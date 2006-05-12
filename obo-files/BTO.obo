@@ -1,0 +1,142 @@
+format-version: 1.0
+date: 04:04:2006 07:22
+saved-by: Melissa  Haendel
+auto-generated-by: OBO-Edit 1.000-beta17
+default-namespace: default_namespace
+
+[Term]
+id: TO:0000000
+name: Broader Fish Taxonomy
+
+[Term]
+id: TO:0000001
+name: OSTARIOPHYSI
+is_a: TO:0000000 ! Broader Fish Taxonomy
+
+[Term]
+id: TO:0000002
+name: Gonorhynchiformes
+is_a: TO:0000001 ! OSTARIOPHYSI
+
+[Term]
+id: TO:0000003
+name: OTOPHYSI
+is_a: TO:0000001 ! OSTARIOPHYSI
+
+[Term]
+id: TO:0000004
+name: Cypriniformes
+is_a: TO:0000003 ! OTOPHYSI
+
+[Term]
+id: TO:0000005
+name: Psilorhynchidae
+is_a: TO:0000004 ! Cypriniformes
+
+[Term]
+id: TO:0000006
+name: Cobitidae
+related_synonym: "loaches" []
+is_a: TO:0000004 ! Cypriniformes
+
+[Term]
+id: TO:0000007
+name: Cyprinidae
+related_synonym: "minnows and carps" []
+is_a: TO:0000004 ! Cypriniformes
+
+[Term]
+id: TO:0000008
+name: Balitoridae
+related_synonym: "hillstream and river loaches" []
+is_a: TO:0000004 ! Cypriniformes
+
+[Term]
+id: TO:0000009
+name: Gyrinocheilidae
+related_synonym: "algae eaters" []
+is_a: TO:0000004 ! Cypriniformes
+
+[Term]
+id: TO:0000010
+name: Catostomidae
+related_synonym: "suckers" []
+is_a: TO:0000004 ! Cypriniformes
+
+[Term]
+id: TO:0000011
+name: Characiformes
+is_a: ZFC:0000003 ! Characiformes+Siluriformes+Gymnotiformes
+
+[Term]
+id: TO:0000012
+name: Citharinidae
+is_a: TO:0000011 ! Characiformes
+
+[Term]
+id: TO:0000013
+name: Citharininae
+is_a: TO:0000012 ! Citharinidae
+
+[Term]
+id: TO:0000014
+name: Distichodontinae
+is_a: TO:0000012 ! Citharinidae
+
+[Term]
+id: TO:0000015
+name: Alestiidae
+related_synonym: "African tetras" []
+is_a: TO:0000011 ! Characiformes
+
+[Term]
+id: TO:0000016
+name: Siluriformes
+is_a: ZFC:0000004 ! Siluriformes + Gymnotiformes
+
+[Term]
+id: TO:0000017
+name: Ictaluridae
+related_synonym: "North American freshwater catfishes" []
+is_a: TO:0000016 ! Siluriformes
+
+[Term]
+id: TO:0000018
+name: Bagridae
+related_synonym: "bagrid catfishes" []
+is_a: TO:0000016 ! Siluriformes
+
+[Term]
+id: TO:0000019
+name: Diplomystidae
+related_synonym: "diplomystid catfishes" []
+is_a: TO:0000016 ! Siluriformes
+
+[Term]
+id: ZFC:0000000
+name: Gymnotiformes
+related_synonym: "knifefishes" []
+is_a: ZFC:0000004 ! Siluriformes + Gymnotiformes
+
+[Term]
+id: ZFC:0000001
+name: Sternopygidae
+related_synonym: "glass knifefishes" []
+is_a: ZFC:0000000 ! Gymnotiformes
+
+[Term]
+id: ZFC:0000002
+name: Apteronotidae
+related_synonym: "ghost knifefishes" []
+is_a: ZFC:0000000 ! Gymnotiformes
+
+[Term]
+id: ZFC:0000003
+name: Characiformes+Siluriformes+Gymnotiformes
+is_a: TO:0000003 ! OTOPHYSI
+
+[Term]
+id: ZFC:0000004
+name: Siluriformes + Gymnotiformes
+is_a: ZFC:0000003 ! Characiformes+Siluriformes+Gymnotiformes
+
