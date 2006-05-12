@@ -1,0 +1,55 @@
+package phenote.config;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import phenote.datamodel.CharField.CharFieldEnum;
+
+public class FieldConfig {
+
+  private CharFieldEnum charFieldEnum;
+  private String label;
+  // Entity field can have multiple ontologies
+  private List<OntologyConfig> ontologyConfigList;
+
+  FieldConfig(CharFieldEnum c,OntologyConfig o) {
+    charFieldEnum = c;
+    if (o == null) return; // shouldnt happen
+    label = o.getName();
+    addOntologyConfig(o);
+  }
+
+  FieldConfig(CharFieldEnum c, String label) {
+    charFieldEnum = c;
+    this.label = label;
+  }
+
+  public CharFieldEnum getCharFieldEnum() { return charFieldEnum; }
+
+  // --> getName?
+  public String getLabel() { return label; }
+
+  //private void setOntologyFile(String f){getOntologyConfig().setOntologyFile(f);}
+  public boolean hasOntology() {
+    return ontologyConfigList != null && !ontologyConfigList.isEmpty();
+  }
+
+  // assume only 1 ontology???
+  public OntologyConfig getOntologyConfig() {
+    if (!hasOntology()) { // probably doenst happen, just in case...
+      addOntologyConfig(new OntologyConfig());
+    }
+    return getOntologyConfigList().get(0);
+  }
+
+  void addOntologyConfig(OntologyConfig o) {
+    getOntologyConfigList().add(o);
+  }
+
+  List<OntologyConfig>getOntologyConfigList() {
+    if (ontologyConfigList == null)
+      ontologyConfigList = new ArrayList<OntologyConfig>(1);
+    return ontologyConfigList;
+  }
+    
+}

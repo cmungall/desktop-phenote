@@ -1,0 +1,118 @@
+package phenote.datamodel;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.geneontology.oboedit.datamodel.OBOClass;
+
+// or just Field? or CharField? eventually separate class?
+public class CharField {
+
+  // separate class? labels? methods? subclasses?
+  // is this taking enums too far? or a good use of them?
+  // would it be nice to have a class that wrapped String and OBOClass?
+  // and all possible field values? or would that be annoying?
+  public enum CharFieldEnum {
+    LUMP("Genotype") { // genotype? default?
+      public void setValue(CharacterI c, CharFieldValue v) {
+        c.setGenotype(v.getName());
+      }
+      public CharFieldValue getValue(CharacterI c) {
+        return new CharFieldValue(c.getGenotype(),c,this);
+      }
+    },
+    GENETIC_CONTEXT("Genetic Context") {
+      public void setValue(CharacterI c, CharFieldValue v) {
+        c.setGeneticContext(v.getOboClass());
+      }
+      public CharFieldValue getValue(CharacterI c) {
+        return new CharFieldValue(c.getGeneticContext(),c,this);
+      }
+    },
+    ENTITY("Entity") {
+      public void setValue(CharacterI c, CharFieldValue v) {
+        c.setEntity(v.getOboClass());
+      }
+      public CharFieldValue getValue(CharacterI c) {
+        return new CharFieldValue(c.getEntity(),c,this);
+      }
+    },
+    PATO("Pato") {
+      public void setValue(CharacterI c, CharFieldValue v) {
+        c.setPato(v.getOboClass());
+      }
+      public CharFieldValue getValue(CharacterI c) {
+        return new CharFieldValue(c.getPato(),c,this);
+      }
+    };
+
+    private final String name;
+    private CharFieldEnum(String name) { this.name = name; }
+    public String toString() { return name; }
+    public abstract void setValue(CharacterI c, CharFieldValue v);
+    public abstract CharFieldValue getValue(CharacterI c);
+    // is this getting silly? abstract?
+    //public void setOboClass(CharacterI c, OBOClass o) {}
+    //public OBOClass getOBOClass(CharacterI c) { return null; }
+  };
+
+  private List<Ontology> ontologyList = new ArrayList<Ontology>(3);
+  private CharFieldEnum charFieldEnum; // or subclass
+  private String name;
+
+  public CharField(CharFieldEnum c, Ontology o) {
+    charFieldEnum = c;
+    ontologyList.add(o);
+  }
+
+  public CharField(CharFieldEnum c, String n) {
+    charFieldEnum = c;
+    name = n;
+  }
+
+  public String getName() {
+    if (name == null) { // not explicitly set
+      if (hasOneOntology())
+        name =  getOntology().getName();
+      else
+        name = charFieldEnum.toString();
+    }
+    return name;
+  }
+
+  public CharFieldEnum getCharFieldEnum() { return charFieldEnum; }
+
+  boolean isGeneticContext() { return charFieldEnum == CharFieldEnum.GENETIC_CONTEXT; }
+
+  List<Ontology> getOntologyList() { return ontologyList; }
+  public boolean hasOntologies() {
+    return ontologyList != null && !ontologyList.isEmpty();
+  }
+  public boolean hasOneOntology() {
+    return hasOntologies() && getOntologySize() == 1;
+  }
+  public Ontology getOntology() {
+    if (!hasOntologies()) return null;
+    return getFirstOntology();
+  }
+  Ontology getFirstOntology() { return ontologyList.get(0); }
+
+  private int getOntologySize() {
+    if (!hasOntologies()) return 0;
+    return ontologyList.size();
+  }
+}
+
+
+// hmmmmmm.... wrap String & OBOClass in one class
+// public class CharFieldValue {
+// OBOClass oboClassValue
+// String stringValue
+// CharFieldValue(String)
+// CharFieldValue(OBOClass)
+// getName() { if isObo return obo.getName; else return string
+// getid, ....
+// }
+
+// above would be setValue(CharFieldValue)
+// getValue(CharFieldValue)
