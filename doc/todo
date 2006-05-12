@@ -1,0 +1,265 @@
+fly data adapter needs to check for empty/null entity & value - should
+be required
+
+#nasty bug - genotype is reverting to original copy on changing
+selection
+
+bug - if load from dataadapter and new selected char has null fields, and 
+old fields in field panel are showing valid old entries - they dont clear to empty
+i think it reject empty
+
+0.4 - Erik
+----------
+In a past PATO curation trial run at ZFIN, the testers wanted an
+interface that could remember the previously entered GC value (most of
+the annotations were recessive phenotypes in homozygous fish) and
+auto-populate the next annotation.  So that's a possible option.
+
+When browsing through terms it would be useful to have a browser-like
+Back button to return to the parent term I was viewing previously,
+particularly if lots of parents to select from. 
+-- and forward button
+
+
+One desirable feature to think about is the ability to copy all
+annotations for genotype_1 and duplicating them for genotype_2.  Two
+alleles of a gene may have identical phenotypes, or differ only in one
+or two characteristics out of a whole bunch of annotations.  So it
+would be nice to do a batch copy/paste of all annotations and then
+edit as needed for the second genotype
+
+
+0.4 David
+---------
+1. I noticed you changed the label for part_of children to 'sub-part'
+and the label for is_a children into 'subclass'. Could you also change
+the label for develops_from children to 'develops into'?
+
+2. Could you add reference IDs to the definitions
+
+3. Children should be grouped by relationship type (e.g.- all subclasses
+together)
+
+4. Something weird happens to the term info window if you the resize
+phenote too small.
+
+5. Would be good if clicking through parents and children made the
+chosen term appear in the anatomy term entry box.
+
+6. (later email)References (as in biblio refs) for definitions are present for some
+proportion of our anatomy terms (these are IDs begining with the string
+FBrf).  Could these be displayed in the term info window? i think this
+is the same as #2??
+
+
+
+launch url from webstart - mimic apollo - actually seems to launch browser from
+from webstart user browserlauncher2 
+
+config refactor - have field configs come straight from xml parse
+
+config file - change to generic <field> entries with
+type="entity|pato..."
+
+finish config, enum, char field refactoring...
+
+finish refactoring for character selection
+
+
+mac svn
+
+
+bug in ant file - cant figure out - very wierd - if do ant jar somehow
+compile uses old stuff - stuff that i think ive even got rid of - it seemed it
+was coming from jar file itself - but does the same with jar file gone - so 
+im really unclear where ant jar - and thus ant compile are getting there
+ source/classfiles - i was just changing Config.DEFAULT_FILE_NAME and the changes
+were not being reflected in jar class nor regular class - even if i deleted Config.class
+and deleted phenote.jar - which leaves me completely stumped??? but everythings
+fine if i do compile from my alias - very wierd! not even reflected in Config.java
+backup file! - this is true of ant compile - which should be excluding phenote.jar
+but maybe it isnt    <fileset dir="${lib}">
+      <include name="*.jar"/>
+      <exclude name="phenote.jar"/>
+    </fileset>
+
+
+put ctol up on web site with taxonomy ontology
+
+refactor char list? take out of char table model - put in datamodel?
+charList? charSet? charSession? Phenotype? 
+
+
+configuration gui - for users - hide the xml!
+
+- make test for alphabet sorting
+
+test suite - fix text for attribute filtering - need to get more than
+one key stroke in - 'ttr' would do it - having trouble with 2nd key
+stroke... maybe because theres no key release - probably messes it up
+ill bet thats it - just dont feel like sinking more time into it at the moment
+
+need to take advantage of namespaces - zf obo file has both anatomy & stages - only anatomy
+name space should be used for anatomy - stage namespace used for stage - namespace has to be
+part of configging ontology (as well as filename, name, & type(entity,pato...))
+
+dropdown list of used before items...
+or just make fields in table drag & droppable - then dont have to take
+up real estate with another drop down list - which could be confusing
+- could try to reuse drop down list or merge lists but that too could
+be confusing - i like drag & drop
+
+window listener for exit
+
+
+cmd line --initialConfiguration initial-zf.cfr initial-fb.cfg, if no 
+current-config.cfg (in ~/.phenote? or phenote-home/conf/?) then get from there
+save to current-config as user makes changes (thread? on close?)
+can save configuration to a file, and load from file - loading will 
+bring into current config (and wipe out previous current config)
+if current config in home then can use across versions - for better or worse
+put version in config file
+
+pato should filter in Value suffix rather than filter out attribute as theres
+other non value crap as well that needs to be filtered out
+
+refactor - search params -> SearchParamManager? singleton? overkill?
+low prior
+
+in config xml reader might want different readers (subclasses?) for different versions
+so can see that its config for version 0.4 - read in with 0.4 reader - and then 
+write out with 0.5 writer - low priority
+
+
+add GO!
+
+put in fields for fly/zfin - 
+qualifiers/context - need vocab/obo from zf/fb
+[ fb - can have more than one qualifier - list]
+stage for zfin start & end?
+pub id
+figure # for zfin
+quantity/units
+- context should just use context.obo
+- qualifiers i think are gonna be cleaned up and separated out of fly_vocab
+-- for instance theres gonna be a spatial qualifier
+ also qualifiers may be part of a compound entity - so a field in the compound entity
+ maker not a separate pheno field unto itself - although one has to wonder what the
+ diff is
+
+dont allow deslection of all 3 searchers:
+term, syn, def
+
+
+coloring for obsoletes in comp list? can you do this?
+obsoletes after non obsoletes or interspersed?
+
+#test suite!
+-- add to it
+-- get hip to gui testing - dig into mouse & key events
+
+
+
+
+when selecting a table row sometimes get this:
+Item in completion list not obo class class java.lang.String
+thats because i think table row is setting to string not obo class as
+dont even have obo class - i think eventually want obo class in there
+- this is harmless at the moment as not doing term info on item in
+text box of combo box - eventually have table boxes selectable (mouse
+over?) to see in term info
+
+
+
+background thread for loading obo files & sorting??
+
+--------
+TermInfo:
+--------
+
+also would be cool if could click on term/charfield in table and show info for that
+
+double click/drag & drop for term to go in field/table/model
+this is non-trivial - several options - none are trivial or quite solve everything
+1) double click - 
+problems: 
+- have to supress second click causing a 2nd link follow, 
+- have to figure which field, cant do this when we go to wierdo stuff
+and an ontology can co in multiple fields, E, E2, Q
+2) button - not as handy, same issues with field unless theres a
+button for every field which is silly as it would proliferate buttons i think
+button would be for the term that is currently displayed -
+ probably easiest but lamest
+3) right popup menu - non trivial - would need mouse listener and then somehow 
+figure what term was clicked from x/y coords - is this even possible?
+menu item for each field
+4) drag & drop - this would be cool - same problem as #3 need to figure out term
+-from initial mouse click, then need to implement drag & drop stuff - non trivial
+this is the best solution - probably hardest as well
+--wait for 3 & 4 why dont we just get term from hyperlink pressed - yes!
+-- though have to clear out if non hyper link is clicked - not sure how -
+ mouse listener? see if mouse clicked on no hyperlink event? mouse event surely
+comes first though? 
+
+
+put in comment from obo terms - didnt know about that
+
+start stage, end stage should not be in Parents! should have own
+category
+
+children "develops from" should be renamed "develops into"
+
+lump syns together in 1 line? or is that confusing?
+--lump other things - isa? subparts?... parents/children - actually i dont know
+lumping actually might make things hard to read especially with long term names
+-get order proper of parents and child - isa first, then partof, then
+start stage then end stage, then catch-all
+-if no children or parent dont show caption? or at least say NO CHILDREN?
+ separate area for each? - probably not
+
+
+
+further off...
+--------------
+
+make terms in table drag & droppable
+
+integrate UVic guis (when ready)
+
+composite terms
+compound entities
+
+fb dataadapter
+
+zf data adapter
+
+integrate with fb & zf sites
+- import db/genotype/lump ids from outside app & possibly other stuff to
+
+web-ize for zf
+
+svn in obo sf
+
+flybase - genotype maker w genetic interactions
+
+fb - nlp search through paper with ontology terms - infer phenos?
+
+worn paths - data & gui
+gui - keep record of what user has clicked on/navigated in past -
+highlight such things (also allow subsetting/filtering to worn path)
+data - note entity to attirbute connections in data and use them for
+suggestions - reuse uvics stuff for this
+
+need to be able to add & flag new terms that are not yet in the ontology but should be
+
+pheno xml data adapter
+
+add images - at least ctol asked for this - fb? zf?
+
+integrate with obo edit - plugin. - undo, shared selection, reasoner(slow)
+
+integrate with Mesquite nexus ctol app - plugin
+
+for ctol rick had suggestion of making EA set, then taxa set - then
+have a matrix(?) or 2 lists with radio buttons for values - i could
+see this being handy for zf or fb as well possibly

@@ -1,0 +1,205 @@
+-------
+for 0.3
+-------
+
+##test is failing with null pointer:
+There was 1 failure:
+1) test(phenote.gui.TestPhenote)
+java.lang.NullPointerException
+        at phenote.gui.AutoComboBox.isInCompletionList(AutoComboBox.java:95)
+        at phenote.gui.TermPanel$ComboBoxActionListener.setTableFromField(TermPanel.java:187)
+        at phenote.gui.TermPanel$ComboBoxActionListener.actionPerformed(TermPanel.java:177)
+        at javax.swing.JComboBox.fireActionEvent(JComboBox.java:1197)
+        at javax.swing.JComboBox.setSelectedItem(JComboBox.java:561)
+        at phenote.gui.TestPhenote.comboTermSelectionGoesToTableTest(TestPhenote.java:82)
+        at phenote.gui.TestPhenote.test(TestPhenote.java:46)
+
+#filter out attributes from pato ontology - or filter in *Value
+
+#BUG with 1 backspace completion doesnt complete
+-- i give up on making a test - simulating backspace seems to be a humdinger
+--- coulda done with AutoTextField - woops next time
+-- this seems to be a 1.5 bug - as doesnt happen in 1.4 jbuilder - 
+- nor when compile & rin with 1.4
+
+#yikes - nothing going into field on comp list selection!
+
+#exception on selecting item from list - subsequent selections dont put text in field
+yikes! - this is probably how release is!
+-- also doesnt go in table
+-- not specific to 1.5 - also in 1.4 (jbuilder)
+Exception in thread "AWT-EventQueue-0" java.lang.NullPointerException
+        at phenote.gui.AutoComboBox.oboClassDowncast(AutoComboBox.java:118)
+        at phenote.gui.AutoComboBox.getSelectedCompListOboClass(AutoComboBox.java:109)
+        at phenote.gui.AutoComboBox.isInCompletionList(AutoComboBox.java:95)
+        at phenote.gui.TermPanel$ComboBoxActionListener.setTableFromField(TermPanel.java:187)
+        at phenote.gui.TermPanel$ComboBoxActionListener.actionPerformed(TermPanel.java:177)
+        at javax.swing.JComboBox.fireActionEvent(JComboBox.java:1197)
+        at javax.swing.JComboBox.setSelectedItem(JComboBox.java:561)
+        at javax.swing.JComboBox.setSelectedIndex(JComboBox.java:597)
+        at javax.swing.plaf.basic.BasicComboPopup$Handler.mouseReleased(BasicComboPopup.java:808)
+        at java.awt.AWTEventMulticaster.mouseReleased(AWTEventMulticaster.java:232)
+        at java.awt.Component.processMouseEvent(Component.java:5488)
+        at javax.swing.JComponent.processMouseEvent(JComponent.java:3126)
+        at javax.swing.plaf.basic.BasicComboPopup$1.processMouseEvent(BasicComboPopup.java:476)
+        at java.awt.Component.processEvent(Component.java:5253)
+
+
+#completion not coming in on very 1st char typed
+
+#when 1st come up if you type in one combo (comp list comes up) and then click in other
+combo you get an exception - unclear which combo box is causing it:
+Exception in thread "AWT-EventQueue-0" java.lang.NullPointerException
+        at phenote.gui.AutoComboBox.oboClassDowncast(AutoComboBox.java:118)
+        at phenote.gui.AutoComboBox.getSelectedCompListOboClass(AutoComboBox.java:109)
+        at phenote.gui.AutoComboBox.isInCompletionList(AutoComboBox.java:95)
+        at phenote.gui.TermPanel$ComboBoxActionListener.setTableFromField(TermPanel.java:187)
+        at phenote.gui.TermPanel$ComboBoxActionListener.actionPerformed(TermPanel.java:177)
+        at javax.swing.JComboBox.fireActionEvent(JComboBox.java:1197)
+        at javax.swing.JComboBox.contentsChanged(JComboBox.java:1268)
+        at javax.swing.AbstractListModel.fireContentsChanged(AbstractListModel.java:100)
+        at javax.swing.DefaultComboBoxModel.setSelectedItem(DefaultComboBoxModel.java:88)
+        at javax.swing.JComboBox.actionPerformed(JComboBox.java:1251)
+        at javax.swing.plaf.basic.BasicComboBoxUI$Handler.focusLost(BasicComboBoxUI.java:1586)
+        at java.awt.AWTEventMulticaster.focusLost(AWTEventMulticaster.java:172)
+        at java.awt.AWTEventMulticaster.focusLost(AWTEventMulticaster.java:171)
+        at java.awt.Component.processFocusEvent(Component.java:5380)
+        at java.awt.Component.processEvent(Component.java:5244)
+        at java.awt.Container.processEvent(Container.java:1966)
+        at java.awt.Component.dispatchEventImpl(Component.java:3955)
+        at java.awt.Container.dispatchEventImpl(Container.java:2024)
+        at java.awt.Component.dispatchEvent(Component.java:3803)
+        at java.awt.KeyboardFocusManager.redispatchEvent(KeyboardFocusManager.java:1810)
+        at java.awt.DefaultKeyboardFocusManager.typeAheadAssertions(DefaultKeyboardFocusManager.java:840)
+        at java.awt.DefaultKeyboardFocusManager.dispatchEvent(DefaultKeyboardFocusManager.java:530)
+
+#BUG -- make test for this
+-- this is a 1.5 bug - probably related to delete bug below - fix delete bug 1st
+if you enter x (entity)
+then click pharynx
+then backspace on "nx"
+then select any other term - pharyngoid for instance get null pointer
+which says that comboBox.getText is returning null in
+TP.setTableFromField:
+Exception in thread "AWT-EventQueue-0" java.lang.NullPointerException
+        at phenote.gui.AutoComboBox.oboClassDowncast(AutoComboBox.java:114)
+        at phenote.gui.AutoComboBox.getSelectedCompListOboClass(AutoComboBox.java:105)
+        at phenote.gui.AutoComboBox.isInCompletionList(AutoComboBox.java:92)
+        at phenote.gui.TermPanel$ComboBoxActionListener.setTableFromField(TermPanel.java:188)
+        at phenote.gui.TermPanel$ComboBoxActionListener.actionPerformed(TermPanel.java:178)
+        at javax.swing.JComboBox.fireActionEvent(JComboBox.java:1197)
+        at javax.swing.JComboBox.setSelectedItem(JComboBox.java:561)
+        at javax.swing.JComboBox.setSelectedIndex(JComboBox.java:597)
+        at javax.swing.plaf.basic.BasicComboPopup$Handler.mouseReleased(BasicComboPopup.java:808)
+        at java.awt.AWTEventMulticaster.mouseReleased(AWTEventMulticaster.java:232)
+        at java.awt.Component.processMouseEvent(Component.java:5488)
+        at javax.swing.JComponent.processMouseEvent(JComponent.java:3126)
+        at javax.swing.plaf.basic.BasicComboPopup$1.processMouseEvent(BasicComboPopup.java:476)
+
+
+#put children relations in term info
+#put term info in scroller.
+#do layout of term info better in phenote - grid bag layout?
+#put border with "Term Information" title around term info
+#put def at end?
+#popup staying up after selection - annoying! didnt use to
+
+
+obsolete button should be "include obsoletes" - search obsoletes in
+addition to non-obsoletes - currently its obsoletes only
+- should we have a mode for searching obs & no non-obs - probably not
+
+alphabeticize comp list - presort?
+
+alphabeticizing has prompted a refactor - 
+CompletionList should be renamed Ontology - its not a completion list
+which is a subset of terms that match input - its all the terms in the
+ontology - obs & non obs - & sorted
+also AutoComboBox should have an Ontology - 
+and there should be one Ontology object for each ontology - rather
+than one CompletionList singleton for all ontologies
+geez - it seems so obvious now
+
+#TermInfo should be a JEditorPane - then do formatting with html - bold! but
+have to then put in line breaks - no word wrapping. apparently there
+is word wrapping
+#-capitalize stages/catch-alls
+#- new line between things?
+
+-------
+for 0.4 4/27/06
+-------
+
+genetic context field added
+-- much reafctoring  for new field/configuration
+
+MVC put in place 
+event listener for CharChange
+selection manager event listener
+MVC!!!
+view table
+view fields
+model phenotype
+table,fields modify model -> controller? sends out model changed event
+ -> views (table,field) update themselves 
+fields & table dont need to talk to each other - just views on model!
+actually its utterly simple - on gt editing or ACB choosing send out
+event - table just merely updates its view - just does a
+refresh/resycnch with pheno data - no need to update column do whole
+table - need to be sure it maintains old selection 
+should there be a PatoComboBox & EntityCB that know how to modify model?
+or is that overkill? alternative is if statements on ontology string/enum
+
+similarly need to selection event listener
+
+also could put in hypoer links into jeditor pane to ontology terms
+- could the text be selectable so it would then go to that term both
+term info and possibly the completion box? (check box for comp box to
+follow selection?) - not sure how possible that would be - support in
+text area? for mouse over text? would be cool!
+or could be done with link that https to self as servlet - kinda silly
+but would work - but would then lose ability to link out to outside
+world - well just have 2 links - internal select - web select
+
+#- also some defs have http links in them - make them clickable! automatic
+BrowserLauncher2 goes to konqueror on linux - either find how to change linux setting
+and/or put in override like apollo does
+
+- but i dont think this works for webstart app - test - see apollos
+  webstart web launch stuff
+
+test suite not working!
+
+bug - search on jaw synonym - get repeated terms + TEST
+
+ant run
+
+#email question - should synonoyms that are exact matches be first in
+comp list like term exact matches are? - melissa says yes
+
+make configurable for anatomy obo - cmd line?, xml config? menu?
+also lump ontology - taxonomy
+
+have to put config file in jar for webstart 
+
+have command line param for which config file to use! 1st cut dont
+need whole command line package
+
+#refactor - Phenotype -> Character
+
+1.5? yes - jbuilder
+
+put syns in brackets in completion list? NO - melissa nixed
+- this will complicate as no longer can do OBOClass.toString for
+completion list - the completion list will no longer be able to be obo
+classes - would have to map between obo classes and completion list -
+parse out term name and look for term in obo session? or cached list
+of obo classes - or keep cached list in same order as string term-syn
+list? curious to get feedback from curators before jumping into this
+complication - is term info enough for syns?
+
+if user deletes last row bring up blank row - dont allow 0 rows
+
+------
+0.5
+-----
