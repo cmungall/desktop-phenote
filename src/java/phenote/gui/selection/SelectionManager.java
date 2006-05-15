@@ -14,7 +14,7 @@ public class SelectionManager {
   private static SelectionManager singleton;
 
   private List<TermSelectionListener> termListenerList;
-  // List<CharacterSelectionListener> characterListenerList;
+  List<CharSelectionListener> charListenerList;
   private CharacterI selectedCharacter;
 
   public static SelectionManager inst() {
@@ -24,6 +24,7 @@ public class SelectionManager {
 
   private SelectionManager() {
     termListenerList = new ArrayList<TermSelectionListener>(5);
+    charListenerList = new ArrayList<CharSelectionListener>(4);
   }
 
   public void addTermSelectionListener(TermSelectionListener l) {
@@ -51,9 +52,17 @@ public class SelectionManager {
 
   public void selectCharacter(Object source, CharacterI character) {
     selectedCharacter = character;
-    // CharacterSelectionEvent e = makeCharacterEvent(source,character);
-    // for (CharacterSelectionListener l : characterListenerList)
-    // l.characterSelected(e);
+    CharSelectionEvent e = makeCharacterEvent(source,character);
+    for (CharSelectionListener l : charListenerList)
+      l.characterSelected(e);
+  }
+
+  private CharSelectionEvent makeCharacterEvent(Object src, CharacterI c) {
+    return new CharSelectionEvent(src,c);
+  }
+
+  public void addCharSelectionListener(CharSelectionListener l) {
+    charListenerList.add(l);
   }
 
 }

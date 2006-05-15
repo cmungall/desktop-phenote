@@ -12,6 +12,8 @@ import phenote.datamodel.Ontology;
 import phenote.datamodel.SearchParamsI;
 import phenote.edit.EditManager;
 import phenote.edit.UpdateTransaction;
+import phenote.gui.selection.CharSelectionListener;
+import phenote.gui.selection.CharSelectionEvent;
 import phenote.gui.selection.SelectionManager;
 
 /** fields can either be text fields for free text or combo boxes if have 
@@ -46,6 +48,9 @@ class CharFieldGui {
     //else if (charField.hasOneOntology())
     else
       initCombo(charField,parent);
+
+    // do just for text field - or both???
+    SelectionManager.inst().addCharSelectionListener(new FieldCharSelectListener());
   }
 
   AutoComboBox getAutoComboBox() {
@@ -129,6 +134,12 @@ class CharFieldGui {
     }
   }
 
+  private class FieldCharSelectListener implements CharSelectionListener {
+    public void characterSelected(CharSelectionEvent e) {
+      /// do something...
+      setValueFromChar(e.getCharacter());
+    }
+  }
 }
 
 

@@ -183,7 +183,7 @@ class CharacterTablePanel extends JPanel {
       selectedRow = getSelectedRow(); 
       CharacterI character = getSelectedCharacter();
       // is this still needed??
-      termPanel.setFieldsFromCharacter(character); // phase out...
+      //termPanel.setFieldsFromCharacter(character); // phase out...
       
       // new way
       SelectionManager.inst().selectCharacter(this,character);
