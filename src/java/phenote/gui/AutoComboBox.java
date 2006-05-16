@@ -423,9 +423,11 @@ class AutoComboBox extends JComboBox {
         is actually an item in completion list, is an obo term. */
     private void editCharField() {
       String input = getText();
+      if (input == null) return; // probably doesnt happen
       // the input should be from selected obo class shouldnt it? is it possible
       // for this not to be so?
       OBOClass oboClass = getSelectedCompListOboClass();
+      if (oboClass == null) return; /// happens on return on invalid term name
 
       // can this happen? yes when user hits return on text - actually i think this
       // is the test for being in the completion list isnt it?

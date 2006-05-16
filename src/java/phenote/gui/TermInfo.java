@@ -28,6 +28,7 @@ import org.geneontology.oboedit.datamodel.LinkedObject;
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOProperty;
 
+import phenote.datamodel.CharacterI;
 import phenote.datamodel.OntologyManager;
 import phenote.gui.selection.SelectionManager;
 import phenote.gui.selection.TermSelectionEvent;
@@ -41,6 +42,8 @@ class TermInfo {
   private static final boolean DO_HTML = true;
   static final String PHENOTE_LINK_PREFIX = "Phenote?id=";
   private TermHyperlinkListener termHyperlinkListener;
+  // current obo class being navigated
+  private OBOClass currentOboClass;
 
   
   TermInfo(TermPanel termPanel) {
@@ -84,6 +87,8 @@ class TermInfo {
   String getText() { return textArea.getText(); }
 
   private void setTextFromOboClass(OBOClass oboClass) {
+    currentOboClass = oboClass;
+
     StringBuffer sb = new StringBuffer();
     if (oboClass.isObsolete())
       sb.append("This term is OBSOLETE").append(newLine());
@@ -201,36 +206,11 @@ class TermInfo {
     } 
   }
 
-//   /** Listens for completion list selection (via moouse over) and populates
-//       term info with term selected -- this is pase - replaced by
-//       TermSelectionEvent/Listener */
-//   private class CompletionListListener implements ListSelectionListener {
-//     public void valueChanged(ListSelectionEvent e) {
-//       //int index = e.getFirstIndex();
-//       Object source = e.getSource();
-//       // hate to cast but it is handy here... and it is in fact a JList
-//       //System.out.println("TI got sel - src: "+source.getClass()+" list? "+(source instanceof javax.swing.JList));
-//       if (!(source instanceof JList)) {
-//         System.out.println("source of combo box mouse over is not JList "+
-//                            source.getClass());
-//         return;
-//       }
-//       JList jList = (JList)source;
-//       Object selectedValue = jList.getSelectedValue();
-//       if (selectedValue == null)
-//         return;
-//       //System.out.println("sel val "+selectedValue.getClass()+" name "+selectedValue);
-//       // the selected item should be an OBOClass
-//       if (!(selectedValue instanceof OBOClass)) {
-//         System.out.println("selected completion term is not obo class "
-//                            +selectedValue.getClass());
-//         return;
-//       }
-//       OBOClass oboClass = (OBOClass)selectedValue;
-//       setTextFromOboClass(oboClass);
-//     }
-//   } // end of CompletionListListener inner class
-
+  /** put present term into current character */
+  private void commitTerm() {
+    CharacterI ch = SelectionManager.inst().getSelectedCharacter();
+    // currentOboClass...
+  }
   
   /** for testing */
   void simulateHyperlinkEvent(HyperlinkEvent e) {
@@ -238,6 +218,8 @@ class TermInfo {
   }
 
 
+  /** inner class TermHyperlink Listener, listens for clicks on term & external
+      hyper links and birngs up the term or brings up the external web page */
   private class TermHyperlinkListener implements HyperlinkListener {
 
     public void hyperlinkUpdate(HyperlinkEvent e) {
@@ -299,3 +281,34 @@ class TermInfo {
     }
   }
 }
+
+
+//   /** Listens for completion list selection (via moouse over) and populates
+//       term info with term selected -- this is pase - replaced by
+//       TermSelectionEvent/Listener */
+//   private class CompletionListListener implements ListSelectionListener {
+//     public void valueChanged(ListSelectionEvent e) {
+//       //int index = e.getFirstIndex();
+//       Object source = e.getSource();
+//       // hate to cast but it is handy here... and it is in fact a JList
+//       //System.out.println("TI got sel - src: "+source.getClass()+" list? "+(source instanceof javax.swing.JList));
+//       if (!(source instanceof JList)) {
+//         System.out.println("source of combo box mouse over is not JList "+
+//                            source.getClass());
+//         return;
+//       }
+//       JList jList = (JList)source;
+//       Object selectedValue = jList.getSelectedValue();
+//       if (selectedValue == null)
+//         return;
+//       //System.out.println("sel val "+selectedValue.getClass()+" name "+selectedValue);
+//       // the selected item should be an OBOClass
+//       if (!(selectedValue instanceof OBOClass)) {
+//         System.out.println("selected completion term is not obo class "
+//                            +selectedValue.getClass());
+//         return;
+//       }
+//       OBOClass oboClass = (OBOClass)selectedValue;
+//       setTextFromOboClass(oboClass);
+//     }
+//   } // end of CompletionListListener inner class
