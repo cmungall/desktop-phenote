@@ -133,28 +133,54 @@ class TermInfo {
 
   private StringBuffer getLinksString(Set links, boolean isChild) {
     StringBuffer sb = new StringBuffer();
+    // or should thi sjust be done more generically with a hash of string bufs
+    // for each unique link type name?
+    StringBuffer isaStringBuf = new StringBuffer();
+    StringBuffer partofStringBuf = new StringBuffer();
+    StringBuffer devFromStringBuf = new StringBuffer();
+    StringBuffer otherStringBuf = new StringBuffer();
     for (Iterator it = links.iterator(); it.hasNext(); ) {
       Link link = (Link)it.next();
       OBOProperty type = link.getType();
-      sb.append(newLine());
+      //sb.append(newLine());
       //if (type == OBOProperty.IS_A) - somehow theres 2 instances???
       if (type.getName().equals("is_a")) {
-        sb.append(bold( isChild ? "Subclass" : "Superclass"));
-        sb.append(bold("(ISA): "));
+	isaStringBuf.append(newLine());
+        isaStringBuf.append(bold( isChild ? "Subclass" : "Superclass"));
+        isaStringBuf.append(bold("(ISA): "));
+	appendLink(isaStringBuf,isChild,link);
       }
       else if (type.getName().equals("part of")) {
-        sb.append(bold( isChild ? "Subpart: " : "Part of: "));
+	partofStringBuf.append(newLine());
+        partofStringBuf.append(bold( isChild ? "Subpart: " : "Part of: "));
+	appendLink(partofStringBuf,isChild,link);
+      }
+      else if (type.getName().equals("develops from")) {
+	devFromStringBuf.append(newLine());
+	devFromStringBuf.append(bold( isChild ? "Develops into: ":"Develops from: "));
+	appendLink(devFromStringBuf,isChild,link);
       }
       // catch all - any relationships missed just do its name capitalize? _->' '?
-      else { 
-        sb.append(bold(capitalize(type.getName()))).append(": ");
+      else {
+	otherStringBuf.append(newLine());
+        otherStringBuf.append(bold(capitalize(type.getName()))).append(": ");
+	appendLink(otherStringBuf,isChild,link);
       }
-      if (isChild)
-        sb.append(termLink(link.getChild()));
-      else
-        sb.append(termLink(link.getParent())); 
+//       if (isChild)
+//         termBuf.append(termLink(link.getChild()));
+//       else
+//         termBuf.append(termLink(link.getParent())); 
     }
+    sb.append(isaStringBuf).append(partofStringBuf);
+    sb.append(devFromStringBuf).append(otherStringBuf);
     return sb;
+  }
+
+  private void appendLink(StringBuffer sb, boolean isChild, Link link) {
+    if (isChild)
+      sb.append(termLink(link.getChild()));
+    else
+      sb.append(termLink(link.getParent())); 
   }
 
   private String termLink(LinkedObject term) {
