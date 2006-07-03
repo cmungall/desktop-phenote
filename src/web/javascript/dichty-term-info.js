@@ -1,6 +1,7 @@
       
       // This is a variable which defines the path to the ajax request processing script
-      // This can be changed and should point to the scipt whcih process the Ajax queries
+      // This can be changed and should point to the script which process the Ajax queries
+      // reference script in source forge is at perl/dichty-ontology.cgi
       var url  = '/db/cgi-bin/ajax_search/ontology.cgi';
       
       function set_ontology(ontologyid){

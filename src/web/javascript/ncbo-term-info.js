@@ -3,7 +3,8 @@
       // This can be changed and should point to the scipt which processes the Ajax queries
       //var url  = '/usr/local/lib/apache/apache-tomcat-5.5.15/webapps/ROOT/ajax/scripts/phenote-ontology.cgi';
       //var url  = '/phenote-ontology.cgi';
-  var url = '/servlet/PhenoteStub';
+      // term info not yet implemented in PhenoteServlet - todo...
+  var url = '/servlet/PhenoteStub'; 
       
 // set_ontology should be called by the above url (at least for dichty it does)
 
