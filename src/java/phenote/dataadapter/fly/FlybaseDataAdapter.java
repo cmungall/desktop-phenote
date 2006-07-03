@@ -12,7 +12,12 @@ import phenote.datamodel.CharacterListI;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.CharacterListManager;
 
-/** Just pastes characters to clipboard for proforma */
+/** Just pastes characters to clipboard for proforma 
+ 6/30/06 - changing this to use new Pheno-Syntax - should this be renamed
+ Pheno-Syntax data adapter? Pheno Syntax need to be able to write to a file
+ as well as also write to flybases proforma app - i think those are 2 different
+ data adapters sharing Syntax objects - PhenoSyntaxFileAdapter 
+ and FlybaseProformaAdapter or something like that - todo... */
 public class FlybaseDataAdapter implements DataAdapterI {
 
   private static ClipboardOwner clipboardOwner = new PhenoteClipboardOwner();

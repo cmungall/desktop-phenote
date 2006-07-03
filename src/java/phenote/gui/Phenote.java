@@ -16,7 +16,7 @@ import phenote.dataadapter.OntologyDataAdapter;
 
 public class Phenote {
 
-  private static final String VERSION = "0.5";
+  private static final String VERSION = "0.6 dev";
   //private static final String DEFAULT_CONFIG_FILE = Config.DEFAULT_CONFIG_FILE;
 
   private CharacterTablePanel characterTablePanel;
@@ -34,11 +34,29 @@ public class Phenote {
     catch (UnsupportedLookAndFeelException e) {
       System.out.println("Failed to set to Java/Metal look & feel");
     }
-    phenote = new Phenote();
-    phenote.doCommandLine(args); // load config file
-    OntologyDataAdapter oda = new OntologyDataAdapter();
+    phenote = getPhenote();
+    phenote.initConfig(args);
+    phenote.initOntologies();
+    phenote.initGui();
+  }
+
+  /** private constructor -> singleton */
+  private Phenote() {}
+
+  /** args is most likely null if not called from command line */
+  public void initConfig(String[] args) {
+    // gets config file from command line & loads - if no config file 
+    // loads default. should actually put that logic here.
+    doCommandLine(args); // load config file
+  }
+
+  public void initOntologies() {
+    OntologyDataAdapter oda = new OntologyDataAdapter(); // singleton?
     oda.loadOntologies(); // loads up OntologyManager
-    phenote.makeWindow();
+  }
+  
+  public void initGui() {
+    makeWindow();
   }
 
   /** for now just looking for '-c configFile.cfg', use command line package
@@ -95,8 +113,11 @@ public class Phenote {
     return mainPanel;
   }
 
+  public static Phenote getPhenote() {  // singleton
+    if (phenote == null) phenote = new Phenote();
+    return phenote;
+  }
   // These methods are actually for TestPhenote
-  static Phenote getPhenote() { return phenote; } // singleton
   TermPanel getTermPanel() { return termPanel; }
   TermInfo getTermInfo() { return termInfo; }
   CharacterTablePanel getCharacterTablePanel() { return characterTablePanel; }

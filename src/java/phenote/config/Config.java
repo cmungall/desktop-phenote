@@ -18,6 +18,7 @@ import org.xml.sax.SAXException;
 import phenote.datamodel.CharField.CharFieldEnum;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.fly.FlybaseDataAdapter;
+import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
 
 public class Config {
 
@@ -290,6 +291,8 @@ public class Config {
     // DataAdapterManager.getAdapter(name)???
     if (name.equalsIgnoreCase("flybase"))
       addDataAdapter(new FlybaseDataAdapter()); // for now...
+    else if (name.equalsIgnoreCase("phenoxml"))
+      addDataAdapter(new PhenoXmlAdapter());
   }
 
   private void addDataAdapter(DataAdapterI da) {

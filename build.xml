@@ -12,6 +12,7 @@
   <property name="test" value="./src/java/test" />
   <!-- where classes go -->  
   <property name="classfiles" value="classfiles" />
+  <property name="web-classfiles" value="web-classfiles" />
   <property name="lib" value="jars" />
   <property name="jarfile" value="jars/phenote.jar"/>
   <property name="obo" value="obo-files" />
@@ -51,6 +52,12 @@
         them into  the classfiles directory. -->
   <target name="compile" depends="init">
     <javac srcdir="${src}" destdir="${classfiles}" debug="yes">
+      <classpath refid="project.classpath3"/>
+    </javac>
+  </target>
+
+  <target name="compile-servlet">
+    <javac srcdir="${src}" destdir="${web-classfiles}" debug="yes">
       <classpath refid="project.classpath3"/>
     </javac>
   </target>

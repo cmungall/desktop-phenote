@@ -268,7 +268,7 @@ class AutoComboBox extends JComboBox {
     // too soon - text field doesnt have text yet.... hmmmm....
     String input = getText();
     // this is a vector of OBOClasses
-    Vector v = getTerms(input);
+    Vector<OBOClass> v = getTerms(input);
     // throws IllegalStateException, Attempt to mutate in notification
     // this tries to change text field amidst notification hmmmm.....
     changingCompletionList = true;
@@ -305,13 +305,13 @@ class AutoComboBox extends JComboBox {
     return inputChanged;
   }
   
-  /** call Ontology to get a Vector of OBOTerms that contain "in"
+  /** call Ontology to get a Vector of OBOClass's that contain "in"
       in ontology */
-  private Vector getTerms(String in) {
+  private Vector<OBOClass> getTerms(String in) {
     // or CompletionList.getCompletionList(getOntology()) ??
     //CompletionList cl = CompletionList.getCompletionList();
     //return cl.getCompletionTerms(getOntology(),in,searchParams);
-    return ontology.getSearchTerms(in,searchParams);
+    return ontology.getSearchTerms(in,searchParams); // vector of OBOClass's
   }
 
   private class AutoDocumentListener implements DocumentListener {

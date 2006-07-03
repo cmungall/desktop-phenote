@@ -56,8 +56,8 @@ public class Ontology {
       should input be just part of search params? 
       its a vector as thats what ComboBox requires 
       put in separate class? */
-  public Vector getSearchTerms(String input,SearchParamsI searchParams) {
-   Vector searchTerms = new Vector();
+  public Vector<OBOClass> getSearchTerms(String input,SearchParamsI searchParams) {
+   Vector<OBOClass> searchTerms = new Vector<OBOClass>();
     if (input == null || input.equals(""))
       return searchTerms;
 

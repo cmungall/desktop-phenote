@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phen:phenoset
+xmlns:phen="http://www.bioontologies.org/obd/schema/pheno">
+<phen:genotype><phen:name>sdf</phen:name></phen:genotype>
+<phen:phenotype_manifestation>
+<phen:manifest_in genotype="sdf"/>
+<phen:phenotype>
+<phen:phenotype_character>
+<phen:bearer>
+<phen:typeref about="FBbt:00001268"/>
+</phen:bearer>
+<phen:quality><phen:typeref about="PATO:0000842"/></phen:quality>
+</phen:phenotype_character>
+</phen:phenotype>
+</phen:phenotype_manifestation>
+</phen:phenoset>
