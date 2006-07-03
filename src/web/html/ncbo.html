@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+
+<TITLE> Phenote Ajax Control (from sohel) </TITLE>
+
+<!-- we need some way of parameterizing the root of the web files??? --> 
+<!-- set in some file somewhere? -->
+
+<link href="/ajax/css/control.css" type="text/css" rel="stylesheet">
+
+<!-- Ajax stuff (prototype library and friends)-->
+
+<script src="/ajax/js/prototype/prototype.js" type="text/javascript"></script>
+<script src="/ajax/js/prototype/effects.js"   type="text/javascript"></script>
+<script src="/ajax/js/prototype/dragdrop.js"  type="text/javascript"></script>
+<script src="/ajax/js/prototype/controls.js"  type="text/javascript"></script>
+<!-- /Ajax stuff -->
+
+<!-- /Custom Javascript -->
+
+<script src="/ajax/js/phenote-control.js"  type="text/javascript"></script>
+
+
+<!-- /Custom Javascript -->
+
+</HEAD>
+<BODY>
+
+<table>
+<tr height="20%"><td>
+
+<form>
+   <div id="ontology">
+      <div style="float: left;">
+
+         <fieldset class="search">
+            Search terms in PATO ontology<br/><br/><br/>
+            <label>Name:</label>
+
+            <input autocomplete="off" id="ontologyname" name="ontologyname" size="20" type="text" value="" />
+            </br>
+            <div class="auto_complete" id="ontologyname_auto_complete"></div>
+         </fieldset>
+
+      </div>
+
+      <div id="ontologyinfo"></div>
+   </div>
+
+
+   <script type="text/javascript">
+   <!-- this is the crucial javascript bit here, ontologyname is the -->
+   <!-- input field, i think ontologyname_auto_complete is the div where-->
+   <!--the auto completion will pop up, and the last param is the-->
+   <!--    script that will does the fetching of terms -->
+   <!-- Autocomp is in js/prototype/controls.js -->
+
+   <!--   new Ajax.Autocompleter( 'ontologyname', -->
+   <!--   'ontologyname_auto_complete', '/phenote-ontology.cgi',{  }) -->
+   <!-- new Ajax.Autocompleter( 'ontologyname', 'ontologyname_auto_complete', '/servlet/PhenoteStub',{  }) -->
+        new Ajax.Autocompleter( 'ontologyname', 'ontologyname_auto_complete', '/servlet/phenote.servlet.PhenoteServlet',{  })
+        
+
+   </script>
+
+
+   <input type="hidden" name="ontologyid">
+</form>
+ 
+
+
+
+</td>
+</tr>
+<tr height="80%"><td>&nbsp;</td></tr>
+</table>
+
+</body>
+</html>
+
