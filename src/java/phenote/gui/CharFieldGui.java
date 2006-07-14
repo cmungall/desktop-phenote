@@ -1,6 +1,8 @@
 package phenote.gui;
 
 import java.awt.Container;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.DocumentEvent;
@@ -67,23 +69,43 @@ class CharFieldGui {
     setText(v);
   }
 
-  private void initCombo(Ontology ontology, Container parent) {
-    isCombo = true;
-    termPanel.addLabel(ontology.getName(),parent);
-    // attach search params to ontology?
-    comboBox = new AutoComboBox(ontology,termPanel.getSearchParams());
-    // refactor... mvc - ACB talk directly to pheno model?
-    //comboBox.addActionListener(new ComboBoxActionListener(ontology.getName(),comboBox));
-    //parent.add(comboBox,makeFieldConstraint());
-    termPanel.addFieldGui(comboBox,parent);
-  }
+//   private void initCombo(Ontology ontology, Container parent) {
+//     // attach search params to ontology?
+//     comboBox = new AutoComboBox(ontology,termPanel.getSearchParams());
+//     // refactor... mvc - ACB talk directly to pheno model?
+//     //comboBox.addActionListener(new ComboBoxActionListener(ontology.getName(),comboBox));
+//     //parent.add(comboBox,makeFieldConstraint());
+//     termPanel.addFieldGui(comboBox,parent);
+//   }
 
 
 
   private void initCombo(CharField charField, Container parent) {
+    isCombo = true;
+
+    String name = charField.getFirstOntology().getName();
+    JLabel label = termPanel.addLabel(name,parent);
+    // if has more than one ontology(entity) than add ontology choose list
+    if (!charField.hasOneOntology()) {
+      label.setText(charField.getName());
+      initOntologyChooser(charField,parent);
+    }
+
     // assume 1 ontology for now...
-    initCombo(charField.getOntology(),parent);
+    //initCombo(charField.getFirstOntology(),parent);
+    // CHANGE THIS TO DO MULTIPLE ONTOLOGIES IF NEED BE
+    comboBox = new AutoComboBox(charField.getFirstOntology(),termPanel.getSearchParams());
+    termPanel.addFieldGui(comboBox,parent);
     comboBox.setCharField(charField);
+  }
+
+  private void initOntologyChooser(CharField charField,Container parent) {
+    JComboBox ontologyChooserCombo = new JComboBox();
+    // add listener....
+    for (Ontology o : charField.getOntologyList()) {
+      ontologyChooserCombo.addItem(o.getName());
+    }
+    termPanel.addOntologyChooser(ontologyChooserCombo);
   }
 
   private void initTextField(String label,Container parent) {

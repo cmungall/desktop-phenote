@@ -101,18 +101,18 @@ public class OntologyManager {
   // eventually...
   // Ontology getOntology(CharFieldEnum c) { return fieldToOntology.get(c); }
 
-  public void addOntology(CharFieldEnum c, Ontology o) {
-    // for now...
-    if (c == CharFieldEnum.GENETIC_CONTEXT)
-      setGeneticContextOntology(o);
-    addOntology(o);
+//   public void addOntology(CharFieldEnum c, Ontology o) {
+//     // for now...
+//     if (c == CharFieldEnum.GENETIC_CONTEXT)
+//       setGeneticContextOntology(o);
+//     addOntology(o);
 
-    // OR
-    // addOntologyToMap(c,o);
+//     // OR
+//     // addOntologyToMap(c,o);
 
-    // OR
-    charFieldList.add(new CharField(c,o));
-  }
+//     // OR
+//     charFieldList.add(new CharField(c,o));
+//   }
   
   public void addField(CharField cf) {
     // for now...

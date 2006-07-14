@@ -64,7 +64,7 @@
 
   <!-- runs off classfiles not jar, todo: run-jar -->
   <target name="run" depends="compile">
-     <java classname="phenote.gui.Phenote" fork="yes">
+     <java classname="phenote.gui.Phenote" fork="yes" jvmargs="-Xmx200M">
          <!-- arg value="-c configfilehereventually"/ -->
         <classpath>
           <pathelement path="${classfiles}"/>

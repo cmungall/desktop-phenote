@@ -30,23 +30,31 @@ public class FieldConfig {
   public String getLabel() { return label; }
 
   //private void setOntologyFile(String f){getOntologyConfig().setOntologyFile(f);}
-  public boolean hasOntology() {
+  public boolean hasOntologies() {
     return ontologyConfigList != null && !ontologyConfigList.isEmpty();
   }
 
+  public boolean hasOntology() { return hasOntologies(); }
+
   // assume only 1 ontology???
   public OntologyConfig getOntologyConfig() {
-    if (!hasOntology()) { // probably doenst happen, just in case...
+    if (!hasOntologies()) { // probably doenst happen, just in case...
       addOntologyConfig(new OntologyConfig());
     }
     return getOntologyConfigList().get(0);
   }
 
   void addOntologyConfig(OntologyConfig o) {
+    if (o == null)
+      return;
     getOntologyConfigList().add(o);
   }
 
-  List<OntologyConfig>getOntologyConfigList() {
+  void setOntologyConfigList(List<OntologyConfig> configs) {
+    ontologyConfigList = configs;
+  }
+
+  public List<OntologyConfig> getOntologyConfigList() {
     if (ontologyConfigList == null)
       ontologyConfigList = new ArrayList<OntologyConfig>(1);
     return ontologyConfigList;

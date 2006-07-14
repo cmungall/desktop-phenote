@@ -16,7 +16,7 @@ public class OntologyConfig {
     this(name);
     ontologyFile = file;
     if (isBad(file)) // exception?
-      System.out.println("null or empty ontology file given for "+name);
+      System.out.println("null or empty ontology file given for "+name+" "+file);
   }
 
   boolean hasName() {

@@ -60,13 +60,25 @@ public class CharField {
   private CharFieldEnum charFieldEnum; // or subclass
   private String name;
 
-  public CharField(CharFieldEnum c, Ontology o) {
+//   public CharField(CharFieldEnum c, Ontology o) {
+//     charFieldEnum = c;
+//     ontologyList.add(o);
+//   }
+
+//   public CharField(CharFieldEnum c, String n) {
+//     charFieldEnum = c;
+//     name = n;
+//   }
+
+  public CharField(CharFieldEnum c) {
     charFieldEnum = c;
+  }
+
+  public void addOntology(Ontology o) {
     ontologyList.add(o);
   }
 
-  public CharField(CharFieldEnum c, String n) {
-    charFieldEnum = c;
+  public void setName(String n) {
     name = n;
   }
 
@@ -84,7 +96,7 @@ public class CharField {
 
   boolean isGeneticContext() { return charFieldEnum == CharFieldEnum.GENETIC_CONTEXT; }
 
-  List<Ontology> getOntologyList() { return ontologyList; }
+  public List<Ontology> getOntologyList() { return ontologyList; }
   public boolean hasOntologies() {
     return ontologyList != null && !ontologyList.isEmpty();
   }
@@ -95,7 +107,7 @@ public class CharField {
     if (!hasOntologies()) return null;
     return getFirstOntology();
   }
-  Ontology getFirstOntology() { return ontologyList.get(0); }
+  public Ontology getFirstOntology() { return ontologyList.get(0); }
 
   private int getOntologySize() {
     if (!hasOntologies()) return 0;

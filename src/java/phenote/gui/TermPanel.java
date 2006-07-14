@@ -74,10 +74,16 @@ class TermPanel extends JPanel {
     return searchParamPanel;
   }
 
-  void addLabel(String labelString,Container parent) {
+  JLabel addLabel(String labelString,Container parent) {
     JLabel label = new JLabel(labelString);
     GridBagConstraints gbc = makeLabelConstraint();
     parent.add(label,gbc);
+    return label;
+  }
+
+  /** if a field has more than one ontology than theres a combo to choose the ontology*/
+  void addOntologyChooser(JComboBox ontologyChooser) {
+    
   }
   
   void addFieldGui(JComponent comp,Container parent) {
@@ -85,12 +91,22 @@ class TermPanel extends JPanel {
   }
 
   private int gridbagRow = 0;
+  boolean ontologyChooserPresent = false;
   private GridBagConstraints makeLabelConstraint() {
+    ontologyChooserPresent = false; // cheesy
+    // x,y,horizPad,vertPad
     return GridBagUtil.makeConstraint(0,gridbagRow,1,3);
   }
 
   private GridBagConstraints makeFieldConstraint() {
-    return GridBagUtil.makeConstraint(1,gridbagRow++,1,3);
+    int x = ontologyChooserPresent ? 2 : 1;
+    int width = ontologyChooserPresent ? 1 : 2; // ???
+    return GridBagUtil.makeWidthConstraint(x,gridbagRow++,1,3,width);
+  }
+
+  private GridBagConstraints makeOntologyChooserConstraint() {
+    ontologyChooserPresent = true; // cheesy
+    return GridBagUtil.makeConstraint(1,gridbagRow,1,3);
   }
   
 

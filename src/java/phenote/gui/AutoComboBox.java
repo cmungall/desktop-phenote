@@ -31,6 +31,9 @@ import phenote.edit.EditManager;
 import phenote.edit.UpdateTransaction;
 import phenote.gui.selection.SelectionManager;
 
+/** The jcombobox that does auto completion - i had to do some tricks(hacks) to get it
+    working with mouse over which doesnt come naturally to jcombobox */
+
 class AutoComboBox extends JComboBox {
 
   //private String ontology; // --> enum!
@@ -432,12 +435,13 @@ class AutoComboBox extends JComboBox {
       // can this happen? yes when user hits return on text - actually i think this
       // is the test for being in the completion list isnt it?
       boolean DEBUG = true;
-      if (!input.equals(oboClass.getName())) {
-        if (DEBUG)
-          System.out.println("User input ["+input+"] and list selection dont match "+
-                           "selection: "+oboClass.getName());
-        return;
-      }
+      // bug - on first return input is the user text not the term selected yet!
+//       if (!input.equals(oboClass.getName())) {
+//         if (DEBUG)
+//           System.out.println("User input ["+input+"] and list selection dont match "+
+//                            "selection: "+oboClass.getName());
+//         return;
+//       }
       
       // check if input is a real term - i think we can get away with checking
       // if in present term completion list - not sure

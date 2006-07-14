@@ -207,6 +207,7 @@ public class Config {
     return document;
   }
 
+  // do this with xml beans & xsd of config?
   private void parseXmlFile(String filename) {
     Document document=null;
     try {
@@ -238,8 +239,14 @@ public class Config {
 
   private void parseEntity(Node node) {
     if (!node.getNodeName().equals("entity")) return;
-    OntologyConfig oc = makeOntologyConfig(node,"Entity");
-    getEntityConfig().addOntologyConfig(oc);
+
+    // while (hasMoreOntologies(node) ??? na!
+    
+    // List <OntologyConfig> getOntologyConfigs(node) {}
+
+    makeOntologyConfigs(node,getEntityConfig());
+    //getEntityConfig().addOntologyConfig(oc);
+    //getEntityConfig().setOntologyConfigs(configs);
     //entityConfigList.add(fc);
   }
 
@@ -251,14 +258,54 @@ public class Config {
     //getGeneticContextConfig().addOntologyConfig(oc);
   }
 
-
+  /** Return null if node doesnt actually have ontology info - like if there
+      is no file attribute which is required */
   private OntologyConfig makeOntologyConfig(Node node, String defaultName) {
     String name = getNameAttribute(node);
     if (name == null || name.equals(""))
       name = defaultName;
+    // if field only has one ontology
+    if (!hasFileAttribute(node))
+      return null;
+
     String file = getFileAttribute(node);
+
+    // see if theres mutliple ontologies specified as ontology elements
+    //if (file == null) 
     OntologyConfig oc = new OntologyConfig(name,file);
     return oc;
+  }
+
+  /** so this is funny but the field node may contain info on a single ontology
+      or it may contain ontology kid nodes, in the case it has multiple ontolgies
+      like entity */
+  private void makeOntologyConfigs(Node fieldNode, FieldConfig fieldConfig) {
+    String name = getNameAttribute(fieldNode);
+    if (name == null || name.equals(""))
+      name = fieldConfig.getLabel();
+
+    // if field only has one ontology will be specified in node attribs
+    OntologyConfig oc = makeOntologyConfig(fieldNode,name);
+    if (oc != null)
+      fieldConfig.addOntologyConfig(oc); // return?
+
+    // see if theres mutliple ontologies specified as ontology elements
+    NodeList kids = fieldNode.getChildNodes();
+    for (int i=0; i<kids.getLength(); i++) {
+      Node node = kids.item(i);
+      if (node.getNodeName().equals("ontology")) {
+        oc = makeOntologyConfig(node,name);
+        fieldConfig.addOntologyConfig(oc);
+      }
+    }
+  }
+
+  private boolean hasFileAttribute(Node node) {
+    return hasContent(getFileAttribute(node));
+  }
+  
+  private boolean hasContent(String s) {
+    return s != null && !s.equals("");
   }
 
   private String getFileAttribute(Node node) {

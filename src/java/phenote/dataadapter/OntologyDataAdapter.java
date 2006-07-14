@@ -39,13 +39,16 @@ public class OntologyDataAdapter {
 
     for (FieldConfig fieldConfig : config.getFieldConfigList()) {
       CharFieldEnum fce = fieldConfig.getCharFieldEnum();
-      CharField cf;
-      if (fieldConfig.hasOntology()) {
-        Ontology o = loadOntology(fieldConfig.getOntologyConfig());
-        cf = new CharField(fce,o);
+      CharField cf = new CharField(fce);
+      if (fieldConfig.hasOntologies()) {
+        //cf = new CharField(fce,o);
+        for (OntologyConfig oc : fieldConfig.getOntologyConfigList()) {
+          Ontology o = loadOntology(oc);
+          cf.addOntology(o);
+        }
       }
       else {
-        cf = new CharField(fce,fieldConfig.getLabel());
+        cf.setName(fieldConfig.getLabel());
       }
       ontologyManager.addField(cf);
     }
