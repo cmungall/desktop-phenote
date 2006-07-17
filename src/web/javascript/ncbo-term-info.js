@@ -1,10 +1,11 @@
       
-      // This is a variable which defines the path to the ajax request processing script
-      // This can be changed and should point to the scipt which processes the Ajax queries
-      //var url  = '/usr/local/lib/apache/apache-tomcat-5.5.15/webapps/ROOT/ajax/scripts/phenote-ontology.cgi';
-      //var url  = '/phenote-ontology.cgi';
-      // term info not yet implemented in PhenoteServlet - todo...
-  var url = '/servlet/PhenoteStub'; 
+// This is a variable which defines the path to the ajax request processing script
+// This can be changed and should point to the scipt which processes the Ajax queries
+//var url  = '/usr/local/lib/apache/apache-tomcat-5.5.15/webapps/ROOT/ajax/scripts/phenote-ontology.cgi';
+//var url  = '/phenote-ontology.cgi';
+// term info not yet implemented in PhenoteServlet - todo...
+// this should be a relative link - need to get servlets code in/close with scripts?
+var url = '/servlet/PhenoteStub'; 
       
 // set_ontology should be called by the above url (at least for dichty it does)
 

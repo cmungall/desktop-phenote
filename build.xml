@@ -56,11 +56,6 @@
     </javac>
   </target>
 
-  <target name="compile-servlet">
-    <javac srcdir="${src}" destdir="${web-classfiles}" debug="yes">
-      <classpath refid="project.classpath3"/>
-    </javac>
-  </target>
 
   <!-- runs off classfiles not jar, todo: run-jar -->
   <target name="run" depends="compile">
@@ -138,7 +133,7 @@
    </javadoc>
   </target>
 
-  <property name="dist" value="0.5"/>
+  <property name="dist" value="0.6"/>
 
   <target name="tar">
     <mkdir dir="tars/${dist}"/>
@@ -186,6 +181,19 @@
   <target name="gzip-tar">
     <gzip zipfile="tars/${dist}/phenote-${dist}.tar.gz" src="tars/${dist}/phenote-${dist}.tar"/>
   </target>
+
+  <target name="compile-servlet">
+    <javac srcdir="${src}" destdir="${web-classfiles}" debug="yes">
+      <classpath refid="project.classpath3"/>
+    </javac>
+  </target>
+
+  <!-- web-deployment should be a symoblic link to ones web site -->
+  <target name="web-deployment">
+     <copy todir="web-deployment">
+       <fileset dir="src/web"/>
+     </copy>
+  </target> 
 
 </project>
 
