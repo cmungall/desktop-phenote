@@ -10,10 +10,7 @@
    }
 
 
-
-
-
-   div#ontologyinfo {
+   div#terminfo {
      float: left;
      width: 375;
      height: 100%;
@@ -21,17 +18,17 @@
    }
 
    /* div returned from ajax record retreival */
-   div#ontologyinfo table {
+   div#terminfo table {
      border: 1px solid blue;
      width: 100%;
      font-size: 14px;
      background-color: lightgoldenrodyellow;
      height: 100%;
    }
-   div#ontologyinfo td.label {
+   div#terminfo td.label {
      font-weight: bold;
    }
-   div#ontologyinfo td.data {
+   div#terminfo td.data {
      width: 60%;    
    }
 
