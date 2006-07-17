@@ -6,17 +6,17 @@
             Search terms in PATO ontology<br/><br/><br/>
             <label>Name:</label>
 
-            <input autocomplete="off" id="ontologyname" name="ontologyname" size="20" type="text" value="" />
+            <input autocomplete="off" id="term" name="term" size="20" type="text" value="" />
             </br>
-            <div class="auto_complete" id="ontologyname_auto_complete"></div>
+            <div class="auto_complete" id="term_auto_complete"></div>
          </fieldset>
 
 
 <script type="text/javascript">
-      new Ajax.Autocompleter( 'ontologyname', 'ontologyname_auto_complete', url,{  })
+      new Ajax.Autocompleter( 'term', 'term_auto_complete', url,{  })
 </script>
 
-<input type="hidden" name="ontologyid">
+<input type="hidden" name="termid">
 </form>
 
 
