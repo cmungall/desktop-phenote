@@ -11,9 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
 
+import phenote.datamodel.CharField;
+import phenote.datamodel.CharField.CharFieldEnum;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyManager;
 import phenote.datamodel.SearchParamsI;
+import phenote.util.HtmlUtil;
 import phenote.gui.Phenote; // move to main package
 
 public class PhenoteServlet extends HttpServlet {
@@ -34,13 +37,14 @@ public class PhenoteServlet extends HttpServlet {
   }
 
 
+  /** this should be done in java server faces/pages(?) */
   public void doPost(HttpServletRequest request, HttpServletResponse response)
     throws IOException, ServletException  {
       
 
     // dont know where this goes???
-    System.out.println("printing from phenote stub to std out...");
-    System.err.println("printing from phenote stub to std err...");
+    System.out.println("servlet doPost "+new Date());
+    System.err.println("is term comp request: "+isTermCompletionRequest(request));
 
     PrintWriter out = response.getWriter();
 
@@ -49,12 +53,14 @@ public class PhenoteServlet extends HttpServlet {
       //ResourceBundle r=ResourceBundle.getBundle("LocalStrings",request.getLocale());
       //Content-Type: text/html; charset=ISO-8859-1
       response.setContentType("text/html");
-      //out.println("Content-Type: text/html; charset=ISO-8859-1");
-      out.println("<ul><li onmouseover=\"set_ontology()\" id=\"termId\" "+
-                  "onclick=\"set_ontology()\">"+userInput+"</li>\n"+
-                  "<li onmouseover='set_ontology()' id='termId' "+
-                  "onclick=\"set_ontology()\">phenoteservlet</li>\n<li onmouseover=\"set_ontology()\" id=\"termId\" onclick=\"set_ontology()\">"+ initDate +"</li></ul>");
-      
+      //out.println("Content-Type: text/html; charset=ISO-8859-1"); // this messes things up
+//       String list = "<ul><li onmouseover=\"set_ontology()\" id=\"termId\" "+
+//         "onclick=\"set_ontology()\">"+userInput+"</li>\n"+
+//         "<li onmouseover=\"set_ontology()\" id=\"termId\" onclick=\"set_ontology()\">"+
+//         "test</li>\n<li onmouseover=\"set_ontology()\" id=\"termId\" onclick=\"set_ontology()\">dude</li></ul>";
+      String list = getCompletionList(userInput);
+      System.out.println("printing to response writer: "+list.substring(0,45)+"...");
+      out.println(list);
     }
         
   }
@@ -63,15 +69,16 @@ public class PhenoteServlet extends HttpServlet {
     return getTermCompletionParam(req) != null;
   }
 
+  /** this should be renamed from unintuitive "ontologyname" */
   private String getTermCompletionParam(HttpServletRequest req) {
     return req.getParameter("ontologyname");
   }
 
   private boolean isTermInfoRequest(HttpServletRequest req) {
-    return getTermInfoParam(req) != null;
+    return getTermIdFromTermInfoRequest(req) != null;
   }
 
-  private String getTermInfoParam(HttpServletRequest req) {
+  private String getTermIdFromTermInfoRequest(HttpServletRequest req) {
     return req.getParameter("ontologyid");
   }
 
@@ -83,29 +90,60 @@ public class PhenoteServlet extends HttpServlet {
     throws IOException, ServletException  {
     if (true || isTermInfoRequest(request)) {
       PrintWriter out = response.getWriter();
-      String userInput = getTermInfoParam(request);
-      out.println("<table><tr><td class=\"label\">Ontology</td> "+
-                  "<td class=\"data\">"+initDate+"</td></tr>\n"+
-                  "<tr><td class=\"label\">Term name</td><td class=\"data\">"
-                  +userInput+"</td></tr></table>");
+      String termId = getTermIdFromTermInfoRequest(request);
+      System.out.println("doGet term info param: "+termId);
+//       out.println("<table><tr><td class=\"label\">Ontology</td> "+
+//                   "<td class=\"data\">"+initDate+"</td></tr>\n"+
+//                   "<tr><td class=\"label\">Term name...</td><td class=\"data\">"
+//                   +userInput+"</td></tr></table>");
+      // for now hard wire to pato
+      OBOClass oboClass = getOntology(null).getOboClass(termId);
+      if (oboClass == null) {
+        System.out.println("term info: no obo class found for "+termId);
+        return;
+      }
+      System.out.println("term info "+HtmlUtil.termInfo(oboClass));
+      out.println(HtmlUtil.termInfo(oboClass));
     }
   }
 
   // List<String>? String[]? or String htmlLiString?
-  // for now just do html ul-li list
+  // for now just return html ul-li list w onmouseover
   private String getCompletionList(String userInput) {
+    StringBuffer sb = new StringBuffer("<ul>");
     // for now just grab the pato ontology - eventuall redo for multiple/config
-    Ontology ontology = OntologyManager.inst().getPatoOntology();
+    Ontology ontology = getOntology(null);
+    if (ontology == null) {
+      System.out.println("failed to get pato from ontology manager");
+      return "ontology retrieval failed";
+    }
     Vector<OBOClass> v = ontology.getSearchTerms(userInput,getSearchParams());
     for (OBOClass oc : v)
-      makeCompListHtmlItem(oc);
+      sb.append(makeCompListHtmlItem(oc));
+    sb.append("</ul>");
+    return sb.toString();
+  }
+
+  private Ontology getOntology(String termId) { // termid?? or ontology name?
+    return getPatoOntology();
+  }
+  
+  // for now...
+  private Ontology getPatoOntology() {
+    for (CharField cf : OntologyManager.inst().getCharFieldList())
+      if (cf.getCharFieldEnum() == CharFieldEnum.PATO)
+        return cf.getFirstOntology();
+    System.out.println("pato ontology not found in ontology manager");
     return null;
   }
 
   private String makeCompListHtmlItem(OBOClass term) {
-    return "<li onmouseover=\"set_ontology()";
+    String id = "'"+term.getID()+"'";
+    return "<li onmouseover=\"set_ontology("+id+")\" id="+id+" "+
+      "onclick=\"set_ontology("+id+")\">"+term.getName()+"</li>\n";
   }
 
+  /** for now search params hard wired - eventually from buttons on web page */
   private SearchParamsI getSearchParams() {
     return new HardWiredSearchParams();
   }
@@ -118,6 +156,8 @@ public class PhenoteServlet extends HttpServlet {
       This should be in conjunction with the other 3 */
     public boolean searchObsoletes() { return false; }
   }
+
+
 }
 
 

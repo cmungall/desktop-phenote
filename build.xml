@@ -12,6 +12,7 @@
   <property name="test" value="./src/java/test" />
   <!-- where classes go -->  
   <property name="classfiles" value="classfiles" />
+  <!-- symbolic link over to web world -->
   <property name="web-classfiles" value="web-classfiles" />
   <property name="lib" value="jars" />
   <property name="jarfile" value="jars/phenote.jar"/>
@@ -188,10 +189,18 @@
     </javac>
   </target>
 
-  <!-- web-deployment should be a symoblic link to ones web site -->
+  <!-- web-deployment & web-config-files  should be a symoblic link to ones web site -->
   <target name="web-deployment">
      <copy todir="web-deployment">
        <fileset dir="src/web"/>
+     </copy>
+     <copy todir="${web-classfiles}">
+       <fileset dir="conf">
+         <include name="*.cfg"/>
+       </fileset>
+     </copy>
+     <copy todir="${web-classfiles}">
+       <fileset dir="obo-files" />
      </copy>
   </target> 
 

@@ -155,7 +155,8 @@ class AutoComboBox extends JComboBox {
   }
 
   /** BasicComboBoxEditor uses JTextField as its editing component but is
-   * only available as a protected variable - odd */
+   * only available as a protected variable - odd 
+   adds auto doc & auto key listeners to combo box edit field */
   private class AutoTextFieldEditor extends BasicComboBoxEditor {
 
 

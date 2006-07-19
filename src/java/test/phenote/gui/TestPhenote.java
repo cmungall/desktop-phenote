@@ -24,6 +24,7 @@ import phenote.dataadapter.fly.FlyCharacter;
 import phenote.dataadapter.fly.FlyCharList;
 import phenote.dataadapter.fly.FlyCharListTransferable;
 import phenote.dataadapter.fly.FlybaseDataAdapter;
+import phenote.util.HtmlUtil;
 
 // making same package as phenotes giving us access to package methods!
 
@@ -194,7 +195,7 @@ public class TestPhenote {
   private void simulatePhenoteHyperlinkUpdate() {
     HyperlinkEvent.EventType type = HyperlinkEvent.EventType.ACTIVATED;
     // 0000732 -> "BodyToneValue"
-    String desc = TermInfo.PHENOTE_LINK_PREFIX+"PATO:0000732";
+    String desc = HtmlUtil.makePhenoIdLink("PATO:0000732");
     HyperlinkEvent e = new HyperlinkEvent(termInfo,type,null,desc);
     termInfo.simulateHyperlinkEvent(e);
   }

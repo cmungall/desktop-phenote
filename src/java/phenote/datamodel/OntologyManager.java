@@ -80,7 +80,9 @@ public class OntologyManager {
     addOntology(patoOntology);
   }
 
+  // pase?
   public Ontology getPatoOntology() {
+    //if (patoOntology != null)
     return patoOntology;
   }
 
@@ -123,6 +125,8 @@ public class OntologyManager {
     charFieldList.add(cf);
   }
 
+  /** This is where the ontologies are in a generic fashion. A char field
+      has one or more ontologies (entity char field often has more than ontology)*/
   public List<CharField> getCharFieldList() { return charFieldList; }
 
   // for now i know that only genetic context is in char field list...

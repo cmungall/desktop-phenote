@@ -5,19 +5,21 @@
 //var url  = '/phenote-ontology.cgi';
 // term info not yet implemented in PhenoteServlet - todo...
 // this should be a relative link - need to get servlets code in/close with scripts?
-var url = '/servlet/PhenoteStub'; 
+//var url = '/servlet/PhenoteStub'; 
+var url = '/servlet/Phenote';
       
 // set_ontology should be called by the above url (at least for dichty it does)
 
       function set_ontology(ontologyid){
 
         // for some reason 0 doesnt work
-        ontologyid = 123;
+        //ontologyid = 123;
 
         //alert("phenote-control.js set_ontology called ontId isNan:"+isNaN(ontologyid)+" ontId: "+ontologyid);
 
         // isNan is "is Not a Number", ontology id has to be a number
-         if ( !isNaN( ontologyid ) ) {      
+        // this aint gonna fly - ontology ids are string PATO:1234
+         //if ( !isNaN( ontologyid ) ) {      
             var pars = 'ontologyid=' + ontologyid;
 
             
@@ -36,5 +38,5 @@ var url = '/servlet/PhenoteStub';
             else {
                document.forms[0].ontologyid.value = ontologyid;
             }
-         }
+         //}
       }

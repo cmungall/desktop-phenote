@@ -42,7 +42,7 @@ public class Config {
 
   public void setConfigFile(String configFile) {
     this.configFile = configFile; // ??
-    System.out.println("Reading config from "+configFile);
+    System.out.println("Attempting to read config from "+configFile);
     parseXmlFile(configFile); // do parse here?
   }
 
@@ -187,10 +187,15 @@ public class Config {
       document = tryFile(builder,"conf/"+filename);
     if (document == null) { // try jar file
       URL url = Config.class.getResource(filename);
-      document = tryFile(builder,url.toString());
+      if (url == null)
+        System.out.println("failed to get file from jar");
+      else
+        document = tryFile(builder,url.toString());
     }
-    if (document == null)
+    if (document == null) {
       System.out.println("Failed to find config file "+filename);
+      throw new FileNotFoundException(filename);
+    }
     return document;
   }
 
@@ -214,6 +219,7 @@ public class Config {
       document = getDocument(filename);
     } catch (Exception e) {
       System.out.println("Xml config parse error: "+e);
+      e.printStackTrace();
       return;
     }
     Element root = document.getDocumentElement();
