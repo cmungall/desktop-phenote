@@ -142,6 +142,8 @@ public class HtmlUtil {
       String id = getIdFromHyperlinkDesc(desc);
       return id;
   }
+
+  /** extract id from hyperlink description string */
   private static String getIdFromHyperlinkDesc(String desc) {
     return desc.substring(PHENOTE_LINK_PREFIX.length());
   }
