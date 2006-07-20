@@ -27,7 +27,6 @@ public class PhenoteServlet extends HttpServlet {
   /** if <load-on-startup>1</load-on-startup> is in web.xml then init will
       happen when web server started (or if code recompiled) - so this is where
       the ontology reading & caching goes */
-
   public void init() throws ServletException {
     initDate = new Date();
     super.init();
@@ -37,7 +36,8 @@ public class PhenoteServlet extends HttpServlet {
   }
 
 
-  /** this should be done in java server faces/pages(?) */
+  /** this should be done in java server faces/pages(?), post comes from ajax
+      autocompleter on typing in stuff */
   public void doPost(HttpServletRequest request, HttpServletResponse response)
     throws IOException, ServletException  {
       
@@ -50,7 +50,8 @@ public class PhenoteServlet extends HttpServlet {
 
     if (isTermCompletionRequest(request)) {
       String userInput = getTermCompletionParam(request);
-      //ResourceBundle r=ResourceBundle.getBundle("LocalStrings",request.getLocale());
+      System.out.println("ontology? "+getOntologyParamString(request));
+//ResourceBundle r=ResourceBundle.getBundle("LocalStrings",request.getLocale());
       //Content-Type: text/html; charset=ISO-8859-1
       response.setContentType("text/html");
       //out.println("Content-Type: text/html; charset=ISO-8859-1"); // this messes things up
@@ -74,12 +75,8 @@ public class PhenoteServlet extends HttpServlet {
     return req.getParameter("ontologyname");
   }
 
-  private boolean isTermInfoRequest(HttpServletRequest req) {
-    return getTermIdFromTermInfoRequest(req) != null;
-  }
-
-  private String getTermIdFromTermInfoRequest(HttpServletRequest req) {
-    return req.getParameter("ontologyid");
+  private String getOntologyParamString(HttpServletRequest req) {
+    return req.getParameter("ontology");
   }
 
   
@@ -106,6 +103,15 @@ public class PhenoteServlet extends HttpServlet {
       out.println(HtmlUtil.termInfo(oboClass));
     }
   }
+
+  private boolean isTermInfoRequest(HttpServletRequest req) {
+    return getTermIdFromTermInfoRequest(req) != null;
+  }
+
+  private String getTermIdFromTermInfoRequest(HttpServletRequest req) {
+    return req.getParameter("ontologyid");
+  }
+
 
   // List<String>? String[]? or String htmlLiString?
   // for now just return html ul-li list w onmouseover
