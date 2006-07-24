@@ -8,19 +8,23 @@
 //var url = '/servlet/PhenoteStub'; 
 var url = '/servlet/Phenote';
       
-// set_ontology should be called by the above url (at least for dichty it does)
 
-      function set_ontology(ontologyid){
+// getTermInfo should be called by the above url (at least for dichty it does)
+// renaming this getTermInfo... from set_ontology,
+// ontologyid -> termId
+
+// ontologyName is the name of the ontology (not a term name!)
+      function getTermInfo(termId,ontologyName) {
 
         // for some reason 0 doesnt work
-        //ontologyid = 123;
+        //termId = 123;
 
-        //alert("phenote-control.js set_ontology called ontId isNan:"+isNaN(ontologyid)+" ontId: "+ontologyid);
+        //alert("phenote-control.js set_ontology called ontId isNan:"+isNaN(termId)+" ontId: "+termId);
 
         // isNan is "is Not a Number", ontology id has to be a number
-        // this aint gonna fly - ontology ids are string PATO:1234
-         //if ( !isNaN( ontologyid ) ) {      
-            var pars = 'ontologyid=' + ontologyid;
+         //if ( !isNaN( termId ) ) {      
+//            var pars = 'ontologyid=' + ontologyid;
+            var pars = 'termId=' + termId +'&ontologyName=' + ontologyName;
 
             
             //alert("phenote-control.js calling Ajax.Updater with "+pars);
@@ -28,15 +32,18 @@ var url = '/servlet/Phenote';
 
             // ontologyinfo is the div where the table goes for term info
             // note: this is a "get" not a post! (term comp is post)
-            var myAjax = new Ajax.Updater('ontologyinfo', url, {method: 'get', parameters: pars, onComplete: document.forms[0].ontologyname.value = '' } );
+            var myAjax = new Ajax.Updater('ontologyinfo', url, {method: 'get', parameters: pars, onComplete: document.forms[0].patoInput.value = '' } );
            // have to have [1] next to form item because the edit subform and
            // the main form both have donorid elements
             if ( document.forms[0].ontologyid.length > 1 ) {
-               document.forms[0].ontologyid[1].value = ontologyid;
-               document.forms[0].ontologyid[2].value = ontologyid;
+               document.forms[0].ontologyid[1].value = termId;
+               document.forms[0].ontologyid[2].value = termId;
             }
             else {
-               document.forms[0].ontologyid.value = ontologyid;
+               document.forms[0].ontologyid.value = termId;
             }
          //}
       }
+
+
+

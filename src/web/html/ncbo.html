@@ -36,9 +36,10 @@
             Search terms in PATO ontology<br/><br/><br/>
             <label>Name:</label>
 
-            <input autocomplete="off" id="ontologyname" name="ontologyname" size="20" type="text" value="" />
+            <!-- input autocomplete="off" id="ontologyname" name="ontologyname" size="20" type="text" value="" / -->
+            <input autocomplete="off" id="patoInput" name="patoInput" size="20" type="text" value="" />
             </br>
-            <div class="auto_complete" id="ontologyname_auto_complete"></div>
+            <div class="auto_complete" id="pato_auto_complete"></div>
          </fieldset>
 
       </div>
@@ -58,12 +59,16 @@
    <!--   'ontologyname_auto_complete', '/phenote-ontology.cgi',{  }) -->
    <!-- new Ajax.Autocompleter( 'ontologyname', 'ontologyname_auto_complete', '/servlet/PhenoteStub',{  }) -->
    <!--  new Ajax.Autocompleter( 'ontologyname', 'ontologyname_auto_complete', '/servlet/phenote.servlet.PhenoteServlet',{  }) -->
-        new Ajax.Autocompleter( 'ontologyname', 'ontologyname_auto_complete', '/servlet/Phenote',{  })
+        var complete = new Ajax.Autocompleter( 'patoInput', 'pato_auto_complete', '/servlet/Phenote',{parameters:'ontologyName=pato&aa=bb'   })
         
+        <!-- complete.options.defaultParams = "ontology=pato"; -->
+        <!--   complete.options.parameters = "ontology=pato"; -->
+
+        <!-- more params? 'ontology=pato&x=y&...' -->
 
    </script>
 
-
+   <!-- this is set by ncbo-term-info.js but its unclear what its for -->
    <input type="hidden" name="ontologyid">
 </form>
  

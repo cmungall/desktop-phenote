@@ -27,6 +27,8 @@ public class OntologyManager {
   private List<Ontology> allOntologyList = new ArrayList<Ontology>();
   private Ontology geneticContextOntology;
   //private Map<CharFieldEnum,List<Ontology>> fieldToOntologyList;
+  /** CharFields generically hold one or more ontologies - i think above 
+   hardwired fields are pase - or at least should be */
   private List<CharField> charFieldList = new ArrayList<CharField>(6);
 
 
@@ -128,6 +130,16 @@ public class OntologyManager {
   /** This is where the ontologies are in a generic fashion. A char field
       has one or more ontologies (entity char field often has more than ontology)*/
   public List<CharField> getCharFieldList() { return charFieldList; }
+
+  /** Returns ontology with name, null if not found */
+  public static Ontology getOntologyForName(String ontologyName) { // static?
+    for (CharField cf : inst().getCharFieldList()) {
+      if (cf.hasOntology(ontologyName))
+        return cf.getOntologyForName(ontologyName);
+    }
+    System.out.println("ERROR: no ontology found for name "+ontologyName);
+    return null;
+  }
 
   // for now i know that only genetic context is in char field list...
   public CharField getGeneticContextCharField() {

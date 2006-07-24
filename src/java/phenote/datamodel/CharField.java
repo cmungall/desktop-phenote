@@ -51,7 +51,17 @@ public class CharField {
     public String toString() { return name; }
     public abstract void setValue(CharacterI c, CharFieldValue v);
     public abstract CharFieldValue getValue(CharacterI c);
-    // is this getting silly? abstract?
+
+    // uncler if we need this???
+//     public CharFieldEnum getCharFieldEnum(String fieldString) {
+//       for ( CharFieldEnum cfe : CharFieldEnum.values()) {
+//         if (cfe.name.equalsIgnoreCase(fieldString))
+//           return cfe;
+//       }
+//       System.out.println("ERROR: No Char Field found for string "+fieldString);
+//       return null;
+//     }
+    // is this getting silly? abstract? --> char field value i think
     //public void setOboClass(CharacterI c, OBOClass o) {}
     //public OBOClass getOBOClass(CharacterI c) { return null; }
   };
@@ -112,6 +122,19 @@ public class CharField {
   private int getOntologySize() {
     if (!hasOntologies()) return 0;
     return ontologyList.size();
+  }
+
+  public boolean hasOntology(String ontologyName) {
+    return getOntologyForName(ontologyName) != null;
+  }
+
+  /** Returns Ontology with name ontologyName, null if dont have it */
+  public Ontology getOntologyForName(String ontologyName) {
+    for (Ontology o : getOntologyList()) {
+      if (o.getName().equalsIgnoreCase(ontologyName))
+        return o;
+    }
+    return null;
   }
 }
 

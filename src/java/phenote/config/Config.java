@@ -276,8 +276,6 @@ public class Config {
 
     String file = getFileAttribute(node);
 
-    // see if theres mutliple ontologies specified as ontology elements
-    //if (file == null) 
     OntologyConfig oc = new OntologyConfig(name,file);
     return oc;
   }

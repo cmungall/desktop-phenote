@@ -50,7 +50,7 @@ public class PhenoteServlet extends HttpServlet {
 
     if (isTermCompletionRequest(request)) {
       String userInput = getTermCompletionParam(request);
-      System.out.println("ontology? "+getOntologyParamString(request));
+      System.out.println("ontology? "+getOntologyParamString(request)+" param aa? "+request.getParameter("aa"));
 //ResourceBundle r=ResourceBundle.getBundle("LocalStrings",request.getLocale());
       //Content-Type: text/html; charset=ISO-8859-1
       response.setContentType("text/html");
@@ -59,8 +59,9 @@ public class PhenoteServlet extends HttpServlet {
 //         "onclick=\"set_ontology()\">"+userInput+"</li>\n"+
 //         "<li onmouseover=\"set_ontology()\" id=\"termId\" onclick=\"set_ontology()\">"+
 //         "test</li>\n<li onmouseover=\"set_ontology()\" id=\"termId\" onclick=\"set_ontology()\">dude</li></ul>";
-      String list = getCompletionList(userInput);
-      System.out.println("printing to response writer: "+list.substring(0,45)+"...");
+      String ontol = getOntologyParamString(request);
+      String list = getCompletionList(userInput,ontol);
+      System.out.println("printing to response writer: "+list.substring(0,85)+"...");
       out.println(list);
     }
         
@@ -72,11 +73,11 @@ public class PhenoteServlet extends HttpServlet {
 
   /** this should be renamed from unintuitive "ontologyname" */
   private String getTermCompletionParam(HttpServletRequest req) {
-    return req.getParameter("ontologyname");
+    return req.getParameter("patoInput");
   }
 
   private String getOntologyParamString(HttpServletRequest req) {
-    return req.getParameter("ontology");
+    return req.getParameter("ontologyName");
   }
 
   
@@ -88,13 +89,19 @@ public class PhenoteServlet extends HttpServlet {
     if (true || isTermInfoRequest(request)) {
       PrintWriter out = response.getWriter();
       String termId = getTermIdFromTermInfoRequest(request);
-      System.out.println("doGet term info param: "+termId);
+      String ontologyName = getOntologyParamString(request);
+      System.out.println("doGet term info param: "+termId+" ont "+ontologyName);
 //       out.println("<table><tr><td class=\"label\">Ontology</td> "+
 //                   "<td class=\"data\">"+initDate+"</td></tr>\n"+
 //                   "<tr><td class=\"label\">Term name...</td><td class=\"data\">"
 //                   +userInput+"</td></tr></table>");
       // for now hard wire to pato
-      OBOClass oboClass = getOntology(null).getOboClass(termId);
+      Ontology ont = getOntology(ontologyName);
+      if (ont == null) {
+        System.out.println("ERROR: Failed to get ontology for "+ontologyName);
+        return;
+      }
+      OBOClass oboClass = getOntology(ontologyName).getOboClass(termId);
       if (oboClass == null) {
         System.out.println("term info: no obo class found for "+termId);
         return;
@@ -109,29 +116,31 @@ public class PhenoteServlet extends HttpServlet {
   }
 
   private String getTermIdFromTermInfoRequest(HttpServletRequest req) {
-    return req.getParameter("ontologyid");
+    return req.getParameter("termId");
   }
 
 
   // List<String>? String[]? or String htmlLiString?
   // for now just return html ul-li list w onmouseover
-  private String getCompletionList(String userInput) {
+  private String getCompletionList(String userInput,String ontol) {
     StringBuffer sb = new StringBuffer("<ul>");
     // for now just grab the pato ontology - eventuall redo for multiple/config
-    Ontology ontology = getOntology(null);
+    Ontology ontology = getOntology(ontol);
     if (ontology == null) {
       System.out.println("failed to get pato from ontology manager");
       return "ontology retrieval failed";
     }
     Vector<OBOClass> v = ontology.getSearchTerms(userInput,getSearchParams());
     for (OBOClass oc : v)
-      sb.append(makeCompListHtmlItem(oc));
+      sb.append(makeCompListHtmlItem(oc,ontol));
     sb.append("</ul>");
     return sb.toString();
   }
 
-  private Ontology getOntology(String termId) { // termid?? or ontology name?
-    return getPatoOntology();
+  /** returns null if ontolName not found */
+  private Ontology getOntology(String ontolName) { // termid?? or ontology name?
+    //return getPatoOntology();
+    return OntologyManager.getOntologyForName(ontolName);
   }
   
   // for now...
@@ -143,9 +152,9 @@ public class PhenoteServlet extends HttpServlet {
     return null;
   }
 
-  private String makeCompListHtmlItem(OBOClass term) {
+  private String makeCompListHtmlItem(OBOClass term,String ontol) {
     String id = "'"+term.getID()+"'";
-    return "<li onmouseover=\"set_ontology("+id+")\" id="+id+" "+
+    return "<li onmouseover=\"getTermInfo("+id+",'"+ontol+"')\" id="+id+" "+
       "onclick=\"set_ontology("+id+")\">"+term.getName()+"</li>\n";
   }
 
