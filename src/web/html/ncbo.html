@@ -25,16 +25,49 @@
 </HEAD>
 <BODY>
 
-<table>
-<tr height="20%"><td>
+<!-- table width="50%" -->
 
-<form>
-   <div id="ontology">
-      <div style="float: left;">
+<!-- tr height="20%" -->
+
+<!-- td width="20%" -->
+
+<form width="20%">
+   <div id="ontology" width="20%">
+
+     <!-- table width="20%" -->
+     <!-- tr -->
+     <!-- td -->
+
+      <!-- ENTITY -->
+
+      <!-- div style="float: left;" -->
+      <div  style="float: left;" width="20%">
 
          <fieldset class="search">
-            Search terms in PATO ontology<br/><br/><br/>
-            <label>Name:</label>
+            <br/><br/><br/>
+            <label>Entity: </label>
+
+            <!-- input autocomplete="off" id="ontologyname" name="ontologyname" size="20" type="text" value="" / -->
+            <input autocomplete="off" id="entityInput" name="entityInput" size="20" type="text" value="" />
+            </br>
+            <div class="auto_complete" id="entity_auto_complete"></div>
+         </fieldset>
+
+      </div>
+
+      <!-- /td -->
+      <!-- /tr -->
+      <!-- tr -- -->
+      <!-- td -->
+
+      <!-- PATO -->
+
+      <div style="clear: left;">
+      <!-- div width="20%" -->
+
+         <fieldset class="search">
+            <br/><br/><br/>
+            <label>PATO: </label>
 
             <!-- input autocomplete="off" id="ontologyname" name="ontologyname" size="20" type="text" value="" / -->
             <input autocomplete="off" id="patoInput" name="patoInput" size="20" type="text" value="" />
@@ -44,41 +77,53 @@
 
       </div>
 
-      <div id="ontologyinfo"></div>
+      <!-- /td -->
+      <!-- /tr -->
+      <!-- /table -->
+
+
    </div>
 
 
+
    <script type="text/javascript">
-   <!-- this is the crucial javascript bit here, ontologyname is the -->
-   <!-- input field, i think ontologyname_auto_complete is the div where-->
+   <!-- this is the crucial javascript bit here, patoInput is the -->
+   <!-- input field, i pato_auto_complete is the div where-->
    <!--the auto completion will pop up, and the last param is the-->
    <!--    script that will does the fetching of terms -->
    <!-- Autocomp is in js/prototype/controls.js -->
-
    <!--   new Ajax.Autocompleter( 'ontologyname', -->
    <!--   'ontologyname_auto_complete', '/phenote-ontology.cgi',{  }) -->
    <!-- new Ajax.Autocompleter( 'ontologyname', 'ontologyname_auto_complete', '/servlet/PhenoteStub',{  }) -->
    <!--  new Ajax.Autocompleter( 'ontologyname', 'ontologyname_auto_complete', '/servlet/phenote.servlet.PhenoteServlet',{  }) -->
-        var complete = new Ajax.Autocompleter( 'patoInput', 'pato_auto_complete', '/servlet/Phenote',{parameters:'ontologyName=pato&aa=bb'   })
-        
-        <!-- complete.options.defaultParams = "ontology=pato"; -->
-        <!--   complete.options.parameters = "ontology=pato"; -->
-
-        <!-- more params? 'ontology=pato&x=y&...' -->
-
+      var complete = new Ajax.Autocompleter( 'patoInput', 'pato_auto_complete', '/servlet/Phenote',{parameters:'ontologyName=pato'   })
+      <!-- complete.options.defaultParams = "ontology=pato"; -->
+      <!--   complete.options.parameters = "ontology=pato"; -->
+      <!-- more params? 'ontology=pato&x=y&...' -->
    </script>
 
-   <!-- this is set by ncbo-term-info.js but its unclear what its for -->
+   <script type="text/javascript">
+     new Ajax.Autocompleter( 'entityInput', 'entity_auto_complete', '/servlet/Phenote',{parameters:'ontologyName=anatomy'})
+   </script>
+
+
+
+   <!-- this is set by ncbo-term-info.js but its unclear what its for is this the datamodel???? -->
    <input type="hidden" name="ontologyid">
 </form>
  
+<!-- /td -->
+
+<!-- td width="80%" -->
+      <div id="termInfo"></div>
+<!-- /td -->
 
 
 
-</td>
-</tr>
-<tr height="80%"><td>&nbsp;</td></tr>
-</table>
+<!-- /td -->
+<!-- /tr -->
+<!-- tr height="80%" --><!-- td -->&nbsp;<!-- /td --></tr -->
+<!-- /table -->
 
 </body>
 </html>

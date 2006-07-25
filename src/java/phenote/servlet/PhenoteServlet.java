@@ -31,7 +31,9 @@ public class PhenoteServlet extends HttpServlet {
     initDate = new Date();
     super.init();
     phenote = Phenote.getPhenote();
-    phenote.initConfig(null); // no args for now, use default config file
+    // cheesy - revisit
+    String[] args = {"-c","initial-zfin.cfg"};
+    phenote.initConfig(args); // hardwire for now to zfin
     phenote.initOntologies();
   }
 
@@ -73,7 +75,10 @@ public class PhenoteServlet extends HttpServlet {
 
   /** this should be renamed from unintuitive "ontologyname" */
   private String getTermCompletionParam(HttpServletRequest req) {
-    return req.getParameter("patoInput");
+    String par = req.getParameter("patoInput"); // for now
+    if (par == null)
+      par = req.getParameter("entityInput");
+    return par;
   }
 
   private String getOntologyParamString(HttpServletRequest req) {
