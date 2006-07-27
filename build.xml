@@ -217,6 +217,17 @@
     </war>
   </target>
 
+  <target name="war-no-jar-depend">
+    <war destfile="war-deployment-link/phenote.war" webxml="src/web/web.xml">
+      <fileset dir="src/web"/>
+      <lib dir="${lib}"/>
+      <classes dir="${classfiles}" />
+      <zipfileset dir="${obo}"/>  <!-- prefix="obo-files"/ ??? -->
+      <zipfileset dir="${conf}"/>
+    </war>
+  </target>
+  
+
 </project>
 
 
