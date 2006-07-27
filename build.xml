@@ -52,7 +52,7 @@
   <!-- The compile target runs javac on all the java files, and saves
         them into  the classfiles directory. -->
   <target name="compile" depends="init">
-    <javac srcdir="${src}" destdir="${classfiles}" debug="yes">
+    <javac srcdir="${src}" destdir="${classfiles}" debug="yes" excludes="test/**">
       <classpath refid="project.classpath3"/>
     </javac>
   </target>
@@ -143,13 +143,15 @@
             <exclude name="${dist}/**"/>
             <exclude name="svn-phenote/**"/>
             <exclude name="tars/**"/>
-            <exclude name="source/obo-files/**"/>
             <exclude name="src/obo-files/**"/>
             <exclude name="*.tar"/>
             <exclude name="*.jar"/>
             <exclude name="garbage/**"/>
             <exclude name="oldjars/**"/>
-            <exclude name="source/**"/>
+            <exclude name="src/java/**"/>
+            <exclude name="web-classfiles/**"/>
+            <exclude name="web-interface/**"/>
+            <exclude name="web-deployment/**"/>
       </tarfileset>
     </tar>
     <gzip zipfile="tars/${dist}/phenote-${dist}.tar.gz" src="tars/${dist}/phenote-${dist}.tar"/>
@@ -162,7 +164,6 @@
             <exclude name="${dist}/**"/>
             <exclude name="svn-phenote/**"/>
             <exclude name="tars/**"/>
-            <exclude name="source/obo-files/**"/>
             <exclude name="src/obo-files/**"/>
             <!-- for now take out go as its 8.5M & not being used yet -->
             <exclude name="obo-files/gene_ontology.obo"/>
@@ -170,10 +171,12 @@
             <exclude name="*.jar"/>
             <exclude name="garbage/**"/>
             <exclude name="oldjars/**"/>
-            <exclude name="jars/phenote.jar"/>
-            <exclude name="source/**"/>
+            <!-- exclude name="jars/phenote.jar"/ -->
             <exclude name="doc/**"/>
             <exclude name="classfiles/**"/>
+            <exclude name="web-classfiles/**"/>
+            <exclude name="web-interface/**"/>
+            <exclude name="web-deployment/**"/>
       </tarfileset>
     </tar>
     <gzip zipfile="tars/${dist}/phenote-${dist}-src.tar.gz" src="tars/${dist}/phenote-${dist}-src.tar"/>
@@ -203,6 +206,16 @@
        <fileset dir="obo-files" />
      </copy>
   </target> 
+
+  <target name="war" depends="jar">
+    <war destfile="war-deployment-link/phenote.war" webxml="src/web/web.xml">
+      <fileset dir="src/web"/>
+      <lib dir="${lib}"/>
+      <classes dir="${classfiles}" />
+      <zipfileset dir="${obo}"/>  <!-- prefix="obo-files"/ ??? -->
+      <zipfileset dir="${conf}"/>
+    </war>
+  </target>
 
 </project>
 
