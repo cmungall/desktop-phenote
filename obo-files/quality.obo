@@ -1,0 +1,7500 @@
+format-version: 1.0
+date: 28:07:2006 00:43
+saved-by: George Gkoutos
+auto-generated-by: OBO-Edit 1.002
+default-namespace: unknown
+
+
+
+[Term]
+id: PATO:0000000
+name: pato
+namespace: attribute
+
+[Term]
+id: PATO:0000001
+name: quality
+namespace: attribute
+is_a: PATO:0000000 ! pato
+
+[Term]
+id: PATO:0000002
+name: value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000003
+name: assay
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000004
+name: mobility
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000005
+name: absolute activity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000006
+name: process
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000007
+name: relative activity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000008
+name: speed
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0000009
+name: absolute speed
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000010
+name: relative speed
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000011
+name: age
+namespace: attribute
+is_a: PATO:0000050 ! life span
+
+[Term]
+id: PATO:0000012
+name: absolute age
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000013
+name: relative age
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000014
+name: color
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000015
+name: color hue
+namespace: attribute
+is_a: PATO:0000014 ! color
+
+[Term]
+id: PATO:0000016
+name: color intensity
+namespace: attribute
+is_a: PATO:0000014 ! color
+
+[Term]
+id: PATO:0000017
+name: color saturation
+namespace: attribute
+is_a: PATO:0000014 ! color
+
+[Term]
+id: PATO:0000018
+name: flourescence
+namespace: attribute
+is_a: PATO:0000014 ! color
+
+[Term]
+id: PATO:0000019
+name: color pattern
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000020
+name: relative color
+namespace: attribute
+is_a: PATO:0000014 ! color
+
+[Term]
+id: PATO:0000021
+name: compatability
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000022
+name: gametophytic compatability
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000023
+name: relative compatability
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000024
+name: sporophytic compatability
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000025
+name: composition
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000026
+name: carbohydrate composition
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000027
+name: electrolyte composition
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000028
+name: macromolecular composition
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000029
+name: protein composition
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000030
+name: enzyme composition
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000031
+name: metabolite composition
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000032
+name: secondary product composition
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000033
+name: concentration
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0000034
+name: protein concentration
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000035
+name: carbohydrate concentration
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000036
+name: water content
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000037
+name: consistency
+namespace: attribute
+def: "the property of holding together and retaining shape" [PATO:gg]
+is_obsolete: true
+
+[Term]
+id: PATO:0000038
+name: gel consistency
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000039
+name: direction
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0000040
+name: distance
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0000041
+name: absolutedistance
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000042
+name: relative distance
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000043
+name: flavor
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000044
+name: frequency
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0000045
+name: absolute frequency
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000046
+name: relative frequency
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000047
+name: gender
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000048
+name: hardness
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0000049
+name: intensity
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000050
+name: life span
+namespace: attribute
+is_a: PATO:0000165 ! time
+
+[Term]
+id: PATO:0000051
+name: morphology
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000052
+name: shape
+namespace: attribute
+is_a: PATO:0000051 ! morphology
+
+[Term]
+id: PATO:0000053
+name: count
+namespace: attribute
+is_a: PATO:0001226 ! quantitative
+
+[Term]
+id: PATO:0000054
+name: absolute number
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000055
+name: relative number
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000056
+name: nutritional
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000057
+name: occurence
+namespace: attribute
+is_a: PATO:0001226 ! quantitative
+
+[Term]
+id: PATO:0000058
+name: odor
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000059
+name: parental type
+namespace: attribute
+is_a: PATO:0000047 ! gender
+
+[Term]
+id: PATO:0000060
+name: pattern
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000061
+name: relative pattern
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000062
+name: sleep pattern
+namespace: attribute
+is_a: PATO:0000186 ! behavioral quality
+
+[Term]
+id: PATO:0000063
+name: percentage
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000064
+name: absolute percentage
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000065
+name: relative percentage
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000066
+name: pilosity
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000067
+name: relative pilosity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000068
+name: qualitative
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000069
+name: deviation(from_normal)
+namespace: attribute
+is_a: PATO:0000068 ! qualitative
+
+[Term]
+id: PATO:0000070
+name: presence
+namespace: attribute
+is_a: PATO:0000068 ! qualitative
+
+[Term]
+id: PATO:0000071
+name: relative_quantity
+namespace: attribute
+is_a: PATO:0001226 ! quantitative
+
+[Term]
+id: PATO:0000073
+name: relative_quality
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000074
+name: shattering
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000075
+name: threshability
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000076
+name: regulation
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000077
+name: response
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000078
+name: rhythym
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000079
+name: absolute rhythym
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000080
+name: amplitude
+namespace: attribute
+def: "The size of the maximum displacement from the 'normal' position, when periodic motion is taking place" [PATO:gg]
+is_a: PATO:0000078 ! rhythym
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0000081
+name: period
+namespace: attribute
+is_a: PATO:0000078 ! rhythym
+is_a: PATO:0000165 ! time
+
+[Term]
+id: PATO:0000082
+name: persistence
+namespace: attribute
+is_a: PATO:0000078 ! rhythym
+
+[Term]
+id: PATO:0000083
+name: phase
+namespace: attribute
+is_a: PATO:0000078 ! rhythym
+
+[Term]
+id: PATO:0000084
+name: relative rhythym
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000085
+name: sensitivity
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000086
+name: absolute sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000087
+name: disease sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000088
+name: absolute disease sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000089
+name: relative disease sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000090
+name: relative sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000091
+name: stress sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000092
+name: abiotic stress sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000093
+name: chemical sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000094
+name: drug sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000095
+name: absolute drug sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000096
+name: relative drug sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000097
+name: herbicide sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000098
+name: insecticide sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000099
+name: plant growth hormone sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000100
+name: soil composition sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000101
+name: soil nutrient sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000102
+name: macronutrient sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000103
+name: micronutrient sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000104
+name: osmotic response sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000105
+name: p h sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000106
+name: acid sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000107
+name: alkali sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000108
+name: salt sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000109
+name: water sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000110
+name: drought sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000111
+name: flooding sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000112
+name: humidity sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000113
+name: radiation sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000114
+name: temperature sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000115
+name: absolute temperature sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000116
+name: relative temperature sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000117
+name: size
+namespace: attribute
+is_a: PATO:0000051 ! morphology
+
+[Term]
+id: PATO:0000118
+name: absolute size
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000119
+name: height
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0000120
+name: absolute height
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000121
+name: relative height
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000122
+name: length
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0000123
+name: absolute length
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000124
+name: relative length
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000125
+name: mass
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0000126
+name: absolute mass
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000127
+name: relative mass
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000128
+name: weight
+namespace: attribute
+is_a: PATO:0001035 ! force
+
+[Term]
+id: PATO:0000129
+name: absolute weight
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000130
+name: relative weight
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000131
+name: relative size
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000132
+name: spatial
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000133
+name: angle
+namespace: attribute
+is_a: PATO:0000132 ! spatial
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0000134
+name: absolute_angle
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000135
+name: relative_angle
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000136
+name: closure
+namespace: attribute
+is_a: PATO:0000132 ! spatial
+
+[Term]
+id: PATO:0000137
+name: orientation
+namespace: attribute
+is_a: PATO:0000132 ! spatial
+
+[Term]
+id: PATO:0000138
+name: absolute orientation
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000139
+name: relative orientation
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000140
+name: placement
+namespace: attribute
+def: "The spatial property of the way in which something is placed" [PATO:gg]
+is_a: PATO:0000132 ! spatial
+
+[Term]
+id: PATO:0000141
+name: structure
+namespace: attribute
+is_a: PATO:0000051 ! morphology
+
+[Term]
+id: PATO:0000142
+name: substance
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000143
+name: addictive substance
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000144
+name: solid substance
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000145
+name: liquid substance
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000146
+name: temperature
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0000147
+name: absolute temperature
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000148
+name: body temperature
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000149
+name: relative temperature
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000150
+name: texture
+namespace: attribute
+is_a: PATO:0000051 ! morphology
+
+[Term]
+id: PATO:0000151
+name: relative texture
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000152
+name: threshold
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000153
+name: absolute threshold
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000154
+name: pain threshold
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000155
+name: relative threshold
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000156
+name: temporal
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000157
+name: absolute temporal
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000158
+name: incidence
+namespace: attribute
+is_a: PATO:0000156 ! temporal
+
+[Term]
+id: PATO:0000159
+name: absolute incidence
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000160
+name: relative incidence
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000161
+name: rate
+namespace: attribute
+is_a: PATO:0000156 ! temporal
+
+[Term]
+id: PATO:0000162
+name: absolute rate
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000163
+name: relative rate
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000164
+name: relative temporal
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000165
+name: time
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0000166
+name: absolute time
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000167
+name: bouts
+namespace: attribute
+is_a: PATO:0000165 ! time
+
+[Term]
+id: PATO:0000168
+name: relative time
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000169
+name: viability
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000170
+name: yield
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000171
+name: absolute yield
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000172
+name: relative yield
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000173
+name: function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000174
+name: autonomic function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000175
+name: behavioral function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000176
+name: metabolic function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000177
+name: physiological function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000178
+name: relative function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000179
+name: body position
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000180
+name: body tone
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000181
+name: piloerection
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000182
+name: abdominal tone
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000183
+name: limb tone
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000184
+name: arousal
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000185
+name: balance
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000186
+name: behavioral quality
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000187
+name: consumption
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000188
+name: coordination
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000189
+name: discrimination
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000190
+name: gait
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000191
+name: learning_and memory
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000192
+name: locomotor_activity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000193
+name: mating
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000194
+name: spontaneous_activity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000195
+name: startle response
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000196
+name: vocalization
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000197
+name: transfer_arousal
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000198
+name: absolute consumption
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000199
+name: relative consumption
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000200
+name: learning
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000201
+name: memory
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000202
+name: long term memory
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000203
+name: short term memory
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000204
+name: absolute locomotor_activity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000205
+name: relative locomotor_activity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000206
+name: enzyme function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000207
+name: circulatory function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000208
+name: defensive function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000209
+name: digestive function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000210
+name: excretory function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000211
+name: muscle function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000212
+name: neural function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000213
+name: neurobehavioral function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000214
+name: reproductive function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000215
+name: respiratory function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000216
+name: heart rate
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000217
+name: immune function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000218
+name: repair function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000219
+name: healing
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000220
+name: regeneration
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000221
+name: urination
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000222
+name: muscle elevation
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000223
+name: muscle strength
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000224
+name: motor function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000225
+name: sensory function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000226
+name: tactile response
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000227
+name: motor performance
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000228
+name: auditory
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000229
+name: olfactory
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000230
+name: proprioreception
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000231
+name: reflex
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000232
+name: taste
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000233
+name: touch
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000234
+name: visual
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000235
+name: odor_acuity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000236
+name: odor type
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000237
+name: absolute odor_acuity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000238
+name: relative odor_acuity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000239
+name: blinking reflex
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000240
+name: contact righting reflex
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000241
+name: corneal reflex
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000242
+name: flinch reflex
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000243
+name: lordosis reflex
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000244
+name: ocular reflex
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000245
+name: pinna reflex
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000246
+name: postural reflex
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000247
+name: proboscis extension reflex
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000248
+name: pupillary reflex
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000249
+name: righting reflex
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000250
+name: spinal reflex
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000251
+name: startle reflex
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000252
+name: suckling reflex
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000253
+name: swallowing reflex
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000254
+name: vibrissae reflex
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000255
+name: taste_acuity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000256
+name: taste type
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000257
+name: absolute taste_acuity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000258
+name: relative taste_acuity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000259
+name: visual_ability
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000260
+name: visual_acuity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000261
+name: maturity
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000262
+name: visual placing
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000263
+name: visual threshold
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000264
+name: absolute visual_ability
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000265
+name: relative visual_ability
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000266
+name: absolute visual_acuity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000267
+name: relative visual_acuity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000268
+name: absolute visual threshold
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000269
+name: relative visual threshold
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000270
+name: defecation
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000271
+name: prepulse inhibition
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000272
+name: relative neurobehavioral function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000273
+name: fecundity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000274
+name: fertility
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000275
+name: gestational period
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000276
+name: litter size
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000277
+name: female fertility
+namespace: attribute
+is_a: PATO:0000274 ! fertility
+
+[Term]
+id: PATO:0000278
+name: hybrid fertility
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000279
+name: male fertility
+namespace: attribute
+is_a: PATO:0000274 ! fertility
+
+[Term]
+id: PATO:0000280
+name: backcross fertility
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000281
+name: cytoplasmic sterility
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000282
+name: f1 fertility
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000283
+name: f2 fertility
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000284
+name: germ line dependent fertility
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000285
+name: soma dependent fertility
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000286
+name: cytoplasmic male sterility
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000287
+name: absolute litter size
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000288
+name: relative litter size
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000289
+name: respiratory rate
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000290
+name: absolute respiratory rate
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000291
+name: relative respiratory rate
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000292
+name: mobility value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000293
+name: absolute activity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000294
+name: process value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000295
+name: relative activity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000296
+name: speed value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000297
+name: arrested value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000298
+name: not arrested value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000299
+name: mobile
+namespace: attribute
+is_a: PATO:0000004 ! mobility
+
+[Term]
+id: PATO:0000300
+name: immobile
+namespace: attribute
+is_a: PATO:0000004 ! mobility
+
+[Term]
+id: PATO:0000301
+name: absolute speed value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000302
+name: relative speed value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000303
+name: fast speed
+namespace: attribute
+is_a: PATO:0000008 ! speed
+
+[Term]
+id: PATO:0000304
+name: slow speed
+namespace: attribute
+is_a: PATO:0000008 ! speed
+
+[Term]
+id: PATO:0000305
+name: age value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000306
+name: absolute age value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000307
+name: relative age value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000308
+name: old
+namespace: attribute
+is_a: PATO:0000011 ! age
+
+[Term]
+id: PATO:0000309
+name: young
+namespace: attribute
+is_a: PATO:0000011 ! age
+
+[Term]
+id: PATO:0000310
+name: color value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000311
+name: color hue value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000312
+name: color intensity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000313
+name: color saturation value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000314
+name: flourescence value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000315
+name: color pattern value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000316
+name: relative color value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000317
+name: black
+namespace: attribute
+is_a: PATO:0000015 ! color hue
+
+[Term]
+id: PATO:0000318
+name: blue
+namespace: attribute
+is_a: PATO:0000015 ! color hue
+
+[Term]
+id: PATO:0000319
+name: cyan
+namespace: attribute
+is_a: PATO:0000015 ! color hue
+
+[Term]
+id: PATO:0000320
+name: green
+namespace: attribute
+is_a: PATO:0000015 ! color hue
+
+[Term]
+id: PATO:0000321
+name: magenta
+namespace: attribute
+is_a: PATO:0000015 ! color hue
+
+[Term]
+id: PATO:0000322
+name: red
+namespace: attribute
+is_a: PATO:0000015 ! color hue
+
+[Term]
+id: PATO:0000323
+name: white
+namespace: attribute
+is_a: PATO:0000015 ! color hue
+
+[Term]
+id: PATO:0000324
+name: yellow
+namespace: attribute
+is_a: PATO:0000015 ! color hue
+
+[Term]
+id: PATO:0000325
+name: bright
+namespace: attribute
+is_a: PATO:0000017 ! color saturation
+
+[Term]
+id: PATO:0000326
+name: dim
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000327
+name: dark
+namespace: attribute
+is_a: PATO:0000017 ! color saturation
+
+[Term]
+id: PATO:0000328
+name: pale
+namespace: attribute
+is_a: PATO:0000017 ! color saturation
+
+[Term]
+id: PATO:0000329
+name: blotchy
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000330
+name: irregular
+namespace: attribute
+is_a: PATO:0000060 ! pattern
+
+[Term]
+id: PATO:0000331
+name: discolored
+namespace: attribute
+is_a: PATO:0000020 ! relative color
+
+[Term]
+id: PATO:0000332
+name: pigmented
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000333
+name: spotted
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000334
+name: unpigmented
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000335
+name: variegated
+namespace: attribute
+related_synonym: "mottled (sensu Drosophila)" []
+is_obsolete: true
+
+[Term]
+id: PATO:0000336
+name: colored
+namespace: attribute
+is_a: PATO:0000020 ! relative color
+
+[Term]
+id: PATO:0000337
+name: colorless
+namespace: attribute
+is_a: PATO:0000020 ! relative color
+
+[Term]
+id: PATO:0000338
+name: compatability value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000339
+name: gametophytic compatability value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000340
+name: relative compatability value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000341
+name: sporophytic compatability value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000342
+name: gametophyte compatible value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000343
+name: gametophyte incompatible value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000344
+name: compatible
+namespace: attribute
+is_a: PATO:0000021 ! compatability
+
+[Term]
+id: PATO:0000345
+name: incompatible
+namespace: attribute
+is_a: PATO:0000021 ! compatability
+
+[Term]
+id: PATO:0000346
+name: sporophyte compatible value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000347
+name: sporophyte incompatible value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000348
+name: composition value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000349
+name: carbohydrate composition value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000350
+name: electrolyte composition value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000351
+name: macromolecular composition value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000352
+name: metabolite composition value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000353
+name: secondary product composition value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000354
+name: protein composition value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000355
+name: enzyme composition value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000356
+name: concentration value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000357
+name: protein concentration value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000358
+name: sugar concentration value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000359
+name: water content value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000360
+name: consistency value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000361
+name: gel consistency value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000362
+name: direction value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000363
+name: away
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000364
+name: bi-directional
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000365
+name: down
+namespace: attribute
+is_a: PATO:0000039 ! direction
+
+[Term]
+id: PATO:0000366
+name: left
+namespace: attribute
+is_a: PATO:0000039 ! direction
+
+[Term]
+id: PATO:0000367
+name: right
+namespace: attribute
+is_a: PATO:0000039 ! direction
+
+[Term]
+id: PATO:0000368
+name: towards
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000369
+name: unidirectional
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000370
+name: up
+namespace: attribute
+is_a: PATO:0000039 ! direction
+
+[Term]
+id: PATO:0000371
+name: distance value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000372
+name: absolute distance value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000373
+name: relative distance value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000374
+name: long distance
+namespace: attribute
+is_a: PATO:0000040 ! distance
+
+[Term]
+id: PATO:0000375
+name: short distance
+namespace: attribute
+is_a: PATO:0000040 ! distance
+
+[Term]
+id: PATO:0000376
+name: flavor value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000377
+name: frequency value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000378
+name: absolute frequency value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000379
+name: relative frequency value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000380
+name: frequent
+namespace: attribute
+is_a: PATO:0000044 ! frequency
+
+[Term]
+id: PATO:0000381
+name: infrequent
+namespace: attribute
+is_a: PATO:0000044 ! frequency
+
+[Term]
+id: PATO:0000382
+name: gender value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000383
+name: female
+namespace: attribute
+is_a: PATO:0000047 ! gender
+
+[Term]
+id: PATO:0000384
+name: male
+namespace: attribute
+is_a: PATO:0000047 ! gender
+
+[Term]
+id: PATO:0000385
+name: hardness value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000386
+name: hard
+namespace: attribute
+is_a: PATO:0000048 ! hardness
+
+[Term]
+id: PATO:0000387
+name: soft
+namespace: attribute
+is_a: PATO:0000048 ! hardness
+
+[Term]
+id: PATO:0000388
+name: intensity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000389
+name: acute
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000390
+name: extreme
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000391
+name: intense
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000392
+name: limited
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000393
+name: maximal
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000394
+name: mild
+namespace: attribute
+is_a: PATO:0000049 ! intensity
+
+[Term]
+id: PATO:0000395
+name: moderate
+namespace: attribute
+is_a: PATO:0000049 ! intensity
+
+[Term]
+id: PATO:0000396
+name: severe
+namespace: attribute
+is_a: PATO:0000049 ! intensity
+
+[Term]
+id: PATO:0000397
+name: slight
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000398
+name: vigorous
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000399
+name: life span value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000400
+name: morphology value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000401
+name: shape value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000402
+name: branched
+namespace: attribute
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0000403
+name: cleft
+namespace: attribute
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0000404
+name: coiled
+namespace: attribute
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0000405
+name: curled
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000406
+name: curved
+namespace: attribute
+related_synonym: "curled" []
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0000407
+name: flat
+namespace: attribute
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0000408
+name: globular
+namespace: attribute
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0000409
+name: oblate
+namespace: attribute
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0000410
+name: pinnate
+namespace: attribute
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0000411
+name: round
+namespace: attribute
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0000412
+name: shrunken
+namespace: attribute
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0000413
+name: square
+namespace: attribute
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0000414
+name: unbranched
+namespace: attribute
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0000415
+name: uncoiled
+namespace: attribute
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0000416
+name: count value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000417
+name: absolute number value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000418
+name: relative number value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000419
+name: decreased number
+namespace: attribute
+is_a: PATO:0000053 ! count
+
+[Term]
+id: PATO:0000420
+name: increased number
+namespace: attribute
+is_a: PATO:0000053 ! count
+
+[Term]
+id: PATO:0000421
+name: nutritional value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000422
+name: auxotroph
+namespace: attribute
+is_a: PATO:0000056 ! nutritional
+
+[Term]
+id: PATO:0000423
+name: prototroph
+namespace: attribute
+is_a: PATO:0000056 ! nutritional
+
+[Term]
+id: PATO:0000424
+name: occurence value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000425
+name: continual
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000426
+name: interrupted
+namespace: attribute
+is_a: PATO:0000057 ! occurence
+
+[Term]
+id: PATO:0000427
+name: recurrent
+namespace: attribute
+is_a: PATO:0000057 ! occurence
+
+[Term]
+id: PATO:0000428
+name: sporadic
+namespace: attribute
+is_a: PATO:0000057 ! occurence
+
+[Term]
+id: PATO:0000429
+name: uninterrupted
+namespace: attribute
+is_a: PATO:0000057 ! occurence
+
+[Term]
+id: PATO:0000430
+name: unique
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000431
+name: odor value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000432
+name: parental type value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000433
+name: paternal
+namespace: attribute
+is_a: PATO:0000059 ! parental type
+
+[Term]
+id: PATO:0000434
+name: maternal
+namespace: attribute
+is_a: PATO:0000059 ! parental type
+
+[Term]
+id: PATO:0000435
+name: pattern value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000436
+name: concrete
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000437
+name: sleep pattern value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000438
+name: invariant
+namespace: attribute
+is_a: PATO:0000060 ! pattern
+
+[Term]
+id: PATO:0000439
+name: perseverative
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000440
+name: regular
+namespace: attribute
+is_a: PATO:0000060 ! pattern
+
+[Term]
+id: PATO:0000441
+name: repetitive
+namespace: attribute
+is_a: PATO:0000057 ! occurence
+
+[Term]
+id: PATO:0000442
+name: insomnia
+namespace: attribute
+is_a: PATO:0000062 ! sleep pattern
+
+[Term]
+id: PATO:0000443
+name: narcolepsy
+namespace: attribute
+is_a: PATO:0000062 ! sleep pattern
+
+[Term]
+id: PATO:0000444
+name: percentage value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000445
+name: relative percentage value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000446
+name: absolute percentage value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000447
+name: decreased percentage
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000448
+name: high percentage
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000449
+name: increased percentage
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000450
+name: low percentage
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000451
+name: pilosity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000452
+name: relative pilosity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000453
+name: glabrous
+namespace: attribute
+is_a: PATO:0000066 ! pilosity
+
+[Term]
+id: PATO:0000454
+name: hairy
+namespace: attribute
+is_a: PATO:0000066 ! pilosity
+
+[Term]
+id: PATO:0000455
+name: pubescent
+namespace: attribute
+is_a: PATO:0000066 ! pilosity
+is_a: PATO:0000261 ! maturity
+
+[Term]
+id: PATO:0000456
+name: abstract
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000457
+name: deviation(from_normal) value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000458
+name: presence value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000459
+name: relative quantity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000460
+name: abnormal
+namespace: attribute
+related_synonym: "aberrant" []
+related_synonym: "atypical" []
+related_synonym: "defective" []
+is_a: PATO:0000069 ! deviation(from_normal)
+
+[Term]
+id: PATO:0000461
+name: normal
+namespace: attribute
+related_synonym: "average" []
+is_a: PATO:0000069 ! deviation(from_normal)
+
+[Term]
+id: PATO:0000462
+name: absent
+namespace: attribute
+is_a: PATO:0000070 ! presence
+
+[Term]
+id: PATO:0000463
+name: conspicuous
+namespace: attribute
+is_a: PATO:0000070 ! presence
+
+[Term]
+id: PATO:0000464
+name: inconspicuous
+namespace: attribute
+is_a: PATO:0000070 ! presence
+
+[Term]
+id: PATO:0000465
+name: marked
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000466
+name: none
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000467
+name: present
+namespace: attribute
+is_a: PATO:0000070 ! presence
+
+[Term]
+id: PATO:0000468
+name: decreased
+namespace: attribute
+is_a: PATO:0000071 ! relative_quantity
+
+[Term]
+id: PATO:0000469
+name: high
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000470
+name: increased
+namespace: attribute
+is_a: PATO:0000071 ! relative_quantity
+
+[Term]
+id: PATO:0000471
+name: low
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000472
+name: quality value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000473
+name: relative_quality value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000474
+name: shattering value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000475
+name: threshability value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000476
+name: bad value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000477
+name: good value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000478
+name: poor value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000479
+name: regulation value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000480
+name: positive regulation
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000481
+name: negative regulation
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000482
+name: response value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000483
+name: tactile hyperresponsive
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000484
+name: tactile hyporesponsive
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000485
+name: mild response
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000486
+name: moderate response
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000487
+name: responsive
+namespace: attribute
+is_a: PATO:0000077 ! response
+
+[Term]
+id: PATO:0000488
+name: unresponsive
+namespace: attribute
+is_a: PATO:0000077 ! response
+
+[Term]
+id: PATO:0000489
+name: vigorous response
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000490
+name: rhythym value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000491
+name: sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000492
+name: absolute rhythym value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000493
+name: amplitude value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000494
+name: period value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000495
+name: persistence value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000496
+name: phase value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000497
+name: relative rhythym value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000498
+name: prolonged period
+namespace: attribute
+is_a: PATO:0000081 ! period
+
+[Term]
+id: PATO:0000499
+name: shortened period
+namespace: attribute
+is_a: PATO:0000081 ! period
+
+[Term]
+id: PATO:0000500
+name: advanced
+namespace: attribute
+is_a: PATO:0000083 ! phase
+
+[Term]
+id: PATO:0000501
+name: dark phase
+namespace: attribute
+is_a: PATO:0000083 ! phase
+
+[Term]
+id: PATO:0000502
+name: delayed
+namespace: attribute
+is_a: PATO:0000083 ! phase
+is_a: PATO:0000156 ! temporal
+
+[Term]
+id: PATO:0000503
+name: light phase
+namespace: attribute
+is_a: PATO:0000083 ! phase
+
+[Term]
+id: PATO:0000504
+name: arrhythymic
+namespace: attribute
+is_a: PATO:0000078 ! rhythym
+
+[Term]
+id: PATO:0000505
+name: rhythymic
+namespace: attribute
+is_a: PATO:0000078 ! rhythym
+
+[Term]
+id: PATO:0000506
+name: absolute sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000507
+name: disease sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000508
+name: relative sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000509
+name: stress sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000510
+name: temperature sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000511
+name: absolute disease sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000512
+name: relative disease sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000513
+name: insensitive
+namespace: attribute
+related_synonym: "resistant" []
+is_a: PATO:0000085 ! sensitivity
+
+[Term]
+id: PATO:0000514
+name: intolerant value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000515
+name: tolerant
+namespace: attribute
+is_a: PATO:0001046 ! resistance
+
+[Term]
+id: PATO:0000516
+name: sensitive
+namespace: attribute
+is_a: PATO:0000085 ! sensitivity
+
+[Term]
+id: PATO:0000517
+name: abiotic stress sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000518
+name: chemical sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000519
+name: humidity sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000520
+name: radiation sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000521
+name: drug sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000522
+name: herbicide sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000523
+name: insecticide sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000524
+name: plant growth hormone sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000525
+name: soil composition sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000526
+name: absolute drug sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000527
+name: relative drug sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000528
+name: drug insensitive
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000529
+name: drug sensitive
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000530
+name: soil nutrient sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000531
+name: macronutrient sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000532
+name: micronutrient sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000533
+name: osmotic response sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000534
+name: p h sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000535
+name: salt sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000536
+name: water sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000537
+name: acid sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000538
+name: alkali sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000539
+name: drought sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000540
+name: flooding sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000541
+name: photosensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000542
+name: absolute photosensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000543
+name: light intensivity sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000544
+name: light_quality sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000545
+name: relative photosensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000546
+name: photoinsensitive
+namespace: attribute
+related_synonym: "photoresistant" []
+is_obsolete: true
+
+[Term]
+id: PATO:0000547
+name: photosensitive
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000548
+name: blue light sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000549
+name: far red light sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000550
+name: red light sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000551
+name: u v light sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000552
+name: absolute temperature sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000553
+name: relative temperature sensitivity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000554
+name: cold sensitive
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000555
+name: heat sensitive
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000556
+name: thermoinsensitive
+namespace: attribute
+related_synonym: "thermoresistant" []
+is_obsolete: true
+
+[Term]
+id: PATO:0000557
+name: thermosensitive
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000558
+name: size value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000559
+name: absolute size value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000560
+name: height value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000561
+name: length value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000562
+name: mass value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000563
+name: relative size value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000564
+name: thickness value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000565
+name: volume value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000566
+name: width value
+namespace: attribute
+related_synonym: ":breadth" []
+is_obsolete: true
+
+[Term]
+id: PATO:0000567
+name: absolute height value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000568
+name: relative height value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000569
+name: short height
+namespace: attribute
+is_a: PATO:0000119 ! height
+
+[Term]
+id: PATO:0000570
+name: tall height
+namespace: attribute
+is_a: PATO:0000119 ! height
+
+[Term]
+id: PATO:0000571
+name: absolute length value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000572
+name: relative length value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000573
+name: long length
+namespace: attribute
+is_a: PATO:0000122 ! length
+
+[Term]
+id: PATO:0000574
+name: short length
+namespace: attribute
+related_synonym: "shortened" []
+is_a: PATO:0000122 ! length
+
+[Term]
+id: PATO:0000575
+name: absolute mass value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000576
+name: relative mass value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000577
+name: weight value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000578
+name: large mass
+namespace: attribute
+is_a: PATO:0000125 ! mass
+
+[Term]
+id: PATO:0000579
+name: small mass
+namespace: attribute
+is_a: PATO:0000125 ! mass
+
+[Term]
+id: PATO:0000580
+name: absolute weight value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000581
+name: relative weight value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000582
+name: heavy
+namespace: attribute
+is_a: PATO:0000128 ! weight
+
+[Term]
+id: PATO:0000583
+name: light
+namespace: attribute
+is_a: PATO:0000128 ! weight
+
+[Term]
+id: PATO:0000584
+name: hypertrophied
+namespace: attribute
+is_a: PATO:0000117 ! size
+is_a: PATO:0000141 ! structure
+
+[Term]
+id: PATO:0000585
+name: hypotrophied
+namespace: attribute
+is_a: PATO:0000117 ! size
+is_a: PATO:0000141 ! structure
+
+[Term]
+id: PATO:0000586
+name: large size
+namespace: attribute
+related_synonym: "big" []
+related_synonym: "enlarged" []
+related_synonym: "great" []
+is_a: PATO:0000117 ! size
+
+[Term]
+id: PATO:0000587
+name: small size
+namespace: attribute
+related_synonym: "tiny" []
+is_a: PATO:0000117 ! size
+
+[Term]
+id: PATO:0000588
+name: vestigial
+namespace: attribute
+is_a: PATO:0000117 ! size
+
+[Term]
+id: PATO:0000589
+name: absolute thickness value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000590
+name: relative thickness value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000591
+name: thick
+namespace: attribute
+is_a: PATO:0000915 ! thickness
+
+[Term]
+id: PATO:0000592
+name: thin
+namespace: attribute
+is_a: PATO:0000915 ! thickness
+
+[Term]
+id: PATO:0000593
+name: absolute volume value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000594
+name: relative volume value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000595
+name: large volume
+namespace: attribute
+is_a: PATO:0000918 ! volume
+
+[Term]
+id: PATO:0000596
+name: small volume
+namespace: attribute
+is_a: PATO:0000918 ! volume
+
+[Term]
+id: PATO:0000597
+name: absolute width value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000598
+name: relative width value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000599
+name: narrow
+namespace: attribute
+is_a: PATO:0000921 ! width
+
+[Term]
+id: PATO:0000600
+name: wide
+namespace: attribute
+is_a: PATO:0000921 ! width
+
+[Term]
+id: PATO:0000601
+name: spatial value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000602
+name: angle value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000603
+name: closure value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000604
+name: orientation value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000605
+name: placement value
+namespace: attribute
+related_synonym: "location" []
+related_synonym: "position" []
+is_obsolete: true
+
+[Term]
+id: PATO:0000606
+name: absolute angle value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000607
+name: relative angle value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000608
+name: closed
+namespace: attribute
+related_synonym: "blocked" []
+is_a: PATO:0000136 ! closure
+
+[Term]
+id: PATO:0000609
+name: closure incomplete
+namespace: attribute
+is_a: PATO:0000136 ! closure
+
+[Term]
+id: PATO:0000610
+name: open
+namespace: attribute
+is_a: PATO:0000136 ! closure
+
+[Term]
+id: PATO:0000611
+name: absolute orientation value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000612
+name: relative orientation value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000613
+name: disoriented
+namespace: attribute
+is_a: PATO:0000137 ! orientation
+
+[Term]
+id: PATO:0000614
+name: oriented
+namespace: attribute
+is_a: PATO:0000137 ! orientation
+
+[Term]
+id: PATO:0000615
+name: anterioralized
+namespace: attribute
+is_a: PATO:0000140 ! placement
+
+[Term]
+id: PATO:0000616
+name: asymmetrical
+namespace: attribute
+is_a: PATO:0000965 ! symmetry
+
+[Term]
+id: PATO:0000617
+name: bent
+namespace: attribute
+is_a: PATO:0000140 ! placement
+
+[Term]
+id: PATO:0000618
+name: bilateral
+namespace: attribute
+is_a: PATO:0000140 ! placement
+
+[Term]
+id: PATO:0000619
+name: crowded
+namespace: attribute
+is_a: PATO:0000140 ! placement
+
+[Term]
+id: PATO:0000620
+name: dorsalized
+namespace: attribute
+is_a: PATO:0000140 ! placement
+
+[Term]
+id: PATO:0000621
+name: ectopic
+namespace: attribute
+is_a: PATO:0000140 ! placement
+is_a: PATO:0000141 ! structure
+
+[Term]
+id: PATO:0000622
+name: erect
+namespace: attribute
+is_a: PATO:0000140 ! placement
+
+[Term]
+id: PATO:0000623
+name: exserted
+namespace: attribute
+is_a: PATO:0000140 ! placement
+
+[Term]
+id: PATO:0000624
+name: inserted
+namespace: attribute
+is_a: PATO:0000140 ! placement
+
+[Term]
+id: PATO:0000625
+name: inverted
+namespace: attribute
+is_a: PATO:0000140 ! placement
+
+[Term]
+id: PATO:0000626
+name: lateralized
+namespace: attribute
+is_a: PATO:0000140 ! placement
+
+[Term]
+id: PATO:0000627
+name: localised
+namespace: attribute
+is_a: PATO:0000140 ! placement
+
+[Term]
+id: PATO:0000628
+name: mislocalised
+namespace: attribute
+is_a: PATO:0000140 ! placement
+
+[Term]
+id: PATO:0000629
+name: misrouted
+namespace: attribute
+is_a: PATO:0000140 ! placement
+
+[Term]
+id: PATO:0000630
+name: posterioralized
+namespace: attribute
+is_a: PATO:0000140 ! placement
+
+[Term]
+id: PATO:0000631
+name: prostrate
+namespace: attribute
+is_a: PATO:0000140 ! placement
+
+[Term]
+id: PATO:0000632
+name: symmetrical
+namespace: attribute
+is_a: PATO:0000965 ! symmetry
+
+[Term]
+id: PATO:0000633
+name: uncrowded
+namespace: attribute
+is_a: PATO:0000140 ! placement
+
+[Term]
+id: PATO:0000634
+name: unilateral
+namespace: attribute
+is_a: PATO:0000140 ! placement
+
+[Term]
+id: PATO:0000635
+name: unlocalised
+namespace: attribute
+is_a: PATO:0000140 ! placement
+
+[Term]
+id: PATO:0000636
+name: ventralized
+namespace: attribute
+is_a: PATO:0000140 ! placement
+
+[Term]
+id: PATO:0000637
+name: structure value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000638
+name: apoptotic
+namespace: attribute
+is_a: PATO:0000141 ! structure
+
+[Term]
+id: PATO:0000639
+name: degenerate
+namespace: attribute
+is_a: PATO:0000141 ! structure
+
+[Term]
+id: PATO:0000640
+name: dysplastic
+namespace: attribute
+is_a: PATO:0000141 ! structure
+
+[Term]
+id: PATO:0000641
+name: deposition defective
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000642
+name: fused
+namespace: attribute
+is_a: PATO:0000141 ! structure
+
+[Term]
+id: PATO:0000643
+name: herniated
+namespace: attribute
+is_a: PATO:0000141 ! structure
+
+[Term]
+id: PATO:0000644
+name: hyperplastic
+namespace: attribute
+is_a: PATO:0000141 ! structure
+
+[Term]
+id: PATO:0000645
+name: hypoplastic
+namespace: attribute
+is_a: PATO:0000141 ! structure
+
+[Term]
+id: PATO:0000646
+name: malformed
+namespace: attribute
+is_a: PATO:0000141 ! structure
+
+[Term]
+id: PATO:0000647
+name: necrotic
+namespace: attribute
+is_a: PATO:0000141 ! structure
+
+[Term]
+id: PATO:0000648
+name: obstructed
+namespace: attribute
+is_a: PATO:0000141 ! structure
+
+[Term]
+id: PATO:0000649
+name: perforated
+namespace: attribute
+is_a: PATO:0000141 ! structure
+
+[Term]
+id: PATO:0000650
+name: supernumerary
+namespace: attribute
+is_a: PATO:0000053 ! count
+
+[Term]
+id: PATO:0000651
+name: unfused
+namespace: attribute
+is_a: PATO:0000141 ! structure
+
+[Term]
+id: PATO:0000652
+name: substance value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000653
+name: addictive substance value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000654
+name: alcochol value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000655
+name: amphetamine value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000656
+name: time_quantity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000657
+name: length_quantity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000658
+name: metamphetamine value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000659
+name: temparature_quantity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000660
+name: angle_quantity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000661
+name: solid substance value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000662
+name: volume_quantity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000663
+name: occurent
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000664
+name: substance_quantity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000665
+name: cookies versus cheese value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000666
+name: energy_quantity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000667
+name: liquid substance value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000668
+name: mass_quantity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000669
+name: concentration_unit
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000670
+name: saccharin versus water value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000671
+name: water value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000672
+name: unit
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000673
+name: temperature value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000674
+name: absolute temperature value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000675
+name: body temperature value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000676
+name: relative temperature value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000677
+name: cold
+namespace: attribute
+is_a: PATO:0000146 ! temperature
+
+[Term]
+id: PATO:0000678
+name: hot
+namespace: attribute
+is_a: PATO:0000146 ! temperature
+
+[Term]
+id: PATO:0000679
+name: temporal value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000680
+name: absolute temporal value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000681
+name: incidence value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000682
+name: rate value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000683
+name: relative temporal value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000684
+name: absolute incidence value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000685
+name: relative incidence value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000686
+name: absolute rate value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000687
+name: relative rate value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000688
+name: asynchronous
+namespace: attribute
+is_a: PATO:0000156 ! temporal
+
+[Term]
+id: PATO:0000689
+name: continuous
+namespace: attribute
+is_a: PATO:0000156 ! temporal
+
+[Term]
+id: PATO:0000690
+name: discontinuous
+namespace: attribute
+is_a: PATO:0000156 ! temporal
+
+[Term]
+id: PATO:0000691
+name: early
+namespace: attribute
+is_a: PATO:0000156 ! temporal
+
+[Term]
+id: PATO:0000692
+name: heterochronic
+namespace: attribute
+is_a: PATO:0000156 ! temporal
+
+[Term]
+id: PATO:0000693
+name: late
+namespace: attribute
+is_a: PATO:0000156 ! temporal
+
+[Term]
+id: PATO:0000694
+name: premature
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000695
+name: synchronous
+namespace: attribute
+is_a: PATO:0000156 ! temporal
+
+[Term]
+id: PATO:0000696
+name: texture value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000697
+name: relative texture value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000698
+name: floury
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000699
+name: glutinous
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000700
+name: rough
+namespace: attribute
+is_a: PATO:0000150 ! texture
+
+[Term]
+id: PATO:0000701
+name: smooth
+namespace: attribute
+is_a: PATO:0000150 ! texture
+
+[Term]
+id: PATO:0000702
+name: threshold value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000703
+name: absolute threshold value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000704
+name: pain threshold value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000705
+name: relative threshold value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000706
+name: increased threshold
+namespace: attribute
+is_a: PATO:0000152 ! threshold
+
+[Term]
+id: PATO:0000707
+name: low threshold
+namespace: attribute
+is_a: PATO:0000152 ! threshold
+
+[Term]
+id: PATO:0000708
+name: decreased threshold
+namespace: attribute
+is_a: PATO:0000152 ! threshold
+
+[Term]
+id: PATO:0000709
+name: high threshold
+namespace: attribute
+is_a: PATO:0000152 ! threshold
+
+[Term]
+id: PATO:0000710
+name: time value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000711
+name: absolute time value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000712
+name: bouts value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000713
+name: relative time value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000714
+name: latency value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000715
+name: fast
+namespace: attribute
+is_a: PATO:0000165 ! time
+
+[Term]
+id: PATO:0000716
+name: slow
+namespace: attribute
+is_a: PATO:0000165 ! time
+
+[Term]
+id: PATO:0000717
+name: viability value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000718
+name: lethal
+namespace: attribute
+is_a: PATO:0000169 ! viability
+
+[Term]
+id: PATO:0000719
+name: viable
+namespace: attribute
+is_a: PATO:0000169 ! viability
+
+[Term]
+id: PATO:0000720
+name: yield value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000721
+name: absolute yield value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000722
+name: relative yield value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000723
+name: high yield
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000724
+name: low yield
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000725
+name: function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000726
+name: autonomic function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000727
+name: behavioral function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000728
+name: metabolic function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000729
+name: physiological function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000730
+name: relative function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000731
+name: body position value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000732
+name: body tone value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000733
+name: piloerection value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000734
+name: abdominal tone value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000735
+name: limb tone value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000736
+name: dysfunctional value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000737
+name: functional value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000738
+name: enzyme function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000739
+name: absolute enzyme function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000740
+name: relative enzyme function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000741
+name: high enzyme function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000742
+name: low enzyme function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000743
+name: arousal value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000744
+name: balance value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000745
+name: behavioral quality value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000746
+name: consumption value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000747
+name: coordination value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000748
+name: discrimination value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000749
+name: gait value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000750
+name: learning and memory value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000751
+name: locomotor activity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000752
+name: mating value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000753
+name: spontaneous activity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000754
+name: startle response
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000755
+name: vocalization value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000756
+name: transfer arousal value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000757
+name: balanced
+namespace: attribute
+is_a: PATO:0000185 ! balance
+
+[Term]
+id: PATO:0000758
+name: unbalanced
+namespace: attribute
+is_a: PATO:0000185 ! balance
+
+[Term]
+id: PATO:0000759
+name: bang sensitive
+namespace: attribute
+is_a: PATO:0000186 ! behavioral quality
+
+[Term]
+id: PATO:0000760
+name: hyperactive
+namespace: attribute
+is_a: PATO:0000186 ! behavioral quality
+
+[Term]
+id: PATO:0000761
+name: hypoactive
+namespace: attribute
+is_a: PATO:0000186 ! behavioral quality
+
+[Term]
+id: PATO:0000762
+name: impaired
+namespace: attribute
+is_a: PATO:0000186 ! behavioral quality
+
+[Term]
+id: PATO:0000763
+name: paralysed
+namespace: attribute
+is_a: PATO:0000186 ! behavioral quality
+
+[Term]
+id: PATO:0000764
+name: passive
+namespace: attribute
+is_a: PATO:0000186 ! behavioral quality
+
+[Term]
+id: PATO:0000765
+name: absolute consumption value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000766
+name: relative consumption value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000767
+name: high consumption
+namespace: attribute
+is_a: PATO:0000187 ! consumption
+
+[Term]
+id: PATO:0000768
+name: low consumption
+namespace: attribute
+is_a: PATO:0000187 ! consumption
+
+[Term]
+id: PATO:0000769
+name: coordinated
+namespace: attribute
+is_a: PATO:0000188 ! coordination
+
+[Term]
+id: PATO:0000770
+name: uncoordinated
+namespace: attribute
+is_a: PATO:0000188 ! coordination
+
+[Term]
+id: PATO:0000771
+name: aversion
+namespace: attribute
+is_a: PATO:0000189 ! discrimination
+
+[Term]
+id: PATO:0000772
+name: indifference
+namespace: attribute
+is_a: PATO:0000189 ! discrimination
+
+[Term]
+id: PATO:0000773
+name: preference
+namespace: attribute
+is_a: PATO:0000189 ! discrimination
+
+[Term]
+id: PATO:0000774
+name: bizarre gate
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000775
+name: learning value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000776
+name: memory value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000777
+name: long term memory value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000778
+name: short term memory value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000779
+name: absolute locomotor activity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000780
+name: relative locomotor activity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000781
+name: circulatory function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000782
+name: defensive function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000783
+name: digestive function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000784
+name: excretory function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000785
+name: muscle function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000786
+name: neural function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000787
+name: neurobehavioral function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000788
+name: reproductive function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000789
+name: respiratory function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000790
+name: heart rate value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000791
+name: immune function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000792
+name: repair function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000793
+name: immubocompetent value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000794
+name: immunodeficient value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000795
+name: healing value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000796
+name: regeneration value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000797
+name: urination value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000798
+name: defecation value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000799
+name: muscle elevation value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000800
+name: muscle strength value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000801
+name: motor function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000802
+name: sensory function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000803
+name: tactile response value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000804
+name: motor performance value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000805
+name: auditory value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000806
+name: olfactory value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000807
+name: proprioreception value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000808
+name: reflex value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000809
+name: taste value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000810
+name: touch value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000811
+name: visual value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000812
+name: odor acuity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000813
+name: odor type value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000814
+name: taste acuity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000815
+name: absolute odor acuity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000816
+name: relative odor acuity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000817
+name: anosmia
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000818
+name: concentration_quantity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000819
+name: quantity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000820
+name: absolute taste acuity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000821
+name: relative taste acuity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000822
+name: taste type value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000823
+name: quinine taste
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000824
+name: water taste
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000825
+name: visual ability value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000826
+name: visual acuity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000827
+name: visual threshold value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000828
+name: visual placing value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000829
+name: absolute visual ability value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000830
+name: relative visual ability value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000831
+name: absolute visual acuity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000832
+name: relative visual acuity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000833
+name: absolute visual threshold value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000834
+name: relative visual threshold value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000835
+name: auditory acuity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000836
+name: auditory ability value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000837
+name: auditory threshold value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000838
+name: absolute auditory ability value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000839
+name: relative auditory ability value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000840
+name: absolute auditory acuity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000841
+name: relative auditory acuity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000842
+name: absolute auditory threshold value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000843
+name: relative auditory threshold value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000844
+name: auditory acuity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000845
+name: auditory ability
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000846
+name: auditory threshold
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000847
+name: absolute auditory acuity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000848
+name: relative auditory acuity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000849
+name: absolute auditory ability
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000850
+name: relative auditory ability
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000851
+name: absolute auditory threshold
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000852
+name: relative auditory threshold
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000853
+name: blinking reflex value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000854
+name: contact righting reflex value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000855
+name: corneal reflex value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000856
+name: flinch reflex value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000857
+name: lordosis reflex value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000858
+name: ocular reflex value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000859
+name: pinna reflex value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000860
+name: postural reflex value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000861
+name: proboscis extension reflex value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000862
+name: pupillary reflex value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000863
+name: righting reflex value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000864
+name: spinal reflex value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000865
+name: startle reflex value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000866
+name: suckling reflex value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000867
+name: swallowing reflex value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000868
+name: vibrissae reflex value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000869
+name: prepulse inhibition value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000870
+name: relative neurobehavioral function value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000871
+name: aggressive
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000872
+name: anxious
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000873
+name: cataleptic
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000874
+name: fearful
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000875
+name: irritable
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000876
+name: respiratory rate value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000877
+name: absolute respiratory rate value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000878
+name: relative respiratory rate value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000879
+name: fecundity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000880
+name: fertility value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000881
+name: gestational period value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000882
+name: litter size value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000883
+name: female fertility value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000884
+name: hybrid fertility value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000885
+name: male fertility value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000886
+name: absolute litter size value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000887
+name: relative litter size value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000888
+name: female fertile
+namespace: attribute
+is_a: PATO:0000277 ! female fertility
+
+[Term]
+id: PATO:0000889
+name: cytoplasmic male sterility value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000890
+name: male sterile
+namespace: attribute
+related_synonym: "male infertile" []
+is_a: PATO:0000279 ! male fertility
+
+[Term]
+id: PATO:0000891
+name: male fertile
+namespace: attribute
+is_a: PATO:0000279 ! male fertility
+
+[Term]
+id: PATO:0000892
+name: female sterile
+namespace: attribute
+related_synonym: "female infertile" []
+is_a: PATO:0000277 ! female fertility
+
+[Term]
+id: PATO:0000893
+name: backcross fertility value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000894
+name: cytoplasmic sterility value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000895
+name: f1 fertility value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000896
+name: f2 fertility value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000897
+name: germ line dependent fertility value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000898
+name: intercross fertility value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000899
+name: soma dependent fertility value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000900
+name: backcross fertile
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000901
+name: backcross sterile
+namespace: attribute
+related_synonym: "backcross infertile" []
+is_obsolete: true
+
+[Term]
+id: PATO:0000902
+name: chinsurah boro type value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000903
+name: cms-hl type value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000904
+name: wild abortive value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000905
+name: f1 fertile
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000906
+name: f1 sterile
+namespace: attribute
+related_synonym: "F1 infertile" []
+is_obsolete: true
+
+[Term]
+id: PATO:0000907
+name: f2 fertile
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000908
+name: f2 sterile
+namespace: attribute
+related_synonym: "F2 infertile" []
+is_obsolete: true
+
+[Term]
+id: PATO:0000909
+name: intercross fertile
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000910
+name: intercross sterile
+namespace: attribute
+related_synonym: "intercross infertile" []
+is_obsolete: true
+
+[Term]
+id: PATO:0000911
+name: slow rate
+namespace: attribute
+is_a: PATO:0000161 ! rate
+
+[Term]
+id: PATO:0000912
+name: fast rate
+namespace: attribute
+is_a: PATO:0000161 ! rate
+
+[Term]
+id: PATO:0000913
+name: qualitative value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000914
+name: continuant
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000915
+name: thickness
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0000916
+name: absolute thickness
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000917
+name: relative thickness
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000918
+name: volume
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0000919
+name: absolute volume
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000920
+name: relative volume
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000921
+name: width
+namespace: attribute
+related_synonym: "attribute:breadth" []
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0000922
+name: absolute width
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000923
+name: relative width
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000924
+name: relative enzyme function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000925
+name: absolute enzyme function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000926
+name: intercross fertility
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000927
+name: photosensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000928
+name: absolute photosensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000929
+name: light intensivity sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000930
+name: light_quality sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000931
+name: blue light sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000932
+name: far red light sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000933
+name: red light sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000934
+name: u v light sensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000935
+name: relative photosensitivity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000936
+name: truncated
+namespace: attribute
+is_a: PATO:0000141 ! structure
+
+[Term]
+id: PATO:0000937
+name: disorganized
+namespace: attribute
+is_a: PATO:0000141 ! structure
+
+[Term]
+id: PATO:0000938
+name: organized
+namespace: attribute
+is_a: PATO:0000141 ! structure
+
+[Term]
+id: PATO:0000939
+name: regular shape
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000940
+name: irregular shape
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000941
+name: vacuolated
+namespace: attribute
+is_a: PATO:0000141 ! structure
+
+[Term]
+id: PATO:0000942
+name: underdeveloped
+namespace: attribute
+is_a: PATO:0000141 ! structure
+
+[Term]
+id: PATO:0000943
+name: overdeveloped
+namespace: attribute
+is_a: PATO:0000141 ! structure
+
+[Term]
+id: PATO:0000944
+name: pointed
+namespace: attribute
+def: "A sharp or tapered end" [PATO:gg]
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0000945
+name: epinastic
+namespace: attribute
+def: "A downward bending of leaves or other plant parts." [PATO:gg]
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0000946
+name: oblong
+namespace: attribute
+def: "Having a somewhat elongated form withnapproximately parallel sides" [PATO:gg]
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0000947
+name: elliptic
+namespace: attribute
+def: "Elliptic shapen" [PATO:gg]
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0000948
+name: hearted
+namespace: attribute
+def: "Heart shaped." [PATO:gg]
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0000949
+name: fasciated
+namespace: attribute
+def: "Abnormally flattened or coalesced." [PATO:gg]
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0000950
+name: grey
+namespace: attribute
+is_a: PATO:0000015 ! color hue
+
+[Term]
+id: PATO:0000951
+name: purple
+namespace: attribute
+is_a: PATO:0000015 ! color hue
+
+[Term]
+id: PATO:0000952
+name: brown
+namespace: attribute
+is_a: PATO:0000015 ! color hue
+
+[Term]
+id: PATO:0000953
+name: orange
+namespace: attribute
+is_a: PATO:0000015 ! color hue
+
+[Term]
+id: PATO:0000954
+name: pink
+namespace: attribute
+is_a: PATO:0000015 ! color hue
+
+[Term]
+id: PATO:0000955
+name: fertile
+namespace: attribute
+is_a: PATO:0000274 ! fertility
+
+[Term]
+id: PATO:0000956
+name: sterile
+namespace: attribute
+is_a: PATO:0000274 ! fertility
+
+[Term]
+id: PATO:0000957
+name: opacity
+namespace: attribute
+def: "The property of not permitting the passage of electromagnetic radiatio" [PATO:gg]
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000958
+name: opacity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000959
+name: relative opacity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000960
+name: absolute opacity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000961
+name: relative opacity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000962
+name: absolute opacity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000963
+name: opaque
+namespace: attribute
+def: "Not clear; not transmitting or reflecting light or radiant energy" [PATO:gg]
+related_synonym: "non-transparent" []
+is_a: PATO:0000957 ! opacity
+
+[Term]
+id: PATO:0000964
+name: clear
+namespace: attribute
+related_synonym: "transparent" []
+is_a: PATO:0000957 ! opacity
+
+[Term]
+id: PATO:0000965
+name: symmetry
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0000966
+name: symmetry value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000967
+name: undulate
+namespace: attribute
+def: "Having a sinuate margin and rippled surface." [PATO:gg]
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0000968
+name: albino value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000969
+name: dwarf
+namespace: attribute
+is_a: PATO:0000117 ! size
+
+[Term]
+id: PATO:0000970
+name: permeability
+namespace: attribute
+def: "The property of something that can be pervaded by a liquid (as by osmosis or diffusion)" [PATO:gg]
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0000971
+name: absolute permeability
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000972
+name: relative permeability
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000973
+name: porosity
+namespace: attribute
+def: "The property of being porous; being able to absorb fluids" [PATO:gg]
+is_a: PATO:0000970 ! permeability
+
+[Term]
+id: PATO:0000974
+name: relative porosity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000975
+name: absolute porosity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000976
+name: permeability value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000977
+name: absolute permeability value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000978
+name: relative permeability value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000979
+name: porosity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000980
+name: absolute porosity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000981
+name: relative porosity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000982
+name: permeable
+namespace: attribute
+is_a: PATO:0000970 ! permeability
+
+[Term]
+id: PATO:0000983
+name: impermeable
+namespace: attribute
+is_a: PATO:0000970 ! permeability
+
+[Term]
+id: PATO:0000984
+name: porous
+namespace: attribute
+def: "able to absorb fluids" [PATO:gg]
+is_a: PATO:0000973 ! porosity
+
+[Term]
+id: PATO:0000985
+name: nonporous
+namespace: attribute
+is_a: PATO:0000973 ! porosity
+
+[Term]
+id: PATO:0000986
+name: absolute consistency
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000987
+name: relative consistency
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000988
+name: relative consistency value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000989
+name: absolute consistency value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000990
+name: consistent
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000991
+name: inconsistent
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000992
+name: viscosity
+namespace: attribute
+def: "a property of fluids describing their internal resistance to flow" [PATO:gg]
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0000993
+name: relative viscosity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000994
+name: absolute viscosity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000995
+name: viscosity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000996
+name: absolute viscosity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000997
+name: relative viscosity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0000998
+name: viscous
+namespace: attribute
+def: "a relatively high resistance to flow." [PATO:gg]
+is_a: PATO:0000992 ! viscosity
+
+[Term]
+id: PATO:0000999
+name: alternation
+namespace: attribute
+is_a: PATO:0001226 ! quantitative
+
+[Term]
+id: PATO:0001000
+name: relative alternation
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001001
+name: absolute alternation
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001002
+name: alternation value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001003
+name: relative alternation value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001004
+name: absolute alternation value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001005
+name: latency
+namespace: attribute
+def: "The time that elapses between a stimulus and the response to it" [PATO:gg]
+is_a: PATO:0000165 ! time
+
+[Term]
+id: PATO:0001006
+name: absolute latency
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001007
+name: relative latency
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001008
+name: absolute latency value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001009
+name: relative latency value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001010
+name: relative intensity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001011
+name: absolute intensity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001012
+name: relative intensity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001013
+name: absolute intensity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001014
+name: absolute occurence
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001015
+name: relative occurence
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001016
+name: absolute occurence value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001017
+name: relative occurence value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001018
+name: physical measure
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0001019
+name: density
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0001020
+name: damage
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0001021
+name: energy
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0001022
+name: impulse
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0001023
+name: momentum
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0001024
+name: power
+namespace: attribute
+def: "The rate at which work is done" [PATO:gg]
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0001025
+name: pressure
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0001026
+name: work
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0001027
+name: physical quantity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001028
+name: acceleration
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0001029
+name: efficiency
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0001030
+name: flux
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0001031
+name: elasticity
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0001032
+name: position
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0001033
+name: stiffness
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0001034
+name: strain
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0001035
+name: force
+namespace: attribute
+is_a: PATO:0001018 ! physical measure
+
+[Term]
+id: PATO:0001036
+name: relative life span
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001037
+name: absolute life span
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001038
+name: ratio
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001039
+name: absolute ratio
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001040
+name: relative ratio
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001041
+name: relative amplitude
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001042
+name: absolute amplitude
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001043
+name: susceptibility
+namespace: attribute
+is_a: PATO:0000085 ! sensitivity
+
+[Term]
+id: PATO:0001044
+name: absolute power
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001045
+name: relative power
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001046
+name: resistance
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0001047
+name: absolute resistance
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001048
+name: relative resistance
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001049
+name: absolute susceptibility
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001050
+name: relative susceptibility
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001051
+name: acute angle
+namespace: attribute
+is_a: PATO:0000133 ! angle
+
+[Term]
+id: PATO:0001052
+name: obtuse angle
+namespace: attribute
+is_a: PATO:0000133 ! angle
+
+[Term]
+id: PATO:0001053
+name: convex angle
+namespace: attribute
+is_a: PATO:0000133 ! angle
+
+[Term]
+id: PATO:0001054
+name: internal angle
+namespace: attribute
+is_a: PATO:0000133 ! angle
+
+[Term]
+id: PATO:0001055
+name: reflex angle
+namespace: attribute
+is_a: PATO:0000133 ! angle
+
+[Term]
+id: PATO:0001056
+name: number
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001057
+name: relative acceleration
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001058
+name: absolute acceleration
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001059
+name: relative efficiency
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001060
+name: absolute efficiency
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001061
+name: relative elasticity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001062
+name: absolute elasticity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001063
+name: relative flux
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001064
+name: absolute flux
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001065
+name: relative stiffness
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001066
+name: absolute stiffness
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001067
+name: absolute strain
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001068
+name: relative strain
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001069
+name: relative density
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001070
+name: absolute density
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001071
+name: relative energy
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001072
+name: absolute energy
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001073
+name: relative impulse
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001074
+name: absolute impulse
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001075
+name: absolute momentum
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001076
+name: relative momentum
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001077
+name: absolute pressure
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001078
+name: relative pressure
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001079
+name: absolute work
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001080
+name: relative work
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001081
+name: physical measure value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001082
+name: damage value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001083
+name: acceleration value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001084
+name: relative acceleration value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001085
+name: absolute acceleration value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001086
+name: efficiency value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001087
+name: relative efficiency value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001088
+name: absolute efficiency value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001089
+name: elasticity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001090
+name: absolute elasticity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001091
+name: relative elasticity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001092
+name: flux value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001093
+name: relative flux value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001094
+name: absolute flux value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001095
+name: force value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001096
+name: absolute force value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001097
+name: relative force value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001098
+name: absolute force
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001099
+name: relative force
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001100
+name: position value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001101
+name: stiffness value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001102
+name: absolute stiffness value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001103
+name: relative stiffness value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001104
+name: strain value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001105
+name: absolute strain value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001106
+name: relative strain value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001107
+name: density value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001108
+name: relative amplitude value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001109
+name: absolute amplitude value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001110
+name: absolute density value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001111
+name: relative density value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001112
+name: energy value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001113
+name: absolute energy value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001114
+name: relative energy value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001115
+name: impulse value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001116
+name: relative impulse value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001117
+name: absolute impulse value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001118
+name: momentum value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001119
+name: absolute momentum value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001120
+name: relative momentum value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001121
+name: power value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001122
+name: absolute power value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001123
+name: relative power value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001124
+name: pressure value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001125
+name: absolute pressure value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001126
+name: relative pressure value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001127
+name: work value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001128
+name: absolute work value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001129
+name: relative work value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001130
+name: ratio value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001131
+name: absolute ratio value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001132
+name: relative ratio value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001133
+name: immunoglobulin concentration
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001134
+name: ig a concentration
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001135
+name: ig d concentration
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001136
+name: ig e concentration
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001137
+name: ig g concentration
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001138
+name: ig m concentration
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001139
+name: urine glucose composition
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001140
+name: immunoglobulin concentration value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001141
+name: ig a concentration value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001142
+name: ig d concentration value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001143
+name: ig e concentration value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001144
+name: ig g concentration value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001145
+name: ig m concentration value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001146
+name: resistance value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001147
+name: absolute resistance value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001148
+name: relative resistance value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001149
+name: susceptibility value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001150
+name: absolute susceptibility value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001151
+name: relative susceptibility value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001152
+name: susceptible
+namespace: attribute
+is_a: PATO:0001043 ! susceptibility
+
+[Term]
+id: PATO:0001153
+name: insusceptible
+namespace: attribute
+is_a: PATO:0001043 ! susceptibility
+
+[Term]
+id: PATO:0001154
+name: elongated
+namespace: attribute
+is_a: PATO:0000122 ! length
+
+[Term]
+id: PATO:0001155
+name: absolute concentration
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001156
+name: relative concentration
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001157
+name: absolute concentration value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001158
+name: relative concentration value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001159
+name: concentrated
+namespace: attribute
+is_a: PATO:0000033 ! concentration
+
+[Term]
+id: PATO:0001160
+name: unconcentrated
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001161
+name: dilute
+namespace: attribute
+is_a: PATO:0000033 ! concentration
+
+[Term]
+id: PATO:0001162
+name: increased concentration
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001163
+name: decreased concentration
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001164
+name: dense
+namespace: attribute
+is_a: PATO:0001019 ! density
+
+[Term]
+id: PATO:0001165
+name: urine enzyme composition value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001166
+name: urine enzyme composition
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001167
+name: damaged
+namespace: attribute
+is_a: PATO:0001020 ! damage
+
+[Term]
+id: PATO:0001168
+name: undamaged
+namespace: attribute
+is_a: PATO:0001020 ! damage
+
+[Term]
+id: PATO:0001169
+name: numerical
+namespace: attribute
+is_a: PATO:0001226 ! quantitative
+
+[Term]
+id: PATO:0001170
+name: numerical value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001171
+name: elastic
+namespace: attribute
+is_a: PATO:0001031 ! elasticity
+
+[Term]
+id: PATO:0001172
+name: inelastic
+namespace: attribute
+is_a: PATO:0001031 ! elasticity
+
+[Term]
+id: PATO:0001173
+name: urine glucose composition value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001174
+name: urine composition
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001175
+name: urine composition
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001176
+name: deaf
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001177
+name: blind
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001178
+name: resistant
+namespace: attribute
+is_a: PATO:0001046 ! resistance
+
+[Term]
+id: PATO:0001179
+name: immune
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001180
+name: relative response
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001181
+name: absolute response
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001182
+name: relative response
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001183
+name: absolute response value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001184
+name: maturity value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001185
+name: larval
+namespace: attribute
+is_a: PATO:0000261 ! maturity
+
+[Term]
+id: PATO:0001186
+name: prepubescent
+namespace: attribute
+is_a: PATO:0000261 ! maturity
+
+[Term]
+id: PATO:0001187
+name: pupal
+namespace: attribute
+is_a: PATO:0000261 ! maturity
+
+[Term]
+id: PATO:0001188
+name: prepupal
+namespace: attribute
+is_a: PATO:0000261 ! maturity
+
+[Term]
+id: PATO:0001189
+name: adolescent
+namespace: attribute
+is_a: PATO:0000261 ! maturity
+
+[Term]
+id: PATO:0001190
+name: juvenile
+namespace: attribute
+is_a: PATO:0000261 ! maturity
+
+[Term]
+id: PATO:0001191
+name: medial
+namespace: attribute
+is_a: PATO:0001032 ! position
+
+[Term]
+id: PATO:0001192
+name: hyperresponsive
+namespace: attribute
+is_a: PATO:0000077 ! response
+
+[Term]
+id: PATO:0001193
+name: lateral
+namespace: attribute
+is_a: PATO:0001032 ! position
+
+[Term]
+id: PATO:0001194
+name: hyporesponsive
+namespace: attribute
+is_a: PATO:0000077 ! response
+
+[Term]
+id: PATO:0001195
+name: proximal
+namespace: attribute
+is_a: PATO:0001032 ! position
+
+[Term]
+id: PATO:0001196
+name: ventral
+namespace: attribute
+is_a: PATO:0001032 ! position
+
+[Term]
+id: PATO:0001197
+name: modified direction
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001198
+name: unmodified direction
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001199
+name: linear
+namespace: attribute
+is_a: PATO:0001032 ! position
+
+[Term]
+id: PATO:0001200
+name: T-shaped
+namespace: attribute
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0001201
+name: Y-shaped
+namespace: attribute
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0001202
+name: enlarged
+namespace: attribute
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0001203
+name: rod-shaped
+namespace: attribute
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0001204
+name: not enlarged
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001205
+name: dentate
+namespace: attribute
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0001206
+name: serrate
+namespace: attribute
+is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0001207
+name: absolute compatability
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001208
+name: odorless
+namespace: attribute
+is_a: PATO:0000058 ! odor
+
+[Term]
+id: PATO:0001209
+name: absolute function
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001210
+name: plane_angle_quantity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001211
+name: solid_angle_quantity
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001212
+name: length_unit
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001213
+name: mass_unit
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001214
+name: temparature_unit
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001215
+name: time_unit
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001216
+name: volume_unit
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001217
+name: energy_unit
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001218
+name: substance_unit
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001219
+name: area_unit
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001220
+name: angle_unit
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001221
+name: plane_angle_unit
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001222
+name: solid_angle_unit
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001223
+name: quantitative value
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001224
+name: real number
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001225
+name: relational number
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001226
+name: quantitative
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0001227
+name: variant
+namespace: attribute
+is_a: PATO:0000060 ! pattern
+
+[Term]
+id: PATO:0001228
+name: dull
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001229
+name: vivid
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001230
+name: strength
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0001231
+name: cold insensitive
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001232
+name: heat insentive
+namespace: attribute
+is_obsolete: true
+
+[Term]
+id: PATO:0001233
+name: dorsal
+namespace: attribute
+is_a: PATO:0001032 ! position
+
+[Term]
+id: PATO:0001234
+name: distal
+namespace: attribute
+is_a: PATO:0001032 ! position
+
+[Term]
+id: PATO:0001235
+name: strength value
+namespace: attribute
+is_obsolete: true
+
+[Typedef]
+id: is_magnitude_of
+name: is_magnitude_of
+namespace: pato.ontology
+
+[Typedef]
+id: is_measurement_of
+name: is_measurement_of
+namespace: pato.ontology
+
+[Typedef]
+id: is_quale_of
+name: is_quale_of
+namespace: pato.ontology
+
+[Typedef]
+id: is_quality_of
+name: is_quality_of
+
+[Typedef]
+id: is_unit_of
+name: is_unit_of
+namespace: pato.ontology
+
+[Typedef]
+id: OBO_REL:part_of
+name: part_of
+is_transitive: true
+
