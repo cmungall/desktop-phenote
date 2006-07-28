@@ -30,6 +30,8 @@ public class PhenoteServlet extends HttpServlet {
   public void init() throws ServletException {
     initDate = new Date();
     super.init();
+    // makes links for term info - put this method in Phenote?
+    HtmlUtil.setStandAlone(false);
     phenote = Phenote.getPhenote();
     // cheesy - revisit
     String[] args = {"-c","initial-zfin.cfg"};
@@ -112,7 +114,7 @@ public class PhenoteServlet extends HttpServlet {
         return;
       }
       System.out.println("term info "+HtmlUtil.termInfo(oboClass));
-      out.println(HtmlUtil.termInfo(oboClass));
+      out.println(HtmlUtil.termInfo(oboClass,ontologyName));
     }
   }
 

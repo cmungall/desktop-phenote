@@ -15,6 +15,16 @@ public class HtmlUtil {
   public static final boolean DO_HTML = true; // take out
   static final String PHENOTE_LINK_PREFIX = "Phenote?id=";
 
+//   /** hmmmm - this is state - should probably do an object? 
+//    should this be somewhere else? gui.Phenote? */
+  private static boolean isStandAlone = true;
+  private static String ontologyName;
+
+  /** Stand alone and web app do different things for term links */
+  public static void setStandAlone(boolean standAlone) {
+    isStandAlone = standAlone;
+  }
+
   public static String termInfo(OBOClass oboClass) {
     if (oboClass == null) {
       System.out.println("null obo class for HtmlUtil.termInfo");
@@ -41,6 +51,20 @@ public class HtmlUtil {
 
     return sb.toString();
   }
+
+  public static String termInfo(OBOClass oboClass, String ontology) {
+    // funny - revisit for sure - either should pass through all methods
+    // or util should actually be an object - singleton? i think maybe its
+    // an object???
+    setOntologyName(ontology);
+    return termInfo(oboClass);
+  }
+
+  private static void setOntologyName(String ont) {
+    ontologyName = ont;
+  }
+
+  private static String getOntologyName() { return ontologyName; }
 
   /** Only works in html mode - do with string buffers? */
   private static String bold(String text) {
@@ -117,7 +141,21 @@ public class HtmlUtil {
   }
 
   private static String termLink(LinkedObject term) {
-    return "<a href='"+makePhenoIdLink(term.getID())+"'>"+term.getName()+"</a>";
+    String clickString = getClickString(term.getID());
+    return "<a "+clickString+">"+term.getName()+"</a>";
+  }
+
+  private static String getClickString(String id) {
+    if (isStandAlone)
+      return "href='"+makePhenoIdLink(id)+"'";
+    else
+      return "href=# "+onClickJavaScript(id);
+  }
+
+  //<A href='#' onClick='getTermInfo(".$_->term_id.")'>
+  private static String onClickJavaScript(String id) {
+    // need ontology name????
+    return " onClick='getTermInfo(\""+id+"\",\""+getOntologyName()+"\")' ";
   }
 
   /** used internally & by TestPhenote */
