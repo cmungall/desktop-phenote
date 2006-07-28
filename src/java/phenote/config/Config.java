@@ -188,7 +188,7 @@ public class Config {
     if (document == null) { // try jar file
       URL url = Config.class.getResource(filename);
       if (url == null)
-        System.out.println("failed to get file from jar");
+        System.out.println("failed to get file from jar without '/' prepend");
       else
         document = tryFile(builder,url.toString());
     }
