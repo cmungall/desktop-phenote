@@ -6,7 +6,8 @@
 // term info not yet implemented in PhenoteServlet - todo...
 // this should be a relative link - need to get servlets code in/close with scripts?
 //var url = '/servlet/PhenoteStub'; 
-var url = '/servlet/Phenote';
+//var url = '/servlet/Phenote'; // tomcat - not jboss
+var url = '/phenote/Phenote'; // jboss
       
 
 // getTermInfo should be called by the above url (at least for dichty it does)

@@ -160,7 +160,7 @@ public class PhenoteServlet extends HttpServlet {
   private String makeCompListHtmlItem(OBOClass term,String ontol) {
     String id = "'"+term.getID()+"'";
     return "<li onmouseover=\"getTermInfo("+id+",'"+ontol+"')\" id="+id+" "+
-      "onclick=\"set_ontology("+id+")\">"+term.getName()+"</li>\n";
+      "onclick=\"getTermInfo("+id+")\">"+term.getName()+"</li>\n";
   }
 
   /** for now search params hard wired - eventually from buttons on web page */
