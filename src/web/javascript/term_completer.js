@@ -8,7 +8,7 @@
          if ( !isNaN( termid ) ) {      
             var pars = 'termid=' + termid;
 
-            var myAjax = new Ajax.Updater('terminfo', url, {method: 'get', parameters: pars, onComplete: document.forms[0].term.value = '' } );
+            var myAjax = new Ajax.Updater('terminfo', url, {method: 'get', parameters: pars } );
            // have to have [1] next to form item because the edit subform and
            // the main form both have donorid elements
             if ( document.forms[0].termid.length > 1 ) {
