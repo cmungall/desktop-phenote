@@ -192,6 +192,18 @@ public class Config {
       else
         document = tryFile(builder,url.toString());
     }
+    // hmmmm - so ontology data adapter prepends "/" for jar file but above
+    // doesnt (which seems to work for web start but not jboss) try with 
+    // prepended slash as well - what the heck
+    // its true this works for jboss - above for webstart - very strange
+    if (document == null) {
+      URL url = Config.class.getResource("/"+filename);
+      if (url == null)
+        System.out.println("failed to get file from jar with '/' prepend");
+      else
+        document = tryFile(builder,url.toString());
+    }
+
     if (document == null) {
       System.out.println("Failed to find config file "+filename);
       throw new FileNotFoundException(filename);
