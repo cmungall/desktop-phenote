@@ -133,6 +133,8 @@ class AutoComboBox extends JComboBox {
   /** This gets obo class selected in completion list - not from text box 
       Returns null if nothing selected - can happen amidst changing selection */
   private OBOClass getSelectedCompListOboClass() {
+    if (defaultComboBoxModel == null)
+      return null;
     Object obj = defaultComboBoxModel.getSelectedItem();
     if (obj == null)
       return null;

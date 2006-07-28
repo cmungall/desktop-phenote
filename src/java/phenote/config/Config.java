@@ -91,6 +91,7 @@ public class Config {
   /** paot config should always be present, make default if not set from xml */
   private FieldConfig getPatoConfig() {
     if (patoConfig == null) {
+      System.out.println("error pato config is null, making default");
       OntologyConfig o = OntologyConfig.defaultPato;
       patoConfig = new FieldConfig(CharFieldEnum.PATO,o);
     }
@@ -252,7 +253,8 @@ public class Config {
   private void parsePato(Node node) {
     if (!node.getNodeName().equals("pato")) return;
     OntologyConfig oc = makeOntologyConfig(node,"Pato");
-    getPatoConfig().addOntologyConfig(oc);
+    //getPatoConfig().addOntologyConfig(oc);
+    patoConfig = new FieldConfig(CharFieldEnum.PATO,oc);
   }
 
   private void parseEntity(Node node) {

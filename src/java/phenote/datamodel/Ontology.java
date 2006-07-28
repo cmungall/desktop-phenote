@@ -101,8 +101,9 @@ public class Ontology {
 
       // SKIP PATO ATTRIBUTES - only want values - or do !contains "value"?
       // yes do contains value - as theres other crap to filter too
-      if (filterAttributes() && isAttribute(originalTerm))
-        continue;
+      // apparently curators want to see attribs as well according to Michael
+      //if (filterAttributes() && isAttribute(originalTerm))
+      //continue;
 
       if (searchParams.searchTerms()) {
         // adds originalTerm to searchTerms if match (1st if exact)
@@ -142,7 +143,7 @@ public class Ontology {
   }
            
   // part of search params?
-  private boolean filterAttributes() { return isPato(); }
+  //private boolean filterAttributes() { return isPato(); }
 
   // make enum!!
   private boolean isPato() {
