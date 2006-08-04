@@ -54,7 +54,7 @@ public class PhenoteServlet extends HttpServlet {
 
     if (isTermCompletionRequest(request)) {
       String userInput = getTermCompletionParam(request);
-      System.out.println("ontology? "+getOntologyParamString(request)+" param aa? "+request.getParameter("aa"));
+      System.out.println("ontology? "+getOntologyParamString(request)+" param entityInput? "+request.getParameter("entityInput"));
 //ResourceBundle r=ResourceBundle.getBundle("LocalStrings",request.getLocale());
       //Content-Type: text/html; charset=ISO-8859-1
       response.setContentType("text/html");
@@ -65,7 +65,8 @@ public class PhenoteServlet extends HttpServlet {
 //         "test</li>\n<li onmouseover=\"set_ontology()\" id=\"termId\" onclick=\"set_ontology()\">dude</li></ul>";
       String ontol = getOntologyParamString(request);
       String list = getCompletionList(userInput,ontol);
-      System.out.println("printing to response writer: "+list.substring(0,85)+"...");
+	  int sz = (list.length() <= 85) ? list.length() : 85;
+      System.out.println("printing to response writer: "+list.substring(0,sz)+"...");
       out.println(list);
     }
         
@@ -77,7 +78,9 @@ public class PhenoteServlet extends HttpServlet {
 
   /** this should be renamed from unintuitive "ontologyname" */
   private String getTermCompletionParam(HttpServletRequest req) {
-    String par = req.getParameter("patoInput"); // for now
+	  String par = req.getParameter("userInput"); // new way
+	if (par ==null)
+	  par = req.getParameter("patoInput"); // for now
     if (par == null)
       par = req.getParameter("entityInput");
     return par;
