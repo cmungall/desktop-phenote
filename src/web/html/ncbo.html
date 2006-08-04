@@ -48,7 +48,7 @@
             <label>Entity: </label>
 
             <!-- input autocomplete="off" id="ontologyname" name="ontologyname" size="20" type="text" value="" / -->
-            <input autocomplete="off" id="entityInput" name="entityInput" size="20" type="text" value="" />
+            <input autocomplete="off" id="entityInput" name="entityInput" size="40" type="text" value="" />
             </br>
             <div class="auto_complete" id="entity_auto_complete"></div>
          </fieldset>
@@ -70,7 +70,7 @@
             <label>Quality: </label>
 
             <!-- input autocomplete="off" id="ontologyname" name="ontologyname" size="20" type="text" value="" / -->
-            <input autocomplete="off" id="patoInput" name="patoInput" size="20" type="text" value="" />
+            <input autocomplete="off" id="patoInput" name="patoInput" size="40" type="text" value="" />
             </br>
             <div class="auto_complete" id="pato_auto_complete"></div>
          </fieldset>
@@ -96,14 +96,14 @@
    <!--   'ontologyname_auto_complete', '/phenote-ontology.cgi',{  }) -->
    <!-- new Ajax.Autocompleter( 'ontologyname', 'ontologyname_auto_complete', '/servlet/PhenoteStub',{  }) -->
    <!--  new Ajax.Autocompleter( 'ontologyname', 'ontologyname_auto_complete', '/servlet/phenote.servlet.PhenoteServlet',{  }) -->
-      var complete = new Ajax.Autocompleter( 'patoInput', 'pato_auto_complete', '/phenote/Phenote',{parameters:'ontologyName=pato'   })
+      var complete = new Ajax.Autocompleter( 'patoInput', 'pato_auto_complete', '/phenote/Phenote',{parameters:'ontologyName=pato',paramName: "userInput"   })
       <!-- complete.options.defaultParams = "ontology=pato"; -->
       <!--   complete.options.parameters = "ontology=pato"; -->
       <!-- more params? 'ontology=pato&x=y&...' -->
    </script>
 
    <script type="text/javascript">
-     new Ajax.Autocompleter( 'entityInput', 'entity_auto_complete', '/phenote/Phenote',{parameters:'ontologyName=anatomy'})
+     new Ajax.Autocompleter( 'entityInput', 'entity_auto_complete', '/phenote/Phenote',{parameters:'ontologyName=anatomy',paramName: "userInput"})
    </script>
 
 
