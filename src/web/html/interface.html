@@ -21,12 +21,54 @@
 <div id="ontology">
  <div style="float: left;">
 
+<link href="/web/css/term_completer.css" type="text/css" rel="stylesheet">
+<form>
+
  <!-- term_completer.html code start -->
+<table>
+<tr>
+<!--#set var="tag" value="genotype" -->
+<!--#set var="title" value="Genotype" -->
+<!--#set var="url" value="/db/cgi-bin/ajax_search/genotype.cgi" -->
 <!--#include virtual="term_completer.html" -->
+</tr><tr>
+<!--#set var="tag" value="mutant_type" -->
+<!--#set var="title" value="Mutant Type" -->
+<!--#set var="url" value="/db/cgi-bin/ajax_search/genotype.cgi" -->
+<!--#include virtual="term_completer.html" -->
+</tr><tr>
+<!--#set var="tag" value="genetic_context" -->
+<!--#set var="title" value="Genetic Context" -->
+<!--#set var="url" value="/db/cgi-bin/ajax_search/genotype.cgi" -->
+<!--#include virtual="term_completer.html" -->
+</tr><tr>
+<!--#set var="tag" value="entity" -->
+<!--#set var="title" value="Entity" -->
+<!--#set var="url" value="/db/cgi-bin/ajax_search/entity.cgi" -->
+<!--#include virtual="term_completer.html" -->
+</tr><tr>
+<!--#set var="tag" value="quality" -->
+<!--#set var="title" value="Quality" -->
+<!--#set var="url" value="/db/cgi-bin/ajax_search/quality.cgi" -->
+<!--#include virtual="term_completer.html" -->
+</tr><tr>
+<!--#set var="tag" value="reference" -->
+<!--#set var="title" value="Reference" -->
+<!--#set var="url" value="/db/cgi-bin/ajax_search/quality.cgi" -->
+<!--#include virtual="term_completer.html" -->
+</tr><tr>
+<td>
+<b>Notes</b>&nbsp;&nbsp;
+</td>
+<td>
+<TEXTAREA NAME="notes" ROWS="4", COLS="20"> </TEXTAREA>
+</td>
+</tr>
+</table>
  <!-- term_completer.html code  ends -->
 
+</form>
 </div>
-
  <div id="terminfo"></div>
 </div>
 </td></tr>
