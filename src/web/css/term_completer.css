@@ -6,20 +6,19 @@
       border: 1px solid gray;
       padding: 2px 2px 2px 2px;
       float: left;
-      width: 630;
+      width: 800;
    }
 
 
-   div#terminfo {
-     float: left;
+   div#terminfo {     
      width: 375;
      height: 100%;
-     float: left;
+     float: right;
    }
 
    /* div returned from ajax record retreival */
    div#terminfo table {
-     border: 1px solid blue;
+     border: 1px solid gray;
      width: 100%;
      font-size: 14px;
      background-color: lightgoldenrodyellow;
@@ -46,7 +45,7 @@
       font-weight:bold;
    }
    fieldset.search {
-      width: 250;
+      width: 800;
    }
 
 
@@ -74,4 +73,14 @@ div.auto_complete ul strong.highlight {
     color: #800;
     margin:0;
     padding:0;
+}
+
+
+
+input { 
+border: 1px solid gray;
+}
+
+TEXTAREA { 
+border: 1px solid gray;
 }
