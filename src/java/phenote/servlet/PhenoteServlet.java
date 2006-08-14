@@ -40,7 +40,8 @@ public class PhenoteServlet extends HttpServlet {
   }
 
 
-  /** this should be done in java server faces/pages(?), post comes from ajax
+  /** AUTO COMPLETE REQUEST
+      this should be done in java server faces/pages(?), post comes from ajax
       autocompleter on typing in stuff */
   public void doPost(HttpServletRequest request, HttpServletResponse response)
     throws IOException, ServletException  {
@@ -65,7 +66,7 @@ public class PhenoteServlet extends HttpServlet {
 //         "test</li>\n<li onmouseover=\"set_ontology()\" id=\"termId\" onclick=\"set_ontology()\">dude</li></ul>";
       String ontol = getOntologyParamString(request);
       String list = getCompletionList(userInput,ontol);
-	  int sz = (list.length() <= 85) ? list.length() : 85;
+      int sz = (list.length() <= 85) ? list.length() : 85;
       System.out.println("printing to response writer: "+list.substring(0,sz)+"...");
       out.println(list);
     }
@@ -78,9 +79,9 @@ public class PhenoteServlet extends HttpServlet {
 
   /** this should be renamed from unintuitive "ontologyname" */
   private String getTermCompletionParam(HttpServletRequest req) {
-	  String par = req.getParameter("userInput"); // new way
-	if (par ==null)
-	  par = req.getParameter("patoInput"); // for now
+    String par = req.getParameter("userInput"); // new way
+    if (par ==null)
+      par = req.getParameter("patoInput"); // for now
     if (par == null)
       par = req.getParameter("entityInput");
     return par;
@@ -92,7 +93,8 @@ public class PhenoteServlet extends HttpServlet {
 
   
 
-  /** i cant tell ya why but term info is done with a get and term completion
+  /** TERM INFO request
+      i cant tell ya why but term info is done with a get and term completion
       is done with a post - is there rhyme or reason to this? */
   public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws IOException, ServletException  {

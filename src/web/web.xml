@@ -12,6 +12,7 @@
 
   <servlet-mapping>
      <servlet-name>Phenote</servlet-name>
-     <url-pattern>/Phenote</url-pattern>
+     <!-- url-pattern>/Phenote</url-pattern -->
+     <url-pattern>/phenote/Phenote</url-pattern>
   </servlet-mapping>
 </web-app>

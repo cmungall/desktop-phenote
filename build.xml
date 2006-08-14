@@ -3,17 +3,24 @@
      ant build file
      ====================================================================== -->
 
+<!-- environment variable $PHENOTE_WEB_CONF_FILES need to be set to -->
+<!-- where cfg & obo files go on the web deployment for web-deployment -->
+<!-- to work, $PHENOTE_WEB_CLASSFILES for classfile deployment -->
+
 <project name="phenote" default="compile" basedir=".">
 
   <description>phenote ant build</description>
-
+  <!-- allows for use of environment vars -->
+  <property environment="env"/>
   <!-- property name="src-svn" value="./src/java" / -->
   <property name="src" value="./src/java" />
   <property name="test" value="./src/java/test" />
   <!-- where classes go -->  
   <property name="classfiles" value="classfiles" />
   <!-- symbolic link over to web world -->
-  <property name="web-classfiles" value="web-classfiles" />
+  <property name="web-classfiles" value="${env.PHENOTE_WEB_CLASSFILES}" />
+  <property name="web-conf" value="${env.PHENOTE_WEB_CONF_FILES}"/>
+  <property name="web-html" value="${env.PHENOTE_WEB_HTML}"/>
   <property name="lib" value="jars" />
   <property name="jarfile" value="jars/phenote.jar"/>
   <property name="obo" value="obo-files" />
@@ -193,16 +200,16 @@
   </target>
 
   <!-- web-deployment & web-config-files  should be a symoblic link to ones web site -->
-  <target name="web-deployment">
-     <copy todir="web-deployment">
+  <target name="web-deployment" depends="compile-servlet">
+     <copy todir="${web-html}">
        <fileset dir="src/web"/>
      </copy>
-     <copy todir="${web-classfiles}">
+     <copy todir="${web-conf}">
        <fileset dir="conf">
          <include name="*.cfg"/>
        </fileset>
      </copy>
-     <copy todir="${web-classfiles}">
+     <copy todir="${web-conf}">
        <fileset dir="obo-files" />
      </copy>
   </target> 
