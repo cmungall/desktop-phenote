@@ -55,7 +55,7 @@ public class PhenoteServlet extends HttpServlet {
 
     if (isTermCompletionRequest(request)) {
       String userInput = getTermCompletionParam(request);
-      System.out.println("ontology? "+getOntologyParamString(request)+" param entityInput? "+request.getParameter("entityInput"));
+      System.out.println("ontology? "+getOntologyParamString(request)+" param entityInput? "+getTermCompletionParam(request));
 //ResourceBundle r=ResourceBundle.getBundle("LocalStrings",request.getLocale());
       //Content-Type: text/html; charset=ISO-8859-1
       response.setContentType("text/html");
@@ -139,7 +139,7 @@ public class PhenoteServlet extends HttpServlet {
     // for now just grab the pato ontology - eventuall redo for multiple/config
     Ontology ontology = getOntology(ontol);
     if (ontology == null) {
-      System.out.println("failed to get pato from ontology manager");
+      System.out.println("failed to get "+ontol+" from ontology manager");
       return "ontology retrieval failed";
     }
     Vector<OBOClass> v = ontology.getSearchTerms(userInput,getSearchParams());

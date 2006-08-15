@@ -47,17 +47,19 @@
       <exclude name="META-INF"/>
     </fileset>
   </path>
+
   <path id="project.classpath3">
     <fileset dir="${lib}">
       <patternset id="non-phenote-jars">
         <include name="**/*.jar"/>
         <exclude name="**/phenote.jar"/>
+        <exclude name="test/**"/>
       </patternset>
     </fileset>
   </path>
 
   <!-- The compile target runs javac on all the java files, and saves
-        them into  the classfiles directory. -->
+        them into  the classfiles directory. excludes="test/**"  -->
   <target name="compile" depends="init">
     <javac srcdir="${src}" destdir="${classfiles}" debug="yes" excludes="test/**">
       <classpath refid="project.classpath3"/>
@@ -67,7 +69,7 @@
 
   <!-- runs off classfiles not jar, todo: run-jar -->
   <target name="run" depends="compile">
-     <java classname="phenote.gui.Phenote" fork="yes" jvmargs="-Xmx200M">
+     <java classname="phenote.gui.Phenote" fork="yes" jvmargs="-Xmx120M">
          <!-- arg value="-c configfilehereventually"/ -->
         <classpath>
           <pathelement path="${classfiles}"/>
@@ -194,7 +196,7 @@
   </target>
 
   <target name="compile-servlet">
-    <javac srcdir="${src}" destdir="${web-classfiles}" debug="yes">
+    <javac srcdir="${src}" destdir="${web-classfiles}" debug="yes" excludes="test/**">
       <classpath refid="project.classpath3"/>
     </javac>
   </target>
