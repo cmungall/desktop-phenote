@@ -1,0 +1,32 @@
+default namespace = "phenote/config/xml"
+##default namespace = "http://phenote/config/xml"
+
+start =
+  element phenote-configuration {
+    dataadapter*,
+    field*
+  }
+
+dataadapter =
+  element dataadapter {
+    ## for now only one dataadapter, phenoxml - more coming...
+    attribute name { "phenoxml" }
+  }
+
+field = 
+  element field {
+    attribute name { text },
+    ## whether field is free text or constrained by ontology - take out?
+    ## this is actually unnecasary - if there is no file free text is assumed    
+    attribute type { "free_text", "ontology" },  
+    ## file is for single ontology - rename ontology_file?  
+    attribute file { text },
+    ontology*
+  } 
+
+ontology =
+  element ontology {
+    attribute name { text },
+    ## obo file for ontology
+    attribute file { text }
+  }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="phenote/config/xml" xmlns:x="phenote/config/xml">
+  <xs:element name="phenote-configuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:dataadapter"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:field"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="dataadapter">
+    <xs:complexType>
+      <xs:attribute name="name" use="required">
+        <xs:annotation>
+          <xs:documentation>for now only one dataadapter, phenoxml - more coming...</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="phenoxml"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="field">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:ontology"/>
+      </xs:sequence>
+      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="type" use="required">
+        <xs:annotation>
+          <xs:documentation>whether field is free text or constrained by ontology</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="free_text"/>
+            <xs:enumeration value="ontology"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="file" use="required">
+        <xs:annotation>
+          <xs:documentation>file is for single ontology - rename ontology_file?  </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ontology">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="file" use="required">
+        <xs:annotation>
+          <xs:documentation>obo file for ontology</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
