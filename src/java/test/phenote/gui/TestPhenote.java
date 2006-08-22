@@ -36,7 +36,7 @@ public class TestPhenote {
   private static TermPanel termPanel;
   private static SearchParamPanel searchParamPanel;
   private static AutoComboBox entityComboBox;
-  private static AutoComboBox patoComboBox;
+  private static AutoComboBox qualityComboBox;
   private static TermInfo termInfo;
   private static CharacterTablePanel characterTablePanel;
 
@@ -55,8 +55,8 @@ public class TestPhenote {
     searchParamPanel = termPanel.getSearchParamPanel();
     entityComboBox = termPanel.getEntityComboBox();
     entityComboBox.setTestMode(true); // turns off popup, hanging bug only in test
-    patoComboBox = termPanel.getPatoComboBox();
-    patoComboBox.setTestMode(true);
+    qualityComboBox = termPanel.getQualityComboBox();
+    qualityComboBox.setTestMode(true);
     termInfo = phenote.getTermInfo();
     characterTablePanel = phenote.getCharacterTablePanel();
   }
@@ -69,9 +69,9 @@ public class TestPhenote {
     comboTermSelectionGoesToTableTest();
     synonymDupTest();
     termInfoSelectTermTest();
-    //attributeInPatoCompletionTest(); --> need 3 keystrokes 'ttr'
+    //attributeInQualityCompletionTest(); --> need 3 keystrokes 'ttr'
     //backspaceInComboBoxTest(); cant sim backspace.....
-    flyDataAdapterTest();
+    //flyDataAdapterTest(); out of date its now doing phenoxml - soon will be syntax
   }
 
   private void displayTermInfoOnCompMouseOverTest() {
@@ -81,15 +81,15 @@ public class TestPhenote {
     System.out.println("set entity text to hea");
     //entityComboBox.setText("hea",doCompletion);
     // already have list from l from previous test - for some reason 2nd l doesnt jibe
-    // even though there are lots of pato terms with 'll' ???
-    //patoComboBox.simulateLKeyStroke(); // just does 'l'
+    // even though there are lots of quality terms with 'll' ???
+    //qualityComboBox.simulateLKeyStroke(); // just does 'l'
     System.out.println("set text - getting 3rd term");
     //JList entityJList = entityComboBox.getJList();
     // pick 3rd item
     //String thirdTerm = (String)entityJList.getModel().getElementAt(2);
     //String thirdTerm = getEntityThirdAutoTerm();
-    String thirdTerm = getPatoThirdAutoTerm();
-    assertNotNull("3rd term from pato combo shouldnt be null",thirdTerm);
+    String thirdTerm = getQualityThirdAutoTerm();
+    assertNotNull("3rd term from quality combo shouldnt be null",thirdTerm);
     //entityJList.setSelectedIndex(2);
     entityComboBox.doMouseOver(2); // 2 is 3rd - 0 indexing
 
@@ -109,18 +109,18 @@ public class TestPhenote {
     return entityComboBox.getModel().getElementAt(2).toString();
   }
 
-  private String getPatoThirdAutoTerm() {
-    assertNotNull(patoComboBox.getModel());
-    assertNotNull("3rd term from pato combo shouldnt be null",
-                  patoComboBox.getModel().getElementAt(2));
-    return patoComboBox.getModel().getElementAt(2).toString();
+  private String getQualityThirdAutoTerm() {
+    assertNotNull(qualityComboBox.getModel());
+    assertNotNull("3rd term from quality combo shouldnt be null",
+                  qualityComboBox.getModel().getElementAt(2));
+    return qualityComboBox.getModel().getElementAt(2).toString();
   }
 
-  private String getPatoTerm(int index) {
-    assertNotNull(patoComboBox.getModel());
-    assertNotNull(index+" term from pato combo shouldnt be null",
-                  patoComboBox.getModel().getElementAt(index));
-    return patoComboBox.getModel().getElementAt(index).toString();
+  private String getQualityTerm(int index) {
+    assertNotNull(qualityComboBox.getModel());
+    assertNotNull(index+" term from quality combo shouldnt be null",
+                  qualityComboBox.getModel().getElementAt(index));
+    return qualityComboBox.getModel().getElementAt(index).toString();
   }
 
   /** Selecting item in entity combo box should cause that item to appear in 
@@ -128,25 +128,25 @@ public class TestPhenote {
   private void comboTermSelectionGoesToTableTest() {
     // selecting item should make it go in table...
     System.out.println("Selecting 3rd entity item");
-    patoComboBox.setSelectedIndex(2); // 2 is 3rd
-    String selectedPatoTerm = getPatoThirdAutoTerm();
+    qualityComboBox.setSelectedIndex(2); // 2 is 3rd
+    String selectedQualityTerm = getQualityThirdAutoTerm();
     CharacterI selPheno = characterTablePanel.getSelectedCharacter();
-    String tablePato = selPheno.getPato().getName(); // oboclass
-    assertEquals(selectedPatoTerm,tablePato);
-    System.out.println("term to table test passed, selected pato term "
-                       +selectedPatoTerm+" pato in table "+tablePato+"\n");
+    String tableQuality = selPheno.getQuality().getName(); // oboclass
+    assertEquals(selectedQualityTerm,tableQuality);
+    System.out.println("term to table test passed, selected quality term "
+                       +selectedQualityTerm+" quality in table "+tableQuality+"\n");
   }
 
-  /** Test that attributes are being filtered out of pato term completion list */
-  private void attributeInPatoCompletionTest() {
+  /** Test that attributes are being filtered out of quality term completion list */
+  private void attributeInQualityCompletionTest() {
     boolean doCompletion = true;
-    System.out.println("Testing pato for attribute filtering");
+    System.out.println("Testing quality for attribute filtering");
     // need to do this with key strokes now - set text doesnt work
     // need at least 3 key strokes 'ttr' for attributes - i seem to have problems
     // getting more than one key stroke in - hmmmmm
-    patoComboBox.setText("attribute",doCompletion);
-    int count = patoComboBox.getItemCount();
-    String m = "Attributes are not being filtered out of Pato completion "+
+    qualityComboBox.setText("attribute",doCompletion);
+    int count = qualityComboBox.getItemCount();
+    String m = "Attributes are not being filtered out of Quality completion "+
       "There are "+count+" terms with 'attribute'";
     System.out.println("There are "+count+" attributes in comp list");
     assertTrue(m,count == 0);
@@ -155,32 +155,32 @@ public class TestPhenote {
   // cant get null pointer to fly - gotta love testing guis
   /** theres a null pointer on selcting item for 1st time, not sure i can replicate*/
   private void compListSelectionTest() {
-    //patoComboBox.setText("larg",true);
-    patoComboBox.simulateLKeyStroke();
-    patoComboBox.setSelectedIndex(2);
-    // this is admittedly presumptious of pato
-    assertEquals("AbnormalValue",patoComboBox.getText());
-    System.out.println("comp list sel ok "+patoComboBox.getText());
+    //qualityComboBox.setText("larg",true);
+    qualityComboBox.simulateLKeyStroke();
+    qualityComboBox.setSelectedIndex(2);
+    // this is admittedly presumptious of quality
+    assertEquals("acute angle",qualityComboBox.getText());
+    System.out.println("comp list sel ok "+qualityComboBox.getText());
   }
   
   /** After term selected in comp list popup should not come up - this doesnt actually
       test this - the popup does go away with setSelInd - only with mouse click it
       sometimes doesnt - need simulated mouse click! */
   private void selectionPopupTest() {
-    patoComboBox.setText("larg",true);
-    patoComboBox.setSelectedIndex(2);
-    assertFalse(patoComboBox.isPopupVisible());
+    qualityComboBox.setText("larg",true);
+    qualityComboBox.setSelectedIndex(2);
+    assertFalse(qualityComboBox.isPopupVisible());
   }
 
   /** with searching on synonyms hit bug where terms come in more than once if have
       2 syns */
   private void synonymDupTest() {
-    patoComboBox.setText("");
+    qualityComboBox.setText("");
     searchParamPanel.setTermSearch(false);
     searchParamPanel.setSynonymSearch(true);
-    simulateAPatoKeyStroke();
-    String first = getPatoTerm(0);
-    String second = getPatoTerm(1);
+    simulateAQualityKeyStroke();
+    String first = getQualityTerm(0);
+    String second = getQualityTerm(1);
     assertFalse(first.equals(second));
   }
 
@@ -189,7 +189,8 @@ public class TestPhenote {
     simulatePhenoteHyperlinkUpdate();
     String m = "term info hyper link test fail, term info should have body tone val "
       +" term info: "+termInfo.getText();
-    assertTrue(m,termInfo.getText().contains("BodyToneValue"));
+    // how to make this test not so pato specific??
+    assertTrue(m,termInfo.getText().contains("body tone value"));
   }
 
   private void simulatePhenoteHyperlinkUpdate() {
@@ -200,12 +201,12 @@ public class TestPhenote {
     termInfo.simulateHyperlinkEvent(e);
   }
 
-  private void simulateAPatoKeyStroke() {
-    simulatePatoKeyStroke(KeyEvent.VK_A,'a');
+  private void simulateAQualityKeyStroke() {
+    simulateQualityKeyStroke(KeyEvent.VK_A,'a');
   }
 
-  private void simulatePatoKeyStroke(int keyCode, char c) {
-    patoComboBox.simulateKeyStroke(keyCode,c);
+  private void simulateQualityKeyStroke(int keyCode, char c) {
+    qualityComboBox.simulateKeyStroke(keyCode,c);
   }
   
   private void flyDataAdapterTest() {
@@ -264,17 +265,17 @@ public class TestPhenote {
 //       completion list */
 //   private void backspaceInComboBoxTest() {
 //     boolean doCompletion = true;
-//     patoComboBox.clear();
-//     patoComboBox.setText("larg",doCompletion);
-//     int preBackspaceCount = patoComboBox.getItemCount();
+//     qualityComboBox.clear();
+//     qualityComboBox.setText("larg",doCompletion);
+//     int preBackspaceCount = qualityComboBox.getItemCount();
  
 //     // simulate backspace/delete key
-//     KeyEvent ke = new KeyEvent(patoComboBox,KeyEvent.VK_DELETE,Calendar.getInstance().getTimeInMillis(),0,KeyEvent.VK_UNDEFINED,KeyEvent.CHAR_UNDEFINED);
-//     //patoComboBox.processKeyEvent(ke);
-//     patoComboBox.getEditor().getEditorComponent().processKeyEvent(ke);
+//     KeyEvent ke = new KeyEvent(qualityComboBox,KeyEvent.VK_DELETE,Calendar.getInstance().getTimeInMillis(),0,KeyEvent.VK_UNDEFINED,KeyEvent.CHAR_UNDEFINED);
+//     //qualityComboBox.processKeyEvent(ke);
+//     qualityComboBox.getEditor().getEditorComponent().processKeyEvent(ke);
 
-//     String postDelText = patoComboBox.getText();
-//     int postBackspaceCount = patoComboBox.getItemCount();
+//     String postDelText = qualityComboBox.getText();
+//     int postBackspaceCount = qualityComboBox.getItemCount();
 //     System.out.println("post text "+postDelText+" pre count "+preBackspaceCount+" post count "+postBackspaceCount);
 //     assertTrue(preBackspaceCount != postBackspaceCount);
 //   }

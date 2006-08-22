@@ -37,6 +37,8 @@ public class PhenoteServlet extends HttpServlet {
     String[] args = {"-c","initial-zfin.cfg"};
     phenote.initConfig(args); // hardwire for now to zfin
     phenote.initOntologies();
+    OntologyFileCheckThread ofct = new OntologyFileCheckThread();
+    ofct.run();
   }
 
 
@@ -66,8 +68,7 @@ public class PhenoteServlet extends HttpServlet {
 //         "test</li>\n<li onmouseover=\"set_ontology()\" id=\"termId\" onclick=\"set_ontology()\">dude</li></ul>";
       String ontol = getOntologyParamString(request);
       String list = getCompletionList(userInput,ontol);
-      int sz = (list.length() <= 85) ? list.length() : 85;
-      System.out.println("printing to response writer: "+list.substring(0,sz)+"...");
+      System.out.println("printing to response writer: "+substring(list,55)+"...");
       out.println(list);
     }
         
@@ -118,9 +119,14 @@ public class PhenoteServlet extends HttpServlet {
         System.out.println("term info: no obo class found for "+termId);
         return;
       }
-      System.out.println("term info "+HtmlUtil.termInfo(oboClass));
+      System.out.println("term info "+substring(HtmlUtil.termInfo(oboClass),60));
       out.println(HtmlUtil.termInfo(oboClass,ontologyName));
     }
+  }
+
+  private String substring(String s,int sz) {
+    sz = (s.length() <= sz) ? s.length() : sz;
+    return s.substring(0,sz);
   }
 
   private boolean isTermInfoRequest(HttpServletRequest req) {
@@ -151,16 +157,16 @@ public class PhenoteServlet extends HttpServlet {
 
   /** returns null if ontolName not found */
   private Ontology getOntology(String ontolName) { // termid?? or ontology name?
-    //return getPatoOntology();
+    //return getQualityOntology();
     return OntologyManager.getOntologyForName(ontolName);
   }
   
   // for now...
-  private Ontology getPatoOntology() {
+  private Ontology getQualityOntology() {
     for (CharField cf : OntologyManager.inst().getCharFieldList())
-      if (cf.getCharFieldEnum() == CharFieldEnum.PATO)
+      if (cf.getCharFieldEnum() == CharFieldEnum.QUALITY)
         return cf.getFirstOntology();
-    System.out.println("pato ontology not found in ontology manager");
+    System.out.println("quality ontology not found in ontology manager");
     return null;
   }
 
@@ -184,6 +190,22 @@ public class PhenoteServlet extends HttpServlet {
     public boolean searchObsoletes() { return false; }
   }
 
+
+  /** thread wakes up and checks if theres a new ontology file - if so loads it
+   this should go in ontology data adapter... not here and configged */
+  private class OntologyFileCheckThread extends Thread {
+
+    public void run() {
+
+      while(true) {
+        // check for files...
+        
+        
+        // sleep in milliseconds - sleep for 5 seconds for now (test)
+        //sleep(5000);
+      }
+    }
+  }
 
 }
 

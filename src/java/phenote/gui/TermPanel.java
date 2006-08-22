@@ -25,7 +25,7 @@ import phenote.datamodel.SearchParamsI;
 import phenote.config.FieldConfig;
 
 /**
- * TermPanel holds all the fileds for the terms - Genotype, Entity/Anatomy, PATO.
+ * TermPanel holds all the fileds for the terms - Genotype, Entity/Anatomy, QUALITY.
  * Can be populated by hand (Genotype), or  selection of instance in completion list. 
  rename FieldPanel or CharFieldPanel?
  also has SearchParamPanel.
@@ -122,8 +122,8 @@ class TermPanel extends JPanel {
     return null;
   }
 
-  AutoComboBox getPatoComboBox() {
-    return getComboBox(CharFieldEnum.PATO);
+  AutoComboBox getQualityComboBox() {
+    return getComboBox(CharFieldEnum.QUALITY);
   }
   boolean hasLumpComboBox() {
     //return lumpField.isCombo();
@@ -141,7 +141,7 @@ class TermPanel extends JPanel {
 //   void clear() { 
 //     lumpField.setText("");
 //     entityField.setText("");
-//     patoField.setText("");
+//     qualityField.setText("");
 //   }
 
   // phase out direct connection for event/listener - obo edit stuff?
@@ -151,8 +151,8 @@ class TermPanel extends JPanel {
 //   private boolean isEntity(String ontology) {
 //     return ontology.equals(ANATOMY); // || GO...
 //   }
-//   private boolean isPato(String ontology) {
-//     return ontology.equals(PATO);
+//   private boolean isQuality(String ontology) {
+//     return ontology.equals(QUALITY);
 //   }
 
 //   // this should be made generic to use beyond just genotype? yes yes yes
@@ -177,9 +177,9 @@ class TermPanel extends JPanel {
 //   }
 
 //   // change -> mvc
-//   void setPatoTableColumn(String patoTerm) {
+//   void setQualityTableColumn(String qualityTerm) {
 //     // characterTablePanel.setSelectedColumn(ontEnum,term)???
-//     characterTablePanel.setSelectedPatoTerm(patoTerm);
+//     characterTablePanel.setSelectedQualityTerm(qualityTerm);
 //   }
 
 //   /** rename - this sets term in table not field - hardwires from ontology
@@ -189,8 +189,8 @@ class TermPanel extends JPanel {
 //   private void setTableColumn(String ontology, String term) {
 //     if (isEntity(ontology))
 //       setEntityTableColumn(term);
-//     else if (isPato(ontology))
-//       setPatoTableColumn(term);
+//     else if (isQuality(ontology))
+//       setQualityTableColumn(term);
 //     else if (ontology.equals(TAXONOMY))
 //       characterTablePanel.setSelectedGenotype(term);
 //     //...
@@ -202,9 +202,9 @@ class TermPanel extends JPanel {
 //   }
 
 //   // change -> mvc
-//   void setPatoTableColumn(String patoTerm) {
+//   void setQualityTableColumn(String qualityTerm) {
 //     // characterTablePanel.setSelectedColumn(ontEnum,term)???
-//     characterTablePanel.setSelectedPatoTerm(patoTerm);
+//     characterTablePanel.setSelectedQualityTerm(qualityTerm);
 //   }
 
 //   /** rename - this sets term in table not field - hardwires from ontology
@@ -214,8 +214,8 @@ class TermPanel extends JPanel {
 //   private void setTableColumn(String ontology, String term) {
 //     if (isEntity(ontology))
 //       setEntityTableColumn(term);
-//     else if (isPato(ontology))
-//       setPatoTableColumn(term);
+//     else if (isQuality(ontology))
+//       setQualityTableColumn(term);
 //     else if (ontology.equals(TAXONOMY))
 //       characterTablePanel.setSelectedGenotype(term);
 //     //...
@@ -267,38 +267,38 @@ class TermPanel extends JPanel {
 //     return ontologyManager.getEntityOntology();
 //   }
 
-//   private Ontology getPatoOntology() {
-//     //return new Ontology("Pato","attribute_and_value.obo");
-//     return ontologyManager.getPatoOntology();
+//   private Ontology getQualityOntology() {
+//     //return new Ontology("Quality","attribute_and_value.obo");
+//     return ontologyManager.getQualityOntology();
 //   }
 
 //     lumpField.setText(instance.getGenotype());
 //     entityField.setText(instance.getEntity());
-//     patoField.setText(instance.getPato()); ????????
+//     qualityField.setText(instance.getQuality()); ????????
 //     addLumpField(fieldPanel);
 //     addGeneticContextField(fieldPanel); // if configured...
 //     entityField = new CharFieldGui(getAnatomyOntology(),fieldPanel);
-//     //patoField = new CharFieldGui(getPatoOntology(),fieldPanel);
-//     patoField = new CharFieldGui(,fieldPanel);
+//     //qualityField = new CharFieldGui(getQualityOntology(),fieldPanel);
+//     qualityField = new CharFieldGui(,fieldPanel);
     // for (FieldConfig fieldConfig : config.getFieldConfigList() )
     // addField(fieldConfig,fieldPanel); but field configs dont have ontologies...
     // would then have to do something like ontMan.getOntology(fc.getFieldEnum)
     // for (FieldOntology fieldOntology : ontologyManager.getFieldOntologyList())
     // addField(fieldOntology,fieldPanel);
 //   final static String ANATOMY = "Anatomy";
-//   final static String PATO = "Pato";
+//   final static String QUALITY = "Quality";
 //   final static String TAXONOMY = "Taxonomy";
 
 
 //   private CharFieldGui lumpField;
 //   private CharFieldGui entityField;
-//   private CharFieldGui patoField; 
+//   private CharFieldGui qualityField; 
 //   private CharFieldGui geneticContextField;
 //   private String getInput(String ontology) {
 //     if (isEntity(ontology))
 //       return entityField.getText();
-//     if (isPato(ontology))
-//       return patoField.getText();
+//     if (isQuality(ontology))
+//       return qualityField.getText();
 //     return ""; // error?
 //   }
   // take out editable - always editable
@@ -367,12 +367,12 @@ class TermPanel extends JPanel {
 //     searchPanel = sp;
 //     // overlay?? home made jcombo - jcombo mac bug - list on top of jtext
 //     // mac bug worked around thank goodness
-//     //searchPanel.setLocation(patoTextField.getLocation());
+//     //searchPanel.setLocation(qualityTextField.getLocation());
 //   }
     //comboBox.setEditable(true);
     //ActionListener a = new AutoActionListener(ontologyString,comboBox); 
     //comboBox.getEditor().addActionListener(a);
     //comboBox.addActionListener(a);
     //entityField.getDocument().addDocumentListener(new AutoDocumentListener(ANATOMY));
-    //patoTextField = addField("Pato Term",this,true);
-    //patoTextField.getDocument().addDocumentListener(new AutoDocumentListener(PATO));
+    //qualityTextField = addField("Quality Term",this,true);
+    //qualityTextField.getDocument().addDocumentListener(new AutoDocumentListener(QUALITY));

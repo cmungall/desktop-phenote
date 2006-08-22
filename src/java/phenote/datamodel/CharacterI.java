@@ -7,19 +7,19 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 public interface CharacterI {
 
   public String getEntityName();
-  public String getPatoName(); // OBOClass?
+  public String getQualityName(); // OBOClass?
   public String getGeneticContextName();
 
   public String getGenotype();
   public OBOClass getEntity();
-  public OBOClass getPato(); // OBOClass?
+  public OBOClass getQuality(); // OBOClass?
   public boolean hasGeneticContext();
   public OBOClass getGeneticContext();
 
   /** eventually have Genotype object? probably */
   public void setGenotype(String gt);
   public void setEntity(OBOClass e);
-  public void setPato(OBOClass p);
+  public void setQuality(OBOClass p);
   public void setGeneticContext(OBOClass gc);
  
   public CharacterI cloneCharacter();

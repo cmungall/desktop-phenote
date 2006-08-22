@@ -108,13 +108,13 @@ public class PhenoXmlAdapter implements DataAdapterI {
       System.out.println("Character "+chr+" has no entity");
     }
 
-    if (chr.getPato() != null) {
+    if (chr.getQuality() != null) {
       Quality q = pc.addNewQuality();
       Typeref trq = q.addNewTyperef();
-      trq.setAbout(chr.getPato().getID());
+      trq.setAbout(chr.getQuality().getID());
     }
     else {
-      System.out.println("Character "+chr+" has no quality(pato)");
+      System.out.println("Character "+chr+" has no quality");
     }
   }
 }

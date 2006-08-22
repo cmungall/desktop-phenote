@@ -65,6 +65,13 @@ class CharFieldGui {
   boolean isCombo() { return isCombo; }
 
   void setValueFromChar(CharacterI character) {
+    if (charField == null) return;
+    if (charField.getCharFieldEnum() == null) {
+      System.out.println("ERROR: Cant set value for field. Gui for character field has"
+                         +" not been associated with a datamodel field. check field"
+                         +" names in config ");
+      return;
+    }
     String v = charField.getCharFieldEnum().getValue(character).getName();
     setText(v);
   }
@@ -158,7 +165,6 @@ class CharFieldGui {
 
   private class FieldCharSelectListener implements CharSelectionListener {
     public void characterSelected(CharSelectionEvent e) {
-      /// do something...
       setValueFromChar(e.getCharacter());
     }
   }

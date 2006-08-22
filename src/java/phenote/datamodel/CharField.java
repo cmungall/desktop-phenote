@@ -37,12 +37,12 @@ public class CharField {
         return new CharFieldValue(c.getEntity(),c,this);
       }
     },
-    PATO("Pato") {
+    QUALITY("Quality") {
       public void setValue(CharacterI c, CharFieldValue v) {
-        c.setPato(v.getOboClass());
+        c.setQuality(v.getOboClass());
       }
       public CharFieldValue getValue(CharacterI c) {
-        return new CharFieldValue(c.getPato(),c,this);
+        return new CharFieldValue(c.getQuality(),c,this);
       }
     };
 
@@ -52,20 +52,22 @@ public class CharField {
     public abstract void setValue(CharacterI c, CharFieldValue v);
     public abstract CharFieldValue getValue(CharacterI c);
 
-    // uncler if we need this???
-//     public CharFieldEnum getCharFieldEnum(String fieldString) {
-//       for ( CharFieldEnum cfe : CharFieldEnum.values()) {
-//         if (cfe.name.equalsIgnoreCase(fieldString))
-//           return cfe;
-//       }
-//       System.out.println("ERROR: No Char Field found for string "+fieldString);
-//       return null;
-//     }
     // is this getting silly? abstract? --> char field value i think
     //public void setOboClass(CharacterI c, OBOClass o) {}
     //public OBOClass getOBOClass(CharacterI c) { return null; }
+
+    // unclear if we need this??? need it in generic field config
+    public static CharFieldEnum getCharFieldEnum(String fieldString) {
+      for ( CharFieldEnum cfe : CharFieldEnum.values()) {
+        if (cfe.name.equalsIgnoreCase(fieldString))
+          return cfe;
+      }
+      System.out.println("ERROR: No Char Field found for string "+fieldString);
+      return null;
+    }
   };
 
+  
   private List<Ontology> ontologyList = new ArrayList<Ontology>(3);
   private CharFieldEnum charFieldEnum; // or subclass
   private String name;

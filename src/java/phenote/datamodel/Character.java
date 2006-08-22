@@ -7,17 +7,17 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 public class Character implements CharacterI, Cloneable {
 
 //   private String entity="";
-//   private String pato="";
+//   private String quality="";
 //   private String geneticContext="";
   private String genotype=""; // eventually Genotype class
   // OboClass? OntologyTerm?...
   private OBOClass entity; // CharFieldValue?
-  private OBOClass pato;
+  private OBOClass quality;
   private OBOClass geneticContext;
 
   public String getGenotype() { return genotype; }
   public OBOClass getEntity() { return entity; }
-  public OBOClass getPato() { return pato; }
+  public OBOClass getQuality() { return quality; }
   public boolean hasGeneticContext() {
     return geneticContext!=null && !geneticContext.equals("");
   }
@@ -25,18 +25,18 @@ public class Character implements CharacterI, Cloneable {
 
   // convenience functions
   public String getEntityName() { return entity.getName(); }
-  public String getPatoName() { return pato.getName(); }
+  public String getQualityName() { return quality.getName(); }
   public String getGeneticContextName() { return geneticContext.getName(); }
 
 
   public void setGenotype(String gt) { genotype = gt; }
   public void setEntity(OBOClass e) { entity = e; }
-  public void setPato(OBOClass p) { pato = p; }
+  public void setQuality(OBOClass p) { quality = p; }
   public void setGeneticContext(OBOClass gc) { geneticContext = gc; }
  
   public boolean equals(CharacterI ch) {
     return eq(genotype,ch.getGenotype()) && eq(entity,ch.getEntity())
-      && eq(pato,ch.getPato()) && eq(geneticContext,ch.getGeneticContext());
+      && eq(quality,ch.getQuality()) && eq(geneticContext,ch.getGeneticContext());
   }
 
   /** check if both are null in addition to .equals() */

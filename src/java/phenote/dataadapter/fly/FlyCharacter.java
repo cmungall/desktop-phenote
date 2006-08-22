@@ -55,7 +55,7 @@ public class FlyCharacter implements FlyCharacterI {
       if (key.equals(ENTITY))
         character.setEntity(oboClass);
       else if (key.equals(VALUE))
-        character.setPato(oboClass);
+        character.setQuality(oboClass);
       else if (key.equals(GENETIC_CONTEXT))
         character.setGeneticContext(oboClass);
     }
@@ -97,7 +97,7 @@ public class FlyCharacter implements FlyCharacterI {
     StringBuffer sb = new StringBuffer();
     sb.append(ENTITY).append(" > ").append(termString(character.getEntity()));
     sb.append("|");
-    sb.append(VALUE).append(" > ").append(termString(character.getPato()));
+    sb.append(VALUE).append(" > ").append(termString(character.getQuality()));
     if (character.hasGeneticContext()) {
       sb.append("|");
       sb.append(GENETIC_CONTEXT).append(" > ");
