@@ -41,7 +41,8 @@ public class PhenoXmlAdapter implements DataAdapterI {
     Phenoset phenoset = doc.addNewPhenoset();
     
     for (CharacterI chr : charList.getList()) {
-      writeCharacterAndGenotype(chr,phenoset);
+      // builds Phenoset from characters
+      addCharAndGenotypeToPhenoset(chr,phenoset);
     }
 
     System.out.println("doc schme type "+doc.schemaType()+" name "+doc.schemaType().getName());
@@ -55,7 +56,7 @@ public class PhenoXmlAdapter implements DataAdapterI {
     }
   }
 
-  private File getFile() {
+  public static File getFile() {
     // todo - remember last accessed dir
     JFileChooser fileChooser = new JFileChooser();
     // todo - file filter - only .xml or .phenoxml?
@@ -76,7 +77,7 @@ public class PhenoXmlAdapter implements DataAdapterI {
   }
 
 
-  private void writeCharacterAndGenotype(CharacterI chr, Phenoset phenoset) {
+  private void addCharAndGenotypeToPhenoset(CharacterI chr, Phenoset phenoset) {
     String genotype = chr.getGenotype();
     PhenotypeManifestation pm = phenoset.addNewPhenotypeManifestation();
     addGenotype(genotype,phenoset,pm);

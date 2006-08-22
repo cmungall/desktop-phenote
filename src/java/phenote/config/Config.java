@@ -28,6 +28,7 @@ import phenote.config.xml.OntologyDocument.Ontology;
 import phenote.datamodel.CharField.CharFieldEnum;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.fly.FlybaseDataAdapter;
+import phenote.dataadapter.phenosyntax.PhenoSyntaxFileAdapter;
 import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
 
 public class Config {
@@ -254,10 +255,12 @@ public class Config {
   // do some other way? DataAdapterManager has mapping? DataAdapter has mapping?
   // DataAdapterManager.getAdapter(name)???
   private void addDataAdapterFromString(String daString) {
-    if (daString.equalsIgnoreCase("flybase"))
-      addDataAdapter(new FlybaseDataAdapter()); // for now...
-    else if (daString.equalsIgnoreCase("phenoxml"))
+    if (daString.equalsIgnoreCase("phenoxml"))
       addDataAdapter(new PhenoXmlAdapter());
+    else if (daString.equalsIgnoreCase("phenosyntax"))
+      addDataAdapter(new PhenoSyntaxFileAdapter());
+    else if (daString.equalsIgnoreCase("flybase")) // pase??
+      addDataAdapter(new FlybaseDataAdapter()); // for now...
   }
 
   private void addDataAdapter(DataAdapterI da) {

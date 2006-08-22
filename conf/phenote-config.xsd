@@ -12,11 +12,12 @@
     <xs:complexType>
       <xs:attribute name="name" use="required">
         <xs:annotation>
-          <xs:documentation>for now only one dataadapter, phenoxml - more coming...</xs:documentation>
+          <xs:documentation>for now just 2 dataadapters, phenoxml &amp; phenosyntax - more coming...</xs:documentation>
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:token">
             <xs:enumeration value="phenoxml"/>
+            <xs:enumeration value="phenosyntax"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
@@ -29,9 +30,6 @@
       </xs:sequence>
       <xs:attribute name="name" use="required"/>
       <xs:attribute name="type" use="required">
-        <xs:annotation>
-          <xs:documentation>whether field is free text or constrained by ontology</xs:documentation>
-        </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:token">
             <xs:enumeration value="free_text"/>

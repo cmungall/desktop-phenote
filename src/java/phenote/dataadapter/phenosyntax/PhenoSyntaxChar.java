@@ -8,7 +8,11 @@ import phenote.datamodel.CharacterI;
     CharacterI. It can make a phenosyntax string from a CharacterI and make
     a CharacterI from a phenosyntax string  e.g. E=head Q=large
     See http://www.fruitfly.org/~cjm/obd/pheno-syntax.html for a full description
-    of pheno syntax.*/
+    of pheno syntax.
+
+    Phenote additions: syntax doesnt do genotype or genetic context but heck we
+    need them - so i added GT=genotype (do we gen context?) GC=geneticContext
+*/
 
 public class PhenoSyntaxChar {
 
@@ -32,12 +36,15 @@ public class PhenoSyntaxChar {
       return ""; //??
     }
     StringBuffer sb = new StringBuffer();
-    sb.append("E= ").append(idPrefixAndName(character.getEntity()));
-    //sb.append
+    // Genotype - not strictly part of pheno syntax but lets face it we need it
+    // i would say its an omission from syntax
+    sb.append("GT= ").append(character.getGenotype());
+    if (character.hasGeneticContext())
+      sb.append(" GC= ").append(idPrefixAndName(character.getGeneticContext()));
+    sb.append(" E= ").append(idPrefixAndName(character.getEntity()));
+    sb.append(" Q= ").append(idPrefixAndName(character.getQuality()));
 
-    // work in progress - abandoned for pheno xml adapter - revisit for flybase...
-
-    return null;
+    return sb.toString();
   }
 
   /** Merges id prefix and name, so for id GO:1234 with name "growth" returns
@@ -51,7 +58,7 @@ public class PhenoSyntaxChar {
   private String getIdPrefix(OBOClass term) {
     String id = term.getID();
     int colonIndex = id.indexOf(":");
-    return id.substring(colonIndex);
+    return id.substring(0,colonIndex+1); // +1 retain colon
   }
 
 }

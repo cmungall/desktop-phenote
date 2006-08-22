@@ -4,7 +4,8 @@ import java.util.List;
 
 /** holds a list of Characters - rename phenotype? i dont think so - can have
  multiple genotypes in it - transfreable allows it to be plopped on the
- clipboard */
+ clipboard 
+hmmm isnt this just a List<CharacterI>? */
 public interface CharacterListI {
 
   public CharacterI get(int i);
