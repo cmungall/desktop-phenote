@@ -5,7 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -39,6 +39,8 @@ class CharacterTablePanel extends JPanel {
   private JButton commitButton;
   
   private int selectedRow;
+  // get from file menu?
+  private static final String SAVE_STRING = "Save data";
   private boolean SANDBOX_MODE = true; // get from config...
 
   CharacterTablePanel(TermPanel tp) {
@@ -72,7 +74,8 @@ class CharacterTablePanel extends JPanel {
     deleteButton = addButton("Delete",al,buttonPanel);
     // should we only add if have data adapter - or disable at least?
     // should this go in a menu?
-    commitButton = addButton("Commit",al,buttonPanel);
+    buttonPanel.add(Box.createRigidArea(new Dimension(80,0)));
+    commitButton = addButton(SAVE_STRING,al,buttonPanel);
     
     add(buttonPanel);
 
@@ -151,7 +154,7 @@ class CharacterTablePanel extends JPanel {
           selectRow = characterTable.getRowCount()-1; // last row deleted
       }
       
-      else if (e.getActionCommand().equals("Commit")) {
+      else if (e.getActionCommand().equals(SAVE_STRING)) {
         Config c = Config.inst();
         if (!c.hasSingleDataAdapter()) {
           System.out.println("Cant commit. No data adapter configged");

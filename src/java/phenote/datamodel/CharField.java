@@ -6,6 +6,7 @@ import java.util.List;
 import org.geneontology.oboedit.datamodel.OBOClass;
 
 // or just Field? or CharField? eventually separate class?
+// associates enum & ontologies
 public class CharField {
 
   // separate class? labels? methods? subclasses?
@@ -13,6 +14,14 @@ public class CharField {
   // would it be nice to have a class that wrapped String and OBOClass?
   // and all possible field values? or would that be annoying?
   public enum CharFieldEnum {
+    PUB("Pub") {
+      public void setValue(CharacterI c, CharFieldValue v) {
+        c.setPub(v.getName());
+      }
+      public CharFieldValue getValue(CharacterI c) {
+        return new CharFieldValue(c.getPub(),c,this);
+      }
+    },
     LUMP("Genotype") { // genotype? default?
       public void setValue(CharacterI c, CharFieldValue v) {
         c.setGenotype(v.getName());

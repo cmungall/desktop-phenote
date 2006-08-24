@@ -16,7 +16,7 @@ import phenote.dataadapter.OntologyDataAdapter;
 
 public class Phenote {
 
-  private static final String VERSION = "0.7 dev";
+  private static final String VERSION = "0.7.1 dev";
   //private static final String DEFAULT_CONFIG_FILE = Config.DEFAULT_CONFIG_FILE;
 
   private CharacterTablePanel characterTablePanel;
@@ -34,6 +34,7 @@ public class Phenote {
     catch (UnsupportedLookAndFeelException e) {
       System.out.println("Failed to set to Java/Metal look & feel");
     }
+    //System.out.println("sys CONFIG prop "+System.getProperty("CONFIG"));
     phenote = getPhenote();
     phenote.initConfig(args);
     phenote.initOntologies();

@@ -10,6 +10,8 @@ public interface CharacterI {
   public String getQualityName(); // OBOClass?
   public String getGeneticContextName();
 
+  public String getPub();
+  public boolean hasPub();
   public String getGenotype();
   public OBOClass getEntity();
   public OBOClass getQuality(); // OBOClass?
@@ -17,6 +19,7 @@ public interface CharacterI {
   public OBOClass getGeneticContext();
 
   /** eventually have Genotype object? probably */
+  public void setPub(String p);
   public void setGenotype(String gt);
   public void setEntity(OBOClass e);
   public void setQuality(OBOClass p);

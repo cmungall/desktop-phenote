@@ -217,10 +217,12 @@ public class Config {
 
     }
     catch (IOException ie) {
-      System.out.println("IOException on config parse "+ie);
+      System.out.println("EXITING! IOException on config parse "+ie);
+      System.exit(1);
     }
     catch (XmlException xe) {
-      System.out.println("Parse of config xml file failed "+xe);
+      System.out.println("EXITING! Parse of config xml file failed "+xe);
+      System.exit(1);
     }
   }
 
@@ -235,13 +237,17 @@ public class Config {
   private List<URL> getPossibleUrls(String filename) {
     List<URL> urls = new ArrayList(5);
     try {
-      urls.add(new File(filename).toURL());
-      urls.add(new File("conf/"+filename).toURL());
+      URL u = new File(filename).toURL();
+      if (u != null) urls.add(u);
+      u = new File("conf/"+filename).toURL();
+      if (u != null) urls.add(u);
     } catch (MalformedURLException e) {
       System.out.println("bad file url "+e);
     }
-    urls.add(Config.class.getResource(filename));
-    urls.add(Config.class.getResource("/"+filename));
+    URL jarUrl = Config.class.getResource(filename);
+    if (jarUrl != null) urls.add(jarUrl);
+    jarUrl = Config.class.getResource("/"+filename);
+    if (jarUrl != null) urls.add(jarUrl);
     return urls;
   }
 
@@ -270,7 +276,7 @@ public class Config {
   }
 
   private void makeFieldConfig(Field field) {
-    String name = field.getName().getStringValue();
+    String name = field.getName().toString();
     //String file = field.getFile().getStringValue();
     // has to be a valid value
     CharFieldEnum cfe = CharFieldEnum.getCharFieldEnum(name);

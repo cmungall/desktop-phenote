@@ -12,7 +12,7 @@
     <xs:complexType>
       <xs:attribute name="name" use="required">
         <xs:annotation>
-          <xs:documentation>for now just 2 dataadapters, phenoxml &amp; phenosyntax - more coming...</xs:documentation>
+          <xs:documentation>for now just 2 dataadapters, phenoxml &amp; phenosyntax</xs:documentation>
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:token">
@@ -28,7 +28,17 @@
       <xs:sequence>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:ontology"/>
       </xs:sequence>
-      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="name" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="Pub"/>
+            <xs:enumeration value="Genotype"/>
+            <xs:enumeration value="Genetic Context"/>
+            <xs:enumeration value="Entity"/>
+            <xs:enumeration value="Quality"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="type" use="required">
         <xs:simpleType>
           <xs:restriction base="xs:token">

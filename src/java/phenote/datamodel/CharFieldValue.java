@@ -31,7 +31,8 @@ public class CharFieldValue {
     charFieldEnum = e;
   }
 
-  public String getName() {
+  // maybe this should be called getString??? why getName???
+  public String getName() { 
     if (!isOboClass)
       return stringValue;
     if (oboClassValue != null) // obo class may not be set yet
@@ -41,7 +42,13 @@ public class CharFieldValue {
 
   OBOClass getOboClass() { return oboClassValue; }
 
-  public void editModel() { charFieldEnum.setValue(character,this); }
+  public void editModel() {
+    if (charFieldEnum == null)
+      System.out.println("ERROR no datamodel associated with configuration, cant set"+
+                         " value");
+    else
+      charFieldEnum.setValue(character,this);
+  }
 
   public String toString() { return getName(); }
 }

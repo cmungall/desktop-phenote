@@ -36,13 +36,24 @@ public class PhenoSyntaxChar {
       return ""; //??
     }
     StringBuffer sb = new StringBuffer();
+
+    if (character.hasPub())
+      sb.append("PUB=").append(character.getPub());
     // Genotype - not strictly part of pheno syntax but lets face it we need it
     // i would say its an omission from syntax
-    sb.append("GT= ").append(character.getGenotype());
+    sb.append(" GT=").append(character.getGenotype());
     if (character.hasGeneticContext())
-      sb.append(" GC= ").append(idPrefixAndName(character.getGeneticContext()));
-    sb.append(" E= ").append(idPrefixAndName(character.getEntity()));
-    sb.append(" Q= ").append(idPrefixAndName(character.getQuality()));
+      sb.append(" GC=").append(idPrefixAndName(character.getGeneticContext()));
+    if (character.getEntity() == null) {
+      System.out.println("Error: character has no entity, ignoring");
+      return "";
+    }
+    sb.append(" E=").append(idPrefixAndName(character.getEntity()));
+    if (character.getQuality() == null) {
+      System.out.println("Error: character has no quality, ignoring");
+      return "";
+    }
+    sb.append(" Q=").append(idPrefixAndName(character.getQuality()));
 
     return sb.toString();
   }
@@ -56,6 +67,7 @@ public class PhenoSyntaxChar {
 
   /** for GO:12345 returns GO: - with colon! */
   private String getIdPrefix(OBOClass term) {
+    if (term == null) return ""; // shouldnt happen
     String id = term.getID();
     int colonIndex = id.indexOf(":");
     return id.substring(0,colonIndex+1); // +1 retain colon

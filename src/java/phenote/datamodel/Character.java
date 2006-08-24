@@ -9,12 +9,15 @@ public class Character implements CharacterI, Cloneable {
 //   private String entity="";
 //   private String quality="";
 //   private String geneticContext="";
+  private String pub;
   private String genotype=""; // eventually Genotype class
   // OboClass? OntologyTerm?...
   private OBOClass entity; // CharFieldValue?
   private OBOClass quality;
   private OBOClass geneticContext;
 
+  public String getPub() { return pub; }
+  public boolean hasPub() { return pub!=null && !pub.equals(""); }
   public String getGenotype() { return genotype; }
   public OBOClass getEntity() { return entity; }
   public OBOClass getQuality() { return quality; }
@@ -29,6 +32,7 @@ public class Character implements CharacterI, Cloneable {
   public String getGeneticContextName() { return geneticContext.getName(); }
 
 
+  public void setPub(String p ) { pub = p; }
   public void setGenotype(String gt) { genotype = gt; }
   public void setEntity(OBOClass e) { entity = e; }
   public void setQuality(OBOClass p) { quality = p; }
