@@ -25,6 +25,8 @@
   <property name="jarfile" value="jars/phenote.jar"/>
   <property name="obo" value="obo-files" />
   <property name="conf" value="conf" />
+  <!-- override this from command line with  -DCONF-FILE=initial-zfin.cfg -->
+  <property name="CONF_FILE" value="initial-flybase.cfg"/>
 
   <!-- The init target makes sure that the prerequisite directories exist. -->
   <target name="init">
@@ -80,6 +82,68 @@
         </classpath>
      </java>
    </target>
+
+  <target name="zfin" depends="compile">
+     <java classname="phenote.gui.Phenote" fork="yes" jvmargs="-Xmx120M">
+         <!-- arg value="-c configfilehereventually"/ -->
+         <arg value="-c"/>
+         <arg value="initial-zfin.cfg"/>
+        <classpath>
+          <pathelement path="${classfiles}"/>
+          <fileset dir="${lib}">
+             <include name="*.jar"/>
+             <exclude name="phenote.jar"/>
+          </fileset>
+        </classpath>
+     </java>
+   </target>
+
+  <target name="fly" depends="compile">
+     <java classname="phenote.gui.Phenote" fork="yes" jvmargs="-Xmx120M">
+         <!-- arg value="-c configfilehereventually"/ -->
+         <arg value="-c"/>
+         <arg value="initial-flybase.cfg"/>
+        <classpath>
+          <pathelement path="${classfiles}"/>
+          <fileset dir="${lib}">
+             <include name="*.jar"/>
+             <exclude name="phenote.jar"/>
+          </fileset>
+        </classpath>
+     </java>
+   </target>
+
+  <target name="obd" depends="compile">
+     <java classname="phenote.gui.Phenote" fork="yes" jvmargs="-Xmx120M">
+         <!-- arg value="-c configfilehereventually"/ -->
+         <arg value="-c"/>
+         <arg value="obd.cfg"/>
+        <classpath>
+          <pathelement path="${classfiles}"/>
+          <fileset dir="${lib}">
+             <include name="*.jar"/>
+             <exclude name="phenote.jar"/>
+          </fileset>
+        </classpath>
+     </java>
+   </target>
+
+   <target name="run-conf" depends="compile">
+     <java classname="phenote.gui.Phenote" fork="yes" jvmargs="-Xmx120M">
+         <!-- arg value="-c configfilehereventually"/ -->
+         <arg value="-c"/>
+         <arg value="${CONF_FILE}"/>
+        <classpath>
+          <pathelement path="${classfiles}"/>
+          <fileset dir="${lib}">
+             <include name="*.jar"/>
+             <exclude name="phenote.jar"/>
+          </fileset>
+        </classpath>
+     </java>
+   </target>
+  
+
 
   <target name="test" depends="build-test">
      <java classname="org.junit.runner.JUnitCore" fork="yes">
