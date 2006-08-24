@@ -25,7 +25,7 @@ import phenote.datamodel.SearchParamsI;
 import phenote.config.FieldConfig;
 
 /**
- * TermPanel holds all the fileds for the terms - Genotype, Entity/Anatomy, QUALITY.
+ * TermPanel holds all the fields for the terms - Genotype, Entity/Anatomy, QUALITY.
  * Can be populated by hand (Genotype), or  selection of instance in completion list. 
  rename FieldPanel or CharFieldPanel?
  also has SearchParamPanel.
@@ -82,8 +82,8 @@ class TermPanel extends JPanel {
   }
 
   /** if a field has more than one ontology than theres a combo to choose the ontology*/
-  void addOntologyChooser(JComboBox ontologyChooser) {
-    
+  void addOntologyChooser(JComboBox ontologyChooser,Container parent) {
+    parent.add(ontologyChooser,makeOntologyChooserConstraint());
   }
   
   void addFieldGui(JComponent comp,Container parent) {
@@ -134,6 +134,10 @@ class TermPanel extends JPanel {
   }
 
 }
+
+
+// GARBAGE - DELETE
+
     // load up terms for term completion
     /// Ontology.init(); // hmmmm.... now initializes with get - thread!
     //return entityField.getAutoComboBox();

@@ -54,7 +54,7 @@ class AutoComboBox extends JComboBox {
     // this will probably throw errors if non metal look & feel is used
     setUI(new MetalListComboUI());
 
-    this.ontology = ontology;
+    setOntology(ontology);
     searchParams = sp; // singleton access? part of ontology?
     setEditable(true);
     AutoTextFieldEditor autoTextFieldEditor = new AutoTextFieldEditor();
@@ -73,6 +73,8 @@ class AutoComboBox extends JComboBox {
     //setUI(new BasicComboBoxUI()); // now setting metal look & feel for whole app
 
   }
+
+  void setOntology(Ontology o) { ontology = o; }
 
   //void setSearchParams(SearchParamsI sp) { searchParams = sp; }
 

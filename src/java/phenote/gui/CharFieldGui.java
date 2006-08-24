@@ -1,5 +1,7 @@
 package phenote.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Container;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -11,6 +13,7 @@ import phenote.datamodel.CharField;
 import phenote.datamodel.CharField.CharFieldEnum;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.Ontology;
+import phenote.datamodel.OntologyManager;
 import phenote.datamodel.SearchParamsI;
 import phenote.edit.EditManager;
 import phenote.edit.UpdateTransaction;
@@ -20,27 +23,15 @@ import phenote.gui.selection.SelectionManager;
 
 /** fields can either be text fields for free text or combo boxes if have 
     ontology to browse - CharFieldGui does either - with get/setText - hides the
-    details of the gui - just a filed that gives text - 
-    make separate class? yes - rename CharFieldGuiGui? */
+    details of the gui - just a field that gives text */
 class CharFieldGui {
   private AutoComboBox comboBox;
   private JTextField textField;
   private boolean isCombo = false;
   private CharField charField;
-  //private SearchParamsI searchParams;
   private TermPanel termPanel;
+  private JComboBox ontologyChooserCombo;
 
-//   /** No ontology -> free text field */
-//   private CharFieldGui(String label,Container parent) {
-//     initTextField(label,parent);
-//   }
-//   /** Fields with ontology -> combo box */
-//   private CharFieldGui(Ontology ontology, Container parent) {
-//     if (ontology == null) // shouldnt happen
-//       initTextField(null,parent); 
-//     else
-//       initCombo(ontology,parent);
-//   }
 
   CharFieldGui(CharField charField,Container parent, TermPanel tp) {
     this.charField = charField;
@@ -76,14 +67,6 @@ class CharFieldGui {
     setText(v);
   }
 
-//   private void initCombo(Ontology ontology, Container parent) {
-//     // attach search params to ontology?
-//     comboBox = new AutoComboBox(ontology,termPanel.getSearchParams());
-//     // refactor... mvc - ACB talk directly to pheno model?
-//     //comboBox.addActionListener(new ComboBoxActionListener(ontology.getName(),comboBox));
-//     //parent.add(comboBox,makeFieldConstraint());
-//     termPanel.addFieldGui(comboBox,parent);
-//   }
 
 
 
@@ -107,12 +90,13 @@ class CharFieldGui {
   }
 
   private void initOntologyChooser(CharField charField,Container parent) {
-    JComboBox ontologyChooserCombo = new JComboBox();
+    ontologyChooserCombo = new JComboBox();
     // add listener....
     for (Ontology o : charField.getOntologyList()) {
       ontologyChooserCombo.addItem(o.getName());
     }
-    termPanel.addOntologyChooser(ontologyChooserCombo);
+    ontologyChooserCombo.addActionListener(new OntologyChooserListener());
+    termPanel.addOntologyChooser(ontologyChooserCombo,parent);
   }
 
   private void initTextField(String label,Container parent) {
@@ -125,10 +109,6 @@ class CharFieldGui {
     termPanel.addFieldGui(textField,parent);
   }
 
-//   private void addDocumentListener(DocumentListener dl) {
-//     if (!isCombo)
-//       textField.getDocument().addDocumentListener(dl);
-//   }
 
   void setText(String text) {
     // set/getText interface to combo & text field?
@@ -168,8 +148,42 @@ class CharFieldGui {
       setValueFromChar(e.getCharacter());
     }
   }
+
+  private class OntologyChooserListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      String s = ontologyChooserCombo.getSelectedItem().toString();
+      Ontology o = OntologyManager.getOntologyForName(s);
+      comboBox.setOntology(o);
+    }
+  }
+
 }
 
+//   private void addDocumentListener(DocumentListener dl) {
+//     if (!isCombo)
+//       textField.getDocument().addDocumentListener(dl);
+//   }
+
+//   private void initCombo(Ontology ontology, Container parent) {
+//     // attach search params to ontology?
+//     comboBox = new AutoComboBox(ontology,termPanel.getSearchParams());
+//     // refactor... mvc - ACB talk directly to pheno model?
+//     //comboBox.addActionListener(new ComboBoxActionListener(ontology.getName(),comboBox));
+//     //parent.add(comboBox,makeFieldConstraint());
+//     termPanel.addFieldGui(comboBox,parent);
+//   }
+
+//   /** No ontology -> free text field */
+//   private CharFieldGui(String label,Container parent) {
+//     initTextField(label,parent);
+//   }
+//   /** Fields with ontology -> combo box */
+//   private CharFieldGui(Ontology ontology, Container parent) {
+//     if (ontology == null) // shouldnt happen
+//       initTextField(null,parent); 
+//     else
+//       initCombo(ontology,parent);
+//   }
 
 //   /** Listens for actions from combo boxes and puts terms into table 
 //    * actions come from mouse select of term as well as return & tab 
