@@ -1,21 +1,19 @@
 format-version: 1.0
-date: 28:07:2006 00:43
-saved-by: George Gkoutos
-auto-generated-by: OBO-Edit 1.002
+date: 11:08:2006 17:21
+saved-by: gg295
+auto-generated-by: OBO-Edit 1.000-beta16
 default-namespace: unknown
-
-
 
 [Term]
 id: PATO:0000000
 name: pato
 namespace: attribute
+is_obsolete: true
 
 [Term]
 id: PATO:0000001
 name: quality
 namespace: attribute
-is_a: PATO:0000000 ! pato
 
 [Term]
 id: PATO:0000002
@@ -33,7 +31,8 @@ is_obsolete: true
 id: PATO:0000004
 name: mobility
 namespace: attribute
-is_a: PATO:0000001 ! quality
+def: "The quality of moving freely." [XX:<new dbxref>]
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000005
@@ -57,7 +56,8 @@ is_obsolete: true
 id: PATO:0000008
 name: speed
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+def: "Rate of change of the position of an object." [XX:<new dbxref>]
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0000009
@@ -93,31 +93,33 @@ is_obsolete: true
 id: PATO:0000014
 name: color
 namespace: attribute
-is_a: PATO:0000001 ! quality
+def: "Color is a property of light that is determined by its wavelength (or by its composition as a blend of several wavelengths). " [Wikipedia:]
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000015
 name: color hue
 namespace: attribute
-is_a: PATO:0000014 ! color
+is_obsolete: true
 
 [Term]
 id: PATO:0000016
 name: color intensity
 namespace: attribute
-is_a: PATO:0000014 ! color
+is_obsolete: true
 
 [Term]
 id: PATO:0000017
 name: color saturation
 namespace: attribute
-is_a: PATO:0000014 ! color
+is_obsolete: true
 
 [Term]
 id: PATO:0000018
 name: flourescence
 namespace: attribute
-is_a: PATO:0000014 ! color
+def: "Fluorescence is a luminescence that is mostly found as an optical phenomenon in cold bodies, in which the molecular absorption of a photon triggers the emission of a lower-energy photon with a longer wavelength." [Wikipedia:]
+is_obsolete: true
 
 [Term]
 id: PATO:0000019
@@ -133,9 +135,10 @@ is_a: PATO:0000014 ! color
 
 [Term]
 id: PATO:0000021
-name: compatability
+name: compatibility
 namespace: attribute
-is_a: PATO:0000001 ! quality
+def: "The quality of having or lacking the ability harmonious coexistence." [gg:]
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000022
@@ -159,7 +162,7 @@ is_obsolete: true
 id: PATO:0000025
 name: composition
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000026
@@ -207,7 +210,8 @@ is_obsolete: true
 id: PATO:0000033
 name: concentration
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+def: "The proportion of the whole a subtance makes up in a mixture of two substances." [XX:<new dbxref>]
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0000034
@@ -244,13 +248,15 @@ is_obsolete: true
 id: PATO:0000039
 name: direction
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+def: "The orientation of a line in space." [XX:<new dbxref>]
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0000040
 name: distance
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+def: "The extent of space between two objects or places." [XX:<new dbxref>]
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0000041
@@ -268,13 +274,14 @@ is_obsolete: true
 id: PATO:0000043
 name: flavor
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000044
 name: frequency
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+def: "The number of times something happens in a period of time." [XX:<new dbxref>]
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0000045
@@ -292,19 +299,21 @@ is_obsolete: true
 id: PATO:0000047
 name: gender
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000048
 name: hardness
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+def: "The constant of proportionality of the force on an elastic body to the body's extension." [XX:<new dbxref>]
+related_synonym: "stiffness" []
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0000049
 name: intensity
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000050
@@ -316,7 +325,7 @@ is_a: PATO:0000165 ! time
 id: PATO:0000051
 name: morphology
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000052
@@ -346,7 +355,7 @@ is_obsolete: true
 id: PATO:0000056
 name: nutritional
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000057
@@ -358,7 +367,7 @@ is_a: PATO:0001226 ! quantitative
 id: PATO:0000058
 name: odor
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000059
@@ -370,7 +379,7 @@ is_a: PATO:0000047 ! gender
 id: PATO:0000060
 name: pattern
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000061
@@ -406,7 +415,8 @@ is_obsolete: true
 id: PATO:0000066
 name: pilosity
 namespace: attribute
-is_a: PATO:0000001 ! quality
+def: "The quality of having hair." [XX:<new dbxref>]
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000067
@@ -418,7 +428,7 @@ is_obsolete: true
 id: PATO:0000068
 name: qualitative
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000069
@@ -437,6 +447,12 @@ id: PATO:0000071
 name: relative_quantity
 namespace: attribute
 is_a: PATO:0001226 ! quantitative
+
+[Term]
+id: PATO:0000072
+name: quality
+namespace: attribute
+is_obsolete: true
 
 [Term]
 id: PATO:0000073
@@ -466,13 +482,13 @@ is_obsolete: true
 id: PATO:0000077
 name: response
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000078
 name: rhythym
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000079
@@ -486,7 +502,7 @@ name: amplitude
 namespace: attribute
 def: "The size of the maximum displacement from the 'normal' position, when periodic motion is taking place" [PATO:gg]
 is_a: PATO:0000078 ! rhythym
-is_a: PATO:0001018 ! physical measure
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0000081
@@ -517,7 +533,7 @@ is_obsolete: true
 id: PATO:0000085
 name: sensitivity
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000086
@@ -721,7 +737,8 @@ is_obsolete: true
 id: PATO:0000119
 name: height
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+def: "The vertical dimension of extension." [XX:<new dbxref>]
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0000120
@@ -739,7 +756,8 @@ is_obsolete: true
 id: PATO:0000122
 name: length
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+def: "The distance between two points." [XX:<new dbxref>]
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0000123
@@ -757,7 +775,8 @@ is_obsolete: true
 id: PATO:0000125
 name: mass
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+def: "The amount of matter in an object." [XX:<new dbxref>]
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0000126
@@ -775,6 +794,7 @@ is_obsolete: true
 id: PATO:0000128
 name: weight
 namespace: attribute
+def: "The size of the force which gravity exerts on a particular object. " [XX:<new dbxref>]
 is_a: PATO:0001035 ! force
 
 [Term]
@@ -799,14 +819,15 @@ is_obsolete: true
 id: PATO:0000132
 name: spatial
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000133
 name: angle
 namespace: attribute
+def: "The measure of a change in direction." [XX:<new dbxref>]
 is_a: PATO:0000132 ! spatial
-is_a: PATO:0001018 ! physical measure
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0000134
@@ -885,7 +906,8 @@ is_obsolete: true
 id: PATO:0000146
 name: temperature
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+def: "The physical quality of the thermal energy of a system." [gg:]
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0000147
@@ -921,7 +943,7 @@ is_obsolete: true
 id: PATO:0000152
 name: threshold
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000153
@@ -945,7 +967,7 @@ is_obsolete: true
 id: PATO:0000156
 name: temporal
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000157
@@ -999,7 +1021,7 @@ is_obsolete: true
 id: PATO:0000165
 name: time
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0000166
@@ -1023,7 +1045,7 @@ is_obsolete: true
 id: PATO:0000169
 name: viability
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000170
@@ -1119,31 +1141,33 @@ is_obsolete: true
 id: PATO:0000185
 name: balance
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000186
 name: behavioral quality
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000187
 name: consumption
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000188
 name: coordination
 namespace: attribute
-is_a: PATO:0000001 ! quality
+def: "The quality of having or lacking skilful and effective interation of movemment." [gg:]
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000189
 name: discrimination
 namespace: attribute
-is_a: PATO:0000001 ! quality
+def: "The quality of perceiving differences between two or more stimuli." [XX:<new dbxref>]
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000190
@@ -1575,7 +1599,7 @@ is_obsolete: true
 id: PATO:0000261
 name: maturity
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000262
@@ -1653,7 +1677,8 @@ is_obsolete: true
 id: PATO:0000274
 name: fertility
 namespace: attribute
-is_a: PATO:0000001 ! quality
+def: "The quality of initiating, sustaining, or supporting reproduction." [XX:<new dbxref>]
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000275
@@ -1671,6 +1696,7 @@ is_obsolete: true
 id: PATO:0000277
 name: female fertility
 namespace: attribute
+def: "The quality of female of initiating, sustaining, or supporting reproduction." [XX:<new dbxref>]
 is_a: PATO:0000274 ! fertility
 
 [Term]
@@ -1683,6 +1709,7 @@ is_obsolete: true
 id: PATO:0000279
 name: male fertility
 namespace: attribute
+def: "The quality of male of initiating, sustaining, or supporting reproduction." [XX:<new dbxref>]
 is_a: PATO:0000274 ! fertility
 
 [Term]
@@ -1803,12 +1830,14 @@ is_obsolete: true
 id: PATO:0000299
 name: mobile
 namespace: attribute
+def: "The quality of being incapable to move freely." [XX:<new dbxref>]
 is_a: PATO:0000004 ! mobility
 
 [Term]
 id: PATO:0000300
 name: immobile
 namespace: attribute
+def: "The quality of being capable to move freely." [XX:<new dbxref>]
 is_a: PATO:0000004 ! mobility
 
 [Term]
@@ -1827,12 +1856,14 @@ is_obsolete: true
 id: PATO:0000303
 name: fast speed
 namespace: attribute
+def: "A speed which is relative high." [XX:<new dbxref>]
 is_a: PATO:0000008 ! speed
 
 [Term]
 id: PATO:0000304
 name: slow speed
 namespace: attribute
+def: "A speed which is relative low." [XX:<new dbxref>]
 is_a: PATO:0000008 ! speed
 
 [Term]
@@ -1911,55 +1942,61 @@ is_obsolete: true
 id: PATO:0000317
 name: black
 namespace: attribute
-is_a: PATO:0000015 ! color hue
+def: "Producing or reflecting comparatively little light and having no predominant hue." [Dictionary:http://dictionary.reference.com/]
+is_a: PATO:0000014 ! color
 
 [Term]
 id: PATO:0000318
 name: blue
 namespace: attribute
-is_a: PATO:0000015 ! color hue
+def: "A hue of that portion of the visible spectrum lying between green and indigo, evoked in the human observer by radiant energy with wavelengths of approximately 420 to 490 nanometers;" [Dictionary:http://dictionary.reference.com/]
+is_a: PATO:0000014 ! color
 
 [Term]
 id: PATO:0000319
 name: cyan
 namespace: attribute
-is_a: PATO:0000015 ! color hue
+is_a: PATO:0000014 ! color
 
 [Term]
 id: PATO:0000320
 name: green
 namespace: attribute
-is_a: PATO:0000015 ! color hue
+def: "A hue of that portion of the visible spectrum lying between yellow and blue, evoked in the human observer by radiant energy with wavelengths of approximately 490 to 570 nanometers;" [Dictionary:http://dictionary.reference.com/]
+is_a: PATO:0000014 ! color
 
 [Term]
 id: PATO:0000321
 name: magenta
 namespace: attribute
-is_a: PATO:0000015 ! color hue
+is_a: PATO:0000322 ! red
 
 [Term]
 id: PATO:0000322
 name: red
 namespace: attribute
-is_a: PATO:0000015 ! color hue
+def: "A hue of the long-wave end of the visible spectrum, evoked in the human observer by radiant energy with wavelengths of approximately 630 to 750 nanometers;" [Dictionary:http://dictionary.reference.com/]
+is_a: PATO:0000014 ! color
 
 [Term]
 id: PATO:0000323
 name: white
 namespace: attribute
-is_a: PATO:0000015 ! color hue
+def: "An achromatic color of maximum lightness; the color of objects that reflect nearly all light of all visible wavelengths;" [Dictionary:http://dictionary.reference.com/]
+is_a: PATO:0000014 ! color
 
 [Term]
 id: PATO:0000324
 name: yellow
 namespace: attribute
-is_a: PATO:0000015 ! color hue
+def: "A hue of that portion of the visible spectrum lying between orange and green, evoked in the human observer by radiant energy with wavelengths of approximately 570 to 590 nanometers" [Dictionary:http://dictionary.reference.com/]
+is_a: PATO:0000014 ! color
 
 [Term]
 id: PATO:0000325
 name: bright
 namespace: attribute
-is_a: PATO:0000017 ! color saturation
+is_obsolete: true
 
 [Term]
 id: PATO:0000326
@@ -1971,13 +2008,13 @@ is_obsolete: true
 id: PATO:0000327
 name: dark
 namespace: attribute
-is_a: PATO:0000017 ! color saturation
+is_obsolete: true
 
 [Term]
 id: PATO:0000328
 name: pale
 namespace: attribute
-is_a: PATO:0000017 ! color saturation
+is_obsolete: true
 
 [Term]
 id: PATO:0000329
@@ -2074,13 +2111,15 @@ is_obsolete: true
 id: PATO:0000344
 name: compatible
 namespace: attribute
-is_a: PATO:0000021 ! compatability
+def: "The quality of being capable of harmonious coexistence." [gg:]
+is_a: PATO:0000021 ! compatibility
 
 [Term]
 id: PATO:0000345
 name: incompatible
 namespace: attribute
-is_a: PATO:0000021 ! compatability
+def: "The quality of being incapable of harmonious coexistence." [gg:]
+is_a: PATO:0000021 ! compatibility
 
 [Term]
 id: PATO:0000346
@@ -2290,12 +2329,14 @@ is_obsolete: true
 id: PATO:0000380
 name: frequent
 namespace: attribute
+def: "A frequence which is relative high." [XX:<new dbxref>]
 is_a: PATO:0000044 ! frequency
 
 [Term]
 id: PATO:0000381
 name: infrequent
 namespace: attribute
+def: "A frequence which is relative low." [XX:<new dbxref>]
 is_a: PATO:0000044 ! frequency
 
 [Term]
@@ -2326,12 +2367,14 @@ is_obsolete: true
 id: PATO:0000386
 name: hard
 namespace: attribute
+def: "The quality of being rigid and resistant to pressure." [XX:<new dbxref>]
 is_a: PATO:0000048 ! hardness
 
 [Term]
 id: PATO:0000387
 name: soft
 namespace: attribute
+def: "The quality of giving little resistance to pressure " [XX:<new dbxref>]
 is_a: PATO:0000048 ! hardness
 
 [Term]
@@ -2639,7 +2682,9 @@ is_obsolete: true
 id: PATO:0000438
 name: invariant
 namespace: attribute
-is_a: PATO:0000060 ! pattern
+def: "The state of not having or exhibiting variation." [Dictionary:http://dictionary.reference.com/]
+related_synonym: "constant" []
+is_a: PATO:0001303 ! variability
 
 [Term]
 id: PATO:0000439
@@ -2729,19 +2774,20 @@ is_obsolete: true
 id: PATO:0000453
 name: glabrous
 namespace: attribute
+def: "The quality of having no hairs, projections, or pubescence" [XX:<new dbxref>]
 is_a: PATO:0000066 ! pilosity
 
 [Term]
 id: PATO:0000454
 name: hairy
 namespace: attribute
+def: "The quality of being covered with hair or hairlike projections" [XX:<new dbxref>]
 is_a: PATO:0000066 ! pilosity
 
 [Term]
 id: PATO:0000455
 name: pubescent
 namespace: attribute
-is_a: PATO:0000066 ! pilosity
 is_a: PATO:0000261 ! maturity
 
 [Term]
@@ -3435,12 +3481,14 @@ is_obsolete: true
 id: PATO:0000569
 name: short height
 namespace: attribute
+def: "A height which is relative high." [XX:<new dbxref>]
 is_a: PATO:0000119 ! height
 
 [Term]
 id: PATO:0000570
 name: tall height
 namespace: attribute
+def: "A height which is relative small." [XX:<new dbxref>]
 is_a: PATO:0000119 ! height
 
 [Term]
@@ -3459,12 +3507,14 @@ is_obsolete: true
 id: PATO:0000573
 name: long length
 namespace: attribute
+def: "A length which is relative large." [XX:<new dbxref>]
 is_a: PATO:0000122 ! length
 
 [Term]
 id: PATO:0000574
 name: short length
 namespace: attribute
+def: "A length which is relative small." [XX:<new dbxref>]
 related_synonym: "shortened" []
 is_a: PATO:0000122 ! length
 
@@ -3490,12 +3540,14 @@ is_obsolete: true
 id: PATO:0000578
 name: large mass
 namespace: attribute
+def: "A mass which is relative large." [XX:<new dbxref>]
 is_a: PATO:0000125 ! mass
 
 [Term]
 id: PATO:0000579
 name: small mass
 namespace: attribute
+def: "A mass which is relative small." [XX:<new dbxref>]
 is_a: PATO:0000125 ! mass
 
 [Term]
@@ -3514,12 +3566,14 @@ is_obsolete: true
 id: PATO:0000582
 name: heavy
 namespace: attribute
+def: "A weight which is realtive high." [XX:<new dbxref>]
 is_a: PATO:0000128 ! weight
 
 [Term]
 id: PATO:0000583
-name: light
+name: light weight
 namespace: attribute
+def: "A weight which is realtive low." [XX:<new dbxref>]
 is_a: PATO:0000128 ! weight
 
 [Term]
@@ -3598,12 +3652,14 @@ is_obsolete: true
 id: PATO:0000595
 name: large volume
 namespace: attribute
+def: "A volume which is relative high." [XX:<new dbxref>]
 is_a: PATO:0000918 ! volume
 
 [Term]
 id: PATO:0000596
 name: small volume
 namespace: attribute
+def: "A volume which is relative low." [XX:<new dbxref>]
 is_a: PATO:0000918 ! volume
 
 [Term]
@@ -3622,12 +3678,14 @@ is_obsolete: true
 id: PATO:0000599
 name: narrow
 namespace: attribute
+def: "A width which is relative small." [XX:<new dbxref>]
 is_a: PATO:0000921 ! width
 
 [Term]
 id: PATO:0000600
 name: wide
 namespace: attribute
+def: "A width which is relative large." [XX:<new dbxref>]
 is_a: PATO:0000921 ! width
 
 [Term]
@@ -3824,6 +3882,7 @@ is_a: PATO:0000140 ! placement
 id: PATO:0000632
 name: symmetrical
 namespace: attribute
+def: "The quality of lacking symmetry." [XX:<new dbxref>]
 is_a: PATO:0000965 ! symmetry
 
 [Term]
@@ -4094,12 +4153,14 @@ is_obsolete: true
 id: PATO:0000677
 name: cold
 namespace: attribute
+def: "A temperature which is relative low" [gg:]
 is_a: PATO:0000146 ! temperature
 
 [Term]
 id: PATO:0000678
 name: hot
 namespace: attribute
+def: "A temperature which is relative high." [gg:]
 is_a: PATO:0000146 ! temperature
 
 [Term]
@@ -4646,30 +4707,35 @@ is_a: PATO:0000187 ! consumption
 id: PATO:0000769
 name: coordinated
 namespace: attribute
+def: "The quality of having skilful and effective interation of movemment." [gg:]
 is_a: PATO:0000188 ! coordination
 
 [Term]
 id: PATO:0000770
 name: uncoordinated
 namespace: attribute
+def: "The quality of lacking skilful and effective interation of movemment." [gg:]
 is_a: PATO:0000188 ! coordination
 
 [Term]
 id: PATO:0000771
 name: aversion
 namespace: attribute
-is_a: PATO:0000189 ! discrimination
+def: "The quality of disliking a perceived stimuli." [XX:<new dbxref>]
+is_a: PATO:0000773 ! preference
 
 [Term]
 id: PATO:0000772
 name: indifference
 namespace: attribute
-is_a: PATO:0000189 ! discrimination
+def: "The quality of having no preference to a perceived stimuli." [XX:<new dbxref>]
+is_a: PATO:0000773 ! preference
 
 [Term]
 id: PATO:0000773
 name: preference
 namespace: attribute
+def: "The quality of liking a perceived stimuli." [XX:<new dbxref>]
 is_a: PATO:0000189 ! discrimination
 
 [Term]
@@ -5360,6 +5426,7 @@ is_obsolete: true
 id: PATO:0000888
 name: female fertile
 namespace: attribute
+def: "The quality of female of being capable of initiating, sustaining, or supporting reproduction." [XX:<new dbxref>]
 is_a: PATO:0000277 ! female fertility
 
 [Term]
@@ -5372,6 +5439,7 @@ is_obsolete: true
 id: PATO:0000890
 name: male sterile
 namespace: attribute
+def: "The quality of male of being incapable of initiating, sustaining, or supporting reproduction." [XX:<new dbxref>]
 related_synonym: "male infertile" []
 is_a: PATO:0000279 ! male fertility
 
@@ -5379,12 +5447,14 @@ is_a: PATO:0000279 ! male fertility
 id: PATO:0000891
 name: male fertile
 namespace: attribute
+def: "The quality of male of being capable of initiating, sustaining, or supporting reproduction." [XX:<new dbxref>]
 is_a: PATO:0000279 ! male fertility
 
 [Term]
 id: PATO:0000892
 name: female sterile
 namespace: attribute
+def: "The quality of female of being incapable of initiating, sustaining, or supporting reproduction." [XX:<new dbxref>]
 related_synonym: "female infertile" []
 is_a: PATO:0000277 ! female fertility
 
@@ -5528,7 +5598,7 @@ is_obsolete: true
 id: PATO:0000915
 name: thickness
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0000916
@@ -5546,7 +5616,8 @@ is_obsolete: true
 id: PATO:0000918
 name: volume
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+def: "The amount of 3-dimensional space an object occupies." [XX:<new dbxref>]
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0000919
@@ -5564,8 +5635,9 @@ is_obsolete: true
 id: PATO:0000921
 name: width
 namespace: attribute
-related_synonym: "attribute:breadth" []
-is_a: PATO:0001018 ! physical measure
+def: "The distance from one side of an object to another side which is opposite. \n\n" [XX:<new dbxref>]
+related_synonym: "breadth" []
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0000922
@@ -5729,9 +5801,8 @@ is_a: PATO:0000052 ! shape
 
 [Term]
 id: PATO:0000948
-name: hearted
+name: heart shaped
 namespace: attribute
-def: "Heart shaped." [PATO:gg]
 is_a: PATO:0000052 ! shape
 
 [Term]
@@ -5745,50 +5816,55 @@ is_a: PATO:0000052 ! shape
 id: PATO:0000950
 name: grey
 namespace: attribute
-is_a: PATO:0000015 ! color hue
+def: "An achromatic color of any lightness between the extremes of black and white." [Dictionary:http://dictionary.reference.com/]
+is_a: PATO:0000014 ! color
 
 [Term]
 id: PATO:0000951
 name: purple
 namespace: attribute
-is_a: PATO:0000015 ! color hue
+def: "A colour that falls about midway between red and blue in hue" [Dictionary:http://dictionary.reference.com/]
+is_a: PATO:0000014 ! color
 
 [Term]
 id: PATO:0000952
 name: brown
 namespace: attribute
-is_a: PATO:0000015 ! color hue
+def: "A colour between red and yellow in hue that are medium to low in lightness and low to moderate in saturation." [Dictionary:http://dictionary.reference.com/]
+is_a: PATO:0000014 ! color
 
 [Term]
 id: PATO:0000953
 name: orange
 namespace: attribute
-is_a: PATO:0000015 ! color hue
+is_a: PATO:0000014 ! color
 
 [Term]
 id: PATO:0000954
 name: pink
 namespace: attribute
-is_a: PATO:0000015 ! color hue
+is_a: PATO:0000322 ! red
 
 [Term]
 id: PATO:0000955
 name: fertile
 namespace: attribute
+def: "The quality of being capable of initiating, sustaining, or supporting reproduction." [XX:<new dbxref>]
 is_a: PATO:0000274 ! fertility
 
 [Term]
 id: PATO:0000956
 name: sterile
 namespace: attribute
+def: "The quality of being incapable of initiating, sustaining, or supporting reproduction." [XX:<new dbxref>]
 is_a: PATO:0000274 ! fertility
 
 [Term]
 id: PATO:0000957
 name: opacity
 namespace: attribute
-def: "The property of not permitting the passage of electromagnetic radiatio" [PATO:gg]
-is_a: PATO:0000001 ! quality
+def: "The property of not permitting the passage of electromagnetic radiation." [PATO:gg]
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000958
@@ -5839,7 +5915,8 @@ is_a: PATO:0000957 ! opacity
 id: PATO:0000965
 name: symmetry
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+def: "The quality of correspondence in size, shape, and relative position of parts on opposite sides of a dividing line or median plane or about a center or axis." [XX:<new dbxref>]
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0000966
@@ -5870,8 +5947,8 @@ is_a: PATO:0000117 ! size
 id: PATO:0000970
 name: permeability
 namespace: attribute
-def: "The property of something that can be pervaded by a liquid (as by osmosis or diffusion)" [PATO:gg]
-is_a: PATO:0000001 ! quality
+def: "The quality of being pervaded by a liquid (as by osmosis or diffusion)" [PATO:gg]
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000971
@@ -5889,7 +5966,7 @@ is_obsolete: true
 id: PATO:0000973
 name: porosity
 namespace: attribute
-def: "The property of being porous; being able to absorb fluids" [PATO:gg]
+def: "The quality of admitting the passage of gas or liquid through pores or interstices." [PATO:gg]
 is_a: PATO:0000970 ! permeability
 
 [Term]
@@ -5944,25 +6021,28 @@ is_obsolete: true
 id: PATO:0000982
 name: permeable
 namespace: attribute
+def: "The quality of being capable to be pervaded by a liquid (as by osmosis or diffusion)." [XX:<new dbxref>]
 is_a: PATO:0000970 ! permeability
 
 [Term]
 id: PATO:0000983
 name: impermeable
 namespace: attribute
+def: "The quality of being incapable to be pervaded by a liquid (as by osmosis or diffusion)." [XX:<new dbxref>]
 is_a: PATO:0000970 ! permeability
 
 [Term]
 id: PATO:0000984
 name: porous
 namespace: attribute
-def: "able to absorb fluids" [PATO:gg]
+def: "The quality of being capable of admitting the passage of gas or liquid through pores or interstices." [PATO:gg]
 is_a: PATO:0000973 ! porosity
 
 [Term]
 id: PATO:0000985
 name: nonporous
 namespace: attribute
+def: "The quality of being incpable of admitting the passage of gas or liquid through pores or interstices." [XX:<new dbxref>]
 is_a: PATO:0000973 ! porosity
 
 [Term]
@@ -6005,8 +6085,8 @@ is_obsolete: true
 id: PATO:0000992
 name: viscosity
 namespace: attribute
-def: "a property of fluids describing their internal resistance to flow" [PATO:gg]
-is_a: PATO:0001018 ! physical measure
+def: "The quality of fluids describing their internal resistance to flow" [PATO:gg]
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0000993
@@ -6042,7 +6122,7 @@ is_obsolete: true
 id: PATO:0000998
 name: viscous
 namespace: attribute
-def: "a relatively high resistance to flow." [PATO:gg]
+def: "A relatively high resistance to flow." [PATO:gg]
 is_a: PATO:0000992 ! viscosity
 
 [Term]
@@ -6162,58 +6242,63 @@ is_obsolete: true
 
 [Term]
 id: PATO:0001018
-name: physical measure
+name: physical quality
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0001019
 name: density
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+def: "The amount of mass per unit of volume. " [XX:<new dbxref>]
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001020
 name: damage
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0001021
 name: energy
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+def: "The capacity of a body or system to do work." [XX:<new dbxref>]
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001022
 name: impulse
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+def: "The change in momentum of the body." [XX:<new dbxref>]
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001023
 name: momentum
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+def: "The velocity of an object multiplied by its mass." [XX:<new dbxref>]
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001024
 name: power
 namespace: attribute
 def: "The rate at which work is done" [PATO:gg]
-is_a: PATO:0001018 ! physical measure
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001025
 name: pressure
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+def: "Amount of force per unit area." [XX:<new dbxref>]
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001026
 name: work
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001027
@@ -6225,49 +6310,55 @@ is_obsolete: true
 id: PATO:0001028
 name: acceleration
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+def: "The rate of change of the speed or velocity of an object." [XX:<new dbxref>]
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001029
 name: efficiency
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001030
 name: flux
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001031
 name: elasticity
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+def: "The ratio of the body's extension to its original length. " [XX:<new dbxref>]
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001032
 name: position
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+def: "The particular portion of space occupied by a physical object." [XX:<new dbxref>]
+related_synonym: "location" []
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001033
 name: stiffness
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+is_obsolete: true
 
 [Term]
 id: PATO:0001034
 name: strain
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+def: "The relative change in length or volume of an object that is being stretched or squashed." [XX:<new dbxref>]
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001035
 name: force
 namespace: attribute
-is_a: PATO:0001018 ! physical measure
+def: "The external cause of acceleration, acting on an object." [XX:<new dbxref>]
+is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001036
@@ -6333,7 +6424,7 @@ is_obsolete: true
 id: PATO:0001046
 name: resistance
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0001047
@@ -6363,12 +6454,14 @@ is_obsolete: true
 id: PATO:0001051
 name: acute angle
 namespace: attribute
+def: "The angle which is less than 90 degrees." [XX:<new dbxref>]
 is_a: PATO:0000133 ! angle
 
 [Term]
 id: PATO:0001052
 name: obtuse angle
 namespace: attribute
+def: "The angle which is more than 180 degrees." [XX:<new dbxref>]
 is_a: PATO:0000133 ! angle
 
 [Term]
@@ -6387,6 +6480,7 @@ is_a: PATO:0000133 ! angle
 id: PATO:0001055
 name: reflex angle
 namespace: attribute
+def: "The angle that is greater than 180 degrees but less than 360 degrees." [XX:<new dbxref>]
 is_a: PATO:0000133 ! angle
 
 [Term]
@@ -7021,7 +7115,7 @@ is_obsolete: true
 
 [Term]
 id: PATO:0001161
-name: dilute
+name: diluted
 namespace: attribute
 is_a: PATO:0000033 ! concentration
 
@@ -7041,6 +7135,7 @@ is_obsolete: true
 id: PATO:0001164
 name: dense
 namespace: attribute
+def: "Relative high amount of mass per unit of volume. " [XX:<new dbxref>]
 is_a: PATO:0001019 ! density
 
 [Term]
@@ -7083,12 +7178,14 @@ is_obsolete: true
 id: PATO:0001171
 name: elastic
 namespace: attribute
+def: "The ratio of the body's extension to its original length that is larger than zero." [XX:<new dbxref>]
 is_a: PATO:0001031 ! elasticity
 
 [Term]
 id: PATO:0001172
 name: inelastic
 namespace: attribute
+def: "The ratio of the body's extension to its original length that equals to zero." [XX:<new dbxref>]
 is_a: PATO:0001031 ! elasticity
 
 [Term]
@@ -7413,13 +7510,14 @@ is_obsolete: true
 id: PATO:0001226
 name: quantitative
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0001227
 name: variant
 namespace: attribute
-is_a: PATO:0000060 ! pattern
+def: "The state of having or exhibiting variation." [Dictionary:http://dictionary.reference.com/]
+is_a: PATO:0001303 ! variability
 
 [Term]
 id: PATO:0001228
@@ -7437,7 +7535,7 @@ is_obsolete: true
 id: PATO:0001230
 name: strength
 namespace: attribute
-is_a: PATO:0000001 ! quality
+is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0001231
@@ -7468,6 +7566,557 @@ id: PATO:0001235
 name: strength value
 namespace: attribute
 is_obsolete: true
+
+[Term]
+id: PATO:0001236
+name: quality of occurrent
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0001237
+name: monadic quality of continuant
+namespace: attribute
+is_a: PATO:0001241 ! quality of continuant
+
+[Term]
+id: PATO:0001238
+name: relational quality of continuant
+namespace: attribute
+is_a: PATO:0001241 ! quality of continuant
+
+[Term]
+id: PATO:0001239
+name: monadic quality of occurrent
+namespace: attribute
+is_a: PATO:0001236 ! quality of occurrent
+
+[Term]
+id: PATO:0001240
+name: relational quality of occurrent
+namespace: attribute
+is_a: PATO:0001236 ! quality of occurrent
+
+[Term]
+id: PATO:0001241
+name: quality of continuant
+namespace: attribute
+is_a: PATO:0000001 ! quality
+
+[Term]
+id: PATO:0001242
+name: wavelength
+namespace: attribute
+def: "The wavelength is the distance between repeating units of a wave pattern. " [XX:<new dbxref>]
+is_a: PATO:0001018 ! physical quality
+
+[Term]
+id: PATO:0001243
+name: light blue
+namespace: attribute
+is_a: PATO:0000318 ! blue
+
+[Term]
+id: PATO:0001244
+name: dark blue
+namespace: attribute
+is_a: PATO:0000318 ! blue
+
+[Term]
+id: PATO:0001245
+name: dark brown
+namespace: attribute
+is_a: PATO:0000952 ! brown
+
+[Term]
+id: PATO:0001246
+name: light brown
+namespace: attribute
+is_a: PATO:0000952 ! brown
+
+[Term]
+id: PATO:0001247
+name: light cyan
+namespace: attribute
+is_a: PATO:0000319 ! cyan
+
+[Term]
+id: PATO:0001248
+name: dark cyan
+namespace: attribute
+is_a: PATO:0000319 ! cyan
+
+[Term]
+id: PATO:0001249
+name: dark green
+namespace: attribute
+is_a: PATO:0000320 ! green
+
+[Term]
+id: PATO:0001250
+name: light green
+namespace: attribute
+is_a: PATO:0000320 ! green
+
+[Term]
+id: PATO:0001251
+name: dark grey
+namespace: attribute
+is_a: PATO:0000950 ! grey
+
+[Term]
+id: PATO:0001252
+name: light grey
+namespace: attribute
+is_a: PATO:0000950 ! grey
+
+[Term]
+id: PATO:0001253
+name: light magenta
+namespace: attribute
+is_a: PATO:0000321 ! magenta
+
+[Term]
+id: PATO:0001254
+name: dark magenta
+namespace: attribute
+is_a: PATO:0000321 ! magenta
+
+[Term]
+id: PATO:0001255
+name: light orange
+namespace: attribute
+is_a: PATO:0000953 ! orange
+
+[Term]
+id: PATO:0001256
+name: dark orange
+namespace: attribute
+is_a: PATO:0000953 ! orange
+
+[Term]
+id: PATO:0001257
+name: light pink
+namespace: attribute
+is_a: PATO:0000954 ! pink
+
+[Term]
+id: PATO:0001258
+name: dark pink
+namespace: attribute
+is_a: PATO:0000954 ! pink
+
+[Term]
+id: PATO:0001259
+name: dark purple
+namespace: attribute
+is_a: PATO:0000951 ! purple
+
+[Term]
+id: PATO:0001260
+name: light purple
+namespace: attribute
+is_a: PATO:0000951 ! purple
+
+[Term]
+id: PATO:0001261
+name: dark red
+namespace: attribute
+is_a: PATO:0000322 ! red
+
+[Term]
+id: PATO:0001262
+name: light red
+namespace: attribute
+is_a: PATO:0000322 ! red
+
+[Term]
+id: PATO:0001263
+name: dark yellow
+namespace: attribute
+is_a: PATO:0000324 ! yellow
+
+[Term]
+id: PATO:0001264
+name: light yellow
+namespace: attribute
+is_a: PATO:0000324 ! yellow
+
+[Term]
+id: PATO:0001265
+name: bright blue
+namespace: attribute
+is_a: PATO:0000318 ! blue
+
+[Term]
+id: PATO:0001266
+name: dull blue
+namespace: attribute
+is_a: PATO:0000318 ! blue
+
+[Term]
+id: PATO:0001267
+name: bright brown
+namespace: attribute
+is_a: PATO:0000952 ! brown
+
+[Term]
+id: PATO:0001268
+name: dull brown
+namespace: attribute
+is_a: PATO:0000952 ! brown
+
+[Term]
+id: PATO:0001269
+name: bright cyan
+namespace: attribute
+is_a: PATO:0000319 ! cyan
+
+[Term]
+id: PATO:0001270
+name: dull cyan
+namespace: attribute
+is_a: PATO:0000319 ! cyan
+
+[Term]
+id: PATO:0001271
+name: bright green
+namespace: attribute
+is_a: PATO:0000320 ! green
+
+[Term]
+id: PATO:0001272
+name: dull green
+namespace: attribute
+is_a: PATO:0000320 ! green
+
+[Term]
+id: PATO:0001273
+name: bright grey
+namespace: attribute
+is_a: PATO:0000950 ! grey
+
+[Term]
+id: PATO:0001274
+name: dull grey
+namespace: attribute
+is_a: PATO:0000950 ! grey
+
+[Term]
+id: PATO:0001275
+name: bright magenta
+namespace: attribute
+is_a: PATO:0000321 ! magenta
+
+[Term]
+id: PATO:0001276
+name: dull magenta
+namespace: attribute
+is_a: PATO:0000321 ! magenta
+
+[Term]
+id: PATO:0001277
+name: bright orange
+namespace: attribute
+is_a: PATO:0000953 ! orange
+
+[Term]
+id: PATO:0001278
+name: dull orange
+namespace: attribute
+is_a: PATO:0000953 ! orange
+
+[Term]
+id: PATO:0001279
+name: bright pink
+namespace: attribute
+is_a: PATO:0000954 ! pink
+
+[Term]
+id: PATO:0001280
+name: dull pink
+namespace: attribute
+is_a: PATO:0000954 ! pink
+
+[Term]
+id: PATO:0001281
+name: bright purple
+namespace: attribute
+is_a: PATO:0000951 ! purple
+
+[Term]
+id: PATO:0001282
+name: dull purple
+namespace: attribute
+is_a: PATO:0000951 ! purple
+
+[Term]
+id: PATO:0001283
+name: bright red
+namespace: attribute
+is_a: PATO:0000322 ! red
+
+[Term]
+id: PATO:0001284
+name: dull red
+namespace: attribute
+is_a: PATO:0000322 ! red
+
+[Term]
+id: PATO:0001285
+name: bright yellow
+namespace: attribute
+is_a: PATO:0000324 ! yellow
+
+[Term]
+id: PATO:0001286
+name: dull yellow
+namespace: attribute
+is_a: PATO:0000324 ! yellow
+
+[Term]
+id: PATO:0001287
+name: red brown
+namespace: attribute
+is_a: PATO:0000952 ! brown
+
+[Term]
+id: PATO:0001288
+name: dark red brown
+namespace: attribute
+is_a: PATO:0001287 ! red brown
+
+[Term]
+id: PATO:0001289
+name: light red brown
+namespace: attribute
+is_a: PATO:0001287 ! red brown
+
+[Term]
+id: PATO:0001290
+name: fluorescent
+namespace: attribute
+def: "emitting light during exposure to radiation from an external source" [The Free Online dictionary:]
+is_obsolete: true
+
+[Term]
+id: PATO:0001291
+name: fluorescent blue
+namespace: attribute
+is_a: PATO:0000318 ! blue
+
+[Term]
+id: PATO:0001292
+name: fluorescent brown
+namespace: attribute
+is_a: PATO:0000952 ! brown
+
+[Term]
+id: PATO:0001293
+name: fluorescent cyan
+namespace: attribute
+is_a: PATO:0000319 ! cyan
+
+[Term]
+id: PATO:0001294
+name: fluorescent green
+namespace: attribute
+is_a: PATO:0000320 ! green
+
+[Term]
+id: PATO:0001295
+name: fluorescent grey
+namespace: attribute
+is_a: PATO:0000950 ! grey
+
+[Term]
+id: PATO:0001296
+name: fluorescent magenta
+namespace: attribute
+is_a: PATO:0000321 ! magenta
+
+[Term]
+id: PATO:0001297
+name: fluorescent orange
+namespace: attribute
+is_a: PATO:0000953 ! orange
+
+[Term]
+id: PATO:0001298
+name: fluorescent pink
+namespace: attribute
+is_a: PATO:0000954 ! pink
+
+[Term]
+id: PATO:0001299
+name: fluorescent purple
+namespace: attribute
+is_a: PATO:0000951 ! purple
+
+[Term]
+id: PATO:0001300
+name: fluorescent red
+namespace: attribute
+is_a: PATO:0000322 ! red
+
+[Term]
+id: PATO:0001301
+name: fluorescent yellow
+namespace: attribute
+is_a: PATO:0000324 ! yellow
+
+[Term]
+id: PATO:0001302
+name: vermilion
+namespace: attribute
+is_a: PATO:0000322 ! red
+
+[Term]
+id: PATO:0001303
+name: variability
+namespace: attribute
+def: "The quality of varying or changing. " [Dictionary:http://dictionary.reference.com/]
+is_a: PATO:0001239 ! monadic quality of occurrent
+
+[Term]
+id: PATO:0001304
+name: variability of temperature
+namespace: attribute
+def: "The quality of temperature of varying or changing. " [gg:]
+is_a: PATO:0001303 ! variability
+
+[Term]
+id: PATO:0001305
+name: increased temperature
+namespace: attribute
+def: "A temperature which is greater relative to the normal or average temperature." [gg:]
+is_a: PATO:0000146 ! temperature
+
+[Term]
+id: PATO:0001306
+name: decreased temperature
+namespace: attribute
+def: "A temperature which is lesser relative to the normal or average temperature" [gg:]
+is_a: PATO:0000146 ! temperature
+
+[Term]
+id: PATO:0001307
+name: decreased variation of temperature 
+namespace: attribute
+def: "The state of being lesser relative to the normal or average in respect to the quality of temperature of varying or changing. " [gg:]
+is_a: PATO:0001304 ! variability of temperature
+
+[Term]
+id: PATO:0001308
+name: increased variation of  temperature
+namespace: attribute
+def: "The state of being greater relative to the normal or average in respect to the quality of temperature of varying or changing. " [gg:]
+is_a: PATO:0001304 ! variability of temperature
+
+[Term]
+id: PATO:0001309
+name: duration
+namespace: attribute
+def: "The quality of enduring or continuing in time." [Dictionary:http://dictionary.reference.com]
+is_a: PATO:0001239 ! monadic quality of occurrent
+
+[Term]
+id: PATO:0001310
+name: duration of temperature
+namespace: attribute
+def: "The quality of temperature of enduring or continuing in time." [gg:]
+is_a: PATO:0001309 ! duration
+
+[Term]
+id: PATO:0001311
+name: decreased duration of temperature 
+namespace: attribute
+def: "The state of being lesser relative to the normal or average in respect to the quality of temperature of enduring or continuing in time." [gg:]
+is_a: PATO:0001310 ! duration of temperature
+
+[Term]
+id: PATO:0001312
+name: increased duration of temperature
+namespace: attribute
+def: "The state of being greater relative to the normal or average in respect to the quality of temperature of enduring or continuing in time." [gg:]
+is_a: PATO:0001310 ! duration of temperature
+
+[Term]
+id: PATO:0001313
+name:  invariant temperature
+namespace: attribute
+def: "The state of not  having or exhibiting variation of temperature." [gg:]
+is_a: PATO:0001304 ! variability of temperature
+
+[Term]
+id: PATO:0001314
+name:  variant temperature
+namespace: attribute
+def: "The state of having or exhibiting variation of temperature." [gg:]
+is_a: PATO:0001304 ! variability of temperature
+
+[Term]
+id: PATO:0001315
+name: mild increased temperature
+namespace: attribute
+def: "A temperature which is increased by a low degree." [gg:]
+is_a: PATO:0001305 ! increased temperature
+
+[Term]
+id: PATO:0001316
+name: moderate increased temperature
+namespace: attribute
+def: "A temperature which is increased by a medium degree." [gg:]
+is_a: PATO:0001305 ! increased temperature
+
+[Term]
+id: PATO:0001317
+name: severe increased temperature
+namespace: attribute
+def: "A temperature which is increased by a high degree." [gg:]
+is_a: PATO:0001305 ! increased temperature
+
+[Term]
+id: PATO:0001318
+name: indiscriminate
+namespace: attribute
+def: "The quality of being incapable perceiving differences between two or more stimuli." [XX:<new dbxref>]
+is_a: PATO:0000189 ! discrimination
+
+[Term]
+id: PATO:0001319
+name: discriminate
+namespace: attribute
+def: "The quality of being capable perceiving differences between two or more stimuli." [XX:<new dbxref>]
+is_a: PATO:0000189 ! discrimination
+
+[Term]
+id: PATO:0001320
+name: pubescent hair
+namespace: attribute
+def: "The quality of being covered with short hairs or soft down." [XX:<new dbxref>]
+is_a: PATO:0000066 ! pilosity
+
+[Term]
+id: PATO:0001321
+name: right angle
+namespace: attribute
+def: "The angle which is 90 degrees." [XX:<new dbxref>]
+is_a: PATO:0000133 ! angle
+
+[Term]
+id: PATO:0001322
+name: straight angle
+namespace: attribute
+def: "The angle which is 180 degrees." [XX:<new dbxref>]
+is_a: PATO:0000133 ! angle
+
+[Term]
+id: PATO:0001323
+name: area
+namespace: attribute
+def: "The two dimensional extent of an object." [XX:<new dbxref>]
+is_a: PATO:0001018 ! physical quality
 
 [Typedef]
 id: is_magnitude_of

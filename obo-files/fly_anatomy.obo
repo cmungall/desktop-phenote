@@ -1,14 +1,13 @@
 format-version: 1.0
-date: 08:03:2006 13:36
+date: 18:06:2006 14:51
 saved-by: djs93
-auto-generated-by: OBO-Edit 1.000-beta16
+auto-generated-by: OBO-Edit 1.001
 subsetdef: EmbDevSlim "EmbDevSlim"
 default-namespace: fly_anatomy.ontology
 
 [Term]
 id: FBbt:00000000
 name: germ layer derivative
-namespace: fly_anatomy.ontology
 is_a: FBbt:00004208 ! developing embryonic structure
 relationship: develops_from FBbt:00000110 ! germ layer
 
@@ -45,7 +44,7 @@ relationship: part_of FBbt:00000004 ! head
 [Term]
 id: FBbt:00000006
 name: head segment
-def: "." [FB:FBrf:0075072]
+def: "." [FB:FBrf0075072]
 is_a: FBbt:00000003 ! segment
 is_a: FBbt:00000004 ! head
 
@@ -233,7 +232,8 @@ relationship: part_of FBbt:00000034 ! egg
 [Term]
 id: FBbt:00000036
 name: yolk granule
-relationship: part_of FBbt:00000035 ! yolk
+comment: Made obsolete because of redudancy with GO cell component term.  Please use GO:0042718 instead.  ds060616
+is_obsolete: true
 
 [Term]
 id: FBbt:00000037
@@ -317,7 +317,7 @@ is_a: FBbt:00000048 ! pronucleus
 [Term]
 id: FBbt:00000052
 name: embryo
-def: "." [FB:FBrf:0039741, FB:FBrf:0041814]
+def: "." [FB:FBrf0039741, FB:FBrf0041814]
 subset: EmbDevSlim
 is_a: FBbt:00004206 ! stage
 relationship: develops_from FBbt:00005288 ! fertilized egg
@@ -360,7 +360,7 @@ relationship: part_of FBbt:00005376 ! yolk sac
 [Term]
 id: FBbt:00000059
 name: mitotic domain
-def: "." [FB:FBrf:0049535, FB:FBrf:0089570]
+def: "." [FB:FBrf0049535, FB:FBrf0089570]
 is_a: FBbt:00004208 ! developing embryonic structure
 
 [Term]
@@ -571,7 +571,7 @@ id: FBbt:00000094
 name: clypeo-labral anlage in statu nascendi
 def: "." [VH:]
 subset: EmbDevSlim
-related_synonym: "Asn Cly" [FB:FBrf:ds555]
+related_synonym: "Asn Cly" [FB:FBrfds555]
 is_a: FBbt:00005413 ! anlage in statu nascendi
 relationship: part_of FBbt:01000119 ! anterior ectoderm anlage
 
@@ -683,7 +683,7 @@ relationship: part_of FBbt:00000111 ! ectoderm
 [Term]
 id: FBbt:00000113
 name: neurectoderm
-def: "." [FB:FBrf:0076117]
+def: "." [FB:FBrf0076117]
 related_synonym: "neuroectoderm" []
 is_a: FBbt:00000111 ! ectoderm
 relationship: develops_from FBbt:00001057 ! neurogenic region
@@ -697,21 +697,21 @@ is_obsolete: true
 [Term]
 id: FBbt:00000116
 name: lateral ventral neurectoderm
-def: "." [FB:FBrf:0076117]
+def: "." [FB:FBrf0076117]
 related_synonym: "lateral ventral neuroectoderm" []
 relationship: part_of FBbt:00005554 ! ventral nerve cord primordium
 
 [Term]
 id: FBbt:00000117
 name: medial ventral neurectoderm
-def: "." [FB:FBrf:0076117]
+def: "." [FB:FBrf0076117]
 related_synonym: "medial ventral neuroectoderm" []
 relationship: part_of FBbt:00005554 ! ventral nerve cord primordium
 
 [Term]
 id: FBbt:00000118
 name: intermediate ventral neurectoderm
-def: "." [FB:FBrf:0076117]
+def: "." [FB:FBrf0076117]
 related_synonym: "intermediate ventral neuroectoderm" []
 relationship: part_of FBbt:00005554 ! ventral nerve cord primordium
 
@@ -772,11 +772,11 @@ relationship: part_of FBbt:00014201 ! early extended germ band embryo
 id: FBbt:00000127
 name: head mesoderm
 subset: EmbDevSlim
-related_synonym: "HeadMes" []
-related_synonym: "HeadMesP3" []
-related_synonym: "P4 HeadMes" [FB:FBrf:ds555]
 related_synonym: "head mesoderm P3 primordium" []
 related_synonym: "head mesoderm primordium P4" []
+related_synonym: "HeadMes" []
+related_synonym: "HeadMesP3" []
+related_synonym: "P4 HeadMes" [FB:FBrfds555]
 related_synonym: "procephalic mesoderm" []
 relationship: develops_from FBbt:00005548 ! head mesoderm anlage
 relationship: part_of FBbt:00000126 ! mesoderm
@@ -786,7 +786,7 @@ id: FBbt:00000128
 name: trunk mesoderm
 subset: EmbDevSlim
 related_synonym: "AtrunkMes" []
-related_synonym: "P2 TrMes" [FB:FBrf:ds555]
+related_synonym: "P2 TrMes" [FB:FBrfds555]
 related_synonym: "TrMes" []
 relationship: develops_from FBbt:00005436 ! trunk mesoderm anlage
 relationship: part_of FBbt:00000126 ! mesoderm
@@ -1023,7 +1023,7 @@ relationship: part_of FBbt:00000155 ! embryonic head
 [Term]
 id: FBbt:00000157
 name: embryonic head segment
-def: "." [FB:FBrf:0075072]
+def: "." [FB:FBrf0075072]
 is_a: FBbt:00000006 ! head segment
 is_a: FBbt:00000154 ! embryonic segment
 relationship: part_of FBbt:00000155 ! embryonic head
@@ -1292,7 +1292,7 @@ name: posterior spiracle primordium
 def: "." [FB:VH]
 comment: Maybe - abdominal 8 dorsal tracheal pit.
 subset: EmbDevSlim
-related_synonym: "P1 PosSpi" [FB:FBrf:ds555]
+related_synonym: "P1 PosSpi" [FB:FBrfds555]
 related_synonym: "posterior spiracle specific anlage" []
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:10005248 ! spiracle primordium
@@ -1375,7 +1375,7 @@ is_a: FBbt:00000201 ! abdominal tracheal pit
 id: FBbt:00000210
 name: anterior endoderm anlage
 subset: EmbDevSlim
-related_synonym: "Asn/A antEndo" [FB:FBrf:ds555]
+related_synonym: "Asn/A antEndo" [FB:FBrfds555]
 is_a: FBbt:00005426 ! anlage
 relationship: part_of FBbt:00005435 ! endoderm anlage
 
@@ -1388,8 +1388,8 @@ relationship: part_of FBbt:00000185 ! embryonic/larval tracheal system
 [Term]
 id: FBbt:00000212
 name: embryonic/larval dorsal trunk
-related_synonym: "DT" []
 related_synonym: "dorsal longitudinal trunk" []
+related_synonym: "DT" []
 related_synonym: "great lateral trunk" []
 is_a: FBbt:00000211 ! embryonic/larval trachea
 
@@ -1514,8 +1514,8 @@ is_a: FBbt:00000223 ! dorsal trunk posterior branch
 [Term]
 id: FBbt:00000233
 name: embryonic/larval lateral trunk
-related_synonym: "LT" []
 related_synonym: "lateral longitudinal trunk" []
+related_synonym: "LT" []
 is_a: FBbt:00000211 ! embryonic/larval trachea
 
 [Term]
@@ -2002,8 +2002,8 @@ is_a: FBbt:00000303 ! embryonic/larval spiracular branch
 [Term]
 id: FBbt:00000314
 name: non-functional spiracular branch
-related_synonym: "Palmen's threads" []
 related_synonym: "collapsed spiracular trachea" []
+related_synonym: "Palmen's threads" []
 is_a: FBbt:00000211 ! embryonic/larval trachea
 
 [Term]
@@ -2474,8 +2474,8 @@ relationship: part_of FBbt:00000392 ! tracheal branch of Tr1
 [Term]
 id: FBbt:00000394
 name: pharyngeal branch
-related_synonym: "PB" []
 related_synonym: "anterior branch of dorsal cervical branch" []
+related_synonym: "PB" []
 relationship: part_of FBbt:00000392 ! tracheal branch of Tr1
 
 [Term]
@@ -2712,7 +2712,7 @@ relationship: part_of FBbt:00000427 ! spiracular plate
 [Term]
 id: FBbt:00000435
 name: posterior spiracular gland
-def: "." [FB:FBrf:0078722]
+def: "." [FB:FBrf0078722]
 relationship: part_of FBbt:00000427 ! spiracular plate
 
 [Term]
@@ -2728,7 +2728,7 @@ relationship: part_of FBbt:00000436 ! posterior spiracular duct
 [Term]
 id: FBbt:00000438
 name: embryonic digestive system
-def: "." [FB:FBrf:0007733, FB:FBrf:0064792, FB:FBrf:0076136]
+def: "." [FB:FBrf0007733, FB:FBrf0064792, FB:FBrf0076136]
 is_a: FBbt:00001842 ! embryonic/larval digestive system
 relationship: part_of FBbt:00005333 ! late embryo
 
@@ -2750,7 +2750,7 @@ relationship: part_of FBbt:00005630 ! embryonic hindgut
 id: FBbt:00000441
 name: hindgut proper primordium
 subset: EmbDevSlim
-related_synonym: "P2 pHiGP" [FB:FBrf:ds555]
+related_synonym: "P2 pHiGP" [FB:FBrfds555]
 related_synonym: "pHiGP2" []
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025992 ! posterior ectoderm derivative
@@ -2762,7 +2762,7 @@ id: FBbt:00000442
 name: Malpighian tubule primordium
 subset: EmbDevSlim
 related_synonym: "MTP2" []
-related_synonym: "P2 MalT" [FB:FBrf:ds555]
+related_synonym: "P2 MalT" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025992 ! posterior ectoderm derivative
 relationship: develops_from FBbt:00005523 ! inclusive hindgut primordium
@@ -2781,8 +2781,8 @@ relationship: part_of FBbt:00005331 ! dorsal closure embryo
 id: FBbt:00000444
 name: anterior midgut inclusive primordium
 subset: EmbDevSlim
-related_synonym: "P2 antEndoP" [FB:FBrf:ds555]
 related_synonym: "antMGP2" []
+related_synonym: "P2 antEndoP" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025996 ! anterior endoderm derivative
 relationship: develops_from FBbt:00005559 ! anterior endoderm
@@ -2792,7 +2792,7 @@ relationship: part_of FBbt:00005321 ! extended germ band embryo
 id: FBbt:00000445
 name: proventriculus outer layer anlage
 def: "." [FB:DJS]
-related_synonym: "A antEndoA" [FB:FBrf:ds555]
+related_synonym: "A antEndoA" [FB:FBrfds555]
 is_a: FBbt:00005426 ! anlage
 relationship: part_of FBbt:00000125 ! endoderm
 relationship: part_of FBbt:00014201 ! early extended germ band embryo
@@ -2808,7 +2808,7 @@ relationship: part_of FBbt:00005624 ! embryonic midgut
 id: FBbt:00000447
 name: posterior endoderm anlage
 subset: EmbDevSlim
-related_synonym: "Asn/A postEndo" [FB:FBrf:ds555]
+related_synonym: "Asn/A postEndo" [FB:FBrfds555]
 is_a: FBbt:00005426 ! anlage
 relationship: part_of FBbt:00005435 ! endoderm anlage
 
@@ -2816,7 +2816,7 @@ relationship: part_of FBbt:00005435 ! endoderm anlage
 id: FBbt:00000448
 name: posterior midgut proper primordium
 subset: EmbDevSlim
-related_synonym: "P1 antEndoP" [FB:FBrf:ds555]
+related_synonym: "P1 antEndoP" [FB:FBrfds555]
 related_synonym: "postMGP2" []
 broad_synonym: "posterior midgut primordium" []
 is_a: FBbt:00005495 ! primordium
@@ -2896,7 +2896,7 @@ relationship: part_of FBbt:00005628 ! embryonic midgut chamber
 id: FBbt:00000461
 name: embryonic inner optic lobe primordium
 subset: EmbDevSlim
-related_synonym: "P1 IOA" [FB:FBrf:ds555]
+related_synonym: "P1 IOA" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025991 ! anterior ectoderm derivative
 relationship: develops_from FBbt:00001059 ! visual primordium
@@ -2907,7 +2907,7 @@ relationship: part_of FBbt:00005331 ! dorsal closure embryo
 [Term]
 id: FBbt:00000462
 name: embryonic/larval muscle system
-def: "." [FB:FBrf:0031016, FB:FBrf:0041814, FB:FBrf:0044229, FB:FBrf:0064793]
+def: "." [FB:FBrf0031016, FB:FBrf0041814, FB:FBrf0044229, FB:FBrf0064793]
 is_a: FBbt:00005069 ! muscle system
 relationship: part_of FBbt:00001727 ! larva
 relationship: part_of FBbt:00005333 ! late embryo
@@ -3133,32 +3133,32 @@ is_a: FBbt:00000501 ! prothoracic oblique muscle
 [Term]
 id: FBbt:00000503
 name: prothoracic dorsal oblique muscle 1
-related_synonym: "DO1" []
 related_synonym: "deo2" []
+related_synonym: "DO1" []
 related_synonym: "dorsal external oblique muscle" []
 is_a: FBbt:00000502 ! prothoracic dorsal oblique muscle
 
 [Term]
 id: FBbt:00000504
 name: prothoracic dorsal oblique muscle 2
-related_synonym: "DO2" []
 related_synonym: "deo1" []
+related_synonym: "DO2" []
 related_synonym: "dorsal external oblique muscle" []
 is_a: FBbt:00000502 ! prothoracic dorsal oblique muscle
 
 [Term]
 id: FBbt:00000505
 name: prothoracic dorsal oblique muscle 3
-related_synonym: "DO3" []
 related_synonym: "dio1" []
+related_synonym: "DO3" []
 related_synonym: "dorsal internal oblique muscle" []
 is_a: FBbt:00000502 ! prothoracic dorsal oblique muscle
 
 [Term]
 id: FBbt:00000506
 name: prothoracic dorsal oblique muscle 4
-related_synonym: "DO4" []
 related_synonym: "dio2" []
+related_synonym: "DO4" []
 related_synonym: "dorsal internal oblique muscle" []
 is_a: FBbt:00000502 ! prothoracic dorsal oblique muscle
 
@@ -3177,9 +3177,9 @@ is_a: FBbt:00000507 ! prothoracic transverse muscle
 [Term]
 id: FBbt:00000509
 name: prothoracic ventral transverse muscle 1
-related_synonym: "VT1" []
 related_synonym: "pet1" []
 related_synonym: "pleural external transverse muscle" []
+related_synonym: "VT1" []
 is_a: FBbt:00000508 ! prothoracic ventral transverse muscle
 
 [Term]
@@ -3225,25 +3225,25 @@ is_a: FBbt:00000514 ! prothoracic intersegmental muscle
 [Term]
 id: FBbt:00000516
 name: prothoracic ventral intersegmental muscle 2
-related_synonym: "VS2" []
 related_synonym: "pmm1" []
 related_synonym: "prothoracic-metathoracic muscle" []
+related_synonym: "VS2" []
 is_a: FBbt:00000515 ! prothoracic ventral intersegmental muscle
 
 [Term]
 id: FBbt:00000517
 name: prothoracic ventral intersegmental muscle 3
-related_synonym: "VS3" []
 related_synonym: "pmm2" []
 related_synonym: "prothoracic-metathoracic muscle" []
+related_synonym: "VS3" []
 is_a: FBbt:00000515 ! prothoracic ventral intersegmental muscle
 
 [Term]
 id: FBbt:00000518
 name: prothoracic ventral intersegmental muscle 4
-related_synonym: "VS4" []
 related_synonym: "pmm3" []
 related_synonym: "prothoracic-metathoracic muscle" []
+related_synonym: "VS4" []
 is_a: FBbt:00000515 ! prothoracic ventral intersegmental muscle
 
 [Term]
@@ -3317,32 +3317,32 @@ is_a: FBbt:00000527 ! mesothoracic oblique muscle
 [Term]
 id: FBbt:00000529
 name: mesothoracic dorsal oblique muscle 1
-related_synonym: "DO1" []
 related_synonym: "deo4" []
+related_synonym: "DO1" []
 related_synonym: "dorsal external oblique muscle" []
 is_a: FBbt:00000528 ! mesothoracic dorsal oblique muscle
 
 [Term]
 id: FBbt:00000530
 name: mesothoracic dorsal oblique muscle 2
-related_synonym: "DO2" []
 related_synonym: "deo3" []
+related_synonym: "DO2" []
 related_synonym: "dorsal external oblique muscle" []
 is_a: FBbt:00000528 ! mesothoracic dorsal oblique muscle
 
 [Term]
 id: FBbt:00000531
 name: mesothoracic dorsal oblique muscle 3
-related_synonym: "DO3" []
 related_synonym: "deo2" []
+related_synonym: "DO3" []
 related_synonym: "dorsal external oblique muscle" []
 is_a: FBbt:00000528 ! mesothoracic dorsal oblique muscle
 
 [Term]
 id: FBbt:00000532
 name: mesothoracic dorsal oblique muscle 4
-related_synonym: "DO4" []
 related_synonym: "deo1" []
+related_synonym: "DO4" []
 related_synonym: "dorsal external oblique muscle" []
 is_a: FBbt:00000528 ! mesothoracic dorsal oblique muscle
 
@@ -3371,25 +3371,25 @@ is_a: FBbt:00000527 ! mesothoracic oblique muscle
 [Term]
 id: FBbt:00000536
 name: mesothoracic ventral oblique muscle 1
-related_synonym: "VO1" []
 related_synonym: "ventral external oblique muscle" []
 related_synonym: "veo1" []
+related_synonym: "VO1" []
 is_a: FBbt:00000535 ! mesothoracic ventral oblique muscle
 
 [Term]
 id: FBbt:00000537
 name: mesothoracic ventral oblique muscle 2
-related_synonym: "VO2" []
 related_synonym: "ventral external oblique muscle" []
 related_synonym: "veo2" []
+related_synonym: "VO2" []
 is_a: FBbt:00000535 ! mesothoracic ventral oblique muscle
 
 [Term]
 id: FBbt:00000538
 name: mesothoracic segment border muscle
-related_synonym: "SBM" []
 related_synonym: "pit" []
 related_synonym: "pleural internal transverse muscle" []
+related_synonym: "SBM" []
 is_a: FBbt:00000483 ! segment border muscle
 is_a: FBbt:00000520 ! hypodermal muscle of mesothorax
 
@@ -3561,24 +3561,24 @@ is_a: FBbt:00000561 ! metathoracic oblique muscle
 [Term]
 id: FBbt:00000563
 name: metathoracic dorsal oblique muscle 1
-related_synonym: "DO1" []
 related_synonym: "deo3" []
+related_synonym: "DO1" []
 related_synonym: "dorsal external oblique muscle" []
 is_a: FBbt:00000562 ! metathoracic dorsal oblique muscle
 
 [Term]
 id: FBbt:00000564
 name: metathoracic dorsal oblique muscle 2
-related_synonym: "DO2" []
 related_synonym: "deo2" []
+related_synonym: "DO2" []
 related_synonym: "dorsal external oblique muscle" []
 is_a: FBbt:00000562 ! metathoracic dorsal oblique muscle
 
 [Term]
 id: FBbt:00000565
 name: metathoracic dorsal oblique muscle 3
-related_synonym: "DO3" []
 related_synonym: "deo1" []
+related_synonym: "DO3" []
 related_synonym: "dorsal external oblique muscle" []
 is_a: FBbt:00000562 ! metathoracic dorsal oblique muscle
 
@@ -3615,33 +3615,33 @@ is_a: FBbt:00000561 ! metathoracic oblique muscle
 [Term]
 id: FBbt:00000570
 name: metathoracic ventral oblique muscle 1
-related_synonym: "VO1" []
 related_synonym: "ventral internal oblique muscle" []
 related_synonym: "vio1" []
+related_synonym: "VO1" []
 is_a: FBbt:00000569 ! metathoracic ventral oblique muscle
 
 [Term]
 id: FBbt:00000571
 name: metathoracic ventral oblique muscle 2
-related_synonym: "VO2" []
 related_synonym: "ventral internal oblique muscle" []
 related_synonym: "vio2" []
+related_synonym: "VO2" []
 is_a: FBbt:00000569 ! metathoracic ventral oblique muscle
 
 [Term]
 id: FBbt:00000572
 name: metathoracic ventral oblique muscle 3
-related_synonym: "VO3" []
 related_synonym: "ventral internal oblique muscle" []
 related_synonym: "vio3" []
+related_synonym: "VO3" []
 is_a: FBbt:00000569 ! metathoracic ventral oblique muscle
 
 [Term]
 id: FBbt:00000573
 name: metathoracic segment border muscle
-related_synonym: "SBM" []
 related_synonym: "pit" []
 related_synonym: "pleural internal transverse muscle" []
+related_synonym: "SBM" []
 is_a: FBbt:00000483 ! segment border muscle
 is_a: FBbt:00000552 ! hypodermal muscle of metathorax
 
@@ -3719,29 +3719,29 @@ is_a: FBbt:00000552 ! hypodermal muscle of metathorax
 [Term]
 id: FBbt:00000584
 name: metathoracic ventral longitudinal muscle 1
-related_synonym: "VL1" []
 related_synonym: "ventral internal longitudinal muscle 32" []
+related_synonym: "VL1" []
 is_a: FBbt:00000583 ! metathoracic ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000585
 name: metathoracic ventral longitudinal muscle 2
-related_synonym: "VL2" []
 related_synonym: "ventral internal longitudinal muscle 33" []
+related_synonym: "VL2" []
 is_a: FBbt:00000583 ! metathoracic ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000586
 name: metathoracic ventral longitudinal muscle 3
-related_synonym: "VL3" []
 related_synonym: "ventral internal longitudinal muscle 34" []
+related_synonym: "VL3" []
 is_a: FBbt:00000583 ! metathoracic ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000587
 name: metathoracic ventral longitudinal muscle 4
-related_synonym: "VL4" []
 related_synonym: "ventral internal longitudinal muscle 35" []
+related_synonym: "VL4" []
 is_a: FBbt:00000583 ! metathoracic ventral longitudinal muscle
 
 [Term]
@@ -3836,8 +3836,8 @@ is_a: FBbt:00000598 ! abdominal longitudinal muscle
 [Term]
 id: FBbt:00000600
 name: abdominal lateral longitudinal muscle 1
-related_synonym: "LL1" []
 related_synonym: "dorso-lateral internal longitudinal muscle 4" []
+related_synonym: "LL1" []
 related_synonym: "pl2" []
 is_a: FBbt:00000599 ! abdominal lateral longitudinal muscle
 
@@ -3851,41 +3851,41 @@ is_a: FBbt:00000598 ! abdominal longitudinal muscle
 [Term]
 id: FBbt:00000602
 name: abdominal ventral longitudinal muscle 1
-related_synonym: "VL1" []
 related_synonym: "pl1" []
 related_synonym: "pleural external longitudinal muscle 12" []
+related_synonym: "VL1" []
 is_a: FBbt:00000601 ! abdominal ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000603
 name: abdominal ventral longitudinal muscle 2
-related_synonym: "VL2" []
 related_synonym: "pleural external longitudinal muscle 13" []
 related_synonym: "vio1" []
+related_synonym: "VL2" []
 is_a: FBbt:00000601 ! abdominal ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000604
 name: abdominal ventral longitudinal muscle 3
-related_synonym: "VL3" []
 related_synonym: "ventral internal longitudinal muscle 6" []
 related_synonym: "vio2" []
+related_synonym: "VL3" []
 is_a: FBbt:00000601 ! abdominal ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000605
 name: abdominal ventral longitudinal muscle 4
-related_synonym: "VL4" []
 related_synonym: "ventral internal longitudinal muscle 7" []
 related_synonym: "vio3" []
+related_synonym: "VL4" []
 is_a: FBbt:00000601 ! abdominal ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000606
 name: abdominal segment border muscle
-related_synonym: "SBM" []
 related_synonym: "pit" []
 related_synonym: "pleural internal transverse muscle 8" []
+related_synonym: "SBM" []
 is_a: FBbt:00000483 ! segment border muscle
 is_a: FBbt:00000588 ! hypodermal muscle of abdomen
 
@@ -3905,24 +3905,24 @@ is_a: FBbt:00000607 ! abdominal oblique muscle
 [Term]
 id: FBbt:00000609
 name: abdominal dorsal oblique muscle 1
-related_synonym: "DO1" []
 related_synonym: "deo4" []
+related_synonym: "DO1" []
 related_synonym: "dorsal external oblique muscle 9" []
 is_a: FBbt:00000608 ! abdominal dorsal oblique muscle
 
 [Term]
 id: FBbt:00000610
 name: abdominal dorsal oblique muscle 2
-related_synonym: "DO2" []
 related_synonym: "deo3" []
+related_synonym: "DO2" []
 related_synonym: "dorsal external oblique muscle 10" []
 is_a: FBbt:00000608 ! abdominal dorsal oblique muscle
 
 [Term]
 id: FBbt:00000611
 name: abdominal dorsal oblique muscle 3
-related_synonym: "DO3" []
 related_synonym: "deo2" []
+related_synonym: "DO3" []
 related_synonym: "dorsal external oblique muscle 11" []
 is_a: FBbt:00000608 ! abdominal dorsal oblique muscle
 relationship: develops_from FBbt:01000611 ! abdominal dorsal oblique muscle 3 founder cell
@@ -3930,8 +3930,8 @@ relationship: develops_from FBbt:01000611 ! abdominal dorsal oblique muscle 3 fo
 [Term]
 id: FBbt:00000612
 name: abdominal dorsal oblique muscle 4
-related_synonym: "DO4" []
 related_synonym: "deo1" []
+related_synonym: "DO4" []
 related_synonym: "dorso-lateral external oblique muscle 19" []
 is_a: FBbt:00000608 ! abdominal dorsal oblique muscle
 
@@ -3970,48 +3970,48 @@ is_a: FBbt:00000607 ! abdominal oblique muscle
 id: FBbt:00000617
 name: abdominal ventral oblique muscle 1
 related_synonym: "14.1" []
-related_synonym: "VO1" []
 related_synonym: "ventral external oblique muscle 14" []
 related_synonym: "veo1" []
+related_synonym: "VO1" []
 is_a: FBbt:00000616 ! abdominal ventral oblique muscle
 
 [Term]
 id: FBbt:00000618
 name: abdominal ventral oblique muscle 2
 related_synonym: "14.2" []
-related_synonym: "VO2" []
 related_synonym: "ventral external oblique muscle 30" []
 related_synonym: "veo2" []
+related_synonym: "VO2" []
 is_a: FBbt:00000616 ! abdominal ventral oblique muscle
 
 [Term]
 id: FBbt:00000619
 name: abdominal ventral oblique muscle 3
-related_synonym: "VO3" []
 related_synonym: "ventral external oblique muscle 28" []
 related_synonym: "veo3" []
+related_synonym: "VO3" []
 is_a: FBbt:00000616 ! abdominal ventral oblique muscle
 
 [Term]
 id: FBbt:00000620
 name: abdominal ventral oblique muscle 4
-related_synonym: "VO4" []
 related_synonym: "ventral external oblique muscle 15" []
 related_synonym: "veo4" []
+related_synonym: "VO4" []
 is_a: FBbt:00000616 ! abdominal ventral oblique muscle
 
 [Term]
 id: FBbt:00000621
 name: abdominal ventral oblique muscle 5
-related_synonym: "VO5" []
 related_synonym: "ventral external oblique muscle 16" []
+related_synonym: "VO5" []
 is_a: FBbt:00000616 ! abdominal ventral oblique muscle
 
 [Term]
 id: FBbt:00000622
 name: abdominal ventral oblique muscle 6
-related_synonym: "VO6" []
 related_synonym: "ventral external oblique muscle 17" []
+related_synonym: "VO6" []
 is_a: FBbt:00000616 ! abdominal ventral oblique muscle
 
 [Term]
@@ -4030,8 +4030,8 @@ is_a: FBbt:00000623 ! abdominal transverse muscle
 [Term]
 id: FBbt:00000625
 name: abdominal dorsal transverse muscle 1
-related_synonym: "DT1" []
 related_synonym: "dorso-lateral external oblique muscle 18" []
+related_synonym: "DT1" []
 related_synonym: "pet5" []
 is_a: FBbt:00000624 ! abdominal dorsal transverse muscle
 relationship: develops_from FBbt:01000625 ! abdominal dorsal transverse muscle 1 founder cell
@@ -4070,8 +4070,8 @@ is_a: FBbt:00000626 ! abdominal lateral transverse muscle
 [Term]
 id: FBbt:00000630
 name: abdominal lateral transverse muscle 4
-related_synonym: "LT4" []
 related_synonym: "lateral external transverse muscle 24" []
+related_synonym: "LT4" []
 related_synonym: "pet4" []
 is_a: FBbt:00000626 ! abdominal lateral transverse muscle
 
@@ -4084,8 +4084,8 @@ is_a: FBbt:00000623 ! abdominal transverse muscle
 [Term]
 id: FBbt:00000632
 name: abdominal ventral transverse muscle 1
-related_synonym: "VT1" []
 related_synonym: "ventral external oblique muscle 25" []
+related_synonym: "VT1" []
 is_a: FBbt:00000631 ! abdominal ventral transverse muscle
 relationship: develops_from FBbt:01000632 ! abdominal ventral transverse muscle 1 founder cell
 
@@ -4110,8 +4110,8 @@ is_a: FBbt:00000623 ! abdominal transverse muscle
 [Term]
 id: FBbt:00000636
 name: abdominal ventral internal muscle 1
-related_synonym: "VI1" []
 related_synonym: "ventral internal longitudinal mouthpart associated muscle 31" []
+related_synonym: "VI1" []
 is_a: FBbt:00000635 ! abdominal ventral internal muscle
 
 [Term]
@@ -4211,8 +4211,8 @@ is_a: FBbt:00000647 ! abdominal 1 longitudinal muscle
 [Term]
 id: FBbt:00000649
 name: abdominal 1 lateral longitudinal muscle 1
-related_synonym: "LL1" []
 related_synonym: "dorso-lateral internal longitudinal muscle 4" []
+related_synonym: "LL1" []
 related_synonym: "pl2" []
 is_a: FBbt:00000600 ! abdominal lateral longitudinal muscle 1
 is_a: FBbt:00000648 ! abdominal 1 lateral longitudinal muscle
@@ -4227,45 +4227,45 @@ is_a: FBbt:00000647 ! abdominal 1 longitudinal muscle
 [Term]
 id: FBbt:00000651
 name: abdominal 1 ventral longitudinal muscle 1
-related_synonym: "VL1" []
 related_synonym: "pl1" []
 related_synonym: "pleural external longitudinal muscle 12" []
+related_synonym: "VL1" []
 is_a: FBbt:00000602 ! abdominal ventral longitudinal muscle 1
 is_a: FBbt:00000650 ! abdominal 1 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000652
 name: abdominal 1 ventral longitudinal muscle 2
-related_synonym: "VL2" []
 related_synonym: "pleural external longitudinal muscle 13" []
 related_synonym: "vio1" []
+related_synonym: "VL2" []
 is_a: FBbt:00000603 ! abdominal ventral longitudinal muscle 2
 is_a: FBbt:00000650 ! abdominal 1 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000653
 name: abdominal 1 ventral longitudinal muscle 3
-related_synonym: "VL3" []
 related_synonym: "ventral internal longitudinal muscle 6" []
 related_synonym: "vio2" []
+related_synonym: "VL3" []
 is_a: FBbt:00000604 ! abdominal ventral longitudinal muscle 3
 is_a: FBbt:00000650 ! abdominal 1 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000654
 name: abdominal 1 ventral longitudinal muscle 4
-related_synonym: "VL4" []
 related_synonym: "ventral internal longitudinal muscle 7" []
 related_synonym: "vio3" []
+related_synonym: "VL4" []
 is_a: FBbt:00000605 ! abdominal ventral longitudinal muscle 4
 is_a: FBbt:00000650 ! abdominal 1 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000655
 name: abdominal 1 segment border muscle
-related_synonym: "SBM" []
 related_synonym: "pit" []
 related_synonym: "pleural internal transverse muscle 8" []
+related_synonym: "SBM" []
 is_a: FBbt:00000606 ! abdominal segment border muscle
 is_a: FBbt:00000637 ! hypodermal muscle of abdominal 1
 
@@ -4285,8 +4285,8 @@ is_a: FBbt:00000656 ! abdominal 1 oblique muscle
 [Term]
 id: FBbt:00000658
 name: abdominal 1 dorsal oblique muscle 1
-related_synonym: "DO1" []
 related_synonym: "deo4" []
+related_synonym: "DO1" []
 related_synonym: "dorsal external oblique muscle 9" []
 is_a: FBbt:00000609 ! abdominal dorsal oblique muscle 1
 is_a: FBbt:00000657 ! abdominal 1 dorsal oblique muscle
@@ -4294,8 +4294,8 @@ is_a: FBbt:00000657 ! abdominal 1 dorsal oblique muscle
 [Term]
 id: FBbt:00000659
 name: abdominal 1 dorsal oblique muscle 2
-related_synonym: "DO2" []
 related_synonym: "deo3" []
+related_synonym: "DO2" []
 related_synonym: "dorsal external oblique muscle 10" []
 is_a: FBbt:00000610 ! abdominal dorsal oblique muscle 2
 is_a: FBbt:00000657 ! abdominal 1 dorsal oblique muscle
@@ -4303,8 +4303,8 @@ is_a: FBbt:00000657 ! abdominal 1 dorsal oblique muscle
 [Term]
 id: FBbt:00000660
 name: abdominal 1 dorsal oblique muscle 3
-related_synonym: "DO3" []
 related_synonym: "deo2" []
+related_synonym: "DO3" []
 related_synonym: "dorsal external oblique muscle 11" []
 is_a: FBbt:00000611 ! abdominal dorsal oblique muscle 3
 is_a: FBbt:00000657 ! abdominal 1 dorsal oblique muscle
@@ -4312,8 +4312,8 @@ is_a: FBbt:00000657 ! abdominal 1 dorsal oblique muscle
 [Term]
 id: FBbt:00000661
 name: abdominal 1 dorsal oblique muscle 4
-related_synonym: "DO4" []
 related_synonym: "deo1" []
+related_synonym: "DO4" []
 related_synonym: "dorso-lateral external oblique muscle 19" []
 is_a: FBbt:00000612 ! abdominal dorsal oblique muscle 4
 is_a: FBbt:00000657 ! abdominal 1 dorsal oblique muscle
@@ -4352,47 +4352,47 @@ is_a: FBbt:00000656 ! abdominal 1 oblique muscle
 [Term]
 id: FBbt:00000666
 name: abdominal 1 ventral oblique muscle 1
-related_synonym: "VO1" []
 related_synonym: "muscle 14.1" []
 related_synonym: "ventral external oblique muscle 14" []
 related_synonym: "veo1" []
+related_synonym: "VO1" []
 is_a: FBbt:00000617 ! abdominal ventral oblique muscle 1
 is_a: FBbt:00000665 ! abdominal 1 ventral oblique muscle
 
 [Term]
 id: FBbt:00000667
 name: abdominal 1 ventral oblique muscle 2
-related_synonym: "VO2" []
 related_synonym: "muscle 14.2" []
 related_synonym: "ventral external oblique muscle 30" []
 related_synonym: "veo2" []
+related_synonym: "VO2" []
 is_a: FBbt:00000618 ! abdominal ventral oblique muscle 2
 is_a: FBbt:00000665 ! abdominal 1 ventral oblique muscle
 
 [Term]
 id: FBbt:00000668
 name: abdominal 1 ventral oblique muscle 4
-related_synonym: "VO4" []
 related_synonym: "ventral external oblique muscle 15" []
 related_synonym: "veo4" []
+related_synonym: "VO4" []
 is_a: FBbt:00000620 ! abdominal ventral oblique muscle 4
 is_a: FBbt:00000665 ! abdominal 1 ventral oblique muscle
 
 [Term]
 id: FBbt:00000669
 name: abdominal 1 ventral oblique muscle 5
-related_synonym: "VO5" []
 related_synonym: "ventral external oblique muscle 16" []
 related_synonym: "veo5" []
+related_synonym: "VO5" []
 is_a: FBbt:00000621 ! abdominal ventral oblique muscle 5
 is_a: FBbt:00000665 ! abdominal 1 ventral oblique muscle
 
 [Term]
 id: FBbt:00000670
 name: abdominal 1 ventral oblique muscle 3
-related_synonym: "VO3" []
 related_synonym: "ventral external oblique muscle 28" []
 related_synonym: "veo3" []
+related_synonym: "VO3" []
 is_a: FBbt:00000619 ! abdominal ventral oblique muscle 3
 is_a: FBbt:00000665 ! abdominal 1 ventral oblique muscle
 
@@ -4412,8 +4412,8 @@ is_a: FBbt:00000671 ! abdominal 1 transverse muscle
 [Term]
 id: FBbt:00000673
 name: abdominal 1 dorsal transverse muscle 1
-related_synonym: "DT1" []
 related_synonym: "dorso-lateral external oblique muscle 18" []
+related_synonym: "DT1" []
 related_synonym: "pet5" []
 is_a: FBbt:00000625 ! abdominal dorsal transverse muscle 1
 is_a: FBbt:00000672 ! abdominal 1 dorsal transverse muscle
@@ -4455,8 +4455,8 @@ is_a: FBbt:00000674 ! abdominal 1 lateral transverse muscle
 [Term]
 id: FBbt:00000678
 name: abdominal 1 lateral transverse muscle 4
-related_synonym: "LT4" []
 related_synonym: "lateral external transverse muscle 24" []
+related_synonym: "LT4" []
 related_synonym: "pet4" []
 is_a: FBbt:00000630 ! abdominal lateral transverse muscle 4
 is_a: FBbt:00000674 ! abdominal 1 lateral transverse muscle
@@ -4471,8 +4471,8 @@ is_a: FBbt:00000671 ! abdominal 1 transverse muscle
 [Term]
 id: FBbt:00000680
 name: abdominal 1 ventral internal muscle 1
-related_synonym: "VI1" []
 related_synonym: "ventral internal longitudinal mouthpart associated muscle 31" []
+related_synonym: "VI1" []
 is_a: FBbt:00000636 ! abdominal ventral internal muscle 1
 is_a: FBbt:00000679 ! abdominal 1 ventral internal muscle
 
@@ -4579,8 +4579,8 @@ is_a: FBbt:00000692 ! abdominal 2 oblique muscle
 [Term]
 id: FBbt:00000694
 name: abdominal 2 dorsal oblique muscle 1
-related_synonym: "DO1" []
 related_synonym: "deo4" []
+related_synonym: "DO1" []
 related_synonym: "dorsal external oblique muscle 9" []
 is_a: FBbt:00000609 ! abdominal dorsal oblique muscle 1
 is_a: FBbt:00000693 ! abdominal 2 dorsal oblique muscle
@@ -4588,8 +4588,8 @@ is_a: FBbt:00000693 ! abdominal 2 dorsal oblique muscle
 [Term]
 id: FBbt:00000695
 name: abdominal 2 dorsal oblique muscle 2
-related_synonym: "DO2" []
 related_synonym: "deo3" []
+related_synonym: "DO2" []
 related_synonym: "dorsal external oblique muscle 10" []
 is_a: FBbt:00000610 ! abdominal dorsal oblique muscle 2
 is_a: FBbt:00000693 ! abdominal 2 dorsal oblique muscle
@@ -4597,8 +4597,8 @@ is_a: FBbt:00000693 ! abdominal 2 dorsal oblique muscle
 [Term]
 id: FBbt:00000696
 name: abdominal 2 dorsal oblique muscle 3
-related_synonym: "DO3" []
 related_synonym: "deo2" []
+related_synonym: "DO3" []
 related_synonym: "dorsal external oblique muscle 11" []
 is_a: FBbt:00000611 ! abdominal dorsal oblique muscle 3
 is_a: FBbt:00000693 ! abdominal 2 dorsal oblique muscle
@@ -4606,8 +4606,8 @@ is_a: FBbt:00000693 ! abdominal 2 dorsal oblique muscle
 [Term]
 id: FBbt:00000697
 name: abdominal 2 dorsal oblique muscle 4
-related_synonym: "DO4" []
 related_synonym: "deo1" []
+related_synonym: "DO4" []
 related_synonym: "dorso-lateral external oblique muscle 19" []
 is_a: FBbt:00000612 ! abdominal dorsal oblique muscle 4
 is_a: FBbt:00000693 ! abdominal 2 dorsal oblique muscle
@@ -4647,9 +4647,9 @@ is_a: FBbt:00000692 ! abdominal 2 oblique muscle
 id: FBbt:00000702
 name: abdominal 2 ventral oblique muscle 1
 related_synonym: "14.1" []
-related_synonym: "VO1" []
 related_synonym: "ventral external oblique muscle 14" []
 related_synonym: "veo1" []
+related_synonym: "VO1" []
 is_a: FBbt:00000617 ! abdominal ventral oblique muscle 1
 is_a: FBbt:00000701 ! abdominal 2 ventral oblique muscle
 
@@ -4657,44 +4657,44 @@ is_a: FBbt:00000701 ! abdominal 2 ventral oblique muscle
 id: FBbt:00000703
 name: abdominal 2 ventral oblique muscle 2
 related_synonym: "14.2" []
-related_synonym: "VO2" []
 related_synonym: "ventral external oblique muscle 30" []
 related_synonym: "veo2" []
+related_synonym: "VO2" []
 is_a: FBbt:00000618 ! abdominal ventral oblique muscle 2
 is_a: FBbt:00000701 ! abdominal 2 ventral oblique muscle
 
 [Term]
 id: FBbt:00000704
 name: abdominal 2 ventral oblique muscle 3
-related_synonym: "VO3" []
 related_synonym: "ventral external oblique muscle 28" []
 related_synonym: "veo3" []
+related_synonym: "VO3" []
 is_a: FBbt:00000619 ! abdominal ventral oblique muscle 3
 is_a: FBbt:00000701 ! abdominal 2 ventral oblique muscle
 
 [Term]
 id: FBbt:00000705
 name: abdominal 2 ventral oblique muscle 4
-related_synonym: "VO4" []
 related_synonym: "ventral external oblique muscle 15" []
 related_synonym: "veo4" []
+related_synonym: "VO4" []
 is_a: FBbt:00000620 ! abdominal ventral oblique muscle 4
 is_a: FBbt:00000701 ! abdominal 2 ventral oblique muscle
 
 [Term]
 id: FBbt:00000706
 name: abdominal 2 ventral oblique muscle 5
-related_synonym: "VO5" []
 related_synonym: "ventral external oblique muscle 16" []
 related_synonym: "veo5" []
+related_synonym: "VO5" []
 is_a: FBbt:00000621 ! abdominal ventral oblique muscle 5
 is_a: FBbt:00000701 ! abdominal 2 ventral oblique muscle
 
 [Term]
 id: FBbt:00000707
 name: abdominal 2 ventral oblique muscle 6
-related_synonym: "VO6" []
 related_synonym: "ventral external oblique muscle 17" []
+related_synonym: "VO6" []
 is_a: FBbt:00000622 ! abdominal ventral oblique muscle 6
 is_a: FBbt:00000701 ! abdominal 2 ventral oblique muscle
 
@@ -4714,8 +4714,8 @@ is_a: FBbt:00000708 ! abdominal 2 longitudinal muscle
 [Term]
 id: FBbt:00000710
 name: abdominal 2 lateral longitudinal muscle 1
-related_synonym: "LL1" []
 related_synonym: "dorso-lateral internal longitudinal muscle 4" []
+related_synonym: "LL1" []
 related_synonym: "pl2" []
 is_a: FBbt:00000600 ! abdominal lateral longitudinal muscle 1
 is_a: FBbt:00000709 ! abdominal 2 lateral longitudinal muscle
@@ -4730,45 +4730,45 @@ is_a: FBbt:00000708 ! abdominal 2 longitudinal muscle
 [Term]
 id: FBbt:00000712
 name: abdominal 2 ventral longitudinal muscle 1
-related_synonym: "VL1" []
 related_synonym: "pl1" []
 related_synonym: "pleural external longitudinal muscle 12" []
+related_synonym: "VL1" []
 is_a: FBbt:00000602 ! abdominal ventral longitudinal muscle 1
 is_a: FBbt:00000711 ! abdominal 2 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000713
 name: abdominal 2 ventral longitudinal muscle 2
-related_synonym: "VL2" []
 related_synonym: "pleural external longitudinal muscle 13" []
 related_synonym: "vio1" []
+related_synonym: "VL2" []
 is_a: FBbt:00000603 ! abdominal ventral longitudinal muscle 2
 is_a: FBbt:00000711 ! abdominal 2 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000714
 name: abdominal 2 ventral longitudinal muscle 3
-related_synonym: "VL3" []
 related_synonym: "ventral internal longitudinal muscle 6" []
 related_synonym: "vio2" []
+related_synonym: "VL3" []
 is_a: FBbt:00000604 ! abdominal ventral longitudinal muscle 3
 is_a: FBbt:00000711 ! abdominal 2 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000715
 name: abdominal 2 ventral longitudinal muscle 4
-related_synonym: "VL4" []
 related_synonym: "ventral internal longitudinal muscle 7" []
 related_synonym: "vio3" []
+related_synonym: "VL4" []
 is_a: FBbt:00000605 ! abdominal ventral longitudinal muscle 4
 is_a: FBbt:00000711 ! abdominal 2 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000716
 name: abdominal 2 segment border muscle
-related_synonym: "SBM" []
 related_synonym: "pit" []
 related_synonym: "pleural internal transverse muscle 8" []
+related_synonym: "SBM" []
 is_a: FBbt:00000606 ! abdominal segment border muscle
 is_a: FBbt:00000682 ! hypodermal muscle of larval abdominal 2
 
@@ -4788,8 +4788,8 @@ is_a: FBbt:00000717 ! abdominal 2 transverse muscle
 [Term]
 id: FBbt:00000719
 name: abdominal 2 dorsal transverse muscle 1
-related_synonym: "DT1" []
 related_synonym: "dorso-lateral external oblique muscle 18" []
+related_synonym: "DT1" []
 related_synonym: "pet5" []
 is_a: FBbt:00000625 ! abdominal dorsal transverse muscle 1
 is_a: FBbt:00000718 ! abdominal 2 dorsal transverse muscle
@@ -4831,8 +4831,8 @@ is_a: FBbt:00000720 ! abdominal 2 lateral transverse muscle
 [Term]
 id: FBbt:00000724
 name: abdominal 2 lateral transverse muscle 4
-related_synonym: "LT4" []
 related_synonym: "lateral external transverse muscle 24" []
+related_synonym: "LT4" []
 related_synonym: "pet4" []
 is_a: FBbt:00000630 ! abdominal lateral transverse muscle 4
 is_a: FBbt:00000720 ! abdominal 2 lateral transverse muscle
@@ -4847,8 +4847,8 @@ is_a: FBbt:00000717 ! abdominal 2 transverse muscle
 [Term]
 id: FBbt:00000726
 name: abdominal 2 ventral transverse muscle 1
-related_synonym: "VT1" []
 related_synonym: "ventral external oblique muscle 25" []
+related_synonym: "VT1" []
 is_a: FBbt:00000632 ! abdominal ventral transverse muscle 1
 is_a: FBbt:00000725 ! abdominal 2 ventral transverse muscle
 
@@ -4949,8 +4949,8 @@ is_a: FBbt:00000737 ! abdominal 3 oblique muscle
 [Term]
 id: FBbt:00000739
 name: abdominal 3 dorsal oblique muscle 1
-related_synonym: "DO1" []
 related_synonym: "deo4" []
+related_synonym: "DO1" []
 related_synonym: "dorsal external oblique muscle 9" []
 is_a: FBbt:00000609 ! abdominal dorsal oblique muscle 1
 is_a: FBbt:00000738 ! abdominal 3 dorsal oblique muscle
@@ -4958,8 +4958,8 @@ is_a: FBbt:00000738 ! abdominal 3 dorsal oblique muscle
 [Term]
 id: FBbt:00000740
 name: abdominal 3 dorsal oblique muscle 2
-related_synonym: "DO2" []
 related_synonym: "deo3" []
+related_synonym: "DO2" []
 related_synonym: "dorsal external oblique muscle 10" []
 is_a: FBbt:00000610 ! abdominal dorsal oblique muscle 2
 is_a: FBbt:00000738 ! abdominal 3 dorsal oblique muscle
@@ -4967,8 +4967,8 @@ is_a: FBbt:00000738 ! abdominal 3 dorsal oblique muscle
 [Term]
 id: FBbt:00000741
 name: abdominal 3 dorsal oblique muscle 3
-related_synonym: "DO3" []
 related_synonym: "deo2" []
+related_synonym: "DO3" []
 related_synonym: "dorsal external oblique muscle 11" []
 is_a: FBbt:00000611 ! abdominal dorsal oblique muscle 3
 is_a: FBbt:00000738 ! abdominal 3 dorsal oblique muscle
@@ -4976,8 +4976,8 @@ is_a: FBbt:00000738 ! abdominal 3 dorsal oblique muscle
 [Term]
 id: FBbt:00000742
 name: abdominal 3 dorsal oblique muscle 4
-related_synonym: "DO4" []
 related_synonym: "deo1" []
+related_synonym: "DO4" []
 related_synonym: "dorso-lateral external oblique muscle 19" []
 is_a: FBbt:00000612 ! abdominal dorsal oblique muscle 4
 is_a: FBbt:00000738 ! abdominal 3 dorsal oblique muscle
@@ -5017,9 +5017,9 @@ is_a: FBbt:00000737 ! abdominal 3 oblique muscle
 id: FBbt:00000747
 name: abdominal 3 ventral oblique muscle 1
 related_synonym: "14.1" []
-related_synonym: "VO1" []
 related_synonym: "ventral external oblique muscle 14" []
 related_synonym: "veo1" []
+related_synonym: "VO1" []
 is_a: FBbt:00000617 ! abdominal ventral oblique muscle 1
 is_a: FBbt:00000746 ! abdominal 3 ventral oblique muscle
 
@@ -5027,44 +5027,44 @@ is_a: FBbt:00000746 ! abdominal 3 ventral oblique muscle
 id: FBbt:00000748
 name: abdominal 3 ventral oblique muscle 2
 related_synonym: "14.2" []
-related_synonym: "VO2" []
 related_synonym: "ventral external oblique muscle 30" []
 related_synonym: "veo2" []
+related_synonym: "VO2" []
 is_a: FBbt:00000618 ! abdominal ventral oblique muscle 2
 is_a: FBbt:00000746 ! abdominal 3 ventral oblique muscle
 
 [Term]
 id: FBbt:00000749
 name: abdominal 3 ventral oblique muscle 3
-related_synonym: "VO3" []
 related_synonym: "ventral external oblique muscle 28" []
 related_synonym: "veo3" []
+related_synonym: "VO3" []
 is_a: FBbt:00000619 ! abdominal ventral oblique muscle 3
 is_a: FBbt:00000746 ! abdominal 3 ventral oblique muscle
 
 [Term]
 id: FBbt:00000750
 name: abdominal 3 ventral oblique muscle 4
-related_synonym: "VO4" []
 related_synonym: "ventral external oblique muscle 15" []
 related_synonym: "veo4" []
+related_synonym: "VO4" []
 is_a: FBbt:00000620 ! abdominal ventral oblique muscle 4
 is_a: FBbt:00000746 ! abdominal 3 ventral oblique muscle
 
 [Term]
 id: FBbt:00000751
 name: abdominal 3 ventral oblique muscle 5
-related_synonym: "VO5" []
 related_synonym: "ventral external oblique muscle 16" []
 related_synonym: "veo5" []
+related_synonym: "VO5" []
 is_a: FBbt:00000621 ! abdominal ventral oblique muscle 5
 is_a: FBbt:00000746 ! abdominal 3 ventral oblique muscle
 
 [Term]
 id: FBbt:00000752
 name: abdominal 3 ventral oblique muscle 6
-related_synonym: "VO6" []
 related_synonym: "ventral external oblique muscle 17" []
+related_synonym: "VO6" []
 is_a: FBbt:00000622 ! abdominal ventral oblique muscle 6
 is_a: FBbt:00000746 ! abdominal 3 ventral oblique muscle
 
@@ -5084,8 +5084,8 @@ is_a: FBbt:00000753 ! abdominal 3 longitudinal muscle
 [Term]
 id: FBbt:00000755
 name: abdominal 3 lateral longitudinal muscle 1
-related_synonym: "LL1" []
 related_synonym: "dorso-lateral internal longitudinal muscle 4" []
+related_synonym: "LL1" []
 related_synonym: "pl2" []
 is_a: FBbt:00000600 ! abdominal lateral longitudinal muscle 1
 is_a: FBbt:00000754 ! abdominal 3 lateral longitudinal muscle
@@ -5100,45 +5100,45 @@ is_a: FBbt:00000753 ! abdominal 3 longitudinal muscle
 [Term]
 id: FBbt:00000757
 name: abdominal 3 ventral longitudinal muscle 1
-related_synonym: "VL1" []
 related_synonym: "pl1" []
 related_synonym: "pleural external longitudinal muscle 12" []
+related_synonym: "VL1" []
 is_a: FBbt:00000602 ! abdominal ventral longitudinal muscle 1
 is_a: FBbt:00000756 ! abdominal 3 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000758
 name: abdominal 3 ventral longitudinal muscle 2
-related_synonym: "VL2" []
 related_synonym: "pleural external longitudinal muscle 13" []
 related_synonym: "vio1" []
+related_synonym: "VL2" []
 is_a: FBbt:00000603 ! abdominal ventral longitudinal muscle 2
 is_a: FBbt:00000756 ! abdominal 3 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000759
 name: abdominal 3 ventral longitudinal muscle 3
-related_synonym: "VL3" []
 related_synonym: "ventral internal longitudinal muscle 6" []
 related_synonym: "vio2" []
+related_synonym: "VL3" []
 is_a: FBbt:00000604 ! abdominal ventral longitudinal muscle 3
 is_a: FBbt:00000756 ! abdominal 3 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000760
 name: abdominal 3 ventral longitudinal muscle 4
-related_synonym: "VL4" []
 related_synonym: "ventral internal longitudinal muscle 7" []
 related_synonym: "vio3" []
+related_synonym: "VL4" []
 is_a: FBbt:00000605 ! abdominal ventral longitudinal muscle 4
 is_a: FBbt:00000756 ! abdominal 3 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000761
 name: abdominal 3 segment border muscle
-related_synonym: "SBM" []
 related_synonym: "pit" []
 related_synonym: "pleural internal transverse muscle 8" []
+related_synonym: "SBM" []
 is_a: FBbt:00000606 ! abdominal segment border muscle
 is_a: FBbt:00000727 ! hypodermal muscle of larval abdominal 3
 
@@ -5158,8 +5158,8 @@ is_a: FBbt:00000762 ! abdominal 3 transverse muscle
 [Term]
 id: FBbt:00000764
 name: abdominal 3 dorsal transverse muscle 1
-related_synonym: "DT1" []
 related_synonym: "dorso-lateral external oblique muscle 18" []
+related_synonym: "DT1" []
 related_synonym: "pet5" []
 is_a: FBbt:00000625 ! abdominal dorsal transverse muscle 1
 is_a: FBbt:00000763 ! abdominal 3 dorsal transverse muscle
@@ -5201,8 +5201,8 @@ is_a: FBbt:00000765 ! abdominal 3 lateral transverse muscle
 [Term]
 id: FBbt:00000769
 name: abdominal 3 lateral transverse muscle 4
-related_synonym: "LT4" []
 related_synonym: "lateral external transverse muscle 24" []
+related_synonym: "LT4" []
 related_synonym: "pet4" []
 is_a: FBbt:00000630 ! abdominal lateral transverse muscle 4
 is_a: FBbt:00000765 ! abdominal 3 lateral transverse muscle
@@ -5217,8 +5217,8 @@ is_a: FBbt:00000762 ! abdominal 3 transverse muscle
 [Term]
 id: FBbt:00000771
 name: abdominal 3 ventral transverse muscle 1
-related_synonym: "VT1" []
 related_synonym: "ventral external oblique muscle 25" []
+related_synonym: "VT1" []
 is_a: FBbt:00000632 ! abdominal ventral transverse muscle 1
 is_a: FBbt:00000770 ! abdominal 3 ventral transverse muscle
 
@@ -5319,8 +5319,8 @@ is_a: FBbt:00000782 ! abdominal 4 oblique muscle
 [Term]
 id: FBbt:00000784
 name: abdominal 4 dorsal oblique muscle 1
-related_synonym: "DO1" []
 related_synonym: "deo4" []
+related_synonym: "DO1" []
 related_synonym: "dorsal external oblique muscle 9" []
 is_a: FBbt:00000609 ! abdominal dorsal oblique muscle 1
 is_a: FBbt:00000783 ! abdominal 4 dorsal oblique muscle
@@ -5328,8 +5328,8 @@ is_a: FBbt:00000783 ! abdominal 4 dorsal oblique muscle
 [Term]
 id: FBbt:00000785
 name: abdominal 4 dorsal oblique muscle 2
-related_synonym: "DO2" []
 related_synonym: "deo3" []
+related_synonym: "DO2" []
 related_synonym: "dorsal external oblique muscle 10" []
 is_a: FBbt:00000610 ! abdominal dorsal oblique muscle 2
 is_a: FBbt:00000783 ! abdominal 4 dorsal oblique muscle
@@ -5337,8 +5337,8 @@ is_a: FBbt:00000783 ! abdominal 4 dorsal oblique muscle
 [Term]
 id: FBbt:00000786
 name: abdominal 4 dorsal oblique muscle 3
-related_synonym: "DO3" []
 related_synonym: "deo2" []
+related_synonym: "DO3" []
 related_synonym: "dorsal external oblique muscle 11" []
 is_a: FBbt:00000611 ! abdominal dorsal oblique muscle 3
 is_a: FBbt:00000783 ! abdominal 4 dorsal oblique muscle
@@ -5346,8 +5346,8 @@ is_a: FBbt:00000783 ! abdominal 4 dorsal oblique muscle
 [Term]
 id: FBbt:00000787
 name: abdominal 4 dorsal oblique muscle 4
-related_synonym: "DO4" []
 related_synonym: "deo1" []
+related_synonym: "DO4" []
 related_synonym: "dorso-lateral external oblique muscle 19" []
 is_a: FBbt:00000612 ! abdominal dorsal oblique muscle 4
 is_a: FBbt:00000783 ! abdominal 4 dorsal oblique muscle
@@ -5387,9 +5387,9 @@ is_a: FBbt:00000782 ! abdominal 4 oblique muscle
 id: FBbt:00000792
 name: abdominal 4 ventral oblique muscle 1
 related_synonym: "14.1" []
-related_synonym: "VO1" []
 related_synonym: "ventral external oblique muscle 14" []
 related_synonym: "veo1" []
+related_synonym: "VO1" []
 is_a: FBbt:00000617 ! abdominal ventral oblique muscle 1
 is_a: FBbt:00000791 ! abdominal 4 ventral oblique muscle
 
@@ -5397,44 +5397,44 @@ is_a: FBbt:00000791 ! abdominal 4 ventral oblique muscle
 id: FBbt:00000793
 name: abdominal 4 ventral oblique muscle 2
 related_synonym: "14.2" []
-related_synonym: "VO2" []
 related_synonym: "ventral external oblique muscle 30" []
 related_synonym: "veo2" []
+related_synonym: "VO2" []
 is_a: FBbt:00000618 ! abdominal ventral oblique muscle 2
 is_a: FBbt:00000791 ! abdominal 4 ventral oblique muscle
 
 [Term]
 id: FBbt:00000794
 name: abdominal 4 ventral oblique muscle 3
-related_synonym: "VO3" []
 related_synonym: "ventral external oblique muscle 28" []
 related_synonym: "veo3" []
+related_synonym: "VO3" []
 is_a: FBbt:00000619 ! abdominal ventral oblique muscle 3
 is_a: FBbt:00000791 ! abdominal 4 ventral oblique muscle
 
 [Term]
 id: FBbt:00000795
 name: abdominal 4 ventral oblique muscle 4
-related_synonym: "VO4" []
 related_synonym: "ventral external oblique muscle 15" []
 related_synonym: "veo4" []
+related_synonym: "VO4" []
 is_a: FBbt:00000620 ! abdominal ventral oblique muscle 4
 is_a: FBbt:00000791 ! abdominal 4 ventral oblique muscle
 
 [Term]
 id: FBbt:00000796
 name: abdominal 4 ventral oblique muscle 5
-related_synonym: "VO5" []
 related_synonym: "ventral external oblique muscle 16" []
 related_synonym: "veo5" []
+related_synonym: "VO5" []
 is_a: FBbt:00000621 ! abdominal ventral oblique muscle 5
 is_a: FBbt:00000791 ! abdominal 4 ventral oblique muscle
 
 [Term]
 id: FBbt:00000797
 name: abdominal 4 ventral oblique muscle 6
-related_synonym: "VO6" []
 related_synonym: "ventral external oblique muscle 17" []
+related_synonym: "VO6" []
 is_a: FBbt:00000622 ! abdominal ventral oblique muscle 6
 is_a: FBbt:00000791 ! abdominal 4 ventral oblique muscle
 
@@ -5454,8 +5454,8 @@ is_a: FBbt:00000798 ! abdominal 4 longitudinal muscle
 [Term]
 id: FBbt:00000800
 name: abdominal 4 lateral longitudinal muscle 1
-related_synonym: "LL1" []
 related_synonym: "dorso-lateral internal longitudinal muscle 4" []
+related_synonym: "LL1" []
 related_synonym: "pl2" []
 is_a: FBbt:00000600 ! abdominal lateral longitudinal muscle 1
 is_a: FBbt:00000799 ! abdominal 4 lateral longitudinal muscle
@@ -5470,45 +5470,45 @@ is_a: FBbt:00000798 ! abdominal 4 longitudinal muscle
 [Term]
 id: FBbt:00000802
 name: abdominal 4 ventral longitudinal muscle 1
-related_synonym: "VL1" []
 related_synonym: "pl1" []
 related_synonym: "pleural external longitudinal muscle 12" []
+related_synonym: "VL1" []
 is_a: FBbt:00000602 ! abdominal ventral longitudinal muscle 1
 is_a: FBbt:00000801 ! abdominal 4 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000803
 name: abdominal 4 ventral longitudinal muscle 2
-related_synonym: "VL2" []
 related_synonym: "pleural external longitudinal muscle 13" []
 related_synonym: "vio1" []
+related_synonym: "VL2" []
 is_a: FBbt:00000603 ! abdominal ventral longitudinal muscle 2
 is_a: FBbt:00000801 ! abdominal 4 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000804
 name: abdominal 4 ventral longitudinal muscle 3
-related_synonym: "VL3" []
 related_synonym: "ventral internal longitudinal muscle 6" []
 related_synonym: "vio2" []
+related_synonym: "VL3" []
 is_a: FBbt:00000604 ! abdominal ventral longitudinal muscle 3
 is_a: FBbt:00000801 ! abdominal 4 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000805
 name: abdominal 4 ventral longitudinal muscle 4
-related_synonym: "VL4" []
 related_synonym: "ventral internal longitudinal muscle 7" []
 related_synonym: "vio3" []
+related_synonym: "VL4" []
 is_a: FBbt:00000605 ! abdominal ventral longitudinal muscle 4
 is_a: FBbt:00000801 ! abdominal 4 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000806
 name: abdominal 4 segment border muscle
-related_synonym: "SBM" []
 related_synonym: "pit" []
 related_synonym: "pleural internal transverse muscle 8" []
+related_synonym: "SBM" []
 is_a: FBbt:00000606 ! abdominal segment border muscle
 is_a: FBbt:00000772 ! hypodermal muscle of larval abdominal 4
 
@@ -5528,8 +5528,8 @@ is_a: FBbt:00000807 ! abdominal 4 transverse muscle
 [Term]
 id: FBbt:00000809
 name: abdominal 4 dorsal transverse muscle 1
-related_synonym: "DT1" []
 related_synonym: "dorso-lateral external oblique muscle 18" []
+related_synonym: "DT1" []
 related_synonym: "pet5" []
 is_a: FBbt:00000625 ! abdominal dorsal transverse muscle 1
 is_a: FBbt:00000808 ! abdominal 4 dorsal transverse muscle
@@ -5571,8 +5571,8 @@ is_a: FBbt:00000810 ! abdominal 4 lateral transverse muscle
 [Term]
 id: FBbt:00000814
 name: abdominal 4 lateral transverse muscle 4
-related_synonym: "LT4" []
 related_synonym: "lateral external transverse muscle 24" []
+related_synonym: "LT4" []
 related_synonym: "pet4" []
 is_a: FBbt:00000630 ! abdominal lateral transverse muscle 4
 is_a: FBbt:00000810 ! abdominal 4 lateral transverse muscle
@@ -5587,8 +5587,8 @@ is_a: FBbt:00000807 ! abdominal 4 transverse muscle
 [Term]
 id: FBbt:00000816
 name: abdominal 4 ventral transverse muscle 1
-related_synonym: "VT1" []
 related_synonym: "ventral external oblique muscle 25" []
+related_synonym: "VT1" []
 is_a: FBbt:00000632 ! abdominal ventral transverse muscle 1
 is_a: FBbt:00000815 ! abdominal 4 ventral transverse muscle
 
@@ -5689,8 +5689,8 @@ is_a: FBbt:00000827 ! abdominal 5 oblique muscle
 [Term]
 id: FBbt:00000829
 name: abdominal 5 dorsal oblique muscle 1
-related_synonym: "DO1" []
 related_synonym: "deo4" []
+related_synonym: "DO1" []
 related_synonym: "dorsal external oblique muscle 9" []
 is_a: FBbt:00000609 ! abdominal dorsal oblique muscle 1
 is_a: FBbt:00000828 ! abdominal 5 dorsal oblique muscle
@@ -5698,8 +5698,8 @@ is_a: FBbt:00000828 ! abdominal 5 dorsal oblique muscle
 [Term]
 id: FBbt:00000830
 name: abdominal 5 dorsal oblique muscle 2
-related_synonym: "DO2" []
 related_synonym: "deo3" []
+related_synonym: "DO2" []
 related_synonym: "dorsal external oblique muscle 10" []
 is_a: FBbt:00000610 ! abdominal dorsal oblique muscle 2
 is_a: FBbt:00000828 ! abdominal 5 dorsal oblique muscle
@@ -5707,8 +5707,8 @@ is_a: FBbt:00000828 ! abdominal 5 dorsal oblique muscle
 [Term]
 id: FBbt:00000831
 name: abdominal 5 dorsal oblique muscle 3
-related_synonym: "DO3" []
 related_synonym: "deo2" []
+related_synonym: "DO3" []
 related_synonym: "dorsal external oblique muscle 11" []
 is_a: FBbt:00000611 ! abdominal dorsal oblique muscle 3
 is_a: FBbt:00000828 ! abdominal 5 dorsal oblique muscle
@@ -5716,8 +5716,8 @@ is_a: FBbt:00000828 ! abdominal 5 dorsal oblique muscle
 [Term]
 id: FBbt:00000832
 name: abdominal 5 dorsal oblique muscle 4
-related_synonym: "DO4" []
 related_synonym: "deo1" []
+related_synonym: "DO4" []
 related_synonym: "dorso-lateral external oblique muscle 19" []
 is_a: FBbt:00000612 ! abdominal dorsal oblique muscle 4
 is_a: FBbt:00000828 ! abdominal 5 dorsal oblique muscle
@@ -5757,9 +5757,9 @@ is_a: FBbt:00000827 ! abdominal 5 oblique muscle
 id: FBbt:00000837
 name: abdominal 5 ventral oblique muscle 1
 related_synonym: "14.1" []
-related_synonym: "VO1" []
 related_synonym: "ventral external oblique muscle 14" []
 related_synonym: "veo1" []
+related_synonym: "VO1" []
 is_a: FBbt:00000617 ! abdominal ventral oblique muscle 1
 is_a: FBbt:00000836 ! abdominal 5 ventral oblique muscle
 
@@ -5767,44 +5767,44 @@ is_a: FBbt:00000836 ! abdominal 5 ventral oblique muscle
 id: FBbt:00000838
 name: abdominal 5 ventral oblique muscle 2
 related_synonym: "14.2" []
-related_synonym: "VO2" []
 related_synonym: "ventral external oblique muscle 30" []
 related_synonym: "veo2" []
+related_synonym: "VO2" []
 is_a: FBbt:00000618 ! abdominal ventral oblique muscle 2
 is_a: FBbt:00000836 ! abdominal 5 ventral oblique muscle
 
 [Term]
 id: FBbt:00000839
 name: abdominal 5 ventral oblique muscle 3
-related_synonym: "VO3" []
 related_synonym: "ventral external oblique muscle 28" []
 related_synonym: "veo3" []
+related_synonym: "VO3" []
 is_a: FBbt:00000619 ! abdominal ventral oblique muscle 3
 is_a: FBbt:00000836 ! abdominal 5 ventral oblique muscle
 
 [Term]
 id: FBbt:00000840
 name: abdominal 5 ventral oblique muscle 4
-related_synonym: "VO4" []
 related_synonym: "ventral external oblique muscle 15" []
 related_synonym: "veo4" []
+related_synonym: "VO4" []
 is_a: FBbt:00000620 ! abdominal ventral oblique muscle 4
 is_a: FBbt:00000836 ! abdominal 5 ventral oblique muscle
 
 [Term]
 id: FBbt:00000841
 name: abdominal 5 ventral oblique muscle 5
-related_synonym: "VO5" []
 related_synonym: "ventral external oblique muscle 16" []
 related_synonym: "veo5" []
+related_synonym: "VO5" []
 is_a: FBbt:00000621 ! abdominal ventral oblique muscle 5
 is_a: FBbt:00000836 ! abdominal 5 ventral oblique muscle
 
 [Term]
 id: FBbt:00000842
 name: abdominal 5 ventral oblique muscle 6
-related_synonym: "VO6" []
 related_synonym: "ventral external oblique muscle 17" []
+related_synonym: "VO6" []
 is_a: FBbt:00000622 ! abdominal ventral oblique muscle 6
 is_a: FBbt:00000836 ! abdominal 5 ventral oblique muscle
 
@@ -5824,8 +5824,8 @@ is_a: FBbt:00000843 ! abdominal 5 longitudinal muscle
 [Term]
 id: FBbt:00000845
 name: abdominal 5 lateral longitudinal muscle 1
-related_synonym: "LL1" []
 related_synonym: "dorso-lateral internal longitudinal muscle 4" []
+related_synonym: "LL1" []
 related_synonym: "pl2" []
 is_a: FBbt:00000600 ! abdominal lateral longitudinal muscle 1
 is_a: FBbt:00000844 ! abdominal 5 lateral longitudinal muscle
@@ -5840,45 +5840,45 @@ is_a: FBbt:00000843 ! abdominal 5 longitudinal muscle
 [Term]
 id: FBbt:00000847
 name: abdominal 5 ventral longitudinal muscle 1
-related_synonym: "VL1" []
 related_synonym: "pl1" []
 related_synonym: "pleural external longitudinal muscle 12" []
+related_synonym: "VL1" []
 is_a: FBbt:00000602 ! abdominal ventral longitudinal muscle 1
 is_a: FBbt:00000846 ! abdominal 5 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000848
 name: abdominal 5 ventral longitudinal muscle 2
-related_synonym: "VL2" []
 related_synonym: "pleural external longitudinal muscle 13" []
 related_synonym: "vio1" []
+related_synonym: "VL2" []
 is_a: FBbt:00000603 ! abdominal ventral longitudinal muscle 2
 is_a: FBbt:00000846 ! abdominal 5 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000849
 name: abdominal 5 ventral longitudinal muscle 3
-related_synonym: "VL3" []
 related_synonym: "ventral internal longitudinal muscle 6" []
 related_synonym: "vio2" []
+related_synonym: "VL3" []
 is_a: FBbt:00000604 ! abdominal ventral longitudinal muscle 3
 is_a: FBbt:00000846 ! abdominal 5 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000850
 name: abdominal 5 ventral longitudinal muscle 4
-related_synonym: "VL4" []
 related_synonym: "ventral internal longitudinal muscle 7" []
 related_synonym: "vio3" []
+related_synonym: "VL4" []
 is_a: FBbt:00000605 ! abdominal ventral longitudinal muscle 4
 is_a: FBbt:00000846 ! abdominal 5 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000851
 name: abdominal 5 segment border muscle
-related_synonym: "SBM" []
 related_synonym: "pit" []
 related_synonym: "pleural internal transverse muscle 8" []
+related_synonym: "SBM" []
 is_a: FBbt:00000606 ! abdominal segment border muscle
 is_a: FBbt:00000817 ! hypodermal muscle of larval abdominal 5
 
@@ -5898,8 +5898,8 @@ is_a: FBbt:00000852 ! abdominal 5 transverse muscle
 [Term]
 id: FBbt:00000854
 name: abdominal 5 dorsal transverse muscle 1
-related_synonym: "DT1" []
 related_synonym: "dorso-lateral external oblique muscle 18" []
+related_synonym: "DT1" []
 related_synonym: "pet5" []
 is_a: FBbt:00000625 ! abdominal dorsal transverse muscle 1
 is_a: FBbt:00000853 ! abdominal 5 dorsal transverse muscle
@@ -5941,8 +5941,8 @@ is_a: FBbt:00000855 ! abdominal 5 lateral transverse muscle
 [Term]
 id: FBbt:00000859
 name: abdominal 5 lateral transverse muscle 4
-related_synonym: "LT4" []
 related_synonym: "lateral external transverse muscle 24" []
+related_synonym: "LT4" []
 related_synonym: "pet4" []
 is_a: FBbt:00000630 ! abdominal lateral transverse muscle 4
 is_a: FBbt:00000855 ! abdominal 5 lateral transverse muscle
@@ -5957,8 +5957,8 @@ is_a: FBbt:00000852 ! abdominal 5 transverse muscle
 [Term]
 id: FBbt:00000861
 name: abdominal 5 ventral transverse muscle 1
-related_synonym: "VT1" []
 related_synonym: "ventral external oblique muscle 25" []
+related_synonym: "VT1" []
 is_a: FBbt:00000632 ! abdominal ventral transverse muscle 1
 is_a: FBbt:00000860 ! abdominal 5 ventral transverse muscle
 
@@ -6059,8 +6059,8 @@ is_a: FBbt:00000872 ! abdominal 6 oblique muscle
 [Term]
 id: FBbt:00000874
 name: abdominal 6 dorsal oblique muscle 1
-related_synonym: "DO1" []
 related_synonym: "deo4" []
+related_synonym: "DO1" []
 related_synonym: "dorsal external oblique muscle 9" []
 is_a: FBbt:00000609 ! abdominal dorsal oblique muscle 1
 is_a: FBbt:00000873 ! abdominal 6 dorsal oblique muscle
@@ -6068,8 +6068,8 @@ is_a: FBbt:00000873 ! abdominal 6 dorsal oblique muscle
 [Term]
 id: FBbt:00000875
 name: abdominal 6 dorsal oblique muscle 2
-related_synonym: "DO2" []
 related_synonym: "deo3" []
+related_synonym: "DO2" []
 related_synonym: "dorsal external oblique muscle 10" []
 is_a: FBbt:00000610 ! abdominal dorsal oblique muscle 2
 is_a: FBbt:00000873 ! abdominal 6 dorsal oblique muscle
@@ -6077,8 +6077,8 @@ is_a: FBbt:00000873 ! abdominal 6 dorsal oblique muscle
 [Term]
 id: FBbt:00000876
 name: abdominal 6 dorsal oblique muscle 3
-related_synonym: "DO3" []
 related_synonym: "deo2" []
+related_synonym: "DO3" []
 related_synonym: "dorsal external oblique muscle 11" []
 is_a: FBbt:00000611 ! abdominal dorsal oblique muscle 3
 is_a: FBbt:00000873 ! abdominal 6 dorsal oblique muscle
@@ -6086,8 +6086,8 @@ is_a: FBbt:00000873 ! abdominal 6 dorsal oblique muscle
 [Term]
 id: FBbt:00000877
 name: abdominal 6 dorsal oblique muscle 4
-related_synonym: "DO4" []
 related_synonym: "deo1" []
+related_synonym: "DO4" []
 related_synonym: "dorso-lateral external oblique muscle 19" []
 is_a: FBbt:00000612 ! abdominal dorsal oblique muscle 4
 is_a: FBbt:00000873 ! abdominal 6 dorsal oblique muscle
@@ -6127,9 +6127,9 @@ is_a: FBbt:00000872 ! abdominal 6 oblique muscle
 id: FBbt:00000882
 name: abdominal 6 ventral oblique muscle 1
 related_synonym: "14.1" []
-related_synonym: "VO1" []
 related_synonym: "ventral external oblique muscle 14" []
 related_synonym: "veo1" []
+related_synonym: "VO1" []
 is_a: FBbt:00000617 ! abdominal ventral oblique muscle 1
 is_a: FBbt:00000881 ! abdominal 6 ventral oblique muscle
 
@@ -6137,44 +6137,44 @@ is_a: FBbt:00000881 ! abdominal 6 ventral oblique muscle
 id: FBbt:00000883
 name: abdominal 6 ventral oblique muscle 2
 related_synonym: "14.2" []
-related_synonym: "VO2" []
 related_synonym: "ventral external oblique muscle 30" []
 related_synonym: "veo2" []
+related_synonym: "VO2" []
 is_a: FBbt:00000618 ! abdominal ventral oblique muscle 2
 is_a: FBbt:00000881 ! abdominal 6 ventral oblique muscle
 
 [Term]
 id: FBbt:00000884
 name: abdominal 6 ventral oblique muscle 3
-related_synonym: "VO3" []
 related_synonym: "ventral external oblique muscle 28" []
 related_synonym: "veo3" []
+related_synonym: "VO3" []
 is_a: FBbt:00000619 ! abdominal ventral oblique muscle 3
 is_a: FBbt:00000881 ! abdominal 6 ventral oblique muscle
 
 [Term]
 id: FBbt:00000885
 name: abdominal 6 ventral oblique muscle 4
-related_synonym: "VO4" []
 related_synonym: "ventral external oblique muscle 15" []
 related_synonym: "veo4" []
+related_synonym: "VO4" []
 is_a: FBbt:00000620 ! abdominal ventral oblique muscle 4
 is_a: FBbt:00000881 ! abdominal 6 ventral oblique muscle
 
 [Term]
 id: FBbt:00000886
 name: abdominal 6 ventral oblique muscle 5
-related_synonym: "VO5" []
 related_synonym: "ventral external oblique muscle 16" []
 related_synonym: "veo5" []
+related_synonym: "VO5" []
 is_a: FBbt:00000621 ! abdominal ventral oblique muscle 5
 is_a: FBbt:00000881 ! abdominal 6 ventral oblique muscle
 
 [Term]
 id: FBbt:00000887
 name: abdominal 6 ventral oblique muscle 6
-related_synonym: "VO6" []
 related_synonym: "ventral external oblique muscle 17" []
+related_synonym: "VO6" []
 is_a: FBbt:00000622 ! abdominal ventral oblique muscle 6
 is_a: FBbt:00000881 ! abdominal 6 ventral oblique muscle
 
@@ -6194,8 +6194,8 @@ is_a: FBbt:00000888 ! abdominal 6 longitudinal muscle
 [Term]
 id: FBbt:00000890
 name: abdominal 6 lateral longitudinal muscle 1
-related_synonym: "LL1" []
 related_synonym: "dorso-lateral internal longitudinal muscle 4" []
+related_synonym: "LL1" []
 related_synonym: "pl2" []
 is_a: FBbt:00000600 ! abdominal lateral longitudinal muscle 1
 is_a: FBbt:00000889 ! abdominal 6 lateral longitudinal muscle
@@ -6210,45 +6210,45 @@ is_a: FBbt:00000888 ! abdominal 6 longitudinal muscle
 [Term]
 id: FBbt:00000892
 name: abdominal 6 ventral longitudinal muscle 1
-related_synonym: "VL1" []
 related_synonym: "pl1" []
 related_synonym: "pleural external longitudinal muscle 12" []
+related_synonym: "VL1" []
 is_a: FBbt:00000602 ! abdominal ventral longitudinal muscle 1
 is_a: FBbt:00000891 ! abdominal 6 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000893
 name: abdominal 6 ventral longitudinal muscle 2
-related_synonym: "VL2" []
 related_synonym: "pleural external longitudinal muscle 13" []
 related_synonym: "vio1" []
+related_synonym: "VL2" []
 is_a: FBbt:00000603 ! abdominal ventral longitudinal muscle 2
 is_a: FBbt:00000891 ! abdominal 6 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000894
 name: abdominal 6 ventral longitudinal muscle 3
-related_synonym: "VL3" []
 related_synonym: "ventral internal longitudinal muscle 6" []
 related_synonym: "vio2" []
+related_synonym: "VL3" []
 is_a: FBbt:00000604 ! abdominal ventral longitudinal muscle 3
 is_a: FBbt:00000891 ! abdominal 6 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000895
 name: abdominal 6 ventral longitudinal muscle 4
-related_synonym: "VL4" []
 related_synonym: "ventral internal longitudinal muscle 7" []
 related_synonym: "vio3" []
+related_synonym: "VL4" []
 is_a: FBbt:00000605 ! abdominal ventral longitudinal muscle 4
 is_a: FBbt:00000891 ! abdominal 6 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000896
 name: abdominal 6 segment border muscle
-related_synonym: "SBM" []
 related_synonym: "pit" []
 related_synonym: "pleural internal transverse muscle 8" []
+related_synonym: "SBM" []
 is_a: FBbt:00000606 ! abdominal segment border muscle
 is_a: FBbt:00000862 ! hypodermal muscle of larval abdominal 6
 
@@ -6268,8 +6268,8 @@ is_a: FBbt:00000897 ! abdominal 6 transverse muscle
 [Term]
 id: FBbt:00000899
 name: abdominal 6 dorsal transverse muscle 1
-related_synonym: "DT1" []
 related_synonym: "dorso-lateral external oblique muscle 18" []
+related_synonym: "DT1" []
 related_synonym: "pet5" []
 is_a: FBbt:00000625 ! abdominal dorsal transverse muscle 1
 is_a: FBbt:00000898 ! abdominal 6 dorsal transverse muscle
@@ -6311,8 +6311,8 @@ is_a: FBbt:00000900 ! abdominal 6 lateral transverse muscle
 [Term]
 id: FBbt:00000904
 name: abdominal 6 lateral transverse muscle 4
-related_synonym: "LT4" []
 related_synonym: "lateral external transverse muscle 24" []
+related_synonym: "LT4" []
 related_synonym: "pet4" []
 is_a: FBbt:00000630 ! abdominal lateral transverse muscle 4
 is_a: FBbt:00000900 ! abdominal 6 lateral transverse muscle
@@ -6327,8 +6327,8 @@ is_a: FBbt:00000897 ! abdominal 6 transverse muscle
 [Term]
 id: FBbt:00000906
 name: abdominal 6 ventral transverse muscle 1
-related_synonym: "VT1" []
 related_synonym: "ventral external oblique muscle 25" []
+related_synonym: "VT1" []
 is_a: FBbt:00000632 ! abdominal ventral transverse muscle 1
 is_a: FBbt:00000905 ! abdominal 6 ventral transverse muscle
 
@@ -6429,8 +6429,8 @@ is_a: FBbt:00000917 ! abdominal 7 oblique muscle
 [Term]
 id: FBbt:00000919
 name: abdominal 7 dorsal oblique muscle 1
-related_synonym: "DO1" []
 related_synonym: "deo4" []
+related_synonym: "DO1" []
 related_synonym: "dorsal external oblique muscle 9" []
 is_a: FBbt:00000609 ! abdominal dorsal oblique muscle 1
 is_a: FBbt:00000918 ! abdominal 7 dorsal oblique muscle
@@ -6438,8 +6438,8 @@ is_a: FBbt:00000918 ! abdominal 7 dorsal oblique muscle
 [Term]
 id: FBbt:00000920
 name: abdominal 7 dorsal oblique muscle 2
-related_synonym: "DO2" []
 related_synonym: "deo3" []
+related_synonym: "DO2" []
 related_synonym: "dorsal external oblique muscle 10" []
 is_a: FBbt:00000610 ! abdominal dorsal oblique muscle 2
 is_a: FBbt:00000918 ! abdominal 7 dorsal oblique muscle
@@ -6447,8 +6447,8 @@ is_a: FBbt:00000918 ! abdominal 7 dorsal oblique muscle
 [Term]
 id: FBbt:00000921
 name: abdominal 7 dorsal oblique muscle 3
-related_synonym: "DO3" []
 related_synonym: "deo2" []
+related_synonym: "DO3" []
 related_synonym: "dorsal external oblique muscle 11" []
 is_a: FBbt:00000611 ! abdominal dorsal oblique muscle 3
 is_a: FBbt:00000918 ! abdominal 7 dorsal oblique muscle
@@ -6456,8 +6456,8 @@ is_a: FBbt:00000918 ! abdominal 7 dorsal oblique muscle
 [Term]
 id: FBbt:00000922
 name: abdominal 7 dorsal oblique muscle 4
-related_synonym: "DO4" []
 related_synonym: "deo1" []
+related_synonym: "DO4" []
 related_synonym: "dorso-lateral external oblique muscle 19" []
 is_a: FBbt:00000612 ! abdominal dorsal oblique muscle 4
 is_a: FBbt:00000918 ! abdominal 7 dorsal oblique muscle
@@ -6497,9 +6497,9 @@ is_a: FBbt:00000917 ! abdominal 7 oblique muscle
 id: FBbt:00000927
 name: abdominal 7 ventral oblique muscle 1
 related_synonym: "14.1" []
-related_synonym: "VO1" []
 related_synonym: "ventral external oblique muscle 14" []
 related_synonym: "veo1" []
+related_synonym: "VO1" []
 is_a: FBbt:00000617 ! abdominal ventral oblique muscle 1
 is_a: FBbt:00000926 ! abdominal 7 ventral oblique muscle
 
@@ -6507,44 +6507,44 @@ is_a: FBbt:00000926 ! abdominal 7 ventral oblique muscle
 id: FBbt:00000928
 name: abdominal 7 ventral oblique muscle 2
 related_synonym: "14.2" []
-related_synonym: "VO2" []
 related_synonym: "ventral external oblique muscle 30" []
 related_synonym: "veo2" []
+related_synonym: "VO2" []
 is_a: FBbt:00000618 ! abdominal ventral oblique muscle 2
 is_a: FBbt:00000926 ! abdominal 7 ventral oblique muscle
 
 [Term]
 id: FBbt:00000929
 name: abdominal 7 ventral oblique muscle 3
-related_synonym: "VO3" []
 related_synonym: "ventral external oblique muscle 28" []
 related_synonym: "veo3" []
+related_synonym: "VO3" []
 is_a: FBbt:00000619 ! abdominal ventral oblique muscle 3
 is_a: FBbt:00000926 ! abdominal 7 ventral oblique muscle
 
 [Term]
 id: FBbt:00000930
 name: abdominal 7 ventral oblique muscle 4
-related_synonym: "VO4" []
 related_synonym: "ventral external oblique muscle 15" []
 related_synonym: "veo4" []
+related_synonym: "VO4" []
 is_a: FBbt:00000620 ! abdominal ventral oblique muscle 4
 is_a: FBbt:00000926 ! abdominal 7 ventral oblique muscle
 
 [Term]
 id: FBbt:00000931
 name: abdominal 7 ventral oblique muscle 5
-related_synonym: "VO5" []
 related_synonym: "ventral external oblique muscle 16" []
 related_synonym: "veo5" []
+related_synonym: "VO5" []
 is_a: FBbt:00000621 ! abdominal ventral oblique muscle 5
 is_a: FBbt:00000926 ! abdominal 7 ventral oblique muscle
 
 [Term]
 id: FBbt:00000932
 name: abdominal 7 ventral oblique muscle 6
-related_synonym: "VO6" []
 related_synonym: "ventral external oblique muscle 17" []
+related_synonym: "VO6" []
 is_a: FBbt:00000622 ! abdominal ventral oblique muscle 6
 is_a: FBbt:00000926 ! abdominal 7 ventral oblique muscle
 
@@ -6564,8 +6564,8 @@ is_a: FBbt:00000933 ! abdominal 7 longitudinal muscle
 [Term]
 id: FBbt:00000935
 name: abdominal 7 lateral longitudinal muscle 1
-related_synonym: "LL1" []
 related_synonym: "dorso-lateral internal longitudinal muscle 4" []
+related_synonym: "LL1" []
 related_synonym: "pl2" []
 is_a: FBbt:00000600 ! abdominal lateral longitudinal muscle 1
 is_a: FBbt:00000934 ! abdominal 7 lateral longitudinal muscle
@@ -6580,45 +6580,45 @@ is_a: FBbt:00000933 ! abdominal 7 longitudinal muscle
 [Term]
 id: FBbt:00000937
 name: abdominal 7 ventral longitudinal muscle 1
-related_synonym: "VL1" []
 related_synonym: "pl1" []
 related_synonym: "pleural external longitudinal muscle 12" []
+related_synonym: "VL1" []
 is_a: FBbt:00000602 ! abdominal ventral longitudinal muscle 1
 is_a: FBbt:00000936 ! abdominal 7 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000938
 name: abdominal 7 ventral longitudinal muscle 2
-related_synonym: "VL2" []
 related_synonym: "pleural external longitudinal muscle 13" []
 related_synonym: "vio1" []
+related_synonym: "VL2" []
 is_a: FBbt:00000603 ! abdominal ventral longitudinal muscle 2
 is_a: FBbt:00000936 ! abdominal 7 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000939
 name: abdominal 7 ventral longitudinal muscle 3
-related_synonym: "VL3" []
 related_synonym: "ventral internal longitudinal muscle 6" []
 related_synonym: "vio2" []
+related_synonym: "VL3" []
 is_a: FBbt:00000604 ! abdominal ventral longitudinal muscle 3
 is_a: FBbt:00000936 ! abdominal 7 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000940
 name: abdominal 7 ventral longitudinal muscle 4
-related_synonym: "VL4" []
 related_synonym: "ventral internal longitudinal muscle 7" []
 related_synonym: "vio3" []
+related_synonym: "VL4" []
 is_a: FBbt:00000605 ! abdominal ventral longitudinal muscle 4
 is_a: FBbt:00000936 ! abdominal 7 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000941
 name: abdominal 7 segment border muscle
-related_synonym: "SBM" []
 related_synonym: "pit" []
 related_synonym: "pleural internal transverse muscle 8" []
+related_synonym: "SBM" []
 is_a: FBbt:00000606 ! abdominal segment border muscle
 is_a: FBbt:00000907 ! hypodermal muscle of larval abdominal 7
 
@@ -6638,8 +6638,8 @@ is_a: FBbt:00000942 ! abdominal 7 transverse muscle
 [Term]
 id: FBbt:00000944
 name: abdominal 7 dorsal transverse muscle 1
-related_synonym: "DT1" []
 related_synonym: "dorso-lateral external oblique muscle 18" []
+related_synonym: "DT1" []
 related_synonym: "pet5" []
 is_a: FBbt:00000625 ! abdominal dorsal transverse muscle 1
 is_a: FBbt:00000943 ! abdominal 7 dorsal transverse muscle
@@ -6680,8 +6680,8 @@ is_a: FBbt:00000945 ! abdominal 7 lateral transverse muscle
 [Term]
 id: FBbt:00000949
 name: abdominal 7 lateral transverse muscle 4
-related_synonym: "LT4" []
 related_synonym: "lateral external transverse muscle 24" []
+related_synonym: "LT4" []
 related_synonym: "pet4" []
 is_a: FBbt:00000630 ! abdominal lateral transverse muscle 4
 is_a: FBbt:00000945 ! abdominal 7 lateral transverse muscle
@@ -6696,8 +6696,8 @@ is_a: FBbt:00000942 ! abdominal 7 transverse muscle
 [Term]
 id: FBbt:00000951
 name: abdominal 7 ventral transverse muscle 1
-related_synonym: "VT1" []
 related_synonym: "ventral external oblique muscle 25" []
+related_synonym: "VT1" []
 is_a: FBbt:00000632 ! abdominal ventral transverse muscle 1
 is_a: FBbt:00000950 ! abdominal 7 ventral transverse muscle
 
@@ -6723,8 +6723,8 @@ is_a: FBbt:00000953 ! abdominal 8 oblique muscle
 [Term]
 id: FBbt:00000955
 name: abdominal 8 dorsal oblique muscle 1
-related_synonym: "DO1" []
 related_synonym: "deo1" []
+related_synonym: "DO1" []
 related_synonym: "dorsal external oblique muscle" []
 is_a: FBbt:00000609 ! abdominal dorsal oblique muscle 1
 is_a: FBbt:00000954 ! abdominal 8 dorsal oblique muscle
@@ -6739,9 +6739,9 @@ is_a: FBbt:00000953 ! abdominal 8 oblique muscle
 [Term]
 id: FBbt:00000957
 name: abdominal 8 ventral oblique muscle 1
-related_synonym: "VO1" []
 related_synonym: "ventral external oblique muscle" []
 related_synonym: "veo1" []
+related_synonym: "VO1" []
 is_a: FBbt:00000617 ! abdominal ventral oblique muscle 1
 is_a: FBbt:00000956 ! abdominal 8 ventral oblique muscle
 
@@ -6775,9 +6775,9 @@ is_a: FBbt:00000960 ! abdominal 8 transverse muscle
 [Term]
 id: FBbt:00000962
 name: abdominal 8 dorsal transverse muscle 1
-related_synonym: "DT1" []
 related_synonym: "dio1" []
 related_synonym: "dorsal internal oblique muscle" []
+related_synonym: "DT1" []
 is_a: FBbt:00000625 ! abdominal dorsal transverse muscle 1
 is_a: FBbt:00000961 ! abdominal 8 dorsal transverse muscle
 
@@ -6834,18 +6834,18 @@ is_a: FBbt:00000968 ! abdominal 8 longitudinal muscle
 [Term]
 id: FBbt:00000970
 name: abdominal 8 ventral longitudinal muscle 1
-related_synonym: "VL1" []
 related_synonym: "pl1" []
 related_synonym: "pleural longitudinal muscle" []
+related_synonym: "VL1" []
 is_a: FBbt:00000602 ! abdominal ventral longitudinal muscle 1
 is_a: FBbt:00000969 ! abdominal 8 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000971
 name: abdominal 8 ventral longitudinal muscle 2
-related_synonym: "VL2" []
 related_synonym: "ventral internal oblique muscle" []
 related_synonym: "vio1" []
+related_synonym: "VL2" []
 is_a: FBbt:00000603 ! abdominal ventral longitudinal muscle 2
 is_a: FBbt:00000969 ! abdominal 8 ventral longitudinal muscle
 
@@ -6885,8 +6885,8 @@ is_a: FBbt:00000975 ! abdominal 9 oblique muscle
 [Term]
 id: FBbt:00000977
 name: abdominal 9 dorsal oblique muscle 1
-related_synonym: "DO1" []
 related_synonym: "deo1" []
+related_synonym: "DO1" []
 related_synonym: "dorsal external oblique muscle" []
 is_a: FBbt:00000609 ! abdominal dorsal oblique muscle 1
 is_a: FBbt:00000976 ! abdominal 9 dorsal oblique muscle
@@ -6901,9 +6901,9 @@ is_a: FBbt:00000975 ! abdominal 9 oblique muscle
 [Term]
 id: FBbt:00000979
 name: abdominal 9 ventral oblique muscle 1
-related_synonym: "VO1" []
 related_synonym: "ventral external oblique muscle" []
 related_synonym: "veo1" []
+related_synonym: "VO1" []
 is_a: FBbt:00000617 ! abdominal ventral oblique muscle 1
 is_a: FBbt:00000978 ! abdominal 9 ventral oblique muscle
 
@@ -6937,9 +6937,9 @@ is_a: FBbt:00000982 ! abdominal 9 transverse muscle
 [Term]
 id: FBbt:00000984
 name: abdominal 9 dorsal transverse muscle 1
-related_synonym: "DT1" []
 related_synonym: "dio1" []
 related_synonym: "dorsal internal oblique muscle" []
+related_synonym: "DT1" []
 is_a: FBbt:00000625 ! abdominal dorsal transverse muscle 1
 is_a: FBbt:00000983 ! abdominal 9 dorsal transverse muscle
 
@@ -6996,18 +6996,18 @@ is_a: FBbt:00000990 ! abdominal 9 longitudinal muscle
 [Term]
 id: FBbt:00000992
 name: abdominal 9 ventral longitudinal muscle 1
-related_synonym: "VL1" []
 related_synonym: "pl1" []
 related_synonym: "pleural longitudinal muscle" []
+related_synonym: "VL1" []
 is_a: FBbt:00000602 ! abdominal ventral longitudinal muscle 1
 is_a: FBbt:00000991 ! abdominal 9 ventral longitudinal muscle
 
 [Term]
 id: FBbt:00000993
 name: abdominal 9 ventral longitudinal muscle 2
-related_synonym: "VL2" []
 related_synonym: "ventral internal oblique muscle" []
 related_synonym: "vio1" []
+related_synonym: "VL2" []
 is_a: FBbt:00000603 ! abdominal ventral longitudinal muscle 2
 is_a: FBbt:00000991 ! abdominal 9 ventral longitudinal muscle
 
@@ -7029,8 +7029,8 @@ is_a: FBbt:00000991 ! abdominal 9 ventral longitudinal muscle
 id: FBbt:00000996
 name: terminal transverse muscle 1
 comment: Maybe - spiracular retractor muscle.
-related_synonym: "TT1" []
 related_synonym: "srm" []
+related_synonym: "TT1" []
 is_a: FBbt:00000470 ! transverse muscle
 is_a: FBbt:00000681 ! hypodermal muscle of larval abdomen
 
@@ -7045,16 +7045,16 @@ is_a: FBbt:00000681 ! hypodermal muscle of larval abdomen
 id: FBbt:00000998
 name: terminal oblique muscle 1
 comment: Maybe - spiracular retractor muscle
-related_synonym: "TO1" []
 related_synonym: "srm" []
+related_synonym: "TO1" []
 is_a: FBbt:00000997 ! terminal oblique muscle
 
 [Term]
 id: FBbt:00000999
 name: terminal oblique muscle 2
 comment: Maybe - spiracular retractor muscle
-related_synonym: "TO2" []
 related_synonym: "srm" []
+related_synonym: "TO2" []
 is_a: FBbt:00000997 ! terminal oblique muscle
 
 [Term]
@@ -7359,7 +7359,7 @@ relationship: part_of FBbt:00005825 ! larval midgut
 [Term]
 id: FBbt:00001052
 name: outer sheath cell
-def: "." [FB:FBrf:0057603]
+def: "." [FB:FBrf0057603]
 is_a: FBbt:00001051 ! midgut muscle
 
 [Term]
@@ -7401,9 +7401,9 @@ relationship: part_of FBbt:00001057 ! neurogenic region
 id: FBbt:00001059
 name: visual primordium
 subset: EmbDevSlim
-related_synonym: "P2 VisSys" [FB:FBrf:ds555]
 related_synonym: "optic lobe placode" []
 related_synonym: "optic lobe primordium" []
+related_synonym: "P2 VisSys" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025991 ! anterior ectoderm derivative
 relationship: develops_from FBbt:00005434 ! visual anlage
@@ -7472,7 +7472,7 @@ relationship: part_of FBbt:00001056 ! embryonic central nervous system
 [Term]
 id: FBbt:00001070
 name: precursor cell of the stomatogastric nervous system
-def: "." [FB:FBrf:0078614]
+def: "." [FB:FBrf0078614]
 related_synonym: "SNSPs" []
 relationship: part_of FBbt:00001069 ! embryonic stomatogastric nervous system
 
@@ -7871,10 +7871,10 @@ is_obsolete: true
 [Term]
 id: FBbt:00001137
 name: sensory mother cell
-related_synonym: "SOP" []
 related_synonym: "sensillum precursor" []
 related_synonym: "sensory organ mother cell" []
 related_synonym: "sensory organ precursor cell" []
+related_synonym: "SOP" []
 is_a: FBbt:00001135 ! proneural cluster
 relationship: part_of FBbt:00005098 ! peripheral nervous system
 
@@ -7887,7 +7887,7 @@ is_a: FBbt:00001137 ! sensory mother cell
 [Term]
 id: FBbt:00001139
 name: peripheral nervous system precursor cluster
-def: "." [FB:FBrf:0047289]
+def: "." [FB:FBrf0047289]
 relationship: develops_from FBbt:00005552 ! ventral sensory complex primordium
 relationship: develops_from FBbt:00005553 ! dorsal sensory complex primordium
 relationship: part_of FBbt:00001134 ! embryonic peripheral nervous system
@@ -8417,7 +8417,7 @@ is_a: FBbt:00001241 ! ventral abdominal td
 [Term]
 id: FBbt:00001244
 name: embryonic glioblast
-def: "." [FB:FBrf:0105240]
+def: "." [FB:FBrf0105240]
 relationship: part_of FBbt:00001055 ! embryonic nervous system
 
 [Term]
@@ -8465,7 +8465,7 @@ relationship: part_of FBbt:00001067 ! embryonic deutocerebrum
 [Term]
 id: FBbt:00001251
 name: embryonic glial cell
-def: "." [FB:FBrf:0050373, FB:FBrf:0053160, FB:FBrf:0054242, FB:FBrf:0082171, FB:FBrf:0090460, FB:FBrf:0098344, FB:FBrf:0105240]
+def: "." [FB:FBrf0050373, FB:FBrf0053160, FB:FBrf0054242, FB:FBrf0082171, FB:FBrf0090460, FB:FBrf0098344, FB:FBrf0105240]
 is_a: FBbt:00005144 ! glial cell
 relationship: part_of FBbt:00001055 ! embryonic nervous system
 
@@ -8689,15 +8689,15 @@ is_a: FBbt:00001258 ! subperineurial glial cell
 [Term]
 id: FBbt:00001287
 name: dorsal lateral subperineurial glial cell
-related_synonym: "DL-SPG" []
 related_synonym: "belt glial cell" []
+related_synonym: "DL-SPG" []
 is_a: FBbt:00001258 ! subperineurial glial cell
 
 [Term]
 id: FBbt:00001288
 name: ventral lateral subperineurial glial cell
-related_synonym: "VL-SPG" []
 related_synonym: "belt glial cell" []
+related_synonym: "VL-SPG" []
 is_a: FBbt:00001258 ! subperineurial glial cell
 
 [Term]
@@ -8806,19 +8806,19 @@ relationship: develops_from FBbt:00001404 ! neuroblast NB1-3
 [Term]
 id: FBbt:00001305
 name: medial intersegmental nerve root glial cell
+related_synonym: "intersegmental glial cell 1" []
 related_synonym: "ISG1" []
 related_synonym: "M-ISNG" []
 related_synonym: "SBC" []
-related_synonym: "intersegmental glial cell 1" []
 related_synonym: "segmental boundary glial cell" []
 is_a: FBbt:00001304 ! intersegmental nerve root glial cell
 
 [Term]
 id: FBbt:00001306
 name: lateral intersegmental nerve root glial cell
+related_synonym: "intersegmental glial cell 2" []
 related_synonym: "ISG2" []
 related_synonym: "L-ISNG" []
-related_synonym: "intersegmental glial cell 2" []
 is_a: FBbt:00001304 ! intersegmental nerve root glial cell
 
 [Term]
@@ -8831,24 +8831,24 @@ is_a: FBbt:00001303 ! neuropil associated CNS glial cell
 id: FBbt:00001308
 name: medial segmental nerve root glial cell 1
 related_synonym: "M-SNG1" []
-related_synonym: "SG1" []
 related_synonym: "segmental glial cell 1" []
+related_synonym: "SG1" []
 is_a: FBbt:00001307 ! segmental nerve root glial cell
 
 [Term]
 id: FBbt:00001309
 name: medial segmental nerve root glial cell 2
 related_synonym: "M-SNG2" []
-related_synonym: "SG2" []
 related_synonym: "segmental glial cell 2" []
+related_synonym: "SG2" []
 is_a: FBbt:00001307 ! segmental nerve root glial cell
 
 [Term]
 id: FBbt:00001310
 name: lateral segmental nerve root glial cell
 related_synonym: "L-SNG" []
-related_synonym: "SG3" []
 related_synonym: "segmental glial cell" []
+related_synonym: "SG3" []
 is_a: FBbt:00001307 ! segmental nerve root glial cell
 
 [Term]
@@ -8881,9 +8881,9 @@ is_a: FBbt:00001311 ! interface glial cell
 [Term]
 id: FBbt:00001315
 name: midline glial cell
+related_synonym: "median glial cell" []
 related_synonym: "MG" []
 related_synonym: "MGA, MGM, MGP" []
-related_synonym: "median glial cell" []
 is_a: FBbt:00001303 ! neuropil associated CNS glial cell
 is_a: FBbt:00005567 ! ventral midline glia
 
@@ -8991,7 +8991,7 @@ is_a: FBbt:00001327 ! peripheral glial cell
 [Term]
 id: FBbt:00001332
 name: embryonic neuroblast
-def: "." [FB:FBrf:0055900]
+def: "." [FB:FBrf0055900]
 relationship: part_of FBbt:00001055 ! embryonic nervous system
 
 [Term]
@@ -9181,28 +9181,28 @@ is_a: FBbt:00005106 ! neuron
 [Term]
 id: FBbt:00001367
 name: SP1 neuron
-def: "." [FB:FBrf:0048551]
+def: "." [FB:FBrf0048551]
 related_synonym: "supraesophageal ganglion neuron 1" []
 is_a: FBbt:00001366 ! supraesophageal ganglion neuron
 
 [Term]
 id: FBbt:00001368
 name: SP2 neuron
-def: "." [FB:FBrf:0048551]
+def: "." [FB:FBrf0048551]
 related_synonym: "supraesophageal ganglion neuron 2" []
 is_a: FBbt:00001366 ! supraesophageal ganglion neuron
 
 [Term]
 id: FBbt:00001369
 name: neuroblast of ventral nervous system
-def: "." [FB:FBrf:0090460, FB:FBrf:0098344]
+def: "." [FB:FBrf0090460, FB:FBrf0098344]
 is_a: FBbt:00001332 ! embryonic neuroblast
 relationship: part_of FBbt:00005554 ! ventral nerve cord primordium
 
 [Term]
 id: FBbt:00001370
 name: stage 1 neuroblast
-def: "." [FB:FBrf:0076117]
+def: "." [FB:FBrf0076117]
 related_synonym: "S1 neuroblast" []
 related_synonym: "SI neuroblast" []
 is_a: FBbt:00001369 ! neuroblast of ventral nervous system
@@ -9210,7 +9210,7 @@ is_a: FBbt:00001369 ! neuroblast of ventral nervous system
 [Term]
 id: FBbt:00001371
 name: neuroblast NB1-1
-def: "." [FB:FBrf:0084809]
+def: "." [FB:FBrf0084809]
 related_synonym: "NB2-2" []
 is_a: FBbt:00001370 ! stage 1 neuroblast
 
@@ -9241,7 +9241,7 @@ is_a: FBbt:00001370 ! stage 1 neuroblast
 [Term]
 id: FBbt:00001376
 name: neuroblast NB5-2
-def: "." [FB:FBrf:0076117]
+def: "." [FB:FBrf0076117]
 related_synonym: "medial SI neuroblast NB 5-2" []
 is_a: FBbt:00001370 ! stage 1 neuroblast
 
@@ -9282,7 +9282,7 @@ is_a: FBbt:00001370 ! stage 1 neuroblast
 [Term]
 id: FBbt:00001383
 name: stage 2 neuroblast
-def: "." [FB:FBrf:0076117]
+def: "." [FB:FBrf0076117]
 related_synonym: "S2 neuroblast" []
 related_synonym: "SII neuroblast" []
 is_a: FBbt:00001369 ! neuroblast of ventral nervous system
@@ -9290,7 +9290,7 @@ is_a: FBbt:00001369 ! neuroblast of ventral nervous system
 [Term]
 id: FBbt:00001384
 name: neuroblast NB1-2
-def: "." [FB:FBrf:0084809]
+def: "." [FB:FBrf0084809]
 related_synonym: "NB1-1" []
 related_synonym: "neuroglioblast 1-1" []
 is_a: FBbt:00001383 ! stage 2 neuroblast
@@ -9298,7 +9298,7 @@ is_a: FBbt:00001383 ! stage 2 neuroblast
 [Term]
 id: FBbt:00001385
 name: neuroblast NB2-2
-def: "." [FB:FBrf:0084809]
+def: "." [FB:FBrf0084809]
 related_synonym: "NB2-3" []
 is_a: FBbt:00001383 ! stage 2 neuroblast
 
@@ -9343,7 +9343,7 @@ is_a: FBbt:00001383 ! stage 2 neuroblast
 [Term]
 id: FBbt:00001393
 name: stage 3 neuroblast
-def: "." [FB:FBrf:0076117]
+def: "." [FB:FBrf0076117]
 related_synonym: "S3 neuroblast" []
 related_synonym: "SIII neuroblast" []
 is_a: FBbt:00001369 ! neuroblast of ventral nervous system
@@ -9407,7 +9407,7 @@ is_a: FBbt:00001401 ! neuroblast NB6-4 of abdomen
 [Term]
 id: FBbt:00001404
 name: neuroblast NB1-3
-def: "." [FB:FBrf:0098344]
+def: "." [FB:FBrf0098344]
 is_a: FBbt:00001399 ! neuroblast NB6-4
 is_a: FBbt:00005147 ! neuroglioblast
 
@@ -9503,7 +9503,7 @@ is_a: FBbt:00001369 ! neuroblast of ventral nervous system
 [Term]
 id: FBbt:00001421
 name: neuroblast NB2-3
-def: "." [FB:FBrf:0084809]
+def: "." [FB:FBrf0084809]
 related_synonym: "NB1-2" []
 is_a: FBbt:00001420 ! stage 5 neuroblast
 
@@ -9635,7 +9635,7 @@ is_a: FBbt:00001433 ! embryonic ganglion mother cell
 [Term]
 id: FBbt:00001446
 name: embryonic neuron
-def: "." [FB:FBrf:0090460, FB:FBrf:0098344]
+def: "." [FB:FBrf0090460, FB:FBrf0098344]
 is_a: FBbt:00005106 ! neuron
 relationship: part_of FBbt:00001055 ! embryonic nervous system
 
@@ -9669,7 +9669,7 @@ relationship: develops_from FBbt:00001380 ! neuroblast NB7-1
 [Term]
 id: FBbt:00001450
 name: segmental nerve pioneer neuron
-def: "." [FB:FBrf:0105282]
+def: "." [FB:FBrf0105282]
 related_synonym: "SNp" []
 is_a: FBbt:00001446 ! embryonic neuron
 
@@ -10180,7 +10180,7 @@ relationship: develops_from FBbt:00001384 ! neuroblast NB1-2
 [Term]
 id: FBbt:00001531
 name: y interneuron
-def: "." [FB:FBrf:0098344]
+def: "." [FB:FBrf0098344]
 is_a: FBbt:00001446 ! embryonic neuron
 is_a: FBbt:00005125 ! interneuron
 
@@ -10371,7 +10371,7 @@ relationship: develops_from FBbt:00001426 ! neuroblast NB7-3
 [Term]
 id: FBbt:00001560
 name: yM
-def: "." [FB:FBrf:0098344]
+def: "." [FB:FBrf0098344]
 is_a: FBbt:00001446 ! embryonic neuron
 is_a: FBbt:00005123 ! motor neuron
 
@@ -10475,7 +10475,7 @@ is_a: FBbt:00001446 ! embryonic neuron
 [Term]
 id: FBbt:00001579
 name: EG neuron
-def: "." [FB:FBrf:0086454]
+def: "." [FB:FBrf0086454]
 related_synonym: "eg-expressing neuron" []
 is_a: FBbt:00001446 ! embryonic neuron
 relationship: develops_from FBbt:00001399 ! neuroblast NB6-4
@@ -10486,59 +10486,59 @@ relationship: develops_from FBbt:00001426 ! neuroblast NB7-3
 [Term]
 id: FBbt:00001580
 name: PM neuron
-def: "." [FB:FBrf:0086454]
+def: "." [FB:FBrf0086454]
 is_a: FBbt:00001446 ! embryonic neuron
 
 [Term]
 id: FBbt:00001581
 name: PQ neuron
-def: "." [FB:FBrf:0086454]
+def: "." [FB:FBrf0086454]
 is_a: FBbt:00001446 ! embryonic neuron
 
 [Term]
 id: FBbt:00001582
 name: EW neuron
-def: "." [FB:FBrf:0086454]
+def: "." [FB:FBrf0086454]
 is_a: FBbt:00001446 ! embryonic neuron
 relationship: develops_from FBbt:00001426 ! neuroblast NB7-3
 
 [Term]
 id: FBbt:00001583
 name: EW1 neuron
-def: "." [FB:FBrf:0100717]
+def: "." [FB:FBrf0100717]
 is_a: FBbt:00001582 ! EW neuron
 is_a: FBbt:00005133 ! serotonin neuron
 
 [Term]
 id: FBbt:00001584
 name: EW2 neuron
-def: "." [FB:FBrf:0100717]
+def: "." [FB:FBrf0100717]
 is_a: FBbt:00001582 ! EW neuron
 is_a: FBbt:00005133 ! serotonin neuron
 
 [Term]
 id: FBbt:00001585
 name: EW3 neuron
-def: "." [FB:FBrf:0100717]
+def: "." [FB:FBrf0100717]
 is_a: FBbt:00001582 ! EW neuron
 
 [Term]
 id: FBbt:00001586
 name: GW neuron
-def: "." [FB:FBrf:0086454]
+def: "." [FB:FBrf0086454]
 is_a: FBbt:00001446 ! embryonic neuron
 relationship: develops_from FBbt:00001426 ! neuroblast NB7-3
 
 [Term]
 id: FBbt:00001587
 name: IP neuron
-def: "." [FB:FBrf:0048551]
+def: "." [FB:FBrf0048551]
 is_a: FBbt:00001446 ! embryonic neuron
 
 [Term]
 id: FBbt:00001588
 name: LP1 neuron
-def: "." [FB:FBrf:0048551]
+def: "." [FB:FBrf0048551]
 related_synonym: "lamina cluster 1" []
 is_a: FBbt:00001446 ! embryonic neuron
 
@@ -10636,7 +10636,7 @@ relationship: develops_from FBbt:00001432 ! UMI precursor
 [Term]
 id: FBbt:00001605
 name: embryonic fiber tract founder cluster
-def: "." [FB:FBrf:0105282]
+def: "." [FB:FBrf0105282]
 relationship: part_of FBbt:00001055 ! embryonic nervous system
 
 [Term]
@@ -11029,7 +11029,7 @@ relationship: part_of FBbt:00000180 ! embryonic abdominal segment 8
 [Term]
 id: FBbt:00001664
 name: embryonic/larval circulatory system
-def: "." [FB:FBrf:0031012]
+def: "." [FB:FBrf0031012]
 is_a: FBbt:00005057 ! circulatory system
 relationship: part_of FBbt:00005333 ! late embryo
 
@@ -11061,7 +11061,7 @@ relationship: part_of FBbt:00001664 ! embryonic/larval circulatory system
 [Term]
 id: FBbt:00001668
 name: lymph gland
-def: "." [FB:FBrf:0031001, FB:FBrf:0032406]
+def: "." [FB:FBrf0031001, FB:FBrf0032406]
 subset: EmbDevSlim
 related_synonym: "hematopoietic organ" []
 relationship: develops_from FBbt:00000132 ! mesodermal crest of segment T3
@@ -11086,7 +11086,7 @@ is_a: FBbt:00001668 ! lymph gland
 [Term]
 id: FBbt:00001672
 name: alary cell
-def: "." [FB:FBrf:0053819]
+def: "." [FB:FBrf0053819]
 relationship: develops_from FBbt:00001666 ! cardioblast
 relationship: part_of FBbt:00001664 ! embryonic/larval circulatory system
 
@@ -11133,7 +11133,7 @@ is_a: FBbt:00001677 ! embryonic/larval ostia
 [Term]
 id: FBbt:00001681
 name: periligament cell
-def: "." [FB:FBrf:0057603]
+def: "." [FB:FBrf0057603]
 relationship: part_of FBbt:00001664 ! embryonic/larval circulatory system
 
 [Term]
@@ -11151,7 +11151,7 @@ relationship: part_of FBbt:00001682 ! embryonic/larval hemocoel
 [Term]
 id: FBbt:00001684
 name: embryonic/larval hemocyte
-def: "." [FB:FBrf:0037631]
+def: "." [FB:FBrf0037631]
 is_a: FBbt:00005063 ! hemocyte
 relationship: part_of FBbt:00001682 ! embryonic/larval hemocoel
 
@@ -11344,8 +11344,8 @@ relationship: part_of FBbt:00005331 ! dorsal closure embryo
 id: FBbt:00001717
 name: corpus cardiacum primordium
 subset: EmbDevSlim
-related_synonym: "P1 CC" [FB:FBrf:ds555]
 related_synonym: "corpus allatum placode" []
+related_synonym: "P1 CC" [FB:FBrfds555]
 is_a: FBbt:00017009 ! ring gland primordium
 
 [Term]
@@ -11443,7 +11443,7 @@ relationship: part_of FBbt:00001730 ! larval head
 [Term]
 id: FBbt:00001732
 name: larval head segment
-def: "." [FB:FBrf:0075072]
+def: "." [FB:FBrf0075072]
 is_a: FBbt:00000006 ! head segment
 is_a: FBbt:00001729 ! larval segment
 relationship: part_of FBbt:00001730 ! larval head
@@ -11702,7 +11702,7 @@ relationship: part_of FBbt:00001768 ! eye disc
 [Term]
 id: FBbt:00001770
 name: ommatidial cluster
-def: "." [FB:FBrf:0064798]
+def: "." [FB:FBrf0064798]
 relationship: part_of FBbt:00001769 ! morphogenetic furrow
 
 [Term]
@@ -11867,7 +11867,7 @@ is_a: FBbt:00001791 ! dorsal histoblast nest abdominal
 [Term]
 id: FBbt:00001793
 name: small cell associated with anterior dorsal histoblasts abdominal
-def: "." [FB:FBrf:0030719]
+def: "." [FB:FBrf0030719]
 relationship: part_of FBbt:00001792 ! anterior dorsal histoblast nest abdominal
 
 [Term]
@@ -12162,7 +12162,7 @@ relationship: part_of FBbt:00001758 ! larval abdominal segment 11
 [Term]
 id: FBbt:00001842
 name: embryonic/larval digestive system
-def: "." [FB:FBrf:0007733, FB:FBrf:0064792]
+def: "." [FB:FBrf0007733, FB:FBrf0064792]
 is_a: FBbt:00005055 ! digestive system
 relationship: part_of FBbt:00001727 ! larva
 
@@ -12183,7 +12183,7 @@ relationship: part_of FBbt:00001843 ! embryonic/larval mouth
 [Term]
 id: FBbt:00001845
 name: cephalopharyngeal skeleton
-def: "." [FB:FBrf:0045366, FB:gg]
+def: "." [FB:FBrf0045366, FB:gg]
 related_synonym: "cephalopharyngeal plates" []
 related_synonym: "cephalopharyngeal sclerites" []
 related_synonym: "mouth parts" []
@@ -12262,6 +12262,7 @@ relationship: part_of FBbt:00001850 ! pharyngeal sclerite
 [Term]
 id: FBbt:00001857
 name: larval dorsal pouch
+comment: Editing Flag: This probably needs fixing. There seem to be two different things referred to as a dorsal pouch. One is a transtional structure formed during evelopment of the head, and the other is an unrelated larval structure.  Need to diambigutae/disentangle.  Note - poss redundancy between primordium term and embryonic term.  ds060616
 is_a: FBbt:00005807 ! dorsal pouch
 relationship: part_of FBbt:00000005 ! acron
 relationship: part_of FBbt:00001850 ! pharyngeal sclerite
@@ -12577,28 +12578,28 @@ relationship: part_of FBbt:00005724 ! adult excretory system
 [Term]
 id: FBbt:00001911
 name: embryonic/larval nervous system
-def: "." [FB:FBrf:0045359, FB:FBrf:0075072, FB:FBrf:0105282]
+def: "." [FB:FBrf0045359, FB:FBrf0075072, FB:FBrf0105282]
 is_a: FBbt:00005093 ! nervous system
 relationship: part_of FBbt:00001727 ! larva
 
 [Term]
 id: FBbt:00001912
 name: larval neuromere
-def: "." [FB:FBrf:0084032, FB:FBrf:0089217, FB:FBrf:0105282]
+def: "." [FB:FBrf0084032, FB:FBrf0089217, FB:FBrf0105282]
 is_a: FBbt:00005140 ! neuromere
 relationship: part_of FBbt:00005719 ! larval nervous system
 
 [Term]
 id: FBbt:00001913
 name: larval lateral neuron
-def: "." [FB:FBrf:0098279]
+def: "." [FB:FBrf0098279]
 related_synonym: "LN" []
 relationship: part_of FBbt:00005719 ! larval nervous system
 
 [Term]
 id: FBbt:00001914
 name: larval dorsal neuron
-def: "." [FB:FBrf:0098279]
+def: "." [FB:FBrf0098279]
 relationship: part_of FBbt:00005719 ! larval nervous system
 
 [Term]
@@ -12622,7 +12623,7 @@ is_a: FBbt:00001914 ! larval dorsal neuron
 [Term]
 id: FBbt:00001918
 name: larval sensory nerve
-def: "." [FB:FBrf:0075072]
+def: "." [FB:FBrf0075072]
 is_a: FBbt:00005136 ! sensory nerve
 relationship: part_of FBbt:00005719 ! larval nervous system
 
@@ -12645,7 +12646,7 @@ relationship: part_of FBbt:00001919 ! larval central nervous system
 [Term]
 id: FBbt:00001921
 name: larval supraesophageal connective
-def: "." [FB:FBrf:0105282]
+def: "." [FB:FBrf0105282]
 is_a: FBbt:00005104 ! connective
 relationship: part_of FBbt:00001920 ! larval brain
 
@@ -12698,7 +12699,7 @@ is_a: FBbt:00001926 ! protocerebral neuromere
 [Term]
 id: FBbt:00001930
 name: larval optic lobe
-def: "." [FB:FBrf:0052913, FB:FBrf:0064800]
+def: "." [FB:FBrf0052913, FB:FBrf0064800]
 relationship: develops_from FBbt:00005659 ! embryonic optic lobe
 relationship: part_of FBbt:00001925 ! larval protocerebrum
 
@@ -12905,16 +12906,16 @@ is_a: FBbt:00001920 ! larval brain
 [Term]
 id: FBbt:00001965
 name: larval antennal nerve
-related_synonym: "SNIII" []
 related_synonym: "sensory nerve III" []
+related_synonym: "SNIII" []
 is_a: FBbt:00001964 ! supraesophageal nerve
 relationship: part_of FBbt:00005806 ! antennal sense organ
 
 [Term]
 id: FBbt:00001966
 name: labral nerve
-related_synonym: "SNI" []
 related_synonym: "sensory nerve I" []
+related_synonym: "SNI" []
 is_a: FBbt:00001964 ! supraesophageal nerve
 relationship: part_of FBbt:00002651 ! pharyngeal monoscolopidial chordotonal organ
 relationship: part_of FBbt:00002652 ! dorsopharyngeal organ
@@ -12922,8 +12923,8 @@ relationship: part_of FBbt:00002652 ! dorsopharyngeal organ
 [Term]
 id: FBbt:00001967
 name: Bolwig's nerve
-related_synonym: "SNII" []
 related_synonym: "sensory nerve II" []
+related_synonym: "SNII" []
 is_a: FBbt:00001964 ! supraesophageal nerve
 
 [Term]
@@ -12935,9 +12936,9 @@ is_a: FBbt:00005212 ! bipolar dendrite neuron
 [Term]
 id: FBbt:00001969
 name: papilla nerve
-related_synonym: "SNIV" []
 related_synonym: "pan" []
 related_synonym: "sensory nerve IV" []
+related_synonym: "SNIV" []
 is_a: FBbt:00001964 ! supraesophageal nerve
 
 [Term]
@@ -12949,7 +12950,7 @@ relationship: part_of FBbt:00002665 ! hypopharyngeal sense organ
 [Term]
 id: FBbt:00001971
 name: larval ventral ganglion
-def: "." [FB:FBrf:0048551]
+def: "." [FB:FBrf0048551]
 related_synonym: "subesophageal + T1 + T2 + T3 + A1 + A2 + A3 + A4 + A5 + A6 + A7 + A8 ganglia" []
 related_synonym: "thoracico-abdominal ganglion" []
 is_a: FBbt:00005137 ! ganglion
@@ -12990,9 +12991,9 @@ is_a: FBbt:00001972 ! subesophageal ganglion neuron
 [Term]
 id: FBbt:00001977
 name: lateropharyngeal nerve
-related_synonym: "SNV" []
 related_synonym: "lpn" []
 related_synonym: "sensory nerve V" []
+related_synonym: "SNV" []
 is_a: FBbt:00001976 ! subesophageal nerve
 relationship: part_of FBbt:00001974 ! labial neuromere
 relationship: part_of FBbt:00002687 ! anterior pharyngeal organ
@@ -13001,9 +13002,9 @@ relationship: part_of FBbt:00002688 ! lateropharyngeal organ
 [Term]
 id: FBbt:00001978
 name: larval labial nerve
-related_synonym: "SNVII" []
 related_synonym: "lan" []
 related_synonym: "sensory nerve VII" []
+related_synonym: "SNVII" []
 is_a: FBbt:00001976 ! subesophageal nerve
 relationship: part_of FBbt:00001974 ! labial neuromere
 relationship: part_of FBbt:00002720 ! labial organ
@@ -13011,9 +13012,9 @@ relationship: part_of FBbt:00002720 ! labial organ
 [Term]
 id: FBbt:00001979
 name: larval maxillary nerve
-related_synonym: "SNVI" []
 related_synonym: "mxn" []
 related_synonym: "sensory nerve VI" []
+related_synonym: "SNVI" []
 is_a: FBbt:00001976 ! subesophageal nerve
 relationship: part_of FBbt:00001975 ! maxillary neuromere
 relationship: part_of FBbt:00002686 ! papilla organ
@@ -13136,8 +13137,8 @@ is_a: FBbt:00001972 ! subesophageal ganglion neuron
 [Term]
 id: FBbt:00001997
 name: anterior fascicle
-related_synonym: "ISN" []
 related_synonym: "intersegmental nerve" []
+related_synonym: "ISN" []
 is_a: FBbt:00001972 ! subesophageal ganglion neuron
 is_a: FBbt:00005101 ! fascicle
 
@@ -13342,8 +13343,8 @@ is_a: FBbt:00002030 ! lateral multidendritic neuron
 [Term]
 id: FBbt:00002037
 name: posterior fascicle
-related_synonym: "SN" []
 related_synonym: "segmental nerve" []
+related_synonym: "SN" []
 is_a: FBbt:00001972 ! subesophageal ganglion neuron
 is_a: FBbt:00005101 ! fascicle
 
@@ -13485,8 +13486,8 @@ relationship: part_of FBbt:00001743 ! larval prothoracic segment
 [Term]
 id: FBbt:00002064
 name: prothoracic anterior fascicle
-related_synonym: "ISN" []
 related_synonym: "intersegmental nerve" []
+related_synonym: "ISN" []
 is_a: FBbt:00001997 ! anterior fascicle
 is_a: FBbt:00002063 ! prothoracic nerve
 
@@ -13621,8 +13622,8 @@ is_a: FBbt:00002075 ! prothoracic dorsal/lateral multidendritic neuron
 [Term]
 id: FBbt:00002085
 name: prothoracic posterior fascicle
-related_synonym: "SN" []
 related_synonym: "segmental nerve" []
+related_synonym: "SN" []
 is_a: FBbt:00002037 ! posterior fascicle
 is_a: FBbt:00002063 ! prothoracic nerve
 
@@ -13741,8 +13742,8 @@ relationship: part_of FBbt:00001744 ! larval mesothoracic segment
 [Term]
 id: FBbt:00002104
 name: mesothoracic anterior fascicle
-related_synonym: "ISN" []
 related_synonym: "intersegmental nerve" []
+related_synonym: "ISN" []
 is_a: FBbt:00001997 ! anterior fascicle
 is_a: FBbt:00002103 ! mesothoracic nerve
 
@@ -13877,8 +13878,8 @@ is_a: FBbt:00002115 ! mesothoracic dorsal/lateral multidendritic neuron
 [Term]
 id: FBbt:00002125
 name: mesothoracic posterior fascicle
-related_synonym: "SN" []
 related_synonym: "segmental nerve" []
+related_synonym: "SN" []
 is_a: FBbt:00002037 ! posterior fascicle
 is_a: FBbt:00002103 ! mesothoracic nerve
 
@@ -13984,8 +13985,8 @@ relationship: part_of FBbt:00001745 ! larval metathoracic segment
 [Term]
 id: FBbt:00002142
 name: metathoracic anterior fascicle
-related_synonym: "ISN" []
 related_synonym: "intersegmental nerve" []
+related_synonym: "ISN" []
 is_a: FBbt:00001997 ! anterior fascicle
 is_a: FBbt:00002141 ! metathoracic nerve
 
@@ -14221,7 +14222,7 @@ is_a: FBbt:00002174 ! metathoracic ventral multidendritic neuron
 [Term]
 id: FBbt:00002179
 name: abdominal nerve
-def: "." [FB:FBrf:0054490]
+def: "." [FB:FBrf0054490]
 is_a: FBbt:00001972 ! subesophageal ganglion neuron
 relationship: part_of FBbt:00001746 ! larval abdomen
 
@@ -15060,8 +15061,8 @@ relationship: part_of FBbt:00001754 ! larval abdominal segment 7
 [Term]
 id: FBbt:00002319
 name: abdominal anterior fascicle
-related_synonym: "ISN" []
 related_synonym: "intersegmental nerve" []
+related_synonym: "ISN" []
 is_a: FBbt:00001997 ! anterior fascicle
 is_a: FBbt:00002179 ! abdominal nerve
 
@@ -17194,11 +17195,11 @@ relationship: part_of FBbt:00000010 ! intercalary segment
 [Term]
 id: FBbt:00002665
 name: hypopharyngeal sense organ
-def: "." [FB:FBrf:0074007]
+def: "." [FB:FBrf0074007]
 subset: EmbDevSlim
-related_synonym: "X-organ of Keilin" []
 related_synonym: "hpo" []
 related_synonym: "larval pharyngeal sense organ" []
+related_synonym: "X-organ of Keilin" []
 is_a: FBbt:00002664 ! intercalary segment sensillum
 relationship: develops_from FBbt:00016001 ! hypopharyngeal sense organ primordium
 relationship: part_of FBbt:00005769 ! larval pharynx
@@ -17340,7 +17341,7 @@ relationship: part_of FBbt:00000013 ! maxillary segment
 [Term]
 id: FBbt:00002690
 name: larval maxillary sense organ
-def: "." [FB:FBrf:0047373, FB:FBrf:0074007]
+def: "." [FB:FBrf0047373, FB:FBrf0074007]
 related_synonym: "Maxillarorgan" []
 related_synonym: "maxillary element" []
 related_synonym: "terminal organ" []
@@ -17438,7 +17439,7 @@ relationship: part_of FBbt:00002690 ! larval maxillary sense organ
 [Term]
 id: FBbt:00002707
 name: ventral organ
-def: "." [FB:FBrf:0074007]
+def: "." [FB:FBrf0074007]
 related_synonym: "vo" []
 is_a: FBbt:00002689 ! larval maxillary segment organ
 relationship: part_of FBbt:00002640 ! antenno-maxillary complex
@@ -17477,14 +17478,14 @@ is_a: FBbt:00002708 ! ventral organ sensillum
 [Term]
 id: FBbt:00002714
 name: dorsal pit
-def: "." [FB:FBrf:0034076]
+def: "." [FB:FBrf0034076]
 is_a: FBbt:00005193 ! pit sensillum
 relationship: part_of FBbt:00002707 ! ventral organ
 
 [Term]
 id: FBbt:00002715
 name: knob in pit sensillum
-def: "." [FB:FBrf:0074007]
+def: "." [FB:FBrf0074007]
 is_a: FBbt:00005193 ! pit sensillum
 relationship: part_of FBbt:00002707 ! ventral organ
 
@@ -17511,7 +17512,7 @@ relationship: part_of FBbt:00000014 ! labial segment
 [Term]
 id: FBbt:00002719
 name: hypophysis
-def: "." [FB:FBrf:0074007]
+def: "." [FB:FBrf0074007]
 related_synonym: "hy" []
 related_synonym: "hypophyseal sense organ" []
 related_synonym: "labial sensory organ" []
@@ -17521,7 +17522,7 @@ is_a: FBbt:00002718 ! larval labial segment sensillum
 [Term]
 id: FBbt:00002720
 name: labial organ
-def: "." [FB:FBrf:0034076]
+def: "." [FB:FBrf0034076]
 related_synonym: "labial sense organ" []
 related_synonym: "lbo" []
 related_synonym: "lower lip sense organ" []
@@ -18889,10 +18890,10 @@ relationship: part_of FBbt:00001755 ! larval abdominal segment 8
 [Term]
 id: FBbt:00002929
 name: abdominal 8 dorsal sensillum trichodeum DMSOh
-related_synonym: "SO7" []
 related_synonym: "dmsc" []
 related_synonym: "sc3" []
 related_synonym: "sk" []
+related_synonym: "SO7" []
 related_synonym: "t7" []
 is_a: FBbt:00002928 ! larval abdominal 8 sensillum
 is_a: FBbt:00005184 ! sensillum trichodeum
@@ -19023,10 +19024,10 @@ is_a: FBbt:00005183 ! sensillum campaniformium
 [Term]
 id: FBbt:00002949
 name: abdominal 10 caudal sensillum basiconicum ASO
-related_synonym: "SO1" []
 related_synonym: "anal sensory organ" []
 related_synonym: "csc" []
 related_synonym: "sc1" []
+related_synonym: "SO1" []
 related_synonym: "t1" []
 related_synonym: "ventral anal sensillum" []
 is_a: FBbt:00002947 ! larval abdominal 10 sensillum
@@ -19048,7 +19049,7 @@ is_a: FBbt:00002950 ! larval abdominal 11 sensillum
 [Term]
 id: FBbt:00002952
 name: prepupa
-def: "." [FB:FBrf:0036849]
+def: "." [FB:FBrf0036849]
 related_synonym: "PP" []
 is_a: FBbt:00004206 ! stage
 relationship: develops_from FBbt:00001727 ! larva
@@ -19056,7 +19057,7 @@ relationship: develops_from FBbt:00001727 ! larva
 [Term]
 id: FBbt:00002953
 name: pupa
-def: "." [FB:FBrf:0036849]
+def: "." [FB:FBrf0036849]
 related_synonym: "P" []
 is_a: FBbt:00004206 ! stage
 relationship: develops_from FBbt:00002952 ! prepupa
@@ -19322,7 +19323,7 @@ relationship: part_of FBbt:00002954 ! pupal tracheal system
 [Term]
 id: FBbt:00003004
 name: adult
-def: "." [FB:FBrf:0036849]
+def: "." [FB:FBrf0036849]
 related_synonym: "imago" []
 is_a: FBbt:00004206 ! stage
 relationship: develops_from FBbt:00006011 ! pharate adult
@@ -19355,7 +19356,7 @@ relationship: part_of FBbt:00003007 ! adult head
 [Term]
 id: FBbt:00003009
 name: adult head segment
-def: "." [FB:FBrf:0075072]
+def: "." [FB:FBrf0075072]
 is_a: FBbt:00000006 ! head segment
 is_a: FBbt:00003006 ! adult segment
 relationship: part_of FBbt:00003007 ! adult head
@@ -19999,7 +20000,7 @@ relationship: part_of FBbt:00003121 ! peritreme
 [Term]
 id: FBbt:00003123
 name: pupal/adult digestive system
-def: "." [FB:FBrf:0007735]
+def: "." [FB:FBrf0007735]
 is_a: FBbt:00005055 ! digestive system
 relationship: part_of FBbt:00002953 ! pupa
 relationship: part_of FBbt:00003004 ! adult
@@ -20154,7 +20155,7 @@ relationship: part_of FBbt:00003125 ! alimentary canal
 [Term]
 id: FBbt:00003149
 name: adult circulatory system
-def: "." [FB:FBrf:0007735, FB:FBrf:0031012]
+def: "." [FB:FBrf0007735, FB:FBrf0031012]
 is_a: FBbt:00005057 ! circulatory system
 relationship: part_of FBbt:00003004 ! adult
 
@@ -20517,7 +20518,7 @@ relationship: part_of FBbt:00003214 ! adult endocrine system
 [Term]
 id: FBbt:00003218
 name: adult muscle system
-def: "." [FB:FBrf:0007735]
+def: "." [FB:FBrf0007735]
 is_a: FBbt:00005069 ! muscle system
 relationship: part_of FBbt:00003004 ! adult
 
@@ -20601,11 +20602,11 @@ relationship: part_of FBbt:00001785 ! male genital disc
 [Term]
 id: FBbt:00003232
 name: adult myoblast
-def: "." [FB:FBrf:0053819]
+def: "." [FB:FBrf0053819]
 subset: EmbDevSlim
-related_synonym: "AMP" []
-related_synonym: "P1 AdMus" [FB:FBrf:ds555]
 related_synonym: "adult muscle precursor" []
+related_synonym: "AMP" []
+related_synonym: "P1 AdMus" [FB:FBrfds555]
 is_a: FBbt:00005083 ! myoblast
 relationship: develops_from FBbt:00005516 ! adult muscle precursor primordium
 relationship: part_of FBbt:00002953 ! pupa
@@ -20917,7 +20918,7 @@ relationship: part_of FBbt:00003175 ! frontal pulsatile organ
 [Term]
 id: FBbt:00003282
 name: skeletal muscle of dorsal head
-def: "." [FB:FBrf:0007310, FB:FBrf:0056570]
+def: "." [FB:FBrf0007310, FB:FBrf0056570]
 is_a: FBbt:00003260 ! skeletal muscle of head
 relationship: part_of FBbt:00004483 ! ptilinum
 
@@ -21347,8 +21348,8 @@ is_a: FBbt:00003359 ! skeletal muscle of mesothorax
 [Term]
 id: FBbt:00003361
 name: indirect flight muscle
-related_synonym: "IFM" []
 related_synonym: "fibrillar muscle" []
+related_synonym: "IFM" []
 is_a: FBbt:00003360 ! flight muscle
 
 [Term]
@@ -21403,82 +21404,82 @@ is_a: FBbt:00003362 ! dorsal medial muscle
 [Term]
 id: FBbt:00003369
 name: lateral oblique dorsal muscle
-related_synonym: "DVM III" []
 related_synonym: "dorso-ventral muscle" []
 related_synonym: "dorsoventral muscle" []
+related_synonym: "DVM III" []
 is_a: FBbt:00003361 ! indirect flight muscle
 
 [Term]
 id: FBbt:00003370
 name: lateral oblique dorsal muscle 46a
-related_synonym: "DVM III" []
 related_synonym: "dorso-ventral muscle" []
 related_synonym: "dorsoventral muscle" []
+related_synonym: "DVM III" []
 is_a: FBbt:00003369 ! lateral oblique dorsal muscle
 
 [Term]
 id: FBbt:00003371
 name: lateral oblique dorsal muscle 46b
-related_synonym: "DVM III" []
 related_synonym: "dorso-ventral muscle" []
 related_synonym: "dorsoventral muscle" []
+related_synonym: "DVM III" []
 is_a: FBbt:00003369 ! lateral oblique dorsal muscle
 
 [Term]
 id: FBbt:00003372
 name: tergosternal muscle
-related_synonym: "DVM I" []
 related_synonym: "dorso-ventral muscle" []
 related_synonym: "dorsoventral muscle" []
+related_synonym: "DVM I" []
 is_a: FBbt:00003361 ! indirect flight muscle
 
 [Term]
 id: FBbt:00003373
 name: tergosternal muscle 47a
-related_synonym: "DVM I" []
 related_synonym: "dorso-ventral muscle" []
 related_synonym: "dorsoventral muscle" []
+related_synonym: "DVM I" []
 is_a: FBbt:00003372 ! tergosternal muscle
 
 [Term]
 id: FBbt:00003374
 name: tergosternal muscle 47b
-related_synonym: "DVM I" []
 related_synonym: "dorso-ventral muscle" []
 related_synonym: "dorsoventral muscle" []
+related_synonym: "DVM I" []
 is_a: FBbt:00003372 ! tergosternal muscle
 
 [Term]
 id: FBbt:00003375
 name: tergosternal muscle 47c
-related_synonym: "DVM I" []
 related_synonym: "dorso-ventral muscle" []
 related_synonym: "dorsoventral muscle" []
+related_synonym: "DVM I" []
 is_a: FBbt:00003372 ! tergosternal muscle
 
 [Term]
 id: FBbt:00003376
 name: coxal tergal remotor muscle
-related_synonym: "DVM II" []
 related_synonym: "dorso-ventral muscle" []
 related_synonym: "dorsoventral muscle" []
+related_synonym: "DVM II" []
 is_a: FBbt:00003311 ! tergal remotor muscle
 is_a: FBbt:00003361 ! indirect flight muscle
 
 [Term]
 id: FBbt:00003377
 name: coxal tergal remotor muscle 48a
-related_synonym: "DVM II" []
 related_synonym: "dorso-ventral muscle" []
 related_synonym: "dorsoventral muscle" []
+related_synonym: "DVM II" []
 is_a: FBbt:00003376 ! coxal tergal remotor muscle
 
 [Term]
 id: FBbt:00003378
 name: coxal tergal remotor muscle 48b
-related_synonym: "DVM II" []
 related_synonym: "dorso-ventral muscle" []
 related_synonym: "dorsoventral muscle" []
+related_synonym: "DVM II" []
 is_a: FBbt:00003376 ! coxal tergal remotor muscle
 
 [Term]
@@ -21641,8 +21642,8 @@ is_a: FBbt:00003402 ! skeletal muscle of mesothoracic leg
 [Term]
 id: FBbt:00003404
 name: mesothoracic extracoxal depressor muscle 66
-related_synonym: "TDT" []
 related_synonym: "jump muscle" []
+related_synonym: "TDT" []
 related_synonym: "tergal depressor of trochanter" []
 related_synonym: "tergotrochanteral muscle" []
 is_a: FBbt:00003320 ! extracoxal depressor muscle
@@ -21743,7 +21744,7 @@ is_a: FBbt:00003418 ! haltere muscle
 [Term]
 id: FBbt:00003421
 name: haltere muscle 78a
-def: "." [FB:FBrf:0037610]
+def: "." [FB:FBrf0037610]
 is_a: FBbt:00003418 ! haltere muscle
 
 [Term]
@@ -22534,14 +22535,14 @@ relationship: part_of FBbt:00004955 ! testis sheath
 [Term]
 id: FBbt:00003559
 name: adult nervous system
-def: "." [FB:FBrf:0002482, FB:FBrf:0007196, FB:FBrf:0007735, FB:FBrf:0034076]
+def: "." [FB:FBrf0002482, FB:FBrf0007196, FB:FBrf0007735, FB:FBrf0034076]
 is_a: FBbt:00005093 ! nervous system
 relationship: part_of FBbt:00003004 ! adult
 
 [Term]
 id: FBbt:00003560
 name: adult neuroblast
-def: "." [FB:FBrf:0047815]
+def: "." [FB:FBrf0047815]
 comment: In larval ventral ganglion.
 is_a: FBbt:00005146 ! neuroblast
 relationship: part_of FBbt:00003559 ! adult nervous system
@@ -22725,7 +22726,7 @@ relationship: part_of FBbt:00003025 ! adult abdominal segment 1
 [Term]
 id: FBbt:00003594
 name: abdominal 2 neuroblast dorso-lateral cluster
-def: "." [FB:FBrf:0076116]
+def: "." [FB:FBrf0076116]
 related_synonym: "dl" []
 is_a: FBbt:00003584 ! abdominal neuroblast
 is_a: FBbt:00005132 ! dorso-lateral dopamine neuron
@@ -22734,7 +22735,7 @@ relationship: part_of FBbt:00003026 ! adult abdominal segment 2
 [Term]
 id: FBbt:00003595
 name: abdominal 2 neuroblast ventro-lateral cluster
-def: "." [FB:FBrf:0076116]
+def: "." [FB:FBrf0076116]
 related_synonym: "vl" []
 is_a: FBbt:00003584 ! abdominal neuroblast
 is_a: FBbt:00005134 ! ventro-lateral serotonin neuron
@@ -22743,7 +22744,7 @@ relationship: part_of FBbt:00003026 ! adult abdominal segment 2
 [Term]
 id: FBbt:00003596
 name: abdominal 2 neuroblast ventro-medial cluster
-def: "." [FB:FBrf:0076116]
+def: "." [FB:FBrf0076116]
 related_synonym: "paramedial cell" []
 related_synonym: "vm" []
 is_a: FBbt:00003584 ! abdominal neuroblast
@@ -22752,7 +22753,7 @@ relationship: part_of FBbt:00003026 ! adult abdominal segment 2
 [Term]
 id: FBbt:00003597
 name: abdominal 2 neuroblast medial cluster
-def: "." [FB:FBrf:0076116]
+def: "." [FB:FBrf0076116]
 related_synonym: "m" []
 is_a: FBbt:00003584 ! abdominal neuroblast
 relationship: part_of FBbt:00003026 ! adult abdominal segment 2
@@ -22760,7 +22761,7 @@ relationship: part_of FBbt:00003026 ! adult abdominal segment 2
 [Term]
 id: FBbt:00003598
 name: abdominal neuroblast dorso-lateral cluster
-def: "." [FB:FBrf:0076116]
+def: "." [FB:FBrf0076116]
 related_synonym: "dl" []
 is_a: FBbt:00003584 ! abdominal neuroblast
 is_a: FBbt:00005132 ! dorso-lateral dopamine neuron
@@ -22798,7 +22799,7 @@ relationship: part_of FBbt:00003031 ! adult abdominal segment 7
 [Term]
 id: FBbt:00003604
 name: abdominal neuroblast ventro-lateral cluster
-def: "." [FB:FBrf:0076116]
+def: "." [FB:FBrf0076116]
 related_synonym: "vl" []
 is_a: FBbt:00003584 ! abdominal neuroblast
 is_a: FBbt:00005134 ! ventro-lateral serotonin neuron
@@ -22836,7 +22837,7 @@ relationship: part_of FBbt:00003031 ! adult abdominal segment 7
 [Term]
 id: FBbt:00003610
 name: abdominal neuroblast ventro-medial cluster
-def: "." [FB:FBrf:0076116]
+def: "." [FB:FBrf0076116]
 related_synonym: "paramedial cell" []
 related_synonym: "vm" []
 is_a: FBbt:00003584 ! abdominal neuroblast
@@ -22874,7 +22875,7 @@ relationship: part_of FBbt:00003031 ! adult abdominal segment 7
 [Term]
 id: FBbt:00003616
 name: abdominal neuroblast medial cluster
-def: "." [FB:FBrf:0076116]
+def: "." [FB:FBrf0076116]
 related_synonym: "m" []
 is_a: FBbt:00003584 ! abdominal neuroblast
 
@@ -22949,7 +22950,7 @@ relationship: part_of FBbt:00003626 ! supraesophageal ganglion
 [Term]
 id: FBbt:00003628
 name: adult dorsal neuron
-def: "." [FB:FBrf:0078638, FB:FBrf:0098279]
+def: "." [FB:FBrf0078638, FB:FBrf0098279]
 relationship: part_of FBbt:00003627 ! protocerebrum
 
 [Term]
@@ -22973,7 +22974,7 @@ is_a: FBbt:00003628 ! adult dorsal neuron
 [Term]
 id: FBbt:00003632
 name: central body complex
-def: "." [FB:FBrf:0049409, http://flybrain.uni-freiburg.de/Flybrain/html/terms/terms.html]
+def: "." [FB:FBrf0049409, http://flybrain.uni-freiburg.de/Flybrain/html/terms/terms.html]
 related_synonym: "central body" []
 related_synonym: "central complex" []
 relationship: part_of FBbt:00003627 ! protocerebrum
@@ -22993,8 +22994,8 @@ is_a: FBbt:00003633 ! small field neuron
 [Term]
 id: FBbt:00003635
 name: horizontal fiber system
-related_synonym: "HFS" []
 related_synonym: "heavy fibers" []
+related_synonym: "HFS" []
 is_a: FBbt:00003633 ! small field neuron
 
 [Term]
@@ -23256,7 +23257,7 @@ relationship: part_of FBbt:00003632 ! central body complex
 [Term]
 id: FBbt:00003684
 name: adult mushroom body
-def: "." [FB:FBrf:0105215]
+def: "." [FB:FBrf0105215]
 related_synonym: "corpora pedunculata" []
 is_a: FBbt:00005801 ! mushroom body
 relationship: part_of FBbt:00003632 ! central body complex
@@ -23361,7 +23362,7 @@ relationship: part_of FBbt:00004508 ! eye
 [Term]
 id: FBbt:00003702
 name: optic lobe neuron
-def: "." [FB:FBrf:0049410, FB:FBrf:0064800]
+def: "." [FB:FBrf0049410, FB:FBrf0064800]
 is_a: FBbt:00005106 ! neuron
 relationship: part_of FBbt:00003701 ! optic lobe
 
@@ -23682,7 +23683,7 @@ relationship: part_of FBbt:00003757 ! inner medulla
 [Term]
 id: FBbt:00003761
 name: pigment-dispersing hormone-immunoreactive neuron
-def: "." [FB:FBrf:0093121]
+def: "." [FB:FBrf0093121]
 related_synonym: "PDF" []
 is_a: FBbt:00005130 ! neurosecretory neuron
 relationship: part_of FBbt:00003748 ! medulla
@@ -23768,8 +23769,8 @@ relationship: part_of FBbt:00003748 ! medulla
 id: FBbt:00003776
 name: medullary intrinsic neuron 1
 related_synonym: "Mi1" []
-related_synonym: "Sut" []
 related_synonym: "small field unilateral tristratified neuron" []
+related_synonym: "Sut" []
 is_a: FBbt:00003775 ! medullary intrinsic neuron
 
 [Term]
@@ -24546,7 +24547,7 @@ relationship: part_of FBbt:00003626 ! supraesophageal ganglion
 [Term]
 id: FBbt:00003924
 name: antennal lobe
-def: "." [FB:FBrf:0051437, FB:FBrf:0107836, http://flybrain.uni-freiburg.de/Flybrain/html/terms/terms.html]
+def: "." [FB:FBrf0051437, FB:FBrf0107836, http://flybrain.uni-freiburg.de/Flybrain/html/terms/terms.html]
 relationship: part_of FBbt:00003923 ! deutocerebrum
 
 [Term]
@@ -24994,7 +24995,7 @@ relationship: part_of FBbt:00005100 ! tract
 [Term]
 id: FBbt:00003999
 name: tritocerebrum
-def: "." [FB:FBrf:0074226]
+def: "." [FB:FBrf0074226]
 relationship: part_of FBbt:00003013 ! adult intercalary segment
 relationship: part_of FBbt:00003626 ! supraesophageal ganglion
 
@@ -25077,7 +25078,7 @@ relationship: part_of FBbt:00003624 ! adult brain
 [Term]
 id: FBbt:00004014
 name: taste-sensory region glomerulus
-def: "." [FB:FBrf:0056378]
+def: "." [FB:FBrf0056378]
 comment: Maybe - gustatory centre.
 related_synonym: "labellar gustatory association centre" []
 relationship: part_of FBbt:00004013 ! subesophageal ganglion
@@ -25154,14 +25155,14 @@ relationship: part_of FBbt:00004146 ! adult labral sense organ
 [Term]
 id: FBbt:00004027
 name: bypass nerve
-def: "." [FB:FBrf:0074012]
+def: "." [FB:FBrf0074012]
 is_a: FBbt:00005105 ! nerve
 relationship: part_of FBbt:00004013 ! subesophageal ganglion
 
 [Term]
 id: FBbt:00004028
 name: adult labial nerve
-def: "." [FB:FBrf:0042883]
+def: "." [FB:FBrf0042883]
 is_a: FBbt:00005105 ! nerve
 relationship: part_of FBbt:00004013 ! subesophageal ganglion
 
@@ -25246,7 +25247,7 @@ relationship: part_of FBbt:00004028 ! adult labial nerve
 [Term]
 id: FBbt:00004044
 name: adult lateral neuron
-def: "." [FB:FBrf:0078638, FB:FBrf:0098279]
+def: "." [FB:FBrf0078638, FB:FBrf0098279]
 related_synonym: "LN" []
 relationship: part_of FBbt:00004013 ! subesophageal ganglion
 
@@ -25259,7 +25260,7 @@ is_a: FBbt:00004044 ! adult lateral neuron
 [Term]
 id: FBbt:00004046
 name: ventral adult lateral neuron
-def: "." [FB:FBrf:0098279, FB:FBrf:0105254]
+def: "." [FB:FBrf0098279, FB:FBrf0105254]
 related_synonym: "LNv" []
 is_a: FBbt:00004044 ! adult lateral neuron
 
@@ -25342,7 +25343,7 @@ relationship: part_of FBbt:00004054 ! prothoracic neuromere
 [Term]
 id: FBbt:00004058
 name: prothoracic ventral neurosecretory neuron
-def: "." [FB:FBrf:0052426]
+def: "." [FB:FBrf0052426]
 related_synonym: "VTNC" []
 is_a: FBbt:00005130 ! neurosecretory neuron
 relationship: part_of FBbt:00004054 ! prothoracic neuromere
@@ -25381,7 +25382,7 @@ relationship: part_of FBbt:00004059 ! mesothoracic neuromere
 [Term]
 id: FBbt:00004064
 name: mesothoracic ventral neurosecretory neuron
-def: "." [FB:FBrf:0052426]
+def: "." [FB:FBrf0052426]
 related_synonym: "VNTC" []
 is_a: FBbt:00005130 ! neurosecretory neuron
 relationship: part_of FBbt:00004059 ! mesothoracic neuromere
@@ -25389,7 +25390,7 @@ relationship: part_of FBbt:00004059 ! mesothoracic neuromere
 [Term]
 id: FBbt:00004065
 name: direct flight muscle motor neuron
-def: "." [FB:FBrf:0074636]
+def: "." [FB:FBrf0074636]
 is_a: FBbt:00005123 ! motor neuron
 relationship: part_of FBbt:00003379 ! direct flight muscle
 relationship: part_of FBbt:00004059 ! mesothoracic neuromere
@@ -25445,7 +25446,7 @@ is_a: FBbt:00004065 ! direct flight muscle motor neuron
 [Term]
 id: FBbt:00004074
 name: indirect flight muscle motor neuron
-def: "." [FB:FBrf:0048552]
+def: "." [FB:FBrf0048552]
 related_synonym: "MN" []
 is_a: FBbt:00005123 ! motor neuron
 relationship: part_of FBbt:00003361 ! indirect flight muscle
@@ -25479,7 +25480,7 @@ is_a: FBbt:00004074 ! indirect flight muscle motor neuron
 [Term]
 id: FBbt:00004080
 name: wing nerve
-def: "." [FB:FBrf:0040724]
+def: "." [FB:FBrf0040724]
 is_a: FBbt:00005105 ! nerve
 relationship: part_of FBbt:00004059 ! mesothoracic neuromere
 relationship: part_of FBbt:00004729 ! wing
@@ -25551,7 +25552,7 @@ relationship: part_of FBbt:00004052 ! thoracic ganglion
 [Term]
 id: FBbt:00004093
 name: metathoracic ventral thoracic neurosecretory neuron
-def: "." [FB:FBrf:0052426]
+def: "." [FB:FBrf0052426]
 related_synonym: "VNTC" []
 is_a: FBbt:00005130 ! neurosecretory neuron
 relationship: part_of FBbt:00004092 ! metathoracic neuromere
@@ -25584,7 +25585,7 @@ relationship: part_of FBbt:00004052 ! thoracic ganglion
 [Term]
 id: FBbt:00004098
 name: gustatory centre of genitalia
-def: "." [FB:FBrf:0068700]
+def: "." [FB:FBrf0068700]
 relationship: part_of FBbt:00004097 ! abdominal neuromere
 
 [Term]
@@ -25595,7 +25596,7 @@ relationship: part_of FBbt:00004097 ! abdominal neuromere
 [Term]
 id: FBbt:00004100
 name: pigment-dispersing hormone-immunoreactive neuron of abdominal neuromere
-def: "." [FB:FBrf:0093121]
+def: "." [FB:FBrf0093121]
 related_synonym: "PDFAb" []
 is_a: FBbt:00005130 ! neurosecretory neuron
 relationship: part_of FBbt:00004099 ! abdominal nerve trunk
@@ -25603,7 +25604,7 @@ relationship: part_of FBbt:00004099 ! abdominal nerve trunk
 [Term]
 id: FBbt:00004101
 name: peptinergic neuron
-def: "." [FB:FBrf:0052426]
+def: "." [FB:FBrf0052426]
 comment: Maybe - neurosecretory neuron.
 is_a: FBbt:00005130 ! neurosecretory neuron
 relationship: part_of FBbt:00004099 ! abdominal nerve trunk
@@ -25675,7 +25676,7 @@ relationship: part_of FBbt:00003032 ! adult abdominal segment 8
 [Term]
 id: FBbt:00004113
 name: adult sense organ
-def: "." [FB:FBrf:0007734, FB:FBrf:0031004]
+def: "." [FB:FBrf0007734, FB:FBrf0031004]
 is_a: FBbt:00005155 ! sense organ
 relationship: part_of FBbt:00003559 ! adult nervous system
 relationship: part_of FBbt:00004992 ! adult cuticle
@@ -25798,7 +25799,7 @@ is_a: FBbt:00004115 ! head bristle
 [Term]
 id: FBbt:00004135
 name: pharyngeal sense organ
-def: "." [FB:FBrf:0068700]
+def: "." [FB:FBrf0068700]
 is_a: FBbt:00004114 ! head sensillum
 
 [Term]
@@ -25934,7 +25935,7 @@ is_a: FBbt:00004155 ! mechano-chemo-sensory labral sensillum
 [Term]
 id: FBbt:00004158
 name: maxillary palp sense organ
-def: "." [FB:FBrf:0042885, FB:FBrf:0068700]
+def: "." [FB:FBrf0042885, FB:FBrf0068700]
 is_a: FBbt:00004114 ! head sensillum
 relationship: part_of FBbt:00004546 ! maxillary palpus
 
@@ -25953,7 +25954,7 @@ relationship: part_of FBbt:00004158 ! maxillary palp sense organ
 [Term]
 id: FBbt:00004161
 name: labellum sensillum
-def: "." [FB:FBrf:0068700]
+def: "." [FB:FBrf0068700]
 is_a: FBbt:00004114 ! head sensillum
 relationship: part_of FBbt:00004531 ! labellum
 
@@ -26014,7 +26015,7 @@ relationship: part_of FBbt:00004496 ! postgena
 [Term]
 id: FBbt:00004171
 name: antennal sensillum
-def: "." [FB:FBrf:0041195, FB:FBrf:0068700]
+def: "." [FB:FBrf0041195, FB:FBrf0068700]
 is_a: FBbt:00004114 ! head sensillum
 relationship: part_of FBbt:00004511 ! antenna
 
@@ -26189,8 +26190,8 @@ id: FBbt:00004201
 name: epipharynx primordium
 def: "." [VH:]
 subset: EmbDevSlim
-related_synonym: "P1 EpiPh" [FB:FBrf:ds555]
 related_synonym: "epipharynx specific anlage" []
+related_synonym: "P1 EpiPh" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 relationship: develops_from FBbt:00005538 ! clypeo-labral primordium
 relationship: part_of FBbt:00004450 ! late extended germ band embryo
@@ -26208,7 +26209,7 @@ id: FBbt:00004203
 name: adult clypeo-labral anlage
 def: "." [VH:]
 subset: EmbDevSlim
-related_synonym: "A AdCly" [FB:FBrf:ds555]
+related_synonym: "A AdCly" [FB:FBrfds555]
 is_a: FBbt:00005426 ! anlage
 relationship: develops_from FBbt:00005538 ! clypeo-labral primordium
 relationship: part_of FBbt:00004450 ! late extended germ band embryo
@@ -26217,7 +26218,7 @@ relationship: part_of FBbt:00004450 ! late extended germ band embryo
 id: FBbt:00004204
 name: ventral ectoderm anlage
 subset: EmbDevSlim
-related_synonym: "Asn/A VenEc" [FB:FBrf:ds555]
+related_synonym: "Asn/A VenEc" [FB:FBrfds555]
 is_a: FBbt:00005426 ! anlage
 relationship: part_of FBbt:00005427 ! ectoderm anlage
 
@@ -26236,7 +26237,7 @@ is_a: FBbt:00000001 ! whole organism
 id: FBbt:00004207
 name: dorsal margin photoreceptor
 is_a: FBbt:00006009 ! eye photoreceptor cell
-relationship: part_of FBbt:00004200 ! retina
+relationship: part_of FBbt:02000000 ! dorsal margin ommatidium
 
 [Term]
 id: FBbt:00004208
@@ -26247,7 +26248,6 @@ relationship: part_of FBbt:00000052 ! embryo
 [Term]
 id: FBbt:00004209
 name: dorsal margin photoreceptor cell R8
-is_a: FBbt:00004207 ! dorsal margin photoreceptor
 is_a: FBbt:00004227 ! photoreceptor cell R8
 
 [Term]
@@ -26403,7 +26403,7 @@ is_a: FBbt:00004230 ! pigment cell
 [Term]
 id: FBbt:00004234
 name: pigment granule
-def: "." [FB:FBrf:0046822]
+def: "." [FB:FBrf0046822]
 relationship: part_of FBbt:00004230 ! pigment cell
 
 [Term]
@@ -26424,7 +26424,7 @@ is_a: FBbt:00004234 ! pigment granule
 [Term]
 id: FBbt:00004238
 name: ocellus sensory structure
-def: "." [FB:FBrf:0050358]
+def: "." [FB:FBrf0050358]
 is_a: FBbt:00004114 ! head sensillum
 relationship: part_of FBbt:00004505 ! ocellus
 
@@ -26516,7 +26516,7 @@ relationship: part_of FBbt:00004663 ! prothoracic leg
 [Term]
 id: FBbt:00004253
 name: prothoracic leg taste bristle
-def: "." [FB:FBrf:0068700]
+def: "." [FB:FBrf0068700]
 is_a: FBbt:00004252 ! prothoracic leg sensillum
 is_a: FBbt:00005178 ! taste bristle
 
@@ -26912,7 +26912,7 @@ is_a: FBbt:00005184 ! sensillum trichodeum
 [Term]
 id: FBbt:00004323
 name: wing sensillum
-def: "." [FB:FBrf:0038304, FB:FBrf:0068700]
+def: "." [FB:FBrf0038304, FB:FBrf0068700]
 is_a: FBbt:00004297 ! adult mesothoracic sensillum
 relationship: part_of FBbt:00004729 ! wing
 
@@ -27075,8 +27075,8 @@ is_a: FBbt:00004343 ! sensillum campaniformium of proximal dorsal radius
 [Term]
 id: FBbt:00004347
 name: sensillum campaniformium of dorsal radius Sc1
-related_synonym: "GSR" []
 related_synonym: "giant sensillum of radius" []
+related_synonym: "GSR" []
 is_a: FBbt:00004343 ! sensillum campaniformium of proximal dorsal radius
 
 [Term]
@@ -27183,7 +27183,7 @@ relationship: part_of FBbt:00004685 ! mesothoracic leg
 [Term]
 id: FBbt:00004363
 name: mesothoracic leg taste bristle
-def: "." [FB:FBrf:0068700]
+def: "." [FB:FBrf0068700]
 is_a: FBbt:00004362 ! mesothoracic leg sensillum
 is_a: FBbt:00005178 ! taste bristle
 
@@ -27454,7 +27454,7 @@ is_a: FBbt:00004407 ! adult metathoracic sensillum
 [Term]
 id: FBbt:00004410
 name: haltere sensillum
-def: "." [FB:FBrf:0038304]
+def: "." [FB:FBrf0038304]
 is_a: FBbt:00004407 ! adult metathoracic sensillum
 relationship: part_of FBbt:00004783 ! haltere
 
@@ -27525,7 +27525,7 @@ relationship: part_of FBbt:00004707 ! metathoracic leg
 [Term]
 id: FBbt:00004421
 name: metathoracic leg taste bristle
-def: "." [FB:FBrf:0068700]
+def: "." [FB:FBrf0068700]
 is_a: FBbt:00004420 ! metathoracic leg sensillum
 is_a: FBbt:00005178 ! taste bristle
 
@@ -27693,7 +27693,6 @@ relationship: part_of FBbt:00004709 ! metathoracic tibia
 [Term]
 id: FBbt:00004449
 name: dorsal margin photoreceptor cell R7
-is_a: FBbt:00004207 ! dorsal margin photoreceptor
 is_a: FBbt:00004225 ! photoreceptor cell R7
 
 [Term]
@@ -27843,7 +27842,7 @@ relationship: part_of FBbt:00004992 ! adult cuticle
 [Term]
 id: FBbt:00004474
 name: adult external
-def: "." [FB:FBrf:0007734, FB:FBrf:0031004]
+def: "." [FB:FBrf0007734, FB:FBrf0031004]
 relationship: part_of FBbt:00003004 ! adult
 
 [Term]
@@ -28296,7 +28295,7 @@ relationship: part_of FBbt:00004481 ! adult external head
 [Term]
 id: FBbt:00004551
 name: adult external thorax
-def: "." [FB:FBrf:0006943]
+def: "." [FB:FBrf0006943]
 relationship: part_of FBbt:00003018 ! adult thorax
 relationship: part_of FBbt:00004474 ! adult external
 
@@ -29437,7 +29436,7 @@ is_a: FBbt:00004748 ! wing septum
 [Term]
 id: FBbt:00004751
 name: wing vein
-def: "Wing veins are epidermal sclerotizations above hemolymph lacunae that run between the dorsal and the ventral wing surfaces and carry trachea and nerves.  The two-dimensional pattern of wing veins is the result of the cuticular differentiation of stripes of epidermal cells on the wing blade, which can be contrasted with the two-dimensional pattern of sensory organs derived from discrete cells." [FB:FBrf:0055233, ISBN:3110148986]
+def: "Wing veins are epidermal sclerotizations above hemolymph lacunae that run between the dorsal and the ventral wing surfaces and carry trachea and nerves.  The two-dimensional pattern of wing veins is the result of the cuticular differentiation of stripes of epidermal cells on the wing blade, which can be contrasted with the two-dimensional pattern of sensory organs derived from discrete cells." [FB:FBrf0055233, ISBN:3110148986]
 relationship: part_of FBbt:00006015 ! wing blade
 
 [Term]
@@ -30199,7 +30198,7 @@ is_a: FBbt:00004862 ! fusome
 [Term]
 id: FBbt:00004864
 name: female reproductive system
-def: "." [FB:FBrf:0007735, FB:FBrf:0034074]
+def: "." [FB:FBrf0007735, FB:FBrf0034074]
 is_a: FBbt:00004857 ! reproductive system
 
 [Term]
@@ -30344,7 +30343,8 @@ is_a: FBbt:00004888 ! oocyte nucleus
 [Term]
 id: FBbt:00004890
 name: germinal vesicle
-is_a: FBbt:00004888 ! oocyte nucleus
+comment: Made obsolete because of redundancy with GO cell component term. Please use GO:0042585 . ds060616.
+is_obsolete: true
 
 [Term]
 id: FBbt:00004891
@@ -30416,8 +30416,8 @@ relationship: part_of FBbt:00004901 ! terminal filament
 [Term]
 id: FBbt:00004903
 name: follicle stem cell
-related_synonym: "SSC" []
 related_synonym: "somatic stem cell" []
+related_synonym: "SSC" []
 is_a: FBbt:00006010 ! somatic stem cell
 relationship: part_of FBbt:00004866 ! germarium
 
@@ -30425,8 +30425,8 @@ relationship: part_of FBbt:00004866 ! germarium
 id: FBbt:00004904
 name: follicle cell
 def: "The cells that make up the inner lining of the ovariole." [FB:gg]
-related_synonym: "SSC" []
 related_synonym: "somatic stem cell" []
+related_synonym: "SSC" []
 relationship: develops_from FBbt:00004903 ! follicle stem cell
 relationship: part_of FBbt:00004894 ! egg chamber
 
@@ -30560,7 +30560,7 @@ relationship: part_of FBbt:00004864 ! female reproductive system
 [Term]
 id: FBbt:00004927
 name: male reproductive system
-def: "." [FB:FBrf:0007735, FB:FBrf:0034075]
+def: "." [FB:FBrf0007735, FB:FBrf0034075]
 is_a: FBbt:00004857 ! reproductive system
 
 [Term]
@@ -30964,7 +30964,7 @@ relationship: part_of FBbt:00004993 ! epidermis
 [Term]
 id: FBbt:00004996
 name: X and XF cell
-def: "." [FB:FBrf:0057603]
+def: "." [FB:FBrf0057603]
 relationship: part_of FBbt:00004993 ! epidermis
 
 [Term]
@@ -31129,7 +31129,7 @@ is_a: FBbt:00004856 ! organ system
 [Term]
 id: FBbt:00005024
 name: tracheal system
-def: "." [FB:FBrf:0064787]
+def: "." [FB:FBrf0064787]
 is_a: FBbt:00004856 ! organ system
 
 [Term]
@@ -31216,9 +31216,9 @@ relationship: part_of FBbt:00005024 ! tracheal system
 id: FBbt:00005037
 name: tracheal primordium
 subset: EmbDevSlim
-related_synonym: "P2 TrachP" [FB:FBrf:ds555]
-related_synonym: "TrachP3" []
+related_synonym: "P2 TrachP" [FB:FBrfds555]
 related_synonym: "tracheal placode" []
+related_synonym: "TrachP3" []
 is_a: FBbt:00005495 ! primordium
 relationship: develops_from FBbt:00000112 ! dorsal ectoderm
 relationship: part_of FBbt:00014201 ! early extended germ band embryo
@@ -31381,7 +31381,7 @@ is_a: FBbt:00004856 ! organ system
 [Term]
 id: FBbt:00005066
 name: fat body
-def: "." [FB:FBrf:0031020, FB:gg]
+def: "." [FB:FBrf0031020, FB:gg]
 relationship: part_of FBbt:00005065 ! adipose system
 
 [Term]
@@ -31442,37 +31442,44 @@ relationship: part_of FBbt:00005074 ! muscle cell
 [Term]
 id: FBbt:00005076
 name: myofibril
-relationship: part_of FBbt:00005074 ! muscle cell
+comment: Made obsolete because of redundancy with GO cell component term. Please use GO:0030016. ds060616.
+is_obsolete: true
 
 [Term]
 id: FBbt:00005077
 name: sarcomere
-relationship: part_of FBbt:00005074 ! muscle cell
+comment: Made obsolete because of redundancy with GO cell component term. Please use GO:0030017 . ds060616.
+is_obsolete: true
 
 [Term]
 id: FBbt:00005078
 name: A band
-relationship: part_of FBbt:00005077 ! sarcomere
+comment: Made obsolete because of redundancy with GO cell component term. Please use GO:0031672 . ds060616.
+is_obsolete: true
 
 [Term]
 id: FBbt:00005079
 name: Z disc
-relationship: part_of FBbt:00005077 ! sarcomere
+comment: Made obsolete because of redundancy with GO cell component term. Please use GO:0030018 . ds060616.
+is_obsolete: true
 
 [Term]
 id: FBbt:00005080
 name: I band
-relationship: part_of FBbt:00005077 ! sarcomere
+comment: Made obsolete because of redundancy with GO cell component term. Please use GO:0031674 . ds060616.
+is_obsolete: true
 
 [Term]
 id: FBbt:00005081
 name: thick filament
-relationship: part_of FBbt:00005077 ! sarcomere
+comment: Made obsolete because of redundancy with GO cell component term. Please use: striated muscle thick filament ; GO:0005863 . ds060616
+is_obsolete: true
 
 [Term]
 id: FBbt:00005082
 name: thin filament
-relationship: part_of FBbt:00005077 ! sarcomere
+comment: Made obsolete because of redundancy with GO cell component term. Please use: striated muscle thin filament ; GO:0005865 . ds060616
+is_obsolete: true
 
 [Term]
 id: FBbt:00005083
@@ -31622,12 +31629,14 @@ relationship: part_of FBbt:00005106 ! neuron
 id: FBbt:00005108
 name: perikaryon
 def: "The cytoplasm of the soma of a neuron, surrounding the nucleus (plural:perikarya)." [http://flybrain.uni-freiburg.de/Flybrain/html/terms/terms.html]
-relationship: part_of FBbt:00005107 ! cell body
+comment: Made obsolete because of redundancy with GO cell component term. Please use GO:0043204 . ds060616.
+is_obsolete: true
 
 [Term]
 id: FBbt:00005109
 name: axon
-relationship: part_of FBbt:00005106 ! neuron
+comment: Made obsolete because of redundancy with GO cell component term. Please use GO:0030424 . ds060616.
+is_obsolete: true
 
 [Term]
 id: FBbt:00005110
@@ -31679,19 +31688,22 @@ relationship: part_of FBbt:00005116 ! bouton
 [Term]
 id: FBbt:00005118
 name: synaptic vesicle
-relationship: part_of FBbt:00005114 ! synapse
+comment: Made obsolete because of redundancy with GO cell component term. Please use GO:0008021 . ds060616.
+is_obsolete: true
 
 [Term]
 id: FBbt:00005119
 name: synaptic cleft
-relationship: part_of FBbt:00005114 ! synapse
+comment: Made obsolete because of redundancy with GO cell component term. Please use GO:0043083 . ds060616.
+is_obsolete: true
 
 [Term]
 id: FBbt:00005120
 name: postsynaptic membrane
+comment: Made obsolete because of redundancy with GO cell component term. Please use GO:0045211. ds060616.
 related_synonym: "SSR" []
 related_synonym: "subsynaptic reticulum" []
-relationship: part_of FBbt:00005114 ! synapse
+is_obsolete: true
 
 [Term]
 id: FBbt:00005121
@@ -31837,8 +31849,8 @@ relationship: part_of FBbt:00005093 ! nervous system
 [Term]
 id: FBbt:00005145
 name: glioblast
-related_synonym: "GP" []
 related_synonym: "glial precursor cell" []
+related_synonym: "GP" []
 is_a: FBbt:00005093 ! nervous system
 
 [Term]
@@ -31867,7 +31879,8 @@ is_a: FBbt:00005146 ! neuroblast
 [Term]
 id: FBbt:00005150
 name: growth cone
-relationship: part_of FBbt:00005146 ! neuroblast
+comment: Made obsolete because of redundancy with GO cell component term. Please use GO:0030426 . ds060616.
+is_obsolete: true
 
 [Term]
 id: FBbt:00005151
@@ -31906,7 +31919,7 @@ is_a: FBbt:00005155 ! sense organ
 [Term]
 id: FBbt:00005157
 name: chemosensory sensory organ
-def: "." [FB:FBrf:0068700]
+def: "." [FB:FBrf0068700]
 is_a: FBbt:00005155 ! sense organ
 
 [Term]
@@ -31966,8 +31979,8 @@ relationship: develops_from FBbt:00005165 ! external sensory organ precursor cel
 id: FBbt:00005167
 name: external sensory organ precursor cell IIb
 def: "." [FB:FBrf0049554, FB:FBrf0111371]
-related_synonym: "SOPIIb" []
 related_synonym: "pIIb" []
+related_synonym: "SOPIIb" []
 xref_analog: FB:FBrf0049554
 xref_analog: FB:FBrf0111371
 is_a: FBbt:00005164 ! external sensory organ precursor cell
@@ -31994,7 +32007,7 @@ relationship: part_of FBbt:00005168 ! external sensory organ
 id: FBbt:00005170
 name: thecogen dendritic cap
 def: "A cuticle-like matrix secreted by the thecogen cell around the tip of the eo dendrite(s)." [FB:djs]
-comment: Formerly, erroneously called 'thecogen dendritic cap cell'. 
+comment: Formerly, erroneously called 'thecogen dendritic cap cell'.
 is_a: FBbt:00005808 ! dendritic cap cell
 relationship: part_of FBbt:00005173 ! thecogen cell
 
@@ -32234,8 +32247,8 @@ is_a: FBbt:00005200 ! denticle
 [Term]
 id: FBbt:00005209
 name: multidendritic neuron
-related_synonym: "Type II neuron" []
 related_synonym: "md" []
+related_synonym: "Type II neuron" []
 is_a: FBbt:00005124 ! sensory neuron
 is_a: FBbt:00005163 ! sensory organ cell
 
@@ -32272,7 +32285,7 @@ relationship: part_of FBbt:00005209 ! multidendritic neuron
 [Term]
 id: FBbt:00005215
 name: chordotonal organ
-def: "Chordotonal organs are arthropod sensory structures consisting of special sensilla called the scolopidia, which are mechano-transducers and respond mainly to stretch or flexion. In insects, they consist of bundles of internal sensilla, each of which has a cap cell, an enveloping cell and one or more sense cells. The distal end of the organ is usually attached to the cuticle of the body wall, marked by a pit, a thickened disc or a nodule of chitin, and the base of the organ is connected with the hypodermis, often by a special ligament." [FB:FBrf:0056378]
+def: "Chordotonal organs are arthropod sensory structures consisting of special sensilla called the scolopidia, which are mechano-transducers and respond mainly to stretch or flexion. In insects, they consist of bundles of internal sensilla, each of which has a cap cell, an enveloping cell and one or more sense cells. The distal end of the organ is usually attached to the cuticle of the body wall, marked by a pit, a thickened disc or a nodule of chitin, and the base of the organ is connected with the hypodermis, often by a special ligament." [FB:FBrf0056378]
 related_synonym: "ch" []
 related_synonym: "scolopophorous organ" []
 is_a: FBbt:00005155 ! sense organ
@@ -32535,13 +32548,13 @@ relationship: part_of FBbt:00001664 ! embryonic/larval circulatory system
 [Term]
 id: FBbt:00005255
 name: embryonic heart anchoring cell primordium
-def: "A group of cells at the distal tip of the frontal sac." [FB:FB:FBrf0167997]
+def: "A group of cells at the distal tip of the frontal sac." [FB:FB\:FBrf0167997]
 relationship: part_of FBbt:00015247 ! dorsal head epidermis primordium
 
 [Term]
 id: FBbt:00005256
 name: larval heart anchoring cell
-def: "Cell type that anchors the cardiac outflow region of the larval heart." [FB:FB:FBrf0167997]
+def: "Cell type that anchors the cardiac outflow region of the larval heart." [FB:FB\:FBrf0167997]
 related_synonym: "HANC" []
 is_a: FBbt:00005254 ! embryonic/larval heart anchoring cell
 
@@ -32574,174 +32587,174 @@ relationship: develops_from FBbt:00004934 ! primary gonial cell
 [Term]
 id: FBbt:00005261
 name: stage S1 oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 
 [Term]
 id: FBbt:00005262
 name: stage S2 oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005261 ! stage S1 oocyte
 
 [Term]
 id: FBbt:00005263
 name: stage S3 oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005262 ! stage S2 oocyte
 
 [Term]
 id: FBbt:00005264
 name: stage S4 oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005263 ! stage S3 oocyte
 
 [Term]
 id: FBbt:00005265
 name: stage S5 oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005264 ! stage S4 oocyte
 
 [Term]
 id: FBbt:00005266
 name: stage S6 oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005265 ! stage S5 oocyte
 
 [Term]
 id: FBbt:00005267
 name: stage S7 oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005266 ! stage S6 oocyte
 
 [Term]
 id: FBbt:00005268
 name: stage S8 oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005267 ! stage S7 oocyte
 
 [Term]
 id: FBbt:00005269
 name: stage S9 oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005268 ! stage S8 oocyte
 
 [Term]
 id: FBbt:00005270
 name: stage S10 oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005269 ! stage S9 oocyte
 
 [Term]
 id: FBbt:00005271
 name: stage S10A oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005270 ! stage S10 oocyte
 
 [Term]
 id: FBbt:00005272
 name: stage S10B oocyte
-def: "." [FB:FBrf:00210380]
+def: "." [FB:FBrf00210380]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005271 ! stage S10A oocyte
 
 [Term]
 id: FBbt:00005273
 name: stage S11 oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005272 ! stage S10B oocyte
 
 [Term]
 id: FBbt:00005274
 name: stage S12 oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005273 ! stage S11 oocyte
 
 [Term]
 id: FBbt:00005275
 name: stage S12A oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005274 ! stage S12 oocyte
 
 [Term]
 id: FBbt:00005276
 name: stage S12B oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005275 ! stage S12A oocyte
 
 [Term]
 id: FBbt:00005277
 name: stage S12C oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005276 ! stage S12B oocyte
 
 [Term]
 id: FBbt:00005278
 name: stage S13 oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005277 ! stage S12C oocyte
 
 [Term]
 id: FBbt:00005279
 name: stage S13A oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005278 ! stage S13 oocyte
 
 [Term]
 id: FBbt:00005280
 name: stage S13B oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005279 ! stage S13A oocyte
 
 [Term]
 id: FBbt:00005281
 name: stage S13C oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005280 ! stage S13B oocyte
 
 [Term]
 id: FBbt:00005282
 name: stage S13D oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005281 ! stage S13C oocyte
 
 [Term]
 id: FBbt:00005283
 name: stage S14 oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005282 ! stage S13D oocyte
 
 [Term]
 id: FBbt:00005284
 name: stage S14A oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005283 ! stage S14 oocyte
 
 [Term]
 id: FBbt:00005285
 name: stage S14B oocyte
-def: "." [FB:FBrf:0021038]
+def: "." [FB:FBrf0021038]
 is_a: FBbt:00004886 ! oocyte
 relationship: develops_from FBbt:00005284 ! stage S14A oocyte
 
@@ -33092,7 +33105,7 @@ relationship: develops_from FBbt:00005338 ! second instar larva
 [Term]
 id: FBbt:00005340
 name: stage 1 third instar larva
-def: "." [FB:FBrf:0036849]
+def: "." [FB:FBrf0036849]
 related_synonym: "L3-1" []
 is_a: FBbt:00005339 ! third instar larva
 
@@ -33334,7 +33347,7 @@ relationship: develops_from FBbt:00005370 ! stage A1 adult
 [Term]
 id: FBbt:00005372
 name: stage 0 adult
-def: "The stage immediately prior to emergence [...] This stage (P15i, Bainbridge and Bownes, 1981) is characterized by the black appearance of the wings, frequent movements of the legs and the presence of the meconium, pale green patch which appears at the posterior tip of the abdomen.  Wings at this stage closely resemble those 87hr after pupariation as described by Tucker et al. (1986).  The cuticle is highly folded, and numerous epidermal cell processes containing transalar microtubule arrays span the lumen." [FB:FBrf:0047373]
+def: "The stage immediately prior to emergence [...] This stage (P15i, Bainbridge and Bownes, 1981) is characterized by the black appearance of the wings, frequent movements of the legs and the presence of the meconium, pale green patch which appears at the posterior tip of the abdomen.  Wings at this stage closely resemble those 87hr after pupariation as described by Tucker et al. (1986).  The cuticle is highly folded, and numerous epidermal cell processes containing transalar microtubule arrays span the lumen." [FB:FBrf0047373]
 is_obsolete: true
 
 [Term]
@@ -33583,7 +33596,7 @@ name: central brain anlage in statu nascendi
 def: "." [FB:DJS&VH]
 subset: EmbDevSlim
 related_synonym: "A0ProcEC" []
-related_synonym: "Asn CenBr" [FB:FBrf:ds555]
+related_synonym: "Asn CenBr" [FB:FBrfds555]
 related_synonym: "procephalic ectoderm anlage in statu nascendi" []
 relationship: part_of FBbt:01000119 ! anterior ectoderm anlage
 
@@ -33633,7 +33646,7 @@ id: FBbt:00005423
 name: foregut anlage in statu nascendi
 subset: EmbDevSlim
 related_synonym: "A0FoG" []
-related_synonym: "Asn FoG" [FB:FBrf:ds555]
+related_synonym: "Asn FoG" [FB:FBrfds555]
 relationship: part_of FBbt:01000119 ! anterior ectoderm anlage
 
 [Term]
@@ -33647,14 +33660,14 @@ id: FBbt:00005425
 name: visual anlage in statu nascendi
 subset: EmbDevSlim
 related_synonym: "A0Vis" []
-related_synonym: "Asn VisSys" [FB:FBrf:ds555]
+related_synonym: "Asn VisSys" [FB:FBrfds555]
 is_a: FBbt:00005413 ! anlage in statu nascendi
 relationship: part_of FBbt:01000119 ! anterior ectoderm anlage
 
 [Term]
 id: FBbt:00005426
 name: anlage
-def: "Anlagen are populations of contiguous cells, typically arranged in one plane, that are morphologically indistinct, but that already correspond in extent to a later organ/tissue." [FB:FBrf0178740, FB:FBrf:0089570]
+def: "Anlagen are populations of contiguous cells, typically arranged in one plane, that are morphologically indistinct, but that already correspond in extent to a later organ/tissue." [FB:FBrf0089570, FB:FBrf0178740]
 subset: EmbDevSlim
 is_a: FBbt:00004208 ! developing embryonic structure
 relationship: develops_from FBbt:00005413 ! anlage in statu nascendi
@@ -33691,7 +33704,7 @@ relationship: part_of FBbt:00000119 ! anterior ectoderm
 id: FBbt:00005432
 name: salivary gland duct anlage
 subset: EmbDevSlim
-related_synonym: "A SalD" [FB:FBrf:ds555]
+related_synonym: "A SalD" [FB:FBrfds555]
 related_synonym: "ASalD" []
 is_a: FBbt:00005426 ! anlage
 is_a: FBbt:00025993 ! ventral ectoderm derivative
@@ -33707,7 +33720,7 @@ is_obsolete: true
 id: FBbt:00005434
 name: visual anlage
 subset: EmbDevSlim
-related_synonym: "A VisSys" [FB:FBrf:ds555]
+related_synonym: "A VisSys" [FB:FBrfds555]
 related_synonym: "AVis" []
 is_a: FBbt:00005426 ! anlage
 relationship: develops_from FBbt:00005425 ! visual anlage in statu nascendi
@@ -33723,7 +33736,7 @@ relationship: part_of FBbt:00005311 ! stage 5 embryo
 id: FBbt:00005436
 name: trunk mesoderm anlage
 subset: EmbDevSlim
-related_synonym: "Asn/A TrMes" [FB:FBrf:ds555]
+related_synonym: "Asn/A TrMes" [FB:FBrfds555]
 is_a: FBbt:00005426 ! anlage
 relationship: part_of FBbt:00000104 ! mesoderm anlage
 
@@ -33743,7 +33756,7 @@ id: FBbt:00005439
 name: clypeo-labral anlage
 def: "." [FB:DJS&VH]
 subset: EmbDevSlim
-related_synonym: "A Cly" [FB:FBrf:ds555]
+related_synonym: "A Cly" [FB:FBrfds555]
 related_synonym: "clypeo-labral specific anlage" []
 is_a: FBbt:00005426 ! anlage
 relationship: develops_from FBbt:00000094 ! clypeo-labral anlage in statu nascendi
@@ -33763,7 +33776,7 @@ is_obsolete: true
 id: FBbt:00005442
 name: hypopharynx anlage
 subset: EmbDevSlim
-related_synonym: "A HyPh" [FB:FBrf:ds555]
+related_synonym: "A HyPh" [FB:FBrfds555]
 related_synonym: "hypopharynx specific anlage" []
 is_a: FBbt:00005426 ! anlage
 relationship: develops_from FBbt:00016000 ! hypopharynx anlage in statu nascendi
@@ -33813,8 +33826,8 @@ is_obsolete: true
 id: FBbt:00005451
 name: cuprophilic cell primordium
 subset: EmbDevSlim
-related_synonym: "P1 MiCupro" [FB:FBrf:ds555]
 related_synonym: "embryonic cuprophilic cell specific anlage" []
+related_synonym: "P1 MiCupro" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025995 ! posterior endoderm derivative
 relationship: develops_from FBbt:10005329 ! posterior midgut inclusive primordium
@@ -33825,8 +33838,8 @@ relationship: part_of FBbt:00005246 ! midgut primordium
 id: FBbt:00005452
 name: midgut interstitial cell primordium
 subset: EmbDevSlim
-related_synonym: "P1 MiInter" [FB:FBrf:ds555]
 related_synonym: "embryonic midgut interstitial cell specific anlage" []
+related_synonym: "P1 MiInter" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025995 ! posterior endoderm derivative
 relationship: develops_from FBbt:10005329 ! posterior midgut inclusive primordium
@@ -33966,7 +33979,7 @@ is_obsolete: true
 id: FBbt:00005475
 name: embryonic leading edge cell primordium
 subset: EmbDevSlim
-related_synonym: "A EdCe" [FB:FBrf:ds555]
+related_synonym: "A EdCe" [FB:FBrfds555]
 related_synonym: "embryonic leading edge cell specific anlage" []
 relationship: develops_from FBbt:00005526 ! dorsal epidermis primordium
 relationship: part_of FBbt:00004450 ! late extended germ band embryo
@@ -34067,7 +34080,7 @@ is_obsolete: true
 id: FBbt:00005494
 name: adult tracheal precursor primordium
 subset: EmbDevSlim
-related_synonym: "A AdTra" [FB:FBrf:ds555]
+related_synonym: "A AdTra" [FB:FBrfds555]
 related_synonym: "adult tracheal precursor specific anlage" []
 is_a: FBbt:00001648 ! embryonic imaginal precursor
 relationship: develops_from FBbt:00005037 ! tracheal primordium
@@ -34075,7 +34088,7 @@ relationship: develops_from FBbt:00005037 ! tracheal primordium
 [Term]
 id: FBbt:00005495
 name: primordium
-def: "Primordia are populations of contiguous cells that are morphologically distinct and already correspond in extent to a later organ/tissue." [FB:DJS, FB:FBrf0178740, FB:FBrf:0089570]
+def: "Primordia are populations of contiguous cells that are morphologically distinct and already correspond in extent to a later organ/tissue." [FB:DJS, FB:FBrf0089570, FB:FBrf0178740]
 subset: EmbDevSlim
 related_synonym: "P" []
 related_synonym: "placode" []
@@ -34098,7 +34111,7 @@ relationship: develops_from FBbt:00005553 ! dorsal sensory complex primordium
 id: FBbt:00005498
 name: dorsal pharyngeal muscle primordium
 subset: EmbDevSlim
-related_synonym: "P1 ParMus" [FB:FBrf:ds555]
+related_synonym: "P1 ParMus" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025999 ! head mesoderm derivative
 relationship: develops_from FBbt:00000127 ! head mesoderm
@@ -34123,7 +34136,7 @@ relationship: part_of FBbt:00017008 ! longitudinal visceral muscle primordium
 id: FBbt:00005501
 name: Malpighian tubule main body primordium
 subset: EmbDevSlim
-related_synonym: "P1 MalTB" [FB:FBrf:ds555]
+related_synonym: "P1 MalTB" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025992 ! posterior ectoderm derivative
 relationship: develops_from FBbt:00000442 ! Malpighian tubule primordium
@@ -34135,7 +34148,7 @@ id: FBbt:00005502
 name: Malpighian tubule tip cell primordium
 subset: EmbDevSlim
 related_synonym: "Malpighian tubule tip cell specific anlage" []
-related_synonym: "P1 MalTT" [FB:FBrf:ds555]
+related_synonym: "P1 MalTT" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025992 ! posterior ectoderm derivative
 relationship: develops_from FBbt:00000442 ! Malpighian tubule primordium
@@ -34146,7 +34159,7 @@ relationship: part_of FBbt:00005331 ! dorsal closure embryo
 id: FBbt:00005503
 name: hypopharynx inclusive primordium
 subset: EmbDevSlim
-related_synonym: "P2 HyPh" [FB:FBrf:ds555]
+related_synonym: "P2 HyPh" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025991 ! anterior ectoderm derivative
 relationship: develops_from FBbt:00005442 ! hypopharynx anlage
@@ -34156,7 +34169,7 @@ relationship: part_of FBbt:00014201 ! early extended germ band embryo
 id: FBbt:00005504
 name: small intestine primordium
 subset: EmbDevSlim
-related_synonym: "P1 SmInt" [FB:FBrf:ds555]
+related_synonym: "P1 SmInt" [FB:FBrfds555]
 related_synonym: "small intestine specific anlage" []
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025992 ! posterior ectoderm derivative
@@ -34168,8 +34181,8 @@ relationship: part_of FBbt:00005331 ! dorsal closure embryo
 id: FBbt:00005505
 name: large intestine primordium
 subset: EmbDevSlim
-related_synonym: "P1 LaInt" [FB:FBrf:ds555]
 related_synonym: "large intestine specific anlage" []
+related_synonym: "P1 LaInt" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025992 ! posterior ectoderm derivative
 relationship: develops_from FBbt:00000441 ! hindgut proper primordium
@@ -34180,7 +34193,7 @@ relationship: part_of FBbt:00005331 ! dorsal closure embryo
 id: FBbt:00005506
 name: rectum primordium
 subset: EmbDevSlim
-related_synonym: "P1 Rect" [FB:FBrf:ds555]
+related_synonym: "P1 Rect" [FB:FBrfds555]
 related_synonym: "rectum specific anlage" []
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025992 ! posterior ectoderm derivative
@@ -34192,9 +34205,9 @@ relationship: part_of FBbt:00005331 ! dorsal closure embryo
 id: FBbt:00005507
 name: esophagus primordium
 subset: EmbDevSlim
-related_synonym: "P1 Eso" [FB:FBrf:ds555]
 related_synonym: "esophagus specific anlage" []
-narrow_synonym: "A/P2 Eso" [FB:FBrf:ds555]
+related_synonym: "P1 Eso" [FB:FBrfds555]
+narrow_synonym: "A/P2 Eso" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00005535 ! foregut primordium
 is_a: FBbt:00025991 ! anterior ectoderm derivative
@@ -34213,7 +34226,8 @@ relationship: part_of FBbt:00005542 ! central brain primordium
 [Term]
 id: FBbt:00005509
 name: embryonic dorsal pouch primordium
-is_obsolete: true
+comment: Editing Flag: This probably needs fixing. There seem to be two different things referred to as a dorsal pouch. One is a transtional structure formed during evelopment of the head, and the other is an unrelated larval structure.  Need to diambigutae/disentangle.  Note - poss redundancy between primordium term and embryonic term.  ds060616
+is_a: FBbt:00005495 ! primordium
 
 [Term]
 id: FBbt:00005510
@@ -34222,7 +34236,7 @@ def: "." [FB:DJS&VH]
 subset: EmbDevSlim
 related_synonym: "AntP1" []
 related_synonym: "AntP2" []
-related_synonym: "P3 AntOrg" [FB:FBrf:ds555]
+related_synonym: "P3 AntOrg" [FB:FBrfds555]
 narrow_synonym: "antennal primordium1" []
 narrow_synonym: "antennal primordium2" []
 is_a: FBbt:00005495 ! primordium
@@ -34240,7 +34254,7 @@ relationship: part_of FBbt:00005542 ! central brain primordium
 id: FBbt:00005512
 name: salivary gland body primordium
 subset: EmbDevSlim
-related_synonym: "P1 SalG" [FB:FBrf:ds555]
+related_synonym: "P1 SalG" [FB:FBrfds555]
 related_synonym: "salivary gland body specific anlage" []
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025993 ! ventral ectoderm derivative
@@ -34252,8 +34266,8 @@ relationship: part_of FBbt:00005331 ! dorsal closure embryo
 id: FBbt:00005513
 name: adult hindgut primordium
 subset: EmbDevSlim
-related_synonym: "P1 AdHi" [FB:FBrf:ds555]
 related_synonym: "adult hindgut specific anlage" []
+related_synonym: "P1 AdHi" [FB:FBrfds555]
 is_a: FBbt:00001648 ! embryonic imaginal precursor
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025992 ! posterior ectoderm derivative
@@ -34265,7 +34279,7 @@ relationship: part_of FBbt:00005331 ! dorsal closure embryo
 id: FBbt:00005514
 name: adult clypeo-labral primordium
 subset: EmbDevSlim
-related_synonym: "A AdCly" [FB:FBrf:ds555]
+related_synonym: "A AdCly" [FB:FBrfds555]
 is_a: FBbt:00001648 ! embryonic imaginal precursor
 is_a: FBbt:00005495 ! primordium
 relationship: develops_from FBbt:00004203 ! adult clypeo-labral anlage
@@ -34305,9 +34319,9 @@ is_a: FBbt:00005342 ! imaginal disc-derived cell-line
 id: FBbt:00005518
 name: somatic muscle primordium
 subset: EmbDevSlim
-related_synonym: "P1 SoMus" [FB:FBrf:ds555]
-related_synonym: "SoMusP2" []
+related_synonym: "P1 SoMus" [FB:FBrfds555]
 related_synonym: "somatic muscle specific anlage" []
+related_synonym: "SoMusP2" []
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00006001 ! somatic mesoderm derivative
 relationship: develops_from FBbt:00000129 ! somatic mesoderm
@@ -34326,7 +34340,7 @@ id: FBbt:00005520
 name: fat body/gonad primordium
 subset: EmbDevSlim
 related_synonym: "FaB/GP2" []
-related_synonym: "P2 FaB/GP" [FB:FBrf:ds555]
+related_synonym: "P2 FaB/GP" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00026002 ! visceral mesoderm derivative
 relationship: develops_from FBbt:00000130 ! visceral mesoderm
@@ -34347,7 +34361,7 @@ is_obsolete: true
 [Term]
 id: FBbt:00005523
 name: inclusive hindgut primordium
-related_synonym: "iHiGP2" [FB:FBrf:ds555]
+related_synonym: "iHiGP2" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 relationship: develops_from FBbt:00004202 ! hindgut anlage
 relationship: part_of FBbt:00000122 ! posterior ectoderm
@@ -34404,7 +34418,7 @@ is_obsolete: true
 id: FBbt:00005531
 name: salivary gland duct primordium
 subset: EmbDevSlim
-related_synonym: "P1 SalD" [FB:FBrf:ds555]
+related_synonym: "P1 SalD" [FB:FBrfds555]
 related_synonym: "SalDP2" []
 broad_synonym: "salivary gland duct specific specific anlage" []
 is_a: FBbt:00005495 ! primordium
@@ -34424,7 +34438,7 @@ is_obsolete: true
 id: FBbt:00005533
 name: ventral epidermis primordium
 subset: EmbDevSlim
-related_synonym: "P2 iVenEp" [FB:FBrf:ds555]
+related_synonym: "P2 iVenEp" [FB:FBrfds555]
 related_synonym: "venEpiP2" []
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025993 ! ventral ectoderm derivative
@@ -34449,7 +34463,7 @@ is_a: FBbt:00005495 ! primordium
 id: FBbt:00005536
 name: stomatogastric nervous system primordium
 subset: EmbDevSlim
-related_synonym: "P2 SNS" [FB:FBrf:ds555]
+related_synonym: "P2 SNS" [FB:FBrfds555]
 related_synonym: "SnsP2" []
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025991 ! anterior ectoderm derivative
@@ -34474,8 +34488,8 @@ relationship: part_of FBbt:00014201 ! early extended germ band embryo
 id: FBbt:00005539
 name: head mesodermal primordium
 subset: EmbDevSlim
-related_synonym: "HeadMesP2" []
 related_synonym: "head mesoderm P2 primordium" []
+related_synonym: "HeadMesP2" []
 is_obsolete: true
 
 [Term]
@@ -34491,10 +34505,10 @@ id: FBbt:00005541
 name: cardiogenic mesoderm
 alt_id: FBbt:00005561
 subset: EmbDevSlim
+related_synonym: "cardiac mesoderm" []
 related_synonym: "CardMes" []
 related_synonym: "CardMesP2" []
-related_synonym: "P2 CardMes" [FB:FBrf:ds555]
-related_synonym: "cardiac mesoderm" []
+related_synonym: "P2 CardMes" [FB:FBrfds555]
 is_a: FBbt:00026002 ! visceral mesoderm derivative
 relationship: develops_from FBbt:00000130 ! visceral mesoderm
 relationship: part_of FBbt:00004450 ! late extended germ band embryo
@@ -34506,8 +34520,8 @@ def: "." [FB:DJS&VH]
 subset: EmbDevSlim
 related_synonym: "ProcEcP2" []
 related_synonym: "procephalic ectoderm primordium" []
-narrow_synonym: "P1 Cen Br" [FB:FBrf:ds555]
-narrow_synonym: "P3 CenBr" [FB:FBrf:ds555]
+narrow_synonym: "P1 Cen Br" [FB:FBrfds555]
+narrow_synonym: "P3 CenBr" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025991 ! anterior ectoderm derivative
 relationship: develops_from FBbt:00015256 ! central brain anlage
@@ -34539,7 +34553,7 @@ relationship: part_of FBbt:00005331 ! dorsal closure embryo
 id: FBbt:00005546
 name: labral sensory complex primordium
 subset: EmbDevSlim
-related_synonym: "P3 LrSens" [FB:FBrf:ds555]
+related_synonym: "P3 LrSens" [FB:FBrfds555]
 is_a: FBbt:00005551 ! sensory nervous system primordium
 relationship: develops_from FBbt:00005538 ! clypeo-labral primordium
 relationship: part_of FBbt:00005331 ! dorsal closure embryo
@@ -34554,7 +34568,7 @@ is_obsolete: true
 id: FBbt:00005548
 name: head mesoderm anlage
 subset: EmbDevSlim
-related_synonym: "Asn/A TrMes" [FB:FBrf:ds555]
+related_synonym: "Asn/A TrMes" [FB:FBrfds555]
 is_a: FBbt:00005426 ! anlage
 relationship: part_of FBbt:00000104 ! mesoderm anlage
 
@@ -34570,7 +34584,7 @@ relationship: part_of FBbt:00005542 ! central brain primordium
 id: FBbt:00005550
 name: proventriculus primordium
 related_synonym: "PvP3" []
-is_obsolete: true
+is_a: FBbt:00005495 ! primordium
 
 [Term]
 id: FBbt:00005551
@@ -34582,7 +34596,7 @@ is_a: FBbt:00005495 ! primordium
 id: FBbt:00005552
 name: ventral sensory complex primordium
 subset: EmbDevSlim
-related_synonym: "P3 VenSens" [FB:FBrf:ds555]
+related_synonym: "P3 VenSens" [FB:FBrfds555]
 related_synonym: "ventral sensory complex specific anlage" []
 is_a: FBbt:00005495 ! primordium
 relationship: part_of FBbt:00004450 ! late extended germ band embryo
@@ -34592,7 +34606,7 @@ relationship: part_of FBbt:00005331 ! dorsal closure embryo
 id: FBbt:00005553
 name: dorsal sensory complex primordium
 subset: EmbDevSlim
-related_synonym: "A/P4 DorSens" [FB:FBrf:ds555]
+related_synonym: "A/P4 DorSens" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 relationship: develops_from FBbt:00005526 ! dorsal epidermis primordium
 relationship: part_of FBbt:00004450 ! late extended germ band embryo
@@ -34604,7 +34618,7 @@ alt_id: FBbt:00000115
 alt_id: FBbt:00005430
 subset: EmbDevSlim
 related_synonym: "AvenNeur" []
-related_synonym: "P3 venNeur" [FB:FBrf:ds555]
+related_synonym: "P3 venNeur" [FB:FBrfds555]
 related_synonym: "venNeurP3" []
 related_synonym: "ventral neurectoderm" []
 related_synonym: "ventral neuroderm primordium" []
@@ -34638,7 +34652,7 @@ is_obsolete: true
 id: FBbt:00005558
 name: ventral ectoderm
 subset: EmbDevSlim
-related_synonym: "P2 VenEc" [FB:FBrf:ds555]
+related_synonym: "P2 VenEc" [FB:FBrfds555]
 related_synonym: "venEc" []
 relationship: part_of FBbt:00000111 ! ectoderm
 
@@ -34654,7 +34668,7 @@ relationship: part_of FBbt:00000125 ! endoderm
 id: FBbt:00005560
 name: posterior endoderm
 subset: EmbDevSlim
-related_synonym: "P2 postEndo" [FB:FBrf:ds555]
+related_synonym: "P2 postEndo" [FB:FBrfds555]
 related_synonym: "postEndo" []
 relationship: develops_from FBbt:00000447 ! posterior endoderm anlage
 relationship: part_of FBbt:00000125 ! endoderm
@@ -34748,8 +34762,8 @@ is_a: FBbt:00000211 ! embryonic/larval trachea
 [Term]
 id: FBbt:00005576
 name: embryonic dorsal trunk
-related_synonym: "DT" []
 related_synonym: "dorsal longitudinal trunk" []
+related_synonym: "DT" []
 related_synonym: "great lateral trunk" []
 is_a: FBbt:00000212 ! embryonic/larval dorsal trunk
 relationship: develops_from FBbt:00017010 ! dorsal longitudinal trunk primordium
@@ -34757,8 +34771,8 @@ relationship: develops_from FBbt:00017010 ! dorsal longitudinal trunk primordium
 [Term]
 id: FBbt:00005577
 name: larval dorsal trunk
-related_synonym: "DT" []
 related_synonym: "dorsal longitudinal trunk" []
+related_synonym: "DT" []
 related_synonym: "great lateral trunk" []
 is_a: FBbt:00000212 ! embryonic/larval dorsal trunk
 relationship: develops_from FBbt:00005576 ! embryonic dorsal trunk
@@ -34766,15 +34780,15 @@ relationship: develops_from FBbt:00005576 ! embryonic dorsal trunk
 [Term]
 id: FBbt:00005578
 name: embryonic lateral trunk
-related_synonym: "LT" []
 related_synonym: "lateral longitudinal trunk" []
+related_synonym: "LT" []
 is_a: FBbt:00000233 ! embryonic/larval lateral trunk
 
 [Term]
 id: FBbt:00005579
 name: larval lateral trunk
-related_synonym: "LT" []
 related_synonym: "lateral longitudinal trunk" []
+related_synonym: "LT" []
 is_a: FBbt:00000233 ! embryonic/larval lateral trunk
 
 [Term]
@@ -35224,13 +35238,13 @@ relationship: part_of FBbt:00005630 ! embryonic hindgut
 [Term]
 id: FBbt:00005647
 name: embryonic muscle system
-def: "." [FB:FBrf:0031016, FB:FBrf:0041814, FB:FBrf:0044229, FB:FBrf:0064793]
+def: "." [FB:FBrf0031016, FB:FBrf0041814, FB:FBrf0044229, FB:FBrf0064793]
 is_a: FBbt:00000462 ! embryonic/larval muscle system
 
 [Term]
 id: FBbt:00005648
 name: larval muscle system
-def: "." [FB:FBrf:0031016, FB:FBrf:0041814, FB:FBrf:0044229, FB:FBrf:0064793]
+def: "." [FB:FBrf0031016, FB:FBrf0041814, FB:FBrf0044229, FB:FBrf0064793]
 is_a: FBbt:00000462 ! embryonic/larval muscle system
 relationship: develops_from FBbt:00005647 ! embryonic muscle system
 
@@ -35416,13 +35430,13 @@ relationship: part_of FBbt:00005672 ! lateral cord
 [Term]
 id: FBbt:00005676
 name: embryonic circulatory system
-def: "." [FB:FBrf:0031012]
+def: "." [FB:FBrf0031012]
 is_a: FBbt:00001664 ! embryonic/larval circulatory system
 
 [Term]
 id: FBbt:00005677
 name: larval circulatory system
-def: "." [FB:FBrf:0031012]
+def: "." [FB:FBrf0031012]
 is_a: FBbt:00001664 ! embryonic/larval circulatory system
 relationship: part_of FBbt:00001727 ! larva
 
@@ -35545,13 +35559,13 @@ is_a: FBbt:00001683 ! embryonic/larval hemolymph
 [Term]
 id: FBbt:00005700
 name: embryonic hemocyte
-def: "." [FB:FBrf:0037631]
+def: "." [FB:FBrf0037631]
 is_a: FBbt:00001684 ! embryonic/larval hemocyte
 
 [Term]
 id: FBbt:00005701
 name: larval hemocyte
-def: "." [FB:FBrf:0037631]
+def: "." [FB:FBrf0037631]
 is_a: FBbt:00001684 ! embryonic/larval hemocyte
 
 [Term]
@@ -35661,7 +35675,7 @@ relationship: part_of FBbt:00001727 ! larva
 [Term]
 id: FBbt:00005719
 name: larval nervous system
-def: "." [FB:FBrf:0045359, FB:FBrf:0075072, FB:FBrf:0105282]
+def: "." [FB:FBrf0045359, FB:FBrf0075072, FB:FBrf0105282]
 is_a: FBbt:00001911 ! embryonic/larval nervous system
 relationship: part_of FBbt:00001727 ! larva
 
@@ -35777,13 +35791,13 @@ relationship: part_of FBbt:00003748 ! medulla
 [Term]
 id: FBbt:00005739
 name: eyelet
-def: "A cell cluster of extraretinal photoreceptors at the posterior margin of the compound eye." [FB:FBrf:0111143, FB:gg]
+def: "A cell cluster of extraretinal photoreceptors at the posterior margin of the compound eye." [FB:FBrf0111143, FB:gg]
 is_a: FBbt:00004114 ! head sensillum
 
 [Term]
 id: FBbt:00005740
 name: eyelet photoreceptor
-def: "." [FB:FBrf:0111143]
+def: "." [FB:FBrf0111143]
 is_a: FBbt:00004211 ! photoreceptor cell
 relationship: part_of FBbt:00005739 ! eyelet
 
@@ -35804,6 +35818,7 @@ relationship: part_of FBbt:00015250 ! embryonic visual system
 [Term]
 id: FBbt:00005743
 name: embryonic dorsal pouch
+comment: Editing Flag: This probably needs fixing. There seem to be two different things referred to as a dorsal pouch. One is a transtional structure formed during evelopment of the head, and the other is an unrelated larval structure.  Need to diambigutae/disentangle.  Note - poss redundancy between primordium term and embryonic term.  ds060616
 subset: EmbDevSlim
 is_a: FBbt:00005807 ! dorsal pouch
 relationship: part_of FBbt:00005741 ! embryonic head epidermis
@@ -35930,7 +35945,7 @@ relationship: part_of FBbt:00005217 ! scolopidium
 [Term]
 id: FBbt:00005764
 name: larval digestive system
-def: "." [FB:FBrf:0007733, FB:FBrf:0064792]
+def: "." [FB:FBrf0007733, FB:FBrf0064792]
 is_a: FBbt:00001842 ! embryonic/larval digestive system
 
 [Term]
@@ -36018,7 +36033,7 @@ relationship: develops_from FBbt:00005633 ! embryonic rectum
 [Term]
 id: FBbt:00005780
 name: dorsal paired medial cell
-def: "." [FB:FBrf:0132261]
+def: "." [FB:FBrf0132261]
 related_synonym: "DPM" []
 relationship: part_of FBbt:00003632 ! central body complex
 
@@ -36243,7 +36258,7 @@ is_a: FBbt:00005142 ! neuromuscular junction
 id: FBbt:00005822
 name: embryonic outer optic lobe primordium
 subset: EmbDevSlim
-related_synonym: "P1 OOA" [FB:FBrf:ds555]
+related_synonym: "P1 OOA" [FB:FBrfds555]
 is_a: FBbt:00025991 ! anterior ectoderm derivative
 relationship: develops_from FBbt:00001059 ! visual primordium
 relationship: part_of FBbt:00004450 ! late extended germ band embryo
@@ -36292,7 +36307,7 @@ id: FBbt:00005830
 name: Bolwig's organ primordium
 def: "." [FB:DJS&VH]
 subset: EmbDevSlim
-related_synonym: "P1 BolOrg" [FB:FBrf:ds555]
+related_synonym: "P1 BolOrg" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025991 ! anterior ectoderm derivative
 relationship: develops_from FBbt:00001059 ! visual primordium
@@ -36790,7 +36805,7 @@ relationship: part_of FBbt:00005156 ! mechanosensory sensory organ
 [Term]
 id: FBbt:00005920
 name: air sac tracheoblast of dorsal mesothoracic disc
-def: "A subset of the adepithelial cells of the dorsal mesothoracic disc that are precursors of the adult air sacs of the thorax." [FB:FBrf:FBrf0151893]
+def: "A subset of the adepithelial cells of the dorsal mesothoracic disc that are precursors of the adult air sacs of the thorax." [FB:FBrfFBrf0151893]
 is_a: FBbt:00005042 ! imaginal tracheoblast
 relationship: develops_from FBbt:00001923 ! larval transverse connective
 relationship: part_of FBbt:00001778 ! dorsal mesothoracic disc
@@ -37276,14 +37291,12 @@ relationship: develops_from FBbt:00005371 ! stage A2 adult
 [Term]
 id: FBbt:00006013
 name: midgut longitudinal visceral muscle primordium
-namespace: fly_anatomy.ontology
 is_a: FBbt:00005495 ! primordium
 relationship: part_of FBbt:00017008 ! longitudinal visceral muscle primordium
 
 [Term]
 id: FBbt:00006014
 name: embryonic/larval midgut longitudinal visceral muscle
-namespace: fly_anatomy.ontology
 is_a: FBbt:00000480 ! longitudinal muscle
 relationship: develops_from FBbt:00006013 ! midgut longitudinal visceral muscle primordium
 relationship: part_of FBbt:00001035 ! embryonic/larval visceral muscle
@@ -37291,20 +37304,17 @@ relationship: part_of FBbt:00001035 ! embryonic/larval visceral muscle
 [Term]
 id: FBbt:00006015
 name: wing blade
-namespace: fly_anatomy.ontology
 relationship: part_of FBbt:00004729 ! wing
 
 [Term]
 id: FBbt:00006016
 name: peritracheal cell
-namespace: fly_anatomy.ontology
 def: "Neuropeptide-expressing cell located at the base of the trachea (two per segment) . " [FB:FBrf0100681]
 relationship: part_of FBbt:00005024 ! tracheal system
 
 [Term]
 id: FBbt:00006017
 name: larval peritracheal cell
-namespace: fly_anatomy.ontology
 def: "Neuropeptide-expressing cell located at the base of the larval trachea (two per segment) that secretes myomodulin just prior to ecdysis." [FB:FBrf0100681]
 is_a: FBbt:00006016 ! peritracheal cell
 relationship: part_of FBbt:00005570 ! larval tracheal system
@@ -37312,7 +37322,6 @@ relationship: part_of FBbt:00005570 ! larval tracheal system
 [Term]
 id: FBbt:00006018
 name: adult peritracheal cell
-namespace: fly_anatomy.ontology
 def: "Neuropeptide-expressing cell located at the base of the adult trachea (two per segment)" [FB:FBrf0100681]
 is_a: FBbt:00006016 ! peritracheal cell
 relationship: part_of FBbt:00003037 ! adult tracheal system
@@ -37320,14 +37329,12 @@ relationship: part_of FBbt:00003037 ! adult tracheal system
 [Term]
 id: FBbt:00006019
 name: Tv neuron
-namespace: fly_anatomy.ontology
 relationship: develops_from FBbt:00005969 ! ventral tritocerebral neuroblast
 relationship: part_of FBbt:00001962 ! larval tritocerebrum
 
 [Term]
 id: FBbt:00006020
 name: lch5 cap attachment cell
-namespace: fly_anatomy.ontology
 def: "A cell that anchors the scolopidial dendritic cap cells of abdominal lateral pentascolopidial chordotonal organ lch5 to the cuticle.  There are two of these per chodotonal organ of this type.\n" [FB:FBrf0180120]
 related_synonym: "CA" []
 relationship: part_of FBbt:00002831 ! abdominal lateral pentascolopidial chordotonal organ lch5
@@ -37335,7 +37342,6 @@ relationship: part_of FBbt:00002831 ! abdominal lateral pentascolopidial chordot
 [Term]
 id: FBbt:00006021
 name: lch5 ligament attachment cell
-namespace: fly_anatomy.ontology
 def: "A cell that anchors the scolopidial ligament cell of abdominal lateral pentascolopidial chordotonal organ lch5 to the cuticle." [FB:FBrf0180120]
 related_synonym: "LA" []
 relationship: part_of FBbt:00002831 ! abdominal lateral pentascolopidial chordotonal organ lch5
@@ -37343,7 +37349,6 @@ relationship: part_of FBbt:00002831 ! abdominal lateral pentascolopidial chordot
 [Term]
 id: FBbt:00006022
 name: external sensory organ precursor cell IIIb
-namespace: fly_anatomy.ontology
 def: "Daughter of PIIb; born during pupal stage; sibling of eo glial cell." [FB:FBrf0111371]
 comment: The ref paper (FBrf0111371) provides evidence for the existance of this intermediate stage between pIIb and the birth of the eo neuron in the wing mechanoreceptor development. There may be some question as to whether this can be generalised to all external sensory organs, but in the absence of evidence that the development of these organs is distinct I have applied this stage to all external sensory organ development. ds060308
 related_synonym: "pIIIb" []
@@ -37353,7 +37358,6 @@ relationship: develops_from FBbt:00005167 ! external sensory organ precursor cel
 [Term]
 id: FBbt:00006023
 name: eo glial cell
-namespace: fly_anatomy.ontology
 def: "Gial cell associated with eo neuron.  Daughter of pIIb; sibling of pIIIb; born during pupal stage." [FB:FBrf0111371]
 comment: Note - the term 'sheath cell' is problematic as it is sometimes used to refer to the the thecogen cell and sometimes to the eo glial cell. ds060308
 broad_synonym: "sheath cell" []
@@ -37377,14 +37381,13 @@ relationship: develops_from FBbt:00005317 ! gastrula embryo
 id: FBbt:00014203
 name: lateral head epidermis primordium
 subset: EmbDevSlim
-narrow_synonym: "P1 HeadEpL" [FB:FBrf:ds555]
-narrow_synonym: "P2 HeadEpL" [FB:FBrf:ds555]
+narrow_synonym: "P1 HeadEpL" [FB:FBrfds555]
+narrow_synonym: "P2 HeadEpL" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025991 ! anterior ectoderm derivative
 relationship: develops_from FBbt:00015256 ! central brain anlage
 relationship: part_of FBbt:00005321 ! extended germ band embryo
 relationship: part_of FBbt:00005331 ! dorsal closure embryo
-relationship: part_of FBbt:00005743 ! embryonic dorsal pouch
 
 [Term]
 id: FBbt:00014874
@@ -37395,7 +37398,7 @@ relationship: part_of FBbt:00004866 ! germarium
 id: FBbt:00015246
 name: dorsal head epidermis
 subset: EmbDevSlim
-related_synonym: "A HeadEpiD" [FB:FBrf:ds555]
+related_synonym: "A HeadEpiD" [FB:FBrfds555]
 relationship: develops_from FBbt:00015247 ! dorsal head epidermis primordium
 relationship: part_of FBbt:00005743 ! embryonic dorsal pouch
 
@@ -37403,8 +37406,8 @@ relationship: part_of FBbt:00005743 ! embryonic dorsal pouch
 id: FBbt:00015247
 name: dorsal head epidermis primordium
 subset: EmbDevSlim
-related_synonym: "P1 HeadEpiD" [FB:FBrf:ds555]
-narrow_synonym: "P3 HeadEpiD" [FB:FBrf:ds555]
+related_synonym: "P1 HeadEpiD" [FB:FBrfds555]
+narrow_synonym: "P3 HeadEpiD" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025991 ! anterior ectoderm derivative
 relationship: develops_from FBbt:00015248 ! dorsal head epidermis anlage
@@ -37415,7 +37418,7 @@ relationship: part_of FBbt:00005331 ! dorsal closure embryo
 id: FBbt:00015248
 name: dorsal head epidermis anlage
 subset: EmbDevSlim
-related_synonym: "A HeadEpiD" [FB:FBrf:ds555]
+related_synonym: "A HeadEpiD" [FB:FBrfds555]
 is_a: FBbt:00005426 ! anlage
 relationship: develops_from FBbt:00015249 ! dorsal head epidermis anlage in statu nascendi
 relationship: part_of FBbt:00000119 ! anterior ectoderm
@@ -37424,7 +37427,7 @@ relationship: part_of FBbt:00000119 ! anterior ectoderm
 id: FBbt:00015249
 name: dorsal head epidermis anlage in statu nascendi
 subset: EmbDevSlim
-related_synonym: "Asn HeadEpiD" [FB:FBrf:ds555]
+related_synonym: "Asn HeadEpiD" [FB:FBrfds555]
 is_a: FBbt:00005413 ! anlage in statu nascendi
 relationship: part_of FBbt:01000119 ! anterior ectoderm anlage
 
@@ -37437,7 +37440,7 @@ relationship: part_of FBbt:00005333 ! late embryo
 id: FBbt:00015252
 name: antennal anlage in statu nascendi
 subset: EmbDevSlim
-related_synonym: "Asn AntP" [FB:FBrf:ds555]
+related_synonym: "Asn AntP" [FB:FBrfds555]
 is_a: FBbt:00005413 ! anlage in statu nascendi
 relationship: part_of FBbt:01000119 ! anterior ectoderm anlage
 
@@ -37445,7 +37448,7 @@ relationship: part_of FBbt:01000119 ! anterior ectoderm anlage
 id: FBbt:00015253
 name: antennal anlage
 subset: EmbDevSlim
-related_synonym: "A AntP" [FB:FBrf:ds555]
+related_synonym: "A AntP" [FB:FBrfds555]
 is_a: FBbt:00005426 ! anlage
 relationship: develops_from FBbt:00015252 ! antennal anlage in statu nascendi
 relationship: part_of FBbt:00000119 ! anterior ectoderm
@@ -37460,8 +37463,8 @@ relationship: part_of FBbt:00005741 ! embryonic head epidermis
 id: FBbt:00015255
 name: ventral head epidermis primordium
 subset: EmbDevSlim
-narrow_synonym: "P1 HeadEpiV" [FB:FBrf:ds555]
-narrow_synonym: "P2 HeadEpiV" [FB:FBrf:ds555]
+narrow_synonym: "P1 HeadEpiV" [FB:FBrfds555]
+narrow_synonym: "P2 HeadEpiV" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 relationship: develops_from FBbt:00015253 ! antennal anlage
 relationship: part_of FBbt:00005321 ! extended germ band embryo
@@ -37471,7 +37474,7 @@ relationship: part_of FBbt:00005331 ! dorsal closure embryo
 id: FBbt:00015256
 name: central brain anlage
 subset: EmbDevSlim
-related_synonym: "A CenBr" [FB:FBrf:ds555]
+related_synonym: "A CenBr" [FB:FBrfds555]
 related_synonym: "AProcEC" []
 related_synonym: "procephalic ectoderm anlage" []
 is_a: FBbt:00005426 ! anlage
@@ -37509,7 +37512,7 @@ id: FBbt:00016000
 name: hypopharynx anlage in statu nascendi
 def: "." [FB:VH]
 subset: EmbDevSlim
-related_synonym: "Asn HyPh" [FB:FBrf:ds555]
+related_synonym: "Asn HyPh" [FB:FBrfds555]
 is_a: FBbt:00005413 ! anlage in statu nascendi
 relationship: part_of FBbt:01000119 ! anterior ectoderm anlage
 
@@ -37518,7 +37521,7 @@ id: FBbt:00016001
 name: hypopharyngeal sense organ primordium
 def: "." [FB:VH]
 subset: EmbDevSlim
-related_synonym: "P3 HySens" [FB:FBrf:ds555]
+related_synonym: "P3 HySens" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025991 ! anterior ectoderm derivative
 relationship: develops_from FBbt:00005503 ! hypopharynx inclusive primordium
@@ -37530,7 +37533,7 @@ id: FBbt:00016002
 name: hypopharynx proper primordium
 def: "." [FB:VH]
 subset: EmbDevSlim
-related_synonym: "P1 HyPh" [FB:FBrf:ds555]
+related_synonym: "P1 HyPh" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025991 ! anterior ectoderm derivative
 relationship: develops_from FBbt:00005503 ! hypopharynx inclusive primordium
@@ -37567,7 +37570,7 @@ id: FBbt:00016007
 name: ventral trunk epidermis primordium
 def: "." [FB:VH]
 subset: EmbDevSlim
-related_synonym: "P1 VenEp" [FB:FBrf:ds555]
+related_synonym: "P1 VenEp" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 relationship: develops_from FBbt:00005533 ! ventral epidermis primordium
 relationship: part_of FBbt:00004450 ! late extended germ band embryo
@@ -37578,7 +37581,7 @@ id: FBbt:00016008
 name: anal pad primordium
 def: "." [FB:VH]
 subset: EmbDevSlim
-related_synonym: "A/P1 AnPd" [FB:FBrf:ds555]
+related_synonym: "A/P1 AnPd" [FB:FBrfds555]
 related_synonym: "anal pad specific anlage" []
 is_a: FBbt:00005495 ! primordium
 relationship: develops_from FBbt:00005533 ! ventral epidermis primordium
@@ -37590,7 +37593,7 @@ id: FBbt:00016009
 name: ventral apodeme anlage
 def: "." [FB:VH]
 subset: EmbDevSlim
-related_synonym: "A venApo" [FB:FBrf:ds555]
+related_synonym: "A venApo" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 relationship: develops_from FBbt:00005533 ! ventral epidermis primordium
 relationship: part_of FBbt:00004450 ! late extended germ band embryo
@@ -37600,7 +37603,7 @@ id: FBbt:00016010
 name: ventral apodeme primordium
 def: "." [FB:VH]
 subset: EmbDevSlim
-related_synonym: "P1 venApo" [FB:FBrf:ds555]
+related_synonym: "P1 venApo" [FB:FBrfds555]
 related_synonym: "ventral apodeme specific primordium" []
 is_a: FBbt:00005495 ! primordium
 relationship: develops_from FBbt:00016009 ! ventral apodeme anlage
@@ -37611,7 +37614,7 @@ id: FBbt:00016011
 name: denticle field primordium
 def: "." [FB:VH]
 subset: EmbDevSlim
-related_synonym: "P DenBl" [FB:FBrf:ds555]
+related_synonym: "P DenBl" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 relationship: develops_from FBbt:10005326 ! denticle field anlage
 relationship: part_of FBbt:00005331 ! dorsal closure embryo
@@ -37721,8 +37724,8 @@ id: FBbt:00017001
 name: anterior spiracle primordium
 def: "." [FB:VH]
 subset: EmbDevSlim
-related_synonym: "P1 AntSpi" [FB:FBrf:ds555]
 related_synonym: "anterior spiracle specific anlage" []
+related_synonym: "P1 AntSpi" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:10005248 ! spiracle primordium
 relationship: develops_from FBbt:00005037 ! tracheal primordium
@@ -37734,7 +37737,7 @@ id: FBbt:00017003
 name: visceral branch primordium
 def: "." [FB:VH]
 subset: EmbDevSlim
-related_synonym: "P1 VisTra" [FB:FBrf:ds555]
+related_synonym: "P1 VisTra" [FB:FBrfds555]
 related_synonym: "visceral branch specific anlage" []
 is_a: FBbt:00005495 ! primordium
 relationship: develops_from FBbt:00005037 ! tracheal primordium
@@ -37746,7 +37749,7 @@ id: FBbt:00017004
 name: ventral longitudinal trunk primordium
 def: "." [FB:VH]
 subset: EmbDevSlim
-related_synonym: "P1 VenTra" [FB:FBrf:ds555]
+related_synonym: "P1 VenTra" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 relationship: develops_from FBbt:00005037 ! tracheal primordium
 relationship: part_of FBbt:00004450 ! late extended germ band embryo
@@ -37757,7 +37760,7 @@ id: FBbt:00017006
 name: plasmatocyte primordium
 def: "." [FB:VH]
 subset: EmbDevSlim
-related_synonym: "P1 Plasma" [FB:FBrf:ds555]
+related_synonym: "P1 Plasma" [FB:FBrfds555]
 narrow_synonym: "lamellocyte specific anlage" []
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025999 ! head mesoderm derivative
@@ -37770,8 +37773,8 @@ id: FBbt:00017007
 name: crystal cell primordium
 def: "." [FB:VH]
 subset: EmbDevSlim
-related_synonym: "P1 Crys" [FB:FBrf:ds555]
 related_synonym: "crystal cell specific anlage" []
+related_synonym: "P1 Crys" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025999 ! head mesoderm derivative
 relationship: part_of FBbt:00004450 ! late extended germ band embryo
@@ -37784,11 +37787,11 @@ name: longitudinal visceral muscle primordium
 alt_id: FBbt:00000108
 def: "This primordium first becomes distinct at around stage 11 as a group of cells at the posterior tip of the visceral mesoderm  (the tail end of the germ-band).  During germ-band retraction these cells migrate anteriorly and split into two clusters - one on either side of the posterior midgut primordium. When these cell reach the anterior tip of the posterior midgut primordium they disperse anteriorly as two rows along the germband.  Finally, during midgut closure these cells spread regularly over the underlying circular visceral muscle primordium." [FB:FBrf0089570, FB:FBrf0111405]
 subset: EmbDevSlim
-related_synonym: "CVM" []
-related_synonym: "P1 LoViMus" [FB:FBrf:ds555]
 related_synonym: "caudal visceral mesoderm" []
+related_synonym: "CVM" []
 related_synonym: "longitudinal visceral mesoderm primordium" []
 related_synonym: "longitudinal visceral muscle precursor" []
+related_synonym: "P1 LoViMus" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 relationship: part_of FBbt:00004450 ! late extended germ band embryo
 relationship: part_of FBbt:00005331 ! dorsal closure embryo
@@ -37807,8 +37810,8 @@ id: FBbt:00017010
 name: dorsal longitudinal trunk primordium
 def: "." [FB:VH]
 subset: EmbDevSlim
-related_synonym: "P1 dorTra" [FB:FBrf:ds555]
 related_synonym: "dorsal trunk specific anlage" []
+related_synonym: "P1 dorTra" [FB:FBrfds555]
 relationship: develops_from FBbt:00005037 ! tracheal primordium
 relationship: part_of FBbt:00004450 ! late extended germ band embryo
 relationship: part_of FBbt:00005331 ! dorsal closure embryo
@@ -37818,7 +37821,7 @@ id: FBbt:00017011
 name: primary segmental branch primordium
 def: "." [FB:VH]
 subset: EmbDevSlim
-related_synonym: "P1 SegTra" [FB:FBrf:ds555]
+related_synonym: "P1 SegTra" [FB:FBrfds555]
 related_synonym: "primary segemental branch specific anlage" []
 is_a: FBbt:00005495 ! primordium
 relationship: develops_from FBbt:00005037 ! tracheal primordium
@@ -37830,9 +37833,9 @@ id: FBbt:00017012
 name: proventriculus outer layer primordium
 def: "." [FB:VH]
 subset: EmbDevSlim
-narrow_synonym: "P1 antEndoA" [FB:FBrf:ds555]
-narrow_synonym: "P3 antEndoA" [FB:FBrf:ds555]
-is_a: FBbt:00005495 ! primordium
+narrow_synonym: "P1 antEndoA" [FB:FBrfds555]
+narrow_synonym: "P3 antEndoA" [FB:FBrfds555]
+is_a: FBbt:00005550 ! proventriculus primordium
 relationship: develops_from FBbt:00000445 ! proventriculus outer layer anlage
 relationship: part_of FBbt:00004450 ! late extended germ band embryo
 relationship: part_of FBbt:00005331 ! dorsal closure embryo
@@ -37855,9 +37858,9 @@ name: circular visceral muscle primordium
 alt_id: FBbt:00000107
 def: "." [FB:VH]
 subset: EmbDevSlim
-related_synonym: "P1 ViMus" [FB:FBrf:ds555]
 related_synonym: "circular visceral mesoderm primordium" []
 related_synonym: "circular visceral muscle precursor" []
+related_synonym: "P1 ViMus" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00026002 ! visceral mesoderm derivative
 relationship: develops_from FBbt:00000130 ! visceral mesoderm
@@ -37870,7 +37873,7 @@ id: FBbt:00017016
 name: excretory star cell primordium
 def: "." [FB:VH]
 subset: EmbDevSlim
-related_synonym: "P1 StaCe" [FB:FBrf:ds555]
+related_synonym: "P1 StaCe" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00026002 ! visceral mesoderm derivative
 relationship: develops_from FBbt:00000130 ! visceral mesoderm
@@ -37890,7 +37893,7 @@ id: FBbt:00017018
 name: salivary gland duct inclusive primordium
 def: "." [FB:VH]
 subset: EmbDevSlim
-related_synonym: "P2 iSalD" [FB:FBrf:ds555]
+related_synonym: "P2 iSalD" [FB:FBrfds555]
 broad_synonym: "salivary gland duct specific anlage" []
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025993 ! ventral ectoderm derivative
@@ -37930,7 +37933,7 @@ id: FBbt:00017025
 name: secondary branch/tracheole primordium
 def: "." [FB:VH]
 subset: EmbDevSlim
-related_synonym: "P1 Tracheo" [FB:FBrf:ds555]
+related_synonym: "P1 Tracheo" [FB:FBrfds555]
 narrow_synonym: "secondary branch specific anlage" []
 narrow_synonym: "tracheole specific anlage" []
 is_a: FBbt:00005495 ! primordium
@@ -37952,7 +37955,7 @@ id: FBbt:00017028
 name: adult anterior midgut primordium
 def: "." [FB:VH]
 subset: EmbDevSlim
-related_synonym: "P1 AdMiAnt" [FB:FBrf:ds555]
+related_synonym: "P1 AdMiAnt" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025996 ! anterior endoderm derivative
 relationship: develops_from FBbt:00000444 ! anterior midgut inclusive primordium
@@ -37962,7 +37965,7 @@ relationship: part_of FBbt:00005246 ! midgut primordium
 id: FBbt:00018001
 name: esophagus anlage
 subset: EmbDevSlim
-related_synonym: "A Eso" [FB:FBrf:ds555]
+related_synonym: "A Eso" [FB:FBrfds555]
 is_a: FBbt:00005426 ! anlage
 relationship: part_of FBbt:00005431 ! foregut anlage
 
@@ -37970,7 +37973,7 @@ relationship: part_of FBbt:00005431 ! foregut anlage
 id: FBbt:00018002
 name: stomatogastric nervous system anlage
 subset: EmbDevSlim
-related_synonym: "A SNS" [FB:FBrf:ds555]
+related_synonym: "A SNS" [FB:FBrfds555]
 is_a: FBbt:00005426 ! anlage
 relationship: part_of FBbt:00005431 ! foregut anlage
 
@@ -37978,7 +37981,7 @@ relationship: part_of FBbt:00005431 ! foregut anlage
 id: FBbt:00018003
 name: frontal ganglion primordium
 subset: EmbDevSlim
-related_synonym: "P1 FrGgl" [FB:FBrf:ds555]
+related_synonym: "P1 FrGgl" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025991 ! anterior ectoderm derivative
 relationship: develops_from FBbt:00005536 ! stomatogastric nervous system primordium
@@ -37989,7 +37992,7 @@ relationship: part_of FBbt:00005252 ! stomodeal invagination late
 id: FBbt:00018004
 name: hypocerebral/esophageal ganglion primordium
 subset: EmbDevSlim
-related_synonym: "P1 HyEsGgl" [FB:FBrf:ds555]
+related_synonym: "P1 HyEsGgl" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025991 ! anterior ectoderm derivative
 relationship: develops_from FBbt:00005536 ! stomatogastric nervous system primordium
@@ -38000,7 +38003,7 @@ relationship: part_of FBbt:00004450 ! late extended germ band embryo
 id: FBbt:00018005
 name: proventricular ganglion primordium
 subset: EmbDevSlim
-related_synonym: "P1 ProvGgl" [FB:FBrf:ds555]
+related_synonym: "P1 ProvGgl" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025991 ! anterior ectoderm derivative
 relationship: develops_from FBbt:00005536 ! stomatogastric nervous system primordium
@@ -38011,7 +38014,7 @@ relationship: part_of FBbt:00005331 ! dorsal closure embryo
 id: FBbt:00018006
 name: proventriculus anlage
 subset: EmbDevSlim
-related_synonym: "A Prov" [FB:FBrf:ds555]
+related_synonym: "A Prov" [FB:FBrfds555]
 is_a: FBbt:00005426 ! anlage
 relationship: part_of FBbt:00005431 ! foregut anlage
 
@@ -38019,7 +38022,7 @@ relationship: part_of FBbt:00005431 ! foregut anlage
 id: FBbt:00018007
 name: proventriculus inclusive primordium
 subset: EmbDevSlim
-related_synonym: "P2 Prov" [FB:FBrf:ds555]
+related_synonym: "P2 Prov" [FB:FBrfds555]
 is_a: FBbt:00005535 ! foregut primordium
 is_a: FBbt:00025991 ! anterior ectoderm derivative
 relationship: develops_from FBbt:00018006 ! proventriculus anlage
@@ -38029,8 +38032,8 @@ relationship: part_of FBbt:00000120 ! stomodeal invagination early
 id: FBbt:00018008
 name: proventriculus inner layer primordium
 subset: EmbDevSlim
-related_synonym: "A ProvI" [FB:FBrf:ds555]
-is_a: FBbt:00005495 ! primordium
+related_synonym: "A ProvI" [FB:FBrfds555]
+is_a: FBbt:00005550 ! proventriculus primordium
 is_a: FBbt:00025991 ! anterior ectoderm derivative
 relationship: develops_from FBbt:00018007 ! proventriculus inclusive primordium
 relationship: part_of FBbt:00000439 ! stomodeum
@@ -38042,7 +38045,7 @@ name: proventriculus intermediate layer primordium
 subset: EmbDevSlim
 related_synonym: "AProvR" []
 related_synonym: "proventriculus reccurent layer primordium" []
-is_a: FBbt:00005495 ! primordium
+is_a: FBbt:00005550 ! proventriculus primordium
 is_a: FBbt:00025991 ! anterior ectoderm derivative
 relationship: develops_from FBbt:00018007 ! proventriculus inclusive primordium
 relationship: part_of FBbt:00000439 ! stomodeum
@@ -38052,7 +38055,7 @@ relationship: part_of FBbt:00005252 ! stomodeal invagination late
 id: FBbt:00018010
 name: adult foregut precursor primordium
 subset: EmbDevSlim
-related_synonym: "A AdFoG" [FB:FBrf:ds555]
+related_synonym: "A AdFoG" [FB:FBrfds555]
 is_a: FBbt:00005495 ! primordium
 is_a: FBbt:00025991 ! anterior ectoderm derivative
 relationship: develops_from FBbt:00018007 ! proventriculus inclusive primordium
@@ -38178,49 +38181,49 @@ relationship: part_of FBbt:00005427 ! ectoderm anlage
 [Term]
 id: FBbt:01000595
 name: abdominal ventral acute muscle 1 founder cell
-related_synonym: "cluster II muscle founder cell" [FB:FBrf:0183937]
+related_synonym: "cluster II muscle founder cell" [FB:FBrf0183937]
 is_a: FBbt:00005084 ! muscle founder cell
 relationship: part_of FBbt:00005518 ! somatic muscle primordium
 
 [Term]
 id: FBbt:01000596
 name: abdominal ventral acute muscle 2 founder cell
-related_synonym: "cluster II muscle founder cell" [FB:FBrf:0183937]
+related_synonym: "cluster II muscle founder cell" [FB:FBrf0183937]
 is_a: FBbt:00005084 ! muscle founder cell
 relationship: part_of FBbt:00005518 ! somatic muscle primordium
 
 [Term]
 id: FBbt:01000597
 name: abdominal ventral acute muscle 3 founder cell
-related_synonym: "cluster II muscle founder cell" [FB:FBrf:0183937]
+related_synonym: "cluster II muscle founder cell" [FB:FBrf0183937]
 is_a: FBbt:00005084 ! muscle founder cell
 relationship: part_of FBbt:00005518 ! somatic muscle primordium
 
 [Term]
 id: FBbt:01000611
 name: abdominal dorsal oblique muscle 3 founder cell
-related_synonym: "cluster III muscle founder cell" [FB:FBrf:0183937]
+related_synonym: "cluster III muscle founder cell" [FB:FBrf0183937]
 is_a: FBbt:00005084 ! muscle founder cell
 relationship: part_of FBbt:00005518 ! somatic muscle primordium
 
 [Term]
 id: FBbt:01000615
 name: abdominal lateral oblique muscle 1 founder cell
-related_synonym: "cluster I muscle founder cell" [FB:FBrf:0183937]
+related_synonym: "cluster I muscle founder cell" [FB:FBrf0183937]
 is_a: FBbt:00005084 ! muscle founder cell
 relationship: part_of FBbt:00005518 ! somatic muscle primordium
 
 [Term]
 id: FBbt:01000625
 name: abdominal dorsal transverse muscle 1 founder cell
-related_synonym: "cluster III muscle founder cell" [FB:FBrf:0183937]
+related_synonym: "cluster III muscle founder cell" [FB:FBrf0183937]
 is_a: FBbt:00005084 ! muscle founder cell
 relationship: part_of FBbt:00005518 ! somatic muscle primordium
 
 [Term]
 id: FBbt:01000632
 name: abdominal ventral transverse muscle 1 founder cell
-related_synonym: "cluster I muscle founder cell" [FB:FBrf:0183937]
+related_synonym: "cluster I muscle founder cell" [FB:FBrf0183937]
 is_a: FBbt:00005084 ! muscle founder cell
 relationship: part_of FBbt:00005518 ! somatic muscle primordium
 
@@ -38247,6 +38250,52 @@ name: embryonic ventral trunk epidermis
 subset: EmbDevSlim
 relationship: develops_from FBbt:00016007 ! ventral trunk epidermis primordium
 relationship: part_of FBbt:00005747 ! embryonic ventral epidermis
+
+[Term]
+id: FBbt:02000000
+name: dorsal margin ommatidium
+def: "An ommatidial subtype located in a single row at the dorsal margin of the eye.  This ommatidial subtype is specialised to detect the e-vector of polarised sunlight." [FB:FBrf0180690]
+is_a: FBbt:00004510 ! ommatidium
+
+[Term]
+id: FBbt:02000001
+name: yellow ommatidium
+def: "Ommatidial subtype with stochastic distribution throughout the retina making up about 30% of all ommatidia.  This ommatidial subtype is specialised to detect short wavelengths (UV + blue)." [FB:FBrf0180690]
+is_a: FBbt:00004510 ! ommatidium
+
+[Term]
+id: FBbt:02000002
+name: pale ommatidium
+def: "Ommatidial subtype with stochastic distribution throughout the retina, making up about 70% of all ommatidia.  This ommatidial subtype is specialised to detect longer wavelengths (UV + green) than yellow ommatidia ." [FB:FBrf0180690]
+is_a: FBbt:00004510 ! ommatidium
+
+[Term]
+id: FBbt:02000003
+name: photoreceptor cell R8 of yellow ommatidium
+def: "." [FB:FBrf0180690]
+is_a: FBbt:00004227 ! photoreceptor cell R8
+relationship: part_of FBbt:02000001 ! yellow ommatidium
+
+[Term]
+id: FBbt:02000004
+name: photoreceptor cell R8 of pale ommatidium
+def: "." [FB:FBrf0180690]
+is_a: FBbt:00004227 ! photoreceptor cell R8
+relationship: part_of FBbt:02000002 ! pale ommatidium
+
+[Term]
+id: FBbt:02000005
+name: photoreceptor cell R7 of yellow ommatidium
+def: "." [FB:FBrf0180690]
+is_a: FBbt:00004225 ! photoreceptor cell R7
+relationship: part_of FBbt:02000001 ! yellow ommatidium
+
+[Term]
+id: FBbt:02000006
+name: photoreceptor cell R7 of pale ommatidium
+def: "." [FB:FBrf0180690]
+is_a: FBbt:00004225 ! photoreceptor cell R7
+relationship: part_of FBbt:02000002 ! pale ommatidium
 
 [Term]
 id: FBbt:10000445
@@ -38292,7 +38341,7 @@ id: FBbt:10005249
 name: adult eye primordium
 def: "." [FB:FBrf0089570]
 subset: EmbDevSlim
-related_synonym: "P1 Eye" [FB:FBrf:ds555]
+related_synonym: "P1 Eye" [FB:FBrfds555]
 is_a: FBbt:00001648 ! embryonic imaginal precursor
 
 [Term]
@@ -38300,7 +38349,7 @@ id: FBbt:10005326
 name: denticle field anlage
 def: "." [FB:VH]
 subset: EmbDevSlim
-related_synonym: "A DenBl" [FB:FBrf:ds555]
+related_synonym: "A DenBl" [FB:FBrfds555]
 relationship: develops_from FBbt:00005533 ! ventral epidermis primordium
 relationship: part_of FBbt:00004450 ! late extended germ band embryo
 
@@ -38367,4 +38416,3 @@ name: develops from
 [Typedef]
 id: part_of
 name: part of
-
