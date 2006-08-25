@@ -177,7 +177,7 @@ class CharacterTablePanel extends JPanel {
 
 
   /** List/row selection listener - fired when user selects new row of table
-      refactor - this should send out CharacterSelectionEvent */
+   notifies selectionManager of new char selection */
   private class CharacterSelectionListener implements ListSelectionListener {
     public void valueChanged(ListSelectionEvent e) {
       if (!hasSelection()) // this can happen with a delete row

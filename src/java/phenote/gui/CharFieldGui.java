@@ -15,6 +15,8 @@ import phenote.datamodel.CharacterI;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyManager;
 import phenote.datamodel.SearchParamsI;
+import phenote.edit.CharChangeEvent;
+import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
 import phenote.edit.UpdateTransaction;
 import phenote.gui.selection.CharSelectionListener;
@@ -42,8 +44,20 @@ class CharFieldGui {
     else
       initCombo(charField,parent);
 
-    // do just for text field - or both???
+    // do just for text field - or both??? listens for selection (eg from table)
     SelectionManager.inst().addCharSelectionListener(new FieldCharSelectListener());
+    // listen for model changes (eg TermInfo commit)
+    
+    EditManager.inst().addCharChangeListener(new FieldCharChangeListener());
+  }
+
+  private class FieldCharChangeListener implements CharChangeListener {
+    public void charChanged(CharChangeEvent e) {
+      // check charField is this char field
+      if (e.isForCharField(charField))
+        // i think all we need to do is setText to synch with model
+        setText(e.getValueString());
+    }
   }
 
   AutoComboBox getAutoComboBox() {
@@ -55,6 +69,7 @@ class CharFieldGui {
   // hasOntology?
   boolean isCombo() { return isCombo; }
 
+  /** Set the gui from the model */
   void setValueFromChar(CharacterI character) {
     if (charField == null) return;
     if (charField.getCharFieldEnum() == null) {
@@ -123,19 +138,19 @@ class CharFieldGui {
   CharFieldEnum getCharFieldEnum() { return charField.getCharFieldEnum(); }
 
   // separate char text field class?
-  // this should be made generic to use beyond just genotype? yes yes yes
-  // and put in CharFieldGui...
+  /** This is where the model gets updated */
   private class TextFieldDocumentListener implements DocumentListener {
     private String previousVal = null;
-    public void changedUpdate(DocumentEvent e) { updateInstanceTable(); }
-    public void insertUpdate(DocumentEvent e) { updateInstanceTable(); }
-    public void removeUpdate(DocumentEvent e) { updateInstanceTable(); }
-    private void updateInstanceTable() {
+    public void changedUpdate(DocumentEvent e) { updateModel(); }
+    public void insertUpdate(DocumentEvent e) { updateModel(); }
+    public void removeUpdate(DocumentEvent e) { updateModel(); }
+    private void updateModel() {
       // on delete last pheno row clearing of text will trigger this
       //if (!characterTablePanel.hasRows()) return;
       //String genotype = lumpField.getText();
       //characterTablePanel.setSelectedGenotype(genotype);
       CharacterI c = SelectionManager.inst().getSelectedCharacter();
+      // i believe this isnt using oboClass as we just have string
       String v = getText();
       UpdateTransaction ut = new UpdateTransaction(c,getCharFieldEnum(),v,previousVal);
       EditManager.inst().updateModel(this,ut);

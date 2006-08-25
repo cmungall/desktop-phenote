@@ -2,13 +2,17 @@ package phenote.gui;
 
 import java.net.URL;
 import java.util.Iterator;
-//import java.util.Set;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JEditorPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.text.JTextComponent;
@@ -22,13 +26,13 @@ import edu.stanford.ejalbert.BrowserLauncherRunner;
 import edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException;
 import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
 
-//import org.geneontology.oboedit.datamodel.Link;
-//import org.geneontology.oboedit.datamodel.LinkedObject;
 import org.geneontology.oboedit.datamodel.OBOClass;
-//import org.geneontology.oboedit.datamodel.OBOProperty;
 
 import phenote.datamodel.CharacterI;
+import phenote.datamodel.CharField.CharFieldEnum;
 import phenote.datamodel.OntologyManager;
+import phenote.edit.EditManager;
+import phenote.edit.UpdateTransaction;
 import phenote.util.HtmlUtil;
 import phenote.gui.selection.SelectionManager;
 import phenote.gui.selection.TermSelectionEvent;
@@ -38,29 +42,19 @@ class TermInfo {
 
   //private JEditorPane textArea;
   private JTextComponent textArea;
-  //private static final boolean DO_HTML = false;
   private static final boolean DO_HTML = HtmlUtil.DO_HTML;
-  //static final String PHENOTE_LINK_PREFIX = "Phenote?id=";
   private TermHyperlinkListener termHyperlinkListener;
   // current obo class being navigated
   private OBOClass currentOboClass;
+  private OBOClass previousOboClass=null; // for undo - not implemented yet
 
   
   TermInfo(TermPanel termPanel) {
-    // do this more generically? some sort of controller?
-//     CompletionListListener l = new CompletionListListener();
-//     termPanel.getEntityComboBox().addCompletionListListener(l);
-//     termPanel.getPatoComboBox().addCompletionListListener(l);
-//     if (termPanel.hasLumpComboBox())
-//       termPanel.getLumpComboBox().addCompletionListListener(l);
     SelectionManager.inst().addTermSelectionListener(new InfoTermSelectionListener());
   }
 
   JComponent getComponent() {
-    // JEditorPane allows for html formatting - bold... but doesnt do word wrap - bummer!
-    // as far as i can tell
-    // would have to explicitly put <br> in text. can also do hyperlinks!
-    // for now just doing JTextArea
+    JPanel termInfoPanel = new JPanel(new BorderLayout(0,0)); // hgap,vgap
     if (DO_HTML) {
       JEditorPane editorPane = new JEditorPane(); 
       editorPane.setContentType("text/html"); // sets up HTMLEditorKit
@@ -68,7 +62,7 @@ class TermInfo {
       editorPane.addHyperlinkListener(termHyperlinkListener);
       textArea = editorPane;
     }
-    else {
+    else { // pase - delete?
       JTextArea jTextArea = new JTextArea(17,50);
       jTextArea.setLineWrap(true);
       jTextArea.setWrapStyleWord(true);
@@ -80,7 +74,20 @@ class TermInfo {
     scrollPane.setMaximumSize(new Dimension(400,300));
     // border - make JPanel for it (there is a disclaimer about non JPanel)
     scrollPane.setBorder(BorderFactory.createTitledBorder("Term Info"));
-    return scrollPane;
+    termInfoPanel.add(scrollPane,BorderLayout.CENTER);
+
+    JButton useTermButton = new JButton("Use Term");
+    useTermButton.addActionListener(new UseTermActionListener());
+    termInfoPanel.add(useTermButton,BorderLayout.SOUTH);
+
+    return termInfoPanel;
+  }
+
+  /** Commits currently browsed term when useTermButton is pressed */
+  private class UseTermActionListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      commitTerm();
+    }
   }
 
   // for TestPhenote
@@ -97,8 +104,7 @@ class TermInfo {
   }
   
   
-
-
+  /** Listen for selection from phenote (mouse over completion list) */
   private class InfoTermSelectionListener implements TermSelectionListener {
     public boolean termSelected(TermSelectionEvent e) {
       setTextFromOboClass(e.getOboClass());
@@ -106,10 +112,23 @@ class TermInfo {
     } 
   }
 
-  /** put present term into current character */
+  /** put present term into current character - not used yet...*/
   private void commitTerm() {
     CharacterI ch = SelectionManager.inst().getSelectedCharacter();
-    // currentOboClass...
+    if (ch == null) { // can this happen?
+      System.out.println("ERROR: no character selected to update");
+      return;
+    }
+    if (currentOboClass == null) { // can this happen?
+      System.out.println("ERROR: no term in term info to add to character");
+      return;
+    }
+
+    CharFieldEnum cfe = OntologyManager.inst().getCharFieldEnumForOboClass(currentOboClass);
+    
+    UpdateTransaction ut = new UpdateTransaction(ch,cfe,currentOboClass,previousOboClass);
+    EditManager.inst().updateModel(this,ut);
+    previousOboClass = currentOboClass;
   }
   
   /** for testing */
@@ -119,7 +138,7 @@ class TermInfo {
 
 
   /** inner class TermHyperlink Listener, listens for clicks on term & external
-      hyper links and birngs up the term or brings up the external web page */
+      hyper links and brings up the term or brings up the external web page */
   private class TermHyperlinkListener implements HyperlinkListener {
 
     public void hyperlinkUpdate(HyperlinkEvent e) {
@@ -131,7 +150,7 @@ class TermInfo {
 
       // internal link to term...
       if (HtmlUtil.isPhenoteLink(e)) {
-        bringUpTermInPhenote(e);
+        bringUpTermInTermInfo(e);
         return;
       }
 
@@ -142,11 +161,6 @@ class TermInfo {
 
       bringUpInBrowser(url);
 
-      // ..... BrowserLauncher2? webstart BasicService? config browser...
-      // somehow distinguish local links from non local?? 
-      // look for localhost? - 
-      // set up localhost servlet? or just pick out text from url?
-      // hmmmmm......
     }
 
     private void bringUpInBrowser(URL url) {
@@ -164,26 +178,44 @@ class TermInfo {
       }
     }
 
-//     private boolean isPhenoteLink(HyperlinkEvent e) {
-//       return e.getURL() == null && e.getDescription().startsWith(PHENOTE_LINK_PREFIX);
-//     }
 
-    private void bringUpTermInPhenote(HyperlinkEvent e) {
-//       String desc = e.getDescription();
-//       if (desc == null || desc.equals("")) return;
-//       String id = getIdFromDescription(desc);
+    private void bringUpTermInTermInfo(HyperlinkEvent e) {
       // or do through obo session?
       String id = HtmlUtil.getIdFromHyperlink(e);
       if (id == null) return;
       OBOClass term = OntologyManager.inst().getOboClass(id);
       setTextFromOboClass(term);
     }
-//     private String getIdFromDescription(String desc) {
-//       return desc.substring(PHENOTE_LINK_PREFIX.length());
-//     }
   }
 }
 
+     // JEditorPane allows for html formatting - bold... but doesnt do word wrap - bummer!
+    // as far as i can tell
+    // would have to explicitly put <br> in text. can also do hyperlinks!
+    // for now just doing JTextArea
+   // do this more generically? some sort of controller?
+//     CompletionListListener l = new CompletionListListener();
+//     termPanel.getEntityComboBox().addCompletionListListener(l);
+//     termPanel.getPatoComboBox().addCompletionListListener(l);
+//     if (termPanel.hasLumpComboBox())
+//       termPanel.getLumpComboBox().addCompletionListListener(l);
+
+      // ..... BrowserLauncher2? webstart BasicService? config browser...
+      // somehow distinguish local links from non local?? 
+      // look for localhost? - 
+      // set up localhost servlet? or just pick out text from url?
+      // hmmmmm......
+//     private boolean isPhenoteLink(HyperlinkEvent e) {
+//       return e.getURL() == null && e.getDescription().startsWith(PHENOTE_LINK_PREFIX);
+//     }
+
+//       String desc = e.getDescription();
+//       if (desc == null || desc.equals("")) return;
+//       String id = getIdFromDescription(desc);
+
+//     private String getIdFromDescription(String desc) {
+//       return desc.substring(PHENOTE_LINK_PREFIX.length());
+//     }
 
 //   /** Listens for completion list selection (via moouse over) and populates
 //       term info with term selected -- this is pase - replaced by

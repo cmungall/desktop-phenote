@@ -81,15 +81,6 @@ public class CharField {
   private CharFieldEnum charFieldEnum; // or subclass
   private String name;
 
-//   public CharField(CharFieldEnum c, Ontology o) {
-//     charFieldEnum = c;
-//     ontologyList.add(o);
-//   }
-
-//   public CharField(CharFieldEnum c, String n) {
-//     charFieldEnum = c;
-//     name = n;
-//   }
 
   public CharField(CharFieldEnum c) {
     charFieldEnum = c;
@@ -118,12 +109,14 @@ public class CharField {
   boolean isGeneticContext() { return charFieldEnum == CharFieldEnum.GENETIC_CONTEXT; }
 
   public List<Ontology> getOntologyList() { return ontologyList; }
+
   public boolean hasOntologies() {
     return ontologyList != null && !ontologyList.isEmpty();
   }
   public boolean hasOneOntology() {
     return hasOntologies() && getOntologySize() == 1;
   }
+  
   public Ontology getOntology() {
     if (!hasOntologies()) return null;
     return getFirstOntology();
@@ -149,6 +142,15 @@ public class CharField {
   }
 }
 
+//   public CharField(CharFieldEnum c, Ontology o) {
+//     charFieldEnum = c;
+//     ontologyList.add(o);
+//   }
+
+//   public CharField(CharFieldEnum c, String n) {
+//     charFieldEnum = c;
+//     name = n;
+//   }
 
 // hmmmmmm.... wrap String & OBOClass in one class
 // public class CharFieldValue {

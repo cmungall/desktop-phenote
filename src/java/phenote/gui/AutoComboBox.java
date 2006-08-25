@@ -426,20 +426,41 @@ class AutoComboBox extends JComboBox {
       //setTableFromField(ontology);
     }
 
-    /** edits Character field, sends out CharChangeEvent. 
+    /** edits Character field via EditManager. 
         checks that text in text field from user
         is actually an item in completion list, is an obo term. */
     private void editCharField() {
       String input = getText();
       if (input == null) return; // probably doesnt happen
       // the input should be from selected obo class shouldnt it? is it possible
-      // for this not to be so?
+      // for this not to be so? returns null if no oboclass?
       OBOClass oboClass = getSelectedCompListOboClass();
       if (oboClass == null) return; /// happens on return on invalid term name
 
+      if (charField == null)  return; // shouldnt happen
+
+      CharacterI c = getSelectedCharacter();
+      CharFieldEnum cfe = charField.getCharFieldEnum();
+      UpdateTransaction ut = new UpdateTransaction(c,cfe,oboClass,previousOboClass);
+      EditManager.inst().updateModel(this,ut);
+      
+      previousOboClass = oboClass; // for undo 
+    }
+  }
+
+}
+
+// GARBAGE
+      //t.editModel();  // or charField.editModel?
+      // CharacterChangeEvent e = new CharacterChangeEvent(t);
+      // OR CharEditManager.inst().updateModel(c,cfe,input,previousModelValue);
+      // CEM.handleTransaction(new UT), CEM.updateModel(UT)
+      // fireChangeEvent(e);
+
+
       // can this happen? yes when user hits return on text - actually i think this
       // is the test for being in the completion list isnt it?
-      boolean DEBUG = true;
+//      boolean DEBUG = true;
       // bug - on first return input is the user text not the term selected yet!
 //       if (!input.equals(oboClass.getName())) {
 //         if (DEBUG)
@@ -454,28 +475,6 @@ class AutoComboBox extends JComboBox {
 //       boolean valid = isInCompletionList(oboClass); //input);
 //       if (!valid)
 //         return;
-      
-      if (charField == null) // shouldnt happen
-        return;
-      
-
-      CharacterI c = getSelectedCharacter();
-      CharFieldEnum cfe = charField.getCharFieldEnum();
-      UpdateTransaction ut = new UpdateTransaction(c,cfe,oboClass,previousOboClass);
-      //t.editModel();  // or charField.editModel?
-      // CharacterChangeEvent e = new CharacterChangeEvent(t);
-      // OR CharEditManager.inst().updateModel(c,cfe,input,previousModelValue);
-      // CEM.handleTransaction(new UT), CEM.updateModel(UT)
-      EditManager.inst().updateModel(this,ut);
-      // fireChangeEvent(e);
-
-      // for undo 
-      previousOboClass = oboClass;
-
-    }
-  }
-
-}
 
 //     /** Sets table value from field. checks that text in text field from user
 //         is actually an item in completion list, is an obo term. */

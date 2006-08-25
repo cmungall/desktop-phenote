@@ -51,6 +51,12 @@ public class Ontology {
     return oboSession.getTerm(id);
   }
 
+  /** Returns true if ontology holds obo class */
+  boolean hasOboClass(OBOClass oboClass) {
+    // if this is too slow can do optimizations with prefixes
+    return getOboClass(oboClass.getID()) != null;
+  }
+
   /** Returns a Vector of OBOTerms from ontology that contain input string
       constrained by compParams. compParams specifies syns,terms,defs,& obs 
       should input be just part of search params? 
@@ -70,8 +76,7 @@ public class Ontology {
     // if obsoletes set then add them in addition to regulars
     if (searchParams.searchObsoletes()) {
       ontologyTermList = getSortedObsoleteTerms();
-      Vector obsoletes = getSearchTerms(input,ontologyTermList,searchParams)
-;
+      Vector obsoletes = getSearchTerms(input,ontologyTermList,searchParams);
       searchTerms.addAll(obsoletes);
     }
     return searchTerms;
@@ -254,6 +259,10 @@ public class Ontology {
     private Vector<OBOClass> getVector() { return searchTerms; }
   }
 }
+
+
+
+// GARBAGE
 
 //   /** Load up/cache Sets for all ontologies used, anatomyOntologyTermSet
 //    * and patoOntologyTermSet -- move to dataadapter/OntologyDataAdapter... */

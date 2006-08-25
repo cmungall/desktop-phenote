@@ -49,6 +49,8 @@ public class HtmlUtil {
     if (definition != null && !definition.equals(""))
       sb.append(nl()).append(nl()).append(bold("Definition: ")).append(definition);
 
+    System.out.println(sb);
+
     return sb.toString();
   }
 

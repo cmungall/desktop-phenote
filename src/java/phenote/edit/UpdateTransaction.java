@@ -14,6 +14,7 @@ public class UpdateTransaction { // extends Transaction?
   //private String oldValue;
   private CharFieldValue newValue;
   private CharFieldValue oldValue;
+  //private boolean undo?
 
   public UpdateTransaction(CharacterI c, CharFieldEnum e, String newVal, String old) {
     newValue = new CharFieldValue(newVal,c,e);
@@ -34,6 +35,15 @@ public class UpdateTransaction { // extends Transaction?
   public void editModel() {
     newValue.editModel();
     //charFieldEnum.setValue(character,newValue);
+  }
+
+  /** return new value for regular trans, old value for undo? */
+  //String getValue() { // if undo  } - does updateTrans know of undo??? not sure
+
+  String getNewValueString() { return newValue.getName(); }
+
+  CharFieldEnum getCharFieldEnum() {
+    return newValue.getCharFieldEnum();
   }
 
   //public void undo() { oldValue.setValue();//charFieldEnum.setValue(character,oldValue); }

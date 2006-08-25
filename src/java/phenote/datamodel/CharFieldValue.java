@@ -50,6 +50,8 @@ public class CharFieldValue {
       charFieldEnum.setValue(character,this);
   }
 
+  public CharFieldEnum getCharFieldEnum() { return charFieldEnum; }
+
   public String toString() { return getName(); }
 }
 

@@ -15,27 +15,17 @@ import phenote.datamodel.CharField.CharFieldEnum;
     actually manages CharFields(which may have ontologies) - rename CharFieldManager?*/
 public class OntologyManager {
 
-  final static String ANATOMY = "Anatomy";
-  final static String PATO = "Pato";
-  final static String TAXONOMY = "Taxonomy";
 
   private static OntologyManager singleton;
-  private Ontology lumpOntology;
-  private List<Ontology> entityOntologyList;
-  //private Ontology entityOntology;
-  private Ontology patoOntology;
+  // isnt this redundant with charFieldList? convenience?
   private List<Ontology> allOntologyList = new ArrayList<Ontology>();
-  private Ontology geneticContextOntology;
-  //private Map<CharFieldEnum,List<Ontology>> fieldToOntologyList;
-  /** CharFields generically hold one or more ontologies - i think above 
-   hardwired fields are pase - or at least should be */
+  /** CharFields generically hold one or more ontologies - are charFields that dont
+   have ontologies in this list?? not sure */
   private List<CharField> charFieldList = new ArrayList<CharField>(6);
 
 
   /** Singleton */
-  private OntologyManager() {
-    //fieldToOntologyList = new HashMap<CharFieldEnum,List<Ontology>>();
-  }
+  private OntologyManager() {}
   
   public static OntologyManager inst() {
     if (singleton == null)
@@ -43,86 +33,8 @@ public class OntologyManager {
     return singleton;
   }
 
-  // public List<Ontology> getOntologyList(CharFieldEnum e) {}
-
-  public boolean haveLumpOntology() { return getLumpOntology() != null; }
-
-  public void setLumpOntology(Ontology lo) {
-    lumpOntology = lo;
-    addOntology(lumpOntology);
-  }
-
-  public Ontology getLumpOntology() {
-    return lumpOntology;
-  }
-
-  public void setEntityOntologyList(List<Ontology> entList) {
-    entityOntologyList = entList;
-  }
-
-  public void addEntityOntology(Ontology o) {
-    getEntityOntologyList().add(o);
-    allOntologyList.add(o);
-  }
-
-  public List<Ontology> getEntityOntologyList() {
-    if (entityOntologyList == null)
-      entityOntologyList = new ArrayList<Ontology>();
-    return entityOntologyList;
-  }
-
-  // for now just 1
-  public Ontology getEntityOntology() {
-    return getEntityOntologyList().get(0);
-  }
-
-  /** Set from OntologyDataAdapter */
-  public void setPatoOntology(Ontology patoOntology) {
-    this.patoOntology = patoOntology;
-    addOntology(patoOntology);
-  }
-
-  // pase?
-  public Ontology getPatoOntology() {
-    //if (patoOntology != null)
-    return patoOntology;
-  }
-
-  public boolean hasGeneticContext() {
-    return geneticContextOntology != null;
-  }
-
-  public void setGeneticContextOntology(Ontology gc) {
-    geneticContextOntology = gc;
-    addOntology(geneticContextOntology);
-  }
-
-  public Ontology getGeneticContextOntology() {
-    return geneticContextOntology;
-  }
-
-
-  // eventually...
-  // Ontology getOntology(CharFieldEnum c) { return fieldToOntology.get(c); }
-
-//   public void addOntology(CharFieldEnum c, Ontology o) {
-//     // for now...
-//     if (c == CharFieldEnum.GENETIC_CONTEXT)
-//       setGeneticContextOntology(o);
-//     addOntology(o);
-
-//     // OR
-//     // addOntologyToMap(c,o);
-
-//     // OR
-//     charFieldList.add(new CharField(c,o));
-//   }
   
   public void addField(CharField cf) {
-    // for now...
-    // if hasOnlyOne? for (Ontology :...)?
-    if (cf.isGeneticContext())
-      setGeneticContextOntology(cf.getFirstOntology());
     addOntologyList(cf.getOntologyList());
     charFieldList.add(cf);
   }
@@ -141,22 +53,6 @@ public class OntologyManager {
     return null;
   }
 
-  // for now i know that only genetic context is in char field list...
-  public CharField getGeneticContextCharField() {
-    if (charFieldList == null || charFieldList.isEmpty())
-      return null;
-    return charFieldList.get(0); // revisit this!!!!
-  }
-  
-
-//   private void addOntologyToMap(CharFieldEnum c, Ontology o) {
-//     List<Ontology> l = fieldToOntologyList.get(c);
-//     if (l == null) {
-//       l = new ArrayList<Ontology>(3);
-//       fieldToOntologyList.put(c,l);
-//     }
-//     l.add(o);
-//   }
 
   private void addOntologyList(List<Ontology> l) {
     allOntologyList.addAll(l);
@@ -180,8 +76,126 @@ public class OntologyManager {
     return null; // not found - null
   }
 
-  // ???
-
-
+  /** for obo class find its char field enum via ontology & char field */
+  public CharFieldEnum getCharFieldEnumForOboClass(OBOClass oboClass) {
+    for (CharField cf : charFieldList) {
+      //if (!cf.hasOntologies()) continue; // is this needed? not sure
+      for (Ontology ont : cf.getOntologyList()) {
+        if (ont.hasOboClass(oboClass))
+          return cf.getCharFieldEnum();
+      }
+    }
+    return null; // this shouldnt happen - err msg?
+  } 
 
 }
+
+  // i think char field now does this
+    //fieldToOntologyList = new HashMap<CharFieldEnum,List<Ontology>>();
+  //private Map<CharFieldEnum,List<Ontology>> fieldToOntologyList;
+//  private List<Ontology> entityOntologyList;
+  //private Ontology geneticContextOntology;
+  //private Ontology lumpOntology;
+  //private Ontology entityOntology;
+  //private Ontology patoOntology;
+
+//   final static String ANATOMY = "Anatomy";
+//   final static String PATO = "Pato";
+//   final static String TAXONOMY = "Taxonomy";
+    // for now...
+    // if hasOnlyOne? for (Ontology :...)?
+//     if (cf.isGeneticContext())
+//       setGeneticContextOntology(cf.getFirstOntology());
+
+  // for now i know that only genetic context is in char field list...
+//   public CharField getGeneticContextCharField() {
+//     if (charFieldList == null || charFieldList.isEmpty())
+//       return null;
+//     return charFieldList.get(0); // revisit this!!!!
+//   }
+  
+
+//   private void addOntologyToMap(CharFieldEnum c, Ontology o) {
+//     List<Ontology> l = fieldToOntologyList.get(c);
+//     if (l == null) {
+//       l = new ArrayList<Ontology>(3);
+//       fieldToOntologyList.put(c,l);
+//     }
+//     l.add(o);
+//   }
+
+
+  // public List<Ontology> getOntologyList(CharFieldEnum e) {}
+
+//   public boolean haveLumpOntology() { return getLumpOntology() != null; }
+
+//   public void setLumpOntology(Ontology lo) {
+//     lumpOntology = lo;
+//     addOntology(lumpOntology);
+//   }
+
+//   public Ontology getLumpOntology() {
+//     return lumpOntology;
+//   }
+
+//   public void setEntityOntologyList(List<Ontology> entList) {
+//     entityOntologyList = entList;
+//   }
+
+//   public void addEntityOntology(Ontology o) {
+//     getEntityOntologyList().add(o);
+//     allOntologyList.add(o);
+//   }
+
+//   public List<Ontology> getEntityOntologyList() {
+//     if (entityOntologyList == null)
+//       entityOntologyList = new ArrayList<Ontology>();
+//     return entityOntologyList;
+//   }
+
+//   // for now just 1
+//   public Ontology getEntityOntology() {
+//     return getEntityOntologyList().get(0);
+//   }
+
+  /** Set from OntologyDataAdapter */
+//   public void setPatoOntology(Ontology patoOntology) {
+//     this.patoOntology = patoOntology;
+//     addOntology(patoOntology);
+//   }
+
+  // pase?
+//   public Ontology getPatoOntology() {
+//     //if (patoOntology != null)
+//     return patoOntology;
+//   }
+
+//   public boolean hasGeneticContext() {
+//     return geneticContextOntology != null;
+//   }
+
+//   public void setGeneticContextOntology(Ontology gc) {
+//     geneticContextOntology = gc;
+//     addOntology(geneticContextOntology);
+//   }
+
+//   public Ontology getGeneticContextOntology() {
+//     return geneticContextOntology;
+//   }
+
+
+  // eventually...
+  // Ontology getOntology(CharFieldEnum c) { return fieldToOntology.get(c); }
+
+//   public void addOntology(CharFieldEnum c, Ontology o) {
+//     // for now...
+//     if (c == CharFieldEnum.GENETIC_CONTEXT)
+//       setGeneticContextOntology(o);
+//     addOntology(o);
+
+//     // OR
+//     // addOntologyToMap(c,o);
+
+//     // OR
+//     charFieldList.add(new CharField(c,o));
+//   }

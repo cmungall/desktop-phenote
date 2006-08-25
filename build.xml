@@ -146,7 +146,7 @@
 
 
   <target name="test" depends="build-test">
-     <java classname="org.junit.runner.JUnitCore" fork="yes">
+     <java classname="org.junit.runner.JUnitCore" fork="yes" jvmargs="-Xmx120M">
          <arg value="phenote.gui.TestPhenote"/>
         <classpath>
           <pathelement path="${classfiles}"/>
