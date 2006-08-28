@@ -54,7 +54,7 @@ class CharFieldGui {
   private class FieldCharChangeListener implements CharChangeListener {
     public void charChanged(CharChangeEvent e) {
       // check charField is this char field
-      if (e.isForCharField(charField))
+      if (e.getSource() != CharFieldGui.this && e.isForCharField(charField))
         // i think all we need to do is setText to synch with model
         setText(e.getValueString());
     }
@@ -71,6 +71,10 @@ class CharFieldGui {
 
   /** Set the gui from the model */
   void setValueFromChar(CharacterI character) {
+    if (character == null) {
+      System.out.println("ERROR: setting to null character");
+      return;
+    }
     if (charField == null) return;
     if (charField.getCharFieldEnum() == null) {
       System.out.println("ERROR: Cant set value for field. Gui for character field has"
@@ -153,7 +157,7 @@ class CharFieldGui {
       // i believe this isnt using oboClass as we just have string
       String v = getText();
       UpdateTransaction ut = new UpdateTransaction(c,getCharFieldEnum(),v,previousVal);
-      EditManager.inst().updateModel(this,ut);
+      EditManager.inst().updateModel(CharFieldGui.this,ut);
       previousVal = v; // undo
     }
   }

@@ -2,6 +2,7 @@ package phenote.gui;
 
 // package phenote.main?
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.BoxLayout;
@@ -16,7 +17,7 @@ import phenote.dataadapter.OntologyDataAdapter;
 
 public class Phenote {
 
-  private static final String VERSION = "0.7.1 dev";
+  private static final String VERSION = "0.7.3 dev";
   //private static final String DEFAULT_CONFIG_FILE = Config.DEFAULT_CONFIG_FILE;
 
   private CharacterTablePanel characterTablePanel;
@@ -82,6 +83,7 @@ public class Phenote {
     JFrame frame = new JFrame("Phenote "+VERSION); // this may be changed to applet...
     frame.getContentPane().add(makeMainPanel());
     MenuManager.createMenuManager(frame);
+    frame.setPreferredSize(new Dimension(1000,550));
     frame.pack();
     frame.setVisible(true);
   }

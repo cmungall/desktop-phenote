@@ -3,11 +3,15 @@ package phenote.dataadapter.phenosyntax;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.LineNumberReader;
 
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
+import phenote.datamodel.CharacterList;
+import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
 
@@ -18,13 +22,43 @@ import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
 
 public class PhenoSyntaxFileAdapter implements DataAdapterI {
 
-  public void load() {}
+  /** this should return CharacterList and caller should load CharListMan
+      or CLM makes the call itself? */
+  public void load() {
+
+    File file = getFileFromUser();
+    if (file == null) return;
+    
+    try {
+      CharacterListI charList = new CharacterList();
+      LineNumberReader lnr = new LineNumberReader(new FileReader(file));
+      PhenoSyntaxChar synChar = new PhenoSyntaxChar();
+      for (String line=lnr.readLine(); line != null; line = lnr.readLine()) {
+        try {
+          synChar.parseLine(line);
+        CharacterI ch = synChar.getCharacter();
+        charList.add(ch);
+        } catch (PhenoSyntaxChar.SyntaxParseException e) {
+          System.out.println(e.getMessage()); // jut "" for whitespace line
+        }
+      }
+      CharacterListManager.inst().setCharacterList(this,charList);
+      lnr.close();
+    }
+    catch (IOException e) {
+      System.out.println("PhenoSyntax read failure "+e);
+    }
+  }
+
+  /** returns null if user fails to pick a file */
+  private File getFileFromUser() {
+    return PhenoXmlAdapter.getFile(); // perhaps a util class
+  }
 
   public void commit(CharacterListI charList) {
-
-    File file = PhenoXmlAdapter.getFile(); // perhaps a util class
-    if (file == null)
-      return;
+    
+    File file = getFileFromUser();
+    if (file == null) return;
 
     PrintWriter pw;
     try {
@@ -33,11 +67,18 @@ public class PhenoSyntaxFileAdapter implements DataAdapterI {
       System.out.println("Failed to open file "+file);
       return;
     }
-    
+
+    System.out.println("Writing pheno syntax to file "+file);
+
     for (CharacterI ch : charList.getList()) {
-      String c = new PhenoSyntaxChar(ch).getPhenoSyntaxString();
+      try {
+        String c = new PhenoSyntaxChar(ch).getPhenoSyntaxString();
         System.out.println(c);
-      pw.println(c);
+        pw.println(c);
+      }
+      catch (PhenoSyntaxChar.BadCharException e) {
+        System.out.println(e.getMessage()+" Not writing out character");
+      }
     }
     pw.close();
   }

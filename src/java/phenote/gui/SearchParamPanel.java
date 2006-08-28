@@ -1,5 +1,6 @@
 package phenote.gui;
 
+import java.awt.Dimension;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,6 +21,8 @@ class SearchParamPanel {
 
   JPanel getPanel() {
     JPanel panel = new JPanel();
+    panel.setMinimumSize(new Dimension(305,150));
+    // panel.setPreferredSize(new Dimension(250,250)); ??
     BoxLayout boxLayout = new BoxLayout(panel,BoxLayout.Y_AXIS);
     panel.setLayout(boxLayout);
     panel.add(new JLabel("Search:"));

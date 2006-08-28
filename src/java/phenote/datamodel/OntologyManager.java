@@ -76,6 +76,17 @@ public class OntologyManager {
     return null; // not found - null
   }
 
+  public OBOClass getOboClassWithExcep(String id) throws TermNotFoundException {
+    OBOClass term = getOboClass(id);
+    if (term == null)
+      throw new TermNotFoundException("ID "+id+" not found in loaded ontologies");
+    return term;
+  }
+
+  public class TermNotFoundException extends Exception {
+    private TermNotFoundException(String m) { super(m); }
+  }
+
   /** for obo class find its char field enum via ontology & char field */
   public CharFieldEnum getCharFieldEnumForOboClass(OBOClass oboClass) {
     for (CharField cf : charFieldList) {

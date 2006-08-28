@@ -95,6 +95,10 @@ class CharacterTableModel extends AbstractTableModel {
 
   public Object getValueAt(int row, int col) {
     CharacterI inst = getCharacter(row);
+    if (inst == null) {
+      System.out.println("ERROR: character is null for row "+row+" in table");
+      return null;
+    }
     if (config.getCharFieldEnum(col) == null) {
       System.out.println("Error column "+col+" not configured proplerly in "+
                          "character table, cant retrieve value ");

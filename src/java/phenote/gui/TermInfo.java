@@ -55,6 +55,8 @@ class TermInfo {
 
   JComponent getComponent() {
     JPanel termInfoPanel = new JPanel(new BorderLayout(0,0)); // hgap,vgap
+    termInfoPanel.setPreferredSize(new Dimension(500,700));
+    termInfoPanel.setMinimumSize(new Dimension(300,500));
     if (DO_HTML) {
       JEditorPane editorPane = new JEditorPane(); 
       editorPane.setContentType("text/html"); // sets up HTMLEditorKit

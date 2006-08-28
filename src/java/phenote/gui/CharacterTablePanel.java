@@ -50,7 +50,9 @@ class CharacterTablePanel extends JPanel {
 
   private void init() {
     setLayout(new GridLayout(2,1)); // row,col
-    
+    setPreferredSize(new Dimension(400,800));
+    setMinimumSize(new Dimension(400,500));    
+
     characterTableModel = new CharacterTableModel();
     characterTable = new JTable(characterTableModel);
     characterTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -60,7 +62,7 @@ class CharacterTablePanel extends JPanel {
 
     JScrollPane tableScroll = new JScrollPane(characterTable);
     // width config? 150 * # of cols? set column width? column width config?
-    characterTable.setPreferredScrollableViewportSize(new Dimension(600, 150));
+    characterTable.setPreferredScrollableViewportSize(new Dimension(500, 150));
 
     add(tableScroll);
 

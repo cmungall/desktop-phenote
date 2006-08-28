@@ -95,6 +95,7 @@ class TermPanel extends JPanel {
   private GridBagConstraints makeLabelConstraint() {
     ontologyChooserPresent = false; // cheesy
     // x,y,horizPad,vertPad
+    // make width 2 unless theres a chooser, then 1
     return GridBagUtil.makeConstraint(0,gridbagRow,1,3);
   }
 
