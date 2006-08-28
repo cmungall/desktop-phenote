@@ -23,7 +23,7 @@ import javax.swing.plaf.metal.MetalComboBoxUI;
 import org.geneontology.oboedit.datamodel.OBOClass;
 
 import phenote.datamodel.CharField;
-import phenote.datamodel.CharField.CharFieldEnum;
+import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.SearchParamsI;

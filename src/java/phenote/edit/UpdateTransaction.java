@@ -2,7 +2,7 @@ package phenote.edit;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
 
-import phenote.datamodel.CharField.CharFieldEnum;
+import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 

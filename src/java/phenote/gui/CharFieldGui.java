@@ -10,7 +10,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.DocumentEvent;
 
 import phenote.datamodel.CharField;
-import phenote.datamodel.CharField.CharFieldEnum;
+import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyManager;
@@ -93,9 +93,9 @@ class CharFieldGui {
     isCombo = true;
 
     String name = charField.getFirstOntology().getName();
-    JLabel label = termPanel.addLabel(name,parent);
+    JLabel label = termPanel.addLabel(name,parent,charField.hasMoreThanOneOntology());
     // if has more than one ontology(entity) than add ontology choose list
-    if (!charField.hasOneOntology()) {
+    if (charField.hasMoreThanOneOntology()) {
       label.setText(charField.getName());
       initOntologyChooser(charField,parent);
     }

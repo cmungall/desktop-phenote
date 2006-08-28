@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import phenote.datamodel.CharField;
-import phenote.datamodel.CharField.CharFieldEnum;
+import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyManager;
@@ -75,8 +75,12 @@ class TermPanel extends JPanel {
   }
 
   JLabel addLabel(String labelString,Container parent) {
+    return addLabel(labelString,parent,false); // false - no ont chooser
+  }
+
+  JLabel addLabel(String labelString,Container parent,boolean hasOntChooser) {
     JLabel label = new JLabel(labelString);
-    GridBagConstraints gbc = makeLabelConstraint();
+    GridBagConstraints gbc = makeLabelConstraint(hasOntChooser);
     parent.add(label,gbc);
     return label;
   }
@@ -92,23 +96,25 @@ class TermPanel extends JPanel {
 
   private int gridbagRow = 0;
   boolean ontologyChooserPresent = false;
-  private GridBagConstraints makeLabelConstraint() {
-    ontologyChooserPresent = false; // cheesy
+  private GridBagConstraints makeLabelConstraint(boolean hasOntChooser) {
+    ontologyChooserPresent = hasOntChooser; // ??
     // x,y,horizPad,vertPad
     // make width 2 unless theres a chooser, then 1
-    return GridBagUtil.makeConstraint(0,gridbagRow,1,3);
-  }
-
-  private GridBagConstraints makeFieldConstraint() {
-    int x = ontologyChooserPresent ? 2 : 1;
-    int width = ontologyChooserPresent ? 1 : 2; // ???
-    return GridBagUtil.makeWidthConstraint(x,gridbagRow++,1,3,width);
+    int width = hasOntChooser ? 1 : 2;
+    return GridBagUtil.makeWidthConstraint(0,gridbagRow,1,3,width);
   }
 
   private GridBagConstraints makeOntologyChooserConstraint() {
-    ontologyChooserPresent = true; // cheesy
-    return GridBagUtil.makeConstraint(1,gridbagRow,1,3);
+    ontologyChooserPresent = true; // cheesy - dont need?
+    return GridBagUtil.makeConstraint(1,gridbagRow,1,3); // width 1
   }
+
+  private GridBagConstraints makeFieldConstraint() {
+    int x = 2;//ontologyChooserPresent ? 2 : 1;
+    int width = 1;//ontologyChooserPresent ? 1 : 2; // ???
+    return GridBagUtil.makeWidthConstraint(x,gridbagRow++,1,3,width);
+  }
+
   
 
   // for test and term info to listen - move to test code?

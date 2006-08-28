@@ -29,7 +29,7 @@ import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
 import org.geneontology.oboedit.datamodel.OBOClass;
 
 import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharField.CharFieldEnum;
+import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.OntologyManager;
 import phenote.edit.EditManager;
 import phenote.edit.UpdateTransaction;
@@ -55,8 +55,8 @@ class TermInfo {
 
   JComponent getComponent() {
     JPanel termInfoPanel = new JPanel(new BorderLayout(0,0)); // hgap,vgap
-    termInfoPanel.setPreferredSize(new Dimension(500,700));
-    termInfoPanel.setMinimumSize(new Dimension(300,500));
+    termInfoPanel.setPreferredSize(new Dimension(600,700));
+    termInfoPanel.setMinimumSize(new Dimension(350,500));
     if (DO_HTML) {
       JEditorPane editorPane = new JEditorPane(); 
       editorPane.setContentType("text/html"); // sets up HTMLEditorKit
@@ -75,7 +75,8 @@ class TermInfo {
     scrollPane.setPreferredSize(new Dimension(400,300));
     scrollPane.setMaximumSize(new Dimension(400,300));
     // border - make JPanel for it (there is a disclaimer about non JPanel)
-    scrollPane.setBorder(BorderFactory.createTitledBorder("Term Info"));
+    //scrollPane.setBorder(BorderFactory.createTitledBorder("Term Info"));
+    termInfoPanel.setBorder(BorderFactory.createTitledBorder("Term Info"));
     termInfoPanel.add(scrollPane,BorderLayout.CENTER);
 
     JButton useTermButton = new JButton("Use Term");

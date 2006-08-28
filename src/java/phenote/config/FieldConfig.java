@@ -3,7 +3,7 @@ package phenote.config;
 import java.util.ArrayList;
 import java.util.List;
 
-import phenote.datamodel.CharField.CharFieldEnum;
+import phenote.datamodel.CharFieldEnum;
 
 public class FieldConfig {
 

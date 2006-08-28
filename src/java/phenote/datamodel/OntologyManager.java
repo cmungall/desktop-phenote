@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
 
-import phenote.datamodel.CharField.CharFieldEnum;
+import phenote.datamodel.CharFieldEnum;
 
 /** Manages all of the ontology. Eventually will get config info (xml? OntologyConfig?)
     and set itself up from that. Should there be an ontology package - whats funny

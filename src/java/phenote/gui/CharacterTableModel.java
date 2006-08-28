@@ -8,7 +8,7 @@ import javax.swing.table.AbstractTableModel;
 import phenote.datamodel.Character;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
-import phenote.datamodel.CharField.CharFieldEnum;
+import phenote.datamodel.CharFieldEnum;
 import phenote.dataadapter.CharacterListManager;
 import phenote.config.Config;
 

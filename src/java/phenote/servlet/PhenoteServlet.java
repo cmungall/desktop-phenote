@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.geneontology.oboedit.datamodel.OBOClass;
 
 import phenote.datamodel.CharField;
-import phenote.datamodel.CharField.CharFieldEnum;
+import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyManager;
 import phenote.datamodel.SearchParamsI;

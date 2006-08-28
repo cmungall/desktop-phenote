@@ -16,7 +16,7 @@ import org.geneontology.dataadapter.IOOperation;
 import org.geneontology.oboedit.dataadapter.OBOFileAdapter;
 
 import phenote.datamodel.CharField;
-import phenote.datamodel.CharField.CharFieldEnum;
+import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyManager;
 import phenote.config.Config;

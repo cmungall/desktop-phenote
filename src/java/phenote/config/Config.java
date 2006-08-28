@@ -25,7 +25,7 @@ import phenote.config.xml.DataadapterDocument.Dataadapter;
 import phenote.config.xml.FieldDocument.Field;
 import phenote.config.xml.OntologyDocument.Ontology;
 
-import phenote.datamodel.CharField.CharFieldEnum;
+import phenote.datamodel.CharFieldEnum;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.fly.FlybaseDataAdapter;
 import phenote.dataadapter.phenosyntax.PhenoSyntaxFileAdapter;
