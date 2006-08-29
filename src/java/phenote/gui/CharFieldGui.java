@@ -1,8 +1,12 @@
 package phenote.gui;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Container;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -126,6 +130,33 @@ class CharFieldGui {
     // addGenericDocumentListener...
     textField.getDocument().addDocumentListener(new TextFieldDocumentListener());
     termPanel.addFieldGui(textField,parent);
+
+    textField.addKeyListener(new TextKeyListener());
+
+  }
+
+  private class TextKeyListener extends java.awt.event.KeyAdapter {
+    public void keyPressed(java.awt.event.KeyEvent e) {
+      System.out.println("got key event mod "+e.getKeyModifiersText(e.getModifiers())+" char "+e.getKeyChar()+" mod int "+e.getModifiers());
+      // on a mac Command-V is paste. this aint so with java/metal look&feel
+      if (e.getKeyChar() == 'v' 
+          && e.getKeyModifiersText(e.getModifiers()).equals("Command")) {
+        System.out.println("got cmd V paste");
+        //System.getClipboard
+        Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
+        try {
+          Transferable t = c.getContents(null); // null?
+          //DataFlavor[] dfArr = t.getTransferDataFlavors();
+          //for (DataFlavor df : dfArr) System.out.println("df "+df);
+          //System.out.println("clip "+c+" nm "+c.getName()+" cont "+c.getContents(null)+" trans data "+c.getContents(null).getTransferData(DataFlavor.stringFlavor));
+          Object s = t.getTransferData(DataFlavor.stringFlavor);
+          // this isnt quite right as it should just insert the text not wipe
+          // it out - but probably sufficient for now?
+          if (s != null)
+            setText(s.toString());
+        } catch (Exception ex) { System.out.println("failed paste "+ex); }
+      }
+    }
   }
 
 
