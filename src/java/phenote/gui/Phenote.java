@@ -17,7 +17,7 @@ import phenote.dataadapter.OntologyDataAdapter;
 
 public class Phenote {
 
-  private static final String VERSION = "0.7.3 dev";
+  private static final String VERSION = "0.7.4 dev";
   //private static final String DEFAULT_CONFIG_FILE = Config.DEFAULT_CONFIG_FILE;
 
   private CharacterTablePanel characterTablePanel;

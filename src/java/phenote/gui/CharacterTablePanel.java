@@ -8,9 +8,12 @@ import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -37,6 +40,8 @@ class CharacterTablePanel extends JPanel {
   private JButton copyButton;
   private JButton deleteButton;
   private JButton commitButton;
+  private JScrollBar verticalScrollBar;
+  private boolean scrollToNewLastRowOnRepaint = false;
   
   private int selectedRow;
   // get from file menu?
@@ -61,6 +66,9 @@ class CharacterTablePanel extends JPanel {
     characterTable.setRowSelectionInterval(0,0); // select 1st row
 
     JScrollPane tableScroll = new JScrollPane(characterTable);
+    verticalScrollBar = tableScroll.getVerticalScrollBar();//needed for scroll to new
+    // wierd - changes to scrollbar seem to happen on own thread?
+    verticalScrollBar.getModel().addChangeListener(new ScrollChangeListener());
     // width config? 150 * # of cols? set column width? column width config?
     characterTable.setPreferredScrollableViewportSize(new Dimension(500, 150));
 
@@ -133,6 +141,10 @@ class CharacterTablePanel extends JPanel {
       be made - at least for sandbox mode. */
   boolean hasRows() { return characterTableModel.hasRows(); }
 
+  private void scrollToLastRow() {
+    verticalScrollBar.setValue(verticalScrollBar.getMaximum()+20);
+  }
+
 
   /** Listens to New, Copy & Delete buttons */
   private class ButtonActionListener implements ActionListener {
@@ -142,12 +154,14 @@ class CharacterTablePanel extends JPanel {
       int selectRow = 0;
       if (e.getActionCommand().equals("New")) {
         selectRow = characterTableModel.addNewBlankRow();
+        scrollToNewLastRowOnRepaint = true;//scrollToLastRow(); // scroll to new row
       }
       else if (!hasRows()) {
         return; // no rows to copy or delete
       }
       else if (e.getActionCommand().equals("Copy")) {
         selectRow = characterTableModel.copyRow(getSelectedRow());
+        scrollToNewLastRowOnRepaint = true;//scrollToLastRow(); // scroll to new row
       }
       else if (e.getActionCommand().equals("Delete")) {
         selectRow = getSelectedRow();
@@ -165,17 +179,18 @@ class CharacterTablePanel extends JPanel {
         c.getSingleDataAdapter().commit(characterTableModel.getCharacterList());
       }
 
-      // if deleted last row, then need to make a new blank one (sandbox mode)
+      // IF DELETED LAST ROW, then need to make a new blank one (sandbox mode)
       if (!hasRows() && SANDBOX_MODE) {
         //termPanel.clear(); // SelectionManager.clearCharacterSelection()
         selectRow = characterTableModel.addNewBlankRow(); // sr should be 0
       }
       selectRow(selectRow);
+      repaint();
       // check whether enable/disable del & copy buttons - disable w no rows
       // doesnt happen in sandbox actually - or shouldnt
       buttonEnableCheck();
     }
-  } // end of inner class
+  } // end of ButtonActionListener inner class
 
 
   /** List/row selection listener - fired when user selects new row of table
@@ -222,11 +237,25 @@ class CharacterTablePanel extends JPanel {
     }
   }
 
+  /** When the scrollbar changes value or range this gets called, but the task of this
+      class is to set the scroll bar at the end/max when a new or copy has been done so 
+      the user sees the new thing they are working on - the scroll bar doesnt see the new
+      row until the repaint thread comes through, thus have to listen for scroll change
+      but only in the context of new & copy (which set a flag) */
+  private class ScrollChangeListener implements ChangeListener {
+    public void stateChanged(ChangeEvent e) {
+      if (scrollToNewLastRowOnRepaint) 
+        scrollToLastRow();
+      scrollToNewLastRowOnRepaint = false;
+    }
+  }
+
   // for test
   void pressCommitButtonTest() {
     commitButton.doClick();
   }
 }
+
   // this comes from term panel - replace with MVC stuff....
   // i think this is pase?
 //   void setSelectedGenotype(String genotype) {
