@@ -28,14 +28,16 @@ import phenote.dataadapter.DataAdapterI;
 public class PhenoXmlAdapter implements DataAdapterI {
 
   private Set genotypesAlreadyAdded = new HashSet<String>(); 
+  private File previousFile;
 
   public void load() {}
 
   public void commit(CharacterListI charList) {
 
-    File file = getFile();
+    File file = getFileFromUser(previousFile);
     if (file == null)
       return;
+    previousFile = file;
 
     PhenosetDocument doc = PhenosetDocument.Factory.newInstance();
     Phenoset phenoset = doc.addNewPhenoset();
@@ -56,9 +58,9 @@ public class PhenoXmlAdapter implements DataAdapterI {
     }
   }
 
-  public static File getFile() {
+  public static File getFileFromUser(File dir) {
     // todo - remember last accessed dir
-    JFileChooser fileChooser = new JFileChooser();
+    JFileChooser fileChooser = new JFileChooser(dir);
     // todo - file filter - only .xml or .phenoxml?
     int returnVal = fileChooser.showOpenDialog(null);
     if(returnVal == JFileChooser.APPROVE_OPTION)

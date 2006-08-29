@@ -22,12 +22,15 @@ import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
 
 public class PhenoSyntaxFileAdapter implements DataAdapterI {
 
+  private File previousFile;
+
   /** this should return CharacterList and caller should load CharListMan
       or CLM makes the call itself? */
   public void load() {
 
-    File file = getFileFromUser();
+    File file = getFileFromUser(previousFile);
     if (file == null) return;
+    previousFile = file;
     
     try {
       CharacterListI charList = new CharacterList();
@@ -51,14 +54,15 @@ public class PhenoSyntaxFileAdapter implements DataAdapterI {
   }
 
   /** returns null if user fails to pick a file */
-  private File getFileFromUser() {
-    return PhenoXmlAdapter.getFile(); // perhaps a util class
+  private File getFileFromUser(File dir) {
+    return PhenoXmlAdapter.getFileFromUser(dir); // perhaps a util class
   }
 
   public void commit(CharacterListI charList) {
     
-    File file = getFileFromUser();
+    File file = getFileFromUser(previousFile);
     if (file == null) return;
+    previousFile = file;
 
     PrintWriter pw;
     try {

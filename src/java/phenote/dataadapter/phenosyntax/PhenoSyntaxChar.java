@@ -110,7 +110,7 @@ public class PhenoSyntaxChar {
       tagStart = found ? m.start() : line.length();
       if (found) tagEnd = m.end(); // dont need if not found (last one)
       String value = line.substring(valueStart,tagStart).trim();
-      value = stripComments(value);
+      value = stripComments(value).trim();
       //System.out.println("tag ."+tag+". val ."+value+".");
       addTagValToChar(tag,value);
     }
