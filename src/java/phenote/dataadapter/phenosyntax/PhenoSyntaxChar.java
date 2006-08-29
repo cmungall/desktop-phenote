@@ -70,7 +70,9 @@ public class PhenoSyntaxChar {
 
   private String makeValue(OBOClass term) {
     // return idPrefixAndName(term); // michael wants ids...
-    return term.getID();
+    //return term.getID();
+    // id & commented out name for readability
+    return term.getID() + " /*" + term.getName() + "*/";
   }
 
   /** Merges id prefix and name, so for id GO:1234 with name "growth" returns
@@ -108,9 +110,15 @@ public class PhenoSyntaxChar {
       tagStart = found ? m.start() : line.length();
       if (found) tagEnd = m.end(); // dont need if not found (last one)
       String value = line.substring(valueStart,tagStart).trim();
+      value = stripComments(value);
       //System.out.println("tag ."+tag+". val ."+value+".");
       addTagValToChar(tag,value);
     }
+  }
+
+  private String stripComments(String value) {
+    value = value.replaceAll("/\\*.*\\*/","");
+    return value;
   }
 
   class SyntaxParseException extends Exception {
