@@ -137,7 +137,6 @@ class CharFieldGui {
 
   private class TextKeyListener extends java.awt.event.KeyAdapter {
     public void keyPressed(java.awt.event.KeyEvent e) {
-      System.out.println("got key event mod "+e.getKeyModifiersText(e.getModifiers())+" char "+e.getKeyChar()+" mod int "+e.getModifiers());
       // on a mac Command-V is paste. this aint so with java/metal look&feel
       if (e.getKeyChar() == 'v' 
           && e.getKeyModifiersText(e.getModifiers()).equals("Command")) {
@@ -146,9 +145,6 @@ class CharFieldGui {
         Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
         try {
           Transferable t = c.getContents(null); // null?
-          //DataFlavor[] dfArr = t.getTransferDataFlavors();
-          //for (DataFlavor df : dfArr) System.out.println("df "+df);
-          //System.out.println("clip "+c+" nm "+c.getName()+" cont "+c.getContents(null)+" trans data "+c.getContents(null).getTransferData(DataFlavor.stringFlavor));
           Object s = t.getTransferData(DataFlavor.stringFlavor);
           // this isnt quite right as it should just insert the text not wipe
           // it out - but probably sufficient for now?

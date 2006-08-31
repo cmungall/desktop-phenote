@@ -13,6 +13,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 
 import phenote.config.Config;
+import phenote.config.ConfigException;
 import phenote.dataadapter.OntologyDataAdapter;
 
 public class Phenote {
@@ -74,7 +75,13 @@ public class Phenote {
     String configFile = getConfigFileFromCommandLine(args);
     if (configFile == null)
       configFile = Config.DEFAULT_CONFIG_FILE;
-    Config.inst().setConfigFile(configFile); // causes parse of file
+    try {
+      Config.inst().setConfigFile(configFile); // causes parse of file
+    } catch (ConfigException e) {
+      System.out.println("EXITING! Fatal error in config file: "+e.getMessage());
+      e.printStackTrace();
+      System.exit(1);
+    }
   }
 
   private String getConfigFileFromCommandLine(String args[]) {

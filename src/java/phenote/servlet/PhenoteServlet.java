@@ -18,6 +18,7 @@ import phenote.datamodel.OntologyManager;
 import phenote.datamodel.SearchParamsI;
 import phenote.util.HtmlUtil;
 import phenote.config.Config;
+import phenote.config.ConfigException;
 import phenote.gui.Phenote; // move to main package
 
 public class PhenoteServlet extends HttpServlet {
@@ -38,8 +39,17 @@ public class PhenoteServlet extends HttpServlet {
     HtmlUtil.setStandAlone(false);
     phenote = Phenote.getPhenote();
     // from web.xml 
-    String configurationFileName = getInitParameter(CONFIG_FILE_PARAM);
-    Config.inst().setConfigFile(configurationFileName); // causes parse of file
+    String configFile = getInitParameter(CONFIG_FILE_PARAM);
+    // just in case not in web.xml
+    if (configFile == null || configFile.equals(""))
+      configFile = "/initial-zfin.cfg";
+    try {
+      Config.inst().setConfigFile(configFile); // causes parse of file
+    } catch (ConfigException e) {
+      String m = "Error in config file: "+configFile+" "+e.getMessage();
+      System.out.println(m);
+      throw new ServletException(m); // ??
+    }
     // cheesy - revisit
     //String[] args = {"-c","initial-zfin.cfg"};
     //phenote.initConfig(args); // hardwire for now to zfin

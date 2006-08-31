@@ -2,8 +2,11 @@ package phenote.gui;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -64,6 +67,7 @@ class CharacterTablePanel extends JPanel {
     CharacterSelectionListener isl = new CharacterSelectionListener();
     characterTable.getSelectionModel().addListSelectionListener(isl);
     characterTable.setRowSelectionInterval(0,0); // select 1st row
+    characterTable.getTableHeader().addMouseListener(new TableSorter());
 
     JScrollPane tableScroll = new JScrollPane(characterTable);
     verticalScrollBar = tableScroll.getVerticalScrollBar();//needed for scroll to new
@@ -247,6 +251,24 @@ class CharacterTablePanel extends JPanel {
       if (scrollToNewLastRowOnRepaint) 
         scrollToLastRow();
       scrollToNewLastRowOnRepaint = false;
+    }
+  }
+
+
+  private class TableSorter extends MouseAdapter {
+    public void mouseClicked(MouseEvent e) {
+      if (e.getClickCount() != 1) return; // ?
+      Point p = e.getPoint();
+      int col = characterTable.getTableHeader().columnAtPoint(p);
+      if (col == -1) return;
+      // shift for descending
+      //  int shiftPressedInt = e.getModifiers()&InputEvent.SHIFT_MASK;
+      //  boolean shiftPressed = (shiftPressedInt != 0);
+      // boolean descending = shiftPressed;
+      //if (model.defaultSortingIsDescending(column))descending = !descending;dont have
+      characterTableModel.setSortKey(col); //, descending);
+      //table.requestFocus();
+      
     }
   }
 

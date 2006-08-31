@@ -54,11 +54,11 @@ public class Config {
 
   /** This is the config file from command line -  
       todo... if user has personal config file use that instead */
-  public void setConfigFile(String configFile) {
+  public void setConfigFile(String configFile) throws ConfigException {
     this.configFile = configFile; // ??
     System.out.println("Attempting to read config from "+configFile);
     //parseXmlFileWithDom(configFile); // do parse here?
-    parseXmlFile(configFile);
+    parseXmlFile(configFile); // thorws ex
   }
 
   public static Config inst() {
@@ -197,7 +197,7 @@ public class Config {
 
 
   /** parse xml file with xml beans (phenoteconfigbeans.xml). Put in own class? */
-  private void parseXmlFile(String filename) {
+  private void parseXmlFile(String filename) throws ConfigException {
     try {
       URL configUrl = getConfigUrl(filename);
       System.out.println("config file: "+configUrl);
@@ -219,12 +219,14 @@ public class Config {
 
     }
     catch (IOException ie) {
-      System.out.println("EXITING! IOException on config parse "+ie);
-      System.exit(1);
+      System.out.println("IOException on config parse "+ie);
+      throw new ConfigException("io exception with config file "+ie.getMessage());
+      //System.exit(1);
     }
     catch (XmlException xe) {
-      System.out.println("EXITING! Parse of config xml file failed "+xe);
-      System.exit(1);
+      System.out.println("Parse of config xml file failed "+xe);
+      throw new ConfigException("Xml exception in config file "+xe.getMessage());
+      //System.exit(1); // bad for servlet to exit
     }
   }
 

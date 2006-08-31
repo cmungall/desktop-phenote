@@ -116,6 +116,10 @@ class CharacterTableModel extends AbstractTableModel {
     return false;
   }
 
+  void setSortKey(int col) {
+
+  }
+
 }
     //--rowCount;
     // hmmmmm - this cant be hardwired, needs to work with config 
