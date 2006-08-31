@@ -7,6 +7,14 @@
   <servlet>
     <servlet-name>Phenote</servlet-name>
     <servlet-class>phenote.servlet.PhenoteServlet</servlet-class>
+    <init-param>
+      <param-name>"-Xmx"</param-name>
+      <param-value>200M</param-value>
+    </init-param>
+    <init-param>
+       <param-name>configuration-file</param-name>
+       <param-value>/initial-zfin.cfg</param-value>
+    </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
 

@@ -17,10 +17,14 @@ import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyManager;
 import phenote.datamodel.SearchParamsI;
 import phenote.util.HtmlUtil;
+import phenote.config.Config;
 import phenote.gui.Phenote; // move to main package
 
 public class PhenoteServlet extends HttpServlet {
 
+  private static final String CONFIG_FILE_PARAM = "configuration-file";
+
+  //private String configurationFileName; not sure needs to be var
   private Date initDate;
   private Phenote phenote;
 
@@ -33,9 +37,12 @@ public class PhenoteServlet extends HttpServlet {
     // makes links for term info - put this method in Phenote?
     HtmlUtil.setStandAlone(false);
     phenote = Phenote.getPhenote();
+    // from web.xml 
+    String configurationFileName = getInitParameter(CONFIG_FILE_PARAM);
+    Config.inst().setConfigFile(configurationFileName); // causes parse of file
     // cheesy - revisit
-    String[] args = {"-c","initial-zfin.cfg"};
-    phenote.initConfig(args); // hardwire for now to zfin
+    //String[] args = {"-c","initial-zfin.cfg"};
+    //phenote.initConfig(args); // hardwire for now to zfin
     phenote.initOntologies();
     // this is not running as a separate thread - investigate
 //     System.out.println("ontologies loaded - starting file checking thread");
