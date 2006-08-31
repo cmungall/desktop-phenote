@@ -21,6 +21,8 @@
   <property name="web-classfiles" value="${env.PHENOTE_WEB_CLASSFILES}" />
   <property name="web-conf" value="${env.PHENOTE_WEB_CONF_FILES}"/>
   <property name="web-html" value="${env.PHENOTE_WEB_HTML}"/>
+  <property name="web-jars" value="${env.PHENOTE_WEB_JAR_DIR}" />
+  
   <property name="lib" value="jars" />
   <property name="jarfile" value="jars/phenote.jar"/>
   <property name="obo" value="obo-files" />
@@ -278,6 +280,12 @@
      <copy todir="${web-conf}">
        <fileset dir="obo-files" />
      </copy>
+     <copy todir="${web-jars}">
+        <fileset dir="${lib}">
+          <include name="*.jar"/>
+          <exclude name="phenote.jar"/>
+        </fileset>
+     </copy>     
   </target> 
 
   <target name="war" depends="jar">

@@ -1,6 +1,7 @@
 package phenote.gui;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -52,6 +53,7 @@ class AutoComboBox extends JComboBox {
   AutoComboBox(Ontology ontology,SearchParamsI sp) {
     // this inner class enables retrieving of JList for mouse over
     // this will probably throw errors if non metal look & feel is used
+    //setFont(new Font("Courier",Font.PLAIN,12));
     setUI(new MetalListComboUI());
 
     setOntology(ontology);
@@ -59,7 +61,7 @@ class AutoComboBox extends JComboBox {
     setEditable(true);
     AutoTextFieldEditor autoTextFieldEditor = new AutoTextFieldEditor();
     this.setEditor(autoTextFieldEditor);
-    setPreferredSize(new Dimension(325,22));
+    setPreferredSize(new Dimension(350,22));
 
     addCompletionListListener(new CompletionListListener());
 
@@ -276,6 +278,8 @@ class AutoComboBox extends JComboBox {
     // too soon - text field doesnt have text yet.... hmmmm....
     String input = getText();
     // this is a vector of OBOClasses
+    // i think ultimately we will need to wrap the OBOClass to be able to
+    // have more control over the string - cut off w ... & [syn][obs] tags
     Vector<OBOClass> v = getTerms(input);
     // throws IllegalStateException, Attempt to mutate in notification
     // this tries to change text field amidst notification hmmmm.....

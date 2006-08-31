@@ -37,8 +37,11 @@ public class PhenoteServlet extends HttpServlet {
     String[] args = {"-c","initial-zfin.cfg"};
     phenote.initConfig(args); // hardwire for now to zfin
     phenote.initOntologies();
-    OntologyFileCheckThread ofct = new OntologyFileCheckThread();
-    ofct.run();
+    // this is not running as a separate thread - investigate
+//     System.out.println("ontologies loaded - starting file checking thread");
+//     OntologyFileCheckThread ofct = new OntologyFileCheckThread();
+//     ofct.run(); // is this not running as threaded?
+//     System.out.println("file thread launched - moving on");
   }
 
 
@@ -82,7 +85,7 @@ public class PhenoteServlet extends HttpServlet {
   private String getTermCompletionParam(HttpServletRequest req) {
     String par = req.getParameter("userInput"); // new way
     if (par ==null)
-      par = req.getParameter("patoInput"); // for now
+      par = req.getParameter("qualityInput"); // for now - pase i think
     if (par == null)
       par = req.getParameter("entityInput");
     return par;
@@ -108,7 +111,6 @@ public class PhenoteServlet extends HttpServlet {
 //                   "<td class=\"data\">"+initDate+"</td></tr>\n"+
 //                   "<tr><td class=\"label\">Term name...</td><td class=\"data\">"
 //                   +userInput+"</td></tr></table>");
-      // for now hard wire to pato
       Ontology ont = getOntology(ontologyName);
       if (ont == null) {
         System.out.println("ERROR: Failed to get ontology for "+ontologyName);
@@ -173,6 +175,7 @@ public class PhenoteServlet extends HttpServlet {
   private String makeCompListHtmlItem(OBOClass term,String ontol) {
     String id = "'"+term.getID()+"'";
     return "<li onmouseover=\"getTermInfo("+id+",'"+ontol+"')\" id="+id+" "+
+// this is wrong - needs ontology name as well...
       "onclick=\"getTermInfo("+id+")\">"+term.getName()+"</li>\n";
   }
 
@@ -198,11 +201,13 @@ public class PhenoteServlet extends HttpServlet {
     public void run() {
 
       while(true) {
+        System.out.println("checking for new files...");
         // check for files...
         
         
         // sleep in milliseconds - sleep for 5 seconds for now (test)
-        //sleep(5000);
+        try { sleep(5000); }
+        catch (InterruptedException e) { System.out.println("interrupted"); }
       }
     }
   }

@@ -17,7 +17,7 @@ import phenote.dataadapter.OntologyDataAdapter;
 
 public class Phenote {
 
-  private static final String VERSION = "0.7.4 dev";
+  private static final String VERSION = "0.7.5 dev";
   //private static final String DEFAULT_CONFIG_FILE = Config.DEFAULT_CONFIG_FILE;
 
   private CharacterTablePanel characterTablePanel;
@@ -62,7 +62,14 @@ public class Phenote {
   }
 
   /** for now just looking for '-c configFile.cfg', use command line package
-      if we need to get more sophisticated */
+      if we need to get more sophisticated 
+      so if user has personal config file should override this - however maybe 
+      there should be a distinction between initial config file and user made configs
+      well really the initials are db/species specific - so could be 
+      --initialConfig zf|fb|obd - actually da heck with that with entity chooser just
+      put all 3 ontologies in one which is then the default (unspecified on cmd line)
+      and -c file.cfg will load/overwrite that cfg into .phenote/my-phenote.cfg 
+      (if it exists) - we can always add --init later if we need it */
   private void doCommandLine(String[] args) {
     String configFile = getConfigFileFromCommandLine(args);
     if (configFile == null)

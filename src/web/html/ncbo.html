@@ -23,7 +23,7 @@
 <script type="text/javascript">
   function setEntityOntology(selectedOntology) {
     if (selectedOntology == 'AO') {
-      ontologyName = 'Anatomy'; <!-- ZFA -->
+      ontologyName = 'ZF'; <!-- ZF Anatomy -->
     } else if (selectedOntology == 'GO') {
       ontologyName = 'GO';
     }
@@ -81,7 +81,7 @@
       <!-- tr -- -->
       <!-- td -->
 
-      <!-- PATO -->
+      <!-- QUALITY -->
 
       <div style="clear: left;">
       <!-- div width="20%" -->
@@ -91,9 +91,9 @@
             <label>Quality: </label>
 
             <!-- input autocomplete="off" id="ontologyname" name="ontologyname" size="20" type="text" value="" / -->
-            <input autocomplete="off" id="patoInput" name="patoInput" size="40" type="text" value="" />
+            <input autocomplete="off" id="qualityInput" name="qualityInput" size="40" type="text" value="" />
             </br>
-            <div class="auto_complete" id="pato_auto_complete"></div>
+            <div class="auto_complete" id="quality_auto_complete"></div>
          </fieldset>
 
       </div>
@@ -108,8 +108,8 @@
 
 
    <script type="text/javascript">
-   <!-- this is the crucial javascript bit here, patoInput is the -->
-   <!-- input field, i pato_auto_complete is the div where-->
+   <!-- this is the crucial javascript bit here, qualityInput is the -->
+   <!-- input field, i quality_auto_complete is the div where-->
    <!--the auto completion will pop up, and the last param is the-->
    <!--    script that will does the fetching of terms -->
    <!-- Autocomp is in js/prototype/controls.js -->
@@ -117,14 +117,14 @@
    <!--   'ontologyname_auto_complete', '/phenote-ontology.cgi',{  }) -->
    <!-- new Ajax.Autocompleter( 'ontologyname', 'ontologyname_auto_complete', '/servlet/PhenoteStub',{  }) -->
    <!--  new Ajax.Autocompleter( 'ontologyname', 'ontologyname_auto_complete', '/servlet/phenote.servlet.PhenoteServlet',{  }) -->
-      var complete = new Ajax.Autocompleter( 'patoInput', 'pato_auto_complete', '/phenote/Phenote',{parameters:'ontologyName=pato',paramName: "userInput"   })
-      <!-- complete.options.defaultParams = "ontology=pato"; -->
-      <!--   complete.options.parameters = "ontology=pato"; -->
-      <!-- more params? 'ontology=pato&x=y&...' -->
+      var complete = new Ajax.Autocompleter( 'qualityInput', 'quality_auto_complete', '/phenote/Phenote',{parameters:'ontologyName=quality',paramName: "userInput"   })
+      <!-- complete.options.defaultParams = "ontology=quality"; -->
+      <!--   complete.options.parameters = "ontology=quality"; -->
+      <!-- more params? 'ontology=quality&x=y&...' -->
    </script>
 
    <script type="text/javascript">
-        var entityAutoCompleter = new Ajax.Autocompleter( 'entityInput', 'entity_auto_complete', '/phenote/Phenote',{parameters:'ontologyName=anatomy',paramName: "userInput"})
+        var entityAutoCompleter = new Ajax.Autocompleter( 'entityInput', 'entity_auto_complete', '/phenote/Phenote',{parameters:'ontologyName=ZF',paramName: "userInput"})
    </script>
 
 

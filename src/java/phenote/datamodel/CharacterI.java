@@ -3,7 +3,12 @@ package phenote.datamodel;
 import org.geneontology.oboedit.datamodel.OBOClass;
 
 /** CharacterIs are the building blocks of phenotypes. All the Characters for a 
-    genotype make up a Phenotype - at least thats my understanding. */
+    genotype make up a Phenotype - at least thats my understanding. 
+    an alternate approach would be to just have a list of CharFields, it would
+    certainly be more generic - hybrid approach would be to retain these fields
+    but also have a CharField list that can just come from config (& take out enum
+    in config xsd for field names) - downside: lose strong typing, and a config 
+    misspelling would end up in a char field */
 public interface CharacterI {
 
   public String getEntityName();

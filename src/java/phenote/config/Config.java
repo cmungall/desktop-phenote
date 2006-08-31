@@ -52,6 +52,8 @@ public class Config {
     //parseXmlFile("./conf/initial-flybase.cfg"); // hardwired for now...
   }
 
+  /** This is the config file from command line -  
+      todo... if user has personal config file use that instead */
   public void setConfigFile(String configFile) {
     this.configFile = configFile; // ??
     System.out.println("Attempting to read config from "+configFile);

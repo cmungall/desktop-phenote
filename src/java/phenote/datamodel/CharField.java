@@ -9,6 +9,98 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 // associates enum & ontologies
 public class CharField {
 
+  private List<Ontology> ontologyList = new ArrayList<Ontology>(3);
+  private CharFieldEnum charFieldEnum; // or subclass
+  private String name;
+
+  public CharField(CharFieldEnum c) {
+    charFieldEnum = c;
+  }
+
+  public void addOntology(Ontology o) {
+    ontologyList.add(o);
+  }
+
+  public void setName(String n) {
+    name = n;
+  }
+
+  public String getName() {
+    if (name == null) { // not explicitly set
+      if (hasOneOntology())
+        name =  getOntology().getName();
+      else
+        name = charFieldEnum.toString();
+    }
+    return name;
+  }
+
+  public CharFieldEnum getCharFieldEnum() { return charFieldEnum; }
+
+  boolean isGeneticContext() { return charFieldEnum == CharFieldEnum.GENETIC_CONTEXT; }
+
+  public List<Ontology> getOntologyList() { return ontologyList; }
+
+  public boolean hasOntologies() {
+    return ontologyList != null && !ontologyList.isEmpty();
+  }
+  public boolean hasOneOntology() {
+    return hasOntologies() && getOntologySize() == 1;
+  }
+  public boolean hasMoreThanOneOntology() {
+    return hasOntologies() && !hasOneOntology(); 
+  }
+  
+  public Ontology getOntology() {
+    if (!hasOntologies()) return null;
+    return getFirstOntology();
+  }
+  public Ontology getFirstOntology() { return ontologyList.get(0); }
+
+  private int getOntologySize() {
+    if (!hasOntologies()) return 0;
+    return ontologyList.size();
+  }
+
+  public boolean hasOntology(String ontologyName) {
+    return getOntologyForName(ontologyName) != null;
+  }
+
+  /** Returns Ontology with name ontologyName (ignores case), null if dont have it */
+  public Ontology getOntologyForName(String ontologyName) {
+    for (Ontology o : getOntologyList()) {
+      if (o.getName().equalsIgnoreCase(ontologyName))
+        return o;
+    }
+    return null;
+  }
+}
+
+    // is this getting silly? abstract? --> char field value i think
+    //public void setOboClass(CharacterI c, OBOClass o) {}
+    //public OBOClass getOBOClass(CharacterI c) { return null; }
+//   public CharField(CharFieldEnum c, Ontology o) {
+//     charFieldEnum = c;
+//     ontologyList.add(o);
+//   }
+
+//   public CharField(CharFieldEnum c, String n) {
+//     charFieldEnum = c;
+//     name = n;
+//   }
+
+// hmmmmmm.... wrap String & OBOClass in one class
+// public class CharFieldValue {
+// OBOClass oboClassValue
+// String stringValue
+// CharFieldValue(String)
+// CharFieldValue(OBOClass)
+// getName() { if isObo return obo.getName; else return string
+// getid, ....
+// }
+
+// above would be setValue(CharFieldValue)
+// getValue(CharFieldValue)
   // separate class? labels? methods? subclasses?
   // is this taking enums too far? or a good use of them?
   // would it be nice to have a class that wrapped String and OBOClass?
@@ -75,98 +167,3 @@ public class CharField {
 //     }
 
 //   };
-
-  // CHAR FIELD VARS
-  private List<Ontology> ontologyList = new ArrayList<Ontology>(3);
-  private CharFieldEnum charFieldEnum; // or subclass
-  private String name;
-
-
-  public CharField(CharFieldEnum c) {
-    charFieldEnum = c;
-  }
-
-  public void addOntology(Ontology o) {
-    ontologyList.add(o);
-  }
-
-  public void setName(String n) {
-    name = n;
-  }
-
-  public String getName() {
-    if (name == null) { // not explicitly set
-      if (hasOneOntology())
-        name =  getOntology().getName();
-      else
-        name = charFieldEnum.toString();
-    }
-    return name;
-  }
-
-  public CharFieldEnum getCharFieldEnum() { return charFieldEnum; }
-
-  boolean isGeneticContext() { return charFieldEnum == CharFieldEnum.GENETIC_CONTEXT; }
-
-  public List<Ontology> getOntologyList() { return ontologyList; }
-
-  public boolean hasOntologies() {
-    return ontologyList != null && !ontologyList.isEmpty();
-  }
-  public boolean hasOneOntology() {
-    return hasOntologies() && getOntologySize() == 1;
-  }
-  public boolean hasMoreThanOneOntology() {
-    return hasOntologies() && !hasOneOntology(); 
-  }
-  
-  public Ontology getOntology() {
-    if (!hasOntologies()) return null;
-    return getFirstOntology();
-  }
-  public Ontology getFirstOntology() { return ontologyList.get(0); }
-
-  private int getOntologySize() {
-    if (!hasOntologies()) return 0;
-    return ontologyList.size();
-  }
-
-  public boolean hasOntology(String ontologyName) {
-    return getOntologyForName(ontologyName) != null;
-  }
-
-  /** Returns Ontology with name ontologyName, null if dont have it */
-  public Ontology getOntologyForName(String ontologyName) {
-    for (Ontology o : getOntologyList()) {
-      if (o.getName().equalsIgnoreCase(ontologyName))
-        return o;
-    }
-    return null;
-  }
-}
-
-    // is this getting silly? abstract? --> char field value i think
-    //public void setOboClass(CharacterI c, OBOClass o) {}
-    //public OBOClass getOBOClass(CharacterI c) { return null; }
-//   public CharField(CharFieldEnum c, Ontology o) {
-//     charFieldEnum = c;
-//     ontologyList.add(o);
-//   }
-
-//   public CharField(CharFieldEnum c, String n) {
-//     charFieldEnum = c;
-//     name = n;
-//   }
-
-// hmmmmmm.... wrap String & OBOClass in one class
-// public class CharFieldValue {
-// OBOClass oboClassValue
-// String stringValue
-// CharFieldValue(String)
-// CharFieldValue(OBOClass)
-// getName() { if isObo return obo.getName; else return string
-// getid, ....
-// }
-
-// above would be setValue(CharFieldValue)
-// getValue(CharFieldValue)
