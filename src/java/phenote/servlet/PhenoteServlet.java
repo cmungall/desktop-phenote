@@ -174,9 +174,9 @@ public class PhenoteServlet extends HttpServlet {
 
   private String makeCompListHtmlItem(OBOClass term,String ontol) {
     String id = "'"+term.getID()+"'";
-    return "<li onmouseover=\"getTermInfo("+id+",'"+ontol+"')\" id="+id+" "+
-// this is wrong - needs ontology name as well...
-      "onclick=\"getTermInfo("+id+")\">"+term.getName()+"</li>\n";
+    String info = "\"getTermInfo("+id+",'"+ontol+"')\"";
+    return "<li onmouseover="+info+" id="+id+" "+
+      "onclick="+info+">"+term.getName()+"</li>\n";
   }
 
   /** for now search params hard wired - eventually from buttons on web page */
