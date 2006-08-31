@@ -117,14 +117,14 @@
    <!--   'ontologyname_auto_complete', '/phenote-ontology.cgi',{  }) -->
    <!-- new Ajax.Autocompleter( 'ontologyname', 'ontologyname_auto_complete', '/servlet/PhenoteStub',{  }) -->
    <!--  new Ajax.Autocompleter( 'ontologyname', 'ontologyname_auto_complete', '/servlet/phenote.servlet.PhenoteServlet',{  }) -->
-      var complete = new Ajax.Autocompleter( 'qualityInput', 'quality_auto_complete', '/phenote/Phenote',{parameters:'ontologyName=quality',paramName: "userInput"   })
+      var complete = new Ajax.Autocompleter( 'qualityInput', 'quality_auto_complete', '../Phenote',{parameters:'ontologyName=quality',paramName: "userInput"   })
       <!-- complete.options.defaultParams = "ontology=quality"; -->
       <!--   complete.options.parameters = "ontology=quality"; -->
       <!-- more params? 'ontology=quality&x=y&...' -->
    </script>
 
    <script type="text/javascript">
-        var entityAutoCompleter = new Ajax.Autocompleter( 'entityInput', 'entity_auto_complete', '/phenote/Phenote',{parameters:'ontologyName=ZF',paramName: "userInput"})
+        var entityAutoCompleter = new Ajax.Autocompleter( 'entityInput', 'entity_auto_complete', '../Phenote',{parameters:'ontologyName=ZF',paramName: "userInput"})
    </script>
 
 
