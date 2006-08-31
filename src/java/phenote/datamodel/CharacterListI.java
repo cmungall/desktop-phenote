@@ -14,4 +14,6 @@ public interface CharacterListI {
   public int size();
   public List<CharacterI> getList();
   public boolean equals(CharacterListI cl);
+  /** Sort data by char field enum field */
+  public void sortBy(CharFieldEnum cfe);
 }

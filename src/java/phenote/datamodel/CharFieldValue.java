@@ -2,7 +2,6 @@ package phenote.datamodel;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
 
-//import phenote.datamodel.CharField.CharFieldEnum;
 
 /** At the moment char field values can be Strings (genotype) and OBOClasses, and possibly
     more coming (Genotype?). This class attempts to hide the details of the actual

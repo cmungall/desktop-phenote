@@ -116,8 +116,13 @@ class CharacterTableModel extends AbstractTableModel {
     return false;
   }
 
+  /** hmmmm... do we sort data or some view of data, view is probably cleaner
+      but for now just sort data itself? dont yet have separate view objects to
+      sort */
   void setSortKey(int col) {
-
+    CharFieldEnum cfe = getCharFieldEnum(col);
+    characterList.sortBy(cfe); // ???
+    fireTableDataChanged();
   }
 
 }
