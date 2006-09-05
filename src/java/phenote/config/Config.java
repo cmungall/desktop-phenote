@@ -1,8 +1,10 @@
 package phenote.config;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.net.MalformedURLException;
@@ -52,13 +54,80 @@ public class Config {
     //parseXmlFile("./conf/initial-flybase.cfg"); // hardwired for now...
   }
 
-  /** This is the config file from command line -  
-      todo... if user has personal config file use that instead */
+  /** This is setting config file with nothing to do with personal config
+   this is for the servlet where config file location is set in web.xml */
   public void setConfigFile(String configFile) throws ConfigException {
-    this.configFile = configFile; // ??
+    setConfigFile(configFile,false,false); // dont use .phenote by default (servlet)
+  }
+
+  /** This is for when phenote is first installed and one of the default config
+      files is used - the -i option if you will. The initial config file will
+      get copied to .phenote/my-phenote.cfg if it doesnt already exist. if it
+      exists then this file is ignored */
+  public void setInitialConfigFile(String configFile) throws ConfigException {
+    setConfigFile(configFile,true,false);
+  }
+
+  public void setOverwriteConfigFile(String configFile) throws ConfigException {
+    setConfigFile(configFile,true,true);
+  }
+
+  /** if usePersonalConfig is false then ignore personal(my-phenote.cfg). if true
+      then overwrite personal if overwritePersonal is true, otherwise only write
+      to personal if personal doesnt exist, if personal exists ignore passed in
+      config file (its an initial config -i) */
+  private void setConfigFile(String file, boolean usePersonalConfig,
+                            boolean overwritePersonalConfig) 
+    throws ConfigException {
+    this.configFile = file; // ??
+    // look to see if config file in ~/.phenote - if not copy there
+    if (usePersonalConfig) { // for standalone not servlet
+      configFile = getMyPhenoteConfig(configFile,overwritePersonalConfig);
+    }
     System.out.println("Attempting to read config from "+configFile);
     //parseXmlFileWithDom(configFile); // do parse here?
-    parseXmlFile(configFile); // thorws ex
+    //URL configUrl = getConfigUrl(filename);
+    //System.out.println("config file: "+configUrl);
+    parseXmlFile(configFile); // throws ex
+  }
+
+  private String getMyPhenoteConfig(String passedInConfig,
+                                    boolean overwritePersonalCfg)
+    throws ConfigException {
+    String home = System.getProperty("user.home");
+    File dotPhenote = new File(home+"/.phenote");
+    if (!dotPhenote.exists()) {
+      System.out.println("creating "+dotPhenote+" directory");
+      dotPhenote.mkdir();
+    }
+    File myPhenote = new File(dotPhenote,"my-phenote.cfg");
+    // if file doesnt exist yet or overwrite, copy over passedInConfig
+    if (!myPhenote.exists() || overwritePersonalCfg) {
+      String s = overwritePersonalCfg ? " getting overwritten" : " does not exist";
+      System.out.println(myPhenote+s+" Copying "+passedInConfig);
+      try {
+        URL passedInUrl = getConfigUrl(passedInConfig);
+        copyUrlToFile(passedInUrl,myPhenote);
+      } catch (FileNotFoundException e) {
+        throw new ConfigException(e);
+      }
+    }
+    return myPhenote.toString(); // ?
+  }
+
+  /** goes thru url line by line and copies to file - is there a better way to 
+      do this? */
+  private void copyUrlToFile(URL configUrl,File myPhenote) throws ConfigException {
+    try {
+      InputStream is = configUrl.openStream();
+      FileOutputStream os = new FileOutputStream(myPhenote);
+      for(int next = is.read(); next != -1; next = is.read()) {
+        os.write(next);
+      }
+      is.close();
+      os.flush();
+      os.close();
+    } catch (Exception e) { throw new ConfigException(e); }
   }
 
   public static Config inst() {
@@ -99,49 +168,6 @@ public class Config {
     return lumpConfig.getOntologyConfig();
   }
 
-//   public OntologyConfig getPatoOntologyConfig() {
-//     return getPatoConfig().getOntologyConfig();
-//   }
-
-  /** paot config should always be present, make default if not set from xml */
-//   private FieldConfig getPatoConfig() {
-//     if (patoConfig == null) {
-//       System.out.println("error pato config is null, making default");
-//       OntologyConfig o = OntologyConfig.defaultPato;
-//       patoConfig = new FieldConfig(CharFieldEnum.PATO,o);
-//     }
-//     return patoConfig;
-//   }
-
-//   public boolean hasGeneticContextField() {
-//     return geneticContextConfig != null;
-//   }
-
-//   public OntologyConfig getGeneticContextOntologyConfig() {
-//     if (!hasGeneticContextField()) return null;
-//     return getGeneticContextConfig().getOntologyConfig(); // check if has ont?
-//   }
-
-//   public FieldConfig getGeneticContextConfig() {
-//     return geneticContextConfig;
-//   }
-  
-//   private void initGeneticContextConfig(OntologyConfig oc) {
-//     geneticContextConfig = new FieldConfig(CharFieldEnum.GENETIC_CONTEXT,oc);
-//   }
-
-//   private FieldConfig getEntityConfig() {
-//     if (entityConfig == null)
-//       entityConfig = new FieldConfig(CharFieldEnum.ENTITY,"Entity");
-//     return entityConfig;
-//   }
-
-//   public List<OntologyConfig> getEntityOntologyConfigs() {
-// //     if (entityConfigList.isEmpty()) entityConfigList = defaultEntityConfigList();
-// //     return entityConfigList;
-//     return getEntityConfig().getOntologyConfigList();
-//   }
-
   public int getNumberOfFields() {
     return getFieldConfigList().size();
   }
@@ -150,10 +176,6 @@ public class Config {
   public String getFieldLabel(int index) {
     return getFieldConfig(index).getLabel();
   }
-
-//   public String getFieldName(int index) {
-//     return getFieldConfig(index).getLabel();
-//   }
 
   public CharFieldEnum getCharFieldEnum(int index) {
     return getFieldConfig(index).getCharFieldEnum();
@@ -164,28 +186,10 @@ public class Config {
     return getFieldConfigList().get(index);
   }
 
-
   /** OntologyDataAdapter calls this to figure which ontologies to load */
   public List<FieldConfig> getFieldConfigList() {
-//     if (fieldList == null)
-//       initFieldConfigList();
     return fieldList;
   }
-
-//   // refactor! - just have it come straight from xml parse!
-//   private void initFieldConfigList() {
-//     //fieldList = new ArrayList<FieldConfig>();
-//     if (hasLumpField()) {
-//       fieldList.add(getLumpConfig());
-//     }
-//     if (hasGeneticContextField()) {
-//       fieldList.add(getGeneticContextConfig());
-//     }
-//     // entity config should always be present shouldnt it?
-//     fieldList.add(getEntityConfig());
-//     fieldList.add(getPatoConfig()); // pato required
-//   }
-
 
   /** Default entity list is the anatomy ontology -- DELETE*/
   private List<OntologyConfig> defaultEntityConfigList() {
@@ -194,7 +198,6 @@ public class Config {
     l.add(oc);
     return l;
   }
-
 
   /** parse xml file with xml beans (phenoteconfigbeans.xml). Put in own class? */
   private void parseXmlFile(String filename) throws ConfigException {
@@ -212,8 +215,6 @@ public class Config {
 
       Field[] fields = pc.getFieldArray();
       for (Field f : fields) {
-        //String name = f.getName().getStringValue();
-        //String file = f.getFile().getStringValue();
         makeFieldConfig(f);
       }
 
@@ -221,12 +222,10 @@ public class Config {
     catch (IOException ie) {
       System.out.println("IOException on config parse "+ie);
       throw new ConfigException("io exception with config file "+ie.getMessage());
-      //System.exit(1);
     }
     catch (XmlException xe) {
       System.out.println("Parse of config xml file failed "+xe);
       throw new ConfigException("Xml exception in config file "+xe.getMessage());
-      //System.exit(1); // bad for servlet to exit
     }
   }
 
@@ -314,6 +313,70 @@ public class Config {
 }
 
 // OLD OLD OLD - DELETE - DOM STUFF - replaced with xml beans
+//   public OntologyConfig getPatoOntologyConfig() {
+//     return getPatoConfig().getOntologyConfig();
+//   }
+
+  /** paot config should always be present, make default if not set from xml */
+//   private FieldConfig getPatoConfig() {
+//     if (patoConfig == null) {
+//       System.out.println("error pato config is null, making default");
+//       OntologyConfig o = OntologyConfig.defaultPato;
+//       patoConfig = new FieldConfig(CharFieldEnum.PATO,o);
+//     }
+//     return patoConfig;
+//   }
+
+//   public boolean hasGeneticContextField() {
+//     return geneticContextConfig != null;
+//   }
+
+//   public OntologyConfig getGeneticContextOntologyConfig() {
+//     if (!hasGeneticContextField()) return null;
+//     return getGeneticContextConfig().getOntologyConfig(); // check if has ont?
+//   }
+
+//   public FieldConfig getGeneticContextConfig() {
+//     return geneticContextConfig;
+//   }
+  
+//   private void initGeneticContextConfig(OntologyConfig oc) {
+//     geneticContextConfig = new FieldConfig(CharFieldEnum.GENETIC_CONTEXT,oc);
+//   }
+
+//   private FieldConfig getEntityConfig() {
+//     if (entityConfig == null)
+//       entityConfig = new FieldConfig(CharFieldEnum.ENTITY,"Entity");
+//     return entityConfig;
+//   }
+
+//   public List<OntologyConfig> getEntityOntologyConfigs() {
+// //     if (entityConfigList.isEmpty()) entityConfigList = defaultEntityConfigList();
+// //     return entityConfigList;
+//     return getEntityConfig().getOntologyConfigList();
+//   }
+
+//   public String getFieldName(int index) {
+//     return getFieldConfig(index).getLabel();
+//   }
+        //String name = f.getName().getStringValue();
+        //String file = f.getFile().getStringValue();
+//     if (fieldList == null)
+//       initFieldConfigList();
+//   // refactor! - just have it come straight from xml parse!
+//   private void initFieldConfigList() {
+//     //fieldList = new ArrayList<FieldConfig>();
+//     if (hasLumpField()) {
+//       fieldList.add(getLumpConfig());
+//     }
+//     if (hasGeneticContextField()) {
+//       fieldList.add(getGeneticContextConfig());
+//     }
+//     // entity config should always be present shouldnt it?
+//     fieldList.add(getEntityConfig());
+//     fieldList.add(getPatoConfig()); // pato required
+//   }
+
 
 //   /** Throws ParserConfig,SAXEx, & IOException if problems - sep class? */
 //   private Document getDocument(String filename) throws Exception {

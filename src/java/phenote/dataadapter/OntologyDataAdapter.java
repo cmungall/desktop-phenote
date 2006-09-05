@@ -68,10 +68,16 @@ public class OntologyDataAdapter {
 
   /** Look for file in current directory (.) and jar file */
   private URL findFile(String fileName) {
+
+    // first try file as is (full path provided)
+    File file = new File(fileName);
+    if (file.exists())
+      return makeUrl(fileName);
+
     String oboFileDir = "obo-files/";
     // try current directory + obo-file dir
     String currentDir = "./" + oboFileDir + fileName;
-    File file = new File(currentDir);
+    file = new File(currentDir);
     if (file.exists())
       return makeUrl(currentDir);
 

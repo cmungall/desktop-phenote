@@ -18,7 +18,7 @@ import phenote.dataadapter.OntologyDataAdapter;
 
 public class Phenote {
 
-  private static final String VERSION = "0.7.5 dev";
+  private static final String VERSION = "0.7.6 dev";
   //private static final String DEFAULT_CONFIG_FILE = Config.DEFAULT_CONFIG_FILE;
 
   private CharacterTablePanel characterTablePanel;
@@ -70,13 +70,19 @@ public class Phenote {
       --initialConfig zf|fb|obd - actually da heck with that with entity chooser just
       put all 3 ontologies in one which is then the default (unspecified on cmd line)
       and -c file.cfg will load/overwrite that cfg into .phenote/my-phenote.cfg 
-      (if it exists) - we can always add --init later if we need it */
+      (if it exists) - we can always add --init later if we need it 
+      -c overwrites, -i doesnt -i is for initial startup of phenote */
   private void doCommandLine(String[] args) {
     String configFile = getConfigFileFromCommandLine(args);
+    // if no config file specified then set default initial config file. this will be
+    // overridden by a personal config file if it exists
     if (configFile == null)
       configFile = Config.DEFAULT_CONFIG_FILE;
     try {
-      Config.inst().setConfigFile(configFile); // causes parse of file
+      if (isOverwriteConfigFile(args))
+        Config.inst().setOverwriteConfigFile(configFile); // causes parse of file->.phenote
+      else
+        Config.inst().setInitialConfigFile(configFile);
     } catch (ConfigException e) {
       System.out.println("EXITING! Fatal error in config file: "+e.getMessage());
       e.printStackTrace();
@@ -84,11 +90,20 @@ public class Phenote {
     }
   }
 
+  private boolean isInitialConfigFile(String args[]) {
+    if (args == null || args.length < 2) return false;
+    return args[0].equals("-i");
+  }
+  private boolean isOverwriteConfigFile(String args[]) {
+    if (args == null || args.length < 2) return false;
+    return args[0].equals("-c");
+  }
+
   private String getConfigFileFromCommandLine(String args[]) {
     // need 2 args
-    if (args == null || args.length <= 1) return null;
-    String firstArg = args[0];
-    if (!firstArg.equals("-c")) return null;
+    if (args == null || args.length < 2) return null;
+    //String firstArg = args[0];
+    if (!isInitialConfigFile(args) && !isOverwriteConfigFile(args)) return null;
     String configFile = args[1];
     return configFile;
   }

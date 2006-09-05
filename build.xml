@@ -17,11 +17,11 @@
   <property name="test" value="./src/java/test" />
   <!-- where classes go -->  
   <property name="classfiles" value="classfiles" />
-  <!-- symbolic link over to web world -->
   <property name="web-classfiles" value="${env.PHENOTE_WEB_CLASSFILES}" />
   <property name="web-conf" value="${env.PHENOTE_WEB_CONF_FILES}"/>
   <property name="web-html" value="${env.PHENOTE_WEB_HTML}"/>
   <property name="web-jars" value="${env.PHENOTE_WEB_JAR_DIR}" />
+  <property name="web.xml-dir" value="${env.PHENOTE_WEB_XML_DIR}" />
   
   <property name="lib" value="jars" />
   <property name="jarfile" value="jars/phenote.jar"/>
@@ -285,7 +285,10 @@
           <include name="*.jar"/>
           <exclude name="phenote.jar"/>
         </fileset>
-     </copy>     
+     </copy>
+     <copy todir="${web.xml-dir}">
+       <fileset file="src/web/WEB-INF/web.xml" />
+     </copy>
   </target> 
 
   <target name="war" depends="jar">

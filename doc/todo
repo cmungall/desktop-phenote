@@ -1,3 +1,12 @@
+column sorting - do shift for descending, also if new added sort it
+in, and perhaps indicate sorted column in header with < & >?
+
+bug: pasting from one phenote to another doesnt work - i think its
+because the data flavors are 2 different instances in 2 different jvms 
+even though in theory its a singleton:
+loading CharacterList from clipboard if there
+Failed to get character list from clipboard: java.awt.datatransfer.UnsupportedFlavorException: Fly Character List
+
 fly data adapter needs to check for empty/null entity & value - should
 be required
 
