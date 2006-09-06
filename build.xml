@@ -9,142 +9,126 @@
 
 <project name="phenote" default="compile" basedir=".">
 
-  <description>phenote ant build</description>
-  <!-- allows for use of environment vars -->
-  <property environment="env"/>
-  <!-- property name="src-svn" value="./src/java" / -->
-  <property name="src" value="./src/java" />
-  <property name="test" value="./src/java/test" />
-  <!-- where classes go -->  
-  <property name="classfiles" value="classfiles" />
-  <property name="web-classfiles" value="${env.PHENOTE_WEB_CLASSFILES}" />
-  <property name="web-conf" value="${env.PHENOTE_WEB_CONF_FILES}"/>
-  <property name="web-html" value="${env.PHENOTE_WEB_HTML}"/>
-  <property name="web-jars" value="${env.PHENOTE_WEB_JAR_DIR}" />
-  <property name="web.xml-dir" value="${env.PHENOTE_WEB_XML_DIR}" />
-  
-  <property name="lib" value="jars" />
-  <property name="jarfile" value="jars/phenote.jar"/>
-  <property name="obo" value="obo-files" />
-  <property name="conf" value="conf" />
-  <!-- override this from command line with  -DCONF-FILE=initial-zfin.cfg -->
-  <property name="CONF_FILE" value="initial-flybase.cfg"/>
+    <description>phenote ant build</description>
+    <!-- allows for use of environment vars -->
+    <property environment="env"/>
+    <!-- property name="src-svn" value="./src/java" / -->
+    <property name="src" value="./src/java"/>
+    <property name="test" value="./src/java/test"/>
+    <!-- where classes go -->
+    <property name="classfiles" value="classfiles"/>
+    <property name="web-classfiles" value="${env.PHENOTE_WEB_CLASSFILES}"/>
+    <property name="web-conf" value="${env.PHENOTE_WEB_CONF_FILES}"/>
+    <property name="web-html" value="${env.PHENOTE_WEB_HTML}"/>
+    <property name="web-jars" value="${env.PHENOTE_WEB_JAR_DIR}"/>
+    <property name="web.xml-dir" value="${env.PHENOTE_WEB_XML_DIR}"/>
 
-  <!-- The init target makes sure that the prerequisite directories exist. -->
-  <target name="init">
-    <mkdir dir="${classfiles}" />
-  </target>
+    <property name="lib" value="jars"/>
+    <property name="jarfile" value="jars/phenote.jar"/>
+    <property name="obo" value="obo-files"/>
+    <property name="conf" value="conf"/>
+    <!-- override this from command line with  -DCONF-FILE=initial-zfin.cfg -->
+    <property name="CONF_FILE" value="initial-flybase.cfg"/>
 
-
-  <!-- The classpath includes all the jar files jars dir, excluding
-       jars/phenote.jar if it exists. -->
-  <path id="project.classpath">
-    <fileset dir="${lib}">
-      <include name="*.jar"/>
-      <exclude name="phenote.jar"/>
-    </fileset>
-  </path>
-
-  <path id="project.classpath2">
-    <fileset dir="${lib}">
-      <exclude name="phenote.jar"/>
-      <exclude name="META-INF"/>
-    </fileset>
-  </path>
-
-  <path id="project.classpath3">
-    <fileset dir="${lib}">
-      <patternset id="non-phenote-jars">
-        <include name="**/*.jar"/>
-        <exclude name="**/phenote.jar"/>
-        <exclude name="test/**"/>
-      </patternset>
-    </fileset>
-  </path>
-
-  <!-- The compile target runs javac on all the java files, and saves
-        them into  the classfiles directory. excludes="test/**"  -->
-  <target name="compile" depends="init">
-    <javac srcdir="${src}" destdir="${classfiles}" debug="yes" excludes="test/**">
-      <classpath refid="project.classpath3"/>
-    </javac>
-  </target>
+    <!-- The init target makes sure that the prerequisite directories exist. -->
+    <target name="init">
+        <mkdir dir="${classfiles}"/>
+    </target>
 
 
-  <!-- runs off classfiles not jar, todo: run-jar -->
-  <target name="run" depends="compile">
-     <java classname="phenote.gui.Phenote" fork="yes" jvmargs="-Xmx120M">
-         <!-- arg value="-c configfilehereventually"/ -->
-        <classpath>
-          <pathelement path="${classfiles}"/>
-          <fileset dir="${lib}">
-             <include name="*.jar"/>
-             <exclude name="phenote.jar"/>
-          </fileset>
-        </classpath>
-     </java>
-   </target>
+    <!-- The classpath includes all the jar files jars dir, excluding
+jars/phenote.jar if it exists. -->
+    <path id="project.classpath">
+        <fileset dir="${lib}">
+            <include name="*.jar"/>
+            <exclude name="phenote.jar"/>
+        </fileset>
+    </path>
 
-  <target name="zfin" depends="compile">
-     <java classname="phenote.gui.Phenote" fork="yes" jvmargs="-Xmx120M">
-         <!-- arg value="-c configfilehereventually"/ -->
-         <arg value="-c"/>
-         <arg value="initial-zfin.cfg"/>
-        <classpath>
-          <pathelement path="${classfiles}"/>
-          <fileset dir="${lib}">
-             <include name="*.jar"/>
-             <exclude name="phenote.jar"/>
-          </fileset>
-        </classpath>
-     </java>
-   </target>
+    <path id="project.classpath2">
+        <fileset dir="${lib}">
+            <exclude name="phenote.jar"/>
+            <exclude name="META-INF"/>
+        </fileset>
+    </path>
 
-  <target name="fly" depends="compile">
-     <java classname="phenote.gui.Phenote" fork="yes" jvmargs="-Xmx120M">
-         <!-- arg value="-c configfilehereventually"/ -->
-         <arg value="-c"/>
-         <arg value="initial-flybase.cfg"/>
-        <classpath>
-          <pathelement path="${classfiles}"/>
-          <fileset dir="${lib}">
-             <include name="*.jar"/>
-             <exclude name="phenote.jar"/>
-          </fileset>
-        </classpath>
-     </java>
-   </target>
+    <path id="project.classpath3">
+        <fileset dir="${lib}">
+            <patternset id="non-phenote-jars">
+                <include name="**/*.jar"/>
+                <exclude name="**/phenote.jar"/>
+                <exclude name="test/**"/>
+            </patternset>
+        </fileset>
+    </path>
 
-  <target name="obd" depends="compile">
-     <java classname="phenote.gui.Phenote" fork="yes" jvmargs="-Xmx120M">
-         <!-- arg value="-c configfilehereventually"/ -->
-         <arg value="-c"/>
-         <arg value="obd.cfg"/>
-        <classpath>
-          <pathelement path="${classfiles}"/>
-          <fileset dir="${lib}">
-             <include name="*.jar"/>
-             <exclude name="phenote.jar"/>
-          </fileset>
-        </classpath>
-     </java>
-   </target>
+    <!-- The compile target runs javac on all the java files, and saves
+them into  the classfiles directory. excludes="test/**"  -->
+    <target name="compile" depends="init">
+        <javac srcdir="${src}" destdir="${classfiles}" debug="yes" excludes="test/**">
+            <classpath refid="project.classpath3"/>
+        </javac>
+    </target>
 
-   <target name="run-conf" depends="compile">
-     <java classname="phenote.gui.Phenote" fork="yes" jvmargs="-Xmx120M">
-         <!-- arg value="-c configfilehereventually"/ -->
-         <arg value="-c"/>
-         <arg value="${CONF_FILE}"/>
-        <classpath>
-          <pathelement path="${classfiles}"/>
-          <fileset dir="${lib}">
-             <include name="*.jar"/>
-             <exclude name="phenote.jar"/>
-          </fileset>
-        </classpath>
-     </java>
-   </target>
-  
+
+    <!-- runs off classfiles not jar, todo: run-jar -->
+    <target name="run" depends="compile">
+        <java classname="phenote.gui.Phenote" fork="yes" jvmargs="-Xmx120M">
+            <!-- arg value="-c configfilehereventually"/ -->
+            <classpath>
+                <pathelement path="${classfiles}"/>
+                <fileset dir="${lib}">
+                    <include name="*.jar"/>
+                    <exclude name="phenote.jar"/>
+                </fileset>
+            </classpath>
+        </java>
+    </target>
+
+    <target name="zfin" depends="compile">
+        <java classname="phenote.gui.Phenote" fork="yes" jvmargs="-Xmx120M">
+            <!-- arg value="-c configfilehereventually"/ -->
+            <arg value="-c"/>
+            <arg value="initial-zfin.cfg"/>
+            <classpath>
+                <pathelement path="${classfiles}"/>
+                <fileset dir="${lib}">
+                    <include name="*.jar"/>
+                    <exclude name="phenote.jar"/>
+                </fileset>
+            </classpath>
+        </java>
+    </target>
+
+    <target name="fly" depends="compile">
+        <java classname="phenote.gui.Phenote" fork="yes" jvmargs="-Xmx120M">
+            <!-- arg value="-c configfilehereventually"/ -->
+            <arg value="-c"/>
+            <arg value="initial-flybase.cfg"/>
+            <classpath>
+                <pathelement path="${classfiles}"/>
+                <fileset dir="${lib}">
+                    <include name="*.jar"/>
+                    <exclude name="phenote.jar"/>
+                </fileset>
+            </classpath>
+        </java>
+    </target>
+
+    <target name="obd" depends="compile">
+        <java classname="phenote.gui.Phenote" fork="yes" jvmargs="-Xmx120M">
+            <!-- arg value="-c configfilehereventually"/ -->
+            <arg value="-c"/>
+            <arg value="obd.cfg"/>
+            <classpath>
+                <pathelement path="${classfiles}"/>
+                <fileset dir="${lib}">
+                    <include name="*.jar"/>
+                    <exclude name="phenote.jar"/>
+                </fileset>
+            </classpath>
+        </java>
+    </target>
   <target name="run-jar" >
      <java classname="phenote.gui.Phenote" fork="yes" jvmargs="-Xmx120M">
          <!-- arg value="-c configfilehereventually"/ -->
@@ -156,185 +140,203 @@
      </java>
   </target>
 
-
-  <target name="test" depends="build-test">
-     <java classname="org.junit.runner.JUnitCore" fork="yes" jvmargs="-Xmx120M">
-         <arg value="phenote.gui.TestPhenote"/>
-        <classpath>
-          <pathelement path="${classfiles}"/>
-          <fileset dir="${lib}">
-             <include name="*.jar"/>
-             <exclude name="phenote.jar"/>
-          </fileset>
-        </classpath>
-     </java>
-   </target>
-
-  <!-- The clean target just erases the classes -->
-  <target name="clean">
-    <delete dir="${classfiles}"/>
-  </target>
-
-  <!-- clean and compile everything -->
-  <target name="build-all" depends="clean,compile,build-test"/>
+    <target name="run-conf" depends="compile">
+        <java classname="phenote.gui.Phenote" fork="yes" jvmargs="-Xmx120M">
+            <!-- arg value="-c configfilehereventually"/ -->
+            <arg value="-c"/>
+            <arg value="${CONF_FILE}"/>
+            <classpath>
+                <pathelement path="${classfiles}"/>
+                <fileset dir="${lib}">
+                    <include name="*.jar"/>
+                    <exclude name="phenote.jar"/>
+                </fileset>
+            </classpath>
+        </java>
+    </target>
 
 
-  <target name="build-test" depends="compile">
-    <javac srcdir="${test}" destdir="${classfiles}" debug="yes">
-      <classpath refid="project.classpath"/> 
-    </javac>  
-  </target>
+    <target name="test" depends="build-test">
+        <java classname="org.junit.runner.JUnitCore" fork="yes" jvmargs="-Xmx120M">
+            <arg value="phenote.gui.TestPhenote"/>
+            <classpath>
+                <pathelement path="${classfiles}"/>
+                <fileset dir="${lib}">
+                    <include name="*.jar"/>
+                    <exclude name="phenote.jar"/>
+                </fileset>
+            </classpath>
+        </java>
+    </target>
 
-  <!-- JAR The jar target compiles everything, and produces a phenote.jar in
-       phenote/jars/phenote.jar.  -->
-  <target name="jar" depends="compile">
-     <jar destfile="${jarfile}">
-        <fileset dir="${classfiles}"/>
-	<fileset file="${obo}/*.obo"/>
-        <fileset file="${conf}/*.cfg"/>
-     </jar>
-  </target>
+    <!-- The clean target just erases the classes -->
+    <target name="clean">
+        <delete dir="${classfiles}"/>
+    </target>
 
-<!-- file=${obo}/*.obo -->
+    <!-- clean and compile everything -->
+    <target name="build-all" depends="clean,compile,build-test"/>
 
 
-  <target name="javadoc">
-   <javadoc
-           destdir="doc/api"
-           author="true"
-           version="true"
-           use="true"
-           windowtitle="Phenote API"
-           package="true">
+    <target name="build-test" depends="compile">
+        <javac srcdir="${test}" destdir="${classfiles}" debug="yes">
+            <classpath refid="project.classpath"/>
+        </javac>
+    </target>
 
-    <!-- this aint pickin everything up??? -->
-    <packageset dir="${src}" defaultexcludes="no">
-      <include name="phenote/*/**"/>
-      <!-- exclude name="com/dummy/test/doc-files/**"/ -->
-    </packageset>
+    <!-- JAR The jar target compiles everything, and produces a phenote.jar in
+  phenote/jars/phenote.jar.  -->
+    <target name="jar" depends="compile">
+        <jar destfile="${jarfile}">
+            <fileset dir="${classfiles}"/>
+            <fileset file="${obo}/*.obo"/>
+            <fileset file="${conf}/*.cfg"/>
+        </jar>
+    </target>
 
-    <classpath refid="project.classpath"/> 
+    <!-- file=${obo}/*.obo -->
 
-    <doctitle><![CDATA[<h1>Phenote</h1>]]></doctitle>
-   </javadoc>
-  </target>
 
-  <property name="dist" value="0.6"/>
+    <target name="javadoc">
+        <javadoc
+                destdir="doc/api"
+                author="true"
+                version="true"
+                use="true"
+                windowtitle="Phenote API"
+                package="true">
 
-  <target name="tar">
-    <mkdir dir="tars/${dist}"/>
-    <tar destfile="tars/${dist}/phenote-${dist}.tar">
-      <tarfileset dir =".">
-            <exclude name="${dist}/**"/>
-            <exclude name="svn-phenote/**"/>
-            <exclude name="tars/**"/>
-            <exclude name="src/obo-files/**"/>
-            <exclude name="*.tar"/>
-            <exclude name="*.jar"/>
-            <exclude name="garbage/**"/>
-            <exclude name="oldjars/**"/>
-            <exclude name="src/java/**"/>
-            <exclude name="web-classfiles/**"/>
-            <exclude name="web-interface/**"/>
-            <exclude name="web-deployment/**"/>
-      </tarfileset>
-    </tar>
-    <gzip zipfile="tars/${dist}/phenote-${dist}.tar.gz" src="tars/${dist}/phenote-${dist}.tar"/>
-  </target>
+            <!-- this aint pickin everything up??? -->
+            <packageset dir="${src}" defaultexcludes="no">
+                <include name="phenote/*/**"/>
+                <!-- exclude name="com/dummy/test/doc-files/**"/ -->
+            </packageset>
 
-  <target name="tar-source">
-    <mkdir dir="tars/${dist}"/>
-    <tar destfile="tars/${dist}/phenote-${dist}-src.tar">
-      <tarfileset dir =".">
-            <exclude name="${dist}/**"/>
-            <exclude name="svn-phenote/**"/>
-            <exclude name="tars/**"/>
-            <exclude name="src/obo-files/**"/>
-            <!-- for now take out go as its 8.5M & not being used yet -->
-            <exclude name="obo-files/gene_ontology.obo"/>
-            <exclude name="*.tar"/>
-            <exclude name="*.jar"/>
-            <exclude name="garbage/**"/>
-            <exclude name="oldjars/**"/>
-            <!-- exclude name="jars/phenote.jar"/ -->
-            <exclude name="doc/**"/>
-            <exclude name="classfiles/**"/>
-            <exclude name="web-classfiles/**"/>
-            <exclude name="web-interface/**"/>
-            <exclude name="web-deployment/**"/>
-      </tarfileset>
-    </tar>
-    <gzip zipfile="tars/${dist}/phenote-${dist}-src.tar.gz" src="tars/${dist}/phenote-${dist}-src.tar"/>
-  </target>
+            <classpath refid="project.classpath"/>
 
-  <target name="gzip-tar">
-    <gzip zipfile="tars/${dist}/phenote-${dist}.tar.gz" src="tars/${dist}/phenote-${dist}.tar"/>
-  </target>
+            <doctitle><![CDATA[<h1>Phenote</h1>]]></doctitle>
+        </javadoc>
+    </target>
 
-  <target name="compile-servlet">
-    <javac srcdir="${src}" destdir="${web-classfiles}" debug="yes" excludes="test/**">
-      <classpath refid="project.classpath3"/>
-    </javac>
-  </target>
+    <property name="dist" value="0.6"/>
 
-  <!-- web-deployment & web-config-files  should be a symoblic link to ones web site -->
-  <target name="web-deployment" depends="compile-servlet">
-     <copy todir="${web-html}">
-       <fileset dir="src/web"/>
-     </copy>
-     <copy todir="${web-conf}">
-       <fileset dir="conf">
-         <include name="*.cfg"/>
-       </fileset>
-     </copy>
-     <copy todir="${web-conf}">
-       <fileset dir="obo-files" />
-     </copy>
-     <copy todir="${web-jars}">
-        <fileset dir="${lib}">
-          <include name="*.jar"/>
-          <exclude name="phenote.jar"/>
-        </fileset>
-     </copy>
-     <copy todir="${web.xml-dir}">
-       <fileset file="src/web/WEB-INF/web.xml" />
-     </copy>
-  </target> 
+    <target name="tar">
+        <mkdir dir="tars/${dist}"/>
+        <tar destfile="tars/${dist}/phenote-${dist}.tar">
+            <tarfileset dir=".">
+                <exclude name="${dist}/**"/>
+                <exclude name="svn-phenote/**"/>
+                <exclude name="tars/**"/>
+                <exclude name="src/obo-files/**"/>
+                <exclude name="*.tar"/>
+                <exclude name="*.jar"/>
+                <exclude name="garbage/**"/>
+                <exclude name="oldjars/**"/>
+                <exclude name="src/java/**"/>
+                <exclude name="web-classfiles/**"/>
+                <exclude name="web-interface/**"/>
+                <exclude name="web-deployment/**"/>
+            </tarfileset>
+        </tar>
+        <gzip zipfile="tars/${dist}/phenote-${dist}.tar.gz" src="tars/${dist}/phenote-${dist}.tar"/>
+    </target>
 
-  <target name="war" depends="jar">
-    <war destfile="war-deployment-link/phenote.war" webxml="src/web/web.xml">
-      <fileset dir="src/web"/>
-      <lib dir="${lib}"/>
-      <classes dir="${classfiles}" />
-      <zipfileset dir="${obo}"/>  <!-- prefix="obo-files"/ ??? -->
-      <zipfileset dir="${conf}"/>
-    </war>
-  </target>
+    <target name="tar-source">
+        <mkdir dir="tars/${dist}"/>
+        <tar destfile="tars/${dist}/phenote-${dist}-src.tar">
+            <tarfileset dir=".">
+                <exclude name="${dist}/**"/>
+                <exclude name="svn-phenote/**"/>
+                <exclude name="tars/**"/>
+                <exclude name="src/obo-files/**"/>
+                <!-- for now take out go as its 8.5M & not being used yet -->
+                <exclude name="obo-files/gene_ontology.obo"/>
+                <exclude name="*.tar"/>
+                <exclude name="*.jar"/>
+                <exclude name="garbage/**"/>
+                <exclude name="oldjars/**"/>
+                <!-- exclude name="jars/phenote.jar"/ -->
+                <exclude name="doc/**"/>
+                <exclude name="classfiles/**"/>
+                <exclude name="web-classfiles/**"/>
+                <exclude name="web-interface/**"/>
+                <exclude name="web-deployment/**"/>
+            </tarfileset>
+        </tar>
+        <gzip zipfile="tars/${dist}/phenote-${dist}-src.tar.gz" src="tars/${dist}/phenote-${dist}-src.tar"/>
+    </target>
 
-  <target name="war-clean">
-    <delete file="war-deployment-link/phenote.war"/>
-  </target>
+    <target name="gzip-tar">
+        <gzip zipfile="tars/${dist}/phenote-${dist}.tar.gz" src="tars/${dist}/phenote-${dist}.tar"/>
+    </target>
 
-  <target name="war-no-jar-depend">
-    <delete file="war-deployment-link/phenote.war"/>
-    <war destfile="war-deployment-link/phenote.war" webxml="src/web/web.xml">
-      <fileset dir="src/web"/>
-      <lib dir="${lib}"/>
-      <classes dir="${classfiles}" />
-      <zipfileset dir="${obo}"/>  <!-- prefix="obo-files"/ ??? -->
-      <zipfileset dir="${conf}"/>
-    </war>
-  </target>
-  
-  <taskdef name="xmlbean" classname="org.apache.xmlbeans.impl.tool.XMLBean" classpath="${lib}/xbean.jar" />
+    <target name="compile-servlet">
+        <javac srcdir="${src}" destdir="${web-classfiles}" debug="yes" excludes="test/**">
+            <classpath refid="project.classpath3"/>
+        </javac>
+    </target>
 
-<!-- classgendir="${build.dir}" - if not doing jar but classes, schema is directory 
+    <!-- web-deployment & web-config-files  should be a symoblic link to ones web site -->
+    <target name="web-deployment" depends="compile-servlet">
+        <copy todir="${web-html}">
+            <fileset dir="src/web"/>
+        </copy>
+        <copy todir="${web-conf}">
+            <fileset dir="conf">
+                <include name="*.cfg"/>
+            </fileset>
+        </copy>
+        <copy todir="${web-conf}">
+            <fileset dir="obo-files"/>
+        </copy>
+        <copy todir="${web-jars}">
+            <fileset dir="${lib}">
+                <include name="*.jar"/>
+                <exclude name="phenote.jar"/>
+            </fileset>
+        </copy>
+        <copy todir="${web.xml-dir}">
+            <fileset file="src/web/WEB-INF/web.xml"/>
+        </copy>
+    </target>
+
+    <target name="war" depends="jar, war-clean">
+        <mkdir dir="war-deployment"/>
+        <war destfile="war-deployment/phenote.war" webxml="src/web/WEB-INF/web.xml">
+            <fileset dir="src/web"/>
+            <lib dir="${lib}"/>
+            <classes dir="${classfiles}"/>
+            <zipfileset dir="${obo}"/>
+            <!-- prefix="obo-files"/ ??? -->
+            <zipfileset dir="${conf}"/>
+        </war>
+    </target>
+
+    <target name="war-clean">
+        <delete dir="war-deployment"/>
+    </target>
+
+    <target name="war-no-jar-depend">
+        <delete file="war-deployment/phenote.war"/>
+        <war destfile="war-deployment/phenote.war" webxml="src/web/WEB-INF/web.xml">
+            <fileset dir="src/web"/>
+            <lib dir="${lib}"/>
+            <classes dir="${classfiles}"/>
+            <zipfileset dir="${obo}"/>
+            <!-- prefix="obo-files"/ ??? -->
+            <zipfileset dir="${conf}"/>
+        </war>
+    </target>
+
+    <taskdef name="xmlbean" classname="org.apache.xmlbeans.impl.tool.XMLBean" classpath="${lib}/xbean.jar"/>
+
+    <!-- classgendir="${build.dir}" - if not doing jar but classes, schema is directory
 where xsd files are (conf) -->
-  <target name="xml-beans">
-    <xmlbean schema="${conf}" destfile="${lib}/phenotexmlbeans.jar" classpath="${project.classpath3}"
-      failonerror="true" javasource="1.5" >
-    </xmlbean>
-  </target>
+    <target name="xml-beans">
+        <xmlbean schema="${conf}" destfile="${lib}/phenotexmlbeans.jar" classpath="${project.classpath3}"
+                 failonerror="true" javasource="1.5">
+        </xmlbean>
+    </target>
 
 </project>
 
