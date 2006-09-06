@@ -145,6 +145,16 @@
      </java>
    </target>
   
+  <target name="run-jar" >
+     <java classname="phenote.gui.Phenote" fork="yes" jvmargs="-Xmx120M">
+         <!-- arg value="-c configfilehereventually"/ -->
+        <classpath>
+          <fileset dir="${lib}">
+             <include name="*.jar"/>
+          </fileset>
+        </classpath>
+     </java>
+  </target>
 
 
   <target name="test" depends="build-test">

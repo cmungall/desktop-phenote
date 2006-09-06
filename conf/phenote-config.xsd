@@ -3,6 +3,7 @@
   <xs:element name="phenote-configuration">
     <xs:complexType>
       <xs:sequence>
+        <xs:element ref="x:check-for-new-ontologies"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:dataadapter"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:field"/>
       </xs:sequence>
@@ -21,6 +22,11 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="check-for-new-ontologies">
+    <xs:complexType>
+      <xs:attribute name="intervalMinutes" use="required" type="xs:integer"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="field">

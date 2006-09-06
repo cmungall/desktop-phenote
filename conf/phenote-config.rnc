@@ -3,6 +3,7 @@ default namespace = "phenote/config/xml"
 
 start =
   element phenote-configuration {
+    check-for-new-ontologies,
     dataadapter*,
     field*
   }
@@ -11,6 +12,12 @@ dataadapter =
   element dataadapter {
     ## for now just 2 dataadapters, phenoxml & phenosyntax
     attribute name {"phenoxml" | "phenosyntax"}
+  }
+
+## Whether to 
+check-for-new-ontologies =
+  element check-for-new-ontologies {
+    attribute intervalMinutes { xsd:integer }                       
   }
 
 field = 

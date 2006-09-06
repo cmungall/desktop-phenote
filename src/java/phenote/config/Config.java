@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -23,6 +24,7 @@ import org.apache.xmlbeans.XmlException;
 // in phenoteconfigbeans.jar code generate xml beans
 import phenote.config.xml.PhenoteConfigurationDocument;
 import phenote.config.xml.PhenoteConfigurationDocument.PhenoteConfiguration;
+import phenote.config.xml.CheckForNewOntologiesDocument.CheckForNewOntologies;
 import phenote.config.xml.DataadapterDocument.Dataadapter;
 import phenote.config.xml.FieldDocument.Field;
 import phenote.config.xml.OntologyDocument.Ontology;
@@ -48,6 +50,8 @@ public class Config {
   //private FieldConfig geneticContextConfig;
   private List<DataAdapterI> dataAdapterList;
   private List<FieldConfig> fieldList = new ArrayList<FieldConfig>();
+  private boolean checkForNewOntologies = false;
+  private int newOntologyCheckMinutes = 10;
 
   /** singleton */
   private Config() {
@@ -148,6 +152,14 @@ public class Config {
     return dataAdapterList.get(0);
   }
 
+  /** perhaps not best name - check if ontology is still fresh, if something newer
+      than load it - for obo files check file date - get this into config file! */
+  public boolean checkForNewOntologies() {
+    return checkForNewOntologies;
+  }
+  /** How many minutes between checks for new ontologies */
+  public int getOntologyCheckMinutes() { return newOntologyCheckMinutes; }
+
   private FieldConfig getLumpConfig() {
     // name = Taxonmony, file = BTO.obo...
     return lumpConfig;
@@ -207,12 +219,26 @@ public class Config {
       PhenoteConfigurationDocument pcd = 
         PhenoteConfigurationDocument.Factory.parse(configUrl);//configFile);
       PhenoteConfiguration pc = pcd.getPhenoteConfiguration();
+
+
+      // CHECK FOR ONTOLOGIES
+      CheckForNewOntologies cfno = pc.getCheckForNewOntologies();
+      if (cfno != null) { // ?
+        checkForNewOntologies = true;
+        BigInteger bi = cfno.getIntervalMinutes();
+        if (bi != null)
+          newOntologyCheckMinutes = bi.intValue();
+      }
+
+      
+      // DATA ADAPTERS
       Dataadapter[] adapters = pc.getDataadapterArray();
       for (Dataadapter da : adapters) {
         String name = da.getName().toString();
         addDataAdapterFromString(name);
       }
 
+      // FIELDS
       Field[] fields = pc.getFieldArray();
       for (Field f : fields) {
         makeFieldConfig(f);

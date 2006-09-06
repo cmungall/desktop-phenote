@@ -24,10 +24,27 @@ public class Ontology {
   private OBOSession oboSession;
   private List<OBOClass> sortedTerms;
   private List<OBOClass> sortedObsoleteTerms;
+  /** well this stuff is specific to ontologies from files (eg obo), perhaps there
+      needs to be some sort of wrapper or subclass? need to think about this...
+      for now just shoving in here */
+  private String source; // "source" is slightly generic isnt it?
+
+  /** this may be general? maybe should be a real date - this is the time of the ontology
+   for files this would be the modification date, for loading from database somewhere
+  obd? zfin? this would be the time of the load */
+  private long ontologyTimestamp;
   
-  public Ontology(String name,OBOSession oboSession) {
+//   public Ontology(String name,OBOSession oboSession) {
+//     this.name = name;
+//     this.oboSession = oboSession;
+//     makeSortedLists(oboSession);
+//   }
+  public Ontology(String name) {
     this.name = name;
-    this.oboSession = oboSession;
+  }
+
+  public void setOboSession(OBOSession os) {
+    oboSession = os;
     makeSortedLists(oboSession);
   }
 
@@ -237,6 +254,13 @@ public class Ontology {
     Collections.sort(sortedTerms);
     return sortedTerms;
   }
+
+  /** moght move this elsewhere - subclass? data adap specific wrapper? */
+  public void setTimestamp(long t) { ontologyTimestamp = t; }
+  public long getTimestamp() { return ontologyTimestamp; }
+  /** for obo files this is the filename */
+  public void setSource(String s) { source = s; }
+  public String getSource() { return source; }
 
 
   /** does unique check w map */

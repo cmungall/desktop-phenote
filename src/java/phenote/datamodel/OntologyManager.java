@@ -17,7 +17,7 @@ public class OntologyManager {
 
 
   private static OntologyManager singleton;
-  // isnt this redundant with charFieldList? convenience?
+  // isnt this redundant with charFieldList? convenience? - phase out! just getOClass
   private List<Ontology> allOntologyList = new ArrayList<Ontology>();
   /** CharFields generically hold one or more ontologies - are charFields that dont
    have ontologies in this list?? not sure */
@@ -66,6 +66,7 @@ public class OntologyManager {
       the id prefix AO,GO,PATO... */
   public OBOClass getOboClass(String id) {
     OBOClass oboClass;
+// this seems to be the sole reason for ontology list - silly!
     Iterator<Ontology> iter = allOntologyList.iterator();
     while (iter.hasNext()) {
       Ontology o = iter.next();

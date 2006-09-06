@@ -57,7 +57,7 @@ public class PhenoteServlet extends HttpServlet {
     // this is not running as a separate thread - investigate
 //     System.out.println("ontologies loaded - starting file checking thread");
 //     OntologyFileCheckThread ofct = new OntologyFileCheckThread();
-//     ofct.run(); // is this not running as threaded?
+//     ofct.start(); // is this not running as threaded?
 //     System.out.println("file thread launched - moving on");
   }
 
@@ -210,26 +210,27 @@ public class PhenoteServlet extends HttpServlet {
     public boolean searchObsoletes() { return false; }
   }
 
-
-  /** thread wakes up and checks if theres a new ontology file - if so loads it
-   this should go in ontology data adapter... not here and configged */
-  private class OntologyFileCheckThread extends Thread {
-
-    public void run() {
-
-      while(true) {
-        System.out.println("checking for new files...");
-        // check for files...
-        
-        
-        // sleep in milliseconds - sleep for 5 seconds for now (test)
-        try { sleep(5000); }
-        catch (InterruptedException e) { System.out.println("interrupted"); }
-      }
-    }
-  }
-
 }
+
+
+// ---> OntologyDataAdapter - moved to
+//   /** thread wakes up and checks if theres a new ontology file - if so loads it
+//    this should go in ontology data adapter... not here and configged */
+//   private class OntologyFileCheckThread extends Thread {
+
+//     public void run() {
+
+//       while(true) {
+//         System.out.println("checking for new files...");
+//         // check for files...
+        
+        
+//         // sleep in milliseconds - sleep for 5 seconds for now (test)
+//         try { sleep(5000); }
+//         catch (InterruptedException e) { System.out.println("interrupted"); }
+//       }
+//     }
+//   }
 
 
 

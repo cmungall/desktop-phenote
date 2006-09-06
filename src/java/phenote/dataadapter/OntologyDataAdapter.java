@@ -1,10 +1,12 @@
 package phenote.dataadapter;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -25,26 +27,35 @@ import phenote.config.OntologyConfig;
 
 /** is this really a data adapter? - OntologyLoader? this isnt a data adapter
     it doesnt load & commit character data - just loads ontologies. rename OntologyLoader
-    for now can stay in dataadapter package */
+    for now can stay in dataadapter package 
+    this is specifically a OboFileLoader - other kinds of ontology loading may com along*/
 public class OntologyDataAdapter {
 
   private Config config;
   private OntologyManager ontologyManager = OntologyManager.inst();
+  private boolean loadingOntologies = false;
 
   public OntologyDataAdapter() {
     config = Config.inst();
+    if (config.checkForNewOntologies()) {
+      new OntologyFileCheckThread().start();
+    }
   }
 
   public void loadOntologies() {
-
+    loadingOntologies = true;
     for (FieldConfig fieldConfig : config.getFieldConfigList()) {
       CharFieldEnum fce = fieldConfig.getCharFieldEnum();
       CharField cf = new CharField(fce);
       if (fieldConfig.hasOntologies()) {
         //cf = new CharField(fce,o);
         for (OntologyConfig oc : fieldConfig.getOntologyConfigList()) {
-          Ontology o = loadOntology(oc);
-          cf.addOntology(o);
+          try {
+            Ontology o = loadOntology(oc);
+            cf.addOntology(o);
+          } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage()+" ignoring ontology, fix config! ");
+          }
         }
       }
       else {
@@ -52,22 +63,44 @@ public class OntologyDataAdapter {
       }
       ontologyManager.addField(cf);
     }
-
+    loadingOntologies = false;
   }
 
 
   /** Load up/cache Sets for all ontologies used, anatomyOntologyTermSet
    * and patoOntologyTermSet -- move to dataadapter/OntologyDataAdapter... */
-  private Ontology loadOntology(OntologyConfig ontCfg) {
-    OBOSession oboSession = getOboSession(findFile(ontCfg.ontologyFile));
-    Ontology ontology = new Ontology(ontCfg.name,oboSession);
+  private Ontology loadOntology(OntologyConfig ontCfg) throws FileNotFoundException {
+//     URL url = findFile(ontCfg.ontologyFile); // throws FileNotFoundEx
+//     File file = new File(url.getFile());
+//     long date = file.lastModified();
+//     System.out.println("url path "+url.getPath()+" file "+file+" mod "+date+" "+new Date(date));
+//     OBOSession oboSession = getOboSession(url);
+    Ontology ontology = new Ontology(ontCfg.name);
+    loadOboSession(ontology,ontCfg.ontologyFile); // throws FileNotFoundEx
+//     if (date > 0) { // jar files have 0 date???
+//       ontology.setTimestamp(date);
+//       ontology.setSource(file.toString());
+//     }
     return ontology;
+  }
+
+  private void loadOboSession(Ontology o,String filename) throws FileNotFoundException {
+    URL url = findFile(filename); // throws FileNotFoundEx
+    OBOSession oboSession = getOboSession(url);
+    o.setOboSession(oboSession);
+    File file = new File(url.getFile());
+    long date = file.lastModified();
+    System.out.println(" file "+file+" mod "+date+" "+new Date(date));
+    if (date > 0) { // jar files have 0 date???
+      o.setTimestamp(date);
+      o.setSource(file.toString());
+    }
   }
 
   
 
   /** Look for file in current directory (.) and jar file */
-  private URL findFile(String fileName) {
+  private URL findFile(String fileName) throws FileNotFoundException {
 
     // first try file as is (full path provided)
     File file = new File(fileName);
@@ -92,8 +125,7 @@ public class OntologyDataAdapter {
     }
 
     if (url == null) {
-      System.out.println("No file found in pwd or jar for "+fileName);
-      return null;
+      throw new FileNotFoundException("No file found for "+fileName);
     }
     return url;
   }
@@ -126,6 +158,50 @@ public class OntologyDataAdapter {
     catch (DataAdapterException e) {
       System.out.println("got data adapter exception: "+e);
       return null; // empty session?
+    }
+  }
+
+  private class OntologyFileCheckThread extends Thread {
+
+    public void run() {
+
+      int checkMilliSecs = config.getOntologyCheckMinutes() * 60000;
+
+      while(true) {
+        // sleep in milliseconds
+        try { sleep(checkMilliSecs); }
+        catch (InterruptedException e) { System.out.println("interrupted"); }
+
+        // if still loading ontologies from previous run then dont bother
+        if (loadingOntologies) {
+          System.out.println("Ontologies are being loaded - ontology checker going "+
+                             "back to sleep");
+          continue;
+        }
+        System.out.println("checking for new obo files...");
+        // check for files...
+        synchOntologies();
+      }
+    }
+    
+    private void synchOntologies() {
+      for (CharField cf : ontologyManager.getCharFieldList()) {
+        for (Ontology o : cf.getOntologyList()) {
+          if (o.getSource() == null) continue;
+          String file = o.getSource();
+          long oldTimestamp = o.getTimestamp();
+          long newTimestamp = new File(file).lastModified();
+          if (newTimestamp > oldTimestamp) {
+            Date d = new Date(newTimestamp);
+            System.out.println("loading new obo file "+file+" new date "+d);
+            try {
+              loadOboSession(o,file);
+            } catch (FileNotFoundException e) { // shouldnt happen
+              System.out.println(e.getMessage()+" ignoring ontology, fix config! ");
+            }
+          }
+        }
+      }
     }
   }
 
