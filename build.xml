@@ -303,12 +303,16 @@ them into  the classfiles directory. excludes="test/**"  -->
     <target name="war" depends="jar, war-clean">
         <mkdir dir="war-deployment"/>
         <war destfile="war-deployment/phenote.war" webxml="src/web/WEB-INF/web.xml">
-            <fileset dir="src/web"/>
-            <lib dir="${lib}"/>
-            <classes dir="${classfiles}"/>
-            <zipfileset dir="${obo}"/>
-            <!-- prefix="obo-files"/ ??? -->
-            <zipfileset dir="${conf}"/>
+            <fileset dir="src/web">
+                <exclude name="perl/*" />
+            </fileset>
+            <lib dir="${lib}">
+                <exclude name="junit-4.0.jar" />
+                <exclude name="BrowserLauncher2-10rc4.jar" />
+                <exclude name="tomcat-servlet.jar" />
+            </lib>
+            <classes dir="${obo}" />
+            <classes dir="${conf}" />
         </war>
     </target>
 
