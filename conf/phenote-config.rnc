@@ -3,6 +3,7 @@ default namespace = "phenote/config/xml"
 
 start =
   element phenote-configuration {
+    attribute version { xsd:float },
     check-for-new-ontologies,
     dataadapter*,
     field*
@@ -35,5 +36,6 @@ ontology =
   element ontology {
     attribute name { text },
     ## obo file for ontology
-    attribute file { text }
+    attribute file { text },
+    attribute filter-out { text }
   }

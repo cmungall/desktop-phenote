@@ -76,6 +76,8 @@ public class OntologyDataAdapter {
 //     System.out.println("url path "+url.getPath()+" file "+file+" mod "+date+" "+new Date(date));
 //     OBOSession oboSession = getOboSession(url);
     Ontology ontology = new Ontology(ontCfg.name);
+    if (ontCfg.hasFilter()) // set filter before loading obo session
+      ontology.setFilter(ontCfg.getFilter());
     loadOboSession(ontology,ontCfg.ontologyFile); // throws FileNotFoundEx
 //     if (date > 0) { // jar files have 0 date???
 //       ontology.setTimestamp(date);
@@ -90,7 +92,7 @@ public class OntologyDataAdapter {
     o.setOboSession(oboSession);
     File file = new File(url.getFile());
     long date = file.lastModified();
-    System.out.println(" file "+file+" mod "+date+" "+new Date(date));
+    //System.out.println(" file "+file+" mod "+date+" "+new Date(date));
     if (date > 0) { // jar files have 0 date???
       o.setTimestamp(date);
       o.setSource(file.toString());

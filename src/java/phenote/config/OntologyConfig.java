@@ -6,6 +6,7 @@ public class OntologyConfig {
   public String name;
   public String ontologyFile;
   public String nameSpace;
+  public String filterOut;
   // public typeEnum? type?? eg Entity/GT/Pato...??
 
   static OntologyConfig defaultPato = new OntologyConfig("Pato","attribute_and_value.obo");
@@ -17,6 +18,11 @@ public class OntologyConfig {
     ontologyFile = file;
     if (isBad(file)) // exception?
       System.out.println("null or empty ontology file given for "+name+" "+file);
+  }
+
+  OntologyConfig(String name, String file, String filterOut) {
+    this(name,file);
+    this.filterOut = filterOut;
   }
 
   boolean hasName() {
@@ -44,4 +50,7 @@ public class OntologyConfig {
   public boolean hasOntology() {
     return ontologyFile != null;
   }
+
+  public boolean hasFilter() { return filterOut != null; }
+  public String getFilter() { return filterOut; } 
 }

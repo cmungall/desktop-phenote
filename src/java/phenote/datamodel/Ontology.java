@@ -12,7 +12,6 @@ import java.util.Vector;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOSession;
-//import org.geneontology.oboedit.datamodel.impl.OBOSessionImpl;
 
 /** rename Ontology? - yes - this isnt a completion list - a completion list is a 
     subset of ontology terms that matches user input. This is a listing of terms of
@@ -24,6 +23,7 @@ public class Ontology {
   private OBOSession oboSession;
   private List<OBOClass> sortedTerms;
   private List<OBOClass> sortedObsoleteTerms;
+  private String filterOutString;
   /** well this stuff is specific to ontologies from files (eg obo), perhaps there
       needs to be some sort of wrapper or subclass? need to think about this...
       for now just shoving in here */
@@ -34,11 +34,6 @@ public class Ontology {
   obd? zfin? this would be the time of the load */
   private long ontologyTimestamp;
   
-//   public Ontology(String name,OBOSession oboSession) {
-//     this.name = name;
-//     this.oboSession = oboSession;
-//     makeSortedLists(oboSession);
-//   }
   public Ontology(String name) {
     this.name = name;
   }
@@ -46,6 +41,7 @@ public class Ontology {
   public void setOboSession(OBOSession os) {
     oboSession = os;
     makeSortedLists(oboSession);
+    filterLists();
   }
 
   private void makeSortedLists(OBOSession oboSession) {
@@ -53,13 +49,11 @@ public class Ontology {
     sortedObsoleteTerms = getSortedTerms(oboSession.getObsoleteTerms());
   }
 
+  private void filterLists() {
+    if (!haveFilter()) return; // from config
+    sortedTerms = filterList(sortedTerms,filterOutString);
+  }
 
-  // pase - Ontology shouldnt load file
-//   public Ontology(String name, String filename) {
-//     //loadAllOntologyTerms();
-//     this.name = name;
-//     loadOntology(filename);
-//   }
 
   public String getName() { return name; }
 
@@ -74,7 +68,7 @@ public class Ontology {
     return getOboClass(oboClass.getID()) != null;
   }
 
-  /** Returns a Vector of OBOTerms from ontology that contain input string
+  /** Returns a Vector of OBOClass from ontology that contain input string
       constrained by compParams. compParams specifies syns,terms,defs,& obs 
       should input be just part of search params? 
       its a vector as thats what ComboBox requires 
@@ -87,7 +81,6 @@ public class Ontology {
     // gets term set for currently selected ontology
     //Set ontologyTermList = getCurrentOntologyTermSet();
     List<OBOClass> ontologyTermList = getSortedTerms(); // non obsolete
-    //boolean isPato = isPato(ontology);
     searchTerms = getSearchTerms(input,ontologyTermList,searchParams);
 
     // if obsoletes set then add them in addition to regulars
@@ -282,11 +275,44 @@ public class Ontology {
     }
     private Vector<OBOClass> getVector() { return searchTerms; }
   }
+
+
+  public void setFilter(String filterOutString) {
+    this.filterOutString = filterOutString;
+  }
+
+  private boolean haveFilter() { return filterOutString != null; }
+
+  /** This is not generic - this looks for ids that have the filterOut string
+      as a prefix and tosses them - for example "ZFS" filters out all zf stage
+      terms - can add more flexibility as needed - this is all thats needed for now*/
+  private List<OBOClass> filterList(List<OBOClass> list, String filterOut) {
+    List<OBOClass> filteredList = new ArrayList<OBOClass>();
+    for (OBOClass term : list) {
+      // or could do remove on list?
+      if (!term.getID().startsWith(filterOut))
+        filteredList.add(term);
+    }
+    return filteredList;
+  }
+
 }
 
 
 
 // GARBAGE
+
+//   public Ontology(String name,OBOSession oboSession) {
+//     this.name = name;
+//     this.oboSession = oboSession;
+//     makeSortedLists(oboSession);
+//   }
+  // pase - Ontology shouldnt load file
+//   public Ontology(String name, String filename) {
+//     //loadAllOntologyTerms();
+//     this.name = name;
+//     loadOntology(filename);
+//   }
 
 //   /** Load up/cache Sets for all ontologies used, anatomyOntologyTermSet
 //    * and patoOntologyTermSet -- move to dataadapter/OntologyDataAdapter... */

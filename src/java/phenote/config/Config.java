@@ -322,7 +322,10 @@ public class Config {
       for (Ontology o : ontologies) {
         String oName = o.getName().getStringValue();
         String oFile = o.getFile().getStringValue();
-        OntologyConfig oc = makeOntologyConfig(oName,oFile);
+        String filterOut=null;
+        if (o.getFilterOut() != null)
+          filterOut = o.getFilterOut().getStringValue();
+        OntologyConfig oc = makeOntologyConfig(oName,oFile,filterOut);
         fc.addOntologyConfig(oc);
       }
     }
@@ -334,6 +337,9 @@ public class Config {
   private OntologyConfig makeOntologyConfig(String name, String file) {
     OntologyConfig oc = new OntologyConfig(name,file);
     return oc;
+  }
+  private OntologyConfig makeOntologyConfig(String name, String file, String filterOut) {
+    return new OntologyConfig(name,file,filterOut);
   }
 
 }
