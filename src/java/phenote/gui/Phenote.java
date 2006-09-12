@@ -11,6 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.metal.MetalLookAndFeel;
+import java.io.FileNotFoundException;
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.xml.DOMConfigurator;
 
 import phenote.config.Config;
 import phenote.config.ConfigException;
@@ -20,6 +24,7 @@ public class Phenote {
 
   private static final String VERSION = "0.8 dev";
   //private static final String DEFAULT_CONFIG_FILE = Config.DEFAULT_CONFIG_FILE;
+  private static final Logger LOG = Logger.getLogger(Phenote.class);
 
   private CharacterTablePanel characterTablePanel;
   private TermPanel termPanel;
@@ -39,6 +44,9 @@ public class Phenote {
     //System.out.println("sys CONFIG prop "+System.getProperty("CONFIG"));
     phenote = getPhenote();
     phenote.initConfig(args);
+    // put this is in a phenote.util.Log class? - get file from config - default?
+    try { DOMConfigurator.configure(Config.inst().getLogConfigUrl()); }
+    catch (FileNotFoundException e) { LOG.error(e.getMessage()); }
     phenote.initOntologies();
     phenote.initGui();
   }
@@ -84,8 +92,8 @@ public class Phenote {
       else
         Config.inst().setInitialConfigFile(configFile);
     } catch (ConfigException e) {
-      System.out.println("EXITING! Fatal error in config file: "+e.getMessage());
-      e.printStackTrace();
+      LOG.fatal("EXITING! Fatal error in config file: "+e.getMessage());
+      e.printStackTrace(); // log?
       System.exit(1);
     }
   }

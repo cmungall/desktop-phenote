@@ -25,7 +25,8 @@ import phenote.gui.Phenote; // move to main package
 public class PhenoteServlet extends HttpServlet {
 
     private static final String CONFIG_FILE_PARAM = "configuration-file";
-    private static final Logger LOG = Logger.getLogger(PhenoteServlet.class);
+  // PhenoteServlet.class is the distinct name for this logger
+  private static final Logger LOG = Logger.getLogger(PhenoteServlet.class);
 
     //private String configurationFileName; not sure needs to be var
     private Date initDate;

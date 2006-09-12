@@ -20,8 +20,9 @@
     </appender>
 
     <category name="phenote" additivity="true">
-        <priority value="info"/>
+        <priority value="debug"/>
         <appender-ref ref="MAIN" />
+        <appender-ref ref="console"/>
     </category>
 
     <root>

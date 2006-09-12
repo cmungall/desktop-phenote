@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.geneontology.oboedit.datamodel.OBOSession;
 import org.geneontology.oboedit.datamodel.impl.OBOSessionImpl;
 import org.geneontology.dataadapter.DataAdapterException;
@@ -17,6 +18,7 @@ import org.geneontology.dataadapter.FileAdapterConfiguration;
 import org.geneontology.dataadapter.IOOperation;
 import org.geneontology.oboedit.dataadapter.OBOFileAdapter;
 
+import phenote.util.FileUtil;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.Ontology;
@@ -34,6 +36,7 @@ public class OntologyDataAdapter {
   private Config config;
   private OntologyManager ontologyManager = OntologyManager.inst();
   private boolean loadingOntologies = false;
+  private static final Logger LOG = Logger.getLogger(OntologyDataAdapter.class);
 
   public OntologyDataAdapter() {
     config = Config.inst();
@@ -54,7 +57,8 @@ public class OntologyDataAdapter {
             Ontology o = loadOntology(oc);
             cf.addOntology(o);
           } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage()+" ignoring ontology, fix config! ");
+            //System.out.println(e.getMessage()+" ignoring ontology, fix config! ");
+            LOG.error(e.getMessage()+" ignoring ontology, fix config! ");
           }
         }
       }
@@ -70,19 +74,10 @@ public class OntologyDataAdapter {
   /** Load up/cache Sets for all ontologies used, anatomyOntologyTermSet
    * and patoOntologyTermSet -- move to dataadapter/OntologyDataAdapter... */
   private Ontology loadOntology(OntologyConfig ontCfg) throws FileNotFoundException {
-//     URL url = findFile(ontCfg.ontologyFile); // throws FileNotFoundEx
-//     File file = new File(url.getFile());
-//     long date = file.lastModified();
-//     System.out.println("url path "+url.getPath()+" file "+file+" mod "+date+" "+new Date(date));
-//     OBOSession oboSession = getOboSession(url);
     Ontology ontology = new Ontology(ontCfg.name);
     if (ontCfg.hasFilter()) // set filter before loading obo session
       ontology.setFilter(ontCfg.getFilter());
     loadOboSession(ontology,ontCfg.ontologyFile); // throws FileNotFoundEx
-//     if (date > 0) { // jar files have 0 date???
-//       ontology.setTimestamp(date);
-//       ontology.setSource(file.toString());
-//     }
     return ontology;
   }
 
@@ -103,44 +98,47 @@ public class OntologyDataAdapter {
 
   /** Look for file in current directory (.) and jar file */
   private URL findFile(String fileName) throws FileNotFoundException {
-
-    // first try file as is (full path provided)
-    File file = new File(fileName);
-    if (file.exists())
-      return makeUrl(fileName);
-
-    String oboFileDir = "obo-files/";
-    // try current directory + obo-file dir
-    String currentDir = "./" + oboFileDir + fileName;
-    file = new File(currentDir);
-    if (file.exists())
-      return makeUrl(currentDir);
-
-    // try jar - hopefully this works... jar files have to have '/' prepended
-    // first try without obo-files dir (in jar)
-    String jarFile = "/" + fileName;
-    URL url = Ontology.class.getResource(jarFile); // looks in jar
-    // 2nd try with obo-files dir in jar file (i used to do it this way)
-    if (url == null) {
-      jarFile = "/" + oboFileDir + fileName;
-      url = Ontology.class.getResource(jarFile); // looks in jar
-    }
-
-    if (url == null) {
-      throw new FileNotFoundException("No file found for "+fileName);
-    }
-    return url;
+    return FileUtil.findUrl(fileName);
   }
+
+//     // first try file as is (full path provided)
+//     File file = new File(fileName);
+//     if (file.exists())
+//       return makeUrl(fileName);
+
+//     String oboFileDir = "obo-files/";
+//     // try current directory + obo-file dir
+//     String currentDir = "./" + oboFileDir + fileName;
+//     file = new File(currentDir);
+//     if (file.exists())
+//       return makeUrl(currentDir);
+
+//     // try jar - hopefully this works... jar files have to have '/' prepended
+//     // first try without obo-files dir (in jar)
+//     String jarFile = "/" + fileName;
+//     URL url = Ontology.class.getResource(jarFile); // looks in jar
+//     // 2nd try with obo-files dir in jar file (i used to do it this way)
+//     if (url == null) {
+//       jarFile = "/" + oboFileDir + fileName;
+//       url = Ontology.class.getResource(jarFile); // looks in jar
+//     }
+
+//     if (url == null) {
+//       throw new FileNotFoundException("No file found for "+fileName);
+//     }
+//     return url;
+//   }
   
-  private URL makeUrl(String file) {
-    try {
-      return new URL("file:"+file);
-    }
-    catch (MalformedURLException e) {
-      System.out.println("malformed url "+file+" "+e);
-      return null;
-    }
-  }
+//   private URL makeUrl(String file) {
+//     try {
+//       return new URL("file:"+file);
+//     }
+//     catch (MalformedURLException e) {
+//       //System.out.println("malformed url "+file+" "+e);
+//       LOG.error("malformed url "+file+" "+e);
+//       return null;
+//     }
+//   }
 
 
   // String -> url to handle web start jar obo files
@@ -158,7 +156,8 @@ public class OntologyDataAdapter {
       return os;
     }
     catch (DataAdapterException e) {
-      System.out.println("got data adapter exception: "+e);
+      //System.out.println("got data adapter exception: "+e);
+      LOG.error("got data adapter exception: "+e);
       return null; // empty session?
     }
   }
@@ -168,24 +167,29 @@ public class OntologyDataAdapter {
     public void run() {
 
       int checkMilliSecs = config.getOntologyCheckMinutes() * 60000;
+      //int checkMilliSecs = 6000;//0.6 * 60000; // debug - 10 secs
 
       while(true) {
         // sleep in milliseconds
         try { sleep(checkMilliSecs); }
-        catch (InterruptedException e) { System.out.println("interrupted"); }
+        catch (InterruptedException e) { LOG.error("thread interrupted??"); }
 
         // if still loading ontologies from previous run then dont bother
         if (loadingOntologies) {
-          System.out.println("Ontologies are being loaded - ontology checker going "+
-                             "back to sleep");
+          //System.out.println("Ontologies are being loaded - ontology checker going "+
+          //                 "back to sleep");
+          LOG.info("Ontologies are being loaded - ontology checker going "+
+                   "back to sleep");
           continue;
         }
-        System.out.println("checking for new obo files...");
+        LOG.info("checking for new obo files..."); 
+        //System.out.println("checking for new obo files...");
         // check for files...
         synchOntologies();
       }
     }
     
+    /** Checks for new obo files */
     private void synchOntologies() {
       for (CharField cf : ontologyManager.getCharFieldList()) {
         for (Ontology o : cf.getOntologyList()) {
@@ -195,11 +199,14 @@ public class OntologyDataAdapter {
           long newTimestamp = new File(file).lastModified();
           if (newTimestamp > oldTimestamp) {
             Date d = new Date(newTimestamp);
-            System.out.println("loading new obo file "+file+" new date "+d);
+            //System.out.println("loading new obo file "+file+" new date "+d);
+            LOG.info("LOG loading new obo file "+file+" new date "+d);
             try {
               loadOboSession(o,file);
             } catch (FileNotFoundException e) { // shouldnt happen
-              System.out.println(e.getMessage()+" ignoring ontology, fix config! ");
+              //System.out.println(e.getMessage()+" ignoring ontology, fix config! ");
+              LOG.error(e.getMessage()+" ignoring ontology, fix config! ");
+              // LOG.debug(stacktrace)??? no string for stack trace... hmm...
             }
           }
         }
@@ -209,6 +216,19 @@ public class OntologyDataAdapter {
 
 }
 
+
+
+
+// GARBAGE
+//     if (date > 0) { // jar files have 0 date???
+//       ontology.setTimestamp(date);
+//       ontology.setSource(file.toString());
+//     }
+//     URL url = findFile(ontCfg.ontologyFile); // throws FileNotFoundEx
+//     File file = new File(url.getFile());
+//     long date = file.lastModified();
+//     System.out.println("url path "+url.getPath()+" file "+file+" mod "+date+" "+new Date(date));
+//     OBOSession oboSession = getOboSession(url);
 //     Ontology pato = loadOntology(config.getPatoOntologyConfig());
 //     ontologyManager.setPatoOntology(pato);
 

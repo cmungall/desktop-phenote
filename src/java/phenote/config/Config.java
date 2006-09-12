@@ -28,7 +28,9 @@ import phenote.config.xml.CheckForNewOntologiesDocument.CheckForNewOntologies;
 import phenote.config.xml.DataadapterDocument.Dataadapter;
 import phenote.config.xml.FieldDocument.Field;
 import phenote.config.xml.OntologyDocument.Ontology;
+import phenote.config.xml.LogDocument.Log;
 
+import phenote.util.FileUtil;
 import phenote.datamodel.CharFieldEnum;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.fly.FlybaseDataAdapter;
@@ -52,6 +54,7 @@ public class Config {
   private List<FieldConfig> fieldList = new ArrayList<FieldConfig>();
   private boolean checkForNewOntologies = false;
   private int newOntologyCheckMinutes = 10;
+  private String logConfigFile = "conf/log4j.xml"; // default log config file
 
   /** singleton */
   private Config() {
@@ -160,6 +163,10 @@ public class Config {
   /** How many minutes between checks for new ontologies */
   public int getOntologyCheckMinutes() { return newOntologyCheckMinutes; }
 
+  public URL getLogConfigUrl() throws FileNotFoundException {
+    return FileUtil.findUrl(logConfigFile);
+  }
+
   private FieldConfig getLumpConfig() {
     // name = Taxonmony, file = BTO.obo...
     return lumpConfig;
@@ -203,13 +210,6 @@ public class Config {
     return fieldList;
   }
 
-  /** Default entity list is the anatomy ontology -- DELETE*/
-  private List<OntologyConfig> defaultEntityConfigList() {
-    OntologyConfig oc = new OntologyConfig("Anatomy","anatomy.obo");
-    List<OntologyConfig> l = new ArrayList<OntologyConfig>(1);
-    l.add(oc);
-    return l;
-  }
 
   /** parse xml file with xml beans (phenoteconfigbeans.xml). Put in own class? */
   private void parseXmlFile(String filename) throws ConfigException {
@@ -230,6 +230,11 @@ public class Config {
           newOntologyCheckMinutes = bi.intValue();
       }
 
+      // LOG CONFIG FILE
+      Log log = pc.getLog();
+      if (log != null && log.getConfigFile() != null) {
+        logConfigFile = log.getConfigFile().getStringValue();
+      }
       
       // DATA ADAPTERS
       Dataadapter[] adapters = pc.getDataadapterArray();
@@ -256,35 +261,7 @@ public class Config {
   }
 
   private URL getConfigUrl(String filename) throws FileNotFoundException {
-    List<URL> possibleUrls = getPossibleUrls(filename);
-    for (URL u : possibleUrls)
-      if (urlExists(u)) return u;
-    System.out.println("Failed to find file "+filename);
-    throw new FileNotFoundException(filename+" not found");
-  }
-
-  private List<URL> getPossibleUrls(String filename) {
-    List<URL> urls = new ArrayList(5);
-    try {
-      URL u = new File(filename).toURL();
-      if (u != null) urls.add(u);
-      u = new File("conf/"+filename).toURL();
-      if (u != null) urls.add(u);
-    } catch (MalformedURLException e) {
-      System.out.println("bad file url "+e);
-    }
-    URL jarUrl = Config.class.getResource(filename);
-    if (jarUrl != null) urls.add(jarUrl);
-    jarUrl = Config.class.getResource("/"+filename);
-    if (jarUrl != null) urls.add(jarUrl);
-    return urls;
-  }
-
-  private boolean urlExists(URL u) {
-    try { u.openStream(); }
-    catch (IOException e) { return false; }
-    //System.out.println("url suceeded "+u);
-    return true;
+    return FileUtil.findUrl(filename);
   }
 
   // do some other way? DataAdapterManager has mapping? DataAdapter has mapping?
@@ -345,6 +322,44 @@ public class Config {
 }
 
 // OLD OLD OLD - DELETE - DOM STUFF - replaced with xml beans
+//   /** Default entity list is the anatomy ontology -- DELETE*/
+//   private List<OntologyConfig> defaultEntityConfigList() {
+//     OntologyConfig oc = new OntologyConfig("Anatomy","anatomy.obo");
+//     List<OntologyConfig> l = new ArrayList<OntologyConfig>(1);
+//     l.add(oc);
+//     return l;
+//   }
+//     List<URL> possibleUrls = getPossibleUrls(filename);
+//     for (URL u : possibleUrls)
+//       if (urlExists(u)) return u;
+//     System.out.println("Failed to find file "+filename);
+//     throw new FileNotFoundException(filename+" not found");
+//   }
+
+//   private List<URL> getPossibleUrls(String filename) {
+//     List<URL> urls = new ArrayList(5);
+//     try {
+//       URL u = new File(filename).toURL();
+//       if (u != null) urls.add(u);
+//       u = new File("conf/"+filename).toURL();
+//       if (u != null) urls.add(u);
+//     } catch (MalformedURLException e) {
+//       System.out.println("bad file url "+e);
+//     }
+//     URL jarUrl = Config.class.getResource(filename);
+//     if (jarUrl != null) urls.add(jarUrl);
+//     jarUrl = Config.class.getResource("/"+filename);
+//     if (jarUrl != null) urls.add(jarUrl);
+//     return urls;
+//   }
+
+//   private boolean urlExists(URL u) {
+//     try { u.openStream(); }
+//     catch (IOException e) { return false; }
+//     //System.out.println("url suceeded "+u);
+//     return true;
+//   }
+
 //   public OntologyConfig getPatoOntologyConfig() {
 //     return getPatoConfig().getOntologyConfig();
 //   }

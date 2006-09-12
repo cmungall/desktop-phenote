@@ -5,6 +5,7 @@ start =
   element phenote-configuration {
     attribute version { xsd:float },
     check-for-new-ontologies,
+    log,
     dataadapter*,
     field*
   }
@@ -15,10 +16,16 @@ dataadapter =
     attribute name {"phenoxml" | "phenosyntax"}
   }
 
-## Whether to 
+## Whether to check if ontology(obo) has been updated/more current obo file
 check-for-new-ontologies =
   element check-for-new-ontologies {
     attribute intervalMinutes { xsd:integer }                       
+  }
+
+## Where the config file for log4j is
+log =
+  element log {
+    attribute config-file { text }
   }
 
 field = 
