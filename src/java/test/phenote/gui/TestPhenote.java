@@ -1,5 +1,7 @@
 package phenote.gui;
 
+// move to main package??
+
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;
@@ -25,6 +27,7 @@ import phenote.dataadapter.fly.FlyCharList;
 import phenote.dataadapter.fly.FlyCharListTransferable;
 import phenote.dataadapter.fly.FlybaseDataAdapter;
 import phenote.util.HtmlUtil;
+import phenote.main.Phenote;
 
 // making same package as phenotes giving us access to package methods!
 

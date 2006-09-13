@@ -5,9 +5,9 @@ import java.awt.Insets;
 
 /** Convenience methods for making GridBagConstraints for GridBagLayout */
 
-class GridBagUtil {
+public class GridBagUtil {
 
-  static GridBagConstraints makeConstraint(int x, int y, int horizPad, int vertPad) {
+  public static GridBagConstraints makeConstraint(int x,int y,int horizPad,int vertPad) {
     return makeConstraint(x,y,horizPad,vertPad,GridBagConstraints.WEST);
   }
   static GridBagConstraints makeConstraint(int x, int y, int horizPad, int vertPad,

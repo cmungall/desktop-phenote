@@ -34,7 +34,7 @@ import phenote.gui.selection.SelectionManager;
   /** Character panel has character table and del add copy buttons to manipulate
    *  table. Modifications to fields modify columns in selected row in table
    * for now no explicit commit - may be configurable later */
-class CharacterTablePanel extends JPanel {
+public class CharacterTablePanel extends JPanel {
 
   private JTable characterTable;
   private CharacterTableModel characterTableModel;
@@ -51,7 +51,7 @@ class CharacterTablePanel extends JPanel {
   private static final String SAVE_STRING = "Save data";
   private boolean SANDBOX_MODE = true; // get from config...
 
-  CharacterTablePanel(TermPanel tp) {
+  public CharacterTablePanel(TermPanel tp) {
     termPanel = tp;
     init();
   }

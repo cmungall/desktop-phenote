@@ -38,7 +38,7 @@ import phenote.gui.selection.SelectionManager;
 import phenote.gui.selection.TermSelectionEvent;
 import phenote.gui.selection.TermSelectionListener;
 
-class TermInfo {
+public class TermInfo {
 
   //private JEditorPane textArea;
   private JTextComponent textArea;
@@ -49,11 +49,11 @@ class TermInfo {
   private OBOClass previousOboClass=null; // for undo - not implemented yet
 
   
-  TermInfo(TermPanel termPanel) {
+  public TermInfo(TermPanel termPanel) {
     SelectionManager.inst().addTermSelectionListener(new InfoTermSelectionListener());
   }
 
-  JComponent getComponent() {
+  public JComponent getComponent() {
     JPanel termInfoPanel = new JPanel(new BorderLayout(0,0)); // hgap,vgap
     termInfoPanel.setPreferredSize(new Dimension(600,700));
     termInfoPanel.setMinimumSize(new Dimension(350,500));

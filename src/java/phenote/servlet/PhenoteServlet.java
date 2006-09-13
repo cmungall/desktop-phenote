@@ -20,7 +20,7 @@ import phenote.datamodel.SearchParamsI;
 import phenote.util.HtmlUtil;
 import phenote.config.Config;
 import phenote.config.ConfigException;
-import phenote.gui.Phenote; // move to main package
+import phenote.main.Phenote;
 
 public class PhenoteServlet extends HttpServlet {
 

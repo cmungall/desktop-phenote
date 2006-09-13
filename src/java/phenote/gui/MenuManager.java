@@ -4,7 +4,7 @@ package phenote.gui;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
-class MenuManager {
+public class MenuManager {
 
   private FileMenu fileMenu;
 
@@ -14,7 +14,7 @@ class MenuManager {
 
   public static MenuManager inst() { return singleton; }
 
-  static void createMenuManager(JFrame frame) {
+  public static void createMenuManager(JFrame frame) {
     singleton.initMenus(frame);
   }
 

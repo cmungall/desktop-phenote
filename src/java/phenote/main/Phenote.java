@@ -1,4 +1,4 @@
-package phenote.gui;
+package phenote.main;
 
 // package phenote.main?
 
@@ -19,6 +19,11 @@ import org.apache.log4j.xml.DOMConfigurator;
 import phenote.config.Config;
 import phenote.config.ConfigException;
 import phenote.dataadapter.OntologyDataAdapter;
+import phenote.gui.CharacterTablePanel;
+import phenote.gui.GridBagUtil;
+import phenote.gui.MenuManager;
+import phenote.gui.TermInfo;
+import phenote.gui.TermPanel;
 
 public class Phenote {
 
@@ -158,9 +163,9 @@ public class Phenote {
     return phenote;
   }
   // These methods are actually for TestPhenote
-  TermPanel getTermPanel() { return termPanel; }
-  TermInfo getTermInfo() { return termInfo; }
-  CharacterTablePanel getCharacterTablePanel() { return characterTablePanel; }
+  public TermPanel getTermPanel() { return termPanel; }
+  public TermInfo getTermInfo() { return termInfo; }
+  public CharacterTablePanel getCharacterTablePanel() { return characterTablePanel; }
 }
 
 

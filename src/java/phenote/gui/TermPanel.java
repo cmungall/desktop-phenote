@@ -31,13 +31,13 @@ import phenote.config.FieldConfig;
  also has SearchParamPanel.
  */
 
-class TermPanel extends JPanel {
+public class TermPanel extends JPanel {
   
   private List<CharFieldGui> charFieldGuiList = new ArrayList<CharFieldGui>(8);
   private SearchParamPanel searchParamPanel; // searchParamManager?
   private OntologyManager ontologyManager = OntologyManager.inst();
 
-  TermPanel() {
+  public TermPanel() {
     init();
   }
 
