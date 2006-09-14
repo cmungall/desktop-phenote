@@ -46,7 +46,9 @@ public class PhenoXmlAdapter implements DataAdapterI {
 
   public void load() {
 	  try {
-		  File file = getFileFromUser(previousFile);
+		  if (file == null) {
+			  file = getFileFromUser(previousFile);
+		  }
 		  if (file == null) return;
 		  previousFile = file;
 		  PhenosetDocument doc = PhenosetDocument.Factory.parse(file);
@@ -118,6 +120,7 @@ public class PhenoXmlAdapter implements DataAdapterI {
 	  catch (IOException e) {
 		  System.out.println("PhenoXml read failure " + e);
 	  }
+	  file = null; // null it for next load/commit
   }
 
   public void commit(CharacterListI charList) {
