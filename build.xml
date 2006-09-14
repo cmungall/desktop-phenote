@@ -144,6 +144,7 @@ them into  the classfiles directory. excludes="test/**"  -->
         <java classname="phenote.main.Phenote" fork="yes" jvmargs="-Xmx120M">
             <!-- arg value="-c configfilehereventually"/ -->
             <arg value="-c"/>
+    <!-- from command line with  -DCONF-FILE=initial-zfin.cfg -->
             <arg value="${CONF_FILE}"/>
             <classpath>
                 <pathelement path="${classfiles}"/>

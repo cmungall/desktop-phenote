@@ -29,12 +29,19 @@ public class PhenoXmlAdapter implements DataAdapterI {
 
   private Set genotypesAlreadyAdded = new HashSet<String>(); 
   private File previousFile;
+  private File file;
+
+  /** command line setting of file */
+  public void setAdapterValue(String filename) {
+    file = new File(filename);
+  }
 
   public void load() {}
 
   public void commit(CharacterListI charList) {
 
-    File file = getFileFromUser(previousFile);
+    if (file == null)
+      file = getFileFromUser(previousFile);
     if (file == null)
       return;
     previousFile = file;

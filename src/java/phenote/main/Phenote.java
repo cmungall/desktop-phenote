@@ -35,6 +35,7 @@ public class Phenote {
   private TermPanel termPanel;
   private static Phenote phenote;
   private TermInfo termInfo;
+  private CommandLine commandLine = CommandLine.inst();
   
 
   public static void main(String[] args) {
@@ -46,33 +47,48 @@ public class Phenote {
     catch (UnsupportedLookAndFeelException e) {
       System.out.println("Failed to set to Java/Metal look & feel");
     }
-    //System.out.println("sys CONFIG prop "+System.getProperty("CONFIG"));
     phenote = getPhenote();
-    phenote.initConfig(args);
+    //phenote.initConfig(args);
+    phenote.doCommandLine(args); // does config
     // put this is in a phenote.util.Log class? - get file from config - default?
     try { DOMConfigurator.configure(Config.inst().getLogConfigUrl()); }
     catch (FileNotFoundException e) { LOG.error(e.getMessage()); }
     phenote.initOntologies();
+    phenote.loadFromCommandLine();  // cant load data til ontologies loaded i think
+
     phenote.initGui();
   }
 
   /** private constructor -> singleton */
   private Phenote() {}
 
-  /** args is most likely null if not called from command line */
-  public void initConfig(String[] args) {
-    // gets config file from command line & loads - if no config file 
-    // loads default. should actually put that logic here.
-    doCommandLine(args); // load config file
-  }
+//   /** args is most likely null if not called from command line */
+//   public void initConfig(String[] args) {
+//     // gets config file from command line & loads - if no config file 
+//     // loads default. should actually put that logic here.
+//     doCommandLine(args); // load config file
+//   }
 
   public void initOntologies() {
     OntologyDataAdapter oda = new OntologyDataAdapter(); // singleton?
     oda.loadOntologies(); // loads up OntologyManager
   }
+
+  private void loadFromCommandLine() {
+    //LOG.debug("read spec "+commandLine.readIsSpecified());
+    if (!commandLine.readIsSpecified()) return;
+    try { commandLine.getReadAdapter().load(); }
+    catch (Exception e) { LOG.error("Failed to do load via command line "+e); }
+  }
   
   public void initGui() {
     makeWindow();
+  }
+
+  private void doCommandLine(String[] args) {
+    doCommandLineOld(args); // -c -i  --> move to CommandLine!
+    try { commandLine.setArgs(args); } // no log yet - sys.out
+    catch (Exception e) { System.out.println("Command line read failed"+e); }
   }
 
   /** for now just looking for '-c configFile.cfg', use command line package
@@ -85,7 +101,7 @@ public class Phenote {
       and -c file.cfg will load/overwrite that cfg into .phenote/my-phenote.cfg 
       (if it exists) - we can always add --init later if we need it 
       -c overwrites, -i doesnt -i is for initial startup of phenote */
-  private void doCommandLine(String[] args) {
+  private void doCommandLineOld(String[] args) {
     String configFile = getConfigFileFromCommandLine(args);
     // if no config file specified then set default initial config file. this will be
     // overridden by a personal config file if it exists

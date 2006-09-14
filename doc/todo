@@ -1,3 +1,11 @@
+on load keeps blank character (from before load) around in table - shouldnt
+
+auto load from sourcforge or bioportal
+
+post compose gui
+post compose syntax
+post compose pheno xml
+
 column sorting - do shift for descending, also if new added sort it
 in, and perhaps indicate sorted column in header with < & >?
 

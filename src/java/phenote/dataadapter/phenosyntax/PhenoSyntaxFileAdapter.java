@@ -23,12 +23,19 @@ import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
 public class PhenoSyntaxFileAdapter implements DataAdapterI {
 
   private File previousFile;
+  private File file;
+
+  /** command line setting of file */
+  public void setAdapterValue(String filename) {
+    file = new File(filename);
+  }
 
   /** this should return CharacterList and caller should load CharListMan
       or CLM makes the call itself? */
   public void load() {
 
-    File file = getFileFromUser(previousFile);
+    if (file == null)
+      file = getFileFromUser(previousFile);
     if (file == null) return;
     previousFile = file;
     
@@ -51,6 +58,7 @@ public class PhenoSyntaxFileAdapter implements DataAdapterI {
     catch (IOException e) {
       System.out.println("PhenoSyntax read failure "+e);
     }
+    file = null; // null it for next load/commit
   }
 
   /** returns null if user fails to pick a file */
@@ -60,7 +68,8 @@ public class PhenoSyntaxFileAdapter implements DataAdapterI {
 
   public void commit(CharacterListI charList) {
     
-    File file = getFileFromUser(previousFile);
+    if (file == null)
+      file = getFileFromUser(previousFile);
     if (file == null) return;
     previousFile = file;
 
@@ -85,6 +94,7 @@ public class PhenoSyntaxFileAdapter implements DataAdapterI {
       }
     }
     pw.close();
+    file = null;
   }
 
 }
