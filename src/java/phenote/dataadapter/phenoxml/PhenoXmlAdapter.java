@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.List;
 
 import javax.swing.JFileChooser;
 
+import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlOptions;
 
 import org.bioontologies.obd.schema.pheno.BearerDocument.Bearer;
@@ -22,8 +24,14 @@ import org.bioontologies.obd.schema.pheno.TyperefDocument.Typeref;
 //import org.bioontologies.obd.schema.pheno.*.*;
 
 import phenote.datamodel.CharacterI;
+import phenote.datamodel.Character;
 import phenote.datamodel.CharacterListI;
+import phenote.datamodel.CharacterList;
+import phenote.datamodel.OntologyManager;
+import phenote.datamodel.OntologyManager.TermNotFoundException;
+import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.DataAdapterI;
+
 
 public class PhenoXmlAdapter implements DataAdapterI {
 
@@ -36,7 +44,81 @@ public class PhenoXmlAdapter implements DataAdapterI {
     file = new File(filename);
   }
 
-  public void load() {}
+  public void load() {
+	  try {
+		  File file = getFileFromUser(previousFile);
+		  if (file == null) return;
+		  previousFile = file;
+		  PhenosetDocument doc = PhenosetDocument.Factory.parse(file);
+		  Phenoset phenoset = doc.getPhenoset();
+		  List<PhenotypeManifestation> phenotypeManifestations = phenoset.getPhenotypeManifestationList();
+		  CharacterListI charList = new CharacterList();
+		  for (PhenotypeManifestation aManifestation : phenotypeManifestations) {
+			  CharacterI character = new Character();
+			  ManifestIn mi = aManifestation.getManifestIn();
+			  if (mi != null) {
+				String genotype = mi.getGenotype();
+				if (genotype != null) {
+					character.setGenotype(genotype);
+				}
+			  }
+			  Phenotype phenotype = aManifestation.getPhenotype();
+			  PhenotypeCharacter phenotypeCharacter = null;
+			  if (phenotype != null) {
+				  List<PhenotypeCharacter> phenotypeCharacters = phenotype.getPhenotypeCharacterList();
+				  if ((phenotypeCharacters != null) && (phenotypeCharacters.size() > 0)) {
+					  // we only load the first character in the phenotype for now
+					  phenotypeCharacter = phenotypeCharacters.get(0);
+				  }
+			  }	  
+			  OntologyManager ontologyManager = OntologyManager.inst();
+			  String entityID = null;
+			  String qualityID = null;
+			  if (phenotypeCharacter != null) {
+				  Bearer bearer = phenotypeCharacter.getBearer();
+				  if (bearer != null) {
+					  Typeref typeref = bearer.getTyperef();
+					  if (typeref != null) {
+						  entityID = typeref.getAbout();
+					  }
+				  }
+				  List<Quality> qualityList = phenotypeCharacter.getQualityList();
+				  if ((qualityList != null) && (qualityList.size() > 0)) {
+					  // we only load the first quality for now
+					  Quality quality = qualityList.get(0);
+					  Typeref qualityTyperef = quality.getTyperef();
+					  if (qualityTyperef != null) {
+						  qualityID = qualityTyperef.getAbout();
+					  }
+				  }
+			  }
+			  if (entityID != null) {
+				  try {
+					  character.setEntity(ontologyManager.getOboClassWithExcep(entityID));
+				  }
+				  catch (TermNotFoundException e) {
+					  System.out.println("Entity term not found " + e);
+				  }
+			  }
+			  if (qualityID != null) {
+				  try {
+					  character.setQuality(ontologyManager.getOboClassWithExcep(qualityID));
+				  }
+				  catch (TermNotFoundException e) {
+					  System.out.println("Quality term not found " + e);
+			  	}
+			  }
+			 charList.add(character); 
+		  }
+		  CharacterListManager.inst().setCharacterList(this,charList);
+	  }
+	  catch (XmlException e) {
+		  System.out.println("Failed to load file as phenoxml " + e);
+	  }
+	  catch (IOException e) {
+		  System.out.println("PhenoXml read failure " + e);
+	  }
+  }
 
   public void commit(CharacterListI charList) {
 
