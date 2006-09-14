@@ -19,7 +19,7 @@ class FileMenu extends JMenu {
   }
 
   private void init() {
-    LoadActionListener actionListener = new LoadActionListener();
+    LoadSaveActionListener actionListener = new LoadSaveActionListener();
 
     loadMenuItem = new JMenuItem("Load Data");
     loadMenuItem.setEnabled(Config.inst().hasDataAdapters());
@@ -35,7 +35,7 @@ class FileMenu extends JMenu {
 
   }
 
-  private class LoadActionListener implements ActionListener {
+  private class LoadSaveActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       if (!Config.inst().hasDataAdapters()) {
         System.out.println("no data adapter to load with");

@@ -18,6 +18,8 @@ import org.apache.log4j.xml.DOMConfigurator;
 
 import phenote.config.Config;
 import phenote.config.ConfigException;
+import phenote.datamodel.CharacterListI;
+import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.OntologyDataAdapter;
 import phenote.gui.CharacterTablePanel;
 import phenote.gui.GridBagUtil;
@@ -54,9 +56,11 @@ public class Phenote {
     try { DOMConfigurator.configure(Config.inst().getLogConfigUrl()); }
     catch (FileNotFoundException e) { LOG.error(e.getMessage()); }
     phenote.initOntologies();
-    phenote.loadFromCommandLine();  // cant load data til ontologies loaded i think
-
-    phenote.initGui();
+    phenote.loadFromCommandLine();  // aft ontols, reads from cmd line if specified
+    if (phenote.commandLine.writeIsSpecified())
+      phenote.writeFromCommandLine();
+    else // init gui if not writing (& reading) from cmd line
+      phenote.initGui();
   }
 
   /** private constructor -> singleton */
@@ -77,8 +81,19 @@ public class Phenote {
   private void loadFromCommandLine() {
     //LOG.debug("read spec "+commandLine.readIsSpecified());
     if (!commandLine.readIsSpecified()) return;
+    // LOG.info("Reading "+blah+" from command line");
     try { commandLine.getReadAdapter().load(); }
     catch (Exception e) { LOG.error("Failed to do load via command line "+e); }
+  }
+
+  private void writeFromCommandLine() {
+    if (!commandLine.writeIsSpecified()) return;
+   try { commandLine.getWriteAdapter().commit(getCharList()); }
+    catch (Exception e) { LOG.error("Failed to do write via command line "+e); }
+  }
+
+  private CharacterListI getCharList() {
+    return CharacterListManager.inst().getCharacterList();
   }
   
   public void initGui() {

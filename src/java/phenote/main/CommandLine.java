@@ -103,6 +103,19 @@ public class CommandLine {
     return adapter;
   }
 
+  /** If output/write was specified on the command line this returns the 
+   * correctly-initialized write data adapter for it.  Note that the
+   * adapter returned may be the same object as that returned by 
+   * <code>getReadAdapter()</code>
+   * @return null if no read adapter specified on command line. */
+  DataAdapterI getWriteAdapter() throws Exception {
+    // LOG.debug("CommandLine: getWriteAdapter called\n");
+    IOOptions ioo = getWriteOptions();
+    DataAdapterI adapter = ioo.getAdapter();
+    adapter.setAdapterValue(ioo.getAdapterValue());
+    return adapter;
+  }
+
 
   /** INPUT FILE COMMAND OPTION */
   private class InputFileCommandOption extends CommandOption {
