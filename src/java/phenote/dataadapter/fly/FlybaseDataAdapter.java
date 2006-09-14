@@ -17,10 +17,15 @@ import phenote.dataadapter.CharacterListManager;
  Pheno-Syntax data adapter? Pheno Syntax need to be able to write to a file
  as well as also write to flybases proforma app - i think those are 2 different
  data adapters sharing Syntax objects - PhenoSyntaxFileAdapter 
- and FlybaseProformaAdapter or something like that - todo... */
+ and FlybaseProformaAdapter or something like that - todo... 
+ this is really a serialized clipboard adapter at this point - i think
+flybase is going to be more tightly integrated */
 public class FlybaseDataAdapter implements DataAdapterI {
 
   private static ClipboardOwner clipboardOwner = new PhenoteClipboardOwner();
+
+  /** no adapter value (ie filename)  to set for clipboard - no op */
+  public void setAdapterValue(String filename) {}
 
   public void commit(CharacterListI charList) {
     System.out.println("copying character list to clipboard");
