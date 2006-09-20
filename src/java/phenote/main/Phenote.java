@@ -3,6 +3,7 @@ package phenote.main;
 // package phenote.main?
 
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.BoxLayout;
@@ -38,6 +39,7 @@ public class Phenote {
   private static Phenote phenote;
   private TermInfo termInfo;
   private CommandLine commandLine = CommandLine.inst();
+  private JFrame frame;
   
 
   public static void main(String[] args) {
@@ -152,8 +154,10 @@ public class Phenote {
     return configFile;
   }
 
+  public Frame getFrame() { return frame; }
+
   private void makeWindow() {
-    JFrame frame = new JFrame("Phenote "+VERSION); // this may be changed to applet...
+    frame = new JFrame("Phenote "+VERSION); // this may be changed to applet...
     frame.getContentPane().add(makeMainPanel());
     MenuManager.createMenuManager(frame);
     frame.setPreferredSize(new Dimension(1000,550));

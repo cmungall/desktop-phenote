@@ -7,6 +7,12 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 
 // or just Field? or CharField? eventually separate class?
 // associates enum & ontologies
+// CharField doesnt handle instance data, just specifies what ontologies are 
+// associated with what parts of the generic character
+// CharFieldValue handles instance data
+// CharField gets specified in the configuration - but oddly enough it better
+// no contradit CharacterI - as in OBOClasses better have ontologies - this is
+// funny i think
 public class CharField {
 
   private List<Ontology> ontologyList = new ArrayList<Ontology>(3);
@@ -74,6 +80,15 @@ public class CharField {
     }
     return null;
   }
+
+  /** whether this field allows for post composition - from config (todo) */
+  public boolean postCompAllowed() {
+    // return postCompAllowed; //eventually
+    return charFieldEnum == CharFieldEnum.ENTITY; // for now
+  }
+
+  // set whether post composition allowed (from config) */
+  // public void setPostCompAllowed(boolean allowed) { postCompAllowed = allowed; }
 }
 
     // is this getting silly? abstract? --> char field value i think

@@ -3,16 +3,20 @@ package phenote.datamodel;
 import org.geneontology.oboedit.datamodel.OBOClass;
 
 /** Characters are the EAV building blocks of a Phenotype. Previously this
-    was called a Phenotype which was a misnomer */
+    was called a Phenotype which was a misnomer 
+    Should the Character datamodel be a generic list of CharFieldValues?
+    That can be free text or from ontologies? hmmmm..... im starting to think
+    this datamodel is too hardwired - hmmmm....*/
 public class Character implements CharacterI, Cloneable {
 
+  // List<CharFieldValue> charFields??? or List<CharField>
 //   private String entity="";
 //   private String quality="";
 //   private String geneticContext="";
   private String pub;
   private String genotype=""; // eventually Genotype class
   // OboClass? OntologyTerm?...
-  private OBOClass entity; // CharFieldValue?
+  private OBOClass entity; // CharFieldValue???
   private OBOClass quality;
   private OBOClass geneticContext;
 

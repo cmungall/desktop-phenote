@@ -46,7 +46,6 @@ public class TermInfo {
   private TermHyperlinkListener termHyperlinkListener;
   // current obo class being navigated
   private OBOClass currentOboClass;
-  private OBOClass previousOboClass=null; // for undo - not implemented yet
 
   
   public TermInfo(TermPanel termPanel) {
@@ -129,9 +128,9 @@ public class TermInfo {
 
     CharFieldEnum cfe = OntologyManager.inst().getCharFieldEnumForOboClass(currentOboClass);
     
-    UpdateTransaction ut = new UpdateTransaction(ch,cfe,currentOboClass,previousOboClass);
+    UpdateTransaction ut = new UpdateTransaction(ch,cfe,currentOboClass);
     EditManager.inst().updateModel(this,ut);
-    previousOboClass = currentOboClass;
+    //previousOboClass = currentOboClass;
   }
   
   /** for testing */

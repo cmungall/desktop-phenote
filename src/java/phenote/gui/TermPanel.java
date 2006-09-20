@@ -11,6 +11,7 @@ import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.text.Document;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -36,9 +37,19 @@ public class TermPanel extends JPanel {
   private List<CharFieldGui> charFieldGuiList = new ArrayList<CharFieldGui>(8);
   private SearchParamPanel searchParamPanel; // searchParamManager?
   private OntologyManager ontologyManager = OntologyManager.inst();
+  private JPanel fieldPanel;
+  private SearchParamsI searchParams;
 
   public TermPanel() {
-    init();
+    this(true);
+    //initAllOntologies();
+  }
+  // false for post comp panel
+  public TermPanel(boolean doAllOntologies) {
+    fieldPanel = new JPanel(new GridBagLayout());
+    add(fieldPanel); // default flow layout?
+    if (doAllOntologies)
+      initAllOntologies();
   }
 
   /** from selection in plump table - hmmm mvc - get from model change event - 
@@ -49,24 +60,25 @@ public class TermPanel extends JPanel {
       fieldGui.setValueFromChar(character);
   }
 
-  private void init() {
-    JPanel fieldPanel = new JPanel(new GridBagLayout());
+  private void initAllOntologies() {
 
     for (CharField charField : ontologyManager.getCharFieldList()) {
       SearchParamsI s = getSearchParamPanel().getSearchParams();
-      CharFieldGui gui = new CharFieldGui(charField,fieldPanel,this); // adds to panel
+      CharFieldGui gui = new CharFieldGui(charField,this); // adds to panel
       charFieldGuiList.add(gui);
     }
 
-    add(fieldPanel);  
-
-    // search param panel
+    // search param panel - maybe search panel should be added to main frame?
     add(getSearchParamPanel().getPanel());
   }
 
   SearchParamsI getSearchParams() {
-    return getSearchParamPanel().getSearchParams();
+    if (searchParams == null)
+      searchParams = getSearchParamPanel().getSearchParams();
+    return searchParams;
   }
+
+  void setSearchParams(SearchParamsI sp) { searchParams = sp; }
 
   SearchParamPanel getSearchParamPanel() {
     if (searchParamPanel == null)
@@ -74,24 +86,28 @@ public class TermPanel extends JPanel {
     return searchParamPanel;
   }
 
-  JLabel addLabel(String labelString,Container parent) {
-    return addLabel(labelString,parent,false); // false - no ont chooser
+  JLabel addLabel(String labelString) {//,Container parent) {
+    return addLabel(labelString,false); // false - no ont chooser
   }
 
-  JLabel addLabel(String labelString,Container parent,boolean hasOntChooser) {
+  JLabel addLabel(String labelString,boolean hasOntChooser) {
     JLabel label = new JLabel(labelString);
     GridBagConstraints gbc = makeLabelConstraint(hasOntChooser);
-    parent.add(label,gbc);
+    fieldPanel.add(label,gbc);
     return label;
   }
 
   /** if a field has more than one ontology than theres a combo to choose the ontology*/
-  void addOntologyChooser(JComboBox ontologyChooser,Container parent) {
-    parent.add(ontologyChooser,makeOntologyChooserConstraint());
+  void addOntologyChooser(JComboBox ontologyChooser) {
+    fieldPanel.add(ontologyChooser,makeOntologyChooserConstraint());
   }
   
-  void addFieldGui(JComponent comp,Container parent) {
-    parent.add(comp,makeFieldConstraint());
+  void addFieldGui(JComponent comp) {
+    fieldPanel.add(comp,makeFieldConstraint());
+  }
+
+  void addPostCompButton(JButton pc) {
+    fieldPanel.add(pc,makePostCompConstraint());
   }
 
   private int gridbagRow = 0;
@@ -115,13 +131,18 @@ public class TermPanel extends JPanel {
     return GridBagUtil.makeWidthConstraint(x,gridbagRow++,1,3,width);
   }
 
+  // put button at end of regular row? or beginning of pc row?
+  private GridBagConstraints makePostCompConstraint() {
+    return GridBagUtil.makeWidthConstraint(3,gridbagRow-1,1,3,2); // width 1
+  }
   
 
-  // for test and term info to listen - move to test code?
+  // for test to listen - move to test code?
   AutoComboBox getEntityComboBox() {
     return getComboBox(CharFieldEnum.ENTITY);
   }
   
+  // for testing - move to test?
   private AutoComboBox getComboBox(CharFieldEnum cfe) {
     for (CharFieldGui cfg : charFieldGuiList)
       if (cfg.getCharFieldEnum() == cfe)

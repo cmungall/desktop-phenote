@@ -18,6 +18,7 @@ public class UpdateTransaction { // extends Transaction?
 
   public UpdateTransaction(CharacterI c, CharFieldEnum e, String newVal, String old) {
     newValue = new CharFieldValue(newVal,c,e);
+    // change this to get old from model - dont need to pass in
     oldValue = new CharFieldValue(old,c,e);
 //     character = c;
 //     charFieldEnum = e;
@@ -27,10 +28,20 @@ public class UpdateTransaction { // extends Transaction?
 
   // public UpdateTransaction(CharFieldValue new, CharFieldValue old) ?
 
-  public UpdateTransaction(CharacterI c, CharFieldEnum e, OBOClass newVal, OBOClass old) {
+  /** actually maybe dont need to pas in old val - just query for it */
+  public UpdateTransaction(CharacterI c,CharFieldEnum e,OBOClass newVal) {
     newValue = new CharFieldValue(newVal,c,e);
-    oldValue = new CharFieldValue(old,c,e);
+    //oldValue = new CharFieldValue(old,c,e);
+    oldValue = e.getValue(c);
   }
+  // hmmmmmmm....
+// /** if isDifferentia is true than update is for differentia of a post composed term*/
+//   public UpdateTransaction(CharacterI c, CharFieldEnum e, boolean isDifferentia,
+//                            OBOClass newVal, OBOClass old) {
+//     newValue = new CharFieldValue(newVal,c,e,isDifferentia);
+//     oldValue = new CharFieldValue(old,c,e,isDifferentia);
+
+//   }
 
   public void editModel() {
     newValue.editModel();

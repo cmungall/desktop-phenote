@@ -37,7 +37,6 @@ import phenote.gui.selection.SelectionManager;
 
 class AutoComboBox extends JComboBox {
 
-  //private String ontology; // --> enum!
   private Ontology ontology;
   private boolean changingCompletionList = false;
   private boolean keyTyped = false;
@@ -49,12 +48,15 @@ class AutoComboBox extends JComboBox {
   //private AutoTextFieldEditor autoTextFieldEditor;
   private AutoTextField autoTextField;
   private CharField charField;
+  ///** Whether differentia of a post composed term */
+  //private boolean isDifferentia = false;
 
-  AutoComboBox(Ontology ontology,SearchParamsI sp) {
+  /** @param editModel if false then ACB doesnt edit model directly (post comp) */
+  AutoComboBox(Ontology ontology,SearchParamsI sp,boolean editModel) {
     // this inner class enables retrieving of JList for mouse over
     // this will probably throw errors if non metal look & feel is used
-    //setFont(new Font("Courier",Font.PLAIN,12));
     setUI(new MetalListComboUI());
+    //setFont(new Font("Courier",Font.PLAIN,12));
 
     setOntology(ontology);
     searchParams = sp; // singleton access? part of ontology?
@@ -65,14 +67,8 @@ class AutoComboBox extends JComboBox {
 
     addCompletionListListener(new CompletionListListener());
 
-    // just for genetic context for now? or everything?
-    addActionListener(new ComboBoxActionListener());
-
-    // mac bug workaround where list covers up textfield on < 12 items no scroll
-    // from http://www.orbital-computer.de/JComboBox/#usage
-    // it does note this may cause class cast excpetions??
-    // it does cause exception when down arror is typed... hmmm...
-    //setUI(new BasicComboBoxUI()); // now setting metal look & feel for whole app
+    if (editModel) // ComboBoxActionListener edits the model
+      addActionListener(new ComboBoxActionListener());
 
   }
 
@@ -81,6 +77,10 @@ class AutoComboBox extends JComboBox {
   //void setSearchParams(SearchParamsI sp) { searchParams = sp; }
 
   void setCharField(CharField charField) { this.charField = charField; }
+  
+  ///** If true than the auto combo is for setting the differentia in a post comp term,
+  //    if false (default) than no post comp or genus in post comp */
+  //void setIsDifferentia(boolean isDiff) { isDifferentia = isDiff; }
 
   /** Set text in editable text field of j combo (eg from table select) */
   void setText(String text) {
@@ -111,32 +111,33 @@ class AutoComboBox extends JComboBox {
   //private Ontology getOntology() { return ontology; }
 
   /** Return true if input String matches name of OBOClass in
-   * defaultComboBoxModel - rename this?
+   * defaultComboBoxModel - rename this? this isnt used anymore - delete?
    */
-  boolean isInCompletionList(String input) {
-    if (defaultComboBoxModel == null)
-      return false;
-    if (input == null) {
-      return false;
-    }
-    // this is wrong as it holds OBOClasses not Strings!
-    //return defaultComboBoxModel.getIndexOf(input) != -1;
-    // have to go through all OBOClasses and extract there names - bummer
-    // most likely input is selected one check that first
-    OBOClass selectedClass = getSelectedCompListOboClass();
-    if (selectedClass != null && input.equals(selectedClass.getName()))
-      return true;
-    // selected failed(is this possible?) - try everything in the list then...
-    for (int i=0; i<defaultComboBoxModel.getSize(); i++) {
-      if (input.equals(getCompListOboClass(i).getName()))
-        return true;
-    }
-    return false;
-  }
+//   boolean isInCompletionList(String input) {
+//     if (defaultComboBoxModel == null)
+//       return false;
+//     if (input == null) {
+//       return false;
+//     }
+//     // this is wrong as it holds OBOClasses not Strings!
+//     //return defaultComboBoxModel.getIndexOf(input) != -1;
+//     // have to go through all OBOClasses and extract there names - bummer
+//     // most likely input is selected one check that first
+//     OBOClass selectedClass = getSelectedCompListOboClass();
+//     if (selectedClass != null && input.equals(selectedClass.getName()))
+//       return true;
+//     // selected failed(is this possible?) - try everything in the list then...
+//     for (int i=0; i<defaultComboBoxModel.getSize(); i++) {
+//       if (input.equals(getCompListOboClass(i).getName()))
+//         return true;
+//     }
+//     return false;
+//   }
  
   /** This gets obo class selected in completion list - not from text box 
-      Returns null if nothing selected - can happen amidst changing selection */
-  private OBOClass getSelectedCompListOboClass() {
+      Returns null if nothing selected - can happen amidst changing selection 
+      also used by PostCompGui */
+  OBOClass getSelectedCompListOboClass() {
     if (defaultComboBoxModel == null)
       return null;
     Object obj = defaultComboBoxModel.getSelectedItem();
@@ -346,6 +347,7 @@ class AutoComboBox extends JComboBox {
     getUIJList().addListSelectionListener(lsl);
   }
 
+  // this is for mouse over term info i believe - changes selection
   private class CompletionListListener implements ListSelectionListener {
     public void valueChanged(ListSelectionEvent e) {
       Object source = e.getSource();
@@ -412,22 +414,14 @@ class AutoComboBox extends JComboBox {
   
   
 
-   /** Listens for actions from combo boxes and puts terms into table 
-   * actions come from mouse select of term as well as return & tab 
-   change this - should only modify character - could be done in ACB except
-   gt text field which isnt done here anyways - then send out CharacterChangeEvent
-  for table to get and refresh itself */
+   /** Listens for actions from combo boxes and edits model/character 
+   * actions come from mouse select of term as well as return & tab  */
   private class ComboBoxActionListener implements ActionListener {
-    //private String previousModelValue=null;
-    private OBOClass previousOboClass=null;
+    //private OBOClass previousOboClass=null;
 
-    private ComboBoxActionListener() {//String ontology,AutoComboBox cb) {
-      //this.ontology = ontology;
-      //comboBox = cb;
-    }
+    private ComboBoxActionListener() {}
     public void actionPerformed(ActionEvent e) {
       editCharField();
-      //setTableFromField(ontology);
     }
 
     /** edits Character field via EditManager. 
@@ -443,18 +437,33 @@ class AutoComboBox extends JComboBox {
 
       if (charField == null)  return; // shouldnt happen
 
-      CharacterI c = getSelectedCharacter();
+
+      CharacterI c = getSelectedCharacter(); // from selectionManager
       CharFieldEnum cfe = charField.getCharFieldEnum();
-      UpdateTransaction ut = new UpdateTransaction(c,cfe,oboClass,previousOboClass);
+      //OBOClass previousOboClass = cfe.getValue(c).getOboClass();
+      // isDifferentia boolean?
+      UpdateTransaction ut = new UpdateTransaction(c,cfe,oboClass);
       EditManager.inst().updateModel(this,ut);
       
-      previousOboClass = oboClass; // for undo 
+      // oh my this is presumptious - assumes only editor, but now theres post
+      // comp gui - should get previous from char itself! of course silly
+      //previousOboClass = oboClass; // for undo 
     }
   }
 
 }
 
 // GARBAGE
+    // mac bug workaround where list covers up textfield on < 12 items no scroll
+    // from http://www.orbital-computer.de/JComboBox/#usage
+    // it does note this may cause class cast excpetions??
+    // it does cause exception when down arror is typed... hmmm...
+    //setUI(new BasicComboBoxUI()); // now setting metal look & feel for whole app
+//String ontology,AutoComboBox cb) {
+    //private String previousModelValue=null;
+      //this.ontology = ontology;
+      //comboBox = cb;
+         //setTableFromField(ontology);
       //t.editModel();  // or charField.editModel?
       // CharacterChangeEvent e = new CharacterChangeEvent(t);
       // OR CharEditManager.inst().updateModel(c,cfe,input,previousModelValue);

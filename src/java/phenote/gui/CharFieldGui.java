@@ -7,11 +7,14 @@ import java.awt.Container;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.DocumentEvent;
+
+import org.geneontology.oboedit.datamodel.OBOClass;
 
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
@@ -37,16 +40,30 @@ class CharFieldGui {
   private CharField charField;
   private TermPanel termPanel;
   private JComboBox ontologyChooserCombo;
+  private String label;
+  private boolean editModel = true;
+  
 
+  CharFieldGui(CharField charField, TermPanel tp) {/*Container parent,*/
+    init(charField,tp);
+  }
 
-  CharFieldGui(CharField charField,Container parent, TermPanel tp) {
-    this.charField = charField;
+  /** @param editModel - whether charFieldGui edits model directly - for post comp it
+      doesnt */
+  CharFieldGui(CharField cf,TermPanel tp,String label,boolean editModel) {
+    this.label = label;
+    this.editModel = editModel;
+    init(cf,tp);
+  }
+
+  private void init(CharField cf, TermPanel tp) {
+    charField = cf;
     termPanel = tp;
     if (!charField.hasOntologies())
-      initTextField(charField.getName(),parent);
+      initTextField(charField.getName());//,parent);
     //else if (charField.hasOneOntology())
     else
-      initCombo(charField,parent);
+      initCombo(charField);//,parent);
 
     // do just for text field - or both??? listens for selection (eg from table)
     SelectionManager.inst().addCharSelectionListener(new FieldCharSelectListener());
@@ -73,7 +90,7 @@ class CharFieldGui {
   // hasOntology?
   boolean isCombo() { return isCombo; }
 
-  /** Set the gui from the model */
+  /** Set the gui from the model (selection) */
   void setValueFromChar(CharacterI character) {
     if (character == null) {
       System.out.println("ERROR: setting to null character");
@@ -91,50 +108,73 @@ class CharFieldGui {
   }
 
 
+  private String getLabel() {
+    if (label == null) {
+      if (charField.hasMoreThanOneOntology())
+        label = charField.getName();
+      else
+        label = charField.getFirstOntology().getName();
+    }
+    return label;
+  }
 
-
-  private void initCombo(CharField charField, Container parent) {
+  private void initCombo(CharField charField) { //, Container parent) {
     isCombo = true;
 
     String name = charField.getFirstOntology().getName();
-    JLabel label = termPanel.addLabel(name,parent,charField.hasMoreThanOneOntology());
-    // if has more than one ontology(entity) than add ontology choose list
-    if (charField.hasMoreThanOneOntology()) {
-      label.setText(charField.getName());
-      initOntologyChooser(charField,parent);
-    }
+    JLabel label = termPanel.addLabel(getLabel(),charField.hasMoreThanOneOntology());
 
-    // assume 1 ontology for now...
-    //initCombo(charField.getFirstOntology(),parent);
-    // CHANGE THIS TO DO MULTIPLE ONTOLOGIES IF NEED BE
-    comboBox = new AutoComboBox(charField.getFirstOntology(),termPanel.getSearchParams());
-    termPanel.addFieldGui(comboBox,parent);
+    // if has more than one ontology(entity) then add ontology choose list
+    if (charField.hasMoreThanOneOntology())
+      initOntologyChooser(charField);
+
+    // editModel - if false then ACB wont directly edit model (post comp)
+    comboBox = new AutoComboBox(charField.getFirstOntology(),
+                                termPanel.getSearchParams(),editModel);
+    termPanel.addFieldGui(comboBox);
+
     comboBox.setCharField(charField);
+
+    // POST COMPOSITION button
+    if (charField.postCompAllowed()) {
+      JButton postCompButton = new JButton("Comp"); // ???
+      postCompButton.addActionListener(new PostCompListener());
+      termPanel.addPostCompButton(postCompButton);
+      // keep this here for now - may reinstate - this is inpanel post comp
+//       // todo -> get pc differentia ontologies from config, >1 add chooser
+//       AutoComboBox postCompCombo =
+//         new AutoComboBox(charField.getFirstOntology(),termPanel.getSearchParams());
+//       // postCompCombo.setVisible(false); // initial state hidden - layout?
+//       postCompCombo.setCharField(charField);
+//       postCompCombo.setIsDifferentia(true); // differentia of genus in post comp
+//       termPanel.addFieldGui(postCompCombo);
+    }
   }
 
-  private void initOntologyChooser(CharField charField,Container parent) {
+  private void initOntologyChooser(CharField charField) {
     ontologyChooserCombo = new JComboBox();
     // add listener....
     for (Ontology o : charField.getOntologyList()) {
       ontologyChooserCombo.addItem(o.getName());
     }
     ontologyChooserCombo.addActionListener(new OntologyChooserListener());
-    termPanel.addOntologyChooser(ontologyChooserCombo,parent);
+    termPanel.addOntologyChooser(ontologyChooserCombo);
   }
 
-  private void initTextField(String label,Container parent) {
+  private void initTextField(String label) {
     isCombo = false;
-    termPanel.addLabel(label,parent);
+    termPanel.addLabel(label);
     textField = new JTextField(25);
     textField.setEditable(true);
     // addGenericDocumentListener...
     textField.getDocument().addDocumentListener(new TextFieldDocumentListener());
-    termPanel.addFieldGui(textField,parent);
+    termPanel.addFieldGui(textField);
 
     textField.addKeyListener(new TextKeyListener());
 
   }
 
+  /** key listener for free text fields */
   private class TextKeyListener extends java.awt.event.KeyAdapter {
     public void keyPressed(java.awt.event.KeyEvent e) {
       // on a mac Command-V is paste. this aint so with java/metal look&feel
@@ -169,7 +209,7 @@ class CharFieldGui {
   CharFieldEnum getCharFieldEnum() { return charField.getCharFieldEnum(); }
 
   // separate char text field class?
-  /** This is where the model gets updated */
+  /** This is where the model gets updated (for free text fields) */
   private class TextFieldDocumentListener implements DocumentListener {
     private String previousVal = null;
     public void changedUpdate(DocumentEvent e) { updateModel(); }
@@ -182,6 +222,7 @@ class CharFieldGui {
       //characterTablePanel.setSelectedGenotype(genotype);
       CharacterI c = SelectionManager.inst().getSelectedCharacter();
       // i believe this isnt using oboClass as we just have string
+      // of course it isnt this is free text
       String v = getText();
       UpdateTransaction ut = new UpdateTransaction(c,getCharFieldEnum(),v,previousVal);
       EditManager.inst().updateModel(CharFieldGui.this,ut);
@@ -203,6 +244,22 @@ class CharFieldGui {
     }
   }
 
+  /** I think post-comp should only be closeable if its empty (in expand collapse
+   inframe case - now window) */
+  private class PostCompListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      new PostCompGui(charField,termPanel.getSearchParams());
+    }
+  }
+
+  /** This is for ontology char fields, freetext returns null. returns obo class
+      selected in AutoComboBox if there is one */
+  OBOClass getSelectedOboClass() throws Exception {
+    if (!isCombo) throw new Exception("Free text field has no OBO Class");
+    OBOClass term = comboBox.getSelectedCompListOboClass();
+    if (term == null) throw new Exception("No term selected");
+    return term;
+  }
 }
 
 //   private void addDocumentListener(DocumentListener dl) {
