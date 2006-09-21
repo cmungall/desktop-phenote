@@ -3,6 +3,7 @@ package phenote.dataadapter.phenosyntax;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
 import org.geneontology.oboedit.datamodel.OBOClass;
 
 import phenote.datamodel.Character;
@@ -30,6 +31,7 @@ public class PhenoSyntaxChar {
     character = ch;
   }
 
+  // WRITE
   String getPhenoSyntaxString() throws BadCharException {
     if (phenoSyntaxString == null) {
       phenoSyntaxString = makeSyntaxString();
@@ -89,6 +91,8 @@ public class PhenoSyntaxChar {
     int colonIndex = id.indexOf(":");
     return id.substring(0,colonIndex+1); // +1 retain colon
   }
+
+
 
   // READ
 
@@ -156,14 +160,19 @@ public class PhenoSyntaxChar {
         System.out.println("pheno syntax tag "+tag+" not recognized (value "+value+")");
     }
     catch (OntologyManager.TermNotFoundException e) {
-      System.out.println("Term not found for tag "+tag+" value "+value+" in loaded "
-                         +"ontologies - check syntax with ontology files.");
+      log().error("Term not found for tag "+tag+" value "+value+" in loaded "
+                  +"ontologies - check syntax with ontology files.");
       return;
     }
       
   }
 
-  
 
   CharacterI getCharacter() { return character; }
+
+  private Logger log;
+  private Logger log() {
+    if (log == null) log = Logger.getLogger(getClass());
+    return log;
+  }
 }

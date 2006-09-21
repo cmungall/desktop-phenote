@@ -63,7 +63,8 @@ public class OntologyManager {
   }
 
   /** Searches all ontologies for id - this could be even more savvy and utilize
-      the id prefix AO,GO,PATO... */
+      the id prefix AO,GO,PATO... 
+      Should this deal with post comp? if ^ then create a post comp term on fly? */
   public OBOClass getOboClass(String id) {
     OBOClass oboClass;
 // this seems to be the sole reason for ontology list - silly!

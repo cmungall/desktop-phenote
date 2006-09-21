@@ -42,6 +42,7 @@ class CharFieldGui {
   private JComboBox ontologyChooserCombo;
   private String label;
   private boolean editModel = true;
+  private boolean doPostComp = true;
   
 
   CharFieldGui(CharField charField, TermPanel tp) {/*Container parent,*/
@@ -49,10 +50,13 @@ class CharFieldGui {
   }
 
   /** @param editModel - whether charFieldGui edits model directly - for post comp it
-      doesnt */
-  CharFieldGui(CharField cf,TermPanel tp,String label,boolean editModel) {
+      doesnt 
+      @param doPostComp if false override configuration and dont show post comp button*/
+  CharFieldGui(CharField cf,TermPanel tp,String label,boolean editModel,
+               boolean doPostComp) {
     this.label = label;
     this.editModel = editModel;
+    this.doPostComp = doPostComp;
     init(cf,tp);
   }
 
@@ -135,8 +139,11 @@ class CharFieldGui {
 
     comboBox.setCharField(charField);
 
-    // POST COMPOSITION button
-    if (charField.postCompAllowed()) {
+    // POST COMPOSITION button - only get post comp button if both configged for it
+    // AND doPostComp flag is true - PostCompGui sets to false - no post comp of 
+    // post comp yet - and if so probably would do in same window not multiple
+    // windows anyways
+    if (charField.postCompAllowed() && doPostComp) {
       JButton postCompButton = new JButton("Comp"); // ???
       postCompButton.addActionListener(new PostCompListener());
       termPanel.addPostCompButton(postCompButton);

@@ -50,12 +50,13 @@ class PostCompGui {
     TermPanel compTermPanel = new TermPanel(false); // (searchParams)?
     compTermPanel.setSearchParams(searchParams);
     
-    // false - dont edit model
-    genusField = new CharFieldGui(charField,compTermPanel,"Genus",false);
+    // false - dont edit model, false - no post comp button
+    genusField = new CharFieldGui(charField,compTermPanel,"Genus",false,false);
 
     // Relationship?? stripped down ontology?
 
-    differentiaField = new CharFieldGui(charField,compTermPanel,"Differentia",false);
+    differentiaField =
+      new CharFieldGui(charField,compTermPanel,"Differentia",false,false);
 
     dialog.add(compTermPanel);
     addButtons();
