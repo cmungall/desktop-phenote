@@ -65,6 +65,7 @@ class PostCompGui {
     dialog.add(compTermPanel);
     addButtons();
     dialog.pack();
+    dialog.setLocationRelativeTo(owner);
     dialog.setVisible(true);
   }
 
