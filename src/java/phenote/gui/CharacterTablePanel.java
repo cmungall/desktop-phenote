@@ -39,7 +39,7 @@ public class CharacterTablePanel extends JPanel {
   private JTable characterTable;
   private CharacterTableModel characterTableModel;
   private TermPanel termPanel;
-  private JButton newButton;
+  //private JButton newButton;
   private JButton copyButton;
   private JButton deleteButton;
   private JButton commitButton;
@@ -83,7 +83,7 @@ public class CharacterTablePanel extends JPanel {
 
     ActionListener al = new ButtonActionListener();
 
-    newButton = addButton("New",al,buttonPanel);
+    addButton("New",al,buttonPanel); //newButton = 
     copyButton = addButton("Copy",al,buttonPanel);
     deleteButton = addButton("Delete",al,buttonPanel);
     // should we only add if have data adapter - or disable at least?

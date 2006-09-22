@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOProperty;
+import org.geneontology.oboedit.datamodel.OBORestriction;
 import org.geneontology.oboedit.datamodel.impl.OBOClassImpl;
 import org.geneontology.oboedit.datamodel.impl.OBOPropertyImpl;
 import org.geneontology.oboedit.datamodel.impl.OBORestrictionImpl;
@@ -36,7 +37,7 @@ class PostCompGui {
   private CharField charField;
   private JDialog dialog;
   private CharFieldGui genusField;
-  private CharFieldGui differentiaField;
+  private CharFieldGui diffField;
 
   PostCompGui(CharField charField,SearchParamsI searchParams) {
     this.charField = charField;
@@ -55,13 +56,69 @@ class PostCompGui {
 
     // Relationship?? stripped down ontology?
 
-    differentiaField =
+    diffField =
       new CharFieldGui(charField,compTermPanel,"Differentia",false,false);
+
+    setGuiFromModel();
 
     dialog.add(compTermPanel);
     addButtons();
     dialog.pack();
     dialog.setVisible(true);
+  }
+
+  private void setGuiFromModel() {
+    OBOClass currentTerm = getModelTerm();
+    if (currentTerm == null) return;
+    
+    //genusField.setText(getGenusString(currentTerm));
+    genusField.setOboClass(getGenusTerm(currentTerm));
+    //if (modelHasDiff(currentTerm))
+    try { diffField.setOboClass(getDiffTerm(currentTerm)); } 
+    catch (Exception e) {} // throws if no diff term
+    
+  }
+
+  private OBOClass getModelTerm() {
+    // there should be convenience method for this
+    CharacterI c = SelectionManager.inst().getSelectedCharacter();
+    return charField.getCharFieldEnum().getValue(c).getOboClass();
+  }
+
+  // util fn?
+  private boolean isPostCompTerm(OBOClass term) {
+    for (Object o : term.getParents()) {
+      if ( ((OBORestriction)o).completes() )
+        return true;
+    }
+    return false;
+  }
+
+  //private String getGenusStr(OBOClass term){return getGenusTerm(term).getName();}
+
+  /** for non post comp returns term itself */
+  private OBOClass getGenusTerm(OBOClass term) {
+    if (isPostCompTerm(term)) {
+      for (Object o : term.getParents()) {
+        OBORestriction r = (OBORestriction)o;
+        if (r.completes() && r.getType() == OBOProperty.IS_A)
+          return (OBOClass)r.getParent(); // check downcast?
+      }
+      // error msg?
+    }
+    return term;
+  }
+
+  /** Throws exception if no diff term - for now only returning one diff term
+      can there be more than one */
+  private OBOClass getDiffTerm(OBOClass term) throws Exception {
+    if (!isPostCompTerm(term)) throw new Exception();
+    for (Object o : term.getParents()) {
+      OBORestriction r = (OBORestriction)o;
+      if (r.completes() && r.getType() != OBOProperty.IS_A)
+        return (OBOClass)r.getParent(); // check downcast?
+    }
+    throw new Exception(); // no diff term found
   }
 
   private void addButtons() {
@@ -87,8 +144,9 @@ class PostCompGui {
         OBOClass pc = makePostCompTerm();
         commitTerm(pc);
       } catch (Exception ex) {
-        String m = "Post composition failed "+ex.getMessage();
-        log().error(m);
+        String m = "Post composition not fully filled in ";
+        if (ex.getMessage()!=null) m+=ex.getMessage();
+        log().debug(m); // ??
         JOptionPane.showMessageDialog(dialog,m,"error",JOptionPane.ERROR_MESSAGE);
         return; // dont dispose
       }
@@ -98,17 +156,20 @@ class PostCompGui {
 
   private OBOClass makePostCompTerm() throws Exception {
     // check that we have a valid genus & differentia
-    OBOClass genusTerm = genusField.getSelectedOboClass();
-    OBOClass diffTerm = differentiaField.getSelectedOboClass();
+    // this is no good - not getting terms that came from main window
+    OBOClass genusTerm = genusField.getCurrentOboClass(); // throws Ex
+    OBOClass diffTerm = diffField.getCurrentOboClass(); // throws Ex
     String nm = pcString(genusTerm.getName(),diffTerm.getName());
     String id = pcString(genusTerm.getID(),diffTerm.getID());
     OBOClass postComp = new OBOClassImpl(nm,id);
     OBOProperty ISA = OBOProperty.IS_A;
     OBORestrictionImpl gRel = new OBORestrictionImpl(postComp,ISA,genusTerm);
+    gRel.setCompletes(true); // post comp flag
     postComp.addParent(gRel);
     // eventually get from obo relationship?
     OBOProperty partOf = new OBOPropertyImpl("OBO_REL:part_of","part_of");
     OBORestrictionImpl dRel = new OBORestrictionImpl(postComp,partOf,diffTerm);
+    dRel.setCompletes(true); // post comp
     postComp.addParent(dRel);
     return postComp;
   }

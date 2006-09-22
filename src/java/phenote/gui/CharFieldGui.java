@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.DocumentEvent;
 
+import org.apache.log4j.Logger;
+
 import org.geneontology.oboedit.datamodel.OBOClass;
 
 import phenote.datamodel.CharField;
@@ -213,6 +215,11 @@ class CharFieldGui {
     else return textField.getText();
   }
 
+  void setOboClass(OBOClass term) {
+    if (isCombo) comboBox.setOboClass(term);
+    else textField.setText(term.getName()); // probably doesnt happen
+  }
+
   CharFieldEnum getCharFieldEnum() { return charField.getCharFieldEnum(); }
 
   // separate char text field class?
@@ -259,13 +266,24 @@ class CharFieldGui {
     }
   }
 
-  /** This is for ontology char fields, freetext returns null. returns obo class
-      selected in AutoComboBox if there is one */
-  OBOClass getSelectedOboClass() throws Exception {
+//   /** This is for ontology char fields, freetext returns null. returns obo class
+//       selected in AutoComboBox if there is one 
+//       this is problematic - it can get term that was selected a while ago */
+//   OBOClass getSelectedOboClass() throws Exception {
+//     if (!isCombo) throw new Exception("Free text field has no OBO Class");
+//     OBOClass term = comboBox.getSelectedCompListOboClass();
+//     if (term == null) throw new Exception("No term selected");
+//     return term;
+//   }
+  OBOClass getCurrentOboClass() throws Exception {
     if (!isCombo) throw new Exception("Free text field has no OBO Class");
-    OBOClass term = comboBox.getSelectedCompListOboClass();
-    if (term == null) throw new Exception("No term selected");
-    return term;
+    return comboBox.getCurrentOboClass(); // throws Ex
+  }
+
+  private Logger log;
+  private Logger log() {
+    if (log == null) log = Logger.getLogger(getClass());
+    return log;
   }
 }
 

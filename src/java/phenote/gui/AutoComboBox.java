@@ -42,6 +42,9 @@ class AutoComboBox extends JComboBox {
   private boolean keyTyped = false;
   private String previousInput = "";
   private boolean doCompletion = true;
+  // should we keep state of currentOboClass which is null if not a valid one?
+  // default combo box.getSelectedItem sortof does this imperfectly
+  private OBOClass currentOboClass=null;
   private DefaultComboBoxModel defaultComboBoxModel;
   private SearchParamsI searchParams;
   private boolean inTestMode = false;
@@ -50,6 +53,8 @@ class AutoComboBox extends JComboBox {
   private CharField charField;
   ///** Whether differentia of a post composed term */
   //private boolean isDifferentia = false;
+  /** if false then model is not edited */
+  private boolean editModel;
 
   /** @param editModel if false then ACB doesnt edit model directly (post comp) */
   AutoComboBox(Ontology ontology,SearchParamsI sp,boolean editModel) {
@@ -67,8 +72,9 @@ class AutoComboBox extends JComboBox {
 
     addCompletionListListener(new CompletionListListener());
 
-    if (editModel) // ComboBoxActionListener edits the model
-      addActionListener(new ComboBoxActionListener());
+    //if (editModel) // ComboBoxActionListener edits the model
+    this.editModel = editModel;
+    addActionListener(new ComboBoxActionListener());
 
   }
 
@@ -95,6 +101,21 @@ class AutoComboBox extends JComboBox {
     this.keyTyped = doCompletion; // key has to be typed for completion
     getEditor().setItem(text);
     this.doCompletion = true; // set back to default
+  }
+
+  void setOboClass(OBOClass term) {
+    currentOboClass = term;
+    setText(term.getName(),false); // no completion
+  }
+
+  /** Throws exception if there isnt a current obo class, if the user
+      has typed something that isnt yet a term - hasnt selected a term */
+  OBOClass getCurrentOboClass() throws Exception {
+    if (currentOboClass == null) throw new Exception("term is null");
+    if (!currentOboClass.getName().equals(getText()))
+      throw new Exception("(obo class "+currentOboClass+" and input "+getText()+
+                          " dont match)");
+    return currentOboClass;
   }
 
   /** Return text in text field */
@@ -136,7 +157,8 @@ class AutoComboBox extends JComboBox {
  
   /** This gets obo class selected in completion list - not from text box 
       Returns null if nothing selected - can happen amidst changing selection 
-      also used by PostCompGui */
+      also used by PostCompGui 
+      this doesnt necasarily stay current with user input hmmm....*/
   OBOClass getSelectedCompListOboClass() {
     if (defaultComboBoxModel == null)
       return null;
@@ -434,10 +456,13 @@ class AutoComboBox extends JComboBox {
       // for this not to be so? returns null if no oboclass?
       OBOClass oboClass = getSelectedCompListOboClass();
       if (oboClass == null) return; /// happens on return on invalid term name
+      currentOboClass = oboClass;
 
+      // if not editing model then return
+      if (!editModel) return;
+
+      // EDIT MODEL
       if (charField == null)  return; // shouldnt happen
-
-
       CharacterI c = getSelectedCharacter(); // from selectionManager
       CharFieldEnum cfe = charField.getCharFieldEnum();
       //OBOClass previousOboClass = cfe.getValue(c).getOboClass();
@@ -470,41 +495,12 @@ class AutoComboBox extends JComboBox {
       // CEM.handleTransaction(new UT), CEM.updateModel(UT)
       // fireChangeEvent(e);
 
-
-      // can this happen? yes when user hits return on text - actually i think this
-      // is the test for being in the completion list isnt it?
-//      boolean DEBUG = true;
-      // bug - on first return input is the user text not the term selected yet!
-//       if (!input.equals(oboClass.getName())) {
-//         if (DEBUG)
-//           System.out.println("User input ["+input+"] and list selection dont match "+
-//                            "selection: "+oboClass.getName());
-//         return;
-//       }
-      
       // check if input is a real term - i think we can get away with checking
       // if in present term completion list - not sure
       // i think this is replaced by check above - make sure does the same...
 //       boolean valid = isInCompletionList(oboClass); //input);
 //       if (!valid)
-//         return;
-
-//     /** Sets table value from field. checks that text in text field from user
-//         is actually an item in completion list, is an obo term. */
-//     private void setTableFromField(String ontology) {
-//       String input = comboBox.getText();//getInput(ontology);
-      
-//       // check if input is a real term - i think we can get away with checking
-//       // if in present term completion list - not sure
-//       boolean valid = comboBox.isInCompletionList(input);
-//       if (!valid)
-//         return;
-//       // its valid - set the field
-//       // no no no - edit model, send out model changed event
-//       setTableColumn(ontology,input);
-//     }
-//   }
- 
+//         return; 
 
 
 // doesnt work - would need to subclass editor component i thing - hassle
