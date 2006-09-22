@@ -3,10 +3,17 @@ package phenote.datamodel;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.log4j.Logger;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
+import org.geneontology.oboedit.datamodel.OBOProperty;
+import org.geneontology.oboedit.datamodel.impl.OBOPropertyImpl;
 
 import phenote.datamodel.CharFieldEnum;
+import phenote.datamodel.OboUtil;
 
 /** Manages all of the ontology. Eventually will get config info (xml? OntologyConfig?)
     and set itself up from that. Should there be an ontology package - whats funny
@@ -64,7 +71,9 @@ public class OntologyManager {
 
   /** Searches all ontologies for id - this could be even more savvy and utilize
       the id prefix AO,GO,PATO... 
-      Should this deal with post comp? if ^ then create a post comp term on fly? */
+      Should this deal with post comp? if ^ then create a post comp term on fly? 
+      im not sure if this is the right place for it, maybe method should be renamed
+      but ill put it here for now */
   public OBOClass getOboClass(String id) {
     OBOClass oboClass;
 // this seems to be the sole reason for ontology list - silly!
@@ -78,6 +87,13 @@ public class OntologyManager {
     return null; // not found - null
   }
 
+  public OBOClass getTermOrPostComp(String id) throws TermNotFoundException {
+    if (isPostComp(id))
+      return getPostComp(id);
+    else
+      return getOboClassWithExcep(id);
+  }
+
   public OBOClass getOboClassWithExcep(String id) throws TermNotFoundException {
     OBOClass term = getOboClass(id);
     if (term == null)
@@ -88,6 +104,45 @@ public class OntologyManager {
   public class TermNotFoundException extends Exception {
     private TermNotFoundException(String m) { super(m); }
   }
+
+  private boolean isPostComp(String id) {
+    if (id == null) return false;
+    return id.contains("^");
+  }
+
+  /** parse string GO:123^part_of(AO:345) into post comp obo class */
+  private OBOClass getPostComp(String id) throws TermNotFoundException {
+    Pattern pat = Pattern.compile("([^\\^]+)\\^([^\\(]*)\\(([^\\)]*)\\)");
+    Matcher m = pat.matcher(id);
+    boolean found = m.find();
+    if (!found) throw new TermNotFoundException("Invalid post comp expression "+id);
+    String genus,rel,diff;
+    try {
+      //log().debug("pattern found for "+id+"? "+found+" g0 "+m.group(0)+" g1 "+m.group(1)+" g2 "+m.group(2)+" g3 "+m.group(3));
+      genus = m.group(1);
+      rel = m.group(2);
+      diff = m.group(3);
+    } catch (RuntimeException e) { // IllegalState, IndexOutOfBounds
+      throw new TermNotFoundException("Invalid post comp expression "+id);
+    }
+
+    OBOClass gTerm = getOboClassWithExcep(genus); // throws ex
+    // OBOProperty = getOboRelationshipProperty(rel) - from rel obo - todo
+    OBOProperty p = new OBOPropertyImpl("OBO_REL:"+rel,rel);
+    OBOClass dTerm = getOboClassWithExcep(diff);
+    
+    return OboUtil.makePostCompTerm(gTerm,p,dTerm);
+  }
+  
+//   /** util fn! */
+//   private OBOClass makePostCompTerm(OBOClass genus, String relation, OBOClass diff) {
+//     String nm = pcString(genus.getName(),diff.getName());
+//     String id = pcString(genus.getID(),diff.getID());
+//     OBOClass postComp = new OBOClassImpl(nm,id);
+//     OBOProperty ISA = OBOProperty.IS_A;
+//     OBORestrictionImpl gRel = new OBORestrictionImpl(postComp,ISA,genusTerm);
+//     return postComp;
+//   }
 
   /** for obo class find its char field enum via ontology & char field */
   public CharFieldEnum getCharFieldEnumForOboClass(OBOClass oboClass) {
@@ -100,6 +155,12 @@ public class OntologyManager {
     }
     return null; // this shouldnt happen - err msg?
   } 
+
+  private Logger log;
+  private Logger log() {
+    if (log == null) log = Logger.getLogger(getClass());
+    return log;
+  }
 
 }
 

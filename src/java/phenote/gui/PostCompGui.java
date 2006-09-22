@@ -22,6 +22,7 @@ import org.geneontology.oboedit.datamodel.impl.OBORestrictionImpl;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
+import phenote.datamodel.OboUtil;
 import phenote.datamodel.SearchParamsI;
 import phenote.edit.EditManager;
 import phenote.edit.UpdateTransaction;
@@ -159,19 +160,20 @@ class PostCompGui {
     // this is no good - not getting terms that came from main window
     OBOClass genusTerm = genusField.getCurrentOboClass(); // throws Ex
     OBOClass diffTerm = diffField.getCurrentOboClass(); // throws Ex
-    String nm = pcString(genusTerm.getName(),diffTerm.getName());
-    String id = pcString(genusTerm.getID(),diffTerm.getID());
-    OBOClass postComp = new OBOClassImpl(nm,id);
-    OBOProperty ISA = OBOProperty.IS_A;
-    OBORestrictionImpl gRel = new OBORestrictionImpl(postComp,ISA,genusTerm);
-    gRel.setCompletes(true); // post comp flag
-    postComp.addParent(gRel);
-    // eventually get from obo relationship?
+//     String nm = pcString(genusTerm.getName(),diffTerm.getName());
+//     String id = pcString(genusTerm.getID(),diffTerm.getID());
+//     OBOClass postComp = new OBOClassImpl(nm,id);
+//     OBOProperty ISA = OBOProperty.IS_A;
+//     OBORestrictionImpl gRel = new OBORestrictionImpl(postComp,ISA,genusTerm);
+//     gRel.setCompletes(true); // post comp flag
+//     postComp.addParent(gRel);
+//     // eventually get from obo relationship?
     OBOProperty partOf = new OBOPropertyImpl("OBO_REL:part_of","part_of");
-    OBORestrictionImpl dRel = new OBORestrictionImpl(postComp,partOf,diffTerm);
-    dRel.setCompletes(true); // post comp
-    postComp.addParent(dRel);
-    return postComp;
+    return OboUtil.makePostCompTerm(genusTerm,partOf,diffTerm);
+//     OBORestrictionImpl dRel = new OBORestrictionImpl(postComp,partOf,diffTerm);
+//     dRel.setCompletes(true); // post comp
+//     postComp.addParent(dRel);
+//     return postComp;
   }
 
   private void commitTerm(OBOClass postComp) {

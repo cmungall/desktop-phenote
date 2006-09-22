@@ -120,7 +120,7 @@ public class CommandLine {
   /** INPUT FILE COMMAND OPTION */
   private class InputFileCommandOption extends CommandOption {
     private final static String help =
-      "Specify filename to read in (phenoxml.xml,phenosyntax.syn)";
+      "Specify filename to read in (phenoxml.xml,phenosyntax.psx)";
     private InputFileCommandOption() {
       // true -> has argument
       super("inputFile",'f',true,"filename",help);

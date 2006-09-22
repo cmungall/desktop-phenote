@@ -153,7 +153,7 @@ public class PhenoSyntaxChar {
       else if (tag.equals("GC"))
         character.setGeneticContext(om.getOboClassWithExcep(value)); // throws ex
       else if (tag.equals("E"))
-        character.setEntity(om.getOboClassWithExcep(value));
+        character.setEntity(om.getTermOrPostComp(value));
       else if (tag.equals("Q"))
         character.setQuality(om.getOboClassWithExcep(value));
       else // throw exception? or let rest of char go through?
