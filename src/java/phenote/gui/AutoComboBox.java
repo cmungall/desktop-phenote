@@ -21,6 +21,8 @@ import javax.swing.plaf.basic.BasicComboBoxEditor;
 import javax.swing.plaf.ComboBoxUI;
 import javax.swing.plaf.metal.MetalComboBoxUI;
 
+import org.apache.log4j.Logger;
+
 import org.geneontology.oboedit.datamodel.OBOClass;
 
 import phenote.datamodel.CharField;
@@ -31,6 +33,8 @@ import phenote.datamodel.SearchParamsI;
 import phenote.edit.EditManager;
 import phenote.edit.UpdateTransaction;
 import phenote.gui.selection.SelectionManager;
+import phenote.gui.selection.UseTermEvent;
+import phenote.gui.selection.UseTermListener;
 
 /** The jcombobox that does auto completion - i had to do some tricks(hacks) to get it
     working with mouse over which doesnt come naturally to jcombobox */
@@ -103,7 +107,12 @@ class AutoComboBox extends JComboBox {
     this.doCompletion = true; // set back to default
   }
 
+  /** rename setTerm? */
   void setOboClass(OBOClass term) {
+    if (term == null) {
+      log().error("Attempt to set term to null");
+      return; // debug stack trace?
+    }
     currentOboClass = term;
     setText(term.getName(),false); // no completion
   }
@@ -391,11 +400,24 @@ class AutoComboBox extends JComboBox {
         return;
       }
       OBOClass oboClass = (OBOClass)selectedValue;
-      SelectionManager.inst().selectTerm(AutoComboBox.this,oboClass);
+      getSelectionManager().selectTerm(AutoComboBox.this,oboClass,getUseTermListener());
       //setTextFromOboClass(oboClass);
     }
   } // end of CompletionListListener inner class
   
+  private UseTermListener useTermListener;
+  private UseTermListener getUseTermListener() {
+    if (useTermListener == null) useTermListener = new ComboUseTermListener();
+    return useTermListener;
+  }
+
+  private class ComboUseTermListener implements UseTermListener {
+    public void useTerm(UseTermEvent e) {
+      setOboClass(e.getTerm());
+      if (editModel) editModel();
+    }
+  }
+
   private SelectionManager getSelectionManager() {
     return SelectionManager.inst();
   }
@@ -469,13 +491,26 @@ class AutoComboBox extends JComboBox {
       // isDifferentia boolean?
       UpdateTransaction ut = new UpdateTransaction(c,cfe,oboClass);
       EditManager.inst().updateModel(this,ut);
-      
-      // oh my this is presumptious - assumes only editor, but now theres post
-      // comp gui - should get previous from char itself! of course silly
-      //previousOboClass = oboClass; // for undo 
     }
   }
 
+  private void editModel() {
+    OBOClass oboClass;
+    try { oboClass = getCurrentOboClass(); }
+    catch (Exception e) { return; } // shouldnt happen, error?
+    if (charField == null)  return; // shouldnt happen
+    CharacterI c = getSelectedCharacter(); // from selectionManager
+    CharFieldEnum cfe = charField.getCharFieldEnum();
+    // isDifferentia boolean?
+    UpdateTransaction ut = new UpdateTransaction(c,cfe,oboClass);
+    EditManager.inst().updateModel(this,ut);
+  }
+
+  private Logger log;
+  private Logger log() {
+    if (log == null) log = Logger.getLogger(getClass());
+    return log;
+  }
 }
 
 // GARBAGE

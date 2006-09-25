@@ -33,8 +33,8 @@ public class SelectionManager {
 
   // void addCharacterSelectionListener(CharacterSelectionListener l) {}
 
-  public void selectTerm(Object source, OBOClass oboClass) {
-    TermSelectionEvent e = makeTermEvent(source,oboClass);
+  public void selectTerm(Object source, OBOClass oboClass,UseTermListener l) {
+    TermSelectionEvent e = makeTermEvent(source,oboClass,l);
     Iterator<TermSelectionListener> it = termListenerList.iterator();
     while(it.hasNext())
       it.next().termSelected(e);
@@ -42,8 +42,8 @@ public class SelectionManager {
 
   // void selectTerm(String termName) {} ???
 
-  private TermSelectionEvent makeTermEvent(Object src, OBOClass oc) {
-    return new TermSelectionEvent(src,oc);
+  private TermSelectionEvent makeTermEvent(Object src, OBOClass oc,UseTermListener l) {
+    return new TermSelectionEvent(src,oc,l);
   }
 
   public CharacterI getSelectedCharacter() {

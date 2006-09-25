@@ -37,6 +37,8 @@ import phenote.util.HtmlUtil;
 import phenote.gui.selection.SelectionManager;
 import phenote.gui.selection.TermSelectionEvent;
 import phenote.gui.selection.TermSelectionListener;
+import phenote.gui.selection.UseTermEvent;
+import phenote.gui.selection.UseTermListener;
 
 public class TermInfo {
 
@@ -46,6 +48,7 @@ public class TermInfo {
   private TermHyperlinkListener termHyperlinkListener;
   // current obo class being navigated
   private OBOClass currentOboClass;
+  private UseTermListener useTermListener;
 
   
   public TermInfo(TermPanel termPanel) {
@@ -88,7 +91,10 @@ public class TermInfo {
   /** Commits currently browsed term when useTermButton is pressed */
   private class UseTermActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
-      commitTerm();
+      //commitTerm();
+      if (useTermListener == null) return; // error? shouldnt happen
+      if (currentOboClass == null) return; // shouldnt happen
+      useTermListener.useTerm(new UseTermEvent(TermInfo.this,currentOboClass));
     }
   }
 
@@ -110,28 +116,36 @@ public class TermInfo {
   private class InfoTermSelectionListener implements TermSelectionListener {
     public boolean termSelected(TermSelectionEvent e) {
       setTextFromOboClass(e.getOboClass());
+      // This sets who now listens to use term button clicks (only 1 listener)
+      setUseTermListener(e.getUseTermListener());
       return true;
     } 
   }
 
-  /** put present term into current character - not used yet...*/
-  private void commitTerm() {
-    CharacterI ch = SelectionManager.inst().getSelectedCharacter();
-    if (ch == null) { // can this happen?
-      System.out.println("ERROR: no character selected to update");
-      return;
-    }
-    if (currentOboClass == null) { // can this happen?
-      System.out.println("ERROR: no term in term info to add to character");
-      return;
-    }
-
-    CharFieldEnum cfe = OntologyManager.inst().getCharFieldEnumForOboClass(currentOboClass);
-    
-    UpdateTransaction ut = new UpdateTransaction(ch,cfe,currentOboClass);
-    EditManager.inst().updateModel(this,ut);
-    //previousOboClass = currentOboClass;
+  private void setUseTermListener(UseTermListener utl) {
+    useTermListener = utl;
   }
+
+//   /** put present term into current character - not used yet...
+//    this is now policy of the UseTermListener(AutoComboBox) TermInfo just sends out
+//    UseTermEvent and UTL/ACB decides what to do with it */
+//   private void commitTerm() {
+//     CharacterI ch = SelectionManager.inst().getSelectedCharacter();
+//     if (ch == null) { // can this happen?
+//       System.out.println("ERROR: no character selected to update");
+//       return;
+//     }
+//     if (currentOboClass == null) { // can this happen?
+//       System.out.println("ERROR: no term in term info to add to character");
+//       return;
+//     }
+
+//     CharFieldEnum cfe = OntologyManager.inst().getCharFieldEnumForOboClass(currentOboClass);
+    
+//     UpdateTransaction ut = new UpdateTransaction(ch,cfe,currentOboClass);
+//     EditManager.inst().updateModel(this,ut);
+//     //previousOboClass = currentOboClass;
+//   }
   
   /** for testing */
   void simulateHyperlinkEvent(HyperlinkEvent e) {
