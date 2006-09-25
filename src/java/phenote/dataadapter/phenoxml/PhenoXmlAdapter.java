@@ -21,6 +21,7 @@ import org.bioontologies.obd.schema.pheno.QualityDocument.Quality;
 import org.bioontologies.obd.schema.pheno.PhenosetDocument;
 import org.bioontologies.obd.schema.pheno.PhenotypeManifestationDocument.PhenotypeManifestation;
 import org.bioontologies.obd.schema.pheno.TyperefDocument.Typeref;
+import org.bioontologies.obd.schema.pheno.ProvenanceDocument.Provenance;
 //import org.bioontologies.obd.schema.pheno.*.*;
 
 import phenote.datamodel.CharacterI;
@@ -35,7 +36,7 @@ import phenote.dataadapter.DataAdapterI;
 
 public class PhenoXmlAdapter implements DataAdapterI {
 
-  private Set genotypesAlreadyAdded = new HashSet<String>(); 
+  private Set<String> genotypesAlreadyAdded = new HashSet<String>(); 
   private File previousFile;
   private File file;
 
@@ -176,6 +177,7 @@ public class PhenoXmlAdapter implements DataAdapterI {
     PhenotypeManifestation pm = phenoset.addNewPhenotypeManifestation();
     addGenotype(genotype,phenoset,pm);
     addPhenotype(chr,pm);
+    addPub(chr, pm);
   }
   
   private void addGenotype(String genotype,Phenoset ps,PhenotypeManifestation pm) {
@@ -211,5 +213,11 @@ public class PhenoXmlAdapter implements DataAdapterI {
     else {
       System.out.println("Character "+chr+" has no quality");
     }
+  }
+  
+  private void addPub(CharacterI chr, PhenotypeManifestation pm) {
+    if (!chr.hasPub()) return;  // no pub, early return
+    Provenance provenance = pm.addNewProvenance();
+    provenance.setId(chr.getPub());
   }
 }
