@@ -53,66 +53,7 @@ public class PhenoXmlAdapter implements DataAdapterI {
 		  if (file == null) return;
 		  previousFile = file;
 		  PhenosetDocument doc = PhenosetDocument.Factory.parse(file);
-		  Phenoset phenoset = doc.getPhenoset();
-		  List<PhenotypeManifestation> phenotypeManifestations = phenoset.getPhenotypeManifestationList();
-		  CharacterListI charList = new CharacterList();
-		  for (PhenotypeManifestation aManifestation : phenotypeManifestations) {
-			  CharacterI character = new Character();
-			  ManifestIn mi = aManifestation.getManifestIn();
-			  if (mi != null) {
-				String genotype = mi.getGenotype();
-				if (genotype != null) {
-					character.setGenotype(genotype);
-				}
-			  }
-			  Phenotype phenotype = aManifestation.getPhenotype();
-			  PhenotypeCharacter phenotypeCharacter = null;
-			  if (phenotype != null) {
-				  List<PhenotypeCharacter> phenotypeCharacters = phenotype.getPhenotypeCharacterList();
-				  if ((phenotypeCharacters != null) && (phenotypeCharacters.size() > 0)) {
-					  // we only load the first character in the phenotype for now
-					  phenotypeCharacter = phenotypeCharacters.get(0);
-				  }
-			  }	  
-			  OntologyManager ontologyManager = OntologyManager.inst();
-			  String entityID = null;
-			  String qualityID = null;
-			  if (phenotypeCharacter != null) {
-				  Bearer bearer = phenotypeCharacter.getBearer();
-				  if (bearer != null) {
-					  Typeref typeref = bearer.getTyperef();
-					  if (typeref != null) {
-						  entityID = typeref.getAbout();
-					  }
-				  }
-				  List<Quality> qualityList = phenotypeCharacter.getQualityList();
-				  if ((qualityList != null) && (qualityList.size() > 0)) {
-					  // we only load the first quality for now
-					  Quality quality = qualityList.get(0);
-					  Typeref qualityTyperef = quality.getTyperef();
-					  if (qualityTyperef != null) {
-						  qualityID = qualityTyperef.getAbout();
-					  }
-				  }
-			  }
-			  if (entityID != null) {
-				  try {
-					  character.setEntity(ontologyManager.getOboClassWithExcep(entityID));
-				  }
-				  catch (TermNotFoundException e) {
-					  System.out.println("Entity term not found " + e);
-				  }
-			  }
-			  if (qualityID != null) {
-				  try {
-					  character.setQuality(ontologyManager.getOboClassWithExcep(qualityID));
-				  }
-				  catch (TermNotFoundException e) {
-					  System.out.println("Quality term not found " + e);
-			  	}
-			  }
-			 charList.add(character); 
-		  }
+		  CharacterListI charList = newCharacterListFromPhenosetDocument(doc);
 		  CharacterListManager.inst().setCharacterList(this,charList);
 	  }
 	  catch (XmlException e) {
@@ -122,6 +63,85 @@ public class PhenoXmlAdapter implements DataAdapterI {
 		  System.out.println("PhenoXml read failure " + e);
 	  }
 	  file = null; // null it for next load/commit
+  }
+  
+  private CharacterListI newCharacterListFromPhenosetDocument(PhenosetDocument doc) {
+    Phenoset phenoset = doc.getPhenoset();
+    List<PhenotypeManifestation> phenotypeManifestations = phenoset.getPhenotypeManifestationList();
+    CharacterListI charList = new CharacterList();
+    for (PhenotypeManifestation aManifestation : phenotypeManifestations) {
+      CharacterI newCharacter = newCharacterFromPhenotypeManifestation(aManifestation);
+      charList.add(newCharacter); 
+    }
+    return charList;
+  }
+  
+  private CharacterI newCharacterFromPhenotypeManifestation(PhenotypeManifestation pm) {
+
+    CharacterI character = new Character();
+    ManifestIn mi = pm.getManifestIn();
+    if (mi != null) {
+    String genotype = mi.getGenotype();
+    if (genotype != null) {
+      character.setGenotype(genotype);
+    }
+    }
+    Phenotype phenotype = pm.getPhenotype();
+    PhenotypeCharacter phenotypeCharacter = null;
+    if (phenotype != null) {
+      List<PhenotypeCharacter> phenotypeCharacters = phenotype.getPhenotypeCharacterList();
+      if ((phenotypeCharacters != null) && (phenotypeCharacters.size() > 0)) {
+        // we only load the first character in the phenotype for now
+        phenotypeCharacter = phenotypeCharacters.get(0);
+      }
+    }   
+    OntologyManager ontologyManager = OntologyManager.inst();
+    String entityID = null;
+    String qualityID = null;
+    if (phenotypeCharacter != null) {
+      Bearer bearer = phenotypeCharacter.getBearer();
+      if (bearer != null) {
+        Typeref typeref = bearer.getTyperef();
+        if (typeref != null) {
+          entityID = typeref.getAbout();
+        }
+      }
+      List<Quality> qualityList = phenotypeCharacter.getQualityList();
+      if ((qualityList != null) && (qualityList.size() > 0)) {
+        // we only load the first quality for now
+        Quality quality = qualityList.get(0);
+        Typeref qualityTyperef = quality.getTyperef();
+        if (qualityTyperef != null) {
+          qualityID = qualityTyperef.getAbout();
+        }
+      }
+    }
+    if (entityID != null) {
+      try {
+        character.setEntity(ontologyManager.getOboClassWithExcep(entityID));
+      }
+      catch (TermNotFoundException e) {
+        System.out.println("Entity term not found " + e);
+      }
+    }
+    if (qualityID != null) {
+      try {
+        character.setQuality(ontologyManager.getOboClassWithExcep(qualityID));
+      }
+      catch (TermNotFoundException e) {
+        System.out.println("Quality term not found " + e);
+      }
+    }
+    List<Provenance> provenanceList = pm.getProvenanceList();
+    if ((provenanceList != null) && (provenanceList.size() > 0)) {
+      // only load the first provenance for now
+      Provenance provenance = provenanceList.get(0);
+      String id = provenance.getId();
+      if (id != null) {
+        character.setPub(id);
+      }
+    }
+    return character;  
   }
 
   public void commit(CharacterListI charList) {
