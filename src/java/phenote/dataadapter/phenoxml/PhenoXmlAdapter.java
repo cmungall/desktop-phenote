@@ -77,14 +77,28 @@ public class PhenoXmlAdapter implements DataAdapterI {
   }
   
   private CharacterI newCharacterFromPhenotypeManifestation(PhenotypeManifestation pm) {
-
+    OntologyManager ontologyManager = OntologyManager.inst();
     CharacterI character = new Character();
     ManifestIn mi = pm.getManifestIn();
     if (mi != null) {
-    String genotype = mi.getGenotype();
-    if (genotype != null) {
+      String genotype = mi.getGenotype();
+      if (genotype != null) {
       character.setGenotype(genotype);
-    }
+      }
+      List<Typeref> typerefList = mi.getTyperefList();
+      if ((typerefList != null) && (typerefList.size() > 0)) {
+        // only load the first typeref
+        Typeref typeref = typerefList.get(0);
+        String geneticContextID = typeref.getAbout();
+        if (geneticContextID != null) {
+          try {
+            character.setGeneticContext(ontologyManager.getOboClassWithExcep(geneticContextID));
+          }
+          catch (TermNotFoundException e) {
+            System.out.println("Genetic context term not found " + e);
+          }
+        }
+      }
     }
     Phenotype phenotype = pm.getPhenotype();
     PhenotypeCharacter phenotypeCharacter = null;
@@ -95,7 +109,6 @@ public class PhenoXmlAdapter implements DataAdapterI {
         phenotypeCharacter = phenotypeCharacters.get(0);
       }
     }   
-    OntologyManager ontologyManager = OntologyManager.inst();
     String entityID = null;
     String qualityID = null;
     if (phenotypeCharacter != null) {
@@ -145,7 +158,6 @@ public class PhenoXmlAdapter implements DataAdapterI {
   }
 
   public void commit(CharacterListI charList) {
-
     if (file == null)
       file = getFileFromUser(previousFile);
     if (file == null)
@@ -193,24 +205,32 @@ public class PhenoXmlAdapter implements DataAdapterI {
 
 
   private void addCharAndGenotypeToPhenoset(CharacterI chr, Phenoset phenoset) {
-    String genotype = chr.getGenotype();
     PhenotypeManifestation pm = phenoset.addNewPhenotypeManifestation();
-    addGenotype(genotype,phenoset,pm);
+    addGenotypeAndContext(chr, phenoset, pm);
     addPhenotype(chr,pm);
     addPub(chr, pm);
   }
   
-  private void addGenotype(String genotype,Phenoset ps,PhenotypeManifestation pm) {
+  private void addGenotypeAndContext(CharacterI chr, Phenoset ps, PhenotypeManifestation pm) {
+    String genotype = chr.getGenotype();
+    addGenotypeToPhenoset(genotype, ps);
+    ManifestIn mi = pm.addNewManifestIn();
+    mi.setGenotype(genotype);
+    if (chr.hasGeneticContext()) {
+      Typeref typeref = mi.addNewTyperef();
+      typeref.setAbout(chr.getGeneticContext().getID());
+    }
+  }
+  
+  private void addGenotypeToPhenoset(String genotype, Phenoset ps) {
     // check if we've already added this genotype, if so dont need to add again
     if (!genotypesAlreadyAdded.contains(genotype)) {
       Genotype gt = ps.addNewGenotype();
       gt.setName(genotype);
       genotypesAlreadyAdded.add(genotype);
     }
-    ManifestIn mi = pm.addNewManifestIn();
-    mi.setGenotype(genotype);
   }
-
+  
   private void addPhenotype(CharacterI chr, PhenotypeManifestation pm) {
     Phenotype p = pm.addNewPhenotype();
     PhenotypeCharacter pc = p.addNewPhenotypeCharacter();
