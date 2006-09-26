@@ -24,6 +24,8 @@ import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.OboUtil;
 import phenote.datamodel.SearchParamsI;
+import phenote.edit.CharChangeEvent;
+import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
 import phenote.edit.UpdateTransaction;
 import phenote.main.Phenote;
@@ -67,6 +69,8 @@ class PostCompGui {
     dialog.pack();
     dialog.setLocationRelativeTo(owner);
     dialog.setVisible(true);
+
+    EditManager.inst().addCharChangeListener(new CompCharChangeListener());
   }
 
   private void setGuiFromModel() {
@@ -79,6 +83,13 @@ class PostCompGui {
     try { diffField.setOboClass(getDiffTerm(currentTerm)); } 
     catch (Exception e) {} // throws if no diff term
     
+  }
+
+  /** If model has changed (main window fiddling - hmmm) set gui */
+  private class CompCharChangeListener implements CharChangeListener {
+    public void charChanged(CharChangeEvent e) {
+      setGuiFromModel();
+    }
   }
 
   private OBOClass getModelTerm() {

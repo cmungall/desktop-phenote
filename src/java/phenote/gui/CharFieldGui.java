@@ -58,7 +58,7 @@ class CharFieldGui {
                boolean doPostComp) {
     this.label = label;
     this.editModel = editModel;
-    this.doPostComp = doPostComp;
+    this.doPostComp = doPostComp; // post comp button
     init(cf,tp);
   }
 
@@ -75,7 +75,12 @@ class CharFieldGui {
     SelectionManager.inst().addCharSelectionListener(new FieldCharSelectListener());
     // listen for model changes (eg TermInfo commit)
     
-    EditManager.inst().addCharChangeListener(new FieldCharChangeListener());
+    // this needs renaming. if not editing model then its a post comp window, and 
+    // post comp windows also listen for char changes in PostCompGui not in there
+    // char field guis. either add a new param or rename "editModel" - hmmm
+    // or subclass CharFieldGui?? hmmmmm....
+    if (editModel)
+      EditManager.inst().addCharChangeListener(new FieldCharChangeListener());
   }
 
   private class FieldCharChangeListener implements CharChangeListener {

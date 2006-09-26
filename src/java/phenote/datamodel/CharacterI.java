@@ -19,7 +19,7 @@ public interface CharacterI {
   public boolean hasPub();
   public String getGenotype();
   public OBOClass getEntity();
-  public OBOClass getQuality(); // OBOClass?
+  public OBOClass getQuality();
   public boolean hasGeneticContext();
   public OBOClass getGeneticContext();
 

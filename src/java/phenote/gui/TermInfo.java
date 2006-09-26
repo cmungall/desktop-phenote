@@ -88,7 +88,8 @@ public class TermInfo {
     return termInfoPanel;
   }
 
-  /** Commits currently browsed term when useTermButton is pressed */
+  /** Fires use term event to use term listener with currently browsed term when
+      useTermButton is pressed */
   private class UseTermActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       //commitTerm();
