@@ -43,22 +43,25 @@ class CharFieldGui {
   private TermPanel termPanel;
   private JComboBox ontologyChooserCombo;
   private String label;
-  private boolean editModel = true;
-  private boolean doPostComp = true;
+  private boolean enableListeners = true;
+  private boolean addCompButton = true;
   
 
   CharFieldGui(CharField charField, TermPanel tp) {/*Container parent,*/
     init(charField,tp);
   }
 
-  /** @param editModel - whether charFieldGui edits model directly - for post comp it
-      doesnt 
-      @param doPostComp if false override configuration and dont show post comp button*/
-  CharFieldGui(CharField cf,TermPanel tp,String label,boolean editModel,
-               boolean doPostComp) {
+  /** @param enableListeners - a catchall flag for disabling editing model, listening
+      to model edits, & litening to selection - postcompGui handles these and sets
+      this false, in main window this is true - rename? more flags? subclass?
+      postCompGui mode?
+      @param addCompButton if false override configuration and dont show
+      post comp button */
+  CharFieldGui(CharField cf,TermPanel tp,String label,boolean enableListeners,
+               boolean addCompButton) {
     this.label = label;
-    this.editModel = editModel;
-    this.doPostComp = doPostComp; // post comp button
+    this.enableListeners = enableListeners;
+    this.addCompButton = addCompButton; // post comp button
     init(cf,tp);
   }
 
@@ -71,15 +74,16 @@ class CharFieldGui {
     else
       initCombo(charField);//,parent);
 
-    // do just for text field - or both??? listens for selection (eg from table)
-    SelectionManager.inst().addCharSelectionListener(new FieldCharSelectListener());
+    // listens for selection (eg from table) - not for PostCompGui
+    if (enableListeners)
+      SelectionManager.inst().addCharSelectionListener(new FieldCharSelectListener());
     // listen for model changes (eg TermInfo commit)
     
     // this needs renaming. if not editing model then its a post comp window, and 
     // post comp windows also listen for char changes in PostCompGui not in there
-    // char field guis. either add a new param or rename "editModel" - hmmm
+    // char field guis. either add a new param or rename "enableListeners" - hmmm
     // or subclass CharFieldGui?? hmmmmm....
-    if (editModel)
+    if (enableListeners)
       EditManager.inst().addCharChangeListener(new FieldCharChangeListener());
   }
 
@@ -139,18 +143,18 @@ class CharFieldGui {
     if (charField.hasMoreThanOneOntology())
       initOntologyChooser(charField);
 
-    // editModel - if false then ACB wont directly edit model (post comp)
+    // enableListeners - if false then ACB wont directly edit model (post comp)
     comboBox = new AutoComboBox(charField.getFirstOntology(),
-                                termPanel.getSearchParams(),editModel);
+                                termPanel.getSearchParams(),enableListeners);
     termPanel.addFieldGui(comboBox);
 
     comboBox.setCharField(charField);
 
     // POST COMPOSITION button - only get post comp button if both configged for it
-    // AND doPostComp flag is true - PostCompGui sets to false - no post comp of 
+    // AND addCompButton flag is true - PostCompGui sets to false - no post comp of 
     // post comp yet - and if so probably would do in same window not multiple
     // windows anyways
-    if (charField.postCompAllowed() && doPostComp) {
+    if (charField.postCompAllowed() && addCompButton) {
       JButton postCompButton = new JButton("Comp"); // ???
       postCompButton.addActionListener(new PostCompListener());
       termPanel.addPostCompButton(postCompButton);
@@ -188,13 +192,13 @@ class CharFieldGui {
 
   }
 
-  /** key listener for free text fields */
+  /** key listener for free text fields for Cmd-V pasting for macs */
   private class TextKeyListener extends java.awt.event.KeyAdapter {
     public void keyPressed(java.awt.event.KeyEvent e) {
       // on a mac Command-V is paste. this aint so with java/metal look&feel
       if (e.getKeyChar() == 'v' 
           && e.getKeyModifiersText(e.getModifiers()).equals("Command")) {
-        System.out.println("got cmd V paste");
+        //log().debug("got cmd V paste");
         //System.getClipboard
         Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
         try {

@@ -29,6 +29,8 @@ import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
 import phenote.edit.UpdateTransaction;
 import phenote.main.Phenote;
+import phenote.gui.selection.CharSelectionEvent;
+import phenote.gui.selection.CharSelectionListener;
 import phenote.gui.selection.SelectionManager;
 
 /** A window for post composition and other wacky stuff that goes beyond the basic
@@ -62,7 +64,7 @@ class PostCompGui {
     diffField =
       new CharFieldGui(charField,compTermPanel,"Differentia",false,false);
 
-    setGuiFromModel();
+    setGuiFromSelectedModel();
 
     dialog.add(compTermPanel);
     addButtons();
@@ -71,9 +73,10 @@ class PostCompGui {
     dialog.setVisible(true);
 
     EditManager.inst().addCharChangeListener(new CompCharChangeListener());
+    SelectionManager.inst().addCharSelectionListener(new CompCharSelectListener());
   }
 
-  private void setGuiFromModel() {
+  private void setGuiFromSelectedModel() {
     OBOClass currentTerm = getModelTerm();
     if (currentTerm == null) return;
     
@@ -88,7 +91,13 @@ class PostCompGui {
   /** If model has changed (main window fiddling - hmmm) set gui */
   private class CompCharChangeListener implements CharChangeListener {
     public void charChanged(CharChangeEvent e) {
-      setGuiFromModel();
+      setGuiFromSelectedModel();
+    }
+  }
+
+  private class CompCharSelectListener implements CharSelectionListener {
+    public void characterSelected(CharSelectionEvent e) {
+      setGuiFromSelectedModel();
     }
   }
 
