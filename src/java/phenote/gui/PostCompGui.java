@@ -94,6 +94,7 @@ class PostCompGui {
     //genusField.setText(getGenusString(currentTerm));
     genusField.setOboClass(getGenusTerm(currentTerm));
     //if (modelHasDiff(currentTerm))
+    try { relField.setRel(getRel(currentTerm)); } catch (Exception e){}
     try { diffField.setOboClass(getDiffTerm(currentTerm)); } 
     catch (Exception e) {} // throws if no diff term
     
@@ -145,13 +146,26 @@ class PostCompGui {
   /** Throws exception if no diff term - for now only returning one diff term
       can there be more than one */
   private OBOClass getDiffTerm(OBOClass term) throws Exception {
+    OBORestriction link = getDiffLink(term); // throws Ex
+    return (OBOClass)link.getParent(); // check downcast?
+  }
+
+  /** If term is post comp return obo property relationship for differentia 
+      otherwise thorws exception */
+  private OBOProperty getRel(OBOClass term) throws Exception {
+    return getDiffLink(term).getType(); // thorws ex
+  }
+
+  /** return the oboRestriction link between term and its differentia 
+      exception if there is none. */
+  private OBORestriction getDiffLink(OBOClass term) throws Exception {
     if (!isPostCompTerm(term)) throw new Exception();
     for (Object o : term.getParents()) {
       OBORestriction r = (OBORestriction)o;
       if (r.completes() && r.getType() != OBOProperty.IS_A)
-        return (OBOClass)r.getParent(); // check downcast?
+        return r;
     }
-    throw new Exception(); // no diff term found
+    throw new Exception(); // none found
   }
 
   private void addButtons() {

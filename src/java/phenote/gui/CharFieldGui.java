@@ -235,6 +235,12 @@ class CharFieldGui {
     else textField.setText(term.getName()); // probably doesnt happen
   }
 
+  /** for auto combos (ontol) for relationships (post comp rel) */
+  void setRel(OBOProperty rel) {
+    if (isCombo) comboBox.setRel(rel);
+    else textField.setText(rel.getName()); // shouldnt actually happen
+  }
+
   CharFieldEnum getCharFieldEnum() { return charField.getCharFieldEnum(); }
 
   // separate char text field class?

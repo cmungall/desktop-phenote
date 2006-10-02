@@ -121,6 +121,16 @@ class AutoComboBox extends JComboBox {
     setText(term.getName(),false); // no completion
   }
 
+  /** for relationships (post comp rel) */
+  void setRel(OBOProperty rel) {
+    if (rel == null) {
+      log().error("Attempt to set term to null");
+      return; // debug stack trace?
+    }
+    currentRel = rel;
+    setText(rel.toString(),false); // eventually .getName()
+  }
+
   /** Throws exception if there isnt a current obo class, if the user
       has typed something that isnt yet a term - hasnt selected a term */
   OBOClass getCurrentOboClass() throws Exception {
