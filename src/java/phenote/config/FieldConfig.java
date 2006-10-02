@@ -11,6 +11,8 @@ public class FieldConfig {
   private String label;
   // Entity field can have multiple ontologies
   private List<OntologyConfig> ontologyConfigList;
+  private boolean isPostComp;
+  private OntologyConfig postCompRelOntCfg;
 
   FieldConfig(CharFieldEnum c,OntologyConfig o) {
     charFieldEnum = c;
@@ -59,5 +61,20 @@ public class FieldConfig {
       ontologyConfigList = new ArrayList<OntologyConfig>(1);
     return ontologyConfigList;
   }
-    
+
+  // POST COMP config... 
+  void setIsPostComp(boolean isPostComp) {
+    this.isPostComp = isPostComp;
+  }
+  public boolean isPostComp() {
+    return isPostComp;
+  }
+  void setPostCompRelOntCfg(OntologyConfig oc) {
+    postCompRelOntCfg = oc;
+  }
+
+  /** If isPostComp() return relationship ontology filename */
+  public OntologyConfig getPostCompRelOntCfg() {
+    return postCompRelOntCfg;
+  }
 }

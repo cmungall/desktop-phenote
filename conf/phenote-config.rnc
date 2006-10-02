@@ -36,6 +36,7 @@ field =
     attribute type { "free_text" | "ontology" },  
     ## file is for single ontology - rename ontology_file?  
     attribute file { text },
+    postcomp?,
     ontology*
   } 
 
@@ -45,4 +46,10 @@ ontology =
     ## obo file for ontology
     attribute file { text },
     attribute filter-out { text }
+  }
+
+postcomp =
+  element postcomp {
+    attribute relationship-ontology { text },
+    ontology*
   }

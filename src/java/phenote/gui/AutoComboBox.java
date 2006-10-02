@@ -24,6 +24,7 @@ import javax.swing.plaf.metal.MetalComboBoxUI;
 import org.apache.log4j.Logger;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
+import org.geneontology.oboedit.datamodel.OBOProperty;
 
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
@@ -49,6 +50,7 @@ class AutoComboBox extends JComboBox {
   // should we keep state of currentOboClass which is null if not a valid one?
   // default combo box.getSelectedItem sortof does this imperfectly
   private OBOClass currentOboClass=null;
+  private OBOProperty currentRel=null;
   private DefaultComboBoxModel defaultComboBoxModel;
   private SearchParamsI searchParams;
   private boolean inTestMode = false;
@@ -59,6 +61,7 @@ class AutoComboBox extends JComboBox {
   //private boolean isDifferentia = false;
   /** if false then model is not edited */
   private boolean editModel;
+  private CompletionListListener compListListener = new CompletionListListener();
 
   /** @param editModel if false then ACB doesnt edit model directly (post comp) */
   AutoComboBox(Ontology ontology,SearchParamsI sp,boolean editModel) {
@@ -74,7 +77,8 @@ class AutoComboBox extends JComboBox {
     this.setEditor(autoTextFieldEditor);
     setPreferredSize(new Dimension(350,22));
 
-    addCompletionListListener(new CompletionListListener());
+    enableTermInfoListening(true); // default
+    //addCompletionListListener(compList);
 
     //if (editModel) // ComboBoxActionListener edits the model
     this.editModel = editModel;
@@ -127,6 +131,18 @@ class AutoComboBox extends JComboBox {
     return currentOboClass;
   }
 
+  /** Throws exception if there isnt a current relation - for relation lists
+      (post comp), if the user
+      has typed something that isnt yet a rel - hasnt selected a rel */
+  OBOProperty getCurrentRelation() throws Exception {
+    if (currentRel == null) throw new Exception("term is null");
+    if (!currentRel.toString().equals(getText()))
+      throw new Exception("(relation "+currentRel+" and input "+getText()+
+                          " dont match)");
+    return currentRel;
+    
+  }
+
   /** Return text in text field */
   String getText() {
     //return (String)getSelectedItem();
@@ -138,65 +154,65 @@ class AutoComboBox extends JComboBox {
     setText("");
   }
 
-  //private Ontology getOntology() { return ontology; }
 
-  /** Return true if input String matches name of OBOClass in
-   * defaultComboBoxModel - rename this? this isnt used anymore - delete?
-   */
-//   boolean isInCompletionList(String input) {
-//     if (defaultComboBoxModel == null)
-//       return false;
-//     if (input == null) {
-//       return false;
-//     }
-//     // this is wrong as it holds OBOClasses not Strings!
-//     //return defaultComboBoxModel.getIndexOf(input) != -1;
-//     // have to go through all OBOClasses and extract there names - bummer
-//     // most likely input is selected one check that first
-//     OBOClass selectedClass = getSelectedCompListOboClass();
-//     if (selectedClass != null && input.equals(selectedClass.getName()))
-//       return true;
-//     // selected failed(is this possible?) - try everything in the list then...
-//     for (int i=0; i<defaultComboBoxModel.getSize(); i++) {
-//       if (input.equals(getCompListOboClass(i).getName()))
-//         return true;
-//     }
-//     return false;
-//   }
- 
   /** This gets obo class selected in completion list - not from text box 
       Returns null if nothing selected - can happen amidst changing selection 
       also used by PostCompGui 
-      this doesnt necasarily stay current with user input hmmm....*/
-  OBOClass getSelectedCompListOboClass() {
-    if (defaultComboBoxModel == null)
-      return null;
-    Object obj = defaultComboBoxModel.getSelectedItem();
-    if (obj == null)
-      return null;
-    // need to check obj for null if nothing selected!!!
-    return oboClassDowncast(obj);
-  }
-  private OBOClass getCompListOboClass(int index) {
-    Object obj = defaultComboBoxModel.getElementAt(index);
-    return oboClassDowncast(obj);
+      this doesnt necasarily stay current with user input hmmm....
+      throws OboException if dont have valid term */
+  OBOClass getSelectedCompListOboClass() throws OboException {
+    Object obj = getSelectedObject(); // throws oboex
+    return oboClassDowncast(obj); // throws oboex
   }
 
-  private OBOClass oboClassDowncast(Object obj) {
-    if (obj == null)
-      return null;
+  private class OboException extends Exception {
+    private OboException() { super(); }
+    private OboException(String s) { super(s); }
+  }
+
+//   private OBOClass getCompListOboClass(int index) {
+//     Object obj = defaultComboBoxModel.getElementAt(index);
+//     return oboClassDowncast(obj);
+//   }
+
+  // strings get in somehow - need to figure out where they are coming from
+  private OBOClass oboClassDowncast(Object obj) throws OboException {
+    if (obj == null) throw new OboException();
     if ( ! (obj instanceof OBOClass)) {
-      System.out.println("Item in completion list not obo class "+obj.getClass());
-      return null;
+      //log.info("Item in completion list not obo class "+obj.getClass());
+      throw new OboException("Item in completion list not obo class "+obj.getClass());
     }
     return (OBOClass)obj;
   }
+
+  private OBOProperty oboPropertyDowncast(Object obj)  throws OboException {
+    if (obj == null) throw new OboException();
+    if ( ! (obj instanceof OBOProperty)) {
+      //log.info("Item in completion list not obo class "+obj.getClass());
+      throw new OboException("Item in completion list not obo prop "+obj.getClass());
+    }
+    return (OBOProperty)obj;
+  }
+
+  /** returns currently selected relation, for auto combos of relations,
+      throws obo ex if there is no current relation */
+  private OBOProperty getSelectedRelation() throws OboException {
+    Object obj = getSelectedObject(); // throws oboex
+    return oboPropertyDowncast(obj); // throws oboex
+  }
+
+  private Object getSelectedObject() throws OboException {
+    if (defaultComboBoxModel == null) throw new OboException(); // ??
+    Object obj = defaultComboBoxModel.getSelectedItem();
+    if (obj == null) throw new OboException();
+    return obj;
+  }
+
 
   /** BasicComboBoxEditor uses JTextField as its editing component but is
    * only available as a protected variable - odd 
    adds auto doc & auto key listeners to combo box edit field */
   private class AutoTextFieldEditor extends BasicComboBoxEditor {
-
 
     private AutoTextFieldEditor() {
       autoTextField = new AutoTextField();
@@ -292,6 +308,13 @@ class AutoComboBox extends JComboBox {
     doCompletion = true;
   }
 
+  /** If combo box is relationship then the items will be OBOProperties not
+      OBOClasses */
+  private boolean isRelationshipList() {
+    return charField.isRelationship();
+  }
+  private boolean isTermList() { return !isRelationshipList(); }
+
   /** Populates defaultComboBoxModel with Vector of OBOClasses - OBOClass.toString
       is the name of the term - thats why its possible - at least for moment
       if we want to put syn in brackets that makes this not possible - certainly
@@ -312,7 +335,11 @@ class AutoComboBox extends JComboBox {
     // this is a vector of OBOClasses
     // i think ultimately we will need to wrap the OBOClass to be able to
     // have more control over the string - cut off w ... & [syn][obs] tags
-    Vector<OBOClass> v = getTerms(input);
+    Vector v;
+    if (isRelationshipList())
+      v = ontology.getStringMatchRelations(input);
+    else
+      v = getTerms(input);
     // throws IllegalStateException, Attempt to mutate in notification
     // this tries to change text field amidst notification hmmmm.....
     changingCompletionList = true;
@@ -372,13 +399,19 @@ class AutoComboBox extends JComboBox {
       should this be done with a selection event - or is that
       overkill, i guess the question will anyone besides term info
       ever care about these mouse over selection - if so make generic */
-  void addCompletionListListener(ListSelectionListener lsl) {
+//  void addCompletionListListener(ListSelectionListener lsl) {
+//     if (!canGetUIJList()) return;
+//     getUIJList().addListSelectionListener(lsl);  }
+  void enableTermInfoListening(boolean enable) {
     if (!canGetUIJList())
       return;
-    getUIJList().addListSelectionListener(lsl);
+    if (enable)
+      getUIJList().addListSelectionListener(compListListener);
+    else
+      getUIJList().removeListSelectionListener(compListListener);
   }
 
-  // this is for mouse over term info i believe - changes selection
+  /** this is for MOUSE OVER TERM INFO - changes selection */
   private class CompletionListListener implements ListSelectionListener {
     public void valueChanged(ListSelectionEvent e) {
       Object source = e.getSource();
@@ -476,21 +509,26 @@ class AutoComboBox extends JComboBox {
       if (input == null) return; // probably doesnt happen
       // the input should be from selected obo class shouldnt it? is it possible
       // for this not to be so? returns null if no oboclass?
-      OBOClass oboClass = getSelectedCompListOboClass();
-      if (oboClass == null) return; /// happens on return on invalid term name
-      currentOboClass = oboClass;
+      // TERM
+      if (isTermList()) {
+        try { currentOboClass = getSelectedCompListOboClass(); }
+        // happens on return on invalid term name
+        catch (OboException e) { return; } // error msg?
+        //if (oboClass == null) return; currentOboClass = oboClass;
+      }
+      // RELATIONSHIP
+      else {
+        try { currentRel = getSelectedRelation(); }
+        catch (OboException e) { return; }
+      }
 
-      // if not editing model then return
-      if (!editModel) return;
-
-      // EDIT MODEL
-      if (charField == null)  return; // shouldnt happen
-      CharacterI c = getSelectedCharacter(); // from selectionManager
-      CharFieldEnum cfe = charField.getCharFieldEnum();
-      //OBOClass previousOboClass = cfe.getValue(c).getOboClass();
-      // isDifferentia boolean?
-      UpdateTransaction ut = new UpdateTransaction(c,cfe,oboClass);
-      EditManager.inst().updateModel(this,ut);
+      // EDIT MODEL 
+      if (editModel)
+        editModel();
+//       CharacterI c = getSelectedCharacter(); // from selectionManager
+//       CharFieldEnum cfe = charField.getCharFieldEnum();
+//       UpdateTransaction ut = new UpdateTransaction(c,cfe,oboClass);
+//       EditManager.inst().updateModel(this,ut);
     }
   }
 
@@ -514,6 +552,32 @@ class AutoComboBox extends JComboBox {
 }
 
 // GARBAGE
+  //private Ontology getOntology() { return ontology; }
+
+  /** Return true if input String matches name of OBOClass in
+   * defaultComboBoxModel - rename this? this isnt used anymore - delete?
+   */
+//   boolean isInCompletionList(String input) {
+//     if (defaultComboBoxModel == null)
+//       return false;
+//     if (input == null) {
+//       return false;
+//     }
+//     // this is wrong as it holds OBOClasses not Strings!
+//     //return defaultComboBoxModel.getIndexOf(input) != -1;
+//     // have to go through all OBOClasses and extract there names - bummer
+//     // most likely input is selected one check that first
+//     OBOClass selectedClass = getSelectedCompListOboClass();
+//     if (selectedClass != null && input.equals(selectedClass.getName()))
+//       return true;
+//     // selected failed(is this possible?) - try everything in the list then...
+//     for (int i=0; i<defaultComboBoxModel.getSize(); i++) {
+//       if (input.equals(getCompListOboClass(i).getName()))
+//         return true;
+//     }
+//     return false;
+//   }
+ 
     // mac bug workaround where list covers up textfield on < 12 items no scroll
     // from http://www.orbital-computer.de/JComboBox/#usage
     // it does note this may cause class cast excpetions??

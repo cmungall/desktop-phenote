@@ -3,6 +3,7 @@ package phenote.datamodel;
 import java.util.ArrayList;
 //import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -10,7 +11,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
 import org.geneontology.oboedit.datamodel.OBOClass;
+import org.geneontology.oboedit.datamodel.OBOProperty;
 import org.geneontology.oboedit.datamodel.OBOSession;
 
 /** rename Ontology? - yes - this isnt a completion list - a completion list is a 
@@ -23,6 +27,7 @@ public class Ontology {
   private OBOSession oboSession;
   private List<OBOClass> sortedTerms;
   private List<OBOClass> sortedObsoleteTerms;
+  private List<OBOProperty> sortedRelations;
   private String filterOutString;
   /** well this stuff is specific to ontologies from files (eg obo), perhaps there
       needs to be some sort of wrapper or subclass? need to think about this...
@@ -45,6 +50,7 @@ public class Ontology {
   }
 
   private void makeSortedLists(OBOSession oboSession) {
+    //log().debug("name "+name+" terms "+oboSession.getTerms()+" propVals "+oboSession.getPropertyValues()+" rels "+oboSession.getRelationshipTypes());
     sortedTerms = getSortedTerms(oboSession.getTerms());
     sortedObsoleteTerms = getSortedTerms(oboSession.getObsoleteTerms());
   }
@@ -92,7 +98,7 @@ public class Ontology {
     return searchTerms;
   }
 
-  private Vector getSearchTerms(String input, List<OBOClass> ontologyTermList,
+  private Vector<OBOClass> getSearchTerms(String input, List<OBOClass> ontologyTermList,
                                     SearchParamsI searchParams) {
     // need a unique list - UniqueTermList has quick check for uniqueness, checking
     // whole list is very very slow
@@ -152,20 +158,41 @@ public class Ontology {
     return uniqueTermList.getVector();//searchTerms;
   }
 
-  // pato subclass?
-  private boolean isAttribute(String term) {
-    return contains(term.toLowerCase(),"attribute");
+  public Vector<OBOProperty> getStringMatchRelations(String input) {
+    Vector<OBOProperty> matches = new Vector<OBOProperty>();
+    for (OBOProperty rel : getSortedRelations()) {
+      if (rel.toString().contains(input))
+        matches.add(rel);
+    }
+    return matches;
   }
-           
-  // part of search params?
-  //private boolean filterAttributes() { return isPato(); }
 
-  // make enum!!
-  private boolean isPato() {
-    //return ont == PATO;
-    // for now - eventually config somehow
-    return name.equals("Pato");
+  private List<OBOProperty> getSortedRelations() {
+    if (sortedRelations == null) {
+      //sortedRelations=new ArrayList<OBOProperty>(); not Comparable!
+      List sorRel = new ArrayList();
+      // if (oboSession == null) ? shouldnt happen
+      sorRel.addAll(oboSession.getRelationshipTypes());
+      Collections.sort(sorRel,new RelComparator());
+      sortedRelations = sorRel; // ?
+    }
+    return sortedRelations;
   }
+
+  private class RelComparator<OBOProperty> implements Comparator<OBOProperty> {
+    public int compare(OBOProperty r1, OBOProperty r2) {
+      return r1.toString().compareTo(r2.toString());
+    }
+    public boolean equals(OBOProperty r1, OBOProperty r2) {
+      return r1.toString().equals(r2.toString());
+    }
+  }
+
+  // pato subclass?
+//   private boolean isAttribute(String term) {
+//     return contains(term.toLowerCase(),"attribute");
+//   }
+           
   
 
 
@@ -296,11 +323,25 @@ public class Ontology {
     return filteredList;
   }
 
+  private Logger log;
+  private Logger log() {
+    if (log == null) log = Logger.getLogger(getClass());
+    return log;
+  }
 }
 
 
 
 // GARBAGE
+  // part of search params?
+  //private boolean filterAttributes() { return isPato(); }
+
+//   // make enum!!
+//   private boolean isPato() {
+//     //return ont == PATO;
+//     // for now - eventually config somehow
+//     return name.equals("Pato");
+//   }
 
 //   public Ontology(String name,OBOSession oboSession) {
 //     this.name = name;

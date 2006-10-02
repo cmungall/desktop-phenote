@@ -210,6 +210,11 @@ public class Config {
     return fieldList;
   }
 
+  /** should this just be a part of fieldConfigList? and main window would filter it
+      out when making up fields? rel is for post comp gui - or maybe FieldConfig
+      should have isPostComp, getPostCompRelFile - yes! */
+  //public FieldConfig getRelationshipFieldConfig() { }
+
 
   /** parse xml file with xml beans (phenoteconfigbeans.xml). Put in own class? */
   private void parseXmlFile(String filename) throws ConfigException {
@@ -288,7 +293,15 @@ public class Config {
     CharFieldEnum cfe = CharFieldEnum.getCharFieldEnum(name);
     //if (cfe == null) ???
     FieldConfig fc = new FieldConfig(cfe,name);
-    // if only one ontology file is an attribute... (convenience)
+    
+    // POST COMP, relationship ontol
+    if (field.getPostcomp() != null) {
+      fc.setIsPostComp(true);
+      String relFile = field.getPostcomp().getRelationshipOntology().getStringValue();
+      fc.setPostCompRelOntCfg(makeOntologyConfig("Relationship",relFile));
+    }
+
+    // ONTOLOGIES if only one ontology file is an attribute... (convenience)
     if (field.getFile() != null) {
       String file = field.getFile().getStringValue();
       fc.addOntologyConfig(makeOntologyConfig(name,file));

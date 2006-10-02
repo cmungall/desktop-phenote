@@ -18,6 +18,8 @@ public class CharField {
   private List<Ontology> ontologyList = new ArrayList<Ontology>(3);
   private CharFieldEnum charFieldEnum; // or subclass
   private String name;
+  private boolean postCompAllowed=false;
+  private Ontology postCompRelOntol;
 
   public CharField(CharFieldEnum c) {
     charFieldEnum = c;
@@ -42,6 +44,10 @@ public class CharField {
   }
 
   public CharFieldEnum getCharFieldEnum() { return charFieldEnum; }
+
+  public boolean isRelationship() {
+    return charFieldEnum == CharFieldEnum.RELATIONSHIP;
+  }
 
   boolean isGeneticContext() { return charFieldEnum == CharFieldEnum.GENETIC_CONTEXT; }
 
@@ -81,14 +87,21 @@ public class CharField {
     return null;
   }
 
-  /** whether this field allows for post composition - from config (todo) */
-  public boolean postCompAllowed() {
-    // return postCompAllowed; //eventually
-    return charFieldEnum == CharFieldEnum.ENTITY; // for now
+  // set whether post composition allowed (from config) */
+  public void setPostCompAllowed(boolean pca) {
+    postCompAllowed = pca;
   }
 
-  // set whether post composition allowed (from config) */
-  // public void setPostCompAllowed(boolean allowed) { postCompAllowed = allowed; }
+  /** whether this field allows for post composition - from config */
+  public boolean postCompAllowed() {
+    return postCompAllowed;
+  }
+
+  public void setPostCompRelOntol(Ontology o) {
+    postCompRelOntol = o;
+  }
+
+  public Ontology getPostCompRelOntol() { return postCompRelOntol; }
 }
 
     // is this getting silly? abstract? --> char field value i think

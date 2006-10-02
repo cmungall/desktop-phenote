@@ -50,8 +50,9 @@ public class OntologyDataAdapter {
     for (FieldConfig fieldConfig : config.getFieldConfigList()) {
       CharFieldEnum fce = fieldConfig.getCharFieldEnum();
       CharField cf = new CharField(fce);
+
+      // ONTOLOGIES
       if (fieldConfig.hasOntologies()) {
-        //cf = new CharField(fce,o);
         for (OntologyConfig oc : fieldConfig.getOntologyConfigList()) {
           try {
             Ontology o = loadOntology(oc);
@@ -65,10 +66,26 @@ public class OntologyDataAdapter {
       else {
         cf.setName(fieldConfig.getLabel());
       }
+
+      // POST COMP
+      if (fieldConfig.isPostComp()) {
+        cf.setPostCompAllowed(true);
+        try {
+          //Ontology o = loadRelationshipOntology(fieldConfig.getPostCompRelOntCfg());
+          Ontology o = loadOntology(fieldConfig.getPostCompRelOntCfg());
+          cf.setPostCompRelOntol(o);
+        } catch (FileNotFoundException e) {
+          LOG.error(e.getMessage()+" ignoring ontology, fix config! ");
+        }
+      }
       ontologyManager.addField(cf);
     }
+    //loadRelationshipOntology();
+    
     loadingOntologies = false;
   }
+
+  
 
 
   /** Load up/cache Sets for all ontologies used, anatomyOntologyTermSet
@@ -80,6 +97,14 @@ public class OntologyDataAdapter {
     loadOboSession(ontology,ontCfg.ontologyFile); // throws FileNotFoundEx
     return ontology;
   }
+
+//   private void loadRelationshipOntology() { hmmmmmm
+//     // for now - todo configure! post comp relationship-ontology
+//     // FieldConfig rfc = config.getRelationshipFieldConfig();
+//     //CharFieldEnum relEnum = rfc.getCharFieldEnum();
+//     CharFieldEnum relEnum = CharFieldEnum.RELATIONSHIP;
+//     CharField cf = new CharField(relEnum);
+//   }
 
   private void loadOboSession(Ontology o,String filename) throws FileNotFoundException {
     URL url = findFile(filename); // throws FileNotFoundEx

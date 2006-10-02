@@ -23,6 +23,7 @@ import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.OboUtil;
+import phenote.datamodel.Ontology;
 import phenote.datamodel.SearchParamsI;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
@@ -42,6 +43,8 @@ class PostCompGui {
   private CharField charField;
   private JDialog dialog;
   private CharFieldGui genusField;
+  //private RelationshipFieldGui relField; ??
+  private CharFieldGui relField;
   private CharFieldGui diffField;
 
   PostCompGui(CharField charField,SearchParamsI searchParams) {
@@ -60,6 +63,14 @@ class PostCompGui {
     genusField = new CharFieldGui(charField,compTermPanel,"Genus",false,false);
 
     // Relationship?? stripped down ontology?
+    CharField relChar = new CharField(CharFieldEnum.RELATIONSHIP);
+    // Ontology o = OntologyManager.getRelationshipOntology() ?? getRelCharField?
+    Ontology o = charField.getPostCompRelOntol();
+    relChar.addOntology(o);
+    relField = new CharFieldGui(relChar,compTermPanel,"Relationship",false,false);
+    relField.enableTermInfoListening(false); // turn off term info for rels
+    // relField = new RelFieldGui(relChar,compTermPanel,"Relationship");
+    // relField = new RelationshipFieldGui(compTermPanel);
 
     diffField =
       new CharFieldGui(charField,compTermPanel,"Differentia",false,false);
@@ -178,23 +189,12 @@ class PostCompGui {
 
   private OBOClass makePostCompTerm() throws Exception {
     // check that we have a valid genus & differentia
-    // this is no good - not getting terms that came from main window
     OBOClass genusTerm = genusField.getCurrentOboClass(); // throws Ex
     OBOClass diffTerm = diffField.getCurrentOboClass(); // throws Ex
-//     String nm = pcString(genusTerm.getName(),diffTerm.getName());
-//     String id = pcString(genusTerm.getID(),diffTerm.getID());
-//     OBOClass postComp = new OBOClassImpl(nm,id);
-//     OBOProperty ISA = OBOProperty.IS_A;
-//     OBORestrictionImpl gRel = new OBORestrictionImpl(postComp,ISA,genusTerm);
-//     gRel.setCompletes(true); // post comp flag
-//     postComp.addParent(gRel);
 //     // eventually get from obo relationship?
-    OBOProperty partOf = new OBOPropertyImpl("OBO_REL:part_of","part_of");
-    return OboUtil.makePostCompTerm(genusTerm,partOf,diffTerm);
-//     OBORestrictionImpl dRel = new OBORestrictionImpl(postComp,partOf,diffTerm);
-//     dRel.setCompletes(true); // post comp
-//     postComp.addParent(dRel);
-//     return postComp;
+    //OBOProperty partOf = new OBOPropertyImpl("OBO_REL:part_of","part_of");
+    OBOProperty rel = relField.getCurrentRelation();
+    return OboUtil.makePostCompTerm(genusTerm,rel,diffTerm);
   }
 
   private void commitTerm(OBOClass postComp) {
@@ -217,3 +217,15 @@ class PostCompGui {
   }
 
 }
+
+//     String nm = pcString(genusTerm.getName(),diffTerm.getName());
+//     String id = pcString(genusTerm.getID(),diffTerm.getID());
+//     OBOClass postComp = new OBOClassImpl(nm,id);
+//     OBOProperty ISA = OBOProperty.IS_A;
+//     OBORestrictionImpl gRel = new OBORestrictionImpl(postComp,ISA,genusTerm);
+//     gRel.setCompletes(true); // post comp flag
+//     postComp.addParent(gRel);
+//     OBORestrictionImpl dRel = new OBORestrictionImpl(postComp,partOf,diffTerm);
+//     dRel.setCompletes(true); // post comp
+//     postComp.addParent(dRel);
+//     return postComp;

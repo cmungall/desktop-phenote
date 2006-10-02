@@ -17,6 +17,7 @@ import javax.swing.event.DocumentEvent;
 import org.apache.log4j.Logger;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
+import org.geneontology.oboedit.datamodel.OBOProperty;
 
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
@@ -99,11 +100,16 @@ class CharFieldGui {
   AutoComboBox getAutoComboBox() {
     if (isCombo)
       return comboBox;
-    return null;
+    return null; // ex?
   }
 
   // hasOntology?
   boolean isCombo() { return isCombo; }
+
+  void enableTermInfoListening(boolean enable) {
+    if (!isCombo()) return;
+    getAutoComboBox().enableTermInfoListening(enable);
+  }
 
   /** Set the gui from the model (selection) */
   void setValueFromChar(CharacterI character) {
@@ -287,6 +293,11 @@ class CharFieldGui {
   OBOClass getCurrentOboClass() throws Exception {
     if (!isCombo) throw new Exception("Free text field has no OBO Class");
     return comboBox.getCurrentOboClass(); // throws Ex
+  }
+
+  OBOProperty getCurrentRelation() throws Exception {
+    if (!isCombo) throw new Exception("Free text field has no Relation");
+    return comboBox.getCurrentRelation(); // throws Ex
   }
 
   private Logger log;

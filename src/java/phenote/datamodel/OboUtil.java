@@ -14,8 +14,8 @@ public class OboUtil {
 
   public static OBOClass makePostCompTerm(OBOClass genus, OBOProperty rel,
                                           OBOClass diff) {
-    String nm = pcString(genus.getName(),diff.getName());
-    String id = pcString(genus.getID(),diff.getID());
+    String nm = pcString(genus.getName(),rel.getName(),diff.getName());
+    String id = pcString(genus.getID(),rel.getName(),diff.getID());
     OBOClass postComp = new OBOClassImpl(nm,id);
     OBOProperty ISA = OBOProperty.IS_A;
     OBORestrictionImpl gRel = new OBORestrictionImpl(postComp,ISA,genus);
@@ -26,9 +26,9 @@ public class OboUtil {
     postComp.addParent(dRel);
     return postComp;
   }
-  private static String pcString(String g, String d) {
+  private static String pcString(String g, String r, String d) {
     // for now hard wire to part_of
-    return g+"^part_of("+d+")";
+    return g+"^"+r+"("+d+")";
   }
 
 

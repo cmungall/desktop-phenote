@@ -1,3 +1,19 @@
+exit menu button? window close
+
+starts with
+
+obsoletes unselectable - but still browsable
+
+{syn} & {obs} tags in comp list
+
+syns show syns not term name
+
+cut down size of string for layout bug
+
+tab selects currently highlighted
+
+maybe do starts with before contains?
+
 on load keeps blank character (from before load) around in table - shouldnt
 
 auto load from sourcforge or bioportal
