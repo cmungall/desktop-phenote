@@ -98,11 +98,13 @@ public class Ontology {
     return searchTerms;
   }
 
+  /** helper fn for getSearchTerms(String,SearhParamsI) */
   private Vector<OBOClass> getSearchTerms(String input, List<OBOClass> ontologyTermList,
                                     SearchParamsI searchParams) {
     // need a unique list - UniqueTermList has quick check for uniqueness, checking
-    // whole list is very very slow
-    UniqueTermList uniqueTermList = new UniqueTermList();
+    // whole list is very very slow - how is it possible to get a dup term? i forget?
+    // the dup term was a BUG! in synonym - woops
+    SearchTermList uniqueTermList = new SearchTermList();
     //Vector searchTerms = new Vector();
     if (ontologyTermList == null)
       return uniqueTermList.getVector();//searchTerms;
@@ -120,12 +122,6 @@ public class Ontology {
       
       boolean termAdded = false;
 
-      // SKIP PATO ATTRIBUTES - only want values - or do !contains "value"?
-      // yes do contains value - as theres other crap to filter too
-      // apparently curators want to see attribs as well according to Michael
-      //if (filterAttributes() && isAttribute(originalTerm))
-      //continue;
-
       if (searchParams.searchTerms()) {
         // adds originalTerm to searchTerms if match (1st if exact)
         termAdded = compareAndAddTerm(input,originalTerm,oboClass,uniqueTermList);
@@ -136,14 +132,14 @@ public class Ontology {
 
       if (searchParams.searchSynonyms()) {
         Set synonyms = oboClass.getSynonyms();
-        for (Iterator i = synonyms.iterator(); i.hasNext(); ) {
+        for (Iterator i = synonyms.iterator(); i.hasNext() &&!termAdded; ) {
           String syn = i.next().toString();
-          //System.out.println("syn "+syn+" for "+originalTerm);
+          //log().debug("syn "+syn+" for "+originalTerm);
           termAdded = compareAndAddTerm(input,syn,oboClass,uniqueTermList);
-          if (termAdded)
-            continue;
+          //if (termAdded) continue; // woops continues this for not the outer!
         }
       }
+      if (termAdded) continue;
 
 
       if (searchParams.searchDefinitions()) {
@@ -151,7 +147,7 @@ public class Ontology {
         if (definition != null & !definition.equals(""))
           termAdded = compareAndAddTerm(input,definition,oboClass,uniqueTermList);
           if (termAdded)
-            continue;
+            continue; // not really necesary as its last
       }
 
     }
@@ -188,19 +184,11 @@ public class Ontology {
     }
   }
 
-  // pato subclass?
-//   private boolean isAttribute(String term) {
-//     return contains(term.toLowerCase(),"attribute");
-//   }
-           
-  
-
-
   /** User input is already lower cased, this potentially adds oboClass to
    * searchTerms if input & compareTerm match. Puts it first if exact. 
    * for term names comp = obo, for syns comp is the syn. 
    Returns true if term is a match & either gets added or already is added
-   * Also checks if term is in list already 
+   * Also checks if term is in list already - not needed - woops!
    Theres a speed issue here - the vector needs to be unique. if check every time
    with whole list very very slow. 2 alternatives to try. 
    1) have separate hash for checking uniqueness (downside 2 data structures). 
@@ -209,9 +197,14 @@ public class Ontology {
    nice - its 1 data structure BUT exact matches go 1st, no way in linked hash set
    to insert 1st elements so would need to keep separate list of exact matches, which
    i guess there can be more than one with synonyms (do syns count for exact matches?
-   should they?) - downside of #2 is need Vector for combo box */
+   should they?) - downside of #2 is need Vector for combo box
+ 
+   this wont fly for having different display strings for syn & obs as compareTerm
+   can be syn obs term or def and its lost here 
+   i think these methods need to be moved to gui.TermSearcher that utilizes Ontology 
+   but produces CompListTerms */
   private boolean compareAndAddTerm(String input, String compareTerm, OBOClass oboClass,
-                                    UniqueTermList uniqueTermList) {
+                                    SearchTermList searchTermList) {
     
     String oboTerm = oboClass.getName();
 
@@ -220,28 +213,22 @@ public class Ontology {
     if (ignoreCase)
       lowerComp = compareTerm.toLowerCase();
 
-    boolean doContains = true; // discard? param for?
+    //boolean doContains = true; // discard? param for?
     // exact match goes first in list
     if (lowerComp.equals(input)) {
-      //if (!searchTerms.contains(oboClass)) {// this takes a long time w long lists!
-      //searchTerms.add(0,oboClass);
-      uniqueTermList.addTermFirst(oboClass); // adds if not present
+      searchTermList.addTermFirst(oboClass); // adds if not present
       return true;
-        //}
+    }
+    // new paradigm - put starts with first
+    else if (lowerComp.startsWith(input)) {
+      searchTermList.addTerm(oboClass);
+      return true;
     }
     // Contains
-    else if (doContains) {
-      if (contains(lowerComp,input) && !termFilter(lowerComp)) {
-        //if(!searchTerms.contains(oboClass))takes long time!searchTerms.add(oboClass);
-        uniqueTermList.addTerm(oboClass); // does unique check
-        return true;
-      }
+    else if (contains(lowerComp,input) && !termFilter(lowerComp)) {
+      searchTermList.addContainsTerm(oboClass);
+      return true;
     }
-//     // Starts with - not doing this for now
-//     else if (lowerComp.startsWith(input)) {
-//       if (!searchTerms.contains(oboClass))
-//         searchTerms.add(oboClass);
-//     }
     return false;
   }
 
@@ -283,10 +270,14 @@ public class Ontology {
   public String getSource() { return source; }
 
 
-  /** does unique check w map */
-  private class UniqueTermList {
+  /** does unique check w map - dont need unique check - it was a bug in synonyms
+   how silly! - but actually this data structure will be handy for putting starts with
+   before contains! UniqueTermList -> SearchTermList*/
+  private class SearchTermList {
     private Vector<OBOClass> searchTerms = new Vector<OBOClass>();
-    private Map<OBOClass,OBOClass> uniqueCheck = new HashMap<OBOClass,OBOClass>();
+    //private Map<OBOClass,OBOClass> uniqueCheck = new HashMap<OBOClass,OBOClass>();
+    // list of terms that are contained but NOT startsWith
+    private Vector<OBOClass> containTerms = new Vector<OBOClass>();
     private void addTerm(OBOClass oboClass) {
       addTerm(oboClass,false);
     }
@@ -294,13 +285,21 @@ public class Ontology {
       addTerm(oboClass,true);
     }
     private void addTerm(OBOClass oboClass,boolean first) {
-      if (uniqueCheck.containsKey(oboClass))
-        return;
+      //if (uniqueCheck.containsKey(oboClass)) {
+      //log().debug("dup term in search "+oboClass);
+      //  new Throwable().printStackTrace();  return;   }
       if (first) searchTerms.add(0,oboClass);
       else searchTerms.add(oboClass);
-      uniqueCheck.put(oboClass,null); // dont need value
+      //uniqueCheck.put(oboClass,null); // dont need value
     }
-    private Vector<OBOClass> getVector() { return searchTerms; }
+    /** Add term thats not startsWith but contains */
+    private void addContainsTerm(OBOClass oboClass) {
+      containTerms.add(oboClass);
+    }
+    private Vector<OBOClass> getVector() { 
+      searchTerms.addAll(containTerms);
+      return searchTerms; 
+    }
   }
 
 
@@ -333,6 +332,20 @@ public class Ontology {
 
 
 // GARBAGE
+      //if (!searchTerms.contains(oboClass)) {// this takes a long time w long lists!
+      //searchTerms.add(0,oboClass);
+      //if (!searchTerms.contains(oboClass))  searchTerms.add(oboClass);
+        //if(!searchTerms.contains(oboClass))takes long time!searchTerms.add(oboClass);
+      // SKIP PATO ATTRIBUTES - only want values - or do !contains "value"?
+      // yes do contains value - as theres other crap to filter too
+      // apparently curators want to see attribs as well according to Michael
+      //if (filterAttributes() && isAttribute(originalTerm))
+      //continue;
+
+  // pato subclass?
+//   private boolean isAttribute(String term) {
+//     return contains(term.toLowerCase(),"attribute");
+//   }
   // part of search params?
   //private boolean filterAttributes() { return isPato(); }
 

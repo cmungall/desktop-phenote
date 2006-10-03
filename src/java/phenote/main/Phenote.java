@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -30,9 +32,10 @@ import phenote.gui.TermPanel;
 
 public class Phenote {
 
-  private static final String VERSION = "0.8 dev";
+  private static final String VERSION = "0.8.1 dev";
   //private static final String DEFAULT_CONFIG_FILE = Config.DEFAULT_CONFIG_FILE;
   private static final Logger LOG = Logger.getLogger(Phenote.class);
+  private static boolean standalone = false; // default for servlet
 
   private CharacterTablePanel characterTablePanel;
   private TermPanel termPanel;
@@ -43,6 +46,7 @@ public class Phenote {
   
 
   public static void main(String[] args) {
+    standalone = true; // i think this is ok
     System.out.println("This is Phenote version "+VERSION);
     // default mac lok & feel is "Mac OS X", but the JComboBox is buggy
     try {
@@ -161,8 +165,19 @@ public class Phenote {
     frame.getContentPane().add(makeMainPanel());
     MenuManager.createMenuManager(frame);
     frame.setPreferredSize(new Dimension(1000,550));
+    if (standalone) // if stand alone exit java on window close
+      frame.addWindowListener(new WindowExit());
     frame.pack();
     frame.setVisible(true);
+  }
+
+  /** for standalone & webstart - not for servlet as i think it will bring the
+      whole servlet down */
+  private class WindowExit extends WindowAdapter {
+    public void windowClosing(WindowEvent e) {
+      if (standalone)
+        System.exit(0);
+    }
   }
 
   /** main panel contains TermPanel CharTablePanel & TermInfo */

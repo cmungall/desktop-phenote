@@ -162,7 +162,7 @@ public class TestPhenote {
     qualityComboBox.simulateLKeyStroke();
     qualityComboBox.setSelectedIndex(2);
     // this is admittedly presumptious of quality
-    assertEquals("acute angle",qualityComboBox.getText());
+    assertEquals("large volume",qualityComboBox.getText());
     System.out.println("comp list sel ok "+qualityComboBox.getText());
   }
   
