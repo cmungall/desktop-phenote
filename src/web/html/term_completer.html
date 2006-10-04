@@ -1,37 +1,22 @@
-
-
-
 <td> <b><!--#if expr="\"tag\"" --><!--#echo var="title" --><!--#endif --></b>&nbsp;&nbsp;
 </td>
 <td>
 <input autocomplete="off" id="<!--#if expr="\"tag\"" --><!--#echo var="tag" --><!--#endif -->" name="<!--#if expr="\"tag\"" --><!--#echo var="tag" --><!--#endif -->" size="26" type="text" value="" />
-</td>
+
 <BR><div class="auto_complete" id="<!--#if expr="\"tag\"" --><!--#echo var="tag" --><!--#endif -->_auto_complete"></div>
 
-<input type="hidden" name="<!--#if expr="\"tag\"" --><!--#echo var="tag" --><!--#endif -->id">
-
+<input type="hidden" id="<!--#if expr="\"tag\"" --><!--#echo var="tag" --><!--#endif -->_id" name="<!--#if expr="\"tag\"" --><!--#echo var="tag" --><!--#endif -->id">
+</td>
 <script type="text/javascript">
 			function set_<!--#if expr="\"tag\"" --><!--#echo var="tag" --><!--#endif -->_term(termid){
            if ( !isNaN( termid ) ) {
             var pars = 'termid=' + termid;
 
             var myAjax = new Ajax.Updater('terminfo', "<!--#if expr="\"url\"" --><!--#echo var="url" --><!--#endif -->", {method: 'get', parameters: pars } );
-           // have to have [1] next to form item because the edit subform and
-           // the main form both have donorid elements
-            if ( document.forms[0].termid.length > 1 ) {
-               document.forms[0].<!--#if expr="\"tag\"" --><!--#echo var="tag" --><!--#endif -->id[1].value = termid;
-               document.forms[0].<!--#if expr="\"tag\"" --><!--#echo var="tag" --><!--#endif -->id[2].value = termid;
-            }
-            else {
-               document.forms[0].<!--#if expr="\"tag\"" --><!--#echo var="tag" --><!--#endif -->id.value = termid;
-            }
+            document.data_table.<!--#if expr="\"tag\"" --><!--#echo var="tag" --><!--#endif -->id.value = termid;
+
          }
-
-
       }
 
              new Ajax.Autocompleter( '<!--#if expr="\"tag\"" --><!--#echo var="tag" --><!--#endif -->', '<!--#if expr="\"tag\"" --><!--#echo var="tag" --><!--#endif -->_auto_complete', '<!--#if expr="\"url\"" --><!--#echo var="url" --><!--#endif -->',{  });
 </script>
-
-
-

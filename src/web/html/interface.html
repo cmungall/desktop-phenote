@@ -12,68 +12,87 @@
 <script src="/web/javascript/ajax-lib/effects.js"   type="text/javascript"></script>
 <script src="/web/javascript/ajax-lib/dragdrop.js"  type="text/javascript"></script>
 <script src="/web/javascript/ajax-lib/controls.js"  type="text/javascript"></script>
+<script src="/web/javascript/ajax-lib/json.js"  type="text/javascript"></script>
+<script src="/web/javascript/interface.js"  type="text/javascript"></script>
+<link href="/web/css/term_completer.css" type="text/css" rel="stylesheet">
+<!--link href="/inc/css/style.css" type="text/css" rel="stylesheet"-->
 </HEAD>
 <BODY>
 
 <table>
-<tr height="20%"><td>
-
+<tr valign="top"><td>
 <div id="ontology">
- <div style="float: left;">
+<div style="float: left;">
 
-<link href="/web/css/term_completer.css" type="text/css" rel="stylesheet">
-<form>
+
+<form name="data_table" action="process_phenotype.pl">
 
  <!-- term_completer.html code start -->
 <table>
 <tr>
 <!--#set var="tag" value="genotype" -->
 <!--#set var="title" value="Genotype" -->
-<!--#set var="url" value="/db/cgi-bin/ajax_search/genotype.cgi" -->
-<!--#include virtual="term_completer.html" -->
-</tr><tr>
-<!--#set var="tag" value="mutant_type" -->
-<!--#set var="title" value="Mutant Type" -->
-<!--#set var="url" value="/db/cgi-bin/ajax_search/genotype.cgi" -->
-<!--#include virtual="term_completer.html" -->
+<!--#set var="url" value="/db/cgi-bin/ajax_search/genetics/genotype.pl" -->
+<!--#include virtual="/web/html/term_completer.html" -->
 </tr><tr>
 <!--#set var="tag" value="genetic_context" -->
 <!--#set var="title" value="Genetic Context" -->
-<!--#set var="url" value="/db/cgi-bin/ajax_search/genotype.cgi" -->
-<!--#include virtual="term_completer.html" -->
+<!--#set var="url" value="/db/cgi-bin/ajax_search/genetics/genetic_context.pl" -->
+<!--#include virtual="/web/html/term_completer.html" -->
 </tr><tr>
 <!--#set var="tag" value="entity" -->
 <!--#set var="title" value="Entity" -->
-<!--#set var="url" value="/db/cgi-bin/ajax_search/entity.cgi" -->
-<!--#include virtual="term_completer.html" -->
+<!--#set var="url" value="/db/cgi-bin/ajax_search/genetics/entity.pl" -->
+<!--#include virtual="/web/html/term_completer.html" -->
 </tr><tr>
 <!--#set var="tag" value="quality" -->
 <!--#set var="title" value="Quality" -->
-<!--#set var="url" value="/db/cgi-bin/ajax_search/quality.cgi" -->
-<!--#include virtual="term_completer.html" -->
+<!--#set var="url" value="/db/cgi-bin/ajax_search/genetics/quality.pl" -->
+<!--#include virtual="/web/html/term_completer.html" -->
 </tr><tr>
 <!--#set var="tag" value="reference" -->
 <!--#set var="title" value="Reference" -->
-<!--#set var="url" value="/db/cgi-bin/ajax_search/quality.cgi" -->
-<!--#include virtual="term_completer.html" -->
+<!--#set var="url" value="/db/cgi-bin/ajax_search/genetics/quality.pl" -->
+<!--#include virtual="/web/html/term_completer.html" -->
 </tr><tr>
 <td>
 <b>Notes</b>&nbsp;&nbsp;
 </td>
 <td>
-<TEXTAREA NAME="notes" ROWS="4", COLS="20"> </TEXTAREA>
+<TEXTAREA id="notes"  NAME="notes" ROWS="4" COLS="20"></TEXTAREA>
 </td>
 </tr>
 </table>
- <!-- term_completer.html code  ends -->
 
-</form>
+
 </div>
  <div id="terminfo"></div>
+<BR>
 </div>
 </td></tr>
-<tr height="80%"><td>&nbsp;</td></tr>
+<tr><td>
+<div id="datatable">
+<CENTER><input type="button" name="Add" value="Add" onClick="insert_row('data')"/>
+<input type="button" name="Update" value="Update" onClick="update_row('data')"/>
+<input type="button" name="Commit" value="Commit" onClick="commit_data('data')"/>
+<input type="button" name="Retrieve" value="Retrieve" onClick="retrieve_data('data')"/>
+<input type="button" name="Clear All" value="Clear All" onClick="clear_table_data('data')"/>
+<table id="data" class="phenotype">
+<col width="15%"/><col width="10%"/><col width="15%"/><col width="15%"/><col width="15%"/><col width="15%"/><col width="15%"/>
+
+<TR><TH>&nbsp;</TH><TH>Genotype</TH><TH>Genetic Context</TH><TH>Entity</TH><TH>Quality</TH><TH>Reference</TH><TH>Notes</TH></TR>
 </table>
+</CENTER>
+</form>
+<div id="results">
+&nbsp;<BR>
+&nbsp;
+</div>
+</div>
+</td></tr>
+</table>
+
+
 </body>
 </html>
 
