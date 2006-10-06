@@ -19,6 +19,7 @@ public class HtmlUtil {
 //    should this be somewhere else? gui.Phenote? */
   private static boolean isStandAlone = true;
   private static String ontologyName;
+  private static String field;
 
   /** Stand alone and web app do different things for term links */
   public static void setStandAlone(boolean standAlone) {
@@ -34,6 +35,7 @@ public class HtmlUtil {
     if (oboClass.isObsolete())
       sb.append("This term is OBSOLETE").append(newLine());
     sb.append(bold("TERM: ")).append(oboClass.getName());
+    sb.append(nl()).append(bold("ID: ")).append(oboClass.getID());
     Set syns = oboClass.getSynonyms();
     for (Iterator it = syns.iterator(); it.hasNext(); ) {
       sb.append(newLine()).append(bold("Synonym: ")).append(it.next());
@@ -54,17 +56,22 @@ public class HtmlUtil {
     return sb.toString();
   }
 
-  public static String termInfo(OBOClass oboClass, String ontology) {
+  public static String termInfo(OBOClass oboClass, String ontology,String field) {
     // funny - revisit for sure - either should pass through all methods
     // or util should actually be an object - singleton? i think maybe its
     // an object???
     setOntologyName(ontology);
+    setField(field);
     return termInfo(oboClass);
   }
 
+  // maybe this should be an object? as this is stateful
   private static void setOntologyName(String ont) {
     ontologyName = ont;
   }
+  /** string for web to track source of term info for UseTermInfo */
+  private static void setField(String f) { field = f; }
+  private static String getField() { return field; }
 
   private static String getOntologyName() { return ontologyName; }
 
@@ -143,21 +150,50 @@ public class HtmlUtil {
   }
 
   private static String termLink(LinkedObject term) {
-    String clickString = getClickString(term.getID());
+    String clickString = getClickString(term.getID(),term.getName());
+    //System.out.println(clickString);
     return "<a "+clickString+">"+term.getName()+"</a>";
   }
 
-  private static String getClickString(String id) {
+  private static String getClickString(String id,String name) {
     if (isStandAlone)
       return "href='"+makePhenoIdLink(id)+"'";
-    else
-      return "href=# "+onClickJavaScript(id);
+    else // this needs some reworking - causes page refresh and goes to top
+      return "href=# "+onClickJavaScript(id,name);
   }
 
-  //<A href='#' onClick='getTermInfo(".$_->term_id.")'>
-  private static String onClickJavaScript(String id) {
-    // need ontology name????
-    return " onClick='getTermInfo(\""+id+"\",\""+getOntologyName()+"\")' ";
+  /**<A href='#' onClick='getTermInfo("id","name","ontology")'> - added in name for
+     UseTerm */
+  private static StringBuffer onClickJavaScript(String id,String name) {
+    //String c = ",";
+    //return " onClick='getTermInfo("+q(id)+c+q(name)+c+q(getOntologyName())+")' ";
+    StringBuffer sb = new StringBuffer("onClick=");
+    String ont = getOntologyName(), f = getField();
+    StringBuffer fn = fn("getTermInfo",new String[]{id,name,ont,f});
+    return sb.append(dq(fn));
+  }
+  /** quoter */
+  private static String dq(String s) {
+    return "\""+s+"\"";
+  } 
+
+  private static StringBuffer dq(StringBuffer sb) {
+    return new StringBuffer("\""+sb+"\"");
+  }
+
+  private static StringBuffer q(StringBuffer sb) {
+    return new StringBuffer("'"+sb+"'");
+  }
+  private static String q(String s) {
+    return "'"+s+"'";
+  }
+
+  public static StringBuffer fn(String fnName, String[] params) {
+    StringBuffer s = new StringBuffer(fnName).append("(").append(q(params[0]));
+    for (int i=1; i<params.length; i++)
+      s.append(",").append(q(params[i]));
+    s.append(")");
+    return s;
   }
 
   /** used internally & by TestPhenote */

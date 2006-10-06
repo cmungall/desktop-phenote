@@ -325,7 +325,8 @@ class AutoComboBox extends JComboBox {
   }
   private boolean isTermList() { return !isRelationshipList(); }
 
-  /** Populates defaultComboBoxModel with Vector of OBOClasses - OBOClass.toString
+  /** MAKE COMPLETION LIST FROM USER INPUT
+      Populates defaultComboBoxModel with Vector of OBOClasses - OBOClass.toString
       is the name of the term - thats why its possible - at least for moment
       if we want to put syn in brackets that makes this not possible - certainly
       handy */

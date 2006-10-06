@@ -15,38 +15,32 @@ var url = '/phenote/Phenote'; // jboss
 // ontologyid -> termId
 
 // ontologyName is the name of the ontology (not a term name!)
-      function getTermInfo(termId,ontologyName) {
+function getTermInfo(termId,termName,ontologyName,field) {
 
-        // for some reason 0 doesnt work
-        //termId = 123;
-
-        //alert("phenote-control.js set_ontology called ontId isNan:"+isNaN(termId)+" ontId: "+termId);
-
-        // isNan is "is Not a Number", ontology id has to be a number
-         //if ( !isNaN( termId ) ) {      
-//            var pars = 'ontologyid=' + ontologyid;
-            var pars = 'termId=' + termId +'&ontologyName=' + ontologyName;
-
+  // for some reason 0 doesnt work
+  //termId = 123;
+  
+  //alert("ncbo-term-info.js set_ontology called termId: "+termId+" field "+field);
+  // isNan is "is Not a Number", ontology id has to be a number
+  //if ( !isNaN( termId ) ) { //var pars = 'ontologyid=' + ontologyid;
+  var pars = 'termId='+termId+'&ontologyName='+ontologyName+'&field='+field;
             
-            //alert("phenote-control.js calling Ajax.Updater with "+pars);
-            //this.debug("phenote-control.js calling Ajax.Updater with "+pars);
+  //alert("ncbo-term-info.js calling Ajax.Updater with "+pars);
+  //this.debug("ncbo-term-info.js calling Ajax.Updater with "+pars);
 
-            // ontologyinfo is the div where the table goes for term info
-            // note: this is a "get" not a post! (term comp is post)
-            //var myAjax = new Ajax.Updater('termInfo', url, {method: 'get', parameters: pars, onComplete: document.forms[0].qualityInput.value = '' } );
-            // take out wipe out on complete
-            var myAjax = new Ajax.Updater('termInfo', url, {method: 'get', parameters: pars } );
-           // have to have [1] next to form item because the edit subform and
-           // the main form both have donorid elements
-            if ( document.forms[0].ontologyid.length > 1 ) {
-               document.forms[0].ontologyid[1].value = termId;
-               document.forms[0].ontologyid[2].value = termId;
-            }
-            else {
-               document.forms[0].ontologyid.value = termId;
-            }
-         //}
-      }
+  // ontologyinfo is the div where the table goes for term info
+  // note: this is a "get" not a post! (term comp is post)
+  //var myAjax = new Ajax.Updater('termInfo', url, {method: 'get', parameters: pars, onComplete: document.forms[0].qualityInput.value = '' } );
+  // took out wipe out on complete
+  var myAjax = new Ajax.Updater('termInfo', url, {method: 'get', parameters: pars } );
+  //if ( document.forms[0].ontologyid.length > 1 ) { // dont need this
+  //document.forms[0].ontologyid[1].value = termId;
+  //document.forms[0].ontologyid[2].value = termId; } else {
+  document.termForm.termInfoTermId.value = termId; // }
+  document.termForm.termInfoTermName.value = termName;
+  document.termForm.activeField.value = field;
+  //} if isNan taken out
+}
 
 
 

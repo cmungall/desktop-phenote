@@ -48,6 +48,7 @@ public class PhenoteServlet extends HttpServlet {
         // just in case not in web.xml
         if (configFile == null || configFile.equals(""))
             configFile = "/initial-zfin.cfg";
+        //boolean DEBUG = true;  if (DEBUG) configFile = "/fiddle.cfg";
         try {
             Config.inst().setConfigFile(configFile); // causes parse of file
         } catch (ConfigException e) {
@@ -93,7 +94,8 @@ public class PhenoteServlet extends HttpServlet {
 //         "<li onmouseover=\"set_ontology()\" id=\"termId\" onclick=\"set_ontology()\">"+
 //         "test</li>\n<li onmouseover=\"set_ontology()\" id=\"termId\" onclick=\"set_ontology()\">dude</li></ul>";
             String ontol = getOntologyParamString(request);
-            String list = getCompletionList(userInput, ontol);
+            String field = getFieldParamString(request);
+            String list = getCompletionList(userInput, ontol, field);
             LOG.debug("printing to response writer: " + substring(list, 55) + "...");
             out.println(list);
         }
@@ -120,37 +122,45 @@ public class PhenoteServlet extends HttpServlet {
         return req.getParameter("ontologyName");
     }
 
+  /** field param string specifies what gui field the request came from - this is 
+      used for UseTermInfo button to populate field from term info */
+  private String getFieldParamString(HttpServletRequest req) {
+    return req.getParameter("field");
+  }
 
-    /**
-     * TERM INFO request
-     * i cant tell ya why but term info is done with a get and term completion
-     * is done with a post - is there rhyme or reason to this?
-     */
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException {
-        if (true || isTermInfoRequest(request)) {
-            PrintWriter out = response.getWriter();
-            String termId = getTermIdFromTermInfoRequest(request);
-            String ontologyName = getOntologyParamString(request);
-            LOG.info("doGet term info param: " + termId + " ont " + ontologyName);
+
+
+  /**
+   * TERM INFO request
+   * i cant tell ya why but term info is done with a get and term completion
+   * is done with a post - is there rhyme or reason to this?
+   */
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
+    throws IOException, ServletException {
+    if (isTermInfoRequest(request)) {
+      PrintWriter out = response.getWriter();
+      String termId = getTermIdFromTermInfoRequest(request);
+      String ontologyName = getOntologyParamString(request);
+      String field = getFieldParamString(request);
+      LOG.info("doGet term info param: " + termId + " ont " + ontologyName);
 //       out.println("<table><tr><td class=\"label\">Ontology</td> "+
 //                   "<td class=\"data\">"+initDate+"</td></tr>\n"+
 //                   "<tr><td class=\"label\">Term name...</td><td class=\"data\">"
 //                   +userInput+"</td></tr></table>");
-            Ontology ont = getOntology(ontologyName);
-            if (ont == null) {
-                LOG.error("ERROR: Failed to get ontology for " + ontologyName);
-                return;
-            }
-            OBOClass oboClass = getOntology(ontologyName).getOboClass(termId);
-            if (oboClass == null) {
-                LOG.error("term info: no obo class found for " + termId);
-                return;
-            }
-            LOG.info("term info " + substring(HtmlUtil.termInfo(oboClass), 60));
-            out.println(HtmlUtil.termInfo(oboClass, ontologyName));
-        }
+      Ontology ont = getOntology(ontologyName);
+      if (ont == null) {
+        LOG.error("ERROR: Failed to get ontology for " + ontologyName);
+        return;
+      }
+      OBOClass oboClass = getOntology(ontologyName).getOboClass(termId);
+      if (oboClass == null) {
+        LOG.error("term info: no obo class found for " + termId);
+        return;
+      }
+      LOG.info("term info " + substring(HtmlUtil.termInfo(oboClass), 60));
+      out.println(HtmlUtil.termInfo(oboClass, ontologyName,field));
     }
+  }
 
     private String substring(String s, int sz) {
         sz = (s.length() <= sz) ? s.length() : sz;
@@ -166,22 +176,26 @@ public class PhenoteServlet extends HttpServlet {
     }
 
 
-    // List<String>? String[]? or String htmlLiString?
-    // for now just return html ul-li list w onmouseover
-    private String getCompletionList(String userInput, String ontol) {
-        StringBuffer sb = new StringBuffer("<ul>");
-        // for now just grab the pato ontology - eventuall redo for multiple/config
-        Ontology ontology = getOntology(ontol);
-        if (ontology == null) {
-            LOG.error("failed to get " + ontol + " from ontology manager");
-            return "ontology retrieval failed";
-        }
-        Vector<OBOClass> v = ontology.getSearchTerms(userInput, getSearchParams());
-        for (OBOClass oc : v)
-            sb.append(makeCompListHtmlItem(oc, ontol));
-        sb.append("</ul>");
-        return sb.toString();
+  /** List<String>? String[]? or String htmlLiString?
+      for now just return html ul-li list w onmouseover
+      userInput is what user has typed which terms will be queried for
+      ontol is the name of the ontology that user is querying
+      field is the gui field user is querying (which may have multiple ontols) */
+  private String getCompletionList(String userInput,String ontol,String field) {
+    StringBuffer sb = new StringBuffer("<ul>");
+    // for now just grab the pato ontology - eventuall redo for multiple/config
+    Ontology ontology = getOntology(ontol);
+    if (ontology == null) {
+      LOG.error("failed to get " + ontol + " from ontology manager");
+      return "ontology retrieval failed";
     }
+    Vector<OBOClass> v = ontology.getSearchTerms(userInput, getSearchParams());
+    for (OBOClass oc : v)
+      sb.append(makeCompListHtmlItem(oc, ontol, field));
+    sb.append("</ul>");
+    //System.out.println(sb);
+    return sb.toString();
+  }
 
     /**
      * returns null if ontolName not found
@@ -200,12 +214,33 @@ public class PhenoteServlet extends HttpServlet {
         return null;
     }
 
-    private String makeCompListHtmlItem(OBOClass term, String ontol) {
-        String id = "'" + term.getID() + "'";
-        String info = "\"getTermInfo(" + id + ",'" + ontol + "')\"";
-        return "<li onmouseover=" + info + " id=" + id + " " +
-                "onclick=" + info + ">" + term.getName() + "</li>\n";
-    }
+  private String makeCompListHtmlItem(OBOClass term, String ontol,String field) {
+    String id = term.getID(), name=term.getName();
+    // pass in id, name & ontology - name for setting field on UseTerm
+    StringBuffer info = dq(fn("getTermInfo",new String[]{id,name,ontol,field}));
+    //String info = "\"getTermInfo("+id +","+q(name)+","+ q(ontol) + ")\"";
+    return "<li onmouseover=" + info + " id=" + q(id) + " " +
+      "onclick=" + info + ">" + name + "</li>\n";
+  }
+
+  private static StringBuffer fn(String fnName, String[] params) {
+    return HtmlUtil.fn(fnName,params);
+  }
+//     StringBuffer s = new StringBuffer(fnName).append("(").append(q(params[0]));
+//     for (int i=1; i<params.length; i++) s.append(",").append(q(params[i]));
+//     s.append(")");    return s;   }
+
+  private static StringBuffer dq(StringBuffer sb) {
+    return new StringBuffer("\""+sb+"\"");
+  }
+
+  private static StringBuffer q(StringBuffer sb) {
+    return new StringBuffer("'"+sb+"'");
+  }
+
+  private static String q(String s) {
+    return "'"+s+"'";
+  } 
 
     /**
      * for now search params hard wired - eventually from buttons on web page

@@ -29,7 +29,7 @@
     }
 
 <!--    entityAutoCompleter.options.parameters = "ontologyName=" +    ontologyName; -->
-   entityAutoCompleter.options.defaultParams = "ontologyName=" +    ontologyName;
+   entityAutoCompleter.options.defaultParams = "ontologyName="+ontologyName+"&field=ENTITY";
     <!-- alert(entityAutoCompleter.options.defaultParams); -->
 
   }
@@ -45,7 +45,7 @@
 
 <!-- td width="20%" -->
 
-<form width="20%">
+<form name="termForm" width="20%">
    <div id="ontology" width="20%">
 
      <!-- table width="20%" -->
@@ -117,27 +117,53 @@
    <!--   'ontologyname_auto_complete', '/phenote-ontology.cgi',{  }) -->
    <!-- new Ajax.Autocompleter( 'ontologyname', 'ontologyname_auto_complete', '/servlet/PhenoteStub',{  }) -->
    <!--  new Ajax.Autocompleter( 'ontologyname', 'ontologyname_auto_complete', '/servlet/phenote.servlet.PhenoteServlet',{  }) -->
-      var complete = new Ajax.Autocompleter( 'qualityInput', 'quality_auto_complete', '../Phenote',{parameters:'ontologyName=quality',paramName: "userInput"   })
+      var complete = new Ajax.Autocompleter( 'qualityInput', 'quality_auto_complete', '../Phenote',{parameters:'ontologyName=quality&field=QUALITY',paramName: "userInput"   })
       <!-- complete.options.defaultParams = "ontology=quality"; -->
       <!--   complete.options.parameters = "ontology=quality"; -->
       <!-- more params? 'ontology=quality&x=y&...' -->
    </script>
 
    <script type="text/javascript">
-        var entityAutoCompleter = new Ajax.Autocompleter( 'entityInput', 'entity_auto_complete', '../Phenote',{parameters:'ontologyName=ZF',paramName: "userInput"})
+        var entityAutoCompleter = new Ajax.Autocompleter( 'entityInput', 'entity_auto_complete', '../Phenote',{parameters:'ontologyName=ZF&field=ENTITY',paramName: "userInput"})
    </script>
 
 
 
    <!-- this is set by ncbo-term-info.js but its unclear what its for is this the datamodel???? -->
-   <input type="hidden" name="ontologyid">
+   <input type="hidden" name="termInfoTermId">
+   <input type="hidden" name="termInfoTermName">
+   <!--what input field haas the user most recently moused over terms --> 
+   <!-- ENTITY or QUALITY, set by ncbo-term-info.js -->
+   <input type="hidden" name="activeField">
 </form>
  
 <!-- /td -->
 
 <!-- td width="80%" -->
       <div id="termInfo"></div>
+      <!-- USE TERM BUTTON --> 
+      <input
+        type="button"
+        value="Use Term"
+        name="use_term_info"
+        onClick="useTermInfo()"
+      >
+
 <!-- /td -->
+   <script type="text/javascript">
+     function useTermInfo() {
+       var field = document.termForm.activeField.value;
+       var termName = document.termForm.termInfoTermName.value;
+       //alert('use term info fn called - field '+field+' name '+termName);
+       <!-- document.termForm.qualityInput.value=document.termForm.termId.value; -->
+       if (field == "ENTITY") {
+         document.termForm.entityInput.value = termName;
+       }
+       else {
+         document.termForm.qualityInput.value= termName;
+       }
+     }
+   </script>
 
 
 
