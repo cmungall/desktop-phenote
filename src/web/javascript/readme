@@ -5,16 +5,18 @@ ajax-lib is open source ajax code from scriptaculous that the above files use.
 in theory these shouldnt need to be modified (though ive had my temptations)
 
 The 3 scripts are all for term info retrieval from the backend. They should 
-probably be merged & deleted. The main variant is the back url to get term info
+probably be merged & deleted. The main variant is the backend url to get term info
 from and that url should come from the top page where all mod specific stuff is set,
 rather than here. Once that is done should be able to merge. 
 
 These scripts are called with onMouseOver that is in the completion list that is
-returned by the server for autocompletion.
+returned by the backend server(be it perl servlet or whatnot) for autocompletion.
 
 dichty-term-info.js might be old and if so should be deleted? sohel?
 
-term_completer.js is the new dichty base script (or old??).
+term_completer.js is the new dichty base script (or old??) should be merged
+with ncbo-term-info.js. Sohel that would require you to change your mouseOver
+function call from the completion list to getTermInfo - would that be ok?
 
 ncbo-term-info.js 
 -----------------
