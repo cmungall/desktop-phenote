@@ -1,0 +1,33 @@
+Files: 
+dichty.html  interface.html  ncbo.html  term_completer.html
+
+dichty.html: I think this is old and should be deleted - sohel? replaced by interface.html
+
+
+interface.html:
+--------------- 
+This should be renamed dichty-top.html as this is dichty base's new
+top level html page. The improvement over dichty.html (amongst other additions) is
+that it generically creates fields using the Sever Side Includes(SSI) file 
+term_completer.html. Also has commit & retrieve buttons, that call javascript functions.
+
+term_completer.html
+-------------------
+This is generic server side include stuff for interface.html. It takes vars tag, title,
+ & url. see interface.html for use. This should be renamed term_completion_field.ssi
+ or just field.ssi (are all fields term completion - some may be free text) or
+ field_template.ssi?
+
+
+ncbo.html 
+---------
+This is the top html page for ncbo/zfin (rename zfin.html?). It should use the new
+SSI paradigm and use the term_completer.html SSI stuff. But this does have stuff that
+interface/term_completer lacks. That is it has an entity chooser (dichtybase has no
+need for one), and a UseTerm button. These require both an ontology name and field
+name to be passed into the auto completion function. Also method names are renamed 
+for clarity sake. 
+
+
+So in summary ncbo.html & interface.html need to grab stuff from each other. Both of which
+serve as templates for new groups coming up with there own top level page (mod.html)
