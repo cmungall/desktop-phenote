@@ -29,8 +29,7 @@ import org.geneontology.oboedit.datamodel.OBOProperty;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.CharacterI;
-import phenote.datamodel.Ontology;
-import phenote.datamodel.SearchParamsI;
+//import phenote.datamodel.Ontology;
 import phenote.edit.EditManager;
 import phenote.edit.UpdateTransaction;
 import phenote.gui.selection.SelectionManager;
@@ -40,19 +39,19 @@ import phenote.gui.selection.UseTermListener;
 /** The jcombobox that does auto completion - i had to do some tricks(hacks) to get it
     working with mouse over which doesnt come naturally to jcombobox */
 
-class AutoComboBox extends JComboBox {
+class AbstractAutoCompList extends JComboBox {
 
-  private Ontology ontology;
+  //private Ontology ontology;
   private boolean changingCompletionList = false;
   private boolean keyTyped = false;
   private String previousInput = "";
   private boolean doCompletion = true;
   // should we keep state of currentOboClass which is null if not a valid one?
   // default combo box.getSelectedItem sortof does this imperfectly
-  private OBOClass currentOboClass=null;
-  private OBOProperty currentRel=null;
+  //private OBOClass currentOboClass=null;
+  //private OBOProperty currentRel=null;
   private DefaultComboBoxModel defaultComboBoxModel;
-  private SearchParamsI searchParams;
+  //private SearchParamsI searchParams;
   private boolean inTestMode = false;
   //private AutoTextFieldEditor autoTextFieldEditor;
   private AutoTextField autoTextField;
@@ -62,31 +61,31 @@ class AutoComboBox extends JComboBox {
   /** if false then model is not edited */
   private boolean editModel;
   private CompletionListListener compListListener = new CompletionListListener();
+  private CompListSearcher compListSearcher;
 
-  /** @param editModel if false then ACB doesnt edit model directly (post comp) */
-  AutoComboBox(Ontology ontology,SearchParamsI sp,boolean editModel) {
+  /** @param editModel if false then ACB doesnt edit model directly (post comp) 
+   can abstract classes have constructors - if not init() */
+  protected AbstractAutoCompList(CompListSearcher s,boolean editModel) {
     // this inner class enables retrieving of JList for mouse over
     // this will probably throw errors if non metal look & feel is used
     setUI(new MetalListComboUI());
-    //setFont(new Font("Courier",Font.PLAIN,12));
-
-    setOntology(ontology);
-    searchParams = sp; // singleton access? part of ontology?
     setEditable(true);
+    setPreferredSize(new Dimension(350,22));
     AutoTextFieldEditor autoTextFieldEditor = new AutoTextFieldEditor();
     this.setEditor(autoTextFieldEditor);
-    setPreferredSize(new Dimension(350,22));
-
+    //setFont(new Font("Courier",Font.PLAIN,12));
+    //setOntology(ontology);
+    //searchParams = sp; // singleton access? part of ontology?
+    compListSearcher = s;
     enableTermInfoListening(true); // default
     //addCompletionListListener(compList);
-
     //if (editModel) // ComboBoxActionListener edits the model
     this.editModel = editModel;
     addActionListener(new ComboBoxActionListener());
 
   }
 
-  void setOntology(Ontology o) { ontology = o; }
+  //void setOntology(Ontology o) { ontology = o; }
 
   //void setSearchParams(SearchParamsI sp) { searchParams = sp; }
 
@@ -103,7 +102,7 @@ class AutoComboBox extends JComboBox {
     setText(text,doCompletion);
   }
 
-  // text from selecting table doesnt do completion, TestPhenote does
+  /** text from selecting table doesnt do completion, TestPhenote does */
   void setText(String text, boolean doCompletion) {
     this.doCompletion = doCompletion;
     this.keyTyped = doCompletion; // key has to be typed for completion
@@ -111,47 +110,6 @@ class AutoComboBox extends JComboBox {
     this.doCompletion = true; // set back to default
   }
 
-  /** rename setTerm? */
-  void setOboClass(OBOClass term) {
-    if (term == null) {
-      log().error("Attempt to set term to null");
-      return; // debug stack trace?
-    }
-    currentOboClass = term;
-    setText(term.getName(),false); // no completion
-  }
-
-  /** for relationships (post comp rel) */
-  void setRel(OBOProperty rel) {
-    if (rel == null) {
-      log().error("Attempt to set term to null");
-      return; // debug stack trace?
-    }
-    currentRel = rel;
-    setText(rel.toString(),false); // eventually .getName()
-  }
-
-  /** Throws exception if there isnt a current obo class, if the user
-      has typed something that isnt yet a term - hasnt selected a term */
-  OBOClass getCurrentOboClass() throws Exception {
-    if (currentOboClass == null) throw new Exception("term is null");
-    if (!currentOboClass.getName().equals(getText()))
-      throw new Exception("(obo class "+currentOboClass+" and input "+getText()+
-                          " dont match)");
-    return currentOboClass;
-  }
-
-  /** Throws exception if there isnt a current relation - for relation lists
-      (post comp), if the user
-      has typed something that isnt yet a rel - hasnt selected a rel */
-  OBOProperty getCurrentRelation() throws Exception {
-    if (currentRel == null) throw new Exception("term is null");
-    if (!currentRel.toString().equals(getText()))
-      throw new Exception("(relation "+currentRel+" and input "+getText()+
-                          " dont match)");
-    return currentRel;
-    
-  }
 
   /** Return text in text field */
   String getText() {
@@ -164,54 +122,7 @@ class AutoComboBox extends JComboBox {
     setText("");
   }
 
-
-  /** This gets obo class selected in completion list - not from text box 
-      Returns null if nothing selected - can happen amidst changing selection 
-      also used by PostCompGui 
-      this doesnt necasarily stay current with user input hmmm....
-      throws OboException if dont have valid term */
-  OBOClass getSelectedCompListOboClass() throws OboException {
-    Object obj = getSelectedObject(); // throws oboex
-    return oboClassDowncast(obj); // throws oboex
-  }
-
-  private class OboException extends Exception {
-    private OboException() { super(); }
-    private OboException(String s) { super(s); }
-  }
-
-//   private OBOClass getCompListOboClass(int index) {
-//     Object obj = defaultComboBoxModel.getElementAt(index);
-//     return oboClassDowncast(obj);
-//   }
-
-  // strings get in somehow - need to figure out where they are coming from
-  private OBOClass oboClassDowncast(Object obj) throws OboException {
-    if (obj == null) throw new OboException();
-    if ( ! (obj instanceof OBOClass)) {
-      //log.info("Item in completion list not obo class "+obj.getClass());
-      throw new OboException("Item in completion list not obo class "+obj.getClass());
-    }
-    return (OBOClass)obj;
-  }
-
-  private OBOProperty oboPropertyDowncast(Object obj)  throws OboException {
-    if (obj == null) throw new OboException();
-    if ( ! (obj instanceof OBOProperty)) {
-      //log.info("Item in completion list not obo class "+obj.getClass());
-      throw new OboException("Item in completion list not obo prop "+obj.getClass());
-    }
-    return (OBOProperty)obj;
-  }
-
-  /** returns currently selected relation, for auto combos of relations,
-      throws obo ex if there is no current relation */
-  private OBOProperty getSelectedRelation() throws OboException {
-    Object obj = getSelectedObject(); // throws oboex
-    return oboPropertyDowncast(obj); // throws oboex
-  }
-
-  private Object getSelectedObject() throws OboException {
+  protected Object getSelectedObject() throws OboException {
     if (defaultComboBoxModel == null) throw new OboException(); // ??
     Object obj = defaultComboBoxModel.getSelectedItem();
     if (obj == null) throw new OboException();
@@ -225,7 +136,7 @@ class AutoComboBox extends JComboBox {
   private class AutoTextFieldEditor extends BasicComboBoxEditor {
 
     private AutoTextFieldEditor() {
-      autoTextField = new AutoTextField();
+      autoTextField = new AutoTextField(); // outer instance var for testing
       editor = autoTextField; // protected editor var from BCBE
       addDocumentListener(new AutoDocumentListener());
       getTextField().addKeyListener(new AutoKeyListener());
@@ -346,11 +257,10 @@ class AutoComboBox extends JComboBox {
     // this is a vector of OBOClasses
     // i think ultimately we will need to wrap the OBOClass to be able to
     // have more control over the string - cut off w ... & [syn][obs] tags
-    Vector v;
-    if (isRelationshipList())
-      v = ontology.getStringMatchRelations(input);
-    else
-      v = getTerms(input);
+    // returns a vector of CompletionTerms (checks if relations)
+    Vector v = getTerms(input); // abstract method
+    //if (isRelationshipList()) v = ontology.getStringMatchRelations(input);
+    //else v = getTerms(input);
     // throws IllegalStateException, Attempt to mutate in notification
     // this tries to change text field amidst notification hmmmm.....
     changingCompletionList = true;
@@ -389,12 +299,17 @@ class AutoComboBox extends JComboBox {
   
   /** call Ontology to get a Vector of OBOClass's that contain "in"
       in ontology */
-  private Vector<OBOClass> getTerms(String in) {
-    // or CompletionList.getCompletionList(getOntology()) ??
-    //CompletionList cl = CompletionList.getCompletionList();
-    //return cl.getCompletionTerms(getOntology(),in,searchParams);
-    return ontology.getSearchTerms(in,searchParams); // vector of OBOClass's
-  }
+//   private Vector<OBOClass> getTermsOld(String in) {
+//     // or CompletionList.getCompletionList(getOntology()) ??
+//     //CompletionList cl = CompletionList.getCompletionList();
+//     //return cl.getCompletionTerms(getOntology(),in,searchParams);
+//     return ontology.getSearchTerms(in,searchParams); // vector of OBOClass's
+//   }
+
+  // Vector<CompletionTerm>? CompletionItem?
+  protected abstract Vector getTerms(String input);
+//     if (isRelationshipList()) return termSearcher.getStringMatchRelations(input);
+//     else return termSearcher.getStringMatchTerms(input);}
 
   private class AutoDocumentListener implements DocumentListener {
     public void changedUpdate(DocumentEvent e) { doCompletion(); }
@@ -522,7 +437,7 @@ class AutoComboBox extends JComboBox {
       // for this not to be so? returns null if no oboclass?
       // TERM
       if (isTermList()) {
-        try { currentOboClass = getSelectedCompListOboClass(); }
+        try { currentOboClass = getSelectedOboClass(); }
         // happens on return on invalid term name
         catch (OboException e) { return; } // error msg?
         //if (oboClass == null) return; currentOboClass = oboClass;
@@ -536,10 +451,6 @@ class AutoComboBox extends JComboBox {
       // EDIT MODEL 
       if (editModel)
         editModel();
-//       CharacterI c = getSelectedCharacter(); // from selectionManager
-//       CharFieldEnum cfe = charField.getCharFieldEnum();
-//       UpdateTransaction ut = new UpdateTransaction(c,cfe,oboClass);
-//       EditManager.inst().updateModel(this,ut);
     }
   }
 
@@ -562,7 +473,16 @@ class AutoComboBox extends JComboBox {
   }
 }
 
+class OboException extends Exception {
+  private OboException() { super(); }
+  private OboException(String s) { super(s); }
+}
+
 // GARBAGE
+//       CharacterI c = getSelectedCharacter(); // from selectionManager
+//       CharFieldEnum cfe = charField.getCharFieldEnum();
+//       UpdateTransaction ut = new UpdateTransaction(c,cfe,oboClass);
+//       EditManager.inst().updateModel(this,ut);
   //private Ontology getOntology() { return ontology; }
 
   /** Return true if input String matches name of OBOClass in
@@ -578,7 +498,7 @@ class AutoComboBox extends JComboBox {
 //     //return defaultComboBoxModel.getIndexOf(input) != -1;
 //     // have to go through all OBOClasses and extract there names - bummer
 //     // most likely input is selected one check that first
-//     OBOClass selectedClass = getSelectedCompListOboClass();
+//     OBOClass selectedClass = getSelectedOboClass();
 //     if (selectedClass != null && input.equals(selectedClass.getName()))
 //       return true;
 //     // selected failed(is this possible?) - try everything in the list then...
