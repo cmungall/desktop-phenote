@@ -1,4 +1,4 @@
-package phenote.gui;
+package phenote.gui.field;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,8 +22,8 @@ import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyManager;
-import phenote.datamodel.SearchParamsI;
 import phenote.config.FieldConfig;
+import phenote.gui.GridBagUtil;
 
 /**
  * TermPanel holds all the fields for the terms - Genotype, Entity/Anatomy, QUALITY.
@@ -32,7 +32,7 @@ import phenote.config.FieldConfig;
  also has SearchParamPanel.
  */
 
-public class TermPanel extends JPanel {
+public class FieldPanel extends JPanel {
   
   private List<CharFieldGui> charFieldGuiList = new ArrayList<CharFieldGui>(8);
   private SearchParamPanel searchParamPanel; // searchParamManager?
@@ -40,12 +40,12 @@ public class TermPanel extends JPanel {
   private JPanel fieldPanel;
   private SearchParamsI searchParams;
 
-  public TermPanel() {
+  public FieldPanel() {
     this(true);
     //initAllOntologies();
   }
   // false for post comp panel
-  public TermPanel(boolean doAllOntologies) {
+  public FieldPanel(boolean doAllOntologies) {
     fieldPanel = new JPanel(new GridBagLayout());
     add(fieldPanel); // default flow layout?
     if (doAllOntologies)
@@ -80,7 +80,7 @@ public class TermPanel extends JPanel {
 
   void setSearchParams(SearchParamsI sp) { searchParams = sp; }
 
-  SearchParamPanel getSearchParamPanel() {
+  public SearchParamPanel getSearchParamPanel() {
     if (searchParamPanel == null)
       searchParamPanel = new SearchParamPanel();
     return searchParamPanel;
@@ -138,26 +138,26 @@ public class TermPanel extends JPanel {
   
 
   // for test to listen - move to test code?
-  AutoComboBox getEntityComboBox() {
+  public AbstractAutoCompList getEntityComboBox() {
     return getComboBox(CharFieldEnum.ENTITY);
   }
   
   // for testing - move to test?
-  private AutoComboBox getComboBox(CharFieldEnum cfe) {
+  private AbstractAutoCompList getComboBox(CharFieldEnum cfe) {
     for (CharFieldGui cfg : charFieldGuiList)
       if (cfg.getCharFieldEnum() == cfe)
-        return cfg.getAutoComboBox();
+        return cfg.getCompList();
     return null;
   }
 
-  AutoComboBox getQualityComboBox() {
+  public AbstractAutoCompList getQualityComboBox() {
     return getComboBox(CharFieldEnum.QUALITY);
   }
   boolean hasLumpComboBox() {
     //return lumpField.isCombo();
     return getLumpComboBox() != null;
   }
-  AutoComboBox getLumpComboBox() {
+  AbstractAutoCompList getLumpComboBox() {
     return getComboBox(CharFieldEnum.LUMP);
   }
 

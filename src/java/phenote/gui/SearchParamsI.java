@@ -1,4 +1,4 @@
-package phenote.datamodel;
+package phenote.gui;
 
 // package phenote.ontology?? dataadapter?
 

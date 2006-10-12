@@ -1,4 +1,4 @@
-package phenote.gui;
+package phenote.gui.field;
 
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -23,8 +23,8 @@ import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.Ontology;
+import phenote.datamodel.OntologyException;
 import phenote.datamodel.OntologyManager;
-import phenote.datamodel.SearchParamsI;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
@@ -35,20 +35,25 @@ import phenote.gui.selection.SelectionManager;
 
 /** fields can either be text fields for free text or combo boxes if have 
     ontology to browse - CharFieldGui does either - with get/setText - hides the
-    details of the gui - just a field that gives text */
+    details of the gui - just a field that gives text 
+    should there be subclasses for free text, term, & relations? hmmmm */
 class CharFieldGui {
-  private AutoComboBox comboBox;
+  //private AutoComboBox comboBox;
+  //private AbstractAutoCompList comboBox; // ???
+  private RelationCompList relCompList;
+  private TermCompList termCompList;
+  private CompListSearcher compListSearcher;
   private JTextField textField;
-  private boolean isCombo = false;
+  private boolean isCompList = false;
   private CharField charField;
-  private TermPanel termPanel;
+  private FieldPanel fieldPanel;
   private JComboBox ontologyChooserCombo;
   private String label;
   private boolean enableListeners = true;
   private boolean addCompButton = true;
   
 
-  CharFieldGui(CharField charField, TermPanel tp) {/*Container parent,*/
+  CharFieldGui(CharField charField, FieldPanel tp) {/*Container parent,*/
     init(charField,tp);
   }
 
@@ -58,7 +63,7 @@ class CharFieldGui {
       postCompGui mode?
       @param addCompButton if false override configuration and dont show
       post comp button */
-  CharFieldGui(CharField cf,TermPanel tp,String label,boolean enableListeners,
+  CharFieldGui(CharField cf,FieldPanel tp,String label,boolean enableListeners,
                boolean addCompButton) {
     this.label = label;
     this.enableListeners = enableListeners;
@@ -66,14 +71,13 @@ class CharFieldGui {
     init(cf,tp);
   }
 
-  private void init(CharField cf, TermPanel tp) {
+  private void init(CharField cf, FieldPanel tp) {
     charField = cf;
-    termPanel = tp;
+    fieldPanel = tp;
     if (!charField.hasOntologies())
-      initTextField(charField.getName());//,parent);
-    //else if (charField.hasOneOntology())
+      initTextField(charField.getName());
     else
-      initCombo(charField);//,parent);
+      initCombo();
 
     // listens for selection (eg from table) - not for PostCompGui
     if (enableListeners)
@@ -83,7 +87,8 @@ class CharFieldGui {
     // this needs renaming. if not editing model then its a post comp window, and 
     // post comp windows also listen for char changes in PostCompGui not in there
     // char field guis. either add a new param or rename "enableListeners" - hmmm
-    // or subclass CharFieldGui?? hmmmmm....
+    // or subclass CharFieldGui?? hmmmmm.... oh right this is changes in model
+    // from the main window i think??
     if (enableListeners)
       EditManager.inst().addCharChangeListener(new FieldCharChangeListener());
   }
@@ -97,19 +102,37 @@ class CharFieldGui {
     }
   }
 
-  AutoComboBox getAutoComboBox() {
-    if (isCombo)
-      return comboBox;
-    return null; // ex?
+  /** for testing and internal use */
+  AbstractAutoCompList getCompList() {
+    if (!isCompList)
+      return null;
+    if (isRelationshipList())
+      return getRelComp();
+    return getTermComp();
+    //return comboBox;
   }
 
   // hasOntology?
-  boolean isCombo() { return isCombo; }
+  boolean isCompList() { return isCompList; }
 
-  void enableTermInfoListening(boolean enable) {
-    if (!isCombo()) return;
-    getAutoComboBox().enableTermInfoListening(enable);
+  private boolean isRelationshipList() {
+    return charField.isRelationship();
   }
+
+  private TermCompList getTermComp() {
+    // throw ex if null?
+    return termCompList;
+  }
+
+  private RelationCompList getRelComp() {
+    return relCompList;
+  }
+
+  // hardwired in term & rel subclasses now
+//   void enableTermInfoListening(boolean enable) {
+//     if (!isCompList()) return;
+//     getCompList().enableTermInfoListening(enable);
+//   }
 
   /** Set the gui from the model (selection) */
   void setValueFromChar(CharacterI character) {
@@ -139,22 +162,20 @@ class CharFieldGui {
     return label;
   }
 
-  private void initCombo(CharField charField) { //, Container parent) {
-    isCombo = true;
+  private void initCombo() { //, Container parent) {
+    isCompList = true;
 
-    String name = charField.getFirstOntology().getName();
-    JLabel label = termPanel.addLabel(getLabel(),charField.hasMoreThanOneOntology());
+    //String name = charField.getFirstOntology().getName();JLabel label = 
+    fieldPanel.addLabel(getLabel(),charField.hasMoreThanOneOntology());
 
     // if has more than one ontology(entity) then add ontology choose list
     if (charField.hasMoreThanOneOntology())
       initOntologyChooser(charField);
 
-    // enableListeners - if false then ACB wont directly edit model (post comp)
-    comboBox = new AutoComboBox(charField.getFirstOntology(),
-                                termPanel.getSearchParams(),enableListeners);
-    termPanel.addFieldGui(comboBox);
+    createCompList();
+    fieldPanel.addFieldGui(getCompList());
 
-    comboBox.setCharField(charField);
+    getCompList().setCharField(charField);
 
     // POST COMPOSITION button - only get post comp button if both configged for it
     // AND addCompButton flag is true - PostCompGui sets to false - no post comp of 
@@ -163,17 +184,34 @@ class CharFieldGui {
     if (charField.postCompAllowed() && addCompButton) {
       JButton postCompButton = new JButton("Comp"); // ???
       postCompButton.addActionListener(new PostCompListener());
-      termPanel.addPostCompButton(postCompButton);
+      fieldPanel.addPostCompButton(postCompButton);
       // keep this here for now - may reinstate - this is inpanel post comp
 //       // todo -> get pc differentia ontologies from config, >1 add chooser
 //       AutoComboBox postCompCombo =
-//         new AutoComboBox(charField.getFirstOntology(),termPanel.getSearchParams());
+//         new AutoComboBox(charField.getFirstOntology(),fieldPanel.getSearchParams());
 //       // postCompCombo.setVisible(false); // initial state hidden - layout?
 //       postCompCombo.setCharField(charField);
 //       postCompCombo.setIsDifferentia(true); // differentia of genus in post comp
-//       termPanel.addFieldGui(postCompCombo);
+//       fieldPanel.addFieldGui(postCompCombo);
     }
   }
+
+  /** sets up rel or term comp list depending on isRelList(). also set up 
+      compListSearcher */
+  private void createCompList() {
+    //comboBox = new AutoComboBox(charField.getFirstOntology(),
+    //fieldPanel.getSearchParams(),enableListeners);
+    // enableListeners - if false then ACB wont directly edit model (post comp)
+    compListSearcher =
+      new CompListSearcher(charField.getFirstOntology(),fieldPanel.getSearchParams());
+    if (isRelationshipList()) {
+      relCompList = new RelationCompList(compListSearcher,enableListeners);
+    }
+    else {
+      termCompList = new TermCompList(compListSearcher,enableListeners);
+    }
+  }
+
 
   private void initOntologyChooser(CharField charField) {
     ontologyChooserCombo = new JComboBox();
@@ -182,17 +220,17 @@ class CharFieldGui {
       ontologyChooserCombo.addItem(o.getName());
     }
     ontologyChooserCombo.addActionListener(new OntologyChooserListener());
-    termPanel.addOntologyChooser(ontologyChooserCombo);
+    fieldPanel.addOntologyChooser(ontologyChooserCombo);
   }
 
   private void initTextField(String label) {
-    isCombo = false;
-    termPanel.addLabel(label);
+    isCompList = false;
+    fieldPanel.addLabel(label);
     textField = new JTextField(25);
     textField.setEditable(true);
     // addGenericDocumentListener...
     textField.getDocument().addDocumentListener(new TextFieldDocumentListener());
-    termPanel.addFieldGui(textField);
+    fieldPanel.addFieldGui(textField);
 
     textField.addKeyListener(new TextKeyListener());
 
@@ -222,23 +260,25 @@ class CharFieldGui {
 
   void setText(String text) {
     // set/getText interface to combo & text field?
-    if (isCombo) comboBox.setText(text);
+    if (isCompList) getCompList().setText(text);
     else textField.setText(text);
   }
   String getText() {
-    if (isCombo) return comboBox.getText();
+    if (isCompList) return getCompList().getText();
     else return textField.getText();
   }
 
   void setOboClass(OBOClass term) {
-    if (isCombo) comboBox.setOboClass(term);
-    else textField.setText(term.getName()); // probably doesnt happen
+    if (!isCompList || isRelationshipList()) return; // throw ex?? 
+    getTermComp().setOboClass(term);
+    //else textField.setText(term.getName()); // shouldnt happen
   }
 
   /** for auto combos (ontol) for relationships (post comp rel) */
   void setRel(OBOProperty rel) {
-    if (isCombo) comboBox.setRel(rel);
-    else textField.setText(rel.getName()); // shouldnt actually happen
+    if (!isCompList || !isRelationshipList()) return; // ex???
+    getRelComp().setRel(rel);
+    //else textField.setText(rel.getName()); // shouldnt actually happen
   }
 
   CharFieldEnum getCharFieldEnum() { return charField.getCharFieldEnum(); }
@@ -274,8 +314,15 @@ class CharFieldGui {
   private class OntologyChooserListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       String s = ontologyChooserCombo.getSelectedItem().toString();
-      Ontology o = OntologyManager.getOntologyForName(s);
-      comboBox.setOntology(o);
+      try {
+        Ontology o = OntologyManager.inst().getOntologyForName(s);
+        //getCompList().setOntology(o); // termComp?
+        compListSearcher.setOntology(o);
+      }
+      catch (OntologyException ex) {
+        log().error(ex.getMessage());
+        return;
+      }
     }
   }
 
@@ -283,27 +330,20 @@ class CharFieldGui {
    inframe case - now window) */
   private class PostCompListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
-      new PostCompGui(charField,termPanel.getSearchParams());
+      new PostCompGui(charField,fieldPanel.getSearchParams());
     }
   }
 
-//   /** This is for ontology char fields, freetext returns null. returns obo class
-//       selected in AutoComboBox if there is one 
-//       this is problematic - it can get term that was selected a while ago */
-//   OBOClass getSelectedOboClass() throws Exception {
-//     if (!isCombo) throw new Exception("Free text field has no OBO Class");
-//     OBOClass term = comboBox.getSelectedCompListOboClass();
-//     if (term == null) throw new Exception("No term selected");
-//     return term;
-//   }
   OBOClass getCurrentOboClass() throws Exception {
-    if (!isCombo) throw new Exception("Free text field has no OBO Class");
-    return comboBox.getCurrentOboClass(); // throws Ex
+    if (!isCompList || isRelationshipList())
+      throw new Exception("Field has no OBO Class");
+    return getTermComp().getCurrentOboClass(); // throws Ex
   }
 
   OBOProperty getCurrentRelation() throws Exception {
-    if (!isCombo) throw new Exception("Free text field has no Relation");
-    return comboBox.getCurrentRelation(); // throws Ex
+    if (!isCompList || !isRelationshipList())
+      throw new Exception("Field has no Relation");
+    return getRelComp().getCurrentRelation(); // throws Ex
   }
 
   private Logger log;
@@ -313,6 +353,15 @@ class CharFieldGui {
   }
 }
 
+//   /** This is for ontology char fields, freetext returns null. returns obo class
+//       selected in AutoComboBox if there is one 
+//       this is problematic - it can get term that was selected a while ago */
+//   OBOClass getSelectedOboClass() throws Exception {
+//     if (!isCompList) throw new Exception("Free text field has no OBO Class");
+//     OBOClass term = getCompList().getSelectedCompListOboClass();
+//     if (term == null) throw new Exception("No term selected");
+//     return term;
+//   }
 //   private void addDocumentListener(DocumentListener dl) {
 //     if (!isCombo)
 //       textField.getDocument().addDocumentListener(dl);
@@ -320,11 +369,11 @@ class CharFieldGui {
 
 //   private void initCombo(Ontology ontology, Container parent) {
 //     // attach search params to ontology?
-//     comboBox = new AutoComboBox(ontology,termPanel.getSearchParams());
+//     comboBox = new AutoComboBox(ontology,fieldPanel.getSearchParams());
 //     // refactor... mvc - ACB talk directly to pheno model?
 //     //comboBox.addActionListener(new ComboBoxActionListener(ontology.getName(),comboBox));
 //     //parent.add(comboBox,makeFieldConstraint());
-//     termPanel.addFieldGui(comboBox,parent);
+//     fieldPanel.addFieldGui(comboBox,parent);
 //   }
 
 //   /** No ontology -> free text field */

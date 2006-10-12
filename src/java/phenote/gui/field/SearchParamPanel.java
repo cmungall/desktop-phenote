@@ -1,4 +1,6 @@
-package phenote.gui;
+package phenote.gui.field;
+
+// also used by servlet - repackage to phenote.ontologysearch?
 
 import java.awt.Dimension;
 import javax.swing.BoxLayout;
@@ -6,9 +8,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-import phenote.datamodel.SearchParamsI;
-
-class SearchParamPanel {
+//import phenote.datamodel.SearchParamsI;
+// only public for TestPhenote
+public class SearchParamPanel {
 
   private SearchParamsI searchParams;
   private JRadioButton termButton;
@@ -70,10 +72,10 @@ class SearchParamPanel {
   }
 
   // these are actually for TestPhenote
-  void setTermSearch(boolean search) {
+  public void setTermSearch(boolean search) {
     termButton.setSelected(search);
   }
-  void setSynonymSearch(boolean search) {
+  public void setSynonymSearch(boolean search) {
     synonymButton.setSelected(search);
   }
 

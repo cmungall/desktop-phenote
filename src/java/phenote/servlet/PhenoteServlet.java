@@ -15,8 +15,12 @@ import org.apache.log4j.Logger;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.Ontology;
+import phenote.datamodel.OntologyException;
 import phenote.datamodel.OntologyManager;
-import phenote.datamodel.SearchParamsI;
+// hmmm bad to ref gui? or is servlet gui-esque? or move search to own package?
+import phenote.gui.field.CompletionTerm;
+import phenote.gui.field.CompListSearcher;
+import phenote.gui.field.SearchParamsI; 
 import phenote.util.HtmlUtil;
 import phenote.config.Config;
 import phenote.config.ConfigException;
@@ -142,23 +146,18 @@ public class PhenoteServlet extends HttpServlet {
       String termId = getTermIdFromTermInfoRequest(request);
       String ontologyName = getOntologyParamString(request);
       String field = getFieldParamString(request);
-      LOG.info("doGet term info param: " + termId + " ont " + ontologyName);
-//       out.println("<table><tr><td class=\"label\">Ontology</td> "+
-//                   "<td class=\"data\">"+initDate+"</td></tr>\n"+
-//                   "<tr><td class=\"label\">Term name...</td><td class=\"data\">"
-//                   +userInput+"</td></tr></table>");
-      Ontology ont = getOntology(ontologyName);
-      if (ont == null) {
-        LOG.error("ERROR: Failed to get ontology for " + ontologyName);
-        return;
+      LOG.debug("doGet term info param: " + termId + " ont " + ontologyName);
+      try {
+        Ontology ont = getOntology(ontologyName); // throws ex
+        OBOClass oboClass = ont.getOboClass(termId); // throws ex
+        //if (oboClass == null) {
+        //  LOG.error("term info: no obo class found for " + termId); return;  }
+        LOG.debug("term info " + substring(HtmlUtil.termInfo(oboClass), 60));
+        out.println(HtmlUtil.termInfo(oboClass, ontologyName,field));
       }
-      OBOClass oboClass = getOntology(ontologyName).getOboClass(termId);
-      if (oboClass == null) {
-        LOG.error("term info: no obo class found for " + termId);
-        return;
+      catch (OntologyException e) {
+        LOG.error(e.getMessage());
       }
-      LOG.info("term info " + substring(HtmlUtil.termInfo(oboClass), 60));
-      out.println(HtmlUtil.termInfo(oboClass, ontologyName,field));
     }
   }
 
@@ -180,41 +179,46 @@ public class PhenoteServlet extends HttpServlet {
       for now just return html ul-li list w onmouseover
       userInput is what user has typed which terms will be queried for
       ontol is the name of the ontology that user is querying
-      field is the gui field user is querying (which may have multiple ontols) */
+      field is the gui field user is querying (which may have multiple ontols) 
+      if ontologyy not found actually returns error string saying as much - why not*/
   private String getCompletionList(String userInput,String ontol,String field) {
     StringBuffer sb = new StringBuffer("<ul>");
-    // for now just grab the pato ontology - eventuall redo for multiple/config
-    Ontology ontology = getOntology(ontol);
-    if (ontology == null) {
-      LOG.error("failed to get " + ontol + " from ontology manager");
-      return "ontology retrieval failed";
+    try {
+      Vector<CompletionTerm> v = getCompListSearcher(ontol).getStringMatchTerms(userInput);
+      //Vector<OBOClass> v = ontology.getStringMatchTerms(userInput, getSearchParams());
+      for (CompletionTerm ct : v)
+        sb.append(makeCompListHtmlItem(ct, ontol, field));
     }
-    Vector<OBOClass> v = ontology.getSearchTerms(userInput, getSearchParams());
-    for (OBOClass oc : v)
-      sb.append(makeCompListHtmlItem(oc, ontol, field));
+    catch (OntologyException e) { sb.append(e.getMessage()); }
     sb.append("</ul>");
-    //System.out.println(sb);
     return sb.toString();
   }
 
-    /**
-     * returns null if ontolName not found
-     */
-    private Ontology getOntology(String ontolName) { // termid?? or ontology name?
-        //return getQualityOntology();
-        return OntologyManager.getOntologyForName(ontolName);
-    }
+  private CompListSearcher getCompListSearcher(String ontol) throws OntologyException {
+    return new CompListSearcher(getOntology(ontol),getSearchParams());
+  }
 
-    // for now...
-    private Ontology getQualityOntology() {
-        for (CharField cf : OntologyManager.inst().getCharFieldList())
-            if (cf.getCharFieldEnum() == CharFieldEnum.QUALITY)
-                return cf.getFirstOntology();
-        LOG.error("quality ontology not found in ontology manager");
-        return null;
-    }
+  /**
+   * throws ex if ontolName not found 
+   */
+  private Ontology getOntology(String ontolName) throws OntologyException { 
+//     if (ontology == null) {
+//       LOG.error("failed to get " + ontol + " from ontology manager");
+//       //return "ontology retrieval failed";
+//       throw new Exception("ontology retrieval failed");  }
+    return OntologyManager.inst().getOntologyForName(ontolName);
+  }
 
-  private String makeCompListHtmlItem(OBOClass term, String ontol,String field) {
+//   // for now...
+//   private Ontology getQualityOntology() {
+//     for (CharField cf : OntologyManager.inst().getCharFieldList())
+//       if (cf.getCharFieldEnum() == CharFieldEnum.QUALITY)
+//         return cf.getFirstOntology();
+//     LOG.error("quality ontology not found in ontology manager");
+//     return null;
+//   }
+
+  private String makeCompListHtmlItem(CompletionTerm term, String ontol,String field) {
     String id = term.getID(), name=term.getName();
     // pass in id, name & ontology - name for setting field on UseTerm
     StringBuffer info = dq(fn("getTermInfo",new String[]{id,name,ontol,field}));
@@ -273,6 +277,8 @@ public class PhenoteServlet extends HttpServlet {
 
 }
 
+//      if (ont == null) {
+//       LOG.error("ERROR: Failed to get ontology for " + ontologyName); return; }
 // ---> OntologyDataAdapter - moved to
 //   /** thread wakes up and checks if theres a new ontology file - if so loads it
 //    this should go in ontology data adapter... not here and configged */

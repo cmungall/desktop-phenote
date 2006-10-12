@@ -28,7 +28,7 @@ import phenote.gui.CharacterTablePanel;
 import phenote.gui.GridBagUtil;
 import phenote.gui.MenuManager;
 import phenote.gui.TermInfo;
-import phenote.gui.TermPanel;
+import phenote.gui.field.FieldPanel;
 
 public class Phenote {
 
@@ -38,7 +38,7 @@ public class Phenote {
   private static boolean standalone = false; // default for servlet
 
   private CharacterTablePanel characterTablePanel;
-  private TermPanel termPanel;
+  private FieldPanel fieldPanel;
   private static Phenote phenote;
   private TermInfo termInfo;
   private CommandLine commandLine = CommandLine.inst();
@@ -180,7 +180,8 @@ public class Phenote {
     }
   }
 
-  /** main panel contains TermPanel CharTablePanel & TermInfo */
+  /** main panel contains FieldPanel CharTablePanel & TermInfo 
+      move this to gui? */
   private JPanel makeMainPanel() {
     JPanel mainPanel = new JPanel(new GridBagLayout()); // ??
     
@@ -189,18 +190,18 @@ public class Phenote {
     termAndTablePanel.setLayout(bl);
 
     //termAndInstancePanel.add(makeTermPanel());
-    termPanel = new TermPanel();
-    termAndTablePanel.add(termPanel);
+    fieldPanel = new FieldPanel();
+    termAndTablePanel.add(fieldPanel);
 
-    characterTablePanel = new CharacterTablePanel(termPanel);
+    characterTablePanel = new CharacterTablePanel(); //fieldPanel);
     // eventually switch to event listener - no explicit connection...
-    //termPanel.setCharacterTablePanel(characterTablePanel);
+    //fieldPanel.setCharacterTablePanel(characterTablePanel);
     termAndTablePanel.add(characterTablePanel);
 
     GridBagConstraints gbc = GridBagUtil.makeConstraint(0,0,5,5);
     mainPanel.add(termAndTablePanel,gbc);
 
-    termInfo = new TermInfo(termPanel);
+    termInfo = new TermInfo(); //fieldPanel);
     ++gbc.gridx;  // ??
     gbc.anchor = GridBagConstraints.NORTHWEST;
     mainPanel.add(termInfo.getComponent(),gbc);
@@ -213,12 +214,12 @@ public class Phenote {
     return phenote;
   }
   // These methods are actually for TestPhenote
-  public TermPanel getTermPanel() { return termPanel; }
+  public FieldPanel getFieldPanel() { return fieldPanel; }
   public TermInfo getTermInfo() { return termInfo; }
   public CharacterTablePanel getCharacterTablePanel() { return characterTablePanel; }
 }
 
 
-//     SearchPanel searchPanel = new SearchPanel(termPanel);
+//     SearchPanel searchPanel = new SearchPanel(fieldPanel);
 //     mainPanel.add(searchPanel);
-//     termPanel.setSearchPanel(searchPanel);
+//     fieldPanel.setSearchPanel(searchPanel);

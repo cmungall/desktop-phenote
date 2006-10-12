@@ -38,7 +38,7 @@ public class CharacterTablePanel extends JPanel {
 
   private JTable characterTable;
   private CharacterTableModel characterTableModel;
-  private TermPanel termPanel;
+  //private FieldPanel fieldPanel;
   //private JButton newButton;
   private JButton copyButton;
   private JButton deleteButton;
@@ -51,8 +51,8 @@ public class CharacterTablePanel extends JPanel {
   private static final String SAVE_STRING = "Save data";
   private boolean SANDBOX_MODE = true; // get from config...
 
-  public CharacterTablePanel(TermPanel tp) {
-    termPanel = tp;
+  public CharacterTablePanel() { //TermPanel tp) {
+    //fieldPanel = tp;
     init();
   }
 
@@ -185,7 +185,7 @@ public class CharacterTablePanel extends JPanel {
 
       // IF DELETED LAST ROW, then need to make a new blank one (sandbox mode)
       if (!hasRows() && SANDBOX_MODE) {
-        //termPanel.clear(); // SelectionManager.clearCharacterSelection()
+        //fieldPanel.clear(); // SelectionManager.clearCharacterSelection()
         selectRow = characterTableModel.addNewBlankRow(); // sr should be 0
       }
       selectRow(selectRow);
@@ -207,7 +207,7 @@ public class CharacterTablePanel extends JPanel {
       selectedRow = getSelectedRow(); 
       CharacterI character = getSelectedCharacter();
       // is this still needed??
-      //termPanel.setFieldsFromCharacter(character); // phase out...
+      //fieldPanel.setFieldsFromCharacter(character); // phase out...
       
       // new way
       SelectionManager.inst().selectCharacter(this,character);

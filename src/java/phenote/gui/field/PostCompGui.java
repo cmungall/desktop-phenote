@@ -1,4 +1,4 @@
-package phenote.gui;
+package phenote.gui.field;
 
 import java.awt.BorderLayout;
 import java.awt.Frame;
@@ -24,7 +24,7 @@ import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.OboUtil;
 import phenote.datamodel.Ontology;
-import phenote.datamodel.SearchParamsI;
+//import phenote.datamodel.SearchParamsI;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
@@ -56,28 +56,28 @@ class PostCompGui {
     // dialog wont be focusable if owner is not showing or something like that
     Frame owner = Phenote.getPhenote().getFrame();
     dialog = new JDialog(owner,charField.getName()+" Post Composition");
-    TermPanel compTermPanel = new TermPanel(false); // (searchParams)?
-    compTermPanel.setSearchParams(searchParams);
+    FieldPanel compFieldPanel = new FieldPanel(false); // (searchParams)?
+    compFieldPanel.setSearchParams(searchParams);
     
     // false - dont edit model, false - no post comp button
-    genusField = new CharFieldGui(charField,compTermPanel,"Genus",false,false);
+    genusField = new CharFieldGui(charField,compFieldPanel,"Genus",false,false);
 
     // Relationship?? stripped down ontology?
     CharField relChar = new CharField(CharFieldEnum.RELATIONSHIP);
     // Ontology o = OntologyManager.getRelationshipOntology() ?? getRelCharField?
     Ontology o = charField.getPostCompRelOntol();
     relChar.addOntology(o);
-    relField = new CharFieldGui(relChar,compTermPanel,"Relationship",false,false);
-    relField.enableTermInfoListening(false); // turn off term info for rels
+    relField = new CharFieldGui(relChar,compFieldPanel,"Relationship",false,false);
+    //relField.enableTermInfoListening(false); // turn off term info for rels
     // relField = new RelFieldGui(relChar,compTermPanel,"Relationship");
-    // relField = new RelationshipFieldGui(compTermPanel);
+    // relField = new RelationshipFieldGui(compFieldPanel);
 
     diffField =
-      new CharFieldGui(charField,compTermPanel,"Differentia",false,false);
+      new CharFieldGui(charField,compFieldPanel,"Differentia",false,false);
 
     setGuiFromSelectedModel();
 
-    dialog.add(compTermPanel);
+    dialog.add(compFieldPanel);
     addButtons();
     dialog.pack();
     dialog.setLocationRelativeTo(owner);

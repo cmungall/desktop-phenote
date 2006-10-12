@@ -51,13 +51,16 @@ public class OntologyManager {
   public List<CharField> getCharFieldList() { return charFieldList; }
 
   /** Returns ontology with name, null if not found */
-  public static Ontology getOntologyForName(String ontologyName) { // static?
+  public Ontology getOntologyForName(String ontologyName)
+    throws OntologyException { // static?
     for (CharField cf : inst().getCharFieldList()) {
       if (cf.hasOntology(ontologyName))
         return cf.getOntologyForName(ontologyName);
     }
-    System.out.println("ERROR: no ontology found for name "+ontologyName);
-    return null;
+    String m = "no ontology found for name "+ontologyName;
+    log().error(m);
+    throw new OntologyException(m);
+    //return null;
   }
 
 
@@ -73,18 +76,21 @@ public class OntologyManager {
       the id prefix AO,GO,PATO... 
       Should this deal with post comp? if ^ then create a post comp term on fly? 
       im not sure if this is the right place for it, maybe method should be renamed
-      but ill put it here for now */
-  public OBOClass getOboClass(String id) {
+      but ill put it here for now 
+      merge this with getOboClassWithEx? */
+  public OBOClass getOboClass(String id) throws TermNotFoundException {
     OBOClass oboClass;
 // this seems to be the sole reason for ontology list - silly!
     Iterator<Ontology> iter = allOntologyList.iterator();
     while (iter.hasNext()) {
       Ontology o = iter.next();
-      oboClass = o.getOboClass(id);
+      try { oboClass = o.getOboClass(id); }
+      catch (OntologyException e) { continue; }
       if (oboClass != null)
         return oboClass;
     }
-    return null; // not found - null
+    //return null; // not found - null -- ex?
+    throw new TermNotFoundException("ID "+id+" not found in loaded ontologies");
   }
 
   public OBOClass getTermOrPostComp(String id) throws TermNotFoundException {
@@ -94,6 +100,7 @@ public class OntologyManager {
       return getOboClassWithExcep(id);
   }
 
+  // phase out - put ex in getOboClass!
   public OBOClass getOboClassWithExcep(String id) throws TermNotFoundException {
     OBOClass term = getOboClass(id);
     if (term == null)

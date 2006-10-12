@@ -63,107 +63,112 @@ public class Ontology {
 
   public String getName() { return name; }
 
-  /** returns null if dont have class for id */
-  public OBOClass getOboClass(String id) {
-    return oboSession.getTerm(id);
+  /** returns null if dont have class for id, throws OntologyException if id is not
+      found */
+  public OBOClass getOboClass(String id) throws OntologyException {
+    OBOClass oc = oboSession.getTerm(id);
+    if (oc == null) throw new OntologyException(id +" id not found in ontology "+name);
+    return oc;
   }
 
   /** Returns true if ontology holds obo class */
   boolean hasOboClass(OBOClass oboClass) {
     // if this is too slow can do optimizations with prefixes
-    return getOboClass(oboClass.getID()) != null;
+    try {getOboClass(oboClass.getID()); }
+    catch (OntologyException e) { return false; }
+    return true; // no exception - it has it
   }
 
-  /** Returns a Vector of OBOClass from ontology that contain input string
-      constrained by compParams. compParams specifies syns,terms,defs,& obs 
-      should input be just part of search params? 
-      its a vector as thats what ComboBox requires 
-      put in separate class? */
-  public Vector<OBOClass> getSearchTerms(String input,SearchParamsI searchParams) {
-   Vector<OBOClass> searchTerms = new Vector<OBOClass>();
-    if (input == null || input.equals(""))
-      return searchTerms;
+//   /** Returns a Vector of OBOClass from ontology that contain input string
+//       constrained by compParams. compParams specifies syns,terms,defs,& obs 
+//       should input be just part of search params? 
+//       its a vector as thats what ComboBox requires 
+//       put in separate class? */
+//   public Vector<OBOClass> getSearchTerms(String input,SearchParamsI searchParams) {
+//    Vector<OBOClass> searchTerms = new Vector<OBOClass>();
+//     if (input == null || input.equals(""))
+//       return searchTerms;
 
-    // gets term set for currently selected ontology
-    //Set ontologyTermList = getCurrentOntologyTermSet();
-    List<OBOClass> ontologyTermList = getSortedTerms(); // non obsolete
-    searchTerms = getSearchTerms(input,ontologyTermList,searchParams);
+//     // gets term set for currently selected ontology
+//     //Set ontologyTermList = getCurrentOntologyTermSet();
+//     List<OBOClass> ontologyTermList = getSortedTerms(); // non obsolete
+//     searchTerms = getSearchTerms(input,ontologyTermList,searchParams);
 
-    // if obsoletes set then add them in addition to regulars
-    if (searchParams.searchObsoletes()) {
-      ontologyTermList = getSortedObsoleteTerms();
-      Vector obsoletes = getSearchTerms(input,ontologyTermList,searchParams);
-      searchTerms.addAll(obsoletes);
-    }
-    return searchTerms;
-  }
+//     // if obsoletes set then add them in addition to regulars
+//     if (searchParams.searchObsoletes()) {
+//       ontologyTermList = getSortedObsoleteTerms();
+//       Vector obsoletes = getSearchTerms(input,ontologyTermList,searchParams);
+//       searchTerms.addAll(obsoletes);
+//     }
+//     return searchTerms;
+//   }
 
-  /** helper fn for getSearchTerms(String,SearhParamsI) */
-  private Vector<OBOClass> getSearchTerms(String input, List<OBOClass> ontologyTermList,
-                                    SearchParamsI searchParams) {
-    // need a unique list - UniqueTermList has quick check for uniqueness, checking
-    // whole list is very very slow - how is it possible to get a dup term? i forget?
-    // the dup term was a BUG! in synonym - woops
-    SearchTermList uniqueTermList = new SearchTermList();
-    //Vector searchTerms = new Vector();
-    if (ontologyTermList == null)
-      return uniqueTermList.getVector();//searchTerms;
+//   /** helper fn for getSearchTerms(String,SearhParamsI) */
+//   private Vector<OBOClass> getSearchTerms(String input, List<OBOClass> ontologyTermList,
+//                                     SearchParamsI searchParams) {
+//     // need a unique list - UniqueTermList has quick check for uniqueness, checking
+//     // whole list is very very slow - how is it possible to get a dup term? i forget?
+//     // the dup term was a BUG! in synonym - woops
+//     SearchTermList uniqueTermList = new SearchTermList();
+//     //Vector searchTerms = new Vector();
+//     if (ontologyTermList == null)
+//       return uniqueTermList.getVector();//searchTerms;
 
-    boolean ignoreCase = true; // param?
-    if (ignoreCase)
-      input = input.toLowerCase();
+//     boolean ignoreCase = true; // param?
+//     if (ignoreCase)
+//       input = input.toLowerCase();
 
-    // i think iterators are more efficient than get(i) ??
-    Iterator<OBOClass> iter = ontologyTermList.iterator();
-    while (iter.hasNext()) {
-      // toString extracts name from OBOClass
-      OBOClass oboClass = iter.next();
-      String originalTerm = oboClass.getName();//toString();
+//     // i think iterators are more efficient than get(i) ??
+//     Iterator<OBOClass> iter = ontologyTermList.iterator();
+//     while (iter.hasNext()) {
+//       // toString extracts name from OBOClass
+//       OBOClass oboClass = iter.next();
+//       String originalTerm = oboClass.getName();//toString();
       
-      boolean termAdded = false;
+//       boolean termAdded = false;
 
-      if (searchParams.searchTerms()) {
-        // adds originalTerm to searchTerms if match (1st if exact)
-        termAdded = compareAndAddTerm(input,originalTerm,oboClass,uniqueTermList);
-        if (termAdded)
-          continue;
-      }
-
-
-      if (searchParams.searchSynonyms()) {
-        Set synonyms = oboClass.getSynonyms();
-        for (Iterator i = synonyms.iterator(); i.hasNext() &&!termAdded; ) {
-          String syn = i.next().toString();
-          //log().debug("syn "+syn+" for "+originalTerm);
-          termAdded = compareAndAddTerm(input,syn,oboClass,uniqueTermList);
-          //if (termAdded) continue; // woops continues this for not the outer!
-        }
-      }
-      if (termAdded) continue;
+//       if (searchParams.searchTerms()) {
+//         // adds originalTerm to searchTerms if match (1st if exact)
+//         termAdded = compareAndAddTerm(input,originalTerm,oboClass,uniqueTermList);
+//         if (termAdded)
+//           continue;
+//       }
 
 
-      if (searchParams.searchDefinitions()) {
-        String definition = oboClass.getDefinition();
-        if (definition != null & !definition.equals(""))
-          termAdded = compareAndAddTerm(input,definition,oboClass,uniqueTermList);
-          if (termAdded)
-            continue; // not really necesary as its last
-      }
+//       if (searchParams.searchSynonyms()) {
+//         Set synonyms = oboClass.getSynonyms();
+//         for (Iterator i = synonyms.iterator(); i.hasNext() &&!termAdded; ) {
+//           String syn = i.next().toString();
+//           //log().debug("syn "+syn+" for "+originalTerm);
+//           termAdded = compareAndAddTerm(input,syn,oboClass,uniqueTermList);
+//           //if (termAdded) continue; // woops continues this for not the outer!
+//         }
+//       }
+//       if (termAdded) continue;
 
-    }
-    return uniqueTermList.getVector();//searchTerms;
-  }
 
-  public Vector<OBOProperty> getStringMatchRelations(String input) {
-    Vector<OBOProperty> matches = new Vector<OBOProperty>();
-    for (OBOProperty rel : getSortedRelations()) {
-      if (rel.toString().contains(input))
-        matches.add(rel);
-    }
-    return matches;
-  }
+//       if (searchParams.searchDefinitions()) {
+//         String definition = oboClass.getDefinition();
+//         if (definition != null & !definition.equals(""))
+//           termAdded = compareAndAddTerm(input,definition,oboClass,uniqueTermList);
+//           if (termAdded)
+//             continue; // not really necesary as its last
+//       }
 
-  private List<OBOProperty> getSortedRelations() {
+//     }
+//     return uniqueTermList.getVector();//searchTerms;
+//   }
+
+//   public Vector<OBOProperty> getStringMatchRelations(String input) {
+//     Vector<OBOProperty> matches = new Vector<OBOProperty>();
+//     for (OBOProperty rel : getSortedRelations()) {
+//       if (rel.toString().contains(input))
+//         matches.add(rel);
+//     }
+//     return matches;
+//   }
+
+  public List<OBOProperty> getSortedRelations() {
     if (sortedRelations == null) {
       //sortedRelations=new ArrayList<OBOProperty>(); not Comparable!
       List sorRel = new ArrayList();
@@ -184,78 +189,20 @@ public class Ontology {
     }
   }
 
-  /** User input is already lower cased, this potentially adds oboClass to
-   * searchTerms if input & compareTerm match. Puts it first if exact. 
-   * for term names comp = obo, for syns comp is the syn. 
-   Returns true if term is a match & either gets added or already is added
-   * Also checks if term is in list already - not needed - woops!
-   Theres a speed issue here - the vector needs to be unique. if check every time
-   with whole list very very slow. 2 alternatives to try. 
-   1) have separate hash for checking uniqueness (downside 2 data structures). 
-   could make a data structure that had both map & vector
-   2) use LinkedHashSet, which does uniqueness & maintains order of insertion
-   nice - its 1 data structure BUT exact matches go 1st, no way in linked hash set
-   to insert 1st elements so would need to keep separate list of exact matches, which
-   i guess there can be more than one with synonyms (do syns count for exact matches?
-   should they?) - downside of #2 is need Vector for combo box
- 
-   this wont fly for having different display strings for syn & obs as compareTerm
-   can be syn obs term or def and its lost here 
-   i think these methods need to be moved to gui.TermSearcher that utilizes Ontology 
-   but produces CompListTerms */
-  private boolean compareAndAddTerm(String input, String compareTerm, OBOClass oboClass,
-                                    SearchTermList searchTermList) {
-    
-    String oboTerm = oboClass.getName();
-
-    String lowerComp = compareTerm;
-    boolean ignoreCase = true; // discard? param for?
-    if (ignoreCase)
-      lowerComp = compareTerm.toLowerCase();
-
-    //boolean doContains = true; // discard? param for?
-    // exact match goes first in list
-    if (lowerComp.equals(input)) {
-      searchTermList.addTermFirst(oboClass); // adds if not present
-      return true;
-    }
-    // new paradigm - put starts with first
-    else if (lowerComp.startsWith(input)) {
-      searchTermList.addTerm(oboClass);
-      return true;
-    }
-    // Contains
-    else if (contains(lowerComp,input) && !termFilter(lowerComp)) {
-      searchTermList.addContainsTerm(oboClass);
-      return true;
-    }
-    return false;
-  }
-
-  // 1.5 has a contains! use when we shift
-  private boolean contains(String term, String input) {
-    return term.contains(input); // 1.5!!
-    //return term.indexOf(input) != -1;
-  }
-  /** Oboedit getTerms returns some terms with obo: prefix that should be filtered
-   * out. Returns true if starts with obo: */
-  private boolean termFilter(String term) {
-    return term.startsWith("obo:");
-  }
 
   /** non obsolete terms - sorted */
-  private List<OBOClass> getSortedTerms() {
+  public List<OBOClass> getSortedTerms() {
     return sortedTerms;
   }
 
-  private List<OBOClass> getSortedObsoleteTerms() {
+  public List<OBOClass> getSortedObsoleteTerms() {
     return sortedObsoleteTerms;
   }
 
 
   private OBOSession getOboSession() { return oboSession; }
 
-  private List<OBOClass> getSortedTerms(Set terms) {
+  public List<OBOClass> getSortedTerms(Set terms) {
     List<OBOClass> sortedTerms = new ArrayList<OBOClass>();
     sortedTerms.addAll(terms);
     Collections.sort(sortedTerms);
@@ -270,37 +217,6 @@ public class Ontology {
   public String getSource() { return source; }
 
 
-  /** does unique check w map - dont need unique check - it was a bug in synonyms
-   how silly! - but actually this data structure will be handy for putting starts with
-   before contains! UniqueTermList -> SearchTermList*/
-  private class SearchTermList {
-    private Vector<OBOClass> searchTerms = new Vector<OBOClass>();
-    //private Map<OBOClass,OBOClass> uniqueCheck = new HashMap<OBOClass,OBOClass>();
-    // list of terms that are contained but NOT startsWith
-    private Vector<OBOClass> containTerms = new Vector<OBOClass>();
-    private void addTerm(OBOClass oboClass) {
-      addTerm(oboClass,false);
-    }
-    private void addTermFirst(OBOClass oboClass) {
-      addTerm(oboClass,true);
-    }
-    private void addTerm(OBOClass oboClass,boolean first) {
-      //if (uniqueCheck.containsKey(oboClass)) {
-      //log().debug("dup term in search "+oboClass);
-      //  new Throwable().printStackTrace();  return;   }
-      if (first) searchTerms.add(0,oboClass);
-      else searchTerms.add(oboClass);
-      //uniqueCheck.put(oboClass,null); // dont need value
-    }
-    /** Add term thats not startsWith but contains */
-    private void addContainsTerm(OBOClass oboClass) {
-      containTerms.add(oboClass);
-    }
-    private Vector<OBOClass> getVector() { 
-      searchTerms.addAll(containTerms);
-      return searchTerms; 
-    }
-  }
 
 
   public void setFilter(String filterOutString) {
@@ -332,6 +248,64 @@ public class Ontology {
 
 
 // GARBAGE
+//   /** User input is already lower cased, this potentially adds oboClass to
+//    * searchTerms if input & compareTerm match. Puts it first if exact. 
+//    * for term names comp = obo, for syns comp is the syn. 
+//    Returns true if term is a match & either gets added or already is added
+//    * Also checks if term is in list already - not needed - woops!
+//    Theres a speed issue here - the vector needs to be unique. if check every time
+//    with whole list very very slow. 2 alternatives to try. 
+//    1) have separate hash for checking uniqueness (downside 2 data structures). 
+//    could make a data structure that had both map & vector
+//    2) use LinkedHashSet, which does uniqueness & maintains order of insertion
+//    nice - its 1 data structure BUT exact matches go 1st, no way in linked hash set
+//    to insert 1st elements so would need to keep separate list of exact matches, which
+//    i guess there can be more than one with synonyms (do syns count for exact matches?
+//    should they?) - downside of #2 is need Vector for combo box
+ 
+//    this wont fly for having different display strings for syn & obs as compareTerm
+//    can be syn obs term or def and its lost here 
+//    i think these methods need to be moved to gui.TermSearcher that utilizes Ontology 
+//    but produces CompListTerms */
+//   private boolean compareAndAddTerm(String input, String compareTerm, OBOClass oboClass,
+//                                     SearchTermList searchTermList) {
+    
+//     String oboTerm = oboClass.getName();
+
+//     String lowerComp = compareTerm;
+//     boolean ignoreCase = true; // discard? param for?
+//     if (ignoreCase)
+//       lowerComp = compareTerm.toLowerCase();
+
+//     //boolean doContains = true; // discard? param for?
+//     // exact match goes first in list
+//     if (lowerComp.equals(input)) {
+//       searchTermList.addTermFirst(oboClass); // adds if not present
+//       return true;
+//     }
+//     // new paradigm - put starts with first
+//     else if (lowerComp.startsWith(input)) {
+//       searchTermList.addTerm(oboClass);
+//       return true;
+//     }
+//     // Contains
+//     else if (contains(lowerComp,input) && !termFilter(lowerComp)) {
+//       searchTermList.addContainsTerm(oboClass);
+//       return true;
+//     }
+//     return false;
+//   }
+
+//   // 1.5 has a contains! use when we shift
+//   private boolean contains(String term, String input) {
+//     return term.contains(input); // 1.5!!
+//     //return term.indexOf(input) != -1;
+//   }
+//   /** Oboedit getTerms returns some terms with obo: prefix that should be filtered
+//    * out. Returns true if starts with obo: */
+//   private boolean termFilter(String term) {
+//     return term.startsWith("obo:");
+//   }
       //if (!searchTerms.contains(oboClass)) {// this takes a long time w long lists!
       //searchTerms.add(0,oboClass);
       //if (!searchTerms.contains(oboClass))  searchTerms.add(oboClass);

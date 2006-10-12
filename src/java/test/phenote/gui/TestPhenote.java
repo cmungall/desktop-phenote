@@ -28,6 +28,9 @@ import phenote.dataadapter.fly.FlyCharListTransferable;
 import phenote.dataadapter.fly.FlybaseDataAdapter;
 import phenote.util.HtmlUtil;
 import phenote.main.Phenote;
+import phenote.gui.field.FieldPanel;
+import phenote.gui.field.SearchParamPanel;
+import phenote.gui.field.AbstractAutoCompList;
 
 // making same package as phenotes giving us access to package methods!
 
@@ -36,10 +39,10 @@ public class TestPhenote {
 
   // dont have handle on instance - have to do statics - wierd
   private static Phenote phenote;
-  private static TermPanel termPanel;
+  private static FieldPanel fieldPanel;
   private static SearchParamPanel searchParamPanel;
-  private static AutoComboBox entityComboBox;
-  private static AutoComboBox qualityComboBox;
+  private static AbstractAutoCompList entityComboBox;
+  private static AbstractAutoCompList qualityComboBox;
   private static TermInfo termInfo;
   private static CharacterTablePanel characterTablePanel;
 
@@ -54,11 +57,11 @@ public class TestPhenote {
 //     catch (InterruptedException e) { System.out.println(e); }
 //     System.out.println("^^^done sleeping - is gui ready?");
     phenote = Phenote.getPhenote();
-    termPanel = phenote.getTermPanel();
-    searchParamPanel = termPanel.getSearchParamPanel();
-    entityComboBox = termPanel.getEntityComboBox();
+    fieldPanel = phenote.getFieldPanel();
+    searchParamPanel = fieldPanel.getSearchParamPanel();
+    entityComboBox = fieldPanel.getEntityComboBox();
     entityComboBox.setTestMode(true); // turns off popup, hanging bug only in test
-    qualityComboBox = termPanel.getQualityComboBox();
+    qualityComboBox = fieldPanel.getQualityComboBox();
     qualityComboBox.setTestMode(true);
     termInfo = phenote.getTermInfo();
     characterTablePanel = phenote.getCharacterTablePanel();

@@ -31,6 +31,7 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.OntologyManager;
+import phenote.datamodel.OntologyManager.TermNotFoundException;
 import phenote.edit.EditManager;
 import phenote.edit.UpdateTransaction;
 import phenote.util.HtmlUtil;
@@ -51,7 +52,7 @@ public class TermInfo {
   private UseTermListener useTermListener;
 
   
-  public TermInfo(TermPanel termPanel) {
+  public TermInfo() { //TermPanel termPanel) {
     SelectionManager.inst().addTermSelectionListener(new InfoTermSelectionListener());
   }
 
@@ -93,7 +94,8 @@ public class TermInfo {
   private class UseTermActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       //commitTerm();
-      if (useTermListener == null) return; // error? shouldnt happen
+      // relation comp list sets to null
+      if (useTermListener == null) return;
       if (currentOboClass == null) return; // shouldnt happen
       useTermListener.useTerm(new UseTermEvent(TermInfo.this,currentOboClass));
     }
@@ -127,26 +129,6 @@ public class TermInfo {
     useTermListener = utl;
   }
 
-//   /** put present term into current character - not used yet...
-//    this is now policy of the UseTermListener(AutoComboBox) TermInfo just sends out
-//    UseTermEvent and UTL/ACB decides what to do with it */
-//   private void commitTerm() {
-//     CharacterI ch = SelectionManager.inst().getSelectedCharacter();
-//     if (ch == null) { // can this happen?
-//       System.out.println("ERROR: no character selected to update");
-//       return;
-//     }
-//     if (currentOboClass == null) { // can this happen?
-//       System.out.println("ERROR: no term in term info to add to character");
-//       return;
-//     }
-
-//     CharFieldEnum cfe = OntologyManager.inst().getCharFieldEnumForOboClass(currentOboClass);
-    
-//     UpdateTransaction ut = new UpdateTransaction(ch,cfe,currentOboClass);
-//     EditManager.inst().updateModel(this,ut);
-//     //previousOboClass = currentOboClass;
-//   }
   
   /** for testing */
   void simulateHyperlinkEvent(HyperlinkEvent e) {
@@ -200,12 +182,35 @@ public class TermInfo {
       // or do through obo session?
       String id = HtmlUtil.getIdFromHyperlink(e);
       if (id == null) return;
-      OBOClass term = OntologyManager.inst().getOboClass(id);
-      setTextFromOboClass(term);
+      try {
+        OBOClass term = OntologyManager.inst().getOboClass(id); // ex
+        setTextFromOboClass(term);
+      }
+      catch (TermNotFoundException ex) { return; }
     }
   }
 }
 
+//   /** put present term into current character - not used yet...
+//    this is now policy of the UseTermListener(AutoComboBox) TermInfo just sends out
+//    UseTermEvent and UTL/ACB decides what to do with it */
+//   private void commitTerm() {
+//     CharacterI ch = SelectionManager.inst().getSelectedCharacter();
+//     if (ch == null) { // can this happen?
+//       System.out.println("ERROR: no character selected to update");
+//       return;
+//     }
+//     if (currentOboClass == null) { // can this happen?
+//       System.out.println("ERROR: no term in term info to add to character");
+//       return;
+//     }
+
+//     CharFieldEnum cfe = OntologyManager.inst().getCharFieldEnumForOboClass(currentOboClass);
+    
+//     UpdateTransaction ut = new UpdateTransaction(ch,cfe,currentOboClass);
+//     EditManager.inst().updateModel(this,ut);
+//     //previousOboClass = currentOboClass;
+//   }
      // JEditorPane allows for html formatting - bold... but doesnt do word wrap - bummer!
     // as far as i can tell
     // would have to explicitly put <br> in text. can also do hyperlinks!
