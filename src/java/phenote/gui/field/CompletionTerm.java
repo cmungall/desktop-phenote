@@ -14,7 +14,14 @@ public class CompletionTerm {
   OBOClass getOboClass() { return term; }
 
   public String toString() {
-    return term.getName(); // ...
+    return compListDisplayString();
+  }
+
+  private String compListDisplayString() {
+    StringBuffer s = new StringBuffer(term.getName());
+    if (term.isObsolete())
+      s.append("[obs]");
+    return s.toString();
   }
 
   public String getID() { return term.getID(); }
