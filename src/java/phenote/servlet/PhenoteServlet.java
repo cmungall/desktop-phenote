@@ -259,11 +259,11 @@ public class PhenoteServlet extends HttpServlet {
         }
 
         public boolean searchSynonyms() {
-            return false;
+          return false; // --> true
         }
 
         public boolean searchDefinitions() {
-            return false;
+          return false; // ?? w [def]??
         }
 
         /**
@@ -271,7 +271,7 @@ public class PhenoteServlet extends HttpServlet {
          * This should be in conjunction with the other 3
          */
         public boolean searchObsoletes() {
-            return false;
+          return false; // --> true w [obs], disallow selection
         }
     }
 

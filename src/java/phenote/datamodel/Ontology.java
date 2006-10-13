@@ -79,6 +79,96 @@ public class Ontology {
     return true; // no exception - it has it
   }
 
+
+  public List<OBOProperty> getSortedRelations() {
+    if (sortedRelations == null) {
+      //sortedRelations=new ArrayList<OBOProperty>(); not Comparable!
+      List sorRel = new ArrayList();
+      // if (oboSession == null) ? shouldnt happen
+      sorRel.addAll(oboSession.getRelationshipTypes());
+      Collections.sort(sorRel,new RelComparator());
+      sortedRelations = sorRel; // ?
+    }
+    return sortedRelations;
+  }
+
+  private class RelComparator<OBOProperty> implements Comparator<OBOProperty> {
+    public int compare(OBOProperty r1, OBOProperty r2) {
+      return r1.toString().compareTo(r2.toString());
+    }
+    public boolean equals(OBOProperty r1, OBOProperty r2) {
+      return r1.toString().equals(r2.toString());
+    }
+  }
+
+
+  /** non obsolete terms - sorted */
+  public List<OBOClass> getSortedTerms() {
+    return sortedTerms;
+  }
+
+  public List<OBOClass> getSortedObsoleteTerms() {
+    return sortedObsoleteTerms;
+  }
+
+
+  private OBOSession getOboSession() { return oboSession; }
+
+  public List<OBOClass> getSortedTerms(Set terms) {
+    List<OBOClass> sortedTerms = new ArrayList<OBOClass>();
+    sortedTerms.addAll(terms);
+    Collections.sort(sortedTerms);
+    return sortedTerms;
+  }
+
+  /** moght move this elsewhere - subclass? data adap specific wrapper? */
+  public void setTimestamp(long t) { ontologyTimestamp = t; }
+  public long getTimestamp() { return ontologyTimestamp; }
+  /** for obo files this is the filename */
+  public void setSource(String s) { source = s; }
+  public String getSource() { return source; }
+
+
+
+
+  public void setFilter(String filterOutString) {
+    this.filterOutString = filterOutString;
+  }
+
+  private boolean haveFilter() {
+    //return filterOutString != null;
+    // minimally filter out obo: obo edit internal terms
+    return true;
+  }
+
+  /** This is not generic - this looks for ids that have the filterOut string
+      as a prefix and tosses them - for example "ZFS" filters out all zf stage
+      terms - can add more flexibility as needed - this is all thats needed for now*/
+  private List<OBOClass> filterList(List<OBOClass> list, String filterOut) {
+    List<OBOClass> filteredList = new ArrayList<OBOClass>();
+    for (OBOClass term : list) {
+      // or could do remove on list?
+      // also filter out obo: terms as they are internal obo edit thingies it seems
+      // funny logic but more efficient to do in one pass - refactor somehow?
+      if (term.getName().startsWith("obo:"))
+        continue; // filter our obo:
+      if (filterOut != null && term.getID().startsWith(filterOut))
+        continue;
+      filteredList.add(term); // passed 2 filters above - add it
+    }
+    return filteredList;
+  }
+
+  private Logger log;
+  private Logger log() {
+    if (log == null) log = Logger.getLogger(getClass());
+    return log;
+  }
+}
+
+
+
+// GARBAGE
 //   /** Returns a Vector of OBOClass from ontology that contain input string
 //       constrained by compParams. compParams specifies syns,terms,defs,& obs 
 //       should input be just part of search params? 
@@ -167,87 +257,6 @@ public class Ontology {
 //     }
 //     return matches;
 //   }
-
-  public List<OBOProperty> getSortedRelations() {
-    if (sortedRelations == null) {
-      //sortedRelations=new ArrayList<OBOProperty>(); not Comparable!
-      List sorRel = new ArrayList();
-      // if (oboSession == null) ? shouldnt happen
-      sorRel.addAll(oboSession.getRelationshipTypes());
-      Collections.sort(sorRel,new RelComparator());
-      sortedRelations = sorRel; // ?
-    }
-    return sortedRelations;
-  }
-
-  private class RelComparator<OBOProperty> implements Comparator<OBOProperty> {
-    public int compare(OBOProperty r1, OBOProperty r2) {
-      return r1.toString().compareTo(r2.toString());
-    }
-    public boolean equals(OBOProperty r1, OBOProperty r2) {
-      return r1.toString().equals(r2.toString());
-    }
-  }
-
-
-  /** non obsolete terms - sorted */
-  public List<OBOClass> getSortedTerms() {
-    return sortedTerms;
-  }
-
-  public List<OBOClass> getSortedObsoleteTerms() {
-    return sortedObsoleteTerms;
-  }
-
-
-  private OBOSession getOboSession() { return oboSession; }
-
-  public List<OBOClass> getSortedTerms(Set terms) {
-    List<OBOClass> sortedTerms = new ArrayList<OBOClass>();
-    sortedTerms.addAll(terms);
-    Collections.sort(sortedTerms);
-    return sortedTerms;
-  }
-
-  /** moght move this elsewhere - subclass? data adap specific wrapper? */
-  public void setTimestamp(long t) { ontologyTimestamp = t; }
-  public long getTimestamp() { return ontologyTimestamp; }
-  /** for obo files this is the filename */
-  public void setSource(String s) { source = s; }
-  public String getSource() { return source; }
-
-
-
-
-  public void setFilter(String filterOutString) {
-    this.filterOutString = filterOutString;
-  }
-
-  private boolean haveFilter() { return filterOutString != null; }
-
-  /** This is not generic - this looks for ids that have the filterOut string
-      as a prefix and tosses them - for example "ZFS" filters out all zf stage
-      terms - can add more flexibility as needed - this is all thats needed for now*/
-  private List<OBOClass> filterList(List<OBOClass> list, String filterOut) {
-    List<OBOClass> filteredList = new ArrayList<OBOClass>();
-    for (OBOClass term : list) {
-      // or could do remove on list?
-      if (!term.getID().startsWith(filterOut))
-        filteredList.add(term);
-    }
-    return filteredList;
-  }
-
-  private Logger log;
-  private Logger log() {
-    if (log == null) log = Logger.getLogger(getClass());
-    return log;
-  }
-}
-
-
-
-// GARBAGE
 //   /** User input is already lower cased, this potentially adds oboClass to
 //    * searchTerms if input & compareTerm match. Puts it first if exact. 
 //    * for term names comp = obo, for syns comp is the syn. 
