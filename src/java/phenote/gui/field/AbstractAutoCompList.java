@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Vector;
+import javax.swing.ComboBoxEditor;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JTextField;
@@ -71,9 +72,12 @@ public abstract class AbstractAutoCompList extends JComboBox {
     setUI(new MetalListComboUI());
     setEditable(true);
     setPreferredSize(new Dimension(350,22));
+    setMaximumSize(new Dimension(350,22));
     AutoTextFieldEditor autoTextFieldEditor = new AutoTextFieldEditor();
     this.setEditor(autoTextFieldEditor);
-    //setFont(new Font("Courier",Font.PLAIN,12));
+    //setFont(new Font("Courier",Font.PLAIN,12)); yuck
+    //setFont(new Font("Lucida Console",Font.PLAIN,12)); not fixed
+    setFont(new Font("Lucida Typewriter",Font.PLAIN,10));
     //setOntology(ontology);
     //searchParams = sp; // singleton access? part of ontology?
     compListSearcher = s;
@@ -113,6 +117,8 @@ public abstract class AbstractAutoCompList extends JComboBox {
     this.doCompletion = doCompletion;
     this.keyTyped = doCompletion; // key has to be typed for completion
     getEditor().setItem(text);
+    //log().debug("setting text "+text);
+    //new Throwable().printStackTrace();
     this.doCompletion = true; // set back to default
   }
 
@@ -138,7 +144,9 @@ public abstract class AbstractAutoCompList extends JComboBox {
 
   /** BasicComboBoxEditor uses JTextField as its editing component but is
    * only available as a protected variable - odd 
-   adds auto doc & auto key listeners to combo box edit field */
+   adds auto doc & auto key listeners to combo box edit field 
+  I think the purpose of this class is to set its editor var to AutoTextField
+  subclass of JTextField */
   private class AutoTextFieldEditor extends BasicComboBoxEditor {
 
     private AutoTextFieldEditor() {
@@ -181,8 +189,15 @@ public abstract class AbstractAutoCompList extends JComboBox {
       // but this is needed from mouse release on selection set text
       // is called and will cause completion list to come up after sel
       // w/o it
+      //log().debug("AutoTextField.setText "+text);
+      //new Throwable().printStackTrace();
       doCompletion = false; 
-      super.setText(text);
+      //this is problematic for syns & such where string is diff than term name
+      // JComboBox sets this text AFTER got event and set to name
+      //super.setText(text); 
+      // this works as only time setText is called with cngCL false is with
+      // selection - or at least so it seems
+      super.setText(getCurrentTermRelName());
       doCompletion = true;
     }
     
@@ -192,19 +207,11 @@ public abstract class AbstractAutoCompList extends JComboBox {
     }
   }
 
-  public void simulateLKeyStroke() {
-    autoTextField.processKeyEvent(new KeyEvent(this,KeyEvent.KEY_PRESSED,0,0,KeyEvent.VK_L,'l'));
-    autoTextField.processKeyEvent(new KeyEvent(this,KeyEvent.KEY_TYPED,0,0,KeyEvent.VK_UNDEFINED,'l'));
-  }
-  
-  public void simulateKeyStroke(int keyCode, char c) {
-    KeyEvent k = new KeyEvent(this,KeyEvent.KEY_PRESSED,0,0,keyCode,c);
-    autoTextField.processKeyEvent(k);
-    k.setKeyCode(KeyEvent.KEY_RELEASED);
-    autoTextField.processKeyEvent(k);
-    k = new KeyEvent(this,KeyEvent.KEY_TYPED,0,0,KeyEvent.VK_UNDEFINED,c);
-    autoTextField.processKeyEvent(k);
-  }
+    
+  /** Return the name of the current term or relation - was gonna call this
+      item name but that gets confused with "items" in combo box */
+  protected abstract String getCurrentTermRelName();
+
 
   private class AutoKeyListener extends KeyAdapter {
     // keyTyped doesnt seem to catch backspace in 1.5 - but did in 1.4 - odd
@@ -402,6 +409,23 @@ public abstract class AbstractAutoCompList extends JComboBox {
       throws ex if in fact current user input is not a valid item */
   protected abstract void setCurrentValidItem() throws OboException;
 
+  /** Override - configureEditor is called when user selects item and sets text
+      field to item selected, unfortunately this happens after the listening 
+      code in this class that sets to term name (not syn name), and then the syn
+      name gets set - so this is to catch & repress the subsequent syn name 
+      setting - hope that makes sense heres the jdocs from JComboBox for this method:
+      Initializes the editor with the specified item. It seems to be ok as far
+      as i can tell to supress this method entirely - if this ends up being 
+      problematic then this should be coulpled with a flag set in setCurrentValidItem
+      or a related method to supress the syn coming after term set */
+  public void configureEditor(ComboBoxEditor anEditor,Object anItem) {
+    //log().debug("configure editor called"+anItem);
+    //new Throwable().printStackTrace();
+    // it appears to be ok to supress this entirely
+    // super.configureEditor(anEditor,anItem); // ??? supress
+  }
+  
+
   protected abstract void editModel();
 
   private Logger log;
@@ -409,6 +433,20 @@ public abstract class AbstractAutoCompList extends JComboBox {
     if (log == null) log = Logger.getLogger(getClass());
     return log;
   }
+  public void simulateLKeyStroke() {
+    autoTextField.processKeyEvent(new KeyEvent(this,KeyEvent.KEY_PRESSED,0,0,KeyEvent.VK_L,'l'));
+    autoTextField.processKeyEvent(new KeyEvent(this,KeyEvent.KEY_TYPED,0,0,KeyEvent.VK_UNDEFINED,'l'));
+  }
+  
+  public void simulateKeyStroke(int keyCode, char c) {
+    KeyEvent k = new KeyEvent(this,KeyEvent.KEY_PRESSED,0,0,keyCode,c);
+    autoTextField.processKeyEvent(k);
+    k.setKeyCode(KeyEvent.KEY_RELEASED);
+    autoTextField.processKeyEvent(k);
+    k = new KeyEvent(this,KeyEvent.KEY_TYPED,0,0,KeyEvent.VK_UNDEFINED,c);
+    autoTextField.processKeyEvent(k);
+  }
+
 }
 
 class OboException extends Exception {

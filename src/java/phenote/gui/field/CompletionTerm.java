@@ -8,13 +8,14 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 /** This is basically a view object for the auto completer for terms/OBOClass */
 
 public class CompletionTerm {
-  OBOClass term;
-  boolean termMatch = false;
-  boolean synonymMatch = false;
-  boolean definitionMatch = false;
-  boolean exactMatch = false;
-  boolean startsWith = false;
-  boolean contains = false; // do we need this?
+  private OBOClass term;
+  private boolean termMatch = false;
+  private boolean isSynMatch = false;
+  private String  synMatchString;
+  private boolean definitionMatch = false;
+  private boolean exactMatch = false;
+  private boolean startsWith = false;
+  private boolean contains = false; // do we need this?
 
   CompletionTerm(OBOClass term) {
     this.term = term;
@@ -23,7 +24,7 @@ public class CompletionTerm {
   OBOClass getOboClass() { return term; }
 
   boolean isTermMatch() { return termMatch; }
-  boolean isSynMatch() { return synonymMatch; }
+  boolean isSynMatch() { return isSynMatch; }
   boolean isDefinitionMatch() { return definitionMatch; }
 
   boolean isExactMatch() { return exactMatch; }
@@ -34,7 +35,13 @@ public class CompletionTerm {
   }
 
   private String compListDisplayString() {
-    StringBuffer s = new StringBuffer(term.getName());
+    StringBuffer s = new StringBuffer();
+    if (isSynMatch())
+      s.append(synMatchString).append("[syn]");
+    else
+      s.append(getName());
+    if (isDefinitionMatch())
+      s.append("[def]");
     if (term.isObsolete())
       s.append("[obs]");
     return s.toString();
@@ -64,7 +71,8 @@ public class CompletionTerm {
       for (Object o : getSyns()) {
         String syn = o.toString();
         if (stringMatches(input,syn)) {
-          synonymMatch = true;
+          isSynMatch = true;
+          synMatchString = syn;
           return true;
         }
       }

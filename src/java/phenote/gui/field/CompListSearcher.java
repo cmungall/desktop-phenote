@@ -192,9 +192,10 @@ public class CompListSearcher {
         definitions.add(ct); // start with/contains?
     }
 
-    private void addTerm(CompletionTerm ct, List startsWith, List contains) {
+    private void addTerm(CompletionTerm ct, List<CompletionTerm> startsWith,
+                         List<CompletionTerm> contains) {
       if (ct.isExactMatch()) // for syns as well? sure why not?
-        startsWith.add(0);
+        startsWith.add(0,ct);
       else if (ct.isStartsWithMatch())
         startsWith.add(ct);
       else

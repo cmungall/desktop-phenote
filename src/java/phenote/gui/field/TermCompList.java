@@ -22,29 +22,10 @@ class TermCompList extends AbstractAutoCompList {
   private OBOClass currentOboClass=null;
 
   TermCompList(CompListSearcher s,boolean editModel) {
-    
     super(s,editModel);
     enableTermInfoListening();
-    // this inner class enables retrieving of JList for mouse over
-    // this will probably throw errors if non metal look & feel is used
-//     setUI(new MetalListComboUI());
-//     //setFont(new Font("Courier",Font.PLAIN,12));
-
-//     setOntology(ontology);
-//     searchParams = sp; // singleton access? part of ontology?
-//     setEditable(true);
-//     AutoTextFieldEditor autoTextFieldEditor = new AutoTextFieldEditor();
-//     this.setEditor(autoTextFieldEditor);
-//     setPreferredSize(new Dimension(350,22));
-
-//     enableTermInfoListening(true); // default
-//     //addCompletionListListener(compList);
-
-//     //if (editModel) // ComboBoxActionListener edits the model
-//     this.editModel = editModel;
-//     addActionListener(new ComboBoxActionListener());
-
   }
+
 
   protected Vector getSearchItems(String input) {
     return getCompListSearcher().getStringMatchTerms(input);
@@ -55,6 +36,13 @@ class TermCompList extends AbstractAutoCompList {
   protected void setCurrentValidItem() throws OboException {
     setOboClass(getSelectedOboClass()); //this will set text to oboclass
     //currentOboClass = getSelectedOboClass();
+  }
+
+  protected String getCurrentTermRelName() {
+    if (currentOboClass!= null)
+      return currentOboClass.getName();
+    else
+      return "";
   }
 
   /** rename setTerm? */
@@ -99,15 +87,6 @@ class TermCompList extends AbstractAutoCompList {
     return (CompletionTerm)obj;
   }
 
-//   // strings get in somehow - need to figure out where they are coming from
-//   private OBOClass oboClassDowncast(Object obj) throws OboException {
-//     if (obj == null) throw new OboException();
-//     if ( ! (obj instanceof OBOClass)) {
-//       //log.info("Item in completion list not obo class "+obj.getClass());
-//       throw new OboException("Item in completion list not obo class "+obj.getClass());
-//     }
-//     return (OBOClass)obj;
-//   }
 
   protected void editModel() {
     OBOClass oboClass;
@@ -167,7 +146,7 @@ class TermCompList extends AbstractAutoCompList {
       //System.out.println("sel val "+selectedValue.getClass()+" name "+selectedValue);
       // the selected item should be an OBOClass
       if (!(selectedValue instanceof CompletionTerm)) {
-        log.debug("selected completion term is not CompTerm "+selectedValue.getClass());
+        log().debug("selected completion term is not CompTerm "+selectedValue.getClass());
         return;
       }
       CompletionTerm ct = (CompletionTerm)selectedValue;
@@ -200,6 +179,33 @@ class TermCompList extends AbstractAutoCompList {
   }
   
 }
+    // this inner class enables retrieving of JList for mouse over
+    // this will probably throw errors if non metal look & feel is used
+//     setUI(new MetalListComboUI());
+//     //setFont(new Font("Courier",Font.PLAIN,12));
+
+//     setOntology(ontology);
+//     searchParams = sp; // singleton access? part of ontology?
+//     setEditable(true);
+//     AutoTextFieldEditor autoTextFieldEditor = new AutoTextFieldEditor();
+//     this.setEditor(autoTextFieldEditor);
+//     setPreferredSize(new Dimension(350,22));
+
+//     enableTermInfoListening(true); // default
+//     //addCompletionListListener(compList);
+
+//     //if (editModel) // ComboBoxActionListener edits the model
+//     this.editModel = editModel;
+//     addActionListener(new ComboBoxActionListener());
+//   // strings get in somehow - need to figure out where they are coming from
+//   private OBOClass oboClassDowncast(Object obj) throws OboException {
+//     if (obj == null) throw new OboException();
+//     if ( ! (obj instanceof OBOClass)) {
+//       //log.info("Item in completion list not obo class "+obj.getClass());
+//       throw new OboException("Item in completion list not obo class "+obj.getClass());
+//     }
+//     return (OBOClass)obj;
+//   }
 //   private OBOClass getCompListOboClass(int index) {
 //     Object obj = defaultComboBoxModel.getElementAt(index);
 //     return oboClassDowncast(obj);

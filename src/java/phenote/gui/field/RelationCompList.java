@@ -39,6 +39,13 @@ class RelationCompList extends AbstractAutoCompList {
     setRel(getSelectedRelation());
   }
 
+  protected String getCurrentTermRelName() {
+    if (currentRel!= null)
+      return currentRel.getName();
+    else
+      return "";
+  }
+
   /** for relationships (post comp rel) */
   void setRel(OBOProperty rel) {
     if (rel == null) {
