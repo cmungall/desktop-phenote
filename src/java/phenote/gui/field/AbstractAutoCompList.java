@@ -71,13 +71,22 @@ public abstract class AbstractAutoCompList extends JComboBox {
     // this will probably throw errors if non metal look & feel is used
     setUI(new MetalListComboUI());
     setEditable(true);
-    setPreferredSize(new Dimension(350,22));
-    setMaximumSize(new Dimension(350,22));
+    setPreferredSize(new Dimension(390,22));
+    setMaximumSize(new Dimension(390,22));
+    // this is super critical - fixes bug where layout goes to hell if string are long
+    // in completion - dont ask me why????
+    setMinimumSize(new Dimension(390,22));
     AutoTextFieldEditor autoTextFieldEditor = new AutoTextFieldEditor();
     this.setEditor(autoTextFieldEditor);
+    // dont know why by setting fonts this seem to get worse not better in terms of
+    // the wierd layout issue with large terms & list
     //setFont(new Font("Courier",Font.PLAIN,12)); yuck
     //setFont(new Font("Lucida Console",Font.PLAIN,12)); not fixed
-    setFont(new Font("Lucida Typewriter",Font.PLAIN,10));
+    //Font[] fonts = 
+    //java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
+    //for (Font f : fonts) System.out.println(f);
+    //setFont(new Font("Lucida Typewriter",Font.PLAIN,10));
+    setFont(new Font("Monospaced",Font.PLAIN,10));
     //setOntology(ontology);
     //searchParams = sp; // singleton access? part of ontology?
     compListSearcher = s;
@@ -359,6 +368,16 @@ public abstract class AbstractAutoCompList extends JComboBox {
     private JList getJList() {
       return listBox; // protected JList in BasicComboBoxUI
     }
+    // hmmmmmm - layout issues... actually the fix was to set the minimum size
+    // issue was with big terms screwing up layout
+//     public void layoutComboBox(java.awt.Container parent, MetalComboBoxLayoutManager manager ) {
+//       javax.swing.Icon icon = ((javax.swing.plaf.metal.MetalComboBoxButton)arrowButton).getComboIcon();
+//       java.awt.Insets buttonInsets = arrowButton.getInsets();
+//       java.awt.Insets insets = comboBox.getInsets();
+//       int buttonWidth = icon.getIconWidth() + buttonInsets.left +  buttonInsets.right;  
+//       log().debug(" comb width "+comboBox.getWidth()+" inset right "+insets.right+" but width "+ buttonWidth+" in left "+insets.left+" l2r "+ comboBox.getComponentOrientation().isLeftToRight()+rectangleForCurrentValue()+editor.getBounds());
+//       super.layoutComboBox(parent,manager);
+//     }    
   }
   
   

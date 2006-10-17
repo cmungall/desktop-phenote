@@ -35,16 +35,29 @@ public class CompletionTerm {
   }
 
   private String compListDisplayString() {
-    StringBuffer s = new StringBuffer();
-    if (isSynMatch())
-      s.append(synMatchString).append("[syn]");
-    else
-      s.append(getName());
+    StringBuffer display = new StringBuffer();
+    StringBuffer appends = new StringBuffer();
+    if (isSynMatch()) {
+      display.append(synMatchString);
+      appends.append("[syn]");
+    }
+    else {
+      display.append(getName());
+    }
     if (isDefinitionMatch())
-      s.append("[def]");
+      appends.append("[def]");
     if (term.isObsolete())
-      s.append("[obs]");
-    return s.toString();
+      appends.append("[obs]");
+    // font metrics? fixed font? query length of Text gui?
+    // if in standalone mode should do fontmetrics
+    int allowedLength = 61 - appends.length(); // keep room for appends
+    if (display.length() > allowedLength) {
+      display.setLength(allowedLength-2); // -2 for ... ???
+      display.append("...");
+    }
+      //display = display.substring(0,allowedLength - 3); // -3 for ...
+    display.append(appends);
+    return display.toString();
   }
 
   public String getID() { return term.getID(); }
