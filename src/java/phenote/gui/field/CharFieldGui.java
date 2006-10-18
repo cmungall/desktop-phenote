@@ -93,15 +93,16 @@ class CharFieldGui {
       EditManager.inst().addCharChangeListener(new FieldCharChangeListener());
   }
 
-  // i think this was to receive edits from term info?? which no longer edits - 
-  // but could imagine other things editing?? investigate this
+  /** edits from post comp come in here i believe (term info used to but now
+      thats done with UseTermEvent */
   private class FieldCharChangeListener implements CharChangeListener {
     public void charChanged(CharChangeEvent e) {
       // check charField is this char field
       if (e.getSource() != CharFieldGui.this && e.isForCharField(charField))
         // i think all we need to do is setText to synch with model
         // for complist dont we also need to set its model (not just text??)
-        setText(e.getValueString());
+        //setText(e.getValueString()); // might as well just synch with model
+        setValueFromChar(getSelectedChar());
     }
   }
 
@@ -289,6 +290,10 @@ class CharFieldGui {
 
   CharFieldEnum getCharFieldEnum() { return charField.getCharFieldEnum(); }
 
+  private CharacterI getSelectedChar() {
+    return SelectionManager.inst().getSelectedCharacter();
+  }
+
   // separate char text field class?
   /** This is where the model gets updated (for free text fields) */
   private class TextFieldDocumentListener implements DocumentListener {
@@ -301,7 +306,7 @@ class CharFieldGui {
       //if (!characterTablePanel.hasRows()) return;
       //String genotype = lumpField.getText();
       //characterTablePanel.setSelectedGenotype(genotype);
-      CharacterI c = SelectionManager.inst().getSelectedCharacter();
+      CharacterI c = getSelectedChar();
       // i believe this isnt using oboClass as we just have string
       // of course it isnt this is free text
       String v = getText();
