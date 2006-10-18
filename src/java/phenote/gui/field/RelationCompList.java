@@ -6,6 +6,9 @@ import org.apache.log4j.Logger;
 
 import org.geneontology.oboedit.datamodel.OBOProperty;
 
+import phenote.datamodel.CharacterI;
+
+
 class RelationCompList extends AbstractAutoCompList {
 
   private OBOProperty currentRel=null;
@@ -88,6 +91,11 @@ class RelationCompList extends AbstractAutoCompList {
    
   /** no-op - relation list doesnt edit model (at least presently) */
   protected void editModel() {}
+
+  /** char in table changed - adjust - not needed for rel(at least not yet)
+      as post comp doesnt listen to table changes (does it? should it?), 
+      just term */
+  protected void setValueFromChar(CharacterI chr) {}
 
   /** Returns a vector of CompletionRelations for auto completion
       which contain input, using search params */

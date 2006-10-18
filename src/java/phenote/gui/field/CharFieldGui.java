@@ -93,11 +93,14 @@ class CharFieldGui {
       EditManager.inst().addCharChangeListener(new FieldCharChangeListener());
   }
 
+  // i think this was to receive edits from term info?? which no longer edits - 
+  // but could imagine other things editing?? investigate this
   private class FieldCharChangeListener implements CharChangeListener {
     public void charChanged(CharChangeEvent e) {
       // check charField is this char field
       if (e.getSource() != CharFieldGui.this && e.isForCharField(charField))
         // i think all we need to do is setText to synch with model
+        // for complist dont we also need to set its model (not just text??)
         setText(e.getValueString());
     }
   }
@@ -147,6 +150,9 @@ class CharFieldGui {
                          +" names in config ");
       return;
     }
+    // if its a comp list need to set its model/current term rel (for AACL.setText)
+    if (isCompList)
+      getCompList().setValueFromChar(character);
     String v = charField.getCharFieldEnum().getValue(character).getName();
     setText(v);
   }

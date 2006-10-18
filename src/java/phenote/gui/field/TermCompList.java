@@ -27,6 +27,20 @@ class TermCompList extends AbstractAutoCompList {
   }
 
 
+  /** char in table changed - setCurrentOboClass & text */
+  protected void setValueFromChar(CharacterI chr) {
+    OBOClass selCharTerm =
+      getCharField().getCharFieldEnum().getValue(chr).getOboClass();
+    // if null then user has made a new char or selected a char with no term
+    if (selCharTerm == null) {
+      currentOboClass = null; // makes getCurTermRelName ""
+      setText(""); // actually calls getCurTermRelNm which is ""
+    }
+    else {
+      setOboClass(selCharTerm); // doesnt allow null
+    }
+  }
+
   protected Vector getSearchItems(String input) {
     return getCompListSearcher().getStringMatchTerms(input);
   }

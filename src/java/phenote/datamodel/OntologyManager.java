@@ -80,7 +80,7 @@ public class OntologyManager {
       merge this with getOboClassWithEx? */
   public OBOClass getOboClass(String id) throws TermNotFoundException {
     OBOClass oboClass;
-// this seems to be the sole reason for ontology list - silly!
+// this seems to be the sole reason for ontology list - silly! use char fields!
     Iterator<Ontology> iter = allOntologyList.iterator();
     while (iter.hasNext()) {
       Ontology o = iter.next();

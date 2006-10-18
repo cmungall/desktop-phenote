@@ -28,6 +28,7 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOProperty;
 
 import phenote.datamodel.CharField;
+import phenote.datamodel.CharacterI;
 //import phenote.datamodel.CharFieldEnum;
 //import phenote.datamodel.CharacterI;
 //import phenote.datamodel.Ontology;
@@ -110,6 +111,12 @@ public abstract class AbstractAutoCompList extends JComboBox {
 
   protected boolean editModelEnabled() { return editModel; }
 
+  /** char in table changed - adjust - not needed for rel(at least not yet)
+      as post comp doesnt listen to table changes (does it? should it?), 
+      just term */
+  protected abstract void setValueFromChar(CharacterI chr);
+  // {charField.getCharFieldEnum().getValue(chr).getOboClass() }
+
   ///** If true than the auto combo is for setting the differentia in a post comp term,
   //    if false (default) than no post comp or genus in post comp */
   //void setIsDifferentia(boolean isDiff) { isDifferentia = isDiff; }
@@ -126,7 +133,7 @@ public abstract class AbstractAutoCompList extends JComboBox {
     this.doCompletion = doCompletion;
     this.keyTyped = doCompletion; // key has to be typed for completion
     getEditor().setItem(text);
-    //log().debug("setting text "+text);
+    //if (charField!=null)log().debug(charField.getName()+" setting text ["+text+"]");
     //new Throwable().printStackTrace();
     this.doCompletion = true; // set back to default
   }
@@ -198,7 +205,8 @@ public abstract class AbstractAutoCompList extends JComboBox {
       // but this is needed from mouse release on selection set text
       // is called and will cause completion list to come up after sel
       // w/o it
-      //log().debug("AutoTextField.setText "+text);
+      //if (charField!=null)
+      //log().debug(charField.getName()+" AutoTextField.setText ["+text+"]"+getCurrentTermRelName());
       //new Throwable().printStackTrace();
       doCompletion = false; 
       //this is problematic for syns & such where string is diff than term name
@@ -441,7 +449,7 @@ public abstract class AbstractAutoCompList extends JComboBox {
     //log().debug("configure editor called"+anItem);
     //new Throwable().printStackTrace();
     // it appears to be ok to supress this entirely
-    // super.configureEditor(anEditor,anItem); // ??? supress
+    super.configureEditor(anEditor,anItem); // ??? supress
   }
   
 

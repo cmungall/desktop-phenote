@@ -5,11 +5,11 @@ public class OntologyConfig {
 
   public String name;
   public String ontologyFile;
-  public String nameSpace;
+  //public String nameSpace; // not used yet - or was this what filter out ended up
   public String filterOut;
   // public typeEnum? type?? eg Entity/GT/Pato...??
 
-  static OntologyConfig defaultPato = new OntologyConfig("Pato","attribute_and_value.obo");
+  //static OntologyConfig defaultPato = new OntologyConfig("Pato","attribute_and_value.obo");
 
   OntologyConfig() {} // not sure this is actually needed/used
   OntologyConfig(String name) { this.name = name; }
