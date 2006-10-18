@@ -279,8 +279,12 @@ public abstract class AbstractAutoCompList extends JComboBox {
     // through, taking out keyTyped, inputChanged may be sufficient
 //     if (!keyTyped) // if user hasnt typed anything dont bother
 //       return;
-    if (!inputChanged()) // if input is actually same no need to recomp
-      return;
+    //log().debug("inputchanged "+inputChanged());
+    // this seems like a good idea but leads to a bug - if user types a letter
+    // then hits "New" then comes back and types same letter then this stops comp
+    // also i dont think this actually stops any funny behavior
+    //if (!inputChanged()) // if input is actually same no need to recomp
+    //return;
     keyTyped = false;
     // too soon - text field doesnt have text yet.... hmmmm....
     String input = getText();
@@ -318,14 +322,14 @@ public abstract class AbstractAutoCompList extends JComboBox {
   }
 
 
-  /** returns true if input changed from previously recorded input */
-  private boolean inputChanged() {
-    String newInput = getText();
-    boolean inputChanged = ! previousInput.equals(newInput);
-    if (inputChanged)
-      previousInput = newInput;
-    return inputChanged;
-  }
+//   /** returns true if input changed from previously recorded input */
+//   private boolean inputChanged() {
+//     String newInput = getText();
+//     boolean inputChanged = ! previousInput.equals(newInput);
+//     if (inputChanged)
+//       previousInput = newInput;
+//     return inputChanged;
+//   }
   
   /** call Ontology to get a Vector of OBOClass's that contain "in"
       in ontology */
