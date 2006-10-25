@@ -6,17 +6,17 @@ import java.awt.Dimension;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
 
 //import phenote.datamodel.SearchParamsI;
 // only public for TestPhenote
 public class SearchParamPanel {
 
   private SearchParamsI searchParams;
-  private JRadioButton termButton;
-  private JRadioButton synonymButton;
-  private JRadioButton definitionButton;
-  private JRadioButton obsoleteButton;
+  private JCheckBox termButton;
+  private JCheckBox synonymButton;
+  private JCheckBox definitionButton;
+  private JCheckBox obsoleteButton;
 
   // SearchParamPanel() {
   // CompletionList.setSearchParams(new SearchParams()) }
@@ -40,8 +40,8 @@ public class SearchParamPanel {
     return panel;
   }
 
-  private JRadioButton makeButton(String label) {
-    JRadioButton button = new JRadioButton(label);
+  private JCheckBox makeButton(String label) {
+    JCheckBox button = new JCheckBox(label);
     return button;
   }
   
