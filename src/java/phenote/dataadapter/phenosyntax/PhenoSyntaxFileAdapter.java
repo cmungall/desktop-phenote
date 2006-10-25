@@ -35,7 +35,7 @@ public class PhenoSyntaxFileAdapter implements DataAdapterI {
   public void load() {
 
     if (file == null)
-      file = getFileFromUser(previousFile);
+      file = getFileFromUserForOpen(previousFile);
     if (file == null) return;
     previousFile = file;
     
@@ -62,14 +62,22 @@ public class PhenoSyntaxFileAdapter implements DataAdapterI {
   }
 
   /** returns null if user fails to pick a file */
-  private File getFileFromUser(File dir) {
-    return PhenoXmlAdapter.getFileFromUser(dir); // perhaps a util class
+ // private File getFileFromUser(File dir) {
+ //   return PhenoXmlAdapter.getFileFromUser(dir); // perhaps a util class
+ // }
+  
+  private File getFileFromUserForSave(File dir) {
+    return PhenoXmlAdapter.getFileFromUserForSave(dir);
+  }
+  
+  private File getFileFromUserForOpen(File dir) {
+    return PhenoXmlAdapter.getFileFromUserForOpen(dir);
   }
 
   public void commit(CharacterListI charList) {
     
     if (file == null)
-      file = getFileFromUser(previousFile);
+      file = getFileFromUserForSave(previousFile);
     if (file == null) return;
     previousFile = file;
 

@@ -48,7 +48,7 @@ public class PhenoXmlAdapter implements DataAdapterI {
   public void load() {
 	  try {
 		  if (file == null) {
-			  file = getFileFromUser(previousFile);
+			  file = getFileFromUserForOpen(previousFile);
 		  }
 		  if (file == null) return;
 		  previousFile = file;
@@ -159,7 +159,7 @@ public class PhenoXmlAdapter implements DataAdapterI {
 
   public void commit(CharacterListI charList) {
     if (file == null)
-      file = getFileFromUser(previousFile);
+      file = getFileFromUserForSave(previousFile);
     if (file == null)
       return;
     previousFile = file;
@@ -183,17 +183,30 @@ public class PhenoXmlAdapter implements DataAdapterI {
     }
   }
 
-  public static File getFileFromUser(File dir) {
+  public static File getFileFromUserIsSave(File dir, boolean isSave) {
     // todo - remember last accessed dir
     JFileChooser fileChooser = new JFileChooser(dir);
     // todo - file filter - only .xml or .phenoxml?
-    int returnVal = fileChooser.showOpenDialog(null);
-    if(returnVal == JFileChooser.APPROVE_OPTION)
+    int returnVal;
+    if (isSave) {
+      returnVal = fileChooser.showSaveDialog(null);
+    } else {
+      returnVal = fileChooser.showOpenDialog(null);
+    }
+    if (returnVal == JFileChooser.APPROVE_OPTION)
       return fileChooser.getSelectedFile();
     else {
       System.out.println("no file chosen");
       return null;
     }
+  }
+  
+  public static File getFileFromUserForSave(File dir) {
+    return getFileFromUserIsSave(dir, true);
+  }
+  
+  public static File getFileFromUserForOpen(File dir) {
+    return getFileFromUserIsSave(dir, false);
   }
 
   private XmlOptions getXmlOptions() {
