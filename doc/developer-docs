@@ -1,0 +1,40 @@
+CONFIGURATION
+-------------
+
+> do you have docs on how to configure it (eg,
+> how to change the ontologies that are available to phenote).
+
+no there isnt yet docs on configuring - at the moment the only way to configure is to modify the xml config file, but on the todo (medium priority) is to have a gui for configuration as biomed users will not want to deal with an xml file.
+
+If you want to change the configuration via xml you will need to run from svn (for now, with webstart you would have to modify the conf file in the jar which im sure you dont want to get into). When you run phenote for the first time you can specify a config file at the command line with something like -c initial_zfin.cfg, which will copy conf/initial_zfin.cfg into ~/.phenote/my-phenote.cfg (if no -c specified & no my-phenote.cfg in place then conf/initial-flybase.cfg is copied by default).
+
+You can then modify the contents of ~/.phenote/my-phenote.cfg. Alternatively you can make your own config file and load it up with -c. In any case the xml file looks like this:
+
+<phenote-configuration version="0.8" xmlns="phenote/config/xml">
+
+  <dataadapter name="phenosyntax"/>
+
+  <log config-file="conf/log4j-standalone.xml" />
+
+  <field name="Pub" />                      
+
+  <field name="Genotype" type="free_text"/>
+
+  <field name="Genetic Context" file="context.obo"/>
+
+  <field name="Entity">
+     <postcomp relationship-ontology="relationship.obo"/>
+     <ontology name="Fly" file="fly_anatomy.obo" />
+     <ontology name="GO" file="gene_ontology.obo"/>
+     <ontology name="SP" file="spatial.obo"/>
+  </field>
+
+  <field name="Quality" file="quality.obo"/>
+                      
+
+</phenote-configuration>
+
+
+So if a field only has one ontology you can shove that file in the field element as an attribute. For multiple ontologies you need to add ontology elements. 
+
+Once the gui configuration is in place no one will need to know about this (unless one prefers mucking with xml over guis).
