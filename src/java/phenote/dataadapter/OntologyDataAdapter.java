@@ -126,44 +126,6 @@ public class OntologyDataAdapter {
     return FileUtil.findUrl(fileName);
   }
 
-//     // first try file as is (full path provided)
-//     File file = new File(fileName);
-//     if (file.exists())
-//       return makeUrl(fileName);
-
-//     String oboFileDir = "obo-files/";
-//     // try current directory + obo-file dir
-//     String currentDir = "./" + oboFileDir + fileName;
-//     file = new File(currentDir);
-//     if (file.exists())
-//       return makeUrl(currentDir);
-
-//     // try jar - hopefully this works... jar files have to have '/' prepended
-//     // first try without obo-files dir (in jar)
-//     String jarFile = "/" + fileName;
-//     URL url = Ontology.class.getResource(jarFile); // looks in jar
-//     // 2nd try with obo-files dir in jar file (i used to do it this way)
-//     if (url == null) {
-//       jarFile = "/" + oboFileDir + fileName;
-//       url = Ontology.class.getResource(jarFile); // looks in jar
-//     }
-
-//     if (url == null) {
-//       throw new FileNotFoundException("No file found for "+fileName);
-//     }
-//     return url;
-//   }
-  
-//   private URL makeUrl(String file) {
-//     try {
-//       return new URL("file:"+file);
-//     }
-//     catch (MalformedURLException e) {
-//       //System.out.println("malformed url "+file+" "+e);
-//       LOG.error("malformed url "+file+" "+e);
-//       return null;
-//     }
-//   }
 
 
   // String -> url to handle web start jar obo files
@@ -245,6 +207,44 @@ public class OntologyDataAdapter {
 
 
 // GARBAGE
+//     // first try file as is (full path provided)
+//     File file = new File(fileName);
+//     if (file.exists())
+//       return makeUrl(fileName);
+
+//     String oboFileDir = "obo-files/";
+//     // try current directory + obo-file dir
+//     String currentDir = "./" + oboFileDir + fileName;
+//     file = new File(currentDir);
+//     if (file.exists())
+//       return makeUrl(currentDir);
+
+//     // try jar - hopefully this works... jar files have to have '/' prepended
+//     // first try without obo-files dir (in jar)
+//     String jarFile = "/" + fileName;
+//     URL url = Ontology.class.getResource(jarFile); // looks in jar
+//     // 2nd try with obo-files dir in jar file (i used to do it this way)
+//     if (url == null) {
+//       jarFile = "/" + oboFileDir + fileName;
+//       url = Ontology.class.getResource(jarFile); // looks in jar
+//     }
+
+//     if (url == null) {
+//       throw new FileNotFoundException("No file found for "+fileName);
+//     }
+//     return url;
+//   }
+  
+//   private URL makeUrl(String file) {
+//     try {
+//       return new URL("file:"+file);
+//     }
+//     catch (MalformedURLException e) {
+//       //System.out.println("malformed url "+file+" "+e);
+//       LOG.error("malformed url "+file+" "+e);
+//       return null;
+//     }
+//   }
 //     if (date > 0) { // jar files have 0 date???
 //       ontology.setTimestamp(date);
 //       ontology.setSource(file.toString());

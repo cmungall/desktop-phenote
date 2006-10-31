@@ -165,6 +165,21 @@
      }
    </script>
 
+   <script  type="text/javascript">
+     function selectTerm(termName) {
+       var field = document.termForm.activeField.value;
+       //var termName = document.termForm.termInfoTermName.value;
+       //alert('use term info fn called - field '+field+' name '+termName);
+       <!-- document.termForm.qualityInput.value=document.termForm.termId.value; -->
+       if (field == "ENTITY") {
+         document.termForm.entityInput.value = termName;
+       }
+       else {
+         document.termForm.qualityInput.value= termName;
+       }
+     }
+   </script>
+
 
 
 <!-- /td -->

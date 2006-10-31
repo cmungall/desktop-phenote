@@ -31,10 +31,10 @@ public class CompletionTerm {
   boolean isStartsWithMatch() { return startsWith; }
 
   public String toString() {
-    return compListDisplayString();
+    return getCompListDisplayString();
   }
 
-  private String compListDisplayString() {
+  public String getCompListDisplayString() {
     StringBuffer display = new StringBuffer();
     StringBuffer appends = new StringBuffer();
     if (isSynMatch()) {

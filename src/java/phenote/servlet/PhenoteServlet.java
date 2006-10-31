@@ -75,7 +75,12 @@ public class PhenoteServlet extends HttpServlet {
     /**
      * AUTO COMPLETE REQUEST
      * this should be done in java server faces/pages(?), post comes from ajax
-     * autocompleter on typing in stuff
+     * autocompleter on typing in stuff. prints html ul list to response:
+     <ul>
+        <li onmouseover=getTermInfo('id','name','ontol','field') id='id'       		
+            onclick=selectTerm('name','field') > termName </li>
+        <li ...
+      </ul>
      */
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
@@ -220,11 +225,13 @@ public class PhenoteServlet extends HttpServlet {
 
   private String makeCompListHtmlItem(CompletionTerm term, String ontol,String field) {
     String id = term.getID(), name=term.getName();
+    String display = term.getCompListDisplayString();
     // pass in id, name & ontology - name for setting field on UseTerm
     StringBuffer info = dq(fn("getTermInfo",new String[]{id,name,ontol,field}));
+    StringBuffer select = dq(fn("selectTerm",new String[]{name,field}));
     //String info = "\"getTermInfo("+id +","+q(name)+","+ q(ontol) + ")\"";
     return "<li onmouseover=" + info + " id=" + q(id) + " " +
-      "onclick=" + info + ">" + name + "</li>\n";
+      "onclick=" + select + ">" + display + "</li>\n";
   }
 
   private static StringBuffer fn(String fnName, String[] params) {
@@ -254,25 +261,25 @@ public class PhenoteServlet extends HttpServlet {
     }
 
     private class HardWiredSearchParams implements SearchParamsI {
-        public boolean searchTerms() {
-            return true;
-        }
-
-        public boolean searchSynonyms() {
-          return false; // --> true
-        }
-
-        public boolean searchDefinitions() {
-          return false; // ?? w [def]??
-        }
-
-        /**
-         * Whether to include obsoletes in searching terms, syns, & definitions
-         * This should be in conjunction with the other 3
-         */
-        public boolean searchObsoletes() {
-          return false; // --> true w [obs], disallow selection
-        }
+      public boolean searchTerms() {
+        return true;
+      }
+      
+      public boolean searchSynonyms() {
+        return true; // --> true
+      }
+      
+      public boolean searchDefinitions() {
+        return false; // ?? w [def]??
+      }
+      
+      /**
+       * Whether to include obsoletes in searching terms, syns, & definitions
+       * This should be in conjunction with the other 3
+       */
+      public boolean searchObsoletes() {
+        return false; // --> true w [obs], disallow selection
+      }
     }
 
 }

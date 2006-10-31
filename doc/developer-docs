@@ -38,3 +38,13 @@ You can then modify the contents of ~/.phenote/my-phenote.cfg. Alternatively you
 So if a field only has one ontology you can shove that file in the field element as an attribute. For multiple ontologies you need to add ontology elements. 
 
 Once the gui configuration is in place no one will need to know about this (unless one prefers mucking with xml over guis).
+
+
+
+> Is it correct that you keep the file information from which an ontology
+> was loaded?
+
+yes - phenote keeps the file name (source) and timestamp (as long) in
+phenote.datamodel.Ontology 
+phenote.datamodel.OntologyManager has a list of
+phenote.datamodel.CharFields which have a list of Ontologys 
