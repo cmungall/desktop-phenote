@@ -80,8 +80,8 @@ public class Phenote {
 //   }
 
   public void initOntologies() {
-    OntologyDataAdapter oda = new OntologyDataAdapter(); // singleton?
-    oda.loadOntologies(); // loads up OntologyManager
+    //OntologyDataAdapter oda = new OntologyDataAdapter(); // singleton?
+    OntologyDataAdapter.getInstance().loadOntologies(); // loads up OntologyManager
   }
 
   private void loadFromCommandLine() {

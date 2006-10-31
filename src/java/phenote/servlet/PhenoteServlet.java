@@ -25,6 +25,7 @@ import phenote.util.HtmlUtil;
 import phenote.config.Config;
 import phenote.config.ConfigException;
 import phenote.main.Phenote;
+import phenote.dataadapter.OntologyDataAdapter;
 
 public class PhenoteServlet extends HttpServlet {
 
@@ -34,7 +35,7 @@ public class PhenoteServlet extends HttpServlet {
 
     //private String configurationFileName; not sure needs to be var
     private Date initDate;
-    private Phenote phenote;
+  //private Phenote phenote;
 
     /**
      * if <load-on-startup>1</load-on-startup> is in web.xml then init will
@@ -46,7 +47,7 @@ public class PhenoteServlet extends HttpServlet {
         super.init();
         // makes links for term info - put this method in Phenote?
         HtmlUtil.setStandAlone(false);
-        phenote = Phenote.getPhenote();
+        //phenote = Phenote.getPhenote();
         // from web.xml
         String configFile = getInitParameter(CONFIG_FILE_PARAM);
         // just in case not in web.xml
@@ -63,7 +64,8 @@ public class PhenoteServlet extends HttpServlet {
         // cheesy - revisit
         //String[] args = {"-c","initial-zfin.cfg"};
         //phenote.initConfig(args); // hardwire for now to zfin
-        phenote.initOntologies();
+        //phenote.initOntologies();
+        OntologyDataAdapter.getInstance().loadOntologies();
         // this is not running as a separate thread - investigate
 //     System.out.println("ontologies loaded - starting file checking thread");
 //     OntologyFileCheckThread ofct = new OntologyFileCheckThread();

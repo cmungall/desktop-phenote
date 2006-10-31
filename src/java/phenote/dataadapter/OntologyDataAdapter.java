@@ -33,16 +33,23 @@ import phenote.config.OntologyConfig;
     this is specifically a OboFileLoader - other kinds of ontology loading may com along*/
 public class OntologyDataAdapter {
 
+  private static OntologyDataAdapter singleton;
   private Config config;
   private OntologyManager ontologyManager = OntologyManager.inst();
   private boolean loadingOntologies = false;
   private static final Logger LOG = Logger.getLogger(OntologyDataAdapter.class);
 
-  public OntologyDataAdapter() {
+  private OntologyDataAdapter() {
     config = Config.inst();
     if (config.checkForNewOntologies()) {
       new OntologyFileCheckThread().start();
     }
+  }
+
+  public static OntologyDataAdapter getInstance() {
+    if (singleton == null)
+      singleton = new OntologyDataAdapter();
+    return singleton;
   }
 
   public void loadOntologies() {
