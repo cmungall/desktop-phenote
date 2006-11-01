@@ -65,7 +65,8 @@ public class PhenoteServlet extends HttpServlet {
         //String[] args = {"-c","initial-zfin.cfg"};
         //phenote.initConfig(args); // hardwire for now to zfin
         //phenote.initOntologies();
-        OntologyDataAdapter.getInstance().loadOntologies();
+        // loads ontologies up - non intuitive?
+        OntologyDataAdapter.getInstance();
         // this is not running as a separate thread - investigate
 //     System.out.println("ontologies loaded - starting file checking thread");
 //     OntologyFileCheckThread ofct = new OntologyFileCheckThread();

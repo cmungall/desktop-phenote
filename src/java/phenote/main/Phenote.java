@@ -32,7 +32,7 @@ import phenote.gui.field.FieldPanel;
 
 public class Phenote {
 
-  private static final String VERSION = "0.8.1 dev";
+  private static final String VERSION = "0.8.2 dev";
   //private static final String DEFAULT_CONFIG_FILE = Config.DEFAULT_CONFIG_FILE;
   private static final Logger LOG = Logger.getLogger(Phenote.class);
   private static boolean standalone = false; // default for servlet
@@ -81,7 +81,8 @@ public class Phenote {
 
   public void initOntologies() {
     //OntologyDataAdapter oda = new OntologyDataAdapter(); // singleton?
-    OntologyDataAdapter.getInstance().loadOntologies(); // loads up OntologyManager
+    // loads up OntologyManager - non intuitive?
+    OntologyDataAdapter.getInstance(); 
   }
 
   private void loadFromCommandLine() {
