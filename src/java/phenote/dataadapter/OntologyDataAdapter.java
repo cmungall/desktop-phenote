@@ -55,6 +55,11 @@ public class OntologyDataAdapter {
     return singleton;
   }
 
+  /** just calls getInstance - but more intuitive for initialization */
+  public static synchronized void initialize() {
+    getInstance();
+  }
+
   private void initOntologies() {
     // to prevent reload during init , maybe dont need with synchronization?
     initializingOntologies = true; 

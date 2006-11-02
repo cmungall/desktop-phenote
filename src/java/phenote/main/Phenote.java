@@ -82,7 +82,7 @@ public class Phenote {
   public void initOntologies() {
     //OntologyDataAdapter oda = new OntologyDataAdapter(); // singleton?
     // loads up OntologyManager - non intuitive?
-    OntologyDataAdapter.getInstance(); 
+    OntologyDataAdapter.initialize(); 
   }
 
   private void loadFromCommandLine() {

@@ -47,8 +47,8 @@ public class PhenoteServlet extends DispatcherServlet {
     }
     // Ensure the Ontologies are read during start up. This takes a while and should be done
     // before a different client calls and has to wait.
-    // ToDo: Shall we create a new method called  OntologyDataAdapter.start()?
-    OntologyDataAdapter.getInstance();
+    // ToDo: Shall we create a new method called  OntologyDataAdapter.start()? YES
+    OntologyDataAdapter.initialize();
   }
 
 }
