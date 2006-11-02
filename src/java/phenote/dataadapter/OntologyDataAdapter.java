@@ -42,6 +42,7 @@ public class OntologyDataAdapter {
 
   private OntologyDataAdapter() {
     config = Config.inst();
+    initOntologies();
     //if (config.checkForNewOntologies()){new OntologyFileCheckThread().start();}
   }
 
@@ -51,7 +52,6 @@ public class OntologyDataAdapter {
   public static synchronized OntologyDataAdapter getInstance() {
     if (singleton == null)
       singleton = new OntologyDataAdapter();
-    singleton.initOntologies();
     return singleton;
   }
 
@@ -168,7 +168,6 @@ public class OntologyDataAdapter {
       in place of old one */
   public void reloadOntology(Ontology ont) throws OntologyException {
     loadOboSession(ont,ont.getSource()); // throws ex
-    
   }
 
 }
