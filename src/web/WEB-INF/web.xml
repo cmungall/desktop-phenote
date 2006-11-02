@@ -5,12 +5,8 @@
 
 <web-app>
   <servlet>
-    <servlet-name>Phenote</servlet-name>
+    <servlet-name>phenote</servlet-name>
     <servlet-class>phenote.servlet.PhenoteServlet</servlet-class>
-    <init-param>
-      <param-name>"-Xmx"</param-name>
-      <param-value>200M</param-value>
-    </init-param>
     <init-param>
        <param-name>configuration-file</param-name>
        <param-value>/initial-zfin.cfg</param-value>
@@ -19,7 +15,12 @@
   </servlet>
 
   <servlet-mapping>
-     <servlet-name>Phenote</servlet-name>
-     <url-pattern>/Phenote</url-pattern>
+     <servlet-name>phenote</servlet-name>
+     <url-pattern>/Phenote/*</url-pattern>
   </servlet-mapping>
+
+  <welcome-file-list>
+      <welcome-file>html/ncbo.html</welcome-file>
+  </welcome-file-list>
+
 </web-app>

@@ -4,7 +4,7 @@
 
 <TITLE> Phenote </TITLE>
 
-<!-- we need some way of parameterizing the root of the web files??? --> 
+<!-- we need some way of parameterizing the root of the web files??? -->
 <!-- set in some file somewhere? -->
 
 <link href="../css/control.css" type="text/css" rel="stylesheet">
@@ -62,7 +62,7 @@
 
             <label for="entityOntology">Ontology:</label>
             <select name="entityOntology" id="entityOntology" onChange="setEntityOntology(this.options[this.selectedIndex].value);">
-             <option value="AO">AO</option> 
+             <option value="AO">AO</option>
              <option value="GO">GO</option>
             </select>
 
@@ -117,14 +117,14 @@
    <!--   'ontologyname_auto_complete', '/phenote-ontology.cgi',{  }) -->
    <!-- new Ajax.Autocompleter( 'ontologyname', 'ontologyname_auto_complete', '/servlet/PhenoteStub',{  }) -->
    <!--  new Ajax.Autocompleter( 'ontologyname', 'ontologyname_auto_complete', '/servlet/phenote.servlet.PhenoteServlet',{  }) -->
-      var complete = new Ajax.Autocompleter( 'qualityInput', 'quality_auto_complete', '../Phenote',{parameters:'ontologyName=quality&field=QUALITY',paramName: "userInput"   })
+      var complete = new Ajax.Autocompleter( 'qualityInput', 'quality_auto_complete', '../Phenote/',{parameters:'ontologyName=quality&field=QUALITY',paramName: "userInput"   })
       <!-- complete.options.defaultParams = "ontology=quality"; -->
       <!--   complete.options.parameters = "ontology=quality"; -->
       <!-- more params? 'ontology=quality&x=y&...' -->
    </script>
 
    <script type="text/javascript">
-        var entityAutoCompleter = new Ajax.Autocompleter( 'entityInput', 'entity_auto_complete', '../Phenote',{parameters:'ontologyName=ZF&field=ENTITY',paramName: "userInput"})
+        var entityAutoCompleter = new Ajax.Autocompleter( 'entityInput', 'entity_auto_complete', '../Phenote/',{parameters:'ontologyName=ZF&field=ENTITY',paramName: "userInput"})
    </script>
 
 
@@ -132,16 +132,16 @@
    <!-- this is set by ncbo-term-info.js but its unclear what its for is this the datamodel???? -->
    <input type="hidden" name="termInfoTermId">
    <input type="hidden" name="termInfoTermName">
-   <!--what input field haas the user most recently moused over terms --> 
+   <!--what input field haas the user most recently moused over terms -->
    <!-- ENTITY or QUALITY, set by ncbo-term-info.js -->
    <input type="hidden" name="activeField">
 </form>
- 
+
 <!-- /td -->
 
 <!-- td width="80%" -->
       <div id="termInfo"></div>
-      <!-- USE TERM BUTTON --> 
+      <!-- USE TERM BUTTON -->
       <input
         type="button"
         value="Use Term"

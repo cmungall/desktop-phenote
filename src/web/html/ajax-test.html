@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+
+</HEAD>
+
+<BODY>
+
+
+<form name="termForm" action="/phenote/Phenote/" method="post">
+  <div id="ontology" width="20%">
+
+    Post:
+    <div style="float: left;" width="20%">
+
+      <fieldset class="search">
+        <br/><br/><br/>
+
+        <label for="entityOntology">Ontology:</label>
+        <select name="ontologyName" id="entityOntology"
+                onChange="setEntityOntology(this.options[this.selectedIndex].value);">
+          <option value="ZF">AO</option>
+          <option value="GO">GO</option>
+        </select>
+
+        <input name="userInput" size="40" type="text" value="neural rod"/>
+        <label>Entity: </label>
+        <input  name="field" size="40" type="text" value="ENTITY"/>
+        <br/>
+      </fieldset>
+
+    </div>
+
+    <input type="submit" value="Submit"/>
+
+
+  </div>
+
+
+</form>
+
+<p></p>
+GET: <a href="/phenote/Phenote/?termId=ZFA:0001066&ontologyName=ZF&field=ENTITY"> Get Term Info</a>
+</body>
+</html>
+

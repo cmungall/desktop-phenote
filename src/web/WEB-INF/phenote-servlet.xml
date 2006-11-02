@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+<!--
+  <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+    <property name="mappings">
+      <props>
+        <prop key="/phenote/">main</prop>
+      </props>
+    </property>
+  </bean>
+-->
+
+  <bean name="/" class="phenote.servlet.PhenoteController"/>
+
+  <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
+    <property name="prefix">
+      <value>/WEB-INF/jsp/</value>
+    </property>
+    <property name="suffix">
+      <value>.jsp</value>
+    </property>
+  </bean>
+
+  <!-- QUARTZ SCHEDULER -->
+  <bean id="anatomyOntologyReloadJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+    <property name="jobClass">
+      <value>phenote.jobs.OntologyUpdateJob</value>
+    </property>
+    <property name="jobDataAsMap">
+      <map>
+        <entry key="ontologyName">
+          <value>ZF</value>
+        </entry>
+        <!-- This directory is relative to the webroot -->
+        <entry key="archiveDirectory">
+          <value>archive-ontology</value>
+        </entry>
+        <!-- time stated in days (can be a fraction) -->
+        <entry key="purgePeriodInDays">
+          <value>0.0035</value>
+        </entry>
+      </map>
+    </property>
+  </bean>
+
+  <bean id="cronOntologyTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <property name="jobDetail">
+      <ref bean="anatomyOntologyReloadJob"/>
+    </property>
+    <property name="cronExpression">
+      <value>20 * * * * ?</value>
+    </property>
+  </bean>
+
+  <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    <property name="triggers">
+      <list>
+        <ref bean="cronOntologyTrigger"/>
+      </list>
+    </property>
+  </bean>
+</beans>
