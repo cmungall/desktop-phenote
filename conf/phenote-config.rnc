@@ -5,6 +5,7 @@ start =
   element phenote-configuration {
     attribute version { xsd:float },
     check-for-new-ontologies,
+    ontology-archive,
     log,
     dataadapter*,
     field*
@@ -17,10 +18,11 @@ dataadapter =
   }
 
 ## Whether to check if ontology(obo) has been updated/more current obo file
-check-for-new-ontologies =
-  element check-for-new-ontologies {
-    attribute intervalMinutes { xsd:integer }                       
-  }
+## I think this needs to be taken out as replaced by quartz scheduler
+##check-for-new-ontologies =
+##  element check-for-new-ontologies {
+##    attribute intervalMinutes { xsd:integer }                       
+##  }
 
 ## Where the config file for log4j is
 log =
