@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE web-app
-    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN"
-    "http://java.sun.com/j2ee/dtds/web-app_2_4.dtd">
+        PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
   <servlet>
@@ -20,7 +19,7 @@
   </servlet-mapping>
 
   <welcome-file-list>
-      <welcome-file>html/ncbo.html</welcome-file>
+      <welcome-file>/index.html</welcome-file>
   </welcome-file-list>
 
 </web-app>
