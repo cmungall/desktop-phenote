@@ -298,11 +298,26 @@ them into  the classfiles directory. excludes="test/**"  -->
         </copy>
         <copy todir="${web.xml-dir}">
             <fileset file="src/web/WEB-INF/web.xml"/>
+            <fileset file="src/web/WEB-INF/phenote-servlet.xml"/>
         </copy>
     </target>
 
-    <target name="war" depends="jar, war-clean">
+    <target name="war-init-dir" depends="jar, war-clean">
         <mkdir dir="war-deployment"/>
+        <war destfile="war-deployment/phenote.war" webxml="src/web/WEB-INF/web.xml">
+            <fileset dir="src/web">
+                <exclude name="perl/*" />
+            </fileset>
+            <lib dir="${lib}">
+                <exclude name="junit-4.0.jar" />
+                <exclude name="BrowserLauncher2-10rc4.jar" />
+                <exclude name="tomcat-servlet.jar" />
+            </lib>
+            <classes dir="${obo}" />
+            <classes dir="${conf}" />
+        </war>
+    </target>
+    <target name="war" depends="jar">
         <war destfile="war-deployment/phenote.war" webxml="src/web/WEB-INF/web.xml">
             <fileset dir="src/web">
                 <exclude name="perl/*" />
