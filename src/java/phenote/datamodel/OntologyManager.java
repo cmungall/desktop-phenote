@@ -25,7 +25,7 @@ public class OntologyManager {
 
   private static OntologyManager singleton;
   // isnt this redundant with charFieldList? convenience? - phase out! just getOClass
-  private List<Ontology> allOntologyList = new ArrayList<Ontology>();
+  //private List<Ontology> allOntologyList = new ArrayList<Ontology>();
   /** CharFields generically hold one or more ontologies - are charFields that dont
    have ontologies in this list?? not sure */
   private List<CharField> charFieldList = new ArrayList<CharField>(6);
@@ -42,13 +42,20 @@ public class OntologyManager {
 
   
   public void addField(CharField cf) {
-    addOntologyList(cf.getOntologyList());
+    //addOntologyList(cf.getOntologyList());
     charFieldList.add(cf);
   }
 
   /** This is where the ontologies are in a generic fashion. A char field
       has one or more ontologies (entity char field often has more than ontology)*/
   public List<CharField> getCharFieldList() { return charFieldList; }
+
+  public List<Ontology> getAllOntologies() {
+    List<Ontology> ontologies = new ArrayList<Ontology>();
+    for (CharField cf : charFieldList)
+      ontologies.addAll(cf.getOntologyList());
+    return ontologies;
+  }
 
   /** Returns ontology with name, null if not found */
   public Ontology getOntologyForName(String ontologyName)
@@ -64,13 +71,13 @@ public class OntologyManager {
   }
 
 
-  private void addOntologyList(List<Ontology> l) {
-    allOntologyList.addAll(l);
-  }
+//   private void addOntologyList(List<Ontology> l) {
+//     allOntologyList.addAll(l);
+//   }
 
-  private void addOntology(Ontology o) {
-    allOntologyList.add(o);
-  }
+//   private void addOntology(Ontology o) {
+//     allOntologyList.add(o);
+//   }
 
   /** Searches all ontologies for id - this could be even more savvy and utilize
       the id prefix AO,GO,PATO... 
@@ -81,9 +88,10 @@ public class OntologyManager {
   public OBOClass getOboClass(String id) throws TermNotFoundException {
     OBOClass oboClass;
 // this seems to be the sole reason for ontology list - silly! use char fields!
-    Iterator<Ontology> iter = allOntologyList.iterator();
-    while (iter.hasNext()) {
-      Ontology o = iter.next();
+    //Iterator<Ontology> iter = getAllOntologies().iterator(); // allOntologyList
+    //while (iter.hasNext()) {
+    for (Ontology o : getAllOntologies()) {
+      //Ontology o = iter.next();
       try { oboClass = o.getOboClass(id); }
       catch (OntologyException e) { continue; }
       if (oboClass != null)
