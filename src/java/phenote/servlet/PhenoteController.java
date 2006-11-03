@@ -32,6 +32,7 @@ public class PhenoteController extends AbstractCommandController {
 
   protected ModelAndView handle(HttpServletRequest request, HttpServletResponse response, Object command,
                                 BindException errors) throws Exception {
+    System.out.println("in PhenoteController.handle()");
     PhenoteBean form = (PhenoteBean) command;
     String ontologyName = form.getOntologyName();
     String field = form.getField();
@@ -80,6 +81,10 @@ public class PhenoteController extends AbstractCommandController {
     try {
       Vector<CompletionTerm> v = getCompListSearcher(ontologyName).getStringMatchTerms(userInput);
       //Vector<OBOClass> v = ontology.getStringMatchTerms(userInput, getSearchParams());
+      // a tad cheesy but if hit no terms then auto comp shows nothing
+      // add an empty item should show then an empty list?
+      if (v.isEmpty())
+        sb.append("<li></li>");
       for (CompletionTerm ct : v)
         sb.append(makeCompListHtmlItem(ct, ontologyName, field));
     }
@@ -90,14 +95,17 @@ public class PhenoteController extends AbstractCommandController {
     return sb.toString();
   }
 
-  private Object makeCompListHtmlItem(CompletionTerm term, String ontol, String field) {
-    String id = term.getID(), name = term.getName();
+  private String makeCompListHtmlItem(CompletionTerm term, String ontol,String field) {
+    String id = term.getID(), name=term.getName();
+    String display = term.getCompListDisplayString();
     // pass in id, name & ontology - name for setting field on UseTerm
-    StringBuffer info = dq(fn("getTermInfo", new String[]{id, name, ontol, field}));
+    StringBuffer info = dq(fn("getTermInfo",new String[]{id,name,ontol,field}));
+    StringBuffer select = dq(fn("selectTerm",new String[]{name,field}));
     //String info = "\"getTermInfo("+id +","+q(name)+","+ q(ontol) + ")\"";
-    return "<li onmouseover=" + info + " id=" + q(id) + " " +
-            "onclick=" + info + ">" + name + "</li>\n";
+    return "<li onmouseover=" + info + " id=" + q(id) + " termTest='dude' " +
+      " onclick=" + select + ">" + display + "</li>\n";
   }
+
 
   private CompListSearcher getCompListSearcher(String ontologyName) throws OntologyException {
     return new CompListSearcher(getOntology(ontologyName), getSearchParams());
@@ -135,11 +143,11 @@ public class PhenoteController extends AbstractCommandController {
     }
 
     public boolean searchSynonyms() {
-      return false; // --> true
+      return true; // --> true
     }
 
     public boolean searchDefinitions() {
-      return false; // ?? w [def]??
+      return false; // ?? w [def]?? zfin not keen on defs
     }
 
     /**
@@ -147,10 +155,17 @@ public class PhenoteController extends AbstractCommandController {
      * This should be in conjunction with the other 3
      */
     public boolean searchObsoletes() {
-      return false; // --> true w [obs], disallow selection
+      return true; // --> true w [obs], disallow selection
     }
   }
 
-
 }
 
+//   private Object makeCompListHtmlItemOLD(CompletionTerm term, String ontol, String field) {
+//     String id = term.getID(), name = term.getName();
+//     // pass in id, name & ontology - name for setting field on UseTerm
+//     StringBuffer info = dq(fn("getTermInfo", new String[]{id, name, ontol, field}));
+//     //String info = "\"getTermInfo("+id +","+q(name)+","+ q(ontol) + ")\"";
+//     return "<li onmouseover=" + info + " id=" + q(id) + " " +
+//             "onclick=" + info + ">" + name + "</li>\n";
+//   }
