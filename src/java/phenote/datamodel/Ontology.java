@@ -4,6 +4,7 @@ import java.util.ArrayList;
 //import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -48,6 +49,8 @@ public class Ontology {
     makeSortedLists(oboSession);
     filterLists();
   }
+
+  public Date getOntologyDate() { return new Date(ontologyTimestamp); }
 
   private void makeSortedLists(OBOSession oboSession) {
     //log().debug("name "+name+" terms "+oboSession.getTerms()+" propVals "+oboSession.getPropertyValues()+" rels "+oboSession.getRelationshipTypes());
@@ -121,8 +124,11 @@ public class Ontology {
     return sortedTerms;
   }
 
-  /** moght move this elsewhere - subclass? data adap specific wrapper? */
-  public void setTimestamp(long t) { ontologyTimestamp = t; }
+  /** meght move this elsewhere - subclass? data adap specific wrapper? */
+  public void setTimestamp(long t) {
+    ontologyTimestamp = t;
+    log().info(getName()+" Ontology date: "+getOntologyDate());
+  }
   public long getTimestamp() { return ontologyTimestamp; }
   /** for obo files this is the filename */
   public void setSource(String s) { source = s; }
