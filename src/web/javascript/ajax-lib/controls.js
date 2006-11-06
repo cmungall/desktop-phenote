@@ -242,7 +242,17 @@ Autocompleter.Base.prototype = {
         newValue += whitespace[0];
       this.element.value = newValue + value;
     } else {
-      this.element.value = value;
+      // MARK GIBSON ADDITIONS/HACKS - put into subclass!
+      // currently ncbo.html is setting element.termName in onclick function 
+      // selectTerm - another way would be to pass term in id or title?
+      // but sohel puts term id in id - ask him about this
+//alert("controls.js updateElement "+this.element.value+" to "+value+"termName? "+this.element.termName+" id? "+this.element.id+" termtest? "+this.element.termTest+" selEl "+selectedElement.id+ " sel el term test "+selectedElement.termTest);
+      if (this.element.termName != null) {
+        this.element.value = this.element.termName;
+      }
+      else {
+        this.element.value = value;
+      }
     }
     this.element.focus();
     

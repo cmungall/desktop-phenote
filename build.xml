@@ -332,6 +332,21 @@ them into  the classfiles directory. excludes="test/**"  -->
         </war>
     </target>
 
+    <target name="war-fiddle" depends="jar">
+        <war destfile="war-deployment/phenote-fiddle.war" webxml="src/web/WEB-INF/web-fiddle.xml">
+            <fileset dir="src/web">
+                <exclude name="perl/*" />
+            </fileset>
+            <lib dir="${lib}">
+                <exclude name="junit-4.0.jar" />
+                <exclude name="BrowserLauncher2-10rc4.jar" />
+                <exclude name="tomcat-servlet.jar" />
+            </lib>
+            <classes dir="${obo}" />
+            <classes dir="${conf}" />
+        </war>
+    </target>
+
     <target name="war-clean">
         <delete dir="war-deployment"/>
     </target>

@@ -32,7 +32,7 @@ public class PhenoteController extends AbstractCommandController {
 
   protected ModelAndView handle(HttpServletRequest request, HttpServletResponse response, Object command,
                                 BindException errors) throws Exception {
-    System.out.println("in PhenoteController.handle()");
+    //System.out.println("in PhenoteController.handle()");
     PhenoteBean form = (PhenoteBean) command;
     String ontologyName = form.getOntologyName();
     String field = form.getField();
