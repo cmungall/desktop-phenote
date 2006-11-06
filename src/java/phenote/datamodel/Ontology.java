@@ -52,6 +52,12 @@ public class Ontology {
 
   public Date getOntologyDate() { return new Date(ontologyTimestamp); }
 
+  public String getVersion() { 
+    // this is wrong - this just says file name loaded from. obo file puts version in
+    // remark field but doesnt seem to be way to get that from obo session??
+    return oboSession.getLoadRemark();
+  }
+
   private void makeSortedLists(OBOSession oboSession) {
     //log().debug("name "+name+" terms "+oboSession.getTerms()+" propVals "+oboSession.getPropertyValues()+" rels "+oboSession.getRelationshipTypes());
     sortedTerms = getSortedTerms(oboSession.getTerms());
@@ -127,7 +133,8 @@ public class Ontology {
   /** meght move this elsewhere - subclass? data adap specific wrapper? */
   public void setTimestamp(long t) {
     ontologyTimestamp = t;
-    log().info(getName()+" Ontology date: "+getOntologyDate());
+    log().info("\n"+getName()+" Ontology date: "+getOntologyDate()
+               +"\nVersion: "+getVersion());
   }
   public long getTimestamp() { return ontologyTimestamp; }
   /** for obo files this is the filename */

@@ -32,8 +32,7 @@ import phenote.gui.field.FieldPanel;
 
 public class Phenote {
 
-  private static final String VERSION = "0.8.2 dev";
-  //private static final String DEFAULT_CONFIG_FILE = Config.DEFAULT_CONFIG_FILE;
+  //private static final String VERSION = "0.8.2 dev";
   private static final Logger LOG = Logger.getLogger(Phenote.class);
   private static boolean standalone = false; // default for servlet
 
@@ -47,7 +46,7 @@ public class Phenote {
 
   public static void main(String[] args) {
     standalone = true; // i think this is ok
-    System.out.println("This is Phenote version "+VERSION);
+    System.out.println("This is Phenote version "+PhenoteVersion.versionString());
     // default mac lok & feel is "Mac OS X", but the JComboBox is buggy
     try {
       UIManager.setLookAndFeel(new MetalLookAndFeel());
@@ -162,7 +161,8 @@ public class Phenote {
   public Frame getFrame() { return frame; }
 
   private void makeWindow() {
-    frame = new JFrame("Phenote "+VERSION); // this may be changed to applet...
+    // this may be changed to applet...
+    frame = new JFrame("Phenote "+PhenoteVersion.versionString()); 
     frame.getContentPane().add(makeMainPanel());
     MenuManager.createMenuManager(frame);
     frame.setPreferredSize(new Dimension(1100,550));
