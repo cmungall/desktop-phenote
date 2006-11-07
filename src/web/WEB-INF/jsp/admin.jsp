@@ -1,3 +1,4 @@
+<%@ page import="phenote.main.PhenoteVersion"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 
 <html>
@@ -17,7 +18,7 @@
       Version
     </td>
     <td colspan="3" class="listContent">
-      0.9
+     <%= PhenoteVersion.versionString()%>
     </td>
   </tr>
   <tr>
