@@ -79,7 +79,7 @@ class CharacterTableModel extends AbstractTableModel {
   /** Returns row # of row inserted */
   private int addCharacter(CharacterI character) {
     //++rowCount;
-    // changes data model (fire event?)
+    // changes data model (fire event?) add transaction for undo! edit man?
     characterList.add(character);
     fireTableRowsInserted(getRowCount(),getRowCount());
     return getRowCount() -1;
@@ -88,6 +88,7 @@ class CharacterTableModel extends AbstractTableModel {
   void deleteSelectedRow(int deleteRow) {
     if (!hasRows())
       return; // err msg?
+    // This needs to make a delete transaction for undo! edit man?
     characterList.remove(deleteRow);
     fireTableRowsDeleted(deleteRow,deleteRow);
   }

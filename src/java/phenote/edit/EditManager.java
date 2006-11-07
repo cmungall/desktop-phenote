@@ -17,6 +17,8 @@ public class EditManager {
 
   private List<CharChangeListener> charListeners = new ArrayList<CharChangeListener>(3);
 
+  private List<TransactionI> transactionList = new ArrayList<TransactionI>();
+
   private EditManager() {}
 
   public static EditManager inst() {
@@ -30,10 +32,23 @@ public class EditManager {
   }
 
   public void updateModel(Object source, UpdateTransaction ut) {
+    transactionList.add(ut);
+    updateModelUpdateTrans(source,ut);
+  }
+
+  /** fires change event, doesnt add to transaction list */
+  private void updateModelUpdateTrans(Object src, UpdateTransaction ut) {
     ut.editModel();
-    CharChangeEvent e = new CharChangeEvent(source,ut);
+    CharChangeEvent e = new CharChangeEvent(src,ut);
     for (CharChangeListener l : charListeners)
       l.charChanged(e);
+  }
+
+  public void updateModel(Object source, CompoundTransaction ct) {
+    transactionList.add(ct);
+    for (UpdateTransaction ut : ct.getTransactions())
+      updateModelUpdateTrans(source,ut);
+    // or should we send out a char change event with a char list?? probably
   }
 
 }

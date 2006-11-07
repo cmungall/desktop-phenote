@@ -1,5 +1,6 @@
 package phenote.gui.field;
 
+import java.util.List;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +28,7 @@ import phenote.datamodel.OntologyException;
 import phenote.datamodel.OntologyManager;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
+import phenote.edit.CompoundTransaction;
 import phenote.edit.EditManager;
 import phenote.edit.UpdateTransaction;
 import phenote.gui.selection.CharSelectionListener;
@@ -51,6 +53,8 @@ class CharFieldGui {
   private String label;
   private boolean enableListeners = true;
   private boolean addCompButton = true;
+  /** if true then set gui but not model, for clearing on multi, default false */
+  private boolean updateGuiOnly = false;
   
 
   CharFieldGui(CharField charField, FieldPanel tp) {/*Container parent,*/
@@ -94,7 +98,7 @@ class CharFieldGui {
   }
 
   /** edits from post comp come in here i believe (term info used to but now
-      thats done with UseTermEvent */
+      thats done with UseTermEvent) */
   private class FieldCharChangeListener implements CharChangeListener {
     public void charChanged(CharChangeEvent e) {
       // check charField is this char field
@@ -102,7 +106,9 @@ class CharFieldGui {
         // i think all we need to do is setText to synch with model
         // for complist dont we also need to set its model (not just text??)
         //setText(e.getValueString()); // might as well just synch with model
-        setValueFromChar(getSelectedChar());
+        // so in the case of multi select presumably they have all been modified in
+        // the same manner so sufficient to just synch with 1st one
+        setValueFromChar(getFirstSelectedChar());
     }
   }
 
@@ -274,6 +280,17 @@ class CharFieldGui {
     if (isCompList) return getCompList().getText();
     else return textField.getText();
   }
+  /** clears gui not model - for multi select - may want to set to * or something? */
+  void setGuiForMultiSelect() {
+    if (isCompList) {
+      getCompList().setGuiForMultiSelect();
+    }
+    else {
+      updateGuiOnly = true;
+      setText("*"); // or * for multi sel? rename method setGuiForMultiSelect?
+      updateGuiOnly = false;
+    }
+  }
 
   void setOboClass(OBOClass term) {
     if (!isCompList || isRelationshipList()) return; // throw ex?? 
@@ -290,35 +307,48 @@ class CharFieldGui {
 
   CharFieldEnum getCharFieldEnum() { return charField.getCharFieldEnum(); }
 
-  private CharacterI getSelectedChar() {
-    return SelectionManager.inst().getSelectedCharacter();
+  private CharacterI getFirstSelectedChar() {
+    return SelectionManager.inst().getFirstSelectedCharacter();
+  }
+
+  private List<CharacterI> getSelectedChars() {
+    return SelectionManager.inst().getSelectedChars();
   }
 
   // separate char text field class?
   /** This is where the model gets updated (for free text fields) */
   private class TextFieldDocumentListener implements DocumentListener {
-    private String previousVal = null;
+    //private String previousVal = null;
     public void changedUpdate(DocumentEvent e) { updateModel(); }
     public void insertUpdate(DocumentEvent e) { updateModel(); }
     public void removeUpdate(DocumentEvent e) { updateModel(); }
     private void updateModel() {
+      // if only updating gui (multi select clear) then dont update model
+      if (updateGuiOnly) return;
       // on delete last pheno row clearing of text will trigger this
       //if (!characterTablePanel.hasRows()) return;
       //String genotype = lumpField.getText();
       //characterTablePanel.setSelectedGenotype(genotype);
-      CharacterI c = getSelectedChar();
+      List<CharacterI> chars = getSelectedChars();
       // i believe this isnt using oboClass as we just have string
       // of course it isnt this is free text
       String v = getText();
-      UpdateTransaction ut = new UpdateTransaction(c,getCharFieldEnum(),v,previousVal);
-      EditManager.inst().updateModel(CharFieldGui.this,ut);
-      previousVal = v; // undo
+      //UpdateTransaction ut = new UpdateTransaction(char,getCharFieldEnum(),v);
+      CompoundTransaction ct = new CompoundTransaction(chars,getCharFieldEnum(),v);
+      EditManager.inst().updateModel(CharFieldGui.this,ct);
+      //previousVal = v; // undo
     }
   }
 
   private class FieldCharSelectListener implements CharSelectionListener {
-    public void characterSelected(CharSelectionEvent e) {
-      setValueFromChar(e.getCharacter());
+    public void charactersSelected(CharSelectionEvent e) {
+      // if multi select then clear out fields - alternatively could do first char
+      // or only show fields that are all same? 
+      if (e.isMultiSelect()) {
+        setGuiForMultiSelect();
+        return;
+      }
+      setValueFromChar(e.getChars().get(0));
     }
   }
 

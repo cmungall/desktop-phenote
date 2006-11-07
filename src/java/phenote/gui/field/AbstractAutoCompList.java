@@ -45,8 +45,8 @@ public abstract class AbstractAutoCompList extends JComboBox {
 
   //private Ontology ontology;
   private boolean changingCompletionList = false;
-  private boolean keyTyped = false;
-  private String previousInput = "";
+  //private boolean keyTyped = false;
+  //private String previousInput = "";
   private boolean doCompletion = true;
   // should we keep state of currentOboClass which is null if not a valid one?
   // default combo box.getSelectedItem sortof does this imperfectly
@@ -64,6 +64,7 @@ public abstract class AbstractAutoCompList extends JComboBox {
   private boolean editModel;
   //private CompletionListListener compListListener = new CompletionListListener();
   private CompListSearcher compListSearcher;
+  private boolean setGuiForMultiSelect = false;
 
   /** @param editModel if false then ACB doesnt edit model directly (post comp) 
    can abstract classes have constructors - if not init() */
@@ -131,13 +132,22 @@ public abstract class AbstractAutoCompList extends JComboBox {
   /** text from selecting table doesnt do completion, TestPhenote does */
   public void setText(String text, boolean doCompletion) {
     this.doCompletion = doCompletion;
-    this.keyTyped = doCompletion; // key has to be typed for completion
+    //this.keyTyped = doCompletion; // key has to be typed for completion
     getEditor().setItem(text);
     //if (charField!=null)log().debug(charField.getName()+" setting text ["+text+"]");
     //new Throwable().printStackTrace();
     this.doCompletion = true; // set back to default
   }
 
+  /** for now just clear out gui without editing model */
+  void setGuiForMultiSelect() {
+    // flag to prevent AutoTextField.setText from setting to current term
+    // is there a cleaner way to do this?? - this falg may need to be generalized
+    // as may want for user being able to set to "" (non-required field gen-con)
+    setGuiForMultiSelect = true;
+    setText("*",false); // false -> no completion, "*"?
+    setGuiForMultiSelect = false;
+  }
 
   /** Return text in text field */
   public String getText() {
@@ -169,7 +179,7 @@ public abstract class AbstractAutoCompList extends JComboBox {
       autoTextField = new AutoTextField(); // outer instance var for testing
       editor = autoTextField; // protected editor var from BCBE
       addDocumentListener(new AutoDocumentListener());
-      getTextField().addKeyListener(new AutoKeyListener());
+      //getTextField().addKeyListener(new AutoKeyListener());
     }
 
     // editor is protected JTextField - wacky
@@ -214,7 +224,12 @@ public abstract class AbstractAutoCompList extends JComboBox {
       //super.setText(text); 
       // this works as only time setText is called with cngCL false is with
       // selection - or at least so it seems
-      super.setText(getCurrentTermRelName());
+      // well that was true but now need to clear text for multi sel
+      //System.out.println("ATF.settext ["+text+"] curr term rel name "+getCurrentTermRelName());
+      if (setGuiForMultiSelect) // flag will probably need to be more general?
+        super.setText(text);
+      else
+        super.setText(getCurrentTermRelName()); // set to term name with syn select
       doCompletion = true;
     }
     
@@ -230,23 +245,6 @@ public abstract class AbstractAutoCompList extends JComboBox {
   protected abstract String getCurrentTermRelName();
 
 
-  private class AutoKeyListener extends KeyAdapter {
-    // keyTyped doesnt seem to catch backspace in 1.5 - but did in 1.4 - odd
-//     public void keyTyped(KeyEvent e)  {
-//       // return & tab should be ignored, as well as a lot of other things
-//       keyTyped = true;
-//       // this may be funny but with key type event the text has not yet be set
-//       // this catches cases where text changed due select/action - kinda cheap
-//       previousInput = getText();
-//     }
-    public void keyReleased(KeyEvent e) {
-      // return & tab should be ignored, as well as a lot of other things
-      keyTyped = true;
-      // this may be funny but with key type event the text has not yet be set
-      // this catches cases where text changed due select/action - kinda cheap
-      previousInput = getText();
-    }
-  }
 
 
   /** disable completion for item being selected - otherwise a popup comes up after
@@ -285,7 +283,7 @@ public abstract class AbstractAutoCompList extends JComboBox {
     // also i dont think this actually stops any funny behavior
     //if (!inputChanged()) // if input is actually same no need to recomp
     //return;
-    keyTyped = false;
+    //keyTyped = false;
     // too soon - text field doesnt have text yet.... hmmmm....
     String input = getText();
     // this is a vector of OBOClasses
@@ -486,6 +484,23 @@ class OboException extends Exception {
 }
 
 // GARBAGE
+//   private class AutoKeyListener extends KeyAdapter {
+//     // keyTyped doesnt seem to catch backspace in 1.5 - but did in 1.4 - odd
+// //     public void keyTyped(KeyEvent e)  {
+// //       // return & tab should be ignored, as well as a lot of other things
+// //       keyTyped = true;
+// //       // this may be funny but with key type event the text has not yet be set
+// //       // this catches cases where text changed due select/action - kinda cheap
+// //       previousInput = getText();
+// //     }
+//     public void keyReleased(KeyEvent e) {
+//       // return & tab should be ignored, as well as a lot of other things
+//       //keyTyped = true;
+//       // this may be funny but with key type event the text has not yet be set
+//       // this catches cases where text changed due select/action - kinda cheap
+//       previousInput = getText();
+//     }
+//   }
 //   private void editModel() {
 //     OBOClass oboClass;
 //     try { oboClass = getCurrentOboClass(); }

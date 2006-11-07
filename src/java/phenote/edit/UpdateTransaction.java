@@ -6,7 +6,7 @@ import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 
-public class UpdateTransaction { // extends Transaction?
+public class UpdateTransaction implements TransactionI { // extends Transaction?
 
 //   private CharacterI character;
 //   private CharFieldEnum charFieldEnum;
@@ -16,15 +16,20 @@ public class UpdateTransaction { // extends Transaction?
   private CharFieldValue oldValue;
   //private boolean undo?
 
-  public UpdateTransaction(CharacterI c, CharFieldEnum e, String newVal, String old) {
+  public UpdateTransaction(CharacterI c, CharFieldEnum e, String newVal) {
     newValue = new CharFieldValue(newVal,c,e);
     // change this to get old from model - dont need to pass in
-    oldValue = new CharFieldValue(old,c,e);
+    //oldValue = new CharFieldValue(old,c,e);
+    oldValue = e.getValue(c);
 //     character = c;
-//     charFieldEnum = e;
+//     charFieldEnum = e;2
 //     newValue = newVal;
 //     oldValue = old;
   }
+
+  // hmmmm - should this be a compos - yes
+  //public UpdateTransaction(List<CharacterI>chars,CharFieldEnum e,String newVal) {}
+
 
   // public UpdateTransaction(CharFieldValue new, CharFieldValue old) ?
 
@@ -34,6 +39,8 @@ public class UpdateTransaction { // extends Transaction?
     //oldValue = new CharFieldValue(old,c,e);
     oldValue = e.getValue(c);
   }
+
+
   // hmmmmmmm....
 // /** if isDifferentia is true than update is for differentia of a post composed term*/
 //   public UpdateTransaction(CharacterI c, CharFieldEnum e, boolean isDifferentia,

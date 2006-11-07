@@ -15,7 +15,9 @@ public class SelectionManager {
 
   private List<TermSelectionListener> termListenerList;
   List<CharSelectionListener> charListenerList;
+  // phase out for list...
   private CharacterI selectedCharacter;
+  private List<CharacterI> selectedCharList;
 
   public static SelectionManager inst() {
     if (singleton == null) singleton = new SelectionManager();
@@ -46,20 +48,35 @@ public class SelectionManager {
     return new TermSelectionEvent(src,oc,l);
   }
 
-  public CharacterI getSelectedCharacter() {
-    return selectedCharacter;
+  public CharacterI getFirstSelectedCharacter() {
+    if (selectedCharList == null || selectedCharList.isEmpty())
+      return null; // ex?
+    return selectedCharList.get(0);
   }
 
-  public void selectCharacter(Object source, CharacterI character) {
-    selectedCharacter = character;
-    CharSelectionEvent e = makeCharacterEvent(source,character);
+  public List<CharacterI> getSelectedChars() {
+    return selectedCharList;
+  }
+
+//   public void selectCharacter(Object source, CharacterI character) {
+//     selectedCharacter = character;
+//     CharSelectionEvent e = makeCharacterEvent(source,character);
+//     for (CharSelectionListener l : charListenerList)
+//       l.characterSelected(e);
+//   }
+
+  public void selectCharacters(Object src, List<CharacterI> chars) {
+    selectedCharList = chars;
+    //if (chars.size() == 1) { selectCharacter(src,chars.get(0)); return; }
+    CharSelectionEvent e = new CharSelectionEvent(src,chars);
     for (CharSelectionListener l : charListenerList)
-      l.characterSelected(e);
+      l.charactersSelected(e);
   }
+ 
 
-  private CharSelectionEvent makeCharacterEvent(Object src, CharacterI c) {
-    return new CharSelectionEvent(src,c);
-  }
+//   private CharSelectionEvent makeCharacterEvent(Object src, CharacterI c) {
+//     return new CharSelectionEvent(src,c);
+//   }
 
   public void addCharSelectionListener(CharSelectionListener l) {
     charListenerList.add(l);

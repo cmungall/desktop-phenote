@@ -1,18 +1,21 @@
 package phenote.gui.selection;
 
 import java.util.EventObject;
+import java.util.List;
 
 import phenote.datamodel.CharacterI;
 
 public class CharSelectionEvent extends EventObject {
 
-  private CharacterI character;
+  private List<CharacterI> charList;
 
-  CharSelectionEvent(Object source, CharacterI ch) {
+  CharSelectionEvent(Object source, List<CharacterI> chars) {
     super(source);
-    this.character= ch;
+    this.charList= chars;
   }
 
-  public CharacterI getCharacter() { return character; }
+  public List<CharacterI> getChars() { return charList; }
+
+  public boolean isMultiSelect() { return charList.size() > 1; }
 
 }

@@ -1,5 +1,6 @@
 package phenote.gui.field;
 
+import java.util.List;
 import java.awt.BorderLayout;
 import java.awt.Frame;
 import java.awt.GridBagLayout;
@@ -28,7 +29,8 @@ import phenote.datamodel.Ontology;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
-import phenote.edit.UpdateTransaction;
+//import phenote.edit.UpdateTransaction;
+import phenote.edit.CompoundTransaction;
 import phenote.main.Phenote;
 import phenote.gui.selection.CharSelectionEvent;
 import phenote.gui.selection.CharSelectionListener;
@@ -108,14 +110,15 @@ class PostCompGui {
   }
 
   private class CompCharSelectListener implements CharSelectionListener {
-    public void characterSelected(CharSelectionEvent e) {
+    public void charactersSelected(CharSelectionEvent e) {
       setGuiFromSelectedModel();
     }
   }
 
   private OBOClass getModelTerm() {
     // there should be convenience method for this
-    CharacterI c = SelectionManager.inst().getSelectedCharacter();
+    // multi select get 1st??
+    CharacterI c = SelectionManager.inst().getFirstSelectedCharacter();
     return charField.getCharFieldEnum().getValue(c).getOboClass();
   }
 
@@ -212,11 +215,11 @@ class PostCompGui {
   }
 
   private void commitTerm(OBOClass postComp) {
-    CharacterI c = SelectionManager.inst().getSelectedCharacter();
+    List<CharacterI> chrs = SelectionManager.inst().getSelectedChars();
     CharFieldEnum cfe = charField.getCharFieldEnum();
-    //OBOClass previousOboClass = cfe.getValue(c).getOboClass();
-    UpdateTransaction ut = new UpdateTransaction(c,cfe,postComp);
-    EditManager.inst().updateModel(this,ut);
+    //UpdateTransaction ut = new UpdateTransaction(c,cfe,postComp);
+    CompoundTransaction ct = new CompoundTransaction(chrs,cfe,postComp);
+    EditManager.inst().updateModel(this,ct);
   }
 
   private String pcString(String g, String d) {

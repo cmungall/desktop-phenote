@@ -1,5 +1,6 @@
 package phenote.gui.field;
 
+import java.util.List;
 import java.util.Vector;
 import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
@@ -12,7 +13,8 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharFieldEnum;
 import phenote.edit.EditManager;
-import phenote.edit.UpdateTransaction;
+import phenote.edit.CompoundTransaction;
+//import phenote.edit.UpdateTransaction;
 import phenote.gui.selection.SelectionManager;
 import phenote.gui.selection.UseTermEvent;
 import phenote.gui.selection.UseTermListener;
@@ -49,7 +51,6 @@ class TermCompList extends AbstractAutoCompList {
       if doesnt validate throw ex */
   protected void setCurrentValidItem() throws OboException {
     setOboClass(getSelectedOboClass()); //this will set text to oboclass
-    //currentOboClass = getSelectedOboClass();
   }
 
   protected String getCurrentTermRelName() {
@@ -107,19 +108,19 @@ class TermCompList extends AbstractAutoCompList {
     try { oboClass = getCurrentOboClass(); }
     catch (Exception e) { return; } // shouldnt happen, error?
     if (getCharField() == null)  return; // shouldnt happen
-    CharacterI c = getSelectedCharacter(); // from selectionManager
+    List<CharacterI> chars = getSelectedChars(); // from selectionManager
     CharFieldEnum cfe = getCharField().getCharFieldEnum();
     // isDifferentia boolean?
-    UpdateTransaction ut = new UpdateTransaction(c,cfe,oboClass);
-    EditManager.inst().updateModel(this,ut);
+    CompoundTransaction ct = new CompoundTransaction(chars,cfe,oboClass);
+    EditManager.inst().updateModel(this,ct);
   }
 
   private SelectionManager getSelectionManager() {
     return SelectionManager.inst();
   }
 
-  private CharacterI getSelectedCharacter() {
-    return getSelectionManager().getSelectedCharacter();
+  private List<CharacterI> getSelectedChars() {
+    return getSelectionManager().getSelectedChars();
   }
 
   /** This is touchy stuff - so i want to be able to display info about term in 

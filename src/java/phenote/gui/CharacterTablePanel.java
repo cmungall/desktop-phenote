@@ -1,5 +1,8 @@
 package phenote.gui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Point;
@@ -36,7 +39,7 @@ import phenote.gui.selection.SelectionManager;
    * for now no explicit commit - may be configurable later */
 public class CharacterTablePanel extends JPanel {
 
-  private JTable characterTable;
+  private JTable charJTable;
   private CharacterTableModel characterTableModel;
   //private FieldPanel fieldPanel;
   //private JButton newButton;
@@ -46,9 +49,10 @@ public class CharacterTablePanel extends JPanel {
   private JScrollBar verticalScrollBar;
   private boolean scrollToNewLastRowOnRepaint = false;
   
-  private int selectedRow;
+  //private int selectedRow;
   // get from file menu?
   private static final String SAVE_STRING = "Save data";
+  // the idea of "sandbox" is that it doesnt go to db til you save/commit
   private boolean SANDBOX_MODE = true; // get from config...
 
   public CharacterTablePanel() { //TermPanel tp) {
@@ -62,19 +66,20 @@ public class CharacterTablePanel extends JPanel {
     setMinimumSize(new Dimension(400,500));    
 
     characterTableModel = new CharacterTableModel();
-    characterTable = new JTable(characterTableModel);
-    characterTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    charJTable = new JTable(characterTableModel);
+    //charJTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    charJTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
     CharacterSelectionListener isl = new CharacterSelectionListener();
-    characterTable.getSelectionModel().addListSelectionListener(isl);
-    characterTable.setRowSelectionInterval(0,0); // select 1st row
-    characterTable.getTableHeader().addMouseListener(new TableSorter());
+    charJTable.getSelectionModel().addListSelectionListener(isl);
+    charJTable.setRowSelectionInterval(0,0); // select 1st row
+    charJTable.getTableHeader().addMouseListener(new TableSorter());
 
-    JScrollPane tableScroll = new JScrollPane(characterTable);
+    JScrollPane tableScroll = new JScrollPane(charJTable);
     verticalScrollBar = tableScroll.getVerticalScrollBar();//needed for scroll to new
     // wierd - changes to scrollbar seem to happen on own thread?
     verticalScrollBar.getModel().addChangeListener(new ScrollChangeListener());
     // width config? 150 * # of cols? set column width? column width config?
-    characterTable.setPreferredScrollableViewportSize(new Dimension(500, 150));
+    charJTable.setPreferredScrollableViewportSize(new Dimension(500, 150));
 
     add(tableScroll);
 
@@ -116,17 +121,27 @@ public class CharacterTablePanel extends JPanel {
   }
 
   private int getSelectedRow() {
-    return characterTable.getSelectedRow();
+    return charJTable.getSelectedRow();
   }
   
   /** row number is zero based for tables */
   private void selectRow(int row) {
-    if (characterTable != null && row >= 0 && row < characterTable.getRowCount())
-      characterTable.setRowSelectionInterval(row,row);
+    if (charJTable != null && row >= 0 && row < charJTable.getRowCount())
+      charJTable.setRowSelectionInterval(row,row);
   }
 
+  // used internally and by test phenote - should use sel man?
   CharacterI getSelectedCharacter() {
     return characterTableModel.getCharacter(getSelectedRow());
+  }
+
+  /** with multi select can have multiple characters selected */
+  List<CharacterI> getSelectedChars() {
+    int[] selRows = charJTable.getSelectedRows();
+    List<CharacterI> selChars = new ArrayList(selRows.length);
+    for (int i : selRows)
+      selChars.add(characterTableModel.getCharacter(i)); // get from datamodel?
+    return selChars;
   }
 
   // for now, for test
@@ -170,8 +185,8 @@ public class CharacterTablePanel extends JPanel {
       else if (e.getActionCommand().equals("Delete")) {
         selectRow = getSelectedRow();
         characterTableModel.deleteSelectedRow(selectRow);
-        if (selectRow >= characterTable.getRowCount())
-          selectRow = characterTable.getRowCount()-1; // last row deleted
+        if (selectRow >= charJTable.getRowCount())
+          selectRow = charJTable.getRowCount()-1; // last row deleted
       }
       
       else if (e.getActionCommand().equals(SAVE_STRING)) {
@@ -203,14 +218,15 @@ public class CharacterTablePanel extends JPanel {
     public void valueChanged(ListSelectionEvent e) {
       if (!hasSelection()) // this can happen with a delete row
         return;
-      // need to track for reinstating select after data change
-      selectedRow = getSelectedRow(); 
-      CharacterI character = getSelectedCharacter();
+      // need to track for reinstating select after data change hmm not used anymore??
+      //selectedRow = getSelectedRow(); 
+      //CharacterI character = getSelectedCharacter();
       // is this still needed??
       //fieldPanel.setFieldsFromCharacter(character); // phase out...
       
-      // new way
-      SelectionManager.inst().selectCharacter(this,character);
+      // new way - change this to take list - multi!
+      //SelectionManager.inst().selectCharacter(this,character);
+      SelectionManager.inst().selectCharacters(this,getSelectedChars());
     }
   }
 
@@ -235,7 +251,7 @@ public class CharacterTablePanel extends JPanel {
       characterTableModel.setCharacterList(characterList);
       // need to repaint & select 1st item in table
       selectRow(0);
-      SelectionManager.inst().selectCharacter(this,getSelectedCharacter());
+      SelectionManager.inst().selectCharacters(this,getSelectedChars());
       //repaint();
       //doLayout(); // ??
     }
@@ -259,7 +275,7 @@ public class CharacterTablePanel extends JPanel {
     public void mouseClicked(MouseEvent e) {
       if (e.getClickCount() != 1) return; // ?
       Point p = e.getPoint();
-      int col = characterTable.getTableHeader().columnAtPoint(p);
+      int col = charJTable.getTableHeader().columnAtPoint(p);
       if (col == -1) return;
       // shift for descending
       //  int shiftPressedInt = e.getModifiers()&InputEvent.SHIFT_MASK;
