@@ -55,7 +55,7 @@ public class Ontology {
   public String getVersion() { 
     // this is wrong - this just says file name loaded from. obo file puts version in
     // remark field but doesnt seem to be way to get that from obo session??
-    return oboSession.getLoadRemark();
+    return oboSession.getCurrentHistory().getVersion();
   }
 
   private void makeSortedLists(OBOSession oboSession) {

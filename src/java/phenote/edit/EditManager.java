@@ -40,15 +40,21 @@ public class EditManager {
   private void updateModelUpdateTrans(Object src, UpdateTransaction ut) {
     ut.editModel();
     CharChangeEvent e = new CharChangeEvent(src,ut);
-    for (CharChangeListener l : charListeners)
-      l.charChanged(e);
+    fireChangeEvent(e);
   }
 
-  public void updateModel(Object source, CompoundTransaction ct) {
+  public void updateModel(Object src, CompoundTransaction ct) {
     transactionList.add(ct);
-    for (UpdateTransaction ut : ct.getTransactions())
-      updateModelUpdateTrans(source,ut);
+    //for (TransactionI t : ct.getTransactions())
+    //updateModelUpdateTrans(source,t);
+    ct.editModel();
+    fireChangeEvent(new CharChangeEvent(src,ct));
     // or should we send out a char change event with a char list?? probably
+  }
+
+  private void fireChangeEvent(CharChangeEvent e) {
+    for (CharChangeListener l : charListeners)
+      l.charChanged(e);
   }
 
 }

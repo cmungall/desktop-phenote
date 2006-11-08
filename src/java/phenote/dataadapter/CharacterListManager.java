@@ -1,5 +1,6 @@
 package phenote.dataadapter;
 // I think this makes more sense in dataadapter than datamodel ?
+// actually should go in edit package maybe?
 
 import java.util.ArrayList;
 import java.util.List;

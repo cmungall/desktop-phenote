@@ -7,21 +7,24 @@ import phenote.datamodel.CharField;
 /** This actually is for a CharField change - rename this CharFieldChangeEvent? */
 public class CharChangeEvent extends EventObject {
 
-  // UpdateTrans -> Transaction?
-  private UpdateTransaction transaction;
+  // UpdateTrans -> Transaction? yes!
+  //private UpdateTransaction transaction;
+  private TransactionI transaction;
   // boolean undo??? or in trans? of just editManager?
 
-  CharChangeEvent(Object source, UpdateTransaction ut) {
+  CharChangeEvent(Object source, TransactionI t) {
     super(source);
-    transaction = ut;
+    transaction = t;
   }
 
-  public String getValueString() { // getNewVal, getOldVal???
-    // if undo return ut.getOldValue().getName()???
-    return transaction.getNewValueString();
-  }
+//   public String getValueString() { // getNewVal, getOldVal???
+//     // if undo return ut.getOldValue().getName()???
+//     return transaction.getNewValueString();
+//   }
 
-  public boolean isForCharField(CharField cf) {
-    return transaction.getCharFieldEnum() == cf.getCharFieldEnum();
+  public boolean isUpdateForCharField(CharField cf) {
+    //return transaction.getCharFieldEnum() == cf.getCharFieldEnum();
+    //if (!transaction.isUpdate()) return false;
+    return transaction.isUpdateForCharField(cf);
   }
 }

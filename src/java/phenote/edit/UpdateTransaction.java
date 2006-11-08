@@ -2,6 +2,7 @@ package phenote.edit;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
 
+import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
@@ -60,7 +61,11 @@ public class UpdateTransaction implements TransactionI { // extends Transaction?
 
   String getNewValueString() { return newValue.getName(); }
 
-  CharFieldEnum getCharFieldEnum() {
+  public boolean isUpdateForCharField(CharField cf) {
+    return getCharFieldEnum() == cf.getCharFieldEnum();    
+  }
+
+  private CharFieldEnum getCharFieldEnum() {
     return newValue.getCharFieldEnum();
   }
 

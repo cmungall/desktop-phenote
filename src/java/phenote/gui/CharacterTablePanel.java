@@ -130,6 +130,18 @@ public class CharacterTablePanel extends JPanel {
       charJTable.setRowSelectionInterval(row,row);
   }
 
+  private void selectRows(RowInterval selRows) {
+    int start = selRows.startRow, end = selRows.endRow;
+    if (charJTable != null && start >= 0 && end < charJTable.getRowCount())
+      charJTable.setRowSelectionInterval(start,end);
+  }
+
+//   private void selectRows(int start, int end) {
+//     if (charJTable != null && start >= 0 && end < charJTable.getRowCount())
+//       charJTable.setRowSelectionInterval(start,end);
+//     System.out.println("sel start "+start+" end "+end+" ? "+(charJTable != null && start >= 0 && end < charJTable.getRowCount()));
+//   }
+
   // used internally and by test phenote - should use sel man?
   CharacterI getSelectedCharacter() {
     return characterTableModel.getCharacter(getSelectedRow());
@@ -171,6 +183,7 @@ public class CharacterTablePanel extends JPanel {
     // bug/issue - if last row is deleted should create new blank one...
     public void actionPerformed(ActionEvent e) {
       int selectRow = 0;
+      RowInterval selectRows=null;
       if (e.getActionCommand().equals("New")) {
         selectRow = characterTableModel.addNewBlankRow();
         scrollToNewLastRowOnRepaint = true;//scrollToLastRow(); // scroll to new row
@@ -179,7 +192,8 @@ public class CharacterTablePanel extends JPanel {
         return; // no rows to copy or delete
       }
       else if (e.getActionCommand().equals("Copy")) {
-        selectRow = characterTableModel.copyRow(getSelectedRow());
+        //selectRow = characterTableModel.copyRow(getSelectedRow());
+        selectRows = characterTableModel.copyChars(getSelectedChars());
         scrollToNewLastRowOnRepaint = true;//scrollToLastRow(); // scroll to new row
       }
       else if (e.getActionCommand().equals("Delete")) {
@@ -203,7 +217,10 @@ public class CharacterTablePanel extends JPanel {
         //fieldPanel.clear(); // SelectionManager.clearCharacterSelection()
         selectRow = characterTableModel.addNewBlankRow(); // sr should be 0
       }
-      selectRow(selectRow);
+      if (selectRows != null) // multi select
+        selectRows(selectRows);
+      else // single row select
+        selectRow(selectRow);
       repaint();
       // check whether enable/disable del & copy buttons - disable w no rows
       // doesnt happen in sandbox actually - or shouldnt

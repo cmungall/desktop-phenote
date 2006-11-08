@@ -9,6 +9,7 @@ import phenote.datamodel.Character;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
 import phenote.datamodel.CharFieldEnum;
+import phenote.edit.CompoundTransaction;
 import phenote.dataadapter.CharacterListManager;
 import phenote.config.Config;
 
@@ -68,14 +69,24 @@ class CharacterTableModel extends AbstractTableModel {
     return addCharacter(new Character());
   }
 
-  /** returns row # of new copied into row */
-  int copyRow(int rowToCopy) {
-    if (!hasRows())
-      return -1; // err msg?
-    CharacterI copy = getCharacter(rowToCopy).cloneCharacter();
-    return addCharacter(copy);
-  }
+//   /** returns row # of new copied into row */
+//   int copyRow(int rowToCopy) {
+//     if (!hasRows())
+//       return -1; // err msg?
+//     CharacterI copy = getCharacter(rowToCopy).cloneCharacter();
+//     return addCharacter(copy);
+//   }
     
+  /** return int[]? of all new rows to be selected? yes i think so */
+  RowInterval copyChars(List<CharacterI> charsToCopy) {
+    CompoundTransaction ct = CompoundTransaction.makeCopyTrans(charsToCopy);
+    ct.editModel(); // clones & adds char to char list
+    fireTableRowsInserted(getRowCount(),getRowCount()); // updates table view
+    int rowEnd = getRowCount() - 1; // -1 -> 0 based
+    int rowStart = rowEnd - charsToCopy.size() + 1; // +1 inclusive
+    return new RowInterval(rowStart,rowEnd); // fix this - return int[]!
+  }
+
   /** Returns row # of row inserted */
   private int addCharacter(CharacterI character) {
     //++rowCount;
@@ -127,6 +138,13 @@ class CharacterTableModel extends AbstractTableModel {
   }
 
 }
+
+class RowInterval {
+  RowInterval(int start,int end) { startRow = start; endRow = end; }
+  int startRow;
+  int endRow;
+}
+
     //--rowCount;
     // hmmmmm - this cant be hardwired, needs to work with config 
     // not sure how to do this....

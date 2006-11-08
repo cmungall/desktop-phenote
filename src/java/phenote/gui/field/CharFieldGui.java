@@ -102,7 +102,7 @@ class CharFieldGui {
   private class FieldCharChangeListener implements CharChangeListener {
     public void charChanged(CharChangeEvent e) {
       // check charField is this char field
-      if (e.getSource() != CharFieldGui.this && e.isForCharField(charField))
+      if (e.getSource() != CharFieldGui.this && e.isUpdateForCharField(charField))
         // i think all we need to do is setText to synch with model
         // for complist dont we also need to set its model (not just text??)
         //setText(e.getValueString()); // might as well just synch with model

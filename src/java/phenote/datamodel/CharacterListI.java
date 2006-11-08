@@ -11,6 +11,7 @@ public interface CharacterListI {
   public CharacterI get(int i);
   public void add(CharacterI c);
   public void remove(int i);
+  public void remove(CharacterI c);
   public int size();
   public List<CharacterI> getList();
   public boolean equals(CharacterListI cl);
