@@ -6,6 +6,7 @@ import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.Toolkit;
+import java.io.File;
 
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
@@ -36,6 +37,16 @@ public class FlybaseDataAdapter implements DataAdapterI {
 
     getClipboard().setContents(tr,clipboardOwner);
     
+  }
+  
+  public void commit(CharacterListI charList, File f) {
+    commit(charList);
+  }
+  
+  public CharacterListI load(File f) {
+    // this is pretty much a dummy implementation
+    load();
+    return null;
   }
 
   /** load character set from clipboard if there is one */
@@ -73,6 +84,15 @@ public class FlybaseDataAdapter implements DataAdapterI {
   public static ClipboardOwner getClipboardOwner() {
     return clipboardOwner;
   }
+  
+  public List<String> getExtensions() {
+    return null;
+  }
+  
+  public String getDescription() {
+    return "FlyBase adapter";
+  }
+
 
   private static class PhenoteClipboardOwner implements ClipboardOwner {
     public void lostOwnership(Clipboard clipboard, Transferable contents) {

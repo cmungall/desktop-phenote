@@ -33,6 +33,7 @@ import phenote.dataadapter.CharListChangeListener;
 import phenote.dataadapter.CharacterListManager;
 import phenote.config.Config;
 import phenote.gui.selection.SelectionManager;
+import phenote.dataadapter.LoadSaveManager;
 
   /** Character panel has character table and del add copy buttons to manipulate
    *  table. Modifications to fields modify columns in selected row in table
@@ -204,12 +205,15 @@ public class CharacterTablePanel extends JPanel {
       }
       
       else if (e.getActionCommand().equals(SAVE_STRING)) {
-        Config c = Config.inst();
-        if (!c.hasSingleDataAdapter()) {
-          System.out.println("Cant commit. No data adapter configged");
-          return;
-        }
-        c.getSingleDataAdapter().commit(characterTableModel.getCharacterList());
+        // commented out this check because it won't work if there are multiple data adapters
+        // error should probably be printed in LoadSaveManager anyway
+        //Config c = Config.inst();
+        //if (!c.hasSingleDataAdapter()) {
+        //  System.out.println("Cant commit. No data adapter configged");
+        //  return;
+        //}
+        //c.getSingleDataAdapter().commit(characterTableModel.getCharacterList());
+        LoadSaveManager.inst().saveData();
       }
 
       // IF DELETED LAST ROW, then need to make a new blank one (sandbox mode)

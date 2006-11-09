@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.List;
+import java.util.Arrays;
 
 import javax.swing.JFileChooser;
 
@@ -33,16 +34,37 @@ import phenote.datamodel.OntologyManager.TermNotFoundException;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.DataAdapterI;
 
+import javax.swing.JComboBox;
+import javax.swing.filechooser.FileFilter;
+
+
 
 public class PhenoXmlAdapter implements DataAdapterI {
 
   private Set<String> genotypesAlreadyAdded = new HashSet<String>(); 
   private File previousFile;
   private File file;
+  private static String[] extensions = {"pxml", "xml"};
 
   /** command line setting of file */
   public void setAdapterValue(String filename) {
     file = new File(filename);
+  }
+  
+  public CharacterListI load(File f) {
+    // this method temporarily duplicates code from load(), which will soon be removed
+    CharacterListI charList = new CharacterList();  // we will return this empty one if we fail reading the xml
+    try {
+      PhenosetDocument doc = PhenosetDocument.Factory.parse(f);
+      charList = newCharacterListFromPhenosetDocument(doc);
+    }
+    catch (XmlException e) {
+      System.out.println("Failed to load file as phenoxml " + e);
+    }
+    catch (IOException e) {
+      System.out.println("PhenoXml read failure " + e);
+    }
+    return charList;
   }
 
   public void load() {
@@ -182,10 +204,25 @@ public class PhenoXmlAdapter implements DataAdapterI {
       System.out.println("Failed to save "+e);
     }
   }
+  
+  public void commit(CharacterListI charList, File f) {
+    file = f;
+    commit(charList);
+  }
 
   public static File getFileFromUserIsSave(File dir, boolean isSave) {
     // todo - remember last accessed dir
     JFileChooser fileChooser = new JFileChooser(dir);
+    
+    //String[] dataAdapterNames = {"PhenoSyntax", "PhenoXML"};
+    //JComboBox comboBox = new JComboBox(dataAdapterNames);
+    //fileChooser.setAccessory(comboBox);
+    //FileFilter phenoXMLFilter = new FileNameExtensionFilter("PhenoXML file", "pxml");
+    //FileFilter phenoSyntaxFilter = new FileNameExtensionFilter("PhenoSyntax file", "psx", "syn");
+    //fileChooser.addChoosableFileFilter(phenoXMLFilter);
+    //fileChooser.addChoosableFileFilter(phenoSyntaxFilter);
+    
+    
     // todo - file filter - only .xml or .phenoxml?
     int returnVal;
     if (isSave) {
@@ -273,4 +310,14 @@ public class PhenoXmlAdapter implements DataAdapterI {
     Provenance provenance = pm.addNewProvenance();
     provenance.setId(chr.getPub());
   }
+  
+  public List<String> getExtensions() {
+    return Arrays.asList(extensions);
+  }
+  
+  public String getDescription() {
+    return "PhenoXML files";
+  }
+
+
 }

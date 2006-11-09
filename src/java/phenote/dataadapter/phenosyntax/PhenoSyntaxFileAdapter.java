@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.LineNumberReader;
+import java.util.List;
+import java.util.Arrays;
 
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
@@ -24,6 +26,7 @@ public class PhenoSyntaxFileAdapter implements DataAdapterI {
 
   private File previousFile;
   private File file;
+  private static String[] extensions = {"psx", "syn"};
 
   /** command line setting of file */
   public void setAdapterValue(String filename) {
@@ -38,7 +41,6 @@ public class PhenoSyntaxFileAdapter implements DataAdapterI {
       file = getFileFromUserForOpen(previousFile);
     if (file == null) return;
     previousFile = file;
-    
     try {
       CharacterListI charList = new CharacterList();
       LineNumberReader lnr = new LineNumberReader(new FileReader(file));
@@ -59,6 +61,29 @@ public class PhenoSyntaxFileAdapter implements DataAdapterI {
       System.out.println("PhenoSyntax read failure "+e);
     }
     file = null; // null it for next load/commit
+  }
+  
+  public CharacterListI load(File f) {
+    // this method temporarily duplicates code from load() - soon load() will be removed
+    CharacterListI charList = new CharacterList();
+    try {
+      LineNumberReader lnr = new LineNumberReader(new FileReader(f));
+      PhenoSyntaxChar synChar = new PhenoSyntaxChar();
+      for (String line=lnr.readLine(); line != null; line = lnr.readLine()) {
+        try {
+          synChar.parseLine(line);
+        CharacterI ch = synChar.getCharacter();
+        charList.add(ch);
+        } catch (PhenoSyntaxChar.SyntaxParseException e) {
+          System.out.println(e.getMessage()); // jut "" for whitespace line
+        }
+      }
+      lnr.close();
+    }
+    catch (IOException e) {
+      System.out.println("PhenoSyntax read failure "+e);
+    }
+    return charList;
   }
 
   /** returns null if user fails to pick a file */
@@ -103,6 +128,19 @@ public class PhenoSyntaxFileAdapter implements DataAdapterI {
     }
     pw.close();
     file = null;
+  }
+  
+  public void commit(CharacterListI charList, File f) {
+    file = f;
+    commit(charList);
+  }
+  
+  public List<String> getExtensions() {
+    return Arrays.asList(extensions);
+  }
+  
+  public String getDescription() {
+    return "PhenoSyntax files";
   }
 
 }

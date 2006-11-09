@@ -144,6 +144,10 @@ public class Config {
   public boolean hasDataAdapters() {
     return dataAdapterList != null && !dataAdapterList.isEmpty();
   }
+  
+  public List<DataAdapterI> getDataAdapters() {
+    return new ArrayList(dataAdapterList);
+  }
 
   /** Return true if have a dataadapter, and only 1 data adapter */
   public boolean hasSingleDataAdapter() {

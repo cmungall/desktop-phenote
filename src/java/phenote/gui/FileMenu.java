@@ -7,7 +7,9 @@ import javax.swing.JMenuItem;
 
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.DataAdapterI;
+import phenote.dataadapter.LoadSaveManager;
 import phenote.config.Config;
+import phenote.gui.prefswindow.PrefsWindowController;
 
 class FileMenu extends JMenu {
 
@@ -32,7 +34,6 @@ class FileMenu extends JMenu {
     save.setActionCommand("save");
     save.addActionListener(actionListener);
     add(save);
-
   }
 
   private class LoadSaveActionListener implements ActionListener {
@@ -42,15 +43,11 @@ class FileMenu extends JMenu {
         return;
       }
       if (e.getActionCommand().equals("load"))
-        getDataAdapter().load();
+        LoadSaveManager.inst().loadData();
 
       else if (e.getActionCommand().equals("save"))
-        getDataAdapter().commit(CharacterListManager.inst().getCharacterList());
+        LoadSaveManager.inst().saveData();
     }
-  }
-
-  private DataAdapterI getDataAdapter() {
-    return Config.inst().getSingleDataAdapter();
   }
 
   // for testing
