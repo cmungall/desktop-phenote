@@ -9,7 +9,8 @@ import phenote.datamodel.Character;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
 import phenote.datamodel.CharFieldEnum;
-import phenote.edit.CompoundTransaction;
+//import phenote.edit.CompoundTransaction;
+import phenote.edit.EditManager;
 import phenote.dataadapter.CharacterListManager;
 import phenote.config.Config;
 
@@ -79,8 +80,9 @@ class CharacterTableModel extends AbstractTableModel {
     
   /** return int[]? of all new rows to be selected? yes i think so */
   RowInterval copyChars(List<CharacterI> charsToCopy) {
-    CompoundTransaction ct = CompoundTransaction.makeCopyTrans(charsToCopy);
-    ct.editModel(); // clones & adds char to char list
+    EditManager.inst().copyChars(charsToCopy); // edits model
+    //CompoundTransaction ct = CompoundTransaction.makeCopyTrans(charsToCopy);
+    //ct.editModel(); // clones & adds char to char list
     fireTableRowsInserted(getRowCount(),getRowCount()); // updates table view
     int rowEnd = getRowCount() - 1; // -1 -> 0 based
     int rowStart = rowEnd - charsToCopy.size() + 1; // +1 inclusive

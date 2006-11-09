@@ -3,6 +3,7 @@ package phenote.edit;
 import java.util.ArrayList;
 import java.util.List;
 
+import phenote.datamodel.CharacterI;
 
 /** The way editing works is gui makes update transaction (see CharFieldGui and
     AutoComboBox) and calls
@@ -44,12 +45,21 @@ public class EditManager {
   }
 
   public void updateModel(Object src, CompoundTransaction ct) {
-    transactionList.add(ct);
     //for (TransactionI t : ct.getTransactions())
     //updateModelUpdateTrans(source,t);
     ct.editModel();
+    transactionList.add(ct);
     fireChangeEvent(new CharChangeEvent(src,ct));
     // or should we send out a char change event with a char list?? probably
+  }
+
+  public void copyChars(List<CharacterI> charsToCopy) {
+    CompoundTransaction ct = CompoundTransaction.makeCopyTrans(charsToCopy);
+    ct.editModel(); // clones & adds char to char list
+    transactionList.add(ct);
+    // dont need yet an event for this - might eventually
+    // would this be a char change or charList change or something else?
+    // i think a char list change though thats used for new data load???
   }
 
   private void fireChangeEvent(CharChangeEvent e) {
