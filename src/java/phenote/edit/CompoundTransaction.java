@@ -42,6 +42,13 @@ public class CompoundTransaction implements TransactionI {
     return copyTrans;
   }
 
+  public static CompoundTransaction makeDelTrans(List<CharacterI> delChars) {
+    CompoundTransaction delTrans = new CompoundTransaction();
+    for (CharacterI c : delChars)
+      delTrans.addTransaction(new DeleteTransaction(c));
+    return delTrans;
+  }
+
   /** just call editModel on kids */
   public void editModel() {
     for (TransactionI childTrans : childTransactions)

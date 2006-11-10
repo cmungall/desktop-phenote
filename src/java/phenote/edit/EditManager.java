@@ -91,6 +91,16 @@ public class EditManager {
     fireChangeEvent(new CharChangeEvent(this,ct));
   }
 
+  public void deleteChars(List<CharacterI> delChars) {
+    if (delChars.isEmpty()) {
+      log().error("No chars to delete");
+      return;
+    }
+    CompoundTransaction ct = CompoundTransaction.makeDelTrans(delChars);
+    ct.editModel();
+    addTransaction(ct);
+  }
+
   private void addTransaction(TransactionI t) {
     transactionList.add(t);
     //System.out.println("got trans "+t);

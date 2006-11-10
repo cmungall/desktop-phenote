@@ -112,6 +112,15 @@ class CharacterTableModel extends AbstractTableModel {
     fireTableRowsDeleted(deleteRow,deleteRow);
   }
 
+  void deleteChars(List<CharacterI> chars) {
+    if (chars.isEmpty()) {
+      log().error("No rows/chars to delete");
+      return;
+    }
+    EditManager.inst().deleteChars(chars);
+    fireTableRowsDeleted(0,getRowCount()); // could be more savvy
+  }
+
 
   public Object getValueAt(int row, int col) {
     CharacterI inst = getCharacter(row);

@@ -195,7 +195,7 @@ public class CharacterTablePanel extends JPanel {
         scrollToNewLastRowOnRepaint = true;//scrollToLastRow(); // scroll to new row
       }
       else if (!hasRows()) {
-        return; // no rows to copy or delete
+        return; // its empty! no rows to copy or delete or save or undo
       }
       else if (e.getActionCommand().equals("Copy")) {
         //selectRow = characterTableModel.copyRow(getSelectedRow());
@@ -208,7 +208,8 @@ public class CharacterTablePanel extends JPanel {
       }
       else if (e.getActionCommand().equals("Delete")) {
         selectRow = getSelectedRow();
-        characterTableModel.deleteSelectedRow(selectRow);
+        //characterTableModel.deleteSelectedRow(selectRow);
+        characterTableModel.deleteChars(getSelectedChars());
         if (selectRow >= charJTable.getRowCount())
           selectRow = charJTable.getRowCount()-1; // last row deleted
       }
