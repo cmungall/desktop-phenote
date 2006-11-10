@@ -29,7 +29,8 @@ class CharacterTableModel extends AbstractTableModel {
 
   CharacterTableModel() {
     characterList = getCharListManager().getCharacterList();
-    addNewBlankRow(); // add blank row to start off
+    // should supress editing model for this i think???
+    addInitialBlankRow(); // add blank row to start off
     //getCharListManager().addCharListChangeListener(new TableCharListChangeListener());
     // --> panel
     //EditManager.inst().addCharChangeListener(new TableCharChangeListener());
@@ -67,10 +68,19 @@ class CharacterTableModel extends AbstractTableModel {
 
   boolean hasRows() { return getRowCount() > 0; }
 
+  void addInitialBlankRow() {
+    EditManager.inst().addInitialCharacter();
+    fireTableRowsInserted(getRowCount(),getRowCount());
+  }
+
   /** Returns row # of new row - handy for selection */
   int addNewBlankRow() {
-    return addCharacter(new Character());
+    EditManager.inst().addNewCharacter();
+    fireTableRowsInserted(getRowCount(),getRowCount());
+    return getRowCount() - 1; // last row
+    //return addCharacter(new Character());
   }
+
 
 //   /** returns row # of new copied into row */
 //   int copyRow(int rowToCopy) {
@@ -95,22 +105,22 @@ class CharacterTableModel extends AbstractTableModel {
     return new RowInterval(rowStart,rowEnd); // fix this - return int[]!
   }
 
-  /** Returns row # of row inserted */
-  private int addCharacter(CharacterI character) {
-    //++rowCount;
-    // changes data model (fire event?) add transaction for undo! edit man?
-    characterList.add(character);
-    fireTableRowsInserted(getRowCount(),getRowCount());
-    return getRowCount() -1;
-  }
+//   /** Returns row # of row inserted */
+//   private int addCharacter(CharacterI character) {
+//     //++rowCount;
+//     // changes data model (fire event?) add transaction for undo! edit man?
+//     characterList.add(character);
+//     fireTableRowsInserted(getRowCount(),getRowCount());
+//     return getRowCount() -1;
+//   }
 
-  void deleteSelectedRow(int deleteRow) {
-    if (!hasRows())
-      return; // err msg?
-    // This needs to make a delete transaction for undo! edit man?
-    characterList.remove(deleteRow);
-    fireTableRowsDeleted(deleteRow,deleteRow);
-  }
+//   void deleteSelectedRow(int deleteRow) {
+//     if (!hasRows())
+//       return; // err msg?
+//     // This needs to make a delete transaction for undo! edit man?
+//     characterList.remove(deleteRow);
+//     fireTableRowsDeleted(deleteRow,deleteRow);
+//   }
 
   void deleteChars(List<CharacterI> chars) {
     if (chars.isEmpty()) {

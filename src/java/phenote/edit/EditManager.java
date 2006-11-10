@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import phenote.datamodel.Character;
 import phenote.datamodel.CharacterI;
 
 /** The way editing works is gui makes update transaction (see CharFieldGui and
@@ -74,6 +75,22 @@ public class EditManager {
     addTransaction(ct);
     fireChangeEvent(new CharChangeEvent(src,ct));
     // or should we send out a char change event with a char list?? probably
+  }
+
+  /** The initial blank character is a fundamental undoable state, so dont
+      keep the transaction for this as its not undoable */
+  public AddTransaction addInitialCharacter() {
+    AddTransaction at = new AddTransaction(new Character());
+    at.editModel();
+    // no addTransaction(at)!
+    return at;
+  }
+
+  /** same as addInitialChar except we record the adding in the transaction list
+      as it can be undone */
+  public void addNewCharacter() {
+    AddTransaction at = addInitialCharacter();
+    addTransaction(at);
   }
 
   public void copyChars(List<CharacterI> charsToCopy) {

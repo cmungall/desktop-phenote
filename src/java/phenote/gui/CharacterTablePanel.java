@@ -242,7 +242,8 @@ public class CharacterTablePanel extends JPanel {
         //fieldPanel.clear(); // SelectionManager.clearCharacterSelection()
         // adding new row can cause a out of synch selection event - wierd
         ignoreSelectionChange = true;
-        selectRow = characterTableModel.addNewBlankRow(); // sr should be 0
+        characterTableModel.addInitialBlankRow(); // sr should be 0
+        selectRow = 0;
         ignoreSelectionChange = false;
       }
       if (selectRows != null) // multi select
