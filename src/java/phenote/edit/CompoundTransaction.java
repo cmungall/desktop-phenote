@@ -56,8 +56,12 @@ public class CompoundTransaction implements TransactionI {
   }
 
   public void undo() {
-    for (TransactionI childTrans : childTransactions)
-      childTrans.undo();
+    // actually i think for undo it should be done in reverse - this actually
+    // matters for delete getting order correct
+    //for (TransactionI childTrans : childTransactions)
+    //childTrans.undo();
+    for (int i=childTransactions.size()-1; i>=0; i--)
+      childTransactions.get(i).undo();
   }
 
   List<TransactionI> getTransactions() { return childTransactions; }

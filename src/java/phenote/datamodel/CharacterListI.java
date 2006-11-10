@@ -10,9 +10,11 @@ public interface CharacterListI {
 
   public CharacterI get(int i);
   public void add(CharacterI c);
+  public void add(int order,CharacterI c);
   public void remove(int i);
   public void remove(CharacterI c);
   public int size();
+  public int indexOf(CharacterI c);
   public List<CharacterI> getList();
   public boolean equals(CharacterListI cl);
   /** Sort data by char field enum field */

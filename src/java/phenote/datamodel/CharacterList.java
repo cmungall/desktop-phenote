@@ -15,9 +15,11 @@ public class CharacterList implements CharacterListI {
 
   public CharacterI get(int i) { return characterList.get(i); }
   public void add(CharacterI c) { characterList.add(c); }
+  public void add(int i, CharacterI c) {characterList.add(i,c); }
   public void remove(int i) { characterList.remove(i); }
   public void remove(CharacterI c) { characterList.remove(c); }
   public int size() { return characterList.size(); }
+  public int indexOf(CharacterI c) { return characterList.indexOf(c); }
   public List<CharacterI> getList() { return characterList; }
 
   public boolean equals(CharacterListI cl) {
