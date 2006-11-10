@@ -52,6 +52,7 @@ public class CharacterTablePanel extends JPanel {
   private JButton commitButton;
   private JScrollBar verticalScrollBar;
   private boolean scrollToNewLastRowOnRepaint = false;
+  private boolean ignoreSelectionChange = false;
   
   //private int selectedRow;
   // get from file menu?
@@ -209,7 +210,11 @@ public class CharacterTablePanel extends JPanel {
       else if (e.getActionCommand().equals("Delete")) {
         selectRow = getSelectedRow();
         //characterTableModel.deleteSelectedRow(selectRow);
+        // this will cause a valueChanged() to CharSelListener when things arent in
+        // synch yet - supress selection listener with flag
+        ignoreSelectionChange = true;
         characterTableModel.deleteChars(getSelectedChars());
+        ignoreSelectionChange = false;
         if (selectRow >= charJTable.getRowCount())
           selectRow = charJTable.getRowCount()-1; // last row deleted
       }
@@ -235,7 +240,10 @@ public class CharacterTablePanel extends JPanel {
       // IF DELETED LAST ROW, then need to make a new blank one (sandbox mode)
       if (!hasRows() && SANDBOX_MODE) {
         //fieldPanel.clear(); // SelectionManager.clearCharacterSelection()
+        // adding new row can cause a out of synch selection event - wierd
+        ignoreSelectionChange = true;
         selectRow = characterTableModel.addNewBlankRow(); // sr should be 0
+        ignoreSelectionChange = false;
       }
       if (selectRows != null) // multi select
         selectRows(selectRows);
@@ -253,6 +261,7 @@ public class CharacterTablePanel extends JPanel {
    notifies selectionManager of new char selection */
   private class CharacterSelectionListener implements ListSelectionListener {
     public void valueChanged(ListSelectionEvent e) {
+      if (ignoreSelectionChange) return; // for bulk delete error out of synch
       if (!hasSelection()) // this can happen with a delete row
         return;
       // need to track for reinstating select after data change hmm not used anymore??
