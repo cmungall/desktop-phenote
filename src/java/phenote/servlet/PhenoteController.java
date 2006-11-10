@@ -98,17 +98,13 @@ public class PhenoteController extends AbstractCommandController {
   private String makeCompListHtmlItem(CompletionTerm term, String ontol,String field) {
     String id = term.getID();
     String display = term.getCompListDisplayString();
-    String name = escapeSingleQuotes(term.getName());
+    String name = term.getName();
     // pass in id, name & ontology - name for setting field on UseTerm
     StringBuffer info = dq(fn("getTermInfo",new String[]{id,name,ontol,field}));
     StringBuffer select = dq(fn("selectTerm",new String[]{name,field}));
     //String info = "\"getTermInfo("+id +","+q(name)+","+ q(ontol) + ")\"";
     return "<li onmouseover=" + info + " id=" + q(id) + " termTest='dude' " +
       " onclick=" + select + ">" + display + "</li>\n";
-  }
-
-  private String escapeSingleQuotes(String s) {
-    return s.replace("'","\\'");
   }
 
   private CompListSearcher getCompListSearcher(String ontologyName) throws OntologyException {

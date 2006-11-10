@@ -185,7 +185,12 @@ public class HtmlUtil {
     return new StringBuffer("'"+sb+"'");
   }
   private static String q(String s) {
+    s = escapeSingleQuotes(s);
     return "'"+s+"'";
+  }
+  private static String escapeSingleQuotes(String s) {
+    if (s == null) return null; // ???
+    return s.replace("'","\\'");
   }
 
   public static StringBuffer fn(String fnName, String[] params) {
