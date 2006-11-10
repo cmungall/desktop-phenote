@@ -102,13 +102,22 @@ class CharFieldGui {
   private class FieldCharChangeListener implements CharChangeListener {
     public void charChanged(CharChangeEvent e) {
       // check charField is this char field
-      if (e.getSource() != CharFieldGui.this && e.isUpdateForCharField(charField))
+      if (e.getSource() != CharFieldGui.this && e.isUpdateForCharField(charField)) {
         // i think all we need to do is setText to synch with model
         // for complist dont we also need to set its model (not just text??)
         //setText(e.getValueString()); // might as well just synch with model
         // so in the case of multi select presumably they have all been modified in
         // the same manner so sufficient to just synch with 1st one
+        // dont edit model if undo (model already edited!)
+        // wait any char change event shouldnt change model as it came from model change
+        //boolean editModel = !e.isUndo();
+        //boolean editModel = false;
+        // maybe setModelUpdateMode(false) ??
+
+        updateGuiOnly = true; // disable model editing - a better way to do this???
         setValueFromChar(getFirstSelectedChar());
+        updateGuiOnly = false; // reenable model editing
+      }
     }
   }
 
@@ -147,14 +156,13 @@ class CharFieldGui {
   /** Set the gui from the model (selection) */
   void setValueFromChar(CharacterI character) {
     if (character == null) {
-      System.out.println("ERROR: setting to null character");
+      log().error("ERROR: setting to null character");
       return;
     }
     if (charField == null) return;
     if (charField.getCharFieldEnum() == null) {
-      System.out.println("ERROR: Cant set value for field. Gui for character field has"
-                         +" not been associated with a datamodel field. check field"
-                         +" names in config ");
+      log().error("Cant set value for field. Gui for character field has not been "+
+                  "associated with a datamodel field. check field names in config");
       return;
     }
     // if its a comp list need to set its model/current term rel (for AACL.setText)
@@ -348,7 +356,9 @@ class CharFieldGui {
         setGuiForMultiSelect();
         return;
       }
+      updateGuiOnly = true; // selection should not cause an edit!
       setValueFromChar(e.getChars().get(0));
+      updateGuiOnly = false;
     }
   }
 

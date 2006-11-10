@@ -16,6 +16,8 @@ public class AddTransaction implements TransactionI {
     addChar = chr;
   }
 
+  public boolean isUpdate() { return false; }
+
   public void editModel() {
     getCharList().add(addChar);
   }

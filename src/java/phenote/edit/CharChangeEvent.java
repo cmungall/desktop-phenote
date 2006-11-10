@@ -17,14 +17,17 @@ public class CharChangeEvent extends EventObject {
     transaction = t;
   }
 
-//   public String getValueString() { // getNewVal, getOldVal???
-//     // if undo return ut.getOldValue().getName()???
-//     return transaction.getNewValueString();
-//   }
+  public boolean isUpdate() { return transaction.isUpdate(); }
+
 
   public boolean isUpdateForCharField(CharField cf) {
     //return transaction.getCharFieldEnum() == cf.getCharFieldEnum();
     //if (!transaction.isUpdate()) return false;
     return transaction.isUpdateForCharField(cf);
   }
+//   public String getValueString() { // getNewVal, getOldVal???
+//     // if undo return ut.getOldValue().getName()???
+//     return transaction.getNewValueString();
+//   }
+
 }

@@ -33,6 +33,7 @@ public class CompoundTransaction implements TransactionI {
 
   public static CompoundTransaction makeCopyTrans(List<CharacterI> charsToCopy) {
     CompoundTransaction copyTrans = new CompoundTransaction();
+    // error if empty list?
     for (CharacterI c : charsToCopy) {
       CharacterI copy = c.cloneCharacter();
       AddTransaction at = new AddTransaction(copy);
@@ -47,7 +48,19 @@ public class CompoundTransaction implements TransactionI {
       childTrans.editModel();
   }
 
+  public void undo() {
+    for (TransactionI childTrans : childTransactions)
+      childTrans.undo();
+  }
+
   List<TransactionI> getTransactions() { return childTransactions; }
+
+  /** returns true if first child is update, assumes kids are homogenous
+      which currently is a true assumption, change this if that becomes untrue */
+  public boolean isUpdate() {
+    if (!hasTransactions()) return false;
+    return firstChild().isUpdate();
+  }
 
 //   /** assumes all transactions have same enum which is true at moment */
 //   public CharFieldEnum getCharFieldEnum() {
@@ -57,8 +70,17 @@ public class CompoundTransaction implements TransactionI {
   /** queries 1st child for this. assumes all transactions have same charfield/update
       status which is true at moment (change if need) */
   public boolean isUpdateForCharField(CharField cf) {
+    if (!hasTransactions()) return false;
     return firstChild().isUpdateForCharField(cf);
   }
 
-  private TransactionI firstChild() { return childTransactions.get(0); }
+  // should this even be allowed?
+  private boolean hasTransactions() {
+    return !childTransactions.isEmpty();
+  }
+
+  private TransactionI firstChild() {
+    if (!hasTransactions()) return null; // ex?
+    return childTransactions.get(0);
+  }
 }

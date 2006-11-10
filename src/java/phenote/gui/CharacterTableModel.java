@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
+import org.apache.log4j.Logger;
+
 import phenote.datamodel.Character;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
@@ -80,6 +82,10 @@ class CharacterTableModel extends AbstractTableModel {
     
   /** return int[]? of all new rows to be selected? yes i think so */
   RowInterval copyChars(List<CharacterI> charsToCopy) {
+    if (charsToCopy.isEmpty()) {
+      log().error("No chars selected to make copy of");
+      return new RowInterval(-1,-1); // ex?
+    }
     EditManager.inst().copyChars(charsToCopy); // edits model
     //CompoundTransaction ct = CompoundTransaction.makeCopyTrans(charsToCopy);
     //ct.editModel(); // clones & adds char to char list
@@ -137,6 +143,11 @@ class CharacterTableModel extends AbstractTableModel {
     CharFieldEnum cfe = getCharFieldEnum(col);
     characterList.sortBy(cfe); // ???
     fireTableDataChanged();
+  }
+  private Logger log;
+  private Logger log() {
+    if (log == null) log = Logger.getLogger(getClass());
+    return log;
   }
 
 }

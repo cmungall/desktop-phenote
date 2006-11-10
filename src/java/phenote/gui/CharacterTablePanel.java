@@ -23,6 +23,8 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import org.apache.log4j.Logger;
+
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
 import phenote.edit.CharChangeEvent;
@@ -46,6 +48,7 @@ public class CharacterTablePanel extends JPanel {
   //private JButton newButton;
   private JButton copyButton;
   private JButton deleteButton;
+  private JButton undoButton;
   private JButton commitButton;
   private JScrollBar verticalScrollBar;
   private boolean scrollToNewLastRowOnRepaint = false;
@@ -92,9 +95,11 @@ public class CharacterTablePanel extends JPanel {
     addButton("New",al,buttonPanel); //newButton = 
     copyButton = addButton("Copy",al,buttonPanel);
     deleteButton = addButton("Delete",al,buttonPanel);
+    buttonPanel.add(Box.createRigidArea(new Dimension(20,0)));
+    undoButton = addButton("Undo",al,buttonPanel);
+    buttonPanel.add(Box.createRigidArea(new Dimension(80,0)));
     // should we only add if have data adapter - or disable at least?
     // should this go in a menu?
-    buttonPanel.add(Box.createRigidArea(new Dimension(80,0)));
     commitButton = addButton(SAVE_STRING,al,buttonPanel);
     
     add(buttonPanel);
@@ -194,6 +199,10 @@ public class CharacterTablePanel extends JPanel {
       }
       else if (e.getActionCommand().equals("Copy")) {
         //selectRow = characterTableModel.copyRow(getSelectedRow());
+        if (!hasSelection()) {
+          log().error("No rows selected for copy - this shouldnt happen!");
+          return;
+        }
         selectRows = characterTableModel.copyChars(getSelectedChars());
         scrollToNewLastRowOnRepaint = true;//scrollToLastRow(); // scroll to new row
       }
@@ -204,6 +213,7 @@ public class CharacterTablePanel extends JPanel {
           selectRow = charJTable.getRowCount()-1; // last row deleted
       }
       
+      // SAVE
       else if (e.getActionCommand().equals(SAVE_STRING)) {
         // commented out this check because it won't work if there are multiple data adapters
         // error should probably be printed in LoadSaveManager anyway
@@ -214,6 +224,11 @@ public class CharacterTablePanel extends JPanel {
         //}
         //c.getSingleDataAdapter().commit(characterTableModel.getCharacterList());
         LoadSaveManager.inst().saveData();
+      }
+
+      // UNDO
+      else if (e.getActionCommand().equals("Undo")) {
+        EditManager.inst().undo();
       }
 
       // IF DELETED LAST ROW, then need to make a new blank one (sandbox mode)
@@ -258,10 +273,23 @@ public class CharacterTablePanel extends JPanel {
       independently... */
   private class TableCharChangeListener implements CharChangeListener {
     public void charChanged(CharChangeEvent e) {
-      //int row = getSelectedRow();
-      //fireTableDataChanged(); // ??? causes loss of selection
+      if (e.isUpdate()) {
+        repaint(); // repaint causes new cell val to get displayed
+        return;
+      }
+      int row = getSelectedRow(); // multi select?? row del? row add?
+      // this was commented out repaint was suffic but now needed for undo of copy/delete
+      // if this is slow we may need to get more savvy - but ill bet its fine
+      characterTableModel.fireTableDataChanged(); // ??? causes loss of selection
       //setRowSelectionInterval(row,row);
-      repaint(); // will this cause new data to display?
+      // big problem, select row causes char select evt, CFG gets this and tries to
+      // update itself but causes ex if in middle of edit. need to be more savvy, if
+      // just char update then need to supress select event as its really just the table
+      // reinstating its selection actually if update just do repaint and return, 
+      // if add or del then need to
+      // send out event
+      selectRow(row);
+      // repaint(); // is this needed after fireTableDataChanged?
     }
   }
 
@@ -312,6 +340,11 @@ public class CharacterTablePanel extends JPanel {
   // for test
   void pressCommitButtonTest() {
     commitButton.doClick();
+  }
+  private Logger log;
+  private Logger log() {
+    if (log == null) log = Logger.getLogger(getClass());
+    return log;
   }
 }
 

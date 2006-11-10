@@ -15,6 +15,8 @@ public class UpdateTransaction implements TransactionI { // extends Transaction?
   //private String oldValue;
   private CharFieldValue newValue;
   private CharFieldValue oldValue;
+  // not sure but this may be needed
+  private boolean isUndone = false;
   //private boolean undo?
 
   public UpdateTransaction(CharacterI c, CharFieldEnum e, String newVal) {
@@ -41,6 +43,7 @@ public class UpdateTransaction implements TransactionI { // extends Transaction?
     oldValue = e.getValue(c);
   }
 
+  public boolean isUpdate() { return true; }
 
   // hmmmmmmm....
 // /** if isDifferentia is true than update is for differentia of a post composed term*/
@@ -53,6 +56,7 @@ public class UpdateTransaction implements TransactionI { // extends Transaction?
 
   public void editModel() {
     newValue.editModel();
+    isUndone = false;
     //charFieldEnum.setValue(character,newValue);
   }
 
@@ -69,6 +73,14 @@ public class UpdateTransaction implements TransactionI { // extends Transaction?
     return newValue.getCharFieldEnum();
   }
 
-  //public void undo() { oldValue.setValue();//charFieldEnum.setValue(character,oldValue); }
+  public void undo() { 
+    //oldValue.setValue();//charFieldEnum.setValue(character,oldValue); }
+    oldValue.editModel();
+    isUndone = true; // super.undo()?
+  }
 
+  public boolean isUndone() { return isUndone; }
+
+  // public String getValue() { if isUndone return oldVal else newVal ??
+  
 }

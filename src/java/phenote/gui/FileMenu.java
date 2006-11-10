@@ -9,7 +9,7 @@ import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.LoadSaveManager;
 import phenote.config.Config;
-import phenote.gui.prefswindow.PrefsWindowController;
+//import phenote.gui.prefswindow.PrefsWindowController;
 
 class FileMenu extends JMenu {
 
