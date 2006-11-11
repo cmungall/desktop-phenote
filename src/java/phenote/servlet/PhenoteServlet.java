@@ -1,7 +1,10 @@
 package phenote.servlet;
 
-import org.apache.log4j.Logger;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+import org.apache.log4j.RollingFileAppender;
+import org.apache.log4j.xml.DOMConfigurator;
 import org.springframework.web.servlet.DispatcherServlet;
 import phenote.config.Config;
 import phenote.config.ConfigException;
@@ -10,11 +13,15 @@ import phenote.util.HtmlUtil;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import java.io.File;
+import java.io.IOException;
 
 public class PhenoteServlet extends DispatcherServlet {
 
   private static final String CONFIG_FILE_PARAM = "configuration-file";
   private static final Logger LOG = Logger.getLogger(PhenoteServlet.class);
+  private static final String LOG4J_FILE_NAME = "log4j.xml";
+  private static String webInfDir;
 
   /**
    * Initialization of this servlet upon server startup.
@@ -25,6 +32,8 @@ public class PhenoteServlet extends DispatcherServlet {
    */
   public void init(ServletConfig config) throws ServletException {
     super.init(config);
+    webInfDir = getServletContext().getRealPath("/WEB-INF/");
+
     PhenoteWebConfiguration.getInstance().setWebRoot(getServletContext().getRealPath("/"));
 
     // ToDo:
@@ -49,7 +58,46 @@ public class PhenoteServlet extends DispatcherServlet {
     // before a different client calls and has to wait.
     // ToDo: Shall we create a new method called  OntologyDataAdapter.start()? YES
     OntologyDataAdapter.initialize();
+
+    initLog4j();
   }
+
+  private void initLog4j() {
+    String log4jFileName = getLog4JFile();
+    // if the log4j-init-file is set do not initialize log4j.
+    if (log4jFileName != null) {
+      DOMConfigurator.configure(log4jFileName);
+    }
+    addRootAppender();
+  }
+
+  private String getLog4JFile() {
+    File log4jFile = new File(webInfDir, LOG4J_FILE_NAME);
+    String log4jFileName = log4jFile.getAbsolutePath();
+    if (!log4jFile.exists())
+      System.out.println("Cannot find log4j file: " + log4jFileName);
+    return log4jFileName;
+  }
+
+  private void addRootAppender() {
+    Logger rootLogger = Logger.getRootLogger();
+
+    String logFileName = "phenote.log";
+    File file = new File(webInfDir, logFileName);
+    String absoluteFilePath = file.getAbsolutePath();
+    RollingFileAppender appender = null;
+    try {
+      String logFilePattern = "%d [%t] %-5p %c{2} - %m%n";
+      appender = new RollingFileAppender(new PatternLayout(logFilePattern), absoluteFilePath);
+      appender.setMaximumFileSize(1 * 1024 * 1024);
+      appender.setAppend(true);
+      appender.setMaxBackupIndex(10);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    rootLogger.addAppender(appender);
+  }
+
 
 }
 

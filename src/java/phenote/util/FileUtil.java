@@ -1,16 +1,15 @@
 package phenote.util;
 
+import org.apache.log4j.Logger;
+
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.GregorianCalendar;
-import java.util.Calendar;
 import java.nio.channels.FileChannel;
-import java.nio.ByteBuffer;
-
-import org.apache.log4j.Logger;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 public class FileUtil {
 
@@ -128,19 +127,26 @@ public class FileUtil {
     return archiveFile;
   }
 
-  private static boolean copyFileIntoArchive(File file, File archiveFile) {
+  /**
+   * Copy one file into another file.
+   * 
+   * @param file
+   * @param archiveFile
+   */
+  synchronized private static boolean copyFileIntoArchive(File file, File archiveFile) {
       boolean success = true;
       FileInputStream fis = null;
       FileOutputStream fos = null;
       try {
-          fis = new FileInputStream(file);
-          fos = new FileOutputStream(archiveFile);
-          FileChannel inChannel = fis.getChannel();
-          ByteBuffer buffer = ByteBuffer.allocate(48);
-          FileChannel outChannel = fos.getChannel();
-          while (inChannel.read(buffer) != -1) {
-              outChannel.write(buffer);
-          }
+        fis = new FileInputStream(file);
+        fos = new FileOutputStream(archiveFile);
+        FileChannel inChannel = fis.getChannel();
+        FileChannel outChannel = fos.getChannel();
+        int bytesWritten = 0;
+        long byteCount = 0;
+        while(bytesWritten < byteCount)
+          bytesWritten +=inChannel.transferTo(bytesWritten, byteCount - bytesWritten, outChannel);
+
         fos.close();
         fis.close();
 

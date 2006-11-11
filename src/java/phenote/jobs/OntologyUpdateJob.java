@@ -29,7 +29,7 @@ public class OntologyUpdateJob extends QuartzJobBean {
 
 
   protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-    LOG.info("Started Ontology Update Job");
+    LOG.info("Started Ontology Update Job: " + ontologyName);
 
     try {
       Ontology ontology = OntologyManager.inst().getOntologyForName(ontologyName);

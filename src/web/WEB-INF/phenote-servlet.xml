@@ -69,6 +69,27 @@
     </property>
   </bean>
 
+  <bean id="qualityOntologyReloadJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+    <property name="jobClass">
+      <value>phenote.jobs.OntologyUpdateJob</value>
+    </property>
+    <property name="jobDataAsMap">
+      <map>
+        <entry key="ontologyName">
+          <value>Quality</value>
+        </entry>
+        <!-- This directory is relative to the webroot -->
+        <entry key="archiveDirectory">
+          <value>archive-ontology</value>
+        </entry>
+        <!-- time stated in days (can be a fraction) -->
+        <entry key="purgePeriodInDays">
+          <value>0.0035</value>
+        </entry>
+      </map>
+    </property>
+  </bean>
+
   <bean id="cronAOTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
     <property name="jobDetail">
       <ref bean="anatomyOntologyReloadJob"/>
@@ -78,10 +99,30 @@
     </property>
   </bean>
 
+  <bean id="cronGOTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <property name="jobDetail">
+      <ref bean="geneOntologyReloadJob"/>
+    </property>
+    <property name="cronExpression">
+      <value>40 * * * * ?</value>
+    </property>
+  </bean>
+
+  <bean id="cronQualityTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <property name="jobDetail">
+      <ref bean="qualityOntologyReloadJob"/>
+    </property>
+    <property name="cronExpression">
+      <value>0 * * * * ?</value>
+    </property>
+  </bean>
+
   <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
     <property name="triggers">
       <list>
         <ref bean="cronAOTrigger"/>
+        <ref bean="cronGOTrigger"/>
+        <ref bean="cronQualityTrigger"/>
       </list>
     </property>
   </bean>
