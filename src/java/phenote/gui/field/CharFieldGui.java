@@ -1,19 +1,16 @@
 package phenote.gui.field;
 
-import java.util.List;
-import java.awt.Toolkit;
+//import java.util.List;
+//import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Container;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.event.DocumentListener;
-import javax.swing.event.DocumentEvent;
+//import javax.swing.JTextField;
+//import javax.swing.event.DocumentListener;
+//import javax.swing.event.DocumentEvent;
 
 import org.apache.log4j.Logger;
 
@@ -28,9 +25,9 @@ import phenote.datamodel.OntologyException;
 import phenote.datamodel.OntologyManager;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
-import phenote.edit.CompoundTransaction;
+//import phenote.edit.CompoundTransaction;
 import phenote.edit.EditManager;
-import phenote.edit.UpdateTransaction;
+//import phenote.edit.UpdateTransaction;
 import phenote.gui.selection.CharSelectionListener;
 import phenote.gui.selection.CharSelectionEvent;
 import phenote.gui.selection.SelectionManager;
@@ -45,7 +42,8 @@ class CharFieldGui {
   private RelationCompList relCompList;
   private TermCompList termCompList;
   private CompListSearcher compListSearcher;
-  private JTextField textField;
+  //private JTextField textField;
+  private FreeTextField freeTextField;
   private boolean isCompList = false;
   private CharField charField;
   private FieldPanel fieldPanel;
@@ -96,6 +94,8 @@ class CharFieldGui {
     if (enableListeners)
       EditManager.inst().addCharChangeListener(new FieldCharChangeListener());
   }
+
+  boolean updateGuiOnly() { return updateGuiOnly; }
 
   /** edits from post comp come in here i believe (term info used to but now
       thats done with UseTermEvent) */
@@ -247,46 +247,46 @@ class CharFieldGui {
   private void initTextField(String label) {
     isCompList = false;
     fieldPanel.addLabel(label);
-    textField = new JTextField(25);
-    textField.setEditable(true);
-    // addGenericDocumentListener...
-    textField.getDocument().addDocumentListener(new TextFieldDocumentListener());
-    fieldPanel.addFieldGui(textField);
-
-    textField.addKeyListener(new TextKeyListener());
-
+    freeTextField = new FreeTextField(this);
+//     textField = new JTextField(25);
+//     textField.setEditable(true);
+//     textField.getDocument().addDocumentListener(new TextFieldDocumentListener());
+//     textField.addKeyListener(new TextKeyListener());
+    fieldPanel.addFieldGui(freeTextField.getComponent());
   }
 
-  /** key listener for free text fields for Cmd-V pasting for macs */
-  private class TextKeyListener extends java.awt.event.KeyAdapter {
-    public void keyPressed(java.awt.event.KeyEvent e) {
-      // on a mac Command-V is paste. this aint so with java/metal look&feel
-      if (e.getKeyChar() == 'v' 
-          && e.getKeyModifiersText(e.getModifiers()).equals("Command")) {
-        //log().debug("got cmd V paste");
-        //System.getClipboard
-        Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
-        try {
-          Transferable t = c.getContents(null); // null?
-          Object s = t.getTransferData(DataFlavor.stringFlavor);
-          // this isnt quite right as it should just insert the text not wipe
-          // it out - but probably sufficient for now?
-          if (s != null)
-            setText(s.toString());
-        } catch (Exception ex) { System.out.println("failed paste "+ex); }
-      }
-    }
-  }
+  private FreeTextField getFreeTextField() { return freeTextField; }
+
+//   /** key listener for free text fields for Cmd-V pasting for macs */
+//   private class TextKeyListener extends java.awt.event.KeyAdapter {
+//     public void keyPressed(java.awt.event.KeyEvent e) {
+//       // on a mac Command-V is paste. this aint so with java/metal look&feel
+//       if (e.getKeyChar() == 'v' 
+//           && e.getKeyModifiersText(e.getModifiers()).equals("Command")) {
+//         //log().debug("got cmd V paste");
+//         //System.getClipboard
+//         Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
+//         try {
+//           Transferable t = c.getContents(null); // null?
+//           Object s = t.getTransferData(DataFlavor.stringFlavor);
+//           // this isnt quite right as it should just insert the text not wipe
+//           // it out - but probably sufficient for now?
+//           if (s != null)
+//             setText(s.toString());
+//         } catch (Exception ex) { System.out.println("failed paste "+ex); }
+//       }
+//     }
+//   }
 
 
   void setText(String text) {
     // set/getText interface to combo & text field?
     if (isCompList) getCompList().setText(text);
-    else textField.setText(text);
+    else getFreeTextField().setText(text);
   }
   String getText() {
     if (isCompList) return getCompList().getText();
-    else return textField.getText();
+    else return getFreeTextField().getText();
   }
   /** clears gui not model - for multi select - may want to set to * or something? */
   void setGuiForMultiSelect() {
@@ -319,34 +319,34 @@ class CharFieldGui {
     return SelectionManager.inst().getFirstSelectedCharacter();
   }
 
-  private List<CharacterI> getSelectedChars() {
-    return SelectionManager.inst().getSelectedChars();
-  }
+//   List<CharacterI> getSelectedChars() {
+//     return SelectionManager.inst().getSelectedChars();
+//   }
 
-  // separate char text field class?
-  /** This is where the model gets updated (for free text fields) */
-  private class TextFieldDocumentListener implements DocumentListener {
-    //private String previousVal = null;
-    public void changedUpdate(DocumentEvent e) { updateModel(); }
-    public void insertUpdate(DocumentEvent e) { updateModel(); }
-    public void removeUpdate(DocumentEvent e) { updateModel(); }
-    private void updateModel() {
-      // if only updating gui (multi select clear) then dont update model
-      if (updateGuiOnly) return;
-      // on delete last pheno row clearing of text will trigger this
-      //if (!characterTablePanel.hasRows()) return;
-      //String genotype = lumpField.getText();
-      //characterTablePanel.setSelectedGenotype(genotype);
-      List<CharacterI> chars = getSelectedChars();
-      // i believe this isnt using oboClass as we just have string
-      // of course it isnt this is free text
-      String v = getText();
-      //UpdateTransaction ut = new UpdateTransaction(char,getCharFieldEnum(),v);
-      CompoundTransaction ct = new CompoundTransaction(chars,getCharFieldEnum(),v);
-      EditManager.inst().updateModel(CharFieldGui.this,ct);
-      //previousVal = v; // undo
-    }
-  }
+//   // separate char text field class?
+//   /** This is where the model gets updated (for free text fields) */
+//   private class TextFieldDocumentListener implements DocumentListener {
+//     //private String previousVal = null;
+//     public void changedUpdate(DocumentEvent e) { updateModel(); }
+//     public void insertUpdate(DocumentEvent e) { updateModel(); }
+//     public void removeUpdate(DocumentEvent e) { updateModel(); }
+//     private void updateModel() {
+//       // if only updating gui (multi select clear) then dont update model
+//       if (updateGuiOnly) return;
+//       // on delete last pheno row clearing of text will trigger this
+//       //if (!characterTablePanel.hasRows()) return;
+//       //String genotype = lumpField.getText();
+//       //characterTablePanel.setSelectedGenotype(genotype);
+//       List<CharacterI> chars = getSelectedChars();
+//       // i believe this isnt using oboClass as we just have string
+//       // of course it isnt this is free text
+//       String v = getText();
+//       //UpdateTransaction ut = new UpdateTransaction(char,getCharFieldEnum(),v);
+//       CompoundTransaction ct = new CompoundTransaction(chars,getCharFieldEnum(),v);
+//       EditManager.inst().updateModel(CharFieldGui.this,ct);
+//       //previousVal = v; // undo
+//     }
+//   }
 
   private class FieldCharSelectListener implements CharSelectionListener {
     public void charactersSelected(CharSelectionEvent e) {
