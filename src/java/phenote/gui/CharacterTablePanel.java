@@ -133,8 +133,11 @@ public class CharacterTablePanel extends JPanel {
   
   /** row number is zero based for tables */
   private void selectRow(int row) {
-    if (charJTable != null && row >= 0 && row < charJTable.getRowCount())
-      charJTable.setRowSelectionInterval(row,row);
+    if (charJTable == null) return;
+    if (row < 0) row = 0; // ???
+    if (row >= charJTable.getRowCount()) row = charJTable.getRowCount() - 1;
+    //if (charJTable != null && row >= 0 && row < charJTable.getRowCount())
+    charJTable.setRowSelectionInterval(row,row);
   }
 
   private void selectRows(RowInterval selRows) {
@@ -191,6 +194,7 @@ public class CharacterTablePanel extends JPanel {
     public void actionPerformed(ActionEvent e) {
       int selectRow = 0;
       RowInterval selectRows=null;
+      boolean doSelection = true;
       if (e.getActionCommand().equals("New")) {
         selectRow = characterTableModel.addNewBlankRow();
         scrollToNewLastRowOnRepaint = true;//scrollToLastRow(); // scroll to new row
@@ -234,6 +238,8 @@ public class CharacterTablePanel extends JPanel {
 
       // UNDO
       else if (e.getActionCommand().equals("Undo")) {
+        // let char change deal with selection i think?? undo is different
+        doSelection = false;
         EditManager.inst().undo();
       }
 
@@ -248,7 +254,7 @@ public class CharacterTablePanel extends JPanel {
       }
       if (selectRows != null) // multi select
         selectRows(selectRows);
-      else // single row select
+      else if (doSelection) // single row select
         selectRow(selectRow);
       repaint();
       // check whether enable/disable del & copy buttons - disable w no rows
@@ -284,6 +290,7 @@ public class CharacterTablePanel extends JPanel {
       independently... */
   private class TableCharChangeListener implements CharChangeListener {
     public void charChanged(CharChangeEvent e) {
+      System.out.println("is update "+e.isUpdate()+"- calling repaint");
       if (e.isUpdate()) {
         repaint(); // repaint causes new cell val to get displayed
         return;
