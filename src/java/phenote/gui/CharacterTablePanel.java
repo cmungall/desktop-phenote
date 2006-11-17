@@ -182,6 +182,13 @@ public class CharacterTablePanel extends JPanel {
       be made - at least for sandbox mode. */
   boolean hasRows() { return characterTableModel.hasRows(); }
 
+  private boolean hasOneEmptySelectedRow() {
+    if (getCharacterList().size() > 1) return false;
+    if (getSelectedChars().size() != 1) return false; // shouldnt happen
+    CharacterI c = getSelectedChars().get(0);
+    return c.hasNoContent(); // method name??
+  }
+
   private void scrollToLastRow() {
     verticalScrollBar.setValue(verticalScrollBar.getMaximum()+20);
   }
@@ -212,6 +219,10 @@ public class CharacterTablePanel extends JPanel {
         scrollToNewLastRowOnRepaint = true;//scrollToLastRow(); // scroll to new row
       }
       else if (e.getActionCommand().equals("Delete")) {
+        // if just deleting first blank row dont do anything otherwise get "false" trans
+        if (hasOneEmptySelectedRow())
+          return;
+
         selectRow = getSelectedRow();
         //characterTableModel.deleteSelectedRow(selectRow);
         // this will cause a valueChanged() to CharSelListener when things arent in
@@ -290,7 +301,6 @@ public class CharacterTablePanel extends JPanel {
       independently... */
   private class TableCharChangeListener implements CharChangeListener {
     public void charChanged(CharChangeEvent e) {
-      System.out.println("is update "+e.isUpdate()+"- calling repaint");
       if (e.isUpdate()) {
         repaint(); // repaint causes new cell val to get displayed
         return;

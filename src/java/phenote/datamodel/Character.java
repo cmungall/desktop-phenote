@@ -60,5 +60,17 @@ public class Character implements CharacterI, Cloneable {
       return (Character)clone();
     } catch (CloneNotSupportedException e) { return null; }
   }
+
+  public boolean hasNoContent() {
+    if (hasPub()) return false;
+    if (genotype!=null && !genotype.equals("")) return false;
+    if (entity != null) return false;
+    if (quality != null) return false;
+    return geneticContext == null;
+  }
  
+  public String toString() {
+    return "Pub "+pub+" genotype "+genotype+" gen ctxt "+geneticContext+" entity "+
+      entity+" qual "+quality;
+  }
 }

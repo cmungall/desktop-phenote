@@ -120,7 +120,7 @@ public class EditManager {
 
   private void addTransaction(TransactionI t) {
     transactionList.add(t);
-    //System.out.println("got trans "+t);
+    //System.out.println("got trans "+t); new Throwable().printStackTrace();
   }
 
   private void fireChangeEvent(CharChangeEvent e) {

@@ -32,4 +32,5 @@ public interface CharacterI {
  
   public CharacterI cloneCharacter();
   public boolean equals(CharacterI c);
+  public boolean hasNoContent();
 }
