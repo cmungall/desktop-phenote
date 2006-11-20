@@ -44,6 +44,33 @@ isnt working yet. So the response needs to look like this:
 </ul>
 
 
+so if you just want to grab pieces of the javascript
+
+ajax scripts:
+<script src="../javascript/ajax-lib/prototype.js" type="text/javascript"></script>
+<script src="../javascript/ajax-lib/effects.js"   type="text/javascript"></script>
+<script src="../javascript/ajax-lib/dragdrop.js"  type="text/javascript"></script>
+<script src="../javascript/ajax-lib/controls.js"  type="text/javascript"></script>
+
+
+EntityOntology Chooser:
+<script type="text/javascript">
+  function setEntityOntology(selectedOntology) {
+    if (selectedOntology == 'AO') {
+      ontologyName = 'ZF'; <!-- ZF Anatomy -->
+    } else if (selectedOntology == 'GO') {
+      ontologyName = 'GO';
+    }
+
+<!--    entityAutoCompleter.options.parameters = "ontologyName=" +    ontologyName; -->
+   entityAutoCompleter.options.defaultParams = "ontologyName="+ontologyName+"&field=ENTITY";
+    <!-- alert(entityAutoCompleter.options.defaultParams); -->
+
+  }
+
+</script>
+
+
 src/web documentation of js,html,ajax...:
 
 This is a web widget to search ontologies dynamically using Ajax. The
