@@ -46,6 +46,13 @@ public class OntologyManager {
     charFieldList.add(cf);
   }
 
+  /** get char field for int. 0 based. based on order in config file */
+  public CharField getCharField(int i) throws Exception {
+    if (i<0) throw new Exception(); 
+    if (i >= charFieldList.size()) throw new Exception(); // ex
+    return charFieldList.get(i);
+  }
+
   /** This is where the ontologies are in a generic fashion. A char field
       has one or more ontologies (entity char field often has more than ontology)*/
   public List<CharField> getCharFieldList() { return charFieldList; }

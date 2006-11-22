@@ -160,22 +160,25 @@ class CharFieldGui {
       return;
     }
     if (charField == null) return;
-    if (charField.getCharFieldEnum() == null) {
-      log().error("Cant set value for field. Gui for character field has not been "+
-                  "associated with a datamodel field. check field names in config");
-      return;
-    }
+//     if (charField.getCharFieldEnum() == null) {
+//       log().error("Cant set value for field "+getLabel()+". Gui for character field has not "
+//                   +"been associated with a datamodel field. check field names in config");
+//       return;
+//     }
     // if its a comp list need to set its model/current term rel (for AACL.setText)
     if (isCompList)
       getCompList().setValueFromChar(character);
-    String v = charField.getCharFieldEnum().getValue(character).getName();
-    setText(v);
+    else 
+      getFreeTextField().setValueFromChar(character);
+      
+    //String v = charField.getCharFieldEnum().getValue(character).getName();
+    //setText(v); ??
   }
 
 
   private String getLabel() {
     if (label == null) {
-      if (charField.hasMoreThanOneOntology())
+      if (charField.hasMoreThanOneOntology() || !charField.hasOntologies())
         label = charField.getName();
       else
         label = charField.getFirstOntology().getName();
@@ -314,6 +317,7 @@ class CharFieldGui {
   }
 
   CharFieldEnum getCharFieldEnum() { return charField.getCharFieldEnum(); }
+  CharField getCharField() { return charField; }
 
   private CharacterI getFirstSelectedChar() {
     return SelectionManager.inst().getFirstSelectedCharacter();

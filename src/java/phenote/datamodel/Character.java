@@ -1,5 +1,8 @@
 package phenote.datamodel;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.geneontology.oboedit.datamodel.OBOClass;
 
 /** Characters are the EAV building blocks of a Phenotype. Previously this
@@ -19,6 +22,32 @@ public class Character implements CharacterI, Cloneable {
   private OBOClass entity; // CharFieldValue???
   private OBOClass quality;
   private OBOClass geneticContext;
+  private HashMap<CharField,CharFieldValue> charFieldToValue =
+    new HashMap<CharField,CharFieldValue>();
+
+  /** for generic fields its just a map from char field to char field value */
+  public void setValue(CharField cf, CharFieldValue cfv) {
+    charFieldToValue.put(cf,cfv);
+    //System.out.println("Char setVal "+cf+" val "+cfv);
+  }
+  /** generic getter */ 
+  public CharFieldValue getValue(CharField cf) {
+    CharFieldValue cfv = charFieldToValue.get(cf);
+    // if cfv is null should we construct a CFV w null/"", should field be init to ""?
+    // undo needs to be able to undo back to null/""/init somehow
+    if (cfv == null) {
+      cfv = CharFieldValue.emptyValue(this,cf); // set in hash?
+    }
+//     if (cfv == null && cf.hasCharFieldEnum()) // phase out - i think this is phased out
+//       cfv = cf.getCharFieldEnum().getValue(this);
+    return cfv;
+  }
+  // should this be isNull?
+  public boolean hasValue(CharField cf) {
+    // empty string is a valid value for non-required field - or should there
+    // be some sort of somthing to indicate "empty" value?
+    return getValue(cf) != null; // && !getValue(cf).equals("");
+  }
 
   public String getPub() { return pub; }
   public boolean hasPub() { return pub!=null && !pub.equals(""); }
@@ -57,7 +86,9 @@ public class Character implements CharacterI, Cloneable {
   public CharacterI cloneCharacter() {
     try {
       // do OBOClasses clone? do we need to clone them?
-      return (Character)clone();
+      Character clone = (Character)clone();
+      clone.charFieldToValue = (HashMap<CharField,CharFieldValue>)charFieldToValue.clone();
+      return clone;
     } catch (CloneNotSupportedException e) { return null; }
   }
 

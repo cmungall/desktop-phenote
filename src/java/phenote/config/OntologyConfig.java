@@ -6,8 +6,8 @@ public class OntologyConfig {
   public String name;
   public String ontologyFile;
   //public String nameSpace; // not used yet - or was this what filter out ended up
-  public String filterOut;
-  // public typeEnum? type?? eg Entity/GT/Pato...??
+  public String filterOut; // public?
+  private String slim;
 
   //static OntologyConfig defaultPato = new OntologyConfig("Pato","attribute_and_value.obo");
 
@@ -23,6 +23,10 @@ public class OntologyConfig {
   OntologyConfig(String name, String file, String filterOut) {
     this(name,file);
     this.filterOut = filterOut;
+  }
+  OntologyConfig(String name, String file, String filterOut,String slim) {
+    this(name,file,filterOut);
+    this.slim = slim;
   }
 
   boolean hasName() {
@@ -53,4 +57,7 @@ public class OntologyConfig {
 
   public boolean hasFilter() { return filterOut != null; }
   public String getFilter() { return filterOut; } 
+
+  public boolean hasSlim() { return slim != null; }
+  public String getSlim() { return slim; }
 }

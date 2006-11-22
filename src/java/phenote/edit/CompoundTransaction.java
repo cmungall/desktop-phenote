@@ -14,15 +14,28 @@ public class CompoundTransaction implements TransactionI {
   // for now we just have UpdateTransactions - later will have Add & Del trans
   List<TransactionI> childTransactions = new ArrayList<TransactionI>();
 
-  /** for bulk updates of string/free text */
-  public CompoundTransaction(List<CharacterI>chars,CharFieldEnum e, String newVal) {
-    for (CharacterI ch : chars)
-      childTransactions.add(new UpdateTransaction(ch,e,newVal));
+//   /** for bulk updates of string/free text */
+//   public CompoundTransaction(List<CharacterI>chars,CharFieldEnum e, String newVal) {
+//     for (CharacterI ch : chars)
+//       childTransactions.add(new UpdateTransaction(ch,e,newVal));
+//   }
+  public static CompoundTransaction makeUpdate(List<CharacterI>crs,CharField cf,String v){
+    CompoundTransaction upTrans = new CompoundTransaction();
+    for (CharacterI ch : crs)
+      upTrans.addTransaction(new UpdateTransaction(ch,cf,v));
+    return upTrans;
   }
-  /** bulk updates of terms */
-  public CompoundTransaction(List<CharacterI>chars,CharFieldEnum e, OBOClass newVal) {
-    for (CharacterI ch : chars)
-      childTransactions.add(new UpdateTransaction(ch,e,newVal));
+
+//   /** bulk updates of terms */
+//   public CompoundTransaction(List<CharacterI>chars,CharFieldEnum e, OBOClass newVal) {
+//     for (CharacterI ch : chars)
+//       childTransactions.add(new UpdateTransaction(ch,e,newVal));
+//   }
+  public static CompoundTransaction makeUpdate(List<CharacterI>l,CharField c,OBOClass o){
+    CompoundTransaction upTrans = new CompoundTransaction();
+    for (CharacterI ch : l)
+      upTrans.addTransaction(new UpdateTransaction(ch,c,o));
+    return upTrans;
   }
 
   private CompoundTransaction() {}

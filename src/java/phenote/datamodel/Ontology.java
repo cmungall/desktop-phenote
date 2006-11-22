@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOProperty;
 import org.geneontology.oboedit.datamodel.OBOSession;
+import org.geneontology.oboedit.datamodel.TermCategory;
 
 /** rename Ontology? - yes - this isnt a completion list - a completion list is a 
     subset of ontology terms that matches user input. This is a listing of terms of
@@ -29,6 +30,7 @@ public class Ontology {
   private List<OBOClass> sortedTerms;
   private List<OBOClass> sortedObsoleteTerms;
   private List<OBOProperty> sortedRelations;
+  private String slim; 
   private String filterOutString;
   /** well this stuff is specific to ontologies from files (eg obo), perhaps there
       needs to be some sort of wrapper or subclass? need to think about this...
@@ -46,6 +48,7 @@ public class Ontology {
 
   public void setOboSession(OBOSession os) {
     oboSession = os;
+    //System.out.println("Ont cats "+os.getCategories());
     makeSortedLists(oboSession);
     filterLists();
   }
@@ -65,8 +68,9 @@ public class Ontology {
   }
 
   private void filterLists() {
-    if (!haveFilter()) return; // from config
-    sortedTerms = filterList(sortedTerms,filterOutString);
+    //if (!haveFilter() && !hasSlim()) return; // from config
+    if (doFiltering())
+      sortedTerms = filterList(sortedTerms);
   }
 
 
@@ -142,30 +146,67 @@ public class Ontology {
   public String getSource() { return source; }
 
 
-
+  /** should be smarter about slims - currently has Ontology & obo session for each field
+      that wants is using a slim of the same ontology - really should be one ontology & 
+      1 obo session with multiple slims - and even gather all the slims in 1 pass - would
+      need to query all ontology configs ahead of time to gather all slims being queried
+      by phenote - no need to build slim data structure if not being used */
+  public void setSlim(String slim) { this.slim = slim; }
+  private boolean hasSlim() { return slim != null; }
+  private boolean inSlim(OBOClass term) {
+    if (!hasSlim()) return true; // no slim - everything qualifies/doesnt get filtered
+    for (Object category : term.getCategories()) {
+      if (((TermCategory)category).getName().equalsIgnoreCase(slim))
+        return true;
+    }
+    return false; // none of the terms slims are in
+  }
 
   public void setFilter(String filterOutString) {
     this.filterOutString = filterOutString;
   }
+  private String getFilter() { return filterOutString; }
+  
+  private boolean filterOut(OBOClass term) {
+    if (!hasFilter()) return false;
+    return term.getID().startsWith(getFilter());
+  }
 
-  private boolean haveFilter() {
-    //return filterOutString != null;
+  private boolean hasFilter() {
+    return filterOutString != null;
     // minimally filter out obo: obo edit internal terms
-    return true;
+    //return true;
+  }
+
+  private boolean doFiltering() {
+    return filterOboArtifacts() || hasFilter() || hasSlim();
+  }
+
+  private boolean filterOboArtifacts() { return true; }
+
+  private boolean isOboArtifact(OBOClass term) {
+    if (!filterOboArtifacts()) return false;
+    return term.getName().startsWith("obo:");
   }
 
   /** This is not generic - this looks for ids that have the filterOut string
       as a prefix and tosses them - for example "ZFS" filters out all zf stage
-      terms - can add more flexibility as needed - this is all thats needed for now*/
-  private List<OBOClass> filterList(List<OBOClass> list, String filterOut) {
+      terms - can add more flexibility as needed - this is all thats needed for now
+      also filters out obo: terms - those are obo edit artifacts i think 
+      also filters for slim! */
+  private List<OBOClass> filterList(List<OBOClass> list) {
     List<OBOClass> filteredList = new ArrayList<OBOClass>();
     for (OBOClass term : list) {
       // or could do remove on list?
       // also filter out obo: terms as they are internal obo edit thingies it seems
       // funny logic but more efficient to do in one pass - refactor somehow?
-      if (term.getName().startsWith("obo:"))
+      //if (term.getName().startsWith("obo:"))
+      if (isOboArtifact(term))
         continue; // filter our obo:
-      if (filterOut != null && term.getID().startsWith(filterOut))
+      //if (hasFilter() && term.getID().startsWith(getFilter()))
+      if (filterOut(term))
+        continue;
+      if (!inSlim(term))
         continue;
       filteredList.add(term); // passed 2 filters above - add it
     }

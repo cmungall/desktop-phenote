@@ -25,6 +25,11 @@ public class CharField {
     charFieldEnum = c;
   }
 
+  /** a generic field with no char field enum - get hip */
+  public CharField(String name) {
+    this.name = name;
+  }
+
   public void addOntology(Ontology o) {
     ontologyList.add(o);
   }
@@ -45,11 +50,14 @@ public class CharField {
 
   public CharFieldEnum getCharFieldEnum() { return charFieldEnum; }
 
+  /** generic fields dont have enums */
+  boolean hasCharFieldEnum() { return charFieldEnum != null; }
+
   public boolean isRelationship() {
     return charFieldEnum == CharFieldEnum.RELATIONSHIP;
   }
 
-  boolean isGeneticContext() { return charFieldEnum == CharFieldEnum.GENETIC_CONTEXT; }
+  //boolean isGeneticContext() { return charFieldEnum == CharFieldEnum.GENETIC_CONTEXT; }
 
   public List<Ontology> getOntologyList() { return ontologyList; }
 
@@ -102,6 +110,8 @@ public class CharField {
   }
 
   public Ontology getPostCompRelOntol() { return postCompRelOntol; }
+
+  public String toString() { return "CharField: "+getName(); }
 }
 
     // is this getting silly? abstract? --> char field value i think

@@ -64,8 +64,16 @@ public class OntologyDataAdapter {
     // to prevent reload during init , maybe dont need with synchronization?
     initializingOntologies = true; 
     for (FieldConfig fieldConfig : config.getFieldConfigList()) {
-      CharFieldEnum fce = fieldConfig.getCharFieldEnum();
-      CharField cf = new CharField(fce);
+      // may not have char field enum!
+      CharField cf;
+      // this is where char field enums happen - scrap entirely????
+//       if (fieldConfig.hasCharFieldEnum()) {
+//         CharFieldEnum fce = fieldConfig.getCharFieldEnum();
+//         cf = new CharField(fce);
+//       }
+//       else {
+      cf = new CharField(fieldConfig.getLabel());
+//      }
 
       // ONTOLOGIES
       if (fieldConfig.hasOntologies()) {
@@ -110,6 +118,8 @@ public class OntologyDataAdapter {
     Ontology ontology = new Ontology(ontCfg.name);
     if (ontCfg.hasFilter()) // set filter before loading obo session
       ontology.setFilter(ontCfg.getFilter());
+    if (ontCfg.hasSlim())
+      ontology.setSlim(ontCfg.getSlim());
     loadOboSession(ontology,ontCfg.ontologyFile); // throws FileNotFoundEx
     return ontology;
   }

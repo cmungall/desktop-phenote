@@ -3,7 +3,6 @@
   <xs:element name="phenote-configuration">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="x:check-for-new-ontologies"/>
         <xs:element ref="x:log"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:dataadapter"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:field"/>
@@ -26,11 +25,6 @@
       </xs:attribute>
     </xs:complexType>
   </xs:element>
-  <xs:element name="check-for-new-ontologies">
-    <xs:complexType>
-      <xs:attribute name="intervalMinutes" use="required" type="xs:integer"/>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="log">
     <xs:complexType>
       <xs:attribute name="config-file" use="required"/>
@@ -43,15 +37,9 @@
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:ontology"/>
       </xs:sequence>
       <xs:attribute name="name" use="required">
-        <xs:simpleType>
-          <xs:restriction base="xs:token">
-            <xs:enumeration value="Pub"/>
-            <xs:enumeration value="Genotype"/>
-            <xs:enumeration value="Genetic Context"/>
-            <xs:enumeration value="Entity"/>
-            <xs:enumeration value="Quality"/>
-          </xs:restriction>
-        </xs:simpleType>
+        <xs:annotation>
+          <xs:documentation>attribute name { "Pub" | "Genotype" | "Genetic Context" | "Entity" | "Quality" },</xs:documentation>
+        </xs:annotation>
       </xs:attribute>
       <xs:attribute name="type" use="required">
         <xs:simpleType>
@@ -66,6 +54,8 @@
           <xs:documentation>file is for single ontology - rename ontology_file?  </xs:documentation>
         </xs:annotation>
       </xs:attribute>
+      <xs:attribute name="filter-out" use="required"/>
+      <xs:attribute name="slim" use="required"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="ontology">
@@ -77,6 +67,7 @@
         </xs:annotation>
       </xs:attribute>
       <xs:attribute name="filter-out" use="required"/>
+      <xs:attribute name="slim" use="required"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="postcomp">

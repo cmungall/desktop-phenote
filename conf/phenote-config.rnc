@@ -4,8 +4,6 @@ default namespace = "phenote/config/xml"
 start =
   element phenote-configuration {
     attribute version { xsd:float },
-    check-for-new-ontologies,
-    ontology-archive,
     log,
     dataadapter*,
     field*
@@ -32,12 +30,15 @@ log =
 
 field = 
   element field {
-    attribute name { "Pub" | "Genotype" | "Genetic Context" | "Entity" | "Quality" },
+    ##attribute name { "Pub" | "Genotype" | "Genetic Context" | "Entity" | "Quality" },
+    attribute name { text },
     ## whether field is free text or constrained by ontology - take out?
     ## this is actually unnecasary - if there is no file free text is assumed    
     attribute type { "free_text" | "ontology" },  
     ## file is for single ontology - rename ontology_file?  
     attribute file { text },
+    attribute filter-out { text },
+    attribute slim { text },
     postcomp?,
     ontology*
   } 
@@ -47,7 +48,8 @@ ontology =
     attribute name { text },
     ## obo file for ontology
     attribute file { text },
-    attribute filter-out { text }
+    attribute filter-out { text },
+    attribute slim { text }
   }
 
 postcomp =

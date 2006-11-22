@@ -14,7 +14,8 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.DocumentEvent;
 
 import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharFieldEnum;
+import phenote.datamodel.CharField;
+//import phenote.datamodel.CharFieldEnum; // phase out
 import phenote.edit.CompoundTransaction;
 import phenote.edit.EditManager;
 import phenote.gui.selection.SelectionManager;
@@ -44,6 +45,17 @@ class FreeTextField {
   String getText() { return textField.getText(); }
 
   private boolean updateGuiOnly() { return charFieldGui.updateGuiOnly(); }
+
+  protected void setValueFromChar(CharacterI chr) {
+    //String v = charField.getCharFieldEnum().getValue(chr).getName();
+    if (!chr.hasValue(getCharField()))
+      return;
+    String v = chr.getValue(getCharField()).getName();
+    setText(v);
+  }
+  
+  // subclass?
+  private CharField getCharField() { return charFieldGui.getCharField(); }
 
   /** key listener for free text fields for Cmd-V pasting for macs */
   private class TextKeyListener extends KeyAdapter {
@@ -80,7 +92,8 @@ class FreeTextField {
     if (!guiTextHasChanged) return; // gui hasnt been edited
     List<CharacterI> chars = getSelectedChars();
     String v = getText();
-    CompoundTransaction ct = new CompoundTransaction(chars,getCharFieldEnum(),v);
+    //CompoundTransaction ct = new CompoundTransaction(chars,getCharFieldEnum(),v);
+    CompoundTransaction ct = CompoundTransaction.makeUpdate(chars,getCharField(),v);
     EditManager.inst().updateModel(charFieldGui,ct); // cfg source
     guiTextHasChanged = false; // reset flag
   }
@@ -89,7 +102,7 @@ class FreeTextField {
     return SelectionManager.inst().getSelectedChars();
   }
   
-  private CharFieldEnum getCharFieldEnum() { return charFieldGui.getCharFieldEnum(); }
+  //private CharFieldEnum getCharFieldEnum() { return charFieldGui.getCharFieldEnum(); }
   
 
   /** This is where it is noted that the gui has been edited, only update  

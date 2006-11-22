@@ -19,28 +19,27 @@ public class UpdateTransaction implements TransactionI { // extends Transaction?
   private boolean isUndone = false;
   //private boolean undo?
 
-  public UpdateTransaction(CharacterI c, CharFieldEnum e, String newVal) {
-    newValue = new CharFieldValue(newVal,c,e);
-    // change this to get old from model - dont need to pass in
-    //oldValue = new CharFieldValue(old,c,e);
-    oldValue = e.getValue(c);
-//     character = c;
-//     charFieldEnum = e;2
-//     newValue = newVal;
-//     oldValue = old;
+//   public UpdateTransaction(CharacterI c, CharFieldEnum e, String newVal) {
+//     newValue = new CharFieldValue(newVal,c,e);
+//     oldValue = e.getValue(c);
+//   }
+
+  public UpdateTransaction(CharacterI c, CharField cf, String newVal) {
+    newValue = new CharFieldValue(newVal,c,cf);
+    oldValue = c.getValue(cf);
   }
-
-  // hmmmm - should this be a compos - yes
-  //public UpdateTransaction(List<CharacterI>chars,CharFieldEnum e,String newVal) {}
-
 
   // public UpdateTransaction(CharFieldValue new, CharFieldValue old) ?
 
-  /** actually maybe dont need to pas in old val - just query for it */
+  /** actually maybe dont need to pas in old val - just query for it phase out*/
   public UpdateTransaction(CharacterI c,CharFieldEnum e,OBOClass newVal) {
     newValue = new CharFieldValue(newVal,c,e);
     //oldValue = new CharFieldValue(old,c,e);
     oldValue = e.getValue(c);
+  }
+  public UpdateTransaction(CharacterI c,CharField cf,OBOClass newVal) {
+    newValue = new CharFieldValue(newVal,c,cf);
+    oldValue = c.getValue(cf);
   }
 
   public boolean isUpdate() { return true; }

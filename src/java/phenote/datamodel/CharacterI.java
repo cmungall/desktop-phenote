@@ -30,6 +30,12 @@ public interface CharacterI {
   public void setQuality(OBOClass p);
   public void setGeneticContext(OBOClass gc);
  
+
+  /** generic fields!!! */
+  public void setValue(CharField cf, CharFieldValue cfv); // ??
+  public CharFieldValue getValue(CharField cf);
+  public boolean hasValue(CharField cf);
+  
   public CharacterI cloneCharacter();
   public boolean equals(CharacterI c);
   public boolean hasNoContent();

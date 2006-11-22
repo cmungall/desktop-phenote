@@ -7,10 +7,12 @@ import javax.swing.table.AbstractTableModel;
 
 import org.apache.log4j.Logger;
 
+import phenote.datamodel.CharField;
 import phenote.datamodel.Character;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
 import phenote.datamodel.CharFieldEnum;
+import phenote.datamodel.OntologyManager;
 //import phenote.edit.CompoundTransaction;
 import phenote.edit.EditManager;
 import phenote.dataadapter.CharacterListManager;
@@ -133,17 +135,33 @@ class CharacterTableModel extends AbstractTableModel {
 
 
   public Object getValueAt(int row, int col) {
-    CharacterI inst = getCharacter(row);
-    if (inst == null) {
-      System.out.println("ERROR: character is null for row "+row+" in table");
+    CharacterI chr = getCharacter(row);
+    if (chr == null) {
+      log().error("character is null for row "+row+" in table");
       return null;
     }
-    if (config.getCharFieldEnum(col) == null) {
-      System.out.println("Error column "+col+" not configured proplerly in "+
+//    if (config.getCharFieldEnum(col) == null) {
+    // for now - eventually get from char not config
+//     if (!config.hasCharField(col)) {
+//       log().error("column "+col+" not configured properly in "+
+//                          "character table, cant retrieve value ");
+//       return null;
+//     }
+    //return config.getCharFieldEnum(col).getValue(chr).getName();
+    // CF = chr.getCharField(col); - yes! hard w hardwired optional model items
+    // return chr.getValue(col).getName(); // ???
+    try {
+      CharField cf = OntologyManager.inst().getCharField(col);
+      if (!chr.hasValue(cf))
+        return null;
+      return chr.getValue(cf).getName();
+    } 
+    catch (Exception e) {
+      log().error("column "+col+" not configured properly in "+
                          "character table, cant retrieve value ");
+      e.printStackTrace();
       return null;
     }
-    return config.getCharFieldEnum(col).getValue(inst).getName();
   }
 
   private CharFieldEnum getCharFieldEnum(int col) {

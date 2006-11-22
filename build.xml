@@ -375,9 +375,9 @@ where xsd files are (conf) -->
 
 <!-- todo do all jars not just phenote - take out -signed -->
 <!-- depends on sym link phenote-webstart and env var PHENOTE_VERSION -->
-    <target name="phenote-webstart-website" depends="sign-jars">
+    <target name="webstart-website" depends="sign-jars">
       <copy todir="phenote-webstart">
-         <fileset file="doc/phenote-website/*.html">
+         <fileset file="doc/phenote-website/*.html"/>
        </copy>
       <mkdir dir="phenote-webstart/${env.PHENOTE_VERSION}"/>
       <copy todir="phenote-webstart/${env.PHENOTE_VERSION}">

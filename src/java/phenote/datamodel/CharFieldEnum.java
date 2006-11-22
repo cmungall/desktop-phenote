@@ -59,13 +59,15 @@ public enum CharFieldEnum {
   public abstract CharFieldValue getValue(CharacterI c);
   
   // unclear if we need this??? need it in generic field config
-  public static CharFieldEnum getCharFieldEnum(String fieldString) {
+  public static CharFieldEnum getCharFieldEnum(String fieldString) throws Exception {
     for ( CharFieldEnum cfe : CharFieldEnum.values()) {
       if (cfe.name.equalsIgnoreCase(fieldString))
         return cfe;
     }
-    System.out.println("ERROR: No Char Field found for string "+fieldString);
-    return null;
+    //System.out.println("ERROR: No Char Field found for string "+fieldString);
+    //return null;
+    // char field enum not found - thats ok with new generic fields
+    throw new Exception("No Char Field found for string "+fieldString);
   }
   
 };

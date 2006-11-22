@@ -292,12 +292,17 @@ public class Config {
   }
 
   private void makeFieldConfig(Field field) {
-    String name = field.getName().toString();
-    //String file = field.getFile().getStringValue();
-    // has to be a valid value
-    CharFieldEnum cfe = CharFieldEnum.getCharFieldEnum(name);
-    //if (cfe == null) ???
-    FieldConfig fc = new FieldConfig(cfe,name);
+    String name = field.getName().getStringValue(); //toString();
+    // has to be a valid value - no longer true for generic free types
+    FieldConfig fc;
+    try {
+      CharFieldEnum cfe = CharFieldEnum.getCharFieldEnum(name);
+      //if (cfe == null) ???
+      fc = new FieldConfig(cfe,name);
+    }
+    catch (Exception e) { // no char field enum for name - new generic!
+      fc = new FieldConfig(name);
+    }
     
     // POST COMP, relationship ontol
     if (field.getPostcomp() != null) {
@@ -309,7 +314,12 @@ public class Config {
     // ONTOLOGIES if only one ontology file is an attribute... (convenience)
     if (field.getFile() != null) {
       String file = field.getFile().getStringValue();
-      fc.addOntologyConfig(makeOntologyConfig(name,file));
+      // downside of strogly types xml beans is filterOut has to be dealt with 
+      // separately for field & ontology - annoying - & all other attribs
+      String filterOut = 
+        field.getFilterOut()!=null ? field.getFilterOut().getStringValue() : null;
+      String slim = field.getSlim()!=null ? field.getSlim().getStringValue() : null;
+      fc.addOntologyConfig(makeOntologyConfig(name,file,filterOut,slim));
     }
     // otherwise its multiple ontologies listed in ontology elements (entity)
     else {
@@ -320,7 +330,8 @@ public class Config {
         String filterOut=null;
         if (o.getFilterOut() != null)
           filterOut = o.getFilterOut().getStringValue();
-        OntologyConfig oc = makeOntologyConfig(oName,oFile,filterOut);
+        String slim = o.getSlim()!=null ? o.getSlim().getStringValue() : null;
+        OntologyConfig oc = makeOntologyConfig(oName,oFile,filterOut,slim);
         fc.addOntologyConfig(oc);
       }
     }
@@ -335,6 +346,10 @@ public class Config {
   }
   private OntologyConfig makeOntologyConfig(String name, String file, String filterOut) {
     return new OntologyConfig(name,file,filterOut);
+  }
+  private OntologyConfig makeOntologyConfig(String name, String file, String filterOut,
+                                            String slim) {
+    return new OntologyConfig(name,file,filterOut,slim);
   }
 
 }

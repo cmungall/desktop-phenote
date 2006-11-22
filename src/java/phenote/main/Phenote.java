@@ -165,7 +165,7 @@ public class Phenote {
     frame = new JFrame("Phenote "+PhenoteVersion.versionString()); 
     frame.getContentPane().add(makeMainPanel());
     MenuManager.createMenuManager(frame);
-    frame.setPreferredSize(new Dimension(1100,550));
+    frame.setPreferredSize(new Dimension(1100,650));
     if (standalone) // if stand alone exit java on window close
       frame.addWindowListener(new WindowExit());
     frame.pack();

@@ -31,16 +31,19 @@ class TermCompList extends AbstractAutoCompList {
 
   /** char in table changed - setCurrentOboClass & text */
   protected void setValueFromChar(CharacterI chr) {
-    OBOClass selCharTerm =
-      getCharField().getCharFieldEnum().getValue(chr).getOboClass();
-    // if null then user has made a new char or selected a char with no term
-    if (selCharTerm == null) {
+    //System.out.println(chr+" val "+chr.getValue(getCharField()));
+    if (!chr.hasValue(getCharField())) {
       currentOboClass = null; // makes getCurTermRelName ""
       setText(""); // actually calls getCurTermRelNm which is ""
+      return;
     }
-    else {
-      setOboClass(selCharTerm); // doesnt allow null
-    }
+      
+    OBOClass selCharTerm = chr.getValue(getCharField()).getOboClass();
+      //getCharField().getCharFieldEnum().getValue(chr).getOboClass();
+    // if null then user has made a new char or selected a char with no term
+    //if (selCharTerm == null) { } else { ??? covered above??
+    setOboClass(selCharTerm); // doesnt allow null
+    //}
   }
 
   protected Vector getSearchItems(String input) {
@@ -62,12 +65,15 @@ class TermCompList extends AbstractAutoCompList {
 
   /** rename setTerm? */
   void setOboClass(OBOClass term) {
-    if (term == null) {
-      log().error("Attempt to set term to null");
-      return; // debug stack trace?
-    }
+    // actually i think null is valid for non-required fields - undo & blanking field
+    // right even if required field should still be able to undo back to init/null
+//     if (term == null) {
+//       log().error("Attempt to set term to null");
+//       return; // debug stack trace?
+//     }
     currentOboClass = term;
-    setText(term.getName(),false); // no completion
+    String val = term == null ? "" : term.getName();
+    setText(val,false); // no completion
   }
 
   /** Throws exception if there isnt a current obo class, if the user
@@ -109,9 +115,10 @@ class TermCompList extends AbstractAutoCompList {
     catch (Exception e) { return; } // shouldnt happen, error?
     if (getCharField() == null)  return; // shouldnt happen
     List<CharacterI> chars = getSelectedChars(); // from selectionManager
-    CharFieldEnum cfe = getCharField().getCharFieldEnum();
+    //CharFieldEnum cfe = getCharField().getCharFieldEnum();
     // isDifferentia boolean?
-    CompoundTransaction ct = new CompoundTransaction(chars,cfe,oboClass);
+    //CompoundTransaction ct = new CompoundTransaction(chars,cfe,oboClass);
+    CompoundTransaction ct = CompoundTransaction.makeUpdate(chars,getCharField(),oboClass);
     EditManager.inst().updateModel(this,ct);
   }
 
@@ -150,8 +157,8 @@ class TermCompList extends AbstractAutoCompList {
       Object source = e.getSource();
       // hate to cast but it is handy here... and it is in fact a JList
       if (!(source instanceof JList)) {
-        System.out.println("source of combo box mouse over event is not JList "+
-                           source.getClass());
+        log().error("source of combo box mouse over event is not JList "
+                    +source.getClass());
         return;
       }
       JList jList = (JList)source;

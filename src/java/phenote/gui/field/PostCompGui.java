@@ -64,7 +64,7 @@ class PostCompGui {
     // false - dont edit model, false - no post comp button
     genusField = new CharFieldGui(charField,compFieldPanel,"Genus",false,false);
 
-    // Relationship?? stripped down ontology?
+    // Relationship?? stripped down ontology? hmmmmmm...
     CharField relChar = new CharField(CharFieldEnum.RELATIONSHIP);
     // Ontology o = OntologyManager.getRelationshipOntology() ?? getRelCharField?
     Ontology o = charField.getPostCompRelOntol();
@@ -119,7 +119,8 @@ class PostCompGui {
     // there should be convenience method for this
     // multi select get 1st??
     CharacterI c = SelectionManager.inst().getFirstSelectedCharacter();
-    return charField.getCharFieldEnum().getValue(c).getOboClass();
+    //return charField.getCharFieldEnum().getValue(c).getOboClass();
+    return c.getValue(charField).getOboClass();
   }
 
   // util fn?
@@ -216,9 +217,9 @@ class PostCompGui {
 
   private void commitTerm(OBOClass postComp) {
     List<CharacterI> chrs = SelectionManager.inst().getSelectedChars();
-    CharFieldEnum cfe = charField.getCharFieldEnum();
-    //UpdateTransaction ut = new UpdateTransaction(c,cfe,postComp);
-    CompoundTransaction ct = new CompoundTransaction(chrs,cfe,postComp);
+    //CharFieldEnum cfe = charField.getCharFieldEnum();
+    //CompoundTransaction ct = new CompoundTransaction(chrs,cfe,postComp);
+    CompoundTransaction ct = CompoundTransaction.makeUpdate(chrs,charField,postComp);
     EditManager.inst().updateModel(this,ct);
   }
 

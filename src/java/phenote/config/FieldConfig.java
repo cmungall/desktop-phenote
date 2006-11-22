@@ -14,19 +14,28 @@ public class FieldConfig {
   private boolean isPostComp;
   private OntologyConfig postCompRelOntCfg;
 
-  FieldConfig(CharFieldEnum c,OntologyConfig o) {
-    charFieldEnum = c;
-    if (o == null) return; // shouldnt happen
-    label = o.getName();
-    addOntologyConfig(o);
-  }
+//   FieldConfig(CharFieldEnum c,OntologyConfig o) {
+//     charFieldEnum = c;
+//     if (o == null) return; // shouldnt happen
+//     label = o.getName();
+//     addOntologyConfig(o);
+//   }
 
   FieldConfig(CharFieldEnum c, String label) {
     charFieldEnum = c;
     this.label = label;
   }
 
+  /** No char field enum - its a generic not in hard wired datamodel! */
+  FieldConfig(String label) {
+    this.label = label;
+    //isGeneric = true;
+  }
+
+  /** with generic fields these are going to become pase' */
   public CharFieldEnum getCharFieldEnum() { return charFieldEnum; }
+
+  public boolean hasCharFieldEnum() { return charFieldEnum != null; }
 
   // --> getName?
   public String getLabel() { return label; }

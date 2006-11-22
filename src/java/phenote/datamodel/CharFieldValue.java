@@ -17,10 +17,12 @@ public class CharFieldValue {
   private String stringValue=null;
   private boolean isOboClass=true;
   private CharFieldEnum charFieldEnum;
+  private CharField charField;
   // private CharField???
   private CharacterI character;
   //private boolean isDifferentia; // ??
 
+  // phase out
   public CharFieldValue(String s,CharacterI c, CharFieldEnum e) {
     stringValue = s;
     isOboClass = false;
@@ -28,11 +30,30 @@ public class CharFieldValue {
     charFieldEnum = e;
   }
 
+  // for generic field - CharField or String???
+  public CharFieldValue(String value,CharacterI c,CharField cf) {
+    //System.out.println("CFV const "+value);
+    this(c,cf);
+    stringValue = value;
+    isOboClass = false;
+  }
+
+  // phase out
   public CharFieldValue(OBOClass o,CharacterI c,CharFieldEnum e) {
     oboClassValue = o;
     isOboClass = true;
     character = c;
     charFieldEnum = e;
+  }
+  public CharFieldValue(OBOClass o,CharacterI c,CharField cf) {
+    this(c,cf);
+    oboClassValue = o;
+    isOboClass = true;
+  }
+
+  private CharFieldValue(CharacterI c,CharField cf) {
+    character = c;
+    charField = cf;
   }
 
   // hmmmmm.... needed if post comp done inframe
@@ -40,6 +61,13 @@ public class CharFieldValue {
 //     this(o,c,e);
 //     this.isDifferentia = isDifferentia;
 //   }
+
+  static CharFieldValue emptyValue(CharacterI c,CharField cf) {
+    if (cf.hasOntologies())
+      return new CharFieldValue((OBOClass)null,c,cf);
+    else
+      return new CharFieldValue((String)null,c,cf); // ""?
+  }
 
   // maybe this should be called getString??? why getName???
   public String getName() { 
@@ -53,11 +81,17 @@ public class CharFieldValue {
   public OBOClass getOboClass() { return oboClassValue; }
 
   public void editModel() {
-    if (charFieldEnum == null)
-      System.out.println("ERROR no datamodel associated with configuration, cant set"+
-                         " value");
-    else
+//     if (charFieldEnum == null)
+//       System.out.println("ERROR no datamodel associated with configuration, cant set"+
+//                          " value");
+    //else
+    if (charFieldEnum != null) { // pase - take out
       charFieldEnum.setValue(character,this);
+    }
+    else {
+      //System.out.println("CFV editMod "+getName());
+      character.setValue(charField,this);
+    }
   }
 
   public CharFieldEnum getCharFieldEnum() { return charFieldEnum; }

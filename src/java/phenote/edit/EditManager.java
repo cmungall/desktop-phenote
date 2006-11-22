@@ -56,17 +56,17 @@ public class EditManager {
     return transactionList.get(transactionList.size()-1);
   }
 
-  public void updateModel(Object source, UpdateTransaction ut) {
-    addTransaction(ut);
-    updateModelUpdateTrans(source,ut);
-  }
+//   public void updateModel(Object source, UpdateTransaction ut) {
+//     addTransaction(ut);
+//     updateModelUpdateTrans(source,ut);
+//   }
 
-  /** fires change event, doesnt add to transaction list */
-  private void updateModelUpdateTrans(Object src, UpdateTransaction ut) {
-    ut.editModel();
-    CharChangeEvent e = new CharChangeEvent(src,ut);
-    fireChangeEvent(e);
-  }
+//   /** fires change event, doesnt add to transaction list */
+//   private void updateModelUpdateTrans(Object src, UpdateTransaction ut) {
+//     ut.editModel();
+//     CharChangeEvent e = new CharChangeEvent(src,ut);
+//     fireChangeEvent(e);
+//   }
 
   public void updateModel(Object src, CompoundTransaction ct) {
     //for (TransactionI t : ct.getTransactions())
