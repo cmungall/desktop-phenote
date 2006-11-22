@@ -403,7 +403,7 @@ where xsd files are (conf) -->
       </copy>
     </target>
 
-    <target name="webstart-just-phenote-jar">
+    <target name="webstart-just-phenote-jar" depends="build-all,jar">
        <signjar jar="${lib}/phenote.jar" keystore="plumpkey" alias="signFiles"
                 storepass="plumper" keypass="plumper"/>
        <copy file="${lib}/phenote.jar"
