@@ -67,8 +67,8 @@ public class CharacterTablePanel extends JPanel {
 
   private void init() {
     setLayout(new GridLayout(2,1)); // row,col
-    setPreferredSize(new Dimension(400,800));
-    setMinimumSize(new Dimension(400,500));    
+    setPreferredSize(new Dimension(1800,800));
+    setMinimumSize(new Dimension(1400,630));    
 
     characterTableModel = new CharacterTableModel();
     charJTable = new JTable(characterTableModel);

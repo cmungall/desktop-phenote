@@ -73,11 +73,11 @@ public abstract class AbstractAutoCompList extends JComboBox {
     // this will probably throw errors if non metal look & feel is used
     setUI(new MetalListComboUI());
     setEditable(true);
-    setPreferredSize(new Dimension(390,22));
-    setMaximumSize(new Dimension(390,22));
+    setPreferredSize(new Dimension(390,20));
+    setMaximumSize(new Dimension(390,20));
     // this is super critical - fixes bug where layout goes to hell if string are long
     // in completion - dont ask me why????
-    setMinimumSize(new Dimension(390,22));
+    setMinimumSize(new Dimension(390,20));
     AutoTextFieldEditor autoTextFieldEditor = new AutoTextFieldEditor();
     this.setEditor(autoTextFieldEditor);
     // dont know why by setting fonts this seem to get worse not better in terms of

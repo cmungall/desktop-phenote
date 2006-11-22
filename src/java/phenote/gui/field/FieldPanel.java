@@ -3,6 +3,7 @@ package phenote.gui.field;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ import phenote.gui.GridBagUtil;
  * TermPanel holds all the fields for the terms - Genotype, Entity/Anatomy, QUALITY.
  * Can be populated by hand (Genotype), or  selection of instance in completion list. 
  rename FieldPanel or CharFieldPanel?
- also has SearchParamPanel.
+ also has SearchParamPanel(?).
  */
 
 public class FieldPanel extends JPanel {
@@ -46,7 +47,11 @@ public class FieldPanel extends JPanel {
   }
   // false for post comp panel
   public FieldPanel(boolean doAllOntologies) {
+    //this.setPreferredSize(new Dimension(800,750));
+    // should figure depth from # of fields really
+    this.setMinimumSize(new Dimension(690,490));
     fieldPanel = new JPanel(new GridBagLayout());
+    // panel inside of panel - i think is a leftover no reason now
     add(fieldPanel); // default flow layout?
     if (doAllOntologies)
       initAllOntologies();
@@ -128,7 +133,7 @@ public class FieldPanel extends JPanel {
   private GridBagConstraints makeFieldConstraint() {
     int x = 2;//ontologyChooserPresent ? 2 : 1;
     int width = 1;//ontologyChooserPresent ? 1 : 2; // ???
-    return GridBagUtil.makeWidthConstraint(x,gridbagRow++,1,3,width);
+    return GridBagUtil.makeWidthConstraint(x,gridbagRow++,1,2,width);
   }
 
   // put button at end of regular row? or beginning of pc row?

@@ -165,7 +165,7 @@ public class Phenote {
     frame = new JFrame("Phenote "+PhenoteVersion.versionString()); 
     frame.getContentPane().add(makeMainPanel());
     MenuManager.createMenuManager(frame);
-    frame.setPreferredSize(new Dimension(1100,650));
+    frame.setPreferredSize(new Dimension(1100,700));
     if (standalone) // if stand alone exit java on window close
       frame.addWindowListener(new WindowExit());
     frame.pack();
@@ -186,26 +186,31 @@ public class Phenote {
   private JPanel makeMainPanel() {
     JPanel mainPanel = new JPanel(new GridBagLayout()); // ??
     
-    JPanel termAndTablePanel = new JPanel();
-    BoxLayout bl = new BoxLayout(termAndTablePanel,BoxLayout.Y_AXIS);
-    termAndTablePanel.setLayout(bl);
+    //JPanel termAndTablePanel = new JPanel();
+    JPanel upperPanel = new JPanel();
+    //BoxLayout bl = new BoxLayout(termAndTablePanel,BoxLayout.Y_AXIS);
+    BoxLayout bl = new BoxLayout(upperPanel,BoxLayout.X_AXIS);
+    upperPanel.setLayout(bl);
 
-    //termAndInstancePanel.add(makeTermPanel());
     fieldPanel = new FieldPanel();
-    termAndTablePanel.add(fieldPanel);
+    upperPanel.add(fieldPanel);
 
-    characterTablePanel = new CharacterTablePanel(); //fieldPanel);
-    // eventually switch to event listener - no explicit connection...
-    //fieldPanel.setCharacterTablePanel(characterTablePanel);
-    termAndTablePanel.add(characterTablePanel);
 
-    GridBagConstraints gbc = GridBagUtil.makeConstraint(0,0,5,5);
-    mainPanel.add(termAndTablePanel,gbc);
 
     termInfo = new TermInfo(); //fieldPanel);
-    ++gbc.gridx;  // ??
-    gbc.anchor = GridBagConstraints.NORTHWEST;
-    mainPanel.add(termInfo.getComponent(),gbc);
+    upperPanel.add(termInfo.getComponent());
+    //++gbc.gridx;  // ??
+    //gbc.anchor = GridBagConstraints.NORTHWEST; // ??
+    //mainPanel.add(termInfo.getComponent(),gbc);
+    
+
+    GridBagConstraints gbc = GridBagUtil.makeConstraint(0,0,5,5);
+    mainPanel.add(upperPanel,gbc);
+
+    characterTablePanel = new CharacterTablePanel();
+    //termAndTablePanel.add(characterTablePanel);
+    ++gbc.gridy; // ?
+    mainPanel.add(characterTablePanel,gbc);
 
     return mainPanel;
   }
