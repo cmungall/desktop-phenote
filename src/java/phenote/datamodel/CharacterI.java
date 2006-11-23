@@ -34,7 +34,11 @@ public interface CharacterI {
   /** generic fields!!! */
   public void setValue(CharField cf, CharFieldValue cfv); // ??
   public CharFieldValue getValue(CharField cf);
+  // should make an exception for this
+  public String getValueString(String fieldName) throws Exception; // yuck
+  public OBOClass getTerm(String field) throws Exception;
   public boolean hasValue(CharField cf);
+  public boolean hasValue(String fieldName) throws Exception;
   
   public CharacterI cloneCharacter();
   public boolean equals(CharacterI c);

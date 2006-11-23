@@ -46,22 +46,31 @@ public class PhenoSyntaxChar {
     }
     StringBuffer sb = new StringBuffer();
 
-    if (character.hasPub())
-      sb.append("PUB=").append(character.getPub());
-    // Genotype - not strictly part of pheno syntax but lets face it we need it
-    // i would say its an omission from syntax
-    sb.append(" GT=").append(character.getGenotype());
-    if (character.hasGeneticContext())
-      sb.append(" GC=").append(makeValue(character.getGeneticContext()));
+    try {
 
-    if (character.getEntity() == null)
-      throw new BadCharException("Error: character has no entity, ignoring");
-    sb.append(" E=").append(makeValue(character.getEntity()));
-
-    if (character.getQuality() == null)
-      throw new BadCharException("Error: character has no quality, ignoring");
-    sb.append(" Q=").append(makeValue(character.getQuality()));
-
+      if (character.hasValue("Pub")) // hasPub
+        sb.append("PUB=").append(character.getValueString("Pub")); //Pub());
+      // Genotype - not strictly part of pheno syntax but lets face it we need it
+      // i would say its an omission from syntax
+      //sb.append(" GT=").append(character.getGenotype());
+      sb.append(" GT=").append(character.getValueString("Genotype"));
+      if (character.hasValue("Genetic Context"))
+        sb.append(" GC=").append(makeValue(character.getTerm("Genetic Context")));
+      
+      if (!character.hasValue("Entity"))
+        throw new BadCharException("Error: character has no entity, ignoring");
+      //sb.append(" E=").append(makeValue(character.getEntity()));
+      sb.append(" E=").append(makeValue(character.getTerm("Entity")));
+      
+      //if (character.getQuality() == null)
+      if (!character.hasValue("Quality"))
+        throw new BadCharException("Error: character has no quality, ignoring");
+      sb.append(" Q=").append(makeValue(character.getTerm("Quality")));
+      
+    }
+    catch (Exception e) {
+      throw new BadCharException(e.getMessage());
+    }
     return sb.toString();
   }
 
@@ -77,20 +86,20 @@ public class PhenoSyntaxChar {
     return term.getID() + " /*" + term.getName() + "*/";
   }
 
-  /** Merges id prefix and name, so for id GO:1234 with name "growth" returns
-      "GO:growth", which is readable and computable & syn acceptable - pase - doing ids*/
-  private String idPrefixAndName(OBOClass term) {
-    return getIdPrefix(term)+term.getName();
-  }
+//   /** Merges id prefix and name, so for id GO:1234 with name "growth" returns
+//       "GO:growth", which is readable and computable & syn acceptable - pase - doing ids*/
+//   private String idPrefixAndName(OBOClass term) {
+//     return getIdPrefix(term)+term.getName();
+//   }
     
 
-  /** for GO:12345 returns GO: - with colon! - pase - doing ids */
-  private String getIdPrefix(OBOClass term) {
-    if (term == null) return ""; // shouldnt happen
-    String id = term.getID();
-    int colonIndex = id.indexOf(":");
-    return id.substring(0,colonIndex+1); // +1 retain colon
-  }
+//   /** for GO:12345 returns GO: - with colon! - pase - doing ids */
+//   private String getIdPrefix(OBOClass term) {
+//     if (term == null) return ""; // shouldnt happen
+//     String id = term.getID();
+//     int colonIndex = id.indexOf(":");
+//     return id.substring(0,colonIndex+1); // +1 retain colon
+//   }
 
 
 

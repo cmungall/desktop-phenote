@@ -42,11 +42,35 @@ public class Character implements CharacterI, Cloneable {
 //       cfv = cf.getCharFieldEnum().getValue(this);
     return cfv;
   }
+
+  public String getValueString(String field) throws Exception {
+    CharField cf = getCharFieldForName(field); // throws ex
+    if (!hasValue(cf)) return null; // ?? exception?
+    return getValue(cf).getName();
+  }
+
+  public OBOClass getTerm(String field) throws Exception {
+    CharField cf = getCharFieldForName(field); // throws ex
+    if (!hasValue(cf)) return null; // ?? exception?
+    return getValue(cf).getOboClass();
+  }
+
   // should this be isNull?
   public boolean hasValue(CharField cf) {
     // empty string is a valid value for non-required field - or should there
     // be some sort of somthing to indicate "empty" value?
     return getValue(cf) != null; // && !getValue(cf).equals("");
+  }
+  public boolean hasValue(String fieldName) throws Exception {
+    return hasValue(getCharFieldForName(fieldName));
+  }
+
+  private CharField getCharFieldForName(String fieldName) throws Exception {
+    for (CharField cf : charFieldToValue.keySet()) {
+      if (cf.getName().equalsIgnoreCase(fieldName))
+        return cf;
+    }
+    throw new Exception("No field for "+fieldName);
   }
 
   public String getPub() { return pub; }
