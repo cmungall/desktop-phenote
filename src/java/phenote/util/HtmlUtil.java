@@ -159,7 +159,7 @@ public class HtmlUtil {
     if (isStandAlone)
       return "href='"+makePhenoIdLink(id)+"'";
     else // this needs some reworking - causes page refresh and goes to top
-      return "href=# "+onClickJavaScript(id,name);
+      return "href=" + dq("javascript:;") + onClickJavaScript(id,name);
   }
 
   /**<A href='#' onClick='getTermInfo("id","name","ontology")'> - added in name for
