@@ -129,7 +129,7 @@ public class PhenoteBean {
   }
 
   private void removeStages(List<Link> parents) {
-    for()
+    
   }
 
   public List<Link> getChildren(){
