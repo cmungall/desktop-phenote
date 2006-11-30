@@ -22,6 +22,7 @@
     <property name="web-html" value="${env.PHENOTE_WEB_HTML}"/>
     <property name="web-jars" value="${env.PHENOTE_WEB_JAR_DIR}"/>
     <property name="web.xml-dir" value="${env.PHENOTE_WEB_XML_DIR}"/>
+    <property name="data_transfer" value="src/web/WEB-INF/data_transfer"/>
 
     <property name="lib" value="jars"/>
     <property name="jarfile" value="jars/phenote.jar"/>
@@ -195,6 +196,13 @@ them into  the classfiles directory. excludes="test/**"  -->
         </jar>
     </target>
 
+    <target name="jar-web" depends="compile">
+        <jar destfile="${jarfile}">
+            <fileset dir="${classfiles}"/>
+            <fileset file="${conf}/*.cfg"/>
+        </jar>
+    </target>
+
     <!-- file=${obo}/*.obo -->
 
 
@@ -302,8 +310,14 @@ them into  the classfiles directory. excludes="test/**"  -->
         </copy>
     </target>
 
-    <target name="war-init-dir" depends="jar, war-clean">
+    <target name="war-init-dir" depends="jar-web, war-clean">
         <mkdir dir="war-deployment"/>
+        <delete dir="${data_transfer}" />
+        <mkdir dir="${data_transfer}" />
+      <copy todir="${data_transfer}">
+          <fileset file="${obo}/**" />
+      </copy>
+
         <war destfile="war-deployment/phenote.war" webxml="src/web/WEB-INF/web.xml">
             <fileset dir="src/web">
                 <exclude name="perl/*" />
@@ -312,8 +326,8 @@ them into  the classfiles directory. excludes="test/**"  -->
                 <exclude name="junit-4.0.jar" />
                 <exclude name="BrowserLauncher2-10rc4.jar" />
                 <exclude name="tomcat-servlet.jar" />
+              <exclude name="jsp-api.jar" />
             </lib>
-            <classes dir="${obo}" />
             <classes dir="${conf}" />
         </war>
     </target>

@@ -16,6 +16,11 @@ public class CompletionTerm {
   private boolean exactMatch = false;
   private boolean startsWith = false;
   private boolean contains = false; // do we need this?
+  // These attributes are needed for the web ajax call
+  // because we do not keep a handle to the oboClass for the termInfo.
+  private String ontol;
+  // Need to track the active gui field for use term in termInfo
+  private String field;
 
   CompletionTerm(OBOClass term) {
     this.term = term;
@@ -118,4 +123,19 @@ public class CompletionTerm {
     return false; // all above failed - no match
   }
 
+  public String getOntol() {
+    return ontol;
+  }
+
+  public void setOntol(String ontol) {
+    this.ontol = ontol;
+  }
+
+  public String getField() {
+    return field;
+  }
+
+  public void setField(String field) {
+    this.field = field;
+  }
 }

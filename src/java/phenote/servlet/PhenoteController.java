@@ -18,6 +18,7 @@ import phenote.datamodel.OntologyManager;
 import phenote.util.HtmlUtil;
 
 import java.util.Vector;
+import java.util.List;
 
 /**
  * The main controller that receives Ajax ontology requests.
@@ -42,24 +43,46 @@ public class PhenoteController extends AbstractCommandController {
       LOG.info("param entityInput: " + userInput);
       LOG.info("Field entity: " + field);
 
-      form.setAjaxList(getCompletionList(userInput, ontologyName, field));
-      LOG.debug(form.getAjaxList());
+      form.setCompletionTermList(getCompletionList(userInput, ontologyName, field));
+      LOG.debug(form.getAjaxReturnList());
     } else if (form.isTermInfoRequest()) {
       String termId = form.getTermId();
       LOG.debug("doGet term info param: " + termId + " ont " + ontologyName);
       try {
         Ontology ont = getOntology(ontologyName);
+        // ToDo: Put oboClass in the web session, then we do not need to pass in the ontology name in
+        // the html ajax call
         OBOClass oboClass = ont.getOboClass(termId);
-        String termInfo = HtmlUtil.termInfo(oboClass);
-        LOG.debug("term info " + termInfo.substring(0,60));
-        String termInfoObo = HtmlUtil.termInfo(oboClass, ontologyName, field);
-        form.setAjaxList(termInfoObo);
+        form.setTerm(oboClass);
+        return new ModelAndView("term_info", "formBean", form);
       }
       catch (OntologyException e) {
         LOG.error(e.getMessage(), e);
       }
     }
-    return new ModelAndView("ajax", "formBean", form);
+    return new ModelAndView("term_completion", "formBean", form);
+  }
+
+  private List<CompletionTerm> getCompletionList(String userInput, String ontologyName, String field) {
+    List<CompletionTerm> termList = null;
+    try {
+      termList = getCompListSearcher(ontologyName).getStringMatchTermList(userInput);
+    } catch (OntologyException e) {
+      // Todo: Add this error as an error completion list
+      LOG.error(e.getMessage(), e);
+    }
+    includeAdditionalAttributes(termList, ontologyName, field);
+    return termList;
+  }
+
+  private void includeAdditionalAttributes(List<CompletionTerm> termList, String ontologyName, String field) {
+    if (termList == null)
+      return;
+
+    for (CompletionTerm term : termList) {
+      term.setField(field);
+      term.setOntol(ontologyName);
+    }
   }
 
 
@@ -76,7 +99,7 @@ public class PhenoteController extends AbstractCommandController {
    * @param ontologyName
    * @param field
    */
-  private String getCompletionList(String userInput, String ontologyName, String field) {
+  private String getHtmlCompletionList(String userInput, String ontologyName, String field) {
     StringBuffer sb = new StringBuffer("<ul>");
     try {
       Vector<CompletionTerm> v = getCompListSearcher(ontologyName).getStringMatchTerms(userInput);
@@ -95,16 +118,16 @@ public class PhenoteController extends AbstractCommandController {
     return sb.toString();
   }
 
-  private String makeCompListHtmlItem(CompletionTerm term, String ontol,String field) {
+  private String makeCompListHtmlItem(CompletionTerm term, String ontol, String field) {
     String id = term.getID();
     String display = term.getCompListDisplayString();
     String name = term.getName();
     // pass in id, name & ontology - name for setting field on UseTerm
-    StringBuffer info = dq(fn("getTermInfo",new String[]{id,name,ontol,field}));
-    StringBuffer select = dq(fn("selectTerm",new String[]{name,field}));
+    StringBuffer info = dq(fn("getTermInfo", new String[]{id, name, ontol, field}));
+    StringBuffer select = dq(fn("selectTerm", new String[]{name, field}));
     //String info = "\"getTermInfo("+id +","+q(name)+","+ q(ontol) + ")\"";
     return "<li onmouseover=" + info + " id=" + q(id) + " termTest='dude' " +
-      " onclick=" + select + ">" + display + "</li>\n";
+            " onclick=" + select + ">" + display + "</li>\n";
   }
 
   private CompListSearcher getCompListSearcher(String ontologyName) throws OntologyException {

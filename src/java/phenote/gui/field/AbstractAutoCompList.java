@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Vector;
 import javax.swing.ComboBoxEditor;
@@ -24,19 +23,11 @@ import javax.swing.plaf.metal.MetalComboBoxUI;
 
 import org.apache.log4j.Logger;
 
-import org.geneontology.oboedit.datamodel.OBOClass;
-import org.geneontology.oboedit.datamodel.OBOProperty;
-
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharacterI;
 //import phenote.datamodel.CharFieldEnum;
 //import phenote.datamodel.CharacterI;
 //import phenote.datamodel.Ontology;
-import phenote.edit.EditManager;
-import phenote.edit.UpdateTransaction;
-import phenote.gui.selection.SelectionManager;
-import phenote.gui.selection.UseTermEvent;
-import phenote.gui.selection.UseTermListener;
 
 /** The jcombobox that does auto completion - i had to do some tricks(hacks) to get it
     working with mouse over which doesnt come naturally to jcombobox */
@@ -107,7 +98,7 @@ public abstract class AbstractAutoCompList extends JComboBox {
   //void setSearchParams(SearchParamsI sp) { searchParams = sp; }
 
   void setCharField(CharField charField) { this.charField = charField; }
-  
+
   protected CharField getCharField() { return charField; }
 
   protected boolean editModelEnabled() { return editModel; }
@@ -194,13 +185,13 @@ public abstract class AbstractAutoCompList extends JComboBox {
       getDocument().addDocumentListener(dl);
     }
   }
-  
+
 
   /** AutoTextField inner class - ignores set text when in
    * changingCompletionList mode - this is the text field for the
    combo box */
   private class AutoTextField extends JTextField {
-    
+
     private AutoTextField() {
       super(25); // width
     }
@@ -210,7 +201,7 @@ public abstract class AbstractAutoCompList extends JComboBox {
         thus wont get completion on user selection, leaving popup hanging */
     public void setText(String text) {
       if (changingCompletionList)
-	return;
+  return;
       // this makes setText(text,true) turn to false (called from TextPhenote)
       // but this is needed from mouse release on selection set text
       // is called and will cause completion list to come up after sel
@@ -218,7 +209,7 @@ public abstract class AbstractAutoCompList extends JComboBox {
       //if (charField!=null)
       //log().debug(charField.getName()+" AutoTextField.setText ["+text+"]"+getCurrentTermRelName());
       //new Throwable().printStackTrace();
-      doCompletion = false; 
+      doCompletion = false;
       //this is problematic for syns & such where string is diff than term name
       // JComboBox sets this text AFTER got event and set to name
       //super.setText(text); 
@@ -232,14 +223,14 @@ public abstract class AbstractAutoCompList extends JComboBox {
         super.setText(getCurrentTermRelName()); // set to term name with syn select
       doCompletion = true;
     }
-    
+
     protected void processKeyEvent(KeyEvent e) {
       //boolean fiddle = KeyboardState.shouldProcess(e);
       super.processKeyEvent(e);
     }
   }
 
-    
+
   /** Return the name of the current term or relation - was gonna call this
       item name but that gets confused with "items" in combo box */
   protected abstract String getCurrentTermRelName();
@@ -328,13 +319,13 @@ public abstract class AbstractAutoCompList extends JComboBox {
 //       previousInput = newInput;
 //     return inputChanged;
 //   }
-  
+
   /** call Ontology to get a Vector of OBOClass's that contain "in"
       in ontology */
 //   private Vector<OBOClass> getTermsOld(String in) {
 //     // or CompletionList.getCompletionList(getOntology()) ??
 //     //CompletionList cl = CompletionList.getCompletionList();
-//     //return cl.getCompletionTerms(getOntology(),in,searchParams);
+//     //return cl.getCompletionTermList(getOntology(),in,searchParams);
 //     return ontology.getSearchTerms(in,searchParams); // vector of OBOClass's
 //   }
 
@@ -389,12 +380,12 @@ public abstract class AbstractAutoCompList extends JComboBox {
 //       super.layoutComboBox(parent,manager);
 //     }    
   }
-  
-  
+
+
 
    /** Listens for actions from combo boxes and edits model/character 
    * actions come from mouse select of term as well as return & tab  */
-  private class ComboBoxActionListener implements ActionListener {
+   private class ComboBoxActionListener implements ActionListener {
     //private OBOClass previousOboClass=null;
 
     private ComboBoxActionListener() {}
@@ -453,7 +444,7 @@ public abstract class AbstractAutoCompList extends JComboBox {
     // it appears to be ok to supress this entirely
     super.configureEditor(anEditor,anItem); // ??? supress
   }
-  
+
 
   protected abstract void editModel();
 
@@ -466,7 +457,7 @@ public abstract class AbstractAutoCompList extends JComboBox {
     autoTextField.processKeyEvent(new KeyEvent(this,KeyEvent.KEY_PRESSED,0,0,KeyEvent.VK_L,'l'));
     autoTextField.processKeyEvent(new KeyEvent(this,KeyEvent.KEY_TYPED,0,0,KeyEvent.VK_UNDEFINED,'l'));
   }
-  
+
   public void simulateKeyStroke(int keyCode, char c) {
     KeyEvent k = new KeyEvent(this,KeyEvent.KEY_PRESSED,0,0,keyCode,c);
     autoTextField.processKeyEvent(k);

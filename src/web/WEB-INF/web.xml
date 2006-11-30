@@ -8,7 +8,7 @@
     <servlet-class>phenote.servlet.PhenoteServlet</servlet-class>
     <init-param>
        <param-name>configuration-file</param-name>
-       <param-value>/initial-zfin.cfg</param-value>
+       <param-value>/zfin-web.cfg</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>

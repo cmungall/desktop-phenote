@@ -1,17 +1,11 @@
 package phenote.gui.field;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.text.Document;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -21,9 +15,7 @@ import javax.swing.JPanel;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.CharacterI;
-import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyManager;
-import phenote.config.FieldConfig;
 import phenote.gui.GridBagUtil;
 
 /**
@@ -374,7 +366,7 @@ public class FieldPanel extends JPanel {
 //     private void doCompletion() {
 //       String input = (String)comboBox.getEditor().getItem();
 //       CompletionList cl = CompletionList.getCompletionList();
-//       Vector v = cl.getCompletionTerms(ontology,input);
+//       Vector v = cl.getCompletionTermList(ontology,input);
 //       System.out.println(input + v);
 //       comboBox.setModel(new DefaultComboBoxModel(v));
 //     }

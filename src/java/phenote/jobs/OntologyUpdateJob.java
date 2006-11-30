@@ -38,9 +38,11 @@ public class OntologyUpdateJob extends QuartzJobBean {
         OntologyDataAdapter ontReader = OntologyDataAdapter.getInstance();
         ontReader.reloadOntology(ontology);
 
+/*
         File archiveFile = FileUtil.archiveFile(newFile, PhenoteWebConfiguration.getInstance().getWebRoot(), archiveDirectory);
         long purgePeriodInMilliseconds = (long) (purgePeriodInDays * MILLISECONDS_PER_DAY );
         FileUtil.purgeArchiveDirectory(archiveFile.getParentFile(), purgePeriodInMilliseconds);
+*/
       }
     } catch (Exception e) {
       LOG.error(e.getMessage(), e);

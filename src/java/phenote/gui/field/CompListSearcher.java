@@ -46,6 +46,30 @@ public class CompListSearcher {
       should input be just part of search params? 
       its a vector as thats what ComboBox requires 
       put in separate class? */
+  public List<CompletionTerm> getStringMatchTermList(String input) {
+   List<CompletionTerm> searchTerms = new ArrayList<CompletionTerm>();
+    if (input == null || input.equals(""))
+      return searchTerms;
+
+    // gets term set for currently selected ontology
+    //Set ontologyTermList = getCurrentOntologyTermSet();
+    List<OBOClass> ontologyTermList = ontology.getSortedTerms(); // non obsolete
+    searchTerms = getSearchTermList(input,ontologyTermList);
+
+    // if obsoletes set then add them in addition to regulars
+    if (searchParams.searchObsoletes()) {
+      ontologyTermList = ontology.getSortedObsoleteTerms();
+      List obsoletes = getSearchTermList(input,ontologyTermList);
+      searchTerms.addAll(obsoletes);
+    }
+    return searchTerms;
+  }
+
+  /** Returns a Vector of OBOClass from ontology that contain input string
+      constrained by compParams. compParams specifies syns,terms,defs,& obs
+      should input be just part of search params?
+      its a vector as thats what ComboBox requires
+      put in separate class? */
   public Vector<CompletionTerm> getStringMatchTerms(String input) {
    Vector<CompletionTerm> searchTerms = new Vector<CompletionTerm>();
     if (input == null || input.equals(""))
@@ -110,6 +134,25 @@ public class CompListSearcher {
     }
     return searchTermList.getVector();
   }
+
+  /** helper fn for getSearchTerms(String,SearhParamsI) */
+  private List<CompletionTerm> getSearchTermList(String input,
+                                                List<OBOClass> ontologyTermList) {
+    SearchTermList searchTermList = new SearchTermList();
+    if (ontologyTermList == null)
+      return searchTermList.getList();
+
+    for (OBOClass oboClass : ontologyTermList) {
+
+      CompletionTerm ct = new CompletionTerm(oboClass);
+      if (ct.matches(input, searchParams)) {
+        searchTermList.addTerm(ct);
+      }
+
+    }
+    return searchTermList.getList();
+  }
+
   /** User input is already lower cased, this potentially adds oboClass to
    * searchTerms if input & compareTerm match. Puts it first if exact. 
    * for term names comp = obo, for syns comp is the syn. 
@@ -205,6 +248,18 @@ public class CompListSearcher {
     private Vector<CompletionTerm> getVector() { 
       //startsWithTerms.addAll(containTerms); return startsWithTerms; 
       Vector<CompletionTerm> sortedTerms = new Vector<CompletionTerm>();
+      sortedTerms.addAll(startsWithTerms);
+      sortedTerms.addAll(containTerms);
+      sortedTerms.addAll(startsWithSyns);
+      sortedTerms.addAll(containSyns);
+      sortedTerms.addAll(definitions);
+      sortedTerms.addAll(obsoletes);
+      return sortedTerms;
+    }
+
+    private List<CompletionTerm> getList() {
+      //startsWithTerms.addAll(containTerms); return startsWithTerms;
+      List<CompletionTerm> sortedTerms = new ArrayList<CompletionTerm>();
       sortedTerms.addAll(startsWithTerms);
       sortedTerms.addAll(containTerms);
       sortedTerms.addAll(startsWithSyns);

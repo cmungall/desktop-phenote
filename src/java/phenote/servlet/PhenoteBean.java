@@ -1,6 +1,14 @@
 package phenote.servlet;
 
 import org.apache.commons.lang.StringUtils;
+import org.geneontology.oboedit.datamodel.OBOClass;
+import org.geneontology.oboedit.datamodel.Link;
+import phenote.gui.field.CompletionTerm;
+import phenote.util.TermLinkComparator;
+
+import java.util.List;
+import java.util.Collections;
+import java.util.ArrayList;
 
 /**
  * This is the main form bean that contains all request parameters.
@@ -16,7 +24,9 @@ public class PhenoteBean {
   private String termId;
   private String field;
 
-  private String ajaxList;
+  private String ajaxReturn;
+  private List<CompletionTerm> completionTermList;
+  private OBOClass term;
 
   public boolean isTermCompletionRequest() {
     if (!StringUtils.isEmpty(userInput))
@@ -82,12 +92,12 @@ public class PhenoteBean {
     this.field = field;
   }
 
-  public String getAjaxList() {
-    return ajaxList;
+  public String getAjaxReturnList() {
+    return ajaxReturn;
   }
 
-  public void setAjaxList(String ajaxList) {
-    this.ajaxList = ajaxList;
+  public void setAjaxReturnList(String ajaxReturnList) {
+    this.ajaxReturn = ajaxReturnList;
   }
 
   public String getTermId() {
@@ -98,5 +108,39 @@ public class PhenoteBean {
     this.termId = termId;
   }
 
+  public List<CompletionTerm> getCompletionTermList() {
+    return completionTermList;
+  }
+
+  public void setCompletionTermList(List<CompletionTerm> completionTermList) {
+    this.completionTermList = completionTermList;
+  }
+
+  public OBOClass getTerm() {
+    return term;
+  }
+
+  public List<Link> getParents(){
+    List<Link> parents = new ArrayList<Link>();
+    parents.addAll(term.getParents());
+    removeStages(parents);
+    Collections.sort(parents, new TermLinkComparator());
+    return parents;
+  }
+
+  private void removeStages(List<Link> parents) {
+    for()
+  }
+
+  public List<Link> getChildren(){
+    List<Link> children = new ArrayList<Link>();
+    children.addAll(term.getChildren());
+    Collections.sort(children, new TermLinkComparator());
+    return children;
+  }
+
+  public void setTerm(OBOClass term) {
+    this.term = term;
+  }
 }
 
