@@ -12,13 +12,13 @@
 <br><b>PARENTS: </b>
 <c:forEach var="parent" items="${formBean.parents}" >
   <br><b> <phenote:relationhipName beanName="parent" property="type.name" type="parent" />
-  : </b><a href="javascript:;" onclick="getTermInfo('<c:out value="${parent.parent.ID}" />','<c:out value="${parent.parent.name}" />','<c:out value="${formBean.ontologyName}" />','<c:out value="${formBean.field}" />')">
+  : </b><a href="javascript:;" onclick="phenoteState.updateTermInfo(new Term('<c:out value="${parent.parent.ID}" />','<c:out value="${parent.parent.name}" />','<c:out value="${formBean.ontologyName}" />'));">
   <c:out value="${parent.parent.name}" /></a>
 </c:forEach>
 <br>
 <br><b>CHILDREN: </b>
 <c:forEach var="parent" items="${formBean.children}" >
-  <br><b>Subclass: </b><a href="javascript:;" onclick="getTermInfo('<c:out value="${parent.child.ID}" />','<c:out value="${parent.child.name}" />','<c:out value="${formBean.ontologyName}" />','<c:out value="${formBean.field}" />')">
+  <br><b>Subclass: </b><a href="javascript:;" onclick="phenoteState.updateTermInfo(new Term('<c:out value="${parent.child.ID}" />','<c:out value="${parent.child.name}" />','<c:out value="${formBean.ontologyName}" />'));">
   <c:out value="${parent.child.name}" /></a>
 </c:forEach>
 
