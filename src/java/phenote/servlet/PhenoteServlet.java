@@ -12,11 +12,10 @@ import phenote.dataadapter.OntologyDataAdapter;
 import phenote.util.HtmlUtil;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
 
 public class PhenoteServlet extends DispatcherServlet {
 
@@ -36,7 +35,6 @@ public class PhenoteServlet extends DispatcherServlet {
   public void init(ServletConfig config) throws ServletException {
     super.init(config);
     webInfDir = getServletContext().getRealPath("/WEB-INF/");
-   Collections.sy
 
     PhenoteWebConfiguration.getInstance().setWebRoot(getServletContext().getRealPath("/"));
     getIntialParameters();
