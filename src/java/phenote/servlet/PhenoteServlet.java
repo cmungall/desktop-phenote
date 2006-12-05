@@ -13,8 +13,10 @@ import phenote.util.HtmlUtil;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 
 public class PhenoteServlet extends DispatcherServlet {
 
@@ -22,6 +24,7 @@ public class PhenoteServlet extends DispatcherServlet {
   private static final Logger LOG = Logger.getLogger(PhenoteServlet.class);
   private static final String LOG4J_FILE_NAME = "log4j.xml";
   private static String webInfDir;
+  private static boolean lazyLoading = false;
 
   /**
    * Initialization of this servlet upon server startup.
@@ -33,8 +36,10 @@ public class PhenoteServlet extends DispatcherServlet {
   public void init(ServletConfig config) throws ServletException {
     super.init(config);
     webInfDir = getServletContext().getRealPath("/WEB-INF/");
+   Collections.sy
 
     PhenoteWebConfiguration.getInstance().setWebRoot(getServletContext().getRealPath("/"));
+    getIntialParameters();
 
     // ToDo:
     // makes links for term info - put this method in Phenote?
@@ -57,9 +62,18 @@ public class PhenoteServlet extends DispatcherServlet {
     // Ensure the Ontologies are read during start up. This takes a while and should be done
     // before a different client calls and has to wait.
     // ToDo: Shall we create a new method called  OntologyDataAdapter.start()? YES
-    OntologyDataAdapter.initialize();
+    if (!lazyLoading)
+      OntologyDataAdapter.initialize();
 
     initLog4j();
+  }
+
+  private void getIntialParameters() {
+    ServletContext context = getServletContext();
+    String lazyload = context.getInitParameter("lazy-load");
+    if (!StringUtils.isEmpty(lazyload) && lazyload.equals("true"))
+      lazyLoading = true;
+
   }
 
   private void initLog4j() {

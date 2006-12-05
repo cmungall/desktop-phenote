@@ -27,6 +27,8 @@ public class PhenoteBean {
   private String ajaxReturn;
   private List<CompletionTerm> completionTermList;
   private OBOClass term;
+  private Link startStage;
+  private Link endStage;
 
   public boolean isTermCompletionRequest() {
     if (!StringUtils.isEmpty(userInput))
@@ -123,13 +125,22 @@ public class PhenoteBean {
   public List<Link> getParents(){
     List<Link> parents = new ArrayList<Link>();
     parents.addAll(term.getParents());
-    removeStages(parents);
+    parents.remove(startStage);
+    parents.remove(endStage);
     Collections.sort(parents, new TermLinkComparator());
     return parents;
   }
 
-  private void removeStages(List<Link> parents) {
-    
+  private void filterStages(List<Link> parents) {
+    List<Link> removeTerms = new ArrayList<Link>();
+    for(Link term: parents){
+      String name = term.getType().getName();
+      if(name.equals("start stage"))
+        startStage = term;
+      if(name.equals("end stage"))
+        endStage = term;
+    }
+    parents.removeAll(removeTerms);
   }
 
   public List<Link> getChildren(){
@@ -139,8 +150,19 @@ public class PhenoteBean {
     return children;
   }
 
+  public Link getStartStage(){
+       return startStage;
+  }
+
+  public Link getEndStage(){
+       return endStage;
+  }
+
   public void setTerm(OBOClass term) {
     this.term = term;
+    List<Link> parents = new ArrayList<Link>();
+    parents.addAll(term.getParents());
+    filterStages(parents);
   }
 }
 

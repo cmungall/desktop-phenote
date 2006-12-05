@@ -16,6 +16,7 @@ import phenote.datamodel.OntologyException;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyManager;
 import phenote.util.HtmlUtil;
+import phenote.dataadapter.OntologyDataAdapter;
 
 import java.util.Vector;
 import java.util.List;
@@ -37,6 +38,9 @@ public class PhenoteController extends AbstractCommandController {
     PhenoteBean form = (PhenoteBean) command;
     String ontologyName = form.getOntologyName();
     String field = form.getField();
+    // Todo: This is needed as the servlet can be configured to not initialize the ontologies (lazy initialization).
+    // this logic should go into the OntologyManger that checks if the configuration file has been loaded or not.
+    OntologyDataAdapter.initialize();
     if (form.isTermCompletionRequest()) {
       String userInput = form.getTermCompletionTerm();
       LOG.info("ontology: " + ontologyName);
