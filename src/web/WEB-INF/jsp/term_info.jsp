@@ -31,10 +31,51 @@
       </tr>
     </c:forEach>
   </logic:notEmpty>
-
 </table>
 
-<br>
+<table width="90%">
+  <tr valign="top">
+    <td width="110">
+      <b>Definition:</b>
+    </td>
+    <td>
+      <c:out value="${formBean.term.definition}" escapeXml="false"/>
+    </td>
+  </tr>
+</table>
+
+<b>PARENTS: </b>
+<c:forEach var="parent" items="${formBean.parents}">
+  <table width="90%">
+    <tr valign="top">
+      <td width="110">
+        <b><phenote:relationhipName beanName="parent" property="type.name" type="parent"/>:</b>
+      </td>
+      <td>
+        <a href="javascript:;"
+           onclick="phenoteState.updateTermInfo(new Term('<c:out value="${parent.parent.ID}" />','<c:out value="${parent.parent.name}" />','<c:out value="${formBean.ontologyName}" />'));">
+          <c:out value="${parent.parent.name}"/></a>
+      </td>
+    </tr>
+  </table>
+</c:forEach>
+<br><b>CHILDREN: </b>
+<c:forEach var="parent" items="${formBean.children}">
+  <table width="90%">
+    <tr valign="top">
+      <td width="110">
+        <b><phenote:relationhipName beanName="parent" property="type.name" type="child"/>:</b>
+      </td>
+      <td>
+        <a href="javascript:;"
+           onclick="phenoteState.updateTermInfo(new Term('<c:out value="${parent.child.ID}" />','<c:out value="${parent.child.name}" />','<c:out value="${formBean.ontologyName}" />'));">
+          <c:out value="${parent.child.name}"/></a>
+      </td>
+    </tr>
+  </table>
+</c:forEach>
+
+
 <c:if test="${formBean.ontologyName == 'ZF'}">
   <table width="90%">
     <tr valign="top">
@@ -56,47 +97,14 @@
   </table>
 </c:if>
 
-<br><b>PARENTS: </b>
-<c:forEach var="parent" items="${formBean.parents}">
-  <table width="90%">
-    <tr valign="top">
-      <td width="110">
-        <b><phenote:relationhipName beanName="parent" property="type.name" type="parent"/>:</b>
-      </td>
-      <td>
-        <a href="javascript:;"
-           onclick="phenoteState.updateTermInfo(new Term('<c:out value="${parent.parent.ID}" />','<c:out value="${parent.parent.name}" />','<c:out value="${formBean.ontologyName}" />'));">
-          <c:out value="${parent.parent.name}"/></a>
-      </td>
-    </tr>
-  </table>
-</c:forEach>
-<br>
-<br><b>CHILDREN: </b>
-<c:forEach var="parent" items="${formBean.children}">
-  <table width="90%">
-    <tr valign="top">
-      <td width="110">
-        <b><phenote:relationhipName beanName="parent" property="type.name" type="child"/>:</b>
-      </td>
-      <td>
-        <a href="javascript:;"
-           onclick="phenoteState.updateTermInfo(new Term('<c:out value="${parent.child.ID}" />','<c:out value="${parent.child.name}" />','<c:out value="${formBean.ontologyName}" />'));">
-          <c:out value="${parent.child.name}"/></a>
-      </td>
-    </tr>
-  </table>
-
-</c:forEach>
-
-<br>
+<p/>
 <table width="90%">
   <tr valign="top">
     <td width="110">
-      <b>Definition:</b>
+      <b>COMMENT:</b>
     </td>
     <td>
-      <c:out value="${formBean.term.definition}" escapeXml="false"/>
+      <c:out value="${formBean.term.comment}" escapeXml="false"/>
     </td>
   </tr>
 </table>
