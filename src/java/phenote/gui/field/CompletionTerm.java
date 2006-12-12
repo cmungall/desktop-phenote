@@ -67,6 +67,8 @@ public class CompletionTerm {
 
   public String getID() { return term.getID(); }
   public String getName() { return term.getName(); }
+  public String getEscapedName() { return term.getName().replaceAll("\\'","\\\\'"); }
+	
   private Set getSyns() { return term.getSynonyms(); }
   private boolean hasDefinition() {
     return getDefinition() != null && !getDefinition().equals("");
