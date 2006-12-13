@@ -228,6 +228,7 @@ public class Config {
       System.out.println("config file: "+configUrl);
       PhenoteConfigurationDocument pcd = 
         PhenoteConfigurationDocument.Factory.parse(configUrl);//configFile);
+      pcd.validate(); //???
       PhenoteConfiguration pc = pcd.getPhenoteConfiguration();
 
 

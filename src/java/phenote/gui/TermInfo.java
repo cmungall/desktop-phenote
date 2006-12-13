@@ -119,6 +119,7 @@ public class TermInfo {
   /** Listen for selection from phenote (mouse over completion list) */
   private class InfoTermSelectionListener implements TermSelectionListener {
     public boolean termSelected(TermSelectionEvent e) {
+      if (!e.isMouseOverEvent()) return false;
       setTextFromOboClass(e.getOboClass());
       // This sets who now listens to use term button clicks (only 1 listener)
       setUseTermListener(e.getUseTermListener());
@@ -186,6 +187,8 @@ public class TermInfo {
       try {
         OBOClass term = OntologyManager.inst().getOboClass(id); // ex
         setTextFromOboClass(term);
+        // send out term selection (non mouse over) for DAG view
+        SelectionManager.inst().selectTerm(TermInfo.this, term);
       }
       catch (TermNotFoundException ex) { return; }
     }

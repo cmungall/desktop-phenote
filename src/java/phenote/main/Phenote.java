@@ -81,7 +81,9 @@ public class Phenote {
   public void initOntologies() {
     //OntologyDataAdapter oda = new OntologyDataAdapter(); // singleton?
     // loads up OntologyManager - non intuitive?
-    OntologyDataAdapter.initialize(); 
+    OntologyDataAdapter.initialize();
+    // if (config.useShrimpDagViewer())
+    // ShrimpDag.inst().initOntologies();
   }
 
   private void loadFromCommandLine() {

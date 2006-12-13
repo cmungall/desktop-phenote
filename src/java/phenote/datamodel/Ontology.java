@@ -125,7 +125,7 @@ public class Ontology {
   }
 
 
-  private OBOSession getOboSession() { return oboSession; }
+  public OBOSession getOboSession() { return oboSession; }
 
   public List<OBOClass> getSortedTerms(Set terms) {
     List<OBOClass> sortedTerms = new ArrayList<OBOClass>();

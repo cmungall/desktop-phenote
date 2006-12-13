@@ -35,17 +35,29 @@ public class SelectionManager {
 
   // void addCharacterSelectionListener(CharacterSelectionListener l) {}
 
-  public void selectTerm(Object source, OBOClass oboClass,UseTermListener l) {
-    TermSelectionEvent e = makeTermEvent(source,oboClass,l);
-    Iterator<TermSelectionListener> it = termListenerList.iterator();
-    while(it.hasNext())
-      it.next().termSelected(e);
+  public void selectMouseOverTerm(Object source, OBOClass oboClass,UseTermListener l) {
+	boolean isMouseOver = true;
+    TermSelectionEvent e = makeTermEvent(source,oboClass,l,isMouseOver);
+    fireSelect(e);
+  }
+  
+  public void selectTerm(Object source,OBOClass oboClass) {
+	boolean isMouseOver = false;
+	  TermSelectionEvent e = makeTermEvent(source,oboClass,null,isMouseOver);
+    fireSelect(e);
   }
 
+  private void fireSelect(TermSelectionEvent e) {
+    Iterator<TermSelectionListener> it = termListenerList.iterator();
+    while(it.hasNext())
+      it.next().termSelected(e);   
+  }
+  
+  
   // void selectTerm(String termName) {} ???
 
-  private TermSelectionEvent makeTermEvent(Object src, OBOClass oc,UseTermListener l) {
-    return new TermSelectionEvent(src,oc,l);
+  private TermSelectionEvent makeTermEvent(Object src, OBOClass oc,UseTermListener l,boolean mouse) {
+    return new TermSelectionEvent(src,oc,l,mouse);
   }
 
   public CharacterI getFirstSelectedCharacter() {

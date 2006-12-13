@@ -53,7 +53,8 @@ public class PhenoSyntaxChar {
       // Genotype - not strictly part of pheno syntax but lets face it we need it
       // i would say its an omission from syntax
       //sb.append(" GT=").append(character.getGenotype());
-      sb.append(" GT=").append(character.getValueString("Genotype"));
+      if (character.hasValue("Genotype"))
+        sb.append(" GT=").append(character.getValueString("Genotype"));
       if (character.hasValue("Genetic Context"))
         sb.append(" GC=").append(makeValue(character.getTerm("Genetic Context")));
       
@@ -61,6 +62,8 @@ public class PhenoSyntaxChar {
         throw new BadCharException("Error: character has no entity, ignoring");
       //sb.append(" E=").append(makeValue(character.getEntity()));
       sb.append(" E=").append(makeValue(character.getTerm("Entity")));
+
+      // if (character.hasValue(CharFieldEnum.STAGE))
       
       //if (character.getQuality() == null)
       if (!character.hasValue("Quality"))

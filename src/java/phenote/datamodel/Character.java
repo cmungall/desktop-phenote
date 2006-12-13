@@ -61,8 +61,13 @@ public class Character implements CharacterI, Cloneable {
     // be some sort of somthing to indicate "empty" value?
     return getValue(cf) != null; // && !getValue(cf).equals("");
   }
-  public boolean hasValue(String fieldName) throws Exception {
-    return hasValue(getCharFieldForName(fieldName));
+  public boolean hasValue(String fieldName) {
+    try {
+      return hasValue(getCharFieldForName(fieldName));
+    } 
+    catch (Exception e) { // throws exception if doesnt have
+      return false;
+    }
   }
 
   private CharField getCharFieldForName(String fieldName) throws Exception {

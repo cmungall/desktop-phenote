@@ -54,6 +54,8 @@ class TermCompList extends AbstractAutoCompList {
       if doesnt validate throw ex */
   protected void setCurrentValidItem() throws OboException {
     setOboClass(getSelectedOboClass()); //this will set text to oboclass
+    // send out selection event that is NOT a mouse over event (for DAG view)
+    SelectionManager.inst().selectTerm(this, getSelectedOboClass());
   }
 
   protected String getCurrentTermRelName() {
@@ -174,7 +176,7 @@ class TermCompList extends AbstractAutoCompList {
       CompletionTerm ct = (CompletionTerm)selectedValue;
       OBOClass oboClass = ct.getOboClass();
       Object src = TermCompList.this;
-      getSelectionManager().selectTerm(src,oboClass,getUseTermListener());
+      getSelectionManager().selectMouseOverTerm(src,oboClass,getUseTermListener());
       //setTextFromOboClass(oboClass);
     }
   } // end of CompletionListListener inner class

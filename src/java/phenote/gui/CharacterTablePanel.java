@@ -50,6 +50,7 @@ public class CharacterTablePanel extends JPanel {
   private JButton deleteButton;
   private JButton undoButton;
   private JButton commitButton;
+  private JButton graphWindow;
   private JScrollBar verticalScrollBar;
   private boolean scrollToNewLastRowOnRepaint = false;
   private boolean ignoreSelectionChange = false;
@@ -102,6 +103,8 @@ public class CharacterTablePanel extends JPanel {
     // should we only add if have data adapter - or disable at least?
     // should this go in a menu?
     commitButton = addButton(SAVE_STRING,al,buttonPanel);
+    buttonPanel.add(Box.createRigidArea(new Dimension(20,0)));
+    graphWindow = addButton("Graph",al,buttonPanel);
     
     add(buttonPanel);
 
@@ -252,6 +255,10 @@ public class CharacterTablePanel extends JPanel {
         // let char change deal with selection i think?? undo is different
         doSelection = false;
         EditManager.inst().undo();
+      }
+
+      else if (e.getActionCommand().equals("Graph")) {
+          ShrimpDag.inst().display();
       }
 
       // IF DELETED LAST ROW, then need to make a new blank one (sandbox mode)

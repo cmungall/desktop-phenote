@@ -35,7 +35,7 @@ var phenoteState = {
 
   updateTermInfo : function (term) {
     var pars = term.params;
-    var myAjax = new Ajax.Updater('termInfo', url, {method: 'get', parameters: pars } );
+    var myAjax = new Ajax.Updater('termInfo', this.termInfoUrl, {method: 'get', parameters: pars } );
     this.setCurrentTermInfoTerm(term);
   },
 
