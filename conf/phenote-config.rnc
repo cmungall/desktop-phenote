@@ -32,6 +32,8 @@ field =
   element field {
     ##attribute name { "Pub" | "Genotype" | "Genetic Context" | "Entity" | "Quality" },
     attribute name { text },
+    ## tag for field for pheno-syntax adapter
+    attribute syntax-abbrev { text },
     ## whether field is free text or constrained by ontology - take out?
     ## this is actually unnecasary - if there is no file free text is assumed    
     attribute type { "free_text" | "ontology" },  
