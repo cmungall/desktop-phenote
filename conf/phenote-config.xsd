@@ -41,6 +41,11 @@
           <xs:documentation>attribute name { "Pub" | "Genotype" | "Genetic Context" | "Entity" | "Quality" },</xs:documentation>
         </xs:annotation>
       </xs:attribute>
+      <xs:attribute name="syntax-abbrev" use="required">
+        <xs:annotation>
+          <xs:documentation>tag for field for pheno-syntax adapter</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
       <xs:attribute name="type" use="required">
         <xs:simpleType>
           <xs:restriction base="xs:token">
