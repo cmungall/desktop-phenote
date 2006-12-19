@@ -30,7 +30,7 @@ import phenote.datamodel.Character;
 import phenote.datamodel.CharacterListI;
 import phenote.datamodel.CharacterList;
 import phenote.datamodel.OntologyManager;
-import phenote.datamodel.OntologyManager.TermNotFoundException;
+import phenote.datamodel.TermNotFoundException;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.DataAdapterI;
 

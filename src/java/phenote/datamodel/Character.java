@@ -13,15 +13,14 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 public class Character implements CharacterI, Cloneable {
 
   // List<CharFieldValue> charFields??? or List<CharField>
-//   private String entity="";
-//   private String quality="";
-//   private String geneticContext="";
+  // phase these out...
   private String pub;
   private String genotype=""; // eventually Genotype class
   // OboClass? OntologyTerm?...
   private OBOClass entity; // CharFieldValue???
   private OBOClass quality;
   private OBOClass geneticContext;
+  // new generic data structure
   private HashMap<CharField,CharFieldValue> charFieldToValue =
     new HashMap<CharField,CharFieldValue>();
 
@@ -30,6 +29,12 @@ public class Character implements CharacterI, Cloneable {
     charFieldToValue.put(cf,cfv);
     //System.out.println("Char setVal "+cf+" val "+cfv);
   }
+
+  public void setValue(CharField cf, String s) throws TermNotFoundException {
+    CharFieldValue cfv = cf.makeValue(this,s);
+    setValue(cf,cfv);
+  }
+
   /** generic getter */ 
   public CharFieldValue getValue(CharField cf) {
     CharFieldValue cfv = charFieldToValue.get(cf);

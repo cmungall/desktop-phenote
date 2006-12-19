@@ -100,11 +100,11 @@ public class OntologyManager {
     for (Ontology o : getAllOntologies()) {
       //Ontology o = iter.next();
       try { oboClass = o.getOboClass(id); }
-      catch (OntologyException e) { continue; }
+      catch (TermNotFoundException e) { continue; }
       if (oboClass != null)
         return oboClass;
     }
-    //return null; // not found - null -- ex?
+    // not sure if we need both onotlogy exception & termnotfoundEx ?? redundant?
     throw new TermNotFoundException("ID "+id+" not found in loaded ontologies");
   }
 
@@ -123,9 +123,6 @@ public class OntologyManager {
     return term;
   }
 
-  public class TermNotFoundException extends Exception {
-    private TermNotFoundException(String m) { super(m); }
-  }
 
   private boolean isPostComp(String id) {
     if (id == null) return false;

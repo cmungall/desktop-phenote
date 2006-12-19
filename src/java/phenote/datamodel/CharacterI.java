@@ -13,6 +13,7 @@ public interface CharacterI {
 
   /** generic fields!!! */
   public void setValue(CharField cf, CharFieldValue cfv); // ??
+  public void setValue(CharField cf, String valueString) throws TermNotFoundException;
   public CharFieldValue getValue(CharField cf);
   // should make an exception for this
   public String getValueString(String fieldName) throws Exception; // yuck

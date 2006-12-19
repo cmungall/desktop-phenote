@@ -31,7 +31,7 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.OntologyManager;
-import phenote.datamodel.OntologyManager.TermNotFoundException;
+import phenote.datamodel.TermNotFoundException;
 import phenote.edit.EditManager;
 import phenote.edit.UpdateTransaction;
 import phenote.util.HtmlUtil;

@@ -71,9 +71,8 @@ public class OntologyDataAdapter {
 //         CharFieldEnum fce = fieldConfig.getCharFieldEnum();
 //         cf = new CharField(fce);
 //       }
-//       else {
       cf = new CharField(fieldConfig.getLabel());
-//      }
+      fieldConfig.setCharField(cf);
 
       // ONTOLOGIES
       if (fieldConfig.hasOntologies()) {

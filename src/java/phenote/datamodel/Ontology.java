@@ -68,7 +68,7 @@ public class Ontology {
   }
 
   private void filterLists() {
-    //if (!haveFilter() && !hasSlim()) return; // from config
+    //if (!haveFilter() && !hasSlim()) return; // froboSession.getTerm(id)om config
     if (doFiltering())
       sortedTerms = filterList(sortedTerms);
   }
@@ -78,17 +78,23 @@ public class Ontology {
 
   /** returns null if dont have class for id, throws OntologyException if id is not
       found */
-  public OBOClass getOboClass(String id) throws OntologyException {
-    OBOClass oc = oboSession.getTerm(id);
-    if (oc == null) throw new OntologyException(id +" id not found in ontology "+name);
-    return oc;
+  public OBOClass getOboClass(String id) throws TermNotFoundException {
+    // this aint right - if its a slim should only search slim
+    //OBOClass oc = oboSession.getTerm(id);
+    for (OBOClass term : sortedTerms) {
+      if (term.getID().equals(id))
+        return term;
+    }
+    //if (term == null)
+    throw new TermNotFoundException(id +" id not found in ontology "+name);
+    //return oc;
   }
 
   /** Returns true if ontology holds obo class */
   boolean hasOboClass(OBOClass oboClass) {
     // if this is too slow can do optimizations with prefixes
     try {getOboClass(oboClass.getID()); }
-    catch (OntologyException e) { return false; }
+    catch (TermNotFoundException e) { return false; }
     return true; // no exception - it has it
   }
 

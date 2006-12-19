@@ -1,5 +1,6 @@
 package phenote.dataadapter.phenosyntax;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,7 +9,11 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 
 import phenote.datamodel.Character;
 import phenote.datamodel.CharacterI;
+import phenote.datamodel.CharField;
 import phenote.datamodel.OntologyManager;
+import phenote.datamodel.TermNotFoundException;
+import phenote.config.Config;
+import phenote.config.ConfigException;
 
 /** A phenotype character thats basically a dataadapter object for datamodel
     CharacterI. It can make a phenosyntax string from a CharacterI and make
@@ -83,27 +88,9 @@ public class PhenoSyntaxChar {
   }
 
   private String makeValue(OBOClass term) {
-    // return idPrefixAndName(term); // michael wants ids...
-    //return term.getID();
     // id & commented out name for readability
     return term.getID() + " /*" + term.getName() + "*/";
   }
-
-//   /** Merges id prefix and name, so for id GO:1234 with name "growth" returns
-//       "GO:growth", which is readable and computable & syn acceptable - pase - doing ids*/
-//   private String idPrefixAndName(OBOClass term) {
-//     return getIdPrefix(term)+term.getName();
-//   }
-    
-
-//   /** for GO:12345 returns GO: - with colon! - pase - doing ids */
-//   private String getIdPrefix(OBOClass term) {
-//     if (term == null) return ""; // shouldnt happen
-//     String id = term.getID();
-//     int colonIndex = id.indexOf(":");
-//     return id.substring(0,colonIndex+1); // +1 retain colon
-//   }
-
 
 
   // READ
@@ -151,34 +138,68 @@ public class PhenoSyntaxChar {
 
   private void addTagValToChar(String tag, String value) {
     if (value.equals("")) {
-      System.out.println("No value given for "+tag);
+      log().error("No value given for "+tag);
       return;
     }
     
     OntologyManager om = OntologyManager.inst();
-
+    
     try {
-      if (tag.equals("PUB")) 
-        character.setPub(value);
-      else if (tag.equals("GT"))
-        character.setGenotype(value);
-      else if (tag.equals("GC"))
-        character.setGeneticContext(om.getOboClassWithExcep(value)); // throws ex
-      else if (tag.equals("E"))
-        character.setEntity(om.getTermOrPostComp(value));
-      else if (tag.equals("Q"))
-        character.setQuality(om.getOboClassWithExcep(value));
-      else // throw exception? or let rest of char go through?
-        System.out.println("pheno syntax tag "+tag+" not recognized (value "+value+")");
+      List<CharField> fields = Config.inst().getCharFieldsForSyntaxAbbrev(tag);//Ex
+      for (CharField cf : fields) {
+        if (cf.getName().equals("Stage")) {
+          // todo - a general relationship extracter?
+          value = extractStageHack(value); // for now - fix for real later
+        }
+        try {
+          // set String -> for obo class automatically find term
+          character.setValue(cf,value); // throws TermNotFoundEx
+          return; // if no ex thrown were done
+        }
+        catch (TermNotFoundException e) {} // do nothing - try next char field
+      }
     }
-    catch (OntologyManager.TermNotFoundException e) {
-      log().error("Term not found for tag "+tag+" value "+value+" in loaded "
-                  +"ontologies - check syntax with ontology files.");
-      return;
-    }
+    catch (ConfigException e) { log().error(e.getMessage()); } // field not found
+    //catch (TermNotFoundException e) {
+    System.out.println("PhSynCh term not found "+value);
+    //log().error(e.getMessage());
+    log().error("Term not found "+value); // list char field?
+    //}
+
+//     try {
+//       if (tag.equals("PUB")) 
+//         character.setPub(value);
+//       else if (tag.equals("GT"))
+//         character.setGenotype(value);
+//       else if (tag.equals("GC"))
+//         character.setGeneticContext(om.getOboClassWithExcep(value)); // throws ex
+//       else if (tag.equals("E"))
+//         character.setEntity(om.getTermOrPostComp(value));
+//       else if (tag.equals("Q"))
+//         character.setQuality(om.getOboClassWithExcep(value));
+//       else // throw exception? or let rest of char go through?
+//         System.out.println("pheno syntax tag "+tag+" not recognized (value "+value+")");
+//     }
+//     catch (OntologyManager.TermNotFoundException e) {
+//       log().error("Term not found for tag "+tag+" value "+value+" in loaded "
+//                   +"ontologies - check syntax with ontology files.");
+//       return;
+//     }
       
   }
 
+  /** Stages come with rel - eg during(adult) - for now just assuming its during and ripping
+      off - in future need to read in rel, and store as relationship between Instances
+      (not OBOClasses!) - big refactor but go for it! 
+      this extracts the "adult" in above example out of "during(adult)" 
+      or alternatively just record relationship in CharFieldValue? */
+  private String extractStageHack(String stageWithRel) {
+    Pattern p = Pattern.compile("during\\(([^\\)]+)\\)");
+    Matcher m = p.matcher(stageWithRel);
+    if (m.matches())
+      return m.group(1);
+    return stageWithRel;
+  }
 
   CharacterI getCharacter() { return character; }
 

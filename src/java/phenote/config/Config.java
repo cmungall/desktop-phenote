@@ -31,6 +31,7 @@ import phenote.config.xml.OntologyDocument.Ontology;
 import phenote.config.xml.LogDocument.Log;
 
 import phenote.util.FileUtil;
+import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.fly.FlybaseDataAdapter;
@@ -215,6 +216,21 @@ public class Config {
     return fieldList;
   }
 
+  /** kinda silly to return list?? so there are 2 fields for "Tag" which perhaps is silly
+      but thats whats happening so need to deal with it */
+  public List<CharField> getCharFieldsForSyntaxAbbrev(String abb) throws ConfigException {
+    // cache in hash??
+    List<CharField> fields = new ArrayList<CharField>(2);
+    for (FieldConfig fc : getFieldConfigList()) {
+      if (fc.hasSyntaxAbbrev(abb) || fc.hasLabel(abb)) // abbrev or label
+        fields.add(fc.getCharField());
+        //return fc.getCharField();
+    }
+    if (fields.isEmpty())
+      throw new ConfigException("No Field configured with syntax abbrev "+abb);
+    return fields;
+  }
+
   /** should this just be a part of fieldConfigList? and main window would filter it
       out when making up fields? rel is for post comp gui - or maybe FieldConfig
       should have isPostComp, getPostCompRelFile - yes! */
@@ -296,13 +312,17 @@ public class Config {
     String name = field.getName().getStringValue(); //toString();
     // has to be a valid value - no longer true for generic free types
     FieldConfig fc;
-    try {
+    try { // phase this out!!
       CharFieldEnum cfe = CharFieldEnum.getCharFieldEnum(name);
       //if (cfe == null) ???
       fc = new FieldConfig(cfe,name);
     }
     catch (Exception e) { // no char field enum for name - new generic!
       fc = new FieldConfig(name);
+    }
+
+    if (field.getSyntaxAbbrev() != null) {
+      fc.setSyntaxAbbrev(field.getSyntaxAbbrev().getStringValue());
     }
     
     // POST COMP, relationship ontol

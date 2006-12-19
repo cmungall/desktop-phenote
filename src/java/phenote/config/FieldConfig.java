@@ -3,16 +3,19 @@ package phenote.config;
 import java.util.ArrayList;
 import java.util.List;
 
-import phenote.datamodel.CharFieldEnum;
+import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldEnum; // phase out
 
 public class FieldConfig {
 
-  private CharFieldEnum charFieldEnum;
+  private CharFieldEnum charFieldEnum; // phase out
+  private CharField charField;
   private String label;
   // Entity field can have multiple ontologies
   private List<OntologyConfig> ontologyConfigList;
   private boolean isPostComp;
   private OntologyConfig postCompRelOntCfg;
+  private String syntaxAbbrev;
 
 //   FieldConfig(CharFieldEnum c,OntologyConfig o) {
 //     charFieldEnum = c;
@@ -39,6 +42,7 @@ public class FieldConfig {
 
   // --> getName?
   public String getLabel() { return label; }
+  boolean hasLabel(String label) { return label.equals(this.label); } 
 
   //private void setOntologyFile(String f){getOntologyConfig().setOntologyFile(f);}
   public boolean hasOntologies() {
@@ -86,4 +90,13 @@ public class FieldConfig {
   public OntologyConfig getPostCompRelOntCfg() {
     return postCompRelOntCfg;
   }
+
+  void setSyntaxAbbrev(String syn) {
+    this.syntaxAbbrev = syn;
+  }
+  //void String getSyntaxAbbrev() { return syntaxAbbrev; }
+  boolean hasSyntaxAbbrev(String abb) { return abb.equals(syntaxAbbrev); }
+
+  public void setCharField(CharField cf) { charField = cf; }
+  CharField getCharField() { return charField; }
 }

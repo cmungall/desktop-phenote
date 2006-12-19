@@ -5,8 +5,7 @@ import java.util.List;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
 
-// or just Field? or CharField? eventually separate class?
-// associates enum & ontologies
+// or just Field? or CharField?
 // CharField doesnt handle instance data, just specifies what ontologies are 
 // associated with what parts of the generic character
 // CharFieldValue handles instance data
@@ -110,6 +109,25 @@ public class CharField {
   }
 
   public Ontology getPostCompRelOntol() { return postCompRelOntol; }
+
+  /** if free text returns string charfieldValue, for ontology field valueString is
+      id and searches ontologies for id, throws ontologyException if not found */
+  public CharFieldValue makeValue(Character c, String valueString)
+    throws TermNotFoundException {
+    if (!hasOntologies())
+      return new CharFieldValue(valueString,c,this);
+    else {
+      OBOClass oboClass=null;
+      for (Ontology ont : ontologyList) {
+        try { oboClass = ont.getOboClass(valueString); }
+        catch (TermNotFoundException e) {} // move on to next ontology
+      }
+      if (oboClass != null)
+        return new CharFieldValue(oboClass,c,this);
+      else
+        throw new TermNotFoundException(valueString+" not found in ontologies for "+this);
+    }
+  }
 
   public String toString() { return "CharField: "+getName(); }
 }
