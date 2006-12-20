@@ -1,9 +1,10 @@
 format-version: 1.0
-date: 18:06:2006 14:51
-saved-by: djs93
-auto-generated-by: OBO-Edit 1.001
+date: 07:11:2006 14:05
+saved-by: David
+auto-generated-by: OBO-Edit 1.002
 subsetdef: EmbDevSlim "EmbDevSlim"
 default-namespace: fly_anatomy.ontology
+namespace-id-rule: * FBbt:$sequence(8,0,99999999)$
 
 [Term]
 id: FBbt:00000000
@@ -569,7 +570,7 @@ relationship: part_of FBbt:00001055 ! embryonic nervous system
 [Term]
 id: FBbt:00000094
 name: clypeo-labral anlage in statu nascendi
-def: "." [VH:]
+def: "." [FB:VH]
 subset: EmbDevSlim
 related_synonym: "Asn Cly" [FB:FBrfds555]
 is_a: FBbt:00005413 ! anlage in statu nascendi
@@ -12901,7 +12902,7 @@ relationship: part_of FBbt:00001962 ! larval tritocerebrum
 [Term]
 id: FBbt:00001964
 name: supraesophageal nerve
-is_a: FBbt:00001920 ! larval brain
+relationship: part_of FBbt:00001920 ! larval brain
 
 [Term]
 id: FBbt:00001965
@@ -13282,26 +13283,31 @@ is_a: FBbt:00005209 ! multidendritic neuron
 [Term]
 id: FBbt:00002025
 name: dorsal multidendritic neuron ddaA
+def: "." [FB:FBrf0089570, FB:FBrf0183734]
 is_a: FBbt:00002024 ! dorsal multidendritic neuron
 
 [Term]
 id: FBbt:00002026
 name: dorsal multidendritic neuron ddaB
+def: "." [FB:FBrf0089570, FB:FBrf0183734]
 is_a: FBbt:00002024 ! dorsal multidendritic neuron
 
 [Term]
 id: FBbt:00002027
 name: dorsal multidendritic neuron ddaC
+def: "." [FB:FBrf0089570, FB:FBrf0183734]
 is_a: FBbt:00002024 ! dorsal multidendritic neuron
 
 [Term]
 id: FBbt:00002028
 name: dorsal multidendritic neuron ddaD
+def: "." [FB:FBrf0089570, FB:FBrf0183734]
 is_a: FBbt:00002024 ! dorsal multidendritic neuron
 
 [Term]
 id: FBbt:00002029
 name: dorsal multidendritic neuron ddaE
+def: "." [FB:FBrf0089570, FB:FBrf0183734]
 is_a: FBbt:00002024 ! dorsal multidendritic neuron
 
 [Term]
@@ -25113,6 +25119,7 @@ relationship: part_of FBbt:00004013 ! subesophageal ganglion
 [Term]
 id: FBbt:00004020
 name: giant fibers
+exact_synonym: "giant fibres" []
 relationship: part_of FBbt:00004019 ! cervical connective
 
 [Term]
@@ -26188,7 +26195,7 @@ relationship: part_of FBbt:00004508 ! eye
 [Term]
 id: FBbt:00004201
 name: epipharynx primordium
-def: "." [VH:]
+def: "." [FB:VH]
 subset: EmbDevSlim
 related_synonym: "epipharynx specific anlage" []
 related_synonym: "P1 EpiPh" [FB:FBrfds555]
@@ -26207,7 +26214,7 @@ relationship: part_of FBbt:00000447 ! posterior endoderm anlage
 [Term]
 id: FBbt:00004203
 name: adult clypeo-labral anlage
-def: "." [VH:]
+def: "." [FB:VH]
 subset: EmbDevSlim
 related_synonym: "A AdCly" [FB:FBrfds555]
 is_a: FBbt:00005426 ! anlage
@@ -30265,17 +30272,20 @@ relationship: part_of FBbt:00004866 ! germarium
 id: FBbt:00004876
 name: cystoblast
 is_a: FBbt:00004874 ! oogonial cell
+relationship: develops_from FBbt:00004873 ! female germline stem cell
 
 [Term]
 id: FBbt:00004877
 name: cystocyte
 is_a: FBbt:00004874 ! oogonial cell
+relationship: develops_from FBbt:00004876 ! cystoblast
 
 [Term]
 id: FBbt:00004878
 name: nurse cell
-def: "One of a group of cells in the ovary that surround the oocyte." [FB:gg]
-relationship: develops_from FBbt:00004860 ! germ cell
+def: "One of a group of 15 germ cells that lie anterior to the oocyte with the egg chamber.  Their cytoplasm is contiguous with the oocyte via cytoplasm via nurse-cell ring canals" [FB:DS]
+is_a: FBbt:00004860 ! germ cell
+relationship: develops_from FBbt:01004878 ! presumptive nurse cell
 relationship: part_of FBbt:00004894 ! egg chamber
 
 [Term]
@@ -30320,9 +30330,9 @@ relationship: part_of FBbt:00004878 ! nurse cell
 [Term]
 id: FBbt:00004886
 name: oocyte
-def: "A cell in the ovary oocyte stage." [FB:gg]
+def: "." [FB:ds]
 is_a: FBbt:00005412 ! gamete
-relationship: part_of FBbt:00004858 ! gonad
+relationship: develops_from FBbt:00014874 ! presumptive oocyte
 relationship: part_of FBbt:00004894 ! egg chamber
 
 [Term]
@@ -30419,14 +30429,14 @@ name: follicle stem cell
 related_synonym: "somatic stem cell" []
 related_synonym: "SSC" []
 is_a: FBbt:00006010 ! somatic stem cell
+is_a: FBbt:00006030 ! somatic cell of ovary
 relationship: part_of FBbt:00004866 ! germarium
 
 [Term]
 id: FBbt:00004904
 name: follicle cell
 def: "The cells that make up the inner lining of the ovariole." [FB:gg]
-related_synonym: "somatic stem cell" []
-related_synonym: "SSC" []
+is_a: FBbt:00006030 ! somatic cell of ovary
 relationship: develops_from FBbt:00004903 ! follicle stem cell
 relationship: part_of FBbt:00004894 ! egg chamber
 
@@ -30585,6 +30595,7 @@ relationship: part_of FBbt:00005259 ! germinal proliferation center
 [Term]
 id: FBbt:00004931
 name: cyst cell
+is_a: FBbt:00006031 ! somatic cell of testis
 relationship: develops_from FBbt:00004933 ! cyst progenitor cell
 relationship: part_of FBbt:00005258 ! spermatocyte cyst
 relationship: part_of FBbt:00005287 ! spermatid cyst
@@ -30596,6 +30607,7 @@ alt_id: FBbt:00004932
 def: "A somatic stem cell;  Mother of cysts cells; Associated with the hub of the germinal centre and with male germline stem cells." [FB:FBrf0064778]
 related_synonym: "cyst stem cell" []
 is_a: FBbt:00006010 ! somatic stem cell
+is_a: FBbt:00006031 ! somatic cell of testis
 relationship: part_of FBbt:00005259 ! germinal proliferation center
 
 [Term]
@@ -31292,6 +31304,7 @@ relationship: part_of FBbt:00005043 ! trachea
 [Term]
 id: FBbt:00005050
 name: tracheal node cell
+relationship: develops_from FBbt:00005052 ! tracheal fusion cell
 relationship: part_of FBbt:00005049 ! tracheal node
 
 [Term]
@@ -31301,12 +31314,16 @@ relationship: part_of FBbt:00005043 ! trachea
 
 [Term]
 id: FBbt:00005052
-name: homotip tracheal tip cell
+name: tracheal fusion cell
+def: "Tracheal fusion (homotip) cells mediate the fusion of tracheal branches during embryogenesis and later serve as node cells." [FB:FBrf0064787]
+related_synonym: "homotip tracheal tip cell" [FB:FBrf0064787]
 is_a: FBbt:00005051 ! tracheal tip cell
 
 [Term]
 id: FBbt:00005053
-name: heterotip tracheal tip cell
+name: terminal tracheal cell
+def: "Tracheal tip cells that do not fuse with other trachea, but instead target non-tracheal tissues during development." [FB:FBrf0064787]
+related_synonym: "heterotip tracheal tip cell" [FB:FBrf0064787]
 is_a: FBbt:00005051 ! tracheal tip cell
 
 [Term]
@@ -33575,7 +33592,8 @@ relationship: part_of FBbt:00004858 ! gonad
 [Term]
 id: FBbt:00005412
 name: gamete
-relationship: part_of FBbt:00004857 ! reproductive system
+is_a: FBbt:00004860 ! germ cell
+relationship: part_of FBbt:00004858 ! gonad
 
 [Term]
 id: FBbt:00005413
@@ -33588,12 +33606,14 @@ is_a: FBbt:00004208 ! developing embryonic structure
 [Term]
 id: FBbt:00005414
 name: ectoderm anlage in statu nascendi
+comment: Check stage is appropriate before substituting 'consider' term.
 is_obsolete: true
+consider: FBbt:00005427
 
 [Term]
 id: FBbt:00005415
 name: central brain anlage in statu nascendi
-def: "." [FB:DJS&VH]
+def: "." [FB:VH]
 subset: EmbDevSlim
 related_synonym: "A0ProcEC" []
 related_synonym: "Asn CenBr" [FB:FBrfds555]
@@ -33603,30 +33623,40 @@ relationship: part_of FBbt:01000119 ! anterior ectoderm anlage
 [Term]
 id: FBbt:00005416
 name: ventral ectoderm anlage in statu nascendi
+comment: Check stage is appropriate before substituting 'consider' term.
 related_synonym: "A0venEC" []
 is_obsolete: true
+consider: FBbt:00004204
 
 [Term]
 id: FBbt:00005417
 name: endoderm anlage in statu nascendi
+comment: Check stage is appropriate before substituting 'consider' term.
 is_obsolete: true
+consider: FBbt:00005435
 
 [Term]
 id: FBbt:00005418
 name: anterior endoderm anlage in statu nascendi
+comment: Check stage is appropriate before substituting 'consider' term.
 related_synonym: "A0antEndo" []
 is_obsolete: true
+consider: FBbt:00000210
 
 [Term]
 id: FBbt:00005419
 name: posterior endoderm anlage in statu nascendi
+comment: Check stage is appropriate before substituting 'consider' term.
 related_synonym: "A0postEndo" []
 is_obsolete: true
+consider: FBbt:00000447
 
 [Term]
 id: FBbt:00005420
 name: mesoderm anlage in statu nascendi
+comment: Check stage is appropriate before substituting 'consider' term.
 is_obsolete: true
+consider: FBbt:00000104
 
 [Term]
 id: FBbt:00005421
@@ -33688,6 +33718,7 @@ relationship: part_of FBbt:00005427 ! ectoderm anlage
 id: FBbt:00005429
 name: furrow canal
 def: "Stable infoldings of plasma membrane, rich in the cytoskeletal proteins F-actin and myosin II, present at the leading edge of membrane invagination during cellularization." [FB:FBrf0022470, FB:FBrf0129926]
+comment: Warning - FBbt:00005429 was previously an ID for 'procephalic ectoderm anlage'.  This is one of a couple of IDs automatically re-used by obo-edit because obsoletes were mistakenly deleted.
 subset: EmbDevSlim
 relationship: part_of FBbt:00005311 ! stage 5 embryo
 
@@ -34369,16 +34400,18 @@ relationship: part_of FBbt:00000123 ! amnioproctodeal invagination
 
 [Term]
 id: FBbt:00005524
-name: anterior endodermal primordium
+name: anterior endoderm primordium
 related_synonym: "antEndoP2" []
 is_obsolete: true
 
 [Term]
 id: FBbt:00005525
-name: posterior endodermal primordium
+name: posterior endoderm primordium
+comment: Check stage is appropriate before substituting 'consider' term.
 related_synonym: "postEndoP2" []
 related_synonym: "posterior endoderm primordium P2" []
 is_obsolete: true
+consider: FBbt:00005560
 
 [Term]
 id: FBbt:00005526
@@ -34392,8 +34425,10 @@ relationship: part_of FBbt:00014201 ! early extended germ band embryo
 [Term]
 id: FBbt:00005527
 name: dorsal ectodermal primordium
+comment: Check stage is appropriate before substituting 'consider' term.
 related_synonym: "dorEcP2" []
 is_obsolete: true
+consider: FBbt:00000112
 
 [Term]
 id: FBbt:00005528
@@ -34404,9 +34439,11 @@ relationship: develops_from FBbt:00000136 ! mesectoderm
 
 [Term]
 id: FBbt:00005529
-name: mesectodermal primordium
+name: mesectoderm primordium
+comment: Check stage is appropriate before substituting 'consider' term.
 related_synonym: "MesEcP2" []
 is_obsolete: true
+consider: FBbt:00000136
 
 [Term]
 id: FBbt:00005530
@@ -34428,11 +34465,13 @@ relationship: part_of FBbt:00014201 ! early extended germ band embryo
 
 [Term]
 id: FBbt:00005532
-name: ventral ectodermal primordium
+name: ventral ectoderm primordium
+comment: Check stage is appropriate before substituting 'consider' term.
 subset: EmbDevSlim
 related_synonym: "venEcP2" []
 related_synonym: "ventral ectoderm primordium P2" []
 is_obsolete: true
+consider: FBbt:00005558
 
 [Term]
 id: FBbt:00005533
@@ -34473,6 +34512,7 @@ relationship: part_of FBbt:00000120 ! stomodeal invagination early
 [Term]
 id: FBbt:00005537
 name: wing disc-derived cell-line
+comment: Warning - FBbt:00005537 was previously an ID for 'procephalic ectoderm anlage'.  This is one of a couple of IDs automatically re-used by obo-edit because obsoletes were mistakenly deleted.
 is_a: FBbt:00005342 ! imaginal disc-derived cell-line
 
 [Term]
@@ -34486,19 +34526,23 @@ relationship: part_of FBbt:00014201 ! early extended germ band embryo
 
 [Term]
 id: FBbt:00005539
-name: head mesodermal primordium
+name: head mesoderm primordium
+comment: Check stage is appropriate before substituting 'consider' term.
 subset: EmbDevSlim
 related_synonym: "head mesoderm P2 primordium" []
 related_synonym: "HeadMesP2" []
 is_obsolete: true
+consider: FBbt:00000127
 
 [Term]
 id: FBbt:00005540
-name: trunk mesodermal primordium
+name: trunk mesoderm primordium
+comment: Check stage is appropriate before substituting 'consider' term.
 subset: EmbDevSlim
 related_synonym: "TrMesP2" []
 related_synonym: "trunk mesoderm primordium P2" []
 is_obsolete: true
+consider: FBbt:00000128
 
 [Term]
 id: FBbt:00005541
@@ -36322,13 +36366,17 @@ is_a: FBbt:00005023 ! imaginal precursor
 [Term]
 id: FBbt:00005832
 name: dorsal ectoderm anlage in statu nascendi
+comment: Check stage is appropriate before substituting 'consider' term.
 related_synonym: "A0dorEC" []
 is_obsolete: true
+consider: FBbt:00005428
 
 [Term]
 id: FBbt:00005833
 name: mesectoderm anlage in statu nascendi
+comment: Check stage is appropriate before substituting 'consider' term.
 is_obsolete: true
+consider: FBbt:00000109
 
 [Term]
 id: FBbt:00005834
@@ -37365,10 +37413,98 @@ xref_analog: FB:FBrf0111371
 relationship: develops_from FBbt:00005167 ! external sensory organ precursor cell IIb
 
 [Term]
+id: FBbt:00006024
+name: dorsal multidendritic neuron ddaF
+def: "." [FB:FBrf0148966, FB:FBrf0183734]
+comment: There is some confusion in the literature between ddaF and ddaD (see FBrf0183734 for details).  The nomeclature used here is according to Grueber et al. (FBrf0148966).  However other papers (notably FBrf0148943) refer to Gruber's ddaD as ddaF and vice-versa.
+is_a: FBbt:00002024 ! dorsal multidendritic neuron
+
+[Term]
+id: FBbt:00006025
+name: abdominal dorsal multidendritic neuron ddaF
+def: "." [FB:FBrf0148966]
+is_a: FBbt:00006024 ! dorsal multidendritic neuron ddaF
+
+[Term]
+id: FBbt:00006026
+name: abdominal 1 dorsal multidendritic neuron ddaF
+def: "." [FB:FBrf0148966]
+is_a: FBbt:00006025 ! abdominal dorsal multidendritic neuron ddaF
+relationship: part_of FBbt:00001748 ! larval abdominal segment 1
+
+[Term]
+id: FBbt:00006027
+name: metathoracic dorsal multidendritic neuron ddaF
+def: "." [FB:FBrf0148966]
+is_a: FBbt:00002153 ! metathoracic dorsal/lateral multidendritic neuron
+is_a: FBbt:00006024 ! dorsal multidendritic neuron ddaF
+
+[Term]
+id: FBbt:00006030
+name: somatic cell of ovary
+def: "." [FB:DS]
+relationship: part_of FBbt:00004893 ! ovariole
+
+[Term]
+id: FBbt:00006031
+name: somatic cell of testis
+def: "." [FB:DS]
+relationship: part_of FBbt:00004928 ! testis
+
+[Term]
 id: FBbt:00011929
 name: larval mushroom body
 is_a: FBbt:00005801 ! mushroom body
 relationship: part_of FBbt:00001925 ! larval protocerebrum
+
+[Term]
+id: FBbt:00012116
+name: mesothoracic dorsal multidendritic neuron ddaF
+def: "." [FB:FBrf0148966]
+is_a: FBbt:00002115 ! mesothoracic dorsal/lateral multidendritic neuron
+is_a: FBbt:00006024 ! dorsal multidendritic neuron ddaF
+
+[Term]
+id: FBbt:00012388
+name: abdominal 2 dorsal multidendritic neuron ddaF
+def: "." [FB:FBrf0148966]
+is_a: FBbt:00006025 ! abdominal dorsal multidendritic neuron ddaF
+relationship: part_of FBbt:00001749 ! larval abdominal segment 2
+
+[Term]
+id: FBbt:00012389
+name: abdominal 3 dorsal multidendritic neuron ddaF
+def: "." [FB:FBrf0148966]
+is_a: FBbt:00006025 ! abdominal dorsal multidendritic neuron ddaF
+relationship: part_of FBbt:00001750 ! larval abdominal segment 3
+
+[Term]
+id: FBbt:00012390
+name: abdominal 4 dorsal multidendritic neuron ddaF
+def: "." [FB:FBrf0148966]
+is_a: FBbt:00006025 ! abdominal dorsal multidendritic neuron ddaF
+relationship: part_of FBbt:00001751 ! larval abdominal segment 4
+
+[Term]
+id: FBbt:00012391
+name: abdominal 5 dorsal multidendritic neuron ddaF
+def: "." [FB:FBrf0148966]
+is_a: FBbt:00006025 ! abdominal dorsal multidendritic neuron ddaF
+relationship: part_of FBbt:00001752 ! larval abdominal segment 5
+
+[Term]
+id: FBbt:00012392
+name: abdominal 6 dorsal multidendritic neuron ddaF
+def: "." [FB:FBrf0148966]
+is_a: FBbt:00006025 ! abdominal dorsal multidendritic neuron ddaF
+relationship: part_of FBbt:00001753 ! larval abdominal segment 6
+
+[Term]
+id: FBbt:00012393
+name: abdominal 7 dorsal multidendritic neuron ddaF
+def: "." [FB:FBrf0148966]
+is_a: FBbt:00006025 ! abdominal dorsal multidendritic neuron ddaF
+relationship: part_of FBbt:00001754 ! larval abdominal segment 7
 
 [Term]
 id: FBbt:00014201
@@ -37392,6 +37528,7 @@ relationship: part_of FBbt:00005331 ! dorsal closure embryo
 [Term]
 id: FBbt:00014874
 name: presumptive oocyte
+relationship: develops_from FBbt:00004877 ! cystocyte
 relationship: part_of FBbt:00004866 ! germarium
 
 [Term]
@@ -38240,6 +38377,13 @@ is_a: FBbt:00005177 ! chaeta
 relationship: part_of FBbt:00004712 ! metathoracic tarsal segment
 
 [Term]
+id: FBbt:01004878
+name: presumptive nurse cell
+def: "." [FB:DS]
+is_a: FBbt:00004860 ! germ cell
+relationship: part_of FBbt:00004866 ! germarium
+
+[Term]
 id: FBbt:01005220
 name: denticle row
 relationship: part_of FBbt:00005201 ! denticle belt
@@ -38416,3 +38560,4 @@ name: develops from
 [Typedef]
 id: part_of
 name: part of
+
