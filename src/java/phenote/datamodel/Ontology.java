@@ -1,7 +1,7 @@
 package phenote.datamodel;
 
 import java.util.ArrayList;
-//import java.util.Collection;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -18,14 +18,17 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOProperty;
 import org.geneontology.oboedit.datamodel.OBOSession;
 import org.geneontology.oboedit.datamodel.TermCategory;
+import org.geneontology.oboedit.dataadapter.OBOMetaData;
+import org.geneontology.oboedit.dataadapter.OBOMetaData.FileMetaData;
 
-/** rename Ontology? - yes - this isnt a completion list - a completion list is a 
-    subset of ontology terms that matches user input. This is a listing of terms of
-    the whole ontology */
+/** Ontology represents at this point the contents of a single obo file (which can
+    be more than one ontology) an ontology wraps an obo edit OBOSession - at this point
+    there is one OBOSession per obo file - that may change in the future */
 public class Ontology {
 
   private String name;
-  //private String filename;
+  //private String filename; // may neec to revive for version/metadata?
+  private String version;
   private OBOSession oboSession;
   private List<OBOClass> sortedTerms;
   private List<OBOClass> sortedObsoleteTerms;
@@ -56,9 +59,23 @@ public class Ontology {
   public Date getOntologyDate() { return new Date(ontologyTimestamp); }
 
   public String getVersion() { 
+    if (version != null) return version;
     // this is wrong - this just says file name loaded from. obo file puts version in
     // remark field but doesnt seem to be way to get that from obo session??
-    return oboSession.getCurrentHistory().getVersion();
+    //return oboSession.getCurrentHistory().getVersion();
+    Object o = oboSession.getAdapterMetaData();
+    if (!(o instanceof OBOMetaData)) return "unknown"; // exception?
+    Collection c = ((OBOMetaData)o).getFileMetaData();
+    //System.out.println("# of file meta datas "+c.size()+c);
+    for (Object obj : c) {
+      if (!(obj instanceof FileMetaData)) return "unknown";
+      // hmmm dont know file name in ontology apparently - need to bring back!
+      // for now just return last one as there is only 1
+      version = ((FileMetaData)obj).getVersion();
+      //System.out.println("VERSION "+version);
+      //return version; ??
+    }
+    return version;
   }
 
   private void makeSortedLists(OBOSession oboSession) {
@@ -140,7 +157,7 @@ public class Ontology {
     return sortedTerms;
   }
 
-  /** meght move this elsewhere - subclass? data adap specific wrapper? */
+  /** might move this elsewhere - subclass? data adap specific wrapper? */
   public void setTimestamp(long t) {
     ontologyTimestamp = t;
     log().info("\n"+getName()+" Ontology date: "+getOntologyDate()
