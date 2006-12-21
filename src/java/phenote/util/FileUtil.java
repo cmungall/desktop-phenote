@@ -1,6 +1,7 @@
 package phenote.util;
 
 import org.apache.log4j.Logger;
+import org.apache.commons.lang.StringUtils;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -186,6 +187,18 @@ public class FileUtil {
           LOG.error("Error while purging archive file '" + file.getAbsolutePath());
       }
     }
+  }
+
+  /**
+   * Strip off all the path information from a file name.
+   * @param filename
+   */
+  public static String getPureFileName(String filename){
+    if(StringUtils.isEmpty(filename) )
+      return filename;
+
+    File file = new File(filename);
+    return file.getName();
   }
 
 }

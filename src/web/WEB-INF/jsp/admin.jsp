@@ -1,5 +1,6 @@
 <%@ page import="phenote.main.PhenoteVersion"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="phenote" uri="/WEB-INF/tld/phenote-tags.tld" %>
 
 <html>
 <head>
@@ -42,9 +43,10 @@
         <c:out value='${item.name}'/>
       </td>
       <td class="listContent">
+        <c:out value='${item.version}'/>
       </td>
       <td class="listContent">
-        <c:out value='${item.source}'/>
+        <phenote:pureFileName beanName="item" property="source" />
       </td>
       <td class="listContent">
       </td>

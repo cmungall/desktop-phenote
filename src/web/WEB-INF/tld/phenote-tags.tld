@@ -38,4 +38,20 @@
         </attribute>
     </tag>
 
+    <tag>
+        <name>pureFileName</name>
+        <tagclass>phenote.presentation.tags.FileUtilTag</tagclass>
+        <info>Remove any directory info on a file name </info>
+        <attribute>
+            <name>beanName</name>
+            <required>true</required>
+            <rtexprvalue>false</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>property</name>
+            <required>true</required>
+            <rtexprvalue>false</rtexprvalue>
+        </attribute>
+    </tag>
+
 </taglib>

@@ -83,6 +83,18 @@ public class FileUtilTest extends TestCase {
 
   }
 
+  public void testPureFilename(){
+    String fileNameOnly = "filenameAlpha.txt";
+    String filename = FileUtil.FILE_SEPARATOR + "dire" + FileUtil.FILE_SEPARATOR + fileNameOnly;
+    String pureFilename = FileUtil.getPureFileName(filename);
+    assertEquals("Pure File Name", fileNameOnly, pureFilename);
+
+    fileNameOnly = "";
+    pureFilename = FileUtil.getPureFileName(fileNameOnly);
+    assertEquals("Pure File Name", fileNameOnly, pureFilename);
+  }
+
+
   /**
    * Create the test directories before the tests are run.
    */
