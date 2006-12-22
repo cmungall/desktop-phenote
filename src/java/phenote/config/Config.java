@@ -40,7 +40,7 @@ import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
 
 public class Config {
 
-  public final static String  DEFAULT_CONFIG_FILE = "/initial-flybase.cfg";
+  public final static String  DEFAULT_CONFIG_FILE = "flybase.cfg";
   private static Config singleton = new Config();
   private String configFile = DEFAULT_CONFIG_FILE;
   //private String patoFile = "attribute_and_values.obo"; // default value
