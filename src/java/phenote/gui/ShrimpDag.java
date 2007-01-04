@@ -1,6 +1,8 @@
 package phenote.gui;
 
-//import javax.swing.JFrame;
+
+import java.awt.Component;
+import javax.swing.JFrame;
 
 import org.geneontology.oboedit.datamodel.OBOSession;
 
@@ -27,9 +29,9 @@ class ShrimpDag {
   }
   
   private ShrimpDag() {
-	//window = new JFrame("Shrimp ontology viewer");
-	//window.pack();
-	//window.setVisible(true);
+    //window = new JFrame("Shrimp ontology viewer");
+    //window.pack();
+    //window.setVisible(true);
     init();
   }
 
@@ -46,13 +48,24 @@ class ShrimpDag {
   private void init() {
     //initShrimp();
     SelectionManager.inst().addTermSelectionListener(new ShrimpSelectionListener());
+    //initOntologies();
   }
   public void display() {
 	    
     //queryView = new QueryView(); false - show query view?
     boolean showQueryPanel = true;
-	  oboViewer =
-      new OBOViewer("Shrimp ontology viewer",getOboSession(),showQueryPanel);
+    oboViewer = new OBOViewer(showQueryPanel);
+    //new OBOViewer("Shrimp ontology viewer",getOboSession(),showQueryPanel);
+    oboViewer.loadOBOSession(getOboSession()); // change this!
+
+    JFrame frame = new JFrame("Shrimp DAG view");
+    //frame.setDefaultCloseOperation(java.awt.WindowListener.DISPOSE_ON_CLOSE);
+    frame.getContentPane().add(oboViewer.getView());
+    frame.pack();
+    frame.setSize(600, 600);
+    frame.setLocation(400, 200);
+    frame.setVisible(true);
+    
   }
   
   private OBOSession getOboSession() {
@@ -76,7 +89,8 @@ class ShrimpDag {
       if (e.isMouseOverEvent()) return false;
       String term = e.getOboClass().getName();
       boolean animate = true;
-      getQueryView().query(term, animate);
+      //getQueryView().query(term, animate);
+      oboViewer.query(getOboSession(),e.getOboClass(),animate);
       return true;
     }
     
