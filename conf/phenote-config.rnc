@@ -6,6 +6,7 @@ start =
     attribute version { xsd:float },
     log,
     dataadapter*,
+    uvic-graph,
     field*
   }
 
@@ -27,6 +28,8 @@ log =
   element log {
     attribute config-file { text }
   }
+
+uvic-graph = element uvic-graph { attribute enable { xsd:boolean } }
 
 field = 
   element field {

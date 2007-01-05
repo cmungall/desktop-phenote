@@ -104,7 +104,8 @@ public class CharacterTablePanel extends JPanel {
     // should this go in a menu?
     commitButton = addButton(SAVE_STRING,al,buttonPanel);
     buttonPanel.add(Box.createRigidArea(new Dimension(20,0)));
-    graphWindow = addButton("Graph",al,buttonPanel);
+    if (Config.inst().uvicGraphIsEnabled())
+      graphWindow = addButton("Graph",al,buttonPanel);
     
     add(buttonPanel);
 

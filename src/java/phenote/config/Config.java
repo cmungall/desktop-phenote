@@ -29,6 +29,7 @@ import phenote.config.xml.DataadapterDocument.Dataadapter;
 import phenote.config.xml.FieldDocument.Field;
 import phenote.config.xml.OntologyDocument.Ontology;
 import phenote.config.xml.LogDocument.Log;
+import phenote.config.xml.UvicGraphDocument.UvicGraph;
 
 import phenote.util.FileUtil;
 import phenote.datamodel.CharField;
@@ -56,6 +57,7 @@ public class Config {
   //private boolean checkForNewOntologies = false;
   //private int newOntologyCheckMinutes = 10;
   private String logConfigFile = "conf/log4j.xml"; // default log config file
+  private boolean uvicGraphEnabled = false; // default false for now
 
   /** singleton */
   private Config() {
@@ -169,28 +171,11 @@ public class Config {
 //   /** How many minutes between checks for new ontologies */
 //   public int getOntologyCheckMinutes() { return newOntologyCheckMinutes; }
 
+  /** config flag for enabling uvic shrimp dag graph */ 
+  public boolean uvicGraphIsEnabled() { return uvicGraphEnabled; }
+
   public URL getLogConfigUrl() throws FileNotFoundException {
     return FileUtil.findUrl(logConfigFile);
-  }
-
-  private FieldConfig getLumpConfig() {
-    // name = Taxonmony, file = BTO.obo...
-    return lumpConfig;
-  }
-
-  public boolean hasLumpField() {
-    return true; // config this - ctol may not have lumps... for now true
-  }
-
-  public boolean hasLumpOntology() {
-    if (!hasLumpField())
-      return false;
-    return lumpConfig.hasOntology();
-  }
-
-  public OntologyConfig getLumpOntologyConfig() {
-    if (!hasLumpField()) return null;
-    return lumpConfig.getOntologyConfig();
   }
 
   public int getNumberOfFields() {
@@ -269,6 +254,11 @@ public class Config {
         String name = da.getName().toString();
         addDataAdapterFromString(name);
       }
+
+      // GRAPH
+      UvicGraph gr = pc.getUvicGraph();
+      if (gr != null)
+        uvicGraphEnabled = gr.getEnable();
 
       // FIELDS
       Field[] fields = pc.getFieldArray();
