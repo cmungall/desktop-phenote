@@ -17,12 +17,6 @@ public class FieldConfig {
   private OntologyConfig postCompRelOntCfg;
   private String syntaxAbbrev;
 
-//   FieldConfig(CharFieldEnum c,OntologyConfig o) {
-//     charFieldEnum = c;
-//     if (o == null) return; // shouldnt happen
-//     label = o.getName();
-//     addOntologyConfig(o);
-//   }
 
   FieldConfig(CharFieldEnum c, String label) {
     charFieldEnum = c;
@@ -94,9 +88,21 @@ public class FieldConfig {
   void setSyntaxAbbrev(String syn) {
     this.syntaxAbbrev = syn;
   }
+  String getSyntaxAbbrev() {
+    if (syntaxAbbrev == null) return getLabel();
+    return syntaxAbbrev;
+  }
   //void String getSyntaxAbbrev() { return syntaxAbbrev; }
   boolean hasSyntaxAbbrev(String abb) { return abb.equals(syntaxAbbrev); }
 
   public void setCharField(CharField cf) { charField = cf; }
   CharField getCharField() { return charField; }
+  boolean hasCharField(CharField cf) { return charField == cf; }
 }
+
+//   FieldConfig(CharFieldEnum c,OntologyConfig o) {
+//     charFieldEnum = c;
+//     if (o == null) return; // shouldnt happen
+//     label = o.getName();
+//     addOntologyConfig(o);
+//   }

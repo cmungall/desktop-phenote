@@ -64,7 +64,9 @@ public class Character implements CharacterI, Cloneable {
   public boolean hasValue(CharField cf) {
     // empty string is a valid value for non-required field - or should there
     // be some sort of somthing to indicate "empty" value?
-    return getValue(cf) != null; // && !getValue(cf).equals("");
+    //return getValue(cf) != null; // && !getValue(cf).equals("");
+    if (getValue(cf) == null) return false;
+    return !getValue(cf).isEmpty();
   }
   public boolean hasValue(String fieldName) {
     try {

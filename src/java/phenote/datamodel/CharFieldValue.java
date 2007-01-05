@@ -69,6 +69,13 @@ public class CharFieldValue {
       return new CharFieldValue((String)null,c,cf); // ""?
   }
 
+  boolean isEmpty() {
+    if (isOboClass)
+      return oboClassValue == null;
+    else 
+      return stringValue == null;
+  }
+
   // maybe this should be called getString??? why getName???
   public String getName() { 
     if (!isOboClass)
@@ -77,6 +84,8 @@ public class CharFieldValue {
       return oboClassValue.getName();
     return ""; // null?
   }
+
+  public boolean isTerm() { return isOboClass; }
 
   public OBOClass getOboClass() { return oboClassValue; }
 

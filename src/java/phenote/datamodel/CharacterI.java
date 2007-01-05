@@ -48,4 +48,4 @@ public interface CharacterI {
   public void setEntity(OBOClass e);
   public void setQuality(OBOClass p);
   public void setGeneticContext(OBOClass gc);
- }
+}

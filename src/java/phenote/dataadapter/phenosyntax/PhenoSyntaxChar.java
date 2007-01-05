@@ -10,6 +10,7 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 import phenote.datamodel.Character;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.OntologyManager;
 import phenote.datamodel.TermNotFoundException;
 import phenote.config.Config;
@@ -53,30 +54,40 @@ public class PhenoSyntaxChar {
 
     try {
 
-      if (character.hasValue("Pub")) // hasPub
-        sb.append("PUB=").append(character.getValueString("Pub")); //Pub());
-      // Genotype - not strictly part of pheno syntax but lets face it we need it
-      // i would say its an omission from syntax
-      //sb.append(" GT=").append(character.getGenotype());
-      if (character.hasValue("Genotype"))
-        sb.append(" GT=").append(character.getValueString("Genotype"));
-      if (character.hasValue("Genetic Context"))
-        sb.append(" GC=").append(makeValue(character.getTerm("Genetic Context")));
-      
-      if (!character.hasValue("Entity"))
-        throw new BadCharException("Error: character has no entity, ignoring");
-      //sb.append(" E=").append(makeValue(character.getEntity()));
-      sb.append(" E=").append(makeValue(character.getTerm("Entity")));
+      // ontology manager should have char fields in order of config which should be
+      // syntax order - hope this isnt too presumptious
+      for (CharField cf : OntologyManager.inst().getCharFieldList()) {
+        if (character.hasValue(cf)) {
+          sb.append(Config.inst().getSyntaxAbbrevForCharField(cf)).append("=");//ex
+          sb.append(makeValue(character.getValue(cf))).append(" ");
+        }
+        // check for entity & quality??
+      }
 
-      // if (character.hasValue(CharFieldEnum.STAGE))
+//       if (character.hasValue("Pub")) // hasPub
+//         sb.append("PUB=").append(character.getValueString("Pub")); //Pub());
+//       // Genotype - not strictly part of pheno syntax but lets face it we need it
+//       // i would say its an omission from syntax
+//       //sb.append(" GT=").append(character.getGenotype());
+//       if (character.hasValue("Genotype"))
+//         sb.append(" GT=").append(character.getValueString("Genotype"));
+//       if (character.hasValue("Genetic Context"))
+//         sb.append(" GC=").append(makeValue(character.getTerm("Genetic Context")));
       
-      //if (character.getQuality() == null)
-      if (!character.hasValue("Quality"))
-        throw new BadCharException("Error: character has no quality, ignoring");
-      sb.append(" Q=").append(makeValue(character.getTerm("Quality")));
+//       if (!character.hasValue("Entity"))
+//         throw new BadCharException("Error: character has no entity, ignoring");
+//       //sb.append(" E=").append(makeValue(character.getEntity()));
+//       sb.append(" E=").append(makeValue(character.getTerm("Entity")));
+
+//       // if (character.hasValue(CharFieldEnum.STAGE))
+      
+//       //if (character.getQuality() == null)
+//       if (!character.hasValue("Quality"))
+//         throw new BadCharException("Error: character has no quality, ignoring");
+//       sb.append(" Q=").append(makeValue(character.getTerm("Quality")));
       
     }
-    catch (Exception e) {
+    catch (ConfigException e) {
       throw new BadCharException(e.getMessage());
     }
     return sb.toString();
@@ -87,7 +98,12 @@ public class PhenoSyntaxChar {
     BadCharException(String m) { super(m); }
   }
 
-  private String makeValue(OBOClass term) {
+  private String makeValue(CharFieldValue v) {
+    if (v.isTerm()) return makeTermValue(v.getOboClass());
+    return v.getName();
+  }
+
+  private String makeTermValue(OBOClass term) {
     // id & commented out name for readability
     return term.getID() + " /*" + term.getName() + "*/";
   }

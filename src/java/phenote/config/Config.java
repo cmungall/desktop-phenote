@@ -231,6 +231,15 @@ public class Config {
     return fields;
   }
 
+  public String getSyntaxAbbrevForCharField(CharField cf) throws ConfigException {
+    for (FieldConfig fc : getFieldConfigList()) {
+      if (fc.hasCharField(cf))
+        return fc.getSyntaxAbbrev();
+    }
+    // failed to find field config for char field - shouldnt happen
+    throw new ConfigException("Syn Abbrev for "+cf+" not found");
+  }
+
   /** should this just be a part of fieldConfigList? and main window would filter it
       out when making up fields? rel is for post comp gui - or maybe FieldConfig
       should have isPostComp, getPostCompRelFile - yes! */
@@ -247,15 +256,6 @@ public class Config {
       pcd.validate(); //???
       PhenoteConfiguration pc = pcd.getPhenoteConfiguration();
 
-
-//       // CHECK FOR ONTOLOGIES
-//       CheckForNewOntologies cfno = pc.getCheckForNewOntologies();
-//       if (cfno != null) { // ?
-//         checkForNewOntologies = true;
-//         BigInteger bi = cfno.getIntervalMinutes();
-//         if (bi != null)
-//           newOntologyCheckMinutes = bi.intValue();
-//       }
 
       // LOG CONFIG FILE
       Log log = pc.getLog();
@@ -375,278 +375,12 @@ public class Config {
 
 }
 
-// OLD OLD OLD - DELETE - DOM STUFF - replaced with xml beans
-//   /** Default entity list is the anatomy ontology -- DELETE*/
-//   private List<OntologyConfig> defaultEntityConfigList() {
-//     OntologyConfig oc = new OntologyConfig("Anatomy","anatomy.obo");
-//     List<OntologyConfig> l = new ArrayList<OntologyConfig>(1);
-//     l.add(oc);
-//     return l;
-//   }
-//     List<URL> possibleUrls = getPossibleUrls(filename);
-//     for (URL u : possibleUrls)
-//       if (urlExists(u)) return u;
-//     System.out.println("Failed to find file "+filename);
-//     throw new FileNotFoundException(filename+" not found");
-//   }
-
-//   private List<URL> getPossibleUrls(String filename) {
-//     List<URL> urls = new ArrayList(5);
-//     try {
-//       URL u = new File(filename).toURL();
-//       if (u != null) urls.add(u);
-//       u = new File("conf/"+filename).toURL();
-//       if (u != null) urls.add(u);
-//     } catch (MalformedURLException e) {
-//       System.out.println("bad file url "+e);
-//     }
-//     URL jarUrl = Config.class.getResource(filename);
-//     if (jarUrl != null) urls.add(jarUrl);
-//     jarUrl = Config.class.getResource("/"+filename);
-//     if (jarUrl != null) urls.add(jarUrl);
-//     return urls;
-//   }
-
-//   private boolean urlExists(URL u) {
-//     try { u.openStream(); }
-//     catch (IOException e) { return false; }
-//     //System.out.println("url suceeded "+u);
-//     return true;
-//   }
-
-//   public OntologyConfig getPatoOntologyConfig() {
-//     return getPatoConfig().getOntologyConfig();
-//   }
-
-  /** paot config should always be present, make default if not set from xml */
-//   private FieldConfig getPatoConfig() {
-//     if (patoConfig == null) {
-//       System.out.println("error pato config is null, making default");
-//       OntologyConfig o = OntologyConfig.defaultPato;
-//       patoConfig = new FieldConfig(CharFieldEnum.PATO,o);
-//     }
-//     return patoConfig;
-//   }
-
-//   public boolean hasGeneticContextField() {
-//     return geneticContextConfig != null;
-//   }
-
-//   public OntologyConfig getGeneticContextOntologyConfig() {
-//     if (!hasGeneticContextField()) return null;
-//     return getGeneticContextConfig().getOntologyConfig(); // check if has ont?
-//   }
-
-//   public FieldConfig getGeneticContextConfig() {
-//     return geneticContextConfig;
-//   }
-  
-//   private void initGeneticContextConfig(OntologyConfig oc) {
-//     geneticContextConfig = new FieldConfig(CharFieldEnum.GENETIC_CONTEXT,oc);
-//   }
-
-//   private FieldConfig getEntityConfig() {
-//     if (entityConfig == null)
-//       entityConfig = new FieldConfig(CharFieldEnum.ENTITY,"Entity");
-//     return entityConfig;
-//   }
-
-//   public List<OntologyConfig> getEntityOntologyConfigs() {
-// //     if (entityConfigList.isEmpty()) entityConfigList = defaultEntityConfigList();
-// //     return entityConfigList;
-//     return getEntityConfig().getOntologyConfigList();
-//   }
-
-//   public String getFieldName(int index) {
-//     return getFieldConfig(index).getLabel();
-//   }
-        //String name = f.getName().getStringValue();
-        //String file = f.getFile().getStringValue();
-//     if (fieldList == null)
-//       initFieldConfigList();
-//   // refactor! - just have it come straight from xml parse!
-//   private void initFieldConfigList() {
-//     //fieldList = new ArrayList<FieldConfig>();
-//     if (hasLumpField()) {
-//       fieldList.add(getLumpConfig());
-//     }
-//     if (hasGeneticContextField()) {
-//       fieldList.add(getGeneticContextConfig());
-//     }
-//     // entity config should always be present shouldnt it?
-//     fieldList.add(getEntityConfig());
-//     fieldList.add(getPatoConfig()); // pato required
-//   }
-
-
-//   /** Throws ParserConfig,SAXEx, & IOException if problems - sep class? */
-//   private Document getDocument(String filename) throws Exception {
-//     DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-//     DocumentBuilder builder = dbf.newDocumentBuilder();
-//     Document document = tryFile(builder,filename);
-//     if (document == null) 
-//       document = tryFile(builder,"conf/"+filename);
-//     if (document == null) { // try jar file
-//       URL url = Config.class.getResource(filename);
-//       // hmmmm - so ontology data adapter prepends "/" for jar file but above
-//       // doesnt (which seems to work for web start but not jboss) try with 
-//       // prepended slash as well - what the heck
-//       // its true this works for jboss - above for webstart - very strange
-//       if (url == null)
-//         url = Config.class.getResource("/"+filename);
-//       if (url == null)
-//         System.out.println("failed to get file from jar with or without '/' prepend");
-//       else
-//         document = tryFile(builder,url.toString());
-//     }
-
-//     if (document == null) {
-//       System.out.println("Failed to find config file "+filename);
-//       throw new FileNotFoundException(filename);
-//     }
-//     return document;
-//   }
-
-//   /** Returns null if cant find file, throws exception if parse fails */
-//   private Document tryFile(DocumentBuilder builder, String uri) throws Exception {
-//     if (uri == null) return null;
-//     Document document = null;
-//     try {
-//       document = builder.parse(uri);
-//     }
-//     catch (FileNotFoundException e) {
-//       return null;
-//     }
-//     return document;
-//   }
-
-//   // do this with xml beans & xsd of config?
-//   private void parseXmlFileWithDom(String filename) {
-//     Document document=null;
-//     try {
-//       document = getDocument(filename);
-//     } catch (Exception e) {
-//       System.out.println("Xml config parse error: "+e);
-//       e.printStackTrace();
-//       return;
-//     }
-//     Element root = document.getDocumentElement();
-//     NodeList kids = root.getChildNodes();
-//     int size = kids.getLength();
-//     for (int i=0; i<size; i++) {
-//       Node node = kids.item(i);
-//       parsePato(node); // if not pato does nothing
-//       parseEntity(node);
-//       parseGeneticContext(node);
-//       parseDataAdapter(node);
-//     }
-//   }
-
-  // private void parseLump(Node node) ...
-
-  // return true if sucessfully parsed?
-//   private void parsePato(Node node) {
-//     if (!node.getNodeName().equals("pato")) return;
-//     OntologyConfig oc = makeOntologyConfig(node,"Pato");
-//     //getPatoConfig().addOntologyConfig(oc);
-//     patoConfig = new FieldConfig(CharFieldEnum.PATO,oc);
-//   }
-
-//   private void parseEntity(Node node) {
-//     if (!node.getNodeName().equals("entity")) return;
-
-//     // while (hasMoreOntologies(node) ??? na!
-    
-//     // List <OntologyConfig> getOntologyConfigs(node) {}
-
-//     makeOntologyConfigs(node,getEntityConfig());
-//     //getEntityConfig().addOntologyConfig(oc);
-//     //getEntityConfig().setOntologyConfigs(configs);
-//     //entityConfigList.add(fc);
-//   }
-
-//   private void parseGeneticContext(Node node) {
-//     if (!node.getNodeName().equals("genetic-context")) return;
-//     OntologyConfig oc = makeOntologyConfig(node,"Genetic Context");
-//     initGeneticContextConfig(oc);
-//     // check if has ontology?
-//     //getGeneticContextConfig().addOntologyConfig(oc);
-//   }
-
-//   /** Return null if node doesnt actually have ontology info - like if there
-//       is no file attribute which is required */
-//   private OntologyConfig makeOntologyConfig(Node node, String defaultName) {
-//     String name = getNameAttribute(node);
-//     if (name == null || name.equals(""))
-//       name = defaultName;
-//     // if field only has one ontology
-//     if (!hasFileAttribute(node))
-//       return null;
-
-//     String file = getFileAttribute(node);
-
-//     return makeOntologyConfig(name,file);
-//   }
-
-//   /** so this is funny but the field node may contain info on a single ontology
-//       or it may contain ontology kid nodes, in the case it has multiple ontolgies
-//       like entity */
-//   private void makeOntologyConfigs(Node fieldNode, FieldConfig fieldConfig) {
-//     String name = getNameAttribute(fieldNode);
-//     if (name == null || name.equals(""))
-//       name = fieldConfig.getLabel();
-
-//     // if field only has one ontology will be specified in node attribs
-//     OntologyConfig oc = makeOntologyConfig(fieldNode,name);
-//     if (oc != null)
-//       fieldConfig.addOntologyConfig(oc); // return?
-
-//     // see if theres mutliple ontologies specified as ontology elements
-//     NodeList kids = fieldNode.getChildNodes();
-//     for (int i=0; i<kids.getLength(); i++) {
-//       Node node = kids.item(i);
-//       if (node.getNodeName().equals("ontology")) {
-//         oc = makeOntologyConfig(node,name);
-//         fieldConfig.addOntologyConfig(oc);
+//       // CHECK FOR ONTOLOGIES
+//       CheckForNewOntologies cfno = pc.getCheckForNewOntologies();
+//       if (cfno != null) { // ?
+//         checkForNewOntologies = true;
+//         BigInteger bi = cfno.getIntervalMinutes();
+//         if (bi != null)
+//           newOntologyCheckMinutes = bi.intValue();
 //       }
-//     }
-//   }
 
-//   private boolean hasFileAttribute(Node node) {
-//     return hasContent(getFileAttribute(node));
-//   }
-  
-//   private boolean hasContent(String s) {
-//     return s != null && !s.equals("");
-//   }
-
-//   private String getFileAttribute(Node node) {
-//     return getAttribute(node,"file");
-//   }
-
-//   private String getNameAttribute(Node node) {
-//     return getAttribute(node,"name");
-//   }
-
-//   /** Returns null if node is not element, or attrib not attribute */
-//   private String getAttribute(Node node, String attrib) {
-//     Element element = elementCast(node);
-//     if (element == null) return null;
-//     return element.getAttribute(attrib);
-//   }
-
-//   private Element elementCast(Node node) {
-//     if (node instanceof Element)
-//       return (Element)node;
-//     System.out.println("Config xml parsing error, expected element "
-//                        +node.getNodeName());
-//     return null; // throw exception?
-//   }
-
-//   private void parseDataAdapter(Node node) {
-//     if (!node.getNodeName().equals("data-adapter")) return;
-//     String name = getNameAttribute(node);
-//     addDataAdapterFromString(name);
-//   }
-
-//}

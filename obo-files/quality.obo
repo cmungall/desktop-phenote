@@ -2,6 +2,8 @@ format-version: 1.0
 date: 28:11:2006 13:58
 saved-by: George Gkoutos
 auto-generated-by: OBO-Edit 1.002
+subsetdef: absent_slim "Absent/present slim"
+subsetdef: abnormal_slim "Abnormal/normal slim"
 default-namespace: quality
 
 [Term]
@@ -2397,17 +2399,20 @@ related_synonym: "aberrant" []
 related_synonym: "atypical" []
 related_synonym: "defective" []
 is_a: PATO:0000069 ! deviation(from_normal)
+subset: abnormal_slim
 
 [Term]
 id: PATO:0000461
 name: normal
 related_synonym: "average" []
 is_a: PATO:0000069 ! deviation(from_normal)
+subset: abnormal_slim
 
 [Term]
 id: PATO:0000462
 name: absent
 is_a: PATO:0000070 ! presence
+subset: absent_slim
 
 [Term]
 id: PATO:0000463
@@ -2433,6 +2438,7 @@ is_obsolete: true
 id: PATO:0000467
 name: present
 is_a: PATO:0000070 ! presence
+subset: absent_slim
 
 [Term]
 id: PATO:0000468
