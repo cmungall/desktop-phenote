@@ -39,6 +39,22 @@ public class CompletionTerm {
     return getCompListDisplayString();
   }
 
+
+  public String getCompListInformalString() {
+	StringBuffer informal = new StringBuffer();
+   
+	if (isSynMatch()) {
+	  informal.append(" [syn: " + synMatchString + "]");  	  
+	}
+	
+	if (term.isObsolete()) { 
+	  informal.append(" [obs]");		  
+	} 
+
+	return informal.toString();
+  }
+	
+	
   public String getCompListDisplayString() {
     StringBuffer display = new StringBuffer();
     StringBuffer appends = new StringBuffer();
