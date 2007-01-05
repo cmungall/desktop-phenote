@@ -32,15 +32,15 @@ public class CharacterList implements CharacterListI {
   }
 
   // ??
-  public void sortBy(CharFieldEnum cfe) {
-    Collections.sort(characterList,getComparator(cfe));
+  public void sortBy(CharField cf) {
+    Collections.sort(characterList,getComparator(cf));
   }
 
-  private Comparator<CharacterI> getComparator(final CharFieldEnum cfe) {
+  private Comparator<CharacterI> getComparator(final CharField cf) {
     return new Comparator<CharacterI>() {
       public int compare(CharacterI c1, CharacterI c2) {
-        String s1 = cfe.getValue(c1).getName();
-        String s2 = cfe.getValue(c2).getName();
+        String s1 = c1.getValueString(cf);//cf.getValue(c1).getName();
+        String s2 = c2.getValueString(cf);
         return s1.compareTo(s2);
       }
     };

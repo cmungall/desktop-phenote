@@ -15,6 +15,7 @@ public interface CharacterI {
   public void setValue(CharField cf, CharFieldValue cfv); // ??
   public void setValue(CharField cf, String valueString) throws TermNotFoundException;
   public CharFieldValue getValue(CharField cf);
+  public String getValueString(CharField cf);
   // should make an exception for this
   public String getValueString(String fieldName) throws Exception; // yuck
   public OBOClass getTerm(String fieldName) throws Exception;

@@ -187,8 +187,11 @@ public class Config {
     return getFieldConfig(index).getLabel();
   }
 
-  public CharFieldEnum getCharFieldEnum(int index) {
-    return getFieldConfig(index).getCharFieldEnum();
+//   public CharFieldEnum getCharFieldEnum(int index) {
+//     return getFieldConfig(index).getCharFieldEnum();
+//   }
+  public CharField getCharField(int index) {
+    return getFieldConfig(index).getCharField();
   }
 
   /** needed for getFieldLabel for table */

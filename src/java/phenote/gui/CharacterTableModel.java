@@ -164,9 +164,9 @@ class CharacterTableModel extends AbstractTableModel {
     }
   }
 
-  private CharFieldEnum getCharFieldEnum(int col) {
-    return config.getCharFieldEnum(col);
-  }
+//   private CharFieldEnum getCharFieldEnum(int col) {
+//     return config.getCharFieldEnum(col);
+//   }
 
     
   public boolean isCellEditable(int r, int c) {
@@ -177,8 +177,8 @@ class CharacterTableModel extends AbstractTableModel {
       but for now just sort data itself? dont yet have separate view objects to
       sort */
   void setSortKey(int col) {
-    CharFieldEnum cfe = getCharFieldEnum(col);
-    characterList.sortBy(cfe); // ???
+    CharField cf = config.getCharField(col);
+    characterList.sortBy(cf); // ???
     fireTableDataChanged();
   }
   private Logger log;
@@ -194,48 +194,4 @@ class RowInterval {
   int startRow;
   int endRow;
 }
-
-    //--rowCount;
-    // hmmmmm - this cant be hardwired, needs to work with config 
-    // not sure how to do this....
-    // getField(col).getValue(inst);
-    //switch (col) { case(0) : return inst.getGenotype(); case(1) : return inst.getEntity();
-    //case(2) : return inst.getPato();}
-//   // i dont think this is still used??? if it is refactor! its wrong actually
-//   public void setValueAtDELETEhmmmmm(Object value, int row, int col) {
-//     CharacterI inst = getCharacter(row);
-//     String valString = (String)value; // better be a string
-
-//     // getField(col).setValue(valString); // setValString? setVal(Obj)?
-
-//     switch (col) {
-//       case(0) : 
-//         inst.setGenotype(valString);
-//         break;
-//       case(1) : 
-//         inst.setEntity(valString);
-//         break;
-//       case(2) : 
-//         inst.setPato(valString);
-//     }
-//     fireTableCellUpdated(row,col); // causes repaint
-//   }
-//   private class TableCharListChangeListener implements CharListChangeListener {
-//     public void newCharList(CharListChangeEvent e) {
-//       characterList = e.getCharacterList();
-//       // need to repaint & select 1st item in table
-//       // do all of this in Panel?
-//     }
-//   }
-
-  // --> CharTablePanel
-//   private class TableCharChangeListener implements CharChangeListener {
-//     public void charChanged(CharChangeEvent e) {
-//       //int row = getSelectedRow();
-//       //fireTableDataChanged(); // ??? causes loss of selection
-//       //setRowSelectionInterval(row,row);
-//       repaint(); // will this cause new data to come in?
-//     }
-//   }
-
 

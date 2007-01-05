@@ -48,6 +48,13 @@ public class Character implements CharacterI, Cloneable {
     return cfv;
   }
 
+  // return "" if null value?? throw ex? used for sorting CharList
+  public String getValueString(CharField cf) {
+    CharFieldValue cfv = getValue(cf);
+    if (cfv.getName() == null) return ""; // ?? ex?
+    return cfv.getName();
+  }
+
   public String getValueString(String field) throws Exception {
     CharField cf = getCharFieldForName(field); // throws ex
     if (!hasValue(cf)) return null; // ?? exception?

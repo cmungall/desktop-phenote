@@ -17,6 +17,6 @@ public interface CharacterListI {
   public int indexOf(CharacterI c);
   public List<CharacterI> getList();
   public boolean equals(CharacterListI cl);
-  /** Sort data by char field enum field */
-  public void sortBy(CharFieldEnum cfe);
+  /** Sort data by char field/column */
+  public void sortBy(CharField cf);
 }

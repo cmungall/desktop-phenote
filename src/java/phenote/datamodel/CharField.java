@@ -204,22 +204,3 @@ public class CharField {
 //       }
 //     };
 
-
-//     // CHAR FIELD ENUM vars & methods (make its own class!)
-//     private final String name;
-//     private CharFieldEnum(String name) { this.name = name; }
-//     public String toString() { return name; }
-//     public abstract void setValue(CharacterI c, CharFieldValue v);
-//     public abstract CharFieldValue getValue(CharacterI c);
-
-//     // unclear if we need this??? need it in generic field config
-//     public static CharFieldEnum getCharFieldEnum(String fieldString) {
-//       for ( CharFieldEnum cfe : CharFieldEnum.values()) {
-//         if (cfe.name.equalsIgnoreCase(fieldString))
-//           return cfe;
-//       }
-//       System.out.println("ERROR: No Char Field found for string "+fieldString);
-//       return null;
-//     }
-
-//   };
