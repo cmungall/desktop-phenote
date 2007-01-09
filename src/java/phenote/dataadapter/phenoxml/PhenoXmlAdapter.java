@@ -9,6 +9,8 @@ import java.util.Arrays;
 
 import javax.swing.JFileChooser;
 
+import org.apache.log4j.Logger;
+
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlOptions;
 
@@ -29,6 +31,8 @@ import phenote.datamodel.CharacterI;
 import phenote.datamodel.Character;
 import phenote.datamodel.CharacterListI;
 import phenote.datamodel.CharacterList;
+import phenote.datamodel.CharFieldEnum; // ?
+import phenote.datamodel.CharFieldException;
 import phenote.datamodel.OntologyManager;
 import phenote.datamodel.TermNotFoundException;
 import phenote.dataadapter.CharacterListManager;
@@ -262,13 +266,24 @@ public class PhenoXmlAdapter implements DataAdapterI {
   }
   
   private void addGenotypeAndContext(CharacterI chr, Phenoset ps, PhenotypeManifestation pm) {
-    String genotype = chr.getGenotype();
-    addGenotypeToPhenoset(genotype, ps);
-    ManifestIn mi = pm.addNewManifestIn();
-    mi.setGenotype(genotype);
-    if (chr.hasGeneticContext()) {
+    ManifestIn mi = pm.addNewManifestIn(); // only add if have gt or gc?
+    try {
+      //chr.getGenotype(); unfortunate new way due to new generic datamodel
+      String genotype = chr.getValueString("Genotype"); // CFEx
+      // check if its there??
+      addGenotypeToPhenoset(genotype, ps);
+      mi.setGenotype(genotype);
+    }
+    catch (CharFieldException e) {} // do nothing just skip it (??)
+
+    String gc = CharFieldEnum.GENETIC_CONTEXT.toString();
+    if (chr.hasValue(gc)) { // hasGeneticCont
       Typeref typeref = mi.addNewTyperef();
-      typeref.setAbout(chr.getGeneticContext().getID());
+      //typeref.setAbout(chr.getGeneticContext().getID());
+      try { typeref.setAbout(chr.getTerm(gc).getID()); }
+      catch (CharFieldException e) {
+        log().debug("failed to get gc field");  // shouldnt happen with hasValue
+      }
     }
   }
   
@@ -319,5 +334,10 @@ public class PhenoXmlAdapter implements DataAdapterI {
     return "PhenoXML files";
   }
 
+  private Logger log;
+  private Logger log() {
+    if (log == null) log = Logger.getLogger(getClass());
+    return log;
+  }
 
 }

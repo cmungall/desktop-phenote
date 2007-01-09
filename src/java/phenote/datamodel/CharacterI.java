@@ -17,23 +17,17 @@ public interface CharacterI {
   public CharFieldValue getValue(CharField cf);
   public String getValueString(CharField cf);
   // should make an exception for this
-  public String getValueString(String fieldName) throws Exception; // yuck
-  public OBOClass getTerm(String fieldName) throws Exception;
+  public String getValueString(String fieldName) throws CharFieldException; // yuck
+  public OBOClass getTerm(String fieldName) throws CharFieldException;
   // public void setTerm(String field, OBOClass term);
   // needed for protege plugin
   // public void setTerm(String field, String id) throws OboException;
   public boolean hasValue(CharField cf);
-  public boolean hasValue(String fieldName) throws Exception;
+  public boolean hasValue(String fieldName);//throws CharFieldException?
   
   public CharacterI cloneCharacter();
   public boolean equals(CharacterI c);
   public boolean hasNoContent();
-
-
-  // pase! delete!
-  public String getEntityName();
-  public String getQualityName(); // OBOClass?
-  public String getGeneticContextName();
 
   public String getPub();
   public boolean hasPub();
@@ -50,3 +44,4 @@ public interface CharacterI {
   public void setQuality(OBOClass p);
   public void setGeneticContext(OBOClass gc);
 }
+

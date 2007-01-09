@@ -12,7 +12,7 @@ public enum CharFieldEnum {
       return new CharFieldValue(c.getPub(),c,this);
     }
   },
-  LUMP("Genotype") { // genotype? default?
+  GENOTYPE("Genotype") { // genotype? default?
     public void setValue(CharacterI c, CharFieldValue v) {
       c.setGenotype(v.getName());
     }
@@ -54,7 +54,8 @@ public enum CharFieldEnum {
   // CHAR FIELD ENUM vars & methods (make its own class!)
   private final String name;
   private CharFieldEnum(String name) { this.name = name; }
-  public String toString() { return name; }
+  public String toString() { return getName(); }
+  public String getName() { return name; }
   public abstract void setValue(CharacterI c, CharFieldValue v);
   public abstract CharFieldValue getValue(CharacterI c);
   

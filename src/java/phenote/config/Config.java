@@ -44,14 +44,8 @@ public class Config {
   public final static String  DEFAULT_CONFIG_FILE = "flybase.cfg";
   private static Config singleton = new Config();
   private String configFile = DEFAULT_CONFIG_FILE;
-  //private String patoFile = "attribute_and_values.obo"; // default value
-  //private OntologyConfig patoConfig;
-  //private FieldConfig patoConfig;
-  private FieldConfig lumpConfig = new FieldConfig(CharFieldEnum.LUMP,"Genotype");
+  //private FieldConfig lumpConfig = new FieldConfig(CharFieldEnum.LUMP,"Genotype");
   //private String lumpOntologyFile = null;  private OntologyConfig lumpConfig = new OntologyConfig("Genotype");
-  //private List<OntologyConfig> entityConfigList = new ArrayList<OntologyConfig>();
-  //private FieldConfig entityConfig;
-  //private FieldConfig geneticContextConfig;
   private List<DataAdapterI> dataAdapterList;
   private List<FieldConfig> fieldList = new ArrayList<FieldConfig>();
   //private boolean checkForNewOntologies = false;

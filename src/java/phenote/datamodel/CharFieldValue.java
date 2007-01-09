@@ -87,7 +87,8 @@ public class CharFieldValue {
 
   public boolean isTerm() { return isOboClass; }
 
-  public OBOClass getOboClass() { return oboClassValue; }
+  public OBOClass getOboClass() { return getTerm(); } // --> getTerm more general
+  public OBOClass getTerm() { return oboClassValue; }
 
   public void editModel() {
 //     if (charFieldEnum == null)
@@ -103,6 +104,7 @@ public class CharFieldValue {
     }
   }
 
+  CharField getCharField() { return charField; }
   public CharFieldEnum getCharFieldEnum() { return charFieldEnum; }
 
   public String toString() { return getName(); }

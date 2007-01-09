@@ -150,13 +150,13 @@ public class FieldPanel extends JPanel {
   public AbstractAutoCompList getQualityComboBox() {
     return getComboBox(CharFieldEnum.QUALITY);
   }
-  boolean hasLumpComboBox() {
-    //return lumpField.isCombo();
-    return getLumpComboBox() != null;
-  }
-  AbstractAutoCompList getLumpComboBox() {
-    return getComboBox(CharFieldEnum.LUMP);
-  }
+//   boolean hasLumpComboBox() {
+//     //return lumpField.isCombo();
+//     return getLumpComboBox() != null;
+//   }
+//   AbstractAutoCompList getLumpComboBox() {
+//     return getComboBox(CharFieldEnum.LUMP);
+//   }
 
 }
 

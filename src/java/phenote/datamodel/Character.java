@@ -1,7 +1,8 @@
 package phenote.datamodel;
 
 import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import org.apache.log4j.Logger;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
 
@@ -14,13 +15,14 @@ public class Character implements CharacterI, Cloneable {
 
   // List<CharFieldValue> charFields??? or List<CharField>
   // phase these out...
-  private String pub;
-  private String genotype=""; // eventually Genotype class
+  //private String pub;
+  //private String genotype=""; // eventually Genotype class
   // OboClass? OntologyTerm?...
-  private OBOClass entity; // CharFieldValue???
-  private OBOClass quality;
-  private OBOClass geneticContext;
-  // new generic data structure
+  //private OBOClass entity; // CharFieldValue???
+  //private OBOClass quality;
+  //private OBOClass geneticContext;
+  // new generic data structure    try { setValue(new CharFieldValue(e,this,getEntityField())); }
+
   private HashMap<CharField,CharFieldValue> charFieldToValue =
     new HashMap<CharField,CharFieldValue>();
 
@@ -29,10 +31,16 @@ public class Character implements CharacterI, Cloneable {
     charFieldToValue.put(cf,cfv);
     //System.out.println("Char setVal "+cf+" val "+cfv);
   }
+  private void setValue(CharFieldValue cfv) {
+    charFieldToValue.put(cfv.getCharField(),cfv);
+  }
 
   public void setValue(CharField cf, String s) throws TermNotFoundException {
     CharFieldValue cfv = cf.makeValue(this,s);
     setValue(cf,cfv);
+  }
+  private void setValue(CharField cf, OBOClass term) {
+    setValue(new CharFieldValue(term,this,cf));
   }
 
   /** generic getter */ 
@@ -55,14 +63,18 @@ public class Character implements CharacterI, Cloneable {
     return cfv.getName();
   }
 
-  public String getValueString(String field) throws Exception {
+  public String getValueString(String field) throws CharFieldException {
     CharField cf = getCharFieldForName(field); // throws ex
-    if (!hasValue(cf)) return null; // ?? exception?
+    if (!hasValue(cf)) return null; // ?? exception? ""?
     return getValue(cf).getName();
   }
 
-  public OBOClass getTerm(String field) throws Exception {
+  public OBOClass getTerm(String field) throws CharFieldException {
     CharField cf = getCharFieldForName(field); // throws ex
+    return getTerm(cf);
+  }
+
+  private OBOClass getTerm(CharField cf) {
     if (!hasValue(cf)) return null; // ?? exception?
     return getValue(cf).getOboClass();
   }
@@ -79,51 +91,108 @@ public class Character implements CharacterI, Cloneable {
     try {
       return hasValue(getCharFieldForName(fieldName));
     } 
-    catch (Exception e) { // throws exception if doesnt have
+    catch (CharFieldException e) { // throws exception if doesnt have
       return false;
     }
   }
 
-  private CharField getCharFieldForName(String fieldName) throws Exception {
-    for (CharField cf : charFieldToValue.keySet()) {
+  private CharField getCharFieldForName(String fieldName) throws CharFieldException {
+    for (CharField cf : getAllCharFields()) {
       if (cf.getName().equalsIgnoreCase(fieldName))
         return cf;
     }
-    throw new Exception("No field for "+fieldName);
+    throw new CharFieldException("No field for "+fieldName);
   }
 
-  public String getPub() { return pub; }
-  public boolean hasPub() { return pub!=null && !pub.equals(""); }
-  public String getGenotype() { return genotype; }
-  public OBOClass getEntity() { return entity; }
-  public OBOClass getQuality() { return quality; }
+  /** return all char fields configured, both currently used or null in char */
+  private List<CharField> getAllCharFields() {
+    return OntologyManager.inst().getCharFieldList();
+  }
+
+  // conveneince methods...
+  public String getPub() { 
+    try { return getValueString(getPubField()); }
+    catch (CharFieldException e) { return null; } // ?? ""?
+  }
+  public boolean hasPub() { return getPub()!=null && !getPub().equals(""); }
+  private CharField getPubField() throws CharFieldException {
+    return getCharFieldForName(CharFieldEnum.PUB.getName());
+  }
+  public String getGenotype() {
+    try { return getValueString(getGenotypeField()); }
+    catch (CharFieldException e) { return null; } // ??
+  }
+  private CharField getGenotypeField() throws CharFieldException {
+    return getCharFieldForName(CharFieldEnum.GENOTYPE.getName());
+  }
+  /** cant decide to kill this or not - part of me thinks entity is fundamental to
+      phenote so why not make it handy */
+  public OBOClass getEntity() {
+    try { return getValue(getEntityField()).getTerm(); }
+    catch (CharFieldException e) { return null; } // ??
+  }
+  private CharField getEntityField() throws CharFieldException {
+    return getCharFieldForName(CharFieldEnum.ENTITY.getName());
+    //catch (CharFieldException e) { return null; } // ?? ex?
+  }
+  public OBOClass getQuality() {
+    //return quality;
+    try { return getValue(getQualField()).getTerm(); }
+    catch (CharFieldException e) { return null; } // ??
+  }
+  private CharField getQualField() throws CharFieldException {
+    return getCharFieldForName(CharFieldEnum.QUALITY.getName());
+  }
   public boolean hasGeneticContext() {
-    return geneticContext!=null && !geneticContext.equals("");
+    return getGeneticContext()!=null && !getGeneticContext().equals("");
   }
-  public OBOClass getGeneticContext() { return geneticContext; }
+  public OBOClass getGeneticContext() {
+    try { return getTerm(getGenConField()); }
+    catch (CharFieldException e) { return null; } // ??
+  }
+  private CharField getGenConField() throws CharFieldException {
+    return getCharFieldForName(CharFieldEnum.GENETIC_CONTEXT.getName());
+  }
 
-  // convenience functions
-  public String getEntityName() { return entity.getName(); }
-  public String getQualityName() { return quality.getName(); }
-  public String getGeneticContextName() { return geneticContext.getName(); }
 
-
-  public void setPub(String p ) { pub = p; }
-  public void setGenotype(String gt) { genotype = gt; }
-  public void setEntity(OBOClass e) { entity = e; }
-  public void setQuality(OBOClass p) { quality = p; }
-  public void setGeneticContext(OBOClass gc) { geneticContext = gc; }
+  public void setPub(String p ) {  
+    try { setValue(new CharFieldValue(p,this,getPubField())); }
+    catch (CharFieldException x) { log().error("no Pub field -> config!"); }
+  }
+  public void setGenotype(String gt) {
+    try { setValue(getGenotypeField(),gt); }
+    catch (CharFieldException x) { log().error(x); }
+    catch (TermNotFoundException e) {} // doesnt happen for free text field
+ }
+  public void setEntity(OBOClass e) {
+    try { setValue(new CharFieldValue(e,this,getEntityField())); }
+    catch (CharFieldException x) { log().error("no Entity field -> config!"); }
+  }
+  public void setQuality(OBOClass q) {
+    try {setValue(new CharFieldValue(q,this,getQualField())); }
+    catch (CharFieldException e) { log().error("no Quality field -> config!"); }
+  }
+  public void setGeneticContext(OBOClass gc) {
+    try { setValue(getGenConField(),gc); }
+    catch (CharFieldException e) { log().error("no Genetic Context field -> config!"); }
+  }
  
+  // this is just used for testing at this point
   public boolean equals(CharacterI ch) {
-    return eq(genotype,ch.getGenotype()) && eq(entity,ch.getEntity())
-      && eq(quality,ch.getQuality()) && eq(geneticContext,ch.getGeneticContext());
+    //return eq(getGenotype(),ch.getGenotype()) && eq(getEntity(),ch.getEntity())
+    //  && eq(quality,ch.getQuality()) && eq(geneticContext,ch.getGeneticContext());
+    for (CharField cf : getAllCharFields()) {
+      if (!eq(getValue(cf),ch.getValue(cf)))
+        return false;
+    }
+    return true;
   }
 
   /** check if both are null in addition to .equals() */
-  private boolean eq(Object o1, Object o2) {
-    if (o1==null && o2==null) return true;
-    if (o1 == null) return false;
-    return o1.equals(o2);
+  private boolean eq(CharFieldValue c1,CharFieldValue c2) {
+    if (c1==null && c2==null) return true;
+    if (c2 == null) return false;
+    return c1.equals(c2);
   }
 
   public CharacterI cloneCharacter() {
@@ -135,16 +204,32 @@ public class Character implements CharacterI, Cloneable {
     } catch (CloneNotSupportedException e) { return null; }
   }
 
+  // used by character table panel
   public boolean hasNoContent() {
-    if (hasPub()) return false;
-    if (genotype!=null && !genotype.equals("")) return false;
-    if (entity != null) return false;
-    if (quality != null) return false;
-    return geneticContext == null;
+//     if (hasPub()) return false;
+//     if (genotype!=null && !genotype.equals("")) return false;
+//     if (getEntity() != null) return false;
+//     if (getQuality() != null) return false;
+//     return geneticContext == null;
+    for (CharField cf : getAllCharFields()) {
+      if (hasValue(cf)) return false;
+    }
+    return true;
   }
  
   public String toString() {
-    return "Pub "+pub+" genotype "+genotype+" gen ctxt "+geneticContext+" entity "+
-      entity+" qual "+quality;
+    //return "Pub "+pub+" genotype "+genotype+" gen ctxt "+geneticContext+" entity "+
+    //  entity+" qual "+quality;
+    StringBuffer sb = new StringBuffer();
+    for (CharField cf : getAllCharFields()) {
+      sb.append(cf.getName()).append(" ").append(charFieldToValue.get(cf)).append(" ");
+    }
+    return sb.toString();
+  }
+
+  private Logger log;
+  private Logger log() {
+    if (log == null) log = Logger.getLogger(getClass());
+    return log;
   }
 }
