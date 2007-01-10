@@ -176,7 +176,7 @@ class CharFieldGui {
   }
 
 
-  private String getLabel() {
+  String getLabel() {
     if (label == null) {
       if (charField.hasMoreThanOneOntology() || !charField.hasOntologies())
         label = charField.getName();
@@ -260,6 +260,7 @@ class CharFieldGui {
 
   private FreeTextField getFreeTextField() { return freeTextField; }
 
+  // ?? was this moved somewhere else?
 //   /** key listener for free text fields for Cmd-V pasting for macs */
 //   private class TextKeyListener extends java.awt.event.KeyAdapter {
 //     public void keyPressed(java.awt.event.KeyEvent e) {

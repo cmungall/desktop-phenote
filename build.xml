@@ -87,10 +87,10 @@ them into  the classfiles directory. excludes="test/**"  -->
     </target>
 
     <target name="zfin" depends="compile">
-        <java classname="phenote.main.Phenote" fork="yes" jvmargs="-Xmx120M">
+        <java classname="phenote.main.Phenote" fork="yes" jvmargs="-Xmx200M">
             <!-- arg value="-c configfilehereventually"/ -->
             <arg value="-c"/>
-            <arg value="initial-zfin.cfg"/>
+            <arg value="zfin-standalone.cfg"/>
             <classpath>
                 <pathelement path="${classfiles}"/>
                 <fileset dir="${lib}">
@@ -102,7 +102,7 @@ them into  the classfiles directory. excludes="test/**"  -->
     </target>
 
     <target name="fly" depends="compile">
-        <java classname="phenote.main.Phenote" fork="yes" jvmargs="-Xmx120M">
+        <java classname="phenote.main.Phenote" fork="yes" jvmargs="-Xmx200M">
             <!-- arg value="-c configfilehereventually"/ -->
             <arg value="-c"/>
             <arg value="initial-flybase.cfg"/>
@@ -117,7 +117,7 @@ them into  the classfiles directory. excludes="test/**"  -->
     </target>
 
     <target name="obd" depends="compile">
-        <java classname="phenote.main.Phenote" fork="yes" jvmargs="-Xmx120M">
+        <java classname="phenote.main.Phenote" fork="yes" jvmargs="-Xmx200M">
             <!-- arg value="-c configfilehereventually"/ -->
             <arg value="-c"/>
             <arg value="obd.cfg"/>
@@ -131,7 +131,7 @@ them into  the classfiles directory. excludes="test/**"  -->
         </java>
     </target>
   <target name="run-jar" >
-     <java classname="phenote.main.Phenote" fork="yes" jvmargs="-Xmx120M">
+     <java classname="phenote.main.Phenote" fork="yes" jvmargs="-Xmx200M">
          <!-- arg value="-c configfilehereventually"/ -->
         <classpath>
           <fileset dir="${lib}">
@@ -142,7 +142,7 @@ them into  the classfiles directory. excludes="test/**"  -->
   </target>
 
     <target name="run-conf" depends="compile">
-        <java classname="phenote.main.Phenote" fork="yes" jvmargs="-Xmx120M">
+        <java classname="phenote.main.Phenote" fork="yes" jvmargs="-Xmx200M">
             <!-- arg value="-c configfilehereventually"/ -->
             <arg value="-c"/>
     <!-- from command line with  -DCONF-FILE=initial-zfin.cfg -->
@@ -159,7 +159,7 @@ them into  the classfiles directory. excludes="test/**"  -->
 
 
     <target name="test" depends="build-test">
-        <java classname="org.junit.runner.JUnitCore" fork="yes" jvmargs="-Xmx120M">
+        <java classname="org.junit.runner.JUnitCore" fork="yes" jvmargs="-Xmx200M">
             <arg value="phenote.gui.TestPhenote"/>
             <classpath>
                 <pathelement path="${classfiles}"/>

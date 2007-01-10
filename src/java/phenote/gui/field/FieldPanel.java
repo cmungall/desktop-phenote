@@ -136,19 +136,19 @@ public class FieldPanel extends JPanel {
 
   // for test to listen - move to test code?
   public AbstractAutoCompList getEntityComboBox() {
-    return getComboBox(CharFieldEnum.ENTITY);
+    //return getComboBox(CharFieldEnum.ENTITY);
+    return getComboBox("Entity");
   }
   
-  // for testing - move to test?
-  private AbstractAutoCompList getComboBox(CharFieldEnum cfe) {
+  private AbstractAutoCompList getComboBox(String name) {
     for (CharFieldGui cfg : charFieldGuiList)
-      if (cfg.getCharFieldEnum() == cfe)
-        return cfg.getCompList();
+      if (cfg.getLabel().equals(name)) return cfg.getCompList();
     return null;
   }
 
+
   public AbstractAutoCompList getQualityComboBox() {
-    return getComboBox(CharFieldEnum.QUALITY);
+    return getComboBox("Quality");
   }
 //   boolean hasLumpComboBox() {
 //     //return lumpField.isCombo();
@@ -162,6 +162,13 @@ public class FieldPanel extends JPanel {
 
 
 // GARBAGE - DELETE
+//   // for testing - move to test?
+//   private AbstractAutoCompList getComboBox(CharFieldEnum cfe) {
+//     for (CharFieldGui cfg : charFieldGuiList)
+//       if (cfg.getCharFieldEnum() == cfe)
+//         return cfg.getCompList();
+//     return null;
+//   }
 
     // load up terms for term completion
     /// Ontology.init(); // hmmmm.... now initializes with get - thread!
