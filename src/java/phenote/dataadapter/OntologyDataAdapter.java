@@ -7,8 +7,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.geneontology.oboedit.datamodel.OBOSession;
@@ -38,11 +40,13 @@ public class OntologyDataAdapter {
   private Config config;
   private OntologyManager ontologyManager = OntologyManager.inst();
   private boolean initializingOntologies = false;
+  private Map<String,Ontology> fileToOntologyCache = new HashMap<String,Ontology>();
+  
   private static final Logger LOG = Logger.getLogger(OntologyDataAdapter.class);
 
   private OntologyDataAdapter() {
     config = Config.inst();
-    initOntologies();
+    initOntologies(); // loads up all ontologies
     //if (config.checkForNewOntologies()){new OntologyFileCheckThread().start();}
   }
 
@@ -108,9 +112,6 @@ public class OntologyDataAdapter {
     initializingOntologies = false;
   }
 
-  
-
-
   /** Load up/cache Sets for all ontologies used, anatomyOntologyTermSet
    * and patoOntologyTermSet -- move to dataadapter/OntologyDataAdapter... */
   private Ontology initOntology(OntologyConfig ontCfg) throws OntologyException {
@@ -119,31 +120,47 @@ public class OntologyDataAdapter {
       ontology.setFilter(ontCfg.getFilter());
     if (ontCfg.hasSlim())
       ontology.setSlim(ontCfg.getSlim());
-    loadOboSession(ontology,ontCfg.ontologyFile); // throws FileNotFoundEx
+      
+    loadOboSession(ontology,ontCfg.getFile()); // throws FileNotFoundEx
     return ontology;
   }
 
-//   private void loadRelationshipOntology() { hmmmmmm
-//     // for now - todo configure! post comp relationship-ontology
-//     // FieldConfig rfc = config.getRelationshipFieldConfig();
-//     //CharFieldEnum relEnum = rfc.getCharFieldEnum();
-//     CharFieldEnum relEnum = CharFieldEnum.RELATIONSHIP;
-//     CharField cf = new CharField(relEnum);
-//   }
-
+  /** Load obo session with obo edit adapter, unless previously loaded - reuse */
   private void loadOboSession(Ontology o,String filename) throws OntologyException {
+    // check cache of ontologies to see if ontology file already loaded
+    if (fileIsInCache(filename)) {
+      loadOboSessionFromCache(o,filename);
+    }
+    else {
+      loadOboSessionIgnoreCache(o,filename);
+    }
+  }
+
+  private boolean fileIsInCache(String filename) {
+    return fileToOntologyCache.containsKey(filename);
+  }
+
+  private void loadOboSessionFromCache(Ontology o,String filename)
+  throws OntologyException {
+    Ontology previousOntol = fileToOntologyCache.get(filename);
+    o.setOboSession(previousOntol.getOboSession()); // throws OntEx if error
+    System.out.println("obo file already loaded using, obo file from cache "+o.getOboSession());
+    o.setTimestamp(previousOntol.getTimestamp());
+    o.setSource(previousOntol.getSource());
+  }
+
+  private void loadOboSessionIgnoreCache(Ontology o,String filename)
+  throws OntologyException {
     URL url = findFile(filename); // throws OntologyEx if file not found
-    OBOSession oboSession = getOboSession(url);
-    o.setOboSession(oboSession); // throws OntEx if error
+    o.setOboSession(getOboSession(url)); // throws OntEx if error
+    fileToOntologyCache.put(filename,o);
     File file = new File(url.getFile());
     long date = file.lastModified();
-    //System.out.println(" file "+file+" mod "+date+" "+new Date(date));
     if (date > 0) { // jar files have 0 date???
       o.setTimestamp(date);
       o.setSource(file.toString());
     }
   }
-
   
 
   /** Look for file in current directory (.) and jar file 
@@ -170,9 +187,7 @@ public class OntologyDataAdapter {
       return os;
     }
     catch (DataAdapterException e) {
-      //System.out.println("got data adapter exception: "+e);
       LOG.error("got data adapter exception: "+e); // ??
-      //return null; // empty session?
       throw new OntologyException(e);
     }
   }
@@ -181,8 +196,17 @@ public class OntologyDataAdapter {
       to reload itself from its file - in other words there is a new obo file to load 
       in place of old one */
   public void reloadOntology(Ontology ont) throws OntologyException {
-    loadOboSession(ont,ont.getSource()); // throws ex
+    loadOboSessionIgnoreCache(ont,ont.getSource()); // throws ex
   }
+
+//   private void loadRelationshipOntology() { hmmmmmm
+//     // for now - todo configure! post comp relationship-ontology
+//     // FieldConfig rfc = config.getRelationshipFieldConfig();
+//     //CharFieldEnum relEnum = rfc.getCharFieldEnum();
+//     CharFieldEnum relEnum = CharFieldEnum.RELATIONSHIP;
+//     CharField cf = new CharField(relEnum);
+//   }
+
 
 }
 
@@ -242,73 +266,8 @@ public class OntologyDataAdapter {
 //       }
 //     }
 
-///     // first try file as is (full path provided)
-//     File file = new File(fileName);
-//     if (file.exists())
-//       return makeUrl(fileName);
-
-//     String oboFileDir = "obo-files/";
-//     // try current directory + obo-file dir
-//     String currentDir = "./" + oboFileDir + fileName;
-//     file = new File(currentDir);
-//     if (file.exists())
-//       return makeUrl(currentDir);
-
-//     // try jar - hopefully this works... jar files have to have '/' prepended
-//     // first try without obo-files dir (in jar)
-//     String jarFile = "/" + fileName;
-//     URL url = Ontology.class.getResource(jarFile); // looks in jar
-//     // 2nd try with obo-files dir in jar file (i used to do it this way)
-//     if (url == null) {
-//       jarFile = "/" + oboFileDir + fileName;
-//       url = Ontology.class.getResource(jarFile); // looks in jar
-//     }
-
-//     if (url == null) {
-//       throw new FileNotFoundException("No file found for "+fileName);
-//     }
-//     return url;
-//   }
   
-//   private URL makeUrl(String file) {
-//     try {
-//       return new URL("file:"+file);
-//     }
-//     catch (MalformedURLException e) {
-//       //System.out.println("malformed url "+file+" "+e);
-//       LOG.error("malformed url "+file+" "+e);
-//       return null;
-//     }
-//   }
 //     if (date > 0) { // jar files have 0 date???
 //       ontology.setTimestamp(date);
 //       ontology.setSource(file.toString());
-//     }
-//     URL url = findFile(ontCfg.ontologyFile); // throws FileNotFoundEx
-//     File file = new File(url.getFile());
-//     long date = file.lastModified();
-//     System.out.println("url path "+url.getPath()+" file "+file+" mod "+date+" "+new Date(date));
-//     OBOSession oboSession = getOboSession(url);
-//     Ontology pato = loadOntology(config.getPatoOntologyConfig());
-//     ontologyManager.setPatoOntology(pato);
-
-//     if (config.hasLumpOntology()) {
-//       Ontology lump = loadOntology(config.getLumpOntologyConfig());
-//       ontologyManager.setLumpOntology(lump);
-//     }
-    
-//     List<OntologyConfig> entities = config.getEntityOntologyConfigs();
-//     Iterator<OntologyConfig> it = entities.iterator();
-//     while(it.hasNext()) {
-//       Ontology o = loadOntology(it.next());
-//       ontologyManager.addEntityOntology(o);
-//     }
-
-//     if (config.hasGeneticContextField()) {
-//       FieldConfig fc = config.getGeneticContextConfig();
-//       Ontology o = loadOntology(fc.getOntologyConfig());
-//       //ontologyManager.setGeneticContextOntology(o);
-//       // alternatively... ... // or (new CharField(cfe,o)) ??
-//       //ontologyManager.addOntology(fc.getCharFieldEnum(),o);
-//       ontologyManager.addField(new CharField(fc.getCharFieldEnum(),o));
 //     }

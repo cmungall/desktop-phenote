@@ -46,6 +46,7 @@ public class OntologyConfig {
       return;
     ontologyFile = file;
   }
+  public String getFile() { return ontologyFile; }
 
   private boolean isBad(String s) {
     return s == null || s.trim().equals("");

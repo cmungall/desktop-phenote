@@ -77,15 +77,6 @@ public class OntologyManager {
     //return null;
   }
 
-
-//   private void addOntologyList(List<Ontology> l) {
-//     allOntologyList.addAll(l);
-//   }
-
-//   private void addOntology(Ontology o) {
-//     allOntologyList.add(o);
-//   }
-
   /** Searches all ontologies for id - this could be even more savvy and utilize
       the id prefix AO,GO,PATO... 
       Should this deal with post comp? if ^ then create a post comp term on fly? 
@@ -182,6 +173,15 @@ public class OntologyManager {
   }
 
 }
+
+//   private void addOntologyList(List<Ontology> l) {
+//     allOntologyList.addAll(l);
+//   }
+
+//   private void addOntology(Ontology o) {
+//     allOntologyList.add(o);
+//   }
+
 
   // i think char field now does this
     //fieldToOntologyList = new HashMap<CharFieldEnum,List<Ontology>>();
