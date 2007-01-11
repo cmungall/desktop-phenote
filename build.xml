@@ -375,11 +375,23 @@ where xsd files are (conf) -->
 
 <!-- todo do all jars not just phenote - take out -signed -->
 <!-- depends on sym link phenote-webstart and env var PHENOTE_VERSION -->
-    <target name="build-webstart" depends="build-sign-jars,webstart"/>
+    <!-- target name="build-webstart" depends="build-sign-jars,webstart"/ -->
+    <target name="build-webstart" depends="build-all,jar,webstart,sign-webstart-jars"/ >
 
     <target name="build-sign-jars" depends="build-all,jar,sign-jars"/>
 
-    <target name="sign-jars">
+
+    <target name="sign-jars-svn-jar-dir-take-this-out-perhaps">
+       <signjar keystore="plumpkey" alias="signFiles"
+                storepass="plumper" keypass="plumper">
+         <fileset dir="${lib}">
+            <include name="*.jar"/>
+         </fileset>
+       </signjar>
+    </target>
+
+
+    <target name="sign-jars-svn-jar-dir-take-this-out-perhaps">
        <signjar keystore="plumpkey" alias="signFiles"
                 storepass="plumper" keypass="plumper">
          <fileset dir="${lib}">
@@ -402,6 +414,15 @@ where xsd files are (conf) -->
         <fileset file="${lib}/*.jar"/>
       </copy>
     </target>
+
+    <target name="sign-webstart-jars">
+       <signjar keystore="plumpkey" alias="signFiles"
+                storepass="plumper" keypass="plumper">
+         <fileset dir="phenote-webstart/${env.PHENOTE_VERSION}/jars">
+            <include name="*.jar"/>
+         </fileset>
+       </signjar>
+    </target>   
 
     <target name="webstart-just-phenote-jar" depends="build-all,jar">
        <signjar jar="${lib}/phenote.jar" keystore="plumpkey" alias="signFiles"
