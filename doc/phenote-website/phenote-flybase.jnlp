@@ -39,7 +39,7 @@ href="phenote-flybase.jnlp">
 </resources>
 <application-desc main-class="phenote.main.Phenote">
         <argument>-c</argument>
-        <argument>/initial-flybase.cfg</argument>
+        <argument>/flybase.cfg</argument>
 </application-desc>
 </jnlp>
 

@@ -39,7 +39,7 @@ href="phenote-zfin.jnlp">
 </resources>
 <application-desc main-class="phenote.main.Phenote">
         <argument>-c</argument>
-        <argument>/initial-zfin.cfg</argument>
+        <argument>/zfin-standalone.cfg</argument>
 </application-desc>
 </jnlp>
 
