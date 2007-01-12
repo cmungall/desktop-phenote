@@ -9,6 +9,8 @@
 
 <project name="phenote" default="compile" basedir=".">
 
+    <!-- for antcontrib for if - hafta set CLASSPATH to /usr/share/ant/lib/ant-contrib-1.0b3.jar-->
+    <!-- taskdef resource="net/sf/antcontrib/antcontrib.properties"/ -->
     <description>phenote ant build</description>
     <!-- allows for use of environment vars -->
     <property environment="env"/>
@@ -395,6 +397,7 @@ where xsd files are (conf) -->
     
 <!-- need to test if PHENOTE_VERSION is defined - possible?? -->
     <target name="webstart">
+      <echo message="Env Var PHENOTE VERSION is set to ${env.PHENOTE_VERSION}" />
       <copy todir="phenote-webstart">
          <fileset file="doc/phenote-website/*.html"/>
        </copy>
@@ -422,6 +425,20 @@ where xsd files are (conf) -->
        <copy file="${lib}/phenote.jar"
              todir="phenote-webstart/${env.PHENOTE_VERSION}/jars"/>
     </target>
+
+
+    <target name="if-version">
+      <if>
+         <equals arg1="${env.PHENOTE_VERSION}" arg2="" />
+         <then>
+           <echo message="Env Var PHENOTE VERSION must be set - exiting" />
+         </then>
+         <else>
+           <echo message="Env Var PHENOTE VERSION is set to ${env.PHENOTE_VERSION}" />
+         </else>
+      </if>
+    </target>
+
 
 </project>
 
