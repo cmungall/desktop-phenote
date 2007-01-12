@@ -34,8 +34,8 @@ href="phenote-human.jnlp">
 	<jar href="jars/phenoteconfigbeans.jar" />
 	<jar href="jars/tomcat-servlet.jar" />
 	<jar href="jars/xbean.jar" />
-        <jar href="jars/te-common.jar" />
-        <jar href="jars/log4j-1.2.13.jar" />
+	<jar href="jars/te-common.jar" />
+	<jar href="jars/log4j-1.2.13.jar" />
 </resources>
 <application-desc main-class="phenote.main.Phenote">
         <argument>-c</argument>

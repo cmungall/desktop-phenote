@@ -396,19 +396,24 @@ where xsd files are (conf) -->
 
     
 <!-- need to test if PHENOTE_VERSION is defined - possible?? -->
-    <target name="webstart">
+    <target name="webstart" depends="copy-jnlps">
       <echo message="Env Var PHENOTE VERSION is set to ${env.PHENOTE_VERSION}" />
       <copy todir="phenote-webstart">
          <fileset file="doc/phenote-website/*.html"/>
        </copy>
       <mkdir dir="phenote-webstart/${env.PHENOTE_VERSION}"/>
-      <copy todir="phenote-webstart/${env.PHENOTE_VERSION}">
-        <fileset file="doc/phenote-website/*.jnlp"/>
-      </copy>
       <copy todir="phenote-webstart/${env.PHENOTE_VERSION}/jars">
         <fileset file="${lib}/*.jar"/>
       </copy>
     </target>
+
+    <target name="copy-jnlps">
+      <echo message="Env Var PHENOTE VERSION is set to ${env.PHENOTE_VERSION}" />
+      <copy todir="phenote-webstart/${env.PHENOTE_VERSION}">
+        <fileset file="doc/phenote-website/*.jnlp"/>
+      </copy>
+    </target>
+    
 
     <target name="sign-webstart-jars">
        <signjar keystore="plumpkey" alias="signFiles"
@@ -420,10 +425,10 @@ where xsd files are (conf) -->
     </target>   
 
     <target name="webstart-just-phenote-jar" depends="build-all,jar">
-       <signjar jar="${lib}/phenote.jar" keystore="plumpkey" alias="signFiles"
-                storepass="plumper" keypass="plumper"/>
        <copy file="${lib}/phenote.jar"
              todir="phenote-webstart/${env.PHENOTE_VERSION}/jars"/>
+       <signjar jar="phenote-webstart/${env.PHENOTE_VERSION}/jars/phenote.jar" keystore="plumpkey" alias="signFiles"
+                storepass="plumper" keypass="plumper"/>
     </target>
 
 
