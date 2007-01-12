@@ -36,8 +36,8 @@ href="phenote-human.jnlp">
 	<jar href="jars/xbean.jar" />
         <jar href="jars/te-common.jar" />
         <jar href="jars/log4j-1.2.13.jar" />
-<</resources>
-<application-desc main-class="phenote.gui.Phenote">
+</resources>
+<application-desc main-class="phenote.main.Phenote">
         <argument>-c</argument>
         <argument>/human.cfg</argument>
 </application-desc>
