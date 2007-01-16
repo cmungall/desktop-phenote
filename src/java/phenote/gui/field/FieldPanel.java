@@ -55,7 +55,7 @@ public class FieldPanel extends JPanel {
     this.setLayout(bl);
     fieldPanel = new JPanel(new GridBagLayout());
     // panel inside of panel - i think is a leftover no reason now
-    add(fieldPanel); // default flow layout?
+    add(fieldPanel);
     // search param panel - maybe search panel should be added to main frame?
     add(getSearchParamPanel().getPanel());
 

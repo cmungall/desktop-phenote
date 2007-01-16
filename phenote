@@ -8,6 +8,6 @@ for file in jars/*.jar; do
   fi;
 done
 
-java -Xmx600M -classpath ${PHENOTE_CLASSPATH} phenote.main.Phenote $@
+java -Xmx650M -classpath ${PHENOTE_CLASSPATH} phenote.main.Phenote $@
 
 ##java -Xmx300M -classpath classfiles:jars/oboedit.jar:jars/org.geneontology.jar:jars/BrowserLauncher2-10rc4.jar:jars/junit-4.0.jar:jars/tomcat-servlet.jar:jars/xbean.jar:jars/jsr173_1.0_api.jar:jars/phenoxmlbeans.jar:jars/phenoteconfigbeans.jar:jars/log4j-1.2.13.jar:jars/te-common.jar phenote.main.Phenote $@

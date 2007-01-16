@@ -28,14 +28,14 @@ public class SearchParamPanel {
     BoxLayout boxLayout = new BoxLayout(panel,BoxLayout.Y_AXIS);
     panel.setLayout(boxLayout);
     panel.add(new JLabel("Search:"));
-    termButton = makeButton("Terms");
+    termButton = makeButton("Term");
     termButton.setSelected(true);
     panel.add(termButton);
-    synonymButton = makeButton("Synonyms");
+    synonymButton = makeButton("Syn");
     panel.add(synonymButton);
-    definitionButton = makeButton("Definitions");
+    definitionButton = makeButton("Def");
     panel.add(definitionButton);
-    obsoleteButton = makeButton("Obsolete");
+    obsoleteButton = makeButton("Obs");
     panel.add(obsoleteButton);
     return panel;
   }
