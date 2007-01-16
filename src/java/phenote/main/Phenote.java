@@ -167,7 +167,7 @@ public class Phenote {
     frame = new JFrame("Phenote "+PhenoteVersion.versionString()); 
     frame.getContentPane().add(makeMainPanel());
     MenuManager.createMenuManager(frame);
-    frame.setPreferredSize(new Dimension(1100,700));
+    frame.setPreferredSize(new Dimension(1130,700)); //1100,700));
     if (standalone) // if stand alone exit java on window close
       frame.addWindowListener(new WindowExit());
     frame.pack();
@@ -194,10 +194,8 @@ public class Phenote {
     BoxLayout bl = new BoxLayout(upperPanel,BoxLayout.X_AXIS);
     upperPanel.setLayout(bl);
 
-    fieldPanel = new FieldPanel();
+    fieldPanel = new FieldPanel(); // field panel contains search params
     upperPanel.add(fieldPanel);
-
-
 
     termInfo = new TermInfo(); //fieldPanel);
     upperPanel.add(termInfo.getComponent());

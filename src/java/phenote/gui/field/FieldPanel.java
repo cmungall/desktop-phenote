@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -39,15 +40,27 @@ public class FieldPanel extends JPanel {
   }
   // false for post comp panel
   public FieldPanel(boolean doAllOntologies) {
-    //this.setPreferredSize(new Dimension(800,750));
-    // should figure depth from # of fields really
-    this.setMinimumSize(new Dimension(690,490));
-    fieldPanel = new JPanel(new GridBagLayout());
-    // panel inside of panel - i think is a leftover no reason now
-    add(fieldPanel); // default flow layout?
+    initGui();
     if (doAllOntologies)
       initAllOntologies();
   }
+
+  private void initGui() {
+    // should figure y from # of fields really
+    // width of ontology labels effects x
+    this.setMinimumSize(new Dimension(730,490));//690,490));
+    //this.setPreferredSize(new Dimension(2000,750)); // irrelevant in box layout
+    //this.setMaximumSize(new Dimension(2000,750));
+    BoxLayout bl = new BoxLayout(this,BoxLayout.X_AXIS); // grid bag?
+    this.setLayout(bl);
+    fieldPanel = new JPanel(new GridBagLayout());
+    // panel inside of panel - i think is a leftover no reason now
+    add(fieldPanel); // default flow layout?
+    // search param panel - maybe search panel should be added to main frame?
+    add(getSearchParamPanel().getPanel());
+
+  }
+
 
   /** from selection in plump table - hmmm mvc - get from model change event - 
    should ACB listen for event and change themselves? - oh wait this is for selection
@@ -66,7 +79,7 @@ public class FieldPanel extends JPanel {
     }
 
     // search param panel - maybe search panel should be added to main frame?
-    add(getSearchParamPanel().getPanel());
+    //add(getSearchParamPanel().getPanel()); --> initGui
   }
 
   SearchParamsI getSearchParams() {
