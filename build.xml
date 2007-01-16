@@ -396,16 +396,21 @@ where xsd files are (conf) -->
 
     
 <!-- need to test if PHENOTE_VERSION is defined - possible?? -->
-    <target name="webstart" depends="copy-jnlps">
+    <target name="webstart" depends="webstart-html,copy-jnlps">
       <echo message="Env Var PHENOTE VERSION is set to ${env.PHENOTE_VERSION}" />
-      <copy todir="phenote-webstart">
-         <fileset file="doc/phenote-website/*.html"/>
-       </copy>
       <mkdir dir="phenote-webstart/${env.PHENOTE_VERSION}"/>
       <copy todir="phenote-webstart/${env.PHENOTE_VERSION}/jars">
         <fileset file="${lib}/*.jar"/>
       </copy>
     </target>
+
+    <target name="webstart-html">
+      <echo message="Env Var PHENOTE VERSION is set to ${env.PHENOTE_VERSION}" />
+      <copy todir="phenote-webstart">
+         <fileset file="doc/phenote-website/*.html"/>
+       </copy>
+    </target>
+    
 
     <target name="copy-jnlps">
       <echo message="Env Var PHENOTE VERSION is set to ${env.PHENOTE_VERSION}" />
