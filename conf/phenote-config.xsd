@@ -15,12 +15,13 @@
     <xs:complexType>
       <xs:attribute name="name" use="required">
         <xs:annotation>
-          <xs:documentation>for now just 2 dataadapters, phenoxml &amp; phenosyntax</xs:documentation>
+          <xs:documentation>for now just 2 dataadapters, phenoxml &amp; phenosyntax (and now also nexus)</xs:documentation>
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:token">
             <xs:enumeration value="phenoxml"/>
             <xs:enumeration value="phenosyntax"/>
+            <xs:enumeration value="nexus"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>

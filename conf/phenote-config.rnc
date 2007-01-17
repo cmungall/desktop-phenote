@@ -12,8 +12,8 @@ start =
 
 dataadapter =
   element dataadapter {
-    ## for now just 2 dataadapters, phenoxml & phenosyntax
-    attribute name {"phenoxml" | "phenosyntax"}
+    ## for now just 2 dataadapters, phenoxml & phenosyntax (and now also nexus)
+    attribute name {"phenoxml" | "phenosyntax" | "nexus"}
   }
 
 ## Whether to check if ontology(obo) has been updated/more current obo file
