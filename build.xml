@@ -417,6 +417,9 @@ where xsd files are (conf) -->
       <copy todir="phenote-webstart/${env.PHENOTE_VERSION}">
         <fileset file="doc/phenote-website/*.jnlp"/>
       </copy>
+      <copy todir="phenote-webstart/latest">
+        <fileset file="doc/phenote-website/*.jnlp"/>
+      </copy>
     </target>
     
 
