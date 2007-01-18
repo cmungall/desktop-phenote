@@ -6,6 +6,7 @@
         <xs:element ref="x:log"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:dataadapter"/>
         <xs:element ref="x:uvic-graph"/>
+        <xs:element ref="x:obo-repository"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:field"/>
       </xs:sequence>
       <xs:attribute name="version" use="required" type="xs:float"/>
@@ -35,6 +36,11 @@
   <xs:element name="uvic-graph">
     <xs:complexType>
       <xs:attribute name="enable" use="required" type="xs:boolean"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="obo-repository">
+    <xs:complexType>
+      <xs:attribute name="url-dir" use="required"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="field">
@@ -68,6 +74,7 @@
       </xs:attribute>
       <xs:attribute name="filter-out" use="required"/>
       <xs:attribute name="slim" use="required"/>
+      <xs:attribute name="repos-subdir" use="required"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="ontology">
@@ -80,6 +87,7 @@
       </xs:attribute>
       <xs:attribute name="filter-out" use="required"/>
       <xs:attribute name="slim" use="required"/>
+      <xs:attribute name="repos-subdir" use="required"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="postcomp">

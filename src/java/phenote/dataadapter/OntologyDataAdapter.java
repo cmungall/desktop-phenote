@@ -1,16 +1,25 @@
 package phenote.dataadapter;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParsePosition;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 
 import org.apache.log4j.Logger;
 import org.geneontology.oboedit.datamodel.OBOSession;
@@ -121,18 +130,18 @@ public class OntologyDataAdapter {
     if (ontCfg.hasSlim())
       ontology.setSlim(ontCfg.getSlim());
       
-    loadOboSession(ontology,ontCfg.getFile()); // throws FileNotFoundEx
+    loadOboSession(ontology,ontCfg); // throws FileNotFoundEx
     return ontology;
   }
 
   /** Load obo session with obo edit adapter, unless previously loaded - reuse */
-  private void loadOboSession(Ontology o,String filename) throws OntologyException {
+  private void loadOboSession(Ontology o,OntologyConfig oc) throws OntologyException {
     // check cache of ontologies to see if ontology file already loaded
-    if (fileIsInCache(filename)) {
-      loadOboSessionFromCache(o,filename);
+    if (fileIsInCache(oc.getFile())) {
+      setOboSessionFromCache(o,oc.getFile());
     }
     else {
-      loadOboSessionIgnoreCache(o,filename);
+      loadOboSessionCheckRepos(o,oc);
     }
   }
 
@@ -140,7 +149,7 @@ public class OntologyDataAdapter {
     return fileToOntologyCache.containsKey(filename);
   }
 
-  private void loadOboSessionFromCache(Ontology o,String filename)
+  private void setOboSessionFromCache(Ontology o,String filename)
   throws OntologyException {
     Ontology previousOntol = fileToOntologyCache.get(filename);
     o.setOboSession(previousOntol.getOboSession()); // throws OntEx if error
@@ -149,17 +158,95 @@ public class OntologyDataAdapter {
     o.setSource(previousOntol.getSource());
   }
 
-  private void loadOboSessionIgnoreCache(Ontology o,String filename)
+  /** If repository is configured loads obo from repos if local out of date */
+  private void loadOboSessionCheckRepos(Ontology o,OntologyConfig oc)
   throws OntologyException {
+    String filename = oc.getFile();
     URL url = findFile(filename); // throws OntologyEx if file not found
+    
+    // if ontCfg.hasSynchUrl() ?
+    // URL synchUrl = ontCfg.getSynchUrl
+    if (oc.hasReposUrl()) {
+      try {
+        URL reposUrl = oc.getReposUrl();//new URL("http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/evidence_code.obo");
+        url = checkRepositoryUrl(url,reposUrl,o.getName());
+
+        // to do - if from repos need to load repos into local obo cache!
+
+      } catch (/*MalformedURL & IO*/Exception e) { LOG.error(e); }
+    }
+    
+    loadOboSessionFromUrl(o,url,filename);
+//     o.setOboSession(getOboSession(url)); // throws OntEx if error
+//     fileToOntologyCache.put(filename,o);
+//     File file = new File(url.getFile());
+//     long date = file.lastModified();
+//     if (date > 0) { // jar files have 0 date???
+//       o.setTimestamp(date);
+//       o.setSource(file.toString());
+//     }
+  }
+
+  /** url is either local file or repos url */
+  private void loadOboSessionFromUrl(Ontology o, URL url, String filename)
+  throws OntologyException {
+    //URL url = findFile(filename); // throws OntologyEx if file not found
     o.setOboSession(getOboSession(url)); // throws OntEx if error
-    fileToOntologyCache.put(filename,o);
+    if (filename!=null)
+      fileToOntologyCache.put(filename,o); // ??
     File file = new File(url.getFile());
     long date = file.lastModified();
     if (date > 0) { // jar files have 0 date???
       o.setTimestamp(date);
       o.setSource(file.toString());
     }
+  }
+
+  private URL checkRepositoryUrl(URL localUrl, URL reposUrl, String ontol)
+    throws OntologyException {
+    long repos = getOboDate(reposUrl);
+    long loc = getOboDate(localUrl); // throws ont ex
+    boolean useRepos = false;
+    if (repos > loc)
+      useRepos = queryUserAboutRepos(ontol);
+    if (useRepos) {
+      LOG.info("Loading new ontology from repository "+reposUrl);
+      return reposUrl;
+    }
+    return localUrl;
+  }
+
+  // is it bad to have a popup from data adapter?
+  private boolean queryUserAboutRepos(String ontol) {
+    String m = "There is a more current ontology in the repository for "+ontol+".\nWould"
+      +" you like to load the new version? (may take a few minutes)";
+    int yn = JOptionPane.showConfirmDialog(null,m,"Synch ontology?",
+                                           JOptionPane.YES_NO_OPTION,
+                                           JOptionPane.QUESTION_MESSAGE);
+    return yn == JOptionPane.YES_OPTION;
+  }
+
+  /** Get the date of the file from the header of the obo file - just read header dont
+      read in whole file. should it also query urlConnection for date first? */
+  private long getOboDate(URL oboUrl) throws OntologyException {
+    try {
+      InputStream is = oboUrl.openStream();
+      BufferedReader br = new BufferedReader(new InputStreamReader(is));
+      // just try first 15 lines? try til hit [Term]?
+      for (int i=1; i<=15; i++) {
+        String line = br.readLine();
+        // eg date: 22:08:2006 15:38
+        if (!line.startsWith("date:")) continue;
+	SimpleDateFormat dateFormat = new SimpleDateFormat("dd:MM:yyyy HH:mm");
+        Date d = dateFormat.parse(line, new ParsePosition(6));
+        LOG.debug("date "+d+" for url "+oboUrl+" line "+line);
+        br.close();
+        if (d == null)
+          throw new OntologyException("couldnt parse date "+line);
+        return d.getTime();
+      }
+      throw new OntologyException("No date found in "+oboUrl);
+    } catch (IOException e) { throw new OntologyException(e); }
   }
   
 
@@ -175,7 +262,7 @@ public class OntologyDataAdapter {
   // String -> url to handle web start jar obo files
   private OBOSession getOboSession(URL oboUrl) throws OntologyException {
     if (oboUrl == null)
-      return new OBOSessionImpl(); // ??
+      throw new OntologyException("No url to retrieve");//return new OBOSessionImpl();
 
     OBOFileAdapter fa = new OBOFileAdapter();
     FileAdapterConfiguration cfg = new OBOFileAdapter.OBOAdapterConfiguration();
@@ -196,7 +283,8 @@ public class OntologyDataAdapter {
       to reload itself from its file - in other words there is a new obo file to load 
       in place of old one */
   public void reloadOntology(Ontology ont) throws OntologyException {
-    loadOboSessionIgnoreCache(ont,ont.getSource()); // throws ex
+    URL url = findFile(ont.getSource()); // ex
+    loadOboSessionFromUrl(ont,url,ont.getSource()); // throws ex
   }
 
 //   private void loadRelationshipOntology() { hmmmmmm

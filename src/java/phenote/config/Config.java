@@ -30,6 +30,7 @@ import phenote.config.xml.FieldDocument.Field;
 import phenote.config.xml.OntologyDocument.Ontology;
 import phenote.config.xml.LogDocument.Log;
 import phenote.config.xml.UvicGraphDocument.UvicGraph;
+import phenote.config.xml.OboRepositoryDocument.OboRepository;
 
 import phenote.util.FileUtil;
 import phenote.datamodel.CharField;
@@ -52,6 +53,7 @@ public class Config {
   //private int newOntologyCheckMinutes = 10;
   private String logConfigFile = "conf/log4j.xml"; // default log config file
   private boolean uvicGraphEnabled = false; // default false for now
+  private String reposUrlDir;
 
   /** singleton */
   private Config() {
@@ -222,6 +224,8 @@ public class Config {
     throw new ConfigException("Syn Abbrev for "+cf+" not found");
   }
 
+  String getReposUrlDir() { return reposUrlDir; }
+
   /** should this just be a part of fieldConfigList? and main window would filter it
       out when making up fields? rel is for post comp gui - or maybe FieldConfig
       should have isPostComp, getPostCompRelFile - yes! */
@@ -256,6 +260,11 @@ public class Config {
       UvicGraph gr = pc.getUvicGraph();
       if (gr != null)
         uvicGraphEnabled = gr.getEnable();
+
+      // Repos url dir
+      OboRepository or = pc.getOboRepository();
+      if (or != null && or.getUrlDir() != null)
+        reposUrlDir = or.getUrlDir().getStringValue();
 
       // FIELDS
       Field[] fields = pc.getFieldArray();
@@ -319,28 +328,16 @@ public class Config {
       fc.setPostCompRelOntCfg(makeOntologyConfig("Relationship",relFile));
     }
 
+
     // ONTOLOGIES if only one ontology file is an attribute... (convenience)
     if (field.getFile() != null) {
-      String file = field.getFile().getStringValue();
-      // downside of strogly types xml beans is filterOut has to be dealt with 
-      // separately for field & ontology - annoying - & all other attribs
-      String filterOut = 
-        field.getFilterOut()!=null ? field.getFilterOut().getStringValue() : null;
-      String slim = field.getSlim()!=null ? field.getSlim().getStringValue() : null;
-      fc.addOntologyConfig(makeOntologyConfig(name,file,filterOut,slim));
+      fc.addOntologyConfig(new OntologyConfig(field));
     }
     // otherwise its multiple ontologies listed in ontology elements (entity)
     else {
       Ontology[] ontologies = field.getOntologyArray();
       for (Ontology o : ontologies) {
-        String oName = o.getName().getStringValue();
-        String oFile = o.getFile().getStringValue();
-        String filterOut=null;
-        if (o.getFilterOut() != null)
-          filterOut = o.getFilterOut().getStringValue();
-        String slim = o.getSlim()!=null ? o.getSlim().getStringValue() : null;
-        OntologyConfig oc = makeOntologyConfig(oName,oFile,filterOut,slim);
-        fc.addOntologyConfig(oc);
+        fc.addOntologyConfig(new OntologyConfig(o));
       }
     }
     fieldList.add(fc);
@@ -352,15 +349,47 @@ public class Config {
     OntologyConfig oc = new OntologyConfig(name,file);
     return oc;
   }
-  private OntologyConfig makeOntologyConfig(String name, String file, String filterOut) {
-    return new OntologyConfig(name,file,filterOut);
-  }
-  private OntologyConfig makeOntologyConfig(String name, String file, String filterOut,
-                                            String slim) {
-    return new OntologyConfig(name,file,filterOut,slim);
-  }
-
 }
+
+//         String oName = o.getName().getStringValue();
+//         String oFile = o.getFile().getStringValue();
+//         String filterOut=null;
+//         if (o.getFilterOut() != null)
+//           filterOut = o.getFilterOut().getStringValue();
+//         String slim = o.getSlim()!=null ? o.getSlim().getStringValue() : null;
+//        OntologyConfig oc = makeOntologyConfig(oName,oFile,filterOut,slim);
+//       String file = field.getFile().getStringValue();
+//       // downside of strogly types xml beans is filterOut has to be dealt with 
+//       // separately for field & ontology - annoying - & all other attribs
+//       String filterOut = 
+//         field.getFilterOut()!=null ? field.getFilterOut().getStringValue() : null;
+//       String slim = field.getSlim()!=null ? field.getSlim().getStringValue() : null;
+//       if (field.getReposSubdir() != null)
+//         fc.setReposSubdir(field.getReposSubdir().getStringValue());
+
+//   private OntologyConfig makeOntologyConfig(Field field) {
+//     String name = field.getName().getStringValue();
+//     String file = field.getFile().getStringValue();
+//     // downside of strongly types xml beans is filterOut has to be dealt with 
+//     // separately for field & ontology - annoying - & all other attribs
+//     String filterOut = 
+//       field.getFilterOut()!=null ? field.getFilterOut().getStringValue() : null;
+//     String slim = field.getSlim()!=null ? field.getSlim().getStringValue() : null;
+//     String rs = field.getReposSubdir()!=null ?
+//       field.getReposSubdir().getStringValue() : null;
+//     return makeOntologyConfig(name,file,filterOut,slim,rs);
+//     //fc.addOntologyConfig(makeOntologyConfig(name,file,filterOut,slim));
+//   }
+
+//   private OntologyConfig makeOntologyConfig(String name, String file, String filterOut) {
+//     return new OntologyConfig(name,file,filterOut);
+//   }
+//   private OntologyConfig makeOntologyConfig(String name, String file, String filterOut,
+//                                             String slim,String reposSubdir) {
+//     return new OntologyConfig(name,file,filterOut,slim,reposSubdir);
+//   }
+
+
 
 //       // CHECK FOR ONTOLOGIES
 //       CheckForNewOntologies cfno = pc.getCheckForNewOntologies();

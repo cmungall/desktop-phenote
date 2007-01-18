@@ -7,6 +7,7 @@ start =
     log,
     dataadapter*,
     uvic-graph,
+    obo-repository,
     field*
   }
 
@@ -31,6 +32,8 @@ log =
 
 uvic-graph = element uvic-graph { attribute enable { xsd:boolean } }
 
+obo-repository = element obo-repository { attribute url-dir {text} }
+
 field = 
   element field {
     ##attribute name { "Pub" | "Genotype" | "Genetic Context" | "Entity" | "Quality" },
@@ -44,6 +47,7 @@ field =
     attribute file { text },
     attribute filter-out { text },
     attribute slim { text },
+    attribute repos-subdir {text},
     postcomp?,
     ontology*
   } 
@@ -54,7 +58,8 @@ ontology =
     ## obo file for ontology
     attribute file { text },
     attribute filter-out { text },
-    attribute slim { text }
+    attribute slim { text },
+    attribute repos-subdir {text}
   }
 
 postcomp =
