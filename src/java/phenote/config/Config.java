@@ -1,44 +1,32 @@
 package phenote.config;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.math.BigInteger;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 import org.apache.xmlbeans.XmlException;
-// in phenoteconfigbeans.jar code generate xml beans
+
 import phenote.config.xml.PhenoteConfigurationDocument;
-import phenote.config.xml.PhenoteConfigurationDocument.PhenoteConfiguration;
-//import phenote.config.xml.CheckForNewOntologiesDocument.CheckForNewOntologies;
 import phenote.config.xml.DataadapterDocument.Dataadapter;
 import phenote.config.xml.FieldDocument.Field;
-import phenote.config.xml.OntologyDocument.Ontology;
 import phenote.config.xml.LogDocument.Log;
-import phenote.config.xml.UvicGraphDocument.UvicGraph;
 import phenote.config.xml.OboRepositoryDocument.OboRepository;
-
-import phenote.util.FileUtil;
-import phenote.datamodel.CharField;
-import phenote.datamodel.CharFieldEnum;
+import phenote.config.xml.OntologyDocument.Ontology;
+import phenote.config.xml.PhenoteConfigurationDocument.PhenoteConfiguration;
+import phenote.config.xml.UvicGraphDocument.UvicGraph;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.fly.FlybaseDataAdapter;
+import phenote.dataadapter.nexus.NEXUSAdapter;
 import phenote.dataadapter.phenosyntax.PhenoSyntaxFileAdapter;
 import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
+import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldEnum;
+import phenote.util.FileUtil;
 
 public class Config {
 
@@ -296,6 +284,8 @@ public class Config {
       addDataAdapter(new PhenoSyntaxFileAdapter());
     else if (daString.equalsIgnoreCase("flybase")) // pase??
       addDataAdapter(new FlybaseDataAdapter()); // for now...
+    else if (daString.equalsIgnoreCase("nexus"))
+      addDataAdapter(new NEXUSAdapter());
   }
 
   private void addDataAdapter(DataAdapterI da) {
