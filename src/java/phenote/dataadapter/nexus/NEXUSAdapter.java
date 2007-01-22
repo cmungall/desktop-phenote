@@ -243,9 +243,7 @@ public class NEXUSAdapter implements DataAdapterI {
         }
         valueCount++;
       }
-      writer.write("\t\t\t");
-      if (entryIterator.hasNext()) writer.write(",");
-      writer.write("\n");
+      if (entryIterator.hasNext()) writer.write("\t\t\t,\n");
       characterNum++;
     }
     writer.write("\t\t;\n");
