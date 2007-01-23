@@ -114,4 +114,6 @@ public class OntologyConfig {
 
   public boolean hasSlim() { return slim != null; }
   public String getSlim() { return slim; }
+
+  public String toString() { return name; }
 }

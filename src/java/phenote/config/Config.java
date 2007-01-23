@@ -88,12 +88,7 @@ public class Config {
   private String getMyPhenoteConfig(String passedInConfig,
                                     boolean overwritePersonalCfg)
     throws ConfigException {
-    String home = System.getProperty("user.home");
-    File dotPhenote = new File(home+"/.phenote");
-    if (!dotPhenote.exists()) {
-      System.out.println("creating "+dotPhenote+" directory");
-      dotPhenote.mkdir();
-    }
+    File dotPhenote = FileUtil.getDotPhenoteDir();
     File myPhenote = new File(dotPhenote,"my-phenote.cfg");
     // if file doesnt exist yet or overwrite, copy over passedInConfig
     if (!myPhenote.exists() || overwritePersonalCfg) {

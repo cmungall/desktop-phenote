@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.*;
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.FileChannel;
@@ -21,6 +22,42 @@ public class FileUtil {
 
   private static final Logger LOG =  Logger.getLogger(FileUtil.class);
 
+  /** if ~/.phenote doesnt exist yet its created */
+  public static File getDotPhenoteDir() {
+    String home = System.getProperty("user.home");
+    File dotPhenote = new File(sep(home,".phenote"));
+    if (!dotPhenote.exists()) {
+      LOG.info("creating "+dotPhenote+" directory");
+      dotPhenote.mkdir();
+    }
+    return dotPhenote;
+  }
+
+  public static File getUserOboCacheDir() {
+    File d = getDotPhenoteDir();
+    File obo = new File(d,"obo-files");
+    if (!obo.exists()) {
+      LOG.info("creating "+obo+" directory");
+      obo.mkdir();
+    }
+    return obo;
+  }
+
+
+  /** get actual name of file sans path */
+  public static String getNameOfFile(URL urlFile) {
+    String path =  urlFile.getPath();
+    int lastSlashIndex = path.lastIndexOf('/');
+    if (lastSlashIndex == -1) return path;
+    return path.substring(lastSlashIndex);
+  }
+
+  private static String getDotPhenoteString() {
+    return getDotPhenoteDir().getPath();
+  }
+  
+  private static String sep(String a, String b) { return a + FILE_SEPARATOR + b; }
+
   public static URL findUrl(String filename) throws FileNotFoundException {
     List<URL> possibleUrls = getPossibleUrls(filename);
     for (URL u : possibleUrls)
@@ -30,10 +67,16 @@ public class FileUtil {
     throw new FileNotFoundException(filename+" not found");
   }
 
+  // this is muddling config and obo - probably should be 2 methods? or be smart about
+  // suffix - or who cares?
   private static List<URL> getPossibleUrls(String filename) {
     List<URL> urls = new ArrayList(5);
     addFile(filename,urls); // full path or relative to pwd
     addFile("conf/"+filename,urls);
+    // ~/.phenote/obo-files cache for obo files - overrides phenote obo-files
+    // eventually may have configured obo dir as well...
+    //addFile(sep(getDotPhenoteString(),"obo-files"),urls);
+    addFile(getUserOboCacheDir().getPath()+"/"+filename,urls);
     addFile("obo-files/"+filename,urls);//this is obo-files specific - separate method?
 //     URL jarUrl = FileUtil.class.getResource(filename);
 //     if (jarUrl != null) urls.add(jarUrl);
@@ -46,13 +89,14 @@ public class FileUtil {
     try {
       URL u = new File(filename).toURL();
       if (u != null) urls.add(u);
+
       URL jarUrl = FileUtil.class.getResource(filename);
       if (jarUrl != null) urls.add(jarUrl);
       jarUrl = FileUtil.class.getResource("/"+filename);
       if (jarUrl != null) urls.add(jarUrl);
     } catch (MalformedURLException e) {
-      System.out.println("bad file url "+e);
-      //LOG.error("bad file url "+e);
+      //System.out.println("bad file url "+e);
+      LOG.error("bad file url "+e);
     }
   }
 

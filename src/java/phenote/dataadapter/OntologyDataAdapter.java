@@ -1,11 +1,17 @@
 package phenote.dataadapter;
 
+import java.io.*;
+
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
+import java.nio.channels.ReadableByteChannel;
+import java.nio.channels.Channels;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -13,6 +19,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.text.ParsePosition;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -95,7 +102,7 @@ public class OntologyDataAdapter {
             cf.addOntology(o);
           } catch (OntologyException e) {
             //System.out.println(e.getMessage()+" ignoring ontology, fix config! ");
-            LOG.error(e.getMessage()+" ignoring init ontology, fix config? ");
+            LOG.error(e.getMessage()+" ignoring init ontology, fix config? "+oc);
           }
         }
       }
@@ -130,7 +137,7 @@ public class OntologyDataAdapter {
     if (ontCfg.hasSlim())
       ontology.setSlim(ontCfg.getSlim());
       
-    loadOboSession(ontology,ontCfg); // throws FileNotFoundEx
+    loadOboSession(ontology,ontCfg); // throws FileNotFoundEx->OntolEx
     return ontology;
   }
 
@@ -163,28 +170,24 @@ public class OntologyDataAdapter {
   throws OntologyException {
     String filename = oc.getFile();
     URL url = findFile(filename); // throws OntologyEx if file not found
-    
+
     // if ontCfg.hasSynchUrl() ?
     // URL synchUrl = ontCfg.getSynchUrl
     if (oc.hasReposUrl()) {
       try {
         URL reposUrl = oc.getReposUrl();//new URL("http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/evidence_code.obo");
-        url = checkRepositoryUrl(url,reposUrl,o.getName());
+        // if out of synch copies repos to local
+        // url may be jar/obo-files or svn/obo-files but this function may put file
+        // in cache ~/.phenote/obo-files
+        url = synchWithRepositoryUrl(url,reposUrl,o.getName());
 
+        
         // to do - if from repos need to load repos into local obo cache!
 
       } catch (/*MalformedURL & IO*/Exception e) { LOG.error(e); }
     }
     
     loadOboSessionFromUrl(o,url,filename);
-//     o.setOboSession(getOboSession(url)); // throws OntEx if error
-//     fileToOntologyCache.put(filename,o);
-//     File file = new File(url.getFile());
-//     long date = file.lastModified();
-//     if (date > 0) { // jar files have 0 date???
-//       o.setTimestamp(date);
-//       o.setSource(file.toString());
-//     }
   }
 
   /** url is either local file or repos url */
@@ -202,7 +205,8 @@ public class OntologyDataAdapter {
     }
   }
 
-  private URL checkRepositoryUrl(URL localUrl, URL reposUrl, String ontol)
+  /** this copies obo file to local cache (~/.phenote/obo-files */
+  private URL synchWithRepositoryUrl(URL localUrl, URL reposUrl, String ontol)
     throws OntologyException {
     long repos = getOboDate(reposUrl);
     long loc = getOboDate(localUrl); // throws ont ex
@@ -210,21 +214,19 @@ public class OntologyDataAdapter {
     if (repos > loc)
       useRepos = queryUserAboutRepos(ontol);
     if (useRepos) {
-      LOG.info("Loading new ontology from repository "+reposUrl);
-      return reposUrl;
+      String file = FileUtil.getNameOfFile(localUrl);
+      try { 
+        localUrl = new File(FileUtil.getUserOboCacheDir(),file).toURL();
+        LOG.info("Loading new ontology from repository "+reposUrl+" to "+localUrl);
+        copyReposToLocal(reposUrl,localUrl);
+      }
+      catch (MalformedURLException e) { throw new OntologyException(e); }
+      //return reposUrl;
     }
     return localUrl;
   }
 
-  // is it bad to have a popup from data adapter?
-  private boolean queryUserAboutRepos(String ontol) {
-    String m = "There is a more current ontology in the repository for "+ontol+".\nWould"
-      +" you like to load the new version? (may take a few minutes)";
-    int yn = JOptionPane.showConfirmDialog(null,m,"Synch ontology?",
-                                           JOptionPane.YES_NO_OPTION,
-                                           JOptionPane.QUESTION_MESSAGE);
-    return yn == JOptionPane.YES_OPTION;
-  }
+  
 
   /** Get the date of the file from the header of the obo file - just read header dont
       read in whole file. should it also query urlConnection for date first? */
@@ -239,7 +241,7 @@ public class OntologyDataAdapter {
         if (!line.startsWith("date:")) continue;
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd:MM:yyyy HH:mm");
         Date d = dateFormat.parse(line, new ParsePosition(6));
-        LOG.debug("date "+d+" for url "+oboUrl+" line "+line);
+        //LOG.debug("date "+d+" for url "+oboUrl+" line "+line);
         br.close();
         if (d == null)
           throw new OntologyException("couldnt parse date "+line);
@@ -248,7 +250,54 @@ public class OntologyDataAdapter {
       throw new OntologyException("No date found in "+oboUrl);
     } catch (IOException e) { throw new OntologyException(e); }
   }
+
+  // is it bad to have a popup from data adapter?
+  private boolean queryUserAboutRepos(String ontol) {
+    String m = "There is a more current ontology in the repository for "+ontol+".\nWould"
+      +" you like to load the new version? (may take a few minutes)";
+    int yn = JOptionPane.showConfirmDialog(null,m,"Synch ontology?",
+                                           JOptionPane.YES_NO_OPTION,
+                                           JOptionPane.QUESTION_MESSAGE);
+    return yn == JOptionPane.YES_OPTION;
+  }
   
+
+  /** local url may be from distrib/jar dir, but needs to be set to 
+      .phenote/obo-files dir as thats where the user cache is */
+  private void copyReposToLocal(URL reposUrl, URL localUrl)
+    throws OntologyException {
+    // is there a better way then just reading & writing lines? nio?
+    try {
+      // nio & old io do the same time - oh well (~1 minute for GO)
+      //startTimer("nio file copy "+reposUrl+" to "+localUrl);
+      InputStream is = reposUrl.openStream();
+      // nio actually does the same with the buffer
+      //BufferedInputStream bis = new BufferedInputStream(is);
+      ReadableByteChannel r = Channels.newChannel(is);
+      //BufferedReader br = new BufferedReader(new InputStreamReader(is));
+      File f = new File(localUrl.getFile());
+      FileOutputStream fos = new FileOutputStream(f);
+      //BufferedOutputStream bos = new BufferedOutputStream(fos);
+      //OutputStreamWriter osw = new OutputStreamWriter(fos);
+      //FileWriter fw = new FileWriter(f);
+      //BufferedWriter bw = new BufferedWriter(fw);
+      //PrintStream ps = new PrintStream(bos);
+      FileChannel w = fos.getChannel();
+      long size = 99999999999999l; // cant get actual size - whole file
+      w.transferFrom(r,0,size);
+      //byte[] buf = new byte[1024];
+//       int i = 0;
+//       //while((i=br.read())!=-1) {
+//       String line;
+//       while ((line=br.readLine())!=null) {
+//         //bos.write(i); //buf, 0, i);
+//         ps.print(line+"\n");
+//       }
+      //stopTimer();
+      r.close();
+      w.close();
+    } catch (IOException e) { throw new OntologyException(e); }
+  }
 
   /** Look for file in current directory (.) and jar file 
       throws OntologyException if file not found - wraps FileNFEx */
@@ -274,7 +323,7 @@ public class OntologyDataAdapter {
       return os;
     }
     catch (DataAdapterException e) {
-      LOG.error("got data adapter exception: "+e); // ??
+      LOG.error("got obo data adapter exception: "+e+" for url "+oboUrl); // ??
       throw new OntologyException(e);
     }
   }
@@ -286,6 +335,22 @@ public class OntologyDataAdapter {
     URL url = findFile(ont.getSource()); // ex
     loadOboSessionFromUrl(ont,url,ont.getSource()); // throws ex
   }
+
+  // eventually move to util class
+  private Calendar startTime;
+  private String timerMsg;
+  private void startTimer(String m) {
+    startTime = Calendar.getInstance();
+    timerMsg = m;
+    LOG.debug(timerMsg+" Start clock "+startTime.getTime());
+  }
+
+  private void stopTimer() {
+    Calendar endTime = Calendar.getInstance();
+    long seconds = (endTime.getTimeInMillis() - startTime.getTimeInMillis())/1000;
+    LOG.debug(timerMsg+" clock stopped, seconds elapsed: "+seconds);
+  }
+
 
 //   private void loadRelationshipOntology() { hmmmmmm
 //     // for now - todo configure! post comp relationship-ontology
