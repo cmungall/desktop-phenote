@@ -59,38 +59,23 @@ public class PhenoSyntaxChar {
       for (CharField cf : OntologyManager.inst().getCharFieldList()) {
         if (character.hasValue(cf)) {
           sb.append(Config.inst().getSyntaxAbbrevForCharField(cf)).append("=");//ex
+          if (isFreeText(cf)) sb.append('"'); // free text gets quoted
           sb.append(makeValue(character.getValue(cf))).append(" ");
+          if (isFreeText(cf)) sb.append("\" ");
         }
         // check for entity & quality??
       }
 
-//       if (character.hasValue("Pub")) // hasPub
-//         sb.append("PUB=").append(character.getValueString("Pub")); //Pub());
-//       // Genotype - not strictly part of pheno syntax but lets face it we need it
-//       // i would say its an omission from syntax
-//       //sb.append(" GT=").append(character.getGenotype());
-//       if (character.hasValue("Genotype"))
-//         sb.append(" GT=").append(character.getValueString("Genotype"));
-//       if (character.hasValue("Genetic Context"))
-//         sb.append(" GC=").append(makeValue(character.getTerm("Genetic Context")));
-      
-//       if (!character.hasValue("Entity"))
-//         throw new BadCharException("Error: character has no entity, ignoring");
-//       //sb.append(" E=").append(makeValue(character.getEntity()));
-//       sb.append(" E=").append(makeValue(character.getTerm("Entity")));
-
-//       // if (character.hasValue(CharFieldEnum.STAGE))
-      
-//       //if (character.getQuality() == null)
-//       if (!character.hasValue("Quality"))
-//         throw new BadCharException("Error: character has no quality, ignoring");
-//       sb.append(" Q=").append(makeValue(character.getTerm("Quality")));
-      
     }
     catch (ConfigException e) {
       throw new BadCharException(e.getMessage());
     }
     return sb.toString();
+  }
+   
+  /** If a char field has ontologies it is not free text */
+  private boolean isFreeText(CharField cf) {
+    return !cf.hasOntologies();
   }
 
   // this may be more general than just this class
@@ -130,6 +115,7 @@ public class PhenoSyntaxChar {
       if (found) tagEnd = m.end(); // dont need if not found (last one)
       String value = line.substring(valueStart,tagStart).trim();
       value = stripComments(value).trim();
+      //value = stripQuotesFromFreeText(value); // free text gets quoted
       //System.out.println("tag ."+tag+". val ."+value+".");
       addTagValToChar(tag,value);
     }
@@ -137,6 +123,15 @@ public class PhenoSyntaxChar {
 
   private String stripComments(String value) {
     value = value.replaceAll("/\\*.*\\*/","");
+    return value;
+  }
+
+  private static final String q = "\"";
+
+  private String stripQuotesFromFreeText(String value,CharField cf) {
+    if (!isFreeText(cf)) return value;
+    if (value.startsWith(q)) value = value.substring(1);
+    if (value.endsWith(q)) value = value.substring(0,value.length()-2);
     return value;
   }
 
@@ -161,8 +156,14 @@ public class PhenoSyntaxChar {
     OntologyManager om = OntologyManager.inst();
     
     try {
+      // so this is funny but there can be more than one char field for an abbrev - for
+      // instance Tag is for both abormal and absent. with setValue only the proper char
+      // field will get set, eg abnormal char field will throw exception for "absent"
       List<CharField> fields = Config.inst().getCharFieldsForSyntaxAbbrev(tag);//Ex
       for (CharField cf : fields) {
+        
+        value = stripQuotesFromFreeText(value,cf);
+
         if (cf.getName().equals("Stage")) {
           // todo - a general relationship extracter?
           value = extractStageHack(value); // for now - fix for real later
@@ -182,25 +183,6 @@ public class PhenoSyntaxChar {
     log().error("Term not found "+value); // list char field?
     //}
 
-//     try {
-//       if (tag.equals("PUB")) 
-//         character.setPub(value);
-//       else if (tag.equals("GT"))
-//         character.setGenotype(value);
-//       else if (tag.equals("GC"))
-//         character.setGeneticContext(om.getOboClassWithExcep(value)); // throws ex
-//       else if (tag.equals("E"))
-//         character.setEntity(om.getTermOrPostComp(value));
-//       else if (tag.equals("Q"))
-//         character.setQuality(om.getOboClassWithExcep(value));
-//       else // throw exception? or let rest of char go through?
-//         System.out.println("pheno syntax tag "+tag+" not recognized (value "+value+")");
-//     }
-//     catch (OntologyManager.TermNotFoundException e) {
-//       log().error("Term not found for tag "+tag+" value "+value+" in loaded "
-//                   +"ontologies - check syntax with ontology files.");
-//       return;
-//     }
       
   }
 
@@ -225,3 +207,43 @@ public class PhenoSyntaxChar {
     return log;
   }
 }
+//     try {
+//       if (tag.equals("PUB")) 
+//         character.setPub(value);
+//       else if (tag.equals("GT"))
+//         character.setGenotype(value);
+//       else if (tag.equals("GC"))
+//         character.setGeneticContext(om.getOboClassWithExcep(value)); // throws ex
+//       else if (tag.equals("E"))
+//         character.setEntity(om.getTermOrPostComp(value));
+//       else if (tag.equals("Q"))
+//         character.setQuality(om.getOboClassWithExcep(value));
+//       else // throw exception? or let rest of char go through?
+//         System.out.println("pheno syntax tag "+tag+" not recognized (value "+value+")");
+//     }
+//     catch (OntologyManager.TermNotFoundException e) {
+//       log().error("Term not found for tag "+tag+" value "+value+" in loaded "
+//                   +"ontologies - check syntax with ontology files.");
+//       return;
+//     }
+//       if (character.hasValue("Pub")) // hasPub
+//         sb.append("PUB=").append(character.getValueString("Pub")); //Pub());
+//       // Genotype - not strictly part of pheno syntax but lets face it we need it
+//       // i would say its an omission from syntax
+//       //sb.append(" GT=").append(character.getGenotype());
+//       if (character.hasValue("Genotype"))
+//         sb.append(" GT=").append(character.getValueString("Genotype"));
+//       if (character.hasValue("Genetic Context"))
+//         sb.append(" GC=").append(makeValue(character.getTerm("Genetic Context")));
+      
+//       if (!character.hasValue("Entity"))
+//         throw new BadCharException("Error: character has no entity, ignoring");
+//       //sb.append(" E=").append(makeValue(character.getEntity()));
+//       sb.append(" E=").append(makeValue(character.getTerm("Entity")));
+
+//       // if (character.hasValue(CharFieldEnum.STAGE))
+      
+//       //if (character.getQuality() == null)
+//       if (!character.hasValue("Quality"))
+//         throw new BadCharException("Error: character has no quality, ignoring");
+//       sb.append(" Q=").append(makeValue(character.getTerm("Quality")));

@@ -173,6 +173,7 @@ public class OntologyDataAdapter {
 
     // if ontCfg.hasSynchUrl() ?
     // URL synchUrl = ontCfg.getSynchUrl
+    startTimer("checking with repos... loading obo session "+filename);
     if (oc.hasReposUrl()) {
       try {
         URL reposUrl = oc.getReposUrl();//new URL("http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/evidence_code.obo");
@@ -180,7 +181,6 @@ public class OntologyDataAdapter {
         // url may be jar/obo-files or svn/obo-files but this function may put file
         // in cache ~/.phenote/obo-files
         url = synchWithRepositoryUrl(url,reposUrl,o.getName());
-
         
         // to do - if from repos need to load repos into local obo cache!
 
@@ -188,6 +188,7 @@ public class OntologyDataAdapter {
     }
     
     loadOboSessionFromUrl(o,url,filename);
+    stopTimer();
   }
 
   /** url is either local file or repos url */
@@ -214,14 +215,23 @@ public class OntologyDataAdapter {
     if (repos > loc)
       useRepos = queryUserAboutRepos(ontol);
     if (useRepos) {
+
+      // i think its always better to download as http/repos is slow
+//       boolean downloadToLocal = false; // from Config!
+//       if (!downloadToLocal) {
+//         LOG.info("Using obo file straight from repository "+reposUrl+
+//                  " NOT downloading to local cache");
+//         return reposUrl; // just use straight from repos
+//       }
+
+      // download obo to local cache (takes time!)
       String file = FileUtil.getNameOfFile(localUrl);
       try { 
         localUrl = new File(FileUtil.getUserOboCacheDir(),file).toURL();
-        LOG.info("Loading new ontology from repository "+reposUrl+" to "+localUrl);
+        LOG.info("Downloading new ontology from repository "+reposUrl+" to "+localUrl);
         copyReposToLocal(reposUrl,localUrl);
       }
       catch (MalformedURLException e) { throw new OntologyException(e); }
-      //return reposUrl;
     }
     return localUrl;
   }
@@ -342,13 +352,13 @@ public class OntologyDataAdapter {
   private void startTimer(String m) {
     startTime = Calendar.getInstance();
     timerMsg = m;
-    LOG.debug(timerMsg+" Start clock "+startTime.getTime());
+    //LOG.debug(timerMsg+" Start clock "+startTime.getTime()); // ??
   }
 
   private void stopTimer() {
     Calendar endTime = Calendar.getInstance();
     long seconds = (endTime.getTimeInMillis() - startTime.getTimeInMillis())/1000;
-    LOG.debug(timerMsg+" clock stopped, seconds elapsed: "+seconds);
+    LOG.debug(timerMsg+" number of seconds: "+seconds);
   }
 
 

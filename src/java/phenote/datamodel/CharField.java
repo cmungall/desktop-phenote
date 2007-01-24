@@ -60,6 +60,8 @@ public class CharField {
 
   public List<Ontology> getOntologyList() { return ontologyList; }
 
+  //booelan isFreeText() return !hasOntologies() ??
+
   public boolean hasOntologies() {
     return ontologyList != null && !ontologyList.isEmpty();
   }
