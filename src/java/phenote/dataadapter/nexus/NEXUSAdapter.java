@@ -300,7 +300,7 @@ public class NEXUSAdapter implements DataAdapterI {
     }
     
     public int hashCode() {
-       return this.entity.hashCode() * this.attribute.hashCode();
+       return this.entity.hashCode() ^ this.attribute.hashCode();
     }
     
     public String toString() {
