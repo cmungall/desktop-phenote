@@ -386,7 +386,7 @@ where xsd files are (conf) -->
 <!-- todo do all jars not just phenote - take out -signed -->
 <!-- depends on sym link phenote-webstart and env var PHENOTE_VERSION -->
     <!-- target name="build-webstart" depends="build-sign-jars,webstart"/ -->
-    <target name="build-webstart" depends="build-all,jar,webstart,sign-webstart-jars"/>
+    <target name="build-webstart" depends="build-all,jar"/>
 
     <!-- target name="build-sign-jars" depends="build-all,jar,sign-jars"/ -->
 
@@ -404,13 +404,7 @@ where xsd files are (conf) -->
 
     
 <!-- need to test if PHENOTE_VERSION is defined - possible?? -->
-    <target name="webstart" depends="webstart-webpages,copy-jnlps">
-      <echo message="Env Var PHENOTE VERSION is set to ${env.PHENOTE_VERSION}" />
-      <mkdir dir="phenote-webstart/${env.PHENOTE_VERSION}"/>
-      <copy todir="phenote-webstart/${env.PHENOTE_VERSION}/jars">
-        <fileset file="${lib}/*.jar"/>
-      </copy>
-    </target>
+    <target name="webstart" depends="webstart-jars,webstart-webpages,copy-jnlps"/>
 
     <target name="webstart-webpages">
       <copy todir="phenote-webstart">
@@ -430,6 +424,16 @@ where xsd files are (conf) -->
       </copy>
     </target>
     
+
+    <target name="webstart-jars" depends="copy-webstart-jars,sign-webstart-jars"/> 
+
+    <target name="copy-webstart-jars">
+      <echo message="Env Var PHENOTE VERSION is set to ${env.PHENOTE_VERSION}" />
+      <mkdir dir="phenote-webstart/${env.PHENOTE_VERSION}"/>
+      <copy todir="phenote-webstart/${env.PHENOTE_VERSION}/jars">
+        <fileset file="${lib}/*.jar"/>
+      </copy>
+    </target>
 
     <target name="sign-webstart-jars">
        <signjar keystore="plumpkey" alias="signFiles"
