@@ -1,7 +1,10 @@
 package phenote.gui.field;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -11,7 +14,11 @@ import org.apache.log4j.Logger;
 import org.geneontology.oboedit.datamodel.OBOClass;
 
 import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharFieldEnum;
+import phenote.datamodel.CharField;
+//import phenote.datamodel.CharFieldEnum;
+import phenote.datamodel.Ontology;
+import phenote.datamodel.OntologyException;
+import phenote.datamodel.OntologyManager;
 import phenote.edit.EditManager;
 import phenote.edit.CompoundTransaction;
 //import phenote.edit.UpdateTransaction;
@@ -22,10 +29,17 @@ import phenote.gui.selection.UseTermListener;
 class TermCompList extends AbstractAutoCompList {
 
   private OBOClass currentOboClass=null;
+  // only term comp lists need ontology choosers - if that changes move to AACL
+  private JComboBox ontologyChooserCombo;
+  private CharFieldGui charFieldGui;
 
-  TermCompList(CompListSearcher s,boolean editModel) {
-    super(s,editModel);
+  TermCompList(CompListSearcher s,boolean editModel,CharFieldGui cfg) {
+    super(s,editModel,cfg.getCharField());
+    this.charFieldGui = cfg; // pass to super? AACL subclass CFG?
     enableTermInfoListening();
+    if (hasMoreThanOneOntology()) // super AACL
+      initOntologyChooser(getCharField());
+
   }
 
 
@@ -43,7 +57,22 @@ class TermCompList extends AbstractAutoCompList {
     // if null then user has made a new char or selected a char with no term
     //if (selCharTerm == null) { } else { ??? covered above??
     setOboClass(selCharTerm); // doesnt allow null
+    setOntologyChooserFromTerm(selCharTerm);
     //}
+  }
+
+  void setOntologyChooserFromTerm(OBOClass term) {
+    if (term==null) return;
+    if (ontologyChooserCombo==null) return;
+    try {
+      Ontology o = OntologyManager.inst().getOntologyForTerm(term);
+      ontologyChooserCombo.setSelectedItem(o.getName());
+    }
+    catch (OntologyException e) {
+      // this happens at the moment for post comp terms - need to pick out 
+      // genus for ontolo chooser or add to obo session?
+      //log().error("No ontology found for term "+term); // shouldnt happen
+    }
   }
 
   protected Vector getSearchItems(String input) {
@@ -194,43 +223,36 @@ class TermCompList extends AbstractAutoCompList {
       if (editModelEnabled()) editModel();
     }
   }
-  
+
+  private void initOntologyChooser(CharField charField) {
+    ontologyChooserCombo = new JComboBox();
+    // need to add in ALL
+    for (Ontology o : charField.getOntologyList()) {
+      ontologyChooserCombo.addItem(o.getName());
+    }
+    ontologyChooserCombo.addActionListener(new OntologyChooserListener());
+    charFieldGui.addOntologyChooser(ontologyChooserCombo);
+  }
+
 
   private Logger log;
   private Logger log() {
     if (log == null) log = Logger.getLogger(getClass());
     return log;
   }
+  private class OntologyChooserListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      String s = ontologyChooserCombo.getSelectedItem().toString();
+      try {
+        Ontology o = OntologyManager.inst().getOntologyForName(s);
+        //getCompList().setOntology(o); // termComp?
+        getCompListSearcher().setOntology(o);
+      }
+      catch (OntologyException ex) {
+        log().error(ex.getMessage());
+        return;
+      }
+    }
+  }
   
 }
-    // this inner class enables retrieving of JList for mouse over
-    // this will probably throw errors if non metal look & feel is used
-//     setUI(new MetalListComboUI());
-//     //setFont(new Font("Courier",Font.PLAIN,12));
-
-//     setOntology(ontology);
-//     searchParams = sp; // singleton access? part of ontology?
-//     setEditable(true);
-//     AutoTextFieldEditor autoTextFieldEditor = new AutoTextFieldEditor();
-//     this.setEditor(autoTextFieldEditor);
-//     setPreferredSize(new Dimension(350,22));
-
-//     enableTermInfoListening(true); // default
-//     //addCompletionListListener(compList);
-
-//     //if (editModel) // ComboBoxActionListener edits the model
-//     this.editModel = editModel;
-//     addActionListener(new ComboBoxActionListener());
-//   // strings get in somehow - need to figure out where they are coming from
-//   private OBOClass oboClassDowncast(Object obj) throws OboException {
-//     if (obj == null) throw new OboException();
-//     if ( ! (obj instanceof OBOClass)) {
-//       //log.info("Item in completion list not obo class "+obj.getClass());
-//       throw new OboException("Item in completion list not obo class "+obj.getClass());
-//     }
-//     return (OBOClass)obj;
-//   }
-//   private OBOClass getCompListOboClass(int index) {
-//     Object obj = defaultComboBoxModel.getElementAt(index);
-//     return oboClassDowncast(obj);
-//   }

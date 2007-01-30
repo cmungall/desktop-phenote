@@ -95,9 +95,14 @@ class PostCompGui {
     
     //genusField.setText(getGenusString(currentTerm));
     genusField.setOboClass(getGenusTerm(currentTerm));
+    // should this happen automatically from setOboClass or is that a burden/inefficiency
+    genusField.setOntologyChooserFromTerm(getGenusTerm(currentTerm));
     //if (modelHasDiff(currentTerm))
     try { relField.setRel(getRel(currentTerm)); } catch (Exception e){}
-    try { diffField.setOboClass(getDiffTerm(currentTerm)); } 
+    try {
+      diffField.setOboClass(getDiffTerm(currentTerm));
+      diffField.setOntologyChooserFromTerm(getDiffTerm(currentTerm));
+    } 
     catch (Exception e) {} // throws if no diff term
     
   }

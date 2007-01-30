@@ -7,14 +7,15 @@ import org.apache.log4j.Logger;
 import org.geneontology.oboedit.datamodel.OBOProperty;
 
 import phenote.datamodel.CharacterI;
+import phenote.datamodel.CharField;
 
 
 class RelationCompList extends AbstractAutoCompList {
 
   private OBOProperty currentRel=null;
 
-  RelationCompList(CompListSearcher searcher,boolean editModel) {
-    super(searcher,editModel);
+  RelationCompList(CompListSearcher searcher,boolean editModel,CharField c) {
+    super(searcher,editModel,c);
     // this inner class enables retrieving of JList for mouse over
     // this will probably throw errors if non metal look & feel is used
 //    setUI(new MetalListComboUI());

@@ -47,7 +47,7 @@ class CharFieldGui {
   private boolean isCompList = false;
   private CharField charField;
   private FieldPanel fieldPanel;
-  private JComboBox ontologyChooserCombo;
+  //private JComboBox ontologyChooserCombo;
   private String label;
   private boolean enableListeners = true;
   private boolean addCompButton = true;
@@ -95,6 +95,7 @@ class CharFieldGui {
       EditManager.inst().addCharChangeListener(new FieldCharChangeListener());
   }
 
+  // FreeTextField.updateModel uses this
   boolean updateGuiOnly() { return updateGuiOnly; }
 
   /** edits from post comp come in here i believe (term info used to but now
@@ -193,13 +194,13 @@ class CharFieldGui {
     fieldPanel.addLabel(getLabel(),charField.hasMoreThanOneOntology());
 
     // if has more than one ontology(entity) then add ontology choose list
-    if (charField.hasMoreThanOneOntology())
-      initOntologyChooser(charField);
+//     if (charField.hasMoreThanOneOntology())
+//       initOntologyChooser(charField);
 
-    createCompList();
+    createCompList(); // comp list now makes ontologyChooser (if >1 ont)
     fieldPanel.addFieldGui(getCompList());
 
-    getCompList().setCharField(charField);
+    //getCompList().setCharField(charField);
 
     // POST COMPOSITION button - only get post comp button if both configged for it
     // AND addCompButton flag is true - PostCompGui sets to false - no post comp of 
@@ -214,7 +215,7 @@ class CharFieldGui {
 //       AutoComboBox postCompCombo =
 //         new AutoComboBox(charField.getFirstOntology(),fieldPanel.getSearchParams());
 //       // postCompCombo.setVisible(false); // initial state hidden - layout?
-//       postCompCombo.setCharField(charField);
+//       postCompCombo.setCharField(harField);
 //       postCompCombo.setIsDifferentia(true); // differentia of genus in post comp
 //       fieldPanel.addFieldGui(postCompCombo);
     }
@@ -229,23 +230,24 @@ class CharFieldGui {
     compListSearcher =
       new CompListSearcher(charField.getFirstOntology(),fieldPanel.getSearchParams());
     if (isRelationshipList()) {
-      relCompList = new RelationCompList(compListSearcher,enableListeners);
+      relCompList = new RelationCompList(compListSearcher,enableListeners,charField);
     }
     else {
-      termCompList = new TermCompList(compListSearcher,enableListeners);
+      termCompList = new TermCompList(compListSearcher,enableListeners,this);
     }
   }
 
+  void addOntologyChooser(JComboBox oc) { fieldPanel.addOntologyChooser(oc); }
 
-  private void initOntologyChooser(CharField charField) {
-    ontologyChooserCombo = new JComboBox();
-    // add listener....
-    for (Ontology o : charField.getOntologyList()) {
-      ontologyChooserCombo.addItem(o.getName());
-    }
-    ontologyChooserCombo.addActionListener(new OntologyChooserListener());
-    fieldPanel.addOntologyChooser(ontologyChooserCombo);
-  }
+//   private void initOntologyChooser(CharField charField) {
+//     ontologyChooserCombo = new JComboBox();
+//     // add listener....
+//     for (Ontology o : charField.getOntologyList()) {
+//       ontologyChooserCombo.addItem(o.getName());
+//     }
+//     ontologyChooserCombo.addActionListener(new OntologyChooserListener());
+//     fieldPanel.addOntologyChooser(ontologyChooserCombo);
+//   }
 
   private void initTextField(String label) {
     isCompList = false;
@@ -324,11 +326,82 @@ class CharFieldGui {
     return SelectionManager.inst().getFirstSelectedCharacter();
   }
 
+  private class FieldCharSelectListener implements CharSelectionListener {
+    public void charactersSelected(CharSelectionEvent e) {
+      // if multi select then clear out fields - alternatively could do first char
+      // or only show fields that are all same? 
+      if (e.isMultiSelect()) {
+        setGuiForMultiSelect();
+        return;
+      }
+      updateGuiOnly = true; // selection should not cause an edit/transaction!
+      setValueFromChar(e.getChars().get(0));
+      updateGuiOnly = false;
+    }
+  }
+
+
+  /** I think post-comp should only be closeable if its empty (in expand collapse
+   inframe case - now window) */
+  private class PostCompListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      new PostCompGui(charField,fieldPanel.getSearchParams());
+    }
+  }
+
+  /** should define a CharFieldGuiEx! */
+  OBOClass getCurrentOboClass() throws Exception {
+    //if (!isCompList || isRelationshipList)
+    if (!isTermCompList())
+      throw new Exception("Field has no OBO Class");
+    return getTermComp().getCurrentOboClass(); // throws Ex
+  }
+
+  OBOProperty getCurrentRelation() throws Exception {
+    if (!isCompList || !isRelationshipList())
+      throw new Exception("Field has no Relation");
+    return getRelComp().getCurrentRelation(); // throws Ex
+  }
+
+  private boolean isTermCompList() {
+    return isCompList && !isRelationshipList() && getTermComp()!=null;
+    // && getTermComp != null?
+  }
+
+  /** for post comp gui to set ontol chooser */
+  void setOntologyChooserFromTerm(OBOClass term) {
+    if (!isTermCompList()) return; // shouldnt happen - ex?
+    getTermComp().setOntologyChooserFromTerm(term);
+  }
+    
+
+  private Logger log;
+  private Logger log() {
+    if (log == null) log = Logger.getLogger(getClass());
+    return log;
+  }
+}
+  // -> TermCompList
+//   private class OntologyChooserListener implements ActionListener {
+//     public void actionPerformed(ActionEvent e) {
+//       String s = ontologyChooserCombo.getSelectedItem().toString();
+//       try {
+//         Ontology o = OntologyManager.inst().getOntologyForName(s);
+//         //getCompList().setOntology(o); // termComp?
+//         compListSearcher.setOntology(o);
+//       }
+//       catch (OntologyException ex) {
+//         log().error(ex.getMessage());
+//         return;
+//       }
+//     }
+//   }
+
 //   List<CharacterI> getSelectedChars() {
 //     return SelectionManager.inst().getSelectedChars();
 //   }
 
-//   // separate char text field class?
+//   // separate char text field class? --> FreeTextField
 //   /** This is where the model gets updated (for free text fields) */
 //   private class TextFieldDocumentListener implements DocumentListener {
 //     //private String previousVal = null;
@@ -353,127 +426,3 @@ class CharFieldGui {
 //     }
 //   }
 
-  private class FieldCharSelectListener implements CharSelectionListener {
-    public void charactersSelected(CharSelectionEvent e) {
-      // if multi select then clear out fields - alternatively could do first char
-      // or only show fields that are all same? 
-      if (e.isMultiSelect()) {
-        setGuiForMultiSelect();
-        return;
-      }
-      updateGuiOnly = true; // selection should not cause an edit!
-      setValueFromChar(e.getChars().get(0));
-      updateGuiOnly = false;
-    }
-  }
-
-  private class OntologyChooserListener implements ActionListener {
-    public void actionPerformed(ActionEvent e) {
-      String s = ontologyChooserCombo.getSelectedItem().toString();
-      try {
-        Ontology o = OntologyManager.inst().getOntologyForName(s);
-        //getCompList().setOntology(o); // termComp?
-        compListSearcher.setOntology(o);
-      }
-      catch (OntologyException ex) {
-        log().error(ex.getMessage());
-        return;
-      }
-    }
-  }
-
-  /** I think post-comp should only be closeable if its empty (in expand collapse
-   inframe case - now window) */
-  private class PostCompListener implements ActionListener {
-    public void actionPerformed(ActionEvent e) {
-      new PostCompGui(charField,fieldPanel.getSearchParams());
-    }
-  }
-
-  OBOClass getCurrentOboClass() throws Exception {
-    if (!isCompList || isRelationshipList())
-      throw new Exception("Field has no OBO Class");
-    return getTermComp().getCurrentOboClass(); // throws Ex
-  }
-
-  OBOProperty getCurrentRelation() throws Exception {
-    if (!isCompList || !isRelationshipList())
-      throw new Exception("Field has no Relation");
-    return getRelComp().getCurrentRelation(); // throws Ex
-  }
-
-  private Logger log;
-  private Logger log() {
-    if (log == null) log = Logger.getLogger(getClass());
-    return log;
-  }
-}
-
-//   /** This is for ontology char fields, freetext returns null. returns obo class
-//       selected in AutoComboBox if there is one 
-//       this is problematic - it can get term that was selected a while ago */
-//   OBOClass getSelectedOboClass() throws Exception {
-//     if (!isCompList) throw new Exception("Free text field has no OBO Class");
-//     OBOClass term = getCompList().getSelectedCompListOboClass();
-//     if (term == null) throw new Exception("No term selected");
-//     return term;
-//   }
-//   private void addDocumentListener(DocumentListener dl) {
-//     if (!isCombo)
-//       textField.getDocument().addDocumentListener(dl);
-//   }
-
-//   private void initCombo(Ontology ontology, Container parent) {
-//     // attach search params to ontology?
-//     comboBox = new AutoComboBox(ontology,fieldPanel.getSearchParams());
-//     // refactor... mvc - ACB talk directly to pheno model?
-//     //comboBox.addActionListener(new ComboBoxActionListener(ontology.getName(),comboBox));
-//     //parent.add(comboBox,makeFieldConstraint());
-//     fieldPanel.addFieldGui(comboBox,parent);
-//   }
-
-//   /** No ontology -> free text field */
-//   private CharFieldGui(String label,Container parent) {
-//     initTextField(label,parent);
-//   }
-//   /** Fields with ontology -> combo box */
-//   private CharFieldGui(Ontology ontology, Container parent) {
-//     if (ontology == null) // shouldnt happen
-//       initTextField(null,parent); 
-//     else
-//       initCombo(ontology,parent);
-//   }
-
-//   /** Listens for actions from combo boxes and puts terms into table 
-//    * actions come from mouse select of term as well as return & tab 
-//    change this - should only modify character - could be done in ACB except
-//    gt text field which isnt done here anyways - then send out CharacterChangeEvent
-//   for table to get and refresh itself 
-//   this is being phased out for AutoComboBox's more generic ComboBoxActionListener*/
-//   private class ComboBoxActionListener implements ActionListener {
-//     private String ontology;
-//     private AutoComboBox comboBox;
-
-//     private ComboBoxActionListener(String ontology,AutoComboBox cb) {
-//       this.ontology = ontology;
-//       comboBox = cb;
-//     }
-//     public void actionPerformed(ActionEvent e) {
-//       setTableFromField(ontology);
-//     }
-
-//     /** Sets table value from field. checks that text in text field from user
-//         is actually an item in completion list, is an obo term. */
-//     private void setTableFromField(String ontology) {
-//       String input = comboBox.getText();//getInput(ontology);
-      
-//       // check if input is a real term - i think we can get away with checking
-//       // if in present term completion list - not sure
-//       boolean valid = comboBox.isInCompletionList(input);
-//       if (!valid)
-//         return;
-//       // its valid - set the field
-//       // no no no - edit model, send out model changed event
-//       setTableColumn(ontology,input);
-//     }
-//   }

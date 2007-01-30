@@ -59,7 +59,7 @@ public abstract class AbstractAutoCompList extends JComboBox {
 
   /** @param editModel if false then ACB doesnt edit model directly (post comp) 
    can abstract classes have constructors - if not init() */
-  protected AbstractAutoCompList(CompListSearcher s,boolean editModel) {
+  protected AbstractAutoCompList(CompListSearcher s,boolean editModel,CharField cf) {
     // this inner class enables retrieving of JList for mouse over
     // this will probably throw errors if non metal look & feel is used
     setUI(new MetalListComboUI());
@@ -82,6 +82,7 @@ public abstract class AbstractAutoCompList extends JComboBox {
     setFont(new Font("Monospaced",Font.PLAIN,10));
     //setOntology(ontology);
     //searchParams = sp; // singleton access? part of ontology?
+    setCharField(cf);
     compListSearcher = s;
     //enableTermInfoListening(true); // default - hardwired in rel & term subclasses
     //addCompletionListListener(compList);
@@ -100,6 +101,10 @@ public abstract class AbstractAutoCompList extends JComboBox {
   void setCharField(CharField charField) { this.charField = charField; }
 
   protected CharField getCharField() { return charField; }
+
+  protected boolean hasMoreThanOneOntology() {
+    return charField.hasMoreThanOneOntology();
+  }
 
   protected boolean editModelEnabled() { return editModel; }
 

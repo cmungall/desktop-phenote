@@ -121,7 +121,7 @@ public class CharField {
     else {
       OBOClass oboClass=null;
       for (Ontology ont : ontologyList) {
-        try { oboClass = ont.getOboClass(valueString); }
+        try { oboClass = ont.getTerm(valueString); }
         catch (TermNotFoundException e) {} // move on to next ontology
       }
       if (oboClass != null)

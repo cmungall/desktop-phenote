@@ -95,7 +95,7 @@ public class Ontology {
 
   /** returns null if dont have class for id, throws OntologyException if id is not
       found */
-  public OBOClass getOboClass(String id) throws TermNotFoundException {
+  public OBOClass getTerm(String id) throws TermNotFoundException {
     // this aint right - if its a slim should only search slim
     //OBOClass oc = oboSession.getTerm(id);
     for (OBOClass term : sortedTerms) {
@@ -107,10 +107,10 @@ public class Ontology {
     //return oc;
   }
 
-  /** Returns true if ontology holds obo class */
-  boolean hasOboClass(OBOClass oboClass) {
+  /** Returns true if ontology holds term/oboClass */
+  boolean hasTerm(OBOClass term) {
     // if this is too slow can do optimizations with prefixes
-    try {getOboClass(oboClass.getID()); }
+    try {getTerm(term.getID()); }
     catch (TermNotFoundException e) { return false; }
     return true; // no exception - it has it
   }

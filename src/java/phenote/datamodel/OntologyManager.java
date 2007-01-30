@@ -90,7 +90,7 @@ public class OntologyManager {
     //while (iter.hasNext()) {
     for (Ontology o : getAllOntologies()) {
       //Ontology o = iter.next();
-      try { oboClass = o.getOboClass(id); }
+      try { oboClass = o.getTerm(id); }
       catch (TermNotFoundException e) { continue; }
       if (oboClass != null)
         return oboClass;
@@ -144,27 +144,17 @@ public class OntologyManager {
     return OboUtil.makePostCompTerm(gTerm,p,dTerm);
   }
   
-//   /** util fn! */
-//   private OBOClass makePostCompTerm(OBOClass genus, String relation, OBOClass diff) {
-//     String nm = pcString(genus.getName(),diff.getName());
-//     String id = pcString(genus.getID(),diff.getID());
-//     OBOClass postComp = new OBOClassImpl(nm,id);
-//     OBOProperty ISA = OBOProperty.IS_A;
-//     OBORestrictionImpl gRel = new OBORestrictionImpl(postComp,ISA,genusTerm);
-//     return postComp;
-//   }
-
-  /** for obo class find its char field enum via ontology & char field */
-  public CharFieldEnum getCharFieldEnumForOboClass(OBOClass oboClass) {
+  /** Currently iterates through every ontology looking for term, if this proves too
+      inefficient we could do something with ID prefixes */
+  public Ontology getOntologyForTerm(OBOClass term) throws OntologyException {
     for (CharField cf : charFieldList) {
-      //if (!cf.hasOntologies()) continue; // is this needed? not sure
-      for (Ontology ont : cf.getOntologyList()) {
-        if (ont.hasOboClass(oboClass))
-          return cf.getCharFieldEnum();
-      }
+      for (Ontology o : cf.getOntologyList())
+        if (o.hasTerm(term))
+          return o;
     }
-    return null; // this shouldnt happen - err msg?
-  } 
+    throw new OntologyException(term+" not found in ontologies");
+  }
+
 
   private Logger log;
   private Logger log() {
@@ -174,64 +164,33 @@ public class OntologyManager {
 
 }
 
+  // previously used by term info
+//   /** for obo class find its char field enum via ontology & char field */
+//   public CharFieldEnum getCharFieldEnumForOboClass(OBOClass oboClass) {
+//     for (CharField cf : charFieldList) {
+//       //if (!cf.hasOntologies()) continue; // is this needed? not sure
+//       for (Ontology ont : cf.getOntologyList()) {
+//         if (ont.hasOboClass(oboClass))
+//           return cf.getCharFieldEnum();
+//       }
+//     }
+//     return null; // this shouldnt happen - err msg?
+//   } 
+
+//   /** util fn! */
+//   private OBOClass makePostCompTerm(OBOClass genus, String relation, OBOClass diff) {
+//     String nm = pcString(genus.getName(),diff.getName());
+//     String id = pcString(genus.getID(),diff.getID());
+//     OBOClass postComp = new OBOClassImpl(nm,id);
+//     OBOProperty ISA = OBOProperty.IS_A;
+//     OBORestrictionImpl gRel = new OBORestrictionImpl(postComp,ISA,genusTerm);
+//     return postComp;
+//   }
 //   private void addOntologyList(List<Ontology> l) {
 //     allOntologyList.addAll(l);
 //   }
 
 //   private void addOntology(Ontology o) {
 //     allOntologyList.add(o);
-//   }
-
-
-  // i think char field now does this
-    //fieldToOntologyList = new HashMap<CharFieldEnum,List<Ontology>>();
-  //private Map<CharFieldEnum,List<Ontology>> fieldToOntologyList;
-//  private List<Ontology> entityOntologyList;
-  //private Ontology geneticContextOntology;
-  //private Ontology lumpOntology;
-  //private Ontology entityOntology;
-  //private Ontology patoOntology;
-
-//   final static String ANATOMY = "Anatomy";
-//   final static String PATO = "Pato";
-//   final static String TAXONOMY = "Taxonomy";
-    // for now...
-    // if hasOnlyOne? for (Ontology :...)?
-//     if (cf.isGeneticContext())
-//       setGeneticContextOntology(cf.getFirstOntology());
-
-  // for now i know that only genetic context is in char field list...
-//   public CharField getGeneticContextCharField() {
-//     if (charFieldList == null || charFieldList.isEmpty())
-//       return null;
-//     return charFieldList.get(0); // revisit this!!!!
-//   }
-  
-
-//   private void addOntologyToMap(CharFieldEnum c, Ontology o) {
-//     List<Ontology> l = fieldToOntologyList.get(c);
-//     if (l == null) {
-//       l = new ArrayList<Ontology>(3);
-//       fieldToOntologyList.put(c,l);
-//     }
-//     l.add(o);
-//   }
-
-
-  // public List<Ontology> getOntologyList(CharFieldEnum e) {}
-
-//   public boolean haveLumpOntology() { return getLumpOntology() != null; }
-
-//   public void setLumpOntology(Ontology lo) {
-//     lumpOntology = lo;
-//     addOntology(lumpOntology);
-//   }
-
-//   public Ontology getLumpOntology() {
-//     return lumpOntology;
-//   }
-
-//   public void setEntityOntologyList(List<Ontology> entList) {
-//     entityOntologyList = entList;
 //   }
 

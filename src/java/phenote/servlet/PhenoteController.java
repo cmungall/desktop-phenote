@@ -56,7 +56,7 @@ public class PhenoteController extends AbstractCommandController {
         Ontology ont = getOntology(ontologyName);
         // ToDo: Put oboClass in the web session, then we do not need to pass in the ontology name in
         // the html ajax call
-        OBOClass oboClass = ont.getOboClass(termId);
+        OBOClass oboClass = ont.getTerm(termId);
         form.setTerm(oboClass);
         return new ModelAndView("term_info", "formBean", form);
       }
