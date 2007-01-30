@@ -1,4 +1,4 @@
-<!--#include virtual="/ssi/header.html" -->
+<!--#include virtual="/phentoe/ssi/header.html" -->
 
 <div id="page_body">
 
@@ -14,30 +14,28 @@ Here is a quote.
 </div>
 -->
 
-<!--#include virtual="/ssi/navi_home.html" -->
+<!--#include virtual="/phenote/ssi/navi_home.html" -->
 
 <div id="main_content">
-<h2>Welcome...</h2>
+<h2>Phenotype Annotation Tools</h2>
 <p>
 </p>
 
 <p>
-...to the Berkeley Bioinformatics and Ontologies Project.
+Phenote is a software tool currently being developed by the National Center for Biomedical Ontology to facilitate the annotation of biological phenotypes.  Its development is being driven by several groups, including: 
+<ul>
+<li><a href="http://flybase.bio.indiana.edu/"><a img="/phenote/images/fly_logo.png"></a><h3>Flybase:  The Drosophila Genome Database.</h3></li>
+<li><a href="http://zfin.org/"><a img="/phenote/images/zfin_logo.gif"></a>ZFIN: The Zebrafish Genome Database</li>
+<li><a href="http://www.nescent.org/"><img class="portrait" border="0" src="/phenote/images/nescent_logo.gif" alt="NESCENT"></a></a>NESCENT: The National Evolultionary Synthesis Center</li>
+
+
 </p>
 
 <p>
-<a href="/content/jobs/">We're hiring!</a>
-</p>
-
-<p>
-The BBOP, located at the Lawrence Berkeley National Labs, is a diverse group of scientific researchers and software engineers dedicated to developing tools and applying computational technologies to solve biological problems.  Members of the group contribute to a number of projects, including <a href="http://geneontology.org/">The Gene Ontology</a>, <a href="http://bioontology.org">The National Center for Biomedical Ontology</a>, and the <a href="http://gmod.org">Generic Model Organism Database Project</a>.  Learn more about our projects <a href="/content/projects/">[here ...]</a>
-</p>
-<p>
-Since our group is focused on the development, use, and integration of ontolgies into biological data analysis, we've set up a <a href="content/faq/">FAQ</a> with answers to some common questions about ontologies.  
 
 </p>
 </div>
 </div>
 
-<!--#include virtual="/ssi/footer.shtml" -->
+<!--#include virtual="/phenote/ssi/footer.shtml" -->
 
