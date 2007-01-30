@@ -8,28 +8,28 @@
   <a href="/">Home</a>
   </li>  
   <li>
-  <a href="/content/projects/">Projects</a>
+  <a href="/content/background/">Background</a>
   </li>
   <li>
-  <a href="/content/software/">Software</a>
+  <a href="/content/software/">Downloads</a>
   </li>
   <li>
-  <a href="/content/publications/">Publications</a>
+  <a href="/content/docs/">Documentation</a>
   </li>
   <li>
-  <a href="/content/jobs/">Jobs</a>
+  <a href="/content/refs/">References</a>
+  </li>
+  <li>
+  <a href="/content/faq/">FAQ</a>
   </li>
   <li>
   <a href="/content/about/">About</a>
   </li>
   <li>
-  <a href="/mediawiki">Wiki</a>
-  </li>
-  <li>
   <a href="/content/links/">Links</a>
   </li>
   <li>
-  <a href="/content/faq/">FAQ</a>
+  <a href="http://www.bioontology.org/wiki-internal/index.php/Phenote_-_A_Phenotype_Annotation_Tool">Internal Wiki</a>
   </li>
 </ul>
 </div>

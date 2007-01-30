@@ -24,8 +24,8 @@ Here is a quote.
 <p>
 Phenote is a software tool currently being developed by the National Center for Biomedical Ontology to facilitate the annotation of biological phenotypes.  Its development is being driven by several groups, including: 
 <ul>
-<li><a href="http://flybase.bio.indiana.edu/"><a img="/phenote/images/fly_logo.png"></a><h3>Flybase:  The Drosophila Genome Database.</h3></li>
-<li><a href="http://zfin.org/"><a img="/phenote/images/zfin_logo.gif"></a>ZFIN: The Zebrafish Genome Database</li>
+<li><a href="http://flybase.bio.indiana.edu/"><img class="portrait" border="0" src="/phenote/images/fly_logo.png"></a><h3>Flybase:  The Drosophila Genome Database.</h3></li>
+<li><a href="http://zfin.org/"><img class="portrait" border="0" src="/phenote/images/zfin_logo.gif"></a>ZFIN: The Zebrafish Genome Database</li>
 <li><a href="http://www.nescent.org/"><img class="portrait" border="0" src="/phenote/images/nescent_logo.gif" alt="NESCENT"></a></a>NESCENT: The National Evolultionary Synthesis Center</li>
 
 
