@@ -4,8 +4,8 @@
 body {
        font-family: arial, helvetica, sans-serif;
        font-size: 100%;
-       background: white url(/images/bg_image25.jpg) repeat top right;
-       color: black;
+       /*background: white url(/phenote/images/) repeat top right;*/
+       color: grey;
        margin: 0;
 }
 

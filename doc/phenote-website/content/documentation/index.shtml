@@ -1,8 +1,8 @@
-<!--#include virtual="/ssi/header.html" -->
+<!--#include virtual="/phenote/ssi/header.html" -->
 
 <div id="page_body">
 
-<!--#include virtual="/ssi/navi_home.html" -->
+<!--#include virtual="/phenote/ssi/navi_home.html" -->
 
 <div id="main_content">
 
@@ -24,4 +24,4 @@ Phenote can be customized for data entry fields, and the ontologies that are des
 </div>
 </div>
 
-<!--#include virtual="/ssi/footer.shtml" -->
+<!--#include virtual="/phenote/ssi/footer.shtml" -->
