@@ -1,5 +1,5 @@
 format-version: 1.0
-date: 22:01:2007 16:16
+date: 26:01:2007 16:23
 saved-by: George Gkoutos
 auto-generated-by: OBO-Edit 1.100-beta16
 subsetdef: abnormal_slim "Abnormal/normal slim"
@@ -289,9 +289,10 @@ is_a: PATO:0001237 ! monadic quality of continuant
 [Term]
 id: PATO:0000048
 name: hardness
-def: "A physical quality inhering in a bearer as the constant of proportionality of the force on its elastic body to its body's extension." [: "http://thesaurus.maths.org/"]
+def: "A physical quality inhering in a bearer by virtue of its capability of being turned, bowed, or twisted without breaking." [merriam-webster:merriam-webster "http://www.m-w.com/"]
 subset: attribute_slim
-related_synonym: "stiffness" []
+related_synonym: "impenetrability" []
+related_synonym: "toughness" []
 is_a: PATO:0001018 ! physical quality
 
 [Term]
@@ -2128,6 +2129,8 @@ id: PATO:0000386
 name: hard
 def: "A hardness quality of being rigid and resistant to pressure." [PATO :GVG]
 subset: value_slim
+related_synonym: "impenetrable" []
+related_synonym: "tough" []
 is_a: PATO:0000048 ! hardness
 
 [Term]
@@ -5603,7 +5606,7 @@ is_obsolete: true
 [Term]
 id: PATO:0001018
 name: physical quality
-def: "A quality that exists through action of continuants at the physical level of organisation" [PATO:GVG]
+def: "A quality that exists through action of continuants at the physical level of organisation." [PATO:GVG]
 subset: attribute_slim
 is_a: PATO:0001237 ! monadic quality of continuant
 
@@ -5692,7 +5695,7 @@ is_a: PATO:0000156 ! temporal
 [Term]
 id: PATO:0001031
 name: elasticity
-def: "A physical quality inhering in a bearer by \nvirtue of the ratio of its extension to its original length." [PATO :GVG]
+def: "A physical quality inhering in a bearer by virtue of its capability to recover its size and shape after deformation in any way." [merriam-webster:merriam-webster "http://www.m-w.com/ "]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
@@ -6427,14 +6430,14 @@ is_obsolete: true
 [Term]
 id: PATO:0001171
 name: elastic
-def: "An elasticity that is larger than zero." [PATO :GVG]
+def: "An elasticity quality inhering in a bearer by virtue of itsability to recover its size and shape after deformation in any way." [merriam-webster:merriam-webster "http://www.m-w.com/"]
 subset: value_slim
 is_a: PATO:0001031 ! elasticity
 
 [Term]
 id: PATO:0001172
 name: inelastic
-def: "An elasticity that equals to zero." [PATO :GVG]
+def: "An elasticity quality inhering in a bearer by virtue of its inability to recover its size and shape after deformation in any way." [merriam-webster:merriam-webster "http://www.m-w.com/ "]
 subset: value_slim
 is_a: PATO:0001031 ! elasticity
 
@@ -8895,6 +8898,44 @@ name: delayed phase
 def: "A phasen which ends before natural start point." [PATO:GVG]
 subset: value_slim
 is_a: PATO:0000083 ! phase
+
+[Term]
+id: PATO:0001543
+name: flexibility
+def: "A physical quality inhering in a bearer by virtue of its capability of being turned, bowed, or twisted without breaking." [merriam-webster:merriam-webster "http://www.m-w.com/"]
+is_a: PATO:0001018 ! physical quality
+
+[Term]
+id: PATO:0001544
+name: flexible
+def: "A physical quality inhering in a bearer by virtue of its ability of being turned, bowed, or twisted without breaking." [merriam-webster:merriam-webster "http://www.m-w.com/ "]
+exact_synonym: "bendy" []
+is_a: PATO:0001543 ! flexibility
+
+[Term]
+id: PATO:0001545
+name: inflexible
+def: "A physical quality inhering in a bearer by virtue of its inability of being turned, bowed, or twisted without breaking." [merriam-webster:merriam-webster "http://www.m-w.com/ "]
+exact_synonym: "stiff" []
+is_a: PATO:0001543 ! flexibility
+
+[Term]
+id: PATO:0001546
+name: quality of a solid
+exact_synonym: "solidity" []
+is_a: PATO:0001018 ! physical quality
+
+[Term]
+id: PATO:0001547
+name: quality of a gas
+exact_synonym: "gaseous" []
+is_a: PATO:0001018 ! physical quality
+
+[Term]
+id: PATO:0001548
+name: quality of a liquid
+exact_synonym: "liquidity" []
+is_a: PATO:0001018 ! physical quality
 
 [Typedef]
 id: is_magnitude_of

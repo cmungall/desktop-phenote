@@ -168,6 +168,7 @@ public class OntologyDataAdapter {
   /** If repository is configured loads obo from repos if local out of date */
   private void loadOboSessionCheckRepos(Ontology o,OntologyConfig oc)
   throws OntologyException {
+    // first get normal/cached/local ontology
     String filename = oc.getFile();
     URL url = findFile(filename); // throws OntologyEx if file not found
 
