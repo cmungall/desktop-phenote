@@ -188,8 +188,6 @@ them into  the classfiles directory. excludes="test/**"  -->
         </javac>
     </target>
 
-    <!-- JAR The jar target compiles everything, and produces a phenote.jar in
-  phenote/jars/phenote.jar.  -->
     <target name="jar-pase" depends="compile">
         <jar destfile="${jarfile}">
             <fileset dir="${classfiles}"/>
@@ -198,6 +196,8 @@ them into  the classfiles directory. excludes="test/**"  -->
         </jar>
     </target>
 
+    <!-- JAR The jar target compiles everything, and produces a phenote.jar in
+  phenote/jars/phenote.jar.  -->
     <target name="jar" depends="compile">
         <jar destfile="${jarfile}">
             <fileset dir="${classfiles}"/>
@@ -404,7 +404,7 @@ where xsd files are (conf) -->
 
     
 <!-- need to test if PHENOTE_VERSION is defined - possible?? -->
-    <target name="webstart" depends="webstart-html,copy-jnlps">
+    <target name="webstart" depends="webstart-webpages,copy-jnlps">
       <echo message="Env Var PHENOTE VERSION is set to ${env.PHENOTE_VERSION}" />
       <mkdir dir="phenote-webstart/${env.PHENOTE_VERSION}"/>
       <copy todir="phenote-webstart/${env.PHENOTE_VERSION}/jars">
@@ -412,10 +412,10 @@ where xsd files are (conf) -->
       </copy>
     </target>
 
-    <target name="webstart-html">
-      <echo message="Env Var PHENOTE VERSION is set to ${env.PHENOTE_VERSION}" />
+    <target name="webstart-webpages">
       <copy todir="phenote-webstart">
-         <fileset file="doc/phenote-website/*.html"/>
+         <!-- fileset file="doc/phenote-website/*.html"/ -->
+         <fileset dir="doc/phenote-website" excludes="*.jnlp"/>
        </copy>
     </target>
     
