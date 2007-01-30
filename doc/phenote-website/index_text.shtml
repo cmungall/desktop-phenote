@@ -2,38 +2,20 @@
 
 <div id="page_body">
 
-<!-- A short and funny little quote. -->
-<!--
-<div id="quote">
-<div class="quote_body">
-Here is a quote.
-</div>
-<div class="quote_ref">
--Me
-</div>
-</div>
--->
-
 <!--#include virtual="/phenote/ssi/navi_home.html" -->
 
 <div id="main_content">
 <h2>Phenotype Annotation Tools</h2>
 <p>
-</p>
-
-<p>
 Phenote is a software tool currently being developed by the National Center for Biomedical Ontology to facilitate the annotation of biological phenotypes.  Its development is being driven by several groups, including: 
 <ul>
-<li><a href="http://flybase.bio.indiana.edu/"><img class="portrait" border="0" src="/phenote/images/fly_logo.png"></a><h3>Flybase:  The Drosophila Genome Database.</h3></li>
-<li><a href="http://zfin.org/"><img class="portrait" border="0" src="/phenote/images/zfin_logo.gif"></a>ZFIN: The Zebrafish Genome Database</li>
-<li><a href="http://www.nescent.org/"><img class="portrait" border="0" src="/phenote/images/nescent_logo.gif" alt="NESCENT"></a></a>NESCENT: The National Evolultionary Synthesis Center</li>
-
-
-</p>
-
-<p>
+   <li><a href="http://flybase.bio.indiana.edu/"><img class="portrait" border="0" src="/phenote/images/fly_logo.png"></a><h3>Flybase:  The Drosophila Genome Database.</h3></li>
+   <li><a href="http://zfin.org/"><img class="portrait" border="0" src="/phenote/images/zfin_logo.gif"></a>ZFIN: The Zebrafish Genome Database</li>
+   <li><a href="http://www.nescent.org/"><img class="portrait" border="0" src="/phenote/images/nescent_logo.gif" alt="NESCENT"></a></a>NESCENT: The National Evolultionary Synthesis Center</li>
+</ul>
 
 </p>
+
 </div>
 </div>
 
