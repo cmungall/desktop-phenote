@@ -1,0 +1,43 @@
+<!--#include virtual="/ssi/header.html" -->
+
+<div id="page_body">
+
+<!-- A short and funny little quote. -->
+<!--
+<div id="quote">
+<div class="quote_body">
+Here is a quote.
+</div>
+<div class="quote_ref">
+-Me
+</div>
+</div>
+-->
+
+<!--#include virtual="/ssi/navi_home.html" -->
+
+<div id="main_content">
+<h2>Welcome...</h2>
+<p>
+</p>
+
+<p>
+...to the Berkeley Bioinformatics and Ontologies Project.
+</p>
+
+<p>
+<a href="/content/jobs/">We're hiring!</a>
+</p>
+
+<p>
+The BBOP, located at the Lawrence Berkeley National Labs, is a diverse group of scientific researchers and software engineers dedicated to developing tools and applying computational technologies to solve biological problems.  Members of the group contribute to a number of projects, including <a href="http://geneontology.org/">The Gene Ontology</a>, <a href="http://bioontology.org">The National Center for Biomedical Ontology</a>, and the <a href="http://gmod.org">Generic Model Organism Database Project</a>.  Learn more about our projects <a href="/content/projects/">[here ...]</a>
+</p>
+<p>
+Since our group is focused on the development, use, and integration of ontolgies into biological data analysis, we've set up a <a href="content/faq/">FAQ</a> with answers to some common questions about ontologies.  
+
+</p>
+</div>
+</div>
+
+<!--#include virtual="/ssi/footer.shtml" -->
+
