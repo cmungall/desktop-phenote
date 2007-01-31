@@ -12,21 +12,26 @@
 Data annotated with Phenote is based on the <a href="http://http://www.fruitfly.org/~cjm/obd/formats.html">EQ model</a> for representing phenotypes, combining entities from any OBO ontology with qualities (such as <a href="http://http://www.bioontology.org/wiki/index.php/PATO:About">PATO</a>).  
 </p>
 
-<p>The software can be used as a complete package, or individual compontents can be downloaded and plugged in to your desired application.  [Learn More]</p>
+<p>The software can be used as a complete package, or individual compontents can be downloaded and plugged in to your desired application.  Check out our <a href="/phenote/info/">Info</a> page to learn more.</p>
 
 <p>This tool is  being developed by the <a href="http://berkeleybop.org/">Bioinformatics Core</a> of the <a href="http://www.bioontology.org">National Center for Biomedical Ontology</a>.  
 </p>
 <p>
 There are two groups driving the development of this software project:
-<ul>
-   <li><p><a href="http://flybase.bio.indiana.edu/"><img class="portrait" border="0" src="/phenote/images/fly_logo.png" alt="Flybase" /></a><h3>Flybase:  The Drosophila Genome Database.</h3></li></p>
-   <li><p><a href="http://zfin.org/"><img class="portrait" border="0" src="/phenote/images/zfin_logo.gif" alt="Zfin" /></a>ZFIN: The Zebrafish Genome Database</li></p>
-</ul>
+<p><a href="http://flybase.bio.indiana.edu/"><img class="portrait" height="75" border="0" src="/phenote/images/fly_logo.png" alt="Flybase" /></a>Flybase:  The Drosophila Genome Database.
+<br />
+</p>
+<p><a href="http://zfin.org/"><img class="portrait" border="0" src="/phenote/images/zfin_logo.gif" height="50" alt="Zfin" /></a>ZFIN: The Zebrafish Genome Database
+<br />
+</p>
 </p>
 <p>
 We are also collaborating with several groups:
-<p><a href="http://www.nescent.org/"><img class="portrait" border="0" src="/phenote/images/nescent_logo.gif" alt="Nescent" /></a>NESCENT: The National Evolutionary Synthesis Center</p>
-<p><a href="http://www.pharmgkb.org/"><img class="portrait" border="0" src="/phenote/images/pgkb_logo.png" alt="PharmGKB" /></a>PharmGKB: The Pharmacogenetics and Pharmacogenomics Knowledge Base 
+<p><a href="http://www.nescent.org/"><img class="portrait" border="0" src="/phenote/images/nescent_logo.gif" height="50" alt="Nescent" /></a>NESCENT: The National Evolutionary Synthesis Center
+<br />
+</p>
+<p><a href="http://www.pharmgkb.org/"><img class="portrait" border="0" src="/phenote/images/pgkb_logo.png" height="50" alt="PharmGKB" /></a>PharmGKB: The Pharmacogenetics and Pharmacogenomics Knowledge Base 
+<br />
 </p>
 </p>
 
