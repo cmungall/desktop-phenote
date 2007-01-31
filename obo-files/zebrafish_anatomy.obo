@@ -1,752 +1,9 @@
 format-version: 1.2
-date: 11:12:2006 16:11
+date: 29:01:2007 10:24
 saved-by: Melissa  Haendel
-auto-generated-by: OBO-Edit 1.100-beta12
-synonymtypedef: PLURAL "PLURAL"
+auto-generated-by: OBO-Edit 1.100-beta18
 default-namespace: zebrafish_anatomical_ontology
 namespace-id-rule: * ZFA:$sequence(7)$
-
-[Term]
-id: CL:0000000
-name: cell
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-060816-76
-is_a: ZFA:0000037 ! anatomical structure
-relationship: end ZFS:0000044 ! Adult
-relationship: part_of ZFA:0001094 ! whole organism
-relationship: start ZFS:0000001 ! Zygote:1-cell
-
-[Term]
-id: CL:0000017
-name: spermatocyte
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-060131-74
-relationship: develops_from ZFA:0001337 ! spermatogonia
-relationship: end ZFS:0000044 ! Adult
-relationship: part_of ZFA:0000598 ! testis
-relationship: start ZFS:0000043 ! Juvenile:Days 45-89
-
-[Term]
-id: CL:0000030
-name: glioblast
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-050915-148
-relationship: develops_from ZFA:0001120 ! neuroectoderm
-relationship: end ZFS:0000000 ! Unknown
-relationship: start ZFS:0000025 ! Segmentation:10-13 somites
-
-[Term]
-id: CL:0000037
-name: hematopoietic stem cell
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-050915-141
-relationship: end ZFS:0000044 ! Adult
-relationship: part_of ZFA:0005023 ! hematopoietic system
-relationship: start ZFS:0000030 ! Pharyngula:Prim-15
-
-[Term]
-id: CL:0000040
-name: monoblast
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-060331-82
-relationship: develops_from CL:0000557 ! myeloid progenitor cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000042
-name: myeloblast
-namespace: zebrafish_anatomy
-synonym: "neutrophil stem cell" RELATED []
-xref: ZFIN:ZDB-ANAT-060331-76
-relationship: develops_from CL:0000557 ! myeloid progenitor cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000049
-name: multipotential myeloid stem cell
-namespace: zebrafish_anatomy
-def: "One of the two stem cells that develops from hematopoietic stem cells  - the other being the lymphoid progenitor cell. The erythroid progenitor cells and the myeloid cells (monocytes and granulocytes) develop from these cells." [ZFIN:curator]
-xref: ZFIN:ZDB-ANAT-060331-73
-is_a: CL:0000037 ! hematopoietic stem cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000051
-name: lymphopoietic stem cell
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-050915-142
-is_a: CL:0000037 ! hematopoietic stem cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000030 ! Pharyngula:Prim-15
-
-[Term]
-id: CL:0000056
-name: myoblast
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-050915-157
-relationship: develops_from CL:0000355 ! muscle stem cell
-relationship: end ZFS:0000000 ! Unknown
-relationship: start ZFS:0000023 ! Segmentation:1-4 somites
-
-[Term]
-id: CL:0000058
-name: chondroblast
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-050915-153
-relationship: develops_from ZFA:0000041 ! mesoderm
-relationship: end ZFS:0000000 ! Unknown
-relationship: start ZFS:0000029 ! Pharyngula:Prim-5
-
-[Term]
-id: CL:0000071
-name: blood vessel endothelial cell
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-050915-152
-relationship: develops_from ZFA:0000041 ! mesoderm
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000084
-name: T cell
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-050915-145
-relationship: develops_from CL:0000230 ! T lymphoblast
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000094
-name: granulocyte
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-060816-79
-is_a: CL:0000000 ! cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000096
-name: neutrophil
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-060331-81
-is_a: CL:0000518 ! phagocyte (sensu Vertebrata)
-relationship: develops_from CL:0000560 ! band form neutrophil
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000101
-name: sensory neuron
-namespace: zebrafish_anatomy
-synonym: "sensory neurons" RELATED PLURAL []
-xref: ZFIN:ZDB-ANAT-011113-357
-relationship: end ZFS:0000044 ! Adult
-relationship: part_of ZFA:0000047 ! peripheral olfactory organ
-relationship: start ZFS:0000030 ! Pharyngula:Prim-15
-
-[Term]
-id: CL:0000103
-name: bipolar neuron
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-051116-45
-relationship: end ZFS:0000044 ! Adult
-relationship: part_of ZFA:0000119 ! retinal inner nuclear layer
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000113
-name: mononuclear phagocyte
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-060331-84
-is_a: CL:0000518 ! phagocyte (sensu Vertebrata)
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000116
-name: pioneer neuron
-namespace: zebrafish_anatomy
-synonym: "pioneer neurons" RELATED PLURAL []
-xref: ZFIN:ZDB-ANAT-011113-334
-relationship: end ZFS:0000029 ! Pharyngula:Prim-5
-relationship: part_of ZFA:0000048 ! olfactory placode
-relationship: start ZFS:0000028 ! Segmentation:26+ somites
-
-[Term]
-id: CL:0000125
-name: glial cell
-namespace: zebrafish_anatomy
-def: "The major support cell of the brain. (Source: BioGlossary, www.Biology-Text.com)" [ZFIN:curator]
-synonym: "glial cells" RELATED PLURAL []
-xref: ZFIN:ZDB-ANAT-010921-436
-relationship: develops_from CL:0000030 ! glioblast
-relationship: end ZFS:0000044 ! Adult
-relationship: part_of ZFA:0000396 ! nervous system
-relationship: start ZFS:0000028 ! Segmentation:26+ somites
-
-[Term]
-id: CL:0000127
-name: astrocyte
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-050915-160
-is_a: CL:0000125 ! glial cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000128
-name: oligodendrocyte
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-060131-75
-is_a: CL:0000125 ! glial cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000138
-name: chondrocyte
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-050915-154
-relationship: develops_from CL:0000058 ! chondroblast
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000147
-name: pigment cell
-namespace: zebrafish_anatomy
-def: "Iridophores (reflective pigment cells), melanophores (neural crest-derived cells containing black melanin pigment), and xanthophores (neural crest-derived cells pigmented yellow). <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a>" [ZFIN:curator]
-synonym: "chromatophores" RELATED []
-synonym: "pigment" RELATED []
-synonym: "pigment cells" RELATED PLURAL []
-xref: ZFIN:ZDB-ANAT-010921-474
-relationship: develops_from CL:0000333 ! neural crest cell
-relationship: end ZFS:0000044 ! Adult
-relationship: part_of ZFA:0000368 ! integument
-relationship: start ZFS:0000027 ! Segmentation:20-25 somites
-
-[Term]
-id: CL:0000148
-name: melanophore
-namespace: zebrafish_anatomy
-def: "Neural crest-derived cells containing black melanin pigment. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a>" [ZFIN:curator]
-synonym: "melanocytes" RELATED []
-synonym: "melanophores" RELATED PLURAL []
-xref: ZFIN:ZDB-ANAT-040708-2
-is_a: CL:0000147 ! pigment cell
-relationship: develops_from CL:0000541 ! melanoblast
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000029 ! Pharyngula:Prim-5
-
-[Term]
-id: CL:0000163
-name: endocrine cell
-namespace: zebrafish_anatomy
-def: "A cell of an endocrine gland, ductless glands that secrete substances which are released directly into the circulation and which influence metabolism and other body functions." [ZFIN:curator]
-xref: ZFIN:ZDB-ANAT-060816-68
-relationship: end ZFS:0000044 ! Adult
-relationship: part_of ZFA:0001158 ! endocrine system
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000166
-name: chromaffin cell
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-050915-151
-relationship: develops_from CL:0000333 ! neural crest cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000167
-name: peptide hormone secreting cell
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-060816-69
-is_a: CL:0000163 ! endocrine cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000187
-name: muscle cell
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-050915-158
-relationship: develops_from CL:0000056 ! myoblast
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000024 ! Segmentation:5-9 somites
-
-[Term]
-id: CL:0000188
-name: skeletal muscle cell
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-050915-159
-is_a: CL:0000187 ! muscle cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000024 ! Segmentation:5-9 somites
-
-[Term]
-id: CL:0000189
-name: slow muscle cell
-namespace: zebrafish_anatomy
-synonym: "slow muscle cells" RELATED PLURAL []
-xref: ZFIN:ZDB-ANAT-031211-15
-is_a: CL:0000188 ! skeletal muscle cell
-relationship: develops_from ZFA:0001056 ! myotome
-relationship: develops_from ZFA:0001373 ! migratory slow muscle precursor cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000024 ! Segmentation:5-9 somites
-
-[Term]
-id: CL:0000190
-name: fast muscle cell
-namespace: zebrafish_anatomy
-synonym: "fast muscle cells" RELATED PLURAL []
-xref: ZFIN:ZDB-ANAT-031211-3
-is_a: CL:0000188 ! skeletal muscle cell
-relationship: develops_from ZFA:0001056 ! myotome
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000024 ! Segmentation:5-9 somites
-
-[Term]
-id: CL:0000202
-name: sensory hair cell
-namespace: zebrafish_anatomy
-def: "Specialized neuronal receptor cells of the lateral line and acoustico-vestibular systems. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a> (Also see Anatomical Atlas entry for <a href='http://zfin.org/zf_info/anatomy/dict/hair_cell/hair_cell.html'>hair cells</a> by T. Whitfield.)" [ZFIN:curator]
-synonym: "hair cells" RELATED PLURAL []
-synonym: "sensory hair cells" RELATED PLURAL []
-xref: ZFIN:ZDB-ANAT-011113-512
-relationship: end ZFS:0000044 ! Adult
-relationship: part_of ZFA:0000234 ! macula neglecta
-relationship: part_of ZFA:0000243 ! neuromast
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000229
-name: lymphoblast
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-050915-143
-relationship: develops_from CL:0000051 ! lymphopoietic stem cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000035 ! Larval:Protruding-mouth
-
-[Term]
-id: CL:0000230
-name: T lymphoblast
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-050915-144
-is_a: CL:0000229 ! lymphoblast
-relationship: end ZFS:0000044 ! Adult
-relationship: part_of ZFA:0001078 ! thymus
-relationship: start ZFS:0000035 ! Larval:Protruding-mouth
-
-[Term]
-id: CL:0000235
-name: macrophage
-namespace: zebrafish_anatomy
-synonym: "macrophages" RELATED PLURAL []
-xref: ZFIN:ZDB-ANAT-060331-85
-is_a: CL:0000113 ! mononuclear phagocyte
-relationship: end ZFS:0000044 ! Adult
-relationship: part_of ZFA:0001159 ! immune system
-relationship: start ZFS:0000025 ! Segmentation:10-13 somites
-
-[Term]
-id: CL:0000246
-name: Mauthner neuron
-namespace: zebrafish_anatomy
-synonym: "Mauthner cell" RELATED []
-xref: ZFIN:ZDB-ANAT-010921-507
-relationship: end ZFS:0000000 ! Unknown
-relationship: part_of ZFA:0000545 ! medulla oblongata
-relationship: part_of ZFA:0001032 ! rhombomere 4
-relationship: start ZFS:0000027 ! Segmentation:20-25 somites
-
-[Term]
-id: CL:0000247
-name: Rohon-Beard neuron
-namespace: zebrafish_anatomy
-def: "Primary sensory neuron present in the dorsal spinal cord of the embryo and early larva. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a>" [ZFIN:curator]
-synonym: "RB neurons" RELATED []
-synonym: "Rohon Beard neurons" RELATED PLURAL []
-synonym: "Rohon-Beard neurons" RELATED PLURAL []
-xref: ZFIN:ZDB-ANAT-010921-407
-relationship: end ZFS:0000038 ! Larval:Day 6
-relationship: part_of CL:0000530 ! primary neuron
-relationship: start ZFS:0000023 ! Segmentation:1-4 somites
-
-[Term]
-id: CL:0000287
-name: eye photoreceptor cell
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-051116-42
-relationship: end ZFS:0000044 ! Adult
-relationship: part_of ZFA:0000143 ! retinal photoreceptor layer
-relationship: part_of ZFA:0001464 ! retinal outer nuclear layer
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000295
-name: somatotrophin secreting cell
-namespace: zebrafish_anatomy
-comment: This might be growth hormone secreting cell CL00000471
-synonym: "somatotroph" RELATED []
-xref: ZFIN:ZDB-ANAT-060816-74
-is_a: CL:0000167 ! peptide hormone secreting cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000319
-name: mucous cell
-namespace: zebrafish_anatomy
-synonym: "mucous cells" RELATED PLURAL []
-xref: ZFIN:ZDB-ANAT-010921-556
-relationship: end ZFS:0000044 ! Adult
-relationship: part_of ZFA:0000368 ! integument
-relationship: part_of ZFA:0001159 ! immune system
-relationship: start ZFS:0000025 ! Segmentation:10-13 somites
-
-[Term]
-id: CL:0000333
-name: neural crest cell
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-050915-149
-relationship: end ZFS:0000029 ! Pharyngula:Prim-5
-relationship: part_of ZFA:0000045 ! neural crest
-relationship: start ZFS:0000023 ! Segmentation:1-4 somites
-
-[Term]
-id: CL:0000355
-name: muscle stem cell
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-050915-156
-is_a: CL:0000680 ! muscle precursor cell
-relationship: end ZFS:0000000 ! Unknown
-relationship: start ZFS:0000023 ! Segmentation:1-4 somites
-
-[Term]
-id: CL:0000362
-name: epidermal cell
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-060816-78
-is_a: CL:0000000 ! cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000430
-name: xanthophore
-namespace: zebrafish_anatomy
-def: "Neural crest-derived cells pigmented yellow. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a>" [ZFIN:curator]
-synonym: "xanthophores" RELATED PLURAL []
-xref: ZFIN:ZDB-ANAT-040708-3
-is_a: CL:0000147 ! pigment cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000032 ! Pharyngula:High-pec
-
-[Term]
-id: CL:0000431
-name: iridophore
-namespace: zebrafish_anatomy
-def: "Reflective pigment cells. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a>" [ZFIN:curator]
-synonym: "iridophores" RELATED PLURAL []
-xref: ZFIN:ZDB-ANAT-040708-1
-is_a: CL:0000147 ! pigment cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000032 ! Pharyngula:High-pec
-
-[Term]
-id: CL:0000438
-name: luteinizing hormone secreting cell
-namespace: zebrafish_anatomy
-comment: also could be follicle stimulating hormone secreting cell CL0000437
-synonym: "delta basophila" RELATED []
-synonym: "gonadotroph" RELATED []
-xref: ZFIN:ZDB-ANAT-060816-75
-is_a: CL:0000167 ! peptide hormone secreting cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000439
-name: prolactin secreting cell
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-060816-70
-is_a: CL:0000167 ! peptide hormone secreting cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000440
-name: melanocyte stimulating hormone secreting cell
-namespace: zebrafish_anatomy
-synonym: "melanotropes" RELATED []
-xref: ZFIN:ZDB-ANAT-060816-72
-is_a: CL:0000167 ! peptide hormone secreting cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000476
-name: thyroid stimulating hormone secreting cell
-namespace: zebrafish_anatomy
-synonym: "beta-basophil" RELATED []
-synonym: "thyrotroph" RELATED []
-xref: ZFIN:ZDB-ANAT-060816-73
-is_a: CL:0000167 ! peptide hormone secreting cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000518
-name: phagocyte (sensu Vertebrata)
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-060331-83
-relationship: develops_from CL:0000040 ! monoblast
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000530
-name: primary neuron
-namespace: zebrafish_anatomy
-synonym: "presumptive neuron neural rod" RELATED []
-synonym: "primary neuron neural keel" RELATED []
-synonym: "primary neuron neural plate" RELATED []
-synonym: "primary neuron neural rod" RELATED []
-synonym: "primary neuron spinal cord" RELATED []
-synonym: "primary neurons trunk" RELATED PLURAL []
-xref: ZFIN:ZDB-ANAT-010921-472
-relationship: end ZFS:0000038 ! Larval:Day 6
-relationship: part_of ZFA:0001120 ! neuroectoderm
-relationship: start ZFS:0000023 ! Segmentation:1-4 somites
-
-[Term]
-id: CL:0000533
-name: primary motoneuron
-namespace: zebrafish_anatomy
-def: "Subset of spinal motoneurons innervating body wall muscle that develop early and achieve large size; present in three or four identifiable pairs per spinal segment. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a>" [ZFIN:curator]
-synonym: "primary motoneuron neural rod" RELATED []
-synonym: "primary motoneuron spinal cord" RELATED []
-synonym: "primary motoneurons" RELATED PLURAL []
-xref: ZFIN:ZDB-ANAT-011113-498
-relationship: end ZFS:0000031 ! Pharyngula:Prim-25
-relationship: part_of CL:0000530 ! primary neuron
-relationship: start ZFS:0000023 ! Segmentation:1-4 somites
-
-[Term]
-id: CL:0000534
-name: primary interneuron
-namespace: zebrafish_anatomy
-synonym: "interneuron" RELATED []
-synonym: "primary interneuron neural rod" RELATED []
-synonym: "primary interneuron spinal cord" RELATED []
-synonym: "primary interneurons" RELATED PLURAL []
-xref: ZFIN:ZDB-ANAT-020309-308
-relationship: end ZFS:0000029 ! Pharyngula:Prim-5
-relationship: part_of CL:0000530 ! primary neuron
-relationship: start ZFS:0000025 ! Segmentation:10-13 somites
-
-[Term]
-id: CL:0000536
-name: secondary motoneuron
-namespace: zebrafish_anatomy
-synonym: "secondary motoneurons" RELATED PLURAL []
-xref: ZFIN:ZDB-ANAT-011113-511
-is_a: CL:0000540 ! neuron
-relationship: end ZFS:0000043 ! Juvenile:Days 45-89
-relationship: start ZFS:0000028 ! Segmentation:26+ somites
-
-[Term]
-id: CL:0000540
-name: neuron
-namespace: zebrafish_anatomy
-synonym: "neurons" RELATED PLURAL []
-xref: ZFIN:ZDB-ANAT-010921-563
-relationship: end ZFS:0000044 ! Adult
-relationship: part_of ZFA:0000396 ! nervous system
-relationship: start ZFS:0000026 ! Segmentation:14-19 somites
-
-[Term]
-id: CL:0000541
-name: melanoblast
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-050915-150
-relationship: develops_from CL:0000333 ! neural crest cell
-relationship: end ZFS:0000000 ! Unknown
-relationship: start ZFS:0000025 ! Segmentation:10-13 somites
-
-[Term]
-id: CL:0000557
-name: myeloid progenitor cell
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-060331-74
-relationship: develops_from CL:0000049 ! multipotential myeloid stem cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000560
-name: band form neutrophil
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-060331-80
-relationship: develops_from CL:0000582 ! metamyelocyte
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000561
-name: amacrine cell
-namespace: zebrafish_anatomy
-synonym: "amacrine neuron" RELATED []
-xref: ZFIN:ZDB-ANAT-051116-41
-relationship: end ZFS:0000044 ! Adult
-relationship: part_of ZFA:0000119 ! retinal inner nuclear layer
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000564
-name: promyelocyte
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-060331-77
-relationship: develops_from CL:0000042 ! myeloblast
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000573
-name: retinal cone cell
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-051116-43
-is_a: CL:0000287 ! eye photoreceptor cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000580
-name: neutrophilic myelocyte
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-060331-78
-relationship: develops_from CL:0000564 ! promyelocyte
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000582
-name: metamyelocyte
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-060331-79
-relationship: develops_from CL:0000580 ! neutrophilic myelocyte
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000604
-name: retinal rod cell
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-051116-44
-is_a: CL:0000287 ! eye photoreceptor cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000611
-name: eosinophil progenitor cell
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-060331-75
-is_a: CL:0000557 ! myeloid progenitor cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000624
-name: CD4 positive T lymphocyte
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-050915-146
-is_a: CL:0000084 ! T cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000625
-name: CD8 positive T lymphocyte
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-050915-147
-is_a: CL:0000084 ! T cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000636
-name: Muller cell
-namespace: zebrafish_anatomy
-def: "Muller cells are the principal glial cell of the retina. They extend radially across the entire thickness of the retina. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-050202-2>Bernardos et al, 2005.</a> ZDB-PUB-050202-2" [ZFIN:curator]
-xref: ZFIN:ZDB-ANAT-050915-161
-is_a: CL:0000127 ! astrocyte
-relationship: end ZFS:0000044 ! Adult
-relationship: part_of ZFA:0000119 ! retinal inner nuclear layer
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000640
-name: corticotrophin hormone secreting cell
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-060816-71
-is_a: CL:0000167 ! peptide hormone secreting cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000670
-name: primordial germ cell
-namespace: zebrafish_anatomy
-synonym: "pgc" RELATED []
-synonym: "PGC" RELATED []
-synonym: "primordial germ cells" RELATED PLURAL []
-xref: ZFIN:ZDB-ANAT-010921-483
-relationship: end ZFS:0000000 ! Unknown
-relationship: part_of ZFA:0000632 ! reproductive system
-relationship: start ZFS:0000014 ! Blastula:Sphere
-
-[Term]
-id: CL:0000680
-name: muscle precursor cell
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-050915-155
-relationship: develops_from ZFA:0000041 ! mesoderm
-relationship: end ZFS:0000000 ! Unknown
-relationship: start ZFS:0000020 ! Gastrula:75%-epiboly
-
-[Term]
-id: CL:0000681
-name: radial glial cell
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-050915-162
-relationship: develops_from ZFA:0001120 ! neuroectoderm
-relationship: end ZFS:0000000 ! Unknown
-relationship: start ZFS:0000029 ! Pharyngula:Prim-5
-
-[Term]
-id: CL:0000700
-name: dopaminergic neuron
-namespace: zebrafish_anatomy
-xref: ZFIN:ZDB-ANAT-060816-77
-is_a: CL:0000000 ! cell
-relationship: end ZFS:0000044 ! Adult
-relationship: start ZFS:0000000 ! Unknown
-
-[Term]
-id: CL:0000740
-name: retinal ganglion cell
-namespace: zebrafish_anatomy
-synonym: "RGC" RELATED []
-xref: ZFIN:ZDB-ANAT-051116-46
-relationship: end ZFS:0000044 ! Adult
-relationship: part_of ZFA:0000024 ! retinal ganglion cell layer
-relationship: start ZFS:0000000 ! Unknown
 
 [Term]
 id: ZFA:0000000
@@ -763,7 +20,6 @@ id: ZFA:0000001
 name: Kupffer's vesicle
 namespace: zebrafish_anatomy
 def: "Small but distinctive epithelial sac containing fluid, located midventrally posterior to the yolk cell or its extension, and transiently present during most of the segmentation period. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a>  Kupffer's vesicle has been compared to the mouse embryonic node. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-050328-4'>Drummond et al, 2005.</a>" [ZFIN:curator]
-comment: Pub says this is the same as the mouse embryonic node  ZDB-PUB-050328-4
 xref: ZFIN:ZDB-ANAT-010921-406
 relationship: develops_from ZFA:0000023 ! forerunner cell group
 relationship: end ZFS:0000029 ! Pharyngula:Prim-5
@@ -774,7 +30,7 @@ relationship: start ZFS:0000024 ! Segmentation:5-9 somites
 id: ZFA:0000003
 name: adaxial cell
 namespace: zebrafish_anatomy
-synonym: "adaxial cells" RELATED PLURAL []
+synonym: "adaxial cells" RELATED []
 xref: ZFIN:ZDB-ANAT-010921-408
 relationship: end ZFS:0000029 ! Pharyngula:Prim-5
 relationship: part_of ZFA:0000279 ! segmental plate
@@ -990,7 +246,7 @@ namespace: zebrafish_anatomy
 def: "A group of cells that migrate at the leading edge of shield during gastrulation but do not involute.  At the end of gastrulation, forerunner cells migrate deep into the embryo and organize to form Kuppfer's vesicle. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-970107-2'>Cooper and D'Amico, 1996.</a>" [ZFIN:curator]
 synonym: "DFCs" RELATED []
 synonym: "dorsal forerunner cells" RELATED []
-synonym: "forerunner cells" RELATED PLURAL []
+synonym: "forerunner cells" RELATED []
 xref: ZFIN:ZDB-ANAT-010921-434
 is_a: ZFA:0001105 ! embryonic structure
 relationship: develops_from ZFA:0001126 ! noninvoluting endocytic marginal cell cluster
@@ -1186,7 +442,7 @@ relationship: start ZFS:0000026 ! Segmentation:14-19 somites
 id: ZFA:0000043
 name: muscle pioneer somite 1
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 1" RELATED PLURAL []
+synonym: "muscle pioneers somite 1" RELATED []
 xref: ZFIN:ZDB-ANAT-010921-456
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000963 ! slow muscle cell somite 1
@@ -1408,7 +664,7 @@ relationship: start ZFS:0000023 ! Segmentation:1-4 somites
 id: ZFA:0000068
 name: proneural cluster
 namespace: zebrafish_anatomy
-synonym: "proneural clusters" RELATED PLURAL []
+synonym: "proneural clusters" RELATED []
 xref: ZFIN:ZDB-ANAT-010921-486
 relationship: end ZFS:0000024 ! Segmentation:5-9 somites
 relationship: part_of ZFA:0000061 ! presumptive central nervous system
@@ -1659,7 +915,7 @@ id: ZFA:0000093
 name: blastomere
 namespace: zebrafish_anatomy
 def: "A cell arising during cleavage; the term encompasses the partially cleaved, incomplete cells at the blastodisc margin before they collectively form the yolk syncytial layer (YSL) in the midblastula. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a>" [ZFIN:curator]
-synonym: "blastomeres" RELATED PLURAL []
+synonym: "blastomeres" RELATED []
 xref: ZFIN:ZDB-ANAT-010921-514
 is_a: ZFA:0001105 ! embryonic structure
 relationship: end ZFS:0000015 ! Blastula:Dome
@@ -1671,7 +927,7 @@ id: ZFA:0000094
 name: blood island
 namespace: zebrafish_anatomy
 def: "Nests of developing blood cells arising late in the segmentation period from the intermediate mass, and located in the anterior-ventral tail, just posterior to the yolk extension. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a>" [ZFIN:curator]
-synonym: "blood islands" RELATED PLURAL []
+synonym: "blood islands" RELATED []
 xref: ZFIN:ZDB-ANAT-010921-515
 relationship: end ZFS:0000029 ! Pharyngula:Prim-5
 relationship: part_of ZFA:0000033 ! intermediate cell mass of mesoderm
@@ -1813,7 +1069,7 @@ relationship: start ZFS:0000024 ! Segmentation:5-9 somites
 id: ZFA:0000108
 name: fin
 namespace: zebrafish_anatomy
-synonym: "fins" RELATED PLURAL []
+synonym: "fins" RELATED []
 xref: ZFIN:ZDB-ANAT-010921-533
 is_a: ZFA:0000292 ! surface structure
 relationship: end ZFS:0000044 ! Adult
@@ -1940,7 +1196,7 @@ relationship: start ZFS:0000027 ! Segmentation:20-25 somites
 id: ZFA:0000119
 name: retinal inner nuclear layer
 namespace: zebrafish_anatomy
-synonym: "inner nuclear layer" RELATED PLURAL []
+synonym: "inner nuclear layer" RELATED []
 synonym: "intermediate cell layer" RELATED []
 xref: ZFIN:ZDB-ANAT-010921-544
 relationship: end ZFS:0000044 ! Adult
@@ -1951,7 +1207,7 @@ relationship: start ZFS:0000030 ! Pharyngula:Prim-15
 id: ZFA:0000120
 name: lateral line ganglion
 namespace: zebrafish_anatomy
-synonym: "lateral line ganglia" RELATED PLURAL []
+synonym: "lateral line ganglia" RELATED []
 synonym: "llg" RELATED []
 xref: ZFIN:ZDB-ANAT-010921-546
 is_a: ZFA:0000013 ! cranial ganglia
@@ -2005,7 +1261,7 @@ id: ZFA:0000125
 name: neuromast mandibular
 namespace: zebrafish_anatomy
 def: "Volcano-shaped lateral line sensory organ located in characteristic positions within the skin epithelium and containing hair cells and their support elements. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a> (Also see Anatomical Atlas entry for <a href='http://zfin.org/zf_info/anatomy/dict/lat_line/lat_line.html'>lateral line</a> by T. Whitfield.)" [ZFIN:curator]
-synonym: "neuromasts mandibular" RELATED PLURAL []
+synonym: "neuromasts mandibular" RELATED []
 xref: ZFIN:ZDB-ANAT-010921-551
 is_a: ZFA:0000243 ! neuromast
 relationship: end ZFS:0000044 ! Adult
@@ -2108,7 +1364,7 @@ id: ZFA:0000136
 name: neuromast otic
 namespace: zebrafish_anatomy
 def: "Volcano-shaped lateral line sensory organ located in characteristic positions within the skin epithelium and containing hair cells and their support elements. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a> (Also see Anatomical Atlas entry for <a href='http://zfin.org/zf_info/anatomy/dict/lat_line/lat_line.html'>lateral line</a> by T. Whitfield.)" [ZFIN:curator]
-synonym: "neuromasts otic" RELATED PLURAL []
+synonym: "neuromasts otic" RELATED []
 xref: ZFIN:ZDB-ANAT-010921-565
 is_a: ZFA:0000243 ! neuromast
 relationship: end ZFS:0000044 ! Adult
@@ -2142,7 +1398,7 @@ id: ZFA:0000139
 name: immature otolith
 namespace: zebrafish_anatomy
 def: "Brightly refractile stone-like organ within the otic vesicle and positioned over a sensory macula; two form in each vesicle during the late segmentation period. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a> (Also see Anatomical Atlas entry for <a href='http://zfin.org/zf_info/anatomy/dict/oto/otolith.html'>otolith</a> by T. Whitfield.)" [ZFIN:curator]
-synonym: "immature otoliths" RELATED PLURAL []
+synonym: "immature otoliths" RELATED []
 xref: ZFIN:ZDB-ANAT-010921-569
 relationship: end ZFS:0000036 ! Larval:Day 4
 relationship: part_of ZFA:0000051 ! otic vesicle
@@ -2257,7 +1513,6 @@ id: ZFA:0000150
 name: pronephric duct
 namespace: zebrafish_anatomy
 def: "Duct of the embryonic kidney, present bilaterally ventral to the somites and leading to the anal region where it empties separately from, and just posterior to the anus. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a>" [ZFIN:curator]
-comment: we should have iain drummond review kidney development.
 xref: ZFIN:ZDB-ANAT-010921-585
 relationship: develops_from ZFA:0000067 ! pronephric mesoderm
 relationship: end ZFS:0000037 ! Larval:Day 5
@@ -2430,7 +1685,7 @@ relationship: start ZFS:0000029 ! Pharyngula:Prim-5
 id: ZFA:0000165
 name: inferior lobe
 namespace: zebrafish_anatomy
-synonym: "inferior lobes" RELATED PLURAL []
+synonym: "inferior lobes" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-1
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000347 ! dorsal zone
@@ -2498,7 +1753,7 @@ is_obsolete: true
 id: ZFA:0000172
 name: branchial muscle
 namespace: zebrafish_anatomy
-synonym: "branchial muscles" RELATED PLURAL []
+synonym: "branchial muscles" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-106
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0001307 ! pharyngeal musculature
@@ -2684,7 +1939,7 @@ id: ZFA:0000190
 name: ganglion
 namespace: zebrafish_anatomy
 def: "Structures containing a collection of nerve cell bodies. (Source: BioGlossary, www.Biology-Text.com)" [ZFIN:curator]
-synonym: "ganglia" RELATED PLURAL []
+synonym: "ganglia" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-122
 is_a: ZFA:0000015 ! anatomical set
 relationship: end ZFS:0000044 ! Adult
@@ -2888,7 +2143,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000211
 name: gill lamella
 namespace: zebrafish_anatomy
-synonym: "gill lamellae" RELATED PLURAL []
+synonym: "gill lamellae" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-141
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000354 ! gill
@@ -2908,7 +2163,7 @@ id: ZFA:0000213
 name: habenula
 namespace: zebrafish_anatomy
 def: "The habenula relays impulses from limbic areas of the telencephalon to an unpaired midbrain nucleus,  the interpeduncular nucleus." [ZFIN:curator]
-synonym: "habenulae" RELATED PLURAL []
+synonym: "habenulae" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-143
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000509 ! epithalamus
@@ -2918,7 +2173,7 @@ relationship: start ZFS:0000033 ! Hatching:Long-pec
 id: ZFA:0000214
 name: hypobranchial vessel
 namespace: zebrafish_anatomy
-synonym: "hypobranchial vessels" RELATED PLURAL []
+synonym: "hypobranchial vessels" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-144
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000114 ! heart
@@ -3058,7 +2313,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000228
 name: lateral line primordium
 namespace: zebrafish_anatomy
-synonym: "lateral line primordia" RELATED PLURAL []
+synonym: "lateral line primordia" RELATED []
 synonym: "llp" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-158
 relationship: end ZFS:0000036 ! Larval:Day 4
@@ -3132,7 +2387,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000236
 name: mandibular muscle
 namespace: zebrafish_anatomy
-synonym: "mandibular muscles" RELATED PLURAL []
+synonym: "mandibular muscles" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-165
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0001307 ! pharyngeal musculature
@@ -3201,7 +2456,7 @@ name: neuromast
 namespace: zebrafish_anatomy
 def: "Volcano-shaped lateral line sensory organ located in characteristic positions within the skin epithelium and containing hair cells and their support elements. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a> (Also see Anatomical Atlas entry for <a href='http://zfin.org/zf_info/anatomy/dict/lat_line/lat_line.html'>lateral line</a> by T. Whitfield.)" [ZFIN:curator]
 synonym: "lateral line neuromast" RELATED []
-synonym: "neuromasts" RELATED PLURAL []
+synonym: "neuromasts" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-175
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000034 ! lateral line system
@@ -3272,7 +2527,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000250
 name: opercle
 namespace: zebrafish_anatomy
-synonym: "opercles" RELATED PLURAL []
+synonym: "opercles" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-181
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000354 ! gill
@@ -3412,7 +2667,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000264
 name: preopercle
 namespace: zebrafish_anatomy
-synonym: "preopercles" RELATED PLURAL []
+synonym: "preopercles" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-194
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000354 ! gill
@@ -3471,7 +2726,7 @@ id: ZFA:0000270
 name: maxilla
 namespace: zebrafish_anatomy
 def: "The dermal maxilla forms part of the upper jaw.  It is first visible as a small dorsoventrally oriented rod of bone in the lateral region of the upper jaw. Through anterior ossification it becomes S-shaped, with its anteriormost tip directed medially (4.8 mm NL). The posteroventral end of the maxilla is connected to the dentary by a ligament. Maxillary teeth are absent in cypriniforms, but are present in other ostariophysans. . Two barbels are present on the maxilla. The presence of two pairs of maxillary barbels is considered by Cavender and Coburn (1992) to be the primitive condition for the Cyprinidae." [ZFIN:curator]
-synonym: "maxillae" RELATED PLURAL []
+synonym: "maxillae" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-20
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000863 ! dermatocranium
@@ -3482,7 +2737,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000271
 name: radial
 namespace: zebrafish_anatomy
-synonym: "radials" RELATED PLURAL []
+synonym: "radials" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-200
 relationship: develops_from ZFA:0001456 ! pectoral fin endoskeletal disc
 relationship: end ZFS:0000044 ! Adult
@@ -3540,7 +2795,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000277
 name: scale
 namespace: zebrafish_anatomy
-synonym: "scales" RELATED PLURAL []
+synonym: "scales" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-207
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0001183 ! dermal superficial region
@@ -3581,7 +2836,7 @@ id: ZFA:0000281
 name: sensory hair cell posterior macula
 namespace: zebrafish_anatomy
 def: "Specialized neuronal receptor cells of the lateral line and acoustico-vestibular systems. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a> (Also see Anatomical Atlas entry for <a href='http://zfin.org/zf_info/anatomy/dict/hair_cell/hair_cell.html'>hair cells</a> by T. Whitfield.)" [ZFIN:curator]
-synonym: "sensory hair cells posterior macula" RELATED PLURAL []
+synonym: "sensory hair cells posterior macula" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-210
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000558 ! posterior macula
@@ -3591,7 +2846,7 @@ relationship: start ZFS:0000037 ! Larval:Day 5
 id: ZFA:0000282
 name: sensory system
 namespace: zebrafish_anatomy
-synonym: "sensory systems" RELATED PLURAL []
+synonym: "sensory systems" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-211
 is_a: ZFA:0001439 ! organ system
 relationship: end ZFS:0000044 ! Adult
@@ -3611,7 +2866,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000284
 name: subopercle
 namespace: zebrafish_anatomy
-synonym: "subopercles" RELATED PLURAL []
+synonym: "subopercles" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-213
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000354 ! gill
@@ -3937,7 +3192,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000318
 name: brain stem/spinal tract and commissures
 namespace: zebrafish_anatomy
-synonym: "brain stem/spinal tracts and commissures" RELATED PLURAL []
+synonym: "brain stem/spinal tracts and commissures" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-245
 is_a: ZFA:0000145 ! CNS tracts and commissures
 relationship: end ZFS:0000044 ! Adult
@@ -4272,7 +3527,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000354
 name: gill
 namespace: zebrafish_anatomy
-synonym: "gills" RELATED PLURAL []
+synonym: "gills" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-279
 is_a: ZFA:0000292 ! surface structure
 is_a: ZFA:0000496 ! organ
@@ -4295,7 +3550,7 @@ id: ZFA:0000356
 name: gill raker
 namespace: zebrafish_anatomy
 def: "Gill rakers are small anterior projections present on all of the branchial arches." [ZFIN:curator]
-synonym: "gill rakers" RELATED PLURAL []
+synonym: "gill rakers" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-280
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000095 ! pharyngeal arch 3-7 skeleton
@@ -4373,7 +3628,7 @@ namespace: zebrafish_anatomy
 def: "Expanded and laterally flattened hemal arches and spines. They support the lepidotrichia of the caudal fin. The hypurals form ventral to the posterior tip of the dorsally-flexed notochord. In zebrafish condensations of the hypurals begin forming at approximately 6 dpf (4.1 mm NL, notochord length). <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-011008-1'>Mabee and Bird, 2001.</a>" [ZFIN:curator]
 synonym: "hyp" RELATED []
 synonym: "hypuralia" RELATED []
-synonym: "hypurals" RELATED PLURAL []
+synonym: "hypurals" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-289
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000859 ! specialized hemal arch and spine
@@ -4579,7 +3834,7 @@ id: ZFA:0000386
 name: macula
 namespace: zebrafish_anatomy
 def: "Patches of thickened, pseudostratified epithelium of the inner ear, consisting of regular arrays of sensory hair cells interspersed with supporting cells. Each patch has its own charcteristic shape and polarity pattern. (See Anatomical Atlas entry for <a href='http://zfin.org/zf_info/anatomy/dict/sens/sens.html'>sensory patches of the ear</a> by T. Whitfield.)" [ZFIN:curator]
-synonym: "maculae" RELATED PLURAL []
+synonym: "maculae" RELATED []
 synonym: "sensory patch" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-309
 relationship: end ZFS:0000044 ! Adult
@@ -4663,7 +3918,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000395
 name: muscle pioneer somite 2
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 2" RELATED PLURAL []
+synonym: "muscle pioneers somite 2" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-318
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000843 ! slow muscle cell somite 2
@@ -4742,7 +3997,7 @@ id: ZFA:0000403
 name: ovary
 namespace: zebrafish_anatomy
 def: "Female reproductive organ." [ZFIN:curator]
-synonym: "ovaries" RELATED PLURAL []
+synonym: "ovaries" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-328
 is_a: ZFA:0000413 ! gonad
 relationship: end ZFS:0000044 ! Adult
@@ -4903,7 +4158,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000420
 name: renal artery
 namespace: zebrafish_anatomy
-synonym: "renal arteries" RELATED PLURAL []
+synonym: "renal arteries" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-346
 is_a: ZFA:0000005 ! artery
 relationship: end ZFS:0000044 ! Adult
@@ -5019,7 +4274,7 @@ name: semicircular canal
 namespace: zebrafish_anatomy
 def: "Fluid-filled toroidal spaces, arranged orthogonally to each other in the ear, that detect angular accelerations. (See Anatomical Atlas entry for <a href='http://zfin.org/zf_info/anatomy/dict/semi_canal/semi.html'>semicircular canals</a> by T. Whitfield.)" [ZFIN:curator]
 synonym: "scc" RELATED []
-synonym: "semicircular canals" RELATED PLURAL []
+synonym: "semicircular canals" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-356
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000217 ! inner ear
@@ -5308,7 +4563,7 @@ id: ZFA:0000461
 name: Weberian ossicle
 namespace: zebrafish_anatomy
 def: "A group of modified neural arches and spines of the first four vertebrae. These include, from anterior to posterior, the claustrum, scaphuium, intercalarium, and tripus.  The os suspensorium is considered to be a fifth ossicle. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-011008-1'>Mabee and Bird, 2001.</a>" [ZFIN:curator]
-synonym: "Weberian ossicles" RELATED PLURAL []
+synonym: "Weberian ossicles" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-387
 is_a: ZFA:0000015 ! anatomical set
 relationship: end ZFS:0000044 ! Adult
@@ -5460,7 +4715,7 @@ id: ZFA:0000476
 name: branchiostegal ray
 namespace: zebrafish_anatomy
 def: "Branchiostegal rays are thin dermal bones that support the branchiostegal membrane.  Three dermal branchiostegal rays form in the branchiostegal membrane ventral to the ceratohyal cartilage. The most posterior ray, branchiostegal 3, ossifies first (3.4 mm NL), and the most anterior ray, branchiostegal 1, ossifies last (5.5 mm NL). The most posterior two branchiostegals (2 and 3) insert externally on the ceratohyal; their anterodorsal tips are thickened triangles, and the rays are expanded. The bifurcated tip of the acinaciform anteriormost ray lies at the ventral margin of the ceratohyal." [ZFIN:curator]
-synonym: "branchiostegal rays" RELATED PLURAL []
+synonym: "branchiostegal rays" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-400
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000863 ! dermatocranium
@@ -5555,7 +4810,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000485
 name: central nucleus inferior lobe
 namespace: zebrafish_anatomy
-synonym: "central nucleus inferior lobes" RELATED PLURAL []
+synonym: "central nucleus inferior lobes" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-409
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000165 ! inferior lobe
@@ -5725,7 +4980,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000503
 name: dorsal oblique branchial muscle
 namespace: zebrafish_anatomy
-synonym: "dorsal oblique branchial muscles" RELATED PLURAL []
+synonym: "dorsal oblique branchial muscles" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-425
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000172 ! branchial muscle
@@ -5817,7 +5072,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000513
 name: fast muscle cell somite 1
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 1" RELATED PLURAL []
+synonym: "fast muscle cells somite 1" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-435
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000924 ! myotome somite 1
@@ -5894,7 +5149,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000521
 name: hyoid muscle
 namespace: zebrafish_anatomy
-synonym: "hyoid muscles" RELATED PLURAL []
+synonym: "hyoid muscles" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-444
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0001307 ! pharyngeal musculature
@@ -6089,7 +5344,7 @@ id: ZFA:0000541
 name: marginal blastomere
 namespace: zebrafish_anatomy
 def: "Cells (incompletely cleaved before the YSL forms), located at the surface just at the rim of the blastodisc, external to the deep blastomeres. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a>" [ZFIN:curator]
-synonym: "marginal blastomeres" RELATED PLURAL []
+synonym: "marginal blastomeres" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-462
 is_a: ZFA:0000093 ! blastomere
 relationship: end ZFS:0000015 ! Blastula:Dome
@@ -6178,7 +5433,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000550
 name: naris
 namespace: zebrafish_anatomy
-synonym: "nares" RELATED PLURAL []
+synonym: "nares" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-470
 is_a: ZFA:0000292 ! surface structure
 relationship: end ZFS:0000044 ! Adult
@@ -6277,7 +5532,7 @@ relationship: start ZFS:0000037 ! Larval:Day 5
 id: ZFA:0000559
 name: otolith organ
 namespace: zebrafish_anatomy
-synonym: "otolith organs" RELATED PLURAL []
+synonym: "otolith organs" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-480
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000217 ! inner ear
@@ -6360,7 +5615,7 @@ id: ZFA:0000567
 name: premaxilla
 namespace: zebrafish_anatomy
 def: "The premaxilla is a bone of the upper jaw.  It is an L-shaped bone first visible as a thin sliver in the anterodorsal region of the upper lip, anterior to the dorsal tip of the maxilla (5.7 mm). In the adult, the premaxilla is ligamentously attached to its counterpart at the midline and the kinethmoid posterodorsally, by the premaxillo-rostroid ligaments. Premaxillary teeth are absent in zebrafish." [ZFIN:curator]
-synonym: "premaxillae" RELATED PLURAL []
+synonym: "premaxillae" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-492
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0001272 ! dorsal mandibular arch
@@ -6552,7 +5807,7 @@ def: "The sensory ganglion of the ear. (See Anatomical Atlas entry for <a href='
 synonym: "auditory ganglion" RELATED []
 synonym: "gVIII" RELATED []
 synonym: "sag" RELATED []
-synonym: "statoacoustic ganglia" RELATED PLURAL []
+synonym: "statoacoustic ganglia" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-516
 is_a: ZFA:0000013 ! cranial ganglia
 relationship: develops_from ZFA:0000138 ! otic placode
@@ -6647,7 +5902,7 @@ id: ZFA:0000598
 name: testis
 namespace: zebrafish_anatomy
 def: "Male reproductive organ." [ZFIN:curator]
-synonym: "testes" RELATED PLURAL []
+synonym: "testes" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-526
 is_a: ZFA:0000413 ! gonad
 relationship: end ZFS:0000044 ! Adult
@@ -6727,7 +5982,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000606
 name: ventral oblique branchial muscle
 namespace: zebrafish_anatomy
-synonym: "ventral oblique branchial muscles" RELATED PLURAL []
+synonym: "ventral oblique branchial muscles" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-534
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000172 ! branchial muscle
@@ -6900,7 +6155,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000625
 name: branchial bar
 namespace: zebrafish_anatomy
-synonym: "branchial bars" RELATED PLURAL []
+synonym: "branchial bars" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-553
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000056 ! pharynx
@@ -7057,7 +6312,7 @@ id: ZFA:0000641
 name: cranial nerve
 namespace: zebrafish_anatomy
 def: "Twelve pairs of cranial nerves exit/enter the cranium through openings in the skull. The nerves contain efferent axons with motor and glandular functions, as well as afferent axons from cranial ganglia with sensory functions. The nerves are numbered in a rostral to caudal sequence, with the exception of the lateral line nerves." [ZFIN:curator]
-synonym: "cranial nerves" RELATED PLURAL []
+synonym: "cranial nerves" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-568
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000396 ! nervous system
@@ -7300,7 +6555,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000666
 name: filamental artery
 namespace: zebrafish_anatomy
-synonym: "filamental arteries" RELATED PLURAL []
+synonym: "filamental arteries" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-590
 is_a: ZFA:0000005 ! artery
 relationship: end ZFS:0000044 ! Adult
@@ -7349,7 +6604,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000670
 name: hepatic vein
 namespace: zebrafish_anatomy
-synonym: "hepatic veins" RELATED PLURAL []
+synonym: "hepatic veins" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-596
 is_a: ZFA:0000082 ! vein
 relationship: end ZFS:0000044 ! Adult
@@ -7391,7 +6646,7 @@ relationship: start ZFS:0000035 ! Larval:Protruding-mouth
 id: ZFA:0000674
 name: interopercle
 namespace: zebrafish_anatomy
-synonym: "interopercles" RELATED PLURAL []
+synonym: "interopercles" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-6
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000354 ! gill
@@ -7420,7 +6675,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000677
 name: segmental intercostal artery
 namespace: zebrafish_anatomy
-synonym: "segmental intercostal arteries" RELATED PLURAL []
+synonym: "segmental intercostal arteries" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-62
 is_a: ZFA:0000005 ! artery
 relationship: end ZFS:0000044 ! Adult
@@ -7431,7 +6686,7 @@ id: ZFA:0000678
 name: sensory hair cell anterior macula
 namespace: zebrafish_anatomy
 def: "Specialized neuronal receptor cells of the lateral line and acoustico-vestibular systems. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a> (Also see Anatomical Atlas entry for <a href='http://zfin.org/zf_info/anatomy/dict/hair_cell/hair_cell.html'>hair cells</a> by T. Whitfield.)" [ZFIN:curator]
-synonym: "sensory hair cells anterior macula" RELATED PLURAL []
+synonym: "sensory hair cells anterior macula" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-63
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000168 ! anterior macula
@@ -7472,7 +6727,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000682
 name: spinal artery
 namespace: zebrafish_anatomy
-synonym: "spinal arteries" RELATED PLURAL []
+synonym: "spinal arteries" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-67
 is_a: ZFA:0000005 ! artery
 relationship: end ZFS:0000044 ! Adult
@@ -7510,7 +6765,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000686
 name: superficial grey and white zone
 namespace: zebrafish_anatomy
-synonym: "superficial grey and white zones" RELATED PLURAL []
+synonym: "superficial grey and white zones" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-71
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000445 ! optic tectum
@@ -7529,7 +6784,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000688
 name: olfactory support cell
 namespace: zebrafish_anatomy
-synonym: "support cells" RELATED PLURAL []
+synonym: "support cells" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-73
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000047 ! peripheral olfactory organ
@@ -7648,7 +6903,7 @@ relationship: start ZFS:0000039 ! Larval:Days 7-13
 id: ZFA:0000699
 name: ural ossification
 namespace: zebrafish_anatomy
-synonym: "ural ossifications" RELATED PLURAL []
+synonym: "ural ossifications" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-83
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000862 ! caudal fin skeleton
@@ -7760,7 +7015,7 @@ name: DEL
 namespace: zebrafish_anatomy
 def: "A multilayer of deep cells of fairly uniform thickness that forms during early epiboly (at dome stage; upon conversion of the blastodisc to the blastoderm); during gastrulation the DEL (deep cell layer) gives rise to the epiblast and hypoblast. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a>" [ZFIN:curator]
 synonym: "deep cell layer" RELATED [ZFIN:ZDB-PUB-961014-576]
-synonym: "DEL cells" RELATED PLURAL []
+synonym: "DEL cells" RELATED []
 xref: ZFIN:ZDB-ANAT-011113-94
 is_a: ZFA:0001105 ! embryonic structure
 relationship: develops_from ZFA:0001473 ! deep blastomere
@@ -7843,7 +7098,7 @@ relationship: start ZFS:0000029 ! Pharyngula:Prim-5
 id: ZFA:0000719
 name: slow muscle cell somite 21
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 21" RELATED PLURAL []
+synonym: "slow muscle cells somite 21" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-100
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000929 ! myotome somite 21
@@ -7853,7 +7108,7 @@ relationship: start ZFS:0000028 ! Segmentation:26+ somites
 id: ZFA:0000720
 name: slow muscle cell somite 24
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 24" RELATED PLURAL []
+synonym: "slow muscle cells somite 24" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-101
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000930 ! myotome somite 24
@@ -7863,7 +7118,7 @@ relationship: start ZFS:0000028 ! Segmentation:26+ somites
 id: ZFA:0000721
 name: slow muscle cell somite 27
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 27" RELATED PLURAL []
+synonym: "slow muscle cells somite 27" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-102
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000931 ! myotome somite 27
@@ -7873,7 +7128,7 @@ relationship: start ZFS:0000029 ! Pharyngula:Prim-5
 id: ZFA:0000722
 name: slow muscle cell somite 3
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 3" RELATED PLURAL []
+synonym: "slow muscle cells somite 3" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-103
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000932 ! myotome somite 3
@@ -7883,7 +7138,7 @@ relationship: start ZFS:0000024 ! Segmentation:5-9 somites
 id: ZFA:0000723
 name: slow muscle cell somite 5
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 5" RELATED PLURAL []
+synonym: "slow muscle cells somite 5" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-104
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000933 ! myotome somite 5
@@ -7893,7 +7148,7 @@ relationship: start ZFS:0000024 ! Segmentation:5-9 somites
 id: ZFA:0000724
 name: slow muscle cell somite 8
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 8" RELATED PLURAL []
+synonym: "slow muscle cells somite 8" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-105
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000934 ! myotome somite 8
@@ -7993,7 +7248,7 @@ relationship: start ZFS:0000025 ! Segmentation:10-13 somites
 id: ZFA:0000734
 name: specialized centra/vertebra
 namespace: zebrafish_anatomy
-synonym: "specialized centra/vertebrae" RELATED PLURAL []
+synonym: "specialized centra/vertebrae" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-114
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000862 ! caudal fin skeleton
@@ -8032,7 +7287,7 @@ relationship: start ZFS:0000025 ! Segmentation:10-13 somites
 id: ZFA:0000738
 name: dorsal oblique extraocular muscle
 namespace: zebrafish_anatomy
-synonym: "dorsal oblique extraocular muscles" RELATED PLURAL []
+synonym: "dorsal oblique extraocular muscles" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-118
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000511 ! extraocular musculature
@@ -8152,7 +7407,7 @@ relationship: start ZFS:0000025 ! Segmentation:10-13 somites
 id: ZFA:0000750
 name: fast muscle cell somite 10
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 10" RELATED PLURAL []
+synonym: "fast muscle cells somite 10" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-129
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001013 ! myotome somite 10
@@ -8172,7 +7427,7 @@ relationship: start ZFS:0000025 ! Segmentation:10-13 somites
 id: ZFA:0000752
 name: fast muscle cell somite 13
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 13" RELATED PLURAL []
+synonym: "fast muscle cells somite 13" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-130
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001014 ! myotome somite 13
@@ -8182,7 +7437,7 @@ relationship: start ZFS:0000026 ! Segmentation:14-19 somites
 id: ZFA:0000753
 name: fast muscle cell somite 16
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 16" RELATED PLURAL []
+synonym: "fast muscle cells somite 16" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-131
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000927 ! myotome somite 16
@@ -8192,7 +7447,7 @@ relationship: start ZFS:0000027 ! Segmentation:20-25 somites
 id: ZFA:0000754
 name: fast muscle cell somite 19
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 19" RELATED PLURAL []
+synonym: "fast muscle cells somite 19" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-132
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000928 ! myotome somite 19
@@ -8202,7 +7457,7 @@ relationship: start ZFS:0000027 ! Segmentation:20-25 somites
 id: ZFA:0000755
 name: fast muscle cell somite 21
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 21" RELATED PLURAL []
+synonym: "fast muscle cells somite 21" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-133
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000929 ! myotome somite 21
@@ -8212,7 +7467,7 @@ relationship: start ZFS:0000028 ! Segmentation:26+ somites
 id: ZFA:0000756
 name: fast muscle cell somite 24
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 24" RELATED PLURAL []
+synonym: "fast muscle cells somite 24" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-134
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000930 ! myotome somite 24
@@ -8222,7 +7477,7 @@ relationship: start ZFS:0000028 ! Segmentation:26+ somites
 id: ZFA:0000757
 name: fast muscle cell somite 27
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 27" RELATED PLURAL []
+synonym: "fast muscle cells somite 27" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-135
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000931 ! myotome somite 27
@@ -8232,7 +7487,7 @@ relationship: start ZFS:0000029 ! Pharyngula:Prim-5
 id: ZFA:0000758
 name: fast muscle cell somite 3
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 3" RELATED PLURAL []
+synonym: "fast muscle cells somite 3" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-136
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000932 ! myotome somite 3
@@ -8242,7 +7497,7 @@ relationship: start ZFS:0000024 ! Segmentation:5-9 somites
 id: ZFA:0000759
 name: fast muscle cell somite 5
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 5" RELATED PLURAL []
+synonym: "fast muscle cells somite 5" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-137
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000933 ! myotome somite 5
@@ -8252,7 +7507,7 @@ relationship: start ZFS:0000024 ! Segmentation:5-9 somites
 id: ZFA:0000760
 name: fast muscle cell somite 8
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 8" RELATED PLURAL []
+synonym: "fast muscle cells somite 8" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-138
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000934 ! myotome somite 8
@@ -8387,7 +7642,7 @@ relationship: start ZFS:0000028 ! Segmentation:26+ somites
 id: ZFA:0000773
 name: fast muscle cell somite 12
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 12" RELATED PLURAL []
+synonym: "fast muscle cells somite 12" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-15
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000926 ! myotome somite 12
@@ -8437,9 +7692,9 @@ relationship: start ZFS:0000025 ! Segmentation:10-13 somites
 id: ZFA:0000778
 name: interneuron spinal cord
 namespace: zebrafish_anatomy
-synonym: "interneurons spinal cord" RELATED PLURAL []
+synonym: "interneurons spinal cord" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-154
-is_a: CL:0000540 ! neuron
+is_a: ZFA:0100000 ! zebrafish anatomical entity
 relationship: end ZFS:0000044 ! Adult
 relationship: start ZFS:0000027 ! Segmentation:20-25 somites
 
@@ -8492,7 +7747,7 @@ relationship: start ZFS:0000025 ! Segmentation:10-13 somites
 id: ZFA:0000784
 name: fast muscle cell somite 15
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 15" RELATED PLURAL []
+synonym: "fast muscle cells somite 15" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-16
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000802 ! myotome somite 15
@@ -8547,7 +7802,7 @@ relationship: start ZFS:0000029 ! Pharyngula:Prim-5
 id: ZFA:0000790
 name: muscle pioneer somite 10
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 10" RELATED PLURAL []
+synonym: "muscle pioneers somite 10" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-165
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001047 ! slow muscle cell somite 10
@@ -8557,7 +7812,7 @@ relationship: start ZFS:0000025 ! Segmentation:10-13 somites
 id: ZFA:0000791
 name: muscle pioneer somite 13
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 13" RELATED PLURAL []
+synonym: "muscle pioneers somite 13" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-166
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001048 ! slow muscle cell somite 13
@@ -8567,7 +7822,7 @@ relationship: start ZFS:0000026 ! Segmentation:14-19 somites
 id: ZFA:0000792
 name: muscle pioneer somite 16
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 16" RELATED PLURAL []
+synonym: "muscle pioneers somite 16" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-167
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001049 ! slow muscle cell somite 16
@@ -8577,7 +7832,7 @@ relationship: start ZFS:0000027 ! Segmentation:20-25 somites
 id: ZFA:0000793
 name: muscle pioneer somite 19
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 19" RELATED PLURAL []
+synonym: "muscle pioneers somite 19" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-168
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001050 ! slow muscle cell somite 19
@@ -8587,7 +7842,7 @@ relationship: start ZFS:0000027 ! Segmentation:20-25 somites
 id: ZFA:0000794
 name: muscle pioneer somite 22
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 22" RELATED PLURAL []
+synonym: "muscle pioneers somite 22" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-169
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000844 ! slow muscle cell somite 22
@@ -8597,7 +7852,7 @@ relationship: start ZFS:0000028 ! Segmentation:26+ somites
 id: ZFA:0000795
 name: fast muscle cell somite 18
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 18" RELATED PLURAL []
+synonym: "fast muscle cells somite 18" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-17
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000803 ! myotome somite 18
@@ -8607,7 +7862,7 @@ relationship: start ZFS:0000027 ! Segmentation:20-25 somites
 id: ZFA:0000796
 name: muscle pioneer somite 25
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 25" RELATED PLURAL []
+synonym: "muscle pioneers somite 25" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-170
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000845 ! slow muscle cell somite 25
@@ -8617,7 +7872,7 @@ relationship: start ZFS:0000028 ! Segmentation:26+ somites
 id: ZFA:0000797
 name: muscle pioneer somite 28
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 28" RELATED PLURAL []
+synonym: "muscle pioneers somite 28" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-171
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000846 ! slow muscle cell somite 28
@@ -8627,7 +7882,7 @@ relationship: start ZFS:0000029 ! Pharyngula:Prim-5
 id: ZFA:0000798
 name: muscle pioneer somite 30
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 30" RELATED PLURAL []
+synonym: "muscle pioneers somite 30" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-172
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000847 ! slow muscle cell somite 30
@@ -8637,7 +7892,7 @@ relationship: start ZFS:0000029 ! Pharyngula:Prim-5
 id: ZFA:0000799
 name: muscle pioneer somite 6
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 6" RELATED PLURAL []
+synonym: "muscle pioneers somite 6" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-173
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000848 ! slow muscle cell somite 6
@@ -8647,7 +7902,7 @@ relationship: start ZFS:0000025 ! Segmentation:10-13 somites
 id: ZFA:0000800
 name: muscle pioneer somite 9
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 9" RELATED PLURAL []
+synonym: "muscle pioneers somite 9" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-174
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000850 ! slow muscle cell somite 9
@@ -8707,7 +7962,7 @@ relationship: start ZFS:0000028 ! Segmentation:26+ somites
 id: ZFA:0000806
 name: fast muscle cell somite 20
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 20" RELATED PLURAL []
+synonym: "fast muscle cells somite 20" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-18
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000804 ! myotome somite 20
@@ -8778,7 +8033,7 @@ id: ZFA:0000813
 name: neuromast infraorbital
 namespace: zebrafish_anatomy
 def: "Volcano-shaped lateral line sensory organ located in characteristic positions within the skin epithelium and containing hair cells and their support elements. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a> (Also see Anatomical Atlas entry for <a href='http://zfin.org/zf_info/anatomy/dict/lat_line/lat_line.html'>lateral line</a> by T. Whitfield.)" [ZFIN:curator]
-synonym: "neuromasts infraorbital" RELATED PLURAL []
+synonym: "neuromasts infraorbital" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-186
 is_a: ZFA:0000243 ! neuromast
 relationship: end ZFS:0000044 ! Adult
@@ -8790,7 +8045,7 @@ id: ZFA:0000814
 name: neuromast opercular
 namespace: zebrafish_anatomy
 def: "Volcano-shaped lateral line sensory organ located in characteristic positions within the skin epithelium and containing hair cells and their support elements. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a> (Also see Anatomical Atlas entry for <a href='http://zfin.org/zf_info/anatomy/dict/lat_line/lat_line.html'>lateral line</a> by T. Whitfield.)" [ZFIN:curator]
-synonym: "neuromasts opercular" RELATED PLURAL []
+synonym: "neuromasts opercular" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-187
 is_a: ZFA:0000243 ! neuromast
 relationship: end ZFS:0000044 ! Adult
@@ -8819,7 +8074,7 @@ relationship: start ZFS:0000035 ! Larval:Protruding-mouth
 id: ZFA:0000817
 name: fast muscle cell somite 23
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 23" RELATED PLURAL []
+synonym: "fast muscle cells somite 23" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-19
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000805 ! myotome somite 23
@@ -8849,7 +8104,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000820
 name: presumptive neuron neural tube
 namespace: zebrafish_anatomy
-synonym: "presumptive neurons neural tube" RELATED PLURAL []
+synonym: "presumptive neurons neural tube" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-192
 relationship: end ZFS:0000027 ! Segmentation:20-25 somites
 relationship: part_of ZFA:0001135 ! neural tube
@@ -8859,7 +8114,7 @@ relationship: start ZFS:0000027 ! Segmentation:20-25 somites
 id: ZFA:0000821
 name: primary neuron hindbrain
 namespace: zebrafish_anatomy
-synonym: "primary neurons hindbrain" RELATED PLURAL []
+synonym: "primary neurons hindbrain" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-195
 relationship: end ZFS:0000024 ! Segmentation:5-9 somites
 relationship: part_of ZFA:0000569 ! presumptive hindbrain
@@ -8922,7 +8177,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0000827
 name: fast muscle cell somite 26
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 26" RELATED PLURAL []
+synonym: "fast muscle cells somite 26" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-20
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000807 ! myotome somite 26
@@ -9032,7 +8287,7 @@ relationship: start ZFS:0000025 ! Segmentation:10-13 somites
 id: ZFA:0000838
 name: fast muscle cell somite 29
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 29" RELATED PLURAL []
+synonym: "fast muscle cells somite 29" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-21
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000808 ! myotome somite 29
@@ -9052,7 +8307,7 @@ relationship: start ZFS:0000025 ! Segmentation:10-13 somites
 id: ZFA:0000840
 name: slow muscle cell somite 11
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 11" RELATED PLURAL []
+synonym: "slow muscle cells somite 11" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-211
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000801 ! myotome somite 11
@@ -9062,7 +8317,7 @@ relationship: start ZFS:0000026 ! Segmentation:14-19 somites
 id: ZFA:0000841
 name: slow muscle cell somite 14
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 14" RELATED PLURAL []
+synonym: "slow muscle cells somite 14" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-212
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000044 ! myotome somite 14
@@ -9072,7 +8327,7 @@ relationship: start ZFS:0000026 ! Segmentation:14-19 somites
 id: ZFA:0000842
 name: slow muscle cell somite 17
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 17" RELATED PLURAL []
+synonym: "slow muscle cells somite 17" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-213
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001015 ! myotome somite 17
@@ -9082,7 +8337,7 @@ relationship: start ZFS:0000027 ! Segmentation:20-25 somites
 id: ZFA:0000843
 name: slow muscle cell somite 2
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 2" RELATED PLURAL []
+synonym: "slow muscle cells somite 2" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-214
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001016 ! myotome somite 2
@@ -9092,7 +8347,7 @@ relationship: start ZFS:0000024 ! Segmentation:5-9 somites
 id: ZFA:0000844
 name: slow muscle cell somite 22
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 22" RELATED PLURAL []
+synonym: "slow muscle cells somite 22" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-215
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001017 ! myotome somite 22
@@ -9102,7 +8357,7 @@ relationship: start ZFS:0000028 ! Segmentation:26+ somites
 id: ZFA:0000845
 name: slow muscle cell somite 25
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 25" RELATED PLURAL []
+synonym: "slow muscle cells somite 25" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-216
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001018 ! myotome somite 25
@@ -9112,7 +8367,7 @@ relationship: start ZFS:0000028 ! Segmentation:26+ somites
 id: ZFA:0000846
 name: slow muscle cell somite 28
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 28" RELATED PLURAL []
+synonym: "slow muscle cells somite 28" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-217
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001019 ! myotome somite 28
@@ -9122,7 +8377,7 @@ relationship: start ZFS:0000029 ! Pharyngula:Prim-5
 id: ZFA:0000847
 name: slow muscle cell somite 30
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 30" RELATED PLURAL []
+synonym: "slow muscle cells somite 30" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-218
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001020 ! myotome somite 30
@@ -9132,7 +8387,7 @@ relationship: start ZFS:0000029 ! Pharyngula:Prim-5
 id: ZFA:0000848
 name: slow muscle cell somite 6
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 6" RELATED PLURAL []
+synonym: "slow muscle cells somite 6" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-219
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001021 ! myotome somite 6
@@ -9142,7 +8397,7 @@ relationship: start ZFS:0000025 ! Segmentation:10-13 somites
 id: ZFA:0000849
 name: fast muscle cell somite 4
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 4" RELATED PLURAL []
+synonym: "fast muscle cells somite 4" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-22
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000809 ! myotome somite 4
@@ -9152,7 +8407,7 @@ relationship: start ZFS:0000024 ! Segmentation:5-9 somites
 id: ZFA:0000850
 name: slow muscle cell somite 9
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 9" RELATED PLURAL []
+synonym: "slow muscle cells somite 9" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-220
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001022 ! myotome somite 9
@@ -9244,7 +8499,7 @@ name: specialized hemal arch and spine
 namespace: zebrafish_anatomy
 synonym: "ha(pu)" RELATED []
 synonym: "hemal arches (preural)" RELATED [ZFIN:ZDB-PUB-011008-1]
-synonym: "specialized hemal arches and spines" RELATED PLURAL []
+synonym: "specialized hemal arches and spines" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-229
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000862 ! caudal fin skeleton
@@ -9254,7 +8509,7 @@ relationship: start ZFS:0000037 ! Larval:Day 5
 id: ZFA:0000860
 name: fast muscle cell somite 7
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 7" RELATED PLURAL []
+synonym: "fast muscle cells somite 7" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-23
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000810 ! myotome somite 7
@@ -9264,7 +8519,7 @@ relationship: start ZFS:0000025 ! Segmentation:10-13 somites
 id: ZFA:0000861
 name: ventral oblique extraocular muscle
 namespace: zebrafish_anatomy
-synonym: "ventral oblique extraocular muscles" RELATED PLURAL []
+synonym: "ventral oblique extraocular muscles" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-230
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000511 ! extraocular musculature
@@ -9414,7 +8669,7 @@ relationship: start ZFS:0000024 ! Segmentation:5-9 somites
 id: ZFA:0000876
 name: fast muscle cell somite 11
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 11" RELATED PLURAL []
+synonym: "fast muscle cells somite 11" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-244
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000801 ! myotome somite 11
@@ -9424,7 +8679,7 @@ relationship: start ZFS:0000026 ! Segmentation:14-19 somites
 id: ZFA:0000877
 name: fast muscle cell somite 14
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 14" RELATED PLURAL []
+synonym: "fast muscle cells somite 14" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-245
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000044 ! myotome somite 14
@@ -9434,7 +8689,7 @@ relationship: start ZFS:0000026 ! Segmentation:14-19 somites
 id: ZFA:0000878
 name: fast muscle cell somite 17
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 17" RELATED PLURAL []
+synonym: "fast muscle cells somite 17" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-246
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001015 ! myotome somite 17
@@ -9444,7 +8699,7 @@ relationship: start ZFS:0000027 ! Segmentation:20-25 somites
 id: ZFA:0000879
 name: fast muscle cell somite 2
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 2" RELATED PLURAL []
+synonym: "fast muscle cells somite 2" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-247
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001016 ! myotome somite 2
@@ -9454,7 +8709,7 @@ relationship: start ZFS:0000024 ! Segmentation:5-9 somites
 id: ZFA:0000880
 name: fast muscle cell somite 22
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 22" RELATED PLURAL []
+synonym: "fast muscle cells somite 22" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-248
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001017 ! myotome somite 22
@@ -9464,7 +8719,7 @@ relationship: start ZFS:0000028 ! Segmentation:26+ somites
 id: ZFA:0000881
 name: fast muscle cell somite 25
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 25" RELATED PLURAL []
+synonym: "fast muscle cells somite 25" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-249
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001018 ! myotome somite 25
@@ -9485,7 +8740,7 @@ relationship: start ZFS:0000025 ! Segmentation:10-13 somites
 id: ZFA:0000883
 name: fast muscle cell somite 28
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 28" RELATED PLURAL []
+synonym: "fast muscle cells somite 28" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-250
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001019 ! myotome somite 28
@@ -9495,7 +8750,7 @@ relationship: start ZFS:0000029 ! Pharyngula:Prim-5
 id: ZFA:0000884
 name: fast muscle cell somite 30
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 30" RELATED PLURAL []
+synonym: "fast muscle cells somite 30" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-251
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001020 ! myotome somite 30
@@ -9505,7 +8760,7 @@ relationship: start ZFS:0000029 ! Pharyngula:Prim-5
 id: ZFA:0000885
 name: fast muscle cell somite 6
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 6" RELATED PLURAL []
+synonym: "fast muscle cells somite 6" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-252
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001021 ! myotome somite 6
@@ -9515,7 +8770,7 @@ relationship: start ZFS:0000025 ! Segmentation:10-13 somites
 id: ZFA:0000886
 name: fast muscle cell somite 9
 namespace: zebrafish_anatomy
-synonym: "fast muscle cells somite 9" RELATED PLURAL []
+synonym: "fast muscle cells somite 9" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-253
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001022 ! myotome somite 9
@@ -9681,7 +8936,7 @@ relationship: start ZFS:0000025 ! Segmentation:10-13 somites
 id: ZFA:0000902
 name: hypural musculature
 namespace: zebrafish_anatomy
-synonym: "hypural muscles" RELATED PLURAL []
+synonym: "hypural muscles" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-268
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000628 ! caudal fin musculature
@@ -9802,7 +9057,7 @@ relationship: start ZFS:0000025 ! Segmentation:10-13 somites
 id: ZFA:0000915
 name: muscle pioneer somite 11
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 11" RELATED PLURAL []
+synonym: "muscle pioneers somite 11" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-280
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000840 ! slow muscle cell somite 11
@@ -9812,7 +9067,7 @@ relationship: start ZFS:0000026 ! Segmentation:14-19 somites
 id: ZFA:0000916
 name: muscle pioneer somite 14
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 14" RELATED PLURAL []
+synonym: "muscle pioneers somite 14" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-281
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000841 ! slow muscle cell somite 14
@@ -9822,7 +9077,7 @@ relationship: start ZFS:0000026 ! Segmentation:14-19 somites
 id: ZFA:0000917
 name: muscle pioneer somite 17
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 17" RELATED PLURAL []
+synonym: "muscle pioneers somite 17" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-282
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000842 ! slow muscle cell somite 17
@@ -9832,7 +9087,7 @@ relationship: start ZFS:0000027 ! Segmentation:20-25 somites
 id: ZFA:0000918
 name: muscle pioneer somite 20
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 20" RELATED PLURAL []
+synonym: "muscle pioneers somite 20" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-283
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000967 ! slow muscle cell somite 20
@@ -9842,7 +9097,7 @@ relationship: start ZFS:0000027 ! Segmentation:20-25 somites
 id: ZFA:0000919
 name: muscle pioneer somite 23
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 23" RELATED PLURAL []
+synonym: "muscle pioneers somite 23" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-284
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000969 ! slow muscle cell somite 23
@@ -9852,7 +9107,7 @@ relationship: start ZFS:0000028 ! Segmentation:26+ somites
 id: ZFA:0000920
 name: muscle pioneer somite 26
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 26" RELATED PLURAL []
+synonym: "muscle pioneers somite 26" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-285
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000970 ! slow muscle cell somite 26
@@ -9862,7 +9117,7 @@ relationship: start ZFS:0000028 ! Segmentation:26+ somites
 id: ZFA:0000921
 name: muscle pioneer somite 29
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 29" RELATED PLURAL []
+synonym: "muscle pioneers somite 29" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-286
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000971 ! slow muscle cell somite 29
@@ -9872,7 +9127,7 @@ relationship: start ZFS:0000029 ! Pharyngula:Prim-5
 id: ZFA:0000922
 name: muscle pioneer somite 4
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 4" RELATED PLURAL []
+synonym: "muscle pioneers somite 4" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-287
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000972 ! slow muscle cell somite 4
@@ -9882,7 +9137,7 @@ relationship: start ZFS:0000024 ! Segmentation:5-9 somites
 id: ZFA:0000923
 name: muscle pioneer somite 7
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 7" RELATED PLURAL []
+synonym: "muscle pioneers somite 7" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-288
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000973 ! slow muscle cell somite 7
@@ -10011,6 +9266,7 @@ relationship: start ZFS:0000025 ! Segmentation:10-13 somites
 id: ZFA:0000936
 name: dorsal fin distal radial
 namespace: zebrafish_anatomy
+
 def: "Rod-like internal median skeletal support bones of the dorsal fin, which articulate with the lepidotrichia distally." [ZFIN:curator]
 xref: ZFIN:ZDB-ANAT-020309-3
 is_a: ZFA:0001419 ! dorsal fin radial
@@ -10043,7 +9299,7 @@ id: ZFA:0000939
 name: neuromast middle
 namespace: zebrafish_anatomy
 def: "Volcano-shaped lateral line sensory organ located in characteristic positions within the skin epithelium and containing hair cells and their support elements. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a> (Also see Anatomical Atlas entry for <a href='http://zfin.org/zf_info/anatomy/dict/lat_line/lat_line.html'>lateral line</a> by T. Whitfield.)" [ZFIN:curator]
-synonym: "neuromasts middle" RELATED PLURAL []
+synonym: "neuromasts middle" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-301
 is_a: ZFA:0000243 ! neuromast
 relationship: end ZFS:0000044 ! Adult
@@ -10055,7 +9311,7 @@ id: ZFA:0000940
 name: neuromast posterior
 namespace: zebrafish_anatomy
 def: "Volcano-shaped lateral line sensory organ located in characteristic positions within the skin epithelium and containing hair cells and their support elements. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a> (Also see Anatomical Atlas entry for <a href='http://zfin.org/zf_info/anatomy/dict/lat_line/lat_line.html'>lateral line</a> by T. Whitfield.)" [ZFIN:curator]
-synonym: "neuromasts posterior" RELATED PLURAL []
+synonym: "neuromasts posterior" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-302
 is_a: ZFA:0000243 ! neuromast
 relationship: develops_from ZFA:0001157 ! posterior lateral line primordium
@@ -10281,7 +9537,7 @@ relationship: start ZFS:0000025 ! Segmentation:10-13 somites
 id: ZFA:0000963
 name: slow muscle cell somite 1
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 1" RELATED PLURAL []
+synonym: "slow muscle cells somite 1" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-325
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000924 ! myotome somite 1
@@ -10291,7 +9547,7 @@ relationship: start ZFS:0000024 ! Segmentation:5-9 somites
 id: ZFA:0000964
 name: slow muscle cell somite 12
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 12" RELATED PLURAL []
+synonym: "slow muscle cells somite 12" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-326
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000926 ! myotome somite 12
@@ -10301,7 +9557,7 @@ relationship: start ZFS:0000026 ! Segmentation:14-19 somites
 id: ZFA:0000965
 name: slow muscle cell somite 15
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 15" RELATED PLURAL []
+synonym: "slow muscle cells somite 15" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-327
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000802 ! myotome somite 15
@@ -10311,7 +9567,7 @@ relationship: start ZFS:0000027 ! Segmentation:20-25 somites
 id: ZFA:0000966
 name: slow muscle cell somite 18
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 18" RELATED PLURAL []
+synonym: "slow muscle cells somite 18" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-328
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000803 ! myotome somite 18
@@ -10321,7 +9577,7 @@ relationship: start ZFS:0000027 ! Segmentation:20-25 somites
 id: ZFA:0000967
 name: slow muscle cell somite 20
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 20" RELATED PLURAL []
+synonym: "slow muscle cells somite 20" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-329
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000804 ! myotome somite 20
@@ -10341,7 +9597,7 @@ relationship: start ZFS:0000028 ! Segmentation:26+ somites
 id: ZFA:0000969
 name: slow muscle cell somite 23
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 23" RELATED PLURAL []
+synonym: "slow muscle cells somite 23" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-330
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000805 ! myotome somite 23
@@ -10351,7 +9607,7 @@ relationship: start ZFS:0000028 ! Segmentation:26+ somites
 id: ZFA:0000970
 name: slow muscle cell somite 26
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 26" RELATED PLURAL []
+synonym: "slow muscle cells somite 26" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-331
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000807 ! myotome somite 26
@@ -10361,7 +9617,7 @@ relationship: start ZFS:0000028 ! Segmentation:26+ somites
 id: ZFA:0000971
 name: slow muscle cell somite 29
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 29" RELATED PLURAL []
+synonym: "slow muscle cells somite 29" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-332
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000808 ! myotome somite 29
@@ -10371,7 +9627,7 @@ relationship: start ZFS:0000029 ! Pharyngula:Prim-5
 id: ZFA:0000972
 name: slow muscle cell somite 4
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 4" RELATED PLURAL []
+synonym: "slow muscle cells somite 4" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-333
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000809 ! myotome somite 4
@@ -10381,7 +9637,7 @@ relationship: start ZFS:0000024 ! Segmentation:5-9 somites
 id: ZFA:0000973
 name: slow muscle cell somite 7
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 7" RELATED PLURAL []
+synonym: "slow muscle cells somite 7" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-334
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000810 ! myotome somite 7
@@ -10669,7 +9925,7 @@ relationship: start ZFS:0000027 ! Segmentation:20-25 somites
 id: ZFA:0001003
 name: muscle pioneer somite 12
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 12" RELATED PLURAL []
+synonym: "muscle pioneers somite 12" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-51
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000964 ! slow muscle cell somite 12
@@ -10679,7 +9935,7 @@ relationship: start ZFS:0000026 ! Segmentation:14-19 somites
 id: ZFA:0001004
 name: muscle pioneer somite 15
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 15" RELATED PLURAL []
+synonym: "muscle pioneers somite 15" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-52
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000965 ! slow muscle cell somite 15
@@ -10688,8 +9944,9 @@ relationship: start ZFS:0000027 ! Segmentation:20-25 somites
 [Term]
 id: ZFA:0001005
 name: muscle pioneer somite 18
+
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 18" RELATED PLURAL []
+synonym: "muscle pioneers somite 18" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-53
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000966 ! slow muscle cell somite 18
@@ -10699,7 +9956,7 @@ relationship: start ZFS:0000027 ! Segmentation:20-25 somites
 id: ZFA:0001006
 name: muscle pioneer somite 21
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 21" RELATED PLURAL []
+synonym: "muscle pioneers somite 21" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-54
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000719 ! slow muscle cell somite 21
@@ -10709,7 +9966,7 @@ relationship: start ZFS:0000028 ! Segmentation:26+ somites
 id: ZFA:0001007
 name: muscle pioneer somite 24
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 24" RELATED PLURAL []
+synonym: "muscle pioneers somite 24" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-55
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000720 ! slow muscle cell somite 24
@@ -10719,7 +9976,7 @@ relationship: start ZFS:0000028 ! Segmentation:26+ somites
 id: ZFA:0001008
 name: muscle pioneer somite 27
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 27" RELATED PLURAL []
+synonym: "muscle pioneers somite 27" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-56
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000721 ! slow muscle cell somite 27
@@ -10729,7 +9986,7 @@ relationship: start ZFS:0000029 ! Pharyngula:Prim-5
 id: ZFA:0001009
 name: muscle pioneer somite 3
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 3" RELATED PLURAL []
+synonym: "muscle pioneers somite 3" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-57
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000722 ! slow muscle cell somite 3
@@ -10739,7 +9996,7 @@ relationship: start ZFS:0000024 ! Segmentation:5-9 somites
 id: ZFA:0001010
 name: muscle pioneer somite 5
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 5" RELATED PLURAL []
+synonym: "muscle pioneers somite 5" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-58
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000723 ! slow muscle cell somite 5
@@ -10749,7 +10006,7 @@ relationship: start ZFS:0000024 ! Segmentation:5-9 somites
 id: ZFA:0001011
 name: muscle pioneer somite 8
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers somite 8" RELATED PLURAL []
+synonym: "muscle pioneers somite 8" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-59
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000724 ! slow muscle cell somite 8
@@ -10889,7 +10146,7 @@ id: ZFA:0001025
 name: neuromast occipital
 namespace: zebrafish_anatomy
 def: "Volcano-shaped lateral line sensory organ located in characteristic positions within the skin epithelium and containing hair cells and their support elements. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a> (Also see Anatomical Atlas entry for <a href='http://zfin.org/zf_info/anatomy/dict/lat_line/lat_line.html'>lateral line</a> by T. Whitfield.)" [ZFIN:curator]
-synonym: "neuromasts occipital" RELATED PLURAL []
+synonym: "neuromasts occipital" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-72
 is_a: ZFA:0000243 ! neuromast
 relationship: end ZFS:0000044 ! Adult
@@ -10901,7 +10158,7 @@ id: ZFA:0001026
 name: neuromast supraorbital
 namespace: zebrafish_anatomy
 def: "Volcano-shaped lateral line sensory organ located in characteristic positions within the skin epithelium and containing hair cells and their support elements. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a> (Also see Anatomical Atlas entry for <a href='http://zfin.org/zf_info/anatomy/dict/lat_line/lat_line.html'>lateral line</a> by T. Whitfield.)" [ZFIN:curator]
-synonym: "neuromasts supraorbital" RELATED PLURAL []
+synonym: "neuromasts supraorbital" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-73
 is_a: ZFA:0000243 ! neuromast
 relationship: end ZFS:0000044 ! Adult
@@ -10922,7 +10179,7 @@ id: ZFA:0001028
 name: hypurapophysis
 namespace: zebrafish_anatomy
 def: "The paired bony lateral extensions off the hemal arch of the parhypural. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-011008-1'>Mabee and Bird, 2001.</a>" [ZFIN:curator]
-synonym: "hypurapophyses" RELATED PLURAL []
+synonym: "hypurapophyses" RELATED []
 synonym: "parhypurapophyses" RELATED []
 synonym: "parhypurapophyses processes" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-75
@@ -11117,7 +10374,7 @@ relationship: start ZFS:0000025 ! Segmentation:10-13 somites
 id: ZFA:0001047
 name: slow muscle cell somite 10
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 10" RELATED PLURAL []
+synonym: "slow muscle cells somite 10" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-96
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001013 ! myotome somite 10
@@ -11127,7 +10384,7 @@ relationship: start ZFS:0000025 ! Segmentation:10-13 somites
 id: ZFA:0001048
 name: slow muscle cell somite 13
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 13" RELATED PLURAL []
+synonym: "slow muscle cells somite 13" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-97
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0001014 ! myotome somite 13
@@ -11137,7 +10394,7 @@ relationship: start ZFS:0000026 ! Segmentation:14-19 somites
 id: ZFA:0001049
 name: slow muscle cell somite 16
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 16" RELATED PLURAL []
+synonym: "slow muscle cells somite 16" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-98
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000927 ! myotome somite 16
@@ -11147,7 +10404,7 @@ relationship: start ZFS:0000027 ! Segmentation:20-25 somites
 id: ZFA:0001050
 name: slow muscle cell somite 19
 namespace: zebrafish_anatomy
-synonym: "slow muscle cells somite 19" RELATED PLURAL []
+synonym: "slow muscle cells somite 19" RELATED []
 xref: ZFIN:ZDB-ANAT-020309-99
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
 relationship: part_of ZFA:0000928 ! myotome somite 19
@@ -11303,7 +10560,7 @@ namespace: zebrafish_anatomy
 def: "A segment of the developing hindbrain. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-961014-576'>Kimmel et al, 1995.</a>" [ZFIN:curator]
 synonym: "hindbrain segment" RELATED []
 synonym: "neuromeres" RELATED []
-synonym: "rhombomeres" RELATED PLURAL []
+synonym: "rhombomeres" RELATED []
 xref: ZFIN:ZDB-ANAT-020702-3
 is_a: ZFA:0001328 ! neuromere
 relationship: end ZFS:0000043 ! Juvenile:Days 45-89
@@ -11408,7 +10665,7 @@ relationship: start ZFS:0000028 ! Segmentation:26+ somites
 id: ZFA:0001074
 name: taste bud
 namespace: zebrafish_anatomy
-synonym: "taste buds" RELATED PLURAL []
+synonym: "taste buds" RELATED []
 xref: ZFIN:ZDB-ANAT-030922-12
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0001101 ! gustatory system
@@ -11473,7 +10730,7 @@ relationship: start ZFS:0000027 ! Segmentation:20-25 somites
 id: ZFA:0001080
 name: sclerotome
 namespace: zebrafish_anatomy
-synonym: "sclerotomes" RELATED PLURAL []
+synonym: "sclerotomes" RELATED []
 xref: ZFIN:ZDB-ANAT-030922-5
 relationship: develops_from ZFA:0000155 ! somite
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
@@ -11529,11 +10786,11 @@ relationship: start ZFS:0000024 ! Segmentation:5-9 somites
 id: ZFA:0001086
 name: muscle pioneer
 namespace: zebrafish_anatomy
-synonym: "muscle pioneers" RELATED PLURAL []
+synonym: "muscle pioneers" RELATED []
 synonym: "non migratory adaxial cells" RELATED []
 xref: ZFIN:ZDB-ANAT-031211-14
+is_a: ZFA:0100000 ! zebrafish anatomical entity
 relationship: end ZFS:0000034 ! Hatching:Pec-fin
-relationship: part_of CL:0000189 ! slow muscle cell
 relationship: start ZFS:0000024 ! Segmentation:5-9 somites
 
 [Term]
@@ -11568,7 +10825,7 @@ relationship: start ZFS:0000001 ! Zygote:1-cell
 id: ZFA:0001095
 name: immature macula
 namespace: zebrafish_anatomy
-synonym: "immature maculae" RELATED PLURAL []
+synonym: "immature maculae" RELATED []
 synonym: "immature sensory patch" RELATED []
 synonym: "immature sensory patches" RELATED []
 xref: ZFIN:ZDB-ANAT-050228-10
@@ -11598,7 +10855,7 @@ relationship: start ZFS:0000028 ! Segmentation:26+ somites
 id: ZFA:0001098
 name: immature sensory hair cell anterior macula
 namespace: zebrafish_anatomy
-synonym: "immature sensory hair cells anterior macula" RELATED PLURAL []
+synonym: "immature sensory hair cells anterior macula" RELATED []
 xref: ZFIN:ZDB-ANAT-050228-13
 relationship: end ZFS:0000036 ! Larval:Day 4
 relationship: part_of ZFA:0001096 ! immature anterior macula
@@ -11608,7 +10865,7 @@ relationship: start ZFS:0000028 ! Segmentation:26+ somites
 id: ZFA:0001099
 name: immature sensory hair cell posterior macula
 namespace: zebrafish_anatomy
-synonym: "immature sensory hair cells posterior macula" RELATED PLURAL []
+synonym: "immature sensory hair cells posterior macula" RELATED []
 xref: ZFIN:ZDB-ANAT-050228-14
 relationship: end ZFS:0000036 ! Larval:Day 4
 relationship: part_of ZFA:0001097 ! immature posterior macula
@@ -11797,7 +11054,7 @@ synonym: "anal papilla" RELATED []
 synonym: "anal papillae" RELATED []
 synonym: "genital papilla" RELATED []
 synonym: "UGP" RELATED []
-synonym: "urogenital papillae" RELATED PLURAL []
+synonym: "urogenital papillae" RELATED []
 xref: ZFIN:ZDB-ANAT-050228-31
 is_a: ZFA:0000292 ! surface structure
 relationship: end ZFS:0000044 ! Adult
@@ -11882,7 +11139,7 @@ name: noninvoluting endocytic marginal cell cluster
 namespace: zebrafish_anatomy
 def: "The NEM cell cluster lies in a superficial position of the dorsal blastoderm margin encompassing EVL cells and one or two layers of underlying deep cells. Unlike other marginal blastomeres, cells in this cluster do not participate in involution. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-970107-2'>Cooper et al, 1996.</a>" [ZFIN:curator]
 synonym: "NEM" RELATED []
-synonym: "noninvoluting endocytic marginal cells" RELATED PLURAL []
+synonym: "noninvoluting endocytic marginal cells" RELATED []
 xref: ZFIN:ZDB-ANAT-050228-39
 relationship: end ZFS:0000017 ! Gastrula:50%-epiboly
 relationship: part_of ZFA:0000038 ! margin
@@ -13171,7 +12428,7 @@ id: ZFA:0001255
 name: interneuromast cell
 namespace: zebrafish_anatomy
 def: "Cells deposited by the migrating lateral line primordium between the neuromasts.  Interneuromast cells proliferate and migrate to form additional neuromasts. <a href='http://zfin.org/cgi-bin/ZFIN_jump?record=ZDB-PUB-050106-4'>Grant et al, 2005.</a>" [ZFIN:curator]
-synonym: "interneuromasts" RELATED PLURAL []
+synonym: "interneuromasts" RELATED []
 xref: ZFIN:ZDB-ANAT-050711-65
 relationship: end ZFS:0000000 ! Unknown
 relationship: part_of ZFA:0000034 ! lateral line system
@@ -13306,7 +12563,7 @@ relationship: start ZFS:0000029 ! Pharyngula:Prim-5
 id: ZFA:0001268
 name: sperm duct
 namespace: zebrafish_anatomy
-synonym: "sperm ducts" RELATED PLURAL []
+synonym: "sperm ducts" RELATED []
 xref: ZFIN:ZDB-ANAT-050711-77
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000598 ! testis
@@ -13484,7 +12741,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0001285
 name: intersegmental vessel
 namespace: zebrafish_anatomy
-synonym: "intersegmental vessels" RELATED PLURAL []
+synonym: "intersegmental vessels" RELATED []
 synonym: "intersomitic vessels" RELATED []
 synonym: "Se" RELATED []
 xref: ZFIN:ZDB-ANAT-050915-90
@@ -13507,7 +12764,7 @@ relationship: start ZFS:0000029 ! Pharyngula:Prim-5
 id: ZFA:0001287
 name: renal tubule
 namespace: zebrafish_anatomy
-synonym: "renal tubules" RELATED PLURAL []
+synonym: "renal tubules" RELATED []
 xref: ZFIN:ZDB-ANAT-050915-92
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000529 ! kidney
@@ -13581,7 +12838,7 @@ relationship: start ZFS:0000038 ! Larval:Day 6
 id: ZFA:0001294
 name: epibranchial placode
 namespace: zebrafish_anatomy
-synonym: "epibranchial placodes" RELATED PLURAL []
+synonym: "epibranchial placodes" RELATED []
 xref: ZFIN:ZDB-ANAT-050915-99
 is_a: ZFA:0001309 ! neurogenic placode
 relationship: end ZFS:0000000 ! Unknown
@@ -13708,7 +12965,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0001306
 name: pharyngeal arch
 namespace: zebrafish_anatomy
-synonym: "pharyngeal arches" RELATED PLURAL []
+synonym: "pharyngeal arches" RELATED []
 xref: ZFIN:ZDB-ANAT-050915-111
 relationship: end ZFS:0000000 ! Unknown
 relationship: part_of ZFA:0001114 ! head
@@ -13748,7 +13005,7 @@ relationship: start ZFS:0000023 ! Segmentation:1-4 somites
 id: ZFA:0001310
 name: dorsolateral placode
 namespace: zebrafish_anatomy
-synonym: "dorsolateral placodes" RELATED PLURAL []
+synonym: "dorsolateral placodes" RELATED []
 xref: ZFIN:ZDB-ANAT-050915-115
 is_a: ZFA:0001309 ! neurogenic placode
 relationship: end ZFS:0000000 ! Unknown
@@ -13821,7 +13078,7 @@ id: ZFA:0001317
 name: endocardial cushion
 namespace: zebrafish_anatomy
 def: "Swellings of tissue present between the endocardial and myocardial cell layers that will give rise to the interstitial cells of the cardiac valves." [ZFIN:curator]
-synonym: "endocardial cushions" RELATED PLURAL []
+synonym: "endocardial cushions" RELATED []
 xref: ZFIN:ZDB-ANAT-051116-3
 relationship: develops_from ZFA:0005072 ! endocardial ring
 relationship: end ZFS:0000035 ! Larval:Protruding-mouth
@@ -13932,7 +13189,7 @@ name: neuromere
 namespace: zebrafish_anatomy
 def: "A metameric segment of the central nervous system." [ZFIN:curator]
 synonym: "neural segment" RELATED []
-synonym: "neuromeres" RELATED PLURAL []
+synonym: "neuromeres" RELATED []
 xref: ZFIN:ZDB-ANAT-060131-11
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000012 ! central nervous system
@@ -13972,7 +13229,7 @@ id: ZFA:0001332
 name: spinal neuromere
 namespace: zebrafish_anatomy
 synonym: "spinal cord segment" RELATED []
-synonym: "spinal neuromeres" RELATED PLURAL []
+synonym: "spinal neuromeres" RELATED []
 xref: ZFIN:ZDB-ANAT-060131-12
 is_a: ZFA:0001328 ! neuromere
 relationship: end ZFS:0000044 ! Adult
@@ -14379,7 +13636,7 @@ id: ZFA:0001373
 name: migratory slow muscle precursor cell
 namespace: zebrafish_anatomy
 def: "Cells that initially are located adjacent to the spinal cord and notochord along that migrate migrate from their initial medial position radially through the myotome to the lateral surface of the somites." [ZFIN:curator]
-synonym: "migratory slow muscle precursor cells" RELATED PLURAL []
+synonym: "migratory slow muscle precursor cells" RELATED []
 xref: ZFIN:ZDB-ANAT-060131-47
 relationship: develops_from ZFA:0000003 ! adaxial cell
 relationship: end ZFS:0000000 ! Unknown
@@ -14480,7 +13737,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0001383
 name: fin bud
 namespace: zebrafish_anatomy
-synonym: "fin buds" RELATED PLURAL []
+synonym: "fin buds" RELATED []
 xref: ZFIN:ZDB-ANAT-060131-54
 is_a: ZFA:0001105 ! embryonic structure
 relationship: end ZFS:0000030 ! Pharyngula:Prim-15
@@ -14548,7 +13805,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0001390
 name: pancreatic bud
 namespace: zebrafish_anatomy
-synonym: "pancreatic buds" RELATED PLURAL []
+synonym: "pancreatic buds" RELATED []
 xref: ZFIN:ZDB-ANAT-060131-61
 is_a: ZFA:0001105 ! embryonic structure
 relationship: develops_from ZFA:0000254 ! pancreas primordium
@@ -15281,7 +14538,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0001462
 name: somite border
 namespace: zebrafish_anatomy
-synonym: "somite border cell" RELATED PLURAL []
+synonym: "somite border cell" RELATED []
 xref: ZFIN:ZDB-ANAT-060816-31
 relationship: end ZFS:0000000 ! Unknown
 relationship: part_of ZFA:0000155 ! somite
@@ -15556,7 +14813,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0005004
 name: aortic arch
 namespace: zebrafish_anatomy
-synonym: "aortic arches" RELATED PLURAL []
+synonym: "aortic arches" RELATED []
 xref: ZFIN:ZDB-ANAT-050915-124
 is_a: ZFA:0000005 ! artery
 relationship: end ZFS:0000044 ! Adult
@@ -15648,7 +14905,7 @@ id: ZFA:0005012
 name: afferent filamental artery
 namespace: zebrafish_anatomy
 synonym: "AFA" RELATED []
-synonym: "afferent filamental arteries" RELATED PLURAL []
+synonym: "afferent filamental arteries" RELATED []
 xref: ZFIN:ZDB-ANAT-050915-131
 is_a: ZFA:0000005 ! artery
 relationship: end ZFS:0000044 ! Adult
@@ -15674,7 +14931,7 @@ name: recurrent branch afferent branchial artery
 namespace: zebrafish_anatomy
 def: "The anterioventral proceeding branch of the afferent branchial artery. <a href='ZFIN_jump?record=ZDB-PUB-010205-5'>Isogai et al. 2001.</a>" [ZFIN:curator]
 synonym: "RCB" RELATED []
-synonym: "recurrent branch afferent branchial arteries" RELATED PLURAL []
+synonym: "recurrent branch afferent branchial arteries" RELATED []
 xref: ZFIN:ZDB-ANAT-050915-133
 is_a: ZFA:0000005 ! artery
 relationship: end ZFS:0000044 ! Adult
@@ -15685,7 +14942,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0005015
 name: afferent lamellar arteriole
 namespace: zebrafish_anatomy
-synonym: "afferent lamellar arterioles" RELATED PLURAL []
+synonym: "afferent lamellar arterioles" RELATED []
 synonym: "AFL" RELATED []
 xref: ZFIN:ZDB-ANAT-050915-134
 is_a: ZFA:0000005 ! artery
@@ -15733,7 +14990,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0005019
 name: efferent lamellar arteriole
 namespace: zebrafish_anatomy
-synonym: "efferent lamellar arterioles" RELATED PLURAL []
+synonym: "efferent lamellar arterioles" RELATED []
 synonym: "ELA" RELATED []
 xref: ZFIN:ZDB-ANAT-050915-137
 is_a: ZFA:0000005 ! artery
@@ -15964,7 +15221,6 @@ relationship: start ZFS:0000033 ! Hatching:Long-pec
 id: ZFA:0005039
 name: anterior lateral mesoderm
 namespace: zebrafish_anatomy
-comment: Transcription seen at 2s.
 xref: ZFIN:ZDB-ANAT-051116-23
 relationship: end ZFS:0000000 ! Unknown
 relationship: part_of ZFA:0001065 ! lateral mesoderm
@@ -15974,7 +15230,6 @@ relationship: start ZFS:0000023 ! Segmentation:1-4 somites
 id: ZFA:0005040
 name: posterior lateral mesoderm
 namespace: zebrafish_anatomy
-comment: transcription blood markers starts 2s.
 synonym: "PLM" RELATED []
 xref: ZFIN:ZDB-ANAT-051116-24
 relationship: end ZFS:0000000 ! Unknown
@@ -15985,7 +15240,6 @@ relationship: start ZFS:0000023 ! Segmentation:1-4 somites
 id: ZFA:0005041
 name: anterior lateral plate mesoderm
 namespace: zebrafish_anatomy
-comment: Transcription spi1 at 4s.
 synonym: "ALPM" RELATED []
 xref: ZFIN:ZDB-ANAT-051116-25
 relationship: end ZFS:0000029 ! Pharyngula:Prim-5
@@ -16039,7 +15293,7 @@ relationship: start ZFS:0000029 ! Pharyngula:Prim-5
 id: ZFA:0005046
 name: hyaloid vessel
 namespace: zebrafish_anatomy
-synonym: "hyaloid vessels" RELATED PLURAL []
+synonym: "hyaloid vessels" RELATED []
 xref: ZFIN:ZDB-ANAT-051116-30
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0001267 ! cranial vasculature
@@ -16084,7 +15338,7 @@ id: ZFA:0005050
 name: palatocerebral artery
 namespace: zebrafish_anatomy
 def: "The PLA branches ventrally from the CrDI.  It extends rostrally along the base of mid- and forebrain, then loops medially and links to the corresponding vessel from the other side of the embryo. <a href='ZFIN_jump?record=ZDB-PUB-010205-5'>Isogai et al. 2001.</a>" [ZFIN:curator]
-synonym: "palatocerebral artery." RELATED PLURAL []
+synonym: "palatocerebral artery." RELATED []
 synonym: "PLA" RELATED []
 xref: ZFIN:ZDB-ANAT-051116-34
 is_a: ZFA:0000005 ! artery
@@ -16251,7 +15505,7 @@ relationship: start ZFS:0000000 ! Unknown
 id: ZFA:0005065
 name: heart valve
 namespace: zebrafish_anatomy
-synonym: "heart valves" RELATED PLURAL []
+synonym: "heart valves" RELATED []
 xref: ZFIN:ZDB-ANAT-060131-70
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0000114 ! heart
@@ -16535,7 +15789,7 @@ id: ZFA:0005091
 name: hepatic sinusoid
 namespace: zebrafish_anatomy
 def: "Wide thin-walled blood vessels in the liver. In mammals they have neither veinous or arterial markers." [ZFIN:curator]
-synonym: "hepatic sinusoids" RELATED PLURAL []
+synonym: "hepatic sinusoids" RELATED []
 xref: ZFIN:ZDB-ANAT-060816-48
 relationship: end ZFS:0000044 ! Adult
 relationship: part_of ZFA:0005024 ! trunk vasculature
@@ -16625,7 +15879,7 @@ id: ZFA:0005100
 name: intervessel commissure
 namespace: zebrafish_anatomy
 def: "Vessels that travel between artery and veins or vein and vein in a single ray." [ZFIN:curator]
-synonym: "intervessel comisures" RELATED PLURAL []
+synonym: "intervessel comisures" RELATED []
 xref: ZFIN:ZDB-ANAT-060816-57
 is_a: ZFA:0005095 ! fin vasculature
 relationship: end ZFS:0000044 ! Adult
@@ -16636,7 +15890,7 @@ id: ZFA:0005101
 name: interray vessel
 namespace: zebrafish_anatomy
 def: "Vessels that travel between veins in adjacent rays." [ZFIN:curator]
-synonym: "interray vessels" RELATED PLURAL []
+synonym: "interray vessels" RELATED []
 xref: ZFIN:ZDB-ANAT-060816-58
 is_a: ZFA:0005095 ! fin vasculature
 relationship: end ZFS:0000044 ! Adult
