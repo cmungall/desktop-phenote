@@ -1,0 +1,56 @@
+<!--#include virtual="/phenote/ssi/header.html" -->
+
+<div id="page_body">
+
+<!--#include virtual="/phenote/ssi/navi_home.html" -->
+
+<div id="main_content">
+
+<h2>About Phenote</h2>
+
+<h3><a name="lists">Mailing lists</a></h3>
+<p>There are several mailing lists pertaining to Phenote:</p>
+<ul>
+  <li>Join in on discussions pertaining to Phenote by <a href="https://lists.sourceforge.net/lists/listinfo/obo-phenote">subscribing to the mailing list</a>
+  </li>
+  <li>Keep on top of changes to phenote.  Join the 
+    <ul>
+      <li><a href="https://lists.sourceforge.net/lists/listinfo/obo-svn-commit">svn commit mailing list</a>
+      </li>
+      <li><a href="https://lists.sourceforge.net/lists/listinfo/obo-phenote-bug-tracker">phenote bug tracker list</a>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<br />  
+
+<h3><a name="Bugs">Bug Reporting</a></h3>
+<p>If you find bugs in Phenote, please <a href="https://sourceforge.net/tracker/?group_id=76834&atid=887913">submit a bug report on our Bug Tracker</a> located on sourceforge.</p>
+<p>Please use this same tracker to submit your enhancement and feature requests.</p>
+
+<br />
+
+<h3><a name="contact">Contact Us</a></h3>
+<p>Software Development:
+<script type="text/javascript">
+obfuscate("fruitfly.org", "mgibson", "Mark Gibson");
+</script></p>
+<p>Requirements, Analysis, Documentation:
+<script type="text/javascript">
+obfuscate("lbl.gov", "nlwashington", "Nicole Washington");
+</script></p>
+
+<h3><a name="Groups">Groups</a></h3>
+<p><a href="www.bioontology.org"><img class="protrait" height="50" src="/phenote/images/NCBO_logo.jpg" /></a>NCBO</p>
+<p><a href="www.berkeleybop.org">Berkeley BOP</a>
+
+<h3><a name="funding">Funding Sources</a></h3>
+The funding for Phenote development is provided from the National Center for Biomedical Ontologies, which is part of the 
+<a href="http://www.bisti.nih.gov/ncbc/index.cfm">National Centers for Biomedical Computing</a> network, 
+supported by the <a href="http://nihroadmap.nih.gov/">NIH Roadmap</a>.
+
+</div>
+</div>
+
+<!--#include virtual="/phenote/ssi/footer.shtml" -->
