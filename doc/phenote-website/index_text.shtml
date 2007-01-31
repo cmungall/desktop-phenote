@@ -5,11 +5,12 @@
 <!--#include virtual="/phenote/ssi/navi_home.html" -->
 
 <div id="main_content">
+<h1>Phenote: A Phenotype Annotation Tool using Ontologies</h1>
 <p>
 <b><i>Phenote</i></b> is both a complete piece of software and a software toolkit designed to facilitate the annotation of biological phenotypes using ontologies.  It provides an interface to record genotype-phenotype pairs, together with the provenance for the annotation.
+</p>
 
-
-Data annotated with Phenote is based on the <a href="http://http://www.fruitfly.org/~cjm/obd/formats.html">EQ model</a> for representing phenotypes, combining entities from any OBO ontology with qualities (such as <a href="http://http://www.bioontology.org/wiki/index.php/PATO:About">PATO</a>).  
+<p>Data annotated with Phenote is based on the <a href="http://http://www.fruitfly.org/~cjm/obd/formats.html">EQ model</a> for representing phenotypes, combining entities from any OBO ontology with qualities (such as <a href="http://http://www.bioontology.org/wiki/index.php/PATO:About">PATO</a>).  
 </p>
 
 <p>The software can be used as a complete package, or individual compontents can be downloaded and plugged in to your desired application.  Check out our <a href="/phenote/info/">Info</a> page to learn more.</p>

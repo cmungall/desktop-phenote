@@ -42,7 +42,7 @@ obfuscate("lbl.gov", "nlwashington", "Nicole Washington");
 </script></p>
 
 <h3><a name="Groups">Groups</a></h3>
-<p><a href="www.bioontology.org"><img class="protrait" height="50" src="/phenote/images/NCBO_logo.jpg" /></a>NCBO</p>
+<p><a href="www.bioontology.org"><img class="protrait" height="50" src="/phenote/images/NCBO_logo.jpg" border="0" /></a>NCBO</p>
 <p><a href="www.berkeleybop.org">Berkeley BOP</a>
 
 <h3><a name="funding">Funding Sources</a></h3>
