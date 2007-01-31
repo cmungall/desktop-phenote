@@ -7,7 +7,7 @@
 <div id="main_content">
 
 <h2>Software Information</h2>
-
+Phenote is both a standalone java application and a software toolkit.
 <h3><a name="features">Features of Standalone software</a></h3>
 <p>
 </p>
@@ -20,30 +20,30 @@
   </li>
   <li>Ontology navigation and term information display
   </li>
-  <li>Bulk copy/edit/delete of phenotype-genotype character entries
+  <li>Bulk copy/edit/delete/sort of phenotype-genotype character entries
   </li>
   <li>Two output formats: phenosyntax and phenoxml
   </li>
   <li>configurable input fields to allow custom data entry and user-specified ontologies
   </li>
+  <li>Preconfigurations available for different communities
+  </li>
 </ul>
 
-<h3><a name="examples">Example Sites Utilizing Phenote components</a></h3>
-The Dictyostelium  Genome Database, <a href="http://dictybase.org">
+<h3><a name="web_users">Websites Utilizing Phenote Software Components</a></h3>
+<p>The Dictyostelium Genome Database, <a href="http://dictybase.org">
 DictyBase</a>, has a web-based 
-<a href="http://165.124.152.194/db/cgi-bin/dictyBase/curation/phenotypeCuration.pl">Phenotype Annotation Tool</a> that is directly linked to their own database backend.
+<a href="http://165.124.152.194/db/cgi-bin/dictyBase/curation/phenotypeCuration.pl">Phenotype Annotation Tool</a> that is directly linked to their own database backend.</p>
 <br />
-<a href="http://zfin.org">Zfin</a> has an integrated phenotype annotation tool in their internal website.  Here's a screenshot of their interface [to be added].
+<p>
+<a href="http://zfin.org">Zfin</a> has an integrated phenotype annotation tool in their internal website.  [screenshot or link to be added].
+</p>
 <br />
 
-<h3><a name="webstart">Running Phenote Webstart Version(s)</a></h3>
-<h3><a name="install">Downloading and Installing Phenote</a></h3>
-<p>
-</p>
-<h3><a name="config">Custom Configuration</a></h3>
-<p>
-Phenote can be customized for data entry fields, and the ontologies that are desired to be included.
-</p>
+<h3><a name="documentation">Documentation</a></h3>
+<p><a href="">Phenotype Annotation User Guide</a></p>
+
+<h3><a name="roadmap">Roadmap</a></h3>
 
 <h3><a name="rel_notes">Release Notes</a></h3>
 <a href="http://toy.lbl.gov:9010/phenote/phenote-release-notes.html">[Release Notes]</a>
