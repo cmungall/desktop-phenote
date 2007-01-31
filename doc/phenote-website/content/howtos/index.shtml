@@ -11,6 +11,7 @@
 <h4><a name="webstart">Running Phenote Webstart Version(s)</a></h4>
 <p>
 By clicking any of links below, Phenote will use Webstart to launch the java application from the web.  Simply clicking on a link below will download the application to your computer and run.  Future clicks on the link should recognize that you've already downloaded the application, and it will simply start the software.  If a newer version of the software is detected on the server, the newest version will replace your old version and then run.</p>
+<p>
 Three configurations of Phenote have been created to include the ontologies most appropriate for use by those communities:
 <ul>
 <li><a href="/phenote/phenote-flybase.jnlp">Fly</a></li>
@@ -25,10 +26,11 @@ Your browser must be configured to recognize webstart appications with the 'jnlp
 </p>
 
 <h4><a name="install">Downloading and Installing Phenote</a></h4>
-The most up-to-date version of phenote can be checked out with subversion using: <br />
+<p>The most up-to-date version of phenote can be checked out with subversion using: <br />
 svn co https://phenote.svn.sourceforge.net/svnroot/obo/phenote/trunk phenote
 <br />
-
+</p>
+<p>
 You can also browse the subversion repository at:
 <a href="http://obo.svn.sourceforge.net/viewvc/obo/phenote/trunk/">
 https://obo.svn.sourceforge.net/viewvc/obo/phenote/trunk/</a>
