@@ -1,0 +1,58 @@
+<!--#include virtual="/phenote/ssi/header.html" -->
+
+<div id="page_body">
+
+<!--#include virtual="/phenote/ssi/navi_howtos.html" -->
+
+<div id="main_content">
+
+<h2>How-Tos</h2>
+<h3><a name="software">Software</a></h3>
+<h4><a name="webstart">Running Phenote Webstart Version(s)</a></h4>
+<p>
+By clicking any of links below, Phenote will use Webstart to launch the java application from the web.  Simply clicking on a link below will download the application to your computer and run.  Future clicks on the link should recognize that you've already downloaded the application, and it will simply start the software.  If a newer version of the software is detected on the server, the newest version will replace your old version and then run.</p>
+Three configurations of Phenote have been created to include the ontologies most appropriate for use by those communities:
+<ul>
+<li><a href="/phenote/phenote-flybase.jnlp">Fly</a></li>
+<li><a href="/phenote/phenote-zfin.jnlp">Zebrafish</a></li>
+<li><a href="/phenote/phenote-human.jnlp">Human</a></li>
+</ul>
+</p>
+<h4>Configuring your browser for Webstart</h4>
+<p>
+You must have Java 1.5 or later installed on your computer.
+Your browser must be configured to recognize webstart appications with the 'jnlp' extension.  Most Mac and Windows browsers tend to have webstart pre-installed on their browsers.  Linux does not <a href="/phenote/webstart-troubleshooting.html">[more on running Phenote on linux...]</a>.  You must set up an association between the MIME type, which is an "application/x-java-jnlp-file".  
+</p>
+
+<h4><a name="install">Downloading and Installing Phenote</a></h4>
+The most up-to-date version of phenote can be checked out with subversion using: <br />
+svn co https://phenote.svn.sourceforge.net/svnroot/obo/phenote/trunk phenote
+<br />
+
+You can also browse the subversion repository at:
+<a href="http://obo.svn.sourceforge.net/viewvc/obo/phenote/trunk/">
+https://obo.svn.sourceforge.net/viewvc/obo/phenote/trunk/</a>
+<br />
+
+Note that if you use this version, it might be buggy.
+</p>
+
+
+<h4><a name="config">Customizing Input</a></h4>
+<p>
+Phenote can be customized for data entry fields, and the ontologies that are desired to be included.
+</p>
+
+
+<h3><a name="annotation">Making Annotations</a></h3>
+<p>
+</p>
+
+
+
+<br />
+</p>
+</div>
+</div>
+
+<!--#include virtual="/phenote/ssi/footer.shtml" -->
