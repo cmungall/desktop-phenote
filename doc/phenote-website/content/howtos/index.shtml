@@ -14,9 +14,9 @@ By clicking any of links below, Phenote will use Webstart to launch the java app
 <p>
 Three configurations of Phenote have been created to include the ontologies most appropriate for use by those communities:
 <ul>
-<li><a href="/phenote/phenote-flybase.jnlp">Fly</a></li>
-<li><a href="/phenote/phenote-zfin.jnlp">Zebrafish</a></li>
-<li><a href="/phenote/phenote-human.jnlp">Human</a></li>
+<li><a href="/phenote/1.0/phenote-flybase.jnlp">Fly</a></li>
+<li><a href="/phenote/1.0/phenote-zfin.jnlp">Zebrafish</a></li>
+<li><a href="/phenote/1.0/phenote-human.jnlp">Human</a></li>
 </ul>
 </p>
 <h4>Configuring your browser for Webstart</h4>

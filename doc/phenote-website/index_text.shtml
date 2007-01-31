@@ -16,26 +16,31 @@ Data annotated with Phenote is based on the <a href="http://http://www.fruitfly.
 
 <p>This tool is  being developed by the <a href="http://berkeleybop.org/">Bioinformatics Core</a> of the <a href="http://www.bioontology.org">National Center for Biomedical Ontology</a>.  
 </p>
-<p>
+
 There are two groups driving the development of this software project:
 <p><a href="http://flybase.bio.indiana.edu/">
 <img class="portrait" height="50" border="0" src="/phenote/images/fly_logo.png" alt="Flybase" /></a>Flybase:  The Drosophila Genome Database.
 <br />
 </p>
 <br />
+<br />
 <p><a href="http://zfin.org/"><img class="portrait" border="0" src="/phenote/images/zfin_logo.gif" height="50" alt="Zfin" /></a>ZFIN: The Zebrafish Genome Database
 <br />
 </p>
-</p>
-<p>
+<br />
+<br />
+
 We are also collaborating with several groups:
 <p><a href="http://www.nescent.org/"><img class="portrait" border="0" src="/phenote/images/nescent_logo.gif" height="50" alt="Nescent" /></a>NESCENT: The National Evolutionary Synthesis Center
 <br />
 </p>
+<br />
+<br />
 <p><a href="http://www.pharmgkb.org/"><img class="portrait" border="0" src="/phenote/images/pgkb_logo.png" height="50" alt="PharmGKB" /></a>PharmGKB: The Pharmacogenetics and Pharmacogenomics Knowledge Base 
 <br />
 </p>
-</p>
+<br />
+<br />
 
 </div>
 </div>
