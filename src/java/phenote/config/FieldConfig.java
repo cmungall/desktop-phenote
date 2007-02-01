@@ -4,35 +4,78 @@ import java.util.ArrayList;
 import java.util.List;
 
 import phenote.datamodel.CharField;
+import phenote.config.xml.OntologyDocument.Ontology;
 import phenote.datamodel.CharFieldEnum; // phase out
+
+// xml beans for writeback
+import phenote.config.xml.FieldDocument.Field;
+import phenote.config.xml.PhenoteConfigurationDocument.PhenoteConfiguration;
 
 public class FieldConfig {
 
-  private CharFieldEnum charFieldEnum; // phase out
+  //private CharFieldEnum charFieldEnum; // phase out
   private CharField charField;
   private String label;
   // Entity field can have multiple ontologies
   private List<OntologyConfig> ontologyConfigList;
-  private boolean isPostComp;
-  private OntologyConfig postCompRelOntCfg;
+  //private boolean isPostComp;
+  //private OntologyConfig postCompRelOntCfg;
   private String syntaxAbbrev;
+  private boolean enabled = true; // default if not specified is true
 
 
-  FieldConfig(CharFieldEnum c, String label) {
-    charFieldEnum = c;
-    this.label = label;
+  /** construct from xml bean field - READ */
+  FieldConfig(Field field) {
+    this.label = field.getName();
+    
+//   try{//phase this out!charFieldEnum = CharFieldEnum.getCharFieldEnum(label);}
+//     catch (Exception e) {} // no char field enum for name - new generic!
+    //fc = new FieldConfig(name);
+    
+    if (field.xgetEnable() != null)
+      enabled = field.getEnable();
+
+    if (field.getSyntaxAbbrev() != null) {
+      setSyntaxAbbrev(field.getSyntaxAbbrev());
+    }
+    
+    // POST COMP, relationship ontol - old way - phase out - now in ont arr below
+    if (field.getPostcomp() != null) {
+      //setIsPostComp(true); - set in OC read by ODA
+      String relFile = field.getPostcomp().getRelationshipOntology();
+      OntologyConfig rel = OntologyConfig.makePostCompRelCfg(relFile);
+      //setPostCompRelOntCfg(rel); dont need anymore - set in OC
+      addOntologyConfig(rel); // new way
+    }
+    
+    // ONTOLOGIES if only one ontology file is an attribute... (convenience)
+    // this is being phased out - no need and a hassle
+    if (field.getFile() != null) {
+      addOntologyConfig(new OntologyConfig(field));
+    }
+    // otherwise its multiple ontologies listed in ontology elements (entity)
+    // also in new way post comp rel comes in here as well
+    else {
+      Ontology[] ontologies = field.getOntologyArray();
+      for (Ontology o : ontologies) {
+        addOntologyConfig(new OntologyConfig(o,getLabel())); // label -> default name
+      }
+    }
   }
+
+//   FieldConfig(CharFieldEnum c, String label) {
+//     charFieldEnum = c;
+//     this.label = label;
+//   }
 
   /** No char field enum - its a generic not in hard wired datamodel! */
-  FieldConfig(String label) {
-    this.label = label;
-    //isGeneric = true;
-  }
-
+//   FieldConfig(String label) {
+//     this.label = label;
+//     //isGeneric = true;
+//   }
   /** with generic fields these are going to become pase' */
-  public CharFieldEnum getCharFieldEnum() { return charFieldEnum; }
-
-  public boolean hasCharFieldEnum() { return charFieldEnum != null; }
+  //public CharFieldEnum getCharFieldEnum() { return charFieldEnum; }
+  //public boolean hasCharFieldEnum() { return charFieldEnum != null; }
 
   // --> getName?
   public String getLabel() { return label; }
@@ -59,6 +102,19 @@ public class FieldConfig {
     getOntologyConfigList().add(o);
   }
 
+  boolean hasOntConfig(OntologyConfig oc) {
+    return getOntConfig(oc.getName()) != null;
+  }
+
+  /** return OC with name - null if none */
+  OntologyConfig getOntConfig(String name) {
+    for (OntologyConfig oc : getOntologyConfigList()) {
+      if (name.equals(oc.getName()))
+        return oc;
+    }
+    return null;
+  }
+
   void setOntologyConfigList(List<OntologyConfig> configs) {
     ontologyConfigList = configs;
   }
@@ -69,21 +125,6 @@ public class FieldConfig {
     return ontologyConfigList;
   }
 
-  // POST COMP config... 
-  void setIsPostComp(boolean isPostComp) {
-    this.isPostComp = isPostComp;
-  }
-  public boolean isPostComp() {
-    return isPostComp;
-  }
-  void setPostCompRelOntCfg(OntologyConfig oc) {
-    postCompRelOntCfg = oc;
-  }
-
-  /** If isPostComp() return relationship ontology filename */
-  public OntologyConfig getPostCompRelOntCfg() {
-    return postCompRelOntCfg;
-  }
 
   void setSyntaxAbbrev(String syn) {
     this.syntaxAbbrev = syn;
@@ -95,10 +136,65 @@ public class FieldConfig {
   //void String getSyntaxAbbrev() { return syntaxAbbrev; }
   boolean hasSyntaxAbbrev(String abb) { return abb.equals(syntaxAbbrev); }
 
+  public  boolean isEnabled() { return enabled; }
+
   public void setCharField(CharField cf) { charField = cf; }
   CharField getCharField() { return charField; }
   boolean hasCharField(CharField cf) { return charField == cf; }
+
+  /** create xml bean and add it to phenCfg for writeback */
+  void write(PhenoteConfiguration phenCfg) {
+    Field f = phenCfg.addNewField();
+    f.setName(getLabel());
+    f.setSyntaxAbbrev(getSyntaxAbbrev());
+    f.setEnable(isEnabled());
+    // f.setType(getType()); // do we need this - no - maybe in future?
+    // new way is to just write out with other ontol configs - delete this
+//     if (isPostComp()) getPostCompRelOntCfg().writePostComp(f);
+    // everything else is in ontology config
+    // change here - writing out ontology element even for single ontology - phasing
+    // out shoving ontology in field attribs
+    // this also will have post comp rel - new way
+    for (OntologyConfig oc : getOntologyConfigList())
+      oc.writeOntology(f);
+  }
+
+  void mergeWithOldConfig(Config oldConfig) {
+    // ADD - 1st see if field is new - if so add it and done
+    if (!oldConfig.hasFieldConfig(this)) {
+      oldConfig.addFieldConfig(this);
+      return;
+    }
+
+    // UPDATE - its not new - need to check contents
+    FieldConfig oldFieldConfig = oldConfig.getFieldConfig(getLabel());
+    // replace syntax abbrev or fill in if blank?? - it is a change in version so replace?
+    // yea if syn has changed that prob means its a cng in format
+    if (syntaxAbbrev != null)
+      oldFieldConfig.syntaxAbbrev = syntaxAbbrev;
+    // ONTOLOGIES
+    for (OntologyConfig newOC : getOntologyConfigList()) {
+      newOC.mergeWithOldConfig(oldFieldConfig);
+    }
+  }
+
 }
+  // POST COMP config... 
+//   void setIsPostComp(boolean isPostComp) {
+//     this.isPostComp = isPostComp;
+//   }
+//   public boolean isPostComp() {
+//     return isPostComp;
+//   }
+//   void setPostCompRelOntCfg(OntologyConfig oc) {
+//     setIsPostComp(true);
+//     postCompRelOntCfg = oc;
+//   }
+
+//   /** If isPostComp() return relationship ontology filename */
+//   public OntologyConfig getPostCompRelOntCfg() {
+//     return postCompRelOntCfg;
+//   }
 
 //   FieldConfig(CharFieldEnum c,OntologyConfig o) {
 //     charFieldEnum = c;

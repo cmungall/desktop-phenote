@@ -3,27 +3,26 @@ package phenote.config;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.LineNumberReader;
+import java.io.PrintStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.xmlbeans.XmlException;
 
+import phenote.main.PhenoteVersion;
 import phenote.config.xml.PhenoteConfigurationDocument;
 import phenote.config.xml.DataadapterDocument.Dataadapter;
 import phenote.config.xml.FieldDocument.Field;
 import phenote.config.xml.LogDocument.Log;
 import phenote.config.xml.OboRepositoryDocument.OboRepository;
-import phenote.config.xml.OntologyDocument.Ontology;
 import phenote.config.xml.PhenoteConfigurationDocument.PhenoteConfiguration;
 import phenote.config.xml.UvicGraphDocument.UvicGraph;
 import phenote.dataadapter.DataAdapterI;
-import phenote.dataadapter.fly.FlybaseDataAdapter;
-import phenote.dataadapter.nexus.NEXUSAdapter;
-import phenote.dataadapter.phenosyntax.PhenoSyntaxFileAdapter;
-import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 import phenote.util.FileUtil;
@@ -33,25 +32,24 @@ public class Config {
   public final static String  DEFAULT_CONFIG_FILE = "flybase.cfg";
   private static Config singleton = new Config();
   private String configFile = DEFAULT_CONFIG_FILE;
-  //private FieldConfig lumpConfig = new FieldConfig(CharFieldEnum.LUMP,"Genotype");
-  //private String lumpOntologyFile = null;  private OntologyConfig lumpConfig = new OntologyConfig("Genotype");
-  private List<DataAdapterI> dataAdapterList;
-  private List<FieldConfig> fieldList = new ArrayList<FieldConfig>();
-  //private boolean checkForNewOntologies = false;
-  //private int newOntologyCheckMinutes = 10;
+  private List<DataAdapterConfig> dataAdapConfList;
+  /** only enabled fields */
+  private List<FieldConfig> enabledFields = new ArrayList<FieldConfig>();
+  /** enabled & disabled */
+  private List<FieldConfig> allFields = new ArrayList<FieldConfig>();
   private String logConfigFile = "conf/log4j.xml"; // default log config file
   private boolean uvicGraphEnabled = false; // default false for now
   private String reposUrlDir;
+  private String version;
 
   /** singleton */
-  private Config() {
-    //parseXmlFile("./conf/initial-flybase.cfg"); // hardwired for now...
-  }
+  private Config() {}
 
   /** This is setting config file with nothing to do with personal config
    this is for the servlet where config file location is set in web.xml */
   public void setConfigFile(String configFile) throws ConfigException {
-    setConfigFile(configFile,false,false); // dont use .phenote by default (servlet)
+    //if (configFile==null) configFile = getDefaultFile();
+    setConfigFile(configFile,false,false,false); // dont use .phenote by default (servlet)
   }
 
   /** This is for when phenote is first installed and one of the default config
@@ -59,11 +57,37 @@ public class Config {
       get copied to .phenote/my-phenote.cfg if it doesnt already exist. if it
       exists then this file is ignored */
   public void setInitialConfigFile(String configFile) throws ConfigException {
-    setConfigFile(configFile,true,false);
+    if (configFile==null) configFile = getDefaultFile();
+    setConfigFile(configFile,true,false,true); // last true should be false!
+    //setConfigFile(configFile,true,false);
+  }
+
+  // --update - set up cmd line!
+  public void updateConfigFileWithNewVersion(String configFile) throws ConfigException {
+    if (configFile==null) configFile = getDefaultFile();
+    setConfigFile(configFile,true,false,true);
   }
 
   public void setOverwriteConfigFile(String configFile) throws ConfigException {
-    setConfigFile(configFile,true,true);
+    if (configFile==null) configFile = getDefaultFile();
+    setConfigFile(configFile,true,true,false);
+  }
+
+  public void loadDefaultConfigFile() throws ConfigException {
+    setConfigFile(getDefaultFile(),true,false,false);
+  }
+
+  /** default file should be in .phenote/conf/my-phenote.cfg. if not set yet then just
+      do good ol flybase.cfg */
+  private String getDefaultFile() {
+    String file=null;
+    try {
+      LineNumberReader r = new LineNumberReader(new FileReader(getMyPhenoteFile()));
+      file = r.readLine();
+    } catch (IOException e) {}
+    if (file == null || file.equals(""))
+      file = DEFAULT_CONFIG_FILE;
+    return file;
   }
 
   /** if usePersonalConfig is false then ignore personal(my-phenote.cfg). if true
@@ -71,42 +95,87 @@ public class Config {
       to personal if personal doesnt exist, if personal exists ignore passed in
       config file (its an initial config -i) */
   private void setConfigFile(String file, boolean usePersonalConfig,
-                            boolean overwritePersonalConfig) 
+                            boolean overwritePersonalConfig,boolean mergeConfigs) 
     throws ConfigException {
     this.configFile = file; // ??
     // look to see if config file in ~/.phenote - if not copy there
     if (usePersonalConfig) { // for standalone not servlet
-      configFile = getMyPhenoteConfig(configFile,overwritePersonalConfig);
+      configFile = getMyPhenoteConfig(configFile,overwritePersonalConfig,mergeConfigs);
     }
     System.out.println("Attempting to read config from "+configFile);
     //parseXmlFileWithDom(configFile); // do parse here?
     //URL configUrl = getConfigUrl(filename);
     //System.out.println("config file: "+configUrl);
     parseXmlFile(configFile); // throws ex
+
+    //System.out.println("testing config writeback");
+    //new ConfigWriter().writeConfig(this,new File(FileUtil.getDotPhenoteDir(),"my-phenote.cfg"));
   }
 
-  private String getMyPhenoteConfig(String passedInConfig,
-                                    boolean overwritePersonalCfg)
+  private String getMyPhenoteConfig(String passedInConfig,boolean overwritePersonalCfg,
+                                    boolean mergeConfigs)
     throws ConfigException {
-    File dotPhenote = FileUtil.getDotPhenoteDir();
-    File myPhenote = new File(dotPhenote,"my-phenote.cfg");
-    // if file doesnt exist yet or overwrite, copy over passedInConfig
-    if (!myPhenote.exists() || overwritePersonalCfg) {
-      String s = overwritePersonalCfg ? " getting overwritten" : " does not exist";
-      System.out.println(myPhenote+s+" Copying "+passedInConfig);
-      try {
-        URL passedInUrl = getConfigUrl(passedInConfig);
-        copyUrlToFile(passedInUrl,myPhenote);
-      } catch (FileNotFoundException e) {
-        throw new ConfigException(e);
+    //File dotPhenote = FileUtil.getDotPhenoteDir();
+    // this wont work with merging/updating
+    //File myPhenote = new File(dotPhenote,"my-phenote.cfg");
+
+    try {
+      URL passedInUrl = getConfigUrl(passedInConfig);
+      String nameOfFile = FileUtil.getNameOfFile(passedInUrl);
+      // this is the "species" conf file - eg ~/.phenote/conf/flybase.cfg
+      File dotConfFile = new File(getDotPhenoteConfDir(),nameOfFile);
+
+      if (mergeConfigs) {
+        mergeNewWithOld(passedInUrl,dotConfFile);
       }
+      
+      // if file doesnt exist yet or overwrite, copy over passedInConfig
+      else if (!dotConfFile.exists() || overwritePersonalCfg) {
+        String s = overwritePersonalCfg ? " getting overwritten" : " does not exist";
+        System.out.println(dotConfFile+s+" Copying "+passedInUrl);
+        //try {
+          //URL passedInUrl = getConfigUrl(passedInConfig);
+          copyUrlToFile(passedInUrl,dotConfFile);
+      }
+      
+      // new way - set new default(no param) config file name in my-phenote.cfg
+      writeMyPhenoteDefaultFile(passedInConfig); // ? passedIn?
+
+      return dotConfFile.toString(); // ?
+      
+    } catch (FileNotFoundException e) {
+      throw new ConfigException(e);
     }
-    return myPhenote.toString(); // ?
+    //return dotConfFile.toString(); // ?
+  }
+
+  private File getDotPhenoteConfDir() {
+    File dotPhenote = FileUtil.getDotPhenoteDir();
+    File conf = new File(dotPhenote,"conf");
+    conf.mkdir();
+    return conf;
+  }
+
+  private File getMyPhenoteFile() {
+    return new File(getDotPhenoteConfDir(),"my-phenote.cfg");
+  }
+
+  /** Write name of config file loaded out to .phenote/conf/my-phenote.cfg for use
+      by future startups with no config specified */
+  private void writeMyPhenoteDefaultFile(String newDefaultFileString)
+    throws ConfigException {
+    try {
+      File myPhenote = getMyPhenoteFile();
+      PrintStream os = new PrintStream(new FileOutputStream(myPhenote));
+      os.print(newDefaultFileString);
+      os.close();
+    } catch (FileNotFoundException e) { throw new ConfigException(e); }
   }
 
   /** goes thru url line by line and copies to file - is there a better way to 
       do this? */
   private void copyUrlToFile(URL configUrl,File myPhenote) throws ConfigException {
+
     try {
       InputStream is = configUrl.openStream();
       FileOutputStream os = new FileOutputStream(myPhenote);
@@ -119,36 +188,98 @@ public class Config {
     } catch (Exception e) { throw new ConfigException(e); }
   }
 
+
+  /** MERGING/UPDATING Load in 2 configs, anything new in newConfig gets put into my phenote 
+      only merge if versions are different(?) in other words only merge on version
+      change/phenote upgrade - if version same then leave in users mucking */
+  private void mergeNewWithOld(URL newConfig,File oldDotConfFile) throws ConfigException {
+    Config newCfg = new Config();
+    newCfg.parseXmlUrl(newConfig); //??
+    Config oldCfg = new Config();
+    oldCfg.parseXmlFile(oldDotConfFile.toString());
+
+    // so actually new/sys config may have out of date version or none - just use
+    // PhenoteVersion itself!
+    String version = PhenoteVersion.versionString();//newCfg.version
+    if (version != null && version.equals(oldCfg.version)) {
+      System.out.println("System & user config same version, not updating cfg");
+      return;
+    }
+    else
+      System.out.println("System config is newer than user, updating user config");
+
+    // Data Adapters
+    for (DataAdapterConfig dac : newCfg.getAdapConfigs()) {
+      if (!oldCfg.hasAdapConfig(dac))
+        oldCfg.addAdapConfig(dac);
+    }
+    // log defaulted and probably wont change - dont worry about?? or check if set?
+    // but it is a version change so check if diff? maybe? not sure hmmm
+    // but i do think ok to update uvic - version change may go from false to true
+    oldCfg.uvicGraphEnabled = newCfg.uvicGraphEnabled; // hmmmm?
+    oldCfg.reposUrlDir = newCfg.reposUrlDir; // ??
+    for (FieldConfig newFC : newCfg.getFieldConfigList())
+      newFC.mergeWithOldConfig(oldCfg);
+
+    // write out updated old cfg - todo write out to .phenote/conf/filename.cfg not mycfg
+    new ConfigWriter().writeConfig(oldCfg,oldDotConfFile);//getMyPhenoteCfgFile());
+  }
+
+//   private File getMyPhenoteCfgFile() {
+//     return new File(FileUtil.getDotPhenoteDir(),"my-phenote.cfg");
+//   }
+
+
   public static Config inst() {
     return singleton;
   }
 
   public boolean hasDataAdapters() {
-    return dataAdapterList != null && !dataAdapterList.isEmpty();
+    //return dataAdapConfList != null && !dataAdapConfList.isEmpty();
+    return getDataAdapters() != null && !getDataAdapters().isEmpty();
   }
   
+  List<DataAdapterConfig> getAdapConfigs() {
+    if (dataAdapConfList == null)
+      dataAdapConfList = new ArrayList<DataAdapterConfig>(4);
+    return dataAdapConfList;
+  }
+  /** Check if has data adapter config with same name */
+  private boolean hasAdapConfig(DataAdapterConfig dac) {
+    for (DataAdapterConfig d : getAdapConfigs()) {
+      //if (d.getName().equals(dac.getName()))
+      if (d.hasSameAdapter(dac))
+        return true;
+    }
+    return false;
+  }
+
+  /** Returns enabled data adapters - empty list if none enabled */
   public List<DataAdapterI> getDataAdapters() {
-    return new ArrayList(dataAdapterList);
+    if (dataAdapConfList==null) return null; // ex?
+    ArrayList daList = new ArrayList(dataAdapConfList.size());
+    for (DataAdapterConfig d : dataAdapConfList) {
+      if (d.isEnabled())
+        daList.add(d.getDataAdapter());
+    }
+    return daList; //new ArrayList(dataAdapConfList);
   }
 
-  /** Return true if have a dataadapter, and only 1 data adapter */
-  public boolean hasSingleDataAdapter() {
-    return hasDataAdapters() && dataAdapterList.size() == 1;
-  }
-
-  public DataAdapterI getSingleDataAdapter() {
-    if (!hasDataAdapters()) return null;
-    return dataAdapterList.get(0);
-  }
-
-  // --> quartz
-//   /** perhaps not best name - check if ontology is still fresh, if something newer
-//       than load it - for obo files check file date - get this into config file! */
-//   public boolean checkForNewOntologies() {
-//     return checkForNewOntologies;
+//   /** Return true if have a dataadapter, and only 1 data adapter */
+//   public boolean hasSingleDataAdapter() {
+//     return hasDataAdapters() && dataAdapConfList.size() == 1;
 //   }
-//   /** How many minutes between checks for new ontologies */
-//   public int getOntologyCheckMinutes() { return newOntologyCheckMinutes; }
+
+  /** LoadSaveMangr uses if no extension works */
+  public DataAdapterI getSingleDataAdapter() {
+    if (!hasDataAdapters()) return null; // ex?
+    for (DataAdapterConfig d : dataAdapConfList)
+      if (d.isEnabled()) return d.getDataAdapter();
+    //return dataAdapConfList.get(0);
+    return null; // none enabled - shouldnt happen - ex?
+  }
+
+
 
   /** config flag for enabling uvic shrimp dag graph */ 
   public boolean uvicGraphIsEnabled() { return uvicGraphEnabled; }
@@ -156,6 +287,8 @@ public class Config {
   public URL getLogConfigUrl() throws FileNotFoundException {
     return FileUtil.findUrl(logConfigFile);
   }
+
+  String getLogConfigFile() { return logConfigFile; }
 
   public int getNumberOfFields() {
     return getFieldConfigList().size();
@@ -180,7 +313,21 @@ public class Config {
 
   /** OntologyDataAdapter calls this to figure which ontologies to load */
   public List<FieldConfig> getFieldConfigList() {
-    return fieldList;
+    return enabledFields;
+  }
+
+  /** returns true if has field config with same name - contents may differ */
+  boolean hasFieldConfig(FieldConfig newFC) {
+    return getFieldConfig(newFC.getLabel()) != null;
+  }
+
+  /** returns field config with label fieldName */
+  FieldConfig getFieldConfig(String fieldName) {
+    for (FieldConfig fc : getFieldConfigList()) {
+      if (fc.getLabel().equals(fieldName))
+        return fc;
+    }
+    return null; // ex?
   }
 
   /** kinda silly to return list?? so there are 2 fields for "Tag" which perhaps is silly
@@ -215,28 +362,41 @@ public class Config {
   //public FieldConfig getRelationshipFieldConfig() { }
 
 
-  /** parse xml file with xml beans (phenoteconfigbeans.xml). Put in own class? */
+  /** parse xml file with xml beans (phenoteconfigbeans.xml).
+      Put in own class? YES ConfigReader */
   private void parseXmlFile(String filename) throws ConfigException {
+    //try {
     try {
       URL configUrl = getConfigUrl(filename);
+      parseXmlUrl(configUrl);
+    }
+    catch (FileNotFoundException e) { throw new ConfigException(e); }
+  }
+      
+  private void parseXmlUrl(URL configUrl) throws ConfigException {
+    try {
       System.out.println("config file: "+configUrl);
       PhenoteConfigurationDocument pcd = 
         PhenoteConfigurationDocument.Factory.parse(configUrl);//configFile);
       pcd.validate(); //???
       PhenoteConfiguration pc = pcd.getPhenoteConfiguration();
 
+      version = pc.getVersion();
 
       // LOG CONFIG FILE
       Log log = pc.getLog();
       if (log != null && log.getConfigFile() != null) {
-        logConfigFile = log.getConfigFile().getStringValue();
+        logConfigFile = log.getConfigFile();
       }
       
-      // DATA ADAPTERS
+      // DATA ADAPTERS  <dataadapter name="phenoxml" enable="true"/>
+
       Dataadapter[] adapters = pc.getDataadapterArray();
       for (Dataadapter da : adapters) {
-        String name = da.getName().toString();
-        addDataAdapterFromString(name);
+        DataAdapterConfig dac = new DataAdapterConfig(da);
+        addAdapConfig(dac);
+        //String name = da.getName().toString();
+        //addDataAdapterFromString(name);
       }
 
       // GRAPH
@@ -247,7 +407,7 @@ public class Config {
       // Repos url dir
       OboRepository or = pc.getOboRepository();
       if (or != null && or.getUrlDir() != null)
-        reposUrlDir = or.getUrlDir().getStringValue();
+        reposUrlDir = or.getUrlDir();
 
       // FIELDS
       Field[] fields = pc.getFieldArray();
@@ -270,110 +430,124 @@ public class Config {
     return FileUtil.findUrl(filename);
   }
 
-  // do some other way? DataAdapterManager has mapping? DataAdapter has mapping?
-  // DataAdapterManager.getAdapter(name)???
-  private void addDataAdapterFromString(String daString) {
-    if (daString.equalsIgnoreCase("phenoxml"))
-      addDataAdapter(new PhenoXmlAdapter());
-    else if (daString.equalsIgnoreCase("phenosyntax"))
-      addDataAdapter(new PhenoSyntaxFileAdapter());
-    else if (daString.equalsIgnoreCase("flybase")) // pase??
-      addDataAdapter(new FlybaseDataAdapter()); // for now...
-    else if (daString.equalsIgnoreCase("nexus"))
-      addDataAdapter(new NEXUSAdapter());
-  }
 
-  private void addDataAdapter(DataAdapterI da) {
-    if (dataAdapterList == null)
-      dataAdapterList = new ArrayList<DataAdapterI>(3);
-    dataAdapterList.add(da);
+  private void addAdapConfig(DataAdapterConfig dac) {
+    getAdapConfigs().add(dac);
   }
 
   private void makeFieldConfig(Field field) {
-    String name = field.getName().getStringValue(); //toString();
-    // has to be a valid value - no longer true for generic free types
-    FieldConfig fc;
-    try { // phase this out!!
-      CharFieldEnum cfe = CharFieldEnum.getCharFieldEnum(name);
-      //if (cfe == null) ???
-      fc = new FieldConfig(cfe,name);
-    }
-    catch (Exception e) { // no char field enum for name - new generic!
-      fc = new FieldConfig(name);
-    }
-
-    if (field.getSyntaxAbbrev() != null) {
-      fc.setSyntaxAbbrev(field.getSyntaxAbbrev().getStringValue());
-    }
-    
-    // POST COMP, relationship ontol
-    if (field.getPostcomp() != null) {
-      fc.setIsPostComp(true);
-      String relFile = field.getPostcomp().getRelationshipOntology().getStringValue();
-      fc.setPostCompRelOntCfg(makeOntologyConfig("Relationship",relFile));
-    }
-
-
-    // ONTOLOGIES if only one ontology file is an attribute... (convenience)
-    if (field.getFile() != null) {
-      fc.addOntologyConfig(new OntologyConfig(field));
-    }
-    // otherwise its multiple ontologies listed in ontology elements (entity)
-    else {
-      Ontology[] ontologies = field.getOntologyArray();
-      for (Ontology o : ontologies) {
-        fc.addOntologyConfig(new OntologyConfig(o));
-      }
-    }
-    fieldList.add(fc);
+    FieldConfig fc = new FieldConfig(field);
+    addFieldConfig(fc);
   }
-
+  void addFieldConfig(FieldConfig fc) {
+    allFields.add(fc);
+    if (fc.isEnabled())
+      enabledFields.add(fc);
+  }
   
-
-  private OntologyConfig makeOntologyConfig(String name, String file) {
-    OntologyConfig oc = new OntologyConfig(name,file);
-    return oc;
-  }
 }
+    //parseXmlFile("./conf/initial-flybase.cfg"); // hardwired for now...
+  //private FieldConfig lumpConfig = new FieldConfig(CharFieldEnum.LUMP,"Genotype");
+  //private String lumpOntologyFile = null;  private OntologyConfig lumpConfig = new OntologyConfig("Genotype");
 
-//         String oName = o.getName().getStringValue();
-//         String oFile = o.getFile().getStringValue();
-//         String filterOut=null;
-//         if (o.getFilterOut() != null)
-//           filterOut = o.getFilterOut().getStringValue();
-//         String slim = o.getSlim()!=null ? o.getSlim().getStringValue() : null;
-//        OntologyConfig oc = makeOntologyConfig(oName,oFile,filterOut,slim);
-//       String file = field.getFile().getStringValue();
-//       // downside of strogly types xml beans is filterOut has to be dealt with 
-//       // separately for field & ontology - annoying - & all other attribs
-//       String filterOut = 
-//         field.getFilterOut()!=null ? field.getFilterOut().getStringValue() : null;
-//       String slim = field.getSlim()!=null ? field.getSlim().getStringValue() : null;
-//       if (field.getReposSubdir() != null)
-//         fc.setReposSubdir(field.getReposSubdir().getStringValue());
+  //private boolean checkForNewOntologies = false;
+  //private int newOntologyCheckMinutes = 10;
+  // --> quartz
+//   /** perhaps not best name - check if ontology is still fresh, if something newer
+//       than load it - for obo files check file date - get this into config file! */
+//   public boolean checkForNewOntologies() {
+//     return checkForNewOntologies;
+//   }
+//   /** How many minutes between checks for new ontologies */
+//   public int getOntologyCheckMinutes() { return newOntologyCheckMinutes; }
+//   private class DataAdapterConfig {
 
-//   private OntologyConfig makeOntologyConfig(Field field) {
-//     String name = field.getName().getStringValue();
-//     String file = field.getFile().getStringValue();
-//     // downside of strongly types xml beans is filterOut has to be dealt with 
-//     // separately for field & ontology - annoying - & all other attribs
-//     String filterOut = 
-//       field.getFilterOut()!=null ? field.getFilterOut().getStringValue() : null;
-//     String slim = field.getSlim()!=null ? field.getSlim().getStringValue() : null;
-//     String rs = field.getReposSubdir()!=null ?
-//       field.getReposSubdir().getStringValue() : null;
-//     return makeOntologyConfig(name,file,filterOut,slim,rs);
-//     //fc.addOntologyConfig(makeOntologyConfig(name,file,filterOut,slim));
+//     /** construct from Dataadapter xml bean */
+//     private DataAdapterConfig(Dataadapter xmlBean) {
+//       String name = da.getName();
+//       addDataAdapterFromString(name);
+//     }
+
+//     boolean enabled=true; // enabled by default
+//     // new -> class name, old -> phenoxml|phenosyntax|nexus 
+//     String configString;
+//     // will be null if enabled = false
+//     DataAdapterI dataAdapter;
+
+//     // do some other way? DataAdapterManager has mapping? DataAdapter has mapping?
+//     // DataAdapterManager.getAdapter(name)???
+//     // just do class string see tracker issue 1649004
+//     private void addDataAdapterFromString(String daString) {
+      
+//       // new way of doing things is class name itself - so 1st try introspect...
+//       try {
+//         Class c = Class.forName(daString);
+//         Object o = c.newInstance();
+//         if ( ! (o instanceof DataAdapterI))
+//           throw new Exception("class not instance of DataAdapterI");
+//         DataAdapterI da = (DataAdapterI)o;
+//         addDataAdapter(da);
+//       }
+//       catch (Exception e) { 
+        
+//         // backward compatibility - have merger replace these with class names eventually
+//         if (daString.equalsIgnoreCase("phenoxml"))
+//           addDataAdapter(new PhenoXmlAdapter());
+//         else if (daString.equalsIgnoreCase("phenosyntax"))
+//           addDataAdapter(new PhenoSyntaxFileAdapter());
+//         else if (daString.equalsIgnoreCase("flybase")) // pase??
+//           addDataAdapter(new FlybaseDataAdapter()); // for now...
+//         else if (daString.equalsIgnoreCase("nexus"))
+//           addDataAdapter(new NEXUSAdapter());
+//         // LOG not set up yet???
+//         else
+//           System.out.println("Data adapter not recognized "+daString);
+//       }
+//     }
 //   }
 
-//   private OntologyConfig makeOntologyConfig(String name, String file, String filterOut) {
-//     return new OntologyConfig(name,file,filterOut);
-//   }
-//   private OntologyConfig makeOntologyConfig(String name, String file, String filterOut,
-//                                             String slim,String reposSubdir) {
-//     return new OntologyConfig(name,file,filterOut,slim,reposSubdir);
-//   }
+//}
 
+//     String name = field.getName(); //toString();
+//     // has to be a valid value - no longer true for generic free types
+//     FieldConfig fc;
+//     try { // phase this out!!
+//       CharFieldEnum cfe = CharFieldEnum.getCharFieldEnum(name);
+//       //if (cfe == null) ???
+//       fc = new FieldConfig(cfe,name);
+//     }
+//     catch (Exception e) { // no char field enum for name - new generic!
+//       fc = new FieldConfig(name);
+//     }
+
+//     if (field.getSyntaxAbbrev() != null) {
+//       fc.setSyntaxAbbrev(field.getSyntaxAbbrev());
+//     }
+    
+//     // POST COMP, relationship ontol
+//     if (field.getPostcomp() != null) {
+//       fc.setIsPostComp(true);
+//       String relFile = field.getPostcomp().getRelationshipOntology();
+//       fc.setPostCompRelOntCfg(OntologyConfig.makeRelCfg(relFile));
+//     }
+
+
+//     // ONTOLOGIES if only one ontology file is an attribute... (convenience)
+//     if (field.getFile() != null) {
+//       fc.addOntologyConfig(new OntologyConfig(field));
+//     }
+//     // otherwise its multiple ontologies listed in ontology elements (entity)
+//     else {
+//       Ontology[] ontologies = field.getOntologyArray();
+//       for (Ontology o : ontologies) {
+//         fc.addOntologyConfig(new OntologyConfig(o));
+//       }
+//     }
+
+//   private OntologyConfig makeOntologyConfig(String name, String file) {
+//     OntologyConfig oc = new OntologyConfig(name,file);
+//     return oc;
+//   }
 
 
 //       // CHECK FOR ONTOLOGIES

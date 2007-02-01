@@ -1,9 +1,10 @@
 default namespace = "phenote/config/xml"
 ##default namespace = "http://phenote/config/xml"
 
+##    attribute version { xsd:float }, -- cant do float 1.0.3 is not a float
 start =
   element phenote-configuration {
-    attribute version { xsd:float },
+    attribute version { xsd:string },
     log,
     dataadapter*,
     uvic-graph,
@@ -14,7 +15,11 @@ start =
 dataadapter =
   element dataadapter {
     ## for now just 2 dataadapters, phenoxml & phenosyntax (and now also nexus)
-    attribute name {"phenoxml" | "phenosyntax" | "nexus"}
+    ## take out this constraint - make more pluggable easy to add DA
+    ##attribute name {"phenoxml" | "phenosyntax" | "nexus"}
+    ## actual class name phenote.dataadapter.phenoxml.PhenoXmlAdapter
+    attribute name { xsd:string },
+    attribute enable { xsd:boolean }
   }
 
 ## Whether to check if ontology(obo) has been updated/more current obo file
@@ -27,43 +32,53 @@ dataadapter =
 ## Where the config file for log4j is
 log =
   element log {
-    attribute config-file { text }
+    attribute config-file { xsd:string }
   }
 
 uvic-graph = element uvic-graph { attribute enable { xsd:boolean } }
 
-obo-repository = element obo-repository { attribute url-dir {text} }
+obo-repository = element obo-repository { attribute url-dir {xsd:string} }
 
 field = 
   element field {
+    attribute enable { xsd:boolean },
     ##attribute name { "Pub" | "Genotype" | "Genetic Context" | "Entity" | "Quality" },
-    attribute name { text },
+    attribute name { xsd:string },
     ## tag for field for pheno-syntax adapter
-    attribute syntax-abbrev { text },
+    attribute syntax-abbrev { xsd:string },
     ## whether field is free text or constrained by ontology - take out?
     ## this is actually unnecasary - if there is no file free text is assumed    
     attribute type { "free_text" | "ontology" },  
-    ## file is for single ontology - rename ontology_file?  
-    attribute file { text },
-    attribute filter-out { text },
-    attribute slim { text },
-    attribute repos-subdir {text},
+    ## file is for single ontology - rename ontology_file?
+    ## phase these 4 out - redundant with single ontology
+    attribute file { xsd:string },
+    attribute filter-out { xsd:string },
+    attribute slim { xsd:string },
+    attribute repos-subdir {xsd:string},
     postcomp?,
     ontology*
   } 
 
 ontology =
   element ontology {
-    attribute name { text },
+    attribute name { xsd:string },
     ## obo file for ontology
-    attribute file { text },
-    attribute filter-out { text },
-    attribute slim { text },
-    attribute repos-subdir {text}
+    attribute file { xsd:string },
+    attribute filter-out { xsd:string },
+    attribute slim { xsd:string },
+    attribute repos-subdir {xsd:string},
+    attribute is-postcomp-rel {xsd:boolean}
   }
 
+## hmmmmm - this is funny - is there a need for more than one rel ontol??
+## alternatively should this just hold ontology+(1 or more)
+## or alternatively just be another ontology with isRel flag and if theres
+## an ontology with isRel flag then do post comp (could also have redundant
+## isPostComp flag) hmmmm - cleaner but not as intuitive
+## isRelForPostComp - more explicit as there may be rels for stage as well
 postcomp =
   element postcomp {
-    attribute relationship-ontology { text },
+    attribute relationship-ontology { xsd:string },
+    ## do we need this??
     ontology*
   }

@@ -5,6 +5,7 @@ import java.net.URL;
 
 import phenote.config.xml.FieldDocument.Field;
 import phenote.config.xml.OntologyDocument.Ontology;
+import phenote.config.xml.PostcompDocument.Postcomp;
 
 /** May not even have ontology file (free text eg genotype) rename FieldConfig? */
 public class OntologyConfig {
@@ -15,16 +16,21 @@ public class OntologyConfig {
   public String filterOut; // public?
   private String slim;
   private String reposSubdir;
+  private boolean isPostCompRel = false;
 
   //static OntologyConfig defaultPato = new OntologyConfig("Pato","attribute_and_value.obo");
 
   OntologyConfig() {} // not sure this is actually needed/used
   OntologyConfig(String name) { this.name = name; }
-  OntologyConfig(String name, String file) {
+  private OntologyConfig(String name, String file) {
     this(name);
-    ontologyFile = file;
-    if (isBad(file)) // exception?
-      System.out.println("null or empty ontology file given for "+name+" "+file);
+    setOntologyFile(file);
+  }
+
+  static OntologyConfig makePostCompRelCfg(String file) {
+    OntologyConfig rel = new OntologyConfig("Relationship",file);
+    rel.isPostCompRel = true;
+    return rel;
   }
 
   OntologyConfig(String name, String file, String filterOut) {
@@ -36,27 +42,36 @@ public class OntologyConfig {
     this.slim = slim;
   }
 
-  /** Ontology stuff in field itself (field only has one ontology) */
+  /** Ontology stuff in field itself (field only has one ontology) - this is getting phased 
+      out replaced by field with single ontology element */
   OntologyConfig(Field field) {
-    name = field.getName().getStringValue();
-    ontologyFile = field.getFile().getStringValue();
+    name = field.getName();
+    ontologyFile = field.getFile();
     // downside of strongly types xml beans is filterOut has to be dealt with 
     // separately for field & ontology - annoying - & all other attribs
-    filterOut = field.getFilterOut()!=null ? field.getFilterOut().getStringValue() : null;
-    slim = field.getSlim()!=null ? field.getSlim().getStringValue() : null;
+    filterOut = field.getFilterOut()!=null ? field.getFilterOut() : null;
+    slim = field.getSlim()!=null ? field.getSlim() : null;
     reposSubdir = field.getReposSubdir()!=null ?
-      field.getReposSubdir().getStringValue() : null;
+      field.getReposSubdir() : null;
   }
 
-  OntologyConfig(Ontology o) {
-    name = o.getName().getStringValue();
-    ontologyFile = o.getFile().getStringValue();
+  /** confusing - this is xml bean Ontology NOT datamodel Ontology - this is reading
+   in from xml config - if ontology doesnt have name use fieldName (single ontols
+   just use field name) */
+  OntologyConfig(phenote.config.xml.OntologyDocument.Ontology o, String fieldName) {
+    name = o.getName()!=null ? o.getName() : fieldName;
+    ontologyFile = o.getFile();
     if (o.getFilterOut() != null)
-      filterOut = o.getFilterOut().getStringValue();
-    slim = o.getSlim()!=null ? o.getSlim().getStringValue() : null;
+      filterOut = o.getFilterOut();
+    slim = o.getSlim()!=null ? o.getSlim() : null;
     if (o.getReposSubdir()!=null)
-      reposSubdir = o.getReposSubdir().getStringValue();
+      reposSubdir = o.getReposSubdir();
+    // if xgetIsPostCompRel != null
+    isPostCompRel = o.getIsPostcompRel(); // hmm what will return when not set??
+    //if (isPostCompRel)  fc.setPostCompRelOntCfg(this);
   }
+
+  public boolean isPostCompRel() { return isPostCompRel; }
 
   boolean hasName() {
     return !isBad(name);
@@ -71,8 +86,10 @@ public class OntologyConfig {
   String getName() { return name; }
 
   void setOntologyFile(String file) {
-    if (isBad(file))
-      return;
+    if (isBad(file)) {
+      System.out.println("null or empty ontology file given for "+name+" "+file);
+      return; // ex?
+    }
     ontologyFile = file;
   }
   public String getFile() { return ontologyFile; }
@@ -91,6 +108,8 @@ public class OntologyConfig {
   private String getReposBaseDir() {
     return Config.inst().getReposUrlDir();
   }
+
+  private String getReposSubdir() { return reposSubdir; }
 
   public boolean hasReposUrl() {
     if (getFile() == null) return false; // shouldnt happen
@@ -116,4 +135,40 @@ public class OntologyConfig {
   public String getSlim() { return slim; }
 
   public String toString() { return name; }
+
+
+  /** make ontology xml bean and add to field xml bean for writeback */
+  void writeOntology(Field f) {
+    Ontology oBean = f.addNewOntology();
+    oBean.setName(getName());
+    oBean.setFile(getFile());
+    if (hasReposUrl())
+      oBean.setReposSubdir(getReposSubdir());
+    if (hasFilter())
+      oBean.setFilterOut(getFilter());
+    if (hasSlim())
+      oBean.setSlim(getSlim());
+    if (isPostCompRel)
+      oBean.setIsPostcompRel(true); // will it write if not set? hope not
+  }
+  
+  void mergeWithOldConfig(FieldConfig oldFC) {
+    // NEW - ADD
+    if (!oldFC.hasOntConfig(this)) {
+      oldFC.addOntologyConfig(this);
+      return;
+    }
+    // UPDATE
+    OntologyConfig oldOC = oldFC.getOntConfig(getName());
+    // or should even null gets transmitted in which case this replaces oldOC??
+    if (ontologyFile!=null) oldOC.ontologyFile = ontologyFile;
+    if (filterOut!=null) oldOC.filterOut = filterOut;
+    if (slim!=null) oldOC.slim = slim;
+    if (reposSubdir!=null) oldOC.reposSubdir = reposSubdir;
+    oldOC.isPostCompRel = isPostCompRel;
+  }
 }
+
+//   void writePostComp(Field f) {// annoying as shares a lot with ontology
+//     Postcomp pc = f.addNewPostcomp();
+//     pc.setRelationshipOntology(getFile());  }

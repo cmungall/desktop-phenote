@@ -84,14 +84,13 @@ public class OntologyDataAdapter {
     // to prevent reload during init , maybe dont need with synchronization?
     initializingOntologies = true; 
     for (FieldConfig fieldConfig : config.getFieldConfigList()) {
-      // may not have char field enum!
-      CharField cf;
+      if (!fieldConfig.isEnabled()) continue;
       // this is where char field enums happen - scrap entirely????
 //       if (fieldConfig.hasCharFieldEnum()) {
 //         CharFieldEnum fce = fieldConfig.getCharFieldEnum();
 //         cf = new CharField(fce);
 //       }
-      cf = new CharField(fieldConfig.getLabel());
+      CharField cf = new CharField(fieldConfig.getLabel());
       fieldConfig.setCharField(cf);
 
       // ONTOLOGIES
@@ -99,7 +98,13 @@ public class OntologyDataAdapter {
         for (OntologyConfig oc : fieldConfig.getOntologyConfigList()) {
           try {
             Ontology o = initOntology(oc);
-            cf.addOntology(o);
+            if (oc.isPostCompRel()) { // POST COMP REL ONTOLOGY
+              cf.setPostCompAllowed(true);
+              cf.setPostCompRelOntol(o);
+            }
+            else { // REGULAR ONTOLOGY
+              cf.addOntology(o);
+            }
           } catch (OntologyException e) {
             //System.out.println(e.getMessage()+" ignoring ontology, fix config! ");
             LOG.error(e.getMessage()+" ignoring init ontology, fix config? "+oc);
@@ -110,17 +115,17 @@ public class OntologyDataAdapter {
         cf.setName(fieldConfig.getLabel());
       }
 
-      // POST COMP
-      if (fieldConfig.isPostComp()) {
-        cf.setPostCompAllowed(true);
-        try {
-          //Ontology o = initRelationshipOntology(fieldConfig.getPostCompRelOntCfg());
-          Ontology o = initOntology(fieldConfig.getPostCompRelOntCfg());
-          cf.setPostCompRelOntol(o);
-        } catch (OntologyException e) {
-          LOG.error(e.getMessage()+" ignoring ontology, fix config? ");
-        }
-      }
+//       // POST COMP
+//       if (fieldConfig.isPostComp()) {
+//         cf.setPostCompAllowed(true);
+//         try {
+//           //Ontology o = initRelationshipOntology(fieldConfig.getPostCompRelOntCfg());
+//           Ontology o = initOntology(fieldConfig.getPostCompRelOntCfg());
+//           cf.setPostCompRelOntol(o);
+//         } catch (OntologyException e) {
+//           LOG.error(e.getMessage()+" ignoring ontology, fix config? ");
+//         }
+//       }
       ontologyManager.addField(cf);
     }
     //initRelationshipOntology();

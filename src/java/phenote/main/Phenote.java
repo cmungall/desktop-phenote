@@ -128,13 +128,15 @@ public class Phenote {
     String configFile = getConfigFileFromCommandLine(args);
     // if no config file specified then set default initial config file. this will be
     // overridden by a personal config file if it exists
-    if (configFile == null)
-      configFile = Config.DEFAULT_CONFIG_FILE;
+    //if (configFile == null) configFile = Config.DEFAULT_CONFIG_FILE; stored in file
     try {
-      if (isOverwriteConfigFile(args))
-        Config.inst().setOverwriteConfigFile(configFile); // causes parse of file->.phenote
-      else
+      if (isOverwriteConfigFile(args)) //causes wipeout move of app file to .phenote
+        Config.inst().setOverwriteConfigFile(configFile); 
+      else if (isInitialConfigFile(args))
         Config.inst().setInitialConfigFile(configFile);
+      //else if update...
+      else // no command line config file specified - use last one specified (cache)
+        Config.inst().loadDefaultConfigFile();
     } catch (ConfigException e) {
       LOG.fatal("EXITING! Fatal error in config file: "+e.getMessage());
       e.printStackTrace(); // log?
@@ -142,6 +144,7 @@ public class Phenote {
     }
   }
 
+  // change to -m for merge?? - move to CommandLine!
   private boolean isInitialConfigFile(String args[]) {
     if (args == null || args.length < 2) return false;
     return args[0].equals("-i");

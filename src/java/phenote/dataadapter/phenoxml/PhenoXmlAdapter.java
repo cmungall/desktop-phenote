@@ -254,6 +254,12 @@ public class PhenoXmlAdapter implements DataAdapterI {
     XmlOptions options = new XmlOptions();
     options.setSavePrettyPrint();
     options.setSavePrettyPrintIndent(2);
+    // cant get rid of ns: ??
+//     java.util.HashMap m = new java.util.HashMap(2);
+//     m.put("ns:","");
+//     options.setSaveImplicitNamespaces(m);
+//     options.setSaveAggressiveNamespaces();
+//     options.setUseDefaultNamespace();
     return options;
   }
 

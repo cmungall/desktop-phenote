@@ -22,6 +22,7 @@ public class CommandLine {
   private CommandOption inputFile = new InputFileCommandOption();
   //private CommandOption inputFmtOption = new InputFormatCommandOption();
   private CommandOption writeFile = new WriteFileCommandOption();
+  //private CommandOption updateConfig 
 
   CommandOption[] options = new CommandOption[] { inputFile, writeFile };
 
