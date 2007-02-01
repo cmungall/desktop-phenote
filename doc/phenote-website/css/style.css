@@ -110,6 +110,11 @@ height: auto;
 #main_content .contact{
  clear: right;
  /*border: 1px solid brown;*/
+
+#main_content .collab_table{
+align: center;
+col {width: 100;}
+td  {align: center; }
 }
 
 /* ---------- "copyright" class. ---------- */
