@@ -1,0 +1,14 @@
+<!--#include virtual="/ssi/header.html" -->
+
+<div id="page_body">
+
+<!--#include virtual="/ssi/navi_home.html" -->
+
+<div id="main_content">
+
+<h2>This page is under construction</h2>
+
+</div>
+</div>
+
+<!--#include virtual="/ssi/footer.shtml" -->
