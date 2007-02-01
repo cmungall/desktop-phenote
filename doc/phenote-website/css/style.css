@@ -111,10 +111,14 @@ height: auto;
  clear: right;
  /*border: 1px solid brown;*/
 
-#main_content .collab_table{
+#main_content table{
 align: center;
 col {width: 100;}
 td  {align: center; }
+}
+
+#main_content td{
+ align: center;
 }
 
 /* ---------- "copyright" class. ---------- */
