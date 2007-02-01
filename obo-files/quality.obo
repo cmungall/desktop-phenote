@@ -1,7 +1,7 @@
 format-version: 1.0
-date: 26:01:2007 16:23
+date: 31:01:2007 14:14
 saved-by: George Gkoutos
-auto-generated-by: OBO-Edit 1.100-beta16
+auto-generated-by: OBO-Edit 1.100-beta18
 subsetdef: abnormal_slim "Abnormal/normal slim"
 subsetdef: absent_slim "Absent/present slim"
 subsetdef: attribute_slim "Attribute slim"
@@ -17,7 +17,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000001
 name: quality
-def: "A dependent entity that inheres in a bearer by virtue of how the bearer is related to other entities." [PATO :GVG]
+def: "A dependent entity that inheres in a bearer by virtue of how the bearer is related to other entities." [PATOC:GVG]
 subset: attribute_slim
 
 [Term]
@@ -33,7 +33,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000004
 name: mobility
-def: "A quality of moving freely." [PATO :GVG]
+def: "A quality of moving freely." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001237 ! monadic quality of continuant
 
@@ -55,7 +55,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000008
 name: speed/velocity
-def: "A physical quality inhering in an object by virtue of the rate of change of its position." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A physical quality inhering in an object by virtue of the rate of change of its position." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
@@ -88,35 +88,35 @@ is_obsolete: true
 [Term]
 id: PATO:0000014
 name: color
-def: "A composite chromatic quality composed of hue, saturation and intensity parts." [XX:<new dbxref>]
+def: "A composite chromatic quality composed of hue, saturation and intensity parts." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001301 ! chromatic property
 
 [Term]
 id: PATO:0000015
 name: color hue
-def: "a chromatic scalar-circular quality inhering in an object that manifests in an observer by virtue of the dominant wavelength of the visible light; may be subject to fiat divisions, typically into 7 or 8 spectra" [XX:<new dbxref>]
+def: "A chromatic scalar-circular quality inhering in an object that manifests in an observer by virtue of the dominant wavelength of the visible light; may be subject to fiat divisions, typically into 7 or 8 spectra." [PATOC:cjm]
 subset: attribute_slim
 is_a: PATO:0001301 ! chromatic property
 
 [Term]
 id: PATO:0000016
 name: color brightness
-def: "A scalar optical quality which obtains by the bearer producing the effects of light emittance in an observer." [XX:<new dbxref>]
+def: "A scalar optical quality which obtains by the bearer producing the effects of light emittance in an observer." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001300 ! optical quality
 
 [Term]
 id: PATO:0000017
 name: color saturation
-def: "a scalar chromatic quality that manifests by virtue of the range of wavelengths in perceived light." [XX:<new dbxref>]
+def: "A scalar chromatic quality that manifests by virtue of the range of wavelengths in perceived light." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001301 ! chromatic property
 
 [Term]
 id: PATO:0000018
 name: fluorescence
-def: "Luminosity in which the bearer emits longer wavelength light following the absorption of shorter wavelength radiation; fluorescence is common with aromatic compounds with several rings joined together." [XX:<new dbxref>]
+def: "Luminosity in which the bearer emits longer wavelength light following the absorption of shorter wavelength radiation; fluorescence is common with aromatic compounds with several rings joined together." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001296 ! luminosity
 
@@ -135,7 +135,7 @@ is_a: PATO:0001300 ! optical quality
 [Term]
 id: PATO:0000021
 name: compatibility
-def: "A quality of having or lacking the ability harmonious coexistence." [PATO :GVG]
+def: "A quality of having or lacking the ability harmonious coexistence." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001237 ! monadic quality of continuant
 
@@ -157,7 +157,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000025
 name: composition
-def: "A monadic quality of continuant inhering in an object by virtue of the quantities or relative ratios of subparts of the inhering entity." [PATO :GVG]
+def: "A monadic quality of continuant inhering in an object by virtue of the quantities or relative ratios of subparts of the inhering entity." [PATOC:GVG]
 comment: For example calcium composition (which may inhere in bone), haemoglobin composition (which may inhere in blood).
 subset: attribute_slim
 is_a: PATO:0001237 ! monadic quality of continuant
@@ -200,7 +200,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000033
 name: concentration
-def: "A physical quality inhering in a substance by \nvirtue of the amount of it there is mixed with another substance." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
+def: "A physical quality inhering in a substance by virtue of the amount of it there is mixed with another substance." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
@@ -222,7 +222,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000037
 name: consistency
-def: "A physical quality that inheres in a continuant by\nvirtue of density, firmness, or viscosity." [PATO :GVG]
+def: "A physical quality that inheres in a continuant by\nvirtue of density, firmness, or viscosity." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
@@ -234,14 +234,14 @@ is_obsolete: true
 [Term]
 id: PATO:0000039
 name: direction
-def: "The orientation of a line in space." [: "http://thesaurus.maths.org/"]
+def: "The orientation of a line in space." [thesaurus.maths:thesaurus.maths "http://thesaurus.maths.org/"]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0000040
 name: distance
-def: "The extent of space between two objects or places." [XX:<new dbxref>]
+def: "The extent of space between two objects or places." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
@@ -258,14 +258,14 @@ is_obsolete: true
 [Term]
 id: PATO:0000043
 name: flavor
-def: "A relational quality inhering in an object or the molecules of an object, in which the molecules are perceived by a taste and odorant receptors." [XX:<new dbxref>]
+def: "A relational quality inhering in an object or the molecules of an object, in which the molecules are perceived by a taste and odorant receptors." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001238 ! relational quality of continuant
 
 [Term]
 id: PATO:0000044
 name: frequency
-def: "A physical quality which inhers to the bearer by virtue of the number of repetitive actions in a particular time." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A physical quality which inhers to the bearer by virtue of the number of repetitive actions in a particular time." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
@@ -304,21 +304,21 @@ is_a: PATO:0001237 ! monadic quality of continuant
 [Term]
 id: PATO:0000050
 name: life span
-def: "A time quality which is the expected maximum age." [XX:<new dbxref>]
+def: "A time quality which is the expected maximum age." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0000165 ! time
 
 [Term]
 id: PATO:0000051
 name: morphology
-def: "A quality inhering in the bearer by virtue of its size, shape and structure" [PATO :GVG]
+def: "A quality inhering in the bearer by virtue of its size, shape and structure" [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0000052
 name: shape
-def: "A morphology quality inhering in a bearer by virtue of the ratios of distances between its features (points, edges, surfaces and also holes etc)." [PATO :GVG]
+def: "A morphology quality inhering in a bearer by virtue of the ratios of distances between its features (points, edges, surfaces and also holes etc)." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0000051 ! morphology
 
@@ -353,7 +353,7 @@ is_a: PATO:0001226 ! quantitative
 [Term]
 id: PATO:0000058
 name: odor
-def: "A relational quality inhering in an object by virtue of the molecules being are aerially dispersed and perceived by an odorant receptor." [XX:<new dbxref>]
+def: "A relational quality inhering in an object by virtue of the molecules being are aerially dispersed and perceived by an odorant receptor." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001238 ! relational quality of continuant
 
@@ -366,7 +366,7 @@ is_a: PATO:0000047 ! biological sex
 [Term]
 id: PATO:0000060
 name: pattern
-def: "A monadic quality of continuant defined by the mathematic properties of the relative position of subparts" [XX:<new dbxref>]
+def: "A monadic quality of continuant defined by the mathematic properties of the relative position of subparts." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001237 ! monadic quality of continuant
 
@@ -399,7 +399,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000066
 name: pilosity
-def: "A quality of having hair." [PATO :GVG]
+def: "A quality of having hair." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001237 ! monadic quality of continuant
 
@@ -460,7 +460,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000077
 name: response
-def: "A quality inhering in a bearer by virtue of \nits reaction to a stimulus or an agent." [PATO :GVG]
+def: "A quality inhering in a bearer by virtue of \nits reaction to a stimulus or an agent." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001237 ! monadic quality of continuant
 
@@ -508,7 +508,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000085
 name: sensitivity
-def: "A relational quality of continuant inhering in an entity by virtue of its propensity to respond to stimulation." [PATO:GVG]
+def: "A relational quality of continuant inhering in an entity by virtue of its propensity to respond to stimulation." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001238 ! relational quality of continuant
 
@@ -670,7 +670,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000117
 name: size
-def: "A morphology quality inhering in a bearer by virtue of its physical magnitude." [WordNet :WordNet "wordnet.princeton.edu/"]
+def: "A morphology quality inhering in a bearer by virtue of its physical magnitude." [WordNet :WordNet "http://wordnet.princeton.edu/"]
 subset: attribute_slim
 is_a: PATO:0000051 ! morphology
 
@@ -682,7 +682,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000119
 name: height
-def: "A physical quality which is equal to the vertical dimension of extension." [PATO :GVG]
+def: "A physical quality which is equal to the vertical dimension of extension." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
@@ -699,7 +699,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000122
 name: length
-def: "A physical quality which is equal to the distance between two points." [PATO :GVG]
+def: "A physical quality which is equal to the distance between two points." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
@@ -716,7 +716,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000125
 name: mass
-def: "A physical quality that inheres in a bearer in proportion to the amount of matter it contains." [PATO :GVG]
+def: "A physical quality that inheres in a bearer in proportion to the amount of matter it contains." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
@@ -784,7 +784,7 @@ is_a: PATO:0000132 ! spatial
 [Term]
 id: PATO:0000137
 name: orientation
-def: "A quality of an object in which its \nlocation is defined by the angle between two axes, or an axis and another object" [XX:<new dbxref>]
+def: "A quality of an object in which its location is defined by the angle between two axes, or an axis and another object." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0000132 ! spatial
 
@@ -801,14 +801,14 @@ is_obsolete: true
 [Term]
 id: PATO:0000140
 name: placement
-def: "A spatial quality of the way in which something is placed" [PATO:gg]
+def: "A spatial quality of the way in which something is placed" [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0000132 ! spatial
 
 [Term]
 id: PATO:0000141
 name: structure
-def: "A morphology quality inhering in a bearer by virtue of the relative position, shape, arrangements and connectivity of an organism's various parts; the pattern underlying its form." [PATO :GVG]
+def: "A morphology quality inhering in a bearer by virtue of the relative position, shape, arrangements and connectivity of an organism's various parts; the pattern underlying its form." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0000051 ! morphology
 
@@ -835,7 +835,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000146
 name: temperature
-def: "A physical quality of the thermal energy of a system." [PATO :GVG]
+def: "A physical quality of the thermal energy of a system." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
@@ -857,7 +857,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000150
 name: texture
-def: "A morphology quality inhering in a bearer by virtue of the relative size and distribution of its surface elements or the representation or invention of the appearance of its surface." [PATO :GVG]
+def: "A morphology quality inhering in a bearer by virtue of the relative size and distribution of its surface elements or the representation or invention of the appearance of its surface." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0000051 ! morphology
 
@@ -869,7 +869,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000152
 name: threshold
-def: "A quality inhering in a bearer  by virtue of its sensitivity towards a fixed location or value where a change is observed; upper limit." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
+def: "A quality inhering in a bearer by virtue of its sensitivity towards a fixed location or value where a change is observed; upper limit." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: attribute_slim
 is_a: PATO:0001237 ! monadic quality of continuant
 
@@ -939,7 +939,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000165
 name: time
-def: "A quality in which events occur in sequence" [XX:<new dbxref>]
+def: "A quality in which events occur in sequence." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
@@ -962,7 +962,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000169
 name: viability
-def: "A quality inhering in a bearer or a population by virtue of the bearer's ability or inability to survive and develop normally or the number of surviving individuals in a given population." [PATO :GVG]
+def: "A quality inhering in a bearer or a population by virtue of the bearer's ability or inability to survive and develop normally or the number of surviving individuals in a given population." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001237 ! monadic quality of continuant
 
@@ -1062,14 +1062,14 @@ is_a: PATO:0001240 ! relational quality of occurrent
 [Term]
 id: PATO:0000188
 name: coordination
-def: "A quality of having or lacking skilful and effective interaction of movement." [PATO :GVG]
+def: "A quality of having or lacking skilful and effective interaction of movement." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001530 ! behavioral quality of occurent
 
 [Term]
 id: PATO:0000189
 name: discrimination
-def: "A quality of perceiving differences between two or more stimuli." [PATO :GVG]
+def: "A quality of perceiving differences between two or more stimuli." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001237 ! monadic quality of continuant
 
@@ -1498,7 +1498,7 @@ is_a: PATO:0001434 ! reproductive quality
 [Term]
 id: PATO:0000274
 name: fertility
-def: "A quality of initiating, sustaining, or supporting reproduction." [PATO :GVG]
+def: "A quality of initiating, sustaining, or supporting reproduction." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001434 ! reproductive quality
 
@@ -1517,7 +1517,7 @@ is_a: PATO:0001496 ! brood quality
 [Term]
 id: PATO:0000277
 name: female fertility
-def: "A fertility quality of the female of initiating, sustaining, or supporting reproduction." [PATO :GVG]
+def: "A fertility quality of the female of initiating, sustaining, or supporting reproduction." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0000274 ! fertility
 
@@ -1529,7 +1529,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000279
 name: male fertility
-def: "A fertility quality of the male of initiating, sustaining, or supporting reproduction." [PATO :GVG]
+def: "A fertility quality of the male of initiating, sustaining, or supporting reproduction." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0000274 ! fertility
 
@@ -1621,7 +1621,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000297
 name: arrested
-def: "A duration in which the end point is shorted before natural end point (prematurely finishing)." [XX:<new dbxref>]
+def: "A duration in which the end point is shorted before natural end point (prematurely finishing)." [PATOC:GVG]
 subset: value_slim
 related_synonym: "incomplete" []
 is_a: PATO:0001309 ! duration
@@ -1634,14 +1634,14 @@ is_obsolete: true
 [Term]
 id: PATO:0000299
 name: mobile
-def: "A mobility quality of being incapable to move freely." [PATO :GVG]
+def: "A mobility quality of being incapable to move freely." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000004 ! mobility
 
 [Term]
 id: PATO:0000300
 name: immobile
-def: "A mobility quality of being capable to move freely." [PATO :GVG]
+def: "A mobility quality of being capable to move freely." [PATOC:GVG]
 subset: value_slim
 related_synonym: "fixed" []
 is_a: PATO:0000004 ! mobility
@@ -1659,14 +1659,14 @@ is_obsolete: true
 [Term]
 id: PATO:0000303
 name: fast speed
-def: "A speed which is relative high." [PATO :GVG]
+def: "A speed which is relative high." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000008 ! speed/velocity
 
 [Term]
 id: PATO:0000304
 name: slow speed
-def: "A speed which is relative low." [XX:<new dbxref>]
+def: "A speed which is relative low." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000008 ! speed/velocity
 
@@ -1735,7 +1735,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000317
 name: black
-def: "A color that lacks any hues as parts." [XX:<new dbxref>]
+def: "A color that lacks any hues as parts." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000014 ! color
 
@@ -1775,14 +1775,14 @@ is_a: PATO:0000014 ! color
 [Term]
 id: PATO:0000323
 name: white
-def: "An achromatic color of maximum lightness; the color of objects that reflect nearly all light of all visible wavelengths;" [Dictionary:http\://dictionary.reference.com/]
+def: "An achromatic color of maximum lightness; the color of objects that reflect nearly all light of all visible wavelengths." [Dictionary:http\://dictionary.reference.com/]
 subset: value_slim
 is_a: PATO:0000014 ! color
 
 [Term]
 id: PATO:0000324
 name: yellow
-def: "A color hue with medium wavelength of that portion of the visible spectrum lying between orange and green, evoked in the human observer by radiant energy with wavelengths of approximately 570 to 590 nanometers" [Dictionary:http\://dictionary.reference.com/]
+def: "A color hue with medium wavelength of that portion of the visible spectrum lying between orange and green, evoked in the human observer by radiant energy with wavelengths of approximately 570 to 590 nanometers." [Dictionary:http\://dictionary.reference.com/]
 subset: value_slim
 is_a: PATO:0000014 ! color
 
@@ -1817,7 +1817,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000330
 name: irregular
-def: "A physical quality inhering in a bearer by virtue of lacking pattern." [PATO :GVG]
+def: "A physical quality inhering in a bearer by virtue of lacking pattern." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000060 ! pattern
 
@@ -1893,14 +1893,14 @@ is_obsolete: true
 [Term]
 id: PATO:0000344
 name: compatible
-def: "A compatibility quality of being capable of harmonious coexistence." [PATO :GVG]
+def: "A compatibility quality of being capable of harmonious coexistence." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000021 ! compatibility
 
 [Term]
 id: PATO:0000345
 name: incompatible
-def: "A compatibility quality of being incapable of harmonious coexistence." [PATO :GVG]
+def: "A compatibility quality of being incapable of harmonious coexistence." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000021 ! compatibility
 
@@ -2002,21 +2002,21 @@ is_obsolete: true
 [Term]
 id: PATO:0000365
 name: down
-def: "A direction from a higher to a lower point." [PATO :GVG]
+def: "A direction from a higher to a lower point." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000039 ! direction
 
 [Term]
 id: PATO:0000366
 name: left
-def: "A direction that is similar to the direction of an object to the north when it faces east." [PATO :GVG]
+def: "A direction that is similar to the direction of an object to the north when it faces east." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000039 ! direction
 
 [Term]
 id: PATO:0000367
 name: right
-def: "A direction that is similar to the direction of an object to the north when it faces west." [PATO :GVG]
+def: "A direction that is similar to the direction of an object to the north when it faces west." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000039 ! direction
 
@@ -2033,7 +2033,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000370
 name: up
-def: "A direction from a  lower to a higher point." [PATO :GVG]
+def: "A direction from a lower to a higher point." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000039 ! direction
 
@@ -2055,14 +2055,14 @@ is_obsolete: true
 [Term]
 id: PATO:0000374
 name: long distance
-def: "A distance which is greater relative to the normal or average." [PATO :GVG]
+def: "A distance which is greater relative to the normal or average." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000040 ! distance
 
 [Term]
 id: PATO:0000375
 name: short distance
-def: "A distance which is lesser relative to the normal or average." [PATO :GVG]
+def: "A distance which is lesser relative to the normal or average." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000040 ! distance
 
@@ -2089,14 +2089,14 @@ is_obsolete: true
 [Term]
 id: PATO:0000380
 name: frequent
-def: "A frequency which is relative high." [XX:<new dbxref>]
+def: "A frequency which is relative high." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000044 ! frequency
 
 [Term]
 id: PATO:0000381
 name: infrequent
-def: "A frequency which is relative low." [XX:<new dbxref>]
+def: "A frequency which is relative low." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000044 ! frequency
 
@@ -2127,7 +2127,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000386
 name: hard
-def: "A hardness quality of being rigid and resistant to pressure." [PATO :GVG]
+def: "A hardness quality of being rigid and resistant to pressure." [PATOC:GVG]
 subset: value_slim
 related_synonym: "impenetrable" []
 related_synonym: "tough" []
@@ -2136,7 +2136,7 @@ is_a: PATO:0000048 ! hardness
 [Term]
 id: PATO:0000387
 name: soft
-def: "A hardness quality of giving little resistance to pressure" [PATO :GVG]
+def: "A hardness quality of giving little resistance to pressure" [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000048 ! hardness
 
@@ -2234,14 +2234,14 @@ is_a: PATO:0000052 ! shape
 [Term]
 id: PATO:0000405
 name: curled
-def: "A shape quality of having parallel chains in undulate fashion on the border." [PATO:]
+def: "A shape quality of having parallel chains in undulate fashion on the border." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
 [Term]
 id: PATO:0000406
 name: curved
-def: "A shape quality inhering in a bearer by virtue of having or marked by a curve or smoothly rounded bend" [WordNet :WordNet "http://wordnet.princeton.edu/"]
+def: "A shape quality inhering in a bearer by virtue of having or marked by a curve or smoothly rounded bend." [WordNet :WordNet "http://wordnet.princeton.edu/"]
 subset: value_slim
 related_synonym: "curled" []
 is_a: PATO:0000052 ! shape
@@ -2249,7 +2249,7 @@ is_a: PATO:0000052 ! shape
 [Term]
 id: PATO:0000407
 name: flat
-def: "A shape lacking depth." [PATO :GVG]
+def: "A shape lacking depth." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
@@ -2438,7 +2438,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000440
 name: regular
-def: "A physical quality inhering in a bearer by virtue of having pattern." [PATO :GVG]
+def: "A physical quality inhering in a bearer by virtue of having pattern." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000060 ! pattern
 
@@ -2508,14 +2508,14 @@ is_obsolete: true
 [Term]
 id: PATO:0000453
 name: glabrous
-def: "A pilosity quality of having no hairs, projections, or pubescence" [PATO :GVG]
+def: "A pilosity quality of having no hairs, projections, or pubescence" [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000066 ! pilosity
 
 [Term]
 id: PATO:0000454
 name: hairy
-def: "A pilosity quality of being covered with hair or hairlike projections" [PATO :GVG]
+def: "A pilosity quality of being covered with hair or hairlike projections" [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000066 ! pilosity
 
@@ -2700,14 +2700,14 @@ is_obsolete: true
 [Term]
 id: PATO:0000487
 name: responsive
-def: "A quality inhering in a bearer by virtue of \nthe presence of its reaction to a stimulus or an agent." [PATO :GVG]
+def: "A quality inhering in a bearer by virtue of \nthe presence of its reaction to a stimulus or an agent." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000077 ! response
 
 [Term]
 id: PATO:0000488
 name: unresponsive
-def: "A quality inhering in a bearer by virtue of \nthe lack of its reaction to a stimulus or an agent." [PATO :GVG]
+def: "A quality inhering in a bearer by virtue of the lack of its reaction to a stimulus or an agent." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000077 ! response
 
@@ -2783,7 +2783,7 @@ is_a: PATO:0000083 ! phase
 [Term]
 id: PATO:0000502
 name: delayed
-def: "A duration in which process ends before natural start point." [PATO:GVG]
+def: "A duration in which process ends before natural start point." [PATOC:GVG]
 subset: value_slim
 related_synonym: "late" []
 is_a: PATO:0001309 ! duration
@@ -2844,7 +2844,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000513
 name: insensitive
-def: "A quality of lacking sensitivity." [XX:<new dbxref>]
+def: "A quality of lacking sensitivity." [PATOC:GVG]
 subset: value_slim
 related_synonym: "resistant" []
 is_a: PATO:0000085 ! sensitivity
@@ -2857,14 +2857,14 @@ is_obsolete: true
 [Term]
 id: PATO:0000515
 name: tolerant
-def: "A resistance quality inhering in a bearer by virtue of its ability to tolarete or being insensitive to a stimulus." [PATO :GVG]
+def: "A resistance quality inhering in a bearer by virtue of its ability to tolarete or being insensitive to a stimulus." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001046 ! resistance
 
 [Term]
 id: PATO:0000516
 name: sensitive
-def: "A quality of having sensitivity." [XX:<new dbxref>]
+def: "A quality of having sensitivity." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000085 ! sensitivity
 
@@ -3134,14 +3134,14 @@ is_obsolete: true
 [Term]
 id: PATO:0000569
 name: short height
-def: "A height which is relative high." [PATO :GVG]
+def: "A height which is relative high." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000119 ! height
 
 [Term]
 id: PATO:0000570
 name: tall height
-def: "A height which is relative small." [PATO :GVG]
+def: "A height which is relative small." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000119 ! height
 
@@ -3158,14 +3158,14 @@ is_obsolete: true
 [Term]
 id: PATO:0000573
 name: long length
-def: "A length which is relative large." [XX:<new dbxref>]
+def: "A length which is relative large." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000122 ! length
 
 [Term]
 id: PATO:0000574
 name: short length
-def: "A length which is relative small." [XX:<new dbxref>]
+def: "A length which is relative small." [PATOC:GVG]
 subset: value_slim
 related_synonym: "shortened" []
 related_synonym: "stubby" []
@@ -3189,14 +3189,14 @@ is_obsolete: true
 [Term]
 id: PATO:0000578
 name: large mass
-def: "A mass which is relative large." [PATO :GVG]
+def: "A mass which is relative large." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000125 ! mass
 
 [Term]
 id: PATO:0000579
 name: small mass
-def: "A mass which is relative small." [PATO :GVG]
+def: "A mass which is relative small." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000125 ! mass
 
@@ -3213,14 +3213,14 @@ is_obsolete: true
 [Term]
 id: PATO:0000582
 name: heavy
-def: "A weight which is relative high." [PATO :GVG]
+def: "A weight which is relative high." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000128 ! weight
 
 [Term]
 id: PATO:0000583
 name: light weight
-def: "A weight which is relative low." [PATO :GVG]
+def: "A weight which is relative low." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000128 ! weight
 
@@ -3241,7 +3241,7 @@ is_a: PATO:0000117 ! size
 [Term]
 id: PATO:0000586
 name: large size
-def: "A size which is greater relative to the normal or average." [PATO :GVG]
+def: "A size which is greater relative to the normal or average." [PATOC:GVG]
 subset: value_slim
 related_synonym: "big" []
 related_synonym: "enlarged" []
@@ -3251,7 +3251,7 @@ is_a: PATO:0000117 ! size
 [Term]
 id: PATO:0000587
 name: small size
-def: "A size which is lesser relative to the normal or average." [PATO :GVG]
+def: "A size which is lesser relative to the normal or average." [PATOC:GVG]
 subset: value_slim
 related_synonym: "tiny" []
 is_a: PATO:0000117 ! size
@@ -3275,14 +3275,14 @@ is_obsolete: true
 [Term]
 id: PATO:0000591
 name: thick
-def: "A thickness which is relative low" [PATO :GVG]
+def: "A thickness which is relative low" [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000915 ! thickness
 
 [Term]
 id: PATO:0000592
 name: thin
-def: "A thickness which is relative low" [PATO :GVG]
+def: "A thickness which is relative low" [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000915 ! thickness
 
@@ -3299,14 +3299,14 @@ is_obsolete: true
 [Term]
 id: PATO:0000595
 name: large volume
-def: "A volume which is relative high." [PATO :GVG]
+def: "A volume which is relative high." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000918 ! volume
 
 [Term]
 id: PATO:0000596
 name: small volume
-def: "A volume which is relative low." [PATO :GVG]
+def: "A volume which is relative low." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000918 ! volume
 
@@ -3323,14 +3323,14 @@ is_obsolete: true
 [Term]
 id: PATO:0000599
 name: narrow
-def: "A width which is relative small." [PATO :GVG]
+def: "A width which is relative small." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000921 ! width
 
 [Term]
 id: PATO:0000600
 name: wide
-def: "A width which is relative large." [PATO :GVG]
+def: "A width which is relative large." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000921 ! width
 
@@ -3421,7 +3421,7 @@ is_a: PATO:0000140 ! placement
 [Term]
 id: PATO:0000616
 name: asymmetrical
-def: "A symmetry quality inhering in a bearer by virtue of lacking symmetry." [PATO :GVG]
+def: "A symmetry quality inhering in a bearer by virtue of lacking symmetry." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000965 ! symmetry
 
@@ -3476,7 +3476,7 @@ is_a: PATO:0000140 ! placement
 [Term]
 id: PATO:0000625
 name: inverted
-def: "to be completely turned about in position or direction" [PATO :GVG]
+def: "to be completely turned about in position or direction" [PATOC:GVG]
 subset: value_slim
 exact_synonym: "backward" []
 exact_synonym: "reversed" []
@@ -3521,7 +3521,7 @@ is_a: PATO:0000140 ! placement
 [Term]
 id: PATO:0000632
 name: symmetrical
-def: "A symmetry quality inhering in a bearer by virtue of having symmetry." [PATO :GVG]
+def: "A symmetry quality inhering in a bearer by virtue of having symmetry." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000965 ! symmetry
 
@@ -3767,7 +3767,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000677
 name: cold
-def: "A temperature which is relative low" [gg:]
+def: "A temperature which is relative low." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000146 ! temperature
 
@@ -3860,7 +3860,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000694
 name: premature
-def: "A duration in which the process starts before natural start point." [XX:<new dbxref>]
+def: "A duration in which the process starts before natural start point." [PATOC:GVG]
 subset: value_slim
 related_synonym: "early" []
 is_a: PATO:0001309 ! duration
@@ -3894,14 +3894,14 @@ is_obsolete: true
 [Term]
 id: PATO:0000700
 name: rough
-def: "A texture quality inhering in a bearer by virtue of its irregular surface." [PATO :GVG]
+def: "A texture quality inhering in a bearer by virtue of its irregular surface." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000150 ! texture
 
 [Term]
 id: PATO:0000701
 name: smooth
-def: "A texture quality inhering in a bearer by virtue of pocessing a surface free of roughness or irregularities." [PATO :GVG]
+def: "A texture quality inhering in a bearer by virtue of pocessing a surface free of roughness or irregularities." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000150 ! texture
 
@@ -3994,14 +3994,14 @@ is_obsolete: true
 [Term]
 id: PATO:0000718
 name: lethal (sensu genetics)
-def: "A viability quality inhering in a bearer or a population by virtue of the bearer's inability to survive and develop normally or the long term survival inability of a given population." [PATO :GVG]
+def: "A viability quality inhering in a bearer or a population by virtue of the bearer's inability to survive and develop normally or the long term survival inability of a given population." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000169 ! viability
 
 [Term]
 id: PATO:0000719
 name: viable
-def: "A viability quality inhering in a bearer or a population by virtue of the bearer's ability to survive and develop normally or the long term survival ability of a given population." [PATO :GVG]
+def: "A viability quality inhering in a bearer or a population by virtue of the bearer's ability to survive and develop normally or the long term survival ability of a given population." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000169 ! viability
 
@@ -4251,49 +4251,49 @@ is_obsolete: true
 [Term]
 id: PATO:0000767
 name: increased consumption
-def: "A consumption which is relative high." [PATO :GVG]
+def: "A consumption which is relative high." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000187 ! consumption
 
 [Term]
 id: PATO:0000768
 name: decreased consumption
-def: "A consumption which is relative low." [PATO :GVG]
+def: "A consumption which is relative low." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000187 ! consumption
 
 [Term]
 id: PATO:0000769
 name: coordinated
-def: "A coordination quality of having skilful and effective interaction of movement." [PATO :GVG]
+def: "A coordination quality of having skilful and effective interaction of movement." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000188 ! coordination
 
 [Term]
 id: PATO:0000770
 name: uncoordinated
-def: "A coordination quality of lacking skilful and effective interaction of movement." [PATO :GVG]
+def: "A coordination quality of lacking skilful and effective interaction of movement." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000188 ! coordination
 
 [Term]
 id: PATO:0000771
 name: aversion
-def: "A preference quality of disliking a perceived stimulus." [PATO :GVG]
+def: "A preference quality of disliking a perceived stimulus." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000773 ! preference
 
 [Term]
 id: PATO:0000772
 name: indifference
-def: "A preference quality of having no preference to a perceived stimulus." [PATO :GVG]
+def: "A preference quality of having no preference to a perceived stimulus." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000773 ! preference
 
 [Term]
 id: PATO:0000773
 name: preference
-def: "A discrimination quality of liking a perceived stimulus." [PATO :GVG]
+def: "A discrimination quality of liking a perceived stimulus." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0000189 ! discrimination
 
@@ -4870,7 +4870,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000888
 name: female fertile
-def: "A female fertility quality of being capable of initiating, sustaining, or supporting reproduction." [PATO :GVG]
+def: "A female fertility quality of being capable of initiating, sustaining, or supporting reproduction." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000277 ! female fertility
 
@@ -4882,7 +4882,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000890
 name: male sterile
-def: "A male fertility quality of being incapable of initiating, sustaining, or supporting reproduction." [PATO :GVG]
+def: "A male fertility quality of being incapable of initiating, sustaining, or supporting reproduction." [PATOC:GVG]
 subset: value_slim
 related_synonym: "male infertile" []
 is_a: PATO:0000279 ! male fertility
@@ -4890,14 +4890,14 @@ is_a: PATO:0000279 ! male fertility
 [Term]
 id: PATO:0000891
 name: male fertile
-def: "A male fertility quality of being capable of initiating, sustaining, or supporting reproduction." [PATO :GVG]
+def: "A male fertility quality of being capable of initiating, sustaining, or supporting reproduction." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000279 ! male fertility
 
 [Term]
 id: PATO:0000892
 name: female sterile
-def: "A female fertility quality of being incapable of initiating, sustaining, or supporting reproduction." [PATO :GVG]
+def: "A female fertility quality of being incapable of initiating, sustaining, or supporting reproduction." [PATOC:GVG]
 subset: value_slim
 related_synonym: "female infertile" []
 is_a: PATO:0000277 ! female fertility
@@ -5023,7 +5023,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000915
 name: thickness
-def: "A physical quality which is equal to the dimension through an object as opposed to its length or width." [WordNet:WordNet "wordnet.princeton.edu/"]
+def: "A physical quality which is equal to the dimension through an object as opposed to its length or width." [WordNet:WordNet "http://wordnet.princeton.edu"]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
@@ -5040,7 +5040,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000918
 name: volume
-def: "A physical quality of the amount of 3-dimensional space an object occupies." [PATO :GVG]
+def: "A physical quality of the amount of 3-dimensional space an object occupies." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
@@ -5057,7 +5057,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000921
 name: width
-def: "A physical quality which is equal to the distance from one side of an object to another side which is opposite." [PATO :GVG]
+def: "A physical quality which is equal to the distance from one side of an object to another side which is opposite." [PATOC:GVG]
 subset: attribute_slim
 related_synonym: "breadth" []
 is_a: PATO:0001018 ! physical quality
@@ -5181,28 +5181,28 @@ is_a: PATO:0000141 ! structure
 [Term]
 id: PATO:0000944
 name: pointed
-def: "A sharp or tapered end" [PATO :GVG]
+def: "A sharp or tapered end" [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
 [Term]
 id: PATO:0000945
 name: epinastic
-def: "A downward bending of leaves or other plant parts." [PATO:gg]
+def: "A downward bending of leaves or other plant parts." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
 [Term]
 id: PATO:0000946
 name: oblong
-def: "Having a somewhat elongated form with approximately parallel sides" [PATO:gg]
+def: "Having a somewhat elongated form with approximately parallel sides" [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
 [Term]
 id: PATO:0000947
 name: elliptic
-def: "Elliptic shape" [PATO:gg]
+def: "Oval and narrowing at both ends." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
@@ -5215,14 +5215,14 @@ is_a: PATO:0000052 ! shape
 [Term]
 id: PATO:0000949
 name: fasciated
-def: "Abnormally flattened or coalesced." [PATO:gg]
+def: "Abnormally flattened or coalesced." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
 [Term]
 id: PATO:0000950
 name: grey
-def: "A color that lacks saturation." [PATO :GVG]
+def: "A color that lacks saturation." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000014 ! color
 
@@ -5249,28 +5249,28 @@ is_a: PATO:0000014 ! color
 [Term]
 id: PATO:0000954
 name: pink
-def: "A composite color with parts\nhigh redness, low blueness, high brightness and low\nsaturation" [PATO :GVG]
+def: "A composite color with parts\nhigh redness, low blueness, high brightness and low\nsaturation" [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000014 ! color
 
 [Term]
 id: PATO:0000955
 name: fertile
-def: "A fertility quality of being capable of initiating, sustaining, or supporting reproduction." [PATO :GVG]
+def: "A fertility quality of being capable of initiating, sustaining, or supporting reproduction." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000274 ! fertility
 
 [Term]
 id: PATO:0000956
 name: sterile
-def: "A fertility quality of being incapable of initiating, sustaining, or supporting reproduction." [PATO :GVG]
+def: "A fertility quality of being incapable of initiating, sustaining, or supporting reproduction." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000274 ! fertility
 
 [Term]
 id: PATO:0000957
 name: opacity
-def: "An optical quality which obtains by virtue\nof the ability of the bearer to absorb visible light" [PATO:gg]
+def: "An optical quality which obtains by virtue\nof the ability of the bearer to absorb visible light" [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001300 ! optical quality
 
@@ -5302,7 +5302,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000963
 name: opaque
-def: "Not clear; not transmitting or reflecting light or radiant energy" [PATO:gg]
+def: "Not clear; not transmitting or reflecting light or radiant energy" [PATOC:GVG]
 subset: value_slim
 exact_synonym: "non-transparent" []
 is_a: PATO:0000957 ! opacity
@@ -5317,7 +5317,7 @@ is_a: PATO:0000957 ! opacity
 [Term]
 id: PATO:0000965
 name: symmetry
-def: "A pattern quality of correspondence in size, shape, and relative position of parts on opposite sides of a dividing line or median plane or about a center or axis." [PATO :GVG]
+def: "A pattern quality of correspondence in size, shape, and relative position of parts on opposite sides of a dividing line or median plane or about a center or axis." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0000060 ! pattern
 
@@ -5329,7 +5329,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000967
 name: undulate
-def: "Having a sinuate margin and rippled surface." [PATO:gg]
+def: "Having a sinuate margin and rippled surface." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
@@ -5364,7 +5364,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000973
 name: porosity
-def: "A perneability quality of admitting the passage of gas or liquid through pores or interstices." [PATO:]
+def: "A perneability quality of admitting the passage of gas or liquid through pores or interstices." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0000970 ! permeability
 
@@ -5425,14 +5425,14 @@ is_a: PATO:0000970 ! permeability
 [Term]
 id: PATO:0000984
 name: porous
-def: "A quality of being capable of admitting the passage of gas or liquid through pores or interstices." [PATO:GVG]
+def: "A quality of being capable of admitting the passage of gas or liquid through pores or interstices." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000973 ! porosity
 
 [Term]
 id: PATO:0000985
 name: nonporous
-def: "A quality of being incapable of admitting the passage of gas or liquid through pores or interstices." [PATO:GVG]
+def: "A quality of being incapable of admitting the passage of gas or liquid through pores or interstices." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000973 ! porosity
 
@@ -5469,7 +5469,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000992
 name: viscosity
-def: "A physical quality of fluids describing their internal resistance to flow" [PATO :GVG]
+def: "A physical quality of fluids describing their internal resistance to flow." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
@@ -5501,7 +5501,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000998
 name: viscous
-def: "A viscosity which relative high." [PATO :GVG]
+def: "A viscosity which relative high." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000992 ! viscosity
 
@@ -5539,7 +5539,7 @@ is_obsolete: true
 [Term]
 id: PATO:0001005
 name: latency
-def: "The time that elapses between a stimulus and the response to it" [PATO:gg]
+def: "The time that elapses between a stimulus and the response to it" [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0000165 ! time
 
@@ -5606,14 +5606,14 @@ is_obsolete: true
 [Term]
 id: PATO:0001018
 name: physical quality
-def: "A quality that exists through action of continuants at the physical level of organisation." [PATO:GVG]
+def: "A quality that exists through action of continuants at the physical level of organisation." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0001019
 name: density
-def: "A physical quality which inhers to the bearer by virtue of some influence exerted by its mass." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A physical quality which inhers to the bearer by virtue of some influence exerted by its mass." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
@@ -5626,35 +5626,35 @@ is_a: PATO:0001237 ! monadic quality of continuant
 [Term]
 id: PATO:0001021
 name: energy
-def: "A physical quality inhering in a bearer by virtue of its capacity to do work." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A physical quality inhering in a bearer by virtue of its capacity to do work." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001022
 name: impulse
-def: "A physical quality inhering in a bearer by virtue of the change in its momentum." [PATO :GVG]
+def: "A physical quality inhering in a bearer by virtue of the change in its momentum." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001023
 name: momentum
-def: "A physical quality inhering in a bearer by \nvirtue of its velocity multiplied by its mass" [PATO :GVG]
+def: "A physical quality inhering in a bearer by \nvirtue of its velocity multiplied by its mass" [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001024
 name: power
-def: "A physical quality inhering in a object by virtue of the rate of doing work." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A physical quality inhering in a object by virtue of the rate of doing work." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001025
 name: pressure
-def: "A physical quality that inheres in a bearer in proportion to the amount of force per unit area it exerts." [PATO :GVG]
+def: "A physical quality that inheres in a bearer in proportion to the amount of force per unit area it exerts." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
@@ -5681,28 +5681,28 @@ is_a: PATO:0001018 ! physical quality
 [Term]
 id: PATO:0001029
 name: efficiency
-def: "A physical quality inhering in a bearer by \nvirtue of ratio of the output to the input." [WordNet :WordNet "wordnet.princeton.edu/"]
+def: "A physical quality inhering in a bearer by virtue of ratio of the output to the input." [WordNet :WordNet "http://wordnet.princeton.edu/"]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001030
 name: flux
-def: "A physical quality that exists by virtue of the amount of flow per unit time." [PATO :GVG]
+def: "A physical quality that exists by virtue of the amount of flow per unit time." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0000156 ! temporal
 
 [Term]
 id: PATO:0001031
 name: elasticity
-def: "A physical quality inhering in a bearer by virtue of its capability to recover its size and shape after deformation in any way." [merriam-webster:merriam-webster "http://www.m-w.com/ "]
+def: "A physical quality inhering in a bearer by virtue of its capability to recover its size and shape after deformation in any way." [merriam-webster:merriam-webster "http://www.m-w.com/"]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001032
 name: position
-def: "The particular portion of space occupied by a physical object." [XX:<new dbxref>]
+def: "The particular portion of space occupied by a physical object." [PATOC:GVG]
 subset: attribute_slim
 related_synonym: "location" []
 is_a: PATO:0000132 ! spatial
@@ -5715,14 +5715,14 @@ is_obsolete: true
 [Term]
 id: PATO:0001034
 name: strain
-def: "A physical quality inhering in a bearer by \nvirtue of the relative change in its length or its volume when being stretched or squashed." [PATO :GVG]
+def: "A physical quality inhering in a bearer by \nvirtue of the relative change in its length or its volume when being stretched or squashed." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001035
 name: force
-def: "A physical quality inhering in a object affecting its acceleration." [: "http://thesaurus.maths.org/"]
+def: "A physical quality inhering in a object affecting its acceleration." [thesaurus.maths:thesaurus.maths "http://thesaurus.maths.org/"]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
@@ -5780,7 +5780,7 @@ is_obsolete: true
 [Term]
 id: PATO:0001046
 name: resistance
-def: "A quality inhering in a bearer by virtue of \nits ability or inability to resist to a stimulus." [PATO :GVG]
+def: "A quality inhering in a bearer by virtue of \nits ability or inability to resist to a stimulus." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001237 ! monadic quality of continuant
 
@@ -5821,14 +5821,14 @@ is_a: PATO:0000133 ! angle
 [Term]
 id: PATO:0001053
 name: convex angle
-def: "An angle which is less than or equal to 180 degrees." [: "http://thesaurus.maths.org/"]
+def: "An angle which is less than or equal to 180 degrees." [maths.org:maths.org "http://thesaurus.maths.org/"]
 subset: value_slim
 is_a: PATO:0000133 ! angle
 
 [Term]
 id: PATO:0001054
 name: internal angle
-def: "An angle inside two adjacent sides of a polygon." [PATO :GVG]
+def: "An angle inside two adjacent sides of a polygon." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000133 ! angle
 
@@ -6334,7 +6334,7 @@ is_a: PATO:0001043 ! susceptibility
 [Term]
 id: PATO:0001154
 name: elongated
-def: "A quality inhering in a bearer by virtue of its lenght being notably higher than its width." [WordNet :WordNet "wordnet.princeton.edu/"]
+def: "A quality inhering in a bearer by virtue of its lenght being notably higher than its width." [WordNet :WordNet "http://wordnet.princeton.edu/"]
 subset: value_slim
 is_a: PATO:0000122 ! length
 
@@ -6361,7 +6361,7 @@ is_obsolete: true
 [Term]
 id: PATO:0001159
 name: concentrated
-def: "A concentration which relative high." [PATO :GVG]
+def: "A concentration which relative high." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000033 ! concentration
 
@@ -6373,7 +6373,7 @@ is_obsolete: true
 [Term]
 id: PATO:0001161
 name: diluted
-def: "A concentration which relative low." [PATO :GVG]
+def: "A concentration which relative low." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000033 ! concentration
 
@@ -6390,7 +6390,7 @@ is_obsolete: true
 [Term]
 id: PATO:0001164
 name: dense
-def: "Relative high amount of mass per unit of volume." [XX:<new dbxref>]
+def: "Relative high amount of mass per unit of volume." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001019 ! density
 
@@ -6437,7 +6437,7 @@ is_a: PATO:0001031 ! elasticity
 [Term]
 id: PATO:0001172
 name: inelastic
-def: "An elasticity quality inhering in a bearer by virtue of its inability to recover its size and shape after deformation in any way." [merriam-webster:merriam-webster "http://www.m-w.com/ "]
+def: "An elasticity quality inhering in a bearer by virtue of its inability to recover its size and shape after deformation in any way." [merriam-webster:merriam-webster "http://www.m-w.com/"]
 subset: value_slim
 is_a: PATO:0001031 ! elasticity
 
@@ -6469,7 +6469,7 @@ is_obsolete: true
 [Term]
 id: PATO:0001178
 name: resistant
-def: "A resistance quality inhering in a bearer by virtue of its ability to resist to a stimulus." [PATO :GVG]
+def: "A resistance quality inhering in a bearer by virtue of its ability to resist to a stimulus." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001046 ! resistance
 
@@ -6548,7 +6548,7 @@ is_a: PATO:0001032 ! position
 [Term]
 id: PATO:0001192
 name: hyperresponsive
-def: "A quality inhering in a bearer by virtue of \nits excessive reaction to a stimulus or an agent." [PATO :GVG]
+def: "A quality inhering in a bearer by virtue of \nits excessive reaction to a stimulus or an agent." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000077 ! response
 
@@ -6561,7 +6561,7 @@ is_a: PATO:0001032 ! position
 [Term]
 id: PATO:0001194
 name: hyporesponsive
-def: "A quality inhering in a bearer by virtue of \nits limited reaction to a stimulus or an agent." [PATO :GVG]
+def: "A quality inhering in a bearer by virtue of \nits limited reaction to a stimulus or an agent." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000077 ! response
 
@@ -6642,7 +6642,7 @@ is_obsolete: true
 [Term]
 id: PATO:0001208
 name: odorless
-def: "A quality of lacking odour." [XX:<new dbxref>]
+def: "A quality of lacking odour." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000058 ! odor
 
@@ -6828,7 +6828,7 @@ is_a: PATO:0000001 ! quality
 [Term]
 id: PATO:0001242
 name: wavelength
-def: "A physical quality which is equal to the distance between repeating units of a wave pattern." [PATO :GVG]
+def: "A physical quality which is equal to the distance between repeating units of a wave pattern." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
@@ -6889,7 +6889,7 @@ is_a: PATO:0000950 ! grey
 [Term]
 id: PATO:0001252
 name: light grey
-def: "A grey that contains high brightness" [PATO :GVG]
+def: "A grey that contains high brightness" [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000950 ! grey
 
@@ -6956,14 +6956,14 @@ is_a: PATO:0000322 ! red
 [Term]
 id: PATO:0001263
 name: dark yellow
-def: "A color consisting of yellow hue and low brightness." [PATO :GVG]
+def: "A color consisting of yellow hue and low brightness." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000324 ! yellow
 
 [Term]
 id: PATO:0001264
 name: light yellow
-def: "A color consisting of yellow hue and high brightness." [PATO :GVG]
+def: "A color consisting of yellow hue and high brightness." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000324 ! yellow
 
@@ -6976,7 +6976,7 @@ is_a: PATO:0000318 ! blue
 [Term]
 id: PATO:0001266
 name: pale blue
-def: "A color consisting of blue hue and low saturation." [PATO :GVG]
+def: "A color consisting of blue hue and low saturation." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000318 ! blue
 
@@ -6989,7 +6989,7 @@ is_a: PATO:0000952 ! brown
 [Term]
 id: PATO:0001268
 name: pale brown
-def: "A color consisting of brown hue and low saturation." [PATO :GVG]
+def: "A color consisting of brown hue and low saturation." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000952 ! brown
 
@@ -7002,7 +7002,7 @@ is_a: PATO:0000319 ! cyan
 [Term]
 id: PATO:0001270
 name: pale cyan
-def: "A color consisting of cyan colour and low saturation." [PATO :GVG]
+def: "A color consisting of cyan colour and low saturation." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000319 ! cyan
 
@@ -7015,7 +7015,7 @@ is_a: PATO:0000320 ! green
 [Term]
 id: PATO:0001272
 name: pale green
-def: "A color consisting of green hue and low saturation." [PATO :GVG]
+def: "A color consisting of green hue and low saturation." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000320 ! green
 
@@ -7052,7 +7052,7 @@ is_a: PATO:0000953 ! orange
 [Term]
 id: PATO:0001278
 name: pale orange
-def: "A color consisting of orange hue and low saturation." [PATO :GVG]
+def: "A color consisting of orange hue and low saturation." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000953 ! orange
 
@@ -7065,7 +7065,7 @@ is_a: PATO:0000954 ! pink
 [Term]
 id: PATO:0001280
 name: pale pink
-def: "A color consisting of pale color and low saturation." [PATO :GVG]
+def: "A color consisting of pale color and low saturation." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000954 ! pink
 
@@ -7078,7 +7078,7 @@ is_a: PATO:0000951 ! purple
 [Term]
 id: PATO:0001282
 name: pale purple
-def: "A color consisting of purple color and low saturation." [PATO :GVG]
+def: "A color consisting of purple color and low saturation." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000951 ! purple
 
@@ -7098,14 +7098,14 @@ is_a: PATO:0000322 ! red
 [Term]
 id: PATO:0001285
 name: bright yellow
-def: "A color consisting of yellow hue and high saturation." [PATO :GVG]
+def: "A color consisting of yellow hue and high saturation." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000324 ! yellow
 
 [Term]
 id: PATO:0001286
 name: pale yellow
-def: "A color consisting of yellow hue and low saturation." [PATO :GVG]
+def: "A color consisting of yellow hue and low saturation." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000324 ! yellow
 
@@ -7136,35 +7136,35 @@ is_obsolete: true
 [Term]
 id: PATO:0001291
 name: electromagnetic (EM) radiation quality
-def: "A quality that inheres in an object by virtue of how that object interacts with electromagnetic radiation" [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A quality that inheres in an object by virtue of how that object interacts with electromagnetic radiation." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001292
 name: full-spectrum EM radiation quality
-def: "An EM radiation quality that is independent of the EM wavelength range" [XX:<new dbxref>]
+def: "An EM radiation quality that is independent of the EM wavelength range" [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001291 ! electromagnetic (EM) radiation quality
 
 [Term]
 id: PATO:0001293
 name: absorption quality
-def: "A scalar EM radiation quality which obtains by the capacity of the bearer to absorb radiation." [XX:<new dbxref>]
+def: "A scalar EM radiation quality which obtains by the capacity of the bearer to absorb radiation." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001292 ! full-spectrum EM radiation quality
 
 [Term]
 id: PATO:0001294
 name: radiation reflective quality
-def: "A scalar EM radiation quality which obtains by the capacity of the bearer to scatter or reflect radiation" [XX:<new dbxref>]
+def: "A scalar EM radiation quality which obtains by the capacity of the bearer to scatter or reflect radiation" [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001292 ! full-spectrum EM radiation quality
 
 [Term]
 id: PATO:0001295
 name: albedo
-def: "A reflective quality restricted to a particular wavelength." [PATO:CJM]
+def: "A reflective quality restricted to a particular wavelength." [PATOC:cjm]
 comment: Typically used for light, but also applied to full EM spectrum.
 subset: attribute_slim
 is_a: PATO:0001294 ! radiation reflective quality
@@ -7172,42 +7172,42 @@ is_a: PATO:0001294 ! radiation reflective quality
 [Term]
 id: PATO:0001296
 name: luminosity
-def: "A scalar optical quality which obtains by the magnitude of the light emitted by the bearer." [XX:<new dbxref>]
+def: "A scalar optical quality which obtains by the magnitude of the light emitted by the bearer." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001300 ! optical quality
 
 [Term]
 id: PATO:0001297
 name: reflectivity
-def: "A reflective quality spanning the full EM spectrum" [XX:<new dbxref>]
+def: "A reflective quality spanning the full EM spectrum" [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001294 ! radiation reflective quality
 
 [Term]
 id: PATO:0001298
 name: phosphorescence
-def: "A fluorescence in which the emittence continues after the absorption has ceased." [XX:<new dbxref>]
+def: "A fluorescence in which the emittence continues after the absorption has ceased." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000018 ! fluorescence
 
 [Term]
 id: PATO:0001299
 name: radiation emitting quality
-def: "A scalar EM radiation quality which obtains by the capacity of the bearer to emit radiation." [XX:<new dbxref>]
+def: "A scalar EM radiation quality which obtains by the capacity of the bearer to emit radiation." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001292 ! full-spectrum EM radiation quality
 
 [Term]
 id: PATO:0001300
 name: optical quality
-def: "An EM radiation quality in which the EM radiation is within the fiat range of the spectrum visible deemed to be light." [XX:<new dbxref>]
+def: "An EM radiation quality in which the EM radiation is within the fiat range of the spectrum visible deemed to be light." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001291 ! electromagnetic (EM) radiation quality
 
 [Term]
 id: PATO:0001301
 name: chromatic property
-def: "An optical quality that obtains by virtue of the mix and magnitude of wavelengths in the light perceived by the observer." [XX:<new dbxref>]
+def: "An optical quality that obtains by virtue of the mix and magnitude of wavelengths in the light perceived by the observer." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001300 ! optical quality
 
@@ -7227,7 +7227,7 @@ is_a: PATO:0001239 ! monadic quality of occurrent
 [Term]
 id: PATO:0001304
 name: variability of temperature
-def: "The quality of temperature of varying or changing." [gg:]
+def: "The quality of temperature of varying or changing." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001303 ! variability
 
@@ -7241,28 +7241,28 @@ is_a: PATO:0000146 ! temperature
 [Term]
 id: PATO:0001306
 name: decreased temperature
-def: "A temperature which is lesser relative to the normal or average temperature" [PATO :GVG]
+def: "A temperature which is lesser relative to the normal or average temperature." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000146 ! temperature
 
 [Term]
 id: PATO:0001307
 name: decreased variation of temperature
-def: "The state of being lesser relative to the normal or average in respect to the quality of temperature of varying or changing." [PATO:GVG]
+def: "The state of being lesser relative to the normal or average in respect to the quality of temperature of varying or changing." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001304 ! variability of temperature
 
 [Term]
 id: PATO:0001308
 name: increased variation of  temperature
-def: "The state of being greater relative to the normal or average in respect to the quality of temperature of varying or changing." [PATO:GVG]
+def: "The state of being greater relative to the normal or average in respect to the quality of temperature of varying or changing." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001304 ! variability of temperature
 
 [Term]
 id: PATO:0001309
 name: duration
-def: "A quaility of occurrent that exists by virtue of the start and end points of the process." [XX:<new dbxref>]
+def: "A quaility of occurrent that exists by virtue of the start and end points of the process." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001239 ! monadic quality of occurrent
 
@@ -7276,7 +7276,7 @@ is_a: PATO:0001309 ! duration
 [Term]
 id: PATO:0001311
 name: decreased duration of temperature
-def: "A duration of temperature which is lesser relative to the normal or average  enduring or continuing in time." [gg:]
+def: "A duration of temperature which is lesser relative to the normal or average enduring or continuing in time." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001310 ! duration of temperature
 
@@ -7290,14 +7290,14 @@ is_a: PATO:0001310 ! duration of temperature
 [Term]
 id: PATO:0001313
 name: invariant temperature
-def: "The state of not  having or exhibiting variation of temperature." [PATO:GVG]
+def: "The state of not  having or exhibiting variation of temperature." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001304 ! variability of temperature
 
 [Term]
 id: PATO:0001314
 name: variant temperature
-def: "The state of having or exhibiting variation of temperature." [PATO:GVG]
+def: "The state of having or exhibiting variation of temperature." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001304 ! variability of temperature
 
@@ -7311,7 +7311,7 @@ is_a: PATO:0001305 ! increased temperature
 [Term]
 id: PATO:0001316
 name: moderate increased temperature
-def: "A temperature which is increased by a medium degree." [PATO :GVG]
+def: "A temperature which is increased by a medium degree." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001305 ! increased temperature
 
@@ -7325,21 +7325,21 @@ is_a: PATO:0001305 ! increased temperature
 [Term]
 id: PATO:0001318
 name: indiscriminate
-def: "A discrimination quality of being incapable perceiving differences between two or more stimuli." [PATO :GVG]
+def: "A discrimination quality of being incapable perceiving differences between two or more stimuli." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000189 ! discrimination
 
 [Term]
 id: PATO:0001319
 name: discriminate
-def: "A discrimination quality of being capable perceiving differences between two or more stimuli.." [PATO :GVG]
+def: "A discrimination quality of being capable of perceiving differences between two or more stimuli." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000189 ! discrimination
 
 [Term]
 id: PATO:0001320
 name: pubescent hair
-def: "A pilosity quality of being covered with short hairs or soft down." [PATO :GVG]
+def: "A pilosity quality of being covered with short hairs or soft down." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000066 ! pilosity
 
@@ -7375,7 +7375,7 @@ is_a: PATO:0000965 ! symmetry
 [Term]
 id: PATO:0001325
 name: radial symmetry
-def: "A symmetry quality inhering in a bearer by virtue of having equal proportion around a central point or axis." [PATO :GVG]
+def: "A symmetry quality inhering in a bearer by virtue of having equal proportion around a central point or axis." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000965 ! symmetry
 
@@ -7388,35 +7388,35 @@ is_obsolete: true
 [Term]
 id: PATO:0001327
 name: zygomorphic
-def: "A symmetry quality inhering in a bearer by virtue of being capable of division into symmetrical halves by only one longitudinal plane passing through the axis." [WordNet:WordNet "http://wordnet.princeton.edu/perl/webwn"]
+def: "A symmetry quality inhering in a bearer by virtue of being capable of division into symmetrical halves by only one longitudinal plane passing through the axis." [WordNet:WordNet "http://wordnet.princeton.edu"]
 subset: value_slim
 is_a: PATO:0001324 ! bilateral symmetry
 
 [Term]
 id: PATO:0001328
 name: actinomorphic
-def: "A symmetry quality inhering in a bearer by virtue of being capable of division into symmetrical halves by any longitudinal plane passing through the axis." [WordNet:WordNet "http://wordnet.princeton.edu/perl/webwn"]
+def: "A symmetry quality inhering in a bearer by virtue of being capable of division into symmetrical halves by any longitudinal plane passing through the axis." [WordNet:WordNet "http://wordnet.princeton.edu"]
 subset: value_slim
 is_a: PATO:0001325 ! radial symmetry
 
 [Term]
 id: PATO:0001329
 name: flavourful
-def: "A quality of having flavour." [XX:<new dbxref>]
+def: "A quality of having flavour." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000043 ! flavor
 
 [Term]
 id: PATO:0001330
 name: flavourless
-def: "A quality of lacking flavour." [XX:<new dbxref>]
+def: "A quality of lacking flavour." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000043 ! flavor
 
 [Term]
 id: PATO:0001331
 name: odorous
-def: "A quality of having odour." [XX:<new dbxref>]
+def: "A quality of having odour." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000058 ! odor
 
@@ -7429,14 +7429,14 @@ is_a: PATO:0000051 ! morphology
 [Term]
 id: PATO:0001333
 name: temporally extended
-def: "A duration in which tart point commences\nbefore natural start and/or end point extended beyond natural end." [XX:<new dbxref>]
+def: "A duration in which tart point commences\nbefore natural start and/or end point extended beyond natural end." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001309 ! duration
 
 [Term]
 id: PATO:0001334
 name: diameter
-def: "A physical quality which is equal to the length of any straight line segment that passes through the center os a circle and whose endpoints are on the circular boundary." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A physical quality which is equal to the length of any straight line segment that passes through the center os a circle and whose endpoints are on the circular boundary." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: attribute_slim
 is_a: PATO:0000122 ! length
 
@@ -7514,7 +7514,7 @@ is_a: PATO:0001342 ! Saccharomyces cerevisiae mating type
 [Term]
 id: PATO:0001345
 name: h minus
-def: "A S. prombe mating type" [XX:<new dbxref>]
+def: "A S. prombe mating type" [PATOC:GVG]
 subset: value_slim
 exact_synonym: "h -" []
 is_a: PATO:0001343 ! Schizosaccharomyces pombe mating type
@@ -7522,7 +7522,7 @@ is_a: PATO:0001343 ! Schizosaccharomyces pombe mating type
 [Term]
 id: PATO:0001346
 name: h plus
-def: "A S. cerevisiae mating type" [XX:<new dbxref>]
+def: "A S. cerevisiae mating type" [PATOC:GVG]
 subset: value_slim
 exact_synonym: "h+" []
 is_a: PATO:0001343 ! Schizosaccharomyces pombe mating type
@@ -7530,14 +7530,14 @@ is_a: PATO:0001343 ! Schizosaccharomyces pombe mating type
 [Term]
 id: PATO:0001347
 name: F
-def: "A bacterial mating type indicating the presense of F plasmid in a bacterial cell" [MGED:MGED]
+def: "A bacterial mating type indicating the presense of F plasmid in a bacterial cell." [MGED:MGED]
 subset: value_slim
 is_a: PATO:0001335 ! bacterial mating type
 
 [Term]
 id: PATO:0001348
 name: F minus
-def: "A bacterial mating type indicating the absense of F plasmid in a bacterial cell" [MGED:MGED]
+def: "A bacterial mating type indicating the absense of F plasmid in a bacterial cell." [MGED:MGED]
 subset: value_slim
 exact_synonym: "F-" []
 is_a: PATO:0001335 ! bacterial mating type
@@ -7553,266 +7553,266 @@ is_a: PATO:0000047 ! biological sex
 [Term]
 id: PATO:0001350
 name: angular acceleration
-def: "A physical quality inhering in a bearer by virtue of the rate of change of its angular velocity." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A physical quality inhering in a bearer by virtue of the rate of change of its angular velocity." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001351
 name: area density
-def: "A density quality which is equal to the mass exerting an influence on a given area." [Wikipedia :Wikipedia "http://en.wikipedia.org/"]
+def: "A density quality which is equal to the mass exerting an influence on a given area." [Wikipedia :Wikipedia "http://www.wikipedia.org/"]
 subset: attribute_slim
 is_a: PATO:0001019 ! density
 
 [Term]
 id: PATO:0001352
 name: linear density
-def: "A linear quality which is equal to the mass exerting an influence on a one-dimensioal object." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A linear quality which is equal to the mass exerting an influence on a one-dimensioal object." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: attribute_slim
 is_a: PATO:0001019 ! density
 
 [Term]
 id: PATO:0001353
 name: mass density
-def: "A density quality which is equal to the mass exerting an influence on a given volume." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A density quality which is equal to the mass exerting an influence on a given volume." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: attribute_slim
 is_a: PATO:0001019 ! density
 
 [Term]
 id: PATO:0001354
 name: translucent
-def: "low opacity" [XX:<new dbxref>]
+def: "Low opacity." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000957 ! opacity
 
 [Term]
 id: PATO:0001355
 name: convex
-def: "A shape that obtains by virtue of having\ninward facing edges; having a surface or boundary that curves or bulges outward, as the exterior of a sphere." [XX:<new dbxref>]
+def: "A shape that obtains by virtue of having\ninward facing edges; having a surface or boundary that curves or bulges outward, as the exterior of a sphere." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
 [Term]
 id: PATO:0001356
 name: pleomorphic
-def: "A shape quality inhering in a cell by virtue of\nit ability to take on two or more different shapes\nduring its life cycle" [XX:<new dbxref>]
+def: "A shape quality inhering in a cell by virtue of\nit ability to take on two or more different shapes\nduring its life cycle" [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
 [Term]
 id: PATO:0001357
 name: pulvinate
-def: "A shape quality inhering in a colony shaped like a cushion or has a marked convex cushion-like form" [XX:<new dbxref>]
+def: "A shape quality inhering in a colony shaped like a cushion or has a marked convex cushion-like form" [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
 [Term]
 id: PATO:0001358
 name: umbonate
-def: "having a knob or knoblike protuberance" [XX:<new dbxref>]
+def: "Having a knob or knoblike protuberance." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
 [Term]
 id: PATO:0001359
 name: rugose
-def: "having many wrinkles or creases on the surface" [XX:<new dbxref>]
+def: "having many wrinkles or creases on the surface" [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
 [Term]
 id: PATO:0001360
 name: filamentous
-def: "having thin filamentous extensions at itsedge" [XX:<new dbxref>]
+def: "Having thin filamentous extensions at itsedge." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
 [Term]
 id: PATO:0001361
 name: warty
-def: "A texture quality inhering in a bearer by virtue of being covered with warts or projections that resemble warts resulting in a hard rough surface." [PATO :GVG]
+def: "A texture quality inhering in a bearer by virtue of being covered with warts or projections that resemble warts resulting in a hard rough surface." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000150 ! texture
 
 [Term]
 id: PATO:0001362
 name: fragile
-def: "Easily damaged or disrupted; brittle butyraceous - resembling butter in appearance and consistency" [XX:<new dbxref>]
+def: "Easily damaged or disrupted; brittle butyraceous - resembling butter in appearance and consistency." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000141 ! structure
 
 [Term]
 id: PATO:0001363
 name: spiral
-def: "plane curve traced by a point circling about\nthe center but at increasing distances from the center" [XX:<new dbxref>]
+def: "plane curve traced by a point circling about\nthe center but at increasing distances from the center" [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
 [Term]
 id: PATO:0001364
 name: rhizoidal
-def: "having root like extensions radiating from\nits center" [XX:<new dbxref>]
+def: "having root like extensions radiating from\nits center" [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
 [Term]
 id: PATO:0001365
 name: spiny
-def: "having spines, thorns or similar stiff\nprojections on its surface" [XX:<new dbxref>]
+def: "having spines, thorns or similar stiff\nprojections on its surface" [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
 [Term]
 id: PATO:0001366
 name: punctiform
-def: "small and resembling a point" [XX:<new dbxref>]
+def: "small and resembling a point" [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
 [Term]
 id: PATO:0001367
 name: lobate
-def: "a morphological quality in which the bearer\nhas deeply undulated edges forming lobes" [XX:<new dbxref>]
+def: "a morphological quality in which the bearer\nhas deeply undulated edges forming lobes" [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
 [Term]
 id: PATO:0001368
 name: erose
-def: "having an irregularly toothed edge" [XX:<new dbxref>]
+def: "Having an irregularly toothed edge." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
 [Term]
 id: PATO:0001369
 name: raised
-def: "is a thick colony that appear above the medium\nsurface with terraced edges" [XX:<new dbxref>]
+def: "is a thick colony that appear above the medium\nsurface with terraced edges" [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
 [Term]
 id: PATO:0001370
 name: viscid
-def: "A texture quality inhering in a bearer by virtue of being covered with a sticky or clammy coating" [PATO :GVG]
+def: "A texture quality inhering in a bearer by virtue of being covered with a sticky or clammy coating." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000150 ! texture
 
 [Term]
 id: PATO:0001371
 name: mucoid
-def: "consistency of mucus" [XX:<new dbxref>]
+def: "consistency of mucus" [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
 [Term]
 id: PATO:0001372
 name: refractivity
-def: "A reflective quality spanning the full EM  spectrum." [XX:<new dbxref>]
+def: "A reflective quality spanning the full EM  spectrum." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001294 ! radiation reflective quality
 
 [Term]
 id: PATO:0001373
 name: glistening
-def: "Reflecting lots of light." [XX:<new dbxref>]
+def: "Reflecting lots of light." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001297 ! reflectivity
 
 [Term]
 id: PATO:0001374
 name: ploidy
-def: "A cellular quality defined by the number of homologous sets of chromosomes in the nucleus or primary chromosome-containing compartment of the cell, each set essentially coding for all the biological traits of the organism." [Wikipedia:Wikipedia "http://en.wikipedia.org"]
+def: "A cellular quality defined by the number of homologous sets of chromosomes in the nucleus or primary chromosome-containing compartment of the cell, each set essentially coding for all the biological traits of the organism." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: attribute_slim
 is_a: PATO:0001396 ! cellular quality
 
 [Term]
 id: PATO:0001375
 name: haploid
-def: "A ploidy quality defined by the number of chromosomes in a gamete of an individual." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A ploidy quality defined by the number of chromosomes in a gamete of an individual." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001374 ! ploidy
 
 [Term]
 id: PATO:0001376
 name: monoploid
-def: "A ploidy quality defined by the number of unique chromosomes in a single complete set." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A ploidy quality defined by the number of unique chromosomes in a single complete set." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001374 ! ploidy
 
 [Term]
 id: PATO:0001377
 name: polyploid
-def: "A ploidy quality inhering in a bearer by virtue of containing more than two homologous sets of chromosomes." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A ploidy quality inhering in a bearer by virtue of containing more than two homologous sets of chromosomes." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001374 ! ploidy
 
 [Term]
 id: PATO:0001378
 name: autopolyploid
-def: "A polyploidy quality inhering in a bearer by virtue of containing chromosomes derived from a single species." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A polyploidy quality inhering in a bearer by virtue of containing chromosomes derived from a single species." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001377 ! polyploid
 
 [Term]
 id: PATO:0001379
 name: allopolyploidy
-def: "A polyploidy quality inhering in a bearer by virtue of containing chromosomes derived from different species." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A polyploidy quality inhering in a bearer by virtue of containing chromosomes derived from different species." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001377 ! polyploid
 
 [Term]
 id: PATO:0001380
 name: paleopolyploid
-def: "A polyploidy quality inhering in a bearer by virtue of having an ancient polyploid ancestor." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A polyploidy quality inhering in a bearer by virtue of having an ancient polyploid ancestor." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001377 ! polyploid
 
 [Term]
 id: PATO:0001381
 name: triploid
-def: "A polyploidy quality inhering in a bearer by virtue of containing three homologous sets of chromosomes." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A polyploidy quality inhering in a bearer by virtue of containing three homologous sets of chromosomes." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001377 ! polyploid
 
 [Term]
 id: PATO:0001382
 name: tetraploid
-def: "A polyploidy quality inhering in a bearer by virtue of containing four homologous sets of chromosomes." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A polyploidy quality inhering in a bearer by virtue of containing four homologous sets of chromosomes." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001377 ! polyploid
 
 [Term]
 id: PATO:0001383
 name: pentaploid
-def: "A polyploidy quality inhering in a bearer by virtue of containing five homologous sets of chromosomes." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A polyploidy quality inhering in a bearer by virtue of containing five homologous sets of chromosomes." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001377 ! polyploid
 
 [Term]
 id: PATO:0001384
 name: hexaploid
-def: "A polyploidy quality inhering in a bearer by virtue of containing four homologous sets of chromosomes." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A polyploidy quality inhering in a bearer by virtue of containing four homologous sets of chromosomes." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001377 ! polyploid
 
 [Term]
 id: PATO:0001385
 name: aneuploid
-def: "A ploidy quality inhering in a bearer by virtue of containing a non-integral multiple of the monoploid number, due to extra or missing chromosomes." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A ploidy quality inhering in a bearer by virtue of containing a non-integral multiple of the monoploid number, due to extra or missing chromosomes." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001374 ! ploidy
 
 [Term]
 id: PATO:0001386
 name: monosomy
-def: "An aneuploidy quality inhering in a bearer by virtue of containing only one chromosome from a pair in a cell's nucleus." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "An aneuploidy quality inhering in a bearer by virtue of containing only one chromosome from a pair in a cell's nucleus." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001385 ! aneuploid
 
 [Term]
 id: PATO:0001387
 name: disomy
-def: "An aneuploidy quality inhering in a bearer by virtue of containing only two chromosome from a pair in a cell's nucleus." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "An aneuploidy quality inhering in a bearer by virtue of containing only two chromosome from a pair in a cell's nucleus." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 comment: For diploid organisms, such as humans, it is the normal condition, whilst for organisms that are normally triploid or above, disomy is an aneuploidy.
 subset: value_slim
 is_a: PATO:0001385 ! aneuploid
@@ -7820,49 +7820,49 @@ is_a: PATO:0001385 ! aneuploid
 [Term]
 id: PATO:0001388
 name: uniparental disomy
-def: "A disomy quality inhering in a bearer by virtue of containing two copies of the chromosome from one of the parents (with no contribution from the other parent)." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A disomy quality inhering in a bearer by virtue of containing two copies of the chromosome from one of the parents (with no contribution from the other parent)." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001387 ! disomy
 
 [Term]
 id: PATO:0001389
 name: trisomy
-def: "An aneuploidy quality inhering in a bearer by virtue of containing three, instead of two, chromosomes of a particular numbered type in an organism." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "An aneuploidy quality inhering in a bearer by virtue of containing three, instead of two, chromosomes of a particular numbered type in an organism." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001385 ! aneuploid
 
 [Term]
 id: PATO:0001390
 name: partial trisomy
-def: "A trisomy quality inhering in a bearer when part of an extra chromosome is attached to one of the other chromosomes, or if one of the chromosomes has two copies of part of its chromosome." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A trisomy quality inhering in a bearer when part of an extra chromosome is attached to one of the other chromosomes, or if one of the chromosomes has two copies of part of its chromosome." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001389 ! trisomy
 
 [Term]
 id: PATO:0001391
 name: mosaic trisomy
-def: "A trisomy quality inhering in a bearer where extra chromosomal material exists in only some of the organism's cells." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A trisomy quality inhering in a bearer where extra chromosomal material exists in only some of the organism's cells." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001389 ! trisomy
 
 [Term]
 id: PATO:0001392
 name: endopolyploid
-def: "A polyploidy quality inhering in a bearer whose chromosome number has been increased by endomitosis and for which the degree of ploidy is proportional to the number of times that endomitosis has taken place." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A polyploidy quality inhering in a bearer whose chromosome number has been increased by endomitosis and for which the degree of ploidy is proportional to the number of times that endomitosis has taken place." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001377 ! polyploid
 
 [Term]
 id: PATO:0001393
 name: euploid
-def: "A ploidy quality inhering in a bearer by virtue of containing an integral multiple of the monoploid number, possibly excluding the sex-determining chromosomes." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A ploidy quality inhering in a bearer by virtue of containing an integral multiple of the monoploid number, possibly excluding the sex-determining chromosomes." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001374 ! ploidy
 
 [Term]
 id: PATO:0001394
 name: diploid
-def: "A ploidy quality inhering in a bearer by virtue of having two copies (homologs) of each chromosome, usually one from the mother and one from the father." [Wikipedia :Wikipedia "http://en.wikipedia.org/"]
+def: "A ploidy quality inhering in a bearer by virtue of having two copies (homologs) of each chromosome, usually one from the mother and one from the father." [Wikipedia :Wikipedia "http://www.wikipedia.org/"]
 comment: The exact number may be one or two different from the 2n number and still be classified as diploidy (although with aneuploidy). Nearly all mammals are diploid organisms, although all individuals have some small fracton of cells that are polyploidy.
 subset: value_slim
 is_a: PATO:0001374 ! ploidy
@@ -7870,42 +7870,42 @@ is_a: PATO:0001374 ! ploidy
 [Term]
 id: PATO:0001395
 name: haplodiploid
-def: "A diploidy quality inhering in a bearer in which one of the sexes has haploid cells and the other has diploid cells." [Wikipedia :Wikipedia "http://en.wikipedia.org/"]
+def: "A diploidy quality inhering in a bearer in which one of the sexes has haploid cells and the other has diploid cells." [Wikipedia :Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001394 ! diploid
 
 [Term]
 id: PATO:0001396
 name: cellular quality
-def: "A monadic quality of continuant that exists at the cellular level of organisation." [XX:<new dbxref>]
+def: "A monadic quality of continuant that exists at the cellular level of organisation." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0001397
 name: cellular potency
-def: "A cellular quality inhering in a bearer by virtue of having the capacity to differentiate into any mature cell type." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A cellular quality inhering in a bearer by virtue of having the capacity to differentiate into any mature cell type." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: attribute_slim
 is_a: PATO:0001396 ! cellular quality
 
 [Term]
 id: PATO:0001398
 name: self-renewal
-def: "A cellular quality inhering in a bearer by virtue of having the ability to go through numerous cycles of cell division while maintaining the undifferentiated state." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A cellular quality inhering in a bearer by virtue of having the ability to go through numerous cycles of cell division while maintaining the undifferentiated state." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: attribute_slim
 is_a: PATO:0001396 ! cellular quality
 
 [Term]
 id: PATO:0001399
 name: totipotent
-def: "A cellular potency quality inhering in a bearer by virtue of having the capacity to form an entire organism." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A cellular potency quality inhering in a bearer by virtue of having the capacity to form an entire organism." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001397 ! cellular potency
 
 [Term]
 id: PATO:0001400
 name: unipotent
-def: "A cellular potency quality inhering in a bearer by virtue of having the capacity to produce only one cell type." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A cellular potency quality inhering in a bearer by virtue of having the capacity to produce only one cell type." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 comment: Unipotent cells have the quality of self-renewal which distinguishes them from non-stem cells.
 subset: value_slim
 is_a: PATO:0001397 ! cellular potency
@@ -7913,28 +7913,28 @@ is_a: PATO:0001397 ! cellular potency
 [Term]
 id: PATO:0001401
 name: oligopotent
-def: "A cellular potency quality inhering in a bearer by virtue of having the ability to form two or more cell types within one tissue type" [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A cellular potency quality inhering in a bearer by virtue of having the ability to form two or more cell types within one tissue type" [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001397 ! cellular potency
 
 [Term]
 id: PATO:0001402
 name: multipotent
-def: "A cellular potency quality inhering in a bearer by virtue of having the ability to form all cell types within one tissue type." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A cellular potency quality inhering in a bearer by virtue of having the ability to form all cell types within one tissue type." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001397 ! cellular potency
 
 [Term]
 id: PATO:0001403
 name: pluripotent
-def: "A cellular potency quality inhering in a bearer by virtue of having the ability to form all cell types." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A cellular potency quality inhering in a bearer by virtue of having the ability to form all cell types." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001397 ! cellular potency
 
 [Term]
 id: PATO:0001404
 name: nucleate quality
-def: "A cellular quality inhering in a bearer by virtue of its number of nuclei." [PATO :GVG]
+def: "A cellular quality inhering in a bearer by virtue of its number of nuclei." [PATOC:GVG]
 subset: attribute_slim
 exact_synonym: "GO:0005634]" []
 is_a: PATO:0001396 ! cellular quality
@@ -7964,7 +7964,7 @@ is_a: PATO:0001404 ! nucleate quality
 [Term]
 id: PATO:0001408
 name: ciliatedness
-def: "A cellular quality inhering in a bearer by virtue of having thin, tail-like projections extending outwards from the cell body." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "A cellular quality inhering in a bearer by virtue of having thin, tail-like projections extending outwards from the cell body." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0001396 ! cellular quality
 
@@ -8004,28 +8004,28 @@ is_a: PATO:0001018 ! physical quality
 [Term]
 id: PATO:0001414
 name: catalytic activity
-def: "A physical quality inhering in a catalyst.by \nvirtue of the amount of its action." [PATO :GVG]
+def: "A physical quality inhering in a catalyst by virtue of the amount of its action." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001415
 name: morbidity
-def: "A quality inhering in a population by virtue of the number of its member that are ill at a given time." [PATO :GVG]
+def: "A quality inhering in a population by virtue of the number of its member that are ill at a given time." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0001416
 name: regular duration
-def: "A duration between subprocess iterations that follows a pattern." [PATO :GVG]
+def: "A duration between subprocess iterations that follows a pattern." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001309 ! duration
 
 [Term]
 id: PATO:0001417
 name: irregular duration
-def: "A duration between subprocess iterations that does not follow a pattern." [PATO :GVG]
+def: "A duration between subprocess iterations that does not follow a pattern." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001309 ! duration
 
@@ -8038,7 +8038,7 @@ is_a: PATO:0000186 ! behavioral quality
 [Term]
 id: PATO:0001419
 name: sharp
-def: "A shape quality inhering in a bearer by virtue of its shape terminating in a point or edge." [PATO :GVG]
+def: "A shape quality inhering in a bearer by virtue of its shape terminating in a point or edge." [PATOC:GVG]
 subset: value_slim
 broad_synonym: "stubby" []
 is_a: PATO:0000052 ! shape
@@ -8046,7 +8046,7 @@ is_a: PATO:0000052 ! shape
 [Term]
 id: PATO:0001420
 name: buoyancy
-def: "A physical quality inhering in a bearer by virtue of its endency or ability to rise or float in a fluid medium such as water or air." [PATO :GVG]
+def: "A physical quality inhering in a bearer by virtue of its endency or ability to rise or float in a fluid medium such as water or air." [PATOC:GVG]
 is_a: PATO:0001018 ! physical quality
 
 [Term]
@@ -8073,7 +8073,7 @@ is_a: PATO:0001372 ! refractivity
 [Term]
 id: PATO:0001424
 name: violet
-def: "A color hue with very low wavelength of that portion of the visible spectrum lying between reddish blue or bluish purple, evoked in the human observer by radiant energy with wavelengths of approximately 420 to 380 nanometers;" [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
+def: "A color hue with very low wavelength of that portion of the visible spectrum lying between reddish blue or bluish purple, evoked in the human observer by radiant energy with wavelengths of approximately 420 to 380 nanometers." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0000014 ! color
 
@@ -8094,7 +8094,7 @@ is_a: PATO:0000322 ! red
 [Term]
 id: PATO:0001427
 name: compound acidity
-def: "A concentration quality inhering in compound by virtue of its tendency to act as a hydron donor." [chemicool:chemicool "http://www.chemicool.com/d"]
+def: "A concentration quality inhering in compound by virtue of its tendency to act as a hydron donor." [chemicool:chemicool "http://www.chemicool.com/"]
 subset: attribute_slim
 is_a: PATO:0000033 ! concentration
 
@@ -8115,14 +8115,14 @@ is_a: PATO:0001428 ! medium acidity
 [Term]
 id: PATO:0001430
 name: alkaline
-def: "An acidity inhering in a solution by virtue of its a low concentration of H+ ions." [chemicool:chemicool "http://www.chemicool.com"]
+def: "An acidity inhering in a solution by virtue of its a low concentration of H+ ions." [chemicool:chemicool "http://www.chemicool.com/"]
 subset: value_slim
 is_a: PATO:0001428 ! medium acidity
 
 [Term]
 id: PATO:0001431
 name: adhesivity
-def: "An emergent molecular relational quality that arises from the molecular attraction exerted between two entities in contact." [Wikipedia:Wikipedia "http://en.wikipedia.org/"]
+def: "An emergent molecular relational quality that arises from the molecular attraction exerted between two entities in contact." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 comment: The definition is general enough to cover adhesion arising from different kinds of chemical bonding/forces, although for PATO this term will most commonly used for cellular adhesion. See also GO:0031589 "cell-substrate adhesion".
 subset: attribute_slim
 related_synonym: "stickiness" []
@@ -8132,7 +8132,7 @@ is_a: PATO:0001238 ! relational quality of continuant
 [Term]
 id: PATO:0001432
 name: decayed
-def: "A quality inhering in a bearer by virtue of its decompositioninto component parts;" [Medical-dictionary:Medical-dictionary "http://medical-dictionary.thefreedictionary.com/"]
+def: "A quality inhering in a bearer by virtue of its decompositioninto component parts." [Medical-dictionary:Medical-dictionary "http://medical-dictionary.thefreedictionary.com/"]
 subset: value_slim
 is_a: PATO:0000169 ! viability
 
@@ -8178,7 +8178,7 @@ is_a: PATO:0001435 ! attachment
 [Term]
 id: PATO:0001439
 name: tonicity
-def: "A structural quality inhering in a bearer by virtue of its elastic tension that facilitate response to stimuli." [WordNet :WordNet "wordnet.princeton.edu/"]
+def: "A structural quality inhering in a bearer by virtue of its elastic tension that facilitate response to stimuli." [WordNet :WordNet "http://wordnet.princeton.edu/"]
 subset: value_slim
 is_a: PATO:0000141 ! structure
 
@@ -8246,7 +8246,7 @@ is_a: PATO:0000141 ! structure
 [Term]
 id: PATO:0001449
 name: cartilaginous
-def: "A structural quality inhering in a bearer by virtue of its consistence of cartilage or gristle" [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
+def: "A structural quality inhering in a bearer by virtue of its consistence of cartilage or gristle." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: value_slim
 is_a: PATO:0000141 ! structure
 
@@ -8278,7 +8278,7 @@ is_a: PATO:0001238 ! relational quality of continuant
 [Term]
 id: PATO:0001453
 name: detached
-def: "A relational structural quality inhering in a bearer by virtue of lacking connection or association with another entity." [PATO :GVG]
+def: "A relational structural quality inhering in a bearer by virtue of lacking connection or association with another entity." [PATOC:GVG]
 subset: value_slim
 related_synonym: "detached_from" []
 is_a: PATO:0001452 ! relational structural quality
@@ -8286,49 +8286,49 @@ is_a: PATO:0001452 ! relational structural quality
 [Term]
 id: PATO:0001454
 name: sensitivity to oxygen
-def: "A sensitivity quality inhering in an entity by virtue of its dependence on oxygen" [PATO:GVG]
+def: "A sensitivity quality inhering in an entity by virtue of its dependence on oxygen" [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0000085 ! sensitivity
 
 [Term]
 id: PATO:0001455
 name: aerobic
-def: "A quality inhearing in a bearer by virtue of its dependence on oxygen." [PATO:GVG]
+def: "A quality inhearing in a bearer by virtue of its dependence on oxygen." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001454 ! sensitivity to oxygen
 
 [Term]
 id: PATO:0001456
 name: anaerobic
-def: "A quality inhearing in a bearer by virtue of its independence on oxygen." [PATO:GVG]
+def: "A quality inhearing in a bearer by virtue of its independence on oxygen." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001454 ! sensitivity to oxygen
 
 [Term]
 id: PATO:0001457
 name: sensitivity of occurrent
-def: "A relational quality of occurrent inhering in an entity by virtue of its capacity to respond to stimulation." [PATO:GVG]
+def: "A relational quality of occurrent inhering in an entity by virtue of its capacity to respond to stimulation." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001240 ! relational quality of occurrent
 
 [Term]
 id: PATO:0001458
 name: sensitivity of occurrent to oxygen
-def: "A sensitivity of occurrent quality inhering in an entity by virtue of it unfolding in a location with or without oxygen." [PATO :GVG]
+def: "A sensitivity of occurrent quality inhering in an entity by virtue of it unfolding in a location with or without oxygen." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001457 ! sensitivity of occurrent
 
 [Term]
 id: PATO:0001459
 name: aerobic (for occurrence)
-def: "A quality inhering in a biological process by virtue of the process unfolding in a location with oxygen." [PATO:GVG]
+def: "A quality inhering in a biological process by virtue of the process unfolding in a location with oxygen." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001458 ! sensitivity of occurrent to oxygen
 
 [Term]
 id: PATO:0001460
 name: anaerobic (for occurrence)
-def: "A quality inhering in a biological process by virtue of the process unfolding in a location without oxygen." [PATO:GVG]
+def: "A quality inhering in a biological process by virtue of the process unfolding in a location without oxygen." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001458 ! sensitivity of occurrent to oxygen
 
@@ -8356,14 +8356,14 @@ is_a: PATO:0001464 ! electric potential
 [Term]
 id: PATO:0001464
 name: electric potential
-def: "A quality that is equal to the potential energy per unit charge associated with a static (time-invariant) electric field, also called the electrostatic potential," [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
+def: "A quality that is equal to the potential energy per unit charge associated with a static (time-invariant) electric field, also called the electrostatic potential." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
 [Term]
 id: PATO:0001465
 name: monstrous
-def: "A morphology quality inhering in a bearer by virture of its all-encompassing, grotesque morphological  defects" [PATO:GVG]
+def: "A morphology quality inhering in a bearer by virture of its all-encompassing, grotesque morphological  defects" [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000051 ! morphology
 
@@ -8396,7 +8396,7 @@ is_a: PATO:0000406 ! curved
 [Term]
 id: PATO:0001470
 name: proportionality
-def: "A composite quality that obtains as a result of the relative magnitude of two related qualities." [PATO:cjm]
+def: "A composite quality that obtains as a result of the relative magnitude of two related qualities." [PATOC:cjm]
 comment: Examples - height to weight; brain size to body size. These could all be children of proportionality. Proportions can be measured as ratios. some measures may be dimensionless. not all ratios measure proportionality. eg m/s measures velocity which is not a proportion in the sense defined above, it is a quality in its own right.
 subset: attribute_slim
 is_a: PATO:0001238 ! relational quality of continuant
@@ -8432,14 +8432,14 @@ is_a: PATO:0000140 ! placement
 [Term]
 id: PATO:0001475
 name: high position
-def: "A position which is relative high." [PATO :GVG]
+def: "A position which is relative high." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001032 ! position
 
 [Term]
 id: PATO:0001476
 name: low position
-def: "A position which is relative low." [PATO:GVG]
+def: "A position which is relative low." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001032 ! position
 
@@ -8476,7 +8476,7 @@ is_a: PATO:0000141 ! structure
 [Term]
 id: PATO:0001481
 name: sloped
-def: "Having an oblique or slanted direction." [WordNet:WordNet "http://wordnet.princeton.edu/"]
+def: "Having an oblique or slanted direction." [WordNet:WordNet "http://wordnet.princeton.edu"]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
@@ -8498,14 +8498,14 @@ is_a: PATO:0000645 ! hypoplastic
 [Term]
 id: PATO:0001484
 name: recent
-def: "Occuring near to or not long before the present." [WordNet:WordNet "http://wordnet.princeton.edu/"]
+def: "Occuring near to or not long before the present." [WordNet:WordNet "http://wordnet.princeton.edu"]
 subset: value_slim
 is_a: PATO:0001309 ! duration
 
 [Term]
 id: PATO:0001485
 name: condensed
-def: "Made to become thicker or more closely packed together." [XX:<new dbxref>]
+def: "Made to become thicker or more closely packed together." [PATOC:GVG]
 subset: value_slim
 related_synonym: "dense" []
 broad_synonym: "compact" []
@@ -8594,14 +8594,14 @@ is_a: PATO:0001018 ! physical quality
 [Term]
 id: PATO:0001499
 name: spherical
-def: "Having the shape of a sphere or ball." [WordNet:WordNet "http://wordnet.princeton.edu/"]
+def: "Having the shape of a sphere or ball." [WordNet:WordNet "http://wordnet.princeton.edu"]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
 [Term]
 id: PATO:0001500
 name: tapered
-def: "A shape which is gradually narrower or thinner toward one end." [WordNet:WordNet "http://wordnet.princeton.edu/"]
+def: "A shape which is gradually narrower or thinner toward one end." [WordNet:WordNet "http://wordnet.princeton.edu"]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
@@ -8616,21 +8616,21 @@ is_a: PATO:0000261 ! maturity
 [Term]
 id: PATO:0001502
 name: complexity
-def: "A monadic quality of continuant inhering in a bearer by virtue of its being intricate and compounded." [WordNet:WordNet "http://wordnet.princeton.edu/"]
+def: "A monadic quality of continuant inhering in a bearer by virtue of its being intricate and compounded." [WordNet:WordNet "http://wordnet.princeton.edu"]
 subset: attribute_slim
 is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0001503
 name: simple
-def: "A complexity quality in a bearer by virtue of its having few parts; not complex, complicated or compound." [WordNet:WordNet "http://wordnet.princeton.edu/"]
+def: "A complexity quality in a bearer by virtue of its having few parts; not complex, complicated or compound." [WordNet:WordNet "http://wordnet.princeton.edu"]
 subset: value_slim
 is_a: PATO:0001502 ! complexity
 
 [Term]
 id: PATO:0001504
 name: complex
-def: "A complexity quality inhering in a bearer by virtue of its being intricate and compounded." [WordNet:WordNet "http://wordnet.princeton.edu/"]
+def: "A complexity quality inhering in a bearer by virtue of its being intricate and compounded." [WordNet:WordNet "http://wordnet.princeton.edu"]
 subset: value_slim
 is_a: PATO:0001502 ! complexity
 
@@ -8646,56 +8646,56 @@ is_a: PATO:0001452 ! relational structural quality
 [Term]
 id: PATO:0001506
 name: diastatic
-def: "Separation of normally joined parts, such as the separation of adjacent bones without fracture or of certain abdominal muscles during pregnancy." [answers.com:answers.com "http://www.answers.com"]
+def: "Separation of normally joined parts, such as the separation of adjacent bones without fracture or of certain abdominal muscles during pregnancy." [answers.com:answers.com "http://www.answers.com/"]
 subset: value_slim
 is_a: PATO:0001505 ! separated
 
 [Term]
 id: PATO:0001507
 name: disrupted
-def: "To break apart or to interrupt the normal course of a process." [XX:<new dbxref>]
+def: "To break apart or to interrupt the normal course of a process." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001239 ! monadic quality of occurrent
 
 [Term]
 id: PATO:0001508
 name: abolished
-def: "The complete inability to accomplish a biological process." [XX:<new dbxref>]
+def: "The complete inability to accomplish a biological process." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001239 ! monadic quality of occurrent
 
 [Term]
 id: PATO:0001509
 name: functionality
-def: "A monadic quality of continuant inhering in a bearer by virtue of its ability or inability to perform a regular function." [WordNet:WordNet "http://wordnet.princeton.edu/"]
+def: "A monadic quality of continuant inhering in a bearer by virtue of its ability or inability to perform a regular function." [WordNet:WordNet "http://wordnet.princeton.edu"]
 subset: attribute_slim
 is_a: PATO:0001237 ! monadic quality of continuant
 
 [Term]
 id: PATO:0001510
 name: functional
-def: "A functionality quality inhering in a bearer by virtue of its ability to perform a regular function." [WordNet:WordNet "http://wordnet.princeton.edu/"]
+def: "A functionality quality inhering in a bearer by virtue of its ability to perform a regular function." [WordNet:WordNet "http://wordnet.princeton.edu"]
 subset: value_slim
 is_a: PATO:0001509 ! functionality
 
 [Term]
 id: PATO:0001511
 name: non-functional
-def: "A functionality quality inhering in a bearer by virtue of its inability to perform a regular function." [WordNet:WordNet "http://wordnet.princeton.edu/"]
+def: "A functionality quality inhering in a bearer by virtue of its inability to perform a regular function." [WordNet:WordNet "http://wordnet.princeton.edu"]
 subset: value_slim
 is_a: PATO:0001509 ! functionality
 
 [Term]
 id: PATO:0001512
 name: punctate
-def: "A pattern inhering in a surface marked by the presence of dots, punctures, points or pits." [PATO:cjm]
+def: "A pattern inhering in a surface marked by the presence of dots, punctures, points or pits." [PATOC:cjm]
 subset: value_slim
 is_a: PATO:0000060 ! pattern
 
 [Term]
 id: PATO:0001513
 name: diffuse
-def: "A pattern (2D or 3D) marked by lack of continuous borders or boundaries; spread out over a large region of the bearer entity." [PATO:cjm]
+def: "A pattern (2D or 3D) marked by lack of continuous borders or boundaries; spread out over a large region of the bearer entity." [PATOC:cjm]
 subset: value_slim
 is_a: PATO:0000060 ! pattern
 
@@ -8709,7 +8709,7 @@ is_a: PATO:0000141 ! structure
 [Term]
 id: PATO:0001515
 name: cloudy
-def: "Being uneven in color." [PATO:NC]
+def: "Being uneven in color." [PATOC:NC]
 subset: value_slim
 related_synonym: "murky" []
 is_a: PATO:0000020 ! relative color
@@ -8730,7 +8730,7 @@ is_a: PATO:0001516 ! focus
 [Term]
 id: PATO:0001518
 name: blurry
-def: "Lacking focus." [PATO:NC]
+def: "Lacking focus." [PATOC:NC]
 subset: value_slim
 is_a: PATO:0001516 ! focus
 
@@ -8792,14 +8792,14 @@ is_a: PATO:0001520 ! sound frequency
 [Term]
 id: PATO:0001527
 name: quiet
-def: "A sound amplitude which is low." [PATO:GVG]
+def: "A sound amplitude which is low." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001521 ! sound amplitude
 
 [Term]
 id: PATO:0001528
 name: loud
-def: "A sound amplitude which is high." [PATO:GVG]
+def: "A sound amplitude which is high." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001521 ! sound amplitude
 
@@ -8818,21 +8818,21 @@ is_a: PATO:0001239 ! monadic quality of occurrent
 [Term]
 id: PATO:0001531
 name: cellular adhesivity
-def: "A cellular quality that exists by virtue of the capacity of the cell to adhere to other cells and molecules, through the emergent action of the molecular parts of the cell surface." [PATO:cjm]
+def: "A cellular quality that exists by virtue of the capacity of the cell to adhere to other cells and molecules, through the emergent action of the molecular parts of the cell surface." [PATOC:cjm]
 subset: attribute_slim
 is_a: PATO:0001431 ! adhesivity
 
 [Term]
 id: PATO:0001532
 name: mono-colored
-def: "A color pattern inhering to a bearer by virtue of having 1 color." [PATO:GVG]
+def: "A color pattern inhering to a bearer by virtue of having 1 color." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000019 ! color pattern
 
 [Term]
 id: PATO:0001533
 name: multi-colored
-def: "A color pattern inhering to a bearer by virtue of having 2 or more colors." [PATO:GVG]
+def: "A color pattern inhering to a bearer by virtue of having 2 or more colors." [PATOC:GVG]
 subset: value_slim
 exact_synonym: "variegated" []
 is_a: PATO:0000019 ! color pattern
@@ -8895,7 +8895,7 @@ is_a: PATO:0001539 ! amylose composition
 [Term]
 id: PATO:0001542
 name: delayed phase
-def: "A phasen which ends before natural start point." [PATO:GVG]
+def: "A phasen which ends before natural start point." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0000083 ! phase
 
@@ -8908,14 +8908,14 @@ is_a: PATO:0001018 ! physical quality
 [Term]
 id: PATO:0001544
 name: flexible
-def: "A physical quality inhering in a bearer by virtue of its ability of being turned, bowed, or twisted without breaking." [merriam-webster:merriam-webster "http://www.m-w.com/ "]
+def: "A physical quality inhering in a bearer by virtue of its ability of being turned, bowed, or twisted without breaking." [merriam-webster:merriam-webster "http://www.m-w.com/"]
 exact_synonym: "bendy" []
 is_a: PATO:0001543 ! flexibility
 
 [Term]
 id: PATO:0001545
 name: inflexible
-def: "A physical quality inhering in a bearer by virtue of its inability of being turned, bowed, or twisted without breaking." [merriam-webster:merriam-webster "http://www.m-w.com/ "]
+def: "A physical quality inhering in a bearer by virtue of its inability of being turned, bowed, or twisted without breaking." [merriam-webster:merriam-webster "http://www.m-w.com/"]
 exact_synonym: "stiff" []
 is_a: PATO:0001543 ! flexibility
 
