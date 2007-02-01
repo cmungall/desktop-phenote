@@ -41,9 +41,44 @@ obfuscate("fruitfly.org", "mgibson", "Mark Gibson");
 obfuscate("lbl.gov", "nlwashington", "Nicole Washington");
 </script></p>
 
-<h3><a name="Groups">Groups</a></h3>
-<p><a href="www.bioontology.org"><img class="protrait" height="50" src="/phenote/images/NCBO_logo.jpg" border="0" /></a>NCBO</p>
-<p><a href="www.berkeleybop.org">Berkeley BOP</a>
+<p>
+Learn more about our supporting organizations by visiting their websites:
+<a href="http://www.bioontology.org">NCBO</a> <br />
+<a href="www.berkeleybop.org">Berkeley BOP</a> <br />
+</p>
+
+<h3><a name="collaborations">Collaborations</a></h3>
+This software is being developed in collaboration with several organizations:
+<p><a href="http://flybase.bio.indiana.edu/">
+<img class="portrait" height="50" border="0" src="/images/fly_logo.png"\
+ alt="Flybase" /></a>Flybase:  The Drosophila Genome Database.
+</p>
+<p><a href="http://www.zfin.org/"><img class="portrait" border="0" src="/im\
+ages/zfin_logo.gif" height="50" alt="Zfin" /></a>ZFIN: The Zebrafish Genome Dat\
+abase
+</p>
+We are also collaborating with several groups:
+<p><a href="http://www.geneontology.org/"><img class="portrait" border="0" src="/images/go_logo.gif" height="50" alt="GO" /></a>The Gene Ontology
+<br />
+<br />
+</p>
+<p><a href="http://www.nescent.org/">
+<img class="portrait" border="0" src="/images/nescent_logo.gif" height="50" alt="Nescent" /></a>NESCENT: The Nati\
+onal Evolutionary Synthesis Center
+<br />
+</p>
+<br />
+<br />
+<p><a href="http://www.pharmgkb.org/"><img class="portrait" border="0" src="/images/pgkb_logo.png" height="50" alt="PharmGKB" /></a>PharmGKB: The Phar\
+macogenetics and Pharmacogenomics Knowledge Base
+<br />
+<br />
+</p>
+<p><a href="http://www.dictybase.org/"><img class="portrait" border="0" src="/images/dicty_logo.png" height="50" alt="Dictybase" /></a>Dictybase
+<br />
+<br />
+</p>
+
 
 <h3><a name="funding">Funding Sources</a></h3>
 The funding for Phenote development is provided from the National Center for Biomedical Ontologies, which is part of the 
