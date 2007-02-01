@@ -1,0 +1,36 @@
+#!/usr/local/bin/perl -w
+
+##
+## Script to update phenote.org based on script from berkeleybop.org
+## WARNING: This script depends on subversion acting a certain way.
+##
+
+use strict;
+
+my @files = ();
+
+## Change everything to a more proper permission.
+system("find ./ -type d -exec chmod 775 {} \\;")
+  and die;
+system("find ./ -type f -exec chmod 664 {} \\;")
+  and die;
+
+## Find all the files that are _currently_ taken care of by subversion.
+foreach $_ (`svn status --verbose`){
+  my @fields = split(/\s+/);
+  # Make sure to throw out uncommited files and directories.
+  if ( $fields[0] eq '' && ! -d $fields[4] ){
+    push @files, $fields[4];
+  }
+}
+
+## Make a string of all the files we'll transfer.
+my $string = "";
+foreach $_ (@files){ $string .=  $_ . " "; }
+
+## Debug.
+#foreach $_ (@files){ print "(" . $_ . ")\n"; }
+
+## rsync it over...
+system("rsync -lptgoDvzPR -e ssh " . $string . "lsc.lbl.gov:/local/phenote.org_80/www/htdocs")
+  and die;
