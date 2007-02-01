@@ -1,8 +1,8 @@
-<!--#include virtual="/phenote/ssi/header.html" -->
+<!--#include virtual="/ssi/header.html" -->
 
 <div id="page_body">
 
-<!--#include virtual="/phenote/ssi/navi_info.html" -->
+<!--#include virtual="/ssi/navi_info.html" -->
 
 <div id="main_content">
 
@@ -41,16 +41,16 @@ DictyBase</a>, has a web-based
 <br />
 
 <h3><a name="documentation">Documentation</a></h3>
-<p><a href="">Phenotype Annotation User Guide</a></p>
+<p>[A <a href="">Phenotype Annotation User Guide</a> is being developed.]</p>
 
 <h3><a name="roadmap">Roadmap</a></h3>
 
 <h3><a name="rel_notes">Release Notes</a></h3>
-<a href="http://toy.lbl.gov:9010/phenote/phenote-release-notes.html">[Release Notes]</a>
+<a href="phenote-release-notes.html">[Release Notes]</a>
 <br />
 
 
 </div>
 </div>
 
-<!--#include virtual="/phenote/ssi/footer.shtml" -->
+<!--#include virtual="/ssi/footer.shtml" -->

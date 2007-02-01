@@ -1,8 +1,8 @@
-<!--#include virtual="/phenote/ssi/header.html" -->
+<!--#include virtual="/ssi/header.html" -->
 
 <div id="page_body">
 
-<!--#include virtual="/phenote/ssi/navi_home.html" -->
+<!--#include virtual="/ssi/navi_home.html" -->
 
 <div id="main_content">
 
@@ -15,4 +15,4 @@
 </div>
 </div>
 
-<!--#include virtual="/phenote/ssi/footer.shtml" -->
+<!--#include virtual="/ssi/footer.shtml" -->
