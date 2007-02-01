@@ -2,7 +2,7 @@
 
 <div id="page_body">
 
-<!--#include virtual="/ssi/navi_home.html" -->
+<!--#include virtual="/ssi/navi_about.html" -->
 
 <div id="main_content">
 
@@ -26,7 +26,7 @@
 <br />  
 
 <h3><a name="Bugs">Bug Reporting</a></h3>
-<p>If you find bugs in Phenote, please <a href="https://sourceforge.net/tracker/?group_id=76834&atid=887913">submit a bug report on our Bug Tracker</a> located on sourceforge.</p>
+<p>If you find bugs in Phenote, please <a href="https://sourceforge.net/tracker/?group_id=76834&atid=887913">submit a bug report</a> on our Bug Tracker located on sourceforge.</p>
 <p>Please use this same tracker to submit your enhancement and feature requests.</p>
 
 <br />
@@ -34,47 +34,53 @@
 <h3><a name="contact">Contact Us</a></h3>
 <p>Software Development:
 <script type="text/javascript">
-obfuscate("fruitfly.org", "mgibson", "Mark Gibson");
+obfuscate("berkeleybop.org", "mgibson", "Mark Gibson");
 </script></p>
 <p>Requirements, Analysis, Documentation:
 <script type="text/javascript">
 obfuscate("lbl.gov", "nlwashington", "Nicole Washington");
 </script></p>
+<p>Phenotype EQ model and XML data formats:
+<script type="text/javascript">
+obfuscate("berkeleybop.org", "cjm", "Chris Mungall");
+</script></p>
 
 <p>
 Learn more about our supporting organizations by visiting their websites:
-<a href="http://www.bioontology.org">NCBO</a> <br />
-<a href="www.berkeleybop.org">Berkeley BOP</a> <br />
+<a href="http://www.bioontology.org">NCBO</a> and
+<a href="www.berkeleybop.org">Berkeley BOP</a>
 </p>
+
+<br />
 
 <h3><a name="collaborations">Collaborations</a></h3>
 This software is being developed in collaboration with several organizations:
-<p><a href="http://flybase.bio.indiana.edu/">
-<img class="portrait" height="50" border="0" src="/images/fly_logo.png"\
- alt="Flybase" /></a>Flybase:  The Drosophila Genome Database.
-</p>
-<p><a href="http://www.zfin.org/"><img class="portrait" border="0" src="/im\
-ages/zfin_logo.gif" height="50" alt="Zfin" /></a>ZFIN: The Zebrafish Genome Dat\
-abase
-</p>
-We are also collaborating with several groups:
-<p><a href="http://www.geneontology.org/"><img class="portrait" border="0" src="/images/go_logo.gif" height="50" alt="GO" /></a>The Gene Ontology
-<br />
-<br />
-</p>
-<p><a href="http://www.nescent.org/">
-<img class="portrait" border="0" src="/images/nescent_logo.gif" height="50" alt="Nescent" /></a>NESCENT: The Nati\
-onal Evolutionary Synthesis Center
-<br />
-</p>
-<br />
-<br />
-<p><a href="http://www.pharmgkb.org/"><img class="portrait" border="0" src="/images/pgkb_logo.png" height="50" alt="PharmGKB" /></a>PharmGKB: The Phar\
-macogenetics and Pharmacogenomics Knowledge Base
-<br />
-<br />
-</p>
-<p><a href="http://www.dictybase.org/"><img class="portrait" border="0" src="/images/dicty_logo.png" height="50" alt="Dictybase" /></a>Dictybase
+<table border="0">
+  <tr>
+    <td><a href="http://flybase.bio.indiana.edu/">
+        <img class="portrait" height="50" border="0" src="/images/fly_logo.png"alt="Flybase" /></a>
+    </td>	
+    <td><a href="http://www.zfin.org/"><img class="portrait" border="0" src="/images/zfin_logo.gif" height="50" alt="Zfin" /></a>
+    </td>
+    <td><a href="http://www.dictybase.org/"><img class="portrait" border="0" src="/images/dicty_logo.png" height="50" alt="Dictybase" /></a>
+    </td>
+    <th<a href="http://www.geneontology.org/"><img class="portrait" border="0" src="/images/go_logo.gif" height="50" alt="GO" /></a>
+    </td>
+    <td><a href="http://www.nescent.org/">
+        <img class="portrait" border="0" src="/images/nescent_logo.gif" height="50" alt="Nescent" /></a>
+    </td>
+    <td><a href="http://www.pharmgkb.org/"><img class="portrait" border="0" src="/images/pgkb_logo.png" height="50" alt="PharmGKB" /></a>
+    </td>
+  </tr>
+  <tr>
+    <td>Flybase</td>
+    <td>Zfin</td>
+    <td>Dictybse</td>
+    <td>Gene Ontology</td>
+    <td>NESCent</td>
+    <td>PharmGKB</td>
+  </tr>
+</table>
 <br />
 <br />
 </p>
