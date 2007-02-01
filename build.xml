@@ -425,7 +425,7 @@ where xsd files are (conf) -->
     </target>
     
 
-    <target name="webstart-jars" depends="copy-webstart-jars,sign-webstart-jars"/> 
+    <target name="webstart-jars" depends="build-all,jar,copy-webstart-jars,sign-webstart-jars"/> 
 
     <target name="copy-webstart-jars">
       <echo message="Env Var PHENOTE VERSION is set to ${env.PHENOTE_VERSION}" />
