@@ -386,7 +386,7 @@ where xsd files are (conf) -->
 <!-- todo do all jars not just phenote - take out -signed -->
 <!-- depends on sym link phenote-webstart and env var PHENOTE_VERSION -->
     <!-- target name="build-webstart" depends="build-sign-jars,webstart"/ -->
-    <target name="build-webstart" depends="build-all,jar"/>
+    <target name="build-webstart" depends="build-all,jar,webstart"/>
 
     <!-- target name="build-sign-jars" depends="build-all,jar,sign-jars"/ -->
 
@@ -414,16 +414,18 @@ where xsd files are (conf) -->
     </target>
     
 
-    <target name="copy-jnlps">
-      <echo message="Env Var PHENOTE VERSION is set to ${env.PHENOTE_VERSION}" />
-      <copy todir="phenote-webstart/${env.PHENOTE_VERSION}">
-        <fileset file="doc/phenote-website/*.jnlp"/>
-      </copy>
+    <target name="copy-jnlps" depends="copy-version-jnlps">
       <copy todir="phenote-webstart/latest">
         <fileset file="doc/phenote-website/*.jnlp"/>
       </copy>
     </target>
-    
+
+    <target name="copy-version-jnlps">
+      <echo message="Env Var PHENOTE VERSION is set to ${env.PHENOTE_VERSION}" />
+      <copy todir="phenote-webstart/${env.PHENOTE_VERSION}">
+        <fileset file="doc/phenote-website/*.jnlp"/>
+      </copy>
+    </target>    
 
     <target name="webstart-jars" depends="build-all,jar,copy-webstart-jars,sign-webstart-jars"/> 
 

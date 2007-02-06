@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jnlp
 spec="1.0+"
-codebase="http://toy.lbl.gov:9010/phenote/1.0/"
+codebase="http://toy.lbl.gov:9010/phenote/1.1/"
 href="phenote-zfin.jnlp">
 <information>
-	<title>Phenote 1.0</title>
+	<title>Phenote 1.1</title>
 	<vendor>BBOP</vendor>
 	<description>Phenote standalone app via webstart</description>
  	 <!-- Declares that the application can run without
