@@ -38,7 +38,7 @@ href="phenote-flybase.jnlp">
 	<jar href="jars/log4j-1.2.13.jar" />
 </resources>
 <application-desc main-class="phenote.main.Phenote">
-        <argument>-i</argument>
+        <argument>-c</argument>
         <argument>/flybase.cfg</argument>
 </application-desc>
 </jnlp>
