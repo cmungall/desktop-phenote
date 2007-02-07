@@ -41,9 +41,12 @@ public class Config {
   private boolean uvicGraphEnabled = false; // default false for now
   private String reposUrlDir;
   private String version;
+  private boolean configInitialized = false;
 
   /** singleton */
   private Config() {}
+
+  public boolean isInitialized() { return configInitialized; }
 
   /** This is setting config file with nothing to do with personal config
    this is for the servlet where config file location is set in web.xml */
@@ -56,12 +59,12 @@ public class Config {
       files is used - the -i option if you will. The initial config file will
       get copied to .phenote/my-phenote.cfg if it doesnt already exist. if it
       exists then this file is ignored */
-  public void setInitialConfigFile(String configFile) throws ConfigException {
-    //if (configFile==null) configFile = getDefaultFile();
-    //setConfigFile(configFile,true,false,true); // last true should be false!
-    updateConfigFileWithNewVersion(configFile);
-    //setConfigFile(configFile,true,false);
-  }
+//   public void setInitialConfigFile(String configFile) throws ConfigException {
+//     //if (configFile==null) configFile = getDefaultFile();
+//     //setConfigFile(configFile,true,false,true); // last true should be false!
+//     updateConfigFileWithNewVersion(configFile);
+//     //setConfigFile(configFile,true,false);
+//   }
 
   // --update - set up cmd line!
   public void updateConfigFileWithNewVersion(String configFile) throws ConfigException {
@@ -108,6 +111,9 @@ public class Config {
     //URL configUrl = getConfigUrl(filename);
     //System.out.println("config file: "+configUrl);
     parseXmlFile(configFile); // throws ex
+
+    // if we got here we succeeded in setting config
+    configInitialized = true;
 
     //System.out.println("testing config writeback");
     //new ConfigWriter().writeConfig(this,new File(FileUtil.getDotPhenoteDir(),"my-phenote.cfg"));

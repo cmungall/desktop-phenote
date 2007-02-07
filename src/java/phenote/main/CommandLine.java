@@ -4,6 +4,8 @@ import com.townleyenterprises.command.CommandOption;
 import com.townleyenterprises.command.CommandParser;
 import com.townleyenterprises.command.DefaultCommandListener;
 
+import phenote.config.Config;
+import phenote.config.ConfigException;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.phenosyntax.PhenoSyntaxFileAdapter;
 import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
@@ -22,9 +24,11 @@ public class CommandLine {
   private CommandOption inputFile = new InputFileCommandOption();
   //private CommandOption inputFmtOption = new InputFormatCommandOption();
   private CommandOption writeFile = new WriteFileCommandOption();
-  //private CommandOption updateConfig 
+  private CommandOption updateConfig = new UpdateConfigCommandOption();
+  private CommandOption setConfig = new SetConfigCommandOption();
 
-  CommandOption[] options = new CommandOption[] { inputFile, writeFile };
+  CommandOption[] options = new CommandOption[] { inputFile, writeFile, updateConfig,
+                                                  setConfig };
 
   // this guarantees that we get the right classes (compile time check)
   private final static String PHENOXML = PhenoXmlAdapter.class.getName();
@@ -116,6 +120,43 @@ public class CommandLine {
     adapter.setAdapterValue(ioo.getAdapterValue());
     return adapter;
   }
+
+  private class UpdateConfigCommandOption extends CommandOption {
+    private final static String help =
+    "Specify config file to update from app conf, adds in new config fields."
+    +" if nothing to update just loads config file as is";
+    private UpdateConfigCommandOption() {
+      // true -> has argument
+      super("updateConfig",'u',true,"config file",help);
+    }
+    public void execute() throws Exception {
+      //System.out.println("executing update config command option "+getArg());
+      try { Config.inst().updateConfigFileWithNewVersion(getArg()); }
+      catch (ConfigException e) { loadDefaultConfig("overwrite",e); }
+    }
+  }
+
+  private class SetConfigCommandOption extends CommandOption {
+    private final static String help =
+      "Specify config file to set from app conf, careful this wipes out previous config";
+    private SetConfigCommandOption() {
+      super("configSet",'c',true,"config file",help); // true -> has arg
+    }
+    public void execute() throws Exception {
+      try { Config.inst().setOverwriteConfigFile(getArg()); }
+      catch (ConfigException e) { loadDefaultConfig("overwrite",e); }
+    }
+  }
+
+  private void loadDefaultConfig(String m, ConfigException e) {
+    System.out.println("Yikes! Failed to "+m+" config file "+e+" gonna try "
+                       +"loading default config");
+    try { Config.inst().loadDefaultConfigFile(); }
+    catch (ConfigException ce) { 
+      System.out.println("bummer - even default config fails. we're hosed! "+ce);
+    }
+  }
+    
 
 
   /** INPUT FILE COMMAND OPTION */
