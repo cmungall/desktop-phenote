@@ -138,9 +138,16 @@ public class Phenote {
       else // no command line config file specified - use last one specified (cache)
         Config.inst().loadDefaultConfigFile();
     } catch (ConfigException e) {
-      LOG.fatal("EXITING! Fatal error in config file: "+e.getMessage());
+      //LOG.fatal("EXITING! Fatal error in config file: "+e.getMessage());
+      LOG.error("Error in config file! "+e.getMessage());
       e.printStackTrace(); // log?
-      System.exit(1);
+      //System.exit(1); // isnt this a bit extreme?
+      System.out.println("Yikes! config exception "+e+" gonna try loading default"
+                         +" config");
+      try { Config.inst().loadDefaultConfigFile(); }
+      catch (ConfigException ce) { 
+        System.out.println("bummer - even default config fails. we're hosed! "+ce);
+      }
     }
   }
 
