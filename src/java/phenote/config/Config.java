@@ -29,9 +29,9 @@ import phenote.util.FileUtil;
 
 public class Config {
 
-  public final static String  DEFAULT_CONFIG_FILE = "flybase.cfg";
+  public final static String  FLYBASE_DEFAULT_CONFIG_FILE = "flybase.cfg";
   private static Config singleton = new Config();
-  private String configFile = DEFAULT_CONFIG_FILE;
+  private String configFile = FLYBASE_DEFAULT_CONFIG_FILE;
   private List<DataAdapterConfig> dataAdapConfList;
   /** only enabled fields */
   private List<FieldConfig> enabledFields = new ArrayList<FieldConfig>();
@@ -81,6 +81,11 @@ public class Config {
     setConfigFile(getDefaultFile(),true,false,false);
   }
 
+  /** if all else fails revert to flybase which should be there */
+  public void loadDefaultFlybaseConfigFile() throws ConfigException {
+    setConfigFile(FLYBASE_DEFAULT_CONFIG_FILE,true,false,false);
+  }
+
   /** default file should be in .phenote/conf/my-phenote.cfg. if not set yet then just
       do good ol flybase.cfg */
   private String getDefaultFile() {
@@ -90,7 +95,7 @@ public class Config {
       file = r.readLine();
     } catch (IOException e) {}
     if (file == null || file.equals(""))
-      file = DEFAULT_CONFIG_FILE;
+      file = FLYBASE_DEFAULT_CONFIG_FILE;
     return file;
   }
 
@@ -138,6 +143,9 @@ public class Config {
       String nameOfFile = FileUtil.getNameOfFile(passedInConfig);
       // this is the "species" conf file - eg ~/.phenote/conf/flybase.cfg
       File dotConfFile = new File(getDotPhenoteConfDir(),nameOfFile);
+
+      if (!passedInExists && !dotConfFile.exists())
+        throw new ConfigException("Cfg file doesnt exist in app nor .phenote/conf");
 
       if (mergeConfigs && passedInExists) {
         mergeNewWithOld(passedInUrl,dotConfFile);

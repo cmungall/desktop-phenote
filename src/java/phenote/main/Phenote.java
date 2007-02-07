@@ -116,7 +116,11 @@ public class Phenote {
     if (!Config.inst().isInitialized()) { 
       try { Config.inst().loadDefaultConfigFile(); }
       catch (ConfigException ce) { 
-        System.out.println("default config has failed. we're hosed! "+ce);
+        System.out.println("default config has failed. "+ce+" loading flybase default");
+        try { Config.inst().loadDefaultFlybaseConfigFile(); }
+        catch (ConfigException c) { 
+          System.out.println("flybase default config has failed. We're hosed! "+c);
+        }
       }
     }
   }

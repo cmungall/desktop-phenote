@@ -153,7 +153,7 @@ public class CommandLine {
                        +"loading default config");
     try { Config.inst().loadDefaultConfigFile(); }
     catch (ConfigException ce) { 
-      System.out.println("bummer - even default config fails. we're hosed! "+ce);
+      System.out.println("bummer - even default config fails. uh oh "+ce);
     }
   }
     
