@@ -57,8 +57,9 @@ public class Config {
       get copied to .phenote/my-phenote.cfg if it doesnt already exist. if it
       exists then this file is ignored */
   public void setInitialConfigFile(String configFile) throws ConfigException {
-    if (configFile==null) configFile = getDefaultFile();
-    setConfigFile(configFile,true,false,true); // last true should be false!
+    //if (configFile==null) configFile = getDefaultFile();
+    //setConfigFile(configFile,true,false,true); // last true should be false!
+    updateConfigFileWithNewVersion(configFile);
     //setConfigFile(configFile,true,false);
   }
 
@@ -112,6 +113,7 @@ public class Config {
     //new ConfigWriter().writeConfig(this,new File(FileUtil.getDotPhenoteDir(),"my-phenote.cfg"));
   }
 
+  // why return string? why not file or url?
   private String getMyPhenoteConfig(String passedInConfig,boolean overwritePersonalCfg,
                                     boolean mergeConfigs)
     throws ConfigException {
@@ -119,23 +121,29 @@ public class Config {
     // this wont work with merging/updating
     //File myPhenote = new File(dotPhenote,"my-phenote.cfg");
 
-    try {
-      URL passedInUrl = getConfigUrl(passedInConfig);
-      String nameOfFile = FileUtil.getNameOfFile(passedInUrl);
+    //try {
+      boolean passedInExists = true;
+      URL passedInUrl=null;
+      // currently getConfigUrl doesnt search .phenote/conf - which is handy here
+      // if passed in conf doesnt exist, carry on with dotConf - funny logic?
+      try { passedInUrl = getConfigUrl(passedInConfig); }
+      catch (FileNotFoundException fe) { passedInExists = false; }
+
+      String nameOfFile = FileUtil.getNameOfFile(passedInConfig);
       // this is the "species" conf file - eg ~/.phenote/conf/flybase.cfg
       File dotConfFile = new File(getDotPhenoteConfDir(),nameOfFile);
 
-      if (mergeConfigs) {
+      if (mergeConfigs && passedInExists) {
         mergeNewWithOld(passedInUrl,dotConfFile);
       }
       
       // if file doesnt exist yet or overwrite, copy over passedInConfig
-      else if (!dotConfFile.exists() || overwritePersonalCfg) {
+      else if (passedInExists && (!dotConfFile.exists() || overwritePersonalCfg)) {
         String s = overwritePersonalCfg ? " getting overwritten" : " does not exist";
         System.out.println(dotConfFile+s+" Copying "+passedInUrl);
         //try {
-          //URL passedInUrl = getConfigUrl(passedInConfig);
-          copyUrlToFile(passedInUrl,dotConfFile);
+        //URL passedInUrl = getConfigUrl(passedInConfig);
+        copyUrlToFile(passedInUrl,dotConfFile);
       }
       
       // new way - set new default(no param) config file name in my-phenote.cfg
@@ -143,9 +151,7 @@ public class Config {
 
       return dotConfFile.toString(); // ?
       
-    } catch (FileNotFoundException e) {
-      throw new ConfigException(e);
-    }
+     //} catch (FileNotFoundException e) {throw new ConfigException(e);}
     //return dotConfFile.toString(); // ?
   }
 

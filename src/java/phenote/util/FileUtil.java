@@ -33,20 +33,41 @@ public class FileUtil {
     return dotPhenote;
   }
 
-  public static File getUserOboCacheDir() {
+  public static File getDotPhenoteOboDir() {
+    return getDotPhenoteSubDir("obo-files");
+//     File d = getDotPhenoteDir();
+//     File obo = new File(d,"obo-files");
+//     if (!obo.exists()) {
+//       LOG.info("creating "+obo+" directory");
+//       obo.mkdir();
+//     }
+//     return obo;
+  }
+
+  private static File getDotPhenoteConfDir() {
+    return getDotPhenoteSubDir("conf");
+  }
+
+  private static File getDotPhenoteSubDir(String subdirString) {
     File d = getDotPhenoteDir();
-    File obo = new File(d,"obo-files");
-    if (!obo.exists()) {
-      LOG.info("creating "+obo+" directory");
-      obo.mkdir();
+    File subdir = new File(d,subdirString);
+    if (!subdir.exists()) {
+      LOG.info("creating "+subdir+" directory");
+      subdir.mkdir();
     }
-    return obo;
+    return subdir;
   }
 
 
   /** get actual name of file sans path */
   public static String getNameOfFile(URL urlFile) {
-    String path =  urlFile.getPath();
+    return getNameOfFile(urlFile.getPath());
+//     int lastSlashIndex = path.lastIndexOf('/');
+//     if (lastSlashIndex == -1) return path;
+//     return path.substring(lastSlashIndex);
+  }
+
+  public static String getNameOfFile(String path) {
     int lastSlashIndex = path.lastIndexOf('/');
     if (lastSlashIndex == -1) return path;
     return path.substring(lastSlashIndex);
@@ -67,7 +88,7 @@ public class FileUtil {
     throw new FileNotFoundException(filename+" not found");
   }
 
-  // this is muddling config and obo - probably should be 2 methods? or be smart about
+  // this is muddling config and obop - probably should be 2 methods? or be smart about
   // suffix - or who cares?
   private static List<URL> getPossibleUrls(String filename) {
     List<URL> urls = new ArrayList(5);
@@ -77,8 +98,8 @@ public class FileUtil {
     addFile("conf/"+filename,urls);
     // ~/.phenote/obo-files cache for obo files - overrides phenote obo-files
     // eventually may have configured obo dir as well...
-    //addFile(sep(getDotPhenoteString(),"obo-files"),urls);
-    addFile(getUserOboCacheDir().getPath()+"/"+filename,urls);
+    addFile(getDotPhenoteOboDir().getPath()+"/"+filename,urls);
+    // addFile(getDotPhenoteConfDir().getPath() ???
     addFile("obo-files/"+filename,urls);//this is obo-files specific - separate method?
 //     URL jarUrl = FileUtil.class.getResource(filename);
 //     if (jarUrl != null) urls.add(jarUrl);
@@ -101,6 +122,8 @@ public class FileUtil {
       LOG.error("bad file url "+e);
     }
   }
+    
+
 
   private static boolean urlExists(URL u) {
     try { u.openStream(); }

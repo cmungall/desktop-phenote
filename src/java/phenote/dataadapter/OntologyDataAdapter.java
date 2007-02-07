@@ -233,7 +233,7 @@ public class OntologyDataAdapter {
       // download obo to local cache (takes time!)
       String file = FileUtil.getNameOfFile(localUrl);
       try { 
-        localUrl = new File(FileUtil.getUserOboCacheDir(),file).toURL();
+        localUrl = new File(FileUtil.getDotPhenoteOboDir(),file).toURL();
         LOG.info("Downloading new ontology from repository "+reposUrl+" to "+localUrl);
         copyReposToLocal(reposUrl,localUrl);
       }
