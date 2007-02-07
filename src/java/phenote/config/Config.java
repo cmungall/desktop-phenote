@@ -193,6 +193,11 @@ public class Config {
       only merge if versions are different(?) in other words only merge on version
       change/phenote upgrade - if version same then leave in users mucking */
   private void mergeNewWithOld(URL newConfig,File oldDotConfFile) throws ConfigException {
+    if (!oldDotConfFile.exists()) {
+      System.out.println(oldDotConfFile+" doesnt exist, creating");
+      copyUrlToFile(newConfig,oldDotConfFile);
+      return;
+    }
     Config newCfg = new Config();
     newCfg.parseXmlUrl(newConfig); //??
     Config oldCfg = new Config();
