@@ -228,7 +228,8 @@ class CharFieldGui {
     //fieldPanel.getSearchParams(),enableListeners);
     // enableListeners - if false then ACB wont directly edit model (post comp)
     compListSearcher =
-      new CompListSearcher(charField.getFirstOntology(),fieldPanel.getSearchParams());
+      new CompListSearcher(charField.getOntologyList(),fieldPanel.getSearchParams());
+      //new CompListSearcher(charField.getFirstOntology(),fieldPanel.getSearchParams());
     if (isRelationshipList()) {
       relCompList = new RelationCompList(compListSearcher,enableListeners,charField);
     }

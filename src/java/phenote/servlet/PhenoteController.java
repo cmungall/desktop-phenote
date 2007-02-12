@@ -103,24 +103,25 @@ public class PhenoteController extends AbstractCommandController {
    * @param ontologyName
    * @param field
    */
-  private String getHtmlCompletionList(String userInput, String ontologyName, String field) {
-    StringBuffer sb = new StringBuffer("<ul>");
-    try {
-      Vector<CompletionTerm> v = getCompListSearcher(ontologyName).getStringMatchTerms(userInput);
-      //Vector<OBOClass> v = ontology.getStringMatchTerms(userInput, getSearchParams());
-      // a tad cheesy but if hit no terms then auto comp shows nothing
-      // add an empty item should show then an empty list?
-      if (v.isEmpty())
-        sb.append("<li></li>");
-      for (CompletionTerm ct : v)
-        sb.append(makeCompListHtmlItem(ct, ontologyName, field));
-    }
-    catch (OntologyException e) {
-      sb.append(e.getMessage());
-    }
-    sb.append("</ul>");
-    return sb.toString();
-  }
+//   @SuppressWarnings("unused")
+// private String  {
+//     StringBuffer sb = new StringBuffer("<ul>");
+//     try {
+//       Vector<CompletionTerm> v = getCompListSearcher(ontologyName).getStringMatchTerms(userInput);
+//       //Vector<OBOClass> v = ontology.getStringMatchTerms(userInput, getSearchParams());
+//       // a tad cheesy but if hit no terms then auto comp shows nothing
+//       // add an empty item should show then an empty list?
+//       if (v.isEmpty())
+//         sb.append("<li></li>");
+//       for (CompletionTerm ct : v)
+//         sb.append(makeCompListHtmlItem(ct, ontologyName, field));
+//     }
+//     catch (OntologyException e) {
+//       sb.append(e.getMessage());
+//     }
+//     sb.append("</ul>");
+//     return sb.toString();
+//   }
 
   private String makeCompListHtmlItem(CompletionTerm term, String ontol, String field) {
     String id = term.getID();
@@ -135,6 +136,8 @@ public class PhenoteController extends AbstractCommandController {
   }
 
   private CompListSearcher getCompListSearcher(String ontologyName) throws OntologyException {
+	// This is currently rigged for 1 ontology, eventually may want to search all ontologies
+	// in a field as standalone does - with ALL option
     return new CompListSearcher(getOntology(ontologyName), getSearchParams());
   }
 

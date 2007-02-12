@@ -32,6 +32,7 @@ class TermCompList extends AbstractAutoCompList {
   // only term comp lists need ontology choosers - if that changes move to AACL
   private JComboBox ontologyChooserCombo;
   private CharFieldGui charFieldGui;
+  private static final String ALL = "ALL";
 
   TermCompList(CompListSearcher s,boolean editModel,CharFieldGui cfg) {
     super(s,editModel,cfg.getCharField());
@@ -39,7 +40,6 @@ class TermCompList extends AbstractAutoCompList {
     enableTermInfoListening();
     if (hasMoreThanOneOntology()) // super AACL
       initOntologyChooser(getCharField());
-
   }
 
 
@@ -75,8 +75,8 @@ class TermCompList extends AbstractAutoCompList {
     }
   }
 
-  protected Vector getSearchItems(String input) {
-    return getCompListSearcher().getStringMatchTerms(input);
+  protected List<CompletionTerm> getSearchItems(String input) {
+    return getCompListSearcher().getStringMatchTermList(input);
   }
 
   /** The user has selected a term from the list, validate and set current obo class
@@ -227,6 +227,7 @@ class TermCompList extends AbstractAutoCompList {
   private void initOntologyChooser(CharField charField) {
     ontologyChooserCombo = new JComboBox();
     // need to add in ALL
+    ontologyChooserCombo.addItem(ALL);
     for (Ontology o : charField.getOntologyList()) {
       ontologyChooserCombo.addItem(o.getName());
     }
@@ -243,9 +244,18 @@ class TermCompList extends AbstractAutoCompList {
   private class OntologyChooserListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       String s = ontologyChooserCombo.getSelectedItem().toString();
+
+      // ALL
+      if (isAll(s)) {
+        //getCompListSearcher().setSearchAll(true);
+        getCompListSearcher().setOntologies(getCharField().getOntologyList());
+        return;
+      }
+
+      // SINGLE ONTOLOGY
       try {
-        Ontology o = OntologyManager.inst().getOntologyForName(s);
-        //getCompList().setOntology(o); // termComp?
+        //Ontology o = OntologyManager.inst().getOntologyForName(s);
+        Ontology o = getCharField().getOntologyForName(s);
         getCompListSearcher().setOntology(o);
       }
       catch (OntologyException ex) {
@@ -253,6 +263,7 @@ class TermCompList extends AbstractAutoCompList {
         return;
       }
     }
+    private boolean isAll(String s) { return s.equals(ALL); }
   }
   
 }

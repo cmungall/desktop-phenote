@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.List;
 import java.util.Vector;
 import javax.swing.ComboBoxEditor;
 import javax.swing.JComboBox;
@@ -14,6 +15,8 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 //import javax.swing.event.ListSelectionEvent;
 //import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListDataListener;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.text.Document;
 import javax.swing.plaf.basic.BasicComboBoxEditor;
@@ -43,7 +46,8 @@ public abstract class AbstractAutoCompList extends JComboBox {
   // default combo box.getSelectedItem sortof does this imperfectly
   //private OBOClass currentOboClass=null;
   //private OBOProperty currentRel=null;
-  private DefaultComboBoxModel defaultComboBoxModel;
+  //private DefaultComboBoxModel defaultComboBoxModel;
+  private CompComboBoxModel compComboBoxModel;
   //private SearchParamsI searchParams;
   private boolean inTestMode = false;
   //private AutoTextFieldEditor autoTextFieldEditor;
@@ -156,9 +160,11 @@ public abstract class AbstractAutoCompList extends JComboBox {
     setText("");
   }
 
+  /** this is funny for TermCompList this is a CompletionTerm, for RelationCompList this
+      is a RelationTerm */
   protected Object getSelectedObject() throws OboException {
-    if (defaultComboBoxModel == null) throw new OboException(); // ??
-    Object obj = defaultComboBoxModel.getSelectedItem();
+    if (compComboBoxModel == null) throw new OboException(); // ??
+    Object obj = compComboBoxModel.getSelectedItem();
     if (obj == null) throw new OboException();
     return obj;
   }
@@ -286,14 +292,18 @@ public abstract class AbstractAutoCompList extends JComboBox {
     // i think ultimately we will need to wrap the OBOClass to be able to
     // have more control over the string - cut off w ... & [syn][obs] tags
     // returns a vector of CompletionTerms (checks if relations)
-    Vector v = getSearchItems(input); // abstract method
+    //Vector v = getSearchItems(input); // abstract method
+    List<CompletionTerm> l = getSearchItems(input);
     //if (isRelationshipList()) v = ontology.getStringMatchRelations(input);
     //else v = getTerms(input);
     // throws IllegalStateException, Attempt to mutate in notification
     // this tries to change text field amidst notification hmmmm.....
     changingCompletionList = true;
-    defaultComboBoxModel = new DefaultComboBoxModel(v);
-    setModel(defaultComboBoxModel);
+    //defaultComboBoxModel = new DefaultComboBoxModel(v);
+    // could just do comboBoxModel.setList(l); ???
+    compComboBoxModel = new CompComboBoxModel(l);
+    //setModel(defaultComboBoxModel);
+    setModel(compComboBoxModel);
     changingCompletionList = false;
     // showPopup can hang during test but not during real run - bizarre
     showPopup(); // only show popup on key events - actually only do comp w key
@@ -335,7 +345,7 @@ public abstract class AbstractAutoCompList extends JComboBox {
 //   }
 
   // Vector<CompletionTerm>? CompletionItem?
-  protected abstract Vector getSearchItems(String input);
+  protected abstract List<CompletionTerm> getSearchItems(String input);
 //     if (isRelationshipList()) return termSearcher.getStringMatchRelations(input);
 //     else return termSearcher.getStringMatchTerms(input);}
 
@@ -472,8 +482,21 @@ public abstract class AbstractAutoCompList extends JComboBox {
     autoTextField.processKeyEvent(k);
   }
 
+  private class CompComboBoxModel implements ComboBoxModel {
+    //private List<CompletionTerm> list; cant do - may also be CompletionRelation!
+    private List list;
+    private Object selectedItem;
+    private CompComboBoxModel(List l) { list = l; }
+    public Object getSelectedItem() { return selectedItem; }
+    public void setSelectedItem(Object anItem) { selectedItem = anItem; }
+    public void	addListDataListener(ListDataListener l) {}
+    public Object getElementAt(int index) { return list.get(index); }
+    public int getSize() { return list.size(); }
+    public void removeListDataListener(ListDataListener l) {}
+  }
 }
 
+// its own file?
 class OboException extends Exception {
   OboException() { super(); }
   OboException(String s) { super(s); }
@@ -508,134 +531,3 @@ class OboException extends Exception {
 //     UpdateTransaction ut = new UpdateTransaction(c,cfe,oboClass);
 //     EditManager.inst().updateModel(this,ut);
 //   }
-//   /** Listens for UseTermEvents from term info,if editModel is true then edits model*/
-//   private class ComboUseTermListener implements UseTermListener {
-//     public void useTerm(UseTermEvent e) {
-//       setOboClass(e.getTerm());
-//       if (editModel) editModel();
-//     }
-//   }
-//   /** This is touchy stuff - so i want to be able to display info about term in 
-//       TermInfo when user mouses over terms in combo boxes JList. This is not
-//       explicitly supported by JComboBox. have to dig into its UI to get JList.
-//       The combo box ui selects items in JList on mouse over, this listener
-//       will listen for those mouse over selections 
-//       should this be done with a selection event - or is that
-//       overkill, i guess the question will anyone besides term info
-//       ever care about these mouse over selection - if so make generic */
-// //  void addCompletionListListener(ListSelectionListener lsl) {
-// //     if (!canGetUIJList()) return;
-// //     getUIJList().addListSelectionListener(lsl);  }
-//   void enableTermInfoListening(boolean enable) {
-//     if (!canGetUIJList())
-//       return;
-//     if (enable)
-//       getUIJList().addListSelectionListener(compListListener);
-//     else
-//       getUIJList().removeListSelectionListener(compListListener);
-//   }
-
-//   /** this is for MOUSE OVER TERM INFO - changes selection */
-//   private class CompletionListListener implements ListSelectionListener {
-//     public void valueChanged(ListSelectionEvent e) {
-//       Object source = e.getSource();
-//       // hate to cast but it is handy here... and it is in fact a JList
-//       if (!(source instanceof JList)) {
-//         System.out.println("source of combo box mouse over event is not JList "+
-//                            source.getClass());
-//         return;
-//       }
-//       JList jList = (JList)source;
-//       Object selectedValue = jList.getSelectedValue();
-//       if (selectedValue == null)
-//         return;
-//       //System.out.println("sel val "+selectedValue.getClass()+" name "+selectedValue);
-//       // the selected item should be an OBOClass
-//       if (!(selectedValue instanceof OBOClass)) {
-//         System.out.println("selected completion term is not obo class "
-//                            +selectedValue.getClass());
-//         return;
-//       }
-//       OBOClass oboClass = (OBOClass)selectedValue;
-//       Object src = AbstractAutoCompList.this;
-//       getSelectionManager().selectTerm(src,oboClass,getUseTermListener());
-//       //setTextFromOboClass(oboClass);
-//     }
-//   } // end of CompletionListListener inner class
-  
-//   private UseTermListener useTermListener;
-//   private UseTermListener getUseTermListener() {
-//     if (useTermListener == null) useTermListener = new ComboUseTermListener();
-//     return useTermListener;
-//   }
-//       CharacterI c = getSelectedCharacter(); // from selectionManager
-//       CharFieldEnum cfe = charField.getCharFieldEnum();
-//       UpdateTransaction ut = new UpdateTransaction(c,cfe,oboClass);
-//       EditManager.inst().updateModel(this,ut);
-  //private Ontology getOntology() { return ontology; }
-
-  /** Return true if input String matches name of OBOClass in
-   * defaultComboBoxModel - rename this? this isnt used anymore - delete?
-   */
-//   boolean isInCompletionList(String input) {
-//     if (defaultComboBoxModel == null)
-//       return false;
-//     if (input == null) {
-//       return false;
-//     }
-//     // this is wrong as it holds OBOClasses not Strings!
-//     //return defaultComboBoxModel.getIndexOf(input) != -1;
-//     // have to go through all OBOClasses and extract there names - bummer
-//     // most likely input is selected one check that first
-//     OBOClass selectedClass = getSelectedOboClass();
-//     if (selectedClass != null && input.equals(selectedClass.getName()))
-//       return true;
-//     // selected failed(is this possible?) - try everything in the list then...
-//     for (int i=0; i<defaultComboBoxModel.getSize(); i++) {
-//       if (input.equals(getCompListOboClass(i).getName()))
-//         return true;
-//     }
-//     return false;
-//   }
- 
-    // mac bug workaround where list covers up textfield on < 12 items no scroll
-    // from http://www.orbital-computer.de/JComboBox/#usage
-    // it does note this may cause class cast excpetions??
-    // it does cause exception when down arror is typed... hmmm...
-    //setUI(new BasicComboBoxUI()); // now setting metal look & feel for whole app
-//String ontology,AutoComboBox cb) {
-    //private String previousModelValue=null;
-      //this.ontology = ontology;
-      //comboBox = cb;
-         //setTableFromField(ontology);
-      //t.editModel();  // or charField.editModel?
-      // CharacterChangeEvent e = new CharacterChangeEvent(t);
-      // OR CharEditManager.inst().updateModel(c,cfe,input,previousModelValue);
-      // CEM.handleTransaction(new UT), CEM.updateModel(UT)
-      // fireChangeEvent(e);
-
-      // check if input is a real term - i think we can get away with checking
-      // if in present term completion list - not sure
-      // i think this is replaced by check above - make sure does the same...
-//       boolean valid = isInCompletionList(oboClass); //input);
-//       if (!valid)
-//         return; 
-
-
-// doesnt work - would need to subclass editor component i thing - hassle
-//   // for TestPhenote
-//   void simulateBackspace() {
-//     KeyEvent ke = new KeyEvent(this,KeyEvent.VK_DELETE,java.util.Calendar.getInstance().getTimeInMillis(),0,KeyEvent.VK_UNDEFINED,KeyEvent.CHAR_UNDEFINED);
-//     //patoComboBox.processKeyEvent(ke);
-//     getEditor().getEditorComponent().processKeyEvent(ke);
-
-//   }
-//     Document d = e.getDocument();
-//     String input;
-//     try {
-//       input = d.getText(0,d.getLength());
-//     }
-//     catch (javax.swing.text.BadLocationException ex) {
-//       System.out.println(ex);
-//       return;
-//     }

@@ -84,16 +84,18 @@ public class CharField {
   }
 
   public boolean hasOntology(String ontologyName) {
-    return getOntologyForName(ontologyName) != null;
+    try { getOntologyForName(ontologyName); }
+    catch (OntologyException e) { return false; }
+    return true; // ?
   }
 
-  /** Returns Ontology with name ontologyName (ignores case), null if dont have it */
-  public Ontology getOntologyForName(String ontologyName) {
+  /** Returns Ontology with name ontologyName (ignores case), ont ex if dont have it */
+  public Ontology getOntologyForName(String ontologyName) throws OntologyException {
     for (Ontology o : getOntologyList()) {
       if (o.getName().equalsIgnoreCase(ontologyName))
         return o;
     }
-    return null;
+    throw new OntologyException(ontologyName+" not found for field "+getName());
   }
 
   // set whether post composition allowed (from config) */
@@ -133,76 +135,4 @@ public class CharField {
 
   public String toString() { return "CharField: "+getName(); }
 }
-
-    // is this getting silly? abstract? --> char field value i think
-    //public void setOboClass(CharacterI c, OBOClass o) {}
-    //public OBOClass getOBOClass(CharacterI c) { return null; }
-//   public CharField(CharFieldEnum c, Ontology o) {
-//     charFieldEnum = c;
-//     ontologyList.add(o);
-//   }
-
-//   public CharField(CharFieldEnum c, String n) {
-//     charFieldEnum = c;
-//     name = n;
-//   }
-
-// hmmmmmm.... wrap String & OBOClass in one class
-// public class CharFieldValue {
-// OBOClass oboClassValue
-// String stringValue
-// CharFieldValue(String)
-// CharFieldValue(OBOClass)
-// getName() { if isObo return obo.getName; else return string
-// getid, ....
-// }
-
-// above would be setValue(CharFieldValue)
-// getValue(CharFieldValue)
-  // separate class? labels? methods? subclasses?
-  // is this taking enums too far? or a good use of them?
-  // would it be nice to have a class that wrapped String and OBOClass?
-  // and all possible field values? or would that be annoying?
-//   public enum CharFieldEnum {
-
-//     PUB("Pub") {
-//       public void setValue(CharacterI c, CharFieldValue v) {
-//         c.setPub(v.getName());
-//       }
-//       public CharFieldValue getValue(CharacterI c) {
-//         return new CharFieldValue(c.getPub(),c,this);
-//       }
-//     },
-//     LUMP("Genotype") { // genotype? default?
-//       public void setValue(CharacterI c, CharFieldValue v) {
-//         c.setGenotype(v.getName());
-//       }
-//       public CharFieldValue getValue(CharacterI c) {
-//         return new CharFieldValue(c.getGenotype(),c,this);
-//       }
-//     },
-//     GENETIC_CONTEXT("Genetic Context") {
-//       public void setValue(CharacterI c, CharFieldValue v) {
-//         c.setGeneticContext(v.getOboClass());
-//       }
-//       public CharFieldValue getValue(CharacterI c) {
-//         return new CharFieldValue(c.getGeneticContext(),c,this);
-//       }
-//     },
-//     ENTITY("Entity") {
-//       public void setValue(CharacterI c, CharFieldValue v) {
-//         c.setEntity(v.getOboClass());
-//       }
-//       public CharFieldValue getValue(CharacterI c) {
-//         return new CharFieldValue(c.getEntity(),c,this);
-//       }
-//     },
-//     QUALITY("Quality") {
-//       public void setValue(CharacterI c, CharFieldValue v) {
-//         c.setQuality(v.getOboClass());
-//       }
-//       public CharFieldValue getValue(CharacterI c) {
-//         return new CharFieldValue(c.getQuality(),c,this);
-//       }
-//     };
 

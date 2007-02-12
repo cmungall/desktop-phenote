@@ -1,6 +1,7 @@
 package phenote.gui.field;
 
-import java.util.Vector;
+import java.util.List;
+//import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
@@ -100,9 +101,13 @@ class RelationCompList extends AbstractAutoCompList {
 
   /** Returns a vector of CompletionRelations for auto completion
       which contain input, using search params */
-  protected Vector getSearchItems(String input) {
+//   protected Vector getSearchItems(String input) {
+//     return getCompListSearcher().getStringMatchRelations(input);
+//   }
+  protected List getSearchItems(String input)  {
     return getCompListSearcher().getStringMatchRelations(input);
   }
+
 
   private Logger log;
   private Logger log() {
