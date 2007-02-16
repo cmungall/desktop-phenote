@@ -115,13 +115,13 @@ public class OntologyManager {
   }
 
 
-  private boolean isPostComp(String id) {
+  boolean isPostComp(String id) {
     if (id == null) return false;
     return id.contains("^");
   }
 
   /** parse string GO:123^part_of(AO:345) into post comp obo class */
-  private OBOClass getPostComp(String id) throws TermNotFoundException {
+  OBOClass getPostComp(String id) throws TermNotFoundException {
     Pattern pat = Pattern.compile("([^\\^]+)\\^([^\\(]*)\\(([^\\)]*)\\)");
     Matcher m = pat.matcher(id);
     boolean found = m.find();

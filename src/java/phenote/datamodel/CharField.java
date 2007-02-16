@@ -115,16 +115,33 @@ public class CharField {
   public Ontology getPostCompRelOntol() { return postCompRelOntol; }
 
   /** if free text returns string charfieldValue, for ontology field valueString is
-      id and searches ontologies for id, throws ontologyException if not found */
+      id and searches ontologies for id, throws ontologyException if not found 
+      this needs to deal with post comp!!!! */
   public CharFieldValue makeValue(Character c, String valueString)
     throws TermNotFoundException {
+
+    // FREE TEXT FIELD
     if (!hasOntologies())
       return new CharFieldValue(valueString,c,this);
+
+    // ONTOLOGY
     else {
+
       OBOClass oboClass=null;
-      for (Ontology ont : ontologyList) {
-        try { oboClass = ont.getTerm(valueString); }
+
+      // CHECK FOR POST COMP - could probably move this to char field but right now just
+      // trying to get this working before i split town...
+      if (OntologyManager.inst().isPostComp(valueString)) {
+        try { oboClass = OntologyManager.inst().getPostComp(valueString); }
         catch (TermNotFoundException e) {} // move on to next ontology
+        
+      }
+      
+      else {
+        for (Ontology ont : ontologyList) {
+          try { oboClass = ont.getTerm(valueString); }
+          catch (TermNotFoundException e) {} // move on to next ontology
+        }
       }
       if (oboClass != null)
         return new CharFieldValue(oboClass,c,this);
