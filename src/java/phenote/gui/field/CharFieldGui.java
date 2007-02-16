@@ -5,6 +5,7 @@ package phenote.gui.field;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Container;
+import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -53,6 +54,8 @@ class CharFieldGui {
   private boolean addCompButton = true;
   /** if true then set gui but not model, for clearing on multi, default false */
   private boolean updateGuiOnly = false;
+  static int fieldHeight = 17;
+  static Dimension inputSize = new Dimension(390,fieldHeight); // size of user input box
   
 
   CharFieldGui(CharField charField, FieldPanel tp) {/*Container parent,*/

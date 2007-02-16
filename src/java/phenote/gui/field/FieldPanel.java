@@ -46,7 +46,7 @@ public class FieldPanel extends JPanel {
   }
 
   private void initGui() {
-    // should figure y from # of fields really
+    // should figure y from # of fields really!!! yes!!!
     // width of ontology labels effects x
     this.setMinimumSize(new Dimension(730,490));//690,490));
     //this.setPreferredSize(new Dimension(2000,750)); // irrelevant in box layout

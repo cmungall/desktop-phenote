@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.awt.Dimension;
-import java.awt.GridLayout;
+//import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -67,9 +69,11 @@ public class CharacterTablePanel extends JPanel {
   }
 
   private void init() {
-    setLayout(new GridLayout(2,1)); // row,col
+    //setBorder(new javax.swing.border.LineBorder(java.awt.Color.RED)); debug
+    //setLayout(new GridLayout(2,1)); // row,col
+    setLayout(new GridBagLayout());
     setPreferredSize(new Dimension(1800,800));
-    setMinimumSize(new Dimension(1400,630));    
+    setMinimumSize(new Dimension(1400,630)); // 630   
 
     characterTableModel = new CharacterTableModel();
     charJTable = new JTable(characterTableModel);
@@ -85,12 +89,14 @@ public class CharacterTablePanel extends JPanel {
     // wierd - changes to scrollbar seem to happen on own thread?
     verticalScrollBar.getModel().addChangeListener(new ScrollChangeListener());
     // width config? 150 * # of cols? set column width? column width config?
-    charJTable.setPreferredScrollableViewportSize(new Dimension(500, 150));
+    charJTable.setPreferredScrollableViewportSize(new Dimension(500, 600));//150
 
-    add(tableScroll);
+    GridBagConstraints gbc = GridBagUtil.makeFillingConstraint(0,0);
+    add(tableScroll,gbc);
 
     // add in buttons
     JPanel buttonPanel = new JPanel();
+    //buttonPanel.setBorder(new javax.swing.border.LineBorder(java.awt.Color.BLUE));
 
     ActionListener al = new ButtonActionListener();
 
@@ -107,7 +113,9 @@ public class CharacterTablePanel extends JPanel {
     if (Config.inst().uvicGraphIsEnabled())
       graphWindow = addButton("Graph",al,buttonPanel);
     
-    add(buttonPanel);
+    // non filling
+    gbc = GridBagUtil.makeAnchorConstraint(0,1,GridBagConstraints.CENTER);
+    add(buttonPanel,gbc);
 
 
     EditManager.inst().addCharChangeListener(new TableCharChangeListener());

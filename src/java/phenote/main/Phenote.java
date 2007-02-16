@@ -125,6 +125,80 @@ public class Phenote {
     }
   }
 
+
+  public Frame getFrame() { return frame; }
+
+  private void makeWindow() {
+    // this may be changed to applet...
+    frame = new JFrame("Phenote "+PhenoteVersion.versionString()); 
+    frame.getContentPane().add(makeMainPanel());
+    MenuManager.createMenuManager(frame);
+    frame.setPreferredSize(new Dimension(1130,700)); //1100,700));
+    if (standalone) // if stand alone exit java on window close
+      frame.addWindowListener(new WindowExit());
+    frame.pack();
+    frame.setVisible(true);
+  }
+
+  /** for standalone & webstart - not for servlet as i think it will bring the
+      whole servlet down */
+  private class WindowExit extends WindowAdapter {
+    public void windowClosing(WindowEvent e) {
+      if (standalone)
+        System.exit(0);
+    }
+  }
+
+  /** main panel contains FieldPanel CharTablePanel & TermInfo 
+      move this to gui? */
+  private JPanel makeMainPanel() {
+    JPanel mainPanel = new JPanel(new GridBagLayout()); // ??
+    
+    //JPanel termAndTablePanel = new JPanel();
+    JPanel upperPanel = new JPanel();
+    //BoxLayout bl = new BoxLayout(termAndTablePanel,BoxLayout.Y_AXIS);
+    BoxLayout bl = new BoxLayout(upperPanel,BoxLayout.X_AXIS);
+    upperPanel.setLayout(bl);
+
+    fieldPanel = new FieldPanel(); // field panel contains search params
+    upperPanel.add(fieldPanel);
+
+    termInfo = new TermInfo(); //fieldPanel);
+    upperPanel.add(termInfo.getComponent());
+    //++gbc.gridx;  // ??
+    //gbc.anchor = GridBagConstraints.NORTHWEST; // ??
+    //mainPanel.add(termInfo.getComponent(),gbc);
+    
+
+    //GridBagConstraints gbc = GridBagUtil.makeConstraint(0,0,4,4); // x,y,hPad,vPad
+//     double weightY = 1;
+//     int fill = GridBagConstraints.BOTH;
+//     int anchor = GridBagConstraints.WEST;
+//     GridBagConstraints gbc = GridBagUtil.makeConstraint(0,0,1,1,weightY,4,4,fill,anchor);
+    GridBagConstraints gbc = GridBagUtil.makeFillingConstraint(0,0);
+    gbc.weighty = 10;
+    mainPanel.add(upperPanel,gbc);
+
+    characterTablePanel = new CharacterTablePanel();
+    //termAndTablePanel.add(characterTablePanel);
+    ++gbc.gridy; // ?
+    gbc.weighty = 17;
+    mainPanel.add(characterTablePanel,gbc);
+
+    return mainPanel;
+  }
+
+  public static Phenote getPhenote() {  // singleton
+    if (phenote == null) phenote = new Phenote();
+    return phenote;
+  }
+  // These methods are actually for TestPhenote
+  public FieldPanel getFieldPanel() { return fieldPanel; }
+  public TermInfo getTermInfo() { return termInfo; }
+  public CharacterTablePanel getCharacterTablePanel() { return characterTablePanel; }
+}
+
+
 //   /** for now just looking for '-c configFile.cfg', use command line package
 //       if we need to get more sophisticated 
 //       so if user has personal config file should override this - however maybe 
@@ -181,72 +255,3 @@ public class Phenote {
 //     return configFile;
 //   }
 
-  public Frame getFrame() { return frame; }
-
-  private void makeWindow() {
-    // this may be changed to applet...
-    frame = new JFrame("Phenote "+PhenoteVersion.versionString()); 
-    frame.getContentPane().add(makeMainPanel());
-    MenuManager.createMenuManager(frame);
-    frame.setPreferredSize(new Dimension(1130,700)); //1100,700));
-    if (standalone) // if stand alone exit java on window close
-      frame.addWindowListener(new WindowExit());
-    frame.pack();
-    frame.setVisible(true);
-  }
-
-  /** for standalone & webstart - not for servlet as i think it will bring the
-      whole servlet down */
-  private class WindowExit extends WindowAdapter {
-    public void windowClosing(WindowEvent e) {
-      if (standalone)
-        System.exit(0);
-    }
-  }
-
-  /** main panel contains FieldPanel CharTablePanel & TermInfo 
-      move this to gui? */
-  private JPanel makeMainPanel() {
-    JPanel mainPanel = new JPanel(new GridBagLayout()); // ??
-    
-    //JPanel termAndTablePanel = new JPanel();
-    JPanel upperPanel = new JPanel();
-    //BoxLayout bl = new BoxLayout(termAndTablePanel,BoxLayout.Y_AXIS);
-    BoxLayout bl = new BoxLayout(upperPanel,BoxLayout.X_AXIS);
-    upperPanel.setLayout(bl);
-
-    fieldPanel = new FieldPanel(); // field panel contains search params
-    upperPanel.add(fieldPanel);
-
-    termInfo = new TermInfo(); //fieldPanel);
-    upperPanel.add(termInfo.getComponent());
-    //++gbc.gridx;  // ??
-    //gbc.anchor = GridBagConstraints.NORTHWEST; // ??
-    //mainPanel.add(termInfo.getComponent(),gbc);
-    
-
-    GridBagConstraints gbc = GridBagUtil.makeConstraint(0,0,5,5);
-    mainPanel.add(upperPanel,gbc);
-
-    characterTablePanel = new CharacterTablePanel();
-    //termAndTablePanel.add(characterTablePanel);
-    ++gbc.gridy; // ?
-    mainPanel.add(characterTablePanel,gbc);
-
-    return mainPanel;
-  }
-
-  public static Phenote getPhenote() {  // singleton
-    if (phenote == null) phenote = new Phenote();
-    return phenote;
-  }
-  // These methods are actually for TestPhenote
-  public FieldPanel getFieldPanel() { return fieldPanel; }
-  public TermInfo getTermInfo() { return termInfo; }
-  public CharacterTablePanel getCharacterTablePanel() { return characterTablePanel; }
-}
-
-
-//     SearchPanel searchPanel = new SearchPanel(fieldPanel);
-//     mainPanel.add(searchPanel);
-//     fieldPanel.setSearchPanel(searchPanel);

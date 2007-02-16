@@ -179,7 +179,9 @@ public class OntologyDataAdapter {
 
     // if ontCfg.hasSynchUrl() ?
     // URL synchUrl = ontCfg.getSynchUrl
-    startTimer("checking with repos... loading obo session "+filename);
+    long mem = Runtime.getRuntime().totalMemory()/1000000;
+    LOG.debug(url+" checking with repos... loading obo session mem "+mem+"\n");
+    startTimer(url+" checked against repos... obo session loaded"); // printed at stopTime
     if (oc.hasReposUrl()) {
       try {
         URL reposUrl = oc.getReposUrl();//new URL("http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/evidence_code.obo");
@@ -195,6 +197,12 @@ public class OntologyDataAdapter {
     
     loadOboSessionFromUrl(o,url,filename);
     stopTimer();
+    mem = Runtime.getRuntime().totalMemory()/1000000;
+    System.out.println("mem after load "+mem+" max "+Runtime.getRuntime().maxMemory()/1000000);
+    //System.gc();
+    //mem = Runtime.getRuntime().totalMemory()/1000000;
+    //System.out.println("\n\nmem after garbage collection "+mem+"\n");
+    
   }
 
   /** url is either local file or repos url */
@@ -311,7 +319,9 @@ public class OntologyDataAdapter {
 //       }
       //stopTimer();
       r.close();
+      is.close(); // ??
       w.close();
+      fos.close(); // ??
     } catch (IOException e) { throw new OntologyException(e); }
   }
 

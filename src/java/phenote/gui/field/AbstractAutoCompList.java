@@ -53,6 +53,7 @@ public abstract class AbstractAutoCompList extends JComboBox {
   //private AutoTextFieldEditor autoTextFieldEditor;
   private AutoTextField autoTextField;
   private CharField charField;
+  //private CharFieldGui charFieldGui; // should it be ISA not HASA?
   ///** Whether differentia of a post composed term */
   //private boolean isDifferentia = false;
   /** if false then model is not edited */
@@ -68,11 +69,13 @@ public abstract class AbstractAutoCompList extends JComboBox {
     // this will probably throw errors if non metal look & feel is used
     setUI(new MetalListComboUI());
     setEditable(true);
-    setPreferredSize(new Dimension(390,20));
-    setMaximumSize(new Dimension(390,20));
+    //charFieldGui = cfg;
+    setCharField(cf);
+    setPreferredSize(CharFieldGui.inputSize); //new Dimension(390,20));
+    setMaximumSize(CharFieldGui.inputSize); //new Dimension(390,20));
     // this is super critical - fixes bug where layout goes to hell if string are long
     // in completion - dont ask me why????
-    setMinimumSize(new Dimension(390,20));
+    setMinimumSize(CharFieldGui.inputSize);
     AutoTextFieldEditor autoTextFieldEditor = new AutoTextFieldEditor();
     this.setEditor(autoTextFieldEditor);
     // dont know why by setting fonts this seem to get worse not better in terms of
@@ -86,7 +89,6 @@ public abstract class AbstractAutoCompList extends JComboBox {
     setFont(new Font("Monospaced",Font.PLAIN,10));
     //setOntology(ontology);
     //searchParams = sp; // singleton access? part of ontology?
-    setCharField(cf);
     compListSearcher = s;
     //enableTermInfoListening(true); // default - hardwired in rel & term subclasses
     //addCompletionListListener(compList);

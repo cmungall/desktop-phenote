@@ -81,8 +81,10 @@ public class FileUtil {
 
   public static URL findUrl(String filename) throws FileNotFoundException {
     List<URL> possibleUrls = getPossibleUrls(filename);
-    for (URL u : possibleUrls)
+    for (URL u : possibleUrls) {
+      //System.out.println(u+" url exists "+urlExists(u));
       if (urlExists(u)) return u;
+    }
     System.out.println("Failed to find file "+filename);
     //LOG.error("Failed to find file "+filename);
     throw new FileNotFoundException(filename+" not found");
