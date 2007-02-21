@@ -1,0 +1,48 @@
+<!--#include virtual="/ssi/header.html" -->
+
+<div id="page_body">
+
+<!--#include virtual="/ssi/navi_howtos.html" -->
+
+<div id="main_content">
+
+
+<h1><a name="config">How-To:  Customize Phenote</a></h1>
+<p>
+Phenote can be customized in the following ways:
+</p>
+<ul>
+  <li><a href="#input">specify input fields</a> and their types</li>
+  <li><a href="#data_adapter">adding a custom data adapter</a></li>
+  <li><a href="#ontologies">specify ontologies</a></li>
+  <li><a href="#post-comp">specify if an ontology field allows for post-composition</a></li>
+  <li><a href="#ontology-updating">turn on/off ontology-updating</a></li>
+</ul>
+
+<p>
+Some basics on customizing phenote:
+</p>
+<p>Make sure you've already tried running the webstart edition of phenote.  Running this once should leave a directory on your computer called ".phenote".  On a PC this will be under C:/Documents and Settings/UserName/.phenote.  On a mac it will be in your home dir (easiest to get to via a terminal window).
+</p>
+<p>
+Open up the file "my-phenote.cfg" from ".phenote/conf/".  It should have one line of text that says "zfin-standalone.cfg".  If it doesn't, change this to the name of the file that contains your custom phenote configuration.
+</p>
+<p>
+Next, copy your custom configuration file into the ".phenote/conf/" directory. 
+</p>
+<p>To get a custom ontology that is local and not on SF, you'll have to copy it into ".phenote/obo-files/".  Any reference to this ontology within your configuration file must match the filename.
+</p>
+<p>
+Then, you should be able to start phenote with the same webstart link as before, but it should load with this new configuration.  you can also start it by double-clicking on the java icon that downloaded to your desktop called "phenote-zfin" or somesuch.
+</p>
+
+<p>More info to come...</p>
+<h2>Location of your configuation file</h2>
+<h2>Location to put your personal obo files</h2>
+<h2>Anatomy of the config file</h2>
+<h2>Fields, types</h2>
+<h2>Making edits to a config file</h2>
+</div>
+</div>
+
+<!--#include virtual="/ssi/footer.shtml" -->
