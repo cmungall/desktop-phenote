@@ -19,8 +19,16 @@ Three configurations of Phenote have been created to include the ontologies most
 <h3><a name="annotation">Development Versions</a></h3>
 Note that these versions have not been fully tested and might contain bugs.  Please report any bugs you find on our <a href="https://sourceforge.net/tracker/?group_id=76834&atid=887913">tracker</a>
 <ul>
-<li><a href="http://toy.lbl.gov:9010/phenote/1.1/phenote-zfin.jnlp">Zebrafish</a></li>
+<li><a href="http://toy.lbl.gov:9010/phenote/1.1/phenote-zfin.jnlp">Zebrafish v1.1</a>
+<p>  Most notable features of this version are:
+  <ul>
+    <li>Ability to configure phenote input fields/ontologies for use with webstart, not just the command-line version.  (For more information about how to create and use your own custom configuration, read our <a href="/content/how-tos/customize.shtml">how-to:customize</a> documentation.)
+    </li>
+    <li>Ability to search through all loaded ontologies at once with the autocompletion feature, in addition to searching for terms in individual ontologies.
+    </li>
+  </ul>
 </ul>
+</p>
 <p>
 You can also <a href="http://obo.svn.sourceforge.net/*checkout*/obo/phenote/trunk/">checkout</a> the latest Development version of Phenote from sourceforge.  
 </p>
