@@ -17,17 +17,17 @@
 
 <h2>The basics</h2>
 
-<p>Make sure you've already tried running the webstart edition of phenote.  Running this once should leave a directory on your computer called ".phenote".  On a PC this will be under C:/Documents and Settings/UserName/.phenote.  On a mac it will be in your home dir (easiest to get to via a terminal window).
-</p>
-
-<h2>Location of your configuation file</h2>
-<p> The configuration files used by Phenote are located in the ".phenote/conf" directory.
+<p>Make sure you've already tried running the webstart edition of phenote.  Running this once should leave a directory on your computer called ".phenote".  
   <ul>
     <li>On a Mac, you will find this located under the MacintoshHD:Users:YourAccount directory, although you probably will not see it in a "finder" window.  You do have access to it if you run a "terminal" window.  It will be located in your user directory. 
     </li>
     <li>On a PC, this is located in the C:/Documents and Settings/YourAccount/
     </li>
   </ul>
+</p>
+
+<h2>Location of your configuation file</h2>
+<p> The configuration files used by Phenote are located in the ".phenote/conf" directory.
 </p>
 <p>
 Within this directory you can store any number of configuration files.  The default files that come with the webstart versions are named "flybase.cfg", "zfin-standalone.cfg", or "human.cfg", depending on which version you've used in the past.  Any file you create/modify should be placed in this directory.
@@ -46,14 +46,10 @@ It should have one single line, which should have the name of the file you want 
 Then, you should be able to start phenote with the same webstart link as before, but it should load with this new configuration.  you can also start it by double-clicking on the java icon that downloaded to your desktop called "phenote-zfin.jnlp" or somesuch.
 </p>
 <br />
-<h2>Other notes</h2>
-<p>To get a custom ontology that is local and not on SF, you'll have to copy it into ".phenote/obo-files/".  Any reference to this ontology within your configuration file must match the filename.
-</p>
-
-<br />
-
 <h2>Other topics under construction:</h2>
 <h2>Location to put your personal obo files</h2>
+<p>To get a custom ontology that is local and not on SF, you'll have to copy it into ".phenote/obo-files/".  Any reference to this ontology within your configuration file must match the filename.
+</p>
 <h2>Anatomy of the config file</h2>
 <h2>Fields, types</h2>
 <h2>Making edits to a config file</h2>
