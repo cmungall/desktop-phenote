@@ -8,36 +8,51 @@
 
 
 <h1><a name="config">How-To:  Customize Phenote</a></h1>
-<p>
-Phenote can be customized in the following ways:
-</p>
-<ul>
-  <li><a href="#input">specify input fields</a> and their types</li>
-  <li><a href="#data_adapter">adding a custom data adapter</a></li>
-  <li><a href="#ontologies">specify ontologies</a></li>
-  <li><a href="#post-comp">specify if an ontology field allows for post-composition</a></li>
-  <li><a href="#ontology-updating">turn on/off ontology-updating</a></li>
-</ul>
 
-<p>
-Some basics on customizing phenote:
+<h2>Background</h2>
+<p>Phenote can be customized to your specifications, including the input fields you desire, the ontologies from which those fields are populated with, and the output format used.  Currently (v1.1) this configuration must be done by hand-editing a text file, but we are currently spec-ing out a GUI to achieve the same results.  This page explains the location of and the process of editing the configuration file used when Phenote loads.
 </p>
+
+<p>This site is being updated with new content on a fairly regular basis.  Please check back often for new information.  In the mean time, if you have questions, you can <a href="/content/about/"> contact us </a> with questions.</p>  
+
+<h2>The basics</h2>
+
 <p>Make sure you've already tried running the webstart edition of phenote.  Running this once should leave a directory on your computer called ".phenote".  On a PC this will be under C:/Documents and Settings/UserName/.phenote.  On a mac it will be in your home dir (easiest to get to via a terminal window).
 </p>
-<p>
-Open up the file "my-phenote.cfg" from ".phenote/conf/".  It should have one line of text that says "zfin-standalone.cfg".  If it doesn't, change this to the name of the file that contains your custom phenote configuration.
+
+<h2>Location of your configuation file</h2>
+<p> The configuration files used by Phenote are located in the ".phenote/conf" directory.
+  <ul>
+    <li>On a Mac, you will find this located under the MacintoshHD:Users:YourAccount directory, although you probably will not see it in a "finder" window.  You do have access to it if you run a "terminal" window.  It will be located in your user directory. 
+    </li>
+    <li>On a PC, this is located in the C:/Documents and Settings/YourAccount/
+    </li>
+  </ul>
 </p>
 <p>
-Next, copy your custom configuration file into the ".phenote/conf/" directory. 
-</p>
-<p>To get a custom ontology that is local and not on SF, you'll have to copy it into ".phenote/obo-files/".  Any reference to this ontology within your configuration file must match the filename.
-</p>
-<p>
-Then, you should be able to start phenote with the same webstart link as before, but it should load with this new configuration.  you can also start it by double-clicking on the java icon that downloaded to your desktop called "phenote-zfin" or somesuch.
+Within this directory you can store any number of configuration files.  The default files that come with the webstart versions are named "flybase.cfg", "zfin-standalone.cfg", or "human.cfg", depending on which version you've used in the past.  Any file you create/modify should be placed in this directory.
 </p>
 
-<p>More info to come...</p>
-<h2>Location of your configuation file</h2>
+<h2>How to set up  a custom configuration in Phenote</h2>
+<p>
+Once you have placed or modified your configuration file in the ".phenote/conf" directory, you need to tell Phenote to use that particular file.  
+</p>
+<p>
+To do this, simply edit the file ".phenote/conf/my-phenote.cfg".  
+If you don't already have this file, you can create a new one.  
+It should have one single line, which should have the name of the file you want to use.  For example, if the name of the file I have copied into ".phenote/conf/" is called my-config.cfg, the my-phenote.cfg file will have one line that reads "my-config.cfg".
+</p>
+<p>
+Then, you should be able to start phenote with the same webstart link as before, but it should load with this new configuration.  you can also start it by double-clicking on the java icon that downloaded to your desktop called "phenote-zfin.jnlp" or somesuch.
+</p>
+<br />
+<h2>Other notes</h2>
+<p>To get a custom ontology that is local and not on SF, you'll have to copy it into ".phenote/obo-files/".  Any reference to this ontology within your configuration file must match the filename.
+</p>
+
+<br />
+
+<h2>Other topics under construction:</h2>
 <h2>Location to put your personal obo files</h2>
 <h2>Anatomy of the config file</h2>
 <h2>Fields, types</h2>

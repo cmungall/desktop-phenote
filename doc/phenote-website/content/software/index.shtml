@@ -22,7 +22,7 @@ Note that these versions have not been fully tested and might contain bugs.  Ple
 <li><a href="http://toy.lbl.gov:9010/phenote/1.1/phenote-zfin.jnlp">Zebrafish v1.1</a>
 <p>  Most notable features of this version are:
   <ul>
-    <li>Ability to configure phenote input fields/ontologies for use with webstart, not just the command-line version.  (For more information about how to create and use your own custom configuration, read our <a href="/content/how-tos/customize.shtml">how-to:customize</a> documentation.)
+    <li>Ability to configure phenote input fields/ontologies for use with webstart, not just the command-line version.  (For more information about how to create and use your own custom configuration, read our <a href="/content/howtos/customize.shtml">how-to:customize</a> documentation.)
     </li>
     <li>Ability to search through all loaded ontologies at once with the autocompletion feature, in addition to searching for terms in individual ontologies.
     </li>
