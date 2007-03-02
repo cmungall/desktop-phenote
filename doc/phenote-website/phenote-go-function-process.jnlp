@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jnlp
 spec="1.0+"
-codebase="http://toy.lbl.gov:9010/phenote/1.0/"
+codebase="http://toy.lbl.gov:9010/phenote/1.1/"
 href="phenote-go-function-process.jnlp">
 <information>
-	<title>Phenote-for-GO 1.0</title>
+	<title>Phenote-for-GO 1.1</title>
 	<vendor>BBOP</vendor>
 	<description>Phenote demo for </description>
  	 <!-- Declares that the application can run without
@@ -38,7 +38,7 @@ href="phenote-go-function-process.jnlp">
 	<jar href="jars/log4j-1.2.13.jar" />
 </resources>
 <application-desc main-class="phenote.main.Phenote">
-        <argument>-i</argument>
+        <argument>-u</argument>
         <argument>/go-function-process.cfg</argument>
 </application-desc>
 </jnlp>
