@@ -8,26 +8,22 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 
 /** Characters are the EAV building blocks of a Phenotype. Previously this
     was called a Phenotype which was a misnomer 
-    Should the Character datamodel be a generic list of CharFieldValues?
-    That can be free text or from ontologies? hmmmm..... im starting to think
-    this datamodel is too hardwired - hmmmm....*/
+    Should the Character datamodel be a generic hash of CharField-CharFieldValues?
+    That can be free text or from ontologies? */
 public class Character implements CharacterI, Cloneable {
-
-  // List<CharFieldValue> charFields??? or List<CharField>
-  // phase these out...
-  //private String pub;
-  //private String genotype=""; // eventually Genotype class
-  // OboClass? OntologyTerm?...
-  //private OBOClass entity; // CharFieldValue???
-  //private OBOClass quality;
-  //private OBOClass geneticContext;
-  // new generic data structure    try { setValue(new CharFieldValue(e,this,getEntityField())); }
 
   private HashMap<CharField,CharFieldValue> charFieldToValue =
     new HashMap<CharField,CharFieldValue>();
 
   // obo edit annotation that gets modified in setValues
   // private OBOEditAnntotation - get & set methods
+
+  /** Throws CharFieldEx if fieldString not valid field, TermNotFoundEx if valueString
+      not found in ontologies associated with field */
+  public void setValue(String fieldString, String valueString)
+    throws CharFieldException,TermNotFoundException {
+    setValue(getCharFieldForName(fieldString),valueString);
+  }
 
   /** for generic fields its just a map from char field to char field value */
   public void setValue(CharField cf, CharFieldValue cfv) {

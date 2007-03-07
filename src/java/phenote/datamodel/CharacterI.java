@@ -12,8 +12,11 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 public interface CharacterI {
 
   /** generic fields!!! */
+  public void setValue(String fieldString, String valueString)
+    throws CharFieldException,TermNotFoundException;
   public void setValue(CharField cf, CharFieldValue cfv); // ??
   public void setValue(CharField cf, String valueString) throws TermNotFoundException;
+  public CharField getCharFieldForName(String fieldName) throws CharFieldException;
   public CharFieldValue getValue(CharField cf);
   public String getValueString(CharField cf);
   // should make an exception for this
