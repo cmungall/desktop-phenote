@@ -29,6 +29,8 @@ public interface CharacterI {
   public boolean equals(CharacterI c);
   public boolean hasNoContent();
 
+  
+  /** these methods are pase and need to be phased out! */
   public String getPub();
   public boolean hasPub();
   public String getGenotype();

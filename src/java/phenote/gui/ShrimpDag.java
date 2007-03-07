@@ -72,6 +72,8 @@ class ShrimpDag {
 	// just hard wire to go for now
     try {
       Ontology o = OntologyManager.inst().getOntologyForName("ZF");
+      // fly causes an endless loop - oh my
+      //Ontology o = OntologyManager.inst().getOntologyForName("Fly");
       return o.getOboSession();
     } catch (phenote.datamodel.OntologyException e) {
       System.out.println("no ontol for dag");

@@ -9,6 +9,7 @@ import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.CharacterI;
 
+/** used for bulk updating (see TermCompList) */
 public class CompoundTransaction implements TransactionI {
 
   // for now we just have UpdateTransactions - later will have Add & Del trans

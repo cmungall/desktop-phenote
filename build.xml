@@ -132,7 +132,7 @@ them into  the classfiles directory. excludes="test/**"  -->
             </classpath>
         </java>
     </target>
-  <target name="run-jar" >
+  <target name="run-jar" depends="jar">
      <java classname="phenote.main.Phenote" fork="yes" jvmargs="-Xmx300M">
          <!-- arg value="-c configfilehereventually"/ -->
         <classpath>
@@ -202,6 +202,16 @@ them into  the classfiles directory. excludes="test/**"  -->
         <jar destfile="${jarfile}">
             <fileset dir="${classfiles}"/>
             <fileset dir="." includes="obo-files/" excludes="obo-files/old"/>
+            <fileset file="${conf}/*.cfg"/>
+        </jar>
+    </target>
+
+    <!-- JAR The jar target compiles everything, and produces a phenote.jar in
+  phenote/jars/phenote.jar.  -->
+    <target name="jar-reduced" depends="compile">
+        <jar destfile="${jarfile}">
+            <fileset dir="${classfiles}"/>
+            <fileset dir="." includes="obo-files/" excludes="obo-files/old,obo-files/fma_obo.obo,obo-files/gene_ontology.obo,obo-files/chebi.obo" />
             <fileset file="${conf}/*.cfg"/>
         </jar>
     </target>
@@ -427,7 +437,8 @@ where xsd files are (conf) -->
       </copy>
     </target>    
 
-    <target name="webstart-jars" depends="build-all,jar,copy-webstart-jars,sign-webstart-jars"/> 
+    <target name="webstart-jars"
+            depends="build-all,jar,copy-webstart-jars,sign-webstart-jars"/> 
 
     <target name="copy-webstart-jars">
       <echo message="Env Var PHENOTE VERSION is set to ${env.PHENOTE_VERSION}" />
@@ -447,6 +458,14 @@ where xsd files are (conf) -->
     </target>   
 
     <target name="webstart-just-phenote-jar" depends="build-all,jar">
+       <copy file="${lib}/phenote.jar"
+             todir="phenote-webstart/${env.PHENOTE_VERSION}/jars"/>
+       <signjar jar="phenote-webstart/${env.PHENOTE_VERSION}/jars/phenote.jar" keystore="plumpkey" alias="signFiles"
+                storepass="plumper" keypass="plumper"/>
+    </target>
+
+    <!-- for quick test purposes - exclude big & slow human -->
+    <target name="webstart-just-phenote-jar-reduced" depends="compile,jar-reduced">
        <copy file="${lib}/phenote.jar"
              todir="phenote-webstart/${env.PHENOTE_VERSION}/jars"/>
        <signjar jar="phenote-webstart/${env.PHENOTE_VERSION}/jars/phenote.jar" keystore="plumpkey" alias="signFiles"

@@ -26,13 +26,17 @@ public class Character implements CharacterI, Cloneable {
   private HashMap<CharField,CharFieldValue> charFieldToValue =
     new HashMap<CharField,CharFieldValue>();
 
+  // obo edit annotation that gets modified in setValues
+  // private OBOEditAnntotation - get & set methods
+
   /** for generic fields its just a map from char field to char field value */
   public void setValue(CharField cf, CharFieldValue cfv) {
     charFieldToValue.put(cf,cfv);
     //System.out.println("Char setVal "+cf+" val "+cfv);
+    // setOboEditModel(oboEditAnnotation,cf,cfv);
   }
   private void setValue(CharFieldValue cfv) {
-    charFieldToValue.put(cfv.getCharField(),cfv);
+    setValue(cfv.getCharField(),cfv);
   }
 
   public void setValue(CharField cf, String s) throws TermNotFoundException {
@@ -96,7 +100,7 @@ public class Character implements CharacterI, Cloneable {
     }
   }
 
-  private CharField getCharFieldForName(String fieldName) throws CharFieldException {
+  public CharField getCharFieldForName(String fieldName) throws CharFieldException {
     for (CharField cf : getAllCharFields()) {
       if (cf.getName().equalsIgnoreCase(fieldName))
         return cf;

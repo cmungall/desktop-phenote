@@ -140,6 +140,7 @@ class TermCompList extends AbstractAutoCompList {
   }
 
 
+  /** edits one or more selected chars */
   protected void editModel() {
     OBOClass oboClass;
     try { oboClass = getCurrentOboClass(); }

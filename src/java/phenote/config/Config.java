@@ -1,6 +1,7 @@
 package phenote.config;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -11,6 +12,7 @@ import java.io.PrintStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
 
 import org.apache.xmlbeans.XmlException;
 
@@ -87,17 +89,24 @@ public class Config {
   }
 
   /** default file should be in .phenote/conf/my-phenote.cfg. if not set yet then just
-      do good ol flybase.cfg */
+      do good ol flybase.cfg - actually if not there then query user */
   private String getDefaultFile() {
     String file=null;
     try {
       LineNumberReader r = new LineNumberReader(new FileReader(getMyPhenoteFile()));
       file = r.readLine();
     } catch (IOException e) {}
-    if (file == null || file.equals(""))
-      file = FLYBASE_DEFAULT_CONFIG_FILE;
+    if (file == null || file.equals("")) {
+      //file = FLYBASE_DEFAULT_CONFIG_FILE;
+      file = queryUserForConfigFile();
+    }
     return file;
   }
+  
+  private String queryUserForConfigFile() {
+    return ConfigFileQueryGui.queryUserForConfigFile();
+  }
+
 
   /** if usePersonalConfig is false then ignore personal(my-phenote.cfg). if true
       then overwrite personal if overwritePersonal is true, otherwise only write
@@ -169,11 +178,9 @@ public class Config {
     //return dotConfFile.toString(); // ?
   }
 
-  private File getDotPhenoteConfDir() {
-    File dotPhenote = FileUtil.getDotPhenoteDir();
-    File conf = new File(dotPhenote,"conf");
-    conf.mkdir();
-    return conf;
+  private static File getDotPhenoteConfDir() {
+    return FileUtil.getDotPhenoteConfDir();
+    //File conf = new File(dotPhenote,"conf");conf.mkdir();return conf;
   }
 
   private File getMyPhenoteFile() {

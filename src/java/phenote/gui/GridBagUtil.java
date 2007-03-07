@@ -15,7 +15,7 @@ public class GridBagUtil {
     return makeConstraint(x,y,horizPad,vertPad,GridBagConstraints.WEST);
   }
 
-  static GridBagConstraints makeAnchorConstraint(int x, int y, int anchor) {
+  public static GridBagConstraints makeAnchorConstraint(int x, int y, int anchor) {
     return makeConstraint(x,y,3,3,anchor);
   }
 
