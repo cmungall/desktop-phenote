@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+  
+  <title>Creating a phenote data adapter - developer docs</title>
+</head>
+
+
+<body>
+
+<h1 style="text-decoration: underline; text-align: center;">Creating a Phenote Data Adapter</h1>
+
+First off if youve just downloaded phenote from sourceforge obo svn,
+the (latest) source is located in phenote/trunk/src/java. The most
+important subdirectories under src/java for creating a data adapter are
+phenote/dataadapter and phenote/datamodel. <br>
+<br>
+A good example data adapter to check out is phenote.dataadapter.phenosyntax.PhenoSyntaxFileAdapter<br>
+<br>
+
+The interface that a phenote data adapter implements is phenote.dataadapter.DataAdapterI, and here is what it looks like:<br>
+
+<br>
+
+public interface DataAdapterI {<br>
+
+<br>
+
+&nbsp; public void load();<br>
+
+&nbsp; public CharacterListI load(File f);<br>
+
+<br>
+
+&nbsp; public void commit(CharacterListI charList);<br>
+
+&nbsp; public void commit(CharacterListI charList, File f);<br>
+
+<br>
+
+&nbsp; /** Set value to use for loading or writeback, for a file adapter this would be<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the file name */<br>
+
+&nbsp; public void setAdapterValue(String adapterValue);<br>
+
+&nbsp; public List&lt;String&gt; getExtensions();<br>
+
+&nbsp; public String getDescription();<br>
+
+}<br>
+
+<br>
+The most important methods are load() and commit(charList).
+&nbsp;load() will be called by phenote to load up a
+phenote.datamodel.CharacterListI. A CharacterListI is just a list of
+phenote.datamodel.Characters. A Character is basically a phenotypic
+statement (relating E,Q,genotype, etc...). So basically what a data
+adapter needs to produce is a list of characters.&nbsp; <br>
+<br>
+A Character is just a set of tag-value fields, where the tag is the
+name of the field (Entity, Quality, Genotype...), and value is the
+value of the field. The actual names of the fields come from the
+phenote configuration. (link to nicoles doc on phenote config), in
+other words the phenote datamodel is proscribed by its configuration
+file. This means that either a data adapter needs to be able to read
+and write any tag-values that come at it, a dataadapter only handles a
+certain subset of a configuration, or a configuration is in tune with a
+data adapter. If the set of fields in configuration is completely
+different than the fields a data adapter is expecting than the data
+adapter wont be able to get/load the data it expects. The upshot is in
+addition to making a data adapter you need to make a configuration that
+fits with it (or make sure it fits with an existing configuration).<br>
+<br>
+&nbsp;To set a field in a character use:<br>
+setValue(CharField cf, String valueString) which throws a
+phenote.datamodel.TermNotFoundException if the valueString is not found
+in the ontologies associated with the CharField(via configuration)<br>
+where phenote.datamodel.CharField is an object that represents a field in a character. &nbsp;To get a char field you can call <br>
+getCharFieldForName(String fieldName) which throws a
+phenote.datamodel.CharFieldException if you give it a string that is
+not from the configuration. Ok even better I just combined this into
+one convenience method:<br>
+setValue(String fieldString, String valueString) throws TermNotFoundException, CharFieldException.<br>
+For fields with ontologies (with term completion) the valueString has to be the id for the term (not the term name)<br>
+<br>
+So thats basically it for making characters. Some code might look like this:<br>
+<br>
+try {<br>
+&nbsp;&nbsp;&nbsp; Character c = new Character();<br>
+&nbsp;&nbsp;&nbsp; c.setValue("Entity","GO:123");<br>
+&nbsp;&nbsp;&nbsp; c.setValue("Quality","PATO:345");<br>
+&nbsp;&nbsp;&nbsp; c.setValue("Genotype","somegenotypehere");<br>
+&nbsp;&nbsp;&nbsp; ....<br>
+} <br>
+catch (CharFieldException e) {...} // may want to do this per field - error msg?<br>
+catch (TermNotFoundException e) {...} // perhaps per field - error message?<br>
+<br>
+and for CharacterLists just add the characters made above to it:<br>
+CharacterList cl = new CharacterList();<br>
+cl.add(character1);<br>
+cl.add(character2);<br>
+...<br>
+<br>
+Ok I just noticed that currently only load(file) and
+commit(charList,file) are being called via the LoadSaveManager - I will
+fix this pronto.<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+ToDo:<br>
+So load &amp; save from file menu has been directed to LoadSaveManager
+which is hardwired to files(Jim Balhoffs work for phenoxml,syntax,
+&amp; nexus adapters - which are all file based - we havent had
+non-file yet). This wont work for database adapters and needs a
+refactoring - I will get on this! <br>
+<br>
+Add method to Character for setting a field with just strings:<br>
+setValue(String field, String value)<br>
+<br>
+<br>
+(dev note: Im wondering if the file stuff in DataAdapterI should be refactored)
+</body>
+</html>
