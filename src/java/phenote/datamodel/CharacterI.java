@@ -19,8 +19,8 @@ public interface CharacterI {
   public CharField getCharFieldForName(String fieldName) throws CharFieldException;
   public CharFieldValue getValue(CharField cf);
   public String getValueString(CharField cf);
-  // should make an exception for this
-  public String getValueString(String fieldName) throws CharFieldException; // yuck
+
+  public String getValueString(String fieldName) throws CharFieldException;
   public OBOClass getTerm(String fieldName) throws CharFieldException;
   // public void setTerm(String field, OBOClass term);
   // needed for protege plugin
