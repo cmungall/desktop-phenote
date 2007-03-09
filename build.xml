@@ -76,7 +76,7 @@ them into  the classfiles directory. excludes="test/**"  -->
 
     <!-- runs off classfiles not jar, todo: run-jar -->
     <target name="run" depends="compile">
-        <java classname="phenote.main.Phenote" fork="yes" jvmargs="-Xmx400M">
+        <java classname="phenote.main.Phenote" fork="yes" jvmargs="-Xmx500M">
             <!-- arg value="-c configfilehereventually"/ -->
             <classpath>
                 <pathelement path="${classfiles}"/>
