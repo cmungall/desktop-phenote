@@ -35,6 +35,8 @@ public class LoadSaveManager {
   
   /**Loads a new document of characters, prompting the user to choose a file and possibly a data adapter.*/
   public void loadData() {
+
+    // should only hop to file dialog if its known that ALL data adapters are File adapters
     File aFile = runOpenDialog();
     if (aFile != null) {
       FileFilter filter = fileChooser.getFileFilter();
