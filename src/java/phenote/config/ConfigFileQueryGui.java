@@ -144,13 +144,13 @@ class ConfigFileQueryGui {
       JarFile jar = juc.getJarFile();//new JarFile(jf);
       Enumeration<JarEntry> en = jar.entries();
       while (en.hasMoreElements()) {
-        System.out.println("entry: "+en.nextElement());
         String entry = en.nextElement().getName();
+        //System.out.println("entry: "+entry);
         if (entry.endsWith(".cfg")) {
           // test if jar if running off of jar basically
           //System.out.println("cfg "+entry +" res? "+ConfigFileQueryGui.class.getResource(entry)+ConfigFileQueryGui.class.getResource("/"+entry));
           if (ConfigFileQueryGui.class.getResource("/"+entry) != null) {
-            System.out.println("cfg that is in webstart phenote.jar "+entry);
+            //System.out.println("cfg that is in webstart phenote.jar "+entry);
             names.add(entry);
           }
         }
@@ -176,7 +176,7 @@ class ConfigFileQueryGui {
     File[] cfgFiles = confDir.listFiles(filter);
     if (cfgFiles == null) return; // null if nothing found
     for (File f : cfgFiles) {
-      System.out.println("adding cfg file "+f.getName()+" from dir "+confDir);
+      //System.out.println("adding cfg file "+f.getName()+" from dir "+confDir);
       names.add(f.getName());
     }
   }
