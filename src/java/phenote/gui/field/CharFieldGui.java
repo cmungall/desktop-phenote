@@ -21,9 +21,12 @@ import org.geneontology.oboedit.datamodel.OBOProperty;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.CharacterI;
+import phenote.datamodel.CharacterListI;
+import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyException;
 import phenote.datamodel.OntologyManager;
+import phenote.dataadapter.QueryableDataAdapterI;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 //import phenote.edit.CompoundTransaction;
@@ -84,6 +87,10 @@ class CharFieldGui {
     else
       initCombo();
 
+    // check queryableAdapter if charField is queryable
+    addRetrieveButton();
+
+
     // listens for selection (eg from table) - not for PostCompGui
     if (enableListeners)
       SelectionManager.inst().addCharSelectionListener(new FieldCharSelectListener());
@@ -96,6 +103,27 @@ class CharFieldGui {
     // from the main window i think??
     if (enableListeners)
       EditManager.inst().addCharChangeListener(new FieldCharChangeListener());
+  }
+
+  private void addRetrieveButton() {
+    // if (Config.inst().hasQueryableDataAdapter()) {
+    // QueryableAdapter qa = Config.inst().getQueryableDataAdapter(); // for now just one
+    // if (qa.isCharFieldQueryable(cf)) {
+    // Button b = new Button("Retrieve");
+    // b.addActionListener(new RetrieveActionListener(qa));
+    // fieldPanel.addRetrieveButton(b)
+    
+  }
+
+  private class RetrieveActionListener implements ActionListener {
+    QueryableDataAdapterI qda;
+    private RetrieveActionListener(QueryableDataAdapterI q) { qda = q; }
+    public void actionPerformed(ActionEvent e) {
+      CharacterListI cl = qda.query(charField,getText());
+      //notifyNewCharList(cl);
+      // check if unsaved data - if so ask user if wants to save/load
+      CharacterListManager.inst().setCharacterList(this,cl);
+    }
   }
 
   // FreeTextField.updateModel uses this
