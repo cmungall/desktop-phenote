@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp
+spec="1.0+"
+codebase="http://toy.lbl.gov:9010/phenote/1.1"
+href="phenote.jnlp">
+<information>
+	<title>Phenote 1.1</title>
+	<vendor>BBOP</vendor>
+	<description>Phenote standalone app via webstart</description>
+ 	 <!-- Declares that the application can run without
+         access to the server it was downloaded from -->
+	<offline-allowed />
+</information>
+<security>
+      <!-- Request that the application be given full
+           access to the local (executing) machine,
+           as if it were a regular Java application.
+           Requires that all JAR files be signed
+           by a trusted party -->
+	<all-permissions />
+</security>
+<resources>
+  	<!-- Specify the versions of the Java Runtime Environment
+         (JRE) that are supported by the application.
+         Multiple entries of this kind are allowed, in which
+         case they are considered to be in order of preference -->
+	<j2se version="1.5+" initial-heap-size="64m" max-heap-size="500m" />
+	<jar href="jars/phenote.jar" />
+	<jar href="jars/oboedit.jar" />
+	<jar href="jars/org.geneontology.jar" />
+	<jar href="jars/BrowserLauncher2-10rc4.jar" />
+	<jar href="jars/jsr173_1.0_api.jar" />
+	<jar href="jars/phenoxmlbeans.jar" />
+	<jar href="jars/phenoteconfigbeans.jar" />
+	<jar href="jars/xbean.jar" />
+	<jar href="jars/tomcat-servlet.jar" />
+	<jar href="jars/te-common.jar" />
+	<jar href="jars/log4j-1.2.13.jar" />
+</resources>
+<!-- no cmd line param will ask user for config at initialization -->
+<application-desc main-class="phenote.main.Phenote">
+</application-desc>
+</jnlp>
+
+
+
