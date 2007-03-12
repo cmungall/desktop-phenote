@@ -150,7 +150,7 @@ class ConfigFileQueryGui {
           // test if jar if running off of jar basically
           //System.out.println("cfg "+entry +" res? "+ConfigFileQueryGui.class.getResource(entry)+ConfigFileQueryGui.class.getResource("/"+entry));
           if (ConfigFileQueryGui.class.getResource("/"+entry) != null) {
-            //System.out.println("cfg that is in jar "+entry);
+            System.out.println("cfg that is in webstart phenote.jar "+entry);
             names.add(entry);
           }
         }
@@ -175,8 +175,10 @@ class ConfigFileQueryGui {
       };
     File[] cfgFiles = confDir.listFiles(filter);
     if (cfgFiles == null) return; // null if nothing found
-    for (File f : cfgFiles) 
+    for (File f : cfgFiles) {
+      System.out.println("adding cfg file "+f.getName()+" from dir "+confDir);
       names.add(f.getName());
+    }
   }
 
   /** generic util? */
