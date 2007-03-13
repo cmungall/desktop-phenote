@@ -172,23 +172,29 @@ public class OntologyDataAdapter {
 
   /** If repository is configured loads obo from repos if local out of date */
   private void loadOboSessionCheckRepos(Ontology o,OntologyConfig oc)
-  throws OntologyException {
+    throws OntologyException {
+
     // first get normal/cached/local ontology
     String filename = oc.getFile();
-    URL url = findFile(filename); // throws OntologyEx if file not found
+    // throws OntologyEx if file not found -- need to catch - should still try url
+    URL url = null;
+    try { url = findFile(filename); }
+    catch (OntologyException oe) {
+      System.out.println(filename+" not found locally, trying url if configured ");
+    }
 
     // if ontCfg.hasSynchUrl() ?
     // URL synchUrl = ontCfg.getSynchUrl
     long mem = Runtime.getRuntime().totalMemory()/1000000;
     LOG.debug(url+" checking with repos... loading obo session mem "+mem+"\n");
-    startTimer(url+" checked against repos... obo session loaded"); // printed at stopTime
+    startTimer();
     if (oc.hasReposUrl()) {
       try {
         URL reposUrl = oc.getReposUrl();//new URL("http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/evidence_code.obo");
         // if out of synch copies repos to local
         // url may be jar/obo-files or svn/obo-files but this function may put file
         // in cache ~/.phenote/obo-files
-        url = synchWithRepositoryUrl(url,reposUrl,o.getName());
+        url = synchWithRepositoryUrl(url,reposUrl,o.getName(),filename);
         
         // to do - if from repos need to load repos into local obo cache!
 
@@ -196,13 +202,10 @@ public class OntologyDataAdapter {
     }
     
     loadOboSessionFromUrl(o,url,filename);
-    stopTimer();
+    stopTimer(url+" checked against repos... obo session loaded");
     mem = Runtime.getRuntime().totalMemory()/1000000;
-    System.out.println("mem after load "+mem+" max "+Runtime.getRuntime().maxMemory()/1000000);
-    //System.gc();
-    //mem = Runtime.getRuntime().totalMemory()/1000000;
-    //System.out.println("\n\nmem after garbage collection "+mem+"\n");
-    
+    long max = Runtime.getRuntime().maxMemory()/1000000;
+    System.out.println("mem after load "+mem+" max "+max);
   }
 
   /** url is either local file or repos url */
@@ -221,12 +224,18 @@ public class OntologyDataAdapter {
   }
 
   /** this copies obo file to local cache (~/.phenote/obo-files */
-  private URL synchWithRepositoryUrl(URL localUrl, URL reposUrl, String ontol)
+  private URL synchWithRepositoryUrl(URL localUrl, URL reposUrl, String ontol,
+                                     String filename)
     throws OntologyException {
     long repos = getOboDate(reposUrl);
-    long loc = getOboDate(localUrl); // throws ont ex
+    long loc = 0;
     boolean useRepos = false;
-    if (repos > loc)
+    if (localUrl != null)
+      loc = getOboDate(localUrl); // throws ont ex
+    else
+      useRepos = true;
+
+    if (repos > loc || useRepos)
       useRepos = queryUserAboutRepos(ontol);
     if (useRepos) {
 
@@ -239,7 +248,8 @@ public class OntologyDataAdapter {
 //       }
 
       // download obo to local cache (takes time!)
-      String file = FileUtil.getNameOfFile(localUrl);
+      String file = localUrl!=null ? FileUtil.getNameOfFile(localUrl) : filename;
+      //String file = FileUtil.getNameOfFile(localUrl);
       try { 
         localUrl = new File(FileUtil.getDotPhenoteOboDir(),file).toURL();
         LOG.info("Downloading new ontology from repository "+reposUrl+" to "+localUrl);
@@ -364,17 +374,17 @@ public class OntologyDataAdapter {
 
   // eventually move to util class
   private Calendar startTime;
-  private String timerMsg;
-  private void startTimer(String m) {
+  //private String timerMsg;
+  private void startTimer() {
     startTime = Calendar.getInstance();
-    timerMsg = m;
+    //timerMsg = m;
     //LOG.debug(timerMsg+" Start clock "+startTime.getTime()); // ??
   }
 
-  private void stopTimer() {
+  private void stopTimer(String m) {
     Calendar endTime = Calendar.getInstance();
     long seconds = (endTime.getTimeInMillis() - startTime.getTimeInMillis())/1000;
-    LOG.debug(timerMsg+" number of seconds: "+seconds);
+    LOG.debug(m+" number of seconds: "+seconds);
   }
 
 
