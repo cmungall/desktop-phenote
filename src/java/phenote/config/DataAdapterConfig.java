@@ -7,6 +7,7 @@ import phenote.dataadapter.fly.FlybaseDataAdapter;
 import phenote.dataadapter.nexus.NEXUSAdapter;
 import phenote.dataadapter.phenosyntax.PhenoSyntaxFileAdapter;
 import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
+import phenote.dataadapter.delimited.DelimitedFileAdapter;
 
 class DataAdapterConfig {
 
@@ -82,6 +83,8 @@ class DataAdapterConfig {
         dataAdapter = new FlybaseDataAdapter(); // for now...
       else if (configString.equalsIgnoreCase("nexus"))
         dataAdapter = new NEXUSAdapter();
+      else if (configString.equalsIgnoreCase("delimited"))
+    	dataAdapter = new DelimitedFileAdapter();
       // LOG not set up yet???
       else
         System.out.println("Data adapter not recognized "+configString);

@@ -59,7 +59,7 @@ public class NEXUSAdapter implements DataAdapterI {
   }
 
   public String getDescription() {
-    return "NEXUS files";
+    return "NEXUS [.nex, .nxs]";
   }
 
   public List<String> getExtensions() {

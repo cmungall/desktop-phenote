@@ -1,4 +1,4 @@
-package phenote.dataadapter.phenosyntax;
+package phenote.dataadapter.delimited;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,16 +17,16 @@ import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
 
-/** Writes pheno syntax characters to a file.
-    See http://www.fruitfly.org/~cjm/obd/pheno-syntax.html for a full description
-    of pheno syntax. Its basically a human readable version of pheno xml
-    e.g. E=head Q=large */
+/** Originated with PhenoSyntaxFileAdapter and modified.  Writes the basic text to 
+ *  a file, with 'tab' delimiters.  First line is column headings, only printed 
+ *  once.
+ *  e.g. E=head Q=large */
 
-public class PhenoSyntaxFileAdapter implements DataAdapterI {
+public class DelimitedFileAdapter implements DataAdapterI {
 
   private File previousFile;
   private File file;
-  private static String[] extensions = {"psx", "syn"};
+  private static String[] extensions = {"tab"};
 
   /** command line setting of file */
   public void setAdapterValue(String filename) {
@@ -44,13 +44,13 @@ public class PhenoSyntaxFileAdapter implements DataAdapterI {
     try {
       CharacterListI charList = new CharacterList();
       LineNumberReader lnr = new LineNumberReader(new FileReader(file));
-      PhenoSyntaxChar synChar = new PhenoSyntaxChar();
+      DelimitedChar synChar = new DelimitedChar();
       for (String line=lnr.readLine(); line != null; line = lnr.readLine()) {
         try {
           synChar.parseLine(line);
         CharacterI ch = synChar.getCharacter();
         charList.add(ch);
-        } catch (PhenoSyntaxChar.SyntaxParseException e) {
+        } catch (DelimitedChar.SyntaxParseException e) {
           System.out.println(e.getMessage()); // jut "" for whitespace line
         }
       }
@@ -58,7 +58,7 @@ public class PhenoSyntaxFileAdapter implements DataAdapterI {
       lnr.close();
     }
     catch (IOException e) {
-      System.out.println("PhenoSyntax read failure "+e);
+      System.out.println("Delimited read failure "+e);
     }
     file = null; // null it for next load/commit
   }
@@ -68,20 +68,20 @@ public class PhenoSyntaxFileAdapter implements DataAdapterI {
     CharacterListI charList = new CharacterList();
     try {
       LineNumberReader lnr = new LineNumberReader(new FileReader(f));
-      PhenoSyntaxChar synChar = new PhenoSyntaxChar();
+      DelimitedChar synChar = new DelimitedChar();
       for (String line=lnr.readLine(); line != null; line = lnr.readLine()) {
         try {
           synChar.parseLine(line);
         CharacterI ch = synChar.getCharacter();
         charList.add(ch);
-        } catch (PhenoSyntaxChar.SyntaxParseException e) {
+        } catch (DelimitedChar.SyntaxParseException e) {
           System.out.println(e.getMessage()); // jut "" for whitespace line
         }
       }
       lnr.close();
     }
     catch (IOException e) {
-      System.out.println("PhenoSyntax read failure "+e);
+      System.out.println("Tab-delimited read failure "+e);
     }
     return charList;
   }
@@ -100,7 +100,6 @@ public class PhenoSyntaxFileAdapter implements DataAdapterI {
   }
 
   public void commit(CharacterListI charList) {
-    
     if (file == null)
       file = getFileFromUserForSave(previousFile);
     if (file == null) return;
@@ -114,15 +113,26 @@ public class PhenoSyntaxFileAdapter implements DataAdapterI {
       return;
     }
 
-    System.out.println("Writing pheno syntax to file "+file);
+    System.out.println("Writing tab-delimited output to file "+file);
+    //first write out header, then write out contents
+    //header determined from first CharI
+    try {
+    	CharacterI ch = charList.get(0);
+    	String c = new DelimitedChar(ch).getDelimitedHeaderString();   
+        System.out.println(c);
+        pw.println(c);   	
+    }
+    catch (DelimitedChar.BadCharException e) {
+        System.out.println(e.getMessage()+" Not writing out header");
+      }
 
     for (CharacterI ch : charList.getList()) {
       try {
-        String c = new PhenoSyntaxChar(ch).getPhenoSyntaxString();
-        System.out.println(c);
-        pw.println(c);
+        String c2 = new DelimitedChar(ch).getDelimitedString();
+        System.out.println(c2);
+        pw.println(c2);
       }
-      catch (PhenoSyntaxChar.BadCharException e) {
+      catch (DelimitedChar.BadCharException e) {
         System.out.println(e.getMessage()+" Not writing out character");
       }
     }
@@ -140,7 +150,7 @@ public class PhenoSyntaxFileAdapter implements DataAdapterI {
   }
   
   public String getDescription() {
-    return "PhenoSyntax [.psx, .syn]";
+    return "Tab Delimited [.tab]";
   }
 
 }

@@ -377,6 +377,15 @@ public class Config {
     return fields;
   }
 
+  public String getLabelForCharField(CharField cf) throws ConfigException {
+	    for (FieldConfig fc : getFieldConfigList()) {
+	      if (fc.hasCharField(cf))
+	        return fc.getLabel();
+	    }
+	    // failed to find field config for char field - shouldnt happen
+	    throw new ConfigException("Syn Abbrev for "+cf+" not found");
+	  }
+  
   public String getSyntaxAbbrevForCharField(CharField cf) throws ConfigException {
     for (FieldConfig fc : getFieldConfigList()) {
       if (fc.hasCharField(cf))

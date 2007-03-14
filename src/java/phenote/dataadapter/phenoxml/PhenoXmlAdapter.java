@@ -337,7 +337,7 @@ public class PhenoXmlAdapter implements DataAdapterI {
   }
   
   public String getDescription() {
-    return "PhenoXML files";
+    return "PhenoXML [.pxml, .xml]";
   }
 
   private Logger log;

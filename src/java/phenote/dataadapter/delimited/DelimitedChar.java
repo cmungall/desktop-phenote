@@ -1,4 +1,4 @@
-package phenote.dataadapter.phenosyntax;
+package phenote.dataadapter.delimited;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -16,67 +16,116 @@ import phenote.datamodel.TermNotFoundException;
 import phenote.config.Config;
 import phenote.config.ConfigException;
 
-/** A phenotype character thats basically a dataadapter object for datamodel
-    CharacterI. It can make a phenosyntax string from a CharacterI and make
-    a CharacterI from a phenosyntax string  e.g. E=head Q=large
-    See http://www.fruitfly.org/~cjm/obd/pheno-syntax.html for a full description
-    of pheno syntax.
-
-    Phenote additions: syntax doesnt do genotype or genetic context but heck we
-    need them - so i added GT=genotype (do we gen context?) GC=geneticContext
+/** I stole this from phenosyntaxchar, but modifying for tab delimited.  will
+ *  initially hard code in the tab-delimiter, but eventually it should be generic to 
+ *  handle any delimiter.
+ * A phenotype character thats basically a dataadapter object for datamodel CharacterI. 
 */
 
-public class PhenoSyntaxChar {
+public class DelimitedChar {
 
   private CharacterI character;
-  private String phenoSyntaxString;
+  private String delimitedString;
+  private String delimitedHeaderString;
+  private String delimiter;
 
-  PhenoSyntaxChar() {}
+  DelimitedChar() {}
 
-  PhenoSyntaxChar(CharacterI ch) {
+  DelimitedChar(CharacterI ch) {
     character = ch;
+    delimiter = "\t";
   }
 
   // WRITE
-  String getPhenoSyntaxString() throws BadCharException {
-    if (phenoSyntaxString == null) {
-      phenoSyntaxString = makeSyntaxString();
+  String getDelimitedString() throws BadCharException {
+    if (delimitedString == null) {
+      delimitedString = makeDelimitedString();
     }
-    return phenoSyntaxString;
+    return delimitedString;
   }
-
-  private String makeSyntaxString() throws BadCharException {
-    if (character == null) { // shouldnt happen
-      System.out.println("Error: no Character to make phenoSyntax string with");
-      return ""; //??
-    }
-    StringBuffer sb = new StringBuffer();
-
-    try {
-
-      // ontology manager should have char fields in order of config which should be
-      // syntax order - hope this isnt too presumptious
+  String getDelimitedHeaderString() throws BadCharException {
+	if (delimitedHeaderString == null) {
+      delimitedHeaderString = makeDelimitedHeaderString();
+	}
+	return delimitedHeaderString;
+  }
+  
+/** the idea for the tab-delimited output writer is to 
+ * 1) identify what the header/column names should be (like they present in the phenote 
+ * window:  pub, entity, quality, etc.).  Need to include all column headers even if there
+ * isn't data for them...they'd just have a blank column...in future will get smart to this.
+ * basically its creating the headers based on the config file.
+ * 2) insert delimiter (initially "tab") between each field
+ * 3) write each phenotype character on an individual line under headers.  one PC for each 
+ * hard return
+ * should i include the config file on the first line?
+ * */
+  private String makeDelimitedHeaderString() throws BadCharException { 
+	if (character == null) { // shouldnt happen
+ 	  System.out.println("Error: could not make tab-delimited header");
+	  return ""; //??
+	}
+	StringBuffer sb = new StringBuffer();
+	try {
+    // ontology manager should have char fields in order of config which should be
+    // syntax order - hope this isnt too presumptious
       for (CharField cf : OntologyManager.inst().getCharFieldList()) {
-        if (character.hasValue(cf)) {
-          sb.append(Config.inst().getSyntaxAbbrevForCharField(cf)).append("=");//ex
-          if (isFreeText(cf)) sb.append('"'); // free text gets quoted
-          sb.append(makeValue(character.getValue(cf)));
-          if (isFreeText(cf)) sb.append("\" ");
-          sb.append("\n");
+    	  //if its a free text field - only one col necessary.
+    	  //if its an ontology field - need two cols (one for ID, the other for text)
+ 	    sb.append(Config.inst().getSyntaxAbbrevForCharField(cf));
+ 	    //for now, i'll call on the syntax abbrev, but i'll want to use the acutal name
+        if (!isFreeText(cf)) { 
+          sb.append(" ID").append(delimiter);
+          sb.append(Config.inst().getSyntaxAbbrevForCharField(cf)).append(" Name");
         }
-        // check for entity & quality??
+        sb.append(delimiter);
       }
-
-    }
+	}
     catch (ConfigException e) {
       throw new BadCharException(e.getMessage());
     }
     return sb.toString();
+	  
+  }
+  
+  private String makeDelimitedString() throws BadCharException {
+    if (character == null) { // shouldnt happen
+      System.out.println("Error: no Character to make delimited string with");
+      return ""; //??
+    }
+    StringBuffer sb = new StringBuffer();
+//*****************
+    try {
+
+        // ontology manager should have char fields in order of config which should be
+        // syntax order - hope this isnt too presumptious
+        for (CharField cf : OntologyManager.inst().getCharFieldList()) {
+          if (character.hasValue(cf)) {
+        	  Config.inst().getLabelForCharField(cf);
+        	  //           sb.append(Config.inst().getLabelForCharField(cf));
+            sb.append(makeValue(character.getValue(cf)));
+          }
+          else if (isOntology(cf)) sb.append(delimiter);  
+          //need to make sure to add extra delimiter for ontology fields
+        sb.append(delimiter);
+        }
+
+      }
+      catch (ConfigException e) {
+        throw new BadCharException(e.getMessage());
+      }
+    
+
+     return sb.toString();
   }
    
   /** If a char field has ontologies it is not free text */
   private boolean isFreeText(CharField cf) {
     return !cf.hasOntologies();
+  }
+  
+  private boolean isOntology(CharField cf) {
+	return cf.hasOntologies();
   }
 
   // this may be more general than just this class
@@ -90,11 +139,12 @@ public class PhenoSyntaxChar {
   }
 
   private String makeTermValue(OBOClass term) {
-    // id & commented out name for readability
-    return term.getID() + " /*" + term.getName() + "*/ ";
+	//if the term comes from an ontology, need to include a col for both
+	//id and name
+    return term.getID() + delimiter + term.getName();
   }
 
-
+//********READ NOT YET IMPLEMENTED!!!
   // READ
 
   /** Parse syntax line into character */
