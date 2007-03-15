@@ -33,7 +33,7 @@ public class DelimitedChar {
 
   DelimitedChar(CharacterI ch) {
     character = ch;
-    delimiter = "\t";
+    delimiter = "\t";  //delimiter is currently set to tab
   }
 
   // WRITE
@@ -58,7 +58,7 @@ public class DelimitedChar {
  * 2) insert delimiter (initially "tab") between each field
  * 3) write each phenotype character on an individual line under headers.  one PC for each 
  * hard return
- * should i include the config file on the first line?
+ * should i include the config file on the first line?...maybe in the future
  * */
   private String makeDelimitedHeaderString() throws BadCharException { 
 	if (character == null) { // shouldnt happen
@@ -72,11 +72,11 @@ public class DelimitedChar {
       for (CharField cf : OntologyManager.inst().getCharFieldList()) {
     	  //if its a free text field - only one col necessary.
     	  //if its an ontology field - need two cols (one for ID, the other for text)
- 	    sb.append(Config.inst().getSyntaxAbbrevForCharField(cf));
+ 	    sb.append(Config.inst().getLabelForCharField(cf));
  	    //for now, i'll call on the syntax abbrev, but i'll want to use the acutal name
         if (!isFreeText(cf)) { 
           sb.append(" ID").append(delimiter);
-          sb.append(Config.inst().getSyntaxAbbrevForCharField(cf)).append(" Name");
+          sb.append(Config.inst().getLabelForCharField(cf)).append(" Name");
         }
         sb.append(delimiter);
       }
@@ -144,47 +144,35 @@ public class DelimitedChar {
     return term.getID() + delimiter + term.getName();
   }
 
-//********READ NOT YET IMPLEMENTED!!!
   // READ
 
   /** Parse syntax line into character */
+  //try just splitting at tab.
   void parseLine(String line) throws SyntaxParseException {
-    character = new Character();
-    Pattern p = Pattern.compile("\\S+=");//\\S+=");
-    Matcher m = p.matcher(line);
-    boolean found = m.find();
-    if (!found)
-      throw new SyntaxParseException(line); // skips whitespace lines
-    int tagStart = m.start();
-    int tagEnd = m.end();
-    while (found) {
-      String tag = line.substring(tagStart,tagEnd-1); // -1 take off =
-      int valueStart = tagEnd;
-      // find next one will give end of value
-      found = m.find(); // if parsing last tag found will be false - at end
-      tagStart = found ? m.start() : line.length();
-      if (found) tagEnd = m.end(); // dont need if not found (last one)
-      String value = line.substring(valueStart,tagStart).trim();
-      value = stripComments(value).trim();
-      //value = stripQuotesFromFreeText(value); // free text gets quoted
-      //System.out.println("tag ."+tag+". val ."+value+".");
-      addTagValToChar(tag,value);
-    }
-  }
-
-  private String stripComments(String value) {
-    value = value.replaceAll("/\\*.*\\*/","");
-    return value;
-  }
-
-  private static final String q = "\"";
-
-  private String stripQuotesFromFreeText(String value,CharField cf) {
-    if (!isFreeText(cf)) return value;
-    if (value.startsWith(q)) value = value.substring(1);
-    if (value.endsWith(q)) value = value.substring(0,value.length()-2);
-    return value;
-  }
+		character = new Character();
+//		System.out.println("input line="+line);
+		Pattern p = Pattern.compile("\t");
+		//parse based on tab...will be delimiter in future
+		String[] items = p.split(line);
+		boolean found = (items.length>0); //m.find();
+//		System.out.println("numcols="+items.length);
+		if (!found)
+		  throw new SyntaxParseException(line); // skips whitespace lines
+		int colCount = 0;
+		int fieldCount = 0;
+		while (found) {
+		  String value = items[colCount];
+		  addDelValToChar(fieldCount,value);
+		  CharField c = Config.inst().getCharField(fieldCount);
+//		  System.out.println("col="+colCount+";  fieldCount="+fieldCount+"; val="+value+"; charfieldname ="+c.getName());
+	      if (isOntology(c)) {
+	        colCount++; //skip over the Name, only keep ID
+	      }
+		  colCount++;
+		  fieldCount++;
+		  found = (colCount<items.length); // if parsing last tag found will be false - at end
+		}
+	  }
 
   class SyntaxParseException extends Exception {
     private String syntaxLine;
@@ -198,56 +186,36 @@ public class DelimitedChar {
     }
   }
 
-  private void addTagValToChar(String tag, String value) {
-    if (value.equals("")) {
-      log().error("No value given for "+tag);
-      return;
-    }
-    
-    OntologyManager om = OntologyManager.inst();
-    
-    try {
-      // so this is funny but there can be more than one char field for an abbrev - for
-      // instance Tag is for both abormal and absent. with setValue only the proper char
-      // field will get set, eg abnormal char field will throw exception for "absent"
-      List<CharField> fields = Config.inst().getCharFieldsForSyntaxAbbrev(tag);//Ex
-      for (CharField cf : fields) {
-        
-        value = stripQuotesFromFreeText(value,cf);
 
-        if (cf.getName().equals("Stage")) {
-          // todo - a general relationship extracter?
-          value = extractStageHack(value); // for now - fix for real later
-        }
-        try {
+  
+  private void addDelValToChar(int fieldNum, String value) {
+//  it doesn't really matter if there's a blank column in this mode
+    if (value.equals("")) {
+//      log().error("No value given for column"+fieldNum);
+      return;  //don't need to populate a CharField if no value
+    }    
+    OntologyManager om = OntologyManager.inst();
+    try {
+      List<CharField> fields = Config.inst().getCharFieldsForDelimited(fieldNum);//Ex
+      //      List<CharField> fields = Config.inst().getCharFieldsForSyntaxAbbrev(tag);//Ex
+
+      for (CharField cf : fields) {
+    	try {
+    	    //System.out.println("column="+fieldNum+"; value = "+value);
           // set String -> for obo class automatically find term
+          //this assumes that you are loading data the same order you saved it
           character.setValue(cf,value); // throws TermNotFoundEx
-          return; // if no ex thrown were done
+    	return; // if no ex thrown were done
         }
         catch (TermNotFoundException e) {} // do nothing - try next char field
       }
     }
     catch (ConfigException e) { log().error(e.getMessage()); } // field not found
     //catch (TermNotFoundException e) {
-    System.out.println("PhSynCh term not found "+value);
+    System.out.println("Error1: term not found ("+value+")");
     //log().error(e.getMessage());
-    log().error("Term not found "+value); // list char field?
-    //}
-
-      
-  }
-
-  /** Stages come with rel - eg during(adult) - for now just assuming its during and ripping
-      off - in future need to read in rel, and store as relationship between Instances
-      (not OBOClasses!) - big refactor but go for it! 
-      this extracts the "adult" in above example out of "during(adult)" 
-      or alternatively just record relationship in CharFieldValue? */
-  private String extractStageHack(String stageWithRel) {
-    Pattern p = Pattern.compile("during\\(([^\\)]+)\\)");
-    Matcher m = p.matcher(stageWithRel);
-    if (m.matches())
-      return m.group(1);
-    return stageWithRel;
+    log().error("Error2: Term not found ("+value+")"); // list char field?
+    //}      
   }
 
   CharacterI getCharacter() { return character; }
@@ -258,43 +226,3 @@ public class DelimitedChar {
     return log;
   }
 }
-//     try {
-//       if (tag.equals("PUB")) 
-//         character.setPub(value);
-//       else if (tag.equals("GT"))
-//         character.setGenotype(value);
-//       else if (tag.equals("GC"))
-//         character.setGeneticContext(om.getOboClassWithExcep(value)); // throws ex
-//       else if (tag.equals("E"))
-//         character.setEntity(om.getTermOrPostComp(value));
-//       else if (tag.equals("Q"))
-//         character.setQuality(om.getOboClassWithExcep(value));
-//       else // throw exception? or let rest of char go through?
-//         System.out.println("pheno syntax tag "+tag+" not recognized (value "+value+")");
-//     }
-//     catch (OntologyManager.TermNotFoundException e) {
-//       log().error("Term not found for tag "+tag+" value "+value+" in loaded "
-//                   +"ontologies - check syntax with ontology files.");
-//       return;
-//     }
-//       if (character.hasValue("Pub")) // hasPub
-//         sb.append("PUB=").append(character.getValueString("Pub")); //Pub());
-//       // Genotype - not strictly part of pheno syntax but lets face it we need it
-//       // i would say its an omission from syntax
-//       //sb.append(" GT=").append(character.getGenotype());
-//       if (character.hasValue("Genotype"))
-//         sb.append(" GT=").append(character.getValueString("Genotype"));
-//       if (character.hasValue("Genetic Context"))
-//         sb.append(" GC=").append(makeValue(character.getTerm("Genetic Context")));
-      
-//       if (!character.hasValue("Entity"))
-//         throw new BadCharException("Error: character has no entity, ignoring");
-//       //sb.append(" E=").append(makeValue(character.getEntity()));
-//       sb.append(" E=").append(makeValue(character.getTerm("Entity")));
-
-//       // if (character.hasValue(CharFieldEnum.STAGE))
-      
-//       //if (character.getQuality() == null)
-//       if (!character.hasValue("Quality"))
-//         throw new BadCharException("Error: character has no quality, ignoring");
-//       sb.append(" Q=").append(makeValue(character.getTerm("Quality")));

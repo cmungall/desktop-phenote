@@ -62,7 +62,7 @@ public class PhenoSyntaxChar {
           if (isFreeText(cf)) sb.append('"'); // free text gets quoted
           sb.append(makeValue(character.getValue(cf)));
           if (isFreeText(cf)) sb.append("\" ");
-          sb.append("\n");
+//          sb.append("\n");
         }
         // check for entity & quality??
       }

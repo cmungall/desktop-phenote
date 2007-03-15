@@ -26,7 +26,7 @@ public class DelimitedFileAdapter implements DataAdapterI {
 
   private File previousFile;
   private File file;
-  private static String[] extensions = {"tab"};
+  private static String[] extensions = {"tab", "xls"};
 
   /** command line setting of file */
   public void setAdapterValue(String filename) {
@@ -36,50 +36,33 @@ public class DelimitedFileAdapter implements DataAdapterI {
   /** this should return CharacterList and caller should load CharListMan
       or CLM makes the call itself? */
   public void load() {
-
-    if (file == null)
-      file = getFileFromUserForOpen(previousFile);
-    if (file == null) return;
-    previousFile = file;
-    try {
-      CharacterListI charList = new CharacterList();
-      LineNumberReader lnr = new LineNumberReader(new FileReader(file));
-      DelimitedChar synChar = new DelimitedChar();
-      for (String line=lnr.readLine(); line != null; line = lnr.readLine()) {
-        try {
-          synChar.parseLine(line);
-        CharacterI ch = synChar.getCharacter();
-        charList.add(ch);
-        } catch (DelimitedChar.SyntaxParseException e) {
-          System.out.println(e.getMessage()); // jut "" for whitespace line
-        }
-      }
-      CharacterListManager.inst().setCharacterList(this,charList);
-      lnr.close();
-    }
-    catch (IOException e) {
-      System.out.println("Delimited read failure "+e);
-    }
-    file = null; // null it for next load/commit
+//this doesn't seem to do anything
   }
   
   public CharacterListI load(File f) {
-    // this method temporarily duplicates code from load() - soon load() will be removed
     CharacterListI charList = new CharacterList();
     try {
-      LineNumberReader lnr = new LineNumberReader(new FileReader(f));
-      DelimitedChar synChar = new DelimitedChar();
-      for (String line=lnr.readLine(); line != null; line = lnr.readLine()) {
-        try {
-          synChar.parseLine(line);
-        CharacterI ch = synChar.getCharacter();
-        charList.add(ch);
-        } catch (DelimitedChar.SyntaxParseException e) {
-          System.out.println(e.getMessage()); // jut "" for whitespace line
-        }
-      }
-      lnr.close();
-    }
+        LineNumberReader lnr = new LineNumberReader(new FileReader(f));
+        DelimitedChar delChar = new DelimitedChar();
+        System.out.println("Reading tab-delimited data from file "+f);
+          try {
+        	String line=lnr.readLine(); //reading header line
+        	System.out.println(line);
+          } catch (IOException e) {
+            System.out.println("Tab-delimited read failure "+e);
+          }
+        for (String line=lnr.readLine(); line != null; line = lnr.readLine()) {
+          try {
+            delChar.parseLine(line);
+            CharacterI ch = delChar.getCharacter();
+            charList.add(ch);
+        	System.out.println(line);
+          } catch (DelimitedChar.SyntaxParseException e) {
+            System.out.println(e.getMessage()); // jut "" for whitespace line
+          }
+        }	
+        lnr.close();
+    }	
     catch (IOException e) {
       System.out.println("Tab-delimited read failure "+e);
     }
@@ -150,7 +133,7 @@ public class DelimitedFileAdapter implements DataAdapterI {
   }
   
   public String getDescription() {
-    return "Tab Delimited [.tab]";
+    return "Tab Delimited [.tab, .xls]";
   }
 
 }

@@ -381,6 +381,18 @@ public class Config {
     return fields;
   }
 
+  public List<CharField> getCharFieldsForDelimited(int colNum) throws ConfigException {
+	    // cache in hash??
+	    List<CharField> fields = new ArrayList<CharField>(2);
+	    for (FieldConfig fc : getFieldConfigList()) {
+	    	fields.add(getCharField(colNum));
+	        //return fc.getCharField();
+	    }
+	    if (fields.isEmpty())
+	      throw new ConfigException("No Field configured");
+	    return fields;
+	  }
+  
   public String getLabelForCharField(CharField cf) throws ConfigException {
 	    for (FieldConfig fc : getFieldConfigList()) {
 	      if (fc.hasCharField(cf))
