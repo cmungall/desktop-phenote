@@ -42,6 +42,7 @@ class CharacterTableModel extends AbstractTableModel {
 
   CharacterI getCharacter(int i) {
     // check out of bounds
+    if (characterList == null) return null; // ex?
     return characterList.get(i);
   }
 
@@ -65,6 +66,7 @@ class CharacterTableModel extends AbstractTableModel {
 
   public int getRowCount() {
     //return rowCount;
+    if (getCharacterList() == null) return 1; // or 0?? always have 1 blank row?
     return getCharacterList().size();
   }
 

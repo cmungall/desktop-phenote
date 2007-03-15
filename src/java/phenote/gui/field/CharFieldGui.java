@@ -1,7 +1,5 @@
 package phenote.gui.field;
 
-//import java.util.List;
-//import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Container;
@@ -9,9 +7,7 @@ import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-//import javax.swing.JTextField;
-//import javax.swing.event.DocumentListener;
-//import javax.swing.event.DocumentEvent;
+import javax.swing.JOptionPane;
 
 import org.apache.log4j.Logger;
 
@@ -26,12 +22,15 @@ import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyException;
 import phenote.datamodel.OntologyManager;
+import phenote.dataadapter.DataAdapterEx;
 import phenote.dataadapter.QueryableDataAdapterI;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 //import phenote.edit.CompoundTransaction;
 import phenote.edit.EditManager;
 //import phenote.edit.UpdateTransaction;
+import phenote.dataadapter.QueryableDataAdapterI;
+import phenote.config.Config;
 import phenote.gui.selection.CharSelectionListener;
 import phenote.gui.selection.CharSelectionEvent;
 import phenote.gui.selection.SelectionManager;
@@ -106,23 +105,32 @@ class CharFieldGui {
   }
 
   private void addRetrieveButton() {
-    // if (Config.inst().hasQueryableDataAdapter()) {
-    // QueryableAdapter qa = Config.inst().getQueryableDataAdapter(); // for now just one
-    // if (qa.isCharFieldQueryable(cf)) {
-    // Button b = new Button("Retrieve");
-    // b.addActionListener(new RetrieveActionListener(qa));
-    // fieldPanel.addRetrieveButton(b)
-    
+    if (!Config.inst().hasQueryableDataAdapter()) return;
+
+    QueryableDataAdapterI qa = Config.inst().getQueryableDataAdapter(); // for now just one
+    if (qa.isFieldQueryable(getCharField().getName())) {
+      JButton b = new JButton("Retrieve");
+      b.addActionListener(new RetrieveActionListener(qa));
+      fieldPanel.addRetrieveButton(b);
+    }
   }
 
   private class RetrieveActionListener implements ActionListener {
     QueryableDataAdapterI qda;
     private RetrieveActionListener(QueryableDataAdapterI q) { qda = q; }
     public void actionPerformed(ActionEvent e) {
-      CharacterListI cl = qda.query(charField,getText());
-      //notifyNewCharList(cl);
-      // check if unsaved data - if so ask user if wants to save/load
-      CharacterListManager.inst().setCharacterList(this,cl);
+      try {
+        CharacterListI cl = qda.query(charField.getName(),getText());
+        //if (cl == null) if null shouldve thrown ex - check anyways?
+        //notifyNewCharList(cl);
+        // check if unsaved data - if so ask user if wants to save/load
+        CharacterListManager.inst().setCharacterList(this,cl);
+      }
+      catch (DataAdapterEx ex) {
+          JOptionPane.showMessageDialog(null,ex.getMessage(),"Retrieve Error",
+                                        JOptionPane.ERROR_MESSAGE);
+
+      }
     }
   }
 

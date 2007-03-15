@@ -6,12 +6,21 @@ start =
   element phenote-configuration {
     attribute version { xsd:string },
     log,
+    queryable-dataadapter*,
     dataadapter*,
     uvic-graph,
     obo-repository,
     field*
   }
 
+queryable-dataadapter = element queryable-dataadapter {
+  ## actual class name, eg phenote.dataadapter.worm.WormAdapter
+  attribute name { xsd:string },
+  attribute enable { xsd:boolean }
+} 
+
+
+## rename/add file-dataadapter - keep dataadapter for backward compatibility?
 dataadapter =
   element dataadapter {
     ## for now just 2 dataadapters, phenoxml & phenosyntax (and now also nexus)

@@ -95,17 +95,18 @@ public class CharFieldValue {
 //       System.out.println("ERROR no datamodel associated with configuration, cant set"+
 //                          " value");
     //else
-    if (charFieldEnum != null) { // pase - take out
-      charFieldEnum.setValue(character,this);
-    }
-    else {
+//     if (charFieldEnum != null) { // pase - take out
+//       charFieldEnum.setValue(character,this);
+//     }
+//     else {
       //System.out.println("CFV editMod "+getName());
-      character.setValue(charField,this);
-    }
+    character.setValue(charField,this);
+//    }
   }
 
-  CharField getCharField() { return charField; }
-  public CharFieldEnum getCharFieldEnum() { return charFieldEnum; }
+  public CharField getCharField() { return charField; }
+  // phase out...
+  //public CharFieldEnum getCharFieldEnum() { return charFieldEnum; }
 
   public String toString() { return getName(); }
 }

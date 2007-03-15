@@ -20,9 +20,8 @@ import phenote.datamodel.OntologyManager;
 import phenote.gui.GridBagUtil;
 
 /**
- * TermPanel holds all the fields for the terms - Genotype, Entity/Anatomy, QUALITY.
+ * FieldPanel holds all the fields for the terms - Genotype, Entity/Anatomy, QUALITY.
  * Can be populated by hand (Genotype), or  selection of instance in completion list. 
- rename FieldPanel or CharFieldPanel?
  also has SearchParamPanel(?).
  */
 
@@ -118,6 +117,11 @@ public class FieldPanel extends JPanel {
 
   void addPostCompButton(JButton pc) {
     fieldPanel.add(pc,makePostCompConstraint());
+  }
+  
+  void addRetrieveButton(JButton rb) {
+    // for now assume fields dont do both post comp and retrieve - fix this!
+    fieldPanel.add(rb,makePostCompConstraint());
   }
 
   private int gridbagRow = 0;

@@ -3,7 +3,7 @@ package phenote.edit;
 import org.geneontology.oboedit.datamodel.OBOClass;
 
 import phenote.datamodel.CharField;
-import phenote.datamodel.CharFieldEnum;
+//import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 
@@ -32,11 +32,11 @@ public class UpdateTransaction implements TransactionI { // extends Transaction?
   // public UpdateTransaction(CharFieldValue new, CharFieldValue old) ?
 
   /** actually maybe dont need to pas in old val - just query for it phase out*/
-  public UpdateTransaction(CharacterI c,CharFieldEnum e,OBOClass newVal) {
-    newValue = new CharFieldValue(newVal,c,e);
-    //oldValue = new CharFieldValue(old,c,e);
-    oldValue = e.getValue(c);
-  }
+//   public UpdateTransaction(CharacterI c,CharFieldEnum e,OBOClass newVal) {
+//     newValue = new CharFieldValue(newVal,c,e);
+//     //oldValue = new CharFieldValue(old,c,e);
+//     oldValue = e.getValue(c);
+//   }
   public UpdateTransaction(CharacterI c,CharField cf,OBOClass newVal) {
     newValue = new CharFieldValue(newVal,c,cf);
     oldValue = c.getValue(cf);
@@ -64,13 +64,18 @@ public class UpdateTransaction implements TransactionI { // extends Transaction?
 
   String getNewValueString() { return newValue.getName(); }
 
+//   public boolean isUpdateForCharField(CharField cf) {
+//     return getCharFieldEnum() == cf.getCharFieldEnum();    
+//   }
   public boolean isUpdateForCharField(CharField cf) {
-    return getCharFieldEnum() == cf.getCharFieldEnum();    
+    // the char field should be the same shouldnt they? they better be?
+    // test for null newVal?
+    return newValue.getCharField().equals(cf);    
   }
 
-  private CharFieldEnum getCharFieldEnum() {
-    return newValue.getCharFieldEnum();
-  }
+//   private CharFieldEnum getCharFieldEnum() {
+//     return newValue.getCharFieldEnum();
+//   }
 
   public void undo() { 
     //oldValue.setValue();//charFieldEnum.setValue(character,oldValue); }

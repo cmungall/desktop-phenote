@@ -19,12 +19,14 @@ import org.apache.xmlbeans.XmlException;
 import phenote.main.PhenoteVersion;
 import phenote.config.xml.PhenoteConfigurationDocument;
 import phenote.config.xml.DataadapterDocument.Dataadapter;
+import phenote.config.xml.QueryableDataadapterDocument.QueryableDataadapter;
 import phenote.config.xml.FieldDocument.Field;
 import phenote.config.xml.LogDocument.Log;
 import phenote.config.xml.OboRepositoryDocument.OboRepository;
 import phenote.config.xml.PhenoteConfigurationDocument.PhenoteConfiguration;
 import phenote.config.xml.UvicGraphDocument.UvicGraph;
 import phenote.dataadapter.DataAdapterI;
+import phenote.dataadapter.QueryableDataAdapterI;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 import phenote.util.FileUtil;
@@ -35,6 +37,7 @@ public class Config {
   private static Config singleton = new Config();
   private String configFile = FLYBASE_DEFAULT_CONFIG_FILE;
   private List<DataAdapterConfig> dataAdapConfList;
+  private List<QueryableAdapConfig> queryAdapConfList;
   /** only enabled fields */
   private List<FieldConfig> enabledFields = new ArrayList<FieldConfig>();
   /** enabled & disabled */
@@ -266,6 +269,7 @@ public class Config {
     return singleton;
   }
 
+  // --> hasFileDataAdapters
   public boolean hasDataAdapters() {
     //return dataAdapConfList != null && !dataAdapConfList.isEmpty();
     return getDataAdapters() != null && !getDataAdapters().isEmpty();
@@ -440,6 +444,13 @@ public class Config {
         //addDataAdapterFromString(name);
       }
 
+      QueryableDataadapter[] queryAdaps = pc.getQueryableDataadapterArray();
+      for (QueryableDataadapter da : queryAdaps) {
+        QueryableAdapConfig qac = new QueryableAdapConfig(da);
+        addQueryAdapCfg(qac);
+      }
+
+
       // GRAPH
       UvicGraph gr = pc.getUvicGraph();
       if (gr != null)
@@ -474,6 +485,32 @@ public class Config {
 
   private void addAdapConfig(DataAdapterConfig dac) {
     getAdapConfigs().add(dac);
+  }
+
+  public boolean hasQueryableDataAdapter() {
+    return queryAdapConfList != null && getQueryableDataAdapter()!= null;
+  }
+  
+  /** Just get first one - for now assume theres one */
+  public QueryableDataAdapterI getQueryableDataAdapter() {
+    //if (!hasQueryableDataAdapter()) return null; // ex?
+    if (queryAdapConfList == null) return null;
+    //queryAdapConfList.get(0).getQueryableAdapter();
+    // return first enabled adap
+    for (QueryableAdapConfig q : getQueryAdapCfgs())
+      if (q.isEnabled()) return q.getQueryableAdapter();
+    return null;
+  }
+
+  private List<QueryableAdapConfig> getQueryAdapCfgs() {
+    if (queryAdapConfList == null)
+      queryAdapConfList = new ArrayList<QueryableAdapConfig>(1);
+    return queryAdapConfList;
+  }
+
+  private void addQueryAdapCfg(QueryableAdapConfig qac) {
+    if (qac == null) return;
+    getQueryAdapCfgs().add(qac);
   }
 
   private void makeFieldConfig(Field field) {

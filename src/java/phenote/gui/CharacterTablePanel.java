@@ -147,6 +147,7 @@ public class CharacterTablePanel extends JPanel {
   private void selectRow(int row) {
     if (charJTable == null) return;
     if (row < 0) row = 0; // ???
+    // is row 0 based and table 1 based?
     if (row >= charJTable.getRowCount()) row = charJTable.getRowCount() - 1;
     //if (charJTable != null && row >= 0 && row < charJTable.getRowCount())
     charJTable.setRowSelectionInterval(row,row);

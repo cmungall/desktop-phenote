@@ -33,6 +33,8 @@ class DataAdapterConfig {
       setDataAdapterFromConfigString();
   }
 
+  protected DataAdapterConfig() {}; // for subclass hmmm
+
   String getName() { return name; }
 
   boolean isEnabled() { return enabled; }

@@ -20,13 +20,18 @@ import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
 /** Writes pheno syntax characters to a file.
     See http://www.fruitfly.org/~cjm/obd/pheno-syntax.html for a full description
     of pheno syntax. Its basically a human readable version of pheno xml
-    e.g. E=head Q=large */
+    e.g. E=head Q=large
+    This should be renamed TagValueFileAdapter as thats what it really is
+    Also DataAdapterI should be renamed FileDataAdapterI to distinguish from 
+    QueryableDataAdapterI
+*/
 
 public class PhenoSyntaxFileAdapter implements DataAdapterI {
 
   private File previousFile;
   private File file;
-  private static String[] extensions = {"psx", "syn"};
+  /** psx phenosyntax, syn syntax, tv tag-value, ptv phenotagvalue */
+  private static String[] extensions = {"psx", "syn","tv","ptv","tagval"};
 
   /** command line setting of file */
   public void setAdapterValue(String filename) {

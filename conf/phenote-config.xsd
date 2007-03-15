@@ -4,12 +4,23 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="x:log"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:queryable-dataadapter"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:dataadapter"/>
         <xs:element ref="x:uvic-graph"/>
         <xs:element ref="x:obo-repository"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:field"/>
       </xs:sequence>
       <xs:attribute name="version" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="queryable-dataadapter">
+    <xs:complexType>
+      <xs:attribute name="name" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>actual class name, eg phenote.dataadapter.worm.WormAdapter</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="enable" use="required" type="xs:boolean"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="dataadapter">
