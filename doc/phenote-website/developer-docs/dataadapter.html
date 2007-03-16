@@ -3,11 +3,15 @@
 <head>
 
 
+
+  
   
   
   <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
 
 
+
+  
   
   
   <title>Creating a phenote data adapter - developer docs</title>
@@ -17,7 +21,9 @@
 <body>
 
 
+
 <h1 style="text-decoration: underline; text-align: center;">Creating a Phenote Data Adapter</h1>
+
 
 
 First off if youve just downloaded phenote from sourceforge obo svn,
@@ -25,71 +31,131 @@ the (latest) source is located in phenote/trunk/src/java. The most
 important subdirectories under src/java for creating a data adapter are
 phenote/dataadapter and phenote/datamodel. <br>
 
+
 <br>
+
 
 A good example data adapter to check out is phenote.dataadapter.phenosyntax.PhenoSyntaxFileAdapter<br>
 
-<br>
-
-
-The interface that a phenote data adapter implements is phenote.dataadapter.DataAdapterI, and here is what it looks like:<br>
-
 
 <br>
+<h3><span style="text-decoration: underline;">File Adapter</span></h3>
+The interface that a phenote file data adapter implements is
+phenote.dataadapter.DataAdapterI (which im going to rename
+FileDataAdapterI), and here is what it looks like:<br>
+
+
+
+<br>
+
 
 
 public interface DataAdapterI {<br>
 
 
+
 <br>
+
 
 
 &nbsp; public void load();<br>
 
 
+
 &nbsp; public CharacterListI load(File f);<br>
 
 
+
 <br>
+
 
 
 &nbsp; public void commit(CharacterListI charList);<br>
 
 
+
 &nbsp; public void commit(CharacterListI charList, File f);<br>
 
 
+
 <br>
+
 
 
 &nbsp; /** Set value to use for loading or writeback, for a file adapter this would be<br>
 
 
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the file name */<br>
+
 
 
 &nbsp; public void setAdapterValue(String adapterValue);<br>
 
 
+
 &nbsp; public List&lt;String&gt; getExtensions();<br>
+
 
 
 &nbsp; public String getDescription();<br>
 
 
+
 }<br>
+
 
 
 <br>
 
-The most important methods are load() and commit(charList).
-&nbsp;load() will be called by phenote to load up a
-phenote.datamodel.CharacterListI. A CharacterListI is just a list of
+
+The most important methods are load and commit.
+&nbsp;load()/load(File) will be called by phenote to load up a
+phenote.datamodel.CharacterListI (see below)<br>
+<br>
+<h3><span style="text-decoration: underline;">Queryable Data Adapter</span></h3>
+The other kind of data adapter is the queryable data adapter. Typically
+this is a data adapter hooked into a database. Here is
+phenote.dataadapter.QueryableDataadapterI interface:<br>
+<br>
+public interface QueryableDataAdapterI {<br>
+&nbsp; /** return true if data adapter can query for the char field */<br>
+&nbsp; public boolean isFieldQueryable(String field);<br>
+&nbsp; /** Throws exception if query fails, and no data to return */<br>
+&nbsp; public CharacterListI query(String field, String query) throws DataAdapterEx;<br>
+}<br>
+<br>
+isFieldQueryable returns true for strings of fields that are queryable
+through this adapter. The paradigm here is that one queries the adapter
+with a field name and value. For instance you can query the pub field
+with pub id value MED:1234, and ideally the adapter would return a
+CharacterList of all the characters (phenotypic statments) for that
+publication in the database. Another common example is querying by
+genotype or allele.<br>
+<br>
+The phenote gui actually queries the QueryableDataAdapter and for every
+field that is queryable it puts a "Retrieve" button next to the field.
+&nbsp;A user will then fill in that field (e.g. MED:1234 in pub field)
+and hit the retrieve button. The gui will then call the
+QueryableDataAdapters query method with the name of the field ("Pub")
+and the query string ("Med:1234"). The QueryableDataAdapterI should
+then return a CharacterList using this query, which will then be loaded
+into phenote.<br>
+(todo: if there is unsaved data, phenote should ask if the user wants to save before loading).
+<br>
+
+<h2><span style="text-decoration: underline;">Reading in data</span></h2>
+
+
+
+&nbsp;A CharacterListI is just a list of
 phenote.datamodel.Characters. A Character is basically a phenotypic
 statement (relating E,Q,genotype, etc...). So basically what a data
 adapter needs to produce is a list of characters.&nbsp; <br>
 
+
 <br>
+
 
 A Character is just a set of tag-value fields, where the tag is the
 name of the field (Entity, Quality, Genotype...), and value is the
@@ -105,65 +171,89 @@ adapter wont be able to get/load the data it expects. The upshot is in
 addition to making a data adapter you need to make a configuration that
 fits with it (or make sure it fits with an existing configuration).<br>
 <br>
-<h2><span style="text-decoration: underline;">Reading in data</span></h2>
+To set a field in a character use:<br>
 
-
-&nbsp;To set a field in a character use:<br>
 
 setValue(CharField cf, String valueString) which throws a
 phenote.datamodel.TermNotFoundException if the valueString is not found
 in the ontologies associated with the CharField(via configuration)<br>
 
+
 where phenote.datamodel.CharField is an object that represents a field in a character. &nbsp;To get a char field you can call <br>
+
 
 getCharFieldForName(String fieldName) which throws a
 phenote.datamodel.CharFieldException if you give it a string that is
 not from the configuration. Ok even better I just combined this into
 one convenience method:<br>
 
+
 setValue(String fieldString, String valueString) throws TermNotFoundException, CharFieldException.<br>
+
 
 For fields with ontologies (with term completion) the valueString has to be the id for the term (not the term name)<br>
 
+
 <br>
+
 
 So thats basically it for making characters. Some code might look like this:<br>
 
+
 <br>
+
 
 try {<br>
 
+
 &nbsp;&nbsp;&nbsp; Character c = new Character();<br>
+
 
 &nbsp;&nbsp;&nbsp; c.setValue("Entity","GO:123");<br>
 
+
 &nbsp;&nbsp;&nbsp; c.setValue("Quality","PATO:345");<br>
+
 
 &nbsp;&nbsp;&nbsp; c.setValue("Genotype","somegenotypehere");<br>
 
+
 &nbsp;&nbsp;&nbsp; ....<br>
+
 
 } <br>
 
+
 catch (CharFieldException e) {...} // may want to do this per field - error msg?<br>
+
 
 catch (TermNotFoundException e) {...} // perhaps per field - error message?<br>
 
+
 <br>
+
 
 and for CharacterLists just add the characters made above to it:<br>
 
+
 CharacterList cl = new CharacterList();<br>
+
 
 cl.add(character1);<br>
 
+
 cl.add(character2);<br>
+
 
 ...<br>
 
+
 <br>
+
 <br>
+
 <h2><span style="text-decoration: underline;">Writing out data</span></h2>
+
 The CharacterList is passed into the commit method. Iterate through the
 list of CharacterI's. To get at a Characters field data just call
 character.getValueString(String fieldString). This throws a
@@ -174,7 +264,9 @@ you would like more info than just the term id from an ontology field
 you can call getTerm(String fieldName). This returns an
 org.geneontology.oboedit.datamodel.OBOClass from the obo edit datamodel
 (I may eventually wrap this in a phenote object - not sure).<br>
+
 <br>
+
 You can also query the OntologyManager for all existing character
 fields with OntologyManager.inst().getCharFieldList() which returns a
 List&lt;CharField&gt;. You can then query whether the Character has a
@@ -184,57 +276,91 @@ getValue(CharField). You can then call charFieldValue.getName() to get
 the free text string or the id of the field. You can also query if its
 a term with charFieldValue.isTerm() and if so get its OBOClass with
 getTerm().<br>
+
 <br>
+
 And thats about it. As you can see theres several way of getting at this data. Heres what some code may look like:<br>
+
 <br>
+
 &nbsp;&nbsp;&nbsp; for (CharacterI ch : characterList.getList()) {<br>
+
 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; try {<br>
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String genotype = ch.getValueString("Genotype");<br>
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OBOClass entityTerm = ch.getTerm("Entity");<br>
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OBOClass valueTerm = ch.getTerm("Value");<br>
+
 <br>
+
 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; // write this data out to data source...<br>
+
 <br>
+
 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; } catch (CharFieldException ex) { ...error&nbsp; processing... }<br>
+
 <br>
+
 This implies that Genotype, Entity, and Value are all in configuration file, and if not exception will be thrown.<br>
-<br>
-<br>
-<br>
 
 <br>
 
 <br>
+
 <br>
+
+
+<br>
+
+
+<br>
+
+<br>
+
 <span style="font-weight: bold;">ToDo/Changes needed to data adapter interface:</span><br>
+
 
 Ok I just noticed that currently only load(file) and
 commit(charList,file) are being called via the LoadSaveManager - I will
 fix this pronto.<br>
+
 
 So load &amp; save from file menu has been directed to LoadSaveManager
 which is hardwired to files(Jim Balhoffs work for phenoxml,syntax,
 &amp; nexus adapters - which are all file based - we havent had
 non-file yet). This wont work for database adapters and needs a
 refactoring - I will get on this! <br>
-<br>
-load() should return a CharacterList not void! <br>
 
 <br>
+
+load() should return a CharacterList not void! <br>
+
+
+<br>
+
 ##DONE Add method to Character for setting a field with just strings:<br>
+
 
 setValue(String field, String value)<br>
 
-<br>
-refactor? should OBOClass be wrapped in a phenote class to detach phenote from obo edit?<br>
 
 <br>
+
+refactor? should OBOClass be wrapped in a phenote class to detach phenote from obo edit?<br>
+
+
+<br>
+
 refactor note: Im wondering if the file stuff in DataAdapterI should be
 refactored - i could imagine a AdapterParam class or subclasses of
 DataAdapterI like FileDataAdapterI and DatabaseDatAdapterI &nbsp;and
 DataAdapterI would have methods like boolean isFileAdapter(),
 FileDataAdapter getFileDataAdpater() - need to think about this.<br>
+
 <br>
+
 refactor: phenote datamodel is eventually gonna also get hip to obo
 edits instance datamodel - however i think it will be under the covers
 and the above interface will remain the same.
