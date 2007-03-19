@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Developer docs</title>
+</head>
+<body>
+<h3><span style="text-decoration: underline;">Editing the model</span></h3>
+So a phenote.edit.CharChangeEvent has a phenote.edit.TransactionI. <br>
+so when a gui component like CharFieldGui wants to edit the model&nbsp;
+it calls a method on the EditManager. For instance, for updating
+multiple fields at once CharFieldGui makes a bunch of
+UpdateTransactions adds them to a CompoundTransaction and sends the
+CompoundTransaction to EditManager.updateModel(). updateModel calls
+editModel() on the CompoundTransaction (which actually edits the
+model),
+make a CharChangeEvent with the transaction and sends out the
+CharChangeEvent out to CharChangeListeners notifying them that the
+model has been changed, and adds the transaction to its list of
+transactions (for undo).<br>
+A phenote.edit.TransactionI knows how to edit and undo its edit to the datamodel. 
+</body>
+</html>
