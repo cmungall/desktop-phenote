@@ -132,7 +132,9 @@ public class PhenoSyntaxChar {
   private String stripQuotesFromFreeText(String value,CharField cf) {
     if (!isFreeText(cf)) return value;
     if (value.startsWith(q)) value = value.substring(1);
-    if (value.endsWith(q)) value = value.substring(0,value.length()-2);
+    //    if (value.endsWith(q)) value = value.substring(0,value.length()-2);
+    //  changed this to "-1" because it was messing up the reader
+    if (value.endsWith(q)) value = value.substring(0,value.length()-1);
     return value;
   }
 
