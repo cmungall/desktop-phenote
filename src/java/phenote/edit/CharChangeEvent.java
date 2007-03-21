@@ -1,7 +1,7 @@
 package phenote.edit;
 
 import java.util.EventObject;
-
+import org.geneontology.oboedit.datamodel.OBOClass;
 import phenote.datamodel.CharField;
 
 /** This actually is for a CharField change - rename this CharFieldChangeEvent? */
@@ -16,10 +16,15 @@ public class CharChangeEvent extends EventObject {
     super(source);
     transaction = t;
   }
+  
+  public OBOClass getNewTerm() { return transaction.getNewTerm(); }
+  
+  public String getNewValueString() { return transaction.getNewValueString(); }
 
   public boolean isUpdate() { return transaction.isUpdate(); }
 
-
+  public TransactionI getTransaction() {return transaction;}
+  
   public boolean isUpdateForCharField(CharField cf) {
     //return transaction.getCharFieldEnum() == cf.getCharFieldEnum();
     //if (!transaction.isUpdate()) return false;

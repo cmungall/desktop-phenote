@@ -22,7 +22,7 @@ public class EditManager {
   private List<CharChangeListener> charListeners = new ArrayList<CharChangeListener>(3);
 
   private List<TransactionI> transactionList = new ArrayList<TransactionI>();
-
+  
   private EditManager() {}
 
   public static EditManager inst() {
@@ -50,10 +50,14 @@ public class EditManager {
     return !transactionList.isEmpty(); // for now - no redo
   }
 
-  private TransactionI getCurrentTransaction() {
+  public TransactionI getCurrentTransaction() {
     // for now just return last one - eventually with redo do some tracking
     if (!haveUndoableTransaction()) return null; // ex?
     return transactionList.get(transactionList.size()-1);
+  }
+  
+  public List<TransactionI> getTransactionList() {
+	  return transactionList;
   }
 
 //   public void updateModel(Object source, UpdateTransaction ut) {

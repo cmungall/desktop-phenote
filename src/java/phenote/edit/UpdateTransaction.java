@@ -62,7 +62,14 @@ public class UpdateTransaction implements TransactionI { // extends Transaction?
   /** return new value for regular trans, old value for undo? */
   //String getValue() { // if undo  } - does updateTrans know of undo??? not sure
 
-  String getNewValueString() { return newValue.getName(); }
+  public String getNewValueString() { return "blah blah blah";}
+  
+  public OBOClass getNewTerm() { 
+//	  System.out.println("trying to get new term");
+	if (newValue.isTerm())
+	    return newValue.getTerm(); 
+	else return null; 
+  }
 
 //   public boolean isUpdateForCharField(CharField cf) {
 //     return getCharFieldEnum() == cf.getCharFieldEnum();    

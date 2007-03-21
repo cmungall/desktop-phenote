@@ -28,6 +28,7 @@ import phenote.gui.CharacterTablePanel;
 import phenote.gui.GridBagUtil;
 import phenote.gui.MenuManager;
 import phenote.gui.TermInfo;
+import phenote.gui.SelectionHistory;
 import phenote.gui.field.FieldPanel;
 
 public class Phenote {
@@ -40,6 +41,7 @@ public class Phenote {
   private FieldPanel fieldPanel;
   private static Phenote phenote;
   private TermInfo termInfo;
+  private SelectionHistory selectionHistory;
   private CommandLine commandLine = CommandLine.inst();
   private JFrame frame;
   
@@ -133,7 +135,7 @@ public class Phenote {
     frame = new JFrame("Phenote "+PhenoteVersion.versionString()); 
     frame.getContentPane().add(makeMainPanel());
     MenuManager.createMenuManager(frame);
-    frame.setPreferredSize(new Dimension(1130,700)); //1100,700));
+    frame.setPreferredSize(new Dimension(1200,700)); //1100,700));
     if (standalone) // if stand alone exit java on window close
       frame.addWindowListener(new WindowExit());
     frame.pack();
@@ -165,6 +167,9 @@ public class Phenote {
 
     termInfo = new TermInfo(); //fieldPanel);
     upperPanel.add(termInfo.getComponent());
+    
+    selectionHistory = new SelectionHistory();
+    upperPanel.add(selectionHistory.getComponent());
     //++gbc.gridx;  // ??
     //gbc.anchor = GridBagConstraints.NORTHWEST; // ??
     //mainPanel.add(termInfo.getComponent(),gbc);

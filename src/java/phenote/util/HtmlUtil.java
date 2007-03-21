@@ -245,7 +245,7 @@ public class HtmlUtil {
       //sb.append(makeRightCol(termLink(link.getParent()))); 
       }
 
-  private static String termLink(LinkedObject term) {
+  public static String termLink(LinkedObject term) {
     String clickString = getClickString(term.getID(),term.getName());
     //System.out.println(clickString);
     return "<a "+clickString+">"+term.getName()+"</a>";

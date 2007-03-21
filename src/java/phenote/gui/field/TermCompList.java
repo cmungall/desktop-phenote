@@ -84,7 +84,7 @@ class TermCompList extends AbstractAutoCompList {
   protected void setCurrentValidItem() throws OboException {
     setOboClass(getSelectedOboClass()); //this will set text to oboclass
     // send out selection event that is NOT a mouse over event (for DAG view)
-    SelectionManager.inst().selectTerm(this, getSelectedOboClass());
+    SelectionManager.inst().selectTerm(this, getSelectedOboClass(), false);
   }
 
   protected String getCurrentTermRelName() {

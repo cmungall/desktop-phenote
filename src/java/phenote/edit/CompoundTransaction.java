@@ -103,9 +103,24 @@ public class CompoundTransaction implements TransactionI {
   private boolean hasTransactions() {
     return !childTransactions.isEmpty();
   }
+  
+  public OBOClass getNewTerm() { 
+//	  System.out.println("trying to get new term for compound transaction");
+	if (firstChild().isUpdate())
+	    return firstChild().getNewTerm(); 
+	else return null; 
+  }
 
   private TransactionI firstChild() {
     if (!hasTransactions()) return null; // ex?
     return childTransactions.get(0);
   }
+  
+  public String getNewValueString() { return "blah blah blah";}
+
+
+  
 }
+
+
+

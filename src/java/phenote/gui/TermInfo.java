@@ -58,7 +58,7 @@ public class TermInfo {
 
   public JComponent getComponent() {
     JPanel termInfoPanel = new JPanel(new BorderLayout(0,0)); // hgap,vgap
-    termInfoPanel.setPreferredSize(new Dimension(700,100));
+    termInfoPanel.setPreferredSize(new Dimension(400,100));
     termInfoPanel.setMinimumSize(new Dimension(380,100));
     //termInfoPanel.setMaximumSize(new Dimension(380,400));
     if (DO_HTML) {
@@ -119,7 +119,8 @@ public class TermInfo {
   /** Listen for selection from phenote (mouse over completion list) */
   private class InfoTermSelectionListener implements TermSelectionListener {
     public boolean termSelected(TermSelectionEvent e) {
-      if (!e.isMouseOverEvent()) return false;
+    	
+      if (!e.isMouseOverEvent() ) return false;
       setTextFromOboClass(e.getOboClass());
       // This sets who now listens to use term button clicks (only 1 listener)
       setUseTermListener(e.getUseTermListener());
@@ -188,7 +189,7 @@ public class TermInfo {
         OBOClass term = OntologyManager.inst().getOboClass(id); // ex
         setTextFromOboClass(term);
         // send out term selection (non mouse over) for DAG view
-        SelectionManager.inst().selectTerm(TermInfo.this, term);
+        SelectionManager.inst().selectTerm(TermInfo.this, term, true);
       }
       catch (TermNotFoundException ex) { return; }
     }
