@@ -25,24 +25,24 @@ public class FieldConfig {
 
 
   /** construct from xml bean field - READ */
-  FieldConfig(Field field) {
-    this.label = field.getName();
+  FieldConfig(Field fieldBean) {
+    this.label = fieldBean.getName();
     
 //   try{//phase this out!charFieldEnum = CharFieldEnum.getCharFieldEnum(label);}
 //     catch (Exception e) {} // no char field enum for name - new generic!
     //fc = new FieldConfig(name);
     
-    if (field.xgetEnable() != null)
-      enabled = field.getEnable();
+    if (fieldBean.xgetEnable() != null)
+      enabled = fieldBean.getEnable();
 
-    if (field.getSyntaxAbbrev() != null) {
-      setSyntaxAbbrev(field.getSyntaxAbbrev());
+    if (fieldBean.getSyntaxAbbrev() != null) {
+      setSyntaxAbbrev(fieldBean.getSyntaxAbbrev());
     }
     
-    // POST COMP, relationship ontol - old way - phase out - now in ont arr below
-    if (field.getPostcomp() != null) {
+    // POST COMP, relationship ontol - OLD WAY - PHASING OUT - now in ont arr below
+    if (fieldBean.getPostcomp() != null) {
       //setIsPostComp(true); - set in OC read by ODA
-      String relFile = field.getPostcomp().getRelationshipOntology();
+      String relFile = fieldBean.getPostcomp().getRelationshipOntology();
       OntologyConfig rel = OntologyConfig.makePostCompRelCfg(relFile);
       //setPostCompRelOntCfg(rel); dont need anymore - set in OC
       addOntologyConfig(rel); // new way
@@ -50,15 +50,15 @@ public class FieldConfig {
     
     // ONTOLOGIES if only one ontology file is an attribute... (convenience)
     // this is being phased out - no need and a hassle
-    if (field.getFile() != null) {
-      addOntologyConfig(new OntologyConfig(field));
+    if (fieldBean.getFile() != null) {
+      addOntologyConfig(new OntologyConfig(fieldBean));
     }
     // otherwise its multiple ontologies listed in ontology elements (entity)
     // also in new way post comp rel comes in here as well
     else {
-      Ontology[] ontologies = field.getOntologyArray();
-      for (Ontology o : ontologies) {
-        addOntologyConfig(new OntologyConfig(o,getLabel())); // label -> default name
+      Ontology[] ontologies = fieldBean.getOntologyArray();
+      for (Ontology ontBean : ontologies) {
+        addOntologyConfig(new OntologyConfig(ontBean,getLabel())); // label -> default name
       }
     }
   }

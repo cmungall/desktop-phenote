@@ -1,5 +1,6 @@
 package phenote.gui.field;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -34,17 +35,16 @@ public class FieldPanel extends JPanel {
   private SearchParamsI searchParams;
 
   public FieldPanel() {
-    this(true);
-    //initAllOntologies();
+    this(true,true);
   }
   // false for post comp panel
-  public FieldPanel(boolean doAllOntologies) {
-    initGui();
-    if (doAllOntologies)
-      initAllOntologies();
+  public FieldPanel(boolean doAllFields,boolean addSearchPanel) {
+    initGui(addSearchPanel);
+    if (doAllFields)
+      initCharFieldGuis();
   }
 
-  private void initGui() {
+  private void initGui(boolean addSearchPanel) {
     // should figure y from # of fields really!!! yes!!!
     // width of ontology labels effects x
     this.setMinimumSize(new Dimension(700,490));//690,490));
@@ -56,29 +56,32 @@ public class FieldPanel extends JPanel {
     // panel inside of panel - i think is a leftover no reason now
     add(fieldPanel);
     // search param panel - maybe search panel should be added to main frame?
-    add(getSearchParamPanel().getPanel());
-
+    if (addSearchPanel)
+      add(getSearchParamPanel().getPanel());
   }
 
 
-  /** from selection in plump table - hmmm mvc - get from model change event - 
-   should ACB listen for event and change themselves? - oh wait this is for selection
-   not editing - no editing in table silly - should do selection event/listener */
-  void setFieldsFromCharacter(CharacterI character) {
-    for (CharFieldGui fieldGui : charFieldGuiList) 
-      fieldGui.setValueFromChar(character);
-  }
-
-  private void initAllOntologies() {
+  private void initCharFieldGuis() {
 
     for (CharField charField : ontologyManager.getCharFieldList()) {
-      SearchParamsI s = getSearchParamPanel().getSearchParams();
-      CharFieldGui gui = new CharFieldGui(charField,this); // adds to panel
+      //CharFieldGui gui = new CharFieldGui(charField,this); // adds to panel
+      CharFieldGui gui = CharFieldGui.makeCharFieldGui(charField,getSearchParams());
+      addCharFieldGuiToPanel(gui);
       charFieldGuiList.add(gui);
     }
-
     // search param panel - maybe search panel should be added to main frame?
     //add(getSearchParamPanel().getPanel()); --> initGui
+  }
+
+  void addCharFieldGuiToPanel(CharFieldGui fieldGui) {
+    addLabel(fieldGui.getLabel(),fieldGui.hasOntologyChooser());
+    if (fieldGui.hasOntologyChooser())
+      addOntologyChooser(fieldGui.getOntologyChooser());
+    addFieldGui(fieldGui.getUserInputGui());
+    if (fieldGui.hasCompButton())
+      addPostCompButton(fieldGui.getCompButton());
+    if (fieldGui.hasRetrieveButton())
+      addRetrieveButton(fieldGui.getRetrieveButton());
   }
 
   SearchParamsI getSearchParams() {
@@ -111,7 +114,7 @@ public class FieldPanel extends JPanel {
     fieldPanel.add(ontologyChooser,makeOntologyChooserConstraint());
   }
   
-  void addFieldGui(JComponent comp) {
+  void addFieldGui(Component comp) {
     fieldPanel.add(comp,makeFieldConstraint());
   }
 
@@ -179,6 +182,14 @@ public class FieldPanel extends JPanel {
 
 
 // GARBAGE - DELETE
+//   /** from selection in plump table - hmmm mvc - get from model change event - 
+//    should ACB listen for event and change themselves? - oh wait this is for selection
+//    not editing - no editing in table silly - should do selection event/listener */
+//   void setFieldsFromCharacter(CharacterI character) {
+//     for (CharFieldGui fieldGui : charFieldGuiList) 
+//       fieldGui.setValueFromChar(character);
+//   }
+
 //   // for testing - move to test?
 //   private AbstractAutoCompList getComboBox(CharFieldEnum cfe) {
 //     for (CharFieldGui cfg : charFieldGuiList)
@@ -395,37 +406,3 @@ public class FieldPanel extends JPanel {
 //       comboBox.setModel(new DefaultComboBoxModel(v));
 //     }
 //   }
-  // delete...
-//   private class AutoDocumentListener implements DocumentListener {
-//     private String ontology;
-//       private AutoDocumentListener(String o) { this.ontology = o; }
-//       public void changedUpdate(DocumentEvent e) { doCompletion(e); }
-//     public void insertUpdate(DocumentEvent e) { doCompletion(e); }
-//     public void removeUpdate(DocumentEvent e) { doCompletion(e); }
-//       private void doCompletion(DocumentEvent e) {
-// 	  Document d = e.getDocument();
-// 	  try {
-// 	      searchPanel.redoCompletionList(ontology,e.getDocument().getText(0,d.getLength()));
-// 	  }
-// 	  catch (javax.swing.text.BadLocationException ex) {
-// 	      System.out.println("bad location");
-// 	  }
-//       }
-//   }
-  // HasText interface? to cover JTextField as well?
-  //  private String getUserInput(String ontology) {
-    //if (ontology.equals(ANATOMY))
-    //return (String)entityField.getEditor().getItem(); //}
-//   void setSearchPanel(SearchPanel sp) { 
-//     searchPanel = sp;
-//     // overlay?? home made jcombo - jcombo mac bug - list on top of jtext
-//     // mac bug worked around thank goodness
-//     //searchPanel.setLocation(qualityTextField.getLocation());
-//   }
-    //comboBox.setEditable(true);
-    //ActionListener a = new AutoActionListener(ontologyString,comboBox); 
-    //comboBox.getEditor().addActionListener(a);
-    //comboBox.addActionListener(a);
-    //entityField.getDocument().addDocumentListener(new AutoDocumentListener(ANATOMY));
-    //qualityTextField = addField("Quality Term",this,true);
-    //qualityTextField.getDocument().addDocumentListener(new AutoDocumentListener(QUALITY));

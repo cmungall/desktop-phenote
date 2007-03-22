@@ -27,8 +27,10 @@ public class OntologyConfig {
     setOntologyFile(file);
   }
 
+  // phasing out - now just doing rel as another ontology - backward compatible
   static OntologyConfig makePostCompRelCfg(String file) {
     OntologyConfig rel = new OntologyConfig("Relationship",file);
+    System.out.println("OC rel name "+rel.name);
     rel.isPostCompRel = true;
     return rel;
   }
@@ -68,6 +70,11 @@ public class OntologyConfig {
       reposSubdir = o.getReposSubdir();
     // if xgetIsPostCompRel != null
     isPostCompRel = o.getIsPostcompRel(); // hmm what will return when not set??
+    
+    // for now ignoring if name set as there was a bug where name was getting set
+    // to "Entity" in the -u .phenote/conf file - woops
+    if (isPostCompRel /*&& o.getName()==null*/) // default Relationship name
+      name = "Relationship";
     //if (isPostCompRel)  fc.setPostCompRelOntCfg(this);
   }
 

@@ -112,21 +112,21 @@ public class TestPhenote {
   }
 
   private String getEntityThirdAutoTerm() {
-    return entityComboBox.getModel().getElementAt(2).toString();
+    return entityComboBox.getJComboBox().getModel().getElementAt(2).toString();
   }
 
   private String getQualityThirdAutoTerm() {
-    assertNotNull(qualityComboBox.getModel());
+    assertNotNull(qualityComboBox.getJComboBox().getModel());
     assertNotNull("3rd term from quality combo shouldnt be null",
-                  qualityComboBox.getModel().getElementAt(2));
-    return qualityComboBox.getModel().getElementAt(2).toString();
+                  qualityComboBox.getJComboBox().getModel().getElementAt(2));
+    return qualityComboBox.getJComboBox().getModel().getElementAt(2).toString();
   }
 
   private String getQualityTerm(int index) {
-    assertNotNull(qualityComboBox.getModel());
+    assertNotNull(qualityComboBox.getJComboBox().getModel());
     assertNotNull(index+" term from quality combo shouldnt be null",
-                  qualityComboBox.getModel().getElementAt(index));
-    return qualityComboBox.getModel().getElementAt(index).toString();
+                  qualityComboBox.getJComboBox().getModel().getElementAt(index));
+    return qualityComboBox.getJComboBox().getModel().getElementAt(index).toString();
   }
 
   /** Selecting item in entity combo box should cause that item to appear in 
@@ -134,7 +134,7 @@ public class TestPhenote {
   private void comboTermSelectionGoesToTableTest() {
     // selecting item should make it go in table...
     System.out.println("Selecting 3rd entity item");
-    qualityComboBox.setSelectedIndex(2); // 2 is 3rd
+    qualityComboBox.getJComboBox().setSelectedIndex(2); // 2 is 3rd
     String selectedQualityTerm = getQualityThirdAutoTerm();
     CharacterI selPheno = characterTablePanel.getSelectedCharacter();
     String tableQuality = selPheno.getQuality().getName(); // oboclass
@@ -151,7 +151,7 @@ public class TestPhenote {
     // need at least 3 key strokes 'ttr' for attributes - i seem to have problems
     // getting more than one key stroke in - hmmmmm
     qualityComboBox.setText("attribute",doCompletion);
-    int count = qualityComboBox.getItemCount();
+    int count = qualityComboBox.getJComboBox().getItemCount();
     String m = "Attributes are not being filtered out of Quality completion "+
       "There are "+count+" terms with 'attribute'";
     System.out.println("There are "+count+" attributes in comp list");
@@ -163,7 +163,7 @@ public class TestPhenote {
   private void compListSelectionTest() {
     //qualityComboBox.setText("larg",true);
     qualityComboBox.simulateLKeyStroke();
-    qualityComboBox.setSelectedIndex(2);
+    qualityComboBox.getJComboBox().setSelectedIndex(2);
     // this is admittedly presumptious of quality
     assertEquals("large volume",qualityComboBox.getText());
     System.out.println("comp list sel ok "+qualityComboBox.getText());
@@ -174,8 +174,8 @@ public class TestPhenote {
       sometimes doesnt - need simulated mouse click! */
   private void selectionPopupTest() {
     qualityComboBox.setText("larg",true);
-    qualityComboBox.setSelectedIndex(2);
-    assertFalse(qualityComboBox.isPopupVisible());
+    qualityComboBox.getJComboBox().setSelectedIndex(2);
+    assertFalse(qualityComboBox.getJComboBox().isPopupVisible());
   }
 
   /** with searching on synonyms hit bug where terms come in more than once if have

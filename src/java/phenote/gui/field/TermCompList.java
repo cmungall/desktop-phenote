@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
@@ -33,18 +34,87 @@ class TermCompList extends AbstractAutoCompList {
   private JComboBox ontologyChooserCombo;
   private CharFieldGui charFieldGui;
   private static final String ALL = "ALL";
+  private JButton postCompButton;
 
-  TermCompList(CompListSearcher s,boolean editModel,CharFieldGui cfg) {
-    super(s,editModel,cfg.getCharField());
-    this.charFieldGui = cfg; // pass to super? AACL subclass CFG?
+
+  protected TermCompList(CharField cf) {
+    super(cf);
+    init();
+  }
+
+//   protected TermCompList(CharField cf, boolean addCompButton) {
+//     super(cf);
+//     this.addCompButton = addCompButton;
+//     init();
+//   }
+
+  // pase?
+//   protected TermCompList(CharField cf, SearchParamsI sp, boolean editModel) {
+//     this(cf,sp,editModel,true,null); // true - dont supress configured comp button
+// //     super(sp,editModel,cf);  protected CharFieldGui(CharField charField,String label) {
+//     init(charField,label);
+//   }
+
+// //     enableTermInfoListening();
+// //     if (hasMoreThanOneOntology()) // super AACL
+// //       initOntologyChooser(getCharField());
+// //     if (charField.postCompAllowed() && addCompButton) {
+// //       JButton postCompButton = new JButton("Comp"); // ???
+// //       postCompButton.addActionListener(new PostCompListener());
+// //       //fieldPanel.addPostCompButton(postCompButton);
+// //     } 
+//   }
+
+//   protected TermCompList(CharField cf, SearchParamsI sp, boolean editModel,
+//                          boolean addCompButton, String label) {
+//     super(sp,editModel,cf,label);
+//     init();
+//   }
+  
+  private void init() {
     enableTermInfoListening();
     if (hasMoreThanOneOntology()) // super AACL
       initOntologyChooser(getCharField());
+//     if (charField.postCompAllowed() && addCompButton) {
+//       JButton postCompButton = new JButton("Comp"); // ???
+//       postCompButton.addActionListener(new PostCompListener());
+//       //fieldPanel.addPostCompButton(postCompButton);
+//     } 
   }
 
 
+  // pase i think
+//   TermCompList(CompListSearcher s,boolean editModel,CharFieldGui cfg) {
+//     super(s,editModel,cfg.getCharField());
+//     this.charFieldGui = cfg; // pass to super? AACL subclass CFG?
+//     enableTermInfoListening();
+//     if (hasMoreThanOneOntology()) // super AACL
+//       initOntologyChooser(getCharField());
+//   }
+
+  protected boolean isTermCompList() { return true; }
+  protected TermCompList getTermComp() { return this; } // need this?
+
+
+  protected boolean hasCompButton() { return postCompButton != null; }
+
+  protected JButton getCompButton() { return postCompButton; }
+
+  protected void allowPostCompButton(boolean allow) {
+    if (!allow) return;
+    if (getCharField().postCompAllowed()) {
+      postCompButton = new JButton("Comp"); // ???
+      postCompButton.addActionListener(new PostCompListener());
+      //fieldPanel.addPostCompButton(postCompButton);
+    } 
+  }
+
   /** char in table changed - setCurrentOboClass & text */
   protected void setValueFromChar(CharacterI chr) {
+    if (chr == null) {
+      log().error("ERROR: attempt to set fields from null character"); // ex?
+      return;
+    }
     //System.out.println(chr+" val "+chr.getValue(getCharField()));
     if (!chr.hasValue(getCharField())) {
       currentOboClass = null; // makes getCurTermRelName ""
@@ -95,7 +165,7 @@ class TermCompList extends AbstractAutoCompList {
   }
 
   /** rename setTerm? */
-  void setOboClass(OBOClass term) {
+  protected void setOboClass(OBOClass term) {
     // actually i think null is valid for non-required fields - undo & blanking field
     // right even if required field should still be able to undo back to init/null
 //     if (term == null) {
@@ -233,8 +303,11 @@ class TermCompList extends AbstractAutoCompList {
       ontologyChooserCombo.addItem(o.getName());
     }
     ontologyChooserCombo.addActionListener(new OntologyChooserListener());
-    charFieldGui.addOntologyChooser(ontologyChooserCombo);
+    //charFieldGui.addOntologyChooser(ontologyChooserCombo);
   }
+
+  protected boolean hasOntologyChooser() { return ontologyChooserCombo != null; }
+  protected JComboBox getOntologyChooser() { return ontologyChooserCombo; }
 
 
   private Logger log;
@@ -267,4 +340,13 @@ class TermCompList extends AbstractAutoCompList {
     private boolean isAll(String s) { return s.equals(ALL); }
   }
   
+  /** I think post-comp should only be closeable if its empty (in expand collapse
+   inframe case - now window) */
+  private class PostCompListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      new PostCompGui(getCharField(),getSearchParams());
+    }
+  }
+  
+
 }

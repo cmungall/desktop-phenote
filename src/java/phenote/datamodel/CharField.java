@@ -39,8 +39,9 @@ public class CharField {
 
   public String getName() {
     if (name == null) { // not explicitly set
-      if (hasOneOntology())
+      if (hasOneOntology()) {
         name =  getOntology().getName();
+      }
       else
         name = charFieldEnum.toString();
     }
@@ -76,7 +77,10 @@ public class CharField {
     if (!hasOntologies()) return null;
     return getFirstOntology();
   }
-  public Ontology getFirstOntology() { return ontologyList.get(0); }
+  public Ontology getFirstOntology() {
+    if (ontologyList.isEmpty()) return null; // ex?
+    return ontologyList.get(0);
+  }
 
   private int getOntologySize() {
     if (!hasOntologies()) return 0;
@@ -103,7 +107,7 @@ public class CharField {
     postCompAllowed = pca;
   }
 
-  /** whether this field allows for post composition - from config */
+  /** whether this field allows for post composition - from config - allowed? how bout has? */
   public boolean postCompAllowed() {
     return postCompAllowed;
   }

@@ -58,24 +58,30 @@ class PostCompGui {
     // dialog wont be focusable if owner is not showing or something like that
     Frame owner = Phenote.getPhenote().getFrame();
     dialog = new JDialog(owner,charField.getName()+" Post Composition");
-    FieldPanel compFieldPanel = new FieldPanel(false); // (searchParams)?
+    FieldPanel compFieldPanel = new FieldPanel(false,false); // (searchParams)?
     compFieldPanel.setSearchParams(searchParams);
     
     // false - dont edit model, false - no post comp button
-    genusField = new CharFieldGui(charField,compFieldPanel,"Genus",false,false);
+    //genusField = new CharFieldGui(charField,compFieldPanel,"Genus",false,false);
+    genusField = CharFieldGui.makePostCompTermList(charField,searchParams,"Genus");
+    compFieldPanel.addCharFieldGuiToPanel(genusField);
 
     // Relationship?? stripped down ontology? hmmmmmm...
     CharField relChar = new CharField(CharFieldEnum.RELATIONSHIP);
     // Ontology o = OntologyManager.getRelationshipOntology() ?? getRelCharField?
     Ontology o = charField.getPostCompRelOntol();
     relChar.addOntology(o);
-    relField = new CharFieldGui(relChar,compFieldPanel,"Relationship",false,false);
+    //relField = new CharFieldGui(relChar,compFieldPanel,"Relationship",false,false);
+    relField = CharFieldGui.makeRelationList(relChar,searchParams); // "Relationship"?
+    compFieldPanel.addCharFieldGuiToPanel(relField);
     //relField.enableTermInfoListening(false); // turn off term info for rels
     // relField = new RelFieldGui(relChar,compTermPanel,"Relationship");
     // relField = new RelationshipFieldGui(compFieldPanel);
 
-    diffField =
-      new CharFieldGui(charField,compFieldPanel,"Differentia",false,false);
+    // when recurse put in flag for comp button
+    diffField = CharFieldGui.makePostCompTermList(charField,searchParams,"Differentia");
+    compFieldPanel.addCharFieldGuiToPanel(diffField);
+    //new CharFieldGui(charField,compFieldPanel,"Differentia",false,false);
 
     setGuiFromSelectedModel();
 

@@ -15,8 +15,16 @@ class RelationCompList extends AbstractAutoCompList {
 
   private OBOProperty currentRel=null;
 
-  RelationCompList(CompListSearcher searcher,boolean editModel,CharField c) {
-    super(searcher,editModel,c);
+  RelationCompList(CharField c) {
+    super(c);
+    //setLabel("Relationship"); //does it get this from char field?
+    allowPostCompButton(false); // cant post comp rels can you?
+    enableEditModel(false); // doesnt directly edit model i dont think ever?
+    enableListeners(false); // at least while in comp window
+  }
+
+//   RelationCompList(CompListSearcher searcher,boolean editModel,CharField c) {
+//     super(searcher,editModel,c);
     // this inner class enables retrieving of JList for mouse over
     // this will probably throw errors if non metal look & feel is used
 //    setUI(new MetalListComboUI());
@@ -35,8 +43,7 @@ class RelationCompList extends AbstractAutoCompList {
 //     //if (editModel) // ComboBoxActionListener edits the model
 //     this.editModel = editModel;
 //     addActionListener(new ComboBoxActionListener());
-
-  }
+    //}
 
   /** The user has selected a rel from the list, validate and set current rel
       if doesnt validate throw ex */

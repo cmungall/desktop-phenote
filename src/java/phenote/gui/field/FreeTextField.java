@@ -1,6 +1,7 @@
 package phenote.gui.field;
 
 import java.util.List;
+import java.awt.Component;
 import java.awt.Toolkit;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -13,6 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.DocumentEvent;
 
+import org.apache.log4j.Logger;
+
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharField;
 //import phenote.datamodel.CharFieldEnum; // phase out
@@ -21,15 +24,17 @@ import phenote.edit.EditManager;
 import phenote.gui.selection.SelectionManager;
 
 // should this be a subclass of charfieldGui? maybe?
-class FreeTextField {
+class FreeTextField extends CharFieldGui {
 
   private JTextField textField;
-  private CharFieldGui charFieldGui;
+  //private CharFieldGui charFieldGui;
   private boolean guiTextHasChanged = false;
+  //private boolean updateGuiOnly = false;
 
   //private void initTextField(String label) {
-  FreeTextField(CharFieldGui cfg) {
-    charFieldGui = cfg;
+  FreeTextField(CharField charField) { //CharFieldGui cfg) {
+    super(charField);
+    //charFieldGui = cfg;
     textField = new JTextField(35);
     textField.setMinimumSize(CharFieldGui.inputSize);
     textField.setEditable(true);
@@ -38,16 +43,23 @@ class FreeTextField {
     textField.addKeyListener(new TextKeyListener());
   }
   
-  JTextField getComponent() { return textField; }
+  
 
-  void setText(String text) {
+  //JTextField getComponent() { return textField; }
+  protected Component getUserInputGui() { return textField; }
+
+  protected void setText(String text) {
     textField.setText(text);
   }
-  String getText() { return textField.getText(); }
+  protected String getText() { return textField.getText(); }
 
-  private boolean updateGuiOnly() { return charFieldGui.updateGuiOnly(); }
+  //private boolean updateGuiOnly() { return /*charFieldGui.*/updateGuiOnly(); }
 
   protected void setValueFromChar(CharacterI chr) {
+    if (chr == null) {
+      log().error("ERROR: attempt to set fields from null character"); // ex?
+      return;
+    }
     //String v = charField.getCharFieldEnum().getValue(chr).getName();
     if (!chr.hasValue(getCharField()))
       return;
@@ -55,8 +67,14 @@ class FreeTextField {
     setText(v);
   }
   
+  protected void setGuiForMultiSelect() {
+    setUpdateGuiOnly(true);//updateGuiOnly = true;
+    setText("*"); 
+    setUpdateGuiOnly(false);//updateGuiOnly = false;
+  }
+
   // subclass?
-  private CharField getCharField() { return charFieldGui.getCharField(); }
+  //private CharField getCharField() { return charFieldGui.getCharField(); }
 
   /** key listener for free text fields for Cmd-V pasting for macs */
   private class TextKeyListener extends KeyAdapter {
@@ -95,7 +113,7 @@ class FreeTextField {
     String v = getText();
     //CompoundTransaction ct = new CompoundTransaction(chars,getCharFieldEnum(),v);
     CompoundTransaction ct = CompoundTransaction.makeUpdate(chars,getCharField(),v);
-    EditManager.inst().updateModel(charFieldGui,ct); // cfg source
+    EditManager.inst().updateModel(this,ct);//charFieldGui,ct); // cfg source
     guiTextHasChanged = false; // reset flag
   }
   
@@ -105,6 +123,8 @@ class FreeTextField {
   
   //private CharFieldEnum getCharFieldEnum() { return charFieldGui.getCharFieldEnum(); }
   
+  
+
 
   /** This is where it is noted that the gui has been edited, only update  
     the model on focus change if the gui has been actually edited */
@@ -115,4 +135,9 @@ class FreeTextField {
     private void setGuiChanged() { guiTextHasChanged = true; }
   }
 
+  private Logger log;
+  private Logger log() {
+    if (log == null) log = Logger.getLogger(getClass());
+    return log;
+  }
 }
