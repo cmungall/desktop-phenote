@@ -503,7 +503,7 @@ public class Config {
     return queryAdapConfList != null && getQueryableDataAdapter()!= null;
   }
   
-  /** Just get first one - for now assume theres one */
+  /** Just get first one thats enabled - for now assume theres one */
   public QueryableDataAdapterI getQueryableDataAdapter() {
     //if (!hasQueryableDataAdapter()) return null; // ex?
     if (queryAdapConfList == null) return null;
@@ -514,7 +514,8 @@ public class Config {
     return null;
   }
 
-  private List<QueryableAdapConfig> getQueryAdapCfgs() {
+  /** all configs for query adaps - enabled or not */
+  List<QueryableAdapConfig> getQueryAdapCfgs() {
     if (queryAdapConfList == null)
       queryAdapConfList = new ArrayList<QueryableAdapConfig>(1);
     return queryAdapConfList;

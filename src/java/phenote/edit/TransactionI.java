@@ -13,7 +13,7 @@ public interface TransactionI {
   
   public OBOClass getNewTerm();
   
-  public String getNewValueString();
+  //public String getNewValueString();
 
   public boolean isUpdate();
   

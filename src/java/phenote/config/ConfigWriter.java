@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.apache.xmlbeans.XmlOptions;
 import phenote.config.xml.DataadapterDocument.Dataadapter;
+import phenote.config.xml.QueryableDataadapterDocument.QueryableDataadapter;
 import phenote.config.xml.LogDocument.Log;
 import phenote.config.xml.OboRepositoryDocument.OboRepository;
 import phenote.config.xml.OntologyDocument.Ontology;
@@ -28,6 +29,8 @@ class ConfigWriter {
     // namespace??? need to get that working - xsd as a check - dont know how
 
     addDataAdapters();
+
+    addQueryDataAdapters();
 
     addLog();
 
@@ -55,7 +58,19 @@ class ConfigWriter {
     daBean.setName(daClassString);
     daBean.setEnable(dac.isEnabled());
   }
-  
+
+  private void addQueryDataAdapters() {
+    for (QueryableAdapConfig q : config.getQueryAdapCfgs()) {
+      addQueryAdapter(q);
+    }
+  }
+
+  private void addQueryAdapter(QueryableAdapConfig qac) {
+    String qacClassString = qac.getConfigString();
+    QueryableDataadapter qdBean = phenCfg.addNewQueryableDataadapter();
+    qdBean.setName(qacClassString);
+    qdBean.setEnable(qac.isEnabled());
+  }  
   private void addLog() {
     Log log = phenCfg.addNewLog();
     log.setConfigFile(config.getLogConfigFile());

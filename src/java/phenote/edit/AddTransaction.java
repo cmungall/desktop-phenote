@@ -1,5 +1,7 @@
 package phenote.edit;
 
+import org.geneontology.oboedit.datamodel.OBOClass;
+
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
 // does char list manager belong in edit package?
@@ -31,5 +33,7 @@ public class AddTransaction implements TransactionI {
 
   /** this is for update trans - return false */
   public boolean isUpdateForCharField(CharField cf) { return false; }
+
+  public OBOClass getNewTerm() { return null; }
 
 }

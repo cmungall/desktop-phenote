@@ -19,7 +19,7 @@ public class CharChangeEvent extends EventObject {
   
   public OBOClass getNewTerm() { return transaction.getNewTerm(); }
   
-  public String getNewValueString() { return transaction.getNewValueString(); }
+  //public String getNewValueString() { return transaction.getNewValueString(); }
 
   public boolean isUpdate() { return transaction.isUpdate(); }
 

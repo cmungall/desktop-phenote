@@ -1,5 +1,7 @@
 package phenote.edit;
 
+import org.geneontology.oboedit.datamodel.OBOClass;
+
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
 import phenote.dataadapter.CharacterListManager;
@@ -32,5 +34,6 @@ class DeleteTransaction implements TransactionI {
     return CharacterListManager.inst().getCharacterList();
   }
     
+  public OBOClass getNewTerm() { return null; }
 
 }
