@@ -4,12 +4,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.LoadSaveManager;
 import phenote.config.Config;
-//import phenote.gui.prefswindow.PrefsWindowController;
+import phenote.config.ConfigFileQueryGui;
+import phenote.config.ConfigException;
+//import phenote.gui.prefswindow.PrefsWindowController; ???
 
 class FileMenu extends JMenu {
 
@@ -34,12 +37,16 @@ class FileMenu extends JMenu {
     save.setActionCommand("save");
     save.addActionListener(actionListener);
     add(save);
+
+    JMenuItem loadConfig = new JMenuItem("Load Configuration");
+    loadConfig.addActionListener(new ConfigActionListener());
+    add(loadConfig);
   }
 
   private class LoadSaveActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       if (!Config.inst().hasDataAdapters()) {
-        System.out.println("no data adapter to load with");
+        System.out.println("no file data adapter to load/save with");
         return;
       }
       if (e.getActionCommand().equals("load"))
@@ -47,6 +54,26 @@ class FileMenu extends JMenu {
 
       else if (e.getActionCommand().equals("save"))
         LoadSaveManager.inst().saveData();
+    }
+  }
+
+  private class ConfigActionListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      // 1st step just set my-phenote.cfg & user restart phenote
+      // eventually reconfigure phenote in same session, cfg,obo,gui
+      String cfg = ConfigFileQueryGui.queryUserForConfigFile();
+      try {
+        if (cfg != null && !cfg.equals(""))
+          Config.writeMyPhenoteDefaultFile(cfg);
+        String m = "You must restart phenote for new config to take effect";
+        JOptionPane.showMessageDialog(null,m,"Please restart",
+                                      JOptionPane.INFORMATION_MESSAGE);
+      }
+      catch (ConfigException x) {
+        String m = "Failed to change configuration "+x.getMessage();
+        JOptionPane.showMessageDialog(null,m,"Config error",
+                                      JOptionPane.ERROR_MESSAGE);
+      }
     }
   }
 

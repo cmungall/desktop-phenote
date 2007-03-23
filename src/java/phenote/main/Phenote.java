@@ -49,7 +49,7 @@ public class Phenote {
   public static void main(String[] args) {
     standalone = true; // i think this is ok
     System.out.println("This is Phenote version "+PhenoteVersion.versionString());
-    // default mac lok & feel is "Mac OS X", but the JComboBox is buggy
+    // default mac look & feel is "Mac OS X", but the JComboBox is buggy
     try {
       UIManager.setLookAndFeel(new MetalLookAndFeel());
     }
@@ -156,16 +156,14 @@ public class Phenote {
   private JPanel makeMainPanel() {
     JPanel mainPanel = new JPanel(new GridBagLayout()); // ??
     
-    //JPanel termAndTablePanel = new JPanel();
     JPanel upperPanel = new JPanel();
-    //BoxLayout bl = new BoxLayout(termAndTablePanel,BoxLayout.Y_AXIS);
     BoxLayout bl = new BoxLayout(upperPanel,BoxLayout.X_AXIS);
     upperPanel.setLayout(bl);
 
     fieldPanel = new FieldPanel(); // field panel contains search params
     upperPanel.add(fieldPanel);
 
-    termInfo = new TermInfo(); //fieldPanel);
+    termInfo = new TermInfo();
     upperPanel.add(termInfo.getComponent());
     
     selectionHistory = new SelectionHistory();
@@ -203,60 +201,4 @@ public class Phenote {
   public CharacterTablePanel getCharacterTablePanel() { return characterTablePanel; }
 }
 
-
-//   /** for now just looking for '-c configFile.cfg', use command line package
-//       if we need to get more sophisticated 
-//       so if user has personal config file should override this - however maybe 
-//       there should be a distinction between initial config file and user made configs
-//       well really the initials are db/species specific - so could be 
-//       --initialConfig zf|fb|obd - actually da heck with that with entity chooser just
-//       put all 3 ontologies in one which is then the default (unspecified on cmd line)
-//       and -c file.cfg will load/overwrite that cfg into .phenote/my-phenote.cfg 
-//       (if it exists) - we can always add --init later if we need it 
-//       -c overwrites, -i doesnt -i is for initial startup of phenote */
-//   private void doCommandLineOld(String[] args) {
-//     String configFile = getConfigFileFromCommandLine(args);
-//     // if no config file specified then set default initial config file. this will be
-//     // overridden by a personal config file if it exists
-//     //if (configFile == null) configFile = Config.DEFAULT_CONFIG_FILE; stored in file
-//     try {
-//       if (isOverwriteConfigFile(args)) //causes wipeout move of app file to .phenote
-//         Config.inst().setOverwriteConfigFile(configFile); 
-//       else if (isInitialConfigFile(args))
-//         Config.inst().setInitialConfigFile(configFile);
-//       //else if update...
-//       else // no command line config file specified - use last one specified (cache)
-//         Config.inst().loadDefaultConfigFile();
-//     } catch (ConfigException e) {
-//       //LOG.fatal("EXITING! Fatal error in config file: "+e.getMessage());
-//       LOG.error("Error in config file! "+e.getMessage());
-//       e.printStackTrace(); // log?
-//       //System.exit(1); // isnt this a bit extreme?
-//       System.out.println("Yikes! config exception "+e+" gonna try loading default"
-//                          +" config");
-//       try { Config.inst().loadDefaultConfigFile(); }
-//       catch (ConfigException ce) { 
-//         System.out.println("bummer - even default config fails. we're hosed! "+ce);
-//       }
-//     }
-//   }
-
-//   // change to -m for merge?? - move to CommandLine!
-//   private boolean isInitialConfigFile(String args[]) {
-//     if (args == null || args.length < 2) return false;
-//     return args[0].equals("-i");
-//   }
-//   private boolean isOverwriteConfigFile(String args[]) {
-//     if (args == null || args.length < 2) return false;
-//     return args[0].equals("-c");
-//   }
-
-//   private String getConfigFileFromCommandLine(String args[]) {
-//     // need 2 args
-//     if (args == null || args.length < 2) return null;
-//     //String firstArg = args[0];
-//     if (!isInitialConfigFile(args) && !isOverwriteConfigFile(args)) return null;
-//     String configFile = args[1];
-//     return configFile;
-//   }
 

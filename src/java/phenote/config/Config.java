@@ -88,7 +88,7 @@ public class Config {
 
   /** if all else fails revert to flybase which should be there */
   public void loadDefaultFlybaseConfigFile() throws ConfigException {
-    setConfigFile(FLYBASE_DEFAULT_CONFIG_FILE,true,false,false);
+    setConfigFile(FLYBASE_DEFAULT_CONFIG_FILE,true,false,false); // merge true?
   }
 
   /** default file should be in .phenote/conf/my-phenote.cfg. if not set yet then just
@@ -186,13 +186,14 @@ public class Config {
     //File conf = new File(dotPhenote,"conf");conf.mkdir();return conf;
   }
 
-  private File getMyPhenoteFile() {
+  private static File getMyPhenoteFile() {
     return new File(getDotPhenoteConfDir(),"my-phenote.cfg");
   }
 
   /** Write name of config file loaded out to .phenote/conf/my-phenote.cfg for use
-      by future startups with no config specified */
-  private void writeMyPhenoteDefaultFile(String newDefaultFileString)
+      by future startups with no config specified 
+      Throws ConfigException if fails to find file */
+  public static void writeMyPhenoteDefaultFile(String newDefaultFileString)
     throws ConfigException {
     try {
       File myPhenote = getMyPhenoteFile();

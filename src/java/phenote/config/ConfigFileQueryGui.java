@@ -39,7 +39,7 @@ import javax.jnlp.*;
 import phenote.gui.GridBagUtil;
 import phenote.util.FileUtil;
 
-class ConfigFileQueryGui {
+public class ConfigFileQueryGui {
 
   //private String selection;
   private String selectedFile;
@@ -47,20 +47,24 @@ class ConfigFileQueryGui {
   private boolean okPressed = false;
   private ButtonGroup buttonGroup;
 
-  static String queryUserForConfigFile() {
+  public static String queryUserForConfigFile() {
     ConfigFileQueryGui c = new ConfigFileQueryGui();
     return c.queryUser();
   }
 
+
   private String queryUser() {
-    dialog = new JDialog(); //"Choose Configuration",true);
-    //dialog.setPreferredSize(new Dimension(300,400));
-    //dialog.setLayout(new BoxLayout(dialog,BoxLayout.Y_AXIS));
-    //dialog.setLayout(new GridLayout(0,1));
-    //dialog.setLayout(new BorderLayout());
+    makeQueryDialog();
+    return selectedFile; 
+  }
+
+
+  private void makeQueryDialog() {
+    java.awt.Frame f = phenote.main.Phenote.getPhenote().getFrame();
+    // true -> modal -> this is crucial! 
+    dialog = new JDialog(f,true); //"Choose Configuration",true);
     dialog.setLayout(new GridBagLayout());
     dialog.setTitle("Phenote Configuration");
-    // set layout?
     JLabel text = new JLabel("Please pick a configuration for Phenote: ");
     int center = GridBagConstraints.CENTER;
     GridBagConstraints gbc = GridBagUtil.makeAnchorConstraint(0,0,center);
@@ -89,12 +93,6 @@ class ConfigFileQueryGui {
     dialog.pack();
     centerOnScreen(dialog);
     dialog.setVisible(true);
-    //return selection; // ????
-    while (!okPressed) {
-      //System.out.println("ok pressed? "+okPressed);
-      try { Thread.sleep(10); } catch (InterruptedException e) {}
-    } // sleep??
-    return selectedFile;
   }
 
   private class OkActionListener implements ActionListener {
@@ -191,19 +189,66 @@ class ConfigFileQueryGui {
     c.setLocation(p);
   }
 
-  private class PhenoteClassLoader extends ClassLoader {
-
-    private PhenoteClassLoader() {
-      super(ClassLoader.getSystemClassLoader());
-    }
-    
-    protected String findLibrary(String lib) {
-      return super.findLibrary(lib);
-      //return this.getParent().findLibrary(lib);
-    }
-
-    //protected ClassLoader getParent() { return super.getParent(); }
-
-  }
-
 }
+
+// silly me - all i needed to do was make the dialog modal! silly silly
+//  WaitSwingWorkerThread waitSwingWorkerThread;
+    // doesnt work - still spins
+    //Thread dt = new DialogThread();
+//     try { 
+//       // this says cant do from EventDispatcherThread
+//       //javax.swing.SwingUtilities.invokeAndWait(new DialogThread());
+//       // this literally makes the computer blow up
+//       //javax.swing.SwingUtilities.invokeLater(new DialogThread());
+//     } //catch (InterruptedException e) { System.out.println("interrupted "+e); }
+//     catch (Exception e) {  System.out.println("Exception: "+e); }
+    //dt.start();
+    //DialogSwingWorkerThread dt = new DialogSwingWorkerThread();
+    //dt.start();
+//     while (!okPressed) {
+//       System.out.println("ok pressed? "+okPressed+" cur thread "+Thread.currentThread()+" dlg thread "+dt);
+//       try { Thread.sleep(300); } catch (InterruptedException e) {}
+//     } // sleep??
+//    return selectedFile; //(String) dt.get(); //selectedFile;
+//     waitSwingWorkerThread  = new WaitSwingWorkerThread();
+//     waitSwingWorkerThread.start();
+//     return (String)waitSwingWorkerThread.get();
+//   private class DialogThread extends Thread {
+//     public void run() {
+//       makeQueryDialog();
+//     }
+//   }
+
+//   private class WaitSwingWorkerThread extends phenote.gui.SwingWorker {
+//     public Object construct() {
+//       while (!okPressed) {
+//         System.out.println("ok pressed? "+okPressed+" cur thread "+Thread.currentThread()+" this "+this+" sel "+selectedFile);
+// //        try {
+//         waitSwingWorkerThread.sleep(300);// } catch (InterruptedException e) {}
+//       } // sleep??
+//       return selectedFile;
+//     }
+//   }
+  
+
+//   private class DialogSwingWorkerThread extends phenote.gui.SwingWorker {
+//     public Object construct() {
+//       makeQueryDialog();
+// //     while (!okPressed) {
+// //       System.out.println("ok pressed? "+okPressed+" cur thread "+Thread.currentThread()+" this "+this);
+// //       try { Thread.sleep(300); } catch (InterruptedException e) {}
+// //     } // sleep??
+//       return selectedFile;
+//     }
+//   }
+
+//   private class PhenoteClassLoader extends ClassLoader {
+//     private PhenoteClassLoader() {
+//       super(ClassLoader.getSystemClassLoader());
+//     }
+//     protected String findLibrary(String lib) {
+//       return super.findLibrary(lib);
+//       //return this.getParent().findLibrary(lib);
+//     }
+//     //protected ClassLoader getParent() { return super.getParent(); }
+//   }
