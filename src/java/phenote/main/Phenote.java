@@ -33,7 +33,6 @@ import phenote.gui.field.FieldPanel;
 
 public class Phenote {
 
-  //private static final String VERSION = "0.8.2 dev";
   private static final Logger LOG = Logger.getLogger(Phenote.class);
   private static boolean standalone = false; // default for servlet
 
@@ -57,7 +56,6 @@ public class Phenote {
       System.out.println("Failed to set to Java/Metal look & feel");
     }
     phenote = getPhenote();
-    //phenote.initConfig(args);
     phenote.doCommandLine(args); // does config
     // put this is in a phenote.util.Log class? - get file from config - default?
     try { DOMConfigurator.configure(Config.inst().getLogConfigUrl()); }
@@ -73,12 +71,6 @@ public class Phenote {
   /** private constructor -> singleton */
   private Phenote() {}
 
-//   /** args is most likely null if not called from command line */
-//   public void initConfig(String[] args) {
-//     // gets config file from command line & loads - if no config file 
-//     // loads default. should actually put that logic here.
-//     doCommandLine(args); // load config file
-//   }
 
   public void initOntologies() {
     //OntologyDataAdapter oda = new OntologyDataAdapter(); // singleton?
@@ -135,7 +127,7 @@ public class Phenote {
     frame = new JFrame("Phenote "+PhenoteVersion.versionString()); 
     frame.getContentPane().add(makeMainPanel());
     MenuManager.createMenuManager(frame);
-    frame.setPreferredSize(new Dimension(1200,700)); //1100,700));
+    frame.setPreferredSize(new Dimension(1220,800)); //1100,700));
     if (standalone) // if stand alone exit java on window close
       frame.addWindowListener(new WindowExit());
     frame.pack();
@@ -156,18 +148,24 @@ public class Phenote {
   private JPanel makeMainPanel() {
     JPanel mainPanel = new JPanel(new GridBagLayout()); // ??
     
-    JPanel upperPanel = new JPanel();
-    BoxLayout bl = new BoxLayout(upperPanel,BoxLayout.X_AXIS);
-    upperPanel.setLayout(bl);
+    JPanel upperPanel = new JPanel(new GridBagLayout());
+    //BoxLayout bl=new BoxLayout(upperPanel,BoxLayout.X_AXIS);upperPanel.setLayout(bl);
 
+    GridBagConstraints ugbc = GridBagUtil.makeFillingConstraint(0,0);
+    ugbc.weightx = 1;
+    
     fieldPanel = new FieldPanel(); // field panel contains search params
-    upperPanel.add(fieldPanel);
+    upperPanel.add(fieldPanel,ugbc);
 
     termInfo = new TermInfo();
-    upperPanel.add(termInfo.getComponent());
+    ugbc.gridx++;
+    ugbc.weightx = 5;
+    upperPanel.add(termInfo.getComponent(),ugbc);
     
     selectionHistory = new SelectionHistory();
-    upperPanel.add(selectionHistory.getComponent());
+    ugbc.gridx++;
+    ugbc.weightx = 3;
+    upperPanel.add(selectionHistory.getComponent(),ugbc);
     //++gbc.gridx;  // ??
     //gbc.anchor = GridBagConstraints.NORTHWEST; // ??
     //mainPanel.add(termInfo.getComponent(),gbc);
@@ -179,13 +177,13 @@ public class Phenote {
 //     int anchor = GridBagConstraints.WEST;
 //     GridBagConstraints gbc = GridBagUtil.makeConstraint(0,0,1,1,weightY,4,4,fill,anchor);
     GridBagConstraints gbc = GridBagUtil.makeFillingConstraint(0,0);
-    gbc.weighty = 10;
+    gbc.weighty = 1;
     mainPanel.add(upperPanel,gbc);
 
     characterTablePanel = new CharacterTablePanel();
     //termAndTablePanel.add(characterTablePanel);
     ++gbc.gridy; // ?
-    gbc.weighty = 17;
+    gbc.weighty = 10;
     mainPanel.add(characterTablePanel,gbc);
 
     return mainPanel;
@@ -201,4 +199,10 @@ public class Phenote {
   public CharacterTablePanel getCharacterTablePanel() { return characterTablePanel; }
 }
 
+//   /** args is most likely null if not called from command line */
+//   public void initConfig(String[] args) {
+//     // gets config file from command line & loads - if no config file 
+//     // loads default. should actually put that logic here.
+//     doCommandLine(args); // load config file
+//   }
 

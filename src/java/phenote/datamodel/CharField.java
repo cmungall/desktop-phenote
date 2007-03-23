@@ -19,6 +19,7 @@ public class CharField {
   private String name;
   private boolean postCompAllowed=false;
   private Ontology postCompRelOntol;
+  // index? orderNumber? for order in gui/datamodel?
 
   public CharField(CharFieldEnum c) {
     charFieldEnum = c;

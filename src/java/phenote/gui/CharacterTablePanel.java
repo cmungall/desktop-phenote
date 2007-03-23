@@ -72,8 +72,9 @@ public class CharacterTablePanel extends JPanel {
     //setBorder(new javax.swing.border.LineBorder(java.awt.Color.RED)); debug
     //setLayout(new GridLayout(2,1)); // row,col
     setLayout(new GridBagLayout());
-    setPreferredSize(new Dimension(1800,800));
-    setMinimumSize(new Dimension(1400,630)); // 630   
+    //setPreferredSize(new Dimension(1800,800));
+    setPreferredSize(new Dimension(1400,500));
+    //setMinimumSize(new Dimension(1400,630)); // 630   
 
     characterTableModel = new CharacterTableModel();
     charJTable = new JTable(characterTableModel);

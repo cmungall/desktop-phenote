@@ -69,7 +69,7 @@ public class SelectionHistory {
   public JComponent getComponent() {
     JPanel termHistoryPanel = new JPanel(new BorderLayout(0,0)); // hgap,vgap
     termHistoryPanel.setPreferredSize(new Dimension(200,100));
-    termHistoryPanel.setMinimumSize(new Dimension(100,100));
+    //termHistoryPanel.setMinimumSize(new Dimension(100,100));
     if (DO_HTML) {
       JEditorPane editorPane = new JEditorPane(); 
       editorPane.setContentType("text/html"); // sets up HTMLEditorKit

@@ -56,6 +56,7 @@ public class OntologyManager {
   /** This is where the ontologies are in a generic fashion. A char field
       has one or more ontologies (entity char field often has more than ontology)*/
   public List<CharField> getCharFieldList() { return charFieldList; }
+  public int getNumberOfFields() { return charFieldList.size(); }
 
   public List<Ontology> getAllOntologies() {
     List<Ontology> ontologies = new ArrayList<Ontology>();
@@ -176,21 +177,4 @@ public class OntologyManager {
 //     }
 //     return null; // this shouldnt happen - err msg?
 //   } 
-
-//   /** util fn! */
-//   private OBOClass makePostCompTerm(OBOClass genus, String relation, OBOClass diff) {
-//     String nm = pcString(genus.getName(),diff.getName());
-//     String id = pcString(genus.getID(),diff.getID());
-//     OBOClass postComp = new OBOClassImpl(nm,id);
-//     OBOProperty ISA = OBOProperty.IS_A;
-//     OBORestrictionImpl gRel = new OBORestrictionImpl(postComp,ISA,genusTerm);
-//     return postComp;
-//   }
-//   private void addOntologyList(List<Ontology> l) {
-//     allOntologyList.addAll(l);
-//   }
-
-//   private void addOntology(Ontology o) {
-//     allOntologyList.add(o);
-//   }
 

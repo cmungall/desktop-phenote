@@ -60,4 +60,8 @@ public class GridBagUtil {
   }
   
 
+  public static void padLeft(GridBagConstraints g,int pad) {
+    g.insets.left = pad;
+  }
+
 }

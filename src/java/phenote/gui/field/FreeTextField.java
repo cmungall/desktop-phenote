@@ -37,6 +37,7 @@ class FreeTextField extends CharFieldGui {
     //charFieldGui = cfg;
     textField = new JTextField(35);
     textField.setMinimumSize(CharFieldGui.inputSize);
+    //textField.setPreferredSize(CharFieldGui.inputSize);
     textField.setEditable(true);
     textField.getDocument().addDocumentListener(new TextFieldDocumentListener());
     textField.addFocusListener(new FreeFocusListener());

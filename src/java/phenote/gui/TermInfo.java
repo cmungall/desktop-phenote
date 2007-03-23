@@ -59,7 +59,7 @@ public class TermInfo {
   public JComponent getComponent() {
     JPanel termInfoPanel = new JPanel(new BorderLayout(0,0)); // hgap,vgap
     termInfoPanel.setPreferredSize(new Dimension(400,100));
-    termInfoPanel.setMinimumSize(new Dimension(380,100));
+    //termInfoPanel.setMinimumSize(new Dimension(380,100));
     //termInfoPanel.setMaximumSize(new Dimension(380,400));
     if (DO_HTML) {
       JEditorPane editorPane = new JEditorPane(); 

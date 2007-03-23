@@ -23,7 +23,8 @@ public class SearchParamPanel {
 
   JPanel getPanel() {
     JPanel panel = new JPanel();
-    panel.setMinimumSize(new Dimension(305,150));
+    //panel.setMinimumSize(new Dimension(305,150));
+    panel.setPreferredSize(new Dimension(60,50));
     // panel.setPreferredSize(new Dimension(250,250)); ??
     BoxLayout boxLayout = new BoxLayout(panel,BoxLayout.Y_AXIS);
     panel.setLayout(boxLayout);

@@ -7,12 +7,14 @@ import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
@@ -32,45 +34,72 @@ public class FieldPanel extends JPanel {
   private SearchParamPanel searchParamPanel; // searchParamManager?
   private OntologyManager ontologyManager = OntologyManager.inst();
   private JPanel fieldPanel;
+  //private JComponent fieldPanel;
   private SearchParamsI searchParams;
+  private JTabbedPane jTabbedPane;
+
+  /** eventually configurable (with default 12) - for now hardwire at 12 */
+  private static int fieldsPerTab = 12;
 
   public FieldPanel() {
     this(true,true);
   }
   // false for post comp panel
   public FieldPanel(boolean doAllFields,boolean addSearchPanel) {
-    initGui(addSearchPanel);
+    initGui();
     if (doAllFields)
       initCharFieldGuis();
+    if (addSearchPanel)
+      initSearchPanel();
   }
 
-  private void initGui(boolean addSearchPanel) {
+  private void initGui() {
     // should figure y from # of fields really!!! yes!!!
     // width of ontology labels effects x
-    this.setMinimumSize(new Dimension(700,490));//690,490));
+    this.setPreferredSize(new Dimension(650,350));//690,490));
+    //this.setMinimumSize(new Dimension(700,490));//690,490));
     //this.setPreferredSize(new Dimension(2000,750)); // irrelevant in box layout
     //this.setMaximumSize(new Dimension(2000,750));
     BoxLayout bl = new BoxLayout(this,BoxLayout.X_AXIS); // grid bag?
     this.setLayout(bl);
-    fieldPanel = new JPanel(new GridBagLayout());
-    // panel inside of panel - i think is a leftover no reason now
-    add(fieldPanel);
+
+  }
+
+  private void initSearchPanel() {
     // search param panel - maybe search panel should be added to main frame?
-    if (addSearchPanel)
-      add(getSearchParamPanel().getPanel());
+    add(Box.createRigidArea(new Dimension(2,0)));
+    add(getSearchParamPanel().getPanel());
   }
 
 
   private void initCharFieldGuis() {
 
+    fieldPanel = new JPanel(new GridBagLayout());
+    if (isTabbed()) {
+      jTabbedPane  = new JTabbedPane();
+      add(jTabbedPane);
+    }
+    else { // no tabs
+      add(fieldPanel);
+    }
+
+    int fieldNum = 0;
+    int tab = 1;
     for (CharField charField : ontologyManager.getCharFieldList()) {
+      if (isTabbed() && fieldNum % fieldsPerTab == 0) {
+        fieldPanel = new JPanel(new GridBagLayout());
+        jTabbedPane.addTab("Tab "+tab++,fieldPanel);
+      }
+      ++fieldNum;
       //CharFieldGui gui = new CharFieldGui(charField,this); // adds to panel
       CharFieldGui gui = CharFieldGui.makeCharFieldGui(charField,getSearchParams());
       addCharFieldGuiToPanel(gui);
       charFieldGuiList.add(gui);
     }
-    // search param panel - maybe search panel should be added to main frame?
-    //add(getSearchParamPanel().getPanel()); --> initGui
+  }
+
+  private boolean isTabbed() {
+    return ontologyManager.getNumberOfFields() > fieldsPerTab;
   }
 
   void addCharFieldGuiToPanel(CharFieldGui fieldGui) {

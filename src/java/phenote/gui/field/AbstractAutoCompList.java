@@ -90,10 +90,10 @@ public abstract class AbstractAutoCompList extends CharFieldGui { //extends JCom
     //charFieldGui = cfg;
     //setCharField(cf);
     jComboBox.setPreferredSize(CharFieldGui.inputSize); //new Dimension(390,20));
-    jComboBox.setMaximumSize(CharFieldGui.inputSize); //new Dimension(390,20));
+    //jComboBox.setMaximumSize(CharFieldGui.inputSize); //new Dimension(390,20));
     // this is super critical - fixes bug where layout goes to hell if string are long
     // in completion - dont ask me why????
-    jComboBox.setMinimumSize(CharFieldGui.inputSize);
+    //jComboBox.setMinimumSize(CharFieldGui.inputSize);
     AutoTextFieldEditor autoTextFieldEditor = new AutoTextFieldEditor();
     jComboBox.setEditor(autoTextFieldEditor);
     // dont know why by setting fonts this seem to get worse not better in terms of
