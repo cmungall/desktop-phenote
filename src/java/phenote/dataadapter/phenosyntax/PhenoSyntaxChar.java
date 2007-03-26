@@ -243,10 +243,3 @@ public class PhenoSyntaxChar {
 //         throw new BadCharException("Error: character has no entity, ignoring");
 //       //sb.append(" E=").append(makeValue(character.getEntity()));
 //       sb.append(" E=").append(makeValue(character.getTerm("Entity")));
-
-//       // if (character.hasValue(CharFieldEnum.STAGE))
-      
-//       //if (character.getQuality() == null)
-//       if (!character.hasValue("Quality"))
-//         throw new BadCharException("Error: character has no quality, ignoring");
-//       sb.append(" Q=").append(makeValue(character.getTerm("Quality")));

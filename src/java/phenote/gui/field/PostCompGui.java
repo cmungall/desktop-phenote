@@ -1,5 +1,6 @@
 package phenote.gui.field;
 
+import java.awt.Dimension;
 import java.util.List;
 import java.awt.BorderLayout;
 import java.awt.Frame;
@@ -85,6 +86,8 @@ class PostCompGui {
 
     setGuiFromSelectedModel();
 
+    // override FieldPanel preferred size which will set window size
+    compFieldPanel.setPreferredSize(null);//new Dimension(700,160));
     dialog.add(compFieldPanel);
     addButtons();
     dialog.pack();

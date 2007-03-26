@@ -44,11 +44,16 @@ public class FieldPanel extends JPanel {
   public FieldPanel() {
     this(true,true);
   }
-  // false for post comp panel
+  // false for post comp panel - boolean isPostComp?
   public FieldPanel(boolean doAllFields,boolean addSearchPanel) {
     initGui();
-    if (doAllFields)
+    if (doAllFields) {
       initCharFieldGuis();
+    }
+    else {
+      fieldPanel = new JPanel(new GridBagLayout());
+      add(fieldPanel);
+    }
     if (addSearchPanel)
       initSearchPanel();
   }
@@ -58,11 +63,10 @@ public class FieldPanel extends JPanel {
     // width of ontology labels effects x
     this.setPreferredSize(new Dimension(650,350));//690,490));
     //this.setMinimumSize(new Dimension(700,490));//690,490));
-    //this.setPreferredSize(new Dimension(2000,750)); // irrelevant in box layout
+    //this.setPreferredSize(new Dimension(2000,750)); //irrel in boxLayout
     //this.setMaximumSize(new Dimension(2000,750));
     BoxLayout bl = new BoxLayout(this,BoxLayout.X_AXIS); // grid bag?
     this.setLayout(bl);
-
   }
 
   private void initSearchPanel() {
