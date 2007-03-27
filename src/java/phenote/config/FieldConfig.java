@@ -129,12 +129,28 @@ public class FieldConfig {
   void setSyntaxAbbrev(String syn) {
     this.syntaxAbbrev = syn;
   }
+  /** gets from label if no syntax abbrev explicitly set, replaces spaces with underscores
+      as pheno syntax is sensitive to spaces (in theory at least) */
   String getSyntaxAbbrev() {
-    if (syntaxAbbrev == null) return getLabel();
-    return syntaxAbbrev;
+    String s =  (syntaxAbbrev == null) ? getLabel() : syntaxAbbrev;
+    s = s.replace(' ','_');
+    return s;
   }
   //void String getSyntaxAbbrev() { return syntaxAbbrev; }
-  boolean hasSyntaxAbbrev(String abb) { return abb.equals(syntaxAbbrev); }
+  /** Test both syntaxAbbrev & label - also test for replacing spaces with underscores */
+  boolean hasSyntaxAbbrev(String abb) {
+    if (equalsWithSpaceUnderscore(abb,syntaxAbbrev)) return true;
+    return equalsWithSpaceUnderscore(abb,label);
+  }
+
+  /** returns true if strings equal or if strings equal after replacing space with
+      underscore */
+  private boolean equalsWithSpaceUnderscore(String abbrev,String s) {
+    if (abbrev==null || s==null) return false;
+    if (abbrev.equalsIgnoreCase(s)) return true;
+    String underForSpace = s.replace(' ','_');
+    return abbrev.equalsIgnoreCase(underForSpace);
+  }
 
   public  boolean isEnabled() { return enabled; }
 
