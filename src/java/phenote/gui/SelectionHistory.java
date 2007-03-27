@@ -69,7 +69,7 @@ public class SelectionHistory {
   public JComponent getComponent() {
     JPanel termHistoryPanel = new JPanel(new BorderLayout(0,0)); // hgap,vgap
     termHistoryPanel.setPreferredSize(new Dimension(200,100));
-    //termHistoryPanel.setMinimumSize(new Dimension(100,100));
+//    termHistoryPanel.setMinimumSize(new Dimension(200,100));
     if (DO_HTML) {
       JEditorPane editorPane = new JEditorPane(); 
       editorPane.setContentType("text/html"); // sets up HTMLEditorKit
@@ -85,7 +85,7 @@ public class SelectionHistory {
     }
     textArea.setEditable(false);
     JScrollPane scrollPane = new JScrollPane(textArea);
-    scrollPane.setPreferredSize(new Dimension(400,300));
+    scrollPane.setPreferredSize(new Dimension(200,100));
     scrollPane.setMaximumSize(new Dimension(400,300));
     // border - make JPanel for it (there is a disclaimer about non JPanel)
     //scrollPane.setBorder(BorderFactory.createTitledBorder("Term Info"));
@@ -120,7 +120,8 @@ public class SelectionHistory {
 	  {
 		  OBOClass term = transList.get(i-1).getNewTerm();
 		  if (term!=null)
-			  html = html + "<br>"+HtmlUtil.termLink(term);
+			  html = html + "<br> *"+term.getName();
+//			  html = html + "<br>"+HtmlUtil.termLink(term);
 	  }
 	  textArea.setText(html);
 	  textArea.setCaretPosition(0);
