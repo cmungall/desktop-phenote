@@ -44,20 +44,32 @@ public class ConfigFileQueryGui {
   //private String selection;
   private String selectedFile;
   private JDialog dialog;
-  private boolean okPressed = false;
+  //private boolean okPressed = false;
   private ButtonGroup buttonGroup;
+  private boolean hasCancelButton = false;
+  private boolean isCancelled = false;
 
   public static String queryUserForConfigFile() {
-    ConfigFileQueryGui c = new ConfigFileQueryGui();
+    try { return queryUserForConfigFile(false); }
+    catch (CancelEx e) {return null;} // shouldnt happen with cancel false
+  }
+
+  public static String queryUserForConfigFile(boolean doCancel) throws CancelEx {
+    ConfigFileQueryGui c = new ConfigFileQueryGui(doCancel);
     return c.queryUser();
   }
 
+  private ConfigFileQueryGui(boolean hasCancelButton) {
+    this.hasCancelButton = hasCancelButton;
+  }
 
-  private String queryUser() {
+  private String queryUser() throws CancelEx {
     makeQueryDialog();
+    if (isCancelled) throw new CancelEx();
     return selectedFile; 
   }
 
+  public static class CancelEx extends Exception {}
 
   private void makeQueryDialog() {
     java.awt.Frame f = phenote.main.Phenote.getPhenote().getFrame();
@@ -68,6 +80,7 @@ public class ConfigFileQueryGui {
     JLabel text = new JLabel("Please pick a configuration for Phenote: ");
     int center = GridBagConstraints.CENTER;
     GridBagConstraints gbc = GridBagUtil.makeAnchorConstraint(0,0,center);
+    gbc.gridwidth=2;
     dialog.add(text,gbc);
 
     JPanel buttonPanel = new JPanel();
@@ -87,9 +100,16 @@ public class ConfigFileQueryGui {
     ++gbc.gridy;
     dialog.add(buttonPanel,gbc);
     JButton ok = new JButton("OK");
+    gbc.gridwidth=1;
     ++gbc.gridy;
     dialog.add(ok,gbc);
     ok.addActionListener(new OkActionListener());
+    if (hasCancelButton) {
+      JButton cancel = new JButton("Cancel");
+      cancel.addActionListener(new CancelActionListener());
+      ++gbc.gridx;
+      dialog.add(cancel,gbc);
+    }
     dialog.pack();
     centerOnScreen(dialog);
     dialog.setVisible(true);
@@ -99,10 +119,16 @@ public class ConfigFileQueryGui {
     public void actionPerformed(ActionEvent e) {
       //selection = g.getSelection().getActionCommand(); 
       //String selectedFile = (String)(buttonGroup.getSelection().getValue("filename"));
-      okPressed = true;
+      //okPressed = true;
       //System.out.println("ok pressed in ok action listener "+okPressed);
       dialog.dispose();
     }  
+  }
+  private class CancelActionListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      isCancelled = true;
+      dialog.dispose();
+    }
   }
 
   private class BtnAction extends AbstractAction {

@@ -61,14 +61,16 @@ class FileMenu extends JMenu {
     public void actionPerformed(ActionEvent e) {
       // 1st step just set my-phenote.cfg & user restart phenote
       // eventually reconfigure phenote in same session, cfg,obo,gui
-      String cfg = ConfigFileQueryGui.queryUserForConfigFile();
+      boolean showCancel = true;
       try {
+        String cfg = ConfigFileQueryGui.queryUserForConfigFile(showCancel);
         if (cfg != null && !cfg.equals(""))
           Config.writeMyPhenoteDefaultFile(cfg);
         String m = "You must restart phenote for new config to take effect";
         JOptionPane.showMessageDialog(null,m,"Please restart",
                                       JOptionPane.INFORMATION_MESSAGE);
       }
+      catch (ConfigFileQueryGui.CancelEx ex) {} // its cancelled do nothing
       catch (ConfigException x) {
         String m = "Failed to change configuration "+x.getMessage();
         JOptionPane.showMessageDialog(null,m,"Config error",
