@@ -44,6 +44,19 @@ public class WormAdapter implements QueryableDataAdapterI {
     // should their be a check that the current char fields have pub & allele?
   }
 
+  private String queryPostgresCharacter(Statement s, String postgres_table, String default_value, String query, int boxI, int colI) {
+    ResultSet rs = null;	// intialize postgres query result
+      // get the phenotype term in timestamp order where the allele and box and column number match
+    try { rs = s.executeQuery("SELECT * FROM "+postgres_table+" WHERE joinkey = '"+query+"' AND alp_box='"+boxI+"' AND alp_column='"+colI+"' ORDER BY alp_timestamp"); }
+    catch (SQLException se) {
+      System.out.println("We got an exception while executing our query:" + "that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
+    try { while (rs.next()) { default_value = rs.getString(4); } }		// assign the new term value
+    catch (SQLException se) {
+      System.out.println("We got an exception while getting a result:this " + "shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
+    System.out.println("Added in function charList term "+query+" column "+colI+" box "+boxI+".");		// comment out later
+    return default_value; 
+  }
+
   /** return true if data adapter can query for the char field */
   public boolean isFieldQueryable(String field) {
     return queryableFields.contains(field);
@@ -191,46 +204,10 @@ public class WormAdapter implements QueryableDataAdapterI {
               System.out.println("We got an exception while getting a result:this " + "shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
 
             System.out.println("We have "+columns+" columns in box "+boxI+".");		// comment out later
+
+
             for (int colI=1; colI<columns+1; colI++) {					// for each of those columns
               Character c1 = new Character();						// create a new character for a phenote row
-
-              String phenotype = "No Phenotype assigned";
-              rs = null;
-                // get the phenotype term in timestamp order where the allele and box and column number match
-              try { rs = s.executeQuery("SELECT * FROM alp_term WHERE joinkey = '"+query+"' AND alp_box='"+boxI+"' AND alp_column='"+colI+"' ORDER BY alp_timestamp"); }
-              catch (SQLException se) {
-                System.out.println("We got an exception while executing our query:" + "that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
-              try { while (rs.next()) { phenotype = rs.getString(4); } }		// assign the phenotype term value
-              catch (SQLException se) {
-                System.out.println("We got an exception while getting a result:this " + "shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
- 
-              String phen_remark = "No Phenotype Remark assigned";
-              rs = null;
-              try { rs = s.executeQuery("SELECT * FROM alp_phen_remark WHERE joinkey = '"+query+"' AND alp_box='"+boxI+"' AND alp_column='"+colI+"' ORDER BY alp_timestamp"); }
-              catch (SQLException se) {
-                System.out.println("We got an exception while executing our query:" + "that probably means our phen_rem SQL is invalid"); se.printStackTrace(); System.exit(1); }
-              try { while (rs.next()) { phen_remark = rs.getString(4); } } 
-              catch (SQLException se) {
-                System.out.println("We got an exception while getting a result:this " + "shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
- 
-              String anatomy = "No anatomy assigned";
-              rs = null;
-              try { rs = s.executeQuery("SELECT * FROM alp_anat_term WHERE joinkey = '"+query+"' AND alp_box='"+boxI+"' AND alp_column='"+colI+"' ORDER BY alp_timestamp"); }
-              catch (SQLException se) {
-                System.out.println("We got an exception while executing our query:" + "that probably means our anaterm SQL is invalid"); se.printStackTrace(); System.exit(1); }
-              try { while (rs.next()) { anatomy = rs.getString(4); } } 
-              catch (SQLException se) {
-                System.out.println("We got an exception while getting a result:this " + "shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
- 
-              String stage = "No Stage assigned";
-              rs = null;
-              try { rs = s.executeQuery("SELECT * FROM alp_lifestage WHERE joinkey = '"+query+"' AND alp_box='"+boxI+"' AND alp_column='"+colI+"' ORDER BY alp_timestamp"); }
-              catch (SQLException se) {
-                System.out.println("We got an exception while executing our query:" + "that probably means our stage SQL is invalid"); se.printStackTrace(); System.exit(1); }
-              try { while (rs.next()) { stage = rs.getString(4); } } 
-              catch (SQLException se) {
-                System.out.println("We got an exception while getting a result:this " + "shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
-
               c1.setValue("Allele",query);						// assign the allele
               c1.setValue("Pub",paper);
               c1.setValue("Curator",curator);
@@ -238,12 +215,113 @@ public class WormAdapter implements QueryableDataAdapterI {
               c1.setValue("Phenotype Text Remark",phen_text_remark);
               c1.setValue("Other Remark",remark);
               c1.setValue("Genetic Interaction",genetic_interaction);
-              c1.setValue("Phenotype",phenotype);
-              c1.setValue("Phenotype Remark",phen_remark);
-//               c1.setValue("Anatomy",anatomy);
-              c1.setValue("Stage",stage);
+              String postgres_value = "No Phenotype assigned";
+              String postgres_table = "alp_term";
+              postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
+              c1.setValue("Phenotype",postgres_value);					// assign the queried value
+              postgres_table = "alp_phen_remark"; postgres_value = "No Phenotype Remark assigned";
+              postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
+              c1.setValue("Phenotype Remark",postgres_value);				// assign the queried value
+              postgres_table = "alp_anat_term"; postgres_value = "No Anatomy assigned";
+              postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
+//              c1.setValue("Anatomy",postgres_value);					// assign the queried value	
+              postgres_table = "alp_lifestage"; postgres_value = "No Stage assigned";
+              postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
+              c1.setValue("Stage",postgres_value);					// assign the queried value
+              postgres_table = "alp_nature"; postgres_value = "No Nature of Allele assigned";
+              postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
+              c1.setValue("Allele Nature",postgres_value);				// assign the queried value
+              postgres_table = "alp_func"; postgres_value = "No Functional Change assigned";
+              postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
+              c1.setValue("Functional Change",postgres_value);				// assign the queried value
+              postgres_table = "alp_temperature"; postgres_value = "No Temperature assigned";
+              postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
+              c1.setValue("Temperature",postgres_value);				// assign the queried value
+              postgres_table = "alp_preparation"; postgres_value = "No Preparation assigned";
+              postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
+              c1.setValue("Preparation",postgres_value);				// assign the queried value
+              postgres_table = "alp_percent"; postgres_value = "No Penetrance Percent assigned";
+              postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
+              c1.setValue("Penetrance Remark",postgres_value);				// assign the queried value
+              postgres_table = "alp_range"; postgres_value = "No Penetrance Range assigned";
+              postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
+              c1.setValue("Penetrance Range",postgres_value);				// assign the queried value
+              postgres_table = "alp_quantity_remark"; postgres_value = "No Quantity Remark assigned";
+              postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
+              c1.setValue("Quantity Remark",postgres_value);				// assign the queried value
+              postgres_table = "alp_heat_sens"; postgres_value = "No Heat Sensitive assigned";
+              postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
+              c1.setValue("Heat Sensitive",postgres_value);				// assign the queried value
+              postgres_table = "alp_cold_sens"; postgres_value = "No Cold Sensitive assigned";
+              postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
+              c1.setValue("Cold Sensitive",postgres_value);				// assign the queried value
+              postgres_table = "alp_mat_effect"; postgres_value = "No Maternal Effect assigned";
+              postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
+              c1.setValue("Maternal Effect",postgres_value);				// assign the queried value
+              postgres_table = "alp_pat_effect"; postgres_value = "No Paternal Effect assigned";
+              postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
+              c1.setValue("Paternal Effect",postgres_value);				// assign the queried value
+              postgres_table = "alp_genotype"; postgres_value = "No Genotype assigned";
+              postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
+              c1.setValue("Genotype",postgres_value);				// assign the queried value
+              postgres_table = "alp_strain"; postgres_value = "No Strain assigned";
+              postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
+              c1.setValue("Strain",postgres_value);				// assign the queried value
+              postgres_table = "alp_delivered"; postgres_value = "No Delivered By assigned";
+              postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
+              c1.setValue("Delivered By",postgres_value);				// assign the queried value
               charList.add(c1);								// add the character to the character list
-              System.out.println("Added to charList term "+phenotype+" column "+colI+" box "+boxI+".");		// comment out later
+//  
+//               String phenotype = "No Phenotype assigned";
+//               rs = null;
+//                 // get the phenotype term in timestamp order where the allele and box and column number match
+//               try { rs = s.executeQuery("SELECT * FROM alp_term WHERE joinkey = '"+query+"' AND alp_box='"+boxI+"' AND alp_column='"+colI+"' ORDER BY alp_timestamp"); }
+//               catch (SQLException se) {
+//                 System.out.println("We got an exception while executing our query:" + "that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
+//               try { while (rs.next()) { phenotype = rs.getString(4); } }		// assign the phenotype term value
+//               catch (SQLException se) {
+//                 System.out.println("We got an exception while getting a result:this " + "shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
+//  
+//               String phen_remark = "No Phenotype Remark assigned";
+//               rs = null;
+//               try { rs = s.executeQuery("SELECT * FROM alp_phen_remark WHERE joinkey = '"+query+"' AND alp_box='"+boxI+"' AND alp_column='"+colI+"' ORDER BY alp_timestamp"); }
+//               catch (SQLException se) {
+//                 System.out.println("We got an exception while executing our query:" + "that probably means our phen_rem SQL is invalid"); se.printStackTrace(); System.exit(1); }
+//               try { while (rs.next()) { phen_remark = rs.getString(4); } } 
+//               catch (SQLException se) {
+//                 System.out.println("We got an exception while getting a result:this " + "shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
+//  
+//               String anatomy = "No anatomy assigned";
+//               rs = null;
+//               try { rs = s.executeQuery("SELECT * FROM alp_anat_term WHERE joinkey = '"+query+"' AND alp_box='"+boxI+"' AND alp_column='"+colI+"' ORDER BY alp_timestamp"); }
+//               catch (SQLException se) {
+//                 System.out.println("We got an exception while executing our query:" + "that probably means our anaterm SQL is invalid"); se.printStackTrace(); System.exit(1); }
+//               try { while (rs.next()) { anatomy = rs.getString(4); } } 
+//               catch (SQLException se) {
+//                 System.out.println("We got an exception while getting a result:this " + "shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
+//  
+//               String stage = "No Stage assigned";
+//               rs = null;
+//               try { rs = s.executeQuery("SELECT * FROM alp_lifestage WHERE joinkey = '"+query+"' AND alp_box='"+boxI+"' AND alp_column='"+colI+"' ORDER BY alp_timestamp"); }
+//               catch (SQLException se) {
+//                 System.out.println("We got an exception while executing our query:" + "that probably means our stage SQL is invalid"); se.printStackTrace(); System.exit(1); }
+//               try { while (rs.next()) { stage = rs.getString(4); } } 
+//               catch (SQLException se) {
+//                 System.out.println("We got an exception while getting a result:this " + "shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
+//  
+//               c1.setValue("Allele",query);						// assign the allele
+//               c1.setValue("Pub",paper);
+//               c1.setValue("Curator",curator);
+//               c1.setValue("Person",person);
+//               c1.setValue("Phenotype Text Remark",phen_text_remark);
+//               c1.setValue("Other Remark",remark);
+//               c1.setValue("Genetic Interaction",genetic_interaction);
+//               c1.setValue("Phenotype",phenotype);
+//               c1.setValue("Phenotype Remark",phen_remark);
+// //               c1.setValue("Anatomy",anatomy);
+//               c1.setValue("Stage",stage);
+//               charList.add(c1);								// add the character to the character list
+//               System.out.println("Added to charList term "+phenotype+" column "+colI+" box "+boxI+".");		// comment out later
             } // for (int colI=1; colI<columns; colI++)
           } // for (int boxI=1; boxI<boxes; boxI++)
         }
