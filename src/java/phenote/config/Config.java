@@ -47,6 +47,7 @@ public class Config {
   private String reposUrlDir;
   private String version;
   private boolean configInitialized = false;
+  private final static String myphenoteFile = "my-phenote";
 
   /** singleton */
   private Config() {}
@@ -187,7 +188,7 @@ public class Config {
   }
 
   private static File getMyPhenoteFile() {
-    return new File(getDotPhenoteConfDir(),"my-phenote.cfg");
+    return new File(getDotPhenoteConfDir(),myphenoteFile);
   }
 
   /** Write name of config file loaded out to .phenote/conf/my-phenote.cfg for use
