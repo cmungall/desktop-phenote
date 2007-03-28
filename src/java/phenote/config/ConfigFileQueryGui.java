@@ -15,8 +15,6 @@ import java.net.URL;
 import java.net.JarURLConnection;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.Dimension;
 import java.awt.Point;
 //import java.awt.BorderLayout;
@@ -24,6 +22,10 @@ import java.awt.Point;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.AbstractAction;
 import javax.swing.BoxLayout;
 import javax.swing.JDialog;
@@ -117,6 +119,7 @@ public class ConfigFileQueryGui {
     }
     dialog.pack();
     centerOnScreen(dialog);
+    dialog.addWindowListener(new WindowCancel());
     dialog.setVisible(true);
   }
 
@@ -132,6 +135,14 @@ public class ConfigFileQueryGui {
   private class CancelActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       isCancelled = true;
+      dialog.dispose();
+    }
+  }
+  private class WindowCancel extends WindowAdapter {
+    public void windowClosing(WindowEvent e) {
+      // should this do a System.exit if we are at startup?
+      if (hasCancelButton)
+        isCancelled = true;
       dialog.dispose();
     }
   }
