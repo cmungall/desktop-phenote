@@ -86,14 +86,19 @@ public class ConfigFileQueryGui {
     JPanel buttonPanel = new JPanel();
     buttonPanel.setLayout(new BoxLayout(buttonPanel,BoxLayout.Y_AXIS));
     buttonGroup = new ButtonGroup();
-    boolean first = true;
+    boolean doFirst = false;
+    String currentConfig = null;
+    try { currentConfig = Config.inst().getMyPhenoteConfigString(); }
+    catch (IOException e) { doFirst = true; }
     for (String cfg : getConfigNames()) {
       JRadioButton b = new JRadioButton(new BtnAction(cfg));
       buttonPanel.add(b);
-      if (first) {
+      // select current myphenote if exists, else select first
+      if ( (currentConfig != null && cfg.equals(currentConfig)) 
+          || (currentConfig == null && doFirst) ) {
         b.setSelected(true);
         selectedFile = cfg;
-        first = false;
+        doFirst = false;
       }
       buttonGroup.add(b);
     }

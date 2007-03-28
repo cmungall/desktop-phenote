@@ -49,6 +49,9 @@ public class Config {
   private boolean configInitialized = false;
   private final static String myphenoteFile = "my-phenote";
 
+  public static Config inst() {
+    return singleton;
+  }
   /** singleton */
   private Config() {}
 
@@ -97,14 +100,23 @@ public class Config {
   private String getDefaultFile() {
     String file=null;
     try {
-      LineNumberReader r = new LineNumberReader(new FileReader(getMyPhenoteFile()));
-      file = r.readLine();
+//      LineNumberReader r = new LineNumberReader(new FileReader(getMyPhenoteFile()));
+//      file = r.readLine();
+      file = getMyPhenoteConfigString();
     } catch (IOException e) {}
     if (file == null || file.equals("")) {
       //file = FLYBASE_DEFAULT_CONFIG_FILE;
       file = queryUserForConfigFile();
     }
     return file;
+  }
+
+  /** Get config file string that is in my-phenote file - throw io exception if file
+      doesnt exist. todo: should also throw ex if doesnt have a valid file in it? */
+  String getMyPhenoteConfigString() throws IOException {
+    LineNumberReader r = new LineNumberReader(new FileReader(getMyPhenoteFile()));
+    String configFile = r.readLine();
+    return configFile;
   }
   
   private String queryUserForConfigFile() {
@@ -267,9 +279,6 @@ public class Config {
 //   }
 
 
-  public static Config inst() {
-    return singleton;
-  }
 
   // --> hasFileDataAdapters
   public boolean hasDataAdapters() {
