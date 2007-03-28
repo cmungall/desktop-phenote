@@ -240,6 +240,9 @@ public class WormAdapter implements QueryableDataAdapterI {
               postgres_table = "alp_preparation"; postgres_value = "No Preparation assigned";
               postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
               c1.setValue("Preparation",postgres_value);				// assign the queried value
+              postgres_table = "alp_penetrance"; postgres_value = "No Penetrance assigned";
+              postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
+              c1.setValue("Penetrance",postgres_value);				// assign the queried value
               postgres_table = "alp_percent"; postgres_value = "No Penetrance Percent assigned";
               postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
               c1.setValue("Penetrance Remark",postgres_value);				// assign the queried value
