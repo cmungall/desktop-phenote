@@ -245,7 +245,7 @@ public class WormAdapter implements QueryableDataAdapterI {
               c1.setValue("Penetrance",postgres_value);				// assign the queried value
               postgres_table = "alp_percent"; postgres_value = "No Penetrance Percent assigned";
               postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
-              c1.setValue("Penetrance Remark",postgres_value);				// assign the queried value
+              c1.setValue("Penetrance Percent",postgres_value);				// assign the queried value
               postgres_table = "alp_range"; postgres_value = "No Penetrance Range assigned";
               postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
               c1.setValue("Penetrance Range",postgres_value);				// assign the queried value
@@ -255,9 +255,15 @@ public class WormAdapter implements QueryableDataAdapterI {
               postgres_table = "alp_heat_sens"; postgres_value = "No Heat Sensitive assigned";
               postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
               c1.setValue("Heat Sensitive",postgres_value);				// assign the queried value
+              postgres_table = "alp_heat_degree"; postgres_value = "No Heat Sensitive Degree assigned";
+              postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
+              c1.setValue("Heat Sensitive Degree",postgres_value);				// assign the queried value
               postgres_table = "alp_cold_sens"; postgres_value = "No Cold Sensitive assigned";
               postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
               c1.setValue("Cold Sensitive",postgres_value);				// assign the queried value
+              postgres_table = "alp_cold_degree"; postgres_value = "No Cold Sensitive Degree assigned";
+              postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
+              c1.setValue("Cold Sensitive Degree",postgres_value);			// assign the queried value
               postgres_table = "alp_mat_effect"; postgres_value = "No Maternal Effect assigned";
               postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, query, boxI, colI);
               c1.setValue("Maternal Effect",postgres_value);				// assign the queried value
