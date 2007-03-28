@@ -103,7 +103,7 @@ public class Phenote {
   }
 
   private void doCommandLine(String[] args) {
-    //doCommandLineOld(args); // -c -i  --> move to CommandLine!
+    //doCommandLineOld(args); // -c -u  --> move to CommandLine!
     try { commandLine.setArgs(args); } // no log yet - sys.out
     catch (Exception e) { System.out.println("Command line read failed"+e); }
     // no config set from command line use default

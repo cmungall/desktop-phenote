@@ -86,8 +86,13 @@ public class Config {
     setConfigFile(configFile,true,true,false);
   }
 
+  /** Changed this to actually do updating of config file by default given that this
+      is now the route in from webstart, without this users will never get config
+      updates - eventually get more sophisticated - give user options of
+      updateFromDefault, revertToMain/Default or personal/ignoreMain/dontupdate */
   public void loadDefaultConfigFile() throws ConfigException {
-    setConfigFile(getDefaultFile(),true,false,false);
+    boolean updatePersonalFromMainCfg = true; //false;
+    setConfigFile(getDefaultFile(),true,false,updatePersonalFromMainCfg);
   }
 
   /** if all else fails revert to flybase which should be there */
