@@ -2,9 +2,13 @@
 <html>
 <head>
 
+
+  
   
   <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
 
+
+  
   
   <title>Phenote Release Notes</title>
 </head>
@@ -12,148 +16,232 @@
 
 <body>
 
+
 <h1>Phenote Release Notes</h1>
 
-1.1
-will probably come out in February<br>
+
+1.2
+will probably come out in May<br>
+
+<h2><span style="text-decoration: underline;">1.1</span></h2>
+<a href="1.1/phenote.jnlp">Phenote 1.1</a><br>
 <br>
+March 28, 2007<br>
+<br>
+Phenote will merge its default configuration with users configuration,
+preserving users changes as well as adding anything new from phenote
+upgrade.<br>
+User can select configuration they want to use at initialization or
+subsequently from file menu &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; (currently requires phenote restart).<br>
+Tab delimited data adapter - thank you nicole!<br>
+Beginnings of term history - thank you nicole!<br>
+Tabbed main panel if more than 12 fields.<br>
+QueryableDataAdapter interface for adding a database data adapter that
+can be queried. The data adapter specifies queryable fields, which get
+a retrieve button.<br>
+Improvements to uvic graphics (still not ready for prime time)<br>
+Layout improved<br>
+Can now search ALL ontologies of a field<br>
+Retrieve obo from web if more up to date or no local found<br>
+Refactored code for field guis<br>
+Ontology chooser reflects current term (bug fix)
 <h2><span style="text-decoration: underline;">1.0</span></h2>
+
 <a href="1.0/phenote-flybase.jnlp">Phenote 1.0 for fly</a><br>
 
+
 <a href="1.0/phenote-zfin.jnlp">Phenote 1.0 for zfin</a><br>
+
 <a href="http://165.124.152.194/db/cgi-bin/dictyBase/curation/phenotypeCuration.pl">DichtyBase
 webby phenote</a><br>
+
 <a href="http://reaper.lbl.gov/phenote/html/ncbo.html">Webby
 Phenote(components used by Zfin)</a><br>
+
 <br>
+
 January 12, 2007<br>
+
 <br>
+
 The main improvement here is the ability to add any field you like, not
 just E,Q,GC,GT,Pub. In the configured webstarts Stage, Evidence,
 Description, Abnormal, and Absent have been added through this new
 mechanism. This entailed a refactoring of the datamodel.<br>
+
 <br>
+
 Webby phenote is now using JSP and Spring.<br>
+
 <br>
+
 There has been some recent work with UVictoria for ontology graph
 visualization. This is coming along well and hopefully will be seen in
 the next release.
 <h2><span style="text-decoration: underline;">0.9</span></h2>
 
+
 <a href="0.9/phenote-flybase.jnlp">Phenote 0.9 for fly</a><br>
 
+
 <a href="0.9/phenote-zfin.jnlp">Phenote (standalone) 0.9 for zfin</a><br>
+
 
 <a href="http://165.124.152.194/web/html/interface.html">DichtyBase
 webby phenote</a><br>
 
+
 <br>
+
 
 mid November 2006<br>
 
+
 <br>
 
+
 Undo<br>
+
 
 Christian Pich(Zfin) has added a Quartz scheduler to phenote, which
 zfin takes advantage of, to schedule when to check for new obo files.<br>
 
+
 Also Christian Pich upgraded the PhenoteServlet to the Spring framework
 - much nicer!<br>
+
 
 Synonyms are now returned from auto complete with [syn] and when
 selected the term goes in the field (webby &amp; standalone), obsoletes
 hits with [obs]<br>
 
+
 Bulk update &amp; copy in standalone.<br>
+
 
 Jim Balhoff(Nescent) changed radio buttons to checkboxes, and file
 saver says save not load and recognizes adapter by file extensions,
 psx-&gt;phenosyntax, .xml -&gt; phenoxml <br>
 
+
 Single quotes escaped for javascript fns.<br>
+
 
 <h2><span style="text-decoration: underline;">0.8</span></h2>
 
+
 <a href="0.8/phenote-flybase.jnlp">Phenote 0.8 for fly.</a><br>
 
+
 <a href="0.8/phenote-zfin.jnlp">Phenote (standalone) 0.8 for zfin</a><br>
+
 
 <a href="http://165.124.152.194/web/html/interface.html">DichtyBase
 webby phenote</a><br>
 
+
 <br>
 
+
 10/2/06<br>
+
 
 Added post composition to standalone phenote. Logging for both
 webby/servlet &amp; standalone.<br>
 
+
 Pheno-xml reader (thanks to Jim Balhoff) and improvements to pheno-xml
 writer (does pub &amp; genetic context)<br>
 
+
 Command line reading &amp; writing of phenoxml &amp; phenosyntax.<br>
+
 
 Application exits on window exit (unless servlet)<br>
 
+
 Can filter out stage terms from zfin anatomy<br>
+
 
 <h2><span style="text-decoration: underline;">0.7</span></h2>
 
+
 <a href="0.7/phenote-flybase.jnlp">Phenote 0.7 for fly.</a><br>
 
+
 <a href="0.7/phenote-zfin.jnlp">Phenote (standalone) 0.7 for zfin</a><br>
+
 
 <a href="http://165.124.152.194/web/html/interface.html">DichtyBase
 webby phenote</a><br>
 
+
 <br>
+
 
 Web: entity chooser, can configure to check for new obo files and load
 them. (These are installed at zfin, if anyone would like to see them
 publicly let me know). Entity field and term info installed into zfin
 phenotype site. term info &amp; completion are scrollable.<br>
 
+
 Standalone: can read &amp; write pheno-syntax with ids &amp; term names
 in comments, entity chooser, pub field, use button in term info, sort
 table by clicking on headers, personal config file gets copied out of
 jar, paste mac bug fixed, file load/save remembered,layout fixed<br>
 
+
 <br>
 
+
 <h2><span style="font-weight: bold;"><span style="text-decoration: underline;">0.6</span></span></h2>
+
 
 <a href="http://reaper.lbl.gov/phenote/html/ncbo.html">Webby Phenote
 (0.6)</a><br>
 
+
 <a href="0.6/phenote-flybase.jnlp">Phenote 0.6 with fly anatomy</a><br>
+
 
 <a href="0.6/phenote-zfin.jnlp">Phenote 0.6 with zebrafish anatomy</a><br>
 
+
 <br>
+
 
 The main feature of release 0.6 is a webby phenote. This is in its
 extremely early stages (very little functionality and buggy). At this
 point it only does Entity and Quality fields and term info and thats
 it, and even thats buggy, but more coming soon! <br>
 
+
 <br>
+
 
 Not much new in the stand alone phenote (as Ive been working on the
 webby phenote). Mainly it can write pheno-xml, and it uses the latest
 pato (as of July 28, 2006).<br>
 
+
 <h2><span style="font-weight: bold;"><span style="text-decoration: underline;">0.5</span></span></h2>
 
+
 <br>
+
 
 <a href="0.5/phenote-flybase.jnlp">Phenote 0.5 webstart for FlyBase</a><br>
 
+
 <a href="0.5/phenote-zfin.jnlp">Phenote 0.5 webstart for ZFIN</a><br>
+
 
 <br>
 
+
 5/12/06<br>
+
 
 No&nbsp; new additions to the gui here. In preparation for my visit to
 Cambridge/FlyBase, I worked on a FlyBase dataadapter. This is phenote
@@ -167,21 +255,30 @@ tested yet with Proforma, but it works in the test suite. Added special
 FlyBase character wrappers that do the parsing and creating of Proforma
 character strings.<br>
 
+
 <h2><span style="text-decoration: underline;">0.4</span></h2>
+
 
 <a href="0.4/phenote-flybase.jnlp">0.4 flybase webstart</a><br>
 
+
 <a href="0.4/phenote-zfin.jnlp">0.4 zfin webstart</a><br>
+
 
 <br>
 
+
 4/26/06<br>
+
 
 Added Genetic Context field.<br>
 
+
 Parent &amp; child terms in term info are now clickable/navigable.<br>
 
+
 Links in descriptions are clickable (should bring up default browser)<br>
+
 
 Added configuration to configure ontologies &amp; fields. This is
 currently at a devloper level (xml file) not a user level(gui - todo).
@@ -191,12 +288,16 @@ change the code to do it (like was done for the ctol release). The
 configuration for now is for developers (internal xml file), on the
 todo is to have a gui configuration for users.<br>
 
+
 Minor bugs:&nbsp; cant delete to 0 rows anymore, synonym search
 duplicates taken out<br>
 
+
 <br>
 
+
 Dev stuff:<br>
+
 
 Refactored for configuration &amp; adding field. Made the internal code
 much more generic for adding new fields from configuration, got rid of
@@ -205,130 +306,187 @@ model-view-controller in some places where views were improperly
 talking to other views. In theory this should also make it easier to
 plop a web gui on top of the current phenote model &amp; controller.<br>
 
+
 Renamed Phenotype to Character. Added Character interface CharacterI.<br>
+
 
 Added tests to test suite.<br>
 
+
 <br>
+
 
 <h2><span style="text-decoration: underline;">0.3.1 (CToL)<br>
 
+
 </span></h2>
+
 
 <a href="0.3.1/phenote-webstart.jnlp">0.3.1 phenote webstart (for CToL)</a><br>
 
+
 <br>
+
 
 4/7/06<br>
 
+
 0.3.1 is identical to 0.3 except that it has ontologies for CToL
 (fish evolution group). In particular it uses a fish taxonomy<br>
+
 
 ontology for the id (in this taxonomy) choosing. On the todo is the
 ability to configure ontologies, but not there yet, so for now need to
 hardwire with seaparate jar file. This clearly makes the todo item a
 bit more pressing.<br>
 
+
 <h2><span style="text-decoration: underline;">0.3</span></h2>
+
 
 <a href="0.3/phenote-webstart.jnlp">0.3 phenote webstart</a><br>
 
+
 <br>
 
+
 4/7/06<br>
+
 
 Release for NESCent fish eveolution meeting. No major new functionality
 here. Cleaned up and fixed a lot of the bugs in 0.2, which was rather
 buggy.<br>
 
+
 <br>
+
 
 Completion terms now sorted alphabeitcally.<br>
 
+
 Obsolete is now in addition to regular terms, not in lieu of.<br>
+
 
 Filtering out attribute values (todo: change to actually filter in
 values)<br>
 
+
 Html formatting of term info (todo: make terms selectable)<br>
+
 
 Children relations are in term info<br>
 
+
 Term info layout greatly improved<br>
+
 
 Term info in scroller<br>
 
+
 Border with label around term info<br>
+
 
 Put definition at end of term info<br>
 
+
 <br>
+
 
 Fixed bugs:<br>
 
+
 Backspace in ontology combo box<br>
+
 
 Selection of item in comp list causing exception, not going in term box<br>
 
+
 No terms with just 1 char<br>
+
 
 Popup was staying up after selection<br>
 
+
 <br>
+
 
 Dev stuff:<br>
 
+
 Test suite added! (todo: add more tests)<br>
+
 
 Migrated to jdk 1.5 (which caused some of the bugs above)<br>
 
+
 Ant file made build.xml.<br>
+
 
 CompletionList refactored into Ontology (prompted by sorting)<br>
 
-<br>
 
 <br>
+
+
+<br>
+
 
 <h2><span style="text-decoration: underline;">0.2</span></h2>
 
+
 <a href="0.2/phenote-webstart.jnlp">0.2 phenote webstart</a><br>
+
 
 <br>
 
+
 3/27/06<br>
+
 
 Added the ability to do term completion on Synonyms, Definitions, and
 Obsoletes. Also can mouse over a term in a completion list and get
 information about it in the term info text area. <br>
 
+
 <br>
+
 
 The term info area needs a lot of work.<br>
 
+
 TODO:<br>
+
 
 &nbsp;layout, scrollbar, border w title, ordering &amp; lumping parents
 &amp; children, formatting. <br>
 
+
 Also perhaps have children &amp; parents be clickable in some fashion
 either html-like clickable text or as buttons.<br>
+
 
 Theres also bugs in term completion boxes. If you start backspacing it
 gets wacky for instance.<br>
 
+
 <br>
 
+
 <a href="0.2/phenote-webstart.jnlp"><br>
+
 
 </a>
 <h2><span style="text-decoration: underline;">0.1</span></h2>
 
+
 <a href="0.1/phenote-webstart.jnlp">0.1 phenote webstart</a><br>
+
 
 <br>
 
+
 &nbsp;3/1/06<br>
+
 
 0.1 was the initial phenote release (known briefly as the plumper at
 the time).&nbsp; It just had a genotype, anatomy and pato fields, where
@@ -337,15 +495,21 @@ ontologies in a drop down list. There was also the phenotype table that
 tracked phenotype instances being edited in the above fields. This very
 limited functionality was demo'd at the cbio meeting 3/3/06 at Stanford.<br>
 
+
 <br>
+
 
 <a href="0.2/phenote-webstart.jnlp"></a><br>
 
-<br>
 
 <br>
+
+
+<br>
+
 
 <a href="phenote.html">Phenote main page</a><br>
+
 
 </body>
 </html>
