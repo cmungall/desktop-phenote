@@ -16,6 +16,9 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import java.io.FileNotFoundException;
 
+// import javax.swing.JTextField;
+// import javax.swing.text.Keymap;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
@@ -43,6 +46,8 @@ public class Phenote {
   private SelectionHistory selectionHistory;
   private CommandLine commandLine = CommandLine.inst();
   private JFrame frame;
+
+  //  public static Keymap defaultKeymap;
   
 
   public static void main(String[] args) {
@@ -50,7 +55,15 @@ public class Phenote {
     System.out.println("This is Phenote version "+PhenoteVersion.versionString());
     // default mac look & feel is "Mac OS X", but the JComboBox is buggy
     try {
+//       JTextField t = new JTextField();
+//       defaultKeymap = t.getKeymap();
+//       System.out.println("default keymap "+defaultKeymap);
+      //System.out.println("default shortcut "+java.awt.Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
       UIManager.setLookAndFeel(new MetalLookAndFeel());
+      //System.out.println("metal shortcut "+java.awt.Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+//       t = new JTextField();
+//       Keymap k = t.getKeymap();
+//       System.out.println("metal keymap "+k);
     }
     catch (UnsupportedLookAndFeelException e) {
       System.out.println("Failed to set to Java/Metal look & feel");

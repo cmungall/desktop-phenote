@@ -10,7 +10,14 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
+import java.awt.event.InputEvent;
+import javax.swing.KeyStroke;
+import javax.swing.text.DefaultEditorKit;
+
+import javax.swing.text.JTextComponent;
 import javax.swing.JTextField;
+import javax.swing.text.Keymap;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.DocumentEvent;
 
@@ -36,15 +43,39 @@ class FreeTextField extends CharFieldGui {
     super(charField);
     //charFieldGui = cfg;
     textField = new JTextField(35);
+    //textField.setKeymap(phenote.main.Phenote.defaultKeymap); didnt work
     textField.setMinimumSize(CharFieldGui.inputSize);
     //textField.setPreferredSize(CharFieldGui.inputSize);
     textField.setEditable(true);
     textField.getDocument().addDocumentListener(new TextFieldDocumentListener());
     textField.addFocusListener(new FreeFocusListener());
-    textField.addKeyListener(new TextKeyListener());
+    //textField.addKeyListener(new TextKeyListener());
+    loadKeyMap(); // mac cut copy paste
   }
-  
-  
+
+  private static final int shortcut = 
+    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+
+  JTextComponent.KeyBinding[] defaultBindings = {
+     new JTextComponent.KeyBinding(
+       KeyStroke.getKeyStroke(KeyEvent.VK_C, shortcut),
+       DefaultEditorKit.copyAction),
+     new JTextComponent.KeyBinding(
+       KeyStroke.getKeyStroke(KeyEvent.VK_V, shortcut),
+       DefaultEditorKit.pasteAction),
+     new JTextComponent.KeyBinding(
+       KeyStroke.getKeyStroke(KeyEvent.VK_X, shortcut),
+       DefaultEditorKit.cutAction),
+   };
+
+ 
+  /** actually i think this only needs to happen once per session - this reinstates
+      apples apple c,v,x that gets lost in setting look & feel to metal to 
+      alleviate jcombo apple bug */
+  private void loadKeyMap() {
+    Keymap k = textField.getKeymap();
+    JTextComponent.loadKeymap(k, defaultBindings, textField.getActions());
+  }
 
   //JTextField getComponent() { return textField; }
   protected Component getUserInputGui() { return textField; }
