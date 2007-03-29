@@ -1,5 +1,7 @@
 package phenote.dataadapter.worm;
 
+import java.util.regex.*;
+
 // add http://jdbc.postgresql.org/download/postgresql-8.2-504.jdbc4.jar to trunk/jars/ directory
 
 import java.util.ArrayList;
@@ -34,6 +36,15 @@ public class WormAdapter implements QueryableDataAdapterI {
   private List<String> queryableFields = new ArrayList<String>(2);
 
   public WormAdapter() { init(); }
+
+  // Returns the first substring in input that matches the pattern.  Returns null if no match found.
+  // lifted from  http://www.exampledepot.com/egs/java.util.regex/Greedy.html?l=rel
+  public static String find(String patternStr, CharSequence input) {
+      Pattern pattern = Pattern.compile(patternStr);
+      Matcher matcher = pattern.matcher(input);
+      if (matcher.find()) { return matcher.group(); }
+      return null;
+  }
 
   private void init() {
     // dont HAVE to use CharFieldEnum but it does enforce using same strings
@@ -87,10 +98,10 @@ public class WormAdapter implements QueryableDataAdapterI {
       // get the phenotype term in timestamp order where the allele and box and column number match
     try { rs = s.executeQuery("SELECT * FROM "+postgres_table+" WHERE joinkey = '"+query+"' AND alp_box='"+boxI+"' AND alp_column='"+colI+"' ORDER BY alp_timestamp"); }
     catch (SQLException se) {
-      System.out.println("We got an exception while executing our query:" + "that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while executing our query: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
     try { while (rs.next()) { default_value = rs.getString(4); } }		// assign the new term value
     catch (SQLException se) {
-      System.out.println("We got an exception while getting a result:this " + "shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while getting a "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
 //    System.out.println("Added in function charList term "+query+" column "+colI+" box "+boxI+".");		// comment out later
     return default_value; 
   }
@@ -102,65 +113,72 @@ public class WormAdapter implements QueryableDataAdapterI {
       // get the papers in timestamp order where the allele and box number match
     try { rs = s.executeQuery("SELECT * FROM alp_paper WHERE joinkey = '"+joinkey+"' AND alp_box='"+boxI+"' ORDER BY alp_timestamp"); }
     catch (SQLException se) {
-      System.out.println("We got an exception while executing our joinkey:" + "that probably means our pap SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while executing our joinkey: that probably means our pap SQL is invalid"); se.printStackTrace(); System.exit(1); }
     try { while (rs.next()) { paper = rs.getString(3); } } 	// assign the paper
     catch (SQLException se) {
-      System.out.println("We got an exception while getting a result:this " + "shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while getting a paper joinkey "+joinkey+" box "+boxI+" result:this shouldn't happen: we've done something really bad."); 
+      se.printStackTrace(); System.exit(1); }
 
     String curator = "No Curator assigned";
     rs = null;
     try { rs = s.executeQuery("SELECT * FROM alp_curator WHERE joinkey = '"+joinkey+"' AND alp_box='"+boxI+"' ORDER BY alp_timestamp"); }
     catch (SQLException se) {
-      System.out.println("We got an exception while executing our query:" + "that probably means our cur SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while executing our query: that probably means our cur SQL is invalid"); se.printStackTrace(); System.exit(1); }
     try { while (rs.next()) { curator = rs.getString(3); } } 
     catch (SQLException se) {
-      System.out.println("We got an exception while getting a result:this " + "shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while getting a curator joinkey "+joinkey+" box "+boxI+" result:this shouldn't happen: we've done something really bad."); 
+      se.printStackTrace(); System.exit(1); }
 
     String person = "No Person assigned";
     rs = null;
     try { rs = s.executeQuery("SELECT * FROM alp_person WHERE joinkey = '"+joinkey+"' AND alp_box='"+boxI+"' ORDER BY alp_timestamp"); }
     catch (SQLException se) {
-      System.out.println("We got an exception while executing our query:" + "that probably means our per SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while executing our query: that probably means our per SQL is invalid"); se.printStackTrace(); System.exit(1); }
     try { while (rs.next()) { person = rs.getString(3); } } 
     catch (SQLException se) {
-      System.out.println("We got an exception while getting a result:this " + "shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while getting a person joinkey "+joinkey+" box "+boxI+" result:this shouldn't happen: we've done something really bad."); 
+      se.printStackTrace(); System.exit(1); }
 
     String phen_text_remark = "No Phenotype Text Remark assigned";
     rs = null;
     try { rs = s.executeQuery("SELECT * FROM alp_phenotype WHERE joinkey = '"+joinkey+"' AND alp_box='"+boxI+"' ORDER BY alp_timestamp"); }
     catch (SQLException se) {
-      System.out.println("We got an exception while executing our query:" + "that probably means our ptr SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while executing our query: that probably means our ptr SQL is invalid"); se.printStackTrace(); System.exit(1); }
     try { while (rs.next()) { phen_text_remark = rs.getString(3); } } 
     catch (SQLException se) {
-      System.out.println("We got an exception while getting a result:this " + "shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while getting a phenotype joinkey "+joinkey+" box "+boxI+" result:this shouldn't happen: we've done something really bad."); 
+      se.printStackTrace(); System.exit(1); }
 
     String remark = "No Other Remark assigned";
     rs = null;
     try { rs = s.executeQuery("SELECT * FROM alp_remark WHERE joinkey = '"+joinkey+"' AND alp_box='"+boxI+"' ORDER BY alp_timestamp"); }
     catch (SQLException se) {
-      System.out.println("We got an exception while executing our query:" + "that probably means our orem SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while executing our query: that probably means our orem SQL is invalid"); se.printStackTrace(); System.exit(1); }
     try { while (rs.next()) { remark = rs.getString(3); } } 
     catch (SQLException se) {
-      System.out.println("We got an exception while getting a result:this " + "shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while getting a remark joinkey "+joinkey+" box "+boxI+" result:this shouldn't happen: we've done something really bad."); 
+      se.printStackTrace(); System.exit(1); }
 
     String genetic_interaction = "No Genetic Interaction assigned";
     rs = null;
     try { rs = s.executeQuery("SELECT * FROM alp_intx_desc WHERE joinkey = '"+joinkey+"' AND alp_box='"+boxI+"' ORDER BY alp_timestamp"); }
     catch (SQLException se) {
-      System.out.println("We got an exception while executing our query:" + "that probably means our gint SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while executing our query: that probably means our gint SQL is invalid"); se.printStackTrace(); System.exit(1); }
     try { while (rs.next()) { genetic_interaction = rs.getString(3); } } 
     catch (SQLException se) {
-      System.out.println("We got an exception while getting a result:this " + "shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while getting a intx_desc joinkey "+joinkey+" box "+boxI+" result:this shouldn't happen: we've done something really bad."); 
+      se.printStackTrace(); System.exit(1); }
 
     int columns = 0;		// the number of columns in that box
     rs = null;
       // grab the highest number column for that box and that allele
     try { rs = s.executeQuery("SELECT alp_column FROM alp_term WHERE joinkey = '"+joinkey+"' AND alp_box = '"+boxI+"' ORDER BY alp_column DESC"); }
     catch (SQLException se) {
-      System.out.println("We got an exception while executing our query:" + "that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
-    try { rs.next(); { columns = rs.getInt(1); } }		// assign the highest number column for that box and that allele to the number of columns
+      System.out.println("We got an exception while executing our query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
+    try { if (rs.next()) { { columns = rs.getInt(1); } } }		// assign the highest number column for that box and that allele to the number of columns
     catch (SQLException se) {
-      System.out.println("We got an exception while getting a result:this " + "shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while getting a column/term joinkey "+joinkey+" box "+boxI+" result:this shouldn't happen: we've done something really bad."); 
+      se.printStackTrace(); System.exit(1); }
 
 //    System.out.println("We have "+columns+" columns in box "+boxI+".");		// comment out later
 
@@ -278,7 +296,8 @@ public class WormAdapter implements QueryableDataAdapterI {
 //            System.out.println(rs.getString(1) + "\t" + rs.getString(2) + "\t" + rs.getString(3));	// comment out later
             foundAllele++; } }		// if there's a result in postgres we have found an allele
       catch (SQLException se) {
-        System.out.println("We got an exception while getting a result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
+        System.out.println("We got an exception while getting a tempname joinkey "+joinkey+" result:this shouldn't happen: we've done something really bad."); 
+        se.printStackTrace(); System.exit(1); }
 
       if (foundAllele <= 0) { throw new DataAdapterEx("Worm query of "+joinkey+" of field "+field+" has no match in postgres"); }	// if there is no match for the allele in postgres
         else {		// if there is a match
@@ -286,10 +305,11 @@ public class WormAdapter implements QueryableDataAdapterI {
           rs = null;		// init result from postgres query
           try { rs = s.executeQuery("SELECT alp_box FROM alp_curator WHERE joinkey = '"+joinkey+"' ORDER BY alp_box DESC"); }	// grab the highest number box for that allele
           catch (SQLException se) {
-            System.out.println("We got an exception while executing our query:" + "that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+            System.out.println("We got an exception while executing our query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
           try { rs.next(); { boxes = rs.getInt(1); } }		// assign the highest number box for that joinkey to the number of boxes
           catch (SQLException se) {
-            System.out.println("We got an exception while getting a result:this " + "shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
+            System.out.println("We got an exception while getting a curator joinkey "+joinkey+" result:this shouldn't happen: we've done something really bad."); 
+            se.printStackTrace(); System.exit(1); }
 //          System.out.println("We have "+boxes+" boxes");	// comment out later
           for (int boxI=1; boxI<boxes+1; boxI++) {		// for each of those boxes
             charList = queryPostgresCharacterList(charList, s, joinkey, boxI);
@@ -302,17 +322,20 @@ public class WormAdapter implements QueryableDataAdapterI {
       Statement s = null;
       try { s = c.createStatement(); }
        catch (SQLException se) {
-        System.out.println("We got an exception while creating a statement:" + "that probably means we're no longer connected."); se.printStackTrace(); System.exit(1); }
+        System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); System.exit(1); }
       Statement s2 = null;
       try { s2 = c.createStatement(); }
        catch (SQLException se) {
-        System.out.println("We got an exception while creating a statement:" + "that probably means we're no longer connected."); se.printStackTrace(); System.exit(1); }
+        System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); System.exit(1); }
 
+      String match = find("WBPaper[0-9]*", query);  	// Find a WBPaper followed by any amount of digits
+      if (match != null) { query = match; }		// query for this, otherwise keep the default value
+System.out.println("Going to query for "+query+".");
       int foundPaper = 0;				// flag if there are any papers in postgres that match, otherwise give an error warning
       ResultSet rs = null;				// initialize result of query
       try { rs = s2.executeQuery("SELECT DISTINCT(joinkey), alp_box FROM alp_paper WHERE alp_paper ~ '"+query+"' ORDER BY joinkey;"); }	// get the alleles from a paper
       catch (SQLException se) {
-        System.out.println("We got an exception while executing our query:" + "that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+        System.out.println("We got an exception while executing our query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
       try { if (rs.next()) { foundPaper++; } }
       catch (SQLException se) {
         System.out.println("We got an exception while getting a publication query result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
@@ -321,13 +344,13 @@ public class WormAdapter implements QueryableDataAdapterI {
           ResultSet rs2 = null;				// initialize result of query
           try { rs2 = s2.executeQuery("SELECT DISTINCT(joinkey), alp_box FROM alp_paper WHERE alp_paper ~ '"+query+"' ORDER BY joinkey;"); }	// get the alleles from a paper
           catch (SQLException se) {
-            System.out.println("We got an exception while executing our query:" + "that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+            System.out.println("We got an exception while executing our query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
           try { while (rs2.next()) {								// while there's data in postgres
             String joinkey = "No Allele assigned for Publication "+query+".";			// initialize allele in each phenote character Row
             int boxI = 0;
             joinkey = rs2.getString(1); 							// get the allele from postgres
             boxI = rs2.getInt(2);								// get the big box from postgres
-                charList = queryPostgresCharacterList(charList, s, joinkey, boxI);
+            charList = queryPostgresCharacterList(charList, s, joinkey, boxI);
           } }
           catch (SQLException se) {
             System.out.println("We got an exception while getting a publication query result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
