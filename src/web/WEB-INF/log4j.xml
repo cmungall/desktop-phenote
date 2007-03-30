@@ -4,7 +4,7 @@
 <log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
 
     <appender name="MAIN" class="org.apache.log4j.RollingFileAppender">
-        <param name="File" value="phenote_log4j.log" />
+        <param name="File" value="${catalina.base}/logs/phenote.log" />
         <param name="Append" value="true" />
         <param name="MaxFileSize" value="1MB" />
         <param name="MaxBackupIndex" value="10" />
@@ -20,12 +20,12 @@
     </appender>
 
     <category name="phenote" additivity="true">
-        <priority value="info"/>
+        <priority value="warn"/>
         <appender-ref ref="MAIN" />
     </category>
 
     <root>
-        <priority value="info" />
+        <priority value="warn" />
         <appender-ref ref="MAIN" />
     </root>
 </log4j:configuration>
