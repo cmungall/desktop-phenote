@@ -8,5 +8,7 @@ public interface QueryableDataAdapterI {
   public boolean isFieldQueryable(String field);
   /** Throws exception if query fails, and no data to return */
   public CharacterListI query(String field, String query) throws DataAdapterEx;
+
+  public void commit(CharacterListI charList);
 }
 

@@ -37,6 +37,13 @@ public class WormAdapter implements QueryableDataAdapterI {
 
   public WormAdapter() { init(); }
 
+
+  public void commit(CharacterListI charList) {
+    // if alleleQueried... wipe out allele and insert
+    // else if Pub queried... wipe out pub and insert
+    // else  - new insert & deletes(from transactions)
+  }
+
   // Returns the first substring in input that matches the pattern.  Returns null if no match found.
   // lifted from  http://www.exampledepot.com/egs/java.util.regex/Greedy.html?l=rel
   public static String find(String patternStr, CharSequence input) {
