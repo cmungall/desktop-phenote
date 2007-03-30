@@ -5,11 +5,8 @@ import phenote.datamodel.Ontology;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Christian Pich
- * Date: Nov 3, 2006
- * Time: 10:57:20 AM
- * To change this template use File | Settings | File Templates.
+ * Bean used on the admin page that shows information about the ontologies
+ * loaded into Phenote. 
  */
 public class AdminBean {
 
