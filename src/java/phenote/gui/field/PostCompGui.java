@@ -109,6 +109,9 @@ class PostCompGui {
     // HARDWIRE 2ND REL&DIFF FOR NOW eventually put in refine button to add more diffs
     addRelDiffGui();
 
+    // WHAT THE HELL HARDWIRE A 3RD
+    addRelDiffGui();
+
 //     // Relationship?? stripped down ontology? hmmmmmm...
 //     CharField relChar = new CharField(CharFieldEnum.RELATIONSHIP);
 //     // Ontology o = OntologyManager.getRelationshipOntology() ?? getRelCharField?
