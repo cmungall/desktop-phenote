@@ -205,7 +205,7 @@ public class OntologyDataAdapter {
     stopTimer(url+" checked against repos... obo session loaded");
     mem = Runtime.getRuntime().totalMemory()/1000000;
     long max = Runtime.getRuntime().maxMemory()/1000000;
-    System.out.println("mem after load "+mem+" max "+max);
+    LOG.debug("mem after load "+mem+" max "+max);
   }
 
   /** url is either local file or repos url */
