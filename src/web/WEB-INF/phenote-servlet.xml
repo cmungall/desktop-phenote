@@ -95,7 +95,7 @@
       <ref bean="anatomyOntologyReloadJob"/>
     </property>
     <property name="cronExpression">
-      <value>20 * * * * ?</value>
+      <value>20 0 23 * * ?</value>
     </property>
   </bean>
 
@@ -104,7 +104,7 @@
       <ref bean="geneOntologyReloadJob"/>
     </property>
     <property name="cronExpression">
-      <value>40 * * * * ?</value>
+      <value>40 0 22 * * ?</value>
     </property>
   </bean>
 
@@ -113,7 +113,7 @@
       <ref bean="qualityOntologyReloadJob"/>
     </property>
     <property name="cronExpression">
-      <value>0 * * * * ?</value>
+      <value>0 30 23 * * ?</value>
     </property>
   </bean>
 
