@@ -1,5 +1,8 @@
 <%@ page import="phenote.main.PhenoteVersion"%>
+<%@ page import="java.util.Date"%>
+<%@ page import="java.text.DateFormat"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ taglib prefix="phenote" uri="/WEB-INF/tld/phenote-tags.tld" %>
 
 <html>
@@ -27,7 +30,12 @@
       Date
     </td>
     <td colspan="3" class="listContent">
-      2006
+      <%
+        Date date = PhenoteVersion.getDateOfVersion();
+        DateFormat format = DateFormat.getDateInstance(DateFormat.LONG);
+      %>
+      <%= format.format(date)%>
+      <fmt:formatDate value="${versionDate}" />
     </td>
   </tr>
   <tr><td colspan="4" class="sectionTitle"> List of Ontologies</td></tr>
