@@ -1,7 +1,8 @@
 package phenote.gui.field;
 
-import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.List;
+import java.awt.Dimension;
 import java.awt.BorderLayout;
 import java.awt.Frame;
 import java.awt.GridBagLayout;
@@ -45,44 +46,88 @@ class PostCompGui {
 
   private CharField charField;
   private JDialog dialog;
+  // eventually with embedding this will be a TermGui
   private CharFieldGui genusField;
   //private RelationshipFieldGui relField; ??
-  private CharFieldGui relField;
-  private CharFieldGui diffField;
+  //private CharFieldGui relField;
+  //private CharFieldGui diffField;
+  private List<RelDiffGui> relDiffGuis = new ArrayList<RelDiffGui>(3);
+  private SearchParamsI searchParams;
+  private FieldPanel compFieldPanel;
 
   PostCompGui(CharField charField,SearchParamsI searchParams) {
     this.charField = charField;
-    init(searchParams);
+    this.searchParams = searchParams;
+    init();
   }
 
-  private void init(SearchParamsI searchParams) {
+  private class RelDiffGui {
+    private CharFieldGui relField;
+    // with embedded/recurse this will be a TermGui...
+    private CharFieldGui diffField;
+    private RelDiffGui() {
+      CharField relChar = new CharField(CharFieldEnum.RELATIONSHIP);
+      Ontology o = charField.getPostCompRelOntol();
+      relChar.addOntology(o);
+      relField = CharFieldGui.makeRelationList(relChar,searchParams);//"Relationship"?
+      compFieldPanel.addCharFieldGuiToPanel(relField);
+      diffField = CharFieldGui.makePostCompTermList(charField,searchParams,"Differentia");
+      compFieldPanel.addCharFieldGuiToPanel(diffField);
+    }
+    private void setRelDiffModel(RelDiffModel rd) {
+//       try { rd.relField.setRel(getRel(currentTerm)); } catch (Exception e){}
+      relField.setRel(rd.rel);
+      diffField.setOboClass(rd.diff);
+      diffField.setOntologyChooserFromTerm(rd.diff);
+    }
+  }
+
+  private class RelDiffModel {
+    private OBOProperty rel;
+    private OBOClass diff;
+    private RelDiffModel(OBORestriction link) {
+      rel = link.getType();
+      diff = (OBOClass)link.getParent();
+    }
+  }
+
+
+  private void init() {
     // dialog wont be focusable if owner is not showing or something like that
     Frame owner = Phenote.getPhenote().getFrame();
     dialog = new JDialog(owner,charField.getName()+" Post Composition");
-    FieldPanel compFieldPanel = new FieldPanel(false,false); // (searchParams)?
+    compFieldPanel = new FieldPanel(false,false); // (searchParams)?
     compFieldPanel.setSearchParams(searchParams);
     
-    // false - dont edit model, false - no post comp button
-    //genusField = new CharFieldGui(charField,compFieldPanel,"Genus",false,false);
+    // MAIN GENUS TERM
     genusField = CharFieldGui.makePostCompTermList(charField,searchParams,"Genus");
     compFieldPanel.addCharFieldGuiToPanel(genusField);
 
-    // Relationship?? stripped down ontology? hmmmmmm...
-    CharField relChar = new CharField(CharFieldEnum.RELATIONSHIP);
-    // Ontology o = OntologyManager.getRelationshipOntology() ?? getRelCharField?
-    Ontology o = charField.getPostCompRelOntol();
-    relChar.addOntology(o);
-    //relField = new CharFieldGui(relChar,compFieldPanel,"Relationship",false,false);
-    relField = CharFieldGui.makeRelationList(relChar,searchParams); // "Relationship"?
-    compFieldPanel.addCharFieldGuiToPanel(relField);
-    //relField.enableTermInfoListening(false); // turn off term info for rels
-    // relField = new RelFieldGui(relChar,compTermPanel,"Relationship");
-    // relField = new RelationshipFieldGui(compFieldPanel);
+    // REL-DIFFS
+    addRelDiffGui();
 
-    // when recurse put in flag for comp button
-    diffField = CharFieldGui.makePostCompTermList(charField,searchParams,"Differentia");
-    compFieldPanel.addCharFieldGuiToPanel(diffField);
-    //new CharFieldGui(charField,compFieldPanel,"Differentia",false,false);
+    // HARDWIRE 2ND REL&DIFF FOR NOW eventually put in refine button to add more diffs
+    addRelDiffGui();
+
+//     // Relationship?? stripped down ontology? hmmmmmm...
+//     CharField relChar = new CharField(CharFieldEnum.RELATIONSHIP);
+//     // Ontology o = OntologyManager.getRelationshipOntology() ?? getRelCharField?
+//     Ontology o = charField.getPostCompRelOntol();
+//     relChar.addOntology(o);
+//     //relField = new CharFieldGui(relChar,compFieldPanel,"Relationship",false,false);
+//     relField = CharFieldGui.makeRelationList(relChar,searchParams); // "Relationship"?
+//     compFieldPanel.addCharFieldGuiToPanel(relField);
+//     //relField.enableTermInfoListening(false); // turn off term info for rels
+//     // relField = new RelFieldGui(relChar,compTermPanel,"Relationship");
+//     // relField = new RelationshipFieldGui(compFieldPanel);
+
+//     // when recurse put in flag for comp button
+//     diffField = CharFieldGui.makePostCompTermList(charField,searchParams,"Differentia");
+//     compFieldPanel.addCharFieldGuiToPanel(diffField);
+//     //new CharFieldGui(charField,compFieldPanel,"Differentia",false,false);
+
+    
+
 
     setGuiFromSelectedModel();
 
@@ -98,6 +143,10 @@ class PostCompGui {
     SelectionManager.inst().addCharSelectionListener(new CompCharSelectListener());
   }
 
+  private void addRelDiffGui() {
+    relDiffGuis.add(new RelDiffGui());
+  }
+
   private void setGuiFromSelectedModel() {
     OBOClass currentTerm = getModelTerm();
     if (currentTerm == null) return;
@@ -106,13 +155,28 @@ class PostCompGui {
     genusField.setOboClass(getGenusTerm(currentTerm));
     // should this happen automatically from setOboClass or is that a burden/inefficiency
     genusField.setOntologyChooserFromTerm(getGenusTerm(currentTerm));
-    //if (modelHasDiff(currentTerm))
-    try { relField.setRel(getRel(currentTerm)); } catch (Exception e){}
+    //if (modelHasDiff(currentTerm)) // should query if temp or real post comp??
+    
     try {
-      diffField.setOboClass(getDiffTerm(currentTerm));
-      diffField.setOntologyChooserFromTerm(getDiffTerm(currentTerm));
-    } 
-    catch (Exception e) {} // throws if no diff term
+      List<RelDiffModel>diffs = getRelDiffs(currentTerm);
+      
+      for (int i=0; i<diffs.size(); i++) {
+        // check that have enough guis for diffs
+        if (i >= relDiffGuis.size()) addRelDiffGui();
+        relDiffGuis.get(i).setRelDiffModel(diffs.get(i));
+      }
+    }
+    catch (CompEx e) { log().debug("get rel diffs failed "+e); }
+
+
+//     for (RelDiffGui rd : relDiffGuis) {
+//       try { rd.relField.setRel(getRel(currentTerm)); } catch (Exception e){}
+//       try {
+//         rd.diffField.setOboClass(getDiffTerm(currentTerm));
+//         rd.diffField.setOntologyChooserFromTerm(getDiffTerm(currentTerm));
+//       } 
+//       catch (Exception e) {} // throws if no diff term
+//     }
     
   }
 
@@ -161,29 +225,54 @@ class PostCompGui {
     return term;
   }
 
+  private class CompEx extends Exception {
+    private CompEx() {}
+    private CompEx(String m) { super(m); }
+  }
+
+  private List<RelDiffModel> getRelDiffs(OBOClass term) throws CompEx {
+    if (!isPostCompTerm(term)) throw new CompEx();
+    List<RelDiffModel>diffs = new ArrayList<RelDiffModel>(4);
+    for (Object o : term.getParents()) {
+      OBORestriction r = (OBORestriction)o;
+      if (isLinkToDiff(r)) {
+        diffs.add(new RelDiffModel(r));
+      }
+      //return r;
+    }
+    if (diffs.isEmpty()) throw new CompEx(); // none found
+    return diffs;
+  }
+
+  private boolean isLinkToDiff(OBORestriction r) {
+    return r.completes() && r.getType() != OBOProperty.IS_A;
+  }
+
   /** Throws exception if no diff term - for now only returning one diff term
       can there be more than one */
-  private OBOClass getDiffTerm(OBOClass term) throws Exception {
+  private OBOClass getDiffTerm(OBOClass term) throws CompEx {
     OBORestriction link = getDiffLink(term); // throws Ex
     return (OBOClass)link.getParent(); // check downcast?
   }
 
   /** If term is post comp return obo property relationship for differentia 
       otherwise thorws exception */
-  private OBOProperty getRel(OBOClass term) throws Exception {
-    return getDiffLink(term).getType(); // thorws ex
+  private OBOProperty getRel(OBOClass term) throws CompEx {
+    return getDiffLink(term).getType(); // throws ex
   }
 
   /** return the oboRestriction link between term and its differentia 
-      exception if there is none. */
-  private OBORestriction getDiffLink(OBOClass term) throws Exception {
-    if (!isPostCompTerm(term)) throw new Exception();
+      exception if there is none. 
+      This assumes that there is only one diff - no longer true! 
+      should make specific ex*/
+  private OBORestriction getDiffLink(OBOClass term) throws CompEx {
+    if (!isPostCompTerm(term)) throw new CompEx();
     for (Object o : term.getParents()) {
       OBORestriction r = (OBORestriction)o;
       if (r.completes() && r.getType() != OBOProperty.IS_A)
         return r;
     }
-    throw new Exception(); // none found
+    throw new CompEx(); // none found
   }
 
   private void addButtons() {
@@ -208,7 +297,7 @@ class PostCompGui {
       try {
         OBOClass pc = makePostCompTerm();
         commitTerm(pc);
-      } catch (Exception ex) {
+      } catch (CompEx ex) {
         String m = "Post composition not fully filled in ";
         if (ex.getMessage()!=null) m+=ex.getMessage();
         log().debug(m); // ??
@@ -219,14 +308,28 @@ class PostCompGui {
     }
   }
 
-  private OBOClass makePostCompTerm() throws Exception {
-    // check that we have a valid genus & differentia
-    OBOClass genusTerm = genusField.getCurrentOboClass(); // throws Ex
-    OBOClass diffTerm = diffField.getCurrentOboClass(); // throws Ex
-//     // eventually get from obo relationship?
-    //OBOProperty partOf = new OBOPropertyImpl("OBO_REL:part_of","part_of");
-    OBOProperty rel = relField.getCurrentRelation();
-    return OboUtil.makePostCompTerm(genusTerm,rel,diffTerm);
+  private OBOClass makePostCompTerm() throws CompEx {
+    try {
+      // check that we have a valid genus & differentia
+      OBOClass genusTerm;
+      try { genusTerm = genusField.getCurrentOboClass(); }
+      catch (CharFieldGui.CharFieldGuiEx e) { throw new CompEx("Genus is unspecified"); }
+      OboUtil oboUtil = OboUtil.initPostCompTerm(genusTerm);
+      for (RelDiffGui rd : relDiffGuis) {
+        // check if filled in both rel & diff
+        try {
+          OBOProperty rel = rd.relField.getCurrentRelation(); // throws ex
+          OBOClass diffTerm = rd.diffField.getCurrentOboClass(); // throws Ex
+          oboUtil.addRelDiff(rel,diffTerm);
+        }
+        catch (CharFieldGui.CharFieldGuiEx e) {} // try next diff
+      }
+      //return OboUtil.makePostCompTerm(genusTerm,rel,diffTerm);
+      //if we didnt get a complete comp - genus rel diff - then throw ex
+      if (!oboUtil.hasRelAndDiff()) throw new CompEx("Missing relation or diff");
+      return oboUtil.getPostCompTerm();
+    }
+    catch (Exception e) { throw new CompEx(e.getMessage()); }
   }
 
   private void commitTerm(OBOClass postComp) {

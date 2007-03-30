@@ -130,6 +130,8 @@ public abstract class AbstractAutoCompList extends CharFieldGui { //extends JCom
 
   protected CompListSearcher getCompListSearcher() { return compListSearcher; }
 
+  protected AbstractAutoCompList getCompList() { return this; }
+
   //void setOntology(Ontology o) { ontology = o; }
 
   //void setSearchParams(SearchParamsI sp) { searchParams = sp; }

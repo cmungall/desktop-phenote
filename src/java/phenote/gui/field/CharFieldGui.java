@@ -270,14 +270,14 @@ abstract class CharFieldGui {
   }
 
   /** for testing and internal use */
-  AbstractAutoCompList getCompList() {
-    if (!isCompList())
-      return null;
-    if (isRelationshipList())
-      return getRelComp();
-    return getTermComp();
-    //return comboBox;
-  }
+  AbstractAutoCompList getCompList() { return null; } // overridden
+//     if (!isCompList())
+//       return null;
+//     if (isRelationshipList())
+//       return getRelComp();
+//     return getTermComp();
+//     //return comboBox;
+//   }
 
   // hasOntology? overridded by AbstractAutoCompList
   boolean isCompList() { return false; }// isCompList; }
@@ -292,10 +292,10 @@ abstract class CharFieldGui {
     return null; // overridden by TermCompList
   }
 
-  private RelationCompList getRelComp() {
-    //return relCompList;
-    return null; // overridden
-  }
+//   private RelationCompList getRelComp() {
+//     //return relCompList;
+//     return null; // overridden
+//   }
 
   // hardwired in term & rel subclasses now
 //   void enableTermInfoListening(boolean enable) {
@@ -465,12 +465,13 @@ abstract class CharFieldGui {
     //else textField.setText(term.getName()); // shouldnt happen
   }
 
-  /** for auto combos (ontol) for relationships (post comp rel) */
-  void setRel(OBOProperty rel) {
-    if (!isCompList() || !isRelationshipList()) return; // ex???
-    getRelComp().setRel(rel);
-    //else textField.setText(rel.getName()); // shouldnt actually happen
-  }
+  /** for auto combos (ontol) for relationships (post comp rel)
+   overriddedn by RelationCompList */
+  void setRel(OBOProperty rel) {}
+//     if (!isCompList() || !isRelationshipList()) return; // ex???
+//     getRelComp().setRel(rel);
+//     //else textField.setText(rel.getName()); // shouldnt actually happen
+//   }
 
   CharFieldEnum getCharFieldEnum() { return charField.getCharFieldEnum(); }
   protected CharField getCharField() { return charField; }
@@ -502,19 +503,25 @@ abstract class CharFieldGui {
 //     }
 //   }
 
+  static class CharFieldGuiEx extends Exception {
+    protected CharFieldGuiEx(String m) { super(m); }
+  }
+
   /** should define a CharFieldGuiEx! */
-  OBOClass getCurrentOboClass() throws Exception {
+  OBOClass getCurrentOboClass() throws CharFieldGuiEx {
     //if (!isCompList() || isRelationshipList)
-    if (!isTermCompList())
-      throw new Exception("Field has no OBO Class");
-    return null; // overridden by term comp list
+    //if (!isTermCompList())
+    // overridden by term comp list
+    throw new CharFieldGuiEx("Field has no OBO Class");
+      //return null; 
     //return getTermComp().getCurrentOboClass(); // throws Ex
   }
 
-  OBOProperty getCurrentRelation() throws Exception {
-    if (!isCompList() || !isRelationshipList())
-      throw new Exception("Field has no Relation");
-    return getRelComp().getCurrentRelation(); // throws Ex
+  /** overridden by RelationCompList */
+  OBOProperty getCurrentRelation() throws CharFieldGuiEx {
+    //if (!isCompList() || !isRelationshipList())
+    throw new CharFieldGuiEx("Field has no Relation");
+    //return getRelComp().getCurrentRelation(); // throws Ex
   }
 
   protected boolean isTermCompList() {

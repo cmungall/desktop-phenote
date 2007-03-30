@@ -179,10 +179,10 @@ class TermCompList extends AbstractAutoCompList {
 
   /** Throws exception if there isnt a current obo class, if the user
       has typed something that isnt yet a term - hasnt selected a term */
-  OBOClass getCurrentOboClass() throws Exception {
-    if (currentOboClass == null) throw new Exception("term is null");
+  OBOClass getCurrentOboClass() throws CharFieldGuiEx {
+    if (currentOboClass == null) throw new CharFieldGuiEx("term is null");
     if (!currentOboClass.getName().equals(getText()))
-      throw new Exception("(obo class "+currentOboClass+" and input "+getText()+
+      throw new CharFieldGuiEx("(obo class "+currentOboClass+" and input "+getText()+
                           " dont match)");
     return currentOboClass;
   }

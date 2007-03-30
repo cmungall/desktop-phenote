@@ -12,8 +12,8 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOProperty;
 import org.geneontology.oboedit.datamodel.impl.OBOPropertyImpl;
 
-import phenote.datamodel.CharFieldEnum;
-import phenote.datamodel.OboUtil;
+//import phenote.datamodel.CharFieldEnum;
+//import phenote.datamodel.OboUtil;
 
 /** Manages all of the ontology. Eventually will get config info (xml? OntologyConfig?)
     and set itself up from that. Should there be an ontology package - whats funny
@@ -121,7 +121,8 @@ public class OntologyManager {
     return id.contains("^");
   }
 
-  /** parse string GO:123^part_of(AO:345) into post comp obo class */
+  /** parse string GO:123^part_of(AO:345) into post comp obo class 
+      This will be replaced with obo edits post comp parse utility */
   OBOClass getPostComp(String id) throws TermNotFoundException {
     Pattern pat = Pattern.compile("([^\\^]+)\\^([^\\(]*)\\(([^\\)]*)\\)");
     Matcher m = pat.matcher(id);
