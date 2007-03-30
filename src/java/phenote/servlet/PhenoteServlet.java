@@ -2,8 +2,6 @@ package phenote.servlet;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
-import org.apache.log4j.RollingFileAppender;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.springframework.web.servlet.DispatcherServlet;
 import phenote.config.Config;
@@ -15,7 +13,6 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import java.io.File;
-import java.io.IOException;
 
 public class PhenoteServlet extends DispatcherServlet {
 
@@ -29,7 +26,7 @@ public class PhenoteServlet extends DispatcherServlet {
    * Initialization of this servlet upon server startup.
    * Happens when <load-on-startup> tag in the web.xml is set to '1'.
    *
-   * @param config
+   * @param config ServletConfig
    * @throws ServletException
    */
   public void init(ServletConfig config) throws ServletException {
@@ -80,34 +77,18 @@ public class PhenoteServlet extends DispatcherServlet {
     if (log4jFileName != null) {
       DOMConfigurator.configure(log4jFileName);
     }
-    addRootAppender();
   }
 
   private String getLog4JFile() {
     File log4jFile = new File(webInfDir, LOG4J_FILE_NAME);
     String log4jFileName = log4jFile.getAbsolutePath();
-    if (!log4jFile.exists())
-      System.out.println("Cannot find log4j file: " + log4jFileName);
-    return log4jFileName;
-  }
-
-  private void addRootAppender() {
-    Logger rootLogger = Logger.getRootLogger();
-
-    String logFileName = "phenote.log";
-    File file = new File(webInfDir, logFileName);
-    String absoluteFilePath = file.getAbsolutePath();
-    RollingFileAppender appender = null;
-    try {
-      String logFilePattern = "%d [%t] %-5p %c{2} - %m%n";
-      appender = new RollingFileAppender(new PatternLayout(logFilePattern), absoluteFilePath);
-      appender.setMaximumFileSize(1 * 1024 * 1024);
-      appender.setAppend(true);
-      appender.setMaxBackupIndex(10);
-    } catch (IOException e) {
-      e.printStackTrace();
+    if (!log4jFile.exists()){
+      LOG.info("Cannot find the log4j file: " + log4jFileName );
+      LOG.info(" Log4j is not configured in this servlet. Use App servers configuration " +
+               "make sure you have a log4j.properties file in the classes directory.");
+      return null;
     }
-    rootLogger.addAppender(appender);
+    return log4jFileName;
   }
 
 
