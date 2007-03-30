@@ -39,6 +39,8 @@ public class WormAdapter implements QueryableDataAdapterI {
 
 
   public void commit(CharacterListI charList) {
+    String m = "Worm adapter commit not yet implemented.";
+    JOptionPane.showMessageDialog(null,m,"Worm stub",JOptionPane.INFORMATION_MESSAGE);
     // if alleleQueried... wipe out allele and insert
     // else if Pub queried... wipe out pub and insert
     // else  - new insert & deletes(from transactions)

@@ -258,7 +258,18 @@ public class CharacterTablePanel extends JPanel {
         //  return;
         //}
         //c.getSingleDataAdapter().commit(characterTableModel.getCharacterList());
-        LoadSaveManager.inst().saveData();
+        
+        // DATABASE if theres a queryable data adapter (database) then that steals
+        // the button from the file adapters
+        if (Config.inst().hasQueryableDataAdapter()) {
+          CharacterListI c = CharacterListManager.inst().getCharacterList();
+          Config.inst().getQueryableDataAdapter().commit(c);
+        }
+        // FILE
+        else {
+          // should be renamed FileLoadSaveManager as its just for files
+          LoadSaveManager.inst().saveData();
+        }
       }
 
       // UNDO
