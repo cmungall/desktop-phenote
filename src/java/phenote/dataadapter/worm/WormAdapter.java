@@ -38,6 +38,10 @@ public class WormAdapter implements QueryableDataAdapterI {
   public WormAdapter() { init(); }
 
 
+  public String getCommitButtonLabel() {
+    return "Commit To Worm DB";
+  }
+
   public void commit(CharacterListI charList) {
     String m = "Worm adapter commit not yet implemented.";
     JOptionPane.showMessageDialog(null,m,"Worm stub",JOptionPane.INFORMATION_MESSAGE);

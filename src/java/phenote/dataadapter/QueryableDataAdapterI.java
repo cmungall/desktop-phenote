@@ -10,5 +10,7 @@ public interface QueryableDataAdapterI {
   public CharacterListI query(String field, String query) throws DataAdapterEx;
 
   public void commit(CharacterListI charList);
+  /** The label that gets displayed on the db commit button */
+  public String getCommitButtonLabel();
 }
 

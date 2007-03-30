@@ -109,7 +109,7 @@ public class CharacterTablePanel extends JPanel {
     buttonPanel.add(Box.createRigidArea(new Dimension(80,0)));
     // should we only add if have data adapter - or disable at least?
     // should this go in a menu?
-    commitButton = addButton(SAVE_STRING,al,buttonPanel);
+    commitButton = addButton(getCommitButtonString(),al,buttonPanel);
     buttonPanel.add(Box.createRigidArea(new Dimension(20,0)));
     if (Config.inst().uvicGraphIsEnabled())
       graphWindow = addButton("Graph",al,buttonPanel);
@@ -121,6 +121,12 @@ public class CharacterTablePanel extends JPanel {
 
     EditManager.inst().addCharChangeListener(new TableCharChangeListener());
     getCharListManager().addCharListChangeListener(new TableCharListChangeListener());
+  }
+
+  private String getCommitButtonString() {
+    if (Config.inst().hasQueryableDataAdapter())
+      return Config.inst().getQueryableDataAdapter().getCommitButtonLabel();
+    else return SAVE_STRING;
   }
 
   private CharacterListManager getCharListManager() {
@@ -249,7 +255,7 @@ public class CharacterTablePanel extends JPanel {
       }
       
       // SAVE
-      else if (e.getActionCommand().equals(SAVE_STRING)) {
+      else if (e.getActionCommand().equals(getCommitButtonString())) {
         // commented out this check because it won't work if there are multiple data adapters
         // error should probably be printed in LoadSaveManager anyway
         //Config c = Config.inst();
