@@ -13,7 +13,7 @@
 <p>Data annotated with Phenote is based on the <a href="http://www.fruitfly.org/~cjm/obd/formats.html">EQ model</a> for representing phenotypes, combining entities from any OBO ontology with qualities (such as from <a href="http://www.bioontology.org/wiki/index.php/PATO:About">PATO</a>).  
 </p>
 
-<p>The software can be used as a complete package, or individual compontents can be downloaded and plugged in to your desired application.  Check out our <a href="/info/">Info</a> page to learn more.</p>
+<p>The software can be used as a complete package, or individual compontents can be downloaded and plugged in to your desired application.  Check out our <a href="/content/info/">Info</a> page to learn more.</p>
 
 <p>This tool is  being developed by the <a href="http://berkeleybop.org/">Bioinformatics Core</a> of the <a href="http://www.bioontology.org">National Center for Biomedical Ontology</a>.  
 </p>

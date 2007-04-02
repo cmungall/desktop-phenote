@@ -22,11 +22,15 @@ Phenote is both a standalone java application and a software toolkit.
   </li>
   <li>Bulk copy/edit/delete/sort of phenotype-genotype character entries
   </li>
-  <li>Two output formats: phenosyntax and phenoxml
+  <li>Excel-compatible output format (tab-delimited)
+  </li>
+  <li>Additional export formats:  phenosyntax, xml
   </li>
   <li>configurable input fields to allow custom data entry and user-specified ontologies
   </li>
   <li>Preconfigurations available for different communities
+  </li>
+  <li>Customized configurations easily added
   </li>
 </ul>
 
