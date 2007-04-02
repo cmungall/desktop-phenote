@@ -8,27 +8,17 @@
 
 <h2>Phenote Software</h2>
 
-<h3>Current Release: 1.0</h3>
-Three configurations of Phenote have been created to include the ontologies most appropriate for use by those communities.  The following are the webstart versions for the most current stable release:
-<ul>
-<li><a href="/phenote/1.0/phenote-flybase.jnlp">Fly</a></li>
-<li><a href="/phenote/1.0/phenote-zfin.jnlp">Zebrafish</a></li>
-<li><a href="/phenote/1.0/phenote-human.jnlp">Human</a></li>
-</ul>
+<h3><a name="current">Current Release: 1.1</a></h3>
+<a href="http://toy.lbl.gov:9010/phenote/1.1/phenote.jnlp">Webstart</a>
+<a href="http://obo.svn.sourceforge.net/*checkout*/obo/phenote/tags/release-1.1/">Download</a>
 
-<h3><a name="annotation">Development Versions</a></h3>
-Note that these versions have not been fully tested and might contain bugs.  Please report any bugs you find on our <a href="https://sourceforge.net/tracker/?group_id=76834&atid=887913">tracker</a>
+See the <a href="http://www.phenote.org/phenote-release-notes.html">Release Notes</a> for more information.
+
+<h3><a name="devel">Development Version</a></h3>
+Note that this version has not been fully tested and might contain bugs.  Please report any bugs you find on our <a href="https://sourceforge.net/tracker/?group_id=76834&atid=887913">tracker</a>
 <ul>
-<li><a href="http://toy.lbl.gov:9010/phenote/1.1/phenote-zfin.jnlp">Zebrafish v1.1</a>
-<p>  Most notable features of this version are:
-  <ul>
-    <li>Ability to configure phenote input fields/ontologies for use with webstart, not just the command-line version.  (For more information about how to create and use your own custom configuration, read our <a href="/content/howtos/customize.shtml">how-to:customize</a> documentation.)
-    </li>
-    <li>Ability to search through all loaded ontologies at once with the autocompletion feature, in addition to searching for terms in individual ontologies.
-    </li>
-  </ul>
+<li><a href="http://toy.lbl.gov:9010/phenote/latest/phenote.jnlp">Phenote-devel</a>
 </ul>
-</p>
 <p>
 You can also <a href="http://obo.svn.sourceforge.net/*checkout*/obo/phenote/trunk/">checkout</a> the latest Development version of Phenote from sourceforge.  
 </p>
