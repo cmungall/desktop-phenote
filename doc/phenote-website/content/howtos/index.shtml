@@ -10,15 +10,11 @@
 <h3><a name="software">Software</a></h3>
 <h4><a name="webstart">Running Phenote Webstart Version(s)</a></h4>
 <p>
-By clicking any of links below, Phenote will use Webstart to launch the java application from the web.  Simply clicking on a link below will download the application to your computer and run.  Future clicks on the link should recognize that you've already downloaded the application, and it will simply start the software.  If a newer version of the software is detected on the server, the newest version will replace your old version and then run.</p>
+Phenote is a Java application, which can be launched from the web using "Webstart".  Simply click on the link below, and this  will download the application to your computer and run.  Future clicks on the link should recognize that you've already downloaded the application, and it will simply start the software.</p>
 <p>
-Three configurations of Phenote 1.0 have been created to include the ontologies most appropriate for use by those communities:
-<ul>
-<li><a href="/phenote/1.0/phenote-flybase.jnlp">Fly</a></li>
-<li><a href="/phenote/1.0/phenote-zfin.jnlp">Zebrafish</a></li>
-<li><a href="/phenote/1.0/phenote-human.jnlp">Human</a></li>
-</ul>
-
+Webstart:  <a href="/phenote/1.1/phenote.jnlp">Phenote v1.1</a>
+</p>
+<p>
 Phenote can also be launched from our <a href="/content/software/">Downloads</a> page.  There you will also find any newer versions under development.
 </p>
 
@@ -39,8 +35,7 @@ You can also browse the subversion repository at:
 <a href="http://obo.svn.sourceforge.net/viewvc/obo/phenote/trunk/">
 https://obo.svn.sourceforge.net/viewvc/obo/phenote/trunk/</a>
 <br />
-
-Note that if you use this version, it might be buggy.
+Note that if you use this version, it might be buggy.  Stable releases can be checked out from phenote/tags in the subversion repository.
 </p>
 
 
@@ -51,7 +46,12 @@ Phenote can be customized to allow data entry fields of your choosing, as well a
 <p>
 At the moment it requires hand editing of a file, which is fairly painless.  If you are interested in configuring your version of Phenote, please read our <a href="/content/howtos/customize.shtml">Instructions on how to edit the configuration file.</a>  In the future, we plan to have an easy-to-use GUI that will allow you to achieve the same results.
 </p>
-
+<p>
+Note that with Phenote v1.1 or later, the user can choose a different configuration from the "File" menu.  When you select "Load Configuration" from the "File" menu, you are prompted with a menu of options.  Listed are several configuration styles that come standard with the Phenote software, with the current choice's radio-button selected.
+If you have created your own custom configuration file, it should be listed here.  
+After selecting (the radio button) for a new configuration, press "OK", or press "Cancel" to revert to your previous selection.  
+Any changes to your configuration settings will take effect the next time Phenote is loaded.  
+</p>
 <h3><a name="annotation">Making Annotations</a></h3>
 <p>
 </p>

@@ -8,10 +8,8 @@
 
 <h2>Phenote Software</h2>
 
-<h3><a name="current">Current Release: 1.1</a></h3>
-<a href="http://toy.lbl.gov:9010/phenote/1.1/phenote.jnlp">Webstart</a>
-<a href="http://obo.svn.sourceforge.net/*checkout*/obo/phenote/tags/release-1.1/">Download</a>
-<br />
+<h3><a name="current">Current Release: 1.1</a><a href="http://toy.lbl.gov:9010/phenote/1.1/phenote.jnlp">Webstart</a>
+<a href="http://obo.svn.sourceforge.net/*checkout*/obo/phenote/tags/release-1.1/">Download</a></h3>
 Newest Features:
 <ul>
 <li>Phenote will merge its default configuration with users' configuration.  This preserves user's additions as well as adding anything new from phenote upgrades.</li>
@@ -27,9 +25,8 @@ Newest Features:
 <li>Ontology chooser reflects current term (bug fix)</li>
 <li>Improvements to uvic graphics (still not ready for prime time)</li>
 </ul>
-<br />
 <p>
-See the <a href="http://www.phenote.org/phenote-release-notes.html">Release Notes</a> for more information.
+See the <a href="http://www.phenote.org/phenote-release-notes.html">Release Notes</a> for more information or back-versions.
 </p>
 
 <h3><a name="devel">Development Version</a></h3>
