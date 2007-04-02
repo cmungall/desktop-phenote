@@ -11,8 +11,26 @@
 <h3><a name="current">Current Release: 1.1</a></h3>
 <a href="http://toy.lbl.gov:9010/phenote/1.1/phenote.jnlp">Webstart</a>
 <a href="http://obo.svn.sourceforge.net/*checkout*/obo/phenote/tags/release-1.1/">Download</a>
-
+<br />
+Newest Features:
+<ul>
+<li>Phenote will merge its default configuration with users' configuration.  This preserves user's additions as well as adding anything new from phenote upgrades.</li>
+<li>User can select configuration they want to use at initialization or subsequently from file menu (currently requires phenote restart). </li>
+<li>Tab delimited data adapter</li>
+<li>Beginnings of term history</li>
+<li>Tabbed main data-entry panel if more than 12 fields are present.  Note that all fields will be displayed in the lower display table without scrolling</li>
+<li>QueryableDataAdapter interface for adding a database data adapter that can be queried. The data adapter specifies queryable fields, which get a retrieve button.</li>
+<li>Layout improved</li>
+<li>Can now search ALL ontologies of a field without having to change the pull-down menu</li>
+<li>User can choose to update their local copy of an OBO ontology from sourceforge (can also retrieve if no local file found)</li>
+<li>Refactored code for field guis</li>
+<li>Ontology chooser reflects current term (bug fix)</li>
+<li>Improvements to uvic graphics (still not ready for prime time)</li>
+</ul>
+<br />
+<p>
 See the <a href="http://www.phenote.org/phenote-release-notes.html">Release Notes</a> for more information.
+</p>
 
 <h3><a name="devel">Development Version</a></h3>
 Note that this version has not been fully tested and might contain bugs.  Please report any bugs you find on our <a href="https://sourceforge.net/tracker/?group_id=76834&atid=887913">tracker</a>
