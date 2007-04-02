@@ -26,6 +26,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 
 
 
@@ -43,12 +44,107 @@ public class WormAdapter implements QueryableDataAdapterI {
   }
 
   public void commit(CharacterListI charList) {
-    String m = "Worm adapter commit not yet implemented.";
-    JOptionPane.showMessageDialog(null,m,"Worm stub",JOptionPane.INFORMATION_MESSAGE);
+//    String m = "Worm adapter commit not yet implemented.";
+//    JOptionPane.showMessageDialog(null,m,"Worm stub",JOptionPane.INFORMATION_MESSAGE);
+    Connection c = connectToDB();
+    Statement s = null;
+    try { s = c.createStatement(); }
+      catch (SQLException se) {
+      System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); System.exit(1); }
+    for (CharacterI chr : charList.getList()) {
+//      System.out.println("Chr "+chr+" end");
+      try {
+        String allele = chr.getValueString("Allele");
+//         System.out.println( "Allele : "+allele+" end.");
+        String paper = chr.getValueString("Pub");
+//         System.out.println( "Pub : "+paper+" end.");
+        String curator = chr.getValueString("Curator");
+//         System.out.println( "Curator : "+curator+" end.");
+        String person = chr.getValueString("Person");
+//         System.out.println( "Person : "+person+" end.");
+        String phen_text_remark = chr.getValueString("Phenotype Text Remark");
+//         System.out.println( "Phenotype Text Remark : "+phen_text_remark+" end.");
+        String remark = chr.getValueString("Other Remark");
+//         System.out.println( "Other Remark : "+remark+" end.");
+        String genetic_interaction = chr.getValueString("Genetic Interaction");
+//         System.out.println( "Genetic Interaction : "+genetic_interaction+" end.");
+        String alp_term = chr.getValueString("Phenotype");
+//         System.out.println( "Phenotype : "+alp_term+" end.");
+        String alp_phen_remark = chr.getValueString("Phenotype Remark");
+//         System.out.println( "Phenotype Remark : "+alp_phen_remark+" end.");
+        String alp_anat_term = chr.getValueString("Anatomy");
+//         System.out.println( "Anatomy : "+alp_anat_term+" end.");
+        String entity = chr.getValueString("Entity");
+//         System.out.println( "Entity : "+entity+" end.");
+        String quality = chr.getValueString("Quality");
+//         System.out.println( "Quality : "+quality+" end.");
+        String alp_lifestage = chr.getValueString("Stage");
+//         System.out.println( "Stage : "+alp_lifestage+" end.");
+        String alp_nature = chr.getValueString("Allele Nature");
+//         System.out.println( "Allele Nature : "+alp_nature+" end.");
+        String alp_func = chr.getValueString("Functional Change");
+//         System.out.println( "Functional Change : "+alp_func+" end.");
+        String alp_temperature = chr.getValueString("Temperature");
+//         System.out.println( "Temperature : "+alp_temperature+" end.");
+        String alp_preparation = chr.getValueString("Preparation");
+//         System.out.println( "Preparation : "+alp_preparation+" end.");
+        String alp_penetrance = chr.getValueString("Penetrance");
+//         System.out.println( "Penetrance : "+alp_penetrance+" end.");
+        String alp_percent = chr.getValueString("Penetrance Percent");
+//         System.out.println( "Penetrance Percent : "+alp_percent+" end.");
+        String alp_range = chr.getValueString("Penetrance Range");
+//         System.out.println( "Penetrance Range : "+alp_range+" end.");
+        String alp_quantity_remark = chr.getValueString("Quantity Remark");
+//         System.out.println( "Quantity Remark : "+alp_quantity_remark+" end.");
+        String alp_heat_sens = chr.getValueString("Heat Sensitive");
+//         System.out.println( "Heat Sensitive : "+alp_heat_sens+" end.");
+        String alp_heat_degree = chr.getValueString("Heat Sensitive Degree");
+//         System.out.println( "Heat Sensitive Degree : "+alp_heat_degree+" end.");
+        String alp_cold_sens = chr.getValueString("Cold Sensitive");
+//         System.out.println( "Cold Sensitive : "+alp_cold_sens+" end.");
+        String alp_cold_degree = chr.getValueString("Cold Sensitive");
+//         System.out.println( "Cold Sensitive Degree : "+alp_cold_degree+" end.");
+        String alp_mat_effect = chr.getValueString("Maternal Effect");
+//         System.out.println( "Maternal Effect : "+alp_mat_effect+" end.");
+        String alp_pat_effect = chr.getValueString("Paternal Effect");
+//         System.out.println( "Paternal Effect : "+alp_pat_effect+" end.");
+        String alp_genotype = chr.getValueString("Genotype");
+//         System.out.println( "Genotype : "+alp_genotype+" end.");
+        String alp_strain = chr.getValueString("Strain");
+//         System.out.println( "Strain : "+alp_strain+" end.");
+        String alp_delevered = chr.getValueString("Delivered By");
+//         System.out.println( "Delivered By : "+alp_delevered+" end.");
+        if (allele != null) {
+            int found_allele = 0;
+            ResultSet rs = null;	// intialize postgres query result
+            String joinkey = allele;
+            try { rs = s.executeQuery("SELECT * FROM alp_tempname WHERE alp_tempname = '"+joinkey+"'");	}	// find the allele that matches the queried allele
+            catch (SQLException se) {
+              System.out.println("We got an exception while executing our query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+            try { while (rs.next()) { 
+//              default_value = rs.getString(4); 
+//               System.out.println("Found "+joinkey+" allele in alp_tempname.");
+              found_allele++; } }
+            catch (SQLException se) {
+              System.out.println("We got an exception while getting a alp_tempname result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
+            if (found_allele > 0) {
+	      PreparedStatement ps = null;	// intialize postgres insert 
+              try { ps = c.prepareStatement("INSERT INTO alp_tempname VALUES (?, ?)"); ps.setString(1, joinkey); ps.setString(2, allele); }
+              catch (SQLException se) {
+                System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+	      try { ps.executeUpdate(); } 	// write to alp_tempname, which is not what we really want, but we need to figure out the pubchunk thing to see what we're going to do
+              catch (SQLException se) { System.out.println("We got an exception while executing an update: possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); } } } 
+          else {
+            System.out.println("There is no allele for "+chr+" Character"); } 
+      } catch (Exception e) {
+        System.out.println("Could not get terms from character: " + e);
+      }
+
+    } // for (CharacterI chr : charList.getList())
     // if alleleQueried... wipe out allele and insert
     // else if Pub queried... wipe out pub and insert
     // else  - new insert & deletes(from transactions)
-  }
+  } // public void commit(CharacterListI charList)
 
   // Returns the first substring in input that matches the pattern.  Returns null if no match found.
   // lifted from  http://www.exampledepot.com/egs/java.util.regex/Greedy.html?l=rel
@@ -343,7 +439,6 @@ public class WormAdapter implements QueryableDataAdapterI {
 
       String match = find("WBPaper[0-9]*", query);  	// Find a WBPaper followed by any amount of digits
       if (match != null) { query = match; }		// query for this, otherwise keep the default value
-System.out.println("Going to query for "+query+".");
       int foundPaper = 0;				// flag if there are any papers in postgres that match, otherwise give an error warning
       ResultSet rs = null;				// initialize result of query
       try { rs = s2.executeQuery("SELECT DISTINCT(joinkey), alp_box FROM alp_paper WHERE alp_paper ~ '"+query+"' ORDER BY joinkey;"); }	// get the alleles from a paper
