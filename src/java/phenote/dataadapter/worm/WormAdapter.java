@@ -110,15 +110,15 @@ public class WormAdapter implements QueryableDataAdapterI {
         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
         if (postgres_value.equals(app_anat_term)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_anat_term); }
 //         System.out.println( "Anatomy : "+app_anat_term+" end.");
-        String app_entity = chr.getValueString("Entity");
-        postgres_table = "app_entity"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
-        if (postgres_value.equals(app_entity)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_entity); }
+//         String app_entity = chr.getValueString("Entity");
+//         postgres_table = "app_entity"; postgres_value = "No postgres value assigned";
+//         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
+//         if (postgres_value.equals(app_entity)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_entity); }
 //         System.out.println( "Entity : "+app_entity+" end.");
-        String app_quality = chr.getValueString("Quality");
-        postgres_table = "app_quality"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
-        if (postgres_value.equals(app_quality)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_quality); }
+//         String app_quality = chr.getValueString("Quality");
+//         postgres_table = "app_quality"; postgres_value = "No postgres value assigned";
+//         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
+//         if (postgres_value.equals(app_quality)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_quality); }
 //         System.out.println( "Quality : "+app_quality+" end.");
         String app_lifestage = chr.getValueString("Stage");
         postgres_table = "app_lifestage"; postgres_value = "No postgres value assigned";
@@ -160,6 +160,11 @@ public class WormAdapter implements QueryableDataAdapterI {
         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
         if (postgres_value.equals(app_range)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_range); }
 //         System.out.println( "Penetrance Range : "+app_range+" end.");
+        String app_quantity = chr.getValueString("Quantity");
+        postgres_table = "app_quantity"; postgres_value = "No postgres value assigned";
+        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
+        if (postgres_value.equals(app_quantity)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_quantity); }
+//         System.out.println( "Quantity : "+app_quantity+" end.");
         String app_quantity_remark = chr.getValueString("Quantity Remark");
         postgres_table = "app_quantity_remark"; postgres_value = "No postgres value assigned";
         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
@@ -317,6 +322,8 @@ public class WormAdapter implements QueryableDataAdapterI {
     catch (SQLException se) {
       System.out.println("We got an exception while getting a "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
 //    System.out.println("Added in function charList term "+query+" column "+colI+".");		// comment out later
+    if (default_value == null) { default_value = "postgres value is null"; }
+    if (default_value == "") { default_value = "postgres value is blank"; }
     return default_value; 
   }
 
@@ -379,6 +386,9 @@ public class WormAdapter implements QueryableDataAdapterI {
       postgres_table = "app_range"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
       c1.setValue("Penetrance Range",postgres_value);				// assign the queried value
+      postgres_table = "app_quantity"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
+      c1.setValue("Quantity",postgres_value);					// assign the queried value
       postgres_table = "app_quantity_remark"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
       c1.setValue("Quantity Remark",postgres_value);				// assign the queried value
