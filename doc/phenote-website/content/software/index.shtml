@@ -23,7 +23,6 @@ Newest Features:
 <li>Tabbed main data-entry panel if more than 12 fields are present.  Note that all fields will be displayed in the lower display table without scrolling</li>
 <li>Refactored code for field guis</li>
 <li>Ontology chooser reflects current term (bug fix)</li>
-<li>Improvements to uvic graphics (still not ready for prime time)</li>
 </ul>
 <p>
 See the <a href="http://www.phenote.org/phenote-release-notes.html">Release Notes</a> for more information or back-versions.
