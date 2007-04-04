@@ -120,7 +120,7 @@ public class SelectionHistory {
 	  {
 		  OBOClass term = transList.get(i-1).getNewTerm();
 		  if (term!=null)
-			  html = html + "<br> *"+term.getName();
+			  html = html + "<br> *"+term.getNamespace()+":"+term.getName();
 //			  html = html + "<br>"+HtmlUtil.termLink(term);
 	  }
 	  textArea.setText(html);

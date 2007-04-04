@@ -12,9 +12,12 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import javax.swing.ImageIcon;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import java.io.FileNotFoundException;
+
+
 
 // import javax.swing.JTextField;
 // import javax.swing.text.Keymap;
@@ -33,6 +36,7 @@ import phenote.gui.MenuManager;
 import phenote.gui.TermInfo;
 import phenote.gui.SelectionHistory;
 import phenote.gui.field.FieldPanel;
+import phenote.gui.SplashScreen;
 
 public class Phenote {
 
@@ -46,6 +50,8 @@ public class Phenote {
   private SelectionHistory selectionHistory;
   private CommandLine commandLine = CommandLine.inst();
   private JFrame frame;
+  public SplashScreen splashScreen;
+  private String logoFile = "src/java/phenote/images/phenote_logo.jpg";
 
   //  public static Keymap defaultKeymap;
   
@@ -69,17 +75,28 @@ public class Phenote {
       System.out.println("Failed to set to Java/Metal look & feel");
     }
     phenote = getPhenote();
+    phenote.splashScreenInit(); //initialize the splash screen;
     phenote.doCommandLine(args); // does config
     // put this is in a phenote.util.Log class? - get file from config - default?
+    phenote.splashScreen.setProgress("Configuring...", 10);
     try { DOMConfigurator.configure(Config.inst().getLogConfigUrl()); }
-    catch (FileNotFoundException e) { LOG.error(e.getMessage()); }
+    catch (FileNotFoundException e) { 
+    	phenote.splashScreen.setProgress("bad file:"+e.getMessage(),10);
+    	LOG.error(e.getMessage()); }
+    phenote.splashScreen.setProgress("Initializing Ontologies...", 20);
     phenote.initOntologies();
+    phenote.splashScreen.setProgress("Ontologies Initialized", 70);
     phenote.loadFromCommandLine();  // aft ontols, reads from cmd line if specified
+    phenote.splashScreen.setProgress("Phenote Loaded", 100);
     if (phenote.commandLine.writeIsSpecified())
       phenote.writeFromCommandLine();
-    else // init gui if not writing (& reading) from cmd line
-      phenote.initGui();
-  }
+    else	// init gui if not writing (& reading) from cmd line
+    {
+    	phenote.initGui();
+    	phenote.splashScreenDestruct();
+
+    }
+  }	
 
   /** private constructor -> singleton */
   private Phenote() {}
@@ -115,6 +132,20 @@ public class Phenote {
     makeWindow();
   }
 
+
+  private void splashScreenInit() {
+	ImageIcon myImage = new ImageIcon(logoFile);
+	splashScreen = new SplashScreen(myImage);
+	splashScreen.setLocationRelativeTo(null);
+	splashScreen.setProgressMax(100);
+	splashScreen.setScreenVisible(true);
+	splashScreen.setProgress("Phenote version "+PhenoteVersion.versionString(), 0);
+  }
+
+  private void splashScreenDestruct() {
+	    splashScreen.setScreenVisible(false);
+	  }
+  
   private void doCommandLine(String[] args) {
     //doCommandLineOld(args); // -c -u  --> move to CommandLine!
     try { commandLine.setArgs(args); } // no log yet - sys.out
@@ -210,6 +241,7 @@ public class Phenote {
   public FieldPanel getFieldPanel() { return fieldPanel; }
   public TermInfo getTermInfo() { return termInfo; }
   public CharacterTablePanel getCharacterTablePanel() { return characterTablePanel; }
+
 }
 
 //   /** args is most likely null if not called from command line */

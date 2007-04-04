@@ -84,7 +84,7 @@ public class OntologyDataAdapter {
     // to prevent reload during init , maybe dont need with synchronization?
     initializingOntologies = true; 
     for (FieldConfig fieldConfig : config.getFieldConfigList()) {
-      if (!fieldConfig.isEnabled()) continue;
+    	if (!fieldConfig.isEnabled()) continue;
       // this is where char field enums happen - scrap entirely????
 //       if (fieldConfig.hasCharFieldEnum()) {
 //         CharFieldEnum fce = fieldConfig.getCharFieldEnum();
