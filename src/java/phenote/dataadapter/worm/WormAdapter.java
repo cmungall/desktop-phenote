@@ -54,15 +54,24 @@ public class WormAdapter implements QueryableDataAdapterI {
     for (CharacterI chr : charList.getList()) {
 //      System.out.println("Chr "+chr+" end");
       try {
-        String allele = chr.getValueString("Allele");
-        int colI = 0;
+        String allele = chr.getValueString("Allele");	// get the allele value from the character, currently could have a column number
+        int colI = 0;					// initialize column to zero
         String match = find(".* - ([0-9]+)", allele);  	// Find a tempname followed by space - space number
-        if (match != null) { colI = Integer.parseInt(match); }	// get the column number 
+        if (match != null) { colI = Integer.parseInt(match); }	// get the column number if there is one
         match = find("(.*) - [0-9]+", allele);  	// Find a tempname followed by space - space number
         if (match != null) { allele = match; }		// query for this, otherwise keep the default value
-        String joinkey = allele;
-        System.out.println( "Allele : "+allele+" end.");
-        System.out.println( "Column : "+colI+" end.");
+        String joinkey = allele;			// assign the tempname / allele to the joinkey 
+        if (colI < 1) {					// if there are no columns, find the highest existing column and add 1 to make the next one
+          ResultSet rs = null;
+          try { rs = s.executeQuery("SELECT app_column FROM app_term WHERE joinkey = '"+joinkey+"' ORDER BY app_column DESC"); }
+          catch (SQLException se) {
+            System.out.println("We got an exception while executing our app_term query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
+          try { if (rs.next()) { if (rs.getInt(1) > colI) { colI = rs.getInt(1); } } colI++; }	// get the next highest number column for that allele
+          catch (SQLException se) {
+            System.out.println("We got an exception while getting a column/term joinkey "+joinkey+" result:this shouldn't happen: we've done something really bad."); 
+            se.printStackTrace(); System.exit(1); } }
+//         System.out.println( "Allele : "+allele+" end.");
+//         System.out.println( "Column : "+colI+" end.");
         String app_paper = chr.getValueString("Pub");
         String postgres_table = "app_paper"; String postgres_value = "No postgres value assigned";
         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
@@ -468,7 +477,7 @@ public class WormAdapter implements QueryableDataAdapterI {
           try { rs = s.executeQuery("SELECT app_column FROM app_term WHERE joinkey = '"+joinkey+"' ORDER BY app_column DESC"); }
           catch (SQLException se) {
             System.out.println("We got an exception while executing our app_term query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
-          try { while (rs.next()) { if (rs.getInt(1) > columns) { columns = rs.getInt(1); } } }		// assign the highest number column for that allele to the number of columns
+          try { if (rs.next()) { if (rs.getInt(1) > columns) { columns = rs.getInt(1); } } }		// assign the highest number column for that allele to the number of columns
           catch (SQLException se) {
             System.out.println("We got an exception while getting a column/term joinkey "+joinkey+" result:this shouldn't happen: we've done something really bad."); 
             se.printStackTrace(); System.exit(1); }
