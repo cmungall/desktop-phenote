@@ -347,16 +347,22 @@ public class WormAdapter implements QueryableDataAdapterI {
       String postgres_value = "No postgres value assigned";
       String postgres_table = "app_term";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
-//       c1.setValue("Phenotype",postgres_value);					// assign the queried value
+      String phenotype_match = find("(WBPhenotype[0-9]*)", postgres_value);  	// Find a WBPhenotype followed by any amount of digits
+      if (phenotype_match != null) { postgres_value = phenotype_match; }		// query for this, otherwise keep the default value
+      c1.setValue("Phenotype",postgres_value);					// assign the queried value
       postgres_table = "app_curator"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
       c1.setValue("Curator",postgres_value);					// assign the queried value
       postgres_table = "app_paper"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
-//       c1.setValue("Pub",postgres_value);					// assign the queried value
+      String paper_match = find("(WBPaper[0-9]*)", postgres_value);		// Find a WBPaper followed by any amount of digits
+      if (paper_match != null) { postgres_value = paper_match; }	// query for this, otherwise keep the default value
+      c1.setValue("Pub",postgres_value);					// assign the queried value
       postgres_table = "app_person"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
-//       c1.setValue("Person",postgres_value);					// assign the queried value
+      String person_match = find("(WBPerson[0-9]*)", postgres_value);	// Find a WBPerson followed by any amount of digits
+      if (person_match != null) { postgres_value = person_match; }	// query for this, otherwise keep the default value
+      if (postgres_value == "No postgres value assigned") { } else { c1.setValue("Person",postgres_value); }					// assign the queried value
       postgres_table = "app_phenotype"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
       c1.setValue("NBP",postgres_value);					// assign the queried value
@@ -430,7 +436,7 @@ public class WormAdapter implements QueryableDataAdapterI {
       charList.add(c1);								// add the character to the character list
     }
     catch (TermNotFoundException e) {
-      System.out.println("Term Not Found Exception, assigning characters by Object Name."); }
+      System.out.println("Term Not Found Exception, assigning characters "+e.getMessage()); }
     catch (CharFieldException e) {
       System.out.println("Char Field Exception, assigning characters "+e.getMessage()); }
     return charList; 
