@@ -54,7 +54,7 @@ public class WormAdapter implements QueryableDataAdapterI {
     for (CharacterI chr : charList.getList()) {
 //      System.out.println("Chr "+chr+" end");
       try {
-        String allele = chr.getValueString("Allele");	// get the allele value from the character, currently could have a column number
+        String allele = chr.getValueString("Object Name");	// get the allele value from the character, currently could have a column number
         int colI = 0;					// initialize column to zero
         String match = find(".* - ([0-9]+)", allele);  	// Find a tempname followed by space - space number
         if (match != null) { colI = Integer.parseInt(match); }	// get the column number if there is one
@@ -72,7 +72,8 @@ public class WormAdapter implements QueryableDataAdapterI {
             se.printStackTrace(); System.exit(1); } }
 //         System.out.println( "Allele : "+allele+" end.");
 //         System.out.println( "Column : "+colI+" end.");
-        String app_paper = chr.getValueString("Pub");
+//         String app_paper = chr.getValueString("Pub");
+        String app_paper = chr.getTerm("Pub").getID();
         String postgres_table = "app_paper"; String postgres_value = "No postgres value assigned";
         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
         if (postgres_value.equals(app_paper)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_paper); }
@@ -87,18 +88,18 @@ public class WormAdapter implements QueryableDataAdapterI {
         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
         if (postgres_value.equals(app_person)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_person); }
 //         System.out.println( "Person : "+person+" end.");
-        String app_phenotype = chr.getValueString("Phenotype Text Remark");
+        String app_phenotype = chr.getValueString("NBP");
         postgres_table = "app_phenotype"; postgres_value = "No postgres value assigned";
 //         System.out.println( "Phenotype Text Remark : "+app_phenotype+" end.");
         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
 //         System.out.println( "Phenotype Text Remark Postgres : "+postgres_value+" end.");
         if (postgres_value.equals(app_phenotype)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_phenotype); }
 //         System.out.println( "Phenotype Text Remark : "+app_phenotype+" end.");
-        String app_remark = chr.getValueString("Other Remark");
+        String app_remark = chr.getValueString("Reference Remark");
         postgres_table = "app_remark"; postgres_value = "No postgres value assigned";
         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
         if (postgres_value.equals(app_remark)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_remark); }
-//         System.out.println( "Other Remark : "+remark+" end.");
+//         System.out.println( "Reference Remark : "+remark+" end.");
         String app_intx_desc = chr.getValueString("Genetic Interaction");
         postgres_table = "app_intx_desc"; postgres_value = "No postgres value assigned";
         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
@@ -129,11 +130,11 @@ public class WormAdapter implements QueryableDataAdapterI {
 //         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
 //         if (postgres_value.equals(app_quality)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_quality); }
 //         System.out.println( "Quality : "+app_quality+" end.");
-        String app_lifestage = chr.getValueString("Stage");
+        String app_lifestage = chr.getValueString("Life Stage");
         postgres_table = "app_lifestage"; postgres_value = "No postgres value assigned";
         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
         if (postgres_value.equals(app_lifestage)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_lifestage); }
-//         System.out.println( "Stage : "+app_lifestage+" end.");
+//         System.out.println( "Life Stage : "+app_lifestage+" end.");
         String app_nature = chr.getValueString("Allele Nature");
         postgres_table = "app_nature"; postgres_value = "No postgres value assigned";
         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
@@ -149,26 +150,31 @@ public class WormAdapter implements QueryableDataAdapterI {
         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
         if (postgres_value.equals(app_temperature)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_temperature); }
 //         System.out.println( "Temperature : "+app_temperature+" end.");
-        String app_preparation = chr.getValueString("Preparation");
+        String app_preparation = chr.getValueString("Treatment");
         postgres_table = "app_preparation"; postgres_value = "No postgres value assigned";
         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
         if (postgres_value.equals(app_preparation)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_preparation); }
-//         System.out.println( "Preparation : "+app_preparation+" end.");
+//         System.out.println( "Treatment : "+app_preparation+" end.");
         String app_penetrance = chr.getValueString("Penetrance");
         postgres_table = "app_penetrance"; postgres_value = "No postgres value assigned";
         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
         if (postgres_value.equals(app_penetrance)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_penetrance); }
 //         System.out.println( "Penetrance : "+app_penetrance+" end.");
-        String app_percent = chr.getValueString("Penetrance Percent");
+        String app_percent = chr.getValueString("Penetrance Remark");
         postgres_table = "app_percent"; postgres_value = "No postgres value assigned";
         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
         if (postgres_value.equals(app_percent)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_percent); }
-//         System.out.println( "Penetrance Percent : "+app_percent+" end.");
-        String app_range = chr.getValueString("Penetrance Range");
+//         System.out.println( "Penetrance Remark : "+app_percent+" end.");
+        String app_range = chr.getValueString("Penetrance Range Start");
         postgres_table = "app_range"; postgres_value = "No postgres value assigned";
         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
         if (postgres_value.equals(app_range)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_range); }
-//         System.out.println( "Penetrance Range : "+app_range+" end.");
+// //         System.out.println( "Penetrance Range  Start: "+app_range+" end.");
+//         String app_range = chr.getValueString("Penetrance Range End");
+//         postgres_table = "app_range"; postgres_value = "No postgres value assigned";
+//         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
+//         if (postgres_value.equals(app_range)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_range); }
+//         System.out.println( "Penetrance Range End : "+app_range+" end.");
         String app_quantity = chr.getValueString("Quantity");
         postgres_table = "app_quantity"; postgres_value = "No postgres value assigned";
         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
@@ -219,11 +225,6 @@ public class WormAdapter implements QueryableDataAdapterI {
         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
         if (postgres_value.equals(app_strain)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_strain); }
 //         System.out.println( "Strain : "+app_strain+" end.");
-        String app_delivered = chr.getValueString("Delivered By");
-        postgres_table = "app_delivered"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
-        if (postgres_value.equals(app_delivered)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_delivered); }
-//         System.out.println( "Delivered By : "+app_delivered+" end.");
         if (allele != null) {
             int found_allele = 0;
             ResultSet rs = null;	// intialize postgres query result
@@ -277,9 +278,10 @@ public class WormAdapter implements QueryableDataAdapterI {
   private void init() {
     // dont HAVE to use CharFieldEnum but it does enforce using same strings
     // across different data adapters which is good to enforce
-    // the worm config needs to have "Pub" and "Allele"
+    // the worm config needs to have "Pub" and "Object Name"
     queryableFields.add(CharFieldEnum.PUB.getName()); // "Pub"
-    queryableFields.add(CharFieldEnum.ALLELE.getName()); // "Allele"
+//    queryableFields.add(CharFieldEnum.ALLELE.getName()); // "Allele"
+    queryableFields.add("Object Name"); // "Object Name"
     // should their be a check that the current char fields have pub & allele?
   }
   /** return true if data adapter can query for the char field */
@@ -341,29 +343,26 @@ public class WormAdapter implements QueryableDataAdapterI {
     try {
       Character c1 = new Character();						// create a new character for a phenote row
       String alleleColumn = joinkey+" - "+colI;
-      c1.setValue("Allele",alleleColumn);					// assign the allele and the column
+      c1.setValue("Object Name",alleleColumn);					// assign the allele and the column
       String postgres_value = "No postgres value assigned";
       String postgres_table = "app_term";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
-      c1.setValue("Phenotype",postgres_value);					// assign the queried value
+//       c1.setValue("Phenotype",postgres_value);					// assign the queried value
       postgres_table = "app_curator"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
       c1.setValue("Curator",postgres_value);					// assign the queried value
       postgres_table = "app_paper"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
-      c1.setValue("Pub",postgres_value);					// assign the queried value
+//       c1.setValue("Pub",postgres_value);					// assign the queried value
       postgres_table = "app_person"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
-      c1.setValue("Person",postgres_value);					// assign the queried value
+//       c1.setValue("Person",postgres_value);					// assign the queried value
       postgres_table = "app_phenotype"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
-      c1.setValue("Phenotype Text Remark",postgres_value);					// assign the queried value
+      c1.setValue("NBP",postgres_value);					// assign the queried value
       postgres_table = "app_remark"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
-      c1.setValue("Other Remark",postgres_value);					// assign the queried value
-      postgres_table = "app_intx_desc"; postgres_value = "No postgres value assigned";
-      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
-      c1.setValue("Genetic Interaction",postgres_value);					// assign the queried value
+      c1.setValue("Reference Remark",postgres_value);					// assign the queried value
       postgres_table = "app_phen_remark"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
       c1.setValue("Phenotype Remark",postgres_value);				// assign the queried value
@@ -373,7 +372,7 @@ public class WormAdapter implements QueryableDataAdapterI {
 //      c1.setValue("Anatomy","WBbt:0004758");			 		// this works, assigning a term ID
       postgres_table = "app_lifestage"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
-      c1.setValue("Stage",postgres_value);					// assign the queried value
+//       c1.setValue("Life Stage",postgres_value);					// assign the queried value
       postgres_table = "app_nature"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
       c1.setValue("Allele Nature",postgres_value);				// assign the queried value
@@ -385,16 +384,19 @@ public class WormAdapter implements QueryableDataAdapterI {
       c1.setValue("Temperature",postgres_value);				// assign the queried value
       postgres_table = "app_preparation"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
-      c1.setValue("Preparation",postgres_value);				// assign the queried value
+      c1.setValue("Treatment",postgres_value);				// assign the queried value
       postgres_table = "app_penetrance"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
       c1.setValue("Penetrance",postgres_value);				// assign the queried value
       postgres_table = "app_percent"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
-      c1.setValue("Penetrance Percent",postgres_value);				// assign the queried value
+      c1.setValue("Penetrance Remark",postgres_value);				// assign the queried value
       postgres_table = "app_range"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
-      c1.setValue("Penetrance Range",postgres_value);				// assign the queried value
+      c1.setValue("Penetrance Range Start",postgres_value);				// assign the queried value
+      postgres_table = "app_quantity"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
+      c1.setValue("Penetrance Range End",postgres_value);				// assign the queried value
       postgres_table = "app_quantity"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
       c1.setValue("Quantity",postgres_value);					// assign the queried value
@@ -425,15 +427,12 @@ public class WormAdapter implements QueryableDataAdapterI {
       postgres_table = "app_strain"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
       c1.setValue("Strain",postgres_value);				// assign the queried value
-      postgres_table = "app_delivered"; postgres_value = "No postgres value assigned";
-      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
-      c1.setValue("Delivered By",postgres_value);				// assign the queried value
       charList.add(c1);								// add the character to the character list
     }
     catch (TermNotFoundException e) {
-      System.out.println("Term Not Found Exception, assigning characters by Allele."); }
+      System.out.println("Term Not Found Exception, assigning characters by Object Name."); }
     catch (CharFieldException e) {
-      System.out.println("Char Field Exception, assigning characters by Allele."); }
+      System.out.println("Char Field Exception, assigning characters "+e.getMessage()); }
     return charList; 
   } // private CharacterListI queryPostgresCharacterList(CharacterList charList, Statement s, String joinkey)
 
@@ -441,7 +440,7 @@ public class WormAdapter implements QueryableDataAdapterI {
 //    String m = "Worm adapter query not yet implemented. field: "+field+" query: "+query;
 //    JOptionPane.showMessageDialog(null,m,"Worm stub",JOptionPane.INFORMATION_MESSAGE);
 
-    String alleleString = "Allele";			// the query could be for Allele or Pub
+    String alleleString = "Object Name";			// the query could be for Allele or Pub
     String pubString = "Pub";
 //    System.out.println("Querying field "+field+" query "+query+" end");
 //    if (field.equals(alleleString)) { System.out.println("Yes Allele"); } else { System.out.println("Not Allele"); }
@@ -501,7 +500,9 @@ public class WormAdapter implements QueryableDataAdapterI {
       int foundPaper = 0;				// flag if there are any papers in postgres that match, otherwise give an error warning
       ResultSet rs = null;				// initialize result of query
       System.out.println("Paper "+query+" end");
-      try { rs = s2.executeQuery("SELECT DISTINCT(joinkey) FROM app_paper WHERE app_paper ~ '"+query+"' ORDER BY joinkey;"); }	// get the alleles from a paper
+      try { rs = s2.executeQuery("SELECT DISTINCT(joinkey) FROM app_paper WHERE app_paper ~ '"+query+"' ORDER BY joinkey;"); 
+System.out.println("SELECT DISTINCT(joinkey) FROM app_paper WHERE app_paper ~ '"+query+"' ORDER BY joinkey;");
+}	// get the alleles from a paper
       catch (SQLException se) {
         System.out.println("We got an exception while executing our app_paper query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
       try { if (rs.next()) { foundPaper++; } }

@@ -222,14 +222,19 @@ abstract class CharFieldGui {
     private RetrieveActionListener(QueryableDataAdapterI q) { qda = q; }
     public void actionPerformed(ActionEvent e) {
       try {
-        CharacterListI cl = qda.query(charField.getName(),getText());
+        String queryValue = getText();
+        if (isTermCompList()) { queryValue = getCurrentOboClass().getID(); }
+        CharacterListI cl = qda.query(charField.getName(),queryValue);
         //if (cl == null) if null shouldve thrown ex - check anyways?
         //notifyNewCharList(cl);
         // check if unsaved data - if so ask user if wants to save/load
         CharacterListManager.inst().setCharacterList(this,cl);
       }
-      catch (DataAdapterEx ex) {
+      catch (CharFieldGuiEx ex) {
           JOptionPane.showMessageDialog(null,ex.getMessage(),"Retrieve Error",
+                                        JOptionPane.ERROR_MESSAGE); }
+      catch (DataAdapterEx ey) {
+          JOptionPane.showMessageDialog(null,ey.getMessage(),"Retrieve Error",
                                         JOptionPane.ERROR_MESSAGE);
 
       }
