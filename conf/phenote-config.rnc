@@ -9,6 +9,7 @@ start =
     queryable-dataadapter*,
     dataadapter*,
     uvic-graph,
+    term-history,
     obo-repository,
     field*
   }
@@ -45,6 +46,8 @@ log =
   }
 
 uvic-graph = element uvic-graph { attribute enable { xsd:boolean } }
+
+term-history = element term-history { attribute enable { xsd:boolean } }
 
 obo-repository = element obo-repository { attribute url-dir {xsd:string} }
 

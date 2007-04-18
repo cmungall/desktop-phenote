@@ -25,11 +25,13 @@ import phenote.config.xml.LogDocument.Log;
 import phenote.config.xml.OboRepositoryDocument.OboRepository;
 import phenote.config.xml.PhenoteConfigurationDocument.PhenoteConfiguration;
 import phenote.config.xml.UvicGraphDocument.UvicGraph;
+import phenote.config.xml.TermHistoryDocument.TermHistory;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.QueryableDataAdapterI;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 import phenote.util.FileUtil;
+
 
 public class Config {
 
@@ -44,6 +46,7 @@ public class Config {
   private List<FieldConfig> allFields = new ArrayList<FieldConfig>();
   private String logConfigFile = "conf/log4j.xml"; // default log config file
   private boolean uvicGraphEnabled = false; // default false for now
+  private boolean termHistoryEnabled = true;   //default to false for now
   private String reposUrlDir;
   private String version;
   private boolean configInitialized = false;
@@ -336,6 +339,8 @@ public class Config {
   /** config flag for enabling uvic shrimp dag graph */ 
   public boolean uvicGraphIsEnabled() { return uvicGraphEnabled; }
 
+  public boolean termHistoryIsEnabled() { return termHistoryEnabled; }
+
   public URL getLogConfigUrl() throws FileNotFoundException {
     return FileUtil.findUrl(logConfigFile);
   }
@@ -483,6 +488,11 @@ public class Config {
       UvicGraph gr = pc.getUvicGraph();
       if (gr != null)
         uvicGraphEnabled = gr.getEnable();
+
+      // TERM HISTORY
+      TermHistory history = pc.getTermHistory();
+      if (history != null)
+        termHistoryEnabled = gr.getEnable();
 
       // Repos url dir
       OboRepository or = pc.getOboRepository();

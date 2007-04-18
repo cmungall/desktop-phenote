@@ -207,9 +207,15 @@ public class Phenote {
     upperPanel.add(termInfo.getComponent(),ugbc);
     
     selectionHistory = new SelectionHistory();
-    ugbc.gridx++;
-    ugbc.weightx = 3;
-    upperPanel.add(selectionHistory.getComponent(),ugbc);
+    if (Config.inst().termHistoryIsEnabled()) {
+	ugbc.gridx++;
+	ugbc.weightx = 3;
+	upperPanel.add(selectionHistory.getComponent(),ugbc);    
+    }
+
+    //    ugbc.gridx++;
+    //ugbc.weightx = 3;
+    //upperPanel.add(selectionHistory.getComponent(),ugbc);
     //++gbc.gridx;  // ??
     //gbc.anchor = GridBagConstraints.NORTHWEST; // ??
     //mainPanel.add(termInfo.getComponent(),gbc);
