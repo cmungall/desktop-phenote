@@ -53,10 +53,42 @@ You can check the xsd to see if it has the element that you added in the rnc if 
 3) generate xmlbeans from xsd. <br>
 3a) You need to download scomp, and jsr-api.jar and xbean.jar jar files from apache xml beans<br>
 see http://xmlbeans.apache.org/ and its download dir http://www.apache.org/dyn/closer.cgi/xmlbeans<br>
-current tgz or zip - and unzip and/or untar it. <br>
-3b) Then run scomp using our phenotcomp &nbsp;scomp -compiler
-/path/to/javac&nbsp; -cp /path/to/jsr173_1.0_api.jar:/path/to/xbean.jar
--out&nbsp;/path/to/phenote/jars/phenoteconfigbeans.jar
-/home/mgibson/p/conf/phenote-config.xsd 
+current tgz or zip - and unzip and/or untar it. The relevant bits are bin/scomp and the jsrwithnumbers.jar and xbean.jar <br>
+make sure to change the permissions on scomp so its executable.<br>
+3b) Before we run scomp we need to set envrionment vars something like so (for unix/linux at least):<br>
+<pre class="code">export XMLBEANS_HOME=/home/me/xmlbeans-2.1.0<br>export PATH=$PATH:$XMLBEANS_HOME/bin<br>export CLASSPATH=$XMLBEANS_HOME/lib/xbean.jar:$XMLBEANS_HOME/lib/jsr173_1.0_api.jar:$CLASSPATH</pre>
+
+3c) Then run scomp using the above jars and the xsd file to create jars/phenote (all on one line):<br>
+<br>
+scomp -out&nbsp;/path/to/phenote/jars/phenoteconfigbeans.jar /home/mgibson/p/conf/phenote-config.xsd<br>
+<br>
+Now you should have a phenoteconfigbeans.jar file. With this jar we can now write java config code.<br>
+<br>
+4) Modify java config files. Go to the file src/java/phenote/config/Config.java.<br>
+<br>
+a) First put in the appropriate import statement from the xmlbean jar, something like<br>
+import phenote.config.xml.UvicGraphDocument.UvicGraph;<br>
+<br>
+b) The simple case is just adding a top level config boolean option - like enabling Uvic graphics - so ill go with that. <br>
+- add a boolean var to Config. <br>
+- modify the &nbsp;parseXmlUrl(URL configUrl) method with something like:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; UvicGraph gr = pc.getUvicGraph();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (gr != null)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; uvicGraphEnabled = gr.getEnable();<br>
+<br>
+- add a public getter method like:<br>
+&nbsp; public boolean uvicGraphIsEnabled() { return uvicGraphEnabled; }<br>
+- you need to deal with config upgrades to make sure youre new param
+gets merged into old configs without wiping out a user previous config
+settings (the default and -u option run by webstart)<br>
+so in this method:<br>
+void mergeNewWithOld(URL newConfig,File oldDotConfFile)<br>
+where you need to add something like<br>
+&nbsp; oldCfg.uvicGraphEnabled = newCfg.uvicGraphEnabled; <br>
+notice this just wipes out the new with the old - you may actually want
+to ask the user if they want this to happen (with a popup box or
+something)<br>
+<br>
+ 
 </body>
 </html>
