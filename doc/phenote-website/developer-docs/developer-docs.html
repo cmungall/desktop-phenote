@@ -36,18 +36,27 @@ Phenote configuration is done with a xml file, that xml file is read
 classes from an xsd file. <br>
 <br>
 1) Add your new config item to the config/phenote-config.rnc file. An
-rnc file is (i think) a handier way of specifying xml schemas<br>
+rnc file is (i think) a handier way of specifying xml schemas. The best
+thing to do there is to look how other elements are configured and just
+copy &amp; tweek.<br>
 <br>
 2) trang the rnc file into an xsd file. <br>
 2a) To do this you first need to download the trang jar file see:
 http://www.thaiopensource.com/relaxng/trang.html and its download dir
-http://www.thaiopensource.com/download/<br>
-2b) run trang with rnc as input and xsd as output like so:<br>
+http://www.thaiopensource.com/download/ where you can download a zip
+file like <a href="http://www.thaiopensource.com/download/trang-20030619.zip">trang-20030619.zip<span style="text-decoration: underline;"> </span></a><br>
+and unzip which should give you the jar - and put that jar whereever you like.<br>
+<span style="font-family: monospace;"></span>2b) cd to conf directory and run trang with rnc as input and xsd as output like so and this will recreate the xsd:<br>
 java -jar /path/to/trang/trang.jar phenote-config.rnc phenote-config.xsd<br>
+You can check the xsd to see if it has the element that you added in the rnc if you like.<br>
 <br>
 3) generate xmlbeans from xsd. <br>
-3a) You need to download scomp from apache xml beans<br>
+3a) You need to download scomp, and jsr-api.jar and xbean.jar jar files from apache xml beans<br>
 see http://xmlbeans.apache.org/ and its download dir http://www.apache.org/dyn/closer.cgi/xmlbeans<br>
-3b)  
+current tgz or zip - and unzip and/or untar it. <br>
+3b) Then run scomp using our phenotcomp &nbsp;scomp -compiler
+/path/to/javac&nbsp; -cp /path/to/jsr173_1.0_api.jar:/path/to/xbean.jar
+-out&nbsp;/path/to/phenote/jars/phenoteconfigbeans.jar
+/home/mgibson/p/conf/phenote-config.xsd 
 </body>
 </html>
