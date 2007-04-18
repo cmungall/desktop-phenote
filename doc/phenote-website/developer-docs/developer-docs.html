@@ -1,12 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
+
+  
   <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+  
   <title>Developer docs</title>
 </head>
+
+
 <body>
+
 <h3><span style="text-decoration: underline;">Editing the model</span></h3>
+
 So a phenote.edit.CharChangeEvent has a phenote.edit.TransactionI. <br>
+
 so when a gui component like CharFieldGui wants to edit the model&nbsp;
 it calls a method on the EditManager. For instance, for updating
 multiple fields at once CharFieldGui makes a bunch of
@@ -18,6 +27,25 @@ make a CharChangeEvent with the transaction and sends out the
 CharChangeEvent out to CharChangeListeners notifying them that the
 model has been changed, and adds the transaction to its list of
 transactions (for undo).<br>
-A phenote.edit.TransactionI knows how to edit and undo its edit to the datamodel. 
+
+A phenote.edit.TransactionI knows how to edit and undo its edit to the datamodel.<br>
+<br>
+<h3><span style="text-decoration: underline;">Adding new configuration params</span></h3>
+Phenote configuration is done with a xml file, that xml file is read
+&amp; written with apaches xml beans. Xml beans code generates java
+classes from an xsd file. <br>
+<br>
+1) Add your new config item to the config/phenote-config.rnc file. An
+rnc file is (i think) a handier way of specifying xml schemas<br>
+<br>
+2) trang the rnc file into an xsd file. <br>
+2a) To do this you first need to download the trang jar file see:
+http://www.thaiopensource.com/relaxng/trang.html and its download dir
+http://www.thaiopensource.com/download/<br>
+2b) run trang with rnc as input and xsd as output like so:<br>
+java -jar /path/to/trang/trang.jar phenote-config.rnc phenote-config.xsd<br>
+<br>
+3) generate xmlbeans from xsd. <br>
+3a) You need to download scomp from apache xml beans 
 </body>
 </html>
