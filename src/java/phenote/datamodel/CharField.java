@@ -89,18 +89,16 @@ public class CharField {
   }
 
   public boolean hasOntology(String ontologyName) {
-    try { getOntologyForName(ontologyName); }
-    catch (OntologyException e) { return false; }
-    return true; // ?
+    return getOntologyForName(ontologyName) != null; 
   }
 
   /** Returns Ontology with name ontologyName (ignores case), ont ex if dont have it */
-  public Ontology getOntologyForName(String ontologyName) throws OntologyException {
+  public Ontology getOntologyForName(String ontologyName){
     for (Ontology o : getOntologyList()) {
       if (o.getName().equalsIgnoreCase(ontologyName))
         return o;
     }
-    throw new OntologyException(ontologyName+" not found for field "+getName());
+    return null;
   }
 
   // set whether post composition allowed (from config) */

@@ -1,16 +1,14 @@
 package phenote.datamodel;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.apache.log4j.Logger;
-
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOProperty;
 import org.geneontology.oboedit.datamodel.impl.OBOPropertyImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 //import phenote.datamodel.CharFieldEnum;
 //import phenote.datamodel.OboUtil;
@@ -66,16 +64,12 @@ public class OntologyManager {
   }
 
   /** Returns ontology with name, null if not found */
-  public Ontology getOntologyForName(String ontologyName)
-    throws OntologyException { // static?
+  public Ontology getOntologyForName(String ontologyName) { // static?
     for (CharField cf : inst().getCharFieldList()) {
       if (cf.hasOntology(ontologyName))
         return cf.getOntologyForName(ontologyName);
     }
-    String m = "no ontology found for name "+ontologyName;
-    log().error(m);
-    throw new OntologyException(m);
-    //return null;
+    return null;
   }
 
   /** Searches all ontologies for id - this could be even more savvy and utilize

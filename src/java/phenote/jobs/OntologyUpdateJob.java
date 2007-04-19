@@ -4,11 +4,9 @@ import org.apache.log4j.Logger;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
-import phenote.util.FileUtil;
+import phenote.dataadapter.OntologyDataAdapter;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyManager;
-import phenote.dataadapter.OntologyDataAdapter;
-import phenote.servlet.PhenoteWebConfiguration;
 
 import java.io.File;
 import java.util.Date;
@@ -31,8 +29,23 @@ public class OntologyUpdateJob extends QuartzJobBean {
   protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
     LOG.info("Started Ontology Update Job: " + ontologyName);
 
+
+    Ontology ontology = OntologyManager.inst().getOntologyForName(ontologyName);
+    if (ontology == null) {
+      // In case no ontology has ever been loaded.
+      // we assume we run in lazy initialization mode
+      // and need to initialize first.
+      OntologyDataAdapter.initialize();
+      ontology = OntologyManager.inst().getOntologyForName(ontologyName);
+      // Check if ontology by this name is found
+      if (ontology == null)
+        LOG.warn("No Ontology with name :" + ontologyName + " found!");
+      // we can return here in either case: If ontology was found it read the latest version
+      // if it could not be found no more action needed.
+      return;
+    }
+
     try {
-      Ontology ontology = OntologyManager.inst().getOntologyForName(ontologyName);
       File newFile = newOntologyFile(ontology);
       if (newFile != null) {
         OntologyDataAdapter ontReader = OntologyDataAdapter.getInstance();

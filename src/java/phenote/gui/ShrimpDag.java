@@ -1,33 +1,28 @@
 package phenote.gui;
 
 
-import java.awt.Component;
-import javax.swing.JFrame;
-
-import org.geneontology.oboedit.datamodel.OBOSession;
-
-//import ca.uvic.csr.shrimp.gui.QueryView.QueryView;
 import ca.uvic.csr.shrimp.gui.QueryView.OBOViewer;
 import ca.uvic.csr.shrimp.gui.QueryView.QueryView;
-
+import org.geneontology.oboedit.datamodel.OBOSession;
+import phenote.datamodel.Ontology;
+import phenote.datamodel.OntologyManager;
 import phenote.gui.selection.SelectionManager;
 import phenote.gui.selection.TermSelectionEvent;
 import phenote.gui.selection.TermSelectionListener;
 
-import phenote.datamodel.Ontology;
-import phenote.datamodel.OntologyManager;
+import javax.swing.*;
 
 class ShrimpDag {
 
   //private JFrame window;
   private OBOViewer oboViewer;
   private static ShrimpDag singleton;
-	
+
   public static ShrimpDag inst() {
     if (singleton == null) singleton = new ShrimpDag();
     return singleton;
   }
-  
+
   private ShrimpDag() {
     //window = new JFrame("Shrimp ontology viewer");
     //window.pack();
@@ -36,22 +31,25 @@ class ShrimpDag {
   }
 
   //public void display() {}
-  
-  /** send obo sessions to shrimp so it can set them up in its datamodel*/
+
+  /**
+   * send obo sessions to shrimp so it can set them up in its datamodel
+   */
   public void initOntologies() {
     // do this in a separate thread! no need to hold up phenote with this
     for (Ontology o : OntologyManager.inst().getAllOntologies()) {
       // oboViewer.loadOboSession(o.getOboSession());
     }
   }
-  
+
   private void init() {
     //initShrimp();
     SelectionManager.inst().addTermSelectionListener(new ShrimpSelectionListener());
     //initOntologies();
   }
+
   public void display() {
-	    
+
     //queryView = new QueryView(); false - show query view?
     boolean showQueryPanel = true;
     oboViewer = new OBOViewer(showQueryPanel);
@@ -65,28 +63,26 @@ class ShrimpDag {
     frame.setSize(600, 600);
     frame.setLocation(400, 200);
     frame.setVisible(true);
-    
-  }
-  
-  private OBOSession getOboSession() {
-	// just hard wire to go for now
-    try {
-      //Ontology o = OntologyManager.inst().getOntologyForName("ZF");
-      // fly causes an endless loop - oh my
-      Ontology o = OntologyManager.inst().getOntologyForName("Fly");
-      //Ontology o = OntologyManager.inst().getOntologyForName("Human Anatomy");
 
-      return o.getOboSession();
-    } catch (phenote.datamodel.OntologyException e) {
+  }
+
+  private OBOSession getOboSession() {
+    // just hard wire to go for now
+    //Ontology o = OntologyManager.inst().getOntologyForName("ZF");
+    // fly causes an endless loop - oh my
+    Ontology o = OntologyManager.inst().getOntologyForName("Fly");
+    //Ontology o = OntologyManager.inst().getOntologyForName("Human Anatomy");
+    if (o == null) {
       System.out.println("no ontol for dag");
       return null;
     }
+    return o.getOboSession();
   }
-  
+
   private QueryView getQueryView() {
     return oboViewer.getQueryView();
   }
-  
+
   private class ShrimpSelectionListener implements TermSelectionListener {
 
     public boolean termSelected(TermSelectionEvent e) {
@@ -94,10 +90,10 @@ class ShrimpDag {
       String term = e.getOboClass().getName();
       boolean animate = true;
       //getQueryView().query(term, animate);
-      oboViewer.query(getOboSession(),e.getOboClass(),animate);
+      oboViewer.query(getOboSession(), e.getOboClass(), animate);
       return true;
     }
-    
+
   }
 
 }

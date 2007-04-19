@@ -1,27 +1,22 @@
 package phenote.servlet;
 
 import org.apache.log4j.Logger;
+import org.geneontology.oboedit.datamodel.OBOClass;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractCommandController;
-import org.geneontology.oboedit.datamodel.OBOClass;
+import phenote.dataadapter.OntologyDataAdapter;
+import phenote.datamodel.Ontology;
+import phenote.datamodel.OntologyException;
+import phenote.datamodel.OntologyManager;
+import phenote.gui.SearchFilterType;
+import phenote.gui.SearchParams;
+import phenote.gui.field.CompListSearcher;
+import phenote.gui.field.CompletionTerm;
+import phenote.util.HtmlUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import phenote.gui.field.CompletionTerm;
-import phenote.gui.field.CompListSearcher;
-//import phenote.gui.field.SearchParamsI;
-import phenote.gui.SearchParamsI;
-import phenote.gui.SearchParams;
-
-import phenote.datamodel.OntologyException;
-import phenote.datamodel.Ontology;
-import phenote.datamodel.OntologyManager;
-import phenote.util.HtmlUtil;
-import phenote.dataadapter.OntologyDataAdapter;
-
-import java.util.Vector;
 import java.util.List;
 
 /**
@@ -102,9 +97,6 @@ public class PhenoteController extends AbstractCommandController {
    * field is the gui field user is querying (which may have multiple ontols)
    * if ontologyy not found actually returns error string saying as much - why not
    *
-   * @param userInput
-   * @param ontologyName
-   * @param field
    */
 //   @SuppressWarnings("unused")
 // private String  {
@@ -141,7 +133,10 @@ public class PhenoteController extends AbstractCommandController {
   private CompListSearcher getCompListSearcher(String ontologyName) throws OntologyException {
 	// This is currently rigged for 1 ontology, eventually may want to search all ontologies
 	// in a field as standalone does - with ALL option
-    return new CompListSearcher(getOntology(ontologyName), SearchParams.inst());
+    SearchParams searchParams = SearchParams.inst();
+    searchParams.setParam(SearchFilterType.TERM, true);
+    searchParams.setParam(SearchFilterType.SYN, true);
+    return new CompListSearcher(getOntology(ontologyName), searchParams);
   }
 
   /**

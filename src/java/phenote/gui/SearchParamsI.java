@@ -4,7 +4,7 @@ package phenote.gui;
 
 public interface SearchParamsI {
 
-  public void setParam(String filter, boolean setting);
+  public void setParam(SearchFilterType filter, boolean setting);
   public boolean searchTerms();
   public boolean searchSynonyms();
   public boolean searchDefinitions();
@@ -12,7 +12,7 @@ public interface SearchParamsI {
       This should be in conjunction with the other 3 */
   public boolean searchObsoletes();
   public boolean verifySettings();
-  public boolean getParam(String filter);
+  public boolean getParam(SearchFilterType filter);
 
 
 
