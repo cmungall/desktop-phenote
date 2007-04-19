@@ -36,6 +36,9 @@ import phenote.gui.selection.CharSelectionListener;
 import phenote.gui.selection.CharSelectionEvent;
 import phenote.gui.selection.SelectionManager;
 
+import phenote.gui.SearchParams;
+import phenote.gui.SearchParamsI;
+
 /** fields can either be text fields for free text or combo boxes if have 
     ontology to browse - CharFieldGui does either - with get/setText - hides the
     details of the gui - just a field that gives text 

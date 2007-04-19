@@ -5,6 +5,9 @@ import java.util.Set;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
 
+import phenote.gui.SearchParamsI;
+//import phenote.gui.SearchParams;
+
 /** This is basically a view object for the auto completer for terms/OBOClass */
 
 public class CompletionTerm {

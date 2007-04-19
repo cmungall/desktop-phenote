@@ -32,7 +32,8 @@ import phenote.datamodel.CharacterI;
 //import phenote.datamodel.CharFieldEnum;
 //import phenote.datamodel.CharacterI;
 //import phenote.datamodel.Ontology;
-
+import phenote.gui.SearchParams;
+import phenote.gui.SearchParamsI;
 /** The jcombobox that does auto completion - i had to do some tricks(hacks) to get it
     working with mouse over which doesnt come naturally to jcombobox */
 
@@ -63,7 +64,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui { //extends JCom
   /** if false then model is not edited */
   //private boolean editModel = true;
   //private CompletionListListener compListListener = new CompletionListListener();
-  private SearchParamsI searchParams;
+  private SearchParamsI searchParams = SearchParams.inst();
   private CompListSearcher compListSearcher;
   private boolean setGuiForMultiSelect = false;
 

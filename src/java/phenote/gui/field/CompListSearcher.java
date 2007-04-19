@@ -11,6 +11,8 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOProperty;
 
 import phenote.datamodel.Ontology;
+import phenote.gui.SearchParams;
+import phenote.gui.SearchParamsI;
 
 
 /** An aid to completion lists. Searches ontology with user input and search params
@@ -24,21 +26,21 @@ public class CompListSearcher {
   //private Ontology ontology;
   //private boolean searchAll=false;
   private List<Ontology> ontologyList = new ArrayList<Ontology>(3);
-  private SearchParamsI searchParams;
+  private SearchParamsI searchParams = SearchParams.inst();
 
   /** Ontology - the initial ontology to search, setOntology changes this,
       initially only searches the one ontology (not ALL) - used by servlet which
       currently doesnt do ALL */
   public CompListSearcher(Ontology o,SearchParamsI sp) {
     setOntology(o);
-    searchParams = sp;
+//    searchParams = sp;
   }
 
   /** l - initial list of ontologies to search, as in ALL. used by CharFieldGui
       to set list to all ontols in field as initial setting is ALL - is this funny? */
   public CompListSearcher(List<Ontology> l,SearchParamsI sp) {
     setOntologies(l);
-    searchParams = sp;
+//    searchParams = sp;
   }
 
   //void setSearchAll(boolean s) { searchAll = s; }

@@ -1,3 +1,5 @@
+
+
 package phenote.gui;
 
 import java.awt.event.ActionEvent;
@@ -26,21 +28,43 @@ class FileMenu extends JMenu {
   private void init() {
     LoadSaveActionListener actionListener = new LoadSaveActionListener();
 
-    loadMenuItem = new JMenuItem("Load Data");
+    JMenuItem newData = new JMenuItem("New");
+    newData.setEnabled(Config.inst().hasDataAdapters());
+    newData.setActionCommand("new");
+    newData.addActionListener(actionListener);
+    add(newData);
+    
+    loadMenuItem = new JMenuItem("Open...");
     loadMenuItem.setEnabled(Config.inst().hasDataAdapters());
     loadMenuItem.setActionCommand("load");
     loadMenuItem.addActionListener(actionListener);
     add(loadMenuItem);
 
-    JMenuItem save = new JMenuItem("Save Data");
+    JMenuItem save = new JMenuItem("Save As...");
     save.setEnabled(Config.inst().hasDataAdapters());
     save.setActionCommand("save");
+    save.setMnemonic('s');
     save.addActionListener(actionListener);
     add(save);
 
-    JMenuItem loadConfig = new JMenuItem("Load Configuration");
-    loadConfig.addActionListener(new ConfigActionListener());
-    add(loadConfig);
+//    JMenuItem export = new JMenuItem("Export...");
+//    export.setEnabled(Config.inst().hasDataAdapters());
+//    export.setActionCommand("export");
+//    export.addActionListener(actionListener);
+//    add(export);
+
+//    JMenuItem loadConfig = new JMenuItem("Load Configuration");
+//    loadConfig.addActionListener(new ConfigActionListener());
+//    add(loadConfig);
+    
+    addSeparator();
+    
+    JMenuItem exit = new JMenuItem("Exit");
+    exit.setEnabled(Config.inst().hasDataAdapters());
+    exit.setActionCommand("exit");
+    exit.addActionListener(new ExitActionListener());
+    add(exit);
+
   }
 
   private class LoadSaveActionListener implements ActionListener {
@@ -49,11 +73,15 @@ class FileMenu extends JMenu {
         System.out.println("no file data adapter to load/save with");
         return;
       }
-      if (e.getActionCommand().equals("load"))
-        LoadSaveManager.inst().loadData();
-
-      else if (e.getActionCommand().equals("save"))
-        LoadSaveManager.inst().saveData();
+      if (e.getActionCommand().equals("new")) {
+    	  LoadSaveManager.inst().saveData();  //will need to make sure to save first!
+    	  LoadSaveManager.inst().newData();
+      } else if (e.getActionCommand().equals("load"))
+    	  LoadSaveManager.inst().loadData();
+      	else if (e.getActionCommand().equals("save"))
+      	  LoadSaveManager.inst().saveData();
+      	else if (e.getActionCommand().equals("export"))
+    	  LoadSaveManager.inst().exportData();
     }
   }
 
@@ -78,6 +106,18 @@ class FileMenu extends JMenu {
       }
     }
   }
+  
+  private class ExitActionListener implements ActionListener {
+	    public void actionPerformed(ActionEvent e) {
+	    	if (e.getActionCommand().equals("exit")) {
+	    	  String m = "Are you sure you want to quit?";
+	    	  JOptionPane.showMessageDialog(null, m, "Phenote Exit",
+	    			  JOptionPane.INFORMATION_MESSAGE);
+    		  System.exit(0);
+	    	}
+	    }
+  }	
+
 
   // for testing
   public void clickLoad() {

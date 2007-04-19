@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import phenote.gui.field.CompletionTerm;
 import phenote.gui.field.CompListSearcher;
-import phenote.gui.field.SearchParamsI;
+//import phenote.gui.field.SearchParamsI;
+import phenote.gui.SearchParamsI;
+import phenote.gui.SearchParams;
+
 import phenote.datamodel.OntologyException;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyManager;
@@ -138,7 +141,7 @@ public class PhenoteController extends AbstractCommandController {
   private CompListSearcher getCompListSearcher(String ontologyName) throws OntologyException {
 	// This is currently rigged for 1 ontology, eventually may want to search all ontologies
 	// in a field as standalone does - with ALL option
-    return new CompListSearcher(getOntology(ontologyName), getSearchParams());
+    return new CompListSearcher(getOntology(ontologyName), SearchParams.inst());
   }
 
   /**
@@ -155,9 +158,9 @@ public class PhenoteController extends AbstractCommandController {
   /**
    * for now search params hard wired - eventually from buttons on web page
    */
-  private SearchParamsI getSearchParams() {
-    return new HardWiredSearchParams();
-  }
+//  private SearchParamsI getSearchParams() {
+//    return new HardWiredSearchParams();
+//  }
 
   private static StringBuffer dq(StringBuffer sb) {
     return new StringBuffer("\"" + sb + "\"");
@@ -167,27 +170,27 @@ public class PhenoteController extends AbstractCommandController {
     return HtmlUtil.fn(fnName, params);
   }
 
-  private class HardWiredSearchParams implements SearchParamsI {
-    public boolean searchTerms() {
-      return true;
-    }
-
-    public boolean searchSynonyms() {
-      return true; // --> true
-    }
-
-    public boolean searchDefinitions() {
-      return false; // ?? w [def]?? zfin not keen on defs
-    }
-
-    /**
-     * Whether to include obsoletes in searching terms, syns, & definitions
-     * This should be in conjunction with the other 3
-     */
-    public boolean searchObsoletes() {
-      return true; // --> true w [obs], disallow selection
-    }
-  }
+//  private class HardWiredSearchParams implements SearchParamsI {
+//    public boolean searchTerms() {
+//      return true;
+//    }
+//
+//    public boolean searchSynonyms() {
+//      return true; // --> true
+//    }
+//
+//    public boolean searchDefinitions() {
+//      return false; // ?? w [def]?? zfin not keen on defs
+//    }
+//
+//    /**
+//     * Whether to include obsoletes in searching terms, syns, & definitions
+//     * This should be in conjunction with the other 3
+//     */
+//    public boolean searchObsoletes() {
+//      return true; // --> true w [obs], disallow selection
+//    }
+//  }
 
 }
 

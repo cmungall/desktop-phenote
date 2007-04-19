@@ -1,6 +1,9 @@
 package phenote.config;
 
 import phenote.config.xml.DataadapterDocument.Dataadapter;
+//should this be:
+//import phenote.dataadapter.*;
+//so that programmers don't have to modify this file?
 
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.fly.FlybaseDataAdapter;

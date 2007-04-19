@@ -50,14 +50,14 @@ public class TermInfo {
   // current obo class being navigated
   private OBOClass currentOboClass;
   private UseTermListener useTermListener;
-
+  private JPanel termInfoPanel;
   
   public TermInfo() { //TermPanel termPanel) {
     SelectionManager.inst().addTermSelectionListener(new InfoTermSelectionListener());
   }
 
   public JComponent getComponent() {
-    JPanel termInfoPanel = new JPanel(new BorderLayout(0,0)); // hgap,vgap
+    termInfoPanel = new JPanel(new BorderLayout(0,0)); // hgap,vgap
     termInfoPanel.setPreferredSize(new Dimension(400,100));
     //termInfoPanel.setMinimumSize(new Dimension(380,100));
     //termInfoPanel.setMaximumSize(new Dimension(380,400));
@@ -89,6 +89,15 @@ public class TermInfo {
 
     return termInfoPanel;
   }
+  
+//  public void resizeTermInfoPanel() {
+//	  //for now, these are absolute dimensions.  in future, modify this
+//	  //to accomodate any variable dimensions.
+//	    termInfoPanel.setPreferredSize(new Dimension(400,100));
+//	    termInfoPanel.revalidate();
+//	    termInfoPanel.repaint();
+//	  
+//  }
 
   /** Fires use term event to use term listener with currently browsed term when
       useTermButton is pressed */

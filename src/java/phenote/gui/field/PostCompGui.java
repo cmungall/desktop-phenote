@@ -38,6 +38,9 @@ import phenote.gui.selection.CharSelectionEvent;
 import phenote.gui.selection.CharSelectionListener;
 import phenote.gui.selection.SelectionManager;
 
+import phenote.gui.SearchParams;
+import phenote.gui.SearchParamsI;
+
 /** A window for post composition and other wacky stuff that goes beyond the basic
     stuff in field (eg relational quality?) 
     may want to be able to give up frame to put inline as well as window? 

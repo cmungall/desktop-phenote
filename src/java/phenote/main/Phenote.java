@@ -206,12 +206,11 @@ public class Phenote {
     ugbc.weightx = 5;
     upperPanel.add(termInfo.getComponent(),ugbc);
     
-    selectionHistory = new SelectionHistory();
-    if (Config.inst().termHistoryIsEnabled()) {
-	ugbc.gridx++;
-	ugbc.weightx = 3;
-	upperPanel.add(selectionHistory.getComponent(),ugbc);    
-    }
+    selectionHistory = SelectionHistory.inst();
+
+    ugbc.gridx++;
+    ugbc.weightx = 3;
+    upperPanel.add(selectionHistory.getComponent(),ugbc);    
 
     //    ugbc.gridx++;
     //ugbc.weightx = 3;

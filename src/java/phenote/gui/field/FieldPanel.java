@@ -22,6 +22,9 @@ import phenote.datamodel.CharacterI;
 import phenote.datamodel.OntologyManager;
 import phenote.gui.GridBagUtil;
 
+import phenote.gui.SearchParamsI;
+import phenote.gui.SearchParams;
+
 /**
  * FieldPanel holds all the fields for the terms - Genotype, Entity/Anatomy, QUALITY.
  * Can be populated by hand (Genotype), or  selection of instance in completion list. 
@@ -42,7 +45,7 @@ public class FieldPanel extends JPanel {
   private static int fieldsPerTab = 12;
 
   public FieldPanel() {
-    this(true,true);
+    this(true,false);
   }
   // false for post comp panel - boolean isPostComp?
   public FieldPanel(boolean doAllFields,boolean addSearchPanel) {
@@ -118,9 +121,10 @@ public class FieldPanel extends JPanel {
   }
 
   SearchParamsI getSearchParams() {
-    if (searchParams == null)
-      searchParams = getSearchParamPanel().getSearchParams();
-    return searchParams;
+////    if (searchParams == null)
+////      searchParams = getSearchParamPanel().getSearchParams();
+//    return searchParams;
+	  return SearchParams.inst();
   }
 
   void setSearchParams(SearchParamsI sp) { searchParams = sp; }

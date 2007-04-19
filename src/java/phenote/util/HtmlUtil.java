@@ -70,6 +70,7 @@ public class HtmlUtil {
     }
     StringBuffer sb = new StringBuffer();
     sb.append("<table>");
+    sb.append(makeRow(makeLeftCol(bold("ONTOLOGY"))+makeRightCol(oboClass.getNamespace().toString())));
     if (oboClass.isObsolete()) {
 	sb.append(makeRow(makeLeftCol(bold("TERM"))+makeRightCol(bold(oboClass.getName())+colorFont(bold("   (OBSOLETE)"), "red"))));
     }
@@ -94,12 +95,13 @@ public class HtmlUtil {
     if ((definition != null) && !(definition.equals(""))) {
 	sb.append(makeRow(makeLeftCol(bold("Definition"))+makeRightCol(definition)));
     }
+    sb.append(makeRow("<tr><td colspan=2 align=center valign=top><font size=-1><hr></font></td></tr>"));
 
-    sb.append(makeRow(makeLeftCol("")+makeRightCol("")));
-    sb.append(makeRow(makeLeftCol(bold("Parents"))+makeRightCol("<hr>")));
+//    sb.append(makeRow(makeLeftCol("")+makeRightCol("")));
+//    sb.append(makeRow(makeLeftCol(bold("Parents"))+makeRightCol("<hr>")));
     sb.append(getParentalString(oboClass));
     sb.append(makeRow(""));
-    sb.append(makeRow(makeLeftCol(bold("Children"))+makeRightCol("<hr>")));
+//    sb.append(makeRow(makeLeftCol(bold("Children"))+makeRightCol("<hr>")));
     sb.append(getChildrenString(oboClass));
     sb.append("</table>");
     return sb.toString();
@@ -185,10 +187,14 @@ public class HtmlUtil {
     StringBuffer haspartStringBuf = new StringBuffer();
     StringBuffer devFromStringBuf = new StringBuffer();
     StringBuffer otherStringBuf = new StringBuffer();
+    StringBuffer startStageStringBuf = new StringBuffer();
+    StringBuffer endStageStringBuf = new StringBuffer();
     int countIsa=0;
     int countPartof=0;
     int countHaspart=0;
     int countDevfrom=0;
+    int countStartStage=0;
+    int countEndStage=0;    
     int countOther=0;
    //i would like to clean this up to be able to group all relationships together, despite
     //the fact that they could be non-standard, like in SO.  might need two for-loops.  
@@ -215,20 +221,35 @@ public class HtmlUtil {
 	    countDevfrom++;
 	    appendLink(devFromStringBuf,isChild,link);
 	}
-      else { //catch all other relationships
+//	else if (type.getName().equals("start stage") || type.getName().equals("start_stage")) {
+//	    countStartStage++;
+//	    appendLink(startStageStringBuf,isChild,link);
+//
+//	}
+//	else if (type.getName().equals("end stage") || type.getName().equals("end_stage")) {
+//	    countEndStage++;
+//	    appendLink(endStageStringBuf,isChild,link);
+//	}
+	else { //catch all other relationships
 	  countOther++;
 	  otherStringBuf.append("<tr>");
-	  otherStringBuf.append(makeLeftCol(italic(capitalize(type.getName())))+"<td>");
+	  otherStringBuf.append(makeLeftCol(bold(italic(capitalize(type.getName()))))+"<td>");
 	  appendLink(otherStringBuf,isChild,link);
 	  otherStringBuf.append("</td></tr>");
       }
     }
     if (countIsa>0) 
-	sb.append(makeRow(makeLeftCol(italic( isChild ? "Subclass (is_a)" : "Superclass (is_a)"))+makeRightCol(isaStringBuf.toString())));
+	  sb.append(makeRow(makeLeftCol(bold(italic( 
+			  isChild ? "Subclass (is_a)" : "Superclass (is_a)"))) + 
+			  makeRightCol(isaStringBuf.toString())));
     if (countPartof>0)
-	sb.append(makeRow(makeLeftCol(italic( isChild ? "Has part" : "Part of"))+makeRightCol(partofStringBuf.toString())));
+	  sb.append(makeRow(makeLeftCol(bold(italic( 
+			  isChild ? "Has part" : "Part of"))) + 
+			  makeRightCol(partofStringBuf.toString())));
     if (countDevfrom>0)
-	sb.append(makeRow(makeLeftCol(italic( isChild ? "Develops into" : "Develops from"))+makeRightCol(devFromStringBuf.toString())));
+	  sb.append(makeRow(makeLeftCol(bold(italic( 
+			  isChild ? "Develops into" : "Develops from"))) +
+			  makeRightCol(devFromStringBuf.toString())));   	
     if (countOther>0)
 	sb.append(makeRow(makeLeftCol(otherStringBuf.toString())));
     return sb;

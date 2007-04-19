@@ -9,7 +9,9 @@ import javax.swing.filechooser.FileFilter;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.CharacterListI;
+import phenote.datamodel.CharacterList;
 import phenote.config.Config;
+import phenote.edit.EditManager;
 
 
 public class LoadSaveManager {
@@ -32,6 +34,13 @@ public class LoadSaveManager {
       singleton = new LoadSaveManager();
     return singleton;
   }
+  
+  public void newData() {	
+//	CharacterListI charList = new CharacterList();
+//	CharacterListManager.inst().setCharacterList(this,charList);
+	System.out.println("NEW!");
+  }
+
   
   /**Loads a new document of characters, prompting the user to choose a file and possibly a data adapter.*/
   public void loadData() {
@@ -86,6 +95,11 @@ public class LoadSaveManager {
     CharacterListI charList = CharacterListManager.inst().getCharacterList();
     adapter.commit(charList, f);
   }
+  
+  public void exportData() {
+	  saveData();
+  }
+
   
   private File runOpenDialog() {
     fileChooser.setAcceptAllFileFilterUsed(true);

@@ -26,6 +26,8 @@ import phenote.edit.CompoundTransaction;
 import phenote.gui.selection.SelectionManager;
 import phenote.gui.selection.UseTermEvent;
 import phenote.gui.selection.UseTermListener;
+import phenote.gui.SearchParams;
+import phenote.gui.SearchParamsI;
 
 class TermCompList extends AbstractAutoCompList {
 
@@ -344,7 +346,8 @@ class TermCompList extends AbstractAutoCompList {
    inframe case - now window) */
   private class PostCompListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
-      new PostCompGui(getCharField(),getSearchParams());
+      new PostCompGui(getCharField(),SearchParams.inst());
+//      new PostCompGui(getCharField(),getSearchParams());
     }
   }
   

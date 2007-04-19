@@ -274,6 +274,7 @@ public class Config {
     // but it is a version change so check if diff? maybe? not sure hmmm
     // but i do think ok to update uvic - version change may go from false to true
     oldCfg.uvicGraphEnabled = newCfg.uvicGraphEnabled; // hmmmm?
+    oldCfg.termHistoryEnabled = newCfg.termHistoryEnabled;
     oldCfg.reposUrlDir = newCfg.reposUrlDir; // ??
     for (FieldConfig newFC : newCfg.getFieldConfigList())
       newFC.mergeWithOldConfig(oldCfg);
@@ -339,8 +340,14 @@ public class Config {
   /** config flag for enabling uvic shrimp dag graph */ 
   public boolean uvicGraphIsEnabled() { return uvicGraphEnabled; }
 
-  public boolean termHistoryIsEnabled() { return termHistoryEnabled; }
+  public boolean termHistoryIsEnabled() { 
+	  return termHistoryEnabled; }
 
+  public void setTermHistory(boolean setter) { 
+	  termHistoryEnabled = setter;
+	  return; }
+
+  
   public URL getLogConfigUrl() throws FileNotFoundException {
     return FileUtil.findUrl(logConfigFile);
   }
@@ -492,7 +499,7 @@ public class Config {
       // TERM HISTORY
       TermHistory history = pc.getTermHistory();
       if (history != null)
-        termHistoryEnabled = gr.getEnable();
+        termHistoryEnabled = history.getEnable();
 
       // Repos url dir
       OboRepository or = pc.getOboRepository();

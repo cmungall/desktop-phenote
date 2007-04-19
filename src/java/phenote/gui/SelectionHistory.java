@@ -46,20 +46,34 @@ import phenote.gui.selection.TermSelectionEvent;
 import phenote.gui.selection.TermSelectionListener;
 import phenote.gui.selection.UseTermEvent;
 import phenote.gui.selection.UseTermListener;
+import phenote.config.Config;
 
 public class SelectionHistory {
 
   //private JEditorPane textArea;
   private JTextComponent textArea;
+  private JPanel termHistoryPanel;
   private static final boolean DO_HTML = HtmlUtil.DO_HTML;
   private TermHyperlinkListener termHyperlinkListener;
   // current obo class being navigated
   private OBOClass currentOboClass;
   private TermInfo termInfo;
+  public boolean isInitialized = false;
 
-  public SelectionHistory() { //TermPanel termPanel) {
+  private SelectionHistory() { //TermPanel termPanel) {
 	    EditManager.inst().addCharChangeListener(new HistorySelectionListener());
 	  }
+  
+  private static SelectionHistory singleton = new SelectionHistory();
+
+//  private SelectionHistory() {}
+
+  public static SelectionHistory inst() {     
+	  if (singleton == null)
+        singleton = new SelectionHistory();
+	  return singleton;
+  }
+
   
 //  public SelectionHistory() { //TermPanel termPanel) {
 //    SelectionManager.inst().addTermSelectionListener(new HistorySelectionListener());
@@ -67,9 +81,10 @@ public class SelectionHistory {
   
 
   public JComponent getComponent() {
-    JPanel termHistoryPanel = new JPanel(new BorderLayout(0,0)); // hgap,vgap
+	termHistoryPanel = new JPanel(new BorderLayout(0,0)); // hgap,vgap
+    termHistoryPanel.setVisible(Config.inst().termHistoryIsEnabled());
     termHistoryPanel.setPreferredSize(new Dimension(200,100));
-//    termHistoryPanel.setMinimumSize(new Dimension(200,100));
+    	//    termHistoryPanel.setMinimumSize(new Dimension(200,100));
     if (DO_HTML) {
       JEditorPane editorPane = new JEditorPane(); 
       editorPane.setContentType("text/html"); // sets up HTMLEditorKit
@@ -78,7 +93,7 @@ public class SelectionHistory {
       textArea = editorPane;
     }
     else { // pase - delete?
-      JTextArea jTextArea = new JTextArea(17,50);
+     	JTextArea jTextArea = new JTextArea(17,50);
       jTextArea.setLineWrap(true);
       jTextArea.setWrapStyleWord(true);
       textArea = jTextArea;
@@ -91,11 +106,13 @@ public class SelectionHistory {
     //scrollPane.setBorder(BorderFactory.createTitledBorder("Term Info"));
     termHistoryPanel.setBorder(BorderFactory.createTitledBorder("Term History"));
     termHistoryPanel.add(scrollPane,BorderLayout.CENTER);
-
+    isInitialized = true;
     return termHistoryPanel;
   }
 
- 
+ public void showSwitch() {
+	 termHistoryPanel.setVisible(Config.inst().termHistoryIsEnabled());
+ }
   // for TestPhenote
   String getText() { return textArea.getText(); }
   
@@ -119,9 +136,12 @@ public class SelectionHistory {
 	  for (int i=transList.size(); i>0; i--)
 	  {
 		  OBOClass term = transList.get(i-1).getNewTerm();
-		  if (term!=null)
-			  html = html + "<br> *"+term.getNamespace()+":"+term.getName();
-//			  html = html + "<br>"+HtmlUtil.termLink(term);
+		  if (term!=null) {
+			  String[] idSplit = term.getID().split(":");
+			  String nsID = idSplit[0];
+			  html = html + "<br>"+nsID+":"+term.getName();
+		  }
+			  //			  html = html + "<br>"+HtmlUtil.termLink(term);
 	  }
 	  textArea.setText(html);
 	  textArea.setCaretPosition(0);
