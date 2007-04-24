@@ -65,8 +65,8 @@ You can add your customized data adapter at the top of the file.  Additionally y
 These items are currently under development.  By default they are disabled for the typical user.
 
 <h2>Fields, types</h2>
-<img src="images/config-field3.png" align="right" caption="Figure 2">
-Each input field is given a "<field..." designation in the xml file.
+<img src="/images/config-field3.png" align="right" caption="Figure 2">
+Each input field is given a designation in the xml file.
 <h3>Field types: free-text, ontology</h3>
 <p>Currently there are two types of input fields for phenote:  free-text or ontology.  By default, if an ontology file is not specified for a field, it is designated as a free-text field. (This will soon be expanded to include ints, floats, and boolean value-types.</p>
 
