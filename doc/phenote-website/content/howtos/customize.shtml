@@ -10,9 +10,8 @@
 <h1><a name="config">How-To:  Customize Phenote</a></h1>
 
 <h2>Background</h2>
-<p>Phenote can be customized to your specifications, including the input fields you desire, the ontologies from which those fields are populated with, and the output format used.  Currently (v1.1) this configuration must be done by hand-editing a text file, but we are currently spec-ing out a GUI to achieve the same results.  This page explains the location of and the process of editing the configuration file used when Phenote loads.
+<p>Phenote can be customized to your specifications, including the input fields you desire, the ontologies from which those fields are populated with, and the output format used.  Currently (in version 1.1), this configuration must be done by hand-editing a text file (see notes below).  We are developing a built-in GUI that will achieve the same result without having to fiddle with the text file.  This page explains the location and process of editing the configuration file used when Phenote loads.
 </p>
-
 <p>This site is being updated with new content on a fairly regular basis.  Please check back often for new information.  In the mean time, if you have questions, you can <a href="/content/about/"> contact us </a> with questions.</p>  
 
 <h2>The basics</h2>
@@ -26,35 +25,34 @@
   </ul>
 </p>
 
-<h2>Location of your configuation file</h2>
+<h2>Location of your configuration file</h2>
 <p> The configuration files used by Phenote are located in the ".phenote/conf" directory.
 </p>
 <p>
 Within this directory you can store any number of configuration files.  The default files that come with the webstart versions are named "flybase.cfg", "zfin-standalone.cfg", or "human.cfg", depending on which version you've used in the past.  Any file you create/modify should be placed in this directory.
 </p>
 
-<h2>How to set up  a custom configuration in Phenote</h2>
+<h2>How to change your Phenote configuration</h2>
 <p>
 Once you have placed or modified your configuration file in the ".phenote/conf" directory, you need to tell Phenote to use that particular file.
 
 Note that with Phenote v1.1 or later, the user can choose a different configuration from the "File" menu.  
-When you select "Load Configuration", you are prompted with a list of options.  
+When you select "Load Configuration", you are prompted with a list of options.  (In v1.2beta, this option is under the "Settings" menu.)
 Listed are several configuration styles that come standard with the Phenote software, with the current choice's radio-button selected.
 If you have created your own custom configuration file with a ".cfg" extension, it should be listed here.  
 After selecting (the radio button) for a new configuration, press "OK", or press "Cancel" to revert to your previous selection.  
 Any changes to your configuration settings will take effect the next time Phenote is loaded.  
-
 </p>
 <p>
 Then, you should be able to start phenote with the same webstart link as before, but it should load with this new configuration.  you can also start it by double-clicking on the java icon that downloaded to your desktop called "phenote.jnlp".
 </p>
-<br />
-<h2>Other topics under construction:</h2>
 <h2>Location to put your personal obo files</h2>
 <p>To get a custom ontology that is local and not on SF, you'll have to copy it into ".phenote/obo-files/".  Any reference to this ontology within your configuration file must match the filename.
 </p>
-<h2>Anatomy of the config file</h2>
-You can download a sample configuration file <a href="/demo.cfg">here</a>.  Descriptive images on this page are taken from this demo.cfg configuration file.
+<h2>Making edits to a config file</h2>
+<p>You can download a sample configuration file <a href="/demo.cfg">here</a>.  Descriptive images on this page are taken from this demo.cfg configuration file.</p>
+<p>As a precaution, if you edit your own configuration file, be sure to save it as a new filename to prevent any accidental overwriting by our server if you upgrate to a new version.
+
 <h3>Data Adapters</h3>
 <img src="/images/config-data-adapter.png" align="right" caption="Figure 1">
 <p>
@@ -67,7 +65,31 @@ You can add your customized data adapter at the top of the file.  Additionally y
 These items are currently under development.  By default they are disabled for the typical user.
 
 <h2>Fields, types</h2>
-<h2>Making edits to a config file</h2>
+<img src="images/config-field3.png" align="right" caption="Figure 2">
+Each input field is given a "<field..." designation in the xml file.
+<h3>Field types: free-text, ontology</h3>
+<p>Currently there are two types of input fields for phenote:  free-text or ontology.  By default, if an ontology file is not specified for a field, it is designated as a free-text field. (This will soon be expanded to include ints, floats, and boolean value-types.</p>
+
+<h3>Field name</h3>
+<p>For each entry field, it is given a name.  This name is used in the Phenote application for the input area, the column headings of the data table, and for the tab-delimited output file.</p> 
+
+<h3>Enabling</h3>
+<p>Similarly as other configuration options, you can enable/disable items from the configuration.  A field can be disabled by setting enable="false"</p>
+
+<h2>Ontology fields</h2>
+For fields in which terms from ontologies will be used as instances, the ontologies themselves need to be specified.  One or more ontologies can be used for each field, and will show up in a drop-down box for selection.  The type-ahead suggestion/autocompletion feature utilizes the ontologies specified for each field.
+<h3>Ontology name</h3>
+<p>For each ontology, specify the name to display in the drop-down box.</p>
+<h3>Ontology file</h3>
+<p>For each ontology, specify the name of the file to be loaded into Phenote.  (if you are using you're only ontology file that does not come pre-packaged with Phenote, please copy it into the ".phenote/obo-files" directory.)</p>
+<h3>Repository location</h3>
+<p>For automated checking for updates to ontologies located at obo-sourceforge, you can specify the repository subdirectory here.  For example, the "chebi.obo" is located within the chemical subdirectory of the repository.  Specifying the repository location is NOT REQUIRED; however you will have to perform updates to your ontology files manually.</p>
+<p>NOTE: The current version of phenote can only update from a single repository, such as obo-sourceforge.  We are currently expanding this feature to update each file independently from any repository.</p>
+<h3>Post-composition</h3>
+<p>To enable post-composition for any ontology-based field, be sure to specify the relationship ontology file as "is_postcomp_rel=true", as is shown for the Entity field in Figure 2.</p>
+
+<h2>Other topics under construction:</h2>
+
 </div>
 </div>
 
