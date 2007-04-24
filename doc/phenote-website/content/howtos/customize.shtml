@@ -62,7 +62,7 @@ You can add your customized data adapter at the top of the file.  Additionally y
 <p> WARNING:  Be sure to enable at least one data adapter, otherwise you will be unable to save your annotations.</p>
 
 <h3>Uvic-graph, term-history</h3>
-These items are currently under development.  By default they are disabled for the typical user.
+These items are currently under development.  By default, these are disabled for the user.
 
 <h2>Fields, types</h2>
 <img src="/images/config-field3.png" align="right" width="100%" caption="Figure 2">
@@ -74,21 +74,19 @@ Each input field is given a designation in the xml file.
 <p>For each entry field, it is given a name.  This name is used in the Phenote application for the input area, the column headings of the data table, and for the tab-delimited output file.</p> 
 
 <h3>Enabling</h3>
-<p>Similarly as other configuration options, you can enable/disable items from the configuration.  A field can be disabled by setting enable="false"</p>
+<p>Similar to other configuration options, you can enable/disable items from the configuration.  A field can be disabled by setting enable="false"</p>
 
 <h2>Ontology fields</h2>
-For fields in which terms from ontologies will be used as instances, the ontologies themselves need to be specified.  One or more ontologies can be used for each field, and will show up in a drop-down box for selection.  The type-ahead suggestion/autocompletion feature utilizes the ontologies specified for each field.
+For fields in which terms from ontologies will be used as instances, the ontologies themselves need to be specified.  One or more ontologies can be used for each field.  If >1 ontology is specified, they will show up in a drop-down box for selection.  The type-ahead suggestion/autocompletion feature utilizes these ontologies specified for each field.
 <h3>Ontology name</h3>
 <p>For each ontology, specify the name to display in the drop-down box.</p>
 <h3>Ontology file</h3>
-<p>For each ontology, specify the name of the file to be loaded into Phenote.  (if you are using you're only ontology file that does not come pre-packaged with Phenote, please copy it into the ".phenote/obo-files" directory.)</p>
+<p>For each ontology, specify the name of the file to be loaded into Phenote.  (if you are using an ontology file that does not come pre-packaged with Phenote, please copy it into the ".phenote/obo-files" directory.)</p>
 <h3>Repository location</h3>
-<p>For automated checking for updates to ontologies located at obo-sourceforge, you can specify the repository subdirectory here.  For example, the "chebi.obo" is located within the chemical subdirectory of the repository.  Specifying the repository location is NOT REQUIRED; however you will have to perform updates to your ontology files manually.</p>
+<p>For automated checking of updates to ontologies located at obo-sourceforge, you can specify the repository subdirectory here.  For example, the "chebi.obo" is located within the chemical subdirectory of the repository.  Specifying the repository location is NOT REQUIRED; however you will have to perform updates to your ontology files manually.</p>
 <p>NOTE: The current version of phenote can only update from a single repository, such as obo-sourceforge.  We are currently expanding this feature to update each file independently from any repository.</p>
 <h3>Post-composition</h3>
 <p>To enable post-composition for any ontology-based field, be sure to specify the relationship ontology file as "is_postcomp_rel=true", as is shown for the Entity field in Figure 2.</p>
-
-<h2>Other topics under construction:</h2>
 
 </div>
 </div>
