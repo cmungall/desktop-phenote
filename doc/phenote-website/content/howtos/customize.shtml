@@ -54,6 +54,18 @@ Then, you should be able to start phenote with the same webstart link as before,
 <p>To get a custom ontology that is local and not on SF, you'll have to copy it into ".phenote/obo-files/".  Any reference to this ontology within your configuration file must match the filename.
 </p>
 <h2>Anatomy of the config file</h2>
+You can download a sample configuration file <a href="/demo.cfg">here</a>.  Descriptive images on this page are taken from this demo.cfg configuration file.
+<h3>Data Adapters</h3>
+<img src="/images/config-data-adapter.png" align="right" caption="Figure 1">
+<p>
+The first customizable items in the configuration file are the Data Adapters (see Figure 1).  Any developer can write their own data adapter and plug it into the configuration for use during file loading and saving, or for database retrieval.  If you are interested in writing your own data adapter, please read the <a href="/developer-docs/dataadapter.html"> Data Adapter developer documentation</a>.  <p>
+<p>
+You can add your customized data adapter at the top of the file.  Additionally you can specify if it is "enabled". Enabling a data adapter makes it available during load/save functions.  In the case of the example in Figure 1, the PhenoXML and NEXUS data adapters are disabled, while the phenosyntax and delimited adapters are enabled. </p>
+<p> WARNING:  Be sure to enable at least one data adapter, otherwise you will be unable to save your annotations.</p>
+
+<h3>Uvic-graph, term-history</h3>
+These items are currently under development.  By default they are disabled for the typical user.
+
 <h2>Fields, types</h2>
 <h2>Making edits to a config file</h2>
 </div>
