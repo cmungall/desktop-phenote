@@ -35,6 +35,9 @@ public class FieldConfig {
     if (fieldBean.xgetEnable() != null)
       enabled = fieldBean.getEnable();
 
+    if (fieldBean.getTab() != null) {
+    }
+
     if (fieldBean.getSyntaxAbbrev() != null) {
       setSyntaxAbbrev(fieldBean.getSyntaxAbbrev());
     }

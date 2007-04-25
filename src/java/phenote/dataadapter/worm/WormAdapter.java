@@ -349,7 +349,8 @@ public class WormAdapter implements QueryableDataAdapterI {
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
       String phenotype_match = find("(WBPhenotype[0-9]*)", postgres_value);  	// Find a WBPhenotype followed by any amount of digits
       if (phenotype_match != null) { postgres_value = phenotype_match; }		// query for this, otherwise keep the default value
-      c1.setValue("Phenotype",postgres_value);					// assign the queried value
+      if (postgres_value == "No postgres value assigned") { } else { c1.setValue("Phenotype",postgres_value); }					// assign the queried value
+//       c1.setValue("Phenotype",postgres_value);					// assign the queried value
       postgres_table = "app_curator"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
       c1.setValue("Curator",postgres_value);					// assign the queried value
@@ -357,7 +358,8 @@ public class WormAdapter implements QueryableDataAdapterI {
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
       String paper_match = find("(WBPaper[0-9]*)", postgres_value);		// Find a WBPaper followed by any amount of digits
       if (paper_match != null) { postgres_value = paper_match; }	// query for this, otherwise keep the default value
-      c1.setValue("Pub",postgres_value);					// assign the queried value
+//       c1.setValue("Pub",postgres_value);					// assign the queried value
+      if (postgres_value == "No postgres value assigned") { } else { c1.setValue("Pub",postgres_value); }					// assign the queried value
       postgres_table = "app_person"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, colI);
       String person_match = find("(WBPerson[0-9]*)", postgres_value);	// Find a WBPerson followed by any amount of digits
@@ -505,10 +507,8 @@ public class WormAdapter implements QueryableDataAdapterI {
       if (match != null) { query = match; }		// query for this, otherwise keep the default value
       int foundPaper = 0;				// flag if there are any papers in postgres that match, otherwise give an error warning
       ResultSet rs = null;				// initialize result of query
-      System.out.println("Paper "+query+" end");
-      try { rs = s2.executeQuery("SELECT DISTINCT(joinkey) FROM app_paper WHERE app_paper ~ '"+query+"' ORDER BY joinkey;"); 
-System.out.println("SELECT DISTINCT(joinkey) FROM app_paper WHERE app_paper ~ '"+query+"' ORDER BY joinkey;");
-}	// get the alleles from a paper
+//       System.out.println("Paper "+query+" end");
+      try { rs = s2.executeQuery("SELECT DISTINCT(joinkey) FROM app_paper WHERE app_paper ~ '"+query+"' ORDER BY joinkey;"); }	// get the alleles from a paper
       catch (SQLException se) {
         System.out.println("We got an exception while executing our app_paper query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
       try { if (rs.next()) { foundPaper++; } }

@@ -63,6 +63,7 @@ field =
     attribute type { "free_text" | "ontology" },  
     ## file is for single ontology - rename ontology_file?
     ## phase these 4 out - redundant with single ontology
+    attribute tab { xsd:string },
     attribute file { xsd:string },
     attribute filter-out { xsd:string },
     attribute slim { xsd:string },

@@ -75,6 +75,7 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="tab" use="required" type="xs:string"/>
       <xs:attribute name="file" use="required" type="xs:string"/>
       <xs:attribute name="filter-out" use="required" type="xs:string"/>
       <xs:attribute name="slim" use="required" type="xs:string"/>
