@@ -12,7 +12,7 @@
 <p>
 Phenote is a Java application, which can be launched from the web using "Webstart".  Simply click on the link below, and this  will download the application to your computer and run.  Future clicks on the link should recognize that you've already downloaded the application, and it will simply start the software.</p>
 <p>
-Webstart:  <a href="/phenote/1.1/phenote.jnlp">Phenote v1.1</a>
+Webstart:  <a href="http://toy.lbl.gov:9010/phenote/1.1/phenote.jnlp">Phenote v1.1</a>
 </p>
 <p>
 Phenote can also be launched from our <a href="/content/software/">Downloads</a> page.  There you will also find any newer versions under development.
