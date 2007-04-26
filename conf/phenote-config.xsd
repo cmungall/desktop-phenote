@@ -90,6 +90,7 @@
           <xs:documentation>obo file for ontology</xs:documentation>
         </xs:annotation>
       </xs:attribute>
+      <xs:attribute name="namespace" use="required" type="xs:string"/>
       <xs:attribute name="filter-out" use="required" type="xs:string"/>
       <xs:attribute name="slim" use="required" type="xs:string"/>
       <xs:attribute name="repos-subdir" use="required" type="xs:string"/>

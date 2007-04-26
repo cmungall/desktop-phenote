@@ -77,6 +77,7 @@ ontology =
     attribute name { xsd:string },
     ## obo file for ontology
     attribute file { xsd:string },
+    attribute namespace { xsd:string },
     attribute filter-out { xsd:string },
     attribute slim { xsd:string },
     attribute repos-subdir {xsd:string},
