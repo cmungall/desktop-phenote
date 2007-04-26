@@ -58,7 +58,7 @@ You might find it valuable to see sample annotations.  Please download this
 <a href="/sample_data.xls"> sample_data.xls </a> file.  You will need to set 
 up your phenote to the "demo" configuration.  Then choose "open" under the 
 "file" menu.  Select this file from your download location.  The data should 
-load into the spreadsheet.  You can play around and manipulate the annotations.
+load into the spreadsheet frame, where you can then play around and manipulate the annotations.  You can also view these annotations directly in excel or other external software application.
 
 </p>
 
