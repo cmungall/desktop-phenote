@@ -14,12 +14,22 @@ import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
+import org.geneontology.oboedit.datamodel.Namespace;
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOProperty;
 import org.geneontology.oboedit.datamodel.OBOSession;
 import org.geneontology.oboedit.datamodel.TermCategory;
+import org.geneontology.oboedit.datamodel.TermUtil;
 import org.geneontology.oboedit.dataadapter.OBOMetaData;
 import org.geneontology.oboedit.dataadapter.OBOMetaData.FileMetaData;
+import org.geneontology.oboedit.query.Query;
+import org.geneontology.oboedit.query.QueryEngine;
+import org.geneontology.oboedit.query.impl.NamespaceQuery;
+import org.geneontology.oboedit.query.impl.CategoryQuery;
+
+// i think this is ok since datamodel is based on config?? 
+// otherwise ODA should be inbetween
+import phenote.config.OntologyConfig;
 
 /** Ontology represents at this point the contents of a single obo file (which can
     be more than one ontology) an ontology wraps an obo edit OBOSession - at this point
@@ -30,7 +40,7 @@ public class Ontology {
   //private String filename; // may neec to revive for version/metadata?
   private String version;
   private OBOSession oboSession;
-  private List<OBOClass> sortedTerms;
+  private Collection<OBOClass> sortedTerms; // was List
   private List<OBOClass> sortedObsoleteTerms;
   private List<OBOProperty> sortedRelations;
   private String slim; 
@@ -49,6 +59,35 @@ public class Ontology {
     this.name = name;
   }
 
+  /** is it funny to pass in a config object to datamodel - given that config dictates
+      the model i actually think its ok */
+  public Ontology(Collection<Namespace> spaces,OntologyConfig oc,OBOSession os) {
+    oboSession = os;
+    // get id filter, slim, & possible namespace from oc...
+    name = oc.name;
+    slim = oc.getSlim();
+    // if namespace specified and is valid load that
+    if (oc.hasNamespace()) {
+      String namespace = oc.getNamespace();
+      if (validNamespace(spaces,namespace)) {
+        loadNamespace(getNamespace(spaces,namespace));
+        return;
+      }
+    }
+    // otherwise load all name spaces
+    loadNamespaces(spaces);
+  }
+
+  private boolean validNamespace(Collection<Namespace> nl, String ns) {
+    return getNamespace(nl,ns) != null;
+  }
+  private Namespace getNamespace(Collection<Namespace> nl,String namespaceString) {
+    for (Namespace n : nl) {
+      if (n.getID().equals(namespaceString)) return n;
+    }
+    return null;
+  }
+
   public void setOboSession(OBOSession os) {
     oboSession = os;
     //System.out.println("Ont cats "+os.getCategories());
@@ -63,25 +102,27 @@ public class Ontology {
     // this is wrong - this just says file name loaded from. obo file puts version in
     // remark field but doesnt seem to be way to get that from obo session??
     //return oboSession.getCurrentHistory().getVersion();
-    Object o = oboSession.getAdapterMetaData();
-    if (!(o instanceof OBOMetaData)) return "unknown"; // exception?
-    Collection c = ((OBOMetaData)o).getFileMetaData();
-    //System.out.println("# of file meta datas "+c.size()+c);
-    for (Object obj : c) {
-      if (!(obj instanceof FileMetaData)) return "unknown";
-      // hmmm dont know file name in ontology apparently - need to bring back!
-      // for now just return last one as there is only 1
-      version = ((FileMetaData)obj).getVersion();
-      //System.out.println("VERSION "+version);
-      //return version; ??
-    }
+    // no longer comes from obo session - but from OboFileAdapter - change this
+    // but i dont think this works anyways as obos dont have versions
+//     Object o = oboSession.getAdapterMetaData();
+//     if (!(o instanceof OBOMetaData)) return "unknown"; // exception?
+//     Collection c = ((OBOMetaData)o).getFileMetaData();
+//     //System.out.println("# of file meta datas "+c.size()+c);
+//     for (Object obj : c) {
+//       if (!(obj instanceof FileMetaData)) return "unknown";
+//       // hmmm dont know file name in ontology apparently - need to bring back!
+//       // for now just return last one as there is only 1
+//       version = ((FileMetaData)obj).getVersion();
+//       //System.out.println("VERSION "+version);
+//       //return version; ??
+//     }
     return version;
   }
 
   private void makeSortedLists(OBOSession oboSession) {
     //log().debug("name "+name+" terms "+oboSession.getTerms()+" propVals "+oboSession.getPropertyValues()+" rels "+oboSession.getRelationshipTypes());
-    sortedTerms = getSortedTerms(oboSession.getTerms());
-    sortedObsoleteTerms = getSortedTerms(oboSession.getObsoleteTerms());
+    sortedTerms = getSortedTerms(TermUtil.getTerms(oboSession));//(oboSession.getTerms());
+    sortedObsoleteTerms = getSortedTerms(TermUtil.getObsoletes(oboSession));
   }
 
   private void filterLists() {
@@ -121,7 +162,7 @@ public class Ontology {
       //sortedRelations=new ArrayList<OBOProperty>(); not Comparable!
       List sorRel = new ArrayList();
       // if (oboSession == null) ? shouldnt happen
-      sorRel.addAll(oboSession.getRelationshipTypes());
+      sorRel.addAll(TermUtil.getRelationshipTypes(oboSession));
       Collections.sort(sorRel,new RelComparator());
       sortedRelations = sorRel; // ?
     }
@@ -139,7 +180,7 @@ public class Ontology {
 
 
   /** non obsolete terms - sorted */
-  public List<OBOClass> getSortedTerms() {
+  public Collection<OBOClass> getSortedTerms() {
     return sortedTerms;
   }
 
@@ -150,7 +191,7 @@ public class Ontology {
 
   public OBOSession getOboSession() { return oboSession; }
 
-  public List<OBOClass> getSortedTerms(Set terms) {
+  public List<OBOClass> getSortedTerms(Collection terms) {
     List<OBOClass> sortedTerms = new ArrayList<OBOClass>();
     sortedTerms.addAll(terms);
     Collections.sort(sortedTerms);
@@ -217,7 +258,7 @@ public class Ontology {
       terms - can add more flexibility as needed - this is all thats needed for now
       also filters out obo: terms - those are obo edit artifacts i think 
       also filters for slim! */
-  private List<OBOClass> filterList(List<OBOClass> list) {
+  private List<OBOClass> filterList(Collection<OBOClass> list) {
     List<OBOClass> filteredList = new ArrayList<OBOClass>();
     for (OBOClass term : list) {
       // or could do remove on list?
@@ -241,270 +282,48 @@ public class Ontology {
     if (log == null) log = Logger.getLogger(getClass());
     return log;
   }
+
+  private void loadNamespace(Namespace n) {
+    Collection<Namespace> c = new ArrayList(1);
+    c.add(n);
+    loadNamespaces(c);
+  }
+
+  private void loadNamespaces(Collection<Namespace> spaces) {
+    if (spaces == null || spaces.isEmpty()) {
+      log().error("No namespace to load"); // ex?
+      return;
+    }
+    
+    // for now just grab 1st namespace as namespacequery only takes 1 namespace
+    //Namespace ns = spaces.toArray(new Namespace[0])[0];
+    Query<OBOClass, OBOClass> nsQuery =
+      new NamespaceQuery(spaces.toArray(new Namespace[0]));
+    // create a new query engine on the session we just loaded
+    QueryEngine engine = new QueryEngine(oboSession);
+    
+    // run the namespace query and cache the results
+    long time = System.currentTimeMillis();
+    //Collection<OBOClass> 
+    // true -> cache result
+    sortedTerms = engine.query(nsQuery, true);
+    System.out.println("got " + sortedTerms.size()
+                       + " namespace hits in " + (System.currentTimeMillis() - time)
+                       + "ms # of namespaces: "+spaces.size()+" printing terms in order: ");
+
+    if (hasSlim()) {
+      CategoryQuery catQuery = new CategoryQuery(slim);
+      time = System.currentTimeMillis();
+      sortedTerms = engine.query(sortedTerms,catQuery, true);
+      System.out.println("Category query (" +slim+ ") got "
+                         + sortedTerms.size()
+                         + " in " + (System.currentTimeMillis() - time) + "ms");
+
+    }
+
+    for (Namespace n : spaces) System.out.println(n);
+    //for (OBOClass o : sortedTerms) System.out.println(o);
+    
+  }
 }
 
-
-
-// GARBAGE
-//   /** Returns a Vector of OBOClass from ontology that contain input string
-//       constrained by compParams. compParams specifies syns,terms,defs,& obs 
-//       should input be just part of search params? 
-//       its a vector as thats what ComboBox requires 
-//       put in separate class? */
-//   public Vector<OBOClass> getSearchTerms(String input,SearchParamsI searchParams) {
-//    Vector<OBOClass> searchTerms = new Vector<OBOClass>();
-//     if (input == null || input.equals(""))
-//       return searchTerms;
-
-//     // gets term set for currently selected ontology
-//     //Set ontologyTermList = getCurrentOntologyTermSet();
-//     List<OBOClass> ontologyTermList = getSortedTerms(); // non obsolete
-//     searchTerms = getSearchTerms(input,ontologyTermList,searchParams);
-
-//     // if obsoletes set then add them in addition to regulars
-//     if (searchParams.searchObsoletes()) {
-//       ontologyTermList = getSortedObsoleteTerms();
-//       Vector obsoletes = getSearchTerms(input,ontologyTermList,searchParams);
-//       searchTerms.addAll(obsoletes);
-//     }
-//     return searchTerms;
-//   }
-
-//   /** helper fn for getSearchTerms(String,SearhParamsI) */
-//   private Vector<OBOClass> getSearchTerms(String input, List<OBOClass> ontologyTermList,
-//                                     SearchParamsI searchParams) {
-//     // need a unique list - UniqueTermList has quick check for uniqueness, checking
-//     // whole list is very very slow - how is it possible to get a dup term? i forget?
-//     // the dup term was a BUG! in synonym - woops
-//     SearchTermList uniqueTermList = new SearchTermList();
-//     //Vector searchTerms = new Vector();
-//     if (ontologyTermList == null)
-//       return uniqueTermList.getVector();//searchTerms;
-
-//     boolean ignoreCase = true; // param?
-//     if (ignoreCase)
-//       input = input.toLowerCase();
-
-//     // i think iterators are more efficient than get(i) ??
-//     Iterator<OBOClass> iter = ontologyTermList.iterator();
-//     while (iter.hasNext()) {
-//       // toString extracts name from OBOClass
-//       OBOClass oboClass = iter.next();
-//       String originalTerm = oboClass.getName();//toString();
-      
-//       boolean termAdded = false;
-
-//       if (searchParams.searchTerms()) {
-//         // adds originalTerm to searchTerms if match (1st if exact)
-//         termAdded = compareAndAddTerm(input,originalTerm,oboClass,uniqueTermList);
-//         if (termAdded)
-//           continue;
-//       }
-
-
-//       if (searchParams.searchSynonyms()) {
-//         Set synonyms = oboClass.getSynonyms();
-//         for (Iterator i = synonyms.iterator(); i.hasNext() &&!termAdded; ) {
-//           String syn = i.next().toString();
-//           //log().debug("syn "+syn+" for "+originalTerm);
-//           termAdded = compareAndAddTerm(input,syn,oboClass,uniqueTermList);
-//           //if (termAdded) continue; // woops continues this for not the outer!
-//         }
-//       }
-//       if (termAdded) continue;
-
-
-//       if (searchParams.searchDefinitions()) {
-//         String definition = oboClass.getDefinition();
-//         if (definition != null & !definition.equals(""))
-//           termAdded = compareAndAddTerm(input,definition,oboClass,uniqueTermList);
-//           if (termAdded)
-//             continue; // not really necesary as its last
-//       }
-
-//     }
-//     return uniqueTermList.getVector();//searchTerms;
-//   }
-
-//   public Vector<OBOProperty> getStringMatchRelations(String input) {
-//     Vector<OBOProperty> matches = new Vector<OBOProperty>();
-//     for (OBOProperty rel : getSortedRelations()) {
-//       if (rel.toString().contains(input))
-//         matches.add(rel);
-//     }
-//     return matches;
-//   }
-//   /** User input is already lower cased, this potentially adds oboClass to
-//    * searchTerms if input & compareTerm match. Puts it first if exact. 
-//    * for term names comp = obo, for syns comp is the syn. 
-//    Returns true if term is a match & either gets added or already is added
-//    * Also checks if term is in list already - not needed - woops!
-//    Theres a speed issue here - the vector needs to be unique. if check every time
-//    with whole list very very slow. 2 alternatives to try. 
-//    1) have separate hash for checking uniqueness (downside 2 data structures). 
-//    could make a data structure that had both map & vector
-//    2) use LinkedHashSet, which does uniqueness & maintains order of insertion
-//    nice - its 1 data structure BUT exact matches go 1st, no way in linked hash set
-//    to insert 1st elements so would need to keep separate list of exact matches, which
-//    i guess there can be more than one with synonyms (do syns count for exact matches?
-//    should they?) - downside of #2 is need Vector for combo box
- 
-//    this wont fly for having different display strings for syn & obs as compareTerm
-//    can be syn obs term or def and its lost here 
-//    i think these methods need to be moved to gui.TermSearcher that utilizes Ontology 
-//    but produces CompListTerms */
-//   private boolean compareAndAddTerm(String input, String compareTerm, OBOClass oboClass,
-//                                     SearchTermList searchTermList) {
-    
-//     String oboTerm = oboClass.getName();
-
-//     String lowerComp = compareTerm;
-//     boolean ignoreCase = true; // discard? param for?
-//     if (ignoreCase)
-//       lowerComp = compareTerm.toLowerCase();
-
-//     //boolean doContains = true; // discard? param for?
-//     // exact match goes first in list
-//     if (lowerComp.equals(input)) {
-//       searchTermList.addTermFirst(oboClass); // adds if not present
-//       return true;
-//     }
-//     // new paradigm - put starts with first
-//     else if (lowerComp.startsWith(input)) {
-//       searchTermList.addTerm(oboClass);
-//       return true;
-//     }
-//     // Contains
-//     else if (contains(lowerComp,input) && !termFilter(lowerComp)) {
-//       searchTermList.addContainsTerm(oboClass);
-//       return true;
-//     }
-//     return false;
-//   }
-
-//   // 1.5 has a contains! use when we shift
-//   private boolean contains(String term, String input) {
-//     return term.contains(input); // 1.5!!
-//     //return term.indexOf(input) != -1;
-//   }
-//   /** Oboedit getTerms returns some terms with obo: prefix that should be filtered
-//    * out. Returns true if starts with obo: */
-//   private boolean termFilter(String term) {
-//     return term.startsWith("obo:");
-//   }
-      //if (!searchTerms.contains(oboClass)) {// this takes a long time w long lists!
-      //searchTerms.add(0,oboClass);
-      //if (!searchTerms.contains(oboClass))  searchTerms.add(oboClass);
-        //if(!searchTerms.contains(oboClass))takes long time!searchTerms.add(oboClass);
-      // SKIP PATO ATTRIBUTES - only want values - or do !contains "value"?
-      // yes do contains value - as theres other crap to filter too
-      // apparently curators want to see attribs as well according to Michael
-      //if (filterAttributes() && isAttribute(originalTerm))
-      //continue;
-
-  // pato subclass?
-//   private boolean isAttribute(String term) {
-//     return contains(term.toLowerCase(),"attribute");
-//   }
-  // part of search params?
-  //private boolean filterAttributes() { return isPato(); }
-
-//   // make enum!!
-//   private boolean isPato() {
-//     //return ont == PATO;
-//     // for now - eventually config somehow
-//     return name.equals("Pato");
-//   }
-
-//   public Ontology(String name,OBOSession oboSession) {
-//     this.name = name;
-//     this.oboSession = oboSession;
-//     makeSortedLists(oboSession);
-//   }
-  // pase - Ontology shouldnt load file
-//   public Ontology(String name, String filename) {
-//     //loadAllOntologyTerms();
-//     this.name = name;
-//     loadOntology(filename);
-//   }
-
-//   /** Load up/cache Sets for all ontologies used, anatomyOntologyTermSet
-//    * and patoOntologyTermSet -- move to dataadapter/OntologyDataAdapter... */
-//   private void loadOntology(String filename) {//loadAllOntologyTerms() {
-//     oboSession = getOboSession(findFile(filename));
-//     sortedTerms = getSortedTerms(oboSession.getTerms());
-//     sortedObsoleteTerms = getSortedTerms(oboSession.getObsoleteTerms());
-//   }
-
-  
-
-//   /** Look for file in current directory (.) and jar file */
-//   private URL findFile(String fileName) {
-//     String oboFileDir = "obo-files/";
-//     // try current directory + obo-file dir
-//     String currentDir = "./" + oboFileDir + fileName;
-//     File file = new File(currentDir);
-//     if (file.exists())
-//       return makeUrl(currentDir);
-
-//     // try jar - hopefully this works... jar files have to have '/' prepended
-//     // first try without obo-files dir (in jar)
-//     String jarFile = "/" + fileName;
-//     URL url = Ontology.class.getResource(jarFile); // looks in jar
-//     // 2nd try with obo-files dir in jar file (i used to do it this way)
-//     if (url == null) {
-//       jarFile = "/" + oboFileDir + fileName;
-//       url = Ontology.class.getResource(jarFile); // looks in jar
-//     }
-
-//     if (url == null) {
-//       System.out.println("No file found in pwd or jar for "+fileName);
-//       return null;
-//     }
-//     return url;
-//   }
-  
-//   private URL makeUrl(String file) {
-//     try {
-//       return new URL("file:"+file);
-//     }
-//     catch (MalformedURLException e) {
-//       System.out.println("malformed url "+file+" "+e);
-//       return null;
-//     }
-//   }
-
-
-//   // String -> url to handle web start jar obo files
-//   private OBOSession getOboSession(URL oboUrl) {
-//     if (oboUrl == null)
-//       return new OBOSessionImpl(); // ??
-
-//     OBOFileAdapter fa = new OBOFileAdapter();
-//     FileAdapterConfiguration cfg = new OBOFileAdapter.OBOAdapterConfiguration();
-//     Collection fileList = new ArrayList();
-//     fileList.add(oboUrl.toString());
-//     cfg.setReadPaths(fileList);
-//     try { // throws data adapter exception
-//       OBOSession os = (OBOSession)fa.doOperation(IOOperation.READ,cfg,null);
-//       return os;
-//     }
-//     catch (DataAdapterException e) {
-//       System.out.println("got data adapter exception: "+e);
-//       return null; // empty session?
-//     }
-//   }
-
-
-//   private Set getObsoleteTerms() {
-//     Set s = getOboSession().getObsoleteTerms();
-//     if (s == null)
-//       System.out.println("No ontology terms loaded for "+name);
-//     return s;
-//   }
-//   private Set getNonObsoleteTerms() {
-//     Set s = getOboSession().getTerms(); // is this inefficient? cache?
-//     if (s == null)
-//       System.out.println("No ontology terms loaded for "+name);
-//     return s;
-//   }

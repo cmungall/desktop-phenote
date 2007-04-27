@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -181,14 +182,16 @@ public class NEXUSAdapter implements DataAdapterI {
     }
     if (categoryNames.contains("attribute_slim")) {
       return valueTerm;
-    } else if ((categoryNames.contains("value_slim")) && !(valueTerm.isRoot())) {
+    }
+    // isRoot no longer there - not sure what replaces it yet...
+    else if ((categoryNames.contains("value_slim"))) { //&& !(valueTerm.isRoot())) {
       return this.getAttributeForValue(this.getParentForTerm(valueTerm));
     }
     return null;
   }
   
   private OBOClass getParentForTerm(OBOClass term) {
-    Set parents = term.getParents();
+    Collection parents = term.getParents();
     for (Object o : parents) {
       Link link = (Link)o;
       if (link.getType().getName().equals("is_a")) {

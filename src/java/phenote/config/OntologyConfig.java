@@ -12,11 +12,12 @@ public class OntologyConfig {
 
   public String name;
   public String ontologyFile;
-  //public String nameSpace; // not used yet - or was this what filter out ended up
+  public String namespace; // this should replace filterOut
   public String filterOut; // public?
   private String slim;
   private String reposSubdir;
   private boolean isPostCompRel = false;
+  private URL loadUrl;
 
   //static OntologyConfig defaultPato = new OntologyConfig("Pato","attribute_and_value.obo");
 
@@ -63,6 +64,8 @@ public class OntologyConfig {
   OntologyConfig(phenote.config.xml.OntologyDocument.Ontology o, String fieldName) {
     name = o.getName()!=null ? o.getName() : fieldName;
     ontologyFile = o.getFile();
+    if (o.getNamespace() != null)
+      namespace = o.getNamespace();
     if (o.getFilterOut() != null)
       filterOut = o.getFilterOut();
     slim = o.getSlim()!=null ? o.getSlim() : null;
@@ -135,11 +138,19 @@ public class OntologyConfig {
     return ontologyFile != null;
   }
 
+  public boolean hasNamespace() { return namespace != null; }
+  public String getNamespace() { return namespace; }
+
   public boolean hasFilter() { return filterOut != null; }
   public String getFilter() { return filterOut; } 
 
   public boolean hasSlim() { return slim != null; }
   public String getSlim() { return slim; }
+
+  /** The actual url used to load ontology */
+  public void setLoadUrl(URL u) { loadUrl = u; }
+  public URL getLoadUrl() { return loadUrl; }
+  public boolean hasLoadUrl() { return loadUrl != null; }
 
   public String toString() { return name; }
 

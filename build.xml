@@ -73,7 +73,6 @@ them into  the classfiles directory. excludes="test/**"  -->
         </javac>
     </target>
 
-
     <!-- runs off classfiles not jar, todo: run-jar -->
     <target name="run" depends="compile">
         <java classname="phenote.main.Phenote" fork="yes" jvmargs="-Xmx500M">
@@ -483,6 +482,26 @@ where xsd files are (conf) -->
            <echo message="Env Var PHENOTE VERSION is set to ${env.PHENOTE_VERSION}" />
          </else>
       </if>
+    </target>
+
+
+     <path id="jars-and-oboedit-classes">
+        <fileset dir="${lib}">
+            <patternset id="non-phenote-jars">
+                <include name="**/*.jar"/>
+                <exclude name="**/phenote.jar"/>
+                <exclude name="test/**"/>
+                <exclude name="**/oboedit.jar"/>
+                <exclude name="**/org.geneontology.jar"/>
+            </patternset>
+        </fileset>
+        <fileset dir="/srv/home/mgibson/phenote/go-dev/java/oboedit/classes"/>
+    </path>
+
+  <target name="compile-with-oboedit-classes" depends="init">
+        <javac srcdir="${src}" destdir="${classfiles}" debug="yes" excludes="test/**">
+            <classpath refid="jars-and-oboedit-classes"/>
+        </javac>
     </target>
 
 

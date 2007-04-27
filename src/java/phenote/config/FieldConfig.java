@@ -158,7 +158,14 @@ public class FieldConfig {
   public  boolean isEnabled() { return enabled; }
 
   public void setCharField(CharField cf) { charField = cf; }
-  CharField getCharField() { return charField; }
+
+  /** Actually creates char field if null, as char fields utimately come from field
+      configs - so this is funny but its actually not funny */
+  public CharField getCharField() {
+    if (charField == null)
+      charField = new CharField(getLabel());
+    return charField;
+  }
   boolean hasCharField(CharField cf) { return charField == cf; }
 
   /** create xml bean and add it to phenCfg for writeback */

@@ -375,7 +375,9 @@ public class Config {
     return getFieldConfigList().get(index);
   }
 
-  /** OntologyDataAdapter calls this to figure which ontologies to load */
+  /** OntologyDataAdapter calls this to figure which ontologies to load
+   This is a list of enabled fields - does not include disabled fields!
+  retname getEnabledFieldConfigs? */
   public List<FieldConfig> getFieldConfigList() {
     return enabledFields;
   }

@@ -2,8 +2,9 @@ package phenote.datamodel;
 
 import org.apache.log4j.Logger;
 import org.geneontology.oboedit.datamodel.OBOClass;
-import org.geneontology.oboedit.datamodel.OBOProperty;
-import org.geneontology.oboedit.datamodel.impl.OBOPropertyImpl;
+import org.geneontology.oboedit.datamodel.OBOSession;
+import org.geneontology.oboedit.postcomp.ParseException;
+import org.geneontology.oboedit.postcomp.PostcompUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,10 +45,12 @@ public class OntologyManager {
     charFieldList.add(cf);
   }
 
-  /** get char field for int. 0 based. based on order in config file */
-  public CharField getCharField(int i) throws Exception {
-    if (i<0) throw new Exception(); 
-    if (i >= charFieldList.size()) throw new Exception(); // ex
+  /** get char field for int. 0 based. based on order in config file
+   CharacterTableModel relies on this order */
+  public CharField getCharField(int i) throws OntologyException {
+    if (i<0) throw new OntologyException("error, asking for negative char field"); 
+    if (i >= charFieldList.size())
+      throw new OntologyException("number "+i+" char field does not exist"); // ex
     return charFieldList.get(i);
   }
 
@@ -94,12 +97,13 @@ public class OntologyManager {
     throw new TermNotFoundException("ID "+id+" not found in loaded ontologies");
   }
 
-  public OBOClass getTermOrPostComp(String id) throws TermNotFoundException {
-    if (isPostComp(id))
-      return getPostComp(id);
-    else
-      return getOboClassWithExcep(id);
-  }
+  // used to be used by phenoSynChar - no longer
+//   public OBOClass getTermOrPostComp(String id) throws TermNotFoundException {
+//     if (isPostComp(id))
+//       return getPostComp(id);
+//     else
+//       return getOboClassWithExcep(id);
+//   }
 
   // phase out - put ex in getOboClass!
   public OBOClass getOboClassWithExcep(String id) throws TermNotFoundException {
@@ -110,6 +114,7 @@ public class OntologyManager {
   }
 
 
+  /** returns true if contains ^ - is this rather presumptious or is ^ reserved */
   boolean isPostComp(String id) {
     if (id == null) return false;
     return id.contains("^");
@@ -117,27 +122,39 @@ public class OntologyManager {
 
   /** parse string GO:123^part_of(AO:345) into post comp obo class 
       This will be replaced with obo edits post comp parse utility */
-  OBOClass getPostComp(String id) throws TermNotFoundException {
-    Pattern pat = Pattern.compile("([^\\^]+)\\^([^\\(]*)\\(([^\\)]*)\\)");
-    Matcher m = pat.matcher(id);
-    boolean found = m.find();
-    if (!found) throw new TermNotFoundException("Invalid post comp expression "+id);
-    String genus,rel,diff;
-    try {
-      //log().debug("pattern found for "+id+"? "+found+" g0 "+m.group(0)+" g1 "+m.group(1)+" g2 "+m.group(2)+" g3 "+m.group(3));
-      genus = m.group(1);
-      rel = m.group(2);
-      diff = m.group(3);
-    } catch (RuntimeException e) { // IllegalState, IndexOutOfBounds
-      throw new TermNotFoundException("Invalid post comp expression "+id);
-    }
+  OBOClass getPostComp(OBOSession os, String id) throws TermNotFoundException {
+//     Pattern pat = Pattern.compile("([^\\^]+)\\^([^\\(]*)\\(([^\\)]*)\\)");
+//     Matcher m = pat.matcher(id);
+//     boolean found = m.find();
+//     if (!found) throw new TermNotFoundException("Invalid post comp expression "+id);
+//     String genus,rel,diff;
+//     try {
+//       //log().debug("pattern found for "+id+"? "+found+" g0 "+m.group(0)+" g1 "+m.group(1)+" g2 "+m.group(2)+" g3 "+m.group(3));
+//       genus = m.group(1);
+//       rel = m.group(2);
+//       diff = m.group(3);
+//     } catch (RuntimeException e) { // IllegalState, IndexOutOfBounds
+//       throw new TermNotFoundException("Invalid post comp expression "+id);
+//     }
 
-    OBOClass gTerm = getOboClassWithExcep(genus); // throws ex
-    // OBOProperty = getOboRelationshipProperty(rel) - from rel obo - todo
-    OBOProperty p = new OBOPropertyImpl("OBO_REL:"+rel,rel);
-    OBOClass dTerm = getOboClassWithExcep(diff);
+//     OBOClass gTerm = getOboClassWithExcep(genus); // throws ex
+//     // OBOProperty = getOboRelationshipProperty(rel) - from rel obo - todo
+//     OBOProperty p = new OBOPropertyImpl("OBO_REL:"+rel,rel);
+//     OBOClass dTerm = getOboClassWithExcep(diff);
     
-    return OboUtil.makePostCompTerm(gTerm,p,dTerm);
+//     return OboUtil.makePostCompTerm(gTerm,p,dTerm);
+    
+    // from obo edit!
+    try {
+      // for now... yikes!
+      System.out.println("OntMan getting postcomp for "+id+" OS "+os);
+      return PostcompUtil.createPostcompObject(os,id);
+    }
+    catch (ParseException e) {
+      String m = "Invalid post comp expression "+id+" "+e.getMessage();
+      System.out.println(m);
+      throw new TermNotFoundException(m);
+    }
   }
   
   /** Currently iterates through every ontology looking for term, if this proves too

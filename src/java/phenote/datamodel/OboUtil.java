@@ -19,21 +19,21 @@ public class OboUtil {
   private boolean hasRelAndDiff=false;
 
 
-  /** used by OntologyManager */
-  public static OBOClass makePostCompTerm(OBOClass genus, OBOProperty rel,
-                                          OBOClass diff) {
-    String nm = pcString(genus.getName(),rel.getName(),diff.getName());
-    String id = pcString(genus.getID(),rel.getName(),diff.getID());
-    OBOClass postCompTerm = new OBOClassImpl(nm,id);
-    OBOProperty ISA = OBOProperty.IS_A;
-    OBORestrictionImpl gRel = new OBORestrictionImpl(postCompTerm,ISA,genus);
-    gRel.setCompletes(true); // post comp flag
-    postCompTerm.addParent(gRel);
-    OBORestrictionImpl dRel = new OBORestrictionImpl(postCompTerm,rel,diff);
-    dRel.setCompletes(true); // post comp
-    postCompTerm.addParent(dRel);
-    return postCompTerm;
-  }
+//   /** used by OntologyManager */
+//   public static OBOClass makePostCompTerm(OBOClass genus, OBOProperty rel,
+//                                           OBOClass diff) {
+//     String nm = pcString(genus.getName(),rel.getName(),diff.getName());
+//     String id = pcString(genus.getID(),rel.getID(),diff.getID());
+//     OBOClass postCompTerm = new OBOClassImpl(nm,id);
+//     OBOProperty ISA = OBOProperty.IS_A;
+//     OBORestrictionImpl gRel = new OBORestrictionImpl(postCompTerm,ISA,genus);
+//     gRel.setCompletes(true); // post comp flag
+//     postCompTerm.addParent(gRel);
+//     OBORestrictionImpl dRel = new OBORestrictionImpl(postCompTerm,rel,diff);
+//     dRel.setCompletes(true); // post comp
+//     postCompTerm.addParent(dRel);
+//     return postCompTerm;
+//   }
 
   public static OboUtil initPostCompTerm(OBOClass genus) {
     OboUtil ou = new OboUtil();
@@ -57,7 +57,7 @@ public class OboUtil {
     postCompTerm.addParent(dRel);
     name += relDiffString(rel.getName(),diff.getName());
     postCompTerm.setName(name);
-    id += relDiffString(rel.getName(),diff.getID());
+    id += relDiffString(rel.getID(),diff.getID());
     // just for now
     ((OBOClassImpl)postCompTerm).setID(id);
     hasRelAndDiff = true;

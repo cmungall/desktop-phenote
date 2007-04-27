@@ -141,6 +141,7 @@ public class DelimitedChar {
   private String makeTermValue(OBOClass term) {
 	//if the term comes from an ontology, need to include a col for both
 	//id and name
+    System.out.println("DelimChar term.getID: "+term.getID());
     return term.getID() + delimiter + term.getName();
   }
 
@@ -196,6 +197,7 @@ public class DelimitedChar {
     }    
     OntologyManager om = OntologyManager.inst();
     try {
+      // there can be more than one field for a fieldNum??? - MG
       List<CharField> fields = Config.inst().getCharFieldsForDelimited(fieldNum);//Ex
       //      List<CharField> fields = Config.inst().getCharFieldsForSyntaxAbbrev(tag);//Ex
 

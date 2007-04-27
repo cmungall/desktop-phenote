@@ -1,5 +1,6 @@
 package phenote.util;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -167,16 +168,16 @@ public class HtmlUtil {
     return "\n";
   }
   private static StringBuffer getParentalString(OBOClass oboClass) {
-    Set parents = oboClass.getParents();
+    Collection parents = oboClass.getParents();
     return getLinksString(parents,false);
   }
 
   private static StringBuffer getChildrenString(OBOClass oboClass) {
-    Set children = oboClass.getChildren();
+    Collection children = oboClass.getChildren();
     return getLinksString(children,true);
   }
 
-  private static StringBuffer getLinksString(Set links, boolean isChild) {
+  private static StringBuffer getLinksString(Collection links, boolean isChild) {
     StringBuffer sb = new StringBuffer();
     // or should thi sjust be done more generically with a hash of string bufs
     // for each unique link type name?

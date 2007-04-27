@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
+import org.geneontology.oboedit.datamodel.OBOSession;
 
 // or just Field? or CharField?
 // CharField doesnt handle instance data, just specifies what ontologies are 
@@ -135,7 +136,11 @@ public class CharField {
       // CHECK FOR POST COMP - could probably move this to char field but right now just
       // trying to get this working before i split town...
       if (OntologyManager.inst().isPostComp(valueString)) {
-        try { oboClass = OntologyManager.inst().getPostComp(valueString); }
+        try {
+          // just gets first ontology for now - fix this!
+          OBOSession os = getOntology().getOboSession();
+          oboClass = OntologyManager.inst().getPostComp(os,valueString);
+        }
         catch (TermNotFoundException e) {} // move on to next ontology
         
       }

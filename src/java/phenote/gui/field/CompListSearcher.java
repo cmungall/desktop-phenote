@@ -2,6 +2,7 @@ package phenote.gui.field;
 // complist package? field package?
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -90,7 +91,7 @@ public class CompListSearcher {
     //Set ontologyTermList = getCurrentOntologyTermSet();
     // THIS IS WRONG! or is it?
     for (Ontology ontology : ontologyList) {
-      List<OBOClass> ontologyTermList = ontology.getSortedTerms(); // non obsolete
+      Collection<OBOClass> ontologyTermList = ontology.getSortedTerms(); // non obsolete
       searchTerms.addAll(getSearchTermList(input,ontologyTermList));
       
       // if obsoletes set then add them in addition to regulars
@@ -106,7 +107,7 @@ public class CompListSearcher {
 
   /** helper fn for getSearchTerms(String,SearhParamsI) */
   private List<CompletionTerm> getSearchTermList(String input,
-                                                List<OBOClass> ontologyTermList) {
+                                                Collection<OBOClass> ontologyTermList) {
     SearchTermList searchTermList = new SearchTermList();
     if (ontologyTermList == null)
       return searchTermList.getList();

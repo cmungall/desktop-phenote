@@ -223,7 +223,7 @@ class PostCompGui {
     if (isPostCompTerm(term)) {
       for (Object o : term.getParents()) {
         OBORestriction r = (OBORestriction)o;
-        if (r.completes() && r.getType() == OBOProperty.IS_A)
+        if (r.completes() && r.getType().equals(OBOProperty.IS_A))
           return (OBOClass)r.getParent(); // check downcast?
       }
       // error msg?
@@ -251,7 +251,7 @@ class PostCompGui {
   }
 
   private boolean isLinkToDiff(OBORestriction r) {
-    return r.completes() && r.getType() != OBOProperty.IS_A;
+    return r.completes() && !r.getType().equals(OBOProperty.IS_A);
   }
 
   /** Throws exception if no diff term - for now only returning one diff term
