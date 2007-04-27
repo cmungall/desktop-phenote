@@ -37,10 +37,10 @@ svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/tags/release-1.1/ phe
 Note that this version has not been fully tested and might contain bugs.  Please report any bugs you find on our <a href="https://sourceforge.net/tracker/?group_id=76834&atid=887913">tracker</a>
 </p>
 <p>
-The most up-to-date version of phenote can be checked out with subversion using:
-svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/trunk phenote
+The most up-to-date version of phenote can be checked out with subversion using:<br />
+svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/trunk phenote <br />
 
-You can also browse the subversion repository at: https://obo.svn.sourceforge.net/viewvc/obo/phenote/
+You can also browse the subversion repository at: <br /> https://obo.svn.sourceforge.net/viewvc/obo/phenote/
 </p>
 <p>
 For instructions on running Phenote, or downloading the sourcecode, visit our <a href="/content/howtos">How-to pages</a>.
