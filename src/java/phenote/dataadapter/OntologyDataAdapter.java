@@ -517,9 +517,15 @@ public class OntologyDataAdapter {
   /** The ontology has been determined to be out of date (by quartz) and thus directed
       to reload itself from its file - in other words there is a new obo file to load 
       in place of old one */
-  public void reloadOntology(Ontology ont) throws OntologyException {
-    URL url = findFile(ont.getSource()); // ex
-    loadOboSessionFromUrl(ont,url,ont.getSource()); // throws ex
+//   public void reloadOntology(Ontology ont) throws OntologyException {
+//     URL url = findFile(ont.getSource()); // ex
+//     loadOboSessionFromUrl(ont,url,ont.getSource()); // throws ex
+//   }
+  public void reloadOntologies() throws OntologyException {
+    fileToOntologyCache = new HashMap<String,Ontology>();
+    // i dont think we need to clear out ontologies from OntMans char field as they
+    // will just get replaced
+    initOntologies();
   }
 
   // eventually move to util class

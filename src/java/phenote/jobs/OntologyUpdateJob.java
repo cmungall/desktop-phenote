@@ -49,7 +49,9 @@ public class OntologyUpdateJob extends QuartzJobBean {
       File newFile = newOntologyFile(ontology);
       if (newFile != null) {
         OntologyDataAdapter ontReader = OntologyDataAdapter.getInstance();
-        ontReader.reloadOntology(ontology);
+        //ontReader.reloadOntology(ontology);
+         // have to now reload all of the ontologies as they are all in 1 oboSession
+        ontReader.reloadOntologies();
 
 /*
         File archiveFile = FileUtil.archiveFile(newFile, PhenoteWebConfiguration.getInstance().getWebRoot(), archiveDirectory);
@@ -106,3 +108,4 @@ public class OntologyUpdateJob extends QuartzJobBean {
     this.purgePeriodInDays = purgePeriodInDays;
   }
 }
+
