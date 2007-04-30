@@ -13,7 +13,7 @@ function startApplets() {
      vncwindow = null;
    }
 
-   vcnwindow = window.open("http://frizzled.lbl.gov:5801", "VNC", "status=no,width=1100,height=800");
+   //   vcnwindow = window.open("http://frizzled.lbl.gov:5801", "VNC", "status=no,width=1100,height=800");
    ircwindow = window.open("about:blank", "My window", "scrollbars=no,status=no,width=510,height=430");
 
    var html = "";

@@ -10,7 +10,7 @@ When: First Tuesday of every month; 8:30am <br/>
 
 <p>You will need an IRC client to visit our chats.  You can download any number of free clients to do this.  You'll need to connect to the <b>irc.sf.net</b> and join the <b>#phenote</b> channel. </p>
 
-<p>Alternatively, you can connect to the Phenote IRC chat using the applet at the bottom of this page. </p>
+<p>Alternatively, you can connect to the Phenote IRC chat using the applet at the bottom of this page. Simply enter a name to be used during the chat.  If the name you enter is already being used by someone else, an 'anonymous' one will be assigned to you. (but you can change it once you're logged on by typing the command "/nick newname") </p>
 
   <form method="post" name="launcher">
  <table style="text-align: left; margin-left: auto; margin-right: auto; width: 524px; height: 84px;" width="100%">
