@@ -93,8 +93,11 @@ class FreeTextField extends CharFieldGui {
       return;
     }
     //String v = charField.getCharFieldEnum().getValue(chr).getName();
-    if (!chr.hasValue(getCharField()))
+    //if (!chr.hasValue(getCharField())) return;
+    if (!chr.hasValue(getCharField())) {
+      setText(""); // ?? null?
       return;
+    }
     String v = chr.getValue(getCharField()).getName();
     setText(v);
   }

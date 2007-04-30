@@ -44,14 +44,6 @@ import phenote.gui.SearchParamsI;
     details of the gui - just a field that gives text 
     should there be subclasses for free text, term, & relations? hmmmm */
 abstract class CharFieldGui {
-  //private AutoComboBox comboBox;
-  //private AbstractAutoCompList comboBox; // ???
-  //private RelationCompList relCompList;
-  //private TermCompList termCompList;
-  //private CompListSearcher compListSearcher;
-  //private JTextField textField;
-  //private FreeTextField freeTextField;
-  //private boolean isCompList = false;
   private CharField charField;
   //private FieldPanel fieldPanel;
   //private JComboBox ontologyChooserCombo;
@@ -75,13 +67,6 @@ abstract class CharFieldGui {
       t.enableListeners(true);
       t.allowPostCompButton(true);
       return t;
-      //return createCompList(charField,sp);
-//       if (charField.isRelationship()) {
-//         return new RelationCompList(searcher,editModel,charField);
-//       }
-//       else {
-//         return new TermCompList(searcher,editModel,charField);
-//       }
     }
     else {
       FreeTextField f = new FreeTextField(charField);
@@ -90,19 +75,7 @@ abstract class CharFieldGui {
     }
   }
 
-//   private static CharFieldGui createCompList(CharField charField, SearchParamsI sp) {
-//     // enableListeners - if false then ACB wont directly edit model (post comp)
-//     //compListSearcher = new CompListSearcher(charField.getOntologyList(),sp);
-//       //new CompListSearcher(charField.getFirstOntology(),fieldPanel.getSearchParams());
-//     if (charField.isRelationshipList()) {
-//       return new RelationCompList(sp,enableListeners,charField);
-//     }
-//     else {
-//       return new TermCompList(sp,enableListeners);
-//     }
-//   }
 
-  // private static CharFieldGui createFreeTextField() {} ??
 
   /** createPostCompRelationList - will relation lists ever be in main window and if
       so will they ever have listeners enabled - maybe, probably not */
@@ -134,34 +107,6 @@ abstract class CharFieldGui {
   protected CharFieldGui(CharField charField) {
     init(charField);
   }
-//   protected CharFieldGui(CharField charField,String label) {
-//     init(charField,label);
-//   }
-
-//   protected CharFieldGui(CharField charField,boolean enableListeners) {
-//     //this.enableListeners = enableListeners;
-//     enableListeners(enableListeners);
-//     init(charField);
-//   }
-    
-
-//   CharFieldGui(CharField charField, FieldPanel tp) {/*Container parent,*/
-//     init(charField,tp);
-//   }
-
-//   /** @param enableListeners - a catchall flag for disabling editing model, listening
-//       to model edits, & litening to selection - postcompGui handles these and sets
-//       this false, in main window this is true - rename? more flags? subclass?
-//       postCompGui mode?
-//       @param addCompButton if false override configuration and dont show
-//       post comp button */
-//   CharFieldGui(CharField cf,FieldPanel tp,String label,boolean enableListeners,
-//                boolean addCompButton) {
-//     this.label = label;
-//     this.enableListeners = enableListeners;
-//     this.addCompButton = addCompButton; // post comp button
-//     init(cf,tp);
-//   }
 
 
   private void init(CharField cf) { //, FieldPanel tp) {
@@ -560,3 +505,60 @@ abstract class CharFieldGui {
     return log;
   }
 }
+
+  // private static CharFieldGui createFreeTextField() {} ??
+
+//   private static CharFieldGui createCompList(CharField charField, SearchParamsI sp) {
+//     // enableListeners - if false then ACB wont directly edit model (post comp)
+//     //compListSearcher = new CompListSearcher(charField.getOntologyList(),sp);
+//       //new CompListSearcher(charField.getFirstOntology(),fieldPanel.getSearchParams());
+//     if (charField.isRelationshipList()) {
+//       return new RelationCompList(sp,enableListeners,charField);
+//     }
+//     else {
+//       return new TermCompList(sp,enableListeners);
+//     }
+//   }
+      //return createCompList(charField,sp);
+//       if (charField.isRelationship()) {
+//         return new RelationCompList(searcher,editModel,charField);
+//       }
+//       else {
+//         return new TermCompList(searcher,editModel,charField);
+//       }
+  //private AutoComboBox comboBox;
+  //private AbstractAutoCompList comboBox; // ???
+  //private RelationCompList relCompList;
+  //private TermCompList termCompList;
+  //private CompListSearcher compListSearcher;
+  //private JTextField textField;
+  //private FreeTextField freeTextField;
+  //private boolean isCompList = false;
+//   protected CharFieldGui(CharField charField,String label) {
+//     init(charField,label);
+//   }
+
+//   protected CharFieldGui(CharField charField,boolean enableListeners) {
+//     //this.enableListeners = enableListeners;
+//     enableListeners(enableListeners);
+//     init(charField);
+//   }
+    
+
+//   CharFieldGui(CharField charField, FieldPanel tp) {/*Container parent,*/
+//     init(charField,tp);
+//   }
+
+//   /** @param enableListeners - a catchall flag for disabling editing model, listening
+//       to model edits, & litening to selection - postcompGui handles these and sets
+//       this false, in main window this is true - rename? more flags? subclass?
+//       postCompGui mode?
+//       @param addCompButton if false override configuration and dont show
+//       post comp button */
+//   CharFieldGui(CharField cf,FieldPanel tp,String label,boolean enableListeners,
+//                boolean addCompButton) {
+//     this.label = label;
+//     this.enableListeners = enableListeners;
+//     this.addCompButton = addCompButton; // post comp button
+//     init(cf,tp);
+//   }
