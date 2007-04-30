@@ -496,6 +496,7 @@ abstract class CharFieldGui {
         setGuiForMultiSelect();
         return;
       }
+      if (e.getChars() == null || e.getChars().isEmpty()) return;
       updateGuiOnly = true; // selection should not cause an edit/transaction!
       setValueFromChar(e.getChars().get(0));
       updateGuiOnly = false;

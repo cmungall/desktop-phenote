@@ -326,9 +326,11 @@ public class Config {
 //     return hasDataAdapters() && dataAdapConfList.size() == 1;
 //   }
 
-  /** LoadSaveMangr uses if no extension works */
-  public DataAdapterI getSingleDataAdapter() {
+  /** LoadSaveMangr uses if no extension works. Returns null if no data adapters loaded
+      Otherwise returns 1st enabled adapter. Todo: add isdefault config */
+  public DataAdapterI getDefaultFileAdapter() {
     if (!hasDataAdapters()) return null; // ex?
+    // if defaultFileAdapter != null retrun defaultFileAdapter - set by config
     for (DataAdapterConfig d : dataAdapConfList)
       if (d.isEnabled()) return d.getDataAdapter();
     //return dataAdapConfList.get(0);

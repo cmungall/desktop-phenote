@@ -14,6 +14,7 @@ public interface CharacterListI {
   public void remove(int i);
   public void remove(CharacterI c);
   public int size();
+  public boolean isEmpty();
   public int indexOf(CharacterI c);
   public List<CharacterI> getList();
   public boolean equals(CharacterListI cl);

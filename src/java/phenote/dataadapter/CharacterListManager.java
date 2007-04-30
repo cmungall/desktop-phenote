@@ -4,6 +4,8 @@ package phenote.dataadapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
+
 import phenote.datamodel.CharacterListI;
 import phenote.datamodel.CharacterList;
 
@@ -26,6 +28,12 @@ public class CharacterListManager {
   }
 
   public void setCharacterList(Object source, CharacterListI charList) {
+    if (charList == null || charList.isEmpty()) {
+      String m = "Data list is empty, load of data failed";
+      // should this send message to gui?
+      JOptionPane.showMessageDialog(null,m,"Load failure",JOptionPane.ERROR_MESSAGE);
+      return;
+    }
     characterList = charList;
     fireChangeEvent(source,charList);
   }

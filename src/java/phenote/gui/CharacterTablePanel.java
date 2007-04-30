@@ -153,6 +153,7 @@ public class CharacterTablePanel extends JPanel {
   /** row number is zero based for tables */
   private void selectRow(int row) {
     if (charJTable == null) return;
+    if (charJTable.getRowCount() == 0) return;
     if (row < 0) row = 0; // ???
     // is row 0 based and table 1 based?
     if (row >= charJTable.getRowCount()) row = charJTable.getRowCount() - 1;

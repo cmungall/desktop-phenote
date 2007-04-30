@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 import java.lang.ClassNotFoundException;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 
 import phenote.dataadapter.DataAdapterI;
@@ -67,7 +68,15 @@ public class LoadSaveManager {
   /**Loads a new document of characters from the given file using the given data adapter.*/
   public void loadData(File f, DataAdapterI adapter) {
     CharacterListI charList = adapter.load(f);
-    CharacterListManager.inst().setCharacterList(this,charList);
+    if (charList == null || charList.isEmpty()) {
+      String m = "Failed to load in data for file "+f+" using data adapter "
+        +adapter.getDescription();
+      JOptionPane.showMessageDialog(null,m,"Load failure",JOptionPane.ERROR_MESSAGE); 
+      return;
+    }
+    else {
+      CharacterListManager.inst().setCharacterList(this,charList);
+    }
   }
   
   /**Saves the document's characters to a file, prompting the user to choose a file and data adapter.*/
@@ -132,7 +141,12 @@ public class LoadSaveManager {
       }
     }
     // just try first adapter if none match extension
-    return Config.inst().getSingleDataAdapter();
+    DataAdapterI da = Config.inst().getDefaultFileAdapter();
+    String m = "Data adapter has not been specified, and file suffix does not map to any"
+      +" data adapter, using default/first data adapter: "+da.getDescription();
+    JOptionPane.showMessageDialog(null,m,"No data adapter specified",
+                            JOptionPane.INFORMATION_MESSAGE);
+    return da;
   }
   
   
