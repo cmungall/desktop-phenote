@@ -1,0 +1,36 @@
+<!--#include virtual="/ssi/header.html" -->
+  <script language="JavaScript" src="/irc_script.js"><!-- --></script>
+<div id="page_body">
+
+<!--#include virtual="/ssi/navi_home.html" -->
+
+<div id="main_content">
+<h2>Phenote Working Group IRC Chat</h2>
+
+When: First Tuesday of every month; 8:30am <br/>
+
+<p>You will need an IRC client to visit our chats.  You can download any number of free clients to do this.  You'll need to connect to the <b>irc.sf.net</b> and join the <b>#phenote</b> channel. </p>
+
+<p>Alternatively, you can connect to the Phenote IRC chat using the applet at the bottom of this page. </p>
+
+  <form method="post" name="launcher">
+ <table style="text-align: left; margin-left: auto; margin-right: auto; width: 524px; height: 84px;" width="100%">
+<tbody>
+  <tr>
+    <td colspan="1" rowspan="1" width="156">IRC Nickname</td>
+    <td style="width: 327px;"><input size="40" name="username"></td>
+  </tr>
+  <tr>
+    <td colspan="2" rowspan="1" style="height: 25px; color: rgb(0, 0, 0); text-align: center; width: 327px;"><input name="appletbutton" value="Start Applets" style="color: rgb(0, 0, 0); "onclick="startApplets()" type="button"><br>
+    </td>
+  </tr>
+
+</tbody>
+</table>
+</form>
+
+</div>
+</div>
+
+<!--#include virtual="/ssi/footer.shtml" -->
+
