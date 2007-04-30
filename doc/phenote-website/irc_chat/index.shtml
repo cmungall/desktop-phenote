@@ -1,5 +1,4 @@
 <!--#include virtual="/ssi/header.html" -->
-  <script language="JavaScript" src="/irc_script.js"><!-- --></script>
 <div id="page_body">
 
 <!--#include virtual="/ssi/navi_home.html" -->
