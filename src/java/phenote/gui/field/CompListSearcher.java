@@ -27,21 +27,19 @@ public class CompListSearcher {
   //private Ontology ontology;
   //private boolean searchAll=false;
   private List<Ontology> ontologyList = new ArrayList<Ontology>(3);
-  private SearchParamsI searchParams = SearchParams.inst();
+  private SearchParamsI searchParams = SearchParams.inst(); // singleton
 
   /** Ontology - the initial ontology to search, setOntology changes this,
       initially only searches the one ontology (not ALL) - used by servlet which
       currently doesnt do ALL */
-  public CompListSearcher(Ontology o,SearchParamsI sp) {
+  public CompListSearcher(Ontology o) {
     setOntology(o);
-//    searchParams = sp;
   }
 
   /** l - initial list of ontologies to search, as in ALL. used by CharFieldGui
       to set list to all ontols in field as initial setting is ALL - is this funny? */
-  public CompListSearcher(List<Ontology> l,SearchParamsI sp) {
+  public CompListSearcher(List<Ontology> l) {
     setOntologies(l);
-//    searchParams = sp;
   }
 
   //void setSearchAll(boolean s) { searchAll = s; }

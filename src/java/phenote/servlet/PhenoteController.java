@@ -136,7 +136,7 @@ public class PhenoteController extends AbstractCommandController {
     SearchParams searchParams = SearchParams.inst();
     searchParams.setParam(SearchFilterType.TERM, true);
     searchParams.setParam(SearchFilterType.SYN, true);
-    return new CompListSearcher(getOntology(ontologyName), searchParams);
+    return new CompListSearcher(getOntology(ontologyName));
   }
 
   /**
