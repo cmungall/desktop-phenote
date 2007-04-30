@@ -1,0 +1,46 @@
+<!--#include virtual="/ssi/header.html" -->
+<div id="page_body">
+
+<!--#include virtual="/ssi/navi_home.html" -->
+
+<div id="main_content">
+<h2>Free IRC Clients</h2>
+
+<p>There are several Internet Relay Chat (IRC) software clients available for every computer platform, such as: </p>
+  <table border="1" height="40" width="500">
+    <tbody>
+      <tr>
+	<td align="center" width="159"><b>Mac</b></td>
+	<td align="center" width="159"><b>Windows</b></td>
+	<td align="center" width="160"><b>Linux</b></td>
+      </tr>
+      <tr>
+	<td align="center" width="159">
+	  <a href="http://homepage.mac.com/philrobin/conversation/">Conversation</a> <br />
+	  <a href="http://www.snak.com/Snak.html">Snak</a><br />
+	  <a href="http://www.ircle.com/">ircle</a>
+	</td>
+	<td align="center" width="159">
+	  <a href="http://www.mirc.com/">mIRC</a><br />
+	  <a href="http://www.xircon.com/">Xircon</a><br />
+	  <span style="color: rgb(0, 0, 0);"><span
+	    style="color: rgb(0, 0, 0);">
+	  <a href="http://www.xchat.org/">xchat</a></span></span>
+	</td>
+	<td align="center" width="160">
+	  <a href="http://konversation.kde.org/">Konversation</a><br />
+	  <a href="http://www.xchat.org/">xchat</a><br />
+	  <a href="http://www.bitchx.org/">BitchX</a>
+	</td>
+      </tr>
+    </tbody>
+  </table>
+  <br />
+<p>  Although we won't be using most IRC features during the Working Group chats, there are dozens and dozens of commands and special IRC features. If you want to read up, take a look at the IRC primer at
+  <a href="http://www.irchelp.org/irchelp/ircprimer.html">http://www.irchelp.org/irchelp/ircprimer.html</a></p>
+
+</div>
+</div>
+
+<!--#include virtual="/ssi/footer.shtml" -->
+

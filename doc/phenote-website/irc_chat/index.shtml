@@ -8,8 +8,9 @@
 
 When: First Tuesday of every month; 8:30am <br/>
 
-<p>You will need an IRC client to visit our chats.  You can download any number of free clients to do this.  You'll need to connect to the <b>irc.sf.net</b> and join the <b>#phenote</b> channel. </p>
+<p>You will need an IRC client to visit our chats.  You can download any number of <a href="/irc_chat/irc_clients.shtml">free clients</a> to do this.  You'll need to connect to the <b>irc.sf.net</b> and join the <b>#phenote</b> channel. </p>
 
+<hr />
 <p>Alternatively, you can connect to the Phenote IRC chat using the applet at the bottom of this page. Simply enter a name to be used during the chat.  If the name you enter is already being used by someone else, an 'anonymous' one will be assigned to you. (but you can change it once you're logged on by typing the command "/nick newname") </p>
 
   <form method="post" name="launcher">
@@ -20,7 +21,7 @@ When: First Tuesday of every month; 8:30am <br/>
     <td style="width: 327px;"><input size="40" name="username"></td>
   </tr>
   <tr>
-    <td colspan="2" rowspan="1" style="height: 25px; color: rgb(0, 0, 0); text-align: center; width: 327px;"><input name="appletbutton" value="Start Applets" style="color: rgb(0, 0, 0); "onclick="startApplets()" type="button"><br>
+    <td colspan="2" rowspan="1" style="height: 25px; color: rgb(0, 0, 0); text-align: center; width: 327px;"><input name="appletbutton" value="Join IRC chat" style="color: rgb(0, 0, 0); "onclick="startApplets()" type="button"><br>
     </td>
   </tr>
 
