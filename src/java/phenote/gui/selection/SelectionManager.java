@@ -18,6 +18,7 @@ public class SelectionManager {
   // phase out for list...
   private CharacterI selectedCharacter;
   private List<CharacterI> selectedCharList;
+  private List<CharacterI> previouslySelectedChars;
 
   public static SelectionManager inst() {
     if (singleton == null) singleton = new SelectionManager();
@@ -29,6 +30,8 @@ public class SelectionManager {
     charListenerList = new ArrayList<CharSelectionListener>(4);
   }
 
+  // TERM SELECTION
+
   public void addTermSelectionListener(TermSelectionListener l) {
     termListenerList.add(l);
   }
@@ -39,27 +42,27 @@ public class SelectionManager {
 	  boolean isMouseOver = false;
 	  boolean isHyperlink = true;
 	  TermSelectionEvent e = makeTermEvent(source, oboClass, l, isMouseOver, isHyperlink);
-	  fireSelect(e);
+	  fireTermSelect(e);
   }
   
   public void selectMouseOverTerm(Object source, OBOClass oboClass,UseTermListener l) {
 	boolean isMouseOver = true;
 	boolean isHyperlink = false;
     TermSelectionEvent e = makeTermEvent(source,oboClass,l,isMouseOver,isHyperlink);
-    fireSelect(e);
+    fireTermSelect(e);
   }
   
   public void selectTerm(Object source,OBOClass oboClass, boolean isHyperlink) {
 	boolean isMouseOver = false;
 //	System.out.println("ishyperlink="+isHyperlink);
 	TermSelectionEvent e = makeTermEvent(source,oboClass,null,isMouseOver, isHyperlink);
-    if (!isHyperlink) fireSelect(e);
+    if (!isHyperlink) fireTermSelect(e);
   }
 
-  private void fireSelect(TermSelectionEvent e) {
+  private void fireTermSelect(TermSelectionEvent e) {
     Iterator<TermSelectionListener> it = termListenerList.iterator();
     while(it.hasNext())
-      it.next().termSelected(e);   
+      it.next().termSelected(e);
   }
   
   
@@ -68,6 +71,8 @@ public class SelectionManager {
   private TermSelectionEvent makeTermEvent(Object src, OBOClass oc,UseTermListener l,boolean mouse, boolean link) {
     return new TermSelectionEvent(src,oc,l,mouse,link);
   }
+
+  // CHARACTER SELECTION
 
   public CharacterI getFirstSelectedCharacter() {
     if (selectedCharList == null || selectedCharList.isEmpty())
@@ -89,9 +94,10 @@ public class SelectionManager {
   public void selectCharacters(Object src, List<CharacterI> chars) {
     selectedCharList = chars;
     //if (chars.size() == 1) { selectCharacter(src,chars.get(0)); return; }
-    CharSelectionEvent e = new CharSelectionEvent(src,chars);
+    CharSelectionEvent e = new CharSelectionEvent(src,chars,previouslySelectedChars);
     for (CharSelectionListener l : charListenerList)
       l.charactersSelected(e);
+    previouslySelectedChars = selectedCharList;
   }
  
 

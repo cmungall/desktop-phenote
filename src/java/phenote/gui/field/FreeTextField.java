@@ -28,6 +28,7 @@ import phenote.datamodel.CharField;
 //import phenote.datamodel.CharFieldEnum; // phase out
 import phenote.edit.CompoundTransaction;
 import phenote.edit.EditManager;
+import phenote.gui.selection.CharSelectionEvent;
 import phenote.gui.selection.SelectionManager;
 
 // should this be a subclass of charfieldGui? maybe?
@@ -136,30 +137,44 @@ class FreeTextField extends CharFieldGui {
   private class FreeFocusListener implements FocusListener {
     public void focusGained(FocusEvent e) {}
     public void focusLost(FocusEvent e) {
-      updateModel();
+      //updateModel();
+      FreeTextField.this.focusLost();
     }
   }
 
+  protected void focusLost() { updateModel(); }
+
+  /** update model using currently selected chars */
   private void updateModel() {
+    List<CharacterI> chars = getSelectedChars();
+    updateModel(chars);
+  }
+
+  private void updateModel(List<CharacterI> chars) {
     // if only updating gui (multi select clear) then dont update model
     if (updateGuiOnly()) return;
     if (!guiTextHasChanged) return; // gui hasnt been edited
-    List<CharacterI> chars = getSelectedChars();
+
     String v = getText();
     //CompoundTransaction ct = new CompoundTransaction(chars,getCharFieldEnum(),v);
     CompoundTransaction ct = CompoundTransaction.makeUpdate(chars,getCharField(),v);
     EditManager.inst().updateModel(this,ct);//charFieldGui,ct); // cfg source
     guiTextHasChanged = false; // reset flag
+
+  }
+
+  /** selection (from table) comes in before focus lost! update model with
+      previous selection */
+  protected void charactersSelected(CharSelectionEvent e) {
+    if (e.hasPreviouslySelectedChars())
+      updateModel(e.getPreviouslySelectedChars());
+    super.charactersSelected(e); // CharFieldGui
   }
   
   private List<CharacterI> getSelectedChars() {
     return SelectionManager.inst().getSelectedChars();
   }
   
-  //private CharFieldEnum getCharFieldEnum() { return charFieldGui.getCharFieldEnum(); }
-  
-  
-
 
   /** This is where it is noted that the gui has been edited, only update  
     the model on focus change if the gui has been actually edited */

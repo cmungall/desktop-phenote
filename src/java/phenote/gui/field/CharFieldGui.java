@@ -435,19 +435,28 @@ abstract class CharFieldGui {
 
   private class FieldCharSelectListener implements CharSelectionListener {
     public void charactersSelected(CharSelectionEvent e) {
-      // if multi select then clear out fields - alternatively could do first char
-      // or only show fields that are all same? 
-      if (e.isMultiSelect()) {
-        setGuiForMultiSelect();
-        return;
-      }
-      if (e.getChars() == null || e.getChars().isEmpty()) return;
-      updateGuiOnly = true; // selection should not cause an edit/transaction!
-      setValueFromChar(e.getChars().get(0));
-      updateGuiOnly = false;
+      CharFieldGui.this.charactersSelected(e);
     }
   }
 
+  /** FreeTextField both overrides and calls this as it needs to edit model
+      on focus change */
+  protected void charactersSelected(CharSelectionEvent e) {
+    // if multi select then clear out fields - alternatively could do first char
+    // or only show fields that are all same? 
+    if (e.isMultiSelect()) {
+      setGuiForMultiSelect();
+      return;
+    }
+    if (e.getChars() == null || e.getChars().isEmpty()) return;
+    updateGuiOnly = true; // selection should not cause an edit/transaction!
+    setValueFromChar(e.getChars().get(0));
+    updateGuiOnly = false;
+  }
+
+  /** overridden by FreeTextField, for selection to tell free text field that
+      focus was lost before selection goes through and rubs out change */
+  //protected void focusLost() {}
 
 //   /** I think post-comp should only be closeable if its empty (in expand collapse
 //    inframe case - now window) */ --> TermCompList
