@@ -1,0 +1,21 @@
+[Settings]
+html=
+images=Images
+ccs=htmlhelp.css
+i=phenote.hhk
+last_path=C:\Documents and Settings\Nicole\Desktop\phenote-helper\html
+prefix list=IDH_,
+preview=1
+css=C:\Documents and Settings\Nicole\Desktop\phenote-helper\javahelp.css
+t=PhenoteTOC.xml
+web_dhtml=1
+web_indxpg=PhenoteWebIndex.html
+web_tocpg=PhenoteWebTOC.html
+web_mainpg=PhenoteWebHelp.html
+web_left=30
+web_pix=0
+web_maintitle=Phenote User's Guide
+web_toctitle=Contents
+web_idxtitle=Index
+[IMAGE MAP]
+MapCount=0

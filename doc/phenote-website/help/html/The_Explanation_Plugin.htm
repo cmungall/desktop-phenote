@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD html 3.2//EN">
+<html>
+<head>
+<meta name="GENERATOR" content="Solutionsoft HelpBreeze JavaHelp Edition">
+<title>The Explanation Plugin</title>
+<link rel="stylesheet" type="text/css" href="../javahelp.css">
+</head>
+<body bgcolor="#ffffff">
+<h1>The Explanation Plugin</h1>
+<p>The explanation plugin displays the explanation for any 
+currently selected links. When the explanation plugin is opened, it looks like 
+this:</p>
+<p><IMG height=155 hspace=0 src="../images/explanation_plugin_initial.gif" 
+width=366 border=0></p>
+<p>Initially, the explanation plugin just shows a list of the currently selected 
+links. Double click a link to see its explanation:</p>
+<p><IMG height=183 hspace=0 src="../images/explanation_plugin_initial_.gif" 
+width=395 border=0></p>
+<p>The current link has two explanations: GIVEN, and an explanation based on the 
+TRANSITIVITY rule. (This means that this is a redundant link, since it is GIVEN 
+- hence created by a human - and can be inferred by the reasoner. See <A 
+href="The_OBO_Edit_Reasoner.htm#redundant">redundant links</A>).</p>
+<p>Whenever any line is selected in the explanation tree, more details are 
+given&nbsp;in the text field at the bottom of the window. In this case, since a 
+link is selected, all that is shown is the link description.</p>
+<p>Note the little control next to the TRANSITIVITY explanation. This means that 
+the explanation can be expanded to show the links that support the explanation. 
+Double-click and explanation (or just click the expand control) to show the 
+supporting links:</p>
+<p><IMG height=219 hspace=0 src="../images/explanation_plugin_supporti.gif" 
+width=602 border=0></p>
+<p>The two supporting links show how the implied link "virion transport vesicle 
+-part_of-&gt; intracellular" was derived: "virion transport vescicle -is_a-&gt; 
+intracellular membrane-bound organelle" and "intracellular membrane-bound 
+organelle" -part_of-&gt; intracellular", therefore "virion transport vesicle 
+-part_of-&gt; intracellular".
+</p>
+<p>Notice that there are expansion controls next to each piece of supporting 
+evidence. If these are expanded, we see the supporting evidence <em>for</em> the 
+supporting evidence:</p>
+<p><IMG height=259 hspace=0 src="../images/explanation_plugin_meta_sup.gif" 
+width=505 border=0></p>
+<p>We can see that "intracellular membrane-bound organelle -part_of-&gt; 
+intracellular" is itself an implied link, because its only explanation is 
+TRANSITIVITY.&nbsp;It is possible to expand that explanation to 
+discover&nbsp;the relevant supporting links, which can in turn be expanded to 
+display their evidence, and so on and so on.</p>
+<p>When the explanation tree for any link is fully expanded, all the leaves 
+will&nbsp;be the GIVEN explanation, because all implied links are initially 
+derived from the user-provided links in the ontology.&nbsp;</p>
+
+<div class="sidebar">
+<h1>Layout Information</h1>
+<hr>
+<p class="sidebar">This component's layout id is<br>
+<code><b>plugin:org.geneontology.oboedit.plugin.ExplanationPlugin</b></code></p>
+<p>See <A href="Customizing_the_Interface.htm">Customizing 
+the Interface</A> for more information </p>
+</div>
+
+</body>
+</html>

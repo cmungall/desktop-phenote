@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="GENERATOR" content="Solutionsoft HelpBreeze JavaHelp Edition">
+<title>Phenote Webstart</title>
+<link rel="stylesheet" type="text/css" href="../javahelp.css">
+</head>
+<body bgcolor="#ffffff">
+<h1>Phenote Webstart</h1>
+<p>Phenote is a Java application,&nbsp;that can be launched 
+from the web using Java Webstart.&nbsp;</p>
+<h2>
+<h2>Downloading and Running Phenote</h2>    </h2>
+<p>You can access Phenote webstart&nbsp;at the website, 
+http://<a 
+href="http://www.phenote.org/content/downloads">www.phenote.org/content/downloads</a>.&nbsp; Clicking on 
+the "Webstart" link will download the application and place a link 
+'phenote.jnlp' in your download location (typically your Desktop) and 
+run.&nbsp;&nbsp;The indication that a link works is that you get a popup that 
+says "Java Loading", or something like that and then a bunch of files get 
+downloaded 
+and eventually the application actually comes up.&nbsp; It will ask you to verify 
+a security certificate from the National Center for Biomedical 
+Ontology.&nbsp;</p>
+<p> 
+   If nothing happens, this may indicate that your browser is 
+not properly configured.&nbsp; See instructions below for configuring your 
+browser.</p>
+<p>In the future, you can start the software by clicking the 'phenote.jnlp' 
+link.</p>
+<h2>Configuring your MacOS or Windows browser for Webstart</h2>
+<p>You must have Java 1.5 or later installed on your computer. Your browser must 
+be configured to recognize webstart appications with the 'jnlp' extension. Most 
+Mac and Windows browsers tend to have webstart pre-installed on their browsers, 
+but you may be asked to update the Java that is installed. </p>
+<h2>Configuring your Linux browser for Webstart</h2>
+<p>              
+           
+            
+ Linux browsers tend not to have webstart pre-installed.&nbsp; You must set up an 
+association between the MIME type, which is an 
+"application/x-java-jnlp-file".<br></p>
+<p>These are the steps I had to go through to get webstart installed on my 
+Mozilla browser on Linux, which does not come with webstart pre-installed:</p>
+<h3>Download/Install Java Webstart</h3>
+<p>First you need to see if you have webstart already installed on your 
+computer. If you have java on your computer then usually webstart comes with 
+java so you should have it. So if you have java you first need to find out where 
+it is installed. In linux you type "which java" at the command line. For me this 
+comes back with<br><br>/usr/lib/java/bin/java</p>
+<p>Since Phenote requires Java 1.5, you need to make sure you are using java 
+1.5. Do a "java-version" at the command line. If you have anything less than 
+1.5, you need to install java 1.5, or if you have 1.5 installed somewhere (but 
+its not the default) you need to find it and grab its javaws. If you try to 
+webstart phenote with a java less than 1.5 nothing will happen and it won't even 
+indicate that its the wrong java, you just have to know.<br><br>So what I found 
+is in java 1.5 javaws is in both the bin and jre directory. So cd to 
+/usr/lib/java and do a "ls jre" and "ls bin" (on windows "dir jre" &amp; "dir 
+bin") and look for a file called "javaws", which is the webstart application. 
+The full path plus javaws is what you will need below. So for me its 
+"/usr/lib/java/jre/javaws"<br><br>If webstart is not on your computer (or 
+network) you can download it from(make sure its from java 1.5):<br><br><a 
+href="http://java.sun.com/products/javawebstart/download.jsp">http://java.sun.com/products/javawebstart/download.jsp</a></p>
+<h3>Associating the MIME type</h3>
+<p>Now that we've found the webstart application we are ready to associate it 
+with a mime type in the browser. Here is how it is done in Mozilla on linux, I 
+hope other browsers are somewhat similar.<br><br>Hit the "Edit" menu, and its 
+"Preferences" sub menu to get the Preferences dialog.&nbsp; Expand the 
+"Navigator" category, and under that click on "Helper Application", which is 
+where mime types get associated with applications. Click the "New Type" button, 
+which brings up a New Type dialog box. In the "MIME Type" field enter 
+"application/x-java-jnlp-file".&nbsp; Under "Description" you can just put "Java 
+Webstart". Under "Extension" put "jnlp". Click on "Open it with:" and in the 
+associated field either entor or browse for the location of webstart on your 
+computer. This is what you were digging for above. For my computer I enter 
+"/usr/lib/java/jre/javaws", the location of my webstart app. then deselect 
+"Always ask me before handling files of this type", as who wants to keep being 
+asked, and hit "OK" and hit "OK" as well in the Helper Applications 
+dialog.<br><br>You now need to restart your browser for it to pick up the new 
+mime type association for webstart and hopefully the above link should now work. 
+</p>
+<h2>Other Hints</h2>
+<p>One thing thats also handy if there are problems bringing up webstart is to 
+bring up the browser's java console (this may not be supported by all browsers). 
+This should give some feedback on things happening behind the scenes of the 
+webstart application, so its good for trouble shooting. In mozilla this can be 
+brought up with menu Tools-&gt;Web Development-&gt;Java 
+Console.<br></p>
+</body>
+</html>

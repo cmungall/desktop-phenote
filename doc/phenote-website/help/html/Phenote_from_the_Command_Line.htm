@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="GENERATOR" content="Solutionsoft HelpBreeze JavaHelp Edition">
+<title>Phenote from the Command Line</title>
+<link rel="stylesheet" type="text/css" href="../javahelp.css">
+</head>
+<body bgcolor="#ffffff">
+<h1>Phenote from the Command Line</h1>
+<h2>1) Install Java 1.5 or higher</h2>
+<p>On Macs, Java 1.5 can be installed automatically by doing a system software update. On any other platform, download 
+the appropriate binaries from the latest Java, currently JRE 6, <a 
+href="http://java.sun.com/javase/downloads/index.jsp">http://java.sun.com/javase/downloads/index.jsp</a>. 
+To run Java applications, all you need is the JRE (Java Runtime Environment). If 
+you need all the tools to run and <em>create</em> Java applications, download 
+the J2SE SDK (Software Development Kit).</p>
+<div class="sidebar">
+<h1>What version of Java do I have?</h1>
+<hr>
+
+<p>Most new computers come with some version of Java already installed. To 
+figure out what version you have, open up a command prompt, or console, or 
+terminal, or whatever you use on your platform to type commands onto a 
+command-line. Then type:</p><code><b>java -version</b></code> 
+<p>and press enter. You should get a response like:</p>
+<p>&nbsp;</p><code><b>java version "1.5.0_06"<br>Java(TM) 2 Runtime Environment, 
+Standard Edition (build 1.5.0_06-b05)<br>Java HotSpot(TM) Client VM (build 
+1.5.0_06-b05, mixed mode, sharing)</b></code> 
+<p>The very first line tells you which version of Java is installed.</p>
+<p>If you get a response like:</p>
+<p>&nbsp;</p><code><b>'java' is not recognized as an internal or external 
+command, operable program or batch file.</b></code> 
+<p>or</p>
+<p>&nbsp;</p><code><b>bash: java: command not found</b></code> 
+<p>Check that you typed a space after "java" and before "-version". If you 
+entered the command correctly but still do not get a response indicating a 
+specific version of Java, then Java is not installed, and you need to follow the 
+installation instructions above.</p></div>
+<p>&nbsp;</p>
+<h2>2) Get Phenote</h2>
+<p>The latest development version of Phenote can be retrieved 
+from&nbsp;SourceForge.net Subversion repository through SVN with the following 
+instruction set: </p><pre>svn co <A href="https://obo.svn.sourceforge.net/svnroot/obo/phenote/trunk">https://obo.svn.sourceforge.net/svnroot/obo/phenote/trunk</a>&nbsp;phenote </pre>
+<p>If you would like to check out a particular release, you will have to check 
+out that particular version from the "tags" directory.&nbsp; For example, to 
+checkout version 1.1 into your phenote1.1/ directory, you would use the 
+following command:</p><pre>svn co <A href="https://obo.svn.sourceforge.net/svnroot/obo/phenote/tags/release-1.1/">https://obo.svn.sourceforge.net/svnroot/obo/phenote/tags/release-1.1/</a>&nbsp;phenote1.1</pre>
+<p>Information about accessing this Subversion repository may be found in a 
+document titled "<a href="http://sourceforge.net/docs/E09">Subversion (Version 
+Control for Source Code)</a>". </p>
+<h2>  3) Launch Phenote</h2>
+<ul>           
+            
+               
+  <li>           
+            
+        On unix platforms (including Mac OS), run 
+  the "phenote" shell script to start the program (to do this on most Unix 
+  platforms, change to the Phenote directory and type "./phenote"). On other 
+  platforms, launch the phenote.jar file in the Phenote installation directory. 
+  This can be done either by double-clicking, or by running the command "java 
+  -jar phenote.jar" at a command prompt.</li></ul>
+</body>
+</html>
