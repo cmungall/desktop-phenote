@@ -9,7 +9,7 @@ public class PhenoteVersion {
 
   //private static final float MAJOR_VERSION_NUM = 0.8f;
   //private static final float SUB_VERSION_NUM = .3f;
-  private static final String VERSION = "1.2-beta3"; // ??
+  private static final String VERSION = "1.2 release"; // ??
   // type is "dev" or "release" 
   //private static final String type = " dev"; // "release"
 
@@ -19,7 +19,7 @@ public class PhenoteVersion {
   }
 
   public static Date getDateOfVersion(){
-    GregorianCalendar cal = new GregorianCalendar(2007, GregorianCalendar.MARCH, 16);
+    GregorianCalendar cal = new GregorianCalendar(2007, GregorianCalendar.MAY, 2);
     return cal.getTime();
   }
 
