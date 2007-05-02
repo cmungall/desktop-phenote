@@ -14,7 +14,7 @@ class SettingsMenu extends JMenu {
   private final int ITEM_PLAIN = 0;  // Item types
   private final int ITEM_CHECK = 1;
   private final int ITEM_RADIO = 2;
-  private JMenu menuSearchFilter;
+//  private JMenu menuSearchFilter;
   private JMenuItem menuSearchFilterTerm;
   private JMenuItem menuSearchFilterSynonym;
   private JMenuItem menuSearchFilterDefinition;
@@ -32,26 +32,29 @@ class SettingsMenu extends JMenu {
   private void init() {
 
     // Build the search types sub-menu
-    menuSearchFilter = new JMenu("Search Filters");
-    menuSearchFilter.setMnemonic('F');
+//    menuSearchFilter = new JMenu("Search Filters");
+//    menuSearchFilter.setMnemonic('F');
 
     //set defaults
     getSearchParams().setParam(SearchFilterType.TERM, true); //default Term = on
     getSearchParams().setParam(SearchFilterType.SYN, true); //default Syn = on
+    getSearchParams().setParam(SearchFilterType.DEF, false); //default Def = off
+    getSearchParams().setParam(SearchFilterType.OBS, false); //default Obs = off
+    
 
     // Create property items based on status
-    menuSearchFilterTerm = CreateMenuItem(menuSearchFilter, ITEM_CHECK,
-            SearchFilterType.TERM.getName(), null, 'T', "Look for partial matches within Term Names",
-            getSearchParams().getParam(SearchFilterType.TERM));
-    menuSearchFilterSynonym = CreateMenuItem(menuSearchFilter, ITEM_CHECK,
+    menuSearchFilterTerm = CreateMenuItem(this, ITEM_CHECK,
+        SearchFilterType.TERM.getName(), null, 'T', "Look for partial matches within Term Names",
+        getSearchParams().getParam(SearchFilterType.TERM));
+    menuSearchFilterSynonym = CreateMenuItem(this, ITEM_CHECK,
             SearchFilterType.SYN.getName(), null, 'S', "Look for partial matches within Synonyms of Terms",
             getSearchParams().getParam(SearchFilterType.SYN));
-    menuSearchFilterDefinition = CreateMenuItem(menuSearchFilter, ITEM_CHECK,
+    menuSearchFilterDefinition = CreateMenuItem(this, ITEM_CHECK,
             SearchFilterType.DEF.getName(), null, 'D', "Look for partial matches within the Definition of Terms",
             getSearchParams().getParam(SearchFilterType.DEF));
 
-    addSeparator();  //obs are in a class by themselves.
-    menuSearchFilterObsolete = CreateMenuItem(menuSearchFilter, ITEM_CHECK,
+//    addSeparator();  //obs are in a class by themselves.
+    menuSearchFilterObsolete = CreateMenuItem(this, ITEM_CHECK,
             SearchFilterType.OBS.getName(), null, 'O', "Look for partial matches within Obsolete Term Names",
             getSearchParams().getParam(SearchFilterType.OBS));
 
@@ -61,7 +64,7 @@ class SettingsMenu extends JMenu {
 ////    searchSettings.setEnabled(Config.inst().hasDataAdapters());
 //    searchSettings.setActionCommand("search");
 //    searchSettings.addActionListener(actionListener);
-    add(menuSearchFilter);
+//    add(menuSearchFilter);
 
     addSeparator();
 
