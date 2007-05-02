@@ -310,12 +310,12 @@ public class Ontology {
     // BUG - this includes obsoletes!
     nsQuery.setAllowObsoletes(false);
     sortedTerms = engine.query(nsQuery, false);
-     System.out.println("Non-obsolete: got " + sortedTerms.size()+" namespace hits in " + (System.currentTimeMillis() - time)+ "ms # of namespaces: "+spaces.size()+" printing terms in order: ");
+    //System.out.println("Non-obsolete: got " + sortedTerms.size()+" namespace hits in " + (System.currentTimeMillis() - time)+ "ms # of namespaces: "+spaces.size()+" printing terms in order: ");
 
     nsQuery.setAllowObsoletes(true);
     nsQuery.setAllowNonObsoletes(false);
     sortedObsoleteTerms = engine.query(nsQuery, false);
-     System.out.println("Obsolete: got " + sortedTerms.size()+" namespace hits in " + (System.currentTimeMillis() - time)+ "ms # of namespaces: "+spaces.size()+" printing terms in order: ");
+    //System.out.println("Obsolete: got " + sortedTerms.size()+" namespace hits in " + (System.currentTimeMillis() - time)+ "ms # of namespaces: "+spaces.size()+" printing terms in order: ");
 
     if (hasSlim()) {
       CategoryQuery catQuery = new CategoryQuery(slim);
