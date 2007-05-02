@@ -41,7 +41,7 @@ public class Ontology {
   private String version;
   private OBOSession oboSession;
   private Collection<OBOClass> sortedTerms; // was List
-  private List<OBOClass> sortedObsoleteTerms;
+  private Collection<OBOClass> sortedObsoleteTerms;
   private List<OBOProperty> sortedRelations;
   private String slim; 
   private String filterOutString;
@@ -184,7 +184,7 @@ public class Ontology {
     return sortedTerms;
   }
 
-  public List<OBOClass> getSortedObsoleteTerms() {
+  public Collection<OBOClass> getSortedObsoleteTerms() {
     return sortedObsoleteTerms;
   }
 
@@ -297,7 +297,8 @@ public class Ontology {
     
     // for now just grab 1st namespace as namespacequery only takes 1 namespace
     //Namespace ns = spaces.toArray(new Namespace[0])[0];
-    Query<OBOClass, OBOClass> nsQuery =
+    //Query<OBOClass, OBOClass> nsQuery =
+    NamespaceQuery nsQuery =
       new NamespaceQuery(spaces.toArray(new Namespace[0]));
     // create a new query engine on the session we just loaded
     QueryEngine engine = new QueryEngine(oboSession);
@@ -305,24 +306,27 @@ public class Ontology {
     // run the namespace query and cache the results
     long time = System.currentTimeMillis();
     //Collection<OBOClass> 
-    // true -> cache result
+    // true -> cache result ??? do we need to cache - i dont think so
     // BUG - this includes obsoletes!
-    sortedTerms = engine.query(nsQuery, true);
-    System.out.println("got " + sortedTerms.size()
-                       + " namespace hits in " + (System.currentTimeMillis() - time)
-                       + "ms # of namespaces: "+spaces.size()+" printing terms in order: ");
+    nsQuery.setAllowObsoletes(false);
+    sortedTerms = engine.query(nsQuery, false);
+     System.out.println("Non-obsolete: got " + sortedTerms.size()+" namespace hits in " + (System.currentTimeMillis() - time)+ "ms # of namespaces: "+spaces.size()+" printing terms in order: ");
+
+    nsQuery.setAllowObsoletes(true);
+    nsQuery.setAllowNonObsoletes(false);
+    sortedObsoleteTerms = engine.query(nsQuery, false);
+     System.out.println("Obsolete: got " + sortedTerms.size()+" namespace hits in " + (System.currentTimeMillis() - time)+ "ms # of namespaces: "+spaces.size()+" printing terms in order: ");
 
     if (hasSlim()) {
       CategoryQuery catQuery = new CategoryQuery(slim);
       time = System.currentTimeMillis();
-      sortedTerms = engine.query(sortedTerms,catQuery, true);
-      System.out.println("Category query (" +slim+ ") got "
-                         + sortedTerms.size()
-                         + " in " + (System.currentTimeMillis() - time) + "ms");
-
+      sortedTerms = engine.query(sortedTerms,catQuery, false);
+//      System.out.println("Category query (" +slim+ ") got "+sortedTerms.size()+" in " + (System.currentTimeMillis() - time) + "ms");
+      // obsoletes?
+      sortedObsoleteTerms = engine.query(sortedObsoleteTerms,catQuery,false);
     }
 
-    for (Namespace n : spaces) System.out.println(n);
+    //for (Namespace n : spaces) System.out.println(n);
     //for (OBOClass o : sortedTerms) System.out.println(o);
     
   }
