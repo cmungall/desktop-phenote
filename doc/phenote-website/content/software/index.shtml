@@ -8,7 +8,7 @@
 
 <h2>Phenote Software</h2>
 
-<h3><a name="current">Current Release: 1.1</a> [<a href="http://toy.lbl.gov:9010/phenote/1.1/phenote.jnlp">Webstart</a>] </h3>
+<h3><a name="current">Current Release: 1.2</a> [<a href="http://toy.lbl.gov:9010/phenote/1.2/phenote.jnlp">Webstart</a>] </h3>
 Newest Features:
 <ul>
 <li>Can now search ALL ontologies of a field without having to change the pull-down menu</li>
@@ -29,7 +29,7 @@ See the <a href="http://www.phenote.org/phenote-release-notes.html">Release Note
 
 <p>
 To download this version with subversion, use the command:
-svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/tags/release-1.1/ phenote
+svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/tags/release-1.2/ phenote
 </p>
 
 <h3><a name="devel">Development Version</a></h3>
