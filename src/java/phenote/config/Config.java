@@ -46,7 +46,7 @@ public class Config {
   private List<FieldConfig> allFields = new ArrayList<FieldConfig>();
   private String logConfigFile = "conf/log4j.xml"; // default log config file
   private boolean uvicGraphEnabled = false; // default false for now
-  private boolean termHistoryEnabled = true;   //default to false for now
+  private boolean termHistoryEnabled = false;   //default to false for now
   private String reposUrlDir;
   private String version;
   private boolean configInitialized = false;
