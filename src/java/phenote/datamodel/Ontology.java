@@ -306,6 +306,7 @@ public class Ontology {
     long time = System.currentTimeMillis();
     //Collection<OBOClass> 
     // true -> cache result
+    // BUG - this includes obsoletes!
     sortedTerms = engine.query(nsQuery, true);
     System.out.println("got " + sortedTerms.size()
                        + " namespace hits in " + (System.currentTimeMillis() - time)
