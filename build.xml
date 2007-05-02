@@ -415,6 +415,27 @@ where xsd files are (conf) -->
 <!-- need to test if PHENOTE_VERSION is defined - possible?? -->
     <target name="webstart" depends="webstart-jars,webstart-webpages,copy-jnlps"/>
 
+
+    <target name="webstart-jars"
+            depends="build-all,jar,copy-webstart-jars,sign-webstart-jars"/> 
+
+    <target name="copy-webstart-jars">
+      <echo message="Env Var PHENOTE VERSION is set to ${env.PHENOTE_VERSION}" />
+      <mkdir dir="phenote-webstart/${env.PHENOTE_VERSION}"/>
+      <copy todir="phenote-webstart/${env.PHENOTE_VERSION}/jars">
+        <fileset file="${lib}/*.jar"/>
+      </copy>
+    </target>
+
+    <target name="sign-webstart-jars">
+       <signjar keystore="plumpkey" alias="signFiles"
+                storepass="plumper" keypass="plumper">
+         <fileset dir="phenote-webstart/${env.PHENOTE_VERSION}/jars">
+            <include name="*.jar"/>
+         </fileset>
+       </signjar>
+    </target>   
+
     <target name="webstart-webpages">
       <copy todir="phenote-webstart">
          <!-- fileset file="doc/phenote-website/*.html"/ -->
@@ -436,25 +457,7 @@ where xsd files are (conf) -->
       </copy>
     </target>    
 
-    <target name="webstart-jars"
-            depends="build-all,jar,copy-webstart-jars,sign-webstart-jars"/> 
 
-    <target name="copy-webstart-jars">
-      <echo message="Env Var PHENOTE VERSION is set to ${env.PHENOTE_VERSION}" />
-      <mkdir dir="phenote-webstart/${env.PHENOTE_VERSION}"/>
-      <copy todir="phenote-webstart/${env.PHENOTE_VERSION}/jars">
-        <fileset file="${lib}/*.jar"/>
-      </copy>
-    </target>
-
-    <target name="sign-webstart-jars">
-       <signjar keystore="plumpkey" alias="signFiles"
-                storepass="plumper" keypass="plumper">
-         <fileset dir="phenote-webstart/${env.PHENOTE_VERSION}/jars">
-            <include name="*.jar"/>
-         </fileset>
-       </signjar>
-    </target>   
 
     <target name="webstart-just-phenote-jar" depends="build-all,jar">
        <copy file="${lib}/phenote.jar"

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jnlp
 spec="1.0+"
-codebase="http://toy.lbl.gov:9010/phenote/1.1"
+codebase="http://toy.lbl.gov:9010/phenote/1.2"
 href="phenote.jnlp">
 <information>
-	<title>Phenote 1.1</title>
+	<title>Phenote 1.2</title>
 	<vendor>National Center for Biomedial Ontology</vendor>
 	<description>Phenote standalone app via webstart</description>
  	 <!-- Declares that the application can run without
