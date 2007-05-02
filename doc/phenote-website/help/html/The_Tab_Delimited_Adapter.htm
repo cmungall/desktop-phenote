@@ -7,6 +7,37 @@
 </HEAD>
 <BODY BGCOLOR=#ffffff>
 <H1>The Tab-Delimited Adapter</H1>
+<P>Purpose:&nbsp; For loading and saving annotation data in a 
+easy-to-read format.</P>
+<P>Extensions:&nbsp; <STRONG>.xls</STRONG> 
+<STRONG>.tab</STRONG></P>
+<P>Notes:&nbsp; These files can be directly imported to external spreadsheet 
+applications like Microsoft Excel.</P>
+<P>You must make sure that you are using the same Phenote configuration when 
+loading a file as was used to save it.&nbsp; For example, if you had "demo" 
+configuration loaded when you saved your data file, then you must have the demo 
+configuration loaded when you try opening your data file.&nbsp; If, in the 
+meantime, you have changed your configuration, you must change it back.</P>
 <P>&nbsp;</P>
+<P>When saving your annotations, the first line of the file will contain the 
+column headings.&nbsp; These column headings are derived from the field names 
+specified in the configuration file.</P>
+<P>&nbsp;</P>
+<P>There is a field called "Pub" which&nbsp;is a free text field.&nbsp; This 
+will translate to a single column in the file, with the column heading of 
+Pub.</P>
+<P>&nbsp;</P>
+<P>There is a field called "Entity" which is an 
+ontology-based field.&nbsp; This will translate into two columns in the 
+file.&nbsp; The column headings will take the name, Entity, and follow it with 
+ID and Name, respectively.&nbsp; In this case, you'd have the column headings 
+"Entity ID" and "Entity Name".&nbsp; The former will contain the ID of the term 
+from the OBO file, and the latter will contain the TermName from the obo 
+file.&nbsp; These are both placed in the file as a conveniece to read 
+for&nbsp;the user.</P>
+<P>Upon reading the file, only the ID column is used and the 
+"Name" column is skipped over; column headings are thrown out.</P>
+<P>You can generate your own tab-delimited files from 
+external applications so long as they follow this format.</P>
 </BODY>
 </HTML>

@@ -29,7 +29,7 @@
      <tocitem text="Loading &amp; Saving" target="Loading___Saving"/>
      <tocitem text="The PhenoXML adapter" target="Data_Formats"/>
      <tocitem text="The PhenoSyntax Adapter" target="The_PhenoSyntax_Adapter"/>
-     <tocitem text="The Tab-Value Adapter" target="The_tag_value_adapter"/>
+     <tocitem text="The Tag-Value Adapter" target="The_tag_value_adapter"/>
      <tocitem text="The Tab-Delimited Adapter" target="The_Tab_Delimited_Adapter"/>
 </tocitem>
 <tocitem text="Creating Annotations">

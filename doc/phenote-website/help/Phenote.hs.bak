@@ -9,7 +9,7 @@
 
 <!-- maps -->
 <maps>
-    <homeID>FirstTopic</homeID>
+    <homeID>What_is_Phenote</homeID>
     <mapref location="Phenote.jhm" />
 </maps>
 

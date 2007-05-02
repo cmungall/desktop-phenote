@@ -1,12 +1,12 @@
 [Settings]
-html=
+html=html
 images=images
 ccs=htmlhelp.css
 i=phenote.hhk
 last_path=C:\Documents and Settings\Nicole\Desktop\phenote-helper\html
 prefix list=IDH_,
 preview=1
-css=C:\Documents and Settings\Nicole\Desktop\phenote-helper\javahelp.css
+css=C:\Documents and Settings\Nicole\Desktop\phenote-help-docs\javahelp.css
 t=PhenoteTOC.xml
 web_dhtml=1
 web_indxpg=PhenoteWebIndex.html
