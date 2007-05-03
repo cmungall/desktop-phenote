@@ -10,6 +10,8 @@ start =
     dataadapter*,
     uvic-graph,
     term-history,
+    auto-update-ontologies,
+    update-timer,
     obo-repository,
     field*
   }
@@ -48,6 +50,10 @@ log =
 uvic-graph = element uvic-graph { attribute enable { xsd:boolean } }
 
 term-history = element term-history { attribute enable { xsd:boolean } }
+
+auto-update-ontologies = element auto-update-ontologies { attribute enable { xsd:boolean } }
+
+update-timer = element update-timer { attribute timer {xsd:integer} }
 
 obo-repository = element obo-repository { attribute url-dir {xsd:string} }
 

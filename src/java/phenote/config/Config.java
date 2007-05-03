@@ -26,6 +26,9 @@ import phenote.config.xml.OboRepositoryDocument.OboRepository;
 import phenote.config.xml.PhenoteConfigurationDocument.PhenoteConfiguration;
 import phenote.config.xml.UvicGraphDocument.UvicGraph;
 import phenote.config.xml.TermHistoryDocument.TermHistory;
+import phenote.config.xml.AutoUpdateOntologiesDocument.AutoUpdateOntologies;
+import phenote.config.xml.UpdateTimerDocument.UpdateTimer;
+
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.QueryableDataAdapterI;
 import phenote.datamodel.CharField;
@@ -47,6 +50,8 @@ public class Config {
   private String logConfigFile = "conf/log4j.xml"; // default log config file
   private boolean uvicGraphEnabled = false; // default false for now
   private boolean termHistoryEnabled = false;   //default to false for now
+  private boolean autoUpdateEnabled = true; //default to true
+  private int updateTimer = 30; //default to 30sec to try to update
   private String reposUrlDir;
   private String version;
   private boolean configInitialized = false;
@@ -343,12 +348,17 @@ public class Config {
   public boolean uvicGraphIsEnabled() { return uvicGraphEnabled; }
 
   public boolean termHistoryIsEnabled() { 
-	  return termHistoryEnabled; }
+    return termHistoryEnabled; }
 
   public void setTermHistory(boolean setter) { 
-	  termHistoryEnabled = setter;
-	  return; }
+    termHistoryEnabled = setter;
+    return; }
 
+  public boolean autoUpdateIsEnabled() {
+    return autoUpdateEnabled; }
+
+  public int getUpdateTimer() {
+      return updateTimer; }
   
   public URL getLogConfigUrl() throws FileNotFoundException {
     return FileUtil.findUrl(logConfigFile);
@@ -504,6 +514,16 @@ public class Config {
       TermHistory history = pc.getTermHistory();
       if (history != null)
         termHistoryEnabled = history.getEnable();
+
+      // AUTO UPDATE OF ONTOLOGIES
+      AutoUpdateOntologies autoUpdate = pc.getAutoUpdateOntologies();
+      if (autoUpdate != null)
+        autoUpdateEnabled = autoUpdate.getEnable();
+
+      // TIMER for UPDATE OF ONTOLOGIES
+      UpdateTimer time = pc.getUpdateTimer();
+      if (time != null)
+	  updateTimer = time.getTimer().intValue();
 
       // Repos url dir
       OboRepository or = pc.getOboRepository();

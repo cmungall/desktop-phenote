@@ -8,6 +8,8 @@
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:dataadapter"/>
         <xs:element ref="x:uvic-graph"/>
         <xs:element ref="x:term-history"/>
+        <xs:element ref="x:auto-update-ontologies"/>
+        <xs:element ref="x:update-timer"/>
         <xs:element ref="x:obo-repository"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:field"/>
       </xs:sequence>
@@ -43,6 +45,16 @@
   <xs:element name="term-history">
     <xs:complexType>
       <xs:attribute name="enable" use="required" type="xs:boolean"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="auto-update-ontologies">
+    <xs:complexType>
+      <xs:attribute name="enable" use="required" type="xs:boolean"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="update-timer">
+    <xs:complexType>
+      <xs:attribute name="timer" use="required" type="xs:integer"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="obo-repository">
