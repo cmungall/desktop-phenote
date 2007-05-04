@@ -88,12 +88,12 @@ For fields in which terms from ontologies will be used as instances, the ontolog
 <p>Ontology files used in fields (see below) can be acquired and updated from external sources.  Currently, this is usually configured to retrieve from the obo-foundry at obo.sourceforge.net.  Soon, you will be able to retrieve your file from any external site that has a valid URL.</p>
 <p>There are three parts to the update:  (1) specifying the repository base URL, (2) whether you want your files to be updated at the start of each Phenote session, and (3) how long you would like the prompter to wait before proceeding with the program loading.</p>
 
-<p><b>obo-repos</b>-As marked in Figure 2, to specify the repository url include the following line. <br /> ns:obo-repository url-dir="http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/"/. <br />
-This will only update those ontology fields in which you have specified a "repos-subdir".</p>
+<p><b>obo-repos</b>-As marked in Figure 2, to specify the repository url include the following line. <br /> &lt;ns:obo-repository url-dir="http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/"/&gt; <br /></p>
+<p>This will only update those ontology fields in which you have specified a "repos-subdir".</p>
 <p>To including a time-out or auto-update feature for your Phenote session, be sure to include the following two lines: <br />
-<ns:auto-update-ontologies enable="true"/><br />
-  <ns:update-timer timer="10"/><br />
-The following table describes how these two options work together:
+&lt;ns:auto-update-ontologies enable="true"/&gt;<br />
+  &lt;ns:update-timer timer="10"/&gt;<br /> </p>
+<p>The following table describes how these two options work together:
 <table border=1 width=500>
   <tr>
     <th colspan=2 rowspan=2 width=100></th>
@@ -116,7 +116,7 @@ The following table describes how these two options work together:
   </tr>
 </table>
 
-      <p>If you don't include these items in the configuration, the default is to automatically update from a repository without asking your permission.</p>
+If you don't include these items in the configuration, the default is to automatically update from a repository without asking your permission.</p>
 
 <h3>Post-composition</h3>
 <p>To enable post-composition for any ontology-based field, be sure to specify the relationship ontology file as "is_postcomp_rel=true", as is shown for the Entity field in Figure 2.</p>
