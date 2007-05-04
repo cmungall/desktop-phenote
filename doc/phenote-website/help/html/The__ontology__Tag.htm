@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" CONTENT="Solutionsoft HelpBreeze JavaHelp Edition">
+<TITLE>The <ontology> Tag</TITLE>
+<LINK REL="stylesheet" TYPE="text/css" HREF=javahelp.css>
+</HEAD>
+<BODY BGCOLOR=#ffffff>
+<H1>The &lt;ontology&gt; <field>Tag</H1>
+<P>The &lt;ontology&gt; tag enables the autocompletion 
+feature on an input field based 
+on the ontology file specified.&nbsp; There can be&nbsp;zero or more ontologies per 
+field.</P>
+<H2>Parameters</H2>
+<H1>
+
+<TABLE borderColor=#000000 cellPadding=5 width="100%" align=center border=1>
+  
+  <TR>
+    <TD align=middle><STRONG 
+      >Name</STRONG></TD>
+    <TD align=middle><STRONG 
+      >Description</STRONG></TD>
+    <TD align=middle><STRONG>Legal 
+      Values</STRONG></TD>
+    <TD align=middle><STRONG>Required</STRONG></TD>
+    <TD align=middle><STRONG 
+      >Default</STRONG></TD></TR>
+  <TR>
+    <TD>
+      <P><FONT face=Courier 
+      >name</FONT></P></TD>
+    <TD>
+      <P>This is the name that is displayed in the 
+      drop-down chooser box for ontology selection during autocompletion in the 
+      <EM>Data Entry</EM> section.&nbsp; </P></TD>
+    <TD><EM>any text value</EM></TD>
+    <TD ALIGN=middle>yes</TD>
+    <TD></TD></TR>
+  <TR>
+    <TD><FONT face=Courier 
+      >file</FONT></TD>
+    <TD>This is the name of the file containing the 
+      ontology.</TD>
+    <TD><EM>any text value</EM></TD>
+    <TD ALIGN=middle>yes</TD>
+    <TD></TD></TR>
+  <TR>
+    <TD><FONT face=Courier>repos-subdir</FONT></TD>
+    <TD>The location (such as a subdirectory) of the file in the specified 
+      repository.&nbsp; If not included, then no checks against the 
+      <EM>obo-repository</EM> will be performed.</TD>
+    <TD>
+      <P><EM>any text value</EM></P></TD>
+    <TD align=middle>no</TD>
+    <TD></TD></TR>
+  <TR>
+    <TD><FONT face=Courier>slim</FONT></TD>
+    <TD>[not sure yet how this works...]</TD>
+    <TD>
+      <P><EM>any text value</EM></P></TD>
+    <TD align=middle>no</TD>
+    <TD></TD></TR>
+  <TR>
+    <TD><FONT face=Courier>is-postcomp-rel</FONT></TD>
+    <TD>The ontology file specified here will be used to 
+      populate the relationships for postcomposition.&nbsp; Typically this will 
+      the the relationship.obo file.&nbsp; Specifying&nbsp;the is-postcomp-rel 
+      triggers Phenote to allow the post-compostion feature along with a button to display.</TD>
+    <TD>
+      <UL>
+        <LI>true 
+        <LI>false</LI></UL></TD>
+    <TD ALIGN=middle>no</TD>
+    <TD>false</TD></TR></TABLE>
+<H2>&nbsp;</H2>
+<H2>Contents</H2></H1>
+<P>Each &lt;ontology&gt; element specifies one ontology to be used with the 
+autocompletion feature in a single &lt;field&gt; element.&nbsp; To include the 
+same ontology in a separate &lt;field&gt; element, it must be listed in 
+both.&nbsp; The order in which the &lt;ontology&gt; elements are listed within 
+the &lt;field&gt; is the order they are displayed in the drop-down chooser 
+box.&nbsp; </P>
+<H1><FONT color=#000000 size=3></FONT>&nbsp;</H1>
+<H2>Example</H2><PRE>&lt;ns:field name="Entity" syntax-abbrev="E" enable="true"&gt;<BR>&nbsp;&nbsp;&nbsp; &lt;ns:ontology name="Relationship" file="relationship.obo" repos-subdir="OBO_REL" is-postcomp-rel="true"/&gt;<BR>&nbsp;&nbsp;&nbsp; &lt;ns:ontology name="GO" file="gene_ontology.obo" repos-subdir="genomic-proteomic"/&gt;<BR>&nbsp;&nbsp;&nbsp; &lt;ns:ontology name="CHEBI" file="chebi.obo" repos-subdir="chemical"/&gt;<BR>&lt;/ns:field&gt;</PRE>
+<P>In this example there are two ontologies specified:  GO and CHEBI.&nbsp; The 
+resulting input item would display a drop-down chooser box with the names GO and 
+CHEBI.&nbsp; The autocompletion on that field would query the gene_ontology.obo 
+and chebi.obo ontologies.&nbsp; Additionally, because is-postcomp-rel is 
+specified, this field would allow for post composition, and those terms would 
+draw their relationships from the relationship.obo ontology.</P>
+<P>&nbsp;</P>
+<P>[INSERT PIC OF RESULTING FIELD HERE and POSTCOMP]</P>
+</BODY>
+</HTML>

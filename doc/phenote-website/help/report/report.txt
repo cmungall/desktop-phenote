@@ -109,6 +109,8 @@ Term Filters	Term_Filters	html\Term_Filters.htm		Not Specified
 Term Info	Term_Info	html\Term_Info.htm		Not Specified	 
 Text Checks	Text_Checks	html\Text_Checks.htm		Not Specified	 
 Text Editing	Text_Editing	html\Text_Editing.htm		Not Specified	 
+The	The__field__Tag	The__field__Tag.htm		Not Specified	 
+The	The__ontology__Tag	The__ontology__Tag.htm		Not Specified	 
 The Basic Flat File Interface	The_Scroller_Tag	html\The_Basic_Flat_File_Interface.htm		Not Specified	 
 The box tag	The_Box_Tag	html\The_Box_Tag.htm		Not Specified	 
 The Category Manager Plugin	The_Category_Manager_Plugin	html\The_Category_Manager_Plugin.htm		Not Specified	 
@@ -151,6 +153,7 @@ The window tag	The_Window_Tag	html\The_Window_Tag.htm		Not Specified
 Undo/Redo	Undo_Redo	html\Undo_Redo.htm		Not Specified	 
 User Defined Checks	User_Defined_Checks	html\User_Defined_Checks.htm		Not Specified	 
 Using Filters	Using_Filters	html\Using_Filters.htm		Not Specified	 
+What is a Configuration?	What_is_a_Configuration_	What_is_a_Configuration_.htm		Not Specified	 
 What is an ontology?	What_is_an_ontology_	html\What_is_an_ontology_.htm		Not Specified	 
 What is Phenote?	What_is_Phenote_	html\What_is_OBO_Edit_.htm		Not Specified	 
 What is Phenote?	What_is_Phenote	html\What_is_Phenote_.htm		Not Specified	 
@@ -162,3 +165,4 @@ Working with Obsoletes	Working_with_Obsoletes	html\Working_with_Obsoletes.htm		N
 Working with Selections	Working_with_Selections	html\Working_with_Selections.htm		Not Specified	 
 Working with Synonym Categories	Working_with_Synonym_Categories	html\Working_with_Synonym_Categories.htm		Not Specified	 
 Working with XML Layouts	Working_with_XML_Layouts	html\Working_with_XML_Layouts.htm		Not Specified	 
+XML skeleton	XML_skeleton	XML_skeleton.htm		Not Specified	 

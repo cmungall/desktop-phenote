@@ -1,0 +1,11 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" CONTENT="Solutionsoft HelpBreeze JavaHelp Edition">
+<TITLE>XML skeleton</TITLE>
+<LINK REL="stylesheet" TYPE="text/css" HREF=javahelp.css>
+</HEAD>
+<BODY BGCOLOR=#ffffff>
+<H1>XML skeleton</H1><PRE>&lt;?xml version="1.0" encoding="UTF-8"?&gt;<BR>&lt;ns:phenote-configuration version="1.3.1" xmlns:ns="phenote/config/xml"&gt;<BR>&nbsp; &lt;ns:log config-file="conf/log4j-standalone.xml"/&gt;</PRE><PRE>&nbsp; &lt;ns:dataadapter name="phenote.dataadapter.delimited.DelimitedFileAdapter" enable="true"/&gt; </PRE><PRE>  &lt;ns:uvic-graph enable="false"/&gt;</PRE><PRE>  &lt;ns:term-history enable="false"/&gt;<BR>&nbsp; <BR>&nbsp; &lt;ns:auto-update-ontologies enable="true"/&gt;&nbsp; &lt;!--true=update; false=don't update--&gt;<BR>&nbsp; &lt;ns:update-timer timer="0"/&gt;&lt;!--set to 0 if you want to bypass the check; time in seconds--&gt;<BR>&nbsp; &lt;ns:obo-repository url-dir="<A href='http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/"/'  ??>http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/"/</A>&gt;</PRE><PRE>&nbsp; &lt;ns:field name="Example Free-text" syntax-abbrev="PUB" enable="true"/&gt;<BR>&nbsp; &lt;ns:field name="Genotype" syntax-abbrev="GT" enable="false"/&gt;</PRE><PRE>&nbsp; &lt;ns:field name="Example Multi-Ontology" syntax-abbrev="E" enable="true"&gt;<BR>&nbsp;&nbsp;&nbsp; &lt;ns:ontology name="Relationship" file="relationship.obo" repos-subdir="OBO_REL" is-postcomp-rel="true"/&gt;<BR>&nbsp;&nbsp;&nbsp; &lt;ns:ontology name="GO" file="gene_ontology.obo" repos-subdir="genomic-proteomic"/&gt;<BR>&nbsp;&nbsp;&nbsp; &lt;ns:ontology name="CL" file="cell.obo" repos-subdir="anatomy/cell_type"/&gt;<BR>&nbsp; &lt;/ns:field&gt;</PRE><PRE><BR>&nbsp; &lt;ns:field name="Example Single-Ontology" syntax-abbrev="Q" enable="true"&gt;<BR>&nbsp;&nbsp;&nbsp; &lt;ns:ontology name="PATO" file="quality.obo" repos-subdir="phenotype"/&gt;<BR>&nbsp; &lt;/ns:field&gt;</PRE><PRE><BR>&lt;/ns:phenote-configuration&gt;</PRE>
+</BODY>
+</HTML>
