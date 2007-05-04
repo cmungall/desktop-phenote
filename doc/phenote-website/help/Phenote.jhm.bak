@@ -120,6 +120,8 @@
    <mapID target="Term_Info" url="html/Term_Info.htm"/>
    <mapID target="Text_Checks" url="html/Text_Checks.htm"/>
    <mapID target="Text_Editing" url="html/Text_Editing.htm"/>
+   <mapID target="The__field__Tag" url="The__field__Tag.htm"/>
+   <mapID target="The__ontology__Tag" url="The__ontology__Tag.htm"/>
    <mapID target="The_Scroller_Tag" url="html/The_Basic_Flat_File_Interface.htm"/>
    <mapID target="The_Box_Tag" url="html/The_Box_Tag.htm"/>
    <mapID target="The_Category_Manager_Plugin" url="html/The_Category_Manager_Plugin.htm"/>
@@ -162,6 +164,7 @@
    <mapID target="Undo_Redo" url="html/Undo_Redo.htm"/>
    <mapID target="User_Defined_Checks" url="html/User_Defined_Checks.htm"/>
    <mapID target="Using_Filters" url="html/Using_Filters.htm"/>
+   <mapID target="What_is_a_Configuration_" url="What_is_a_Configuration_.htm"/>
    <mapID target="What_is_an_ontology_" url="html/What_is_an_ontology_.htm"/>
    <mapID target="What_is_Phenote_" url="html/What_is_OBO_Edit_.htm"/>
    <mapID target="What_is_Phenote" url="html/What_is_Phenote_.htm"/>
@@ -173,6 +176,7 @@
    <mapID target="Working_with_Selections" url="html/Working_with_Selections.htm"/>
    <mapID target="Working_with_Synonym_Categories" url="html/Working_with_Synonym_Categories.htm"/>
    <mapID target="Working_with_XML_Layouts" url="html/Working_with_XML_Layouts.htm"/>
+   <mapID target="XML_skeleton" url="XML_skeleton.htm"/>
 
 <!-- Index Bookmarks -->
 

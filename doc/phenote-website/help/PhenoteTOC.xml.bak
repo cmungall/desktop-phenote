@@ -25,9 +25,12 @@
      <tocitem text="Changing your Configuration" target="Changing_your_Configuration"/>
 </tocitem>
 <tocitem text="Loading/Saving Annotations">
-     <tocitem text="Loading &amp; Saving" target="Loading___Saving"/>
      <tocitem text="Introduction to Data Adapters" target="Introduction_to_Adapters"/>
-     <tocitem text="Phenote Data Formats" target="Data_Formats"/>
+     <tocitem text="Loading &amp; Saving" target="Loading___Saving"/>
+     <tocitem text="The PhenoXML adapter" target="Data_Formats"/>
+     <tocitem text="The PhenoSyntax Adapter" target="The_PhenoSyntax_Adapter"/>
+     <tocitem text="The Tag-Value Adapter" target="The_tag_value_adapter"/>
+     <tocitem text="The Tab-Delimited Adapter" target="The_Tab_Delimited_Adapter"/>
 </tocitem>
 <tocitem text="Creating Annotations">
      <tocitem text="Editing Functions"/>
@@ -43,9 +46,13 @@
      <tocitem text="Other Uses for Phenote" target="Other_Uses_for_Phenote"/>
 </tocitem>
 <tocitem text="Customizing Phenote">
+     <tocitem text="What is a Configuration?" target="What_is_a_Configuration_"/>
      <tocitem text="Example Interfaces"/>
      <tocitem text="How To Edit a Configuration File" target="How_To_Edit_a_Configuration_File"/>
      <tocitem text="Ontology Updates" target="Ontologies"/>
+     <tocitem text="XML skeleton" target="XML_skeleton"/>
+     <tocitem text="The &lt;field&gt; Tag" target="The__field__Tag"/>
+     <tocitem text="The &lt;ontology&gt; Tag" target="The__ontology__Tag"/>
 </tocitem>
 <tocitem text="Appendix">
      <tocitem text="An Introduction to OBO Ontologies" target="An_Introduction_to_OBO_Ontologies"/>
