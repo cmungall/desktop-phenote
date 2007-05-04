@@ -62,8 +62,43 @@ You can add your customized data adapter at the top of the file.  Additionally y
 <p> WARNING:  Be sure to enable at least one data adapter, otherwise you will be unable to save your annotations.</p>
 
 <h3>Uvic-graph, term-history</h3>
-These items are currently under development.  By default, these are disabled for the user.
+<p>These items are currently under development.  By default, these are disabled for the user.</p>
 
+<h3>Updating ontologies from external sources</h3>
+<p>Ontology files used in fields (see below) can be acquired and updated from external sources.  Currently, this is usually configured to retrieve from the obo-foundry at obo.sourceforge.net.  Soon, you will be able to retrieve your file from any external site that has a valid URL.</p>
+<p>There are three parts to the update:  (1) specifying the repository base URL, (2) whether you want your files to be updated at the start of each Phenote session, and (3) how long you would like the prompter to wait before proceeding with the program loading.</p>
+
+<p>To specify the repository url include the following line. <br /> <ns:obo-repository url-dir="http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/"/>. <br />
+This will only update those ontology fields in which you have specified a "repos-subdir".</p>
+<p>To including a time-out or auto-update feature for your Phenote session, be sure to include the following two lines: <br />
+<ns:auto-update-ontologies enable="true"/><br />
+  <ns:update-timer timer="10"/><br />
+The following table describes how these two options work together:
+<table border=1 width=500>
+  <tr>
+    <th colspan=2 rowspan=2 width=100></th>
+    <th colspan=2>Auto Update Ontologies</th>
+  </tr>
+  <tr>
+    <th>True</th>
+    <th>False</th>
+  </tr>
+  <tr>
+    <th rowspan=2>Timer (sec)</th>
+    <th><i>t</i> = 0 </th>
+    <td>Will auto update without prompting. <b>(Default</b>)</td>
+    <td>Will never update</td>
+  </tr>
+  <tr>
+    <th> <i>t</i> > 0 </th>
+    <td>Will wait <i>time</i> seconds for answer, then will auto update.</td>
+    <td>Will wait <i>time</i> seconds for answer, then will bypass update.</td>
+  </tr>
+</table>
+
+      <p>If you don't include these items in the configuration, the default is to automatically update from a repository without asking your permission.</p>
+
+</p>
 <h2>Fields, types</h2>
 <img src="/images/config-field3.png" align="right" width="100%" caption="Figure 2">
 Each input field is given a designation in the xml file.
