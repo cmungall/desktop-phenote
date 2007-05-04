@@ -27,6 +27,9 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import javax.swing.JDialog;
+import javax.swing.JComponent;
+import java.awt.Component;
 
 import org.apache.log4j.Logger;
 
@@ -49,6 +52,7 @@ import phenote.datamodel.OntologyManager;
 import phenote.config.Config;
 import phenote.config.FieldConfig;
 import phenote.config.OntologyConfig;
+import phenote.gui.SynchOntologyDialog;
 
 /** is this really a data adapter? - OntologyLoader? this isnt a data adapter
     it doesnt load & commit character data - just loads ontologies. rename OntologyLoader
@@ -62,6 +66,7 @@ public class OntologyDataAdapter {
   private boolean initializingOntologies = false;
   private Map<String,Ontology> fileToOntologyCache = new HashMap<String,Ontology>();
   private OBOMetaData adapterMetaData;
+  private SynchOntologyDialog synchDialog;
   
   private static final Logger LOG = Logger.getLogger(OntologyDataAdapter.class);
 
@@ -370,14 +375,19 @@ public class OntologyDataAdapter {
     throws OntologyException {
     long repos = getOboDate(reposUrl);
     long loc = 0;
+    int timer = config.getUpdateTimer();
+    boolean autoUpdate = config.autoUpdateIsEnabled();
     boolean useRepos = false;
     if (localUrl != null)
       loc = getOboDate(localUrl); // throws ont ex
     else
       useRepos = true;
-
-    if (repos > loc || useRepos)
-      useRepos = queryUserAboutRepos(ontol);
+    //if autoupdate without popup
+    if ((autoUpdate && (timer==0)) && (repos > loc)) {
+    	useRepos = true;
+    } else if (repos > loc || useRepos) {
+      useRepos = synchDialog.queryUserForOntologyUpdate(ontol);
+    }
     if (useRepos) {
 
       // i think its always better to download as http/repos is slow
@@ -426,16 +436,6 @@ public class OntologyDataAdapter {
     } catch (IOException e) { throw new OntologyException(e); }
   }
 
-  // is it bad to have a popup from data adapter?
-  private boolean queryUserAboutRepos(String ontol) {
-    String m = "There is a more current ontology in the repository for "+ontol+".\nWould"
-      +" you like to load the new version? (may take a few minutes)";
-    int yn = JOptionPane.showConfirmDialog(null,m,"Synch ontology?",
-                                           JOptionPane.YES_NO_OPTION,
-                                           JOptionPane.QUESTION_MESSAGE);
-    return yn == JOptionPane.YES_OPTION;
-  }
-  
 
   /** local url may be from distrib/jar dir, but needs to be set to 
       .phenote/obo-files dir as thats where the user cache is */

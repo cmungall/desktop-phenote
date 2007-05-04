@@ -52,7 +52,8 @@ class HelpMenu extends JMenu {
     public void actionPerformed(ActionEvent e) {
     	boolean showCancel = false;
     	if (e.getActionCommand().equals("help")) {
-    		String m = "Help is under construction.";
+    		String m = "<html><p>This feature is not yet integrated.</p>" +
+    				"<p> Please visit www.phenote.org/help</p></html>";
     		JOptionPane.showMessageDialog(null, m, "Phenote Help",
     			JOptionPane.INFORMATION_MESSAGE);
     		System.out.println("help selected");	

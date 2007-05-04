@@ -50,8 +50,8 @@ public class Config {
   private String logConfigFile = "conf/log4j.xml"; // default log config file
   private boolean uvicGraphEnabled = false; // default false for now
   private boolean termHistoryEnabled = false;   //default to false for now
-  private boolean autoUpdateEnabled = true; //default to true
-  private int updateTimer = 30; //default to 30sec to try to update
+  private boolean autoUpdateEnabled = true; //default to true if not in config
+  private int updateTimer = 0; //default is to not wait
   private String reposUrlDir;
   private String version;
   private boolean configInitialized = false;
@@ -281,6 +281,8 @@ public class Config {
     oldCfg.uvicGraphEnabled = newCfg.uvicGraphEnabled; // hmmmm?
     oldCfg.termHistoryEnabled = newCfg.termHistoryEnabled;
     oldCfg.reposUrlDir = newCfg.reposUrlDir; // ??
+    oldCfg.autoUpdateEnabled = newCfg.autoUpdateEnabled;
+    oldCfg.updateTimer = newCfg.updateTimer;
     for (FieldConfig newFC : newCfg.getFieldConfigList())
       newFC.mergeWithOldConfig(oldCfg);
 
