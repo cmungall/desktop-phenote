@@ -1,56 +1,56 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
-<HTML>
-<HEAD>
-<META NAME="GENERATOR" CONTENT="Solutionsoft HelpBreeze JavaHelp Edition">
-<TITLE>The <field> Tag</TITLE>
-<LINK REL="stylesheet" TYPE="text/css" HREF=javahelp.css>
-</HEAD>
-<BODY BGCOLOR=#ffffff>
-<H1>The &lt;field&gt; <field> Tag</H1>
-<P>The &lt;field&gt; tag creates a single input field.&nbsp; There can be one or more fields 
-per configuration.</P>
-<H2>Parameters</H2>
-<P>
-<TABLE borderColor=#000000 cellPadding=5 width="100%" align=center border=1>
+<html>
+<head>
+<meta name="GENERATOR" content="Solutionsoft HelpBreeze JavaHelp Edition">
+<title>The <field> Tag<field> Tag</title>
+<link rel="stylesheet" type="text/css" href="../javahelp.css">
+</head>
+<body bgcolor="#ffffff">
+<h1>The &lt;field&gt; <field> Tag</h1>
+<p>The &lt;field&gt; tag creates a single input field.&nbsp; There can be one or more fields 
+per configuration.</p>
+<h2>Parameters</h2>
+<p>
+<table bordercolor="#000000" cellpadding="5" width="100%" align="center" border="1">
   
-  <TR>
-    <TD align=middle><STRONG>Name</STRONG></TD>
-    <TD align=middle><STRONG>Description</STRONG></TD>
-    <TD align=middle><STRONG>Legal Values</STRONG></TD>
-    <TD align=middle><STRONG>Default</STRONG></TD></TR>
-  <TR>
-    <TD>
-      <P><FONT face=Courier>name</FONT></P></TD>
-    <TD>
-      <P>This is the name that is displayed in the Phenote interface next to the 
-      input box in the <EM>Data Entry</EM> section.&nbsp; This is also used as a 
-      column header in the <EM>Annotation Spreadsheet.</EM></P></TD>
-    <TD><EM>any text value</EM></TD>
-    <TD></TD></TR>
-  <TR>
-    <TD><FONT face=Courier>syntax-abbrev</FONT></TD>
-    <TD>This is a short abbreviation used by the Pheno-syntax data adapter</TD>
-    <TD><EM>any text value</EM></TD>
-    <TD></TD></TR>
-  <TR>
-    <TD><FONT face=Courier>enable</FONT></TD>
-    <TD>A flag that turns this field on or off.</TD>
-    <TD>
-      <UL>
-        <LI>true 
-        <LI>false</LI></UL></TD>
-    <TD>true</TD></TR></TABLE></P>
-<H2>&nbsp;</H2>
-<H2>Contents</H2>
-<P>Each &lt;field&gt; element specifies one input are in 
-the <EM>Data Entry </EM>section.&nbsp;</P>
-<P>There are two types of fields:&nbsp; free-text or 
+  <tr>
+    <td align="middle"><strong>Name</strong></td>
+    <td align="middle"><strong>Description</strong></td>
+    <td align="middle"><strong>Legal Values</strong></td>
+    <td align="middle"><strong>Default</strong></td></tr>
+  <tr>
+    <td>
+      <p><font face="Courier">name</font></p></td>
+    <td>
+      <p>This is the name that is displayed in the Phenote interface next to the 
+      input box in the <em>Data Entry</em> section.&nbsp; This is also used as a 
+      column header in the <em>Annotation Spreadsheet.</em></p></td>
+    <td><em>any text value</em></td>
+    <td></td></tr>
+  <tr>
+    <td><font face="Courier">syntax-abbrev</font></td>
+    <td>This is a short abbreviation used by the Pheno-syntax data adapter</td>
+    <td><em>any text value</em></td>
+    <td></td></tr>
+  <tr>
+    <td><font face="Courier">enable</font></td>
+    <td>A flag that turns this field on or off.</td>
+    <td>
+      <ul>
+        <li>true 
+        <li>false</li></ul></td>
+    <td>true</td></tr></table></p>
+<h2>&nbsp;</h2>
+<h2>Contents</h2>
+<p>Each &lt;field&gt; element specifies one input are in 
+the <em>Data Entry </em>section.&nbsp;</p>
+<p>There are two types of fields:&nbsp; free-text or 
 ontology.&nbsp; By default, a field is of the free-text type.&nbsp; To specify 
-ontology type, see The &lt;ontology&gt; Tag page.</P>
-<P>&nbsp;</P>
-<H2>Example</H2>
-<P>
-<H3>Free Text Field</H3><PRE>&lt;ns:field name="Field Name" syntax-abbrev="FA" enable="true"/&gt;</PRE>
-<H3>Ontology Field</H3><PRE>&lt;ns:field name="Genetic Context" syntax-abbrev="GC" enable="true"&gt;<BR>&nbsp;&nbsp;&nbsp; [see The&lt;ontology&gt; Tag page for specification.]<BR>&lt;/ns:field&gt;</PRE>
-</BODY>
-</HTML>
+ontology type, see The &lt;ontology&gt; Tag page.</p>
+<p>&nbsp;</p>
+<h2>Example</h2>
+<p>
+<h3>Free Text Field</h3><pre>&lt;ns:field name="Field Name" syntax-abbrev="FA" enable="true"/&gt;</pre>
+<h3>Ontology Field</h3><pre>&lt;ns:field name="Genetic Context" syntax-abbrev="GC" enable="true"&gt;<br>&nbsp;&nbsp;&nbsp; [see The&lt;ontology&gt; Tag page for specification.]<br>&lt;/ns:field&gt;</pre>
+</body>
+</html>
