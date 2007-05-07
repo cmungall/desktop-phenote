@@ -57,14 +57,6 @@ public class CompListSearcher {
     ontologyList = l; // (List<Ontology>)l.clone(); cant clone interfaces
   }
 
-//   public Vector<CompletionRelation> getStringMatchRelations(String input) {
-//     Vector<CompletionRelation> matches = new Vector<CompletionRelation>();
-//     for (OBOProperty rel : ontology.getSortedRelations()) {
-//       if (rel.toString().contains(input))
-//         matches.add(new CompletionRelation(rel));
-//     }
-//     return matches;
-//   }
   public List<CompletionRelation> getStringMatchRelations(String input) {
     List<CompletionRelation> matches = new ArrayList<CompletionRelation>();
     // most likely only 1 relation ontology, but no harm being general
@@ -81,16 +73,20 @@ public class CompListSearcher {
       constrained by compParams. compParams specifies syns,terms,defs,& obs 
       should input be just part of search params? called by servlet & standalone now */
   public List<CompletionTerm> getStringMatchTermList(String input) {
-   List<CompletionTerm> searchTerms = new ArrayList<CompletionTerm>();
-    if (input == null || input.equals(""))
-      return searchTerms;
-
+    List<CompletionTerm> searchTerms = new ArrayList<CompletionTerm>();
+   
+    boolean nothingForNothing = false; // get from FieldConfig!!
+    if (nothingForNothing && isBlank(input)) {
+      return searchTerms; // empty
+    }
+    
     // gets term set for currently selected ontology(s)
     //Set ontologyTermList = getCurrentOntologyTermSet();
     // THIS IS WRONG! or is it?
     for (Ontology ontology : ontologyList) {
       Collection<OBOClass> ontologyTermList = ontology.getSortedTerms(); // non obsolete
-      searchTerms.addAll(getSearchTermList(input,ontologyTermList));
+      List<CompletionTerm> l = getSearchTermList(input,ontologyTermList);
+      searchTerms.addAll(l);
       
       // if obsoletes set then add them in addition to regulars
       if (searchParams.searchObsoletes()) {
@@ -102,6 +98,9 @@ public class CompListSearcher {
     return searchTerms;
   }
 
+  private boolean isBlank(String s) {
+    return s == null || s.equals("");
+  }
 
   /** helper fn for getSearchTerms(String,SearhParamsI) */
   private List<CompletionTerm> getSearchTermList(String input,
@@ -113,6 +112,8 @@ public class CompListSearcher {
     for (OBOClass oboClass : ontologyTermList) {
 
       CompletionTerm ct = new CompletionTerm(oboClass);
+      // if input is blank then add all terms (list all terms on empty input)
+      // matches records the kind of hit in CompTerm
       if (ct.matches(input, searchParams)) {
         searchTermList.addTerm(ct);
       }
@@ -144,8 +145,10 @@ public class CompListSearcher {
     return term.contains(input); // 1.5!!
   }
 
-  /** this data structure is handy for putting starts with
-   before contains! UniqueTermList -> SearchTermList*/
+
+  /** SearchTermList INNER CLASS
+      this data structure is handy for putting starts with
+      before contains! UniqueTermList -> SearchTermList*/
   private class SearchTermList {
     private List<CompletionTerm> startsWithTerms = new ArrayList<CompletionTerm>();
     //private Map<OBOClass,OBOClass> uniqueCheck = new HashMap<OBOClass,OBOClass>();

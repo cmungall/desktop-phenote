@@ -5,8 +5,8 @@ package phenote.gui;
 public class SearchParams implements SearchParamsI {
 
   private static SearchParams singleton;
-  private boolean searchTerm = false;
-  private boolean searchSyn = false;
+  private boolean searchTerm = true; //false; default true??
+  private boolean searchSyn = true; // false; default true?
   private boolean searchDef = false;
   private boolean searchObs = false;
 

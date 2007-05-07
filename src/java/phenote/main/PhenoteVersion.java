@@ -15,7 +15,7 @@ public class PhenoteVersion {
 
   public static String versionString() {
     //return MAJOR_VERSION_NUM +""+ SUB_VERSION_NUM + type; 
-    return VERSION;
+    return VERSION; // +getDateOfVersion?
   }
 
   public static Date getDateOfVersion(){

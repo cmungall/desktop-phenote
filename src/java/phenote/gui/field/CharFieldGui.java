@@ -59,11 +59,11 @@ abstract class CharFieldGui {
   
 
   /** CharFieldGui for main window not post comp box - factory method */
-  static CharFieldGui makeCharFieldGui(CharField charField,SearchParamsI sp) {
+  static CharFieldGui makeCharFieldGui(CharField charField) {
     if (charField.hasOntologies()) {
       //return new TermCompList(charField,sp,true); // enable listeners
       TermCompList t = new TermCompList(charField);
-      t.setSearchParams(sp);
+      //t.setSearchParams(sp);
       t.enableListeners(true);
       t.allowPostCompButton(true);
       return t;
@@ -79,21 +79,20 @@ abstract class CharFieldGui {
 
   /** createPostCompRelationList - will relation lists ever be in main window and if
       so will they ever have listeners enabled - maybe, probably not */
-  static CharFieldGui makeRelationList(CharField cf,SearchParamsI sp) {
+  static CharFieldGui makeRelationList(CharField cf) {
     RelationCompList r = new RelationCompList(cf);
-    r.setSearchParams(sp); // does rel really need search params?
+    //r.setSearchParams(sp); // does rel really need search params?
     return r;
   }
 
   /** make term completion lists for post comp window (genus & diff), they dont listen
       to selection nor edit model - isolated */
-  static CharFieldGui makePostCompTermList(CharField cf,SearchParamsI sp,
-                                                   String label) {
+  static CharFieldGui makePostCompTermList(CharField cf,String label) {
     // false - no listeners(dont edit model), false - dont add comp button
     // eventually adding comp button come from config for recursive comp
     //boolean allowPostCompBut = false;
     TermCompList t =  new TermCompList(cf);
-    t.setSearchParams(sp);
+    //t.setSearchParams(sp);
     // t.isInSeparateWindow(true) or t.isolate(true)??
     t.enableEditModel(false);
     t.enableListeners(false);
@@ -144,7 +143,7 @@ abstract class CharFieldGui {
   protected boolean editModelEnabled() { return editModel; }
   
   // overridden by AbstaractAutoCompList
-  protected void setSearchParams(SearchParamsI sp) {}
+  //protected void setSearchParams(SearchParamsI sp) {}
   
 
   /** no-op - overridden by term comp list - set to false for now for terms in comp

@@ -38,7 +38,7 @@ public class FieldPanel extends JPanel {
   private OntologyManager ontologyManager = OntologyManager.inst();
   private JPanel fieldPanel;
   //private JComponent fieldPanel;
-  private SearchParamsI searchParams;
+  //private SearchParamsI searchParams;
   private JTabbedPane jTabbedPane;
 
   /** eventually configurable (with default 12) - for now hardwire at 12 */
@@ -99,7 +99,7 @@ public class FieldPanel extends JPanel {
       }
       ++fieldNum;
       //CharFieldGui gui = new CharFieldGui(charField,this); // adds to panel
-      CharFieldGui gui = CharFieldGui.makeCharFieldGui(charField,getSearchParams());
+      CharFieldGui gui = CharFieldGui.makeCharFieldGui(charField);
       addCharFieldGuiToPanel(gui);
       charFieldGuiList.add(gui);
     }
@@ -120,14 +120,14 @@ public class FieldPanel extends JPanel {
       addRetrieveButton(fieldGui.getRetrieveButton());
   }
 
-  SearchParamsI getSearchParams() {
+//  SearchParamsI getSearchParams() {
 ////    if (searchParams == null)
 ////      searchParams = getSearchParamPanel().getSearchParams();
 //    return searchParams;
-	  return SearchParams.inst();
-  }
+//	  return SearchParams.inst();
+//  }
 
-  void setSearchParams(SearchParamsI sp) { searchParams = sp; }
+  //void setSearchParams(SearchParamsI sp) { searchParams = sp; }
 
   public SearchParamPanel getSearchParamPanel() {
     if (searchParamPanel == null)
@@ -425,21 +425,3 @@ public class FieldPanel extends JPanel {
 //     return comboBox;
 //   }
 
-//   private class AutoActionListener implements ActionListener {
-//     private String ontology;
-//     private JComboBox comboBox;
-//     private AutoActionListener(String o,JComboBox jcb) {
-//       ontology = o;
-//       comboBox = jcb;
-//     }
-//     public void actionPerformed(ActionEvent e) {
-//       doCompletion();
-//     }
-//     private void doCompletion() {
-//       String input = (String)comboBox.getEditor().getItem();
-//       CompletionList cl = CompletionList.getCompletionList();
-//       Vector v = cl.getCompletionTermList(ontology,input);
-//       System.out.println(input + v);
-//       comboBox.setModel(new DefaultComboBoxModel(v));
-//     }
-//   }

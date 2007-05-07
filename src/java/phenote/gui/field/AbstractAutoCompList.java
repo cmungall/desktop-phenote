@@ -14,14 +14,11 @@ import javax.swing.JList;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-//import javax.swing.event.ListSelectionEvent;
-//import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListDataListener;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.text.Document;
 import javax.swing.plaf.basic.BasicComboBoxEditor;
-//import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.ComboBoxUI;
 import javax.swing.plaf.metal.MetalComboBoxUI;
 
@@ -29,104 +26,46 @@ import org.apache.log4j.Logger;
 
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharacterI;
-//import phenote.datamodel.CharFieldEnum;
-//import phenote.datamodel.CharacterI;
-//import phenote.datamodel.Ontology;
 import phenote.gui.SearchParams;
 import phenote.gui.SearchParamsI;
-/** The jcombobox that does auto completion - i had to do some tricks(hacks) to get it
+/** has a jcombobox that does auto completion - i had to do some tricks(hacks) to get it
     working with mouse over which doesnt come naturally to jcombobox */
 
-public abstract class AbstractAutoCompList extends CharFieldGui { //extends JComboBox {
-
+public abstract class AbstractAutoCompList extends CharFieldGui {
 
   private JComboBox jComboBox = new JComboBox();
-
-  //private Ontology ontology;
   private boolean changingCompletionList = false;
-  //private boolean keyTyped = false;
-  //private String previousInput = "";
   private boolean doCompletion = true;
-  // should we keep state of currentOboClass which is null if not a valid one?
-  // default combo box.getSelectedItem sortof does this imperfectly
-  //private OBOClass currentOboClass=null;
-  //private OBOProperty currentRel=null;
-  //private DefaultComboBoxModel defaultComboBoxModel;
   private CompComboBoxModel compComboBoxModel;
-  //private SearchParamsI searchParams;
   private boolean inTestMode = false;
-  //private AutoTextFieldEditor autoTextFieldEditor;
   private AutoTextField autoTextField;
-  //private CharField charField;
-  //private CharFieldGui charFieldGui; // should it be ISA not HASA?
-  ///** Whether differentia of a post composed term */
-  //private boolean isDifferentia = false;
-  /** if false then model is not edited */
-  //private boolean editModel = true;
-  //private CompletionListListener compListListener = new CompletionListListener();
   private SearchParamsI searchParams = SearchParams.inst();
   private CompListSearcher compListSearcher;
   private boolean setGuiForMultiSelect = false;
-
 
   protected AbstractAutoCompList(CharField cf) {
     super(cf);
     init();
   }
 
-  /** @param editModel if false then ACB doesnt edit model directly (post comp) 
-   can abstract classes have constructors - if not init() */
-  //protected AbstractAutoCompList(CompListSearcher s,boolean editModel,CharField cf) {
-//   protected AbstractAutoCompList(SearchParamsI sp,boolean editModel,CharField cf,
-//                                  String label) {
-//     super(cf,label);
-//     init();
-//   }
-
   private void init() {
     // this inner class enables retrieving of JList for mouse over
     // this will probably throw errors if non metal look & feel is used
     jComboBox.setUI(new MetalListComboUI());
     jComboBox.setEditable(true);
-    //charFieldGui = cfg;
-    //setCharField(cf);
     jComboBox.setPreferredSize(CharFieldGui.inputSize); //new Dimension(390,20));
-    //jComboBox.setMaximumSize(CharFieldGui.inputSize); //new Dimension(390,20));
-    // this is super critical - fixes bug where layout goes to hell if string are long
-    // in completion - dont ask me why????
-    //jComboBox.setMinimumSize(CharFieldGui.inputSize);
     AutoTextFieldEditor autoTextFieldEditor = new AutoTextFieldEditor();
     jComboBox.setEditor(autoTextFieldEditor);
-    // dont know why by setting fonts this seem to get worse not better in terms of
-    // the wierd layout issue with large terms & list
-    //setFont(new Font("Courier",Font.PLAIN,12)); yuck
-    //setFont(new Font("Lucida Console",Font.PLAIN,12)); not fixed
-    //Font[] fonts = 
-    //java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
-    //for (Font f : fonts) System.out.println(f);
-    //setFont(new Font("Lucida Typewriter",Font.PLAIN,10));
     jComboBox.setFont(new Font("Monospaced",Font.PLAIN,10));
-    //setOntology(ontology);
-    //searchParams = sp; // singleton access? part of ontology?
-    //compListSearcher = new CompListSearcher(cf.getFirstOntology(),sp);//s;
-    //enableTermInfoListening(true); // default - hardwired in rel & term subclasses
-    //addCompletionListListener(compList);
-    // why is this commented out?
-    //if (editModel) // ComboBoxActionListener edits the model
-    //this.editModel = editModel;
     jComboBox.addActionListener(new ComboBoxActionListener());
-
+    compListSearcher = new CompListSearcher(getCharField().getOntologyList());
+    // init with all terms if config.showAllOnEmptyInput...
+    doCompletion(false); // dont show pupup - we dont have a gui yet, just populating
   }
 
   protected Component getUserInputGui() { return jComboBox; }
 
   protected boolean isCompList() { return true; }
-
-  protected void setSearchParams(SearchParamsI sp) {
-    searchParams = sp;
-    // this assumes that its set up initially with ALL - presumptious?
-    compListSearcher = new CompListSearcher(getCharField().getOntologyList());
-  }
 
   protected SearchParamsI getSearchParams() { return searchParams; }
 
@@ -134,31 +73,16 @@ public abstract class AbstractAutoCompList extends CharFieldGui { //extends JCom
 
   protected AbstractAutoCompList getCompList() { return this; }
 
-  //void setOntology(Ontology o) { ontology = o; }
-
-  //void setSearchParams(SearchParamsI sp) { searchParams = sp; }
-
-  //void setCharField(CharField charField) { this.charField = charField; }
-
-  //protected CharField getCharField() { return charField; }
-
   protected boolean hasOntologyChooser() { return hasMoreThanOneOntology(); }
   
   protected boolean hasMoreThanOneOntology() {
     return getCharField().hasMoreThanOneOntology();
   }
 
-  //protected boolean editModelEnabled() { return editModel; }
-
   /** char in table changed - adjust - not needed for rel(at least not yet)
       as post comp doesnt listen to table changes (does it? should it?), 
       just term */
   protected abstract void setValueFromChar(CharacterI chr);
-  // {charField.getCharFieldEnum().getValue(chr).getOboClass() }
-
-  ///** If true than the auto combo is for setting the differentia in a post comp term,
-  //    if false (default) than no post comp or genus in post comp */
-  //void setIsDifferentia(boolean isDiff) { isDifferentia = isDiff; }
 
   /** Set text in editable text field of j combo (eg from table select) */
   public void setText(String text) {
@@ -170,10 +94,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui { //extends JCom
   /** text from selecting table doesnt do completion, TestPhenote does */
   public void setText(String text, boolean doCompletion) {
     this.doCompletion = doCompletion;
-    //this.keyTyped = doCompletion; // key has to be typed for completion
     jComboBox.getEditor().setItem(text);
-    //if (charField!=null)log().debug(charField.getName()+" setting text ["+text+"]");
-    //new Throwable().printStackTrace();
     this.doCompletion = true; // set back to default
   }
 
@@ -189,7 +110,6 @@ public abstract class AbstractAutoCompList extends CharFieldGui { //extends JCom
 
   /** Return text in text field */
   public String getText() {
-    //return (String)getSelectedItem();
     return jComboBox.getEditor().getItem().toString(); // or editor.getText() ?
   }
 
@@ -220,7 +140,6 @@ public abstract class AbstractAutoCompList extends CharFieldGui { //extends JCom
       autoTextField = new AutoTextField(); // outer instance var for testing
       editor = autoTextField; // protected editor var from BCBE
       addDocumentListener(new AutoDocumentListener());
-      //getTextField().addKeyListener(new AutoKeyListener());
     }
 
     // editor is protected JTextField - wacky
@@ -251,14 +170,11 @@ public abstract class AbstractAutoCompList extends CharFieldGui { //extends JCom
         thus wont get completion on user selection, leaving popup hanging */
     public void setText(String text) {
       if (changingCompletionList)
-  return;
+        return;
       // this makes setText(text,true) turn to false (called from TextPhenote)
       // but this is needed from mouse release on selection set text
       // is called and will cause completion list to come up after sel
       // w/o it
-      //if (charField!=null)
-      //log().debug(charField.getName()+" AutoTextField.setText ["+text+"]"+getCurrentTermRelName());
-      //new Throwable().printStackTrace();
       doCompletion = false;
       //this is problematic for syns & such where string is diff than term name
       // JComboBox sets this text AFTER got event and set to name
@@ -266,7 +182,6 @@ public abstract class AbstractAutoCompList extends CharFieldGui { //extends JCom
       // this works as only time setText is called with cngCL false is with
       // selection - or at least so it seems
       // well that was true but now need to clear text for multi sel
-      //System.out.println("ATF.settext ["+text+"] curr term rel name "+getCurrentTermRelName());
       if (setGuiForMultiSelect) // flag will probably need to be more general?
         super.setText(text);
       else
@@ -275,7 +190,6 @@ public abstract class AbstractAutoCompList extends CharFieldGui { //extends JCom
     }
 
     protected void processKeyEvent(KeyEvent e) {
-      //boolean fiddle = KeyboardState.shouldProcess(e);
       super.processKeyEvent(e);
     }
   }
@@ -288,16 +202,6 @@ public abstract class AbstractAutoCompList extends CharFieldGui { //extends JCom
 
 
 
-  /** disable completion for item being selected - otherwise a popup comes up after
-      the selection - probably no harm in keeping this but this may be redundant with
-      the turning off of doCompletion in inner ATF.setText which is more
-      comprehensive - also we are no longer subclass of JCombo so this doesnt
-      even get called - if we do need this then we need to subclass JCombo */
-//   public void setSelectedItem(Object item) {
-//     doCompletion = false;
-//     jComboBox.setSelectedItem(item);
-//     doCompletion = true;
-//   }
 
   /** If combo box is relationship then the items will be OBOProperties not
       OBOClasses */
@@ -307,48 +211,29 @@ public abstract class AbstractAutoCompList extends CharFieldGui { //extends JCom
   private boolean isTermList() { return !isRelationshipList(); }
 
   /** MAKE COMPLETION LIST FROM USER INPUT
-      Populates defaultComboBoxModel with Vector of OBOClasses - OBOClass.toString
-      is the name of the term - thats why its possible - at least for moment
-      if we want to put syn in brackets that makes this not possible - certainly
-      handy */
+      Populates defaultComboBoxModel with List of CompTerms */
   private void doCompletion() {
+    // showPopup can hang during test but not during real run - bizarre
+    doCompletion(!inTestMode);
+  }
+
+  private void doCompletion(boolean showPopup) {
     if (!doCompletion) // flag set if text filled in externally (from table sel)
       return;
-    // so AbstractDoc.replace does a remove and then insert, the remove sets
-    // text to "" and then keyTyped gets set to false, so the insert doesnt go
-    // through, taking out keyTyped, inputChanged may be sufficient
-//     if (!keyTyped) // if user hasnt typed anything dont bother
-//       return;
-    //log().debug("inputchanged "+inputChanged());
-    // this seems like a good idea but leads to a bug - if user types a letter
-    // then hits "New" then comes back and types same letter then this stops comp
-    // also i dont think this actually stops any funny behavior
-    //if (!inputChanged()) // if input is actually same no need to recomp
-    //return;
-    //keyTyped = false;
     // too soon - text field doesnt have text yet.... hmmmm....
     String input = getText();
-    // this is a vector of OBOClasses
-    // i think ultimately we will need to wrap the OBOClass to be able to
-    // have more control over the string - cut off w ... & [syn][obs] tags
-    // returns a vector of CompletionTerms (checks if relations)
-    //Vector v = getSearchItems(input); // abstract method
+    // returns a list of CompletionTerms (checks if relations)
+    // if input is empty will return whole list (if configged)
     List<CompletionTerm> l = getSearchItems(input);
-    //if (isRelationshipList()) v = ontology.getStringMatchRelations(input);
-    //else v = getTerms(input);
-    // throws IllegalStateException, Attempt to mutate in notification
-    // this tries to change text field amidst notification hmmmm.....
     changingCompletionList = true;
-    //defaultComboBoxModel = new DefaultComboBoxModel(v);
     // could just do comboBoxModel.setList(l); ???
     compComboBoxModel = new CompComboBoxModel(l);
-    //setModel(defaultComboBoxModel);
     jComboBox.setModel(compComboBoxModel);
     changingCompletionList = false;
-    // showPopup can hang during test but not during real run - bizarre
-    if (!inTestMode)
-      jComboBox.showPopup(); // only show popup on key events - actually only do comp w key
+    if (showPopup)
+      jComboBox.showPopup();//only show popup on key events actually only do comp w key
   }
+
 
   /** This is cheesy but theres a hanging bug with showPopup that only happens
       in test mode - dont know why but doesnt actually matter, so setting flag
@@ -357,37 +242,6 @@ public abstract class AbstractAutoCompList extends CharFieldGui { //extends JCom
     this.inTestMode = inTestMode;
   }
 
-  /** This is cheesy but theres a hanging bug with showPopup that only happens
-      in test mode - dont know why but doesnt actually matter, so if inTestMode
-      then dont showpopup - if hangs in nontest will investigate 
-      this actually needs to go in subclass of JCombo if we go there - this class
-      no longer sublcasses JCombo - for now commenting out */
-//   public void showPopup() {
-//     if (inTestMode)
-//       return;
-//     super.showPopup();
-//   }
-
-
-//   /** returns true if input changed from previously recorded input */
-//   private boolean inputChanged() {
-//     String newInput = getText();
-//     boolean inputChanged = ! previousInput.equals(newInput);
-//     if (inputChanged)
-//       previousInput = newInput;
-//     return inputChanged;
-//   }
-
-  /** call Ontology to get a Vector of OBOClass's that contain "in"
-      in ontology */
-//   private Vector<OBOClass> getTermsOld(String in) {
-//     // or CompletionList.getCompletionList(getOntology()) ??
-//     //CompletionList cl = CompletionList.getCompletionList();
-//     //return cl.getCompletionTermList(getOntology(),in,searchParams);
-//     return ontology.getSearchTerms(in,searchParams); // vector of OBOClass's
-//   }
-
-  // Vector<CompletionTerm>? CompletionItem?
   protected abstract List<CompletionTerm> getSearchItems(String input);
 //     if (isRelationshipList()) return termSearcher.getStringMatchRelations(input);
 //     else return termSearcher.getStringMatchTerms(input);}
@@ -427,24 +281,13 @@ public abstract class AbstractAutoCompList extends CharFieldGui { //extends JCom
     private JList getJList() {
       return listBox; // protected JList in BasicComboBoxUI
     }
-    // hmmmmmm - layout issues... actually the fix was to set the minimum size
-    // issue was with big terms screwing up layout
-//     public void layoutComboBox(java.awt.Container parent, MetalComboBoxLayoutManager manager ) {
-//       javax.swing.Icon icon = ((javax.swing.plaf.metal.MetalComboBoxButton)arrowButton).getComboIcon();
-//       java.awt.Insets buttonInsets = arrowButton.getInsets();
-//       java.awt.Insets insets = comboBox.getInsets();
-//       int buttonWidth = icon.getIconWidth() + buttonInsets.left +  buttonInsets.right;  
-//       log().debug(" comb width "+comboBox.getWidth()+" inset right "+insets.right+" but width "+ buttonWidth+" in left "+insets.left+" l2r "+ comboBox.getComponentOrientation().isLeftToRight()+rectangleForCurrentValue()+editor.getBounds());
-//       super.layoutComboBox(parent,manager);
-//     }    
   }
 
 
 
    /** Listens for actions from combo boxes and edits model/character 
-   * actions come from mouse select of term as well as return & tab  */
+   * actions come from mouse select/click of term as well as return & tab  */
    private class ComboBoxActionListener implements ActionListener {
-    //private OBOClass previousOboClass=null;
 
     private ComboBoxActionListener() {}
     public void actionPerformed(ActionEvent e) {
@@ -458,20 +301,6 @@ public abstract class AbstractAutoCompList extends CharFieldGui { //extends JCom
       String input = getText();
       if (input == null) return; // probably doesnt happen
 
-//       // the input should be from selected obo class shouldnt it? is it possible
-//       // for this not to be so? returns null if no oboclass?
-//       // TERM
-//       if (isTermList()) {
-//         try { currentOboClass = getSelectedOboClass(); }
-//         // happens on return on invalid term name
-//         catch (OboException e) { return; } // error msg?
-//         //if (oboClass == null) return; currentOboClass = oboClass;
-//       }
-//       // RELATIONSHIP
-//       else {
-//         try { currentRel = getSelectedRelation(); }
-//         catch (OboException e) { return; }
-//       }
       // abstract method - sets currentSelItem, returns false if not valid
       try { setCurrentValidItem(); }
       catch (OboException e) { return; } // if not valid then dont edit model
@@ -486,23 +315,6 @@ public abstract class AbstractAutoCompList extends CharFieldGui { //extends JCom
       in TermCL set currentSelOboClass, in RelCL set currentSelectedRelation 
       throws ex if in fact current user input is not a valid item */
   protected abstract void setCurrentValidItem() throws OboException;
-
-  /** Override - configureEditor is called when user selects item and sets text
-      field to item selected, unfortunately this happens after the listening 
-      code in this class that sets to term name (not syn name), and then the syn
-      name gets set - so this is to catch & repress the subsequent syn name 
-      setting - hope that makes sense heres the jdocs from JComboBox for this method:
-      Initializes the editor with the specified item. It seems to be ok as far
-      as i can tell to supress this method entirely - if this ends up being 
-      problematic then this should be coulpled with a flag set in setCurrentValidItem
-      or a related method to supress the syn coming after term set 
-  this doesnt seem to be supressing anymore so i guess its ok */
-//   public void configureEditor(ComboBoxEditor anEditor,Object anItem) {
-//     //log().debug("configure editor called"+anItem);
-//     //new Throwable().printStackTrace();
-//     // it appears to be ok to supress this entirely
-//     super.configureEditor(anEditor,anItem); // ??? supress
-//   }
 
 
   protected abstract void editModel();
@@ -545,7 +357,182 @@ public abstract class AbstractAutoCompList extends CharFieldGui { //extends JCom
 
 
 // GARBAGE
-//   private class AutoKeyListener extends KeyAdapter {
+  /** @param editModel if false then ACB doesnt edit model directly (post comp) 
+   can abstract classes have constructors - if not init() */
+  //protected AbstractAutoCompList(CompListSearcher s,boolean editModel,CharField cf) {
+//   protected AbstractAutoCompList(SearchParamsI sp,boolean editModel,CharField cf,
+//                                  String label) {
+//     super(cf,label);
+//     init();
+//   }
+  /** Override - configureEditor is called when user selects item and sets text
+      field to item selected, unfortunately this happens after the listening 
+      code in this class that sets to term name (not syn name), and then the syn
+      name gets set - so this is to catch & repress the subsequent syn name 
+      setting - hope that makes sense heres the jdocs from JComboBox for this method:
+      Initializes the editor with the specified item. It seems to be ok as far
+      as i can tell to supress this method entirely - if this ends up being 
+      problematic then this should be coulpled with a flag set in setCurrentValidItem
+      or a related method to supress the syn coming after term set 
+  this doesnt seem to be supressing anymore so i guess its ok */
+//   public void configureEditor(ComboBoxEditor anEditor,Object anItem) {
+//     //log().debug("configure editor called"+anItem);
+//     //new Throwable().printStackTrace();
+//     // it appears to be ok to supress this entirely
+//     super.configureEditor(anEditor,anItem); // ??? supress
+//   }
+
+//       // the input should be from selected obo class shouldnt it? is it possible
+//       // for this not to be so? returns null if no oboclass?
+//       // TERM
+//       if (isTermList()) {
+//         try { currentOboClass = getSelectedOboClass(); }
+//         // happens on return on invalid term name
+//         catch (OboException e) { return; } // error msg?
+//         //if (oboClass == null) return; currentOboClass = oboClass;
+//       }
+//       // RELATIONSHIP
+//       else {
+//         try { currentRel = getSelectedRelation(); }
+//         catch (OboException e) { return; }
+//       }
+    // hmmmmmm - layout issues... actually the fix was to set the minimum size
+    // issue was with big terms screwing up layout
+//     public void layoutComboBox(java.awt.Container parent, MetalComboBoxLayoutManager manager ) {
+//       javax.swing.Icon icon = ((javax.swing.plaf.metal.MetalComboBoxButton)arrowButton).getComboIcon();
+//       java.awt.Insets buttonInsets = arrowButton.getInsets();
+//       java.awt.Insets insets = comboBox.getInsets();
+//       int buttonWidth = icon.getIconWidth() + buttonInsets.left +  buttonInsets.right;  
+//       log().debug(" comb width "+comboBox.getWidth()+" inset right "+insets.right+" but width "+ buttonWidth+" in left "+insets.left+" l2r "+ comboBox.getComponentOrientation().isLeftToRight()+rectangleForCurrentValue()+editor.getBounds());
+//       super.layoutComboBox(parent,manager);
+//     }    
+  /** This is cheesy but theres a hanging bug with showPopup that only happens
+      in test mode - dont know why but doesnt actually matter, so if inTestMode
+      then dont showpopup - if hangs in nontest will investigate 
+      this actually needs to go in subclass of JCombo if we go there - this class
+      no longer sublcasses JCombo - for now commenting out */
+//   public void showPopup() {
+//     if (inTestMode)
+//       return;
+//     super.showPopup();
+//   }
+
+
+//   /** returns true if input changed from previously recorded input */
+//   private boolean inputChanged() {
+//     String newInput = getText();
+//     boolean inputChanged = ! previousInput.equals(newInput);
+//     if (inputChanged)
+//       previousInput = newInput;
+//     return inputChanged;
+//   }
+
+  /** call Ontology to get a Vector of OBOClass's that contain "in"
+      in ontology */
+//   private Vector<OBOClass> getTermsOld(String in) {
+//     // or CompletionList.getCompletionList(getOntology()) ??
+//     //CompletionList cl = CompletionList.getCompletionList();
+//     //return cl.getCompletionTermList(getOntology(),in,searchParams);
+//     return ontology.getSearchTerms(in,searchParams); // vector of OBOClass's
+//   }
+    //setModel(defaultComboBoxModel);
+    //defaultComboBoxModel = new DefaultComboBoxModel(v);
+    //if (isRelationshipList()) v = ontology.getStringMatchRelations(input);
+    //else v = getTerms(input);
+    // throws IllegalStateException, Attempt to mutate in notification
+    // this tries to change text field amidst notification hmmmm.....
+    // this is a vector of OBOClasses
+    // i think ultimately we will need to wrap the OBOClass to be able to
+    // have more control over the string - cut off w ... & [syn][obs] tags
+    // so AbstractDoc.replace does a remove and then insert, the remove sets
+    // text to "" and then keyTyped gets set to false, so the insert doesnt go
+    // through, taking out keyTyped, inputChanged may be sufficient
+//     if (!keyTyped) // if user hasnt typed anything dont bother
+//       return;
+    //log().debug("inputchanged "+inputChanged());
+    // this seems like a good idea but leads to a bug - if user types a letter
+    // then hits "New" then comes back and types same letter then this stops comp
+    // also i dont think this actually stops any funny behavior
+    //if (!inputChanged()) // if input is actually same no need to recomp
+    //return;
+    //keyTyped = false;
+  /** disable completion for item being selected - otherwise a popup comes up after
+      the selection - probably no harm in keeping this but this may be redundant with
+      the turning off of doCompletion in inner ATF.setText which is more
+      comprehensive - also we are no longer subclass of JCombo so this doesnt
+      even get called - if we do need this then we need to subclass JCombo */
+//   public void setSelectedItem(Object item) {
+//     doCompletion = false;
+//     jComboBox.setSelectedItem(item);
+//     doCompletion = true;
+//   }
+      //boolean fiddle = KeyboardState.shouldProcess(e);
+      //System.out.println("ATF.settext ["+text+"] curr term rel name "+getCurrentTermRelName());
+      //if (charField!=null)
+      //log().debug(charField.getName()+" AutoTextField.setText ["+text+"]"+getCurrentTermRelName());
+      //new Throwable().printStackTrace();
+      //getTextField().addKeyListener(new AutoKeyListener());
+    //return (String)getSelectedItem();
+    //if (charField!=null)log().debug(charField.getName()+" setting text ["+text+"]");
+    //new Throwable().printStackTrace();
+    //this.keyTyped = doCompletion; // key has to be typed for completion
+  // {charField.getCharFieldEnum().getValue(chr).getOboClass() }
+
+  ///** If true than the auto combo is for setting the differentia in a post comp term,
+  //    if false (default) than no post comp or genus in post comp */
+  //void setIsDifferentia(boolean isDiff) { isDifferentia = isDiff; }
+
+  //protected boolean editModelEnabled() { return editModel; }
+
+  //void setOntology(Ontology o) { ontology = o; }
+
+  //void setSearchParams(SearchParamsI sp) { searchParams = sp; }
+
+  //void setCharField(CharField charField) { this.charField = charField; }
+
+  //protected CharField getCharField() { return charField; }
+
+//   protected void setSearchParams(SearchParamsI sp) {
+//     searchParams = sp;
+//     // this assumes that its set up initially with ALL - presumptious?
+//     compListSearcher = new CompListSearcher(getCharField().getOntologyList());
+//   }
+
+    //setOntology(ontology);
+    //searchParams = sp; // singleton access? part of ontology?
+    //compListSearcher = new CompListSearcher(cf.getFirstOntology(),sp);//s;
+    //enableTermInfoListening(true); // default - hardwired in rel & term subclasses
+    //addCompletionListListener(compList);
+    // why is this commented out?
+    //if (editModel) // ComboBoxActionListener edits the model
+    //this.editModel = editModel;
+    //charFieldGui = cfg;
+    //setCharField(cf);
+    //jComboBox.setMaximumSize(CharFieldGui.inputSize); //new Dimension(390,20));
+    // this is super critical - fixes bug where layout goes to hell if string are long
+    // in completion - dont ask me why????
+    //jComboBox.setMinimumSize(CharFieldGui.inputSize);
+    // dont know why by setting fonts this seem to get worse not better in terms of
+    // the wierd layout issue with large terms & list
+    //setFont(new Font("Courier",Font.PLAIN,12)); yuck
+    //setFont(new Font("Lucida Console",Font.PLAIN,12)); not fixed
+    //Font[] fonts = 
+    //java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
+    //for (Font f : fonts) System.out.println(f);
+    //setFont(new Font("Lucida Typewriter",Font.PLAIN,10));
+  //private AutoTextFieldEditor autoTextFieldEditor;
+  //private SearchParamsI searchParams;
+  //private DefaultComboBoxModel defaultComboBoxModel;
+  //private Ontology ontology;
+  //private boolean keyTyped = false;
+  //private String previousInput = "";
+  //private CharField charField;
+  //private CharFieldGui charFieldGui; // should it be ISA not HASA?
+  ///** Whether differentia of a post composed term */
+  //private boolean isDifferentia = false;
+  /** if false then model is not edited */
+  //private boolean editModel = true;
+  //private CompletionListListener compListListener = new CompletionListListener();//   private class AutoKeyListener extends KeyAdapter {
 //     // keyTyped doesnt seem to catch backspace in 1.5 - but did in 1.4 - odd
 // //     public void keyTyped(KeyEvent e)  {
 // //       // return & tab should be ignored, as well as a lot of other things

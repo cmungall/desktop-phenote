@@ -126,7 +126,11 @@ public class CompletionTerm {
     return false;
   }
 
+  private boolean isBlank(String s) { return s == null || s.equals(""); }
+
   private boolean stringMatches(String input, String item) {
+    // if configged for adding terms on blanks??
+    if (isBlank(input)) return true;
     input = input.toLowerCase().trim();
     item = item.toLowerCase().trim();
     if (input.equals(item)) {

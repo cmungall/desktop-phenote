@@ -37,6 +37,8 @@ class TermCompList extends AbstractAutoCompList {
     enableTermInfoListening();
     if (hasMoreThanOneOntology()) // super AACL
       initOntologyChooser(getCharField());
+    // if config.showAllOnEmptyInput...
+    
   }
 
 
@@ -74,7 +76,6 @@ class TermCompList extends AbstractAutoCompList {
       log().error("ERROR: attempt to set fields from null character"); // ex?
       return;
     }
-    //System.out.println(chr+" val "+chr.getValue(getCharField()));
     if (!chr.hasValue(getCharField())) {
       currentOboClass = null; // makes getCurTermRelName ""
       setText(""); // actually calls getCurTermRelNm which is ""
@@ -82,12 +83,8 @@ class TermCompList extends AbstractAutoCompList {
     }
 
     OBOClass selCharTerm = chr.getValue(getCharField()).getOboClass();
-    //getCharField().getCharFieldEnum().getValue(chr).getOboClass();
-    // if null then user has made a new char or selected a char with no term
-    //if (selCharTerm == null) { } else { ??? covered above??
     setOboClass(selCharTerm); // doesnt allow null
     setOntologyChooserFromTerm(selCharTerm);
-    //}
   }
 
   void setOntologyChooserFromTerm(OBOClass term) {
@@ -215,10 +212,6 @@ class TermCompList extends AbstractAutoCompList {
    * overkill, i guess the question will anyone besides term info
    * ever care about these mouse over selection - if so make generic
    */
-//  void addCompletionListListener(ListSelectionListener lsl) {
-//     if (!canGetUIJList()) return;
-//     getUIJList().addListSelectionListener(lsl);  }
-  //private CompletionListListener compListListener = new CompletionListListener();
   void enableTermInfoListening() { //boolean enable) {
     if (!canGetUIJList())
       return;
@@ -335,12 +328,19 @@ class TermCompList extends AbstractAutoCompList {
    */
   private class PostCompListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
-      new PostCompGui(getCharField(), SearchParams.inst());
-//      new PostCompGui(getCharField(),getSearchParams());
+      new PostCompGui(getCharField());
     }
   }
 
 }
+
+//  void addCompletionListListener(ListSelectionListener lsl) {
+//     if (!canGetUIJList()) return;
+//     getUIJList().addListSelectionListener(lsl);  }
+  //private CompletionListListener compListListener = new CompletionListListener();
+    //getCharField().getCharFieldEnum().getValue(chr).getOboClass();
+    // if null then user has made a new char or selected a char with no term
+    //if (selCharTerm == null) { } else { ??? covered above??
 //     if (charField.postCompAllowed() && addCompButton) {
 //       JButton postCompButton = new JButton("Comp"); // ???
 //       postCompButton.addActionListener(new PostCompListener());

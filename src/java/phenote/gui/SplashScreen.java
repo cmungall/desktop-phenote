@@ -39,6 +39,7 @@ public class SplashScreen extends JWindow {
 //    this.getContentPane().add(messagePanel, BorderLayout.NORTH);
     southPanel.add(progressBar, null);
     this.pack();
+    setAlwaysOnTop(false); // doesnt work on linux??? stays on top! annoying!
   }
 
   public void setProgressMax(int maxProgress)

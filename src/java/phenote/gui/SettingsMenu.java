@@ -35,7 +35,8 @@ class SettingsMenu extends JMenu {
 //    menuSearchFilter = new JMenu("Search Filters");
 //    menuSearchFilter.setMnemonic('F');
 
-    //set defaults
+    //set defaults - these are actually the same as SearchParams defaults but it 
+    // doesnt hurt to be sure
     getSearchParams().setParam(SearchFilterType.TERM, true); //default Term = on
     getSearchParams().setParam(SearchFilterType.SYN, true); //default Syn = on
     getSearchParams().setParam(SearchFilterType.DEF, false); //default Def = off

@@ -27,7 +27,6 @@ import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.OboUtil;
 import phenote.datamodel.Ontology;
-//import phenote.datamodel.SearchParamsI;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
@@ -38,8 +37,8 @@ import phenote.gui.selection.CharSelectionEvent;
 import phenote.gui.selection.CharSelectionListener;
 import phenote.gui.selection.SelectionManager;
 
-import phenote.gui.SearchParams;
-import phenote.gui.SearchParamsI;
+//import phenote.gui.SearchParams;
+//import phenote.gui.SearchParamsI;
 
 /** A window for post composition and other wacky stuff that goes beyond the basic
     stuff in field (eg relational quality?) 
@@ -55,12 +54,12 @@ class PostCompGui {
   //private CharFieldGui relField;
   //private CharFieldGui diffField;
   private List<RelDiffGui> relDiffGuis = new ArrayList<RelDiffGui>(3);
-  private SearchParamsI searchParams;
+  //private SearchParamsI searchParams = SearchParams.inst();
   private FieldPanel compFieldPanel;
 
-  PostCompGui(CharField charField,SearchParamsI searchParams) {
+  PostCompGui(CharField charField) {
     this.charField = charField;
-    this.searchParams = searchParams;
+    //this.searchParams = searchParams;
     init();
   }
 
@@ -72,9 +71,9 @@ class PostCompGui {
       CharField relChar = new CharField(CharFieldEnum.RELATIONSHIP);
       Ontology o = charField.getPostCompRelOntol();
       relChar.addOntology(o);
-      relField = CharFieldGui.makeRelationList(relChar,searchParams);//"Relationship"?
+      relField = CharFieldGui.makeRelationList(relChar);//"Relationship"?
       compFieldPanel.addCharFieldGuiToPanel(relField);
-      diffField = CharFieldGui.makePostCompTermList(charField,searchParams,"Differentia");
+      diffField = CharFieldGui.makePostCompTermList(charField,"Differentia");
       compFieldPanel.addCharFieldGuiToPanel(diffField);
     }
     private void setRelDiffModel(RelDiffModel rd) {
@@ -100,10 +99,10 @@ class PostCompGui {
     Frame owner = Phenote.getPhenote().getFrame();
     dialog = new JDialog(owner,charField.getName()+" Post Composition");
     compFieldPanel = new FieldPanel(false,false); // (searchParams)?
-    compFieldPanel.setSearchParams(searchParams);
+    //compFieldPanel.setSearchParams(searchParams);
     
     // MAIN GENUS TERM
-    genusField = CharFieldGui.makePostCompTermList(charField,searchParams,"Genus");
+    genusField = CharFieldGui.makePostCompTermList(charField,"Genus");
     compFieldPanel.addCharFieldGuiToPanel(genusField);
 
     // REL-DIFFS
