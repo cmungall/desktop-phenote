@@ -8,6 +8,8 @@ import java.awt.Frame;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -63,6 +65,8 @@ class PostCompGui {
     init();
   }
 
+
+  /** RelDiffGui INNER CLASS */
   private class RelDiffGui {
     private CharFieldGui relField;
     // with embedded/recurse this will be a TermGui...
@@ -82,7 +86,8 @@ class PostCompGui {
       diffField.setOboClass(rd.diff);
       diffField.setOntologyChooserFromTerm(rd.diff);
     }
-  }
+  } // end of RelDiffGui INNER CLASS
+
 
   private class RelDiffModel {
     private OBOProperty rel;
@@ -109,29 +114,11 @@ class PostCompGui {
     addRelDiffGui();
 
     // HARDWIRE 2ND REL&DIFF FOR NOW eventually put in refine button to add more diffs
-    addRelDiffGui();
+    //addRelDiffGui();
 
     // WHAT THE HELL HARDWIRE A 3RD
-    addRelDiffGui();
+    //addRelDiffGui();
 
-//     // Relationship?? stripped down ontology? hmmmmmm...
-//     CharField relChar = new CharField(CharFieldEnum.RELATIONSHIP);
-//     // Ontology o = OntologyManager.getRelationshipOntology() ?? getRelCharField?
-//     Ontology o = charField.getPostCompRelOntol();
-//     relChar.addOntology(o);
-//     //relField = new CharFieldGui(relChar,compFieldPanel,"Relationship",false,false);
-//     relField = CharFieldGui.makeRelationList(relChar,searchParams); // "Relationship"?
-//     compFieldPanel.addCharFieldGuiToPanel(relField);
-//     //relField.enableTermInfoListening(false); // turn off term info for rels
-//     // relField = new RelFieldGui(relChar,compTermPanel,"Relationship");
-//     // relField = new RelationshipFieldGui(compFieldPanel);
-
-//     // when recurse put in flag for comp button
-//     diffField = CharFieldGui.makePostCompTermList(charField,searchParams,"Differentia");
-//     compFieldPanel.addCharFieldGuiToPanel(diffField);
-//     //new CharFieldGui(charField,compFieldPanel,"Differentia",false,false);
-
-    
 
 
     setGuiFromSelectedModel();
@@ -150,6 +137,7 @@ class PostCompGui {
 
   private void addRelDiffGui() {
     relDiffGuis.add(new RelDiffGui());
+    dialog.pack();
   }
 
   private void setGuiFromSelectedModel() {
@@ -282,11 +270,23 @@ class PostCompGui {
 
   private void addButtons() {
     JPanel buttonPanel = new JPanel();
+    buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+    buttonPanel.add(Box.createHorizontalGlue());
+    JButton addDiff = new JButton(new PlusAction());
+    buttonPanel.add(addDiff);
+    buttonPanel.add(Box.createRigidArea(new Dimension(140,50)));
     JButton ok = new JButton(new OkAction());
     buttonPanel.add(ok);
+    buttonPanel.add(Box.createRigidArea(new Dimension(15,0)));
     JButton cancel = new JButton(new CancelAction());
     buttonPanel.add(cancel);
+    buttonPanel.add(Box.createHorizontalGlue());
     dialog.add(buttonPanel,BorderLayout.SOUTH);
+  }
+
+  private class PlusAction extends AbstractAction {
+    private PlusAction() { super("+"); }
+    public void actionPerformed(ActionEvent e) { addRelDiffGui(); }
   }
 
   private class CancelAction extends AbstractAction {
@@ -357,6 +357,23 @@ class PostCompGui {
   }
 
 }
+
+//     // Relationship?? stripped down ontology? hmmmmmm...
+//     CharField relChar = new CharField(CharFieldEnum.RELATIONSHIP);
+//     // Ontology o = OntologyManager.getRelationshipOntology() ?? getRelCharField?
+//     Ontology o = charField.getPostCompRelOntol();
+//     relChar.addOntology(o);
+//     //relField = new CharFieldGui(relChar,compFieldPanel,"Relationship",false,false);
+//     relField = CharFieldGui.makeRelationList(relChar,searchParams); // "Relationship"?
+//     compFieldPanel.addCharFieldGuiToPanel(relField);
+//     //relField.enableTermInfoListening(false); // turn off term info for rels
+//     // relField = new RelFieldGui(relChar,compTermPanel,"Relationship");
+//     // relField = new RelationshipFieldGui(compFieldPanel);
+
+//     // when recurse put in flag for comp button
+//     diffField = CharFieldGui.makePostCompTermList(charField,searchParams,"Differentia");
+//     compFieldPanel.addCharFieldGuiToPanel(diffField);
+//     //new CharFieldGui(charField,compFieldPanel,"Differentia",false,false);
 
 //     String nm = pcString(genusTerm.getName(),diffTerm.getName());
 //     String id = pcString(genusTerm.getID(),diffTerm.getID());
