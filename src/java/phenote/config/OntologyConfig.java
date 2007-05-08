@@ -164,6 +164,8 @@ public class OntologyConfig {
       oBean.setReposSubdir(getReposSubdir());
     if (hasFilter())
       oBean.setFilterOut(getFilter());
+    if (hasNamespace())
+      oBean.setNamespace(getNamespace());
     if (hasSlim())
       oBean.setSlim(getSlim());
     if (isPostCompRel)
@@ -183,6 +185,7 @@ public class OntologyConfig {
     if (filterOut!=null) oldOC.filterOut = filterOut;
     if (slim!=null) oldOC.slim = slim;
     if (reposSubdir!=null) oldOC.reposSubdir = reposSubdir;
+    if (namespace != null) oldOC.namespace = namespace;
     oldOC.isPostCompRel = isPostCompRel;
   }
 }
