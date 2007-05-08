@@ -284,7 +284,7 @@ public class Config {
     oldCfg.autoUpdateEnabled = newCfg.autoUpdateEnabled;
     oldCfg.updateTimer = newCfg.updateTimer;
     for (FieldConfig newFC : newCfg.getFieldConfigList())
-      newFC.mergeWithOldConfig(oldCfg);
+      newFC.mergeWithOldConfig(oldCfg,newCfg);
 
     // write out updated old cfg - todo write out to .phenote/conf/filename.cfg not mycfg
     new ConfigWriter().writeConfig(oldCfg,oldDotConfFile);//getMyPhenoteCfgFile());
@@ -593,6 +593,18 @@ public class Config {
     allFields.add(fc);
     if (fc.isEnabled())
       enabledFields.add(fc);
+  }
+
+  /** get index of field config in enabled field config list - returns -1 if
+      not in there -- ex? */
+  int getEnabledFieldIndex(FieldConfig fc) {
+    return enabledFields.indexOf(fc);
+  }
+
+  void insertFieldConfig(int index, FieldConfig fc) {
+    if (fc.isEnabled())
+      enabledFields.add(index,fc);
+    allFields.add(index,fc); // ??
   }
   
 }

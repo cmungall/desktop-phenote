@@ -66,19 +66,6 @@ public class FieldConfig {
     }
   }
 
-//   FieldConfig(CharFieldEnum c, String label) {
-//     charFieldEnum = c;
-//     this.label = label;
-//   }
-
-  /** No char field enum - its a generic not in hard wired datamodel! */
-//   FieldConfig(String label) {
-//     this.label = label;
-//     //isGeneric = true;
-//   }
-  /** with generic fields these are going to become pase' */
-  //public CharFieldEnum getCharFieldEnum() { return charFieldEnum; }
-  //public boolean hasCharFieldEnum() { return charFieldEnum != null; }
 
   // --> getName?
   public String getLabel() { return label; }
@@ -185,10 +172,13 @@ public class FieldConfig {
       oc.writeOntology(f);
   }
 
-  void mergeWithOldConfig(Config oldConfig) {
+  void mergeWithOldConfig(Config oldConfig,Config thisCfg) { // should FC know its Cfg?
     // ADD - 1st see if field is new - if so add it and done
     if (!oldConfig.hasFieldConfig(this)) {
-      oldConfig.addFieldConfig(this);
+      // cant just add - need to add in proper place! insert!
+      //oldConfig.addFieldConfig(this);
+      int index = thisCfg.getEnabledFieldIndex(this);
+      oldConfig.insertFieldConfig(index,this);
       return;
     }
 
@@ -205,6 +195,20 @@ public class FieldConfig {
   }
 
 }
+
+//   FieldConfig(CharFieldEnum c, String label) {
+//     charFieldEnum = c;
+//     this.label = label;
+//   }
+
+  /** No char field enum - its a generic not in hard wired datamodel! */
+//   FieldConfig(String label) {
+//     this.label = label;
+//     //isGeneric = true;
+//   }
+  /** with generic fields these are going to become pase' */
+  //public CharFieldEnum getCharFieldEnum() { return charFieldEnum; }
+  //public boolean hasCharFieldEnum() { return charFieldEnum != null; }
   // POST COMP config... 
 //   void setIsPostComp(boolean isPostComp) {
 //     this.isPostComp = isPostComp;
