@@ -373,20 +373,26 @@ public class OntologyDataAdapter {
   private URL synchWithRepositoryUrl(URL localUrl, URL reposUrl, String ontol,
                                      String filename)
     throws OntologyException {
-    long repos = getOboDate(reposUrl);
-    long loc = 0;
-    int timer = config.getUpdateTimer();
-    boolean autoUpdate = config.autoUpdateIsEnabled();
+
     boolean useRepos = false;
-    if (localUrl != null)
-      loc = getOboDate(localUrl); // throws ont ex
-    else
+    if (localUrl == null) {
       useRepos = true;
-    //if autoupdate without popup
-    if ((autoUpdate && (timer==0)) && (repos > loc)) {
+    }
+    else {
+      long repos = getOboDate(reposUrl); // throws ex if no date
+      long loc = 0;
+      int timer = config.getUpdateTimer();
+      boolean autoUpdate = config.autoUpdateIsEnabled();
+      if (localUrl != null)
+        loc = getOboDate(localUrl); // throws ont ex
+      else
+        useRepos = true;
+      //if autoupdate without popup
+      if ((autoUpdate && (timer==0)) && (repos > loc)) {
     	useRepos = true;
-    } else if (repos > loc || useRepos) {
-      useRepos = synchDialog.queryUserForOntologyUpdate(ontol);
+      } else if (repos > loc || useRepos) {
+        useRepos = synchDialog.queryUserForOntologyUpdate(ontol);
+      }
     }
     if (useRepos) {
 

@@ -140,7 +140,7 @@ public class Config {
   /** if usePersonalConfig is false then ignore personal(my-phenote.cfg). if true
       then overwrite personal if overwritePersonal is true, otherwise only write
       to personal if personal doesnt exist, if personal exists ignore passed in
-      config file (its an initial config -i) */
+      config file */
   private void setConfigFile(String file, boolean usePersonalConfig,
                             boolean overwritePersonalConfig,boolean mergeConfigs) 
     throws ConfigException {

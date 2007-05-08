@@ -17,7 +17,9 @@ public class OntologyConfig {
   private String slim;
   private String reposSubdir;
   private boolean isPostCompRel = false;
+  /** load url is url where ontol loaded from, repos or local file cache or jar */
   private URL loadUrl;
+  private String reposUrlString;
 
   //static OntologyConfig defaultPato = new OntologyConfig("Pato","attribute_and_value.obo");
 
@@ -63,7 +65,7 @@ public class OntologyConfig {
    just use field name) */
   OntologyConfig(phenote.config.xml.OntologyDocument.Ontology o, String fieldName) {
     name = o.getName()!=null ? o.getName() : fieldName;
-    ontologyFile = o.getFile();
+    setFile(o.getFile());
     if (o.getNamespace() != null)
       namespace = o.getNamespace();
     if (o.getFilterOut() != null)
@@ -79,6 +81,19 @@ public class OntologyConfig {
     if (isPostCompRel /*&& o.getName()==null*/) // default Relationship name
       name = "Relationship";
     //if (isPostCompRel)  fc.setPostCompRelOntCfg(this);
+  }
+
+  /** File can be url(repos) or filename (from cache/jar/app), if url sets 
+      reposUrlString and ontologyFile with end of url */
+  private void setFile(String file) {
+    if (file.startsWith("http:")) {
+      reposUrlString = file;
+      ontologyFile = file.substring(file.lastIndexOf('/')+1);
+      System.out.println("file configged as url "+file+" file "+ontologyFile);
+    }
+    else {
+      ontologyFile = file;
+    }
   }
 
   public boolean isPostCompRel() { return isPostCompRel; }
@@ -107,12 +122,15 @@ public class OntologyConfig {
   void setReposSubdir(String rs) { reposSubdir = rs; }
 
   public URL getReposUrl() throws MalformedURLException {
-    String urlString="";
-    String urlDir = getReposBaseDir();
-    if (urlDir != null)
-      urlString = urlDir;
-    urlString += "/" + reposSubdir + "/" + getFile();
-    return new URL(urlString);
+    return new URL(getReposUrlString());
+  }
+
+  private String getReposUrlString() {
+    if (reposUrlString == null) { // old way - construct from base & subdir - silly
+      if (getReposBaseDir()==null || reposSubdir==null || getFile()==null) return null;
+      reposUrlString = getReposBaseDir()+"/"+reposSubdir + "/" + getFile();
+    }
+    return reposUrlString;
   }
 
   private String getReposBaseDir() {
@@ -122,12 +140,13 @@ public class OntologyConfig {
   private String getReposSubdir() { return reposSubdir; }
 
   public boolean hasReposUrl() {
-    if (getFile() == null) return false; // shouldnt happen
+    //if (getFile() == null) return false; // shouldnt happen
+    return getReposUrlString() != null;
     // repos base dir is just a convenience
-    if (reposSubdir == null) //&& getReposBaseDir() == null)
-      return false;
+    //if (reposSubdir == null) //&& getReposBaseDir() == null)
+    //return false;
     //try { getReposUrl(); } catch (MalformedURLException e) { return false; } ??
-    return true;
+    //return true;
   }
 
   private boolean isBad(String s) {
@@ -147,7 +166,8 @@ public class OntologyConfig {
   public boolean hasSlim() { return slim != null; }
   public String getSlim() { return slim; }
 
-  /** The actual url used to load ontology */
+  /** The actual url used to load ontology - this may be file: or http:
+   so if from file cache this is different than repository url */
   public void setLoadUrl(URL u) { loadUrl = u; }
   public URL getLoadUrl() { return loadUrl; }
   public boolean hasLoadUrl() { return loadUrl != null; }
