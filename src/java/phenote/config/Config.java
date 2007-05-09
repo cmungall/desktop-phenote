@@ -193,8 +193,8 @@ public class Config {
       else if (passedInExists && (!dotConfFile.exists() || overwritePersonalCfg)) {
         String s = overwritePersonalCfg ? " getting overwritten" : " does not exist";
         System.out.println(dotConfFile+s+" Copying "+passedInUrl);
-        //try {
-        //URL passedInUrl = getConfigUrl(passedInConfig);
+        // this should probably do a read & write of cfg to get version in there
+        // however if writeback is missing something its problematic
         copyUrlToFile(passedInUrl,dotConfFile);
       }
       
@@ -531,8 +531,6 @@ public class Config {
       OboRepository or = pc.getOboRepository();
       if (or != null && or.getUrlDir() != null)
         reposUrlDir = or.getUrlDir();
-
-      System.out.println("repos url dir read in "+reposUrlDir+this);
 
       // FIELDS
       Field[] fields = pc.getFieldArray();
