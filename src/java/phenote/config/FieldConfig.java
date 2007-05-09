@@ -22,10 +22,12 @@ public class FieldConfig {
   //private OntologyConfig postCompRelOntCfg;
   private String syntaxAbbrev;
   private boolean enabled = true; // default if not specified is true
+  private Config config;
 
 
   /** construct from xml bean field - READ */
-  FieldConfig(Field fieldBean) {
+  FieldConfig(Field fieldBean,Config cfg) {
+    this.config = cfg;
     this.label = fieldBean.getName();
     
 //   try{//phase this out!charFieldEnum = CharFieldEnum.getCharFieldEnum(label);}
@@ -46,7 +48,7 @@ public class FieldConfig {
     if (fieldBean.getPostcomp() != null) {
       //setIsPostComp(true); - set in OC read by ODA
       String relFile = fieldBean.getPostcomp().getRelationshipOntology();
-      OntologyConfig rel = OntologyConfig.makePostCompRelCfg(relFile);
+      OntologyConfig rel = OntologyConfig.makePostCompRelCfg(relFile,this);
       //setPostCompRelOntCfg(rel); dont need anymore - set in OC
       addOntologyConfig(rel); // new way
     }
@@ -54,18 +56,19 @@ public class FieldConfig {
     // ONTOLOGIES if only one ontology file is an attribute... (convenience)
     // this is being phased out - no need and a hassle
     if (fieldBean.getFile() != null) {
-      addOntologyConfig(new OntologyConfig(fieldBean));
+      addOntologyConfig(new OntologyConfig(fieldBean,this));
     }
     // otherwise its multiple ontologies listed in ontology elements (entity)
     // also in new way post comp rel comes in here as well
     else {
       Ontology[] ontologies = fieldBean.getOntologyArray();
       for (Ontology ontBean : ontologies) {
-        addOntologyConfig(new OntologyConfig(ontBean,getLabel())); // label -> default name
+        addOntologyConfig(new OntologyConfig(ontBean,getLabel(),this)); // label -> default name
       }
     }
   }
 
+  Config getConfig() { return config; }
 
   // --> getName?
   public String getLabel() { return label; }
@@ -78,13 +81,13 @@ public class FieldConfig {
 
   public boolean hasOntology() { return hasOntologies(); }
 
-  // assume only 1 ontology???
-  public OntologyConfig getOntologyConfig() {
-    if (!hasOntologies()) { // probably doenst happen, just in case...
-      addOntologyConfig(new OntologyConfig());
-    }
-    return getOntologyConfigList().get(0);
-  }
+//   // assume only 1 ontology???
+//   public OntologyConfig getOntologyConfig() {
+//     if (!hasOntologies()) { // probably doenst happen, just in case...
+//       addOntologyConfig(new OntologyConfig());
+//     }
+//     return getOntologyConfigList().get(0);
+//   }
 
   void addOntologyConfig(OntologyConfig o) {
     if (o == null)

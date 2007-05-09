@@ -532,6 +532,8 @@ public class Config {
       if (or != null && or.getUrlDir() != null)
         reposUrlDir = or.getUrlDir();
 
+      System.out.println("repos url dir read in "+reposUrlDir+this);
+
       // FIELDS
       Field[] fields = pc.getFieldArray();
       for (Field f : fields) {
@@ -586,7 +588,7 @@ public class Config {
   }
 
   private void makeFieldConfig(Field field) {
-    FieldConfig fc = new FieldConfig(field);
+    FieldConfig fc = new FieldConfig(field,this);
     addFieldConfig(fc);
   }
   void addFieldConfig(FieldConfig fc) {

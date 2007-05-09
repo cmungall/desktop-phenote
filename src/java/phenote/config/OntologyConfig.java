@@ -20,36 +20,22 @@ public class OntologyConfig {
   /** load url is url where ontol loaded from, repos or local file cache or jar */
   private URL loadUrl;
   private String reposUrlString;
+  private FieldConfig fieldConfig;
 
   //static OntologyConfig defaultPato = new OntologyConfig("Pato","attribute_and_value.obo");
 
-  OntologyConfig() {} // not sure this is actually needed/used
-  OntologyConfig(String name) { this.name = name; }
-  private OntologyConfig(String name, String file) {
-    this(name);
-    setOntologyFile(file);
+  //OntologyConfig() {} // not sure this is actually needed/used
+  private OntologyConfig(String name,FieldConfig fc) {
+    this.name = name;
+    fieldConfig = fc;
   }
 
-  // phasing out - now just doing rel as another ontology - backward compatible
-  static OntologyConfig makePostCompRelCfg(String file) {
-    OntologyConfig rel = new OntologyConfig("Relationship",file);
-    System.out.println("OC rel name "+rel.name);
-    rel.isPostCompRel = true;
-    return rel;
-  }
 
-  OntologyConfig(String name, String file, String filterOut) {
-    this(name,file);
-    this.filterOut = filterOut;
-  }
-  OntologyConfig(String name, String file, String filterOut,String slim) {
-    this(name,file,filterOut);
-    this.slim = slim;
-  }
 
   /** Ontology stuff in field itself (field only has one ontology) - this is getting phased 
       out replaced by field with single ontology element */
-  OntologyConfig(Field field) {
+  OntologyConfig(Field field,FieldConfig fc) {
+    fieldConfig = fc;
     name = field.getName();
     ontologyFile = field.getFile();
     // downside of strongly types xml beans is filterOut has to be dealt with 
@@ -63,7 +49,9 @@ public class OntologyConfig {
   /** confusing - this is xml bean Ontology NOT datamodel Ontology - this is reading
    in from xml config - if ontology doesnt have name use fieldName (single ontols
    just use field name) */
-  OntologyConfig(phenote.config.xml.OntologyDocument.Ontology o, String fieldName) {
+  OntologyConfig(phenote.config.xml.OntologyDocument.Ontology o, String fieldName,
+                 FieldConfig fc) {
+    fieldConfig = fc;
     name = o.getName()!=null ? o.getName() : fieldName;
     setFile(o.getFile());
     if (o.getNamespace() != null)
@@ -83,13 +71,35 @@ public class OntologyConfig {
     //if (isPostCompRel)  fc.setPostCompRelOntCfg(this);
   }
 
+  // for makePostCompRelCfg
+  private OntologyConfig(String name, String file,FieldConfig fc) {
+    this(name,fc);
+    setOntologyFile(file);
+  }
+
+  // phasing out - now just doing rel as another ontology - backward compatible
+  static OntologyConfig makePostCompRelCfg(String file,FieldConfig fc) {
+    OntologyConfig rel = new OntologyConfig("Relationship",file,fc);
+    rel.isPostCompRel = true;
+    return rel;
+  }
+
+//   OntologyConfig(String name, String file, String filterOut) {
+//     this(name,file);
+//     this.filterOut = filterOut;
+//   }
+//   OntologyConfig(String name, String file, String filterOut,String slim) {
+//     this(name,file,filterOut);
+//     this.slim = slim;
+//   }
+
+
   /** File can be url(repos) or filename (from cache/jar/app), if url sets 
       reposUrlString and ontologyFile with end of url */
   private void setFile(String file) {
     if (file.startsWith("http:")) {
       reposUrlString = file;
       ontologyFile = file.substring(file.lastIndexOf('/')+1);
-      System.out.println("file configged as url "+file+" file "+ontologyFile);
     }
     else {
       ontologyFile = file;
@@ -134,7 +144,9 @@ public class OntologyConfig {
   }
 
   private String getReposBaseDir() {
-    return Config.inst().getReposUrlDir();
+    // Config.inst() is rather presumptious!
+    //return Config.inst().getReposUrlDir();
+    return fieldConfig.getConfig().getReposUrlDir();
   }
 
   private String getReposSubdir() { return reposSubdir; }
@@ -179,9 +191,11 @@ public class OntologyConfig {
   void writeOntology(Field f) {
     Ontology oBean = f.addNewOntology();
     oBean.setName(getName());
+    
     oBean.setFile(getFile());
+    // new style - if there is a repos url that set file to it
     if (hasReposUrl())
-      oBean.setReposSubdir(getReposSubdir());
+      oBean.setFile(getReposUrlString());
     if (hasFilter())
       oBean.setFilterOut(getFilter());
     if (hasNamespace())
@@ -201,10 +215,15 @@ public class OntologyConfig {
     // UPDATE
     OntologyConfig oldOC = oldFC.getOntConfig(getName());
     // or should even null gets transmitted in which case this replaces oldOC??
-    if (ontologyFile!=null) oldOC.ontologyFile = ontologyFile;
+    if (reposUrlString != null) {
+      oldOC.ontologyFile = reposUrlString;
+    }
+    else if (ontologyFile!=null) {
+      oldOC.ontologyFile = ontologyFile;
+    }
     if (filterOut!=null) oldOC.filterOut = filterOut;
     if (slim!=null) oldOC.slim = slim;
-    if (reposSubdir!=null) oldOC.reposSubdir = reposSubdir;
+    //if (reposSubdir!=null) oldOC.reposSubdir = reposSubdir;
     if (namespace != null) oldOC.namespace = namespace;
     oldOC.isPostCompRel = isPostCompRel;
   }
