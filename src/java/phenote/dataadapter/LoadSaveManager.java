@@ -23,10 +23,17 @@ public class LoadSaveManager {
   private LoadSaveManager() {
     fileChooser = new JFileChooser();
     List<DataAdapterI> adapters = Config.inst().getDataAdapters();
+    boolean first = true;
+    FileFilter filt1=null;
     for (DataAdapterI adapter: adapters) {
       DataAdapterFileFilter filter = new DataAdapterFileFilter(adapter);
       fileChooser.addChoosableFileFilter(filter);
+      if (first) {
+        filt1 = filter;
+        first = false;
+      }
     }
+    fileChooser.setFileFilter(filt1);
   }
   
   /**Returns singleton*/
