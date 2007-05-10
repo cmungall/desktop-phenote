@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="GENERATOR" content="Solutionsoft HelpBreeze JavaHelp Edition">
+<title>The <dataadapter> Tag</title>
+<link rel="stylesheet" type="text/css" href="../javahelp.css">
+</head>
+<body bgcolor="#ffffff">
+<h1>The &lt;dataadapter&gt; <dataadapter> Tag</h1>
+<p>The &lt;dataadapter&gt; tag allows the user to specify a read and/or write 
+adapter.&nbsp; These data adapters are for loading/saving of annotation data 
+only, not for ontologies.&nbsp; At least one data adapter should be specified 
+per configuration, with up to as many as desired.</p>
+<h2>Parameters</h2>
+<h1>
+<table bordercolor="#000000" cellpadding="5" width="100%" align="center" border="1">
+  
+  <tr>
+    <td align="middle"><strong>Name</strong></td>
+    <td align="middle"><strong>Description</strong></td>
+    <td align="middle"><strong>Legal Values</strong></td>
+    <td align="middle"><strong>Required</strong></td>
+    <td align="middle"><strong>Default</strong></td></tr>
+  <tr>
+    <td>
+      <p><font face="Courier">name</font></p></td>
+    <td>
+      <p>This is the name&nbsp;of the data adapter, including&nbsp;its location 
+      within the software.&nbsp; This location is set by the developers of each 
+      data adapter.</p></td>
+    <td><em>any text value</em></td>
+    <td align="middle">yes</td>
+    <td>&nbsp;</td></tr>
+  <tr>
+    <td><font face="Courier">enable</font></td>
+    <td>For each element, it can be turned on or off.&nbsp; In this way you 
+      can maintain the list of available data adapters, but just "hide" them in 
+      the application if set to false.&nbsp; </td>
+    <td>
+      <ul>
+        <li>true 
+        <li>false</li></ul></td>
+    <td align="middle">no</td>
+    <td>false</td></tr></table>
+<h2>&nbsp;</h2>
+<h2>Contents</h2></h1>
+<p>Each &lt;dataadapter&gt; element specifies one data 
+adapter to be used during loading and saving of the annotation data.&nbsp; You will 
+see these data adapters in the the Load or Save dialog boxes, 
+in the order they are specified in the configuration.&nbsp; To include multiple data 
+adapters, be sure to repeat the full line for each adapter.&nbsp; Data adapters 
+can be removed from a Phenote session by disabling the element, or by deleting 
+from the configuration itself.&nbsp;&nbsp; </p>
+<h1><font color="#000000" size="3"></font>&nbsp;</h1>
+<h2>Example</h2><pre>&lt;ns:dataadapter name="phenote.dataadapter.delimited.DelimitedFileAdapter" enable="true"/&gt; <pre>&lt;ns:dataadapter name="phenote.dataadapter.phenosyntax.PhenoSyntaxFileAdapter" enable="false"/&gt; </pre></pre><pre>  </pre>
+</body>
+</html>
