@@ -30,6 +30,7 @@ import phenote.config.Config;
 
 public class SynchOntologyDialog {
 
+  // i think its ok to cache config as this object is not reused
   private Config config = Config.inst();
 
   private ButtonGroup buttonGroup;

@@ -72,6 +72,13 @@ public class Config {
     setConfigFile(configFile,false,false,false); // dont use .phenote by default (servlet)
   }
 
+  public static void changeConfig(String newCfgFile) throws ConfigException {
+    Config newCfg = new Config();
+    // throws ConfigEx on fail
+    newCfg.updateConfigFileWithNewVersion(newCfgFile); // for now???
+    singleton = newCfg; // if config succeeds then set 
+  }
+
   /** This is for when phenote is first installed and one of the default config
       files is used - the -i option if you will. The initial config file will
       get copied to .phenote/my-phenote.cfg if it doesnt already exist. if it
@@ -126,7 +133,7 @@ public class Config {
 
   /** Get config file string that is in my-phenote file - throw io exception if file
       doesnt exist. todo: should also throw ex if doesnt have a valid file in it? */
-  String getMyPhenoteConfigString() throws IOException {
+  public String getMyPhenoteConfigString() throws IOException {
     LineNumberReader r = new LineNumberReader(new FileReader(getMyPhenoteFile()));
     String configFile = r.readLine();
     return configFile;

@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 //import phenote.datamodel.CharFieldEnum;
 //import phenote.datamodel.OboUtil;
 
-/** Manages all of the ontology. Eventually will get config info (xml? OntologyConfig?)
+/** Manages all of the ontologies. Eventually will get config info (xml? OntologyConfig?)
     and set itself up from that. Should there be an ontology package - whats funny
     is that ontologies have obo filenames that they parse so they are sort of
     data adapterish 
@@ -39,7 +39,7 @@ public class OntologyManager {
     return singleton;
   }
 
-  
+  /** OntologyDataAdapter adds fields */
   public void addField(CharField cf) {
     //addOntologyList(cf.getOntologyList());
     charFieldList.add(cf);

@@ -50,4 +50,9 @@ public class CharacterListManager {
     listenerList.add(l);
   }
 
+  public void clear() {
+    characterList.clear();
+    // notify listeners???
+  }
+
 }

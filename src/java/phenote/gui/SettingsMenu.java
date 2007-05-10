@@ -4,7 +4,9 @@ package phenote.gui;
 import phenote.config.Config;
 import phenote.config.ConfigException;
 import phenote.config.ConfigFileQueryGui;
+import phenote.main.Phenote;
 
+import java.io.IOException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -168,21 +170,48 @@ class SettingsMenu extends JMenu {
       // eventually reconfigure phenote in same session, cfg,obo,gui
       boolean showCancel = true;
       try {
-        String cfg = ConfigFileQueryGui.queryUserForConfigFile(showCancel);
-        if (cfg != null && !cfg.equals(""))
-          Config.writeMyPhenoteDefaultFile(cfg);
-        String m = "You must restart phenote for new config to take effect";
-        JOptionPane.showMessageDialog(null, m, "Please restart",
-                JOptionPane.INFORMATION_MESSAGE);
+        String currentConfig = null;
+        try { currentConfig = Config.inst().getMyPhenoteConfigString(); }
+        catch (IOException x) {}
+
+        String newCfg = ConfigFileQueryGui.queryUserForConfigFile(showCancel);
+    
+        if (newCfg == null || newCfg.equals(""))
+          throw new ConfigException("ERROR: Got no config from user");
+
+        if (currentConfig != null && newCfg.equals(currentConfig))
+          throw new ConfigException("Config not changed"); // ?? or do nothing?
+
+
+        Config.writeMyPhenoteDefaultFile(newCfg);
+        
+        restartMessage();
+        //changeConfig(newCfg);
       }
-      catch (ConfigFileQueryGui.CancelEx ex) {
-      } // its cancelled do nothing
+      catch (ConfigFileQueryGui.CancelEx ex) {} // its cancelled do nothing
       catch (ConfigException x) {
         String m = "Failed to change configuration " + x.getMessage();
         JOptionPane.showMessageDialog(null, m, "Config error",
                 JOptionPane.ERROR_MESSAGE);
       }
     }
+  }
+
+  private void restartMessage() {
+    String m = "You must restart phenote for new config to take effect";
+    JOptionPane.showMessageDialog(null, m, "Restart Phenote",
+                JOptionPane.INFORMATION_MESSAGE);    
+  }
+
+  
+  /** This doesnt work yet Wipe out data and load new configuration */
+  private void changeConfig(String newCfg) {
+    String m = "This will wipe out your current data - are you sure you want "
+      +"to do this?";
+    int ret = JOptionPane.showConfirmDialog(null, m, "Confirm data wipeout",
+                      JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+    if (ret != JOptionPane.YES_OPTION) return;
+    Phenote.getPhenote().changeConfig(newCfg);
   }
 
   private class ShowHistoryActionListener implements ActionListener {

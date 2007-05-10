@@ -61,7 +61,7 @@ import phenote.gui.SynchOntologyDialog;
 public class OntologyDataAdapter {
 
   private static OntologyDataAdapter singleton;
-  private Config config;
+  //private Config config; cant cache may change
   private OntologyManager ontologyManager = OntologyManager.inst();
   private boolean initializingOntologies = false;
   private Map<String,Ontology> fileToOntologyCache = new HashMap<String,Ontology>();
@@ -74,10 +74,12 @@ public class OntologyDataAdapter {
   private static final boolean DO_ONE_OBO_SESSION = true;
 
   private OntologyDataAdapter() {
-    config = Config.inst();
+    //config = Config.inst();
     initOntologies(); // loads up all ontologies
     //if (config.checkForNewOntologies()){new OntologyFileCheckThread().start();}
   }
+
+  private Config cfg() { return Config.inst(); }
 
   /** synchronized so cant reload an ontology while ontologies are being initialized 
    getInstance calls initOntologies - in other words you have to call getInstance to
@@ -111,7 +113,7 @@ public class OntologyDataAdapter {
 
   private void initOntolsSeparateOboSessions() {
     // getFieldConfigList gives enabled fields - not disabled
-    for (FieldConfig fieldConfig : config.getFieldConfigList()) {
+    for (FieldConfig fieldConfig : cfg().getFieldConfigList()) {
       if (!fieldConfig.isEnabled()) continue; // not necasary actually
       CharField cf = new CharField(fieldConfig.getLabel());
       fieldConfig.setCharField(cf);
@@ -165,7 +167,7 @@ public class OntologyDataAdapter {
   private OBOSession loadAllOboFilesIntoOneOboSession() throws OntologyException {
     // get unique list of obo files
     Collection<String> files = new ArrayList<String>();
-    for (FieldConfig fieldConfig : config.getFieldConfigList()) {
+    for (FieldConfig fieldConfig : cfg().getFieldConfigList()) {
       for (OntologyConfig oc : fieldConfig.getOntologyConfigList()) {
         try {
           String file = findOboUrlString(oc); // throws oex if not found
@@ -185,7 +187,7 @@ public class OntologyDataAdapter {
   // should Config actually set OntologyManager up with char fields - maybe this shouldnt
   // be ont data adapters responsibility - its just the 1st time that we need it
   private void initCharFields() {
-    for (FieldConfig fieldConfig : config.getFieldConfigList()) {
+    for (FieldConfig fieldConfig : cfg().getFieldConfigList()) {
       CharField cf = fieldConfig.getCharField(); // creates char field (if not there)
       ontologyManager.addField(cf);
     }
@@ -194,7 +196,7 @@ public class OntologyDataAdapter {
   /** This actually creates both CharFields and Ontologies and maps namespaces from
       obo file adapter meta data */
   private void mapNamespacesToOntologies(OBOSession oboSession) throws OntologyException {
-    for (FieldConfig fieldConfig : config.getFieldConfigList()) {
+    for (FieldConfig fieldConfig : cfg().getFieldConfigList()) {
       CharField cf = fieldConfig.getCharField(); // creates char field (if not there)
       // ontology manager.addCF???
       if (fieldConfig.hasOntologies()) {
@@ -381,8 +383,8 @@ public class OntologyDataAdapter {
     else {
       long repos = getOboDate(reposUrl); // throws ex if no date
       long loc = 0;
-      int timer = config.getUpdateTimer();
-      boolean autoUpdate = config.autoUpdateIsEnabled();
+      int timer = cfg().getUpdateTimer();
+      boolean autoUpdate = cfg().autoUpdateIsEnabled();
       if (localUrl != null)
         loc = getOboDate(localUrl); // throws ont ex
       else
@@ -552,7 +554,7 @@ public class OntologyDataAdapter {
 
 //   private void loadRelationshipOntology() { hmmmmmm
 //     // for now - todo configure! post comp relationship-ontology
-//     // FieldConfig rfc = config.getRelationshipFieldConfig();
+//     // FieldConfig rfc = cfg().getRelationshipFieldConfig();
 //     //CharFieldEnum relEnum = rfc.getCharFieldEnum();
 //     CharFieldEnum relEnum = CharFieldEnum.RELATIONSHIP;
 //     CharField cf = new CharField(relEnum);
@@ -583,7 +585,7 @@ public class OntologyDataAdapter {
 
 //     public void run() {
 
-//       int checkMilliSecs = config.getOntologyCheckMinutes() * 60000;
+//       int checkMilliSecs = cfg().getOntologyCheckMinutes() * 60000;
 //       //int checkMilliSecs = 6000;//0.6 * 60000; // debug - 10 secs
 
 //       while(true) {

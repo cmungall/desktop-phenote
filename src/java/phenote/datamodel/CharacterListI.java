@@ -13,6 +13,7 @@ public interface CharacterListI {
   public void add(int order,CharacterI c);
   public void remove(int i);
   public void remove(CharacterI c);
+  public void clear();
   public int size();
   public boolean isEmpty();
   public int indexOf(CharacterI c);

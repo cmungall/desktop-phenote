@@ -27,7 +27,7 @@ class CharacterTableModel extends AbstractTableModel {
   //private int rowCount = 0;
   // todo - get this from data adapter/model - especially for loaded
   private CharacterListI characterList;// = new CharacterList();
-  private Config config = Config.inst();
+  //private Config config = Config.inst(); cant cache - may change!
 
   CharacterTableModel() {
     characterList = getCharListManager().getCharacterList();
@@ -37,6 +37,8 @@ class CharacterTableModel extends AbstractTableModel {
     // --> panel
     //EditManager.inst().addCharChangeListener(new TableCharChangeListener());
   }
+
+  private Config cfg() { return Config.inst(); }
 
   private CharacterListManager getCharListManager() { return CharacterListManager.inst(); }
 
@@ -57,11 +59,11 @@ class CharacterTableModel extends AbstractTableModel {
   }
 
   public String getColumnName(int col) {
-    return config.getFieldLabel(col);
+    return cfg().getFieldLabel(col);
   }
 
   public int getColumnCount() {
-    return config.getNumberOfFields();
+    return cfg().getNumberOfFields();
   }
 
   public int getRowCount() {
@@ -142,14 +144,14 @@ class CharacterTableModel extends AbstractTableModel {
       log().error("character is null for row "+row+" in table");
       return null;
     }
-//    if (config.getCharFieldEnum(col) == null) {
+//    if (cfg().getCharFieldEnum(col) == null) {
     // for now - eventually get from char not config
-//     if (!config.hasCharField(col)) {
+//     if (!cfg().hasCharField(col)) {
 //       log().error("column "+col+" not configured properly in "+
 //                          "character table, cant retrieve value ");
 //       return null;
 //     }
-    //return config.getCharFieldEnum(col).getValue(chr).getName();
+    //return cfg().getCharFieldEnum(col).getValue(chr).getName();
     // CF = chr.getCharField(col); - yes! hard w hardwired optional model items
     // return chr.getValue(col).getName(); // ???
     try {
@@ -179,7 +181,7 @@ class CharacterTableModel extends AbstractTableModel {
       but for now just sort data itself? dont yet have separate view objects to
       sort */
   void setSortKey(int col) {
-    CharField cf = config.getCharField(col);
+    CharField cf = cfg().getCharField(col);
     characterList.sortBy(cf); // ???
     fireTableDataChanged();
   }

@@ -10,6 +10,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.ImageIcon;
@@ -129,27 +130,27 @@ public class Phenote {
   }
   
   public void initGui() {
-    makeWindow();
+    makeWindow(); // ok this is silly
   }
 
 
   private void splashScreenInit() {
-	ImageIcon myImage = new ImageIcon(logoFile);
-	splashScreen = new SplashScreen(myImage);
-	splashScreen.setLocationRelativeTo(null);
-	splashScreen.setProgressMax(100);
-	splashScreen.setScreenVisible(true);
-	splashScreen.setProgress("Phenote version "+PhenoteVersion.versionString(), 0);
+    ImageIcon myImage = new ImageIcon(logoFile);
+    splashScreen = new SplashScreen(myImage);
+    splashScreen.setLocationRelativeTo(null);
+    splashScreen.setProgressMax(100);
+    splashScreen.setScreenVisible(true);
+    splashScreen.setProgress("Phenote version "+PhenoteVersion.versionString(), 0);
   }
 
   private void splashScreenDestruct() {
-	    splashScreen.setScreenVisible(false);
-	  }
+    splashScreen.setScreenVisible(false);
+  }
   
   private void doCommandLine(String[] args) {
-    //doCommandLineOld(args); // -c -u  --> move to CommandLine!
-    try { commandLine.setArgs(args); } // no log yet - sys.out
-    catch (Exception e) { System.out.println("Command line read failed"+e); }
+    try { commandLine.setArgs(args); } // sets config if specified
+    catch (Exception e) { // no log yet - sys.out
+      System.out.println("Command line read failed"+e); }
     // no config set from command line use default
     if (!Config.inst().isInitialized()) { 
       try { Config.inst().loadDefaultConfigFile(); }
@@ -237,6 +238,37 @@ public class Phenote {
 
     return mainPanel;
   }
+  
+  /** this doesnt work yet - OntologyManager list of char fields is not getting 
+      reset for one thing - slippery slope this stuff */
+  public void changeConfig(String newCfg) { // throws ConfigException??
+
+    try {
+      // load new config
+      // Config loadDefaultConfigFile?? as its set above w writeMyPhen?
+      Config.changeConfig(newCfg); // for now just does update with new version
+      
+      // wipe out old data
+      CharacterListManager.inst().clear();
+      
+      // load ontologies - reuse ones that are already loaded? dump ones not used?
+      // this needs to reset onotologymanagers charfields - or something does??
+      // ontolMan.clear()?
+      initOntologies(); // ?? i think will preserve ontol cache which is good
+      
+      // wipe out & bring up new gui
+      phenote.initGui(); // or phenote.reinitGui()?
+
+    }
+    catch (ConfigException e) { // throw it??
+      String m = "Failed to change configuration " + e.getMessage();
+      JOptionPane.showMessageDialog(null, m, "Config error",
+                                    JOptionPane.ERROR_MESSAGE);
+    }
+
+  }
+
+
 
   public static Phenote getPhenote() {  // singleton
     if (phenote == null) phenote = new Phenote();
