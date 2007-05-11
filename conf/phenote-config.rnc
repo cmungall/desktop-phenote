@@ -5,6 +5,7 @@ default namespace = "phenote/config/xml"
 start =
   element phenote-configuration {
     attribute version { xsd:string },
+    master-to-local-config,
     log,
     queryable-dataadapter*,
     dataadapter*,
@@ -15,6 +16,13 @@ start =
     obo-repository,
     field*
   }
+
+## specify how the master config interacts with local/cached config
+## WIPEOUT_ALWAYS master will always wipe out local every run
+## UPDATE_WITH_VERSION_CHANGE (default) update/merge master with local on version change
+master-to-local-config = element master-to-local-config {
+  attribute mode { xsd:string }
+}
 
 queryable-dataadapter = element queryable-dataadapter {
   ## actual class name, eg phenote.dataadapter.worm.WormAdapter
@@ -34,12 +42,6 @@ dataadapter =
     attribute enable { xsd:boolean }
   }
 
-## Whether to check if ontology(obo) has been updated/more current obo file
-## I think this needs to be taken out as replaced by quartz scheduler
-##check-for-new-ontologies =
-##  element check-for-new-ontologies {
-##    attribute intervalMinutes { xsd:integer }                       
-##  }
 
 ## Where the config file for log4j is
 log =
@@ -90,6 +92,12 @@ ontology =
     attribute is-postcomp-rel {xsd:boolean}
   }
 
+## Whether to check if ontology(obo) has been updated/more current obo file
+## I think this needs to be taken out as replaced by quartz scheduler
+##check-for-new-ontologies =
+##  element check-for-new-ontologies {
+##    attribute intervalMinutes { xsd:integer } }
+
 ## hmmmmm - this is funny - is there a need for more than one rel ontol??
 ## alternatively should this just hold ontology+(1 or more)
 ## or alternatively just be another ontology with isRel flag and if theres
@@ -102,3 +110,4 @@ postcomp =
     ## do we need this??
     ontology*
   }
+

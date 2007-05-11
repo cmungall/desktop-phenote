@@ -28,6 +28,7 @@ import phenote.config.xml.UvicGraphDocument.UvicGraph;
 import phenote.config.xml.TermHistoryDocument.TermHistory;
 import phenote.config.xml.AutoUpdateOntologiesDocument.AutoUpdateOntologies;
 import phenote.config.xml.UpdateTimerDocument.UpdateTimer;
+import phenote.config.xml.MasterToLocalConfigDocument.MasterToLocalConfig;
 
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.QueryableDataAdapterI;
@@ -54,6 +55,7 @@ public class Config {
   private int updateTimer = 0; //default is to not wait
   private String reposUrlDir;
   private String version;
+  private String masterToLocalConfigMode;
   private boolean configInitialized = false;
   private final static String myphenoteFile = "my-phenote";
 
@@ -169,49 +171,132 @@ public class Config {
     //new ConfigWriter().writeConfig(this,new File(FileUtil.getDotPhenoteDir(),"my-phenote.cfg"));
   }
 
-  // why return string? why not file or url?
-  private String getMyPhenoteConfig(String passedInConfig,boolean overwritePersonalCfg,
+  /** masterConfig is filename from cmd line or from my-phenote
+      First test if masterConfig exists, then looks for file in .phenote cache.
+      throws excpetion if neither exist
+      if mergeConfigs is true and masterConfig exists it then tries to merge
+      passedIn(master) with dotConf(cache)
+     why return string? why not file or url? */
+  private String getMyPhenoteConfig(String masterConfig,boolean overwritePersonalCfg,
                                     boolean mergeConfigs)
     throws ConfigException {
-    //File dotPhenote = FileUtil.getDotPhenoteDir();
-    // this wont work with merging/updating
-    //File myPhenote = new File(dotPhenote,"my-phenote.cfg");
+    
+//       boolean masterExists = true;
+//       URL masterUrl=null;
+//       // currently getConfigUrl doesnt search .phenote/conf - which is handy here
+//       // if passed in conf doesnt exist, carry on with dotConf - funny logic?
+//       try { masterUrl = getConfigUrl(masterConfig); }
+//       catch (FileNotFoundException fe) { masterExists = false; }
 
-    //try {
-      boolean passedInExists = true;
-      URL passedInUrl=null;
+//       // strips path to just file (but isnt it already stripped??)
+//       String nameOfFile = FileUtil.getNameOfFile(masterConfig); 
+//       // this is the "species" conf file - eg ~/.phenote/conf/flybase.cfg
+//       File dotConfFile = new File(getDotPhenoteConfDir(),nameOfFile);
+
+//       if (!masterExists && !dotConfFile.exists())
+//         throw new ConfigException("Cfg file doesnt exist in app nor .phenote/conf");
+
+    // master conf may have attribute that overrides merge/overwrite settings - need to
+    // check those before going through with below -- throws Ex
+    ConfigMode mode = new ConfigMode(masterConfig,mergeConfigs,overwritePersonalCfg);
+
+    //if (mergeConfigs && masterExists) {
+    if (mode.isUpdate())
+      mergeMasterWithLocal(mode); // eventuall pass in mode as well
+    
+      
+    // if file doesnt exist yet or overwrite, copy over masterConfig
+    else if (mode.isWipeout()) {
+      mode.doWipeout(); // ?? thorws ConfigEx
+      // this should probably do a read & write of cfg to get version in there
+      // however if writeback is missing something its problematic
+      // mode.doWipeout?
+      //copyUrlToFile(mode.masterUrl,mode.localFile); // Exx
+    }
+    
+    // new way - set new default(no param) config file name in my-phenote.cfg
+    writeMyPhenoteDefaultFile(masterConfig); // ? master?
+    
+    return mode.localFileString(); // ?
+  }
+
+
+  /** ConfigMode INNER CLASS */
+  private class ConfigMode {
+    private String mode = "";
+    //private boolean updateWithNewVersion=false;
+    private boolean masterExists = true;
+    private URL masterUrl;
+    private File localFile; //dotConfFile;
+    private boolean cmdLineWipeout=false;
+    private ConfigMode(String masterConfig,boolean merge,boolean cmdLineWipeout) 
+      throws ConfigException {
+      this.cmdLineWipeout = cmdLineWipeout;
       // currently getConfigUrl doesnt search .phenote/conf - which is handy here
       // if passed in conf doesnt exist, carry on with dotConf - funny logic?
-      try { passedInUrl = getConfigUrl(passedInConfig); }
-      catch (FileNotFoundException fe) { passedInExists = false; }
+      try { masterUrl = getConfigUrl(masterConfig); }
+      catch (FileNotFoundException fe) { masterExists = false; }
 
-      String nameOfFile = FileUtil.getNameOfFile(passedInConfig);
+      // strips path to just file (but isnt it already stripped??)
+      String nameOfFile = FileUtil.getNameOfFile(masterConfig); 
       // this is the "species" conf file - eg ~/.phenote/conf/flybase.cfg
-      File dotConfFile = new File(getDotPhenoteConfDir(),nameOfFile);
+      localFile = new File(getDotPhenoteConfDir(),nameOfFile);
 
-      if (!passedInExists && !dotConfFile.exists())
+      if (!masterExists && !localFile.exists())
         throw new ConfigException("Cfg file doesnt exist in app nor .phenote/conf");
 
-      if (mergeConfigs && passedInExists) {
-        mergeNewWithOld(passedInUrl,dotConfFile);
-      }
-      
-      // if file doesnt exist yet or overwrite, copy over passedInConfig
-      else if (passedInExists && (!dotConfFile.exists() || overwritePersonalCfg)) {
-        String s = overwritePersonalCfg ? " getting overwritten" : " does not exist";
-        System.out.println(dotConfFile+s+" Copying "+passedInUrl);
-        // this should probably do a read & write of cfg to get version in there
-        // however if writeback is missing something its problematic
-        copyUrlToFile(passedInUrl,dotConfFile);
-      }
-      
-      // new way - set new default(no param) config file name in my-phenote.cfg
-      writeMyPhenoteDefaultFile(passedInConfig); // ? passedIn?
+      Config cfg = new Config();
+      cfg.parseXmlFile(masterConfig);
+      if (cfg.masterToLocalConfigMode != null)
+        mode = cfg.masterToLocalConfigMode;
+//       if (overwrite || mode.equals("WIPEOUT_ALWAYS"))
+//         wipeoutAlways = true;
+//       else
+//         updateWithNewVersion = true; // for now
+    }
+    private boolean isWipeout() {
+      if (!masterExists) return false;
+      if (!localFileExists()) return true; // init
+      if (cmdLineWipeout) return true;
+      return mode.equals("WIPEOUT_ALWAYS");
+      //return (!dotConfFile.exists() || overwritePersonalCfg)
+    }
+    
+    /** not sure if this belongs in this class?? */
+    private void doWipeout() throws ConfigException {
+      doWipeoutMessage();
+      copyUrlToFile(masterUrl,localFile); // Ex  put method in inner class?
+    }
 
-      return dotConfFile.toString(); // ?
-      
-     //} catch (FileNotFoundException e) {throw new ConfigException(e);}
-    //return dotConfFile.toString(); // ?
+    private void doWipeoutMessage() {
+      String s = !localFileExists() ? " does not exist" : " getting overwritten";
+      System.out.println(localFile+s+" Copying "+masterUrl);
+    }
+
+    private boolean isUpdate() {
+      if (isWipeout()) return false;
+      else return true; // for now...
+    }
+    private boolean isUpdateWithNewVersion() {
+      return isUpdate(); // for now
+    }
+    private boolean isUpdateAlways() {
+      return isUpdate() && !isUpdateWithNewVersion(); // always false at moment
+    }
+    
+    private boolean isUpdateable(String version) {
+      if (isUpdateAlways()) return true;
+      if (!isUpdateWithNewVersion()) return false;
+      // version
+      if (version == null) return false;
+      return (!version.equals(PhenoteVersion.versionString()));
+    }
+
+
+    private boolean localFileExists() {
+      return localFile!=null && localFile.exists();
+    }
+    private String localFileString() { return localFile.toString(); }
   }
 
   private static File getDotPhenoteConfDir() {
@@ -237,7 +322,8 @@ public class Config {
   }
 
   /** goes thru url line by line and copies to file - is there a better way to 
-      do this? */
+      do this? actually should do copy anymore should read in and write out xml
+      adding version along the way */
   private void copyUrlToFile(URL configUrl,File myPhenote) throws ConfigException {
 
     try {
@@ -256,21 +342,24 @@ public class Config {
   /** MERGING/UPDATING Load in 2 configs, anything new in newConfig gets put into my phenote 
       only merge if versions are different(?) in other words only merge on version
       change/phenote upgrade - if version same then leave in users mucking */
-  private void mergeNewWithOld(URL newConfig,File oldDotConfFile) throws ConfigException {
-    if (!oldDotConfFile.exists()) {
-      System.out.println(oldDotConfFile+" doesnt exist, creating");
-      copyUrlToFile(newConfig,oldDotConfFile);
-      return;
-    }
+  private void mergeMasterWithLocal(ConfigMode mode) throws ConfigException { //URL newConfig,File oldDotConfFile
+    // this actually is redundant as covered in isWipeout()
+//     if (!mode.localFileExists()) { 
+//       System.out.println(mode.localFile+" doesnt exist, creating");
+//       // this should actually do a read in and writeback to get version in there...
+//       copyUrlToFile(mode.masterUrl,mode.localFile);
+//       return;
+//     }
     Config newCfg = new Config();
-    newCfg.parseXmlUrl(newConfig); //??
+    newCfg.parseXmlUrl(mode.masterUrl); //??
     Config oldCfg = new Config();
-    oldCfg.parseXmlFile(oldDotConfFile.toString());
+    oldCfg.parseXmlFile(mode.localFileString());
 
     // so actually new/sys config may have out of date version or none - just use
     // PhenoteVersion itself!
-    String version = PhenoteVersion.versionString();//newCfg.version
-    if (version != null && version.equals(oldCfg.version)) {
+    //String version = PhenoteVersion.versionString();//newCfg.version
+    //if (mode.isUpdateWithNewVersion() && version != null && version.equals(oldCfg.version)) {
+    if (!mode.isUpdateable(oldCfg.version)) {
       System.out.println("System & user config same version, not updating cfg");
       return;
     }
@@ -293,13 +382,9 @@ public class Config {
     for (FieldConfig newFC : newCfg.getFieldConfigList())
       newFC.mergeWithOldConfig(oldCfg,newCfg);
 
-    // write out updated old cfg - todo write out to .phenote/conf/filename.cfg not mycfg
-    new ConfigWriter().writeConfig(oldCfg,oldDotConfFile);//getMyPhenoteCfgFile());
+    // write out updated old cfg
+    new ConfigWriter().writeConfig(oldCfg,mode.localFile);
   }
-
-//   private File getMyPhenoteCfgFile() {
-//     return new File(FileUtil.getDotPhenoteDir(),"my-phenote.cfg");
-//   }
 
 
 
@@ -491,6 +576,10 @@ public class Config {
 
       version = pc.getVersion();
 
+      MasterToLocalConfig m = pc.getMasterToLocalConfig();
+      if (m != null && m.getMode() != null)
+        masterToLocalConfigMode = m.getMode();
+
       // LOG CONFIG FILE
       Log log = pc.getLog();
       if (log != null && log.getConfigFile() != null) {
@@ -615,7 +704,16 @@ public class Config {
   }
   
 }
-    //parseXmlFile("./conf/initial-flybase.cfg"); // hardwired for now...
+//   private File getMyPhenoteCfgFile() {
+//     return new File(FileUtil.getDotPhenoteDir(),"my-phenote.cfg");
+//   }
+
+    //File dotPhenote = FileUtil.getDotPhenoteDir();
+    // this wont work with merging/updating
+    //File myPhenote = new File(dotPhenote,"my-phenote.cfg");
+      //} catch (FileNotFoundException e) {throw new ConfigException(e);}
+    //return dotConfFile.toString(); // ?
+   //parseXmlFile("./conf/initial-flybase.cfg"); // hardwired for now...
   //private FieldConfig lumpConfig = new FieldConfig(CharFieldEnum.LUMP,"Genotype");
   //private String lumpOntologyFile = null;  private OntologyConfig lumpConfig = new OntologyConfig("Genotype");
 

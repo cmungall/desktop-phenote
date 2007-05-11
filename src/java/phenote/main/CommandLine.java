@@ -130,7 +130,9 @@ public class CommandLine {
       super("updateConfig",'u',true,"config file",help);
     }
     public void execute() throws Exception {
-      //System.out.println("executing update config command option "+getArg());
+
+      // this should use ConfigMode (make outer class)!!
+
       try { Config.inst().updateConfigFileWithNewVersion(getArg()); }
       catch (ConfigException e) { loadDefaultConfig("overwrite",e); }
     }
@@ -143,6 +145,9 @@ public class CommandLine {
       super("configSet",'c',true,"config file",help); // true -> has arg
     }
     public void execute() throws Exception {
+
+      // this should use ConfigMode (make outer class)!!
+
       try { Config.inst().setOverwriteConfigFile(getArg()); }
       catch (ConfigException e) { loadDefaultConfig("overwrite",e); }
     }

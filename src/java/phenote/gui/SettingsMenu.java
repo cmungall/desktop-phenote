@@ -186,7 +186,7 @@ class SettingsMenu extends JMenu {
         Config.writeMyPhenoteDefaultFile(newCfg);
         
         restartMessage();
-        //changeConfig(newCfg);
+        //changeConfig(newCfg); // not working yet
       }
       catch (ConfigFileQueryGui.CancelEx ex) {} // its cancelled do nothing
       catch (ConfigException x) {

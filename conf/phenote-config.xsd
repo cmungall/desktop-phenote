@@ -3,6 +3,7 @@
   <xs:element name="phenote-configuration">
     <xs:complexType>
       <xs:sequence>
+        <xs:element ref="x:master-to-local-config"/>
         <xs:element ref="x:log"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:queryable-dataadapter"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:dataadapter"/>
@@ -14,6 +15,11 @@
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:field"/>
       </xs:sequence>
       <xs:attribute name="version" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="master-to-local-config">
+    <xs:complexType>
+      <xs:attribute name="mode" use="required" type="xs:string"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="queryable-dataadapter">
