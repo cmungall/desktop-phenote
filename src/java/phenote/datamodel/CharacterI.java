@@ -32,6 +32,9 @@ public interface CharacterI {
   public boolean equals(CharacterI c);
   public boolean hasNoContent();
 
+  // public void setDBString(String? Object?)??
+  // public String getDBString()
+
   
   /** these methods are pase and need to be phased out! */
   public String getPub();
