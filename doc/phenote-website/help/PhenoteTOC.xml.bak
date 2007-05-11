@@ -47,8 +47,16 @@
 </tocitem>
 <tocitem text="Customizing Phenote">
      <tocitem text="What is a Configuration?"/>
-     <tocitem text="Example Interfaces"/>
+     <tocitem text="XML skeleton" target="XML_skeleton"/>
+     <tocitem text="The &lt;dataadapter&gt; Tag" target="The__dataadapter__Tag116"/>
+     <tocitem text="The &lt;field&gt; Tag" target="The__field__Tag"/>
+     <tocitem text="The &lt;ontology&gt; Tag" target="The__ontology__Tag"/>
+     <tocitem text="The &lt;auto-update-ontologies&gt; Tag" target="The__auto_update_ontologies__Tag115"/>
+     <tocitem text="The &lt;update-timer&gt; Tag"/>
+     <tocitem text="The &lt;term-history&gt; Tag" target="The__term_history__Tag118"/>
      <tocitem text="How To Edit a Configuration File" target="How_To_Edit_a_Configuration_File"/>
+     <tocitem text="Sample Configuration 1" target="Sample_Configuration_Files"/>
+     <tocitem text="Example Interfaces"/>
      <tocitem text="Ontology Updates" target="Ontologies"/>
 </tocitem>
 <tocitem text="Appendix">

@@ -111,6 +111,8 @@
    <mapID target="Reusing_Filters" url="html/Reusing_Filters.htm"/>
    <mapID target="Running_Phenote_for_the_First_Time" url="html/Running_Phenote_for_the_First_Time.htm"/>
    <mapID target="Sample_Annotations" url="html/Sample_Annotations.htm"/>
+   <mapID target="Sample_Configuration_2" url="Sample_Configuration_2.htm"/>
+   <mapID target="Sample_Configuration_Files" url="Sample_Configuration_Files.htm"/>
    <mapID target="Saving_a_History_File" url="html/Saving_a_History_File.htm"/>
    <mapID target="Searching" url="html/Searching.htm"/>
    <mapID target="Setting_the_Filter_Mode" url="html/Setting_the_Filter_Mode.htm"/>
@@ -121,7 +123,11 @@
    <mapID target="Text_Checks" url="html/Text_Checks.htm"/>
    <mapID target="Text_Editing" url="html/Text_Editing.htm"/>
    <mapID target="The__field__Tag" url="html/The__field__Tag.htm"/>
+   <mapID target="The__dataadapter__Tag116" url="html/The__dataadapter__Tag.htm"/>
+   <mapID target="The__term_history__Tag118" url="html/The__term_history__Tag.htm"/>
+   <mapID target="The__auto_update_ontologies__Tag115" url="html/The__auto_update_ontologies__Tag.htm"/>
    <mapID target="The__ontology__Tag" url="html/The__ontology__Tag.htm"/>
+   <mapID target="The__update_timer__Tag" url="The__update_timer__Tag.htm"/>
    <mapID target="The_Scroller_Tag" url="html/The_Basic_Flat_File_Interface.htm"/>
    <mapID target="The_Box_Tag" url="html/The_Box_Tag.htm"/>
    <mapID target="The_Category_Manager_Plugin" url="html/The_Category_Manager_Plugin.htm"/>

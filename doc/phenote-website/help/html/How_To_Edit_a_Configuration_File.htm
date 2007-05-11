@@ -18,8 +18,7 @@
 
 <h2>Background</h2>
 <p>Phenote can be customized to your specifications, including the input fields you desire, the ontologies from which those fields are populated with, and the output format used.  Currently (in version 1.1), this configuration must be done by hand-editing a text file (see notes below).  We are developing a built-in GUI that will achieve the same result without having to fiddle with the text file.  This page explains the location and process of editing the configuration file used when Phenote loads.
-</p>
-<p>This site is being updated with new content on a fairly regular basis.  Please check back often for new information.  In the mean time, if you have questions, you can <A href="/content/about/"> contact us </A> with questions.</p>  
+</p>  
 
 <h2>The basics</h2>
 
@@ -32,7 +31,7 @@
     <li>On a PC, this is located in the C:/Documents and Settings/YourAccount/
     </li>
   </ul>
-<P></P>
+<p></p>
 
 <h2>Location of your configuration file</h2>
 <p> The configuration files used by Phenote are located in the ".phenote/conf" directory.
@@ -59,13 +58,13 @@ Then, you should be able to start phenote with the same webstart link as before,
 <p>To get a custom ontology that is local and not on SF, you'll have to copy it into ".phenote/obo-files/".  Any reference to this ontology within your configuration file must match the filename.
 </p>
 <h2>Making edits to a config file</h2>
-<p>You can download a sample configuration file <A href="/demo.cfg">here</A>.  Descriptive images on this page are taken from this demo.cfg configuration file.</p>
+<p>You can&nbsp;see&nbsp;sample configuration files in the 
+section entitled Sample Configuration Files.&nbsp;  Descriptive images on this page are taken from this demo.cfg configuration file.</p>
 <p>As a precaution, if you edit your own configuration file, be sure to save it as a new filename to prevent any accidental overwriting by our server if you upgrate to a new version.
 
 <h3>Data Adapters</h3>
-<IMG src="/images/config-data-adapter.png" align=right  caption="Figure 1">
 <p>
-The first customizable items in the configuration file are the Data Adapters (see Figure 1).  Any developer can write their own data adapter and plug it into the configuration for use during file loading and saving, or for database retrieval.  If you are interested in writing your own data adapter, please read the <A href="/developer-docs/dataadapter.html"> Data Adapter developer documentation</A>.  <p>
+The first customizable items in the configuration file are the Data Adapters (see Figure 1).  Any developer can write their own data adapter and plug it into the configuration for use during file loading and saving, or for database retrieval.  If you are interested in writing your own data adapter, please read the <A href="/developer-docs/dataadapter.html"> Data Adapter developer documentation</a>.  <p>
 <p>
 You can add your customized data adapter at the top of the file.  Additionally you can specify if it is "enabled". Enabling a data adapter makes it available during load/save functions.  In the case of the example in Figure 1, the PhenoXML and NEXUS data adapters are disabled, while the phenosyntax and delimited adapters are enabled. </p>
 <p> WARNING:  Be sure to enable at least one data adapter, otherwise you will be unable to save your annotations.</p>
@@ -74,7 +73,6 @@ You can add your customized data adapter at the top of the file.  Additionally y
 <p>These items are currently under development.  By default, these are disabled for the user.</p>
 
 <h2>Fields, types</h2>
-<IMG src="/images/config-field3.png" width="100%" align=right  caption="Figure 2">
 Each input field is given a designation in the xml file.
 <h3>Field types: free-text, ontology</h3>
 <p>Currently there are two types of input fields for phenote:  free-text or ontology.  By default, if an ontology file is not specified for a field, it is designated as a free-text field. (This will soon be expanded to include ints, floats, and boolean value-types.</p>
@@ -103,17 +101,17 @@ For fields in which terms from ontologies will be used as instances, the ontolog
 &lt;ns:auto-update-ontologies enable="true"/&gt;<br >
   &lt;ns:update-timer timer="10"/&gt;<br > </p>
 <p>The following table describes how these two options work together:
-<table border=1 width=500>
+<table border="1" width="500">
   <tr>
-    <th colspan=2 rowspan=2 width=100></th>
-    <th colspan=2>Auto Update Ontologies</th>
+    <th colspan="2" rowspan="2" width="100"></th>
+    <th colspan="2">Auto Update Ontologies</th>
   </tr>
   <tr>
     <th>True</th>
     <th>False</th>
   </tr>
   <tr>
-    <th rowspan=2>Timer (sec)</th>
+    <th rowspan="2">Timer (sec)</th>
     <th><i>t</i> = 0 </th>
     <td>Will auto update without prompting. <b>(Default</b>)</td>
     <td>Will never update and will not notify you if there are updates.</td>
