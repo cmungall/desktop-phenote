@@ -16,7 +16,10 @@ public interface TransactionI {
   //public String getNewValueString();
 
   public boolean isUpdate();
-  
+ 
+  // public boolean isDelete();
+  // public String getDBIDString
+ 
   ///** this is actually update sepcific - but thats ok i think */
   //public CharFieldEnum getCharFieldEnum();
   public boolean isUpdateForCharField(CharField cf);
