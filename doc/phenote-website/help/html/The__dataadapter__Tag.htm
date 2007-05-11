@@ -36,7 +36,7 @@ per configuration, with up to as many as desired.</p>
     <td>For each element, it can be turned on or off.&nbsp; In this way you 
       can maintain the list of available data adapters, but just "hide" them in 
       the application if set to false.&nbsp; </td>
-    <td>
+    <td align="left">
       <ul>
         <li>true 
         <li>false</li></ul></td>
@@ -51,10 +51,13 @@ in the order they are specified in the configuration.&nbsp; To include multiple 
 adapters, be sure to repeat the full line for each adapter.&nbsp; Data adapters 
 can be removed from a Phenote session by disabling the element, or by deleting 
 from the configuration itself.&nbsp;&nbsp; </p>
-<P>Developers&nbsp;can easily write their own data adapter and plug it into the 
+<p>Developers&nbsp;can easily write their own data adapter and plug it into the 
 configuration for use during file loading and saving, or for database retrieval. 
 If you are interested in writing your own data adapter, please read the section 
-on Information for Developers.</P>
+on Information for Developers.</p>
+<p>&nbsp;</p>
+<p>WARNING: Be sure to enable at least one data adapter, otherwise you will be 
+unable to save your annotations.</p>
 <h1><font color="#000000" size="3"></font>&nbsp;</h1>
 <h2>Example</h2><pre>&lt;ns:dataadapter name="phenote.dataadapter.delimited.DelimitedFileAdapter" enable="true"/&gt; <pre>&lt;ns:dataadapter name="phenote.dataadapter.phenosyntax.PhenoSyntaxFileAdapter" enable="false"/&gt; </pre></pre><pre>  </pre>
 </body>

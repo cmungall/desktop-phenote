@@ -1,95 +1,109 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
-<HTML>
-<HEAD>
-<META NAME="GENERATOR" CONTENT="Solutionsoft HelpBreeze JavaHelp Edition">
-<TITLE>The <ontology> Tag<ontology> Tag</TITLE>
-<LINK REL="stylesheet" TYPE="text/css" HREF="../javahelp.css">
-</HEAD>
-<BODY BGCOLOR=#ffffff>
-<H1>The &lt;ontology&gt; <field>Tag</H1>
-<P>The &lt;ontology&gt; tag enables the autocompletion 
+<html>
+<head>
+<meta name="GENERATOR" content="Solutionsoft HelpBreeze JavaHelp Edition">
+<title>The <ontology> Tag<ontology> Tag</title>
+<link rel="stylesheet" type="text/css" href="../javahelp.css">
+</head>
+<body bgcolor="#ffffff">
+<h1>The &lt;ontology&gt; <field>Tag</h1>
+<p>The &lt;ontology&gt; tag enables the autocompletion 
 feature on an input field based 
 on the ontology file specified.&nbsp; There can be&nbsp;zero or more ontologies per 
-field.</P>
-<H2>Parameters</H2>
-<H1>
+field.</p>
+<h2>Parameters</h2>
+<h1>
 
-<TABLE borderColor=#000000 cellPadding=5 width="100%" align=center border=1>
+<table bordercolor="#000000" cellpadding="5" width="100%" align="center" border="1">
   
-  <TR>
-    <TD align=middle><STRONG       >Name</STRONG></TD>
+  <tr>
+    <td align="middle"><strong       >Name</strong></td>
 
-    <TD align=middle><STRONG       >Description</STRONG></TD>
+    <td align="middle"><strong       >Description</strong></td>
 
-    <TD align=middle><STRONG>Legal 
-      Values</STRONG></TD>
-    <TD align=middle><STRONG>Required</STRONG></TD>
-    <TD align=middle><STRONG       >Default</STRONG></TD></TR>
+    <td align="middle"><strong>Legal 
+      Values</strong></td>
+    <td align="middle"><strong>Required</strong></td>
+    <td align="middle"><strong       >Default</strong></td></tr>
 
-  <TR>
-    <TD>
-      <P><FONT face=Courier       >name</FONT></P></TD>
+  <tr>
+    <td>
+      <p><font face="Courier"       >name</font></p></td>
 
-    <TD>
-      <P>This is the name that is displayed in the 
+    <td>
+      <p>This is the name that is displayed in the 
       drop-down chooser box for ontology selection during autocompletion in the 
-      <EM>Data Entry</EM> section.&nbsp; </P></TD>
-    <TD><EM>any text value</EM></TD>
-    <TD ALIGN=middle>yes</TD>
-    <TD></TD></TR>
-  <TR>
-    <TD><FONT face=Courier       >file</FONT></TD>
+      <em>Data Entry</em> section.&nbsp; </p></td>
+    <td><em>any text value</em></td>
+    <td align="middle">yes</td>
+    <td></td></tr>
+  <tr>
+    <td><font face="Courier"       >file</font></td>
 
-    <TD>This is the name of the file containing the 
-      ontology.</TD>
-    <TD><EM>any text value</EM></TD>
-    <TD ALIGN=middle>yes</TD>
-    <TD></TD></TR>
-  <TR>
-    <TD><FONT face=Courier>repos-subdir</FONT></TD>
-    <TD>The location (such as a subdirectory) of the file in the specified 
+    <td>This is the name of the file containing the 
+      ontology.&nbsp; You can specify the filename by itself or a URL of a repository to check for 
+      updates.</td>
+    <td><em>any text value</em></td>
+    <td align="middle">yes</td>
+    <td></td></tr>
+  <tr>
+    <td><font face="Courier">repos-subdir</font></td>
+    <td>
+      <p>The location (such as a subdirectory) of the file in the specified 
       repository.&nbsp; If not included, then no checks against the 
-      <EM>obo-repository</EM> will be performed.</TD>
-    <TD>
-      <P><EM>any text value</EM></P></TD>
-    <TD align=middle>no</TD>
-    <TD></TD></TR>
-  <TR>
-    <TD><FONT face=Courier>slim</FONT></TD>
-    <TD>[not sure yet how this works...]</TD>
-    <TD>
-      <P><EM>any text value</EM></P></TD>
-    <TD align=middle>no</TD>
-    <TD></TD></TR>
-  <TR>
-    <TD><FONT face=Courier>is-postcomp-rel</FONT></TD>
-    <TD>The ontology file specified here will be used to 
+      <em>obo-repository</em> will be performed.</p>
+      <p>[RETIRED.&nbsp; Incorporated into <em>file.</em>]</p>   </td>
+    <td>
+      <p><em>any text value</em></p></td>
+    <td align="middle">no</td>
+    <td></td></tr>
+  <tr>
+    <td><font face="Courier">slim</font></td>
+    <td>[not sure yet how this works...]</td>
+    <td>
+      <p><em>any text value</em></p></td>
+    <td align="middle">no</td>
+    <td></td></tr>
+  <tr>
+    <td><font face="Courier">is-postcomp-rel</font></td>
+    <td>The ontology file specified here will be used to 
       populate the relationships for postcomposition.&nbsp; Typically this will 
       the the relationship.obo file.&nbsp; Specifying&nbsp;the is-postcomp-rel 
-      triggers Phenote to allow the post-compostion feature along with a button to display.</TD>
-    <TD>
-      <UL>
-        <LI>true 
-        <LI>false</LI></UL></TD>
-    <TD ALIGN=middle>no</TD>
-    <TD>false</TD></TR></TABLE>
-<H2>&nbsp;</H2>
-<H2>Contents</H2></H1>
-<P>Each &lt;ontology&gt; element specifies one ontology to be used with the 
-autocompletion feature in a single &lt;field&gt; element.&nbsp; To include the 
-same ontology in a separate &lt;field&gt; element, it must be listed in 
-both.&nbsp; The order in which the &lt;ontology&gt; elements are listed within 
-the &lt;field&gt; is the order they are displayed in the drop-down chooser 
-box.&nbsp; </P>
-<H1><FONT color=#000000 size=3></FONT>&nbsp;</H1>
-<H2>Example</H2><PRE>&lt;ns:field name="Entity" syntax-abbrev="E" enable="true"&gt;<BR>&nbsp;&nbsp;&nbsp; &lt;ns:ontology name="Relationship" file="relationship.obo" repos-subdir="OBO_REL" is-postcomp-rel="true"/&gt;<BR>&nbsp;&nbsp;&nbsp; &lt;ns:ontology name="GO" file="gene_ontology.obo" repos-subdir="genomic-proteomic"/&gt;<BR>&nbsp;&nbsp;&nbsp; &lt;ns:ontology name="CHEBI" file="chebi.obo" repos-subdir="chemical"/&gt;<BR>&lt;/ns:field&gt;</PRE>
-<P>In this example there are two ontologies specified:  GO and CHEBI.&nbsp; The 
+      triggers Phenote to allow the post-compostion feature along with a button to display.</td>
+    <td>
+      <ul>
+        <li>
+        <div align="left">true </div> 
+        <li>
+        <div align="left">false</div></li></ul></td>
+    <td align="middle">no</td>
+    <td>false</td></tr></table>
+<h2>&nbsp;</h2>
+<h2>Contents</h2></h1>
+<p>Each &lt;ontology&gt; element specifies one ontology to be 
+used with the autocompletion feature in a single &lt;field&gt; element.&nbsp; To 
+include the same ontology in a separate &lt;field&gt; element, it must be listed in 
+both.&nbsp; The order in which the &lt;ontology&gt; elements are listed 
+within the &lt;field&gt; is the order they are displayed in the drop-down 
+chooser box.&nbsp;&nbsp;A URL specified in the filename can be different for 
+each ontology, so that&nbsp;each ontology can be checked against different repositories, if 
+desired. </p>
+<h1><font color="#000000" size="3"></font>&nbsp;</h1>
+<h2>Example</h2><pre>&lt;ns:field name="Entity" syntax-abbrev="E" enable="true"&gt;<br>&nbsp;&nbsp;&nbsp; &lt;ns:ontology name="Relationship" file="relationship.obo" repos-subdir="OBO_REL" is-postcomp-rel="true"/&gt;<br>&nbsp;&nbsp;&nbsp; &lt;ns:ontology name="GO" file= "http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/genomic-proteomic/gene_ontology.obo"/&gt;<br>&nbsp;&nbsp;&nbsp; &lt;ns:ontology name="CHEBI" file= "http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/chemical/chebi.obo"/&gt;<br>&lt;/ns:field&gt;</pre>
+<p>In this example there are two ontologies specified:  GO and CHEBI.&nbsp; The 
 resulting input item would display a drop-down chooser box with the names GO and 
 CHEBI.&nbsp; The autocompletion on that field would query the gene_ontology.obo 
 and chebi.obo ontologies.&nbsp; Additionally, because is-postcomp-rel is 
 specified, this field would allow for post composition, and those terms would 
-draw their relationships from the relationship.obo ontology.</P>
-<P>&nbsp;</P>
-<P>[INSERT PIC OF RESULTING FIELD HERE and POSTCOMP]</P>
-</BODY>
-</HTML>
+draw their relationships from the relationship.obo ontology.</p>
+<p>The resulting element would look like this in the 
+<em>Data Entry</em>             
+              
+          
+       
+            
+      panel:</p>
+<p><IMG hspace=0 src="../images/ont_chooser.png" 
+border=0></p>
+</body>
+</html>
