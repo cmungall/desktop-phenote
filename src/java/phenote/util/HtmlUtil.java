@@ -88,22 +88,32 @@ public class HtmlUtil {
 		}
 		if (oboClass.isObsolete()) {
 			Set obsReplacements = oboClass.getReplacedBy();
+			StringBuffer replace = new StringBuffer();
+			boolean replaceFlag = false;
+			boolean considerFlag = false;
 			ObsoletableObject obsObj;
 			for (Iterator it = obsReplacements.iterator(); it.hasNext(); ) {
 				obsObj = (ObsoletableObject)it.next();
+				replaceFlag = true;
 				if (obsObj!=null) {
-					sb.append(makeRow(makeLeftCol(italic("replaced by:"))+makeRightCol(bold(termLink(obsObj)))));
+					replace.append(termLink(obsObj)+"<br>");
 				}
 			}
+			if (replaceFlag)			
+				sb.append(makeRow(makeLeftCol(bold(italic("Replaced by:")))+makeRightCol(replace.toString())));
+
 			Set obsConsiders = oboClass.getConsiderReplacements();
+			StringBuffer considers = new StringBuffer();
 			for (Iterator it = obsConsiders.iterator(); it.hasNext(); ) {
 				obsObj = (ObsoletableObject)it.next();
+				considerFlag = true;
 				if (obsObj!=null) {
-					sb.append(makeRow(makeLeftCol(italic("consider replacing with:"))+makeRightCol(bold(termLink(obsObj)))));
+					considers.append(termLink(obsObj)+"<br>");
 				}
 			}
-			
-		}
+			if (considerFlag)
+				sb.append(makeRow(makeLeftCol(bold(italic("Consider using:")))+makeRightCol(considers.toString())));	
+		}	
 		sb.append(makeRow(makeLeftCol(bold("ID"))+makeRightCol(oboClass.getID())));
 
 		String synonyms = makeSyns(true, oboClass.getSynonyms());
