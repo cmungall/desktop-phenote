@@ -223,12 +223,14 @@ public class Config {
 
   /** ConfigMode INNER CLASS */
   private class ConfigMode {
+
     private String mode = "";
     //private boolean updateWithNewVersion=false;
     private boolean masterExists = true;
     private URL masterUrl;
     private File localFile; //dotConfFile;
     private boolean cmdLineWipeout=false;
+
     private ConfigMode(String masterConfig,boolean merge,boolean cmdLineWipeout) 
       throws ConfigException {
       this.cmdLineWipeout = cmdLineWipeout;
@@ -245,14 +247,14 @@ public class Config {
       if (!masterExists && !localFile.exists())
         throw new ConfigException("Cfg file doesnt exist in app nor .phenote/conf");
 
-      Config cfg = new Config();
-      cfg.parseXmlFile(masterConfig);
-      if (cfg.masterToLocalConfigMode != null)
-        mode = cfg.masterToLocalConfigMode;
-//       if (overwrite || mode.equals("WIPEOUT_ALWAYS"))
-//         wipeoutAlways = true;
-//       else
-//         updateWithNewVersion = true; // for now
+      if (masterExists) {
+        Config cfg = new Config();
+        try {
+          cfg.parseXmlFile(masterConfig);
+          if (cfg.masterToLocalConfigMode != null)
+            mode = cfg.masterToLocalConfigMode;
+        } catch (ConfigException x) {} // do nothing? err msg?
+      }
     }
     private boolean isWipeout() {
       if (!masterExists) return false;
@@ -274,6 +276,7 @@ public class Config {
     }
 
     private boolean isUpdate() {
+      if (!masterExists) return false; // cant update without master
       if (isWipeout()) return false;
       else return true; // for now...
     }
@@ -704,6 +707,11 @@ public class Config {
   }
   
 }
+
+//       if (overwrite || mode.equals("WIPEOUT_ALWAYS"))
+//         wipeoutAlways = true;
+//       else
+//         updateWithNewVersion = true; // for now
 //   private File getMyPhenoteCfgFile() {
 //     return new File(FileUtil.getDotPhenoteDir(),"my-phenote.cfg");
 //   }

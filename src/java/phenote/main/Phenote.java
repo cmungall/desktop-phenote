@@ -150,7 +150,7 @@ public class Phenote {
   private void doCommandLine(String[] args) {
     try { commandLine.setArgs(args); } // sets config if specified
     catch (Exception e) { // no log yet - sys.out
-      System.out.println("Command line read failed"+e); }
+      System.out.println("Command line read failed: "+e); e.printStackTrace();}
     // no config set from command line use default
     if (!Config.inst().isInitialized()) { 
       try { Config.inst().loadDefaultConfigFile(); }

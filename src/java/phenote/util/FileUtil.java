@@ -85,6 +85,9 @@ public class FileUtil {
 
   // this is muddling config and obo - probably should be 2 methods? or be smart about
   // suffix - or who cares?
+  // ok this is even sillier as it will look in .phenote for obo files and not for 
+  // conf files - which is what the app wants but really there needs to be 2 different
+  // methods - this is sheer laziness!
   private static List<URL> getPossibleUrls(String filename) {
     List<URL> urls = new ArrayList(5);
     // hmmm - should full path go last? can be problem with running from

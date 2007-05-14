@@ -156,6 +156,7 @@ public class CommandLine {
   private void loadDefaultConfig(String m, ConfigException e) {
     System.out.println("Yikes! Failed to "+m+" config file "+e+" gonna try "
                        +"loading default config");
+    //e.printStackTrace();
     try { Config.inst().loadDefaultConfigFile(); }
     catch (ConfigException ce) { 
       System.out.println("bummer - even default config fails. uh oh "+ce);
@@ -173,7 +174,7 @@ public class CommandLine {
       super("inputFile",'f',true,"filename",help);
     }
     public void execute() throws Exception {
-      //System.out.println("executing input file command option "+getArg());
+      //System.out.println("executing input fileConf command option "+getArg());
       getReadOptions().setFilename(getArg());
       setAdapterForFile(getReadOptions(), false);
     }
