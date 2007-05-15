@@ -49,13 +49,17 @@ public class Config {
   /** enabled & disabled */
   private List<FieldConfig> allFields = new ArrayList<FieldConfig>();
   private String logConfigFile = "conf/log4j.xml"; // default log config file
+  // maybe should be using xmlbean where possible?
   private boolean uvicGraphEnabled = false; // default false for now
   private boolean termHistoryEnabled = false;   //default to false for now
   private boolean autoUpdateEnabled = true; //default to true if not in config
   private int updateTimer = 0; //default is to not wait
   private String reposUrlDir;
   private String version;
-  private String masterToLocalConfigMode;
+  //private String masterToLocalConfigMode;
+  //private MasterToLocalConfig masterToLocalBean;
+  private PhenoteConfiguration phenoConfigBean; // cache the xml parse bean??
+
   private boolean configInitialized = false;
   private final static String myphenoteFile = "my-phenote";
 
@@ -221,15 +225,16 @@ public class Config {
   }
 
 
-  /** ConfigMode INNER CLASS */
+  /** ConfigMode INNER CLASS - outer class? */
   private class ConfigMode {
 
-    private String mode = "";
+    //private String mode = "";
     //private boolean updateWithNewVersion=false;
     private boolean masterExists = true;
     private URL masterUrl;
     private File localFile; //dotConfFile;
     private boolean cmdLineWipeout=false;
+    private MasterToLocalConfig masterToLocalBean;
 
     private ConfigMode(String masterConfig,boolean merge,boolean cmdLineWipeout) 
       throws ConfigException {
@@ -247,27 +252,83 @@ public class Config {
       if (!masterExists && !localFile.exists())
         throw new ConfigException("Cfg file doesnt exist in app nor .phenote/conf");
 
-      if (masterExists) {
-        Config cfg = new Config();
-        try {
-          cfg.parseXmlFile(masterConfig);
-          if (cfg.masterToLocalConfigMode != null)
-            mode = cfg.masterToLocalConfigMode;
-        } catch (ConfigException x) {} // do nothing? err msg?
-      }
+      parseModeXml(masterConfig);
     }
+
+    private void parseModeXml(String masterConfig) throws ConfigException {
+      if (!masterExists) return;
+      Config cfg = new Config();
+      try {
+        cfg.parseXmlFile(masterConfig);
+        //if (cfg.masterToLocalConfigMode != null)  mode = cfg.masterToLocalConfigMode;
+        if (cfg.phenoConfigBean == null) return;
+        masterToLocalBean = cfg.phenoConfigBean.getMasterToLocalConfig();
+        //mode = masterToLocalBean.getMode()
+        loadMasterOverrideUrl();
+      } catch (ConfigException x) {} // do nothing? err msg?
+    }
+
+    /** if have master override - load it! */
+    private void loadMasterOverrideUrl() {
+      if (!haveXmlBean()) return;
+      String urlString = getXmlBean().getOverridingMasterUrl();
+      if (urlString==null) return;
+      try {
+        URL u = new URL(urlString); // throws MalformedURLEx
+        u.openStream(); // throws IOEx
+        masterUrl = u; // no exception thrown - we're ok
+        masterExists = true; // actually this has to be true silly
+      } catch (Exception e) {} // masterUrl not set
+    }
+
+    private boolean haveXmlBean() { return masterToLocalBean != null; }
+    private MasterToLocalConfig getXmlBean() { return masterToLocalBean; }
+
     private boolean isWipeout() {
       if (!masterExists) return false;
       if (!localFileExists()) return true; // init
       if (cmdLineWipeout) return true;
-      return mode.equals("WIPEOUT_ALWAYS");
+      return configIsWipeout(); //mode.equals("WIPEOUT");
       //return (!dotConfFile.exists() || overwritePersonalCfg)
     }
     
+    private boolean configIsWipeout() {
+      if (!haveXmlBean() || masterToLocalBean.getMode() == null)
+        return false;
+      return masterToLocalBean.getMode().equals("WIPEOUT");
+    }
+
     /** not sure if this belongs in this class?? */
     private void doWipeout() throws ConfigException {
+      
+      if (!isAlways() && versionSame()) {
+        sameVersionMessage("writing over");
+        return;
+      }
+
       doWipeoutMessage();
+      // this shouldnt be copy!!! read in write out to get version!
       copyUrlToFile(masterUrl,localFile); // Ex  put method in inner class?
+    }
+
+    private void sameVersionMessage(String type) {
+      System.out.println("Template & local config have same version "+phenoteVersion()+
+                         ", not "+type+" local cfg");
+    }
+
+    private boolean versionSame() throws ConfigException {
+      if (!localFileExists()) return false;
+      Config localCfg = new Config();
+      localCfg.parseXmlFile(localFileString());
+      return versionSame(localCfg.version);
+    }
+
+    private String phenoteVersion() { return PhenoteVersion.versionString(); }
+
+    private boolean versionSame(String version) {
+      if (version == null) return false;
+      if (PhenoteVersion.versionString() == null) return false;
+      return (version.equals(phenoteVersion()));
     }
 
     private void doWipeoutMessage() {
@@ -281,18 +342,27 @@ public class Config {
       else return true; // for now...
     }
     private boolean isUpdateWithNewVersion() {
-      return isUpdate(); // for now
+      return isUpdate() && !isUpdateAlways(); // for now
     }
     private boolean isUpdateAlways() {
-      return isUpdate() && !isUpdateWithNewVersion(); // always false at moment
+      if (!isUpdate()) return false;  //!isUpdateWithNewVersion();
+      return isAlways();
     }
     
+    private boolean isAlways() {
+      if (!haveXmlBean()) return false;
+      String when = masterToLocalBean.getWhen();
+      if (when == null) return false;
+      return when.equals("ALWAYS");
+    }
+
+
     private boolean isUpdateable(String version) {
+      if (!isUpdate()) return false;
       if (isUpdateAlways()) return true;
       if (!isUpdateWithNewVersion()) return false;
       // version
-      if (version == null) return false;
-      return (!version.equals(PhenoteVersion.versionString()));
+      return !versionSame(version);
     }
 
 
@@ -363,7 +433,8 @@ public class Config {
     //String version = PhenoteVersion.versionString();//newCfg.version
     //if (mode.isUpdateWithNewVersion() && version != null && version.equals(oldCfg.version)) {
     if (!mode.isUpdateable(oldCfg.version)) {
-      System.out.println("System & user config same version, not updating cfg");
+      //System.out.println("System & user config same version, not updating cfg");
+      mode.sameVersionMessage("updating");
       return;
     }
     else
@@ -575,23 +646,24 @@ public class Config {
       PhenoteConfigurationDocument pcd = 
         PhenoteConfigurationDocument.Factory.parse(configUrl);//configFile);
       pcd.validate(); //???
-      PhenoteConfiguration pc = pcd.getPhenoteConfiguration();
+      phenoConfigBean = pcd.getPhenoteConfiguration();
 
-      version = pc.getVersion();
+      version = phenoConfigBean.getVersion();
 
-      MasterToLocalConfig m = pc.getMasterToLocalConfig();
-      if (m != null && m.getMode() != null)
-        masterToLocalConfigMode = m.getMode();
+      //MasterToLocalConfig m 
+//         = phenoConfigBean.getMasterToLocalConfig();
+//       if (m != null && m.getMode() != null)
+//         masterToLocalConfigMode = m.getMode();
 
       // LOG CONFIG FILE
-      Log log = pc.getLog();
+      Log log = phenoConfigBean.getLog();
       if (log != null && log.getConfigFile() != null) {
         logConfigFile = log.getConfigFile();
       }
       
       // DATA ADAPTERS  <dataadapter name="phenoxml" enable="true"/>
 
-      Dataadapter[] adapters = pc.getDataadapterArray();
+      Dataadapter[] adapters = phenoConfigBean.getDataadapterArray();
       for (Dataadapter da : adapters) {
         DataAdapterConfig dac = new DataAdapterConfig(da);
         addAdapConfig(dac);
@@ -599,7 +671,7 @@ public class Config {
         //addDataAdapterFromString(name);
       }
 
-      QueryableDataadapter[] queryAdaps = pc.getQueryableDataadapterArray();
+      QueryableDataadapter[] queryAdaps = phenoConfigBean.getQueryableDataadapterArray();
       for (QueryableDataadapter da : queryAdaps) {
         QueryableAdapConfig qac = new QueryableAdapConfig(da);
         addQueryAdapCfg(qac);
@@ -607,32 +679,32 @@ public class Config {
 
 
       // GRAPH
-      UvicGraph gr = pc.getUvicGraph();
+      UvicGraph gr = phenoConfigBean.getUvicGraph();
       if (gr != null)
         uvicGraphEnabled = gr.getEnable();
 
       // TERM HISTORY
-      TermHistory history = pc.getTermHistory();
+      TermHistory history = phenoConfigBean.getTermHistory();
       if (history != null)
         termHistoryEnabled = history.getEnable();
 
       // AUTO UPDATE OF ONTOLOGIES
-      AutoUpdateOntologies autoUpdate = pc.getAutoUpdateOntologies();
+      AutoUpdateOntologies autoUpdate = phenoConfigBean.getAutoUpdateOntologies();
       if (autoUpdate != null)
         autoUpdateEnabled = autoUpdate.getEnable();
 
       // TIMER for UPDATE OF ONTOLOGIES
-      UpdateTimer time = pc.getUpdateTimer();
+      UpdateTimer time = phenoConfigBean.getUpdateTimer();
       if (time != null)
 	  updateTimer = time.getTimer().intValue();
 
       // Repos url dir
-      OboRepository or = pc.getOboRepository();
+      OboRepository or = phenoConfigBean.getOboRepository();
       if (or != null && or.getUrlDir() != null)
         reposUrlDir = or.getUrlDir();
 
       // FIELDS
-      Field[] fields = pc.getFieldArray();
+      Field[] fields = phenoConfigBean.getFieldArray();
       for (Field f : fields) {
         makeFieldConfig(f);
       }

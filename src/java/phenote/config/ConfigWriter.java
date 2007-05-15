@@ -16,6 +16,10 @@ import phenote.config.xml.UvicGraphDocument.UvicGraph;
 import phenote.dataadapter.DataAdapterI;
 import phenote.main.PhenoteVersion;
 
+/** Im realizing now ive done this all wrong - as theres really 2 redundant datamodels
+    for the config - the xml beans, and phenotes own and there really should be just
+    the xml beans - then you dont have to do all this back & forth between them
+    hindsight is 20 20 */
 class ConfigWriter {
 
   private Config config;

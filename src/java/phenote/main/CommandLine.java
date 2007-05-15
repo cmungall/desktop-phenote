@@ -174,7 +174,7 @@ public class CommandLine {
       super("inputFile",'f',true,"filename",help);
     }
     public void execute() throws Exception {
-      //System.out.println("executing input fileConf command option "+getArg());
+      //System.out.println("executing input file command option "+getArg());
       getReadOptions().setFilename(getArg());
       setAdapterForFile(getReadOptions(), false);
     }

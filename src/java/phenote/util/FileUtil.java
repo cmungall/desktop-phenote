@@ -72,6 +72,8 @@ public class FileUtil {
   
   private static String sep(String a, String b) { return a + FILE_SEPARATOR + b; }
 
+
+  /** split into findMaster?ConfigUrl & findOboUrl!!! */
   public static URL findUrl(String filename) throws FileNotFoundException {
     List<URL> possibleUrls = getPossibleUrls(filename);
     for (URL u : possibleUrls) {
@@ -87,7 +89,9 @@ public class FileUtil {
   // suffix - or who cares?
   // ok this is even sillier as it will look in .phenote for obo files and not for 
   // conf files - which is what the app wants but really there needs to be 2 different
-  // methods - this is sheer laziness!
+  // methods - this is sheer laziness! also with separate methods can print out
+  // better error message
+  // split into getPossibleMaster?ConfigUrls & getPossibleOboUrls
   private static List<URL> getPossibleUrls(String filename) {
     List<URL> urls = new ArrayList(5);
     // hmmm - should full path go last? can be problem with running from
@@ -106,6 +110,7 @@ public class FileUtil {
     return urls;
   }
 
+  // make an inner class for this?
   private static void addFile(String filename,List<URL> urls) {
     try {
       URL u = new File(filename).toURL();

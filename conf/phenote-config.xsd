@@ -20,6 +20,8 @@
   <xs:element name="master-to-local-config">
     <xs:complexType>
       <xs:attribute name="mode" use="required" type="xs:string"/>
+      <xs:attribute name="when" use="required" type="xs:string"/>
+      <xs:attribute name="overriding-master-url" use="required" type="xs:string"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="queryable-dataadapter">

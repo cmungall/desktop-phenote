@@ -18,10 +18,13 @@ start =
   }
 
 ## specify how the master config interacts with local/cached config
-## WIPEOUT_ALWAYS master will always wipe out local every run
-## UPDATE_WITH_VERSION_CHANGE (default) update/merge master with local on version change
+## WIPEOUT master will always wipe out local every run
+## UPDATE (default) update/merge master with local
+## when is ALWAYS,ON_VERSION_CHANGE,INIT
 master-to-local-config = element master-to-local-config {
-  attribute mode { xsd:string }
+  attribute mode { xsd:string },
+  attribute when { xsd:string },
+  attribute overriding-master-url { xsd:string }
 }
 
 queryable-dataadapter = element queryable-dataadapter {
