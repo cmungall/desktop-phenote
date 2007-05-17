@@ -1,39 +1,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-
-
-
-
-  
-  
-  
   
   <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
 
-
-
-
-  
-  
-  
-  
   <title>Phenote Release Notes</title>
 </head>
 
-
 <body>
-
-
-
-
 <h1>Phenote Release Notes</h1>
-
-
-
 
 1.3
 will probably come out in June<br>
+
+<h2><span style="text-decoration: underline;">1.3-beta2</span></h2>
+under development, not yet released.
+<br>
+File-&gt;New is disabled until next version<br>
+Web-based documentation and Help features<br>
 
 <h2><span style="text-decoration: underline;">1.3-beta1</span></h2>
 
@@ -43,10 +27,9 @@ Added config for birn<br>
 Added SAO.obo for birn<br>
 Namespace config writes back<br>
 Config update/merge bug where fields in wrong order fixed.<br>
-Can specify more than one website for ontologies<br>
+Can specify more than one website for ontology update<br>
 Empty field shows all terms in ontology rather than none<br>
 Can add more differentia to post comp<br>
-
 <h2><span style="text-decoration: underline;">1.2</span></h2>
 
 <a href="1.2/phenote.jnlp">Phenote 1.2</a><br>
@@ -59,23 +42,30 @@ Features:
 Can post-compose with &gt;2 terms <br>
 
 
-Term history display can be toggled on/off <br>
+Term history display can be toggled on/off (Settings-&gt;Term History menu)<br>
 
 
-Synonym types display in term info<br>
+Synonyms are delineated by their scope in Term Info:  Exact, Narrow, Broad, General, Related.  If the synonym category is given, it is displayed next to the synonym.  For example:  the term 'water' has the <i>related</i> synonym H2O, which has the category of a chemical <i>formula</i>.<br>
+<br>
 
 
-Obsolete replacements displayed in term info<br>
-
+Obsolete replacements or consideration terms are displayed in term info with links<br>
 
 Search filters moved into menu <br>
-
 
 Loading splash screen <br>
 
 Can configure by namespace for ontologies<br>
 
+Can automatically update ontologies during startup (configurable)<br>
 
+Timer added to configuration during ontology update check (configurable)<br>
+
+Can check which version of phenote is running by selecting Help-&gt;About.<br>
+
+Common configuration for OMIM curation for use by NCBO included (ncbo.cfg).
+
+Updates to the zfin-standalone.cfg for the zebrafish community annotation.  Only includes GO and ZFanatomy ontologies.
 
 Bug Fixes: Free text field text not "sticking"
 
