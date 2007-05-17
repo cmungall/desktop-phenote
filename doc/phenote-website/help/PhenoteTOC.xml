@@ -33,7 +33,10 @@
      <tocitem text="The Tab-Delimited Adapter" target="The_Tab_Delimited_Adapter"/>
 </tocitem>
 <tocitem text="Creating Annotations">
-     <tocitem text="Editing Functions"/>
+     <tocitem text="Editing Functions" target="Editing_Functions"/>
+     <tocitem text="Changing your Autocompletion Settings" target="Changing_your_Autocompletion_Settings"/>
+     <tocitem text="Entering data into Free-Text fields" target="Entering_data_into_Free_Text_fields"/>
+     <tocitem text="Entering data into Ontology Fields" target="Entering_data_into_Ontology_Fields"/>
      <tocitem text="Sample Annotations" target="Sample_Annotations"/>
 </tocitem>
 <tocitem text="Information for Developers">

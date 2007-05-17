@@ -100,6 +100,8 @@ Restrictions	Restrictions	html\Restrictions.htm		Not Specified
 Reusing Filters	Reusing_Filters	html\Reusing_Filters.htm		Not Specified	 
 Running Phenote for the First Time	Running_Phenote_for_the_First_Time	html\Running_Phenote_for_the_First_Time.htm		Not Specified	 
 Sample Annotations	Sample_Annotations	html\Sample_Annotations.htm		Not Specified	 
+Sample Configuration 1	Sample_Configuration_1	html\Sample_Configuration_1.htm		Not Specified	 
+Sample Configuration 2	Sample_Configuration_2	html\Sample_Configuration_2.htm		Not Specified	 
 Saving a History File	Saving_a_History_File	html\Saving_a_History_File.htm		Not Specified	 
 Searching	Searching	html\Searching.htm		Not Specified	 
 Setting the Filter Mode	Setting_the_Filter_Mode	html\Setting_the_Filter_Mode.htm		Not Specified	 
@@ -109,8 +111,12 @@ Term Filters	Term_Filters	html\Term_Filters.htm		Not Specified
 Term Info	Term_Info	html\Term_Info.htm		Not Specified	 
 Text Checks	Text_Checks	html\Text_Checks.htm		Not Specified	 
 Text Editing	Text_Editing	html\Text_Editing.htm		Not Specified	 
-The	The__field__Tag	The__field__Tag.htm		Not Specified	 
-The	The__ontology__Tag	The__ontology__Tag.htm		Not Specified	 
+The	The__field__Tag	html\The__field__Tag.htm		Not Specified	 
+The	The__dataadapter__Tag116	html\The__dataadapter__Tag.htm		Not Specified	 
+The	The__term_history__Tag118	html\The__term_history__Tag.htm		Not Specified	 
+The	The__auto_update_ontologies__Tag115	html\The__auto_update_ontologies__Tag.htm		Not Specified	 
+The	The__ontology__Tag	html\The__ontology__Tag.htm		Not Specified	 
+The	The__update_timer__Tag	html\The__update_timer__Tag.htm		Not Specified	 
 The Basic Flat File Interface	The_Scroller_Tag	html\The_Basic_Flat_File_Interface.htm		Not Specified	 
 The box tag	The_Box_Tag	html\The_Box_Tag.htm		Not Specified	 
 The Category Manager Plugin	The_Category_Manager_Plugin	html\The_Category_Manager_Plugin.htm		Not Specified	 
@@ -153,7 +159,7 @@ The window tag	The_Window_Tag	html\The_Window_Tag.htm		Not Specified
 Undo/Redo	Undo_Redo	html\Undo_Redo.htm		Not Specified	 
 User Defined Checks	User_Defined_Checks	html\User_Defined_Checks.htm		Not Specified	 
 Using Filters	Using_Filters	html\Using_Filters.htm		Not Specified	 
-What is a Configuration?	What_is_a_Configuration_	What_is_a_Configuration_.htm		Not Specified	 
+What is a Configuration?	What_is_a_Configuration_	html\What_is_a_Configuration_.htm		Not Specified	 
 What is an ontology?	What_is_an_ontology_	html\What_is_an_ontology_.htm		Not Specified	 
 What is Phenote?	What_is_Phenote_	html\What_is_OBO_Edit_.htm		Not Specified	 
 What is Phenote?	What_is_Phenote	html\What_is_Phenote_.htm		Not Specified	 
@@ -165,4 +171,4 @@ Working with Obsoletes	Working_with_Obsoletes	html\Working_with_Obsoletes.htm		N
 Working with Selections	Working_with_Selections	html\Working_with_Selections.htm		Not Specified	 
 Working with Synonym Categories	Working_with_Synonym_Categories	html\Working_with_Synonym_Categories.htm		Not Specified	 
 Working with XML Layouts	Working_with_XML_Layouts	html\Working_with_XML_Layouts.htm		Not Specified	 
-XML skeleton	XML_skeleton	XML_skeleton.htm		Not Specified	 
+XML skeleton	XML_skeleton	html\XML_skeleton.htm		Not Specified	 

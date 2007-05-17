@@ -25,6 +25,7 @@
    <mapID target="Building_Filters" url="html/Building_Filters.htm"/>
    <mapID target="Changing_Link_Attributes" url="html/Changing_Link_Attributes.htm"/>
    <mapID target="Changing_Relationship_Types" url="html/Changing_Relationship_Types.htm"/>
+   <mapID target="Changing_your_Autocompletion_Settings" url="html/Changing_your_Autocompletion_Settings.htm"/>
    <mapID target="Changing_your_Configuration" url="html/Changing_your_Configuration.htm"/>
    <mapID target="Classes" url="html/Classes.htm"/>
    <mapID target="Cloning" url="html/Cloning.htm"/>
@@ -45,7 +46,10 @@
    <mapID target="Destroying" url="html/Destroying.htm"/>
    <mapID target="Disjointedness_Check" url="html/Disjointedness_Check.htm"/>
    <mapID target="Editing" url="html/Editing.htm"/>
+   <mapID target="Editing_Functions" url="html/Editing_Functions.htm"/>
    <mapID target="Editing_Obsoletes" url="html/Editing_Obsoletes.htm"/>
+   <mapID target="Entering_data_into_Free_Text_fields" url="html/Entering_data_into_Free_Text_fields.htm"/>
+   <mapID target="Entering_data_into_Ontology_Fields" url="html/Entering_data_into_Ontology_Fields.htm"/>
    <mapID target="Example_Layouts" url="html/Example_Layouts.htm"/>
    <mapID target="Example_Scripts" url="html/Example_Scripts.htm"/>
    <mapID target="Exiting_Phenote" url="html/Exiting_Phenote.htm"/>
