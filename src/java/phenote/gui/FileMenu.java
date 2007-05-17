@@ -29,7 +29,7 @@ class FileMenu extends JMenu {
     LoadSaveActionListener actionListener = new LoadSaveActionListener();
 
     JMenuItem newData = new JMenuItem("New");
-    newData.setEnabled(Config.inst().hasDataAdapters());
+    newData.setEnabled(false);
     newData.setActionCommand("new");
     newData.addActionListener(actionListener);
     add(newData);
