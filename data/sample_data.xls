@@ -18,7 +18,7 @@ PMID:12668617 	OMIM602229.0001 			GO:0016563	transcriptional activator activity	
 PMID:9462749 	OMIM602229.0002 			SO:1000062	nonsense_codon_change_in_transcript	PATO:0001632	anterior to	SO:0000330	conserved_region							Y83X stop codon mutation before HMG domain 	
 PMID:9722528 	OMIM602229.0002 			GO:0065004	protein-DNA complex assembly	PATO:0001511	non-functional									***SOX10mut failed to form protein-DNA complexes 	
 PMID:9722528 	OMIM602229.0002 			GO:0008104	protein localization	PATO:0000628	mislocalised	GO:0005829	cytosol					PATO:0000460	abnormal	protein mislocalization to the cytosol 	
-PMID:9462749 	OMIM602229.0003 			SO:1000034^located_in(SO:0000330)	nucleotide_insertion^located_in(conserved_region)	PATO:0000467	present									6-bp insertion in middle of HMG domain 	
+PMID:9462749 	OMIM602229.0003 			SO:1000034^OBO_REL:located_in(SO:0000330)	nucleotide_insertion^located_in(conserved_region)	PATO:0000467	present									6-bp insertion in middle of HMG domain 	
 PMID:9722528 	OMIM602229.0003 			GO:0065004	protein-DNA complex assembly	PATO:0001511	non-functional									***SOX10mut failed to form protein-DNA complexes 	
 PMID:9722528 	OMIM602229.0003 			GO:0008104	protein localization	PATO:0001032	position	GO:0005634	nucleus					PATO:0000461	normal	protein localization to the nucleus 	
 PMID:12668617 	OMIM602229.0003 			GO:0016563	transcriptional activator activity	PATO:0001508	abolished									***Sox10 ability to activate transcription eliminated 	
@@ -33,11 +33,11 @@ PMID:12668617 	OMIM602229.0005 			GO:0003713	transcription coactivator activity	
 PMID:9722528 	OMIM602229.? 			GO:0016563	transcriptional activator activity	PATO:0001511	non-functional			 	 					deficient in activity as a transcriptional activator 	
 PMID:11734543 	OMIM602229.? 			FMA:62983	Myelin sheath	PATO:0001617	deformed									myelin defects 	
 PMID:11734543 	OMIM602229.? 			GO:0016563	transcriptional activator activity	PATO:0000462	absent									***SOX10 failed to transactivate the CX32 promoter 	
-PMID:11734543 	OMIM602229.? 			GO:0008134^located_in(SO:0000167)	transcription factor binding^located_in(promoter)	PATO:0000462	absent									***SOX10 failed to transactivate the CX32 promoter 	
+PMID:11734543 	OMIM602229.? 			GO:0008134^OBO_REL:located_in(SO:0000167)	transcription factor binding^located_in(promoter)	PATO:0000462	absent									***SOX10 failed to transactivate the CX32 promoter 	
 PMID:9462749 	[OMIM602229.0001/+] 			GO:0007605	sensory perception of sound	PATO:0000468	decreased									bilateral profound hearing loss 	
 PMID:9462749 	[OMIM602229.0001/+] 			FMA:53667	Hair	PATO:0000323	white									white hair color 	
 PMID:9462749 	[OMIM602229.0001/+] 			FMA:58611	Iridial part of retina	PATO:0000318	blue									blue irides with grey speckles 	
-PMID:9462749 	[OMIM602229.0001/+] 			FMA:63846^located_in(FMA:7163)	Cell pigment^located_in(Skin)	PATO:0001608	patchy									depigmented skin patches 	
+PMID:9462749 	[OMIM602229.0001/+] 			FMA:63846^OBO_REL:located_in(FMA:7163)	Cell pigment^located_in(Skin)	PATO:0001608	patchy									depigmented skin patches 	
 PMID:9462749 	[OMIM602229.0001/+] 			FMA:63846	Cell pigment	PATO:0000460	abnormal									pigmentary abnormalities (detailed with other entries) 	
 PMID:9462749 	[OMIM602229.0001/+] 			FMA:7199	Intestine	PATO:0000648	obstructed									intestinal obstruction in neonates 	
 PMID:9462749 	[OMIM602229.0001/+] 			GO:0007588	excretion	PATO:0000911	decreased rate									constipation in adults 	
@@ -49,37 +49,37 @@ PMID:9462749 	[OMIM602229.0002/+] 			GO:0007605	sensory perception of sound	PATO
 PMID:9462749 	[OMIM602229.0002/+] 			FMA:53667	Hair	PATO:0000665	light									fair hair color 	
 PMID:9462749 	[OMIM602229.0002/+] 			FMA:58611	Iridial part of retina	PATO:0001265	bright blue									vivid blue eyes 	
 PMID:9462749 	[OMIM602229.0002/+] 			FMA:7199	Intestine	PATO:0001624	decreased functionality									bowel problems 	
-PMID:9462749 	[OMIM602229.0002/+] 			FMA:5884^located_in(FMA:14544)	Ganglion^located_in(Rectum)	PATO:0000419	decreased number									number of ganglia was dramatically reduced 	
+PMID:9462749 	[OMIM602229.0002/+] 			FMA:5884^OBO_REL:located_in(FMA:14544)	Ganglion^located_in(Rectum)	PATO:0000419	decreased number									number of ganglia was dramatically reduced 	
 PMID:9462749 	[OMIM602229.0003/+] 			GO:0007605	sensory perception of sound	PATO:0000468	decreased									deafness 	
 PMID:9462749 	[OMIM602229.0003/+] 			FMA:14544	Rectum	PATO:0001557	lacking physical part	FMA:5884	Ganglion							short segment HSCR - aganglionic tract in rectum+sigmoid colon 	
 PMID:9462749 	[OMIM602229.0003/+] 			FMA:14548	Sigmoid colon	PATO:0001557	lacking physical part	FMA:5884	Ganglion							short segment HSCR - aganglionic tract in rectum+sigmoid colon 	
 PMID:9462749 	[OMIM602229.0004/+] 	PM:0000019	penetrance_incomplete	GO:0007605	sensory perception of sound	PATO:0000468	decreased									deafness 	
-PMID:9462749 	[OMIM602229.0004/+] 	PM:0000023	expressivity_incomplete	FMA:63846^contained_in(FMA:61695)	Cell pigment^contained_in(Body surface)	PATO:0000468	decreased									hypopigmentation 	
+PMID:9462749 	[OMIM602229.0004/+] 	PM:0000023	expressivity_incomplete	FMA:63846^OBO_REL:contained_in(FMA:61695)	Cell pigment^contained_in(Body surface)	PATO:0000468	decreased									hypopigmentation 	
 PMID:9462749 	[OMIM602229.0004/+] 			FMA:7199	Intestine	PATO:0001557	lacking physical part	FMA:84048	Ganglion cell							HSCR 	
 PMID:9462749 	[OMIM602229.0004/+] 	PM:0000023	expressivity_incomplete	FMA:53667	Hair	PATO:0000323	white									white hair color 	
 PMID:9462749 	[OMIM602229.0004/+] 	PM:0000019	penetrance_incomplete	FMA:7199	Intestine	PATO:0001571	dilated									megacolon 	
 PMID:10441344 	OMIM602229.0005 			SO:1000061	nonconservative_missense_codon_change_in_transcript	PATO:0000467	present									SER135THR mutation 	
 PMID:10441344 	OMIM602229.0005 			SO:1000061	nonconservative_missense_codon_change_in_transcript	PATO:0000467	present									SER135THR mutation 	
-PMID:2280978 	Yemenite deaf-blind hypopigmentation syndrome 			FMA:63846^located_in(FMA:7163)	Cell pigment^located_in(Skin)	PATO:0001608	patchy									hypo and hyperpigmented skin 	
+PMID:2280978 	Yemenite deaf-blind hypopigmentation syndrome 			FMA:63846^OBO_REL:located_in(FMA:7163)	Cell pigment^located_in(Skin)	PATO:0001608	patchy									hypo and hyperpigmented skin 	
 PMID:2280978 	Yemenite deaf-blind hypopigmentation syndrome 			FMA:58238	Cornea	PATO:0000587	decreased size									microcornea 	
 PMID:2280978 	Yemenite deaf-blind hypopigmentation syndrome 			FMA:54448	Eye	MP:0005262	coloboma									coloboma 	
 PMID:2280978 	Yemenite deaf-blind hypopigmentation syndrome 	PM:0000019	penetrance_incomplete	GO:0007605	sensory perception of sound	PATO:0000468	decreased									severe hearing loss 	
-PMID:10441344 	OMIM602229.0005 			FMA:63846^located_in(FMA:7163)	Cell pigment^located_in(Skin)	PATO:0001608	patchy									hypo and hyperpigmented skin 	
+PMID:10441344 	OMIM602229.0005 			FMA:63846^OBO_REL:located_in(FMA:7163)	Cell pigment^located_in(Skin)	PATO:0001608	patchy									hypo and hyperpigmented skin 	
 PMID:10441344 	OMIM602229.0005 	PM:0000019	penetrance_incomplete	GO:0007605	sensory perception of sound	PATO:0000468	decreased									severe hearing loss 	
 PMID:10482261 	OMIM602229.0008 			FMA:62983	Myelin sheath	PATO:0001617	deformed			 	 					leukodystrophy - progressive degeneration development of the myelin sheath 	
 PMID:10482261 	OMIM602229.0008 			FMA:7199	Intestine	PATO:0000648	obstructed									intestinal obstruction in neonates 	
 PMID:10482261 	OMIM602229.0008 			FMA:7199	Intestine	PATO:0001557	lacking physical part	FMA:5884	Ganglion							long segment HSCR - aganglionic tract in entire colon 	
-PMID:10482261 	OMIM602229.0008 			FMA:63846^located_in(FMA:58237)	Cell pigment^located_in(Left iris)	PATO:0000616	asymmetrical	FMA:63846^located_in(FMA:58236)	Cell pigment^located_in(Right iris)							heterochromia iridis - one eye is different color (intensity) than the other 	
+PMID:10482261 	OMIM602229.0008 			FMA:63846^OBO_REL:located_in(FMA:58237)	Cell pigment^located_in(Left iris)	PATO:0000616	asymmetrical	FMA:63846^OBO_REL:located_in(FMA:58236)	Cell pigment^located_in(Right iris)							heterochromia iridis - one eye is different color (intensity) than the other 	
 PMID:10482261 	OMIM602229.0008 	PM:0000022	expressivity_complete	GO:0007605	sensory perception of sound	PATO:0000468	decreased									profound hearing loss 	
 PMID:10482261 	OMIM602229.0008 			FMA:59516	Root of nose	PATO:0000600	increased width									broad nasal root 	
 PMID:10482261 	OMIM602229.0008 			FMA:59324	Medial angle of left eye	PATO:0000374	increased distance	FMA:59323	Medial angle of right eye	 	 					dystopia canthorum - inner corners of the eyes (canthi) are spaced farther apart than normal 	
-PMID:10482261 	OMIM602229.0008 			GO:0048589^has_participant(FMA:20394)	developmental growth^has_participant(Body)	PATO:0000911	decreased rate									developmental delay 	
+PMID:10482261 	OMIM602229.0008 			GO:0048589^OBO_REL:has_participant(FMA:20394)	developmental growth^has_participant(Body)	PATO:0000911	decreased rate									developmental delay 	
 PMID:10482261 	OMIM602229.0008 			FMA:20394	Body	MP:0000754	partial paralysis									spastic quadraplegia 	
 PMID:10482261 	OMIM602229.0008 			FMA:9721	Tendon	PATO:0001568	having decreased function	GO:0060004	reflex							loss of deep tendon reflexes 	
 PMID:10482261 	OMIM602229.0008 	PM:0000022	expressivity_complete	GO:0007600	sensory perception	PATO:0000468	decreased									sensory dullness 	
 PMID:10482261 	OMIM602229.0008 			FMA:9903	Peripheral nervous system	PATO:0001624	decreased functionality									peripheral neuropathy 	
 PMID:10482261 	OMIM602229.0008 			FMA:5867	Motor nerve	PATO:0001585	conduction									***decreased conductive velocity 	
-PMID:10482261 	OMIM602229.0008 			FMA:30316^contained_in(FMA:7182)	Muscle^contained_in(Limb)	PATO:0001623	atrophied									muscles in all limbs were severely atrophic 	
-PMID:10482261 	OMIM602229.0008 			FMA:67257^contained_in(FMA:20935)	Protein^contained_in(Cerebrospinal fluid)	PATO:0001162	increased concentration									Protein in the cerebrospinal fluid was elevated  	
-PMID:10482261 	OMIM602229.0008 			GO:0008038^contained_in(FMA:79876)	neuron recognition^contained_in(Brainstem)	PATO:0000468	decreased	GO:0007605	sensory perception of sound							no auditory brainstem response bilaterally 	
-PMID:10482261 	OMIM602229.0008 			FMA:62983^located_in(FMA:50801)	Myelin sheath^located_in(Brain)	PATO:0000468	decreased			 	 					prominent deficiency of myelination in the entire brain 	
+PMID:10482261 	OMIM602229.0008 			FMA:30316^OBO_REL:contained_in(FMA:7182)	Muscle^contained_in(Limb)	PATO:0001623	atrophied									muscles in all limbs were severely atrophic 	
+PMID:10482261 	OMIM602229.0008 			FMA:67257^OBO_REL:contained_in(FMA:20935)	Protein^contained_in(Cerebrospinal fluid)	PATO:0001162	increased concentration									Protein in the cerebrospinal fluid was elevated  	
+PMID:10482261 	OMIM602229.0008 			GO:0008038^OBO_REL:contained_in(FMA:79876)	neuron recognition^contained_in(Brainstem)	PATO:0000468	decreased	GO:0007605	sensory perception of sound							no auditory brainstem response bilaterally 	
+PMID:10482261 	OMIM602229.0008 			FMA:62983^OBO_REL:located_in(FMA:50801)	Myelin sheath^located_in(Brain)	PATO:0000468	decreased			 	 					prominent deficiency of myelination in the entire brain 	
