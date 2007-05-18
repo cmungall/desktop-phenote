@@ -17,7 +17,7 @@
      <tocitem text="Running Phenote for the First Time" target="Running_Phenote_for_the_First_Time"/>
      <tocitem text="Exiting Phenote" target="Exiting_Phenote"/>
 </tocitem>
-<tocitem text="The Phenote Interface">
+<tocitem text="The Phenote Interface" target="The_Phenote_Interface">
      <tocitem text="Menu Bars" target="Menu_Bars"/>
      <tocitem text="Data Entry" target="Data_Entry"/>
      <tocitem text="Term Info" target="Term_Info"/>

@@ -119,6 +119,7 @@ pre.code_table {font-size: x-small;
 
 [border] {border: solid thin;
        border-color: silver}
+img {border: none }
 
 table {border: none;
        border-color: white;
