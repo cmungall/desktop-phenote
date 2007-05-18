@@ -5,6 +5,9 @@ default namespace = "phenote/config/xml"
 start =
   element phenote-configuration {
     attribute version { xsd:string },
+    attribute description { xsd:string },
+    attribute name { xsd:string },
+    attribute author { xsd:string },
     master-to-local-config,
     log,
     queryable-dataadapter*,
@@ -67,6 +70,7 @@ field =
     attribute enable { xsd:boolean },
     ##attribute name { "Pub" | "Genotype" | "Genetic Context" | "Entity" | "Quality" },
     attribute name { xsd:string },
+    attribute desc { xsd:string },
     ## tag for field for pheno-syntax adapter
     attribute syntax-abbrev { xsd:string },
     ## whether field is free text or constrained by ontology - take out?
