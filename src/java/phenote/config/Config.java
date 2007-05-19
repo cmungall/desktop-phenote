@@ -56,6 +56,9 @@ public class Config {
   private int updateTimer = 0; //default is to not wait
   private String reposUrlDir;
   private String version;
+  private String configName;
+  private String configDesc;
+  private String configAuthor;
   //private String masterToLocalConfigMode;
   //private MasterToLocalConfig masterToLocalBean;
   private PhenoteConfiguration phenoConfigBean; // cache the xml parse bean??
@@ -649,7 +652,15 @@ public class Config {
       phenoConfigBean = pcd.getPhenoteConfiguration();
 
       version = phenoConfigBean.getVersion();
+      
+      configName = phenoConfigBean.getName();
+      
+      configDesc = phenoConfigBean.getDescription();
+      
+      configAuthor = phenoConfigBean.getAuthor();
 
+      System.out.println("version:  "+version+"\nname:  "+configName+"\nDesc:  "+
+      		configDesc+"\nAuthor:  "+configAuthor);
       //MasterToLocalConfig m 
 //         = phenoConfigBean.getMasterToLocalConfig();
 //       if (m != null && m.getMode() != null)

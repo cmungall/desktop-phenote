@@ -16,6 +16,7 @@ public class FieldConfig {
   //private CharFieldEnum charFieldEnum; // phase out
   private CharField charField;
   private String label;
+  private String desc;
   // Entity field can have multiple ontologies
   private List<OntologyConfig> ontologyConfigList;
   //private boolean isPostComp;
@@ -29,7 +30,7 @@ public class FieldConfig {
   FieldConfig(Field fieldBean,Config cfg) {
     this.config = cfg;
     this.label = fieldBean.getName();
-    
+    this.desc = fieldBean.getDesc();
 //   try{//phase this out!charFieldEnum = CharFieldEnum.getCharFieldEnum(label);}
 //     catch (Exception e) {} // no char field enum for name - new generic!
     //fc = new FieldConfig(name);

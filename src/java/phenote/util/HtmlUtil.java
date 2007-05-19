@@ -46,7 +46,7 @@ public class HtmlUtil {
 		if (oboClass.isObsolete()) {
 			sb.append("This term is OBSOLETE").append(newLine());
 
-			
+
 		}		
 		sb.append(nl()).append(bold("ID: ")).append(colorFont(oboClass.getID(), "red"));
 
@@ -203,7 +203,7 @@ public class HtmlUtil {
 //			int totSyns = 0;
 //			totSyns=broadSynCount+exactSynCount+narrowSynCount+relatedSynCount+unknownScopeCount;
 //			if (totSyns>0) {
-//				sb.append(makeRow(makeLeftCol(bold("Synonyms:"))+makeRightCol(temp.toString())));
+//			sb.append(makeRow(makeLeftCol(bold("Synonyms:"))+makeRightCol(temp.toString())));
 //			}
 			if (exactSynCount>0)
 				sb.append(makeRow(makeLeftCol(bold("Exact Synonyms:"))+makeRightCol(exactBuf.toString())));
@@ -218,7 +218,7 @@ public class HtmlUtil {
 		}
 		return sb.toString();
 	}
-	
+
 	public static String termInfo(OBOClass oboClass, String ontology,String field) {
 		// funny - revisit for sure - either should pass through all methods
 		// or util should actually be an object - singleton? i think maybe its
