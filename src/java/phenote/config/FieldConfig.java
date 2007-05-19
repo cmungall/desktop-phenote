@@ -73,7 +73,9 @@ public class FieldConfig {
 
   // --> getName?
   public String getLabel() { return label; }
+  public String getDesc() { return desc; }
   boolean hasLabel(String label) { return label.equals(this.label); } 
+  boolean hasDesc(String desc) { return desc.equals(this.desc); }
 
   //private void setOntologyFile(String f){getOntologyConfig().setOntologyFile(f);}
   public boolean hasOntologies() {

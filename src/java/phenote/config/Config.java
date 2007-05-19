@@ -789,6 +789,10 @@ public class Config {
     allFields.add(index,fc); // ??
   }
   
+  public String getConfigName() {	return configName;  }
+  public String getConfigDesc() { return configDesc; }
+  public String getConfigAuthor() { return configAuthor; }
+  
 }
 
 //       if (overwrite || mode.equals("WIPEOUT_ALWAYS"))
