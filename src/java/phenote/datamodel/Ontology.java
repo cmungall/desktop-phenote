@@ -64,7 +64,7 @@ public class Ontology {
   public Ontology(Collection<Namespace> spaces,OntologyConfig oc,OBOSession os) {
     oboSession = os;
     // get id filter, slim, & possible namespace from oc...
-    name = oc.name;
+    name = oc.getName();
     slim = oc.getSlim();
     // if namespace specified and is valid load that
     if (oc.hasNamespace()) {

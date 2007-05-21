@@ -19,7 +19,7 @@ import org.apache.xmlbeans.XmlException;
 import phenote.main.PhenoteVersion;
 import phenote.config.xml.PhenoteConfigurationDocument;
 import phenote.config.xml.DataadapterDocument.Dataadapter;
-import phenote.config.xml.QueryableDataadapterDocument.QueryableDataadapter;
+//import phenote.config.xml.QueryableDataadapterDocument.QueryableDataadapter;
 import phenote.config.xml.FieldDocument.Field;
 import phenote.config.xml.LogDocument.Log;
 import phenote.config.xml.OboRepositoryDocument.OboRepository;
@@ -43,24 +43,25 @@ public class Config {
   private static Config singleton = new Config();
   private String configFile = FLYBASE_DEFAULT_CONFIG_FILE;
   private List<DataAdapterConfig> dataAdapConfList;
-  private List<QueryableAdapConfig> queryAdapConfList;
+  private List<DataAdapterConfig> queryAdapConfList;
   /** only enabled fields */
   private List<FieldConfig> enabledFields = new ArrayList<FieldConfig>();
   /** enabled & disabled */
   private List<FieldConfig> allFields = new ArrayList<FieldConfig>();
-  private String logConfigFile = "conf/log4j.xml"; // default log config file
+  private static final String defaultLogConfigFile = "conf/log4j.xml";
   // maybe should be using xmlbean where possible?
-  private boolean uvicGraphEnabled = false; // default false for now
-  private boolean termHistoryEnabled = false;   //default to false for now
-  private boolean autoUpdateEnabled = true; //default to true if not in config
-  private int updateTimer = 0; //default is to not wait
-  private String reposUrlDir;
+  //private boolean uvicGraphEnabled = false; // default false for now
+  //private boolean termHistoryEnabled = false;   //default to false for now
+  //private boolean autoUpdateEnabled = true; //default to true if not in config
+  //private int updateTimer = 0; //default is to not wait
+  //private String reposUrlDir;
   private String version;
   private String configName;
   private String configDesc;
   private String configAuthor;
   //private String masterToLocalConfigMode;
   //private MasterToLocalConfig masterToLocalBean;
+  private PhenoteConfigurationDocument phenoDocBean;
   private PhenoteConfiguration phenoConfigBean; // cache the xml parse bean??
 
   private boolean configInitialized = false;
@@ -443,20 +444,27 @@ public class Config {
     else
       System.out.println("System config is newer than user, updating user config");
 
-    // Data Adapters
-    for (DataAdapterConfig dac : newCfg.getAdapConfigs()) {
-      if (!oldCfg.hasAdapConfig(dac))
-        oldCfg.addAdapConfig(dac);
+    // File Adapters - preserves enable state of old/local - should it?
+    for (DataAdapterConfig dac : newCfg.getFileAdapConfigs()) {
+      if (!oldCfg.hasFileAdapConfig(dac))
+        oldCfg.addFileAdapConfig(dac);
+    }
+    for (DataAdapterConfig dac : newCfg.getQueryAdapCfgs()) {
+      if (!oldCfg.hasQueryAdapCfg(dac))
+        oldCfg.addQueryAdapCfg(dac);
     }
     // log defaulted and probably wont change - dont worry about?? or check if set?
     // but it is a version change so check if diff? maybe? not sure hmmm
     // but i do think ok to update uvic - version change may go from false to true
-    oldCfg.uvicGraphEnabled = newCfg.uvicGraphEnabled; // hmmmm?
-    oldCfg.termHistoryEnabled = newCfg.termHistoryEnabled;
-    oldCfg.reposUrlDir = newCfg.reposUrlDir; // ??
-    oldCfg.autoUpdateEnabled = newCfg.autoUpdateEnabled;
-    oldCfg.updateTimer = newCfg.updateTimer;
-    for (FieldConfig newFC : newCfg.getFieldConfigList())
+    //oldCfg.uvicGraphEnabled = newCfg.uvicGraphEnabled; // hmmmm?
+    oldCfg.setUvicGraphIsEnabled(newCfg.uvicGraphIsEnabled());
+    oldCfg.setTermHistory(newCfg.termHistoryIsEnabled()); //preserve old user pref?
+    oldCfg.setReposUrlDir(newCfg.getReposUrlDir()); // ?? pase
+    oldCfg.setAutoUpdate(newCfg.autoUpdateIsEnabled());
+    oldCfg.setUpdateTimer(newCfg.getUpdateTimer()); // ??? master shouldnt override???
+    // should it merge just enabled fields or all fields - probably all fields
+    //for (FieldConfig newFC : newCfg.getEnabledFieldCfgs())
+    for (FieldConfig newFC : newCfg.getAllFieldCfgs())
       newFC.mergeWithOldConfig(oldCfg,newCfg);
 
     // write out updated old cfg
@@ -471,15 +479,22 @@ public class Config {
     return getDataAdapters() != null && !getDataAdapters().isEmpty();
   }
   
-  List<DataAdapterConfig> getAdapConfigs() {
+  List<DataAdapterConfig> getFileAdapConfigs() {
     if (dataAdapConfList == null)
       dataAdapConfList = new ArrayList<DataAdapterConfig>(4);
     return dataAdapConfList;
   }
-  /** Check if has data adapter config with same name */
-  private boolean hasAdapConfig(DataAdapterConfig dac) {
-    for (DataAdapterConfig d : getAdapConfigs()) {
-      //if (d.getName().equals(dac.getName()))
+  /** Check if has file adapter config with same name */
+  private boolean hasFileAdapConfig(DataAdapterConfig dac) {
+    for (DataAdapterConfig d : getFileAdapConfigs()) {
+      if (d.hasSameAdapter(dac))
+        return true;
+    }
+    return false;
+  }
+  /** Check if has file adapter config with same name */
+  private boolean hasQueryAdapCfg(DataAdapterConfig dac) {
+    for (DataAdapterConfig d : getQueryAdapCfgs()) {
       if (d.hasSameAdapter(dac))
         return true;
     }
@@ -492,7 +507,7 @@ public class Config {
     ArrayList daList = new ArrayList(dataAdapConfList.size());
     for (DataAdapterConfig d : dataAdapConfList) {
       if (d.isEnabled())
-        daList.add(d.getDataAdapter());
+        daList.add(d.getFileAdapter());
     }
     return daList; //new ArrayList(dataAdapConfList);
   }
@@ -508,7 +523,7 @@ public class Config {
     if (!hasDataAdapters()) return null; // ex?
     // if defaultFileAdapter != null retrun defaultFileAdapter - set by config
     for (DataAdapterConfig d : dataAdapConfList)
-      if (d.isEnabled()) return d.getDataAdapter();
+      if (d.isEnabled()) return d.getFileAdapter();
     //return dataAdapConfList.get(0);
     return null; // none enabled - shouldnt happen - ex?
   }
@@ -516,63 +531,143 @@ public class Config {
 
 
   /** config flag for enabling uvic shrimp dag graph */ 
-  public boolean uvicGraphIsEnabled() { return uvicGraphEnabled; }
-
-  public boolean termHistoryIsEnabled() { 
-    return termHistoryEnabled; }
-
-  public void setTermHistory(boolean setter) { 
-    termHistoryEnabled = setter;
-    return; }
-
-  public boolean autoUpdateIsEnabled() {
-    return autoUpdateEnabled; }
-
-  public int getUpdateTimer() {
-      return updateTimer; }
-  
-  public URL getLogConfigUrl() throws FileNotFoundException {
-    return FileUtil.findUrl(logConfigFile);
+  public boolean uvicGraphIsEnabled() {
+    //return uvicGraphEnabled;
+    return getUvicGraphBean().getEnable();
   }
 
-  String getLogConfigFile() { return logConfigFile; }
+  private UvicGraph getUvicGraphBean() {
+    UvicGraph g = phenoConfigBean.getUvicGraph();
+    if (g == null) {
+      g = phenoConfigBean.addNewUvicGraph(); // will this default to false?
+    }
+    return g;
+  }
+
+  public void setUvicGraphIsEnabled(boolean enable) {
+    getUvicGraphBean().setEnable(enable);
+  }
+
+  public boolean termHistoryIsEnabled() { 
+    return getHistoryBean().getEnable();
+  }
+
+  private TermHistory getHistoryBean() {
+    TermHistory history = phenoConfigBean.getTermHistory();
+    if (history == null) {
+      history = phenoConfigBean.addNewTermHistory();
+      history.setEnable(false); // default false
+    }
+    return history;
+  }
+
+  public void setTermHistory(boolean setter) { 
+    getHistoryBean().setEnable(setter);
+  }
+
+  public boolean autoUpdateIsEnabled() {
+    return getAutoUpdateBean().getEnable();
+  }
+
+  public void setAutoUpdate(boolean enable) {
+    getAutoUpdateBean().setEnable(enable);
+  }
+
+  private AutoUpdateOntologies getAutoUpdateBean() {
+    AutoUpdateOntologies au = phenoConfigBean.getAutoUpdateOntologies();
+    if (au == null) {
+      au = phenoConfigBean.addNewAutoUpdateOntologies();
+      au.setEnable(true); // default true??
+    }
+    return au;
+  }
+
+  // rename getUpdateTimerSeconds?
+  public int getUpdateTimer() {
+    return getTimerBean().getTimer();
+  }
+
+  public void setUpdateTimer(int seconds) {
+    getTimerBean().setTimer(seconds);
+  }
+
+  private UpdateTimer getTimerBean() {
+    UpdateTimer u = phenoConfigBean.getUpdateTimer();
+    if (u == null) {
+      u = phenoConfigBean.addNewUpdateTimer();
+      u.setTimer(0); // default is not to wait???
+    }
+    return u;
+  }
+  
+  public URL getLogConfigUrl() throws FileNotFoundException {
+    return FileUtil.findUrl(getLogConfigFile());
+  }
+
+  String getLogConfigFile() { 
+    if (phenoConfigBean.getLog() == null) {
+      Log log = phenoConfigBean.addNewLog();
+      log.setConfigFile(defaultLogConfigFile);
+    }
+    return phenoConfigBean.getLog().getConfigFile();
+  }
 
   public int getNumberOfFields() {
-    return getFieldConfigList().size();
+    return getEnbldFieldCfgs().size();
   }
 
   /** Gives name of field at index, 0 based (for table heading) */
   public String getFieldLabel(int index) {
-    return getFieldConfig(index).getLabel();
+    return getEnbldFieldCfg(index).getLabel();
   }
 
 //   public CharFieldEnum getCharFieldEnum(int index) {
 //     return getFieldConfig(index).getCharFieldEnum();
 //   }
-  public CharField getCharField(int index) {
-    return getFieldConfig(index).getCharField();
+  public CharField getEnbldCharField(int index) {
+    return getEnbldFieldCfg(index).getCharField();
   }
 
   /** needed for getFieldLabel for table */
-  private FieldConfig getFieldConfig(int index) {
-    return getFieldConfigList().get(index);
+  private FieldConfig getEnbldFieldCfg(int index) {
+    return getEnbldFieldCfgs().get(index);
   }
 
   /** OntologyDataAdapter calls this to figure which ontologies to load
    This is a list of enabled fields - does not include disabled fields!
   retname getEnabledFieldConfigs? */
-  public List<FieldConfig> getFieldConfigList() {
+  public List<FieldConfig> getEnbldFieldCfgs() {
     return enabledFields;
   }
 
+  private void reconstructEnabledFieldList() {
+    enabledFields.clear();
+    for (FieldConfig fc : getAllFieldCfgs()) {
+      if (fc.isEnabled())
+        enabledFields.add(fc);
+    }
+  }
+
+  public List<FieldConfig> getAllFieldCfgs() { return allFields; }
+
   /** returns true if has field config with same name - contents may differ */
-  boolean hasFieldConfig(FieldConfig newFC) {
-    return getFieldConfig(newFC.getLabel()) != null;
+  boolean hasEnbldFieldCfg(FieldConfig newFC) {
+    return getEnbldFieldCfg(newFC.getLabel()) != null;
+  }
+  boolean hasFieldCfgAll(FieldConfig fc) {
+    return getAllFieldCfg(fc.getLabel()) != null;
   }
 
   /** returns field config with label fieldName */
-  FieldConfig getFieldConfig(String fieldName) {
-    for (FieldConfig fc : getFieldConfigList()) {
+  FieldConfig getEnbldFieldCfg(String fieldName) {
+    for (FieldConfig fc : getEnbldFieldCfgs()) {
+      if (fc.getLabel().equals(fieldName))
+        return fc;
+    }
+    return null; // ex?
+  }
+  FieldConfig getAllFieldCfg(String fieldName) {
+    for (FieldConfig fc : getAllFieldCfgs()) {
       if (fc.getLabel().equals(fieldName))
         return fc;
     }
@@ -584,7 +679,7 @@ public class Config {
   public List<CharField> getCharFieldsForSyntaxAbbrev(String abb) throws ConfigException {
     // cache in hash??
     List<CharField> fields = new ArrayList<CharField>(2);
-    for (FieldConfig fc : getFieldConfigList()) {
+    for (FieldConfig fc : getEnbldFieldCfgs()) {
       if (fc.hasSyntaxAbbrev(abb) || fc.hasLabel(abb)) // abbrev or label
         fields.add(fc.getCharField());
         //return fc.getCharField();
@@ -597,8 +692,8 @@ public class Config {
   public List<CharField> getCharFieldsForDelimited(int colNum) throws ConfigException {
 	    // cache in hash??
 	    List<CharField> fields = new ArrayList<CharField>(2);
-	    for (FieldConfig fc : getFieldConfigList()) {
-	    	fields.add(getCharField(colNum));
+	    for (FieldConfig fc : getEnbldFieldCfgs()) {
+	    	fields.add(getEnbldCharField(colNum));
 	        //return fc.getCharField();
 	    }
 	    if (fields.isEmpty())
@@ -607,7 +702,7 @@ public class Config {
 	  }
   
   public String getLabelForCharField(CharField cf) throws ConfigException {
-	    for (FieldConfig fc : getFieldConfigList()) {
+	    for (FieldConfig fc : getEnbldFieldCfgs()) {
 	      if (fc.hasCharField(cf))
 	        return fc.getLabel();
 	    }
@@ -616,7 +711,7 @@ public class Config {
 	  }
   
   public String getSyntaxAbbrevForCharField(CharField cf) throws ConfigException {
-    for (FieldConfig fc : getFieldConfigList()) {
+    for (FieldConfig fc : getEnbldFieldCfgs()) {
       if (fc.hasCharField(cf))
         return fc.getSyntaxAbbrev();
     }
@@ -624,7 +719,17 @@ public class Config {
     throw new ConfigException("Syn Abbrev for "+cf+" not found");
   }
 
-  String getReposUrlDir() { return reposUrlDir; }
+  // pase - phase out - returns null if doesnt have
+  String getReposUrlDir() {
+    if (phenoConfigBean.getOboRepository() == null) return null;
+    return phenoConfigBean.getOboRepository().getUrlDir();
+  }
+  private void setReposUrlDir(String d) { // phase out
+    if (d==null) return;
+    if (phenoConfigBean.getOboRepository() == null)
+      phenoConfigBean.addNewOboRepository();
+    phenoConfigBean.getOboRepository().setUrlDir(d);
+  }
 
   /** should this just be a part of fieldConfigList? and main window would filter it
       out when making up fields? rel is for post comp gui - or maybe FieldConfig
@@ -642,14 +747,16 @@ public class Config {
     }
     catch (FileNotFoundException e) { throw new ConfigException(e); }
   }
+
+  PhenoteConfigurationDocument getPhenoDocBean() { return phenoDocBean; }
       
   private void parseXmlUrl(URL configUrl) throws ConfigException {
     try {
       System.out.println("config file: "+configUrl);
-      PhenoteConfigurationDocument pcd = 
-        PhenoteConfigurationDocument.Factory.parse(configUrl);//configFile);
-      pcd.validate(); //???
-      phenoConfigBean = pcd.getPhenoteConfiguration();
+      //PhenoteConfigurationDocument pcd = 
+      phenoDocBean = PhenoteConfigurationDocument.Factory.parse(configUrl);
+      phenoDocBean.validate(); //???
+      phenoConfigBean = phenoDocBean.getPhenoteConfiguration();
 
       version = phenoConfigBean.getVersion();
       
@@ -667,52 +774,53 @@ public class Config {
 //         masterToLocalConfigMode = m.getMode();
 
       // LOG CONFIG FILE
-      Log log = phenoConfigBean.getLog();
-      if (log != null && log.getConfigFile() != null) {
-        logConfigFile = log.getConfigFile();
-      }
+//       Log log = phenoConfigBean.getLog();
+//       if (log != null && log.getConfigFile() != null) {
+//         logConfigFile = log.getConfigFile();
+//       }
       
       // DATA ADAPTERS  <dataadapter name="phenoxml" enable="true"/>
 
       Dataadapter[] adapters = phenoConfigBean.getDataadapterArray();
       for (Dataadapter da : adapters) {
         DataAdapterConfig dac = new DataAdapterConfig(da);
-        addAdapConfig(dac);
-        //String name = da.getName().toString();
-        //addDataAdapterFromString(name);
+        if (dac.isQueryable())
+          addQueryAdapCfg(dac);
+        else
+          addFileAdapConfig(dac);
       }
 
-      QueryableDataadapter[] queryAdaps = phenoConfigBean.getQueryableDataadapterArray();
-      for (QueryableDataadapter da : queryAdaps) {
-        QueryableAdapConfig qac = new QueryableAdapConfig(da);
-        addQueryAdapCfg(qac);
-      }
+//       QueryableDataadapter[] queryAdaps = phenoConfigBean.getQueryableDataadapterArray();
+//       for (QueryableDataadapter da : queryAdaps) {
+//         QueryableAdapConfig qac = new QueryableAdapConfig(da);
+//         addQueryAdapCfg(qac);
+//       }
 
 
-      // GRAPH
-      UvicGraph gr = phenoConfigBean.getUvicGraph();
-      if (gr != null)
-        uvicGraphEnabled = gr.getEnable();
+      // GRAPH - now accesses bean directly
+//       UvicGraph gr = phenoConfigBean.getUvicGraph();
+//       if (gr != null)
+//         uvicGraphEnabled = gr.getEnable();
 
       // TERM HISTORY
-      TermHistory history = phenoConfigBean.getTermHistory();
-      if (history != null)
-        termHistoryEnabled = history.getEnable();
+//       TermHistory history = phenoConfigBean.getTermHistory();
+//       if (history != null)
+//         termHistoryEnabled = history.getEnable();
 
       // AUTO UPDATE OF ONTOLOGIES
-      AutoUpdateOntologies autoUpdate = phenoConfigBean.getAutoUpdateOntologies();
-      if (autoUpdate != null)
-        autoUpdateEnabled = autoUpdate.getEnable();
+//       AutoUpdateOntologies autoUpdate = phenoConfigBean.getAutoUpdateOntologies();
+//       if (autoUpdate != null)
+//         autoUpdateEnabled = autoUpdate.getEnable();
 
       // TIMER for UPDATE OF ONTOLOGIES
-      UpdateTimer time = phenoConfigBean.getUpdateTimer();
-      if (time != null)
-	  updateTimer = time.getTimer().intValue();
+//       UpdateTimer time = phenoConfigBean.getUpdateTimer();
+//       if (time != null)
+// 	  updateTimer = time.getTimer().intValue();
 
       // Repos url dir
-      OboRepository or = phenoConfigBean.getOboRepository();
-      if (or != null && or.getUrlDir() != null)
-        reposUrlDir = or.getUrlDir();
+//       OboRepository or = phenoConfigBean.getOboRepository();
+//       if (or != null && or.getUrlDir() != null)
+//         reposUrlDir = or.getUrlDir();
 
       // FIELDS
       Field[] fields = phenoConfigBean.getFieldArray();
@@ -735,9 +843,12 @@ public class Config {
     return FileUtil.findUrl(filename);
   }
 
+  private void addQueryAdapCfg(DataAdapterConfig dac) {
+    getQueryAdapCfgs().add(dac);
+  }
 
-  private void addAdapConfig(DataAdapterConfig dac) {
-    getAdapConfigs().add(dac);
+  private void addFileAdapConfig(DataAdapterConfig dac) {
+    getFileAdapConfigs().add(dac);
   }
 
   public boolean hasQueryableDataAdapter() {
@@ -750,15 +861,16 @@ public class Config {
     if (queryAdapConfList == null) return null;
     //queryAdapConfList.get(0).getQueryableAdapter();
     // return first enabled adap
-    for (QueryableAdapConfig q : getQueryAdapCfgs())
+    //for (QueryableAdapConfig q : getQueryAdapCfgs())
+    for (DataAdapterConfig q : getQueryAdapCfgs())
       if (q.isEnabled()) return q.getQueryableAdapter();
     return null;
   }
 
   /** all configs for query adaps - enabled or not */
-  List<QueryableAdapConfig> getQueryAdapCfgs() {
+  List<DataAdapterConfig> getQueryAdapCfgs() {
     if (queryAdapConfList == null)
-      queryAdapConfList = new ArrayList<QueryableAdapConfig>(1);
+      queryAdapConfList = new ArrayList<DataAdapterConfig>(1);
     return queryAdapConfList;
   }
 
@@ -779,14 +891,23 @@ public class Config {
 
   /** get index of field config in enabled field config list - returns -1 if
       not in there -- ex? */
-  int getEnabledFieldIndex(FieldConfig fc) {
-    return enabledFields.indexOf(fc);
+//   int getEnabledFieldIndex(FieldConfig fc) {
+//     return enabledFields.indexOf(fc);
+//   }
+
+  int getAllFieldIndex(FieldConfig fc) {
+    return allFields.indexOf(fc);
   }
 
+  /** adds to both field config list and xml beans field list */
   void insertFieldConfig(int index, FieldConfig fc) {
-    if (fc.isEnabled())
-      enabledFields.add(index,fc);
     allFields.add(index,fc); // ??
+    if (fc.isEnabled())
+      reconstructEnabledFieldList();//enabledFields.add(index,fc);
+    // make space for new field
+    phenoConfigBean.insertNewField(index);
+    // set bean for that field
+    phenoConfigBean.setFieldArray(index,fc.getFieldBean());
   }
   
   public String getConfigName() {	return configName;  }
@@ -823,101 +944,4 @@ public class Config {
 //   /** How many minutes between checks for new ontologies */
 //   public int getOntologyCheckMinutes() { return newOntologyCheckMinutes; }
 //   private class DataAdapterConfig {
-
-//     /** construct from Dataadapter xml bean */
-//     private DataAdapterConfig(Dataadapter xmlBean) {
-//       String name = da.getName();
-//       addDataAdapterFromString(name);
-//     }
-
-//     boolean enabled=true; // enabled by default
-//     // new -> class name, old -> phenoxml|phenosyntax|nexus 
-//     String configString;
-//     // will be null if enabled = false
-//     DataAdapterI dataAdapter;
-
-//     // do some other way? DataAdapterManager has mapping? DataAdapter has mapping?
-//     // DataAdapterManager.getAdapter(name)???
-//     // just do class string see tracker issue 1649004
-//     private void addDataAdapterFromString(String daString) {
-      
-//       // new way of doing things is class name itself - so 1st try introspect...
-//       try {
-//         Class c = Class.forName(daString);
-//         Object o = c.newInstance();
-//         if ( ! (o instanceof DataAdapterI))
-//           throw new Exception("class not instance of DataAdapterI");
-//         DataAdapterI da = (DataAdapterI)o;
-//         addDataAdapter(da);
-//       }
-//       catch (Exception e) { 
-        
-//         // backward compatibility - have merger replace these with class names eventually
-//         if (daString.equalsIgnoreCase("phenoxml"))
-//           addDataAdapter(new PhenoXmlAdapter());
-//         else if (daString.equalsIgnoreCase("phenosyntax"))
-//           addDataAdapter(new PhenoSyntaxFileAdapter());
-//         else if (daString.equalsIgnoreCase("flybase")) // pase??
-//           addDataAdapter(new FlybaseDataAdapter()); // for now...
-//         else if (daString.equalsIgnoreCase("nexus"))
-//           addDataAdapter(new NEXUSAdapter());
-//         // LOG not set up yet???
-//         else
-//           System.out.println("Data adapter not recognized "+daString);
-//       }
-//     }
-//   }
-
-//}
-
-//     String name = field.getName(); //toString();
-//     // has to be a valid value - no longer true for generic free types
-//     FieldConfig fc;
-//     try { // phase this out!!
-//       CharFieldEnum cfe = CharFieldEnum.getCharFieldEnum(name);
-//       //if (cfe == null) ???
-//       fc = new FieldConfig(cfe,name);
-//     }
-//     catch (Exception e) { // no char field enum for name - new generic!
-//       fc = new FieldConfig(name);
-//     }
-
-//     if (field.getSyntaxAbbrev() != null) {
-//       fc.setSyntaxAbbrev(field.getSyntaxAbbrev());
-//     }
-    
-//     // POST COMP, relationship ontol
-//     if (field.getPostcomp() != null) {
-//       fc.setIsPostComp(true);
-//       String relFile = field.getPostcomp().getRelationshipOntology();
-//       fc.setPostCompRelOntCfg(OntologyConfig.makeRelCfg(relFile));
-//     }
-
-
-//     // ONTOLOGIES if only one ontology file is an attribute... (convenience)
-//     if (field.getFile() != null) {
-//       fc.addOntologyConfig(new OntologyConfig(field));
-//     }
-//     // otherwise its multiple ontologies listed in ontology elements (entity)
-//     else {
-//       Ontology[] ontologies = field.getOntologyArray();
-//       for (Ontology o : ontologies) {
-//         fc.addOntologyConfig(new OntologyConfig(o));
-//       }
-//     }
-
-//   private OntologyConfig makeOntologyConfig(String name, String file) {
-//     OntologyConfig oc = new OntologyConfig(name,file);
-//     return oc;
-//   }
-
-
-//       // CHECK FOR ONTOLOGIES
-//       CheckForNewOntologies cfno = pc.getCheckForNewOntologies();
-//       if (cfno != null) { // ?
-//         checkForNewOntologies = true;
-//         BigInteger bi = cfno.getIntervalMinutes();
-//         if (bi != null)
-//           newOntologyCheckMinutes = bi.intValue();
-//       }
 

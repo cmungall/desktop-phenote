@@ -181,7 +181,7 @@ class CharacterTableModel extends AbstractTableModel {
       but for now just sort data itself? dont yet have separate view objects to
       sort */
   void setSortKey(int col) {
-    CharField cf = cfg().getCharField(col);
+    CharField cf = cfg().getEnbldCharField(col);
     characterList.sortBy(cf); // ???
     fireTableDataChanged();
   }

@@ -6,6 +6,8 @@ import java.io.File;
 import phenote.datamodel.CharacterListI;
 
 
+/** I think this should be renamed FileAdapterI, except i dont know how the integrated
+    adpaters are going to pan out - ie birn - we'll see */
 public interface DataAdapterI {
 
   // it is weird that these have different return values, but load() should go away in the near future

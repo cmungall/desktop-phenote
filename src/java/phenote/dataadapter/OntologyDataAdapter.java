@@ -113,7 +113,7 @@ public class OntologyDataAdapter {
 
   private void initOntolsSeparateOboSessions() {
     // getFieldConfigList gives enabled fields - not disabled
-    for (FieldConfig fieldConfig : cfg().getFieldConfigList()) {
+    for (FieldConfig fieldConfig : cfg().getEnbldFieldCfgs()) {
       if (!fieldConfig.isEnabled()) continue; // not necasary actually
       CharField cf = new CharField(fieldConfig.getLabel());
       fieldConfig.setCharField(cf);
@@ -167,7 +167,7 @@ public class OntologyDataAdapter {
   private OBOSession loadAllOboFilesIntoOneOboSession() throws OntologyException {
     // get unique list of obo files
     Collection<String> files = new ArrayList<String>();
-    for (FieldConfig fieldConfig : cfg().getFieldConfigList()) {
+    for (FieldConfig fieldConfig : cfg().getEnbldFieldCfgs()) {
       for (OntologyConfig oc : fieldConfig.getOntologyConfigList()) {
         try {
           String file = findOboUrlString(oc); // throws oex if not found
@@ -187,7 +187,7 @@ public class OntologyDataAdapter {
   // should Config actually set OntologyManager up with char fields - maybe this shouldnt
   // be ont data adapters responsibility - its just the 1st time that we need it
   private void initCharFields() {
-    for (FieldConfig fieldConfig : cfg().getFieldConfigList()) {
+    for (FieldConfig fieldConfig : cfg().getEnbldFieldCfgs()) {
       CharField cf = fieldConfig.getCharField(); // creates char field (if not there)
       ontologyManager.addField(cf);
     }
@@ -196,7 +196,7 @@ public class OntologyDataAdapter {
   /** This actually creates both CharFields and Ontologies and maps namespaces from
       obo file adapter meta data */
   private void mapNamespacesToOntologies(OBOSession oboSession) throws OntologyException {
-    for (FieldConfig fieldConfig : cfg().getFieldConfigList()) {
+    for (FieldConfig fieldConfig : cfg().getEnbldFieldCfgs()) {
       CharField cf = fieldConfig.getCharField(); // creates char field (if not there)
       // ontology manager.addCF???
       if (fieldConfig.hasOntologies()) {
@@ -207,9 +207,9 @@ public class OntologyDataAdapter {
             throw new OntologyException("No namespace/meta data for ontologies");
           // i think we need url it was loaded with
           if (!oc.hasLoadUrl()) {
-            LOG.error("Failed to find obo for "+oc.name+" can not load");
+            LOG.error("Failed to find obo for "+oc.getName()+" can not load");
             // in case log not set up right - need to work on that
-            System.out.println("Failed to find obo for "+oc.name+" can not load");
+            System.out.println("Failed to find obo for "+oc.getName()+" can not load");
             continue;
           }
           String urlString = oc.getLoadUrl().toString();
@@ -234,7 +234,7 @@ public class OntologyDataAdapter {
   /** Load up/cache Sets for all ontologies used, anatomyOntologyTermSet
    * and patoOntologyTermSet -- move to dataadapter/OntologyDataAdapter... */
   private Ontology initOntology(OntologyConfig ontCfg) throws OntologyException {
-    Ontology ontology = new Ontology(ontCfg.name); // new Ontology(ontCfg)?
+    Ontology ontology = new Ontology(ontCfg.getName()); // new Ontology(ontCfg)?
     if (ontCfg.hasFilter()) // set filter before loading obo session
       ontology.setFilter(ontCfg.getFilter());
     if (ontCfg.hasSlim())
@@ -289,7 +289,7 @@ public class OntologyDataAdapter {
         // if out of synch copies repos to local(.phenote/obo-files)
         // url may be jar/obo-files or svn/obo-files but this function will put file
         // in cache ~/.phenote/obo-files
-        url = synchWithRepositoryUrl(url,reposUrl,ontCfg.name,filename);
+        url = synchWithRepositoryUrl(url,reposUrl,ontCfg.getName(),filename);
       } catch (/*MalfURL & Ontol*/Exception e) { LOG.error(e); }
     }
  

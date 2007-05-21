@@ -5,7 +5,6 @@
       <xs:sequence>
         <xs:element ref="x:master-to-local-config"/>
         <xs:element ref="x:log"/>
-        <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:queryable-dataadapter"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:dataadapter"/>
         <xs:element ref="x:uvic-graph"/>
         <xs:element ref="x:term-history"/>
@@ -27,19 +26,10 @@
       <xs:attribute name="overriding-master-url" use="required" type="xs:string"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="queryable-dataadapter">
-    <xs:complexType>
-      <xs:attribute name="name" use="required" type="xs:string">
-        <xs:annotation>
-          <xs:documentation>actual class name, eg phenote.dataadapter.worm.WormAdapter</xs:documentation>
-        </xs:annotation>
-      </xs:attribute>
-      <xs:attribute name="enable" use="required" type="xs:boolean"/>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="dataadapter">
     <xs:complexType>
       <xs:attribute name="name" use="required" type="xs:string"/>
+      <xs:attribute name="is-queryable" use="required" type="xs:boolean"/>
       <xs:attribute name="enable" use="required" type="xs:boolean"/>
     </xs:complexType>
   </xs:element>
@@ -65,7 +55,7 @@
   </xs:element>
   <xs:element name="update-timer">
     <xs:complexType>
-      <xs:attribute name="timer" use="required" type="xs:integer"/>
+      <xs:attribute name="timer" use="required" type="xs:int"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="obo-repository">
@@ -115,7 +105,11 @@
         </xs:annotation>
       </xs:attribute>
       <xs:attribute name="namespace" use="required" type="xs:string"/>
-      <xs:attribute name="filter-out" use="required" type="xs:string"/>
+      <xs:attribute name="filter-out" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>filter out replaced by namespace, pase'</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
       <xs:attribute name="slim" use="required" type="xs:string"/>
       <xs:attribute name="repos-subdir" use="required" type="xs:string"/>
       <xs:attribute name="is-postcomp-rel" use="required" type="xs:boolean"/>

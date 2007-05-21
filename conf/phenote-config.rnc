@@ -10,7 +10,6 @@ start =
     attribute author { xsd:string },
     master-to-local-config,
     log,
-    queryable-dataadapter*,
     dataadapter*,
     uvic-graph,
     term-history,
@@ -30,12 +29,6 @@ master-to-local-config = element master-to-local-config {
   attribute overriding-master-url { xsd:string }
 }
 
-queryable-dataadapter = element queryable-dataadapter {
-  ## actual class name, eg phenote.dataadapter.worm.WormAdapter
-  attribute name { xsd:string },
-  attribute enable { xsd:boolean }
-} 
-
 
 ## rename/add file-dataadapter - keep dataadapter for backward compatibility?
 dataadapter =
@@ -45,6 +38,7 @@ dataadapter =
     ##attribute name {"phenoxml" | "phenosyntax" | "nexus"}
     ## actual class name phenote.dataadapter.phenoxml.PhenoXmlAdapter
     attribute name { xsd:string },
+    attribute is-queryable { xsd:boolean },
     attribute enable { xsd:boolean }
   }
 
@@ -61,7 +55,7 @@ term-history = element term-history { attribute enable { xsd:boolean } }
 
 auto-update-ontologies = element auto-update-ontologies { attribute enable { xsd:boolean } }
 
-update-timer = element update-timer { attribute timer {xsd:integer} }
+update-timer = element update-timer { attribute timer {xsd:int} }
 
 obo-repository = element obo-repository { attribute url-dir {xsd:string} }
 
@@ -93,6 +87,7 @@ ontology =
     ## obo file for ontology
     attribute file { xsd:string },
     attribute namespace { xsd:string },
+    ## filter out replaced by namespace, pase'
     attribute filter-out { xsd:string },
     attribute slim { xsd:string },
     attribute repos-subdir {xsd:string},

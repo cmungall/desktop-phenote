@@ -37,8 +37,6 @@ public class FieldPanel extends JPanel {
   private SearchParamPanel searchParamPanel; // searchParamManager?
   private OntologyManager ontologyManager = OntologyManager.inst();
   private JPanel fieldPanel;
-  //private JComponent fieldPanel;
-  //private SearchParamsI searchParams;
   private JTabbedPane jTabbedPane;
 
   /** eventually configurable (with default 12) - for now hardwire at 12 */
@@ -66,7 +64,6 @@ public class FieldPanel extends JPanel {
     // width of ontology labels effects x
     this.setPreferredSize(new Dimension(650,350));//690,490));
     //this.setMinimumSize(new Dimension(700,490));//690,490));
-    //this.setPreferredSize(new Dimension(2000,750)); //irrel in boxLayout
     //this.setMaximumSize(new Dimension(2000,750));
     BoxLayout bl = new BoxLayout(this,BoxLayout.X_AXIS); // grid bag?
     this.setLayout(bl);
@@ -207,221 +204,14 @@ public class FieldPanel extends JPanel {
   public AbstractAutoCompList getQualityComboBox() {
     return getComboBox("Quality");
   }
+
+}
+
 //   boolean hasLumpComboBox() {
 //     //return lumpField.isCombo();
 //     return getLumpComboBox() != null;
 //   }
 //   AbstractAutoCompList getLumpComboBox() {
 //     return getComboBox(CharFieldEnum.LUMP);
-//   }
-
-}
-
-
-// GARBAGE - DELETE
-//   /** from selection in plump table - hmmm mvc - get from model change event - 
-//    should ACB listen for event and change themselves? - oh wait this is for selection
-//    not editing - no editing in table silly - should do selection event/listener */
-//   void setFieldsFromCharacter(CharacterI character) {
-//     for (CharFieldGui fieldGui : charFieldGuiList) 
-//       fieldGui.setValueFromChar(character);
-//   }
-
-//   // for testing - move to test?
-//   private AbstractAutoCompList getComboBox(CharFieldEnum cfe) {
-//     for (CharFieldGui cfg : charFieldGuiList)
-//       if (cfg.getCharFieldEnum() == cfe)
-//         return cfg.getCompList();
-//     return null;
-//   }
-
-    // load up terms for term completion
-    /// Ontology.init(); // hmmmm.... now initializes with get - thread!
-    //return entityField.getAutoComboBox();
-// dont think we need this at least for sandbox, if we do jut iter fields
-//   void clear() { 
-//     lumpField.setText("");
-//     entityField.setText("");
-//     qualityField.setText("");
-//   }
-
-  // phase out direct connection for event/listener - obo edit stuff?
-  //private CharacterTablePanel characterTablePanel;
-
-//     characterTablePanel.setSelectedEntityTerm(entityTerm);
-//   private boolean isEntity(String ontology) {
-//     return ontology.equals(ANATOMY); // || GO...
-//   }
-//   private boolean isQuality(String ontology) {
-//     return ontology.equals(QUALITY);
-//   }
-
-//   // this should be made generic to use beyond just genotype? yes yes yes
-//   // and put in CharFieldGui...
-//   private class GenotypeDocumentListener implements DocumentListener {
-//     public void changedUpdate(DocumentEvent e) { updateInstanceTable(); }
-//     public void insertUpdate(DocumentEvent e) { updateInstanceTable(); }
-//     public void removeUpdate(DocumentEvent e) { updateInstanceTable(); }
-//     private void updateInstanceTable() {
-//       // on delete last pheno row clearing of text will trigger this
-//       if (!characterTablePanel.hasRows())
-//         return;
-//       String genotype = lumpField.getText();
-//       characterTablePanel.setSelectedGenotype(genotype);
-//     }
-//   }
-//   // used by ComboBoxActionListener to set table panel - rename this
-//   // do this with event? yes event/listener... yes yes yes
-//   void setEntityTableColumn(String entityTerm) {
-//       //entityField.setText(entityTerm);
-//     characterTablePanel.setSelectedEntityTerm(entityTerm);
-//   }
-
-//   // change -> mvc
-//   void setQualityTableColumn(String qualityTerm) {
-//     // characterTablePanel.setSelectedColumn(ontEnum,term)???
-//     characterTablePanel.setSelectedQualityTerm(qualityTerm);
-//   }
-
-//   /** rename - this sets term in table not field - hardwires from ontology
-//       to methods in table - have mapping enum to table column in table? 
-//       this aint right - use MVC - edit character model & send out modelChanged event 
-//       need model changed manager, listener event...  REFACTOR!!!*/
-//   private void setTableColumn(String ontology, String term) {
-//     if (isEntity(ontology))
-//       setEntityTableColumn(term);
-//     else if (isQuality(ontology))
-//       setQualityTableColumn(term);
-//     else if (ontology.equals(TAXONOMY))
-//       characterTablePanel.setSelectedGenotype(term);
-//     //...
-//   // used by ComboBoxActionListener to set table panel - rename this
-//   // do this with event? yes event/listener... yes yes yes
-//   void setEntityTableColumn(String entityTerm) {
-//       //entityField.setText(entityTerm);
-//     characterTablePanel.setSelectedEntityTerm(entityTerm);
-//   }
-
-//   // change -> mvc
-//   void setQualityTableColumn(String qualityTerm) {
-//     // characterTablePanel.setSelectedColumn(ontEnum,term)???
-//     characterTablePanel.setSelectedQualityTerm(qualityTerm);
-//   }
-
-//   /** rename - this sets term in table not field - hardwires from ontology
-//       to methods in table - have mapping enum to table column in table? 
-//       this aint right - use MVC - edit character model & send out modelChanged event 
-//       need model changed manager, listener event...  REFACTOR!!!*/
-//   private void setTableColumn(String ontology, String term) {
-//     if (isEntity(ontology))
-//       setEntityTableColumn(term);
-//     else if (isQuality(ontology))
-//       setQualityTableColumn(term);
-//     else if (ontology.equals(TAXONOMY))
-//       characterTablePanel.setSelectedGenotype(term);
-//     //...
-//   }
-//   }
-//   private void addGeneticContextField(JPanel parent) {
-//     if (!ontologyManager.hasGeneticContext())
-//       return; // for now assume genetic context has to have ontology/combo
-//     //Ontology gco = ontologyManager.getGeneticContextOntology();
-//     //geneticContextField = new CharFieldGui(gco,parent);
-//     // eventually will just loop through CharFields
-//     CharField cf = ontologyManager.getGeneticContextCharField();
-//     geneticContextField = new CharFieldGui(cf,parent);
-//   }
-
-//   private void addField(FieldConfig fieldConfig, JComponent parent) {
-//     //List<Ontology> ol = ontologyManager.getOntologyList(charFieldEnum);
-//   }
-  //private void addField(FieldOntology fo, JComponent parent) {
-  // List<Ontology> ol = fo.getOntologyList();
-  // String label = fo.getLabel();
-  // new CharFieldGui(fo,parent);??  }
-//   private void addLumpField(JPanel parent) {
-//     if (ontologyManager.haveLumpOntology()) {
-//       //Ontology lumpOntology = getLumpOntology();
-//       Ontology lumpOntology = ontologyManager.getLumpOntology();
-//       lumpField = new CharFieldGui(lumpOntology,parent);
-//     }
-//     else {
-//       //lumpField = addField("Genotype",parent,true); 
-//       lumpField = new CharFieldGui("Genotype",parent);
-//       GenotypeDocumentListener gdl = new GenotypeDocumentListener();
-//       lumpField.addDocumentListener(gdl);
-//     }
-//   }
-
-//   private boolean haveLumpOntology() {
-//     return ontologyManager.haveLumpOntology();
-//   }
-
-//   private Ontology getLumpOntology() {
-//     //return new Ontology(TAXONOMY,"BTO.obo");
-//     return ontologyManager.getLumpOntology();
-//   }
-
-//   /** hardwired for now - eventually come generically from configuration... */
-//   private Ontology getAnatomyOntology() {
-//     // this causes parsing of obo file - background thread?
-//     return ontologyManager.getEntityOntology();
-//   }
-
-//   private Ontology getQualityOntology() {
-//     //return new Ontology("Quality","attribute_and_value.obo");
-//     return ontologyManager.getQualityOntology();
-//   }
-
-//     lumpField.setText(instance.getGenotype());
-//     entityField.setText(instance.getEntity());
-//     qualityField.setText(instance.getQuality()); ????????
-//     addLumpField(fieldPanel);
-//     addGeneticContextField(fieldPanel); // if configured...
-//     entityField = new CharFieldGui(getAnatomyOntology(),fieldPanel);
-//     //qualityField = new CharFieldGui(getQualityOntology(),fieldPanel);
-//     qualityField = new CharFieldGui(,fieldPanel);
-    // for (FieldConfig fieldConfig : config.getFieldConfigList() )
-    // addField(fieldConfig,fieldPanel); but field configs dont have ontologies...
-    // would then have to do something like ontMan.getOntology(fc.getFieldEnum)
-    // for (FieldOntology fieldOntology : ontologyManager.getFieldOntologyList())
-    // addField(fieldOntology,fieldPanel);
-//   final static String ANATOMY = "Anatomy";
-//   final static String QUALITY = "Quality";
-//   final static String TAXONOMY = "Taxonomy";
-
-
-//   private CharFieldGui lumpField;
-//   private CharFieldGui entityField;
-//   private CharFieldGui qualityField; 
-//   private CharFieldGui geneticContextField;
-//   private String getInput(String ontology) {
-//     if (isEntity(ontology))
-//       return entityField.getText();
-//     if (isQuality(ontology))
-//       return qualityField.getText();
-//     return ""; // error?
-//   }
-  // take out editable - always editable
-//   private JTextField addField(String labelString,JPanel parent,boolean editable) {
-    
-//     addLabel(labelString,parent);
-//     JTextField textField = new JTextField(25);
-//     // parameterize - eventually allow edit for new ont terms
-//     textField.setEditable(editable); 
-//     GridBagConstraints gbc = makeFieldConstraint();
-//     parent.add(textField,gbc);
-    
-//     return textField;
-//   }
-
-//   private AutoComboBox addComboBox(Ontology ontology, Container parent) {
-//     addLabel(ontology.getName(),parent);
-//     AutoComboBox comboBox = new AutoComboBox(ontology);
-//     comboBox.setSearchParams(getSearchParamPanel().getSearchParams());
-//     // refactor... mvc - ACB talk directly to pheno model?
-//     comboBox.addActionListener(new ComboBoxActionListener(ontology.getName(),comboBox));
-//     parent.add(comboBox,makeFieldConstraint());
-//     return comboBox;
 //   }
 

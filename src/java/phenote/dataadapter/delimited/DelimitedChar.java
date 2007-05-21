@@ -164,7 +164,7 @@ public class DelimitedChar {
 		while (found) {
 		  String value = items[colCount];
 		  addDelValToChar(fieldCount,value);
-		  CharField c = Config.inst().getCharField(fieldCount);
+		  CharField c = Config.inst().getEnbldCharField(fieldCount);
 //		  System.out.println("col="+colCount+";  fieldCount="+fieldCount+"; val="+value+"; charfieldname ="+c.getName());
 	      if (isOntology(c)) {
 	        colCount++; //skip over the Name, only keep ID

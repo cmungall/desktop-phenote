@@ -15,39 +15,45 @@ public class FieldConfig {
 
   //private CharFieldEnum charFieldEnum; // phase out
   private CharField charField;
-  private String label;
+  //private String label;
   private String desc;
   // Entity field can have multiple ontologies
   private List<OntologyConfig> ontologyConfigList;
   //private boolean isPostComp;
   //private OntologyConfig postCompRelOntCfg;
-  private String syntaxAbbrev;
-  private boolean enabled = true; // default if not specified is true
+  //private String syntaxAbbrev;
+  //private boolean enabled = true; // default if not specified is true
   private Config config;
+  private Field fieldBean;
 
+
+  // from gui config
+  // public FieldConfig(Config cfg) ?? { 
+  // fieldBean = cfg.getPhenCfgBean().addNewField()
 
   /** construct from xml bean field - READ */
   FieldConfig(Field fieldBean,Config cfg) {
     this.config = cfg;
-    this.label = fieldBean.getName();
+    this.fieldBean = fieldBean; // test for null - even possible?
+    //this.label = fieldBean.getName();
     this.desc = fieldBean.getDesc();
 //   try{//phase this out!charFieldEnum = CharFieldEnum.getCharFieldEnum(label);}
 //     catch (Exception e) {} // no char field enum for name - new generic!
     //fc = new FieldConfig(name);
     
-    if (fieldBean.xgetEnable() != null)
-      enabled = fieldBean.getEnable();
+//     if (fieldBean.xgetEnable() != null)
+//       enabled = fieldBean.getEnable();
 
-    if (fieldBean.getTab() != null) {
+    if (fieldBean.getTab() != null) { //todo...
     }
 
-    if (fieldBean.getSyntaxAbbrev() != null) {
-      setSyntaxAbbrev(fieldBean.getSyntaxAbbrev());
-    }
+//     if (fieldBean.getSyntaxAbbrev() != null) {
+//       setSyntaxAbbrev(fieldBean.getSyntaxAbbrev());
+//     }
     
     // POST COMP, relationship ontol - OLD WAY - PHASING OUT - now in ont arr below
     if (fieldBean.getPostcomp() != null) {
-      //setIsPostComp(true); - set in OC read by ODA
+      //setIsPostComp(true); - set in OC read by ODAe
       String relFile = fieldBean.getPostcomp().getRelationshipOntology();
       OntologyConfig rel = OntologyConfig.makePostCompRelCfg(relFile,this);
       //setPostCompRelOntCfg(rel); dont need anymore - set in OC
@@ -64,17 +70,24 @@ public class FieldConfig {
     else {
       Ontology[] ontologies = fieldBean.getOntologyArray();
       for (Ontology ontBean : ontologies) {
-        addOntologyConfig(new OntologyConfig(ontBean,getLabel(),this)); // label -> default name
+        addOntologyConfig(new OntologyConfig(ontBean,this)); // label -> default name
       }
     }
   }
 
   Config getConfig() { return config; }
 
+  /** return xml bean for field -always non null */
+  Field getFieldBean() { return fieldBean; } 
+
   // --> getName?
-  public String getLabel() { return label; }
+  public String getLabel() { return fieldBean.getName(); } //return label; }
+  boolean hasLabel(String label) { return label.equals(getLabel()); } 
+  // public void setLabel(String label) { fieldBean.setName(label); } // ??
+
+  //public String getLabel() { return label; }
   public String getDesc() { return desc; }
-  boolean hasLabel(String label) { return label.equals(this.label); } 
+  // boolean hasLabel(String label) { return label.equals(this.label); } 
   boolean hasDesc(String desc) { return desc.equals(this.desc); }
 
   //private void setOntologyFile(String f){getOntologyConfig().setOntologyFile(f);}
@@ -93,9 +106,15 @@ public class FieldConfig {
 //   }
 
   void addOntologyConfig(OntologyConfig o) {
-    if (o == null)
-      return;
+    if (o == null)  return;
     getOntologyConfigList().add(o);
+  }
+  void insertOntologyConfig(int index,OntologyConfig o) {
+    // hmmm funny parallel data structures hmm
+    // hafta make space in array for new bean
+    getFieldBean().insertNewOntology(index);
+    getFieldBean().setOntologyArray(index,o.getOntologyBean());
+    getOntologyConfigList().add(index,o);
   }
 
   boolean hasOntConfig(OntologyConfig oc) {
@@ -121,22 +140,27 @@ public class FieldConfig {
     return ontologyConfigList;
   }
 
+  int getOntCfgIndex(OntologyConfig oc) {
+    return ontologyConfigList.indexOf(oc);
+  }
+
 
   void setSyntaxAbbrev(String syn) {
-    this.syntaxAbbrev = syn;
+    //this.syntaxAbbrev = syn;
+    fieldBean.setSyntaxAbbrev(syn);
   }
   /** gets from label if no syntax abbrev explicitly set, replaces spaces with underscores
       as pheno syntax is sensitive to spaces (in theory at least) */
   String getSyntaxAbbrev() {
-    String s =  (syntaxAbbrev == null) ? getLabel() : syntaxAbbrev;
+    String s = fieldBean.getSyntaxAbbrev();
+    if (s == null) s = getLabel(); // setSynAbb?
     s = s.replace(' ','_');
     return s;
   }
   //void String getSyntaxAbbrev() { return syntaxAbbrev; }
   /** Test both syntaxAbbrev & label - also test for replacing spaces with underscores */
   boolean hasSyntaxAbbrev(String abb) {
-    if (equalsWithSpaceUnderscore(abb,syntaxAbbrev)) return true;
-    return equalsWithSpaceUnderscore(abb,label);
+    return equalsWithSpaceUnderscore(abb,getSyntaxAbbrev());
   }
 
   /** returns true if strings equal or if strings equal after replacing space with
@@ -148,7 +172,17 @@ public class FieldConfig {
     return abbrev.equalsIgnoreCase(underForSpace);
   }
 
-  public  boolean isEnabled() { return enabled; }
+  public  boolean isEnabled() {
+    //return enabled;
+    if (fieldBean.xgetEnable() == null)
+      fieldBean.setEnable(true); // default true
+    return fieldBean.getEnable();
+  }
+
+  public void setEnabled(boolean e) {
+    fieldBean.setEnable(e);
+  }
+
 
   public void setCharField(CharField cf) { charField = cf; }
 
@@ -161,39 +195,27 @@ public class FieldConfig {
   }
   boolean hasCharField(CharField cf) { return charField == cf; }
 
-  /** create xml bean and add it to phenCfg for writeback */
-  void write(PhenoteConfiguration phenCfg) {
-    Field f = phenCfg.addNewField();
-    f.setName(getLabel());
-    f.setSyntaxAbbrev(getSyntaxAbbrev());
-    f.setEnable(isEnabled());
-    // f.setType(getType()); // do we need this - no - maybe in future?
-    // new way is to just write out with other ontol configs - delete this
-//     if (isPostComp()) getPostCompRelOntCfg().writePostComp(f);
-    // everything else is in ontology config
-    // change here - writing out ontology element even for single ontology - phasing
-    // out shoving ontology in field attribs
-    // this also will have post comp rel - new way
-    for (OntologyConfig oc : getOntologyConfigList())
-      oc.writeOntology(f);
-  }
 
   void mergeWithOldConfig(Config oldConfig,Config thisCfg) { // should FC know its Cfg?
     // ADD - 1st see if field is new - if so add it and done
-    if (!oldConfig.hasFieldConfig(this)) {
+    if (!oldConfig.hasFieldCfgAll(this)) {
       // cant just add - need to add in proper place! insert!
       //oldConfig.addFieldConfig(this);
-      int index = thisCfg.getEnabledFieldIndex(this);
+      int index = thisCfg.getAllFieldIndex(this); // enabled??? disabled?
+      System.out.println("index merge "+index+" fc "+this);
       oldConfig.insertFieldConfig(index,this);
       return;
     }
 
     // UPDATE - its not new - need to check contents
-    FieldConfig oldFieldConfig = oldConfig.getFieldConfig(getLabel());
+    FieldConfig oldFieldConfig = oldConfig.getAllFieldCfg(getLabel());
     // replace syntax abbrev or fill in if blank?? - it is a change in version so replace?
     // yea if syn has changed that prob means its a cng in format
-    if (syntaxAbbrev != null)
-      oldFieldConfig.syntaxAbbrev = syntaxAbbrev;
+    //if (syntaxAbbrev != null)
+    // only do if in bean, not getSA which grabs label if bean is null
+    if (fieldBean.getSyntaxAbbrev() != null)
+      oldFieldConfig.setSyntaxAbbrev(fieldBean.getSyntaxAbbrev());
+    oldFieldConfig.setEnabled(isEnabled()); // ??? mode?
     // ONTOLOGIES
     for (OntologyConfig newOC : getOntologyConfigList()) {
       newOC.mergeWithOldConfig(oldFieldConfig);
@@ -202,39 +224,20 @@ public class FieldConfig {
 
 }
 
-//   FieldConfig(CharFieldEnum c, String label) {
-//     charFieldEnum = c;
-//     this.label = label;
-//   }
-
-  /** No char field enum - its a generic not in hard wired datamodel! */
-//   FieldConfig(String label) {
-//     this.label = label;
-//     //isGeneric = true;
-//   }
-  /** with generic fields these are going to become pase' */
-  //public CharFieldEnum getCharFieldEnum() { return charFieldEnum; }
-  //public boolean hasCharFieldEnum() { return charFieldEnum != null; }
-  // POST COMP config... 
-//   void setIsPostComp(boolean isPostComp) {
-//     this.isPostComp = isPostComp;
-//   }
-//   public boolean isPostComp() {
-//     return isPostComp;
-//   }
-//   void setPostCompRelOntCfg(OntologyConfig oc) {
-//     setIsPostComp(true);
-//     postCompRelOntCfg = oc;
-//   }
-
-//   /** If isPostComp() return relationship ontology filename */
-//   public OntologyConfig getPostCompRelOntCfg() {
-//     return postCompRelOntCfg;
-//   }
-
-//   FieldConfig(CharFieldEnum c,OntologyConfig o) {
-//     charFieldEnum = c;
-//     if (o == null) return; // shouldnt happen
-//     label = o.getName();
-//     addOntologyConfig(o);
+  // this should come for free with new bean datamodel
+  /** create xml bean and add it to phenCfg for writeback */
+//   void write(PhenoteConfiguration phenCfg) {
+//     Field f = phenCfg.addNewField();
+//     f.setName(getLabel());
+//     f.setSyntaxAbbrev(getSyntaxAbbrev());
+//     f.setEnable(isEnabled());
+//     // f.setType(getType()); // do we need this - no - maybe in future?
+//     // new way is to just write out with other ontol configs - delete this
+// //     if (isPostComp()) getPostCompRelOntCfg().writePostComp(f);
+//     // everything else is in ontology config
+//     // change here - writing out ontology element even for single ontology - phasing
+//     // out shoving ontology in field attribs
+//     // this also will have post comp rel - new way
+//     for (OntologyConfig oc : getOntologyConfigList())
+//       oc.writeOntology(f);
 //   }
