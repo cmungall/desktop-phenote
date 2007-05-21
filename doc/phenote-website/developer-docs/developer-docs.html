@@ -2,9 +2,13 @@
 <html>
 <head>
 
+
+  
   
   <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
 
+
+  
   
   <title>Developer docs</title>
 </head>
@@ -12,9 +16,12 @@
 
 <body>
 
+
 <h3><span style="text-decoration: underline;">Editing the model</span></h3>
 
+
 So a phenote.edit.CharChangeEvent has a phenote.edit.TransactionI. <br>
+
 
 so when a gui component like CharFieldGui wants to edit the model&nbsp;
 it calls a method on the EditManager. For instance, for updating
@@ -28,67 +35,125 @@ CharChangeEvent out to CharChangeListeners notifying them that the
 model has been changed, and adds the transaction to its list of
 transactions (for undo).<br>
 
+
 A phenote.edit.TransactionI knows how to edit and undo its edit to the datamodel.<br>
+
 <br>
+
 <h3><span style="text-decoration: underline;">Adding new configuration params</span></h3>
+
 Phenote configuration is done with a xml file, that xml file is read
 &amp; written with apaches xml beans. Xml beans code generates java
 classes from an xsd file. <br>
+
 <br>
+
 1) Add your new config item to the config/phenote-config.rnc file. An
 rnc file is (i think) a handier way of specifying xml schemas. The best
 thing to do there is to look how other elements are configured and just
 copy &amp; tweek.<br>
+
 <br>
+
 2) trang the rnc file into an xsd file. <br>
+
 2a) To do this you first need to download the trang jar file see:
 http://www.thaiopensource.com/relaxng/trang.html and its download dir
 http://www.thaiopensource.com/download/ where you can download a zip
 file like <a href="http://www.thaiopensource.com/download/trang-20030619.zip">trang-20030619.zip<span style="text-decoration: underline;"> </span></a><br>
+
 and unzip which should give you the jar - and put that jar whereever you like.<br>
+
 <span style="font-family: monospace;"></span>2b) cd to conf directory and run trang with rnc as input and xsd as output like so and this will recreate the xsd:<br>
+
 java -jar /path/to/trang/trang.jar phenote-config.rnc phenote-config.xsd<br>
+
 You can check the xsd to see if it has the element that you added in the rnc if you like.<br>
+
 <br>
+
 3) generate xmlbeans from xsd. <br>
+
 3a) You need to download scomp, and jsr-api.jar and xbean.jar jar files from apache xml beans<br>
+
 see http://xmlbeans.apache.org/ and its download dir http://www.apache.org/dyn/closer.cgi/xmlbeans<br>
+
 current tgz or zip - and unzip and/or untar it. The relevant bits are bin/scomp and the jsrwithnumbers.jar and xbean.jar <br>
+
 make sure to change the permissions on scomp so its executable.<br>
+
 3b) Before we run scomp we need to set envrionment vars something like so (for unix/linux at least):<br>
+
 <pre class="code">export XMLBEANS_HOME=/home/me/xmlbeans-2.1.0<br>export PATH=$PATH:$XMLBEANS_HOME/bin<br>export CLASSPATH=$XMLBEANS_HOME/lib/xbean.jar:$XMLBEANS_HOME/lib/jsr173_1.0_api.jar:$CLASSPATH</pre>
 
+
 3c) Then run scomp using the above jars and the xsd file to create jars/phenote (all on one line):<br>
+
 <br>
+
 scomp -out&nbsp;/path/to/phenote/jars/phenoteconfigbeans.jar /home/mgibson/p/conf/phenote-config.xsd<br>
+
 <br>
+
 Now you should have a phenoteconfigbeans.jar file. With this jar we can now write java config code.<br>
+
 <br>
+
 4) Modify java config files. Go to the file src/java/phenote/config/Config.java.<br>
+
 <br>
+
 a) First put in the appropriate import statement from the xmlbean jar, something like<br>
-import phenote.config.xml.UvicGraphDocument.UvicGraph;<br>
+import phenote.config.xml.TermHistoryDocument.TermHistory;<br>
 <br>
-b) The simple case is just adding a top level config boolean option - like enabling Uvic graphics - so ill go with that. <br>
-- add a boolean var to Config. <br>
-- modify the &nbsp;parseXmlUrl(URL configUrl) method with something like:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; UvicGraph gr = pc.getUvicGraph();<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (gr != null)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; uvicGraphEnabled = gr.getEnable();<br>
-<br>
+
+b) The simple case is just adding a top level config boolean option - like enabling term history - so ill go with that. <br>
+- the new parameter would automatically be read into an xml bean -
+write a private getter for the new bean value like so (putting in
+default value if null)<br>
+&nbsp; private TermHistory getHistoryBean() {<br>
+&nbsp;&nbsp;&nbsp; TermHistory history = phenoConfigBean.getTermHistory();<br>
+&nbsp;&nbsp;&nbsp; if (history == null) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; history = phenoConfigBean.addNewTermHistory();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; history.setEnable(false); // default false<br>
+&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp; return history;<br>
+&nbsp; }<br>
+&nbsp;<br>
 - add a public getter method like:<br>
-&nbsp; public boolean uvicGraphIsEnabled() { return uvicGraphEnabled; }<br>
+&nbsp; public boolean termHistoryIsEnabled() { <br>
+&nbsp;&nbsp;&nbsp; return getHistoryBean().getEnable();<br>
+&nbsp; }<br>
+<br>
+- setters are used by merge code and will be used in future by gui config:<br>
+&nbsp; public void setTermHistory(boolean setter) { <br>
+&nbsp;&nbsp;&nbsp; getHistoryBean().setEnable(setter);<br>
+&nbsp; }<br>
+<br>
+
 - you need to deal with config upgrades to make sure youre new param
 gets merged into old configs without wiping out a user previous config
 settings (the default and -u option run by webstart)<br>
+if you dont want the master/template config file to alter the value of
+a users local config then nothing needs to be done here. but if you do
+then...<br>
+
 so in this method:<br>
+<br>
+
 void mergeNewWithOld(URL newConfig,File oldDotConfFile)<br>
+<br>
 where you need to add something like<br>
-&nbsp; oldCfg.uvicGraphEnabled = newCfg.uvicGraphEnabled; <br>
+<br>
+&nbsp;&nbsp;&nbsp; oldCfg.setAutoUpdate(newCfg.autoUpdateIsEnabled());<br>
+<br>
+
 notice this just wipes out the new with the old - you may actually want
 to ask the user if they want this to happen (with a popup box or
-something)<br>
+something) - this example is for auto update.<br>
+
 <br>
+
  
 </body>
 </html>
