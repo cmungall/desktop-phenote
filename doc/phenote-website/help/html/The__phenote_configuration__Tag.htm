@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="GENERATOR" content="Solutionsoft HelpBreeze JavaHelp Edition">
+<title>XML skeleton</title>
+<link rel="stylesheet" type="text/css" href="../javahelp.css">
+</head>
+<body bgcolor="#ffffff">
+<h1>The &lt;phenote-configuration&gt; Tag</h1>
+<p>            
+          
+            
+     The &lt;phenote-configuration&gt; tag ...</p>
+<p>            
+          
+            
+        &nbsp;</p>
+<h2>            
+          
+            
+        Parameters</h2>
+<h1>
+<table bordercolor="#000000" cellpadding="5" width="100%" align="center" border="1">
+  
+  <tr>
+    <td align="middle"><strong>Name</strong></td>
+    <td align="middle"><strong>Description</strong></td>
+    <td align="middle"><strong>Legal Values</strong></td>
+    <td align="middle"><strong>Required</strong></td>
+    <td align="middle"><strong>Default</strong></td></tr>
+  <tr>
+    <td>
+      <p align="left"><font face="Courier">name</font></p></td>
+    <td>
+      <p>This is a short descriptive name given to the 
+      Configuration to be displayed in the "chooser" window.&nbsp; This does not have to be the same as the 
+      filename.&nbsp; In the case that it is unspecified, the filename will be 
+      displayed instead.</p></td>
+    <td><em>any text value</em></td>
+    <td align="middle">no</td>
+    <td>&nbsp;</td></tr>
+  <tr>
+    <td>
+      <p align="left"><font face="Courier">xmlns</font></p></td>
+    <td>
+      <p>This line is required for use by phenote software.&nbsp; Please include 
+      as specified:</p></td>
+    <td align="left"><font face="Courier">"phenote/config/xml"</font></td>
+    <td align="middle">yes</td>
+    <td></td></tr>
+  <tr>
+    <td>
+      <p align="left"><font face="Courier">author</font></p></td>
+    <td>
+      <p>The name of the author of the configuration file.&nbsp; It might be 
+      nice to include an email address incase if there are questions.</p></td>
+    <td align="left"><em>any text value</em></td>
+    <td align="middle">no</td>
+    <td></td></tr>
+  <tr>
+    <td>
+      <p align="left"><font face="Courier">version</font></p></td>
+    <td>A version number for the configuration.&nbsp; This should indicate 
+      which version of phenote it is compatible with, and something about the 
+      revision history itself.&nbsp; Keep the format:&nbsp; 1.3.1 (first two 
+      numbers indicate phenote version, last number is the revision number for 
+      the configuration)</td>
+    <td align="left"><em>any text value</em></td>
+    <td align="middle">yes</td>
+    <td></td></tr>
+  <tr>
+    <td>
+      <p align="left"><font face="Courier">description</font></p></td>
+    <td>This is a general description about the purpose of the 
+      configuration.&nbsp; The author might list the general target community, 
+      the overall use of the data, a repository where the data might be stored, 
+      or other important information.</td>
+    <td align="left"><em>any text value</em></td>
+    <td align="middle">no</td>
+    <td></td></tr></table>
+<h2>&nbsp;</h2>
+<h2>Contents</h2></h1>
+<p>            
+            
+       All other tags should be included within 
+the &lt;phenote-configuration&gt; tag, including:</p>
+<ul>
+  <li>
+<div>            
+            
+              
+   data-adapters</div>
+  <li>
+<div>            
+            
+              
+ fields (and ontologies)</div>
+  <li>
+<div>            
+            
+            settings such 
+as update-timer, auto-update-ontologies, etc.</div></li></ul>
+<h1><font color="#000000" size="3"></font>&nbsp;</h1>
+<h2>Example</h2><pre><pre>&lt;ns:phenote-configuration version="1.3.1" xmlns:ns="phenote/config/xml"&gt;<br>&nbsp;</pre><pre>&lt;!--Enter your configuration options here --&gt;</pre><pre><br>&lt;/ns:phenote-configuration&gt;</pre></pre>
+<p></p></body></html>

@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="GENERATOR" content="Solutionsoft HelpBreeze JavaHelp Edition">
+<title>Writing a Data Adapter</title>
+<link rel="stylesheet" type="text/css" href="../javahelp.css">
+</head>
+<body bgcolor="#ffffff">
+<h1>Writing a Data Adapter</h1>
+
+<p>First off if you've just downloaded phenote from sourceforge obo svn, the (latest) source is located in <font face="Courier">phenote/trunk/src/java</font>. The most important subdirectories under <font face="Courier">src/java</font> for creating a data adapter are: </p>
+<ul>
+  <li><font face="Courier">phenote/dataadapter</font>&nbsp; -and- 
+  <li><font face="Courier">phenote/datamodel</font>. </li>
+</ul>
+<p>
+   For a good example of a data adapter, check out <font face="Courier"> phenote.dataadapter.phenosyntax.PhenoSyntaxFileAdapter</font> 
+</p>
+<h2>Types of Data Adapters</h2>
+<p>There are two types of Data Adapters used in Phenote.&nbsp; The first is a 
+<strong>File Data Adapter</strong> which is in charge of loading and saving the 
+annotations created in a Phenote session.&nbsp; The second is a 
+<strong>Queryable Data Adapter</strong> which is in charge of loading/writing 
+annotations to databases over a network.</p>
+<h3>File Data Adapter</h3>
+<p>The interface that a phenote file data adapter implements is <font 
+face="Courier">phenote.dataadapter.DataAdapterI</font> (although this will be 
+renamed <font face="Courier">FileDataAdapterI</font> in the future), and here is what it 
+looks like:</p><pre>
+
+<br>public interface DataAdapterI {
+<br>&nbsp; public void load();
+<br>&nbsp; public CharacterListI load(File f);
+<br>&nbsp; public void commit(CharacterListI charList);&nbsp;
+<br>&nbsp; public void commit(CharacterListI charList, File f);
+<br>&nbsp; /** Set value to use for loading or writeback, for a file adapter this would be
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the file name */
+<br>&nbsp; public void setAdapterValue(String adapterValue);
+<br>&nbsp; public List&lt;String&gt; getExtensions();<br>&nbsp; public String getDescription();<br>} </pre>
+
+<p>
+The most important methods 
+are load and commit. &nbsp;<font face="Courier">load()/load(File)</font> will be 
+called by phenote to load up a <font 
+face="Courier">phenote.datamodel.CharacterListI</font> (see below)</p>
+<br>
+<h3>Queryable Data Adapter</h3>
+<p>The other kind of data adapter is the queryable data adapter. Typically
+this is a data adapter hooked into a database. Here is the&nbsp;<font 
+face="Courier">phenote.dataadapter.QueryableDataadapterI</font> interface:<br></p>
+<pre>
+public interface QueryableDataAdapterI {
+<br>&nbsp; /** return true if data adapter can query for the char field */
+<br>&nbsp; public boolean isFieldQueryable(String field);
+<br>&nbsp; /** Throws exception if query fails, and no data to return */
+<br>&nbsp; public CharacterListI query(String field, String query) throws DataAdapterEx;
+<br>}
+</pre>
+<p>
+<font face="Courier">isFieldQueryable</font> returns true for strings of fields 
+that are queryable through this adapter. The paradigm here is that the user 
+queries the adapter with a field name and value. For instance you can query the 
+pub field with pub id value MED:1234, and ideally the adapter would return a 
+<font face="Courier">CharacterList</font>       
+                                           of all the characters (phenotypic statements) associated with that publication in the connected database. Another common example is querying by genotype or allele, where given a particular genotype, the adapter will return all the phenotypic statements annotated to that genotype.</p>
+<p align="center"><IMG hspace=0 src="../images/QueryField.png" border=0></p>
+
+<p>The Phenote GUI actually queries the <font face="Courier">QueryableDataAdapter</font>       and for every field that is queryable it puts a "Retrieve" button next to the field.  A user will then fill in that field (e.g. MED:1234 in pub field) in the <i>Data Entry</i> 
+panel and hit the retrieve button. The&nbsp;GUI will then call the 
+QueryableDataAdapter's query method with the name of the field ("Pub") and the 
+query string ("Med:1234"). The <font face="Courier">QueryableDataAdapterI</font> 
+should then return a<font face="Courier"> CharacterList </font>using this query, 
+which will then be loaded into Phenote and typically presented to the user in 
+the <i>Annotation Spreadsheet</i>.</p>
+
+<h2>Reading in data</h2>
+<p>A <font face="Courier">CharacterListI</font> is just a list of <font face="Courier">phenote.datamodel.Characters</font>. A <font 
+face="Courier">Character</font> is basically a phenotypic statement (relating an Entity-Quality phenotype to a genotype, publication, etc.). So basically what a data adapter needs to produce is a list of characters. </p>
+
+<p>A <font face="Courier">Character</font> is just a set of tag-value fields, where 
+the tag is the name of a field (Entity, Quality, Genotype...), and value is the 
+value of the field. The actual names of the fields come from the phenote 
+configuration (see the section on <A 
+href="What_is_a_Configuration_.htm">Customizing Phenote</a> for more information). In other words, the phenote datamodel is proscribed by its configuration file. This means that a data adapter needs to be able to either:</p>
+<ul>
+  <li>read and write any tag-values that come at it, 
+  <li>a dataadapter only handles a certain subset of a 
+  configuration, or 
+  <li>a configuration is in tune with a data adapter.</li></ul>
+<p>                                                
+If the set of fields in a configuration are completely different than the set of fields that a data adapter is expecting, then the data adapter won't be able to get/load the data it expects. Therefore, in addition to making a data adapter, you need to make sure a configuration fits with it, or make a new configuration.</p>
+<p>
+To set a field in a character, use:</p>
+<p>
+<font face="Courier">setValue(CharField cf, String valueString)</font> which throws a <font face="Courier">phenote.datamodel.TermNotFoundException </font> if the <font face="Courier">valueString</font> is not found in the ontologies associated with the CharField(via configuration) where <font face="Courier">phenote.datamodel.CharField</font> is an object that represents a field in a character. To get a char field you can call <font face="Courier">getCharFieldForName(String fieldName)</font> which throws a
+<font face="Courier">phenote.datamodel.CharFieldException</font> if you give it a string that is not from the configuration. Ok even better I just combined this into
+one convenience method:</p>
+
+<pre>setValue(String fieldString, String valueString) throws TermNotFoundException, CharFieldException.</pre>
+
+<p>For fields with ontologies (with term completion) the <font face="Courier">valueString</font> has to be the id for the term (not the term name)</p>
+
+So thats basically it for making characters. Some code might look like this:<br>
+
+<pre>
+try {
+<br>&nbsp;&nbsp;&nbsp; Character c = new Character();
+<br>&nbsp;&nbsp;&nbsp; c.setValue("Entity","GO:123");
+<br>&nbsp;&nbsp;&nbsp; c.setValue("Quality","PATO:345");
+<br>&nbsp;&nbsp;&nbsp; c.setValue("Genotype","somegenotypehere");
+<br>&nbsp;&nbsp;&nbsp; ....
+<br>} 
+<br>catch (CharFieldException e) {...} // may want to do this per field - error msg?
+<br>catch (TermNotFoundException e) {...} // perhaps per field - error message?
+</pre>
+
+<p>and for <font face="Courier">CharacterLists</font> just add the characters made above to it:</p>
+
+<pre>
+CharacterList cl = new CharacterList();
+<br>cl.add(character1);
+<br>cl.add(character2);
+<br>...
+<br>
+</pre>
+
+<h2>Writing out data</h2>
+<p>
+The CharacterList is passed into the commit method. Iterate through the list of <font face="Courier">CharacterI</font>'s. To get at a Character's field data, just call
+<font face="Courier">character.getValueString(String fieldString)</font>. This throws a
+<font face="Courier">CharFieldException</font> if the <font face="Courier">fieldString</font> doesn't match a field in your configuration. This returns a String which is the value of that field, in the case of fields with ontologies this is a term id (GO:1234). If you would like more info than just the term id from an ontology field, you can call <font face="Courier">getTerm(String fieldName)</font>. This returns an
+<font face="Courier">org.geneontology.oboedit.datamodel.OBOClass</font> from the OBO-Edit datamodel (I may eventually wrap this in a phenote object - not sure).</p>
+
+<p>You can also query the <font face="Courier">OntologyManager</font> for all existing character fields with <font face="Courier">OntologyManager.inst().getCharFieldList()</font> which returns a <font face="Courier">List&lt;CharField&gt;</font>. You can then query whether the <font face="Courier">Character</font> has a value for a char field with <font face="Courier">character.hasValue(CharField)</font>, and can retrieve a <font face="Courier">phenote.datamodel.CharFieldValue</font> from the character with
+<font face="Courier">getValue(CharField)</font>. You can then call <font face="Courier">charFieldValue.getName()</font> to get the free text string or the id of the field. You can also query if its a term with <font face="Courier">charFieldValue.isTerm()</font> and if so get its OBOClass with
+<font face="Courier">getTerm()</font>.</p>
+<br>
+
+<p>And that's about it. As you can see, there's several ways of getting at Phenote data. Here's what some code may look like:</p>
+<pre>
+<br>&nbsp;&nbsp;&nbsp; for (CharacterI ch : characterList.getList()) {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; try {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String genotype = ch.getValueString("Genotype");
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OBOClass entityTerm = ch.getTerm("Entity");
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OBOClass valueTerm = ch.getTerm("Value");
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // write this data out to data source...
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } catch (CharFieldException ex) { 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...error processing... 
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+</pre>
+<p>This implies that Genotype, Entity, and Value are all in a configuration file, and if not an  exception will be thrown.</p>
+
+</body>
+</html>

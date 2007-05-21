@@ -40,7 +40,7 @@
      <tocitem text="Sample Annotations" target="Sample_Annotations"/>
 </tocitem>
 <tocitem text="Information for Developers">
-     <tocitem text="Writing a Data Adapter"/>
+     <tocitem text="Writing a Data Adapter" target="Writing_a_Data_Adapter"/>
      <tocitem text="Connecting to a Database" target="Connecting_to_a_Database"/>
      <tocitem text="Adding configurability" target="Adding_configurability"/>
 </tocitem>
@@ -54,7 +54,10 @@
      <tocitem text="Sample Configuration 1" target="Sample_Configuration_1"/>
      <tocitem text="Sample Configuration 2" target="Sample_Configuration_2"/>
      <tocitem text="XML skeleton" target="XML_skeleton"/>
+     <tocitem text="The &lt;phenote-configuration&gt; Tag" target="The__phenote_configuration__Tag"/>
+     <tocitem text="The &lt;tab&gt; Tag" target="The__tab__Tag"/>
      <tocitem text="The &lt;dataadapter&gt; Tag" target="The__dataadapter__Tag116"/>
+     <tocitem text="The &lt;master-to-local-config&gt; Tag" target="The__master_to_local_config__Tag"/>
      <tocitem text="The &lt;field&gt; Tag" target="The__field__Tag"/>
      <tocitem text="The &lt;ontology&gt; Tag" target="The__ontology__Tag"/>
      <tocitem text="The &lt;auto-update-ontologies&gt; Tag" target="The__auto_update_ontologies__Tag115"/>

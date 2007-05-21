@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" CONTENT="Solutionsoft HelpBreeze JavaHelp Edition">
+<TITLE>The <master-to-local-config> Tag</TITLE>
+<LINK REL="stylesheet" TYPE="text/css" HREF=../javahelp.css>
+</HEAD>
+<BODY BGCOLOR=#ffffff>
+<H1>The 
+&lt;master-to-local-config&gt; <master-to-local-config> Tag</H1>
+<H2>Parameters</H2>
+<H1>
+<TABLE borderColor=#000000 cellPadding=5 width="100%" align=center border=1>
+  
+  <TR>
+    <TD align=middle><STRONG>Name</STRONG></TD>
+    <TD align=middle><STRONG>Description</STRONG></TD>
+    <TD align=middle><STRONG><STRONG></STRONG>Legal Values</STRONG></TD>
+    <TD align=middle><STRONG>Required</STRONG></TD>
+    <TD align=middle><STRONG>Default</STRONG></TD></TR>
+  <TR>
+    <TD>
+      <P><FONT face=Courier>mode</FONT></P></TD>
+    <TD>
+      <P>This designates how to merge files together.</P></TD>
+    <TD>
+      <UL>
+        <LI>
+        <DIV align=left><FONT size=2>UPDATE</FONT></DIV>
+        <LI>
+        <DIV align=left><FONT size=2>WIPEOUT</FONT></DIV></LI></UL></TD>
+    <TD align=middle>no</TD>
+    <TD><FONT size=2>&nbsp;UPDATE</FONT></TD></TR>
+  <TR>
+    <TD><FONT face=Courier>when</FONT></TD>
+    <TD>
+      <P>When and how a configuration merger will take place.&nbsp; </P></TD>
+    <TD align=left>
+      <UL>
+        <LI>
+        <DIV align=left><FONT size=2>ON_VERSION_ CHANGE</FONT></DIV>
+        <LI>
+        <DIV align=left><FONT size=2>ALWAYS</FONT></DIV></LI></UL></TD>
+    <TD align=middle>no</TD>
+    <TD><FONT size=2>ON_VERSION_ 
+      CHANGE</FONT></TD></TR>
+  <TR>
+    <TD><FONT face=Courier>overriding-master-url</FONT></TD>
+    <TD>
+      <P>The config file located at this&nbsp;URL will override the config file 
+      of the same name in webstart jar (or svn/app conf).&nbsp; If the URL 
+      points to the phenote&nbsp;svn checkout for the config, it means one can 
+      just commit updates to a config to subversion and it will become the new 
+      template/master</P></TD>
+    <TD align=left><EM>any valid URL</EM></TD>
+    <TD align=middle>no</TD>
+    <TD></TD></TR></TABLE>
+<H2>&nbsp;</H2>
+<H2>Contents</H2></H1>
+<P>All other tags should be included within the &lt;phenote-configuration&gt; 
+tag, including:</P>
+<UL>
+  <LI>
+  <DIV>data-adapters</DIV>
+  <LI>
+  <DIV>fields (and ontologies)</DIV>
+  <LI>
+  <DIV>settings such as update-timer, auto-update-ontologies, etc.</DIV></LI></UL>
+<H1><FONT color=#000000 size=3></FONT>&nbsp;</H1>
+<H2>Example</H2><PRE>&nbsp; &lt;ns:master-to-local-config mode="UPDATE" when="ON_VERSION_CHANGE" <BR>&nbsp;&nbsp;&nbsp;&nbsp; overriding-master-url="<A href="http://obo.svn.sourceforge.net/viewvc/*checkout*/obo/phenote/trunk/conf/ncbo.cfg">http://obo.svn.sourceforge.net/viewvc/*checkout*/obo/phenote/trunk/conf/ncbo.cfg</A>" /&gt;<BR></PRE>
+</BODY>
+</HTML>

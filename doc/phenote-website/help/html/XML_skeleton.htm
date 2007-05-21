@@ -7,10 +7,17 @@
 </head>
 <body bgcolor="#ffffff">
 <h1>XML skeleton</h1>
-<P>The text displayed below is the skeleton of the XML file.&nbsp; The lines are 
-absolutely necessary for a configuration to work properly.&nbsp; </P>
-<P>&nbsp;</P>
-<P>You will typically enter your custom options where it says "enter your 
-configuration options here".</P>
+<P>The text displayed below is the skeleton of the XML 
+file.&nbsp; The lines are absolutely necessary for a configuration to work 
+properly.&nbsp; You must include the xml header (<FONT 
+face=Courier>&lt;?xml</FONT>... ), the <FONT 
+face=Courier>&lt;phenote-configuration&gt;</FONT> tag, and the <FONT 
+face=Courier>&lt;log&gt;</FONT>              
+       tag. </P>
+<P>              
+       &nbsp; </P>
+<P>You will enter your custom options where it says "<FONT 
+face=Courier size=2>enter your configuration options here</FONT>            
+  ".</P>
 <P>&nbsp;</P>
 <H2>Contents of the XML file</H2><pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br>&lt;ns:phenote-configuration version="1.3.1" xmlns:ns="phenote/config/xml"&gt;<br>&nbsp; &lt;ns:log config-file="conf/log4j-standalone.xml"/&gt;</pre><pre>&nbsp;</pre><PRE>&lt;!--Enter your configuration options here --&gt;</PRE><PRE><br>&lt;/ns:phenote-configuration&gt;</PRE><PRE>&nbsp;</PRE></body></html>

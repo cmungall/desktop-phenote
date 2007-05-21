@@ -17,7 +17,7 @@
      <tocitem text="Running Phenote for the First Time" target="Running_Phenote_for_the_First_Time"/>
      <tocitem text="Exiting Phenote" target="Exiting_Phenote"/>
 </tocitem>
-<tocitem text="The Phenote Interface">
+<tocitem text="The Phenote Interface" target="The_Phenote_Interface">
      <tocitem text="Menu Bars" target="Menu_Bars"/>
      <tocitem text="Data Entry" target="Data_Entry"/>
      <tocitem text="Term Info" target="Term_Info"/>
@@ -54,7 +54,10 @@
      <tocitem text="Sample Configuration 1" target="Sample_Configuration_1"/>
      <tocitem text="Sample Configuration 2" target="Sample_Configuration_2"/>
      <tocitem text="XML skeleton" target="XML_skeleton"/>
+     <tocitem text="The &lt;phenote-configuration&gt; Tag" target="The__phenote_configuration__Tag"/>
+     <tocitem text="The &lt;tab&gt; Tag" target="The__tab__Tag"/>
      <tocitem text="The &lt;dataadapter&gt; Tag" target="The__dataadapter__Tag116"/>
+     <tocitem text="The &lt;master-to-local-config&gt; Tag" target="The__master_to_local_config__Tag"/>
      <tocitem text="The &lt;field&gt; Tag" target="The__field__Tag"/>
      <tocitem text="The &lt;ontology&gt; Tag" target="The__ontology__Tag"/>
      <tocitem text="The &lt;auto-update-ontologies&gt; Tag" target="The__auto_update_ontologies__Tag115"/>
