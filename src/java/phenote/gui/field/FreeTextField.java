@@ -105,7 +105,8 @@ class FreeTextField extends CharFieldGui {
   
   protected void setGuiForMultiSelect() {
     setUpdateGuiOnly(true);//updateGuiOnly = true;
-    setText("*"); 
+    setText("*"); // this sets gui text changed to true, but probably shouldnt
+    // guiTextHasChanged = false; // ???
     setUpdateGuiOnly(false);//updateGuiOnly = false;
   }
 
@@ -182,7 +183,12 @@ class FreeTextField extends CharFieldGui {
     public void changedUpdate(DocumentEvent e) { setGuiChanged(); }
     public void insertUpdate(DocumentEvent e) { setGuiChanged(); }
     public void removeUpdate(DocumentEvent e) { setGuiChanged(); }
-    private void setGuiChanged() { guiTextHasChanged = true; }
+    private void setGuiChanged() { 
+      // only note text change if not updating just gui?, * for multi select
+      // fixes bug for * multi select editing model
+      if (!updateGuiOnly())
+        guiTextHasChanged = true;
+    }
   }
 
   private Logger log;

@@ -315,6 +315,8 @@ public class CharacterTablePanel extends JPanel {
    notifies selectionManager of new char selection */
   private class CharacterSelectionListener implements ListSelectionListener {
     public void valueChanged(ListSelectionEvent e) {
+      // selection sends out many spurious events, the only one we want is non-adjust
+      if (e.getValueIsAdjusting()) return;
       if (ignoreSelectionChange) return; // for bulk delete error out of synch
       if (!hasSelection()) // this can happen with a delete row
         return;
