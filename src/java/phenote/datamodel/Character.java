@@ -10,7 +10,7 @@ import org.geneontology.oboedit.datamodel.OBOClass;
     was called a Phenotype which was a misnomer 
     Should the Character datamodel be a generic hash of CharField-CharFieldValues?
     That can be free text or from ontologies? */
-public class Character implements CharacterI, Cloneable {
+public class Character implements CharacterI {
 
   private HashMap<CharField,CharFieldValue> charFieldToValue =
     new HashMap<CharField,CharFieldValue>();
@@ -27,6 +27,7 @@ public class Character implements CharacterI, Cloneable {
 
   /** for generic fields its just a map from char field to char field value */
   public void setValue(CharField cf, CharFieldValue cfv) {
+    cfv.setCharacter(this);
     charFieldToValue.put(cf,cfv);
     //System.out.println("Char setVal "+cf+" val "+cfv);
     // setOboEditModel(oboEditAnnotation,cf,cfv);
@@ -196,12 +197,19 @@ public class Character implements CharacterI, Cloneable {
   }
 
   public CharacterI cloneCharacter() {
-    try {
-      // do OBOClasses clone? do we need to clone them?
-      Character clone = (Character)clone();
-      clone.charFieldToValue = (HashMap<CharField,CharFieldValue>)charFieldToValue.clone();
-      return clone;
-    } catch (CloneNotSupportedException e) { return null; }
+    //try {
+    // do OBOClasses clone? do we need to clone them? dont think so - immutable
+    Character charClone = new Character(); //(Character)clone();
+    // WRONG - will use same charFieldVal which points to old char!!
+//    clone.charFieldToValue =(HashMap<CharField,CharFieldValue>)charFieldToValue.clone();
+    // clone.setCharFieldValuesCharacterToSelf(); ???
+    for (CharFieldValue v : charFieldToValue.values()) {
+      CharFieldValue cfvClone = v.cloneCharFieldValue();
+      // cfvClone.setCharacter(charClone); done by setValue
+      charClone.setValue(cfvClone.getCharField(),cfvClone);
+    }
+    return charClone;
+      //} catch (CloneNotSupportedException e) { return null; }
   }
 
   // used by character table panel

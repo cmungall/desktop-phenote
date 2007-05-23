@@ -11,7 +11,7 @@ import org.geneontology.oboedit.datamodel.OBOClass;
     should this be merged with CharField? im forgetting the rationale for having it be
     separate??? oh wait CharField is the generic field, CharFieldValue is an actual
     instance of data within the CharField - linked via CharFieldEnum & Character*/
-public class CharFieldValue {
+public class CharFieldValue implements Cloneable {
 
   private OBOClass oboClassValue=null;
   private String stringValue=null;
@@ -56,6 +56,11 @@ public class CharFieldValue {
     charField = cf;
   }
 
+  CharFieldValue cloneCharFieldValue() {
+    try { return (CharFieldValue)clone(); }
+    catch (CloneNotSupportedException x) { return null; }
+  }
+
   // hmmmmm.... needed if post comp done inframe
 //   public CharFieldValue(OBOClass o,CharacterI c,CharFieldEnum e, boolean isDifferentia) {
 //     this(o,c,e);
@@ -68,6 +73,8 @@ public class CharFieldValue {
     else
       return new CharFieldValue((String)null,c,cf); // ""?
   }
+
+  void setCharacter(CharacterI c) { character = c; }
 
   boolean isEmpty() {
     if (isOboClass)
