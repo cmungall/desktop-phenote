@@ -146,13 +146,29 @@ public class OntologyManager {
     
     // from obo edit!
     try {
-      // for now... yikes!
-      System.out.println("OntMan getting postcomp for "+id+" OS "+os);
+      // System.out.println("OntMan getting postcomp for "+id+" OS "+os);
+      // obo session now has all ontologies!
       return PostcompUtil.createPostcompObject(os,id);
     }
     catch (ParseException e) {
-      String m = "Invalid post comp expression "+id+" "+e.getMessage();
-      System.out.println(m);
+
+      // ok this is hacky but pre1.2 phenote used relationship names instead of ids
+      // eg located_in instead of OBO_REL:located_in, so before we throw our hands up
+      // we should try slipping in an OBO_REL: and see if that works
+      if (!id.contains("^OBO_REL:")) {
+        log().error("Post comp failed for "+id+" gonna try inserting ^OBO_REL:");
+        String oboRelId = id.replace("^","^OBO_REL:");
+        try {
+          OBOClass o = PostcompUtil.createPostcompObject(os,oboRelId);
+          // no exception - it worked!
+          log().error("inserting OBO_REL: worked - please update your datafile");
+          return o;
+        }
+        catch (ParseException x) { log().error("Inserting ^OBO_REL: didnt work"); }
+      }
+
+      String m = "\nInvalid post comp expression "+id+" "+e.getMessage();
+      log().error(m);
       throw new TermNotFoundException(m);
     }
   }

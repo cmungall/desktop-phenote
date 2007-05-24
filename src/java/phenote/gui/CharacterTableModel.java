@@ -63,7 +63,7 @@ class CharacterTableModel extends AbstractTableModel {
   }
 
   public int getColumnCount() {
-    return cfg().getNumberOfFields();
+    return cfg().getEnbldFieldsNum();
   }
 
   public int getRowCount() {

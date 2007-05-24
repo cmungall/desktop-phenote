@@ -612,7 +612,7 @@ public class Config {
     return phenoConfigBean.getLog().getConfigFile();
   }
 
-  public int getNumberOfFields() {
+  public int getEnbldFieldsNum() {
     return getEnbldFieldCfgs().size();
   }
 
@@ -624,12 +624,19 @@ public class Config {
 //   public CharFieldEnum getCharFieldEnum(int index) {
 //     return getFieldConfig(index).getCharFieldEnum();
 //   }
+
+  public boolean hasEnbldCharField(int index) {
+    return getEnbldCharField(index) != null;
+  }
+
   public CharField getEnbldCharField(int index) {
+    if (index >= getEnbldFieldsNum()) return null;
     return getEnbldFieldCfg(index).getCharField();
   }
 
   /** needed for getFieldLabel for table */
   private FieldConfig getEnbldFieldCfg(int index) {
+    if (index >= getEnbldFieldsNum()) return null;
     return getEnbldFieldCfgs().get(index);
   }
 
@@ -689,17 +696,17 @@ public class Config {
     return fields;
   }
 
-  public List<CharField> getCharFieldsForDelimited(int colNum) throws ConfigException {
-	    // cache in hash??
-	    List<CharField> fields = new ArrayList<CharField>(2);
-	    for (FieldConfig fc : getEnbldFieldCfgs()) {
-	    	fields.add(getEnbldCharField(colNum));
-	        //return fc.getCharField();
-	    }
-	    if (fields.isEmpty())
-	      throw new ConfigException("No Field configured");
-	    return fields;
-	  }
+//   public List<CharField> getCharFieldsForDelimited(int colNum) throws ConfigException {
+//     // cache in hash??
+//     List<CharField> fields = new ArrayList<CharField>(2);
+//     for (FieldConfig fc : getEnbldFieldCfgs()) {
+//       fields.add(getEnbldCharField(colNum));
+//       //return fc.getCharField();
+//     }
+//     if (fields.isEmpty())
+//       throw new ConfigException("No Field configured");
+//     return fields;
+//   }
   
   public String getLabelForCharField(CharField cf) throws ConfigException {
 	    for (FieldConfig fc : getEnbldFieldCfgs()) {

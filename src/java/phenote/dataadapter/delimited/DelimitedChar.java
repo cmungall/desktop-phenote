@@ -196,28 +196,26 @@ public class DelimitedChar {
       return;  //don't need to populate a CharField if no value
     }    
     OntologyManager om = OntologyManager.inst();
-    try {
-      // there can be more than one field for a fieldNum??? - MG
-      List<CharField> fields = Config.inst().getCharFieldsForDelimited(fieldNum);//Ex
-      //      List<CharField> fields = Config.inst().getCharFieldsForSyntaxAbbrev(tag);//Ex
-
-      for (CharField cf : fields) {
-    	try {
-    	    //System.out.println("column="+fieldNum+"; value = "+value);
-          // set String -> for obo class automatically find term
-          //this assumes that you are loading data the same order you saved it
-          character.setValue(cf,value); // throws TermNotFoundEx
-    	return; // if no ex thrown were done
-        }
-        catch (TermNotFoundException e) {} // do nothing - try next char field
-      }
+    //try { // there can be more than one field for a fieldNum??? - MG
+    //List<CharField> fields = Config.inst().getCharFieldsForDelimited(fieldNum);//Ex
+    if (!Config.inst().hasEnbldCharField(fieldNum)) {
+      log().error("No Field configged for column # "+fieldNum);
+      return;
     }
-    catch (ConfigException e) { log().error(e.getMessage()); } // field not found
-    //catch (TermNotFoundException e) {
-    System.out.println("Error1: term not found ("+value+")");
-    //log().error(e.getMessage());
-    log().error("Error2: Term not found ("+value+")"); // list char field?
-    //}      
+    CharField cf = Config.inst().getEnbldCharField(fieldNum);
+    //List<CharField> fields=Config.inst().getCharFieldsForSyntaxAbbrev(tag);//Ex
+    //for (CharField cf : fields) {
+    try {
+      //System.out.println("column="+fieldNum+"; value = "+value);
+      // set String -> for obo class automatically find term
+      //this assumes that you are loading data the same order you saved it
+      character.setValue(cf,value); // throws TermNotFoundEx
+      return; // if no ex thrown were done
+    }
+    catch (TermNotFoundException e) {
+      System.out.println("Error1: term not found ("+value+") "+e.getMessage());
+      log().error("Error2: Term not found ("+value+") "+e.getMessage());
+    } 
   }
 
   CharacterI getCharacter() { return character; }
