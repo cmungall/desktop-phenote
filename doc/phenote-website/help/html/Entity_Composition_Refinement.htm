@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta name="GENERATOR" content="Solutionsoft HelpBreeze JavaHelp Edition">
+<title>Entity Composition/Refinement</title>
+<link rel="stylesheet" type="text/css" href="../javahelp.css">
+</head>
+<body bgcolor="#ffffff">
+<h1>Entity Composition/Refinement</h1>
+<p>&nbsp;</p>
+<p>Sometimes, the terms contained in the ontologies are just not specific enough 
+for your needs.&nbsp; In those cases, you might need to 'post-compose' or refine 
+a term.&nbsp; </p>
+<p>For this exercise, I will demonstrate with two example phrases to capture 
+</p>
+<ul>
+  <li>(a) projection neuron axon 
+  <li>(b)&nbsp;projection neurons of temporal mesocortex</li></ul>
+<h2>Step 1:&nbsp; Bring up the refinement window</h2>
+<p>Click the "Comp" button next to the field that you wish to create a composed 
+term.&nbsp; It will open the refinement window:</p>
+<p><IMG hspace=0 src="../images/Refine-window.png" border=0></p>
+<h2>Step 2:&nbsp; Select a term to refine.</h2>
+<p>Statement (a) can be translated into two terms:&nbsp; </p>
+<p>the <strong>axon</strong> of the <strong>projection neuron</strong></p>
+<p>however, we need to have a <em>relationship</em> betwen the two terms:</p>
+<p>the <strong>axon </strong>which is <strong><em>part of</em></strong> the 
+<strong>projection neuron</strong></p>
+<p>In the Phenote world, 
+the shorthand for this new term will look like:</p>
+<p>    
+       Axon^part_of(Projection neuron)</p>
+<p>So, begin typing the terms into the fields within the 
+window.&nbsp; This interface will act similarly to the main <em>Data Entry</em> 
+panel; as you begin typing a list of partial matches will display below the 
+field, and any terms you mouseover will be displayed in the <em>Term Info 
+</em>panel.&nbsp; You can navigate through the <em>Term Info</em> panel and use 
+terms just as you would in the main window.</p>
+<p>The refinement window would look like:</p>
+<p><IMG hspace=0 src="../images/Refine-twoterm.png" 
+border=0></p>
+<h2>Step 3:&nbsp; Add additional refinements, if 
+necessary</h2>
+<p>Statement (b) needs to be broken down into three 
+terms:</p>
+<p>the <strong>projection neurons</strong> which are 
+<strong><em>part_of</em></strong> the <strong>mesocortex </strong>which is 
+<strong><em>part_of</em></strong> the <strong>temporal part of the 
+head</strong></p>
+<p>In order to create a 3-term refinement, additional fields 
+will need to be added.&nbsp; After entering the first two terms, click the add 
+(+) button to increase the number of fields for entry.&nbsp; The resulting 
+window will look like:</p>
+<p><IMG hspace=0 src="../images/Refine-expand.png" 
+border=0></p>
+<p>Then, fill in the additional relationship(s) and terms...</p>
+<p><IMG hspace=0 src="../images/Refine-threeterm.png"  border=0></p>
+<p>You can continue to add additional refinements in this same way, if 
+necessary.</p>
+<p>         
+              
+         The Phenote shorthand 
+for this will read:</p>
+<p>         
+              
+           Projection 
+neuron^part_of(Mesocortex)^part_of(Temporal part of head)</p>
+<h2>       Step 4:&nbsp; Select OK for your new 
+term</h2>
+<p>Once you select "OK", your newly composed term will be copied back to the 
+<em>Data Entry</em> field in the main window, and to the <em>Annotation 
+Spreadsheet</em>.&nbsp; 
+These&nbsp;terms will be presented in the Phenote shorthand, and will look like:</p>
+<p><IMG hspace=0 src="../images/Refine-spreadsheet.png" border=0></p>
+<p>&nbsp;</p>
+</body>
+</html>

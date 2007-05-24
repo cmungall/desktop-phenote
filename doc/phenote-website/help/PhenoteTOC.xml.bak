@@ -37,10 +37,11 @@
      <tocitem text="Changing your Autocompletion Settings" target="Changing_your_Autocompletion_Settings"/>
      <tocitem text="Entering data into Free-Text fields" target="Entering_data_into_Free_Text_fields"/>
      <tocitem text="Entering data into Ontology Fields" target="Entering_data_into_Ontology_Fields"/>
+     <tocitem text="Entity Composition/Refinement" target="Entity_Composition_Refinement"/>
      <tocitem text="Sample Annotations" target="Sample_Annotations"/>
 </tocitem>
 <tocitem text="Information for Developers">
-     <tocitem text="Writing a Data Adapter"/>
+     <tocitem text="Writing a Data Adapter" target="Writing_a_Data_Adapter"/>
      <tocitem text="Connecting to a Database" target="Connecting_to_a_Database"/>
      <tocitem text="Adding configurability" target="Adding_configurability"/>
 </tocitem>
@@ -69,35 +70,34 @@
      <tocitem text="Basic Concepts and Vocabulary" target="Basic_Concepts_and_Vocabulary"/>
 </tocitem>
 <tocitem text="from OBOedit">
-     <tocitem text="Customizing OBO-Edit">
-          <tocitem text="The Configuration Plugin" target="The_Configuration_Plugin"/>
-          <tocitem text="Customizing the Interface">
-               <tocitem text="Working with XML Layouts" target="Working_with_XML_Layouts"/>
-               <tocitem text="Common Parameters" target="Common_Parameters"/>
-               <tocitem text="The &lt;glue&gt; Tag" target="The_Glue_Tag"/>
-               <tocitem text="The &lt;spacer&gt; Tag" target="The_Spacer_Tag"/>
-               <tocitem text="The &lt;label&gt; Tag" target="The_Label_Tag"/>
-               <tocitem text="The &lt;box&gt; Tag" target="The_Box_Tag"/>
-               <tocitem text="The &lt;grid&gt; Tag" target="The_Grid_Tag"/>
-               <tocitem text="The &lt;panel&gt; Tag" target="The_Panel_Tag"/>
-               <tocitem text="The &lt;compactgrid&gt; Tag" target="The_Compactgrid_Tag"/>
-               <tocitem text="The &lt;divider&gt; Tag" target="The_Divider_Tag"/>
-               <tocitem text="The &lt;tabs&gt; Tag" target="The_Tabs_Tag"/>
-               <tocitem text="The &lt;window&gt; Tag" target="The_Window_Tag"/>
-               <tocitem text="The &lt;if&gt; Tag" target="The_If_Tag"/>
-               <tocitem text="The &lt;component&gt; Tag" target="The_Component_Tag"/>
-               <tocitem text="Example Layouts" target="Example_Layouts">
-                    <tocitem text="The Default Layout" target="The_Default_Layout"/>
-               </tocitem>
-          </tocitem>
-     </tocitem>
-     <tocitem text="New Topic"/>
      <tocitem text="Working with Data Adapters">
           <tocitem text="The Basic Flat File Interface" target="The_Scroller_Tag"/>
           <tocitem text="The OBO Adapter" target="The_OBO_Adapter"/>
           <tocitem text="The GO Flat File Adapter" target="The_GO_Flat_File_Adapter"/>
           <tocitem text="The Serial Adapter" target="The_Serial_Adapter"/>
           <tocitem text="Custom Data Adapters" target="Custom_Data_Adapters"/>
+     </tocitem>
+     <tocitem text="Customizing the Interface">
+          <tocitem text="Working with XML Layouts" target="Working_with_XML_Layouts"/>
+          <tocitem text="Common Parameters" target="Common_Parameters"/>
+          <tocitem text="The &lt;glue&gt; Tag" target="The_Glue_Tag"/>
+          <tocitem text="The &lt;spacer&gt; Tag" target="The_Spacer_Tag"/>
+          <tocitem text="The &lt;label&gt; Tag" target="The_Label_Tag"/>
+          <tocitem text="The &lt;box&gt; Tag" target="The_Box_Tag"/>
+          <tocitem text="The &lt;grid&gt; Tag" target="The_Grid_Tag"/>
+          <tocitem text="The &lt;panel&gt; Tag" target="The_Panel_Tag"/>
+          <tocitem text="The &lt;compactgrid&gt; Tag" target="The_Compactgrid_Tag"/>
+          <tocitem text="The &lt;divider&gt; Tag" target="The_Divider_Tag"/>
+          <tocitem text="The &lt;tabs&gt; Tag" target="The_Tabs_Tag"/>
+          <tocitem text="The &lt;window&gt; Tag" target="The_Window_Tag"/>
+          <tocitem text="The &lt;if&gt; Tag" target="The_If_Tag"/>
+          <tocitem text="The &lt;component&gt; Tag" target="The_Component_Tag"/>
+          <tocitem text="Example Layouts" target="Example_Layouts">
+               <tocitem text="The Default Layout" target="The_Default_Layout"/>
+          </tocitem>
+     </tocitem>
+     <tocitem text="Customizing OBO-Edit">
+          <tocitem text="The Configuration Plugin" target="The_Configuration_Plugin"/>
      </tocitem>
 </tocitem>
 </toc>

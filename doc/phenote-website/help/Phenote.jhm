@@ -51,6 +51,7 @@
    <mapID target="Editing_Obsoletes" url="html/Editing_Obsoletes.htm"/>
    <mapID target="Entering_data_into_Free_Text_fields" url="html/Entering_data_into_Free_Text_fields.htm"/>
    <mapID target="Entering_data_into_Ontology_Fields" url="html/Entering_data_into_Ontology_Fields.htm"/>
+   <mapID target="Entity_Composition_Refinement" url="html/Entity_Composition_Refinement.htm"/>
    <mapID target="Example_Layouts" url="html/Example_Layouts.htm"/>
    <mapID target="Example_Scripts" url="html/Example_Scripts.htm"/>
    <mapID target="Exiting_Phenote" url="html/Exiting_Phenote.htm"/>
