@@ -16,6 +16,7 @@ start =
     auto-update-ontologies,
     update-timer,
     obo-repository,
+    autocomplete-settings,
     field*
   }
 
@@ -57,6 +58,13 @@ auto-update-ontologies = element auto-update-ontologies { attribute enable { xsd
 
 update-timer = element update-timer { attribute timer {xsd:int} }
 
+autocomplete-settings = element autocomplete-settings {
+  attribute term { xsd:boolean },
+  attribute synonym { xsd:boolean },
+  attribute definition { xsd:boolean },
+  attribute obsolete { xsd:boolean }
+}
+
 obo-repository = element obo-repository { attribute url-dir {xsd:string} }
 
 field = 
@@ -64,6 +72,7 @@ field =
     attribute enable { xsd:boolean },
     ##attribute name { "Pub" | "Genotype" | "Genetic Context" | "Entity" | "Quality" },
     attribute name { xsd:string },
+    attribute colwidth { xsd:int },
     attribute desc { xsd:string },
     ## tag for field for pheno-syntax adapter
     attribute syntax-abbrev { xsd:string },

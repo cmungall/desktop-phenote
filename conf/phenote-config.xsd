@@ -11,6 +11,7 @@
         <xs:element ref="x:auto-update-ontologies"/>
         <xs:element ref="x:update-timer"/>
         <xs:element ref="x:obo-repository"/>
+        <xs:element ref="x:autocomplete-settings"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:field"/>
       </xs:sequence>
       <xs:attribute name="version" use="required" type="xs:string"/>
@@ -58,6 +59,14 @@
       <xs:attribute name="timer" use="required" type="xs:int"/>
     </xs:complexType>
   </xs:element>
+  <xs:element name="autocomplete-settings">
+    <xs:complexType>
+      <xs:attribute name="term" use="required" type="xs:boolean"/>
+      <xs:attribute name="synonym" use="required" type="xs:boolean"/>
+      <xs:attribute name="definition" use="required" type="xs:boolean"/>
+      <xs:attribute name="obsolete" use="required" type="xs:boolean"/>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="obo-repository">
     <xs:complexType>
       <xs:attribute name="url-dir" use="required" type="xs:string"/>
@@ -75,6 +84,7 @@
           <xs:documentation>attribute name { "Pub" | "Genotype" | "Genetic Context" | "Entity" | "Quality" },</xs:documentation>
         </xs:annotation>
       </xs:attribute>
+      <xs:attribute name="colwidth" use="required" type="xs:int"/>
       <xs:attribute name="desc" use="required" type="xs:string"/>
       <xs:attribute name="syntax-abbrev" use="required" type="xs:string">
         <xs:annotation>
