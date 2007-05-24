@@ -96,7 +96,8 @@ public class OntologyConfig {
   /** File can be url(repos) or filename (from cache/jar/app), if url sets 
       reposUrlString and ontologyFile with end of url */
   private void setFile(String file) {
-    if (file.startsWith("http:")) {
+    if (file.startsWith("http:") || file.startsWith("https:") ||
+    		file.startsWith("ftp:") || file.startsWith("sftp:")) {
       reposUrlString = file;
       ontologyFile = file.substring(file.lastIndexOf('/')+1);
     }
