@@ -12,6 +12,7 @@ import java.io.PrintStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.Enum;
 
 
 import org.apache.xmlbeans.XmlException;
@@ -29,12 +30,15 @@ import phenote.config.xml.TermHistoryDocument.TermHistory;
 import phenote.config.xml.AutoUpdateOntologiesDocument.AutoUpdateOntologies;
 import phenote.config.xml.UpdateTimerDocument.UpdateTimer;
 import phenote.config.xml.MasterToLocalConfigDocument.MasterToLocalConfig;
+import phenote.config.xml.AutocompleteSettingsDocument.AutocompleteSettings;
 
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.QueryableDataAdapterI;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 import phenote.util.FileUtil;
+import phenote.gui.SearchFilterType;
+import phenote.gui.SearchParams;
 
 
 public class Config {
@@ -65,6 +69,9 @@ public class Config {
   private PhenoteConfiguration phenoConfigBean; // cache the xml parse bean??
 
   private boolean configInitialized = false;
+  private boolean configModified = false; 
+  //flag for if any settings during session have changed, such as search params, col widths, etc.
+
   private final static String myphenoteFile = "my-phenote";
 
   public static Config inst() {
@@ -74,7 +81,20 @@ public class Config {
   private Config() {}
 
   public boolean isInitialized() { return configInitialized; }
+  
+  public boolean isConfigModified() { return configModified; }
+  public void setConfigModified(boolean setting) { configModified = setting; }
 
+  public void saveModifiedConfig() {
+    // this is the "species" conf file - eg ~/.phenote/conf/flybase.cfg
+  	System.out.println(configFile);
+    File localFile = new File(configFile);
+
+    new ConfigWriter().writeConfig(this,localFile);
+    
+		setConfigModified(false);  //in case if the person doesn't quit
+    return;
+  }
   /** This is setting config file with nothing to do with personal config
    this is for the servlet where config file location is set in web.xml */
   public void setConfigFile(String configFile) throws ConfigException {
@@ -599,6 +619,29 @@ public class Config {
     }
     return u;
   }
+    
+  public AutocompleteSettings getAutocompleteSettings() { 	
+ // 	boolean[] temp;
+  	AutocompleteSettings s = phenoConfigBean.getAutocompleteSettings();
+   	if (s==null) {
+   		//set defaults if not in configuration file
+   		s = phenoConfigBean.addNewAutocompleteSettings();
+   		s.setTerm(true);
+   		s.setSynonym(true);
+   		s.setDefinition(false);
+   		s.setObsolete(false);
+   	}
+   	return s;
+  }
+   	
+  public void setAutocompleteSettings() {
+  	SearchParams searchParams = SearchParams.inst();
+  	getAutocompleteSettings().setTerm(searchParams.getParam(SearchFilterType.TERM));
+  	getAutocompleteSettings().setSynonym(searchParams.getParam(SearchFilterType.SYN));
+  	getAutocompleteSettings().setDefinition(searchParams.getParam(SearchFilterType.DEF));
+  	getAutocompleteSettings().setObsolete(searchParams.getParam(SearchFilterType.OBS));
+  }
+ 
   
   public URL getLogConfigUrl() throws FileNotFoundException {
     return FileUtil.findUrl(getLogConfigFile());

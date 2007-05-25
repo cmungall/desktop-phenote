@@ -24,6 +24,7 @@ class SettingsMenu extends JMenu {
   private JMenuItem showHistory;
   public SearchParams searchParams;
   private SelectionHistory selHist = SelectionHistory.inst();
+  private Config config = Config.inst();
 
 
   SettingsMenu() {
@@ -39,10 +40,15 @@ class SettingsMenu extends JMenu {
 
     //set defaults - these are actually the same as SearchParams defaults but it 
     // doesnt hurt to be sure
-    getSearchParams().setParam(SearchFilterType.TERM, true); //default Term = on
-    getSearchParams().setParam(SearchFilterType.SYN, true); //default Syn = on
-    getSearchParams().setParam(SearchFilterType.DEF, false); //default Def = off
-    getSearchParams().setParam(SearchFilterType.OBS, false); //default Obs = off
+  	//Set these from the Config!
+//    getSearchParams().setParam(SearchFilterType.TERM, true); //default Term = on
+//    getSearchParams().setParam(SearchFilterType.SYN, true); //default Syn = on
+//    getSearchParams().setParam(SearchFilterType.DEF, false); //default Def = off
+//    getSearchParams().setParam(SearchFilterType.OBS, false); //default Obs = off
+    getSearchParams().setParam(SearchFilterType.TERM, config.getAutocompleteSettings().getTerm()); 
+    getSearchParams().setParam(SearchFilterType.SYN, config.getAutocompleteSettings().getSynonym());
+    getSearchParams().setParam(SearchFilterType.DEF, config.getAutocompleteSettings().getDefinition()); 
+    getSearchParams().setParam(SearchFilterType.OBS, config.getAutocompleteSettings().getObsolete());
     
 
     // Create property items based on status
@@ -160,6 +166,7 @@ class SettingsMenu extends JMenu {
 //   	  JOptionPane.showMessageDialog(null,m,"Search Parameter Change",
 //            JOptionPane.INFORMATION_MESSAGE);
 //   	  System.out.println("changing search setting");
+      Config.inst().setConfigModified(true);
       return;
     }
   }

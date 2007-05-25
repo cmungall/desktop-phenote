@@ -47,7 +47,8 @@ class ConfigWriter {
     //addFields();
 
     try { // xmlOptions? pretty print
-    doc.save(file,getXmlOptions()); } 
+    doc.save(file,getXmlOptions()); 
+    System.out.println("Saved changes to config file "+file);} 
     catch (IOException e) { 
       System.out.println("Failed to save config file "+e); }
   }

@@ -5,6 +5,7 @@ package phenote.gui;
 public class SearchParams implements SearchParamsI {
 
   private static SearchParams singleton;
+  //want to set these from the configuration file defaults
   private boolean searchTerm = true; //false; default true??
   private boolean searchSyn = true; // false; default true?
   private boolean searchDef = false;
@@ -52,6 +53,23 @@ public class SearchParams implements SearchParamsI {
     }
     return true;
   }
+  
+//  public boolean[] getAllParams() {
+//  	boolean[] temp;
+//  	for (SearchFilterType i : SearchFilterType.values()) {
+//  		if (i==SearchFilterType.TERM) {
+//  			temp[i.ordinal()]=searchTerm;
+//  		} else if (i==SearchFilterType.SYN) {
+//  			temp[i.ordinal()]=searchSyn;
+//  		} else if (i==SearchFilterType.DEF) {
+//  			temp[i.ordinal()]=searchDef;
+//  		} else if (i==SearchFilterType.OBS) {
+//  			temp[i.ordinal()]=searchObs;
+//  		}
+//  	}
+//  	return temp;
+//  }
+  
 
   public boolean searchTerms() {
     return searchTerm;

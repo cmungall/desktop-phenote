@@ -109,11 +109,32 @@ class FileMenu extends JMenu {
   
   private class ExitActionListener implements ActionListener {
 	    public void actionPerformed(ActionEvent e) {
+	    	String m = "";
+	    	int n;
 	    	if (e.getActionCommand().equals("exit")) {
-	    	  String m = "Are you sure you want to quit?";
-	    	  JOptionPane.showMessageDialog(null, m, "Phenote Exit",
-	    			  JOptionPane.INFORMATION_MESSAGE);
-    		  System.exit(0);
+	    		if (Config.inst().isConfigModified()) {
+	    			m="Your Default Settings have been modified.  Do you wish to save them?";
+	    			n = JOptionPane.showConfirmDialog(null,m,"Configuration Alert", JOptionPane.YES_NO_OPTION);
+	    			if (n==JOptionPane.YES_OPTION) { 
+	    				Config.inst().setAutocompleteSettings();
+	    				//write out configuration!
+	    		    Config.inst().saveModifiedConfig();
+	    			}
+	    			else { 
+	    				m="Your changes have not been saved.\n";
+	    			}
+	    		}
+//	    		else {
+//	    			System.out.println("your settings have not changed");
+//	    		}
+	    		
+	    	  m += "Are you sure you want to quit?";
+	    	  n = JOptionPane.showConfirmDialog(null, m, "Phenote Exit",
+	    			  JOptionPane.YES_NO_OPTION);
+	    	  if (n==JOptionPane.YES_OPTION) {
+	    	  	System.exit(0);
+	    	  } else { return; }
+	    	  
 	    	}
 	    }
   }	
