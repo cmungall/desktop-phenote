@@ -119,6 +119,7 @@ class FileMenu extends JMenu {
 	    				Config.inst().setAutocompleteSettings();
 	    				//write out configuration!
 	    		    Config.inst().saveModifiedConfig();
+	    		    m="";
 	    			}
 	    			else { 
 	    				m="Your changes have not been saved.\n";
