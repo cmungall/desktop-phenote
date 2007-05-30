@@ -42,13 +42,13 @@
    <mapID target="Sample_Configuration_1" url="html/Sample_Configuration_1.htm"/>
    <mapID target="Sample_Configuration_2" url="html/Sample_Configuration_2.htm"/>
    <mapID target="Term_Info" url="html/Term_Info.htm"/>
-   <mapID target="The__field__Tag" url="html/The__field__Tag.htm"/>
-   <mapID target="The__dataadapter__Tag116" url="html/The__dataadapter__Tag.htm"/>
    <mapID target="The__term_history__Tag118" url="html/The__term_history__Tag.htm"/>
    <mapID target="The__auto_update_ontologies__Tag115" url="html/The__auto_update_ontologies__Tag.htm"/>
    <mapID target="The__ontology__Tag" url="html/The__ontology__Tag.htm"/>
    <mapID target="The__update_timer__Tag" url="html/The__update_timer__Tag.htm"/>
    <mapID target="The__master_to_local_config__Tag" url="html/The__master_to_local_config__Tag.htm"/>
+   <mapID target="The__dataadapter__Tag116" url="html/The__dataadapter__Tag.htm"/>
+   <mapID target="The__field__Tag" url="html/The__field__Tag.htm"/>
    <mapID target="The__tab__Tag" url="html/The__tab__Tag.htm"/>
    <mapID target="The_Scroller_Tag" url="html/The_Basic_Flat_File_Interface.htm"/>
    <mapID target="The_Default_Layout" url="html/Introduction.htm"/>
