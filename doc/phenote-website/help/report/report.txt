@@ -1,174 +1,55 @@
 Topic Title	MapID	File Path	Index Keywords	Status	Notes
 Adding configurability	Adding_configurability	html\Adding_configurability.htm		Not Specified	 
-Adding New Relationships	Adding_New_Relationships	html\Adding_New_Relationships.htm		Not Specified	 
-Adding New Terms	Adding_New_Terms	html\Adding_New_Terms.htm		Not Specified	 
 Advantages to Annotation with Ontolgies	Advantages_to_Annotation_with_Ontolgies	html\Advantages_to_Annotation_with_Ontolgies.htm		Not Specified	 
 An Introduction to OBO Ontologies	An_Introduction_to_OBO_Ontologies	html\An_Introduction_to_OBO_Ontologies.htm		Not Specified	 
 Annotation Spreadsheet	Annotation_Spreadsheet	html\Annotation_Spreadsheet.htm		Not Specified	 
-Assigning New Roots	Assigning_New_Roots	html\Assigning_New_Roots.htm		Not Specified	 
-Assigning Replacement Terms	Assigning_Replacement_Terms	html\Assigning_Replacement_Terms.htm		Not Specified	 
-Backtick Expressions	Backtick_Expressions	html\Backtick_Expressions.htm		Not Specified	 
 Basic Concepts and Vocabulary	Basic_Concepts_and_Vocabulary	html\Basic_Concepts_and_Vocabulary.htm		Not Specified	 
 Bugs and Troubleshooting	Bugs_and_Troubleshooting	html\Bugs_and_Troubleshooting.htm		Not Specified	 
-Building a Filter	Building_a_Filter	html\Building_a_Filter.htm		Not Specified	 
-Building Filters	Building_Filters	html\Building_Filters.htm		Not Specified	 
-Changing Link Attributes	Changing_Link_Attributes	html\Changing_Link_Attributes.htm		Not Specified	 
-Changing Relationship Types	Changing_Relationship_Types	html\Changing_Relationship_Types.htm		Not Specified	 
+Changing Link Attributes	The_Phenote_Interface	html\The_Phenote_Interface.htm		Not Specified	 
+Changing your Autocompletion Settings	Changing_your_Autocompletion_Settings	html\Changing_your_Autocompletion_Settings.htm		Not Specified	 
 Changing your Configuration	Changing_your_Configuration	html\Changing_your_Configuration.htm		Not Specified	 
-Classes	Classes	html\Classes.htm		Not Specified	 
-Cloning	Cloning	html\Cloning.htm		Not Specified	 
-Common Parameters	Common_Parameters	html\Common_Parameters.htm		Not Specified	 
-Compound Filtering	Compound_Filtering	html\Compound_Filtering.htm		Not Specified	 
 Connecting to a Database	Connecting_to_a_Database	html\Connecting_to_a_Database.htm		Not Specified	 
-Creating Your Own GO Slim in OBO-Edit	Creating_Your_Own_GO_Slim_in_OBO_Edit	html\Creating_Your_Own_GO_Slim_in_OBO_Edit.htm		Not Specified	 
-Cross Products	Cross_Products	html\Cross_Products.htm		Not Specified	 
-Cross Products By Hand	Cross_Products_By_Hand	html\Cross_Products_By_Hand.htm		Not Specified	 
-Cross Products in the Text Editor	Cross_Products_in_the_Text_Editor	html\Cross_Products_in_the_Text_Editor.htm		Not Specified	 
-Custom Data Adapters	Custom_Data_Adapters	html\Custom_Data_Adapters.htm		Not Specified	 
-Dangling Intersection Check	Dangling_Intersection_Check	html\Dangling_Intersection_Check.htm		Not Specified	 
 Data Entry	Data_Entry	html\Data_Entry.htm		Not Specified	 
 Data Formats	Data_Formats	html\Data_Formats.htm		Not Specified	 
-Dbxref Check	Dbxref_Check	html\Dbxref_Check.htm		Not Specified	 
-Definition Check	Definition_Check	html\Definition_Check.htm		Not Specified	 
-Deleting	Deleting	html\Deleting.htm		Not Specified	 
-Destroying	Destroying	html\Destroying.htm		Not Specified	 
-Disjointedness Check	Disjointedness_Check	html\Disjointedness_Check.htm		Not Specified	 
-Editing	Editing	html\Editing.htm		Not Specified	 
-Editing Obsoletes	Editing_Obsoletes	html\Editing_Obsoletes.htm		Not Specified	 
-Example Layouts	Example_Layouts	html\Example_Layouts.htm		Not Specified	 
-Example Scripts	Example_Scripts	html\Example_Scripts.htm		Not Specified	 
+Editing Functions	Editing_Functions	html\Editing_Functions.htm		Not Specified	 
+Entering data into Free-Text fields	Entering_data_into_Free_Text_fields	html\Entering_data_into_Free_Text_fields.htm		Not Specified	 
+Entering data into Ontology Fields	Entering_data_into_Ontology_Fields	html\Entering_data_into_Ontology_Fields.htm		Not Specified	 
+Entity Composition/Refinement	Entity_Composition_Refinement	html\Entity_Composition_Refinement.htm		Not Specified	 
 Exiting Phenote	Exiting_Phenote	html\Exiting_Phenote.htm		Not Specified	 
-Expression Syntax	Expression_Syntax	html\Expression_Syntax.htm		Not Specified	 
-Filtering	Filtering	html\Filtering.htm		Not Specified	 
-Filters	Filters	html\Filters.htm		Not Specified	 
-Frequently Asked Questions	Frequently_Asked_Questions	html\Frequently_Asked_Questions.htm		Not Specified	 
 Getting Phenote Started	Getting_Phenote_Started	html\Getting_Phenote_Started.htm		Not Specified	 
-Getting Started	Getting_Started	html\Getting_Started.htm		Not Specified	 
-Global Filters & Renderers	Global_Filters___Renderers	html\Global_Filters___Renderers.htm		Not Specified	 
-How Do I Find Terms Without an is_a Parent?	How_Do_I_Find_Terms_Without_an_is_a_Parent_	html\How_Do_I_Find_Terms_Without_an_is_a_Parent_.htm		Not Specified	 
-How Do I Make a "Slim" Ontology?	How_Do_I_Make_a__Slim__Ontology_	html\How_Do_I_Make_a__Slim__Ontology_.htm		Not Specified	 
-How Do I Not Search Obsoletes?	How_Do_I_Not_Search_Obsoletes_	html\How_Do_I_Not_Search_Obsoletes_.htm		Not Specified	 
-How Do I Search a Specific Ontology?	How_Do_I_Search_a_Specific_Ontology_	html\How_Do_I_Search_a_Specific_Ontology_.htm		Not Specified	 
-How Do I Spell Check?	How_Do_I_Spell_Check_	html\How_Do_I_Spell_Check_.htm		Not Specified	 
-How ID Generation Works	How_ID_Generation_Works	html\How_ID_Generation_Works.htm		Not Specified	 
-How OBO-Edit Understands Histories	How_OBO_Edit_Understands_Histories	html\How_OBO_Edit_Understands_Histories.htm		Not Specified	 
 How To Edit a Configuration File	How_To_Edit_a_Configuration_File	html\How_To_Edit_a_Configuration_File.htm		Not Specified	 
-Instances	Instances	html\Instances.htm		Not Specified	 
-Intersections	Intersections	html\Intersections.htm		Not Specified	 
 Introduction to Adapters	Introduction_to_Adapters	html\Introduction_to_Adapters.htm		Not Specified	 
-Introduction to Cross Products	Introduction_to_Cross_Products	html\Introduction_to_Cross_Products.htm		Not Specified	 
-Introduction to Expressions	Introduction_to_Expressions	html\Introduction_to_Expressions.htm		Not Specified	 
-Introduction to Plugins	Introduction_to_Plugins	html\Introduction_to_Plugins.htm		Not Specified	 
-Introduction to Verification	Introduction_to_Verification	html\Introduction_to_Verification.htm		Not Specified	 
-ISA Cycle Check	ISA_Cycle_Check	html\ISA_Cycle_Check.htm		Not Specified	 
-Java Options on the Command Line	Java_Options_on_the_Command_line	html\Java_Options_on_the_Command_line.htm		Not Specified	 
-jen_layout_1	jen_layout_1	html\jen_layout_1.htm		Not Specified	 
-jen_layout_2	jen_layout_2	html\jen_layout_2.htm		Not Specified	 
-jen_layout_3	jen_layout_3	html\jen_layout_3.htm		Not Specified	 
-jen_layout_4	jen_layout_4	html\jen_layout_4.htm		Not Specified	 
-Language Concepts	Language_Concepts	html\Language_Concepts.htm		Not Specified	 
 Licensing Information	Licensing_Information	html\Licensing_Information.htm		Not Specified	 
-Link Filters	Link_Filters	html\Link_Filters.htm		Not Specified	 
-Link Filters vs Term Filters	Link_Filters_vs_Term_Filters	html\Link_Filters_vs_Term_Filters.htm		Not Specified	 
 Loading & Saving	Loading___Saving	html\Loading___Saving.htm		Not Specified	 
-Loading a History File	Loading_a_History_File	html\Loading_a_History_File.htm		Not Specified	 
 Menu Bars	Menu_Bars	html\Menu_Bars.htm		Not Specified	 
-Merging	Merging	html\Merging.htm		Not Specified	 
-Moving	Moving	html\Moving.htm		Not Specified	 
-Name Redundancy Check	Name_Redundancy_Check	html\Name_Redundancy_Check.htm		Not Specified	 
-obo2flat	obo2flat	html\obo2flat.htm		Not Specified	 
-obo2obo	obo2obo	html\obo2obo.htm		Not Specified	 
-obodiff	obodiff	html\obodiff.htm		Not Specified	 
-OBO-Edit Command-line Options	OBO_Edit_Command_line_Options	html\OBO_Edit_Command_line_Options.htm		Not Specified	 
-OBO-Edit Features	OBO_Edit_Features	html\OBO_Edit_Features.htm		Not Specified	 
-OBO-Edit-Specific Variables	OBO_Edit_Specific_Variables	html\OBO_Edit_Specific_Variables.htm		Not Specified	 
-obomerge	obomerge	html\obomerge.htm		Not Specified	 
-Obsolete Items	Obsolete_Items	html\Obsolete_Items.htm		Not Specified	 
 Ontologies	Ontologies	html\Ontologies.htm		Not Specified	 
 Ontologies included with Phenote	Ontologies_included_with_Phenote	html\Ontologies_included_with_Phenote.htm		Not Specified	 
-Other Uses for Phenote	Other_Uses_for_Phenote	html\Other_Uses_for_Phenote.htm		Not Specified	 
-Other Uses of Filters	Other_Uses_of_Filters	html\Other_Uses_of_Filters.htm		Not Specified	 
 Phenote from the Command Line	Phenote_from_the_Command_Line	html\Phenote_from_the_Command_Line.htm		Not Specified	 
 Phenote Webstart	Phenote_Webstart	html\Phenote_Webstart.htm		Not Specified	 
-placeholder	placeholder	html\placeholder.htm		Not Specified	 
-Plugins	Plugins	html\Plugins.htm		Not Specified	 
-Properties	Properties	html\Properties.htm		Not Specified	 
-Reasoner Prefilters	Reasoner_Prefilters	html\Reasoner_Prefilters.htm		Not Specified	 
-Rendering	Rendering	html\Rendering.htm		Not Specified	 
-Requesting New Features & Functionality	Requesting_New_Features___Functionality	html\Requesting_New_Features___Functionality.htm		Not Specified	 
-Restrictions	Restrictions	html\Restrictions.htm		Not Specified	 
-Reusing Filters	Reusing_Filters	html\Reusing_Filters.htm		Not Specified	 
 Running Phenote for the First Time	Running_Phenote_for_the_First_Time	html\Running_Phenote_for_the_First_Time.htm		Not Specified	 
 Sample Annotations	Sample_Annotations	html\Sample_Annotations.htm		Not Specified	 
 Sample Configuration 1	Sample_Configuration_1	html\Sample_Configuration_1.htm		Not Specified	 
 Sample Configuration 2	Sample_Configuration_2	html\Sample_Configuration_2.htm		Not Specified	 
-Saving a History File	Saving_a_History_File	html\Saving_a_History_File.htm		Not Specified	 
-Searching	Searching	html\Searching.htm		Not Specified	 
-Setting the Filter Mode	Setting_the_Filter_Mode	html\Setting_the_Filter_Mode.htm		Not Specified	 
-Some terminology	Some_terminology	html\Some_terminology.htm		Not Specified	 
-Structural Editing	Structural_Editing	html\Structural_Editing.htm		Not Specified	 
-Term Filters	Term_Filters	html\Term_Filters.htm		Not Specified	 
 Term Info	Term_Info	html\Term_Info.htm		Not Specified	 
-Text Checks	Text_Checks	html\Text_Checks.htm		Not Specified	 
-Text Editing	Text_Editing	html\Text_Editing.htm		Not Specified	 
-The	The__field__Tag	html\The__field__Tag.htm		Not Specified	 
-The	The__dataadapter__Tag116	html\The__dataadapter__Tag.htm		Not Specified	 
-The	The__term_history__Tag118	html\The__term_history__Tag.htm		Not Specified	 
-The	The__auto_update_ontologies__Tag115	html\The__auto_update_ontologies__Tag.htm		Not Specified	 
-The	The__ontology__Tag	html\The__ontology__Tag.htm		Not Specified	 
-The	The__update_timer__Tag	html\The__update_timer__Tag.htm		Not Specified	 
+The &lt;auto-update-ontologies&gt; Tag	The__auto_update_ontologies__Tag115	html\The__auto_update_ontologies__Tag.htm		Not Specified	 
+The &lt;dataadapter&gt; Tag	The__dataadapter__Tag116	html\The__dataadapter__Tag.htm		Not Specified	 
+The &lt;field&gt; Tag	The__field__Tag	html\The__field__Tag.htm		Not Specified	 
+The &lt;master-to-local-config&gt; Tag	The__master_to_local_config__Tag	html\The__master_to_local_config__Tag.htm		Not Specified	 
+The &lt;ontology&gt; Tag	The__ontology__Tag	html\The__ontology__Tag.htm		Not Specified	 
+The &lt;tab&gt; Tag	The__tab__Tag	html\The__tab__Tag.htm		Not Specified	 
+The &lt;term-history&gt; Tag	The__term_history__Tag118	html\The__term_history__Tag.htm		Not Specified	 
+The &lt;update-timer&gt; Tag	The__update_timer__Tag	html\The__update_timer__Tag.htm		Not Specified	 
 The Basic Flat File Interface	The_Scroller_Tag	html\The_Basic_Flat_File_Interface.htm		Not Specified	 
-The box tag	The_Box_Tag	html\The_Box_Tag.htm		Not Specified	 
-The Category Manager Plugin	The_Category_Manager_Plugin	html\The_Category_Manager_Plugin.htm		Not Specified	 
-The Change Tracker Plugin	The_Change_Tracker_Plugin	html\The_Change_Tracker_Plugin.htm		Not Specified	 
-The compactgrid tag	The_Compactgrid_Tag	html\The_Compactgrid_Tag.htm		Not Specified	 
-The Complex Class Plugin	The_Complex_Class_Plugin	html\The_Complex_Class_Plugin.htm		Not Specified	 
-The component tag	The_Component_Tag	html\The_Component_Tag.htm		Not Specified	 
-The Configuration Plugin	The_Configuration_Plugin	html\The_Configuration_Plugin.htm		Not Specified	 
-The DAG Viewer	The_DAG_Viewer	html\The_DAG_Viewer.htm		Not Specified	 
-The Dbxref Library Plugin	The_Dbxref_Library_Plugin	html\The_Dbxref_Library_Plugin.htm		Not Specified	 
 The Default Layout	The_Default_Layout	html\Introduction.htm		Not Specified	 
-The divider tag	The_Divider_Tag	html\The_Divider_Tag.htm		Not Specified	 
-The Explanation Plugin	The_Explanation_Plugin	html\The_Explanation_Plugin.htm		Not Specified	 
-The Extended Info Plugin	The_Extended_Info_Plugin	html\The_Extended_Info_Plugin.htm		Not Specified	 
-The glue tag	The_Glue_Tag	html\The_Glue_Tag.htm		Not Specified	 
-The GO Flat File Adapter	The_GO_Flat_File_Adapter	html\The_GO_Flat_File_Adapter.htm		Not Specified	 
-The Graph Viewer Plugin	The_Graph_Viewer_Plugin	html\The_Graph_Viewer_Plugin.htm		Not Specified	 
-The grid tag	The_Grid_Tag	html\The_Grid_Tag.htm		Not Specified	 
-The History Plugin	The_History_Plugin	html\The_History_Plugin.htm		Not Specified	 
-The ID Manager Plugin	The_ID_Manager_Plugin	html\The_ID_Manager_Plugin.htm		Not Specified	 
-The if tag	The_If_Tag	html\The_If_Tag.htm		Not Specified	 
-The Interface	The_Interface	html\The_Interface.htm		Not Specified	 
-The label tag	The_Label_Tag	html\The_Label_Tag.htm		Not Specified	 
 The OBO Adapter	The_OBO_Adapter	html\The_OBO_Adapter.htm		Not Specified	 
-The OBO-Edit Reasoner	The_OBO_Edit_Reasoner	html\The_OBO_Edit_Reasoner.htm		Not Specified	 
-The Ontology Editor Panel	The_Term_Editor_Panel	html\The_Term_Editor_Panel.htm		Not Specified	 
-The panel tag	The_Panel_Tag	html\The_Panel_Tag.htm		Not Specified	 
-The Parent Plugin	The_Parent_Plugin	html\The_Parent_Plugin.htm		Not Specified	 
 The PhenoSyntax Adapter	The_PhenoSyntax_Adapter	html\The_PhenoSyntax_Adapter.htm		Not Specified	 
-The Reasoner and the Interface	The_Reasoner_and_the_Interface	html\The_Reasoner_and_the_Interface.htm		Not Specified	 
-The Reasoner Plugin	The_Reasoner_Plugin	html\The_Reasoner_Plugin.htm		Not Specified	 
 The Serial Adapter	The_Serial_Adapter	html\The_Serial_Adapter.htm		Not Specified	 
-The spacer tag	The_Spacer_Tag	html\The_Spacer_Tag.htm		Not Specified	 
-The Synonym Category Manager Plugin	The_Synonym_Category_Manager_Plugin	html\The_Synonym_Category_Manager_Plugin.htm		Not Specified	 
 The Tab-Delimited Adapter	The_Tab_Delimited_Adapter	html\The_Tab_Delimited_Adapter.htm		Not Specified	 
-The tabs tag	The_Tabs_Tag	html\The_Tabs_Tag.htm		Not Specified	 
 The tag-value adapter	The_tag_value_adapter	html\The_tag_value_adapter.htm		Not Specified	 
-The Verification Plugin	The_Verification_Plugin	html\The_Verification_Plugin.htm		Not Specified	 
-The window tag	The_Window_Tag	html\The_Window_Tag.htm		Not Specified	 
-Undo/Redo	Undo_Redo	html\Undo_Redo.htm		Not Specified	 
-User Defined Checks	User_Defined_Checks	html\User_Defined_Checks.htm		Not Specified	 
 Using Filters	Using_Filters	html\Using_Filters.htm		Not Specified	 
 What is a Configuration?	What_is_a_Configuration_	html\What_is_a_Configuration_.htm		Not Specified	 
 What is an ontology?	What_is_an_ontology_	html\What_is_an_ontology_.htm		Not Specified	 
-What is Phenote?	What_is_Phenote_	html\What_is_OBO_Edit_.htm		Not Specified	 
 What is Phenote?	What_is_Phenote	html\What_is_Phenote_.htm		Not Specified	 
-Who should use Phenote	Who_should_use_Phenote	html\Who_should_use_Phenote.htm		Not Specified	 
-Working with Categories	Working_with_Categories	html\Working_with_Categories.htm		Not Specified	 
-Working with Intersections	Working_with_Intersections	html\Working_with_Intersections.htm		Not Specified	 
-Working with Namespaces	Working_with_Namespaces	html\Working_with_Namespaces.htm		Not Specified	 
-Working with Obsoletes	Working_with_Obsoletes	html\Working_with_Obsoletes.htm		Not Specified	 
-Working with Selections	Working_with_Selections	html\Working_with_Selections.htm		Not Specified	 
-Working with Synonym Categories	Working_with_Synonym_Categories	html\Working_with_Synonym_Categories.htm		Not Specified	 
-Working with XML Layouts	Working_with_XML_Layouts	html\Working_with_XML_Layouts.htm		Not Specified	 
+Writing a Data Adapter	Writing_a_Data_Adapter	html\Writing_a_Data_Adapter.htm		Not Specified	 
+XML skeleton	The__phenote_configuration__Tag	html\The__phenote_configuration__Tag.htm		Not Specified	 
 XML skeleton	XML_skeleton	html\XML_skeleton.htm		Not Specified	 
