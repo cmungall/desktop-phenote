@@ -1,6 +1,6 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-<xsl:param name="mapfile" select='/phenote/doc/phenote-website/help/Phenote.jhm'/>
+<xsl:param name="mapfile" select='Phenote.jhm'/>
 
 <xsl:template match="toc">
   <html>

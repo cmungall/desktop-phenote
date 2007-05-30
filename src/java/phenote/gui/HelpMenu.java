@@ -8,6 +8,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
+import javax.help.CSH;
 
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.DataAdapterI;
@@ -18,6 +19,7 @@ import phenote.config.ConfigException;
 //import phenote.gui.prefswindow.PrefsWindowController; ???
 import phenote.gui.SplashScreen;
 import phenote.main.PhenoteVersion;
+import phenote.main.HelpManager;
 
 class HelpMenu extends JMenu {
 
@@ -38,7 +40,9 @@ class HelpMenu extends JMenu {
     help = new JMenuItem("Phenote Help");
     help.setEnabled(Config.inst().hasDataAdapters());
     help.setActionCommand("help");
-    help.addActionListener(actionListener);
+ 		help.addActionListener(new CSH.DisplayHelpFromSource(HelpManager
+				.getHelpBroker()));
+//    help.addActionListener(actionListener);
     add(help); 
 
     JMenuItem about = new JMenuItem("About");
@@ -57,7 +61,7 @@ class HelpMenu extends JMenu {
     		JOptionPane.showMessageDialog(null, m, "Phenote Help",
     			JOptionPane.INFORMATION_MESSAGE);
     		System.out.println("help selected");	
-    	}
+     	}
     	else if (e.getActionCommand().equals("about")) {
     		//throw up splash screen here.  make sure to make different pic.
 //    	  String m = "This is Phenote v (version here)....[more to come]";
