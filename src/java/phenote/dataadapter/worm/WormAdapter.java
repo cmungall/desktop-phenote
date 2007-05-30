@@ -315,7 +315,17 @@ public class WormAdapter implements QueryableDataAdapterI {
     } catch (SQLException se) {
       System.out.println("Couldn't connect: print out a stack trace and exit.");
       se.printStackTrace();
-      System.exit(1);
+      System.out.println("Couldn't connect: stack trace done.");
+      String getMessage = se.getMessage();
+      getMessage = getMessage + " \nYour IP is not recognized by the postgres database, please contact help@wormbase.org if you're a valid Phenotype WormBase curator.";
+      JOptionPane.showMessageDialog(null,getMessage,"Postgres connection error",JOptionPane.INFORMATION_MESSAGE);
+//       Throwable throwCause = se.getCause();
+//       String getCause = throwCause.toString();
+//       JOptionPane.showMessageDialog(null,getCause,"getCause",JOptionPane.INFORMATION_MESSAGE);
+//       String m = "Your IP is not recognized by the postgres database, please contact help@wormbase.org if you're a valid Phenotype WormBase curator.";
+//       JOptionPane.showMessageDialog(null,m,"Worm stub",JOptionPane.INFORMATION_MESSAGE);
+      // System.exit(1);
+      // System.out.println("Couldn't connect: exit done.");
     }
     if (c != null)
       System.out.println("Hooray! We connected to the database!");
@@ -335,11 +345,18 @@ public class WormAdapter implements QueryableDataAdapterI {
       try { while (rs.next()) { default_value = rs.getString(4); } }		// assign the new term value
       catch (SQLException se) {
         System.out.println("We got an exception while getting a "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); } }
-    else {
+    else if (boxI > 0) {
       try { rs = s.executeQuery("SELECT * FROM "+postgres_table+" WHERE joinkey = '"+query+"' AND app_box='"+boxI+"' ORDER BY app_timestamp"); }
       catch (SQLException se) {
         System.out.println("We got an exception while executing our "+postgres_table+" query: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
       try { while (rs.next()) { default_value = rs.getString(3); } }		// assign the new term value
+      catch (SQLException se) {
+        System.out.println("We got an exception while getting a "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); } }
+    else {
+      try { rs = s.executeQuery("SELECT * FROM "+postgres_table+" WHERE joinkey = '"+query+"' ORDER BY app_timestamp"); }
+      catch (SQLException se) {
+        System.out.println("We got an exception while executing our "+postgres_table+" query: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      try { while (rs.next()) { default_value = rs.getString(2); } }		// assign the new term value
       catch (SQLException se) {
         System.out.println("We got an exception while getting a "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); } }
 //    System.out.println("Added in function charList term "+query+" column "+colI+".");		// comment out later
@@ -361,10 +378,12 @@ public class WormAdapter implements QueryableDataAdapterI {
       if (phenotype_match != null) { postgres_value = phenotype_match; }		// query for this, otherwise keep the default value
       if (postgres_value == "No postgres value assigned") { } else { c1.setValue("Phenotype",postgres_value); }					// assign the queried value
 //       c1.setValue("Phenotype",postgres_value);					// assign the queried value
-      postgres_table = "app_curator"; postgres_value = "No postgres value assigned";
-      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-      c1.setValue("Curator",postgres_value);					// assign the queried value
-
+      postgres_table = "app_type"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, 0, 0);
+      c1.setValue("Object Type",postgres_value);					// assign the queried value
+      postgres_table = "app_intx_desc"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
+      c1.setValue("Genetic Intx Desc",postgres_value);					// assign the queried value
       postgres_table = "app_paper"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
       String paper_match = find("(WBPaper[0-9]*)", postgres_value);		// Find a WBPaper followed by any amount of digits
@@ -377,11 +396,15 @@ public class WormAdapter implements QueryableDataAdapterI {
       if (person_match != null) { postgres_value = person_match; }	// query for this, otherwise keep the default value
       if (postgres_value == "No postgres value assigned") { } else { c1.setValue("Person",postgres_value); }					// assign the queried value
       postgres_table = "app_phenotype"; postgres_value = "No postgres value assigned";
-      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
       c1.setValue("NBP",postgres_value);					// assign the queried value
       postgres_table = "app_remark"; postgres_value = "No postgres value assigned";
-      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
       c1.setValue("Reference Remark",postgres_value);					// assign the queried value
+
+      postgres_table = "app_curator"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      c1.setValue("Curator",postgres_value);					// assign the queried value
       postgres_table = "app_phen_remark"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
       c1.setValue("Phenotype Remark",postgres_value);				// assign the queried value
