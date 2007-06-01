@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -19,6 +20,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JPopupMenu;
+import javax.swing.JOptionPane;
+import javax.swing.JMenuItem;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -38,14 +42,16 @@ import phenote.dataadapter.CharacterListManager;
 import phenote.config.Config;
 import phenote.gui.selection.SelectionManager;
 import phenote.dataadapter.LoadSaveManager;
+import phenote.gui.TableRightClickMenu;
 
   /** Character panel has character table and del add copy buttons to manipulate
    *  table. Modifications to fields modify columns in selected row in table
    * for now no explicit commit - may be configurable later */
 public class CharacterTablePanel extends JPanel {
 
-  private JTable charJTable;
-  private CharacterTableModel characterTableModel;
+  private CharacterTableModel characterTableModel = new CharacterTableModel();
+  private JTable charJTable = new JTable(characterTableModel);
+
   //private FieldPanel fieldPanel;
   //private JButton newButton;
   private JButton copyButton;
@@ -56,6 +62,7 @@ public class CharacterTablePanel extends JPanel {
   private JScrollBar verticalScrollBar;
   private boolean scrollToNewLastRowOnRepaint = false;
   private boolean ignoreSelectionChange = false;
+  private Point currentMousePoint = new Point(0,0);
   
   //private int selectedRow;
   // get from file menu?
@@ -65,6 +72,7 @@ public class CharacterTablePanel extends JPanel {
 
   public CharacterTablePanel() { //TermPanel tp) {
     //fieldPanel = tp;
+  	super();    
     init();
   }
 
@@ -76,8 +84,6 @@ public class CharacterTablePanel extends JPanel {
     setPreferredSize(new Dimension(1400,500));
     //setMinimumSize(new Dimension(1400,630)); // 630   
 
-    characterTableModel = new CharacterTableModel();
-    charJTable = new JTable(characterTableModel);
     //charJTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     charJTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
     CharacterSelectionListener isl = new CharacterSelectionListener();
@@ -93,6 +99,12 @@ public class CharacterTablePanel extends JPanel {
     charJTable.setPreferredScrollableViewportSize(new Dimension(500, 600));//150
 
     GridBagConstraints gbc = GridBagUtil.makeFillingConstraint(0,0);
+
+    //Add listener to components that can bring up popup menus.
+    JPopupMenu popup = new TableRightClickMenu();
+    MouseListener popupListener = new PopupListener(popup);
+    charJTable.addMouseListener(popupListener);
+
     add(tableScroll,gbc);
 
     // add in buttons
@@ -146,8 +158,15 @@ public class CharacterTablePanel extends JPanel {
     return getSelectedRow() != -1;
   }
 
-  private int getSelectedRow() {
+  public int getSelectedRow() {
     return charJTable.getSelectedRow();
+  }
+  
+  public String getCellString(int row, int col) {
+  	Object s = charJTable.getValueAt(row,col);
+  	if (s==null) {
+  		return ("");
+  	} else return s.toString();
   }
   
   /** row number is zero based for tables */
@@ -401,6 +420,66 @@ public class CharacterTablePanel extends JPanel {
       //table.requestFocus();
       
     }
+  }
+  private void setPoint (Point p) {
+  	currentMousePoint= p;
+  	return;
+  }
+  public Point getPoint() {
+  	return currentMousePoint;
+  }
+  
+  public Point getTableCoord() {
+  	Point coord;
+  	int col = charJTable.getTableHeader().columnAtPoint(currentMousePoint);
+    int row = charJTable.rowAtPoint(currentMousePoint);
+    coord = new Point(row,col);
+    return (coord);
+  }
+  
+  private class PopupListener extends MouseAdapter {
+  	JPopupMenu popup;
+  	int col; int row;
+  	Point p;
+  	PopupListener(JPopupMenu popupMenu) {
+  		popup = popupMenu;
+  	}
+
+  	public void mousePressed(MouseEvent e) {
+//  		super.mousePressed(e);
+  		maybeShowPopup(e);
+  	}
+
+  	public void mouseReleased(MouseEvent e) {
+//  		super.mouseReleased(e);
+  		maybeShowPopup(e);
+  	}
+
+  	private void maybeShowPopup(MouseEvent e) {
+  		String m="";
+  		col=e.getX();
+  		row=e.getY();
+  		p= e.getPoint();
+      col = charJTable.getTableHeader().columnAtPoint(p);
+      row = charJTable.rowAtPoint(p);
+      setPoint(p);
+//      System.out.println("col="+col+" row= "+row);
+//  		System.out.println("button="+e.getButton());
+//  		System.out.println(e.paramString());
+//  		System.out.println("popuptrigger="+e.isPopupTrigger());
+//  		if(e.getButton()==MouseEvent.BUTTON3) {
+  		if (e.isPopupTrigger()) {
+    		m = "popuptrigger!";
+    		popup.show(e.getComponent(),
+  					e.getX(), e.getY());
+  		}
+//  		else {
+//  			m="no trigger, its "+e.paramString()+"!";
+//  		}
+//  		JOptionPane.showMessageDialog(null, m, "Phenote Help",
+//    			JOptionPane.INFORMATION_MESSAGE);
+//  		e.consume();
+  	}
   }
 
   // for test

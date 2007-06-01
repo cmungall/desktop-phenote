@@ -10,10 +10,20 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
 import java.awt.event.InputEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.KeyStroke;
 import javax.swing.text.DefaultEditorKit;
+import javax.swing.JPopupMenu;
+import javax.swing.JMenuItem;
+import java.awt.Point;
+
+
+
 
 import javax.swing.text.JTextComponent;
 import javax.swing.JTextField;
@@ -30,6 +40,8 @@ import phenote.edit.CompoundTransaction;
 import phenote.edit.EditManager;
 import phenote.gui.selection.CharSelectionEvent;
 import phenote.gui.selection.SelectionManager;
+import phenote.gui.FieldRightClickMenu;
+
 
 // should this be a subclass of charfieldGui? maybe?
 class FreeTextField extends CharFieldGui {
@@ -50,6 +62,11 @@ class FreeTextField extends CharFieldGui {
     textField.setEditable(true);
     textField.getDocument().addDocumentListener(new TextFieldDocumentListener());
     textField.addFocusListener(new FreeFocusListener());
+     //Add listener to components that can bring up popup menus.
+    JPopupMenu popup = new FieldRightClickMenu();
+    MouseListener popupListener = new PopupListener(popup);
+    textField.addMouseListener(popupListener);
+
     //textField.addKeyListener(new TextKeyListener());
     loadKeyMap(); // mac cut copy paste
   }
@@ -132,6 +149,45 @@ class FreeTextField extends CharFieldGui {
         } catch (Exception ex) { System.out.println("failed paste "+ex); }
       }
     }
+  }
+  
+  private class PopupListener extends MouseAdapter {
+  	JPopupMenu popup;
+  	
+  	int col; int row;
+  	Point p;
+  	PopupListener(JPopupMenu popupMenu) {
+  		popup = popupMenu;
+  	}
+
+  	public void mousePressed(MouseEvent e) {
+//  		super.mousePressed(e);
+  		maybeShowPopup(e);
+  	}
+
+  	public void mouseReleased(MouseEvent e) {
+//  		super.mouseReleased(e);
+  		maybeShowPopup(e);
+  	}
+
+  	private void maybeShowPopup(MouseEvent e) {
+//  		String m="";
+//  		col=e.getX();
+//  		row=e.getY();
+//       System.out.println("col="+col+" row= "+row);
+//  		System.out.println("button="+e.getButton());
+//  		System.out.println(e.paramString());
+//  		System.out.println("popuptrigger="+e.isPopupTrigger());
+//  		if(e.getButton()==MouseEvent.BUTTON3) {
+  		if (e.isPopupTrigger()) {
+//    		m = "popuptrigger!";
+    		popup.show(e.getComponent(),
+  					e.getX(), e.getY());
+  		}
+//  		else {
+////  			m="no trigger, its "+e.paramString()+"!";
+//  		}
+  	}
   }
 
   /** if the focus has changed and the gui has been edited then edit the model */

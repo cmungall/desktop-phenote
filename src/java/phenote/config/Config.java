@@ -60,9 +60,9 @@ public class Config {
   //private int updateTimer = 0; //default is to not wait
   //private String reposUrlDir;
   private String version;
-  private String configName;
-  private String configDesc;
-  private String configAuthor;
+//  private String configName;
+//  private String configDesc;
+//  private String configAuthor;
   //private String masterToLocalConfigMode;
   //private MasterToLocalConfig masterToLocalBean;
   private PhenoteConfigurationDocument phenoDocBean;
@@ -86,13 +86,14 @@ public class Config {
   public void setConfigModified(boolean setting) { configModified = setting; }
 
   public void saveModifiedConfig() {
-    // this is the "species" conf file - eg ~/.phenote/conf/flybase.cfg
-  	System.out.println(configFile);
+  	//If settings during the Phenote session are modified (such as search
+  	//parameters, term history view, col widths (and others, eventually)
+  	//then this function will rewrite the config file with whatever the
+  	//current settings are (presumably they are changed)
     File localFile = new File(configFile);
-
     new ConfigWriter().writeConfig(this,localFile);
-    
-		setConfigModified(false);  //in case if the person doesn't quit
+
+    setConfigModified(false);  //in case if the person doesn't quit
     return;
   }
   /** This is setting config file with nothing to do with personal config
@@ -810,14 +811,14 @@ public class Config {
 
       version = phenoConfigBean.getVersion();
       
-      configName = phenoConfigBean.getName();
+//      configName = phenoConfigBean.getName();
       
-      configDesc = phenoConfigBean.getDescription();
+//      configDesc = phenoConfigBean.getDescription();
       
-      configAuthor = phenoConfigBean.getAuthor();
+//      configAuthor = phenoConfigBean.getAuthor();
 
-      System.out.println("version:  "+version+"\nname:  "+configName+"\nDesc:  "+
-      		configDesc+"\nAuthor:  "+configAuthor);
+//      System.out.println("version:  "+version+"\nname:  "+configName+"\nDesc:  "+
+//      		configDesc+"\nAuthor:  "+getConfigAuthor());
       //MasterToLocalConfig m 
 //         = phenoConfigBean.getMasterToLocalConfig();
 //       if (m != null && m.getMode() != null)
@@ -960,9 +961,30 @@ public class Config {
     phenoConfigBean.setFieldArray(index,fc.getFieldBean());
   }
   
-  public String getConfigName() {	return configName;  }
-  public String getConfigDesc() { return configDesc; }
-  public String getConfigAuthor() { return configAuthor; }
+  public String getConfigName() {	
+  	String name = phenoConfigBean.getName();
+  	return name;  
+  	}
+  public void setConfigName(String name) {
+  	phenoConfigBean.setName(name);
+  	return;
+  }
+  public String getConfigDesc() { 
+  	String desc = phenoConfigBean.getDescription();
+  	return desc; 
+  	}
+  public void setConfigDesc(String desc) {
+  	phenoConfigBean.setDescription(desc);
+  	return;
+  }
+  public String getConfigAuthor() { 
+  	String author = phenoConfigBean.getAuthor();
+    return author;
+  }
+  public void setConfigAuthor(String author) {
+  	phenoConfigBean.setAuthor(author);
+  	return;
+  }
   
 }
 

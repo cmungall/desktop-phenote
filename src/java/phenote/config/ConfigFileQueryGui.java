@@ -29,6 +29,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.AbstractAction;
 import javax.swing.BoxLayout;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -46,6 +47,7 @@ public class ConfigFileQueryGui {
   //private String selection;
   private String selectedFile;
   private JDialog dialog;
+  private JPanel infoPanel;
   //private boolean okPressed = false;
   private ButtonGroup buttonGroup;
   private boolean hasCancelButton = false;
@@ -82,7 +84,7 @@ public class ConfigFileQueryGui {
     JLabel text = new JLabel("Please pick a configuration for Phenote: ");
     int center = GridBagConstraints.CENTER;
     GridBagConstraints gbc = GridBagUtil.makeAnchorConstraint(0,0,center);
-    gbc.gridwidth=2;
+    gbc.gridwidth=3;
     dialog.add(text,gbc);
 
     JPanel buttonPanel = new JPanel();
@@ -92,7 +94,7 @@ public class ConfigFileQueryGui {
     String currentConfig = null;
     try { currentConfig = Config.inst().getMyPhenoteConfigString(); }
     catch (IOException e) { doFirst = true; }
-    for (String cfg : getConfigNames()) {
+   for (String cfg : getConfigNames()) {
       JRadioButton b = new JRadioButton(new BtnAction(cfg));
       buttonPanel.add(b);
       // select current myphenote if exists, else select first
@@ -117,10 +119,18 @@ public class ConfigFileQueryGui {
       ++gbc.gridx;
       dialog.add(cancel,gbc);
     }
+    JButton info = new JButton("Info...");
+    info.addActionListener(new InfoActionListener());
+    ++gbc.gridx;
+    dialog.add(info,gbc);
     dialog.pack();
     centerOnScreen(dialog);
     dialog.addWindowListener(new WindowCancel());
     dialog.setVisible(true);
+  }
+  
+  private void updateInfoPanel() {
+  	
   }
 
   private class OkActionListener implements ActionListener {
@@ -135,7 +145,18 @@ public class ConfigFileQueryGui {
   private class CancelActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       isCancelled = true;
+      
       dialog.dispose();
+    }
+  }
+  private class InfoActionListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+    	System.out.println("info button pressed");
+    	String m = "This feature will display some basic information about \na configuration. " +
+    			"It is not yet enabled.";
+      JOptionPane.showMessageDialog(null, m, "Config Info",
+              JOptionPane.INFORMATION_MESSAGE);
+    	return;
     }
   }
   private class WindowCancel extends WindowAdapter {
@@ -154,6 +175,7 @@ public class ConfigFileQueryGui {
       super(makeDisplayFromFile(configFilename));
       //putValue("filename",configFilename);
       this.configFilename = configFilename;
+      updateInfoPanel();
     }
     public void actionPerformed(ActionEvent e) {
       selectedFile = configFilename;
@@ -161,7 +183,7 @@ public class ConfigFileQueryGui {
   }
   private String makeDisplayFromFile(String f) {
     f = f.replaceAll(".cfg","");
-    f = f.replaceAll("-"," ");
+    //f = f.replaceAll("-"," ");
     return f;
   }
 
