@@ -5,7 +5,7 @@ codebase="http://phenote.org/phenote/1.3"
 href="phenote.jnlp">
 <information>
 	<title>Phenote 1.3</title>
-	<vendor>National Center for Biomedial Ontology</vendor>
+	<vendor>National Center for Biomedical Ontology</vendor>
 	<description>Phenote standalone app via webstart</description>
  	 <!-- Declares that the application can run without
          access to the server it was downloaded from -->
