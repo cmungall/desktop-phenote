@@ -1,0 +1,1737 @@
+format-version: 1.0
+version: $Revision: 1.6 $
+date: 13:03:2007 14:52
+saved-by: cwt6
+auto-generated-by: DAG-Edit 1.419 rev 3
+default-namespace: cereal_plant_growth_stage
+remark: This is the first version of the cereal plant growth stage ontology.  This is created from the files temporal_gramene.ontology (ver 1.12) and temporal_gramene.definition (ver 1.13).
+
+[Term]
+id: GRO:0007000
+name: in-vitro culture stage
+def: "The stages describing the callus growth and differentiation in the tissue culture experiments." [GR:pj]
+is_a: GRO:0007139 ! A-vegetative stage
+
+[Term]
+id: GRO:0007001
+name: rice plant growth stage
+def: "The gross developmental stages defined for the plant." [GR:pj]
+is_a: GRO:0007040 ! rice growth stage
+
+[Term]
+id: GRO:0007002
+name: maize growth stage
+def: "The development and growth of maize have been translated into several scales to quantify development for scientific and management purposes. The growth stage terms and their descriptors were provided by the MaizeDB." [GR:pj, MaizeDB:lv, web:http //www.agron.missouri.edu/phenotypes.html]
+is_a: GRO:0007199 ! cereal plant growth stage ontology
+
+[Term]
+id: GRO:0007003
+name: 00-germination
+def: "Process by which embryonic organs formed during kernel development and which have been dormant in the dry seed\, resume their growth under appropriate temperature and moisture conditions" [MaizeDB:64055]
+synonym: "maize growth stage-0" []
+is_a: GRO:0007002 ! maize growth stage
+
+[Term]
+id: GRO:0007004
+name: rice growth stage unknown
+def: "A case when it is difficult to annotate the growth stage defined in an experiment" [GR:pj]
+is_a: GRO:0007001 ! rice plant growth stage
+
+[Term]
+id: GRO:0007005
+name: 0.02-radicle emergence from seed
+def: "The radicle and its enclosing sheath\, the coleorhiza\, break through the pericarp." [MaizeDB:67351]
+synonym: "maize growth stage-0.2" []
+is_a: GRO:0007003 ! 00-germination
+
+[Term]
+id: GRO:0007006
+name: 0.03-coleoptile emergence from seed
+def: "The coleoptile\, enclosing the plumule or embryonic shoot\, pushes through the pericarp" [MaizeDB:67352]
+synonym: "maize growth stage-0.3" []
+is_a: GRO:0007003 ! 00-germination
+
+[Term]
+id: GRO:0007007
+name: 01-seedling
+def: "Commonly refers to the growth stage between germination and tassel differentiation\, with a duration of approximately three weeks for adapted cultivars in the US Corn Belt" [MaizeDB:1863]
+synonym: "maize growth stage-1" []
+is_a: GRO:0007002 ! maize growth stage
+
+[Term]
+id: GRO:0007008
+name: 1.01-seedling emergence
+def: "Coleoptile appears above the soil surface. Nodal roots begin to develop." [MaizeDB:64057]
+synonym: "maize growth stage-1.1" []
+is_a: GRO:0007007 ! 01-seedling
+
+[Term]
+id: GRO:0007009
+name: 1.02-one to two leaves
+def: "First or second leaf collar visible." [MaizeDB:67353]
+synonym: "maize growth stage-1.2" []
+is_a: GRO:0007007 ! 01-seedling
+
+[Term]
+id: GRO:0007010
+name: 1.03-three to four leaves
+def: "3 or 4 leaf collars visible" [MaizeDB:25331]
+synonym: "maize growth stage-1.3" []
+is_a: GRO:0007007 ! 01-seedling
+
+[Term]
+id: GRO:0007011
+name: 02-tassel initiation
+def: "Apical dome of shoot meristem elongates\, followed by appearance of tassel branch primordia. Under favorable conditions in adapted hybrids in the US Corn Belt\, this may occur about  2-3 weeks after seedling emergence\, when 4-6 leaf collars are visible. Stem growing point is at or near soil surface. Tassel initiation is very sensitive to photoperiod and temperature\, maximal sensitivity to these factors occurs during a brief period with a duration\, equivalent to the emergence of two leaves\, just before tassel initiation" [MaizeDB:67306]
+synonym: "4-6 leaf stage" []
+synonym: "early whorl stage" []
+synonym: "maize growth stage-2" []
+synonym: "tassel differentiation" []
+is_a: GRO:0007002 ! maize growth stage
+
+[Term]
+id: GRO:0007012
+name: 03-rapid stem elongation
+def: "After tassel initiation\, stem length begins to increase rapidly\, through elongation of cells formed by the intercalary meristem at the base of above-ground internodes. The rate of elongation decreases prior to anthesis\, but plant height may continue to increase until after flowering" [MaizeDB:67358]
+synonym: "maize growth stage-3" []
+synonym: "mid-whorl stage" []
+synonym: "stem elongation" []
+synonym: "telescoping" []
+is_a: GRO:0007002 ! maize growth stage
+
+[Term]
+id: GRO:0007013
+name: 3.01-ear initiation
+def: "Elongation of apical dome of axillary meristem corresponding to top ear\, followed by appearance of spikelet primordia. Typically\, in adapted materials in the US Corn Belt\, 6-8 leaf collars are visible\, but this depends on genotype and environmental conditions." [MaizeDB:67356]
+synonym: "6 leaf" []
+synonym: "6-8 leaf" []
+synonym: "7 leaf" []
+synonym: "8 leaf" []
+synonym: "V6" []
+synonym: "V7" []
+synonym: "V8" []
+synonym: "maize growth stage-3.1" []
+synonym: "mid-whorl stage" []
+is_a: GRO:0007012 ! 03-rapid stem elongation
+
+[Term]
+id: GRO:0007014
+name: 3.02-late whorl stage
+def: "In adapted materials in the US Corn Belt\, the collars of leaves 9-11 are visible (some of the lowest leaves may already have degenerated by this stage). By 10-leaf stage\, new leaves appear every 2-3 days. Tassel development accelerates\, and rapid stem elongation continues." [MaizeDB:67357]
+synonym: "1-11 leaf" []
+synonym: "10-leaf" []
+synonym: "11-leaf" []
+synonym: "9-leaf" []
+synonym: "V-11" []
+synonym: "V10" []
+synonym: "V9" []
+synonym: "maize growth stage-3.2" []
+is_a: GRO:0007012 ! 03-rapid stem elongation
+
+[Term]
+id: GRO:0007015
+name: 3.03-mid-vegetative
+def: "Rapid stem elongation continues. In adapted materials in the US Corn Belt\, 12-14 leaf collars are visible. Number of ovules (potential kernels) is being determined. Male meiosis begins about this time" [MaizeDB:67359]
+synonym: "V12" []
+synonym: "V13" []
+synonym: "V14" []
+synonym: "maize growth stage-3.3" []
+is_a: GRO:0007012 ! 03-rapid stem elongation
+
+[Term]
+id: GRO:0007016
+name: 3.04-late vegetative
+def: "Late vegetative stage\, corresponding to the 15-leaf stage or later in adapted hybrids in the US Corn Belt\, which normally have a total of about 20 leaves. Depending on genotype and environmental conditions\, a corn plant may develop 10-30 leaves. Ear is developing rapidly and silk elongation begins. Female meiosis begins when silks are approx. 2 mm long and ears approx. 2 cm long. Brace roots begin growing\, a new leaf is added every 1-2 days " [MaizeDB:67360]
+synonym: "V15" []
+synonym: "V16" []
+synonym: "V17" []
+synonym: "V18" []
+synonym: "V19" []
+synonym: "V20" []
+synonym: "maize growth stage-3.4" []
+is_a: GRO:0007012 ! 03-rapid stem elongation
+
+[Term]
+id: GRO:0007017
+name: 04-gametophyte development
+def: "Includes both male (pollen) and female (embryo sac) gametophyte development\, which are sub stages of this stage" [MaizeDB:67385]
+synonym: "gametogenesis" []
+synonym: "maize growth stage-4" []
+is_a: GRO:0007002 ! maize growth stage
+relationship: part_of GRO:0007016 ! 3.04-late vegetative
+
+[Term]
+id: GRO:0007018
+name: 4.01-pollen development
+def: "Microsporogenesis\, or pollen development\, includes all stages from microsporocyte meiosis through the mature pollen grain" [MaizeDB:67383]
+synonym: "maize growth stage-4.1" []
+synonym: "male gametophyte development" []
+synonym: "microspore development" []
+synonym: "microsporogenesis" []
+is_a: GRO:0007017 ! 04-gametophyte development
+
+[Term]
+id: GRO:0007019
+name: 4.02-embryo sac development
+def: "Includes megasporogenesis (female meiosis) and megagametogenesis (beginning with mitotic division of the meiotic products through maturation of the embryo sac)" [MaizeDB:67384]
+synonym: "female gametophyte development" []
+synonym: "maize growth stage-4.2" []
+synonym: "megagametogenesis" []
+synonym: "megaspore development" []
+synonym: "megasporogenesis" []
+is_a: GRO:0007017 ! 04-gametophyte development
+
+[Term]
+id: GRO:0007020
+name: 05-flowering
+def: "The term \"flowering\" is used here to encompass the processes of anthesis (pollen shed)\, silking (emergence of styles from husk)\, pollination\, and fertilization" [MaizeDB:13811]
+synonym: "maize growth stage-5" []
+is_a: GRO:0007002 ! maize growth stage
+
+[Term]
+id: GRO:0007021
+name: 5.01-anthesis
+def: "Anthers are extruded between glume and lemma\, pores at the anther tip break open\, and pollen is released. Pollen shed occurs first from spikelets slightly above the middle of the central axis of the tassel\, then proceeds towards tip and base\, pollen shedding from lateral branches occurs somewhat later. " [MaizeDB:67361]
+synonym: "Pollen shed" []
+synonym: "Pollen shedding" []
+synonym: "VT" []
+synonym: "maize growth stage-5.1" []
+is_a: GRO:0007020 ! 05-flowering
+
+[Term]
+id: GRO:0007022
+name: 5.02-silking
+def: "Silks (styles) emerge from the husks at the ear tip. Normally the first silks appear slightly after anthesis begins\, but this interval can be delayed by drought or other stresses. Silks of  spikelets at the base of the ear emerge prior to those from more apical spikelets" [MaizeDB:67362]
+synonym: "R1" []
+synonym: "maize growth stage-5.2" []
+synonym: "silk emergence" []
+is_a: GRO:0007020 ! 05-flowering
+
+[Term]
+id: GRO:0007023
+name: 5.03-pollination
+def: "Pollen lands on a silk hair\, hydrates\, and germinates by sending out a pollen tube through the pollen pore. The pollen tube grows rapidly (0.5 cm/hr) down the length of the silk to the ovary and the embryo sac" [MaizeDB:67364]
+synonym: "maize growth stage-5.3" []
+is_a: GRO:0007020 ! 05-flowering
+
+[Term]
+id: GRO:0007024
+name: 5.04-fertilization
+def: "Fertilization occurs 16-24 hours after pollination. It consists of the simultaneous fusion of 1 sperm cell with the egg to form the diploid zygote\, and the other sperm cell with 2 polar nuclei to form the triploid primary endosperm nucleus" [GR:pj, MAizeDB:67365]
+synonym: "double fecundation" []
+synonym: "double fertilization" []
+synonym: "fecundation" []
+synonym: "maize growth stage-5.4" []
+is_a: GRO:0007020 ! 05-flowering
+
+[Term]
+id: GRO:0007025
+name: 06-post-flowering
+def: "The period of slow kernel growth between fertilization and the beginning of linear grain-filling\, lasting roughly 10-12 days. Some workers divides this period into dilatory and exponential phases\, which approximately coincide with the endosperm's free nuclear and mitotic stages\, respectively. From about 4-10 days after pollination\, the embryo is in the proembryo stage\, a club-shaped mass of cells with little differentiation except for a basal suspensor region\, and an apical region of smaller cells\, the embryo proper" [MaizeDB:67370]
+synonym: "R1" []
+synonym: "lag phase" []
+synonym: "maize growth stage-6" []
+synonym: "proembryo" []
+is_a: GRO:0007002 ! maize growth stage
+
+[Term]
+id: GRO:0007026
+name: 6.01-dilatory
+def: "This phase is the initial few days following fertilization\, during which time very slow dry matter accumulation occurs in the kernel. In the endosperm\, the primary endosperm nucleus divides 2-4 hours after fertilization\, followed by rapid synchronous divisions to produce a free nuclear tissue. The fertilized egg undergoes its first division about 10-12 hours after fertilization\, and by the end of this stage will have developed into the proembryo with about 12-24 cells" [MaizeDB:67371]
+synonym: "free nuclear" []
+synonym: "maize growth stage-6.1" []
+is_a: GRO:0007025 ! 06-post-flowering
+
+[Term]
+id: GRO:0007027
+name: 6.02-exponential
+def: "The phase with increased metabolic activity and rapid kernel development that links the dilatory phase with the linear grain-filling period. It occurs approximately 5-12 days after pollination (dap). In the endosperm\, cell walls are laid down beginning about 5 dap\, changing the free nuclear tissue into a cellular one. The embryo continues in the proembryo stage through about 10 dap. MaizeDB includes a sub-stage." [MaizeDB:67369]
+synonym: "maize growth stage-6.2" []
+is_a: GRO:0007025 ! 06-post-flowering
+
+[Term]
+id: GRO:0007028
+name: 6.02.1-transition stage
+def: "Occurs when the ovoid\, radially symmetrical proembryo elongates to form a cone-shaped structure\, establishing the future shoot-root meristem axis\, about 10-12 days after pollination. " [MaizeDB:67451]
+comment: In the endosperm\, mitotic activity in the central region declines\, and nuclear size and DNA content begin to increase  (endoreduplication)
+synonym: "endoreduplication" []
+synonym: "maize growth stage-6.2.1" []
+is_a: GRO:0007027 ! 6.02-exponential
+
+[Term]
+id: GRO:0007029
+name: 07-linear grain-filling
+def: "Stage of rapid\, nearly linear increase in kernel dry matter\, that begins about 2 weeks after pollination and lasts almost until physiological maturity" [MaizeDB:64632]
+synonym: "effective filling period" []
+synonym: "grain filling" []
+synonym: "maize growth stage-7" []
+is_a: GRO:0007002 ! maize growth stage
+
+[Term]
+id: GRO:0007030
+name: 7.01-blister stage
+def: "This stage is initiated when significant starch accumulation begins\, approximately 12-17 days after pollination (dap). Kernels  appear white and translucent\, endosperm and its inner fluid are clear. Endoreduplication\, an increase in DNA content in endosperm cells\, which began in the transition stage\, peaks about 16-18 dap" [MaizeDB:67372]
+comment: dap is days after pollination
+synonym: "R2" []
+synonym: "maize growth stage-7.1" []
+is_a: GRO:0007029 ! 07-linear grain-filling
+
+[Term]
+id: GRO:0007031
+name: 7.01.1-coleoptilar stage
+def: "In the coleoptilar stage\, the embryo develops a prominent shoot apical meristem surrounded by the coleoptilar ring\, and backed by the flattened\, spade-shaped scutellum\, it occurs about 12-14 days after pollination" [MaizeDB:67376]
+synonym: "embryo coleoptilar stage" []
+synonym: "maize growth stage-7.1.1" []
+is_a: GRO:0007030 ! 7.01-blister stage
+
+[Term]
+id: GRO:0007032
+name: 7.01.2-embryo-1
+def: "Embryo stage 1 is defined by the appearance of first leaf primordium from the shoot apical meristem\, it occurs about 14-18 days after pollination\, when embryo is slightly more than 1 mm long" [MaizeDB:67377]
+comment: Stage 1 embryos are often used to initiate embryonic callus in tissue culture experiments
+synonym: "embryo stage 1" []
+synonym: "maize growth stage-7.1.2" []
+is_a: GRO:0007030 ! 7.01-blister stage
+
+[Term]
+id: GRO:0007033
+name: 7.02-stage
+def: "Endosperm fluid has changed from clear to a milky white\, more viscous substance due to accumulating starch\, kernels are about 80% moisture\, aleurone color characteristic of the genotype appears\, occurs about 18-22 days after pollination" [MaizeDB:67373]
+comment: The embryo is at stage 2\: second leaf primordium is formed\, and embryo length is approx. 2 mm
+synonym: "R3" []
+synonym: "embryo stage 2" []
+synonym: "embryo-2" []
+synonym: "maize growth stage-7.2" []
+is_a: GRO:0007029 ! 07-linear grain-filling
+
+[Term]
+id: GRO:0007034
+name: 7.03-early dough stage
+def: "Endosperm fluid has changed to a pasty or soft dough-like consistency\, kernels have about 70% moisture\, occurs about 22-28 days after pollination. Embryo is at stage 3\: third leaf primordium forms\, radicle is recognizable within the coleorhiza\, embryo is about 3 mm long" [MaizeDB:67374]
+synonym: "R4" []
+synonym: "dough stage" []
+synonym: "embryo stage 3" []
+synonym: "embryo-3" []
+synonym: "maize growth stage-7.3" []
+is_a: GRO:0007029 ! 07-linear grain-filling
+
+[Term]
+id: GRO:0007035
+name: 7.04-late dough stage
+def: "Endosperm consistency checked by firmer dough than in the previous stage. Towards end of this stage\, in dent genotypes\, kernels begin to dent on top\, occurs about 28-35 days after pollination. Embryo is at stage 4\: fourth leaf primordium has formed\, embryo is 5-6 mm long" [MaizeDB:67379]
+synonym: "embryo stage 4" []
+synonym: "embryo-4" []
+synonym: "maize growth stage-7.4" []
+is_a: GRO:0007029 ! 07-linear grain-filling
+
+[Term]
+id: GRO:0007036
+name: 08-leveling of of grain-filling
+def: "Rate of dry matter accumulation in kernel diminishes as endosperm transfer cells are crushed. All or nearly all kernels are dented (in a dent genotype)\, kernels are about 50-55% moisture\, husk has begun to dry rapidly\, occurs about 35-42 days after pollination. Embryo is at stage 5\, fifth leaf  primordium has formed and lateral seminal root primordia can be observed" [MaizeDB:67382]
+synonym: "R5" []
+synonym: "attenuative" []
+synonym: "dent stage" []
+synonym: "embryo stage 5" []
+synonym: "embryo-5" []
+synonym: "leveling of of dry matter accumulation" []
+synonym: "maize growth stage-8" []
+is_a: GRO:0007002 ! maize growth stage
+
+[Term]
+id: GRO:0007037
+name: 09-maturity
+def: "The stage begins at physiological maturity (when the kernel has approximately 30-35% moisture) and continues through dry kernel (15% moisture or less). This stage is subdivided into the two stages listed above." [MaizeDB:11088]
+synonym: "maize growth stage-9" []
+synonym: "senescence" []
+is_a: GRO:0007002 ! maize growth stage
+
+[Term]
+id: GRO:0007038
+name: 9.01-physiological maturity
+def: "Occurs when grain dry matter accumulation ceases and a black abscission layer forms at the base of the kernel\, approx. 50-65 days after pollination\, grain moisture is about 30-35%. Embryo is at stage 6\: a sixth leaf primordium may have formed\, although many genotypes form only 5 embryonic leaves\, dormancy occurs after massive hydration of embryo cells" [MaizeDB:67380]
+synonym: "R6" []
+synonym: "black layer" []
+synonym: "embryo stage 6" []
+synonym: "embryo-6" []
+synonym: "maize growth stage-9.1" []
+is_a: GRO:0007037 ! 09-maturity
+
+[Term]
+id: GRO:0007039
+name: 9.02-dry kernel
+def: "The kernel has dried to safe storage moisture\, 15% or less" [MaizeDB:67381]
+synonym: "dry seed" []
+synonym: "maize growth stage-9.2" []
+synonym: "storage maturity" []
+is_a: GRO:0007037 ! 09-maturity
+
+[Term]
+id: GRO:0007040
+name: rice growth stage
+def: "The growth and developmental stages defined for the rice plant." [GR:pj]
+synonym: "rice growth stages" []
+is_a: GRO:0007199 ! cereal plant growth stage ontology
+
+[Term]
+id: GRO:0007041
+name: 4.2-panicle differentiation stage
+def: "At this point\, the panicle is 1 to 2 mm in length and the branching of the panicle is visible" [web:http //www.uaex.edu/Other_Areas/publications/HTML/MP192/1_Rice_Growth_and_Development_Reproductive.asp, GR:pj]
+comment: In parallel the stem elongation is continuing
+synonym: "PD" []
+synonym: "rice growth stage-4.2" []
+relationship: part_of GRO:0007048 ! 04-stem elongation stage
+
+[Term]
+id: GRO:0007042
+name: 08-dough stage
+def: "One of the ripening stages when endosperm starts hardening." [GR:pj]
+synonym: "rice growth stage-8" []
+is_a: GRO:0007141 ! C-embryo stage
+
+[Term]
+id: GRO:0007043
+name: 01-germination
+def: "Occurs when the seed coat has imbibed adequate water becoming soft and elastic. The coleorhiza elongates slightly\, emerging through the seed coat and the radicle breaks through the coleorhiza and becomes anchored in the soil or growth media." [GR:pj, web:http //www.uaex.edu/Other_Areas/publications/HTML/MP192/1_Rice_Growth_and_Development_Vegetative.asp]
+comment: Thus\, under dry-seeded or aerobic conditions\, the radicle emerges before the coleoptile. Under water-seeded or reduced oxygen (anaerobic) conditions\, the coleoptile may emerge before the root. The coleoptile continues to elongate and several lateral roots called seminal roots form.
+synonym: "rice growth stage-1" []
+is_a: GRO:0007139 ! A-vegetative stage
+
+[Term]
+id: GRO:0007044
+name: 06-heading stage
+def: "is the time when the panicle begins to exsert from the boot." [web:http //www.uaex.edu/Other_Areas/publications/HTML/MP192/1_Rice_Growth_and_Development_Reproductive.asp, GR:pj]
+comment: Heading may take over 10 to 14 days due to variations within tillers on the same plant and between plants in the field. Agronomically\, heading date is defined as the time when 50 percent of the panicles have at least partially exserted from the boot.
+synonym: "rice growth stage-6" []
+is_a: GRO:0007140 ! B-reproductive stage
+
+[Term]
+id: GRO:0007045
+name: 09-mature grain stage
+def: "The whole grain is hard and ready for harvest. This stage is reached at approximately 15-20 percent moisture" [GR:pj, web:http //www.uaex.edu/Other_Areas/publications/HTML/MP192/1_Rice_Growth_and_Development_Ripening.asp]
+synonym: "maturity stage" []
+synonym: "rice growth stage-9" []
+is_a: GRO:0007141 ! C-embryo stage
+
+[Term]
+id: GRO:0007046
+name: 07-milk stage
+def: "At this stage\, the developing starch grains in the kernel are soft\, and the interior of the kernel is filled with a white liquid resembling milk." [GR:pj, web:http //www.uaex.edu/Other_Areas/publications/HTML/MP192/1_Rice_Growth_and_Development_Ripening.asp]
+synonym: "milk grain" []
+synonym: "rice growth stage-7" []
+is_a: GRO:0007141 ! C-embryo stage
+
+[Term]
+id: GRO:0007047
+name: 02-seedling
+def: "occurs when the first internode called the mesocotyl has elongated and pushed the tip of the rice coleoptile (epiblast or first sheathing leaf) through the soil surface" [GR:pj, web:http //www.uaex.edu/Other_Areas/publications/HTML/MP192/1_Rice_Growth_and_Development_Vegetative.asp]
+comment: The length of the mesocotyl varies with cultivars. Some Semi-dwarf varieties may have a very short mesocotyl and generally will not emerge if covered by more than 1/2 to 3/4 inch of soil. The mesocotyl only develops in the dark and doesnt show up in water-seeded rice
+synonym: "rice growth stage-2" []
+is_a: GRO:0007139 ! A-vegetative stage
+
+[Term]
+id: GRO:0007048
+name: 04-stem elongation stage
+def: "Begins about the same time panicle initiation is occurring. It continues until full plant height is reached." [GR:pj, web:http //www.uaex.edu/Other_Areas/publications/HTML/MP192/1_Rice_Growth_and_Development_Vegetative.asp]
+comment: The top five internodes may elongate. Stem internodes can be distinguished from root internodes by the green color in the stem wall. Overlaps the vegetative and reproductive stages
+synonym: "internode elongation" []
+synonym: "jointing stage" []
+synonym: "rice growth stage-4" []
+is_a: GRO:0007139 ! A-vegetative stage
+relationship: part_of GRO:0007140 ! B-reproductive stage
+
+[Term]
+id: GRO:0007049
+name: 03-tillering stage
+def: "Usually begins at the fifth leaf stage when the first tiller is visible and emerges from the axillary bud of the second leaf on the culm. Tillering continues when the sixth leaf emerges\, the second tiller comes from the axillary bud of the third leaf." [GR:pj, web:http //www.uaex.edu/Other_Areas/publications/HTML/MP192/1_Rice_Growth_and_Development_Vegetative.asp]
+comment: In direct-seeded rice fields with a normal plant population (10 to 20 plants per square foot)\, rice plants generally produce 2 to 5 panicle bearing tillers per plant compared to 10 to 30 tillers per plant in transplanted rice where more space is available between plants.
+synonym: "rice growth stage-3" []
+is_a: GRO:0007139 ! A-vegetative stage
+
+[Term]
+id: GRO:0007051
+name: 01-germination
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+is_a: GRO:0007156 ! wheat, barley and oat growth stage
+
+[Term]
+id: GRO:0007052
+name: 1.01-dry seed
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-0
+is_a: GRO:0007051 ! 01-germination
+
+[Term]
+id: GRO:0007053
+name: 1.02-start of imbibition
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-1
+is_a: GRO:0007051 ! 01-germination
+
+[Term]
+id: GRO:0007054
+name: 1.03-imbibition complete
+def: "When the imbibition of the seed is complete." [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-3
+is_a: GRO:0007051 ! 01-germination
+
+[Term]
+id: GRO:0007055
+name: 1.04-radicle emerged from seed
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-5
+is_a: GRO:0007051 ! 01-germination
+
+[Term]
+id: GRO:0007056
+name: 1.05-coleoptile emerged from seed
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-7
+is_a: GRO:0007051 ! 01-germination
+
+[Term]
+id: GRO:0007057
+name: 1.06-leaf just at coleoptile tip
+def: "The leaf has just emerged." [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-9\, Haun scale-0
+is_a: GRO:0007051 ! 01-germination
+
+[Term]
+id: GRO:0007058
+name: 02-seedling growth
+is_a: GRO:0007156 ! wheat, barley and oat growth stage
+
+[Term]
+id: GRO:0007059
+name: 2.01-first leaf through coleoptile
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-10\, Feekes scale-1
+is_a: GRO:0007058 ! 02-seedling growth
+
+[Term]
+id: GRO:0007060
+name: 2.02-first leaf unfolded
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-11\, Haun scale-1.+
+is_a: GRO:0007058 ! 02-seedling growth
+
+[Term]
+id: GRO:0007061
+name: 2.03-two leaves unfolded
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-12\, Haun scale-1.+
+is_a: GRO:0007058 ! 02-seedling growth
+
+[Term]
+id: GRO:0007062
+name: 2.04-three leaves unfolded
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-13\, Haun scale-2.+
+is_a: GRO:0007058 ! 02-seedling growth
+
+[Term]
+id: GRO:0007063
+name: 2.05-four leaves unfolded
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-14\, Haun scale-3.+
+is_a: GRO:0007058 ! 02-seedling growth
+
+[Term]
+id: GRO:0007064
+name: 2.06-five leaves unfolded
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-15\, Haun scale-4.+
+is_a: GRO:0007058 ! 02-seedling growth
+
+[Term]
+id: GRO:0007065
+name: 2.07-six leaves unfolded
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-16\, Haun scale-5.+
+is_a: GRO:0007058 ! 02-seedling growth
+
+[Term]
+id: GRO:0007066
+name: 2.08-seven leaves unfolded
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-\,  scale-6.+
+is_a: GRO:0007058 ! 02-seedling growth
+
+[Term]
+id: GRO:0007067
+name: 2.09-eight leaves unfolded
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-18\, Haun scale-7.+
+is_a: GRO:0007058 ! 02-seedling growth
+
+[Term]
+id: GRO:0007068
+name: 2.10 nine or more leaves unfolded
+def: "When 9 or more leaves have unfolded or exposed." [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-19
+is_a: GRO:0007058 ! 02-seedling growth
+
+[Term]
+id: GRO:0007069
+name: 03-tillering
+is_a: GRO:0007156 ! wheat, barley and oat growth stage
+
+[Term]
+id: GRO:0007070
+name: 3.01-main shoot only
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-20
+is_a: GRO:0007069 ! 03-tillering
+
+[Term]
+id: GRO:0007071
+name: 3.02-main shoot and one tiller
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-21\, Feekes scale-2
+is_a: GRO:0007069 ! 03-tillering
+
+[Term]
+id: GRO:0007072
+name: 3.03-main shoot and two tillers
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-22
+is_a: GRO:0007069 ! 03-tillering
+
+[Term]
+id: GRO:0007073
+name: 3.04-main shoot and three tillers
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-23
+is_a: GRO:0007069 ! 03-tillering
+
+[Term]
+id: GRO:0007074
+name: 3.05-main shoot and four tillers
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-24
+is_a: GRO:0007069 ! 03-tillering
+
+[Term]
+id: GRO:0007075
+name: 3.06-main shoot and five tillers
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-25
+is_a: GRO:0007069 ! 03-tillering
+
+[Term]
+id: GRO:0007076
+name: 3.07-shoot and six tillers
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-26\, Feekes scale-3
+is_a: GRO:0007069 ! 03-tillering
+
+[Term]
+id: GRO:0007077
+name: 3.08-main shoot and seven tillers
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-27
+is_a: GRO:0007069 ! 03-tillering
+
+[Term]
+id: GRO:0007078
+name: 3.09-main shoot and eight tillers
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-28
+is_a: GRO:0007069 ! 03-tillering
+
+[Term]
+id: GRO:0007079
+name: 3.10-main shoot and nine or more tillers
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-29
+is_a: GRO:0007069 ! 03-tillering
+
+[Term]
+id: GRO:0007080
+name: 04-stem elongation
+is_a: GRO:0007156 ! wheat, barley and oat growth stage
+
+[Term]
+id: GRO:0007081
+name: 4.01-pseudo stem erection
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-30\, Feekes scale 4-5
+is_a: GRO:0007080 ! 04-stem elongation
+
+[Term]
+id: GRO:0007082
+name: 4.02 first node detectable
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-31\, Feekes scale-6
+is_a: GRO:0007080 ! 04-stem elongation
+
+[Term]
+id: GRO:0007083
+name: 4.03-second node detectable
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-32\, Feekes scale-7
+is_a: GRO:0007080 ! 04-stem elongation
+
+[Term]
+id: GRO:0007084
+name: 4.04-third node detectable
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-33
+is_a: GRO:0007080 ! 04-stem elongation
+
+[Term]
+id: GRO:0007085
+name: 4.05-fourth node detectable
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-34
+is_a: GRO:0007080 ! 04-stem elongation
+
+[Term]
+id: GRO:0007086
+name: 4.06-fifth node detectable
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-35
+is_a: GRO:0007080 ! 04-stem elongation
+
+[Term]
+id: GRO:0007087
+name: 4.07-sixth node detectable
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-36
+is_a: GRO:0007080 ! 04-stem elongation
+
+[Term]
+id: GRO:0007088
+name: 4.08-flag leaf just visible
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-37\, Feekes scale-8
+is_a: GRO:0007080 ! 04-stem elongation
+
+[Term]
+id: GRO:0007089
+name: 4.09-flag leaf ligule/collar just visible
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-39\, Feekes scale-9
+is_a: GRO:0007080 ! 04-stem elongation
+
+[Term]
+id: GRO:0007090
+name: 05-booting
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-40
+is_a: GRO:0007156 ! wheat, barley and oat growth stage
+
+[Term]
+id: GRO:0007091
+name: 5.01-flag leaf sheath extending
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-41\, Haun scale-8 to 9
+is_a: GRO:0007090 ! 05-booting
+
+[Term]
+id: GRO:0007092
+name: 5.02-boots just swollen
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-45\, Feekes scale-10\, Haun scale-9.2
+is_a: GRO:0007090 ! 05-booting
+
+[Term]
+id: GRO:0007093
+name: 5.03-flag leaf sheath opening
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-47
+is_a: GRO:0007090 ! 05-booting
+
+[Term]
+id: GRO:0007094
+name: 5.04-first awns visible
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-49\, Haun scale-10.1
+is_a: GRO:0007090 ! 05-booting
+
+[Term]
+id: GRO:0007095
+name: 06-inflorescence emergence
+is_a: GRO:0007156 ! wheat, barley and oat growth stage
+
+[Term]
+id: GRO:0007096
+name: 6.01-first spikelet of inflorescence visible
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-50\, Feekes scale-10.1\, Haun scale-10.2
+is_a: GRO:0007095 ! 06-inflorescence emergence
+
+[Term]
+id: GRO:0007097
+name: 6.02-1/4 of inflorescence emerged
+def: "When a quarter of the inflorescence has emerged." [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-53\, Feekes scale-10.2
+is_a: GRO:0007095 ! 06-inflorescence emergence
+
+[Term]
+id: GRO:0007098
+name: 6.03-1/2 of inflorescence emerged
+def: "When half of the inflorescence has emerged." [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-1\, Feekes scale-10.3\, Haun scale-10.5
+is_a: GRO:0007095 ! 06-inflorescence emergence
+
+[Term]
+id: GRO:0007099
+name: 6.04-3/4 of inflorescence emerged
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-57\, Feekes scale-10.4\, Haun scale-10.7
+is_a: GRO:0007095 ! 06-inflorescence emergence
+
+[Term]
+id: GRO:0007100
+name: 6.05-emergence of inflorescence completed
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-59\, Feekes scale-10.5\, Haun scale-11
+is_a: GRO:0007095 ! 06-inflorescence emergence
+
+[Term]
+id: GRO:0007101
+name: 07-anthesis
+def: "The time of flowering or pollination." [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+is_a: GRO:0007156 ! wheat, barley and oat growth stage
+
+[Term]
+id: GRO:0007102
+name: 7.01-anthesis beginning
+def: "When the of flowering or pollination has just begun" [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-60\, Feekes scale-10.51\, Haun scale-11.4
+synonym: "Beginning on anthesis" []
+is_a: GRO:0007101 ! 07-anthesis
+
+[Term]
+id: GRO:0007103
+name: 7.02-anthesis half-way
+def: "When the of flowering or pollination has occurred on 50 percent of  all florets in the inflorescence" [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Haun scale-11.5
+is_a: GRO:0007101 ! 07-anthesis
+
+[Term]
+id: GRO:0007104
+name: 7.03-anthesis completed
+def: "When the flowering or pollination is complete in all florets." [web:http //www.extension.umn.edu/distribution/cropsystems/DC2547.html#systems]
+comment: Zadok scale-69\, Haun scale-11.6
+is_a: GRO:0007101 ! 07-anthesis
+
+[Term]
+id: GRO:0007105
+name: 08-milk development
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-70
+is_a: GRO:0007156 ! wheat, barley and oat growth stage
+
+[Term]
+id: GRO:0007106
+name: 8.01-kernel watery ripe
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-71\, Feekes scale-10.54\, Haun scale-12.1
+is_a: GRO:0007105 ! 08-milk development
+
+[Term]
+id: GRO:0007107
+name: 8.02-early milk
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-73\, Haun scale-13
+is_a: GRO:0007105 ! 08-milk development
+
+[Term]
+id: GRO:0007108
+name: 8.04-medium milk
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-75\, Feekes scale-11.1
+is_a: GRO:0007105 ! 08-milk development
+
+[Term]
+id: GRO:0007109
+name: 8.03-late milk
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-77
+is_a: GRO:0007105 ! 08-milk development
+
+[Term]
+id: GRO:0007110
+name: 09-dough development
+def: "  " [web:http //www.ibiblio.org/botnet/glossary/a_vi.html, GR:pj]
+comment: Zadok scale-80
+is_a: GRO:0007156 ! wheat, barley and oat growth stage
+
+[Term]
+id: GRO:0007111
+name: 9.01-early dough
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-83\, Haun scale-14
+is_a: GRO:0007110 ! 09-dough development
+
+[Term]
+id: GRO:0007112
+name: 9.02-soft dough
+def: "   " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-85\, Feekes scale-11.2
+is_a: GRO:0007110 ! 09-dough development
+
+[Term]
+id: GRO:0007113
+name: 9.03-hard dough
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-87\, Haun scale-15
+is_a: GRO:0007110 ! 09-dough development
+
+[Term]
+id: GRO:0007114
+name: 10-ripening
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-90
+is_a: GRO:0007156 ! wheat, barley and oat growth stage
+
+[Term]
+id: GRO:0007115
+name: 10.01-kernel medium hard
+def: "Kernel is difficult to divide by using the thumbnail." [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-91\, Feekes scale-11.3
+is_a: GRO:0007114 ! 10-ripening
+
+[Term]
+id: GRO:0007116
+name: 10.02-kernel hard
+def: "Kernel can no longer be dented with thumbnail." [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-92\, Feekes scale-11.4\, Haun scale-16
+is_a: GRO:0007114 ! 10-ripening
+
+[Term]
+id: GRO:0007117
+name: 10.03-kernel loosening in daytime
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-93
+is_a: GRO:0007114 ! 10-ripening
+
+[Term]
+id: GRO:0007118
+name: 10.04-overripe, straw dead and collapsing
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-94
+is_a: GRO:0007114 ! 10-ripening
+
+[Term]
+id: GRO:0007119
+name: 10.05-seed dormant
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-95
+is_a: GRO:0007114 ! 10-ripening
+
+[Term]
+id: GRO:0007120
+name: 10.06-viable seed germination
+def: "Viable seed giving 50 percent germination." [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-96
+is_a: GRO:0007114 ! 10-ripening
+
+[Term]
+id: GRO:0007121
+name: 10.07-seed not dormant
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-97
+is_a: GRO:0007114 ! 10-ripening
+
+[Term]
+id: GRO:0007122
+name: 10.08-secondary dormancy induced
+def: "  " [web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm, GR:pj]
+comment: Zadok scale-98
+is_a: GRO:0007114 ! 10-ripening
+
+[Term]
+id: GRO:0007123
+name: 10.09-secondary dormancy lost
+def: "  " [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: Zadok scale-99
+is_a: GRO:0007114 ! 10-ripening
+
+[Term]
+id: GRO:0007124
+name: sorghum growth stage
+def: "Sorghum Development and Key Growth Stages as described by Brent Bean and Carl Patrick\, Extension Agronomist and Entomologist at the Texas A&M\, Agricultural Research and Extension station. " [web:http //primera.tamu.edu/ir4/sor-stage.pdf, GR:pj]
+comment: The growth stages defined for Sorghum were extracted from the document at http\://primera.tamu.edu/ir4/sor-stage.pdf
+is_a: GRO:0007199 ! cereal plant growth stage ontology
+
+[Term]
+id: GRO:0007125
+name: 01-seedling emergence
+def: "Coleoptile visible at soil surface. " [web:http //primera.tamu.edu/ir4/sor-stage.pdf, GR:pj]
+comment: Coleoptile is the first leaf and is shorter than the later emerging leaves and has a rounded tip
+synonym: "sorghum growth stage-0" []
+is_a: GRO:0007124 ! sorghum growth stage
+
+[Term]
+id: GRO:0007126
+name: 02-three leaf stage
+def: "Collar of 3rd leaf is visible" [GR:pj, web:http //primera.tamu.edu/ir4/sor-stage.pdf]
+comment: This stage will occur approximately 10 days after emergence\, depending on soil temperature\, moisture\, planting depth\, etc.
+synonym: "sorghum growth stage-1" []
+is_a: GRO:0007124 ! sorghum growth stage
+
+[Term]
+id: GRO:0007127
+name: 04-five leaf stage
+def: "Collar of 5th leaf is visible" [GR:pj, web:http //primera.tamu.edu/ir4/sor-stage.pdf]
+comment: Occurs approximately 20 days after emergence. May have lost first leaf (coleoptile) by this time.
+synonym: "sorghum growth stage-3" []
+is_a: GRO:0007124 ! sorghum growth stage
+
+[Term]
+id: GRO:0007128
+name: 05-growing point differentiation
+def: "Growing point visible above the soil surface." [web:http //primera.tamu.edu/ir4/sor-stage.pdf, GR:pj]
+comment: Occurs approximately 30 to 35 days after emergence. Generally corresponds with the 7 to 8 leaf stage. May have lost 1 to 3 leaves from the bottom of the plant.
+synonym: "sorghum growth stage-4" []
+is_a: GRO:0007124 ! sorghum growth stage
+
+[Term]
+id: GRO:0007129
+name: 06-flag leaf visible
+def: "Tip of the flag leaf (last leaf) is visible in the whorl. " [GR:pj, web:http //primera.tamu.edu/ir4/sor-stage.pdf]
+comment: The last 3 to 4 leaves may not be fully expanded (collars not visible).
+synonym: "sorghum growth stage-5" []
+is_a: GRO:0007124 ! sorghum growth stage
+
+[Term]
+id: GRO:0007130
+name: 07-boot stage
+def: "Leaf collars of all leaves are now visible. Sorghum head is enclosed in the flag leaf sheath" [web:http //primera.tamu.edu/ir4/sor-stage.pdf, GR:pj]
+comment: Peduncle (stalk supporting the head) is beginning to elongate
+synonym: "sorghum growth stage-6" []
+is_a: GRO:0007124 ! sorghum growth stage
+
+[Term]
+id: GRO:0007131
+name: 08-heading
+def: "50% of the plants in the field have visible heads" [GR:pj, web:http //primera.tamu.edu/ir4/sor-stage.pdf]
+synonym: "half-bloom" []
+synonym: "sorghum growth stage-7" []
+is_a: GRO:0007124 ! sorghum growth stage
+
+[Term]
+id: GRO:0007132
+name: 10-dough stage
+is_a: GRO:0007124 ! sorghum growth stage
+
+[Term]
+id: GRO:0007133
+name: 10.01-soft dough
+def: "Grain can be easily squeezed between the fingers" [GR:pj, web:http //primera.tamu.edu/ir4/sor-stage.pdf]
+comment: 8 to 12 functional leaves present. One half of grain dry weight has accumulated.
+synonym: "sorghum growth stage-9" []
+is_a: GRO:0007132 ! 10-dough stage
+
+[Term]
+id: GRO:0007134
+name: 10.02-hard dough
+def: "Cannot squeeze grain between the fingers." [web:http //primera.tamu.edu/ir4/sor-stage.pdf, GR:pj]
+comment: Three-fourths of grain dry weight has accumulated
+synonym: "sorghum growth stage-10" []
+is_a: GRO:0007132 ! 10-dough stage
+
+[Term]
+id: GRO:0007135
+name: 11-physiological maturity
+def: "This stage is identified by the dark spot on the tip of the kernel. Grain will contain 25 to 35% moisture." [GR:pj, web:http //primera.tamu.edu/ir4/sor-stage.pdf]
+comment: Maximum total dry weight has been achieved
+synonym: "black layer" []
+synonym: "sorghum growth stage-11" []
+is_a: GRO:0007124 ! sorghum growth stage
+
+[Term]
+id: GRO:0007136
+name: rice plant part development stage
+def: "The developmental stages of individual plant parts or organs in a rice plant." [GR:pj]
+comment: The rice plant organ developmental stages were defined by the Oryzabase\, in Japan. ref\: http\://www.shigen.nig.ac.jp/rice/oryzabase/development/organAndStage.jsp
+is_a: GRO:0007040 ! rice growth stage
+
+[Term]
+id: GRO:0007137
+name: embryo development
+def: "Defines all the stages of embryo development from fertilization stage to maturity stage." [Oryzabase:Embryo, GR:pj]
+comment: The embryo developmental stages were defined by the Oryzabase\, in Japan. ref\:  http\://earth.lab.nig.ac.jp\:8080/IneDatabase/query?type=browse&data=embryo&item=All
+is_a: GRO:0007136 ! rice plant part development stage
+
+[Term]
+id: GRO:0007138
+name: leaf development
+def: "Defines all the stages of leaf development from recruitment of leaf primordial cells to fully developed leaf." [Oryzabase:Embryo, GR:pj]
+comment: The leaf developmental stages were defined by the Oryzabase\, in Japan. ref\:  http\://earth.lab.nig.ac.jp\:8080/IneDatabase/query?type=browse&data=leaf&item=All
+is_a: GRO:0007136 ! rice plant part development stage
+
+[Term]
+id: GRO:0007139
+name: A-vegetative stage
+def: "growth stages from germination to panicle initiation stage." [GR:pj, web:http //www.uaex.edu/Other_Areas/publications/HTML/MP192/1_Rice_Growth_and_Development.asp#Vegetative]
+comment: The later stage (lag phase) may overlap with the reproductive stage
+is_a: GRO:0007001 ! rice plant growth stage
+
+[Term]
+id: GRO:0007140
+name: B-reproductive stage
+def: "Growth stages from panicle initiation to heading stage." [GR:pj, web:http //www.uaex.edu/Other_Areas/publications/HTML/MP192/1_Rice_Growth_and_Development_Reproductive.asp]
+is_a: GRO:0007001 ! rice plant growth stage
+
+[Term]
+id: GRO:0007141
+name: C-embryo stage
+def: "Growth stages from fertilization\, embryo formation to ripening and maturation stage." [GR:pj, web:http //www.uaex.edu/Other_Areas/publications/HTML/MP192/1_Rice_Growth_and_Development_Ripening.asp]
+comment: Light intensity is very important during this interval since 60 percent or more of the carbohydrates used in grain filling are photosynthesized during this time interval. High temperatures tend to reduce the grain filling period and may reduce grain weight. Low temperatures tend to lengthen the time required for grain fill and ripening.
+synonym: "grain-filling stage" []
+synonym: "ripening stage" []
+is_a: GRO:0007001 ! rice plant growth stage
+
+[Term]
+id: GRO:0007142
+name: 1-4 leaf stage
+def: "The period from development of the first to fourth leaf stage" [GR:pj, web:http //www.uaex.edu/Other_Areas/publications/HTML/MP192/1_Rice_Growth_and_Development_Vegetative.asp]
+comment: During this time\, the seminal roots further develop\, the secondary or lateral roots develop and the first four leaves appear
+synonym: "pre-tillering" []
+synonym: "rice growth stage-2.1" []
+is_a: GRO:0007047 ! 02-seedling
+
+[Term]
+id: GRO:0007143
+name: 03-four leaf stage
+def: "Collar of 4th leaf is visible." [web:http //primera.tamu.edu/ir4/sor-stage.pdf, GR:pj]
+comment: Occurs approximately 15 days after emergence
+synonym: "sorghum growth stage-2" []
+is_a: GRO:0007124 ! sorghum growth stage
+
+[Term]
+id: GRO:0007144
+name: 3.1-maximum tillering
+def: "tillering increases in a sigmoidal-shaped curve until the maximum tiller number is reached. At this point\, the main culm may be difficult to distinguish from the tiller." [GR:pj, web:http //www.uaex.edu/Other_Areas/publications/HTML/MP192/1_Rice_Growth_and_Development_Vegetative.asp]
+comment: After maximum tillering has occurred\, no more effective tillers are produced. A portion of the late tillers will generally die due to competition effects
+synonym: "rice growth stage-3.1" []
+is_a: GRO:0007049 ! 03-tillering stage
+
+[Term]
+id: GRO:0007145
+name: ratooning stage
+def: "Producing new tillers from nodes after harvest" [GR:pj \, JCL]
+comment: Excluding germination and early seedling stages\, it begins a fresh cycle producing new tillers from nodes post-harvest. It may or may not be considered as a growth stage by others. However\, Gramene is proposing it to be included as one of the new growth stage.
+synonym: "rice growth stage-3A" []
+is_a: GRO:0007139 ! A-vegetative stage
+
+[Term]
+id: GRO:0007146
+name: vegetative lag phase
+def: "Is the period from the end of active tillering to the beginning of the reproductive stage. Tiller number decreases\, height and stem diameter continue to increase but at a slower rate." [GR:pj, web:http //www.uaex.edu/Other_Areas/publications/HTML/MP192/1_Rice_Growth_and_Development_Vegetative.asp]
+comment: The length of this period is a function of the maturation period of the cultivar. For very-short season cultivars with 110-day maturity\, this period may not be evident. In this situation\, maximum tillering stage and the beginning of reproductive growth may overlap. In a 150-day rice cultivar\, the lag phase period may last more than two weeks. The vegetative lag phase in midseason varieties is characterized by yellowing plants
+synonym: "rice growth stage-4.3" []
+is_a: GRO:0007139 ! A-vegetative stage
+
+[Term]
+id: GRO:0007147
+name: 4.1-panicle initiation stage
+def: "Is the time when the panicle primordia initiate the production of a panicle in the uppermost node of the culm" [GR:pj, web:http //www.uaex.edu/Other_Areas/publications/HTML/MP192/1_Rice_Growth_and_Development_Reproductive.asp]
+comment: A thin green band is visible just above the top node\, and represents the very beginning of internode elongation (stem elongation stage) and is evident for only a couple of days
+synonym: "PI" []
+synonym: "green ring stage" []
+synonym: "rice growth stage-4.1" []
+relationship: part_of GRO:0007048 ! 04-stem elongation stage
+
+[Term]
+id: GRO:0007148
+name: 05-booting stage
+def: "This stage is characterized by a swelling of the flag leaf sheath\, caused by an increase in the size of the panicle as it grows up the leaf sheath. " [GR:pj, web:http //www.uaex.edu/Other_Areas/publications/HTML/MP192/1_Rice_Growth_and_Development_Reproductive.asp]
+synonym: "rice growth stage-5" []
+is_a: GRO:0007140 ! B-reproductive stage
+
+[Term]
+id: GRO:0007149
+name: 5.1-early booting stage
+def: "In this stage\, meiosis occurs. Panicle continues to grow." [web:http //www.uaex.edu/Other_Areas/publications/HTML/MP192/1_Rice_Growth_and_Development_Reproductive.asp, GR:pj]
+synonym: "rice growth stage-5.1" []
+is_a: GRO:0007148 ! 05-booting stage
+
+[Term]
+id: GRO:0007150
+name: 5.2-late booting stage
+def: "In this stage the flag leaf has completely extended. It occurs about 6 days prior to heading. " [GR:pj, web:http //www.uaex.edu/Other_Areas/publications/HTML/MP192/1_Rice_Growth_and_Development_Reproductive.asp]
+synonym: "rice growth stage-5.2" []
+is_a: GRO:0007148 ! 05-booting stage
+
+[Term]
+id: GRO:0007151
+name: 6.1-flowering stage
+def: "Refers to the events between the opening and closing of floret" [GR:pj, web:http //www.uaex.edu/Other_Areas/publications/HTML/MP192/1_Rice_Growth_and_Development_Reproductive.asp]
+comment: The events occurring in this stage are\: (a). The tips of the lemma and palea (hulls) open. #(b) The filaments elongate.# (c). The anthers exsert from the lemma and palea. #(d). As the lemma and palea open further\, the tips of the feathery stigma become visible. #(e). The filaments elongate past the tips of lemma and palea. #(f). The spikelet closes\, leaving the anther outside. Anther dehiscence (pollen shed) usually occurs just prior to or at the time the lemma and palea open (step a).
+synonym: "anthesis" []
+synonym: "anthesis stage" []
+synonym: "rice growth stage-6.1" []
+is_a: GRO:0007044 ! 06-heading stage
+
+[Term]
+id: GRO:0007152
+name: 8.1-dough stage
+def: "The starch in the grain begins to become firm but is still soft" [GR:pj, web:http //www.uaex.edu/Other_Areas/publications/HTML/MP192/1_Rice_Growth_and_Development_Ripening.asp]
+synonym: "early dough grain" []
+synonym: "early dough stage" []
+synonym: "rice growth stage-8.1" []
+is_a: GRO:0007042 ! 08-dough stage
+
+[Term]
+id: GRO:0007153
+name: 09-flowering
+def: "Occurs when 50% of the plants in the field are in some stage of bloom" [web:http //primera.tamu.edu/ir4/sor-stage.pdf, GR:pj]
+comment: Flowering occurs over a 4 to 9 day period.
+synonym: "sorghum growth stage8" []
+is_a: GRO:0007124 ! sorghum growth stage
+
+[Term]
+id: GRO:0007154
+name: 8.2-hard dough stage
+def: "The whole grain is firm during this stage and almost ready for harvest. The moisture content is still above 22 percent." [GR:pj, web:http //www.uaex.edu/Other_Areas/publications/HTML/MP192/1_Rice_Growth_and_Development_Ripening.asp]
+synonym: "late dough grain" []
+synonym: "late dough stage" []
+synonym: "rice growth stage-8.2" []
+is_a: GRO:0007042 ! 08-dough stage
+
+[Term]
+id: GRO:0007156
+name: wheat, barley and oat growth stage
+alt_id: GRO:0007050
+alt_id: GRO:0007155
+def: "The development and growth of cereals wheat\, oat and barley has been translated into several numeric scales to quantify development for scientific and management purposes. These are based on the most commonly used scales defined by Feekes\, Zadok and Haun." [GR:pj, web:http //weeds.montana.edu/crop/Growth_stages_book/p22_23.htm]
+comment: The curators have extracted the growth stage information based on the document available at http\://weeds.montana.edu/crop/Growth_stages_book/p22_23.htm
+synonym: "Triticeae plant growth stage" []
+synonym: "barley growth stage" []
+synonym: "oat growth stage" []
+synonym: "wheat growth stage" []
+is_a: GRO:0007199 ! cereal plant growth stage ontology
+
+[Term]
+id: GRO:0007157
+name: panicle development
+def: "Defines all the stages of panicle or rice inflorescence development from switching over of the stem apical meristem into rachis meristem to mature panicle formation." [Oryzabase:Embryo, GR:pj]
+comment: The panicle developmental stages were defined by the Oryzabase\, in Japan. ref\: http\://earth.lab.nig.ac.jp\:8080/IneDatabase/query?type=browse&data=panicle&item=All
+is_a: GRO:0007136 ! rice plant part development stage
+
+[Term]
+id: GRO:0007158
+name: spikelet development
+def: "Defines all the stages of spikelet development from formation of rudimentary glumes to floret development." [Oryzabase:Embryo, GR:pj]
+comment: The spikelet developmental stages were defined by the Oryzabase\, in Japan. ref\: http\://earth.lab.nig.ac.jp\:8080/IneDatabase/query?type=browse&data=spikelet&item=All
+is_a: GRO:0007136 ! rice plant part development stage
+
+[Term]
+id: GRO:0007159
+name: stamen development
+def: "Defines all the stages of stamen development from stamen primordia differentiation to end of microgametogenesis." [GR:pj, Oryzabase:Embryo]
+comment: The stamen developmental stages were defined by the Oryzabase\, in Japan. ref\: http\://earth.lab.nig.ac.jp\:8080/IneDatabase/query?type=browse&data=stamen&item=All
+is_a: GRO:0007136 ! rice plant part development stage
+
+[Term]
+id: GRO:0007160
+name: ovule development
+def: "Defines all the stages of ovule development from carpel primordium formation to megagametogenesis." [Oryzabase:Embryo, GR:pj]
+comment: The ovule developmental stages were defined by the Oryzabase\, in Japan. ref\: http\://earth.lab.nig.ac.jp\:8080/IneDatabase/query?type=browse&data=ovule&item=All
+is_a: GRO:0007136 ! rice plant part development stage
+
+[Term]
+id: GRO:0007161
+name: leaf stage P0
+def: "Recruitment of leaf founder or primordial cells occurs." [Oryzabase:Leaf, GR:pj]
+comment: Marked by down regulation of Osh1 gene (GR_protein_id=77897) and expression of OsPnh gene (GR_protein_id=90881).
+is_a: GRO:0007138 ! leaf development
+
+[Term]
+id: GRO:0007162
+name: leaf stage P4
+def: "Elongation of leaf blade occurs along with differentiation of epidermis specific bulliform cells\, silica cells\, cork cells and stomata.  " [Oryzabase:Leaf, GR:pj]
+is_a: GRO:0007138 ! leaf development
+
+[Term]
+id: GRO:0007163
+name: leaf stage P2
+def: "Foot-like shape\, with overlapping of two leaf margins occurs along with differentiation of vascular bundle and establishment of leaf domains along the central-marginal axis." [Oryzabase:Leaf, GR:pj]
+is_a: GRO:0007138 ! leaf development
+
+[Term]
+id: GRO:0007164
+name: leaf stage P1
+def: "Protrusion of leaf primordium and elongation of leaf margin around stem apical meristem (SAM) occurs." [Oryzabase:Leaf, GR:pj]
+is_a: GRO:0007138 ! leaf development
+
+[Term]
+id: GRO:0007165
+name: leaf stage P5
+def: "Elongation of leaf sheath\, emergence of leaf blade from the sheath of preceding leaf and formation of lacunae occurs. The leaf blade\, sheath\, ligule and auricles are fully developed in the juvenile leaf." [Oryzabase:Leaf, GR:pj]
+is_a: GRO:0007138 ! leaf development
+
+[Term]
+id: GRO:0007166
+name: leaf stage P3
+def: "Formation of ligule primordia and leaf blade and leaf sheath boundary occurs\, along with differentiation of sclerenchymatous cells and initiation of epidermis." [GR:pj, Oryzabase:Leaf]
+is_a: GRO:0007138 ! leaf development
+
+[Term]
+id: GRO:0007167
+name: leaf stage PX
+def: "Completely mature adult leaf." [GR:pj, Oryzabase:Leaf]
+is_a: GRO:0007138 ! leaf development
+
+[Term]
+id: GRO:0007168
+name: embryo stage EM1
+def: "The stage marked by the fertilization event." [Oryzabase:Embryo, GR:pj]
+comment: Occurs at zero days after pollination. Number of embryo cells at this stage are one (zygote).
+is_a: GRO:0007137 ! embryo development
+
+[Term]
+id: GRO:0007169
+name: embryo stage EM5
+def: "Marked with onset of coleoptile\, stem apical meristem (SAM) and radicle differentiation." [GR:pj, Oryzabase:Embryo]
+comment: Occurs at four days after pollination.
+is_a: GRO:0007137 ! embryo development
+
+[Term]
+id: GRO:0007170
+name: embryo stage EM3
+def: "Globular stage of the embryo." [Oryzabase:Embryo, GR:pj]
+comment: Occurs at tow days after pollination.
+is_a: GRO:0007137 ! embryo development
+
+[Term]
+id: GRO:0007171
+name: embryo stage EM2
+def: "First division of fertilized egg. Globular stage ca.25-cell stage marked with rapid cell division." [Oryzabase:Leaf, GR:pj]
+comment: Occurs at one day after pollination.
+is_a: GRO:0007137 ! embryo development
+
+[Term]
+id: GRO:0007172
+name: embryo stage EM6
+def: "Protrusion of first leaf primordium and enlargement of scutellum occurs at this stage. Marks the onset of juvenile vegetative stage." [GR:pj, Oryzabase:Embryo]
+comment: Occurs at five-six days after pollination. Expression of Amy1A (GR_protein_id=77717) in scutellar epithelium appears.
+is_a: GRO:0007137 ! embryo development
+
+[Term]
+id: GRO:0007173
+name: embryo stage EM4
+def: "It's a globular stage with oblong-shaped embryo. Marked by onset of exponential increase in size and cell number. Formation of gradient of cell size along dorsoventral direction and marked regionalization in the developing embryo." [GR:pj, Oryzabase:Embryo]
+comment: Occurs at three days after pollination.
+is_a: GRO:0007137 ! embryo development
+
+[Term]
+id: GRO:0007174
+name: embryo stage EM7
+def: "Identified by protrusion of 2nd and 3rd leaf primordia and epiblast." [GR:pj, Oryzabase:Embryo]
+comment: Occurs at seven-eight days after pollination.
+is_a: GRO:0007137 ! embryo development
+
+[Term]
+id: GRO:0007175
+name: embryo stage EM8
+def: "Enlargement of embryo parts and morphological completion." [Oryzabase:Embryo, GR:pj]
+comment: Occurs at nine-ten days after pollination. Expression of maturation-related genes such as OsEM (GR_protein_id=77791)\, Rab16A\, VP1 (GR_protein_id=78075\, 89294) observed.
+is_a: GRO:0007137 ! embryo development
+
+[Term]
+id: GRO:0007176
+name: embryo stage EM9
+def: "Embryo maturation process begins." [GR:pj, Oryzabase:Embryo, GR_ref:6590]
+comment: Occurs at eleven-twenty days after pollination. Expression of maturation-related genes such as OsEM (GR_protein_id=77791)\, Rab16A\, VP1 (GR_protein_id=78075\, 89294) observed.
+is_a: GRO:0007137 ! embryo development
+
+[Term]
+id: GRO:0007177
+name: embryo stage EM10
+def: "Embryo gains dormancy and tolerance for desiccation. Embryonic shoot\, radicle\, scutellum\, epiblast and bundle sheath are mature." [GR:pj, Oryzabase:Embryo, GR_ref:6590]
+comment: Occurs at 21 and onwards of days after pollination.
+is_a: GRO:0007137 ! embryo development
+
+[Term]
+id: GRO:0007178
+name: ovule stage OV0
+def: "Starts with carpel primordium formation." [GR:pj, Oryzabase:Ovule]
+comment: Panicle length at this stage is less than 0.3 cm.
+is_a: GRO:0007160 ! ovule development
+
+[Term]
+id: GRO:0007179
+name: ovule stage OV4
+def: "Meiotic division of the megaspore mother cell results in a linear tetrad of megaspores. The inner integument elongation also occurs." [GR_Ref:2512, Oryzabase:Ovule, GR:pj]
+comment: Panicle length at this stage is about 5-7 cm.
+is_a: GRO:0007160 ! ovule development
+
+[Term]
+id: GRO:0007180
+name: ovule stage OV2
+def: "Integument primordia are initiated on both sides of the ovule primordium. Megasporogenesis starts with the formation of archespore from one of the sub-epidermal cells in the nucellus. The archespore is distinguished by its large size. " [GR_Ref:2512, GR:pj, Oryzabase:Ovule]
+comment: Panicle length at this stage is about 1-3 cm.
+is_a: GRO:0007160 ! ovule development
+
+[Term]
+id: GRO:0007181
+name: ovule stage OV1
+def: "Ovule primordium formation and carpel elongation occurs." [GR:pj, GR_Ref:2512, Oryzabase:Ovule]
+comment: Panicle length at this stage is about 0.3-1.0 cm.
+is_a: GRO:0007160 ! ovule development
+
+[Term]
+id: GRO:0007182
+name: ovule stage OV5
+def: "The inner integument fully encloses the nucellus\, except for the area where micropyle forms. The ovule acquires an anatropous shape by rotating 60 degrees from its original position." [GR:pj, GR_Ref:2512, Oryzabase:Ovule]
+comment: Panicle length at this stage is about 7-10 cm.
+is_a: GRO:0007160 ! ovule development
+
+[Term]
+id: GRO:0007183
+name: ovule stage OV3
+def: "Integument primordia starts differentiation\, firstly into outer integument and later into the outer integument. Funiculus develops on adaxial side of the ovary. The archespore expands and differentiates into the megaspore mother cell. The megaspore mother cell is polarized with its nucleus at the micropylar end." [GR_Ref:2512, GR:pj, Oryzabase:Ovule]
+comment: Panicle length at this stage is about 3-5 cm.
+is_a: GRO:0007160 ! ovule development
+
+[Term]
+id: GRO:0007184
+name: ovule stage OV6
+def: "Micropylar megaspore degenerates and the functional megaspore enlarges. " [GR_Ref:2512, Oryzabase:Ovule, GR:pj]
+comment: Panicle length at this stage is about 10-12 cm.
+is_a: GRO:0007160 ! ovule development
+
+[Term]
+id: GRO:0007185
+name: ovule stage OV7
+def: "The developing embryosac is at the two-nucleate megagametophyte stage. Degenerate megaspores are still visible. Marks the start of megagametogenesis." [GR:pj, GR_Ref:2512, Oryzabase:Ovule]
+comment: Panicle length at this stage is about 12-14 cm.
+is_a: GRO:0007160 ! ovule development
+
+[Term]
+id: GRO:0007186
+name: ovule stage OV10
+def: "Embryosac matures. The events include\, polarization of the egg cell and synergids\, fusion of the polar nuclei and mitosis of the antipodal cells to yield as many as eight cells. A single layer of four to five nucellus cells borders the micropyle." [GR:pj, GR_Ref:2512, Oryzabase:Ovule]
+comment: Panicle length at this stage is about 18-25 cm.
+is_a: GRO:0007160 ! ovule development
+
+[Term]
+id: GRO:0007187
+name: ovule stage OV9
+def: "Formation of eight nucleate megagametophyte\, followed by migration of the nuclei and cellularization. The ovule rotates approximately 90 degrees from its original position." [GR:pj, GR_Ref:2512, Oryzabase:Ovule]
+comment: Panicle length at this stage is about 6-18 cm.
+is_a: GRO:0007160 ! ovule development
+
+[Term]
+id: GRO:0007188
+name: ovule stage OV8
+def: "Large central vacuole develops between the two nuclei of megagametophyte\, followed by mitosis of both the nuclei\, resulting in the four nucleate stage. " [GR_Ref:2512, Oryzabase:Ovule, GR:pj]
+comment: Panicle length at this stage is about 14-16 cm.
+is_a: GRO:0007160 ! ovule development
+
+[Term]
+id: GRO:0007189
+name: panicle stage PA1
+def: "Starts with conversion of stem apical meristem into inflorescence (panicle) apical meristem or rachis meristem." [GR:pj, Oryzabase:Panicle]
+is_a: GRO:0007157 ! panicle development
+
+[Term]
+id: GRO:0007190
+name: panicle stage PA6
+def: "Formation of lateral meristems from primary rachis meristem occurs." [Oryzabase:Panicle, GR:pj]
+comment: Rachis is about 0.7 mm in length.
+is_a: GRO:0007157 ! panicle development
+
+[Term]
+id: GRO:0007191
+name: callus initiation
+def: "Beginning of the callus formation from a single protoplast or pollen cell" [GR:pj]
+is_a: GRO:0007000 ! in-vitro culture stage
+
+[Term]
+id: GRO:0007192
+name: callus promotion
+def: "multiplication of the callus in undifferentiated form" [GR:pj]
+is_a: GRO:0007000 ! in-vitro culture stage
+
+[Term]
+id: GRO:0007193
+name: plantlet regeneration
+def: "Differentiation of  the callus tissue in the plantlet form." [GR:pj]
+synonym: "callus regeneration" []
+is_a: GRO:0007000 ! in-vitro culture stage
+
+[Term]
+id: GRO:0007194
+name: 0.01-imbibition
+def: "Adsorption of water by colloidal materials of the seed\, leading to seed swelling and increased metabolic activity in the initial stages of germination." [MaizeDB:64054]
+synonym: "maize growth stage-0.1" []
+is_a: GRO:0007003 ! 00-germination
+
+[Term]
+id: GRO:0007195
+name: panicle stage PA4
+def: "Formation of third and subsequent bracts and 7-15 primary branch primordia occurs. Rachis meristem aborts turning the panicle into a determinate inflorescence from its indeterminate type in early stages of development." [Oryzabase:Panicle, GR:pj]
+comment: Rachis is about 0.1 mm in length.
+is_a: GRO:0007157 ! panicle development
+
+[Term]
+id: GRO:0007196
+name: panicle stage PA2
+def: "Rachis meristem enlarges and first bract formation occurs." [Oryzabase:Panicle, GR:pj]
+is_a: GRO:0007157 ! panicle development
+
+[Term]
+id: GRO:0007197
+name: panicle stage PA8
+is_a: GRO:0007157 ! panicle development
+
+[Term]
+id: GRO:0007198
+name: panicle stage PA7
+def: "Formation of spikelets and florets occurs." [GR:pj, Oryzabase:Panicle]
+comment: Rachis is more than 1 mm in length.
+is_a: GRO:0007157 ! panicle development
+
+[Term]
+id: GRO:0007199
+name: cereal plant growth stage ontology
+alt_id: GRO:0080001
+def: "Ontology of the growth stages in various cereal crops." [GR:pj]
+synonym: "cereal plant ontology" []
+
+[Term]
+id: GRO:0007200
+name: panicle stage PA5
+def: "Elongation of primary branch primordia occurs." [GR:pj, Oryzabase:Panicle]
+comment: Marked by down regulation of OsH1 gene in rachis meristem. Rachis is less than 0.5 mm in length.
+is_a: GRO:0007157 ! panicle development
+
+[Term]
+id: GRO:0007201
+name: panicle stage PA3
+def: "Rachis meristem enlarges and second bract formation occurs." [GR:pj, Oryzabase:Panicle]
+is_a: GRO:0007157 ! panicle development
+
+[Term]
+id: GRO:0007202
+name: spikelet stage SP1
+def: "Formation of two rudimentary glumes in distichous phyllotaxy occurs." [GR:pj, Oryzabase:Spikelet]
+is_a: GRO:0007158 ! spikelet development
+
+[Term]
+id: GRO:0007203
+name: spikelet stage SP5
+def: "Formation of lodicules occurs." [Oryzabase:Spikelet, GR:pj]
+is_a: GRO:0007158 ! spikelet development
+
+[Term]
+id: GRO:0007204
+name: spikelet stage SP3
+def: "Formation of lemma in distichous phyllotaxy occurs." [Oryzabase:Spikelet, GR:pj]
+is_a: GRO:0007158 ! spikelet development
+
+[Term]
+id: GRO:0007205
+name: spikelet stage SP2
+def: "Formation of two empty glumes in distichous phyllotaxy occurs." [GR:pj, Oryzabase:Spikelet]
+is_a: GRO:0007158 ! spikelet development
+
+[Term]
+id: GRO:0007206
+name: spikelet stage SP6
+def: "Formation of stamen primordia in a whorl occurs." [GR:pj, Oryzabase:Spikelet]
+is_a: GRO:0007158 ! spikelet development
+
+[Term]
+id: GRO:0007207
+name: spikelet stage SP4
+def: "Formation of Palea in distichous phyllotaxy occurs." [GR:pj, Oryzabase:Spikelet]
+is_a: GRO:0007158 ! spikelet development
+
+[Term]
+id: GRO:0007208
+name: spikelet stage SP7
+def: "Starts with formation of carpel primordium and establishment of rudimentary and empty glumes\, lemma\, palea\, stamen and pistil occurs." [Oryzabase:Spikelet, GR:pj]
+is_a: GRO:0007158 ! spikelet development
+
+[Term]
+id: GRO:0007209
+name: stamen stage ST0
+def: "Stamen primordia differentiation occurs." [GR:pj, Oryzabase:Stamen]
+comment: At this stage floret is less than 1 mm in length.
+is_a: GRO:0007159 ! stamen development
+
+[Term]
+id: GRO:0007210
+name: stamen stage ST3
+def: "Primary parietal cells periclinally divide into endothecium and secondary parietal cells." [GR:pj, Oryzabase:Stamen]
+comment: At this stage floret is less than 2 mm in length.
+is_a: GRO:0007159 ! stamen development
+
+[Term]
+id: GRO:0007211
+name: stamen stage ST1
+def: "Archesporial cell differentiate at four corners of the anther hypodermal layer." [GR:pj, Oryzabase:Stamen]
+comment: At this stage floret is about 1 mm in length.
+is_a: GRO:0007159 ! stamen development
+
+[Term]
+id: GRO:0007212
+name: stamen stage ST5
+def: "This stage describes the microsporogenesis in rice plant." [GR:pj, Oryzabase:Stamen]
+comment: At this stage floret is about 2-5 mm in length.
+is_a: GRO:0007159 ! stamen development
+
+[Term]
+id: GRO:0007213
+name: stamen stage ST4
+def: "Secondary parietal cells periclinally divide into middle layer and tapetum cells. Premeiotic DNA synthesis occurs and Pollen mother cell (PMC) enters into meiosis stage." [Oryzabase:Stamen, GR:pj]
+comment: At this stage floret is about 2 mm in length.
+is_a: GRO:0007159 ! stamen development
+
+[Term]
+id: GRO:0007214
+name: stamen stage ST2
+def: "Archesporial cells divide into primary sporogenous cells and primary parietal cells." [Oryzabase:Stamen, GR:pj]
+comment: At this stage floret is about 1.5 mm in length.
+is_a: GRO:0007159 ! stamen development
+
+[Term]
+id: GRO:0007215
+name: obsolete cereal plant growth stage terms
+def: "Terms that are deleted from growth stage ontology are assigned this new parent term." [GR:pj]
+is_obsolete: true
+
+[Term]
+id: GRO:0007216
+name: 1.1-dry seed
+def: "The physiologically mature seed that is ready to undergo the germination phase. The seed may or maynot be in the dormant state." [GR:pj ""]
+is_a: GRO:0007043 ! 01-germination
+
+[Term]
+id: GRO:0007217
+name: stamen stage ST5-1
+def: "Pollen mother cell meiosis enters Meiosis-I leptotene stage." [Oryzabase:Stamen, GR:pj]
+is_a: GRO:0007212 ! stamen stage ST5
+
+[Term]
+id: GRO:0007218
+name: stamen stage ST5-2
+def: "Pollen mother cell meiosis enters Meiosis-I zygotene stage." [GR:pj, Oryzabase:Stamen]
+is_a: GRO:0007212 ! stamen stage ST5
+
+[Term]
+id: GRO:0007219
+name: stamen stage ST5-3
+def: "Pollen mother cell meiosis enters Meiosis-I pachytene stage." [Oryzabase:Stamen, GR:pj]
+comment: At this stage floret is about 3-3.4 mm in length.
+is_a: GRO:0007212 ! stamen stage ST5
+
+[Term]
+id: GRO:0007220
+name: stamen stage ST5-4
+def: "Pollen mother cell meiosis enters Meiosis-I diplotene stage." [GR:pj, Oryzabase:Stamen]
+comment: At this stage floret is about 3.5 mm in length.
+is_a: GRO:0007212 ! stamen stage ST5
+
+[Term]
+id: GRO:0007221
+name: stamen stage ST5-5
+def: "Pollen mother cell meiosis enters Meiosis-I diakinesis stage." [Oryzabase:Stamen, GR:pj]
+comment: At this stage floret is about 3.8 mm in length.
+is_a: GRO:0007212 ! stamen stage ST5
+
+[Term]
+id: GRO:0007222
+name: stamen stage ST5-6
+def: "Pollen mother cell meiosis enters Meiosis-I metaphase-I and anaphase-I stage." [GR:pj, Oryzabase:Stamen]
+comment: At this stage floret is about 4.2 mm in length.
+is_a: GRO:0007212 ! stamen stage ST5
+
+[Term]
+id: GRO:0007223
+name: stamen stage ST5-7
+def: "Pollen mother cell meiosis enters Meiosis-II stage." [Oryzabase:Stamen, GR:pj]
+comment: At this stage floret is about 4.5 mm in length.
+is_a: GRO:0007212 ! stamen stage ST5
+
+[Term]
+id: GRO:0007224
+name: stamen stage ST5-8
+def: "Tetrad formation occurs. Endothecium and middle layer cells degrade." [GR:pj, Oryzabase:Stamen]
+comment: At this stage floret is about 5 mm in length.
+is_a: GRO:0007212 ! stamen stage ST5
+
+[Term]
+id: GRO:0007225
+name: stamen stage ST6
+def: "Describes the microgametogenesis stages in rice plant." [GR:pj]
+is_a: GRO:0007159 ! stamen development
+
+[Term]
+id: GRO:0007226
+name: stamen stage ST6-1
+def: "Uninucleate pollen formation." [GR:pj, Oryzabase:Stamen]
+is_a: GRO:0007225 ! stamen stage ST6
+
+[Term]
+id: GRO:0007227
+name: stamen stage ST6-3
+def: "Pollen is in binucleate stage." [GR:pj, Oryzabase:Stamen]
+is_a: GRO:0007225 ! stamen stage ST6
+
+[Term]
+id: GRO:0007228
+name: stamen stage ST6-2
+def: "Pollen undergoes mitosis-I." [Oryzabase:Stamen, GR:pj]
+is_a: GRO:0007225 ! stamen stage ST6
+
+[Term]
+id: GRO:0007229
+name: stamen stage ST6-4
+def: "Pollen undergoes mitosis-II." [Oryzabase:Stamen, GR:pj]
+is_a: GRO:0007225 ! stamen stage ST6
+
+[Term]
+id: GRO:0007230
+name: stamen stage ST6-5
+def: "Pollen undergoes maturation phase and so the anthers. " [GR:pj, Oryzabase:Stamen]
+comment: At this stage floret is about 7 mm in length.
+is_a: GRO:0007225 ! stamen stage ST6
+
+[Term]
+id: GRO:0007231
+name: 1.2-imbibition stage
+def: "Absorption of water by  the seed\, leading to the swelling of endosperm\, embryo and seedcoat tissues. The process increases metabolic activity in the initial stages of germination." [GR:pj]
+is_a: GRO:0007043 ! 01-germination
+
+[Term]
+id: GRO:0007232
+name: 1.21-early imbibition stage
+def: "The process of absorption of water by  the seed\, leading to the swelling of endosperm\, embryo and seedcoat tissues has just begun. Compared to the dry state seed\, the metabolic activity may not show any significant increase at this stage." [GR:pj]
+is_a: GRO:0007231 ! 1.2-imbibition stage
+
+[Term]
+id: GRO:0007233
+name: 1.22-late imbibition stage
+def: "Absorption of water by  the seed\, leading to the swelling of endosperm\, embryo and seedcoat tissues is complete. The increase in metabolic activity is well established." [GR:pj]
+is_a: GRO:0007231 ! 1.2-imbibition stage
+
+[Term]
+id: GRO:0007234
+name: 1.3-radicle emergence stage
+def: "The radicle and its enclosing sheath\, the coleorhiza\, breaks through the pericarp. In some rice varieties the coleoptile emerges before the radicle." [GR:pj]
+is_a: GRO:0007236 ! 1.3-radicle and coleoptile emergence stage
+
+[Term]
+id: GRO:0007235
+name: 1.3-coleoptile emergence stage
+def: "The coleoptile\, enclosing the plumule emerges through the pericarp. In some rice varieties the radicle emerges before the coleoptile." [GR:pj]
+is_a: GRO:0007236 ! 1.3-radicle and coleoptile emergence stage
+
+[Term]
+id: GRO:0007236
+name: 1.3-radicle and coleoptile emergence stage
+def: "The radicle with coleorhiza and coleoptile\, enclosing the plumule\, breaks through the pericarp. In some rice varieties the coleoptile and radicle emergence may occur together or preceed either depending on the rice variety. " [GR:pj]
+is_a: GRO:0007043 ! 01-germination
+
+[Typedef]
+id: part_of
+name: part of
+
