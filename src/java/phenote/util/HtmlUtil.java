@@ -14,6 +14,8 @@ import org.geneontology.oboedit.datamodel.OBOProperty;
 import org.geneontology.oboedit.datamodel.Synonym;
 import org.geneontology.oboedit.datamodel.ObsoletableObject;
 import org.geneontology.oboedit.datamodel.IdentifiedObject;
+import org.geneontology.oboedit.datamodel.Dbxref;
+import org.geneontology.oboedit.datamodel.impl.DbxrefImpl;
 
 
 public class HtmlUtil {
@@ -82,44 +84,21 @@ public class HtmlUtil {
 		sb.append(makeRow(makeLeftCol(bold("ONTOLOGY"))+makeRightCol(oboClass.getNamespace().toString())));
 		if (oboClass.isObsolete()) {
 			sb.append(makeRow(makeLeftCol(bold("TERM"))+makeRightCol(bold(oboClass.getName())+colorFont(bold("   (OBSOLETE)"), "red"))));
+			sb.append(makeObsLinks(oboClass));
 		}
 		else {
 			sb.append(makeRow(makeLeftCol(bold("TERM"))+makeRightCol(bold(oboClass.getName()))));
 		}
-		if (oboClass.isObsolete()) {
-			Set obsReplacements = oboClass.getReplacedBy();
-			StringBuffer replace = new StringBuffer();
-			boolean replaceFlag = false;
-			boolean considerFlag = false;
-			ObsoletableObject obsObj;
-			for (Iterator it = obsReplacements.iterator(); it.hasNext(); ) {
-				obsObj = (ObsoletableObject)it.next();
-				replaceFlag = true;
-				if (obsObj!=null) {
-					replace.append(termLink(obsObj)+"<br>");
-				}
-			}
-			if (replaceFlag)			
-				sb.append(makeRow(makeLeftCol(bold(italic("Replaced by:")))+makeRightCol(replace.toString())));
 
-			Set obsConsiders = oboClass.getConsiderReplacements();
-			StringBuffer considers = new StringBuffer();
-			for (Iterator it = obsConsiders.iterator(); it.hasNext(); ) {
-				obsObj = (ObsoletableObject)it.next();
-				considerFlag = true;
-				if (obsObj!=null) {
-					considers.append(termLink(obsObj)+"<br>");
-				}
-			}
-			if (considerFlag)
-				sb.append(makeRow(makeLeftCol(bold(italic("Consider using:")))+makeRightCol(considers.toString())));	
-		}	
 		sb.append(makeRow(makeLeftCol(bold("ID"))+makeRightCol(oboClass.getID())));
 
 		String synonyms = makeSyns(true, oboClass.getSynonyms());
 		if (synonyms!=null) {
 			sb.append(synonyms);
 		}
+
+		sb.append(makeDbxrefs(oboClass));
+		
 		String definition = oboClass.getDefinition();
 
 		if ((definition != null) && !(definition.equals(""))) {
@@ -143,7 +122,63 @@ public class HtmlUtil {
 		sb.append("</table>");
 		return sb.toString();
 	}
+	
+	private static String makeObsLinks(OBOClass oboClass) {
+		StringBuffer sb = new StringBuffer();
+		Set obsReplacements = oboClass.getReplacedBy();
+		StringBuffer replace = new StringBuffer();
+		boolean replaceFlag = false;
+		boolean considerFlag = false;
+		ObsoletableObject obsObj;
+		for (Iterator it = obsReplacements.iterator(); it.hasNext(); ) {
+			obsObj = (ObsoletableObject)it.next();
+			replaceFlag = true;
+			if (obsObj!=null) {
+				replace.append(termLink(obsObj)+"<br>");
+			}
+		}
+		if (replaceFlag)			
+			sb.append(makeRow(makeLeftCol(bold(italic("Replaced by:")))+makeRightCol(replace.toString())));
 
+		Set obsConsiders = oboClass.getConsiderReplacements();
+		StringBuffer considers = new StringBuffer();
+		for (Iterator it = obsConsiders.iterator(); it.hasNext(); ) {
+			obsObj = (ObsoletableObject)it.next();
+			considerFlag = true;
+			if (obsObj!=null) {
+				considers.append(termLink(obsObj)+"<br>");
+			}
+		}
+		if (considerFlag)
+			sb.append(makeRow(makeLeftCol(bold(italic("Consider using:")))+makeRightCol(considers.toString())));	
+		if (replaceFlag || considerFlag)
+			return sb.toString();
+		else
+			return "";
+	}	
+
+	private static String makeDbxrefs(OBOClass oboClass) {
+		Set dbxrefs = oboClass.getDbxrefs();
+		StringBuffer sb = new StringBuffer();
+		StringBuffer dbxrefString = new StringBuffer();
+		boolean dbxrefFlag = false;
+		if (dbxrefs != null) {
+			Dbxref dbxrefObj;
+			for (Iterator it = dbxrefs.iterator(); it.hasNext(); ) {
+				dbxrefObj = (Dbxref)it.next();
+				dbxrefFlag=true;
+				if (dbxrefObj!=null) {
+					dbxrefString.append(dbxrefObj.getDatabase()+":"+dbxrefObj.getID()+
+							"("+dbxrefObj.getType()+")<br>");
+				}
+			}
+		}
+		if (dbxrefFlag)
+			return makeRow(makeLeftCol(bold("X-refs"))+makeRightCol(dbxrefString.toString()));			
+		else	
+			return "";
+	}
+	
 	private static String makeSyns(boolean sortByScope, Set syns) {
 		//This method creates a table of synonyms for a term, sorted by scope as
 		//defined in the oboedit class Synonym
