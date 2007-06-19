@@ -26,6 +26,8 @@ import javax.swing.JTable;
 import phenote.gui.CharacterTablePanel;
 import phenote.gui.CharacterTableModel;
 import phenote.main.Phenote;
+import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldValue;
 
 
 
@@ -42,9 +44,15 @@ class TableRightClickMenu extends JPopupMenu {
 //		Create the popup menu.
 		JMenuItem menuItem;
 		menuItem = new JMenuItem();
-		menuItem.setText("Copy");
+		menuItem.setText("Copy as Text");
 		menuItem.setMnemonic(KeyEvent.VK_C);
-		menuItem.addActionListener(new CopyActionListener());
+		menuItem.addActionListener(new CopyTextActionListener());
+		add(menuItem);
+		menuItem = new JMenuItem();
+		menuItem.setText("Copy Term");
+		menuItem.setMnemonic(KeyEvent.VK_C);
+		menuItem.setEnabled(true);
+		menuItem.addActionListener(new CopyCharActionListener());
 		add(menuItem);
 		menuItem = new JMenuItem();
 //		menuItem.addActionListener(new CutActionListener());
@@ -60,7 +68,7 @@ class TableRightClickMenu extends JPopupMenu {
 		add(menuItem);
 	}
 
-	private class CopyActionListener implements ActionListener {
+	private class CopyTextActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			CharacterTablePanel table = Phenote.getPhenote().getCharacterTablePanel();
 			Point coord = table.getTableCoord();
@@ -68,6 +76,24 @@ class TableRightClickMenu extends JPopupMenu {
 			int col = (int) coord.getY();
 			String s = table.getCellString(row, col);
 			//System.out.println("copied ("+row+","+col+") "+s);
+			Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
+			//System.out.println("system clipboard="+c.getContents(null));
+			StringSelection stringSelection = new StringSelection( s );
+			c.setContents( stringSelection , null);
+		}
+	}
+
+	private class CopyCharActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			CharacterTablePanel table = Phenote.getPhenote().getCharacterTablePanel();
+			Point coord = table.getTableCoord();
+			int row = (int) coord.getX();
+			int col = (int) coord.getY();
+			CharFieldValue cfv = table.getCellCharField(row,col);
+			String s="";
+			if (cfv!=null)
+				s = cfv.getName();
+			System.out.println("copied ("+row+","+col+") "+s);
 			Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
 			//System.out.println("system clipboard="+c.getContents(null));
 			StringSelection stringSelection = new StringSelection( s );

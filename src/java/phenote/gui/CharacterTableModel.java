@@ -61,6 +61,10 @@ class CharacterTableModel extends AbstractTableModel {
   public String getColumnName(int col) {
     return cfg().getFieldLabel(col);
   }
+  
+  public int getColwidth(int col) {
+  	return cfg().getFieldColwidth(col);
+  }
 
   public int getColumnCount() {
     return cfg().getEnbldFieldsNum();
@@ -158,7 +162,8 @@ class CharacterTableModel extends AbstractTableModel {
       CharField cf = OntologyManager.inst().getCharField(col);
       if (!chr.hasValue(cf))
         return null;
-      return chr.getValue(cf).getName();
+      return chr.getValue(cf);
+      //      return chr.getValue(cf).getName();
     } 
     catch (Exception e) {
       log().error("column "+col+" not configured properly in "+

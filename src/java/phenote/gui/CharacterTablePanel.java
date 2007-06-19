@@ -2,6 +2,7 @@ package phenote.gui;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.Integer;
 
 import java.awt.Dimension;
 //import java.awt.GridLayout;
@@ -14,6 +15,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -23,6 +27,10 @@ import javax.swing.JTable;
 import javax.swing.JPopupMenu;
 import javax.swing.JOptionPane;
 import javax.swing.JMenuItem;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+import javax.swing.event.TableColumnModelEvent;
+import javax.swing.event.TableColumnModelListener;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -33,6 +41,8 @@ import org.apache.log4j.Logger;
 
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
+import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldValue;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
@@ -51,7 +61,11 @@ public class CharacterTablePanel extends JPanel {
 
   private CharacterTableModel characterTableModel = new CharacterTableModel();
   private JTable charJTable = new JTable(characterTableModel);
-
+  private static int DEFAULT_COLWIDTH=150; //default column width for table
+  private static int INIT_TABLE_WIDTH=1400;
+  private static int INIT_TABLE_HEIGHT=500;
+  private static int DEFAULT_VIEW_WIDTH=500;
+  private static int DEFAULT_VIEW_HEIGHT=600;
   //private FieldPanel fieldPanel;
   //private JButton newButton;
   private JButton copyButton;
@@ -60,9 +74,12 @@ public class CharacterTablePanel extends JPanel {
   private JButton commitButton;
   private JButton graphWindow;
   private JScrollBar verticalScrollBar;
+  private JScrollBar horizontalScrollBar;
   private boolean scrollToNewLastRowOnRepaint = false;
   private boolean ignoreSelectionChange = false;
   private Point currentMousePoint = new Point(0,0);
+  private int tableWidth=INIT_TABLE_WIDTH;
+  private int tableHeight=INIT_TABLE_HEIGHT;
   
   //private int selectedRow;
   // get from file menu?
@@ -81,7 +98,8 @@ public class CharacterTablePanel extends JPanel {
     //setLayout(new GridLayout(2,1)); // row,col
     setLayout(new GridBagLayout());
     //setPreferredSize(new Dimension(1800,800));
-    setPreferredSize(new Dimension(1400,500));
+    setColumns();
+    setPreferredSize(new Dimension(tableWidth, tableHeight));
     //setMinimumSize(new Dimension(1400,630)); // 630   
 
     //charJTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -95,8 +113,11 @@ public class CharacterTablePanel extends JPanel {
     verticalScrollBar = tableScroll.getVerticalScrollBar();//needed for scroll to new
     // wierd - changes to scrollbar seem to happen on own thread?
     verticalScrollBar.getModel().addChangeListener(new ScrollChangeListener());
+    horizontalScrollBar = tableScroll.getHorizontalScrollBar();
+    if (tableWidth>DEFAULT_VIEW_WIDTH)
+    	charJTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     // width config? 150 * # of cols? set column width? column width config?
-    charJTable.setPreferredScrollableViewportSize(new Dimension(500, 600));//150
+    charJTable.setPreferredScrollableViewportSize(new Dimension(DEFAULT_VIEW_WIDTH, DEFAULT_VIEW_HEIGHT));//150
 
     GridBagConstraints gbc = GridBagUtil.makeFillingConstraint(0,0);
 
@@ -106,7 +127,7 @@ public class CharacterTablePanel extends JPanel {
     charJTable.addMouseListener(popupListener);
 
     add(tableScroll,gbc);
-
+    
     // add in buttons
     JPanel buttonPanel = new JPanel();
     //buttonPanel.setBorder(new javax.swing.border.LineBorder(java.awt.Color.BLUE));
@@ -135,6 +156,29 @@ public class CharacterTablePanel extends JPanel {
     getCharListManager().addCharListChangeListener(new TableCharListChangeListener());
   }
 
+  private void setColumns() {
+  	//this method sets the column widths according to those in the configuration
+  	//default width=30
+  	//will determine the total table width according to dimensions in config
+  	int columnCount = characterTableModel.getColumnCount();
+  	int totalWidth = 0;
+    for (int i = 0; i < columnCount; i++) {
+      TableColumn column = charJTable.getColumnModel().getColumn(i);
+      //get the field width from the model
+      int width = characterTableModel.getColwidth(i);
+      if (width==0) //-1 is no display
+      	{width=DEFAULT_COLWIDTH;}
+      column.setPreferredWidth(width);
+      column.addPropertyChangeListener(new ColwidthChangeListener());
+      charJTable.getTableHeader().setResizingColumn(column);
+      column.setWidth(width);
+      totalWidth+=width;
+     	System.out.println("Set column "+characterTableModel.getColumnName(i)+" width = "+width);  	
+    }
+    System.out.println("Total width = "+totalWidth);
+    tableWidth=totalWidth;
+  }
+  
   private String getCommitButtonString() {
     if (Config.inst().hasQueryableDataAdapter())
       return Config.inst().getQueryableDataAdapter().getCommitButtonLabel();
@@ -167,6 +211,11 @@ public class CharacterTablePanel extends JPanel {
   	if (s==null) {
   		return ("");
   	} else return s.toString();
+  }
+  
+  public CharFieldValue getCellCharField(int row, int col) {
+  	CharFieldValue cfv = (CharFieldValue) charJTable.getValueAt(row,col);
+  	return cfv;
   }
   
   /** row number is zero based for tables */
@@ -403,7 +452,27 @@ public class CharacterTablePanel extends JPanel {
       scrollToNewLastRowOnRepaint = false;
     }
   }
-
+  
+  private class ColwidthChangeListener implements PropertyChangeListener {
+  	public void propertyChange(PropertyChangeEvent e)
+  	{
+  		//listens for changes to the column widths, makes changes to config,
+  		//and flags that there's been changes (so that they'll be saved)
+  		if (e.getPropertyName().equals("width")) {
+  			TableColumn col = (TableColumn)e.getSource();
+  			int colIndex = col.getModelIndex();
+  			Integer newWidth = (Integer)e.getNewValue();
+  			int w = newWidth.intValue();
+  			if (w!=(Config.inst().getFieldColwidth(colIndex))) {
+  				//only flag modified if changed from original settings
+  				Config.inst().setFieldColwidth(colIndex, w);
+  				Config.inst().setConfigModified(true);
+  				System.out.println("column "+colIndex+" "+e.getPropertyName()+" changed: "+ e.getOldValue()+" --> "+w);
+  			}
+  		}
+  	}	
+  }
+  
 
   private class TableSorter extends MouseAdapter {
     public void mouseClicked(MouseEvent e) {

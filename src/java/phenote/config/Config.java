@@ -664,6 +664,14 @@ public class Config {
   public String getFieldLabel(int index) {
     return getEnbldFieldCfg(index).getLabel();
   }
+  
+  public int getFieldColwidth(int index) {
+  	return getEnbldFieldCfg(index).getColwidth();
+  }
+  
+  public void setFieldColwidth(int index, int width) {
+  	getEnbldFieldCfg(index).setColwidth(width);
+  }
 
 //   public CharFieldEnum getCharFieldEnum(int index) {
 //     return getFieldConfig(index).getCharFieldEnum();

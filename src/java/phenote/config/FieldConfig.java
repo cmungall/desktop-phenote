@@ -87,6 +87,18 @@ public class FieldConfig {
 
   //public String getLabel() { return label; }
   public String getDesc() { return desc; }
+  
+  public int getColwidth() { 
+  	//if 0 then uninitialized;
+  	//if -1 indicates not to display
+   	return fieldBean.getColwidth(); 
+  }
+  
+  public void setColwidth(int w) {
+  	fieldBean.setColwidth(w);
+  	return;
+  }
+  
   // boolean hasLabel(String label) { return label.equals(this.label); } 
   boolean hasDesc(String desc) { return desc.equals(this.desc); }
 
