@@ -52,7 +52,7 @@ public class Phenote {
   private CommandLine commandLine = CommandLine.inst();
   private JFrame frame;
   public SplashScreen splashScreen;
-  private String logoFile = "src/java/phenote/images/phenote_logo.jpg";
+  private String logoFile = "images/phenote_logo.jpg";
 
   //  public static Keymap defaultKeymap;
   

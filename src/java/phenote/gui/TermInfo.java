@@ -95,20 +95,20 @@ public class TermInfo {
     termInfoPanel.setBorder(BorderFactory.createTitledBorder("Term Info"));
     termInfoPanel.add(scrollPane,BorderLayout.CENTER);
     //Layout doesn't look good right now.  Will fix
-    ImageIcon ok = new ImageIcon("OK.GIF");
+    ImageIcon ok = new ImageIcon("images/OK.GIF");
     useTermButton = new JButton(ok);
 //    JButton useTermButton = new JButton("Use Term");
     useTermButton.addActionListener(new UseTermActionListener());
     useTermButton.setPreferredSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
     useTermButton.setMinimumSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
     useTermButton.setToolTipText("Use Term");
-    ImageIcon back = new ImageIcon("arrow.small.left.gif");
+    ImageIcon back = new ImageIcon("images/arrow.small.left.gif");
     JButton backButton = new JButton(back);
     backButton.setToolTipText("Go back a term");
     backButton.setPreferredSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
     backButton.setMinimumSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
     backButton.setMaximumSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
-    ImageIcon forward = new ImageIcon("arrow.small.right.gif");
+    ImageIcon forward = new ImageIcon("images/arrow.small.right.gif");
     JButton forwardButton = new JButton(forward);
     forwardButton.setToolTipText("Go forward a term");
     forwardButton.setPreferredSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
