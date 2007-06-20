@@ -173,9 +173,9 @@ public class CharacterTablePanel extends JPanel {
       charJTable.getTableHeader().setResizingColumn(column);
       column.setWidth(width);
       totalWidth+=width;
-     	System.out.println("Set column "+characterTableModel.getColumnName(i)+" width = "+width);  	
+     	//System.out.println("Set column "+characterTableModel.getColumnName(i)+" width = "+width);  	
     }
-    System.out.println("Total width = "+totalWidth);
+    //System.out.println("Total width = "+totalWidth);
     tableWidth=totalWidth;
   }
   
@@ -467,7 +467,7 @@ public class CharacterTablePanel extends JPanel {
   				//only flag modified if changed from original settings
   				Config.inst().setFieldColwidth(colIndex, w);
   				Config.inst().setConfigModified(true);
-  				System.out.println("column "+colIndex+" "+e.getPropertyName()+" changed: "+ e.getOldValue()+" --> "+w);
+//  				System.out.println("column "+colIndex+" "+e.getPropertyName()+" changed: "+ e.getOldValue()+" --> "+w);
   			}
   		}
   	}	
