@@ -30,6 +30,8 @@
     <property name="jarfile" value="jars/phenote.jar"/>
     <property name="obo" value="obo-files"/>
     <property name="conf" value="conf"/>
+    <property name="images" value="images"/>
+
     <!-- override this from command line with  -DCONF-FILE=initial-zfin.cfg -->
     <property name="CONF_FILE" value="initial-flybase.cfg"/>
 
