@@ -56,7 +56,7 @@ public class TermInfo {
   private UseTermListener useTermListener;
   private JPanel termInfoPanel;
   private JPanel naviPanel;
-  private JTextField termField;
+  private JEditorPane termField;
   private static int TERM_INFO_DEFAULT_WIDTH=350;
   private static int TERM_INFO_DEFAULT_HEIGHT=400;
   private static int BUTTON_HEIGHT = 30;
@@ -70,7 +70,7 @@ public class TermInfo {
   public JComponent getComponent() {
     termInfoPanel = new JPanel(new BorderLayout(0,0)); // hgap,vgap
     termInfoPanel.setPreferredSize(new Dimension(TERM_INFO_DEFAULT_WIDTH,TERM_INFO_DEFAULT_HEIGHT));
-    termInfoPanel.setMinimumSize(new Dimension(200,150));
+    termInfoPanel.setMinimumSize(new Dimension(200,200));
     //termInfoPanel.setMaximumSize(new Dimension(380,400));
     if (DO_HTML) {
     	JEditorPane editorPane = new JEditorPane(); 
@@ -94,10 +94,13 @@ public class TermInfo {
     termInfoPanel.setBorder(BorderFactory.createTitledBorder("Term Info"));
     termInfoPanel.add(scrollPane,BorderLayout.CENTER);
     //Layout doesn't look good right now.  Will fix
-    JButton useTermButton = new JButton("Use Term");
+    ImageIcon ok = new ImageIcon("OK.GIF");
+    JButton useTermButton = new JButton(ok);
+//    JButton useTermButton = new JButton("Use Term");
     useTermButton.addActionListener(new UseTermActionListener());
-    useTermButton.setPreferredSize(new Dimension(TERM_INFO_DEFAULT_WIDTH, 30));
-    useTermButton.setMinimumSize(new Dimension(TERM_INFO_DEFAULT_WIDTH, 30));
+    useTermButton.setPreferredSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
+    useTermButton.setMinimumSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
+    useTermButton.setToolTipText("Use Term");
     ImageIcon back = new ImageIcon("arrow.small.left.gif");
     JButton backButton = new JButton(back);
     backButton.setToolTipText("Go back a term");
@@ -111,9 +114,9 @@ public class TermInfo {
     forwardButton.setMinimumSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
     forwardButton.setMaximumSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
     JPanel naviButtons = new JPanel();
-    naviButtons.setMinimumSize(new Dimension((2*BUTTON_HEIGHT), BUTTON_HEIGHT));
-    naviButtons.setPreferredSize(new Dimension((2*BUTTON_HEIGHT), BUTTON_HEIGHT));
-    naviButtons.setMaximumSize(new Dimension((2*BUTTON_HEIGHT), BUTTON_HEIGHT));
+    naviButtons.setMinimumSize(new Dimension((3*BUTTON_HEIGHT), BUTTON_HEIGHT));
+    naviButtons.setPreferredSize(new Dimension((3*BUTTON_HEIGHT), BUTTON_HEIGHT));
+    naviButtons.setMaximumSize(new Dimension((3*BUTTON_HEIGHT), BUTTON_HEIGHT));
     naviButtons.setLayout(new BorderLayout(0,0));
     naviPanel = new JPanel();
     naviPanel.setLayout(new BorderLayout(0,0));
@@ -124,15 +127,17 @@ public class TermInfo {
     backButton.addActionListener(new BackNaviActionListener());
 //    bottomPanel.add(backButton, BorderLayout.WEST);
 //    bottomPanel.add(forwardButton, BorderLayout.CENTER);
-    bottomPanel.add(useTermButton);
-    termInfoPanel.add(bottomPanel,BorderLayout.SOUTH);
-    termField = new JTextField();
+    naviPanel.add(useTermButton);
+    //termInfoPanel.add(bottomPanel,BorderLayout.SOUTH);
+    termField =  new JEditorPane();
+    termField.setContentType("text/html");
     termField.setText("(no term selected)");
-    termField.setPreferredSize(new Dimension(TERM_INFO_DEFAULT_WIDTH,20));
+    termField.setPreferredSize(new Dimension(TERM_INFO_DEFAULT_WIDTH,BUTTON_HEIGHT));
     termField.setEditable(false);  
-    naviButtons.add(backButton, BorderLayout.WEST);
+    naviButtons.add(useTermButton, BorderLayout.WEST);
+    naviButtons.add(backButton, BorderLayout.CENTER);
     naviButtons.add(forwardButton, BorderLayout.EAST);
-    naviPanel.add(naviButtons, BorderLayout.WEST);
+    naviPanel.add(naviButtons, BorderLayout.EAST);
     naviPanel.add(termField, BorderLayout.CENTER);
     termInfoPanel.add(naviPanel, BorderLayout.NORTH);
     return termInfoPanel;
@@ -201,7 +206,7 @@ public class TermInfo {
     String html = HtmlUtil.termInfo(oboClass);
 
     textArea.setText(html);
-    termField.setText(oboClass.getName());
+    termField.setText("<b>"+oboClass.getName()+"</b>");
     // scroll to top (by default does bottom)
     textArea.setCaretPosition(0);
   }

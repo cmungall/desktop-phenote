@@ -206,11 +206,10 @@ public class Phenote {
     	  n = JOptionPane.showConfirmDialog(null, m, "Phenote Exit",
     			  JOptionPane.YES_NO_OPTION);
     	  if (n==JOptionPane.YES_OPTION) {
+    	  	//  now quit
     	  	System.exit(0);
     	  } else { return; }
-      
-    	} //now quit
-        System.exit(0);
+     	} 
     }
   }
 

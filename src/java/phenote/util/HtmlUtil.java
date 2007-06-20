@@ -83,11 +83,11 @@ public class HtmlUtil {
 		sb.append("<table>");
 		sb.append(makeRow(makeLeftCol(bold("ONTOLOGY"))+makeRightCol(oboClass.getNamespace().toString())));
 		if (oboClass.isObsolete()) {
-			sb.append(makeRow(makeLeftCol(bold("TERM"))+makeRightCol(bold(oboClass.getName())+colorFont(bold("   (OBSOLETE)"), "red"))));
+			//sb.append(makeRow(makeLeftCol(bold("TERM"))+makeRightCol(bold(oboClass.getName())+colorFont(bold("   (OBSOLETE)"), "red"))));
 			sb.append(makeObsLinks(oboClass));
 		}
 		else {
-			sb.append(makeRow(makeLeftCol(bold("TERM"))+makeRightCol(bold(oboClass.getName()))));
+			//sb.append(makeRow(makeLeftCol(bold("TERM"))+makeRightCol(bold(oboClass.getName()))));
 		}
 
 		sb.append(makeRow(makeLeftCol(bold("ID"))+makeRightCol(oboClass.getID())));
