@@ -56,6 +56,7 @@ public class TermInfo {
   private UseTermListener useTermListener;
   private JPanel termInfoPanel;
   private JPanel naviPanel;
+  private JButton useTermButton;
   private JEditorPane termField;
   private static int TERM_INFO_DEFAULT_WIDTH=350;
   private static int TERM_INFO_DEFAULT_HEIGHT=400;
@@ -95,7 +96,7 @@ public class TermInfo {
     termInfoPanel.add(scrollPane,BorderLayout.CENTER);
     //Layout doesn't look good right now.  Will fix
     ImageIcon ok = new ImageIcon("OK.GIF");
-    JButton useTermButton = new JButton(ok);
+    useTermButton = new JButton(ok);
 //    JButton useTermButton = new JButton("Use Term");
     useTermButton.addActionListener(new UseTermActionListener());
     useTermButton.setPreferredSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
@@ -204,9 +205,10 @@ public class TermInfo {
     currentOboClass = oboClass;
 
     String html = HtmlUtil.termInfo(oboClass);
-
+    String term = HtmlUtil.termName(oboClass);
     textArea.setText(html);
-    termField.setText("<b>"+oboClass.getName()+"</b>");
+    termField.setText(term);
+    useTermButton.setEnabled(!oboClass.isObsolete());
     // scroll to top (by default does bottom)
     textArea.setCaretPosition(0);
   }

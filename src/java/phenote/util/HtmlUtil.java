@@ -71,6 +71,14 @@ public class HtmlUtil {
 		return sb.toString();
 	}
 
+	public static String termName(OBOClass oboClass) {
+		StringBuffer sb = new StringBuffer();
+		if (oboClass.isObsolete()) {
+			sb.append(bold(colorFont(bold("(OBSOLETE) "), "red")));
+		}
+		sb.append(bold(oboClass.getName()));
+		return sb.toString();
+	}
 	//Nicole's attempt at making the Term Info box look a little better   
 	//I'm puting all the information into an html table.  rhs are each single table cells
 	//but are separated by line breaks.  
@@ -83,7 +91,6 @@ public class HtmlUtil {
 		sb.append("<table>");
 		sb.append(makeRow(makeLeftCol(bold("ONTOLOGY"))+makeRightCol(oboClass.getNamespace().toString())));
 		if (oboClass.isObsolete()) {
-			//sb.append(makeRow(makeLeftCol(bold("TERM"))+makeRightCol(bold(oboClass.getName())+colorFont(bold("   (OBSOLETE)"), "red"))));
 			sb.append(makeObsLinks(oboClass));
 		}
 		else {
