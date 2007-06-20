@@ -2,7 +2,9 @@ package phenote.gui;
 
 import java.net.URL;
 import java.util.Iterator;
+import java.awt.List;
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -15,7 +17,9 @@ import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
+import javax.swing.ImageIcon;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 import javax.swing.event.ListSelectionEvent;
@@ -51,6 +55,13 @@ public class TermInfo {
   private OBOClass currentOboClass;
   private UseTermListener useTermListener;
   private JPanel termInfoPanel;
+  private JPanel naviPanel;
+  private JTextField termField;
+  private static int TERM_INFO_DEFAULT_WIDTH=350;
+  private static int TERM_INFO_DEFAULT_HEIGHT=400;
+  private static int BUTTON_HEIGHT = 30;
+  private List termInfoNaviHistory = new List();
+  private int naviIndex=-1;
   
   public TermInfo() { //TermPanel termPanel) {
     SelectionManager.inst().addTermSelectionListener(new InfoTermSelectionListener());
@@ -58,11 +69,11 @@ public class TermInfo {
 
   public JComponent getComponent() {
     termInfoPanel = new JPanel(new BorderLayout(0,0)); // hgap,vgap
-    termInfoPanel.setPreferredSize(new Dimension(350,200));
+    termInfoPanel.setPreferredSize(new Dimension(TERM_INFO_DEFAULT_WIDTH,TERM_INFO_DEFAULT_HEIGHT));
     termInfoPanel.setMinimumSize(new Dimension(200,150));
     //termInfoPanel.setMaximumSize(new Dimension(380,400));
     if (DO_HTML) {
-      JEditorPane editorPane = new JEditorPane(); 
+    	JEditorPane editorPane = new JEditorPane(); 
       editorPane.setContentType("text/html"); // sets up HTMLEditorKit
       termHyperlinkListener = new TermHyperlinkListener();
       editorPane.addHyperlinkListener(termHyperlinkListener);
@@ -82,11 +93,48 @@ public class TermInfo {
     //scrollPane.setBorder(BorderFactory.createTitledBorder("Term Info"));
     termInfoPanel.setBorder(BorderFactory.createTitledBorder("Term Info"));
     termInfoPanel.add(scrollPane,BorderLayout.CENTER);
-
+    //Layout doesn't look good right now.  Will fix
     JButton useTermButton = new JButton("Use Term");
     useTermButton.addActionListener(new UseTermActionListener());
-    termInfoPanel.add(useTermButton,BorderLayout.SOUTH);
-
+    useTermButton.setPreferredSize(new Dimension(TERM_INFO_DEFAULT_WIDTH, 30));
+    useTermButton.setMinimumSize(new Dimension(TERM_INFO_DEFAULT_WIDTH, 30));
+    ImageIcon back = new ImageIcon("/Users/Nicole/Desktop/arrow.small.left.gif");
+    JButton backButton = new JButton(back);
+    backButton.setToolTipText("Go back a term");
+    backButton.setPreferredSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
+    backButton.setMinimumSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
+    backButton.setMaximumSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
+    ImageIcon forward = new ImageIcon("/Users/Nicole/Desktop/arrow.small.right.gif");
+    JButton forwardButton = new JButton(forward);
+    forwardButton.setToolTipText("Go forward a term");
+    forwardButton.setPreferredSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
+    forwardButton.setMinimumSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
+    forwardButton.setMaximumSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
+    JPanel naviButtons = new JPanel();
+    naviButtons.setMinimumSize(new Dimension((2*BUTTON_HEIGHT), BUTTON_HEIGHT));
+    naviButtons.setPreferredSize(new Dimension((2*BUTTON_HEIGHT), BUTTON_HEIGHT));
+    naviButtons.setMaximumSize(new Dimension((2*BUTTON_HEIGHT), BUTTON_HEIGHT));
+    naviButtons.setLayout(new BorderLayout(0,0));
+    naviPanel = new JPanel();
+    naviPanel.setLayout(new BorderLayout(0,0));
+    JPanel bottomPanel = new JPanel();
+    bottomPanel.setBackground(Color.lightGray);
+    bottomPanel.setLayout(new BorderLayout(0,0));
+    forwardButton.addActionListener(new ForwardNaviActionListener());
+    backButton.addActionListener(new BackNaviActionListener());
+//    bottomPanel.add(backButton, BorderLayout.WEST);
+//    bottomPanel.add(forwardButton, BorderLayout.CENTER);
+    bottomPanel.add(useTermButton);
+    termInfoPanel.add(bottomPanel,BorderLayout.SOUTH);
+    termField = new JTextField();
+    termField.setText("(no term selected)");
+    termField.setPreferredSize(new Dimension(TERM_INFO_DEFAULT_WIDTH,20));
+    termField.setEditable(false);  
+    naviButtons.add(backButton, BorderLayout.WEST);
+    naviButtons.add(forwardButton, BorderLayout.EAST);
+    naviPanel.add(naviButtons, BorderLayout.WEST);
+    naviPanel.add(termField, BorderLayout.CENTER);
+    termInfoPanel.add(naviPanel, BorderLayout.NORTH);
     return termInfoPanel;
   }
   
@@ -108,9 +156,42 @@ public class TermInfo {
       if (useTermListener == null) return;
       if (currentOboClass == null) return; // shouldnt happen
       useTermListener.useTerm(new UseTermEvent(TermInfo.this,currentOboClass));
+
     }
   }
-
+  
+  private class BackNaviActionListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+    	String id="";
+    	if (naviIndex>0) {
+    		naviIndex--;
+    		id = getTermFromNaviHistory(naviIndex);
+    		try {
+    			OBOClass term = OntologyManager.inst().getOboClass(id); // ex
+    			setTextFromOboClass(term);
+    			// send out term selection (non mouse over) for DAG view
+    			SelectionManager.inst().selectTerm(TermInfo.this, term, true);
+    		}
+    		catch (TermNotFoundException ex) { return; }
+    	}
+    }
+  }
+  private class ForwardNaviActionListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+  	int tot = termInfoNaviHistory.getItemCount();
+    	if (naviIndex<(tot-1)) {
+    		naviIndex++;
+    		String id = getTermFromNaviHistory(naviIndex);
+    		try {
+    			OBOClass term = OntologyManager.inst().getOboClass(id); // ex
+    			setTextFromOboClass(term);
+    			// send out term selection (non mouse over) for DAG view
+    			SelectionManager.inst().selectTerm(TermInfo.this, term, true);
+    		}
+    		catch (TermNotFoundException ex) { return; }
+    	}
+    }
+  }
   // for TestPhenote
   String getText() { return textArea.getText(); }
 
@@ -120,6 +201,7 @@ public class TermInfo {
     String html = HtmlUtil.termInfo(oboClass);
 
     textArea.setText(html);
+    termField.setText(oboClass.getName());
     // scroll to top (by default does bottom)
     textArea.setCaretPosition(0);
   }
@@ -129,7 +211,12 @@ public class TermInfo {
   private class InfoTermSelectionListener implements TermSelectionListener {
     public boolean termSelected(TermSelectionEvent e) {
     	
-      if (!e.isMouseOverEvent() ) return false;
+      if (!e.isMouseOverEvent() ) {
+      	//add the item to the navi history if selected from list only
+      	String id=e.getOboClass().getID();
+        addTermToNaviHistory(id);
+      	return false;
+      }
       setTextFromOboClass(e.getOboClass());
       // This sets who now listens to use term button clicks (only 1 listener)
       setUseTermListener(e.getUseTermListener());
@@ -147,7 +234,27 @@ public class TermInfo {
     termHyperlinkListener.hyperlinkUpdate(e);
   }
 
+  private void addTermToNaviHistory(String link) {
+  	int tot = termInfoNaviHistory.getItemCount();
+  	if ((tot-1)>naviIndex) { //we're in the middle of the navi
+  		if (naviIndex>=0) { //we're not at the beginning
+  		//remove all the items between end and here
+  			for (int i=(tot-1); i>naviIndex; i--) {
+  				termInfoNaviHistory.remove(i);
+  			}
+  		}
+  	}
+		termInfoNaviHistory.add(link);
+		naviIndex++;  //we should be at the end of the history
+//  	System.out.println("tot="+tot+"; naviIndex="+naviIndex);
+  }
 
+  private String getTermFromNaviHistory(int position) {
+  	if (termInfoNaviHistory.getItemCount() >= 1)
+  		return termInfoNaviHistory.getItem(position);
+  	else 
+  		return "";
+  }
   /** inner class TermHyperlink Listener, listens for clicks on term & external
       hyper links and brings up the term or brings up the external web page */
   private class TermHyperlinkListener implements HyperlinkListener {
@@ -197,6 +304,7 @@ public class TermInfo {
       try {
         OBOClass term = OntologyManager.inst().getOboClass(id); // ex
         setTextFromOboClass(term);
+        addTermToNaviHistory(id);
         // send out term selection (non mouse over) for DAG view
         SelectionManager.inst().selectTerm(TermInfo.this, term, true);
       }
