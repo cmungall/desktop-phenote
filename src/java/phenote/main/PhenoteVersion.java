@@ -9,7 +9,7 @@ public class PhenoteVersion {
 
   //private static final float MAJOR_VERSION_NUM = 0.8f;
   //private static final float SUB_VERSION_NUM = .3f;
-  private static final String VERSION = "1.3 release"; // ??
+  private static final String VERSION = "1.4-beta1"; // ??
   // type is "dev" or "release" 
   //private static final String type = " dev"; // "release"
 

@@ -194,6 +194,7 @@ them into  the classfiles directory. excludes="test/**"  -->
             <fileset dir="${classfiles}"/>
             <fileset file="${obo}/*.obo"/>
             <fileset file="${conf}/*.cfg"/>
+	    <fileset dir="${images}"/>
         </jar>
     </target>
 
@@ -204,6 +205,7 @@ them into  the classfiles directory. excludes="test/**"  -->
             <fileset dir="${classfiles}"/>
             <fileset dir="." includes="obo-files/" excludes="obo-files/old"/>
             <fileset file="${conf}/*.cfg"/>
+	    <fileset dir="${images}"/>
         </jar>
     </target>
 
@@ -214,6 +216,7 @@ them into  the classfiles directory. excludes="test/**"  -->
             <fileset dir="${classfiles}"/>
             <fileset dir="." includes="obo-files/" excludes="obo-files/old,obo-files/fma_obo.obo,obo-files/gene_ontology.obo,obo-files/chebi.obo" />
             <fileset file="${conf}/*.cfg"/>
+	    <fileset dir="${images}"/>
         </jar>
     </target>
 
@@ -365,6 +368,7 @@ them into  the classfiles directory. excludes="test/**"  -->
             </lib>
             <classes dir="${obo}" />
             <classes dir="${conf}" />
+	    <classes dir="${images}" />
         </war>
     </target>
 
@@ -396,7 +400,7 @@ where xsd files are (conf) -->
 
 <!-- todo do all jars not just phenote - take out -signed -->
 <!-- depends on sym link phenote-webstart and env var PHENOTE_VERSION -->
-    <!-- target name="build-webstart" depends="build-sign-jars,webstart"/ -->
+    <!--target name="build-webstart" depends="build-sign-jars,webstart"/-->
     <target name="build-webstart" depends="build-all,jar,webstart"/>
 
     <!-- target name="build-sign-jars" depends="build-all,jar,sign-jars"/ -->
@@ -416,8 +420,6 @@ where xsd files are (conf) -->
     
 <!-- need to test if PHENOTE_VERSION is defined - possible?? -->
     <target name="webstart" depends="webstart-jars,webstart-webpages,copy-jnlps"/>
-
-
     <target name="webstart-jars"
             depends="build-all,jar,copy-webstart-jars,sign-webstart-jars"/> 
 
