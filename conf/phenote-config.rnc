@@ -17,7 +17,8 @@ start =
     update-timer,
     obo-repository,
     autocomplete-settings,
-    field*
+    field*,
+    group*
   }
 
 ## specify how the master config interacts with local/cached config
@@ -87,7 +88,8 @@ field =
     attribute slim { xsd:string },
     attribute repos-subdir {xsd:string},
     postcomp?,
-    ontology*
+    ontology*,
+    group-ref*
   } 
 
 ontology =
@@ -101,6 +103,18 @@ ontology =
     attribute slim { xsd:string },
     attribute repos-subdir {xsd:string},
     attribute is-postcomp-rel {xsd:boolean}
+  }
+  
+ group =
+   element group {
+     attribute name { xsd:ID },
+     attribute container { "window" | "tab" },
+     attribute interface { "default" | "character-template" }
+  }
+  
+  group-ref =
+    element group-ref {
+      attribute name { xsd:IDREF }
   }
 
 ## Whether to check if ontology(obo) has been updated/more current obo file
