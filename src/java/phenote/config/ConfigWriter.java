@@ -4,14 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.xmlbeans.XmlOptions;
-//import phenote.config.xml.DataadapterDocument.Dataadapter;
-//import phenote.config.xml.QueryableDataadapterDocument.QueryableDataadapter;
-// import phenote.config.xml.LogDocument.Log;
-// import phenote.config.xml.OboRepositoryDocument.OboRepository;
-// import phenote.config.xml.OntologyDocument.Ontology;
 import phenote.config.xml.PhenoteConfigurationDocument;
 import phenote.config.xml.PhenoteConfigurationDocument.PhenoteConfiguration;
-// import phenote.config.xml.UvicGraphDocument.UvicGraph;
 
 import phenote.dataadapter.DataAdapterI;
 import phenote.main.PhenoteVersion;
@@ -22,8 +16,6 @@ import phenote.main.PhenoteVersion;
     hindsight is 20 20 */
 class ConfigWriter {
 
-  //private Config config;
-  //private PhenoteConfiguration phenCfg;
 
   void writeConfig(Config config, File file) { //throws IOException? {
     //this.config = config; // convenience
@@ -34,17 +26,6 @@ class ConfigWriter {
     phenCfg.setVersion(PhenoteVersion.versionString());
     //xml namespace? need to get that working - xsd as a check - dont know how
 
-    //addDataAdapters();
-
-    //addQueryDataAdapters();
-
-    //addLog();
-
-    //addUvicGraph();
-
-    //addRepository();
-
-    //addFields();
 
     try { // xmlOptions? pretty print
     doc.save(file,getXmlOptions()); 
@@ -59,6 +40,30 @@ class ConfigWriter {
     options.setSavePrettyPrintIndent(2);
     return options;
   }
+
+}
+
+// GARBAGE...
+//import phenote.config.xml.DataadapterDocument.Dataadapter;
+//import phenote.config.xml.QueryableDataadapterDocument.QueryableDataadapter;
+// import phenote.config.xml.LogDocument.Log;
+// import phenote.config.xml.OboRepositoryDocument.OboRepository;
+// import phenote.config.xml.OntologyDocument.Ontology;
+// import phenote.config.xml.UvicGraphDocument.UvicGraph;
+  //private Config config;
+  //private PhenoteConfiguration phenCfg;
+
+    //addDataAdapters();
+
+    //addQueryDataAdapters();
+
+    //addLog();
+
+    //addUvicGraph();
+
+    //addRepository();
+
+    //addFields();
 
 //   private void addDataAdapters() {
 //     for (DataAdapterConfig dac : config.getAdapConfigs()) {
@@ -107,4 +112,3 @@ class ConfigWriter {
 //     }
 //   }
 
-}

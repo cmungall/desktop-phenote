@@ -253,29 +253,6 @@ public class Ontology {
     return term.getName().startsWith("obo:");
   }
 
-  /** This is not generic - this looks for ids that have the filterOut string
-      as a prefix and tosses them - for example "ZFS" filters out all zf stage
-      terms - can add more flexibility as needed - this is all thats needed for now
-      also filters out obo: terms - those are obo edit artifacts i think 
-      also filters for slim! */
-  private List<OBOClass> filterList(Collection<OBOClass> list) {
-    List<OBOClass> filteredList = new ArrayList<OBOClass>();
-    for (OBOClass term : list) {
-      // or could do remove on list?
-      // also filter out obo: terms as they are internal obo edit thingies it seems
-      // funny logic but more efficient to do in one pass - refactor somehow?
-      //if (term.getName().startsWith("obo:"))
-      if (isOboArtifact(term))
-        continue; // filter our obo:
-      //if (hasFilter() && term.getID().startsWith(getFilter()))
-      if (filterOut(term))
-        continue;
-      if (!inSlim(term))
-        continue;
-      filteredList.add(term); // passed 2 filters above - add it
-    }
-    return filteredList;
-  }
 
   private Logger log;
   private Logger log() {
@@ -329,6 +306,30 @@ public class Ontology {
     //for (Namespace n : spaces) System.out.println(n);
     //for (OBOClass o : sortedTerms) System.out.println(o);
     
+  }
+
+  /** This is not generic - this looks for ids that have the filterOut string
+      as a prefix and tosses them - for example "ZFS" filters out all zf stage
+      terms - can add more flexibility as needed - this is all thats needed for now
+      also filters out obo: terms - those are obo edit artifacts i think 
+      also filters for slim! - phase out for obo edit stuff  */
+  private List<OBOClass> filterList(Collection<OBOClass> list) {
+    List<OBOClass> filteredList = new ArrayList<OBOClass>();
+    for (OBOClass term : list) {
+      // or could do remove on list?
+      // also filter out obo: terms as they are internal obo edit thingies it seems
+      // funny logic but more efficient to do in one pass - refactor somehow?
+      //if (term.getName().startsWith("obo:"))
+      if (isOboArtifact(term))
+        continue; // filter our obo:
+      //if (hasFilter() && term.getID().startsWith(getFilter()))
+      if (filterOut(term))
+        continue;
+      if (!inSlim(term))
+        continue;
+      filteredList.add(term); // passed 2 filters above - add it
+    }
+    return filteredList;
   }
 }
 

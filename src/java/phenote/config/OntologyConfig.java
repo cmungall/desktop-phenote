@@ -64,6 +64,7 @@ public class OntologyConfig {
     //name = field.getName();
     setName(field.getName());
     setFile(field.getFile());//ontologyFile = field.getFile();
+    getOntologyBean().setFile(field.getFile()); // crucial!
     // downside of strongly types xml beans is filterOut has to be dealt with 
     // separately for field & ontology - annoying - & all other attribs
     //filterOut = field.getFilterOut()!=null ? field.getFilterOut() : null;
@@ -72,10 +73,12 @@ public class OntologyConfig {
     setSlim(field.getSlim());
     //reposSubdir = field.getReposSubdir()!=null ? field.getReposSubdir() : null;
     setReposSubdir(field.getReposSubdir());
+    //fc.getFieldBean().setFile(null); // ?
+    fc.getFieldBean().xsetFile(null);
   }
 
 
-  // for makePostCompRelCfg PASE
+  // for makePostCompRelCfg PASE - for backward compatibility
   private OntologyConfig(String name, String file,FieldConfig fc) {
     //this(name,fc);
     fieldConfig = fc;
@@ -88,6 +91,8 @@ public class OntologyConfig {
   static OntologyConfig makePostCompRelCfg(String file,FieldConfig fc) {
     OntologyConfig rel = new OntologyConfig("Relationship",file,fc);
     rel.setIsPostCompRel(true);
+    rel.getOntologyBean().setFile(file); // crucial!
+    fc.getFieldBean().unsetPostcomp(); // also crucial - get rid of it
     return rel;
   }
 
@@ -96,6 +101,11 @@ public class OntologyConfig {
   /** File can be url(repos) or filename (from cache/jar/app), if url sets 
       reposUrlString and ontologyFile with end of url */
   private void setFile(String file) {
+    if (file == null) {
+      System.out.println("ERROR: null ontology file "+getName());
+      new Throwable().printStackTrace();
+      return;
+    }
     if (file.startsWith("http:") || file.startsWith("https:") ||
     		file.startsWith("ftp:") || file.startsWith("sftp:")) {
       reposUrlString = file;

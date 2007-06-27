@@ -75,6 +75,11 @@ public class FileUtil {
 
   /** split into findMaster?ConfigUrl & findOboUrl!!! */
   public static URL findUrl(String filename) throws FileNotFoundException {
+    if (filename == null) {
+      String m = "cant find null file";
+      LOG.error(m); System.out.println(m);
+      throw new FileNotFoundException(m);
+    }
     List<URL> possibleUrls = getPossibleUrls(filename);
     for (URL u : possibleUrls) {
       //System.out.println(u+" url exists "+urlExists(u));
@@ -94,6 +99,11 @@ public class FileUtil {
   // split into getPossibleMaster?ConfigUrls & getPossibleOboUrls
   private static List<URL> getPossibleUrls(String filename) {
     List<URL> urls = new ArrayList(5);
+    if (filename == null) {
+      System.out.println("cant find null file");
+      LOG.error("cant find null file");
+      return urls; // ?? ex?
+    }
     // hmmm - should full path go last? can be problem with running from
     // jar as config files are in root(fix), obo files finally given dir
     addFile(filename,urls); // full path or relative to pwd
@@ -112,6 +122,11 @@ public class FileUtil {
 
   // make an inner class for this?
   private static void addFile(String filename,List<URL> urls) {
+    if (filename == null) {
+      System.out.println("cant find null file");
+      LOG.error("cant find null file");
+      return;
+    }
     try {
       URL u = new File(filename).toURL();
       if (u != null) urls.add(u);

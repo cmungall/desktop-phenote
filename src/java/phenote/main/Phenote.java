@@ -78,6 +78,9 @@ public class Phenote {
     phenote = getPhenote();
     phenote.splashScreenInit(); //initialize the splash screen;
     phenote.doCommandLine(args); // does config
+
+    //new phenote.gui.ConfigGui(); // testing out
+
     // put this is in a phenote.util.Log class? - get file from config - default?
     phenote.splashScreen.setProgress("Configuring...", 10);
     try { DOMConfigurator.configure(Config.inst().getLogConfigUrl()); }
@@ -95,6 +98,7 @@ public class Phenote {
     {
     	phenote.initGui();
     	phenote.splashScreenDestruct();
+
 
     }
   }	

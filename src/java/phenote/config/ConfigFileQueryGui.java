@@ -1,11 +1,16 @@
 package phenote.config;
 
+// this should be moved to gui - actually i think ConfigGui may more or less replace it?
+
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
@@ -95,7 +100,7 @@ public class ConfigFileQueryGui {
     try { currentConfig = Config.inst().getMyPhenoteConfigString(); }
     catch (IOException e) { doFirst = true; }
    for (String cfg : getConfigNames()) {
-      JRadioButton b = new JRadioButton(new BtnAction(cfg));
+     JRadioButton b = new JRadioButton(new BtnAction(cfg)); // makes display name
       buttonPanel.add(b);
       // select current myphenote if exists, else select first
       if ( (currentConfig != null && cfg.equals(currentConfig)) 
@@ -183,20 +188,22 @@ public class ConfigFileQueryGui {
   }
   private String makeDisplayFromFile(String f) {
     f = f.replaceAll(".cfg","");
-    //f = f.replaceAll("-"," ");
+    f = f.replaceAll("-"," ");
     return f;
   }
 
-  /** query conf directories in app conf, jar conf(webstart) and .phenote/conf */
-  private Set<String> getConfigNames() {
+  /** query conf directories in app conf, jar conf(webstart) and .phenote/conf 
+   List? soreted alphabeitcally?
+  these strings are the actual filenames as in name-with-dash.cfg */
+  public static SortedSet<String> getConfigNames() {
 
-    Set<String> names = new LinkedHashSet<String>();
+    //Set<String> names = new LinkedHashSet<String>();
+    SortedSet<String> names = new TreeSet<String>();
 
+    // JAR
     // should only go into jar if actually running from jar hmmmmm
     // will this work with webstart??? probably not
-
     File jf = new File("jars/phenote.jar");
-
     try {
       BasicService bs = (BasicService)ServiceManager.lookup("javax.jnlp.BasicService");      
       URL codeBaseUrl = bs.getCodeBase(); // this is the url to phenote webstart
@@ -227,10 +234,13 @@ public class ConfigFileQueryGui {
     // ~/.phenote/conf
     File dotPhenConf = FileUtil.getDotPhenoteConfDir();
     addCfgFromDir(dotPhenConf,names);
+
+    //Collections.sort(names);
+
     return names;
   }
 
-  private void addCfgFromDir(File confDir,Set<String> names) {
+  private static void addCfgFromDir(File confDir,SortedSet<String> names) {
     FilenameFilter filter = new FilenameFilter() {
         public boolean accept(File dir, String name) {
           return name.endsWith(".cfg");}
@@ -255,64 +265,4 @@ public class ConfigFileQueryGui {
 
 }
 
-// silly me - all i needed to do was make the dialog modal! silly silly
-//  WaitSwingWorkerThread waitSwingWorkerThread;
-    // doesnt work - still spins
-    //Thread dt = new DialogThread();
-//     try { 
-//       // this says cant do from EventDispatcherThread
-//       //javax.swing.SwingUtilities.invokeAndWait(new DialogThread());
-//       // this literally makes the computer blow up
-//       //javax.swing.SwingUtilities.invokeLater(new DialogThread());
-//     } //catch (InterruptedException e) { System.out.println("interrupted "+e); }
-//     catch (Exception e) {  System.out.println("Exception: "+e); }
-    //dt.start();
-    //DialogSwingWorkerThread dt = new DialogSwingWorkerThread();
-    //dt.start();
-//     while (!okPressed) {
-//       System.out.println("ok pressed? "+okPressed+" cur thread "+Thread.currentThread()+" dlg thread "+dt);
-//       try { Thread.sleep(300); } catch (InterruptedException e) {}
-//     } // sleep??
-//    return selectedFile; //(String) dt.get(); //selectedFile;
-//     waitSwingWorkerThread  = new WaitSwingWorkerThread();
-//     waitSwingWorkerThread.start();
-//     return (String)waitSwingWorkerThread.get();
-//   private class DialogThread extends Thread {
-//     public void run() {
-//       makeQueryDialog();
-//     }
-//   }
 
-//   private class WaitSwingWorkerThread extends phenote.gui.SwingWorker {
-//     public Object construct() {
-//       while (!okPressed) {
-//         System.out.println("ok pressed? "+okPressed+" cur thread "+Thread.currentThread()+" this "+this+" sel "+selectedFile);
-// //        try {
-//         waitSwingWorkerThread.sleep(300);// } catch (InterruptedException e) {}
-//       } // sleep??
-//       return selectedFile;
-//     }
-//   }
-  
-
-//   private class DialogSwingWorkerThread extends phenote.gui.SwingWorker {
-//     public Object construct() {
-//       makeQueryDialog();
-// //     while (!okPressed) {
-// //       System.out.println("ok pressed? "+okPressed+" cur thread "+Thread.currentThread()+" this "+this);
-// //       try { Thread.sleep(300); } catch (InterruptedException e) {}
-// //     } // sleep??
-//       return selectedFile;
-//     }
-//   }
-
-//   private class PhenoteClassLoader extends ClassLoader {
-//     private PhenoteClassLoader() {
-//       super(ClassLoader.getSystemClassLoader());
-//     }
-//     protected String findLibrary(String lib) {
-//       return super.findLibrary(lib);
-//       //return this.getParent().findLibrary(lib);
-//     }
-//     //protected ClassLoader getParent() { return super.getParent(); }
-//   }

@@ -9,6 +9,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.help.CSH;
+import javax.help.HelpBroker;
 
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.DataAdapterI;
@@ -40,10 +41,15 @@ class HelpMenu extends JMenu {
     help = new JMenuItem("Phenote Help");
     help.setEnabled(Config.inst().hasDataAdapters());
     help.setActionCommand("help");
- 		help.addActionListener(new CSH.DisplayHelpFromSource(HelpManager
-				.getHelpBroker()));
-//    help.addActionListener(actionListener);
-    add(help); 
+    HelpBroker hb = HelpManager.getHelpBroker();
+    if (hb == null) {
+      System.out.println("Unable to retrieve help broker");
+    }
+    else {
+      help.addActionListener(new CSH.DisplayHelpFromSource(HelpManager.getHelpBroker()));
+      //help.addActionListener(actionListener);
+      add(help); 
+    }
 
     JMenuItem about = new JMenuItem("About");
     about.setEnabled(Config.inst().hasDataAdapters());

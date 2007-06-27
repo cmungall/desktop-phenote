@@ -342,10 +342,12 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   public JComboBox getJComboBox() { return jComboBox; }
 
   private class CompComboBoxModel implements ComboBoxModel {
-    //private List<CompletionTerm> list; cant do - may also be CompletionRelation!
+    //private List<CompletionTerm>, cant do - may also be CompletionRelation!
     private List list;
     private Object selectedItem;
+
     private CompComboBoxModel(List l) { list = l; }
+
     public Object getSelectedItem() { return selectedItem; }
     public void setSelectedItem(Object anItem) { selectedItem = anItem; }
     public void	addListDataListener(ListDataListener l) {}

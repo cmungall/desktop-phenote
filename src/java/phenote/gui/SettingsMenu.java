@@ -77,9 +77,15 @@ class SettingsMenu extends JMenu {
 
     addSeparator();
 
-    JMenuItem loadConfig = new JMenuItem("Configuration...");
+    JMenuItem loadConfig = new JMenuItem("Set Configuration...");
     loadConfig.addActionListener(new ConfigActionListener());
     add(loadConfig);
+
+    // proto gui config
+    JMenuItem browseConfig = new JMenuItem("Browse configuration");
+    browseConfig.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) { new ConfigGui(); } } );
+    add(browseConfig);
 
     //not sure if it should be in this menu
     addSeparator();

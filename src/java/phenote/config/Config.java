@@ -45,7 +45,8 @@ public class Config {
 
   public final static String  FLYBASE_DEFAULT_CONFIG_FILE = "flybase.cfg";
   private static Config singleton = new Config();
-  private String configFile = FLYBASE_DEFAULT_CONFIG_FILE;
+
+  private String configFile = FLYBASE_DEFAULT_CONFIG_FILE; // default
   private List<DataAdapterConfig> dataAdapConfList;
   private List<DataAdapterConfig> queryAdapConfList;
   /** only enabled fields */
@@ -68,6 +69,11 @@ public class Config {
   private PhenoteConfigurationDocument phenoDocBean;
   private PhenoteConfiguration phenoConfigBean; // cache the xml parse bean??
 
+  // so name is both the filename and the display name for the config - which simplifies 
+  // things - but if it becomes a drag we'll break this up
+  private String name;
+  private String displayName; // for gui config to get html italics & grey in there - cheesy?
+
   private boolean configInitialized = false;
   private boolean configModified = false; 
   //flag for if any settings during session have changed, such as search params, col widths, etc.
@@ -79,6 +85,23 @@ public class Config {
   }
   /** singleton */
   private Config() {}
+
+  // for gui config
+  public static Config newInstance(String name,String displayName) {
+    Config c = new Config();
+    c.phenoDocBean = PhenoteConfigurationDocument.Factory.newInstance();
+    c.phenoConfigBean = c.phenoDocBean.addNewPhenoteConfiguration();
+    c.setConfigName(name);
+    c.displayName = displayName;
+    return c;
+  }
+
+  public static Config makeConfigFromFile(String file) throws ConfigException {
+    Config c = new Config();
+    c.setConfigFile(file,true,false,false);
+    //c.setConfigName(file); // or in setConfigFile?
+    return c;
+  }
 
   public boolean isInitialized() { return configInitialized; }
   
@@ -183,6 +206,7 @@ public class Config {
                             boolean overwritePersonalConfig,boolean mergeConfigs) 
     throws ConfigException {
     this.configFile = file; // ??
+    setNameFromConfigFile(file); // ??
     // look to see if config file in ~/.phenote - if not copy there
     if (usePersonalConfig) { // for standalone not servlet
       configFile = getMyPhenoteConfig(configFile,overwritePersonalConfig,mergeConfigs);
@@ -656,6 +680,11 @@ public class Config {
     return phenoConfigBean.getLog().getConfigFile();
   }
 
+  /** Adds & returns xml Field bean */
+  Field addNewFieldBean() {
+    return phenoConfigBean.addNewField();
+  }
+
   public int getEnbldFieldsNum() {
     return getEnbldFieldCfgs().size();
   }
@@ -969,18 +998,42 @@ public class Config {
     phenoConfigBean.setFieldArray(index,fc.getFieldBean());
   }
   
-  public String getConfigName() {	
-  	String name = phenoConfigBean.getName();
-  	return name;  
-  	}
-  public void setConfigName(String name) {
-  	phenoConfigBean.setName(name);
-  	return;
+  public String toString() {
+    if (displayName != null) return displayName;
+    return getConfigName();
   }
+
+  // i dont think we should do it this way - i think the name & filename should be 
+  // synonomous - and the user shouldnt have to know anything about files
+  public String getConfigName() {	
+    //String name = phenoConfigBean.getName();
+    return this.name;  
+  }
+  public void setConfigName(String name) {
+    this.name = name; //phenoConfigBean.setName(name);
+    displayName = name; // displayName = null?
+    setConfigFileFromName();
+  }
+
+  private void setConfigFileFromName() {
+    configFile =  name.replaceAll(" ","-");
+    configFile += ".cfg";
+  }
+
+  private void setNameFromConfigFile(String file) {
+    name = file;
+    if (name.endsWith(".cfg")) name = name.substring(0,name.length()-4);
+    name.replaceAll("-"," ");
+  }
+
+  private String getConfigFile() {
+    return configFile;
+  }
+
   public String getConfigDesc() { 
-  	String desc = phenoConfigBean.getDescription();
-  	return desc; 
-  	}
+    String desc = phenoConfigBean.getDescription();
+    return desc; 
+  }
   public void setConfigDesc(String desc) {
   	phenoConfigBean.setDescription(desc);
   	return;
@@ -1012,16 +1065,4 @@ public class Config {
    //parseXmlFile("./conf/initial-flybase.cfg"); // hardwired for now...
   //private FieldConfig lumpConfig = new FieldConfig(CharFieldEnum.LUMP,"Genotype");
   //private String lumpOntologyFile = null;  private OntologyConfig lumpConfig = new OntologyConfig("Genotype");
-
-  //private boolean checkForNewOntologies = false;
-  //private int newOntologyCheckMinutes = 10;
-  // --> quartz
-//   /** perhaps not best name - check if ontology is still fresh, if something newer
-//       than load it - for obo files check file date - get this into config file! */
-//   public boolean checkForNewOntologies() {
-//     return checkForNewOntologies;
-//   }
-//   /** How many minutes between checks for new ontologies */
-//   public int getOntologyCheckMinutes() { return newOntologyCheckMinutes; }
-//   private class DataAdapterConfig {
 

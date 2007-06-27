@@ -7,6 +7,10 @@ import java.awt.Insets;
 
 public class GridBagUtil {
 
+  public static GridBagConstraints initConstraint() {
+    return makeConstraint(1,1);
+  }
+
   public static GridBagConstraints makeConstraint(int x,int y) {
     return makeConstraint(x,y,3,3,GridBagConstraints.WEST);
   }

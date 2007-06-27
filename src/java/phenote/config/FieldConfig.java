@@ -25,6 +25,7 @@ public class FieldConfig {
   //private boolean enabled = true; // default if not specified is true
   private Config config;
   private Field fieldBean;
+  private String displayName;
 
 
   // from gui config
@@ -62,7 +63,7 @@ public class FieldConfig {
     
     // ONTOLOGIES if only one ontology file is an attribute... (convenience)
     // this is being phased out - no need and a hassle
-    if (fieldBean.getFile() != null) {
+    if (fieldBean.getFile() != null && !fieldBean.getFile().equals("")) {
       addOntologyConfig(new OntologyConfig(fieldBean,this));
     }
     // otherwise its multiple ontologies listed in ontology elements (entity)
@@ -75,15 +76,33 @@ public class FieldConfig {
     }
   }
 
+  // for ConfigGui
+  public FieldConfig(String label, String displayName,Config cfg) {
+    config = cfg;
+    setLabel(label);
+    this.displayName = displayName;
+  }
+
   Config getConfig() { return config; }
 
   /** return xml bean for field -always non null */
-  Field getFieldBean() { return fieldBean; } 
+  Field getFieldBean() {
+    if (fieldBean == null) //create one...
+      fieldBean = config.addNewFieldBean();
+    return fieldBean;
+  } 
 
   // --> getName?
-  public String getLabel() { return fieldBean.getName(); } //return label; }
+  public String getLabel() { return fieldBean.getName(); } 
   boolean hasLabel(String label) { return label.equals(getLabel()); } 
-  // public void setLabel(String label) { fieldBean.setName(label); } // ??
+  public void setLabel(String label) {
+    getFieldBean().setName(label);
+    displayName = label;
+  } // ??
+  public String toString() { 
+    if (displayName != null) return displayName;
+    return getLabel();
+  }
 
   //public String getLabel() { return label; }
   public String getDesc() { return desc; }

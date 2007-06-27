@@ -105,44 +105,12 @@ public class OntologyDataAdapter {
     if (DO_ONE_OBO_SESSION) {
       initOntolsOneOboSession();
     }
-    else {
+    else { // pase - phase out
       initOntolsSeparateOboSessions();
     }
     initializingOntologies = false;
   }
 
-  private void initOntolsSeparateOboSessions() {
-    // getFieldConfigList gives enabled fields - not disabled
-    for (FieldConfig fieldConfig : cfg().getEnbldFieldCfgs()) {
-      if (!fieldConfig.isEnabled()) continue; // not necasary actually
-      CharField cf = new CharField(fieldConfig.getLabel());
-      fieldConfig.setCharField(cf);
-
-      // ONTOLOGIES
-      if (fieldConfig.hasOntologies()) {
-        for (OntologyConfig oc : fieldConfig.getOntologyConfigList()) {
-          try {
-            Ontology o = initOntology(oc); // LOAD OBO SESSION
-            if (oc.isPostCompRel()) { // POST COMP REL ONTOLOGY
-              cf.setPostCompAllowed(true);
-              cf.setPostCompRelOntol(o);
-            }
-            else { // REGULAR ONTOLOGY
-              cf.addOntology(o);
-            }
-          } catch (OntologyException e) {
-            LOG.error(e.getMessage()+" ignoring init ontology, fix config? "+oc);
-          }
-        }
-      }
-      else {
-
-        cf.setName(fieldConfig.getLabel());
-      }
-      // i think this order needs to be same as config order
-      ontologyManager.addField(cf);
-    }
-  }
 
 
   private void initOntolsOneOboSession() {
@@ -174,7 +142,8 @@ public class OntologyDataAdapter {
           files.add(file);
         }
         catch (OntologyException e) {
-          LOG.warn(e.getMessage()+" Please check config & obo files");
+          String m = e.getMessage()+" Please check config & obo files";
+          LOG.error(m); System.out.println(m);
         }
       }
     }
@@ -231,29 +200,6 @@ public class OntologyDataAdapter {
   }
 
 
-  /** Load up/cache Sets for all ontologies used, anatomyOntologyTermSet
-   * and patoOntologyTermSet -- move to dataadapter/OntologyDataAdapter... */
-  private Ontology initOntology(OntologyConfig ontCfg) throws OntologyException {
-    Ontology ontology = new Ontology(ontCfg.getName()); // new Ontology(ontCfg)?
-    if (ontCfg.hasFilter()) // set filter before loading obo session
-      ontology.setFilter(ontCfg.getFilter());
-    if (ontCfg.hasSlim())
-      ontology.setSlim(ontCfg.getSlim());
-      
-    loadOboSession(ontology,ontCfg); // throws FileNotFoundEx->OntolEx
-    return ontology;
-  }
-
-  /** Load obo session with obo edit adapter, unless previously loaded - reuse */
-  private void loadOboSession(Ontology o,OntologyConfig oc) throws OntologyException {
-    // check cache of ontologies to see if ontology file already loaded
-    if (fileIsInCache(oc.getFile())) {
-      setOboSessionFromCache(o,oc.getFile());
-    }
-    else {
-      loadOboSessionCheckRepos(o,oc);
-    }
-  }
 
   /** if configged checks if repos has more recent - if so copies to cache
       if no repos gets from cache(.phenote/obo-files), if no cache gets from app/obo-files
@@ -265,13 +211,15 @@ public class OntologyDataAdapter {
   
 
   /** if configged checks if repos has more recent - if so copies to cache
-      if no repos gets from cache(.phenote/obo-files), if no cache gets from app/obo-files
-      throws ontology ex if fails to find in
+      if no repos gets from cache(.phenote/obo-files), if no cache gets from
+      app/obo-files throws ontology ex if fails to find in
       url/repos, .phenote/obo-files and app/obo-files */
   private URL findOboUrl(OntologyConfig ontCfg) throws OntologyException {
     // first get local url (if there is one) to use to compare against repos url
     // get normal/cached/local ontology
     String filename = ontCfg.getFile();
+    if (filename == null)
+      throw new OntologyException(ontCfg.getName()+" has null file");
     // throws OntologyEx if file not found -- catch & try url
     URL url = null;
     try { url = findFile(filename); }
@@ -302,74 +250,7 @@ public class OntologyDataAdapter {
    
   }
 
-  private boolean fileIsInCache(String filename) {
-    return fileToOntologyCache.containsKey(filename);
-  }
 
-  private void setOboSessionFromCache(Ontology o,String filename)
-  throws OntologyException {
-    Ontology previousOntol = fileToOntologyCache.get(filename);
-    o.setOboSession(previousOntol.getOboSession()); // throws OntEx if error
-    System.out.println("obo file already loaded using, obo file from cache "+o.getOboSession());
-    o.setTimestamp(previousOntol.getTimestamp());
-    o.setSource(previousOntol.getSource());
-  }
-
-  /** If repository is configured loads obo from repos if local out of date */
-  private void loadOboSessionCheckRepos(Ontology o,OntologyConfig oc)
-    throws OntologyException {
-
-//     // first get normal/cached/local ontology
-//     String filename = oc.getFile();
-//     // throws OntologyEx if file not found -- need to catch - should still try url
-//     URL url = null;
-//     try { url = findFile(filename); }
-//     catch (OntologyException oe) {
-//       System.out.println(filename+" not found locally, trying url if configured ");
-//     }
-
-//     // if ontCfg.hasSynchUrl() ?
-//     // URL synchUrl = ontCfg.getSynchUrl
-//     if (oc.hasReposUrl()) {
-//       try {
-//         URL reposUrl = oc.getReposUrl();
-//         // if out of synch copies repos to local(.phenote/obo-files)
-//         // url may be jar/obo-files or svn/obo-files but this function may put file
-//         // in cache ~/.phenote/obo-files
-//         url = synchWithRepositoryUrl(url,reposUrl,o.getName(),filename);
-        
-//         // to do - if from repos need to load repos into local obo cache!
-
-//       } catch (/*MalformedURL & IO*/Exception e) { LOG.error(e); }
-//     }
-
-    URL url = findOboUrl(oc);
-
-    long mem = Runtime.getRuntime().totalMemory()/1000000;
-    LOG.debug(url+" checking with repos... loading obo session mem "+mem+"\n");
-    startTimer();
-    
-    loadOboSessionFromUrl(o,url,oc.getFile());
-    stopTimer(url+" checked against repos... obo session loaded");
-    mem = Runtime.getRuntime().totalMemory()/1000000;
-    long max = Runtime.getRuntime().maxMemory()/1000000;
-    LOG.debug("mem after load "+mem+" max "+max);
-  }
-
-  /** url is either local file or repos url */
-  private void loadOboSessionFromUrl(Ontology o, URL url, String filename)
-  throws OntologyException {
-    //URL url = findFile(filename); // throws OntologyEx if file not found
-    o.setOboSession(getOboSession(url)); // throws OntEx if error
-    if (filename!=null)
-      fileToOntologyCache.put(filename,o); // ??
-    File file = new File(url.getFile());
-    long date = file.lastModified();
-    if (date > 0) { // jar files have 0 date???
-      o.setTimestamp(date);
-      o.setSource(file.toString());
-    }
-  }
 
   /** this copies obo file to local cache (~/.phenote/obo-files */
   private URL synchWithRepositoryUrl(URL localUrl, URL reposUrl, String ontol,
@@ -487,6 +368,7 @@ public class OntologyDataAdapter {
   /** Look for file in current directory (.) and jar file 
       throws OntologyException if file not found - wraps FileNFEx */
   private URL findFile(String fileName) throws OntologyException {
+    if (fileName == null) throw new OntologyException("file is null");
     try { return FileUtil.findUrl(fileName); }
     catch (FileNotFoundException e) { throw new OntologyException(e); }
   }
@@ -549,6 +431,134 @@ public class OntologyDataAdapter {
     Calendar endTime = Calendar.getInstance();
     long seconds = (endTime.getTimeInMillis() - startTime.getTimeInMillis())/1000;
     LOG.debug(m+" number of seconds: "+seconds);
+  }
+
+  // pase - phase out
+  private void initOntolsSeparateOboSessions() {
+    // getFieldConfigList gives enabled fields - not disabled
+    for (FieldConfig fieldConfig : cfg().getEnbldFieldCfgs()) {
+      if (!fieldConfig.isEnabled()) continue; // not necasary actually
+      CharField cf = new CharField(fieldConfig.getLabel());
+      fieldConfig.setCharField(cf);
+
+      // ONTOLOGIES
+      if (fieldConfig.hasOntologies()) {
+        for (OntologyConfig oc : fieldConfig.getOntologyConfigList()) {
+          try {
+            Ontology o = initOntology(oc); // LOAD OBO SESSION
+            if (oc.isPostCompRel()) { // POST COMP REL ONTOLOGY
+              cf.setPostCompAllowed(true);
+              cf.setPostCompRelOntol(o);
+            }
+            else { // REGULAR ONTOLOGY
+              cf.addOntology(o);
+            }
+          } catch (OntologyException e) {
+            LOG.error(e.getMessage()+" ignoring init ontology, fix config? "+oc);
+          }
+        }
+      }
+      else {
+
+        cf.setName(fieldConfig.getLabel());
+      }
+      // i think this order needs to be same as config order
+      ontologyManager.addField(cf);
+    }
+  }
+
+  /** Load up/cache Sets for all ontologies used, anatomyOntologyTermSet
+   * and patoOntologyTermSet -- move to dataadapter/OntologyDataAdapter... 
+   this is old - phase out? */
+  private Ontology initOntology(OntologyConfig ontCfg) throws OntologyException {
+    Ontology ontology = new Ontology(ontCfg.getName()); // new Ontology(ontCfg)?
+    if (ontCfg.hasFilter()) // set filter before loading obo session
+      ontology.setFilter(ontCfg.getFilter());
+    if (ontCfg.hasSlim())
+      ontology.setSlim(ontCfg.getSlim());
+      
+    loadOboSession(ontology,ontCfg); // throws FileNotFoundEx->OntolEx
+    return ontology;
+  }
+
+  /** Load obo session with obo edit adapter, unless previously loaded - reuse 
+   this is old - phase out! */
+  private void loadOboSession(Ontology o,OntologyConfig oc) throws OntologyException {
+    // check cache of ontologies to see if ontology file already loaded
+    if (fileIsInCache(oc.getFile())) {
+      setOboSessionFromCache(o,oc.getFile());
+    }
+    else {
+      loadOboSessionCheckRepos(o,oc);
+    }
+  }
+
+  private boolean fileIsInCache(String filename) {
+    return fileToOntologyCache.containsKey(filename);
+  }
+
+  private void setOboSessionFromCache(Ontology o,String filename)
+    throws OntologyException {
+    Ontology previousOntol = fileToOntologyCache.get(filename);
+    o.setOboSession(previousOntol.getOboSession()); // throws OntEx if error
+    System.out.println("obo file already loaded using, obo file from cache "+o.getOboSession());
+    o.setTimestamp(previousOntol.getTimestamp());
+    o.setSource(previousOntol.getSource());
+  }
+  /** If repository is configured loads obo from repos if local out of date */
+  private void loadOboSessionCheckRepos(Ontology o,OntologyConfig oc)
+    throws OntologyException {
+
+//     // first get normal/cached/local ontology
+//     String filename = oc.getFile();
+//     // throws OntologyEx if file not found -- need to catch - should still try url
+//     URL url = null;
+//     try { url = findFile(filename); }
+//     catch (OntologyException oe) {
+//       System.out.println(filename+" not found locally, trying url if configured ");
+//     }
+
+//     // if ontCfg.hasSynchUrl() ?
+//     // URL synchUrl = ontCfg.getSynchUrl
+//     if (oc.hasReposUrl()) {
+//       try {
+//         URL reposUrl = oc.getReposUrl();
+//         // if out of synch copies repos to local(.phenote/obo-files)
+//         // url may be jar/obo-files or svn/obo-files but this function may put file
+//         // in cache ~/.phenote/obo-files
+//         url = synchWithRepositoryUrl(url,reposUrl,o.getName(),filename);
+        
+//         // to do - if from repos need to load repos into local obo cache!
+
+//       } catch (/*MalformedURL & IO*/Exception e) { LOG.error(e); }
+//     }
+
+    URL url = findOboUrl(oc);
+
+    long mem = Runtime.getRuntime().totalMemory()/1000000;
+    LOG.debug(url+" checking with repos... loading obo session mem "+mem+"\n");
+    startTimer();
+    
+    loadOboSessionFromUrl(o,url,oc.getFile());
+    stopTimer(url+" checked against repos... obo session loaded");
+    mem = Runtime.getRuntime().totalMemory()/1000000;
+    long max = Runtime.getRuntime().maxMemory()/1000000;
+    LOG.debug("mem after load "+mem+" max "+max);
+  }
+
+  /** url is either local file or repos url */
+  private void loadOboSessionFromUrl(Ontology o, URL url, String filename)
+  throws OntologyException {
+    //URL url = findFile(filename); // throws OntologyEx if file not found
+    o.setOboSession(getOboSession(url)); // throws OntEx if error
+    if (filename!=null)
+      fileToOntologyCache.put(filename,o); // ??
+    File file = new File(url.getFile());
+    long date = file.lastModified();
+    if (date > 0) { // jar files have 0 date???
+      o.setTimestamp(date);
+      o.setSource(file.toString());
+    }
   }
 
 
