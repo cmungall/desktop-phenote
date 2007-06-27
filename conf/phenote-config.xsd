@@ -13,6 +13,7 @@
         <xs:element ref="x:obo-repository"/>
         <xs:element ref="x:autocomplete-settings"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:field"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:group"/>
       </xs:sequence>
       <xs:attribute name="version" use="required" type="xs:string"/>
       <xs:attribute name="description" use="required" type="xs:string"/>
@@ -104,6 +105,7 @@
       <xs:attribute name="filter-out" use="required" type="xs:string"/>
       <xs:attribute name="slim" use="required" type="xs:string"/>
       <xs:attribute name="repos-subdir" use="required" type="xs:string"/>
+      <xs:attribute name="groups" type="xs:IDREFS"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="ontology">
@@ -123,6 +125,27 @@
       <xs:attribute name="slim" use="required" type="xs:string"/>
       <xs:attribute name="repos-subdir" use="required" type="xs:string"/>
       <xs:attribute name="is-postcomp-rel" use="required" type="xs:boolean"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="group">
+    <xs:complexType>
+      <xs:attribute name="name" use="required" type="xs:ID"/>
+      <xs:attribute name="container" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="window"/>
+            <xs:enumeration value="tab"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="interface" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="default"/>
+            <xs:enumeration value="character-template"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
     </xs:complexType>
   </xs:element>
   <xs:element name="postcomp">

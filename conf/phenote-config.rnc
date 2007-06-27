@@ -87,9 +87,9 @@ field =
     attribute filter-out { xsd:string },
     attribute slim { xsd:string },
     attribute repos-subdir {xsd:string},
+    attribute groups { xsd:IDREFS }?,
     postcomp?,
-    ontology*,
-    group-ref*
+    ontology*
   } 
 
 ontology =
@@ -112,10 +112,6 @@ ontology =
      attribute interface { "default" | "character-template" }
   }
   
-  group-ref =
-    element group-ref {
-      attribute name { xsd:IDREF }
-  }
 
 ## Whether to check if ontology(obo) has been updated/more current obo file
 ## I think this needs to be taken out as replaced by quartz scheduler
