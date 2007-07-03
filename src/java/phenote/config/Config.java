@@ -1,7 +1,6 @@
 package phenote.config;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -11,34 +10,30 @@ import java.io.LineNumberReader;
 import java.io.PrintStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.lang.Enum;
-
 
 import org.apache.xmlbeans.XmlException;
 
-import phenote.main.PhenoteVersion;
 import phenote.config.xml.PhenoteConfigurationDocument;
-import phenote.config.xml.DataadapterDocument.Dataadapter;
-//import phenote.config.xml.QueryableDataadapterDocument.QueryableDataadapter;
-import phenote.config.xml.FieldDocument.Field;
-import phenote.config.xml.LogDocument.Log;
-import phenote.config.xml.OboRepositoryDocument.OboRepository;
-import phenote.config.xml.PhenoteConfigurationDocument.PhenoteConfiguration;
-import phenote.config.xml.UvicGraphDocument.UvicGraph;
-import phenote.config.xml.TermHistoryDocument.TermHistory;
 import phenote.config.xml.AutoUpdateOntologiesDocument.AutoUpdateOntologies;
-import phenote.config.xml.UpdateTimerDocument.UpdateTimer;
-import phenote.config.xml.MasterToLocalConfigDocument.MasterToLocalConfig;
 import phenote.config.xml.AutocompleteSettingsDocument.AutocompleteSettings;
-
+import phenote.config.xml.DataadapterDocument.Dataadapter;
+import phenote.config.xml.FieldDocument.Field;
+import phenote.config.xml.GroupDocument.Group;
+import phenote.config.xml.LogDocument.Log;
+import phenote.config.xml.MasterToLocalConfigDocument.MasterToLocalConfig;
+import phenote.config.xml.PhenoteConfigurationDocument.PhenoteConfiguration;
+import phenote.config.xml.TermHistoryDocument.TermHistory;
+import phenote.config.xml.UpdateTimerDocument.UpdateTimer;
+import phenote.config.xml.UvicGraphDocument.UvicGraph;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.QueryableDataAdapterI;
 import phenote.datamodel.CharField;
-import phenote.datamodel.CharFieldEnum;
-import phenote.util.FileUtil;
 import phenote.gui.SearchFilterType;
 import phenote.gui.SearchParams;
+import phenote.main.PhenoteVersion;
+import phenote.util.FileUtil;
 
 
 public class Config {
@@ -1047,6 +1042,24 @@ public class Config {
   	return;
   }
   
+  public List<Group> getFieldGroups() {
+    return Arrays.asList(this.phenoConfigBean.getGroupArray());
+  }
+  
+  public List<String> getFieldsInGroup(String groupName) {
+    List<String> fields = new ArrayList<String>();
+    for (Field aField : this.phenoConfigBean.getFieldArray()) {
+      final List groups = aField.getGroups();
+      if (groups != null) {
+        for (Object aGroup : groups) {
+          if (((String)aGroup).equals(groupName)) {
+            fields.add(aField.getName());
+          }
+        }
+      }
+    }
+    return fields;
+  }
 }
 
 //       if (overwrite || mode.equals("WIPEOUT_ALWAYS"))

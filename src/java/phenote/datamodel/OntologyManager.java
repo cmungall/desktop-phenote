@@ -1,15 +1,15 @@
 package phenote.datamodel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOSession;
 import org.geneontology.oboedit.postcomp.ParseException;
 import org.geneontology.oboedit.postcomp.PostcompUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import phenote.config.Config;
 
 //import phenote.datamodel.CharFieldEnum;
 //import phenote.datamodel.OboUtil;
@@ -58,6 +58,17 @@ public class OntologyManager {
       has one or more ontologies (entity char field often has more than ontology)*/
   public List<CharField> getCharFieldList() { return charFieldList; }
   public int getNumberOfFields() { return charFieldList.size(); }
+  
+  public List<CharField> getCharFieldListForGroup(String groupName) {
+    List<CharField> charFields = new ArrayList<CharField>();
+    final List<String> fieldNames = Config.inst().getFieldsInGroup(groupName); 
+    for (CharField field : this.getCharFieldList()) {
+      if (fieldNames.contains(field.getName())) {
+        charFields.add(field);
+      }
+    }
+    return charFields;
+  }
 
   public List<Ontology> getAllOntologies() {
     List<Ontology> ontologies = new ArrayList<Ontology>();
