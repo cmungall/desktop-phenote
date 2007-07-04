@@ -438,7 +438,7 @@ public class OntologyDataAdapter {
     // getFieldConfigList gives enabled fields - not disabled
     for (FieldConfig fieldConfig : cfg().getEnbldFieldCfgs()) {
       if (!fieldConfig.isEnabled()) continue; // not necasary actually
-      CharField cf = new CharField(fieldConfig.getLabel());
+      CharField cf = new CharField(fieldConfig.getLabel(),fieldConfig.getDataTag());
       fieldConfig.setCharField(cf);
 
       // ONTOLOGIES

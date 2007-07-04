@@ -71,6 +71,7 @@ public class Config {
 
   private boolean configInitialized = false;
   private boolean configModified = false; 
+  private boolean alwaysOverride = false;
   //flag for if any settings during session have changed, such as search params, col widths, etc.
 
   private final static String myphenoteFile = "my-phenote";
@@ -145,8 +146,10 @@ public class Config {
     setConfigFile(configFile,true,false,true);
   }
 
+  /** -c from command line does this - should be always but isnt??? */
   public void setOverwriteConfigFile(String configFile) throws ConfigException {
     if (configFile==null) configFile = getDefaultFile();
+    alwaysOverride = true; // make sure it wipes out always
     setConfigFile(configFile,true,true,false);
   }
 
@@ -198,7 +201,7 @@ public class Config {
       to personal if personal doesnt exist, if personal exists ignore passed in
       config file */
   private void setConfigFile(String file, boolean usePersonalConfig,
-                            boolean overwritePersonalConfig,boolean mergeConfigs) 
+                             boolean overwritePersonalConfig,boolean mergeConfigs) 
     throws ConfigException {
     this.configFile = file; // ??
     setNameFromConfigFile(file); // ??
@@ -394,6 +397,7 @@ public class Config {
     }
     
     private boolean isAlways() {
+      if (alwaysOverride) return true;
       if (!haveXmlBean()) return false;
       String when = masterToLocalBean.getWhen();
       if (when == null) return false;

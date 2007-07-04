@@ -17,18 +17,21 @@ public class CharField {
 
   private List<Ontology> ontologyList = new ArrayList<Ontology>(3);
   private CharFieldEnum charFieldEnum; // or subclass
-  private String name;
+  private String name; // display name
+  private String tag; // non display tag to refer to field (no spaces...)
   private boolean postCompAllowed=false;
   private Ontology postCompRelOntol;
   // index? orderNumber? for order in gui/datamodel?
 
+  /** used for relationship */
   public CharField(CharFieldEnum c) {
     charFieldEnum = c;
   }
 
   /** a generic field with no char field enum - get hip */
-  public CharField(String name) {
+  public CharField(String name,String tag) {
     this.name = name;
+    this.tag = tag;
   }
 
   public void addOntology(Ontology o) {
@@ -48,6 +51,13 @@ public class CharField {
         name = charFieldEnum.toString();
     }
     return name;
+  }
+
+  public boolean isField(String tag) {
+    if (tag.equalsIgnoreCase(this.tag)) return true;
+    if (tag.equalsIgnoreCase(name)) return true;
+    // check with _ substition for spaces?? shouldnt have to
+    return false;
   }
 
   public CharFieldEnum getCharFieldEnum() { return charFieldEnum; }

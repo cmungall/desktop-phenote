@@ -22,7 +22,8 @@ public class Character implements CharacterI {
       not found in ontologies associated with field */
   public void setValue(String fieldString, String valueString)
     throws CharFieldException,TermNotFoundException {
-    setValue(getCharFieldForName(fieldString),valueString);
+    CharField cf = getCharFieldForName(fieldString);
+    setValue(cf,valueString);
   }
 
   /** for generic fields its just a map from char field to char field value */
@@ -99,7 +100,8 @@ public class Character implements CharacterI {
 
   public CharField getCharFieldForName(String fieldName) throws CharFieldException {
     for (CharField cf : getAllCharFields()) {
-      if (cf.getName().equalsIgnoreCase(fieldName))
+      //if (cf.getName().equalsIgnoreCase(fieldName))
+      if (cf.isField(fieldName)) // checks name and datatag
         return cf;
     }
     throw new CharFieldException("No field for "+fieldName);

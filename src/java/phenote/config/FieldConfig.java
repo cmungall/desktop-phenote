@@ -180,14 +180,32 @@ public class FieldConfig {
     //this.syntaxAbbrev = syn;
     fieldBean.setSyntaxAbbrev(syn);
   }
-  /** gets from label if no syntax abbrev explicitly set, replaces spaces with underscores
+  /** gets from datatag then label if no syntax abbrev explicitly set,
+      replaces spaces with underscores in label
       as pheno syntax is sensitive to spaces (in theory at least) */
   String getSyntaxAbbrev() {
     String s = fieldBean.getSyntaxAbbrev();
-    if (s == null) s = getLabel(); // setSynAbb?
-    s = s.replace(' ','_');
+    if (s == null) s = fieldBean.getDatatag();
+    if (s == null) {
+      s = getLabel(); // setSynAbb?
+      s = s.replace(' ','_');
+    }
     return s;
   }
+
+  /** DataTag should replace syntax abbrev has a handle to the field, used by
+      DataInputServlet (and should be used by syn adapter) */
+  void setDataTag(String dt) {
+    fieldBean.setDatatag(dt);
+  }
+
+  /** First tries to return explicitly set datatag, 2nd syn abbrev, 3rd label w _ */
+  public String getDataTag() {
+    String s = fieldBean.getDatatag();
+    if (s == null) s = getSyntaxAbbrev();
+    return s;
+  }
+
   //void String getSyntaxAbbrev() { return syntaxAbbrev; }
   /** Test both syntaxAbbrev & label - also test for replacing spaces with underscores */
   boolean hasSyntaxAbbrev(String abb) {
@@ -221,7 +239,7 @@ public class FieldConfig {
       configs - so this is funny but its actually not funny */
   public CharField getCharField() {
     if (charField == null)
-      charField = new CharField(getLabel());
+      charField = new CharField(getLabel(),getDataTag());
     return charField;
   }
   boolean hasCharField(CharField cf) { return charField == cf; }
