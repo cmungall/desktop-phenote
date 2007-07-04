@@ -22,7 +22,7 @@ public class DataInputServlet extends HttpServlet {
 
   //private static final String CONFIG_FILE_PARAM = "configuration-file";
   // PhenoteServlet.class is the distinct name for this logger
-  private static final Logger LOG = Logger.getLogger(PhenoteServlet.class);
+  private static final Logger LOG = Logger.getLogger(DataInputServlet.class);
 
   public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws IOException, ServletException {

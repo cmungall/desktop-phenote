@@ -18,7 +18,8 @@ start =
     obo-repository,
     autocomplete-settings,
     field*,
-    group*
+    group*,
+    data-input-servlet
   }
 
 ## specify how the master config interacts with local/cached config
@@ -51,7 +52,11 @@ log =
     attribute config-file { xsd:string }
   }
 
+## Weather to enable uvic graphics - not working so well so should stay disabled
 uvic-graph = element uvic-graph { attribute enable { xsd:boolean } }
+
+## Whether to enable DataInputServlet - used by SmartAtlas
+data-input-servlet = element data-input-servlet { attribute enable { xsd:boolean } }
 
 term-history = element term-history { attribute enable { xsd:boolean } }
 
@@ -75,8 +80,10 @@ field =
     attribute name { xsd:string },
     attribute colwidth { xsd:int },
     attribute desc { xsd:string },
-    ## tag for field for pheno-syntax adapter
+    ## tag for field for pheno-syntax adapter - replaced by datatag
     attribute syntax-abbrev { xsd:string },
+    ## tag for field, replaces syntax-abbrev
+    attribute datatag { xsd:string },
     ## whether field is free text or constrained by ontology - take out?
     ## this is actually unnecasary - if there is no file free text is assumed    
     attribute type { "free_text" | "ontology" },  
