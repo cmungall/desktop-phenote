@@ -48,9 +48,14 @@ class CharacterTableModel extends AbstractTableModel {
     return characterList.get(i);
   }
 
+  /** returns -1 if not found */
+  int indexOf(CharacterI ch) {
+    return getCharacterList().indexOf(ch);
+  }
+
   // this should come from datamodel not here - refactor
   CharacterListI getCharacterList() {
-    return characterList;
+    return getCharListManager().getCharacterList();
   }
 
   void setCharacterList(CharacterListI charList) {
@@ -100,19 +105,21 @@ class CharacterTableModel extends AbstractTableModel {
 //     return addCharacter(copy);
 //   }
     
-  /** return int[]? of all new rows to be selected? yes i think so */
+  /** return RowInterval of all new rows to be selected? yes i think so
+   the caller (CharTablePanel) wants to know what rows were created
+   (so it can selection them) */
   RowInterval copyChars(List<CharacterI> charsToCopy) {
     if (charsToCopy.isEmpty()) {
       log().error("No chars selected to make copy of");
       return new RowInterval(-1,-1); // ex?
     }
-    EditManager.inst().copyChars(charsToCopy); // edits model
+    EditManager.inst().copyChars(charsToCopy); // edit        characterTableModel.selects model
     //CompoundTransaction ct = CompoundTransaction.makeCopyTrans(charsToCopy);
     //ct.editModel(); // clones & adds char to char list
     fireTableRowsInserted(getRowCount(),getRowCount()); // updates table view
     int rowEnd = getRowCount() - 1; // -1 -> 0 based
     int rowStart = rowEnd - charsToCopy.size() + 1; // +1 inclusive
-    return new RowInterval(rowStart,rowEnd); // fix this - return int[]!
+    return new RowInterval(rowStart,rowEnd); 
   }
 
 //   /** Returns row # of row inserted */

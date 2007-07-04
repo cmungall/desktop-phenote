@@ -1,5 +1,8 @@
 package phenote.edit;
 
+import java.util.List;
+
+import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharField;
 import org.geneontology.oboedit.datamodel.OBOClass;
 
@@ -16,6 +19,8 @@ public interface TransactionI {
   //public String getNewValueString();
 
   public boolean isUpdate();
+  public boolean isAdd();
+  public List<CharacterI> getCharacters();
  
   // public boolean isDelete();
   // public String getDBIDString

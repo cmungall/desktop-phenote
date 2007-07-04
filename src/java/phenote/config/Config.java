@@ -48,7 +48,7 @@ public class Config {
   private List<FieldConfig> enabledFields = new ArrayList<FieldConfig>();
   /** enabled & disabled */
   private List<FieldConfig> allFields = new ArrayList<FieldConfig>();
-  private static final String defaultLogConfigFile = "conf/log4j.xml";
+  private static final String defaultLogConfigFile = "conf/log4j-standalone.xml";
   // maybe should be using xmlbean where possible?
   //private boolean uvicGraphEnabled = false; // default false for now
   //private boolean termHistoryEnabled = false;   //default to false for now

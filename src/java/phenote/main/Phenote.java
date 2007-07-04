@@ -83,10 +83,17 @@ public class Phenote {
 
     // put this is in a phenote.util.Log class? - get file from config - default?
     phenote.splashScreen.setProgress("Configuring...", 10);
-    try { DOMConfigurator.configure(Config.inst().getLogConfigUrl()); }
-    catch (FileNotFoundException e) { 
-    	phenote.splashScreen.setProgress("bad file:"+e.getMessage(),10);
-    	LOG.error(e.getMessage()); }
+    // LOG4J
+    if (!phenote.commandLine.isLogSpecified()) {
+      try { DOMConfigurator.configure(Config.inst().getLogConfigUrl()); }
+      catch (FileNotFoundException e) { 
+        phenote.splashScreen.setProgress("bad file:"+e.getMessage(),10);
+        LOG.error(e.getMessage());
+      }
+    }
+
+    LOG.debug("debug test2 of log4j");
+
     phenote.splashScreen.setProgress("Initializing Ontologies...", 20);
     phenote.initOntologies();
     phenote.splashScreen.setProgress("Ontologies Initialized", 70);
@@ -98,9 +105,11 @@ public class Phenote {
     {
     	phenote.initGui();
     	phenote.splashScreenDestruct();
-
-
     }
+
+    // if (Config.inst().doSmartAtlasServlet()) 
+    new phenote.servlet.DataInputServer();
+
   }	
 
   /** private constructor -> singleton */

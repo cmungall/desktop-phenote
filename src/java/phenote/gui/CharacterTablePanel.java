@@ -367,6 +367,8 @@ public class CharacterTablePanel extends JPanel {
         selectRow = 0;
         ignoreSelectionChange = false;
       }
+
+      // SELECT ROWS
       if (selectRows != null) // multi select
         selectRows(selectRows);
       else if (doSelection) // single row select
@@ -404,26 +406,37 @@ public class CharacterTablePanel extends JPanel {
       kicking out the selection state. so selected row is tracked and reinstated
       when a data change event happens - although yikes - we may get this event
       before the table model - i think this all has to be done together - not
-      independently... */
+      independently... triggered by undo, copyChars, update field */
   private class TableCharChangeListener implements CharChangeListener {
     public void charChanged(CharChangeEvent e) {
       if (e.isUpdate()) {
         repaint(); // repaint causes new cell val to get displayed
-        return;
+        return; // avoid select below
       }
-      int row = getSelectedRow(); // multi select?? row del? row add?
-      // this was commented out repaint was suffic but now needed for undo of copy/delete
-      // if this is slow we may need to get more savvy - but ill bet its fine
-      characterTableModel.fireTableDataChanged(); // ??? causes loss of selection
-      //setRowSelectionInterval(row,row);
-      // big problem, select row causes char select evt, CFG gets this and tries to
-      // update itself but causes ex if in middle of edit. need to be more savvy, if
-      // just char update then need to supress select event as its really just the table
-      // reinstating its selection actually if update just do repaint and return, 
-      // if add or del then need to
-      // send out event
-      selectRow(row);
-      // repaint(); // is this needed after fireTableDataChanged?
+      if (e.isAdd()) { // works for add, compound add, delete-undo
+        charJTable.clearSelection();
+        characterTableModel.fireTableDataChanged(); // ??? causes loss of selection
+        for (CharacterI c : e.getTransaction().getCharacters()) { // compound add??
+          int addIndex = characterTableModel.indexOf(c);
+          if (addIndex != -1)
+            charJTable.addRowSelectionInterval(addIndex,addIndex);
+        }
+      }
+      else { // delete(undo add)
+        int selRow = getSelectedRow(); // multi select?? row del? row add?
+        // this was commented out repaint was suffic but now needed for undo of copy/delete
+        // if this is slow we may need to get more savvy - but ill bet its fine
+        characterTableModel.fireTableDataChanged(); // ??? causes loss of selection
+        //setRowSelectionInterval(row,row);
+        // big problem, select row causes char select evt, CFG gets this and tries to
+        // update itself but causes ex if in middle of edit. need to be more savvy, if
+        // just char update then need to supress select event as its really just the table
+        // reinstating its selection actually if update just do repaint and return, 
+        // if add or del then need to
+        // send out event
+        selectRow(selRow); // ???
+        // repaint(); // is this needed after fireTableDataChanged?
+      }
     }
   }
 

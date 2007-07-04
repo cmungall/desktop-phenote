@@ -1,5 +1,8 @@
 package phenote.edit;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.geneontology.oboedit.datamodel.OBOClass;
 
 import phenote.datamodel.CharField;
@@ -41,6 +44,14 @@ public class UpdateTransaction implements TransactionI { // extends Transaction?
     newValue = new CharFieldValue(newVal,c,cf);
     oldValue = c.getValue(cf);
   }
+
+  public List<CharacterI> getCharacters() {
+    List<CharacterI> l = new ArrayList<CharacterI>();
+    if (newValue.getCharacter()!=null) l.add(newValue.getCharacter());
+    return l;
+  }
+
+  public boolean isAdd() { return false; }
 
   public boolean isUpdate() { return true; }
 

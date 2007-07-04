@@ -80,6 +80,20 @@ public class CompoundTransaction implements TransactionI {
 
   List<TransactionI> getTransactions() { return childTransactions; }
 
+  public List<CharacterI> getCharacters() {
+    List<CharacterI>l = new ArrayList<CharacterI>();
+    for (TransactionI t : getTransactions())
+      l.addAll(t.getCharacters());
+    return l;
+  }
+
+  public boolean isAdd() {
+    if (!hasTransactions()) return false;
+    for (TransactionI t : getTransactions())
+      if (!t.isAdd()) return false;
+    return true;
+  }
+
   /** returns true if first child is update, assumes kids are homogenous
       which currently is a true assumption, change this if that becomes untrue */
   public boolean isUpdate() {

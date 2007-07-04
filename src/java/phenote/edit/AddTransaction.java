@@ -1,5 +1,8 @@
 package phenote.edit;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.geneontology.oboedit.datamodel.OBOClass;
 
 import phenote.datamodel.CharacterI;
@@ -13,18 +16,34 @@ import phenote.datamodel.CharField;
 public class AddTransaction implements TransactionI {
 
   private CharacterI addChar;
+  private boolean isUndone = false;
+  // private int index; ??
 
   public AddTransaction(CharacterI chr) {
     addChar = chr;
   }
 
   public boolean isUpdate() { return false; }
+  public boolean isAdd() { return !isUndone; }
 
   public void editModel() {
     getCharList().add(addChar);
+    isUndone = false;
+    // index = getCharList().indexOf(addChar); ??
   }
 
-  public void undo() { getCharList().remove(addChar); }
+  // public int getIndex() { return index; } ???
+
+  public void undo() {
+    getCharList().remove(addChar);
+    isUndone = true;
+  }
+
+  public List<CharacterI> getCharacters() {
+    List<CharacterI> l = new ArrayList<CharacterI>();
+    l.add(addChar);
+    return l;
+  }
 
   // should char list be passed in? charlistMan part of edit pkg?
   private CharacterListI getCharList() {

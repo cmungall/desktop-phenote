@@ -4,7 +4,11 @@ import java.util.EventObject;
 import org.geneontology.oboedit.datamodel.OBOClass;
 import phenote.datamodel.CharField;
 
-/** This actually is for a CharField change - rename this CharFieldChangeEvent? */
+/** This actually is for a CharField change - rename this CharFieldChangeEvent?
+ but its really the value of the field thats changed 
+ perhaps CharFieldValueChangeEvent - well thats verbose 
+ but wait this holds the transaction that could be an update to a char field val
+ or a whole new char, or delete char... so maybe the name is proper */
 public class CharChangeEvent extends EventObject {
 
   // UpdateTrans -> Transaction? yes!
@@ -22,6 +26,7 @@ public class CharChangeEvent extends EventObject {
   //public String getNewValueString() { return transaction.getNewValueString(); }
 
   public boolean isUpdate() { return transaction.isUpdate(); }
+  public boolean isAdd() { return transaction.isAdd(); }
 
   public TransactionI getTransaction() {return transaction;}
   

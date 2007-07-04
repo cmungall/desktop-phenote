@@ -1,8 +1,12 @@
 package phenote.main;
 
+import java.io.FileNotFoundException;
+
 import com.townleyenterprises.command.CommandOption;
 import com.townleyenterprises.command.CommandParser;
 import com.townleyenterprises.command.DefaultCommandListener;
+
+import org.apache.log4j.xml.DOMConfigurator;
 
 import phenote.config.Config;
 import phenote.config.ConfigException;
@@ -26,9 +30,11 @@ public class CommandLine {
   private CommandOption writeFile = new WriteFileCommandOption();
   private CommandOption updateConfig = new UpdateConfigCommandOption();
   private CommandOption setConfig = new SetConfigCommandOption();
+  private CommandOption log = new LogCommandOption();
+  private boolean logSpecified = false;
 
   CommandOption[] options = new CommandOption[] { inputFile, writeFile, updateConfig,
-                                                  setConfig };
+                                                  setConfig, log };
 
   // this guarantees that we get the right classes (compile time check)
   private final static String PHENOXML = PhenoXmlAdapter.class.getName();
@@ -163,6 +169,25 @@ public class CommandLine {
     }
   }
     
+  private class LogCommandOption extends CommandOption {
+    private final static String help = "Specify log file";
+    private LogCommandOption() {
+      super("logFile",'l',true,"filename",help);
+    }
+    public void execute() throws Exception {
+      logSpecified = true;
+//      try {
+        DOMConfigurator.configure(getArg());
+//       }
+//       catch (FileNotFoundException e) { 
+//         //phenote.splashScreen.setProgress("bad file:"+e.getMessage(),10);
+//         //LOG.error(e.getMessage());
+//         System.out.println("Cmdline log failed "+e.getMessage());
+//       }
+    }
+  }
+
+  boolean isLogSpecified() { return logSpecified; }
 
 
   /** INPUT FILE COMMAND OPTION */

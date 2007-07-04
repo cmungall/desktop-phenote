@@ -75,6 +75,7 @@ public class CharFieldValue implements Cloneable {
   }
 
   void setCharacter(CharacterI c) { character = c; }
+  public CharacterI getCharacter() { return character; }
 
   boolean isEmpty() {
     if (isOboClass)

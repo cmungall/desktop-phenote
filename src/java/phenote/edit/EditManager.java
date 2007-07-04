@@ -83,18 +83,31 @@ public class EditManager {
 
   /** The initial blank character is a fundamental undoable state, so dont
       keep the transaction for this as its not undoable */
-  public AddTransaction addInitialCharacter() {
-    AddTransaction at = new AddTransaction(new Character());
-    at.editModel();
+  public void addInitialCharacter() {
+    //AddTransaction at = new AddTransaction(new Character());
+    //at.editModel();
+    addCharacter(new Character(), false);
     // no addTransaction(at)!
-    return at;
+    //return at;
   }
 
   /** same as addInitialChar except we record the adding in the transaction list
       as it can be undone */
   public void addNewCharacter() {
-    AddTransaction at = addInitialCharacter();
-    addTransaction(at);
+    addCharacter(new Character(), true);
+    //addTransaction(at);
+  }
+
+  public void addCharacter(Character c) {
+    addCharacter(c,true);
+  }
+
+  // fire char change event???
+  private void addCharacter(Character c, boolean recordTrans) {
+    AddTransaction at = new AddTransaction(c);
+    at.editModel();
+    if (recordTrans) addTransaction(at);
+    fireChangeEvent(new CharChangeEvent(this,at)); // this???
   }
 
   public void copyChars(List<CharacterI> charsToCopy) {
@@ -121,6 +134,8 @@ public class EditManager {
     ct.editModel();
     addTransaction(ct);
   }
+
+
 
   private void addTransaction(TransactionI t) {
     transactionList.add(t);
