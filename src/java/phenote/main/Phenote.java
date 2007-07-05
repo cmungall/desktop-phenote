@@ -107,8 +107,8 @@ public class Phenote {
     	phenote.splashScreenDestruct();
     }
 
-    // if (Config.inst().doSmartAtlasServlet()) 
-    new phenote.servlet.DataInputServer();
+    if (Config.inst().dataInputServletIsEnabled()) 
+      new phenote.servlet.DataInputServer();
 
   }	
 

@@ -19,6 +19,7 @@ import phenote.config.xml.PhenoteConfigurationDocument;
 import phenote.config.xml.AutoUpdateOntologiesDocument.AutoUpdateOntologies;
 import phenote.config.xml.AutocompleteSettingsDocument.AutocompleteSettings;
 import phenote.config.xml.DataadapterDocument.Dataadapter;
+import phenote.config.xml.DataInputServletDocument.DataInputServlet;
 import phenote.config.xml.FieldDocument.Field;
 import phenote.config.xml.GroupDocument.Group;
 import phenote.config.xml.LogDocument.Log;
@@ -592,6 +593,19 @@ public class Config {
     getUvicGraphBean().setEnable(enable);
   }
 
+  public boolean dataInputServletIsEnabled() {
+    return getDataInputServletBean().getEnable();
+  }
+  
+  private DataInputServlet getDataInputServletBean() {
+    DataInputServlet d = phenoConfigBean.getDataInputServlet();
+    if (d == null) d = phenoConfigBean.addNewDataInputServlet();
+    return d;
+  }
+  public void setDataInputServletIsEnabled(boolean enable) {
+    getDataInputServletBean().setEnable(enable);
+  }
+
   public boolean termHistoryIsEnabled() { 
     return getHistoryBean().getEnable();
   }
@@ -1045,6 +1059,7 @@ public class Config {
   	phenoConfigBean.setAuthor(author);
   	return;
   }
+
   
   public List<Group> getFieldGroups() {
     return Arrays.asList(this.phenoConfigBean.getGroupArray());
