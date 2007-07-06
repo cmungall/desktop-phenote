@@ -389,9 +389,11 @@ public class OntologyDataAdapter {
   private OBOSession getOboSession(Collection<String> fileList)
     throws OntologyException {
     OBOFileAdapter fa = new OBOFileAdapter();
-    FileAdapterConfiguration cfg = new OBOFileAdapter.OBOAdapterConfiguration();
+    OBOFileAdapter.OBOAdapterConfiguration cfg = new OBOFileAdapter.OBOAdapterConfiguration();
     // takes strings not urls!
     cfg.setReadPaths(fileList);
+    cfg.setBasicSave(false);     //i think i need this for dangling references
+    cfg.setAllowDangling(true);  //setting this to true for now!  should be configrable
     try { // throws data adapter exception
       OBOSession os = (OBOSession)fa.doOperation(IOOperation.READ,cfg,null);
       adapterMetaData = fa.getMetaData(); // check for null?

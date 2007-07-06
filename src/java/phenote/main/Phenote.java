@@ -220,13 +220,14 @@ public class Phenote {
 //    		else {
 //    			System.out.println("your settings have not changed");
 //    		}
-    	  m += "Are you sure you want to quit?";
-    	  n = JOptionPane.showConfirmDialog(null, m, "Phenote Exit",
-    			  JOptionPane.YES_NO_OPTION);
-    	  if (n==JOptionPane.YES_OPTION) {
-    	  	//  now quit
-    	  	System.exit(0);
-    	  } else { return; }
+//    	  m += "Are you sure you want to quit?";
+//    	  n = JOptionPane.showConfirmDialog(null, m, "Phenote Exit",
+//    			  JOptionPane.YES_NO_OPTION);
+//    	  if (n==JOptionPane.YES_OPTION) {
+//    	  	//  now quit
+//    	  	System.exit(0);
+//    	  } else { return; }
+    		System.exit(0);
      	} 
     }
   }

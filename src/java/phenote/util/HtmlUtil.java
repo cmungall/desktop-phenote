@@ -2,20 +2,30 @@ package phenote.util;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.Set;
+import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.lang.Object;
 
+
 import javax.swing.event.HyperlinkEvent;
+
+
 
 import org.geneontology.oboedit.datamodel.Link;
 import org.geneontology.oboedit.datamodel.LinkedObject;
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOProperty;
+import org.geneontology.oboedit.datamodel.OBORestriction;
 import org.geneontology.oboedit.datamodel.Synonym;
 import org.geneontology.oboedit.datamodel.ObsoletableObject;
 import org.geneontology.oboedit.datamodel.IdentifiedObject;
 import org.geneontology.oboedit.datamodel.Dbxref;
 import org.geneontology.oboedit.datamodel.impl.DbxrefImpl;
+import org.geneontology.oboedit.datamodel.impl.OBORestrictionImpl;
+import org.geneontology.oboedit.datamodel.TermUtil;
 
 
 public class HtmlUtil {
@@ -33,45 +43,18 @@ public class HtmlUtil {
 	public static void setStandAlone(boolean standAlone) {
 		isStandAlone = standAlone;
 	}
-
-	//this is Mark's old termInfo box.  I'll keep it around
-	//just in case we need to go back to it.  note that it might not
-	//work quite right because i've now changed the other functions it
-	//calls.
-	public static String termInfoOld(OBOClass oboClass) {
-		if (oboClass == null) {
-			System.out.println("null obo class for HtmlUtil.termInfo");
-			return ""; // null? exception?
-		}
-		StringBuffer sb = new StringBuffer();
-		sb.append(bold("TERM: ")).append(oboClass.getName());
-		if (oboClass.isObsolete()) {
-			sb.append("This term is OBSOLETE").append(newLine());
-
-
-		}		
-		sb.append(nl()).append(bold("ID: ")).append(colorFont(oboClass.getID(), "red"));
-
-		Set syns = oboClass.getSynonyms();
-		for (Iterator it = syns.iterator(); it.hasNext(); ) {
-			sb.append(newLine()).append(bold("Synonym: ")).append(it.next());
-		}
-
-		String definition = oboClass.getDefinition();
-		// definition = lineWrap(definition);
-		if (definition != null && !definition.equals(""))
-			sb.append(nl()).append(nl()).append(bold("Definition: ")).append(definition);
-
-		sb.append(nl()).append(nl()).append(bold("CHILDREN: "));
-		sb.append(getChildrenString(oboClass));
-
-
-		// if (DEBUG) System.out.println(sb);
-
-		return sb.toString();
+	
+	public static String termInfo(OBOClass oboClass, String ontology,String field) {
+		// funny - revisit for sure - either should pass through all methods
+		// or util should actually be an object - singleton? i think maybe its
+		// an object???
+		setOntologyName(ontology);
+		setField(field);
+		return termInfo(oboClass);
 	}
 
 	public static String termName(OBOClass oboClass) {
+		//creates the term name to display in a different component
 		StringBuffer sb = new StringBuffer();
 		if (oboClass.isObsolete()) {
 			sb.append(bold(colorFont(bold("(OBSOLETE) "), "red")));
@@ -79,10 +62,10 @@ public class HtmlUtil {
 		sb.append(bold(oboClass.getName()));
 		return sb.toString();
 	}
-	//Nicole's attempt at making the Term Info box look a little better   
-	//I'm puting all the information into an html table.  rhs are each single table cells
-	//but are separated by line breaks.  
+
 	public static String termInfo(OBOClass oboClass) {
+		//This page is basically a html table.  
+		//rhs are each single table cells but are separated by line breaks.
 		if (oboClass == null) {
 			System.out.println("null obo class for HtmlUtil.termInfo");
 			return ""; // null? exception?
@@ -91,10 +74,12 @@ public class HtmlUtil {
 		sb.append("<table>");
 		sb.append(makeRow(makeLeftCol(bold("ONTOLOGY"))+makeRightCol(oboClass.getNamespace().toString())));
 		if (oboClass.isObsolete()) {
-			sb.append(makeObsLinks(oboClass));
+			sb.append(makeObsLinks(oboClass));  //considers&replaced-bys
 		}
 		else {
 			//sb.append(makeRow(makeLeftCol(bold("TERM"))+makeRightCol(bold(oboClass.getName()))));
+			//Term name has been thrown out of the term info box proper, and is
+			//in a different java element.
 		}
 
 		sb.append(makeRow(makeLeftCol(bold("ID"))+makeRightCol(oboClass.getID())));
@@ -111,15 +96,16 @@ public class HtmlUtil {
 		if ((definition != null) && !(definition.equals(""))) {
 			sb.append(makeRow(makeLeftCol(bold("Definition"))+makeRightCol(definition)));
 		}
-		if (!oboClass.isObsolete()) {
+		if (org.geneontology.oboedit.datamodel.TermUtil.isIntersection(oboClass)) {
+			//this term is an intersection term, show the xp definition
+			sb.append(makeRow(makeLeftCol(bold("XP Definition:"))+makeRightCol(getIntersectionParents(oboClass).toString())));
+		}
+		if (!oboClass.isObsolete()) {//don't really want to navigate around obs terms
 			sb.append(makeRow("<tr><td colspan=2 align=center valign=top><font size=-1><hr></font></td></tr>"));
-
-			//		sb.append(makeRow(makeLeftCol("")+makeRightCol("")));
-			//		sb.append(makeRow(makeLeftCol(bold("Parents"))+makeRightCol("<hr>")));
 			sb.append(getParentalString(oboClass));
 			sb.append(makeRow(""));
-			//		sb.append(makeRow(makeLeftCol(bold("Children"))+makeRightCol("<hr>")));
 			sb.append(getChildrenString(oboClass));
+			sb.append(getIntersectionChildren(oboClass)); //cross-products it is present in
 		}
 		String comments = oboClass.getComment();
 		if ((comments != null) && !(comments.equals(""))) {
@@ -131,6 +117,7 @@ public class HtmlUtil {
 	}
 	
 	private static String makeObsLinks(OBOClass oboClass) {
+		//to display the replaced-bys and consider term links for obsoleted terms
 		StringBuffer sb = new StringBuffer();
 		Set obsReplacements = oboClass.getReplacedBy();
 		StringBuffer replace = new StringBuffer();
@@ -165,6 +152,8 @@ public class HtmlUtil {
 	}	
 
 	private static String makeDbxrefs(OBOClass oboClass) {
+		//will display any dbxrefs.  
+		//this will eventually resolve to clickable URL refs, but not yet
 		Set dbxrefs = oboClass.getDbxrefs();
 		StringBuffer sb = new StringBuffer();
 		StringBuffer dbxrefString = new StringBuffer();
@@ -175,8 +164,7 @@ public class HtmlUtil {
 				dbxrefObj = (Dbxref)it.next();
 				dbxrefFlag=true;
 				if (dbxrefObj!=null) {
-					dbxrefString.append(dbxrefObj.getDatabase()+":"+dbxrefObj.getID()+
-							"("+dbxrefObj.getType()+")<br>");
+					dbxrefString.append(dbxrefObj.getDatabase()+":"+dbxrefObj.getID()+"<br>");
 				}
 			}
 		}
@@ -190,6 +178,7 @@ public class HtmlUtil {
 		//This method creates a table of synonyms for a term, sorted by scope as
 		//defined in the oboedit class Synonym
 		//will expand this method to be able to sort by category, not just scope
+		//kinda ugly right now...need to clean up.  
 		StringBuffer sb = new StringBuffer();
 		if (sortByScope) {
 			StringBuffer temp = new StringBuffer();
@@ -261,14 +250,6 @@ public class HtmlUtil {
 		return sb.toString();
 	}
 
-	public static String termInfo(OBOClass oboClass, String ontology,String field) {
-		// funny - revisit for sure - either should pass through all methods
-		// or util should actually be an object - singleton? i think maybe its
-		// an object???
-		setOntologyName(ontology);
-		setField(field);
-		return termInfo(oboClass);
-	}
 
 	// maybe this should be an object? as this is stateful
 	private static void setOntologyName(String ont) {
@@ -320,104 +301,217 @@ public class HtmlUtil {
 		if (DO_HTML) return "\n<br>";
 		return "\n";
 	}
+	
+	private static StringBuffer getIntersectionChildren(OBOClass oboClass) {
+		StringBuffer sb = new StringBuffer();
+		Collection children = oboClass.getChildren();
+		sb.append(getLinksString(linksList(children, true, true), true, true));
+		return (sb);
+	}
+	
+	private static StringBuffer getIntersectionParents(OBOClass oboClass) {
+		//these will be present if the term is a xp
+		StringBuffer sb = new StringBuffer();
+		Collection parents = oboClass.getParents();
+		sb.append(xpDefs(linksList(parents,true,false)));
+		return (sb);		
+	}
+	
 	private static StringBuffer getParentalString(OBOClass oboClass) {
 		Collection parents = oboClass.getParents();
-		return getLinksString(parents,false);
+		return (getLinksString(linksList(parents, false,false), false, false));
+//		return getLinksString(parents,false, false);
 	}
 
 	private static StringBuffer getChildrenString(OBOClass oboClass) {
 		Collection children = oboClass.getChildren();
-		return getLinksString(children,true);
+		return (getLinksString(linksList(children, false,true), true, false));
+
+//		return getLinksString(children,true, false);
 	}
 
-	private static StringBuffer getLinksString(Collection links, boolean isChild) {
-		StringBuffer sb = new StringBuffer();
-		// or should thi sjust be done more generically with a hash of string bufs
-		// for each unique link type name?
-		// YES...that would be a better method i think -nlw
-		//method:  make all the rt hand columns, then wrap around the left col of the type for the table entry
-		StringBuffer isaStringBuf = new StringBuffer();
-		StringBuffer partofStringBuf = new StringBuffer();
-		StringBuffer haspartStringBuf = new StringBuffer();
-		StringBuffer devFromStringBuf = new StringBuffer();
-		StringBuffer otherStringBuf = new StringBuffer();
-		StringBuffer startStageStringBuf = new StringBuffer();
-		StringBuffer endStageStringBuf = new StringBuffer();
-		int countIsa=0;
-		int countPartof=0;
-		int countHaspart=0;
-		int countDevfrom=0;
-		int countStartStage=0;
-		int countEndStage=0;    
-		int countOther=0;
-		//i would like to clean this up to be able to group all relationships together, despite
-		//the fact that they could be non-standard, like in SO.  might need two for-loops.  
-		//would this be a drain on space/time?
+
+	
+	private static class LinkCollection {
+		//a little class to manage links for navigation.  
+		//hope this isn't duplicating stuff
+		//each link collection is for only one kind of relationship type
+		private List<Link> links = new ArrayList<Link>();
+		private boolean isChild;
+		private String linkName;
+		private OBOProperty linkType;
+		private boolean xp;  			//true=this list is for cross-products
+
+		public LinkCollection(Link link) {
+			//creates the first link in a list.
+			this.addLink(link);
+			this.linkType = link.getType();
+			this.linkName = link.getType().toString();
+		}		
+		public void setType(OBOProperty type) {
+			linkType = type;
+			linkName = type.toString();
+		}
+		public OBOProperty getType() {
+			return linkType;
+		}
+		public String getLinkName() {
+			return linkName;
+		}
+		public void setXP(boolean flag) {
+			xp = flag;			
+		}
+		public boolean getXP() {
+			return xp;
+		}
+		public List getLinks() {
+			return links;
+		}
+		public Link get(int i) {
+			return links.get(i);
+		}
+		public void addLink(Link link) {
+			links.add(link);
+		}
+		public void setLinks(List<Link> newLinks) {
+			links = newLinks;
+		}
+		public int size() {
+			return links.size();
+		}
+	}
+	
+	private static List<LinkCollection> linksList(Collection links, boolean xp, boolean isChild) {
+		//given a collection of oboclass links, this processes the collection to
+		//separate out the links and group by releationship type+parent/child+xp state
+		HashSet relSet= new HashSet();
+		List<LinkCollection> allLinks = new ArrayList<LinkCollection>();
 		for (Iterator it = links.iterator(); it.hasNext(); ) {
 			Link link = (Link)it.next();
-			OBOProperty type = link.getType();
-			if (type.getName().equals("is_a")) {
-				countIsa++;
-				appendLink(isaStringBuf,isChild,link);
-			}
-			else if (type.getName().equals("part of") || type.getName().equals("part_of")) {	  
-				countPartof++;
-				appendLink(partofStringBuf,isChild,link);
-			}
-			else if (type.getName().equals("has part") || type.getName().equals("has_part")) {
-				//i'm using this to catch the wierd reciprocal stuff in FMA
-				//not sure yet if this is the best solution
-				//probably need a new way to visualize reciprocal 'part' relationships
-				countHaspart++;
-				appendLink(haspartStringBuf,isChild,link);
-			}	  
-			else if (type.getName().equals("develops from") || type.getName().equals("develops_from")) {
-				countDevfrom++;
-				appendLink(devFromStringBuf,isChild,link);
-			}
-//			else if (type.getName().equals("start stage") || type.getName().equals("start_stage")) {
-//			countStartStage++;
-//			appendLink(startStageStringBuf,isChild,link);
-
-//			}
-//			else if (type.getName().equals("end stage") || type.getName().equals("end_stage")) {
-//			countEndStage++;
-//			appendLink(endStageStringBuf,isChild,link);
-//			}
-			else { //catch all other relationships
-				countOther++;
-				otherStringBuf.append("<tr>");
-				otherStringBuf.append(makeLeftCol(bold(italic(capitalize(type.getName()))))+"<td>");
-				appendLink(otherStringBuf,isChild,link);
-				otherStringBuf.append("</td></tr>");
+			if (((OBORestriction)link).completes()==xp) {
+				//only add to links list those that match the desired xp state
+				OBOProperty type = link.getType();
+				if (!relSet.contains(type)) {
+						relSet.add(type);
+					LinkCollection linkSet = new LinkCollection(link);
+					if (type.equals(OBOProperty.IS_A))
+						allLinks.add(0,linkSet);
+					else
+						allLinks.add(linkSet);
+				} else {
+					for (ListIterator lit=allLinks.listIterator();lit.hasNext();) {
+						LinkCollection temp = (LinkCollection)lit.next();
+						if (temp.get(0).getType()==type) {
+							temp.addLink(link);
+							allLinks.set(lit.nextIndex()-1, temp);
+						}
+					}				
+				}
 			}
 		}
-		if (countIsa>0) 
-			sb.append(makeRow(makeLeftCol(bold(italic( 
-					isChild ? "Subclass (is_a)" : "Superclass (is_a)"))) + 
-					makeRightCol(isaStringBuf.toString())));
-		if (countPartof>0)
-			sb.append(makeRow(makeLeftCol(bold(italic( 
-					isChild ? "Has part" : "Part of"))) + 
-					makeRightCol(partofStringBuf.toString())));
-		if (countDevfrom>0)
-			sb.append(makeRow(makeLeftCol(bold(italic( 
-					isChild ? "Develops into" : "Develops from"))) +
-					makeRightCol(devFromStringBuf.toString())));   	
-		if (countOther>0)
-			sb.append(makeRow(makeLeftCol(otherStringBuf.toString())));
+		return allLinks;
+	}
+	private static StringBuffer getLinksString(List<LinkCollection> allLinks, boolean isChild, boolean xp) {
+		/* This functions creates/groups the tabular entries for parents/children 
+		 * ontology links for term info.  This has the caveat that if there are
+		 * >1 is_a xp genus terms, i think the xp display will be screwy 
+		 */
+		StringBuffer sb = new StringBuffer();
+		for (ListIterator lit=allLinks.listIterator();lit.hasNext();) {
+			//for each relationship type
+			LinkCollection temp = (LinkCollection)lit.next();
+			String tempType = temp.getLinkName();
+			List<Link> links = temp.getLinks();
+			StringBuffer tempSB = new StringBuffer();
+			for (Iterator it = links.iterator(); it.hasNext(); ) {
+				//create all the clickable links first
+				Link link = (Link)it.next();
+				appendLink(tempSB,isChild,link,xp);
+			}
+			if (temp.getLinkName().contains("is_a")) {
+				//add in the relationship type for lhs
+				if (isChild) {
+					if (xp) {
+						tempType = "Crossed in";
+					} else {
+						tempType = "Subclass";
+					}
+				} else {
+					if (xp) {
+						tempType = "Genus";
+					} else {
+						tempType = "Superclass";
+					}
+				}
+				//put it at the front of the list if it isn't already there!
+				sb.insert(0,makeRow(makeLeftCol(bold(italic(tempType))) + 
+						makeRightCol(tempSB.toString())));
+
+			} else { //not an is_a
+				if (xp) {
+					tempType="Differentia<br> ("+tempType+")";
+				}
+				if (tempType.contains("part")) {
+					if (isChild) {
+						tempType = "Has part";
+					}
+				}
+				if (tempType.contains("from")) {
+					if (isChild) {
+						tempType = tempType.replaceAll("from","into");
+					}
+				}
+				if (tempType.endsWith("of")) {
+					if (isChild)
+					{//change x_of -> has_x
+						tempType = tempType.replaceAll("_*of", "");
+						tempType="has "+tempType;
+						}
+					}
+				//add the table row 
+				sb.append(makeRow(makeLeftCol(bold(italic(tempType))) + 
+						makeRightCol(tempSB.toString())));
+			} 			
+		}
+		return sb;
+	}
+	
+	private static StringBuffer xpDefs (List<LinkCollection> allLinks) {
+		/* This functions creates/groups the tabular entries for parents/children 
+		 * ontology links for term info, adds line breaks for isa 
+		 */
+		StringBuffer sb = new StringBuffer();
+		String genusLink = "";
+		String differentiaLink = "";
+		for (ListIterator lit=allLinks.listIterator();lit.hasNext();) {
+			LinkCollection temp = (LinkCollection)lit.next();
+			String tempType = temp.getLinkName();
+			List<Link> links = temp.getLinks();
+			StringBuffer tempSB = new StringBuffer();
+			for (Iterator it = links.iterator(); it.hasNext(); ) {
+				Link link = (Link)it.next();
+				appendLink(tempSB,false,link,true);
+			}
+			if (temp.getLinkName().contains("is_a")) {
+				genusLink = tempSB.toString();
+			}
+			else { differentiaLink = tempSB.toString();
+			sb.append(genusLink +" "+ temp.getLinkName()+" "+differentiaLink+"<br>");
+			}		
+		}
 		return sb;
 	}
 
-	private static void appendLink(StringBuffer sb, boolean isChild, Link link) {
+	private static void appendLink(StringBuffer sb, boolean isChild, Link link, boolean xp) {
+		OBORestriction res = (OBORestriction) link;
+		IdentifiedObject term;
 		if (isChild)
-			sb.append(termLink(link.getChild())+"<br>");
+			term = link.getChild();
 		else
-			sb.append(termLink(link.getParent())+"<br>");
-		//    if (isChild)
-		//sb.append(makeRightCol(termLink(link.getChild())));
-		//else
-		//sb.append(makeRightCol(termLink(link.getParent()))); 
+			term = link.getParent();
+		sb.append(termLink(term)+" ");
+		if (!xp || (isChild&&xp))
+			sb.append("<br>");
 	}
 
 	public static String termLink(IdentifiedObject term) {
@@ -501,3 +595,135 @@ public class HtmlUtil {
 	}
 
 }
+////this is Mark's old termInfo box.  I'll keep it around
+////just in case we need to go back to it.  note that it might not
+////work quite right because i've now changed the other functions it
+////calls.
+//public static String termInfoOld(OBOClass oboClass) {
+//if (oboClass == null) {
+//	System.out.println("null obo class for HtmlUtil.termInfo");
+//	return ""; // null? exception?
+//}
+//StringBuffer sb = new StringBuffer();
+//sb.append(bold("TERM: ")).append(oboClass.getName());
+//if (oboClass.isObsolete()) {
+//	sb.append("This term is OBSOLETE").append(newLine());
+//
+//
+//}		
+//sb.append(nl()).append(bold("ID: ")).append(colorFont(oboClass.getID(), "red"));
+//
+//Set syns = oboClass.getSynonyms();
+//for (Iterator it = syns.iterator(); it.hasNext(); ) {
+//	sb.append(newLine()).append(bold("Synonym: ")).append(it.next());
+//}
+//
+//String definition = oboClass.getDefinition();
+//// definition = lineWrap(definition);
+//if (definition != null && !definition.equals(""))
+//	sb.append(nl()).append(nl()).append(bold("Definition: ")).append(definition);
+//
+//sb.append(nl()).append(nl()).append(bold("CHILDREN: "));
+//sb.append(getChildrenString(oboClass));
+//
+//
+//// if (DEBUG) System.out.println(sb);
+//
+//return sb.toString();
+//}
+
+
+//private static StringBuffer getLinksString(Collection links, boolean isChild, boolean xp) {
+//StringBuffer sb = new StringBuffer();
+//// or should thi sjust be done more generically with a hash of string bufs
+//// for each unique link type name?
+//// YES...that would be a better method i think -nlw
+////method:  make all the rt hand columns, then wrap around the left col of the type for the table entry
+//StringBuffer isaStringBuf = new StringBuffer();
+//StringBuffer partofStringBuf = new StringBuffer();
+//StringBuffer haspartStringBuf = new StringBuffer();
+//StringBuffer devFromStringBuf = new StringBuffer();
+//StringBuffer otherStringBuf = new StringBuffer();
+//StringBuffer startStageStringBuf = new StringBuffer();
+//StringBuffer endStageStringBuf = new StringBuffer();
+//int countIsa=0;
+//int countPartof=0;
+//int countHaspart=0;
+//int countDevfrom=0;
+//int countStartStage=0;
+//int countEndStage=0;    
+//int countOther=0;
+////i would like to clean this up to be able to group all relationships together, despite
+////the fact that they could be non-standard, like in SO.  might need two for-loops.  
+////would this be a drain on space/time?
+//for (Iterator it = links.iterator(); it.hasNext(); ) {
+//Link link = (Link)it.next();
+//OBOProperty type = link.getType();
+//if (type.getName().equals("is_a")) {
+//	countIsa++;
+//	appendLink(isaStringBuf,isChild,link,xp);
+//}
+//else if (type.getName().equals("part of") || type.getName().equals("part_of")) {	  
+//	countPartof++;
+//	appendLink(partofStringBuf,isChild,link,xp);
+//}
+//else if (type.getName().equals("has part") || type.getName().equals("has_part")) {
+//	//i'm using this to catch the wierd reciprocal stuff in FMA
+//	//not sure yet if this is the best solution
+//	//probably need a new way to visualize reciprocal 'part' relationships
+//	countHaspart++;
+//	appendLink(haspartStringBuf,isChild,link,xp);
+//}	  
+//else if (type.getName().equals("develops from") || type.getName().equals("develops_from")) {
+//	countDevfrom++;
+//	appendLink(devFromStringBuf,isChild,link,xp);
+//}
+////else if (type.getName().equals("start stage") || type.getName().equals("start_stage")) {
+////countStartStage++;
+////appendLink(startStageStringBuf,isChild,link);
+//
+////}
+////else if (type.getName().equals("end stage") || type.getName().equals("end_stage")) {
+////countEndStage++;
+////appendLink(endStageStringBuf,isChild,link);
+////}
+//else { //catch all other relationships
+//	countOther++;
+//	otherStringBuf.append("<tr>");
+//	otherStringBuf.append(makeLeftCol(bold(italic(capitalize(type.getName()))))+"<td>");
+//	appendLink(otherStringBuf,isChild,link,xp);
+//	otherStringBuf.append("</td></tr>");
+//}
+//}
+//if (!xp) {
+//if (countIsa>0) 
+//	sb.append(makeRow(makeLeftCol(bold(italic( 
+//			isChild ? "Subclass (is_a)" : "Superclass (is_a)"))) + 
+//			makeRightCol(isaStringBuf.toString())));
+//if (countPartof>0)
+//	sb.append(makeRow(makeLeftCol(bold(italic( 
+//			isChild ? "Has part" : "Part of"))) + 
+//			makeRightCol(partofStringBuf.toString())));
+//if (countDevfrom>0)
+//	sb.append(makeRow(makeLeftCol(bold(italic( 
+//			isChild ? "Develops into" : "Develops from"))) +
+//			makeRightCol(devFromStringBuf.toString())));   	
+//if (countOther>0)
+//	sb.append(makeRow(makeLeftCol(otherStringBuf.toString())));
+//} else {
+//if (countIsa>0) {
+//	sb.append(makeRow(makeLeftCol(bold(italic( 
+//			"genus:"))) + 
+//			makeRightCol(isaStringBuf.toString())));
+//} else {
+//	sb.append(makeRow(makeLeftCol(bold(italic( 
+//			"differentia: has_part"))) + 
+//			makeRightCol(partofStringBuf.toString())));
+//	sb.append(makeRow(makeLeftCol(bold(italic(
+//	"differentia: develops_from"))) +
+//			makeRightCol(devFromStringBuf.toString())));
+//	sb.append(makeRow(makeLeftCol(otherStringBuf.toString())));
+//}
+//}
+//return sb;
+//}
