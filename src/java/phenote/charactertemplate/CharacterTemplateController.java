@@ -51,7 +51,6 @@ public class CharacterTemplateController implements ActionListener {
   }
 
   private void createMenu() {
-    // we should actually get the menu title from a group title
     JMenuItem menuItem = new JMenuItem(this.getGroupTitle());
     menuItem.setActionCommand(CharacterTemplateController.SHOW_CHARACTER_TEMPLATE_ACTION);
     menuItem.addActionListener(this);
