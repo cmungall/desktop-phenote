@@ -125,7 +125,11 @@ abstract class CharFieldGui {
   }
   
   public SelectionManager getSelectionManager() {
+    if (this.selectionManager == null) {
+      return SelectionManager.inst();
+    } else {
     return this.selectionManager;
+    }
   }
   
   public void setEditManager(EditManager manager) {
