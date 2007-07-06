@@ -49,6 +49,12 @@ public class OntologyConfig {
       setName("Relationship");
   }
 
+  public OntologyConfig(String name,String displayName,FieldConfig fc) {
+    fieldConfig = fc;
+    setName(name);
+    // displayname
+  }
+
   Ontology getOntologyBean() {
     // if ontologyBean == null ontologyBean = new Ontology(); ???
     if (ontologyBean == null) // this is for backward compatible to old ontol ways
@@ -79,17 +85,18 @@ public class OntologyConfig {
 
 
   // for makePostCompRelCfg PASE - for backward compatibility
-  private OntologyConfig(String name, String file,FieldConfig fc) {
-    //this(name,fc);
-    fieldConfig = fc;
-    setName(name);
-    setOntologyFile(file);
-  }
+//   private OntologyConfig(String name, String file,FieldConfig fc) {
+//     //this(name,fc);
+//     fieldConfig = fc;
+//     setName(name);
+//     setOntologyFile(file);
+//   }
 
   // phasing out PASE - now just doing rel as another ontology - backward compatible
   // called from field config
   static OntologyConfig makePostCompRelCfg(String file,FieldConfig fc) {
-    OntologyConfig rel = new OntologyConfig("Relationship",file,fc);
+    OntologyConfig rel = new OntologyConfig("Relationship",null,fc);
+    rel.setOntologyFile(file);
     rel.setIsPostCompRel(true);
     rel.getOntologyBean().setFile(file); // crucial!
     fc.getFieldBean().unsetPostcomp(); // also crucial - get rid of it
@@ -100,7 +107,7 @@ public class OntologyConfig {
 
   /** File can be url(repos) or filename (from cache/jar/app), if url sets 
       reposUrlString and ontologyFile with end of url */
-  private void setFile(String file) {
+  public void setFile(String file) {
     if (file == null) {
       System.out.println("ERROR: null ontology file "+getName());
       new Throwable().printStackTrace();
@@ -124,7 +131,7 @@ public class OntologyConfig {
     return !isBad(getName());
   }
 
-  void setName(String name) {
+  public void setName(String name) {
     if (isBad(name))
       return;
     //this.name = name;

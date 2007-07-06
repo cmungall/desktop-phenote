@@ -37,6 +37,8 @@ import phenote.config.ConfigFileQueryGui; // phase out
 public class ConfigGui {
 
   private final static String NO_NAME = "No Name";
+  private final static String NO_NAME_ITAL = 
+    "<html><i><font color=gray>"+NO_NAME+"</font></i></html>";
 
   private JList configList;
   private Config currentConfig; // ???
@@ -221,7 +223,7 @@ public class ConfigGui {
 
     // ONTOLOGY LIST
     ListSelectionListener l = new OntologyListSelectionListener();
-    ontologyList = addList("Ontologies",g,fieldPanel,null,l);
+    ontologyList = addList("Ontologies",g,fieldPanel,new AddOntActionListener(),l);
 
     return fieldScroll;
   }
@@ -236,10 +238,10 @@ public class ConfigGui {
     addTitle("ONTOLOGY",g,ontolPanel);
 
     // NAME
-    ontolNameInput = addNameInput(g,ontolPanel,null);//new OntolNameDocumentListener());
+    ontolNameInput = addNameInput(g,ontolPanel,new OntNameDocumentListener());
 
     // FILE/URL
-    ontolFile = addInput(g,"File/URL",ontolPanel);
+    ontolFile = addInput(g,"File/URL",ontolPanel,new OntFileDocLis());
 
     namespace = addInput(g,"Namespace",ontolPanel);
 
@@ -254,6 +256,7 @@ public class ConfigGui {
   }
 
 
+
   private PhenoteListModel<Config> getConfigListModel() {
     return getPhenoteListModel(configList);
   }
@@ -261,10 +264,17 @@ public class ConfigGui {
   private Config getConfig(int i) {
     return getConfigListModel().get(i);
   }
+
   private FieldConfig getFieldConfig(int i) { return getFieldListModel().get(i); }
+
+  private OntologyConfig getOntConfig(int i) { return getOntListModel().get(i); }
 
   private PhenoteListModel<FieldConfig> getFieldListModel() {
     return getPhenoteListModel(fieldList);
+  }
+
+  private PhenoteListModel<OntologyConfig> getOntListModel() {
+    return getPhenoteListModel(ontologyList);
   }
 
   private PhenoteListModel getPhenoteListModel(JList l) {
@@ -296,15 +306,29 @@ public class ConfigGui {
         System.out.println("Error: no config selected");
         return;
       }
-      String n = NO_NAME;
-      String noNameItalics = "<html><i><font color=gray>"+n+"</font></i></html>";
-      FieldConfig fc = new FieldConfig(n,noNameItalics,getSelectedConfig()); //??
+      FieldConfig fc = new FieldConfig(NO_NAME,NO_NAME_ITAL,getSelectedConfig());
       getFieldListModel().add(fc);
       int newIndex = fieldList.getModel().getSize() - 1;
       fieldList.setSelectedIndex(newIndex);
       fieldList.repaint();
     }
   }
+
+  private class AddOntActionListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      if (!hasSelectedField()) {
+        System.out.println("Error: no field selected");
+        return;
+      }
+      OntologyConfig oc =
+        new OntologyConfig(NO_NAME,NO_NAME_ITAL,getSelectedFieldConfig()); 
+      getOntListModel().add(oc);
+      int newIndex = ontologyList.getModel().getSize() - 1;
+      ontologyList.setSelectedIndex(newIndex);
+      ontologyList.repaint();
+    }
+  }
+
 
   private class ConfigNameDocListener implements DocumentListener {
     public void changedUpdate(DocumentEvent e) { updateConfigListWithName(); }
@@ -345,6 +369,29 @@ public class ConfigGui {
     fieldList.repaint();
   }
 
+  private class OntNameDocumentListener implements DocumentListener {
+    public void changedUpdate(DocumentEvent e) { updateOntListWithName(); }
+    public void insertUpdate(DocumentEvent e) { updateOntListWithName(); }
+    public void removeUpdate(DocumentEvent e) { updateOntListWithName(); }
+  }
+
+  private void updateOntListWithName() {
+    if (!userEditing) return;
+    int i = ontologyList.getSelectedIndex();
+    if (i == -1) return; // nothing selected
+    getOntConfig(i).setName(ontolNameInput.getText());
+    ontologyList.repaint();
+  }
+  private class OntFileDocLis implements DocumentListener {
+    public void changedUpdate(DocumentEvent e) { updateOntFile(); }
+    public void insertUpdate(DocumentEvent e) { updateOntFile(); }
+    public void removeUpdate(DocumentEvent e) { updateOntFile(); }
+  }
+
+  private void updateOntFile() {
+    getSelectedOntologyConfig().setFile(ontolFile.getText());
+  }
+
   private class OntologyListSelectionListener implements ListSelectionListener {
     public void valueChanged(ListSelectionEvent e) {
       if (e.getValueIsAdjusting()) return; // only need 1 event/sel
@@ -368,6 +415,10 @@ public class ConfigGui {
       Config c = getSelectedConfig();
       setConfig(c);
     }
+  }
+
+  private boolean hasSelectedField() {
+    return getSelectedFieldConfig() != null;
   }
 
   private FieldConfig getSelectedFieldConfig() {
