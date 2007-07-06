@@ -1,49 +1,39 @@
 package phenote.gui;
 
-import java.net.URL;
-import java.util.Iterator;
-import java.awt.List;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
+
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JList;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.text.JTextComponent;
-import javax.swing.ImageIcon;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import edu.stanford.ejalbert.BrowserLauncher;
-import edu.stanford.ejalbert.BrowserLauncherRunner;
-import edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException;
-import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
+import javax.swing.text.JTextComponent;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
 
-import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.OntologyManager;
 import phenote.datamodel.TermNotFoundException;
-import phenote.edit.EditManager;
-import phenote.edit.UpdateTransaction;
-import phenote.util.HtmlUtil;
 import phenote.gui.selection.SelectionManager;
 import phenote.gui.selection.TermSelectionEvent;
 import phenote.gui.selection.TermSelectionListener;
 import phenote.gui.selection.UseTermEvent;
 import phenote.gui.selection.UseTermListener;
+import phenote.util.HtmlUtil;
+import edu.stanford.ejalbert.BrowserLauncher;
+import edu.stanford.ejalbert.BrowserLauncherRunner;
+import edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException;
+import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
 
 public class TermInfo {
 
@@ -63,9 +53,15 @@ public class TermInfo {
   private static int BUTTON_HEIGHT = 30;
   private List termInfoNaviHistory = new List();
   private int naviIndex=-1;
+  private SelectionManager selectionManager;
   
   public TermInfo() { //TermPanel termPanel) {
-    SelectionManager.inst().addTermSelectionListener(new InfoTermSelectionListener());
+    this(SelectionManager.inst());
+  }
+  
+  public TermInfo(SelectionManager selManager) {
+    this.selectionManager = selManager;
+    this.selectionManager.addTermSelectionListener(new InfoTermSelectionListener());
   }
 
   public JComponent getComponent() {
@@ -176,7 +172,7 @@ public class TermInfo {
     			OBOClass term = OntologyManager.inst().getOboClass(id); // ex
     			setTextFromOboClass(term);
     			// send out term selection (non mouse over) for DAG view
-    			SelectionManager.inst().selectTerm(TermInfo.this, term, true);
+          TermInfo.this.selectionManager.selectTerm(TermInfo.this, term, true);
     		}
     		catch (TermNotFoundException ex) { return; }
     	}
@@ -192,7 +188,7 @@ public class TermInfo {
     			OBOClass term = OntologyManager.inst().getOboClass(id); // ex
     			setTextFromOboClass(term);
     			// send out term selection (non mouse over) for DAG view
-    			SelectionManager.inst().selectTerm(TermInfo.this, term, true);
+          TermInfo.this.selectionManager.selectTerm(TermInfo.this, term, true);
     		}
     		catch (TermNotFoundException ex) { return; }
     	}
@@ -313,7 +309,7 @@ public class TermInfo {
         setTextFromOboClass(term);
         addTermToNaviHistory(id);
         // send out term selection (non mouse over) for DAG view
-        SelectionManager.inst().selectTerm(TermInfo.this, term, true);
+        TermInfo.this.selectionManager.selectTerm(TermInfo.this, term, true);
       }
       catch (TermNotFoundException ex) { return; }
     }

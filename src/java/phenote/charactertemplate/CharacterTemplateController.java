@@ -15,6 +15,7 @@ import phenote.edit.EditManager;
 import phenote.gui.CharacterTablePanel;
 import phenote.gui.GridBagUtil;
 import phenote.gui.MenuManager;
+import phenote.gui.TermInfo;
 import phenote.gui.field.FieldPanel;
 import phenote.gui.selection.SelectionManager;
 
@@ -68,13 +69,21 @@ public class CharacterTemplateController implements ActionListener {
   private JPanel createPanel() {
     JPanel panel = new JPanel(new GridBagLayout());
     JPanel upperPanel = new JPanel(new GridBagLayout());
+    
     FieldPanel fieldPanel = new FieldPanel(true, false, this.groupName, this.selectionManager, this.editManager);
     GridBagConstraints upperPanelConstraints = GridBagUtil.makeFillingConstraint(0,0);
     upperPanelConstraints.weightx = 1;
     upperPanel.add(fieldPanel, upperPanelConstraints);
+    
+    TermInfo termInfo = new TermInfo(this.selectionManager);
+    upperPanelConstraints.gridx++;
+    upperPanelConstraints.weightx = 5;
+    upperPanel.add(termInfo.getComponent(), upperPanelConstraints);
+    
     GridBagConstraints gridBagConstraints = GridBagUtil.makeFillingConstraint(0,0);
     gridBagConstraints.weighty = 1;
     panel.add(upperPanel, gridBagConstraints);
+    
     JPanel tablePanel = new CharacterTablePanel(this.characterListManager, this.editManager, this.selectionManager);
     gridBagConstraints.gridy++;
     gridBagConstraints.weighty = 10;
