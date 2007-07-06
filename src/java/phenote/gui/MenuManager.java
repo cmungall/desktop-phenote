@@ -2,13 +2,19 @@ package phenote.gui;
 // --> phenote.gui.menu ??
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 public class MenuManager {
+  
+  private JMenuBar menuBar;
 
   private FileMenu fileMenu;
   
   private EditMenu editMenu;
+  
+  private JMenu viewMenu;
   
   private HelpMenu helpMenu;
 
@@ -23,18 +29,26 @@ public class MenuManager {
   public static void createMenuManager(JFrame frame) {
     singleton.initMenus(frame);
   }
+  
+  public void addViewMenuItem(JMenuItem menuItem) {
+    if (this.viewMenu == null) {
+      this.viewMenu = new JMenu("View");
+      this.menuBar.add(this.viewMenu, 2);
+    }
+    this.viewMenu.add(menuItem);
+  }
 
   private void initMenus(JFrame frame) {
-    JMenuBar menuBar = new JMenuBar();
+    this.menuBar = new JMenuBar();
     fileMenu = new FileMenu();
     editMenu = new EditMenu();
     settingsMenu = new SettingsMenu();
     helpMenu = new HelpMenu();
-    menuBar.add(fileMenu);
-    menuBar.add(editMenu);
-    menuBar.add(settingsMenu);
-    menuBar.add(helpMenu);
-    frame.setJMenuBar(menuBar);
+    this.menuBar.add(fileMenu);
+    this.menuBar.add(editMenu);
+    this.menuBar.add(settingsMenu);
+    this.menuBar.add(helpMenu);
+    frame.setJMenuBar(this.menuBar);
   }
 
 
@@ -42,3 +56,4 @@ public class MenuManager {
   // for testing actually
   public FileMenu getFileMenu() { return fileMenu; }
 }
+

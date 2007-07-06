@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
 
+import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.CharField;
-import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.CharacterI;
 
 /** used for bulk updating (see TermCompList) */
@@ -45,21 +45,21 @@ public class CompoundTransaction implements TransactionI {
     childTransactions.add(trans);
   }
 
-  public static CompoundTransaction makeCopyTrans(List<CharacterI> charsToCopy) {
+  public static CompoundTransaction makeCopyTrans(List<CharacterI> charsToCopy, CharacterListManager clManager) {
     CompoundTransaction copyTrans = new CompoundTransaction();
     // error if empty list?
     for (CharacterI c : charsToCopy) {
       CharacterI copy = c.cloneCharacter();
-      AddTransaction at = new AddTransaction(copy);
+      AddTransaction at = new AddTransaction(copy, clManager);
       copyTrans.addTransaction(at);
     }
     return copyTrans;
   }
 
-  public static CompoundTransaction makeDelTrans(List<CharacterI> delChars) {
+  public static CompoundTransaction makeDelTrans(List<CharacterI> delChars, CharacterListManager clManager) {
     CompoundTransaction delTrans = new CompoundTransaction();
     for (CharacterI c : delChars)
-      delTrans.addTransaction(new DeleteTransaction(c));
+      delTrans.addTransaction(new DeleteTransaction(c, clManager));
     return delTrans;
   }
 

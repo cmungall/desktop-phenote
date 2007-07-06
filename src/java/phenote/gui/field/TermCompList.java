@@ -112,7 +112,7 @@ class TermCompList extends AbstractAutoCompList {
   protected void setCurrentValidItem() throws OboException {
     setOboClass(getSelectedOboClass()); //this will set text to oboclass
     // send out selection event that is NOT a mouse over event (for DAG view)
-    SelectionManager.inst().selectTerm(this, getSelectedOboClass(), false);
+    this.getSelectionManager().selectTerm(this, getSelectedOboClass(), false);
   }
 
   protected String getCurrentTermRelName() {
@@ -192,10 +192,6 @@ class TermCompList extends AbstractAutoCompList {
     //CompoundTransaction ct = new CompoundTransaction(chars,cfe,oboClass);
     CompoundTransaction ct = CompoundTransaction.makeUpdate(chars, getCharField(), oboClass);
     EditManager.inst().updateModel(this, ct);
-  }
-
-  private SelectionManager getSelectionManager() {
-    return SelectionManager.inst();
   }
 
   private List<CharacterI> getSelectedChars() {

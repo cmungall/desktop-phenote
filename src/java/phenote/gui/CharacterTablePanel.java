@@ -1,11 +1,6 @@
 package phenote.gui;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.lang.Integer;
-
 import java.awt.Dimension;
-//import java.awt.GridLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Point;
@@ -14,53 +9,47 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
-import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JPopupMenu;
-import javax.swing.JOptionPane;
-import javax.swing.JMenuItem;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
-import javax.swing.event.TableColumnModelEvent;
-import javax.swing.event.TableColumnModelListener;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableColumn;
 
 import org.apache.log4j.Logger;
 
-import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharacterListI;
-import phenote.datamodel.CharField;
-import phenote.datamodel.CharFieldValue;
-import phenote.edit.CharChangeEvent;
-import phenote.edit.CharChangeListener;
-import phenote.edit.EditManager;
+import phenote.config.Config;
 import phenote.dataadapter.CharListChangeEvent;
 import phenote.dataadapter.CharListChangeListener;
 import phenote.dataadapter.CharacterListManager;
-import phenote.config.Config;
-import phenote.gui.selection.SelectionManager;
 import phenote.dataadapter.LoadSaveManager;
-import phenote.gui.TableRightClickMenu;
+import phenote.datamodel.CharFieldValue;
+import phenote.datamodel.CharacterI;
+import phenote.datamodel.CharacterListI;
+import phenote.edit.CharChangeEvent;
+import phenote.edit.CharChangeListener;
+import phenote.edit.EditManager;
+import phenote.gui.selection.SelectionManager;
 
   /** Character panel has character table and del add copy buttons to manipulate
    *  table. Modifications to fields modify columns in selected row in table
    * for now no explicit commit - may be configurable later */
 public class CharacterTablePanel extends JPanel {
 
-  private CharacterTableModel characterTableModel = new CharacterTableModel();
-  private JTable charJTable = new JTable(characterTableModel);
+  private CharacterTableModel characterTableModel;
+  private JTable charJTable;
   private static int DEFAULT_COLWIDTH=150; //default column width for table
   private static int INIT_TABLE_WIDTH=1400;
   private static int INIT_TABLE_HEIGHT=500;
@@ -80,6 +69,9 @@ public class CharacterTablePanel extends JPanel {
   private Point currentMousePoint = new Point(0,0);
   private int tableWidth=INIT_TABLE_WIDTH;
   private int tableHeight=INIT_TABLE_HEIGHT;
+  private CharacterListManager characterListManager;
+  private EditManager editManager;
+  private SelectionManager selectionManager;
   
   //private int selectedRow;
   // get from file menu?
@@ -89,7 +81,16 @@ public class CharacterTablePanel extends JPanel {
 
   public CharacterTablePanel() { //TermPanel tp) {
     //fieldPanel = tp;
-  	super();    
+    this(CharacterListManager.inst(), EditManager.inst(), SelectionManager.inst());
+  }
+  
+  public CharacterTablePanel(CharacterListManager clManager, EditManager eManager, SelectionManager selManager) {
+    super();
+    this.characterListManager = clManager;
+    this.editManager = eManager;
+    this.selectionManager = selManager;
+    this.characterTableModel = new CharacterTableModel(this.characterListManager, this.editManager);
+    this.charJTable = new JTable(this.characterTableModel);
     init();
   }
 
@@ -152,7 +153,7 @@ public class CharacterTablePanel extends JPanel {
     add(buttonPanel,gbc);
 
 
-    EditManager.inst().addCharChangeListener(new TableCharChangeListener());
+    this.editManager.addCharChangeListener(new TableCharChangeListener());
     getCharListManager().addCharListChangeListener(new TableCharListChangeListener());
   }
 
@@ -186,7 +187,7 @@ public class CharacterTablePanel extends JPanel {
   }
 
   private CharacterListManager getCharListManager() {
-    return CharacterListManager.inst();
+    return this.characterListManager;
   }
 
   private JButton addButton(String name,ActionListener al,JPanel parent) {
@@ -351,7 +352,7 @@ public class CharacterTablePanel extends JPanel {
       else if (e.getActionCommand().equals("Undo")) {
         // let char change deal with selection i think?? undo is different
         doSelection = false;
-        EditManager.inst().undo();
+        CharacterTablePanel.this.editManager.undo();
       }
 
       else if (e.getActionCommand().equals("Graph")) {
@@ -398,7 +399,7 @@ public class CharacterTablePanel extends JPanel {
       
       // new way - change this to take list - multi!
       //SelectionManager.inst().selectCharacter(this,character);
-      SelectionManager.inst().selectCharacters(this,getSelectedChars());
+      CharacterTablePanel.this.selectionManager.selectCharacters(this,getSelectedChars());
     }
   }
 
@@ -447,7 +448,7 @@ public class CharacterTablePanel extends JPanel {
       characterTableModel.setCharacterList(characterList);
       // need to repaint & select 1st item in table
       selectRow(0);
-      SelectionManager.inst().selectCharacters(this,getSelectedChars());
+      CharacterTablePanel.this.selectionManager.selectCharacters(this,getSelectedChars());
       //repaint();
       //doLayout(); // ??
     }

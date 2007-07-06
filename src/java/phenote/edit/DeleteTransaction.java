@@ -2,21 +2,26 @@ package phenote.edit;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.geneontology.oboedit.datamodel.OBOClass;
 
-import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharacterListI;
 import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.CharField;
+import phenote.datamodel.CharacterI;
+import phenote.datamodel.CharacterListI;
 
 class DeleteTransaction implements TransactionI {
 
   private CharacterI delChar;
   // remember where the char was in the list for undo
   private int listOrder;
+  private CharacterListManager characterListManager;
   private boolean isUndone = false;
 
-  DeleteTransaction(CharacterI c) { delChar = c; }
+  DeleteTransaction(CharacterI c, CharacterListManager clManager) {
+    this.delChar = c;
+    this.characterListManager = clManager;
+    }
 
   public void editModel() {
     listOrder = getCharList().indexOf(delChar);
@@ -46,7 +51,7 @@ class DeleteTransaction implements TransactionI {
 
   // should char list be passed in? charlistMan part of edit pkg?
   private CharacterListI getCharList() {
-    return CharacterListManager.inst().getCharacterList();
+    return this.characterListManager.getCharacterList();
   }
     
   public OBOClass getNewTerm() { return null; }

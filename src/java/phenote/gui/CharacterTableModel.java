@@ -1,22 +1,18 @@
 package phenote.gui;
 
 import java.util.List;
-import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
 import org.apache.log4j.Logger;
 
+import phenote.config.Config;
+import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.CharField;
-import phenote.datamodel.Character;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
-import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.OntologyManager;
-//import phenote.edit.CompoundTransaction;
 import phenote.edit.EditManager;
-import phenote.dataadapter.CharacterListManager;
-import phenote.config.Config;
 
 /** 
  *  table model for table of characters. currently holds list of characters - this should
@@ -27,20 +23,30 @@ class CharacterTableModel extends AbstractTableModel {
   //private int rowCount = 0;
   // todo - get this from data adapter/model - especially for loaded
   private CharacterListI characterList;// = new CharacterList();
+  private CharacterListManager characterListManager;
+  private EditManager editManager;
   //private Config config = Config.inst(); cant cache - may change!
 
-  CharacterTableModel() {
-    characterList = getCharListManager().getCharacterList();
+  CharacterTableModel(CharacterListManager clManager, EditManager eManager) {
+    this.characterList = clManager.getCharacterList();
+    this.characterListManager = clManager;
+    this.editManager = eManager;
     // should supress editing model for this i think???
     addInitialBlankRow(); // add blank row to start off
     //getCharListManager().addCharListChangeListener(new TableCharListChangeListener());
     // --> panel
     //EditManager.inst().addCharChangeListener(new TableCharChangeListener());
   }
+  
+  public CharacterTableModel() {
+    this(CharacterListManager.inst(), EditManager.inst());
+  }
 
   private Config cfg() { return Config.inst(); }
 
-  private CharacterListManager getCharListManager() { return CharacterListManager.inst(); }
+  private CharacterListManager getCharListManager() {
+    return this.characterListManager;
+    }
 
   CharacterI getCharacter(int i) {
     // check out of bounds
@@ -84,13 +90,13 @@ class CharacterTableModel extends AbstractTableModel {
   boolean hasRows() { return getRowCount() > 0; }
 
   void addInitialBlankRow() {
-    EditManager.inst().addInitialCharacter();
+    this.editManager.addInitialCharacter();
     fireTableRowsInserted(getRowCount(),getRowCount());
   }
 
   /** Returns row # of new row - handy for selection */
   int addNewBlankRow() {
-    EditManager.inst().addNewCharacter();
+    this.editManager.addNewCharacter();
     fireTableRowsInserted(getRowCount(),getRowCount());
     return getRowCount() - 1; // last row
     //return addCharacter(new Character());
@@ -113,7 +119,7 @@ class CharacterTableModel extends AbstractTableModel {
       log().error("No chars selected to make copy of");
       return new RowInterval(-1,-1); // ex?
     }
-    EditManager.inst().copyChars(charsToCopy); // edit        characterTableModel.selects model
+    this.editManager.copyChars(charsToCopy); // edits model
     //CompoundTransaction ct = CompoundTransaction.makeCopyTrans(charsToCopy);
     //ct.editModel(); // clones & adds char to char list
     fireTableRowsInserted(getRowCount(),getRowCount()); // updates table view
@@ -144,7 +150,7 @@ class CharacterTableModel extends AbstractTableModel {
       log().error("No rows/chars to delete");
       return;
     }
-    EditManager.inst().deleteChars(chars);
+    this.editManager.deleteChars(chars);
     fireTableRowsDeleted(0,getRowCount()); // could be more savvy
   }
 

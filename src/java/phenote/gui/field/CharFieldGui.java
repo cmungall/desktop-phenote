@@ -56,6 +56,7 @@ abstract class CharFieldGui {
   static int fieldHeight = 17;
   static Dimension inputSize = new Dimension(390,fieldHeight); // size of user input box
   private boolean editModel = true;
+  private SelectionManager selectionManager;
   
 
   /** CharFieldGui for main window not post comp box - factory method */
@@ -64,18 +65,14 @@ abstract class CharFieldGui {
       //return new TermCompList(charField,sp,true); // enable listeners
       TermCompList t = new TermCompList(charField);
       //t.setSearchParams(sp);
-      t.enableListeners(true);
       t.allowPostCompButton(true);
       return t;
     }
     else {
       FreeTextField f = new FreeTextField(charField);
-      f.enableListeners(true);
       return f;
     }
   }
-
-
 
   /** createPostCompRelationList - will relation lists ever be in main window and if
       so will they ever have listeners enabled - maybe, probably not */
@@ -95,7 +92,6 @@ abstract class CharFieldGui {
     //t.setSearchParams(sp);
     // t.isInSeparateWindow(true) or t.isolate(true)??
     t.enableEditModel(false);
-    t.enableListeners(false);
     t.allowPostCompButton(false); // eventually config for recurse/embed
     t.setLabel(label);
     return t;
@@ -122,21 +118,18 @@ abstract class CharFieldGui {
   /** Get the component used for user input - text field or jCombo */
   protected abstract Component getUserInputGui();
 
-  protected void enableListeners(boolean enable) {
-    if (!enable) return;
-
-    // listens for selection (eg from table) - not for PostCompGui
-    //if (enableListeners)
-    SelectionManager.inst().addCharSelectionListener(new FieldCharSelectListener());
-    // listen for model changes (eg TermInfo commit)
-    
-    // this needs renaming. if not editing model then its a post comp window, and 
-    // post comp windows also listen for char changes in PostCompGui not in there
-    // char field guis. either add a new param or rename "enableListeners" - hmmm
-    // or subclass CharFieldGui?? hmmmmm.... oh right this is changes in model
-    // from the main window i think??
-    //if (enableListeners)
-    EditManager.inst().addCharChangeListener(new FieldCharChangeListener());
+  
+  public void setSelectionManager(SelectionManager manager) {
+    this.selectionManager = manager;
+    manager.addCharSelectionListener(new FieldCharSelectListener());
+  }
+  
+  public SelectionManager getSelectionManager() {
+    return this.selectionManager;
+  }
+  
+  public void setEditManager(EditManager manager) {
+    manager.addCharChangeListener(new FieldCharChangeListener());
   }
 
   protected void enableEditModel(boolean em) { editModel = em; }
@@ -429,7 +422,7 @@ abstract class CharFieldGui {
   protected CharField getCharField() { return charField; }
 
   private CharacterI getFirstSelectedChar() {
-    return SelectionManager.inst().getFirstSelectedCharacter();
+    return this.getSelectionManager().getFirstSelectedCharacter();
   }
 
   private class FieldCharSelectListener implements CharSelectionListener {

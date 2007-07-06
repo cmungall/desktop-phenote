@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.Character;
 import phenote.datamodel.CharacterI;
 
@@ -23,7 +24,15 @@ public class EditManager {
 
   private List<TransactionI> transactionList = new ArrayList<TransactionI>();
   
-  private EditManager() {}
+  private CharacterListManager characterListManager;
+  
+  public EditManager() {
+    this(CharacterListManager.inst());
+  }
+  
+  public EditManager(CharacterListManager clManager) {
+    this.characterListManager = clManager;
+  }
 
   public static EditManager inst() {
     if (singleton == null)
@@ -104,7 +113,7 @@ public class EditManager {
 
   // fire char change event???
   private void addCharacter(Character c, boolean recordTrans) {
-    AddTransaction at = new AddTransaction(c);
+    AddTransaction at = new AddTransaction(c, this.characterListManager);
     at.editModel();
     if (recordTrans) addTransaction(at);
     fireChangeEvent(new CharChangeEvent(this,at)); // this???
@@ -115,7 +124,7 @@ public class EditManager {
       log().error("No chars to make copy of");
       return;
     }
-    CompoundTransaction ct = CompoundTransaction.makeCopyTrans(charsToCopy);
+    CompoundTransaction ct = CompoundTransaction.makeCopyTrans(charsToCopy, this.characterListManager);
     ct.editModel(); // clones & adds char to char list
     addTransaction(ct);
     // dont need yet an event for this - might eventually
@@ -130,12 +139,10 @@ public class EditManager {
       log().error("No chars to delete");
       return;
     }
-    CompoundTransaction ct = CompoundTransaction.makeDelTrans(delChars);
+    CompoundTransaction ct = CompoundTransaction.makeDelTrans(delChars, this.characterListManager);
     ct.editModel();
     addTransaction(ct);
   }
-
-
 
   private void addTransaction(TransactionI t) {
     transactionList.add(t);

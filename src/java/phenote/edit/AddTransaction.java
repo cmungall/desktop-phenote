@@ -5,22 +5,23 @@ import java.util.List;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
 
-import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharacterListI;
-// does char list manager belong in edit package?
 import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.CharField;
+import phenote.datamodel.CharacterI;
+import phenote.datamodel.CharacterListI;
 
 /** For adding a character (not a char subpart - thats an update) */
 
 public class AddTransaction implements TransactionI {
 
   private CharacterI addChar;
+  private CharacterListManager characterListManager;
   private boolean isUndone = false;
   // private int index; ??
 
-  public AddTransaction(CharacterI chr) {
-    addChar = chr;
+  public AddTransaction(CharacterI chr, CharacterListManager clManager) {
+    this.addChar = chr;
+    this.characterListManager = clManager;
   }
 
   public boolean isUpdate() { return false; }
@@ -32,7 +33,7 @@ public class AddTransaction implements TransactionI {
     // index = getCharList().indexOf(addChar); ??
   }
 
-  // public int getIndex() { return index; } ???
+// public int getIndex() { return index; } ???
 
   public void undo() {
     getCharList().remove(addChar);
@@ -47,7 +48,7 @@ public class AddTransaction implements TransactionI {
 
   // should char list be passed in? charlistMan part of edit pkg?
   private CharacterListI getCharList() {
-    return CharacterListManager.inst().getCharacterList();
+    return this.characterListManager.getCharacterList();
   }
 
   /** this is for update trans - return false */

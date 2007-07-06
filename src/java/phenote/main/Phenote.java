@@ -8,36 +8,33 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.BoxLayout;
+import java.io.FileNotFoundException;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
-import javax.swing.ImageIcon;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.metal.MetalLookAndFeel;
-import java.io.FileNotFoundException;
-
-
-
-// import javax.swing.JTextField;
-// import javax.swing.text.Keymap;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
+import phenote.charactertemplate.CharacterTemplateController;
 import phenote.config.Config;
 import phenote.config.ConfigException;
-import phenote.datamodel.CharacterListI;
+import phenote.config.xml.GroupDocument.Group;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.OntologyDataAdapter;
+import phenote.datamodel.CharacterListI;
 import phenote.gui.CharacterTablePanel;
 import phenote.gui.GridBagUtil;
 import phenote.gui.MenuManager;
-import phenote.gui.TermInfo;
 import phenote.gui.SelectionHistory;
-import phenote.gui.field.FieldPanel;
 import phenote.gui.SplashScreen;
+import phenote.gui.TermInfo;
+import phenote.gui.field.FieldPanel;
 
 public class Phenote {
 
@@ -144,8 +141,16 @@ public class Phenote {
   
   public void initGui() {
     makeWindow(); // ok this is silly
+    this.createGroupGuis();
   }
 
+  private void createGroupGuis() {
+    for (Group group : Config.inst().getFieldGroups()) {
+      if (group.getInterface().equals(Group.Interface.CHARACTER_TEMPLATE)) {
+        new CharacterTemplateController(group.getName());
+      }
+    }
+  }
 
   private void splashScreenInit() {
     ImageIcon myImage = new ImageIcon(logoFile);

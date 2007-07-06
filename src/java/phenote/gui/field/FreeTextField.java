@@ -229,7 +229,7 @@ class FreeTextField extends CharFieldGui {
   }
   
   private List<CharacterI> getSelectedChars() {
-    return SelectionManager.inst().getSelectedChars();
+    return this.getSelectionManager().getSelectedChars();
   }
   
 

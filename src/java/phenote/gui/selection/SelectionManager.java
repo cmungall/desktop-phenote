@@ -25,7 +25,7 @@ public class SelectionManager {
     return singleton;
   }
 
-  private SelectionManager() {
+  public SelectionManager() {
     termListenerList = new ArrayList<TermSelectionListener>(5);
     charListenerList = new ArrayList<CharSelectionListener>(4);
   }

@@ -11,19 +11,15 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import phenote.datamodel.CharField;
-import phenote.datamodel.CharFieldEnum;
-import phenote.datamodel.CharacterI;
 import phenote.datamodel.OntologyManager;
+import phenote.edit.EditManager;
 import phenote.gui.GridBagUtil;
-
-import phenote.gui.SearchParamsI;
-import phenote.gui.SearchParams;
+import phenote.gui.selection.SelectionManager;
 
 /**
  * FieldPanel holds all the fields for the terms - Genotype, Entity/Anatomy, QUALITY.
@@ -38,6 +34,9 @@ public class FieldPanel extends JPanel {
   private OntologyManager ontologyManager = OntologyManager.inst();
   private JPanel fieldPanel;
   private JTabbedPane jTabbedPane;
+  private String representedGroup;
+  private SelectionManager selectionManager;
+  private EditManager editManager;
 
   /** eventually configurable (with default 12) - for now hardwire at 12 */
   private static int fieldsPerTab = 12;
@@ -47,6 +46,13 @@ public class FieldPanel extends JPanel {
   }
   // false for post comp panel - boolean isPostComp?
   public FieldPanel(boolean doAllFields,boolean addSearchPanel) {
+    this(doAllFields, addSearchPanel, null, SelectionManager.inst(), EditManager.inst());
+  }
+  
+  public FieldPanel(boolean doAllFields, boolean addSearchPanel, String representedGroup, SelectionManager selectionManager, EditManager editManager) {
+    this.representedGroup = representedGroup;
+    this.selectionManager = selectionManager;
+    this.editManager = editManager;
     initGui();
     if (doAllFields) {
       initCharFieldGuis();
@@ -89,7 +95,7 @@ public class FieldPanel extends JPanel {
 
     int fieldNum = 0;
     int tab = 1;
-    for (CharField charField : ontologyManager.getCharFieldList()) {
+    for (CharField charField : this.getCharFieldList()) {
       if (isTabbed() && fieldNum % fieldsPerTab == 0) {
         fieldPanel = new JPanel(new GridBagLayout());
         jTabbedPane.addTab("Tab "+tab++,fieldPanel);
@@ -97,13 +103,19 @@ public class FieldPanel extends JPanel {
       ++fieldNum;
       //CharFieldGui gui = new CharFieldGui(charField,this); // adds to panel
       CharFieldGui gui = CharFieldGui.makeCharFieldGui(charField);
+      gui.setSelectionManager(this.selectionManager);
+      gui.setEditManager(this.editManager);
       addCharFieldGuiToPanel(gui);
       charFieldGuiList.add(gui);
     }
   }
 
   private boolean isTabbed() {
-    return ontologyManager.getNumberOfFields() > fieldsPerTab;
+    if (this.representedGroup != null) {
+      return this.ontologyManager.getCharFieldListForGroup(this.representedGroup).size() > FieldPanel.fieldsPerTab;
+    } else {
+      return ontologyManager.getNumberOfFields() > fieldsPerTab;
+    }
   }
 
   void addCharFieldGuiToPanel(CharFieldGui fieldGui) {
@@ -203,6 +215,14 @@ public class FieldPanel extends JPanel {
 
   public AbstractAutoCompList getQualityComboBox() {
     return getComboBox("Quality");
+  }
+  
+  private List<CharField> getCharFieldList() {
+    if (this.representedGroup != null) {
+      return this.ontologyManager.getCharFieldListForGroup(this.representedGroup);
+    } else {
+    return this.ontologyManager.getCharFieldList();
+    }
   }
 
 }

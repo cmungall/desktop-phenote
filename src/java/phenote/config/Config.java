@@ -1079,6 +1079,15 @@ public class Config {
     }
     return fields;
   }
+  
+  public String getTitleForGroup(String groupName) {
+    for (Group aGroup : this.phenoConfigBean.getGroupArray()) {
+      if (aGroup.getName().equals(groupName)) {
+        return aGroup.getTitle();
+      }
+    }
+    return null;
+  }
 }
 
 //       if (overwrite || mode.equals("WIPEOUT_ALWAYS"))

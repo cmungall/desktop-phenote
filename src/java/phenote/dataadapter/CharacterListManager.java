@@ -4,10 +4,11 @@ package phenote.dataadapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JOptionPane;
 
-import phenote.datamodel.CharacterListI;
 import phenote.datamodel.CharacterList;
+import phenote.datamodel.CharacterListI;
 
 /** Contains current CharacterList. sends out CharacterListChanged events
     when character list has changed */
@@ -16,10 +17,9 @@ public class CharacterListManager {
   private static CharacterListManager singleton;
 
   private CharacterListI characterList = new CharacterList();
-  private List<CharListChangeListener>listenerList
-  = new ArrayList<CharListChangeListener>(6);
+  private List<CharListChangeListener> listenerList = new ArrayList<CharListChangeListener>(6);
 
-  private CharacterListManager() {}
+  public CharacterListManager() {}
 
   public static CharacterListManager inst() {
     if (singleton == null)
