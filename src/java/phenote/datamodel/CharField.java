@@ -74,6 +74,15 @@ public class CharField {
   public List<Ontology> getOntologyList() { return ontologyList; }
 
   //booelan isFreeText() return !hasOntologies() ??
+  public boolean isFreeText() {		//  now have third type isInt, so can't just negate 2007 07 09
+    if ( hasOntologies() || isInt() )  return false; 
+    return true; 
+  }
+
+  public boolean isInt() {		//  now have third type isInt, so can't just negate 2007 07 09
+    if ( hasOntologies() || isFreeText() )  return false; 
+    return true; 
+  }
 
   public boolean hasOntologies() {
     return ontologyList != null && !ontologyList.isEmpty();

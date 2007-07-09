@@ -74,7 +74,8 @@ public class DelimitedChar {
     	  //if its an ontology field - need two cols (one for ID, the other for text)
  	    sb.append(Config.inst().getLabelForCharField(cf));
  	    //for now, i'll call on the syntax abbrev, but i'll want to use the acutal name
-        if (!isFreeText(cf)) { 
+        // if (!isFreeText(cf)) { // }		// now have third type isInt, so can't just negate 2007 07 09
+        if (isOntology(cf)) { 
           sb.append(" ID").append(delimiter);
           sb.append(Config.inst().getLabelForCharField(cf)).append(" Name");
         }
@@ -121,7 +122,8 @@ public class DelimitedChar {
    
   /** If a char field has ontologies it is not free text */
   private boolean isFreeText(CharField cf) {
-    return !cf.hasOntologies();
+    // return !cf.hasOntologies();	// now have third type isInt, so can't just negate 2007 07 09
+    return cf.isFreeText();
   }
   
   private boolean isOntology(CharField cf) {

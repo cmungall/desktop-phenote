@@ -108,6 +108,7 @@
           <xs:restriction base="xs:token">
             <xs:enumeration value="free_text"/>
             <xs:enumeration value="ontology"/>
+            <xs:enumeration value="int"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>

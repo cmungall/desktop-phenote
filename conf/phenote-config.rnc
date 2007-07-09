@@ -86,7 +86,7 @@ field =
     attribute datatag { xsd:string },
     ## whether field is free text or constrained by ontology - take out?
     ## this is actually unnecasary - if there is no file free text is assumed    
-    attribute type { "free_text" | "ontology" },  
+    attribute type { "free_text" | "ontology" | "int" },  
     ## file is for single ontology - rename ontology_file?
     ## phase these 4 out - redundant with single ontology
     attribute tab { xsd:string },
