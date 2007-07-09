@@ -1,43 +1,39 @@
 package phenote.gui.field;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.Dimension;
-import java.awt.BorderLayout;
-import java.awt.Frame;
-import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
-
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOProperty;
 import org.geneontology.oboedit.datamodel.OBORestriction;
-import org.geneontology.oboedit.datamodel.impl.OBOClassImpl;
-import org.geneontology.oboedit.datamodel.impl.OBOPropertyImpl;
-import org.geneontology.oboedit.datamodel.impl.OBORestrictionImpl;
 
-import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
+import phenote.datamodel.CharacterI;
 import phenote.datamodel.OboUtil;
 import phenote.datamodel.Ontology;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
-import phenote.edit.EditManager;
-//import phenote.edit.UpdateTransaction;
 import phenote.edit.CompoundTransaction;
-import phenote.main.Phenote;
+import phenote.edit.EditManager;
 import phenote.gui.selection.CharSelectionEvent;
 import phenote.gui.selection.CharSelectionListener;
 import phenote.gui.selection.SelectionManager;
+import phenote.main.Phenote;
 
 //import phenote.gui.SearchParams;
 //import phenote.gui.SearchParamsI;
@@ -58,10 +54,16 @@ class PostCompGui {
   private List<RelDiffGui> relDiffGuis = new ArrayList<RelDiffGui>(3);
   //private SearchParamsI searchParams = SearchParams.inst();
   private FieldPanel compFieldPanel;
-
-  PostCompGui(CharField charField) {
+  private EditManager editManager;
+  private SelectionManager selectionManager;
+  private Frame owner;
+  
+  
+  PostCompGui(CharField charField, EditManager eManager, SelectionManager selManager, Frame ownerFrame) {
     this.charField = charField;
-    //this.searchParams = searchParams;
+    this.editManager = eManager;
+    this.selectionManager = selManager;
+    this.owner = ownerFrame;
     init();
   }
 
@@ -76,8 +78,12 @@ class PostCompGui {
       Ontology o = charField.getPostCompRelOntol();
       relChar.addOntology(o);
       relField = CharFieldGui.makeRelationList(relChar);//"Relationship"?
+      relField.setEditManager(PostCompGui.this.editManager);
+      relField.setSelectionManager(PostCompGui.this.selectionManager);
       compFieldPanel.addCharFieldGuiToPanel(relField);
       diffField = CharFieldGui.makePostCompTermList(charField,"Differentia");
+      diffField.setEditManager(PostCompGui.this.editManager);
+      diffField.setSelectionManager(PostCompGui.this.selectionManager);
       compFieldPanel.addCharFieldGuiToPanel(diffField);
     }
     private void setRelDiffModel(RelDiffModel rd) {
@@ -101,13 +107,14 @@ class PostCompGui {
 
   private void init() {
     // dialog wont be focusable if owner is not showing or something like that
-    Frame owner = Phenote.getPhenote().getFrame();
-    dialog = new JDialog(owner,charField.getName()+" Post Composition");
-    compFieldPanel = new FieldPanel(false,false); // (searchParams)?
+   
+    dialog = new JDialog(this.owner, charField.getName() + " Post Composition");
+    compFieldPanel = new FieldPanel(false,false, null, this.selectionManager, this.editManager); // (searchParams)?
     //compFieldPanel.setSearchParams(searchParams);
     
     // MAIN GENUS TERM
     genusField = CharFieldGui.makePostCompTermList(charField,"Genus");
+    genusField.setSelectionManager(this.selectionManager);
     compFieldPanel.addCharFieldGuiToPanel(genusField);
 
     // REL-DIFFS
@@ -131,8 +138,8 @@ class PostCompGui {
     dialog.setLocationRelativeTo(owner);
     dialog.setVisible(true);
 
-    EditManager.inst().addCharChangeListener(new CompCharChangeListener());
-    SelectionManager.inst().addCharSelectionListener(new CompCharSelectListener());
+    this.editManager.addCharChangeListener(new CompCharChangeListener());
+    this.selectionManager.addCharSelectionListener(new CompCharSelectListener());
   }
 
   private void addRelDiffGui() {
@@ -189,7 +196,7 @@ class PostCompGui {
   private OBOClass getModelTerm() {
     // there should be convenience method for this
     // multi select get 1st??
-    CharacterI c = SelectionManager.inst().getFirstSelectedCharacter();
+    CharacterI c = this.selectionManager.getFirstSelectedCharacter();
     //return charField.getCharFieldEnum().getValue(c).getOboClass();
     return c.getValue(charField).getOboClass();
   }
@@ -338,11 +345,11 @@ class PostCompGui {
   }
 
   private void commitTerm(OBOClass postComp) {
-    List<CharacterI> chrs = SelectionManager.inst().getSelectedChars();
+    List<CharacterI> chrs = this.selectionManager.getSelectedChars();
     //CharFieldEnum cfe = charField.getCharFieldEnum();
     //CompoundTransaction ct = new CompoundTransaction(chrs,cfe,postComp);
     CompoundTransaction ct = CompoundTransaction.makeUpdate(chrs,charField,postComp);
-    EditManager.inst().updateModel(this,ct);
+    this.editManager.updateModel(this,ct);
   }
 
   private String pcString(String g, String d) {

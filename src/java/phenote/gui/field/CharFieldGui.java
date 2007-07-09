@@ -57,6 +57,7 @@ abstract class CharFieldGui {
   static Dimension inputSize = new Dimension(390,fieldHeight); // size of user input box
   private boolean editModel = true;
   private SelectionManager selectionManager;
+  private EditManager editManager;
   
 
   /** CharFieldGui for main window not post comp box - factory method */
@@ -133,7 +134,16 @@ abstract class CharFieldGui {
   }
   
   public void setEditManager(EditManager manager) {
+    this.editManager = manager;
     manager.addCharChangeListener(new FieldCharChangeListener());
+  }
+  
+  public EditManager getEditManager() {
+    if (this.editManager == null) {
+      return EditManager.inst();
+    } else {
+    return this.editManager;
+    }
   }
 
   protected void enableEditModel(boolean em) { editModel = em; }

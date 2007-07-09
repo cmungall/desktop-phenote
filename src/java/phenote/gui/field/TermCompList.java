@@ -1,21 +1,28 @@
 package phenote.gui.field;
 
-import org.apache.log4j.Logger;
-import org.geneontology.oboedit.datamodel.OBOClass;
-import phenote.datamodel.*;
-import phenote.edit.CompoundTransaction;
-import phenote.edit.EditManager;
-import phenote.gui.SearchParams;
-import phenote.gui.selection.SelectionManager;
-import phenote.gui.selection.UseTermEvent;
-import phenote.gui.selection.UseTermListener;
-
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import org.apache.log4j.Logger;
+import org.geneontology.oboedit.datamodel.OBOClass;
+
+import phenote.datamodel.CharField;
+import phenote.datamodel.CharacterI;
+import phenote.datamodel.Ontology;
+import phenote.datamodel.OntologyException;
+import phenote.datamodel.OntologyManager;
+import phenote.edit.CompoundTransaction;
+import phenote.edit.EditManager;
+import phenote.gui.selection.UseTermEvent;
+import phenote.gui.selection.UseTermListener;
 
 class TermCompList extends AbstractAutoCompList {
 
@@ -324,7 +331,8 @@ class TermCompList extends AbstractAutoCompList {
    */
   private class PostCompListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
-      new PostCompGui(getCharField());
+      final Frame frame = (Frame)(TermCompList.this.postCompButton.getTopLevelAncestor());
+      new PostCompGui(getCharField(), TermCompList.this.getEditManager(), TermCompList.this.getSelectionManager(), frame);
     }
   }
 
