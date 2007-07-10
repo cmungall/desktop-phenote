@@ -19,6 +19,7 @@ import org.geneontology.oboedit.datamodel.Link;
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.TermCategory;
 
+import phenote.dataadapter.AbstractFileAdapter;
 import phenote.dataadapter.DataAdapterI;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
@@ -31,16 +32,19 @@ import phenote.datamodel.CharacterListI;
  * There is no support for reading of NEXUS files.
 */
 
-public class NEXUSAdapter implements DataAdapterI {
+public class NEXUSAdapter extends AbstractFileAdapter {
   
   private File file;
   private static String[] extensions = {"nex", "nxs"};
+  private static String description =  "NEXUS [.nex, .nxs]";
   private static String GENOTYPE_KEY = "Genotype";
   private static String ENTITY_KEY = "Entity";
   private static String VALUE_KEY = "Quality";
   private static String STATE_SYMBOLS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   private LinkedHashMap<String, ArrayList<Integer>> genotypes; // ordered map of genotype names and value lists
   private LinkedHashMap<NEXUSCharacter, List<OBOClass>> nexusCharacters; // ordered map of character names and state lists
+
+  public NEXUSAdapter() { super(extensions,description); }
 
   
   public void commit(CharacterListI charList) {
@@ -57,10 +61,6 @@ public class NEXUSAdapter implements DataAdapterI {
   public void commit(CharacterListI charList, File f) {
     this.file = f;
     commit(charList);
-  }
-
-  public String getDescription() {
-    return "NEXUS [.nex, .nxs]";
   }
 
   public List<String> getExtensions() {

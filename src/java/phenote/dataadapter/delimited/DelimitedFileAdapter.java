@@ -15,6 +15,7 @@ import phenote.datamodel.CharacterListI;
 import phenote.datamodel.CharacterList;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.DataAdapterI;
+import phenote.dataadapter.AbstractFileAdapter;
 import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
 
 /** Originated with PhenoSyntaxFileAdapter and modified.  Writes the basic text to 
@@ -22,11 +23,17 @@ import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
  *  once.
  *  e.g. E=head Q=large */
 
-public class DelimitedFileAdapter implements DataAdapterI {
+public class DelimitedFileAdapter extends AbstractFileAdapter {
 
   private File previousFile;
   private File file;
   private static String[] extensions = {"tab", "xls"};
+  private static String desc = "Tab Delimited [.tab, .xls]";
+
+
+  public DelimitedFileAdapter() {
+    super(extensions,desc);
+  }
 
   /** command line setting of file */
   public void setAdapterValue(String filename) {
@@ -128,12 +135,20 @@ public class DelimitedFileAdapter implements DataAdapterI {
     commit(charList);
   }
   
-  public List<String> getExtensions() {
-    return Arrays.asList(extensions);
-  }
+//   public List<String> getExtensions() {
+//     return Arrays.asList(extensions);
+//   }
+
+  /** should both be in DataAdapterI convenience and in an AbstactDataAdapter?
+   */
+//   public boolean hasExtension(String ext) {
+//     for (String x : getExtensions())
+//       if (x.equals(ext)) return true;
+//     return false;
+//   }
   
-  public String getDescription() {
-    return "Tab Delimited [.tab, .xls]";
-  }
+//   public String getDescription() {
+//     return "Tab Delimited [.tab, .xls]";
+//   }
 
 }

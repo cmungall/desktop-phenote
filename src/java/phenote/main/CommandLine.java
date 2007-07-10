@@ -260,8 +260,14 @@ public class CommandLine {
   }
 
   private DataAdapterI getDataAdapterFromSuffix(String filename) throws AdapterEx {
+
+    // would be good to do this generically???
+    // from config?? (tried and had probs) or go through and find all data adaps?
+
     String suffix = getFileSuffix(filename);
-    // anything with game in it??
+    DataAdapterI tab = new phenote.dataadapter.delimited.DelimitedFileAdapter();
+    if (tab.hasExtension(suffix))
+      return tab;
     if (suffix.matches(".*syn.*|psx")) // ???
       return getDataAdapter(PHENOSYNTAX);
     if (suffix.matches(".*xml.*"))

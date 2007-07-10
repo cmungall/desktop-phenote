@@ -20,7 +20,9 @@ import phenote.dataadapter.CharacterListManager;
  data adapters sharing Syntax objects - PhenoSyntaxFileAdapter 
  and FlybaseProformaAdapter or something like that - todo... 
  this is really a serialized clipboard adapter at this point - i think
-flybase is going to be more tightly integrated */
+flybase is going to be more tightly integrated 
+This is pase and should probably be removed - 
+*/
 public class FlybaseDataAdapter implements DataAdapterI {
 
   private static ClipboardOwner clipboardOwner = new PhenoteClipboardOwner();
@@ -88,6 +90,7 @@ public class FlybaseDataAdapter implements DataAdapterI {
   public List<String> getExtensions() {
     return null;
   }
+  public boolean hasExtension(String s) { return false; }
   
   public String getDescription() {
     return "FlyBase adapter";

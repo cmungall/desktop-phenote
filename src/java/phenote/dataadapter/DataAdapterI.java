@@ -25,6 +25,7 @@ public interface DataAdapterI {
   public void setAdapterValue(String adapterValue);
   
   public List<String> getExtensions();
+  public boolean hasExtension(String ext);
   public String getDescription();
 
 }

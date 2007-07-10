@@ -35,6 +35,7 @@ import phenote.datamodel.CharFieldEnum; // ?
 import phenote.datamodel.CharFieldException;
 import phenote.datamodel.OntologyManager;
 import phenote.datamodel.TermNotFoundException;
+import phenote.dataadapter.AbstractFileAdapter;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.DataAdapterI;
 
@@ -43,17 +44,15 @@ import javax.swing.filechooser.FileFilter;
 
 
 
-public class PhenoXmlAdapter implements DataAdapterI {
+public class PhenoXmlAdapter extends AbstractFileAdapter {
 
   private Set<String> genotypesAlreadyAdded = new HashSet<String>(); 
   private File previousFile;
-  private File file;
+  //private File file;
   private static String[] extensions = {"pxml", "xml"};
+  private static final String description =  "PhenoXML [.pxml, .xml]";
 
-  /** command line setting of file */
-  public void setAdapterValue(String filename) {
-    file = new File(filename);
-  }
+  public PhenoXmlAdapter() { super(extensions,description); }
   
   public CharacterListI load(File f) {
     // this method temporarily duplicates code from load(), which will soon be removed
@@ -332,14 +331,6 @@ public class PhenoXmlAdapter implements DataAdapterI {
     provenance.setId(chr.getPub());
   }
   
-  public List<String> getExtensions() {
-    return Arrays.asList(extensions);
-  }
-  
-  public String getDescription() {
-    return "PhenoXML [.pxml, .xml]";
-  }
-
   private Logger log;
   private Logger log() {
     if (log == null) log = Logger.getLogger(getClass());

@@ -13,6 +13,7 @@ import java.util.Arrays;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
 import phenote.datamodel.CharacterList;
+import phenote.dataadapter.AbstractFileAdapter;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
@@ -26,17 +27,16 @@ import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
     QueryableDataAdapterI
 */
 
-public class PhenoSyntaxFileAdapter implements DataAdapterI {
+public class PhenoSyntaxFileAdapter extends AbstractFileAdapter {
 
   private File previousFile;
-  private File file;
+  //private File file;
   /** psx phenosyntax, syn syntax, tv tag-value, ptv phenotagvalue */
   private static String[] extensions = {"psx", "syn","tv","ptv","tagval"};
+  private static String description = "PhenoSyntax [.psx, .syn]";
 
-  /** command line setting of file */
-  public void setAdapterValue(String filename) {
-    file = new File(filename);
-  }
+  public PhenoSyntaxFileAdapter() { super(extensions,description); }
+
 
   /** this should return CharacterList and caller should load CharListMan
       or CLM makes the call itself? */
@@ -140,12 +140,4 @@ public class PhenoSyntaxFileAdapter implements DataAdapterI {
     commit(charList);
   }
   
-  public List<String> getExtensions() {
-    return Arrays.asList(extensions);
-  }
-  
-  public String getDescription() {
-    return "PhenoSyntax [.psx, .syn]";
-  }
-
 }

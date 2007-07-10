@@ -15,9 +15,12 @@ public class SplashScreen extends JWindow {
   JProgressBar progressBar = new JProgressBar();
 //  JTextArea messagePanel = new JTextArea();
   ImageIcon imageIcon;
+  private boolean enable = true;
 
   
-  public SplashScreen(ImageIcon imageIcon) {
+  public SplashScreen(ImageIcon imageIcon, boolean enable) {
+    this.enable = enable;
+    if (!enable) return;
     this.imageIcon = imageIcon;
     try {
       jbInit();
@@ -44,11 +47,13 @@ public class SplashScreen extends JWindow {
 
   public void setProgressMax(int maxProgress)
   {
+    if (!enable) return;
     progressBar.setMaximum(maxProgress);
   }
 
   public void setProgress(int progress)
   {
+    if (!enable) return;
     final int theProgress = progress;
     SwingUtilities.invokeLater(new Runnable() {
       public void run() {
@@ -59,6 +64,7 @@ public class SplashScreen extends JWindow {
 
   public void setProgress(String message, int progress)
   {
+    if (!enable) return;
     final int theProgress = progress;
     final String theMessage = message;
     setProgress(progress);

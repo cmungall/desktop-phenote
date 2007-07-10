@@ -73,7 +73,8 @@ public class Phenote {
       System.out.println("Failed to set to Java/Metal look & feel");
     }
     phenote = getPhenote();
-    phenote.splashScreenInit(); //initialize the splash screen;
+    boolean enableSplashScreen = phenote.commandLine.writeIsSpecified();
+    phenote.splashScreenInit(enableSplashScreen); //initialize the splash screen;
     phenote.doCommandLine(args); // does config
 
     //new phenote.gui.ConfigGui(); // testing out
@@ -96,8 +97,12 @@ public class Phenote {
     phenote.splashScreen.setProgress("Ontologies Initialized", 70);
     phenote.loadFromCommandLine();  // aft ontols, reads from cmd line if specified
     phenote.splashScreen.setProgress("Phenote Loaded", 100);
-    if (phenote.commandLine.writeIsSpecified())
+    if (phenote.commandLine.writeIsSpecified()) {
       phenote.writeFromCommandLine();
+      // it hangs after writing - not sure why
+      System.out.println("Done writing, exiting phenote");
+      System.exit(0);
+    }
     else	// init gui if not writing (& reading) from cmd line
     {
     	phenote.initGui();
@@ -152,9 +157,10 @@ public class Phenote {
     }
   }
 
-  private void splashScreenInit() {
+  private void splashScreenInit(boolean enable) {
     ImageIcon myImage = new ImageIcon(logoFile);
-    splashScreen = new SplashScreen(myImage);
+    splashScreen = new SplashScreen(myImage,enable);
+    if (!enable) return;
     splashScreen.setLocationRelativeTo(null);
     splashScreen.setProgressMax(100);
     splashScreen.setScreenVisible(true);

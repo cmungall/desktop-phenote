@@ -83,7 +83,7 @@ class HelpMenu extends JMenu {
   private void splashScreenInit() {
 	ImageIcon myImage = new ImageIcon(logoFile);
 	SplashScreenListener splashScreenListener = new SplashScreenListener();
-	splashScreen = new SplashScreen(myImage);
+	splashScreen = new SplashScreen(myImage,true); // true->enable
 	splashScreen.setLocationRelativeTo(null);
 //	splashScreen.setProgressMax(100);
 	splashScreen.setScreenVisible(true);
