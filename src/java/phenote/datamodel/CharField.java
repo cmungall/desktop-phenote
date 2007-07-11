@@ -164,6 +164,7 @@ public class CharField {
         
       }
       
+      // TERM not post comp
       else {
         for (Ontology ont : ontologyList) {
           try { oboClass = ont.getTerm(valueString); }
