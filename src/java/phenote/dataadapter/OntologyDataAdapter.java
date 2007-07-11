@@ -238,7 +238,10 @@ public class OntologyDataAdapter {
         // url may be jar/obo-files or svn/obo-files but this function will put file
         // in cache ~/.phenote/obo-files
         url = synchWithRepositoryUrl(url,reposUrl,ontCfg.getName(),filename);
-      } catch (/*MalfURL & Ontol*/Exception e) { LOG.error(e); }
+        //} catch (/*MalfURL & Ontol*/Exception e) { LOG.error(e); e.printStackTrace(); }
+      } catch (MalformedURLException m) {
+        LOG.error("URL is malformed "+m);
+      }
     }
  
     if (url == null) 
@@ -252,7 +255,8 @@ public class OntologyDataAdapter {
 
 
 
-  /** this copies obo file to local cache (~/.phenote/obo-files */
+  /** this copies obo file from reposUrl to local cache (~/.phenote/obo-files 
+   called by findOboUrl which has already established that the reposUrl exists */
   private URL synchWithRepositoryUrl(URL localUrl, URL reposUrl, String ontol,
                                      String filename)
     throws OntologyException {
@@ -262,18 +266,30 @@ public class OntologyDataAdapter {
       useRepos = true;
     }
     else {
-      long repos = getOboDate(reposUrl); // throws ex if no date
+      long reposDate = 0;
+      try {
+        getOboDate(reposUrl); // throws ex if no date
+      }
+      catch (OntologyException oe) { // no reposDate
+        LOG.error(oe); 
+        // already have local copy, no date to synch with, dont bother downloading from
+        // repos, there should probably be a config to override this (always download)
+        if (localUrl != null)
+          useRepos = false; 
+      }
       long loc = 0;
       int timer = cfg().getUpdateTimer();
       boolean autoUpdate = cfg().autoUpdateIsEnabled();
-      if (localUrl != null)
-        loc = getOboDate(localUrl); // throws ont ex
+      if (localUrl != null) {
+        try { loc = getOboDate(localUrl); }
+        catch (OntologyException e2) { loc = 0; } // no local date - keep as 0
+      }
       else
         useRepos = true;
       //if autoupdate without popup
-      if ((autoUpdate && (timer==0)) && (repos > loc)) {
+      if ((autoUpdate && (timer==0)) && (reposDate > loc)) {
     	useRepos = true;
-      } else if (repos > loc || useRepos) {
+      } else if (reposDate > loc || useRepos) {
         useRepos = synchDialog.queryUserForOntologyUpdate(ontol);
       }
     }
@@ -303,7 +319,8 @@ public class OntologyDataAdapter {
   
 
   /** Get the date of the file from the header of the obo file - just read header dont
-      read in whole file. should it also query urlConnection for date first? */
+      read in whole file. should it also query urlConnection for date first? 
+      throws OntologyException if unable to parse date DateEx?*/
   private long getOboDate(URL oboUrl) throws OntologyException {
     try {
       InputStream is = oboUrl.openStream();
@@ -311,6 +328,12 @@ public class OntologyDataAdapter {
       // just try first 15 lines? try til hit [Term]?
       for (int i=1; i<=15; i++) {
         String line = br.readLine();
+        if (i == 1 && line == null)
+          throw new OntologyException("readLine returns null, "+
+                                      "url seems to have no content "+oboUrl);
+        if (line == null)
+          throw new OntologyException("No date found in url "+oboUrl);
+          
         // eg date: 22:08:2006 15:38
         if (!line.startsWith("date:")) continue;
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd:MM:yyyy HH:mm");

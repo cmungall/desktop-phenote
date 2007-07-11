@@ -268,8 +268,11 @@ public class CommandLine {
     DataAdapterI tab = new phenote.dataadapter.delimited.DelimitedFileAdapter();
     if (tab.hasExtension(suffix))
       return tab;
-    if (suffix.matches(".*syn.*|psx")) // ???
-      return getDataAdapter(PHENOSYNTAX);
+    DataAdapterI tagVal = new phenote.dataadapter.phenosyntax.PhenoSyntaxFileAdapter();
+    if (tagVal.hasExtension(suffix))
+      return tagVal;
+    //if (suffix.matches(".*syn.*|psx")) // ???
+    //return getDataAdapter(PHENOSYNTAX);
     if (suffix.matches(".*xml.*"))
       return getDataAdapter(PHENOXML);
     // configuration can specify what to do with .xml suffix (game or chado)
