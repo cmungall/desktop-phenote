@@ -76,7 +76,7 @@ public class PhenoSyntaxChar {
    
   /** If a char field has ontologies it is not free text */
   private boolean isFreeText(CharField cf) {
-    return !cf.hasOntologies();
+    return cf.isFreeText();//!cf.hasOntologies();
   }
 
   // this may be more general than just this class
