@@ -42,14 +42,16 @@ public class FieldPanel extends JPanel {
   private static int fieldsPerTab = 12;
 
   public FieldPanel() {
-    this(true,false);
+    this(true,false); // false - no search panel - in menu now
   }
   // false for post comp panel - boolean isPostComp?
   public FieldPanel(boolean doAllFields,boolean addSearchPanel) {
     this(doAllFields, addSearchPanel, null, SelectionManager.inst(), EditManager.inst());
   }
   
-  public FieldPanel(boolean doAllFields, boolean addSearchPanel, String representedGroup, SelectionManager selectionManager, EditManager editManager) {
+  public FieldPanel(boolean doAllFields, boolean addSearchPanel,
+                    String representedGroup, SelectionManager selectionManager,
+                    EditManager editManager) {
     this.representedGroup = representedGroup;
     this.selectionManager = selectionManager;
     this.editManager = editManager;
@@ -221,7 +223,7 @@ public class FieldPanel extends JPanel {
     if (this.representedGroup != null) {
       return this.ontologyManager.getCharFieldListForGroup(this.representedGroup);
     } else {
-    return this.ontologyManager.getCharFieldList();
+      return this.ontologyManager.getCharFieldList();
     }
   }
 

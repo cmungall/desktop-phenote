@@ -2,6 +2,9 @@ package phenote.main;
 
 // package phenote.main?
 
+import java.util.ArrayList;
+import java.util.List;
+
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
@@ -14,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.metal.MetalLookAndFeel;
@@ -28,10 +32,12 @@ import phenote.config.xml.GroupDocument.Group;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.OntologyDataAdapter;
 import phenote.datamodel.CharacterListI;
+import phenote.edit.EditManager;
 import phenote.gui.CharacterTablePanel;
 import phenote.gui.GridBagUtil;
 import phenote.gui.MenuManager;
 import phenote.gui.SelectionHistory;
+import phenote.gui.selection.SelectionManager;
 import phenote.gui.SplashScreen;
 import phenote.gui.TermInfo;
 import phenote.gui.field.FieldPanel;
@@ -42,7 +48,7 @@ public class Phenote {
   private static boolean standalone = false; // default for servlet
 
   private CharacterTablePanel characterTablePanel;
-  private FieldPanel fieldPanel;
+  private FieldPanel mainFieldPanel;
   private static Phenote phenote;
   private TermInfo termInfo;
   private SelectionHistory selectionHistory;
@@ -145,17 +151,44 @@ public class Phenote {
   }
   
   public void initGui() {
-    makeWindow(); // ok this is silly
-    this.createGroupGuis();
+    makeMainWindow(); // ok this is silly
+    this.createGroupWindows();
   }
 
-  private void createGroupGuis() {
-    for (Group group : Config.inst().getFieldGroups()) {
+  private void createGroupWindows() {
+    for (Group group : getGroupsByContainer(Group.Container.WINDOW)) {
       if (group.getInterface().equals(Group.Interface.CHARACTER_TEMPLATE)) {
         new CharacterTemplateController(group.getName());
       }
     }
   }
+
+  /** do group guis specified for a tab(not window) - for tab in main window */
+  private void createGroupTabs() {
+    for (Group group : getGroupsByContainer(Group.Container.TAB)) {
+      
+    }
+
+  }
+
+  private boolean hasGroupTabs() {
+    return !getGroupTabs().isEmpty();
+  }
+
+  private List<Group> getGroupTabs() {
+    return getGroupsByContainer(Group.Container.TAB);
+  }
+
+  /** Get groups specifically designated for a container - window or tab */
+  private List<Group> getGroupsByContainer(Group.Container.Enum container) {
+    List<Group> l = new ArrayList<Group>();
+    for (Group group : Config.inst().getFieldGroups()) {
+      if (group.getContainer() == container) // only do tabs
+        l.add(group);
+    }
+    return l;
+  }
+
 
   private void splashScreenInit(boolean enable) {
     ImageIcon myImage = new ImageIcon(logoFile);
@@ -191,10 +224,20 @@ public class Phenote {
 
   public Frame getFrame() { return frame; }
 
-  private void makeWindow() {
+  private void makeMainWindow() {
     // this may be changed to applet...
     frame = new JFrame("Phenote "+PhenoteVersion.versionString()); 
-    frame.getContentPane().add(makeMainPanel());
+    if (!hasGroupTabs()) {
+      frame.getContentPane().add(makeGroupPanel(null));
+    }
+    else {
+      JTabbedPane tabbedGroups = new JTabbedPane();
+      for (Group g : getGroupTabs()) {
+        JPanel p = makeGroupPanel(g.getName());
+        tabbedGroups.add(g.getTitle(),p);
+      }
+      frame.getContentPane().add(tabbedGroups);
+    }
     MenuManager.createMenuManager(frame);
     frame.setPreferredSize(new Dimension(1220,800)); //1100,700));
     if (standalone) // if stand alone exit java on window close
@@ -240,7 +283,7 @@ public class Phenote {
 
   /** main panel contains FieldPanel CharTablePanel & TermInfo 
       move this to gui? */
-  private JPanel makeMainPanel() {
+  private JPanel makeGroupPanel(String group) {
     JPanel mainPanel = new JPanel(new GridBagLayout()); // ??
     
     JPanel upperPanel = new JPanel(new GridBagLayout());
@@ -249,8 +292,9 @@ public class Phenote {
     GridBagConstraints ugbc = GridBagUtil.makeFillingConstraint(0,0);
     ugbc.weightx = 1;
     
-    fieldPanel = new FieldPanel(); // field panel contains search params
-    upperPanel.add(fieldPanel,ugbc);
+    // need to do different selection & edit mgrs
+    mainFieldPanel = new FieldPanel(true,false,group,SelectionManager.inst(),EditManager.inst());
+    upperPanel.add(mainFieldPanel,ugbc);
 
     termInfo = new TermInfo();
     ugbc.gridx++;
@@ -325,7 +369,7 @@ public class Phenote {
     return phenote;
   }
   // These methods are actually for TestPhenote
-  public FieldPanel getFieldPanel() { return fieldPanel; }
+  public FieldPanel getFieldPanel() { return mainFieldPanel; }
   public TermInfo getTermInfo() { return termInfo; }
   public CharacterTablePanel getCharacterTablePanel() { return characterTablePanel; }
 
