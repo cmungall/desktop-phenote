@@ -215,7 +215,7 @@ class FreeTextField extends CharFieldGui {
     String v = getText();
     //CompoundTransaction ct = new CompoundTransaction(chars,getCharFieldEnum(),v);
     CompoundTransaction ct = CompoundTransaction.makeUpdate(chars,getCharField(),v);
-    EditManager.inst().updateModel(this,ct);//charFieldGui,ct); // cfg source
+    this.getEditManager().updateModel(this,ct);//charFieldGui,ct); // cfg source
     guiTextHasChanged = false; // reset flag
 
   }

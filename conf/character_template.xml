@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<panel size="1024,700" minimumSize="1024,700" layout="BorderLayout">
+	<hbox constraints="BorderLayout.NORTH">
+		<panel id="charFieldPanelContainer" border="EmptyBorder(10,10,10,10)" layout="BorderLayout">
+		</panel>
+		<panel id="termInfoPanelContainer" border="EmptyBorder(10,10,10,10)" layout="BorderLayout">
+		</panel>
+	</hbox>
+	<vbox constraints="BorderLayout.CENTER" border="EmptyBorder(10,10,10,10)">
+	    <scrollpane>
+	        <table id="characterTemplateTable"/>
+	    </scrollpane>
+	    <glue/>
+	    <panel id="buttonPanel">
+	        <button id="addButton" text="Add Template" action="addNewCharacter"/>
+	        <button id="invertSelectionButton" text="Invert Selection" action="invertSelectedCharacters"/>
+	        <button id="generateButton" text="Generate Characters" action="generateCharacters"/>
+	    </panel>
+	</vbox>
+</panel>

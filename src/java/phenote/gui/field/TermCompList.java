@@ -198,7 +198,7 @@ class TermCompList extends AbstractAutoCompList {
     // isDifferentia boolean?
     //CompoundTransaction ct = new CompoundTransaction(chars,cfe,oboClass);
     CompoundTransaction ct = CompoundTransaction.makeUpdate(chars, getCharField(), oboClass);
-    EditManager.inst().updateModel(this, ct);
+    this.getEditManager().updateModel(this, ct);
   }
 
   private List<CharacterI> getSelectedChars() {

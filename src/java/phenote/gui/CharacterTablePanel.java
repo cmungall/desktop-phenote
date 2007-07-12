@@ -41,6 +41,8 @@ import phenote.datamodel.CharacterListI;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
+import phenote.gui.selection.CharSelectionEvent;
+import phenote.gui.selection.CharSelectionListener;
 import phenote.gui.selection.SelectionManager;
 
   /** Character panel has character table and del add copy buttons to manipulate
@@ -155,6 +157,7 @@ public class CharacterTablePanel extends JPanel {
 
     this.editManager.addCharChangeListener(new TableCharChangeListener());
     getCharListManager().addCharListChangeListener(new TableCharListChangeListener());
+    this.selectionManager.addCharSelectionListener(new SelectionManagerListener());
   }
 
   private void setColumns() {
@@ -563,6 +566,25 @@ public class CharacterTablePanel extends JPanel {
 //    			JOptionPane.INFORMATION_MESSAGE);
 //  		e.consume();
   	}
+  }
+  
+  private class SelectionManagerListener implements CharSelectionListener {
+
+    public void charactersSelected(CharSelectionEvent e) {
+      if (e.getSource() != CharacterTablePanel.this) {
+        final CharacterListI allCharacters = CharacterTablePanel.this.getCharacterList();
+        int startIndex = allCharacters.size() - 1;
+        int stopIndex = 0;
+        List<CharacterI> selectedCharacters = e.getChars();
+        if (selectedCharacters.isEmpty()) return;
+        for (CharacterI character : selectedCharacters) {
+          final int characterIndex = allCharacters.indexOf(character);
+          if (characterIndex < startIndex) startIndex = characterIndex;
+          if (characterIndex > stopIndex) stopIndex = characterIndex;
+        }
+        CharacterTablePanel.this.selectRows(new RowInterval(startIndex, stopIndex));
+      }
+    }
   }
 
   // for test

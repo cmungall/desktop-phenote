@@ -107,12 +107,12 @@ public class EditManager {
     //addTransaction(at);
   }
 
-  public void addCharacter(Character c) {
+  public void addCharacter(CharacterI c) {
     addCharacter(c,true);
   }
 
   // fire char change event???
-  private void addCharacter(Character c, boolean recordTrans) {
+  private void addCharacter(CharacterI c, boolean recordTrans) {
     AddTransaction at = new AddTransaction(c, this.characterListManager);
     at.editModel();
     if (recordTrans) addTransaction(at);

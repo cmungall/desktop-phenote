@@ -59,9 +59,17 @@ public class SelectionHistory {
   private OBOClass currentOboClass;
   private TermInfo termInfo;
   public boolean isInitialized = false;
+  private EditManager editManager;
+  private SelectionManager selectionManager;
 
-  private SelectionHistory() { //TermPanel termPanel) {
-	    EditManager.inst().addCharChangeListener(new HistorySelectionListener());
+  public SelectionHistory() {
+    this(EditManager.inst(), SelectionManager.inst());
+  }
+  
+  private SelectionHistory(EditManager eManager, SelectionManager selManager) { //TermPanel termPanel) {
+    this.editManager = eManager;
+    this.selectionManager = selManager;
+    this.editManager.addCharChangeListener(new HistorySelectionListener());
 	  }
   
   private static SelectionHistory singleton = new SelectionHistory();
@@ -151,11 +159,11 @@ public class SelectionHistory {
   //need to make sure this is also recording the "use term" events
   
   private SelectionManager getSelectionManager() {
-	    return SelectionManager.inst();
+    return this.selectionManager;
 	  }
   
   private EditManager getEditManager() {
-	return EditManager.inst();
+    return this.editManager;
   }
 
 private class HistorySelectionListener implements CharChangeListener {

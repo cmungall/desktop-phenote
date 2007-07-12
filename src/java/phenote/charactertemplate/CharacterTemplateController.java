@@ -1,19 +1,24 @@
 package phenote.charactertemplate;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+
+import org.apache.log4j.Logger;
+import org.swixml.SwingEngine;
 
 import phenote.config.Config;
 import phenote.dataadapter.CharacterListManager;
+import phenote.datamodel.CharacterI;
 import phenote.edit.EditManager;
-import phenote.gui.CharacterTablePanel;
-import phenote.gui.GridBagUtil;
 import phenote.gui.MenuManager;
 import phenote.gui.TermInfo;
 import phenote.gui.field.FieldPanel;
@@ -22,33 +27,60 @@ import phenote.gui.selection.SelectionManager;
 public class CharacterTemplateController implements ActionListener {
 
   public static final String SHOW_CHARACTER_TEMPLATE_ACTION = "showCharacterTemplate";
-  private final String groupName;
+  private final String representedGroup;
   private CharacterListManager characterListManager;
   private EditManager editManager;
-  private SelectionManager selectionManager; 
+  private SelectionManager selectionManager;
+  private CharacterTemplateTableModel tableModel;
   private JFrame window;
+  private JPanel charFieldPanelContainer; // initialized by swix
+  private JPanel termInfoPanelContainer; // initialized by swix
+  private JTable characterTemplateTable; // initialized by swix
   
   public CharacterTemplateController(String groupName) {
     super();
+    this.representedGroup = groupName;
     this.characterListManager = new CharacterListManager();
     this.editManager = new EditManager(this.characterListManager);
     this.selectionManager = new SelectionManager();
-    this.groupName = groupName;
+    this.tableModel = new CharacterTemplateTableModel(this.representedGroup, this.characterListManager, this.editManager);
+    this.editManager.addInitialCharacter();
+    this.selectionManager.selectCharacters(this, this.characterListManager.getCharacterList().getList());
     this.createMenu();
   }
 
   public void actionPerformed(ActionEvent event) {
-    if (event.getActionCommand().equals(CharacterTemplateController.SHOW_CHARACTER_TEMPLATE_ACTION)) {
+    final String actionCommand = event.getActionCommand();
+    if (actionCommand.equals(CharacterTemplateController.SHOW_CHARACTER_TEMPLATE_ACTION)) {
       this.showCharacterTemplate();
-    }
+    } 
   }
   
   public void showCharacterTemplate() {
     this.getWindow().setVisible(true);
   }
   
+  public void addNewCharacter() {
+    this.editManager.addNewCharacter();
+  }
+  
+  public void invertSelectedCharacters() {
+    this.tableModel.invertCharacterSelection();
+  }
+  
+  public void generateCharacters() {
+    final List<CharacterI> templates = this.tableModel.getSelectedCharacters();
+    final List<CharacterI> newCharacters = new ArrayList<CharacterI>();
+    for (CharacterI character : templates) {
+      final CharacterI newCharacter = character.cloneCharacter();
+      EditManager.inst().addCharacter(newCharacter);
+      newCharacters.add(newCharacter);
+    }
+    SelectionManager.inst().selectCharacters(this, newCharacters);
+  }
+  
   private String getGroupTitle() {
-    return Config.inst().getTitleForGroup(this.groupName);
+    return Config.inst().getTitleForGroup(this.representedGroup);
   }
 
   private void createMenu() {
@@ -61,34 +93,32 @@ public class CharacterTemplateController implements ActionListener {
   private JFrame getWindow() {
     if (this.window == null) {
       this.window = new JFrame(this.getGroupTitle());
-      this.window.getContentPane().add(this.createPanel());
+      final JPanel panel = this.createPanel();
+      this.window.getContentPane().add(panel);
+      this.window.setSize(panel.getSize());
     }
     return this.window;
   }
   
   private JPanel createPanel() {
-    JPanel panel = new JPanel(new GridBagLayout());
-    JPanel upperPanel = new JPanel(new GridBagLayout());
-    
-    FieldPanel fieldPanel = new FieldPanel(true, false, this.groupName, this.selectionManager, this.editManager);
-    GridBagConstraints upperPanelConstraints = GridBagUtil.makeFillingConstraint(0,0);
-    upperPanelConstraints.weightx = 1;
-    upperPanel.add(fieldPanel, upperPanelConstraints);
-    
-    TermInfo termInfo = new TermInfo(this.selectionManager);
-    upperPanelConstraints.gridx++;
-    upperPanelConstraints.weightx = 5;
-    upperPanel.add(termInfo.getComponent(), upperPanelConstraints);
-    
-    GridBagConstraints gridBagConstraints = GridBagUtil.makeFillingConstraint(0,0);
-    gridBagConstraints.weighty = 1;
-    panel.add(upperPanel, gridBagConstraints);
-    
-    JPanel tablePanel = new CharacterTablePanel(this.characterListManager, this.editManager, this.selectionManager);
-    gridBagConstraints.gridy++;
-    gridBagConstraints.weighty = 10;
-    panel.add(tablePanel, gridBagConstraints);
-    return panel;
+    SwingEngine swix = new SwingEngine(this);
+    try {
+      JPanel panel = (JPanel)swix.render(new File("conf/character_template.xml"));
+      this.characterTemplateTable.setModel(this.tableModel);
+      this.characterTemplateTable.setSelectionModel(new SelectionManagerListSelectionModel(this.characterListManager, this.editManager, this.selectionManager));  
+      FieldPanel fieldPanel = new FieldPanel(true, false, this.representedGroup, this.selectionManager, this.editManager);
+      this.charFieldPanelContainer.add(fieldPanel, BorderLayout.NORTH);
+      TermInfo termInfo = new TermInfo(this.selectionManager);
+      this.termInfoPanelContainer.add(termInfo.getComponent());
+      return panel;
+    } catch (Exception e) {
+      this.getLogger().error("Unable to render interface", e);
+      return new JPanel();
+    }
+  }
+  
+  private Logger getLogger() {
+    return Logger.getLogger(this.getClass());
   }
   
 }
