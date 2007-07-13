@@ -458,39 +458,6 @@ public class OntologyDataAdapter {
     LOG.debug(m+" number of seconds: "+seconds);
   }
 
-  // pase - phase out
-  private void initOntolsSeparateOboSessions() {
-    // getFieldConfigList gives enabled fields - not disabled
-    for (FieldConfig fieldConfig : cfg().getEnbldFieldCfgs()) {
-      if (!fieldConfig.isEnabled()) continue; // not necasary actually
-      CharField cf = new CharField(fieldConfig.getLabel(),fieldConfig.getDataTag());
-      fieldConfig.setCharField(cf);
-
-      // ONTOLOGIES
-      if (fieldConfig.hasOntologies()) {
-        for (OntologyConfig oc : fieldConfig.getOntologyConfigList()) {
-          try {
-            Ontology o = initOntology(oc); // LOAD OBO SESSION
-            if (oc.isPostCompRel()) { // POST COMP REL ONTOLOGY
-              cf.setPostCompAllowed(true);
-              cf.setPostCompRelOntol(o);
-            }
-            else { // REGULAR ONTOLOGY
-              cf.addOntology(o);
-            }
-          } catch (OntologyException e) {
-            LOG.error(e.getMessage()+" ignoring init ontology, fix config? "+oc);
-          }
-        }
-      }
-      else {
-
-        cf.setName(fieldConfig.getLabel());
-      }
-      // i think this order needs to be same as config order
-      ontologyManager.addField(cf);
-    }
-  }
 
   /** Load up/cache Sets for all ontologies used, anatomyOntologyTermSet
    * and patoOntologyTermSet -- move to dataadapter/OntologyDataAdapter... 
@@ -586,6 +553,39 @@ public class OntologyDataAdapter {
     }
   }
 
+  // pase - phase out
+  private void initOntolsSeparateOboSessions() {
+    // getFieldConfigList gives enabled fields - not disabled
+    for (FieldConfig fieldConfig : cfg().getEnbldFieldCfgs()) {
+      if (!fieldConfig.isEnabled()) continue; // not necasary actually
+      CharField cf = new CharField(fieldConfig.getLabel(),fieldConfig.getDataTag());
+      fieldConfig.setCharField(cf);
+
+      // ONTOLOGIES
+      if (fieldConfig.hasOntologies()) {
+        for (OntologyConfig oc : fieldConfig.getOntologyConfigList()) {
+          try {
+            Ontology o = initOntology(oc); // LOAD OBO SESSION
+            if (oc.isPostCompRel()) { // POST COMP REL ONTOLOGY
+              cf.setPostCompAllowed(true);
+              cf.setPostCompRelOntol(o);
+            }
+            else { // REGULAR ONTOLOGY
+              cf.addOntology(o);
+            }
+          } catch (OntologyException e) {
+            LOG.error(e.getMessage()+" ignoring init ontology, fix config? "+oc);
+          }
+        }
+      }
+      else {
+
+        cf.setName(fieldConfig.getLabel());
+      }
+      // i think this order needs to be same as config order
+      ontologyManager.addField(cf);
+    }
+  }
 
 //   private void loadRelationshipOntology() { hmmmmmm
 //     // for now - todo configure! post comp relationship-ontology

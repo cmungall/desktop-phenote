@@ -14,20 +14,19 @@ import phenote.config.Config;
 //import phenote.datamodel.CharFieldEnum;
 //import phenote.datamodel.OboUtil;
 
-/** Manages all of the ontologies. Eventually will get config info (xml? OntologyConfig?)
-    and set itself up from that. Should there be an ontology package - whats funny
+/** Manages all of the ontologies. Should there be an ontology package - whats funny
     is that ontologies have obo filenames that they parse so they are sort of
     data adapterish 
-    actually manages CharFields(which may have ontologies) - rename CharFieldManager?*/
+    actually manages CharFields(which may have ontologies) - rename CharFieldManager? yes!
+    gets initialized by OntologyDataAdapter which loops through FieldConfigs and passes
+    CharFields to OntMan */
 public class OntologyManager {
 
 
   private static OntologyManager singleton;
-  // isnt this redundant with charFieldList? convenience? - phase out! just getOClass
-  //private List<Ontology> allOntologyList = new ArrayList<Ontology>();
-  /** CharFields generically hold one or more ontologies - are charFields that dont
-   have ontologies in this list?? not sure */
-  private List<CharField> charFieldList = new ArrayList<CharField>(6);
+  /** CharFields generically hold zero or more ontologies - are charFields that dont
+   have ontologies in this list?? yes */
+  private List<CharField> charFieldList = new ArrayList<CharField>();
 
 
   /** Singleton */
@@ -41,7 +40,6 @@ public class OntologyManager {
 
   /** OntologyDataAdapter adds fields */
   public void addField(CharField cf) {
-    //addOntologyList(cf.getOntologyList());
     charFieldList.add(cf);
   }
 
@@ -54,11 +52,23 @@ public class OntologyManager {
     return charFieldList.get(i);
   }
 
+  public CharField getCharField(int i, String group) throws OntologyException {
+    if (i<0) throw new OntologyException("error, asking for negative char field"); 
+    if (i >= getNumberOfFields(group))
+      throw new OntologyException("number "+i+" char field does not exist");
+    return getCharFieldListForGroup(group).get(i);
+  }
+
+
   /** This is where the ontologies are in a generic fashion. A char field
       has one or more ontologies (entity char field often has more than ontology)*/
   public List<CharField> getCharFieldList() { return charFieldList; }
   public int getNumberOfFields() { return charFieldList.size(); }
+  private int getNumberOfFields(String group) {
+    return getCharFieldListForGroup(group).size();
+  }
   
+  /** should this be stored as a data structure? */
   public List<CharField> getCharFieldListForGroup(String groupName) {
     List<CharField> charFields = new ArrayList<CharField>();
     final List<String> fieldNames = Config.inst().getFieldsInGroup(groupName); 

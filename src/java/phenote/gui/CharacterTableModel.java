@@ -164,22 +164,11 @@ class CharacterTableModel extends AbstractTableModel {
       log().error("character is null for row "+row+" in table");
       return null;
     }
-//    if (cfg().getCharFieldEnum(col) == null) {
-    // for now - eventually get from char not config
-//     if (!cfg().hasCharField(col)) {
-//       log().error("column "+col+" not configured properly in "+
-//                          "character table, cant retrieve value ");
-//       return null;
-//     }
-    //return cfg().getCharFieldEnum(col).getValue(chr).getName();
-    // CF = chr.getCharField(col); - yes! hard w hardwired optional model items
-    // return chr.getValue(col).getName(); // ???
     try {
-      CharField cf = OntologyManager.inst().getCharField(col);
+      CharField cf = OntologyManager.inst().getCharField(col,group);
       if (!chr.hasValue(cf))
         return null;
       return chr.getValue(cf);
-      //      return chr.getValue(cf).getName();
     } 
     catch (Exception e) {
       log().error("column "+col+" not configured properly in "+
@@ -188,11 +177,6 @@ class CharacterTableModel extends AbstractTableModel {
       return null;
     }
   }
-
-//   private CharFieldEnum getCharFieldEnum(int col) {
-//     return config.getCharFieldEnum(col);
-//   }
-
     
   public boolean isCellEditable(int r, int c) {
     return false;
@@ -220,3 +204,17 @@ class RowInterval {
   int endRow;
 }
 
+//   private CharFieldEnum getCharFieldEnum(int col) {
+//     return config.getCharFieldEnum(col);
+//   }
+
+//    if (cfg().getCharFieldEnum(col) == null) {
+    // for now - eventually get from char not config
+//     if (!cfg().hasCharField(col)) {
+//       log().error("column "+col+" not configured properly in "+
+//                          "character table, cant retrieve value ");
+//       return null;
+//     }
+    //return cfg().getCharFieldEnum(col).getValue(chr).getName();
+    // CF = chr.getCharField(col); - yes! hard w hardwired optional model items
+    // return chr.getValue(col).getName(); // ???
