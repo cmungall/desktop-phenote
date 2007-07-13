@@ -1,26 +1,23 @@
 package phenote.gui.field;
 
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.List;
-import java.util.Vector;
-import javax.swing.ComboBoxEditor;
+
+import javax.accessibility.Accessible;
+import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListDataListener;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.text.Document;
 import javax.swing.plaf.basic.BasicComboBoxEditor;
-import javax.swing.plaf.ComboBoxUI;
-import javax.swing.plaf.metal.MetalComboBoxUI;
+import javax.swing.plaf.basic.ComboPopup;
+import javax.swing.text.Document;
 
 import org.apache.log4j.Logger;
 
@@ -49,9 +46,6 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   }
 
   private void init() {
-    // this inner class enables retrieving of JList for mouse over
-    // this will probably throw errors if non metal look & feel is used
-    jComboBox.setUI(new MetalListComboUI());
     jComboBox.setEditable(true);
     jComboBox.setPreferredSize(CharFieldGui.inputSize); //new Dimension(390,20));
     AutoTextFieldEditor autoTextFieldEditor = new AutoTextFieldEditor();
@@ -257,16 +251,14 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     return getUIJList() != null;
   }
 
-  /** This may return null if not using Metal/Java UI/Look & Feel as JList comes
-      from the UI - need to implement getting JList from each UI I guess */
   protected JList getUIJList() {
-    ComboBoxUI comboBoxUI = jComboBox.getUI();
-    if (!(comboBoxUI instanceof MetalListComboUI)) {
-      System.out.println("Cant retrieve JList for look & feel, cant do mouse overs "
-                         +comboBoxUI.getClass());
+    Accessible popup = jComboBox.getAccessibleContext().getAccessibleChild(0);
+    if (!(popup instanceof ComboPopup)) {
+      this.log().error("Can't retrieve popup from combobox; can't do mouse overs - found instead " + popup.getClass());
       return null;
+    } else {
+      return ((ComboPopup)popup).getList();
     }
-    return ((MetalListComboUI)comboBoxUI).getJList();
   }
 
   // for TestPhenote
@@ -275,12 +267,6 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     if (!canGetUIJList()) return;
     JList jList = getUIJList();
     jList.setSelectedIndex(itemNumber);
-  }
-
-  private class MetalListComboUI extends MetalComboBoxUI {
-    private JList getJList() {
-      return listBox; // protected JList in BasicComboBoxUI
-    }
   }
 
 
