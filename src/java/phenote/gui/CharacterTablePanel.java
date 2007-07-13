@@ -74,6 +74,7 @@ public class CharacterTablePanel extends JPanel {
   private CharacterListManager characterListManager;
   private EditManager editManager;
   private SelectionManager selectionManager;
+  private String group = "default";
   
   //private int selectedRow;
   // get from file menu?
@@ -81,17 +82,17 @@ public class CharacterTablePanel extends JPanel {
   // the idea of "sandbox" is that it doesnt go to db til you save/commit
   private boolean SANDBOX_MODE = true; // get from config...
 
-  public CharacterTablePanel() { //TermPanel tp) {
-    //fieldPanel = tp;
-    this(CharacterListManager.inst(), EditManager.inst(), SelectionManager.inst());
+  public CharacterTablePanel(String group) {
+    this(group,CharacterListManager.inst(),EditManager.inst(),SelectionManager.inst());
   }
   
-  public CharacterTablePanel(CharacterListManager clManager, EditManager eManager, SelectionManager selManager) {
+  public CharacterTablePanel(String group, CharacterListManager clManager, EditManager eManager, SelectionManager selManager) {
     super();
+    if (group != null) this.group = group;
     this.characterListManager = clManager;
     this.editManager = eManager;
     this.selectionManager = selManager;
-    this.characterTableModel = new CharacterTableModel(this.characterListManager, this.editManager);
+    this.characterTableModel = new CharacterTableModel(group,this.characterListManager, this.editManager);
     this.charJTable = new JTable(this.characterTableModel);
     init();
   }

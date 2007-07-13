@@ -324,7 +324,7 @@ public class Phenote {
     gbc.weighty = 1;
     mainPanel.add(upperPanel,gbc);
 
-    characterTablePanel = new CharacterTablePanel();
+    characterTablePanel = new CharacterTablePanel(group);
     //termAndTablePanel.add(characterTablePanel);
     ++gbc.gridy; // ?
     gbc.weighty = 10;

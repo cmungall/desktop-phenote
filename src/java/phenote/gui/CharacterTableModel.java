@@ -25,9 +25,12 @@ class CharacterTableModel extends AbstractTableModel {
   private CharacterListI characterList;// = new CharacterList();
   private CharacterListManager characterListManager;
   private EditManager editManager;
+  private String group = "default";
   //private Config config = Config.inst(); cant cache - may change!
 
-  CharacterTableModel(CharacterListManager clManager, EditManager eManager) {
+  CharacterTableModel(String group, CharacterListManager clManager,
+                      EditManager eManager) {
+    if (group != null) this.group = group;
     this.characterList = clManager.getCharacterList();
     this.characterListManager = clManager;
     this.editManager = eManager;
@@ -38,9 +41,9 @@ class CharacterTableModel extends AbstractTableModel {
     //EditManager.inst().addCharChangeListener(new TableCharChangeListener());
   }
   
-  public CharacterTableModel() {
-    this(CharacterListManager.inst(), EditManager.inst());
-  }
+//   public CharacterTableModel() {
+//     this(null,CharacterListManager.inst(), EditManager.inst());
+//   }
 
   private Config cfg() { return Config.inst(); }
 
@@ -70,7 +73,7 @@ class CharacterTableModel extends AbstractTableModel {
   }
 
   public String getColumnName(int col) {
-    return cfg().getFieldLabel(col);
+    return cfg().getFieldLabel(col,group);
   }
   
   public int getColwidth(int col) {
@@ -78,7 +81,7 @@ class CharacterTableModel extends AbstractTableModel {
   }
 
   public int getColumnCount() {
-    return cfg().getEnbldFieldsNum();
+    return cfg().getEnbldFieldsNum(group);
   }
 
   public int getRowCount() {

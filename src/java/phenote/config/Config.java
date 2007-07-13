@@ -702,9 +702,17 @@ public class Config {
     return getEnbldFieldCfgs().size();
   }
 
+  public int getEnbldFieldsNum(String group) {
+    return getFieldCfgsInGroup(group).size();
+  }
+
   /** Gives name of field at index, 0 based (for table heading) */
-  public String getFieldLabel(int index) {
-    return getEnbldFieldCfg(index).getLabel();
+  public String getFieldLabel(int index,String group) {
+    if (getEnbldFieldCfg(index,group)==null) {
+      System.out.println("ERROR: no field for col "+index+" group "+group);
+      return null; // ? ex? ""?
+    }
+    return getEnbldFieldCfg(index,group).getLabel();
   }
   
   public int getFieldColwidth(int index) {
@@ -732,6 +740,11 @@ public class Config {
   private FieldConfig getEnbldFieldCfg(int index) {
     if (index >= getEnbldFieldsNum()) return null;
     return getEnbldFieldCfgs().get(index);
+  }
+
+  private FieldConfig getEnbldFieldCfg(int index,String group) {
+    if (index >= getEnbldFieldsNum(group)) return null;
+    return getFieldCfgsInGroup(group).get(index);
   }
 
   /** OntologyDataAdapter calls this to figure which ontologies to load
@@ -1076,8 +1089,23 @@ public class Config {
           }
         }
       }
+      // if we are looking for default group and field hasnt specified group
+      // then field goes into default group
+      else if (groups == null && groupName.equals("default")) {
+        fields.add(aField.getName());
+      }
     }
     return fields;
+  }
+
+  /** get enabled field configs for a group - or should we just use Field? */
+  private List<FieldConfig> getFieldCfgsInGroup(String group) {
+    List<FieldConfig> fCfgs = new ArrayList<FieldConfig>();
+    for (FieldConfig fc : getEnbldFieldCfgs()) {
+      if (fc.inGroup(group))
+        fCfgs.add(fc);
+    }
+    return fCfgs;
   }
   
   public String getTitleForGroup(String groupName) {

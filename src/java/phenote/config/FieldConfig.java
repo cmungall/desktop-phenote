@@ -244,6 +244,13 @@ public class FieldConfig {
   }
   boolean hasCharField(CharField cf) { return charField == cf; }
 
+  boolean inGroup(String group) {
+    List<String> l = fieldBean.getGroups();
+    if (group == null && l == null) return true;
+    if (group == null && l.contains("default")) return true;
+    if (l == null) return group.equals("default");
+    return l.contains(group);
+  }
 
   void mergeWithOldConfig(Config oldConfig,Config thisCfg) { // should FC know its Cfg?
     // ADD - 1st see if field is new - if so add it and done
