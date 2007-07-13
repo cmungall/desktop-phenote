@@ -26,7 +26,7 @@ public class DataInputServer {
 
   protected final static Logger logger = LogManager.getLogger(DataInputServer.class);
 
-  private static final int DEFAULT_SERVER_PORT = 8085; // igb is 7085
+  private static final int DEFAULT_SERVER_PORT = 8080; // igb is 7085
   private static final String SERVLET_NAME = "phenote";
   
   public DataInputServer() {
