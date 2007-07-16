@@ -23,6 +23,7 @@ import phenote.gui.MenuManager;
 import phenote.gui.TermInfo;
 import phenote.gui.field.FieldPanel;
 import phenote.gui.selection.SelectionManager;
+import phenote.main.Phenote;
 
 public class CharacterTemplateController implements ActionListener {
 
@@ -64,12 +65,24 @@ public class CharacterTemplateController implements ActionListener {
     this.editManager.addNewCharacter();
   }
   
-  public void invertSelectedCharacters() {
-    this.tableModel.invertCharacterSelection();
+  public void deleteSelectedCharacters() {
+    this.editManager.deleteChars(this.selectionManager.getSelectedChars());
+  }
+  
+  public void duplicateSelectedCharacters() {
+    this.editManager.copyChars(this.selectionManager.getSelectedChars());
+  }
+  
+  public void undo() {
+    this.editManager.undo();
+  }
+  
+  public void invertMarkedCharacters() {
+    this.tableModel.invertCharacterMarks();
   }
   
   public void generateCharacters() {
-    final List<CharacterI> templates = this.tableModel.getSelectedCharacters();
+    final List<CharacterI> templates = this.tableModel.getMarkedCharacters();
     final List<CharacterI> newCharacters = new ArrayList<CharacterI>();
     for (CharacterI character : templates) {
       final CharacterI newCharacter = character.cloneCharacter();
@@ -77,6 +90,7 @@ public class CharacterTemplateController implements ActionListener {
       newCharacters.add(newCharacter);
     }
     SelectionManager.inst().selectCharacters(this, newCharacters);
+    Phenote.getPhenote().getFrame().toFront();
   }
   
   private String getGroupTitle() {

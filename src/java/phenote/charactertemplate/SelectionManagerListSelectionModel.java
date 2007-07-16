@@ -38,8 +38,8 @@ public class SelectionManagerListSelectionModel extends DefaultListSelectionMode
 
   public void charChanged(CharChangeEvent e) {
     if (e.isAdd()) {
-      this.setSelectionInterval(this.getCharacterCount() - 1, this.getCharacterCount() - 1);
-    }
+      this.setSelectionInterval(e.getTransaction().getCharacters());
+    } 
   }
 
   public void setSelectionInterval(int index0, int index1) {
@@ -48,6 +48,22 @@ public class SelectionManagerListSelectionModel extends DefaultListSelectionMode
     final int secondIndex = index0 > index1 ? index0 : index1;
     final List<CharacterI> selectedCharacters = this.characterListManager.getCharacterList().getList().subList(firstIndex, secondIndex + 1);
     this.selectionManager.selectCharacters(this, new ArrayList<CharacterI>(selectedCharacters));
+  }
+  
+  public void clearSelection() {
+    // only clear the selection if there are no characters
+    if (this.getCharacterCount() == 0) {
+      super.clearSelection();
+      return;
+    }
+    // otherwise select a character
+    final int selectedIndex = this.getMinSelectionIndex();
+    if (selectedIndex > -1) {
+      final int maximumSelectedIndex = selectedIndex < this.getCharacterCount() ? selectedIndex : (this.getCharacterCount() - 1);
+      this.setSelectionInterval(maximumSelectedIndex, maximumSelectedIndex);
+    } else {
+      this.setSelectionInterval(0, 0);
+    }
   }
   
   public void charactersSelected(CharSelectionEvent e) {

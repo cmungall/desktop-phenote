@@ -23,8 +23,8 @@ public class CharacterTemplateTableModel extends AbstractTableModel implements C
   private String representedGroup;
   private CharacterListManager characterListManager;
   private EditManager editManager;
-  private Set<CharacterI> selectedCharacters;
-  private static final String SELECTED_COLUMN_NAME = "Selected";
+  private Set<CharacterI> markedCharacters;
+  private static final String SELECTED_COLUMN_NAME = "Use";
 
   public CharacterTemplateTableModel(String groupName, CharacterListManager clManager, EditManager eManager) {
     super();
@@ -32,37 +32,37 @@ public class CharacterTemplateTableModel extends AbstractTableModel implements C
     this.characterListManager = clManager;
     this.editManager = eManager;
     this.editManager.addCharChangeListener(this);
-    this.selectedCharacters = new HashSet<CharacterI>();
+    this.markedCharacters = new HashSet<CharacterI>();
   }
   
-  public List<CharacterI> getSelectedCharacters() {
+  public List<CharacterI> getMarkedCharacters() {
     // make a list to make sure the characters are in the same order as they are in the main character list
     List<CharacterI> characters = new ArrayList<CharacterI>();
     for (CharacterI character : this.getAllCharacters()) {
-      if (this.isCharacterSelected(character)){
+      if (this.isCharacterMarked(character)){
         characters.add(character);
       }
     }
     return characters;
   }
   
-  public boolean isCharacterSelected(CharacterI character) {
-    return this.selectedCharacters.contains(character);
+  public boolean isCharacterMarked(CharacterI character) {
+    return this.markedCharacters.contains(character);
   }
   
-  public void setCharacterIsSelected(CharacterI character, boolean selected) {
+  public void setCharacterIsMarked(CharacterI character, boolean selected) {
     if (selected) {
-      this.selectedCharacters.add(character);
+      this.markedCharacters.add(character);
     } else {
-      this.selectedCharacters.remove(character);
+      this.markedCharacters.remove(character);
     }
     final int indexOfCharacter = this.getAllCharacters().indexOf(character);
     this.fireTableRowsUpdated(indexOfCharacter, indexOfCharacter);
   }
   
-  public void invertCharacterSelection() {
+  public void invertCharacterMarks() {
     for (CharacterI character : this.getAllCharacters()) {
-      this.setCharacterIsSelected(character, !this.isCharacterSelected(character));
+      this.setCharacterIsMarked(character, !this.isCharacterMarked(character));
     }
   }
 
@@ -78,7 +78,7 @@ public class CharacterTemplateTableModel extends AbstractTableModel implements C
     final CharacterI character = this.getCharacterAtRow(row);
     final String fieldName = this.getColumnName(column);
     if (fieldName == CharacterTemplateTableModel.SELECTED_COLUMN_NAME) {
-      return this.isCharacterSelected(character);
+      return this.isCharacterMarked(character);
     }
     try {
       return character.getValueString(fieldName);
@@ -90,7 +90,7 @@ public class CharacterTemplateTableModel extends AbstractTableModel implements C
   
   public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
     if (this.getColumnName(columnIndex).equals(CharacterTemplateTableModel.SELECTED_COLUMN_NAME)) {
-      this.setCharacterIsSelected(this.getCharacterAtRow(rowIndex), (Boolean)aValue);
+      this.setCharacterIsMarked(this.getCharacterAtRow(rowIndex), (Boolean)aValue);
     }
   }
 
@@ -119,6 +119,9 @@ public class CharacterTemplateTableModel extends AbstractTableModel implements C
       this.fireTableRowsUpdated(0, this.getRowCount() - 1);
     } else if (e.isAdd()) {
       this.fireTableRowsInserted(this.getRowCount() - 1, this.getRowCount() - 1);
+    } else { // must be a deletion
+      this.fireTableDataChanged();
+      this.cleanupMarkedCharactersSet();
     }
   }
   
@@ -130,6 +133,10 @@ public class CharacterTemplateTableModel extends AbstractTableModel implements C
     return this.characterListManager.getCharacterList().getList();
   }
 
+  private void cleanupMarkedCharactersSet() {
+    this.markedCharacters.retainAll(this.getAllCharacters());
+  }
+  
   private Logger getLogger() {
     return Logger.getLogger(this.getClass());
   }

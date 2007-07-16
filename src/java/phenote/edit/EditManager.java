@@ -142,6 +142,7 @@ public class EditManager {
     CompoundTransaction ct = CompoundTransaction.makeDelTrans(delChars, this.characterListManager);
     ct.editModel();
     addTransaction(ct);
+    fireChangeEvent(new CharChangeEvent(this, ct));
   }
 
   private void addTransaction(TransactionI t) {

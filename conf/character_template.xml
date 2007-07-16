@@ -12,8 +12,11 @@
 	    </scrollpane>
 	    <glue/>
 	    <panel id="buttonPanel">
-	        <button id="addButton" text="Add Template" action="addNewCharacter"/>
-	        <button id="invertSelectionButton" text="Invert Selection" action="invertSelectedCharacters"/>
+	        <button id="addButton" text="New" action="addNewCharacter"/>
+	        <button id="deleteButton" text="Delete" action="deleteSelectedCharacters"/>
+	        <button id="copyButton" text="Copy" action="duplicateSelectedCharacters"/>
+	        <button id="undoButton" text="Undo" actioin="undo"/>
+	        <button id="invertSelectionButton" text="Invert Marked" action="invertMarkedCharacters"/>
 	        <button id="generateButton" text="Generate Characters" action="generateCharacters"/>
 	    </panel>
 	</vbox>
