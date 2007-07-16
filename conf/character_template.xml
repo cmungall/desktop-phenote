@@ -6,12 +6,13 @@
 		<panel id="termInfoPanelContainer" border="EmptyBorder(10,10,10,10)" layout="BorderLayout">
 		</panel>
 	</hbox>
-	<vbox constraints="BorderLayout.CENTER" border="EmptyBorder(10,10,10,10)">
+	<panel constraints="BorderLayout.CENTER" layout="GridBagLayout">
 	    <scrollpane>
+	    	<gridbagconstraints gridx="0" gridy="0" weightx="1" weighty="1" fill="GridBagConstraints.BOTH" insets="10,10,0,10"/>
 	        <table id="characterTemplateTable"/>
 	    </scrollpane>
-	    <glue/>
 	    <panel id="buttonPanel">
+	    	<gridbagconstraints gridx="0" gridy="1" weightx="1" insets="10,10,10,10"/>
 	        <button id="addButton" text="New" action="addNewCharacter"/>
 	        <button id="deleteButton" text="Delete" action="deleteSelectedCharacters"/>
 	        <button id="copyButton" text="Copy" action="duplicateSelectedCharacters"/>
@@ -19,5 +20,5 @@
 	        <button id="invertSelectionButton" text="Invert Marked" action="invertMarkedCharacters"/>
 	        <button id="generateButton" text="Generate Characters" action="generateCharacters"/>
 	    </panel>
-	</vbox>
+	</panel>
 </panel>
