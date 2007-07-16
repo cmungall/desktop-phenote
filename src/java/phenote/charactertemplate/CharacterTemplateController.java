@@ -45,8 +45,7 @@ public class CharacterTemplateController implements ActionListener {
     this.editManager = new EditManager(this.characterListManager);
     this.selectionManager = new SelectionManager();
     this.tableModel = new CharacterTemplateTableModel(this.representedGroup, this.characterListManager, this.editManager);
-    this.editManager.addInitialCharacter();
-    this.selectionManager.selectCharacters(this, this.characterListManager.getCharacterList().getList());
+    this.addInitialBlankCharacter();
     this.createMenu();
   }
 
@@ -67,6 +66,9 @@ public class CharacterTemplateController implements ActionListener {
   
   public void deleteSelectedCharacters() {
     this.editManager.deleteChars(this.selectionManager.getSelectedChars());
+    if (this.characterListManager.getCharacterList().isEmpty()) {
+      this.addInitialBlankCharacter();
+    }
   }
   
   public void duplicateSelectedCharacters() {
@@ -82,9 +84,8 @@ public class CharacterTemplateController implements ActionListener {
   }
   
   public void generateCharacters() {
-    final List<CharacterI> templates = this.tableModel.getMarkedCharacters();
     final List<CharacterI> newCharacters = new ArrayList<CharacterI>();
-    for (CharacterI character : templates) {
+    for (CharacterI character : this.tableModel.getMarkedCharacters()) {
       final CharacterI newCharacter = character.cloneCharacter();
       EditManager.inst().addCharacter(newCharacter);
       newCharacters.add(newCharacter);
@@ -129,6 +130,11 @@ public class CharacterTemplateController implements ActionListener {
       this.getLogger().error("Unable to render interface", e);
       return new JPanel();
     }
+  }
+  
+  private void addInitialBlankCharacter() {
+    this.editManager.addInitialCharacter();
+    this.selectionManager.selectCharacters(this, this.characterListManager.getCharacterList().getList());
   }
   
   private Logger getLogger() {
