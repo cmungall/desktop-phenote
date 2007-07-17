@@ -79,7 +79,7 @@ public class SelectionManagerListSelectionModel extends DefaultListSelectionMode
   }
   
   private void setSelectionInterval(List<CharacterI> characters) {
-    if ((characters == null) || (characters.isEmpty())) {
+    if ((characters == null) || (characters.isEmpty()) || (!this.characterListManager.getCharacterList().getList().containsAll(characters))) {
       this.clearSelection();
       return;
     }

@@ -10,6 +10,8 @@ import javax.swing.table.AbstractTableModel;
 import org.apache.log4j.Logger;
 
 import phenote.config.Config;
+import phenote.dataadapter.CharListChangeEvent;
+import phenote.dataadapter.CharListChangeListener;
 import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharacterI;
@@ -18,7 +20,7 @@ import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
 
 @SuppressWarnings("serial")
-public class CharacterTemplateTableModel extends AbstractTableModel implements CharChangeListener {
+public class CharacterTemplateTableModel extends AbstractTableModel implements CharChangeListener, CharListChangeListener {
   
   private String representedGroup;
   private CharacterListManager characterListManager;
@@ -30,6 +32,7 @@ public class CharacterTemplateTableModel extends AbstractTableModel implements C
     super();
     this.representedGroup = groupName;
     this.characterListManager = clManager;
+    this.characterListManager.addCharListChangeListener(this);
     this.editManager = eManager;
     this.editManager.addCharChangeListener(this);
     this.markedCharacters = new HashSet<CharacterI>();
@@ -124,6 +127,10 @@ public class CharacterTemplateTableModel extends AbstractTableModel implements C
     }
   }
   
+  public void newCharList(CharListChangeEvent e) {
+    this.fireTableDataChanged();
+  }
+
   private CharacterI getCharacterAtRow(int row) {
     return this.characterListManager.getCharacterList().get(row);
   }

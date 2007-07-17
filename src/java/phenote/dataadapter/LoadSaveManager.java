@@ -2,25 +2,27 @@ package phenote.dataadapter;
 
 import java.io.File;
 import java.util.List;
-import java.lang.ClassNotFoundException;
+
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 
-import phenote.dataadapter.DataAdapterI;
-import phenote.dataadapter.CharacterListManager;
-import phenote.datamodel.CharacterListI;
-import phenote.datamodel.CharacterList;
 import phenote.config.Config;
-import phenote.edit.EditManager;
+import phenote.datamodel.CharacterListI;
 
 
 public class LoadSaveManager {
   
   private static LoadSaveManager singleton;
   private JFileChooser fileChooser;
+  private CharacterListManager characterListManager;
   
   private LoadSaveManager() {
+    this(CharacterListManager.inst());
+  }
+  
+  public LoadSaveManager(CharacterListManager clManager) {
+    this.characterListManager = clManager;
     fileChooser = new JFileChooser();
     List<DataAdapterI> adapters = Config.inst().getDataAdapters();
     boolean first = true;
@@ -43,10 +45,10 @@ public class LoadSaveManager {
     return singleton;
   }
   
-  public void newData() {	
-//	CharacterListI charList = new CharacterList();
-//	CharacterListManager.inst().setCharacterList(this,charList);
-	System.out.println("NEW!");
+  public void newData() { 
+//  CharacterListI charList = new CharacterList();
+//  CharacterListManager.inst().setCharacterList(this,charList);
+  System.out.println("NEW!");
   }
 
   
@@ -82,7 +84,7 @@ public class LoadSaveManager {
       return;
     }
     else {
-      CharacterListManager.inst().setCharacterList(this,charList);
+      this.characterListManager.setCharacterList(this,charList);
     }
   }
   
@@ -108,12 +110,12 @@ public class LoadSaveManager {
   
   /**Saves the document's characters to the given file using the given data adapter.*/
   public void saveData(File f, DataAdapterI adapter) {
-    CharacterListI charList = CharacterListManager.inst().getCharacterList();
+    CharacterListI charList = this.characterListManager.getCharacterList();
     adapter.commit(charList, f);
   }
   
   public void exportData() {
-	  saveData();
+    saveData();
   }
 
   
