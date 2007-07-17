@@ -32,6 +32,7 @@ import phenote.config.xml.GroupDocument.Group;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.OntologyDataAdapter;
 import phenote.datamodel.CharacterListI;
+import phenote.datamodel.OntologyManager;
 import phenote.edit.EditManager;
 import phenote.gui.CharacterTablePanel;
 import phenote.gui.GridBagUtil;
@@ -228,7 +229,7 @@ public class Phenote {
     // this may be changed to applet...
     frame = new JFrame("Phenote "+PhenoteVersion.versionString()); 
     if (!hasGroupTabs()) {
-      frame.getContentPane().add(makeGroupPanel(null));
+      frame.getContentPane().add(makeGroupPanel(OntologyManager.DEFAULT_GROUP));
     }
     else {
       JTabbedPane tabbedGroups = new JTabbedPane();

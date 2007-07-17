@@ -34,7 +34,7 @@ public class FieldPanel extends JPanel {
   private OntologyManager ontologyManager = OntologyManager.inst();
   private JPanel fieldPanel;
   private JTabbedPane jTabbedPane;
-  private String representedGroup;
+  private String group;
   private SelectionManager selectionManager;
   private EditManager editManager;
 
@@ -49,15 +49,21 @@ public class FieldPanel extends JPanel {
 //     this(doAllFields, addSearchPanel, null, SelectionManager.inst(), EditManager.inst());
 //   }
 
-  public FieldPanel(boolean doAllFields, boolean addSearchPanel, String group) {
-    this(doAllFields,addSearchPanel,group,SelectionManager.getSelMan(group),
+  public FieldPanel(boolean doAllFields, boolean addSearchPanel, String grp) {
+    setGroup(grp);
+    init(doAllFields,addSearchPanel,group,SelectionManager.getSelMan(group),
          EditManager.getEditManager(group));
   }
   
   public FieldPanel(boolean doAllFields, boolean addSearchPanel,
-                    String representedGroup, SelectionManager selectionManager,
+                    String group, SelectionManager selectionManager,
                     EditManager editManager) {
-    this.representedGroup = representedGroup;
+    init(doAllFields,addSearchPanel,group,selectionManager,editManager);
+  }
+
+  private void init(boolean doAllFields, boolean addSearchPanel,String group,
+                    SelectionManager selectionManager, EditManager editManager) {
+    setGroup(group);
     this.selectionManager = selectionManager;
     this.editManager = editManager;
     initGui();
@@ -70,6 +76,11 @@ public class FieldPanel extends JPanel {
     }
     if (addSearchPanel)
       initSearchPanel();
+  } 
+
+  private void setGroup(String g) {
+    if (g == null) this.group = OntologyManager.DEFAULT_GROUP;
+    else this.group = g;
   }
 
   private void initGui() {
@@ -118,8 +129,8 @@ public class FieldPanel extends JPanel {
   }
 
   private boolean isTabbed() {
-    if (this.representedGroup != null) {
-      return this.ontologyManager.getCharFieldListForGroup(this.representedGroup).size() > FieldPanel.fieldsPerTab;
+    if (this.group != null) {
+      return this.ontologyManager.getCharFieldListForGroup(this.group).size() > FieldPanel.fieldsPerTab;
     } else {
       return ontologyManager.getNumberOfFields() > fieldsPerTab;
     }
@@ -225,8 +236,8 @@ public class FieldPanel extends JPanel {
   }
   
   private List<CharField> getCharFieldList() {
-    if (this.representedGroup != null) {
-      return this.ontologyManager.getCharFieldListForGroup(this.representedGroup);
+    if (this.group != null) {
+      return this.ontologyManager.getCharFieldListForGroup(this.group);
     } else {
       return this.ontologyManager.getCharFieldList();
     }

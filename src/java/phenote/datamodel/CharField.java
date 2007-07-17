@@ -21,6 +21,8 @@ public class CharField {
   private String tag; // non display tag to refer to field (no spaces...)
   private boolean postCompAllowed=false;
   private Ontology postCompRelOntol;
+  public enum Type { TERM, FREE_TEXT, INT };
+  private Type type;
   // index? orderNumber? for order in gui/datamodel?
 
   /** used for relationship */
@@ -34,8 +36,15 @@ public class CharField {
     this.tag = tag;
   }
 
+  /** part of constructor? probably */
+  public void setType(Type t) {
+    this.type = t;
+  }
+
   public void addOntology(Ontology o) {
     ontologyList.add(o);
+    // ??? if you have ontologies you better be a Term
+    type = Type.TERM;
   }
 
   public void setName(String n) {
@@ -75,13 +84,21 @@ public class CharField {
 
   //booelan isFreeText() return !hasOntologies() ??
   public boolean isFreeText() {		//  now have third type isInt, so can't just negate 2007 07 09
-    if ( hasOntologies() || isInt() )  return false; 
-    return true; 
+    //if ( hasOntologies() || isInt() )  return false; 
+    //return true; 
+    return type == Type.FREE_TEXT;
   }
 
   public boolean isInt() {		//  now have third type isInt, so can't just negate 2007 07 09
-    if ( hasOntologies() || isFreeText() )  return false; 
-    return true; 
+    //if ( hasOntologies() || isFreeText() )  return false; 
+    //return true; 
+    return type == Type.INT;
+  }
+
+  /** This should be redundant with hasOntologies (though with instances this
+      may change?) */
+  public boolean isTerm() {
+    return type == Type.TERM;
   }
 
   public boolean hasOntologies() {
