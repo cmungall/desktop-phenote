@@ -195,7 +195,8 @@ public class TermInfo {
     }
   }
   // for TestPhenote
-  String getText() { return textArea.getText(); }
+  //String getVerbiage() { return textArea.getText(); }
+  String getTermFieldText() { return termField.getText(); }
 
   private void setTextFromOboClass(OBOClass oboClass) {
     currentOboClass = oboClass;

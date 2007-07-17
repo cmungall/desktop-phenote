@@ -21,8 +21,9 @@ public class CharField {
   private String tag; // non display tag to refer to field (no spaces...)
   private boolean postCompAllowed=false;
   private Ontology postCompRelOntol;
-  public enum Type { TERM, FREE_TEXT, INT };
-  private Type type;
+  // RELATIONSHIP? DANGLER? INSTANCE? use CharFieldEnum?
+  public enum Type { TERM, FREE_TEXT, INT }; 
+  private Type type = Type.FREE_TEXT; // free text default, bkwrd compat
   // index? orderNumber? for order in gui/datamodel?
 
   /** used for relationship */

@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JCheckBox;
 
+/** this isnt used at the moment - nicole moved search params to menu - maybe delete?
+    or maybe this is something for the docking interface */
 //import phenote.datamodel.SearchParamsI;
 // only public for TestPhenote
 public class SearchParamPanel {
