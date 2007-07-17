@@ -61,7 +61,7 @@ public class ConfigGui {
   public ConfigGui() { init(); }
 
   private void init() {
-    JFrame frame = new JFrame("Phenote Configuration");
+    JFrame frame = new JFrame("Phenote Configuration(under development)");
 
     JComponent allConfigs = makeAllConfigsPanel();
     allConfigs.setPreferredSize(new Dimension(300,300));

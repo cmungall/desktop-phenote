@@ -176,6 +176,11 @@ public class Phenote {
     return !getGroupTabs().isEmpty();
   }
 
+  private int getNumGroupTabs() {
+    if (getGroupTabs() == null) return 0;
+    return getGroupTabs().size();
+  }
+
   private List<Group> getGroupTabs() {
     return getGroupsByContainer(Group.Container.TAB);
   }
@@ -228,7 +233,7 @@ public class Phenote {
   private void makeMainWindow() {
     // this may be changed to applet...
     frame = new JFrame("Phenote "+PhenoteVersion.versionString()); 
-    if (!hasGroupTabs()) {
+    if (getNumGroupTabs() < 2) {
       frame.getContentPane().add(makeGroupPanel(OntologyManager.DEFAULT_GROUP));
     }
     else {

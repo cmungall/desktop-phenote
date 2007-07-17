@@ -82,7 +82,7 @@ class SettingsMenu extends JMenu {
     add(loadConfig);
 
     // proto gui config
-    JMenuItem browseConfig = new JMenuItem("Browse configuration");
+    JMenuItem browseConfig = new JMenuItem("Browse configuration(dev)");
     browseConfig.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) { new ConfigGui(); } } );
     add(browseConfig);
