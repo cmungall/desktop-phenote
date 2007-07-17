@@ -121,7 +121,6 @@ public class CharacterTemplateTableModel extends AbstractTableModel implements C
       this.fireTableRowsInserted(this.getRowCount() - 1, this.getRowCount() - 1);
     } else { // must be a deletion
       this.fireTableDataChanged();
-      this.cleanupMarkedCharactersSet();
     }
   }
   
@@ -133,10 +132,6 @@ public class CharacterTemplateTableModel extends AbstractTableModel implements C
     return this.characterListManager.getCharacterList().getList();
   }
 
-  private void cleanupMarkedCharactersSet() {
-    this.markedCharacters.retainAll(this.getAllCharacters());
-  }
-  
   private Logger getLogger() {
     return Logger.getLogger(this.getClass());
   }
