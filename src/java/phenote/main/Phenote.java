@@ -293,8 +293,10 @@ public class Phenote {
     ugbc.weightx = 1;
     
     // need to do different selection & edit mgrs
-    mainFieldPanel = new FieldPanel(true,false,group,SelectionManager.inst(),EditManager.inst());
-    upperPanel.add(mainFieldPanel,ugbc);
+    FieldPanel groupFieldPanel = new FieldPanel(true,false,group);
+    // for testing - thats it
+    if (group == null || group.equals("default")) mainFieldPanel = groupFieldPanel;
+    upperPanel.add(groupFieldPanel,ugbc);
 
     termInfo = new TermInfo();
     ugbc.gridx++;

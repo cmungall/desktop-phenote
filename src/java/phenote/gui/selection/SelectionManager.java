@@ -1,17 +1,22 @@
 package phenote.gui.selection;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
 
 import phenote.datamodel.CharacterI;
+import phenote.datamodel.OntologyManager;
 
 /** Controller for term & character selection */
 public class SelectionManager {
 
-  private static SelectionManager singleton;
+  //private static SelectionManager singleton;
+  private static Map<String,SelectionManager> groupToSelMan =
+    new HashMap<String,SelectionManager>();
 
   private List<TermSelectionListener> termListenerList;
   List<CharSelectionListener> charListenerList;
@@ -20,10 +25,22 @@ public class SelectionManager {
   private List<CharacterI> selectedCharList;
   private List<CharacterI> previouslySelectedChars;
 
+  /** return main/default instance */
   public static SelectionManager inst() {
-    if (singleton == null) singleton = new SelectionManager();
-    return singleton;
+    return getSelMan(OntologyManager.DEFAULT_GROUP);
+//     if (singleton == null) singleton = new SelectionManager();
+//     return singleton;
   }
+
+  public static SelectionManager getSelMan(String group) {
+    if (group == null) group = OntologyManager.DEFAULT_GROUP; // ??
+   if (groupToSelMan.get(group) == null) {
+      SelectionManager s = new SelectionManager();
+      groupToSelMan.put(group,s);
+    }
+    return groupToSelMan.get(group);
+  }
+  
 
   public SelectionManager() {
     termListenerList = new ArrayList<TermSelectionListener>(5);

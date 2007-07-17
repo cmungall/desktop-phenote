@@ -18,7 +18,10 @@ public class CharacterList implements CharacterListI {
   public static int FORWARD_SORT = 1;
   public static int REV_SORT = 2;
 
-  public CharacterI get(int i) { return characterList.get(i); }
+  public CharacterI get(int i) {
+    // should this check if i is out of range - throw ex, or print error msg??
+    return characterList.get(i);
+  }
   public void add(CharacterI c) {//once a new char is added, any sorts are voided
 	characterList.add(c); 
 	sorted=UNSORTED; 

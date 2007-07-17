@@ -90,6 +90,11 @@ public class DelimitedFileAdapter extends AbstractFileAdapter {
   }
 
   public void commit(CharacterListI charList) {
+    if (charList.isEmpty()) {
+      System.out.println("No Data to save"); // popup!
+      return;
+    }
+
     if (file == null)
       file = getFileFromUserForSave(previousFile);
     if (file == null) return;

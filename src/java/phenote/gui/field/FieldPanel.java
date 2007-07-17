@@ -41,12 +41,17 @@ public class FieldPanel extends JPanel {
   /** eventually configurable (with default 12) - for now hardwire at 12 */
   private static int fieldsPerTab = 12;
 
-  public FieldPanel() {
-    this(true,false); // false - no search panel - in menu now
-  }
-  // false for post comp panel - boolean isPostComp?
-  public FieldPanel(boolean doAllFields,boolean addSearchPanel) {
-    this(doAllFields, addSearchPanel, null, SelectionManager.inst(), EditManager.inst());
+//   public FieldPanel() {
+//     this(true,false); // false - no search panel - in menu now
+//   }
+//   // false for post comp panel - boolean isPostComp?
+//   public FieldPanel(boolean doAllFields,boolean addSearchPanel) {
+//     this(doAllFields, addSearchPanel, null, SelectionManager.inst(), EditManager.inst());
+//   }
+
+  public FieldPanel(boolean doAllFields, boolean addSearchPanel, String group) {
+    this(doAllFields,addSearchPanel,group,SelectionManager.getSelMan(group),
+         EditManager.getEditManager(group));
   }
   
   public FieldPanel(boolean doAllFields, boolean addSearchPanel,

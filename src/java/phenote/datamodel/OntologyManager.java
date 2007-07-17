@@ -28,6 +28,8 @@ public class OntologyManager {
    have ontologies in this list?? yes */
   private List<CharField> charFieldList = new ArrayList<CharField>();
 
+  public final static String DEFAULT_GROUP = "default";
+
 
   /** Singleton */
   private OntologyManager() {}

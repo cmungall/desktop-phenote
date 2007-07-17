@@ -83,10 +83,12 @@ public class CharacterTablePanel extends JPanel {
   private boolean SANDBOX_MODE = true; // get from config...
 
   public CharacterTablePanel(String group) {
-    this(group,CharacterListManager.inst(),EditManager.inst(),SelectionManager.inst());
+    this(group,CharacterListManager.getCharListMan(group),EditManager.getEditManager(group),
+         SelectionManager.getSelMan(group));
   }
   
-  public CharacterTablePanel(String group, CharacterListManager clManager, EditManager eManager, SelectionManager selManager) {
+  public CharacterTablePanel(String group, CharacterListManager clManager,
+                             EditManager eManager, SelectionManager selManager) {
     super();
     if (group != null) this.group = group;
     this.characterListManager = clManager;
@@ -296,6 +298,8 @@ public class CharacterTablePanel extends JPanel {
       int selectRow = 0;
       RowInterval selectRows=null;
       boolean doSelection = true;
+
+      // NEW
       if (e.getActionCommand().equals("New")) {
         selectRow = characterTableModel.addNewBlankRow();
         scrollToNewLastRowOnRepaint = true;//scrollToLastRow(); // scroll to new row
@@ -303,6 +307,8 @@ public class CharacterTablePanel extends JPanel {
       else if (!hasRows()) {
         return; // its empty! no rows to copy or delete or save or undo
       }
+
+      // COPY
       else if (e.getActionCommand().equals("Copy")) {
         //selectRow = characterTableModel.copyRow(getSelectedRow());
         if (!hasSelection()) {
@@ -312,6 +318,8 @@ public class CharacterTablePanel extends JPanel {
         selectRows = characterTableModel.copyChars(getSelectedChars());
         scrollToNewLastRowOnRepaint = true;//scrollToLastRow(); // scroll to new row
       }
+
+      // DELETE
       else if (e.getActionCommand().equals("Delete")) {
         // if just deleting first blank row dont do anything otherwise get "false" trans
         if (hasOneEmptySelectedRow())

@@ -1,13 +1,16 @@
 package phenote.edit;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
 import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.Character;
 import phenote.datamodel.CharacterI;
+import phenote.datamodel.OntologyManager;
 
 /** The way editing works is gui makes update transaction (see CharFieldGui and
     AutoComboBox) and calls
@@ -18,7 +21,9 @@ import phenote.datamodel.CharacterI;
 
 public class EditManager {
 
-  private static EditManager singleton;
+  //private static EditManager singleton;
+  private static Map<String,EditManager> groupToEditMan =
+    new HashMap<String,EditManager>();
 
   private List<CharChangeListener> charListeners = new ArrayList<CharChangeListener>(3);
 
@@ -26,18 +31,31 @@ public class EditManager {
   
   private CharacterListManager characterListManager;
   
-  public EditManager() {
-    this(CharacterListManager.inst());
-  }
+//   public EditManager() {
+//     this(CharacterListManager.inst());
+//   }
   
   public EditManager(CharacterListManager clManager) {
     this.characterListManager = clManager;
   }
 
+  // gets the "default" (group) edit manager
   public static EditManager inst() {
-    if (singleton == null)
-      singleton = new EditManager();
-    return singleton;
+    return getEditManager(OntologyManager.DEFAULT_GROUP);
+//     if (singleton == null)
+//       singleton = new EditManager();
+//     return singleton;
+  }
+
+  // ??
+  public static EditManager getEditManager(String group) {
+    if (group == null) group = OntologyManager.DEFAULT_GROUP;
+    if (groupToEditMan.get(group) == null) {
+      CharacterListManager c = CharacterListManager.getCharListMan(group);
+      EditManager e = new EditManager(c); // group?
+      groupToEditMan.put(group,e);
+    }
+    return groupToEditMan.get(group);
   }
 
   public void addCharChangeListener(CharChangeListener l) {
