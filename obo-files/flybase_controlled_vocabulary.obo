@@ -1,0 +1,5284 @@
+format-version: 1.0
+date: 10:04:2007 13:20
+saved-by: djs93
+auto-generated-by: OBO-Edit 1.002
+subsetdef: camcur "camcur"
+default-namespace: FlyBase miscellaneous CV
+namespace-id-rule: * FBcv:$sequence(7,0,9999999)$
+
+[Term]
+id: FBcv:0000000
+name: FlyBase CV
+
+[Term]
+id: FBcv:0000001
+name: death certificate
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000002
+name: thermotaxis behavior defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+exact_synonym: "thermotaxis behaviour defective" []
+is_a: FBcv:0000387 ! behavioral
+
+[Term]
+id: FBcv:0000003
+name: In transgenic Drosophila (intraspecific)
+namespace: mode_of_assay
+comment: Proforma field: GA19.
+subset: camcur
+xref_analog: abbrev:1
+is_a: FBcv:0000607 ! In transgenic Drosophila
+
+[Term]
+id: FBcv:0000004
+name: Whole-organism transient assay (intraspecific)
+namespace: mode_of_assay
+comment: Proforma field: GA19.
+subset: camcur
+xref_analog: abbrev:2
+is_a: FBcv:0000608 ! Whole-organism transient assay
+
+[Term]
+id: FBcv:0000005
+name: qualifier
+is_a: FBcv:0000000 ! FlyBase CV
+
+[Term]
+id: FBcv:0000006
+name: male semi-fertile
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000375 ! semi-fertile
+is_a: FBcv:0000376 ! male fertile
+
+[Term]
+id: FBcv:0000007
+name: female semi-fertile
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000375 ! semi-fertile
+is_a: FBcv:0000377 ! female fertile
+
+[Term]
+id: FBcv:0000008
+name: variegation
+namespace: phenotypic_class
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000009
+name: temporal stage qualifier
+namespace: temporal_qualifier
+is_a: FBcv:0000176 ! temporal  qualifier
+
+[Term]
+id: FBcv:0000010
+name: monophasic
+namespace: temporal_qualifier
+comment: Deprecated:  Use of this term is discouraged as there is no way to decide how to group anatomy terms combined with this qualifier with other terms in the anatomy ontology.  Subject to discussion and once its usage in old curation is removed, this term will be obsoleted.  DS
+is_a: FBcv:0000009 ! temporal stage qualifier
+
+[Term]
+id: FBcv:0000011
+name: relative temporal qualifier
+namespace: temporal_qualifier
+is_a: FBcv:0000176 ! temporal  qualifier
+
+[Term]
+id: FBcv:0000012
+name: absolute temporal qualifier
+namespace: temporal_qualifier
+is_a: FBcv:0000176 ! temporal  qualifier
+
+[Term]
+id: FBcv:0000013
+name: descriptor
+is_a: FBcv:0000000 ! FlyBase CV
+
+[Term]
+id: FBcv:0000014
+name: structural qualifier
+namespace: structural_qualifier
+is_a: FBcv:0000809 ! phenotype qualifier
+
+[Term]
+id: FBcv:0000015
+name: postage stamp
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000016
+name: Baylor TE recombination mapping kit stock
+is_a: FBcv:0000648 ! mapping stock
+
+[Term]
+id: FBcv:0000017
+name: penetrance qualifier
+def: "Penetrance is the fraction of individuals of a given genotype who exhibit the phenotype associated with that genotype." [ISBN:0716735202]
+is_a: FBcv:0000005 ! qualifier
+
+[Term]
+id: FBcv:0000018
+name: penetrance complete
+def: "Penetrance is the fraction of individuals of a given genotype who exhibit the phenotype associated with that genotype.  Penetrance is complete when all the individuals of a given genotype exhibit the phenotype associated with that genotype." [ISBN:0716735202]
+is_a: FBcv:0000017 ! penetrance qualifier
+
+[Term]
+id: FBcv:0000019
+name: penetrance incomplete
+def: "Penetrance is the fraction of individuals of a given genotype who exhibit the phenotype associated with that genotype.  Penetrance is incomplete when only some the individuals of a given genotype exhibit the phenotype associated with that genotype." [ISBN:0716735202]
+is_a: FBcv:0000017 ! penetrance qualifier
+
+[Term]
+id: FBcv:0000020
+name: penetrance percent
+def: "Penetrance is the fraction of individuals of a given genotype who exhibit the phenotype associated with that genotype.  Penetrance is incomplete when only a percentage of the individuals of a given genotype exhibit the phenotype associated with that genotype." [ISBN:0716735202]
+comment: This term modifed by a % value.
+is_a: FBcv:0000019 ! penetrance incomplete
+
+[Term]
+id: FBcv:0000021
+name: expressivity qualifier
+def: "Expressivity measures the extent to which a given genotype is expressed at the phenotypic level." [ISBN:0716735202]
+is_a: FBcv:0000005 ! qualifier
+
+[Term]
+id: FBcv:0000022
+name: expressivity complete
+def: "Expressivity measures the extent to which a given genotype is expressed at the phenotypic level.  Expressivity is complete when an individual of a given genotype expresses the full phenotype associated with that genotype." [ISBN:0716735202]
+is_a: FBcv:0000021 ! expressivity qualifier
+
+[Term]
+id: FBcv:0000023
+name: expressivity incomplete
+def: "Expressivity measures the extent to which a given genotype is expressed at the phenotypic level.  Expressivity is incomplete when an individual of a given genotype expresses only partially the phenotype associated with that genotype." [ISBN:0716735202]
+is_a: FBcv:0000021 ! expressivity qualifier
+
+[Term]
+id: FBcv:0000024
+name: expressivity high
+def: "Expressivity measures the extent to which a given genotype is expressed at the phenotypic level.  \"High expressivity\" conveys that while expressivity is not complete, the phenotype expressed is approaching that of complete expressivity." [ISBN:0716735202]
+is_a: FBcv:0000023 ! expressivity incomplete
+
+[Term]
+id: FBcv:0000025
+name: expressivity low
+def: "Expressivity measures the extent to which a given genotype is expressed at the phenotypic level.  \"Low expressivity\" conveys that phenotype expressed is a much reduced version compared to complete expressivity." [ISBN:0716735202]
+is_a: FBcv:0000023 ! expressivity incomplete
+
+[Term]
+id: FBcv:0000026
+name: recessive visible allele recombination mapping stock
+is_a: FBcv:0000649 ! visible allele recombination mapping stock
+
+[Term]
+id: FBcv:0000027
+name: dominant visible allele recombination mapping stock
+is_a: FBcv:0000649 ! visible allele recombination mapping stock
+
+[Term]
+id: FBcv:0000028
+name: SNP recombination mapping stock
+is_a: FBcv:0000648 ! mapping stock
+
+[Term]
+id: FBcv:0000029
+name: transposable element mutagenesis stock
+is_a: FBcv:0010000 ! living stock
+
+[Term]
+id: FBcv:0000030
+name: compartment
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000031
+name: anterior compartment
+namespace: spatial_qualifier
+def: "Restricted to the anterior compartment of some specified type" [FB:DS]
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000030 ! compartment
+
+[Term]
+id: FBcv:0000032
+name: compartment boundary
+namespace: spatial_qualifier
+def: "Restricted to some compartment boundary within a specified type." [FB:DS]
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000030 ! compartment
+
+[Term]
+id: FBcv:0000033
+name: anterior/posterior compartment boundary
+namespace: spatial_qualifier
+def: "Restricted to an anterior/posterior compartment boundary within a specified type." [FB:DS]
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000032 ! compartment boundary
+
+[Term]
+id: FBcv:0000034
+name: dorsal/ventral compartment boundary
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000032 ! compartment boundary
+
+[Term]
+id: FBcv:0000035
+name: dorsal compartment
+namespace: spatial_qualifier
+def: "Restricted to the dorsal compartment of some specified type." [FB:DS]
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000030 ! compartment
+
+[Term]
+id: FBcv:0000036
+name: posterior compartment
+namespace: spatial_qualifier
+def: "Restricted to the posterior compartment of some specified type." [FB:DS]
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000030 ! compartment
+
+[Term]
+id: FBcv:0000037
+name: ventral compartment
+namespace: spatial_qualifier
+def: "Restricted to the ventral compartment of some specified type." [FB:DS]
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000030 ! compartment
+
+[Term]
+id: FBcv:0000038
+name: relative spatial qualifier
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000039
+name: anterior to
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.\n\nDeprecated:  Use of this term is discouraged as there is no way to decide how to group anatomy terms combined with this qualifier with other terms in the anatomy ontology.  Once its usage in old curation is removed, this term will be obsoleted.  DS
+is_a: FBcv:0000038 ! relative spatial qualifier
+
+[Term]
+id: FBcv:0000040
+name: distal to
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.\n\nDeprecated:  Use of this term is discouraged as there is no way to decide how to group anatomy terms combined with this qualifier with other terms in the anatomy ontology.  Once its usage in old curation is removed, this term will be obsoleted.  DS
+is_a: FBcv:0000038 ! relative spatial qualifier
+
+[Term]
+id: FBcv:0000041
+name: dorsal to
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.\n\nDeprecated:  Use of this term is discouraged as there is no way to decide how to group anatomy terms combined with this qualifier with other terms in the anatomy ontology.  Once its usage in old curation is removed, this term will be obsoleted.  DS
+is_a: FBcv:0000038 ! relative spatial qualifier
+
+[Term]
+id: FBcv:0000042
+name: deficiency kit stock
+related_synonym: "deletion kit stock" []
+is_a: FBcv:0010000 ! living stock
+
+[Term]
+id: FBcv:0000043
+name: transposase source for transposable element mutagenesis
+is_a: FBcv:0000029 ! transposable element mutagenesis stock
+
+[Term]
+id: FBcv:0000044
+name: ammunition source for transposable element mutagenesis
+is_a: FBcv:0000029 ! transposable element mutagenesis stock
+
+[Term]
+id: FBcv:0000045
+name: posterior to
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.\n\nDeprecated:  Use of this term is discouraged as there is no way to decide how to group anatomy terms combined with this qualifier with other terms in the anatomy ontology.  Once its usage in old curation is removed, this term will be obsoleted.  DS
+is_a: FBcv:0000038 ! relative spatial qualifier
+
+[Term]
+id: FBcv:0000046
+name: precursor
+namespace: temporal_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.\n\nDeprecated:  Use of this term is discouraged as there is no way to decide how to group anatomy terms combined with this qualifier with other terms in the anatomy ontology.  Once its usage in old curation is removed, this term will be obsoleted.  DS
+is_a: FBcv:0000176 ! temporal  qualifier
+
+[Term]
+id: FBcv:0000047
+name: proximal to
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.\n\nDeprecated:  Use of this term is discouraged as there is no way to decide how to group anatomy terms combined with this qualifier with other terms in the anatomy ontology.  Once its usage in old curation is removed, this term will be obsoleted.  DS
+is_a: FBcv:0000038 ! relative spatial qualifier
+
+[Term]
+id: FBcv:0000048
+name: surrounding
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.\n\nDeprecated:  Use of this term is discouraged as there is no way to decide how to group anatomy terms combined with this qualifier with other terms in the anatomy ontology.  Once its usage in old curation is removed, this term will be obsoleted.  DS
+is_a: FBcv:0000038 ! relative spatial qualifier
+
+[Term]
+id: FBcv:0000049
+name: ventral to
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.\n\nDeprecated:  Use of this term is discouraged as there is no way to decide how to group anatomy terms combined with this qualifier with other terms in the anatomy ontology.  Once its usage in old curation is removed, this term will be obsoleted.  DS
+is_a: FBcv:0000038 ! relative spatial qualifier
+
+[Term]
+id: FBcv:0000050
+name: vicinity of
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.\n\nDeprecated:  Use of this term is discouraged as there is no way to decide how to group anatomy terms combined with this qualifier with other terms in the anatomy ontology.  Once its usage in old curation is removed, this term will be obsoleted.  DS
+is_a: FBcv:0000038 ! relative spatial qualifier
+
+[Term]
+id: FBcv:0000051
+name: segment boundary
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000052
+name: spatial qualifier
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+is_a: FBcv:0000005 ! qualifier
+
+[Term]
+id: FBcv:0000053
+name: anterior
+namespace: spatial_qualifier
+def: "Restricted to anterior region of some specified type." [FB:DS]
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000054
+name: apical
+namespace: spatial_qualifier
+def: "Restricted to apical region of some specified type." [FB:DS]
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAP6-q. Proforma field: GAT23-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000055
+name: basal
+namespace: spatial_qualifier
+def: "Restricted to basal region of some specified type." [FB:DS]
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAP6-q. Proforma field: GAT23-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000056
+name: central
+namespace: spatial_qualifier
+def: "Restricted to central region of some specified type." [FB:DS]
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000057
+name: contralateral
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.\n\nDeprecated:  Contralateral means - on the oppsoite  side from ....  In curation usage: on the oppsoite  side froms what ?  Will be obsoleted once a replacement term agreed upon (if needed) and any old usage retrofitted. DS
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000058
+name: distal
+namespace: spatial_qualifier
+def: "Restricted to distsal region of some specified type." [FB:DS]
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000059
+name: dorsal
+namespace: spatial_qualifier
+def: "Restricted to dorsal region of some specified type." [FB:DS]
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000060
+name: dorso-lateral
+namespace: spatial_qualifier
+def: "Restricted to dorso-lateral region of some specified type." [FB:DS]
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000061
+name: ectopic
+namespace: structural_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000014 ! structural qualifier
+
+[Term]
+id: FBcv:0000062
+name: ipsilateral
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.\n\nDeprecated:  As far as I can tell, ipsilateral means - on the same side as ....  In curation usage: on the same side as what ?  Will be obsoleted once a replacement term agreed upon (if needed) and any old usage retrofitted. DS
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000063
+name: lateral
+namespace: spatial_qualifier
+def: "Restricted to lateral region(s) of some specified type." [FB:DS]
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAP6-q. Proforma field: GAT23-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000064
+name: medial
+namespace: spatial_qualifier
+def: "Restricted to medial region of some specified type." [FB:DS]
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000065
+name: posterior
+namespace: spatial_qualifier
+def: "Restricted to posterior region of some specified type." [FB:DS]
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000066
+name: proximal
+namespace: spatial_qualifier
+def: "Restricted to proximal region of some specified type." [FB:DS]
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000067
+name: restricted
+namespace: spatial_qualifier
+def: "Restricted to unknown part(s) of a specified type." [FB:DS]
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000068
+name: supernumerary
+namespace: structural_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000014 ! structural qualifier
+
+[Term]
+id: FBcv:0000069
+name: ubiquitous
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000070
+name: ventral
+namespace: spatial_qualifier
+def: "Restricted to ventral region of some specified type." [FB:DS]
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000071
+name: ventro-lateral
+namespace: spatial_qualifier
+def: "Restricted to ventro-lateral region of some specified type." [FB:DS]
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000072
+name: gene expression qualifier
+is_obsolete: true
+
+[Term]
+id: FBcv:0000073
+name: embryonic expression pattern
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+is_obsolete: true
+
+[Term]
+id: FBcv:0000074
+name: egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000075
+name: 0% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000076
+name: 0-10% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000077
+name: 0-100% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000078
+name: 0-20% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000079
+name: 0-30% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000080
+name: 0-40% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000081
+name: 0-50% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000082
+name: 0-60% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000083
+name: 0-70% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000084
+name: 0-80% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000085
+name: 0-90% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000086
+name: 10% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000087
+name: 10-100% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000088
+name: 10-20% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000089
+name: 10-30% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000090
+name: 10-40% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000091
+name: 10-50% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000092
+name: 10-60% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000093
+name: 10-70% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000094
+name: 10-80% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000095
+name: 10-90% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000096
+name: 100% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000097
+name: 20% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000098
+name: 20-100% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000099
+name: 20-30% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000100
+name: 20-40% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000101
+name: 20-50% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000102
+name: 20-60% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000103
+name: 20-70% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000104
+name: 20-80% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000105
+name: 20-90% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000106
+name: 30% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000107
+name: 30-100% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000108
+name: 30-40% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000109
+name: 30-50% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000110
+name: 30-60% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000111
+name: 30-70% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000112
+name: 30-80% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000113
+name: 30-90% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000114
+name: 40% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000115
+name: 40-100% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000116
+name: 40-50% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000117
+name: 40-60% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000118
+name: 40-70% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000119
+name: 40-80% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000120
+name: 40-90% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000121
+name: 50% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000122
+name: 50-100% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000123
+name: 50-60% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000124
+name: 50-70% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000125
+name: 50-80% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000126
+name: 50-90% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000127
+name: 60% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000128
+name: 60-100% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000129
+name: 60-80% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000130
+name: 60-90% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000131
+name: 70% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000132
+name: 70-100% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000133
+name: 70-80% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000134
+name: 70-90% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000135
+name: 80% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000136
+name: 80-90% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000137
+name: 90% egg length
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000139
+name: 90-100% egg length
+namespace: spatial_qualifier
+alt_id: FBcv:0000138
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+related_synonym: "90-100% egg length" []
+is_a: FBcv:0000074 ! egg length
+
+[Term]
+id: FBcv:0000140
+name: FlyBase analysis
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000141
+name: gradient
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000142
+name: anterior posterior gradient
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000141 ! gradient
+
+[Term]
+id: FBcv:0000143
+name: dorsal ventral gradient
+namespace: spatial_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000141 ! gradient
+
+[Term]
+id: FBcv:0000144
+name: maternal pattern
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+is_obsolete: true
+
+[Term]
+id: FBcv:0000145
+name: striped
+namespace: spatial_qualifier
+def: "Restricted to stripes in some specified type" [FB:DS]
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000146
+name: I-CreI endonuclease
+namespace: origin_of_mutation
+def: "Endonuclease that recognizes and cleaves a 19-24 bp palindromic DNA site." [UniProt:P05725]
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000478 ! site specific recombinase
+
+[Term]
+id: FBcv:0000147
+name: even pair rule
+namespace: embryonic_pattern_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000322 ! pair rule
+
+[Term]
+id: FBcv:0000148
+name: odd pair rule
+namespace: embryonic_pattern_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000322 ! pair rule
+
+[Term]
+id: FBcv:0000149
+name: species list
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000150
+name: segmentally repeated
+namespace: spatial_qualifier
+def: "Restricted to a segmentally repeated pattern with some specified type." [FB:DS]
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000151
+name: archive
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000152
+name: balancer stock
+def: "A stock with one or more chromosomes (balancers) that are used primarily for their ability to preserve a stock genotype without selection." [FB:KM]
+is_a: FBcv:0010000 ! living stock
+
+[Term]
+id: FBcv:0000153
+name: cell autonomous
+namespace: genotype_to_phenotype_relation
+def: "A phenotypic effect which is expressed in and  limited to cells of the mutant genetic constitution under investigation is said to be cell autonomous." [FB:FBrf0002379]
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000797 ! cell autonomy qualifier
+
+[Term]
+id: FBcv:0000154
+name: cell non-autonomous
+namespace: genotype_to_phenotype_relation
+def: "A phenotypic effect which is not expressed in/limited to cells of the mutant genetic constitution under investigation is said to be cell non-autonomous." [FB:FBrf0002379]
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000797 ! cell autonomy qualifier
+
+[Term]
+id: FBcv:0000155
+name: single balancer
+is_a: FBcv:0000152 ! balancer stock
+
+[Term]
+id: FBcv:0000156
+name: pair of homologous balancers
+is_a: FBcv:0000152 ! balancer stock
+
+[Term]
+id: FBcv:0000157
+name: recessive lethal balancer
+is_a: FBcv:0000152 ! balancer stock
+
+[Term]
+id: FBcv:0000158
+name: balancer for chromosome 1
+is_a: FBcv:0000152 ! balancer stock
+
+[Term]
+id: FBcv:0000159
+name: balancer for chromosome 2
+is_a: FBcv:0000152 ! balancer stock
+
+[Term]
+id: FBcv:0000160
+name: balancer for chromosome 3
+is_a: FBcv:0000152 ! balancer stock
+
+[Term]
+id: FBcv:0000161
+name: maternal effect
+namespace: genotype_to_phenotype_relation
+def: "A phenotypic attribute is described as showing a maternal effect when the phenotype of an individual is a manifestation of the genotype of the mother, rather than the genotype of the individual." [ISBN:0716735202]
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000685 ! parental effect
+
+[Term]
+id: FBcv:0000162
+name: non-rescuable maternal effect
+namespace: genotype_to_phenotype_relation
+def: "A phenotypic attribute is described as showing a non-rescuable maternal effect (strict maternal effect) when the introduction of a wild-type copy of the responsible mutation from the father has no ameliorating effect on the maternal effect mutant phenotype." [PMID:2499512]
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000161 ! maternal effect
+
+[Term]
+id: FBcv:0000163
+name: rescuable maternal effect
+namespace: genotype_to_phenotype_relation
+def: "A phenotypic attribute is described as showing a rescuable maternal effect when the introduction of a wild-type copy of the responsible mutation from the father ameliorates the maternal effect mutant phenotype." [PMID:2499512]
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000161 ! maternal effect
+
+[Term]
+id: FBcv:0000164
+name: paternal effect
+namespace: genotype_to_phenotype_relation
+def: "A phenotypic attribute is described as showing a paternal effect when the phenotype of an individual is a manifestation of the genotype of the father, rather than the genotype of the individual." [PMID:9630751]
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000685 ! parental effect
+
+[Term]
+id: FBcv:0000165
+name: pair of balancers for chromosome 2
+is_obsolete: true
+
+[Term]
+id: FBcv:0000166
+name: morphological qualifier
+namespace: expression_qualifier
+is_a: FBcv:0000005 ! qualifier
+
+[Term]
+id: FBcv:0000167
+name: faint
+namespace: expression_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+is_a: FBcv:0000166 ! morphological qualifier
+
+[Term]
+id: FBcv:0000168
+name: granular
+namespace: expression_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+is_a: FBcv:0000166 ! morphological qualifier
+
+[Term]
+id: FBcv:0000169
+name: intense
+namespace: expression_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+is_a: FBcv:0000166 ! morphological qualifier
+
+[Term]
+id: FBcv:0000170
+name: punctate
+namespace: expression_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+is_a: FBcv:0000166 ! morphological qualifier
+
+[Term]
+id: FBcv:0000171
+name: uniform
+namespace: expression_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+is_a: FBcv:0000166 ! morphological qualifier
+
+[Term]
+id: FBcv:0000172
+name: variable
+namespace: expression_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+is_a: FBcv:0000166 ! morphological qualifier
+
+[Term]
+id: FBcv:0000173
+name: pair of balancers for chromosome 3
+is_obsolete: true
+
+[Term]
+id: FBcv:0000174
+name: dominant male sterile balancer
+is_a: FBcv:0000152 ! balancer stock
+
+[Term]
+id: FBcv:0000175
+name: dominant female sterile balancer
+is_a: FBcv:0000152 ! balancer stock
+
+[Term]
+id: FBcv:0000176
+name: temporal  qualifier
+namespace: temporal_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+is_a: FBcv:0000005 ! qualifier
+
+[Term]
+id: FBcv:0000177
+name: dominant female sterile balancer for chromosome 2
+is_obsolete: true
+
+[Term]
+id: FBcv:0000178
+name: early
+namespace: temporal_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.\n\nDeprecated:  Use of this term is discouraged as there is no way to decide how to group anatomy terms combined with this qualifier with other terms in the anatomy ontology.  Subject to discussion and once its usage in old curation is removed, this term will be obsoleted.  DS
+is_a: FBcv:0000011 ! relative temporal qualifier
+
+[Term]
+id: FBcv:0000179
+name: dominant female sterile balancer for chromosome 3
+is_obsolete: true
+
+[Term]
+id: FBcv:0000180
+name: dominant male sterile balancer for chromosome 2
+is_obsolete: true
+
+[Term]
+id: FBcv:0000181
+name: late
+namespace: temporal_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.\n\nDeprecated:  Use of this term is discouraged as there is no way to decide how to group anatomy terms combined with this qualifier with other terms in the anatomy ontology.  Subject to discussion and once its usage in old curation is removed, this term will be obsoleted.  DS
+is_a: FBcv:0000011 ! relative temporal qualifier
+
+[Term]
+id: FBcv:0000182
+name: mid
+namespace: temporal_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.\n\nDeprecated:  Use of this term is discouraged as there is no way to decide how to group anatomy terms combined with this qualifier with other terms in the anatomy ontology.  Subject to discussion and once its usage in old curation is removed, this term will be obsoleted.  DS
+is_a: FBcv:0000011 ! relative temporal qualifier
+
+[Term]
+id: FBcv:0000183
+name: n day
+namespace: temporal_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.\n\nDeprecated:  Use of this term is discouraged as there is no way to decide how to group anatomy terms combined with this qualifier with other terms in the anatomy ontology.  Subject to discussion and once its usage in old curation is removed, this term will be obsoleted.  DS
+is_a: FBcv:0000012 ! absolute temporal qualifier
+
+[Term]
+id: FBcv:0000184
+name: n hr
+namespace: temporal_qualifier
+comment: Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.\n\nDeprecated:  Use of this term is discouraged as there is no way to decide how to group anatomy terms combined with this qualifier with other terms in the anatomy ontology.  Subject to discussion and once its usage in old curation is removed, this term will be obsoleted.  DS
+is_a: FBcv:0000012 ! absolute temporal qualifier
+
+[Term]
+id: FBcv:0000185
+name: dominant male sterile balancer for chromosome 3
+is_obsolete: true
+
+[Term]
+id: FBcv:0000186
+name: recessive lethal balancer for chromosome 1
+is_obsolete: true
+
+[Term]
+id: FBcv:0000187
+name: recessive lethal balancer for chromosome 2
+is_obsolete: true
+
+[Term]
+id: FBcv:0000188
+name: publication descriptor
+is_a: FBcv:0000013 ! descriptor
+
+[Term]
+id: FBcv:0000189
+name: publication class
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000188 ! publication descriptor
+
+[Term]
+id: FBcv:0000190
+name: abstract
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000191
+name: advertisement
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000192
+name: autobiography
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000193
+name: bibliographic list
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000194
+name: biography
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000195
+name: book
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000196
+name: booklet
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000197
+name: book review
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000198
+name: computer file
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+related_synonym: "CD-ROM" []
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000199
+name: conference report
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000200
+name: demonstration
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000201
+name: DNA/RNA sequence record
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000202
+name: protein sequence record
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000203
+name: erratum
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+related_synonym: "correction" []
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000204
+name: film
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+related_synonym: "video" []
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000205
+name: interview
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000206
+name: jigsaw puzzle
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000207
+name: letter
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000208
+name: microscope slides
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000209
+name: news article
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000210
+name: note
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000211
+name: obituary
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000212
+name: paper
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000213
+name: patent
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000214
+name: personal communication to FlyBase
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000215
+name: poem
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000216
+name: poster
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000217
+name: press release
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000218
+name: recording
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000219
+name: retraction
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+related_synonym: "erratum" []
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000220
+name: review
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000221
+name: slides
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000222
+name: spoof
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000223
+name: stock list
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000224
+name: supplementary material
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000225
+name: T-shirt
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000226
+name: tactile diagram
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000227
+name: teaching note
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000228
+name: thesis
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000229
+name: curated genome annotation
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000230
+name: automatic genome annotation
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000231
+name: white paper
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000232
+name: recessive lethal balancer for chromosome 3
+is_obsolete: true
+
+[Term]
+id: FBcv:0000233
+name: unpublished
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+related_synonym: "privately distributed report" []
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000234
+name: publication language
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000188 ! publication descriptor
+
+[Term]
+id: FBcv:0000235
+name: Afrikaans
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000236
+name: Arabic
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000237
+name: Armenian
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000238
+name: Belarussian
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+related_synonym: "Belarusian" []
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000239
+name: Bulgarian
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000240
+name: Catalan
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000241
+name: Chinese
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000242
+name: Cumbrian
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000243
+name: Czech
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000244
+name: Danish
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000245
+name: Dutch
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000246
+name: English
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000247
+name: Estonian
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000248
+name: Faroese
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000249
+name: Farsi
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000250
+name: Finnish
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000251
+name: Flemish
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000252
+name: French
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000253
+name: German
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000254
+name: Greek
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000255
+name: Hebrew
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000256
+name: Hungarian
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000257
+name: Icelandic
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000258
+name: Indonesian
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000259
+name: Italian
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000260
+name: Japanese
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000261
+name: Jugoslavian
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000262
+name: Korean
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000263
+name: Latin
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000264
+name: Latvian
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000265
+name: Lithuanian
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000266
+name: Malay
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000267
+name: Malayalam
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000268
+name: Norwegian
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000269
+name: Polish
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000270
+name: Portuguese
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000271
+name: Serbo-Croat(Roman)
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000274 ! Serbo-Croat
+
+[Term]
+id: FBcv:0000272
+name: Romanian
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000273
+name: Russian
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000274
+name: Serbo-Croat
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000275
+name: Slovak
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000276
+name: Slovenian
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000277
+name: Spanish
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000278
+name: Swedish
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000279
+name: Turkish
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000280
+name: Ukrainian
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000281
+name: Yiddish
+namespace: language
+comment: Proforma field: P13. Proforma field: P14.
+subset: camcur
+is_a: FBcv:0000234 ! publication language
+
+[Term]
+id: FBcv:0000282
+name: mutant scorability rank
+namespace: scorability
+comment: Proforma field: GA3.
+is_a: FBcv:0000807 ! allele descriptor
+
+[Term]
+id: FBcv:0000283
+name: RK1
+namespace: scorability
+comment: Proforma field: GA3.
+subset: camcur
+is_a: FBcv:0000282 ! mutant scorability rank
+
+[Term]
+id: FBcv:0000284
+name: RK2
+namespace: scorability
+comment: Proforma field: GA3.
+subset: camcur
+is_a: FBcv:0000282 ! mutant scorability rank
+
+[Term]
+id: FBcv:0000285
+name: RK3
+namespace: scorability
+comment: Proforma field: GA3.
+subset: camcur
+is_a: FBcv:0000282 ! mutant scorability rank
+
+[Term]
+id: FBcv:0000286
+name: allele morphy class
+namespace: allele_class
+comment: Proforma field: GA4.
+is_a: FBcv:0000807 ! allele descriptor
+
+[Term]
+id: FBcv:0000287
+name: loss of function
+namespace: allele_class
+comment: Proforma field: GA4.
+subset: camcur
+is_a: FBcv:0000286 ! allele morphy class
+
+[Term]
+id: FBcv:0000288
+name: amorph
+namespace: allele_class
+comment: Proforma field: GA4.
+subset: camcur
+is_a: FBcv:0000287 ! loss of function
+
+[Term]
+id: FBcv:0000289
+name: hypomorph
+namespace: allele_class
+comment: Proforma field: GA4.
+subset: camcur
+is_a: FBcv:0000287 ! loss of function
+
+[Term]
+id: FBcv:0000290
+name: gain of function
+namespace: allele_class
+comment: Proforma field: GA4.
+subset: camcur
+is_a: FBcv:0000286 ! allele morphy class
+
+[Term]
+id: FBcv:0000291
+name: neomorph
+namespace: allele_class
+comment: Proforma field: GA4.
+subset: camcur
+is_a: FBcv:0000290 ! gain of function
+
+[Term]
+id: FBcv:0000292
+name: antimorph
+namespace: allele_class
+comment: Proforma field: GA4.
+subset: camcur
+is_a: FBcv:0000290 ! gain of function
+
+[Term]
+id: FBcv:0000293
+name: hypermorph
+namespace: allele_class
+comment: Proforma field: GA4.
+subset: camcur
+is_a: FBcv:0000290 ! gain of function
+
+[Term]
+id: FBcv:0000294
+name: wild-type allele
+namespace: allele_class
+comment: Proforma field: GA4.
+subset: camcur
+is_a: FBcv:0000286 ! allele morphy class
+
+[Term]
+id: FBcv:0000295
+name: wild-type generic
+namespace: allele_class
+comment: Proforma field: GA4.
+subset: camcur
+is_a: FBcv:0000294 ! wild-type allele
+
+[Term]
+id: FBcv:0000296
+name: isoallele
+namespace: allele_class
+comment: Proforma field: GA4.
+subset: camcur
+is_a: FBcv:0000294 ! wild-type allele
+
+[Term]
+id: FBcv:0000297
+name: extracted wild-type chromosome 1
+is_a: FBcv:0000615 ! extracted wild-type chromosome
+
+[Term]
+id: FBcv:0000298
+name: recessive
+namespace: dominance_qualifier
+def: "A phenotypic attribute is described as recessive when it is manifest only in individuals homozygous or hemizygous for the allele that causes that phenotype." [ISBN:0805303162]
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q.
+subset: camcur
+is_a: FBcv:0000565 ! dominance relationship qualifier
+
+[Term]
+id: FBcv:0000299
+name: dominant
+namespace: dominance_qualifier
+def: "A phenotypic attribute is described as dominant when it is manifest in individuals heterozygous for the allele that causes that phenotype.\ndefinition_reference: ISBN:0805303162" [ISBN:0805303162]
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q.
+subset: camcur
+is_a: FBcv:0000565 ! dominance relationship qualifier
+
+[Term]
+id: FBcv:0000300
+name: codominant
+namespace: dominance_qualifier
+def: "A phenotypic attribute is described as codominant when it is manifest in individuals carrying the allele that causes that phenotype, irrespective of the homologous allele." [ISBN:0805303162]
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q.
+subset: camcur
+is_a: FBcv:0000299 ! dominant
+
+[Term]
+id: FBcv:0000301
+name: semidominant
+namespace: dominance_qualifier
+def: "A phenotypic attribute is described as semidominant when individuals heterozygous for the allele show phenotypes part way between homozygotes for either allele." [ISBN:0805303162]
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q.
+subset: camcur
+is_a: FBcv:0000299 ! dominant
+
+[Term]
+id: FBcv:0000302
+name: extracted wild-type chromosome 2
+is_a: FBcv:0000615 ! extracted wild-type chromosome
+
+[Term]
+id: FBcv:0000303
+name: extracted wild-type chromosome 3
+is_a: FBcv:0000615 ! extracted wild-type chromosome
+
+[Term]
+id: FBcv:0000304
+name: extracted wild-type chromosome 4
+is_a: FBcv:0000615 ! extracted wild-type chromosome
+
+[Term]
+id: FBcv:0000305
+name: extracted wild-type chromosome Y
+is_a: FBcv:0000615 ! extracted wild-type chromosome
+
+[Term]
+id: FBcv:0000306
+name: sex limited
+namespace: sex_qualifier
+def: "A phenotypic attribute is described as sex limited if its expression is limited to one or other sex by virtue of the particular biology of that sex, rather than the sex-linkage of the genes underlying the attribute." [ISBN:002418120X]
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q.
+subset: camcur
+is_a: FBcv:0000332 ! sex qualifier
+
+[Term]
+id: FBcv:0000307
+name: male limited
+namespace: sex_qualifier
+def: "A  phenotypic attribute is described as male limited if its expression is limited to males by virtue of the particular biology of males, rather than the sex-linkage of the genes underlying the attribute." [ISBN:002418120X]
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q.
+subset: camcur
+is_a: FBcv:0000306 ! sex limited
+
+[Term]
+id: FBcv:0000308
+name: female limited
+namespace: sex_qualifier
+def: "A phenotypic attribute is described as female limited if its expression is limited to females by virtue of the particular biology of females, rather than the sex-linkage of the genes underlying the attribute." [ISBN:002418120X]
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q.
+subset: camcur
+is_a: FBcv:0000306 ! sex limited
+
+[Term]
+id: FBcv:0000309
+name: conditional qualifier
+namespace: environmental_qualifier
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+is_a: FBcv:0000005 ! qualifier
+
+[Term]
+id: FBcv:0000310
+name: temperature conditional
+namespace: environmental_qualifier
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000309 ! conditional qualifier
+
+[Term]
+id: FBcv:0000311
+name: conditional ts
+namespace: environmental_qualifier
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000310 ! temperature conditional
+
+[Term]
+id: FBcv:0000312
+name: conditional cs
+namespace: environmental_qualifier
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000310 ! temperature conditional
+
+[Term]
+id: FBcv:0000313
+name: drug conditional
+namespace: environmental_qualifier
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000309 ! conditional qualifier
+
+[Term]
+id: FBcv:0000314
+name: conditional RU486
+namespace: environmental_qualifier
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000313 ! drug conditional
+
+[Term]
+id: FBcv:0000315
+name: conditional tetracycline
+namespace: environmental_qualifier
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000313 ! drug conditional
+
+[Term]
+id: FBcv:0000316
+name: homeotic
+namespace: homeotic
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q.
+subset: camcur
+is_a: FBcv:0000014 ! structural qualifier
+
+[Term]
+id: FBcv:0000317
+name: isogenic chromosome 1
+is_a: FBcv:0000619 ! isogenic stock
+
+[Term]
+id: FBcv:0000318
+name: isogenic chromosome 2
+is_a: FBcv:0000619 ! isogenic stock
+
+[Term]
+id: FBcv:0000319
+name: gap
+namespace: embryonic_pattern_qualifier
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000654 ! embryonic pattern qualifier
+
+[Term]
+id: FBcv:0000320
+name: terminal
+namespace: embryonic_pattern_qualifier
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000654 ! embryonic pattern qualifier
+
+[Term]
+id: FBcv:0000321
+name: isogenic chromosome 3
+is_a: FBcv:0000619 ! isogenic stock
+
+[Term]
+id: FBcv:0000322
+name: pair rule
+namespace: embryonic_pattern_qualifier
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000654 ! embryonic pattern qualifier
+
+[Term]
+id: FBcv:0000323
+name: segment polarity
+namespace: embryonic_pattern_qualifier
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000654 ! embryonic pattern qualifier
+
+[Term]
+id: FBcv:0000324
+name: dorsal-ventral polarity
+namespace: embryonic_pattern_qualifier
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q.
+subset: camcur
+is_a: FBcv:0000654 ! embryonic pattern qualifier
+
+[Term]
+id: FBcv:0000325
+name: neurogenic
+namespace: embryonic_pattern_qualifier
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q.
+subset: camcur
+is_a: FBcv:0000654 ! embryonic pattern qualifier
+
+[Term]
+id: FBcv:0000326
+name: isogenic chromosome 4
+is_a: FBcv:0000619 ! isogenic stock
+
+[Term]
+id: FBcv:0000327
+name: P-element transposase source for transposable element mutagenesis
+is_a: FBcv:0000043 ! transposase source for transposable element mutagenesis
+
+[Term]
+id: FBcv:0000328
+name: hobo transposase source for transposable element mutagenesis
+is_a: FBcv:0000043 ! transposase source for transposable element mutagenesis
+
+[Term]
+id: FBcv:0000329
+name: piggyBac transposase source for transposable element mutagenesis
+is_a: FBcv:0000043 ! transposase source for transposable element mutagenesis
+
+[Term]
+id: FBcv:0000330
+name: minos transposase source for transposable element mutagenesis
+is_a: FBcv:0000043 ! transposase source for transposable element mutagenesis
+
+[Term]
+id: FBcv:0000331
+name: polyphasic
+namespace: temporal_qualifier
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q.\n\nDeprecated:  Use of this term is discouraged as there is no way to decide how to group anatomy terms combined with this qualifier with other terms in the anatomy ontology.  Subject to discussion and once its usage in old curation is removed, this term will be obsoleted.  DS
+is_a: FBcv:0000009 ! temporal stage qualifier
+
+[Term]
+id: FBcv:0000332
+name: sex qualifier
+namespace: sex_qualifier
+is_a: FBcv:0000809 ! phenotype qualifier
+
+[Term]
+id: FBcv:0000333
+name: male
+namespace: sex_qualifier
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000332 ! sex qualifier
+
+[Term]
+id: FBcv:0000334
+name: female
+namespace: sex_qualifier
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000332 ! sex qualifier
+
+[Term]
+id: FBcv:0000335
+name: germ-line clone
+namespace: genotype_to_phenotype_relation
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000812 ! clone qualifier
+
+[Term]
+id: FBcv:0000336
+name: somatic clone
+namespace: genotype_to_phenotype_relation
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
+subset: camcur
+is_a: FBcv:0000812 ! clone qualifier
+
+[Term]
+id: FBcv:0000337
+name: P-element ammunition for transposable element mutagenesis
+is_a: FBcv:0000044 ! ammunition source for transposable element mutagenesis
+
+[Term]
+id: FBcv:0000338
+name: hobo ammunition for transposable element mutagenesis
+is_a: FBcv:0000044 ! ammunition source for transposable element mutagenesis
+
+[Term]
+id: FBcv:0000339
+name: fully
+namespace: extent
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. \n\nDeprecated:  Use of this term is discouraged as 'fully' assumed in the absence of use of 'partially'.
+is_a: FBcv:0000811 ! qualitative qualifier
+
+[Term]
+id: FBcv:0000340
+name: partially
+namespace: extent
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q.
+subset: camcur
+is_a: FBcv:0000811 ! qualitative qualifier
+
+[Term]
+id: FBcv:0000341
+name: good
+namespace: intensity_qualifier
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q.
+subset: camcur
+is_a: FBcv:0000811 ! qualitative qualifier
+
+[Term]
+id: FBcv:0000342
+name: poor
+namespace: intensity_qualifier
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q.
+subset: camcur
+is_a: FBcv:0000811 ! qualitative qualifier
+
+[Term]
+id: FBcv:0000343
+name: reduced
+namespace: intensity_qualifier
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q.
+subset: camcur
+is_a: FBcv:0000811 ! qualitative qualifier
+
+[Term]
+id: FBcv:0000344
+name: slow
+namespace: intensity_qualifier
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q.
+subset: camcur
+is_a: FBcv:0000811 ! qualitative qualifier
+
+[Term]
+id: FBcv:0000345
+name: fast
+namespace: intensity_qualifier
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q.
+subset: camcur
+is_a: FBcv:0000811 ! qualitative qualifier
+
+[Term]
+id: FBcv:0000346
+name: intermediate
+namespace: intensity_qualifier
+comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q.
+subset: camcur
+is_a: FBcv:0000811 ! qualitative qualifier
+
+[Term]
+id: FBcv:0000347
+name: phenotypic class
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+is_a: FBcv:0000807 ! allele descriptor
+
+[Term]
+id: FBcv:0000348
+name: wild-type
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000349
+name: viable
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a. Proforma field: MA8.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000350
+name: semi-viable
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000349 ! viable
+
+[Term]
+id: FBcv:0000351
+name: lethal
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000352
+name: semi-lethal
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000351 ! lethal
+
+[Term]
+id: FBcv:0000353
+name: cell lethal
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000351 ! lethal
+
+[Term]
+id: FBcv:0000354
+name: visible
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000355
+name: eye color defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+exact_synonym: "eye colour defective" []
+is_a: FBcv:0000354 ! visible
+
+[Term]
+id: FBcv:0000356
+name: body color defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+exact_synonym: "body colour defective" []
+is_a: FBcv:0000354 ! visible
+
+[Term]
+id: FBcv:0000357
+name: size defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000354 ! visible
+
+[Term]
+id: FBcv:0000358
+name: small body
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000357 ! size defective
+
+[Term]
+id: FBcv:0000359
+name: reduced cell number
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000357 ! size defective
+
+[Term]
+id: FBcv:0000360
+name: reduced cell size
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000357 ! size defective
+
+[Term]
+id: FBcv:0000361
+name: large body
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000357 ! size defective
+
+[Term]
+id: FBcv:0000362
+name: increased cell number
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000357 ! size defective
+
+[Term]
+id: FBcv:0000363
+name: increased cell size
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000357 ! size defective
+
+[Term]
+id: FBcv:0000364
+name: sterile
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000365
+name: semi-sterile
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000364 ! sterile
+
+[Term]
+id: FBcv:0000366
+name: female sterile
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000364 ! sterile
+
+[Term]
+id: FBcv:0000367
+name: female semi-sterile
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000365 ! semi-sterile
+is_a: FBcv:0000366 ! female sterile
+
+[Term]
+id: FBcv:0000368
+name: female sterile germ-line-dependent
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000366 ! female sterile
+
+[Term]
+id: FBcv:0000369
+name: female sterile soma-dependent
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000366 ! female sterile
+
+[Term]
+id: FBcv:0000370
+name: male sterile
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000364 ! sterile
+
+[Term]
+id: FBcv:0000371
+name: male semi-sterile
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000365 ! semi-sterile
+is_a: FBcv:0000370 ! male sterile
+
+[Term]
+id: FBcv:0000372
+name: male sterile germ-line-dependent
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000370 ! male sterile
+
+[Term]
+id: FBcv:0000373
+name: male sterile soma-dependent
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000370 ! male sterile
+
+[Term]
+id: FBcv:0000374
+name: fertile
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a. Proforma field: MA8.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000375
+name: semi-fertile
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000374 ! fertile
+
+[Term]
+id: FBcv:0000376
+name: male fertile
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000374 ! fertile
+
+[Term]
+id: FBcv:0000377
+name: female fertile
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000374 ! fertile
+
+[Term]
+id: FBcv:0000378
+name: grandchildless
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000364 ! sterile
+
+[Term]
+id: FBcv:0000379
+name: enhancer of variegation
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000008 ! variegation
+
+[Term]
+id: FBcv:0000380
+name: non-enhancer of variegation
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000008 ! variegation
+
+[Term]
+id: FBcv:0000381
+name: suppressor of variegation
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000008 ! variegation
+
+[Term]
+id: FBcv:0000382
+name: non-suppressor of variegation
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000008 ! variegation
+
+[Term]
+id: FBcv:0000383
+name: auxotroph
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000384
+name: aging defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000385
+name: short lived
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000384 ! aging defective
+
+[Term]
+id: FBcv:0000386
+name: long lived
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000384 ! aging defective
+
+[Term]
+id: FBcv:0000387
+name: behavioral
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+exact_synonym: "behavioural" []
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000388
+name: geotaxis behavior defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+exact_synonym: "geotaxis behaviour defective" []
+is_a: FBcv:0000387 ! behavioral
+
+[Term]
+id: FBcv:0000389
+name: paralytic
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000387 ! behavioral
+
+[Term]
+id: FBcv:0000390
+name: hypoactive
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000387 ! behavioral
+
+[Term]
+id: FBcv:0000391
+name: bang sensitive
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000387 ! behavioral
+
+[Term]
+id: FBcv:0000392
+name: hyperactive
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000387 ! behavioral
+
+[Term]
+id: FBcv:0000393
+name: pain response defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000387 ! behavioral
+
+[Term]
+id: FBcv:0000394
+name: circadian rhythm defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000387 ! behavioral
+
+[Term]
+id: FBcv:0000395
+name: locomotor rhythm defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000394 ! circadian rhythm defective
+
+[Term]
+id: FBcv:0000396
+name: eclosion rhythm defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000394 ! circadian rhythm defective
+
+[Term]
+id: FBcv:0000397
+name: learning defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000387 ! behavioral
+
+[Term]
+id: FBcv:0000398
+name: memory defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000387 ! behavioral
+
+[Term]
+id: FBcv:0000399
+name: courtship defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000387 ! behavioral
+
+[Term]
+id: FBcv:0000400
+name: mating defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000399 ! courtship defective
+
+[Term]
+id: FBcv:0000401
+name: mating rhythm defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000399 ! courtship defective
+
+[Term]
+id: FBcv:0000402
+name: song defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000399 ! courtship defective
+
+[Term]
+id: FBcv:0000403
+name: chemosensitive behavior defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+exact_synonym: "chemosensitive behaviour defective" []
+is_a: FBcv:0000387 ! behavioral
+
+[Term]
+id: FBcv:0000404
+name: olfaction defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000403 ! chemosensitive behavior defective
+
+[Term]
+id: FBcv:0000405
+name: gustation defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000403 ! chemosensitive behavior defective
+
+[Term]
+id: FBcv:0000406
+name: tarsal response defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000403 ! chemosensitive behavior defective
+
+[Term]
+id: FBcv:0000407
+name: auditory system defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000387 ! behavioral
+
+[Term]
+id: FBcv:0000408
+name: environmental stress response defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000387 ! behavioral
+
+[Term]
+id: FBcv:0000409
+name: osmotic stress response defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000408 ! environmental stress response defective
+
+[Term]
+id: FBcv:0000410
+name: heat stress response defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000408 ! environmental stress response defective
+
+[Term]
+id: FBcv:0000411
+name: visual behavior defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+exact_synonym: "visual behaviour defective" []
+is_a: FBcv:0000387 ! behavioral
+
+[Term]
+id: FBcv:0000412
+name: optomotor behavior defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+exact_synonym: "optomotor behaviour defective" []
+is_a: FBcv:0000411 ! visual behavior defective
+
+[Term]
+id: FBcv:0000413
+name: phototaxis behavior defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+exact_synonym: "phototaxis behaviour defective" []
+is_a: FBcv:0000411 ! visual behavior defective
+
+[Term]
+id: FBcv:0000414
+name: locomotor behavior defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+exact_synonym: "locomotor behaviour defective" []
+is_a: FBcv:0000387 ! behavioral
+
+[Term]
+id: FBcv:0000415
+name: jumpless
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000414 ! locomotor behavior defective
+
+[Term]
+id: FBcv:0000416
+name: uncoordinated
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000414 ! locomotor behavior defective
+
+[Term]
+id: FBcv:0000417
+name: flight behavior defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+exact_synonym: "flight behaviour defective" []
+is_a: FBcv:0000387 ! behavioral
+
+[Term]
+id: FBcv:0000418
+name: flightless
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000417 ! flight behavior defective
+
+[Term]
+id: FBcv:0000419
+name: feeding behavior defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+exact_synonym: "feeding behaviour defective" []
+is_a: FBcv:0000387 ! behavioral
+
+[Term]
+id: FBcv:0000420
+name: grooming behavior defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+exact_synonym: "grooming behaviour defective" []
+is_a: FBcv:0000387 ! behavioral
+
+[Term]
+id: FBcv:0000421
+name: touch sensitivity defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000387 ! behavioral
+
+[Term]
+id: FBcv:0000422
+name: photoperiod response variant
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000387 ! behavioral
+
+[Term]
+id: FBcv:0000423
+name: DNA repair defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000424
+name: cell death defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000425
+name: cell death increase
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000424 ! cell death defective
+
+[Term]
+id: FBcv:0000426
+name: cell death decrease
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000424 ! cell death defective
+
+[Term]
+id: FBcv:0000427
+name: cell growth defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000428
+name: cell size defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000429
+name: cell shape defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000430
+name: cell polarity
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000431
+name: meiotic
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000432
+name: mitotic
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000433
+name: cytokinesis defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000434
+name: neurophysiology defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000435
+name: neuroanatomy defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000436
+name: sex-determination defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000437
+name: dosage compensation defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000438
+name: electrophoretic variant
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000439
+name: chemical resistant
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000440
+name: chemical sensitive
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000441
+name: radiation resistant
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000442
+name: radiation sensitive
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000443
+name: Minute
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000444
+name: hyperplastic
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000445
+name: tumorigenic
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000446
+name: melanotic 'tumor'
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000447
+name: melanotic necrosis
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000448
+name: immune response defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000449
+name: tissue polarity
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000450
+name: developmental rate defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000451
+name: wound healing defective
+namespace: phenotypic_class
+comment: Proforma field: GA56. Proforma field: GA28a. Proforma field: GA29a.
+subset: camcur
+is_a: FBcv:0000347 ! phenotypic class
+
+[Term]
+id: FBcv:0000452
+name: origin of mutation
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+is_a: FBcv:0000807 ! allele descriptor
+
+[Term]
+id: FBcv:0000453
+name: piggyBac ammunition for transposable element mutagenesis
+is_a: FBcv:0000044 ! ammunition source for transposable element mutagenesis
+
+[Term]
+id: FBcv:0000454
+name: synthetic
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000452 ! origin of mutation
+
+[Term]
+id: FBcv:0000455
+name: in vitro construct
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+is_a: FBcv:0000452 ! origin of mutation
+
+[Term]
+id: FBcv:0000456
+name: in vitro construct | regulatory fusion
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000455 ! in vitro construct
+
+[Term]
+id: FBcv:0000457
+name: in vitro construct | coding region fusion
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000455 ! in vitro construct
+
+[Term]
+id: FBcv:0000458
+name: in vitro construct | site directed mutagenesis
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000455 ! in vitro construct
+
+[Term]
+id: FBcv:0000459
+name: in vitro construct | deletion
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000455 ! in vitro construct
+
+[Term]
+id: FBcv:0000460
+name: in vitro construct | genomic fragment
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000455 ! in vitro construct
+
+[Term]
+id: FBcv:0000461
+name: in vitro construct | minigene
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000455 ! in vitro construct
+
+[Term]
+id: FBcv:0000462
+name: in vitro construct | amino acid replacement
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000455 ! in vitro construct
+
+[Term]
+id: FBcv:0000463
+name: in vitro construct | RNAi
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000455 ! in vitro construct
+
+[Term]
+id: FBcv:0000464
+name: in vitro construct | other
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000455 ! in vitro construct
+
+[Term]
+id: FBcv:0000465
+name: natural population
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000452 ! origin of mutation
+
+[Term]
+id: FBcv:0000466
+name: environmental treatment
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000452 ! origin of mutation
+
+[Term]
+id: FBcv:0000467
+name: cold-treatment
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000466 ! environmental treatment
+
+[Term]
+id: FBcv:0000468
+name: heat-treatment
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000466 ! environmental treatment
+
+[Term]
+id: FBcv:0000469
+name: spontaneous
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000452 ! origin of mutation
+
+[Term]
+id: FBcv:0000470
+name: recombination
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000452 ! origin of mutation
+
+[Term]
+id: FBcv:0000471
+name: gene conversion
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000470 ! recombination
+
+[Term]
+id: FBcv:0000472
+name: intralocus exchange
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000470 ! recombination
+
+[Term]
+id: FBcv:0000473
+name: unequal recombination
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000470 ! recombination
+
+[Term]
+id: FBcv:0000474
+name: mitotic recombination
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000470 ! recombination
+
+[Term]
+id: FBcv:0000475
+name: magnification
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000470 ! recombination
+
+[Term]
+id: FBcv:0000476
+name: detachment
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000470 ! recombination
+
+[Term]
+id: FBcv:0000477
+name: reduction
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000470 ! recombination
+
+[Term]
+id: FBcv:0000478
+name: site specific recombinase
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000470 ! recombination
+
+[Term]
+id: FBcv:0000479
+name: FLPase
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000478 ! site specific recombinase
+
+[Term]
+id: FBcv:0000480
+name: SCEI endonuclease
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000478 ! site specific recombinase
+
+[Term]
+id: FBcv:0000481
+name: cre recombinase
+namespace: origin_of_mutation
+def: "Catalyzes site-specific recombination between two 34bp loxP sites." [UniProt:P06956]
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+exact_synonym: "Cre recombinase" []
+is_a: FBcv:0000478 ! site specific recombinase
+
+[Term]
+id: FBcv:0000482
+name: segregation
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000452 ! origin of mutation
+
+[Term]
+id: FBcv:0000483
+name: transposable element activity
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000452 ! origin of mutation
+
+[Term]
+id: FBcv:0000484
+name: IR-hybrid dysgenesis
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "IR" []
+is_a: FBcv:0000483 ! transposable element activity
+
+[Term]
+id: FBcv:0000485
+name: Stalker-hybrid dysgenesis
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000483 ! transposable element activity
+
+[Term]
+id: FBcv:0000486
+name: P-element activity
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000483 ! transposable element activity
+
+[Term]
+id: FBcv:0000487
+name: PM hybrid dysgenesis
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000486 ! P-element activity
+
+[Term]
+id: FBcv:0000488
+name: &Dgr;2-3
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000486 ! P-element activity
+
+[Term]
+id: FBcv:0000489
+name: Js
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "Jumpstarter" []
+is_a: FBcv:0000486 ! P-element activity
+
+[Term]
+id: FBcv:0000490
+name: p&pgr;25.1
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000486 ! P-element activity
+
+[Term]
+id: FBcv:0000491
+name: p&pgr;25.7wc
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000486 ! P-element activity
+
+[Term]
+id: FBcv:0000492
+name: MR
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000486 ! P-element activity
+
+[Term]
+id: FBcv:0000493
+name: MR<up>h12</up>
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000492 ! MR
+
+[Term]
+id: FBcv:0000494
+name: MR<up>T007</up>
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000492 ! MR
+
+[Term]
+id: FBcv:0000495
+name: MRF23.5
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000492 ! MR
+
+[Term]
+id: FBcv:0000496
+name: MRF31.1
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000492 ! MR
+
+[Term]
+id: FBcv:0000497
+name: hobo activity
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000483 ! transposable element activity
+
+[Term]
+id: FBcv:0000498
+name: hobo dysgenesis
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000497 ! hobo activity
+
+[Term]
+id: FBcv:0000499
+name: HBL1
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "Hobbled1" []
+related_synonym: "Hobo transposase source" []
+is_a: FBcv:0000497 ! hobo activity
+
+[Term]
+id: FBcv:0000500
+name: mariner transposase
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000483 ! transposable element activity
+
+[Term]
+id: FBcv:0000501
+name: gypsy element activity
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000483 ! transposable element activity
+
+[Term]
+id: FBcv:0000502
+name: piggyBac transposase
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000483 ! transposable element activity
+
+[Term]
+id: FBcv:0000503
+name: irradiation
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000452 ! origin of mutation
+
+[Term]
+id: FBcv:0000504
+name: ionizing radiation
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000503 ! irradiation
+
+[Term]
+id: FBcv:0000505
+name: &agr; ray
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000504 ! ionizing radiation
+
+[Term]
+id: FBcv:0000506
+name: &ggr; ray
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000504 ! ionizing radiation
+
+[Term]
+id: FBcv:0000507
+name: <up>60</up>Co &ggr; ray
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000506 ! &ggr; ray
+
+[Term]
+id: FBcv:0000508
+name: <up>137</up>Cs &ggr; ray
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000506 ! &ggr; ray
+
+[Term]
+id: FBcv:0000509
+name: <up>226</up>Ra &agr; ray
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "radium" []
+is_a: FBcv:0000506 ! &ggr; ray
+
+[Term]
+id: FBcv:0000510
+name: <up>32</up>P
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000504 ! ionizing radiation
+
+[Term]
+id: FBcv:0000511
+name: <up>3</up>H
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "tritium" []
+is_a: FBcv:0000504 ! ionizing radiation
+
+[Term]
+id: FBcv:0000512
+name: <up>3</up>H-deoxycytidine
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000504 ! ionizing radiation
+
+[Term]
+id: FBcv:0000513
+name: <up>3</up>H-thymidine
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000504 ! ionizing radiation
+
+[Term]
+id: FBcv:0000514
+name: Bevatron irradiation
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000504 ! ionizing radiation
+
+[Term]
+id: FBcv:0000515
+name: deuteron irradiation
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000504 ! ionizing radiation
+
+[Term]
+id: FBcv:0000516
+name: neutrons
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000504 ! ionizing radiation
+
+[Term]
+id: FBcv:0000517
+name: <up>252</up>Cf fission neutrons
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000516 ! neutrons
+
+[Term]
+id: FBcv:0000518
+name: X ray
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000504 ! ionizing radiation
+
+[Term]
+id: FBcv:0000519
+name: non-ionizing radiation
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000503 ! irradiation
+
+[Term]
+id: FBcv:0000520
+name: magnetic field
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000519 ! non-ionizing radiation
+
+[Term]
+id: FBcv:0000521
+name: radio waves
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000519 ! non-ionizing radiation
+
+[Term]
+id: FBcv:0000522
+name: stratosphere exposure
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000519 ! non-ionizing radiation
+
+[Term]
+id: FBcv:0000523
+name: supersonic-treatment
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000519 ! non-ionizing radiation
+
+[Term]
+id: FBcv:0000524
+name: U.V.
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000519 ! non-ionizing radiation
+
+[Term]
+id: FBcv:0000525
+name: chemical
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000452 ! origin of mutation
+
+[Term]
+id: FBcv:0000526
+name: alkylating agent
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000525 ! chemical
+
+[Term]
+id: FBcv:0000527
+name: diethyl sulfate
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "DES" []
+is_a: FBcv:0000526 ! alkylating agent
+
+[Term]
+id: FBcv:0000528
+name: 2-chloroethyl methanesulfonate
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "CB1506" []
+is_a: FBcv:0000526 ! alkylating agent
+
+[Term]
+id: FBcv:0000529
+name: 2-fluoroethyl methanesulfonate
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "CB1522" []
+is_a: FBcv:0000526 ! alkylating agent
+
+[Term]
+id: FBcv:0000530
+name: ethyl methanesulfonate
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "CB1528" []
+related_synonym: "EMS" []
+is_a: FBcv:0000526 ! alkylating agent
+
+[Term]
+id: FBcv:0000531
+name: ethyl nitrosourea
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "ENU" []
+is_a: FBcv:0000526 ! alkylating agent
+
+[Term]
+id: FBcv:0000532
+name: hycanthon methanesulfonate
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "HMS" []
+is_a: FBcv:0000526 ! alkylating agent
+
+[Term]
+id: FBcv:0000533
+name: methyl methanesulfonate
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "CB1540" []
+related_synonym: "MMS" []
+is_a: FBcv:0000526 ! alkylating agent
+
+[Term]
+id: FBcv:0000534
+name: mustard gas
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "1,1'-thiobis[2-chloroethane" []
+is_a: FBcv:0000526 ! alkylating agent
+
+[Term]
+id: FBcv:0000535
+name: N-methyl-N'-nitro-N-nitrosoguanidine
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "MNNG" []
+related_synonym: "NNG" []
+is_a: FBcv:0000526 ! alkylating agent
+
+[Term]
+id: FBcv:0000536
+name: sulfur mustard
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "CB1735" []
+is_a: FBcv:0000526 ! alkylating agent
+
+[Term]
+id: FBcv:0000537
+name: minos ammunition for transposable element mutagenesis
+is_a: FBcv:0000044 ! ammunition source for transposable element mutagenesis
+
+[Term]
+id: FBcv:0000538
+name: carbamate
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000525 ! chemical
+
+[Term]
+id: FBcv:0000539
+name: urethane
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000538 ! carbamate
+
+[Term]
+id: FBcv:0000540
+name: vinyl carbamate
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000538 ! carbamate
+
+[Term]
+id: FBcv:0000541
+name: intercalating agent
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000525 ! chemical
+
+[Term]
+id: FBcv:0000542
+name: mitomycin C
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000541 ! intercalating agent
+
+[Term]
+id: FBcv:0000543
+name: ICR 100
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "2-methoxy-6-[3-(ethyl-2-chloroethyl)aminopropylamino]acridine" []
+related_synonym: "quinacrine mustard" []
+is_a: FBcv:0000541 ! intercalating agent
+
+[Term]
+id: FBcv:0000544
+name: ICR 170
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "2-methoxy-6-dichloro-9-(3-ethyl-2-chloroethyl-aminopropylamino)acridine-dihydrochloride" []
+is_a: FBcv:0000541 ! intercalating agent
+
+[Term]
+id: FBcv:0000545
+name: 1,2-dibromoethane
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "DBE" []
+is_a: FBcv:0000541 ! intercalating agent
+
+[Term]
+id: FBcv:0000546
+name: 1,2-dichloroethane
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "DCE" []
+is_a: FBcv:0000541 ! intercalating agent
+
+[Term]
+id: FBcv:0000547
+name: 1-bromo-2-chloroethane
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "BCE" []
+is_a: FBcv:0000541 ! intercalating agent
+
+[Term]
+id: FBcv:0000548
+name: base analog
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000525 ! chemical
+
+[Term]
+id: FBcv:0000549
+name: 5-bromouracil
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000548 ! base analog
+
+[Term]
+id: FBcv:0000550
+name: 5-bromouridine
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000548 ! base analog
+
+[Term]
+id: FBcv:0000551
+name: enzyme inhibitor
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000525 ! chemical
+
+[Term]
+id: FBcv:0000552
+name: aminopterin
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000551 ! enzyme inhibitor
+
+[Term]
+id: FBcv:0000553
+name: inorganic compound
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000525 ! chemical
+
+[Term]
+id: FBcv:0000554
+name: cupric sulfate
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000553 ! inorganic compound
+
+[Term]
+id: FBcv:0000555
+name: H<down>3</down>BO<down>3</down>
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000553 ! inorganic compound
+
+[Term]
+id: FBcv:0000556
+name: sodium bisulphite
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000553 ! inorganic compound
+
+[Term]
+id: FBcv:0000557
+name: sodium fluoride
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000553 ! inorganic compound
+
+[Term]
+id: FBcv:0000558
+name: epoxy hydrocarbon
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000525 ! chemical
+
+[Term]
+id: FBcv:0000559
+name: diepoxybutane
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "DEB" []
+related_synonym: "erythritol anhydride" []
+is_a: FBcv:0000558 ! epoxy hydrocarbon
+
+[Term]
+id: FBcv:0000560
+name: diepoxyoctane
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000558 ! epoxy hydrocarbon
+
+[Term]
+id: FBcv:0000561
+name: unclassified chemical
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000525 ! chemical
+
+[Term]
+id: FBcv:0000562
+name: 1,2:5,6-dibenzanthracene
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000563
+name: 1,4-dimethanesulfonoxy-1:4-dimethylbutane
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "CB2348" []
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000564
+name: 1,4-dimethanesulfonoxybut-2-yne
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "CB2058" []
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000565
+name: dominance relationship qualifier
+namespace: dominance_qualifier
+def: "Dominance relationships describe the dependence of the expression of a phenotypic attribute of an allele on the genotype at the locus in question.  An allele might be recessive with respect to one phenotypic attribute, but dominant with respect to another." [FB:rd]
+is_a: FBcv:0000005 ! qualifier
+
+[Term]
+id: FBcv:0000566
+name: 1,6-dimethylsulfonoxy D-mannitol
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "CB2511" []
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000567
+name: 1,6-dimethylsulfonoxy L-mannitol
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "CB2628" []
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000568
+name: 1-amino-2-naphthol-4-sulfonic acid
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000569
+name: 1-diethylaminoethylethylamino-4-methyl-thioxanthenone
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000570
+name: 2-methoxyethanol
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000571
+name: 2,5,-bisethylene-imine-1,4-benzoquinone
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000572
+name: 7-bromomethyl 12 methyl benz<up>&agr;</up> anthracine
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000573
+name: actinomycin D
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000574
+name: benzo(&agr;)pyrene
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000575
+name: caffeine
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000576
+name: cisplatin
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "cis-dichlorodiammineplatinum(II)" []
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000577
+name: colchicine
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000578
+name: dimethyl sulfoxide
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000579
+name: DNA
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000580
+name: ethyl ether
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000581
+name: ethylenimine
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "EI" []
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000582
+name: ethylene oxide
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000583
+name: fagaronine
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000584
+name: formaldehyde
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000585
+name: hesperidine
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000586
+name: hexamethylmelamine
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "altretamine" []
+related_synonym: "HMM" []
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000587
+name: hexamethylphosphoramide
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "HMPA" []
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000588
+name: iodine
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000553 ! inorganic compound
+
+[Term]
+id: FBcv:0000589
+name: Janus green B
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000590
+name: methoxy diethylnitrosamine
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000591
+name: natural gas
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000592
+name: nitrosomethyl urea
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "MNU" []
+related_synonym: "N-methyl-N-nitrosourea" []
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000593
+name: N-nitrosodimethylamine
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "DMN" []
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000594
+name: p-N,N-di(2-chloroethyl)aminophenylvaleric acid
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "CB1356" []
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000595
+name: p-N,N-di-(2-chloroethyl)amino-D-phenylalanine
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "CB3026" []
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000596
+name: p-N,N-di-(2-chloroethyl)amino-DL-phenylalanine
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "CB3007" []
+related_synonym: "melphalan" []
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000597
+name: p-N,N-di-(2-chloroethyl)amino-L-phenylalanine
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "CB3025" []
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000598
+name: dominant temperature-sensitive lethal balancer
+is_a: FBcv:0000152 ! balancer stock
+
+[Term]
+id: FBcv:0000599
+name: p-N,N-di-(2-chloroethyl)aminophenylethylamine
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "CB3034" []
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000600
+name: p-p'-N,N-di(2-chloroethyl)aminophenoxyphenylalanine1
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "CB305" []
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000601
+name: quinhydrone
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000602
+name: S-2-chloroethylcysteine
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "CB1592" []
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000603
+name: styryl quinoline
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "CB3086" []
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000604
+name: triaziquone
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000605
+name: triethylenemelamine
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "CB1246" []
+related_synonym: "TEM" []
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000606
+name: allele assay method
+namespace: mode_of_assay
+comment: Proforma field: GA19.
+is_a: FBcv:0000807 ! allele descriptor
+
+[Term]
+id: FBcv:0000607
+name: In transgenic Drosophila
+namespace: mode_of_assay
+subset: camcur
+is_a: FBcv:0000606 ! allele assay method
+
+[Term]
+id: FBcv:0000608
+name: Whole-organism transient assay
+namespace: mode_of_assay
+subset: camcur
+is_a: FBcv:0000606 ! allele assay method
+
+[Term]
+id: FBcv:0000609
+name: Drosophila cell culture
+namespace: mode_of_assay
+comment: Proforma field: GA19.
+subset: camcur
+xref_analog: abbrev:3
+is_a: FBcv:0000606 ! allele assay method
+
+[Term]
+id: FBcv:0000610
+name: In transgenic Drosophila (allele of one drosophilid species in genome of another drosophilid)
+namespace: mode_of_assay
+comment: Proforma field: GA19.
+subset: camcur
+xref_analog: abbrev:5
+is_a: FBcv:0000607 ! In transgenic Drosophila
+
+[Term]
+id: FBcv:0000611
+name: Whole-organism transient assay (allele from one drosophilid species assayed in another drosophilid)
+namespace: mode_of_assay
+comment: Proforma field: GA19.
+subset: camcur
+xref_analog: abbrev:6
+is_a: FBcv:0000608 ! Whole-organism transient assay
+
+[Term]
+id: FBcv:0000612
+name: In transgenic Drosophila (allele of foreign species in genome of drosophilid)
+namespace: mode_of_assay
+comment: Proforma field: GA19.
+subset: camcur
+xref_analog: abbrev:7
+is_a: FBcv:0000607 ! In transgenic Drosophila
+
+[Term]
+id: FBcv:0000613
+name: Whole-organism transient assay (allele of foreign species assayed in drosophilid)
+namespace: mode_of_assay
+comment: Proforma field: GA19.
+subset: camcur
+xref_analog: abbrev:8
+is_a: FBcv:0000608 ! Whole-organism transient assay
+
+[Term]
+id: FBcv:0000614
+name: stock descriptor
+is_a: FBcv:0000013 ! descriptor
+
+[Term]
+id: FBcv:0000615
+name: extracted wild-type chromosome
+is_a: FBcv:0010000 ! living stock
+
+[Term]
+id: FBcv:0000616
+name: laboratory stock
+comment: I don't think this is a useful term.
+is_obsolete: true
+
+[Term]
+id: FBcv:0000617
+name: selected wild-type stock
+is_a: FBcv:0000618 ! wild-type stock
+
+[Term]
+id: FBcv:0000618
+name: wild-type stock
+is_a: FBcv:0010000 ! living stock
+
+[Term]
+id: FBcv:0000619
+name: isogenic stock
+is_a: FBcv:0010000 ! living stock
+
+[Term]
+id: FBcv:0000620
+name: genetic interaction qualifier
+namespace: genetic_interaction_type
+is_a: FBcv:0000005 ! qualifier
+
+[Term]
+id: FBcv:0000621
+name: suppressor
+namespace: genetic_interaction_type
+comment: Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA28b-q. Proforma field: GA29b-q.
+is_a: FBcv:0000620 ! genetic interaction qualifier
+
+[Term]
+id: FBcv:0000622
+name: suppressible
+namespace: genetic_interaction_type
+comment: Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA28b-q. Proforma field: GA29b-q.
+subset: camcur
+is_a: FBcv:0000620 ! genetic interaction qualifier
+
+[Term]
+id: FBcv:0000623
+name: enhancer
+namespace: genetic_interaction_type
+comment: Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA28b-q. Proforma field: GA29b-q.
+is_a: FBcv:0000620 ! genetic interaction qualifier
+
+[Term]
+id: FBcv:0000624
+name: enhanceable
+namespace: genetic_interaction_type
+comment: Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA28b-q. Proforma field: GA29b-q.
+subset: camcur
+is_a: FBcv:0000620 ! genetic interaction qualifier
+
+[Term]
+id: FBcv:0000625
+name: non-enhancer
+namespace: genetic_interaction_type
+comment: Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA28b-q. Proforma field: GA29b-q.
+is_a: FBcv:0000620 ! genetic interaction qualifier
+
+[Term]
+id: FBcv:0000626
+name: non-enhanceable
+namespace: genetic_interaction_type
+comment: Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA28b-q. Proforma field: GA29b-q.
+subset: camcur
+is_a: FBcv:0000620 ! genetic interaction qualifier
+
+[Term]
+id: FBcv:0000627
+name: non-suppressor
+namespace: genetic_interaction_type
+comment: Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA28b-q. Proforma field: GA29b-q.
+is_a: FBcv:0000620 ! genetic interaction qualifier
+
+[Term]
+id: FBcv:0000628
+name: non-suppressible
+namespace: genetic_interaction_type
+comment: Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA28b-q. Proforma field: GA29b-q.
+subset: camcur
+is_a: FBcv:0000620 ! genetic interaction qualifier
+
+[Term]
+id: FBcv:0000629
+name: dominant temperature-sensitive lethal balancer for chromosome 2
+is_obsolete: true
+
+[Term]
+id: FBcv:0000630
+name: dominant temperature-sensitive lethal balancer for chromosome 3
+is_obsolete: true
+
+[Term]
+id: FBcv:0000631
+name: DrosDel Project deficiency kit stock
+is_a: FBcv:0000042 ! deficiency kit stock
+
+[Term]
+id: FBcv:0000632
+name: Bloomington Stock Center deficiency kit stock
+is_a: FBcv:0000042 ! deficiency kit stock
+
+[Term]
+id: FBcv:0000633
+name: Exelixis Inc. deficiency kit stock
+is_a: FBcv:0000042 ! deficiency kit stock
+
+[Term]
+id: FBcv:0000634
+name: duplication kit stock
+is_a: FBcv:0010000 ! living stock
+
+[Term]
+id: FBcv:0000635
+name: Cambridge University duplication kit for chromosome 2 stock
+is_a: FBcv:0000634 ! duplication kit stock
+
+[Term]
+id: FBcv:0000636
+name: Bloomington Stock Center duplication kit for chromosome 1 stock
+is_a: FBcv:0000634 ! duplication kit stock
+
+[Term]
+id: FBcv:0000637
+name: Gene Disruption Project stock
+is_a: FBcv:0010000 ! living stock
+
+[Term]
+id: FBcv:0000638
+name: sequenced strain
+is_a: FBcv:0000614 ! stock descriptor
+
+[Term]
+id: FBcv:0000639
+name: Golic laboratory gene replacement kit stock
+is_a: FBcv:0010000 ! living stock
+
+[Term]
+id: FBcv:0000640
+name: Golic laboratory gene replacement kit stock
+is_obsolete: true
+
+[Term]
+id: FBcv:0000641
+name: cytotype of stock
+is_a: FBcv:0010000 ! living stock
+
+[Term]
+id: FBcv:0000642
+name: H cytotype
+is_a: FBcv:0000641 ! cytotype of stock
+
+[Term]
+id: FBcv:0000643
+name: hobo family transposable element insertions present
+is_obsolete: true
+
+[Term]
+id: FBcv:0000644
+name: hobo family transposable element insertions absent
+is_obsolete: true
+
+[Term]
+id: FBcv:0000645
+name: P cytotype
+is_a: FBcv:0000641 ! cytotype of stock
+
+[Term]
+id: FBcv:0000646
+name: P-element family transposable element insertions absent
+is_obsolete: true
+
+[Term]
+id: FBcv:0000647
+name: P-element family transposable element insertions present
+is_obsolete: true
+
+[Term]
+id: FBcv:0000648
+name: mapping stock
+is_a: FBcv:0010000 ! living stock
+
+[Term]
+id: FBcv:0000649
+name: visible allele recombination mapping stock
+is_a: FBcv:0000648 ! mapping stock
+
+[Term]
+id: FBcv:0000650
+name: editorial
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000651
+name: meeting report
+namespace: pub_type
+comment: Proforma field: P1.
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000652
+name: compendium
+namespace: pub_type
+subset: camcur
+is_a: FBcv:0000189 ! publication class
+
+[Term]
+id: FBcv:0000653
+name: subset
+namespace: expression_qualifier
+def: "Restricted to unknown subtype(s) of a specifed type." [FB:DS]
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000654
+name: embryonic pattern qualifier
+namespace: embryonic_pattern_qualifier
+is_a: FBcv:0000052 ! spatial qualifier
+
+[Term]
+id: FBcv:0000655
+name: Vienna Drosophila RNAi Center
+exact_synonym: "VDRC" []
+exact_synonym: "Vienna" []
+is_a: FBcv:0010013 ! stock center collection
+
+[Term]
+id: FBcv:0000685
+name: parental effect
+namespace: genotype_to_phenotype_relation
+def: "Parental effects describe the dependence of the expression of a phenotypic attribute of an allele on the parent from which that allele is inherited." [FB:rd]
+is_a: FBcv:0000809 ! phenotype qualifier
+
+[Term]
+id: FBcv:0000797
+name: cell autonomy qualifier
+namespace: genotype_to_phenotype_relation
+def: "Cell autonomy statements describe the cellular focus of mutant phenotype, generally revealed by genetic mosaic analysis, in terms of whether the mutant has its phenotypic effect limited to, or not limited to, cells of the mutant genotype." [FB:rd]
+is_a: FBcv:0000809 ! phenotype qualifier
+
+[Term]
+id: FBcv:0000799
+name: gene descriptor
+is_obsolete: true
+
+[Term]
+id: FBcv:0000801
+name: polymorphism assay
+is_obsolete: true
+
+[Term]
+id: FBcv:0000803
+name: RFLP
+related_synonym: "restriction fragment length polymorphism" []
+is_obsolete: true
+
+[Term]
+id: FBcv:0000805
+name: DNA sequence variant
+is_obsolete: true
+
+[Term]
+id: FBcv:0000807
+name: allele descriptor
+is_a: FBcv:0000013 ! descriptor
+
+[Term]
+id: FBcv:0000809
+name: phenotype qualifier
+is_a: FBcv:0000005 ! qualifier
+
+[Term]
+id: FBcv:0000811
+name: qualitative qualifier
+is_a: FBcv:0000809 ! phenotype qualifier
+
+[Term]
+id: FBcv:0000812
+name: clone qualifier
+namespace: genotype_to_phenotype_relation
+is_a: FBcv:0000809 ! phenotype qualifier
+
+[Term]
+id: FBcv:0000813
+name: nitrogen mustard
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "2-chloro-N-(2-chloroethyl)-N-methylethanamine" []
+related_synonym: "CB1414" []
+related_synonym: "HN2" []
+related_synonym: "mechlorethamine" []
+is_a: FBcv:0000526 ! alkylating agent
+
+[Term]
+id: FBcv:0000814
+name: 1,4-dimethanesulfonoxybutane
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "busulfan" []
+related_synonym: "CB2041" []
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0000815
+name: p-N,N-di-(2-chloroethyl)aminophenylbutyric acid
+namespace: origin_of_mutation
+comment: Proforma field: GA8. Proforma field: A4.
+subset: camcur
+related_synonym: "CB1348" []
+related_synonym: "chlorambucil" []
+is_a: FBcv:0000561 ! unclassified chemical
+
+[Term]
+id: FBcv:0010000
+name: living stock
+is_a: FBcv:0000614 ! stock descriptor
+
+[Term]
+id: FBcv:0010001
+name: molecular extract
+is_a: FBcv:0000614 ! stock descriptor
+
+[Term]
+id: FBcv:0010002
+name: preserved specimen
+is_a: FBcv:0000614 ! stock descriptor
+
+[Term]
+id: FBcv:0010003
+name: E cytotype
+is_a: FBcv:0000641 ! cytotype of stock
+
+[Term]
+id: FBcv:0010004
+name: M cytotype
+is_a: FBcv:0000641 ! cytotype of stock
+
+[Term]
+id: FBcv:0010005
+name: genomic DNA
+is_a: FBcv:0010001 ! molecular extract
+
+[Term]
+id: FBcv:0010006
+name: ethanol-preserved specimen
+is_a: FBcv:0010002 ! preserved specimen
+
+[Term]
+id: FBcv:0010007
+name: pinned speciman
+is_a: FBcv:0010002 ! preserved specimen
+
+[Term]
+id: FBcv:0010008
+name: <new term>
+is_obsolete: true
+
+[Term]
+id: FBcv:0010009
+name: fluorescent balancer
+is_a: FBcv:0000152 ! balancer stock
+
+[Term]
+id: FBcv:0010010
+name: lacZ balancer
+is_a: FBcv:0000152 ! balancer stock
+
+[Term]
+id: FBcv:0010011
+name: laboratory wild-type stock
+is_a: FBcv:0000618 ! wild-type stock
+
+[Term]
+id: FBcv:0010012
+name: collection
+is_a: FBcv:0000614 ! stock descriptor
+
+[Term]
+id: FBcv:0010013
+name: stock center collection
+is_a: FBcv:0010012 ! collection
+
+[Term]
+id: FBcv:0010014
+name: laboratory collection
+is_a: FBcv:0010012 ! collection
+
+[Term]
+id: FBcv:0010015
+name: Saxton laboratory
+is_a: FBcv:0010014 ! laboratory collection
+
+[Term]
+id: FBcv:0010016
+name: Garcia-Bellido laboratory
+is_a: FBcv:0010014 ! laboratory collection
+
+[Term]
+id: FBcv:0010017
+name: Nusslein-Volhard laboratory
+is_a: FBcv:0010014 ! laboratory collection
+
+[Term]
+id: FBcv:0010018
+name: Carpenter laboratory
+is_a: FBcv:0010014 ! laboratory collection
+
+[Term]
+id: FBcv:0010019
+name: Artavanis laboratory
+related_synonym: "Harvard Medical School Exelixis Drosophila Collection" []
+is_obsolete: true
+
+[Term]
+id: FBcv:0010020
+name: Exelixis Drosophila Stock Collection at Harvard Medical School
+related_synonym: "Artavanis-Tsakonas laboratory" []
+is_a: FBcv:0010014 ! laboratory collection
+
+[Term]
+id: FBcv:0010021
+name: Bloomington Drosophila Stock Center
+related_synonym: "BDSC" []
+related_synonym: "BSC" []
+exact_synonym: "Bloomington" []
+is_a: FBcv:0010013 ! stock center collection
+
+[Term]
+id: FBcv:0010022
+name: Tucson Drosophila Stock Center
+related_synonym: "Drosophila species stock center" []
+related_synonym: "Tucson" []
+exact_synonym: "species stock center" []
+is_a: FBcv:0010013 ! stock center collection
+
+[Term]
+id: FBcv:0010023
+name: Szeged Drosophila Stock Centre
+related_synonym: "Szeged" []
+is_a: FBcv:0010013 ! stock center collection
+
+[Term]
+id: FBcv:0010024
+name: Drosophila Genetic Resource Center
+related_synonym: "DGRC" []
+related_synonym: "Kyoto" []
+related_synonym: "Kyoto stock center" []
+is_a: FBcv:0010013 ! stock center collection
+
