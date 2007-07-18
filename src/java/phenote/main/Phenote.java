@@ -80,7 +80,8 @@ public class Phenote {
       System.out.println("Failed to set to Java/Metal look & feel");
     }
     phenote = getPhenote();
-    boolean enableSplashScreen = phenote.commandLine.writeIsSpecified();
+    boolean enableSplashScreen = !phenote.commandLine.writeIsSpecified();
+    //System.out.println("splash "+enableSplashScreen);
     phenote.splashScreenInit(enableSplashScreen); //initialize the splash screen;
     phenote.doCommandLine(args); // does config
 
