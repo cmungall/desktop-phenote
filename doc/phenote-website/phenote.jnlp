@@ -36,6 +36,7 @@ href="phenote.jnlp">
 	<jar href="jars/tomcat-servlet.jar" />
 	<jar href="jars/te-common.jar" />
 	<jar href="jars/log4j-1.2.13.jar" />
+	<jar href="jars/jh.jar" />
 </resources>
 <!-- no cmd line param will ask user for config at initialization -->
 <application-desc main-class="phenote.main.Phenote">
