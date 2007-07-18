@@ -24,7 +24,7 @@ href="phenote.jnlp">
          (JRE) that are supported by the application.
          Multiple entries of this kind are allowed, in which
          case they are considered to be in order of preference -->
-	<j2se version="1.5+" initial-heap-size="64m" max-heap-size="500m" />
+	<j2se version="1.5+" initial-heap-size="64m" max-heap-size="600m" />
 	<jar href="jars/phenote.jar" />
 	<jar href="jars/oboedit.jar" />
 	<jar href="jars/org.geneontology.jar" />
