@@ -85,7 +85,7 @@ public class FileUtil {
       //System.out.println(u+" url exists "+urlExists(u));
       if (urlExists(u)) return u;
     }
-    System.out.println("Failed to find file "+filename);
+    //System.out.println("Failed to find file "+filename);
     //LOG.error("Failed to find file "+filename);
     throw new FileNotFoundException(filename+" not found");
   }

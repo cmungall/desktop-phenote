@@ -201,12 +201,14 @@ them into  the classfiles directory. excludes="test/**"  -->
     <!-- JAR The jar target compiles everything, and produces a phenote.jar in
   phenote/jars/phenote.jar.  -->
     <target name="jar" depends="compile">
+        <!-- copy file="doc/phenote-website/help/Phenote.hs" todir="conf" ?? -->
         <jar destfile="${jarfile}">
             <fileset dir="${classfiles}"/>
             <fileset dir="." includes="obo-files/" excludes="obo-files/old"/>
             <fileset file="${conf}/*.cfg"/>
 	    <fileset dir="." includes="${conf}/*.xml"/>
 	    <fileset dir="." includes="images/"/>
+            <fileset dir="doc/phenote-website" includes="help/**"/>
         </jar>
     </target>
 
