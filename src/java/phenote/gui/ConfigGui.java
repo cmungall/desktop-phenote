@@ -65,7 +65,8 @@ public class ConfigGui {
     String m="This is a mockup for gui configuration. This is very much under const"
       +"ruction!\nPresently you can use it to browse configs, and you can see where "
       +"I am going with editing(which doesnt work yet).\nFeedback would be great.\n"
-      +"Thanks.\nWarning: it takes a while to load all the configs up";
+      +"Thanks.\nWarning: it takes a while(~1 minute) to load all the configs up\n"
+      +"during which time phenote will be frozen(but not dead) - this will be improved";
     int ok =
       JOptionPane.showConfirmDialog(null,m,"Under construction!",JOptionPane.OK_CANCEL_OPTION);
     if (ok == JOptionPane.CANCEL_OPTION) return;
