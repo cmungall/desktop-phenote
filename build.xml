@@ -205,6 +205,7 @@ them into  the classfiles directory. excludes="test/**"  -->
             <fileset dir="${classfiles}"/>
             <fileset dir="." includes="obo-files/" excludes="obo-files/old"/>
             <fileset file="${conf}/*.cfg"/>
+	    <fileset dir="." includes="${conf}/*.xml"/>
 	    <fileset dir="." includes="images/"/>
         </jar>
     </target>
