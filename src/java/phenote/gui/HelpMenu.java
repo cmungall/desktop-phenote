@@ -39,7 +39,7 @@ class HelpMenu extends JMenu {
 
 
     help = new JMenuItem("Phenote Help");
-    help.setEnabled(Config.inst().hasDataAdapters());
+    help.setEnabled(true);
     help.setActionCommand("help");
     HelpBroker hb = HelpManager.getHelpBroker();
     if (hb == null) {
@@ -52,7 +52,7 @@ class HelpMenu extends JMenu {
     }
 
     JMenuItem about = new JMenuItem("About");
-    about.setEnabled(Config.inst().hasDataAdapters());
+    about.setEnabled(true);
     about.setActionCommand("about");
     about.addActionListener(actionListener);
     add(about);
