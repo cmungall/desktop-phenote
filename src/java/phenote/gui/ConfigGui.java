@@ -14,6 +14,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -61,6 +62,14 @@ public class ConfigGui {
   public ConfigGui() { init(); }
 
   private void init() {
+    String m="This is a mockup for gui configuration. This is very much under const"
+      +"ruction!\nPresently you can use it to browse configs, and you can see where "
+      +"I am going with editing(which doesnt work yet).\nFeedback would be great.\n"
+      +"Thanks.\nWarning: it takes a while to load all the configs up";
+    int ok =
+      JOptionPane.showConfirmDialog(null,m,"Under construction!",JOptionPane.OK_CANCEL_OPTION);
+    if (ok == JOptionPane.CANCEL_OPTION) return;
+
     JFrame frame = new JFrame("Phenote Configuration(under development)");
 
     JComponent allConfigs = makeAllConfigsPanel();
@@ -99,7 +108,7 @@ public class ConfigGui {
     frame.pack();
     frame.setVisible(true);
 
-      Config c2 = Config.newInstance("h2","2");//NO_NAME,noNameItalics); //??
+    //Config c2 = Config.newInstance("h2","2");//NO_NAME,noNameItalics); //??
       //configList.setModel(getConfigListModel()); // ????
       //getConfigListModel().list.add(c2);
       configList.repaint();
