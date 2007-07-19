@@ -108,6 +108,7 @@ public class FileUtil {
     // jar as config files are in root(fix), obo files finally given dir
     addFile(filename,urls); // full path or relative to pwd
     addFile("conf/"+filename,urls);
+    addFile("images/"+filename,urls);
     // ~/.phenote/obo-files cache for obo files - overrides phenote obo-files
     // eventually may have configured obo dir as well...
     addFile(getDotPhenoteOboDir().getPath()+"/"+filename,urls);

@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 
+import java.io.FileNotFoundException;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,6 +32,7 @@ import phenote.gui.selection.TermSelectionListener;
 import phenote.gui.selection.UseTermEvent;
 import phenote.gui.selection.UseTermListener;
 import phenote.util.HtmlUtil;
+import phenote.util.FileUtil;
 import edu.stanford.ejalbert.BrowserLauncher;
 import edu.stanford.ejalbert.BrowserLauncherRunner;
 import edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException;
@@ -91,20 +94,30 @@ public class TermInfo {
     termInfoPanel.setBorder(BorderFactory.createTitledBorder("Term Info"));
     termInfoPanel.add(scrollPane,BorderLayout.CENTER);
     //Layout doesn't look good right now.  Will fix
-    ImageIcon ok = new ImageIcon("images/OK.GIF");
+    ImageIcon ok = new ImageIcon();
+    ImageIcon back = new ImageIcon();
+    ImageIcon forward = new ImageIcon();
+		try {
+	    ok = new ImageIcon(FileUtil.findUrl("images/OK.GIF"));
+		}	catch (FileNotFoundException ex) {  }
+
     useTermButton = new JButton(ok);
 //    JButton useTermButton = new JButton("Use Term");
     useTermButton.addActionListener(new UseTermActionListener());
     useTermButton.setPreferredSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
     useTermButton.setMinimumSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
     useTermButton.setToolTipText("Use Term");
-    ImageIcon back = new ImageIcon("images/arrow.small.left.gif");
+		try {
+	    back = new ImageIcon(FileUtil.findUrl("images/arrow.small.left.gif"));
+		}	catch (FileNotFoundException ex) {  }
     JButton backButton = new JButton(back);
     backButton.setToolTipText("Go back a term");
     backButton.setPreferredSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
     backButton.setMinimumSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
     backButton.setMaximumSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
-    ImageIcon forward = new ImageIcon("images/arrow.small.right.gif");
+    try {
+    forward = new ImageIcon(FileUtil.findUrl("images/arrow.small.right.gif"));
+		}	catch (FileNotFoundException ex) {  }
     JButton forwardButton = new JButton(forward);
     forwardButton.setToolTipText("Go forward a term");
     forwardButton.setPreferredSize(new Dimension(BUTTON_HEIGHT, BUTTON_HEIGHT));
