@@ -42,6 +42,7 @@ import phenote.gui.selection.SelectionManager;
 import phenote.gui.SplashScreen;
 import phenote.gui.TermInfo;
 import phenote.gui.field.FieldPanel;
+import phenote.util.FileUtil;
 
 public class Phenote {
 
@@ -56,7 +57,8 @@ public class Phenote {
   private CommandLine commandLine = CommandLine.inst();
   private JFrame frame;
   public SplashScreen splashScreen;
-  private String logoFile = "images/phenote_logo.jpg";
+  private String logoFile = "images/phenote_logo.jpg";    
+
 
   //  public static Keymap defaultKeymap;
   
@@ -198,7 +200,12 @@ public class Phenote {
 
 
   private void splashScreenInit(boolean enable) {
-    ImageIcon myImage = new ImageIcon(logoFile);
+  	ImageIcon myImage = new ImageIcon();
+  	try {
+      myImage = new ImageIcon(FileUtil.findUrl(logoFile));
+  	}	catch (FileNotFoundException ex) {  }
+ 	
+//    ImageIcon myImage = new ImageIcon(logoFile);
     splashScreen = new SplashScreen(myImage,enable);
     if (!enable) return;
     splashScreen.setLocationRelativeTo(null);
