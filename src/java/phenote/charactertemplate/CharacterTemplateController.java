@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +27,7 @@ import phenote.gui.TermInfo;
 import phenote.gui.field.FieldPanel;
 import phenote.gui.selection.SelectionManager;
 import phenote.main.Phenote;
+import phenote.util.FileUtil;
 
 public class CharacterTemplateController implements ActionListener {
 
@@ -165,7 +165,7 @@ public class CharacterTemplateController implements ActionListener {
   private JPanel createPanel() {
     SwingEngine swix = new SwingEngine(this);
     try {
-      JPanel panel = (JPanel)swix.render(new File("conf/character_template.xml"));
+      JPanel panel = (JPanel)swix.render(FileUtil.findUrl("character_template.xml"));
       this.characterTemplateTable.setModel(this.tableModel);
       this.characterTemplateTable.setSelectionModel(new SelectionManagerListSelectionModel(this.characterListManager, this.editManager, this.selectionManager));  
       FieldPanel fieldPanel = new FieldPanel(true, false, this.representedGroup, this.selectionManager, this.editManager);
