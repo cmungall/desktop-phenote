@@ -60,7 +60,7 @@ class FileMenu extends JMenu {
     addSeparator();
     
     JMenuItem exit = new JMenuItem("Exit");
-    exit.setEnabled(Config.inst().hasDataAdapters());
+    exit.setEnabled(true);
     exit.setActionCommand("exit");
     exit.addActionListener(new ExitActionListener());
     add(exit);
