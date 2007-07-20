@@ -2,11 +2,13 @@ package phenote.charactertemplate;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -155,24 +157,24 @@ public class CharacterTemplateController implements ActionListener {
   private JFrame getWindow() {
     if (this.window == null) {
       this.window = new JFrame(this.getGroupTitle());
-      final JPanel panel = this.createPanel();
+      final JComponent panel = this.createPanel();
       this.window.getContentPane().add(panel);
       this.window.setSize(panel.getSize());
     }
     return this.window;
   }
   
-  private JPanel createPanel() {
+  private JComponent createPanel() {
     SwingEngine swix = new SwingEngine(this);
     try {
-      JPanel panel = (JPanel)swix.render(FileUtil.findUrl("character_template.xml"));
+      JComponent component = (JComponent)swix.render(FileUtil.findUrl("character_template.xml"));
       this.characterTemplateTable.setModel(this.tableModel);
       this.characterTemplateTable.setSelectionModel(new SelectionManagerListSelectionModel(this.characterListManager, this.editManager, this.selectionManager));  
       FieldPanel fieldPanel = new FieldPanel(true, false, this.representedGroup, this.selectionManager, this.editManager);
-      this.charFieldPanelContainer.add(fieldPanel, BorderLayout.NORTH);
+      this.charFieldPanelContainer.add(fieldPanel);
       TermInfo termInfo = new TermInfo(this.selectionManager);
       this.termInfoPanelContainer.add(termInfo.getComponent());
-      return panel;
+      return component;
     } catch (Exception e) {
       this.getLogger().error("Unable to render interface", e);
       return new JPanel();

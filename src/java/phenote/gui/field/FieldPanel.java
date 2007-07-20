@@ -1,16 +1,15 @@
 package phenote.gui.field;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -18,7 +17,6 @@ import javax.swing.JTabbedPane;
 import phenote.datamodel.CharField;
 import phenote.datamodel.OntologyManager;
 import phenote.edit.EditManager;
-import phenote.gui.GridBagUtil;
 import phenote.gui.selection.SelectionManager;
 
 /**
@@ -89,8 +87,9 @@ public class FieldPanel extends JPanel {
     this.setPreferredSize(new Dimension(650,350));//690,490));
     //this.setMinimumSize(new Dimension(700,490));//690,490));
     //this.setMaximumSize(new Dimension(2000,750));
-    BoxLayout bl = new BoxLayout(this,BoxLayout.X_AXIS); // grid bag?
-    this.setLayout(bl);
+    //BoxLayout bl = new BoxLayout(this,BoxLayout.X_AXIS); // grid bag?
+    //this.setLayout(bl);
+    this.setLayout(new GridLayout());
   }
 
   private void initSearchPanel() {
@@ -136,15 +135,54 @@ public class FieldPanel extends JPanel {
     }
   }
 
+  private int currentGridBagRow = 0;
   void addCharFieldGuiToPanel(CharFieldGui fieldGui) {
-    addLabel(fieldGui.getLabel(),fieldGui.hasOntologyChooser());
-    if (fieldGui.hasOntologyChooser())
-      addOntologyChooser(fieldGui.getOntologyChooser());
-    addFieldGui(fieldGui.getUserInputGui());
-    if (fieldGui.hasCompButton())
-      addPostCompButton(fieldGui.getCompButton());
-    if (fieldGui.hasRetrieveButton())
-      addRetrieveButton(fieldGui.getRetrieveButton());
+    GridBagConstraints baseConstraints = new GridBagConstraints();
+    baseConstraints.insets = new Insets(2,3,2,3);
+    baseConstraints.gridy = this.currentGridBagRow++;
+    this.addLabel(fieldGui, (GridBagConstraints)baseConstraints.clone());
+    this.addOntologyChooser(fieldGui, (GridBagConstraints)baseConstraints.clone());
+    this.addInputGui(fieldGui, (GridBagConstraints)baseConstraints.clone());
+    this.addPostCompButton(fieldGui, (GridBagConstraints)baseConstraints.clone());
+    this.addRetrieveButton(fieldGui, (GridBagConstraints)baseConstraints.clone());
+  }
+  
+  private void addLabel(CharFieldGui fieldGui, GridBagConstraints constraints) {
+    constraints.gridx = 0;
+    if (!fieldGui.hasOntologyChooser()) {
+      constraints.gridwidth = 2;
+    }
+    constraints.anchor = GridBagConstraints.EAST;
+    fieldPanel.add(new JLabel(fieldGui.getLabel()), constraints);
+  }
+  
+  private void addOntologyChooser(CharFieldGui fieldGui, GridBagConstraints constraints) {
+    constraints.gridx = 1;
+    constraints.fill = GridBagConstraints.HORIZONTAL;
+    if (fieldGui.hasOntologyChooser()) {
+      fieldPanel.add(fieldGui.getOntologyChooser(), constraints);
+    }
+  }
+  
+  private void addInputGui(CharFieldGui fieldGui, GridBagConstraints constraints) {
+    constraints.gridx = 2;
+    constraints.weightx = 1.0;
+    constraints.fill = GridBagConstraints.HORIZONTAL;
+    fieldPanel.add(fieldGui.getUserInputGui(), constraints);
+  }
+  
+  private void addPostCompButton(CharFieldGui fieldGui, GridBagConstraints constraints) {
+    constraints.gridx = 3;
+    if (fieldGui.hasCompButton()) {
+      fieldPanel.add(fieldGui.getCompButton(), constraints);
+    }
+  }
+  
+  private void addRetrieveButton(CharFieldGui fieldGui, GridBagConstraints constraints) {
+    constraints.gridx = 4;
+    if (fieldGui.hasRetrieveButton()) {
+      fieldPanel.add(fieldGui.getRetrieveButton(), constraints);
+    }
   }
 
 //  SearchParamsI getSearchParams() {
@@ -161,63 +199,7 @@ public class FieldPanel extends JPanel {
       searchParamPanel = new SearchParamPanel();
     return searchParamPanel;
   }
-
-  JLabel addLabel(String labelString) {//,Container parent) {
-    return addLabel(labelString,false); // false - no ont chooser
-  }
-
-  JLabel addLabel(String labelString,boolean hasOntChooser) {
-    JLabel label = new JLabel(labelString);
-    GridBagConstraints gbc = makeLabelConstraint(hasOntChooser);
-    fieldPanel.add(label,gbc);
-    return label;
-  }
-
-  /** if a field has more than one ontology than theres a combo to choose the ontology*/
-  void addOntologyChooser(JComboBox ontologyChooser) {
-    fieldPanel.add(ontologyChooser,makeOntologyChooserConstraint());
-  }
   
-  void addFieldGui(Component comp) {
-    fieldPanel.add(comp,makeFieldConstraint());
-  }
-
-  void addPostCompButton(JButton pc) {
-    fieldPanel.add(pc,makePostCompConstraint());
-  }
-  
-  void addRetrieveButton(JButton rb) {
-    // for now assume fields dont do both post comp and retrieve - fix this!
-    fieldPanel.add(rb,makePostCompConstraint());
-  }
-
-  private int gridbagRow = 0;
-  boolean ontologyChooserPresent = false;
-  private GridBagConstraints makeLabelConstraint(boolean hasOntChooser) {
-    ontologyChooserPresent = hasOntChooser; // ??
-    // x,y,horizPad,vertPad
-    // make width 2 unless theres a chooser, then 1
-    int width = hasOntChooser ? 1 : 2;
-    return GridBagUtil.makeWidthConstraint(0,gridbagRow,1,3,width);
-  }
-
-  private GridBagConstraints makeOntologyChooserConstraint() {
-    ontologyChooserPresent = true; // cheesy - dont need?
-    return GridBagUtil.makeConstraint(1,gridbagRow,1,3); // width 1
-  }
-
-  private GridBagConstraints makeFieldConstraint() {
-    int x = 2;//ontologyChooserPresent ? 2 : 1;
-    int width = 1;//ontologyChooserPresent ? 1 : 2; // ???
-    return GridBagUtil.makeWidthConstraint(x,gridbagRow++,1,2,width);
-  }
-
-  // put button at end of regular row? or beginning of pc row?
-  private GridBagConstraints makePostCompConstraint() {
-    return GridBagUtil.makeWidthConstraint(3,gridbagRow-1,1,3,2); // width 1
-  }
-  
-
   // for test to listen - move to test code?
   public AbstractAutoCompList getEntityComboBox() {
     //return getComboBox(CharFieldEnum.ENTITY);

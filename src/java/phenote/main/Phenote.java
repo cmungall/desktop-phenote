@@ -2,24 +2,26 @@ package phenote.main;
 
 // package phenote.main?
 
-import java.util.ArrayList;
-import java.util.List;
-
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 
 import org.apache.log4j.Logger;
@@ -33,12 +35,10 @@ import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.OntologyDataAdapter;
 import phenote.datamodel.CharacterListI;
 import phenote.datamodel.OntologyManager;
-import phenote.edit.EditManager;
 import phenote.gui.CharacterTablePanel;
 import phenote.gui.GridBagUtil;
 import phenote.gui.MenuManager;
 import phenote.gui.SelectionHistory;
-import phenote.gui.selection.SelectionManager;
 import phenote.gui.SplashScreen;
 import phenote.gui.TermInfo;
 import phenote.gui.field.FieldPanel;
@@ -298,54 +298,33 @@ public class Phenote {
   /** main panel contains FieldPanel CharTablePanel & TermInfo 
       move this to gui? */
   private JPanel makeGroupPanel(String group) {
-    JPanel mainPanel = new JPanel(new GridBagLayout()); // ??
+    JPanel mainPanel = new JPanel(new GridLayout());
     
-    JPanel upperPanel = new JPanel(new GridBagLayout());
-    //BoxLayout bl=new BoxLayout(upperPanel,BoxLayout.X_AXIS);upperPanel.setLayout(bl);
-
-    GridBagConstraints ugbc = GridBagUtil.makeFillingConstraint(0,0);
-    ugbc.weightx = 1;
+    JPanel infoHistoryPanel = new JPanel(new GridBagLayout());
+    infoHistoryPanel.setBorder(new EmptyBorder(10,10,10,10));
     
     // need to do different selection & edit mgrs
     FieldPanel groupFieldPanel = new FieldPanel(true,false,group);
+    groupFieldPanel.setBorder(new EmptyBorder(10,10,10,10));
     // for testing - thats it
     if (group == null || group.equals("default")) mainFieldPanel = groupFieldPanel;
-    upperPanel.add(groupFieldPanel,ugbc);
 
     termInfo = new TermInfo();
-    ugbc.gridx++;
+    GridBagConstraints ugbc = GridBagUtil.makeFillingConstraint(0,0);
     ugbc.weightx = 5;
-    upperPanel.add(termInfo.getComponent(),ugbc);
+    infoHistoryPanel.add(termInfo.getComponent(),ugbc);
     
     selectionHistory = SelectionHistory.inst();
-
     ugbc.gridx++;
     ugbc.weightx = 3;
-    upperPanel.add(selectionHistory.getComponent(),ugbc);    
-
-    //    ugbc.gridx++;
-    //ugbc.weightx = 3;
-    //upperPanel.add(selectionHistory.getComponent(),ugbc);
-    //++gbc.gridx;  // ??
-    //gbc.anchor = GridBagConstraints.NORTHWEST; // ??
-    //mainPanel.add(termInfo.getComponent(),gbc);
+    infoHistoryPanel.add(selectionHistory.getComponent(),ugbc); 
     
-
-    //GridBagConstraints gbc = GridBagUtil.makeConstraint(0,0,4,4); // x,y,hPad,vPad
-//     double weightY = 1;
-//     int fill = GridBagConstraints.BOTH;
-//     int anchor = GridBagConstraints.WEST;
-//     GridBagConstraints gbc = GridBagUtil.makeConstraint(0,0,1,1,weightY,4,4,fill,anchor);
-    GridBagConstraints gbc = GridBagUtil.makeFillingConstraint(0,0);
-    gbc.weighty = 1;
-    mainPanel.add(upperPanel,gbc);
+    JSplitPane innerSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, groupFieldPanel, infoHistoryPanel);
 
     characterTablePanel = new CharacterTablePanel(group);
-    //termAndTablePanel.add(characterTablePanel);
-    ++gbc.gridy; // ?
-    gbc.weighty = 10;
-    mainPanel.add(characterTablePanel,gbc);
-
+    
+    JSplitPane outerSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, innerSplitPane, characterTablePanel);
+    mainPanel.add(outerSplitPane);
     return mainPanel;
   }
   

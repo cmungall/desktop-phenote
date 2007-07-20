@@ -1,46 +1,36 @@
 package phenote.gui.field;
 
-import java.util.List;
 import java.awt.Component;
+import java.awt.Point;
 import java.awt.Toolkit;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.InputEvent;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.KeyStroke;
-import javax.swing.text.DefaultEditorKit;
+import java.util.List;
+
 import javax.swing.JPopupMenu;
-import javax.swing.JMenuItem;
-import java.awt.Point;
-
-
-
-
-import javax.swing.text.JTextComponent;
 import javax.swing.JTextField;
-import javax.swing.text.Keymap;
-import javax.swing.event.DocumentListener;
+import javax.swing.KeyStroke;
 import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.DefaultEditorKit;
+import javax.swing.text.JTextComponent;
+import javax.swing.text.Keymap;
 
 import org.apache.log4j.Logger;
 
-import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharField;
-//import phenote.datamodel.CharFieldEnum; // phase out
+import phenote.datamodel.CharacterI;
 import phenote.edit.CompoundTransaction;
-import phenote.edit.EditManager;
-import phenote.gui.selection.CharSelectionEvent;
-import phenote.gui.selection.SelectionManager;
 import phenote.gui.FieldRightClickMenu;
+import phenote.gui.selection.CharSelectionEvent;
 
 
 // should this be a subclass of charfieldGui? maybe?
@@ -55,10 +45,8 @@ class FreeTextField extends CharFieldGui {
   FreeTextField(CharField charField) { //CharFieldGui cfg) {
     super(charField);
     //charFieldGui = cfg;
-    textField = new JTextField(35);
+    textField = new JTextField();
     //textField.setKeymap(phenote.main.Phenote.defaultKeymap); didnt work
-    textField.setMinimumSize(CharFieldGui.inputSize);
-    //textField.setPreferredSize(CharFieldGui.inputSize);
     textField.setEditable(true);
     textField.getDocument().addDocumentListener(new TextFieldDocumentListener());
     textField.addFocusListener(new FreeFocusListener());

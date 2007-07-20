@@ -1,7 +1,8 @@
 package phenote.gui.field;
 
 import java.awt.Component;
-import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.FontMetrics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -12,10 +13,12 @@ import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListDataListener;
 import javax.swing.plaf.basic.BasicComboBoxEditor;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import javax.swing.plaf.basic.ComboPopup;
 import javax.swing.text.Document;
 
@@ -47,10 +50,9 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
 
   private void init() {
     jComboBox.setEditable(true);
-    jComboBox.setPreferredSize(CharFieldGui.inputSize); //new Dimension(390,20));
     AutoTextFieldEditor autoTextFieldEditor = new AutoTextFieldEditor();
     jComboBox.setEditor(autoTextFieldEditor);
-    jComboBox.setFont(new Font("Monospaced",Font.PLAIN,10));
+    jComboBox.setRenderer(new ResizingComboBoxRenderer());
     jComboBox.addActionListener(new ComboBoxActionListener());
     compListSearcher = new CompListSearcher(getCharField().getOntologyList());
     // init with all terms if config.showAllOnEmptyInput...
@@ -156,7 +158,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   private class AutoTextField extends JTextField {
 
     private AutoTextField() {
-      super(25); // width
+      super();
     }
 
     /** dont set text if changing completion list, if changing text turn off
@@ -341,6 +343,56 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     public int getSize() { return list.size(); }
     public void removeListDataListener(ListDataListener l) {}
   }
+  
+  private static class ResizingComboBoxRenderer extends BasicComboBoxRenderer {
+    
+    private static final String ELLIPSIS = "...";
+    private static final int PADDING = 3; // this may be look-and-feel dependent
+    
+    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+      final String name = ((CompletionTerm)value).getCompListDisplayName();
+      final String suffix = ((CompletionTerm)value).getCompListDisplaySuffix();
+      String displayValue;
+      if (suffix.length() == 0) {
+        // there are no tags, truncate as normal
+        displayValue = name;
+      } else {
+        final int width = list.getWidth() - PADDING;     
+        final FontMetrics metrics = list.getFontMetrics(list.getFont()); // change this to component (which is actually this anyway)
+        //final char[] textArray = text.toCharArray();
+        final String combined = name + suffix;
+        if ((SwingUtilities.computeStringWidth(metrics, combined)) < width) { 
+          // the whole thing will fit with the tags, don't worry about truncation
+          displayValue = combined;
+        } else {
+          // we need to figure out how much text we can fit with an ellipsis before the tags
+          final String ellipsisPlusTags = ELLIPSIS + suffix; 
+          int stopIndex;
+          String elided = "";
+          for (stopIndex = (name.length() - 1); stopIndex > 1; stopIndex--) {
+            elided = name.substring(0, stopIndex) + ellipsisPlusTags;
+            final int totalWidth = SwingUtilities.computeStringWidth(metrics, elided);
+            if (totalWidth < width) {
+              break;
+            }
+          }
+          displayValue = elided;
+        }
+      }
+      return super.getListCellRendererComponent(list, displayValue, index, isSelected,
+          cellHasFocus);
+    }
+
+    /* Built-in preferredSize() forces combobox to width of longest list element.
+     * Override allows smaller resizing - but parent component needs to give it a reasonable size.
+     */
+    public Dimension getPreferredSize() {
+      final Dimension dimension = super.getPreferredSize();
+      dimension.width = 1;
+      return dimension;
+    }
+  }
+  
 }
 
 

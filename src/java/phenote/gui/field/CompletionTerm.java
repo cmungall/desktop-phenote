@@ -6,7 +6,6 @@ import java.util.Set;
 import org.geneontology.oboedit.datamodel.OBOClass;
 
 import phenote.gui.SearchParamsI;
-//import phenote.gui.SearchParams;
 
 /** This is basically a view object for the auto completer for terms/OBOClass */
 
@@ -59,29 +58,27 @@ public class CompletionTerm {
 	
 	
   public String getCompListDisplayString() {
-    StringBuffer display = new StringBuffer();
-    StringBuffer appends = new StringBuffer();
-    if (isSynMatch()) {
-      display.append(synMatchString);
-      appends.append("[syn]");
-    }
-    else {
-      display.append(getName());
-    }
-    if (isDefinitionMatch())
-      appends.append("[def]");
-    if (term.isObsolete())
-      appends.append("[obs]");
-    // font metrics? fixed font? query length of Text gui?
-    // if in standalone mode should do fontmetrics
-    int allowedLength = 61 - appends.length(); // keep room for appends
+    final StringBuffer display = new StringBuffer(this.getCompListDisplayName());
+    final String appends = this.getCompListDisplaySuffix();
+    final int allowedLength = 61 - appends.length(); // keep room for appends
     if (display.length() > allowedLength) {
       display.setLength(allowedLength-2); // -2 for ... ???
       display.append("...");
     }
-      //display = display.substring(0,allowedLength - 3); // -3 for ...
     display.append(appends);
     return display.toString();
+  }
+  
+  public String getCompListDisplayName() {
+    return (this.isSynMatch()) ? this.synMatchString : this.getName(); 
+  }
+  
+  public String getCompListDisplaySuffix() {
+    final StringBuffer appends = new StringBuffer();
+    if (this.isSynMatch()) appends.append("[syn]");
+    if (this.isDefinitionMatch()) appends.append("[def]");
+    if (this.term.isObsolete()) appends.append("[obs]");
+    return appends.toString();
   }
 
   public String getID() { return term.getID(); }

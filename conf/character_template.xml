@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<panel size="1024,700" minimumSize="1024,700" layout="BorderLayout">
-	<hbox constraints="BorderLayout.NORTH">
-		<panel id="charFieldPanelContainer" border="EmptyBorder(10,10,10,10)" layout="BorderLayout">
+<splitpane size="1024,700" minimumSize="1024,700" orientation="HORIZONTAL" continuousLayout="true">
+	<splitpane constraints="BorderLayout.NORTH" orientation="VERTICAL" continuousLayout="true" dividerLocation="600">
+		<panel id="charFieldPanelContainer" layout="GridLayout" border="EmptyBorder(10,10,10,10)">
 		</panel>
-		<panel id="termInfoPanelContainer" border="EmptyBorder(10,10,10,10)" layout="BorderLayout">
+		<panel id="termInfoPanelContainer" layout="GridLayout" border="EmptyBorder(10,10,10,10)">
 		</panel>
-	</hbox>
+	</splitpane>
 	<panel constraints="BorderLayout.CENTER" layout="GridBagLayout">
 	    <scrollpane>
 	    	<gridbagconstraints gridx="0" gridy="0" weightx="1" weighty="1" fill="GridBagConstraints.BOTH" insets="10,10,0,10"/>
@@ -21,4 +21,4 @@
 	        <button id="generateButton" text="Generate Characters" action="generateCharacters"/>
 	    </panel>
 	</panel>
-</panel>
+</splitpane>
