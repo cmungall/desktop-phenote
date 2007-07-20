@@ -26,9 +26,14 @@ public class CharacterListManager {
 
 //  public CharacterListManager() {}
 
+  // default()?
+  public static CharacterListManager main() {
+    return getCharListMan(OntologyManager.DEFAULT_GROUP);
+  }
+
   /** Returns "default" CharacterListManager */ 
   public static CharacterListManager inst() {
-    return getCharListMan(OntologyManager.DEFAULT_GROUP);
+    return main();
 //     if (singleton == null)
 //       singleton = new CharacterListManager();
 //     return singleton;

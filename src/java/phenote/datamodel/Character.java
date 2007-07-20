@@ -99,16 +99,11 @@ public class Character implements CharacterI {
   }
 
   public CharField getCharFieldForName(String fieldName) throws CharFieldException {
-    for (CharField cf : getAllCharFields()) {
-      //if (cf.getName().equalsIgnoreCase(fieldName))
-      if (cf.isField(fieldName)) // checks name and datatag
-        return cf;
-    }
-    throw new CharFieldException("No field for "+fieldName);
+    return OntologyManager.inst().getCharFieldForName(fieldName);
   }
 
   /** return all char fields configured, both currently used or null in char */
-  private List<CharField> getAllCharFields() {
+  public List<CharField> getAllCharFields() {
     return OntologyManager.inst().getCharFieldList();
   }
 

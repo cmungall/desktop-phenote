@@ -74,6 +74,11 @@ public class FieldPanel extends JPanel {
     }
     if (addSearchPanel)
       initSearchPanel();
+
+    // if haveGroupAdapter() && groupAdapter.hasCharChangeListener?
+    // editManager.addCharChangeListener(groupAdapter.getCharChangeListener())
+    // testing out...
+    //editManager.addCharChangeListener(new phenote.dataadapter.AllFieldsGroupAdapter("genotypeMaker").getCharChangeListener());
   } 
 
   private void setGroup(String g) {

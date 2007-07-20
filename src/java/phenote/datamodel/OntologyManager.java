@@ -61,6 +61,15 @@ public class OntologyManager {
     return getCharFieldListForGroup(group).get(i);
   }
 
+  public CharField getCharFieldForName(String fieldName) throws CharFieldException {
+    for (CharField cf : getCharFieldList()) {
+      //if (cf.getName().equalsIgnoreCase(fieldName))
+      if (cf.isField(fieldName)) // checks name and datatag
+        return cf;
+    }
+    throw new CharFieldException("No field for "+fieldName);
+  }
+
 
   /** This is where the ontologies are in a generic fashion. A char field
       has one or more ontologies (entity char field often has more than ontology)*/

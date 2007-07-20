@@ -1,5 +1,6 @@
 package phenote.datamodel;
 
+import java.util.List;
 import org.geneontology.oboedit.datamodel.OBOClass;
 
 /** CharacterIs are the building blocks of phenotypes. All the Characters for a 
@@ -12,6 +13,7 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 public interface CharacterI {
 
   /** generic fields!!! */
+  public List<CharField> getAllCharFields();
   public void setValue(String fieldString, String valueString)
     throws CharFieldException,TermNotFoundException;
   public void setValue(CharField cf, CharFieldValue cfv); // ??
