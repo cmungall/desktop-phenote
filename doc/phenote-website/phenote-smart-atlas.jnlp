@@ -44,7 +44,7 @@ href="phenote.jnlp">
 </resources>
 <!-- no cmd line param will ask user for config at initialization -->
 <application-desc main-class="phenote.main.Phenote">
-        <argument>-u</argument>
+        <argument>-c</argument>
         <argument>/smart-atlas.cfg</argument>
 </application-desc>
 </jnlp>
