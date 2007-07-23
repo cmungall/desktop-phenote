@@ -39,8 +39,9 @@ Visit our <a href="/content/software/">Downloads</a> page to get the latest vers
 </p>
 
 <h3><a name="screenshot">Screenshot</a></h3>
-<img class="portrait" width="75%" border="0" src="/images/phenote_screenshot.png" alt="Screenshot" />
+<p><img class="portrait" width="75%" border="0" src="/images/phenote_screenshot.png" alt="Screenshot" /> </p>
 <br />
+
 
 <h3><a name="documentation">Documentation</a></h3>
 <p>Browse the <a href="http://www.phenote.org/help">Phenote on-line documentation</a> </p>
