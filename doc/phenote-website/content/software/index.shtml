@@ -8,7 +8,29 @@
 
 <h2>Phenote Software</h2>
 
-<h3><a name="current">Current Release: 1.3</a> [<a href="http://www.phenote.org/phenote/latest/phenote.jnlp">Webstart</a>] </h3>
+<h3><a name="current">Beta Release: 1.4 beta 2</a> [<a href=="http://www.phenote.org/phenote/1.4-beta2/phenote.jnlp">Webstart</a>] </h3>
+Newest features:
+<ul>
+  <li>feature: RESTful data input for BIRN's smart atlas</li>
+  <li>feature: Character Template for NESCent/CToL (Jim Balhoff).</li>
+  <li>feature: Progress on gui for config (in progress)</li>
+  <li>feature: Progress on field groups (genotype maker, pub querying...)</li>
+  <li>feature:  right-click editing functions for free-text fields in data input frame.  right-click copy in table.</li>
+  <li>feature:  incorporation of help documentation into Phenote under menu item Help-&gt;PhenoteHelp </li>
+  <li>feature:  added plant_grammene.cfg configuration, plus appropriate obo files.</li>
+  <li>feature:  navigation bar added to top of term info; buttons to traverse worn paths; term name moved up to top of box [<a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1685540&amp;group_id=76834&amp;atid=887913">1685540</a>]</li>
+  <li>feature:  dbxrefs are listed in term info (no external links yet) [<a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1739399&amp;group_id=76834&amp;atid=887913">1739399</a>]</li>
+  <li>change: 'use term' button moved and replaced with checkmark button in navigation bar</li>
+  <li>change: ontology files can be read with dangling references</li>
+  <li>bugfix: obsolete terms were not being read in from annotation files as Ontology.getTerm was only looking at non obsoleted terms</li>
+  <li>known bug: ontology files using import statements not properly read</li>
+</ul>
+
+<p>
+See the <a href="http://www.phenote.org/phenote-release-notes.html">Release Notes</a> for more detailed information.
+</p>
+
+<h3><a name="current">Current Release: 1.3</a> [<a href="http://www.phenote.org/phenote/1.3/phenote.jnlp">Webstart</a>] </h3>
 Newest Features:
 <ul>
 <li>Web-based documentation and Help features</li>
@@ -24,9 +46,6 @@ Newest Features:
 <li>Can check for updates to ontology files independently from any URL </li>
 <li>Obsolete replacements or consideration terms are displayed in term info with links</li>
 </ul>
-<p>
-See the <a href="http://www.phenote.org/phenote-release-notes.html">Release Notes</a> for more detailed information.
-</p>
 
 <p>
 To download this version with subversion, use the command:
