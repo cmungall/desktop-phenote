@@ -11,7 +11,9 @@
 <h3><a name="lists">Mailing lists</a></h3>
 <p>There are several mailing lists pertaining to Phenote:</p>
 <ul>
-  <li>Join in on discussions pertaining to Phenote by <a href="https://lists.sourceforge.net/lists/listinfo/obo-phenote">subscribing to the mailing list</a>
+  <li>Join in on discussions pertaining to Phenote for the users: <a href="https://lists.sourceforge.net/lists/listinfo/obo-phenote">subscribing to the mailing list</a>
+  </li>
+<li>If you are interested in the software development issues: <a href="https://lists.sourceforge.net/lists/listinfo/obo-phenote-dev">subscribing to the dev mailing list</a>
   </li>
   <li>Keep on top of changes to phenote.  Join the 
     <ul>
@@ -27,7 +29,8 @@
 
 <h3><a name="Bugs">Bug Reporting</a></h3>
 <p>If you find bugs in Phenote, please <a href="https://sourceforge.net/tracker/?group_id=76834&atid=887913">submit a bug report</a> on our Bug Tracker located on sourceforge.</p>
-<p>Please use this same tracker to submit your enhancement and feature requests.</p>
+<p>If you are submitting a bug, please note what version you are using.</p>
+<p>If you are submitting a feature request, please select "new feature" from the "group" menu.</p>
 
 <br />
 

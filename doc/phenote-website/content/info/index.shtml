@@ -38,25 +38,18 @@ Phenote is both a standalone java application and a software toolkit.
 Visit our <a href="/content/software/">Downloads</a> page to get the latest version of Phenote.
 </p>
 
-<h3><a name="web_users">Websites Utilizing Phenote Software Components</a></h3>
-<p>The Dictyostelium Genome Database, <a href="http://dictybase.org">
-DictyBase</a>, has a web-based 
-<a href="http://165.124.152.194/db/cgi-bin/dictyBase/curation/phenotypeCuration.pl">Phenotype Annotation Tool</a> that is directly linked to their own database backend.</p>
-<br />
-<p>
-<a href="http://zfin.org">Zfin</a> has an integrated phenotype annotation tool in their internal website.  [screenshot or link to be added].
-</p>
+<h3><a name="screenshot">Screenshot</a></h3>
+<img class="portrait" height="50" border="0" src="/images/phenote_screenshot.png" alt="Screenshot" />
 <br />
 
 <h3><a name="documentation">Documentation</a></h3>
-<p>[A <a href="">Phenotype Annotation User Guide</a> is being developed.]</p>
+<p>Browse the <a href="http://www.phenote.org/help">Phenote on-line documentation</a> </p>
 
 <h3><a name="roadmap">Roadmap</a></h3>
 
 <h3><a name="rel_notes">Release Notes</a></h3>
-<a href="/phenote-release-notes.html">[Release Notes]</a>
+To keep up-to-date on information about the latest release, please read our <a href="/phenote-release-notes.html">[Release Notes]</a>.
 <br />
-
 
 </div>
 </div>
