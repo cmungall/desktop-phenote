@@ -159,6 +159,7 @@
         </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="title" use="required" type="xs:string"/>
+      <xs:attribute name="group_adapter" use="required" type="xs:string"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="postcomp">

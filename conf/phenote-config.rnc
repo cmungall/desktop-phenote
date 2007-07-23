@@ -117,7 +117,13 @@ ontology =
      attribute name { xsd:ID },
      attribute container { "window" | "tab" },
      attribute interface { "default" | "character-template" },
-     attribute title { xsd:string }
+     attribute title { xsd:string },
+     ## group adapter is a plugin that processes data from group and shoves it
+     ## in the main/default group (in field values,field name or row data
+     ## since its a plugin this should be a full path java class like
+     ## phenote.dataadapter.fly.FlyGenotypeGroupAdapter or
+     ## phenote.dataadapter.FieldsGroupAdapter
+     attribute group_adapter { xsd:string }
   }
   
 
