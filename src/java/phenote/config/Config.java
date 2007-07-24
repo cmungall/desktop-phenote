@@ -8,11 +8,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.LineNumberReader;
 import java.io.PrintStream;
+import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.apache.xmlbeans.XmlException;
 
 import phenote.config.xml.PhenoteConfigurationDocument;
@@ -29,8 +31,10 @@ import phenote.config.xml.TermHistoryDocument.TermHistory;
 import phenote.config.xml.UpdateTimerDocument.UpdateTimer;
 import phenote.config.xml.UvicGraphDocument.UvicGraph;
 import phenote.dataadapter.DataAdapterI;
+import phenote.dataadapter.GroupAdapterI;
 import phenote.dataadapter.QueryableDataAdapterI;
 import phenote.datamodel.CharField;
+import phenote.datamodel.OntologyManager;
 import phenote.gui.SearchFilterType;
 import phenote.gui.SearchParams;
 import phenote.main.PhenoteVersion;
@@ -49,7 +53,7 @@ public class Config {
   private List<FieldConfig> enabledFields = new ArrayList<FieldConfig>();
   /** enabled & disabled */
   private List<FieldConfig> allFields = new ArrayList<FieldConfig>();
-  private static final String defaultLogConfigFile = "conf/log4j-standalone.xml";
+  public static final String defaultLogConfigFile = "conf/log4j-standalone.xml";
   // maybe should be using xmlbean where possible?
   //private boolean uvicGraphEnabled = false; // default false for now
   //private boolean termHistoryEnabled = false;   //default to false for now
@@ -1108,30 +1112,71 @@ public class Config {
     return fCfgs;
   }
   
+  /** Returns null if group w groupName doesnt exist */
   public String getTitleForGroup(String groupName) {
+    Group g = getGroup(groupName);
+    if (g == null) return null;
+    return g.getTitle();
+  }
+
+  /** Returns xmlbean Group for groupName, returns null if no such group
+   should it create group for "default" if it doesnt exist - i think so - just 
+  have to make sure not creating 2 defaults */
+  private Group getGroup(String groupName) {
+    if (groupName == null) return getDefaultGroup();
     for (Group aGroup : this.phenoConfigBean.getGroupArray()) {
       if (aGroup.getName().equals(groupName)) {
-        return aGroup.getTitle();
+        return aGroup;
       }
     }
-    return null;
+    if (groupName.equals(OntologyManager.DEFAULT_GROUP)) // OntMan?
+      return createDefaultGroup(); // ??
+    //return null; // ex? return default?
+    return getDefaultGroup(); // if all fails just return default?? or null??
   }
+
+  public Group getDefaultGroup() {
+    return getGroup(OntologyManager.DEFAULT_GROUP);
+  }
+
+  private Group createDefaultGroup() {
+    Group g = phenoConfigBean.addNewGroup();
+    g.setName(OntologyManager.DEFAULT_GROUP);
+    return g;
+  }
+
+  public boolean hasGroupAdapter(String group) {
+    return getGroupAdapter(group) != null;
+    //getGroup(group).getGroupAdapter() != null;
+  }
+
+  /** returns null if group adapter for group not found - ex? */
+  public GroupAdapterI getGroupAdapter(String group) {
+    String classString = getGroup(group).getGroupAdapter();
+    if (classString == null) return null;
+    try {
+      // should we cache in hash and insure 1 instance???
+      Class c = Class.forName(classString);
+      Constructor cr = c.getConstructor(String.class);
+      Object o = cr.newInstance(group);
+      if (!(o instanceof GroupAdapterI)) {
+        log().error("group_adapter cfg is not a GroupAdapterI "+classString);
+        return null;
+      }
+      return (GroupAdapterI)o;
+    }
+    catch (Exception e) {
+      log().error("Unable to find group adapter for "+classString+"\n"+e);
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  private Logger log;
+  private Logger log() {
+    if (log == null) log = Logger.getLogger(getClass());
+    return log;
+  }
+
 }
-
-//       if (overwrite || mode.equals("WIPEOUT_ALWAYS"))
-//         wipeoutAlways = true;
-//       else
-//         updateWithNewVersion = true; // for now
-//   private File getMyPhenoteCfgFile() {
-//     return new File(FileUtil.getDotPhenoteDir(),"my-phenote.cfg");
-//   }
-
-    //File dotPhenote = FileUtil.getDotPhenoteDir();
-    // this wont work with merging/updating
-    //File myPhenote = new File(dotPhenote,"my-phenote.cfg");
-      //} catch (FileNotFoundException e) {throw new ConfigException(e);}
-    //return dotConfFile.toString(); // ?
-   //parseXmlFile("./conf/initial-flybase.cfg"); // hardwired for now...
-  //private FieldConfig lumpConfig = new FieldConfig(CharFieldEnum.LUMP,"Genotype");
-  //private String lumpOntologyFile = null;  private OntologyConfig lumpConfig = new OntologyConfig("Genotype");
 

@@ -17,7 +17,7 @@ import phenote.datamodel.OntologyManager;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 
-public class AllFieldsGroupAdapter { // implements GroupAdapterI?
+public class AllFieldsGroupAdapter implements GroupAdapterI {
 
   private CharChangeListener charListener = new AllCharChangeListener();
   private String group = "genotypeMaker"; // hardwire for now for testing
@@ -27,6 +27,8 @@ public class AllFieldsGroupAdapter { // implements GroupAdapterI?
     this.group = grp;
     namespace = new Namespace(group);
   }
+
+  public boolean hasCharChangeListener() { return true; }
 
   public CharChangeListener getCharChangeListener() {
     return charListener;

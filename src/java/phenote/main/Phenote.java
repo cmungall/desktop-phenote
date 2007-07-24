@@ -10,6 +10,7 @@ import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +66,16 @@ public class Phenote {
 
   public static void main(String[] args) {
     standalone = true; // i think this is ok
+    // set up logging with default logger until we read in log file from
+    // config file
+    try { 
+      URL u = FileUtil.findUrl(Config.defaultLogConfigFile);
+      DOMConfigurator.configure(u);
+    }
+    catch (FileNotFoundException e) {
+      System.out.println("Default log cfg file not found "+e);
+    }
+    
     System.out.println("This is Phenote version "+PhenoteVersion.versionString());
     // default mac look & feel is "Mac OS X", but the JComboBox is buggy
     try {
@@ -242,12 +253,13 @@ public class Phenote {
     // this may be changed to applet...
     frame = new JFrame("Phenote "+PhenoteVersion.versionString()); 
     if (getNumGroupTabs() < 2) {
-      frame.getContentPane().add(makeGroupPanel(OntologyManager.DEFAULT_GROUP));
+      Group g = Config.inst().getDefaultGroup();
+      frame.getContentPane().add(makeGroupPanel(g));
     }
     else {
       JTabbedPane tabbedGroups = new JTabbedPane();
       for (Group g : getGroupTabs()) {
-        JPanel p = makeGroupPanel(g.getName());
+        JPanel p = makeGroupPanel(g); //.getName());
         tabbedGroups.add(g.getTitle(),p);
       }
       frame.getContentPane().add(tabbedGroups);
@@ -297,17 +309,18 @@ public class Phenote {
 
   /** main panel contains FieldPanel CharTablePanel & TermInfo 
       move this to gui? */
-  private JPanel makeGroupPanel(String group) {
+  private JPanel makeGroupPanel(Group group) {
     JPanel mainPanel = new JPanel(new GridLayout());
     
     JPanel infoHistoryPanel = new JPanel(new GridBagLayout());
     infoHistoryPanel.setBorder(new EmptyBorder(10,10,10,10));
     
     // need to do different selection & edit mgrs
-    FieldPanel groupFieldPanel = new FieldPanel(true,false,group);
+    FieldPanel groupFieldPanel = new FieldPanel(true,false,group.getName());
     groupFieldPanel.setBorder(new EmptyBorder(10,10,10,10));
     // for testing - thats it
-    if (group == null || group.equals("default")) mainFieldPanel = groupFieldPanel;
+    if (group == null || group.getName().equals("default"))
+      mainFieldPanel = groupFieldPanel;
 
     termInfo = new TermInfo();
     GridBagConstraints ugbc = GridBagUtil.makeFillingConstraint(0,0);
@@ -321,7 +334,7 @@ public class Phenote {
     
     JSplitPane innerSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, groupFieldPanel, infoHistoryPanel);
 
-    characterTablePanel = new CharacterTablePanel(group);
+    characterTablePanel = new CharacterTablePanel(group.getName());
     
     JSplitPane outerSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, innerSplitPane, characterTablePanel);
     mainPanel.add(outerSplitPane);

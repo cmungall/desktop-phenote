@@ -14,9 +14,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import phenote.config.Config;
+import phenote.config.xml.GroupDocument.Group;
 import phenote.datamodel.CharField;
 import phenote.datamodel.OntologyManager;
 import phenote.edit.EditManager;
+import phenote.dataadapter.GroupAdapterI;
 import phenote.gui.selection.SelectionManager;
 
 /**
@@ -47,6 +50,7 @@ public class FieldPanel extends JPanel {
 //     this(doAllFields, addSearchPanel, null, SelectionManager.inst(), EditManager.inst());
 //   }
 
+  // Group or String for group?
   public FieldPanel(boolean doAllFields, boolean addSearchPanel, String grp) {
     setGroup(grp);
     init(doAllFields,addSearchPanel,group,SelectionManager.getSelMan(group),
@@ -75,10 +79,15 @@ public class FieldPanel extends JPanel {
     if (addSearchPanel)
       initSearchPanel();
 
-    // if haveGroupAdapter() && groupAdapter.hasCharChangeListener?
-    // editManager.addCharChangeListener(groupAdapter.getCharChangeListener())
-    // testing out...
-    //editManager.addCharChangeListener(new phenote.dataadapter.AllFieldsGroupAdapter("genotypeMaker").getCharChangeListener());
+    // should there be a GroupConfig object?
+    if (Config.inst().hasGroupAdapter(group)) {
+      GroupAdapterI groupAdap = Config.inst().getGroupAdapter(group);
+      if (groupAdap.hasCharChangeListener()) {
+        editManager.addCharChangeListener(groupAdap.getCharChangeListener());
+        // testing out...
+        //editManager.addCharChangeListener(new phenote.dataadapter.AllFieldsGroupAdapter("genotypeMaker").getCharChangeListener());
+      }
+    }
   } 
 
   private void setGroup(String g) {
