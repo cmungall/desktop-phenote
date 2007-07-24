@@ -123,7 +123,10 @@ ontology =
      ## since its a plugin this should be a full path java class like
      ## phenote.dataadapter.fly.FlyGenotypeGroupAdapter or
      ## phenote.dataadapter.FieldsGroupAdapter
-     attribute group_adapter { xsd:string }
+     attribute group_adapter { xsd:string },
+     ## which field (in main group) is destination for this group, if its
+     ## destiny is a field
+     attribute destination_field { xsd:string }
   }
   
 
