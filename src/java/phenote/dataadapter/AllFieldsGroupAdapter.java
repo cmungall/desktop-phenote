@@ -1,95 +1,21 @@
 package phenote.dataadapter;
 
-import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import org.geneontology.oboedit.datamodel.Namespace;
 import org.geneontology.oboedit.datamodel.OBOClass;
-import org.geneontology.oboedit.datamodel.OBOSession;
 import org.geneontology.oboedit.datamodel.impl.OBOClassImpl;
-import org.geneontology.oboedit.datamodel.impl.OBOSessionImpl;
 
 import phenote.datamodel.CharField;
-import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharacterListI;
-import phenote.datamodel.Ontology;
-import phenote.datamodel.OntologyManager;
-import phenote.edit.CharChangeEvent;
-import phenote.edit.CharChangeListener;
 
-public class AllFieldsGroupAdapter implements GroupAdapterI {
+public class AllFieldsGroupAdapter extends AbstractGroupAdapter {
 
-  private CharChangeListener charListener = new AllCharChangeListener();
-  private String group = "genotypeMaker"; // hardwire for now for testing
-  private Namespace namespace;
-  private CharField destinationCharField;
-  
-  public AllFieldsGroupAdapter(String grp) {
-    this.group = grp;
-    namespace = new Namespace(group);
-  }
-
-  public boolean hasCharChangeListener() { return true; }
-
-  public CharChangeListener getCharChangeListener() {
-    return charListener;
-  }
-
-  private void loadUpMainField() {
-    if (!hasDestinationCharField()) return; // err msg?
-    // clear out old obo classes??? query be namespace and OBOSess.removeObject?
-
-    // make new OBOSession?? or use existing OBOSession - might be bad for bridge?
-    OBOSession os = new OBOSessionImpl();
-
-    // make OBOClasses from characters
-    for (CharacterI c : getGroupChars()) {
-      OBOClass o = makeOboClassFromChar(c);
-      if (o == null) continue;
-      os.addObject(o);
-    }
-
-    // load obo classes into main field -> namespace query? 
-    getDestinationOntology().setOboSession(os);
-
+  public AllFieldsGroupAdapter(String group) {
+    super(group);
   }
 
   // public boolean isFieldValueMaker() { return true; } ??
-
-  public void setDestinationField(String fieldName) {
-    try {
-      destinationCharField = OntologyManager.inst().getCharFieldForName(fieldName);
-    }
-    catch (CharFieldException e) { // popup? throw ex?
-      log().error("Cant find destination field "+fieldName+" for group "+group
-                  +" Check config file.");
-    }
-  }
-
-  /** If CharField doesnt have Ontology yet, create one */
-  private Ontology getDestinationOntology() {
-    if (!hasDestinationCharField()) return null;
-
-    CharField cf = getDestinationCharField();
-    if (!cf.hasOntologies()) {
-      Ontology ont = new Ontology(cf.getName());
-      cf.addOntology(ont);
-    }
-    return cf.getOntology(); // just assume theres only 1 ontol
-  }
-
-  private boolean hasDestinationCharField() {
-    return getDestinationCharField() != null;
-  }
-
-  private CharField getDestinationCharField() {
-    return destinationCharField;
-    // for now
-    //try { return OntologyManager.inst().getCharFieldForName("GT"); }
-    //catch (CharFieldException e) { return null; } // for now
-  }
 
   // protected? - subclass override?
   protected OBOClass makeOboClassFromChar(CharacterI c) {
@@ -105,22 +31,11 @@ public class AllFieldsGroupAdapter implements GroupAdapterI {
     sb.insert(0,':');
     String id = sb.toString();
     OBOClass o = new OBOClassImpl(name,id);
-    o.setNamespace(namespace); // ???
+    o.setNamespace(getNamespace()); // ???
     return o;
   }
 
 
-    
-
-  private List<CharacterI> getGroupChars() {
-    return CharacterListManager.getCharListMan(group).getCharacterList().getList();
-  }
-
-  private class AllCharChangeListener implements CharChangeListener {
-    public void charChanged(CharChangeEvent e) {
-      loadUpMainField();
-    }
-  }
 
   private Logger log;
   private Logger log() {
