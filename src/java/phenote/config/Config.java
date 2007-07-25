@@ -1151,19 +1151,23 @@ public class Config {
   }
 
   /** returns null if group adapter for group not found - ex? */
-  public GroupAdapterI getGroupAdapter(String group) {
-    String classString = getGroup(group).getGroupAdapter();
+  public GroupAdapterI getGroupAdapter(String groupStr) {
+    Group grp = getGroup(groupStr);
+    String classString = grp.getGroupAdapter();
     if (classString == null) return null;
     try {
       // should we cache in hash and insure 1 instance???
       Class c = Class.forName(classString);
       Constructor cr = c.getConstructor(String.class);
-      Object o = cr.newInstance(group);
+      Object o = cr.newInstance(groupStr);
       if (!(o instanceof GroupAdapterI)) {
         log().error("group_adapter cfg is not a GroupAdapterI "+classString);
         return null;
       }
-      return (GroupAdapterI)o;
+      GroupAdapterI ga = (GroupAdapterI)o;
+      String destField = grp.getDestinationField();
+      ga.setDestinationField(destField); // ex/err msg if fail?
+      return ga;
     }
     catch (Exception e) {
       log().error("Unable to find group adapter for "+classString+"\n"+e);

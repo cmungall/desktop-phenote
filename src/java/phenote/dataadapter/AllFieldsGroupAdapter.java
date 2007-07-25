@@ -2,6 +2,8 @@ package phenote.dataadapter;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import org.geneontology.oboedit.datamodel.Namespace;
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOSession;
@@ -22,6 +24,7 @@ public class AllFieldsGroupAdapter implements GroupAdapterI {
   private CharChangeListener charListener = new AllCharChangeListener();
   private String group = "genotypeMaker"; // hardwire for now for testing
   private Namespace namespace;
+  private CharField destinationCharField;
   
   public AllFieldsGroupAdapter(String grp) {
     this.group = grp;
@@ -35,6 +38,7 @@ public class AllFieldsGroupAdapter implements GroupAdapterI {
   }
 
   private void loadUpMainField() {
+    if (!hasDestinationCharField()) return; // err msg?
     // clear out old obo classes??? query be namespace and OBOSess.removeObject?
 
     // make new OBOSession?? or use existing OBOSession - might be bad for bridge?
@@ -52,9 +56,22 @@ public class AllFieldsGroupAdapter implements GroupAdapterI {
 
   }
 
+  // public boolean isFieldValueMaker() { return true; } ??
+
+  public void setDestinationField(String fieldName) {
+    try {
+      destinationCharField = OntologyManager.inst().getCharFieldForName(fieldName);
+    }
+    catch (CharFieldException e) { // popup? throw ex?
+      log().error("Cant find destination field "+fieldName+" for group "+group
+                  +" Check config file.");
+    }
+  }
+
   /** If CharField doesnt have Ontology yet, create one */
   private Ontology getDestinationOntology() {
-    //new Throwable().printStackTrace();
+    if (!hasDestinationCharField()) return null;
+
     CharField cf = getDestinationCharField();
     if (!cf.hasOntologies()) {
       Ontology ont = new Ontology(cf.getName());
@@ -63,10 +80,15 @@ public class AllFieldsGroupAdapter implements GroupAdapterI {
     return cf.getOntology(); // just assume theres only 1 ontol
   }
 
+  private boolean hasDestinationCharField() {
+    return getDestinationCharField() != null;
+  }
+
   private CharField getDestinationCharField() {
+    return destinationCharField;
     // for now
-    try { return OntologyManager.inst().getCharFieldForName("GT"); }
-    catch (CharFieldException e) { return null; } // for now
+    //try { return OntologyManager.inst().getCharFieldForName("GT"); }
+    //catch (CharFieldException e) { return null; } // for now
   }
 
   // protected? - subclass override?
@@ -98,6 +120,12 @@ public class AllFieldsGroupAdapter implements GroupAdapterI {
     public void charChanged(CharChangeEvent e) {
       loadUpMainField();
     }
+  }
+
+  private Logger log;
+  private Logger log() {
+    if (log == null) log = Logger.getLogger(getClass());
+    return log;
   }
 
 }
