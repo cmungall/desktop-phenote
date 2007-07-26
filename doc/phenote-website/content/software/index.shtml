@@ -8,7 +8,7 @@
 
 <h2>Phenote Software</h2>
 
-<h3><a name="current">Beta Release: 1.4 beta 2</a> [<a href=="http://www.phenote.org/phenote/1.4-beta2/phenote.jnlp">Webstart</a>] </h3>
+<h3><a name="current">Beta Release: 1.4 beta 2</a> [<a href="http://www.phenote.org/phenote/1.4-beta2/phenote.jnlp">Webstart</a>] </h3>
 Newest features:
 <ul>
   <li>feature: RESTful data input for BIRN's smart atlas</li>
