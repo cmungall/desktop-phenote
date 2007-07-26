@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.geneontology.oboedit.datamodel.Namespace;
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOSession;
+import org.geneontology.oboedit.datamodel.impl.OBOClassImpl;
 import org.geneontology.oboedit.datamodel.impl.OBOSessionImpl;
 
 import phenote.datamodel.CharField;
@@ -18,7 +19,7 @@ import phenote.datamodel.OntologyManager;
 import phenote.edit.CharChangeListener;
 import phenote.edit.CharChangeEvent;
 
-abstract class AbstractGroupAdapter implements GroupAdapterI {
+public abstract class AbstractGroupAdapter implements GroupAdapterI {
 
   private CharChangeListener charListener;
   private String group;
@@ -61,8 +62,19 @@ abstract class AbstractGroupAdapter implements GroupAdapterI {
     getDestinationOntology().setOboSession(os);
   }
 
+  // protected? - subclass override?
+  protected OBOClass makeOboClassFromChar(CharacterI c) {
+    if (c.hasNoContent()) return null; // ex?
+    String name = makeNameFromChar(c);
+    String id = ":"+name;
+    OBOClass o = new OBOClassImpl(name,id);
+    o.setNamespace(getNamespace()); // ???
+    return o;
+  }
+
   /** This is where subclasses come in and do their thing */
-  protected abstract OBOClass makeOboClassFromChar(CharacterI c);
+  protected abstract String makeNameFromChar(CharacterI c); 
+
 
   public void setDestinationField(String fieldName) {
     try {
