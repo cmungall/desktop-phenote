@@ -350,6 +350,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     private static final int PADDING = 3; // this may be look-and-feel dependent
     
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+      if (!(value instanceof CompletionTerm)) return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
       final String name = ((CompletionTerm)value).getCompListDisplayName();
       final String suffix = ((CompletionTerm)value).getCompListDisplaySuffix();
       String displayValue;
