@@ -178,11 +178,13 @@ abstract class CharFieldGui {
       try {
         String queryValue = getText();
         if (isTermCompList()) { queryValue = getCurrentOboClass().getID(); }
-        CharacterListI cl = qda.query(charField.getName(),queryValue);
-        //if (cl == null) if null shouldve thrown ex - check anyways?
-        //notifyNewCharList(cl);
-        // check if unsaved data - if so ask user if wants to save/load
-        CharacterListManager.inst().setCharacterList(this,cl);
+        for (String group : qda.getQueryableGroups()) {
+          CharacterListI cl = qda.query(group,charField.getName(),queryValue);
+          //if (cl == null) if null shouldve thrown ex - check anyways?
+          //notifyNewCharList(cl);
+          // check if unsaved data - if so ask user if wants to save/load
+          CharacterListManager.getCharListMan(group).setCharacterList(this,cl);
+        }
       }
       catch (CharFieldGuiEx ex) {
           JOptionPane.showMessageDialog(null,ex.getMessage(),"Retrieve Error",

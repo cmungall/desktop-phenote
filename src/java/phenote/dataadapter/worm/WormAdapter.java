@@ -35,9 +35,13 @@ import java.sql.PreparedStatement;
 public class WormAdapter implements QueryableDataAdapterI {
 
   private List<String> queryableFields = new ArrayList<String>(2);
+  private List<String> queryableGroups = new ArrayList<String>(2);
 
   public WormAdapter() { init(); }
 
+  public List<String> getQueryableGroups() {
+    return queryableGroups;
+  }
 
   public String getCommitButtonLabel() {
     return "Commit To Worm DB";
@@ -285,6 +289,8 @@ public class WormAdapter implements QueryableDataAdapterI {
 //    queryableFields.add(CharFieldEnum.ALLELE.getName()); // "Allele"
     queryableFields.add("Object Name"); // "Object Name"
     // should their be a check that the current char fields have pub & allele?
+    queryableGroups.add("default");
+    queryableGroups.add("referenceMaker");
   }
   /** return true if data adapter can query for the char field */
   public boolean isFieldQueryable(String field) {
@@ -478,7 +484,12 @@ public class WormAdapter implements QueryableDataAdapterI {
     return charList; 
   } // private CharacterListI queryPostgresCharacterList(CharacterList charList, Statement s, String joinkey)
 
-  public CharacterListI query(String field, String query) throws DataAdapterEx {
+  public CharacterListI query(String group, String field, String query) throws DataAdapterEx {
+
+    // something like this....?
+    // if (group.equals("default")) return queryForDefaultGroup(field,query)
+    // else if (group.equals("referenceMaker")) return queryForReferenceMaker(field,query);
+
 //    String m = "Worm adapter query not yet implemented. field: "+field+" query: "+query;
 //    JOptionPane.showMessageDialog(null,m,"Worm stub",JOptionPane.INFORMATION_MESSAGE);
 
