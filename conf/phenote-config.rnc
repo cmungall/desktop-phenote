@@ -76,17 +76,17 @@ obo-repository = element obo-repository { attribute url-dir {xsd:string} }
 field = 
   element field {
     attribute enable { xsd:boolean },
-    ##attribute name { "Pub" | "Genotype" | "Genetic Context" | "Entity" | "Quality" },
     attribute name { xsd:string },
     attribute colwidth { xsd:int },
     attribute desc { xsd:string },
-    ## tag for field for pheno-syntax adapter - replaced by datatag
-    attribute syntax-abbrev { xsd:string },
     ## tag for field, replaces syntax-abbrev
     attribute datatag { xsd:string },
-    ## whether field is free text or constrained by ontology - take out?
-    ## this is actually unnecasary - if there is no file free text is assumed    
-    attribute type { "free_text" | "ontology" | "int" },  
+    ## tag for field for pheno-syntax adapter - replaced by datatag
+    attribute syntax-abbrev { xsd:string },
+    ## whether field is free text, (ontology)term, int, ID, if obo file is
+    ## added term is assumed, otherewise free_text is the default
+    ## ID requires a : and no whitespace 
+    attribute type { "free_text" | "term" | "int" | "ID" },  
     ## file is for single ontology - rename ontology_file?
     ## phase these 4 out - redundant with single ontology
     attribute tab { xsd:string },

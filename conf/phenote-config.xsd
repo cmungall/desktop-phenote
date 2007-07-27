@@ -86,29 +86,26 @@
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:ontology"/>
       </xs:sequence>
       <xs:attribute name="enable" use="required" type="xs:boolean"/>
-      <xs:attribute name="name" use="required" type="xs:string">
-        <xs:annotation>
-          <xs:documentation>attribute name { "Pub" | "Genotype" | "Genetic Context" | "Entity" | "Quality" },</xs:documentation>
-        </xs:annotation>
-      </xs:attribute>
+      <xs:attribute name="name" use="required" type="xs:string"/>
       <xs:attribute name="colwidth" use="required" type="xs:int"/>
       <xs:attribute name="desc" use="required" type="xs:string"/>
-      <xs:attribute name="syntax-abbrev" use="required" type="xs:string">
-        <xs:annotation>
-          <xs:documentation>tag for field for pheno-syntax adapter - replaced by datatag</xs:documentation>
-        </xs:annotation>
-      </xs:attribute>
       <xs:attribute name="datatag" use="required" type="xs:string">
         <xs:annotation>
           <xs:documentation>tag for field, replaces syntax-abbrev</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="syntax-abbrev" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>tag for field for pheno-syntax adapter - replaced by datatag</xs:documentation>
         </xs:annotation>
       </xs:attribute>
       <xs:attribute name="type" use="required">
         <xs:simpleType>
           <xs:restriction base="xs:token">
             <xs:enumeration value="free_text"/>
-            <xs:enumeration value="ontology"/>
+            <xs:enumeration value="term"/>
             <xs:enumeration value="int"/>
+            <xs:enumeration value="ID"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
