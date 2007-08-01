@@ -35,7 +35,6 @@ import phenote.config.xml.GroupDocument.Group;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.OntologyDataAdapter;
 import phenote.datamodel.CharacterListI;
-import phenote.datamodel.OntologyManager;
 import phenote.gui.CharacterTablePanel;
 import phenote.gui.GridBagUtil;
 import phenote.gui.MenuManager;
@@ -333,7 +332,8 @@ public class Phenote {
     infoHistoryPanel.add(selectionHistory.getComponent(),ugbc); 
     
     JSplitPane innerSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, groupFieldPanel, infoHistoryPanel);
-
+    innerSplitPane.setDividerLocation(700);
+    
     characterTablePanel = new CharacterTablePanel(group.getName());
     
     JSplitPane outerSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, innerSplitPane, characterTablePanel);
