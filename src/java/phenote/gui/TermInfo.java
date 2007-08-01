@@ -65,6 +65,7 @@ public class TermInfo {
   public TermInfo(SelectionManager selManager) {
     this.selectionManager = selManager;
     this.selectionManager.addTermSelectionListener(new InfoTermSelectionListener());
+    ErrorManager.inst().addErrorListener(new InfoErrorListener());
   }
 
   public JComponent getComponent() {
@@ -163,7 +164,8 @@ public class TermInfo {
 //  }
 
   /** Fires use term event to use term listener with currently browsed term when
-      useTermButton is pressed */
+      useTermButton is pressed - i think this causes the model to be edited? 
+  TermCompList listens for */
   private class UseTermActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       //commitTerm();
@@ -328,6 +330,16 @@ public class TermInfo {
       catch (TermNotFoundException ex) { return; }
     }
   }
+
+  private class InfoErrorListener implements ErrorListener {
+    public void handleError(ErrorEvent e) {
+      GuiUtil.doBlinker(textArea); // and/or termField?
+      GuiUtil.doBlinker(termField);
+      textArea.setText(e.getMsg());
+      termField.setText("ERROR!");
+    }
+  }
+
 }
 
 //   /** put present term into current character - not used yet...

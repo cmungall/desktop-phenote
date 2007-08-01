@@ -108,6 +108,7 @@ public class SelectionManager {
 //       l.characterSelected(e);
 //   }
 
+  // called from CharacterTablePanel and CharacterTemplateController
   public void selectCharacters(Object src, List<CharacterI> chars) {
     selectedCharList = chars;
     //if (chars.size() == 1) { selectCharacter(src,chars.get(0)); return; }

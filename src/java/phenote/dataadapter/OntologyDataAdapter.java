@@ -557,9 +557,10 @@ public class OntologyDataAdapter {
   private void initOntolsSeparateOboSessions() {
     // getFieldConfigList gives enabled fields - not disabled
     for (FieldConfig fieldConfig : cfg().getEnbldFieldCfgs()) {
-      if (!fieldConfig.isEnabled()) continue; // not necasary actually
-      CharField cf = new CharField(fieldConfig.getLabel(),fieldConfig.getDataTag());
-      fieldConfig.setCharField(cf);
+      //if (!fieldConfig.isEnabled()) continue; // not necasary actually
+      CharField cf = fieldConfig.getCharField();
+      //new CharField(fieldConfig.getLabel(),fieldConfig.getDataTag());
+      //fieldConfig.setCharField(cf);
 
       // ONTOLOGIES
       if (fieldConfig.hasOntologies()) {

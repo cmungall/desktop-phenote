@@ -79,6 +79,8 @@ public class PhenoSyntaxChar {
     return cf.isFreeText();//!cf.hasOntologies();
   }
 
+
+
   // this may be more general than just this class
   class BadCharException extends Exception {
     BadCharException(String m) { super(m); }
@@ -86,7 +88,7 @@ public class PhenoSyntaxChar {
 
   private String makeValue(CharFieldValue v) {
     if (v.isTerm()) return makeTermValue(v.getOboClass());
-    return v.getName();
+    return v.getName()+" "; // just in case
   }
 
   private String makeTermValue(OBOClass term) {

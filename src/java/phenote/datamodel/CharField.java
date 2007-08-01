@@ -6,6 +6,9 @@ import java.util.List;
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOSession;
 
+// type is from xmlbean Field??
+import phenote.config.xml.FieldDocument.Field.Type;
+
 // or just Field? or CharField?
 // CharField doesnt handle instance data, just specifies what ontologies are 
 // associated with what parts of the generic character
@@ -22,8 +25,10 @@ public class CharField {
   private boolean postCompAllowed=false;
   private Ontology postCompRelOntol;
   // RELATIONSHIP? DANGLER? INSTANCE? use CharFieldEnum?
-  public enum Type { TERM, FREE_TEXT, INT }; 
-  private Type type = Type.FREE_TEXT; // free text default, bkwrd compat
+  // should we actually just use xmlbean
+  // phenote.config.xml.FieldDocument.Field.Type???
+  //public enum Type { TERM, FREE_TEXT, INT, ID }; 
+  private Type.Enum type = Type.FREE_TEXT; // free text default, bkwrd compat
   // index? orderNumber? for order in gui/datamodel?
 
   /** used for relationship */
@@ -32,13 +37,14 @@ public class CharField {
   }
 
   /** a generic field with no char field enum - get hip */
-  public CharField(String name,String tag) {
+  public CharField(String name,String tag,Type.Enum type) {
     this.name = name;
     this.tag = tag;
+    if (type != null) this.type = type;
   }
 
   /** part of constructor? probably */
-  public void setType(Type t) {
+  public void setType(Type.Enum t) {
     this.type = t;
   }
 
@@ -101,6 +107,8 @@ public class CharField {
   public boolean isTerm() {
     return type == Type.TERM;
   }
+
+  public boolean isID() { return type == Type.ID; }
 
   public boolean hasOntologies() {
     return ontologyList != null && !ontologyList.isEmpty();

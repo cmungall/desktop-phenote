@@ -1,5 +1,8 @@
 package phenote.gui.field;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -15,9 +18,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 
+import javax.swing.InputVerifier;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+//import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.DefaultEditorKit;
@@ -29,8 +39,12 @@ import org.apache.log4j.Logger;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharacterI;
 import phenote.edit.CompoundTransaction;
+import phenote.gui.ErrorEvent;
+import phenote.gui.ErrorManager;
 import phenote.gui.FieldRightClickMenu;
+import phenote.gui.GuiUtil;
 import phenote.gui.selection.CharSelectionEvent;
+import phenote.main.Phenote;
 
 
 // should this be a subclass of charfieldGui? maybe?
@@ -55,9 +69,19 @@ class FreeTextField extends CharFieldGui {
     MouseListener popupListener = new PopupListener(popup);
     textField.addMouseListener(popupListener);
 
+    if (hasInputVerifier())
+      textField.setInputVerifier(getInputVerifier());
+
     //textField.addKeyListener(new TextKeyListener());
     loadKeyMap(); // mac cut copy paste
   }
+
+  protected boolean hasInputVerifier() {
+    return getInputVerifier() != null;
+  }
+
+  /** overridden by subclasses that verify input (IdFieldGui, IntFieldGui...) */
+  protected InputVerifier getInputVerifier() { return null; }
 
   private static final int shortcut = 
     Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
@@ -139,6 +163,7 @@ class FreeTextField extends CharFieldGui {
     }
   }
   
+  // whats this about???
   private class PopupListener extends MouseAdapter {
   	JPopupMenu popup;
   	
@@ -199,8 +224,27 @@ class FreeTextField extends CharFieldGui {
     // if only updating gui (multi select clear) then dont update model
     if (updateGuiOnly()) return;
     if (!guiTextHasChanged) return; // gui hasnt been edited
-
+    if (!verify()) {
+      //JOptionPane.showMessageDialog(null,getConstraintFailureMsg(),"Input Error",
+      //                                JOptionPane.ERROR_MESSAGE); 
+//          try { SwingUtilities.invokeLater(new ErrMsgThread()); } // invokeAndWait
+//          catch (Exception e) { log().error("err msg thread ex "+e); }
+      //fireErrorEvent(getConstraintFailureMsg());
+      return; // error message?
+    }
     String v = getText();
+
+    // if constraints fail - ie IDField doesnt have : - then passesConstraints is
+    // responsible for putting up error message?
+    // InputVerifier should take care of this?
+//     if (!passesConstraints(v)) {
+//       displayConstraintFailureMsg(); //??
+//       guiTextHasChanged = false; // ?????
+//       textField.requestFocus(false); // false - not temporary
+//       // if a new row was selected old row should get selected somehow....
+//       return; // failed - dont edit model - clear out field?
+//     }
+
     //CompoundTransaction ct = new CompoundTransaction(chars,getCharFieldEnum(),v);
     CompoundTransaction ct = CompoundTransaction.makeUpdate(chars,getCharField(),v);
     this.getEditManager().updateModel(this,ct);//charFieldGui,ct); // cfg source
@@ -208,9 +252,82 @@ class FreeTextField extends CharFieldGui {
 
   }
 
-  /** selection (from table) comes in before focus lost! update model with
+  //private Timer timer;
+
+  protected void fireErrorEvent(String m) {
+//     textField.setBackground(java.awt.Color.RED);
+//     textField.repaint();
+//     Blinker b = new Blinker();
+//     Timer timer = new Timer(300,b);
+//     b.setTimer(timer);
+//     timer.start();
+    GuiUtil.doBlinker(textField);
+    ErrorManager.inst().error(new ErrorEvent(this,m));
+//     textField.repaint();
+//     try { Thread.sleep(1000); } catch (InterruptedException e) {}
+//     textField.setBackground(java.awt.Color.BLUE);
+//     textField.repaint();
+//     try { Thread.sleep(1000); } catch (InterruptedException e) {}
+//     textField.setBackground(java.awt.Color.RED);
+  }
+
+  private class Blinker implements ActionListener {
+    private int counter = 0;
+    private Timer timer;
+    public void actionPerformed(ActionEvent e) {
+      Color c = Color.RED;
+      if (counter++ % 2 == 0) c = Color.WHITE; 
+      textField.setBackground(c);
+      if (counter == 5) timer.stop();
+    }
+    private void setTimer(Timer t) { timer = t; }
+  }
+
+//   private class ErrMsgThread implements Runnable {
+//     public void run() {
+//       JOptionPane.showMessageDialog(null,getConstraintFailureMsg(),"ID Input Error",
+//                                     JOptionPane.ERROR_MESSAGE); 
+//     }
+//   }
+
+  protected boolean verify() {
+    if (!hasInputVerifier()) return true;
+    return getInputVerifier().verify(textField);
+  }
+
+  // no constraints for free text - subclasses override this
+  // maybe there should be an abstract method/class?
+//   protected boolean passesConstraints(String input) {
+//     return true;
+//   }
+
+//   private void displayConstraintFailureMsg() {
+//     boolean modal = false; //true;
+//     final JDialog d = new JDialog(Phenote.getPhenote().getFrame(),"Input Error",modal);
+//     // causes it to hang
+//     //JOptionPane.showInternalMessageDialog(d,getConstraintFailureMsg(),"Input Error",
+//     //                          JOptionPane.ERROR_MESSAGE); 
+//     // causes table selection event to not go through(???)
+//     //JOptionPane.showMessageDialog(null,getConstraintFailureMsg(),"Input Error",
+//     //                            JOptionPane.ERROR_MESSAGE); 
+//     d.add(new JLabel(getConstraintFailureMsg()),"North");
+//     JButton ok = new JButton("OK");
+//     ok.addActionListener(new ActionListener() {
+//         public void actionPerformed(ActionEvent e) {
+//           System.out.println("disposing "+d);
+//           d.dispose();}});
+//     d.add(ok,"South");
+//     d.setAlwaysOnTop(true);
+//     d.pack();
+//     d.show();
+//   }
+
+  protected String getConstraintFailureMsg() { return null; }
+
+  /** selection (from selMan/table) comes in before focus lost! update model with
       previous selection */
   protected void charactersSelected(CharSelectionEvent e) {
+    //new Throwable().printStackTrace();
     if (e.hasPreviouslySelectedChars())
       updateModel(e.getPreviouslySelectedChars());
     super.charactersSelected(e); // CharFieldGui
@@ -236,7 +353,7 @@ class FreeTextField extends CharFieldGui {
   }
 
   private Logger log;
-  private Logger log() {
+  protected Logger log() {
     if (log == null) log = Logger.getLogger(getClass());
     return log;
   }

@@ -86,7 +86,8 @@ field =
     ## whether field is free text, (ontology)term, int, ID, if obo file is
     ## added term is assumed, otherewise free_text is the default
     ## ID requires a : and no whitespace 
-    attribute type { "free_text" | "term" | "int" | "ID" },  
+    ## free_text is just for backward compatibility - phase out
+    attribute type { "FREE_TEXT" | "TERM" | "INT" | "ID" | "free_text" },  
     ## file is for single ontology - rename ontology_file?
     ## phase these 4 out - redundant with single ontology
     attribute tab { xsd:string },

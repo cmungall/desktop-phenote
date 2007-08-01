@@ -62,12 +62,15 @@ abstract class CharFieldGui {
 
   /** CharFieldGui for main window not post comp box - factory method */
   static CharFieldGui makeCharFieldGui(CharField charField) {
-    if (charField.hasOntologies()) {
+    if (charField.isTerm()) { //hasOntologies()) {
       //return new TermCompList(charField,sp,true); // enable listeners
       TermCompList t = new TermCompList(charField);
       //t.setSearchParams(sp);
       t.allowPostCompButton(true);
       return t;
+    }
+    else if (charField.isID()) {
+      return new IdFieldGui(charField);
     }
     else {
       FreeTextField f = new FreeTextField(charField);

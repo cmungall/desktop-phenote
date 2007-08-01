@@ -104,6 +104,22 @@ public class FieldConfig {
     return getLabel();
   }
 
+  private Field.Type.Enum getType() {
+    // if not configged default to term if have ontols, otherwise free text
+    if (fieldBean.getType() == null) {
+      if (hasOntologies()) fieldBean.setType(Field.Type.TERM);
+      else fieldBean.setType(Field.Type.FREE_TEXT);
+    }
+    return fieldBean.getType();
+  }
+
+  public boolean isID() {
+    if (getType() == null) return false;
+    return getType() == Field.Type.ID;
+  }
+
+  
+
   //public String getLabel() { return label; }
   public String getDesc() { return desc; }
   
@@ -239,7 +255,7 @@ public class FieldConfig {
       configs - so this is funny but its actually not funny */
   public CharField getCharField() {
     if (charField == null)
-      charField = new CharField(getLabel(),getDataTag());
+      charField = new CharField(getLabel(),getDataTag(),getType());
     return charField;
   }
   boolean hasCharField(CharField cf) { return charField == cf; }
