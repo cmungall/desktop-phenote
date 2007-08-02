@@ -109,6 +109,7 @@ public class CharFieldValue implements Cloneable {
 //     else {
       //System.out.println("CFV editMod "+getName());
     character.setValue(charField,this);
+    // could also edit obo edit model at this point!
 //    }
   }
 

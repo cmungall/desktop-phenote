@@ -100,6 +100,9 @@ class RelationCompList extends AbstractAutoCompList {
   /** no-op - relation list doesnt edit model (at least presently) */
   protected void editModel() {}
 
+  /** no-op override */
+  protected void setModelToNull() {}
+
   /** char in table changed - adjust - not needed for rel(at least not yet)
       as post comp doesnt listen to table changes (does it? should it?), 
       just term */

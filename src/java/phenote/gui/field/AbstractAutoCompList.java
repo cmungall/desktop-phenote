@@ -56,7 +56,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     jComboBox.addActionListener(new ComboBoxActionListener());
     compListSearcher = new CompListSearcher(getCharField().getOntologyList());
     // init with all terms if config.showAllOnEmptyInput...
-    doCompletion(false); // dont show pupup - we dont have a gui yet, just populating
+    doCompletion(false); // dont show popup - we dont have a gui yet, just populating
   }
 
   protected Component getUserInputGui() { return jComboBox; }
@@ -136,6 +136,8 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
       autoTextField = new AutoTextField(); // outer instance var for testing
       editor = autoTextField; // protected editor var from BCBE
       addDocumentListener(new AutoDocumentListener());
+      // call returnKeyHit - for nulling out term
+      addReturnKeyListener(autoTextField);
     }
 
     // editor is protected JTextField - wacky
@@ -229,6 +231,12 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     if (showPopup)
       jComboBox.showPopup();//only show popup on key events actually only do comp w key
   }
+
+
+  // for subclasses to override - abstract?
+  protected void returnKeyHit() {}
+
+  abstract protected void setModelToNull();
 
 
   /** This is cheesy but theres a hanging bug with showPopup that only happens
@@ -518,86 +526,3 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     //new Throwable().printStackTrace();
     //this.keyTyped = doCompletion; // key has to be typed for completion
   // {charField.getCharFieldEnum().getValue(chr).getOboClass() }
-
-  ///** If true than the auto combo is for setting the differentia in a post comp term,
-  //    if false (default) than no post comp or genus in post comp */
-  //void setIsDifferentia(boolean isDiff) { isDifferentia = isDiff; }
-
-  //protected boolean editModelEnabled() { return editModel; }
-
-  //void setOntology(Ontology o) { ontology = o; }
-
-  //void setSearchParams(SearchParamsI sp) { searchParams = sp; }
-
-  //void setCharField(CharField charField) { this.charField = charField; }
-
-  //protected CharField getCharField() { return charField; }
-
-//   protected void setSearchParams(SearchParamsI sp) {
-//     searchParams = sp;
-//     // this assumes that its set up initially with ALL - presumptious?
-//     compListSearcher = new CompListSearcher(getCharField().getOntologyList());
-//   }
-
-    //setOntology(ontology);
-    //searchParams = sp; // singleton access? part of ontology?
-    //compListSearcher = new CompListSearcher(cf.getFirstOntology(),sp);//s;
-    //enableTermInfoListening(true); // default - hardwired in rel & term subclasses
-    //addCompletionListListener(compList);
-    // why is this commented out?
-    //if (editModel) // ComboBoxActionListener edits the model
-    //this.editModel = editModel;
-    //charFieldGui = cfg;
-    //setCharField(cf);
-    //jComboBox.setMaximumSize(CharFieldGui.inputSize); //new Dimension(390,20));
-    // this is super critical - fixes bug where layout goes to hell if string are long
-    // in completion - dont ask me why????
-    //jComboBox.setMinimumSize(CharFieldGui.inputSize);
-    // dont know why by setting fonts this seem to get worse not better in terms of
-    // the wierd layout issue with large terms & list
-    //setFont(new Font("Courier",Font.PLAIN,12)); yuck
-    //setFont(new Font("Lucida Console",Font.PLAIN,12)); not fixed
-    //Font[] fonts = 
-    //java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
-    //for (Font f : fonts) System.out.println(f);
-    //setFont(new Font("Lucida Typewriter",Font.PLAIN,10));
-  //private AutoTextFieldEditor autoTextFieldEditor;
-  //private SearchParamsI searchParams;
-  //private DefaultComboBoxModel defaultComboBoxModel;
-  //private Ontology ontology;
-  //private boolean keyTyped = false;
-  //private String previousInput = "";
-  //private CharField charField;
-  //private CharFieldGui charFieldGui; // should it be ISA not HASA?
-  ///** Whether differentia of a post composed term */
-  //private boolean isDifferentia = false;
-  /** if false then model is not edited */
-  //private boolean editModel = true;
-  //private CompletionListListener compListListener = new CompletionListListener();//   private class AutoKeyListener extends KeyAdapter {
-//     // keyTyped doesnt seem to catch backspace in 1.5 - but did in 1.4 - odd
-// //     public void keyTyped(KeyEvent e)  {
-// //       // return & tab should be ignored, as well as a lot of other things
-// //       keyTyped = true;
-// //       // this may be funny but with key type event the text has not yet be set
-// //       // this catches cases where text changed due select/action - kinda cheap
-// //       previousInput = getText();
-// //     }
-//     public void keyReleased(KeyEvent e) {
-//       // return & tab should be ignored, as well as a lot of other things
-//       //keyTyped = true;
-//       // this may be funny but with key type event the text has not yet be set
-//       // this catches cases where text changed due select/action - kinda cheap
-//       previousInput = getText();
-//     }
-//   }
-//   private void editModel() {
-//     OBOClass oboClass;
-//     try { oboClass = getCurrentOboClass(); }
-//     catch (Exception e) { return; } // shouldnt happen, error?
-//     if (charField == null)  return; // shouldnt happen
-//     CharacterI c = getSelectedCharacter(); // from selectionManager
-//     CharFieldEnum cfe = charField.getCharFieldEnum();
-//     // isDifferentia boolean?
-//     UpdateTransaction ut = new UpdateTransaction(c,cfe,oboClass);
-//     EditManager.inst().updateModel(this,ut);
-//   }

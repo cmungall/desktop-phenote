@@ -1,10 +1,12 @@
 package phenote.gui.field;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -359,28 +361,6 @@ abstract class CharFieldGui {
 //   }
 
 
-//  void addOntologyChooser(JComboBox oc) { fieldPanel.addOntologyChooser(oc); }
-
-//   private void initOntologyChooser(CharField charField) {
-//     ontologyChooserCombo = new JComboBox();
-//     // add listener....
-//     for (Ontology o : charField.getOntologyList()) {
-//       ontologyChooserCombo.addItem(o.getName());
-//     }
-//     ontologyChooserCombo.addActionListener(new OntologyChooserListener());
-//     fieldPanel.addOntologyChooser(ontologyChooserCombo);
-//   }
-
-//   private void initTextField(String label) {
-//     //isCompList = false;
-//     fieldPanel.addLabel(label);
-//     freeTextField = new FreeTextField(this);
-// //     textField = new JTextField(25);
-// //     textField.setEditable(true);
-// //     textField.getDocument().addDocumentListener(new TextFieldDocumentListener());
-// //     textField.addKeyListener(new TextKeyListener());
-//     fieldPanel.addFieldGui(freeTextField.getComponent());
-//   }
 
 //  private FreeTextField getFreeTextField() { return freeTextField; }
 
@@ -519,6 +499,27 @@ abstract class CharFieldGui {
   /** Overridden by TermCompList */
   protected JButton getCompButton() { return null; }
 
+  protected void addReturnKeyListener(Component c) {
+    c.addKeyListener(new ReturnKeyListener());
+  }
+
+  private class ReturnKeyListener extends KeyAdapter {
+    // doesnt work
+//     public void keyTyped(KeyEvent e) {
+//       if (e.getKeyCode() == KeyEvent.VK_ENTER) returnKeyHit();
+//     }
+//     public void keyReleased(KeyEvent e) {
+//       if (e.getKeyCode() == KeyEvent.VK_ENTER) returnKeyHit();
+//     }
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) returnKeyHit();
+      }
+   
+  }
+
+  // for subclasses to override
+  protected void returnKeyHit() {}
+
   private Logger log;
   private Logger log() {
     if (log == null) log = Logger.getLogger(getClass());
@@ -526,6 +527,28 @@ abstract class CharFieldGui {
   }
 }
 
+//  void addOntologyChooser(JComboBox oc) { fieldPanel.addOntologyChooser(oc); }
+
+//   private void initOntologyChooser(CharField charField) {
+//     ontologyChooserCombo = new JComboBox();
+//     // add listener....
+//     for (Ontology o : charField.getOntologyList()) {
+//       ontologyChooserCombo.addItem(o.getName());
+//     }
+//     ontologyChooserCombo.addActionListener(new OntologyChooserListener());
+//     fieldPanel.addOntologyChooser(ontologyChooserCombo);
+//   }
+
+//   private void initTextField(String label) {
+//     //isCompList = false;
+//     fieldPanel.addLabel(label);
+//     freeTextField = new FreeTextField(this);
+// //     textField = new JTextField(25);
+// //     textField.setEditable(true);
+// //     textField.getDocument().addDocumentListener(new TextFieldDocumentListener());
+// //     textField.addKeyListener(new TextKeyListener());
+//     fieldPanel.addFieldGui(freeTextField.getComponent());
+//   }
   // private static CharFieldGui createFreeTextField() {} ??
 
 //   private static CharFieldGui createCompList(CharField charField, SearchParamsI sp) {

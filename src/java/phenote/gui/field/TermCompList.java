@@ -188,17 +188,31 @@ class TermCompList extends AbstractAutoCompList {
     OBOClass oboClass;
     try {
       oboClass = getCurrentOboClass();
+      setModel(oboClass);
     }
-    catch (Exception e) {
+    catch (CharFieldGuiEx e) {
       return;
     } // shouldnt happen, error?
+  }
+
+  /** oc may be null - for nullifying model */
+  private void setModel(OBOClass oboClass) {
     if (getCharField() == null) return; // shouldnt happen
     List<CharacterI> chars = getSelectedChars(); // from selectionManager
-    //CharFieldEnum cfe = getCharField().getCharFieldEnum();
-    // isDifferentia boolean?
-    //CompoundTransaction ct = new CompoundTransaction(chars,cfe,oboClass);
-    CompoundTransaction ct = CompoundTransaction.makeUpdate(chars, getCharField(), oboClass);
+    CompoundTransaction ct =
+      CompoundTransaction.makeUpdate(chars, getCharField(), oboClass);
     this.getEditManager().updateModel(this, ct);
+  }
+
+  // allow user to nullify field
+  protected void setModelToNull() {
+    setModel(null);
+  }
+
+  protected void returnKeyHit() {
+    //log().debug("return key hit - value ["+getText()+"]");
+    if (getText() == null || getText().trim().equals(""))
+      setModelToNull();
   }
 
   private List<CharacterI> getSelectedChars() {
@@ -351,40 +365,3 @@ class TermCompList extends AbstractAutoCompList {
 //       //fieldPanel.addPostCompButton(postCompButton);
 //     } 
 
-  // pase i think
-//   TermCompList(CompListSearcher s,boolean editModel,CharFieldGui cfg) {
-//     super(s,editModel,cfg.getCharField());
-//     this.charFieldGui = cfg; // pass to super? AACL subclass CFG?
-//     enableTermInfoListening();
-//     if (hasMoreThanOneOntology()) // super AACL
-//       initOntologyChooser(getCharField());
-//   }
-
-//   protected TermCompList(CharField cf, boolean addCompButton) {
-//     super(cf);
-//     this.addCompButton = addCompButton;
-//     init();
-//   }
-
-  // pase?
-//   protected TermCompList(CharField cf, SearchParamsI sp, boolean editModel) {
-//     this(cf,sp,editModel,true,null); // true - dont supress configured comp button
-// //     super(sp,editModel,cf);  protected CharFieldGui(CharField charField,String label) {
-//     init(charField,label);
-//   }
-
-// //     enableTermInfoListening();
-// //     if (hasMoreThanOneOntology()) // super AACL
-// //       initOntologyChooser(getCharField());
-// //     if (charField.postCompAllowed() && addCompButton) {
-// //       JButton postCompButton = new JButton("Comp"); // ???
-// //       postCompButton.addActionListener(new PostCompListener());
-// //       //fieldPanel.addPostCompButton(postCompButton);
-// //     } 
-//   }
-
-//   protected TermCompList(CharField cf, SearchParamsI sp, boolean editModel,
-//                          boolean addCompButton, String label) {
-//     super(sp,editModel,cf,label);
-//     init();
-//   }
