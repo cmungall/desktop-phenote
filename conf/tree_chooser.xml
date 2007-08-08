@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<panel layout="GridBagLayout" size="800,600">
+	<panel id="treeViewerContainer" layout="GridLayout">
+		<gridbagconstraints gridx="0" gridy="0" weightx="1" weighty="1" fill="GridBagConstraints.BOTH"/>
+	</panel>
+	<panel id="buttonPanel" layout="GridBagLayout">
+		<gridbagconstraints gridx="0" gridy="1" weightx="1" fill="GridBagConstraints.HORIZONTAL" insets="10,10,10,10"/>
+	    <label id="newickFieldLabel" text="Newick Tree:">
+	    	<gridbagconstraints gridx="0" gridy="0" weightx="0" anchor="GridBagConstraints.WEST" insets="0,0,0,5"/>
+	    </label>
+	    <textfield id="newickField"  action="changeNewickTreeAction">
+	    	<gridbagconstraints gridx="1" gridy="0" weightx="1" fill="GridBagConstraints.HORIZONTAL"/>
+	    </textfield>
+	    <button id="applyButton" text="Apply Selection" action="applySelectionAction">
+	    	<gridbagconstraints gridx="2" gridy="0" weightx="0" anchor="GridBagConstraints.EAST" insets="0,5,0,0"/>
+	    </button>
+	</panel>
+</panel>

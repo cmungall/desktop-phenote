@@ -127,7 +127,19 @@ ontology =
      attribute group_adapter { xsd:string },
      ## which field (in main group) is destination for this group, if its
      ## destiny is a field
-     attribute destination_field { xsd:string }
+     attribute destination_field { xsd:string },
+     templatechooser*
+  }
+  
+  templatechooser =
+  	element templatechooser {
+  	  ## title is for the user interface
+  	  attribute title { xsd:string },
+  	  ## adapter is class which implement TemplateChooser interface
+  	  attribute adapter { xsd:string },
+  	  ## field is name of field this chooser works with
+  	  ## it really should be an IDREF - that will require refactoring field element and existing configs
+  	  attribute field { xsd:string }
   }
   
 

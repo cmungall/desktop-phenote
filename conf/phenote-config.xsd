@@ -139,6 +139,9 @@
   </xs:element>
   <xs:element name="group">
     <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:templatechooser"/>
+      </xs:sequence>
       <xs:attribute name="name" use="required" type="xs:ID"/>
       <xs:attribute name="container" use="required">
         <xs:simpleType>
@@ -159,6 +162,21 @@
       <xs:attribute name="title" use="required" type="xs:string"/>
       <xs:attribute name="group_adapter" use="required" type="xs:string"/>
       <xs:attribute name="destination_field" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="templatechooser">
+    <xs:complexType>
+      <xs:attribute name="title" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>title is for the user interface</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="adapter" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>adapter is class which implement TemplateChooser interface</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="field" use="required" type="xs:string"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="postcomp">

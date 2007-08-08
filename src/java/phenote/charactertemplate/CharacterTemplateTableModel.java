@@ -1,6 +1,8 @@
 package phenote.charactertemplate;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,7 +22,7 @@ import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
 
 @SuppressWarnings("serial")
-public class CharacterTemplateTableModel extends AbstractTableModel implements CharChangeListener, CharListChangeListener {
+public class CharacterTemplateTableModel extends AbstractTableModel implements CharChangeListener, CharListChangeListener, TemplateChoiceListener {
   
   private String representedGroup;
   private CharacterListManager characterListManager;
@@ -47,6 +49,12 @@ public class CharacterTemplateTableModel extends AbstractTableModel implements C
       }
     }
     return characters;
+  }
+  
+  public void setMarkedCharacters(Collection<CharacterI> charactersToMark) {
+    for (CharacterI character : this.getAllCharacters()) {
+      this.setCharacterIsMarked(character, charactersToMark.contains(character));
+    }
   }
   
   public boolean isCharacterMarked(CharacterI character) {
@@ -131,6 +139,10 @@ public class CharacterTemplateTableModel extends AbstractTableModel implements C
     this.fireTableDataChanged();
   }
 
+  public void templateChoiceChanged(TemplateChooser source) {
+    this.setMarkedCharacters(source.getChosenTemplates(Collections.unmodifiableList(this.getAllCharacters())));
+  }
+  
   private CharacterI getCharacterAtRow(int row) {
     return this.characterListManager.getCharacterList().get(row);
   }
