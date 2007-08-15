@@ -1,0 +1,1300 @@
+format-version: 1.2
+idspace: rdf http://www.w3.org/1999/02/22-rdf-syntax-ns# ""
+idspace: rdfs http://www.w3.org/2000/01/rdf-schema# ""
+idspace: owl http://www.w3.org/2002/07/owl# ""
+idspace: xsd http://www.w3.org/2001/XMLSchema# ""
+idspace: dc http://purl.org/dc/elements/1.1/ ""
+idspace: eor http://dublincore.org/2000/03/13/eor# ""
+idspace: serql http://www.openrdf.org/schema/serql# ""
+idspace: swrl http://www.w3.org/2003/11/swrl# ""
+idspace: birn_obo_ubo http://www.nbirn.net/birnlex/1.1/BIRNLex-OBO-UBO.owl# ""
+idspace: core http://www.w3.org/2004/02/skos/core# ""
+idspace: j.0 http://protege.stanford.edu/plugins/owl/protege# ""
+idspace: birn_org_anat http://www.nbirn.net/birnlex/1.2/BIRNLex-OrganismalAnatomy.owl# ""
+idspace: birn_invest http://www.nbirn.net/birnlex/1.2/BIRNLex-Investigation.owl# ""
+idspace: bfo http://www.ifomis.org/bfo/1.0# ""
+idspace: obo_annot http://www.nbirn.net/birnlex/1.1/OBO_annotation_properties.owl# ""
+idspace: birn_cog_behav http://www.nbirn.net/birnlex/1.2/BIRNLex-CogBehavior.owl# ""
+idspace: obi http://obi.sourceforge.net/ontology/OBI.owl# ""
+idspace: birn_annot http://www.nbirn.net/birnlex/1.1/BIRNLex_annotation_properties.owl# ""
+idspace: protege-dc http://protege.stanford.edu/plugins/owl/dc/protege-dc.owl# ""
+idspace: sao1_0 http://ccdb.ucsd.edu/SAO/1.0# ""
+idspace: sao1_1 http://ccdb.ucsd.edu/SAO/1.1# ""
+idspace: sao http://ccdb.ucsd.edu/SAO/1.1# ""
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_1
+name: Specimen_fixation
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_169  ! _birnlexMain_retired_class
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_10
+name: Ingestion
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_8  ! Agent_delivery_process
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_100
+name: Smoking_behavior
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_93  ! Behavioral_phenotype
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_101
+name: Smoking
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_100  ! Smoking_behavior
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_102  ! Past_smoking_behavior
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_103  ! Non_smoking
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_104  ! Never_has_smoked
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_102
+name: Past_smoking_behavior
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_100  ! Smoking_behavior
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_101  ! Smoking
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_103  ! Non_smoking
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_104  ! Never_has_smoked
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_103
+name: Non_smoking
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_100  ! Smoking_behavior
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_101  ! Smoking
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_102  ! Past_smoking_behavior
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_104  ! Never_has_smoked
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_104
+name: Never_has_smoked
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_100  ! Smoking_behavior
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_101  ! Smoking
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_102  ! Past_smoking_behavior
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_103  ! Non_smoking
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_105
+name: Mild_cognitive_impairment
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_95  ! Memory_phenotype
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_106  ! Working_memory_phenotype
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_106
+name: Working_memory_phenotype
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_95  ! Memory_phenotype
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_105  ! Mild_cognitive_impairment
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_107
+name: Gender_phenotype
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_97  ! Physical_phenotype
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_108
+name: Protein_expression_phenotype
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_96  ! Molecular_phenotype
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_109
+name: Gene_expression_phenotype
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_96  ! Molecular_phenotype
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_11
+name: Vascular_perfusion
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_8  ! Agent_delivery_process
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_110
+name: Image_analysis_software
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_111
+name: Image_processing_software
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_112
+name: Image_reconstruction_software
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_113
+name: Electron_tomography_software
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_112  ! Image_reconstruction_software
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_114
+name: Item_recognition_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_3  ! Behavioral_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_115
+name: Investigator_role
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_116
+name: Intracellular_injection
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_12  ! Injection
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_117  ! Intramuscular_injection
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_118  ! Intraperotineal_injection
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_119  ! Intrathecal_injection
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_120  ! Subthelial_injection
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_117
+name: Intramuscular_injection
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_12  ! Injection
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_116  ! Intracellular_injection
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_118  ! Intraperotineal_injection
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_119  ! Intrathecal_injection
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_120  ! Subthelial_injection
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_118
+name: Intraperotineal_injection
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_12  ! Injection
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_116  ! Intracellular_injection
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_117  ! Intramuscular_injection
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_119  ! Intrathecal_injection
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_120  ! Subthelial_injection
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_119
+name: Intrathecal_injection
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_12  ! Injection
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_116  ! Intracellular_injection
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_117  ! Intramuscular_injection
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_118  ! Intraperotineal_injection
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_120  ! Subthelial_injection
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_12
+name: Injection
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_8  ! Agent_delivery_process
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_120
+name: Subthelial_injection
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_12  ! Injection
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_116  ! Intracellular_injection
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_117  ! Intramuscular_injection
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_118  ! Intraperotineal_injection
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_119  ! Intrathecal_injection
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_121
+name: Specimen_preparation
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_169  ! _birnlexMain_retired_class
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_122
+name: Staining
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_121  ! Specimen_preparation
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_123
+name: Immunolabeling_protocol
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_30  ! Microscopy_contrast_enhancement_protocol
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_124  ! Intracellular_injection_protocol
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_124
+name: Intracellular_injection_protocol
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_30  ! Microscopy_contrast_enhancement_protocol
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_123  ! Immunolabeling_protocol
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_125
+name: Staining_protocol
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_30  ! Microscopy_contrast_enhancement_protocol
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_126
+name: Free_recall_ability
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_13  ! Phenotype_attribute
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_127
+name: Experimenter
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_115  ! Investigator_role
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_128
+name: Co-investigator
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_115  ! Investigator_role
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_129
+name: Instrument_operator
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_115  ! Investigator_role
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_13
+name: Phenotype_attribute
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_7  ! Organism_characteristic
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_130
+name: Data_analyzer
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_115  ! Investigator_role
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_131
+name: Principal_investigator
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_115  ! Investigator_role
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_132
+name: Project_leader
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_115  ! Investigator_role
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_133
+name: Collaborator
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_115  ! Investigator_role
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_134
+name: Toxin
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_70  ! Protein_specific_probe
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_135
+name: Antibody
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_70  ! Protein_specific_probe
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_136
+name: Phalloidin
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_134  ! Toxin
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_137
+name: Monoclonal_antibody
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_135  ! Antibody
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_138
+name: Polyclonal_antibody
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_135  ! Antibody
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_139
+name: Imaging_platform
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_169  ! _birnlexMain_retired_class
+disjoint_from: obi:OBI_51 
+disjoint_from: obi:OBI_52 
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_14
+name: Gender
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_7  ! Organism_characteristic
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_140
+name: Magnetic_resonance_imaging_platform
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_139  ! Imaging_platform
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_141
+name: Structural_MRI_platform
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_139  ! Imaging_platform
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_142
+name: Functional_MRI_platform
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_139  ! Imaging_platform
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_143
+name: Male
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_14  ! Gender
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_144  ! Female
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_144
+name: Female
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_14  ! Gender
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_143  ! Male
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_145
+name: Algorithm_execution
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_169  ! _birnlexMain_retired_class
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_146
+name: Neurodegenerative_disease
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_169  ! _birnlexMain_retired_class
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_147
+name: Schizophrenia
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_169  ! _birnlexMain_retired_class
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_148
+name: Control_group
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_169  ! _birnlexMain_retired_class
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_149
+name: Sample_sectioning
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_121  ! Specimen_preparation
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_15
+name: Organism_attribute
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_7  ! Organism_characteristic
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_150
+name: Cardinal_part_of_imaging_instrument
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_169  ! _birnlexMain_retired_class
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_151
+name: Cardinal_part_of_microscope
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_150  ! Cardinal_part_of_imaging_instrument
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_152
+name: Energy_filter
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_151  ! Cardinal_part_of_microscope
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_153
+name: In_column_energy_filter
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_152  ! Energy_filter
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_154
+name: Sample_dissection
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_121  ! Specimen_preparation
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_155
+name: Handedness
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_99  ! Behavioral_laterality
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_156
+name: Right_handedness
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_155  ! Handedness
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_157
+name: Left_handedness
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_155  ! Handedness
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_158
+name: Ambidextrous
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_155  ! Handedness
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_159
+name: Experiment
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_169  ! _birnlexMain_retired_class
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_16
+name: Genotype
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_7  ! Organism_characteristic
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_160
+name: Algorithm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_161
+name: Image_reconstruction_algorithm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_160  ! Algorithm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_162
+name: R-weighted_back_projection
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_161  ! Image_reconstruction_algorithm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_163
+name: Alzheimers_disease
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_146  ! Neurodegenerative_disease
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_164
+name: Institution
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_169  ! _birnlexMain_retired_class
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_165
+name: Lead_institution
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_164  ! Institution
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_166
+name: Collaborating_institution
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_164  ! Institution
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_167
+name: Embryonic_age
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_27  ! Age
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_168  ! Postnatal_age
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_168
+name: Postnatal_age
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_27  ! Age
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_167  ! Embryonic_age
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_169
+name: _birnlexMain_retired_class
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_17
+name: Quantitative_organism_attribute
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_7  ! Organism_characteristic
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_18
+name: Phenotype
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_7  ! Organism_characteristic
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_19
+name: Cognitive_entity
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_169  ! _birnlexMain_retired_class
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_2
+name: Experimental_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_20
+name: Emotion
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_19  ! Cognitive_entity
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_21
+name: Happiness
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_20  ! Emotion
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_22
+name: Anxiety
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_20  ! Emotion
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_23
+name: Fear
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_20  ! Emotion
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_24
+name: Sadness
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_20  ! Emotion
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_25
+name: Anger
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_20  ! Emotion
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_26
+name: Body_weight
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_17  ! Quantitative_organism_attribute
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_27
+name: Age
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_17  ! Quantitative_organism_attribute
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_28
+name: Specimen_preparation_protocol
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_169  ! _birnlexMain_retired_class
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_29
+name: Biochemical_speciment_preparation_protocol
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_28  ! Specimen_preparation_protocol
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_3
+name: Behavioral_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_2  ! Experimental_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_30
+name: Microscopy_contrast_enhancement_protocol
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_28  ! Specimen_preparation_protocol
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_31
+name: Reagent
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_169  ! _birnlexMain_retired_class
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_32
+name: Gene_specific_probe
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_31  ! Reagent
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_33
+name: Fixative
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_31  ! Reagent
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_34
+name: Contrast_agent
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_31  ! Reagent
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_35
+name: Glutaraldehyde
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_33  ! Fixative
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_36
+name: Tannic_acid
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_33  ! Fixative
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_37
+name: Paraformaldehyde
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_33  ! Fixative
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_38
+name: Fixation_protocol
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_28  ! Specimen_preparation_protocol
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_39
+name: Tissue_dissection
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_169  ! _birnlexMain_retired_class
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_4
+name: Tissue_section
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_169  ! _birnlexMain_retired_class
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_40
+name: Tissue_sectioning
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_39  ! Tissue_dissection
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_41
+name: Behavioral_process
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_169  ! _birnlexMain_retired_class
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_42
+name: Delayed_matching_to_sample_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_3  ! Behavioral_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_43  ! Episodic_recall_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_44  ! Acupuncture_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_45  ! Breathhold_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_46  ! Encoding_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_47  ! Classical_conditioning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_48  ! Sensorimotor_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_49  ! Oddball_discrimination_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_50  ! Mismatch_negativitiy_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_51  ! Deductive_reasoning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_52  ! Eye_Saccade_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_53  ! Reading_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_54  ! Serial_item_recognition_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_55  ! Eating_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_56  ! Action_observation_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_57  ! Divided_auditory_attention_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_88  ! Drawing_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_43
+name: Episodic_recall_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_3  ! Behavioral_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_42  ! Delayed_matching_to_sample_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_44  ! Acupuncture_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_45  ! Breathhold_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_46  ! Encoding_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_47  ! Classical_conditioning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_48  ! Sensorimotor_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_49  ! Oddball_discrimination_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_50  ! Mismatch_negativitiy_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_51  ! Deductive_reasoning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_52  ! Eye_Saccade_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_53  ! Reading_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_54  ! Serial_item_recognition_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_55  ! Eating_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_56  ! Action_observation_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_57  ! Divided_auditory_attention_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_88  ! Drawing_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_44
+name: Acupuncture_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_3  ! Behavioral_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_42  ! Delayed_matching_to_sample_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_43  ! Episodic_recall_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_45  ! Breathhold_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_46  ! Encoding_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_47  ! Classical_conditioning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_48  ! Sensorimotor_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_49  ! Oddball_discrimination_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_50  ! Mismatch_negativitiy_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_51  ! Deductive_reasoning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_52  ! Eye_Saccade_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_53  ! Reading_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_54  ! Serial_item_recognition_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_55  ! Eating_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_56  ! Action_observation_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_57  ! Divided_auditory_attention_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_88  ! Drawing_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_45
+name: Breathhold_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_3  ! Behavioral_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_42  ! Delayed_matching_to_sample_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_43  ! Episodic_recall_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_44  ! Acupuncture_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_46  ! Encoding_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_47  ! Classical_conditioning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_48  ! Sensorimotor_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_49  ! Oddball_discrimination_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_50  ! Mismatch_negativitiy_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_51  ! Deductive_reasoning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_52  ! Eye_Saccade_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_53  ! Reading_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_54  ! Serial_item_recognition_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_55  ! Eating_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_56  ! Action_observation_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_57  ! Divided_auditory_attention_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_88  ! Drawing_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_46
+name: Encoding_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_3  ! Behavioral_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_42  ! Delayed_matching_to_sample_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_43  ! Episodic_recall_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_44  ! Acupuncture_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_45  ! Breathhold_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_47  ! Classical_conditioning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_48  ! Sensorimotor_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_49  ! Oddball_discrimination_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_50  ! Mismatch_negativitiy_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_51  ! Deductive_reasoning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_52  ! Eye_Saccade_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_53  ! Reading_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_54  ! Serial_item_recognition_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_55  ! Eating_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_56  ! Action_observation_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_57  ! Divided_auditory_attention_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_88  ! Drawing_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_47
+name: Classical_conditioning_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_3  ! Behavioral_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_42  ! Delayed_matching_to_sample_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_43  ! Episodic_recall_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_44  ! Acupuncture_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_45  ! Breathhold_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_46  ! Encoding_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_48  ! Sensorimotor_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_49  ! Oddball_discrimination_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_50  ! Mismatch_negativitiy_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_51  ! Deductive_reasoning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_52  ! Eye_Saccade_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_53  ! Reading_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_54  ! Serial_item_recognition_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_55  ! Eating_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_56  ! Action_observation_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_57  ! Divided_auditory_attention_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_88  ! Drawing_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_48
+name: Sensorimotor_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_3  ! Behavioral_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_42  ! Delayed_matching_to_sample_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_43  ! Episodic_recall_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_44  ! Acupuncture_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_45  ! Breathhold_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_46  ! Encoding_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_47  ! Classical_conditioning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_49  ! Oddball_discrimination_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_50  ! Mismatch_negativitiy_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_51  ! Deductive_reasoning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_52  ! Eye_Saccade_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_53  ! Reading_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_54  ! Serial_item_recognition_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_55  ! Eating_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_56  ! Action_observation_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_57  ! Divided_auditory_attention_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_88  ! Drawing_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_49
+name: Oddball_discrimination_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_3  ! Behavioral_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_42  ! Delayed_matching_to_sample_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_43  ! Episodic_recall_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_44  ! Acupuncture_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_45  ! Breathhold_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_46  ! Encoding_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_47  ! Classical_conditioning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_48  ! Sensorimotor_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_50  ! Mismatch_negativitiy_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_51  ! Deductive_reasoning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_52  ! Eye_Saccade_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_53  ! Reading_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_54  ! Serial_item_recognition_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_55  ! Eating_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_56  ! Action_observation_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_57  ! Divided_auditory_attention_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_88  ! Drawing_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_5
+name: Assessment
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_169  ! _birnlexMain_retired_class
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_50
+name: Mismatch_negativitiy_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_3  ! Behavioral_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_42  ! Delayed_matching_to_sample_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_43  ! Episodic_recall_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_44  ! Acupuncture_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_45  ! Breathhold_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_46  ! Encoding_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_47  ! Classical_conditioning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_48  ! Sensorimotor_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_49  ! Oddball_discrimination_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_51  ! Deductive_reasoning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_52  ! Eye_Saccade_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_53  ! Reading_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_54  ! Serial_item_recognition_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_55  ! Eating_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_56  ! Action_observation_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_57  ! Divided_auditory_attention_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_88  ! Drawing_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_51
+name: Deductive_reasoning_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_3  ! Behavioral_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_42  ! Delayed_matching_to_sample_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_43  ! Episodic_recall_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_44  ! Acupuncture_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_45  ! Breathhold_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_46  ! Encoding_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_47  ! Classical_conditioning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_48  ! Sensorimotor_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_49  ! Oddball_discrimination_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_50  ! Mismatch_negativitiy_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_52  ! Eye_Saccade_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_53  ! Reading_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_54  ! Serial_item_recognition_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_55  ! Eating_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_56  ! Action_observation_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_57  ! Divided_auditory_attention_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_88  ! Drawing_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_52
+name: Eye_Saccade_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_3  ! Behavioral_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_42  ! Delayed_matching_to_sample_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_43  ! Episodic_recall_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_44  ! Acupuncture_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_45  ! Breathhold_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_46  ! Encoding_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_47  ! Classical_conditioning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_48  ! Sensorimotor_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_49  ! Oddball_discrimination_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_50  ! Mismatch_negativitiy_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_51  ! Deductive_reasoning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_53  ! Reading_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_54  ! Serial_item_recognition_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_55  ! Eating_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_56  ! Action_observation_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_57  ! Divided_auditory_attention_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_88  ! Drawing_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_53
+name: Reading_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_3  ! Behavioral_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_42  ! Delayed_matching_to_sample_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_43  ! Episodic_recall_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_44  ! Acupuncture_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_45  ! Breathhold_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_46  ! Encoding_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_47  ! Classical_conditioning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_48  ! Sensorimotor_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_49  ! Oddball_discrimination_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_50  ! Mismatch_negativitiy_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_51  ! Deductive_reasoning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_52  ! Eye_Saccade_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_54  ! Serial_item_recognition_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_55  ! Eating_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_56  ! Action_observation_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_57  ! Divided_auditory_attention_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_88  ! Drawing_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_54
+name: Serial_item_recognition_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_114  ! Item_recognition_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_42  ! Delayed_matching_to_sample_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_43  ! Episodic_recall_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_44  ! Acupuncture_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_45  ! Breathhold_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_46  ! Encoding_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_47  ! Classical_conditioning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_48  ! Sensorimotor_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_49  ! Oddball_discrimination_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_50  ! Mismatch_negativitiy_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_51  ! Deductive_reasoning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_52  ! Eye_Saccade_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_53  ! Reading_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_55  ! Eating_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_56  ! Action_observation_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_57  ! Divided_auditory_attention_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_88  ! Drawing_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_55
+name: Eating_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_3  ! Behavioral_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_42  ! Delayed_matching_to_sample_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_43  ! Episodic_recall_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_44  ! Acupuncture_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_45  ! Breathhold_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_46  ! Encoding_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_47  ! Classical_conditioning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_48  ! Sensorimotor_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_49  ! Oddball_discrimination_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_50  ! Mismatch_negativitiy_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_51  ! Deductive_reasoning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_52  ! Eye_Saccade_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_53  ! Reading_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_54  ! Serial_item_recognition_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_56  ! Action_observation_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_57  ! Divided_auditory_attention_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_88  ! Drawing_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_56
+name: Action_observation_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_3  ! Behavioral_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_42  ! Delayed_matching_to_sample_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_43  ! Episodic_recall_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_44  ! Acupuncture_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_45  ! Breathhold_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_46  ! Encoding_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_47  ! Classical_conditioning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_48  ! Sensorimotor_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_49  ! Oddball_discrimination_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_50  ! Mismatch_negativitiy_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_51  ! Deductive_reasoning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_52  ! Eye_Saccade_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_53  ! Reading_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_54  ! Serial_item_recognition_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_55  ! Eating_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_57  ! Divided_auditory_attention_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_88  ! Drawing_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_57
+name: Divided_auditory_attention_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_3  ! Behavioral_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_42  ! Delayed_matching_to_sample_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_43  ! Episodic_recall_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_44  ! Acupuncture_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_45  ! Breathhold_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_46  ! Encoding_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_47  ! Classical_conditioning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_48  ! Sensorimotor_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_49  ! Oddball_discrimination_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_50  ! Mismatch_negativitiy_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_51  ! Deductive_reasoning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_52  ! Eye_Saccade_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_53  ! Reading_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_54  ! Serial_item_recognition_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_55  ! Eating_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_56  ! Action_observation_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_88  ! Drawing_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_58
+name: Visual_oddball_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_49  ! Oddball_discrimination_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_91  ! Auditory_oddball_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_59
+name: Microscopic_imaging_assay
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_169  ! _birnlexMain_retired_class
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_6
+name: Cognitive_assessment
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_5  ! Assessment
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_60
+name: Light_microscopic_imaging_assay
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_59  ! Microscopic_imaging_assay
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_61
+name: Electron_microscopic_imaging_assay
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_59  ! Microscopic_imaging_assay
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_62
+name: Transmission_electron_microscopic_imaging_assay
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_59  ! Microscopic_imaging_assay
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_63
+name: Cognitive_process
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_41  ! Behavioral_process
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_64  ! Free_recall
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_65  ! Memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_66  ! Autobiographical_memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_67  ! Working_memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_68  ! Recognition_memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_69  ! Attention
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_64
+name: Free_recall
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_63  ! Cognitive_process
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_63  ! Cognitive_process
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_65  ! Memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_66  ! Autobiographical_memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_67  ! Working_memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_68  ! Recognition_memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_69  ! Attention
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_65
+name: Memory
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_63  ! Cognitive_process
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_63  ! Cognitive_process
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_64  ! Free_recall
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_66  ! Autobiographical_memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_67  ! Working_memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_68  ! Recognition_memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_69  ! Attention
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_66
+name: Autobiographical_memory
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_65  ! Memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_63  ! Cognitive_process
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_64  ! Free_recall
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_65  ! Memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_67  ! Working_memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_68  ! Recognition_memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_69  ! Attention
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_67
+name: Working_memory
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_65  ! Memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_63  ! Cognitive_process
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_64  ! Free_recall
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_65  ! Memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_66  ! Autobiographical_memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_68  ! Recognition_memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_69  ! Attention
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_68
+name: Recognition_memory
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_65  ! Memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_63  ! Cognitive_process
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_64  ! Free_recall
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_65  ! Memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_66  ! Autobiographical_memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_67  ! Working_memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_69  ! Attention
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_69
+name: Attention
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_63  ! Cognitive_process
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_63  ! Cognitive_process
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_64  ! Free_recall
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_65  ! Memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_66  ! Autobiographical_memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_67  ! Working_memory
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_68  ! Recognition_memory
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_7
+name: Organism_characteristic
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_169  ! _birnlexMain_retired_class
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_70
+name: Protein_specific_probe
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_32  ! Gene_specific_probe
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_71  ! DNA_specific_probe
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_72  ! RNA_specific_probe
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_71
+name: DNA_specific_probe
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_32  ! Gene_specific_probe
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_70  ! Protein_specific_probe
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_72  ! RNA_specific_probe
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_72
+name: RNA_specific_probe
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_32  ! Gene_specific_probe
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_70  ! Protein_specific_probe
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_71  ! DNA_specific_probe
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_73
+name: Imaging_instrument
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_169  ! _birnlexMain_retired_class
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_74
+name: Magnetic_resonance_imaging_scanner
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_73  ! Imaging_instrument
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_75
+name: Microscope
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_73  ! Imaging_instrument
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_76
+name: Optical_microscope
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_75  ! Microscope
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_77
+name: Multiphoton_microscope
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_76  ! Optical_microscope
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_78
+name: Confocal_microscope
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_76  ! Optical_microscope
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_79
+name: Laser_scanning_confocal_microscope
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_78  ! Confocal_microscope
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_8
+name: Agent_delivery_process
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_169  ! _birnlexMain_retired_class
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_80
+name: Electron_microscope
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_75  ! Microscope
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_81
+name: Scanning_electron_microscope
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_80  ! Electron_microscope
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_82
+name: Transmission_electron_microscope
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_80  ! Electron_microscope
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_83
+name: Intermediate_voltage_electron_microscope
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_82  ! Transmission_electron_microscope
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_84
+name: High_voltage_electron_microscope
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_82  ! Transmission_electron_microscope
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_85
+name: Ultrahigh_voltage_electron_microscope
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_82  ! Transmission_electron_microscope
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_86
+name: Covert_visual_reading_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_53  ! Reading_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_87  ! Covert_braille_reading_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_87
+name: Covert_braille_reading_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_53  ! Reading_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_86  ! Covert_visual_reading_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_88
+name: Drawing_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_3  ! Behavioral_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_42  ! Delayed_matching_to_sample_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_43  ! Episodic_recall_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_44  ! Acupuncture_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_45  ! Breathhold_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_46  ! Encoding_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_47  ! Classical_conditioning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_48  ! Sensorimotor_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_49  ! Oddball_discrimination_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_50  ! Mismatch_negativitiy_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_51  ! Deductive_reasoning_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_52  ! Eye_Saccade_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_53  ! Reading_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_54  ! Serial_item_recognition_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_55  ! Eating_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_56  ! Action_observation_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_57  ! Divided_auditory_attention_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_89
+name: Simple_saccade_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_52  ! Eye_Saccade_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_90  ! Anti_saccade_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_9
+name: Immersion
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_8  ! Agent_delivery_process
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_90
+name: Anti_saccade_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_52  ! Eye_Saccade_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_89  ! Simple_saccade_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_91
+name: Auditory_oddball_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_49  ! Oddball_discrimination_paradigm
+disjoint_from: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_58  ! Visual_oddball_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_92
+name: Sternberg_paradigm
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_114  ! Item_recognition_paradigm
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_93
+name: Behavioral_phenotype
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_18  ! Phenotype
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_94
+name: Cognitive_phenotype
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_18  ! Phenotype
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_95
+name: Memory_phenotype
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_18  ! Phenotype
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_96
+name: Molecular_phenotype
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_18  ! Phenotype
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_97
+name: Physical_phenotype
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_18  ! Phenotype
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_98
+name: Verbal_fluency
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_94  ! Cognitive_phenotype
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_99
+name: Behavioral_laterality
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_93  ! Behavioral_phenotype
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#id_000026
+name: Behavioral_assessment
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_5  ! Assessment
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#id_000027
+name: Nicotine_use_assessment
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#id_000026  ! Behavioral_assessment
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#id_000028
+name: Fagerstrom_test_for_nicotine_dependence
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#id_000027  ! Nicotine_use_assessment
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#id_000029
+name: Neuropsychological_assessment
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_5  ! Assessment
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#id_000030
+name: California_Verbal_Learning_Test
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#id_000029  ! Neuropsychological_assessment
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#id_000031
+name: Trail_making_test
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#id_000029  ! Neuropsychological_assessment
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#id_000032
+name: Mini_mental_state_examination
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#id_000029  ! Neuropsychological_assessment
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#id_000033
+name: Verbal_fluency_assessment
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_6  ! Cognitive_assessment
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#id_000060
+name: Normal_control_group
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_148  ! Control_group
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#id_000061
+name: Sham_control_group
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_148  ! Control_group
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#id_000062
+name: Sham_operated_control_group
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_148  ! Control_group
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#id_000067
+name: Gross_dissection
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_39  ! Tissue_dissection
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#id_000068
+name: Microdissection
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#birnlexMain_39  ! Tissue_dissection
+
+[Term]
+id: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#id_000069
+name: Laser_capture
+is_a: http://www.nbirn.net/birnlex/1.2/BIRNLex-Main.owl#id_000068  ! Microdissection
+
