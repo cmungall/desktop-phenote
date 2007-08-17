@@ -7,15 +7,15 @@
 		</panel>
 	</splitpane>
 	<panel constraints="BorderLayout.CENTER" layout="GridBagLayout">
-	    <scrollpane>
+	    <scrollpane horizontalScrollBarPolicy="JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS">
 	    	<gridbagconstraints gridx="0" gridy="0" weightx="1" weighty="1" fill="GridBagConstraints.BOTH" insets="10,10,0,10"/>
 	        <table id="characterTemplateTable"/>
 	    </scrollpane>
 	    <panel id="buttonPanel">
 	    	<gridbagconstraints gridx="0" gridy="1" weightx="1" insets="10,10,10,10"/>
 	        <button id="addButton" text="New" action="addNewCharacter"/>
+	        <button id="duplicateButton" text="Duplicate" action="duplicateSelectedCharacters"/>
 	        <button id="deleteButton" text="Delete" action="deleteSelectedCharacters"/>
-	        <button id="copyButton" text="Copy" action="duplicateSelectedCharacters"/>
 	        <button id="undoButton" text="Undo" action="undo"/>
 	        <button id="invertSelectionButton" text="Invert Marked" action="invertMarkedCharacters"/>
 	        <button id="generateButton" text="Generate Characters" action="generateCharacters"/>

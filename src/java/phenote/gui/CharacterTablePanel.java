@@ -141,7 +141,7 @@ public class CharacterTablePanel extends JPanel {
     ActionListener al = new ButtonActionListener();
 
     addButton("New",al,buttonPanel); //newButton = 
-    copyButton = addButton("Copy",al,buttonPanel);
+    copyButton = addButton("Duplicate",al,buttonPanel);
     deleteButton = addButton("Delete",al,buttonPanel);
     buttonPanel.add(Box.createRigidArea(new Dimension(20,0)));
     undoButton = addButton("Undo",al,buttonPanel);
@@ -308,11 +308,11 @@ public class CharacterTablePanel extends JPanel {
         return; // its empty! no rows to copy or delete or save or undo
       }
 
-      // COPY
-      else if (e.getActionCommand().equals("Copy")) {
+      // DUPLICATE
+      else if (e.getActionCommand().equals("Duplicate")) {
         //selectRow = characterTableModel.copyRow(getSelectedRow());
         if (!hasSelection()) {
-          log().error("No rows selected for copy - this shouldnt happen!");
+          log().error("No rows selected for duplicate - this shouldnt happen!");
           return;
         }
         selectRows = characterTableModel.copyChars(getSelectedChars());
