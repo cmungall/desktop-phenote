@@ -45,12 +45,13 @@ public class WormReferenceGroupAdapter extends AbstractGroupAdapter {
         if (match != null) { sb.append("_").append(match); }
           else { sb.append("_").append(nbp); } }
       else { sb.append("_"); }
-      if (c.hasValue("OtherRemark")) {
-        String othRem = c.getValueString("OtherRemark");
-        String match = find("^(.{15})", othRem);	// Find the first 15 characters
-        if (match != null) { sb.append("_").append(match); }
-          else { sb.append("_").append(othRem); } }
-      else { sb.append("_"); }
+// OtherRemark is not part of the Ref ID
+//      if (c.hasValue("OtherRemark")) {
+//        String othRem = c.getValueString("OtherRemark");
+//        String match = find("^(.{15})", othRem);	// Find the first 15 characters
+//        if (match != null) { sb.append("_").append(match); }
+//          else { sb.append("_").append(othRem); } }
+//      else { sb.append("_"); }
       
     } catch (CharFieldException e) {
       log().error(e.getMessage());

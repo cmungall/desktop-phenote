@@ -59,14 +59,15 @@ public class WormAdapter implements QueryableDataAdapterI {
 //      System.out.println("Chr "+chr+" end");
       try {
         String allele = chr.getValueString("Object Name");	// get the allele value from the character, currently could have a column number
+        String pgdbid = chr.getValueString("Object Name");	// get the allele value from the character, currently could have a column number
         int colI = 0; int boxI = 0;					// initialize column to zero
-        String match = find(".* - ([0-9]+) - [0-9]+", allele);  	// Find a tempname followed by space - space number
+        String match = find(".* - ([0-9]+) - [0-9]+", pgdbid);  	// Find a tempname followed by space - space number
         if (match != null) { boxI = Integer.parseInt(match); }	// get the column number if there is one
-        match = find(".* - [0-9]+ - ([0-9]+)", allele);  	// Find a tempname followed by space - space number
+        match = find(".* - [0-9]+ - ([0-9]+)", pgdbid);  	// Find a tempname followed by space - space number
         if (match != null) { colI = Integer.parseInt(match); }	// get the column number if there is one
-        match = find("(.*) - [0-9]+ - [0-9]+", allele);  	// Find a tempname followed by space - space number
-        if (match != null) { allele = match; }		// query for this, otherwise keep the default value
-        String joinkey = allele;			// assign the tempname / allele to the joinkey 
+        match = find("(.*) - [0-9]+ - [0-9]+", pgdbid);  	// Find a tempname followed by space - space number
+        if (match != null) { pgdbid = match; }		// query for this, otherwise keep the default value
+        String joinkey = pgdbid;			// assign the tempname / allele to the joinkey 
         if (colI < 1) {					// if there are no columns, find the highest existing column and add 1 to make the next one
           ResultSet rs = null;
           try { rs = s.executeQuery("SELECT app_column FROM app_term WHERE joinkey = '"+joinkey+"' ORDER BY app_column DESC"); }
@@ -371,116 +372,29 @@ public class WormAdapter implements QueryableDataAdapterI {
     return default_value; 
   }
 
-  private CharacterListI queryPostgresCharacterList(String group, CharacterListI charList, Statement s, String joinkey, int boxI, int colI) {
+  private CharacterListI queryPostgresCharacterReferenceList(String group, CharacterListI charList, Statement s, String joinkey, int boxI, int colI) {
       // populate a phenote character based on postgres value by joinkey, then append to character list
     try {
       Character c1 = new Character();						// create a new character for a phenote row
-      String alleleColumn = joinkey+" - "+boxI+" - "+colI;
-      c1.setValue("Object Name",alleleColumn);					// assign the allele and the column
 
+      String postgres_table = "app_paper"; String postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
+      String paper_match = find("(WBPaper[0-9]*)", postgres_value);		// Find a WBPaper followed by any amount of digits
+      if (paper_match != null) { postgres_value = paper_match; }	// query for this, otherwise keep the default value
+//       c1.setValue("Pub",postgres_value);					// assign the queried value
+      if (postgres_value == "No postgres value assigned") { } else { c1.setValue("Pub",postgres_value); }					// assign the queried value
+      postgres_table = "app_person"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
+      String person_match = find("(WBPerson[0-9]*)", postgres_value);	// Find a WBPerson followed by any amount of digits
+      if (person_match != null) { postgres_value = person_match; }	// query for this, otherwise keep the default value
+      if (postgres_value == "No postgres value assigned") { } else { c1.setValue("Person",postgres_value); }					// assign the queried value
+      postgres_table = "app_phenotype"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
+      c1.setValue("NBP",postgres_value);					// assign the queried value
+      postgres_table = "app_remark"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
+      c1.setValue("Reference Remark",postgres_value);					// assign the queried value
 
-      String postgres_table = "app_type"; String postgres_value = "No postgres value assigned";
-      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, 0, 0);
-      c1.setValue("Object Type",postgres_value);					// assign the queried value
-
-      if (group.equals("default")) { 		// these values only go to the Main tab 
-        postgres_value = "No postgres value assigned";
-        postgres_table = "app_term";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-        String phenotype_match = find("(WBPhenotype[0-9]*)", postgres_value);  	// Find a WBPhenotype followed by any amount of digits
-        if (phenotype_match != null) { postgres_value = phenotype_match; }		// query for this, otherwise keep the default value
-        if (postgres_value == "No postgres value assigned") { } else { c1.setValue("Phenotype",postgres_value); }					// assign the queried value
-//       c1.setValue("Phenotype",postgres_value);					// assign the queried value
-        postgres_table = "app_intx_desc"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
-        c1.setValue("Genetic Intx Desc",postgres_value);					// assign the queried value
-        postgres_table = "app_curator"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-        c1.setValue("Curator",postgres_value);					// assign the queried value
-        postgres_table = "app_phen_remark"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-        c1.setValue("Phenotype Remark",postgres_value);				// assign the queried value
-        postgres_table = "app_anat_term"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-//        c1.setValue("Anatomy",postgres_value);					// this doesn't work, assigning whatever term name(s) is in postgres
-//        c1.setValue("Anatomy","WBbt:0004758");			 		// this works, assigning a term ID
-        postgres_table = "app_lifestage"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-//         c1.setValue("Life Stage",postgres_value);					// assign the queried value
-        postgres_table = "app_nature"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-        c1.setValue("Allele Nature",postgres_value);				// assign the queried value
-        postgres_table = "app_func"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-        c1.setValue("Functional Change",postgres_value);				// assign the queried value
-        postgres_table = "app_temperature"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-        c1.setValue("Temperature",postgres_value);				// assign the queried value
-        postgres_table = "app_preparation"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-        c1.setValue("Treatment",postgres_value);				// assign the queried value
-        postgres_table = "app_penetrance"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-        c1.setValue("Penetrance",postgres_value);				// assign the queried value
-        postgres_table = "app_percent"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-        c1.setValue("Penetrance Remark",postgres_value);				// assign the queried value
-        postgres_table = "app_range"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-        c1.setValue("Penetrance Range Start",postgres_value);				// assign the queried value
-        postgres_table = "app_quantity"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-        c1.setValue("Penetrance Range End",postgres_value);				// assign the queried value
-        postgres_table = "app_quantity"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-        c1.setValue("Quantity",postgres_value);					// assign the queried value
-        postgres_table = "app_quantity_remark"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-        c1.setValue("Quantity Remark",postgres_value);				// assign the queried value
-        postgres_table = "app_heat_sens"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-        c1.setValue("Heat Sensitive",postgres_value);				// assign the queried value
-        postgres_table = "app_heat_degree"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-        c1.setValue("Heat Sensitive Degree",postgres_value);				// assign the queried value
-        postgres_table = "app_cold_sens"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-        c1.setValue("Cold Sensitive",postgres_value);				// assign the queried value
-        postgres_table = "app_cold_degree"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-        c1.setValue("Cold Sensitive Degree",postgres_value);			// assign the queried value
-        postgres_table = "app_mat_effect"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-        c1.setValue("Maternal Effect",postgres_value);				// assign the queried value
-        postgres_table = "app_pat_effect"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-        c1.setValue("Paternal Effect",postgres_value);				// assign the queried value
-        postgres_table = "app_genotype"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-        c1.setValue("Genotype",postgres_value);				// assign the queried value
-        postgres_table = "app_strain"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-        c1.setValue("Strain",postgres_value);				// assign the queried value
-      }
-      else if (group.equals("referenceMaker")) { 	// these values only go to the referenceMaker tab
-        postgres_table = "app_paper"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
-        String paper_match = find("(WBPaper[0-9]*)", postgres_value);		// Find a WBPaper followed by any amount of digits
-        if (paper_match != null) { postgres_value = paper_match; }	// query for this, otherwise keep the default value
-//         c1.setValue("Pub",postgres_value);					// assign the queried value
-        if (postgres_value == "No postgres value assigned") { } else { c1.setValue("Pub",postgres_value); }					// assign the queried value
-        postgres_table = "app_person"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
-        String person_match = find("(WBPerson[0-9]*)", postgres_value);	// Find a WBPerson followed by any amount of digits
-        if (person_match != null) { postgres_value = person_match; }	// query for this, otherwise keep the default value
-        if (postgres_value == "No postgres value assigned") { } else { c1.setValue("Person",postgres_value); }					// assign the queried value
-        postgres_table = "app_phenotype"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
-        c1.setValue("NBP",postgres_value);					// assign the queried value
-        postgres_table = "app_remark"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
-        c1.setValue("Reference Remark",postgres_value);					// assign the queried value
-      }
       charList.add(c1);								// add the character to the character list
     }
     catch (TermNotFoundException e) {
@@ -488,7 +402,106 @@ public class WormAdapter implements QueryableDataAdapterI {
     catch (CharFieldException e) {
       System.out.println("Char Field Exception, assigning characters "+e.getMessage()); }
     return charList; 
-  } // private CharacterListI queryPostgresCharacterList(CharacterList charList, Statement s, String joinkey)
+  } // private CharacterListI queryPostgresCharacterReferenceList(CharacterList charList, Statement s, String joinkey)
+
+  private CharacterListI queryPostgresCharacterMainList(String group, CharacterListI charList, Statement s, String joinkey, int boxI, int colI) {
+      // populate a phenote character based on postgres value by joinkey, then append to character list
+    try {
+      Character c1 = new Character();						// create a new character for a phenote row
+
+      c1.setValue("Object Name",joinkey);					// assign the allele and the column
+      String alleleColumn = joinkey+" - "+boxI+" - "+colI;
+      c1.setValue("PGDBID",alleleColumn);					// assign the allele and the column
+      String postgres_table = "app_type"; String postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, 0, 0);
+      c1.setValue("Object Type",postgres_value);					// assign the queried value
+
+      postgres_value = "No postgres value assigned";
+      postgres_table = "app_term";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      String phenotype_match = find("(WBPhenotype[0-9]*)", postgres_value);  	// Find a WBPhenotype followed by any amount of digits
+      if (phenotype_match != null) { postgres_value = phenotype_match; }		// query for this, otherwise keep the default value
+      if (postgres_value == "No postgres value assigned") { } else { c1.setValue("Phenotype",postgres_value); }					// assign the queried value
+//     c1.setValue("Phenotype",postgres_value);					// assign the queried value
+      postgres_table = "app_intx_desc"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
+      c1.setValue("Genetic Intx Desc",postgres_value);					// assign the queried value
+      postgres_table = "app_curator"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      c1.setValue("Curator",postgres_value);					// assign the queried value
+      postgres_table = "app_phen_remark"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      c1.setValue("Phenotype Remark",postgres_value);				// assign the queried value
+      postgres_table = "app_anat_term"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+//      c1.setValue("Anatomy",postgres_value);					// this doesn't work, assigning whatever term name(s) is in postgres
+//      c1.setValue("Anatomy","WBbt:0004758");			 		// this works, assigning a term ID
+      postgres_table = "app_lifestage"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+//       c1.setValue("Life Stage",postgres_value);					// assign the queried value
+      postgres_table = "app_nature"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      c1.setValue("Allele Nature",postgres_value);				// assign the queried value
+      postgres_table = "app_func"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      c1.setValue("Functional Change",postgres_value);				// assign the queried value
+      postgres_table = "app_temperature"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      c1.setValue("Temperature",postgres_value);				// assign the queried value
+      postgres_table = "app_preparation"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      c1.setValue("Treatment",postgres_value);				// assign the queried value
+      postgres_table = "app_penetrance"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      c1.setValue("Penetrance",postgres_value);				// assign the queried value
+      postgres_table = "app_percent"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      c1.setValue("Penetrance Remark",postgres_value);				// assign the queried value
+      postgres_table = "app_range"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      c1.setValue("Penetrance Range Start",postgres_value);				// assign the queried value
+      postgres_table = "app_quantity"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      c1.setValue("Penetrance Range End",postgres_value);				// assign the queried value
+      postgres_table = "app_quantity"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      c1.setValue("Quantity",postgres_value);					// assign the queried value
+      postgres_table = "app_quantity_remark"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      c1.setValue("Quantity Remark",postgres_value);				// assign the queried value
+      postgres_table = "app_heat_sens"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      c1.setValue("Heat Sensitive",postgres_value);				// assign the queried value
+      postgres_table = "app_heat_degree"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      c1.setValue("Heat Sensitive Degree",postgres_value);				// assign the queried value
+      postgres_table = "app_cold_sens"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      c1.setValue("Cold Sensitive",postgres_value);				// assign the queried value
+      postgres_table = "app_cold_degree"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      c1.setValue("Cold Sensitive Degree",postgres_value);			// assign the queried value
+      postgres_table = "app_mat_effect"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      c1.setValue("Maternal Effect",postgres_value);				// assign the queried value
+      postgres_table = "app_pat_effect"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      c1.setValue("Paternal Effect",postgres_value);				// assign the queried value
+      postgres_table = "app_genotype"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      c1.setValue("Genotype",postgres_value);				// assign the queried value
+      postgres_table = "app_strain"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      c1.setValue("Strain",postgres_value);				// assign the queried value
+
+      charList.add(c1);								// add the character to the character list
+    }
+    catch (TermNotFoundException e) {
+      System.out.println("Term Not Found Exception, assigning characters "+e.getMessage()); }
+    catch (CharFieldException e) {
+      System.out.println("Char Field Exception, assigning characters "+e.getMessage()); }
+    return charList; 
+  } // private CharacterListI queryPostgresCharacterMainList(CharacterList charList, Statement s, String joinkey)
 
   public CharacterListI query(String group, String field, String query) throws DataAdapterEx {
 
@@ -516,8 +529,8 @@ public class WormAdapter implements QueryableDataAdapterI {
         System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); System.exit(1); }
 
       ResultSet rs = null;	// intialize postgres query result
-      String match = find("(.*) - [0-9]+ - [0-9]+", query);  	// Find a tempname followed by space - space number
-      if (match != null) { query = match; }		// query for this, otherwise keep the default value
+//      String match = find("(.*) - [0-9]+ - [0-9]+", query);  	// Find a tempname followed by space - space number when query by postgres database ID instead of object name like it really should
+//      if (match != null) { query = match; }		// query for this, otherwise keep the default value
       String joinkey = query;
       try { rs = s.executeQuery("SELECT * FROM app_tempname WHERE app_tempname = '"+joinkey+"'");	}	// find the allele that matches the queried allele
       catch (SQLException se) {
@@ -544,8 +557,11 @@ public class WormAdapter implements QueryableDataAdapterI {
             System.out.println("We got an exception while getting a column/term joinkey "+joinkey+" result:this shouldn't happen: we've done something really bad."); 
             se.printStackTrace(); System.exit(1); }
           for (int boxI=1; boxI<boxes+1; boxI++) {					// for each of those columns
-            for (int colI=1; colI<columns+1; colI++) {					// for each of those columns
-              charList = queryPostgresCharacterList(group, charList, s, joinkey, boxI, colI); } }
+            if (group.equals("default")) { 		// these values only go to the Main tab 
+              for (int colI=1; colI<columns+1; colI++) {					// for each of those columns
+                charList = queryPostgresCharacterMainList(group, charList, s, joinkey, boxI, colI); } }
+            else if (group.equals("referenceMaker")) { 	// these values only go to the referenceMaker tab
+              charList = queryPostgresCharacterReferenceList(group, charList, s, joinkey, boxI, 0); } }
           return charList; }	// if there is a match
 
     } else if (field.equals(pubString)) {						// if querying the publication, get paper data
@@ -596,8 +612,11 @@ public class WormAdapter implements QueryableDataAdapterI {
             catch (SQLException se) {
               System.out.println("We got an exception while getting a publication query result column app_term :this shouldn't happen: we've done something really bad."); 
                se.printStackTrace(); System.exit(1); }
-            for (int colI=1; colI<columns+1; colI++) {					// for each of those columns
-              charList = queryPostgresCharacterList(group, charList, s, joinkey, boxI, colI); }
+            if (group.equals("default")) { 		// these values only go to the Main tab 
+              for (int colI=1; colI<columns+1; colI++) {					// for each of those columns
+                charList = queryPostgresCharacterMainList(group, charList, s, joinkey, boxI, colI); } }
+            else if (group.equals("referenceMaker")) { 	// these values only go to the referenceMaker tab
+              charList = queryPostgresCharacterReferenceList(group, charList, s, joinkey, boxI, 0); }
           } }
           catch (SQLException se) {
             System.out.println("We got an exception while getting a publication query result joinkey, box app_paper :this shouldn't happen: we've done something really bad."); 
