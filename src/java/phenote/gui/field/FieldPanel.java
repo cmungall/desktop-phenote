@@ -19,6 +19,7 @@ import phenote.config.xml.GroupDocument.Group;
 import phenote.datamodel.CharField;
 import phenote.datamodel.OntologyManager;
 import phenote.edit.EditManager;
+import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.GroupAdapterI;
 import phenote.gui.selection.SelectionManager;
 
@@ -84,8 +85,9 @@ public class FieldPanel extends JPanel {
       GroupAdapterI groupAdap = Config.inst().getGroupAdapter(group);
       if (groupAdap.hasCharChangeListener()) {
         editManager.addCharChangeListener(groupAdap.getCharChangeListener());
-        // testing out...
-        //editManager.addCharChangeListener(new phenote.dataadapter.AllFieldsGroupAdapter("genotypeMaker").getCharChangeListener());
+      }
+      if  (groupAdap.hasCharListChangeListener()) {
+        CharacterListManager.getCharListMan(group).addCharListChangeListener(groupAdap.getCharListChangeListener());
       }
     }
   } 

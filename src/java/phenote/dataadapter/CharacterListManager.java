@@ -65,6 +65,7 @@ public class CharacterListManager {
     CharListChangeEvent e = new CharListChangeEvent(source,charList);
     for (CharListChangeListener l : listenerList)
       l.newCharList(e);
+    System.out.println("fired char list chagne event "+e);
   }
 
   public void addCharListChangeListener(CharListChangeListener l) {

@@ -22,6 +22,7 @@ import phenote.edit.CharChangeEvent;
 public abstract class AbstractGroupAdapter implements GroupAdapterI {
 
   private CharChangeListener charListener;
+  private CharListChangeListener charListChangeListener;
   private String group;
   private Namespace namespace;
   private CharField destinationCharField;
@@ -30,6 +31,7 @@ public abstract class AbstractGroupAdapter implements GroupAdapterI {
     this.group = group;
     namespace = new Namespace(group);
     setCharChangeListener(new GroupCharChangeListener());
+    setCharListChangeListener(new GroupCharListChangeListener());
   }
 
   public boolean hasCharChangeListener() { return charListener != null; }
@@ -41,10 +43,23 @@ public abstract class AbstractGroupAdapter implements GroupAdapterI {
     charListener = l;
   }
 
+  public boolean hasCharListChangeListener() { return charListChangeListener!= null; }
+
+  public CharListChangeListener getCharListChangeListener() {
+    return charListChangeListener;
+  }
+
+  protected void setCharListChangeListener(CharListChangeListener l) {
+    charListChangeListener = l;
+  }
+
   protected Namespace getNamespace() { return namespace; }
 
   /** This is the real workhorse here */
   protected void loadUpMainField() {
+
+    log().debug("AGA loadUpMainField");
+
     if (!hasDestinationCharField()) return; // err msg?
     // clear out old obo classes??? query be namespace and OBOSess.removeObject?
 
@@ -112,6 +127,12 @@ public abstract class AbstractGroupAdapter implements GroupAdapterI {
   /** just triggers loadUpMainField */
   private class GroupCharChangeListener implements CharChangeListener {
     public void charChanged(CharChangeEvent e) {
+      loadUpMainField();
+    }
+  }
+  
+  private class GroupCharListChangeListener implements CharListChangeListener {
+    public void newCharList(CharListChangeEvent e) {
       loadUpMainField();
     }
   }
