@@ -26,6 +26,7 @@ import org.geneontology.oboedit.datamodel.Dbxref;
 import org.geneontology.oboedit.datamodel.impl.DbxrefImpl;
 import org.geneontology.oboedit.datamodel.impl.OBORestrictionImpl;
 import org.geneontology.oboedit.datamodel.TermUtil;
+import org.geneontology.oboedit.datamodel.PropertyValue;
 
 
 public class HtmlUtil {
@@ -66,6 +67,9 @@ public class HtmlUtil {
 	public static String termInfo(OBOClass oboClass) {
 		//This page is basically a html table.  
 		//rhs are each single table cells but are separated by line breaks.
+		//It would be really nice if these could show up as configurable items for the user...
+		//they could decide what is normally displayed, possibly with being able to get more
+		//info by clicking a button...or maybe we can set these up as expandable items
 		if (oboClass == null) {
 			System.out.println("null obo class for HtmlUtil.termInfo");
 			return ""; // null? exception?
@@ -100,6 +104,7 @@ public class HtmlUtil {
 			//this term is an intersection term, show the xp definition
 			sb.append(makeRow(makeLeftCol(bold("XP Definition:"))+makeRightCol(getIntersectionParents(oboClass).toString())));
 		}
+		//what if parents/children were placed side-by-side???  might look nicer
 		if (!oboClass.isObsolete()) {//don't really want to navigate around obs terms
 			sb.append(makeRow("<tr><td colspan=2 align=center valign=top><font size=-1><hr></font></td></tr>"));
 			sb.append(getParentalString(oboClass));
@@ -112,7 +117,28 @@ public class HtmlUtil {
 			sb.append(makeRow("<tr><td colspan=2 align=center valign=top><font size=-1><hr></font></td></tr>"));
 			sb.append(makeRow(makeLeftCol(bold("Comments"))+makeRightCol(comments)));
 		}
+		//comment this out if you don't want to display the property values anymore.
+		Set<PropertyValue> properties = oboClass.getPropertyValues();
+		if (!properties.isEmpty()) {
+			sb.append(makeRow("<tr><td colspan=2 align=center valign=top><font size=-1><hr></font></td></tr>"));
+			sb.append(getPropertiesString(properties));
+		}
 		sb.append("</table>");
+		return sb.toString();
+	}
+
+	//This method is important because after a conversion of OWL->OBO, many of the properties aren't 
+	//assigned to specific OBO properties (like synonyms).  This allows all the class/annotation
+	//properties to be displayed in the termInfo box.  They'll show up at the bottom for now.
+	//Note:  right now these show up at least duplicated (if not quaduplicated)...but i think
+	//that's an oboedit problem
+	private static String getPropertiesString(Set<PropertyValue> properties) {
+		StringBuffer sb = new StringBuffer();
+		PropertyValue propVal;
+		for (Iterator it = properties.iterator(); it.hasNext(); ) {
+			propVal = (PropertyValue)it.next();
+			sb.append(makeRow(makeLeftCol(bold(propVal.getProperty()+":"))+makeRightCol(propVal.getValue())));
+		}
 		return sb.toString();
 	}
 	
