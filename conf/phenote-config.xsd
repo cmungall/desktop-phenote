@@ -116,6 +116,7 @@
       <xs:attribute name="slim" use="required" type="xs:string"/>
       <xs:attribute name="repos-subdir" use="required" type="xs:string"/>
       <xs:attribute name="groups" type="xs:IDREFS"/>
+      <xs:attribute name="copy-field" use="required" type="xs:boolean"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="ontology">

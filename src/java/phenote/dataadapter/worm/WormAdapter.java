@@ -290,8 +290,8 @@ public class WormAdapter implements QueryableDataAdapterI {
 //    queryableFields.add(CharFieldEnum.ALLELE.getName()); // "Allele"
     queryableFields.add("Object Name"); // "Object Name"
     // should their be a check that the current char fields have pub & allele?
-    queryableGroups.add("default");
-    queryableGroups.add("referenceMaker");
+    queryableGroups.add("referenceMaker");		// populate reference obo for the main
+    queryableGroups.add("default");			// default last
   }
   /** return true if data adapter can query for the char field */
   public boolean isFieldQueryable(String field) {
@@ -340,6 +340,33 @@ public class WormAdapter implements QueryableDataAdapterI {
       System.out.println("We should never get here.");
     return c; 
   } // private Connection connectToDB
+
+//      title = queryPostgresTitle(s, "wpa_title", pubID);
+//      name = queryPostgresName(s, "two_standardname", personID);
+  private String queryPostgresName(Statement s, String postgres_table, String personID) {
+    String joinkey = find("([0-9]+)", personID);		// Find a WBPaper followed by any amount of digits
+    String name = null;
+    ResultSet rs = null;	// intialize postgres query result
+    try { rs = s.executeQuery("SELECT * FROM "+postgres_table+" WHERE joinkey = '"+joinkey+"' ORDER BY two_timestamp "); }
+    catch (SQLException se) {
+      System.out.println("We got an exception while executing our "+postgres_table+" query: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
+    try { while (rs.next()) { name = rs.getString(3); } }		// assign the new term value
+    catch (SQLException se) {
+      System.out.println("We got an exception while getting a "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
+    return name;
+  }
+  private String queryPostgresTitle(Statement s, String postgres_table, String pubID) {
+    String joinkey = find("([0-9]+)", pubID);		// Find a WBPaper followed by any amount of digits
+    String title = null;
+    ResultSet rs = null;	// intialize postgres query result
+    try { rs = s.executeQuery("SELECT * FROM "+postgres_table+" WHERE joinkey = '"+joinkey+"' ORDER BY wpa_timestamp "); }
+    catch (SQLException se) {
+      System.out.println("We got an exception while executing our "+postgres_table+" query: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
+    try { while (rs.next()) { title = rs.getString(2); } }		// assign the new term value
+    catch (SQLException se) {
+      System.out.println("We got an exception while getting a "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); } 
+    return title;
+  }
 
   private String queryPostgresCharacter(Statement s, String postgres_table, String default_value, String query, int boxI, int colI) {
     // get the value corresponding to a phenote cell from a postgres table by column
@@ -398,7 +425,7 @@ public class WormAdapter implements QueryableDataAdapterI {
       charList.add(c1);								// add the character to the character list
     }
     catch (TermNotFoundException e) {
-      System.out.println("Term Not Found Exception, assigning characters "+e.getMessage()); }
+      System.out.println("Term Not Found Exception, assigning characters in queryPostgresCharacterReferenceList "+e.getMessage()); }
     catch (CharFieldException e) {
       System.out.println("Char Field Exception, assigning characters "+e.getMessage()); }
     return charList; 
@@ -494,10 +521,36 @@ public class WormAdapter implements QueryableDataAdapterI {
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
       c1.setValue("Strain",postgres_value);				// assign the queried value
 
+
+      String pubID = null;
+      String title = null;
+      String personID = null;
+      String name = null;
+      String nbp = null;
+      postgres_table = "app_paper"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
+      String paper_match = find("(WBPaper[0-9]*)", postgres_value);		// Find a WBPaper followed by any amount of digits
+      if (paper_match != null) { postgres_value = paper_match; }	// query for this, otherwise keep the default value
+      if (postgres_value == "No postgres value assigned") { } else { pubID = postgres_value; }		// assign the queried value
+      postgres_table = "app_person"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
+      String person_match = find("(WBPerson[0-9]*)", postgres_value);	// Find a WBPerson followed by any amount of digits
+      if (person_match != null) { postgres_value = person_match; }	// query for this, otherwise keep the default value
+      if (postgres_value == "No postgres value assigned") { } else { personID = postgres_value; }	// assign the queried value
+      postgres_table = "app_phenotype"; postgres_value = "No postgres value assigned";
+      nbp = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
+
+      if (pubID != null) { title = queryPostgresTitle(s, "wpa_title", pubID); }
+      if (personID != null) { name = queryPostgresName(s, "two_standardname", personID); }
+
+      String refID = WormReferenceGroupAdapter.makeNameFromPubPersonNBP(pubID, title, personID, name, nbp);
+      refID = ":" + refID;
+      c1.setValue("Ref",refID);				// assign the queried value
+
       charList.add(c1);								// add the character to the character list
     }
     catch (TermNotFoundException e) {
-      System.out.println("Term Not Found Exception, assigning characters "+e.getMessage()); }
+      System.out.println("Term Not Found Exception, assigning characters in queryPostgresCharacterMainList "+e.getMessage()); }
     catch (CharFieldException e) {
       System.out.println("Char Field Exception, assigning characters "+e.getMessage()); }
     return charList; 

@@ -17,45 +17,45 @@ public class WormReferenceGroupAdapter extends AbstractGroupAdapter {
     super(group);
   }
   protected String makeNameFromChar(CharacterI c) {
-    StringBuilder sb = new StringBuilder();
     try {
-      if (c.hasValue("Pub")) {
-        String pubID = c.getTerm("Pub").getID();	// get the Papers's ID
+        String pubID = null;
+        if (c.getTerm("Pub") != null) { pubID = c.getTerm("Pub").getID(); }	// get the Papers's ID
+        String title = c.getValueString("Pub");		// get the Paper's value (the title)
+        String personID = null;
+        if (c.getTerm("Person") != null) { personID = c.getTerm("Person").getID(); }
+        String name = c.getValueString("Person");
+        String nbp = c.getValueString("NBP");
+        String refID = makeNameFromPubPersonNBP(pubID, title, personID, name, nbp);
+        return refID;      
+    } catch (CharFieldException e) {
+      log().error(e.getMessage());
+      return null;
+    }
+  }
+
+  static String makeNameFromPubPersonNBP( String pubID, String title, String personID, String name, String nbp ) {
+    StringBuilder sb = new StringBuilder();
+    if (pubID != null) {
         String match = find("([0-9]+)", pubID);         // Find a set of digits
         sb.append(match);				// append it to the stringbuilder
-        String title = c.getValueString("Pub");		// get the Paper's value (the title)
         match = find("^(.{15})", title);         	// Find the first 15 characters
         if (match != null) { sb.append("_").append(match); }	// if there's a match append it
           else { sb.append("_").append(title); } }		// otherwise append the full title
       else { sb.append("_"); }				// if there's no publication append a single underscore
-      if (c.hasValue("Person")) {
-        String personID = c.getTerm("Person").getID();
+    if (personID != null) {
         String match = find("([0-9]+)", personID);      // Find a set of digits
         sb.append("_").append(match);
       // eventually this will be a list
-        String name = c.getValueString("Person");
         match = find("^(.{15})", name);         	// Find the first 15 characters
         if (match != null) { sb.append("_").append(match); }
           else { sb.append("_").append(name); } }
       else { sb.append("_").append("_"); }
-      if (c.hasValue("NBP")) {
+    if (nbp != null) {
       // this will also be a list
-        String nbp = c.getValueString("NBP");
         String match = find("^(.{15})", nbp);		// Find the first 15 characters
         if (match != null) { sb.append("_").append(match); }
           else { sb.append("_").append(nbp); } }
       else { sb.append("_"); }
-// OtherRemark is not part of the Ref ID
-//      if (c.hasValue("OtherRemark")) {
-//        String othRem = c.getValueString("OtherRemark");
-//        String match = find("^(.{15})", othRem);	// Find the first 15 characters
-//        if (match != null) { sb.append("_").append(match); }
-//          else { sb.append("_").append(othRem); } }
-//      else { sb.append("_"); }
-      
-    } catch (CharFieldException e) {
-      log().error(e.getMessage());
-    }
     return sb.toString();
   }
 
