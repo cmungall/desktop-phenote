@@ -96,6 +96,9 @@ field =
     attribute slim { xsd:string },
     attribute repos-subdir {xsd:string},
     attribute groups { xsd:IDREFS }?,
+    ## whether to copy the field when character is copied/duplicated
+    ## a database id usually shouldnt be copied, default true
+    attribute copy-field { xsd:boolean },
     postcomp?,
     ontology*
   } 
