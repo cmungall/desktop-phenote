@@ -13,6 +13,7 @@ import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.CharacterListI;
 import phenote.dataadapter.DataAdapterEx;
 import phenote.dataadapter.QueryableDataAdapterI;
+import phenote.dataadapter.CharacterListManager;
 
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterList;
@@ -61,6 +62,30 @@ public class WormAdapter implements QueryableDataAdapterI {
     }
   }
 
+  public CharacterI getCharacterReference(String refID) throws DataAdapterEx {
+    CharacterListManager clm = CharacterListManager.getCharListMan("referenceMaker");
+    for (CharacterI chr : clm.getCharList()) {
+      try {
+        if (chr.getValueString("RefID").equals(refID)) { return chr; } }
+      catch (CharFieldException e) { throw new DataAdapterEx(e); }
+    }
+    throw new DataAdapterEx("Reference "+refID+" not found"); 	
+  }
+
+  public void commitReference(CharacterI cMain) {
+    try {
+      String refID = cMain.getTerm("Reference").getID();
+      CharacterI cRef = getCharacterReference(refID);
+      String pub = cRef.getValueString("Pub");
+      String person = cRef.getValueString("Person");
+      String nbp = cRef.getValueString("NBP");
+      String remark = cRef.getValueString("Reference Remark");
+//      System.out.println("Pub "+pub+" Per "+person+" nbp "+nbp+" remark "+remark+" end");
+    } catch (Exception e) {
+      System.out.println("Could not commit Reference from character: " + e);
+    }
+  }
+
   public void commit(CharacterListI charList) {
 //    String m = "Worm adapter commit not yet implemented.";
 //    JOptionPane.showMessageDialog(null,m,"Worm stub",JOptionPane.INFORMATION_MESSAGE);
@@ -72,6 +97,7 @@ public class WormAdapter implements QueryableDataAdapterI {
     for (CharacterI chr : charList.getList()) {
 //      System.out.println("Chr "+chr+" end");
       try {
+        commitReference(chr);
         String allele = chr.getValueString("Object Name");	// get the allele value from the character, currently could have a column number
         String pgdbid = chr.getValueString("Object Name");	// get the allele value from the character, currently could have a column number
         int colI = 0; int boxI = 0;					// initialize column to zero
@@ -306,6 +332,7 @@ public class WormAdapter implements QueryableDataAdapterI {
 //    queryableFields.add(CharFieldEnum.ALLELE.getName()); // "Allele"
     queryableFields.add("Object Name"); // "Object Name"
     // should their be a check that the current char fields have pub & allele?
+    queryableFields.add("NBP Date"); 
     queryableGroups.add("referenceMaker");		// populate reference obo for the main
     queryableGroups.add("default");			// default last
   }

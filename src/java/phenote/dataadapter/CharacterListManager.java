@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import phenote.datamodel.CharacterList;
 import phenote.datamodel.CharacterListI;
+import phenote.datamodel.CharacterI;
 import phenote.datamodel.OntologyManager;
 
 /** Contains current CharacterList. sends out CharacterListChanged events
@@ -58,6 +59,8 @@ public class CharacterListManager {
     characterList = charList;
     fireChangeEvent(source,charList);
   }
+
+  public List<CharacterI> getCharList() { return characterList.getList(); }
 
   public CharacterListI getCharacterList() { return characterList; }
 
