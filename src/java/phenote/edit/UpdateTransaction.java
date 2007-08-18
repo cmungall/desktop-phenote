@@ -32,6 +32,10 @@ public class UpdateTransaction implements TransactionI { // extends Transaction?
     oldValue = c.getValue(cf);
   }
 
+  public List<CharacterI> getDeletedAnnotations() {
+    return new ArrayList<CharacterI>(0);
+  }
+
   // public UpdateTransaction(CharFieldValue new, CharFieldValue old) ?
 
   /** actually maybe dont need to pas in old val - just query for it phase out*/

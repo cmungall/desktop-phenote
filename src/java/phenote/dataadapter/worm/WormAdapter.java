@@ -21,6 +21,8 @@ import phenote.datamodel.CharFieldException;
 import phenote.datamodel.TermNotFoundException;
 import phenote.datamodel.CharField;
 
+import phenote.edit.EditManager;
+
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -45,6 +47,18 @@ public class WormAdapter implements QueryableDataAdapterI {
 
   public String getCommitButtonLabel() {
     return "Commit To Worm DB";
+  }
+
+  public void delete() {
+    List<CharacterI> l = EditManager.inst().getDeletedAnnotations();
+    try {
+      for (CharacterI chr : l) {
+        String pgdbid = chr.getValueString("PGDBID");
+        if (pgdbid == null) continue;
+        System.out.println("Delete "+pgdbid+" end"); }
+    } catch (Exception e) {
+      System.out.println("Could not delete character: " + e);
+    }
   }
 
   public void commit(CharacterListI charList) {
@@ -258,6 +272,8 @@ public class WormAdapter implements QueryableDataAdapterI {
       }
 
     } // for (CharacterI chr : charList.getList())
+
+    delete();
     // if alleleQueried... wipe out allele and insert
     // else if Pub queried... wipe out pub and insert
     // else  - new insert & deletes(from transactions)

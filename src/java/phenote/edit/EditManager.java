@@ -39,6 +39,12 @@ public class EditManager {
     this.characterListManager = clManager;
   }
 
+  public List<CharacterI> getDeletedAnnotations() {
+    List<CharacterI> l = new ArrayList<CharacterI>();
+    for (TransactionI t : getTransactionList()) { l.addAll(t.getDeletedAnnotations()); }
+    return l;
+  }
+
   // gets the "default" (group) edit manager
   public static EditManager inst() {
     return getEditManager(OntologyManager.DEFAULT_GROUP);

@@ -18,6 +18,12 @@ class DeleteTransaction implements TransactionI {
   private CharacterListManager characterListManager;
   private boolean isUndone = false;
 
+  public List<CharacterI> getDeletedAnnotations() {
+    List<CharacterI> l = new ArrayList<CharacterI>();
+    l.add(delChar);
+    return l;
+  }
+
   DeleteTransaction(CharacterI c, CharacterListManager clManager) {
     this.delChar = c;
     this.characterListManager = clManager;

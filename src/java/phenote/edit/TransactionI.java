@@ -10,6 +10,8 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 // interface? class?
 public interface TransactionI {
 
+  public List<CharacterI> getDeletedAnnotations();
+
   public void editModel();
 
   public void undo();

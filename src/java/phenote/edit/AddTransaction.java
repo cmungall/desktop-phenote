@@ -24,6 +24,10 @@ public class AddTransaction implements TransactionI {
     this.characterListManager = clManager;
   }
 
+  public List<CharacterI> getDeletedAnnotations() {
+    return new ArrayList<CharacterI>(0);
+  }
+
   public boolean isUpdate() { return false; }
   public boolean isAdd() { return !isUndone; }
 

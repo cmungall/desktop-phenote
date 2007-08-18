@@ -39,6 +39,12 @@ public class CompoundTransaction implements TransactionI {
     return upTrans;
   }
 
+  public List<CharacterI> getDeletedAnnotations() {
+    List<CharacterI>l = new ArrayList<CharacterI>();
+    for (TransactionI ch : childTransactions) { l.addAll(ch.getDeletedAnnotations()); }
+    return l;
+  }
+
   private CompoundTransaction() {}
 
   private void addTransaction(TransactionI trans) {
