@@ -78,6 +78,7 @@ public class CharField {
     return name;
   }
 
+  /** returns true if field has has tag or name of input tag */
   public boolean isField(String tag) {
     if (tag.equalsIgnoreCase(this.tag)) return true;
     if (tag.equalsIgnoreCase(name)) return true;
@@ -118,6 +119,8 @@ public class CharField {
   }
 
   public boolean isID() { return type == Type.ID; }
+
+  public boolean isReadOnly() { return false; } // return type == Type.READ_ONLY;
 
   public boolean hasOntologies() {
     return ontologyList != null && !ontologyList.isEmpty();

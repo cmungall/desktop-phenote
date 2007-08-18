@@ -87,7 +87,7 @@ field =
     ## added term is assumed, otherewise free_text is the default
     ## ID requires a : and no whitespace 
     ## free_text is just for backward compatibility - phase out
-    attribute type { "FREE_TEXT" | "TERM" | "INT" | "ID" | "READ_ONLY" | "free_text" },  
+    attribute type { "FREE_TEXT" | "TERM" | "INT" | "ID" | "READ_ONLY" | "HIDDEN" | "free_text" },  
     ## should this be another type? will there be anything readonly aside from strings?
     ##attribute read-only { xsd:boolean },
     ## file is for single ontology - rename ontology_file?
