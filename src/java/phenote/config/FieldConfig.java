@@ -251,7 +251,8 @@ public class FieldConfig {
   /** specifies whether to copy field to new character when char is duplicated
       default is true, db ids generally shouldnt copy */
   public boolean copies() {
-    return true;
+    if ( fieldBean.xgetCopyField() == null ) { return true; }
+    else { return fieldBean.getCopyField(); }
   }
 
   public void setCharField(CharField cf) { charField = cf; }
