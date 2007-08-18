@@ -74,6 +74,9 @@ abstract class CharFieldGui {
     else if (charField.isID()) {
       return new IdFieldGui(charField);
     }
+    else if (charField.isReadOnly()) {
+      return new ReadOnlyFieldGui(charField);
+    }
     else {
       FreeTextField f = new FreeTextField(charField);
       return f;

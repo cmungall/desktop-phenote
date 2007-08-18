@@ -120,7 +120,9 @@ public class CharField {
 
   public boolean isID() { return type == Type.ID; }
 
-  public boolean isReadOnly() { return false; } // return type == Type.READ_ONLY;
+  public boolean isReadOnly() { 
+    return type == Type.READ_ONLY; 
+  }
 
   public boolean hasOntologies() {
     return ontologyList != null && !ontologyList.isEmpty();
