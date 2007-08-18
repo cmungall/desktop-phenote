@@ -23,6 +23,8 @@ public class CharField {
   private String name; // display name
   private String tag; // non display tag to refer to field (no spaces...)
   private boolean postCompAllowed=false;
+  /** Whether to copy this field on copy/clone/duplicating */
+  private boolean copies = true;
   private Ontology postCompRelOntol;
   // RELATIONSHIP? DANGLER? INSTANCE? use CharFieldEnum?
   // should we actually just use xmlbean
@@ -36,12 +38,19 @@ public class CharField {
     charFieldEnum = c;
   }
 
-  /** a generic field with no char field enum - get hip */
+  /** a generic field with no char field enum - get hip
+   type is from field xml bean: TERM, FREE_TEXT...*/
   public CharField(String name,String tag,Type.Enum type) {
     this.name = name;
     this.tag = tag;
     if (type != null) this.type = type;
   }
+
+  public void setCopyEnabled(boolean cp) {
+    copies = cp;
+  }
+
+  public boolean getCopyEnabled() { return copies; }
 
   /** part of constructor? probably */
   public void setType(Type.Enum t) {

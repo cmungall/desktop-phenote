@@ -57,6 +57,8 @@ public class CharFieldValue implements Cloneable {
   }
 
   CharFieldValue cloneCharFieldValue() {
+    if (!charField.getCopyEnabled()) 
+      return null; // null?? new CharFieldValue(character
     try { return (CharFieldValue)clone(); }
     catch (CloneNotSupportedException x) { return null; }
   }

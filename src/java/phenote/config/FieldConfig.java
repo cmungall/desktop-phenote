@@ -248,6 +248,11 @@ public class FieldConfig {
     fieldBean.setEnable(e);
   }
 
+  /** specifies whether to copy field to new character when char is duplicated
+      default is true, db ids generally shouldnt copy */
+  public boolean copies() {
+    return true;
+  }
 
   public void setCharField(CharField cf) { charField = cf; }
 
@@ -256,6 +261,7 @@ public class FieldConfig {
   public CharField getCharField() {
     if (charField == null)
       charField = new CharField(getLabel(),getDataTag(),getType());
+    charField.setCopyEnabled(copies());
     return charField;
   }
   boolean hasCharField(CharField cf) { return charField == cf; }
