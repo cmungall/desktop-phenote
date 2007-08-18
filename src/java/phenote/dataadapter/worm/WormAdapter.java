@@ -420,23 +420,36 @@ public class WormAdapter implements QueryableDataAdapterI {
     try {
       Character c1 = new Character();						// create a new character for a phenote row
 
+      String pubID = null; String title = null; String personID = null; String name = null; String nbp = null;
+
       String postgres_table = "app_paper"; String postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
       String paper_match = find("(WBPaper[0-9]*)", postgres_value);		// Find a WBPaper followed by any amount of digits
-      if (paper_match != null) { postgres_value = paper_match; }	// query for this, otherwise keep the default value
+      if (paper_match != null) { 
+         postgres_value = paper_match; 						// query for this, otherwise keep the default value
+         pubID = paper_match; 
+         title = queryPostgresTitle(s, "wpa_title", pubID); }
 //       c1.setValue("Pub",postgres_value);					// assign the queried value
       if (postgres_value == "No postgres value assigned") { } else { c1.setValue("Pub",postgres_value); }					// assign the queried value
       postgres_table = "app_person"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
       String person_match = find("(WBPerson[0-9]*)", postgres_value);	// Find a WBPerson followed by any amount of digits
-      if (person_match != null) { postgres_value = person_match; }	// query for this, otherwise keep the default value
+      if (person_match != null) { 
+        postgres_value = person_match; 					 	// query for this, otherwise keep the default value
+        personID = person_match; 
+        name = queryPostgresName(s, "two_standardname", personID); }
       if (postgres_value == "No postgres value assigned") { } else { c1.setValue("Person",postgres_value); }					// assign the queried value
       postgres_table = "app_phenotype"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
+      if (postgres_value != null) { nbp = postgres_value; }
       c1.setValue("NBP",postgres_value);					// assign the queried value
       postgres_table = "app_remark"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
       c1.setValue("Reference Remark",postgres_value);					// assign the queried value
+
+      String refID = WormReferenceGroupAdapter.makeNameFromPubPersonNBP(pubID, title, personID, name, nbp);
+      refID = ":" + refID;
+      c1.setValue("RefID",refID);				// assign the queried value
 
       charList.add(c1);								// add the character to the character list
     }
