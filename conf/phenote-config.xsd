@@ -107,6 +107,7 @@
             <xs:enumeration value="INT"/>
             <xs:enumeration value="ID"/>
             <xs:enumeration value="READ_ONLY"/>
+            <xs:enumeration value="HIDDEN"/>
             <xs:enumeration value="free_text"/>
           </xs:restriction>
         </xs:simpleType>
