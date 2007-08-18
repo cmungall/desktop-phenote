@@ -55,10 +55,23 @@ public abstract class AbstractGroupAdapter implements GroupAdapterI {
 
   protected Namespace getNamespace() { return namespace; }
 
-  /** This is the real workhorse here */
-  protected void loadUpMainField() {
+  
+//   protected void makeTerms() {
+//     if (recordsId())
+//       setIdField();
+//     loadUpMainField();
+//   }
 
-    log().debug("AGA loadUpMainField");
+  protected boolean recordsId() { return false; }
+
+  protected void setIdField(CharacterI c, String id) {}
+
+  /** This is the real workhorse here
+   just goes through and makes all the terms and shoves them over to 
+   main/default destination field */
+  protected void makeTerms() { //loadUpMainField() {
+
+    //log().debug("AGA makeTerms");
 
     if (!hasDestinationCharField()) return; // err msg?
     // clear out old obo classes??? query be namespace and OBOSess.removeObject?
@@ -71,6 +84,8 @@ public abstract class AbstractGroupAdapter implements GroupAdapterI {
       OBOClass o = makeOboClassFromChar(c);
       if (o == null) continue;
       os.addObject(o);
+      if (recordsId())
+        setIdField(c,o.getID());
     }
 
     // load obo classes into main field -> namespace query? 
@@ -124,16 +139,16 @@ public abstract class AbstractGroupAdapter implements GroupAdapterI {
     return CharacterListManager.getCharListMan(group).getCharacterList().getList();
   }
 
-  /** just triggers loadUpMainField */
+  /** just triggers makeTerms */
   private class GroupCharChangeListener implements CharChangeListener {
     public void charChanged(CharChangeEvent e) {
-      loadUpMainField();
+      makeTerms();
     }
   }
   
   private class GroupCharListChangeListener implements CharListChangeListener {
     public void newCharList(CharListChangeEvent e) {
-      loadUpMainField();
+      makeTerms();
     }
   }
   

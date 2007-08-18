@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharFieldException;
+import phenote.datamodel.TermNotFoundException;
 import phenote.dataadapter.AbstractGroupAdapter;
 
 /* Makes worm Reference list based off of Publication, Person, NBP, and
@@ -16,6 +17,16 @@ public class WormReferenceGroupAdapter extends AbstractGroupAdapter {
   public WormReferenceGroupAdapter(String group) {
     super(group);
   }
+
+  protected boolean recordsId() { return true; }
+
+  /** this should be read only and probably hidden */
+  protected void setIdField(CharacterI c, String id) {
+    try { c.setValue("RefID",id); }
+    catch (CharFieldException e) {log().error("cant set id field"+e.getMessage());}
+    catch (TermNotFoundException x) { log().error(x); }
+  }
+
   protected String makeNameFromChar(CharacterI c) {
     try {
         String pubID = null;
