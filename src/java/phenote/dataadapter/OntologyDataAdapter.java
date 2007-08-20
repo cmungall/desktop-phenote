@@ -139,7 +139,8 @@ public class OntologyDataAdapter {
       for (OntologyConfig oc : fieldConfig.getOntologyConfigList()) {
         try {
           String file = findOboUrlString(oc); // throws oex if not found
-          files.add(file);
+          if (!files.contains(file)) // dont load file twice
+            files.add(file);
         }
         catch (OntologyException e) {
           String m = e.getMessage()+" Please check config & obo files";
