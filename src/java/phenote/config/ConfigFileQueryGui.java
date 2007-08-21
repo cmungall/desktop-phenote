@@ -2,47 +2,37 @@ package phenote.config;
 
 // this should be moved to gui - actually i think ConfigGui may more or less replace it?
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
-import java.util.Enumeration;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
-import java.io.IOException;
-import java.net.URL;
-import java.net.JarURLConnection;
-
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Point;
-//import java.awt.BorderLayout;
-//import java.awt.GridLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Enumeration;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
+
 import javax.swing.AbstractAction;
 import javax.swing.BoxLayout;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JButton;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-
-import javax.jnlp.*;
+import org.apache.log4j.Logger;
 
 import phenote.gui.GridBagUtil;
 import phenote.util.FileUtil;
@@ -196,37 +186,22 @@ public class ConfigFileQueryGui {
    List? soreted alphabeitcally?
   these strings are the actual filenames as in name-with-dash.cfg */
   public static SortedSet<String> getConfigNames() {
-
-    //Set<String> names = new LinkedHashSet<String>();
     SortedSet<String> names = new TreeSet<String>();
-
+    
     // JAR
-    // should only go into jar if actually running from jar hmmmmm
-    // will this work with webstart??? probably not
-    File jf = new File("jars/phenote.jar");
-    try {
-      BasicService bs = (BasicService)ServiceManager.lookup("javax.jnlp.BasicService");      
-      URL codeBaseUrl = bs.getCodeBase(); // this is the url to phenote webstart
-      String s = "jar:"+codeBaseUrl.toString()+"/jars/phenote.jar!/";
-      URL jarUrl = new URL(s);
-      JarURLConnection juc = (JarURLConnection)jarUrl.openConnection();
-      JarFile jar = juc.getJarFile();//new JarFile(jf);
+    JarFile jar = ConfigFileQueryGui.getJarFile();
+    if (jar != null) {
       Enumeration<JarEntry> en = jar.entries();
       while (en.hasMoreElements()) {
         String entry = en.nextElement().getName();
-        //System.out.println("entry: "+entry);
         if (entry.endsWith(".cfg")) {
-          // test if jar if running off of jar basically
-          //System.out.println("cfg "+entry +" res? "+ConfigFileQueryGui.class.getResource(entry)+ConfigFileQueryGui.class.getResource("/"+entry));
           if (ConfigFileQueryGui.class.getResource("/"+entry) != null) {
-            //System.out.println("cfg that is in webstart phenote.jar "+entry);
             names.add(entry);
           }
         }
       }
-    } catch (IOException e) {}//System.out.println("io cant open phen jar "+e);}
-    catch (Exception e) {} //System.out.println("cant open phen jar "+e); } // ???
-
+    }
+    
     // do app/distrib conf dir
     File appConf = new File("conf/");
     addCfgFromDir(appConf,names);
@@ -235,9 +210,17 @@ public class ConfigFileQueryGui {
     File dotPhenConf = FileUtil.getDotPhenoteConfDir();
     addCfgFromDir(dotPhenConf,names);
 
-    //Collections.sort(names);
-
     return names;
+  }
+  
+  private static JarFile getJarFile() {
+    try {
+      URL jarUrl = ConfigFileQueryGui.class.getProtectionDomain().getCodeSource().getLocation();
+      return new JarFile(jarUrl.getPath());
+    } catch (IOException e) {
+      log().debug("No Phenote jar file found");
+    }
+    return null;
   }
 
   private static void addCfgFromDir(File confDir,SortedSet<String> names) {
@@ -263,6 +246,9 @@ public class ConfigFileQueryGui {
     c.setLocation(p);
   }
 
+  private static Logger log() {
+    return Logger.getLogger(ConfigFileQueryGui.class);
+  }
 }
 
 
