@@ -34,6 +34,7 @@ public class MenuManager {
     if (this.viewMenu == null) {
       this.viewMenu = new JMenu("View");
       this.menuBar.add(this.viewMenu, 2);
+      this.menuBar.getParent().validate();
     }
     this.viewMenu.add(menuItem);
   }
