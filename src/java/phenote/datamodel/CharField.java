@@ -180,7 +180,7 @@ public class CharField {
   /** if free text returns string charfieldValue, for ontology field valueString is
       id and searches ontologies for id, throws ontologyException if not found 
       this needs to deal with post comp!!!! */
-  public CharFieldValue makeValue(Character c, String valueString)
+  public CharFieldValue makeValue(CharacterI c, String valueString)
     throws TermNotFoundException {
 
     // FREE TEXT FIELD
