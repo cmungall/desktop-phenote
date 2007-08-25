@@ -15,6 +15,7 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.SortedSet;
@@ -216,9 +217,12 @@ public class ConfigFileQueryGui {
   private static JarFile getJarFile() {
     try {
       URL jarUrl = ConfigFileQueryGui.class.getProtectionDomain().getCodeSource().getLocation();
-      return new JarFile(jarUrl.getPath());
+      log().debug("Jar URL is " + jarUrl);
+      return new JarFile(new File(jarUrl.toURI()));
     } catch (IOException e) {
       log().debug("No Phenote jar file found");
+    } catch (URISyntaxException e) {
+      log().error("Could not convert jar URL to URI", e);
     }
     return null;
   }
