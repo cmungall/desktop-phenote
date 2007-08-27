@@ -1,0 +1,1 @@
+start javaw -Dphenote.version="@@phenote.version@@" -Dphenote.build="@@phenote.build@@" -jar lib\phenote.jar

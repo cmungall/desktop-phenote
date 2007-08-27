@@ -8,7 +8,7 @@
 <!-- to work, $PHENOTE_WEB_CLASSFILES for classfile deployment -->
 
 <project name="phenote" default="compile" basedir=".">
-
+	
     <!-- for antcontrib for if - hafta set CLASSPATH to /usr/share/ant/lib/ant-contrib-1.0b3.jar-->
     <!-- taskdef resource="net/sf/antcontrib/antcontrib.properties"/ -->
     <description>phenote ant build</description>
@@ -31,6 +31,13 @@
     <property name="obo" value="obo-files"/>
     <property name="conf" value="conf"/>
     <property name="images" value="images"/>
+	
+	<property name="main-class" value="phenote.main.Phenote"/>
+	<tstamp>
+		<format property="NOW" pattern="yyyy-MM-dd_HH:mm:ss"/>
+	</tstamp>
+	<property name="phenote.version" value="1.4-beta3"/>
+	<property name="phenote.build" value="${NOW}"/>
 
     <!-- override this from command line with  -DCONF-FILE=initial-zfin.cfg -->
     <property name="CONF_FILE" value="initial-flybase.cfg"/>
@@ -77,7 +84,10 @@ them into  the classfiles directory. excludes="test/**"  -->
 
     <!-- runs off classfiles not jar, todo: run-jar -->
     <target name="run" depends="compile">
-        <java classname="phenote.main.Phenote" fork="yes" jvmargs="-Xmx500M">
+        <java classname="phenote.main.Phenote" fork="yes">
+        	<jvmarg value="-Xmx500M"/>
+        	<jvmarg value="-Dphenote.version=${phenote.version}"/>
+        	<jvmarg value="-Dphenote.build=${phenote.build}"/>
             <!-- arg value="-c configfilehereventually"/ -->
             <classpath>
                 <pathelement path="${classfiles}"/>
@@ -513,6 +523,47 @@ where xsd files are (conf) -->
             <classpath refid="jars-and-oboedit-classes"/>
         </javac>
     </target>
+	
+		
+	<target name="dist-init">
+		<mkdir dir="dist"/>
+	</target>
+	
+	<taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler" classpath="build-lib/jarbundler-1.9.jar"/>
+	<!-- Create a competely self-contained double-clickable app bundle for Mac OS X in "dist/Phenote.app" -->
+	<target name="dist-mac" depends="jar, dist-init">
+		<jarbundler dir="dist" name="Phenote" mainclass="phenote.main.Phenote" jvmversion="1.5*" vmoptions="-Xmx1024M -Dphenote.version=${phenote.version} -Dphenote.build=${phenote.build}" screenmenu="true" version="${phenote.version}" build="${phenote.build}">
+			<jarfileset dir="${lib}"/>
+		</jarbundler>
+	</target>
+	
+	<!-- Create a double-clickable batch file for Windows in "dist/Phenote".  Jars are placed in a nested lib folder. -->
+	<target name="dist-win" depends="jar, dist-init">
+		<mkdir dir="dist/Phenote/lib"/>
+		<copy todir="dist/Phenote" file="Phenote.bat"/>
+		<replace file="dist/Phenote/Phenote.bat" token="@@phenote.version@@" value="${phenote.version}"/>
+		<replace file="dist/Phenote/Phenote.bat" token="@@phenote.build@@" value="${phenote.build}"/>
+		<copy todir="dist/Phenote/lib">
+			<fileset dir="${lib}">
+			</fileset>
+		</copy>
+		<path id="libclasses">
+			<fileset dir="dist/Phenote/lib">
+				<exclude name="phenote.jar"/>
+			</fileset>
+		</path>
+		<manifestclasspath property="jar.classpath" jarfile="dist/Phenote/lib/phenote.jar">
+			<classpath refid="libclasses"/>
+		</manifestclasspath>
+		<jar destfile="dist/Phenote/lib/phenote.jar" update="yes">
+		    <manifest>
+		    	<attribute name="Main-Class" value="${main-class}"/>
+		       	<attribute name="Class-Path" value="${jar.classpath}"/>
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name="dist" depends="dist-mac, dist-win"/>
 
 
 </project>
