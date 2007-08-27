@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jnlp
 spec="1.0+"
-codebase="http://toy.lbl.gov:9010/phenote/1.1/"
+codebase="http://toy.lbl.gov:9010/phenote/@@phenote.version@@"
 href="phenote-go-function-process.jnlp">
 <information>
-	<title>Phenote-for-GO 1.1</title>
+	<title>Phenote-for-GO @@phenote.version@@</title>
 	<vendor>National Center for Biomedical Ontology</vendor>
 	<description>Phenote demo for </description>
  	 <!-- Declares that the application can run without

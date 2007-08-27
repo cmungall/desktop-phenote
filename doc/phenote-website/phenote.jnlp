@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jnlp
 spec="1.0+"
-codebase="http://phenote.org/phenote/1.4-beta2"
+codebase="http://phenote.org/phenote/@@phenote.version@@"
 href="phenote.jnlp">
 <information>
-	<title>Phenote 1.4-beta2</title>
+	<title>Phenote @@phenote.version@@</title>
 	<vendor>National Center for Biomedical Ontology</vendor>
 	<description>Phenote standalone app via webstart</description>
  	 <!-- Declares that the application can run without
