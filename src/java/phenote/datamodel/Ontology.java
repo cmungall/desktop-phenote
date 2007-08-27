@@ -280,8 +280,8 @@ public class Ontology {
     // for now just grab 1st namespace as namespacequery only takes 1 namespace
     //Namespace ns = spaces.toArray(new Namespace[0])[0];
     //Query<OBOClass, OBOClass> nsQuery =
-    NamespaceQuery nsQuery =
-      new NamespaceQuery(spaces.toArray(new Namespace[0]));
+    Namespace[] spacesArray = spaces.toArray(new Namespace[0]);
+    NamespaceQuery nsQuery = new NamespaceQuery(spacesArray);
     // create a new query engine on the session we just loaded
     QueryEngine engine = new QueryEngine(oboSession);
     
@@ -292,16 +292,20 @@ public class Ontology {
     // BUG - this includes obsoletes!
     nsQuery.setAllowObsoletes(false);
     sortedTerms = engine.query(nsQuery, false);
-    //System.out.println("Non-obsolete: got " + sortedTerms.size()+" namespace hits in " + (System.currentTimeMillis() - time)+ "ms # of namespaces: "+spaces.size()+" printing terms in order: ");
+    //log().debug(spacesArray[0]+" Non-obsolete: got " + sortedTerms.size()+" namespace hits in " + (System.currentTimeMillis() - time)+ "ms # of namespaces: "+spaces.size());
+//     int i=0;
+//     for (OBOClass oc : sortedTerms) {
+//       System.out.println(++i +" "+spacesArray[0]+" "+oc.getName()+" ns:"+oc.getNamespace());
+//     }
 
     nsQuery.setAllowObsoletes(true);
     nsQuery.setAllowNonObsoletes(false);
     sortedObsoleteTerms = engine.query(nsQuery, false);
-    //System.out.println("Obsolete: got " + sortedTerms.size()+" namespace hits in " + (System.currentTimeMillis() - time)+ "ms # of namespaces: "+spaces.size()+" printing terms in order: ");
+    //log().debug("Obsolete: got " + sortedTerms.size()+" namespace hits in " + (System.currentTimeMillis() - time)+ "ms # of namespaces: "+spaces.size());
 
     if (hasSlim()) {
       CategoryQuery catQuery = new CategoryQuery(slim);
-      time = System.currentTimeMillis();
+      //time = System.currentTimeMillis();
       sortedTerms = engine.query(sortedTerms,catQuery, false);
 //      System.out.println("Category query (" +slim+ ") got "+sortedTerms.size()+" in " + (System.currentTimeMillis() - time) + "ms");
       // obsoletes?

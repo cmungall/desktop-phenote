@@ -8,6 +8,7 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOSession;
 import org.geneontology.oboedit.postcomp.ParseException;
 import org.geneontology.oboedit.postcomp.PostcompUtil;
+import org.geneontology.oboedit.postcomp.TokenMgrError;
 
 import phenote.config.Config;
 
@@ -202,6 +203,12 @@ public class OntologyManager {
       String m = "\nInvalid post comp expression "+id+" "+e.getMessage();
       log().error(m);
       throw new TermNotFoundException(m);
+    }
+    // post comp parser can throw a plain old exception on parse failure
+    // this should be an exception not an error!!!
+    catch (TokenMgrError x) {
+      log().error("parse of post comp term failed "+x);
+      throw new TermNotFoundException(x);
     }
   }
   
