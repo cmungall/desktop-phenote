@@ -10,7 +10,9 @@ import java.util.List;
 
 import javax.accessibility.Accessible;
 import javax.swing.ComboBoxModel;
+import javax.swing.InputMap;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -123,7 +125,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     if (obj == null) throw new OboException();
     return obj;
   }
-
+  
 
   /** BasicComboBoxEditor uses JTextField as its editing component but is
    * only available as a protected variable - odd 
@@ -133,11 +135,13 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   private class AutoTextFieldEditor extends BasicComboBoxEditor {
 
     private AutoTextFieldEditor() {
+      super();
       autoTextField = new AutoTextField(); // outer instance var for testing
       editor = autoTextField; // protected editor var from BCBE
       addDocumentListener(new AutoDocumentListener());
       // call returnKeyHit - for nulling out term
       addReturnKeyListener(autoTextField);
+      this.correctInputMapForEditorField(autoTextField);
     }
 
     // editor is protected JTextField - wacky
@@ -151,6 +155,20 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     private void addDocumentListener(DocumentListener dl) {
       getDocument().addDocumentListener(dl);
     }
+    
+    /**
+     * This method replaces the AutoTextFieldEditor's InputMap with the same one
+     * the current look and feel would use.  This was a problem for keyboard selection
+     * when using the Quaqua look and feel.
+     */
+    private void correctInputMapForEditorField(JTextField field) {
+      final Component systemComboBoxEditor = new JComboBox().getEditor().getEditorComponent();
+      if (systemComboBoxEditor instanceof JComponent) {
+        final InputMap map = ((JComponent)systemComboBoxEditor).getInputMap();
+        SwingUtilities.replaceUIInputMap(field, JComponent.WHEN_FOCUSED, map);
+      }
+    }
+    
   }
 
 

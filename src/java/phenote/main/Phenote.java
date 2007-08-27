@@ -1,7 +1,5 @@
 package phenote.main;
 
-// package phenote.main?
-
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
@@ -23,7 +21,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.metal.MetalLookAndFeel;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
@@ -76,21 +73,26 @@ public class Phenote {
     }
     
     System.out.println("This is Phenote version "+PhenoteVersion.versionString());
-    // default mac look & feel is "Mac OS X", but the JComboBox is buggy
     try {
-//       JTextField t = new JTextField();
-//       defaultKeymap = t.getKeymap();
-//       System.out.println("default keymap "+defaultKeymap);
-      //System.out.println("default shortcut "+java.awt.Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
-      UIManager.setLookAndFeel(new MetalLookAndFeel());
-      //System.out.println("metal shortcut "+java.awt.Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
-//       t = new JTextField();
-//       Keymap k = t.getKeymap();
-//       System.out.println("metal keymap "+k);
+      final String lookAndFeelClassName = UIManager.getSystemLookAndFeelClassName();
+      if (lookAndFeelClassName.equals("apple.laf.AquaLookAndFeel")) {
+        // We are running on Mac OS X - use the Quaqua look and feel
+        System.setProperty("apple.laf.useScreenMenuBar", "true");
+        UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
+      } else {
+        // We are on some other platform, use the system look and feel
+        UIManager.setLookAndFeel(lookAndFeelClassName);
+      }
+    } catch (ClassNotFoundException e) {
+      LOG.error("Look and feel class not found", e);
+    } catch (InstantiationException e) {
+      LOG.error("Could not instantiate look and feel", e);
+    } catch (IllegalAccessException e) {
+      LOG.error("Error setting look and feel", e);
+    } catch (UnsupportedLookAndFeelException e) {
+      LOG.error("Look and feel not supported", e);
     }
-    catch (UnsupportedLookAndFeelException e) {
-      System.out.println("Failed to set to Java/Metal look & feel");
-    }
+
     phenote = getPhenote();
     boolean enableSplashScreen = !phenote.commandLine.writeIsSpecified();
     //System.out.println("splash "+enableSplashScreen);

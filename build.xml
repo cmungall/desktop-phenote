@@ -88,6 +88,7 @@ them into  the classfiles directory. excludes="test/**"  -->
         	<jvmarg value="-Xmx500M"/>
         	<jvmarg value="-Dphenote.version=${phenote.version}"/>
         	<jvmarg value="-Dphenote.build=${phenote.build}"/>
+        	<jvmarg value="-Djava.library.path=${lib}"/>
             <!-- arg value="-c configfilehereventually"/ -->
             <classpath>
                 <pathelement path="${classfiles}"/>
