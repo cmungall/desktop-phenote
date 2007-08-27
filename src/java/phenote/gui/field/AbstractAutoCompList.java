@@ -218,18 +218,30 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   private void doCompletion(boolean showPopup) {
     if (!doCompletion) // flag set if text filled in externally (from table sel)
       return;
+    
     // too soon - text field doesnt have text yet.... hmmmm....
     String input = getText();
     // returns a list of CompletionTerms (checks if relations)
     // if input is empty will return whole list (if configged)
+    //log().debug("got new completion request for input "+input+" time "+time());
     List<CompletionTerm> l = getSearchItems(input);
-    changingCompletionList = true;
+    //log().debug("got search items for input "+input+" milsec: "+time());
+   changingCompletionList = true;
     // could just do comboBoxModel.setList(l); ???
     compComboBoxModel = new CompComboBoxModel(l);
     jComboBox.setModel(compComboBoxModel);
     changingCompletionList = false;
     if (showPopup)
       jComboBox.showPopup();//only show popup on key events actually only do comp w key
+    //log().debug("put comp list in gui for input "+input+" milsec: "+time());
+  }
+
+  private long time=0;
+  private long time() {
+    long newTime =  System.currentTimeMillis();
+    long newTimeDiff = newTime-time;
+    time = newTime;
+    return newTimeDiff;
   }
 
 

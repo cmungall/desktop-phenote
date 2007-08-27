@@ -28,6 +28,8 @@ public class CompListSearcher {
   //private boolean searchAll=false;
   private List<Ontology> ontologyList = new ArrayList<Ontology>(3);
   private SearchParamsI searchParams = SearchParams.inst(); // singleton
+  private String previousInput = "";
+  private List<CompletionTerm> previousCompList = new ArrayList<CompletionTerm>();
 
   /** Ontology - the initial ontology to search, setOntology changes this,
       initially only searches the one ontology (not ALL) - used by servlet which
@@ -80,21 +82,33 @@ public class CompListSearcher {
       return searchTerms; // empty
     }
     
-    // gets term set for currently selected ontology(s)
-    //Set ontologyTermList = getCurrentOntologyTermSet();
-    // THIS IS WRONG! or is it?
-    for (Ontology ontology : ontologyList) {
-      Collection<OBOClass> ontologyTermList = ontology.getSortedTerms(); // non obsolete
-      List<CompletionTerm> l = getSearchTermList(input,ontologyTermList);
-      searchTerms.addAll(l);
-      
-      // if obsoletes set then add them in addition to regulars
-      if (searchParams.searchObsoletes()) {
-        ontologyTermList = ontology.getSortedObsoleteTerms();
-        List obsoletes = getSearchTermList(input,ontologyTermList);
-        searchTerms.addAll(obsoletes);
+    // optimization - if user has only typed one more letter (common case)
+    // use previous search list
+    if (input.startsWith(previousInput) 
+        && input.length() == previousInput.length() + 1) {
+      searchTerms = searchPreviousList(input,previousCompList);
+    }
+
+    else {
+      // gets term set for currently selected ontology(s)
+      //Set ontologyTermList = getCurrentOntologyTermSet();
+      // THIS IS WRONG! or is it?
+      for (Ontology ontology : ontologyList) {
+        Collection<OBOClass> ontologyTermList = ontology.getSortedTerms(); // non obsolete
+        List<CompletionTerm> l = getSearchTermList(input,ontologyTermList);
+        searchTerms.addAll(l);
+        
+        // if obsoletes set then add them in addition to regulars
+        if (searchParams.searchObsoletes()) {
+          ontologyTermList = ontology.getSortedObsoleteTerms();
+          List obsoletes = getSearchTermList(input,ontologyTermList);
+          searchTerms.addAll(obsoletes);
+        }
       }
     }
+
+    previousInput = input;
+    previousCompList = searchTerms;
     return searchTerms;
   }
 
@@ -121,6 +135,18 @@ public class CompListSearcher {
     }
     return searchTermList.getList();
   }
+
+  private List<CompletionTerm> searchPreviousList(String input,
+                                                  List<CompletionTerm> prevList) {
+    // alternatively could just remove terms from prev list???
+    SearchTermList newList = new SearchTermList();
+    for (CompletionTerm ct : prevList) {
+      if (ct.matches(input,searchParams))
+        newList.addTerm(ct);
+    }
+    return newList.getList();
+  }
+
 
   /** User input is already lower cased, this potentially adds oboClass to
    * searchTerms if input & compareTerm match. Puts it first if exact. 
