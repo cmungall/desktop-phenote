@@ -133,11 +133,8 @@ public class FieldPanel extends JPanel {
         fieldPanel = new JPanel(new GridBagLayout());
         jTabbedPane.addTab("Tab "+tab++,fieldPanel);
       }
-      CharFieldGui gui = CharFieldGui.makeCharFieldGui(charField);
-      if (charField.isTerm()) {
-        int minCompChars = Config.inst().getMinCompChars(fieldNum);
-        gui.setMinCompChars(minCompChars);
-      }
+      int minCompChars = Config.inst().getMinCompChars(fieldNum);
+      CharFieldGui gui = CharFieldGui.makeCharFieldGui(charField,minCompChars);
       ++fieldNum;
       gui.setSelectionManager(this.selectionManager);
       gui.setEditManager(this.editManager);

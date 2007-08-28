@@ -48,7 +48,12 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   private int minCompChars = 0;
 
   protected AbstractAutoCompList(CharField cf) {
+    this(cf,0); // minCompChars = 0
+  }
+
+  protected AbstractAutoCompList(CharField cf,int minCompChars) {
     super(cf);
+    setMinCompChars(minCompChars);
     init();
   }
 
@@ -60,7 +65,10 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     jComboBox.addActionListener(new ComboBoxActionListener());
     compListSearcher = new CompListSearcher(getCharField().getOntologyList());
     // init with all terms if config.showAllOnEmptyInput...
-    doCompletion(false); // dont show popup - we dont have a gui yet, just populating
+    if (getMinCompChars() == 0) {
+      boolean showPopupWithComp = false; // dont show popup -
+      doCompletion(showPopupWithComp);  //we dont have a gui yet, just populating
+    }
   }
 
   public void setMinCompChars(int minChars) { minCompChars = minChars; }

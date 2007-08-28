@@ -34,8 +34,9 @@ class TermCompList extends AbstractAutoCompList {
   private JButton postCompButton;
 
 
-  protected TermCompList(CharField cf) {
-    super(cf);
+  protected TermCompList(CharField cf,int minCompChars) {
+    // AbstractAutoCompList constructor - does pre-populating if minCompChars==0
+    super(cf,minCompChars);
     init();
   }
 

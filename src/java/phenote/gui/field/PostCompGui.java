@@ -81,8 +81,7 @@ class PostCompGui {
     //compFieldPanel.setSearchParams(searchParams);
     
     // MAIN GENUS TERM
-    genusField = CharFieldGui.makePostCompTermList(charField,"Genus");
-    genusField.setMinCompChars(minCompChars);
+    genusField = CharFieldGui.makePostCompTermList(charField,"Genus",minCompChars);
     genusField.setSelectionManager(this.selectionManager);
     compFieldPanel.addCharFieldGuiToPanel(genusField);
 
@@ -130,7 +129,7 @@ class PostCompGui {
       relField.setEditManager(PostCompGui.this.editManager);
       relField.setSelectionManager(PostCompGui.this.selectionManager);
       compFieldPanel.addCharFieldGuiToPanel(relField);
-      diffField = CharFieldGui.makePostCompTermList(charField,"Differentia");
+      diffField = CharFieldGui.makePostCompTermList(charField,"Differentia",minCompChars);
       diffField.setEditManager(PostCompGui.this.editManager);
       diffField.setSelectionManager(PostCompGui.this.selectionManager);
       compFieldPanel.addCharFieldGuiToPanel(diffField);

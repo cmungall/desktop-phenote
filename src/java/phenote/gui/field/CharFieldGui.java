@@ -63,10 +63,10 @@ abstract class CharFieldGui {
   
 
   /** CharFieldGui for main window not post comp box - factory method */
-  static CharFieldGui makeCharFieldGui(CharField charField) {
+  static CharFieldGui makeCharFieldGui(CharField charField,int minCompChars) {
     if (charField.isTerm()) { //hasOntologies()) {
       //return new TermCompList(charField,sp,true); // enable listeners
-      TermCompList t = new TermCompList(charField);
+      TermCompList t = new TermCompList(charField,minCompChars);
       //t.setSearchParams(sp);
       t.allowPostCompButton(true);
       return t;
@@ -93,11 +93,12 @@ abstract class CharFieldGui {
 
   /** make term completion lists for post comp window (genus & diff), they dont listen
       to selection nor edit model - isolated */
-  static CharFieldGui makePostCompTermList(CharField cf,String label) {
+  static CharFieldGui makePostCompTermList(CharField cf,String label,
+                                           int minCompChars) {
     // false - no listeners(dont edit model), false - dont add comp button
     // eventually adding comp button come from config for recursive comp
     //boolean allowPostCompBut = false;
-    TermCompList t =  new TermCompList(cf);
+    TermCompList t =  new TermCompList(cf,minCompChars);
     //t.setSearchParams(sp);
     // t.isInSeparateWindow(true) or t.isolate(true)??
     t.enableEditModel(false);
