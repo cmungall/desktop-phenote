@@ -102,7 +102,11 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
   }
   
   public void markSelectedCharacters() {
-    this.tableModel.markCharactersInRows(this.characterTemplateTable.getSelectedRows());
+    this.tableModel.setCharactersInRowsAreMarked(this.characterTemplateTable.getSelectedRows(), true);
+  }
+  
+  public void unmarkSelectedCharacters() {
+    this.tableModel.setCharactersInRowsAreMarked(this.characterTemplateTable.getSelectedRows(), false);
   }
   
   public void undo() {

@@ -13,13 +13,14 @@
 	    </scrollpane>
 	    <panel id="buttonPanel">
 	    	<gridbagconstraints gridx="0" gridy="1" weightx="1" insets="10,10,10,10"/>
-	        <button id="addButton" text="New" action="addNewCharacter"/>
-	        <button id="duplicateButton" text="Duplicate" action="duplicateSelectedCharacters"/>
-	        <button id="deleteButton" text="Delete" action="deleteSelectedCharacters"/>
-	        <button id="undoButton" text="Undo" action="undo"/>
-	        <button id="markButton" text="Mark Selected" action="markSelectedCharacters"/>
-	        <button id="invertSelectionButton" text="Invert Marked" action="invertMarkedCharacters"/>
-	        <button id="generateButton" text="Generate Characters" action="generateCharacters"/>
+	        <button id="addButton" text="New" action="addNewCharacter" toolTipText="Add new row"/>
+	        <button id="duplicateButton" text="Duplicate" action="duplicateSelectedCharacters" toolTipText="Duplicate selected rows"/>
+	        <button id="deleteButton" text="Delete" action="deleteSelectedCharacters" toolTipText="Delete selected rows"/>
+	        <button id="undoButton" text="Undo" action="undo" toolTipText="Undo previous action"/>
+	        <button id="markButton" text="Mark" action="markSelectedCharacters" toolTipText="Mark selected rows for use"/>
+	        <button id="unmarkButton" text="Unmark" action="unmarkSelectedCharacters" toolTipText="Unmark selected rows for use"/>
+	        <button id="invertSelectionButton" text="Invert" action="invertMarkedCharacters" toolTipText="Invert rows marked for use"/>
+	        <button id="generateButton" text="Generate Characters" action="generateCharacters" toolTipText="Generate characters in the main window from marked templates"/>
 	    </panel>
 	</panel>
 </splitpane>
