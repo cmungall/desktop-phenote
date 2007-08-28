@@ -79,7 +79,7 @@ public class WormAdapter implements QueryableDataAdapterI {
       String pub = cRef.getValueString("Pub");
       String person = cRef.getValueString("Person");
       String nbp = cRef.getValueString("NBP");
-      String remark = cRef.getValueString("Reference Remark");
+      String remark = cRef.getValueString("Paper Remark");
 //      System.out.println("Pub "+pub+" Per "+person+" nbp "+nbp+" remark "+remark+" end");
     } catch (Exception e) {
       System.out.println("Could not commit Reference from character: " + e);
@@ -142,7 +142,7 @@ public class WormAdapter implements QueryableDataAdapterI {
 //         System.out.println( "Phenotype Text Remark Postgres : "+postgres_value+" end.");
         if (postgres_value.equals(app_phenotype)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_phenotype); }
 //         System.out.println( "Phenotype Text Remark : "+app_phenotype+" end.");
-        String app_remark = chr.getValueString("Reference Remark");
+        String app_remark = chr.getValueString("Paper Remark");
         postgres_table = "app_remark"; postgres_value = "No postgres value assigned";
         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
         if (postgres_value.equals(app_remark)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_remark); }
@@ -272,6 +272,11 @@ public class WormAdapter implements QueryableDataAdapterI {
         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
         if (postgres_value.equals(app_strain)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_strain); }
 //         System.out.println( "Strain : "+app_strain+" end.");
+        String app_objrem = chr.getValueString("ObjRem");
+        postgres_table = "app_obj_remark"; postgres_value = "No postgres value assigned";
+        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+        if (postgres_value.equals(app_objrem)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_objrem); }
+//         System.out.println( "Object Remark : "+app_obj_remark+" end.");
         if (allele != null) {
             int found_allele = 0;
             ResultSet rs = null;	// intialize postgres query result
@@ -442,6 +447,25 @@ public class WormAdapter implements QueryableDataAdapterI {
     return default_value; 
   }
 
+//        postgres_value = queryPostgresPapRemHist(s, postgres_table, postgres_value, pubID);
+  private String queryPostgresPapRemHist(Statement s, String postgres_table, String pubID) {
+    StringBuilder sb = new StringBuilder();
+    ResultSet rs = null;	// intialize postgres query result
+//    System.out.println("SELECT * FROM "+postgres_table+" WHERE app_wbpaper ~ '"+pubID+"' ORDER BY app_timestamp"); 
+    try { rs = s.executeQuery("SELECT * FROM "+postgres_table+" WHERE app_wbpaper ~ '"+pubID+"' ORDER BY app_timestamp"); }
+    catch (SQLException se) {
+      System.out.println("We got an exception while executing our "+postgres_table+" query: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
+    try { while (rs.next()) { sb.append(rs.getString(3)).append(" -- "); } }		// append the new term value
+    catch (SQLException se) {
+      System.out.println("We got an exception while getting a "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); } 
+    String pap_rem_hist = sb.toString();
+//    System.out.println("pap_rem_hist "+pap_rem_hist+" is not null"); 
+    if (pap_rem_hist == null) { pap_rem_hist = "postgres value is null"; }
+    if (pap_rem_hist == "") { pap_rem_hist = "postgres value is blank"; }
+    return pap_rem_hist; 
+  }
+
+
   private CharacterListI queryPostgresCharacterReferenceList(String group, CharacterListI charList, Statement s, String joinkey, int boxI, int colI) {
       // populate a phenote character based on postgres value by joinkey, then append to character list
     try {
@@ -458,6 +482,7 @@ public class WormAdapter implements QueryableDataAdapterI {
          title = queryPostgresTitle(s, "wpa_title", pubID); }
 //       c1.setValue("Pub",postgres_value);					// assign the queried value
       if (postgres_value == "No postgres value assigned") { } else { c1.setValue("Pub",postgres_value); }					// assign the queried value
+//System.out.println("pubID "+pubID+" box "+boxI+" is not null"); 
       postgres_table = "app_person"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
       String person_match = find("(WBPerson[0-9]*)", postgres_value);	// Find a WBPerson followed by any amount of digits
@@ -470,9 +495,12 @@ public class WormAdapter implements QueryableDataAdapterI {
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
       if (postgres_value != null) { nbp = postgres_value; }
       c1.setValue("NBP",postgres_value);					// assign the queried value
-      postgres_table = "app_remark"; postgres_value = "No postgres value assigned";
-      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
-      c1.setValue("Reference Remark",postgres_value);					// assign the queried value
+
+      if (pubID != null) {
+//        System.out.println("pubID "+pubID+" is not null"); 
+        postgres_table = "app_paper_remark"; 
+        postgres_value = queryPostgresPapRemHist(s, postgres_table, pubID);
+        c1.setValue("Paper Remark History",postgres_value); }					// assign the queried value
 
       String refID = WormReferenceGroupAdapter.makeNameFromPubPersonNBP(pubID, title, personID, name, nbp);
       refID = ":" + refID;
@@ -576,6 +604,9 @@ public class WormAdapter implements QueryableDataAdapterI {
       postgres_table = "app_strain"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
       c1.setValue("Strain",postgres_value);				// assign the queried value
+      postgres_table = "app_obj_remark"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+      c1.setValue("ObjRem",postgres_value);				// assign the queried value
 
 
       String pubID = null;
@@ -659,17 +690,19 @@ public class WormAdapter implements QueryableDataAdapterI {
           try { rs = s.executeQuery("SELECT app_box, app_column FROM app_term WHERE joinkey = '"+joinkey+"' ORDER BY app_column DESC"); }
           catch (SQLException se) {
             System.out.println("We got an exception while executing our app_term query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
-          try { if (rs.next()) { 
+          try { while (rs.next()) { 
             if (rs.getInt(1) > boxes) { boxes = rs.getInt(1); } 		// assign the highest number boxes for that allele to the number of boxes 
             if (rs.getInt(2) > columns) { columns = rs.getInt(2); } } }		// assign the highest number column for that allele to the number of columns
           catch (SQLException se) {
             System.out.println("We got an exception while getting a column/term joinkey "+joinkey+" result:this shouldn't happen: we've done something really bad."); 
             se.printStackTrace(); System.exit(1); }
+//System.out.println("there are "+boxes+" boxes for "+joinkey+" joinkey"); 
           for (int boxI=1; boxI<boxes+1; boxI++) {					// for each of those columns
             if (group.equals("default")) { 		// these values only go to the Main tab 
               for (int colI=1; colI<columns+1; colI++) {					// for each of those columns
                 charList = queryPostgresCharacterMainList(group, charList, s, joinkey, boxI, colI); } }
             else if (group.equals("referenceMaker")) { 	// these values only go to the referenceMaker tab
+//System.out.println("querying box "+boxI+" for "+joinkey+" joinkey"); 
               charList = queryPostgresCharacterReferenceList(group, charList, s, joinkey, boxI, 0); } }
           return charList; }	// if there is a match
 
