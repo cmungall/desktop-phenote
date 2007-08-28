@@ -101,6 +101,9 @@ field =
     ## whether to copy the field when character is copied/duplicated
     ## a database id usually shouldnt be copied, default true
     attribute copy-field { xsd:boolean },
+    ## the amount of letters/chars a user has to type before completion happens
+    ## this is to optimize slow completion w many ontologies 
+    attribute min-completion-chars { xsd:int },
     postcomp?,
     ontology*
   } 

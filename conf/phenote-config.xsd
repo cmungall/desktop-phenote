@@ -119,6 +119,7 @@
       <xs:attribute name="repos-subdir" use="required" type="xs:string"/>
       <xs:attribute name="groups" type="xs:IDREFS"/>
       <xs:attribute name="copy-field" use="required" type="xs:boolean"/>
+      <xs:attribute name="min-completion-chars" use="required" type="xs:int"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="ontology">

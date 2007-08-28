@@ -133,6 +133,14 @@ public class FieldConfig {
   	fieldBean.setColwidth(w);
   	return;
   }
+
+  /** Return the amount of letters/chars a user has to type before completion
+      kicks in - this helps with slow completion with many ontologies on a slow
+      computer */
+  public int getMinCompletionChars() {
+    // i think if unconfigged/uninitialized defaults to 0 which is what we want
+    return fieldBean.getMinCompletionChars();
+  }
   
   // boolean hasLabel(String label) { return label.equals(this.label); } 
   boolean hasDesc(String desc) { return desc.equals(this.desc); }

@@ -44,6 +44,8 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   private SearchParamsI searchParams = SearchParams.inst();
   private CompListSearcher compListSearcher;
   private boolean setGuiForMultiSelect = false;
+  // minimum chars to type for completion to happen - from config
+  private int minCompChars = 0;
 
   protected AbstractAutoCompList(CharField cf) {
     super(cf);
@@ -60,6 +62,8 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     // init with all terms if config.showAllOnEmptyInput...
     doCompletion(false); // dont show popup - we dont have a gui yet, just populating
   }
+
+  public void setMinCompChars(int minChars) { minCompChars = minChars; }
 
   protected Component getUserInputGui() { return jComboBox; }
 
@@ -239,6 +243,8 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     
     // too soon - text field doesnt have text yet.... hmmmm....
     String input = getText();
+    // If length of input is shorter than minimum required for completion do nothing
+    if (input.length() < minCompChars) return;
     // returns a list of CompletionTerms (checks if relations)
     // if input is empty will return whole list (if configged)
     //log().debug("got new completion request for input "+input+" time "+time());

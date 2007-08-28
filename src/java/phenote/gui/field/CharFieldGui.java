@@ -523,6 +523,9 @@ abstract class CharFieldGui {
   // for subclasses to override
   protected void returnKeyHit() {}
 
+  /** no op - override in term completion gui */
+  public void setMinCompChars(int minCompChars) {}
+
   private Logger log;
   private Logger log() {
     if (log == null) log = Logger.getLogger(getClass());

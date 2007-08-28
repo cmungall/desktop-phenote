@@ -727,6 +727,14 @@ public class Config {
   	getEnbldFieldCfg(index).setColwidth(width);
   }
 
+  public int getMinCompChars(int fieldIndex) {
+    if (!hasEnbldCharField(fieldIndex)) {
+      log().error("No char field for index "+fieldIndex);
+      return 0; // throw ex?
+    }
+    return getEnbldFieldCfg(fieldIndex).getMinCompletionChars();
+  }
+
 //   public CharFieldEnum getCharFieldEnum(int index) {
 //     return getFieldConfig(index).getCharFieldEnum();
 //   }
