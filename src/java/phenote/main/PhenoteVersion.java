@@ -9,13 +9,16 @@ import org.apache.log4j.Logger;
 
 public class PhenoteVersion {
 
+  private String hardwiredDefaultVersion = "1.4-beta3";
+
   public static String versionString() {
     final String version = System.getProperty("phenote.version");
     if (version != null) {
       return version;
     } else {
-      log().error("Version information not found");
-      return "";
+      log().info("Version information not found as property, going with hardwired default of "+hardwiredDefaultVersion);
+      
+      return hardwiredDefaultVersion;
     }
   }
   
