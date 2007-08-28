@@ -64,6 +64,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   }
 
   public void setMinCompChars(int minChars) { minCompChars = minChars; }
+  public int getMinCompChars() { return minCompChars; }
 
   protected Component getUserInputGui() { return jComboBox; }
 

@@ -57,52 +57,20 @@ class PostCompGui {
   private EditManager editManager;
   private SelectionManager selectionManager;
   private Frame owner;
+  /** # of chars to type to get completion in genus & diff - do we need for relation? */
+  private int minCompChars=0;
   
   
-  PostCompGui(CharField charField, EditManager eManager, SelectionManager selManager, Frame ownerFrame) {
+  PostCompGui(CharField charField, EditManager eManager, SelectionManager selManager,
+              Frame ownerFrame, int minCompChars) {
     this.charField = charField;
     this.editManager = eManager;
     this.selectionManager = selManager;
     this.owner = ownerFrame;
+    this.minCompChars = minCompChars;
     init();
   }
 
-
-  /** RelDiffGui INNER CLASS */
-  private class RelDiffGui {
-    private CharFieldGui relField;
-    // with embedded/recurse this will be a TermGui...
-    private CharFieldGui diffField;
-    private RelDiffGui() {
-      CharField relChar = new CharField(CharFieldEnum.RELATIONSHIP);
-      Ontology o = charField.getPostCompRelOntol();
-      relChar.addOntology(o);
-      relField = CharFieldGui.makeRelationList(relChar);//"Relationship"?
-      relField.setEditManager(PostCompGui.this.editManager);
-      relField.setSelectionManager(PostCompGui.this.selectionManager);
-      compFieldPanel.addCharFieldGuiToPanel(relField);
-      diffField = CharFieldGui.makePostCompTermList(charField,"Differentia");
-      diffField.setEditManager(PostCompGui.this.editManager);
-      diffField.setSelectionManager(PostCompGui.this.selectionManager);
-      compFieldPanel.addCharFieldGuiToPanel(diffField);
-    }
-    private void setRelDiffModel(RelDiffModel rd) {
-//       try { rd.relField.setRel(getRel(currentTerm)); } catch (Exception e){}
-      relField.setRel(rd.rel);
-      diffField.setOboClass(rd.diff);
-      diffField.setOntologyChooserFromTerm(rd.diff);
-    }
-  } // end of RelDiffGui INNER CLASS
-
-
-  private class RelDiffModel {
-    private OBOProperty rel;
-    private OBOClass diff;
-    private RelDiffModel(OBORestriction link) {
-      rel = link.getType();
-      diff = (OBOClass)link.getParent();
-    }
-  }
 
 
   private void init() {
@@ -114,6 +82,7 @@ class PostCompGui {
     
     // MAIN GENUS TERM
     genusField = CharFieldGui.makePostCompTermList(charField,"Genus");
+    genusField.setMinCompChars(minCompChars);
     genusField.setSelectionManager(this.selectionManager);
     compFieldPanel.addCharFieldGuiToPanel(genusField);
 
@@ -146,6 +115,44 @@ class PostCompGui {
     relDiffGuis.add(new RelDiffGui());
     dialog.pack();
   }
+
+  /** RelDiffGui INNER CLASS */
+  private class RelDiffGui {
+    private CharFieldGui relField;
+    // with embedded/recurse this will be a TermGui...
+    private CharFieldGui diffField;
+    private RelDiffGui() {
+      CharField relChar = new CharField(CharFieldEnum.RELATIONSHIP);
+      Ontology o = charField.getPostCompRelOntol();
+      relChar.addOntology(o);
+      relField = CharFieldGui.makeRelationList(relChar);//"Relationship"?
+      relField.setMinCompChars(minCompChars);
+      relField.setEditManager(PostCompGui.this.editManager);
+      relField.setSelectionManager(PostCompGui.this.selectionManager);
+      compFieldPanel.addCharFieldGuiToPanel(relField);
+      diffField = CharFieldGui.makePostCompTermList(charField,"Differentia");
+      diffField.setEditManager(PostCompGui.this.editManager);
+      diffField.setSelectionManager(PostCompGui.this.selectionManager);
+      compFieldPanel.addCharFieldGuiToPanel(diffField);
+    }
+    private void setRelDiffModel(RelDiffModel rd) {
+//       try { rd.relField.setRel(getRel(currentTerm)); } catch (Exception e){}
+      relField.setRel(rd.rel);
+      diffField.setOboClass(rd.diff);
+      diffField.setOntologyChooserFromTerm(rd.diff);
+    }
+  } // end of RelDiffGui INNER CLASS
+
+
+  private class RelDiffModel {
+    private OBOProperty rel;
+    private OBOClass diff;
+    private RelDiffModel(OBORestriction link) {
+      rel = link.getType();
+      diff = (OBOClass)link.getParent();
+    }
+  }
+
 
   private void setGuiFromSelectedModel() {
     OBOClass currentTerm = getModelTerm();

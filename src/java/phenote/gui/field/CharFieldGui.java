@@ -525,6 +525,7 @@ abstract class CharFieldGui {
 
   /** no op - override in term completion gui */
   public void setMinCompChars(int minCompChars) {}
+  public int getMinCompChars() { return 0; }
 
   private Logger log;
   private Logger log() {

@@ -346,7 +346,8 @@ class TermCompList extends AbstractAutoCompList {
   private class PostCompListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       final Frame frame = (Frame)(TermCompList.this.postCompButton.getTopLevelAncestor());
-      new PostCompGui(getCharField(), TermCompList.this.getEditManager(), TermCompList.this.getSelectionManager(), frame);
+      new PostCompGui(getCharField(), TermCompList.this.getEditManager(),
+                      TermCompList.this.getSelectionManager(),frame,getMinCompChars());
     }
   }
 
