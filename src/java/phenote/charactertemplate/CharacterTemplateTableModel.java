@@ -76,6 +76,12 @@ public class CharacterTemplateTableModel extends AbstractTableModel implements C
       this.setCharacterIsMarked(character, !this.isCharacterMarked(character));
     }
   }
+  
+  public void markCharactersInRows(int[] rows) {
+    for (int row : rows) {
+      this.setCharacterIsMarked(this.getCharacterAtRow(row), true);
+    }
+  }
 
   public int getColumnCount() {
     return Config.inst().getFieldsInGroup(this.representedGroup).size() + 1;

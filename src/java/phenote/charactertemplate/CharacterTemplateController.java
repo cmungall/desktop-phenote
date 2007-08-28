@@ -101,6 +101,10 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
     this.editManager.copyChars(this.selectionManager.getSelectedChars());
   }
   
+  public void markSelectedCharacters() {
+    this.tableModel.markCharactersInRows(this.characterTemplateTable.getSelectedRows());
+  }
+  
   public void undo() {
     this.editManager.undo();
   }
