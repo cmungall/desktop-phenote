@@ -38,7 +38,7 @@
 	<tstamp>
 		<format property="NOW" pattern="yyyy-MM-dd_HH:mm:ss"/>
 	</tstamp>
-	<property name="phenote.version" value="1.4-beta3"/>
+	<property name="phenote.version" value="setVersionWith-Dphenote.version=x.y-betaz"/>
 	<property name="phenote.build" value="${NOW}"/>
 
     <!-- override this from command line with  -DCONF-FILE=initial-zfin.cfg -->
@@ -435,7 +435,7 @@ where xsd files are (conf) -->
     </target>
 
     
-    <target name="webstart" depends="webstart-jars,webstart-webpages,copy-jnlps"/>
+    <target name="webstart" depends="echo-phenote-version,webstart-jars,webstart-webpages,copy-jnlps"/>
     <target name="webstart-jars"
             depends="build-all,jar,copy-webstart-jars,sign-webstart-jars"/> 
 
@@ -554,6 +554,10 @@ where xsd files are (conf) -->
 	
 	<target name="dist" depends="dist-mac, dist-win"/>
 
+
+  <target name="echo-phenote-version">
+    <echo message="${phenote.version}" />
+  </target>
 
 </project>
 
