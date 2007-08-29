@@ -184,7 +184,7 @@ public class CharField {
     throws TermNotFoundException {
 
     // FREE TEXT FIELD
-    if (!hasOntologies())
+    if (!hasOntologies()) // -> !isTerm() or isFreeText()
       return new CharFieldValue(valueString,c,this);
 
     // ONTOLOGY

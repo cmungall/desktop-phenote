@@ -16,53 +16,10 @@ package phenote.datamodel;
     or check this - i dont think there is */
 public enum CharFieldEnum {
 
-  PUB("Pub") {
-    public void setValue(CharacterI c, CharFieldValue v) {
-      c.setPub(v.getName());
-    }
-    public CharFieldValue getValue(CharacterI c) {
-      return new CharFieldValue(c.getPub(),c,this);
-    }
-  },
-  GENOTYPE("Genotype") { // genotype? default?
-    public void setValue(CharacterI c, CharFieldValue v) {
-      c.setGenotype(v.getName());
-    }
-    public CharFieldValue getValue(CharacterI c) {
-      return new CharFieldValue(c.getGenotype(),c,this);
-    }
-  },
-  ALLELE("Allele"),
-  GENETIC_CONTEXT("Genetic Context") {
-    public void setValue(CharacterI c, CharFieldValue v) {
-      c.setGeneticContext(v.getOboClass());
-    }
-    public CharFieldValue getValue(CharacterI c) {
-      return new CharFieldValue(c.getGeneticContext(),c,this);
-    }
-  },
-  ENTITY("Entity") {
-    public void setValue(CharacterI c, CharFieldValue v) {
-        c.setEntity(v.getOboClass());
-    }
-    public CharFieldValue getValue(CharacterI c) {
-      return new CharFieldValue(c.getEntity(),c,this);
-    }
-  },
-  QUALITY("Quality") {
-    public void setValue(CharacterI c, CharFieldValue v) {
-        c.setQuality(v.getOboClass());
-    }
-    public CharFieldValue getValue(CharacterI c) {
-      return new CharFieldValue(c.getQuality(),c,this);
-    }
-  },
+  PUB("Pub"), GENOTYPE("Genotype"), ALLELE("Allele"), GENETIC_CONTEXT("Genetic Context"),
+  ENTITY("Entity"), QUALITY("Quality"),
   /** Its questionable if relationship belongs here ??? */
-  RELATIONSHIP("Relationship") {
-    public void setValue(CharacterI c, CharFieldValue v) {}
-    public CharFieldValue getValue(CharacterI c) { return null; }
-  };
-  
+  RELATIONSHIP("Relationship");
   
   // CHAR FIELD ENUM vars & methods (make its own class!)
   private final String name;

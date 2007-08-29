@@ -134,9 +134,9 @@ public class Ontology {
 
   public String getName() { return name; }
 
-  /** returns null if dont have class for id, throws OntologyException if id is not
+  /** throws TermNotFoundException if id is not
       found 
-      this was only searching non-obsolete terms changing it to also include obsoletes*/
+      searches non-obsolete & obsoletes*/
   public OBOClass getTerm(String id) throws TermNotFoundException {
     // this aint right - if its a slim should only search slim
     //OBOClass oc = oboSession.getTerm(id);
@@ -149,6 +149,9 @@ public class Ontology {
         return obs;
     }
     //if (term == null)
+
+    // if (danglerMode()) return new Dangler();
+
     throw new TermNotFoundException(id +" id not found in ontology "+name);
     //return oc;
   }
