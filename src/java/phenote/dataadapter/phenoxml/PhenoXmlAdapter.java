@@ -28,6 +28,7 @@ import org.bioontologies.obd.schema.pheno.ProvenanceDocument.Provenance;
 //import org.bioontologies.obd.schema.pheno.*.*;
 
 import phenote.datamodel.CharacterI;
+import phenote.datamodel.CharacterIFactory;
 import phenote.datamodel.Character;
 import phenote.datamodel.CharacterListI;
 import phenote.datamodel.CharacterList;
@@ -103,7 +104,7 @@ public class PhenoXmlAdapter extends AbstractFileAdapter {
   
   private CharacterI newCharacterFromPhenotypeManifestation(PhenotypeManifestation pm) {
     OntologyManager ontologyManager = OntologyManager.inst();
-    CharacterI character = new Character();
+    CharacterI character = CharacterIFactory.makeChar();
     ManifestIn mi = pm.getManifestIn();
     if (mi != null) {
       String genotype = mi.getGenotype();

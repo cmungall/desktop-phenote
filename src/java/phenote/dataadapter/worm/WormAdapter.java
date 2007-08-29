@@ -16,6 +16,7 @@ import phenote.dataadapter.QueryableDataAdapterI;
 import phenote.dataadapter.CharacterListManager;
 
 import phenote.datamodel.CharacterI;
+import phenote.datamodel.CharacterIFactory;
 import phenote.datamodel.CharacterList;
 import phenote.datamodel.Character;
 import phenote.datamodel.CharFieldException;
@@ -469,7 +470,7 @@ public class WormAdapter implements QueryableDataAdapterI {
   private CharacterListI queryPostgresCharacterReferenceList(String group, CharacterListI charList, Statement s, String joinkey, int boxI, int colI) {
       // populate a phenote character based on postgres value by joinkey, then append to character list
     try {
-      Character c1 = new Character();						// create a new character for a phenote row
+      CharacterI c1 = CharacterIFactory.makeChar();						// create a new character for a phenote row
 
       String pubID = null; String title = null; String personID = null; String name = null; String nbp = null;
 
@@ -518,7 +519,7 @@ public class WormAdapter implements QueryableDataAdapterI {
   private CharacterListI queryPostgresCharacterMainList(String group, CharacterListI charList, Statement s, String joinkey, int boxI, int colI) {
       // populate a phenote character based on postgres value by joinkey, then append to character list
     try {
-      Character c1 = new Character();						// create a new character for a phenote row
+      CharacterI c1 = CharacterIFactory.makeChar();						// create a new character for a phenote row
 
       c1.setValue("Object Name",joinkey);					// assign the allele and the column
       String alleleColumn = joinkey+" - "+boxI+" - "+colI;

@@ -9,6 +9,7 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 
 import phenote.datamodel.Character;
 import phenote.datamodel.CharacterI;
+import phenote.datamodel.CharacterIFactory;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.OntologyManager;
@@ -101,7 +102,7 @@ public class PhenoSyntaxChar {
 
   /** Parse syntax line into character */
   void parseLine(String line) throws SyntaxParseException {
-    character = new Character();
+    character = CharacterIFactory.makeChar();
     Pattern p = Pattern.compile("\\S+=");//\\S+=");
     Matcher m = p.matcher(line);
     boolean found = m.find();

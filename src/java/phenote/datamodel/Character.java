@@ -14,6 +14,9 @@ public class Character implements CharacterI {
 
   private HashMap<CharField,CharFieldValue> charFieldToValue =
     new HashMap<CharField,CharFieldValue>();
+  
+  /** chould only be constrcuted from factory */
+  Character() {}
 
   // obo edit annotation that gets modified in setValues
   // private OBOEditAnntotation - get & set methods

@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 
-import phenote.datamodel.Character;
+import phenote.datamodel.CharacterI;
+import phenote.datamodel.CharacterIFactory;
 import phenote.datamodel.CharFieldException;
 import phenote.datamodel.TermNotFoundException;
 import phenote.edit.EditManager;
@@ -29,7 +30,7 @@ public class DataInputServlet extends HttpServlet {
     System.out.println("got get" +request);
     LOG.debug("servlet doGet " + new Date());
     
-    Character ch = new Character();
+    CharacterI ch = CharacterIFactory.makeChar();
     Enumeration e = request.getParameterNames();
     while (e.hasMoreElements()) {
       Object o = e.nextElement();

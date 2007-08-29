@@ -3,6 +3,7 @@ package phenote.dataadapter.fly;
 import org.geneontology.oboedit.datamodel.OBOClass;
 
 import phenote.datamodel.CharacterI;
+import phenote.datamodel.CharacterIFactory;
 import phenote.datamodel.Character;
 import phenote.datamodel.OntologyManager;
 import phenote.datamodel.TermNotFoundException;
@@ -20,7 +21,7 @@ public class FlyCharacter implements FlyCharacterI {
   }
 
   public FlyCharacter(String genotype, String proformaeEVString) {
-    character = new Character();
+    character = CharacterIFactory.makeChar();
     character.setGenotype(genotype);
     parseEVString(proformaeEVString);
   }

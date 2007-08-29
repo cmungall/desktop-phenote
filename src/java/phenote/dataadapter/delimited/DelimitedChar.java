@@ -9,6 +9,7 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 
 import phenote.datamodel.Character;
 import phenote.datamodel.CharacterI;
+import phenote.datamodel.CharacterIFactory;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.OntologyManager;
@@ -152,31 +153,31 @@ public class DelimitedChar {
   /** Parse syntax line into character */
   //try just splitting at tab.
   void parseLine(String line) throws SyntaxParseException {
-		character = new Character();
+    character = CharacterIFactory.makeChar();
 //		System.out.println("input line="+line);
-		Pattern p = Pattern.compile("\t");
-		//parse based on tab...will be delimiter in future
-		String[] items = p.split(line);
-		boolean found = (items.length>0); //m.find();
+    Pattern p = Pattern.compile("\t");
+    //parse based on tab...will be delimiter in future
+    String[] items = p.split(line);
+    boolean found = (items.length>0); //m.find();
 //		System.out.println("numcols="+items.length);
-		if (!found)
-		  throw new SyntaxParseException(line); // skips whitespace lines
-		int colCount = 0;
-		int fieldCount = 0;
-		while (found) {
-		  String value = items[colCount];
-		  addDelValToChar(fieldCount,value);
-		  CharField c = Config.inst().getEnbldCharField(fieldCount);
+    if (!found)
+      throw new SyntaxParseException(line); // skips whitespace lines
+    int colCount = 0;
+    int fieldCount = 0;
+    while (found) {
+      String value = items[colCount];
+      addDelValToChar(fieldCount,value);
+      CharField c = Config.inst().getEnbldCharField(fieldCount);
 //		  System.out.println("col="+colCount+";  fieldCount="+fieldCount+"; val="+value+"; charfieldname ="+c.getName());
-	      if (isOntology(c)) {
-	        colCount++; //skip over the Name, only keep ID
-	      }
-		  colCount++;
-		  fieldCount++;
-		  found = (colCount<items.length); // if parsing last tag found will be false - at end
-		}
-	  }
-
+      if (isOntology(c)) {
+        colCount++; //skip over the Name, only keep ID
+      }
+      colCount++;
+      fieldCount++;
+      found = (colCount<items.length); // if parsing last tag found will be false - at end
+    }
+  }
+  
   class SyntaxParseException extends Exception {
     private String syntaxLine;
     SyntaxParseException(String syntaxLine) {

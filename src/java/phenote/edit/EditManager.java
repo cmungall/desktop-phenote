@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.Character;
 import phenote.datamodel.CharacterI;
+import phenote.datamodel.CharacterIFactory;
 import phenote.datamodel.OntologyManager;
 
 /** The way editing works is gui makes update transaction (see CharFieldGui and
@@ -119,7 +120,7 @@ public class EditManager {
   public void addInitialCharacter() {
     //AddTransaction at = new AddTransaction(new Character());
     //at.editModel();
-    addCharacter(new Character(), false);
+    addCharacter(CharacterIFactory.makeChar(), false);
     // no addTransaction(at)!
     //return at;
   }
@@ -127,7 +128,7 @@ public class EditManager {
   /** same as addInitialChar except we record the adding in the transaction list
       as it can be undone */
   public void addNewCharacter() {
-    addCharacter(new Character(), true);
+    addCharacter(CharacterIFactory.makeChar(), true);
     //addTransaction(at);
   }
 
