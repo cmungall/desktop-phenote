@@ -201,6 +201,7 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
       this.characterTemplateTable.setModel(this.tableModel);
       this.characterTemplateTable.setSelectionModel(new SelectionManagerListSelectionModel(this.characterListManager, this.editManager, this.selectionManager));
       this.characterTemplateTable.getTableHeader().addMouseListener(new TableSortingAdapter(this.characterTemplateTable, this.tableModel));
+      this.characterTemplateTable.putClientProperty("Quaqua.Table.style", "striped");
       FieldPanel fieldPanel = new FieldPanel(true, false, this.representedGroup, this.selectionManager, this.editManager);
       this.charFieldPanelContainer.add(fieldPanel);
       TermInfo termInfo = new TermInfo(this.selectionManager);

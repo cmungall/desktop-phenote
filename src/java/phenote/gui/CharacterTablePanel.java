@@ -114,6 +114,7 @@ public class CharacterTablePanel extends JPanel {
     charJTable.getSelectionModel().addListSelectionListener(isl);
     charJTable.setRowSelectionInterval(0,0); // select 1st row
     charJTable.getTableHeader().addMouseListener(new TableSortingAdapter(this.charJTable, this.characterTableModel));
+    charJTable.putClientProperty("Quaqua.Table.style", "striped");
 
     JScrollPane tableScroll = new JScrollPane(charJTable);
     verticalScrollBar = tableScroll.getVerticalScrollBar();//needed for scroll to new
