@@ -504,14 +504,15 @@ public class CharacterTablePanel extends JPanel {
     public void mouseClicked(MouseEvent e) {
       if (e.getClickCount() != 1) return; // ?
       Point p = e.getPoint();
-      int col = charJTable.getTableHeader().columnAtPoint(p);
-      if (col == -1) return;
+      int viewColumnIndex = charJTable.getTableHeader().columnAtPoint(p);
+      int modelColumnIndex = charJTable.convertColumnIndexToModel(viewColumnIndex);
+      if (modelColumnIndex == -1) return;
       // shift for descending
       //  int shiftPressedInt = e.getModifiers()&InputEvent.SHIFT_MASK;
       //  boolean shiftPressed = (shiftPressedInt != 0);
       // boolean descending = shiftPressed;
       //if (model.defaultSortingIsDescending(column))descending = !descending;dont have
-      characterTableModel.setSortKey(col); //, descending);
+      characterTableModel.setSortKey(modelColumnIndex); //, descending);
       //table.requestFocus();
       
     }
