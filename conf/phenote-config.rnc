@@ -19,7 +19,8 @@ start =
     autocomplete-settings,
     field*,
     group*,
-    data-input-servlet
+    data-input-servlet,
+    character-mode
   }
 
 ## specify how the master config interacts with local/cached config
@@ -71,6 +72,16 @@ autocomplete-settings = element autocomplete-settings {
   attribute obsolete { xsd:boolean }
 }
 
+## what implementation of CharacterI to use, CHARACTER or OBO_ANNOTATION
+character-mode = element character-mode {
+  ## type of character to use
+  attribute mode { "CHARACTER" | "OBO_ANNOTATION" },
+  ## if using OBO_ANNOTATION, then specify the java mapping class to use
+  ## full java class name, eg phenote.datamodel.BasicAnnotationMappingDriver
+  attribute mapping { xsd:string }
+}
+
+## this is pase and should be phased out
 obo-repository = element obo-repository { attribute url-dir {xsd:string} }
 
 field = 

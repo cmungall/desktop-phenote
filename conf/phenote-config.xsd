@@ -15,6 +15,7 @@
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:field"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:group"/>
         <xs:element ref="x:data-input-servlet"/>
+        <xs:element ref="x:character-mode"/>
       </xs:sequence>
       <xs:attribute name="version" use="required" type="xs:string"/>
       <xs:attribute name="description" use="required" type="xs:string"/>
@@ -72,6 +73,11 @@
       <xs:attribute name="synonym" use="required" type="xs:boolean"/>
       <xs:attribute name="definition" use="required" type="xs:boolean"/>
       <xs:attribute name="obsolete" use="required" type="xs:boolean"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="character-mode">
+    <xs:complexType>
+      <xs:attribute name="mode" use="required" type="xs:string"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="obo-repository">
