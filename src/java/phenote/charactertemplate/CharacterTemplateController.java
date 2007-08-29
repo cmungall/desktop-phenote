@@ -27,6 +27,7 @@ import phenote.datamodel.CharField;
 import phenote.datamodel.CharacterI;
 import phenote.edit.EditManager;
 import phenote.gui.MenuManager;
+import phenote.gui.TableSortingAdapter;
 import phenote.gui.TermInfo;
 import phenote.gui.field.FieldPanel;
 import phenote.gui.selection.SelectionManager;
@@ -198,7 +199,8 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
     try {
       JComponent component = (JComponent)swix.render(FileUtil.findUrl("character_template.xml"));
       this.characterTemplateTable.setModel(this.tableModel);
-      this.characterTemplateTable.setSelectionModel(new SelectionManagerListSelectionModel(this.characterListManager, this.editManager, this.selectionManager));  
+      this.characterTemplateTable.setSelectionModel(new SelectionManagerListSelectionModel(this.characterListManager, this.editManager, this.selectionManager));
+      this.characterTemplateTable.getTableHeader().addMouseListener(new TableSortingAdapter(this.characterTemplateTable, this.tableModel));
       FieldPanel fieldPanel = new FieldPanel(true, false, this.representedGroup, this.selectionManager, this.editManager);
       this.charFieldPanelContainer.add(fieldPanel);
       TermInfo termInfo = new TermInfo(this.selectionManager);

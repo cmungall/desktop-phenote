@@ -113,7 +113,7 @@ public class CharacterTablePanel extends JPanel {
     CharacterSelectionListener isl = new CharacterSelectionListener();
     charJTable.getSelectionModel().addListSelectionListener(isl);
     charJTable.setRowSelectionInterval(0,0); // select 1st row
-    charJTable.getTableHeader().addMouseListener(new TableSorter());
+    charJTable.getTableHeader().addMouseListener(new TableSortingAdapter(this.charJTable, this.characterTableModel));
 
     JScrollPane tableScroll = new JScrollPane(charJTable);
     verticalScrollBar = tableScroll.getVerticalScrollBar();//needed for scroll to new
@@ -499,24 +499,6 @@ public class CharacterTablePanel extends JPanel {
   	}	
   }
   
-
-  private class TableSorter extends MouseAdapter {
-    public void mouseClicked(MouseEvent e) {
-      if (e.getClickCount() != 1) return; // ?
-      Point p = e.getPoint();
-      int viewColumnIndex = charJTable.getTableHeader().columnAtPoint(p);
-      int modelColumnIndex = charJTable.convertColumnIndexToModel(viewColumnIndex);
-      if (modelColumnIndex == -1) return;
-      // shift for descending
-      //  int shiftPressedInt = e.getModifiers()&InputEvent.SHIFT_MASK;
-      //  boolean shiftPressed = (shiftPressedInt != 0);
-      // boolean descending = shiftPressed;
-      //if (model.defaultSortingIsDescending(column))descending = !descending;dont have
-      characterTableModel.setSortKey(modelColumnIndex); //, descending);
-      //table.requestFocus();
-      
-    }
-  }
   private void setPoint (Point p) {
   	currentMousePoint= p;
   	return;

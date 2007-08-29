@@ -18,7 +18,7 @@ import phenote.edit.EditManager;
  *  table model for table of characters. currently holds list of characters - this should
  be moved to datamodel - CharacterList object? CharacterSession? Phenotype?
  */
-class CharacterTableModel extends AbstractTableModel {
+class CharacterTableModel extends AbstractTableModel implements SortableTableModel {
 
   //private int rowCount = 0;
   // todo - get this from data adapter/model - especially for loaded
@@ -185,11 +185,14 @@ class CharacterTableModel extends AbstractTableModel {
   /** hmmmm... do we sort data or some view of data, view is probably cleaner
       but for now just sort data itself? dont yet have separate view objects to
       sort */
-  void setSortKey(int col) {
-    CharField cf = cfg().getEnbldCharField(col);
-    characterList.sortBy(cf); // ???
+  public void sortOnColumn(int column) {
+    CharField cf = cfg().getEnbldCharField(column);
+    characterList.sortBy(cf);
     fireTableDataChanged();
   }
+
+
+
   private Logger log;
   private Logger log() {
     if (log == null) log = Logger.getLogger(getClass());

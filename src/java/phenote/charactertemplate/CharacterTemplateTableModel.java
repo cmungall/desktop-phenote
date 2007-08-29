@@ -15,14 +15,16 @@ import phenote.config.Config;
 import phenote.dataadapter.CharListChangeEvent;
 import phenote.dataadapter.CharListChangeListener;
 import phenote.dataadapter.CharacterListManager;
+import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharacterI;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
+import phenote.gui.SortableTableModel;
 
 @SuppressWarnings("serial")
-public class CharacterTemplateTableModel extends AbstractTableModel implements CharChangeListener, CharListChangeListener, TemplateChoiceListener {
+public class CharacterTemplateTableModel extends AbstractTableModel implements CharChangeListener, CharListChangeListener, TemplateChoiceListener, SortableTableModel {
   
   private String representedGroup;
   private CharacterListManager characterListManager;
@@ -147,6 +149,24 @@ public class CharacterTemplateTableModel extends AbstractTableModel implements C
 
   public void templateChoiceChanged(TemplateChooser source) {
     this.setMarkedCharacters(source.getChosenTemplates(Collections.unmodifiableList(this.getAllCharacters())));
+  }
+  
+  public void sortOnColumn(int column) {
+    final String fieldName = this.getColumnName(column);
+    // right now we cannot sort by the checkmarked column, unfortunately
+    if (fieldName.equals(CharacterTemplateTableModel.SELECTED_COLUMN_NAME)) return;
+    final CharacterI aCharacter;
+    if (this.getRowCount() < 1) {
+      return;
+    } else {
+      aCharacter = this.getCharacterAtRow(0);
+    }
+    try {
+      final CharField charField = aCharacter.getCharFieldForName(fieldName);
+      this.characterListManager.getCharacterList().sortBy(charField);
+    } catch (CharFieldException e) {
+      this.getLogger().error("Could not find CharField to sort by", e);
+    }
   }
   
   private CharacterI getCharacterAtRow(int row) {
