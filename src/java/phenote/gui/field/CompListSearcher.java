@@ -141,6 +141,7 @@ public class CompListSearcher {
     // alternatively could just remove terms from prev list???
     SearchTermList newList = new SearchTermList();
     for (CompletionTerm ct : prevList) {
+      ct.resetMatchState(); // reusing ct has stale match state from previous search
       if (ct.matches(input,searchParams))
         newList.addTerm(ct);
     }

@@ -37,6 +37,15 @@ public class CompletionTerm {
   boolean isExactMatch() { return exactMatch; }
   boolean isStartsWithMatch() { return startsWith; }
 
+  void resetMatchState() {
+    termMatch = false;
+    isSynMatch = false;
+    definitionMatch = false;
+    exactMatch = false;
+    startsWith = false;
+    contains = false;
+  }
+
   public String toString() {
     return getCompListDisplayString();
   }
