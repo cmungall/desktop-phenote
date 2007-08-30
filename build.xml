@@ -187,6 +187,25 @@ them into  the classfiles directory. excludes="test/**"  -->
         </java>
     </target>
 
+  <target name="runtests" depends="build-test" description="Unit tests">
+      <antcall target="runatest">
+          <param name="junit.test.class.name" value="phenote.UnitTests"/>
+      </antcall>
+  </target>
+
+  <target name="runatest" depends="build-test">
+      <java fork="yes" classname="junit.textui.TestRunner" taskname="junit" failonerror="true">
+          <arg value="${junit.test.class.name}"/>
+        <classpath>
+            <pathelement path="${classfiles}"/>
+            <fileset dir="${lib}">
+                <include name="*.jar"/>
+                <exclude name="phenote.jar"/>
+            </fileset>
+        </classpath>
+      </java>
+  </target>
+
     <!-- The clean target just erases the classes -->
     <target name="clean">
         <delete dir="${classfiles}"/>

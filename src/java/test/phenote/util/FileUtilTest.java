@@ -1,9 +1,10 @@
 package phenote.util;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-import junit.textui.TestRunner;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import org.junit.Test;
+import org.junit.After;
+import org.junit.Before;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,37 +12,32 @@ import java.io.IOException;
 /**
  * Unit test class for FileUtil.
  */
-public class FileUtilTest extends TestCase {
+public class FileUtilTest {
 
   private static final File testArchiveDir = new File("src" + FileUtil.FILE_SEPARATOR +
-                                                      "java" + FileUtil.FILE_SEPARATOR +
-                                                      "test", "test-archive-dir");
+          "java" + FileUtil.FILE_SEPARATOR +
+          "test", "test-archive-dir");
   private static final File testLoadDirectory = new File("src" + FileUtil.FILE_SEPARATOR +
-                                                      "java" + FileUtil.FILE_SEPARATOR +
-                                                      "test", "test-load-dir");
+          "java" + FileUtil.FILE_SEPARATOR +
+          "test", "test-load-dir");
   private File testLoadFile;
   private File testPurgeFile;
 
-  public static void main(String args[]) {
-    TestRunner.run(suite());
-  }
-
-  public static Test suite() {
-    return new TestSuite(FileUtilTest.class);
-  }
-
-  protected void setUp() {
+  @Before
+  public void setUp() {
     setTestDirectories();
   }
 
-  protected void tearDown() {
+  @After
+  public void tearDown() {
     cleanupTestFilesStructure();
   }
 
   /**
    * Create a single file and archive it. Make sure it moved into the archive directory.
    */
-  public void testArchiveFile() {
+  @Test
+  public void archiveFile() {
     File archivedFile = FileUtil.archiveFile(testLoadFile, testArchiveDir);
     File[] files = testArchiveDir.listFiles();
     assertEquals("Number of files", 1, files.length);
@@ -54,7 +50,8 @@ public class FileUtilTest extends TestCase {
    * Sleep for a second and then archive another file and then purge the first file while the
    * second file does not get purged.
    */
-  public void testPurgeArchiveFile() {
+  @Test
+  public void purgeArchiveFile() {
     File archivedFile = FileUtil.archiveFile(testLoadFile, testArchiveDir);
     File[] files = testArchiveDir.listFiles();
     assertEquals("Number of files", 1, files.length);
@@ -83,7 +80,8 @@ public class FileUtilTest extends TestCase {
 
   }
 
-  public void testPureFilename(){
+  @Test
+  public void pureFilename() {
     String fileNameOnly = "filenameAlpha.txt";
     String filename = FileUtil.FILE_SEPARATOR + "dire" + FileUtil.FILE_SEPARATOR + fileNameOnly;
     String pureFilename = FileUtil.getPureFileName(filename);
@@ -118,9 +116,10 @@ public class FileUtilTest extends TestCase {
     testPurgeFile.delete();
     testLoadDirectory.delete();
     File[] files = testArchiveDir.listFiles();
-    for (File file : files) {
-      file.delete();
-    }
+    if (files != null)
+      for (File file : files) {
+        file.delete();
+      }
     testArchiveDir.delete();
   }
 
