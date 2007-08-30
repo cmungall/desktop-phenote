@@ -20,6 +20,7 @@ import org.apache.xmlbeans.XmlException;
 import phenote.config.xml.PhenoteConfigurationDocument;
 import phenote.config.xml.AutoUpdateOntologiesDocument.AutoUpdateOntologies;
 import phenote.config.xml.AutocompleteSettingsDocument.AutocompleteSettings;
+import phenote.config.xml.CharacterModeDocument.CharacterMode;
 import phenote.config.xml.DataadapterDocument.Dataadapter;
 import phenote.config.xml.DataInputServletDocument.DataInputServlet;
 import phenote.config.xml.FieldDocument.Field;
@@ -283,11 +284,13 @@ public class Config {
     //private String mode = "";
     //private boolean updateWithNewVersion=false;
     private boolean masterExists = true;
+    /** url from overriding-master-url config */
     private URL masterUrl;
     private File localFile; //dotConfFile;
     private boolean cmdLineWipeout=false;
     private MasterToLocalConfig masterToLocalBean;
 
+    /** @param masterConfig config file in jar/source, not cache, not overriding url */
     private ConfigMode(String masterConfig,boolean merge,boolean cmdLineWipeout) 
       throws ConfigException {
       this.cmdLineWipeout = cmdLineWipeout;
@@ -307,6 +310,7 @@ public class Config {
       parseModeXml(masterConfig);
     }
 
+    /** @param masterConfig config file in jar/source, not cache, not overriding url */
     private void parseModeXml(String masterConfig) throws ConfigException {
       if (!masterExists) return;
       Config cfg = new Config();
@@ -320,7 +324,7 @@ public class Config {
       } catch (ConfigException x) {} // do nothing? err msg?
     }
 
-    /** if have master override - load it! */
+    /** if have master override (possibly) from http - load it! */
     private void loadMasterOverrideUrl() {
       if (!haveXmlBean()) return;
       String urlString = getXmlBean().getOverridingMasterUrl();
@@ -451,7 +455,7 @@ public class Config {
       do this? actually should do copy anymore should read in and write out xml
       adding version along the way */
   private void copyUrlToFile(URL configUrl,File myPhenote) throws ConfigException {
-
+    log().info("Copying "+configUrl+" to "+myPhenote);
     try {
       InputStream is = configUrl.openStream();
       FileOutputStream os = new FileOutputStream(myPhenote);
@@ -660,6 +664,20 @@ public class Config {
       u.setTimer(0); // default is not to wait???
     }
     return u;
+  }
+
+  /** returns enum from character mode xml bean itself - why not right? */
+  public CharacterMode.Mode.Enum getCharacterMode() {
+    return getCharModeBean().getMode();
+  }
+
+  private CharacterMode getCharModeBean() {
+    CharacterMode mode = phenoConfigBean.getCharacterMode();
+    if (mode == null) {
+      mode = phenoConfigBean.addNewCharacterMode();
+      mode.setMode(CharacterMode.Mode.CHARACTER); // character default
+    }
+    return mode;
   }
     
   public AutocompleteSettings getAutocompleteSettings() { 	
