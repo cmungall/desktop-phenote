@@ -236,7 +236,7 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
   private TemplateChooser createTemplateChooserInstance(String className) {
     final String errorMessage = "Failed creating TemplateChooser";
     try {
-      Class adapterClass = Class.forName(className);
+      Class<?> adapterClass = Class.forName(className);
       Object chooser = adapterClass.newInstance();
       return (TemplateChooser)chooser;
     } catch (ClassNotFoundException e) {
