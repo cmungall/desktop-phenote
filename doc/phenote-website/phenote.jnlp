@@ -42,6 +42,7 @@ href="phenote.jnlp">
 	<jar href="jars/swixml.jar" />
 	<jar href="jars/jdom.jar" />
 	<jar href="jars/quaqua.jar" />
+	<jar href="jars/jebl-0.4.jar" />
 </resources>
 <!-- no cmd line param will ask user for config at initialization -->
 <application-desc main-class="phenote.main.Phenote">
