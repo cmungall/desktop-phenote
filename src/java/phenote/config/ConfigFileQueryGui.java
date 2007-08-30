@@ -244,7 +244,7 @@ public class ConfigFileQueryGui {
         JarFile jar = juc.getJarFile();//new JarFile(jf);
         return jar;
         //} catch (IOException e) {}//System.out.println("io cant open phen jar "+e);}
-      } catch (Exception e) {log().debug("cant open phenote jar from webstart");} 
+      } catch (Exception e) {}//log().debug("cant open phenote jar from webstart");} 
       //System.out.println("cant open phen jar "+e); } // ???
     }
 
