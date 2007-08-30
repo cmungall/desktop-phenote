@@ -33,6 +33,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import javax.jnlp.BasicService;
+import java.net.JarURLConnection;
+import javax.jnlp.ServiceManager;
+
 import org.apache.log4j.Logger;
 
 import phenote.gui.GridBagUtil;
@@ -224,6 +228,27 @@ public class ConfigFileQueryGui {
     } catch (URISyntaxException e) {
       log().error("Could not convert jar URL to URI", e);
     }
+    // from webstart toURI sometimes throws this, not on my machine but birn & zf???
+    // so in this case revert to old way of getting this...
+    catch (IllegalArgumentException x) {
+      // JAR
+      // should only go into jar if actually running from jar hmmmmm
+      // will this work with webstart??? probably not
+      File jf = new File("jars/phenote.jar");
+      try {
+        BasicService bs = (BasicService)ServiceManager.lookup("javax.jnlp.BasicService");      
+        URL codeBaseUrl = bs.getCodeBase(); // this is the url to phenote webstart
+        String s = "jar:"+codeBaseUrl.toString()+"/jars/phenote.jar!/";
+        URL jarUrl = new URL(s);
+        JarURLConnection juc = (JarURLConnection)jarUrl.openConnection();
+        JarFile jar = juc.getJarFile();//new JarFile(jf);
+        return jar;
+        //} catch (IOException e) {}//System.out.println("io cant open phen jar "+e);}
+      } catch (Exception e) {log().debug("cant open phenote jar from webstart");} 
+      //System.out.println("cant open phen jar "+e); } // ???
+    }
+
+
     return null;
   }
 
