@@ -1,4 +1,4 @@
-package phenote.gui;
+package phenote.error;
 
 import java.util.EventObject;
 

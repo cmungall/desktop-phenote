@@ -26,6 +26,9 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 
 import phenote.datamodel.OntologyManager;
 import phenote.datamodel.TermNotFoundException;
+import phenote.error.ErrorEvent;
+import phenote.error.ErrorListener;
+import phenote.error.ErrorManager;
 import phenote.gui.selection.SelectionManager;
 import phenote.gui.selection.TermSelectionEvent;
 import phenote.gui.selection.TermSelectionListener;

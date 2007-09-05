@@ -52,6 +52,8 @@ import phenote.datamodel.OntologyManager;
 import phenote.config.Config;
 import phenote.config.FieldConfig;
 import phenote.config.OntologyConfig;
+import phenote.error.ErrorEvent;
+import phenote.error.ErrorManager;
 import phenote.gui.SynchOntologyDialog;
 
 /** is this really a data adapter? - OntologyLoader? this isnt a data adapter
@@ -427,7 +429,7 @@ public class OntologyDataAdapter {
     catch (DataAdapterException e) {
       String m = "got obo data adapter exception: "+e+" message "+e.getMessage()
         +" cause "+e.getCause(); // cause is crucial!
-      phenote.gui.ErrorManager.inst().error(new phenote.gui.ErrorEvent(this,m));
+      ErrorManager.inst().error(new ErrorEvent(this,m));
       LOG.error(m); // error manager should do this for free 
       throw new OntologyException(e);
     }

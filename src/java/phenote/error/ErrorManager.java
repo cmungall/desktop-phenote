@@ -1,4 +1,4 @@
-package phenote.gui;
+package phenote.error;
 
 // dataadapter?? datamodel??
 

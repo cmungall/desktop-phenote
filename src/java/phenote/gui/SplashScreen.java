@@ -7,6 +7,11 @@ http://www.devdaily.com/java/edu/SplashScreen/SplashScreen.java
 import javax.swing.*;
 import java.awt.*;
 
+import phenote.error.ErrorEvent;
+import phenote.error.ErrorListener;
+import phenote.error.ErrorManager;
+
+
 public class SplashScreen extends JWindow {
   BorderLayout borderLayout1 = new BorderLayout();
   JLabel imageLabel = new JLabel();
