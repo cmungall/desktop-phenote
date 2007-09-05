@@ -19,9 +19,11 @@ public class CharacterIFactory {
 
   public CharacterI makeCharacter() {
     // need to get mapping driver from configuration?
-    if (isOboAnnotationMode())
-      return new AnnotationCharacter(new BasicAnnotationMappingDriver());
-
+    if (isOboAnnotationMode()) {
+      // Returns Basic by default
+      AnnotationMappingDriver d = Config.inst().getAnnotMappingDriver();
+      return new AnnotationCharacter(d);
+    }
     // default... for now
     return new Character();
 

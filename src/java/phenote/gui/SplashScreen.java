@@ -43,6 +43,7 @@ public class SplashScreen extends JWindow {
     southPanel.add(progressBar, null);
     this.pack();
     setAlwaysOnTop(false); // doesnt work on linux??? stays on top! annoying!
+    ErrorManager.inst().addErrorListener(new SplashErrorListener());
   }
 
   public void setProgressMax(int maxProgress)
@@ -99,6 +100,15 @@ public class SplashScreen extends JWindow {
     }
     progressBar.setString(message);
 //    messagePanel.setText(message);
+  }
+
+
+  /** This is actually useless as message flits by too quickly and error messages
+      get lost */
+  private class SplashErrorListener implements ErrorListener {
+    public void handleError(ErrorEvent e) {
+      setProgress(e.getMsg(),0); // 0?? 100??
+    }
   }
 
 }

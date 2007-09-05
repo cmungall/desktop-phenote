@@ -65,7 +65,7 @@ public class TermInfo {
   public TermInfo(SelectionManager selManager) {
     this.selectionManager = selManager;
     this.selectionManager.addTermSelectionListener(new InfoTermSelectionListener());
-    ErrorManager.inst().addErrorListener(new InfoErrorListener());
+    //ErrorManager.inst().addErrorListener(new InfoErrorListener());
   }
 
   public JComponent getComponent() {
@@ -151,6 +151,9 @@ public class TermInfo {
     naviPanel.add(naviButtons, BorderLayout.EAST);
     naviPanel.add(termField, BorderLayout.CENTER);
     termInfoPanel.add(naviPanel, BorderLayout.NORTH);
+
+    ErrorManager.inst().addErrorListener(new InfoErrorListener());
+
     return termInfoPanel;
   }
   
@@ -332,6 +335,15 @@ public class TermInfo {
   }
 
   private class InfoErrorListener implements ErrorListener {
+
+    // retrieve any errors sitting in error manager and display?
+    // this is handy for errors that happened before term info came up
+    // is this funny? and if theres more than one then what?
+    private InfoErrorListener() {
+      for (ErrorEvent e : ErrorManager.inst().getErrors())
+        handleError(e);
+    }
+
     public void handleError(ErrorEvent e) {
       GuiUtil.doBlinker(textArea); // and/or termField?
       GuiUtil.doBlinker(termField);

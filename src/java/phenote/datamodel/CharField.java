@@ -18,6 +18,8 @@ import phenote.config.xml.FieldDocument.Field.Type;
 // funny i think
 public class CharField {
 
+  private static boolean DO_DANGLERS = true; // for testing
+
   private List<Ontology> ontologyList = new ArrayList<Ontology>(3);
   private CharFieldEnum charFieldEnum; // or subclass
   private String name; // display name
@@ -187,7 +189,7 @@ public class CharField {
     if (!hasOntologies()) // -> !isTerm() or isFreeText()
       return new CharFieldValue(valueString,c,this);
 
-    // ONTOLOGY
+    // TERM
     else {
 
       OBOClass oboClass=null;
@@ -214,7 +216,8 @@ public class CharField {
       if (oboClass != null)
         return new CharFieldValue(oboClass,c,this);
       else
-        throw new TermNotFoundException(valueString+" not found in ontologies for "+this);
+        throw new TermNotFoundException(valueString+" not found in ontologies for "
+                                        +this);
     }
   }
 

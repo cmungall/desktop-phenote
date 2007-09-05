@@ -269,10 +269,10 @@ public class OntologyDataAdapter {
     else {
       long reposDate = 0;
       try {
-        getOboDate(reposUrl); // throws ex if no date
+        reposDate = getOboDate(reposUrl); // throws ex if no date
       }
       catch (OntologyException oe) { // no reposDate
-        LOG.error(oe); 
+        LOG.error("got OntEx trying to parse date from repos "+oe); 
         // already have local copy, no date to synch with, dont bother downloading from
         // repos, there should probably be a config to override this (always download)
         if (localUrl != null)
@@ -288,6 +288,7 @@ public class OntologyDataAdapter {
       else
         useRepos = true;
       //if autoupdate without popup
+      LOG.debug("repos date "+reposDate+" local date "+loc);
       if ((autoUpdate && (timer==0)) && (reposDate > loc)) {
     	useRepos = true;
       } else if (reposDate > loc || useRepos) {
@@ -424,7 +425,10 @@ public class OntologyDataAdapter {
       return os;
     }
     catch (DataAdapterException e) {
-      LOG.error("got obo data adapter exception: "+e); // ??
+      String m = "got obo data adapter exception: "+e+" message "+e.getMessage()
+        +" cause "+e.getCause(); // cause is crucial!
+      phenote.gui.ErrorManager.inst().error(new phenote.gui.ErrorEvent(this,m));
+      LOG.error(m); // error manager should do this for free 
       throw new OntologyException(e);
     }
   }

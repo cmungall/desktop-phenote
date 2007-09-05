@@ -34,6 +34,8 @@ import phenote.config.xml.UvicGraphDocument.UvicGraph;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.GroupAdapterI;
 import phenote.dataadapter.QueryableDataAdapterI;
+import phenote.datamodel.AnnotationMappingDriver;
+import phenote.datamodel.BasicAnnotationMappingDriver;
 import phenote.datamodel.CharField;
 import phenote.datamodel.OntologyManager;
 import phenote.gui.SearchFilterType;
@@ -669,6 +671,33 @@ public class Config {
   /** returns enum from character mode xml bean itself - why not right? */
   public CharacterMode.Mode.Enum getCharacterMode() {
     return getCharModeBean().getMode();
+  }
+
+  /** mapping for character to obo annot, used for OBO_ANNOTATION character mode
+      meaningless in pure character mode, returns BasicAnnotationMappingDriver by
+      default */
+  public AnnotationMappingDriver getAnnotMappingDriver() {
+    String map = getCharModeBean().getMapping();
+    if (map == null) {
+      map = "phenote.datamodel.BasicAnnotationMappingDriver"; // default
+      getCharModeBean().setMapping(map);
+    }
+    try {
+      Object o = getInstanceForString(map);
+      if (!(o instanceof AnnotationMappingDriver))
+        throw new Exception(map+" not an instance of AnnotationMappingDriver");
+      return (AnnotationMappingDriver)o;
+    }
+    catch (Exception e) {
+      log().error("failed to get annot mapping driver "+e+" going with "
+                  +"BasicAnnotationMappingDriver");
+      return new BasicAnnotationMappingDriver(); // return null?
+    }
+  }
+
+  private Object getInstanceForString(String classString) throws Exception {
+    Class c = Class.forName(classString);
+    return c.newInstance();
   }
 
   private CharacterMode getCharModeBean() {
