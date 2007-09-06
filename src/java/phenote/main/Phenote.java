@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -22,7 +23,10 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.apache.log4j.LogManager;
 import org.apache.log4j.xml.DOMConfigurator;
 
 import phenote.charactertemplate.CharacterTemplateController;
@@ -46,7 +50,7 @@ import phenote.util.FileUtil;
 
 public class Phenote {
 
-  private static final Logger LOG = Logger.getLogger(Phenote.class);
+  private static Logger LOG = Logger.getLogger(Phenote.class);
   private static boolean standalone = false; // default for servlet
 
   private CharacterTablePanel characterTablePanel;
@@ -74,6 +78,27 @@ public class Phenote {
     catch (FileNotFoundException e) {
       System.out.println("Default log cfg file not found "+e);
       // should then configure up default log with sys out and .phenote file...
+      // stolen from apollo
+      // Attempt to detect whether the standard Log4J configuration has failed
+      // (e.g., because the conf file in the log4j.configuration variable was not
+      // found.)  If it has failed then fall back to the default configuration 
+      // implemented in BasicConfigurator.
+      //static {
+      // Check whether the root logger has an appender; there does not appear
+      // to be a more direct way to check whether Log4J has already been 
+      // initialized.  Note that the root logger's appender can always be
+      // set to a NullAppender, so this does not restrict the utility of
+      // the logging in any way.
+      Logger rl = LogManager.getRootLogger();
+      Enumeration appenders = rl.getAllAppenders();
+      
+      if (!appenders.hasMoreElements()) {
+        System.out.println("Log4J configuration failed, using default configuration settings");
+        BasicConfigurator.configure(); 
+        rl.setLevel(Level.INFO);
+      }
+      LOG = LogManager.getLogger(Phenote.class);
+      //}
     }
     
     // writes error events to log
