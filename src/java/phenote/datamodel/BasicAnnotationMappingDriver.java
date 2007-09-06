@@ -7,15 +7,15 @@ import java.util.List;
 import org.geneontology.oboedit.annotation.datamodel.Annotation;
 import org.geneontology.oboedit.annotation.datamodel.AnnotationOntology;
 import org.geneontology.oboedit.datamodel.Datatype;
-import org.geneontology.oboedit.datamodel.HistoryItem;
 import org.geneontology.oboedit.datamodel.IdentifiedObject;
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOProperty;
 import org.geneontology.oboedit.datamodel.Value;
-import org.geneontology.oboedit.datamodel.history.AddPropertyValueHistoryItem;
-import org.geneontology.oboedit.datamodel.history.DeletePropertyValueHistoryItem;
 import org.geneontology.oboedit.datamodel.impl.DatatypeValueImpl;
 import org.geneontology.oboedit.datamodel.impl.OBOPropertyImpl;
+import org.geneontology.oboedit.history.AddPropertyValueHistoryItem;
+import org.geneontology.oboedit.history.DeletePropertyValueHistoryItem;
+import org.geneontology.oboedit.history.HistoryItem;
 
 public class BasicAnnotationMappingDriver implements AnnotationMappingDriver {
 

@@ -5,7 +5,7 @@ import org.geneontology.oboedit.annotation.datamodel.impl.AnnotationImpl;
 import org.geneontology.oboedit.datamodel.LinkedObject;
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOProperty;
-import org.geneontology.oboedit.datamodel.TermUtil;
+import org.geneontology.oboedit.util.TermUtil;
 
 public class AnnotationCharacter extends AbstractCharacter {
 

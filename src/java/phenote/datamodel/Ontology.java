@@ -14,18 +14,21 @@ import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
+import org.geneontology.util.TaskDelegate;
 import org.geneontology.oboedit.datamodel.Namespace;
+import org.geneontology.oboedit.datamodel.impl.DanglingClassImpl;
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOProperty;
 import org.geneontology.oboedit.datamodel.OBOSession;
 import org.geneontology.oboedit.datamodel.TermCategory;
-import org.geneontology.oboedit.datamodel.TermUtil;
+import org.geneontology.oboedit.util.TermUtil;
 import org.geneontology.oboedit.dataadapter.OBOMetaData;
 import org.geneontology.oboedit.dataadapter.OBOMetaData.FileMetaData;
 import org.geneontology.oboedit.query.Query;
 import org.geneontology.oboedit.query.QueryEngine;
 import org.geneontology.oboedit.query.impl.NamespaceQuery;
 import org.geneontology.oboedit.query.impl.CategoryQuery;
+import org.geneontology.oboedit.util.QueryUtil;
 
 // i think this is ok since datamodel is based on config?? 
 // otherwise ODA should be inbetween
@@ -150,11 +153,21 @@ public class Ontology {
     }
     //if (term == null)
 
-    // if (danglerMode()) return new Dangler();
+//     if (danglerMode()) { no not here - multi ontol field needs to loop thru ontols
+//       // shoot error? or let handler do that?
+//       return new DanglingClassImpl(id); // name will have to be added by dataadap?
+//     }
 
     throw new TermNotFoundException(id +" id not found in ontology "+name);
     //return oc;
   }
+
+  // hmmmm - i think we may always want dangler mode that is putting danglers in
+  // for terms not found
+//   private boolean danglerMode() { 
+//     return true;
+//     //return false;
+//   }
 
   /** Returns true if ontology holds term/oboClass */
   boolean hasTerm(OBOClass term) {
@@ -295,6 +308,7 @@ public class Ontology {
     // BUG - this includes obsoletes!
     nsQuery.setAllowObsoletes(false);
     sortedTerms = engine.query(nsQuery, false);
+    //sortedTerms = QueryUtil.getResults(engine.query(nsQuery, false));
     //log().debug(spacesArray[0]+" Non-obsolete: got " + sortedTerms.size()+" namespace hits in " + (System.currentTimeMillis() - time)+ "ms # of namespaces: "+spaces.size());
 //     int i=0;
 //     for (OBOClass oc : sortedTerms) {
@@ -308,11 +322,11 @@ public class Ontology {
 
     if (hasSlim()) {
       CategoryQuery catQuery = new CategoryQuery(slim);
-      //time = System.currentTimeMillis();
-      sortedTerms = engine.query(sortedTerms,catQuery, false);
+      //time = System.currentTimeMillis(); // i think bool is for caching
+      sortedTerms = QueryUtil.getResults(engine.query(sortedTerms,catQuery)); //, false);
 //      System.out.println("Category query (" +slim+ ") got "+sortedTerms.size()+" in " + (System.currentTimeMillis() - time) + "ms");
       // obsoletes?
-      sortedObsoleteTerms = engine.query(sortedObsoleteTerms,catQuery,false);
+      sortedObsoleteTerms = QueryUtil.getResults(engine.query(sortedObsoleteTerms,catQuery));
     }
 
     //for (Namespace n : spaces) System.out.println(n);

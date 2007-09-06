@@ -290,7 +290,7 @@ public class OntologyDataAdapter {
       else
         useRepos = true;
       //if autoupdate without popup
-      LOG.debug("repos date "+reposDate+" local date "+loc);
+      //LOG.debug("repos date "+reposDate+" local date "+loc);
       if ((autoUpdate && (timer==0)) && (reposDate > loc)) {
     	useRepos = true;
       } else if (reposDate > loc || useRepos) {

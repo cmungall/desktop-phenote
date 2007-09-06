@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOSession;
+import org.geneontology.oboedit.datamodel.impl.DanglingClassImpl;
 
 // type is from xmlbean Field??
 import phenote.config.xml.FieldDocument.Field.Type;
@@ -202,7 +203,7 @@ public class CharField {
           OBOSession os = getOntology().getOboSession();
           oboClass = OntologyManager.inst().getPostComp(os,valueString);
         }
-        catch (TermNotFoundException e) {} // move on to next ontology
+        catch (TermNotFoundException e) {}
         
       }
       
@@ -213,6 +214,11 @@ public class CharField {
           catch (TermNotFoundException e) {} // move on to next ontology
         }
       }
+      
+      // if cant find it make a dangler!
+      if (oboClass == null && danglerMode())
+        oboClass =  new DanglingClassImpl(valueString);
+
       if (oboClass != null)
         return new CharFieldValue(oboClass,c,this);
       else
@@ -220,6 +226,9 @@ public class CharField {
                                         +this);
     }
   }
+
+  // i think we eventually will want this always to be so
+  private boolean danglerMode() { return true; }
 
   public String toString() { return "CharField: "+getName(); }
 }

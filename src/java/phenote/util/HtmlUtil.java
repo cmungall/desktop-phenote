@@ -25,7 +25,7 @@ import org.geneontology.oboedit.datamodel.IdentifiedObject;
 import org.geneontology.oboedit.datamodel.Dbxref;
 import org.geneontology.oboedit.datamodel.impl.DbxrefImpl;
 import org.geneontology.oboedit.datamodel.impl.OBORestrictionImpl;
-import org.geneontology.oboedit.datamodel.TermUtil;
+import org.geneontology.oboedit.util.TermUtil;
 import org.geneontology.oboedit.datamodel.PropertyValue;
 
 
@@ -100,7 +100,7 @@ public class HtmlUtil {
 		if ((definition != null) && !(definition.equals(""))) {
 			sb.append(makeRow(makeLeftCol(bold("Definition"))+makeRightCol(definition)));
 		}
-		if (org.geneontology.oboedit.datamodel.TermUtil.isIntersection(oboClass)) {
+		if (TermUtil.isIntersection(oboClass)) {
 			//this term is an intersection term, show the xp definition
 			sb.append(makeRow(makeLeftCol(bold("XP Definition:"))+makeRightCol(getIntersectionParents(oboClass).toString())));
 		}

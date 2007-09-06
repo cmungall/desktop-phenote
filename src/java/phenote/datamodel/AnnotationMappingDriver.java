@@ -3,7 +3,7 @@ package phenote.datamodel;
 import java.util.List;
 
 import org.geneontology.oboedit.annotation.datamodel.Annotation;
-import org.geneontology.oboedit.datamodel.HistoryItem;
+import org.geneontology.oboedit.history.HistoryItem;
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOProperty;
 
