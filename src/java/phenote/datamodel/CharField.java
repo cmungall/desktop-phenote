@@ -9,6 +9,8 @@ import org.geneontology.oboedit.datamodel.impl.DanglingClassImpl;
 
 // type is from xmlbean Field??
 import phenote.config.xml.FieldDocument.Field.Type;
+import phenote.error.ErrorEvent;
+import phenote.error.ErrorManager;
 
 // or just Field? or CharField?
 // CharField doesnt handle instance data, just specifies what ontologies are 
@@ -216,8 +218,11 @@ public class CharField {
       }
       
       // if cant find it make a dangler!
-      if (oboClass == null && danglerMode())
+      if (oboClass == null && danglerMode()) {
         oboClass =  new DanglingClassImpl(valueString);
+        String e = valueString+" not found in loaded obo files. Creating a 'dangler'";
+        ErrorManager.inst().error(new ErrorEvent(this,e));
+      }
 
       if (oboClass != null)
         return new CharFieldValue(oboClass,c,this);

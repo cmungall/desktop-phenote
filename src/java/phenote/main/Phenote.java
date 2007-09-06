@@ -29,6 +29,9 @@ import phenote.charactertemplate.CharacterTemplateController;
 import phenote.config.Config;
 import phenote.config.ConfigException;
 import phenote.config.xml.GroupDocument.Group;
+import phenote.error.ErrorEvent;
+import phenote.error.ErrorListener;
+import phenote.error.ErrorManager;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.OntologyDataAdapter;
 import phenote.datamodel.CharacterListI;
@@ -70,9 +73,14 @@ public class Phenote {
     }
     catch (FileNotFoundException e) {
       System.out.println("Default log cfg file not found "+e);
+      // should then configure up default log with sys out and .phenote file...
     }
     
-    System.out.println("This is Phenote version "+PhenoteVersion.versionString());
+    // writes error events to log
+    ErrorManager.inst().addErrorListener(new LogErrorListener());
+    String v = "This is Phenote version "+PhenoteVersion.versionString();
+    System.out.println(v);
+    LOG.info(v);
     try {
       final String lookAndFeelClassName = UIManager.getSystemLookAndFeelClassName();
       if (lookAndFeelClassName.equals("apple.laf.AquaLookAndFeel")) {
@@ -378,6 +386,15 @@ public class Phenote {
     if (phenote == null) phenote = new Phenote();
     return phenote;
   }
+
+  /** listens for errors and shoots them to the log */
+  private static class LogErrorListener implements ErrorListener {
+    public void handleError(ErrorEvent e) {
+      Logger log = Logger.getLogger(e.getSource().getClass());
+      log.error(e.getMsg());
+    }
+  }
+
   // These methods are actually for TestPhenote
   public FieldPanel getFieldPanel() { return mainFieldPanel; }
   public TermInfo getTermInfo() { return termInfo; }
