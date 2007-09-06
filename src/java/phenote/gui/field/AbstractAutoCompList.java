@@ -1,5 +1,6 @@
 package phenote.gui.field;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FontMetrics;
@@ -151,6 +152,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
       super();
       autoTextField = new AutoTextField(); // outer instance var for testing
       editor = autoTextField; // protected editor var from BCBE
+      editor.setForeground(java.awt.Color.RED);
       addDocumentListener(new AutoDocumentListener());
       // call returnKeyHit - for nulling out term
       addReturnKeyListener(autoTextField);
@@ -221,6 +223,13 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     protected void processKeyEvent(KeyEvent e) {
       super.processKeyEvent(e);
     }
+    private void setInputTextColor(Color c) {
+      setForeground(c);
+    }
+  }
+
+  protected void setInputTextColor(Color c) {
+    autoTextField.setInputTextColor(c);
   }
 
 

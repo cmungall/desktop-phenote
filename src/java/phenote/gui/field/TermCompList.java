@@ -1,5 +1,6 @@
 package phenote.gui.field;
 
+import java.awt.Color;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,7 @@ import javax.swing.event.ListSelectionListener;
 
 import org.apache.log4j.Logger;
 import org.geneontology.oboedit.datamodel.OBOClass;
+import org.geneontology.oboedit.util.TermUtil;
 
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharacterI;
@@ -141,6 +143,10 @@ class TermCompList extends AbstractAutoCompList {
 //       return; // debug stack trace?
 //     }
     currentOboClass = term;
+    if (TermUtil.isDangling(currentOboClass))
+      setInputTextColor(Color.RED);
+    else
+      setInputTextColor(Color.BLACK);
     String val = term == null ? "" : term.getName();
     setText(val, false); // no completion
   }
