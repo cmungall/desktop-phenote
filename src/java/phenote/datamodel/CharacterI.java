@@ -14,10 +14,20 @@ public interface CharacterI {
 
   /** generic fields!!! */
   public List<CharField> getAllCharFields();
-  public void setValue(String fieldString, String valueString)
+  /** Looks up CharField with fieldString using both field name & datatag,
+      if CharField isnt found throws CharFieldException.
+      Then creates CharFieldValue using valueString. If field is TERM then
+      valueString is ID and is looked up, if not found then creates dangler.
+      danglers actually make TermNotFoundEx irrelevant (take out?). 
+      CFV.isDangler() will indicate if you got a dangler */
+  public CharFieldValue setValue(String fieldString, String valueString)
     throws CharFieldException,TermNotFoundException;
   public void setValue(CharField cf, CharFieldValue cfv); // ??
-  public void setValue(CharField cf, String valueString) throws TermNotFoundException;
+  /** @returns char field value created
+      if cf is a term will look for OBOClass with ID in valueString, if ID not 
+      found will create dangler which actually makes TermNotFoundEx irrelevant
+      take out? or do we want a non-dangler mode?? */
+  public CharFieldValue setValue(CharField cf, String valueString) throws TermNotFoundException;
   public CharField getCharFieldForName(String fieldName) throws CharFieldException;
   public CharFieldValue getValue(CharField cf);
   public String getValueString(CharField cf);

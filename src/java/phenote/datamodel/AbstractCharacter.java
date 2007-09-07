@@ -6,104 +6,48 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 
 public abstract class AbstractCharacter implements CharacterI {
 
-	// this is just used for testing at this point
-	public boolean equals(CharacterI ch) {
-		for (CharField cf : getAllCharFields()) {
-			if (!eq(getValue(cf), ch.getValue(cf)))
-				return false;
-		}
-		return true;
-	}
+  /** Returns CharFieldValue created */
+  public CharFieldValue setValue(String fieldString, String valueString)
+    throws CharFieldException, TermNotFoundException {
+    CharField cf = getCharFieldForName(fieldString);
+    return setValue(cf, valueString);
+  }
 
-	/** check if both are null in addition to .equals() */
-	protected boolean eq(CharFieldValue c1, CharFieldValue c2) {
-		if (c1 == null && c2 == null)
-			return true;
-		if (c2 == null)
-			return false;
-		return c1.equals(c2);
-	}
+  /** if term field, string should be id, obo class will be searched for, if class
+      not found then dangler is created. if free text field just uses string of
+      course. the dangler makes termNotFoundEx irrelevant - take out? or will there
+      be a no dangler mode? probably not right? */
+  public CharFieldValue setValue(CharField cf, String s) throws TermNotFoundException {
+    CharFieldValue cfv = cf.makeValue(this, s);
+    setValue(cf, cfv);
+    return cfv;
+  }
 
-	public List<CharField> getAllCharFields() {
-		return OntologyManager.inst().getCharFieldList();
-	}
 
-	public CharField getCharFieldForName(String fieldName)
-			throws CharFieldException {
-		return OntologyManager.inst().getCharFieldForName(fieldName);
-	}
+  public List<CharField> getAllCharFields() {
+    return OntologyManager.inst().getCharFieldList();
+  }
+  
+  public CharField getCharFieldForName(String fieldName)
+    throws CharFieldException {
+    return OntologyManager.inst().getCharFieldForName(fieldName);
+  }
 
-	public OBOClass getEntity() {
-		try {
-			return getValue(getEntityField()).getTerm();
-		} catch (CharFieldException e) {
-			return null;
-		} // ??
-	}
+  protected OBOClass getTerm(CharField cf) {
+    if (!hasValue(cf))
+      return null; // ?? exception?
+    return getValue(cf).getOboClass();
+  }
 
-	protected CharField getEntityField() throws CharFieldException {
-		return getCharFieldForName(CharFieldEnum.ENTITY.getName());
-	}
-
-	protected CharField getGenConField() throws CharFieldException {
-		return getCharFieldForName(CharFieldEnum.GENETIC_CONTEXT.getName());
-	}
-
-	protected CharField getPubField() throws CharFieldException {
-		return getCharFieldForName(CharFieldEnum.PUB.getName());
-	}
-
-	protected CharField getQualField() throws CharFieldException {
-		return getCharFieldForName(CharFieldEnum.QUALITY.getName());
-	}
-
-	public OBOClass getGeneticContext() {
-		try {
-			return getTerm(getGenConField());
-		} catch (CharFieldException e) {
-			return null;
-		} // ??
-	}
-
-	protected OBOClass getTerm(CharField cf) {
-		if (!hasValue(cf))
-			return null; // ?? exception?
-		return getValue(cf).getOboClass();
-	}
-
-	public String getGenotype() {
-		try {
-			return getValueString(getGenotypeField());
-		} catch (CharFieldException e) {
-			return null;
-		} // ??
-	}
-
-	protected CharField getGenotypeField() throws CharFieldException {
-		return getCharFieldForName(CharFieldEnum.GENOTYPE.getName());
-	}
-
-	public String getPub() {
-		try {
-			return getValueString(getPubField());
-		} catch (CharFieldException e) {
-			return null;
-		} // ?? ""?
-	}
-
-	public OBOClass getQuality() {
-		// return quality;
-		try {
-			return getValue(getQualField()).getTerm();
-		} catch (CharFieldException e) {
-			return null;
-		} // ??
-	}
 
 	public OBOClass getTerm(String field) throws CharFieldException {
 		CharField cf = getCharFieldForName(field);
 		return getTerm(cf);
 	}
+
+  protected void setValue(CharField cf, OBOClass term) {
+    setValue(new CharFieldValue(term, this, cf));
+  }
 
 	public String getValueString(CharField cf) {
 		CharFieldValue cfv = getValue(cf);
@@ -119,9 +63,6 @@ public abstract class AbstractCharacter implements CharacterI {
 		return getValue(cf).getName();
 	}
 
-	public boolean hasGeneticContext() {
-		return getGeneticContext() != null && !getGeneticContext().equals("");
-	}
 
 	public boolean hasNoContent() {
 		for (CharField cf : getAllCharFields()) {
@@ -129,14 +70,6 @@ public abstract class AbstractCharacter implements CharacterI {
 				return false;
 		}
 		return true;
-	}
-
-	/**
-	 * According to the CharacterI documentation, the methods below are garbage
-	 */
-
-	public boolean hasPub() {
-		return getPub() != null && !getPub().equals("");
 	}
 
 	public boolean hasValue(CharField cf) {
@@ -152,6 +85,37 @@ public abstract class AbstractCharacter implements CharacterI {
 			return false;
 		}
 	}
+  
+  protected void setValue(CharFieldValue cfv) {
+    setValue(cfv.getCharField(), cfv);
+  }
+
+  // this is just used for testing at this point
+  public boolean equals(CharacterI ch) {
+    for (CharField cf : getAllCharFields()) {
+      if (!eq(getValue(cf), ch.getValue(cf)))
+        return false;
+    }
+    return true;
+  }
+
+  /** check if both are null in addition to .equals() */
+  protected boolean eq(CharFieldValue c1, CharFieldValue c2) {
+    if (c1 == null && c2 == null)
+      return true;
+    if (c2 == null)
+      return false;
+    return c1.equals(c2);
+  }
+
+  /**
+   * According to the CharacterI documentation, the methods below are garbage
+   */
+  
+  public boolean hasPub() {
+    return getPub() != null && !getPub().equals("");
+  }
+
 
 	public void setEntity(OBOClass e) {
 		try {
@@ -161,21 +125,51 @@ public abstract class AbstractCharacter implements CharacterI {
 		}
 	}
 
-	protected void setValue(CharFieldValue cfv) {
-		setValue(cfv.getCharField(), cfv);
+
+  public boolean hasGeneticContext() {
+    return getGeneticContext() != null && !getGeneticContext().equals("");
+  }
+  
+  public void setGeneticContext(OBOClass gc) {
+    try {
+      setValue(getGenConField(), gc);
+    } catch (CharFieldException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public OBOClass getEntity() {
+    try {
+      return getValue(getEntityField()).getTerm();
+    } catch (CharFieldException e) {
+      return null;
+    } // ??
+  }
+
+	protected CharField getEntityField() throws CharFieldException {
+		return getCharFieldForName(CharFieldEnum.ENTITY.getName());
 	}
 
-	public void setGeneticContext(OBOClass gc) {
+	protected CharField getGenConField() throws CharFieldException {
+		return getCharFieldForName(CharFieldEnum.GENETIC_CONTEXT.getName());
+	}
+
+  protected CharField getPubField() throws CharFieldException {
+    return getCharFieldForName(CharFieldEnum.PUB.getName());
+  }
+
+	protected CharField getQualField() throws CharFieldException {
+		return getCharFieldForName(CharFieldEnum.QUALITY.getName());
+	}
+
+	public OBOClass getGeneticContext() {
 		try {
-			setValue(getGenConField(), gc);
+			return getTerm(getGenConField());
 		} catch (CharFieldException e) {
-			throw new RuntimeException(e);
-		}
+			return null;
+		} // ??
 	}
 
-	protected void setValue(CharField cf, OBOClass term) {
-		setValue(new CharFieldValue(term, this, cf));
-	}
 
 	public void setGenotype(String gt) {
 		try {
@@ -185,6 +179,25 @@ public abstract class AbstractCharacter implements CharacterI {
 		} catch (TermNotFoundException e) {
 		} // doesnt happen for free text field
 	}
+  public String getGenotype() {
+    try {
+      return getValueString(getGenotypeField());
+    } catch (CharFieldException e) {
+      return null;
+    } // ??
+  }
+
+  protected CharField getGenotypeField() throws CharFieldException {
+    return getCharFieldForName(CharFieldEnum.GENOTYPE.getName());
+  }
+
+  public String getPub() {
+    try {
+      return getValueString(getPubField());
+    } catch (CharFieldException e) {
+      return null;
+    } // ?? ""?
+  }
 
 	public void setPub(String p) {
 		try {
@@ -193,6 +206,15 @@ public abstract class AbstractCharacter implements CharacterI {
 			throw new RuntimeException(x);
 		}
 	}
+	public OBOClass getQuality() {
+		// return quality;
+		try {
+			return getValue(getQualField()).getTerm();
+		} catch (CharFieldException e) {
+			return null;
+		} // ??
+	}
+
 
 	public void setQuality(OBOClass q) {
 		try {
@@ -200,17 +222,6 @@ public abstract class AbstractCharacter implements CharacterI {
 		} catch (CharFieldException e) {
 			throw new RuntimeException(e);
 		}
-	}
-
-	public void setValue(String fieldString, String valueString)
-			throws CharFieldException, TermNotFoundException {
-		CharField cf = getCharFieldForName(fieldString);
-		setValue(cf, valueString);
-	}
-
-	public void setValue(CharField cf, String s) throws TermNotFoundException {
-		CharFieldValue cfv = cf.makeValue(this, s);
-		setValue(cf, cfv);
 	}
 
 }

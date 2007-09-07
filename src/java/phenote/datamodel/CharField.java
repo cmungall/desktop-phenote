@@ -118,7 +118,7 @@ public class CharField {
   }
 
   /** This should be redundant with hasOntologies (though with instances this
-      may change?) */
+      may change?) when ontology is added type is automatically set to TERM */
   public boolean isTerm() {
     return type == Type.TERM;
   }

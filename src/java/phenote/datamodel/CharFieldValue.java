@@ -1,6 +1,7 @@
 package phenote.datamodel;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
+import org.geneontology.oboedit.util.TermUtil;
 
 
 /** At the moment char field values can be Strings (genotype) and OBOClasses, and possibly
@@ -92,11 +93,18 @@ public class CharFieldValue implements Cloneable {
 
   // maybe this should be called getString??? why getName???
   public String getName() { 
-    if (!isOboClass)
+    if (!isTerm())
       return stringValue;
     if (oboClassValue != null) // obo class may not be set yet
       return oboClassValue.getName();
     return ""; // null?
+  }
+
+  public void setName(String name) {
+    if (isTerm())
+      oboClassValue.setName(name);
+    else // this method is really for terms, but might as well...
+      stringValue = name;
   }
 
   public boolean isTerm() { return isOboClass; }
@@ -105,6 +113,21 @@ public class CharFieldValue implements Cloneable {
   public OBOClass getTerm() { return oboClassValue; }
 
   public void editModel() {
+    character.setValue(charField,this);
+    // could also edit obo edit annot model at this point! ??
+  }
+
+  public CharField getCharField() { return charField; }
+
+  public boolean isDangler() {
+    if (!isTerm()) return false;
+    if (isEmpty()) return false;
+    return TermUtil.isDangling(getTerm());
+  }
+
+  public String toString() { return getName(); }
+}
+
 //     if (charFieldEnum == null)
 //       System.out.println("ERROR no datamodel associated with configuration, cant set"+
 //                          " value");
@@ -114,15 +137,6 @@ public class CharFieldValue implements Cloneable {
 //     }
 //     else {
       //System.out.println("CFV editMod "+getName());
-    character.setValue(charField,this);
-    // could also edit obo edit model at this point!
-//    }
-  }
-
-  public CharField getCharField() { return charField; }
   // phase out...
   //public CharFieldEnum getCharFieldEnum() { return charFieldEnum; }
-
-  public String toString() { return getName(); }
-}
 

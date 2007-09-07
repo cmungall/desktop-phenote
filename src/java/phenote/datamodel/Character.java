@@ -9,8 +9,9 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 /** Characters are the EAV building blocks of a Phenotype. Previously this
     was called a Phenotype which was a misnomer 
     Should the Character datamodel be a generic hash of CharField-CharFieldValues?
-    That can be free text or from ontologies? */
-public class Character implements CharacterI {
+    That can be free text or from ontologies?
+    This is the straightontabular implementation of CharacterI */
+public class Character extends AbstractCharacter implements CharacterI {
 
   private HashMap<CharField,CharFieldValue> charFieldToValue =
     new HashMap<CharField,CharFieldValue>();
@@ -22,12 +23,13 @@ public class Character implements CharacterI {
   // private OBOEditAnntotation - get & set methods
 
   /** Throws CharFieldEx if fieldString not valid field, TermNotFoundEx if valueString
-      not found in ontologies associated with field */
-  public void setValue(String fieldString, String valueString)
-    throws CharFieldException,TermNotFoundException {
-    CharField cf = getCharFieldForName(fieldString);
-    setValue(cf,valueString);
-  }
+      not found in ontologies associated with field 
+  returns the constructed CharFieldValue */
+//   public CharFieldValue setValue(String fieldString, String valueString)
+//     throws CharFieldException,TermNotFoundException {
+//     CharField cf = getCharFieldForName(fieldString);
+//     return setValue(cf,valueString);
+//   }
 
   /** for generic fields its just a map from char field to char field value */
   public void setValue(CharField cf, CharFieldValue cfv) {
@@ -36,17 +38,23 @@ public class Character implements CharacterI {
     //System.out.println("Char setVal "+cf+" val "+cfv);
     // setOboEditModel(oboEditAnnotation,cf,cfv);
   }
-  private void setValue(CharFieldValue cfv) {
-    setValue(cfv.getCharField(),cfv);
-  }
 
-  public void setValue(CharField cf, String s) throws TermNotFoundException {
-    CharFieldValue cfv = cf.makeValue(this,s);
-    setValue(cf,cfv);
-  }
-  private void setValue(CharField cf, OBOClass term) {
-    setValue(new CharFieldValue(term,this,cf));
-  }
+  // --> AbstractCharacter
+//   private void setValue(CharFieldValue cfv) {
+//     setValue(cfv.getCharField(),cfv);
+//   }
+
+  // --> AbstractCharacter 
+//   public CharFieldValue setValue(CharField cf, String s)
+//     throws TermNotFoundException {
+//     // finds term or makes dangler or uses string for free text
+//     CharFieldValue cfv = cf.makeValue(this,s);
+//     setValue(cf,cfv);
+//     return cfv;
+//   }
+//   private void setValue(CharField cf, OBOClass term) {
+//     setValue(new CharFieldValue(term,this,cf));
+//   }
 
   /** generic getter */ 
   public CharFieldValue getValue(CharField cf) {
@@ -79,10 +87,10 @@ public class Character implements CharacterI {
     return getTerm(cf);
   }
 
-  private OBOClass getTerm(CharField cf) {
-    if (!hasValue(cf)) return null; // ?? exception?
-    return getValue(cf).getOboClass();
-  }
+//   private OBOClass getTerm(CharField cf) {
+//     if (!hasValue(cf)) return null; // ?? exception?
+//     return getValue(cf).getOboClass();
+//   }
 
   // should this be isNull?
   public boolean hasValue(CharField cf) {
@@ -111,90 +119,90 @@ public class Character implements CharacterI {
   }
 
   // conveneince methods...
-  public String getPub() { 
-    try { return getValueString(getPubField()); }
-    catch (CharFieldException e) { return null; } // ?? ""?
-  }
-  public boolean hasPub() { return getPub()!=null && !getPub().equals(""); }
-  private CharField getPubField() throws CharFieldException {
-    return getCharFieldForName(CharFieldEnum.PUB.getName());
-  }
-  public String getGenotype() {
-    try { return getValueString(getGenotypeField()); }
-    catch (CharFieldException e) { return null; } // ??
-  }
-  private CharField getGenotypeField() throws CharFieldException {
-    return getCharFieldForName(CharFieldEnum.GENOTYPE.getName());
-  }
-  /** cant decide to kill this or not - part of me thinks entity is fundamental to
-      phenote so why not make it handy */
-  public OBOClass getEntity() {
-    try { return getValue(getEntityField()).getTerm(); }
-    catch (CharFieldException e) { return null; } // ??
-  }
-  private CharField getEntityField() throws CharFieldException {
-    return getCharFieldForName(CharFieldEnum.ENTITY.getName());
-    //catch (CharFieldException e) { return null; } // ?? ex?
-  }
-  public OBOClass getQuality() {
-    //return quality;
-    try { return getValue(getQualField()).getTerm(); }
-    catch (CharFieldException e) { return null; } // ??
-  }
-  private CharField getQualField() throws CharFieldException {
-    return getCharFieldForName(CharFieldEnum.QUALITY.getName());
-  }
-  public boolean hasGeneticContext() {
-    return getGeneticContext()!=null && !getGeneticContext().equals("");
-  }
-  public OBOClass getGeneticContext() {
-    try { return getTerm(getGenConField()); }
-    catch (CharFieldException e) { return null; } // ??
-  }
-  private CharField getGenConField() throws CharFieldException {
-    return getCharFieldForName(CharFieldEnum.GENETIC_CONTEXT.getName());
-  }
+//   public String getPub() { 
+//     try { return getValueString(getPubField()); }
+//     catch (CharFieldException e) { return null; } // ?? ""?
+//   }
+//   public boolean hasPub() { return getPub()!=null && !getPub().equals(""); }
+//   private CharField getPubField() throws CharFieldException {
+//     return getCharFieldForName(CharFieldEnum.PUB.getName());
+//   }
+//   public String getGenotype() {
+//     try { return getValueString(getGenotypeField()); }
+//     catch (CharFieldException e) { return null; } // ??
+//   }
+//   private CharField getGenotypeField() throws CharFieldException {
+//     return getCharFieldForName(CharFieldEnum.GENOTYPE.getName());
+//   }
+//   /** cant decide to kill this or not - part of me thinks entity is fundamental to
+//       phenote so why not make it handy */
+//   public OBOClass getEntity() {
+//     try { return getValue(getEntityField()).getTerm(); }
+//     catch (CharFieldException e) { return null; } // ??
+//   }
+//   private CharField getEntityField() throws CharFieldException {
+//     return getCharFieldForName(CharFieldEnum.ENTITY.getName());
+//     //catch (CharFieldException e) { return null; } // ?? ex?
+//   }
+//   public OBOClass getQuality() {
+//     //return quality;
+//     try { return getValue(getQualField()).getTerm(); }
+//     catch (CharFieldException e) { return null; } // ??
+//   }
+//   private CharField getQualField() throws CharFieldException {
+//     return getCharFieldForName(CharFieldEnum.QUALITY.getName());
+//   }
+//   public boolean hasGeneticContext() {
+//     return getGeneticContext()!=null && !getGeneticContext().equals("");
+//   }
+//   public OBOClass getGeneticContext() {
+//     try { return getTerm(getGenConField()); }
+//     catch (CharFieldException e) { return null; } // ??
+//   }
+//   private CharField getGenConField() throws CharFieldException {
+//     return getCharFieldForName(CharFieldEnum.GENETIC_CONTEXT.getName());
+//   }
 
 
-  public void setPub(String p ) {  
-    try { setValue(new CharFieldValue(p,this,getPubField())); }
-    catch (CharFieldException x) { log().error("no Pub field -> config!"); }
-  }
-  public void setGenotype(String gt) {
-    try { setValue(getGenotypeField(),gt); }
-    catch (CharFieldException x) { log().error(x); }
-    catch (TermNotFoundException e) {} // doesnt happen for free text field
- }
-  public void setEntity(OBOClass e) {
-    try { setValue(new CharFieldValue(e,this,getEntityField())); }
-    catch (CharFieldException x) { log().error("no Entity field -> config!"); }
-  }
-  public void setQuality(OBOClass q) {
-    try {setValue(new CharFieldValue(q,this,getQualField())); }
-    catch (CharFieldException e) { log().error("no Quality field -> config!"); }
-  }
-  public void setGeneticContext(OBOClass gc) {
-    try { setValue(getGenConField(),gc); }
-    catch (CharFieldException e) { log().error("no Genetic Context field -> config!"); }
-  }
+//   public void setPub(String p ) {  
+//     try { setValue(new CharFieldValue(p,this,getPubField())); }
+//     catch (CharFieldException x) { log().error("no Pub field -> config!"); }
+//   }
+//   public void setGenotype(String gt) {
+//     try { setValue(getGenotypeField(),gt); }
+//     catch (CharFieldException x) { log().error(x); }
+//     catch (TermNotFoundException e) {} // doesnt happen for free text field
+//  }
+//   public void setEntity(OBOClass e) {
+//     try { setValue(new CharFieldValue(e,this,getEntityField())); }
+//     catch (CharFieldException x) { log().error("no Entity field -> config!"); }
+//   }
+//   public void setQuality(OBOClass q) {
+//     try {setValue(new CharFieldValue(q,this,getQualField())); }
+//     catch (CharFieldException e) { log().error("no Quality field -> config!"); }
+//   }
+//   public void setGeneticContext(OBOClass gc) {
+//     try { setValue(getGenConField(),gc); }
+//     catch (CharFieldException e) { log().error("no Genetic Context field -> config!"); }
+//   }
  
-  // this is just used for testing at this point
-  public boolean equals(CharacterI ch) {
-    //return eq(getGenotype(),ch.getGenotype()) && eq(getEntity(),ch.getEntity())
-    //  && eq(quality,ch.getQuality()) && eq(geneticContext,ch.getGeneticContext());
-    for (CharField cf : getAllCharFields()) {
-      if (!eq(getValue(cf),ch.getValue(cf)))
-        return false;
-    }
-    return true;
-  }
+//   // this is just used for testing at this point
+//   public boolean equals(CharacterI ch) {
+//     //return eq(getGenotype(),ch.getGenotype()) && eq(getEntity(),ch.getEntity())
+//     //  && eq(quality,ch.getQuality()) && eq(geneticContext,ch.getGeneticContext());
+//     for (CharField cf : getAllCharFields()) {
+//       if (!eq(getValue(cf),ch.getValue(cf)))
+//         return false;
+//     }
+//     return true;
+//   }
 
-  /** check if both are null in addition to .equals() */
-  private boolean eq(CharFieldValue c1,CharFieldValue c2) {
-    if (c1==null && c2==null) return true;
-    if (c2 == null) return false;
-    return c1.equals(c2);
-  }
+//   /** check if both are null in addition to .equals() */
+//   private boolean eq(CharFieldValue c1,CharFieldValue c2) {
+//     if (c1==null && c2==null) return true;
+//     if (c2 == null) return false;
+//     return c1.equals(c2);
+//   }
 
   public CharacterI cloneCharacter() {
     //try {
