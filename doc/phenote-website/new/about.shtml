@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+
+    <!--#include virtual="ssi/head.html" -->
+    <title>Phenote</title>
+
+  </head>
+  <body>
+
+    <!--#include virtual="ssi/header.html" -->
+
+    <div id="main_container_aux">
+      <div id="main_content_aux">
+	<div class="catch_phrase">
+	  About Phenote
+	</div>
+
+	<p>
+	Phenote is both a complete piece of software and a software toolkit designed to facilitate the annotation of biological phenotypes using ontologies.  It provides an interface to record genotype-phenotype pairs, together with the provenance for the annotation.  Typical users of Phenote include literature curators, laboratory researchers, and clinicians looking for a method to record data in a user-friendly and computable way.
+	</p>
+	<p>
+	Data annotated with Phenote is based on the <a href="http://www.fruitfly.org/~cjm/obd/formats.html">EQ model</a> for representing phenotypes, combining entities from any ontology with qualities (such as PATO).
+	</p>
+
+	<h3>
+	  <a href="coordination.shtml">
+	    Coordination
+	  </a>
+	</h3>
+	<p>
+	  Who to ask for assistance (and to complain to).
+	</p>
+
+	<h3>
+	  <a href="related.shtml">
+	    Related Projects
+	  </a>
+	</h3>
+	<p>
+	  Brief descriptions and links to projects who are relevant
+	  to Phenote, ontologies, and annotation.
+	</p>
+	
+	<h3>
+	  <a href="faq.shtml">
+	    Frequently Asked Questions (FAQs)
+	  </a>
+	</h3>
+	<p>
+	  Common questions about Phenote, ontologies, and annotation, 
+	  along with their answers.
+	</p>	
+      </div>
+    </div>
+
+    <!--#include virtual="ssi/footer.html" -->
+
+  </body>
+</html>

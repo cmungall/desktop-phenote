@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+
+    <!--#include virtual="ssi/head.html" -->
+    <title>Open Biomedical Ontologies Foundry</title>
+
+  </head>
+  <body>
+
+    <!--#include virtual="ssi/header.html" -->
+
+    <div id="main_container_aux">
+      <div id="main_content_aux">
+	<div class="catch_phrase">
+	  How to Join the OBO Foundry
+	</div>
+
+	<h3>Step 1: Survey </h3>
+	<p>
+	  Find out what is already availble in the domain you are interested in. While the perfect solution may not yet exist it is important to contact people who share an interest in that domain and to learn from them (and gain their investment in using this ontology). Assess these ontologies critically and give them your comments, effective groups welcome this interest. If the domain is not yet covered by any existing ontology, then perhaps ask yourself why.  
+	</p>
+	
+	<h3>Step 2: If ontology is active and applied, then ask to collaborate </h3>
+	<p>
+	  As the primary goal is interoperability it is crucial that ontologies be shared by different groups. Ontology development is inherently a community exercise, and therefore collaboration is essential. In order to be collaborative however, your partners must be active and responsive. Likewise applying the ontology to key data sets leads to fewer problems in the ontology and more commitment to fixing remaining problems because important research data is involved that scientists depend upon. All of the OBO Foundry contributors have agreed to be active and apply their ontologies. 
+	</p>
+
+	<h3>Step 3: If a relevant, but moribund, ontology is found then learn from it</h3>
+	<p>
+	  It is much more expedient to learn from previous work than to start from scratch. Synthesize whatever is already available whenever possible. 
+	</p>
+	
+	<h3>Step 4: Agree to sustained improvements</h3>
+	<p>
+	  The only essential requirement for joining the OBO Foundry is agreement to adopt and refine a set of principles that prove effective for ontology development in serving the biomedical research community.
+	</p>
+
+	<h3>Step 5: E-mail us</h3>
+	<p>
+	  Let us know who you are and what you're doing--contact us
+	  <b><script type="text/javascript">
+	      obfuscate("lists.sourceforge.net","obo-discuss","here");
+	  </script></b>.
+	  We look foward to hearing from you.
+	</p>
+
+      </div>
+    </div>
+
+    <!--#include virtual="ssi/footer.html" -->
+
+  </body>
+</html>

@@ -1,0 +1,289 @@
+format-version: 1.2
+idspace: rdf http://www.w3.org/1999/02/22-rdf-syntax-ns# ""
+idspace: rdfs http://www.w3.org/2000/01/rdf-schema# ""
+idspace: owl http://www.w3.org/2002/07/owl# ""
+idspace: xsd http://www.w3.org/2001/XMLSchema# ""
+idspace: dc http://purl.org/dc/elements/1.1/ ""
+idspace: eor http://dublincore.org/2000/03/13/eor# ""
+idspace: serql http://www.openrdf.org/schema/serql# ""
+idspace: obd http://www.bioontology.org/obd/obd-ontology# ""
+idspace: oboInOwl http://www.bioontology.org/oboInOwl# ""
+idspace: ncithesaurus http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl# ""
+idspace: biopax1 http://www.biopax.org/release/biopax-level1.owl# ""
+idspace: mged http://mged.sourceforge.net/ontologies/MGEDOntology.owl# ""
+
+[Term]
+id: __file:///Users/cjm/obo-utils/owl.owl#__Description1
+name: __Description1
+namespace: __file:///Users/cjm/obo-utils/owl.owl#
+is_anonymous: true
+
+[Typedef]
+id: rdfs:comment
+name: comment
+namespace: http://www.w3.org/2000/01/rdf-schema#
+
+[Typedef]
+id: rdfs:isDefinedBy
+name: isDefinedBy
+namespace: http://www.w3.org/2000/01/rdf-schema#
+
+[Typedef]
+id: rdfs:label
+name: label
+namespace: http://www.w3.org/2000/01/rdf-schema#
+
+[Typedef]
+id: rdfs:seeAlso
+name: seeAlso
+namespace: http://www.w3.org/2000/01/rdf-schema#
+
+[Typedef]
+id: owl:allValuesFrom
+name: allValuesFrom
+namespace: http://www.w3.org/2002/07/owl#
+domain: owl:Restriction     ! Restriction
+range: rdfs:Class     ! *external to file*
+
+[Typedef]
+id: owl:backwardCompatibleWith
+name: backwardCompatibleWith
+namespace: http://www.w3.org/2002/07/owl#
+domain: owl:Ontology     ! Ontology
+range: owl:Ontology     ! Ontology
+
+[Typedef]
+id: owl:cardinality
+name: cardinality
+namespace: http://www.w3.org/2002/07/owl#
+domain: owl:Restriction     ! Restriction
+range: xsd:nonNegativeInteger     ! *external to file*
+
+[Typedef]
+id: owl:complementOf
+name: complementOf
+namespace: http://www.w3.org/2002/07/owl#
+domain: owl:Class     ! Class
+range: owl:Class     ! Class
+
+[Typedef]
+id: owl:differentFrom
+name: differentFrom
+namespace: http://www.w3.org/2002/07/owl#
+domain: owl:Thing     ! Thing
+range: owl:Thing     ! Thing
+
+[Typedef]
+id: owl:disjointWith
+name: disjointWith
+namespace: http://www.w3.org/2002/07/owl#
+domain: owl:Class     ! Class
+range: owl:Class     ! Class
+
+[Typedef]
+id: owl:distinctMembers
+name: distinctMembers
+namespace: http://www.w3.org/2002/07/owl#
+domain: owl:AllDifferent     ! AllDifferent
+range: rdf:List     ! *external to file*
+
+[Typedef]
+id: owl:equivalentClass
+name: equivalentClass
+namespace: http://www.w3.org/2002/07/owl#
+domain: owl:Class     ! Class
+range: owl:Class     ! Class
+
+[Typedef]
+id: owl:equivalentProperty
+name: equivalentProperty
+namespace: http://www.w3.org/2002/07/owl#
+
+[Typedef]
+id: owl:hasValue
+name: hasValue
+namespace: http://www.w3.org/2002/07/owl#
+domain: owl:Restriction     ! Restriction
+
+[Typedef]
+id: owl:imports
+name: imports
+namespace: http://www.w3.org/2002/07/owl#
+domain: owl:Ontology     ! Ontology
+range: owl:Ontology     ! Ontology
+
+[Typedef]
+id: owl:incompatibleWith
+name: incompatibleWith
+namespace: http://www.w3.org/2002/07/owl#
+domain: owl:Ontology     ! Ontology
+range: owl:Ontology     ! Ontology
+
+[Typedef]
+id: owl:intersectionOf
+name: intersectionOf
+namespace: http://www.w3.org/2002/07/owl#
+domain: owl:Class     ! Class
+range: rdf:List     ! *external to file*
+
+[Typedef]
+id: owl:inverseOf
+name: inverseOf
+namespace: http://www.w3.org/2002/07/owl#
+domain: owl:ObjectProperty     ! ObjectProperty
+range: owl:ObjectProperty     ! ObjectProperty
+
+[Typedef]
+id: owl:maxCardinality
+name: maxCardinality
+namespace: http://www.w3.org/2002/07/owl#
+domain: owl:Restriction     ! Restriction
+range: xsd:nonNegativeInteger     ! *external to file*
+
+[Typedef]
+id: owl:minCardinality
+name: minCardinality
+namespace: http://www.w3.org/2002/07/owl#
+domain: owl:Restriction     ! Restriction
+range: xsd:nonNegativeInteger     ! *external to file*
+
+[Typedef]
+id: owl:onProperty
+name: onProperty
+namespace: http://www.w3.org/2002/07/owl#
+domain: owl:Restriction     ! Restriction
+range: rdf:Property     ! *external to file*
+
+[Typedef]
+id: owl:oneOf
+name: oneOf
+namespace: http://www.w3.org/2002/07/owl#
+domain: rdfs:Class     ! *external to file*
+range: rdf:List     ! *external to file*
+
+[Typedef]
+id: owl:priorVersion
+name: priorVersion
+namespace: http://www.w3.org/2002/07/owl#
+domain: owl:Ontology     ! Ontology
+range: owl:Ontology     ! Ontology
+
+[Typedef]
+id: owl:sameAs
+name: sameAs
+namespace: http://www.w3.org/2002/07/owl#
+
+[Typedef]
+id: owl:sameIndividualAs
+name: sameIndividualAs
+namespace: http://www.w3.org/2002/07/owl#
+domain: owl:Thing     ! Thing
+range: owl:Thing     ! Thing
+
+[Typedef]
+id: owl:someValuesFrom
+name: someValuesFrom
+namespace: http://www.w3.org/2002/07/owl#
+domain: owl:Restriction     ! Restriction
+range: rdfs:Class     ! *external to file*
+
+[Typedef]
+id: owl:unionOf
+name: unionOf
+namespace: http://www.w3.org/2002/07/owl#
+domain: owl:Class     ! Class
+range: rdf:List     ! *external to file*
+
+[Typedef]
+id: owl:versionInfo
+name: versionInfo
+namespace: http://www.w3.org/2002/07/owl#
+
+[Term]
+id: owl:AllDifferent
+name: AllDifferent
+namespace: owl:
+
+[Term]
+id: owl:AnnotationProperty
+name: AnnotationProperty
+namespace: owl:
+
+[Term]
+id: owl:Class
+name: Class
+namespace: owl:
+
+[Term]
+id: owl:DataRange
+name: DataRange
+namespace: owl:
+
+[Term]
+id: owl:DatatypeProperty
+name: DatatypeProperty
+namespace: owl:
+
+[Term]
+id: owl:DeprecatedClass
+name: DeprecatedClass
+namespace: owl:
+
+[Term]
+id: owl:DeprecatedProperty
+name: DeprecatedProperty
+namespace: owl:
+
+[Term]
+id: owl:FunctionalProperty
+name: FunctionalProperty
+namespace: owl:
+
+[Term]
+id: owl:InverseFunctionalProperty
+name: InverseFunctionalProperty
+namespace: owl:
+
+[Term]
+id: owl:Nothing
+name: Nothing
+namespace: owl:
+is_a: owl:Thing     ! Thing
+
+[Term]
+id: owl:ObjectProperty
+name: ObjectProperty
+namespace: owl:
+
+[Term]
+id: owl:Ontology
+name: Ontology
+namespace: owl:
+
+[Term]
+id: owl:OntologyProperty
+name: OntologyProperty
+namespace: owl:
+
+[Term]
+id: owl:Restriction
+name: Restriction
+namespace: owl:
+
+[Term]
+id: owl:SymmetricProperty
+name: SymmetricProperty
+namespace: owl:
+
+[Term]
+id: owl:Thing
+name: Thing
+namespace: owl:
+union_of: __file:///Users/cjm/obo-utils/owl.owl#__Description1     ! __Description1
+union_of: owl:Nothing     ! Nothing
+
+[Term]
+id: owl:TransitiveProperty
+name: TransitiveProperty
+namespace: owl:
+

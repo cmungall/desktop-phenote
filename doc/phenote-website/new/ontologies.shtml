@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+
+    <!--#include virtual="ssi/head.html" -->
+    <title>Open Biomedical Ontologies Foundry</title>
+
+  </head>
+  <body>
+
+    <!--#include virtual="ssi/header.html" -->
+
+    <div id="main_container_aux">
+      <div id="main_content_aux">
+	<div class="catch_phrase">
+	  The Ontologies of the OBO Foundry
+	</div>
+
+	<h3>
+	  <a href="crit.shtml">
+	    Current Principles
+	  </a>
+	</h3>
+	<p>
+	  OBO consists of ontologies which either conform to, or are
+	  committed to working towards conforming to, the OBO Foundry
+	  principles. The OBO coordinators are committed to working
+	  with ontology developers to aid this process, and they are
+	  also committed to keeping these Foundry Principles under
+	  review.
+	</p>
+	
+	<h3>
+	  <a href="http://www.obofoundry.org">
+	    Ontology Table
+	  </a>
+	</h3>
+	<p>
+	  Our main page contains a tabular listing of the current set
+	  of ontologies in the OBO Foundry. The table can be sorted by
+	  clicking on column headings, and you can find further
+	  information by clicking on the ontology name.
+	</p>
+
+	<h3>
+	  <a href="browse.shtml">
+	    Ontology Browser
+	  </a>
+	</h3>
+	<p>
+	  An indexed view of the current set of ontologies in the OBO
+	  Foundry organized by domains. Nodes can be expanded and
+	  collapsed, and the leaf nodes link to further information.
+	</p>
+
+	<h3>
+	  <a href="http://www.berkeleybop.org/ontologies">
+	    Downloads
+	  </a>
+	</h3>
+	<p>
+	  All of the current set of ontologies in the OBO Foundry are
+	  available here to download in a variety of different
+	  representations: obo_xml, obo format, owl, chadoxml, rdf,
+	  tabular, prolog, and others. Updated nightly.
+	</p>
+
+	<h3>
+	  <a href="http://sourceforge.net/cvs/?group_id=76834">
+	    Ontology repository
+	  </a>
+	</h3>
+	<p>
+	  Many of the OBO Foundry ontologies are maintained in this
+	  CVS repository. You can browse and download the active
+	  versions of these ontologies here.
+	</p>
+
+      </div>
+    </div>
+
+    <!--#include virtual="ssi/footer.html" -->
+
+  </body>
+</html>

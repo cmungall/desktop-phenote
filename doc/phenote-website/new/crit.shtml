@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+
+    <!--#include virtual="ssi/head.html" -->
+    <title>Open Biomedical Ontologies Foundry</title>
+
+  </head>
+  <body>
+
+    <!--#include virtual="ssi/header.html" -->
+
+    <div id="main_container_aux">
+      <div id="main_content_aux">
+	<div class="catch_phrase">
+	  OBO Foundry Principles
+	</div>
+
+	<p>
+	  OBO is an open community and, by joining the initiative, the
+	  authors of an ontology commit to its maintenance in light of
+	  scientific advance and to working with other members to
+	  ensure the improvement of these principles over time. The
+	  OBO Foundry is an attempt to apply the scientific method to
+	  the task of ontology development, and the scientific method
+	  rests on constant criticism and on the assumption that no
+	  resource will ever exist in a form in which it cannot be
+	  further improved.
+	</p>
+	<p>
+	  To comment on, or ask questions about, any of these
+	  principles please send e-mail to
+	  the
+	  <a href="mailto:obo-discuss@lists.sourceforge.net">
+	    OBO discussion list
+	  </a>.
+	  To propose new principles please use the
+	  <a href="http://obofoundry.org/wiki/index.php/OBO_Foundry_Principles">
+	    OBO wiki
+	  </a>.
+	</p>
+
+	<br />
+
+	<h1> Version as of 24 April 2006 </h1>
+
+	<p>
+
+	  <ol>
+
+	    <li>
+	      <h3 class="crit">The ontology must be <em>open</em> and available to be
+		used by all without any constraint other than (a) its
+		origin must be acknowledged and (b) it is not to be
+		altered and subsequently redistributed under the
+		original name or with the same identifiers.</h3>
+	      
+	      <p>
+		The OBO ontologies are for sharing and are resources
+		for the entire community. For this reason, they must
+		be available to all without any constraint or license
+		on their use or redistribution. However, it is proper
+		that their original source is always credited and that
+		after any external alterations, they must never be
+		redistributed under the same name or with the same
+		identifiers.
+		</p>
+	    </li>
+
+	    <li>
+	      <h3 class="crit">The ontology is in, or can be expressed in,
+		a <em>common shared syntax</em>. This may be either the
+		OBO syntax, extensions of this syntax, or OWL. </h3>
+	      <p>
+		The reason for this is that the same tools can then be
+		usefully applied. This facilitates shared software
+		implementations. This criterion is not met in all of
+		the ontologies currently listed, but we are working
+		with the ontology developers to have them available in
+		a common OBO syntax.
+	      </p>
+	    </li>
+
+	    <li>
+	      <h3 class="crit">The ontologies possesses a <em>unique identifier
+		  space</em> within the OBO Foundry.</h3>
+	      <p>
+		The source of concepts from any ontology can be
+		immediately identified by the prefix of the identifier
+		of each concept. It is, therefore, important that this
+		prefix be unique.
+	      </p>
+	    </li>
+
+	    <li>
+	      <h3 class="crit">The ontology provider has procedures for identifying
+		distinct successive <em>versions</em>.</h3>
+	    </li>
+
+	    <li>
+	      <h3 class="crit">The ontology has a clearly specified and
+		clearly <em>delineated content</em>.</h3>
+	      <p>The ontology must be orthogonal to other ontologies
+		already lodged within OBO.
+	      </p>
+	      <p>
+		The major reason for this principle is to allow two
+		different ontologies, for example anatomy and process,
+		to be combined through additional relationships. These
+		relationships could then be used to constrain when
+		terms could be jointly applied to describe
+		complementary (but distinguishable) perspectives on
+		the same biological or medical entity.
+	      </p>
+	      <p>
+		As a corollary to this, we would strive for community
+		acceptance of a single ontology for one domain, rather
+		than encouraging rivalry between ontologies.
+	      </p>
+	    </li>
+
+	    <li>
+	      <h3 class="crit">The ontologies include textual <em>definitions</em>
+		for all terms. </h3>
+	      <p>
+		Many biological and medical terms may be ambiguous, so
+		concepts should be defined so that their precise
+		meaning within the context of a particular ontology is
+		clear to a human reader.
+	      </p>
+	    </li>
+
+	    <li>
+	      <h3 class="crit">The ontology uses relations which are unambiguously
+	      defined following the pattern of definitions laid down
+		in the <em>OBO Relation Ontology</em>.</h3>
+	    </li>
+
+	    <li>
+	      <h3 class="crit">The ontology is <em>well documented</em>.</h3>
+	    </li>
+
+	    <li>
+	      <h3 class="crit">The ontology has a plurality of
+		independent <em>users</em>.</h3>
+	    </li>
+
+	    <li>
+	      <h3 class="crit">The ontology will be
+		developed <em>collaboratively</em> with other OBO
+		Foundry members.</h3>
+	    </li>
+	  </ol>
+	</p>
+	
+      </div>
+    </div>
+
+    <!--#include virtual="ssi/footer.html" -->
+
+  </body>
+</html>

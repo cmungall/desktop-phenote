@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<title>OBO Main</title> 
+	<link href="/css/stylesheet.css" rel="stylesheet" type="text/css" media="screen" />
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+	<meta name="description" content="Open Biomedical Ontologies, a collection of freely available well-structured controlled vocabularies." />
+<script src="obfuscate.js" type="text/javascript"></script> 
+</head>
+<body>
+
+<div id="header">
+	<h1>the obo foundry </h1>
+</div>
+
+<div id="content">
+
+<div class="main-text">
+	<div id="about">
+<p>The Open Biomedical Ontologies (OBO) Foundry is a collaborative experiment: to produce well-structured vocabularies for shared use across different biological and medical domains.
+			The OBO Foundry introduces a new paradigm for biomedical ontology development by the establishment of gold standard reference ontologies for individual domains of inquiry. 
+</p>
+
+<p>
+Those involved comprise a group of biological researchers and ontology developers who agree in advance to the adoption of a growing set of principles specifying best practices in ontology development. These principles are designed to foster interoperability of ontologies within the broader OBO framework, and also to ensure a gradual improvement of quality and formal rigor in ontologies, in ways designed to meet the increasing needs of data and information integration in the biomedical domain.
+</p>
+<p> 
+By joining the OBO Foundry, the authors of an ontology commit to its maintenance in light of scientific advance, and to soliciting community feedback for its improvement. They also give an assurance that they will work with other Foundry members to ensure that, for any particular domain, there is community convergence on a single reference ontology. Application ontologies developed for specific purposes can then be referred back to this common reference, which will be updated in light of scientific advance. In this way application ontologies, too, for example the application ontologies developed for purposes of managing clinical trial data, can take advantage of the Foundry methodology.
+</p>
+<p>
+This site contains ontologies and points to some other efforts within the community. Ideally we see a range of ontologies being designed for biomedical domains. Some of these will be generic and apply across all organisms and others will be more restricted in scope, for example to specific taxonomic groups. 
+</p>
+		<ul>
+			<li>
+				<a href="../cgi-bin/table.cgi" class="site">View the OBO Foundry ontologies in table form</a> 
+			</li>
+			<li>
+				<a href="browse.shtml" class="site">Browse the index of the OBO Foundry ontologies</a> 
+			</li>
+		</ul>
+	</div>
+	<div>
+	<h2>coordinators</h2>
+		<p><br>
+
+The coordinators of the OBO Foundry are <a
+href="http://www.gen.cam.ac.uk/Research/ashburner.htm">Michael Ashburner</a>
+(NCBO, GO), <a href="http://www.berkeleybop.org/content/people/cjm/">Chris
+Mungall</a> (NCBO, GO, BBOP), Suzanna Lewis (NCBO, GO, BBOP), and <a
+href="http://ontology.buffalo.edu/smith/">Barry Smith</a> (NCBO, ORG).
+
+		</p>
+		<h3><a href="http://bioontology.org/">National Center for Biomedical Ontology (NCBO)</a></h3> 
+		<p class="description">
+		The NCBO is a consortium of leading biologists, clinicians, informaticians, and ontologists who develop innovative technology and methods that allow scientists to create, disseminate, and manage biomedical information and knowledge in machine-processable form. 
+		</p>
+		<h3> <a href="http://org.buffalo.edu/">Ontology Research Group (ORG)</a></h3> 
+		<p class="description">
+		The ORG is located in the New York State Center of Excellence in Bioinformatics and Life Sciences http://bioinformatics.buffalo.edu/ in Buffalo. It is engaged in foundational ontology research and in biomedical ontology development in the domain of biology and clinical medicine. A special focus of research is electronic health records.
+		</p>
+	        <h3><a href="http://www.geneontology.org">Gene Ontology (GO)</a></h3> 
+        	<p class="description">
+                The GO project provides a controlled voc abulary to describe gene and gene product attributes in any organism. Members of the GO Consortium supply annotations of gene products using this vocabulary which can be viewed and downloaded via the GO website.
+                </p>
+		<h3><a href="http://www.berkeleybop.org/">Berkeley Bioinformatics and Ontologies Project (BBOP)</a></h3> 
+		<p class="description">
+			The BBOP is located at the Lawrence Berkeley National Labs, is a diverse group of scientific researchers and software engineers dedicated to developing tools and applying computational technologies to solve biological problems. Members of the group contribute to a number of projects, including The Gene Ontology, The National Center for Biomedical Ontology, and the Generic Model Organism Database Project.
+		</p>
+	</div>
+	<div>
+	<h2>related projects</h2>
+		<h3> <a href="http://www.gmod.org/">Generic Model Organism Databases</a></h3> 
+		<p class="description">
+			The Generic Model Organism Project (GMOD) is a joint effort by the model organism system databases WormBase, FlyBase, MGI, SGD, Gramene, Rat Genome Database, EcoCyc, and TAIR to develop reusable components suitable for creating new community databases of biology. 
+		</p>
+		<h3><a href="http://ifomis.org">Institute for Formal Ontology and Medical Information Science 
+(IFOMIS)</a></h3>
+		<p class="description">
+The Institute for Formal Ontology and Medical Information Science 
+(IFOMIS) comprehends an interdisciplinary research group with members 
+from Philosophy, Computer and Information Science, Logic, Medicine, 
+and Medical Informatics, focusing on theoretically grounded research 
+in both formal and applied ontology.
+		</p>
+		<h3><a href="http://mged.sf.net/">MGED</a></h3> 
+		<p class="description">
+			The Microarray Gene Expression Data (MGED) Society is an international organisation of biologists, computer scientists, and data analysts that aims to facilitate the sharing of microarray data generated by functional genomics and proteomics experiments. 
+		</p>
+		<h3><a href="http://www.ebi.ac.uk/ontology-lookup/">Ontology Lookup Service</a></h3> 
+		<p class="description">
+			The Ontology Lookup Service is a spin-off of the PRIDE project, which required a centralized query interface for ontology and controlled vocabulary lookup. While many of the ontologies queriable by the OLS are available online, each has its own query interface and output format. The OLS provides a web service interface to query multiple ontologies from a single location with a unified output format. 
+		</p>
+		<h3><a href="http://www.plantontology.org/">Plant Ontology Consortium</a></h3> 
+		<p class="description">
+			The Plant Ontology Consortium (POC) aims to develop, curate and share structured controlled vocabularies (ontologies) that describe plant structures and growth/developmental stages. Through this effort, the project aims to facilitate cross database querying by fostering consistent use of these vocabularies in the annotation of tissue and/or growth stage specific expression of genes, proteins and phenotypes. 
+		</p>
+		<h3><a href="http://www.psidev.info/index.php?q=node/258">Proteomics Standards Initiative</a></h3>
+		<p class="description">
+		Is also interested in guidelines for the development of Controlled Vocabularies.
+		</p>
+		<h3><a href="http://www.sofg.org/">Standards and Ontologies for Functional Genomics</a></h3> 
+		<p class="description">
+			SOFG is both a meeting and a website; it aims to bring together biologists, bioinformaticians, and computer scientists who are developing and using standards and ontologies with an emphasis on describing high-throughput functional genomics experiments. 
+		</p>
+	</div>
+</div>
+
+<!--#include virtual="/ssi/navi_bar.html" -->
+
+</div>
+
+</body>
+</html>

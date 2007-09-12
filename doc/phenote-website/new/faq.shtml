@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+
+    <!--#include virtual="ssi/head.html" -->
+    <title>Open Biomedical Ontologies Foundry</title>
+
+  </head>
+  <body>
+
+    <!--#include virtual="ssi/header.html" -->
+
+    <div id="main_container_aux">
+      <div id="main_content_aux">
+	<div class="catch_phrase">
+	  Frequently Asked Questions (FAQ)
+	</div>
+
+	<h3>How do I join?</h3>
+	<p>
+	  Joining is easy! Just follow the steps on our
+	  <a href="join.shtml"><b>join</b></a> page. We look forward to hearing
+	  from you.
+	</p>
+	
+	<h3>How should we resolve conflicts when ontologies overlap?</h3>
+	<p>
+	  Make every attempt to resolve inconsistencies and merge the
+	  ontologies. Tools are available for aiding this process
+	  (such as <a href="http://www.berkeleybop.org/obol/">OBOL</a>
+	  and <a
+	  href="http://protege.cim3.net/cgi-bin/wiki.pl?Prompt">Prompt</a>)
+	  and the community can be used to help clarify best
+	  practices.
+
+	  Also, face-to-face meetings can helpful to resolve details
+	  that cannot be covered through email.
+	</p>
+	
+      </div>
+    </div>
+
+    <!--#include virtual="ssi/footer.html" -->
+
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ontology_descriptions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://smi.stanford.edu/2006/01/ontoMetaData ../../Documents%20and%20Settings/solbrig/Desktop/OBO/obo-metadata.xsd"
+ xmlns="http://smi.stanford.edu/2006/01/ontoMetaData">
+	<ontology_description>
+		<concise_name>cell</concise_name>
+		<supported_language>en</supported_language>
+		<description xmlns="http://purl.org/dc/elements/1.1/">
+			The Cell Ontology is designed as a structured controlled vocabulary
+			for cell types. This ontology was constructed for use by the model
+			organism and other bioinformatics databases, where there is a need for
+			a controlled vocabulary of cell types. This ontology is not organism
+			specific; indeed it includes cell types from prokaryotes to mammals,
+			including plants and fungi. A full description of the Cell Ontology
+			can be found in http://genomebiology.com/2005/6/2/R21
+			Rhee and Ashburner. 2005. An Ontology for Cell Types.
+		</description>
+		<authority>
+			<idspace local_name="CL">urn:lsid:bioontology.org:CL:</idspace>
+			<about>
+				<homepage url="http://lists.sourceforge.net/lists/listinfo/obo-cell-type">Cell type mail list</homepage>
+				<contact email="j.bard@ed.ac.uk">
+					Jonathan Bard
+				</contact>
+			</about>
+		</authority>
+		<core_format>
+			<format>obo_text</format>
+			<format_version>1.0</format_version>
+		</core_format>
+		<download_url>http://cvs.sourceforge.net/viewcvs.py/obo/obo/ontology/anatomy/cell_type/cell.obo</download_url>
+	</ontology_description>
+</ontology_descriptions>
+

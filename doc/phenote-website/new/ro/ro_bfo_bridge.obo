@@ -1,0 +1,71 @@
+format-version: 1.2
+date: 14:07:2006 00:00
+saved-by: cjm
+auto-generated-by: cjm
+default-namespace: ro_bfo_bridge
+idspace: OBO_REL http://www.obofoundry.org/ro/ro.owl# "OBO Relation ontology official home on OBO Foundry"
+idspace: bfo_ro http://www.ifomis.org/obo/ro/1.0# "BFO Relations"
+idspace: snap http://www.ifomis.org/bfo/1.0/snap# "BFO SNAP ontology (continuants)"
+idspace: span http://www.ifomis.org/bfo/1.0/span# "BFO SPAN ontology (occurrents)"
+remark: Domain and range constraints for OBO_REL, in terms of BFO
+
+[Typedef]
+id: OBO_REL:located_in
+domain: snap:Continuant
+range: snap:Continuant
+
+[Typedef]
+id: OBO_REL:location_of
+domain: snap:Continuant
+range: snap:Continuant
+
+[Typedef]
+id: OBO_REL:transformation_of
+domain: snap:Continuant
+range: snap:Continuant
+
+[Typedef]
+id: OBO_REL:transformed_into
+domain: snap:Continuant
+range: snap:Continuant
+
+[Typedef]
+id: OBO_REL:derives_from
+domain: snap:Continuant
+range: snap:Continuant
+
+[Typedef]
+id: OBO_REL:derived_into
+domain: snap:Continuant
+range: snap:Continuant
+
+[Typedef]
+id: OBO_REL:preceded_by
+domain: span:Occurrent
+range: span:Occurrent
+
+[Typedef]
+id: OBO_REL:precedes
+domain: span:Occurrent
+range: span:Occurrent
+
+[Typedef]
+id: OBO_REL:has_participant
+domain: span:Occurrent
+range: snap:Continuant
+
+[Typedef]
+id: OBO_REL:participates_in
+domain: snap:Continuant
+range: span:Occurrent
+
+[Typedef]
+id: OBO_REL:has_agent
+domain: span:Occurrent
+range: snap:Continuant
+
+[Typedef]
+id: OBO_REL:agent_in
+domain: snap:Continuant
+range: span:Occurrent
+

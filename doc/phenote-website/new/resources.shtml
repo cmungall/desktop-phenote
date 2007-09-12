@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+
+    <!--#include virtual="ssi/head.html" -->
+    <title>Open Biomedical Ontologies Foundry</title>
+
+  </head>
+  <body>
+
+    <!--#include virtual="ssi/header.html" -->
+
+    <div id="main_container_aux">
+      <div id="main_content_aux">
+	<div class="catch_phrase">
+	  OBO Foundry Resources
+	</div>
+
+	<h3>
+	  <a href="http://www.obofoundry.org/index.cgi?show=mappings">
+	    Mappings
+	  </a>
+	</h3> 
+	<p>
+	  On this page you can find bi-directional mappings between
+	  OBO ontologies and between an OBO ontology and other
+	  ontologies (or controlled vocabularies) that are critical to
+	  the biomedical research community. Useful for the
+	  integration of data.
+	</p>
+	
+        <h3>
+	  <a href="http://oboedit.org">Tools
+	  </a>
+	</h3> 
+        <p>
+	  Just one tool listed here now, OBO-Edit for the creation and
+	  maintenance of an ontology, more are coming soon.
+        </p>
+
+	<h3>
+	  <a href="literature.shtml">
+	    Literature
+	  </a>
+	</h3> 
+	<p>
+	  A compendium of relevant publications.
+	</p>
+	
+	<h3>
+	  <a href="http://sourceforge.net/projects/obo">
+	    Project
+	  </a>
+	</h3> 
+        <p>
+	  The OBO Foundry uses Sourceforge to manage this
+	  project. This is a link to these project pages.
+        </p>
+
+      </div>
+    </div>
+
+    <!--#include virtual="ssi/footer.html" -->
+
+  </body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title> OBO Inclusion Criteria </title> 
+	<link href="/css/stylesheet.css" rel="stylesheet" type="text/css" media="screen">
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+	<meta name="description" content="Criteria for membership of Open Biomedical Ontologies">
+	<script src="obfuscate.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div id="header">
+        <h1>the obo foundry </h1>
+</div>
+
+<div id="content">
+
+<!--#include virtual="/ssi/navi_bar.html" -->
+
+	<div class="main-text" id="crit">
+	<h2>OBO Foundry Principles</h2> 
+	<p>
+	For an ontology to be accepted as one of the Open Biomedical Ontologies in the Foundry, the following criteria must be met (further principles will be added over time):
+</p>
+<p>
+Version as of 24 April 2006
+</p>
+<ol>
+	<li>
+	<h4>The ontology must be <b>open</b> and available to be used by all without any constraint other than (a) its origin must be acknowledged and (b) it is not to be altered and subsequently redistributed under the original name or with the same identifiers.</h4>
+		<p>
+		The OBO ontologies are for sharing and are resources for the entire community. For this reason, they must be available to all without any constraint or license on their use or redistribution. However, it is proper that their original source is always credited and that after any external alterations, they must never be redistributed under the same name or with the same identifiers. 
+		</p>
+	</li>
+	<li>
+	<h4>The ontology is in, or can be expressed in, a <b>common shared syntax</b>. This may be either the OBO syntax, extensions of this syntax, or OWL. </h4> 
+		<p>
+		The reason for this is that the same tools can then be usefully applied. This facilitates shared software implementations. This criterion is not met in all of the ontologies currently listed, but we are working with the ontology developers to have them available in a common OBO syntax. 
+		</p>
+	</li>
+	<li>
+	<h4>The ontologies possesses a <b>unique identifier space</b> within the OBO Foundry.</h4> 
+		<p>
+		The source of concepts from any ontology can be immediately identified by the prefix of the identifier of each concept. It is, therefore, important that this prefix be unique. 
+		</p>
+	</li>
+	<li>
+	<h4>The ontology provider has procedures for identifying distinct successive <b>versions</b>.</h4>
+	</li>
+	<li>
+	<h4>The ontology has a clearly specified and clearly <b>delineated content</b>.</h4>
+		<p>The ontology must be orthogonal to other ontologies already lodged within OBO. </p> 
+		<p>
+		The major reason for this principle is to allow two different ontologies, for example anatomy and process, to be combined through additional relationships. These relationships could then be used to constrain when terms could be jointly applied to describe complementary (but distinguishable) perspectives on the same biological or medical entity. </p>
+		<p>
+		As a corollary to this, we would strive for community acceptance of a single ontology for one domain, rather than encouraging rivalry between ontologies. 
+		</p>
+	</li>
+	<li>
+	<h4>The ontologies include textual <b>definitions</b> for all terms. </h4> 
+		<p>
+		Many biological and medical terms may be ambiguous, so concepts should be defined so that their precise meaning within the context of a particular ontology is clear to a human reader. 
+		</p>
+	</li>
+	<li>
+	<h4>The ontology uses relations which are unambiguously defined following the pattern of definitions laid down in the <b>OBO Relation Ontology</b>.</h4>
+	</li>
+	<li>
+	<h4>The ontology is <b>well documented</b>.</h4>
+	</li>
+	<li>
+	<h4>The ontology has a plurality of independent <b>users</b>.</h4>
+	</li>
+	<li>
+	<h4>The ontology will be developed <b>collaboratively</b> with other OBO Foundry members.</h4>
+	</li>
+</ol>
+</div>
+</div>
+</body>
+</html>
