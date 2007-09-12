@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+
+    <!--#include virtual="ssi/head.html" -->
+    <title>Phenote: A Phenotype Annotation Tool using Ontologies</title>
+
+  </head>
+  <body>
+
+    <!--#include virtual="ssi/header.html" -->
+
+    <div id="main_container">
+      <div id="main_content">
+	<div class="catch_phrase">
+	  Welcome to Phenote
+	</div>
+
+	<p>
+	</p>
+	<p>
+	</p>
+	<p>
+	</p>
+	
+      </div>
+    </div>
+
+    <div id="sidebar_container">
+
+      <div id="sidebar_content">
+
+	<div class="content_box_head_blue">
+	  Frequently Used Links
+	</div>
+
+	<div class="content_box_blue">
+
+	  <p class="quick_link">
+	    <img src="images/star.gif" alt=""  class="icon_green"/>
+	    <a href="faq.shtml" title="Frequently asked questions">
+	      Frequently asked questions (FAQ)
+	    </a>
+	  </p>
+
+	  <p class="quick_link">
+	    <img src="images/star.gif" alt=""  class="icon_green"/>
+	    <a href="http://www.phenote.org/phenote.jnlp"
+	       title="Lauch Phenote via Webstart">
+		Launch phenote
+	    </a>
+	  </p>
+
+	  <p class="quick_link">
+	    <img src="images/star.gif" alt=""  class="icon_green"/>
+	    <a href="join.shtml" title="Join us">Join the OBO Foundry</a>
+	  </p>
+
+	</div>
+
+	<div class="content_box_head_green">
+	  <img src="images/calendar.gif"
+	       alt="Upcoming Events" 
+	       class="icon_blue"/>
+	  Upcoming Events
+	</div>
+
+	<div class="content_box_green">
+
+	  <!-- Comment this out instead of erasing it. -->
+	  There are no upcoming events at this time.
+	  
+	  <!-- Do not destry the following event template -->
+	  <!--
+	  <h3>Event Title</h3>
+	  <ul class="events">
+	    <li class="events">
+
+	      Event Information
+
+	    </li>
+	  </ul>
+	  -->
+
+	</div>
+
+
+	<div class="content_box_head_green">
+	  <img src="images/document.gif" alt="News" class="icon_blue" />
+	  News
+	</div>
+
+	<div class="content_box_green">
+
+	  <!-- Comment this out instead of erasing it. -->
+	  No news is good news!
+	  
+	  <!-- Do not destry the following event template -->
+	  <!--
+	  <h3>Event Title</h3>
+	  <ul class="events">
+	    <li class="events">
+
+	      Event Information
+
+	    </li>
+	  </ul>
+	  -->
+
+	</div>
+	
+	
+      </div>
+    </div>
+
+    <!--#include virtual="ssi/footer.html" -->
+
+  </body>
+</html>
