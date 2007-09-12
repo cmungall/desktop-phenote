@@ -6,6 +6,7 @@ href="phenote.jnlp">
 <information>
 	<title>Phenote @@phenote.version@@</title>
 	<vendor>National Center for Biomedical Ontology</vendor>
+	<icon href="images/phenote_logo.jpg" />
 	<description>Phenote standalone app via webstart</description>
  	 <!-- Declares that the application can run without
          access to the server it was downloaded from -->
