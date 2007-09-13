@@ -15,12 +15,13 @@
 	<div class="catch_phrase">
 	</div>
 	<h3>Launch Phenote in your browser</h3>
-	<p> You can run phenote directly from your web browser without a separate installation.</p>
+	<p> You can run phenote directly from your web browser without a separate installation by selecting one of the following links:</p>
 	<ul><li>Beta release: <a href="http://www.phenote.org/1.4-beta3/phenote.jnlp">1.4 beta3</a></li>
 	<li>Stable release: <a href="http://www.phenote.org/1.3/phenote.jnlp">1.3</a> </li>
 	<li><a href="http://www.phenote.org/old.shtml">Older releases</a></li>
 	</ul>
-		
+	<p> You may be prompted to sign a certificate and allow the download.  This will take a few minutes the first time you do this.
+	</p>
 	<h3>Run Phenote at the command line</h3>
 	<p> To run phenote on the command line, linux or MacOSX users will need to checkout Phenote from the subversion repository.  This can be done with the following command:</p>
 	<ul><li>Beta release: <b>svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/tags/1.4-beta3/ phenote</b> </li>
@@ -32,7 +33,7 @@
 	<h3>Hardware requirements</h3>
 	<ul>
 	<li> 400 Mhz processor or faster.</li>
-	<li> 500 MB RAM </li>
+	<li> 500+ MB RAM </li>
 	<li> ? MB free disk space on your computer </li>
 	<li> Internet connection (broadband is best).  Required for automatic updates of ontologies and some functions. </li>
 	</ul>
@@ -45,6 +46,42 @@
 	
       </div>
     </div>
+
+    <div id="sidebar_container">
+
+      <div id="sidebar_content">
+
+	<div class="content_box_head_blue">
+	  Recently added features, version 1.4-beta3
+	</div>
+
+	<div class="content_box_blue">
+<ul>
+  <li>feature: Native look-and-feel enabled for interface.  Users should now see Mac or Windows style depending on their system.</li>
+  <li>feature: read-only field (needs work)</li>
+  <li>feature: config disabling of copy of field (for db ids)</li>
+  <li>feature: display property values of terms in term info</li>
+  <li>feature: Phylogeny Chooser for NESCent/PhenoMap project. A user can import a phylogenetic tree in Newick format.  The user can use the tree
+  viewer to select rows within the character template - typically taxonomic groups.</li>
+  <li>feature: term fields can be nullified</li>
+  <li>feature: separate queries to backend for different groups, implemented in worm</li>
+  <li>feature: ID field type, requires ":"</li>
+  <li>feature: can get unique list of deleted annots</li>
+  <li>feature: added group adapter framework</li>
+  <li>feature: fly genotype group adapter makes fly genotype strings from tab/group</li>
+  <li>feature: worm group adapter makes reference terms from ref query</li>
+  <li>change: on term completion if adding a letter use previous completion list</li>
+  <li>change: worm adapter query tab working properly</li>
+  <li>change: build file takes param for webstart version deployment, and puts in jnlp</li>
+  <li>change: group adapters can listen for CharList changes</li>
+  <li>change: added/corrected birn ontologies</li>
+  <li>bugfix: load of file doesnt crash on post comp parsing bug</li>
+  <li>bugfix: doesnt load obo files specified twice twice</li>
+  <li>bugfix: view menu show up at initialization</li>
+  <li>bugfix: layout of term history with split pane proper</li>
+</ul>
+	</div>
+      </div>
 
     <!--#include virtual="ssi/footer.html" -->
 

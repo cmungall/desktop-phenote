@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+
+    <!--#include virtual="ssi/head.html" -->
+    <title>Phenote</title>
+
+  </head>
+  <body>
+
+    <!--#include virtual="ssi/header.html" -->
+
+    <div id="main_container_aux">
+      <div id="main_content_aux">
+
+	<div class="catch_phrase">
+	Project Team
+	</div>
+	<h2 class="bio"><a name="exec" id="exec"></a>
+	Development</h2>
+	<div class="third_bio">
+	<p><img src="http://www.bioontology.org/images/team/gibson.jpg" title="Mark Gibson" alt="Mark Gibson" height="130"/></p>
+      <p><a href="http://www.berkeleybop.org/mgibson/" title="Mark Gibson">Mark Gibson</a>, MSE</p>
+	</div>	
+	<div class="third_bio">
+	<p><img src="http://www.bioontology.org/images/team/washington.jpg" title="Nicole Washington" alt="Nicole Washington" height="130" /> </p>
+      <p><a href="http://berkeleybop.org/content/people/nlwashington/" title="Nicole Washington">Nicole Washington</a></a>, PhD </p>
+      <var>Software Developer</var>
+	</div>	
+      <div class="third_bio">
+      <p><img src="http://www.bioontology.org/images/team/mungall.jpg" title="Chris Mungall" alt="Chris Mungall" height="130" /></p>
+      <p><a href="http://www.fruitfly.org/%7Ecjm/" title="Chris Mungall">Chris Mungall</a>, BSc</p>
+      <var>Bioinformatics Specialist, BDGP</var>
+    </div>
+    <div class="clearall"></div>
+
+    <div class="third_bio">
+      <p><img src="images/team/lewis.jpg" title="Suzanna Lewis" alt="Suzanna Lewis" height="130" /> </p>
+      <p><a href="http://www.berkeleybop.org/content/people/suzi/" title="Suzanna Lewis">Suzanna Lewis</a>, MS</p>
+      <var>Co-principal Investigator</var> </div>
+
+      <h1>Affiliations</h1>
+
+	<h3>
+	  <a href="http://bioontology.org/">
+	    National Center for Biomedical Ontology (NCBO)
+	  </a>
+	</h3> 
+	<p>
+	  The NCBO is a consortium of leading biologists, clinicians,
+	  informaticians, and ontologists who develop innovative
+	  technology and methods that allow scientists to create,
+	  disseminate, and manage biomedical information and knowledge
+	  in machine-processable form.
+	</p>
+
+	<h3>
+	  <a href="http://www.berkeleybop.org/">
+	    Berkeley Bioinformatics and Ontologies Project (BBOP)
+	  </a>
+	</h3> 
+	<p>
+	  The BBOP is located at the Lawrence Berkeley National Labs,
+	  is a diverse group of scientific researchers and software
+	  engineers dedicated to developing tools and applying
+	  computational technologies to solve biological
+	  problems. Members of the group contribute to a number of
+	  projects, including The Gene Ontology, The National Center
+	  for Biomedical Ontology, and the Generic Model Organism
+	  Database Project.
+	</p>
+	
+      </div>
+    </div>
+
+    <!--#include virtual="ssi/footer.html" -->
+
+  </body>
+</html>
