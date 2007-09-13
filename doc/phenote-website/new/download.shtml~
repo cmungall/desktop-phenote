@@ -47,6 +47,42 @@
       </div>
     </div>
 
+    <div id="sidebar_container">
+
+      <div id="sidebar_content">
+
+	<div class="content_box_head_blue">
+	  Recently added features, version 1.4-beta3
+	</div>
+
+	<div class="content_box_blue">
+<ul>
+  <li>feature: Native look-and-feel enabled for interface.  Users should now see Mac or Windows style depending on their system.</li>
+  <li>feature: read-only field (needs work)</li>
+  <li>feature: config disabling of copy of field (for db ids)</li>
+  <li>feature: display property values of terms in term info</li>
+  <li>feature: Phylogeny Chooser for NESCent/PhenoMap project. A user can import a phylogenetic tree in Newick format.  The user can use the tree
+  viewer to select rows within the character template - typically taxonomic groups.</li>
+  <li>feature: term fields can be nullified</li>
+  <li>feature: separate queries to backend for different groups, implemented in worm</li>
+  <li>feature: ID field type, requires ":"</li>
+  <li>feature: can get unique list of deleted annots</li>
+  <li>feature: added group adapter framework</li>
+  <li>feature: fly genotype group adapter makes fly genotype strings from tab/group</li>
+  <li>feature: worm group adapter makes reference terms from ref query</li>
+  <li>change: on term completion if adding a letter use previous completion list</li>
+  <li>change: worm adapter query tab working properly</li>
+  <li>change: build file takes param for webstart version deployment, and puts in jnlp</li>
+  <li>change: group adapters can listen for CharList changes</li>
+  <li>change: added/corrected birn ontologies</li>
+  <li>bugfix: load of file doesnt crash on post comp parsing bug</li>
+  <li>bugfix: doesnt load obo files specified twice twice</li>
+  <li>bugfix: view menu show up at initialization</li>
+  <li>bugfix: layout of term history with split pane proper</li>
+</ul>
+	</div>
+      </div>
+
     <!--#include virtual="ssi/footer.html" -->
 
   </body>
