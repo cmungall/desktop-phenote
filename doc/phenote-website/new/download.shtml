@@ -3,7 +3,7 @@
   <head>
 
     <!--#include virtual="ssi/head.html" -->
-    <title>Phenote</title>
+    <title>Phenote: A Phenotype Annotation Tool using Ontologies</title>
 
   </head>
   <body>
@@ -13,22 +13,35 @@
     <div id="main_container_aux">
       <div id="main_content_aux">
 	<div class="catch_phrase">
-	  Download Software
 	</div>
-
-	<h3>
-	  <a href="ssi/header.shtml">
-	    Header
-	  </a>
-	</h3>
-	<p>Use phenote with webstart</p>
-	<h4>Hardware requirements
-	</h4>
-	<h4>Software requirements
-	</h4>
-	<p>
-	  Body
+	<h3>Launch Phenote in your browser</h3>
+	<p> You can run phenote directly from your web browser without a separate installation.</p>
+	<ul><li>Beta release: <a href="http://www.phenote.org/1.4-beta3/phenote.jnlp">1.4 beta3</a></li>
+	<li>Stable release: <a href="http://www.phenote.org/1.3/phenote.jnlp">1.3</a> </li>
+	<li><a href="http://www.phenote.org/old.shtml">Older releases</a></li>
+	</ul>
+		
+	<h3>Run Phenote at the command line</h3>
+	<p> To run phenote on the command line, linux or MacOSX users will need to checkout Phenote from the subversion repository.  This can be done with the following command:</p>
+	<ul><li>Beta release: <b>svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/tags/1.4-beta3/ phenote</b> </li>
+	<li>Stable release: <b>svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/tags/1.3/ phenote</b>
+	<li>Latest: <b>svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/trunk phenote </b></li>
+	</ul>	
+	<p>Once you've got it, you can run Phenote with ant with the command:  <b>ant run</b>
 	</p>
+	<h3>Hardware requirements</h3>
+	<ul>
+	<li> 400 Mhz processor or faster.</li>
+	<li> 500 MB RAM </li>
+	<li> ? MB free disk space on your computer </li>
+	<li> Internet connection (broadband is best).  Required for automatic updates of ontologies and some functions. </li>
+	</ul>
+	<h3>Software requirements</h3>
+	<ul>
+	<li> PC running Windows XP; Mac OSX; Linux </li>
+	<li> Webstart:  Internet browser with webstart installed </li>
+	<li> Command line:  Java 1.5 or later; Ant </li>
+	</ul>	
 	
       </div>
     </div>

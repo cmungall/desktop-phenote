@@ -3,7 +3,7 @@
   <head>
 
     <!--#include virtual="ssi/head.html" -->
-    <title>Open Biomedical Ontologies Foundry</title>
+    <title>Phenote: A Phenotype Annotation Tool</title>
 
   </head>
   <body>
@@ -16,7 +16,7 @@
 	  Frequently Asked Questions (FAQ)
 	</div>
 
-	<h2>General</h2>
+	<h1>General</h1>
 	<h3>How do I get started?</h3>
 	<p>
 	   You can lauch Phenote directly from your browser.  Simply click on the Phenote link from the main page or the Downloads page, and it will launch directly from your browser.  It will take a couple of minutes to download all the components, but that's it.
@@ -33,7 +33,7 @@
 	<p>
 	You can request new features through our <a href="http://www.sourceforge.net/tracker/?group_id=76834&atid=887913">Feature Request tracker</a>.  Please be sure to label the "Group" as a "new feature".
 	</p>
-	<h2>Ontologies</h2>
+	<h1>Ontologies</h1>
 	<h3>What kinds of ontologies can I use?</h3>
 	<p>
 	You can use any kind of domain specific ontologies.  While Phenote is a tool being developed for annotation of biological phenotypes, it can certainly be adapted to any domain whose knowledge is captured with ontologies.  
@@ -65,7 +65,7 @@
 	    <li><a href="http://www.obofoundry.org/">OBO Foundry</a></li>
 	  </ul>
 	</p>
-	<h2>Using Phenote</h2>
+	<h1>Using Phenote</h1>
 	<h3>Is there some online documentation?</h3>
 	<p>
 	You bet!  Check out our <a href="http://www.phenote.org/help/">User's Guide</a></p>
