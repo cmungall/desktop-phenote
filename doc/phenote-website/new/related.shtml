@@ -3,7 +3,7 @@
   <head>
 
     <!--#include virtual="ssi/head.html" -->
-    <title>Open Biomedical Ontologies Foundry</title>
+    <title>Phenote</title>
 
   </head>
   <body>
@@ -15,19 +15,30 @@
 	<div class="catch_phrase">
 	  Related Projects
 	</div>
-
+	<h1>Ontologies</h1>
 	<h3>
-	  <a href="http://www.gmod.org/">
-	    Generic Model Organism Databases</a>
+	  <a href="http://www.bioontology.org/wiki/index.php/PATO:Main_Page">
+	    Phenotype and Trait Ontology (PATO)</a>
+	</h3> 	
+	<p> 
+	An ontology of phenotypic qualities (properties). This ontology
+	can be used in conjunction with other ontologies such as GO or 
+	anatomical ontologies to refer to phenotypes. Examples of 
+	qualities are red, ectopic, high temperature, fused, small, 
+	edematous and arrested.
+	</p>
+	<h3>
+	  <a href="http://www.geneontology.org/">
+	    Gene Ontology (GO)</a>
 	</h3> 
 	<p>
-	  The Generic Model Organism Project (GMOD) is a joint effort
-	  by the model organism system databases WormBase, FlyBase,
-	  MGI, SGD, Gramene, Rat Genome Database, EcoCyc, and TAIR to
-	  develop reusable components suitable for creating new
-	  community databases of biology.
-	</p>
-
+	The Gene Ontology (GO) project is a collaborative effort to address 
+	the need for consistent descriptions of gene products in different 
+	databases. 
+	The Gene Ontology project provides a controlled vocabulary to 
+	describe gene and gene product attributes in any organism.  There
+	are three distinct ontologies developed by GO:  molecular function,
+	biological process, and cellular component.  
 	<h3>
 	  <a href="http://obi.sourceforge.net/">
 	    Ontologies for Biomedical Investigations
@@ -42,6 +53,48 @@
 	  field of study.
 	</p>
 	
+
+	<h1>Resources</h1>
+	<h3>
+	  <a href="http://www.bioontology.org/">
+	    National Center for Biomedical Ontology</a>
+	</h3> 
+	<p>
+	The NCBO is a consortium of leading biologists, clinicians, 
+	informaticians, and ontologists who develop innovative technology 
+	and methods that allow scientists to create, disseminate, and 
+	manage biomedical information and knowledge in machine-processable 
+	form.
+	</p>
+	<h3>
+	  <a href="http://www.obofoundry.org/">
+	    OBO Foundry</a>
+	</h3> 	
+	<p>
+	The OBO Foundry is an open, inclusive, and collaborative core of
+	interoperable ontologies developed by the research community.  The
+	goal is to facilitate the creation of consistent, compatible, and 
+	unambiguous ontologies thereby supporting the biomedical research
+	community.  The contributors are those biological researchers and 
+	ontology developers who have agreed to work together on an evolving 
+	set of design principles that can foster interoperability of 
+	ontologies, and ensure a gradual improvement of quality and formal 
+	rigor in ontologies, in ways designed to meet the increasing needs 
+	of data and information integration in the biomedical domain.
+	
+	</p>
+	<h3>
+	  <a href="http://www.gmod.org/">
+	    Generic Model Organism Databases</a>
+	</h3> 
+	<p>
+	  The Generic Model Organism Project (GMOD) is a joint effort
+	  by the model organism system databases WormBase, FlyBase,
+	  MGI, SGD, Gramene, Rat Genome Database, EcoCyc, and TAIR to
+	  develop reusable components suitable for creating new
+	  community databases of biology.
+	</p>
+
 	<h3>
 	  <a href="http://ifomis.org">
 	    Institute for Formal Ontology and Medical Information
@@ -109,19 +162,6 @@
 	<p>
 	  Is also interested in guidelines for the development of
 	  Controlled Vocabularies.
-	</p>
-	
-	<h3>
-	  <a href="http://www.sofg.org/">
-	    Standards and Ontologies for Functional Genomics
-	  </a>
-	</h3> 
-	<p>
-	  SOFG is both a meeting and a website; it aims to bring
-	  together biologists, bioinformaticians, and computer
-	  scientists who are developing and using standards and
-	  ontologies with an emphasis on describing high-throughput
-	  functional genomics experiments.
 	</p>
 	
       </div>
