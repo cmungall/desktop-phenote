@@ -21,13 +21,13 @@
 	<p>
 	Data annotated with Phenote is based on the <a href="http://www.fruitfly.org/~cjm/obd/formats.html">EQ model</a> for representing phenotypes, combining entities from any ontology with qualities (such as PATO).
 	</p>
-	<h2> Features included:</h2>
+	<h2>Features include:</h2>
 	<ul>
 	  <li>Friendly spreadsheet-like interface
 	  </li>
 	  <li>Type-ahead-suggest (autocompletion) for terms within ontologies
 	  </li>
-	  <li>Use of any OBO-format ontology
+	  <li>Use of any OBO-format ontology (or OWL->OBO converted)
 	  </li>
 	  <li>Ontology navigation and term information display
 	  </li>
@@ -102,10 +102,22 @@
 	    <li class="events">
 	  <p class="quick_link">
 	    <img src="images/star.gif" alt=""  class="icon_green"/>	      
-	    <a href="http://www.phenote.org/irc_chat">User's Group Monthly Meeting</a>, October 4, Online 
+	    <a href="http://www.phenote.org/irc_chat">User's Group Monthly Meeting</a>, October 4, 8:30am, Online 
 	    </p>
 	    </li> 
-	  <h3>Phenote demo</h3>
+	    <li class="events">
+	  <p class="quick_link">
+	    <img src="images/star.gif" alt=""  class="icon_green"/>	      
+	    <a href="http://www.phenote.org/irc_chat">User's Group Monthly Meeting</a>, November 6, 8:30am, Online 
+	    </p>
+	    </li> 
+	    <li class="events">
+	  <p class="quick_link">
+	    <img src="images/star.gif" alt=""  class="icon_green"/>	      
+	    <a href="http://www.phenote.org/irc_chat">User's Group Monthly Meeting</a>, December 1, 8:30am, Online 
+	    </p>
+	    </li> 
+	  <h3>Meetings/Demos</h3>
 	  <ul class="events">
 	    <li class="events">
 	  <p class="quick_link">
