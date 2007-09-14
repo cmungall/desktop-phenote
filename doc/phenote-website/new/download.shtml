@@ -17,7 +17,7 @@
 	<h3>Launch Phenote in your browser</h3>
 	<p> You can run phenote directly from your web browser without a separate installation by selecting one of the following links:</p>
 	<ul><li>Beta release: <a href="http://www.phenote.org/phenote/1.4-beta3/phenote.jnlp">1.4 beta3</a></li>
-	<li>Stable release: <a href="http://www.phenote.org/1.3/phenote.jnlp">1.3</a> </li>
+	<li>Stable release: <a href="http://www.phenote.org/phenote/1.3/phenote.jnlp">1.3</a> </li>
 	<li><a href="http://www.phenote.org/phenote/phenote.html">Older releases</a></li>
 	</ul>
 	<p> You may be prompted to sign a certificate and allow the download.  This will take a few minutes the first time you do this.
