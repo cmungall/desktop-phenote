@@ -37,37 +37,34 @@
 	<p> There are several relevant mailing lists user's and/or developers
 	might be interested in joining:</p>
 	<p>General phenote discussion and announcements
-	[<script type="text/javascript">
+	[ <script type="text/javascript">
 	obfuscate("lists.sourceforge.org", "obo-phenote", "Email");
-	</script>]
-	[<a href="https://lists.sourceforge.net/lists/listinfo/obo-phenote">
-	Join</a>]</p>
+	</script> ]
+	[ <a href="https://lists.sourceforge.net/lists/listinfo/obo-phenote">Join</a> ]</p>
 	<p>Phenote software development
-	[<script type="text/javascript">
+	[ <script type="text/javascript">
 	obfuscate("lists.sourceforge.org", "obo-phenote-dev", "Email");
-	</script>]
-	[<a href="https://lists.sourceforge.net/lists/listinfo/obo-phenote-dev">	Join</a>]</p>
+	</script> ]
+	[ <a href="https://lists.sourceforge.net/lists/listinfo/obo-phenote-dev">Join</a> ]</p>
 	<p>Phenotype annotation discussion list
-	[<script type="text/javascript">
+	[ <script type="text/javascript">
 	obfuscate("lists.sourceforge.org", "obo-phenotype", "Email");
-	</script>] 
-	[<a href="https://lists.sourceforge.net/lists/listinfo/obo-phenotype">
-	Join</a>]</p>
+	</script> ] 
+	[ <a href="https://lists.sourceforge.net/lists/listinfo/obo-phenotype">Join</a> ]</p>
 	<p>General OBO ontology discussion
-	[<script type="text/javascript">
+	[ <script type="text/javascript">
 	obfuscate("lists.sourceforge.org", "obo-discuss", "Email");
-	</script>]
-	[<a href="https://lists.sourceforge.net/lists/listinfo/obo-discuss">
-	Join</a>]</p>
+	</script> ]
+	[ <a href="https://lists.sourceforge.net/lists/listinfo/obo-discuss">Join</a> ]</p>
 	<p>General NCBO discussion
-	[<script type="text/javascript">
+	[ <script type="text/javascript">
 	obfuscate("lists.stanford.edu", "cbio-everyone", "Email");
-	</script>]</p>
+	</script> ]</p>
 	<h1>Reporting Bugs / Requesting Features</h1>
 	<p>If you come across problems during your use of Phenote software,
 	or there's a new feature you are dying to have, please use our 
-	tracker of sourceforge to log your request:
-	<a href="https://sourceforge.net/tracker/?group_id=76834&atid=887913">Bug Tracker</a></p>
+	tracker on sourceforge to log your request:
+	<a href="https://sourceforge.net/tracker/?group_id=76834&atid=887913">Request Tracker</a></p>
 	
       </div>
     </div>
