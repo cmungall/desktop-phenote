@@ -15,14 +15,36 @@
 	<div class="catch_phrase">
 	  Welcome to Phenote
 	</div>
+	<p>
+	Phenote is both a complete piece of software and a software toolkit designed to facilitate the annotation of biological phenotypes using ontologies.  It provides an interface to record genotype-phenotype pairs, together with the provenance for the annotation.  Typical users of Phenote include literature curators, laboratory researchers, and clinicians looking for a method to record data in a user-friendly and computable way.
+	</p>
+	<p>
+	Data annotated with Phenote is based on the <a href="http://www.fruitfly.org/~cjm/obd/formats.html">EQ model</a> for representing phenotypes, combining entities from any ontology with qualities (such as PATO).
+	</p>
+	<h2> Features included:</h2>
+	<ul>
+	  <li>Friendly spreadsheet-like interface
+	  </li>
+	  <li>Type-ahead-suggest (autocompletion) for terms within ontologies
+	  </li>
+	  <li>Use of any OBO-format ontology
+	  </li>
+	  <li>Ontology navigation and term information display
+	  </li>
+	  <li>Bulk copy/edit/delete/sort of phenotype-genotype character entries
+	  </li>
+	  <li>Excel-compatible output format (tab-delimited)
+	  </li>
+	  <li>Additional export formats:  phenosyntax, xml
+	  </li>
+	  <li>configurable input fields to allow custom data entry and user-specified ontologies
+	  </li>
+	  <li>Preconfigurations available for different communities
+	  </li>
+	  <li>Customized configurations easily added
+	  </li>
+	</ul>
 
-	<p>
-	</p>
-	<p>
-	</p>
-	<p>
-	</p>
-	
       </div>
     </div>
 
@@ -38,7 +60,7 @@
 
 	  <p class="quick_link">
 	    <img src="images/star.gif" alt=""  class="icon_green"/>
-	    <a href="http://www.phenote.org/phenote.jnlp"
+	    <a href="http://www.phenote.org/phenote/1.4-beta3/phenote.jnlp"
 	       title="Lauch Phenote via Webstart">
 		Launch Phenote via Webstart
 	    </a>
@@ -74,8 +96,16 @@
 	    </p>
 	    </li>
 	  </ul>
-	  -->	  
-	  <h3>Event Title</h3>
+	  -->	 
+	  <h3>Phenote User's Group IRC</h3>
+	  <ul class="events">
+	    <li class="events">
+	  <p class="quick_link">
+	    <img src="images/star.gif" alt=""  class="icon_green"/>	      
+	    <a href="http://www.phenote.org/irc_chat">User's Group Monthly Meeting</a>, October 4, Online 
+	    </p>
+	    </li> 
+	  <h3>Phenote demo</h3>
 	  <ul class="events">
 	    <li class="events">
 	  <p class="quick_link">
@@ -100,7 +130,7 @@
 	  <!--No news is good news!-->
 	  
 	  <!-- Do not destry the following event template -->
-	  New Phenote Beta available: 1.4-beta3!
+	  <a href="http://www.phenote.org/download.shtml">New Phenote Beta available: 1.4-beta3!</a>
 	  <!--
 	  <h3>Event Title</h3>
 	  <ul class="events">

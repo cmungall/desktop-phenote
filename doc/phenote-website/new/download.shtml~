@@ -10,8 +10,8 @@
 
     <!--#include virtual="ssi/header.html" -->
 
-    <div id="main_container_aux">
-      <div id="main_content_aux">
+    <div id="main_container">
+      <div id="main_content">
 	<div class="catch_phrase">
 	</div>
 	<h3>Launch Phenote in your browser</h3>
