@@ -56,28 +56,28 @@
 	</div>
 
 	<div class="content_box_blue">
-  <p>feature: Native look-and-feel enabled for interface.  Users should now see Mac or Windows style depending on their system.</p>
-  <p>feature: read-only field (needs work)</p>
-  <p>feature: config disabpng of copy of field (for db ids)</p>
-  <p>feature: display property values of terms in term info</p>
-  <p>feature: Phylogeny Chooser for NESCent/PhenoMap project. A user can import a phylogenetic tree in Newick format.  The user can use the tree
-  viewer to select rows within the character template - typically taxonomic groups.</p>
-  <p>feature: term fields can be nullified</p>
-  <p>feature: separate queries to backend for different groups, implemented in worm</p>
-  <p>feature: ID field type, requires ":"</p>
-  <p>feature: can get unique list of deleted annots</p>
-  <p>feature: added group adapter framework</p>
-  <p>feature: fly genotype group adapter makes fly genotype strings from tab/group</p>
-  <p>feature: worm group adapter makes reference terms from ref query</p>
-  <p>change: on term completion if adding a letter use previous completion list</p>
-  <p>change: worm adapter query tab working properly</p>
-  <p>change: build file takes param for webstart version deployment, and puts in jnlp</p>
-  <p>change: group adapters can psten for CharList changes</p>
-  <p>change: added/corrected BIRN ontologies</p>
-  <p>bugfix: load of file doesnt crash on post comp parsing bug</p>
-  <p>bugfix: doesnt load obo files specified twice twice</p>
-  <p>bugfix: view menu show up at initialization</p>
-  <p>bugfix: layout of term history with split pane proper</p>
+  <b>feature</b>: Native look-and-feel enabled for interface.  Users should now see Mac or Windows style depending on their system.<br />
+  <b>feature</b>: read-only field (needs work)<br />
+  <b>feature</b>: config disabpng of copy of field (for db ids)<br />
+  <b>feature</b>: display property values of terms in term info<br />
+  <b>feature</b>: Phylogeny Chooser for NESCent/PhenoMap project. A user can import a phylogenetic tree in Newick format.  The user can use the tree
+  viewer to select rows within the character template - typically taxonomic groups.<br />
+  <b>feature</b>: term fields can be nullified<br />
+  <b>feature</b>: separate queries to backend for different groups, implemented in worm<br />
+  <b>feature</b>: ID field type, requires ":"<br />
+  <b>feature</b>: can get unique list of deleted annots<br />
+  <b>feature</b>: added group adapter framework<br />
+  <b>feature</b>: fly genotype group adapter makes fly genotype strings from tab/group<br />
+  <b>feature</b>: worm group adapter makes reference terms from ref query<br />
+  <b>change</b>: on term completion if adding a letter use previous completion list<br />
+  <b>change</b>: worm adapter query tab working properly<br />
+  <b>change</b>: build file takes param for webstart version deployment, and puts in jnlp<br />
+  <b>change</b>: group adapters can psten for CharList changes<br />
+  <b>change</b>: added/corrected BIRN ontologies<br />
+  <b>bugfix</b>: load of file doesnt crash on post comp parsing bug<br />
+  <b>bugfix</b>: doesnt load obo files specified twice twice<br />
+  <b>bugfix</b>: view menu show up at initialization<br />
+  <b>bugfix</b>: layout of term history with split pane proper<br />
 	</div>
       </div>
     </div>
