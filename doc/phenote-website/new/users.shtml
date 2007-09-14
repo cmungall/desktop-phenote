@@ -46,6 +46,11 @@
     <td>The Gene Ontology</td>
     </tr>
     <tr>
+    <td><a href="http://www.wormbase.org/"><img class="portrait" border="0" src="/images/worm_logo.jpg" height="50" alt="WB" /></a>
+    </td>
+    <td>The <i>C. elegans</i> Genome Database (Wormbase)</td>
+    </tr>
+    <tr>
     <td><a href="http://www.nescent.org/">
         <img class="portrait" border="0" src="/images/nescent_logo.gif" height="50" alt="Nescent" /></a>
     </td>
