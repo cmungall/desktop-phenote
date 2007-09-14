@@ -101,7 +101,7 @@ public class CompListSearcher {
         // if obsoletes set then add them in addition to regulars
         if (searchParams.searchObsoletes()) {
           ontologyTermList = ontology.getSortedObsoleteTerms();
-          List obsoletes = getSearchTermList(input,ontologyTermList);
+          List<CompletionTerm> obsoletes = getSearchTermList(input,ontologyTermList);
           searchTerms.addAll(obsoletes);
         }
       }

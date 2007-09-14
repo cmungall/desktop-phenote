@@ -1,6 +1,6 @@
 package phenote.datamodel;
 
-import java.util.List;
+import ca.odell.glazedlists.EventList;
 
 /** holds a list of Characters - rename phenotype? i dont think so - can have
  multiple genotypes in it - transfreable allows it to be plopped on the
@@ -17,8 +17,6 @@ public interface CharacterListI {
   public int size();
   public boolean isEmpty();
   public int indexOf(CharacterI c);
-  public List<CharacterI> getList();
+  public EventList<CharacterI> getList();
   public boolean equals(CharacterListI cl);
-  /** Sort data by char field/column */
-  public void sortBy(CharField cf);
 }

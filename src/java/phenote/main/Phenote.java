@@ -25,21 +25,21 @@ import javax.swing.border.EmptyBorder;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
 import phenote.charactertemplate.CharacterTemplateController;
 import phenote.config.Config;
 import phenote.config.ConfigException;
 import phenote.config.xml.GroupDocument.Group;
-import phenote.error.ErrorEvent;
-import phenote.error.ErrorListener;
-import phenote.error.ErrorManager;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.OntologyDataAdapter;
 import phenote.datamodel.CharacterListI;
-import phenote.gui.CharacterTablePanel;
+import phenote.error.ErrorEvent;
+import phenote.error.ErrorListener;
+import phenote.error.ErrorManager;
+import phenote.gui.CharacterTableController;
 import phenote.gui.GridBagUtil;
 import phenote.gui.MenuManager;
 import phenote.gui.SelectionHistory;
@@ -53,7 +53,7 @@ public class Phenote {
   private static Logger LOG = Logger.getLogger(Phenote.class);
   private static boolean standalone = false; // default for servlet
 
-  private CharacterTablePanel characterTablePanel;
+  private JPanel characterTablePanel;
   private FieldPanel mainFieldPanel;
   private static Phenote phenote;
   private TermInfo termInfo;
@@ -349,8 +349,11 @@ public class Phenote {
     JPanel infoHistoryPanel = new JPanel(new GridBagLayout());
     infoHistoryPanel.setBorder(new EmptyBorder(10,10,10,10));
     
+    CharacterTableController tableController = new CharacterTableController(group.getName());
+    characterTablePanel = tableController.getCharacterTablePanel();
+    
     // need to do different selection & edit mgrs
-    FieldPanel groupFieldPanel = new FieldPanel(true,false,group.getName());
+    FieldPanel groupFieldPanel = new FieldPanel(true,false,group.getName(), tableController.getSelectionModel());
     groupFieldPanel.setBorder(new EmptyBorder(10,10,10,10));
     // for testing - thats it
     if (group == null || group.getName().equals("default"))
@@ -369,7 +372,7 @@ public class Phenote {
     JSplitPane innerSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, groupFieldPanel, infoHistoryPanel);
     innerSplitPane.setDividerLocation(700);
     
-    characterTablePanel = new CharacterTablePanel(group.getName());
+    
     
     JSplitPane outerSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, innerSplitPane, characterTablePanel);
     mainPanel.add(outerSplitPane);
@@ -423,7 +426,7 @@ public class Phenote {
   // These methods are actually for TestPhenote
   public FieldPanel getFieldPanel() { return mainFieldPanel; }
   public TermInfo getTermInfo() { return termInfo; }
-  public CharacterTablePanel getCharacterTablePanel() { return characterTablePanel; }
+  //public CharacterTablePanel getCharacterTablePanel() { return characterTablePanel; }
 
 }
 

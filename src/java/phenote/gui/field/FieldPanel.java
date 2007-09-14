@@ -9,19 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import phenote.config.Config;
-import phenote.config.xml.GroupDocument.Group;
-import phenote.datamodel.CharField;
-import phenote.datamodel.OntologyManager;
-import phenote.edit.EditManager;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.GroupAdapterI;
+import phenote.datamodel.CharField;
+import phenote.datamodel.CharacterI;
+import phenote.datamodel.OntologyManager;
+import phenote.edit.EditManager;
 import phenote.gui.selection.SelectionManager;
+import ca.odell.glazedlists.swing.EventSelectionModel;
 
 /**
  * FieldPanel holds all the fields for the terms - Genotype, Entity/Anatomy, QUALITY.
@@ -39,6 +39,7 @@ public class FieldPanel extends JPanel {
   private String group;
   private SelectionManager selectionManager;
   private EditManager editManager;
+  private EventSelectionModel<CharacterI> selectionModel;
 
   /** eventually configurable (with default 12) - for now hardwire at 12 */
   private static int fieldsPerTab = 12;
@@ -52,21 +53,23 @@ public class FieldPanel extends JPanel {
 //   }
 
   // Group or String for group?
-  public FieldPanel(boolean doAllFields, boolean addSearchPanel, String grp) {
+  public FieldPanel(boolean doAllFields, boolean addSearchPanel, String grp, EventSelectionModel<CharacterI> model) {
     setGroup(grp);
     init(doAllFields,addSearchPanel,group,SelectionManager.getSelMan(group),
-         EditManager.getEditManager(group));
+         EditManager.getEditManager(group), model);
   }
   
   public FieldPanel(boolean doAllFields, boolean addSearchPanel,
                     String group, SelectionManager selectionManager,
-                    EditManager editManager) {
-    init(doAllFields,addSearchPanel,group,selectionManager,editManager);
+                    EditManager editManager, EventSelectionModel<CharacterI> model) {
+    
+    init(doAllFields,addSearchPanel,group,selectionManager,editManager, model);
   }
 
   private void init(boolean doAllFields, boolean addSearchPanel,String group,
-                    SelectionManager selectionManager, EditManager editManager) {
+                    SelectionManager selectionManager, EditManager editManager, EventSelectionModel<CharacterI> model) {
     setGroup(group);
+    this.selectionModel = model;
     this.selectionManager = selectionManager;
     this.editManager = editManager;
     initGui();
@@ -136,7 +139,9 @@ public class FieldPanel extends JPanel {
       int minCompChars = Config.inst().getMinCompChars(fieldNum);
       CharFieldGui gui = CharFieldGui.makeCharFieldGui(charField,minCompChars);
       ++fieldNum;
+      
       gui.setSelectionManager(this.selectionManager);
+      gui.setListSelectionModel(this.selectionModel);
       gui.setEditManager(this.editManager);
       addCharFieldGuiToPanel(gui);
       charFieldGuiList.add(gui);

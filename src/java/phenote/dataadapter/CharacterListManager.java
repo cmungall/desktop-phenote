@@ -56,7 +56,9 @@ public class CharacterListManager {
       JOptionPane.showMessageDialog(null,m,"Load failure",JOptionPane.ERROR_MESSAGE);
       return;
     }
-    characterList = charList;
+    characterList.getList().clear();
+    characterList.getList().addAll(charList.getList());
+    //characterList = charList;
     fireChangeEvent(source,charList);
   }
 

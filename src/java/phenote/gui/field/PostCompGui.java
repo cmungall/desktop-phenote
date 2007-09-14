@@ -12,9 +12,10 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import org.apache.log4j.Logger;
 import org.geneontology.oboedit.datamodel.OBOClass;
@@ -31,9 +32,8 @@ import phenote.edit.CharChangeListener;
 import phenote.edit.CompoundTransaction;
 import phenote.edit.EditManager;
 import phenote.gui.selection.CharSelectionEvent;
-import phenote.gui.selection.CharSelectionListener;
 import phenote.gui.selection.SelectionManager;
-import phenote.main.Phenote;
+import ca.odell.glazedlists.swing.EventSelectionModel;
 
 //import phenote.gui.SearchParams;
 //import phenote.gui.SearchParamsI;
@@ -56,16 +56,18 @@ class PostCompGui {
   private FieldPanel compFieldPanel;
   private EditManager editManager;
   private SelectionManager selectionManager;
+  private EventSelectionModel<CharacterI> selectionModel;
   private Frame owner;
   /** # of chars to type to get completion in genus & diff - do we need for relation? */
   private int minCompChars=0;
   
   
-  PostCompGui(CharField charField, EditManager eManager, SelectionManager selManager,
+  PostCompGui(CharField charField, EditManager eManager, SelectionManager selManager, EventSelectionModel<CharacterI> selModel,
               Frame ownerFrame, int minCompChars) {
     this.charField = charField;
     this.editManager = eManager;
     this.selectionManager = selManager;
+    this.selectionModel = selModel;
     this.owner = ownerFrame;
     this.minCompChars = minCompChars;
     init();
@@ -77,12 +79,13 @@ class PostCompGui {
     // dialog wont be focusable if owner is not showing or something like that
    
     dialog = new JDialog(this.owner, charField.getName() + " Post Composition");
-    compFieldPanel = new FieldPanel(false,false, null, this.selectionManager, this.editManager); // (searchParams)?
+    compFieldPanel = new FieldPanel(false,false, null, this.selectionManager, this.editManager, null); // (searchParams)?
     //compFieldPanel.setSearchParams(searchParams);
     
     // MAIN GENUS TERM
     genusField = CharFieldGui.makePostCompTermList(charField,"Genus",minCompChars);
     genusField.setSelectionManager(this.selectionManager);
+    //genusField.setListSelectionModel(this.selectionModel);
     compFieldPanel.addCharFieldGuiToPanel(genusField);
 
     // REL-DIFFS
@@ -107,7 +110,7 @@ class PostCompGui {
     dialog.setVisible(true);
 
     this.editManager.addCharChangeListener(new CompCharChangeListener());
-    this.selectionManager.addCharSelectionListener(new CompCharSelectListener());
+    this.selectionModel.addListSelectionListener(new CompCharSelectListener());
   }
 
   private void addRelDiffGui() {
@@ -128,10 +131,12 @@ class PostCompGui {
       relField.setMinCompChars(minCompChars);
       relField.setEditManager(PostCompGui.this.editManager);
       relField.setSelectionManager(PostCompGui.this.selectionManager);
+      //relField.setListSelectionModel(PostCompGui.this.selectionModel);
       compFieldPanel.addCharFieldGuiToPanel(relField);
       diffField = CharFieldGui.makePostCompTermList(charField,"Differentia",minCompChars);
       diffField.setEditManager(PostCompGui.this.editManager);
       diffField.setSelectionManager(PostCompGui.this.selectionManager);
+      //diffField.setListSelectionModel(PostCompGui.this.selectionModel);
       compFieldPanel.addCharFieldGuiToPanel(diffField);
     }
     private void setRelDiffModel(RelDiffModel rd) {
@@ -193,18 +198,25 @@ class PostCompGui {
     }
   }
 
-  private class CompCharSelectListener implements CharSelectionListener {
-    public void charactersSelected(CharSelectionEvent e) {
+  private class CompCharSelectListener implements ListSelectionListener {
+
+    public void valueChanged(ListSelectionEvent e) {
       setGuiFromSelectedModel();
     }
+    
   }
 
   private OBOClass getModelTerm() {
     // there should be convenience method for this
     // multi select get 1st??
-    CharacterI c = this.selectionManager.getFirstSelectedCharacter();
-    //return charField.getCharFieldEnum().getValue(c).getOboClass();
-    return c.getValue(charField).getOboClass();
+    //CharacterI c = this.selectionManager.getFirstSelectedCharacter();
+    // TODO - this may not be the best
+    if (!this.selectionModel.getSelected().isEmpty()) {
+      CharacterI c = this.selectionModel.getSelected().get(0);
+      return c.getValue(charField).getOboClass();
+    } else {
+      return null;
+    }    
   }
 
   // util fn?
@@ -351,11 +363,11 @@ class PostCompGui {
   }
 
   private void commitTerm(OBOClass postComp) {
-    List<CharacterI> chrs = this.selectionManager.getSelectedChars();
-    //CharFieldEnum cfe = charField.getCharFieldEnum();
-    //CompoundTransaction ct = new CompoundTransaction(chrs,cfe,postComp);
-    CompoundTransaction ct = CompoundTransaction.makeUpdate(chrs,charField,postComp);
-    this.editManager.updateModel(this,ct);
+    final List<CharacterI> chrs = this.selectionModel.getSelected();
+    if (!chrs.isEmpty()) {
+      final CompoundTransaction ct = CompoundTransaction.makeUpdate(chrs,charField,postComp);
+      this.editManager.updateModel(this,ct);
+    }
   }
 
   private String pcString(String g, String d) {

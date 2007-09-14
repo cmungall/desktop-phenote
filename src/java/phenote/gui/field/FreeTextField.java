@@ -1,53 +1,33 @@
 package phenote.gui.field;
 
+import java.awt.Color;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Point;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.InputVerifier;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.JComponent;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
-import javax.swing.KeyStroke;
-//import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.text.DefaultEditorKit;
-import javax.swing.text.JTextComponent;
-import javax.swing.text.Keymap;
 
 import org.apache.log4j.Logger;
 
 import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 import phenote.edit.CompoundTransaction;
 import phenote.error.ErrorEvent;
 import phenote.error.ErrorManager;
 import phenote.gui.FieldRightClickMenu;
 import phenote.gui.GuiUtil;
-import phenote.gui.selection.CharSelectionEvent;
-import phenote.main.Phenote;
 
-
-// should this be a subclass of charfieldGui? maybe?
 class FreeTextField extends CharFieldGui {
 
   private JTextField textField;
@@ -58,22 +38,16 @@ class FreeTextField extends CharFieldGui {
   //private void initTextField(String label) {
   FreeTextField(CharField charField) { //CharFieldGui cfg) {
     super(charField);
-    //charFieldGui = cfg;
-    textField = new JTextField();
-    //textField.setKeymap(phenote.main.Phenote.defaultKeymap); didnt work
-    textField.setEditable(true);
-    textField.getDocument().addDocumentListener(new TextFieldDocumentListener());
-    textField.addFocusListener(new FreeFocusListener());
+    this.getTextField().setEditable(true);
+    this.getTextField().addActionListener(new FieldActionListener());
+    this.getTextField().getDocument().addDocumentListener(new TextFieldDocumentListener());
      //Add listener to components that can bring up popup menus.
     JPopupMenu popup = new FieldRightClickMenu();
     MouseListener popupListener = new PopupListener(popup);
-    textField.addMouseListener(popupListener);
+    this.getTextField().addMouseListener(popupListener);
 
     if (hasInputVerifier())
-      textField.setInputVerifier(getInputVerifier());
-
-    //textField.addKeyListener(new TextKeyListener());
-    loadKeyMap(); // mac cut copy paste
+      this.getTextField().setInputVerifier(getInputVerifier());
   }
 
   protected boolean hasInputVerifier() {
@@ -83,35 +57,21 @@ class FreeTextField extends CharFieldGui {
   /** overridden by subclasses that verify input (IdFieldGui, IntFieldGui...) */
   protected InputVerifier getInputVerifier() { return null; }
 
-  private static final int shortcut = 
-    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
-
-  JTextComponent.KeyBinding[] defaultBindings = {
-     new JTextComponent.KeyBinding(
-       KeyStroke.getKeyStroke(KeyEvent.VK_C, shortcut),
-       DefaultEditorKit.copyAction),
-     new JTextComponent.KeyBinding(
-       KeyStroke.getKeyStroke(KeyEvent.VK_V, shortcut),
-       DefaultEditorKit.pasteAction),
-     new JTextComponent.KeyBinding(
-       KeyStroke.getKeyStroke(KeyEvent.VK_X, shortcut),
-       DefaultEditorKit.cutAction),
-   };
-
- 
-  /** actually i think this only needs to happen once per session - this reinstates
-      apples apple c,v,x that gets lost in setting look & feel to metal to 
-      alleviate jcombo apple bug */
-  private void loadKeyMap() {
-    Keymap k = textField.getKeymap();
-    JTextComponent.loadKeymap(k, defaultBindings, textField.getActions());
+  protected JComponent getUserInputGui() {
+    return this.getTextField();
+    }
+  
+  private JTextField getTextField() {
+    if (this.textField == null) {
+      this.textField = new JTextField();
+    }
+    return this.textField;
   }
 
-  //JTextField getComponent() { return textField; }
-  protected Component getUserInputGui() { return textField; }
-
   protected void setText(String text) {
+    this.setUpdateGuiOnly(true);
     textField.setText(text);
+    this.setUpdateGuiOnly(false);
   }
   protected String getText() { return textField.getText(); }
 
@@ -132,37 +92,32 @@ class FreeTextField extends CharFieldGui {
     setText(v);
   }
   
-  protected void setGuiForMultiSelect() {
-    setUpdateGuiOnly(true);//updateGuiOnly = true;
-    setText("*"); // this sets gui text changed to true, but probably shouldnt
-    // guiTextHasChanged = false; // ???
-    setUpdateGuiOnly(false);//updateGuiOnly = false;
+  protected void setCharFieldValue(CharFieldValue value) {
+    this.setText(value.getName());
+  }
+  
+  protected void focusLost() {
+    super.focusLost();
+    if (!this.shouldResetGuiForMultipleValues()) {
+      this.updateModel();
+    }
+  }
+  
+  protected boolean hasFocus() {
+    return this.getTextField().hasFocus();
   }
 
   // subclass?
   //private CharField getCharField() { return charFieldGui.getCharField(); }
-
-  /** key listener for free text fields for Cmd-V pasting for macs */
-  private class TextKeyListener extends KeyAdapter {
-    public void keyPressed(KeyEvent e) {
-      // on a mac Command-V is paste. this aint so with java/metal look&feel
-      if (e.getKeyChar() == 'v' 
-          && e.getKeyModifiersText(e.getModifiers()).equals("Command")) {
-        //log().debug("got cmd V paste");
-        //System.getClipboard
-        Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
-        try {
-          Transferable t = c.getContents(null); // null?
-          Object s = t.getTransferData(DataFlavor.stringFlavor);
-          // this isnt quite right as it should just insert the text not wipe
-          // it out - but probably sufficient for now?
-          if (s != null)
-            setText(s.toString());
-        } catch (Exception ex) { System.out.println("failed paste "+ex); }
-      }
-    }
-  }
   
+  private class FieldActionListener implements ActionListener {
+
+    public void actionPerformed(ActionEvent e) {
+      FreeTextField.this.updateModel();
+    }
+    
+  }
+
   // whats this about???
   private class PopupListener extends MouseAdapter {
   	JPopupMenu popup;
@@ -203,27 +158,19 @@ class FreeTextField extends CharFieldGui {
   	}
   }
 
-  /** if the focus has changed and the gui has been edited then edit the model */
-  private class FreeFocusListener implements FocusListener {
-    public void focusGained(FocusEvent e) {}
-    public void focusLost(FocusEvent e) {
-      //updateModel();
-      FreeTextField.this.focusLost();
-    }
-  }
-
-  protected void focusLost() { updateModel(); }
-
   /** update model using currently selected chars */
-  private void updateModel() {
+  protected void updateModel() {
+    log().debug("Update model");
     List<CharacterI> chars = getSelectedChars();
     updateModel(chars);
   }
 
   private void updateModel(List<CharacterI> chars) {
+    if (chars.isEmpty()) return;
     // if only updating gui (multi select clear) then dont update model
     if (updateGuiOnly()) return;
     if (!guiTextHasChanged) return; // gui hasnt been edited
+    if (!this.hasChangedMultipleValues()) return;
     if (!verify()) {
       //JOptionPane.showMessageDialog(null,getConstraintFailureMsg(),"Input Error",
       //                                JOptionPane.ERROR_MESSAGE); 
@@ -324,20 +271,6 @@ class FreeTextField extends CharFieldGui {
 
   protected String getConstraintFailureMsg() { return null; }
 
-  /** selection (from selMan/table) comes in before focus lost! update model with
-      previous selection */
-  protected void charactersSelected(CharSelectionEvent e) {
-    //new Throwable().printStackTrace();
-    if (e.hasPreviouslySelectedChars())
-      updateModel(e.getPreviouslySelectedChars());
-    super.charactersSelected(e); // CharFieldGui
-  }
-  
-  private List<CharacterI> getSelectedChars() {
-    return this.getSelectionManager().getSelectedChars();
-  }
-  
-
   /** This is where it is noted that the gui has been edited, only update  
     the model on focus change if the gui has been actually edited */
   private class TextFieldDocumentListener implements DocumentListener {
@@ -347,8 +280,10 @@ class FreeTextField extends CharFieldGui {
     private void setGuiChanged() { 
       // only note text change if not updating just gui?, * for multi select
       // fixes bug for * multi select editing model
-      if (!updateGuiOnly())
+      if (!updateGuiOnly()) {
+        FreeTextField.this.setHasChangedMultipleValues(true);
         guiTextHasChanged = true;
+      }
     }
   }
 

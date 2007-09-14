@@ -5,21 +5,13 @@ package phenote.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
-import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharacterListI;
-import phenote.dataadapter.CharacterListManager;
-import phenote.dataadapter.DataAdapterI;
-import phenote.dataadapter.LoadSaveManager;
 import phenote.config.Config;
-import phenote.config.ConfigFileQueryGui;
-import phenote.config.ConfigException;
 import phenote.edit.EditManager;
-import phenote.gui.CharacterTablePanel;
-import phenote.gui.CharacterTableModel;
 
 
 //import phenote.gui.prefswindow.PrefsWindowController; ???
@@ -27,8 +19,7 @@ import phenote.gui.CharacterTableModel;
 class EditMenu extends JMenu {
 
   private JMenuItem editMenuItem;
-  private CharacterTableModel characterTableModel;
-  private boolean scrollToNewLastRowOnRepaint = false;
+  
 
   EditMenu() {
     super("Edit");

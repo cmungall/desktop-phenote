@@ -1,57 +1,48 @@
 package phenote.gui.field;
 
-import java.awt.Component;
-import java.awt.Container;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.util.Collections;
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import org.apache.log4j.Logger;
-
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOProperty;
 
-import phenote.datamodel.CharField;
-import phenote.datamodel.CharFieldEnum;
-import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharacterListI;
+import phenote.config.Config;
 import phenote.dataadapter.CharacterListManager;
-import phenote.datamodel.Ontology;
-import phenote.datamodel.OntologyException;
-import phenote.datamodel.OntologyManager;
 import phenote.dataadapter.DataAdapterEx;
 import phenote.dataadapter.QueryableDataAdapterI;
+import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldEnum;
+import phenote.datamodel.CharFieldValue;
+import phenote.datamodel.CharacterI;
+import phenote.datamodel.CharacterListI;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
-//import phenote.edit.CompoundTransaction;
 import phenote.edit.EditManager;
-//import phenote.edit.UpdateTransaction;
-import phenote.dataadapter.QueryableDataAdapterI;
-import phenote.config.Config;
-import phenote.gui.selection.CharSelectionListener;
-import phenote.gui.selection.CharSelectionEvent;
 import phenote.gui.selection.SelectionManager;
-
-import phenote.gui.SearchParams;
-import phenote.gui.SearchParamsI;
+import ca.odell.glazedlists.swing.EventSelectionModel;
 
 /** fields can either be text fields for free text or combo boxes if have 
     ontology to browse - CharFieldGui does either - with get/setText - hides the
     details of the gui - just a field that gives text 
     should there be subclasses for free text, term, & relations? hmmmm */
-abstract class CharFieldGui {
+abstract class CharFieldGui implements ListSelectionListener {
   private CharField charField;
-  //private FieldPanel fieldPanel;
-  //private JComboBox ontologyChooserCombo;
   private String label;
-  //private boolean enableListeners = true;
-  private boolean addCompButton = true;
   /** if true then set gui but not model, for clearing on multi, default false */
   private boolean updateGuiOnly = false;
   private JButton retrieveButton;
@@ -60,27 +51,41 @@ abstract class CharFieldGui {
   private boolean editModel = true;
   private SelectionManager selectionManager;
   private EditManager editManager;
-  
+  protected EventSelectionModel<CharacterI> selectionModel;
+  private boolean inMultipleValueState = false;
+  private boolean hasChangedMultipleValues = true;
+  private Color enabledColor;
+  private Color disabledColor;
 
   /** CharFieldGui for main window not post comp box - factory method */
   static CharFieldGui makeCharFieldGui(CharField charField,int minCompChars) {
+    CharFieldGui fieldGui;
     if (charField.isTerm()) { //hasOntologies()) {
       //return new TermCompList(charField,sp,true); // enable listeners
       TermCompList t = new TermCompList(charField,minCompChars);
       //t.setSearchParams(sp);
       t.allowPostCompButton(true);
-      return t;
+      fieldGui = t;
     }
     else if (charField.isID()) {
-      return new IdFieldGui(charField);
+      fieldGui = new IdFieldGui(charField);
     }
     else if (charField.isReadOnly()) {
-      return new ReadOnlyFieldGui(charField);
+      fieldGui = new ReadOnlyFieldGui(charField);
     }
     else {
       FreeTextField f = new FreeTextField(charField);
-      return f;
+      fieldGui = f;
     }
+    fieldGui.setGuiForNoSelection();
+    final JComponent component = fieldGui.getUserInputGui();
+    if (component instanceof JComboBox) {
+      // JComboBox does not correctly notify its focus listeners - need to use editor instead
+      ((JComboBox)component).getEditor().getEditorComponent().addFocusListener(new FieldFocusListener(fieldGui));
+    } else {
+      component.addFocusListener(new FieldFocusListener(fieldGui));
+    }
+    return fieldGui;
   }
 
   /** createPostCompRelationList - will relation lists ever be in main window and if
@@ -126,12 +131,73 @@ abstract class CharFieldGui {
 
 
   /** Get the component used for user input - text field or jCombo */
-  protected abstract Component getUserInputGui();
+  protected abstract JComponent getUserInputGui();
 
+  public void setListSelectionModel(EventSelectionModel<CharacterI> model) {
+    this.selectionModel = model;
+    this.selectionModel.addListSelectionListener(this);
+  }
   
+  public void valueChanged(ListSelectionEvent e) {
+    this.updateGuiOnly = true;
+    this.setValueFromChars(this.getSelectedChars());
+    this.updateGuiOnly = false;
+  }
+  
+  /** Set the gui from the model (selection) */
+  protected void setValueFromChars(List<CharacterI> characters) {
+    this.setForegroundColor(this.getEnabledTextColor());
+    this.setInMultipleValueState(false);
+    if (characters.isEmpty()) {
+      this.setGuiForNoSelection();
+      return;
+    }
+    this.getUserInputGui().setEnabled(true);
+    if (this.areCharactersEqualForCharField(characters, this.getCharField())) {
+      this.setCharFieldValue(characters.get(0).getValue(this.getCharField()));
+    } else {
+      this.setMultipleValuesConditions();
+    }
+  }
+  
+  protected boolean areCharactersEqualForCharField(List<CharacterI> characters, CharField charField) {
+    if (characters.isEmpty()) return true;
+    final CharFieldValue firstValue = characters.get(0).getValue(this.getCharField());
+    for (CharacterI character : characters) {
+      final CharFieldValue otherValue = character.getValue(this.getCharField());
+      if (otherValue == null) {
+        if (firstValue == null) {
+          continue;
+        } else {
+          return false;
+        }
+      }
+      if (!otherValue.equals(firstValue)) {
+        return false;
+      }
+    }
+    return true;
+  }
+  
+  protected abstract void setCharFieldValue(CharFieldValue value);
+  
+  protected void focusLost() {
+    log().debug("Focus lost on " + this.getCharField().getName());
+    if (this.shouldResetGuiForMultipleValues()) {
+      this.setGuiForMultipleValues();
+    } 
+  }
+  
+  protected void focusGained() {
+    log().debug("Focus gained on " + this.getCharField().getName());
+    if (this.isInMultipleValueState()) {
+      this.setGuiForMultipleValues();
+      this.setHasChangedMultipleValues(false);
+    }
+  }
+
   public void setSelectionManager(SelectionManager manager) {
     this.selectionManager = manager;
-    manager.addCharSelectionListener(new FieldCharSelectListener());
   }
   
   public SelectionManager getSelectionManager() {
@@ -154,9 +220,81 @@ abstract class CharFieldGui {
     return this.editManager;
     }
   }
+  
+  protected void setMultipleValuesConditions() {
+    this.setInMultipleValueState(true);
+    this.setHasChangedMultipleValues(false);
+    this.setGuiForMultipleValues();
+  }
+  
+  protected boolean shouldResetGuiForMultipleValues() {
+    return (this.isInMultipleValueState() && (!this.hasChangedMultipleValues()));
+  }
+  
+  protected void setGuiForMultipleValues() {
+    if (this.hasFocus()) {
+      this.setForegroundColor(this.getEnabledTextColor());
+      this.setText("");
+    } else {
+      this.setForegroundColor(this.getDisabledTextColor());
+      this.setText("Multiple Values");
+    }
+  }
+  
+  protected void setGuiForNoSelection() {
+    this.getUserInputGui().setEnabled(false);
+    this.setText("No Selection");
+  }
+  
+  protected Color getDisabledTextColor() {
+    if (this.disabledColor == null) {
+      this.disabledColor = (new JTextField()).getDisabledTextColor();
+    }
+    return this.disabledColor;
+  }
+  
+  protected Color getEnabledTextColor() {
+    if (this.enabledColor == null) {
+      this.enabledColor = (new JTextField()).getForeground();
+    }
+    return this.enabledColor;
+  }
+  
+  protected boolean isInMultipleValueState() {
+    return this.inMultipleValueState;
+  }
+
+  protected void setInMultipleValueState(boolean inMultipleValueState) {
+    this.inMultipleValueState = inMultipleValueState;
+  }
+
+  protected boolean hasChangedMultipleValues() {
+    return this.hasChangedMultipleValues;
+  }
+
+  protected void setHasChangedMultipleValues(boolean hasChangedMultipleValues) {
+    this.hasChangedMultipleValues = hasChangedMultipleValues;
+  }
+  
+  protected void setForegroundColor(Color color) {
+    this.getUserInputGui().setForeground(color);
+  }
+  
+  protected abstract boolean hasFocus();
 
   protected void enableEditModel(boolean em) { editModel = em; }
   protected boolean editModelEnabled() { return editModel; }
+  
+  /** Main method for subclasses to edit model with current value */
+  protected abstract void updateModel();
+  
+  protected List<CharacterI> getSelectedChars() {
+    if (this.selectionModel == null) {
+      return Collections.emptyList();
+    } else {
+      return this.selectionModel.getSelected(); 
+    }
+  }
   
   // overridden by AbstaractAutoCompList
   //protected void setSearchParams(SearchParamsI sp) {}
@@ -205,6 +343,29 @@ abstract class CharFieldGui {
       }
     }
   }
+  
+  private static class FieldFocusListener implements FocusListener {
+    
+    private CharFieldGui field;
+    
+    public FieldFocusListener(CharFieldGui fieldGui) {
+      this.field = fieldGui;
+    }
+    
+    public void focusGained(FocusEvent e) {
+      if (e.isTemporary()) {
+        return;
+      }
+      this.field.focusGained();
+    }
+    
+    public void focusLost(FocusEvent e) {
+      if (e.isTemporary()) {
+        return;
+      }
+      this.field.focusLost();
+    }
+  }
 
   // FreeTextField.updateModel uses this
   protected boolean updateGuiOnly() { return updateGuiOnly; }
@@ -233,7 +394,7 @@ abstract class CharFieldGui {
         // is updateGuiOnly still needed here? dont think so - only for free text
         // and this only gets post comp term updates ???
         //updateGuiOnly = true; // disable model editing - a better way to do this???
-        setValueFromChar(getFirstSelectedChar());
+//        setValueFromChar(getFirstSelectedChar());
         //updateGuiOnly = false; // reenable model editing
       }
     }
@@ -273,27 +434,6 @@ abstract class CharFieldGui {
 //     getCompList().enableTermInfoListening(enable);
 //   }
 
-  /** Set the gui from the model (selection) */
-  void setValueFromChar(CharacterI character) {
-    // call this check from subclass? no do this check in subclass!
-//     if (character == null) {
-//       log().error("ERROR: attempt to set fields from null character"); // ex?
-//       return;
-//     }
-//     if (charField == null) return;
-//     if (charField.getCharFieldEnum() == null) {
-//       log().error("Cant set value for field "+getLabel()+". Gui for character field has not "
-//                   +"been associated with a datamodel field. check field names in config");
-//       return;
-//     }
-    // if its a comp list need to set its model/current term rel (for AACL.setText)
-    /// overridden in subclass
-    //if (isCompList()) getCompList().setValueFromChar(character);
-    //else getFreeTextField().setValueFromChar(character);
-      
-    //String v = charField.getCharFieldEnum().getValue(character).getName();
-    //setText(v); ??
-  }
 
 
   protected void setLabel(String label) {
@@ -395,16 +535,9 @@ abstract class CharFieldGui {
     // set/getText interface to combo & text field?
     //if (isCompList()) getCompList().setText(text);
     //else getFreeTextField().setText(text);}
-  protected abstract String getText(); // {
-    //if (isCompList()) return getCompList().getText();
-    //else return getFreeTextField().getText();}
-  /** clears gui not model - for multi select - may want to set to * or something? */
-  protected abstract void setGuiForMultiSelect(); // {
-//     if (isCompList()) { getCompList().setGuiForMultiSelect(); }
-//     else {
-//       updateGuiOnly = true;
-//       setText("*"); // or * for multi sel? rename method setGuiForMultiSelect?
-//       updateGuiOnly = false;   } }
+  protected abstract String getText();
+    
+ 
 
   protected void setOboClass(OBOClass term) {
     // no-op overridden by TermCompList
@@ -423,43 +556,6 @@ abstract class CharFieldGui {
 
   CharFieldEnum getCharFieldEnum() { return charField.getCharFieldEnum(); }
   protected CharField getCharField() { return charField; }
-
-  private CharacterI getFirstSelectedChar() {
-    return this.getSelectionManager().getFirstSelectedCharacter();
-  }
-
-  private class FieldCharSelectListener implements CharSelectionListener {
-    public void charactersSelected(CharSelectionEvent e) {
-      CharFieldGui.this.charactersSelected(e);
-    }
-  }
-
-  /** FreeTextField both overrides and calls this as it needs to edit model
-      on focus change */
-  protected void charactersSelected(CharSelectionEvent e) {
-    // if multi select then clear out fields - alternatively could do first char
-    // or only show fields that are all same? 
-    if (e.isMultiSelect()) {
-      setGuiForMultiSelect();
-      return;
-    }
-    if (e.getChars() == null || e.getChars().isEmpty()) return;
-    updateGuiOnly = true; // selection should not cause an edit/transaction!
-    setValueFromChar(e.getChars().get(0));
-    updateGuiOnly = false;
-  }
-
-  /** overridden by FreeTextField, for selection to tell free text field that
-      focus was lost before selection goes through and rubs out change */
-  //protected void focusLost() {}
-
-//   /** I think post-comp should only be closeable if its empty (in expand collapse
-//    inframe case - now window) */ --> TermCompList
-//   private class PostCompListener implements ActionListener {
-//     public void actionPerformed(ActionEvent e) {
-//       new PostCompGui(charField,fieldPanel.getSearchParams());
-//     }
-//   }
 
   static class CharFieldGuiEx extends Exception {
     protected CharFieldGuiEx(String m) { super(m); }
@@ -503,35 +599,13 @@ abstract class CharFieldGui {
   /** Overridden by TermCompList */
   protected JButton getCompButton() { return null; }
 
-  protected void addReturnKeyListener(Component c) {
-    c.addKeyListener(new ReturnKeyListener());
-  }
-
-  private class ReturnKeyListener extends KeyAdapter {
-    // doesnt work
-//     public void keyTyped(KeyEvent e) {
-//       if (e.getKeyCode() == KeyEvent.VK_ENTER) returnKeyHit();
-//     }
-//     public void keyReleased(KeyEvent e) {
-//       if (e.getKeyCode() == KeyEvent.VK_ENTER) returnKeyHit();
-//     }
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ENTER) returnKeyHit();
-      }
-   
-  }
-
-  // for subclasses to override
-  protected void returnKeyHit() {}
-
+  
   /** no op - override in term completion gui */
   public void setMinCompChars(int minCompChars) {}
   public int getMinCompChars() { return 0; }
 
-  private Logger log;
-  private Logger log() {
-    if (log == null) log = Logger.getLogger(getClass());
-    return log;
+  private static Logger log() {
+    return Logger.getLogger(CharFieldGui.class);
   }
 }
 

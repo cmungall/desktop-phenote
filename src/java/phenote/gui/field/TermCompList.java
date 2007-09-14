@@ -17,12 +17,12 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.util.TermUtil;
 
 import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyException;
 import phenote.datamodel.OntologyManager;
 import phenote.edit.CompoundTransaction;
-import phenote.edit.EditManager;
 import phenote.gui.selection.UseTermEvent;
 import phenote.gui.selection.UseTermListener;
 
@@ -31,7 +31,6 @@ class TermCompList extends AbstractAutoCompList {
   private OBOClass currentOboClass = null;
   // only term comp lists need ontology choosers - if that changes move to AACL
   private JComboBox ontologyChooserCombo;
-  private CharFieldGui charFieldGui;
   private static final String ALL = "ALL";
   private JButton postCompButton;
 
@@ -96,6 +95,11 @@ class TermCompList extends AbstractAutoCompList {
     setOboClass(selCharTerm); // doesnt allow null
     setOntologyChooserFromTerm(selCharTerm);
   }
+  
+  protected void setCharFieldValue(CharFieldValue value) {
+    this.setOboClass(value.getOboClass());
+    this.setOntologyChooserFromTerm(value.getOboClass());
+  }
 
   void setOntologyChooserFromTerm(OBOClass term) {
     if (term == null) return;
@@ -144,9 +148,9 @@ class TermCompList extends AbstractAutoCompList {
 //     }
     currentOboClass = term;
     if (TermUtil.isDangling(currentOboClass))
-      setInputTextColor(Color.RED);
+      this.setForegroundColor(Color.RED);
     else
-      setInputTextColor(Color.BLACK);
+      this.setForegroundColor(this.getEnabledTextColor());
     String val = term == null ? "" : term.getName();
     setText(val, false); // no completion
   }
@@ -172,6 +176,10 @@ class TermCompList extends AbstractAutoCompList {
    */
   private OBOClass getSelectedOboClass() throws OboException {
     Object obj = getSelectedObject(); // throws oboex
+    log().debug("The selected list object is: " + obj + " with class " + obj.getClass());
+    if (obj instanceof String) {
+      log().debug("String");
+    }
     //return oboClassDowncast(obj); // throws oboex
     CompletionTerm t = completionTermDowncast(obj);
     return t.getOboClass();
@@ -191,39 +199,53 @@ class TermCompList extends AbstractAutoCompList {
   /**
    * edits one or more selected chars
    */
-  protected void editModel() {
-    OBOClass oboClass;
-    try {
-      oboClass = getCurrentOboClass();
-      setModel(oboClass);
+  protected void updateModel() {
+    log().debug("Update model");
+    try { 
+      this.setCurrentValidItem(); 
     }
-    catch (CharFieldGuiEx e) {
+    catch (OboException e) {
+      if (!this.editModelEnabled()) {
+        return;
+      }
+      if ((this.getText() == null) || (this.getText().equals(""))) {
+        this.setModelToNull();
+        return;
+      } else {
+        this.setValueFromChars(this.getSelectedChars());
+      }
       return;
-    } // shouldnt happen, error?
+    }
+    if (this.editModelEnabled()) {
+      try {
+        OBOClass oboClass = getCurrentOboClass();
+        this.setModel(oboClass);
+      }
+      catch (CharFieldGuiEx e) {
+        return;
+      } // shouldnt happen, error?
+    }
   }
+
 
   /** oc may be null - for nullifying model */
   private void setModel(OBOClass oboClass) {
-    if (getCharField() == null) return; // shouldnt happen
-    List<CharacterI> chars = getSelectedChars(); // from selectionManager
-    CompoundTransaction ct =
-      CompoundTransaction.makeUpdate(chars, getCharField(), oboClass);
+    if (this.getCharField() == null) return; // shouldn't happen
+    final List<CharacterI> chars = this.getSelectedChars();
+    if (chars.isEmpty()) return;
+    if (this.areCharactersEqualForCharField(chars, this.getCharField())) {
+      final OBOClass modelTerm = chars.get(0).getValue(this.getCharField()).getOboClass();
+      final boolean equal = (modelTerm == null) ? (modelTerm == oboClass) : (modelTerm.equals(oboClass));
+      if (equal) return; // don't edit model - the value is the same
+    }
+    final CompoundTransaction ct = CompoundTransaction.makeUpdate(chars, getCharField(), oboClass);
     this.getEditManager().updateModel(this, ct);
   }
 
   // allow user to nullify field
   protected void setModelToNull() {
+    log().debug("Nulling model");
     setModel(null);
-  }
-
-  protected void returnKeyHit() {
-    //log().debug("return key hit - value ["+getText()+"]");
-    if (getText() == null || getText().trim().equals(""))
-      setModelToNull();
-  }
-
-  private List<CharacterI> getSelectedChars() {
-    return getSelectionManager().getSelectedChars();
   }
 
   /**
@@ -287,8 +309,9 @@ class TermCompList extends AbstractAutoCompList {
    */
   private class ComboUseTermListener implements UseTermListener {
     public void useTerm(UseTermEvent e) {
-      setOboClass(e.getTerm());
-      if (editModelEnabled()) editModel();
+      if ((TermCompList.this.editModelEnabled()) && (TermCompList.this.getSelectedChars().isEmpty())) return;
+      TermCompList.this.setOboClass(e.getTerm());
+      if (TermCompList.this.editModelEnabled()) TermCompList.this.setModel(e.getTerm());
     }
   }
 
@@ -354,7 +377,7 @@ class TermCompList extends AbstractAutoCompList {
     public void actionPerformed(ActionEvent e) {
       final Frame frame = (Frame)(TermCompList.this.postCompButton.getTopLevelAncestor());
       new PostCompGui(getCharField(), TermCompList.this.getEditManager(),
-                      TermCompList.this.getSelectionManager(),frame,getMinCompChars());
+                      TermCompList.this.getSelectionManager(), TermCompList.this.selectionModel, frame,getMinCompChars());
     }
   }
 

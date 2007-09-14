@@ -8,7 +8,6 @@ import java.util.Map;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
 
-import phenote.datamodel.CharacterI;
 import phenote.datamodel.OntologyManager;
 
 /** Controller for term & character selection */
@@ -19,11 +18,6 @@ public class SelectionManager {
     new HashMap<String,SelectionManager>();
 
   private List<TermSelectionListener> termListenerList;
-  List<CharSelectionListener> charListenerList;
-  // phase out for list...
-  private CharacterI selectedCharacter;
-  private List<CharacterI> selectedCharList;
-  private List<CharacterI> previouslySelectedChars;
 
   /** return main/default instance */
   public static SelectionManager inst() {
@@ -44,7 +38,6 @@ public class SelectionManager {
 
   public SelectionManager() {
     termListenerList = new ArrayList<TermSelectionListener>(5);
-    charListenerList = new ArrayList<CharSelectionListener>(4);
   }
 
   // TERM SELECTION
@@ -61,18 +54,18 @@ public class SelectionManager {
 	  TermSelectionEvent e = makeTermEvent(source, oboClass, l, isMouseOver, isHyperlink);
 	  fireTermSelect(e);
   }
-  
+
   public void selectMouseOverTerm(Object source, OBOClass oboClass,UseTermListener l) {
-	boolean isMouseOver = true;
-	boolean isHyperlink = false;
+    boolean isMouseOver = true;
+    boolean isHyperlink = false;
     TermSelectionEvent e = makeTermEvent(source,oboClass,l,isMouseOver,isHyperlink);
     fireTermSelect(e);
   }
-  
+
   public void selectTerm(Object source,OBOClass oboClass, boolean isHyperlink) {
-	boolean isMouseOver = false;
-//	System.out.println("ishyperlink="+isHyperlink);
-	TermSelectionEvent e = makeTermEvent(source,oboClass,null,isMouseOver, isHyperlink);
+    boolean isMouseOver = false;
+//  System.out.println("ishyperlink="+isHyperlink);
+    TermSelectionEvent e = makeTermEvent(source,oboClass,null,isMouseOver, isHyperlink);
     if (!isHyperlink) fireTermSelect(e);
   }
 
@@ -87,44 +80,6 @@ public class SelectionManager {
 
   private TermSelectionEvent makeTermEvent(Object src, OBOClass oc,UseTermListener l,boolean mouse, boolean link) {
     return new TermSelectionEvent(src,oc,l,mouse,link);
-  }
-
-  // CHARACTER SELECTION
-
-  public CharacterI getFirstSelectedCharacter() {
-    if (selectedCharList == null || selectedCharList.isEmpty())
-      return null; // ex?
-    return selectedCharList.get(0);
-  }
-
-  public List<CharacterI> getSelectedChars() {
-    return selectedCharList;
-  }
-
-//   public void selectCharacter(Object source, CharacterI character) {
-//     selectedCharacter = character;
-//     CharSelectionEvent e = makeCharacterEvent(source,character);
-//     for (CharSelectionListener l : charListenerList)
-//       l.characterSelected(e);
-//   }
-
-  // called from CharacterTablePanel and CharacterTemplateController
-  public void selectCharacters(Object src, List<CharacterI> chars) {
-    selectedCharList = chars;
-    //if (chars.size() == 1) { selectCharacter(src,chars.get(0)); return; }
-    CharSelectionEvent e = new CharSelectionEvent(src,chars,previouslySelectedChars);
-    for (CharSelectionListener l : charListenerList)
-      l.charactersSelected(e);
-    previouslySelectedChars = selectedCharList;
-  }
- 
-
-//   private CharSelectionEvent makeCharacterEvent(Object src, CharacterI c) {
-//     return new CharSelectionEvent(src,c);
-//   }
-
-  public void addCharSelectionListener(CharSelectionListener l) {
-    charListenerList.add(l);
   }
 
 }

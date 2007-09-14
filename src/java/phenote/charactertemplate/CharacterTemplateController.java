@@ -1,10 +1,16 @@
 package phenote.charactertemplate;
 
 import java.awt.Component;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -14,6 +20,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 import org.apache.log4j.Logger;
 import org.swixml.SwingEngine;
@@ -25,16 +32,24 @@ import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.LoadSaveManager;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharacterI;
+import phenote.edit.CharChangeEvent;
+import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
 import phenote.gui.MenuManager;
-import phenote.gui.TableSortingAdapter;
 import phenote.gui.TermInfo;
 import phenote.gui.field.FieldPanel;
 import phenote.gui.selection.SelectionManager;
 import phenote.main.Phenote;
 import phenote.util.FileUtil;
+import ca.odell.glazedlists.FilterList;
+import ca.odell.glazedlists.SortedList;
+import ca.odell.glazedlists.TextFilterator;
+import ca.odell.glazedlists.swing.EventSelectionModel;
+import ca.odell.glazedlists.swing.EventTableModel;
+import ca.odell.glazedlists.swing.TableComparatorChooser;
+import ca.odell.glazedlists.swing.TextComponentMatcherEditor;
 
-public class CharacterTemplateController implements ActionListener, TemplateChoiceListener {
+public class CharacterTemplateController implements ActionListener, TemplateChoiceListener, CharChangeListener {
 
   public static final String SHOW_CHARACTER_TEMPLATE_ACTION = "showCharacterTemplate";
   public static final String IMPORT_TEMPLATE_CHARACTERS_ACTION = "importCharacters";
@@ -44,21 +59,26 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
   private EditManager editManager;
   private SelectionManager selectionManager;
   private LoadSaveManager loadSaveManager;
-  private CharacterTemplateTableModel tableModel;
   private JFrame window;
   private JPanel charFieldPanelContainer; // initialized by swix
   private JPanel termInfoPanelContainer; // initialized by swix
   private JTable characterTemplateTable; // initialized by swix
+  private JTextField filterField; // initialized by swix
   private List<TemplateChooser> templateChoosers = new ArrayList<TemplateChooser>();
+  private SortedList<CharacterI> sortedCharacters;
+  private FilterList<CharacterI> filteredCharacters;
+  private EventSelectionModel<CharacterI> selectionModel;
+  private Set<CharacterI> markedCharacters = new HashSet<CharacterI>();
   
   public CharacterTemplateController(String groupName) {
     super();
     this.representedGroup = groupName;
     this.characterListManager = new CharacterListManager();
     this.editManager = new EditManager(this.characterListManager);
+    this.editManager.addCharChangeListener(this);
     this.selectionManager = new SelectionManager();
-    this.tableModel = new CharacterTemplateTableModel(this.representedGroup, this.characterListManager, this.editManager);
-    this.addInitialBlankCharacter();
+    this.sortedCharacters = new SortedList<CharacterI>(this.characterListManager.getCharacterList().getList(), new EverythingEqualComparator<CharacterI>());
+    this.sortedCharacters.setMode(SortedList.AVOID_MOVING_ELEMENTS);
     this.configureTemplateChoosers();
     this.configureMenus();
   }
@@ -92,22 +112,19 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
   }
   
   public void deleteSelectedCharacters() {
-    this.editManager.deleteChars(this.selectionManager.getSelectedChars());
-    if (this.characterListManager.getCharacterList().isEmpty()) {
-      this.addInitialBlankCharacter();
-    }
+    this.editManager.deleteChars(this.selectionModel.getSelected());
   }
   
   public void duplicateSelectedCharacters() {
-    this.editManager.copyChars(this.selectionManager.getSelectedChars());
+    this.editManager.copyChars(this.selectionModel.getSelected());
   }
   
   public void markSelectedCharacters() {
-    this.tableModel.setCharactersInRowsAreMarked(this.characterTemplateTable.getSelectedRows(), true);
+    this.setCharactersAreMarked(this.selectionModel.getSelected(), true);
   }
   
   public void unmarkSelectedCharacters() {
-    this.tableModel.setCharactersInRowsAreMarked(this.characterTemplateTable.getSelectedRows(), false);
+    this.setCharactersAreMarked(this.selectionModel.getSelected(), false);
   }
   
   public void undo() {
@@ -115,22 +132,85 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
   }
   
   public void invertMarkedCharacters() {
-    this.tableModel.invertCharacterMarks();
+    for (CharacterI character : this.getCurrentCharacters()) {
+      this.setCharacterIsMarked(character, !this.isCharacterMarked(character));
+    }
+  }
+  
+  public boolean isCharacterMarked(CharacterI character) {
+    return this.markedCharacters.contains(character);
+  }
+  
+  public void setCharacterIsMarked(CharacterI character, boolean selected) {
+    if (selected) {
+      this.markedCharacters.add(character);
+    } else {
+      this.markedCharacters.remove(character);
+    }
+    this.updateCharacterForGlazedLists(character);
+  }
+  
+  public List<CharacterI> getMarkedCharacters() {
+    // make a list to make sure the characters are in the same order as they are in the character list
+    List<CharacterI> characters = new ArrayList<CharacterI>();
+    for (CharacterI character : this.getCurrentCharacters()) {
+      if (this.isCharacterMarked(character)){
+        characters.add(character);
+      }
+    }
+    return characters;
+  }
+  
+  public void setMarkedCharacters(Collection<CharacterI> charactersToMark) {
+    for (CharacterI character : this.sortedCharacters) {
+      this.setCharacterIsMarked(character, charactersToMark.contains(character));
+    }
+  }
+  
+  public void setCharactersAreMarked(List<CharacterI> characters, boolean marked) {
+    for (CharacterI character : characters) {
+      this.setCharacterIsMarked(character, marked);
+    }
   }
   
   public void generateCharacters() {
-    final List<CharacterI> newCharacters = new ArrayList<CharacterI>();
-    for (CharacterI character : this.tableModel.getMarkedCharacters()) {
-      final CharacterI newCharacter = character.cloneCharacter();
-      EditManager.inst().addCharacter(newCharacter);
-      newCharacters.add(newCharacter);
-    }
-    SelectionManager.inst().selectCharacters(this, newCharacters);
+    EditManager.inst().copyChars(this.getMarkedCharacters());
     Phenote.getPhenote().getFrame().toFront();
   }
   
   public void templateChoiceChanged(TemplateChooser source) {
+    this.setMarkedCharacters(source.getChosenTemplates(Collections.unmodifiableList(this.sortedCharacters)));
     this.showCharacterTemplate();
+  }
+
+  public void charChanged(CharChangeEvent e) {
+    if (e.isUpdate()) {
+      for (CharacterI character : e.getTransaction().getCharacters()) {
+        this.updateCharacterForGlazedLists(character);
+      }
+    } else if (e.isAdd()) {
+      this.setSelectionWithCharacters(e.getTransaction().getCharacters());
+    }
+  }
+  
+  private void setSelectionWithCharacters(List<CharacterI> characters) {
+    this.filterField.setText("");
+    this.selectionModel.clearSelection();
+    for (CharacterI character : characters) {
+      final int index = this.filteredCharacters.indexOf(character);
+      if (index > -1) {
+        this.selectionModel.addSelectionInterval(index, index);
+        Rectangle rect = this.characterTemplateTable.getCellRect(index, 0, false);
+        this.characterTemplateTable.scrollRectToVisible(rect);
+      }
+    }
+  }
+
+  private void updateCharacterForGlazedLists(CharacterI character) {
+    final int index = this.characterListManager.getCharacterList().getList().indexOf(character);
+    if (index > -1) {
+      this.characterListManager.getCharacterList().getList().set(index, character);
+    }
   }
 
   private String getGroupTitle() {
@@ -198,11 +278,16 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
     SwingEngine swix = new SwingEngine(this);
     try {
       JComponent component = (JComponent)swix.render(FileUtil.findUrl("character_template.xml"));
-      this.characterTemplateTable.setModel(this.tableModel);
-      this.characterTemplateTable.setSelectionModel(new SelectionManagerListSelectionModel(this.characterListManager, this.editManager, this.selectionManager));
-      this.characterTemplateTable.getTableHeader().addMouseListener(new TableSortingAdapter(this.characterTemplateTable, this.tableModel));
+      this.filteredCharacters = new FilterList<CharacterI>(this.sortedCharacters, new TextComponentMatcherEditor<CharacterI>(filterField, new CharacterFilterator()));
+      final CharacterTemplateTableFormat tableFormat = new CharacterTemplateTableFormat(this.representedGroup, this);
+      EventTableModel<CharacterI> eventTableModel = new EventTableModel<CharacterI>(this.filteredCharacters, tableFormat);
+      this.characterTemplateTable.setModel(eventTableModel);
+      new TableComparatorChooser<CharacterI>(this.characterTemplateTable, this.sortedCharacters, false);
+      this.selectionModel = new EventSelectionModel<CharacterI>(this.filteredCharacters);
+      this.characterTemplateTable.setSelectionModel(this.selectionModel);
       this.characterTemplateTable.putClientProperty("Quaqua.Table.style", "striped");
-      FieldPanel fieldPanel = new FieldPanel(true, false, this.representedGroup, this.selectionManager, this.editManager);
+      this.filterField.putClientProperty("Quaqua.TextField.style", "search");
+      FieldPanel fieldPanel = new FieldPanel(true, false, this.representedGroup, this.selectionManager, this.editManager, this.selectionModel);
       this.charFieldPanelContainer.add(fieldPanel);
       TermInfo termInfo = new TermInfo(this.selectionManager);
       this.termInfoPanelContainer.add(termInfo.getComponent());
@@ -213,11 +298,6 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
     }
   }
   
-  private void addInitialBlankCharacter() {
-    this.editManager.addInitialCharacter();
-    this.selectionManager.selectCharacters(this, this.characterListManager.getCharacterList().getList());
-  }
-  
   private void configureTemplateChoosers() {
     for (Group group : Config.inst().getFieldGroups()) {
       if (group.getName() == this.representedGroup) {
@@ -225,7 +305,6 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
          TemplateChooser chooser = this.createTemplateChooserInstance(chooserConfig.getAdapter());
          chooser.setCharField(this.getCharFieldWithName(chooserConfig.getField()));
          chooser.setTitle(chooserConfig.getTitle());
-         chooser.addTemplateChoiceListener(this.tableModel);
          chooser.addTemplateChoiceListener(this);
          this.templateChoosers.add(chooser);
        }
@@ -258,6 +337,10 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
     return null;
   }
   
+  private List<CharacterI> getCurrentCharacters() {
+    return (this.filteredCharacters == null) ? this.sortedCharacters : this.filteredCharacters;
+  }
+  
   private LoadSaveManager getLoadSaveManager() {
     if (this.loadSaveManager == null) {
       this.loadSaveManager = new LoadSaveManager(this.characterListManager);
@@ -269,4 +352,18 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
     return Logger.getLogger(this.getClass());
   }
   
+  private static class EverythingEqualComparator<T> implements Comparator<T> {
+    public int compare(T o1, T o2) {
+      return 0;
+    }
+  }
+  
+  private static class CharacterFilterator implements TextFilterator<CharacterI> {
+    public void getFilterStrings(List<String> baseList, CharacterI character) {
+      for (CharField charField : character.getAllCharFields()) {
+        baseList.add(character.getValueString(charField));
+      }
+    }
+  }
+
 }

@@ -1,14 +1,12 @@
 package phenote.gui.field;
 
 import java.util.List;
-//import java.util.Vector;
 
 import org.apache.log4j.Logger;
-
 import org.geneontology.oboedit.datamodel.OBOProperty;
 
-import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldValue;
 
 
 class RelationCompList extends AbstractAutoCompList {
@@ -97,16 +95,22 @@ class RelationCompList extends AbstractAutoCompList {
     return r.getOboProperty();
   }
    
-  /** no-op - relation list doesnt edit model (at least presently) */
-  protected void editModel() {}
+  protected void updateModel() {
+    try {
+      this.setCurrentValidItem();
+    } catch (OboException e) {
+      log().debug(e);
+      // TODO Auto-generated catch block
+    }
+  }
 
   /** no-op override */
   protected void setModelToNull() {}
 
   /** char in table changed - adjust - not needed for rel(at least not yet)
       as post comp doesnt listen to table changes (does it? should it?), 
-      just term */
-  protected void setValueFromChar(CharacterI chr) {}
+      just term */ 
+  protected void setCharFieldValue(CharFieldValue value) {}
 
   /** Returns a vector of CompletionRelations for auto completion
       which contain input, using search params */

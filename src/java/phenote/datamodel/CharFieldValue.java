@@ -88,7 +88,7 @@ public class CharFieldValue implements Cloneable {
     if (isOboClass)
       return oboClassValue == null;
     else 
-      return stringValue == null;
+      return ((stringValue == null) || (stringValue.equals("")));
   }
 
   // maybe this should be called getString??? why getName???
@@ -126,7 +126,7 @@ public class CharFieldValue implements Cloneable {
   }
 
   public String toString() { return getName(); }
-}
+
 
 //     if (charFieldEnum == null)
 //       System.out.println("ERROR no datamodel associated with configuration, cant set"+
@@ -139,4 +139,23 @@ public class CharFieldValue implements Cloneable {
       //System.out.println("CFV editMod "+getName());
   // phase out...
   //public CharFieldEnum getCharFieldEnum() { return charFieldEnum; }
+  
+  public boolean equals(Object o) {
+    final CharFieldValue otherValue = (CharFieldValue)o;
+    if (this == otherValue) return true;
+    if (this.isEmpty()) {
+      return otherValue.isEmpty();
+    }
+    if (this.isTerm()) {
+      return ((otherValue.isTerm()) && (this.getTerm().equals(otherValue.getTerm())));
+    }
+    return this.getName().equals(otherValue.getName());
+  }
+  
+  public int hashCode() {
+    if (this.oboClassValue != null) return this.oboClassValue.hashCode();
+    if ((this.stringValue != null) || (!this.stringValue.equals(""))) return this.stringValue.hashCode();
+    return 0;
+  }
+}
 

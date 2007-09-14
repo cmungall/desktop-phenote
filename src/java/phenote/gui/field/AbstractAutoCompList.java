@@ -28,6 +28,7 @@ import javax.swing.text.Document;
 import org.apache.log4j.Logger;
 
 import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 import phenote.gui.SearchParams;
 import phenote.gui.SearchParamsI;
@@ -36,7 +37,7 @@ import phenote.gui.SearchParamsI;
 
 public abstract class AbstractAutoCompList extends CharFieldGui {
 
-  private JComboBox jComboBox = new JComboBox();
+  private JComboBox jComboBox;
   private boolean changingCompletionList = false;
   private boolean doCompletion = true;
   private CompComboBoxModel compComboBoxModel;
@@ -44,7 +45,6 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   private AutoTextField autoTextField;
   private SearchParamsI searchParams = SearchParams.inst();
   private CompListSearcher compListSearcher;
-  private boolean setGuiForMultiSelect = false;
   // minimum chars to type for completion to happen - from config
   private int minCompChars = 0;
 
@@ -59,11 +59,11 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   }
 
   private void init() {
-    jComboBox.setEditable(true);
+    this.getJComboBox().setEditable(true);
     AutoTextFieldEditor autoTextFieldEditor = new AutoTextFieldEditor();
-    jComboBox.setEditor(autoTextFieldEditor);
-    jComboBox.setRenderer(new ResizingComboBoxRenderer());
-    jComboBox.addActionListener(new ComboBoxActionListener());
+    this.getJComboBox().setEditor(autoTextFieldEditor);
+    this.getJComboBox().setRenderer(new ResizingComboBoxRenderer());
+    this.getJComboBox().addActionListener(new ComboBoxActionListener());
     compListSearcher = new CompListSearcher(getCharField().getOntologyList());
     // init with all terms if config.showAllOnEmptyInput...
     if (getMinCompChars() == 0) {
@@ -75,7 +75,16 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   public void setMinCompChars(int minChars) { minCompChars = minChars; }
   public int getMinCompChars() { return minCompChars; }
 
-  protected Component getUserInputGui() { return jComboBox; }
+  protected JComponent getUserInputGui() {
+    return this.getJComboBox();
+  }
+  
+  public JComboBox getJComboBox() {
+    if (this.jComboBox == null) {
+      this.jComboBox = new JComboBox();
+    }
+    return this.jComboBox;
+  }
 
   protected boolean isCompList() { return true; }
 
@@ -90,12 +99,18 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   protected boolean hasMoreThanOneOntology() {
     return getCharField().hasMoreThanOneOntology();
   }
+  
+  protected abstract void setCharFieldValue(CharFieldValue value);
 
-  /** char in table changed - adjust - not needed for rel(at least not yet)
-      as post comp doesnt listen to table changes (does it? should it?), 
-      just term */
-  protected abstract void setValueFromChar(CharacterI chr);
-
+  protected boolean hasFocus() {
+    return this.getJComboBox().getEditor().getEditorComponent().hasFocus();
+  }
+  
+  protected void setForegroundColor(Color color) {
+    this.getJComboBox().setForeground(color); // have to do this with Mac UI
+    this.getJComboBox().getEditor().getEditorComponent().setForeground(color); // have to do this with Metal UI
+  }
+  
   /** Set text in editable text field of j combo (eg from table select) */
   public void setText(String text) {
     // do not do term completion on externally set text!
@@ -110,22 +125,10 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     this.doCompletion = true; // set back to default
   }
 
-  /** for now just clear out gui without editing model */
-  protected void setGuiForMultiSelect() {
-    // flag to prevent AutoTextField.setText from setting to current term
-    // is there a cleaner way to do this?? - this falg may need to be generalized
-    // as may want for user being able to set to "" (non-required field gen-con)
-    setGuiForMultiSelect = true; // ????
-    setText("*",false); // false -> no completion, "*"?
-    setGuiForMultiSelect = false;
-  }
-
   /** Return text in text field */
   public String getText() {
     return jComboBox.getEditor().getItem().toString(); // or editor.getText() ?
   }
-
-  
 
   void clear() {
     setText("");
@@ -154,8 +157,6 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
       editor = autoTextField; // protected editor var from BCBE
       editor.setForeground(java.awt.Color.RED);
       addDocumentListener(new AutoDocumentListener());
-      // call returnKeyHit - for nulling out term
-      addReturnKeyListener(autoTextField);
       this.correctInputMapForEditorField(autoTextField);
     }
 
@@ -213,8 +214,9 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
       // this works as only time setText is called with cngCL false is with
       // selection - or at least so it seems
       // well that was true but now need to clear text for multi sel
-      if (setGuiForMultiSelect) // flag will probably need to be more general?
+      if (AbstractAutoCompList.this.isInMultipleValueState() || AbstractAutoCompList.this.getSelectedChars().isEmpty()) {
         super.setText(text);
+      }
       else
         super.setText(getCurrentTermRelName()); // set to term name with syn select
       doCompletion = true;
@@ -223,13 +225,6 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     protected void processKeyEvent(KeyEvent e) {
       super.processKeyEvent(e);
     }
-    private void setInputTextColor(Color c) {
-      setForeground(c);
-    }
-  }
-
-  protected void setInputTextColor(Color c) {
-    autoTextField.setInputTextColor(c);
   }
 
 
@@ -256,9 +251,9 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   }
 
   private void doCompletion(boolean showPopup) {
+    this.setHasChangedMultipleValues(true);
     if (!doCompletion) // flag set if text filled in externally (from table sel)
       return;
-    
     // too soon - text field doesnt have text yet.... hmmmm....
     String input = getText();
     // If length of input is shorter than minimum required for completion do nothing
@@ -285,10 +280,6 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     time = newTime;
     return newTimeDiff;
   }
-
-
-  // for subclasses to override - abstract?
-  protected void returnKeyHit() {}
 
   abstract protected void setModelToNull();
 
@@ -341,23 +332,15 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
 
     private ComboBoxActionListener() {}
     public void actionPerformed(ActionEvent e) {
-      listItemSelected();
-    }
-
-    /** edits Character field via EditManager if editModel is true. 
-        checks that text in text field from user
-        is actually an item in completion list, is an obo term. */
-    private void listItemSelected() {
-      String input = getText();
-      if (input == null) return; // probably doesnt happen
-
-      // abstract method - sets currentSelItem, returns false if not valid
-      try { setCurrentValidItem(); }
-      catch (OboException e) { return; } // if not valid then dont edit model
-
-      // EDIT MODEL 
-      if (editModelEnabled())
-        editModel();
+      if (e.getActionCommand().equals("comboBoxChanged")) {
+        AbstractAutoCompList.this.setHasChangedMultipleValues(true);
+      }
+      if (AbstractAutoCompList.this.shouldResetGuiForMultipleValues()) {
+        AbstractAutoCompList.this.setGuiForMultipleValues();
+        return;
+      } else {
+        AbstractAutoCompList.this.updateModel();
+      }
     }
   }
 
@@ -367,7 +350,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   protected abstract void setCurrentValidItem() throws OboException;
 
 
-  protected abstract void editModel();
+  protected abstract void updateModel();
 
   private Logger log;
   private Logger log() {
@@ -388,8 +371,6 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     autoTextField.processKeyEvent(k);
   }
 
-  /** For TestPhenote */
-  public JComboBox getJComboBox() { return jComboBox; }
 
   private class CompComboBoxModel implements ComboBoxModel {
     //private List<CompletionTerm>, cant do - may also be CompletionRelation!

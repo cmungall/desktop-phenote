@@ -1,9 +1,12 @@
 package phenote.gui.field;
 
+import javax.swing.JComponent;
 import javax.swing.JLabel;
-import java.awt.Component;
 import java.awt.Dimension;
+import java.util.List;
+
 import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 import org.apache.log4j.Logger;
 
@@ -13,8 +16,8 @@ class ReadOnlyFieldGui extends CharFieldGui {
 
   ReadOnlyFieldGui(CharField charfield) {
     super(charfield);
-    readOnlyLabel.setPreferredSize(new Dimension(200,20));
-    readOnlyLabel.setBorder(new javax.swing.border.LineBorder(java.awt.Color.BLACK) );
+    this.getReadOnlyLabel().setPreferredSize(new Dimension(200,20));
+    this.getReadOnlyLabel().setBorder(new javax.swing.border.LineBorder(java.awt.Color.BLACK) );
   }
 
 
@@ -31,6 +34,15 @@ class ReadOnlyFieldGui extends CharFieldGui {
     setText(v);
   }
 
+  protected void setCharFieldValue(CharFieldValue value) {
+    this.setText(value.getName());
+  }
+  
+  protected void updateModel() {}
+  
+  protected boolean hasFocus() {
+    return this.readOnlyLabel.hasFocus();
+  }
 
 
   protected void setText(String s) { 
@@ -38,8 +50,17 @@ class ReadOnlyFieldGui extends CharFieldGui {
     readOnlyLabel.repaint(); }
   protected String getText() { return readOnlyLabel.getText(); }
 
-  protected void setGuiForMultiSelect() { }
-  protected Component getUserInputGui() { return readOnlyLabel; }
+  
+  protected JComponent getUserInputGui() {
+    return this.getReadOnlyLabel();
+  }
+  
+  private JLabel getReadOnlyLabel() {
+    if (this.readOnlyLabel == null) {
+      this.readOnlyLabel = new JLabel();
+    }
+    return this.readOnlyLabel;
+  }
 
   private Logger log;
   protected Logger log() {

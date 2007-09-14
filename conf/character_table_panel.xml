@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<panel id="characterTablePanel" constraints="BorderLayout.CENTER" layout="GridBagLayout">
+	<panel layout="GridBagLayout">
+		<gridbagconstraints gridx="0" gridy="0" weightx="1" weighty="0" fill="GridBagConstraints.HORIZONTAL"/>
+		<label text="Search:" horizontalAlignment="SwingConstants.RIGHT">
+			<gridbagconstraints gridx="0" gridy="0" weightx="1" weighty="0" anchor="GridBagConstraints.EAST"/>
+		</label>
+		<textfield id="filterField" columns="25">
+			<gridbagconstraints gridx="1" gridy="0" weightx="0" weighty="0" anchor="GridBagConstraints.EAST" insets="0,0,0,5"/>
+		</textfield>
+	</panel>
+    <scrollpane horizontalScrollBarPolicy="JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS">
+    	<gridbagconstraints gridx="0" gridy="1" weightx="1" weighty="1" fill="GridBagConstraints.BOTH" insets="5,5,0,5"/>
+        <table id="characterTable"/>
+    </scrollpane>
+    <panel id="buttonPanel">
+    	<gridbagconstraints gridx="0" gridy="2" weightx="1" insets="10,10,10,10" fill="GridBagConstraints.HORIZONTAL"/>
+        <button id="addButton" text="New" action="addNewCharacter" toolTipText="Add new row"/>
+        <button id="duplicateButton" text="Duplicate" action="duplicateSelectedCharacters" toolTipText="Duplicate selected rows"/>
+        <button id="deleteButton" text="Delete" action="deleteSelectedCharacters" toolTipText="Delete selected rows"/>
+        <panel size="20,1" preferredSize="20,1"/>
+        <button id="undoButton" text="Undo" action="undo" toolTipText="Undo previous action"/>
+        <panel size="80,1" preferredSize="80,1"/>
+        <button id="commitButton" text="Save Data" action="commitCharacters" toolTipText="Save Data"/>
+        <panel size="20,1" preferredSize="20,1"/>
+        <button id="graphButton" text="Graph" action="showGraph" toolTipText="Show Graph View"/>
+    </panel>
+</panel>
