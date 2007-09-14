@@ -19,7 +19,7 @@
 	<h1>General</h1>
 	<h3>How do I get started?</h3>
 	<p>
-	   You can lauch Phenote directly from your browser.  Simply click on the Phenote link from the main page or the Downloads page, and it will launch directly from your browser.  It will take a couple of minutes to download all the components, but that's it.
+	   You can lauch Phenote directly from your browser.  Simply click on the Launch Phenote 'quick link' from the <a href="http://www.phenote.org/">main page</a> or the <a href="http://www.phenote.org/downloads.shtml">Downloads</a> page, and it will launch directly from your browser.  It will take a couple of minutes to download all the components, but that's it.
 	</p>
 	<h3>What's the best forum to ask my burning questions?</h3>
 	<p>
@@ -40,7 +40,7 @@
 	</p>
 	<h3>Can I use OBO and/or OWL format ontologies?</h3>
 	<p>
-	Yes!  However, there's a little catch.  You will need to convert your OWL ontology to OBO format first.
+	Yes!  However, there's a little catch.  You will need to convert your OWL ontology to OBO format first.  In the future, we plan to include a feature to convert on-the-fly.
 	</p>
 	<h3>How can I convert my OWL ontology to OBO format?</h3>
 	<p>
@@ -48,7 +48,7 @@
 	</p>
 	<h3>Can I use my own ontologies?</h3>
 	<p>
-	  Yes you can!  You don't have to use ontologies that are in public repositories if you don't want to.  Please consult the User Guide for more detailed instructions...
+	  Yes you can!  You don't have to use ontologies that are in public repositories if you don't want to.  Please consult the <a href="http://www.phenote.org/help/">User Guide</a> for more detailed instructions...
 	</p>
 	<h3>Can I use my own pre-coordinated phenotype ontology?</h3>
 	<p>
@@ -71,13 +71,21 @@
 	You bet!  Check out our <a href="http://www.phenote.org/help/">User's Guide</a></p>
 	<h3>When I'm annotating, I can't seem to find the right terms?</h3>
 	<p>
-	Sometimes a term you are looking for is really just a synonym of another term.  Make sure you have "synonyms" selected under the "Settings" menu. 
-	If you still can't find it, it might be that the ontology is really missing a term.  Ontologies are never complete, and are under active development.  There are usually online term request resources for each ontology.  You will need to contact each ontology resource separately.  
+	Sometimes a term you are looking for is really just a synonym of another term.  Make sure you have "synonyms" selected under the "Settings" menu. </p>
+	<p>If you still can't find it, it might be that the ontology is really missing a term.  Ontologies, while extensive, are never complete, and are under active development.  There are usually online term request resources for each ontology.  You will need to contact each ontology resource separately.  </p>
 	</p>	
 	<h3>Can I output my data in RDF-OWL?</h3>
 	<p>
 	Not yet, but that feature is coming soon.
 	</p>
+	<h3>Are there any tools that allow me to analyze my annotations?</h3>
+	<p> Presently Phenote does not include any analysis tools.  However,
+	<a href="http://www.bioontology.org/wiki/index.php/OBD:Main_Page">tools</a> 
+	are being developed within the NCBO that will allow
+	for data warehousing, querying, and analysis.  Our hope is to have
+	them integrated in Phenote whenever possible.  Please stay tuned 
+	for future updates and take a look at our <a href="roadmap.shtml">
+	roadmap</a> to find out more.</p>
       </div>
     </div>
 
