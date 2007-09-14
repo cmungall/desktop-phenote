@@ -92,7 +92,7 @@
 	    <li class="events">
 	  <p class="quick_link">
 	    <img src="images/star.gif" alt=""  class="icon_green"/>	      
-	    <a href="http://www.cs.uoregon.edu/~dhowe/biocurator/">BioCurator meeting</a>, October 23-25, San Jose, CA 
+	    <a href="link">Event</a>, Date, Location 
 	    </p>
 	    </li>
 	  </ul>
@@ -105,18 +105,6 @@
 	    <a href="http://www.phenote.org/irc_chat">User's Group Monthly Meeting</a>, October 4, 8:30am, Online 
 	    </p>
 	    </li> 
-	    <li class="events">
-	  <p class="quick_link">
-	    <img src="images/star.gif" alt=""  class="icon_green"/>	      
-	    <a href="http://www.phenote.org/irc_chat">User's Group Monthly Meeting</a>, November 6, 8:30am, Online 
-	    </p>
-	    </li> 
-	    <li class="events">
-	  <p class="quick_link">
-	    <img src="images/star.gif" alt=""  class="icon_green"/>	      
-	    <a href="http://www.phenote.org/irc_chat">User's Group Monthly Meeting</a>, December 1, 8:30am, Online 
-	    </p>
-	    </li> 
 	  <h3>Meetings/Demos</h3>
 	  <ul class="events">
 	    <li class="events">
@@ -127,9 +115,7 @@
 	    </li>
 	  </ul>
 	  
-
 	</div>
-
 
 	<div class="content_box_head_green">
 	  <img src="images/document.gif" alt="News" class="icon_blue" />
