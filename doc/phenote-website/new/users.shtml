@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+
+    <!--#include virtual="ssi/head.html" -->
+    <title>Phenote</title>
+
+  </head>
+  <body>
+
+    <!--#include virtual="ssi/header.html" -->
+
+    <div id="main_container_aux">
+      <div id="main_content_aux">
+	<div class="catch_phrase">
+	Project Team
+	</div>
+    <div class="clearall"></div>
+	<h2 class="bio"><a name="exec" id="exec"></a>
+	Development</h2>
+	<div class="third_bio">
+	<p><img src="http://www.bioontology.org/images/team/gibson.jpg" title="Mark Gibson" alt="Mark Gibson" height="130"/></p>
+      <p><a href="http://www.berkeleybop.org/mgibson/" title="Mark Gibson">Mark Gibson</a>, MSE</p>
+	</div>	
+	<div class="third_bio">
+	<p><img src="http://www.bioontology.org/images/team/washington.jpg" title="Nicole Washington" alt="Nicole Washington" height="130" /> </p>
+      <p><a href="http://berkeleybop.org/content/people/nlwashington/" title="Nicole Washington">Nicole Washington</a></a>, PhD </p>
+	</div>	
+      <div class="third_bio">
+      <p><img src="http://www.bioontology.org/images/team/mungall.jpg" title="Chris Mungall" alt="Chris Mungall" height="130" /></p>
+      <p><a href="http://www.fruitfly.org/%7Ecjm/" title="Chris Mungall">Chris Mungall</a>, BSc</p>
+    </div>
+    <div class="clearall"></div>
+
+    <div class="third_bio">
+      <p><img src="images/team/lewis.jpg" title="Suzanna Lewis" alt="Suzanna Lewis" height="130" /> </p>
+      <p><a href="http://www.berkeleybop.org/content/people/suzi/" title="Suzanna Lewis">Suzanna Lewis</a>, MS</p>
+    </div>
+    <div class="clearall"></div>
+
+      <h1>Collaborations</h1>
+
+      <p>Phenote development is a community effort.  We welcome input and feedback from our users.  The following groups are using Phenote:</p>
+      <table border="0">
+        <tr>
+	<td><a href="http://flybase.bio.indiana.edu/">
+        <img class="portrait" height="50" border="0" src="/images/fly_logo.png"alt="Flybase" /></a>
+	</td>
+    <td>Flybase</td>
+    </tr>		
+    <tr>
+    <td><a href="http://www.zfin.org/"><img class="portrait" border="0" src="/images/zfin_logo.gif" height="50" alt="Zfin" /></a>
+    </td>
+    <td>Zebrafish Information Network (Zfin)</td>
+    </tr>
+	<td><a href="http://www.nbirn.net/research/mouse/index.shtm">
+        <img class="portrait" height="50" border="0" src="/images/BIRN_logo.gif"alt="BIRN" /></a>
+	</td>
+    <td>mouse Biomedical Informatics Research Network (mouseBIRN)</td>
+    </tr>		
+    <tr>
+    <td><a href="http://www.dictybase.org/"><img class="portrait" border="0" src="/images/dicty_logo.png" height="50" alt="Dictybase" /></a>
+    </td>
+    <td>Dictyostelium Model Organism Database (Dictybase)</td>
+    </tr>
+    <tr>
+    <td><a href="http://www.geneontology.org/"><img class="portrait" border="0" src="/images/go_logo.gif" height="50" alt="GO" /></a>
+    </td>
+    <td>The Gene Ontology</td>
+    </tr>
+    <tr>
+    <td><a href="http://www.nescent.org/">
+        <img class="portrait" border="0" src="/images/nescent_logo.gif" height="50" alt="Nescent" /></a>
+    </td>
+    <td>National Evolutionary Synthesis Center (NESCent)</td>
+    </tr>
+    <tr>
+    <td><a href="http://www.pharmgkb.org/"><img class="portrait" border="0" src="/images/pgkb_logo.png" height="50" alt="PharmGKB" /></a>
+    </td>
+    <td>PharmacoGenomics KnowledgeBase (PharmGKB)</td>
+    </tr>
+    <tr>
+    <td><a href="http://www.xenbase.org"><img class="portrait" border="0" src="/images/xenbase_logo.png" height="50" alt="Xenbase" /></a>
+    </td>
+    <td>Xenopus Model Organism Database (Xenbase)</td>
+    </tr>
+</table>
+
+      <p>If you are an active user and would like to be listed on our webpage, please <a href="contact.shtml">contact us</a>.</p>
+	
+      </div>
+    </div>
+
+    <!--#include virtual="ssi/footer.html" -->
+
+  </body>
+</html>
