@@ -27,11 +27,11 @@
 	</p>
 	<h3>I found a bug in Phenote.  How do I report errors?</h3>
 	<p>
-	We want to know if there's any errors.  Please use our <a href="http://www.sourceforge.net/tracker/?group_id=76834&atid=887913">Bug Report tracker</a>.
+	We want to know if there's any errors.  Please use our <a href="http://www.sourceforge.net/tracker/?group_id=76834&amp;atid=887913">Bug Report tracker</a>.
 	</p>
 	<h3>There's a function/feature I wish Phenote had.  Can you add it?</h3>
 	<p>
-	You can request new features through our <a href="http://www.sourceforge.net/tracker/?group_id=76834&atid=887913">Feature Request tracker</a>.  Please be sure to label the "Group" as a "new feature".
+	You can request new features through our <a href="http://www.sourceforge.net/tracker/?group_id=76834&amp;atid=887913">Feature Request tracker</a>.  Please be sure to label the "Group" as a "new feature".
 	</p>
 	<h1>Ontologies</h1>
 	<h3>What kinds of ontologies can I use?</h3>
@@ -59,12 +59,11 @@
 	</p>	
 	<h3>Is there one place I can go to browse through all the available ontologies?</h3>
 	<p>
-	Yep! There are several online resources that can help you learn more.  Some of these include:
+	Yep! There are several online resources that can help you learn more.  Some of these include:</p>
 	  <ul>
 	    <li><a href="http://www.bioontology.org/">National Center for Biomedical Ontology</a></li>
 	    <li><a href="http://www.obofoundry.org/">OBO Foundry</a></li>
 	  </ul>
-	</p>
 	<h1>Using Phenote</h1>
 	<h3>Is there some online documentation?</h3>
 	<p>

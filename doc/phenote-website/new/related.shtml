@@ -16,10 +16,10 @@
 	  Related Projects
 	</div>
 	<h1>Ontologies</h1>
-	<h3>
+	<h2>
 	  <a href="http://www.bioontology.org/wiki/index.php/PATO:Main_Page">
 	    Phenotype and Trait Ontology (PATO)</a>
-	</h3> 	
+	</h2> 	
 	<p> 
 	An ontology of phenotypic qualities (properties). This ontology
 	can be used in conjunction with other ontologies such as GO or 
@@ -27,10 +27,10 @@
 	qualities are red, ectopic, high temperature, fused, small, 
 	edematous and arrested.
 	</p>
-	<h3>
+	<h2>
 	  <a href="http://www.geneontology.org/">
 	    Gene Ontology (GO)</a>
-	</h3> 
+	</h2> 
 	<p>
 	The Gene Ontology (GO) project is a collaborative effort to address 
 	the need for consistent descriptions of gene products in different 
@@ -39,11 +39,12 @@
 	describe gene and gene product attributes in any organism.  There
 	are three distinct ontologies developed by GO:  molecular function,
 	biological process, and cellular component.  
-	<h3>
+	</p>
+	<h2>
 	  <a href="http://obi.sourceforge.net/">
 	    Ontologies for Biomedical Investigations
 	  </a>
-	</h3> 
+	</h2> 
 	<p>
 	  The Ontology for Biomedical Investigations (OBI) project is
 	  developing an integrated ontology for the description of
@@ -55,10 +56,10 @@
 	
 
 	<h1>Resources</h1>
-	<h3>
+	<h2>
 	  <a href="http://www.bioontology.org/">
 	    National Center for Biomedical Ontology</a>
-	</h3> 
+	</h2> 
 	<p>
 	The NCBO is a consortium of leading biologists, clinicians, 
 	informaticians, and ontologists who develop innovative technology 
@@ -66,10 +67,10 @@
 	manage biomedical information and knowledge in machine-processable 
 	form.
 	</p>
-	<h3>
+	<h2>
 	  <a href="http://www.obofoundry.org/">
 	    OBO Foundry</a>
-	</h3> 	
+	</h2> 	
 	<p>
 	The OBO Foundry is an open, inclusive, and collaborative core of
 	interoperable ontologies developed by the research community.  The
@@ -83,10 +84,10 @@
 	of data and information integration in the biomedical domain.
 	
 	</p>
-	<h3>
+	<h2>
 	  <a href="http://www.gmod.org/">
 	    Generic Model Organism Databases</a>
-	</h3> 
+	</h2> 
 	<p>
 	  The Generic Model Organism Project (GMOD) is a joint effort
 	  by the model organism system databases WormBase, FlyBase,
@@ -95,12 +96,12 @@
 	  community databases of biology.
 	</p>
 
-	<h3>
+	<h2>
 	  <a href="http://ifomis.org">
 	    Institute for Formal Ontology and Medical Information
 	    Science (IFOMIS)
 	  </a>
-	</h3>
+	</h2>
 	<p>
 	  The Institute for Formal Ontology and Medical Information
 	  Science (IFOMIS) comprehends an interdisciplinary research
@@ -110,11 +111,11 @@
 	  applied ontology.
 	</p>
 
-	<h3>
+	<h2>
 	  <a href="http://mged.sf.net/">
 	    MGED
 	  </a>
-	</h3> 
+	</h2> 
 	<p>
 	  The Microarray Gene Expression Data (MGED) Society is an
 	  international organisation of biologists, computer
@@ -123,11 +124,11 @@
 	  and proteomics experiments.
 	</p>
 
-	<h3>
+	<h2>
 	  <a href="http://www.ebi.ac.uk/ontology-lookup/">
 	    Ontology Lookup Service
 	  </a>
-	</h3> 
+	</h2> 
 	<p>
 	  The Ontology Lookup Service is a spin-off of the PRIDE
 	  project, which required a centralized query interface for
@@ -139,11 +140,11 @@
 	  format.
 	</p>
 
-	<h3>
+	<h2>
 	  <a href="http://www.plantontology.org/">
 	    Plant Ontology Consortium
 	  </a>
-	</h3> 
+	</h2> 
 	<p>
 	  The Plant Ontology Consortium (POC) aims to develop, curate
 	  and share structured controlled vocabularies (ontologies)
@@ -154,11 +155,11 @@
 	  specific expression of genes, proteins and phenotypes.
 	</p>
 	
-	<h3>
+	<h2>
 	  <a href="http://www.psidev.info/index.php?q=node/258">
 	    Proteomics Standards Initiative
 	  </a>
-	</h3>
+	</h2>
 	<p>
 	  Is also interested in guidelines for the development of
 	  Controlled Vocabularies.
