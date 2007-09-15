@@ -72,7 +72,6 @@
 	<p>
 	Sometimes a term you are looking for is really just a synonym of another term.  Make sure you have "synonyms" selected under the "Settings" menu. </p>
 	<p>If you still can't find it, it might be that the ontology is really missing a term.  Ontologies, while extensive, are never complete, and are under active development.  There are usually online term request resources for each ontology.  You will need to contact each ontology resource separately.  </p>
-	</p>	
 	<h3>Can I output my data in RDF-OWL?</h3>
 	<p>
 	Not yet, but that feature is coming soon.
