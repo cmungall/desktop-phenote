@@ -20,19 +20,18 @@
       <p>Phenote development is a community effort.  We welcome input and feedback from our users.  The following groups are using Phenote:</p>
       <table border="0">
         <tr>
-	<td><a href="http://flybase.bio.indiana.edu/">
-        <img class="portrait" height="50" src="/images/fly_logo.png"alt="Flybase" /></a>
+	<td><a link="http://flybase.bio.indiana.edu/"> <img class="portrait" height="50" src="/images/fly_logo.png" alt="Flybase" /></a>
 	</td>
     <td>Flybase</td>
     </tr>		
     <tr>
-    <td><a href="http://www.zfin.org/"><img class="portrait"  src="/images/zfin_logo.gif" height="50" alt="Zfin" /></a>
+    <td><a href="http://www.zfin.org/"> <img class="portrait" src="/images/zfin_logo.gif" height="50" alt="Zfin" /></a>
     </td>
     <td>Zebrafish Information Network (Zfin)</td>
     </tr>
     <tr>
 	<td><a href="http://www.nbirn.net/research/mouse/index.shtm">
-        <img class="portrait" height="50"  src="/images/BIRN_logo.gif"alt="BIRN" /></a>
+        <img class="portrait" height="50"  src="/images/BIRN_logo.gif" alt="BIRN" /></a>
 	</td>
     <td>mouse Biomedical Informatics Research Network (mouseBIRN)</td>
     </tr>		

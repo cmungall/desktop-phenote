@@ -32,6 +32,7 @@ a:hover {
 a.image:link, a.image:visited, a.image:hover {
 	background: none;
 	padding: 0px;
+	color: #000000;
 }
 
 a.image img {
