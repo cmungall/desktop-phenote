@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+
+    <!--#include virtual="ssi/head.html" -->
+    <title>Phenote</title>
+
+  </head>
+  <body>
+
+    <!--#include virtual="ssi/header.html" -->
+
+    <div id="main_container_aux">
+      <div id="main_content_aux">
+	<div class="catch_phrase">
+	Phenote Funding and Support
+	</div>
+	<p>Phenote is being developed by the <a href="http://www.berkeleybop.org/">
+	Bioinformatics Core</a> of the <a href="http://www.bioontology.org/">
+	National Center for Biomedical Ontology</a>, which is part of the 
+	<a href="http://www.bisti.nih.gov/ncbc/index.cfm">
+	National Center for Biomedical Computing</a> network.  
+	Funding is given by the <a href="http://nihroadmap.nih.gov/">NIH Roadmap</a> initiative. </p>
+
+	<p> There are three funded groups driving the development of this 
+	software project through the NCBO:</p>
+	
+        <table border="0">
+	  <tr>
+	    <td><a href="http://flybase.bio.indiana.edu/">
+	    <img class="portrait" height="50" border="0" src="/images/fly_logo.png"alt="Flybase" /></a>
+	    </td>
+	    <td><p><strong>Flybase:  The Drosophila Genome Database</strong>[<a href="http://www.bioontology.org/dbp_drosophila.html">...</a>]</p></td>
+	  </tr>		
+	  <tr>
+	    <td><a href="http://www.zfin.org/"><img class="portrait" border="0" src="/images/zfin_logo.gif" height="50" alt="Zfin" /></a>
+	    </td>
+	    <td><p><strong>Zfin:  Zebrafish Information Network</strong> [<a href="http://www.bioontology.org/dbp_zfin.html">...</a>]</p>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td><a href="http://www.nbirn.net/research/mouse/index.shtm">
+	    <img class="portrait" height="50" border="0" src="/images/BIRN_logo.gif" alt="BIRN" /></a>
+	    </td>
+	    <td><p><strong>mouseBIRN: mouse Biomedical Informatics Research Network</strong></p>
+	    </td>
+	  </tr>	
+	</table>	
+
+      </div>
+    </div>
+
+    <!--#include virtual="ssi/footer.html" -->
+
+  </body>
+</html>

@@ -17,24 +17,25 @@
 	</div>
        <h2 class="bio"><a name="exec" id="exec"></a>
 	Development</h2>
-	<div class="fourth_bio">
-	<p><img src="http://www.bioontology.org/images/team/gibson.jpg" title="Mark Gibson" alt="Mark Gibson" height="130" /></p>
+	<div class="third_bio">
+	<p><img src="http://www.bioontology.org/images/team/gibson.jpg" title="Mark Gibson" alt="Mark Gibson" height="130"/></p>
       <p><a href="http://www.berkeleybop.org/content/about/people/" title="Mark Gibson">Mark Gibson</a>, MSE</p>
 	</div>	
-	<div class="fourth_bio">
+	<div class="third_bio">
 	<p><img src="http://www.bioontology.org/images/team/washington.jpg" title="Nicole Washington" alt="Nicole Washington" height="130" /> </p>
       <p><a href="http://berkeleybop.org/content/about/people/nlwashington/" title="Nicole Washington">Nicole Washington</a>, PhD </p>
 	</div>	
-      <div class="fourth_bio">
+      <div class="third_bio">
       <p><img src="http://www.bioontology.org/images/team/mungall.jpg" title="Chris Mungall" alt="Chris Mungall" height="130" /></p>
       <p><a href="http://www.fruitfly.org/%7Ecjm/" title="Chris Mungall">Chris Mungall</a>, BSc</p>
     </div>
-    <div class="fourth_bio">
+    <div class="clearall"></div>
+
+    <div class="third_bio">
       <p><img src="http://www.bioontology.org/images/team/lewis.jpg" title="Suzanna Lewis" alt="Suzanna Lewis" height="130" /> </p>
       <p><a href="http://www.berkeleybop.org/content/about/people/" title="Suzanna Lewis">Suzanna Lewis</a>, MS</p>
     </div>
     <div class="clearall"></div>
-    <h2><a href="contact.shtml">Contact us...</a></h2>
 
       <h1>Affiliations</h1>
 

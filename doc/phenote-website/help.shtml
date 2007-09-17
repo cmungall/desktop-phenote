@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+
+    <!--#include virtual="ssi/head.html" -->
+    <title>Phenote</title>
+
+  </head>
+  <body>
+
+    <!--#include virtual="ssi/header.html" -->
+
+    <div id="main_container_aux">
+      <div id="main_content_aux">
+
+	<div class="catch_phrase">
+	Getting Help with Phenote
+	</div>	
+	<h2><a href="http://www.phenote.org/faq.shtml">Frequently Asked Questions (FAQs)</a></h2>
+	<p>A resource for some basic questions and those we are most frequently asked</p>
+	<h2><a href="http://www.phenote.org/help/">Online Help</a></h2>
+	<p>We provide a searchable online help tool to help answer your questions.  This is the same help content provided in the software.</p>
+	<h2><a href="http://www.phenote.org/contact.shtml">Contact Us</a></h2>
+	<p>We are here to help you whenever you might need it.  You can contact
+	us directly or pose your questions to our user community with the links provided here. 
+	</p>
+      </div>
+    </div>
+
+    <!--#include virtual="ssi/footer.html" -->
+
+  </body>
+</html>

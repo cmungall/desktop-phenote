@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+
+    <!--#include virtual="ssi/head.html" -->
+    <title>Phenote: A Phenotype Annotation Tool</title>
+
+  </head>
+  <body>
+
+    <!--#include virtual="ssi/header.html" -->
+
+    <div id="main_container_aux">
+      <div id="main_content_aux">
+	<div class="catch_phrase">
+	  Frequently Asked Questions (FAQ)
+	</div>
+
+	<h1>General</h1>
+	<h3>How do I get started?</h3>
+	<p>
+	   You can lauch Phenote directly from your browser.  Simply click on the Launch Phenote 'quick link' from the <a href="http://www.phenote.org/">main page</a> or the <a href="http://www.phenote.org/downloads.shtml">Downloads</a> page, and it will launch directly from your browser.  It will take a couple of minutes to download all the components, but that's it.
+	</p>
+	<h3>What's the best forum to ask my burning questions?</h3>
+	<p>
+	  There's several discussion groups that are relevant to Phenote users.  You'll find a list on our <a href="http://www.phenote.org/contact.shmtl">Contact</a> page.
+	</p>
+	<h3>I found a bug in Phenote.  How do I report errors?</h3>
+	<p>
+	We want to know if there's any errors.  Please use our <a href="http://www.sourceforge.net/tracker/?group_id=76834&amp;atid=887913">Bug Report tracker</a>.
+	</p>
+	<h3>There's a function/feature I wish Phenote had.  Can you add it?</h3>
+	<p>
+	You can request new features through our <a href="http://www.sourceforge.net/tracker/?group_id=76834&amp;atid=887913">Feature Request tracker</a>.  Please be sure to label the "Group" as a "new feature".
+	</p>
+	<h1>Ontologies</h1>
+	<h3>What kinds of ontologies can I use?</h3>
+	<p>
+	You can use any kind of domain specific ontologies.  While Phenote is a tool being developed for annotation of biological phenotypes, it can certainly be adapted to any domain whose knowledge is captured with ontologies.  
+	</p>
+	<h3>Can I use OBO and/or OWL format ontologies?</h3>
+	<p>
+	Yes!  However, there's a little catch.  You will need to convert your OWL ontology to OBO format first.  In the future, we plan to include a feature to convert on-the-fly.
+	</p>
+	<h3>How can I convert my OWL ontology to OBO format?</h3>
+	<p>
+	There's an online tool to help with this conversion: <a href="http://www.berkeleybop.org/obo-conv.cgi">OWL-OBO converter</a>
+	</p>
+	<h3>Can I use my own ontologies?</h3>
+	<p>
+	  Yes you can!  You don't have to use ontologies that are in public repositories if you don't want to.  Please consult the <a href="http://www.phenote.org/help/">User Guide</a> for more detailed instructions...
+	</p>
+	<h3>Can I use my own pre-coordinated phenotype ontology?</h3>
+	<p>
+	Yes!  Phenote is a generic tool that allows you to use any kind of ontology.  Its simplicity allows the user to mix and match different kinds of annotations from different kinds of ontologies.  So, you might use your pre-coordinated phenotype ontology for one kind of statement, and then combine a different entity+quality ontology for another statement.  
+	</p>
+	<h3>What's the difference between using a pre-coordinated phenotype ontology, and E+Q statements?</h3>
+	<p>
+	</p>	
+	<h3>Is there one place I can go to browse through all the available ontologies?</h3>
+	<p>
+	Yep! There are several online resources that can help you learn more.  Some of these include:</p>
+	  <ul>
+	    <li><a href="http://www.bioontology.org/">National Center for Biomedical Ontology</a></li>
+	    <li><a href="http://www.obofoundry.org/">OBO Foundry</a></li>
+	  </ul>
+	<h1>Using Phenote</h1>
+	<h3>Is there some online documentation?</h3>
+	<p>
+	You bet!  Check out our <a href="http://www.phenote.org/help/">User's Guide</a></p>
+	<h3>When I'm annotating, I can't seem to find the right terms?</h3>
+	<p>
+	Sometimes a term you are looking for is really just a synonym of another term.  Make sure you have "synonyms" selected under the "Settings" menu. </p>
+	<p>If you still can't find it, it might be that the ontology is really missing a term.  Ontologies, while extensive, are never complete, and are under active development.  There are usually online term request resources for each ontology.  You will need to contact each ontology resource separately.  </p>
+	</p>	
+	<h3>Can I output my data in RDF-OWL?</h3>
+	<p>
+	Not yet, but that feature is coming soon.
+	</p>
+	<h3>Are there any tools that allow me to analyze my annotations?</h3>
+	<p> Presently Phenote does not include any analysis tools.  However,
+	<a href="http://www.bioontology.org/wiki/index.php/OBD:Main_Page">tools</a> 
+	are being developed within the NCBO that will allow
+	for data warehousing, querying, and analysis.  Our hope is to have
+	them integrated in Phenote whenever possible.  Please stay tuned 
+	for future updates and take a look at our <a href="roadmap.shtml">
+	roadmap</a> to find out more.</p>
+      </div>
+    </div>
+
+    <!--#include virtual="ssi/footer.html" -->
+
+  </body>
+</html>

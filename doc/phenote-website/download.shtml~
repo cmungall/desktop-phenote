@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+
+    <!--#include virtual="ssi/head.html" -->
+    <title>Phenote: A Phenotype Annotation Tool using Ontologies</title>
+
+  </head>
+  <body>
+
+    <!--#include virtual="ssi/header.html" -->
+
+    <div id="main_container">
+      <div id="main_content">
+	<div class="catch_phrase">
+	</div>
+	<h2><a href="http://www.phenote.org/phenote/latest/phenote.jnlp">Launch Phenote in your browser</a></h2>
+	<p> You can run phenote directly from your web browser without a separate installation by selecting one of the following links:</p>
+	<ul><li><strong>Beta release: <a href="http://www.phenote.org/phenote/1.4-beta3/phenote.jnlp">1.4 beta3</a></strong></li>
+	<li><strong>Stable release: <a href="http://www.phenote.org/phenote/1.3/phenote.jnlp">1.3</a> </strong></li>
+	<li><a href="http://www.phenote.org/phenote/phenote.html">Older releases</a></li>
+	</ul>
+	<p> You may be prompted to sign a certificate and allow the download.  This will take a few minutes the first time you do this.
+	</p>
+	<h2>Run Phenote at the command line</h2>
+	<p> To run phenote on the command line, linux or MacOSX users will need to checkout Phenote from the subversion repository.  This can be done with the following command:</p>
+	<ul><li>Beta release: <b>svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/tags/1.4-beta3/ phenote</b> </li>
+	<li>Stable release: <b>svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/tags/1.3/ phenote</b>
+	<li>Latest: <b>svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/trunk phenote </b></li>
+	</ul>	
+	<p>Once you've got it, you can run Phenote with ant with the command:  <b>ant run</b>
+	</p>
+	<h2>Hardware requirements</h2>
+	<ul>
+	<li> 400 Mhz processor or faster.</li>
+	<li> 500+ MB RAM </li>
+	<li> 200 MB free disk space on your computer </li>
+	<li> Internet connection (broadband is best).  Required for automatic updates of ontologies and some functions. </li>
+	</ul>
+	<h2>Software requirements</h2>
+	<ul>
+	<li> PC running Windows XP; Mac OSX; Linux </li>
+	<li> Webstart:  Internet browser with webstart installed </li>
+	<li> Command line:  Java 1.5 or later; Ant </li>
+	</ul>	
+	
+      </div>
+    </div>
+
+    <div id="sidebar_container">
+
+      <div id="sidebar_content">
+
+	<div class="content_box_head_blue">
+	  Recently added features, version 1.4-beta3
+	</div>
+
+	<div class="content_box_blue">
+  <b>feature</b>: Native look-and-feel enabled for interface.  Users should now see Mac or Windows style depending on their system.<br />
+  <b>feature</b>: read-only field (needs work)<br />
+  <b>feature</b>: config disabpng of copy of field (for db ids)<br />
+  <b>feature</b>: display property values of terms in term info<br />
+  <b>feature</b>: Phylogeny Chooser for NESCent/PhenoMap project. A user can import a phylogenetic tree in Newick format.  The user can use the tree
+  viewer to select rows within the character template - typically taxonomic groups.<br />
+  <b>feature</b>: term fields can be nullified<br />
+  <b>feature</b>: separate queries to backend for different groups, implemented in worm<br />
+  <b>feature</b>: ID field type, requires ":"<br />
+  <b>feature</b>: can get unique list of deleted annots<br />
+  <b>feature</b>: added group adapter framework<br />
+  <b>feature</b>: fly genotype group adapter makes fly genotype strings from tab/group<br />
+  <b>feature</b>: worm group adapter makes reference terms from ref query<br />
+  <b>change</b>: on term completion if adding a letter use previous completion list<br />
+  <b>change</b>: worm adapter query tab working properly<br />
+  <b>change</b>: build file takes param for webstart version deployment, and puts in jnlp<br />
+  <b>change</b>: group adapters can psten for CharList changes<br />
+  <b>change</b>: added/corrected BIRN ontologies<br />
+  <b>bugfix</b>: load of file doesnt crash on post comp parsing bug<br />
+  <b>bugfix</b>: doesnt load obo files specified twice twice<br />
+  <b>bugfix</b>: view menu show up at initialization<br />
+  <b>bugfix</b>: layout of term history with split pane proper<br />
+	</div>
+      </div>
+    </div>
+
+    <!--#include virtual="ssi/footer.html" -->
+
+  </body>
+</html>
