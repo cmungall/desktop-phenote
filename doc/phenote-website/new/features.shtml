@@ -52,10 +52,10 @@
 
 	  <p class="quick_link">
 	    <img src="images/star.gif" alt=""  class="icon_green"/>
-	    <a href="http://www.phenote.org/phenote.jnlp"
+	    <a href="http://www.phenote.org/phenote/1.4-beta3/phenote.jnlp"
 	       title="Lauch Phenote via Webstart">
-		Launch Phenote v1.4-beta3 via Webstart
-	    </a>
+		Launch Phenote v1.4-beta3
+	    </a> via webstart
 	  </p>
 	  <p class="quick_link">
 	    <img src="images/star.gif" alt=""  class="icon_green"/>
