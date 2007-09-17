@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+
+    <!--#include virtual="ssi/head.html" -->
+    <title>Phenote: A Phenotype Annotation Tool using Ontologies</title>
+
+  </head>
+  <body>
+
+    <!--#include virtual="ssi/header.html" -->
+
+    <div id="main_container_aux">
+      <div id="main_content_aux">
+	<div class="catch_phrase">
+	  Phenote Events
+	</div>
+
+	<h1>Upcoming Events, 2007</h1>
+	<h2>September</h2>
+	<ul>
+	  <li>
+	  </li>
+	</ul>
+
+	<h2>October</h2>
+	<ul>
+	  <li>Oct 2, Phenote Users Group, Online
+	  </li>
+	<li>Oct 23-25, Ontology Best Practices Workshop, <a href="http://www.cs.uoregon.edu/~dhowe/biocurator/">Biocurator Meeting</a>, Hayes Mansion, San Jose, CA
+	</li>
+	</ul>
+
+	<h2>November</h2>
+	<ul>
+	  <li>Nov 6, Phenote Users Group, Online
+	  </li>
+	<li>Nov 27, <a href="http://www.bioontology.org/">NCBO</a> Scientific Advisory Board meeting</li>
+	</ul>
+
+	<h2>December</h2>
+	<ul>
+	  <li>Dec 4, Phenote Users Group, Online
+	  </li>
+	</ul>
+
+	<h1>Past Events, 2007</h1>
+	<h2>September</h2>
+	<ul>
+	  <li>Sept 4, Phenote Users Group, Online
+	  </li>
+	</ul>
+	<h2>August</h2>
+	<ul>
+	  <li>Aug 29, Phenote Demo, <a href="http://darwin.nerc-oxford.ac.uk/gc_wiki/index.php/EnvO_Workshop">Environment Ontology Workshop</a></li>
+	  <li>Aug 28, new 1.4 beta 3 released [<a href="http://www.phenote.org/downloads.shtml">Release notes</a>...]</li>
+	  <li>Aug 22-24, Phenote Demo, <a href="http://wiki.modencode.org/index.php/White">K. White group, ModENCODE</a>, Chicago, IL
+	  </li>
+	  <li>Aug 13-14, site visit, <a href="http://www.nbirn.net/research/mouse/index.shtm">BIRN</a>, San Diego, CA
+	  </li>
+	  <li>Aug 7, <a href="http://www.bioontology.org/wiki/index.php/Phenote:Main_Page#Phenote:Agendas_.26_Transcripts">Phenote Users Group</a>, Online
+	  </li>
+	</ul>	
+	<h2>July</h2>
+	<ul>
+	  <li>July 3, <a href="http://www.bioontology.org/wiki/index.php/Phenote:Main_Page#Phenote:Agendas_.26_Transcripts">Phenote Users Group</a>, Online
+	  </li>
+	</ul>
+	<h2>June</h2>
+	<ul>
+	  <li>June 6, "Representing Phenotypes in OWL", <a href="http://owled2007.iut-velizy.uvsq.fr">OWL: Experiences and Directions Conference Presentation, Innsbruck, Austria.  [<a href="http://owled2007.iut-velizy.uvsq.fr/PapersPDF/paper_40.pdf">PDF</a> 
+	  </li>
+	  <li>June 5, <a href="http://www.bioontology.org/wiki/index.php/Phenote:Main_Page#Phenote:Agendas_.26_Transcripts">Phenote Users Group</a>, Online
+	  </li>
+	</ul>
+	<h2>May</h2>
+	<ul>
+	  <li>May 1, <a href="http://www.bioontology.org/wiki/index.php/Phenote:Main_Page#Phenote:Agendas_.26_Transcripts">Phenote Users Group</a>, Online
+	  </li>
+	</ul>
+	<h2>April</h2>
+	<ul>
+	  <li>Apr 12-13, site visit, <a href="http://www.nbirn.net/research/mouse/index.shtm">BIRN</a>, San Diego, CA
+	  </li>
+	  <li>Apr 11-12, site visit, <a href="http://www.wormbase.org">Wormbase</a>, Pasadena, CA
+	  </li>
+	  <li>Apr 10, <a href="http://www.bioontology.org/wiki/index.php/Phenote:Main_Page#Phenote:Agendas_.26_Transcripts">Phenote Users Group</a>, Online
+	  </li>
+	<li>Apr 5, <a href="http://www.bioontology.org/">NCBO</a> Scientific Advisory Board meeting</li>
+	</ul>
+	<h2>March</h2>
+	<ul>
+	  <li>Mar 28-29, site visit, <a href="http://zfin.org">ZFin</a>, Eugene, OR
+	  </li>
+	</ul>
+	<h1>Past Events, 2007</h1>
+
+
+      </div>
+    </div>
+
+    <!--#include virtual="ssi/footer.html" -->
+
+</body>
+</html>
