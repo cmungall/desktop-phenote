@@ -13,7 +13,7 @@
     <div id="main_container_aux">
       <div id="main_content_aux">
 	<div class="catch_phrase">
-	  Phenote Events
+	  News and Events
 	</div>
 
 	<h1>Upcoming Events, 2007</h1>
@@ -47,12 +47,14 @@
 	<h1>Past Events, 2007</h1>
 	<h2>September</h2>
 	<ul>
+	  <li>Sept 17, New website released
+	  </li>
 	  <li>Sept 4, Phenote Users Group, Online
 	  </li>
 	</ul>
 	<h2>August</h2>
 	<ul>
-	  <li>Aug 29, Phenote Demo, <a href="http://darwin.nerc-oxford.ac.uk/gc_wiki/index.php/EnvO_Workshop">Environment Ontology Workshop</a></li>
+	  <li>Aug 29, Phenote Demo, <a href="http://darwin.nerc-oxford.ac.uk/gc_wiki/index.php/EnvO_Workshop">Environment Ontology Workshop</a>, Oxford, UK</li>
 	  <li>Aug 28, new 1.4 beta 3 released [<a href="http://www.phenote.org/downloads.shtml">Release notes</a>...]</li>
 	  <li>Aug 22-24, Phenote Demo, <a href="http://wiki.modencode.org/index.php/White">K. White group, ModENCODE</a>, Chicago, IL
 	  </li>

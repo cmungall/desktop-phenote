@@ -79,7 +79,7 @@
 	  <img src="images/calendar.gif"
 	       alt="Upcoming Events" 
 	       class="icon_blue"/>
-	  Upcoming Events
+	  <a href="events.shtml">Upcoming Events</a>
 	</div>
 
 	<div class="content_box_green">
@@ -115,12 +115,12 @@
 	    </p>
 	    </li>
 	  </ul>
-	  <h3><a href="http://www.phenote.org/events.shtml">Past Events...</a></h3>	  
+	  <!--h3><a href="http://www.phenote.org/events.shtml">Past Events...</a></h3-->	  
 	</div>
 
 	<div class="content_box_head_green">
 	  <img src="images/document.gif" alt="News" class="icon_blue" />
-	  News
+	  <a href="events.shtml">News</a>
 	</div>
 
 	<div class="content_box_green">
@@ -129,17 +129,10 @@
 	  <!--No news is good news!-->
 	  
 	  <!-- Do not destry the following event template -->
-	  <ul class="news">
-	    <li class="news">
 	    <p>09.17.2007 - New website rolled out!  The website has the same
 	    content as the old one, just with a new look-and-feel.</p>
-	    </li>
-	    <li class="news">
 	    <p> 08.28.2007 - 
 	    <a href="http://www.phenote.org/download.shtml">New Phenote Beta available: 1.4-beta3!</a> </p>
-	    </li>
-	  </ul>	  
-
 	  <!--
 	  <h3>Event Title</h3>
 	  <ul class="events">
