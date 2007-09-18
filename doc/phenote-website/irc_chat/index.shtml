@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
 
-    <!--#include virtual="http://www.phenote.org/ssi/head.html" -->
+    <!--#include virtual="/ssi/head.html" -->
     <title>Phenote: A Phenotype Annotation Tool using Ontologies</title>
 
   </head>
   <body>
 
-    <!--#include virtual="http://www.phenote.org/ssi/header.html" -->
+    <!--#include virtual="/ssi/header.html" -->
 
     <div id="main_container_aux">
       <div id="main_content_aux">
@@ -42,7 +42,7 @@ When: First Tuesday of every month; 8:30am <br/>
 </div>
 </div>
 
-<!--#include virtual="http://www.phenote.org/ssi/footer.shtml" -->
+<!--#include virtual="/ssi/footer.shtml" -->
 
   </body>
 </html>
