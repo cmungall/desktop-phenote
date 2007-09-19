@@ -1,5 +1,6 @@
 package phenote.dataadapter.delimited;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,6 +30,7 @@ public class DelimitedChar {
   private String delimitedString;
   private String delimitedHeaderString;
   private String delimiter;
+  private List<DelimFieldParser> fieldParsers = new ArrayList<DelimFieldParser>();
 
   DelimitedChar() {}
 
@@ -76,7 +78,7 @@ public class DelimitedChar {
  	    sb.append(Config.inst().getLabelForCharField(cf));
  	    //for now, i'll call on the syntax abbrev, but i'll want to use the acutal name
         // if (!isFreeText(cf)) { // }		// now have third type isInt, so can't just negate 2007 07 09
-        if (isOntology(cf)) { 
+        if (isTerm(cf)) { 
           sb.append(" ID").append(delimiter);
           sb.append(Config.inst().getLabelForCharField(cf)).append(" Name");
         }
@@ -107,7 +109,7 @@ public class DelimitedChar {
         	  //           sb.append(Config.inst().getLabelForCharField(cf));
             sb.append(makeValue(character.getValue(cf)));
           }
-          else if (isOntology(cf)) sb.append(delimiter);  
+          else if (isTerm(cf)) sb.append(delimiter);  
           //need to make sure to add extra delimiter for ontology fields
         sb.append(delimiter);
         }
@@ -127,8 +129,8 @@ public class DelimitedChar {
     return cf.isFreeText();
   }
   
-  private boolean isOntology(CharField cf) {
-	return cf.hasOntologies();
+  private boolean isTerm(CharField cf) {
+    return cf.isTerm(); //hasOntologies();
   }
 
   // this may be more general than just this class
@@ -148,30 +150,69 @@ public class DelimitedChar {
     return term.getID() + delimiter + term.getName();
   }
 
-  // READ
+  // READ - split read & write into 2 classes?
 
-  /** Parse syntax line into character */
-  //try just splitting at tab.
-  void parseLine(String line) throws SyntaxParseException {
+  /** make DelimFieldParsers from headerLine, throw exception 
+      if line fails to be a header */
+  void setHeader(String headerLine) throws DelimitedEx {
+    String[] colHeaders = splitLine(headerLine);
+    if (colHeaders.length == 0) throw new DelimitedEx(headerLine);
+    int i=0;
+    boolean done = false;
+    while (i<colHeaders.length && !done) {
+      try {
+        DelimFieldParser p = DelimFieldParser.makeNextParser(colHeaders,i);
+        fieldParsers.add(p);
+        // may parse 1 field, may parse 2, may also skip unfound fields
+        i = p.getLastParseField() + 1;
+      } //?? thrown if rest of fields not configged
+      catch (DelimitedEx e) { done = true; } 
+    }
+    if (fieldParsers.isEmpty())
+      throw new DelimitedEx(headerLine);
+  }
+
+  private String[] splitLine(String line) {
+    //parse based on tab...will be delimiter in future
+    Pattern p = Pattern.compile("\t");
+    return p.split(line);
+  }
+
+
+  void parseLine(String line) throws DelimitedEx {
+    character = CharacterIFactory.makeChar();
+    String[] items = splitLine(line);
+    if (items.length==0) throw new DelimitedEx(line); // BlankEx?
+    for (DelimFieldParser p : fieldParsers) {
+      p.parseField(items,character); // add cfv to char or ret cfv?
+    }
+  }
+
+  /** Parse syntax line into character - throw DelimitedEx if blank line/no
+      columns found - just splitting at tab.  */
+  void parseLineOld_DELETE(String line) throws DelimitedEx { // cf list?
     character = CharacterIFactory.makeChar();
 //		System.out.println("input line="+line);
-    Pattern p = Pattern.compile("\t");
-    //parse based on tab...will be delimiter in future
-    String[] items = p.split(line);
+    String[] items = splitLine(line);
+
+    // doesnt split always return at least 1 item even for empty line???
     boolean found = (items.length>0); //m.find();
 //		System.out.println("numcols="+items.length);
     if (!found)
-      throw new SyntaxParseException(line); // skips whitespace lines
+      throw new DelimitedEx(line); // skips whitespace lines ??
     int colCount = 0;
     int fieldCount = 0;
     while (found) {
       String value = items[colCount];
-      addDelValToChar(fieldCount,value);
+      // this aint right - this hardwires column # to field, should use column name!
       CharField c = Config.inst().getEnbldCharField(fieldCount);
-//		  System.out.println("col="+colCount+";  fieldCount="+fieldCount+"; val="+value+"; charfieldname ="+c.getName());
-      if (isOntology(c)) {
+//System.out.println("col="+colCount+";  fieldCount="+fieldCount+"; val="+value+"; charfieldname ="+c.getName());
+      String termName = null;
+      if (c.isTerm()) {
         colCount++; //skip over the Name, only keep ID
+        termName = items[colCount];
       }
+      addDelValToChar(fieldCount,value,termName); // termName null if not term
       colCount++;
       fieldCount++;
       found = (colCount<items.length); // if parsing last tag found will be false - at end
@@ -191,8 +232,9 @@ public class DelimitedChar {
   }
 
 
-  
-  private void addDelValToChar(int fieldNum, String value) {
+  /** if term then value is ID and termName is name of term, if free text then
+      value is free text and termName is null */
+  private void addDelValToChar(int fieldNum, String value, String termName) {
 //  it doesn't really matter if there's a blank column in this mode
     if (value.equals("")) {
 //      log().error("No value given for column"+fieldNum);
@@ -211,10 +253,14 @@ public class DelimitedChar {
     try {
       //System.out.println("column="+fieldNum+"; value = "+value);
       // set String -> for obo class automatically find term
+      // if term not found makes a dangler
       //this assumes that you are loading data the same order you saved it
-      character.setValue(cf,value); // throws TermNotFoundEx
+      CharFieldValue v = character.setValue(cf,value); // throws TermNotFoundEx
+      if (v.isDangler())
+        v.setName(termName); // ???
       return; // if no ex thrown were done
     }
+    // no longer thrown really - dangler created instead!
     catch (TermNotFoundException e) {
       System.out.println("Error1: term not found ("+value+") "+e.getMessage());
       log().error("Error2: Term not found ("+value+") "+e.getMessage());

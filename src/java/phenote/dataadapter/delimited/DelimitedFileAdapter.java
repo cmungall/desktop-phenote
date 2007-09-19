@@ -9,11 +9,15 @@ import java.io.PrintWriter;
 import java.io.LineNumberReader;
 import java.util.List;
 import java.util.Arrays;
+import java.util.regex.Pattern;
+
+import org.apache.log4j.Logger;
 
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
 import phenote.datamodel.CharacterList;
 import phenote.dataadapter.CharacterListManager;
+import phenote.datamodel.CharField;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.AbstractFileAdapter;
 import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
@@ -29,7 +33,7 @@ public class DelimitedFileAdapter extends AbstractFileAdapter {
   private File file;
   private static String[] extensions = {"tab", "xls"};
   private static String desc = "Tab Delimited [.tab, .xls]";
-
+  private static Logger LOG = Logger.getLogger(DelimitedFileAdapter.class);
 
   public DelimitedFileAdapter() {
     super(extensions,desc);
@@ -49,32 +53,70 @@ public class DelimitedFileAdapter extends AbstractFileAdapter {
   public CharacterListI load(File f) {
     CharacterListI charList = new CharacterList();
     try {
-        LineNumberReader lnr = new LineNumberReader(new FileReader(f));
-        DelimitedChar delChar = new DelimitedChar();
-        System.out.println("Reading tab-delimited data from file "+f);
-          try {
-        	String line=lnr.readLine(); //reading header line
-        	System.out.println(line);
-          } catch (IOException e) {
-            System.out.println("Tab-delimited read failure "+e);
+      LineNumberReader lnr = new LineNumberReader(new FileReader(f));
+      DelimitedChar delChar = new DelimitedChar();
+      System.out.println("Reading tab-delimited data from file "+f);
+      //List<CharField> fields;
+      try {
+        // the header is being tossed and it should be used for char field mapping!
+        // the standard for headers is 1 col for free texts, 2 cols for terms
+        // term cols: fieldName(space)ID(tab)fieldName(space)Name
+        boolean isHeader = false;
+        while (!isHeader) {
+          String headerLine=lnr.readLine(); //reading header line
+          try { 
+            delChar.setHeader(headerLine);
+            isHeader = true; // no ex thrown - success
+          } catch (DelimitedEx e) {
+            isHeader = false;
+            LOG.error("Invalid header: "+headerLine); //for debug?log?  
           }
-        for (String line=lnr.readLine(); line != null; line = lnr.readLine()) {
-          try {
-            delChar.parseLine(line);
-            CharacterI ch = delChar.getCharacter();
-            charList.add(ch);
-        	System.out.println(line);
-          } catch (DelimitedChar.SyntaxParseException e) {
-            System.out.println(e.getMessage()); // jut "" for whitespace line
-          }
-        }	
-        lnr.close();
+        }
+        //fields = headerToCharFields(headerLine);
+      } catch (IOException e) {
+        LOG.error("Tab-delimited read failure "+e);
+      }
+      for (String line=lnr.readLine(); line != null; line = lnr.readLine()) {
+        try {
+          delChar.parseLine(line);
+          CharacterI ch = delChar.getCharacter();
+          charList.add(ch);
+          System.out.println(line);
+        } catch (DelimitedEx e) { // thrown for blank line - who cares right
+          // log? errorEvent? do nothing - does it even throw for blanks?
+          //(e.getMessage()); // jut "" for whitespace line
+        }
+      }	
+      lnr.close();
     }	
     catch (IOException e) {
       System.out.println("Tab-delimited read failure "+e);
     }
     return charList;
   }
+
+//   /** Takes header line and maps it into char fields, error if char field 
+//       doesnt exist -- pase --> DelChar.setHeader */
+//   private List<DelimFieldParser> headerToParsers(String headerLine) {
+//     Pattern p = Pattern.compile("\t");
+//     //parse based on tab...will be delimiter in future
+//     String[] headers = p.split(headerLine);
+//     if (headers.length==0) throw new DelimitedEx(headerLine,0);
+//     //List<CharField> fields = new ArrayList<CharField>();
+    
+//     int i=0;
+//     List<DelimFieldParser> parsers = new ArrayList<DelimFieldParser>();
+//     while (i<headers.length) {
+//       // if a field is not found/configged then insert null to be ignored
+//       // but theres 2 kinds of ignore term & free text
+//       // or do int to field mapping/hash?
+//       DelimFieldParser p = DelimFieldParser.makeNextParser(headers,i);
+//       parsers.add(p);
+//       // may parse 1 field, may parse 2, may also skip unfound fields
+//       i = p.getLastParseField() + 1;
+//     }
+//     return parsers;
+//   }
 
   /** returns null if user fails to pick a file */
  // private File getFileFromUser(File dir) {
@@ -140,6 +182,12 @@ public class DelimitedFileAdapter extends AbstractFileAdapter {
     commit(charList);
   }
   
+  // im changing my mind - should just go to log and have appender from log
+  // rather than vice versa
+//   private void debug(String s) {
+//     phenote.error.ErrorManager.inst().debug(this,s);
+//   }
+
 //   public List<String> getExtensions() {
 //     return Arrays.asList(extensions);
 //   }

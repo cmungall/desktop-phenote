@@ -147,8 +147,11 @@ class TermCompList extends AbstractAutoCompList {
 //       return; // debug stack trace?
 //     }
     currentOboClass = term;
-    if (TermUtil.isDangling(currentOboClass))
+    if (TermUtil.isDangling(currentOboClass)) {
+      // this doesnt work on a mac!!!
       this.setForegroundColor(Color.RED);
+      //phenote.error.ErrorManager.inst().error(new phenote.error.ErrorEvent(this,"setting dangle color to red"));
+    }
     else
       this.setForegroundColor(this.getEnabledTextColor());
     String val = term == null ? "" : term.getName();
