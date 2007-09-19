@@ -1,60 +1,45 @@
 package phenote.dataadapter;
 
-import java.io.*;
-
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.IOException;
-import java.nio.channels.FileChannel;
-import java.nio.channels.ReadableByteChannel;
-import java.nio.channels.Channels;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.FileChannel;
+import java.nio.channels.ReadableByteChannel;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.text.ParsePosition;
-import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.swing.JOptionPane;
-import javax.swing.JDialog;
-import javax.swing.JComponent;
-import java.awt.Component;
 
 import org.apache.log4j.Logger;
-
 import org.geneontology.dataadapter.DataAdapterException;
-import org.geneontology.dataadapter.FileAdapterConfiguration;
 import org.geneontology.dataadapter.IOOperation;
-
-import org.geneontology.oboedit.datamodel.Namespace;
-import org.geneontology.oboedit.datamodel.OBOSession;
-import org.geneontology.oboedit.datamodel.impl.OBOSessionImpl;
 import org.geneontology.oboedit.dataadapter.OBOFileAdapter;
 import org.geneontology.oboedit.dataadapter.OBOMetaData;
+import org.geneontology.oboedit.datamodel.Namespace;
+import org.geneontology.oboedit.datamodel.OBOSession;
 
-import phenote.util.FileUtil;
-import phenote.datamodel.CharField;
-import phenote.datamodel.CharFieldEnum;
-import phenote.datamodel.Ontology;
-import phenote.datamodel.OntologyException;
-import phenote.datamodel.OntologyManager;
 import phenote.config.Config;
 import phenote.config.FieldConfig;
 import phenote.config.OntologyConfig;
+import phenote.datamodel.CharField;
+import phenote.datamodel.Ontology;
+import phenote.datamodel.OntologyException;
+import phenote.datamodel.OntologyManager;
 import phenote.error.ErrorEvent;
 import phenote.error.ErrorManager;
 import phenote.gui.SynchOntologyDialog;
+import phenote.util.FileUtil;
 
 /** is this really a data adapter? - OntologyLoader? this isnt a data adapter
     it doesnt load & commit character data - just loads ontologies. rename OntologyLoader
@@ -68,7 +53,6 @@ public class OntologyDataAdapter {
   private boolean initializingOntologies = false;
   private Map<String,Ontology> fileToOntologyCache = new HashMap<String,Ontology>();
   private OBOMetaData adapterMetaData;
-  private SynchOntologyDialog synchDialog;
   
   private static final Logger LOG = Logger.getLogger(OntologyDataAdapter.class);
 
@@ -294,7 +278,7 @@ public class OntologyDataAdapter {
       if ((autoUpdate && (timer==0)) && (reposDate > loc)) {
     	useRepos = true;
       } else if (reposDate > loc || useRepos) {
-        useRepos = synchDialog.queryUserForOntologyUpdate(ontol);
+        useRepos = SynchOntologyDialog.queryUserForOntologyUpdate(ontol);
       }
     }
     if (useRepos) {
@@ -407,7 +391,7 @@ public class OntologyDataAdapter {
     if (oboUrl == null)
       throw new OntologyException("No url to retrieve");
 
-    Collection fileList = new ArrayList();
+    Collection<String> fileList = new ArrayList<String>();
     fileList.add(oboUrl.toString());
     return getOboSession(fileList);
   }

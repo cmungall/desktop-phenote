@@ -181,7 +181,7 @@ public class Ontology {
   public List<OBOProperty> getSortedRelations() {
     if (sortedRelations == null) {
       //sortedRelations=new ArrayList<OBOProperty>(); not Comparable!
-      List sorRel = new ArrayList();
+      List<OBOProperty> sorRel = new ArrayList<OBOProperty>();
       // if (oboSession == null) ? shouldnt happen
       sorRel.addAll(TermUtil.getRelationshipTypes(oboSession));
       Collections.sort(sorRel,new RelComparator());
@@ -190,7 +190,7 @@ public class Ontology {
     return sortedRelations;
   }
 
-  private class RelComparator<OBOProperty> implements Comparator<OBOProperty> {
+  private class RelComparator implements Comparator<OBOProperty> {
     public int compare(OBOProperty r1, OBOProperty r2) {
       return r1.toString().compareTo(r2.toString());
     }

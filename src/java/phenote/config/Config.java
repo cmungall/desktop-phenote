@@ -559,7 +559,7 @@ public class Config {
   /** Returns enabled data adapters - empty list if none enabled */
   public List<DataAdapterI> getDataAdapters() {
     if (dataAdapConfList==null) return null; // ex?
-    ArrayList daList = new ArrayList(dataAdapConfList.size());
+    ArrayList<DataAdapterI> daList = new ArrayList<DataAdapterI>(dataAdapConfList.size());
     for (DataAdapterConfig d : dataAdapConfList) {
       if (d.isEnabled())
         daList.add(d.getFileAdapter());
@@ -696,7 +696,7 @@ public class Config {
   }
 
   private Object getInstanceForString(String classString) throws Exception {
-    Class c = Class.forName(classString);
+    Class<?> c = Class.forName(classString);
     return c.newInstance();
   }
 
@@ -1111,10 +1111,6 @@ public class Config {
     name.replaceAll("-"," ");
   }
 
-  private String getConfigFile() {
-    return configFile;
-  }
-
   public String getConfigDesc() { 
     String desc = phenoConfigBean.getDescription();
     return desc; 
@@ -1140,7 +1136,7 @@ public class Config {
   public List<String> getFieldsInGroup(String groupName) {
     List<String> fields = new ArrayList<String>();
     for (Field aField : this.phenoConfigBean.getFieldArray()) {
-      final List groups = aField.getGroups();
+      final List<?> groups = aField.getGroups();
       if (groups != null) {
         for (Object aGroup : groups) {
           if (((String)aGroup).equals(groupName)) {
@@ -1212,8 +1208,8 @@ public class Config {
     if (classString == null) return null;
     try {
       // should we cache in hash and insure 1 instance???
-      Class c = Class.forName(classString);
-      Constructor cr = c.getConstructor(String.class);
+      Class<?> c = Class.forName(classString);
+      Constructor<?> cr = c.getConstructor(String.class);
       Object o = cr.newInstance(groupStr);
       if (!(o instanceof GroupAdapterI)) {
         log().error("group_adapter cfg is not a GroupAdapterI "+classString);
