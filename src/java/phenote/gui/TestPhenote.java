@@ -2,35 +2,35 @@ package phenote.gui;
 
 // move to main package??
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.KeyEvent;
-import java.util.Calendar;
-import javax.swing.JList;
+
 import javax.swing.event.HyperlinkEvent;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull; // wierd
-import static org.junit.Assert.assertTrue;
 
-import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharacterListI;
 import phenote.dataadapter.CharacterListManager;
-import phenote.dataadapter.fly.FlyCharacter;
 import phenote.dataadapter.fly.FlyCharList;
 import phenote.dataadapter.fly.FlyCharListTransferable;
+import phenote.dataadapter.fly.FlyCharacter;
 import phenote.dataadapter.fly.FlybaseDataAdapter;
-import phenote.util.HtmlUtil;
-import phenote.main.Phenote;
+import phenote.datamodel.CharacterI;
+import phenote.datamodel.CharacterListI;
+import phenote.gui.field.AbstractAutoCompList;
 import phenote.gui.field.FieldPanel;
 import phenote.gui.field.SearchParamPanel;
-import phenote.gui.field.AbstractAutoCompList;
+import phenote.main.Phenote;
+import phenote.util.HtmlUtil;
 
 // making same package as phenotes giving us access to package methods!
 
@@ -44,7 +44,7 @@ public class TestPhenote {
   private static AbstractAutoCompList entityComboBox;
   private static AbstractAutoCompList qualityComboBox;
   private static TermInfo termInfo;
-  private static CharacterTablePanel characterTablePanel;
+  private static CharacterTableController tableController;
 
   /** @BeforeClass says to run this once before all the tests */
   @BeforeClass public static void init() {
@@ -64,7 +64,7 @@ public class TestPhenote {
     qualityComboBox = fieldPanel.getQualityComboBox();
     qualityComboBox.setTestMode(true);
     termInfo = phenote.getTermInfo();
-    characterTablePanel = phenote.getCharacterTablePanel();
+    tableController = phenote.getCharacterTableController();
   }
 
   /** @Test is an annotation defined in Test - Test looks for Test methods */
@@ -136,10 +136,12 @@ public class TestPhenote {
       table in entity column */
   private void comboTermSelectionGoesToTableTest() {
     // selecting item should make it go in table...
+    tableController.addNewCharacter();
+    tableController.getSelectionModel().setSelectionInterval(0,0);
     System.out.println("Selecting 3rd entity item");
     qualityComboBox.getJComboBox().setSelectedIndex(2); // 2 is 3rd
     String selectedQualityTerm = getQualityThirdAutoTerm();
-    CharacterI selPheno = characterTablePanel.getSelectedCharacter();
+    CharacterI selPheno = tableController.getSelectionModel().getSelected().get(0);
     String tableQuality = selPheno.getQuality().getName(); // oboclass
     assertEquals(selectedQualityTerm,tableQuality);
     System.out.println("term to table test passed, selected quality term "
@@ -225,8 +227,8 @@ public class TestPhenote {
   }
   
   private void flyDataAdapterTest() {
-    CharacterListI cl = characterTablePanel.getCharacterList();
-    characterTablePanel.pressCommitButtonTest();
+    CharacterListI cl = CharacterListManager.main().getCharacterList();
+    
     DataFlavor charListFlavor = FlyCharListTransferable.getCharListDataFlavor();
     try {
       Object o = getClipboard().getData(charListFlavor);

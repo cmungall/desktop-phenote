@@ -53,11 +53,11 @@ public class Phenote {
   private static Logger LOG = Logger.getLogger(Phenote.class);
   private static boolean standalone = false; // default for servlet
 
-  private JPanel characterTablePanel;
   private FieldPanel mainFieldPanel;
   private static Phenote phenote;
   private TermInfo termInfo;
   private SelectionHistory selectionHistory;
+  private CharacterTableController tableController;
   private CommandLine commandLine = CommandLine.inst();
   private JFrame frame;
   public SplashScreen splashScreen;
@@ -349,11 +349,10 @@ public class Phenote {
     JPanel infoHistoryPanel = new JPanel(new GridBagLayout());
     infoHistoryPanel.setBorder(new EmptyBorder(10,10,10,10));
     
-    CharacterTableController tableController = new CharacterTableController(group.getName());
-    characterTablePanel = tableController.getCharacterTablePanel();
+    this.tableController = new CharacterTableController(group.getName());
     
     // need to do different selection & edit mgrs
-    FieldPanel groupFieldPanel = new FieldPanel(true,false,group.getName(), tableController.getSelectionModel());
+    FieldPanel groupFieldPanel = new FieldPanel(true,false,group.getName(), this.tableController.getSelectionModel());
     groupFieldPanel.setBorder(new EmptyBorder(10,10,10,10));
     // for testing - thats it
     if (group == null || group.getName().equals("default"))
@@ -374,7 +373,7 @@ public class Phenote {
     
     
     
-    JSplitPane outerSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, innerSplitPane, characterTablePanel);
+    JSplitPane outerSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, innerSplitPane, this.tableController.getCharacterTablePanel());
     mainPanel.add(outerSplitPane);
     return mainPanel;
   }
@@ -427,6 +426,7 @@ public class Phenote {
   public FieldPanel getFieldPanel() { return mainFieldPanel; }
   public TermInfo getTermInfo() { return termInfo; }
   //public CharacterTablePanel getCharacterTablePanel() { return characterTablePanel; }
+  public CharacterTableController getCharacterTableController() { return this.tableController; }
 
 }
 
