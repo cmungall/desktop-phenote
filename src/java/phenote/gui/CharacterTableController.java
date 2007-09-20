@@ -80,7 +80,12 @@ public class CharacterTableController {
   }
   
   public void deleteSelectedCharacters() {
+    final int maxSelectedRow = this.selectionModel.getMaxSelectionIndex();
     this.getEditManager().deleteChars(this.selectionModel.getSelected());
+    if ((maxSelectedRow > -1) && (!this.filteredCharacters.isEmpty())) {
+      final int rowToSelect = Math.min((this.filteredCharacters.size() - 1), maxSelectedRow);
+      this.selectionModel.setSelectionInterval(rowToSelect, rowToSelect);
+    }
   }
   
   public void undo() {
