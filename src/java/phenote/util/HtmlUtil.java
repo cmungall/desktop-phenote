@@ -330,7 +330,7 @@ public class HtmlUtil {
 	
 	private static StringBuffer getIntersectionChildren(OBOClass oboClass) {
 		StringBuffer sb = new StringBuffer();
-		Collection children = oboClass.getChildren();
+		Collection<Link> children = oboClass.getChildren();
 		sb.append(getLinksString(linksList(children, true, true), true, true));
 		return (sb);
 	}
@@ -338,19 +338,19 @@ public class HtmlUtil {
 	private static StringBuffer getIntersectionParents(OBOClass oboClass) {
 		//these will be present if the term is a xp
 		StringBuffer sb = new StringBuffer();
-		Collection parents = oboClass.getParents();
+		Collection<Link> parents = oboClass.getParents();
 		sb.append(xpDefs(linksList(parents,true,false)));
 		return (sb);		
 	}
 	
 	private static StringBuffer getParentalString(OBOClass oboClass) {
-		Collection parents = oboClass.getParents();
+		Collection<Link> parents = oboClass.getParents();
 		return (getLinksString(linksList(parents, false,false), false, false));
 //		return getLinksString(parents,false, false);
 	}
 
 	private static StringBuffer getChildrenString(OBOClass oboClass) {
-		Collection children = oboClass.getChildren();
+		Collection<Link> children = oboClass.getChildren();
 		return (getLinksString(linksList(children, false,true), true, false));
 
 //		return getLinksString(children,true, false);
@@ -363,7 +363,6 @@ public class HtmlUtil {
 		//hope this isn't duplicating stuff
 		//each link collection is for only one kind of relationship type
 		private List<Link> links = new ArrayList<Link>();
-		private boolean isChild;
 		private String linkName;
 		private OBOProperty linkType;
 		private boolean xp;  			//true=this list is for cross-products
@@ -390,7 +389,7 @@ public class HtmlUtil {
 		public boolean getXP() {
 			return xp;
 		}
-		public List getLinks() {
+		public List<Link> getLinks() {
 			return links;
 		}
 		public Link get(int i) {
@@ -407,12 +406,12 @@ public class HtmlUtil {
 		}
 	}
 	
-	private static List<LinkCollection> linksList(Collection links, boolean xp, boolean isChild) {
+	private static List<LinkCollection> linksList(Collection<Link> links, boolean xp, boolean isChild) {
 		//given a collection of oboclass links, this processes the collection to
 		//separate out the links and group by releationship type+parent/child+xp state
-		HashSet relSet= new HashSet();
+		HashSet<OBOProperty> relSet= new HashSet<OBOProperty>();
 		List<LinkCollection> allLinks = new ArrayList<LinkCollection>();
-		for (Iterator it = links.iterator(); it.hasNext(); ) {
+		for (Iterator<Link> it = links.iterator(); it.hasNext(); ) {
 			Link link = (Link)it.next();
 			if (((OBORestriction)link).completes()==xp) {
 				//only add to links list those that match the desired xp state
@@ -425,7 +424,7 @@ public class HtmlUtil {
 					else
 						allLinks.add(linkSet);
 				} else {
-					for (ListIterator lit=allLinks.listIterator();lit.hasNext();) {
+					for (ListIterator<LinkCollection> lit=allLinks.listIterator();lit.hasNext();) {
 						LinkCollection temp = (LinkCollection)lit.next();
 						if (temp.get(0).getType()==type) {
 							temp.addLink(link);
@@ -443,13 +442,13 @@ public class HtmlUtil {
 		 * >1 is_a xp genus terms, i think the xp display will be screwy 
 		 */
 		StringBuffer sb = new StringBuffer();
-		for (ListIterator lit=allLinks.listIterator();lit.hasNext();) {
+		for (ListIterator<LinkCollection> lit=allLinks.listIterator();lit.hasNext();) {
 			//for each relationship type
 			LinkCollection temp = (LinkCollection)lit.next();
 			String tempType = temp.getLinkName();
 			List<Link> links = temp.getLinks();
 			StringBuffer tempSB = new StringBuffer();
-			for (Iterator it = links.iterator(); it.hasNext(); ) {
+			for (Iterator<Link> it = links.iterator(); it.hasNext(); ) {
 				//create all the clickable links first
 				Link link = (Link)it.next();
 				appendLink(tempSB,isChild,link,xp);

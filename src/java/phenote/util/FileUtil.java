@@ -1,10 +1,10 @@
 package phenote.util;
 
-import org.apache.log4j.Logger;
-import org.apache.commons.lang.StringUtils;
-
-import java.io.*;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.FileChannel;
@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 
 public class FileUtil {
 
@@ -66,10 +69,6 @@ public class FileUtil {
     return path.substring(lastSlashIndex);
   }
 
-  private static String getDotPhenoteString() {
-    return getDotPhenoteDir().getPath();
-  }
-  
   private static String sep(String a, String b) { return a + FILE_SEPARATOR + b; }
 
 
@@ -98,7 +97,7 @@ public class FileUtil {
   // better error message
   // split into getPossibleMaster?ConfigUrls & getPossibleOboUrls
   private static List<URL> getPossibleUrls(String filename) {
-    List<URL> urls = new ArrayList(5);
+    List<URL> urls = new ArrayList<URL>(5);
     if (filename == null) {
       System.out.println("cant find null file");
       LOG.error("cant find null file");

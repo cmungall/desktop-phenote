@@ -1,11 +1,5 @@
 package phenote.main;
 
-import java.io.FileNotFoundException;
-
-import com.townleyenterprises.command.CommandOption;
-import com.townleyenterprises.command.CommandParser;
-import com.townleyenterprises.command.DefaultCommandListener;
-
 import org.apache.log4j.xml.DOMConfigurator;
 
 import phenote.config.Config;
@@ -13,6 +7,10 @@ import phenote.config.ConfigException;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.phenosyntax.PhenoSyntaxFileAdapter;
 import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
+
+import com.townleyenterprises.command.CommandOption;
+import com.townleyenterprises.command.CommandParser;
+import com.townleyenterprises.command.DefaultCommandListener;
 
 /** a lot of this is copied from apollo.main.CommandLine - theres potential for 
     some generic super class but where would it go? in a jar file with one class?
@@ -295,7 +293,7 @@ public class CommandLine {
   private DataAdapterI getDataAdapter(String classString) throws AdapterEx {
     try {
       // introspection? or switch on string?
-      Class c = Class.forName(classString);
+      Class<?> c = Class.forName(classString);
       Object o = c.newInstance();
       if (!(o instanceof DataAdapterI)) // shouldnt happen
         System.out.println("Class string is not data adapter "+o);

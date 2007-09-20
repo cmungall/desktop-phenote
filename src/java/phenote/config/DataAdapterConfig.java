@@ -1,17 +1,13 @@
 package phenote.config;
 
 import phenote.config.xml.DataadapterDocument.Dataadapter;
-//should this be:
-//import phenote.dataadapter.*;
-//so that programmers don't have to modify this file?
-
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.QueryableDataAdapterI;
+import phenote.dataadapter.delimited.DelimitedFileAdapter;
 import phenote.dataadapter.fly.FlybaseDataAdapter;
 import phenote.dataadapter.nexus.NEXUSAdapter;
 import phenote.dataadapter.phenosyntax.PhenoSyntaxFileAdapter;
 import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
-import phenote.dataadapter.delimited.DelimitedFileAdapter;
 
 class DataAdapterConfig {
 
@@ -128,7 +124,7 @@ class DataAdapterConfig {
   }
 
   private Object getInstanceForName() throws Exception {
-    Class c = Class.forName(getName()); //configString);
+    Class<?> c = Class.forName(getName()); //configString);
     return c.newInstance();
   }
 
