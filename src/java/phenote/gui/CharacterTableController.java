@@ -65,6 +65,7 @@ public class CharacterTableController {
     this.tableFormat = new CharacterTableFormat(this.representedGroup);
     this.getEditManager().addCharChangeListener(new CharacterChangeListener());
     this.initializeInterface();
+    this.addInitialBlankCharacter();
   }
   
   public JPanel getCharacterTablePanel() {
@@ -85,6 +86,9 @@ public class CharacterTableController {
     if ((maxSelectedRow > -1) && (!this.filteredCharacters.isEmpty())) {
       final int rowToSelect = Math.min((this.filteredCharacters.size() - 1), maxSelectedRow);
       this.selectionModel.setSelectionInterval(rowToSelect, rowToSelect);
+    }
+    if (this.getCharacterListManager().getCharacterList().isEmpty()) {
+      this.addInitialBlankCharacter();
     }
   }
   
@@ -152,6 +156,10 @@ public class CharacterTableController {
   
   private int getWidthOfColumn(int columnIndex) {
     return Config.inst().getFieldColwidth(columnIndex);
+  }
+  
+  private void addInitialBlankCharacter() {
+    this.getEditManager().addInitialCharacter();
   }
   
   private void setSelectionWithCharacters(List<CharacterI> characters) {

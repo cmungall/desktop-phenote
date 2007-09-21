@@ -136,6 +136,7 @@ abstract class CharFieldGui implements ListSelectionListener {
   public void setListSelectionModel(EventSelectionModel<CharacterI> model) {
     this.selectionModel = model;
     this.selectionModel.addListSelectionListener(this);
+    this.setValueFromChars(this.selectionModel.getSelected());
   }
   
   public void valueChanged(ListSelectionEvent e) {
