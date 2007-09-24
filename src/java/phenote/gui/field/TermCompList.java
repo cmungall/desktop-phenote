@@ -115,8 +115,9 @@ class TermCompList extends AbstractAutoCompList {
     }
   }
 
-  protected List<CompletionTerm> getSearchItems(String input) {
-    return getCompListSearcher().getStringMatchTermList(input);
+  /** now threaded so cant return - set AbAutoCompList when done */
+  protected void getSearchItems(String input,SearchListener l) {
+    /*return*/ getCompListSearcher().getStringMatchTermList(input,l);
   }
 
   /**

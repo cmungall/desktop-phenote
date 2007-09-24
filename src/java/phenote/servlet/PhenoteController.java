@@ -13,6 +13,7 @@ import phenote.gui.SearchFilterType;
 import phenote.gui.SearchParams;
 import phenote.gui.field.CompListSearcher;
 import phenote.gui.field.CompletionTerm;
+import phenote.gui.field.SearchListener;
 import phenote.util.HtmlUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,8 +46,9 @@ public class PhenoteController extends AbstractCommandController {
       LOG.info("param entityInput: " + userInput);
       LOG.info("Field entity: " + field);
 
-      form.setCompletionTermList(getCompletionList(userInput, ontologyName, field));
-      LOG.debug(form.getAjaxReturnList());
+      //form.setCompletionTermList( // this is now done by ContSearchListener
+      getCompletionList(userInput, ontologyName, field, form);
+      LOG.debug(form.getAjaxReturnList()); // ?? should this go in CSL?
     } else if (form.isTermInfoRequest()) {
       String termId = form.getTermId();
       LOG.debug("doGet term info param: " + termId + " ont " + ontologyName);
@@ -65,16 +67,34 @@ public class PhenoteController extends AbstractCommandController {
     return new ModelAndView("term_completion", "formBean", form);
   }
 
-  private List<CompletionTerm> getCompletionList(String userInput, String ontologyName, String field) {
-    List<CompletionTerm> termList = null;
+  private void getCompletionList(String userInput, String ontologyName, String field,
+                                 PhenoteBean form) {
+    //List<CompletionTerm> termList = null;
+    SearchListener searchListener = new ContSearchListener(ontologyName,field,form);
     try {
-      termList = getCompListSearcher(ontologyName).getStringMatchTermList(userInput);
+      //termList = its now threaded - term list returned to SearchListener
+      getCompListSearcher(ontologyName).getStringMatchTermList(userInput,searchListener);
     } catch (OntologyException e) {
       // Todo: Add this error as an error completion list
       LOG.error(e.getMessage(), e);
     }
-    includeAdditionalAttributes(termList, ontologyName, field);
-    return termList;
+    //includeAdditionalAttributes(termList, ontologyName, field);
+    //return termList;
+  }
+
+  private class ContSearchListener implements SearchListener {
+    private String ontologyName;
+    private String field;
+    private PhenoteBean form;
+    private ContSearchListener(String ontologyName, String field, PhenoteBean form) {
+      this.ontologyName = ontologyName;
+      this.field = field;
+      this.form = form;
+    }
+    public void newResults(List termList) {
+      includeAdditionalAttributes(termList, ontologyName, field);
+      form.setCompletionTermList(termList);
+    }
   }
 
   private void includeAdditionalAttributes(List<CompletionTerm> termList, String ontologyName, String field) {

@@ -117,8 +117,10 @@ class RelationCompList extends AbstractAutoCompList {
 //   protected Vector getSearchItems(String input) {
 //     return getCompListSearcher().getStringMatchRelations(input);
 //   }
-  protected List getSearchItems(String input)  {
-    return getCompListSearcher().getStringMatchRelations(input);
+  protected void getSearchItems(String input, SearchListener l)  {
+    // for now not threading and just sending results to listener - 
+    // relations are short lists - dont need threaded optimization
+    l.newResults(getCompListSearcher().getStringMatchRelations(input));
   }
 
 

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 //import java.util.Vector;
 
+import org.geneontology.util.AbstractTaskDelegate;
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOProperty;
 
@@ -59,6 +60,7 @@ public class CompListSearcher {
     ontologyList = l; // (List<Ontology>)l.clone(); cant clone interfaces
   }
 
+  /** relations are short ontologies - dont need threaded optimization */
   public List<CompletionRelation> getStringMatchRelations(String input) {
     List<CompletionRelation> matches = new ArrayList<CompletionRelation>();
     // most likely only 1 relation ontology, but no harm being general
@@ -71,46 +73,79 @@ public class CompListSearcher {
     return matches;
   }
 
+  private CompTaskDelegate compTaskDelegate = null;
+
   /** Returns a List of CompletionTerms from ontology that contain input string
       constrained by compParams. compParams specifies syns,terms,defs,& obs 
       should input be just part of search params? called by servlet & standalone now */
-  public List<CompletionTerm> getStringMatchTermList(String input) {
-    List<CompletionTerm> searchTerms = new ArrayList<CompletionTerm>();
-   
-    boolean nothingForNothing = false; // get from FieldConfig!!
-    if (nothingForNothing && isBlank(input)) {
-      return searchTerms; // empty
-    }
+  public /*List<CompletionTerm>*/ void getStringMatchTermList(String input,
+                                                     SearchListener lis) {
+
+    //new org.jdesktop.swingworker.SwingWorker();
+    // kill old task!
+    if (compTaskDelegate!=null) compTaskDelegate.cancel();
+    compTaskDelegate = new CompTaskDelegate(input,lis);
+    org.geneontology.swing.BackgroundUtil.scheduleTask(compTaskDelegate);
     
-    // optimization - if user has only typed one more letter (common case)
-    // use previous search list
-    if (input.startsWith(previousInput) 
-        && input.length() == previousInput.length() + 1) {
-      searchTerms = searchPreviousList(input,previousCompList);
+  }
+
+  private class CompTaskDelegate
+    extends AbstractTaskDelegate<List<CompletionTerm>> {
+
+    private String input;
+    private SearchListener searchListener;
+
+    private CompTaskDelegate(String input,SearchListener l) {
+      this.input = input;
+      this.searchListener = l;
     }
 
-    else {
-      // gets term set for currently selected ontology(s)
-      //Set ontologyTermList = getCurrentOntologyTermSet();
-      // THIS IS WRONG! or is it?
-      for (Ontology ontology : ontologyList) {
-        Collection<OBOClass> ontologyTermList = ontology.getSortedTerms(); // non obsolete
-        List<CompletionTerm> l = getSearchTermList(input,ontologyTermList);
-        searchTerms.addAll(l);
-        
-        // if obsoletes set then add them in addition to regulars
-        if (searchParams.searchObsoletes()) {
-          ontologyTermList = ontology.getSortedObsoleteTerms();
-          List<CompletionTerm> obsoletes = getSearchTermList(input,ontologyTermList);
-          searchTerms.addAll(obsoletes);
+    public void execute() {
+      List<CompletionTerm> searchTerms = new ArrayList<CompletionTerm>();
+      
+      // if no input should phenote give no terms? or all terms?
+      boolean nothingForNothing = false; // get from FieldConfig!!
+      if (nothingForNothing && isBlank(input)) {
+        results = searchTerms; // empty
+        searchListener.newResults(results);
+        return;
+      }
+      
+      // optimization - if user has only typed one more letter (common case)
+      // use previous search list
+      if (input.startsWith(previousInput) 
+          && input.length() == previousInput.length() + 1) {
+        searchTerms = searchPreviousList(input,previousCompList);
+      }
+      
+      else {
+        // gets term set for currently selected ontology(s)
+        //Set ontologyTermList = getCurrentOntologyTermSet();
+        // THIS IS WRONG! or is it?
+        for (Ontology ontology : ontologyList) {
+          Collection<OBOClass> ontologyTermList = ontology.getSortedTerms(); // non obsolete
+          List<CompletionTerm> l = getSearchTermList(input,ontologyTermList);
+          searchTerms.addAll(l);
+          
+          // if obsoletes set then add them in addition to regulars
+          if (searchParams.searchObsoletes()) {
+            ontologyTermList = ontology.getSortedObsoleteTerms();
+            List<CompletionTerm> obsoletes = getSearchTermList(input,ontologyTermList);
+            searchTerms.addAll(obsoletes);
+          }
         }
       }
-    }
 
-    previousInput = input;
-    previousCompList = searchTerms;
-    return searchTerms;
+      previousInput = input;
+      previousCompList = searchTerms;
+      //return searchTerms;
+      //setResults(searchTerms);
+      results = searchTerms;
+      searchListener.newResults(results); // send off results
+      
+    }
   }
+
 
   private boolean isBlank(String s) {
     return s == null || s.equals("");

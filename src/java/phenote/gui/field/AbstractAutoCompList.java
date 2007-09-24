@@ -261,17 +261,37 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     // returns a list of CompletionTerms (checks if relations)
     // if input is empty will return whole list (if configged)
     //log().debug("got new completion request for input "+input+" time "+time());
-    List<CompletionTerm> l = getSearchItems(input);
+    listSearchListener.showPopup = showPopup;
+    /*List<CompletionTerm> l =*/ getSearchItems(input,listSearchListener);
     //log().debug("got search items for input "+input+" milsec: "+time());
-   changingCompletionList = true;
-    // could just do comboBoxModel.setList(l); ???
-    compComboBoxModel = new CompComboBoxModel(l);
-    jComboBox.setModel(compComboBoxModel);
-    changingCompletionList = false;
-    if (showPopup)
-      jComboBox.showPopup();//only show popup on key events actually only do comp w key
+//    changingCompletionList = true;
+//     // could just do comboBoxModel.setList(l); ???
+//     compComboBoxModel = new CompComboBoxModel(l);
+//     jComboBox.setModel(compComboBoxModel);
+//     changingCompletionList = false;
+//     if (showPopup)
+//       jComboBox.showPopup();//only show popup on key events actually only
     //log().debug("put comp list in gui for input "+input+" milsec: "+time());
   }
+
+  private ListSearchListener listSearchListener = new ListSearchListener();
+
+  /** This is where the CompListSearcher results get returned
+      from thread */
+  private class ListSearchListener implements SearchListener {
+    private boolean showPopup = true;
+    // could have CompletionItem superclass for rel & term??
+    public void newResults(List results) {
+      changingCompletionList = true;
+      // could just do comboBoxModel.setList(l); ???
+      compComboBoxModel = new CompComboBoxModel(results);
+      jComboBox.setModel(compComboBoxModel);
+      changingCompletionList = false;
+      if (showPopup) //only show popup on key events actually only do com      
+        jComboBox.showPopup();
+    }
+  }
+
 
   private long time=0;
   private long time() {
@@ -291,7 +311,8 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     this.inTestMode = inTestMode;
   }
 
-  protected abstract List<CompletionTerm> getSearchItems(String input);
+  // no longer returns List<CompletionTerm>, a thread sends list to listener
+  protected abstract void getSearchItems(String input,SearchListener l);
 //     if (isRelationshipList()) return termSearcher.getStringMatchRelations(input);
 //     else return termSearcher.getStringMatchTerms(input);}
 
