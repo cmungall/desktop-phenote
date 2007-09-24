@@ -2,7 +2,6 @@ package phenote.datamodel;
 
 import ca.odell.glazedlists.BasicEventList;
 import ca.odell.glazedlists.EventList;
-import ca.odell.glazedlists.GlazedLists;
 
 /** i made this as a transferable when i didnt get the whole transferable thing
     and now i dont whether to scrap it or not. all it is at the moment is a
@@ -10,8 +9,7 @@ import ca.odell.glazedlists.GlazedLists;
     functionality - i guess ill keep it for now */
 public class CharacterList implements CharacterListI {
 
-  // the thread safe version is required due to problems selecting the first character when the character table is first created
-  private EventList<CharacterI> characterList = GlazedLists.threadSafeList(new BasicEventList<CharacterI>());
+  private EventList<CharacterI> characterList = new BasicEventList<CharacterI>();
 
   public CharacterI get(int i) {
     // should this check if i is out of range - throw ex, or print error msg??

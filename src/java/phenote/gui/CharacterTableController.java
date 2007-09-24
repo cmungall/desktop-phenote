@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.table.TableColumn;
 
 import org.apache.log4j.Logger;
@@ -67,7 +68,7 @@ public class CharacterTableController {
     this.initializeInterface();
     this.addInitialBlankCharacter();
   }
-  
+    
   public JPanel getCharacterTablePanel() {
     return this.characterTablePanel;
   }
@@ -159,7 +160,11 @@ public class CharacterTableController {
   }
   
   private void addInitialBlankCharacter() {
-    this.getEditManager().addInitialCharacter();
+    SwingUtilities.invokeLater(new Runnable() {
+      public void run() {
+        CharacterTableController.this.getEditManager().addInitialCharacter();
+      }
+    });
   }
   
   private void setSelectionWithCharacters(List<CharacterI> characters) {
