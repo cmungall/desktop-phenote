@@ -19,6 +19,7 @@ import phenote.config.ConfigFileQueryGui;
 import phenote.config.ConfigException;
 //import phenote.gui.prefswindow.PrefsWindowController; ???
 import phenote.gui.SplashScreen;
+import phenote.gui.TermRequestGUI;
 import phenote.main.PhenoteVersion;
 import phenote.main.HelpManager;
 
@@ -26,6 +27,7 @@ class HelpMenu extends JMenu {
 
   private JMenuItem help;
   public SplashScreen splashScreen;
+  public TermRequestGUI termRequester;
   private String logoFile = "src/java/phenote/images/phenote_logo.jpg";
 
   HelpMenu() {
@@ -56,6 +58,15 @@ class HelpMenu extends JMenu {
     about.setActionCommand("about");
     about.addActionListener(actionListener);
     add(about);
+
+    JMenuItem request = new JMenuItem("Request Term");
+    request.setEnabled(true);
+    request.setActionCommand("request");
+//    termRequester.addMouseListener(splashScreenListener);
+
+    request.addActionListener(actionListener);
+    add(request);
+    
   }
 
   private class HelpActionListener implements ActionListener {
@@ -77,19 +88,27 @@ class HelpMenu extends JMenu {
 //    	  splashScreenDestruct();
 //      	  System.out.println("about selected");	
       	}
-      }
+    	else if (e.getActionCommand().equals("request")) {
+    		try {
+    			termRequester = new TermRequestGUI();
+    			termRequester.setVisible(true);
+    		} catch (Exception ex) {
+    			ex.printStackTrace();
+    		}
+    	}
+    }
   }
 
   private void splashScreenInit() {
-	ImageIcon myImage = new ImageIcon(logoFile);
-	SplashScreenListener splashScreenListener = new SplashScreenListener();
-	splashScreen = new SplashScreen(myImage,true); // true->enable
-	splashScreen.setLocationRelativeTo(null);
+  	ImageIcon myImage = new ImageIcon(logoFile);
+  	SplashScreenListener splashScreenListener = new SplashScreenListener();
+  	splashScreen = new SplashScreen(myImage,true); // true->enable
+  	splashScreen.setLocationRelativeTo(null);
 //	splashScreen.setProgressMax(100);
-	splashScreen.setScreenVisible(true);
-	splashScreen.addMouseListener(splashScreenListener);
-	splashScreen.setProgress("Phenote version "+PhenoteVersion.versionString(), 0);
-	
+  	splashScreen.setScreenVisible(true);
+  	splashScreen.addMouseListener(splashScreenListener);
+  	splashScreen.setProgress("Phenote version "+PhenoteVersion.versionString(), 0);
+
   }
 
   private class SplashScreenListener implements MouseListener {
