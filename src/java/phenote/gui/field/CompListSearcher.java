@@ -9,6 +9,7 @@ import java.util.Set;
 //import java.util.Vector;
 
 import org.geneontology.util.AbstractTaskDelegate;
+import org.geneontology.util.TaskDelegate;
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOProperty;
 
@@ -113,53 +114,68 @@ public class CompListSearcher {
       
       // optimization - if user has only typed one more letter (common case)
       // use previous search list
-      if (input.startsWith(previousInput) 
-          && input.length() == previousInput.length() + 1) {
-        searchTerms = searchPreviousList(input,previousCompList);
-      }
-      
-      else {
-        // gets term set for currently selected ontology(s)
-        //Set ontologyTermList = getCurrentOntologyTermSet();
-        // THIS IS WRONG! or is it?
-        for (Ontology ontology : ontologyList) {
-          Collection<OBOClass> ontologyTermList = ontology.getSortedTerms(); // non obsolete
-          List<CompletionTerm> l = getSearchTermList(input,ontologyTermList);
-          searchTerms.addAll(l);
-          
-          // if obsoletes set then add them in addition to regulars
-          if (searchParams.searchObsoletes()) {
-            ontologyTermList = ontology.getSortedObsoleteTerms();
-            List<CompletionTerm> obsoletes = getSearchTermList(input,ontologyTermList);
-            searchTerms.addAll(obsoletes);
-          }
+      try {
+        if (input.startsWith(previousInput) 
+            && input.length() == previousInput.length() + 1) {
+          searchTerms = searchPreviousList(input,previousCompList,this);
         }
-      }
+        
+        else {
+          // gets term set for currently selected ontology(s)
+          //Set ontologyTermList = getCurrentOntologyTermSet();
+          // THIS IS WRONG! or is it?
+          for (Ontology ontology : ontologyList) {
+            Collection<OBOClass> ontologyTermList = ontology.getSortedTerms(); // non obsolete
+            List<CompletionTerm> l =
+              getSearchTermList(input,ontologyTermList,this);
+            searchTerms.addAll(l);
+            
+            // if obsoletes set then add them in addition to regulars
+            if (searchParams.searchObsoletes()) {
+              ontologyTermList = ontology.getSortedObsoleteTerms();
+              List<CompletionTerm> obsoletes =
+                getSearchTermList(input,ontologyTermList,this);
+              searchTerms.addAll(obsoletes);
+            }
+          } 
+
+        }
+      } 
+      catch (CancelEx x) { return; } // task has been cancelled
 
       previousInput = input;
       previousCompList = searchTerms;
       //return searchTerms;
       //setResults(searchTerms);
       results = searchTerms;
-      searchListener.newResults(results); // send off results
-      
-    }
-  }
+      if (!isCancelled())
+        searchListener.newResults(results); // send off results
+    
+    } // end of execute method
+
+  } // end CompTask inner class
 
 
   private boolean isBlank(String s) {
     return s == null || s.equals("");
   }
 
-  /** helper fn for getSearchTerms(String,SearhParamsI) */
+
+  private class CancelEx extends Exception {}
+
+  /** helper fn for CompTaskDelegate */
   private List<CompletionTerm> getSearchTermList(String input,
-                                                Collection<OBOClass> ontologyTermList) {
+                                                 Collection<OBOClass> ontologyTermList,
+                                                 TaskDelegate task) throws CancelEx {
     SearchTermList searchTermList = new SearchTermList();
     if (ontologyTermList == null)
       return searchTermList.getList();
 
+    int i =0;
     for (OBOClass oboClass : ontologyTermList) {
+    //for (int i=0; i<ontologyTermList.size(); i++) {
 
+      if (i++ % 50 == 0 && task.isCancelled()) throw new CancelEx(); 
       CompletionTerm ct = new CompletionTerm(oboClass);
       // if input is blank then add all terms (list all terms on empty input)
       // matches records the kind of hit in CompTerm
@@ -172,10 +188,16 @@ public class CompListSearcher {
   }
 
   private List<CompletionTerm> searchPreviousList(String input,
-                                                  List<CompletionTerm> prevList) {
+                                                  List<CompletionTerm> prevList,
+                                                  TaskDelegate task)
+    throws CancelEx {
+
     // alternatively could just remove terms from prev list???
     SearchTermList newList = new SearchTermList();
-    for (CompletionTerm ct : prevList) {
+    //for (CompletionTerm ct : prevList) {
+    for (int i=0; i<prevList.size(); i++) {
+      if (i % 50 == 0 && task.isCancelled()) throw new CancelEx();
+      CompletionTerm ct = prevList.get(i);
       ct.resetMatchState(); // reusing ct has stale match state from previous search
       if (ct.matches(input,searchParams))
         newList.addTerm(ct);
