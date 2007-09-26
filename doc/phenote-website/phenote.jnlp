@@ -44,6 +44,9 @@ href="phenote.jnlp">
 	<jar href="jars/jdom.jar" />
 	<jar href="jars/quaqua.jar" />
 	<jar href="jars/jebl-0.4.jar" />
+	<nativelib href="jars/phenote-nativelibs.jar"/>
+	<property name="phenote.version" value="@@phenote.version@@"/>
+    <property name="phenote.build" value="@@phenote.build@@"/>
 </resources>
 <!-- no cmd line param will ask user for config at initialization -->
 <application-desc main-class="phenote.main.Phenote">

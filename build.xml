@@ -28,6 +28,7 @@
 
     <property name="lib" value="jars"/>
     <property name="jarfile" value="jars/phenote.jar"/>
+	<property name="nativelibs-jarname" value="phenote-nativelibs.jar"/>
     <property name="obo" value="obo-files"/>
     <property name="conf" value="conf"/>
     <property name="images" value="images"/>
@@ -463,6 +464,9 @@ where xsd files are (conf) -->
       <copy todir="phenote-webstart/${phenote.version}/jars">
         <fileset file="${lib}/*.jar"/>
       </copy>
+      <jar destfile="phenote-webstart/${phenote.version}/jars/${nativelibs-jarname}">
+      	<fileset file="${lib}/*.jnilib"/>
+      </jar>
     </target>
 
     <target name="sign-webstart-jars">
