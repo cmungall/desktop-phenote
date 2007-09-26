@@ -188,36 +188,6 @@ public class DelimitedChar {
     }
   }
 
-  /** Parse syntax line into character - throw DelimitedEx if blank line/no
-      columns found - just splitting at tab.  */
-  void parseLineOld_DELETE(String line) throws DelimitedEx { // cf list?
-    character = CharacterIFactory.makeChar();
-//		System.out.println("input line="+line);
-    String[] items = splitLine(line);
-
-    // doesnt split always return at least 1 item even for empty line???
-    boolean found = (items.length>0); //m.find();
-//		System.out.println("numcols="+items.length);
-    if (!found)
-      throw new DelimitedEx(line); // skips whitespace lines ??
-    int colCount = 0;
-    int fieldCount = 0;
-    while (found) {
-      String value = items[colCount];
-      // this aint right - this hardwires column # to field, should use column name!
-      CharField c = Config.inst().getEnbldCharField(fieldCount);
-//System.out.println("col="+colCount+";  fieldCount="+fieldCount+"; val="+value+"; charfieldname ="+c.getName());
-      String termName = null;
-      if (c.isTerm()) {
-        colCount++; //skip over the Name, only keep ID
-        termName = items[colCount];
-      }
-      addDelValToChar(fieldCount,value,termName); // termName null if not term
-      colCount++;
-      fieldCount++;
-      found = (colCount<items.length); // if parsing last tag found will be false - at end
-    }
-  }
   
   class SyntaxParseException extends Exception {
     private String syntaxLine;
@@ -275,3 +245,34 @@ public class DelimitedChar {
     return log;
   }
 }
+
+//   /** Parse syntax line into character - throw DelimitedEx if blank line/no
+//       columns found - just splitting at tab.  */
+//   void parseLineOld_DELETE(String line) throws DelimitedEx { // cf list?
+//     character = CharacterIFactory.makeChar();
+// //		System.out.println("input line="+line);
+//     String[] items = splitLine(line);
+
+//     // doesnt split always return at least 1 item even for empty line???
+//     boolean found = (items.length>0); //m.find();
+// //		System.out.println("numcols="+items.length);
+//     if (!found)
+//       throw new DelimitedEx(line); // skips whitespace lines ??
+//     int colCount = 0;
+//     int fieldCount = 0;
+//     while (found) {
+//       String value = items[colCount];
+//       // this aint right - this hardwires column # to field, should use column name!
+//       CharField c = Config.inst().getEnbldCharField(fieldCount);
+// //System.out.println("col="+colCount+";  fieldCount="+fieldCount+"; val="+value+"; charfieldname ="+c.getName());
+//       String termName = null;
+//       if (c.isTerm()) {
+//         colCount++; //skip over the Name, only keep ID
+//         termName = items[colCount];
+//       }
+//       addDelValToChar(fieldCount,value,termName); // termName null if not term
+//       colCount++;
+//       fieldCount++;
+//       found = (colCount<items.length); // if parsing last tag found will be false - at end
+//     }
+//  }

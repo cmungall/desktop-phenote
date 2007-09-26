@@ -17,6 +17,9 @@ import org.geneontology.oboedit.history.AddPropertyValueHistoryItem;
 import org.geneontology.oboedit.history.DeletePropertyValueHistoryItem;
 import org.geneontology.oboedit.history.HistoryItem;
 
+/** Maps ENTITY to subject and QUALITY to object 
+ but is this proper? shouldnt genotype be subject? */
+
 public class BasicAnnotationMappingDriver implements AnnotationMappingDriver {
 
 	protected boolean auditHistoryMode = false;

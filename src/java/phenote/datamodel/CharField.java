@@ -195,6 +195,10 @@ public class CharField {
     // TERM
     else {
 
+      // null term
+      if (valueString.trim().equals(""))
+        return CharFieldValue.emptyValue(c,this);
+
       OBOClass oboClass=null;
 
       // CHECK FOR POST COMP - could probably move this to char field but right now just
