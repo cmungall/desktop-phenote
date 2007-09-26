@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.accessibility.Accessible;
+import javax.accessibility.AccessibleContext;
 import javax.swing.ComboBoxModel;
 import javax.swing.InputMap;
 import javax.swing.JComboBox;
@@ -289,9 +290,46 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
       changingCompletionList = false;
       if (showPopup) //only show popup on key events actually only do com      
         jComboBox.showPopup();
+      //jComboBox.revalidate();
+      //jComboBox.repaint();
+      //getUIJList().repaint();
+      //compRepaint(jComboBox);
+      //compRepaint();
+      comboPopupRepaint();
     }
   }
 
+  private void comboPopupRepaint() {
+    if (!hasComboPopup()) {
+      log().error("no combo popup to repaint");
+      return;
+    }
+    ComboPopup p = getComboPopup();
+    if (p instanceof Component) ((Component)p).repaint();
+    else log().error("Combo Popup not a component, cant repaint");
+  }
+
+//  private void compRepaint() {
+//     AccessibleContext ac = jComboBox.getAccessibleContext();
+//     for (int i=0; i<ac.getAccessibleChildrenCount(); i++) {
+//       Accessible a = ac.getAccessibleChild(i);
+//       log().debug("Accessible child "+a);
+//       if (a instanceof Component) ((Component)a).repaint();
+//     }
+//  }
+
+//   private void compRepaintCont(java.awt.Container parent) {
+//     System.out.println(parent+" repainting jcombo kids... "+parent.getComponentCount());
+//     log().debug("repainting jcombo kids... "+parent.getComponentCount());
+//     for (Component c : parent.getComponents()) {
+//       log().debug("repainting jcombo child "+c);
+//       log().debug("instance of ComboPopup "+(c instanceof ComboPopup));
+//       c.repaint();
+//       if (c instanceof java.awt.Container) compRepaintCont((java.awt.Container)c);
+//     }
+      
+//   }
+  
 
   private long time=0;
   private long time() {
@@ -328,14 +366,34 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   }
 
   protected JList getUIJList() {
-    Accessible popup = jComboBox.getAccessibleContext().getAccessibleChild(0);
-    if (!(popup instanceof ComboPopup)) {
-      this.log().error("Can't retrieve popup from combobox; can't do mouse overs - found instead " + popup.getClass());
-      return null;
-    } else {
-      return ((ComboPopup)popup).getList();
-    }
+    if (!hasComboPopup()) return null;
+    return getComboPopup().getList();
+//     Accessible popup = jComboBox.getAccessibleContext().getAccessibleChild(0);
+//     if (!(popup instanceof ComboPopup)) {
+//       this.log().error("Can't retrieve popup from combobox; can't do mouse overs - found instead " + popup.getClass());
+//       return null;
+//     } else {
+//       return ((ComboPopup)popup).getList();
+//     }
   }
+  
+  private boolean hasComboPopup() { return getComboPopup() != null; }
+
+  /** compbo popup is plaf, and not a child component - only way i see to get
+      it is via Accessible - wierd */
+  private ComboPopup getComboPopup() {
+    //Accessible popup = jComboBox.getAccessibleContext().getAccessibleChild(0);
+    AccessibleContext ac = jComboBox.getAccessibleContext();
+    for (int i=0; i<ac.getAccessibleChildrenCount(); i++) {
+      Accessible a = ac.getAccessibleChild(i);
+      if (a instanceof ComboPopup)
+        return (ComboPopup)a;
+    }
+    // no ComboPopup found... exception?
+    log().error("Can't retrieve popup from combobox; can't do mouse overs");
+    return null; // ex?
+  }
+
 
   // for TestPhenote
   public void doMouseOver(int itemNumber) {
@@ -461,124 +519,3 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
 }
 
 
-// GARBAGE
-  /** @param editModel if false then ACB doesnt edit model directly (post comp) 
-   can abstract classes have constructors - if not init() */
-  //protected AbstractAutoCompList(CompListSearcher s,boolean editModel,CharField cf) {
-//   protected AbstractAutoCompList(SearchParamsI sp,boolean editModel,CharField cf,
-//                                  String label) {
-//     super(cf,label);
-//     init();
-//   }
-  /** Override - configureEditor is called when user selects item and sets text
-      field to item selected, unfortunately this happens after the listening 
-      code in this class that sets to term name (not syn name), and then the syn
-      name gets set - so this is to catch & repress the subsequent syn name 
-      setting - hope that makes sense heres the jdocs from JComboBox for this method:
-      Initializes the editor with the specified item. It seems to be ok as far
-      as i can tell to supress this method entirely - if this ends up being 
-      problematic then this should be coulpled with a flag set in setCurrentValidItem
-      or a related method to supress the syn coming after term set 
-  this doesnt seem to be supressing anymore so i guess its ok */
-//   public void configureEditor(ComboBoxEditor anEditor,Object anItem) {
-//     //log().debug("configure editor called"+anItem);
-//     //new Throwable().printStackTrace();
-//     // it appears to be ok to supress this entirely
-//     super.configureEditor(anEditor,anItem); // ??? supress
-//   }
-
-//       // the input should be from selected obo class shouldnt it? is it possible
-//       // for this not to be so? returns null if no oboclass?
-//       // TERM
-//       if (isTermList()) {
-//         try { currentOboClass = getSelectedOboClass(); }
-//         // happens on return on invalid term name
-//         catch (OboException e) { return; } // error msg?
-//         //if (oboClass == null) return; currentOboClass = oboClass;
-//       }
-//       // RELATIONSHIP
-//       else {
-//         try { currentRel = getSelectedRelation(); }
-//         catch (OboException e) { return; }
-//       }
-    // hmmmmmm - layout issues... actually the fix was to set the minimum size
-    // issue was with big terms screwing up layout
-//     public void layoutComboBox(java.awt.Container parent, MetalComboBoxLayoutManager manager ) {
-//       javax.swing.Icon icon = ((javax.swing.plaf.metal.MetalComboBoxButton)arrowButton).getComboIcon();
-//       java.awt.Insets buttonInsets = arrowButton.getInsets();
-//       java.awt.Insets insets = comboBox.getInsets();
-//       int buttonWidth = icon.getIconWidth() + buttonInsets.left +  buttonInsets.right;  
-//       log().debug(" comb width "+comboBox.getWidth()+" inset right "+insets.right+" but width "+ buttonWidth+" in left "+insets.left+" l2r "+ comboBox.getComponentOrientation().isLeftToRight()+rectangleForCurrentValue()+editor.getBounds());
-//       super.layoutComboBox(parent,manager);
-//     }    
-  /** This is cheesy but theres a hanging bug with showPopup that only happens
-      in test mode - dont know why but doesnt actually matter, so if inTestMode
-      then dont showpopup - if hangs in nontest will investigate 
-      this actually needs to go in subclass of JCombo if we go there - this class
-      no longer sublcasses JCombo - for now commenting out */
-//   public void showPopup() {
-//     if (inTestMode)
-//       return;
-//     super.showPopup();
-//   }
-
-
-//   /** returns true if input changed from previously recorded input */
-//   private boolean inputChanged() {
-//     String newInput = getText();
-//     boolean inputChanged = ! previousInput.equals(newInput);
-//     if (inputChanged)
-//       previousInput = newInput;
-//     return inputChanged;
-//   }
-
-  /** call Ontology to get a Vector of OBOClass's that contain "in"
-      in ontology */
-//   private Vector<OBOClass> getTermsOld(String in) {
-//     // or CompletionList.getCompletionList(getOntology()) ??
-//     //CompletionList cl = CompletionList.getCompletionList();
-//     //return cl.getCompletionTermList(getOntology(),in,searchParams);
-//     return ontology.getSearchTerms(in,searchParams); // vector of OBOClass's
-//   }
-    //setModel(defaultComboBoxModel);
-    //defaultComboBoxModel = new DefaultComboBoxModel(v);
-    //if (isRelationshipList()) v = ontology.getStringMatchRelations(input);
-    //else v = getTerms(input);
-    // throws IllegalStateException, Attempt to mutate in notification
-    // this tries to change text field amidst notification hmmmm.....
-    // this is a vector of OBOClasses
-    // i think ultimately we will need to wrap the OBOClass to be able to
-    // have more control over the string - cut off w ... & [syn][obs] tags
-    // so AbstractDoc.replace does a remove and then insert, the remove sets
-    // text to "" and then keyTyped gets set to false, so the insert doesnt go
-    // through, taking out keyTyped, inputChanged may be sufficient
-//     if (!keyTyped) // if user hasnt typed anything dont bother
-//       return;
-    //log().debug("inputchanged "+inputChanged());
-    // this seems like a good idea but leads to a bug - if user types a letter
-    // then hits "New" then comes back and types same letter then this stops comp
-    // also i dont think this actually stops any funny behavior
-    //if (!inputChanged()) // if input is actually same no need to recomp
-    //return;
-    //keyTyped = false;
-  /** disable completion for item being selected - otherwise a popup comes up after
-      the selection - probably no harm in keeping this but this may be redundant with
-      the turning off of doCompletion in inner ATF.setText which is more
-      comprehensive - also we are no longer subclass of JCombo so this doesnt
-      even get called - if we do need this then we need to subclass JCombo */
-//   public void setSelectedItem(Object item) {
-//     doCompletion = false;
-//     jComboBox.setSelectedItem(item);
-//     doCompletion = true;
-//   }
-      //boolean fiddle = KeyboardState.shouldProcess(e);
-      //System.out.println("ATF.settext ["+text+"] curr term rel name "+getCurrentTermRelName());
-      //if (charField!=null)
-      //log().debug(charField.getName()+" AutoTextField.setText ["+text+"]"+getCurrentTermRelName());
-      //new Throwable().printStackTrace();
-      //getTextField().addKeyListener(new AutoKeyListener());
-    //return (String)getSelectedItem();
-    //if (charField!=null)log().debug(charField.getName()+" setting text ["+text+"]");
-    //new Throwable().printStackTrace();
-    //this.keyTyped = doCompletion; // key has to be typed for completion
-  // {charField.getCharFieldEnum().getValue(chr).getOboClass() }

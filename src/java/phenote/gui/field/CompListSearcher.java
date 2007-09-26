@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 //import java.util.Vector;
+import org.apache.log4j.Logger;
 
 import org.geneontology.util.AbstractTaskDelegate;
 import org.geneontology.util.TaskDelegate;
@@ -102,6 +103,7 @@ public class CompListSearcher {
     }
 
     public void execute() {
+      try {
       List<CompletionTerm> searchTerms = new ArrayList<CompletionTerm>();
       
       // if no input should phenote give no terms? or all terms?
@@ -138,8 +140,9 @@ public class CompListSearcher {
               searchTerms.addAll(obsoletes);
             }
           } 
-
+        
         }
+      
       } 
       catch (CancelEx x) { return; } // task has been cancelled
 
@@ -150,6 +153,10 @@ public class CompListSearcher {
       results = searchTerms;
       if (!isCancelled())
         searchListener.newResults(results); // send off results
+
+      } catch (RuntimeException x) {
+        log().error("got runtime exception in completion "+x);
+      }
     
     } // end of execute method
 
@@ -288,128 +295,11 @@ public class CompListSearcher {
       return sortedTerms;
     }
   }
+
+  private Logger log;
+  private Logger log() {
+    if (log == null) log = Logger.getLogger(getClass());
+    return log;
+  }
 }
 
-  // now done in Ontology.filterList() so dont have to check every time
-//   /** Oboedit getTerms returns some terms with obo: prefix that should be filtered
-//    * out. Returns true if starts with obo: */
-//   private boolean termFilter(String term) {
-//     return term.startsWith("obo:"); // take these out of ontology?
-//   }
-  // finally got rid of default vector model for AbstractAutoCompList!
-//   /** Returns a Vector of OBOClass from ontology that contain input string
-//       constrained by compParams. compParams specifies syns,terms,defs,& obs
-//       should input be just part of search params?
-//       its a vector as thats what ComboBox/TermCompList requires */
-//   public Vector<CompletionTerm> getStringMatchTerms(String input) {
-//    Vector<CompletionTerm> searchTerms = new Vector<CompletionTerm>();
-//     if (input == null || input.equals(""))
-//       return searchTerms;
-
-//     // gets term set for currently selected ontology
-//     //Set ontologyTermList = getCurrentOntologyTermSet();
-//     List<OBOClass> ontologyTermList = ontology.getSortedTerms(); // non obsolete
-//     searchTerms = getSearchTerms(input,ontologyTermList);
-
-//     // if obsoletes set then add them in addition to regulars
-//     if (searchParams.searchObsoletes()) {
-//       ontologyTermList = ontology.getSortedObsoleteTerms();
-//       Vector obsoletes = getSearchTerms(input,ontologyTermList);
-//       searchTerms.addAll(obsoletes);
-//     }
-//     return searchTerms;
-//   }
-
-//   /** helper fn for getSearchTerms(String,SearhParamsI) */
-//   private Vector<CompletionTerm> getSearchTerms(String input,
-//                                                 List<OBOClass> ontologyTermList) {
-//     SearchTermList searchTermList = new SearchTermList();
-//     if (ontologyTermList == null)
-//       return searchTermList.getVector();
-
-//     //boolean ignoreCase = true; // param? //if (ignoreCase)
-//     //input = input.toLowerCase(); // done in CompletionTerm
-
-//     // i think iterators are more efficient than get(i) ??
-//     Iterator<OBOClass> iter = ontologyTermList.iterator();
-//     while (iter.hasNext()) {
-
-//       OBOClass oboClass = iter.next();
-
-//       CompletionTerm ct = new CompletionTerm(oboClass);
-//       if (ct.matches(input,searchParams)) {
-//         searchTermList.addTerm(ct);
-//       }
-
-//     }
-//     return searchTermList.getVector();
-//   }
-
-//   private boolean compareAndAddTerm(String input, String compareTerm, OBOClass oboClass,
-//                                     SearchTermList searchTermList) {
-    
-//     //String oboTerm = oboClass.getName();
-
-//     String lowerComp = compareTerm;
-//     boolean ignoreCase = true; // discard? param for?
-//     if (ignoreCase)
-//       lowerComp = compareTerm.toLowerCase();
-
-//     //boolean doContains = true; // discard? param for?
-//     // exact match goes first in list
-//     if (lowerComp.equals(input)) {
-//       searchTermList.addTermFirst(oboClass); // adds if not present
-//       return true;
-//     }
-//     // new paradigm - put starts with first
-//     else if (lowerComp.startsWith(input)) {
-//       searchTermList.addTerm(oboClass);
-//       return true;
-//     }
-//     // Contains
-//     else if (contains(lowerComp,input)) { // && !termFilter(lowerComp) -> Ont
-//       searchTermList.addContainsTerm(oboClass);
-//       return true;
-//     }
-//     return false;
-//   }
-//       String originalTerm = oboClass.getName();//toString();
-//       boolean termAdded = false;
-//       if (searchParams.searchTerms()) {
-//         // adds originalTerm to searchTerms if match (1st if exact)
-//         termAdded = compareAndAddTerm(input,originalTerm,oboClass,searchTermList);
-//         if (termAdded) continue;}
-//       if (searchParams.searchSynonyms()) {
-//         Set synonyms = oboClass.getSynonyms();
-//         for (Iterator i = synonyms.iterator(); i.hasNext() &&!termAdded; ) {
-//           String syn = i.next().toString();
-//           //log().debug("syn "+syn+" for "+originalTerm);
-//           termAdded = compareAndAddTerm(input,syn,oboClass,searchTermList);
-//           //if (termAdded) continue; // woops continues this for not the outer!
-//         }
-//       }
-//       if (termAdded) continue;
-//       if (searchParams.searchDefinitions()) {
-//         String definition = oboClass.getDefinition();
-//         if (definition != null & !definition.equals(""))
-//           termAdded = compareAndAddTerm(input,definition,oboClass,searchTermList);
-//           if (termAdded) continue; // not really necesary as its last }
-//     private void addTerm(OBOClass oboClass) {
-//       addTerm(oboClass,false);
-//     }
-//     private void addTermFirst(OBOClass oboClass) {
-//       addTerm(oboClass,true);
-//     }
-//     private void addTerm(OBOClass oboClass,boolean first) {
-//       //if (uniqueCheck.containsKey(oboClass)) {
-//       //log().debug("dup term in search "+oboClass);
-//       //  new Throwable().printStackTrace();  return;   }
-//       CompletionTerm t = new CompletionTerm(oboClass);
-//       if (first) startsWithTerms.add(0,t);
-//       else startsWithTerms.add(t);
-//       //uniqueCheck.put(oboClass,null); // dont need value
-//     }
-//     /** Add term thats not startsWith but contains */
-//     private void addContainsTerm(OBOClass oboClass) {
-//       containTerms.add(new CompletionTerm(oboClass));
-//     }
