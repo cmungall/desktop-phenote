@@ -309,27 +309,6 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     else log().error("Combo Popup not a component, cant repaint");
   }
 
-//  private void compRepaint() {
-//     AccessibleContext ac = jComboBox.getAccessibleContext();
-//     for (int i=0; i<ac.getAccessibleChildrenCount(); i++) {
-//       Accessible a = ac.getAccessibleChild(i);
-//       log().debug("Accessible child "+a);
-//       if (a instanceof Component) ((Component)a).repaint();
-//     }
-//  }
-
-//   private void compRepaintCont(java.awt.Container parent) {
-//     System.out.println(parent+" repainting jcombo kids... "+parent.getComponentCount());
-//     log().debug("repainting jcombo kids... "+parent.getComponentCount());
-//     for (Component c : parent.getComponents()) {
-//       log().debug("repainting jcombo child "+c);
-//       log().debug("instance of ComboPopup "+(c instanceof ComboPopup));
-//       c.repaint();
-//       if (c instanceof java.awt.Container) compRepaintCont((java.awt.Container)c);
-//     }
-      
-//   }
-  
 
   private long time=0;
   private long time() {
@@ -368,13 +347,6 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   protected JList getUIJList() {
     if (!hasComboPopup()) return null;
     return getComboPopup().getList();
-//     Accessible popup = jComboBox.getAccessibleContext().getAccessibleChild(0);
-//     if (!(popup instanceof ComboPopup)) {
-//       this.log().error("Can't retrieve popup from combobox; can't do mouse overs - found instead " + popup.getClass());
-//       return null;
-//     } else {
-//       return ((ComboPopup)popup).getList();
-//     }
   }
   
   private boolean hasComboPopup() { return getComboPopup() != null; }
