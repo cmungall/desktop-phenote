@@ -21,6 +21,8 @@ import org.apache.log4j.Logger;
 import org.swixml.SwingEngine;
 
 import phenote.config.Config;
+import phenote.dataadapter.CharListChangeEvent;
+import phenote.dataadapter.CharListChangeListener;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.LoadSaveManager;
 import phenote.datamodel.CharField;
@@ -65,6 +67,7 @@ public class CharacterTableController {
     this.selectionModel = new EventSelectionModel<CharacterI>(this.filteredCharacters);
     this.tableFormat = new CharacterTableFormat(this.representedGroup);
     this.getEditManager().addCharChangeListener(new CharacterChangeListener());
+    CharacterListManager.getCharListMan(this.representedGroup).addCharListChangeListener(new CharacterListChangeListener());
     this.initializeInterface();
     this.addInitialBlankCharacter();
   }
@@ -168,7 +171,7 @@ public class CharacterTableController {
   }
   
   private void setSelectionWithCharacters(List<CharacterI> characters) {
-    this.filterField.setText("");
+    this.clearFilter();
     this.selectionModel.clearSelection();
     for (CharacterI character : characters) {
       final int index = this.filteredCharacters.indexOf(character);
@@ -178,6 +181,10 @@ public class CharacterTableController {
         this.characterTable.scrollRectToVisible(rect);
       }
     }
+  }
+  
+  private void clearFilter() {
+    this.filterField.setText("");
   }
 
   private void updateCharacterForGlazedLists(CharacterI character) {
@@ -222,6 +229,16 @@ public class CharacterTableController {
         CharacterTableController.this.setSelectionWithCharacters(e.getTransaction().getCharacters());
       }
     }
+  }
+  
+  private class CharacterListChangeListener implements CharListChangeListener {
+    public void newCharList(CharListChangeEvent e) {
+      CharacterTableController.this.clearFilter();
+      if (!CharacterTableController.this.filteredCharacters.isEmpty()) {
+        CharacterTableController.this.selectionModel.setSelectionInterval(0, 0);
+      }
+    }
+    
   }
   
   private static class EverythingEqualComparator<T> implements Comparator<T> {
