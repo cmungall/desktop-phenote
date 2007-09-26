@@ -2,21 +2,19 @@ package phenote.dataadapter.delimited;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.geneontology.oboedit.datamodel.OBOClass;
 
-import phenote.datamodel.Character;
-import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharacterIFactory;
-import phenote.datamodel.CharField;
-import phenote.datamodel.CharFieldValue;
-import phenote.datamodel.OntologyManager;
-import phenote.datamodel.TermNotFoundException;
 import phenote.config.Config;
 import phenote.config.ConfigException;
+import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldValue;
+import phenote.datamodel.CharacterI;
+import phenote.datamodel.CharacterIFactory;
+import phenote.datamodel.OntologyManager;
+import phenote.datamodel.TermNotFoundException;
 
 /** I stole this from phenosyntaxchar, but modifying for tab delimited.  will
  *  initially hard code in the tab-delimiter, but eventually it should be generic to 
@@ -174,8 +172,10 @@ public class DelimitedChar {
 
   private String[] splitLine(String line) {
     //parse based on tab...will be delimiter in future
-    Pattern p = Pattern.compile("\t");
-    return p.split(line);
+    final String delimiter = "\t";
+    final Pattern p = Pattern.compile(delimiter);
+    final String trimmedLine = (line.endsWith(delimiter)) ? (line.substring(0, line.length() -1)) : line;
+    return p.split(trimmedLine, -1);
   }
 
 
