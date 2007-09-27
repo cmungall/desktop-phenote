@@ -9,7 +9,7 @@
 	<panel constraints="BorderLayout.CENTER" layout="GridBagLayout">
 		<panel layout="GridBagLayout">
 		<gridbagconstraints gridx="0" gridy="0" weightx="1" weighty="0" fill="GridBagConstraints.HORIZONTAL"/>
-		<label text="Search:" horizontalAlignment="SwingConstants.RIGHT">
+		<label text="Filter:" horizontalAlignment="SwingConstants.RIGHT">
 			<gridbagconstraints gridx="0" gridy="0" weightx="1" weighty="0" anchor="GridBagConstraints.EAST"/>
 		</label>
 		<textfield id="filterField" columns="25">
