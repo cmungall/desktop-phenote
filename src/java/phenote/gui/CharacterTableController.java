@@ -15,6 +15,8 @@ import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableColumn;
 
 import org.apache.log4j.Logger;
@@ -55,6 +57,8 @@ public class CharacterTableController {
   private JPanel characterTablePanel; // initialized by swix
   private JTable characterTable; // initialized by swix
   private JTextField filterField; // initialized by swix
+  private JButton duplicateButton; // initialized by swix
+  private JButton deleteButton; // initialized by swix
   private JButton commitButton; // initialized by swix
   private JButton graphButton; // initialized by swix
   
@@ -137,6 +141,7 @@ public class CharacterTableController {
     if (tableWidth>DEFAULT_VIEW_WIDTH) this.characterTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     this.characterTable.addMouseListener(new PopupListener(new TableRightClickMenu(this.characterTable)));
     this.characterTablePanel.validate();
+    this.selectionModel.addListSelectionListener(new SelectionListener());
   }
   
   private void setColumnWidths() {
@@ -181,6 +186,12 @@ public class CharacterTableController {
         this.characterTable.scrollRectToVisible(rect);
       }
     }
+  }
+  
+  private void updateButtonStates() {
+    final boolean hasSelection = !this.selectionModel.isSelectionEmpty();
+    this.duplicateButton.setEnabled(hasSelection);
+    this.deleteButton.setEnabled(hasSelection);
   }
   
   private void clearFilter() {
@@ -238,7 +249,12 @@ public class CharacterTableController {
         CharacterTableController.this.selectionModel.setSelectionInterval(0, 0);
       }
     }
-    
+  }
+  
+  private class SelectionListener implements ListSelectionListener {
+    public void valueChanged(ListSelectionEvent e) {
+      CharacterTableController.this.updateButtonStates();
+    }
   }
   
   private static class EverythingEqualComparator<T> implements Comparator<T> {
