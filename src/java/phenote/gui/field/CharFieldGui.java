@@ -183,14 +183,12 @@ abstract class CharFieldGui implements ListSelectionListener {
   protected abstract void setCharFieldValue(CharFieldValue value);
   
   protected void focusLost() {
-    log().debug("Focus lost on " + this.getCharField().getName());
     if (this.shouldResetGuiForMultipleValues()) {
       this.setGuiForMultipleValues();
     } 
   }
   
   protected void focusGained() {
-    log().debug("Focus gained on " + this.getCharField().getName());
     if (this.isInMultipleValueState()) {
       this.setGuiForMultipleValues();
       this.setHasChangedMultipleValues(false);

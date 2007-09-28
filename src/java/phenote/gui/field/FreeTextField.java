@@ -160,7 +160,6 @@ class FreeTextField extends CharFieldGui {
 
   /** update model using currently selected chars */
   protected void updateModel() {
-    log().debug("Update model");
     List<CharacterI> chars = getSelectedChars();
     updateModel(chars);
   }

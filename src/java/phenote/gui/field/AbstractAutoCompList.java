@@ -30,7 +30,6 @@ import org.apache.log4j.Logger;
 
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldValue;
-import phenote.datamodel.CharacterI;
 import phenote.gui.SearchParams;
 import phenote.gui.SearchParamsI;
 /** has a jcombobox that does auto completion - i had to do some tricks(hacks) to get it

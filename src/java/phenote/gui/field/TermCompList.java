@@ -180,10 +180,6 @@ class TermCompList extends AbstractAutoCompList {
    */
   private OBOClass getSelectedOboClass() throws OboException {
     Object obj = getSelectedObject(); // throws oboex
-    log().debug("The selected list object is: " + obj + " with class " + obj.getClass());
-    if (obj instanceof String) {
-      log().debug("String");
-    }
     //return oboClassDowncast(obj); // throws oboex
     CompletionTerm t = completionTermDowncast(obj);
     return t.getOboClass();
@@ -204,7 +200,6 @@ class TermCompList extends AbstractAutoCompList {
    * edits one or more selected chars
    */
   protected void updateModel() {
-    log().debug("Update model");
     try { 
       this.setCurrentValidItem(); 
     }
@@ -248,7 +243,6 @@ class TermCompList extends AbstractAutoCompList {
 
   // allow user to nullify field
   protected void setModelToNull() {
-    log().debug("Nulling model");
     setModel(null);
   }
 
