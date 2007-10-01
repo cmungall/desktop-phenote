@@ -4,8 +4,6 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.Comparator;
 import java.util.List;
 
@@ -17,7 +15,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.TableColumn;
 
 import org.apache.log4j.Logger;
 import org.swixml.SwingEngine;
@@ -43,10 +40,6 @@ import ca.odell.glazedlists.swing.TextComponentMatcherEditor;
 
 public class CharacterTableController {
   
-  private static int DEFAULT_COLWIDTH=150; //default column width for table
-  private static int INIT_TABLE_WIDTH=1400;
-  private static int DEFAULT_VIEW_WIDTH=500;
-  private int tableWidth=INIT_TABLE_WIDTH;
   private static final String SAVE_STRING = "Save Data";
   private String representedGroup = "default";
   private SortedList<CharacterI> sortedCharacters;
@@ -137,34 +130,10 @@ public class CharacterTableController {
       this.graphButton.getParent().remove(this.graphButton);
     }
     this.filterField.putClientProperty("Quaqua.TextField.style", "search");
-    this.setColumnWidths();
-    if (tableWidth>DEFAULT_VIEW_WIDTH) this.characterTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     this.characterTable.addMouseListener(new PopupListener(new TableRightClickMenu(this.characterTable)));
     this.characterTablePanel.validate();
     this.selectionModel.addListSelectionListener(new SelectionListener());
-  }
-  
-  private void setColumnWidths() {
-    //this method sets the column widths according to those in the configuration
-    //will determine the total table width according to dimensions in config
-    final int columnCount = this.tableFormat.getColumnCount();
-    int totalWidth = 0;
-    for (int i = 0; i < columnCount; i++) {
-      TableColumn column = this.characterTable.getColumnModel().getColumn(i);
-      int width = this.getWidthOfColumn(i);
-      if (width==0) //-1 is no display
-        {width=DEFAULT_COLWIDTH;}
-      column.setPreferredWidth(width);
-      column.addPropertyChangeListener(new ColwidthChangeListener());
-      this.characterTable.getTableHeader().setResizingColumn(column);
-      column.setWidth(width);
-      totalWidth+=width;   
-    }
-    tableWidth=totalWidth;
-  }
-  
-  private int getWidthOfColumn(int columnIndex) {
-    return Config.inst().getFieldColwidth(columnIndex);
+    new TableColumnPrefsSaver(this.characterTable, this.getTableAutoSaveName());
   }
   
   private void addInitialBlankCharacter() {
@@ -226,6 +195,10 @@ public class CharacterTableController {
     else return CharacterTableController.SAVE_STRING;
   }
   
+  private String getTableAutoSaveName() {
+    return Config.inst().getConfigName() + this.representedGroup + "CharacterTable";
+  }
+  
   private static Logger log() {
     return Logger.getLogger(CharacterTableController.class);
   }
@@ -269,25 +242,6 @@ public class CharacterTableController {
         baseList.add(character.getValueString(charField));
       }
     }
-  }
-  
-  private static class ColwidthChangeListener implements PropertyChangeListener {
-    public void propertyChange(PropertyChangeEvent e)
-    {
-      //listens for changes to the column widths, makes changes to config,
-      //and flags that there's been changes (so that they'll be saved)
-      if (e.getPropertyName().equals("width")) {
-        TableColumn col = (TableColumn)e.getSource();
-        int colIndex = col.getModelIndex();
-        Integer newWidth = (Integer)e.getNewValue();
-        int w = newWidth.intValue();
-        if (w!=(Config.inst().getFieldColwidth(colIndex))) {
-          //only flag modified if changed from original settings
-          Config.inst().setFieldColwidth(colIndex, w);
-          Config.inst().setConfigModified(true);
-        }
-      }
-    } 
   }
   
   private class PopupListener extends MouseAdapter {

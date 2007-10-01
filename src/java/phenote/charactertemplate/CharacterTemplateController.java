@@ -36,6 +36,7 @@ import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
 import phenote.gui.MenuManager;
+import phenote.gui.TableColumnPrefsSaver;
 import phenote.gui.TermInfo;
 import phenote.gui.field.FieldPanel;
 import phenote.gui.selection.SelectionManager;
@@ -286,6 +287,7 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
       this.selectionModel = new EventSelectionModel<CharacterI>(this.filteredCharacters);
       this.characterTemplateTable.setSelectionModel(this.selectionModel);
       this.characterTemplateTable.putClientProperty("Quaqua.Table.style", "striped");
+      new TableColumnPrefsSaver(this.characterTemplateTable, this.getTableAutoSaveName());
       this.filterField.putClientProperty("Quaqua.TextField.style", "search");
       FieldPanel fieldPanel = new FieldPanel(true, false, this.representedGroup, this.selectionManager, this.editManager, this.selectionModel);
       this.charFieldPanelContainer.add(fieldPanel);
@@ -335,6 +337,10 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
       if (field.getName().equals(fieldName)) return field;
     }
     return null;
+  }
+  
+  private String getTableAutoSaveName() {
+    return Config.inst().getConfigName() + this.representedGroup + "CharacterTemplateTable";
   }
   
   private List<CharacterI> getCurrentCharacters() {
