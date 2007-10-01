@@ -20,27 +20,6 @@ class RelationCompList extends AbstractAutoCompList {
     enableEditModel(false); // doesnt directly edit model i dont think ever?
   }
 
-//   RelationCompList(CompListSearcher searcher,boolean editModel,CharField c) {
-//     super(searcher,editModel,c);
-    // this inner class enables retrieving of JList for mouse over
-    // this will probably throw errors if non metal look & feel is used
-//    setUI(new MetalListComboUI());
-    //setFont(new Font("Courier",Font.PLAIN,12));
-
-//     setOntology(ontology);
-//     searchParams = sp; // singleton access? part of ontology?
-//     setEditable(true);
-//     AutoTextFieldEditor autoTextFieldEditor = new AutoTextFieldEditor();
-//     this.setEditor(autoTextFieldEditor);
-//     setPreferredSize(new Dimension(350,22));
-
-//     enableTermInfoListening(true); // default
-//     //addCompletionListListener(compList);
-
-//     //if (editModel) // ComboBoxActionListener edits the model
-//     this.editModel = editModel;
-//     addActionListener(new ComboBoxActionListener());
-    //}
 
   /** The user has selected a rel from the list, validate and set current rel
       if doesnt validate throw ex */
@@ -112,11 +91,6 @@ class RelationCompList extends AbstractAutoCompList {
       just term */ 
   protected void setCharFieldValue(CharFieldValue value) {}
 
-  /** Returns a vector of CompletionRelations for auto completion
-      which contain input, using search params */
-//   protected Vector getSearchItems(String input) {
-//     return getCompListSearcher().getStringMatchRelations(input);
-//   }
   protected void getSearchItems(String input, SearchListener l)  {
     // for now not threading and just sending results to listener - 
     // relations are short lists - dont need threaded optimization
@@ -131,6 +105,32 @@ class RelationCompList extends AbstractAutoCompList {
   }
 }
 
+  /** Returns a vector of CompletionRelations for auto completion
+      which contain input, using search params */
+//   protected Vector getSearchItems(String input) {
+//     return getCompListSearcher().getStringMatchRelations(input);
+//   }
+//   RelationCompList(CompListSearcher searcher,boolean editModel,CharField c) {
+//     super(searcher,editModel,c);
+    // this inner class enables retrieving of JList for mouse over
+    // this will probably throw errors if non metal look & feel is used
+//    setUI(new MetalListComboUI());
+    //setFont(new Font("Courier",Font.PLAIN,12));
+
+//     setOntology(ontology);
+//     searchParams = sp; // singleton access? part of ontology?
+//     setEditable(true);
+//     AutoTextFieldEditor autoTextFieldEditor = new AutoTextFieldEditor();
+//     this.setEditor(autoTextFieldEditor);
+//     setPreferredSize(new Dimension(350,22));
+
+//     enableTermInfoListening(true); // default
+//     //addCompletionListListener(compList);
+
+//     //if (editModel) // ComboBoxActionListener edits the model
+//     this.editModel = editModel;
+//     addActionListener(new ComboBoxActionListener());
+    //}
 //   private OBOProperty oboPropertyDowncast(Object obj)  throws OboException {
 //     if (obj == null) throw new OboException();
 //     if ( ! (obj instanceof OBOProperty)) {

@@ -1,16 +1,20 @@
 package phenote.edit;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
 
 import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldException;
+import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
+import phenote.datamodel.OntologyManager;
 
-/** For adding a character (not a char subpart - thats an update) */
+/** For adding a character (not a char field/subpart - thats an update) */
 
 public class AddTransaction implements TransactionI {
 
@@ -33,9 +37,17 @@ public class AddTransaction implements TransactionI {
 
   public void editModel() {
     getCharList().add(addChar);
+    // automatically put in date_created???
+    try {
+      CharField dateField = OntologyManager.inst().getCharFieldForName("date_created");
+      CharFieldValue v = new CharFieldValue(getDate(),addChar,dateField);
+    } catch (CharFieldException e) { System.out.println("no date_created field"); } //?
     isUndone = false;
     // index = getCharList().indexOf(addChar); ??
   }
+
+  // get current date
+  private Date getDate() { return new Date(); }
 
 // public int getIndex() { return index; } ???
 

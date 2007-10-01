@@ -1,6 +1,9 @@
 package phenote.datamodel;
 
+import java.util.Date;
+
 import org.geneontology.oboedit.datamodel.OBOClass;
+import org.geneontology.oboedit.datamodel.impl.DanglingClassImpl;
 import org.geneontology.oboedit.util.TermUtil;
 
 
@@ -16,6 +19,7 @@ public class CharFieldValue implements Cloneable {
 
   private OBOClass oboClassValue=null;
   private String stringValue=null;
+  private Date dateValue=null;
   private boolean isOboClass=true;
   private CharFieldEnum charFieldEnum;
   private CharField charField;
@@ -50,6 +54,12 @@ public class CharFieldValue implements Cloneable {
     this(c,cf);
     oboClassValue = o;
     isOboClass = true;
+  }
+
+  public CharFieldValue(Date d, CharacterI c, CharField cf) {
+    this(c,cf);
+    dateValue = d;
+    isOboClass = false;
   }
 
   private CharFieldValue(CharacterI c,CharField cf) {
@@ -92,7 +102,12 @@ public class CharFieldValue implements Cloneable {
   }
 
   // maybe this should be called getString??? why getName???
+  // --> getValueAsString - much better name - phase out
   public String getName() { 
+    return getValueAsString();
+  }
+
+  public String getValueAsString() {
     if (!isTerm())
       return stringValue;
     if (oboClassValue != null) // obo class may not be set yet
@@ -108,6 +123,9 @@ public class CharFieldValue implements Cloneable {
   }
 
   public boolean isTerm() { return isOboClass; }
+
+  public boolean isDate() { return dateValue != null; }
+  public Date getDate() { return dateValue; }
 
   public OBOClass getOboClass() { return getTerm(); } // --> getTerm more general
   public OBOClass getTerm() { return oboClassValue; }
@@ -125,7 +143,19 @@ public class CharFieldValue implements Cloneable {
     return TermUtil.isDangling(getTerm());
   }
 
-  public String toString() { return getName(); }
+  /** if cfv is a term just returns it, otherwise makes a dangling term out of 
+      its value, string or date or whatnot */
+  public OBOClass toTerm() {
+    if (isTerm()) return getTerm();
+    else {
+      OBOClass term =
+        new DanglingClassImpl(getCharField().getTag()+":"+getValueAsString());
+      term.setName(getName());
+      return term;
+    }
+  }
+
+  public String toString() { return getValueAsString(); }
 
 
 //     if (charFieldEnum == null)

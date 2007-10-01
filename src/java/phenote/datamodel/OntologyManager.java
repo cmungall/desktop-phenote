@@ -5,12 +5,15 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.geneontology.oboedit.datamodel.OBOClass;
+import org.geneontology.oboedit.datamodel.OBOProperty;
 import org.geneontology.oboedit.datamodel.OBOSession;
 import org.geneontology.oboedit.postcomp.ParseException;
 import org.geneontology.oboedit.postcomp.PostcompUtil;
 import org.geneontology.oboedit.postcomp.TokenMgrError;
+import org.geneontology.oboedit.util.TermUtil;
 
 import phenote.config.Config;
+import phenote.config.xml.FieldDocument.Field.Type;
 
 //import phenote.datamodel.CharFieldEnum;
 //import phenote.datamodel.OboUtil;
@@ -28,12 +31,20 @@ public class OntologyManager {
   /** CharFields generically hold zero or more ontologies - are charFields that dont
    have ontologies in this list?? yes */
   private List<CharField> charFieldList = new ArrayList<CharField>();
+  /** OBOSession holds all ontologies */
+  private OBOSession oboSession;
 
   public final static String DEFAULT_GROUP = "default";
 
 
   /** Singleton */
-  private OntologyManager() {}
+  private OntologyManager() {
+    // always have user & date field by default
+    // should be at end in case displayed??
+    CharField dateCreated =
+      new CharField("Date Created","date_created",Type.DATE);
+    addField(dateCreated);
+  }
   
   public static OntologyManager inst() {
     if (singleton == null)
@@ -44,6 +55,18 @@ public class OntologyManager {
   /** OntologyDataAdapter adds fields */
   public void addField(CharField cf) {
     charFieldList.add(cf);
+  }
+
+  public void setOboSession(OBOSession s) { oboSession = s; }
+  public OBOSession getOboSession() { return oboSession; }
+
+  /** returns relation of id from obo session, null if dont have */
+  public OBOProperty getRelation(String id) {
+    for (OBOProperty p : TermUtil.getRelationshipTypes(oboSession)) {
+      if (p.getID().equals(id))
+        return p;
+    }
+    return null;
   }
 
   /** get char field for int. 0 based. based on order in config file

@@ -26,24 +26,39 @@ public class BasicAnnotationMappingDriver implements AnnotationMappingDriver {
 	protected boolean changeObjectsMode = true;
 	protected List<HistoryItem> historyItems;
 
-	/**
-	 * We probably want to create a special static ontology that extends
-	 * AnnotationOntology to contain these properties. This is here just to keep
-	 * the example simple
-	 */
-	protected static final OBOProperty GENOTYPE_REL = new OBOPropertyImpl(
-			"oban:has_genotype", "has_genotype");
-	protected static final OBOProperty HAS_QUALITY_REL = new OBOPropertyImpl(
-			"pato:has_quality", "has_quality");
+  /**
+   * We probably want to create a special static ontology that extends
+   * AnnotationOntology to contain these properties. This is here just to keep
+   * the example simple
+   */
+  protected static final OBOProperty GENOTYPE_REL = new OBOPropertyImpl(
+    "oban:has_genotype", "has_genotype");
+  protected static final OBOProperty HAS_QUALITY_REL = new OBOPropertyImpl(
+    "pato:has_quality", "has_quality");
+  
+  public OBOProperty getPropertyForField(CharField cf) {
+    // First check if configged/in char field
+    // if (cf.hasOboRelation()) return cf.getOboRelation();
+    if (CharFieldEnum.PUB.equals(cf)) {
+      return AnnotationOntology.EVIDENCE_REL();
+    } else if (CharFieldEnum.GENOTYPE.equals(cf)) {
+      return GENOTYPE_REL;
+    }
+    //return null;
+    // since not configged nor in java/mapper create one on fly - better
+    // than returning null which causes failure - should pring error 
+    // message though(?) - info, error might be annoying
+    // LOG.info("No obo relationship found for "+cf);
+    return new OBOPropertyImpl("PHENOTE_MAPPING_REL:"+cf.getTag(),cf.getTag());
+  }
 
-	public OBOProperty getPropertyForField(CharField cf) {
-		if (cf.equals(CharFieldEnum.PUB.getName())) {
-			return AnnotationOntology.EVIDENCE_REL();
-		} else if (cf.equals(CharFieldEnum.GENOTYPE.getName())) {
-			return GENOTYPE_REL;
-		}
-		return null;
-	}
+  /** retrieves prop from obo session by id, if not there then creates one */
+  protected OBOProperty getRelation(String id, String name) {
+    OBOProperty p = OntologyManager.inst().getRelation(id);
+    if (p != null) return p;
+    return new OBOPropertyImpl(id,name);
+  }
+
 
 	public List<HistoryItem> popHistoryList() {
 		List<HistoryItem> out = historyItems;
@@ -51,27 +66,27 @@ public class BasicAnnotationMappingDriver implements AnnotationMappingDriver {
 		return out;
 	}
 	
-	public CharFieldValue getCharFieldValue(OBOClass oboclass,
-			CharacterI character, CharField field) {
-		return new CharFieldValue(oboclass, character, field);
-	}
-
+  public CharFieldValue getCharFieldValue(OBOClass oboclass,
+                                          CharacterI character, CharField field) {
+    return new CharFieldValue(oboclass, character, field);
+  }
+  
 	public CharFieldValue getCharFieldValue(String s, CharacterI character,
 			CharField field) {
 		return new CharFieldValue(s, character, field);
 	}
 
-	public void setPropertyValue(Annotation annotation, OBOProperty property,
-			OBOClass value) {
-		clearProperty(annotation, property);
-		if (changeObjectsMode)
-			annotation.addPropertyValue(property, value);
-		if (auditHistoryMode) {
-			historyItems.add(new AddPropertyValueHistoryItem(
-					annotation.getID(), property.getID(), value.getType()
-							.getID(), value.getID()));
-		}
-	}
+  public void setPropertyValue(Annotation annotation, OBOProperty property,
+                               OBOClass value) {
+    clearProperty(annotation, property);
+    if (changeObjectsMode)
+      annotation.addPropertyValue(property, value);
+    if (auditHistoryMode) {
+      historyItems.add(new AddPropertyValueHistoryItem(
+                         annotation.getID(), property.getID(), value.getType()
+                         .getID(), value.getID()));
+    }
+  }
 
 	public void setPropertyValue(Annotation annotation, OBOProperty property,
 			String value) {
@@ -107,17 +122,25 @@ public class BasicAnnotationMappingDriver implements AnnotationMappingDriver {
 		}
 	}
 
-	public OBOProperty getDefaultRelationship() {
-		return HAS_QUALITY_REL;
-	}
+  public OBOProperty getDefaultRelationship() {
+    return HAS_QUALITY_REL;
+  }
 
-	public boolean isSubjectField(CharField cf) {
-		return CharFieldEnum.ENTITY.getName().equals(cf);
-	}
+  public boolean isSubjectField(CharField cf) {
+    return CharFieldEnum.ENTITY.equals(cf);
+  }
 
-	public boolean isObjectField(CharField cf) {
-		return CharFieldEnum.QUALITY.getName().equals(cf);
-	}
+  // phase out? for isObjectGenusField?
+  public boolean isObjectField(CharField cf) {
+    return isObjectGenusField(cf);//CharFieldEnum.QUALITY.getName().equals(cf);
+  }
+  public boolean isObjectGenusField(CharField cf) {
+    return CharFieldEnum.QUALITY.equals(cf);
+  }
+
+  public boolean isObjectDifferentiaField(CharField cf) {
+    return false; // basic - no object differentia
+  }
 
 	public boolean getAuditHistoryMode() {
 		return auditHistoryMode;

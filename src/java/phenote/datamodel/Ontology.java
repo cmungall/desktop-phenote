@@ -153,11 +153,6 @@ public class Ontology {
     }
     //if (term == null)
 
-//     if (danglerMode()) { no not here - multi ontol field needs to loop thru ontols
-//       // shoot error? or let handler do that?
-//       return new DanglingClassImpl(id); // name will have to be added by dataadap?
-//     }
-
     throw new TermNotFoundException(id +" id not found in ontology "+name);
     //return oc;
   }

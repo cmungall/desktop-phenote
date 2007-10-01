@@ -102,6 +102,11 @@
         <xs:element minOccurs="0" ref="x:postcomp"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:ontology"/>
       </xs:sequence>
+      <xs:attribute name="obo-relation" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>what relation to use in mapping field to obo annotation</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
       <xs:attribute name="enable" use="required" type="xs:boolean"/>
       <xs:attribute name="name" use="required" type="xs:string"/>
       <xs:attribute name="colwidth" use="required" type="xs:int"/>
@@ -124,6 +129,7 @@
             <xs:enumeration value="INT"/>
             <xs:enumeration value="ID"/>
             <xs:enumeration value="READ_ONLY"/>
+            <xs:enumeration value="DATE"/>
             <xs:enumeration value="HIDDEN"/>
             <xs:enumeration value="free_text"/>
           </xs:restriction>

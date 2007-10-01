@@ -103,6 +103,7 @@ public class OntologyDataAdapter {
     try {
       OBOSession os = loadAllOboFilesIntoOneOboSession();
       initCharFields();
+      ontologyManager.setOboSession(os);
       // map namespaces to ontologies? 2 methods?
       mapNamespacesToOntologies(os);
       // load ontologies from namespaces

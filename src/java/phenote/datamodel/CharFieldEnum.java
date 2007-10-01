@@ -26,6 +26,9 @@ public enum CharFieldEnum {
   private CharFieldEnum(String name) { this.name = name; }
   public String toString() { return getName(); }
   public String getName() { return name; }
+  public boolean equals(String s) { return name.equalsIgnoreCase(s); }
+  public boolean equals(CharField cf) { return name.equals(cf.getName()); }
+
   // no longer used?
   //public abstract void setValue(CharacterI c, CharFieldValue v);
   //public abstract CharFieldValue getValue(CharacterI c);
@@ -33,7 +36,7 @@ public enum CharFieldEnum {
   // unclear if we need this??? need it in generic field config
   public static CharFieldEnum getCharFieldEnum(String fieldString) throws Exception {
     for ( CharFieldEnum cfe : CharFieldEnum.values()) {
-      if (cfe.name.equalsIgnoreCase(fieldString))
+      if (cfe.equals(fieldString))
         return cfe;
     }
     //System.out.println("ERROR: No Char Field found for string "+fieldString);

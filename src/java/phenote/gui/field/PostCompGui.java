@@ -18,6 +18,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import org.apache.log4j.Logger;
+import org.geneontology.oboedit.datamodel.Link;
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOProperty;
 import org.geneontology.oboedit.datamodel.OBORestriction;
@@ -88,16 +89,8 @@ class PostCompGui {
     //genusField.setListSelectionModel(this.selectionModel);
     compFieldPanel.addCharFieldGuiToPanel(genusField);
 
-    // REL-DIFFS
+    // REL-DIFF - put in 1 differentia
     addRelDiffGui();
-
-    // HARDWIRE 2ND REL&DIFF FOR NOW eventually put in refine button to add more diffs
-    //addRelDiffGui();
-
-    // WHAT THE HELL HARDWIRE A 3RD
-    //addRelDiffGui();
-
-
 
     setGuiFromSelectedModel();
 
@@ -162,14 +155,14 @@ class PostCompGui {
     OBOClass currentTerm = getModelTerm();
     if (currentTerm == null) return;
     
-    //genusField.setText(getGenusString(currentTerm));
-    genusField.setOboClass(getGenusTerm(currentTerm));
+    OBOClass genus = OboUtil.getGenusTerm(currentTerm);
+    genusField.setOboClass(genus);
     // should this happen automatically from setOboClass or is that a burden/inefficiency
-    genusField.setOntologyChooserFromTerm(getGenusTerm(currentTerm));
+    genusField.setOntologyChooserFromTerm(genus);
     //if (modelHasDiff(currentTerm)) // should query if temp or real post comp??
     
     try {
-      List<RelDiffModel>diffs = getRelDiffs(currentTerm);
+      List<RelDiffModel>diffs = getRelDiffs(currentTerm); // CompEx if none
       
       for (int i=0; i<diffs.size(); i++) {
         // check that have enough guis for diffs
@@ -177,18 +170,9 @@ class PostCompGui {
         relDiffGuis.get(i).setRelDiffModel(diffs.get(i));
       }
     }
-    catch (CompEx e) { log().debug("get rel diffs failed "+e); }
+    //just got no diffs no need for msg log().debug("get rel diffs failed "+e); }
+    catch (CompEx e) {}
 
-
-//     for (RelDiffGui rd : relDiffGuis) {
-//       try { rd.relField.setRel(getRel(currentTerm)); } catch (Exception e){}
-//       try {
-//         rd.diffField.setOboClass(getDiffTerm(currentTerm));
-//         rd.diffField.setOntologyChooserFromTerm(getDiffTerm(currentTerm));
-//       } 
-//       catch (Exception e) {} // throws if no diff term
-//     }
-    
   }
 
   /** If model has changed (main window fiddling - hmmm) set gui */
@@ -220,28 +204,28 @@ class PostCompGui {
   }
 
   // util fn?
-  private boolean isPostCompTerm(OBOClass term) {
-    for (Object o : term.getParents()) {
-      if ( ((OBORestriction)o).completes() )
-        return true;
-    }
-    return false;
-  }
+//   private boolean isPostCompTerm(OBOClass term) {
+//     for (Object o : term.getParents()) {
+//       if ( ((OBORestriction)o).completes() )
+//         return true;
+//     }
+//     return false;
+//   }
 
   //private String getGenusStr(OBOClass term){return getGenusTerm(term).getName();}
 
   /** for non post comp returns term itself */
-  private OBOClass getGenusTerm(OBOClass term) {
-    if (isPostCompTerm(term)) {
-      for (Object o : term.getParents()) {
-        OBORestriction r = (OBORestriction)o;
-        if (r.completes() && r.getType().equals(OBOProperty.IS_A))
-          return (OBOClass)r.getParent(); // check downcast?
-      }
-      // error msg?
-    }
-    return term;
-  }
+//   private OBOClass getGenusTerm(OBOClass term) {
+//     if (isPostCompTerm(term)) {
+//       for (Object o : term.getParents()) {
+//         OBORestriction r = (OBORestriction)o;
+//         if (r.completes() && r.getType().equals(OBOProperty.IS_A))
+//           return (OBOClass)r.getParent(); // check downcast?
+//       }
+//       // error msg?
+//     }
+//     return term;
+//   }
 
   private class CompEx extends Exception {
     private CompEx() {}
@@ -249,14 +233,13 @@ class PostCompGui {
   }
 
   private List<RelDiffModel> getRelDiffs(OBOClass term) throws CompEx {
-    if (!isPostCompTerm(term)) throw new CompEx();
+    if (!OboUtil.isPostCompTerm(term)) throw new CompEx();
     List<RelDiffModel>diffs = new ArrayList<RelDiffModel>(4);
-    for (Object o : term.getParents()) {
-      OBORestriction r = (OBORestriction)o;
+    for (Link l : term.getParents()) {
+      OBORestriction r = (OBORestriction)l;
       if (isLinkToDiff(r)) {
         diffs.add(new RelDiffModel(r));
       }
-      //return r;
     }
     if (diffs.isEmpty()) throw new CompEx(); // none found
     return diffs;
@@ -266,32 +249,32 @@ class PostCompGui {
     return r.completes() && !r.getType().equals(OBOProperty.IS_A);
   }
 
-  /** Throws exception if no diff term - for now only returning one diff term
-      can there be more than one */
-  private OBOClass getDiffTerm(OBOClass term) throws CompEx {
-    OBORestriction link = getDiffLink(term); // throws Ex
-    return (OBOClass)link.getParent(); // check downcast?
-  }
+//   /** Throws exception if no diff term - for now only returning one diff term
+//       can there be more than one */
+//   private OBOClass getDiffTerm(OBOClass term) throws CompEx {
+//     OBORestriction link = getDiffLink(term); // throws Ex
+//     return (OBOClass)link.getParent(); // check downcast?
+//   }
 
-  /** If term is post comp return obo property relationship for differentia 
-      otherwise thorws exception */
-  private OBOProperty getRel(OBOClass term) throws CompEx {
-    return getDiffLink(term).getType(); // throws ex
-  }
+//   /** If term is post comp return obo property relationship for differentia 
+//       otherwise thorws exception */
+//   private OBOProperty getRel(OBOClass term) throws CompEx {
+//     return getDiffLink(term).getType(); // throws ex
+//   }
 
-  /** return the oboRestriction link between term and its differentia 
-      exception if there is none. 
-      This assumes that there is only one diff - no longer true! 
-      should make specific ex*/
-  private OBORestriction getDiffLink(OBOClass term) throws CompEx {
-    if (!isPostCompTerm(term)) throw new CompEx();
-    for (Object o : term.getParents()) {
-      OBORestriction r = (OBORestriction)o;
-      if (r.completes() && r.getType() != OBOProperty.IS_A)
-        return r;
-    }
-    throw new CompEx(); // none found
-  }
+//   /** return the oboRestriction link between term and its differentia 
+//       exception if there is none. 
+//       This assumes that there is only one diff - no longer true! 
+//       should make specific ex*/
+//   private OBORestriction getDiffLink(OBOClass term) throws CompEx {
+//     if (!OboUtil.isPostCompTerm(term)) throw new CompEx();
+//     for (Object o : term.getParents()) {
+//       OBORestriction r = (OBORestriction)o;
+//       if (r.completes() && r.getType() != OBOProperty.IS_A)
+//         return r;
+//     }
+//     throw new CompEx(); // none found
+//   }
 
   private void addButtons() {
     JPanel buttonPanel = new JPanel();

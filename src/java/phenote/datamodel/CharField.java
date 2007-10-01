@@ -83,6 +83,14 @@ public class CharField {
     return name;
   }
 
+  /** Tag is what comes from datatag in config, used for referencing field
+      (like from smart atlas servlet), and as dangling prefix for obo 
+      mapping, if datatag not set in config, returns name */
+  public String getTag() {
+    if (tag == null) return getName();
+    return tag;
+  }
+
   /** returns true if field has has tag or name of input tag */
   public boolean isField(String tag) {
     if (tag.equalsIgnoreCase(this.tag)) return true;

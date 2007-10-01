@@ -64,6 +64,8 @@ public class DelimitedFileAdapter extends AbstractFileAdapter {
         boolean isHeader = false;
         while (!isHeader) {
           String headerLine=lnr.readLine(); //reading header line
+          if (headerLine == null) // EndOfFile no header!
+            throw new DelimitedEx("No valid header found");
           try { 
             delChar.setHeader(headerLine);
             isHeader = true; // no ex thrown - success
@@ -73,8 +75,15 @@ public class DelimitedFileAdapter extends AbstractFileAdapter {
           }
         }
         //fields = headerToCharFields(headerLine);
-      } catch (IOException e) {
+      } catch (DelimitedEx x) {
+        LOG.error("Tab-delimited read failure "+x);
+        // failed to get header(?) - shouldnt go on i think
+        // return null??? throw ex?? return empty charList?
+        return charList;
+      }
+      catch (IOException e) {
         LOG.error("Tab-delimited read failure "+e);
+        return charList;
       }
       for (String line=lnr.readLine(); line != null; line = lnr.readLine()) {
         try {

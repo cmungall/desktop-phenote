@@ -45,10 +45,10 @@ public class DelimitedChar {
     return delimitedString;
   }
   String getDelimitedHeaderString() throws BadCharException {
-	if (delimitedHeaderString == null) {
+    if (delimitedHeaderString == null) {
       delimitedHeaderString = makeDelimitedHeaderString();
-	}
-	return delimitedHeaderString;
+    }
+    return delimitedHeaderString;
   }
   
 /** the idea for the tab-delimited output writer is to 
@@ -61,38 +61,42 @@ public class DelimitedChar {
  * hard return
  * should i include the config file on the first line?...maybe in the future
  * */
-  private String makeDelimitedHeaderString() throws BadCharException { 
-	if (character == null) { // shouldnt happen
- 	  System.out.println("Error: could not make tab-delimited header");
-	  return ""; //??
-	}
-	StringBuffer sb = new StringBuffer();
-	try {
+  private String makeDelimitedHeaderString() { //throws BadCharException { 
+    if (character == null) { // shouldnt happen
+      System.out.println("Error: could not make tab-delimited header");
+      return ""; //??
+    }
+    StringBuffer sb = new StringBuffer();
+    //try {
     // ontology manager should have char fields in order of config which should be
     // syntax order - hope this isnt too presumptious
-      for (CharField cf : OntologyManager.inst().getCharFieldList()) {
-    	  //if its a free text field - only one col necessary.
-    	  //if its an ontology field - need two cols (one for ID, the other for text)
- 	    sb.append(Config.inst().getLabelForCharField(cf));
- 	    //for now, i'll call on the syntax abbrev, but i'll want to use the acutal name
-        // if (!isFreeText(cf)) { // }		// now have third type isInt, so can't just negate 2007 07 09
-        if (isTerm(cf)) { 
-          sb.append(" ID").append(delimiter);
-          sb.append(Config.inst().getLabelForCharField(cf)).append(" Name");
+    for (CharField cf : OntologyManager.inst().getCharFieldList()) {
+      //if its a free text field - only one col necessary.
+      //if its an ontology field - need two cols (one for ID, the other for text)
+      // the label from config & char field should be the same, so dont need to get
+      // from config - was there some reason for this???
+      //String label = Config.inst().getLabelForCharField(cf);
+      String label = cf.getName();
+      sb.append(label);
+      //for now, i'll call on the syntax abbrev, but i'll want to use the acutal name
+      // if (!isFreeText(cf)) { // }		// now have third type isInt, so can't just negate 2007 07 09
+      if (isTerm(cf)) { 
+        sb.append(" ID").append(delimiter);
+        sb.append(label).append(" Name");
         }
-        sb.append(delimiter);
-      }
-	}
-    catch (ConfigException e) {
-      throw new BadCharException(e.getMessage());
+      sb.append(delimiter);
     }
+//     }
+//     catch (ConfigException e) {
+//       throw new BadCharException(e.getMessage());
+//     }
     return sb.toString();
-	  
+    
   }
   
   private String makeDelimitedString() throws BadCharException {
     if (character == null) { // shouldnt happen
-      System.out.println("Error: no Character to make delimited string with");
+      log().error("Error: no Character to make delimited string with");
       return ""; //??
     }
     StringBuffer sb = new StringBuffer();

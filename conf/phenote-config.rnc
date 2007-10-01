@@ -86,6 +86,11 @@ obo-repository = element obo-repository { attribute url-dir {xsd:string} }
 
 field = 
   element field {
+    ## what relation to use in mapping field to obo annotation
+    attribute obo-relation { xsd:string },
+    ## unclear if enable is needed, if false then field not used, but if user
+    ## changed mind could easily bring reenable field, also for merges can
+    ## just unenable fields getting wiped out - i like that 
     attribute enable { xsd:boolean },
     attribute name { xsd:string },
     attribute colwidth { xsd:int },
@@ -98,7 +103,8 @@ field =
     ## added term is assumed, otherewise free_text is the default
     ## ID requires a : and no whitespace 
     ## free_text is just for backward compatibility - phase out
-    attribute type { "FREE_TEXT" | "TERM" | "INT" | "ID" | "READ_ONLY" | "HIDDEN" | "free_text" },  
+    attribute type { "FREE_TEXT" | "TERM" | "INT" | "ID" | "READ_ONLY" | "DATE"
+                     | "HIDDEN" | "free_text" },  
     ## should this be another type? will there be anything readonly aside from strings?
     ##attribute read-only { xsd:boolean },
     ## file is for single ontology - rename ontology_file?

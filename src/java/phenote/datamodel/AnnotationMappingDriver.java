@@ -28,7 +28,10 @@ public interface AnnotationMappingDriver {
 	
 	public boolean isSubjectField(CharField cf);
 
-	public boolean isObjectField(CharField cf);
+  // replace with isObjectGenusField?
+  public boolean isObjectField(CharField cf);
+  public boolean isObjectGenusField(CharField cf);
+  public boolean isObjectDifferentiaField(CharField cf);
 	
 	public boolean getAuditHistoryMode();
 	
