@@ -1,5 +1,6 @@
 package phenote.datamodel;
 
+import java.text.DateFormat;
 import java.util.Date;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
@@ -97,6 +98,8 @@ public class CharFieldValue implements Cloneable {
   boolean isEmpty() {
     if (isOboClass)
       return oboClassValue == null;
+    else if (isDate())
+      return dateValue == null;
     else 
       return ((stringValue == null) || (stringValue.equals("")));
   }
@@ -108,6 +111,11 @@ public class CharFieldValue implements Cloneable {
   }
 
   public String getValueAsString() {
+    if (isEmpty()) return ""; // null?
+    if (isTerm())
+      return oboClassValue.getName();
+    if (isDate())
+      return DateFormat.getDateInstance().format(dateValue);
     if (!isTerm())
       return stringValue;
     if (oboClassValue != null) // obo class may not be set yet

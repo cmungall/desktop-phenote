@@ -94,35 +94,29 @@ public class DelimitedChar {
     
   }
   
+  // Character -> String, for writeback of course
   private String makeDelimitedString() throws BadCharException {
     if (character == null) { // shouldnt happen
       log().error("Error: no Character to make delimited string with");
       return ""; //??
     }
     StringBuffer sb = new StringBuffer();
-//*****************
-    try {
-
-        // ontology manager should have char fields in order of config which should be
-        // syntax order - hope this isnt too presumptious
-        for (CharField cf : OntologyManager.inst().getCharFieldList()) {
-          if (character.hasValue(cf)) {
-        	  Config.inst().getLabelForCharField(cf);
-        	  //           sb.append(Config.inst().getLabelForCharField(cf));
-            sb.append(makeValue(character.getValue(cf)));
-          }
-          else if (isTerm(cf)) sb.append(delimiter);  
-          //need to make sure to add extra delimiter for ontology fields
-        sb.append(delimiter);
-        }
-
+    //try {
+    // ontology manager should have char fields in order of config which should be
+    // syntax order - hope this isnt too presumptious
+    for (CharField cf : OntologyManager.inst().getCharFieldList()) {
+      if (character.hasValue(cf)) {
+        sb.append(makeValue(character.getValue(cf)));
       }
-      catch (ConfigException e) {
-        throw new BadCharException(e.getMessage());
-      }
+      // if empty term then do 2 delimiters since it takes up 2 spots
+      else if (isTerm(cf)) sb.append(delimiter); 
+      //need to make sure to add extra delimiter for ontology fields
+      sb.append(delimiter);
+    }
     
-
-     return sb.toString();
+//  }catch(ConfigException e){throw new BadCharException(e.getMessage());}
+    
+    return sb.toString();
   }
    
   /** If a char field has ontologies it is not free text */
@@ -142,7 +136,7 @@ public class DelimitedChar {
 
   private String makeValue(CharFieldValue v) {
     if (v.isTerm()) return makeTermValue(v.getOboClass());
-    return v.getName();
+    return v.getValueAsString();
   }
 
   private String makeTermValue(OBOClass term) {

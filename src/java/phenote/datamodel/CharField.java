@@ -41,6 +41,9 @@ public class CharField {
   /** used for relationship */
   public CharField(CharFieldEnum c) {
     charFieldEnum = c;
+    name = c.getName();
+    tag = c.getTag(); // name if not set
+    type = c.getType(); // may be null
   }
 
   /** a generic field with no char field enum - get hip

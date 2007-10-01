@@ -1,5 +1,8 @@
 package phenote.datamodel;
 
+// type is from xmlbean Field
+import phenote.config.xml.FieldDocument.Field.Type;
+
 // labels? methods? subclasses?
 // is this taking enums too far? or a good use of them?
 /** so this class has evolved - this was actually doing the setting of field values at one
@@ -18,16 +21,35 @@ public enum CharFieldEnum {
 
   PUB("Pub"), GENOTYPE("Genotype"), ALLELE("Allele"), GENETIC_CONTEXT("Genetic Context"),
   ENTITY("Entity"), QUALITY("Quality"),
+  DATE_CREATED("Date Created","date_created",Type.DATE),
   /** Its questionable if relationship belongs here ??? */
   RELATIONSHIP("Relationship");
   
   // CHAR FIELD ENUM vars & methods (make its own class!)
   private final String name;
-  private CharFieldEnum(String name) { this.name = name; }
+  private final String tag;
+  private final Type.Enum type;
+  private CharFieldEnum(String name) {
+    this(name,null,null);
+  }
+  private CharFieldEnum(String name,String tag,Type.Enum type) {
+    this.name = name;
+    this.tag = tag;
+    this.type = type;
+  }
   public String toString() { return getName(); }
   public String getName() { return name; }
-  public boolean equals(String s) { return name.equalsIgnoreCase(s); }
-  public boolean equals(CharField cf) { return name.equals(cf.getName()); }
+  public String getTag() { 
+    return tag!= null ? tag : name;
+  }
+  public Type.Enum getType() { return type; }
+  public boolean equals(String s) {
+    if (s == null) return false;
+    return name.equalsIgnoreCase(s) || s.equalsIgnoreCase(tag);
+  }
+  public boolean equals(CharField cf) {
+    return equals(cf.getName()) || equals(cf.getTag());
+  }
 
   // no longer used?
   //public abstract void setValue(CharacterI c, CharFieldValue v);

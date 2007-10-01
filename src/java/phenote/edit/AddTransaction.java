@@ -37,11 +37,11 @@ public class AddTransaction implements TransactionI {
 
   public void editModel() {
     getCharList().add(addChar);
-    // automatically put in date_created???
-    try {
-      CharField dateField = OntologyManager.inst().getCharFieldForName("date_created");
-      CharFieldValue v = new CharFieldValue(getDate(),addChar,dateField);
-    } catch (CharFieldException e) { System.out.println("no date_created field"); } //?
+    // automatically put in date_created???  //try {
+    CharField dateField = OntologyManager.inst().getDateCreatedField();
+    CharFieldValue v = new CharFieldValue(getDate(),addChar,dateField);
+    addChar.setValue(dateField,v);
+    //} catch (CharFieldException e) { System.out.println("no date_created field"); } //?
     isUndone = false;
     // index = getCharList().indexOf(addChar); ??
   }

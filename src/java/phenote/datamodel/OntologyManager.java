@@ -41,11 +41,11 @@ public class OntologyManager {
   private OntologyManager() {
     // always have user & date field by default
     // should be at end in case displayed??
-    CharField dateCreated =
-      new CharField("Date Created","date_created",Type.DATE);
-    addField(dateCreated);
+//     CharField dateCreated =
+//       new CharField("Date Created","date_created",Type.DATE);
+//     addField(dateCreated);
   }
-  
+
   public static OntologyManager inst() {
     if (singleton == null)
       singleton = new OntologyManager();
@@ -86,12 +86,30 @@ public class OntologyManager {
   }
 
   public CharField getCharFieldForName(String fieldName) throws CharFieldException {
+    if (fieldName == null) throw new CharFieldException("Char field string is null");
     for (CharField cf : getCharFieldList()) {
       //if (cf.getName().equalsIgnoreCase(fieldName))
       if (cf.isField(fieldName)) // checks name and datatag
         return cf;
     }
     throw new CharFieldException("No field for "+fieldName);
+  }
+
+  // ?
+  private CharField getCharFieldForEnum(CharFieldEnum en) throws CharFieldException {
+    try { return getCharFieldForName(en.getName()); }
+    catch (CharFieldException e) { return getCharFieldForName(en.getTag()); }
+  }
+
+  /** If date_created doesnt exist then create it - its a fundamental */
+  public CharField getDateCreatedField() {
+    try { return getCharFieldForEnum(CharFieldEnum.DATE_CREATED); }
+    catch (CharFieldException e) {
+      // if !config.doCreateDate throw CFex??
+      CharField dateCreated = new CharField(CharFieldEnum.DATE_CREATED);
+      addField(dateCreated);
+      return dateCreated;
+    }
   }
 
 
