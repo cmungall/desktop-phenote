@@ -104,8 +104,8 @@ public class TableColumnPrefsSaver implements PropertyChangeListener, TableColum
       for (TableColumn column : this.getColumns()) {
         final int newIndex = this.getOrderPrefs().getInt(this.getColumnName(column), 0);
         final int currentIndex = this.getIndexOfColumn(column);
-        final int maxIndex = this.table.getColumnCount() - 1;
-        if ((newIndex < maxIndex) && (currentIndex < maxIndex)) {
+        final int columnCount = this.table.getColumnCount();
+        if ((newIndex < columnCount) && (currentIndex < columnCount)) {
           this.table.getColumnModel().moveColumn(currentIndex, newIndex); 
         }
       }
