@@ -1,5 +1,6 @@
 package phenote.datamodel;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -134,6 +135,8 @@ public class CharField {
     return type == Type.TERM;
   }
 
+  public boolean isDate() { return type == Type.DATE; }
+
   public boolean isID() { return type == Type.ID; }
 
   public boolean isReadOnly() { 
@@ -194,26 +197,21 @@ public class CharField {
   public Ontology getPostCompRelOntol() { return postCompRelOntol; }
 
   /** if free text returns string charfieldValue, for ontology field valueString is
-      id and searches ontologies for id, throws ontologyException if not found 
-      this needs to deal with post comp!!!! */
+      id and searches ontologies for id, throws CharFieldException if invalid date for
+      date field (used to for term not found but now creates dangler instead)
+      this deals with postcomp too */
   public CharFieldValue makeValue(CharacterI c, String valueString)
-    throws TermNotFoundException {
+    throws CharFieldException {
 
-    // FREE TEXT FIELD
-    if (!hasOntologies()) // -> !isTerm() or isFreeText()
-      return new CharFieldValue(valueString,c,this);
+    // empty value
+    if (valueString == null || valueString.trim().equals(""))
+      return CharFieldValue.emptyValue(c,this);
 
     // TERM
-    else {
-
-      // null term
-      if (valueString.trim().equals(""))
-        return CharFieldValue.emptyValue(c,this);
-
+    if (isTerm()) {
       OBOClass oboClass=null;
 
-      // CHECK FOR POST COMP - could probably move this to char field but right now just
-      // trying to get this working before i split town...
+      // POST COMP - move this to char field value?
       if (OntologyManager.inst().isPostComp(valueString)) {
         try {
           // just gets first ontology for now - fix this!
@@ -221,10 +219,9 @@ public class CharField {
           oboClass = OntologyManager.inst().getPostComp(os,valueString);
         }
         catch (TermNotFoundException e) {}
-        
       }
       
-      // TERM not post comp
+      // TERM regular, not post comp
       else {
         for (Ontology ont : ontologyList) {
           try { oboClass = ont.getTerm(valueString); }
@@ -232,7 +229,7 @@ public class CharField {
         }
       }
       
-      // if cant find it make a dangler!
+      // DANGLER if cant find it make a dangler!
       if (oboClass == null && danglerMode()) {
         oboClass =  new DanglingClassImpl(valueString);
         String e = valueString+" not found in loaded obo files. Creating a 'dangler'";
@@ -241,10 +238,29 @@ public class CharField {
 
       if (oboClass != null)
         return new CharFieldValue(oboClass,c,this);
-      else
-        throw new TermNotFoundException(valueString+" not found in ontologies for "
-                                        +this);
+      // if danglers are permanent this should be tossed as makes irrelevant
+      else {
+        TermNotFoundException e =
+          new TermNotFoundException(valueString+" not found in ontologies for "+this);
+        throw new CharFieldException(e);
+      }
     }
+
+    // DATE
+    else if (isDate()) {
+      try { return CharFieldValue.makeDate(valueString,c,this); }
+      catch (ParseException e) {
+        throw new CharFieldException(e);
+      }
+      
+    }
+
+    // FREE TEXT FIELD
+    //if (!hasOntologies()) // -> !isTerm() or isFreeText()
+    else
+      return new CharFieldValue(valueString,c,this);
+
+
   }
 
   // i think we eventually will want this always to be so

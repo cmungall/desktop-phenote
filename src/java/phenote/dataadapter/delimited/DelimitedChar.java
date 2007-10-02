@@ -14,7 +14,7 @@ import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterIFactory;
 import phenote.datamodel.OntologyManager;
-import phenote.datamodel.TermNotFoundException;
+import phenote.datamodel.CharFieldException;
 
 /** I stole this from phenosyntaxchar, but modifying for tab delimited.  will
  *  initially hard code in the tab-delimiter, but eventually it should be generic to 
@@ -200,7 +200,7 @@ public class DelimitedChar {
   }
 
 
-  /** if term then value is ID and termName is name of term, if free text then
+  /** READ, if term then value is ID and termName is name of term, if free text then
       value is free text and termName is null */
   private void addDelValToChar(int fieldNum, String value, String termName) {
 //  it doesn't really matter if there's a blank column in this mode
@@ -223,15 +223,15 @@ public class DelimitedChar {
       // set String -> for obo class automatically find term
       // if term not found makes a dangler
       //this assumes that you are loading data the same order you saved it
-      CharFieldValue v = character.setValue(cf,value); // throws TermNotFoundEx
+      CharFieldValue v = character.setValue(cf,value); // throws CFEx for bad date
       if (v.isDangler())
         v.setName(termName); // ???
       return; // if no ex thrown were done
     }
-    // no longer thrown really - dangler created instead!
-    catch (TermNotFoundException e) {
-      System.out.println("Error1: term not found ("+value+") "+e.getMessage());
-      log().error("Error2: Term not found ("+value+") "+e.getMessage());
+    // thrown for bad date, not for not found - dangler created instead!
+    catch (CharFieldException e) {
+      System.out.println(e.getMessage()); // ?
+      log().error(e.getMessage());
     } 
   }
 

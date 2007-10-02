@@ -27,7 +27,7 @@ public interface CharacterI {
       if cf is a term will look for OBOClass with ID in valueString, if ID not 
       found will create dangler which actually makes TermNotFoundEx irrelevant
       take out? or do we want a non-dangler mode?? */
-  public CharFieldValue setValue(CharField cf, String valueString) throws TermNotFoundException;
+  public CharFieldValue setValue(CharField cf, String valueString) throws CharFieldException;
   public CharField getCharFieldForName(String fieldName) throws CharFieldException;
   public CharFieldValue getValue(CharField cf);
   public String getValueString(CharField cf);

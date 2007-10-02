@@ -13,7 +13,7 @@ import phenote.datamodel.CharacterIFactory;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.OntologyManager;
-import phenote.datamodel.TermNotFoundException;
+import phenote.datamodel.CharFieldException;
 import phenote.config.Config;
 import phenote.config.ConfigException;
 
@@ -179,7 +179,7 @@ public class PhenoSyntaxChar {
           character.setValue(cf,value); // throws TermNotFoundEx
           return; // if no ex thrown were done
         }
-        catch (TermNotFoundException e) {} // do nothing - try next char field
+        catch (CharFieldException e) {} // do nothing - try next char field
       }
     }
     catch (ConfigException e) { log().error(e.getMessage()); } // field not found
@@ -213,36 +213,3 @@ public class PhenoSyntaxChar {
     return log;
   }
 }
-//     try {
-//       if (tag.equals("PUB")) 
-//         character.setPub(value);
-//       else if (tag.equals("GT"))
-//         character.setGenotype(value);
-//       else if (tag.equals("GC"))
-//         character.setGeneticContext(om.getOboClassWithExcep(value)); // throws ex
-//       else if (tag.equals("E"))
-//         character.setEntity(om.getTermOrPostComp(value));
-//       else if (tag.equals("Q"))
-//         character.setQuality(om.getOboClassWithExcep(value));
-//       else // throw exception? or let rest of char go through?
-//         System.out.println("pheno syntax tag "+tag+" not recognized (value "+value+")");
-//     }
-//     catch (OntologyManager.TermNotFoundException e) {
-//       log().error("Term not found for tag "+tag+" value "+value+" in loaded "
-//                   +"ontologies - check syntax with ontology files.");
-//       return;
-//     }
-//       if (character.hasValue("Pub")) // hasPub
-//         sb.append("PUB=").append(character.getValueString("Pub")); //Pub());
-//       // Genotype - not strictly part of pheno syntax but lets face it we need it
-//       // i would say its an omission from syntax
-//       //sb.append(" GT=").append(character.getGenotype());
-//       if (character.hasValue("Genotype"))
-//         sb.append(" GT=").append(character.getValueString("Genotype"));
-//       if (character.hasValue("Genetic Context"))
-//         sb.append(" GC=").append(makeValue(character.getTerm("Genetic Context")));
-      
-//       if (!character.hasValue("Entity"))
-//         throw new BadCharException("Error: character has no entity, ignoring");
-//       //sb.append(" E=").append(makeValue(character.getEntity()));
-//       sb.append(" E=").append(makeValue(character.getTerm("Entity")));

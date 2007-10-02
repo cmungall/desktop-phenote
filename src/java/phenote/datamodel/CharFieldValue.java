@@ -1,6 +1,7 @@
 package phenote.datamodel;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.Date;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
@@ -21,7 +22,7 @@ public class CharFieldValue implements Cloneable {
   private OBOClass oboClassValue=null;
   private String stringValue=null;
   private Date dateValue=null;
-  private boolean isOboClass=true;
+  //private boolean isOboClass=true;
   private CharFieldEnum charFieldEnum;
   private CharField charField;
   // private CharField???
@@ -31,36 +32,30 @@ public class CharFieldValue implements Cloneable {
   // phase out
   public CharFieldValue(String s,CharacterI c, CharFieldEnum e) {
     stringValue = s;
-    isOboClass = false;
     character = c;
     charFieldEnum = e;
   }
 
-  // for generic field - CharField or String???
+  // for string field 
   public CharFieldValue(String value,CharacterI c,CharField cf) {
-    //System.out.println("CFV const "+value);
     this(c,cf);
     stringValue = value;
-    isOboClass = false;
   }
 
   // phase out
   public CharFieldValue(OBOClass o,CharacterI c,CharFieldEnum e) {
     oboClassValue = o;
-    isOboClass = true;
     character = c;
     charFieldEnum = e;
   }
   public CharFieldValue(OBOClass o,CharacterI c,CharField cf) {
     this(c,cf);
     oboClassValue = o;
-    isOboClass = true;
   }
 
   public CharFieldValue(Date d, CharacterI c, CharField cf) {
     this(c,cf);
     dateValue = d;
-    isOboClass = false;
   }
 
   private CharFieldValue(CharacterI c,CharField cf) {
@@ -68,10 +63,17 @@ public class CharFieldValue implements Cloneable {
     charField = cf;
   }
 
+  /** dateString is a date, if not valid date throws ParseEx */
+  static CharFieldValue makeDate(String dateString, CharacterI c, CharField cf) 
+    throws ParseException {
+    CharFieldValue cfv = new CharFieldValue(c,cf);
+    cfv.dateValue = DateFormat.getDateInstance().parse(dateString);
+    return cfv;
+  }
+
   CharFieldValue cloneCharFieldValue() {
     if (!charField.getCopyEnabled()) {
       CharFieldValue nullCloneValue = new CharFieldValue(character, charField);
-      nullCloneValue.isOboClass = isOboClass;
       return nullCloneValue;
     }
 //      return null; // null?? new CharFieldValue(character
@@ -86,17 +88,20 @@ public class CharFieldValue implements Cloneable {
 //   }
 
   static CharFieldValue emptyValue(CharacterI c,CharField cf) {
-    if (cf.hasOntologies())
-      return new CharFieldValue((OBOClass)null,c,cf);
-    else
-      return new CharFieldValue((String)null,c,cf); // ""?
+    // everything is null, type from char field
+    return new CharFieldValue(c,cf);
+//     if (cf.isTerm())
+//       return new CharFieldValue((OBOClass)null,c,cf);
+//     else if (cf.isDate())
+//     else
+//       return new CharFieldValue((String)null,c,cf); // ""?
   }
 
   void setCharacter(CharacterI c) { character = c; }
   public CharacterI getCharacter() { return character; }
 
   boolean isEmpty() {
-    if (isOboClass)
+    if (isTerm())
       return oboClassValue == null;
     else if (isDate())
       return dateValue == null;
@@ -130,9 +135,9 @@ public class CharFieldValue implements Cloneable {
       stringValue = name;
   }
 
-  public boolean isTerm() { return isOboClass; }
+  public boolean isTerm() { return getCharField().isTerm(); }
 
-  public boolean isDate() { return dateValue != null; }
+  public boolean isDate() { return getCharField().isDate(); }
   public Date getDate() { return dateValue; }
 
   public OBOClass getOboClass() { return getTerm(); } // --> getTerm more general

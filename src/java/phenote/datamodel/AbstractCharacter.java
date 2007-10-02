@@ -2,6 +2,8 @@ package phenote.datamodel;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import org.geneontology.oboedit.datamodel.OBOClass;
 
 public abstract class AbstractCharacter implements CharacterI {
@@ -15,9 +17,10 @@ public abstract class AbstractCharacter implements CharacterI {
 
   /** if term field, string should be id, obo class will be searched for, if class
       not found then dangler is created. if free text field just uses string of
-      course. the dangler makes termNotFoundEx irrelevant - take out? or will there
-      be a no dangler mode? probably not right? */
-  public CharFieldValue setValue(CharField cf, String s) throws TermNotFoundException {
+      course. the dangler makes termNotFound Ex irrelevant - take out? or will there
+      be a no dangler mode? probably not right?
+      CharFieldEx thrown if improper date for date field */
+  public CharFieldValue setValue(CharField cf, String s) throws CharFieldException {
     CharFieldValue cfv = cf.makeValue(this, s);
     setValue(cf, cfv);
     return cfv;
@@ -171,14 +174,16 @@ public abstract class AbstractCharacter implements CharacterI {
 	}
 
 
-	public void setGenotype(String gt) {
-		try {
-			setValue(getGenotypeField(), gt);
-		} catch (CharFieldException x) {
-			throw new RuntimeException(x);
-		} catch (TermNotFoundException e) {
-		} // doesnt happen for free text field
-	}
+  // still used by phenoxml - phase out
+  public void setGenotype(String gt) {
+    try {
+      setValue(getGenotypeField(), gt);
+    } catch (CharFieldException x) {
+      //throw new RuntimeException(x); // runtime??
+      log().error("Failed to set genotype "+x);
+    } 
+  }
+
   public String getGenotype() {
     try {
       return getValueString(getGenotypeField());
@@ -224,4 +229,9 @@ public abstract class AbstractCharacter implements CharacterI {
 		}
 	}
 
+  private Logger log;
+  private Logger log() {
+    if (log == null) log = Logger.getLogger(getClass());
+    return log;
+  }
 }

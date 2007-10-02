@@ -73,10 +73,10 @@ class DelimFieldParser {
       if (cfv.isDangler()) // throw error if not term?
         cfv.setName(items[columnIndex+1]);
     }
-    // no longer thrown really - dangler created instead!
-    catch (TermNotFoundException e) {
-      LOG.error("Error: Term not found ("+value+") "+e.getMessage()+
-                  " (and no dangler created)");
+    // no longer thrown for term not found - dangler created instead!
+    // this is thrown for faulty dates
+    catch (CharFieldException e) {
+      LOG.error(e.getMessage());
     } 
   }
 }
