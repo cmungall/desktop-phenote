@@ -24,8 +24,8 @@ import java.beans.PropertyChangeListener;
 
 import org.jdesktop.layout.GroupLayout;
 import org.jdesktop.layout.LayoutStyle;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
-import com.swtdesigner.SwingResourceManager;
+//import com.jgoodies.forms.factories.DefaultComponentFactory;
+//import com.swtdesigner.SwingResourceManager;
 
 import phenote.error.ErrorEvent;
 import phenote.error.ErrorListener;
