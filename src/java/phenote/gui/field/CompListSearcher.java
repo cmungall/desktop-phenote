@@ -10,6 +10,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 import org.geneontology.util.AbstractTaskDelegate;
+import org.geneontology.swing.BackgroundUtil;
 import org.geneontology.util.TaskDelegate;
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.OBOProperty;
@@ -31,7 +32,7 @@ public class CompListSearcher {
   //private boolean searchAll=false;
   private List<Ontology> ontologyList = new ArrayList<Ontology>(3);
   private SearchParamsI searchParams = SearchParams.inst(); // singleton
-  private String previousInput = "";
+  private String previousInput = null;
   private List<CompletionTerm> previousCompList = new ArrayList<CompletionTerm>();
 
   /** Ontology - the initial ontology to search, setOntology changes this,
@@ -77,22 +78,27 @@ public class CompListSearcher {
 
   private CompTaskDelegate compTaskDelegate = null;
 
-  /** Returns a List of CompletionTerms from ontology that contain input string
-      constrained by compParams. compParams specifies syns,terms,defs,& obs 
+  /** Makes a List of CompletionTerms from ontology that contain input string
+      constrained by compParams. Gives this list to SearchListener, does search
+      in background thread if thread is true.  compParams specifies syns,terms,defs,& obs 
       should input be just part of search params? called by servlet & standalone now */
-  public /*List<CompletionTerm>*/ void getStringMatchTermList(String input,
-                                                     SearchListener lis) {
+  public void getStringMatchTermList(String input,SearchListener lis,boolean threaded) {
 
     //new org.jdesktop.swingworker.SwingWorker();
     // kill old task!
     if (compTaskDelegate!=null) compTaskDelegate.cancel();
-    compTaskDelegate = new CompTaskDelegate(input,lis);
-    org.geneontology.swing.BackgroundUtil.scheduleTask(compTaskDelegate);
-    
+    // THREADED
+    if (threaded) {
+      compTaskDelegate = new CompTaskDelegate(input,lis);
+      BackgroundUtil.scheduleTask(compTaskDelegate);
+    }
+    // NON THREADED - null task, results sent to listener synchronously
+    else {
+      getSearchTermList(input,lis,null);
+    }
   }
 
-  private class CompTaskDelegate
-    extends AbstractTaskDelegate<List<CompletionTerm>> {
+  private class CompTaskDelegate extends AbstractTaskDelegate<List<CompletionTerm>> {
 
     private String input;
     private SearchListener searchListener;
@@ -104,57 +110,9 @@ public class CompListSearcher {
 
     public void execute() {
       try {
-      List<CompletionTerm> searchTerms = new ArrayList<CompletionTerm>();
-      
-      // if no input should phenote give no terms? or all terms?
-      boolean nothingForNothing = false; // get from FieldConfig!!
-      if (nothingForNothing && isBlank(input)) {
-        results = searchTerms; // empty
-        searchListener.newResults(results);
-        return;
-      }
-      
-      // optimization - if user has only typed one more letter (common case)
-      // use previous search list
-      try {
-        if (input.startsWith(previousInput) 
-            && input.length() == previousInput.length() + 1) {
-          searchTerms = searchPreviousList(input,previousCompList,this);
-        }
-        
-        else {
-          // gets term set for currently selected ontology(s)
-          //Set ontologyTermList = getCurrentOntologyTermSet();
-          // THIS IS WRONG! or is it?
-          for (Ontology ontology : ontologyList) {
-            Collection<OBOClass> ontologyTermList = ontology.getSortedTerms(); // non obsolete
-            List<CompletionTerm> l =
-              getSearchTermList(input,ontologyTermList,this);
-            searchTerms.addAll(l);
-            
-            // if obsoletes set then add them in addition to regulars
-            if (searchParams.searchObsoletes()) {
-              ontologyTermList = ontology.getSortedObsoleteTerms();
-              List<CompletionTerm> obsoletes =
-                getSearchTermList(input,ontologyTermList,this);
-              searchTerms.addAll(obsoletes);
-            }
-          } 
-        
-        }
-      
-      } 
-      catch (CancelEx x) { return; } // task has been cancelled
-
-      previousInput = input;
-      previousCompList = searchTerms;
-      //return searchTerms;
-      //setResults(searchTerms);
-      results = searchTerms;
-      if (!isCancelled())
-        searchListener.newResults(results); // send off results
-
-      } catch (RuntimeException x) {
+        getSearchTermList(input,searchListener,this);
+      } // TaskDelegates dont yet deal with runtime exceptions
+      catch (RuntimeException x) {
         log().error("got runtime exception in completion "+x);
       }
     
@@ -162,6 +120,68 @@ public class CompListSearcher {
 
   } // end CompTask inner class
 
+  /** task is null for non threaded case. if threaded/nonnull checks to see if task
+      is cancelled - when done passes results to SearchListener */
+  private void getSearchTermList(String input, SearchListener searchListener,
+                                 TaskDelegate task) {
+    List<CompletionTerm> searchTerms = new ArrayList<CompletionTerm>();
+    
+    // if no input should phenote give no terms? or all terms?
+    boolean nothingForNothing = false; // get from FieldConfig!!
+    if (nothingForNothing && isBlank(input)) {
+      //results = searchTerms; // empty
+      searchListener.newResults(searchTerms);
+      return;
+    }
+    
+    // optimization - if user has only typed one more letter (common case)
+    // use previous search list - i think this even works with threaded
+    try {
+      if (previousInput != null && input.startsWith(previousInput) 
+          && input.length() == previousInput.length() + 1) {
+        searchTerms = searchPreviousList(input,previousCompList,task);
+      }
+      
+      else {
+        // gets term set for currently selected ontology(s)
+        //Set ontologyTermList = getCurrentOntologyTermSet();
+        // THIS IS WRONG! or is it?
+        for (Ontology ontology : ontologyList) {
+          Collection<OBOClass> ontologyTermList = ontology.getSortedTerms(); // non obsolete
+          List<CompletionTerm> l =
+            getOntSearchTermList(input,ontologyTermList,task);
+          searchTerms.addAll(l);
+          
+          // if obsoletes set then add them in addition to regulars
+          if (searchParams.searchObsoletes()) {
+            ontologyTermList = ontology.getSortedObsoleteTerms();
+            List<CompletionTerm> obsoletes =
+              getOntSearchTermList(input,ontologyTermList,task);
+            searchTerms.addAll(obsoletes);
+          }
+        } 
+        
+      }
+      
+    } 
+    catch (CancelEx x) { return; } // task has been cancelled
+    
+    previousInput = input;
+    previousCompList = searchTerms;
+    //return searchTerms;
+    //setResults(searchTerms);
+    //results = searchTerms; // does task need results?
+    if (!isCancelled(task))
+      searchListener.newResults(searchTerms); // send off results
+
+  }
+
+  /** for non threaded context task will be null and returns false, otherwise
+      queries task */
+  private boolean isCancelled(TaskDelegate task) {
+    if (task == null) return false;
+    return task.isCancelled();
+  }
 
   private boolean isBlank(String s) {
     return s == null || s.equals("");
@@ -170,8 +190,10 @@ public class CompListSearcher {
 
   private class CancelEx extends Exception {}
 
-  /** helper fn for CompTaskDelegate */
-  private List<CompletionTerm> getSearchTermList(String input,
+  
+
+  /** helper fn for CompTaskDelegate, does search for terms from a single ontology */
+  private List<CompletionTerm> getOntSearchTermList(String input,
                                                  Collection<OBOClass> ontologyTermList,
                                                  TaskDelegate task) throws CancelEx {
     SearchTermList searchTermList = new SearchTermList();
@@ -182,7 +204,7 @@ public class CompListSearcher {
     for (OBOClass oboClass : ontologyTermList) {
     //for (int i=0; i<ontologyTermList.size(); i++) {
 
-      if (i++ % 50 == 0 && task.isCancelled()) throw new CancelEx(); 
+      if (i++ % 50 == 0 && isCancelled(task)) throw new CancelEx(); 
       CompletionTerm ct = new CompletionTerm(oboClass);
       // if input is blank then add all terms (list all terms on empty input)
       // matches records the kind of hit in CompTerm
@@ -203,7 +225,7 @@ public class CompListSearcher {
     SearchTermList newList = new SearchTermList();
     //for (CompletionTerm ct : prevList) {
     for (int i=0; i<prevList.size(); i++) {
-      if (i % 50 == 0 && task.isCancelled()) throw new CancelEx();
+      if (i % 50 == 0 && isCancelled(task)) throw new CancelEx();
       CompletionTerm ct = prevList.get(i);
       ct.resetMatchState(); // reusing ct has stale match state from previous search
       if (ct.matches(input,searchParams))

@@ -72,8 +72,11 @@ public class PhenoteController extends AbstractCommandController {
     //List<CompletionTerm> termList = null;
     SearchListener searchListener = new ContSearchListener(ontologyName,field,form);
     try {
-      //termList = its now threaded - term list returned to SearchListener
-      getCompListSearcher(ontologyName).getStringMatchTermList(userInput,searchListener);
+      //termList = its now optionally threaded - term list returned to SearchListener
+      // Christian - set this boolean to false to turn off threading
+      boolean thread = true;
+      getCompListSearcher(ontologyName).getStringMatchTermList(userInput,searchListener,
+                                                               thread);
     } catch (OntologyException e) {
       // Todo: Add this error as an error completion list
       LOG.error(e.getMessage(), e);

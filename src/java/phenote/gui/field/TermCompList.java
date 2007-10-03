@@ -116,8 +116,8 @@ class TermCompList extends AbstractAutoCompList {
   }
 
   /** now threaded so cant return - set AbAutoCompList when done */
-  protected void getSearchItems(String input,SearchListener l) {
-    /*return*/ getCompListSearcher().getStringMatchTermList(input,l);
+  protected void getSearchItems(String input,SearchListener l,boolean thread) {
+    /*return*/ getCompListSearcher().getStringMatchTermList(input,l,thread);
   }
 
   /**
@@ -156,7 +156,7 @@ class TermCompList extends AbstractAutoCompList {
     else
       this.setForegroundColor(this.getEnabledTextColor());
     String val = term == null ? "" : term.getName();
-    setText(val, false); // no completion
+    setText(val); // no completion with setText fyi
   }
 
   /**

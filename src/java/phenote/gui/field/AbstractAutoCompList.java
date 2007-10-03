@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.accessibility.Accessible;
 import javax.accessibility.AccessibleContext;
+import javax.swing.AbstractButton;
 import javax.swing.ComboBoxModel;
 import javax.swing.InputMap;
 import javax.swing.JComboBox;
@@ -21,6 +22,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListDataListener;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 import javax.swing.plaf.basic.BasicComboBoxEditor;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import javax.swing.plaf.basic.ComboPopup;
@@ -39,7 +42,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
 
   private JComboBox jComboBox;
   private boolean changingCompletionList = false;
-  private boolean doCompletion = true;
+  private boolean settingTextExternally = false;
   private CompComboBoxModel compComboBoxModel;
   private boolean inTestMode = false;
   private AutoTextField autoTextField;
@@ -66,10 +69,14 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     this.getJComboBox().addActionListener(new ComboBoxActionListener());
     compListSearcher = new CompListSearcher(getCharField().getOntologyList());
     // init with all terms if config.showAllOnEmptyInput...
-    if (getMinCompChars() == 0) {
-      boolean showPopupWithComp = false; // dont show popup -
-      doCompletion(showPopupWithComp);  //we dont have a gui yet, just populating
-    }
+    // this can take a while (post comp gui) do on demand with popup menu listener
+//     if (getMinCompChars() == 0) {
+//       boolean showPopupWithComp = false; // dont show popup -
+//       doCompletion(showPopupWithComp);  //we dont have a gui yet, just populating
+//     }
+    getJComboBox().addPopupMenuListener(new CompPopupMenuListener());
+    //if (hasArrowButton())
+    //getArrowButton().addActionListener(new ArrowButtonActionListener());
   }
 
   public void setMinCompChars(int minChars) { minCompChars = minChars; }
@@ -114,15 +121,15 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   /** Set text in editable text field of j combo (eg from table select) */
   public void setText(String text) {
     // do not do term completion on externally set text!
-    boolean doCompletion = false;
-    setText(text,doCompletion);
+    boolean settingTextExternally = true;
+    setText(text,settingTextExternally);
   }
 
   /** text from selecting table doesnt do completion, TestPhenote does */
-  public void setText(String text, boolean doCompletion) {
-    this.doCompletion = doCompletion;
+  public void setText(String text, boolean settingTextExternally) {
+    this.settingTextExternally = settingTextExternally;
     jComboBox.getEditor().setItem(text);
-    this.doCompletion = true; // set back to default
+    this.settingTextExternally = false; // set back to default
   }
 
   /** Return text in text field */
@@ -207,7 +214,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
       // but this is needed from mouse release on selection set text
       // is called and will cause completion list to come up after sel
       // w/o it
-      doCompletion = false;
+      settingTextExternally = true;
       //this is problematic for syns & such where string is diff than term name
       // JComboBox sets this text AFTER got event and set to name
       //super.setText(text); 
@@ -219,7 +226,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
       }
       else
         super.setText(getCurrentTermRelName()); // set to term name with syn select
-      doCompletion = true;
+      settingTextExternally = false;
     }
 
     protected void processKeyEvent(KeyEvent e) {
@@ -251,8 +258,13 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   }
 
   private void doCompletion(boolean showPopup) {
+    doCompletion(showPopup,true); // thread
+  }
+
+  /** This completion is threaded */
+  private void doCompletion(boolean showPopup, boolean thread) {
     this.setHasChangedMultipleValues(true);
-    if (!doCompletion) // flag set if text filled in externally (from table sel)
+    if (settingTextExternally) // flag set if text filled in externally (from table sel)
       return;
     // too soon - text field doesnt have text yet.... hmmmm....
     String input = getText();
@@ -262,7 +274,9 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     // if input is empty will return whole list (if configged)
     //log().debug("got new completion request for input "+input+" time "+time());
     listSearchListener.showPopup = showPopup;
-    /*List<CompletionTerm> l =*/ getSearchItems(input,listSearchListener);
+    // fires thread
+    /*List<CompletionTerm> l =*/ 
+    getSearchItems(input,listSearchListener,thread);
     //log().debug("got search items for input "+input+" milsec: "+time());
 //    changingCompletionList = true;
 //     // could just do comboBoxModel.setList(l); ???
@@ -287,8 +301,11 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
       compComboBoxModel = new CompComboBoxModel(results);
       jComboBox.setModel(compComboBoxModel);
       changingCompletionList = false;
-      if (showPopup) //only show popup on key events actually only do com      
+      if (showPopup) { //only show popup on key events actually only do com
+        doingPopupForCompletion = true; // otherwise doComp endless loop
         jComboBox.showPopup();
+        doingPopupForCompletion = false;
+      }
       //jComboBox.revalidate();
       //jComboBox.repaint();
       //getUIJList().repaint();
@@ -328,7 +345,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   }
 
   // no longer returns List<CompletionTerm>, a thread sends list to listener
-  protected abstract void getSearchItems(String input,SearchListener l);
+  protected abstract void getSearchItems(String input,SearchListener l,boolean thread);
 //     if (isRelationshipList()) return termSearcher.getStringMatchRelations(input);
 //     else return termSearcher.getStringMatchTerms(input);}
 
@@ -365,6 +382,30 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     return null; // ex?
   }
 
+  /** This is the button pressed to see the list
+      so in theory youre not supposed to delve into the innards of the jcombo
+      but in practice ya need to, need to know when that button is pressed when the
+      user hasnt entered anything, and AbstractButton is not plaf specific (hopefully) */
+  private AbstractButton getArrowButton() {
+    for (Component c : getJComboBox().getComponents()) {
+      if (c instanceof AbstractButton) return (AbstractButton)c; 
+    }
+    return null; // ex?
+  }
+
+  private boolean hasArrowButton() { return getArrowButton() != null; }
+
+  private class ArrowButtonActionListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      log().debug("arrow has been pressed jcombo vis? "+getJComboBox().isPopupVisible());
+      if (!getJComboBox().isPopupVisible()) return;
+      getJComboBox().hidePopup(); // ???
+      if (getText() == null || getText().length() == 0) {
+        doCompletion(true); // --> doNonThreadedCompletion
+      }      
+    }
+  }
+  
 
   // for TestPhenote
   public void doMouseOver(int itemNumber) {
@@ -484,6 +525,27 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
       final Dimension dimension = super.getPreferredSize();
       dimension.width = 1;
       return dimension;
+    }
+  }
+
+  private boolean doingPopupForCompletion = false;
+
+  /** If user hits arrow on completion field with nothing typed in, all terms
+      should then be listed */
+  private class CompPopupMenuListener implements PopupMenuListener {
+    public void popupMenuCanceled(PopupMenuEvent e) {}
+    public void	popupMenuWillBecomeInvisible(PopupMenuEvent e) {}
+    public void	popupMenuWillBecomeVisible(PopupMenuEvent e) {
+      //log().debug("popup will become visible "+getText()+" disable? "+doingPopupForCompletion+" popup vis? "+getJComboBox().isPopupVisible());
+      if (doingPopupForCompletion) return;
+      if (getText() != null && getText().length() > 0) 
+        return;
+      // popup already coming dont do another
+      boolean showPopup = false;
+      // dont do threaded as need to wait for results before continuing with popup
+      // if threaded and popup then its blinky (2 popups, 1st one is blank)
+      boolean doThreaded = false;
+      doCompletion(showPopup,doThreaded);
     }
   }
   

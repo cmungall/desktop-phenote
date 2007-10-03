@@ -41,7 +41,7 @@ class RelationCompList extends AbstractAutoCompList {
       return; // debug stack trace?
     }
     currentRel = rel;
-    setText(rel.getName(),false); // eventually .getName()
+    setText(rel.getName());
   }
   /** Throws exception if there isnt a current relation - for relation lists
       (post comp), if the user
@@ -91,9 +91,10 @@ class RelationCompList extends AbstractAutoCompList {
       just term */ 
   protected void setCharFieldValue(CharFieldValue value) {}
 
-  protected void getSearchItems(String input, SearchListener l)  {
-    // for now not threading and just sending results to listener - 
-    // relations are short lists - dont need threaded optimization
+  /** for now not threading and just sending results to listener - 
+      relations are short lists - dont need threaded optimization
+      so boolean thread is ignored */
+  protected void getSearchItems(String input, SearchListener l, boolean thread)  {
     l.newResults(getCompListSearcher().getStringMatchRelations(input));
   }
 

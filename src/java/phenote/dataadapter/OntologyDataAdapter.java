@@ -132,6 +132,8 @@ public class OntologyDataAdapter {
     for (FieldConfig fieldConfig : cfg().getEnbldFieldCfgs()) {
       for (OntologyConfig oc : fieldConfig.getOntologyConfigList()) {
         try {
+          // this actually does repos synching, should only do once per obo file,
+          // but it wont download something twice as 2nd time it will be in synch
           String file = findOboUrlString(oc); // throws oex if not found
           if (!files.contains(file)) { // dont load file twice
             files.add(file);
