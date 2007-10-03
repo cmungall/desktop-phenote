@@ -84,6 +84,7 @@ public class LoadSaveManager {
       return;
     }
     else {
+      this.characterListManager.setCurrentDataFile(f);
       this.characterListManager.setCharacterList(this,charList);
     }
   }

@@ -2,6 +2,7 @@ package phenote.dataadapter;
 // I think this makes more sense in dataadapter than datamodel ?
 // actually should go in edit package maybe?
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,9 +10,9 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
+import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterList;
 import phenote.datamodel.CharacterListI;
-import phenote.datamodel.CharacterI;
 import phenote.datamodel.OntologyManager;
 
 /** Contains current CharacterList. sends out CharacterListChanged events
@@ -24,6 +25,7 @@ public class CharacterListManager {
 
   private CharacterListI characterList = new CharacterList();
   private List<CharListChangeListener> listenerList = new ArrayList<CharListChangeListener>(6);
+  private File currentFile; // can hold source of current character list if loaded from a file
 
 //  public CharacterListManager() {}
 
@@ -80,5 +82,14 @@ public class CharacterListManager {
     characterList.clear();
     // notify listeners???
   }
+  
+  public File getCurrentDataFile() {
+    return this.currentFile;
+  }
+  
+  public void setCurrentDataFile(File aFile) {
+    this.currentFile = aFile;
+  }
+
 
 }

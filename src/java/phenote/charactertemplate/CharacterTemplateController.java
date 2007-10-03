@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -28,6 +29,8 @@ import org.swixml.SwingEngine;
 import phenote.config.Config;
 import phenote.config.xml.GroupDocument.Group;
 import phenote.config.xml.TemplatechooserDocument.Templatechooser;
+import phenote.dataadapter.CharListChangeEvent;
+import phenote.dataadapter.CharListChangeListener;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.LoadSaveManager;
 import phenote.datamodel.CharField;
@@ -50,7 +53,7 @@ import ca.odell.glazedlists.swing.EventTableModel;
 import ca.odell.glazedlists.swing.TableComparatorChooser;
 import ca.odell.glazedlists.swing.TextComponentMatcherEditor;
 
-public class CharacterTemplateController implements ActionListener, TemplateChoiceListener, CharChangeListener {
+public class CharacterTemplateController implements ActionListener, TemplateChoiceListener, CharChangeListener, CharListChangeListener {
 
   public static final String SHOW_CHARACTER_TEMPLATE_ACTION = "showCharacterTemplate";
   public static final String IMPORT_TEMPLATE_CHARACTERS_ACTION = "importCharacters";
@@ -75,6 +78,7 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
     super();
     this.representedGroup = groupName;
     this.characterListManager = new CharacterListManager();
+    CharacterListManager.main().addCharListChangeListener(this);
     this.editManager = new EditManager(this.characterListManager);
     this.editManager.addCharChangeListener(this);
     this.selectionManager = new SelectionManager();
@@ -194,6 +198,27 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
     }
   }
   
+  public void newCharList(CharListChangeEvent e) {
+    // this is assumed to be coming from the main CharacterListManager
+    this.tryLoadDefaultDataFile();
+  }
+
+  private void tryLoadDefaultDataFile() {
+    final File file = CharacterListManager.main().getCurrentDataFile();
+    if (file == null) {
+      return;
+    }
+    final int dotLocation = file.getName().lastIndexOf(".");
+    final boolean hasExtension = dotLocation > 0;
+    final String extension = hasExtension ? file.getName().substring(dotLocation) : "";
+    final String baseName = hasExtension ? file.getName().substring(0, dotLocation) : file.getName();
+    final String defaultFileName = baseName + "-" + this.representedGroup +  extension;
+    File templatesFile = new File(file.getParent(), defaultFileName);
+    if (templatesFile.exists()) {
+      this.getLoadSaveManager().loadData(templatesFile);
+    }
+  }
+  
   private void setSelectionWithCharacters(List<CharacterI> characters) {
     this.filterField.setText("");
     this.selectionModel.clearSelection();
@@ -295,7 +320,7 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
       this.termInfoPanelContainer.add(termInfo.getComponent());
       return component;
     } catch (Exception e) {
-      this.getLogger().error("Unable to render interface", e);
+      this.log().error("Unable to render interface", e);
       return new JPanel();
     }
   }
@@ -321,11 +346,11 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
       Object chooser = adapterClass.newInstance();
       return (TemplateChooser)chooser;
     } catch (ClassNotFoundException e) {
-      this.getLogger().error(errorMessage, e);
+      this.log().error(errorMessage, e);
     } catch (InstantiationException e) {
-      this.getLogger().error(errorMessage, e);
+      this.log().error(errorMessage, e);
     } catch (IllegalAccessException e) {
-      this.getLogger().error(errorMessage, e);
+      this.log().error(errorMessage, e);
     }
     return null;
   }
@@ -354,7 +379,7 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
     return this.loadSaveManager;
   }
   
-  private Logger getLogger() {
+  private Logger log() {
     return Logger.getLogger(this.getClass());
   }
   

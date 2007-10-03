@@ -1,6 +1,10 @@
 package phenote.charactertemplate;
 
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
@@ -28,17 +32,25 @@ import org.apache.log4j.Logger;
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.swixml.SwingEngine;
 
+import phenote.dataadapter.CharListChangeEvent;
+import phenote.dataadapter.CharListChangeListener;
+import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 import phenote.util.FileUtil;
 
-public class TreeChooser extends AbstractTemplateChooser {
+public class TreeChooser extends AbstractTemplateChooser implements CharListChangeListener {
   
   private JFrame window;
   private TreeViewer treeViewer;
   private JTextField newickField; // initialized by swix
   private JLabel newickFieldLabel; // initialized by swix
   private JPanel treeViewerContainer; // initialized by swix
+  
+  public TreeChooser() {
+    super();
+    CharacterListManager.main().addCharListChangeListener(this);
+  }
   
   public void showChooser() {
     this.getWindow().setVisible(true);
@@ -54,7 +66,7 @@ public class TreeChooser extends AbstractTemplateChooser {
   
   public Collection<CharacterI> getChosenTemplates(Collection<CharacterI> candidates) {
     if (this.getCharField() == null) {
-      this.getLogger().error("CharField not set for TreeChooser - no matching templates.");
+      this.log().error("CharField not set for TreeChooser - no matching templates.");
       return Collections.emptyList();
     }
     final Collection<String> chosenTermIDs = this.getChosenTermIDs();
@@ -87,6 +99,11 @@ public class TreeChooser extends AbstractTemplateChooser {
     catch (ImportException e) {
       if (this.newickFieldLabel != null) this.newickFieldLabel.setForeground(Color.RED);
     } 
+  }
+  
+  public void newCharList(CharListChangeEvent e) {
+    // this is assumed to be coming from the main CharacterListManager
+    this.tryLoadDefaultDataFile();
   }
   
   private Set<String> getChosenTermIDs() {
@@ -127,7 +144,7 @@ public class TreeChooser extends AbstractTemplateChooser {
       JComponent component = (JComponent)swix.render(FileUtil.findUrl("tree_chooser.xml"));
       return component;
     } catch (Exception e) {
-      this.getLogger().error("Unable to render interface", e);
+      this.log().error("Unable to render interface", e);
       return new JPanel();
     }
   }
@@ -143,12 +160,35 @@ public class TreeChooser extends AbstractTemplateChooser {
       return Utils.rootTheTree(importer.importNextTree());
     } catch (IOException e) {
       // this is unlikely since we're using a StringReader
-      this.getLogger().error("Can't read tree, newick text must be null", e);
+      this.log().error("Can't read tree, newick text must be null", e);
       return null;
     } 
   }
   
-  private Logger getLogger() {
+  private void tryLoadDefaultDataFile() {
+    final File file = CharacterListManager.main().getCurrentDataFile();
+    if (file == null) {
+      return;
+    }
+    final int dotLocation = file.getName().lastIndexOf(".");
+    final boolean hasExtension = dotLocation > 0;
+    final String baseName = hasExtension ? file.getName().substring(0, dotLocation) : file.getName();
+    final String defaultFileName = baseName + ".tre";
+    File treeFile = new File(file.getParent(), defaultFileName);
+    if (treeFile.exists()) {
+      // the tree must be on the first line and contain no linebreaks
+      try {
+        String newick = (new BufferedReader(new FileReader(treeFile))).readLine();
+        this.setNewickTree(newick);
+      } catch (FileNotFoundException e) {
+        log().error("Could open tree file", e);
+      } catch (IOException e) {
+        log().error("Could open tree file", e);
+      }
+    }
+  }
+  
+  private Logger log() {
     return Logger.getLogger(this.getClass());
   }
 
