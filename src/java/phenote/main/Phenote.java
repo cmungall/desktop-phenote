@@ -29,6 +29,8 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
+import com.sun.java.help.impl.SwingWorker;
+
 import phenote.charactertemplate.CharacterTemplateController;
 import phenote.config.Config;
 import phenote.config.ConfigException;
@@ -41,6 +43,7 @@ import phenote.error.ErrorListener;
 import phenote.error.ErrorManager;
 import phenote.gui.CharacterTableController;
 import phenote.gui.GridBagUtil;
+import phenote.gui.LoadingScreen;
 import phenote.gui.MenuManager;
 import phenote.gui.SelectionHistory;
 import phenote.gui.SplashScreen;
@@ -61,7 +64,9 @@ public class Phenote {
   private CommandLine commandLine = CommandLine.inst();
   private JFrame frame;
   public SplashScreen splashScreen;
+  public LoadingScreen loadingScreen;
   private String logoFile = "images/phenote_logo.jpg";    
+
 
 
   //  public static Keymap defaultKeymap;
@@ -133,14 +138,25 @@ public class Phenote {
     phenote.doCommandLine(args); // does config
 
     //new phenote.gui.ConfigGui(); // testing out
+    
+ /*   set up the overall task of loading the software
+    there will be several events:
+    1.  loading configuration - display config name
+    2.  checking for ontology updates - per ontology display name
+    3.	updating ontologies (name) - downloading... display name
+    4.	loading into datamodel - display name - this is the bulk of the time
+  */    
 
     // put this is in a phenote.util.Log class? - get file from config - default?
     phenote.splashScreen.setProgress("Configuring...", 10);
+    phenote.loadingScreen.setMessageText("Loading configuration: "+Config.inst().getConfigName());
+    phenote.loadingScreen.setProgress(5);
     // LOG4J
     if (!phenote.commandLine.isLogSpecified()) {
       try { DOMConfigurator.configure(Config.inst().getLogConfigUrl()); }
       catch (FileNotFoundException e) { 
         phenote.splashScreen.setProgress("bad file:"+e.getMessage(),10);
+        phenote.loadingScreen.setMessageText("Bad config: "+e.getMessage());
         LOG.error(e.getMessage());
       }
     }
@@ -148,10 +164,19 @@ public class Phenote {
     LOG.debug("debug test2 of log4j");
 
     phenote.splashScreen.setProgress("Initializing Ontologies...", 20);
+    phenote.loadingScreen.setMessageText("Initializing Ontologies");
+    phenote.loadingScreen.setProgress(10);
+//    phenote.loadingScreen.setProgress(20);
+//    boolean done = false;
+    
     phenote.initOntologies();
     phenote.splashScreen.setProgress("Ontologies Initialized", 70);
+    phenote.loadingScreen.setMessageText("Ontologies Initialized");
+//    phenote.loadingScreen.setProgress(70);
     phenote.loadFromCommandLine();  // aft ontols, reads from cmd line if specified
     phenote.splashScreen.setProgress("Phenote Loaded", 100);
+    phenote.loadingScreen.setMessageText("Phenote Loaded");
+    phenote.loadingScreen.setProgress(100);
     if (phenote.commandLine.writeIsSpecified()) {
       phenote.writeFromCommandLine();
       // it hangs after writing - not sure why
@@ -162,6 +187,7 @@ public class Phenote {
     {
     	phenote.initGui();
     	phenote.splashScreenDestruct();
+//    	phenote.loadingScreenDestruct();
     }
 
     if (Config.inst().dataInputServletIsEnabled()) 
@@ -252,15 +278,19 @@ public class Phenote {
  	
 //    ImageIcon myImage = new ImageIcon(logoFile);
     splashScreen = new SplashScreen(myImage,enable);
+    loadingScreen = new LoadingScreen();
+    
     if (!enable) return;
-    splashScreen.setLocationRelativeTo(null);
-    splashScreen.setProgressMax(100);
-    splashScreen.setScreenVisible(true);
-    splashScreen.setProgress("Phenote version "+PhenoteVersion.versionString(), 0);
+//    splashScreen.setLocationRelativeTo(null);
+//    splashScreen.setProgressMax(100);
+//    splashScreen.setScreenVisible(true);
+    loadingScreen.setScreenVisible(true);
+//    splashScreen.setProgress("Phenote version "+PhenoteVersion.versionString(), 0);
   }
 
   private void splashScreenDestruct() {
     splashScreen.setScreenVisible(false);
+    loadingScreen.setScreenVisible(false);
   }
   
   private void doCommandLine(String[] args) {
@@ -279,6 +309,15 @@ public class Phenote {
       }
     }
   }
+
+//  private void ontologyProgressChangeListener extends PropertyChangeListener {
+//  	public void propertyChange(PropertyChangeEvent evt) {
+//  		if (!done) {
+//  			int progress = task.getProgress();
+//  			String m = "some ontology";
+//  			loadingScreen.setProgress(m, progress);
+//    }
+
 
 
   public Frame getFrame() { return frame; }
@@ -427,6 +466,8 @@ public class Phenote {
   public TermInfo getTermInfo() { return termInfo; }
   //public CharacterTablePanel getCharacterTablePanel() { return characterTablePanel; }
   public CharacterTableController getCharacterTableController() { return this.tableController; }
+
+
 
 }
 
