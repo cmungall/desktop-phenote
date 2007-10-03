@@ -596,7 +596,6 @@ public class OntologyDataAdapter {
       if (fieldConfig.hasOntologies()) {
         for (OntologyConfig oc : fieldConfig.getOntologyConfigList()) {
           try {
-            phenote.loadingScreen.setMessageText("loading separate obo session with "+o.getName());
             Ontology o = initOntology(oc); // LOAD OBO SESSION
             if (oc.isPostCompRel()) { // POST COMP REL ONTOLOGY
               cf.setPostCompAllowed(true);
