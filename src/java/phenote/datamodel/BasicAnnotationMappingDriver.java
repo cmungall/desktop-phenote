@@ -31,8 +31,8 @@ public class BasicAnnotationMappingDriver implements AnnotationMappingDriver {
    * AnnotationOntology to contain these properties. This is here just to keep
    * the example simple
    */
-  protected static final OBOProperty GENOTYPE_REL = new OBOPropertyImpl(
-    "oban:has_genotype", "has_genotype");
+  protected static final OBOProperty GENOTYPE_REL =
+  new OBOPropertyImpl("oban:has_genotype", "has_genotype");
   protected static final OBOProperty HAS_QUALITY_REL = new OBOPropertyImpl(
     "pato:has_quality", "has_quality");
   

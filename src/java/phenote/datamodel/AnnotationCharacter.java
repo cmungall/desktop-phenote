@@ -167,6 +167,10 @@ public class AnnotationCharacter extends AbstractCharacter {
     CharFieldValue cfv = null;
     if (isSubjectField(cf)) {
       LinkedObject subject = annotation.getSubject();
+      // For char fields that are free text, in obo as dangling class - just rip out
+      // name
+      if (subject!= null && !cf.isTerm())
+        return new CharFieldValue(subject.getName(),this,cf);
       if (subject instanceof OBOClass) {
         cfv = new CharFieldValue((OBOClass) subject, this, cf);
       }
