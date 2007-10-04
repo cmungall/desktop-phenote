@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
@@ -226,8 +227,12 @@ public class Phenote {
   }
   
   public void initGui() {
-    makeMainWindow(); // ok this is silly
-    this.createGroupWindows();
+    SwingUtilities.invokeLater(new Runnable() {
+      public void run() {
+        makeMainWindow();
+        createGroupWindows();
+      }
+    });
   }
 
   private void createGroupWindows() {

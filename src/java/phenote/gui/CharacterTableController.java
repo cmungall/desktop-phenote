@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -137,11 +136,7 @@ public class CharacterTableController {
   }
   
   private void addInitialBlankCharacter() {
-    SwingUtilities.invokeLater(new Runnable() {
-      public void run() {
-        CharacterTableController.this.getEditManager().addInitialCharacter();
-      }
-    });
+    this.getEditManager().addInitialCharacter();
   }
   
   private void setSelectionWithCharacters(List<CharacterI> characters) {
