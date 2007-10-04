@@ -76,25 +76,6 @@ class TermCompList extends AbstractAutoCompList {
       //fieldPanel.addPostCompButton(postCompButton);
     }
   }
-
-  /**
-   * char in table changed - setCurrentOboClass & text
-   */
-  protected void setValueFromChar(CharacterI chr) {
-    if (chr == null) {
-      log().error("ERROR: attempt to set fields from null character"); // ex?
-      return;
-    }
-    if (!chr.hasValue(getCharField())) {
-      currentOboClass = null; // makes getCurTermRelName ""
-      setText(""); // actually calls getCurTermRelNm which is ""
-      return;
-    }
-
-    OBOClass selCharTerm = chr.getValue(getCharField()).getOboClass();
-    setOboClass(selCharTerm); // doesnt allow null
-    setOntologyChooserFromTerm(selCharTerm);
-  }
   
   protected void setCharFieldValue(CharFieldValue value) {
     this.setOboClass(value.getOboClass());
