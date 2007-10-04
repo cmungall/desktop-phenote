@@ -1,0 +1,375 @@
+format-version: 1.2
+date: 02:10:2007 15:27
+saved-by: peter
+auto-generated-by: OBO-Edit 1.101
+default-namespace: teleost-taxonomy
+
+[Term]
+id: TTO: 1029899
+name: Prochilodus vimboides
+is_a: TTO:101208 ! Prochilodus
+property_value: has_rank TTO:species
+
+[Term]
+id: TTO:1
+name: Craniata
+
+[Term]
+id: TTO:10000001
+name: Eigenmannia sp.
+is_a: TTO:104678 ! Eigenmannia
+property_value: has_rank TTO:Unknown_species
+
+[Term]
+id: TTO:10000002
+name: Sternopygus sp.
+is_a: TTO:102060 ! Sternopygus
+property_value: has_rank TTO:Unknown_species
+
+[Term]
+id: TTO:1003114
+name: Notemigonus crysoleucus
+is_a: TTO:100967 ! Notemigonus
+property_value: has_rank TTO:species
+
+[Term]
+id: TTO:1003239
+name: Opsariichthys uncirostris
+is_a: TTO:103159 ! Opsariichthys
+property_value: has_rank TTO:species
+
+[Term]
+id: TTO:1004143
+name: Chalceus macrolepidotus
+is_a: TTO:100825 ! Chalceus
+property_value: has_rank TTO:species
+
+[Term]
+id: TTO:1004205
+name: Hepsetus odoe
+is_a: TTO:109162 ! Hepsetus
+property_value: has_rank TTO:species
+
+[Term]
+id: TTO:1004213
+name: Xenocharax spilurus
+is_a: TTO:103438 ! Xenocharax
+property_value: has_rank TTO:species
+
+[Term]
+id: TTO:1004343
+name: Rhoadsia altipinna
+is_a: TTO:105589 ! Rhoadsia
+property_value: has_rank TTO:species
+
+[Term]
+id: TTO:100558
+name: Chanos
+is_a: TTO:10720 ! Chanidae
+property_value: has_rank TTO:genus
+
+[Term]
+id: TTO:1006103
+name: Rhabdolichops troscheli
+is_a: TTO:107098 ! Rhabdolichops
+property_value: has_rank TTO:species
+
+[Term]
+id: TTO:100825
+name: Chalceus
+is_a: TTO:10910 ! Characidae
+property_value: has_rank TTO:genus
+
+[Term]
+id: TTO:100967
+name: Notemigonus
+is_a: TTO:10760 ! Cyprinidae
+property_value: has_rank TTO:genus
+
+[Term]
+id: TTO:101208
+name: Prochilodus
+is_a: TTO:10855 ! Prochilodontidae
+property_value: has_rank TTO:genus
+
+[Term]
+id: TTO:101842
+name: Brycon
+is_a: TTO:10910 ! Characidae
+property_value: has_rank TTO:genus
+
+[Term]
+id: TTO:102060
+name: Sternopygus
+is_a: TTO:11231 ! Sternopygidae
+property_value: has_rank TTO:genus
+
+[Term]
+id: TTO:1027661
+name: Chanos chanos
+is_a: TTO:100558 ! Chanos
+property_value: has_rank TTO:species
+
+[Term]
+id: TTO:1028504
+name: Bryconamericus brevirostris
+is_a: TTO:105385 ! Bryconamericus
+property_value: has_rank TTO:species
+
+[Term]
+id: TTO:102915
+name: Diplomystes
+is_a: TTO:10920 ! Diplomystidae
+property_value: has_rank TTO:genus
+
+[Term]
+id: TTO:1029536
+name: Brycon dentex
+is_a: TTO:101842 ! Brycon
+property_value: has_rank TTO:species
+
+[Term]
+id: TTO:1030110
+name: Platyurosternarchus macrostomus
+synonym: "Sternarchus macrostoma" EXACT []
+is_a: TTO:110391 ! Platyurosternarchus
+property_value: has_rank TTO:species
+
+[Term]
+id: TTO:103159
+name: Opsariichthys
+is_a: TTO:10760 ! Cyprinidae
+property_value: has_rank TTO:genus
+
+[Term]
+id: TTO:103339
+name: Auchenoglanis
+is_a: TTO:10940 ! Bagridae
+property_value: has_rank TTO:genus
+
+[Term]
+id: TTO:103438
+name: Xenocharax
+is_a: TTO:10820 ! Citharinidae
+property_value: has_rank TTO:genus
+
+[Term]
+id: TTO:1046341
+name: Diplomystes chilensis
+synonym: "Diplomystes papillosus" EXACT []
+is_a: TTO:102915 ! Diplomystes
+property_value: has_rank TTO:species
+
+[Term]
+id: TTO:104678
+name: Eigenmannia
+is_a: TTO:11231 ! Sternopygidae
+property_value: has_rank TTO:genus
+
+[Term]
+id: TTO:105055
+name: Zacco
+is_a: TTO:10760 ! Cyprinidae
+property_value: has_rank TTO:genus
+
+[Term]
+id: TTO:1051779
+name: Zacco temminckii
+is_a: TTO:105055 ! Zacco
+property_value: has_rank TTO:species
+
+[Term]
+id: TTO:105268
+name: Sternarchorhamphus
+is_a: TTO:11232 ! Apteronotidae
+property_value: has_rank TTO:genus
+
+[Term]
+id: TTO:105385
+name: Bryconamericus
+is_a: TTO:10910 ! Characidae
+property_value: has_rank TTO:genus
+
+[Term]
+id: TTO:105589
+name: Rhoadsia
+is_a: TTO:10910 ! Characidae
+property_value: has_rank TTO:genus
+
+[Term]
+id: TTO:1056213
+name: Auchenoglanis monkei
+synonym: "Parauchenoglanis guttatus" EXACT []
+is_a: TTO:103339 ! Auchenoglanis
+property_value: has_rank TTO:species
+
+[Term]
+id: TTO:1062171
+name: Sternopygus macrurus
+is_a: TTO:102060 ! Sternopygus
+property_value: has_rank TTO:species
+
+[Term]
+id: TTO:107098
+name: Rhabdolichops
+is_a: TTO:11231 ! Sternopygidae
+property_value: has_rank TTO:genus
+
+[Term]
+id: TTO:10720
+name: Chanidae
+is_a: TTO:1350 ! Gonorynchiformes
+property_value: has_rank TTO:family
+
+[Term]
+id: TTO:10760
+name: Cyprinidae
+is_a: TTO:1360 ! Cypriniformes
+property_value: has_rank TTO:family
+
+[Term]
+id: TTO:10820
+name: Citharinidae
+is_a: TTO:1370 ! Characiformes
+property_value: has_rank TTO:family
+
+[Term]
+id: TTO:10827
+name: Hepsetidae
+is_a: TTO:1370 ! Characiformes
+property_value: has_rank TTO:family
+
+[Term]
+id: TTO:10855
+name: Prochilodontidae
+is_a: TTO:1370 ! Characiformes
+property_value: has_rank TTO:family
+
+[Term]
+id: TTO:10910
+name: Characidae
+is_a: TTO:1370 ! Characiformes
+property_value: has_rank TTO:family
+
+[Term]
+id: TTO:109162
+name: Hepsetus
+is_a: TTO:10827 ! Hepsetidae
+property_value: has_rank TTO:genus
+
+[Term]
+id: TTO:10920
+name: Diplomystidae
+is_a: TTO:1380 ! Siluriformes
+property_value: has_rank TTO:family
+
+[Term]
+id: TTO:10940
+name: Bagridae
+is_a: TTO:1380 ! Siluriformes
+property_value: has_rank TTO:family
+
+[Term]
+id: TTO:110391
+name: Platyurosternarchus
+is_a: TTO:11232 ! Apteronotidae
+property_value: has_rank TTO:genus
+
+[Term]
+id: TTO:11231
+name: Sternopygidae
+is_a: TTO:1390 ! Gymnotiformes
+property_value: has_rank TTO:family
+
+[Term]
+id: TTO:11232
+name: Apteronotidae
+is_a: TTO:1390 ! Gymnotiformes
+property_value: has_rank TTO:family
+
+[Term]
+id: TTO:1350
+name: Gonorynchiformes
+is_a: TTO:18 ! Actinopterygii
+property_value: has_rank TTO:order
+
+[Term]
+id: TTO:1360
+name: Cypriniformes
+is_a: TTO:18 ! Actinopterygii
+property_value: has_rank TTO:order
+
+[Term]
+id: TTO:1370
+name: Characiformes
+is_a: TTO:18 ! Actinopterygii
+property_value: has_rank TTO:order
+
+[Term]
+id: TTO:1380
+name: Siluriformes
+is_a: TTO:18 ! Actinopterygii
+property_value: has_rank TTO:order
+
+[Term]
+id: TTO:1390
+name: Gymnotiformes
+is_a: TTO:18 ! Actinopterygii
+property_value: has_rank TTO:order
+
+[Term]
+id: TTO:18
+name: Actinopterygii
+is_a: TTO:1 ! Craniata
+property_value: has_rank TTO:class
+
+[Term]
+id: TTO:class
+name: class
+xref: NCBITaxon:class
+is_a: TTO:taxonomic_rank ! taxonomic_rank
+
+[Term]
+id: TTO:family
+name: family
+xref: NCBITaxon:family
+is_a: TTO:taxonomic_rank ! taxonomic_rank
+
+[Term]
+id: TTO:genus
+name: genus
+xref: NCBITaxon:genus
+is_a: TTO:taxonomic_rank ! taxonomic_rank
+
+[Term]
+id: TTO:order
+name: order
+xref: NCBITaxon:order
+is_a: TTO:taxonomic_rank ! taxonomic_rank
+
+[Term]
+id: TTO:species
+name: species
+xref: NCBITaxon:species
+is_a: TTO:taxonomic_rank ! taxonomic_rank
+
+[Term]
+id: TTO:taxonomic_rank
+name: taxonomic_rank
+xref: NCBITaxon:taxonomic_rank
+
+[Term]
+id: TTO:Unknown_species
+name: Unknown species
+is_a: TTO:taxonomic_rank ! taxonomic_rank
+
+[Term]
+id: TTO:Unknown_species_group
+name: Unknown species group
+is_a: TTO:taxonomic_rank ! taxonomic_rank
+
+[Term]
+id: TTO:Unnamed_species
+name: Unnamed species
+is_a: TTO:taxonomic_rank ! taxonomic_rank
+
