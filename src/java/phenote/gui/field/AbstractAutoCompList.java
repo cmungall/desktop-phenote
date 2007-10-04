@@ -269,7 +269,8 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     // too soon - text field doesnt have text yet.... hmmmm....
     String input = getText();
     // If length of input is shorter than minimum required for completion do nothing
-    if (input.length() < minCompChars) return;
+    // disabling this - with threading dont need - and its buggy
+    //if (input.length() < minCompChars) return;
     // returns a list of CompletionTerms (checks if relations)
     // if input is empty will return whole list (if configged)
     //log().debug("got new completion request for input "+input+" time "+time());
