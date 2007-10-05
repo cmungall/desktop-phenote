@@ -201,6 +201,8 @@ public class CompListSearcher {
       return searchTermList.getList();
 
     int i =0;
+    // ontologyTermList (from Ontology) is presorted already by term name
+    // if sorted by term id (eg zf stage) SearchTermList i think needs to know that?
     for (OBOClass oboClass : ontologyTermList) {
     //for (int i=0; i<ontologyTermList.size(); i++) {
 

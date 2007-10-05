@@ -10,12 +10,6 @@ import phenote.config.xml.OntologyDocument.Ontology;
 /** May not even have ontology file (free text eg genotype) rename FieldConfig? */
 public class OntologyConfig {
 
-  //public String name;
-  //public String namespace; // this should replace filterOut
-  //public String filterOut; // public?
-  //private String slim;
-  //private String reposSubdir; // pase!
-  //private boolean isPostCompRel = false;
   /** just the filename - no path/url */
   public String ontologyFile;
   /** if url given for file then this string gets set (or old backward compatible repos
@@ -34,14 +28,7 @@ public class OntologyConfig {
   OntologyConfig(phenote.config.xml.OntologyDocument.Ontology o,FieldConfig fc) {
     ontologyBean = o;
     fieldConfig = fc;
-    //name = o.getName()!=null ? o.getName() : fieldName;
     setFile(o.getFile());
-    //if (o.getNamespace() != null) namespace = o.getNamespace();
-//    if (o.getFilterOut() != null) filterOut = o.getFilterOut();
-    //slim = o.getSlim()!=null ? o.getSlim() : null;
-    //if (o.getReposSubdir()!=null) reposSubdir = o.getReposSubdir();
-    // if xgetIsPostCompRel != null
-    //isPostCompRel = o.getIsPostcompRel(); // hmm what will return when not set??
     
     // for now ignoring if name set as there was a bug where name was getting set
     // to "Entity" in the -u .phenote/conf file - woops
@@ -264,24 +251,23 @@ public class OntologyConfig {
     if (isPostCompRel()) // only set if true, if not there default false
       oldOC.setIsPostCompRel(isPostCompRel());
   }
+
+  public boolean sortById() {
+    if (fieldConfig.getFieldBean().getSortBy() == null) return false;
+    return fieldConfig.getFieldBean().getSortBy() == Field.SortBy.ID;
+  }
 }
 
-    //if (isPostCompRel)  fc.setPostCompRelOntCfg(this);
-  //static OntologyConfig defaultPato = new OntologyConfig("Pato","attribute_and_value.obo");
-
-  //OntologyConfig() {} // not sure this is actually needed/used
-//   private OntologyConfig(String name,FieldConfig fc) {
-//     fieldConfig = fc;
-//     setName(name);//this.name = name;
-//   }
-//   OntologyConfig(String name, String file, String filterOut) {
-//     this(name,file);
-//     this.filterOut = filterOut;
-//   }
-//   OntologyConfig(String name, String file, String filterOut,String slim) {
-//     this(name,file,filterOut);
-//     this.slim = slim;
-//   }
-//   void writePostComp(Field f) {// annoying as shares a lot with ontology
-//     Postcomp pc = f.addNewPostcomp();
-//     pc.setRelationshipOntology(getFile());  }
+  //public String name;
+  //public String namespace; // this should replace filterOut
+  //public String filterOut; // public?
+  //private String slim;
+  //private String reposSubdir; // pase!
+  //private boolean isPostCompRel = false;
+    //name = o.getName()!=null ? o.getName() : fieldName;
+    //if (o.getNamespace() != null) namespace = o.getNamespace();
+//    if (o.getFilterOut() != null) filterOut = o.getFilterOut();
+    //slim = o.getSlim()!=null ? o.getSlim() : null;
+    //if (o.getReposSubdir()!=null) reposSubdir = o.getReposSubdir();
+    // if xgetIsPostCompRel != null
+    //isPostCompRel = o.getIsPostcompRel(); // hmm what will return when not set??

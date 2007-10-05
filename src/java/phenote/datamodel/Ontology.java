@@ -43,11 +43,16 @@ public class Ontology {
   //private String filename; // may neec to revive for version/metadata?
   private String version;
   private OBOSession oboSession;
+  // presorting things is faster but problematic, as syns dont get sorted
+  // if we could limit output(??) then sorting on fly might be fast enough
+  // with limiting output may wanna do scoring but then lose alphabetical?
+  // maybe have different modes/preferences
   private Collection<OBOClass> sortedTerms; // was List
   private Collection<OBOClass> sortedObsoleteTerms;
   private List<OBOProperty> sortedRelations;
   private String slim; 
-  private String filterOutString;
+  private boolean sortById = false;
+  private String filterOutString; // phase out
   /** well this stuff is specific to ontologies from files (eg obo), perhaps there
       needs to be some sort of wrapper or subclass? need to think about this...
       for now just shoving in here */
@@ -69,6 +74,7 @@ public class Ontology {
     // get id filter, slim, & possible namespace from oc...
     name = oc.getName();
     slim = oc.getSlim();
+    sortById = oc.sortById();
     // if namespace specified and is valid load that
     if (oc.hasNamespace()) {
       String namespace = oc.getNamespace();
@@ -293,6 +299,7 @@ public class Ontology {
     //Query<OBOClass, OBOClass> nsQuery =
     Namespace[] spacesArray = spaces.toArray(new Namespace[0]);
     NamespaceQuery nsQuery = new NamespaceQuery(spacesArray);
+    if (sortById) nsQuery.setComparator(new IdComparator());
     // create a new query engine on the session we just loaded
     QueryEngine engine = new QueryEngine(oboSession);
     
@@ -302,6 +309,7 @@ public class Ontology {
     // true -> cache result ??? do we need to cache - i dont think so
     // BUG - this includes obsoletes!
     nsQuery.setAllowObsoletes(false);
+    // NameSpaceQuery sorts be term name
     sortedTerms = engine.query(nsQuery, false);
     //sortedTerms = QueryUtil.getResults(engine.query(nsQuery, false));
     //log().debug(spacesArray[0]+" Non-obsolete: got " + sortedTerms.size()+" namespace hits in " + (System.currentTimeMillis() - time)+ "ms # of namespaces: "+spaces.size());
@@ -352,5 +360,20 @@ public class Ontology {
     }
     return filteredList;
   }
+
+
+  private class IdComparator implements Comparator<OBOClass> {
+    public int compare(OBOClass o1, OBOClass o2) {
+      return o1.getID().compareToIgnoreCase(o2.getID());
+    }
+  }
+
 }
 
+//   private class IdSortedNamespaceQuery extends NamespaceQuery {
+//     protected Comparator<OBOClass> comparator = new Comparator<OBOClass>() {
+//       public int compare(OBOClass o1, OBOClass o2) {
+//         return o1.getID().compareToIgnoreCase(o2.getID());
+//       }
+//     };
+//   }

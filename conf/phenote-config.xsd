@@ -143,6 +143,14 @@
       <xs:attribute name="groups" type="xs:IDREFS"/>
       <xs:attribute name="copy-field" use="required" type="xs:boolean"/>
       <xs:attribute name="min-completion-chars" use="required" type="xs:int"/>
+      <xs:attribute name="sort-by" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="NAME"/>
+            <xs:enumeration value="ID"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
     </xs:complexType>
   </xs:element>
   <xs:element name="ontology">

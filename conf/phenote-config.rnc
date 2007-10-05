@@ -122,6 +122,8 @@ field =
     ## this is to optimize slow completion w many ontologies 
     ## with new threading optimization this is being phased out
     attribute min-completion-chars { xsd:int },
+    # for ontol completion what to sort terms by, default is NAME
+    attribute sort-by { "NAME" | "ID" },
     postcomp?,
     ontology*
   } 
