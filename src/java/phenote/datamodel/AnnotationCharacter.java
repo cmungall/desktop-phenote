@@ -177,6 +177,7 @@ public class AnnotationCharacter extends AbstractCharacter {
     }
     else if (isObjectGenusField(cf)) {
       cfv = objectGenus;
+      // cold also see if diff or not and get from annot, below is if no diff
 //       LinkedObject link = annotation.getObject();
 //       if (link != null && TermUtil.isClass(link)) {
 //         OBOClass postComp = TermUtil.getClass(link);
@@ -228,8 +229,11 @@ public class AnnotationCharacter extends AbstractCharacter {
 		return driver.getCharFieldValue(s, character, field);
 	}
 
-	public CharacterI cloneCharacter() {
-		Annotation clone = (Annotation) annotation.clone();
-		return new AnnotationCharacter(clone, driver);
-	}
+  public CharacterI cloneCharacter() {
+    Annotation clone = (Annotation) annotation.clone();
+    AnnotationCharacter a =  new AnnotationCharacter(clone, driver);
+    a.objectGenus = objectGenus.cloneCharFieldValue();
+    a.objectDifferentia = objectDifferentia.cloneCharFieldValue();
+    return a;
+  }
 }
