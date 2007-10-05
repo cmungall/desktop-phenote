@@ -15,7 +15,7 @@ import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
 import phenote.datamodel.Ontology;
-import phenote.datamodel.OntologyManager;
+import phenote.datamodel.CharFieldManager;
 import phenote.edit.CharChangeListener;
 import phenote.edit.CharChangeEvent;
 
@@ -108,7 +108,7 @@ public abstract class AbstractGroupAdapter implements GroupAdapterI {
 
   public void setDestinationField(String fieldName) {
     try {
-      destinationCharField = OntologyManager.inst().getCharFieldForName(fieldName);
+      destinationCharField = CharFieldManager.inst().getCharFieldForName(fieldName);
     }
     catch (CharFieldException e) { // popup? throw ex?
       log().error("Cant find destination field "+fieldName+" for group "+group

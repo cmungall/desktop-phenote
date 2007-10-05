@@ -21,7 +21,7 @@ import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyException;
-import phenote.datamodel.OntologyManager;
+import phenote.datamodel.CharFieldManager;
 import phenote.edit.CompoundTransaction;
 import phenote.gui.selection.UseTermEvent;
 import phenote.gui.selection.UseTermListener;
@@ -86,7 +86,7 @@ class TermCompList extends AbstractAutoCompList {
     if (term == null) return;
     if (ontologyChooserCombo == null) return;
     try {
-      Ontology o = OntologyManager.inst().getOntologyForTerm(term);
+      Ontology o = CharFieldManager.inst().getOntologyForTerm(term);
       ontologyChooserCombo.setSelectedItem(o.getName());
     }
     catch (OntologyException e) {

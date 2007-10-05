@@ -212,11 +212,11 @@ public class CharField {
       OBOClass oboClass=null;
 
       // POST COMP - move this to char field value?
-      if (OntologyManager.inst().isPostComp(valueString)) {
+      if (CharFieldManager.inst().isPostComp(valueString)) {
         try {
           // just gets first ontology for now - fix this!
           OBOSession os = getOntology().getOboSession();
-          oboClass = OntologyManager.inst().getPostComp(os,valueString);
+          oboClass = CharFieldManager.inst().getPostComp(os,valueString);
         }
         catch (TermNotFoundException e) {}
       }

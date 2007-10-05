@@ -32,7 +32,7 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharFieldEnum;
-import phenote.datamodel.OntologyManager;
+import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.TermNotFoundException;
 import phenote.edit.EditManager;
 import phenote.edit.CharChangeEvent;
@@ -220,7 +220,7 @@ private class HistorySelectionListener implements CharChangeListener {
 //	    	System.out.println("link to *"+id+"* selected");
 	        if (id == null) return;
 	        try {
-	          OBOClass term = OntologyManager.inst().getOboClass(id); // ex
+	          OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
 	          currentOboClass = term;
 	          // send out term selection (non mouse over) for DAG view
 	          Object src = SelectionHistory.this;

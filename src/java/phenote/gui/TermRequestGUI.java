@@ -24,7 +24,7 @@ import javax.swing.border.BevelBorder;
 import org.jdesktop.layout.GroupLayout;
 import org.jdesktop.layout.LayoutStyle;
 
-import phenote.datamodel.OntologyManager;
+import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.Ontology;
 
 
@@ -87,7 +87,7 @@ public class TermRequestGUI extends JFrame {
 		ontologyLabel.setText("Ontology");
 
 		ontologyComboBox = new JComboBox();
-  	for (Ontology o : OntologyManager.inst().getAllOntologies()) {
+  	for (Ontology o : CharFieldManager.inst().getAllOntologies()) {
       ontologyComboBox.addItem(o.getName());
     }
 //    ontologyComboBox.addActionListener(new OntologyChooserListener());

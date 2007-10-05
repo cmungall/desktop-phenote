@@ -8,7 +8,7 @@ import phenote.config.Config;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.OntologyException;
-import phenote.datamodel.OntologyManager;
+import phenote.datamodel.CharFieldManager;
 import ca.odell.glazedlists.GlazedLists;
 import ca.odell.glazedlists.gui.AdvancedTableFormat;
 
@@ -30,7 +30,7 @@ public class CharacterTableFormat implements AdvancedTableFormat<CharacterI> {
 
   public Object getColumnValue(CharacterI character, int column) {
     try {
-      CharField cf = OntologyManager.inst().getCharField(column, this.representedGroup);
+      CharField cf = CharFieldManager.inst().getCharField(column, this.representedGroup);
       return character.getValueString(cf);
     } 
     catch (OntologyException e) {

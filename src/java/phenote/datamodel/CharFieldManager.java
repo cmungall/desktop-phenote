@@ -24,10 +24,10 @@ import phenote.config.xml.FieldDocument.Field.Type;
     actually manages CharFields(which may have ontologies) - rename CharFieldManager? yes!
     gets initialized by OntologyDataAdapter which loops through FieldConfigs and passes
     CharFields to OntMan */
-public class OntologyManager {
+public class CharFieldManager {
 
 
-  private static OntologyManager singleton;
+  private static CharFieldManager singleton;
   /** CharFields generically hold zero or more ontologies - are charFields that dont
    have ontologies in this list?? yes */
   private List<CharField> charFieldList = new ArrayList<CharField>();
@@ -38,7 +38,7 @@ public class OntologyManager {
 
 
   /** Singleton */
-  private OntologyManager() {
+  private CharFieldManager() {
     // always have user & date field by default
     // should be at end in case displayed??
 //     CharField dateCreated =
@@ -46,9 +46,9 @@ public class OntologyManager {
 //     addField(dateCreated);
   }
 
-  public static OntologyManager inst() {
+  public static CharFieldManager inst() {
     if (singleton == null)
-      singleton = new OntologyManager();
+      singleton = new CharFieldManager();
     return singleton;
   }
 

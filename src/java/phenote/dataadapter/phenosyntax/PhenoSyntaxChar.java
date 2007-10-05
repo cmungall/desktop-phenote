@@ -12,7 +12,7 @@ import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterIFactory;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldValue;
-import phenote.datamodel.OntologyManager;
+import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharFieldException;
 import phenote.config.Config;
 import phenote.config.ConfigException;
@@ -57,7 +57,7 @@ public class PhenoSyntaxChar {
 
       // ontology manager should have char fields in order of config which should be
       // syntax order - hope this isnt too presumptious
-      for (CharField cf : OntologyManager.inst().getCharFieldList()) {
+      for (CharField cf : CharFieldManager.inst().getCharFieldList()) {
         if (character.hasValue(cf)) {
           sb.append(Config.inst().getSyntaxAbbrevForCharField(cf)).append("=");//ex
           if (isFreeText(cf)) sb.append('"'); // free text gets quoted
@@ -159,7 +159,7 @@ public class PhenoSyntaxChar {
       return;
     }
     
-    OntologyManager om = OntologyManager.inst();
+    CharFieldManager om = CharFieldManager.inst();
     
     try {
       // so this is funny but there can be more than one char field for an abbrev - for

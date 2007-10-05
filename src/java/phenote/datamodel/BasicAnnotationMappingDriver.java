@@ -54,7 +54,7 @@ public class BasicAnnotationMappingDriver implements AnnotationMappingDriver {
 
   /** retrieves prop from obo session by id, if not there then creates one */
   protected OBOProperty getRelation(String id, String name) {
-    OBOProperty p = OntologyManager.inst().getRelation(id);
+    OBOProperty p = CharFieldManager.inst().getRelation(id);
     if (p != null) return p;
     return new OBOPropertyImpl(id,name);
   }

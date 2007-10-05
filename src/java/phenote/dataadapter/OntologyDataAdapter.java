@@ -40,7 +40,7 @@ import phenote.config.OntologyConfig;
 import phenote.datamodel.CharField;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyException;
-import phenote.datamodel.OntologyManager;
+import phenote.datamodel.CharFieldManager;
 import phenote.error.ErrorEvent;
 import phenote.error.ErrorManager;
 import phenote.gui.SynchOntologyDialog;
@@ -55,7 +55,7 @@ public class OntologyDataAdapter {
 
   private static OntologyDataAdapter singleton;
   //private Config config; cant cache may change
-  private OntologyManager ontologyManager = OntologyManager.inst();
+  private CharFieldManager ontologyManager = CharFieldManager.inst();
   private boolean initializingOntologies = false;
   private Map<String,Ontology> fileToOntologyCache = new HashMap<String,Ontology>();
   private OBOMetaData adapterMetaData;

@@ -6,7 +6,7 @@ import jebl.gui.trees.treeviewer.painters.BasicLabelPainter;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
 
-import phenote.datamodel.OntologyManager;
+import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.TermNotFoundException;
 
 public class OntologyTermPainter extends BasicLabelPainter {
@@ -24,7 +24,7 @@ public class OntologyTermPainter extends BasicLabelPainter {
     final String defaultLabel =  super.getLabel(node);
     if (defaultLabel == null) return defaultLabel;
     try {
-      OBOClass term = OntologyManager.inst().getOboClass(defaultLabel.trim());
+      OBOClass term = CharFieldManager.inst().getOboClass(defaultLabel.trim());
       return " " + term.getName() + " [" + defaultLabel.trim() + "] ";
     } catch (TermNotFoundException e) {
       return defaultLabel;

@@ -12,7 +12,7 @@ import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
-import phenote.datamodel.OntologyManager;
+import phenote.datamodel.CharFieldManager;
 
 /** For adding a character (not a char field/subpart - thats an update) */
 
@@ -38,7 +38,7 @@ public class AddTransaction implements TransactionI {
   public void editModel() {
     getCharList().add(addChar);
     // automatically put in date_created???  //try {
-    CharField dateField = OntologyManager.inst().getDateCreatedField();
+    CharField dateField = CharFieldManager.inst().getDateCreatedField();
     CharFieldValue v = new CharFieldValue(getDate(),addChar,dateField);
     addChar.setValue(dateField,v);
     //} catch (CharFieldException e) { System.out.println("no date_created field"); } //?

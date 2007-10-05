@@ -81,12 +81,12 @@ public class Character extends AbstractCharacter implements CharacterI {
   }
 
   public CharField getCharFieldForName(String fieldName) throws CharFieldException {
-    return OntologyManager.inst().getCharFieldForName(fieldName);
+    return CharFieldManager.inst().getCharFieldForName(fieldName);
   }
 
   /** return all char fields configured, both currently used or null in char */
   public List<CharField> getAllCharFields() {
-    return OntologyManager.inst().getCharFieldList();
+    return CharFieldManager.inst().getCharFieldList();
   }
 
 

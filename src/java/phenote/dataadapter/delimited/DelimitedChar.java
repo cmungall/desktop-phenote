@@ -13,7 +13,7 @@ import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterIFactory;
-import phenote.datamodel.OntologyManager;
+import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharFieldException;
 
 /** I stole this from phenosyntaxchar, but modifying for tab delimited.  will
@@ -70,7 +70,7 @@ public class DelimitedChar {
     //try {
     // ontology manager should have char fields in order of config which should be
     // syntax order - hope this isnt too presumptious
-    for (CharField cf : OntologyManager.inst().getCharFieldList()) {
+    for (CharField cf : CharFieldManager.inst().getCharFieldList()) {
       //if its a free text field - only one col necessary.
       //if its an ontology field - need two cols (one for ID, the other for text)
       // the label from config & char field should be the same, so dont need to get
@@ -104,7 +104,7 @@ public class DelimitedChar {
     //try {
     // ontology manager should have char fields in order of config which should be
     // syntax order - hope this isnt too presumptious
-    for (CharField cf : OntologyManager.inst().getCharFieldList()) {
+    for (CharField cf : CharFieldManager.inst().getCharFieldList()) {
       if (character.hasValue(cf)) {
         sb.append(makeValue(character.getValue(cf)));
       }
@@ -208,7 +208,7 @@ public class DelimitedChar {
 //      log().error("No value given for column"+fieldNum);
       return;  //don't need to populate a CharField if no value
     }    
-    OntologyManager om = OntologyManager.inst();
+    CharFieldManager om = CharFieldManager.inst();
     //try { // there can be more than one field for a fieldNum??? - MG
     //List<CharField> fields = Config.inst().getCharFieldsForDelimited(fieldNum);//Ex
     if (!Config.inst().hasEnbldCharField(fieldNum)) {

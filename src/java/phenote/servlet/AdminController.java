@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import phenote.datamodel.Ontology;
-import phenote.datamodel.OntologyManager;
+import phenote.datamodel.CharFieldManager;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class AdminController implements Controller {
   public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
     AdminBean form = new AdminBean();
-    List<Ontology> ontologies = OntologyManager.inst().getAllOntologies();
+    List<Ontology> ontologies = CharFieldManager.inst().getAllOntologies();
     form.setOntologies(ontologies);
 
     return new ModelAndView("admin", "formBean", form);

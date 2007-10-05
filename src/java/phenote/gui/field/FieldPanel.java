@@ -18,7 +18,7 @@ import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.GroupAdapterI;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharacterI;
-import phenote.datamodel.OntologyManager;
+import phenote.datamodel.CharFieldManager;
 import phenote.edit.EditManager;
 import phenote.gui.selection.SelectionManager;
 import ca.odell.glazedlists.swing.EventSelectionModel;
@@ -33,7 +33,7 @@ public class FieldPanel extends JPanel {
   
   private List<CharFieldGui> charFieldGuiList = new ArrayList<CharFieldGui>(8);
   private SearchParamPanel searchParamPanel; // searchParamManager?
-  private OntologyManager ontologyManager = OntologyManager.inst();
+  private CharFieldManager ontologyManager = CharFieldManager.inst();
   private JPanel fieldPanel;
   private JTabbedPane jTabbedPane;
   private String group;
@@ -96,7 +96,7 @@ public class FieldPanel extends JPanel {
   } 
 
   private void setGroup(String g) {
-    if (g == null) this.group = OntologyManager.DEFAULT_GROUP;
+    if (g == null) this.group = CharFieldManager.DEFAULT_GROUP;
     else this.group = g;
   }
 

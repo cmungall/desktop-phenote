@@ -8,7 +8,7 @@ import org.springframework.web.servlet.mvc.AbstractCommandController;
 import phenote.dataadapter.OntologyDataAdapter;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyException;
-import phenote.datamodel.OntologyManager;
+import phenote.datamodel.CharFieldManager;
 import phenote.gui.SearchFilterType;
 import phenote.gui.SearchParams;
 import phenote.gui.field.CompListSearcher;
@@ -166,7 +166,7 @@ public class PhenoteController extends AbstractCommandController {
    * throws ex if ontolName not found
    */
   private Ontology getOntology(String ontolName) throws OntologyException {
-    return OntologyManager.inst().getOntologyForName(ontolName);
+    return CharFieldManager.inst().getOntologyForName(ontolName);
   }
 
   private static String q(String s) {

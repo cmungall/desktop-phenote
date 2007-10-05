@@ -37,7 +37,7 @@ import phenote.dataadapter.QueryableDataAdapterI;
 import phenote.datamodel.AnnotationMappingDriver;
 import phenote.datamodel.BasicAnnotationMappingDriver;
 import phenote.datamodel.CharField;
-import phenote.datamodel.OntologyManager;
+import phenote.datamodel.CharFieldManager;
 import phenote.gui.SearchFilterType;
 import phenote.gui.SearchParams;
 import phenote.main.PhenoteVersion;
@@ -1180,19 +1180,19 @@ public class Config {
         return aGroup;
       }
     }
-    if (groupName.equals(OntologyManager.DEFAULT_GROUP)) // OntMan?
+    if (groupName.equals(CharFieldManager.DEFAULT_GROUP)) // OntMan?
       return createDefaultGroup(); // ??
     //return null; // ex? return default?
     return getDefaultGroup(); // if all fails just return default?? or null??
   }
 
   public Group getDefaultGroup() {
-    return getGroup(OntologyManager.DEFAULT_GROUP);
+    return getGroup(CharFieldManager.DEFAULT_GROUP);
   }
 
   private Group createDefaultGroup() {
     Group g = phenoConfigBean.addNewGroup();
-    g.setName(OntologyManager.DEFAULT_GROUP);
+    g.setName(CharFieldManager.DEFAULT_GROUP);
     return g;
   }
 

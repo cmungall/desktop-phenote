@@ -24,7 +24,7 @@ import javax.swing.text.JTextComponent;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
 
-import phenote.datamodel.OntologyManager;
+import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.TermNotFoundException;
 import phenote.error.ErrorEvent;
 import phenote.error.ErrorListener;
@@ -190,7 +190,7 @@ public class TermInfo {
     		naviIndex--;
     		id = getTermFromNaviHistory(naviIndex);
     		try {
-    			OBOClass term = OntologyManager.inst().getOboClass(id); // ex
+    			OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
     			setTextFromOboClass(term);
     			// send out term selection (non mouse over) for DAG view
           TermInfo.this.selectionManager.selectTerm(TermInfo.this, term, true);
@@ -206,7 +206,7 @@ public class TermInfo {
     		naviIndex++;
     		String id = getTermFromNaviHistory(naviIndex);
     		try {
-    			OBOClass term = OntologyManager.inst().getOboClass(id); // ex
+    			OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
     			setTextFromOboClass(term);
     			// send out term selection (non mouse over) for DAG view
           TermInfo.this.selectionManager.selectTerm(TermInfo.this, term, true);
@@ -327,7 +327,7 @@ public class TermInfo {
       String id = HtmlUtil.getIdFromHyperlink(e);
       if (id == null) return;
       try {
-        OBOClass term = OntologyManager.inst().getOboClass(id); // ex
+        OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
         setTextFromOboClass(term);
         addTermToNaviHistory(id);
         // send out term selection (non mouse over) for DAG view

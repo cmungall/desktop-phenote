@@ -11,7 +11,7 @@ import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.Character;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterIFactory;
-import phenote.datamodel.OntologyManager;
+import phenote.datamodel.CharFieldManager;
 
 /** The way editing works is gui makes update transaction (see CharFieldGui and
     AutoComboBox) and calls
@@ -48,7 +48,7 @@ public class EditManager {
 
   // gets the "default" (group) edit manager
   public static EditManager inst() {
-    return getEditManager(OntologyManager.DEFAULT_GROUP);
+    return getEditManager(CharFieldManager.DEFAULT_GROUP);
 //     if (singleton == null)
 //       singleton = new EditManager();
 //     return singleton;
@@ -56,7 +56,7 @@ public class EditManager {
 
   // ??
   public static EditManager getEditManager(String group) {
-    if (group == null) group = OntologyManager.DEFAULT_GROUP;
+    if (group == null) group = CharFieldManager.DEFAULT_GROUP;
     if (groupToEditMan.get(group) == null) {
       CharacterListManager c = CharacterListManager.getCharListMan(group);
       EditManager e = new EditManager(c); // group?

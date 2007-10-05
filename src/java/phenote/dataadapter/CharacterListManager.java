@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterList;
 import phenote.datamodel.CharacterListI;
-import phenote.datamodel.OntologyManager;
+import phenote.datamodel.CharFieldManager;
 
 /** Contains current CharacterList. sends out CharacterListChanged events
     when character list has changed */
@@ -31,7 +31,7 @@ public class CharacterListManager {
 
   // default()?
   public static CharacterListManager main() {
-    return getCharListMan(OntologyManager.DEFAULT_GROUP);
+    return getCharListMan(CharFieldManager.DEFAULT_GROUP);
   }
 
   /** Returns "default" CharacterListManager */ 
@@ -43,7 +43,7 @@ public class CharacterListManager {
   }
 
   public static CharacterListManager getCharListMan(String group) {
-    if (group == null) group = OntologyManager.DEFAULT_GROUP; // ??
+    if (group == null) group = CharFieldManager.DEFAULT_GROUP; // ??
     if (groupToListMan.get(group) == null) {
       CharacterListManager e = new CharacterListManager(); // (group) ?
       groupToListMan.put(group,e);

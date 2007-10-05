@@ -5,7 +5,7 @@ import org.geneontology.oboedit.datamodel.OBOClass;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterIFactory;
 import phenote.datamodel.Character;
-import phenote.datamodel.OntologyManager;
+import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.TermNotFoundException;
 
 public class FlyCharacter implements FlyCharacterI {
@@ -78,7 +78,7 @@ public class FlyCharacter implements FlyCharacterI {
     if (id == null || id.equals(""))
       throw new TermException("Failed to get term id "+id);
     try {
-      OBOClass oc = OntologyManager.inst().getOboClass(id); // ex
+      OBOClass oc = CharFieldManager.inst().getOboClass(id); // ex
       if (!oc.getName().equals(name))
         throw new TermException("Data name "+name+" and ontology name "+oc.getName()+
                                 "are inconsistent for id "+id);

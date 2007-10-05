@@ -5,7 +5,7 @@ import ca.uvic.csr.shrimp.gui.QueryView.OBOViewer;
 import ca.uvic.csr.shrimp.gui.QueryView.QueryView;
 import org.geneontology.oboedit.datamodel.OBOSession;
 import phenote.datamodel.Ontology;
-import phenote.datamodel.OntologyManager;
+import phenote.datamodel.CharFieldManager;
 import phenote.gui.selection.SelectionManager;
 import phenote.gui.selection.TermSelectionEvent;
 import phenote.gui.selection.TermSelectionListener;
@@ -37,7 +37,7 @@ class ShrimpDag {
    */
   public void initOntologies() {
     // do this in a separate thread! no need to hold up phenote with this
-    for (Ontology o : OntologyManager.inst().getAllOntologies()) {
+    for (Ontology o : CharFieldManager.inst().getAllOntologies()) {
       // oboViewer.loadOboSession(o.getOboSession());
     }
   }
@@ -70,7 +70,7 @@ class ShrimpDag {
     // just hard wire to go for now
     //Ontology o = OntologyManager.inst().getOntologyForName("ZF");
     // fly causes an endless loop - oh my
-    Ontology o = OntologyManager.inst().getOntologyForName("Fly");
+    Ontology o = CharFieldManager.inst().getOntologyForName("Fly");
     //Ontology o = OntologyManager.inst().getOntologyForName("Human Anatomy");
     if (o == null) {
       System.out.println("no ontol for dag");

@@ -28,12 +28,12 @@ public abstract class AbstractCharacter implements CharacterI {
 
 
   public List<CharField> getAllCharFields() {
-    return OntologyManager.inst().getCharFieldList();
+    return CharFieldManager.inst().getCharFieldList();
   }
   
   public CharField getCharFieldForName(String fieldName)
     throws CharFieldException {
-    return OntologyManager.inst().getCharFieldForName(fieldName);
+    return CharFieldManager.inst().getCharFieldForName(fieldName);
   }
 
   protected OBOClass getTerm(CharField cf) {

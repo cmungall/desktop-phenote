@@ -6,7 +6,7 @@ import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharFieldException;
-import phenote.datamodel.OntologyManager;
+import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.TermNotFoundException;
 
 /** A class that parses a single field out of a tab delimited line.
@@ -32,13 +32,13 @@ class DelimFieldParser {
       try {
         // should i strip "ID" now, or see if there is afield with ID at end?
         // which of course would be awkward but not inconceivable
-        cf = OntologyManager.inst().getCharFieldForName(head);
+        cf = CharFieldManager.inst().getCharFieldForName(head);
       }
       catch (CharFieldException e) { // column not a char field
         // so term id headers have ID at end so try stripping off
         if (head.endsWith("ID")) {
           head = head.substring(0,head.length()-3);
-          try { cf = OntologyManager.inst().getCharFieldForName(head); }
+          try { cf = CharFieldManager.inst().getCharFieldForName(head); }
           catch (CharFieldException x) { cf = null; } // already is really
         }
       }

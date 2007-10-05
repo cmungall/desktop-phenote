@@ -8,7 +8,7 @@ import java.util.Map;
 
 import org.geneontology.oboedit.datamodel.OBOClass;
 
-import phenote.datamodel.OntologyManager;
+import phenote.datamodel.CharFieldManager;
 
 /** Controller for term & character selection */
 public class SelectionManager {
@@ -21,13 +21,13 @@ public class SelectionManager {
 
   /** return main/default instance */
   public static SelectionManager inst() {
-    return getSelMan(OntologyManager.DEFAULT_GROUP);
+    return getSelMan(CharFieldManager.DEFAULT_GROUP);
 //     if (singleton == null) singleton = new SelectionManager();
 //     return singleton;
   }
 
   public static SelectionManager getSelMan(String group) {
-    if (group == null) group = OntologyManager.DEFAULT_GROUP; // ??
+    if (group == null) group = CharFieldManager.DEFAULT_GROUP; // ??
    if (groupToSelMan.get(group) == null) {
       SelectionManager s = new SelectionManager();
       groupToSelMan.put(group,s);

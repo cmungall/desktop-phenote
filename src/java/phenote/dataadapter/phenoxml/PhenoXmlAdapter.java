@@ -34,7 +34,7 @@ import phenote.datamodel.CharacterListI;
 import phenote.datamodel.CharacterList;
 import phenote.datamodel.CharFieldEnum; // ?
 import phenote.datamodel.CharFieldException;
-import phenote.datamodel.OntologyManager;
+import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.TermNotFoundException;
 import phenote.dataadapter.AbstractFileAdapter;
 import phenote.dataadapter.CharacterListManager;
@@ -103,7 +103,7 @@ public class PhenoXmlAdapter extends AbstractFileAdapter {
   }
   
   private CharacterI newCharacterFromPhenotypeManifestation(PhenotypeManifestation pm) {
-    OntologyManager ontologyManager = OntologyManager.inst();
+    CharFieldManager ontologyManager = CharFieldManager.inst();
     CharacterI character = CharacterIFactory.makeChar();
     ManifestIn mi = pm.getManifestIn();
     if (mi != null) {
