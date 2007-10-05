@@ -1206,6 +1206,7 @@ public class Config {
     Group grp = getGroup(groupStr);
     String classString = grp.getGroupAdapter();
     if (classString == null) return null;
+    if (grp.getInterface().equals(Group.Interface.CHARACTER_TEMPLATE)) return null;
     try {
       // should we cache in hash and insure 1 instance???
       Class<?> c = Class.forName(classString);

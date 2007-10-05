@@ -117,19 +117,19 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
   }
   
   public void deleteSelectedCharacters() {
-    this.editManager.deleteChars(this.selectionModel.getSelected());
+    this.editManager.deleteChars(this.getSelectionModel().getSelected());
   }
   
   public void duplicateSelectedCharacters() {
-    this.editManager.copyChars(this.selectionModel.getSelected());
+    this.editManager.copyChars(this.getSelectionModel().getSelected());
   }
   
   public void markSelectedCharacters() {
-    this.setCharactersAreMarked(this.selectionModel.getSelected(), true);
+    this.setCharactersAreMarked(this.getSelectionModel().getSelected(), true);
   }
   
   public void unmarkSelectedCharacters() {
-    this.setCharactersAreMarked(this.selectionModel.getSelected(), false);
+    this.setCharactersAreMarked(this.getSelectionModel().getSelected(), false);
   }
   
   public void undo() {
@@ -183,6 +183,20 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
     Phenote.getPhenote().getFrame().toFront();
   }
   
+  public EventSelectionModel<CharacterI> getSelectionModel() {
+    return this.selectionModel;
+  }
+  
+  public JFrame getWindow() {
+    if (this.window == null) {
+      this.window = new JFrame(this.getGroupTitle());
+      final JComponent panel = this.createPanel();
+      this.window.getContentPane().add(panel);
+      this.window.setSize(panel.getSize());
+    }
+    return this.window;
+  }
+  
   public void templateChoiceChanged(TemplateChooser source) {
     this.setMarkedCharacters(source.getChosenTemplates(Collections.unmodifiableList(this.sortedCharacters)));
     this.showCharacterTemplate();
@@ -221,11 +235,11 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
   
   private void setSelectionWithCharacters(List<CharacterI> characters) {
     this.filterField.setText("");
-    this.selectionModel.clearSelection();
+    this.getSelectionModel().clearSelection();
     for (CharacterI character : characters) {
       final int index = this.filteredCharacters.indexOf(character);
       if (index > -1) {
-        this.selectionModel.addSelectionInterval(index, index);
+        this.getSelectionModel().addSelectionInterval(index, index);
         Rectangle rect = this.characterTemplateTable.getCellRect(index, 0, false);
         this.characterTemplateTable.scrollRectToVisible(rect);
       }
@@ -290,15 +304,7 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
     }
   }
   
-  private JFrame getWindow() {
-    if (this.window == null) {
-      this.window = new JFrame(this.getGroupTitle());
-      final JComponent panel = this.createPanel();
-      this.window.getContentPane().add(panel);
-      this.window.setSize(panel.getSize());
-    }
-    return this.window;
-  }
+  
   
   private JComponent createPanel() {
     SwingEngine swix = new SwingEngine(this);

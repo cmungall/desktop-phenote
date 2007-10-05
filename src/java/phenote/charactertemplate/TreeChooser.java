@@ -26,16 +26,13 @@ import jebl.evolution.io.NewickImporter;
 import jebl.evolution.trees.Tree;
 import jebl.evolution.trees.Utils;
 import jebl.gui.trees.treeviewer.TreeViewer;
-import jebl.gui.trees.treeviewer.painters.BasicLabelPainter;
 
 import org.apache.log4j.Logger;
-import org.geneontology.oboedit.datamodel.OBOClass;
 import org.swixml.SwingEngine;
 
 import phenote.dataadapter.CharListChangeEvent;
 import phenote.dataadapter.CharListChangeListener;
 import phenote.dataadapter.CharacterListManager;
-import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 import phenote.util.FileUtil;
 
@@ -69,16 +66,11 @@ public class TreeChooser extends AbstractTemplateChooser implements CharListChan
       this.log().error("CharField not set for TreeChooser - no matching templates.");
       return Collections.emptyList();
     }
-    final Collection<String> chosenTermIDs = this.getChosenTermIDs();
+    final Collection<String> selectedTaxa = this.getSelectedTaxonNames();
     final Collection<CharacterI> chosenTemplates = new ArrayList<CharacterI>();
     for (CharacterI character : candidates) {
-      final CharFieldValue fieldValue = character.getValue(this.getCharField()); 
-      if (fieldValue.isTerm()) {
-        OBOClass term = fieldValue.getTerm();
-        if ((term != null) && (chosenTermIDs.contains(term.getID()))) {
-          chosenTemplates.add(character);
-        }
-      } else if (chosenTermIDs.contains(fieldValue.getName())){
+      final String valueString = character.getValueString(this.getCharField());
+      if (selectedTaxa.contains(valueString)) {
         chosenTemplates.add(character);
       }
     }
@@ -89,15 +81,11 @@ public class TreeChooser extends AbstractTemplateChooser implements CharListChan
     try {
       Tree tree = this.importTree(treeText);
       this.getTreeViewer().setTree(tree);
-      // must reset label painters every time tree is changed, because TreeViewer creates new ones
-      final OntologyTermPainter ontologyTermTipPainter = new OntologyTermPainter("Tip Labels", this.getTreeViewer().getTreePane().getTree(), BasicLabelPainter.PainterIntent.TIP);
-      final OntologyTermPainter ontologyTermNodePainter = new OntologyTermPainter("Node Labels", this.getTreeViewer().getTreePane().getTree(), BasicLabelPainter.PainterIntent.NODE);
-      this.getTreeViewer().getTreePane().setTaxonLabelPainter(ontologyTermTipPainter);
-      this.getTreeViewer().getTreePane().setNodeLabelPainter(ontologyTermNodePainter);
       if (this.newickFieldLabel != null) this.newickFieldLabel.setForeground(Color.BLACK);
     }
     catch (ImportException e) {
       if (this.newickFieldLabel != null) this.newickFieldLabel.setForeground(Color.RED);
+      log().error("Invalid Newick tree", e);
     } 
   }
   
@@ -106,16 +94,16 @@ public class TreeChooser extends AbstractTemplateChooser implements CharListChan
     this.tryLoadDefaultDataFile();
   }
   
-  private Set<String> getChosenTermIDs() {
-    final Set<String> termIDs = new HashSet<String>();
+  private Set<String> getSelectedTaxonNames() {
+    final Set<String> taxa = new HashSet<String>();
     final Set<Node> nodes = this.getTreeViewer().getTreePane().getSelectedNodes();
     final Tree tree = this.getTreeViewer().getTreePane().getTree();
     for (Node node : nodes) {
       if (tree.isExternal(node)) {
-        termIDs.add(tree.getTaxon(node).getName());
+        taxa.add(tree.getTaxon(node).getName());
       }
     }
-    return termIDs;
+    return taxa;
   }
   
   private TreeViewer getTreeViewer() {
@@ -181,9 +169,9 @@ public class TreeChooser extends AbstractTemplateChooser implements CharListChan
         String newick = (new BufferedReader(new FileReader(treeFile))).readLine();
         this.setNewickTree(newick);
       } catch (FileNotFoundException e) {
-        log().error("Could open tree file", e);
+        log().error("Could not open tree file", e);
       } catch (IOException e) {
-        log().error("Could open tree file", e);
+        log().error("Could not open tree file", e);
       }
     }
   }

@@ -8,6 +8,8 @@ import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -29,8 +31,6 @@ import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
-
-import com.sun.java.help.impl.SwingWorker;
 
 import phenote.charactertemplate.CharacterTemplateController;
 import phenote.config.Config;
@@ -238,9 +238,30 @@ public class Phenote {
   private void createGroupWindows() {
     for (Group group : getGroupsByContainer(Group.Container.WINDOW)) {
       if (group.getInterface().equals(Group.Interface.CHARACTER_TEMPLATE)) {
-        new CharacterTemplateController(group.getName());
+        createTemplateController(group.getGroupAdapter(), group.getName());
       }
     }
+  }
+  
+  private CharacterTemplateController createTemplateController(String className, String groupName) {
+    final String errorMessage = "Failed creating CharacterTemplate";
+    try {
+      Class<?> adapterClass = Class.forName(className);
+      Constructor<?> constructor = adapterClass.getConstructor(String.class);
+      Object templateController = constructor.newInstance(groupName);
+      return (CharacterTemplateController)templateController;
+    } catch (ClassNotFoundException e) {
+      LOG.error(errorMessage, e);
+    } catch (InstantiationException e) {
+      LOG.error(errorMessage, e);
+    } catch (IllegalAccessException e) {
+      LOG.error(errorMessage, e);
+    } catch (NoSuchMethodException e) {
+      LOG.error(errorMessage, e);
+    } catch (InvocationTargetException e) {
+      LOG.error(errorMessage, e);
+    }
+    return null;
   }
 
   /** do group guis specified for a tab(not window) - for tab in main window */
