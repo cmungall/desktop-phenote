@@ -51,17 +51,74 @@ public class WormAdapter implements QueryableDataAdapterI {
     return "Commit To Worm DB";
   }
 
-  public void delete() {
+  public void delete(Connection c, Statement s) {
     List<CharacterI> l = EditManager.inst().getDeletedAnnotations();
     try {
       for (CharacterI chr : l) {
         String pgdbid = chr.getValueString("PGDBID");
         if (pgdbid == null) continue;
-        System.out.println("Delete "+pgdbid+" end"); }
+        System.out.println("Delete "+pgdbid+" end"); 
+        int colI = 0; int boxI = 0;					// initialize column to zero
+        String match = find(".* - ([0-9]+) - [0-9]+", pgdbid);  	// Find a tempname followed by space - space number
+        if (match != null) { boxI = Integer.parseInt(match); }	// get the column number if there is one
+        match = find(".* - [0-9]+ - ([0-9]+)", pgdbid);  	// Find a tempname followed by space - space number
+        if (match != null) { colI = Integer.parseInt(match); }	// get the column number if there is one
+        match = find("(.*) - [0-9]+ - [0-9]+", pgdbid);  	// Find a tempname followed by space - space number
+        if (match != null) { pgdbid = match; }		// query for this, otherwise keep the default value
+        String joinkey = pgdbid;			// assign the tempname / allele to the joinkey 
+        System.out.println("Delete "+pgdbid+" Join "+joinkey+" Box "+boxI+" Col "+colI+" end"); 
+
+//      These have only box and not column
+//        String postgres_table = "app_paper"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_person"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_phenotype"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_paper_remark"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_intx_desc"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        String postgres_table = "app_curator"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        postgres_table = "app_term"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        postgres_table = "app_phen_remark"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        postgres_table = "app_anat_term"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        postgres_table = "app_lifestage"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        postgres_table = "app_nature"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        postgres_table = "app_func"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        postgres_table = "app_temperature"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        postgres_table = "app_preparation"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        postgres_table = "app_penetrance"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        postgres_table = "app_percent"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        postgres_table = "app_range"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        postgres_table = "app_quantity"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        postgres_table = "app_quantity_remark"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        postgres_table = "app_heat_sens"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        postgres_table = "app_heat_degree"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        postgres_table = "app_cold_sens"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        postgres_table = "app_cold_degree"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        postgres_table = "app_mat_effect"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        postgres_table = "app_pat_effect"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        postgres_table = "app_genotype"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        postgres_table = "app_strain"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        postgres_table = "app_obj_remark"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+      }
     } catch (Exception e) {
       System.out.println("Could not delete character: " + e);
     }
   }
+
+  public void nullPostgresBoxCol(Connection c, Statement s, String postgres_table, String joinkey, int boxI, int colI) {
+    String postgres_value = "No postgres value assigned";
+    postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+    if ( (postgres_value.equals("No postgres value assigned")) || (postgres_value.equals("postgres value is null")) ) { } else { 
+      updatePostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI, null); }
+  }
+
+  private void updatePostgresBoxCol(Connection c, Statement s, String postgres_table, String joinkey, int boxI, int colI, String value) {
+    PreparedStatement ps = null;	// intialize postgres insert 
+    try { ps = c.prepareStatement("INSERT INTO "+postgres_table+" VALUES (?, ?, ?, ?)"); ps.setString(1, joinkey); ps.setInt(2, boxI); ps.setInt(3, colI); ps.setString(4, value); }
+    catch (SQLException se) {
+      System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+    try { ps.executeUpdate(); } 	
+    catch (SQLException se) { System.out.println("We got an exception while executing an update: possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); }
+  } // private void updatePostgresCol(String postgres_table, String joinkey, int colI, String value)
+
 
   public CharacterI getCharacterReference(String refID) throws DataAdapterEx {
     CharacterListManager clm = CharacterListManager.getCharListMan("referenceMaker");
@@ -305,7 +362,7 @@ public class WormAdapter implements QueryableDataAdapterI {
 
     } // for (CharacterI chr : charList.getList())
 
-    delete();
+    delete(c, s);
     // if alleleQueried... wipe out allele and insert
     // else if Pub queried... wipe out pub and insert
     // else  - new insert & deletes(from transactions)
@@ -470,7 +527,7 @@ public class WormAdapter implements QueryableDataAdapterI {
   private CharacterListI queryPostgresCharacterReferenceList(String group, CharacterListI charList, Statement s, String joinkey, int boxI, int colI) {
       // populate a phenote character based on postgres value by joinkey, then append to character list
     try {
-      CharacterI c1 = CharacterIFactory.makeChar();						// create a new character for a phenote row
+      CharacterI c1 = CharacterIFactory.makeChar();				// create a new character for a phenote row
 
       String pubID = null; String title = null; String personID = null; String name = null; String nbp = null;
 
@@ -519,7 +576,7 @@ public class WormAdapter implements QueryableDataAdapterI {
   private CharacterListI queryPostgresCharacterMainList(String group, CharacterListI charList, Statement s, String joinkey, int boxI, int colI) {
       // populate a phenote character based on postgres value by joinkey, then append to character list
     try {
-      CharacterI c1 = CharacterIFactory.makeChar();						// create a new character for a phenote row
+      CharacterI c1 = CharacterIFactory.makeChar();				// create a new character for a phenote row
 
       c1.setValue("Object Name",joinkey);					// assign the allele and the column
       String alleleColumn = joinkey+" - "+boxI+" - "+colI;
