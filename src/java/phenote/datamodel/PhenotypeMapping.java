@@ -11,11 +11,14 @@ public class PhenotypeMapping extends BasicAnnotationMappingDriver {
   private final OBOProperty INHERES_IN_REL =
   getRelation("OBO_REL:inheres_in","inheres_in");
   private final OBOProperty INFLUENCES_REL = getRelation("OBOL:influences","influences");
+  private final OBOProperty TOWARDS_REL = getRelation("OBOL:towards","towards");
   
 
   public OBOProperty getPropertyForField(CharField cf) {
     if (CharFieldEnum.ENTITY.equals(cf))
       return INHERES_IN_REL;
+    if (CharFieldEnum.ENTITY2.equals(cf))
+      return TOWARDS_REL;
     return super.getPropertyForField(cf); // pub, genotype
   }  
 
