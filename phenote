@@ -1,6 +1,7 @@
 #!/bin/sh
 
-PHENOTE_CLASSPATH=classfiles
+## have to add conf directory to pick up log4j config file
+PHENOTE_CLASSPATH=classfiles:conf
 for file in jars/*.jar; do 
   if [ $file != jars/phenote.jar ]; then 
     #echo "Adding ${file} to CLASSPATH"
