@@ -1,7 +1,5 @@
 package phenote.main;
 
-import org.apache.log4j.xml.DOMConfigurator;
-
 import phenote.config.Config;
 import phenote.config.ConfigException;
 import phenote.dataadapter.DataAdapterI;
@@ -174,8 +172,9 @@ public class CommandLine {
     }
     public void execute() throws Exception {
       logSpecified = true;
+      // this has been superseded by just using default log4j initialization procedure
 //      try {
-        DOMConfigurator.configure(getArg());
+//        DOMConfigurator.configure(getArg());
 //       }
 //       catch (FileNotFoundException e) { 
 //         //phenote.splashScreen.setProgress("bad file:"+e.getMessage(),10);

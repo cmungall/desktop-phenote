@@ -10,7 +10,6 @@ import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -30,7 +29,6 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.log4j.xml.DOMConfigurator;
 
 import phenote.charactertemplate.CharacterTemplateController;
 import phenote.config.Config;
@@ -75,37 +73,20 @@ public class Phenote {
 
   public static void main(String[] args) {
     standalone = true; // i think this is ok
-    // set up logging with default logger until we read in log file from
-    // config file
-    try { 
-      URL u = FileUtil.findUrl(Config.defaultLogConfigFile);
-      DOMConfigurator.configure(u);
-    }
-    catch (FileNotFoundException e) {
-      System.out.println("Default log cfg file not found "+e);
-      // should then configure up default log with sys out and .phenote file...
-      // stolen from apollo
-      // Attempt to detect whether the standard Log4J configuration has failed
-      // (e.g., because the conf file in the log4j.configuration variable was not
-      // found.)  If it has failed then fall back to the default configuration 
-      // implemented in BasicConfigurator.
-      //static {
+ 
       // Check whether the root logger has an appender; there does not appear
       // to be a more direct way to check whether Log4J has already been 
       // initialized.  Note that the root logger's appender can always be
       // set to a NullAppender, so this does not restrict the utility of
       // the logging in any way.
       Logger rl = LogManager.getRootLogger();
-      Enumeration appenders = rl.getAllAppenders();
-      
+      Enumeration<?> appenders = rl.getAllAppenders();
       if (!appenders.hasMoreElements()) {
         System.out.println("Log4J configuration failed, using default configuration settings");
         BasicConfigurator.configure(); 
         rl.setLevel(Level.INFO);
+        LOG = LogManager.getLogger(Phenote.class);
       }
-      LOG = LogManager.getLogger(Phenote.class);
-      //}
-    }
     
     // writes error events to log
     ErrorManager.inst().addErrorListener(new LogErrorListener());
@@ -148,22 +129,9 @@ public class Phenote {
     4.	loading into datamodel - display name - this is the bulk of the time
   */    
 
-    // put this is in a phenote.util.Log class? - get file from config - default?
     phenote.splashScreen.setProgress("Configuring...", 10);
     phenote.loadingScreen.setMessageText("Loading configuration: "+Config.inst().getConfigName());
     phenote.loadingScreen.setProgress(5);
-    // LOG4J
-    if (!phenote.commandLine.isLogSpecified()) {
-      try { DOMConfigurator.configure(Config.inst().getLogConfigUrl()); }
-      catch (FileNotFoundException e) { 
-        phenote.splashScreen.setProgress("bad file:"+e.getMessage(),10);
-        phenote.loadingScreen.setMessageText("Bad config: "+e.getMessage());
-        LOG.error(e.getMessage());
-      }
-    }
-
-    LOG.debug("debug test2 of log4j");
-
     phenote.splashScreen.setProgress("Initializing Ontologies...", 20);
     phenote.loadingScreen.setMessageText("Initializing Ontologies");
     phenote.loadingScreen.setProgress(10);

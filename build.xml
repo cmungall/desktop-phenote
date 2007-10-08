@@ -95,6 +95,8 @@ them into  the classfiles directory. excludes="test/**"  -->
             <!-- arg value="-c configfilehereventually"/ -->
             <classpath>
                 <pathelement path="${classfiles}"/>
+            	<!-- for log4j -->
+            	<pathelement path="${conf}"/>
                 <fileset dir="${lib}">
                     <include name="*.jar"/>
                     <exclude name="phenote.jar"/>
@@ -240,6 +242,7 @@ them into  the classfiles directory. excludes="test/**"  -->
             <fileset dir="${classfiles}"/>
             <fileset dir="." includes="obo-files/" excludes="obo-files/old"/>
             <fileset file="${conf}/*.cfg"/>
+        	<fileset file="${conf}/log4j.xml"/>
 	    <fileset dir="." includes="${conf}/*.xml"/>
 	    <fileset dir="." includes="images/"/>
             <fileset dir="doc/phenote-website" includes="help/**"/>
