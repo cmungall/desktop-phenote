@@ -35,8 +35,10 @@ public class PhenotypeMapping extends BasicAnnotationMappingDriver {
     return CharFieldEnum.QUALITY.equals(cf);
   }
 
+  /** both entity and entity2 are object differentia fields
+   entity is inheres_in, E2 is towards?? */
   public boolean isObjectDifferentiaField(CharField cf) {
-    return CharFieldEnum.ENTITY.equals(cf);
+    return CharFieldEnum.ENTITY.equals(cf) || CharFieldEnum.ENTITY2.equals(cf);
   }
 
 }

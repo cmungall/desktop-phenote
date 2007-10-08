@@ -20,7 +20,7 @@ import phenote.config.xml.FieldDocument.Field.Type;
 public enum CharFieldEnum {
 
   PUB("Pub"), GENOTYPE("Genotype"), ALLELE("Allele"), GENETIC_CONTEXT("Genetic Context"),
-  ENTITY("Entity"), QUALITY("Quality"),
+  ENTITY("Entity"), ENTITY2("E2"), QUALITY("Quality"),
   DATE_CREATED("Date Created","date_created",Type.DATE),
   /** Its questionable if relationship belongs here ??? */
   RELATIONSHIP("Relationship");

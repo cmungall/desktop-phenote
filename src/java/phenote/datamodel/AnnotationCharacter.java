@@ -1,5 +1,8 @@
 package phenote.datamodel;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 
 import org.geneontology.util.ObjectUtil;
@@ -20,7 +23,8 @@ public class AnnotationCharacter extends AbstractCharacter {
   protected Annotation annotation;
   protected AnnotationMappingDriver driver;
   private CharFieldValue objectGenus;
-  private CharFieldValue objectDifferentia;
+  //private CharFieldValue objectDifferentia;
+  private Map<CharField,CharFieldValue> charFieldToObjectDiff = new HashMap(2);
 
   public AnnotationCharacter(AnnotationMappingDriver driver) {
     this("__temp__:" + idgen++, driver);
@@ -112,7 +116,8 @@ public class AnnotationCharacter extends AbstractCharacter {
     }
     // OBJECT DIFFERENTIA
     else if (isObjectDifferentiaField(cf)) {
-      objectDifferentia = cfv;
+      //objectDifferentia = cfv;
+      charFieldToObjectDiff.put(cf,cfv);
       setObject();
     }
     // PROPERTIES (not subject or object)
@@ -129,10 +134,22 @@ public class AnnotationCharacter extends AbstractCharacter {
     }
   }
   
-  /** If have genus then set object, if just diff then do nothing - wait for genus */
+  private void setObjectDiff(CharField cf, CharFieldValue cfv) {
+    if (cfv == null || cfv.isEmpty()) {
+      if (charFieldToObjectDiff.containsKey(cf))
+        charFieldToObjectDiff.remove(cf);
+    }
+    else {
+      charFieldToObjectDiff.put(cf,cfv);
+    }
+    setObject();
+  }
+
+  /** If have genus then set object, if just diff then do nothing - wait for genus
+   if genus is nulled out need to null out object - not doing this yet... */
   private void setObject() {
     // NO GENUS - return, wait for diff
-    if (!hasObjectGenus()) return; // cant do object without genus
+    if (!hasObjectGenus()) return; // setAnnotObject(null) // null ptr?
 
     // NO DIFF just set genus then
     if (!hasObjectDiff()) {
@@ -141,15 +158,20 @@ public class AnnotationCharacter extends AbstractCharacter {
 
     // GENUS & DIFF - make post comp
     else {
-      OBOProperty rel = driver.getPropertyForField(objectDifferentia.getCharField());
-      OBOClass pc =
-        OboUtil.makePostCompTerm(objectGenus.toTerm(),rel,objectDifferentia.toTerm());
-      setAnnotObject(pc);
+//       OBOProperty rel = driver.getPropertyForField(objectDifferentia.getCharField());
+//       OBOClass pc =
+//         OboUtil.makePostCompTerm(objectGenus.toTerm(),rel,objectDifferentia.toTerm());
+      OboUtil ou = OboUtil.initPostCompTerm(objectGenus.toTerm());
+      for (Map.Entry<CharField,CharFieldValue> e : charFieldToObjectDiff.entrySet()) {
+        OBOProperty rel = driver.getPropertyForField(e.getKey());
+        ou.addRelDiff(rel,e.getValue().toTerm());
+      }
+      setAnnotObject(ou.getPostCompTerm());
     }
   }
 
   private boolean hasObjectGenus() { return objectGenus!=null; }
-  private boolean hasObjectDiff() { return objectDifferentia!=null; }
+  private boolean hasObjectDiff() { return !charFieldToObjectDiff.isEmpty(); }
 
 
   private void setAnnotObject(OBOClass term) {
@@ -186,7 +208,7 @@ public class AnnotationCharacter extends AbstractCharacter {
 //       }
     }
     else if (isObjectDifferentiaField(cf)) {
-      cfv = objectDifferentia;
+      cfv = charFieldToObjectDiff.get(cf); //objectDifferentia;
 //       LinkedObject link = annotation.getObject();
 //       if (link != null && TermUtil.isClass(link)) {
 //         OBOClass postComp = TermUtil.getClass(link);
@@ -233,7 +255,11 @@ public class AnnotationCharacter extends AbstractCharacter {
     Annotation clone = (Annotation) annotation.clone();
     AnnotationCharacter a =  new AnnotationCharacter(clone, driver);
     a.objectGenus = objectGenus.cloneCharFieldValue();
-    a.objectDifferentia = objectDifferentia.cloneCharFieldValue();
+    //a.objectDifferentia = objectDifferentia.cloneCharFieldValue();
+    Map<CharField,CharFieldValue> m = new HashMap<CharField,CharFieldValue>(2);
+    for (Map.Entry<CharField,CharFieldValue> e : charFieldToObjectDiff.entrySet()) {
+      a.charFieldToObjectDiff.put(e.getKey(),e.getValue().cloneCharFieldValue());
+    }
     return a;
   }
 }
