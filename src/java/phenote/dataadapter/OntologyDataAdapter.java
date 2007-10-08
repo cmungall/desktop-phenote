@@ -502,7 +502,7 @@ public class OntologyDataAdapter {
   }
 
   /** Load obo session with obo edit adapter, unless previously loaded - reuse 
-   this is old - phase out! */
+   this is old - phase out! - multi obos */
   private void loadOboSession(Ontology o,OntologyConfig oc) throws OntologyException {
     // check cache of ontologies to see if ontology file already loaded
     if (fileIsInCache(oc.getFile())) {
@@ -525,7 +525,8 @@ public class OntologyDataAdapter {
     o.setTimestamp(previousOntol.getTimestamp());
     o.setSource(previousOntol.getSource());
   }
-  /** If repository is configured loads obo from repos if local out of date */
+  /** If repository is configured loads obo from repos if local out of date
+   old - phase out - multi obo sessions*/
   private void loadOboSessionCheckRepos(Ontology o,OntologyConfig oc)
     throws OntologyException {
 		int progress = phenote.loadingScreen.getStartupProgress();

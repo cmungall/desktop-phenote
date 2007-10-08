@@ -74,20 +74,21 @@ public class Phenote {
   public static void main(String[] args) {
     standalone = true; // i think this is ok
  
-      // Check whether the root logger has an appender; there does not appear
-      // to be a more direct way to check whether Log4J has already been 
-      // initialized.  Note that the root logger's appender can always be
-      // set to a NullAppender, so this does not restrict the utility of
-      // the logging in any way.
-      Logger rl = LogManager.getRootLogger();
-      Enumeration<?> appenders = rl.getAllAppenders();
-      if (!appenders.hasMoreElements()) {
-        System.out.println("Log4J configuration failed, using default configuration settings");
-        BasicConfigurator.configure(); 
-        rl.setLevel(Level.INFO);
-        LOG = LogManager.getLogger(Phenote.class);
-      }
+    // Check whether the root logger has an appender; there does not appear
+    // to be a more direct way to check whether Log4J has already been 
+    // initialized.  Note that the root logger's appender can always be
+    // set to a NullAppender, so this does not restrict the utility of
+    // the logging in any way.
+    Logger rl = LogManager.getRootLogger();
+    Enumeration<?> appenders = rl.getAllAppenders();
+    if (!appenders.hasMoreElements()) {
+      System.out.println("Log4J configuration failed, using default configuration settings");
+      BasicConfigurator.configure(); 
+      rl.setLevel(Level.INFO);
+      LOG = LogManager.getLogger(Phenote.class);
+    }
     
+
     // writes error events to log
     ErrorManager.inst().addErrorListener(new LogErrorListener());
     String v = "This is Phenote version "+PhenoteVersion.versionString();
