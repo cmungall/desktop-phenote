@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Making a Phenote release</title>
+</head>
+<body>
+<h2>Making a Phenote release</h2>
+<br>
+-&nbsp;commit everything, check with other developers, compile all, TEST...<br>
+<br>
+- modify docs/phenote-website/phenote.jnlp file<br>
+ant will automatically put in new version of phenote (thanks jim)<br>
+need to add any new jar files to jar list (eventually will automate with ant?)<br>
+<br>
+- edit docs/phenote-website/phenote-release-notes.html<br>
+with all the new features and bug fixes<br>
+this could even be added to as you fix things during the release cycle. <br>
+this page is used by the phenote website<br>
+<br>
+[phenote.html is being phased out so not critical to update]<br>
+<br>
+-&nbsp;svn checkout on web machine (or a machine that is networked with
+it - maybe this is so of your machine already - not always the case) <br>
+<br>
+- make sure you have a jar signer that will be needed for signing the
+jars for webstart. if you dont you need to make one [fill in details of
+making a key for jar signing]<br>
+<br>
+- make a symbolic link from your phenote root to the root of your web
+where phenote will be plopped - and call it "phenote-webstart". This
+will be used by ant<br>
+<br>
+- set environment variable PHENOTE_VERSION to the current version of
+phenote, e.g. "1.5". ant will deploy phenote to
+phenote-webstart/${PHENOTE_VERSION}<br>
+<br>
+- ant webstart (called from phenote root) should then install phenote webstart<br>
+<br>
+- [Nicole then modifies some files and runs some script to update the
+phenote website download page - nicole could you fill that in here? ]
+</body>
+</html>
