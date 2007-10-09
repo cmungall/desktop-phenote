@@ -6,7 +6,7 @@ href="phenote.jnlp">
 <information>
 	<title>Phenote @@phenote.version@@</title>
 	<vendor>National Center for Biomedical Ontology</vendor>
-	<icon href="images/phenote_logo.jpg" />
+	<icon href="images/elephant_icon.jpg" />
 	<description>Phenote standalone app via webstart</description>
  	 <!-- Declares that the application can run without
          access to the server it was downloaded from -->
@@ -46,6 +46,8 @@ href="phenote.jnlp">
 	<jar href="jars/jebl-0.4.jar" />
 	<jar href="jars/glazedlists-1.7.0_java15.jar" />
 	<nativelib href="jars/phenote-nativelibs.jar"/>
+	<nativelib href="jars/swing-layout.jar"/>
+
 	<property name="phenote.version" value="@@phenote.version@@"/>
     <property name="phenote.build" value="@@phenote.build@@"/>
 </resources>

@@ -18,9 +18,9 @@ jetty - (MG) allows phenote to be a standalone servlet without having to plug
 into tomcat server - used to talk with smart atlas over http
 jetty-util (MG) unfortunately jetty comes with 2 jars - silly
 
-jhindexer (Nicole Washington NW)? i think nicole added this for indexing help?
+jhindexer (NW) this is the library for the indexing capability in the help manual.
 
-jh - (NW?) i think this is also for help?
+jh - (NW) this is the tool that puts together the help files/interface
 
 jnlp - (MG) i think this allows phenote to find stuff when in webstart context
 - i think this is used to find all the config files in the webstart jar
@@ -80,8 +80,7 @@ i think this makes it beany - and closer to jsf
 sugilayout - MG/Uvic/Seth Carbon - sugilayout from graphviz implemented in
 java - used by shrimp which isnt being used - not needed for webstart i think
 
-swing-layout - NW? JB? added recently by nicole or jim? to do some swing
-layout - probably needed for webstart
+swing-layout - (NW) - this is for some swing layout stuff, i believe for the new loading screen, but i don't remember which part
 
 swixml - (JB) does swing layout via xml - used in main character table and character template table
 
