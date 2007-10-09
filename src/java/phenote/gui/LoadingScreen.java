@@ -3,6 +3,7 @@ package phenote.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.io.FileNotFoundException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -14,6 +15,7 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import org.apache.log4j.Logger;
 import org.jdesktop.layout.GroupLayout;
 import org.jdesktop.layout.LayoutStyle;
 
@@ -23,6 +25,7 @@ import phenote.util.FileUtil;
 
 public class LoadingScreen extends JFrame {
 
+  private static final Logger LOG = Logger.getLogger(LoadingScreen.class);
 	/**
 	 * Launch the application
 	 * @param args
@@ -43,26 +46,30 @@ public class LoadingScreen extends JFrame {
 	/**
 	 * Create the frame
 	 */
-	public LoadingScreen() {
-		super();
-		setBackground(Color.WHITE);
-		getContentPane().setBackground(Color.WHITE);
-		setBounds(100, 100, 500, 375);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setResizable(false);
-
-		final JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		getContentPane().add(panel, BorderLayout.CENTER);
-
-		ImageIcon imageIcon = new ImageIcon(FileUtil.findUrl(
-"images/elephant_header.jpg"));
-		
-		JLabel logo = new JLabel();
+  public LoadingScreen() {
+    super();
+    setBackground(Color.WHITE);
+    getContentPane().setBackground(Color.WHITE);
+    setBounds(100, 100, 500, 375);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setResizable(false);
+    
+    final JPanel panel = new JPanel();
+    panel.setBackground(Color.WHITE);
+    getContentPane().add(panel, BorderLayout.CENTER);
+    
+    JLabel logo = new JLabel();
+    try {
+      ImageIcon imageIcon = new ImageIcon(FileUtil.findUrl(
+                                            "images/elephant_header.jpg"));
+      
 //		logo.createTitle("");
-		logo.setIcon(imageIcon);
-		//		logo.setIcon(SwingResourceManager.getIcon(LoadingScreen.class, "images/elephant_header.jpg"));
-
+      logo.setIcon(imageIcon);
+      //		logo.setIcon(SwingResourceManager.getIcon(LoadingScreen.class, "images/elephant_header.jpg"));
+    }
+    catch (FileNotFoundException e) {
+      LOG.error("Unable to find elephant image");
+    }
 
 		startupProgressBar = new JProgressBar();
 		startupProgressBar.setString("");
