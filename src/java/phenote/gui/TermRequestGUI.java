@@ -270,13 +270,15 @@ public class TermRequestGUI extends JFrame {
 		  m+="[DEF] "+ newtermDef.getText()+"\n";
 		  m+="[COMMENT] "+ newtermComment.getText()+"\n";
 		  String newtermID = submitNewTermViaREST();
-		  if (newRadioButton.isSelected()) {
-		  	m = "<html><body>Your term <bold>"+newtermName.getText()+"</bold> has been successfully created.\n";
-		  	m+= "It has been given a temporary ID <font color=red>"+newtermID+"</font></body></html>";
-		  }
+//		  if (newRadioButton.isSelected()) {
+//		  	m = "<html><body>Your term <bold>"+newtermName.getText()+"</bold> has been successfully created.\n";
+//		  	m+= "It has been given a temporary ID <font color=red>"+newtermID+"</font></body></html>";
+//		  }
 		  if (newtermID!=null) {
 		  }
-      JOptionPane.showMessageDialog(null, m, "Submission Successful", JOptionPane.PLAIN_MESSAGE);
+		  m="This feature has not yet been implemented!";
+		  JOptionPane.showMessageDialog(null, m, "Submission Error", JOptionPane.ERROR_MESSAGE);
+		  //      JOptionPane.showMessageDialog(null, m, "Submission Successful", JOptionPane.PLAIN_MESSAGE);
 			thisframe.setVisible(false);
 		}
 	}
