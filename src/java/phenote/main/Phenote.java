@@ -84,7 +84,7 @@ public class Phenote {
     if (!appenders.hasMoreElements()) {
       System.out.println("Log4J configuration failed, using default configuration settings");
       BasicConfigurator.configure(); 
-      rl.setLevel(Level.INFO);
+      rl.setLevel(Level.DEBUG);
       LOG = LogManager.getLogger(Phenote.class);
     }
     
