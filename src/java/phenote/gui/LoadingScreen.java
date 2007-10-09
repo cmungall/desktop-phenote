@@ -3,9 +3,6 @@ package phenote.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.lang.Object;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -16,19 +13,10 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import java.awt.event.ActionListener;
-//import javax.swing.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
 
 import org.jdesktop.layout.GroupLayout;
 import org.jdesktop.layout.LayoutStyle;
-//import com.jgoodies.forms.factories.DefaultComponentFactory;
-import com.swtdesigner.SwingResourceManager;
 
-import phenote.error.ErrorEvent;
-import phenote.error.ErrorListener;
 import phenote.main.PhenoteVersion;
 
 public class LoadingScreen extends JFrame {
@@ -59,6 +47,7 @@ public class LoadingScreen extends JFrame {
 		getContentPane().setBackground(Color.WHITE);
 		setBounds(100, 100, 500, 375);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
 
 		final JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);

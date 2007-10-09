@@ -280,6 +280,7 @@ public class Phenote {
 //    splashScreen.setProgressMax(100);
 //    splashScreen.setScreenVisible(true);
     loadingScreen.setScreenVisible(true);
+    loadingScreen.setLocationRelativeTo(null); // centers panel on screen
 //    splashScreen.setProgress("Phenote version "+PhenoteVersion.versionString(), 0);
   }
 
