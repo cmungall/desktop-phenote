@@ -12,6 +12,7 @@
 - modify docs/phenote-website/phenote.jnlp file<br>
 ant will automatically put in new version of phenote (thanks jim)<br>
 need to add any new jar files to jar list (eventually will automate with ant?)<br>
+also update any specialized jnlpl files (eg smart-atlas.jnlp)<br>
 <br>
 - edit docs/phenote-website/phenote-release-notes.html<br>
 with all the new features and bug fixes<br>
@@ -27,9 +28,10 @@ it - maybe this is so of your machine already - not always the case) <br>
 jars for webstart. if you dont you need to make one [fill in details of
 making a key for jar signing]<br>
 <br>
-- make a symbolic link from your phenote root to the root of your web
-where phenote will be plopped - and call it "phenote-webstart". This
-will be used by ant<br>
+- make a symbolic link (if you dont already have one) from your phenote
+root to the root of your web where phenote will be plopped - and call
+it "phenote-webstart". This will be used by ant<br>
+make sure you have write permission to this directory and permission to mkdird<br>
 <br>
 (this is no longer true - but we may bring this back) [- set
 environment variable PHENOTE_VERSION to the current version of phenote,
@@ -40,6 +42,8 @@ phenote-webstart/${PHENOTE_VERSION}]<br>
 version number is something like "1.5"<br>
 <br>
 - [Nicole then modifies some files and runs some script to update the
-phenote website download page - nicole could you fill that in here? ]
+phenote website download page - nicole could you fill that in here? ]<br>
+<br>
+- make tag in sourceforge subversion
 </body>
 </html>
