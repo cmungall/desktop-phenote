@@ -34,7 +34,7 @@ jstl?
 
 junit - MG - for testing phenote - ant test - not needed for webstart
 
-layouts - JB? for laying out CharacterTemplate?
+layouts ?
 
 libquaqua.jnilib - JB - jni lib for qua qua for java on macs - needed for
 webstart
