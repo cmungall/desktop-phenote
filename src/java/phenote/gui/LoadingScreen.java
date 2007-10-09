@@ -18,6 +18,8 @@ import org.jdesktop.layout.GroupLayout;
 import org.jdesktop.layout.LayoutStyle;
 
 import phenote.main.PhenoteVersion;
+import phenote.util.FileUtil;
+
 
 public class LoadingScreen extends JFrame {
 
@@ -53,7 +55,8 @@ public class LoadingScreen extends JFrame {
 		panel.setBackground(Color.WHITE);
 		getContentPane().add(panel, BorderLayout.CENTER);
 
-		ImageIcon imageIcon = new ImageIcon("images/elephant_header.jpg");
+		ImageIcon imageIcon = new ImageIcon(FileUtil.findUrl(
+"images/elephant_header.jpg"));
 		
 		JLabel logo = new JLabel();
 //		logo.createTitle("");

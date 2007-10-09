@@ -17,6 +17,10 @@
 	</div>
 
 	<h1>1.4 </h1>
+	<h2>10.09.2007, version <a href="put.link.here">1.4 - release</a></h2>
+	<ul>
+	<li>feature: Loading splash more informative about what's going on behind-the-scenes such as which ontologies are loading, if they are being updated, etc.</li>
+	</ul>
 	<h2>08.28.2007, version <a href="phenote/1.4-beta3/phenote.jnlp">1.4-beta3</a></h2>
 	<ul>
   <li>feature: Native look-and-feel enabled for interface.  Users should now see Mac or Windows style depending on their system.</li>
