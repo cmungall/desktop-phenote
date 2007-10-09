@@ -6,6 +6,7 @@ href="phenote.jnlp">
 <information>
 	<title>Phenote @@phenote.version@@</title>
 	<vendor>National Center for Biomedical Ontology</vendor>
+	<icon href="images/elephant_icon.jpg" />
 	<description>Phenote standalone app via webstart</description>
  	 <!-- Declares that the application can run without
          access to the server it was downloaded from -->
@@ -43,6 +44,10 @@ href="phenote.jnlp">
 	<jar href="jars/jdom.jar" />
 	<jar href="jars/quaqua.jar" />
 	<jar href="jars/jebl-0.4.jar" />
+	<jar href="jars/swing-layout.jar" />
+	<jar href="jars/glazedlists-1.7.0_java15.jar" />
+	<nativelib href="jars/phenote-nativelibs.jar"/>
+
 </resources>
 <!-- no cmd line param will ask user for config at initialization -->
 <application-desc main-class="phenote.main.Phenote">

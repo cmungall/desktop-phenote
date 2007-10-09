@@ -45,8 +45,9 @@ href="phenote.jnlp">
 	<jar href="jars/quaqua.jar" />
 	<jar href="jars/jebl-0.4.jar" />
 	<jar href="jars/glazedlists-1.7.0_java15.jar" />
+	<jar  href="jars/swing-layout.jar"/>
 	<nativelib href="jars/phenote-nativelibs.jar"/>
-	<nativelib href="jars/swing-layout.jar"/>
+
 
 	<property name="phenote.version" value="@@phenote.version@@"/>
     <property name="phenote.build" value="@@phenote.build@@"/>
