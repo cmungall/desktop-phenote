@@ -120,7 +120,7 @@ field =
     attribute copy-field { xsd:boolean },
     ## the amount of letters/chars a user has to type before completion happens
     ## this is to optimize slow completion w many ontologies 
-    ## with new threading optimization this is being phased out
+    ## with new threading optimization this is being phased out, its been disabled
     attribute min-completion-chars { xsd:int },
     # for ontol completion what to sort terms by, default is NAME
     attribute sort-by { "NAME" | "ID" },
