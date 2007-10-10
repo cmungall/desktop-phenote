@@ -43,8 +43,29 @@ phenote-webstart/${PHENOTE_VERSION}]<br>
 - ant webstart -Dphenote.version="versionNumber" (called from phenote root) should then install phenote webstart<br>
 version number is something like "1.5"<br>
 <br>
-- [Nicole then modifies some files and runs some script to update the
-phenote website download page - nicole could you fill that in here? ]<br>
+<ul>
+  <li>update the release notes:
+  <p> in phenote/doc/phenote-website there's a file called phenote-release-notes.shtml.  add any significant changes, bugfixes, or new features.  i try to put the most interesting (for the user) changes first, since they might read this to see what's new, but might stop reading after only a few.  When applicable, be sure to include a link to the tracker item that the item relates.</p>
+  </li>
+  <li>update the links on the website:
+  <ul>
+    <li>index.shtml:
+    <p>there's a 'quick link' - change to the latest version</p>
+    <p>add a note that there's been a new release to the 'news' section</p>
+    <p>remove the oldest release news item</p></li>
+    <li>events.shtml:
+    <p>add the same news item to this page (past events section)</p>
+    </li>
+    <li>download.shtml:
+    <p>update the link to the newest release under webstart </p>
+    <p>update the svn command under 'run phenote at the command   line'</p>
+    <p>add the latest and/or sexiest features of the latest release</p>
+    </li>
+  </ul>
+  <li>to update the website:
+  <p>then, to make sure all the changes are made to the website, be sure to first commit your changes to svn.  then run 'update_site' script that resides in the phenote/website dir.  this must be done from a berkeleybop machine.</p>
+  </li>
+</ul>
 <br>
 - make tag in sourceforge subversion
 </body>
