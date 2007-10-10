@@ -16,17 +16,21 @@
 	</div>
 	<h2><a href="http://www.phenote.org/phenote/latest/phenote.jnlp">Launch Phenote in your browser</a></h2>
 	<p> You can run phenote directly from your web browser without a separate installation by selecting one of the following links:</p>
-	<ul><li><strong>Beta release: <a href="http://www.phenote.org/phenote/1.4-beta3/phenote.jnlp">1.4 beta3</a></strong></li>
-	<li><strong>Stable release: <a href="http://www.phenote.org/phenote/1.3/phenote.jnlp">1.3</a> </strong></li>
+<!--	<ul><li><strong>Beta release: <a href="http://www.phenote.org/phenote/1.4-beta3/phenote.jnlp">1.4 beta3</a></strong></li>-->
+	<li><strong>Stable release: <a href="http://www.phenote.org/phenote/1.4/phenote.jnlp">1.4</a> </strong></li>
 	<li><a href="http://www.phenote.org/phenote/phenote.html">Older releases</a></li>
 	</ul>
 	<p> You may be prompted to sign a certificate and allow the download.  This will take a few minutes the first time you do this.
 	</p>
 	<h2>Run Phenote at the command line</h2>
 	<p> To run phenote on the command line, linux or MacOSX users will need to checkout Phenote from the subversion repository.  This can be done with the following command:</p>
-	<ul><li>Beta release: <b>svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/tags/1.4-beta3/ phenote</b> </li>
-	<li>Stable release: <b>svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/tags/1.3/ phenote</b>
-	<li>Latest: <b>svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/trunk phenote </b></li>
+	<ul>
+<!--	<li>Beta release: <b>svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/tags/1.4-beta3/ phenote</b>
+	</li>-->
+	<li>Stable release: <b>svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/tags/1.4/ phenote</b>
+	</li>
+	<li>Latest: <b>svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/trunk phenote </b>
+	</li>
 	</ul>	
 	<p>Once you've got it, you can run Phenote with ant with the command:  <b>ant run</b>
 	</p>
@@ -52,32 +56,32 @@
       <div id="sidebar_content">
 
 	<div class="content_box_head_blue">
-	  Recently added features, version 1.4-beta3
+	  Recently added features, version 1.4
 	</div>
 
 	<div class="content_box_blue">
-  <b>feature</b>: Native look-and-feel enabled for interface.  Users should now see Mac or Windows style depending on their system.<br />
-  <b>feature</b>: read-only field (needs work)<br />
-  <b>feature</b>: config disabpng of copy of field (for db ids)<br />
-  <b>feature</b>: display property values of terms in term info<br />
-  <b>feature</b>: Phylogeny Chooser for NESCent/PhenoMap project. A user can import a phylogenetic tree in Newick format.  The user can use the tree
-  viewer to select rows within the character template - typically taxonomic groups.<br />
-  <b>feature</b>: term fields can be nullified<br />
-  <b>feature</b>: separate queries to backend for different groups, implemented in worm<br />
-  <b>feature</b>: ID field type, requires ":"<br />
-  <b>feature</b>: can get unique list of deleted annots<br />
-  <b>feature</b>: added group adapter framework<br />
-  <b>feature</b>: fly genotype group adapter makes fly genotype strings from tab/group<br />
-  <b>feature</b>: worm group adapter makes reference terms from ref query<br />
-  <b>change</b>: on term completion if adding a letter use previous completion list<br />
-  <b>change</b>: worm adapter query tab working properly<br />
-  <b>change</b>: build file takes param for webstart version deployment, and puts in jnlp<br />
-  <b>change</b>: group adapters can psten for CharList changes<br />
-  <b>change</b>: added/corrected BIRN ontologies<br />
-  <b>bugfix</b>: load of file doesnt crash on post comp parsing bug<br />
-  <b>bugfix</b>: doesnt load obo files specified twice twice<br />
-  <b>bugfix</b>: view menu show up at initialization<br />
-  <b>bugfix</b>: layout of term history with split pane proper<br />
+	 <b>feature</b>: Loading splash more informative about what's going on behind-the-scenes such as which ontologies are loading, if they are being updated, etc.<br />
+	<b>feature</b>: obo edit annotation model can now be optionally configured for backend, which will allow for more sophisticated data to be captured (like comparisons)<br />
+	<b>feature</b>: Error for obo parse failures to info panel <br />
+	<b>feature</b>: Delimited tab adapter uses column headings to map to table, rather than ordering <br />
+	<b>feature</b>: Autocompletion optimized with threading, cancels stale requests (min-comp-chars now pase) <br />
+	<b>feature</b>: Date created automatically added into data (under the hood) <br />
+	<b>feature</b>: If arrow hit with empty input then gets &amp; displays all terms (used to inefficiently pre-load) <br />
+	<b>feature</b>: Can sort completion list by ID, needed for zfin stages<br />
+	<b>feature</b>: Table preserves user ordering of columns, in addition to column widths.<br />
+	<b>feature</b>: Filter search field allows user to narrow down displayed data rows via matching text.<br />
+	<b>feature</b>: See actual value in input field when multiple rows are selected and have the same value.<br />
+	<b>feature</b>: Copy all taxon names in specimen list as an unresolved Newick tree (for PhenoMap/NESCent)<br />
+	<b>feature</b>: Automatically open specimen list and phylogenetic tree files when opening data file (for PhenoMap/NESCent)<br />
+	<b>change</b>: Moved test suites in with source to work with eclipse<br />
+	<b>change</b>: Took a lot of obos out of webstart jar - less bulky - as they get automatically downloaded<br />
+	<b>change</b>: Phenote now follows standard log4j configuration conventions.  Pass a custom log configuration to Phenote via the classpath or the system propery "log4j.configuration".<br />
+	<b>bugfix</b>: Terms not found are no longer dropped, a dangler is created, and error msg to info, show up in red<br />
+	<b>bugfix</b>: if log conf fails use backup default<br />
+	<b>bugfix</b>: Input fields now commit changes with either Return or Tab<br />
+	<b>bugfix</b>: Native lib is loaded properly for Mac interface on webstart, allowing traversal of aliases in file dialog, as well as user sidebar items in file dialog<br />
+	<b>bugfix</b>: Noncontiguous row selection works now on Mac<br />
+</ul>
 	</div>
       </div>
     </div>

@@ -16,7 +16,8 @@
 	</div>
 	<h2><a href="http://www.phenote.org/phenote/latest/phenote.jnlp">Launch Phenote in your browser</a></h2>
 	<p> You can run phenote directly from your web browser without a separate installation by selecting one of the following links:</p>
-<!--	<ul><li><strong>Beta release: <a href="http://www.phenote.org/phenote/1.4-beta3/phenote.jnlp">1.4 beta3</a></strong></li>-->
+	<ul>
+<!--	<li><strong>Beta release: <a href="http://www.phenote.org/phenote/1.4-beta3/phenote.jnlp">1.4 beta3</a></strong></li>-->
 	<li><strong>Stable release: <a href="http://www.phenote.org/phenote/1.4/phenote.jnlp">1.4</a> </strong></li>
 	<li><a href="http://www.phenote.org/phenote/phenote.html">Older releases</a></li>
 	</ul>
