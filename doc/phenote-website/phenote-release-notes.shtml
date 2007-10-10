@@ -29,16 +29,31 @@
 
 	
 <ul>
-
-	<li>feature: Loading splash more informative about what's going on
-behind-the-scenes such as which ontologies are loading, if they are
-being updated, etc.</li>
-  <li>feature: obo edit annotation model can now be optionally configured for
-backend, which will allow for more sophisticated data to be captured (like
-comparisons)</li>
-  <li>feature: Error for obo parse failures to info panel</li><li>feature: Delimited tab adapter uses column headings to map to table, rather than ordering</li><li>feature: Autocompletion optimized with threading, cancels stale requests (min-comp-chars now pase)</li><li>feature: Date created automatically added into data (under the hood)</li><li>feature: If arrow hit with empty input then gets &amp; displays all terms (used to inefficiently pre-load)</li><li>feature: Can sort completion list by ID, needed for zfin stages</li><li>change: Moved test suites in with source to work with eclipse</li><li>change: Took a lot of obos out of webstart jar - less bulky - as they get automatically downloaded</li></ul><ul><li>bugfix: Terms not found are no longer dropped, a dangler is created, and error msg to info, show up in red</li><li>bugfix: if log conf fails use backup default</li>
-
-	
+	<li>feature: Loading splash more informative about what's going on behind-the-scenes such as which ontologies are loading, if they are being updated, etc.</li>
+	<li>feature: obo edit annotation model can now be optionally configured for backend, which will allow for more sophisticated data to be captured (like comparisons)</li>
+	<li>feature: Error for obo parse failures to info panel</li>
+	<li>feature: Delimited tab adapter uses column headings to map to table, rather than ordering</li>
+	<li>feature: Autocompletion optimized with threading, cancels stale requests (min-comp-chars now pase)</li>
+	<li>feature: Date created automatically added into data (under the hood)</li>
+	<li>feature: If arrow hit with empty input then gets &amp; displays all terms (used to inefficiently pre-load)</li>
+	<li>feature: Can sort completion list by ID, needed for zfin stages</li>
+	<li>feature: Table preserves user ordering of columns, in addition to column widths.</li>
+	<li>feature: Filter search field allows user to narrow down displayed data rows via matching text.</li>
+	<li>feature: See actual value in input field when multiple rows are selected and have the same value.</li>
+	<li>feature: Copy all taxon names in specimen list as an unresolved Newick tree (for PhenoMap/NESCent)</li>
+	<li>feature: Automatically open specimen list and phylogenetic tree files when opening data file (for PhenoMap/NESCent)</li>
+</ul>
+<ul>
+	<li>change: Moved test suites in with source to work with eclipse</li>
+	<li>change: Took a lot of obos out of webstart jar - less bulky - as they get automatically downloaded</li>
+	<li>change: Phenote now follows standard log4j configuration conventions.  Pass a custom log configuration to Phenote via the classpath or the system propery "log4j.configuration".</li>
+</ul>
+<ul>
+	<li>bugfix: Terms not found are no longer dropped, a dangler is created, and error msg to info, show up in red</li>
+	<li>bugfix: if log conf fails use backup default</li>
+	<li>bugfix: Input fields now commit changes with either Return or Tab</li>
+	<li>bugfix: Native lib is loaded properly for Mac interface on webstart, allowing traversal of aliases in file dialog, as well as user sidebar items in file dialog</li>
+	<li>bugfix: Noncontiguous row selection works now on Mac</li>
 </ul>
 
 	
