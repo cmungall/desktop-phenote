@@ -1,15 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<!--#include virtual="ssi/head.html" -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><!--#include virtual="ssi/head.html" -->
+
 
     
     
-  <title>Phenote: A Phenotype Annotation Tool using Ontologies</title>
-</head>
+  <title>Phenote: A Phenotype Annotation Tool using Ontologies</title></head>
 
-
-  <body>
+<body>
 
 
     <!--#include virtual="ssi/header.html" -->
@@ -28,7 +25,7 @@
 <h1>1.4 </h1>
 
 	
-<h2>10.09.2007, version <a href="put.link.here">1.4 - release</a></h2>
+<h2>10.10.2007, version <a href="put.link.here">1.4 - release</a></h2>
 
 	
 <ul>
@@ -36,10 +33,10 @@
 	<li>feature: Loading splash more informative about what's going on
 behind-the-scenes such as which ontologies are loading, if they are
 being updated, etc.</li>
-  <li>obo edit annotation model can now be optionally configured for
-backend, which will allow for more sophistaicated to be captured (like
+  <li>feature: obo edit annotation model can now be optionally configured for
+backend, which will allow for more sophisticated data to be captured (like
 comparisons)</li>
-  <li></li>
+  <li>feature: Error for obo parse failures to info panel</li><li>feature: Delimited tab adapter uses column headings to map to table, rather than ordering</li><li>change: Moved test suites in with source to work with eclipse</li></ul><ul><li>bugfix: Terms not found are no longer dropped, a dangler is created, and error msg to info, show up in red</li><li>bugfix: if log conf fails use backup default</li>
 
 	
 </ul>
@@ -833,5 +830,4 @@ limited functionality was demo'd at the cbio meeting 3/3/06 at Stanford.</p>
 
     <!--#include virtual="ssi/footer.html" -->
 
-</body>
-</html>
+</body></html>
