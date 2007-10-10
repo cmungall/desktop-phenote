@@ -90,6 +90,11 @@ class HelpMenu extends JMenu {
       	}
     	else if (e.getActionCommand().equals("request")) {
     		try {
+		    String m="This feature is still in development.  Any information\n"+
+			"you enter will be lost\n";
+			
+		    JOptionPane.showMessageDialog(null, m, "Phenote message", JOptionPane.PLAIN_MESSAGE);
+
     			termRequester = new TermRequestGUI();
     			termRequester.setVisible(true);
     		} catch (Exception ex) {
