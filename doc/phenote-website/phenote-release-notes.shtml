@@ -36,7 +36,7 @@ being updated, etc.</li>
   <li>feature: obo edit annotation model can now be optionally configured for
 backend, which will allow for more sophisticated data to be captured (like
 comparisons)</li>
-  <li>feature: Error for obo parse failures to info panel</li><li>feature: Delimited tab adapter uses column headings to map to table, rather than ordering</li><li>change: Moved test suites in with source to work with eclipse</li></ul><ul><li>bugfix: Terms not found are no longer dropped, a dangler is created, and error msg to info, show up in red</li><li>bugfix: if log conf fails use backup default</li>
+  <li>feature: Error for obo parse failures to info panel</li><li>feature: Delimited tab adapter uses column headings to map to table, rather than ordering</li><li>feature: Autocompletion optimized with threading, cancels stale requests (min-comp-chars now pase)</li><li>feature: Date created automatically added into data (under the hood)</li><li>feature: If arrow hit with empty input then gets &amp; displays all terms (used to inefficiently pre-load)</li><li>feature: Can sort completion list by ID, needed for zfin stages</li><li>change: Moved test suites in with source to work with eclipse</li><li>change: Took a lot of obos out of webstart jar - less bulky - as they get automatically downloaded</li></ul><ul><li>bugfix: Terms not found are no longer dropped, a dangler is created, and error msg to info, show up in red</li><li>bugfix: if log conf fails use backup default</li>
 
 	
 </ul>
