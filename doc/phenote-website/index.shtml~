@@ -79,7 +79,7 @@
 	  <img src="images/calendar.gif"
 	       alt="Upcoming Events" 
 	       class="icon_blue"/>
-	  Upcoming Events
+	  <a href="events.shtml">Upcoming Events</a>
 	</div>
 
 	<div class="content_box_green">
@@ -102,7 +102,7 @@
 	    <li class="events">
 	  <p class="quick_link">
 	    <img src="images/star.gif" alt=""  class="icon_green"/>	      
-	    <a href="http://www.phenote.org/irc_chat">User's Group Monthly Meeting</a>, October 4, 8:30am, Online 
+	    <a href="http://www.phenote.org/irc_chat">User's Group Monthly Meeting</a>, November 1, 9:00am, Online 
 	    </p>
 	    </li> 
 	  </ul>
@@ -115,12 +115,12 @@
 	    </p>
 	    </li>
 	  </ul>
-	  <h3><a href="http://www.phenote.org/events.shtml">Past Events...</a></h3>	  
+	  <!--h3><a href="http://www.phenote.org/events.shtml">Past Events...</a></h3-->	  
 	</div>
 
 	<div class="content_box_head_green">
 	  <img src="images/document.gif" alt="News" class="icon_blue" />
-	  News
+	  <a href="events.shtml">News</a>
 	</div>
 
 	<div class="content_box_green">
@@ -129,7 +129,8 @@
 	  <!--No news is good news!-->
 	  
 	  <!-- Do not destry the following event template -->
-	    <p>09.17.2007 - New website rolled out!  The website has the same
+	  <p>10.02.2007 - Phenote user's group to be moved to first Thursday of each month, 9am.  Join us for our next meeting on November 1st over WebEx!</p>
+	  <p>09.17.2007 - New website rolled out!  The website has the same
 	    content as the old one, just with a new look-and-feel.</p>
 	    <p> 08.28.2007 - 
 	    <a href="http://www.phenote.org/download.shtml">New Phenote Beta available: 1.4-beta3!</a> </p>

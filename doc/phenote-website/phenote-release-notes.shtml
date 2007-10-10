@@ -25,9 +25,7 @@
 <h1>1.4 </h1>
 
 	
-<h2>10.10.2007, version <a href="put.link.here">1.4 - release</a></h2>
-
-	
+<h2>10.10.2007, version <a href="phenote/1.4/phenote.jnlp">1.4 - release</a></h2>
 <ul>
 	<li>feature: Loading splash more informative about what's going on behind-the-scenes such as which ontologies are loading, if they are being updated, etc.</li>
 	<li>feature: obo edit annotation model can now be optionally configured for backend, which will allow for more sophisticated data to be captured (like comparisons)</li>
@@ -42,13 +40,9 @@
 	<li>feature: See actual value in input field when multiple rows are selected and have the same value.</li>
 	<li>feature: Copy all taxon names in specimen list as an unresolved Newick tree (for PhenoMap/NESCent)</li>
 	<li>feature: Automatically open specimen list and phylogenetic tree files when opening data file (for PhenoMap/NESCent)</li>
-</ul>
-<ul>
 	<li>change: Moved test suites in with source to work with eclipse</li>
 	<li>change: Took a lot of obos out of webstart jar - less bulky - as they get automatically downloaded</li>
 	<li>change: Phenote now follows standard log4j configuration conventions.  Pass a custom log configuration to Phenote via the classpath or the system propery "log4j.configuration".</li>
-</ul>
-<ul>
 	<li>bugfix: Terms not found are no longer dropped, a dangler is created, and error msg to info, show up in red</li>
 	<li>bugfix: if log conf fails use backup default</li>
 	<li>bugfix: Input fields now commit changes with either Return or Tab</li>
