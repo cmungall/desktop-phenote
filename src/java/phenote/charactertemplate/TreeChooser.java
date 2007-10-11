@@ -106,7 +106,7 @@ public class TreeChooser extends AbstractTemplateChooser implements CharListChan
     return taxa;
   }
   
-  private TreeViewer getTreeViewer() {
+  protected TreeViewer getTreeViewer() {
     if (this.treeViewer == null) {
       this.treeViewer = this.createViewer();
       // starting out with a tree helps the TreeViewer to display correctly

@@ -15,30 +15,33 @@ import java.util.List;
 import java.util.Set;
 import java.util.Map.Entry;
 
+import org.apache.log4j.Logger;
 import org.geneontology.oboedit.datamodel.Link;
 import org.geneontology.oboedit.datamodel.OBOClass;
 import org.geneontology.oboedit.datamodel.TermCategory;
 
 import phenote.dataadapter.AbstractFileAdapter;
+import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
+import phenote.main.PhenoteVersion;
 
 /** Writes Phenote characters to a NEXUS file.
  * Phenote characters are grouped into NEXUS characters via shared "attribute" heritage
  * within PATO.
  * The exporter supports only up to 36 values for any particular attribute, due to
  * various limitations of other widely used NEXUS implementations (e.g. Mesquite & MacClade).
- * There is no support for reading of NEXUS files.
+ * There is currently no support for reading of NEXUS files.
 */
 
 public class NEXUSAdapter extends AbstractFileAdapter {
   
   private File file;
-  private static String[] extensions = {"nex", "nxs"};
-  private static String description =  "NEXUS [.nex, .nxs]";
-  private static String GENOTYPE_KEY = "Genotype";
-  private static String ENTITY_KEY = "Entity";
-  private static String VALUE_KEY = "Quality";
+  private static final String[] extensions = {"nex", "nxs"};
+  private static final String description =  "NEXUS [.nex, .nxs]";
+  private static final String TAXON_KEY = "Taxon";
+  private static final String ENTITY_KEY = "Entity";
+  private static final String VALUE_KEY = "Quality";
   private static String STATE_SYMBOLS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   private LinkedHashMap<String, ArrayList<Integer>> genotypes; // ordered map of genotype names and value lists
   private LinkedHashMap<NEXUSCharacter, List<OBOClass>> nexusCharacters; // ordered map of character names and state lists
@@ -49,17 +52,25 @@ public class NEXUSAdapter extends AbstractFileAdapter {
   public void commit(CharacterListI charList) {
     if (this.file == null)
       return;
+    this.commit(charList, this.file);
+  }
+  
+  public void commit(CharacterListI charList, File f) {
+    this.file = f;
+    try {
+      this.commit(charList, new BufferedWriter(new FileWriter(this.file)));
+    } catch (IOException e) {
+      log().error("Failed to write NEXUS file", e);
+    }
+  }
+  
+  public void commit(CharacterListI charList, Writer writer) {
     this.setGenotypes(new LinkedHashMap<String, ArrayList<Integer>>());
     this.setNexusCharacters(new LinkedHashMap<NEXUSCharacter, List<OBOClass>>());
     this.populateGenotypesAndCharacters(charList);
     this.createDefaultCharacterValues();
     this.populateCharacterValues(charList);
-    this.writeNexus(this.file);
-  }
-
-  public void commit(CharacterListI charList, File f) {
-    this.file = f;
-    commit(charList);
+    this.writeNexus(writer);
   }
 
   public List<String> getExtensions() {
@@ -67,7 +78,7 @@ public class NEXUSAdapter extends AbstractFileAdapter {
   }
 
   public void load() {
-    System.out.println("Cannot read: NEXUS adapter is for import only.");
+    log().error("Cannot read: NEXUS adapter is for import only.");
   }
 
   public CharacterListI load(File f) {
@@ -102,16 +113,16 @@ public class NEXUSAdapter extends AbstractFileAdapter {
         OBOClass entityTerm;
         OBOClass valueTerm;
         try {
-          genotype = ch.getValueString(GENOTYPE_KEY);
+          genotype = ch.getValueString(TAXON_KEY);
           entityTerm = ch.getTerm(ENTITY_KEY);
           valueTerm = ch.getTerm(VALUE_KEY);
-        } catch (Exception e) {
-          System.out.println("Could not get terms from character: " + e);
+        } catch (CharFieldException e) {
+          log().error("Could not get terms from character: " + ch, e);
           continue;
         }
         OBOClass attributeTerm = this.getAttributeForValue(valueTerm);
         if (attributeTerm == null) {
-          System.out.println("Failed to find attribute for value.");
+          log().error("Failed to find attribute for value: " + valueTerm);
           continue;
         }
         if (!(this.genotypes.containsKey(genotype))) {
@@ -140,34 +151,34 @@ public class NEXUSAdapter extends AbstractFileAdapter {
   private void populateCharacterValues(CharacterListI characterList) {
     for (CharacterI ch : characterList.getList()) {
       if (this.isValidCharacter(ch)) {
-        String genotype;
+        OBOClass taxonTerm;
         OBOClass entityTerm;
         OBOClass valueTerm;
         try {
-          genotype = ch.getValueString(GENOTYPE_KEY);
+          taxonTerm = ch.getTerm(TAXON_KEY);
           entityTerm = ch.getTerm(ENTITY_KEY);
           valueTerm = ch.getTerm(VALUE_KEY);
-        } catch (Exception e) {
-          System.out.println("Could not get terms from character: " + e);
+        } catch (CharFieldException e) {
+          log().error("Could not get terms from character: " + ch, e);
           continue;
         }
         OBOClass attributeTerm = this.getAttributeForValue(valueTerm);
         if (attributeTerm == null) {
-          System.out.println("Failed to find attribute for value.");
+          log().error("Failed to find attribute for value: " + valueTerm);
           continue;
         }
         NEXUSCharacter currentCharacter = new NEXUSCharacter(entityTerm, attributeTerm);
         List<OBOClass> currentValueList = this.getNexusCharacters().get(currentCharacter);
         int indexOfCharacter = Arrays.asList(this.getNexusCharacters().values().toArray()).indexOf(currentValueList);
         int indexOfValue = currentValueList.indexOf(valueTerm);
-        this.getGenotypes().get(genotype).set(indexOfCharacter, indexOfValue);
+        this.getGenotypes().get(taxonTerm.getName()).set(indexOfCharacter, indexOfValue);
       }
     }
   }
   
   private boolean isValidCharacter(CharacterI character) {
     try {
-      return (character.hasValue(GENOTYPE_KEY) && (character.hasValue(ENTITY_KEY)) && (character.hasValue(VALUE_KEY)));
+      return ((character.hasValue(TAXON_KEY)) && (character.hasValue(ENTITY_KEY)) && (character.hasValue(VALUE_KEY)));
     } catch (Exception e) {
       return false;
     }
@@ -181,9 +192,7 @@ public class NEXUSAdapter extends AbstractFileAdapter {
     }
     if (categoryNames.contains("attribute_slim")) {
       return valueTerm;
-    }
-    // isRoot no longer there - not sure what replaces it yet...
-    else if ((categoryNames.contains("value_slim"))) { //&& !(valueTerm.isRoot())) {
+    } else if ((categoryNames.contains("value_slim"))) {
       return this.getAttributeForValue(this.getParentForTerm(valueTerm));
     }
     return null;
@@ -199,10 +208,9 @@ public class NEXUSAdapter extends AbstractFileAdapter {
     return null;
   }
   
-  private void writeNexus(File f) {
+  private void writeNexus(Writer writer) {
     try {
-      BufferedWriter writer = new BufferedWriter(new FileWriter(f));
-      writer.write("#NEXUS\n[Generated by Phenote]\n\n");
+      writer.write("#NEXUS\n[Generated by Phenote " + PhenoteVersion.versionString() + "]\n\n");
       writer.write("BEGIN TAXA;\n");
       writer.write("\tDIMENSIONS NTAX=" + this.getGenotypes().size() + ";\n");
       this.writeTaxLabels(writer);
@@ -215,7 +223,7 @@ public class NEXUSAdapter extends AbstractFileAdapter {
       writer.write("END;\n");
       writer.close();
     } catch (IOException e) {
-      System.out.println("Failed to write NEXUS file " + e);
+      log().error("Failed to write NEXUS file", e);
     }
   }
   
@@ -273,8 +281,11 @@ public class NEXUSAdapter extends AbstractFileAdapter {
     return ("'" + text + "'");
   }
   
+  private static Logger log() {
+    return Logger.getLogger(NEXUSAdapter.class);
+  }
   
-  private class NEXUSCharacter {
+  private static class NEXUSCharacter {
     
     private OBOClass entity;
     private OBOClass attribute;

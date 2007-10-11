@@ -187,6 +187,10 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
     return this.selectionModel;
   }
   
+  public List<CharacterI> getAllCharacters() {
+    return this.sortedCharacters;
+  }
+  
   public JFrame getWindow() {
     if (this.window == null) {
       this.window = new JFrame(this.getGroupTitle());

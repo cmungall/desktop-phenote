@@ -12,11 +12,16 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
+import javax.swing.SwingUtilities;
 import javax.swing.event.HyperlinkEvent;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import phenote.dataadapter.CharacterListManager;
@@ -46,72 +51,65 @@ public class TestPhenote {
   private static TermInfo termInfo;
   private static CharacterTableController tableController;
 
-  /** @BeforeClass says to run this once before all the tests */
-  @BeforeClass public static void init() {
+  /** @throws InvocationTargetException 
+   * @throws InterruptedException 
+   * @BeforeClass says to run this once before all the tests */
+  @BeforeClass public static void init() throws InterruptedException, InvocationTargetException {
     System.out.println("Initializing Phenote...");
-    Phenote.main(null);
-    // so the gui actually needs a little time to do layout on gui thread
-    // or else ACB.doComp() showPopup causes a hang - wierd!
-//     System.out.println("sleeping...");
-//     try {Thread.currentThread().sleep(5000); } // millis
-//     catch (InterruptedException e) { System.out.println(e); }
-//     System.out.println("^^^done sleeping - is gui ready?");
-    phenote = Phenote.getPhenote();
-    fieldPanel = phenote.getFieldPanel();
-    searchParamPanel = fieldPanel.getSearchParamPanel();
-    entityComboBox = fieldPanel.getEntityComboBox();
-    entityComboBox.setTestMode(true); // turns off popup, hanging bug only in test
-    qualityComboBox = fieldPanel.getQualityComboBox();
-    qualityComboBox.setTestMode(true);
-    termInfo = phenote.getTermInfo();
-    tableController = phenote.getCharacterTableController();
+    final String[] emptyArgs = {};
+    Phenote.main(emptyArgs);
+    SwingUtilities.invokeAndWait(new Runnable() {
+      public void run() {
+        phenote = Phenote.getPhenote();
+        fieldPanel = phenote.getFieldPanel();
+        searchParamPanel = fieldPanel.getSearchParamPanel();
+        entityComboBox = fieldPanel.getEntityComboBox();
+        entityComboBox.setTestMode(true); // turns off popup, hanging bug only in test
+        qualityComboBox = fieldPanel.getQualityComboBox();
+        qualityComboBox.setTestMode(true);
+        termInfo = phenote.getTermInfo();
+        tableController = phenote.getCharacterTableController();
+      }
+    });
   }
 
-  /** @Test is an annotation defined in Test - Test looks for Test methods */
-  @Test public void test() {
-    //selectionPopupTest(); not done proper
-    compListSelectionTest(); 
-    displayTermInfoOnCompMouseOverTest();
-    comboTermSelectionGoesToTableTest();
-    //synonymDupTest(); -- uses pase searchParamPanel
-    termInfoSelectTermTest();
-    //attributeInQualityCompletionTest(); --> need 3 keystrokes 'ttr'
-    //backspaceInComboBoxTest(); cant sim backspace.....
-    //flyDataAdapterTest(); out of date its now doing phenoxml - soon will be syntax
-  }
+  @Ignore @Test public void displayTermInfoOnCompMouseOverTest() throws InterruptedException, InvocationTargetException {
+    SwingUtilities.invokeAndWait(new Runnable() {
+      public void run() {
+        System.out.println("Testing comp list mouse over term info...");
+        // "he" should have plenty of completion terms associated, heart, head...
+        boolean doCompletion = true;
+        System.out.println("set entity text to hea");
+        //entityComboBox.setText("hea",doCompletion);
+        // already have list from l from previous test - for some reason 2nd l doesnt jibe
+        // even though there are lots of quality terms with 'll' ???
+        //qualityComboBox.simulateLKeyStroke(); // just does 'l'
+        System.out.println("set text - getting 3rd term");
+        //JList entityJList = entityComboBox.getJList();
+        // pick 3rd item
+        //String thirdTerm = (String)entityJList.getModel().getElementAt(2);
+        //String thirdTerm = getEntityThirdAutoTerm();
+        String thirdTerm = getQualityThirdAutoTerm();
+        assertNotNull("3rd term from quality combo shouldnt be null",thirdTerm);
+        //entityJList.setSelectedIndex(2);
+        //entityComboBox.doMouseOver(2); // 2 is 3rd - 0 indexing
+        qualityComboBox.doMouseOver(2);
 
-  private void displayTermInfoOnCompMouseOverTest() {
-    System.out.println("Testing comp list mouse over term info...");
-    // "he" should have plenty of completion terms associated, heart, head...
-    boolean doCompletion = true;
-    System.out.println("set entity text to hea");
-    //entityComboBox.setText("hea",doCompletion);
-    // already have list from l from previous test - for some reason 2nd l doesnt jibe
-    // even though there are lots of quality terms with 'll' ???
-    //qualityComboBox.simulateLKeyStroke(); // just does 'l'
-    System.out.println("set text - getting 3rd term");
-    //JList entityJList = entityComboBox.getJList();
-    // pick 3rd item
-    //String thirdTerm = (String)entityJList.getModel().getElementAt(2);
-    //String thirdTerm = getEntityThirdAutoTerm();
-    String thirdTerm = getQualityThirdAutoTerm();
-    assertNotNull("3rd term from quality combo shouldnt be null",thirdTerm);
-    //entityJList.setSelectedIndex(2);
-    //entityComboBox.doMouseOver(2); // 2 is 3rd - 0 indexing
-    qualityComboBox.doMouseOver(2);
+        //String info = termInfo.getText();
+        // gets text in term field part where name is displayed
+        String info = termInfo.getTermFieldText();
+        //String properInfoPrefix = "Term: "+thirdTerm;
+        // this doesnt work anymore with mtml stuff in there...
+        //boolean isInfoProper = info.startsWith(properInfoPrefix); 
+        boolean isInfoProper = info.contains(thirdTerm);
 
-    //String info = termInfo.getText();
-    // gets text in term field part where name is displayed
-    String info = termInfo.getTermFieldText();
-    //String properInfoPrefix = "Term: "+thirdTerm;
-    // this doesnt work anymore with mtml stuff in there...
-    //boolean isInfoProper = info.startsWith(properInfoPrefix); 
-    boolean isInfoProper = info.contains(thirdTerm);
-
-    String msg = "term info should contain '"+thirdTerm
-      +"' not getting mouseover but its ["+info+"]";
-    assertTrue(msg,isInfoProper);
-    System.out.println("Completion mouse over term info test succeeded!");
+        String msg = "term info should contain '"+thirdTerm
+          +"' not getting mouseover but its ["+info+"]";
+        assertTrue(msg,isInfoProper);
+        System.out.println("Completion mouse over term info test succeeded!");
+      }
+    });
+    
   }
 
   private String getEntityThirdAutoTerm() {
@@ -133,81 +131,97 @@ public class TestPhenote {
   }
 
   /** Selecting item in entity combo box should cause that item to appear in 
-      table in entity column */
-  private void comboTermSelectionGoesToTableTest() {
-    // selecting item should make it go in table...
-    tableController.addNewCharacter();
-    tableController.getSelectionModel().setSelectionInterval(0,0);
-    System.out.println("Selecting 3rd entity item");
-    qualityComboBox.getJComboBox().setSelectedIndex(2); // 2 is 3rd
-    String selectedQualityTerm = getQualityThirdAutoTerm();
-    CharacterI selPheno = tableController.getSelectionModel().getSelected().get(0);
-    String tableQuality = selPheno.getQuality().getName(); // oboclass
-    assertEquals(selectedQualityTerm,tableQuality);
-    System.out.println("term to table test passed, selected quality term "
-                       +selectedQualityTerm+" quality in table "+tableQuality+"\n");
-  }
+      table in entity column 
+   * @throws InvocationTargetException 
+   * @throws InterruptedException */
+  @Ignore @Test public void comboTermSelectionGoesToTableTest() throws InterruptedException, InvocationTargetException {
+    SwingUtilities.invokeAndWait(new Runnable() {
+      public void run() {
+        // selecting item should make it go in table...
+        tableController.addNewCharacter();
+        tableController.getSelectionModel().setSelectionInterval(0,0);
+        System.out.println("Selecting 3rd entity item");
+        qualityComboBox.getJComboBox().setSelectedIndex(2); // 2 is 3rd
+        String selectedQualityTerm = getQualityThirdAutoTerm();
+        CharacterI selPheno = tableController.getSelectionModel().getSelected().get(0);
+        String tableQuality = selPheno.getQuality().getName(); // oboclass
+        assertEquals(selectedQualityTerm,tableQuality);
+        System.out.println("term to table test passed, selected quality term "
+                           +selectedQualityTerm+" quality in table "+tableQuality+"\n");
+      }
+    });
 
-  /** Test that attributes are being filtered out of quality term completion list */
-  private void attributeInQualityCompletionTest() {
-    boolean doCompletion = true;
-    System.out.println("Testing quality for attribute filtering");
-    // need to do this with key strokes now - set text doesnt work
-    // need at least 3 key strokes 'ttr' for attributes - i seem to have problems
-    // getting more than one key stroke in - hmmmmm
-    qualityComboBox.setText("attribute",doCompletion);
-    int count = qualityComboBox.getJComboBox().getItemCount();
-    String m = "Attributes are not being filtered out of Quality completion "+
-      "There are "+count+" terms with 'attribute'";
-    System.out.println("There are "+count+" attributes in comp list");
-    assertTrue(m,count == 0);
   }
 
   // cant get null pointer to fly - gotta love testing guis
   /** theres a null pointer on selcting item for 1st time, not sure i can replicate
    this is an awful test - assumes lacking physical part is the 2nd indexed
    L term in quality
-   ontology - assumes theres a quality ontology */
-  private void compListSelectionTest() {
-    //qualityComboBox.setText("larg",true);
-    qualityComboBox.simulateLKeyStroke();
-    qualityComboBox.getJComboBox().setSelectedIndex(2);
-    // this is admittedly presumptious of quality
-    assertEquals("lacking physical part",qualityComboBox.getText());
-    System.out.println("comp list sel ok "+qualityComboBox.getText());
+   ontology - assumes theres a quality ontology 
+   * @throws InvocationTargetException 
+   * @throws InterruptedException */
+  @Ignore @Test public void compListSelectionTest() throws InterruptedException, InvocationTargetException {
+    SwingUtilities.invokeAndWait(new Runnable() {
+      public void run() {
+      //qualityComboBox.setText("larg",true);
+        qualityComboBox.simulateLKeyStroke();
+        qualityComboBox.getJComboBox().setSelectedIndex(2);
+        // this is admittedly presumptious of quality
+        assertEquals("lacking physical part",qualityComboBox.getText());
+        System.out.println("comp list sel ok "+qualityComboBox.getText());
+      }
+    });
   }
   
   /** After term selected in comp list popup should not come up - this doesnt actually
       test this - the popup does go away with setSelInd - only with mouse click it
-      sometimes doesnt - need simulated mouse click! */
-  private void selectionPopupTest() {
-    qualityComboBox.setText("larg",true);
-    qualityComboBox.getJComboBox().setSelectedIndex(2);
-    assertFalse(qualityComboBox.getJComboBox().isPopupVisible());
+      sometimes doesnt - need simulated mouse click! 
+   * @throws InvocationTargetException 
+   * @throws InterruptedException */
+  @Ignore @Test public void selectionPopupTest() throws InterruptedException, InvocationTargetException {
+    SwingUtilities.invokeAndWait(new Runnable() {
+      public void run() {
+        qualityComboBox.setText("larg",true);
+        qualityComboBox.getJComboBox().setSelectedIndex(2);
+        assertFalse(qualityComboBox.getJComboBox().isPopupVisible());
+      }
+    });
+    
   }
 
   /** with searching on synonyms hit bug where terms come in more than once if have
-      2 syns */
-  private void synonymDupTest() {
-    qualityComboBox.setText("");
-    // searchParamPanel not used anymore - need to set in menu
-    //searchParamPanel.setTermSearch(false);
-    //searchParamPanel.setSynonymSearch(true);
-    SearchParams.inst().setParam(SearchFilterType.TERM,false);
-    SearchParams.inst().setParam(SearchFilterType.SYN,true);
-    simulateAQualityKeyStroke();
-    String first = getQualityTerm(0);
-    String second = getQualityTerm(1);
-    assertFalse(first.equals(second));
+      2 syns 
+   * @throws InvocationTargetException 
+   * @throws InterruptedException */
+  @Ignore @Test public void synonymDupTest() throws InterruptedException, InvocationTargetException {
+    SwingUtilities.invokeAndWait(new Runnable() {
+      public void run() {
+        qualityComboBox.setText("");
+        // searchParamPanel not used anymore - need to set in menu
+        //searchParamPanel.setTermSearch(false);
+        //searchParamPanel.setSynonymSearch(true);
+        SearchParams.inst().setParam(SearchFilterType.TERM,false);
+        SearchParams.inst().setParam(SearchFilterType.SYN,true);
+        simulateAQualityKeyStroke();
+        String first = getQualityTerm(0);
+        String second = getQualityTerm(1);
+        assertFalse(first.equals(second));
+      }
+    });
+    
   }
 
   // utlimatley need to do mouse click on term - how to do that???
-  private void termInfoSelectTermTest() {
-    simulatePhenoteHyperlinkUpdate();
-    String m = "term info hyper link test fail, term info should have body tone val "
-      +" term info: "+termInfo.getTermFieldText();
-    // how to make this test not so pato specific??
-    assertTrue(m,termInfo.getTermFieldText().contains("body tone value"));
+  @Test public void termInfoSelectTermTest() throws InterruptedException, InvocationTargetException {
+    SwingUtilities.invokeAndWait(new Runnable() {
+      public void run() {
+        simulatePhenoteHyperlinkUpdate();
+        String m = "term info hyper link test fail, term info should have body tone val "
+          +" term info: "+termInfo.getTermFieldText();
+        // how to make this test not so pato specific??
+        assertTrue(m,termInfo.getTermFieldText().contains("body tone value"));
+      }
+    });
   }
 
   private void simulatePhenoteHyperlinkUpdate() {
@@ -226,11 +240,9 @@ public class TestPhenote {
     qualityComboBox.simulateKeyStroke(keyCode,c);
   }
   
-  private void flyDataAdapterTest() {
+  @Ignore @Test public void flyDataAdapterTest() throws UnsupportedFlavorException, IOException {
     CharacterListI cl = CharacterListManager.main().getCharacterList();
-    
     DataFlavor charListFlavor = FlyCharListTransferable.getCharListDataFlavor();
-    try {
       Object o = getClipboard().getData(charListFlavor);
       String m = "Failure: clipboard transferrable is not a FlyCharList "+o;
       assertTrue(m,o instanceof FlyCharList);
@@ -254,11 +266,6 @@ public class TestPhenote {
       CharacterListI newCL = CharacterListManager.inst().getCharacterList();
       //assertEquals(cl,newCL); == NOT .equals()
       assertTrue(cl.equals(newCL));
-    }
-    catch (Exception e) {
-      System.out.println("FAILURE: Exception thrown "+e);
-      e.printStackTrace();
-    }
   }
 
 //   // put in CharList class?

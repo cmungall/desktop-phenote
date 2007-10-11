@@ -1,35 +1,26 @@
 package phenote.util;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-import junit.textui.TestRunner;
-import org.geneontology.oboedit.datamodel.Link;
-import org.geneontology.oboedit.datamodel.OBOProperty;
-import org.geneontology.oboedit.datamodel.impl.InstancePropertyValue;
-import org.geneontology.oboedit.datamodel.impl.OBOPropertyImpl;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.geneontology.oboedit.datamodel.Link;
+import org.geneontology.oboedit.datamodel.OBOProperty;
+import org.geneontology.oboedit.datamodel.impl.InstancePropertyValue;
+import org.geneontology.oboedit.datamodel.impl.OBOPropertyImpl;
+import org.junit.Assert;
+import org.junit.Test;
+
+
 /**
  * Unit test class for FileUtil.
  */
-public class TermLinkComparatorTest extends TestCase {
-
-  public static void main(String args[]) {
-    TestRunner.run(TermLinkComparatorTest.suite());
-  }
-
-  public static Test suite() {
-    return new TestSuite(TermLinkComparatorTest.class);
-  }
+public class TermLinkComparatorTest {
 
   /**
    * Create a single file and archive it. Make sure it moved into the archive directory.
    */
-  public void testIS_A_Before_PART_Of() {
+  @Test public void testIS_A_Before_PART_Of() {
     List<InstancePropertyValue> links = new ArrayList<InstancePropertyValue>();
     links.add(getLinkUnknownOne());
     links.add(getLinkUnknownTwo());
@@ -40,15 +31,15 @@ public class TermLinkComparatorTest extends TestCase {
     Collections.sort(links, new TermLinkComparator());
 
     Link link = (Link) links.get(0);
-    assertEquals("IS a first", "is_a", link.getType().getName());
+    Assert.assertEquals("IS a first", "is_a", link.getType().getName());
     link = (Link) links.get(1);
-    assertEquals("Part of is second", "part of", link.getType().getName());
+    Assert.assertEquals("Part of is second", "part of", link.getType().getName());
     link = (Link) links.get(2);
-    assertEquals("Part of is second", "develops from", link.getType().getName());
+    Assert.assertEquals("Part of is second", "develops from", link.getType().getName());
     link = (Link) links.get(3);
-    assertEquals("IS a first", "Unknown A", link.getType().getName());
+    Assert.assertEquals("IS a first", "Unknown A", link.getType().getName());
     link = (Link) links.get(4);
-    assertEquals("IS a first", "Unknown B", link.getType().getName());
+    Assert.assertEquals("IS a first", "Unknown B", link.getType().getName());
 
   }
 

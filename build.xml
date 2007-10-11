@@ -16,7 +16,7 @@
     <property environment="env"/>
     <!-- property name="src-svn" value="./src/java" / -->
     <property name="src" value="./src/java"/>
-    <property name="test" value="./src/java/test"/>
+    <property name="test" value="./test/java"/>
     <!-- where classes go -->
     <property name="classfiles" value="classfiles"/>
     <property name="web-classfiles" value="${env.PHENOTE_WEB_CLASSFILES}"/>
@@ -176,38 +176,33 @@ them into  the classfiles directory. excludes="test/**"  -->
         </java>
     </target>
 
-
-    <target name="test" depends="build-test">
-        <java classname="org.junit.runner.JUnitCore" fork="yes" jvmargs="-Xmx200M">
-            <arg value="phenote.gui.TestPhenote"/>
-            <classpath>
+	<target name="test" depends="build-test" description="Unit tests">
+		<junit fork="yes" printsummary="on" maxmemory="1024m">
+			<classpath>
                 <pathelement path="${classfiles}"/>
                 <fileset dir="${lib}">
                     <include name="*.jar"/>
                     <exclude name="phenote.jar"/>
                 </fileset>
             </classpath>
-        </java>
-    </target>
-
-  <target name="runtests" depends="build-test" description="Unit tests">
-      <antcall target="runatest">
-          <param name="junit.test.class.name" value="phenote.UnitTests"/>
-      </antcall>
-  </target>
-
-  <target name="runatest" depends="build-test">
-      <java fork="yes" classname="junit.textui.TestRunner" taskname="junit" failonerror="true">
-          <arg value="${junit.test.class.name}"/>
-        <classpath>
-            <pathelement path="${classfiles}"/>
-            <fileset dir="${lib}">
-                <include name="*.jar"/>
-                <exclude name="phenote.jar"/>
-            </fileset>
-        </classpath>
-      </java>
-  </target>
+			<batchtest>
+				<fileset dir="${test}"/>
+			</batchtest>
+		</junit>
+	</target>
+	
+	<target name="runatest" depends="build-test">
+		<junit fork="yes" printsummary="on" maxmemory="1024m">
+			<classpath>
+                <pathelement path="${classfiles}"/>
+                <fileset dir="${lib}">
+                    <include name="*.jar"/>
+                    <exclude name="phenote.jar"/>
+                </fileset>
+            </classpath>
+			<test name="${junit.test.class.name}"/>
+		</junit>
+ 	</target>
 
     <!-- The clean target just erases the classes -->
     <target name="clean">
@@ -217,7 +212,6 @@ them into  the classfiles directory. excludes="test/**"  -->
 
     <!-- clean and compile everything -->
     <target name="build-all" depends="clean,compile,build-test"/>
-
 
     <target name="build-test" depends="compile">
         <javac srcdir="${test}" destdir="${classfiles}" debug="yes">
