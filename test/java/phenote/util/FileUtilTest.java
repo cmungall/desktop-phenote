@@ -15,12 +15,10 @@ import java.io.IOException;
  */
 public class FileUtilTest {
 
-  private static final File testArchiveDir = new File("src" + FileUtil.FILE_SEPARATOR +
-          "java" + FileUtil.FILE_SEPARATOR +
-          "test", "test-archive-dir");
-  private static final File testLoadDirectory = new File("src" + FileUtil.FILE_SEPARATOR +
-          "java" + FileUtil.FILE_SEPARATOR +
-          "test", "test-load-dir");
+  private static final File testArchiveDir = new File("test" + FileUtil.FILE_SEPARATOR + FileUtil.FILE_SEPARATOR +
+          "testfiles", "test-archive-dir");
+  private static final File testLoadDirectory = new File("test" + FileUtil.FILE_SEPARATOR + FileUtil.FILE_SEPARATOR +
+          "testfiles", "test-load-dir");
   private File testLoadFile;
   private File testPurgeFile;
 
