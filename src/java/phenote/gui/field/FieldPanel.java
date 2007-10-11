@@ -83,10 +83,11 @@ public class FieldPanel extends JPanel {
     if (addSearchPanel)
       initSearchPanel();
 
-    // should there be a GroupConfig object?
+    // should there be a GroupConfig object? cant GroupAdap do this itself?
     if (Config.inst().hasGroupAdapter(group)) {
       GroupAdapterI groupAdap = Config.inst().getGroupAdapter(group);
       if (groupAdap.hasCharChangeListener()) {
+        // this is doing for all groups, should probably just for its own group
         editManager.addCharChangeListener(groupAdap.getCharChangeListener());
       }
       if  (groupAdap.hasCharListChangeListener()) {

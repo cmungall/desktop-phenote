@@ -72,6 +72,8 @@ public class CharacterTableController {
     return this.characterTablePanel;
   }
   
+  /** in swixml config conf/character_table_panel.xml the add button New is set up to
+      call this method */
   public void addNewCharacter() {
     this.getEditManager().addNewCharacter();
   }
