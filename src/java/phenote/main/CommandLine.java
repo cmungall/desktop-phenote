@@ -44,6 +44,10 @@ public class CommandLine {
       commandLineSingleton = new CommandLine();
     return commandLineSingleton;
   }
+  
+  public static void reset() {
+    commandLineSingleton = null;
+  }
 
   /** 
    * Set command-line arguments passed along from main().

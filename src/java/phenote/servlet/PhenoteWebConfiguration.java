@@ -18,6 +18,10 @@ public class PhenoteWebConfiguration {
     }
     return instance;
   }
+  
+  public static void reset() {
+    instance = null;
+  }
 
 
   public String getWebRoot() {

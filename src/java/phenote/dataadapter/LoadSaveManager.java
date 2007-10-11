@@ -45,6 +45,10 @@ public class LoadSaveManager {
     return singleton;
   }
   
+  public static void reset() {
+    singleton = null;
+  }
+  
   public void newData() { 
 //  CharacterListI charList = new CharacterList();
 //  CharacterListManager.inst().setCharacterList(this,charList);

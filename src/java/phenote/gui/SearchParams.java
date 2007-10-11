@@ -22,6 +22,10 @@ public class SearchParams implements SearchParamsI {
       singleton = new SearchParams();
     return singleton;
   }
+  
+  public static void reset() {
+    singleton = null;
+  }
 
   /**
    * Set a search filter type. 

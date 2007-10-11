@@ -35,8 +35,12 @@ import phenote.config.Config;
 import phenote.config.ConfigException;
 import phenote.config.xml.GroupDocument.Group;
 import phenote.dataadapter.CharacterListManager;
+import phenote.dataadapter.LoadSaveManager;
 import phenote.dataadapter.OntologyDataAdapter;
+import phenote.datamodel.CharFieldManager;
+import phenote.datamodel.CharacterIFactory;
 import phenote.datamodel.CharacterListI;
+import phenote.edit.EditManager;
 import phenote.error.ErrorEvent;
 import phenote.error.ErrorListener;
 import phenote.error.ErrorManager;
@@ -44,10 +48,14 @@ import phenote.gui.CharacterTableController;
 import phenote.gui.GridBagUtil;
 import phenote.gui.LoadingScreen;
 import phenote.gui.MenuManager;
+import phenote.gui.SearchParams;
 import phenote.gui.SelectionHistory;
+import phenote.gui.ShrimpDag;
 import phenote.gui.SplashScreen;
 import phenote.gui.TermInfo;
 import phenote.gui.field.FieldPanel;
+import phenote.gui.selection.SelectionManager;
+import phenote.servlet.PhenoteWebConfiguration;
 import phenote.util.FileUtil;
 
 public class Phenote {
@@ -442,11 +450,36 @@ public class Phenote {
 
   }
 
-
-
   public static Phenote getPhenote() {  // singleton
     if (phenote == null) phenote = new Phenote();
     return phenote;
+  }
+  
+  public static void reset() {
+    phenote = null;
+  }
+  
+  
+  /**
+   * This is used to reset state between unit tests.
+   */
+  public static void resetAllSingletons() {
+    CharacterListManager.reset();
+    LoadSaveManager.reset();
+    OntologyDataAdapter.reset();
+    CharacterIFactory.reset();
+    CharFieldManager.reset();
+    EditManager.reset();
+    ErrorManager.reset();
+    MenuManager.reset();
+    SearchParams.reset();
+    SelectionHistory.reset();
+    ShrimpDag.reset();
+    SelectionManager.reset();
+    CommandLine.reset();
+    PhenoteWebConfiguration.reset();
+    Config.reset();
+    Phenote.reset();
   }
 
   /** listens for errors and shoots them to the log */

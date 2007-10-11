@@ -53,6 +53,10 @@ public class EditManager {
 //       singleton = new EditManager();
 //     return singleton;
   }
+  
+  public static void reset() {
+    groupToEditMan.clear();
+  }
 
   // ??
   public static EditManager getEditManager(String group) {

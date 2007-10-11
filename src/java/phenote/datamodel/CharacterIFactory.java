@@ -8,9 +8,17 @@ import phenote.config.xml.CharacterModeDocument.CharacterMode;
 
 public class CharacterIFactory {
   
-  private static CharacterIFactory singleton = new CharacterIFactory();
+  private static CharacterIFactory singleton;
 
-  public static CharacterIFactory inst() { return singleton; }
+  public static CharacterIFactory inst() { 
+    if (singleton == null) {
+      singleton = new CharacterIFactory(); 
+    }
+    return singleton; }
+  
+  public static void reset() {
+    singleton = null;
+  }
 
   /** static sugar */
   public static CharacterI makeChar() { 

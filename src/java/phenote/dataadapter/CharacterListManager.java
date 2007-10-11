@@ -41,6 +41,10 @@ public class CharacterListManager {
 //       singleton = new CharacterListManager();
 //     return singleton;
   }
+  
+  public static void reset() {
+    groupToListMan.clear();
+  }
 
   public static CharacterListManager getCharListMan(String group) {
     if (group == null) group = CharFieldManager.DEFAULT_GROUP; // ??

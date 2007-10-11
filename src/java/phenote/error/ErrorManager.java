@@ -18,6 +18,10 @@ public class ErrorManager {
     if (singleton == null) singleton = new ErrorManager();
     return singleton;
   }
+  
+  public static void reset() {
+    singleton = null;
+  }
 
   public void error(ErrorEvent e) {
     for (ErrorListener l : errorListeners) {

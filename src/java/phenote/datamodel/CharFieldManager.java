@@ -51,6 +51,10 @@ public class CharFieldManager {
       singleton = new CharFieldManager();
     return singleton;
   }
+  
+  public static void reset() {
+    singleton = null;
+  }
 
   /** OntologyDataAdapter adds fields */
   public void addField(CharField cf) {

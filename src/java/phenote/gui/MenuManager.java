@@ -20,14 +20,23 @@ public class MenuManager {
 
   private SettingsMenu settingsMenu;
   
-  private static MenuManager singleton = new MenuManager();
+  private static MenuManager singleton;
 
   private MenuManager() {}
 
-  public static MenuManager inst() { return singleton; }
+  public static MenuManager inst() {
+    if (singleton == null) {
+      singleton = new MenuManager();
+    }
+    return singleton; 
+    }
+  
+  public static void reset() {
+    singleton = null;
+  }
 
   public static void createMenuManager(JFrame frame) {
-    singleton.initMenus(frame);
+    inst().initMenus(frame);
   }
   
   public void addViewMenuItem(JMenuItem menuItem) {

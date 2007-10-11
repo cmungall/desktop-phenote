@@ -24,6 +24,8 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import phenote.config.Config;
+import phenote.config.ConfigException;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.fly.FlyCharList;
 import phenote.dataadapter.fly.FlyCharListTransferable;
@@ -53,14 +55,16 @@ public class TestPhenote {
 
   /** @throws InvocationTargetException 
    * @throws InterruptedException 
+   * @throws ConfigException 
    * @BeforeClass says to run this once before all the tests */
-  @BeforeClass public static void init() throws InterruptedException, InvocationTargetException {
-    System.out.println("Initializing Phenote...");
-    final String[] emptyArgs = {};
-    Phenote.main(emptyArgs);
+  @BeforeClass public static void init() throws InterruptedException, InvocationTargetException, ConfigException {
+    Phenote.resetAllSingletons();
+    Config.inst().setConfigFile("ncbo.cfg");
+    phenote = Phenote.getPhenote();
+    phenote.initOntologies();
+    phenote.initGui();
     SwingUtilities.invokeAndWait(new Runnable() {
       public void run() {
-        phenote = Phenote.getPhenote();
         fieldPanel = phenote.getFieldPanel();
         searchParamPanel = fieldPanel.getSearchParamPanel();
         entityComboBox = fieldPanel.getEntityComboBox();
@@ -72,7 +76,7 @@ public class TestPhenote {
       }
     });
   }
-
+  
   @Ignore @Test public void displayTermInfoOnCompMouseOverTest() throws InterruptedException, InvocationTargetException {
     SwingUtilities.invokeAndWait(new Runnable() {
       public void run() {

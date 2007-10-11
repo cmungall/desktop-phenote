@@ -16,6 +16,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import phenote.config.Config;
+import phenote.config.ConfigException;
 import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
@@ -28,9 +30,12 @@ public class TreeChooserTest extends TreeChooser {
   private TreeChooser treeChooser;
   private static final String[] termIDs = {"TTO:1003114", "TTO:1004143", "TTO:1030110"};
 
-  @BeforeClass public static void initialize() {
-    final String[] emptyArgs = {};
-    Phenote.main(emptyArgs);
+  @BeforeClass public static void initialize() throws ConfigException {
+    Phenote.resetAllSingletons();
+    Config.inst().setConfigFile("phenomap.cfg");
+    Phenote phenote = Phenote.getPhenote();
+    phenote.initOntologies();
+    phenote.initGui();
   }
 
   @Before public void setup() throws InterruptedException, InvocationTargetException {

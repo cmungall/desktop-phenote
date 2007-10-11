@@ -47,7 +47,7 @@ import phenote.util.FileUtil;
 public class Config {
 
   public final static String  FLYBASE_DEFAULT_CONFIG_FILE = "flybase.cfg";
-  private static Config singleton = new Config();
+  private static Config singleton;
 
   private String configFile = FLYBASE_DEFAULT_CONFIG_FILE; // default
   private List<DataAdapterConfig> dataAdapConfList;
@@ -85,8 +85,16 @@ public class Config {
   private final static String myphenoteFile = "my-phenote";
 
   public static Config inst() {
+    if (singleton == null) {
+      singleton = new Config();
+    }
     return singleton;
   }
+  
+  public static void reset() {
+    singleton = null;
+  }
+  
   /** singleton */
   private Config() {}
 

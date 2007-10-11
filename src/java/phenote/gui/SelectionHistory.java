@@ -81,6 +81,10 @@ public class SelectionHistory {
         singleton = new SelectionHistory();
 	  return singleton;
   }
+  
+  public static void reset() {
+    singleton = null;
+  }
 
   
 //  public SelectionHistory() { //TermPanel termPanel) {

@@ -12,7 +12,7 @@ import phenote.gui.selection.TermSelectionListener;
 
 import javax.swing.*;
 
-class ShrimpDag {
+public class ShrimpDag {
 
   //private JFrame window;
   private OBOViewer oboViewer;
@@ -21,6 +21,10 @@ class ShrimpDag {
   public static ShrimpDag inst() {
     if (singleton == null) singleton = new ShrimpDag();
     return singleton;
+  }
+  
+  public static void reset() {
+    singleton = null;
   }
 
   private ShrimpDag() {

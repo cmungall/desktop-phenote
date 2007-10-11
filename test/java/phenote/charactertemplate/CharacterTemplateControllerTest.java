@@ -9,6 +9,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import phenote.config.Config;
+import phenote.config.ConfigException;
 import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharacterI;
@@ -19,9 +21,12 @@ public class CharacterTemplateControllerTest {
   
   private CharacterTemplateController controller;
   
-  @BeforeClass public static void initialize() {
-    final String[] emptyArgs = {};
-    Phenote.main(emptyArgs);
+  @BeforeClass public static void initialize() throws ConfigException {
+    Phenote.resetAllSingletons();
+    Config.inst().setConfigFile("phenomap.cfg");
+    Phenote phenote = Phenote.getPhenote();
+    phenote.initOntologies();
+    phenote.initGui();
   }
   
   @Before public void setup() throws InterruptedException, InvocationTargetException {

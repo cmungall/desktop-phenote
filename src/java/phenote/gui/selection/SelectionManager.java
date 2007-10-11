@@ -25,6 +25,10 @@ public class SelectionManager {
 //     if (singleton == null) singleton = new SelectionManager();
 //     return singleton;
   }
+  
+  public static void reset() {
+    groupToSelMan.clear();
+  }
 
   public static SelectionManager getSelMan(String group) {
     if (group == null) group = CharFieldManager.DEFAULT_GROUP; // ??
