@@ -25,12 +25,21 @@ public class DataInputServlet extends HttpServlet {
   // PhenoteServlet.class is the distinct name for this logger
   private static final Logger LOG = Logger.getLogger(DataInputServlet.class);
 
-  public void doGet(final HttpServletRequest request, final HttpServletResponse response)
+  public void doGet(/*final*/ HttpServletRequest request, /*final*/ HttpServletResponse response)
     throws IOException, ServletException {
-    System.out.println("got get" +request);
+    System.out.println("got get " +request);
     LOG.debug("servlet doGet " + new Date());
+        Enumeration<?> e = request.getParameterNames();
+        while (e.hasMoreElements())  LOG.debug("param -prethread "+e.nextElement());
     // need to interact with the application on the Swing thread
-    SwingUtilities.invokeLater(new Runnable() {
+    SwingUtilities.invokeLater(new EditRunnable(request));
+  }
+
+  private class EditRunnable implements Runnable {
+    private HttpServletRequest request;
+    private EditRunnable(HttpServletRequest req) {
+      this.request = req;
+    }
       public void run() {
         CharacterI ch = CharacterIFactory.makeChar();
         Enumeration<?> e = request.getParameterNames();
@@ -52,7 +61,7 @@ public class DataInputServlet extends HttpServlet {
         }
         EditManager.inst().addCharacter(ch);
       }
-    });
+
   }
 
   /**
