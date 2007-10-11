@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp
+spec="1.0+"
+codebase="http://phenote.org/phenote/@@phenote.version@@"
+href="phenote.jnlp">
+<information>
+	<title>Phenote @@phenote.version@@</title>
+	<vendor>National Center for Biomedical Ontology</vendor>
+	<icon href="/images/elephant_icon.jpg" />
+	<description>Phenote standalone app via webstart</description>
+ 	 <!-- Declares that the application can run without
+         access to the server it was downloaded from -->
+	<offline-allowed />
+</information>
+<security>
+      <!-- Request that the application be given full
+           access to the local (executing) machine,
+           as if it were a regular Java application.
+           Requires that all JAR files be signed
+           by a trusted party -->
+	<all-permissions />
+</security>
+<resources>
+  	<!-- Specify the versions of the Java Runtime Environment
+         (JRE) that are supported by the application.
+         Multiple entries of this kind are allowed, in which
+         case they are considered to be in order of preference -->
+	<j2se version="1.5+" initial-heap-size="64m" max-heap-size="600m" />
+	<jar href="jars/phenote.jar" />
+	<jar href="jars/oboedit.jar" />
+	<jar href="jars/org.geneontology.jar" />
+	<jar href="jars/BrowserLauncher2-10rc4.jar" />
+	<jar href="jars/jsr173_1.0_api.jar" />
+	<jar href="jars/phenoxmlbeans.jar" />
+	<jar href="jars/phenoteconfigbeans.jar" />
+	<jar href="jars/xbean.jar" />
+	<jar href="jars/tomcat-servlet.jar" />
+	<jar href="jars/te-common.jar" />
+	<jar href="jars/log4j-1.2.13.jar" />
+	<jar href="jars/jh.jar" />
+	<jar href="jars/jetty-6.1.4.jar" />
+	<jar href="jars/jetty-util-6.1.4.jar" />
+	<jar href="jars/swixml.jar" />
+	<jar href="jars/jdom.jar" />
+	<jar href="jars/quaqua.jar" />
+	<jar href="jars/jebl-0.4.jar" />
+	<jar href="jars/swing-layout.jar" />
+	<jar href="jars/glazedlists-1.7.0_java15.jar" />
+	<nativelib href="jars/phenote-nativelibs.jar"/>
+
+</resources>
+<!-- was smart-atlas.cfg, merged into birn.cfg  -->
+<application-desc main-class="phenote.main.Phenote">
+        <argument>-c</argument>
+        <argument>/birn.cfg</argument>
+</application-desc>
+</jnlp>
