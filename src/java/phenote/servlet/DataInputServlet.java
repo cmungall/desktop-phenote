@@ -27,12 +27,13 @@ public class DataInputServlet extends HttpServlet {
 
   public void doGet(/*final*/ HttpServletRequest request, /*final*/ HttpServletResponse response)
     throws IOException, ServletException {
-    System.out.println("got get " +request);
-    LOG.debug("servlet doGet " + new Date());
-        Enumeration<?> e = request.getParameterNames();
-        while (e.hasMoreElements())  LOG.debug("param -prethread "+e.nextElement());
+    //System.out.println("got get " +request);
+    LOG.debug("servlet doGet " + new Date()+request);
     // need to interact with the application on the Swing thread
-    SwingUtilities.invokeLater(new EditRunnable(request));
+    //SwingUtilities.invokeLater(new EditRunnable(request));
+    // not sure why but invokeLater made later requests be empty???
+    try { SwingUtilities.invokeAndWait(new EditRunnable(request)); }
+    catch (/*Interrupted*/Exception x) { LOG.error(x); }
   }
 
   private class EditRunnable implements Runnable {
