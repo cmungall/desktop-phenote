@@ -49,9 +49,9 @@ href="phenote.jnlp">
 	<nativelib href="jars/phenote-nativelibs.jar"/>
 
 </resources>
-<!-- no cmd line param will ask user for config at initialization -->
+<!-- was smart-atlas.cfg, merged into birn.cfg  -->
 <application-desc main-class="phenote.main.Phenote">
-        <argument>-u</argument>
-        <argument>/smart-atlas.cfg</argument>
+        <argument>-c</argument>
+        <argument>/birn.cfg</argument>
 </application-desc>
 </jnlp>
