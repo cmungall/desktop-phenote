@@ -1,20 +1,20 @@
 package phenote.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Date;
 import java.util.Enumeration;
-import java.util.Vector;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.swing.SwingUtilities;
 
 import org.apache.log4j.Logger;
 
+import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterIFactory;
-import phenote.datamodel.CharFieldException;
 import phenote.datamodel.TermNotFoundException;
 import phenote.edit.EditManager;
 
@@ -25,30 +25,34 @@ public class DataInputServlet extends HttpServlet {
   // PhenoteServlet.class is the distinct name for this logger
   private static final Logger LOG = Logger.getLogger(DataInputServlet.class);
 
-  public void doGet(HttpServletRequest request, HttpServletResponse response)
+  public void doGet(final HttpServletRequest request, final HttpServletResponse response)
     throws IOException, ServletException {
     System.out.println("got get" +request);
     LOG.debug("servlet doGet " + new Date());
-    
-    CharacterI ch = CharacterIFactory.makeChar();
-    Enumeration e = request.getParameterNames();
-    while (e.hasMoreElements()) {
-      Object o = e.nextElement();
-      LOG.debug("param "+o);
-      // test if instance of String?
-      String field = (String)o;
-      String value = request.getParameter(field);
-      try {
-        ch.setValue(field,value);
+    // need to interact with the application on the Swing thread
+    SwingUtilities.invokeLater(new Runnable() {
+      public void run() {
+        CharacterI ch = CharacterIFactory.makeChar();
+        Enumeration<?> e = request.getParameterNames();
+        while (e.hasMoreElements()) {
+          Object o = e.nextElement();
+          LOG.debug("param "+o);
+          // test if instance of String?
+          String field = (String)o;
+          String value = request.getParameter(field);
+          try {
+            ch.setValue(field,value);
+          }
+          catch (CharFieldException cfe) {
+            LOG.error("field not found "+cfe);
+          }
+          catch (TermNotFoundException tnfe) {
+            LOG.error("term not found in field "+field+" "+tnfe);
+          }
+        }
+        EditManager.inst().addCharacter(ch);
       }
-      catch (CharFieldException cfe) {
-        LOG.error("field not found "+cfe);
-      }
-      catch (TermNotFoundException tnfe) {
-        LOG.error("term not found in field "+field+" "+tnfe);
-      }
-    }
-    EditManager.inst().addCharacter(ch);
+    });
   }
 
   /**
