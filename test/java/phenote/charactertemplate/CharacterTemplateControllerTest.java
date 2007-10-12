@@ -23,7 +23,7 @@ public class CharacterTemplateControllerTest {
   
   @BeforeClass public static void initialize() throws ConfigException {
     Phenote.resetAllSingletons();
-    Config.inst().setConfigFile("phenomap.cfg");
+    Config.inst().setConfigFile("test.cfg");
     Phenote phenote = Phenote.getPhenote();
     phenote.initOntologies();
     phenote.initGui();

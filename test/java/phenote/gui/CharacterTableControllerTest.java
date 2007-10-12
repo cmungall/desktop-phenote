@@ -20,7 +20,7 @@ public class CharacterTableControllerTest {
   
   @BeforeClass public static void initialize() throws ConfigException {
     Phenote.resetAllSingletons();
-    Config.inst().setConfigFile("ncbo.cfg");
+    Config.inst().setConfigFile("test.cfg");
     Phenote phenote = Phenote.getPhenote();
     phenote.initOntologies();
     phenote.initGui();

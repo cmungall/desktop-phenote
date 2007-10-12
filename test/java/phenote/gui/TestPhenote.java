@@ -59,7 +59,7 @@ public class TestPhenote {
    * @BeforeClass says to run this once before all the tests */
   @BeforeClass public static void init() throws InterruptedException, InvocationTargetException, ConfigException {
     Phenote.resetAllSingletons();
-    Config.inst().setConfigFile("ncbo.cfg");
+    Config.inst().setConfigFile("test.cfg");
     phenote = Phenote.getPhenote();
     phenote.initOntologies();
     phenote.initGui();
