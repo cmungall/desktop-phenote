@@ -151,7 +151,9 @@ public class OntologyDataAdapter {
     }
     // should we have singleOboSession instance var?? or confusing with multi?
     numFiles = files.size();
-    progressFactor = 1+(10/numFiles); //this is kind of a hack right now until we get threading
+    // i have funny test configs with no ontol files - / 0 exception
+    int div = numFiles == 0 ? 1 : numFiles; 
+    progressFactor = 1+(10/div); //this is kind of a hack right now until we get threading
     System.out.println("numfiles="+numFiles);
     OBOSession os = getOboSession(files);
     return os;
