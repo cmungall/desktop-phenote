@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -95,7 +96,12 @@ public class Phenote {
       rl.setLevel(Level.DEBUG);
       LOG = LogManager.getLogger(Phenote.class);
     }
-    
+    org.apache.log4j.FileAppender a = (org.apache.log4j.FileAppender)rl.getAppender("MAIN");
+    if (a != null) System.out.println("log file: "+a.getFile());
+    else System.out.println("No MAIN File Appender for log4j");
+
+    File f = new File("phenote_log4j.log");
+    System.out.println("path of log file "+f.getPath()+" absolute "+f.getAbsolutePath());
 
     // writes error events to log
     ErrorManager.inst().addErrorListener(new LogErrorListener());
