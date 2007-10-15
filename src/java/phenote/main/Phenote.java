@@ -101,7 +101,7 @@ public class Phenote {
     else System.out.println("No MAIN File Appender for log4j");
 
     File f = new File("phenote_log4j.log");
-    System.out.println("path of log file "+f.getPath()+" absolute "+f.getAbsolutePath());
+    System.out.println("path of log file "+f.getPath()+" absolute "+f.getAbsolutePath()+" canWrite "+f.canWrite());
 
     // writes error events to log
     ErrorManager.inst().addErrorListener(new LogErrorListener());
