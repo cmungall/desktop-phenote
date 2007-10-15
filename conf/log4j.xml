@@ -4,7 +4,7 @@
 <log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
 
     <appender name="MAIN" class="org.apache.log4j.RollingFileAppender">
-        <param name="File" value="phenote_log4j.log" />
+        <param name="File" value="${user.home}/.phenote/log/phenote_log4j.log" />
         <param name="Append" value="true" />
         <param name="MaxFileSize" value="1MB" />
         <param name="MaxBackupIndex" value="10" />
