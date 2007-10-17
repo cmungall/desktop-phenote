@@ -1,4 +1,4 @@
-package phenote.gui;
+package phenote.gui.actions;
 // --> phenote.gui.menu ??
 
 import javax.swing.JFrame;
