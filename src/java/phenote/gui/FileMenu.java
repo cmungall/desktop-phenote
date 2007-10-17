@@ -15,6 +15,8 @@ import phenote.config.Config;
 import phenote.config.ConfigFileQueryGui;
 import phenote.config.ConfigException;
 //import phenote.gui.prefswindow.PrefsWindowController; ???
+import phenote.gui.actions.OpenFileAction;
+import phenote.gui.actions.SaveAsFileAction;
 
 class FileMenu extends JMenu {
 
@@ -34,17 +36,19 @@ class FileMenu extends JMenu {
     newData.addActionListener(actionListener);
     add(newData);
     
-    loadMenuItem = new JMenuItem("Open...");
-    loadMenuItem.setEnabled(Config.inst().hasDataAdapters());
-    loadMenuItem.setActionCommand("load");
-    loadMenuItem.addActionListener(actionListener);
+    loadMenuItem = new JMenuItem(new OpenFileAction());
+//    loadMenuItem = new JMenuItem("Open...");
+//    loadMenuItem.setEnabled(Config.inst().hasDataAdapters());
+//    loadMenuItem.setActionCommand("load");
+//    loadMenuItem.addActionListener(actionListener);
     add(loadMenuItem);
 
-    JMenuItem save = new JMenuItem("Save As...");
-    save.setEnabled(Config.inst().hasDataAdapters());
-    save.setActionCommand("save");
-    save.setMnemonic('s');
-    save.addActionListener(actionListener);
+    JMenuItem save = new JMenuItem(new SaveAsFileAction());
+    //    JMenuItem save = new JMenuItem("Save As...");
+//    save.setEnabled(Config.inst().hasDataAdapters());
+//    save.setActionCommand("save");
+//    save.setMnemonic('s');
+//    save.addActionListener(actionListener);
     add(save);
 
 //    JMenuItem export = new JMenuItem("Export...");

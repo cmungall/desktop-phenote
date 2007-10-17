@@ -25,6 +25,7 @@ class SettingsMenu extends JMenu {
   public SearchParams searchParams;
   private SelectionHistory selHist = SelectionHistory.inst();
   private Config config = Config.inst();
+  
 
 
   SettingsMenu() {
@@ -81,6 +82,16 @@ class SettingsMenu extends JMenu {
     loadConfig.addActionListener(new ConfigActionListener());
     add(loadConfig);
 
+    JMenuItem showToolbar = new JMenuItem("Show Toolbar");
+    showToolbar.addActionListener(new ActionListener() {
+    	public void actionPerformed(ActionEvent e) {
+    		//show the toolbar
+    		Phenote.getPhenote().standardToolbar.showToolbar();
+    		
+    	}
+    });
+    add(showToolbar);
+    
     // proto gui config
     JMenuItem browseConfig = new JMenuItem("Browse configuration(dev)");
     browseConfig.addActionListener(new ActionListener() {

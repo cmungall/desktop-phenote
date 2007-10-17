@@ -5,6 +5,8 @@ import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.BorderLayout;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -55,6 +57,7 @@ import phenote.gui.ShrimpDag;
 import phenote.gui.SplashScreen;
 import phenote.gui.TermInfo;
 import phenote.gui.field.FieldPanel;
+import phenote.gui.StandardToolbar;
 import phenote.gui.selection.SelectionManager;
 import phenote.servlet.PhenoteWebConfiguration;
 import phenote.util.FileUtil;
@@ -71,6 +74,7 @@ public class Phenote {
   private CharacterTableController tableController;
   private CommandLine commandLine = CommandLine.inst();
   private JFrame frame;
+  public StandardToolbar standardToolbar;
   public SplashScreen splashScreen;
   public LoadingScreen loadingScreen;
   private String logoFile = "images/phenote_logo.jpg";    
@@ -351,6 +355,9 @@ public class Phenote {
     frame.setPreferredSize(new Dimension(1220,800)); //1100,700));
     if (standalone) // if stand alone exit java on window close
       frame.addWindowListener(new WindowExit());
+    standardToolbar = new StandardToolbar();
+    frame.add(standardToolbar, BorderLayout.NORTH);
+
     frame.pack();
     frame.setVisible(true);
   }
@@ -455,6 +462,8 @@ public class Phenote {
     }
 
   }
+
+
 
   public static Phenote getPhenote() {  // singleton
     if (phenote == null) phenote = new Phenote();
