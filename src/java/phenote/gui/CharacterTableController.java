@@ -4,14 +4,12 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -24,22 +22,19 @@ import phenote.dataadapter.CharListChangeListener;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.LoadSaveManager;
 import phenote.dataadapter.OntologyMakerI;
-import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
+import phenote.gui.field.CharFieldMatcherEditor;
+import phenote.util.EverythingEqualComparator;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.FilterList;
 import ca.odell.glazedlists.SortedList;
-import ca.odell.glazedlists.TextFilterator;
 import ca.odell.glazedlists.swing.EventSelectionModel;
 import ca.odell.glazedlists.swing.EventTableModel;
 import ca.odell.glazedlists.swing.TableComparatorChooser;
-import ca.odell.glazedlists.swing.TextComponentMatcherEditor;
-
-/** Layout happens via swix with xml file conf/character_table_panel.xml 
- i kinda wonder if that file should just be in this directory? */
 
 public class CharacterTableController {
   
@@ -50,13 +45,14 @@ public class CharacterTableController {
   private EventSelectionModel<CharacterI> selectionModel;
   private CharacterTableFormat tableFormat;
   private LoadSaveManager loadSaveManager;
+  private CharFieldMatcherEditor filter;
   private JPanel characterTablePanel; // initialized by swix
   private JTable characterTable; // initialized by swix
-  private JTextField filterField; // initialized by swix
   private JButton duplicateButton; // initialized by swix
   private JButton deleteButton; // initialized by swix
   private JButton commitButton; // initialized by swix
   private JButton graphButton; // initialized by swix
+  private JPanel filterPanel; // initialized by swix
   private JButton ontolMakerButton;  // initialized by swix
   private OntologyMakerI ontolMaker; // for now just 1 term maker...
   
@@ -65,7 +61,8 @@ public class CharacterTableController {
     this.loadPanelLayout();
     this.sortedCharacters = new SortedList<CharacterI>(this.getCharacterListManager().getCharacterList().getList(), new EverythingEqualComparator<CharacterI>());
     this.sortedCharacters.setMode(SortedList.AVOID_MOVING_ELEMENTS);
-    this.filteredCharacters = new FilterList<CharacterI>(this.sortedCharacters, new TextComponentMatcherEditor<CharacterI>(this.filterField, new CharacterFilterator()));
+    this.filter = new CharFieldMatcherEditor(CharFieldManager.inst().getCharFieldListForGroup(this.representedGroup));
+    this.filteredCharacters = new FilterList<CharacterI>(this.sortedCharacters, this.filter);
     this.selectionModel = new EventSelectionModel<CharacterI>(this.filteredCharacters);
     this.tableFormat = new CharacterTableFormat(this.representedGroup);
     this.getEditManager().addCharChangeListener(new CharacterChangeListener());
@@ -84,10 +81,14 @@ public class CharacterTableController {
     this.getEditManager().addNewCharacter();
   }
   
+  /** in swixml config conf/character_table_panel.xml the duplicate button is set up to
+  call this method */
   public void duplicateSelectedCharacters() {
     this.getEditManager().copyChars(this.selectionModel.getSelected());
   }
   
+  /** in swixml config conf/character_table_panel.xml the delete button is set up to
+  call this method */
   public void deleteSelectedCharacters() {
     final int maxSelectedRow = this.selectionModel.getMaxSelectionIndex();
     this.getEditManager().deleteChars(this.selectionModel.getSelected());
@@ -100,10 +101,14 @@ public class CharacterTableController {
     }
   }
   
+  /** in swixml config conf/character_table_panel.xml the undo button is set up to
+  call this method */
   public void undo() {
     this.getEditManager().undo();
   }
   
+  /** in swixml config conf/character_table_panel.xml the save button is set up to
+  call this method */
   public void commitCharacters() {
     if (Config.inst().hasQueryableDataAdapter()) {
       Config.inst().getQueryableDataAdapter().commit(this.getCharacterListManager().getCharacterList());
@@ -129,6 +134,7 @@ public class CharacterTableController {
     return this.selectionModel;
   }
   
+  /** Instantiates interface objects from Swixml file */
   private void loadPanelLayout() {
     SwingEngine swix = new SwingEngine(this);
     try {
@@ -137,7 +143,6 @@ public class CharacterTableController {
       log().fatal("Unable to render character table interface", e);
     }
   }
-
   
   private void initializeInterface() { 
     final EventTableModel<CharacterI> eventTableModel = new EventTableModel<CharacterI>(this.filteredCharacters, this.tableFormat);
@@ -149,7 +154,7 @@ public class CharacterTableController {
     if (!Config.inst().uvicGraphIsEnabled()) {
       this.graphButton.getParent().remove(this.graphButton);
     }
-    this.filterField.putClientProperty("Quaqua.TextField.style", "search");
+    this.filterPanel.add(this.filter.getComponent());
     this.characterTable.addMouseListener(new PopupListener(new TableRightClickMenu(this.characterTable)));
     this.characterTablePanel.validate();
     this.selectionModel.addListSelectionListener(new SelectionListener());
@@ -192,7 +197,7 @@ public class CharacterTableController {
   }
   
   private void clearFilter() {
-    this.filterField.setText("");
+    this.filter.setFilter(null, this);
   }
 
   private void updateCharacterForGlazedLists(CharacterI character) {
@@ -243,6 +248,7 @@ public class CharacterTableController {
     }
   }
   
+  /** Listens for loading of new data files and clears the search filter */
   private class CharacterListChangeListener implements CharListChangeListener {
     public void newCharList(CharListChangeEvent e) {
       CharacterTableController.this.clearFilter();
@@ -255,20 +261,6 @@ public class CharacterTableController {
   private class SelectionListener implements ListSelectionListener {
     public void valueChanged(ListSelectionEvent e) {
       CharacterTableController.this.updateButtonStates();
-    }
-  }
-  
-  private static class EverythingEqualComparator<T> implements Comparator<T> {
-    public int compare(T o1, T o2) {
-      return 0;
-    }
-  }
-  
-  private static class CharacterFilterator implements TextFilterator<CharacterI> {
-    public void getFilterStrings(List<String> baseList, CharacterI character) {
-      for (CharField charField : character.getAllCharFields()) {
-        baseList.add(character.getValueString(charField));
-      }
     }
   }
   

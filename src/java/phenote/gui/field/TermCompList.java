@@ -26,7 +26,7 @@ import phenote.edit.CompoundTransaction;
 import phenote.gui.selection.UseTermEvent;
 import phenote.gui.selection.UseTermListener;
 
-class TermCompList extends AbstractAutoCompList {
+public class TermCompList extends AbstractAutoCompList {
 
   private OBOClass currentOboClass = null;
   // only term comp lists need ontology choosers - if that changes move to AACL
@@ -35,7 +35,7 @@ class TermCompList extends AbstractAutoCompList {
   private JButton postCompButton;
 
 
-  protected TermCompList(CharField cf,int minCompChars) {
+  public TermCompList(CharField cf,int minCompChars) {
     // AbstractAutoCompList constructor - does pre-populating if minCompChars==0
     super(cf,minCompChars);
     init();
@@ -144,7 +144,7 @@ class TermCompList extends AbstractAutoCompList {
    * Throws exception if there isnt a current obo class, if the user
    * has typed something that isnt yet a term - hasnt selected a term
    */
-  OBOClass getCurrentOboClass() throws CharFieldGuiEx {
+  public OBOClass getCurrentOboClass() throws CharFieldGuiEx {
     if (currentOboClass == null) throw new CharFieldGuiEx("term is null");
     if (!currentOboClass.getName().equals(getText()))
       throw new CharFieldGuiEx("(obo class " + currentOboClass + " and input " + getText() +

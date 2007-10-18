@@ -97,7 +97,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
 
   protected SearchParamsI getSearchParams() { return searchParams; }
 
-  protected CompListSearcher getCompListSearcher() { return compListSearcher; }
+  public CompListSearcher getCompListSearcher() { return compListSearcher; }
 
   protected AbstractAutoCompList getCompList() { return this; }
 

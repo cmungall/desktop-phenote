@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<panel id="filterContainer" layout="GridBagLayout" border="TitledBorder" toolTipText="Filter table rows">
+	<combobox id="charFieldPopup" action="updateEditedCharField" toolTipText="Field to filter on">
+		<gridbagconstraints gridx="0" gridy="0" weightx="0" weighty="0" gridheight="2" fill="GridBagConstraints.HORIZONTAL"/>
+	</combobox>
+	<panel id="inputFieldContainer" layout="GridLayout">
+		<gridbagconstraints gridx="1" gridy="0" weightx="1" weighty="0" gridheight="2" fill="GridBagConstraints.HORIZONTAL"/>
+	</panel>
+	<buttongroup id="modeRadioButton">
+		<gridbagconstraints gridx="2" gridy="0" weightx="0" weighty="1" gridheight="2" fill="GridBagConstraints.BOTH"/>		
+		<radiobutton id="exactModeRadioButton" text="Exact" action="setExactFilterMode" toolTipText="Match ontology term exactly">
+			<gridbagconstraints gridx="2" gridy="0" fill="GridBagConstraints.HORIZONTAL"/>
+		</radiobutton>
+		<radiobutton id="inheritModeRadioButton" text="Inherit" action="setInheritFilterMode" toolTipText="Match all descendant ontology terms">
+			<gridbagconstraints gridx="2" gridy="1" fill="GridBagConstraints.HORIZONTAL"/>		
+		</radiobutton>
+	</buttongroup>
+</panel>
+

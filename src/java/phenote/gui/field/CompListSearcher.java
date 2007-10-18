@@ -51,7 +51,7 @@ public class CompListSearcher {
   //void setSearchAll(boolean s) { searchAll = s; }
 
   /** Set the ontology to search. Ontology chooser may set this */
-  void setOntology(Ontology o) {
+  public void setOntology(Ontology o) {
     //setSearchAll(false); // ??
     //ontology = o;
     // re init or else will modify list passed in in setOntologies
@@ -59,7 +59,7 @@ public class CompListSearcher {
     ontologyList.add(o);
   }
 
-  void setOntologies(List<Ontology> l) {
+  public void setOntologies(List<Ontology> l) {
     ontologyList = l; // (List<Ontology>)l.clone(); cant clone interfaces
   }
 

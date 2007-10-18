@@ -40,7 +40,7 @@ import ca.odell.glazedlists.swing.EventSelectionModel;
     ontology to browse - CharFieldGui does either - with get/setText - hides the
     details of the gui - just a field that gives text 
     should there be subclasses for free text, term, & relations? hmmmm */
-abstract class CharFieldGui implements ListSelectionListener {
+public abstract class CharFieldGui implements ListSelectionListener {
   private CharField charField;
   private String label;
   /** if true then set gui but not model, for clearing on multi, default false */
@@ -58,7 +58,7 @@ abstract class CharFieldGui implements ListSelectionListener {
   private Color disabledColor;
 
   /** CharFieldGui for main window not post comp box - factory method */
-  static CharFieldGui makeCharFieldGui(CharField charField,int minCompChars) {
+  public static CharFieldGui makeCharFieldGui(CharField charField,int minCompChars) {
     CharFieldGui fieldGui;
     if (charField.isTerm()) { //hasOntologies()) {
       //return new TermCompList(charField,sp,true); // enable listeners
@@ -98,7 +98,7 @@ abstract class CharFieldGui implements ListSelectionListener {
 
   /** make term completion lists for post comp window (genus & diff), they dont listen
       to selection nor edit model - isolated */
-  static CharFieldGui makePostCompTermList(CharField cf,String label,
+  public static CharFieldGui makePostCompTermList(CharField cf,String label,
                                            int minCompChars) {
     // false - no listeners(dont edit model), false - dont add comp button
     // eventually adding comp button come from config for recursive comp
@@ -556,7 +556,7 @@ abstract class CharFieldGui implements ListSelectionListener {
   CharFieldEnum getCharFieldEnum() { return charField.getCharFieldEnum(); }
   protected CharField getCharField() { return charField; }
 
-  static class CharFieldGuiEx extends Exception {
+  public static class CharFieldGuiEx extends Exception {
     protected CharFieldGuiEx(String m) { super(m); }
   }
 

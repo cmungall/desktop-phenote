@@ -21,7 +21,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 
 import org.apache.log4j.Logger;
 import org.swixml.SwingEngine;
@@ -34,6 +33,7 @@ import phenote.dataadapter.CharListChangeListener;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.LoadSaveManager;
 import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
@@ -41,6 +41,7 @@ import phenote.edit.EditManager;
 import phenote.gui.MenuManager;
 import phenote.gui.TableColumnPrefsSaver;
 import phenote.gui.TermInfo;
+import phenote.gui.field.CharFieldMatcherEditor;
 import phenote.gui.field.FieldPanel;
 import phenote.gui.selection.SelectionManager;
 import phenote.main.Phenote;
@@ -51,7 +52,6 @@ import ca.odell.glazedlists.TextFilterator;
 import ca.odell.glazedlists.swing.EventSelectionModel;
 import ca.odell.glazedlists.swing.EventTableModel;
 import ca.odell.glazedlists.swing.TableComparatorChooser;
-import ca.odell.glazedlists.swing.TextComponentMatcherEditor;
 
 public class CharacterTemplateController implements ActionListener, TemplateChoiceListener, CharChangeListener, CharListChangeListener {
 
@@ -67,12 +67,14 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
   private JPanel charFieldPanelContainer; // initialized by swix
   private JPanel termInfoPanelContainer; // initialized by swix
   private JTable characterTemplateTable; // initialized by swix
-  private JTextField filterField; // initialized by swix
+  private JPanel filterPanel; // initialized by swix
   private List<TemplateChooser> templateChoosers = new ArrayList<TemplateChooser>();
   private SortedList<CharacterI> sortedCharacters;
   private FilterList<CharacterI> filteredCharacters;
   private EventSelectionModel<CharacterI> selectionModel;
   private Set<CharacterI> markedCharacters = new HashSet<CharacterI>();
+  private CharFieldMatcherEditor filter;
+  
   
   public CharacterTemplateController(String groupName) {
     super();
@@ -238,7 +240,7 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
   }
   
   private void setSelectionWithCharacters(List<CharacterI> characters) {
-    this.filterField.setText("");
+    this.filter.setFilter(null, this);
     this.getSelectionModel().clearSelection();
     for (CharacterI character : characters) {
       final int index = this.filteredCharacters.indexOf(character);
@@ -314,7 +316,9 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
     SwingEngine swix = new SwingEngine(this);
     try {
       JComponent component = (JComponent)swix.render(FileUtil.findUrl("character_template.xml"));
-      this.filteredCharacters = new FilterList<CharacterI>(this.sortedCharacters, new TextComponentMatcherEditor<CharacterI>(filterField, new CharacterFilterator()));
+      this.filter = new CharFieldMatcherEditor(CharFieldManager.inst().getCharFieldListForGroup(this.representedGroup));
+      this.filterPanel.add(this.filter.getComponent());
+      this.filteredCharacters = new FilterList<CharacterI>(this.sortedCharacters, this.filter);
       final CharacterTemplateTableFormat tableFormat = new CharacterTemplateTableFormat(this.representedGroup, this);
       EventTableModel<CharacterI> eventTableModel = new EventTableModel<CharacterI>(this.filteredCharacters, tableFormat);
       this.characterTemplateTable.setModel(eventTableModel);
@@ -323,7 +327,6 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
       this.characterTemplateTable.setSelectionModel(this.selectionModel);
       this.characterTemplateTable.putClientProperty("Quaqua.Table.style", "striped");
       new TableColumnPrefsSaver(this.characterTemplateTable, this.getTableAutoSaveName());
-      this.filterField.putClientProperty("Quaqua.TextField.style", "search");
       FieldPanel fieldPanel = new FieldPanel(true, false, this.representedGroup, this.selectionManager, this.editManager, this.selectionModel);
       this.charFieldPanelContainer.add(fieldPanel);
       TermInfo termInfo = new TermInfo(this.selectionManager);
