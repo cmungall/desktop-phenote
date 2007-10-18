@@ -1227,7 +1227,7 @@ public class Config {
       }
       GroupAdapterI ga = (GroupAdapterI)o;
       String destField = grp.getDestinationField();
-      ga.setDestinationField(destField); // ex/err msg if fail?
+      ga.addDestinationField(destField); // ex/err msg if fail?
       return ga;
     }
     catch (Exception e) {

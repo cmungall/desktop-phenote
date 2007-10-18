@@ -22,9 +22,10 @@ import phenote.edit.CharChangeListener;
     also setDestinationField needs to take a list
 
     This should be replaced by OntologyMakerI - phase out!
+    thiscould be CharOntMakerI but i dont think thats necasary
 */
 
-public interface GroupAdapterI {
+public interface GroupAdapterI extends OntologyMakerI {
 
   /** If a group reacts to char changes(edits) then a char change listener should be 
       added, for instance a user edits group fields and dest field is automatically 
@@ -37,8 +38,4 @@ public interface GroupAdapterI {
   boolean hasCharListChangeListener();
   CharListChangeListener getCharListChangeListener();
 
-  /** the destination field that this group is populating (with obo classes), if
-      a group is not populating a destination field this would be no-oped
-      one could imagine other destinations like main datamodel */
-  void setDestinationField(String field); // CharField? Ex?
 }

@@ -42,7 +42,10 @@ public class ProformaAlleleParser extends OntologyMaker { //extends AbstractGrou
   private static final Logger LOG = Logger.getLogger(ProformaAlleleParser.class);
 
   public ProformaAlleleParser() {
-    setDestinationField("LA1"); // testing
+    addDestinationField("LA1"); // testing, eventually from cfg
+    addDestinationField("LA2");
+    addDestinationField("NLA");
+    addDestinationField("ACC");
   }
 
   public boolean useButtonToLaunch() { return true; }

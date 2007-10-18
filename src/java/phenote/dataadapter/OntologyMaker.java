@@ -1,5 +1,8 @@
 package phenote.dataadapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 import org.geneontology.oboedit.datamodel.OBOSession;
@@ -11,12 +14,14 @@ import phenote.datamodel.Ontology;
 
 public abstract class OntologyMaker implements OntologyMakerI {
   
-  // --> List
-  private CharField destinationCharField;
+  // --> List - can have multiple destinations
+  //private CharField destinationCharField;
+  private List<CharField>destinationCharFields = new ArrayList<CharField>(4);
 
-  public void setDestinationField(String fieldName) {
+  public void addDestinationField(String fieldName) {
     try {
-      destinationCharField = CharFieldManager.inst().getCharFieldForName(fieldName);
+      CharField cf = CharFieldManager.inst().getCharFieldForName(fieldName);
+      destinationCharFields.add(cf);
     }
     catch (CharFieldException e) { // popup? throw ex?
       log().error("Cant find destination field "+fieldName+" for ontology maker. "
@@ -28,27 +33,33 @@ public abstract class OntologyMaker implements OntologyMakerI {
   public String getButtonText() { return null; } // ""?
 
   protected void setOboSession(OBOSession os) {
-    getDestinationOntology().setOboSession(os);
+    for (Ontology o : getDestinationOntologies())
+      o.setOboSession(os);
   }
   
-  /** If CharField doesnt have Ontology yet, create one */
-  private Ontology getDestinationOntology() {
-    if (!hasDestinationCharField()) return null;
-
-    CharField cf = getDestinationCharField();
-    if (!cf.hasOntologies()) {
-      Ontology ont = new Ontology(cf.getName());
-      cf.addOntology(ont);
+  /** If CharField doesnt have Ontology yet, create one, assumes thers only one ontol
+      per char field - ok for now */
+  private List<Ontology> getDestinationOntologies() {
+    List<Ontology> ontList = new ArrayList<Ontology>();
+    for (CharField cf : destinationCharFields) {
+    
+      //CharField cf = getDestinationCharField();
+      if (!cf.hasOntologies()) {
+        Ontology ont = new Ontology(cf.getName());
+        cf.addOntology(ont);
+      }
+      //return cf.getOntology(); // just assume theres only 1 ontol
+      ontList.add(cf.getOntology());
     }
-    return cf.getOntology(); // just assume theres only 1 ontol
+    return ontList;
   }
   protected boolean hasDestinationCharField() {
-    return getDestinationCharField() != null;
+    return !destinationCharFields.isEmpty();
   }
 
-  private CharField getDestinationCharField() {
-    return destinationCharField;
-  }
+//   private CharField getDestinationCharField() {
+//     return destinationCharField;
+//   }
 
   private Logger log;
   private Logger log() {

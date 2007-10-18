@@ -13,4 +13,9 @@ public interface OntologyMakerI {
 
   public String getButtonText();
 
+  /** the destination field that this group is populating (with obo classes), if
+      a group is not populating a destination field this would be no-oped
+      one could imagine other destinations like main datamodel */
+  public void addDestinationField(String field); // CharField? Ex?
+
 }
