@@ -23,6 +23,7 @@ import phenote.dataadapter.CharListChangeEvent;
 import phenote.dataadapter.CharListChangeListener;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.LoadSaveManager;
+import phenote.dataadapter.OntologyMakerI;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharacterI;
 import phenote.edit.CharChangeEvent;
@@ -36,6 +37,9 @@ import ca.odell.glazedlists.swing.EventSelectionModel;
 import ca.odell.glazedlists.swing.EventTableModel;
 import ca.odell.glazedlists.swing.TableComparatorChooser;
 import ca.odell.glazedlists.swing.TextComponentMatcherEditor;
+
+/** Layout happens via swix with xml file conf/character_table_panel.xml 
+ i kinda wonder if that file should just be in this directory? */
 
 public class CharacterTableController {
   
@@ -53,6 +57,8 @@ public class CharacterTableController {
   private JButton deleteButton; // initialized by swix
   private JButton commitButton; // initialized by swix
   private JButton graphButton; // initialized by swix
+  private JButton ontolMakerButton;  // initialized by swix
+  private OntologyMakerI ontolMaker; // for now just 1 term maker...
   
   public CharacterTableController(String groupName) {
     if (groupName != null) this.representedGroup = groupName;
@@ -107,6 +113,18 @@ public class CharacterTableController {
     }
   }
   
+  /** set up as action method in character_table_panel.xml swix config 
+      make terms button has been hit by user - go off and make terms if we have
+      a TermMaker - otherwise do nothing - error msg, this assumes for moment
+      that there is only 1 term maker - if we need more than need to deal with that */
+  public void makeOntology() {
+    if (ontolMaker == null) {
+      log().error("No Ontology Maker to make ontology with");
+      return;
+    }
+    ontolMaker.makeOntology();
+  }
+
   public EventSelectionModel<CharacterI> getSelectionModel() {
     return this.selectionModel;
   }
@@ -119,6 +137,7 @@ public class CharacterTableController {
       log().fatal("Unable to render character table interface", e);
     }
   }
+
   
   private void initializeInterface() { 
     final EventTableModel<CharacterI> eventTableModel = new EventTableModel<CharacterI>(this.filteredCharacters, this.tableFormat);
@@ -135,6 +154,18 @@ public class CharacterTableController {
     this.characterTablePanel.validate();
     this.selectionModel.addListSelectionListener(new SelectionListener());
     new TableColumnPrefsSaver(this.characterTable, this.getTableAutoSaveName());
+
+    OntologyMakerI om = Config.inst().getOntMaker(representedGroup);
+    if (om != null && om.useButtonToLaunch()) {
+      // TermMakerManager.getTermMaker(group)??
+      ontolMaker = om;
+      ontolMakerButton.setText(om.getButtonText());
+    }
+    else {
+      // remove from parent...
+      ontolMakerButton.setVisible(false);
+    }
+
   }
   
   private void addInitialBlankCharacter() {

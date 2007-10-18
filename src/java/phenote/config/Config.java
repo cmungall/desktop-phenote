@@ -33,6 +33,7 @@ import phenote.config.xml.UpdateTimerDocument.UpdateTimer;
 import phenote.config.xml.UvicGraphDocument.UvicGraph;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.GroupAdapterI;
+import phenote.dataadapter.OntologyMakerI;
 import phenote.dataadapter.QueryableDataAdapterI;
 import phenote.datamodel.AnnotationMappingDriver;
 import phenote.datamodel.BasicAnnotationMappingDriver;
@@ -1234,6 +1235,19 @@ public class Config {
       e.printStackTrace();
       return null;
     }
+  }
+
+  /** returns whether have term maker for given group - there could also be a term
+      maker manager? */
+  public boolean hasOntMakerForGroup(String group) {
+    // for now hardwire - set up config
+    return getOntMaker(group) != null;
+  }
+  // OntMaker manager?
+  public OntologyMakerI getOntMaker(String group) {
+    // testing
+    if (!group.equals("genotypeMaker")) return null; // testing
+    return new phenote.dataadapter.fly.ProformaAlleleParser();
   }
 
   private Logger log;

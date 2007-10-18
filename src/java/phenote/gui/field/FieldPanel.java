@@ -38,7 +38,7 @@ public class FieldPanel extends JPanel {
   private JTabbedPane jTabbedPane;
   private String group;
   private SelectionManager selectionManager;
-  private EditManager editManager;
+  private EditManager groupEditMan;
   private EventSelectionModel<CharacterI> selectionModel;
 
   /** eventually configurable (with default 12) - for now hardwire at 12 */
@@ -61,17 +61,17 @@ public class FieldPanel extends JPanel {
   
   public FieldPanel(boolean doAllFields, boolean addSearchPanel,
                     String group, SelectionManager selectionManager,
-                    EditManager editManager, EventSelectionModel<CharacterI> model) {
+                    EditManager groupEditMan, EventSelectionModel<CharacterI> model) {
     
-    init(doAllFields,addSearchPanel,group,selectionManager,editManager, model);
+    init(doAllFields,addSearchPanel,group,selectionManager,groupEditMan, model);
   }
 
   private void init(boolean doAllFields, boolean addSearchPanel,String group,
-                    SelectionManager selectionManager, EditManager editManager, EventSelectionModel<CharacterI> model) {
+                    SelectionManager selectionManager, EditManager groupEditMan, EventSelectionModel<CharacterI> model) {
     setGroup(group);
     this.selectionModel = model;
     this.selectionManager = selectionManager;
-    this.editManager = editManager;
+    this.groupEditMan = groupEditMan;
     initGui();
     if (doAllFields) {
       initCharFieldGuis();
@@ -84,11 +84,12 @@ public class FieldPanel extends JPanel {
       initSearchPanel();
 
     // should there be a GroupConfig object? cant GroupAdap do this itself?
+    // yea i think group adap can just do this
     if (Config.inst().hasGroupAdapter(group)) {
       GroupAdapterI groupAdap = Config.inst().getGroupAdapter(group);
       if (groupAdap.hasCharChangeListener()) {
         // this is doing for all groups, should probably just for its own group
-        editManager.addCharChangeListener(groupAdap.getCharChangeListener());
+        groupEditMan.addCharChangeListener(groupAdap.getCharChangeListener());
       }
       if  (groupAdap.hasCharListChangeListener()) {
         CharacterListManager.getCharListMan(group).addCharListChangeListener(groupAdap.getCharListChangeListener());
@@ -143,7 +144,7 @@ public class FieldPanel extends JPanel {
       
       gui.setSelectionManager(this.selectionManager);
       gui.setListSelectionModel(this.selectionModel);
-      gui.setEditManager(this.editManager);
+      gui.setEditManager(this.groupEditMan);
       addCharFieldGuiToPanel(gui);
       charFieldGuiList.add(gui);
     }

@@ -10,22 +10,26 @@ import org.geneontology.oboedit.datamodel.OBOSession;
 import org.geneontology.oboedit.datamodel.impl.OBOClassImpl;
 import org.geneontology.oboedit.datamodel.impl.OBOSessionImpl;
 
-import phenote.datamodel.CharField;
-import phenote.datamodel.CharFieldException;
+//import phenote.datamodel.CharField;
+//import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
-import phenote.datamodel.Ontology;
-import phenote.datamodel.CharFieldManager;
+//import phenote.datamodel.Ontology;
+//import phenote.datamodel.CharFieldManager;
 import phenote.edit.CharChangeListener;
 import phenote.edit.CharChangeEvent;
 
-public abstract class AbstractGroupAdapter implements GroupAdapterI {
+// rename this GroupOntologyMaker? or CharTableOntologyMaker? or CharOntologyMaker?
+// CharacterOntologyMaker?
+// i think group adapter i may be unnecasary - it seems to me group adapter 
+// could wire itself up - doesnt need field panel to do it
+public abstract class AbstractGroupAdapter extends OntologyMaker implements GroupAdapterI {
 
   private CharChangeListener charListener;
   private CharListChangeListener charListChangeListener;
   private String group;
   private Namespace namespace;
-  private CharField destinationCharField;
+  //private CharField destinationCharField;
 
   protected AbstractGroupAdapter(String group)  {
     this.group = group;
@@ -64,12 +68,13 @@ public abstract class AbstractGroupAdapter implements GroupAdapterI {
 
   protected boolean recordsId() { return false; }
 
+  /** overridden by worm */
   protected void setIdField(CharacterI c, String id) {}
 
   /** This is the real workhorse here
    just goes through and makes all the terms and shoves them over to 
    main/default destination field */
-  protected void makeTerms() { //loadUpMainField() {
+  public void makeOntology() { //loadUpMainField() { --> makeOntology
 
     //log().debug("AGA makeTerms");
 
@@ -89,7 +94,8 @@ public abstract class AbstractGroupAdapter implements GroupAdapterI {
     }
 
     // load obo classes into main field -> namespace query? 
-    getDestinationOntology().setOboSession(os);
+    //getDestinationOntology().setOboSession(os);
+    setOboSession(os);
   }
 
   // protected? - subclass override?
@@ -106,34 +112,38 @@ public abstract class AbstractGroupAdapter implements GroupAdapterI {
   protected abstract String makeNameFromChar(CharacterI c); 
 
 
-  public void setDestinationField(String fieldName) {
-    try {
-      destinationCharField = CharFieldManager.inst().getCharFieldForName(fieldName);
-    }
-    catch (CharFieldException e) { // popup? throw ex?
-      log().error("Cant find destination field "+fieldName+" for group "+group
-                  +" Check config file.");
-    }
-  }
+//   public void setDestinationField(String fieldName) {
+//     try {
+//       destinationCharField = CharFieldManager.inst().getCharFieldForName(fieldName);
+//     }
+//     catch (CharFieldException e) { // popup? throw ex?
+//       log().error("Cant find destination field "+fieldName+" for group "+group
+//                   +" Check config file.");
+//     }
+//   }
 
-  /** If CharField doesnt have Ontology yet, create one */
-  private Ontology getDestinationOntology() {
-    if (!hasDestinationCharField()) return null;
+//   protected void setOboSession(OBOSession os) {
+//     getDestinationOntology().setOboSession(os);
+//   }
+  
+//   /** If CharField doesnt have Ontology yet, create one */
+//   private Ontology getDestinationOntology() {
+//     if (!hasDestinationCharField()) return null;
 
-    CharField cf = getDestinationCharField();
-    if (!cf.hasOntologies()) {
-      Ontology ont = new Ontology(cf.getName());
-      cf.addOntology(ont);
-    }
-    return cf.getOntology(); // just assume theres only 1 ontol
-  }
-  private boolean hasDestinationCharField() {
-    return getDestinationCharField() != null;
-  }
+//     CharField cf = getDestinationCharField();
+//     if (!cf.hasOntologies()) {
+//       Ontology ont = new Ontology(cf.getName());
+//       cf.addOntology(ont);
+//     }
+//     return cf.getOntology(); // just assume theres only 1 ontol
+//   }
+//   private boolean hasDestinationCharField() {
+//     return getDestinationCharField() != null;
+//   }
 
-  private CharField getDestinationCharField() {
-    return destinationCharField;
-  }
+//   private CharField getDestinationCharField() {
+//     return destinationCharField;
+//   }
 
   private List<CharacterI> getGroupChars() {
     return CharacterListManager.getCharListMan(group).getCharacterList().getList();
@@ -142,13 +152,13 @@ public abstract class AbstractGroupAdapter implements GroupAdapterI {
   /** just triggers makeTerms */
   private class GroupCharChangeListener implements CharChangeListener {
     public void charChanged(CharChangeEvent e) {
-      makeTerms();
+      makeOntology();
     }
   }
   
   private class GroupCharListChangeListener implements CharListChangeListener {
     public void newCharList(CharListChangeEvent e) {
-      makeTerms();
+      makeOntology();
     }
   }
   

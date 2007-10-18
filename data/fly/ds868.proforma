@@ -1,0 +1,2173 @@
+! PUBLICATION PROFORMA                   Version 27:  25 June 2007
+!
+! P. PUBLICATION DATA
+!
+! P22. Publication FBrf            *U :FBrf0190216
+! P32. FBrf to be merged into P22. *N :
+! P1.  Type of publication  [CV] *T :paper
+! P21. Journal etc unique ID *W/*U (starw.nice) :9003
+! P2.  Journal etc abbreviation           *w/*s :
+! P20. Series abbreviation      *S :
+! P3.  Volume designation       *y :
+! P4.  Issue number             *Y :
+! P11a. Page range              *z :
+! P11b. URL                     *R :
+! P11c. accession number           :
+! P11d. DOI                        :
+! P10. Year of publication      *t :
+! P12. Author(s)              *a-r :
+! P16. Title of publication (excl. part-title)   *u :
+! P17. Part-number and title                     *v :
+! P13. Language(s) of paper [CV]                 *L :English
+! P14. Additional language(s) of abstract(s) [CV]*A :
+! P8.  Publisher (if P1 = book)                  *x :
+! P24. Place of publication (if P1 = book)       *P :
+! P25. Biosis ID                *B :
+! P26. Medline ID               *M :
+! P27. Zoo Record ID            *Q :
+! P29. ISBN if P1=book          *I :
+! P33. Conference abstract text *D :
+! P30. Also published as (FBrf)            *C :
+! P31. Related publication (FBrf)          *E :
+! P23. Text of personal communication      *F :
+! P18. Associated text                     *G :
+! P19. Internal notes                      *H :
+! P38. File deposited to archive           *K :
+! P39. Delete this FBrf from the bibliography   TAKE CARE :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! G. GENE DATA (excluding kilobase distance data)
+! If this publication includes information to enter concerning a gene,
+! move to the start of the line below and include the Gene proforma.
+! GENE PROFORMA                          Version 46:  3 Aug 2007
+!
+! G1a.  Gene symbol to use in database                      *a :Ras85D
+! G1b.  Gene symbol used in paper                           *i :Ras
+! G1e.  Action - rename this gene symbol                       :
+! G1f.  Action - merge these genes                             :
+! G1g.  Is G1a the valid symbol of a gene in FlyBase?          :y
+! G30.  Gene category (if gene is new to FlyBase) [SO CV]   *t :
+! G2a.  Gene name to use in database                        *e :
+! G2b.  Gene name used in paper                             *V :
+! G2c.  Database gene name(s) to replace                    *V :
+! G27.  Etymology                                              :
+! G31a. Action - delete gene              - TAKE CARE :
+! G31b. Action - dissociate G1a from FBrf - TAKE CARE :
+! G20a. G1a in title/abstract? Reviews - G1a significant subject? NSC :n
+! G20b. G1a wildtype expression in wildtype analysed?             NSC :n
+! G20c. G1a expression analysed in mutant/perturbed bckgrd?       NSC :n
+! G20d. G1a genome annotation analysed?                           NSC :n
+! G20e. G1a product physical interaction analysed?                NSC :n
+! G20f. G1a cis-regulatory elements characterized?                NSC :n
+! G20g. G1a gene model decorated - alleles/rescue frags/breaks?   NSC :n
+! G20h. G1a polymorphism data reported?                           NSC :n
+! G10a. Cytological map posn if by chromosome in situ      *c :
+! G10b. Cytological map posn if details unspecified        *c :
+! G11.  Comments on cytological map position [SoftCV]      *D :
+! G25.  Relationship to clone                         [SoftCV]*s :
+! G19a. Gene order/orientation from molecular mapping [SoftCV]*s :
+! G19b. Comments, not allele-specific -- molecular         *s :
+! G12a. Comments, not allele-specific - biological role    *r :
+! G12b. Comments, not allele-specific -- mutants           *p :
+! G14a. Comments, not allele-specific -- other             *u :
+! G14b. Identification                                        :
+! G28a. Comments -- relationship to other genes        [free text] *q :
+! G28b. Source for merge/identity of                      [SoftCV] *q :
+! G29a. Functional comp/gain of function -- structured [SoftCV] *q :
+! G29b. Functional comp/gain of function            [free text] *q :
+! G18.  Gene(s) stated to interact genetically with G1a    *p :
+! G22.  Homologous gene in reference species of drosophilid*M :
+! G24a. GO -- Cellular component | evidence [CV]           *f :
+! G24b. GO -- Molecular function | evidence [CV]           *F :
+! G24c. GO -- Biological process | evidence [CV]           *d :
+! G24e. GO specific internal note                          *H :
+! G24f. GO -- date entered or last reviewed		   			  :y
+! G15.  Internal notes  *W :
+! RARE FIELDS MODULE:
+! move to the start of the line below this and include the Gene Modules pro.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! GA. ALLELE DATA FOR THIS GENE (excluding kilobase distance data)
+! If there is any data to enter regarding a specific allele of this gene,
+! move to the start of the line below this and include the Allele proforma.
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :Ras85D[V12.Scer\UAS]
+! GA1b.  Allele symbol used in paper                       *i :
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :y
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :cell death decrease | third instar larval stage 2 | somatic clone { Scer\GAL4[Act5C.PI] }
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :dorsal mesothoracic disc & stage 2 third instar larva { Scer\GAL4[Act5C.PI] }
+! GA7a.  Phenotype  [free text]                         *k :Cells in regions of the late third instar wing disc which are normally sensitive to irradiation induced apoptosis become resistant to it if they are part of @Ras85D[V12.Scer\UAS]@; @Scer\GAL4[Act5C.PI]@ somatic clones. (40Gy of &ggr; rays; assayed after 4hrs)
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :P{UAS-Ras85D.V12}
+! GA10b. Name in paper for construct                       *L :UAS-Ras[v12]
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :"Ras85D[V12.Scer\UAS]" is a guess for "UAS-Ras[v12]" based on common usage. ds070808
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another gene to curate for this publication, move to the
+! start of the line below this and include the Gene proforma again.
+! GENE PROFORMA                          Version 46:  3 Aug 2007
+!
+! G1a.  Gene symbol to use in database                      *a :Dp
+! G1b.  Gene symbol used in paper                           *i :dDP
+! G1e.  Action - rename this gene symbol                       :
+! G1f.  Action - merge these genes                             :
+! G1g.  Is G1a the valid symbol of a gene in FlyBase?          :y
+! G30.  Gene category (if gene is new to FlyBase) [SO CV]   *t :
+! G2a.  Gene name to use in database                        *e :
+! G2b.  Gene name used in paper                             *V :
+! G2c.  Database gene name(s) to replace                    *V :
+! G27.  Etymology                                              :
+! G31a. Action - delete gene              - TAKE CARE :
+! G31b. Action - dissociate G1a from FBrf - TAKE CARE :
+! G20a. G1a in title/abstract? Reviews - G1a significant subject? NSC :y
+! G20b. G1a wildtype expression in wildtype analysed?             NSC :n
+! G20c. G1a expression analysed in mutant/perturbed bckgrd?       NSC :n
+! G20d. G1a genome annotation analysed?                           NSC :n
+! G20e. G1a product physical interaction analysed?                NSC :n
+! G20f. G1a cis-regulatory elements characterized?                NSC :n
+! G20g. G1a gene model decorated - alleles/rescue frags/breaks?   NSC :n
+! G20h. G1a polymorphism data reported?                           NSC :n
+! G10a. Cytological map posn if by chromosome in situ      *c :
+! G10b. Cytological map posn if details unspecified        *c :
+! G11.  Comments on cytological map position [SoftCV]      *D :
+! G25.  Relationship to clone                         [SoftCV]*s :
+! G19a. Gene order/orientation from molecular mapping [SoftCV]*s :
+! G19b. Comments, not allele-specific -- molecular         *s :
+! G12a. Comments, not allele-specific - biological role    *r :
+! G12b. Comments, not allele-specific -- mutants           *p :
+! G14a. Comments, not allele-specific -- other             *u :
+! G14b. Identification                                        :
+! G28a. Comments -- relationship to other genes        [free text] *q :
+! G28b. Source for merge/identity of                      [SoftCV] *q :
+! G29a. Functional comp/gain of function -- structured [SoftCV] *q :
+! G29b. Functional comp/gain of function            [free text] *q :
+! G18.  Gene(s) stated to interact genetically with G1a    *p :
+! G22.  Homologous gene in reference species of drosophilid*M :
+! G24a. GO -- Cellular component | evidence [CV]           *f :
+! G24b. GO -- Molecular function | evidence [CV]           *F :
+! G24c. GO -- Biological process | evidence [CV]           *d :
+! G24e. GO specific internal note                          *H :
+! G24f. GO -- date entered or last reviewed		   			  :y
+! G15.  Internal notes  *W :
+! RARE FIELDS MODULE:
+! move to the start of the line below this and include the Gene Modules pro.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! GA. ALLELE DATA FOR THIS GENE (excluding kilobase distance data)
+! If there is any data to enter regarding a specific allele of this gene,
+! move to the start of the line below this and include the Allele proforma.
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :Dp[a2]
+! GA1b.  Allele symbol used in paper                       *i :dDP[a2]
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :y
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :(with Dp[a4]) cell death decrease | third instar larval stage 2
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :(with Dp[a4]) dorsal mesothoracic disc & stage 2 third instar larva
+! GA7a.  Phenotype  [free text]                         *k :In wild-type animals, exposure to 40Gy of &ggr; rays induces a distinct pattern of apoptosis in the wing disc, focussed on the the wing pouch, but excluding the DV boundary region and prospective vein.  In @Dp[a4]@/@Dp[a2]@ animals, the same irradiation treatment induces a different pattern of apoptosis,  a smaller number of apoptotic cells are clustered in the center of the wing pouch, many in the D-V boundary region or prospective veins.  This new pattern of apoptosis is consistent over time and follows the same kinetics as in wild-type.  Marker analysis suggests that patterning of the wing disc (including vein and D-V boundary specification) is normal in these animals.
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :(with Dp[a4]) dorsal mesothoracic disc & stage 2 third instar larva, suppressible { Df(3L)X14/+ }
+(with Dp[a4]) dorsal mesothoracic disc & stage 2 third instar larva, suppressible { Df(3L)XR38/+ }
+(with Dp[a4]) dorsal mesothoracic disc & stage 2 third instar larva, suppressible { Ark[CD4]/+ }
+! GA28c. Genetic interaction  [free text]               *S :Ectopic cell radiation induced cell death seen at the dorsal-ventral boundary in the wing discs of lated third instar @Dp[a4]@/@Dp[a2]@ animals is partially suppressed by @Df(3L)X14@/+, but not by @Df(3L)XR38@/+ or @Ark[CD4]@/+.
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :
+! GA10b. Name in paper for construct                       *L :
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :Dp[a4]
+! GA1b.  Allele symbol used in paper                       *i :dDP[a4]
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :y
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :(with Dp[a2]) cell death decrease | third instar larval stage 2
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :(with Dp[a2]) dorsal mesothoracic disc & stage 2 third instar larva
+! GA7a.  Phenotype  [free text]                         *k :In wild-type animals, exposure to 40Gy of &ggr; rays induces a distinct pattern of apoptosis in the wing disc, focussed on the the wing pouch, but excluding the DV boundary region and prospective vein.  In @Dp[a4]@/@Dp[a2]@ animals, the same irradiation treatment induces a different pattern of apoptosis,  a smaller number of apoptotic cells are clustered in the center of the wing pouch, many in the D-V boundary region or prospective veins.  This new pattern of apoptosis is consistent over time and follows the same kinetics as in wild-type.  Marker analysis suggests that patterning of the wing disc (including vein and D-V boundary specification) is normal in these animals.
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :
+! GA10b. Name in paper for construct                       *L :
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another gene to curate for this publication, move to the
+! start of the line below this and include the Gene proforma again.
+! GENE PROFORMA                          Version 46:  3 Aug 2007
+!
+! G1a.  Gene symbol to use in database                      *a :N
+! G1b.  Gene symbol used in paper                           *i :N
+! G1e.  Action - rename this gene symbol                       :
+! G1f.  Action - merge these genes                             :
+! G1g.  Is G1a the valid symbol of a gene in FlyBase?          :y
+! G30.  Gene category (if gene is new to FlyBase) [SO CV]   *t :
+! G2a.  Gene name to use in database                        *e :
+! G2b.  Gene name used in paper                             *V :
+! G2c.  Database gene name(s) to replace                    *V :
+! G27.  Etymology                                              :
+! G31a. Action - delete gene              - TAKE CARE :
+! G31b. Action - dissociate G1a from FBrf - TAKE CARE :
+! G20a. G1a in title/abstract? Reviews - G1a significant subject? NSC :n
+! G20b. G1a wildtype expression in wildtype analysed?             NSC :n
+! G20c. G1a expression analysed in mutant/perturbed bckgrd?       NSC :n
+! G20d. G1a genome annotation analysed?                           NSC :n
+! G20e. G1a product physical interaction analysed?                NSC :n
+! G20f. G1a cis-regulatory elements characterized?                NSC :n
+! G20g. G1a gene model decorated - alleles/rescue frags/breaks?   NSC :n
+! G20h. G1a polymorphism data reported?                           NSC :n
+! G10a. Cytological map posn if by chromosome in situ      *c :
+! G10b. Cytological map posn if details unspecified        *c :
+! G11.  Comments on cytological map position [SoftCV]      *D :
+! G25.  Relationship to clone                         [SoftCV]*s :
+! G19a. Gene order/orientation from molecular mapping [SoftCV]*s :
+! G19b. Comments, not allele-specific -- molecular         *s :
+! G12a. Comments, not allele-specific - biological role    *r :
+! G12b. Comments, not allele-specific -- mutants           *p :
+! G14a. Comments, not allele-specific -- other             *u :
+! G14b. Identification                                        :
+! G28a. Comments -- relationship to other genes        [free text] *q :
+! G28b. Source for merge/identity of                      [SoftCV] *q :
+! G29a. Functional comp/gain of function -- structured [SoftCV] *q :
+! G29b. Functional comp/gain of function            [free text] *q :
+! G18.  Gene(s) stated to interact genetically with G1a    *p :
+! G22.  Homologous gene in reference species of drosophilid*M :
+! G24a. GO -- Cellular component | evidence [CV]           *f :
+! G24b. GO -- Molecular function | evidence [CV]           *F :
+! G24c. GO -- Biological process | evidence [CV]           *d :
+! G24e. GO specific internal note                          *H :
+! G24f. GO -- date entered or last reviewed		   			  :y
+! G15.  Internal notes  *W :
+! RARE FIELDS MODULE:
+! move to the start of the line below this and include the Gene Modules pro.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! GA. ALLELE DATA FOR THIS GENE (excluding kilobase distance data)
+! If there is any data to enter regarding a specific allele of this gene,
+! move to the start of the line below this and include the Allele proforma.
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :N[ICN.Scer\UAS]
+! GA1b.  Allele symbol used in paper                       *i :
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :y
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :cell death increase | third instar larval stage 2 | somatic clone { Scer\GAL4[Act5C.PI] }
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :dorsal mesothoracic disc & stage 2 third instar larva | somatic clone { Scer\GAL4[Act5C.PI] }
+! GA7a.  Phenotype  [free text]                         *k :Cells in regions of the late third instar wing disc which are normally insensitive to irradiation induced apoptosis become sensitive to it if they are part of @N[ICN.Scer\UAS]@; @Scer\GAL4[Act5C.PI]@ somatic clones. (40Gy of &ggr; rays; assayed after 4hrs)
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :P{UAS-N.ICN}
+! GA10b. Name in paper for construct                       *L :UAS-Nic
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another gene to curate for this publication, move to the
+! start of the line below this and include the Gene proforma again.
+
+! GENE PROFORMA                          Version 46:  3 Aug 2007
+!
+! G1a.  Gene symbol to use in database                      *a :E2f
+! G1b.  Gene symbol used in paper                           *i :de2f1
+! G1e.  Action - rename this gene symbol                       :
+! G1f.  Action - merge these genes                             :
+! G1g.  Is G1a the valid symbol of a gene in FlyBase?          :y
+! G30.  Gene category (if gene is new to FlyBase) [SO CV]   *t :
+! G2a.  Gene name to use in database                        *e :
+! G2b.  Gene name used in paper                             *V :
+! G2c.  Database gene name(s) to replace                    *V :
+! G27.  Etymology                                              :
+! G31a. Action - delete gene              - TAKE CARE :
+! G31b. Action - dissociate G1a from FBrf - TAKE CARE :
+! G20a. G1a in title/abstract? Reviews - G1a significant subject? NSC :y
+! G20b. G1a wildtype expression in wildtype analysed?             NSC :y
+! G20c. G1a expression analysed in mutant/perturbed bckgrd?       NSC :n
+! G20d. G1a genome annotation analysed?                           NSC :n
+! G20e. G1a product physical interaction analysed?                NSC :y
+! G20f. G1a cis-regulatory elements characterized?                NSC :n
+! G20g. G1a gene model decorated - alleles/rescue frags/breaks?   NSC :n
+! G20h. G1a polymorphism data reported?                           NSC :n
+! G10a. Cytological map posn if by chromosome in situ      *c :
+! G10b. Cytological map posn if details unspecified        *c :
+! G11.  Comments on cytological map position [SoftCV]      *D :
+! G25.  Relationship to clone                         [SoftCV]*s :
+! G19a. Gene order/orientation from molecular mapping [SoftCV]*s :
+! G19b. Comments, not allele-specific -- molecular         *s :
+! G12a. Comments, not allele-specific - biological role    *r :
+! G12b. Comments, not allele-specific -- mutants           *p :
+! G14a. Comments, not allele-specific -- other             *u :
+! G14b. Identification                                        :
+! G28a. Comments -- relationship to other genes        [free text] *q :
+! G28b. Source for merge/identity of                      [SoftCV] *q :
+! G29a. Functional comp/gain of function -- structured [SoftCV] *q :
+! G29b. Functional comp/gain of function            [free text] *q :
+! G18.  Gene(s) stated to interact genetically with G1a    *p :
+! G22.  Homologous gene in reference species of drosophilid*M :
+! G24a. GO -- Cellular component | evidence [CV]           *f :
+! G24b. GO -- Molecular function | evidence [CV]           *F :
+! G24c. GO -- Biological process | evidence [CV]           *d :
+! G24e. GO specific internal note                          *H :
+! G24f. GO -- date entered or last reviewed		   			  :y
+! G15.  Internal notes  *W :
+! RARE FIELDS MODULE:
+! move to the start of the line below this and include the Gene Modules pro.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! GA. ALLELE DATA FOR THIS GENE (excluding kilobase distance data)
+! If there is any data to enter regarding a specific allele of this gene,
+! move to the start of the line below this and include the Allele proforma.
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :E2f[rM729]
+! GA1b.  Allele symbol used in paper                       *i :de2f1[729]
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :y
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :
+! GA7a.  Phenotype  [free text]                         *k :
+! GA28a. Genetic interaction  [CV, class, effect]       *S :(with E2f[91]) cell death decrease | third instar larval stage 2, UI { E2f2[76Q1]/E2f2[g5] }
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :(with E2f[91]) dorsal mesothoracic disc & stage 2 third instar larva, UI { E2f2[76Q1]/E2f2[g5] }
+! GA28c. Genetic interaction  [free text]               *S :In wild-type animals, exposure to 40Gy of &ggr; rays induces a distinct pattern of apoptosis in the wing disc, focussed on the the wing pouch, but excluding the DV boundary region and prospective vein.  In @E2f[rM729]@/@E2f[91]@; @E2f2[76Q1]@/@E2f2[g5]@ animals, the same irradiation treatment induces a different pattern of apoptosis  a smaller number of apoptotic cells are clustered in the center of the wing pouch, many in the D-V boundary region or prospective veins.
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :
+! GA10b. Name in paper for construct                       *L :
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :E2f[91]
+! GA1b.  Allele symbol used in paper                       *i :de2f1[91]
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :y
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :
+! GA7a.  Phenotype  [free text]                         *k :
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :
+! GA10b. Name in paper for construct                       *L :
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :E2f[i2]
+! GA1b.  Allele symbol used in paper                       *i :de2f1[i2]
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :y
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :hypomorph
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :dorsal mesothoracic disc & stage 2 third instar larva
+! GA7a.  Phenotype  [free text]                         *k :In wild-type animals, exposure to 40Gy of &ggr; rays induces a distinct pattern of apoptosis in the wing disc, focussed on the the wing pouch, but excluding the DV boundary region and prospective vein.  In @E2f[i2]@ homozygotes, the same irradiation treatment induces less cell death was reduced in the intervein regions but increased cell death at the D/V boundary.
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :
+! GA10b. Name in paper for construct                       *L :
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :E2f[su89]
+! GA1b.  Allele symbol used in paper                       *i :de2f1[su89]
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :y
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :dorsal mesothoracic disc & stage 2 third instar larva
+! GA7a.  Phenotype  [free text]                         *k :In wild-type animals, exposure to 40Gy of &ggr; rays induces a distinct pattern of apoptosis in the wing disc, focussed on the the wing pouch, but excluding the DV boundary region and prospective vein.  In @E2f[su89]@ homozygotes, some apoptotic cells are present in both prospective vein and DV boundary regions.
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :
+! GA10b. Name in paper for construct                       *L :
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :E2f[dsRNA.cFa]
+! GA1b.  Allele symbol used in paper                       *i :unnamed
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :y
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :
+! GA7a.  Phenotype  [free text]                         *k :
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :
+! GA10b. Name in paper for construct                       *L :
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :dsRNA transcribed from the template was transfected into S2 cells to study the phenotypic consequences of dsRNA interference (RNAi) of the @E2f@ gene.
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another gene to curate for this publication, move to the
+! start of the line below this and include the Gene proforma again.
+! GENE PROFORMA                          Version 46:  3 Aug 2007
+!
+! G1a.  Gene symbol to use in database                      *a :E2f2
+! G1b.  Gene symbol used in paper                           *i :de2f2
+! G1e.  Action - rename this gene symbol                       :
+! G1f.  Action - merge these genes                             :
+! G1g.  Is G1a the valid symbol of a gene in FlyBase?          :y
+! G30.  Gene category (if gene is new to FlyBase) [SO CV]   *t :
+! G2a.  Gene name to use in database                        *e :
+! G2b.  Gene name used in paper                             *V :
+! G2c.  Database gene name(s) to replace                    *V :
+! G27.  Etymology                                              :
+! G31a. Action - delete gene              - TAKE CARE :
+! G31b. Action - dissociate G1a from FBrf - TAKE CARE :
+! G20a. G1a in title/abstract? Reviews - G1a significant subject? NSC :n
+! G20b. G1a wildtype expression in wildtype analysed?             NSC :n
+! G20c. G1a expression analysed in mutant/perturbed bckgrd?       NSC :n
+! G20d. G1a genome annotation analysed?                           NSC :n
+! G20e. G1a product physical interaction analysed?                NSC :y
+! G20f. G1a cis-regulatory elements characterized?                NSC :n
+! G20g. G1a gene model decorated - alleles/rescue frags/breaks?   NSC :n
+! G20h. G1a polymorphism data reported?                           NSC :n
+! G10a. Cytological map posn if by chromosome in situ      *c :
+! G10b. Cytological map posn if details unspecified        *c :
+! G11.  Comments on cytological map position [SoftCV]      *D :
+! G25.  Relationship to clone                         [SoftCV]*s :
+! G19a. Gene order/orientation from molecular mapping [SoftCV]*s :
+! G19b. Comments, not allele-specific -- molecular         *s :
+! G12a. Comments, not allele-specific - biological role    *r :
+! G12b. Comments, not allele-specific -- mutants           *p :
+! G14a. Comments, not allele-specific -- other             *u :
+! G14b. Identification                                        :
+! G28a. Comments -- relationship to other genes        [free text] *q :
+! G28b. Source for merge/identity of                      [SoftCV] *q :
+! G29a. Functional comp/gain of function -- structured [SoftCV] *q :
+! G29b. Functional comp/gain of function            [free text] *q :
+! G18.  Gene(s) stated to interact genetically with G1a    *p :
+! G22.  Homologous gene in reference species of drosophilid*M :
+! G24a. GO -- Cellular component | evidence [CV]           *f :
+! G24b. GO -- Molecular function | evidence [CV]           *F :
+! G24c. GO -- Biological process | evidence [CV]           *d :
+! G24e. GO specific internal note                          *H :
+! G24f. GO -- date entered or last reviewed		   			  :y
+! G15.  Internal notes  *W :
+! RARE FIELDS MODULE:
+! move to the start of the line below this and include the Gene Modules pro.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! GA. ALLELE DATA FOR THIS GENE (excluding kilobase distance data)
+! If there is any data to enter regarding a specific allele of this gene,
+! move to the start of the line below this and include the Allele proforma.
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :E2f2[dsRNA.cSa]
+! GA1b.  Allele symbol used in paper                       *i :unnamed
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :y
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :
+! GA7a.  Phenotype  [free text]                         *k :
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :
+! GA10b. Name in paper for construct                       *L :
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :dsRNA transcribed from the template was transfected into S2 cells to study the phenotypic consequences of dsRNA interference (RNAi) of the @E2f2@ gene.
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :E2f2[76Q1]
+! GA1b.  Allele symbol used in paper                       *i :de2f2[76Q1]
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :y
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :
+! GA7a.  Phenotype  [free text]                         *k :@E2f2[76Q1]@/@E2f2[329]@ @Mpp6[+t4]@ animals have a pattern of irradiation induced apoptosis in the late third instar wing disc which is identical to that seen in wild-type animals. (@Mpp6[+t4]@ is present to rescued loss of @Mpp6@ in @Df(2L)E2f2[329]@.
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :
+! GA10b. Name in paper for construct                       *L :
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :E2f2[g5]
+! GA1b.  Allele symbol used in paper                       *i :de2f2[g5]
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :n
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :
+! GA7a.  Phenotype  [free text]                         *k :
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :
+! GA10b. Name in paper for construct                       *L :
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :E2f2[329]
+! GA1b.  Allele symbol used in paper                       *i :de2f2[329]
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :y
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :
+! GA7a.  Phenotype  [free text]                         *k :@E2f2[76Q1]@/@E2f2[329]@ @Mpp6[+t4]@ animals have a pattern of irradiation induced apoptosis in the late third instar wing disc which is identical to that seen in wild-type animals. (@Mpp6[+t4]@ is present to rescued loss of @Mpp6@ in @Df(2L)E2f2[329]@.
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :
+! GA10b. Name in paper for construct                       *L :
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another gene to curate for this publication, move to the
+! start of the line below this and include the Gene proforma again.
+! GENE PROFORMA                          Version 46:  3 Aug 2007
+!
+! G1a.  Gene symbol to use in database                      *a :Mpp6
+! G1b.  Gene symbol used in paper                           *i :mpp6
+! G1e.  Action - rename this gene symbol                       :
+! G1f.  Action - merge these genes                             :
+! G1g.  Is G1a the valid symbol of a gene in FlyBase?          :y
+! G30.  Gene category (if gene is new to FlyBase) [SO CV]   *t :
+! G2a.  Gene name to use in database                        *e :
+! G2b.  Gene name used in paper                             *V :
+! G2c.  Database gene name(s) to replace                    *V :
+! G27.  Etymology                                              :
+! G31a. Action - delete gene              - TAKE CARE :
+! G31b. Action - dissociate G1a from FBrf - TAKE CARE :
+! G20a. G1a in title/abstract? Reviews - G1a significant subject? NSC :n
+! G20b. G1a wildtype expression in wildtype analysed?             NSC :n
+! G20c. G1a expression analysed in mutant/perturbed bckgrd?       NSC :n
+! G20d. G1a genome annotation analysed?                           NSC :n
+! G20e. G1a product physical interaction analysed?                NSC :n
+! G20f. G1a cis-regulatory elements characterized?                NSC :n
+! G20g. G1a gene model decorated - alleles/rescue frags/breaks?   NSC :n
+! G20h. G1a polymorphism data reported?                           NSC :n
+! G10a. Cytological map posn if by chromosome in situ      *c :
+! G10b. Cytological map posn if details unspecified        *c :
+! G11.  Comments on cytological map position [SoftCV]      *D :
+! G25.  Relationship to clone                         [SoftCV]*s :
+! G19a. Gene order/orientation from molecular mapping [SoftCV]*s :
+! G19b. Comments, not allele-specific -- molecular         *s :
+! G12a. Comments, not allele-specific - biological role    *r :
+! G12b. Comments, not allele-specific -- mutants           *p :
+! G14a. Comments, not allele-specific -- other             *u :
+! G14b. Identification                                        :
+! G28a. Comments -- relationship to other genes        [free text] *q :
+! G28b. Source for merge/identity of                      [SoftCV] *q :
+! G29a. Functional comp/gain of function -- structured [SoftCV] *q :
+! G29b. Functional comp/gain of function            [free text] *q :
+! G18.  Gene(s) stated to interact genetically with G1a    *p :
+! G22.  Homologous gene in reference species of drosophilid*M :
+! G24a. GO -- Cellular component | evidence [CV]           *f :
+! G24b. GO -- Molecular function | evidence [CV]           *F :
+! G24c. GO -- Biological process | evidence [CV]           *d :
+! G24e. GO specific internal note                          *H :
+! G24f. GO -- date entered or last reviewed		   			  :y
+! G15.  Internal notes  *W :
+! RARE FIELDS MODULE:
+! move to the start of the line below this and include the Gene Modules pro.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! GA. ALLELE DATA FOR THIS GENE (excluding kilobase distance data)
+! If there is any data to enter regarding a specific allele of this gene,
+! move to the start of the line below this and include the Allele proforma.
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :Mpp6[+t4]
+! GA1b.  Allele symbol used in paper                       *i :
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :y
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :
+! GA7a.  Phenotype  [free text]                         *k :
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :P{Mpp6[+t4]}
+! GA10b. Name in paper for construct                       *L :p"["mpp6"]"
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another gene to curate for this publication, move to the
+! start of the line below this and include the Gene proforma again.
+! GENE PROFORMA                          Version 46:  3 Aug 2007
+!
+! G1a.  Gene symbol to use in database                      *a :Rbf
+! G1b.  Gene symbol used in paper                           *i :rbf
+! G1e.  Action - rename this gene symbol                       :
+! G1f.  Action - merge these genes                             :
+! G1g.  Is G1a the valid symbol of a gene in FlyBase?          :y
+! G30.  Gene category (if gene is new to FlyBase) [SO CV]   *t :
+! G2a.  Gene name to use in database                        *e :
+! G2b.  Gene name used in paper                             *V :
+! G2c.  Database gene name(s) to replace                    *V :
+! G27.  Etymology                                              :
+! G31a. Action - delete gene              - TAKE CARE :
+! G31b. Action - dissociate G1a from FBrf - TAKE CARE :
+! G20a. G1a in title/abstract? Reviews - G1a significant subject? NSC :n
+! G20b. G1a wildtype expression in wildtype analysed?             NSC :n
+! G20c. G1a expression analysed in mutant/perturbed bckgrd?       NSC :n
+! G20d. G1a genome annotation analysed?                           NSC :n
+! G20e. G1a product physical interaction analysed?                NSC :n
+! G20f. G1a cis-regulatory elements characterized?                NSC :n
+! G20g. G1a gene model decorated - alleles/rescue frags/breaks?   NSC :n
+! G20h. G1a polymorphism data reported?                           NSC :n
+! G10a. Cytological map posn if by chromosome in situ      *c :
+! G10b. Cytological map posn if details unspecified        *c :
+! G11.  Comments on cytological map position [SoftCV]      *D :
+! G25.  Relationship to clone                         [SoftCV]*s :
+! G19a. Gene order/orientation from molecular mapping [SoftCV]*s :
+! G19b. Comments, not allele-specific -- molecular         *s :
+! G12a. Comments, not allele-specific - biological role    *r :
+! G12b. Comments, not allele-specific -- mutants           *p :
+! G14a. Comments, not allele-specific -- other             *u :
+! G14b. Identification                                        :
+! G28a. Comments -- relationship to other genes        [free text] *q :
+! G28b. Source for merge/identity of                      [SoftCV] *q :
+! G29a. Functional comp/gain of function -- structured [SoftCV] *q :
+! G29b. Functional comp/gain of function            [free text] *q :
+! G18.  Gene(s) stated to interact genetically with G1a    *p :
+! G22.  Homologous gene in reference species of drosophilid*M :
+! G24a. GO -- Cellular component | evidence [CV]           *f :
+! G24b. GO -- Molecular function | evidence [CV]           *F :
+! G24c. GO -- Biological process | evidence [CV]           *d :
+! G24e. GO specific internal note                          *H :
+! G24f. GO -- date entered or last reviewed		   			  :y
+! G15.  Internal notes  *W :
+! RARE FIELDS MODULE:
+! move to the start of the line below this and include the Gene Modules pro.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! GA. ALLELE DATA FOR THIS GENE (excluding kilobase distance data)
+! If there is any data to enter regarding a specific allele of this gene,
+! move to the start of the line below this and include the Allele proforma.
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :Rbf[dsRNA.cFa]
+! GA1b.  Allele symbol used in paper                       *i :unnamed
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :y
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :
+! GA7a.  Phenotype  [free text]                         *k :
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :
+! GA10b. Name in paper for construct                       *L :
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :dsRNA transcribed from the template was transfected into S2 cells to study the phenotypic consequences of dsRNA interference (RNAi) of the @Rbf@ gene.
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :Rbf[&Dgr;14]
+! GA1b.  Allele symbol used in paper                       *i :rbf[&Dgr;14]
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :y
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :cell death increase | third instar larval stage 2 | somatic clone
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :dorsal mesothoracic disc & stage 2 third instar larva | somatic clone
+! GA7a.  Phenotype  [free text]                         *k :Cells at the dorsal-ventral boundary of the late third instar wing disc are normally insensitive to irradiation induced apoptosis but become sensitive to it if they are part of @Rbf[&Dgr;14]@ homozygous somatic clones. (40Gy of &ggr; rays; assayed after 4 hours at 25[o]C).  There is also a general increase in cell death throughout these clones.
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :
+! GA10b. Name in paper for construct                       *L :
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another gene to curate for this publication, move to the
+! start of the line below this and include the Gene proforma again.
+! GENE PROFORMA                          Version 46:  3 Aug 2007
+!
+! G1a.  Gene symbol to use in database                      *a :RnrS # Dcp-1
+! G1b.  Gene symbol used in paper                           *i :rnr2 # dcp-1
+! G1e.  Action - rename this gene symbol                       :
+! G1f.  Action - merge these genes                             :
+! G1g.  Is G1a the valid symbol of a gene in FlyBase?          :y
+! G30.  Gene category (if gene is new to FlyBase) [SO CV]   *t :
+! G2a.  Gene name to use in database                        *e :
+! G2b.  Gene name used in paper                             *V :
+! G2c.  Database gene name(s) to replace                    *V :
+! G27.  Etymology                                              :
+! G31a. Action - delete gene              - TAKE CARE :
+! G31b. Action - dissociate G1a from FBrf - TAKE CARE :
+! G20a. G1a in title/abstract? Reviews - G1a significant subject? NSC :n
+! G20b. G1a wildtype expression in wildtype analysed?             NSC :y
+! G20c. G1a expression analysed in mutant/perturbed bckgrd?       NSC :y
+! G20d. G1a genome annotation analysed?                           NSC :n
+! G20e. G1a product physical interaction analysed?                NSC :n
+! G20f. G1a cis-regulatory elements characterized?                NSC :n
+! G20g. G1a gene model decorated - alleles/rescue frags/breaks?   NSC :n
+! G20h. G1a polymorphism data reported?                           NSC :n
+! G10a. Cytological map posn if by chromosome in situ      *c :
+! G10b. Cytological map posn if details unspecified        *c :
+! G11.  Comments on cytological map position [SoftCV]      *D :
+! G25.  Relationship to clone                         [SoftCV]*s :
+! G19a. Gene order/orientation from molecular mapping [SoftCV]*s :
+! G19b. Comments, not allele-specific -- molecular         *s :
+! G12a. Comments, not allele-specific - biological role    *r :
+! G12b. Comments, not allele-specific -- mutants           *p :
+! G14a. Comments, not allele-specific -- other             *u :
+! G14b. Identification                                        :
+! G28a. Comments -- relationship to other genes        [free text] *q :
+! G28b. Source for merge/identity of                      [SoftCV] *q :
+! G29a. Functional comp/gain of function -- structured [SoftCV] *q :
+! G29b. Functional comp/gain of function            [free text] *q :
+! G18.  Gene(s) stated to interact genetically with G1a    *p :
+! G22.  Homologous gene in reference species of drosophilid*M :
+! G24a. GO -- Cellular component | evidence [CV]           *f :
+! G24b. GO -- Molecular function | evidence [CV]           *F :
+! G24c. GO -- Biological process | evidence [CV]           *d :
+! G24e. GO specific internal note                          *H :
+! G24f. GO -- date entered or last reviewed		   			  :y
+! G15.  Internal notes  *W :
+! RARE FIELDS MODULE:
+! move to the start of the line below this and include the Gene Modules pro.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! GA. ALLELE DATA FOR THIS GENE (excluding kilobase distance data)
+! If there is any data to enter regarding a specific allele of this gene,
+! move to the start of the line below this and include the Allele proforma.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another gene to curate for this publication, move to the
+! start of the line below this and include the Gene proforma again.
+
+! GENE PROFORMA                          Version 46:  3 Aug 2007
+!
+! G1a.  Gene symbol to use in database                      *a :Ark
+! G1b.  Gene symbol used in paper                           *i :dark
+! G1e.  Action - rename this gene symbol                       :
+! G1f.  Action - merge these genes                             :
+! G1g.  Is G1a the valid symbol of a gene in FlyBase?          :y
+! G30.  Gene category (if gene is new to FlyBase) [SO CV]   *t :
+! G2a.  Gene name to use in database                        *e :
+! G2b.  Gene name used in paper                             *V :
+! G2c.  Database gene name(s) to replace                    *V :
+! G27.  Etymology                                              :
+! G31a. Action - delete gene              - TAKE CARE :
+! G31b. Action - dissociate G1a from FBrf - TAKE CARE :
+! G20a. G1a in title/abstract? Reviews - G1a significant subject? NSC :n
+! G20b. G1a wildtype expression in wildtype analysed?             NSC :n
+! G20c. G1a expression analysed in mutant/perturbed bckgrd?       NSC :n
+! G20d. G1a genome annotation analysed?                           NSC :n
+! G20e. G1a product physical interaction analysed?                NSC :n
+! G20f. G1a cis-regulatory elements characterized?                NSC :n
+! G20g. G1a gene model decorated - alleles/rescue frags/breaks?   NSC :n
+! G20h. G1a polymorphism data reported?                           NSC :n
+! G10a. Cytological map posn if by chromosome in situ      *c :
+! G10b. Cytological map posn if details unspecified        *c :
+! G11.  Comments on cytological map position [SoftCV]      *D :
+! G25.  Relationship to clone                         [SoftCV]*s :
+! G19a. Gene order/orientation from molecular mapping [SoftCV]*s :
+! G19b. Comments, not allele-specific -- molecular         *s :
+! G12a. Comments, not allele-specific - biological role    *r :
+! G12b. Comments, not allele-specific -- mutants           *p :
+! G14a. Comments, not allele-specific -- other             *u :
+! G14b. Identification                                        :
+! G28a. Comments -- relationship to other genes        [free text] *q :
+! G28b. Source for merge/identity of                      [SoftCV] *q :
+! G29a. Functional comp/gain of function -- structured [SoftCV] *q :
+! G29b. Functional comp/gain of function            [free text] *q :
+! G18.  Gene(s) stated to interact genetically with G1a    *p :
+! G22.  Homologous gene in reference species of drosophilid*M :
+! G24a. GO -- Cellular component | evidence [CV]           *f :
+! G24b. GO -- Molecular function | evidence [CV]           *F :
+! G24c. GO -- Biological process | evidence [CV]           *d :
+! G24e. GO specific internal note                          *H :
+! G24f. GO -- date entered or last reviewed		   			  :y
+! G15.  Internal notes  *W :
+! RARE FIELDS MODULE:
+! move to the start of the line below this and include the Gene Modules pro.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! GA. ALLELE DATA FOR THIS GENE (excluding kilobase distance data)
+! If there is any data to enter regarding a specific allele of this gene,
+! move to the start of the line below this and include the Allele proforma.
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :Ark[CD4]
+! GA1b.  Allele symbol used in paper                       *i :dark[CD4]
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :y
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :
+! GA7a.  Phenotype  [free text]                         *k :
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :
+! GA10b. Name in paper for construct                       *L :
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another gene to curate for this publication, move to the
+! start of the line below this and include the Gene proforma again.
+! GENE PROFORMA                          Version 46:  3 Aug 2007
+!
+! G1a.  Gene symbol to use in database                      *a :W
+! G1b.  Gene symbol used in paper                           *i :hid
+! G1e.  Action - rename this gene symbol                       :
+! G1f.  Action - merge these genes                             :
+! G1g.  Is G1a the valid symbol of a gene in FlyBase?          :y
+! G30.  Gene category (if gene is new to FlyBase) [SO CV]   *t :
+! G2a.  Gene name to use in database                        *e :
+! G2b.  Gene name used in paper                             *V :
+! G2c.  Database gene name(s) to replace                    *V :
+! G27.  Etymology                                              :
+! G31a. Action - delete gene              - TAKE CARE :
+! G31b. Action - dissociate G1a from FBrf - TAKE CARE :
+! G20a. G1a in title/abstract? Reviews - G1a significant subject? NSC :n
+! G20b. G1a wildtype expression in wildtype analysed?             NSC :y
+! G20c. G1a expression analysed in mutant/perturbed bckgrd?       NSC :y
+! G20d. G1a genome annotation analysed?                           NSC :n
+! G20e. G1a product physical interaction analysed?                NSC :n
+! G20f. G1a cis-regulatory elements characterized?                NSC :y
+! G20g. G1a gene model decorated - alleles/rescue frags/breaks?   NSC :n
+! G20h. G1a polymorphism data reported?                           NSC :n
+! G10a. Cytological map posn if by chromosome in situ      *c :
+! G10b. Cytological map posn if details unspecified        *c :
+! G11.  Comments on cytological map position [SoftCV]      *D :
+! G25.  Relationship to clone                         [SoftCV]*s :
+! G19a. Gene order/orientation from molecular mapping [SoftCV]*s :
+! G19b. Comments, not allele-specific -- molecular         *s :
+! G12a. Comments, not allele-specific - biological role    *r :
+! G12b. Comments, not allele-specific -- mutants           *p :
+! G14a. Comments, not allele-specific -- other             *u :
+! G14b. Identification                                        :
+! G28a. Comments -- relationship to other genes        [free text] *q :
+! G28b. Source for merge/identity of                      [SoftCV] *q :
+! G29a. Functional comp/gain of function -- structured [SoftCV] *q :
+! G29b. Functional comp/gain of function            [free text] *q :
+! G18.  Gene(s) stated to interact genetically with G1a    *p :
+! G22.  Homologous gene in reference species of drosophilid*M :
+! G24a. GO -- Cellular component | evidence [CV]           *f :
+! G24b. GO -- Molecular function | evidence [CV]           *F :
+! G24c. GO -- Biological process | evidence [CV]           *d :
+! G24e. GO specific internal note                          *H :
+! G24f. GO -- date entered or last reviewed		   			  :y
+! G15.  Internal notes  *W :
+! RARE FIELDS MODULE:
+! move to the start of the line below this and include the Gene Modules pro.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! GA. ALLELE DATA FOR THIS GENE (excluding kilobase distance data)
+! If there is any data to enter regarding a specific allele of this gene,
+! move to the start of the line below this and include the Allele proforma.
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :W[05014]
+! GA1b.  Allele symbol used in paper                       *i :hid[P05014]
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :y
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :
+! GA7a.  Phenotype  [free text]                         *k :
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :
+! GA10b. Name in paper for construct                       *L :
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another gene to curate for this publication, move to the
+! start of the line below this and include the Gene proforma again.
+
+! GENE PROFORMA                          Version 46:  3 Aug 2007
+!
+! G1a.  Gene symbol to use in database                      *a :Scer\GAL4
+! G1b.  Gene symbol used in paper                           *i :Gal4
+! G1e.  Action - rename this gene symbol                       :
+! G1f.  Action - merge these genes                             :
+! G1g.  Is G1a the valid symbol of a gene in FlyBase?          :y
+! G30.  Gene category (if gene is new to FlyBase) [SO CV]   *t :
+! G2a.  Gene name to use in database                        *e :
+! G2b.  Gene name used in paper                             *V :
+! G2c.  Database gene name(s) to replace                    *V :
+! G27.  Etymology                                              :
+! G31a. Action - delete gene              - TAKE CARE :
+! G31b. Action - dissociate G1a from FBrf - TAKE CARE :
+! G20a. G1a in title/abstract? Reviews - G1a significant subject? NSC :
+! G20b. G1a wildtype expression in wildtype analysed?             NSC :
+! G20c. G1a expression analysed in mutant/perturbed bckgrd?       NSC :
+! G20d. G1a genome annotation analysed?                           NSC :
+! G20e. G1a product physical interaction analysed?                NSC :
+! G20f. G1a cis-regulatory elements characterized?                NSC :
+! G20g. G1a gene model decorated - alleles/rescue frags/breaks?   NSC :
+! G20h. G1a polymorphism data reported?                           NSC :
+! G10a. Cytological map posn if by chromosome in situ      *c :
+! G10b. Cytological map posn if details unspecified        *c :
+! G11.  Comments on cytological map position [SoftCV]      *D :
+! G25.  Relationship to clone                         [SoftCV]*s :
+! G19a. Gene order/orientation from molecular mapping [SoftCV]*s :
+! G19b. Comments, not allele-specific -- molecular         *s :
+! G12a. Comments, not allele-specific - biological role    *r :
+! G12b. Comments, not allele-specific -- mutants           *p :
+! G14a. Comments, not allele-specific -- other             *u :
+! G14b. Identification                                        :
+! G28a. Comments -- relationship to other genes        [free text] *q :
+! G28b. Source for merge/identity of                      [SoftCV] *q :
+! G29a. Functional comp/gain of function -- structured [SoftCV] *q :
+! G29b. Functional comp/gain of function            [free text] *q :
+! G18.  Gene(s) stated to interact genetically with G1a    *p :
+! G22.  Homologous gene in reference species of drosophilid*M :
+! G24a. GO -- Cellular component | evidence [CV]           *f :
+! G24b. GO -- Molecular function | evidence [CV]           *F :
+! G24c. GO -- Biological process | evidence [CV]           *d :
+! G24e. GO specific internal note                          *H :
+! G24f. GO -- date entered or last reviewed		   			  :y
+! G15.  Internal notes  *W :
+! RARE FIELDS MODULE:
+! move to the start of the line below this and include the Gene Modules pro.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! GA. ALLELE DATA FOR THIS GENE (excluding kilobase distance data)
+! If there is any data to enter regarding a specific allele of this gene,
+! move to the start of the line below this and include the Allele proforma.
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :Scer\GAL4[en-e16E]
+! GA1b.  Allele symbol used in paper                       *i :
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :y
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :
+! GA7a.  Phenotype  [free text]                         *k :
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :
+! GA10b. Name in paper for construct                       *L :
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :P{en2.4-GAL4}e16E
+! GA10f. Name in paper for insertion                   *N :enGal4
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :Scer\GAL4[Scer\FRT.Act5C]
+! GA1b.  Allele symbol used in paper                       *i :
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :y
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :
+! GA7a.  Phenotype  [free text]                         *k :
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :P{AyGAL4}
+! GA10b. Name in paper for construct                       *L :unnamed
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :'Scer\GAL4[Scer\FRT.Act5C]' is a guess for 'FLP-out' driver on basis of common usage. ds070808
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :Scer\GAL4[Act5C.PI]
+! GA1b.  Allele symbol used in paper                       *i :unnamed
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :y
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :
+! GA7a.  Phenotype  [free text]                         *k :
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :P{Act5C-GAL4}
+! GA10b. Name in paper for construct                       *L :unnamed
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :FLPase
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :Scer\GAL4[Scer\FRT.Act5C]
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another gene to curate for this publication, move to the
+! start of the line below this and include the Gene proforma again.
+! GENE PROFORMA                          Version 46:  3 Aug 2007
+!
+! G1a.  Gene symbol to use in database                      *a :His3 # bs
+! G1b.  Gene symbol used in paper                           *i :H3 # dSRF
+! G1e.  Action - rename this gene symbol                       :
+! G1f.  Action - merge these genes                             :
+! G1g.  Is G1a the valid symbol of a gene in FlyBase?          :y
+! G30.  Gene category (if gene is new to FlyBase) [SO CV]   *t :
+! G2a.  Gene name to use in database                        *e :
+! G2b.  Gene name used in paper                             *V :
+! G2c.  Database gene name(s) to replace                    *V :
+! G27.  Etymology                                              :
+! G31a. Action - delete gene              - TAKE CARE :
+! G31b. Action - dissociate G1a from FBrf - TAKE CARE :
+! G20a. G1a in title/abstract? Reviews - G1a significant subject? NSC :n
+! G20b. G1a wildtype expression in wildtype analysed?             NSC :y
+! G20c. G1a expression analysed in mutant/perturbed bckgrd?       NSC :y
+! G20d. G1a genome annotation analysed?                           NSC :n
+! G20e. G1a product physical interaction analysed?                NSC :n
+! G20f. G1a cis-regulatory elements characterized?                NSC :n
+! G20g. G1a gene model decorated - alleles/rescue frags/breaks?   NSC :n
+! G20h. G1a polymorphism data reported?                           NSC :n
+! G10a. Cytological map posn if by chromosome in situ      *c :
+! G10b. Cytological map posn if details unspecified        *c :
+! G11.  Comments on cytological map position [SoftCV]      *D :
+! G25.  Relationship to clone                         [SoftCV]*s :
+! G19a. Gene order/orientation from molecular mapping [SoftCV]*s :
+! G19b. Comments, not allele-specific -- molecular         *s :
+! G12a. Comments, not allele-specific - biological role    *r :
+! G12b. Comments, not allele-specific -- mutants           *p :
+! G14a. Comments, not allele-specific -- other             *u :
+! G14b. Identification                                        :
+! G28a. Comments -- relationship to other genes        [free text] *q :
+! G28b. Source for merge/identity of                      [SoftCV] *q :
+! G29a. Functional comp/gain of function -- structured [SoftCV] *q :
+! G29b. Functional comp/gain of function            [free text] *q :
+! G18.  Gene(s) stated to interact genetically with G1a    *p :
+! G22.  Homologous gene in reference species of drosophilid*M :
+! G24a. GO -- Cellular component | evidence [CV]           *f :
+! G24b. GO -- Molecular function | evidence [CV]           *F :
+! G24c. GO -- Biological process | evidence [CV]           *d :
+! G24e. GO specific internal note                          *H :
+! G24f. GO -- date entered or last reviewed		   			  :y
+! G15.  Internal notes  *W :
+! RARE FIELDS MODULE:
+! move to the start of the line below this and include the Gene Modules pro.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! GA. ALLELE DATA FOR THIS GENE (excluding kilobase distance data)
+! If there is any data to enter regarding a specific allele of this gene,
+! move to the start of the line below this and include the Allele proforma.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another gene to curate for this publication, move to the
+! start of the line below this and include the Gene proforma again.
+! GENE PROFORMA                          Version 46:  3 Aug 2007
+!
+! G1a.  Gene symbol to use in database                      *a :Dl
+! G1b.  Gene symbol used in paper                           *i :
+! G1e.  Action - rename this gene symbol                       :
+! G1f.  Action - merge these genes                             :
+! G1g.  Is G1a the valid symbol of a gene in FlyBase?          :y
+! G30.  Gene category (if gene is new to FlyBase) [SO CV]   *t :
+! G2a.  Gene name to use in database                        *e :
+! G2b.  Gene name used in paper                             *V :Delta
+! G2c.  Database gene name(s) to replace                    *V :
+! G27.  Etymology                                              :
+! G31a. Action - delete gene              - TAKE CARE :
+! G31b. Action - dissociate G1a from FBrf - TAKE CARE :
+! G20a. G1a in title/abstract? Reviews - G1a significant subject? NSC :n
+! G20b. G1a wildtype expression in wildtype analysed?             NSC :n
+! G20c. G1a expression analysed in mutant/perturbed bckgrd?       NSC :n
+! G20d. G1a genome annotation analysed?                           NSC :n
+! G20e. G1a product physical interaction analysed?                NSC :n
+! G20f. G1a cis-regulatory elements characterized?                NSC :n
+! G20g. G1a gene model decorated - alleles/rescue frags/breaks?   NSC :n
+! G20h. G1a polymorphism data reported?                           NSC :n
+! G10a. Cytological map posn if by chromosome in situ      *c :
+! G10b. Cytological map posn if details unspecified        *c :
+! G11.  Comments on cytological map position [SoftCV]      *D :
+! G25.  Relationship to clone                         [SoftCV]*s :
+! G19a. Gene order/orientation from molecular mapping [SoftCV]*s :
+! G19b. Comments, not allele-specific -- molecular         *s :
+! G12a. Comments, not allele-specific - biological role    *r :
+! G12b. Comments, not allele-specific -- mutants           *p :
+! G14a. Comments, not allele-specific -- other             *u :
+! G14b. Identification                                        :
+! G28a. Comments -- relationship to other genes        [free text] *q :
+! G28b. Source for merge/identity of                      [SoftCV] *q :
+! G29a. Functional comp/gain of function -- structured [SoftCV] *q :
+! G29b. Functional comp/gain of function            [free text] *q :
+! G18.  Gene(s) stated to interact genetically with G1a    *p :
+! G22.  Homologous gene in reference species of drosophilid*M :
+! G24a. GO -- Cellular component | evidence [CV]           *f :
+! G24b. GO -- Molecular function | evidence [CV]           *F :
+! G24c. GO -- Biological process | evidence [CV]           *d :
+! G24e. GO specific internal note                          *H :
+! G24f. GO -- date entered or last reviewed		   			  :y
+! G15.  Internal notes  *W :
+! RARE FIELDS MODULE:
+! move to the start of the line below this and include the Gene Modules pro.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! GA. ALLELE DATA FOR THIS GENE (excluding kilobase distance data)
+! If there is any data to enter regarding a specific allele of this gene,
+! move to the start of the line below this and include the Allele proforma.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another gene to curate for this publication, move to the
+! start of the line below this and include the Gene proforma again.
+! GENE PROFORMA                          Version 46:  3 Aug 2007
+!
+! G1a.  Gene symbol to use in database                      *a :Ppyr\LUC
+! G1b.  Gene symbol used in paper                           *i :luc
+! G1e.  Action - rename this gene symbol                       :
+! G1f.  Action - merge these genes                             :
+! G1g.  Is G1a the valid symbol of a gene in FlyBase?          :y
+! G30.  Gene category (if gene is new to FlyBase) [SO CV]   *t :
+! G2a.  Gene name to use in database                        *e :
+! G2b.  Gene name used in paper                             *V :
+! G2c.  Database gene name(s) to replace                    *V :
+! G27.  Etymology                                              :
+! G31a. Action - delete gene              - TAKE CARE :
+! G31b. Action - dissociate G1a from FBrf - TAKE CARE :
+! G20a. G1a in title/abstract? Reviews - G1a significant subject? NSC :
+! G20b. G1a wildtype expression in wildtype analysed?             NSC :
+! G20c. G1a expression analysed in mutant/perturbed bckgrd?       NSC :
+! G20d. G1a genome annotation analysed?                           NSC :
+! G20e. G1a product physical interaction analysed?                NSC :
+! G20f. G1a cis-regulatory elements characterized?                NSC :
+! G20g. G1a gene model decorated - alleles/rescue frags/breaks?   NSC :
+! G20h. G1a polymorphism data reported?                           NSC :
+! G10a. Cytological map posn if by chromosome in situ      *c :
+! G10b. Cytological map posn if details unspecified        *c :
+! G11.  Comments on cytological map position [SoftCV]      *D :
+! G25.  Relationship to clone                         [SoftCV]*s :
+! G19a. Gene order/orientation from molecular mapping [SoftCV]*s :
+! G19b. Comments, not allele-specific -- molecular         *s :
+! G12a. Comments, not allele-specific - biological role    *r :
+! G12b. Comments, not allele-specific -- mutants           *p :
+! G14a. Comments, not allele-specific -- other             *u :
+! G14b. Identification                                        :
+! G28a. Comments -- relationship to other genes        [free text] *q :
+! G28b. Source for merge/identity of                      [SoftCV] *q :
+! G29a. Functional comp/gain of function -- structured [SoftCV] *q :
+! G29b. Functional comp/gain of function            [free text] *q :
+! G18.  Gene(s) stated to interact genetically with G1a    *p :
+! G22.  Homologous gene in reference species of drosophilid*M :
+! G24a. GO -- Cellular component | evidence [CV]           *f :
+! G24b. GO -- Molecular function | evidence [CV]           *F :
+! G24c. GO -- Biological process | evidence [CV]           *d :
+! G24e. GO specific internal note                          *H :
+! G24f. GO -- date entered or last reviewed		   			  :y
+! G15.  Internal notes  *W :
+! RARE FIELDS MODULE:
+! move to the start of the line below this and include the Gene Modules pro.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! GA. ALLELE DATA FOR THIS GENE (excluding kilobase distance data)
+! If there is any data to enter regarding a specific allele of this gene,
+! move to the start of the line below this and include the Allele proforma.
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :Ppyr\LUC[mus209.5'-168]
+! GA1b.  Allele symbol used in paper                       *i :unnamed
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :y
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :
+! GA7a.  Phenotype  [free text]                         *k :
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :
+! GA10b. Name in paper for construct                       *L :
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :Carried in a plasmid, "PCNAwt-luc", transfected into S2 cells.
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :Ppyr\LUC[mus209.5'-168.hidE2f]
+! GA1b.  Allele symbol used in paper                       *i :unnamed
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :n
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :
+! GA7a.  Phenotype  [free text]                         *k :
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :
+! GA10b. Name in paper for construct                       *L :
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :in vitro construct | site directed mutagenesis
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :Ppyr\LUC[mus209.5'-168]
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :@Ppyr\LUC[mus209.5'-168]@ in which the two @E2f@ protein binding sites have been replaced by an @E2f@ protein binding site from 1.4kB upstream of the @W@ transcriptional start site.
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :Carried in a plasmid , "PCNA-hidE2F-luc", transfected into S2 cells.
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :Ppyr\LUC[mus209.5'-168.mutI.II]
+! GA1b.  Allele symbol used in paper                       *i :unnamed
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :y
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :
+! GA7a.  Phenotype  [free text]                         *k :
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :
+! GA10b. Name in paper for construct                       *L :
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :Carried in a plasmid, "PCNAE2Fmut-luc", and transfected into S2 cells.
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+! ALLELE PROFORMA                        Version 39: 6 July 2007
+!
+! GA1a.  Allele symbol to use in database                  *A :Ppyr\LUC[mus209.5'-168.mutI.II.hidE2F]
+! GA1b.  Allele symbol used in paper                       *i :unnamed
+! GA1e.  Action - rename this allele symbol                   :
+! GA1f.  Action - merge these alleles                         :
+! GA1g.  Is GA1a the valid symbol of an allele in FlyBase?    :n
+! GA2a.  Allele name to use in database                    *e :
+! GA2b.  Allele name used in paper                         *V :
+! GA2c.  Database allele name(s) to replace                *V :
+! GA31.  Etymology                                            :
+! GA32a. Action - delete allele             - TAKE CARE :
+! GA32b. Action - dissociate GA1a from FBrf - TAKE CARE :
+! GA3.   Rank [CV]                                      *k :
+! GA4.   Allele class [CV]                              *k :
+! GA56.  Phenotypic | dominance class [bipartite CV]    *k :
+! GA17.  Phenotype  [CV, body part(s) where manifest]   *k :
+! GA7a.  Phenotype  [free text]                         *k :
+! GA28a. Genetic interaction  [CV, class, effect]       *S :
+! GA28b. Genetic interaction  [CV, anatomy, effect]     *S :
+! GA28c. Genetic interaction  [free text]               *S :
+! GA29a. Xenogenetic interaction [CV, class, effect]    *j :
+! GA29b. Xenogenetic interaction [CV, anatomy, effect]  *j :
+! GA29c. Xenogenetic interaction [free text]            *j :
+! GA21.  Interallelic complementation data (structured) [SoftCV]*Q :
+! GA22.  Interallelic complementation data (free text)          *Q :
+! GA10a. Associated construct                              *I :
+! GA10b. Name in paper for construct                       *L :
+! GA10c. Associated insertion - G1a is outwith insert      *G :
+! GA10d. Name in paper for insertion                       *N :
+! GA10e. Associated insertion - G1a is inside insert   *G :
+! GA10f. Name in paper for insertion                   *N :
+! GA10g. Associated aberration / cytology +            *P/*C  :
+! GA8.   Mutagen [CV]                                  *o :in vitro construct | site directed mutagenesis
+! GA19.  Vehicle of assay [CV]                         *k :
+! GA15.  Discoverer                                    *w :
+! GA11.  Progenitor genotype                           *O :Ppyr\LUC[mus209.5'-168.mutI.II]
+! GA23a. Notes on origin [SoftCV]                      *R :
+! GA23b. Notes on origin [free text]                   *R :
+! GA12a. Nucleotide/amino acid changes (wrt GA11) [SoftCV]*s :
+! GA12b. Molecular modifications (wrt GA11)   [free text] *s :@Ppyr\LUC[mus209.5'-168.mutI.II]@ in which the @E2f@ protein binding site from 1.4kB upstream of the @W@ transcriptional start site has been inserted 1.3 kb upstream of the @Ppyr\LUC@ transcriptional start.
+! GA30.  Tagged with                                       :
+! GA13.  Comments not specific to one transcript/product*u :
+! GA20.  Information on availability                    *v :
+! GA33.  Accession number (seq cur only)         TAKE CARE :
+! GA14.  Internal notes  *W :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another allele of this gene to curate for this pub, move to
+! the start of the line below this and include the Allele proforma again.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! If there is another gene to curate for this publication, move to the
+! start of the line below this and include the Gene proforma again.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! A. ABERRATION DATA (excluding kilobase distance data)
+! If this publication includes information to enter concerning an
+! aberration, defined as a named multi-segment construction whose segments
+! are all from the same species (not necessarily Drosophila melanogaster),
+! move to the start of the line below and include the Aberration proforma.
+! ABERRATION PROFORMA                    Version 36: 6 July 2007
+!
+! A1a.  Aberration symbol to use in database           *a :Df(3L)X14
+! A1b.  Aberration symbol used in paper                *i :X14
+! A1e.  Action - rename this aberration symbol            :
+! A1f.  Action - merge these aberrations                  :
+! A1g.  Is A1a the valid symbol of an aberration in FlyBase? :y
+! A2a.  Aberration name to use in database             *e :
+! A2b.  Aberration name used in paper                  *Q :
+! A2c.  Database aberration name(s) to replace         *Q :
+! A27a. Action - delete aberration        - TAKE CARE :
+! A27b. Action - dissociate A1a from FBrf - TAKE CARE :
+! A4.   Mutagen  [CV]                                  *o :
+! A16.  Discoverer                                     *w :
+! A6.   Progenitor genotype                            *O :
+! A22a. Notes on origin [SoftCV]                       *R :
+! A22b. Notes on origin [free text]                    *R :
+! A23.  Parent chromosome (for segregants - *Y)           :
+! A7a. Genes removed or broken by the aberration (Df) in A1a (complementation)     *q :
+! A7b. Genes fully duplicated in the Dp in A1a (complementation)     *q :
+! A7c. Genes NOT removed or broken by the aberration (Df) in A1a (complementation) *q :
+! A7d. Genes NOT included in the Dp in A1a (complementation)         *q :
+! A7e. Genes partially disrupted by the Df in A1a (complementation) *q :
+! A7f. Genes partially duplicated in the Dp in A1a (complementation)*q :
+! A7x. Non-standard complementation data (free text, usually for A7e, A7f) *q :
+! A17. Phenotype (not associated with specified alleles)    *p :
+! A19a. Phenotype in combination with other abs [SoftCV]    *T :
+! A19b. Phenotype in combination with other abs [free text] *T :
+! A8a. Breaks: cytological or progen break ranges       *B :
+1:
+2:
+3:
+! A8b. Segments: cytological ranges of ends *B :
+1:
+2:
+3:
+! A9. Type of aberration relative to progenitor [CV]   *C :
+! A10. Known new junction(s) of A8a sides *N :
+! A11. New order of A8b segments          *N :
+! A18. Comments about cytology            *c :
+! A26. Type of aberration relative to wild-type  [CV]  *C :
+! A24a. Transposon insertions             *P :
+! A24b. Non-insert allele(s)              *S :
+! A14. Other comments                     *u :
+! A25a. Genes fully removed by the aberration (Df) in A1a (molecular) NSC               :
+! A25b. Genes fully duplicated in the Dp in A1a (molecular)  NSC        :
+! A25c. Genes NOT removed or broken by the aberration (Df) in A1a (molecular)  NSC      :
+! A25d. Genes NOT included in the Dp in A1a (molecular) NSC             :
+! A25e. Genes partially removed or broken by the aberration (Df) in A1a (molecular) NSC :
+! A25f. Genes partially included in the Dp in A1a (molecular) NSC       :
+! A25x. Molecular data (free text, usually for A25e, A25f) NSC :
+! A20a. A1a polymorphism data reported?       *K :n
+! A21. Information on availability            *v :
+! A28. Accession number (seq cur only) TAKE CARE :
+! A15. Internal notes                         *K :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+! AB. BALANCER DATA ABOUT THIS ABERRATION
+! If there is any data regarding a specific constellation of markers on
+! this aberration, which has been named as a balancer chromosome, move
+! to the start of the line below this and include the Balancer proforma.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+! If there is another aberration to curate for this publication, go to the
+! start of the line below this and include the Aberration proforma again.
+! ABERRATION PROFORMA                    Version 36: 6 July 2007
+!
+! A1a.  Aberration symbol to use in database           *a :Df(3L)XR38
+! A1b.  Aberration symbol used in paper                *i :Df(3L)X38
+! A1e.  Action - rename this aberration symbol            :
+! A1f.  Action - merge these aberrations                  :
+! A1g.  Is A1a the valid symbol of an aberration in FlyBase? :y
+! A2a.  Aberration name to use in database             *e :
+! A2b.  Aberration name used in paper                  *Q :
+! A2c.  Database aberration name(s) to replace         *Q :
+! A27a. Action - delete aberration        - TAKE CARE :
+! A27b. Action - dissociate A1a from FBrf - TAKE CARE :
+! A4.   Mutagen  [CV]                                  *o :
+! A16.  Discoverer                                     *w :
+! A6.   Progenitor genotype                            *O :
+! A22a. Notes on origin [SoftCV]                       *R :
+! A22b. Notes on origin [free text]                    *R :
+! A23.  Parent chromosome (for segregants - *Y)           :
+! A7a. Genes removed or broken by the aberration (Df) in A1a (complementation)     *q :
+! A7b. Genes fully duplicated in the Dp in A1a (complementation)     *q :
+! A7c. Genes NOT removed or broken by the aberration (Df) in A1a (complementation) *q :
+! A7d. Genes NOT included in the Dp in A1a (complementation)         *q :
+! A7e. Genes partially disrupted by the Df in A1a (complementation) *q :
+! A7f. Genes partially duplicated in the Dp in A1a (complementation)*q :
+! A7x. Non-standard complementation data (free text, usually for A7e, A7f) *q :
+! A17. Phenotype (not associated with specified alleles)    *p :
+! A19a. Phenotype in combination with other abs [SoftCV]    *T :
+! A19b. Phenotype in combination with other abs [free text] *T :
+! A8a. Breaks: cytological or progen break ranges       *B :
+1:
+2:
+3:
+! A8b. Segments: cytological ranges of ends *B :
+1:
+2:
+3:
+! A9. Type of aberration relative to progenitor [CV]   *C :
+! A10. Known new junction(s) of A8a sides *N :
+! A11. New order of A8b segments          *N :
+! A18. Comments about cytology            *c :
+! A26. Type of aberration relative to wild-type  [CV]  *C :
+! A24a. Transposon insertions             *P :
+! A24b. Non-insert allele(s)              *S :
+! A14. Other comments                     *u :
+! A25a. Genes fully removed by the aberration (Df) in A1a (molecular) NSC               :
+! A25b. Genes fully duplicated in the Dp in A1a (molecular)  NSC        :
+! A25c. Genes NOT removed or broken by the aberration (Df) in A1a (molecular)  NSC      :
+! A25d. Genes NOT included in the Dp in A1a (molecular) NSC             :
+! A25e. Genes partially removed or broken by the aberration (Df) in A1a (molecular) NSC :
+! A25f. Genes partially included in the Dp in A1a (molecular) NSC       :
+! A25x. Molecular data (free text, usually for A25e, A25f) NSC :
+! A20a. A1a polymorphism data reported?       *K :n
+! A21. Information on availability            *v :
+! A28. Accession number (seq cur only) TAKE CARE :
+! A15. Internal notes                         *K :
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+! AB. BALANCER DATA ABOUT THIS ABERRATION
+! If there is any data regarding a specific constellation of markers on
+! this aberration, which has been named as a balancer chromosome, move
+! to the start of the line below this and include the Balancer proforma.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+! If there is another aberration to curate for this publication, go to the
+! start of the line below this and include the Aberration proforma again.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! MA. TRANSPOSON INSERTION DATA
+! MS. MOLECULAR SEGMENT AND CONSTRUCT DATA
+! TE. NATURAL TRANSPOSON, GENERIC DATA
+! If this publication includes information to enter concerning a
+! transposon/transgene insertion, molecular segment/construct, or
+! natural transposon, move to the start of the line below and include
+! the appropriate ti.pro, moseg.pro, or gen.natTE.pro proforma.
+!!!!!!!!!!!!!!!!!! END OF RECORD FOR THIS PUBLICATION !!!!!!!!!!!!!!!!!!!!

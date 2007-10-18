@@ -7,6 +7,8 @@
     </scrollpane>
     <panel id="buttonPanel">
     	<gridbagconstraints gridx="0" gridy="1" weightx="1" insets="10,10,10,10" fill="GridBagConstraints.HORIZONTAL"/>
+        <button id="ontolMakerButton" text="Make Ontology" action="makeOntology" toolTipText="make ontology for field(s)"/>
+        <panel size="80,1" preferredSize="80,1"/>
         <button id="addButton" text="New" action="addNewCharacter" toolTipText="Add new row"/>
         <button id="duplicateButton" text="Duplicate" action="duplicateSelectedCharacters" toolTipText="Duplicate selected rows"/>
         <button id="deleteButton" text="Delete" action="deleteSelectedCharacters" toolTipText="Delete selected rows"/>
