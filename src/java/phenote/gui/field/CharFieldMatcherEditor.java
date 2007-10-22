@@ -35,8 +35,8 @@ import phenote.util.FileUtil;
 import ca.odell.glazedlists.matchers.AbstractMatcherEditor;
 
 /**
- * @author Jim Balhoff
  * Provides a search panel for filtering character lists by charfield values.
+ * @author Jim Balhoff
  */
 public class CharFieldMatcherEditor extends AbstractMatcherEditor<CharacterI> {
   

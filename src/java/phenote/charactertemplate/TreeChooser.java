@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -22,7 +23,9 @@ import javax.swing.JTextField;
 
 import jebl.evolution.graphs.Node;
 import jebl.evolution.io.ImportException;
+import jebl.evolution.io.NewickExporter;
 import jebl.evolution.io.NewickImporter;
+import jebl.evolution.io.NexusImporter;
 import jebl.evolution.trees.Tree;
 import jebl.evolution.trees.Utils;
 import jebl.gui.trees.treeviewer.TreeViewer;
@@ -63,7 +66,7 @@ public class TreeChooser extends AbstractTemplateChooser implements CharListChan
   
   public Collection<CharacterI> getChosenTemplates(Collection<CharacterI> candidates) {
     if (this.getCharField() == null) {
-      this.log().error("CharField not set for TreeChooser - no matching templates.");
+      log().error("CharField not set for TreeChooser - no matching templates.");
       return Collections.emptyList();
     }
     final Collection<String> selectedTaxa = this.getSelectedTaxonNames();
@@ -79,14 +82,30 @@ public class TreeChooser extends AbstractTemplateChooser implements CharListChan
 
   public void setNewickTree(String treeText) {
     try {
-      Tree tree = this.importTree(treeText);
-      this.getTreeViewer().setTree(tree);
+      final Tree tree = this.importTree(treeText);
+      this.setTree(tree);
       if (this.newickFieldLabel != null) this.newickFieldLabel.setForeground(Color.BLACK);
     }
     catch (ImportException e) {
       if (this.newickFieldLabel != null) this.newickFieldLabel.setForeground(Color.RED);
       log().error("Invalid Newick tree", e);
     } 
+  }
+  
+  public void setTree(Tree tree) {
+    this.replaceTaxonUnderscoresWithSpaces(tree);
+    this.getTreeViewer().setTree(tree);
+    if (this.newickField != null) {
+      try {
+        final StringWriter writer = new StringWriter();
+        final NewickExporter exporter = new NewickExporter(writer);
+        exporter.exportTree(tree);
+        log().debug("The imported tree is: " + writer.toString());
+        this.newickField.setText(writer.toString());
+      } catch (IOException e) {
+        log().error("Error exporting Newick tree", e);
+      }
+    }
   }
   
   public void newCharList(CharListChangeEvent e) {
@@ -132,7 +151,7 @@ public class TreeChooser extends AbstractTemplateChooser implements CharListChan
       JComponent component = (JComponent)swix.render(FileUtil.findUrl("tree_chooser.xml"));
       return component;
     } catch (Exception e) {
-      this.log().error("Unable to render interface", e);
+      log().error("Unable to render interface", e);
       return new JPanel();
     }
   }
@@ -148,7 +167,7 @@ public class TreeChooser extends AbstractTemplateChooser implements CharListChan
       return Utils.rootTheTree(importer.importNextTree());
     } catch (IOException e) {
       // this is unlikely since we're using a StringReader
-      this.log().error("Can't read tree, newick text must be null", e);
+      log().error("Can't read tree, newick text must be null", e);
       return null;
     } 
   }
@@ -164,20 +183,34 @@ public class TreeChooser extends AbstractTemplateChooser implements CharListChan
     final String defaultFileName = baseName + ".tre";
     File treeFile = new File(file.getParent(), defaultFileName);
     if (treeFile.exists()) {
-      // the tree must be on the first line and contain no linebreaks
+      // the tree file must be in NEXUS format
       try {
-        String newick = (new BufferedReader(new FileReader(treeFile))).readLine();
-        this.setNewickTree(newick);
+        NexusImporter importer = new NexusImporter(new BufferedReader(new FileReader(treeFile)));
+        Tree tree = importer.importNextTree();
+        this.setTree(tree);
       } catch (FileNotFoundException e) {
         log().error("Could not open tree file", e);
       } catch (IOException e) {
         log().error("Could not open tree file", e);
+      } catch (ImportException e) {
+        log().error("Could not read tree", e);
       }
     }
   }
   
-  private Logger log() {
-    return Logger.getLogger(this.getClass());
+  private Tree replaceTaxonUnderscoresWithSpaces(Tree tree) {
+    for (Node node : tree.getNodes()) {
+      if (tree.isExternal(node)) {
+        log().debug("Taxon: " + tree.getTaxon(node).getName());
+      } else {
+        log().debug("Label: " + node.getAttribute("label"));
+      }
+    }
+    return null; //TODO
+  }
+  
+  private static Logger log() {
+    return Logger.getLogger(TreeChooser.class);
   }
 
 }
