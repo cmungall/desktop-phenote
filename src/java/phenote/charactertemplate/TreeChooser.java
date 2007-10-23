@@ -26,6 +26,7 @@ import jebl.evolution.io.ImportException;
 import jebl.evolution.io.NewickExporter;
 import jebl.evolution.io.NewickImporter;
 import jebl.evolution.io.NexusImporter;
+import jebl.evolution.taxa.Taxon;
 import jebl.evolution.trees.Tree;
 import jebl.evolution.trees.Utils;
 import jebl.gui.trees.treeviewer.TreeViewer;
@@ -95,17 +96,6 @@ public class TreeChooser extends AbstractTemplateChooser implements CharListChan
   public void setTree(Tree tree) {
     this.replaceTaxonUnderscoresWithSpaces(tree);
     this.getTreeViewer().setTree(tree);
-    if (this.newickField != null) {
-      try {
-        final StringWriter writer = new StringWriter();
-        final NewickExporter exporter = new NewickExporter(writer);
-        exporter.exportTree(tree);
-        log().debug("The imported tree is: " + writer.toString());
-        this.newickField.setText(writer.toString());
-      } catch (IOException e) {
-        log().error("Error exporting Newick tree", e);
-      }
-    }
   }
   
   public void newCharList(CharListChangeEvent e) {
@@ -123,6 +113,17 @@ public class TreeChooser extends AbstractTemplateChooser implements CharListChan
       }
     }
     return taxa;
+  }
+  
+  private void updateNewickField(Tree tree) {
+    try {
+      final StringWriter writer = new StringWriter();
+      final NewickExporter exporter = new NewickExporter(writer);
+      exporter.exportTree(tree);
+      this.newickField.setText(writer.toString());
+    } catch (IOException e) {
+      log().error("Error exporting Newick tree", e);
+    }
   }
   
   protected TreeViewer getTreeViewer() {
@@ -198,15 +199,23 @@ public class TreeChooser extends AbstractTemplateChooser implements CharListChan
     }
   }
   
-  private Tree replaceTaxonUnderscoresWithSpaces(Tree tree) {
+  private void replaceTaxonUnderscoresWithSpaces(Tree tree) {
     for (Node node : tree.getNodes()) {
       if (tree.isExternal(node)) {
         log().debug("Taxon: " + tree.getTaxon(node).getName());
+        final String original = tree.getTaxon(node).getName();
+        final String replaced = original.replaceAll("_", " ");
+        tree.renameTaxa(tree.getTaxon(node), Taxon.getTaxon(replaced));
       } else {
         log().debug("Label: " + node.getAttribute("label"));
+        final Object label = node.getAttribute("label");
+        if (label != null) {
+          final String original = node.getAttribute("label").toString();
+          final String replaced = original.replaceAll("_", " ");
+          node.setAttribute("label", replaced);
+        }
       }
     }
-    return null; //TODO
   }
   
   private static Logger log() {
