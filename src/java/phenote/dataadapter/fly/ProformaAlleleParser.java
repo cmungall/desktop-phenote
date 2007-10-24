@@ -100,23 +100,38 @@ public class ProformaAlleleParser extends OntologyMaker { //extends AbstractGrou
    set obosession for desitnation fields */
   private void parseProforma(File file) throws FileNotFoundException, IOException {
     OBOSession ses = new OBOSessionImpl(); // maybe add to main obo sess?
-    Pattern p = Pattern.compile("^\\! GA1a\\..*\\*A \\:(.*)");
+    Pattern allelePat = Pattern.compile("^\\! GA1a\\..*\\*A \\:(.*)");
+    Pattern abPat = Pattern.compile("^\\! A1a\\..*\\*a \\:(.*)");
     LineNumberReader l = new LineNumberReader(new FileReader(file));
     for (String line = l.readLine(); line != null; line = l.readLine()) {
-      // check if have allele
-      Matcher m = p.matcher(line);
-      if (m.matches()) {
-        LOG.debug("Got a match "+line+" allele "+m.group(1));
-        // get allele
-        String allele = m.group(1);
-        // make obo class from allele
-        OBOClass c = makeAlleleTerm(allele);
-        // add to obo session
-        ses.addObject(c);
-      }
+      // ALLELES - if pattern matches, makes allele oboClasses & adds to ses
+      matchAndAddToSession(line,allelePat,ses);
+      
+      // ABBERATIONS
+      matchAndAddToSession(line,abPat,ses);
     }
     //getDestinationOntology().setOboSession(ses);
     setOboSession(ses);
+  }
+
+  /** check if pattern matches - and if so get groups, split with " # "
+      make obo classes, and add them to obo session, if doesnt match then
+      nothing added - used for allele & abberation patterns */
+  private void matchAndAddToSession(String line, Pattern p, OBOSession os) {
+    Matcher m = p.matcher(line);
+    if (m.matches()) {
+      LOG.debug("Got a match "+line+" allele "+m.group(1));
+      // get allele
+      String alleles = m.group(1);
+      Pattern delim = Pattern.compile(" # ");
+      String[] alleleArray = delim.split(alleles);
+      for (String allele : alleleArray) {
+        // make obo class from allele
+        OBOClass c = makeAlleleTerm(allele);
+        // add to obo session
+        os.addObject(c);
+      }
+    }
   }
 
   private OBOClass makeAlleleTerm(String allele) {
