@@ -21,5 +21,6 @@ public interface QueryableDataAdapterI {
   public void commit(CharacterListI charList);
   /** The label that gets displayed on the db commit button */
   public String getCommitButtonLabel();
+
 }
 
