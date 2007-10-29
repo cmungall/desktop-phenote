@@ -598,6 +598,11 @@ public abstract class CharFieldGui implements ListSelectionListener {
   /** Overridden by TermCompList */
   protected JButton getCompButton() { return null; }
 
+  /** should get this from config... stub for now */
+  protected boolean hasListGui() { return false; }
+  /** JList? initialize if configged */
+  protected JComponent getListGui() { return null; }
+  
   
   /** no op - override in term completion gui */
   public void setMinCompChars(int minCompChars) {}

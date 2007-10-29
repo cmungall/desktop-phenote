@@ -206,20 +206,28 @@ public class FieldPanel extends JPanel {
   
   private void addInputGui(CharFieldGui fieldGui, GridBagConstraints constraints) {
     constraints.gridx = 2;
+    if (!fieldGui.hasListGui()) constraints.gridwidth = 2;
     constraints.weightx = 1.0;
     constraints.fill = GridBagConstraints.HORIZONTAL;
     fieldPanel.add(fieldGui.getUserInputGui(), constraints);
   }
   
-  private void addPostCompButton(CharFieldGui fieldGui, GridBagConstraints constraints) {
+  private void addListGui(CharFieldGui fieldGui, GridBagConstraints constraints) {
+    if (!fieldGui.hasListGui()) return;
     constraints.gridx = 3;
+    constraints.gridwidth = 2;
+    // fieldPanel.add(fieldGui.getListGui(),constraints);
+  }
+
+  private void addPostCompButton(CharFieldGui fieldGui, GridBagConstraints constraints) {
+    constraints.gridx = 4;
     if (fieldGui.hasCompButton()) {
       fieldPanel.add(fieldGui.getCompButton(), constraints);
     }
   }
   
   private void addRetrieveButton(CharFieldGui fieldGui, GridBagConstraints constraints) {
-    constraints.gridx = 4;
+    constraints.gridx = 5;
     if (fieldGui.hasRetrieveButton()) {
       fieldPanel.add(fieldGui.getRetrieveButton(), constraints);
     }
