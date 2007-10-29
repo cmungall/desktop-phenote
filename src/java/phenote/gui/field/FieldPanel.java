@@ -160,15 +160,36 @@ public class FieldPanel extends JPanel {
 
   private int currentGridBagRow = 0;
   void addCharFieldGuiToPanel(CharFieldGui fieldGui) {
+//     GridBagConstraints baseConstraints = new GridBagConstraints();
+//     baseConstraints.insets = new Insets(2,3,2,3);
+//     baseConstraints.gridy = this.currentGridBagRow++;
+    // why is it necasary to clone? to reset? // baseConst.clone() - taken out
+    // first one does new row
+    this.addLabel(fieldGui, getConstraintsNewRow());
+    this.addOntologyChooser(fieldGui, getConstraintsSameRow());
+    this.addInputGui(fieldGui, getConstraintsSameRow());
+    //addList();
+    this.addPostCompButton(fieldGui, getConstraintsSameRow());
+    this.addRetrieveButton(fieldGui, getConstraintsSameRow());
+  }
+
+  /** set up basic grid bag constraints with insets and increments currentGridBagRow/gridy
+   */
+  GridBagConstraints getConstraintsNewRow() {
+    GridBagConstraints baseConstraints = getConstraintsSameRow();
+    baseConstraints.gridy = ++this.currentGridBagRow;
+    return baseConstraints;
+  }
+  
+  /** set up basic grid bag constraints with insets and uses currentGridBagRow for gridy
+      (doesnt increment it) */
+  GridBagConstraints getConstraintsSameRow() {
     GridBagConstraints baseConstraints = new GridBagConstraints();
     baseConstraints.insets = new Insets(2,3,2,3);
-    baseConstraints.gridy = this.currentGridBagRow++;
-    this.addLabel(fieldGui, (GridBagConstraints)baseConstraints.clone());
-    this.addOntologyChooser(fieldGui, (GridBagConstraints)baseConstraints.clone());
-    this.addInputGui(fieldGui, (GridBagConstraints)baseConstraints.clone());
-    this.addPostCompButton(fieldGui, (GridBagConstraints)baseConstraints.clone());
-    this.addRetrieveButton(fieldGui, (GridBagConstraints)baseConstraints.clone());
+    baseConstraints.gridy = this.currentGridBagRow; // no incrementing
+    return baseConstraints;
   }
+    
   
   private void addLabel(CharFieldGui fieldGui, GridBagConstraints constraints) {
     constraints.gridx = 0;
