@@ -160,10 +160,6 @@ public class FieldPanel extends JPanel {
 
   private int currentGridBagRow = 0;
   void addCharFieldGuiToPanel(CharFieldGui fieldGui) {
-//     GridBagConstraints baseConstraints = new GridBagConstraints();
-//     baseConstraints.insets = new Insets(2,3,2,3);
-//     baseConstraints.gridy = this.currentGridBagRow++;
-    // why is it necasary to clone? to reset? // baseConst.clone() - taken out
     // first one does new row
     this.addLabel(fieldGui, getConstraintsNewRow());
     this.addOntologyChooser(fieldGui, getConstraintsSameRow());
