@@ -18,16 +18,12 @@
 
 	<h1>Upcoming Events, 2007</h1>
 
-	<h2>October</h2>
-	<ul>
-	<li>Oct 23-25, Ontology Best Practices Workshop, <a href="http://www.cs.uoregon.edu/~dhowe/biocurator/">Biocurator Meeting</a>, Hayes Mansion, San Jose, CA
-	</li>
-	</ul>
-
 	<h2>November</h2>
 	<ul>
 	  <li>Nov 1, Phenote Users Group, Online via WebEx
 	  </li>
+	  <li>Nov 4, Talk, <a href="http://meetings.cshl.edu/meetings/info07.shtml">Genome Informatics</a>
+	  </li>	  
 	<li>Nov 27, <a href="http://www.bioontology.org/">NCBO</a> Scientific Advisory Board meeting</li>
 	</ul>
 
@@ -39,15 +35,19 @@
 
 	<h1>Past News and Events, 2007</h1>
 	<h2>October</h2>
-	  <p>Oct 10, New Phenote Release - <a href="http://www.phenote.org/download.shtml">version 1.4</a>
-
+	<ul>
+	<li>Oct 23-25, Ontology Best Practices Workshop, <a href="http://www.cs.uoregon.edu/~dhowe/biocurator/">Biocurator Meeting</a>, Hayes Mansion, San Jose, CA [<a href="http://www.phenote.org/resources/Biocurator_2007.ppt">Download presentation</a>]
+	</li>
+	  <li>Oct 10, New Phenote Release - <a href="http://www.phenote.org/download.shtml">version 1.4</a>
+	  </li>
 	  <li>Oct 2, Phenote Users Group, Online via WebEx
 	  </li>
+	</ul>
+
 
 	<h2>September</h2>
 	<ul>
-	  <li>Sept 17, New website released
-	  </li>
+	  <li>Sept 17, - New website rolled out!  The website has the same content as the old one, just with a new look-and-feel.</li>
 	  <li>Sept 4, Phenote Users Group, Online
 	  </li>
 	</ul>
