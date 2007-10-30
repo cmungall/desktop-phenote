@@ -4,7 +4,7 @@ import java.util.List;
 
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharField;
-import org.geneontology.oboedit.datamodel.OBOClass;
+import org.obo.datamodel.OBOClass;
 
 
 // interface? class?

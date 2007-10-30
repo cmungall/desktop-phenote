@@ -1,13 +1,14 @@
 package phenote.dataadapter.worm;
 
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
-import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharFieldException;
-import phenote.datamodel.TermNotFoundException;
 import phenote.dataadapter.AbstractGroupAdapter;
+import phenote.datamodel.CharFieldException;
+import phenote.datamodel.CharacterI;
+import phenote.datamodel.TermNotFoundException;
 
 /* Makes worm Reference list based off of Publication, Person, NBP, and
  * OtherRemark */

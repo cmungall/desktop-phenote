@@ -5,16 +5,15 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
-import org.geneontology.oboedit.datamodel.OBOClass;
+import org.obo.datamodel.OBOClass;
 
 import phenote.config.Config;
-import phenote.config.ConfigException;
 import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldException;
+import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterIFactory;
-import phenote.datamodel.CharFieldManager;
-import phenote.datamodel.CharFieldException;
 
 /** I stole this from phenosyntaxchar, but modifying for tab delimited.  will
  *  initially hard code in the tab-delimiter, but eventually it should be generic to 

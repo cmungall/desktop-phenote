@@ -1,9 +1,7 @@
 package phenote.gui.field;
 
-import java.util.List;
-
 import org.apache.log4j.Logger;
-import org.geneontology.oboedit.datamodel.OBOProperty;
+import org.obo.datamodel.OBOProperty;
 
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldValue;

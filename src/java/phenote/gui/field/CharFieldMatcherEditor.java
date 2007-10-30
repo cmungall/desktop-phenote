@@ -22,7 +22,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 import org.apache.log4j.Logger;
-import org.geneontology.oboedit.datamodel.OBOClass;
+import org.obo.datamodel.OBOClass;
 import org.swixml.SwingEngine;
 
 import phenote.datamodel.CharField;

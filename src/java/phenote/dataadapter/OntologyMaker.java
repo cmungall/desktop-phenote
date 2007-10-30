@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import org.geneontology.oboedit.datamodel.OBOSession;
+import org.obo.datamodel.OBOSession;
 
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldException;

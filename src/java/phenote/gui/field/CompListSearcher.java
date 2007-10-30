@@ -3,17 +3,14 @@ package phenote.gui.field;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-//import java.util.Vector;
-import org.apache.log4j.Logger;
 
-import org.geneontology.util.AbstractTaskDelegate;
-import org.geneontology.swing.BackgroundUtil;
-import org.geneontology.util.TaskDelegate;
-import org.geneontology.oboedit.datamodel.OBOClass;
-import org.geneontology.oboedit.datamodel.OBOProperty;
+import org.apache.log4j.Logger;
+import org.bbop.swing.BackgroundUtil;
+import org.bbop.util.AbstractTaskDelegate;
+import org.bbop.util.TaskDelegate;
+import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOProperty;
 
 import phenote.datamodel.Ontology;
 import phenote.gui.SearchParams;

@@ -2,7 +2,7 @@ package phenote.gui.selection;
 
 import java.util.EventObject;
 
-import org.geneontology.oboedit.datamodel.OBOClass;
+import org.obo.datamodel.OBOClass;
 
 /** im not sure if this belongs in selection package - a use term listener listens
     for UseTermEvents - this is from the term browser saying basically the user wants

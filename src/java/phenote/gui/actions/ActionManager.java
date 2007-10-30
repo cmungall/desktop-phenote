@@ -1,17 +1,12 @@
 package phenote.gui.actions;
 // --> phenote.gui.menu ??
 
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.ImageIcon;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.ImageIcon;
 
 
 //This is to help centralize actions that appear in buttons, menus, etc.

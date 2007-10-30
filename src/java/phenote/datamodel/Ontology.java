@@ -5,33 +5,20 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Vector;
 
 import org.apache.log4j.Logger;
+import org.obo.datamodel.Namespace;
+import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOProperty;
+import org.obo.datamodel.OBOSession;
+import org.obo.datamodel.TermCategory;
+import org.obo.query.QueryEngine;
+import org.obo.query.impl.CategoryQuery;
+import org.obo.query.impl.NamespaceQuery;
+import org.obo.util.QueryUtil;
+import org.obo.util.TermUtil;
 
-import org.geneontology.util.TaskDelegate;
-import org.geneontology.oboedit.datamodel.Namespace;
-import org.geneontology.oboedit.datamodel.impl.DanglingClassImpl;
-import org.geneontology.oboedit.datamodel.OBOClass;
-import org.geneontology.oboedit.datamodel.OBOProperty;
-import org.geneontology.oboedit.datamodel.OBOSession;
-import org.geneontology.oboedit.datamodel.TermCategory;
-import org.geneontology.oboedit.util.TermUtil;
-import org.geneontology.oboedit.dataadapter.OBOMetaData;
-import org.geneontology.oboedit.dataadapter.OBOMetaData.FileMetaData;
-import org.geneontology.oboedit.query.Query;
-import org.geneontology.oboedit.query.QueryEngine;
-import org.geneontology.oboedit.query.impl.NamespaceQuery;
-import org.geneontology.oboedit.query.impl.CategoryQuery;
-import org.geneontology.oboedit.util.QueryUtil;
-
-// i think this is ok since datamodel is based on config?? 
-// otherwise ODA should be inbetween
 import phenote.config.OntologyConfig;
 
 /** Ontology represents at this point the contents of a single obo file (which can

@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.geneontology.oboedit.datamodel.OBOClass;
-import org.geneontology.oboedit.datamodel.OBOProperty;
-import org.geneontology.oboedit.datamodel.OBOSession;
-import org.geneontology.oboedit.postcomp.ParseException;
-import org.geneontology.oboedit.postcomp.PostcompUtil;
-import org.geneontology.oboedit.postcomp.TokenMgrError;
-import org.geneontology.oboedit.util.TermUtil;
+import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOProperty;
+import org.obo.datamodel.OBOSession;
+import org.obo.postcomp.ParseException;
+import org.obo.postcomp.PostcompUtil;
+import org.obo.postcomp.TokenMgrError;
+import org.obo.util.TermUtil;
 
 import phenote.config.Config;
-import phenote.config.xml.FieldDocument.Field.Type;
 
 //import phenote.datamodel.CharFieldEnum;
 //import phenote.datamodel.OboUtil;

@@ -3,28 +3,24 @@ package phenote.gui;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Point;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.BoxLayout;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.ButtonGroup;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-
-import javax.jnlp.*;
-
-import phenote.gui.GridBagUtil;
 import phenote.config.Config;
 
 

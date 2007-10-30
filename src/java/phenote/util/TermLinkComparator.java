@@ -1,7 +1,7 @@
 package phenote.util;
 
-import org.geneontology.oboedit.datamodel.Link;
-import org.geneontology.oboedit.datamodel.OBOProperty;
+import org.obo.datamodel.Link;
+import org.obo.datamodel.OBOProperty;
 
 import java.util.Comparator;
 

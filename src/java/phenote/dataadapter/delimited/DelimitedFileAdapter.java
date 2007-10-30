@@ -2,25 +2,19 @@ package phenote.dataadapter.delimited;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.LineNumberReader;
-import java.util.List;
-import java.util.Arrays;
-import java.util.regex.Pattern;
+import java.io.PrintWriter;
 
 import org.apache.log4j.Logger;
 
-import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharacterListI;
-import phenote.datamodel.CharacterList;
-import phenote.dataadapter.CharacterListManager;
-import phenote.datamodel.CharField;
-import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.AbstractFileAdapter;
 import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
+import phenote.datamodel.CharacterI;
+import phenote.datamodel.CharacterList;
+import phenote.datamodel.CharacterListI;
 
 /** Originated with PhenoSyntaxFileAdapter and modified.  Writes the basic text to 
  *  a file, with 'tab' delimiters.  First line is column headings, only printed 

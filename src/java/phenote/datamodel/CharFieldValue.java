@@ -4,9 +4,9 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
 
-import org.geneontology.oboedit.datamodel.OBOClass;
-import org.geneontology.oboedit.datamodel.impl.DanglingClassImpl;
-import org.geneontology.oboedit.util.TermUtil;
+import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.impl.DanglingClassImpl;
+import org.obo.util.TermUtil;
 
 
 /** At the moment char field values can be Strings (genotype) and OBOClasses, and possibly

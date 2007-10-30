@@ -1,17 +1,16 @@
 package phenote.dataadapter.fly;
 
-import java.util.List;
+import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
-import java.awt.Toolkit;
 import java.io.File;
+import java.util.List;
 
-import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharacterListI;
-import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.CharacterListManager;
+import phenote.dataadapter.DataAdapterI;
+import phenote.datamodel.CharacterListI;
 
 /** Just pastes characters to clipboard for proforma 
  6/30/06 - changing this to use new Pheno-Syntax - should this be renamed

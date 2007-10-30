@@ -4,15 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-
-import org.geneontology.util.ObjectUtil;
-import org.geneontology.oboedit.annotation.datamodel.Annotation;
-import org.geneontology.oboedit.annotation.datamodel.impl.AnnotationImpl;
-import org.geneontology.oboedit.datamodel.LinkedObject;
-import org.geneontology.oboedit.datamodel.OBOClass;
-import org.geneontology.oboedit.datamodel.OBOProperty;
-import org.geneontology.oboedit.datamodel.impl.DanglingClassImpl;
-import org.geneontology.oboedit.util.TermUtil;
+import org.bbop.util.ObjectUtil;
+import org.obo.annotation.datamodel.Annotation;
+import org.obo.annotation.datamodel.impl.AnnotationImpl;
+import org.obo.datamodel.LinkedObject;
+import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOProperty;
+import org.obo.util.TermUtil;
 
 public class AnnotationCharacter extends AbstractCharacter {
 

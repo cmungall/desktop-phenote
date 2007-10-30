@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.geneontology.oboedit.datamodel.Link;
-import org.geneontology.oboedit.datamodel.OBOProperty;
-import org.geneontology.oboedit.datamodel.impl.InstancePropertyValue;
-import org.geneontology.oboedit.datamodel.impl.OBOPropertyImpl;
 import org.junit.Assert;
 import org.junit.Test;
+import org.obo.datamodel.Link;
+import org.obo.datamodel.OBOProperty;
+import org.obo.datamodel.impl.InstancePropertyValue;
+import org.obo.datamodel.impl.OBOPropertyImpl;
 
 
 /**

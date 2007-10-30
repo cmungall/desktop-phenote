@@ -18,8 +18,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import org.apache.log4j.Logger;
-import org.geneontology.oboedit.datamodel.OBOClass;
-import org.geneontology.oboedit.datamodel.OBOProperty;
+import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOProperty;
 
 import phenote.config.Config;
 import phenote.dataadapter.CharacterListManager;

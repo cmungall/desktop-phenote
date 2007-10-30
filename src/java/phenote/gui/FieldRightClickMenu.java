@@ -5,7 +5,7 @@ package phenote.gui;
 //import java.awt.event.MouseAdapter;
 //import java.awt.event.MouseEvent;
 import java.awt.event.KeyEvent;
-import javax.swing.JMenu;
+
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.text.DefaultEditorKit;

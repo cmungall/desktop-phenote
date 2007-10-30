@@ -5,17 +5,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
-import org.geneontology.oboedit.datamodel.OBOClass;
+import org.obo.datamodel.OBOClass;
 
-import phenote.datamodel.Character;
-import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharacterIFactory;
-import phenote.datamodel.CharField;
-import phenote.datamodel.CharFieldValue;
-import phenote.datamodel.CharFieldManager;
-import phenote.datamodel.CharFieldException;
 import phenote.config.Config;
 import phenote.config.ConfigException;
+import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldException;
+import phenote.datamodel.CharFieldManager;
+import phenote.datamodel.CharFieldValue;
+import phenote.datamodel.CharacterI;
+import phenote.datamodel.CharacterIFactory;
 
 /** A phenotype character thats basically a dataadapter object for datamodel
     CharacterI. It can make a phenosyntax string from a CharacterI and make

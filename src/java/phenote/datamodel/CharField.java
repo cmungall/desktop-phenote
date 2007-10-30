@@ -4,9 +4,9 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.geneontology.oboedit.datamodel.OBOClass;
-import org.geneontology.oboedit.datamodel.OBOSession;
-import org.geneontology.oboedit.datamodel.impl.DanglingClassImpl;
+import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOSession;
+import org.obo.datamodel.impl.DanglingClassImpl;
 
 // type is from xmlbean Field??
 import phenote.config.xml.FieldDocument.Field.Type;

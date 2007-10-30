@@ -1,8 +1,7 @@
 package phenote.datamodel;
 
 
-import org.geneontology.oboedit.datamodel.OBOProperty;
-import org.geneontology.oboedit.datamodel.impl.OBOPropertyImpl;
+import org.obo.datamodel.OBOProperty;
 
 
 public class PhenotypeMapping extends BasicAnnotationMappingDriver {

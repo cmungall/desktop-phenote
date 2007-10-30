@@ -1,14 +1,14 @@
 package phenote.presentation.tags;
 
+import java.io.IOException;
+
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.Tag;
+import javax.servlet.jsp.tagext.TagSupport;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts.taglib.TagUtils;
 
-import javax.servlet.jsp.tagext.TagSupport;
-import javax.servlet.jsp.tagext.Tag;
-import javax.servlet.jsp.JspException;
-import java.io.IOException;
-
-import phenote.util.TermLinkComparator;
 import phenote.datamodel.RelationshipEnumeration;
 
 /**

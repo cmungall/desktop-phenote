@@ -2,7 +2,6 @@ package phenote.dataadapter;
 
 import java.util.List;
 
-import phenote.datamodel.CharField;
 import phenote.datamodel.CharacterListI;
 
 public interface QueryableDataAdapterI {

@@ -4,8 +4,16 @@ package phenote.gui;
 http://www.devdaily.com/java/edu/SplashScreen/SplashScreen.java
 */
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JWindow;
+import javax.swing.SwingUtilities;
 
 import phenote.error.ErrorEvent;
 import phenote.error.ErrorListener;

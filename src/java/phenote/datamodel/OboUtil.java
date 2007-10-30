@@ -1,14 +1,13 @@
 package phenote.datamodel;
 
-import org.geneontology.oboedit.datamodel.Link;
-import org.geneontology.oboedit.datamodel.LinkedObject;
-import org.geneontology.oboedit.datamodel.OBOClass;
-import org.geneontology.oboedit.datamodel.OBOProperty;
-import org.geneontology.oboedit.datamodel.OBORestriction;
-import org.geneontology.oboedit.datamodel.impl.OBOClassImpl;
-import org.geneontology.oboedit.datamodel.impl.OBOPropertyImpl;
-import org.geneontology.oboedit.datamodel.impl.OBORestrictionImpl;
-import org.geneontology.oboedit.util.TermUtil;
+import org.obo.datamodel.Link;
+import org.obo.datamodel.LinkedObject;
+import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOProperty;
+import org.obo.datamodel.OBORestriction;
+import org.obo.datamodel.impl.OBOClassImpl;
+import org.obo.datamodel.impl.OBORestrictionImpl;
+import org.obo.util.TermUtil;
 
 
 /** changing this from static to non-static so can build post comp object from

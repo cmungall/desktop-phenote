@@ -2,12 +2,11 @@ package phenote.dataadapter.delimited;
 
 import org.apache.log4j.Logger;
 
-import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharField;
-import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharFieldManager;
-import phenote.datamodel.TermNotFoundException;
+import phenote.datamodel.CharFieldValue;
+import phenote.datamodel.CharacterI;
 
 /** A class that parses a single field out of a tab delimited line.
     Gets its info from header line. static method makeNextParser 

@@ -1,6 +1,6 @@
 package phenote.datamodel;
 
-import org.geneontology.oboedit.postcomp.TokenMgrError;
+import org.obo.postcomp.TokenMgrError;
 
 /** unclear to me if we really need both ontology ex and termo not found ex */
 

@@ -3,21 +3,15 @@ package phenote.dataadapter;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.obo.datamodel.Namespace;
+import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOSession;
+import org.obo.datamodel.impl.OBOClassImpl;
+import org.obo.datamodel.impl.OBOSessionImpl;
 
-import org.geneontology.oboedit.datamodel.Namespace;
-import org.geneontology.oboedit.datamodel.OBOClass;
-import org.geneontology.oboedit.datamodel.OBOSession;
-import org.geneontology.oboedit.datamodel.impl.OBOClassImpl;
-import org.geneontology.oboedit.datamodel.impl.OBOSessionImpl;
-
-//import phenote.datamodel.CharField;
-//import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharacterListI;
-//import phenote.datamodel.Ontology;
-//import phenote.datamodel.CharFieldManager;
-import phenote.edit.CharChangeListener;
 import phenote.edit.CharChangeEvent;
+import phenote.edit.CharChangeListener;
 
 // rename this GroupOntologyMaker? or CharTableOntologyMaker? or CharOntologyMaker?
 // CharacterOntologyMaker?

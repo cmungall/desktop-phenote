@@ -3,45 +3,36 @@ package phenote.dataadapter.phenoxml;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.List;
-import java.util.Arrays;
+import java.util.Set;
 
 import javax.swing.JFileChooser;
 
 import org.apache.log4j.Logger;
-
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlOptions;
-
+import org.bioontologies.obd.schema.pheno.PhenosetDocument;
 import org.bioontologies.obd.schema.pheno.BearerDocument.Bearer;
 import org.bioontologies.obd.schema.pheno.GenotypeDocument.Genotype;
 import org.bioontologies.obd.schema.pheno.ManifestInDocument.ManifestIn;
-import org.bioontologies.obd.schema.pheno.PhenotypeDocument.Phenotype;
-import org.bioontologies.obd.schema.pheno.PhenotypeCharacterDocument.PhenotypeCharacter;
 import org.bioontologies.obd.schema.pheno.PhenosetDocument.Phenoset;
-import org.bioontologies.obd.schema.pheno.QualityDocument.Quality;
-import org.bioontologies.obd.schema.pheno.PhenosetDocument;
+import org.bioontologies.obd.schema.pheno.PhenotypeCharacterDocument.PhenotypeCharacter;
+import org.bioontologies.obd.schema.pheno.PhenotypeDocument.Phenotype;
 import org.bioontologies.obd.schema.pheno.PhenotypeManifestationDocument.PhenotypeManifestation;
-import org.bioontologies.obd.schema.pheno.TyperefDocument.Typeref;
 import org.bioontologies.obd.schema.pheno.ProvenanceDocument.Provenance;
-//import org.bioontologies.obd.schema.pheno.*.*;
+import org.bioontologies.obd.schema.pheno.QualityDocument.Quality;
+import org.bioontologies.obd.schema.pheno.TyperefDocument.Typeref;
 
-import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharacterIFactory;
-import phenote.datamodel.Character;
-import phenote.datamodel.CharacterListI;
-import phenote.datamodel.CharacterList;
-import phenote.datamodel.CharFieldEnum; // ?
-import phenote.datamodel.CharFieldException;
-import phenote.datamodel.CharFieldManager;
-import phenote.datamodel.TermNotFoundException;
 import phenote.dataadapter.AbstractFileAdapter;
 import phenote.dataadapter.CharacterListManager;
-import phenote.dataadapter.DataAdapterI;
-
-import javax.swing.JComboBox;
-import javax.swing.filechooser.FileFilter;
+import phenote.datamodel.CharFieldEnum;
+import phenote.datamodel.CharFieldException;
+import phenote.datamodel.CharFieldManager;
+import phenote.datamodel.CharacterI;
+import phenote.datamodel.CharacterIFactory;
+import phenote.datamodel.CharacterList;
+import phenote.datamodel.CharacterListI;
+import phenote.datamodel.TermNotFoundException;
 
 
 

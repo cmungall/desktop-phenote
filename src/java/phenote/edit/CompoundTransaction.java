@@ -3,7 +3,7 @@ package phenote.edit;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.geneontology.oboedit.datamodel.OBOClass;
+import org.obo.datamodel.OBOClass;
 
 import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.CharField;

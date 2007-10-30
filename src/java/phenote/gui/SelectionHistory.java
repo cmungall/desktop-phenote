@@ -1,52 +1,32 @@
 package phenote.gui;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.net.URL;
-import java.util.Iterator;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.List;
+
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JList;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.text.JTextComponent;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.text.JTextComponent;
 
-import edu.stanford.ejalbert.BrowserLauncher;
-import edu.stanford.ejalbert.BrowserLauncherRunner;
-import edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException;
-import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
+import org.obo.datamodel.OBOClass;
 
-import org.geneontology.oboedit.datamodel.OBOClass;
-
-import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharFieldEnum;
+import phenote.config.Config;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.TermNotFoundException;
-import phenote.edit.EditManager;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
-import phenote.edit.UpdateTransaction;
+import phenote.edit.EditManager;
 import phenote.edit.TransactionI;
-import phenote.util.HtmlUtil;
-import phenote.gui.TermInfo;
 import phenote.gui.selection.SelectionManager;
-import phenote.gui.selection.TermSelectionEvent;
-import phenote.gui.selection.TermSelectionListener;
 import phenote.gui.selection.UseTermEvent;
 import phenote.gui.selection.UseTermListener;
-import phenote.config.Config;
+import phenote.util.HtmlUtil;
 
 public class SelectionHistory {
 

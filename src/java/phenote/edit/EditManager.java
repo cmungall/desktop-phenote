@@ -8,10 +8,9 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import phenote.dataadapter.CharacterListManager;
-import phenote.datamodel.Character;
+import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterIFactory;
-import phenote.datamodel.CharFieldManager;
 
 /** The way editing works is gui makes update transaction (see CharFieldGui and
     AutoComboBox) and calls

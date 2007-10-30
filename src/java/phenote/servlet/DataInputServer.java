@@ -1,17 +1,12 @@
 package phenote.servlet;
 
 //import org.mortbay.http.HttpContext;
-import org.mortbay.jetty.HttpContent;
-//import org.mortbay.http.HttpServer;
-import org.mortbay.jetty.Server;
-//import org.mortbay.http.SocketListener;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.mortbay.jetty.Connector;
+import org.mortbay.jetty.Server;
 import org.mortbay.jetty.bio.SocketConnector;
 import org.mortbay.jetty.servlet.ServletHandler;
-import org.mortbay.jetty.servlet.ServletHolder;
-//import org.mortbay.util.MultiException;
-
-import org.apache.log4j.*;
 
 /** this class kicks off the servlet. modeled after igb's UnibrowControlServer 
  * maybe this should go in dataadapter? as its gonna end up loading new data 

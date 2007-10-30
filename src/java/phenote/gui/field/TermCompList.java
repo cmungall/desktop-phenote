@@ -13,8 +13,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import org.apache.log4j.Logger;
-import org.geneontology.oboedit.datamodel.OBOClass;
-import org.geneontology.oboedit.util.TermUtil;
+import org.obo.datamodel.OBOClass;
+import org.obo.util.TermUtil;
 
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldValue;

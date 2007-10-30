@@ -1,8 +1,8 @@
 package phenote.gui.field;
 
-import org.geneontology.oboedit.datamodel.Link;
-import org.geneontology.oboedit.datamodel.LinkedObject;
-import org.geneontology.oboedit.datamodel.OBOClass;
+import org.obo.datamodel.Link;
+import org.obo.datamodel.LinkedObject;
+import org.obo.datamodel.OBOClass;
 
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldManager;

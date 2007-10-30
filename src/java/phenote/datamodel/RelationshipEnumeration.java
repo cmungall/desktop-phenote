@@ -1,6 +1,6 @@
 package phenote.datamodel;
 
-import org.geneontology.oboedit.datamodel.OBOProperty;
+import org.obo.datamodel.OBOProperty;
 
 /**
  * Created by IntelliJ IDEA.

@@ -18,10 +18,10 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import org.apache.log4j.Logger;
-import org.geneontology.oboedit.datamodel.Link;
-import org.geneontology.oboedit.datamodel.OBOClass;
-import org.geneontology.oboedit.datamodel.OBOProperty;
-import org.geneontology.oboedit.datamodel.OBORestriction;
+import org.obo.datamodel.Link;
+import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOProperty;
+import org.obo.datamodel.OBORestriction;
 
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
@@ -32,7 +32,6 @@ import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.CompoundTransaction;
 import phenote.edit.EditManager;
-import phenote.gui.selection.CharSelectionEvent;
 import phenote.gui.selection.SelectionManager;
 import ca.odell.glazedlists.swing.EventSelectionModel;
 

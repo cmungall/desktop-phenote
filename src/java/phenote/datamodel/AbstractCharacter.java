@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import org.geneontology.oboedit.datamodel.OBOClass;
+import org.obo.datamodel.OBOClass;
 
 public abstract class AbstractCharacter implements CharacterI {
 

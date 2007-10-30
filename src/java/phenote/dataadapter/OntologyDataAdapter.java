@@ -21,31 +21,27 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import java.beans.PropertyChangeEvent;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-
 import org.apache.log4j.Logger;
-import org.geneontology.dataadapter.DataAdapterException;
-import org.geneontology.dataadapter.IOOperation;
-import org.geneontology.oboedit.dataadapter.OBOFileAdapter;
-import org.geneontology.oboedit.dataadapter.OBOMetaData;
-import org.geneontology.oboedit.datamodel.Namespace;
-import org.geneontology.oboedit.datamodel.OBOSession;
+import org.bbop.dataadapter.DataAdapterException;
+import org.bbop.dataadapter.IOOperation;
+import org.obo.dataadapter.OBOFileAdapter;
+import org.obo.dataadapter.OBOMetaData;
+import org.obo.dataadapter.OBOAdapter;
+import org.obo.datamodel.Namespace;
+import org.obo.datamodel.OBOSession;
 
 import phenote.config.Config;
 import phenote.config.FieldConfig;
 import phenote.config.OntologyConfig;
 import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyException;
-import phenote.datamodel.CharFieldManager;
 import phenote.error.ErrorEvent;
 import phenote.error.ErrorManager;
 import phenote.gui.SynchOntologyDialog;
-import phenote.util.FileUtil;
 import phenote.main.Phenote;
+import phenote.util.FileUtil;
 
 /** is this really a data adapter? - OntologyLoader? this isnt a data adapter
     it doesnt load & commit character data - just loads ontologies. rename OntologyLoader
@@ -445,7 +441,8 @@ public class OntologyDataAdapter {
     this.updateLoadingScreen("loading ontologies into memory", false);
     
     try { // throws data adapter exception
-      OBOSession os = (OBOSession)fa.doOperation(IOOperation.READ,cfg,null);
+      
+      OBOSession os = fa.doOperation(OBOAdapter.READ_ONTOLOGY,cfg,null);
       adapterMetaData = fa.getMetaData(); // check for null?
       return os;
     }

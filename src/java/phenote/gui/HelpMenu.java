@@ -2,26 +2,18 @@ package phenote.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.help.CSH;
+import javax.help.HelpBroker;
+import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.ImageIcon;
-import javax.help.CSH;
-import javax.help.HelpBroker;
 
-import phenote.dataadapter.CharacterListManager;
-import phenote.dataadapter.DataAdapterI;
-import phenote.dataadapter.LoadSaveManager;
-import phenote.config.Config;
-import phenote.config.ConfigFileQueryGui;
-import phenote.config.ConfigException;
-//import phenote.gui.prefswindow.PrefsWindowController; ???
-import phenote.gui.SplashScreen;
-import phenote.gui.TermRequestGUI;
-import phenote.main.PhenoteVersion;
 import phenote.main.HelpManager;
+import phenote.main.PhenoteVersion;
 
 class HelpMenu extends JMenu {
 

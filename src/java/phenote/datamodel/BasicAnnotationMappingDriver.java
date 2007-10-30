@@ -4,18 +4,18 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.geneontology.oboedit.annotation.datamodel.Annotation;
-import org.geneontology.oboedit.annotation.datamodel.AnnotationOntology;
-import org.geneontology.oboedit.datamodel.Datatype;
-import org.geneontology.oboedit.datamodel.IdentifiedObject;
-import org.geneontology.oboedit.datamodel.OBOClass;
-import org.geneontology.oboedit.datamodel.OBOProperty;
-import org.geneontology.oboedit.datamodel.Value;
-import org.geneontology.oboedit.datamodel.impl.DatatypeValueImpl;
-import org.geneontology.oboedit.datamodel.impl.OBOPropertyImpl;
-import org.geneontology.oboedit.history.AddPropertyValueHistoryItem;
-import org.geneontology.oboedit.history.DeletePropertyValueHistoryItem;
-import org.geneontology.oboedit.history.HistoryItem;
+import org.obo.annotation.datamodel.Annotation;
+import org.obo.annotation.datamodel.AnnotationOntology;
+import org.obo.datamodel.Datatype;
+import org.obo.datamodel.IdentifiedObject;
+import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOProperty;
+import org.obo.datamodel.Value;
+import org.obo.datamodel.impl.DatatypeValueImpl;
+import org.obo.datamodel.impl.OBOPropertyImpl;
+import org.obo.history.AddPropertyValueHistoryItem;
+import org.obo.history.DeletePropertyValueHistoryItem;
+import org.obo.history.HistoryItem;
 
 /** Maps ENTITY to subject and QUALITY to object 
  but is this proper? shouldnt genotype be subject? */

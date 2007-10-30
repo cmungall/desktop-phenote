@@ -1,7 +1,7 @@
 package phenote.datamodel;
 
 import java.util.List;
-import org.geneontology.oboedit.datamodel.OBOClass;
+import org.obo.datamodel.OBOClass;
 
 /** CharacterIs are the building blocks of phenotypes. All the Characters for a 
     genotype make up a Phenotype - at least thats my understanding. 

@@ -3,7 +3,7 @@ package phenote.gui;
 
 import ca.uvic.csr.shrimp.gui.QueryView.OBOViewer;
 import ca.uvic.csr.shrimp.gui.QueryView.QueryView;
-import org.geneontology.oboedit.datamodel.OBOSession;
+import org.obo.datamodel.OBOSession;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.CharFieldManager;
 import phenote.gui.selection.SelectionManager;
@@ -58,7 +58,8 @@ public class ShrimpDag {
     boolean showQueryPanel = true;
     oboViewer = new OBOViewer(showQueryPanel);
     //new OBOViewer("Shrimp ontology viewer",getOboSession(),showQueryPanel);
-    oboViewer.loadOBOSession(getOboSession()); // change this!
+    // This doesnt compile as OBOSession has package jumped, shrimp needs change
+    //oboViewer.loadOBOSession(getOboSession()); // change this!
 
     JFrame frame = new JFrame("Shrimp DAG view");
     //frame.setDefaultCloseOperation(java.awt.WindowListener.DISPOSE_ON_CLOSE);
@@ -94,7 +95,8 @@ public class ShrimpDag {
       String term = e.getOboClass().getName();
       boolean animate = true;
       //getQueryView().query(term, animate);
-      oboViewer.query(getOboSession(), e.getOboClass(), animate);
+     // This doesnt compile as OBOSession has package jumped, shrimp needs change
+     //oboViewer.query(getOboSession(), e.getOboClass(), animate);
       return true;
     }
 

@@ -3,13 +3,9 @@ package phenote.config;
 import java.util.ArrayList;
 import java.util.List;
 
-import phenote.datamodel.CharField;
-import phenote.config.xml.OntologyDocument.Ontology;
-import phenote.datamodel.CharFieldEnum; // phase out
-
-// xml beans for writeback
 import phenote.config.xml.FieldDocument.Field;
-import phenote.config.xml.PhenoteConfigurationDocument.PhenoteConfiguration;
+import phenote.config.xml.OntologyDocument.Ontology;
+import phenote.datamodel.CharField;
 
 public class FieldConfig {
 

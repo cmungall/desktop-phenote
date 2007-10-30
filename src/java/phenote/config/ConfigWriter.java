@@ -4,10 +4,9 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.xmlbeans.XmlOptions;
+
 import phenote.config.xml.PhenoteConfigurationDocument;
 import phenote.config.xml.PhenoteConfigurationDocument.PhenoteConfiguration;
-
-import phenote.dataadapter.DataAdapterI;
 import phenote.main.PhenoteVersion;
 
 /** Im realizing now ive done this all wrong - as theres really 2 redundant datamodels

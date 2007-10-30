@@ -1,11 +1,10 @@
 package phenote.dataadapter.fly;
 
-import org.geneontology.oboedit.datamodel.OBOClass;
+import org.obo.datamodel.OBOClass;
 
+import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterIFactory;
-import phenote.datamodel.Character;
-import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.TermNotFoundException;
 
 public class FlyCharacter implements FlyCharacterI {

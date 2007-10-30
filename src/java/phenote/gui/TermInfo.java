@@ -22,7 +22,7 @@ import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 import javax.swing.text.JTextComponent;
 
-import org.geneontology.oboedit.datamodel.OBOClass;
+import org.obo.datamodel.OBOClass;
 
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.TermNotFoundException;

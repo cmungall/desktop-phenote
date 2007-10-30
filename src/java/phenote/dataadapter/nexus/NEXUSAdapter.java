@@ -16,9 +16,9 @@ import java.util.Set;
 import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
-import org.geneontology.oboedit.datamodel.Link;
-import org.geneontology.oboedit.datamodel.OBOClass;
-import org.geneontology.oboedit.datamodel.TermCategory;
+import org.obo.datamodel.Link;
+import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.TermCategory;
 
 import phenote.dataadapter.AbstractFileAdapter;
 import phenote.datamodel.CharFieldException;

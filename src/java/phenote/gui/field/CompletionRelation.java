@@ -1,7 +1,7 @@
 package phenote.gui.field;
 // completion package?
 
-import org.geneontology.oboedit.datamodel.OBOProperty;
+import org.obo.datamodel.OBOProperty;
 
 /** This is basically a view object for the auto completer for relations/
     OBOProperties */

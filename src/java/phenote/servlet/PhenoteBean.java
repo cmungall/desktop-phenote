@@ -1,8 +1,8 @@
 package phenote.servlet;
 
 import org.apache.commons.lang.StringUtils;
-import org.geneontology.oboedit.datamodel.OBOClass;
-import org.geneontology.oboedit.datamodel.Link;
+import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.Link;
 import phenote.gui.field.CompletionTerm;
 import phenote.util.TermLinkComparator;
 

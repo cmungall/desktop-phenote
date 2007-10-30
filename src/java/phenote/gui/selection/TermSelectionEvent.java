@@ -2,7 +2,7 @@ package phenote.gui.selection;
 
 import java.util.EventObject;
 
-import org.geneontology.oboedit.datamodel.OBOClass;
+import org.obo.datamodel.OBOClass;
 
 public class TermSelectionEvent extends EventObject {
 

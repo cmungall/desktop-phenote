@@ -3,7 +3,7 @@ package phenote.gui.field;
 
 import java.util.Set;
 
-import org.geneontology.oboedit.datamodel.OBOClass;
+import org.obo.datamodel.OBOClass;
 
 import phenote.gui.SearchParamsI;
 

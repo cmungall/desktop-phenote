@@ -1,32 +1,25 @@
 package phenote.util;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
-import java.util.HashSet;
-import java.util.ArrayList;
-import java.util.List;
-import java.lang.Object;
-
 
 import javax.swing.event.HyperlinkEvent;
 
-
-
-import org.geneontology.oboedit.datamodel.Link;
-import org.geneontology.oboedit.datamodel.LinkedObject;
-import org.geneontology.oboedit.datamodel.OBOClass;
-import org.geneontology.oboedit.datamodel.OBOProperty;
-import org.geneontology.oboedit.datamodel.OBORestriction;
-import org.geneontology.oboedit.datamodel.Synonym;
-import org.geneontology.oboedit.datamodel.ObsoletableObject;
-import org.geneontology.oboedit.datamodel.IdentifiedObject;
-import org.geneontology.oboedit.datamodel.Dbxref;
-import org.geneontology.oboedit.datamodel.impl.DbxrefImpl;
-import org.geneontology.oboedit.datamodel.impl.OBORestrictionImpl;
-import org.geneontology.oboedit.util.TermUtil;
-import org.geneontology.oboedit.datamodel.PropertyValue;
+import org.obo.datamodel.Dbxref;
+import org.obo.datamodel.IdentifiedObject;
+import org.obo.datamodel.Link;
+import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOProperty;
+import org.obo.datamodel.OBORestriction;
+import org.obo.datamodel.ObsoletableObject;
+import org.obo.datamodel.PropertyValue;
+import org.obo.datamodel.Synonym;
+import org.obo.util.TermUtil;
 
 
 public class HtmlUtil {

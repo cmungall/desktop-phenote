@@ -5,23 +5,17 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.LineNumberReader;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.JFileChooser;
 
 import org.apache.log4j.Logger;
+import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOSession;
+import org.obo.datamodel.impl.OBOClassImpl;
+import org.obo.datamodel.impl.OBOSessionImpl;
 
-import org.geneontology.oboedit.datamodel.OBOClass;
-import org.geneontology.oboedit.datamodel.OBOSession;
-import org.geneontology.oboedit.datamodel.impl.OBOClassImpl;
-import org.geneontology.oboedit.datamodel.impl.OBOSessionImpl;
-
-import phenote.edit.CharChangeListener;
-import phenote.dataadapter.CharListChangeListener;
-import phenote.dataadapter.AbstractGroupAdapter;
 import phenote.dataadapter.OntologyMaker;
 
 /** not sure if this is an appropriate implementation of GroupAdapterI, group adapters

@@ -1,28 +1,18 @@
 package phenote.gui;
 
 
+import java.awt.Color;
+import java.util.Vector;
+
+import javax.swing.Action;
+import javax.swing.JButton;
+import javax.swing.JToolBar;
+import javax.swing.border.BevelBorder;
+
 import phenote.config.Config;
-import phenote.config.ConfigException;
-import phenote.config.ConfigFileQueryGui;
-//import phenote.main.Phenote;
-//import phenote.gui.ActionManager;
+import phenote.gui.actions.DuplicateAnnotationAction;
 import phenote.gui.actions.OpenFileAction;
 import phenote.gui.actions.SaveAsFileAction;
-import phenote.gui.actions.DuplicateAnnotationAction;
-
-import java.io.IOException;
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.Color;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.LineBorder;
-import java.awt.BorderLayout;
-import javax.swing.*;
-import javax.swing.Action;
-import java.util.Vector;
-import java.awt.*;
-import java.awt.event.*;
 
 // This is the basic toolbar to be displayed, containing items
 // such as New, Save, Print, etc.  Could be turned on/off if desired.

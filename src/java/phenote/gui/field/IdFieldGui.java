@@ -3,7 +3,6 @@ package phenote.gui.field;
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
 import phenote.datamodel.CharField;
 

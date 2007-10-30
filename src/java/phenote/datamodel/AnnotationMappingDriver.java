@@ -2,10 +2,10 @@ package phenote.datamodel;
 
 import java.util.List;
 
-import org.geneontology.oboedit.annotation.datamodel.Annotation;
-import org.geneontology.oboedit.history.HistoryItem;
-import org.geneontology.oboedit.datamodel.OBOClass;
-import org.geneontology.oboedit.datamodel.OBOProperty;
+import org.obo.annotation.datamodel.Annotation;
+import org.obo.history.HistoryItem;
+import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOProperty;
 
 public interface AnnotationMappingDriver {
 	public OBOProperty getPropertyForField(CharField cf);

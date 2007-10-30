@@ -1,14 +1,15 @@
 package phenote.gui.field;
 
+import java.awt.Dimension;
+
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import java.awt.Dimension;
-import java.util.List;
+
+import org.apache.log4j.Logger;
 
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
-import org.apache.log4j.Logger;
 
 
 class ReadOnlyFieldGui extends CharFieldGui {

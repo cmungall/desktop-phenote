@@ -4,15 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.geneontology.oboedit.datamodel.OBOClass;
+import org.obo.datamodel.OBOClass;
 
 import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.CharField;
-import phenote.datamodel.CharFieldException;
+import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
-import phenote.datamodel.CharFieldManager;
 
 /** For adding a character (not a char field/subpart - thats an update) */
 
