@@ -111,7 +111,7 @@
 	    <li class="events">
 	  <p class="quick_link">
 	    <img src="images/star.gif" alt=""  class="icon_green"/>	      
-	    <a href="http://www.cs.uoregon.edu/~dhowe/biocurator/">BioCurator meeting</a>, October 23-25, San Jose, CA 
+	    <a href="http://meetings.cshl.edu/meetings/info07.shtml">Genome Informatics</a>, November 1-5, Cold Spring Harbor, NY 
 	    </p>
 	    </li>
 	  </ul>
@@ -129,10 +129,10 @@
 	  <!--No news is good news!-->
 	  
 	  <!-- Do not destry the following event template -->
-	  <p>10.10.2007 - <b>New Phenote Release - <a href="http://www.phenote.org/download.shtml">version 1.4</a></b>
+	    <p><a href="http://www.cs.uoregon.edu/~dhowe/biocurator/">BioCurator meeting</a>, October 23-25, San Jose, CA 
+	  [<a href="http://www.phenote.org/resources/Biocurator_2007.ppt">Download presentation</a>]</p>
+	  <p>10.10.2007 - <b>New Phenote Release - <a href="http://www.phenote.org/download.shtml">version 1.4</a></b></p>
 	  <p>10.02.2007 - Phenote user's group to be moved to first Thursday of each month, 9am.  Join us for our next meeting on November 1st over WebEx!</p>
-	  <p>09.17.2007 - New website rolled out!  The website has the same
-	    content as the old one, just with a new look-and-feel.</p>
 	  <!--
 	  <h3>Event Title</h3>
 	  <ul class="events">
