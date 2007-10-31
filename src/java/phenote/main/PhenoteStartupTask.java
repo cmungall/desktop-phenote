@@ -16,6 +16,7 @@ import org.bbop.util.CollectionUtil;
 import org.oboedit.gui.tasks.DefaultGUIStartupTask;
 
 public class PhenoteStartupTask extends DefaultGUIStartupTask {
+
 	@Override
 	protected Collection<GUIComponentFactory<?>> getDefaultComponentFactories() {
 		Collection<GUIComponentFactory<?>> factories = super.getDefaultComponentFactories();
@@ -36,12 +37,15 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 	@Override
   // ??
 	protected String getPerspectiveResourceDir() { // not using org
-		return "phenote/gui/layout/resource";//"org/phenote/gui/layout/resources";
+		//return "phenote/gui/layout/resource";
+    //"org/phenote/gui/layout/resources";
+    return System.getProperty("user.home") + "/.phenote";
 	}
 
 	@Override
   /** im not sure about this and svn & webstart? */
 	protected File getPrefsDir() {
+    // .phenote/layout?
 		return new File(System.getProperty("user.home") + "/.phenote");
 	}
 
@@ -53,6 +57,8 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		return menus;
 	}
 
+
+  /** PhenoteCompFactory inner class */
   private class PhenoteCompFactory implements GUIComponentFactory {
     public GUIComponent createComponent(String id) {
       String l = "<html><h1>This is an example component</h1></html>";
