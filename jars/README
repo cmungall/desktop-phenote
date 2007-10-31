@@ -34,7 +34,7 @@ jstl?
 
 junit - MG - for testing phenote - ant test - not needed for webstart
 
-jwf - wizard - used by oboedit -
+jwf - wizard - used by oboedit - for multi add(??)
 
 idw.jar - for oboedit window docking stuff
 
