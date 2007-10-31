@@ -1,5 +1,6 @@
 package phenote.datamodel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -12,8 +13,9 @@ import org.obo.datamodel.OBOClass;
     In the table view a character represents a row */
 public class Character extends AbstractCharacter implements CharacterI {
 
-  private HashMap<CharField,CharFieldValue> charFieldToValue =
-    new HashMap<CharField,CharFieldValue>();
+  // should there be a CharFieldValList explicit object?
+  private HashMap<CharField,List<CharFieldValue>> charFieldToValue =
+    new HashMap<CharField,List<CharFieldValue>>();
   
   /** should only be constrcuted from factory */
   Character() {
@@ -28,24 +30,52 @@ public class Character extends AbstractCharacter implements CharacterI {
   /** for generic fields its just a map from char field to char field value */
   public void setValue(CharField cf, CharFieldValue cfv) {
     cfv.setCharacter(this);
-    charFieldToValue.put(cf,cfv);
+    List<CharFieldValue> newItem = new ArrayList<CharFieldValue>();
+    newItem.add(cfv);
+    List<CharFieldValue> list = charFieldToValue.get(cf);
+    if (!cf.isList() || !hasValue(cf))
+      charFieldToValue.put(cf,newItem);
+    else
+      list.add(cfv);
+    //charFieldToValue.put(cf,cfv);
     //System.out.println("Char setVal "+cf+" val "+cfv);
     // setOboEditModel(oboEditAnnotation,cf,cfv);
   }
 
+  // public void addValue ??? for lists??? is it funny that setVal is used for lists?
 
-  /** generic getter */ 
-  public CharFieldValue getValue(CharField cf) {
-    CharFieldValue cfv = charFieldToValue.get(cf);
-    // if cfv is null should we construct a CFV w null/"", should field be init to ""?
-    // undo needs to be able to undo back to null/""/init somehow
-    if (cfv == null) {
-      cfv = CharFieldValue.emptyValue(this,cf); // set in hash?
+  // add to characterI - for lists - should this have a rank/order - is it possible
+  // to have duplicates???
+  public void deleteValue(CharField cf, CharFieldValue cfv) {
+    if (!hasValue(cf)) return;
+    List<CharFieldValue> list = charFieldToValue.get(cf);
+    for (CharFieldValue v : list) {
+      if (v.equals(cfv)) {
+        list.remove(cfv);
+        return;
+      }
     }
-    return cfv;
   }
 
-  // return "" if null value?? throw ex? used for sorting CharList
+  /** generic getter - getting single value or 1st item of list */ 
+  public CharFieldValue getValue(CharField cf) {
+    List<CharFieldValue> cfvList = charFieldToValue.get(cf);
+    // if cfv is null should we construct a CFV w null/"", should field be init to ""?
+    // undo needs to be able to undo back to null/""/init somehow
+    if (cfvList == null || cfvList.isEmpty()) {
+      //cfv =
+      return CharFieldValue.emptyValue(this,cf); // set in hash-list?
+    }
+    return cfvList.get(0);
+  }
+
+  // make part of CharacterI! return null if not set? empty list?
+  public List<CharFieldValue> getValList(CharField cf) {
+    return charFieldToValue.get(cf);
+  }
+
+  /** returns string for charfield value of char field, no matter what type,
+      return "" if null value?? throw ex? used for sorting CharList */
   public String getValueString(CharField cf) {
     CharFieldValue cfv = getValue(cf);
     if (cfv.getName() == null) return ""; // ?? ex?
@@ -97,10 +127,12 @@ public class Character extends AbstractCharacter implements CharacterI {
     // WRONG - will use same charFieldVal which points to old char!!
 //    clone.charFieldToValue =(HashMap<CharField,CharFieldValue>)charFieldToValue.clone();
     // clone.setCharFieldValuesCharacterToSelf(); ???
-    for (CharFieldValue v : charFieldToValue.values()) {
-      CharFieldValue cfvClone = v.cloneCharFieldValue();
-      // cfvClone.setCharacter(charClone); done by setValue
-      charClone.setValue(cfvClone.getCharField(),cfvClone);
+    for (List<CharFieldValue> list : charFieldToValue.values()) {
+      for (CharFieldValue v : list) {
+        CharFieldValue cfvClone = v.cloneCharFieldValue();
+        // cfvClone.setCharacter(charClone); done by setValue
+        charClone.setValue(cfvClone.getCharField(),cfvClone);
+      }
     }
     return charClone;
       //} catch (CloneNotSupportedException e) { return null; }

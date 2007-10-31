@@ -143,6 +143,12 @@ public class CharField {
     return type == Type.READ_ONLY; 
   }
 
+  /** return true if holds a list of CharFieldValues, false if just 1 char field
+      value */
+  public boolean isList() {
+    return getTag().equals("NLA"); // just testing...
+  }
+
   public boolean hasOntologies() {
     return ontologyList != null && !ontologyList.isEmpty();
   }

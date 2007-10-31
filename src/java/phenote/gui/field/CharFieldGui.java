@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
@@ -599,9 +600,19 @@ public abstract class CharFieldGui implements ListSelectionListener {
   protected JButton getCompButton() { return null; }
 
   /** should get this from config... stub for now */
-  protected boolean hasListGui() { return false; }
+  protected boolean hasListGui() {
+    //return false;
+    //return label.equals("Non Locus Alleles"); // testing
+    return charField.isList();
+  }
   /** JList? initialize if configged */
-  protected JComponent getListGui() { return null; }
+  protected JComponent getListGui() {
+    //return null;
+    JList l = new JList();
+    //l.setMinimumSize(new Dimension(400,400));
+    l.setPreferredSize(new Dimension(150,50));
+    return l;
+  }
   
   
   /** no op - override in term completion gui */

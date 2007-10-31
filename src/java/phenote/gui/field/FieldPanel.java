@@ -164,7 +164,7 @@ public class FieldPanel extends JPanel {
     this.addLabel(fieldGui, getConstraintsNewRow());
     this.addOntologyChooser(fieldGui, getConstraintsSameRow());
     this.addInputGui(fieldGui, getConstraintsSameRow());
-    //addList();
+    addListGui(fieldGui,getConstraintsSameRow());
     this.addPostCompButton(fieldGui, getConstraintsSameRow());
     this.addRetrieveButton(fieldGui, getConstraintsSameRow());
   }
@@ -216,7 +216,7 @@ public class FieldPanel extends JPanel {
     if (!fieldGui.hasListGui()) return;
     constraints.gridx = 3;
     constraints.gridwidth = 2;
-    // fieldPanel.add(fieldGui.getListGui(),constraints);
+    fieldPanel.add(fieldGui.getListGui(),constraints);
   }
 
   private void addPostCompButton(CharFieldGui fieldGui, GridBagConstraints constraints) {

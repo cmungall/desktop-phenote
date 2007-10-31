@@ -62,6 +62,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
   private class PhenoteCompFactory implements GUIComponentFactory {
     public GUIComponent createComponent(String id) {
       String l = "<html><h1>This is an example component</h1></html>";
+      // 1st is id, 2nd id -> title bar string
       return new GUIComponentWrapper(id, id, new JLabel(l));
     }
 
@@ -73,6 +74,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
       return "main";
     }
 
+    /** This is not the ids above used in createComponent */
     public List getIDs() {
       return CollectionUtil.list("example_component");
     }

@@ -9,8 +9,8 @@ import org.obo.datamodel.impl.DanglingClassImpl;
 import org.obo.util.TermUtil;
 
 
-/** At the moment char field values can be Strings (genotype) and OBOClasses, and possibly
-    more coming (Genotype?). This class attempts to hide the details of the actual
+/** At the moment char field values can be Strings, OBOClasses, and dates, and possibly
+    more coming. This class attempts to hide the details of the actual
     data structure of the value for the field - could be String or OBOClass but can
     still deal with both the same - at least thats the idea... 
     post composition brings up some interesting issues...??? 
