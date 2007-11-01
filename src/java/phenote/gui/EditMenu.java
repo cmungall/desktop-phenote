@@ -12,6 +12,9 @@ import javax.swing.JOptionPane;
 
 import phenote.config.Config;
 import phenote.edit.EditManager;
+import phenote.gui.actions.UndoAction;
+import phenote.gui.actions.RedoAction;
+
 
 
 //import phenote.gui.prefswindow.PrefsWindowController; ???
@@ -29,11 +32,14 @@ class EditMenu extends JMenu {
   private void init() {
     EditActionListener actionListener = new EditActionListener();
 
-    editMenuItem = new JMenuItem("Undo");
-     editMenuItem.setActionCommand("undo");
-     editMenuItem.setMnemonic( 'z' );
-    editMenuItem.addActionListener(actionListener);
+    editMenuItem = new JMenuItem(new UndoAction());
     add(editMenuItem);
+    editMenuItem = new JMenuItem(new RedoAction());
+    add(editMenuItem);
+//    editMenuItem = new JMenuItem("Undo");
+//     editMenuItem.setActionCommand("undo");
+//     editMenuItem.setMnemonic( 'z' );
+//    editMenuItem.addActionListener(actionListener);
     
     addSeparator();
 
@@ -74,7 +80,7 @@ class EditMenu extends JMenu {
     add(deleteChar);
     
     //set all to disabled until they are working.
-    setEnabled(false);
+    setEnabled(true);
 
  }
 

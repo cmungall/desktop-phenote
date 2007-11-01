@@ -13,6 +13,9 @@ import phenote.config.Config;
 import phenote.gui.actions.DuplicateAnnotationAction;
 import phenote.gui.actions.OpenFileAction;
 import phenote.gui.actions.SaveAsFileAction;
+import phenote.gui.actions.UndoAction;
+import phenote.gui.actions.RedoAction;
+import phenote.gui.actions.CopyAction;
 
 // This is the basic toolbar to be displayed, containing items
 // such as New, Save, Print, etc.  Could be turned on/off if desired.
@@ -29,11 +32,11 @@ public class StandardToolbar extends JToolBar {
   private Vector buttons;
   
   public void hideToolbar() {
-  	hide();
+  	setVisible(false);
   }
   
   public void showToolbar() {
-  	show();
+  	setVisible(true);
   }
 
   public StandardToolbar() {
@@ -50,6 +53,10 @@ public class StandardToolbar extends JToolBar {
     Action saveAction = new SaveAsFileAction();
     Action openAction = new OpenFileAction();
     Action dupAnnotationAction = new DuplicateAnnotationAction();
+    Action undoAction = new UndoAction();
+    Action redoAction = new RedoAction();
+    Action copyAction = new CopyAction();
+    
     
     JButton saveButton = new JButton(saveAction);
     JButton openButton = new JButton(openAction);
@@ -64,6 +71,13 @@ public class StandardToolbar extends JToolBar {
     JButton newAnnotButton = new JButton("New Annot");
     JButton dupAnnotButton = new JButton(dupAnnotationAction);
     JButton delAnnotButton = new JButton("Del Annot");
+    
+    JButton undoButton = new JButton(undoAction);
+    JButton redoButton = new JButton(redoAction);
+    JButton copyButton = new JButton(copyAction);
+    buttons.add(undoButton);
+    buttons.add(redoButton);
+    buttons.add(copyButton);
     
     
 //    add(newAnnotButton);

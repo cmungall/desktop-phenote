@@ -9,6 +9,10 @@ import java.awt.event.KeyEvent;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.text.DefaultEditorKit;
+import javax.swing.JTextField;
+import javax.swing.text.JTextComponent;
+
+import phenote.gui.actions.CopyAction;
 
 
 public class FieldRightClickMenu extends JPopupMenu {
@@ -17,18 +21,20 @@ public class FieldRightClickMenu extends JPopupMenu {
 	//this in some way needs to link up to the undo/redo transaction 
 	//history i think.
 	
-	public FieldRightClickMenu() {
+	public FieldRightClickMenu(JTextComponent field) {
 		super();
-		init();
+		init(field);
 	}
 
-	private void init() {
+	private void init(JTextComponent field) {
 //		Create the popup menu.
 		JMenuItem menuItem;
 		menuItem = new JMenuItem(new DefaultEditorKit.CopyAction());
-		menuItem.setText("Copy");
+		menuItem.setText("Default Copy");
 		menuItem.setMnemonic(KeyEvent.VK_C);
 		menuItem.setEnabled(true);
+		add(menuItem);
+		menuItem = new JMenuItem(new CopyAction(field));
 		add(menuItem);
 		menuItem = new JMenuItem(new DefaultEditorKit.CutAction());
 		menuItem.setText("Cut");
