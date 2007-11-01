@@ -56,6 +56,7 @@ import phenote.gui.SelectionHistory;
 import phenote.gui.ShrimpDag;
 import phenote.gui.SplashScreen;
 import phenote.gui.TermInfo;
+import phenote.gui.TermInfo2;
 import phenote.gui.field.FieldPanel;
 import phenote.gui.StandardToolbar;
 import phenote.gui.selection.SelectionManager;
@@ -69,7 +70,8 @@ public class Phenote {
 
   private FieldPanel mainFieldPanel;
   private static Phenote phenote;
-  private TermInfo termInfo;
+//  private TermInfo termInfo;
+  private TermInfo2 termInfo;
   private SelectionHistory selectionHistory;
   private CharacterTableController tableController;
   private CommandLine commandLine = CommandLine.inst();
@@ -419,7 +421,8 @@ public class Phenote {
     if (group == null || group.getName().equals("default"))
       mainFieldPanel = groupFieldPanel;
 
-    termInfo = new TermInfo();
+//    termInfo = new TermInfo();
+    termInfo = new TermInfo2();
     GridBagConstraints ugbc = GridBagUtil.makeFillingConstraint(0,0);
     ugbc.weightx = 5;
     infoHistoryPanel.add(termInfo.getComponent(),ugbc);
@@ -512,11 +515,13 @@ public class Phenote {
 
   // These methods are actually for TestPhenote
   public FieldPanel getFieldPanel() { return mainFieldPanel; }
-  public TermInfo getTermInfo() { return termInfo; }
+//  public TermInfo getTermInfo() { return termInfo; }
   //public CharacterTablePanel getCharacterTablePanel() { return characterTablePanel; }
   public CharacterTableController getCharacterTableController() { return this.tableController; }
 
-
+  public TermInfo2 getTermInfo() {
+  	return termInfo;
+  }
 
 }
 
