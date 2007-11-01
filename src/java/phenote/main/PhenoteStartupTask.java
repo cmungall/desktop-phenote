@@ -20,8 +20,10 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
 	@Override
 	protected Collection<GUIComponentFactory<?>> getDefaultComponentFactories() {
-		Collection<GUIComponentFactory<?>> factories = super.getDefaultComponentFactories();
-		factories.add(new PhenoteCompFactory());
+		//Collection<GUIComponentFactory<?>> factories = super.getDefaultComponentFactories();
+    Collection<GUIComponentFactory<?>> factories =
+      new ArrayList<GUIComponentFactory<?>>();
+		factories.add(new FieldPanelFactory());
 		return factories;
 	}
 	
@@ -38,9 +40,9 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 	@Override
   // ??
 	protected String getPerspectiveResourceDir() { // not using org
-		//return "phenote/gui/layout/resource";
+		return "phenote/gui/layout/resource"; // need to add this
     //"org/phenote/gui/layout/resources";
-    return System.getProperty("user.home") + "/.phenote";
+    //return System.getProperty("user.home") + "/.phenote";
 	}
 
 	@Override
@@ -60,13 +62,13 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
 
   /** PhenoteCompFactory inner class */
-  private class PhenoteCompFactory implements GUIComponentFactory {
+  private class FieldPanelFactory implements GUIComponentFactory {
     public GUIComponent createComponent(String id) {
       //String l = "<html><h1>This is an example component</h1></html>";
       // 1st is id, 2nd id -> title bar string
       //return new GUIComponentWrapper(id, id, new JLabel(l));
-      FieldPanel groupFieldPanel = new FieldPanel(true,false,group.getName(), this.tableController.getSelectionModel());
-      return new GUIComponentWrapper(id, id, new groupFieldPanel());
+      //FieldPanel groupFieldPanel = new FieldPanel(true,false,group.getName(), this.tableController.getSelectionModel());
+      return new GUIComponentWrapper(id, id, null); //new groupFieldPanel());
     }
 
     public FactoryCategory getCategory() {

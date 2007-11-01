@@ -403,6 +403,7 @@ public class Phenote {
   }
 
   /** main panel contains FieldPanel CharTablePanel & TermInfo 
+      a group panel now holds all 3 of these things
       move this to gui? */
   private JPanel makeGroupPanel(Group group) {
     JPanel mainPanel = new JPanel(new GridLayout());
@@ -434,8 +435,9 @@ public class Phenote {
     innerSplitPane.setDividerLocation(700);
     
     
-    
-    JSplitPane outerSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, innerSplitPane, this.tableController.getCharacterTablePanel());
+    JPanel ctp =  this.tableController.getCharacterTablePanel();
+    JSplitPane outerSplitPane =
+      new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, innerSplitPane,ctp);
     mainPanel.add(outerSplitPane);
     return mainPanel;
   }
