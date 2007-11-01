@@ -20,6 +20,7 @@ import phenote.datamodel.CharField;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharFieldManager;
 import phenote.edit.EditManager;
+import phenote.gui.CharacterTableController;
 import phenote.gui.selection.SelectionManager;
 import ca.odell.glazedlists.swing.EventSelectionModel;
 
@@ -51,6 +52,11 @@ public class FieldPanel extends JPanel {
 //   public FieldPanel(boolean doAllFields,boolean addSearchPanel) {
 //     this(doAllFields, addSearchPanel, null, SelectionManager.inst(), EditManager.inst());
 //   }
+
+  public FieldPanel() {
+    this(true,false,Config.inst().getDefaultGroup().getName(),
+         CharacterTableController.getDefaultController().getSelectionModel());
+  }
 
   // Group or String for group?
   public FieldPanel(boolean doAllFields, boolean addSearchPanel, String grp, EventSelectionModel<CharacterI> model) {

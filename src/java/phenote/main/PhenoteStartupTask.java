@@ -67,25 +67,27 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
       //String l = "<html><h1>This is an example component</h1></html>";
       // 1st is id, 2nd id -> title bar string
       //return new GUIComponentWrapper(id, id, new JLabel(l));
-      //FieldPanel groupFieldPanel = new FieldPanel(true,false,group.getName(), this.tableController.getSelectionModel());
-      return new GUIComponentWrapper(id, id, null); //new groupFieldPanel());
+      // for now just doing default group - need to iterate groups
+      FieldPanel groupFieldPanel = new FieldPanel(); //true,false,Config.inst().getDefaultGroup(), this.tableController.getSelectionModel());
+      return new GUIComponentWrapper(id, id, groupFieldPanel);
     }
 
     public FactoryCategory getCategory() {
-      return FactoryCategory.MISC;
+      return FactoryCategory.ANNOTATION;
     }
 
     public String getDefaultID() {
-      return "main";
+      return "dnote-editor";
     }
 
-    /** This is not the ids above used in createComponent */
+    /** This is not the ids above used in createComponent??
+     */
     public List getIDs() {
-      return CollectionUtil.list("example_component");
+      return CollectionUtil.list("dnote-editor");
     }
 
     public String getName() {
-      return "Example Component";
+      return "DNote Editor";
     }
 
     public boolean getPreferSeparateWindow() {

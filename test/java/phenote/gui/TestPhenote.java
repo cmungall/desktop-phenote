@@ -50,7 +50,7 @@ public class TestPhenote {
   private static SearchParamPanel searchParamPanel;
   private static AbstractAutoCompList entityComboBox;
   private static AbstractAutoCompList qualityComboBox;
-  private static TermInfo termInfo;
+  private static TermInfo2 termInfo;
   private static CharacterTableController tableController;
 
   /** @throws InvocationTargetException 
@@ -77,44 +77,44 @@ public class TestPhenote {
     });
   }
   
-  @Ignore @Test public void displayTermInfoOnCompMouseOverTest() throws InterruptedException, InvocationTargetException {
-    SwingUtilities.invokeAndWait(new Runnable() {
-      public void run() {
-        System.out.println("Testing comp list mouse over term info...");
-        // "he" should have plenty of completion terms associated, heart, head...
-        boolean doCompletion = true;
-        System.out.println("set entity text to hea");
-        //entityComboBox.setText("hea",doCompletion);
-        // already have list from l from previous test - for some reason 2nd l doesnt jibe
-        // even though there are lots of quality terms with 'll' ???
-        //qualityComboBox.simulateLKeyStroke(); // just does 'l'
-        System.out.println("set text - getting 3rd term");
-        //JList entityJList = entityComboBox.getJList();
-        // pick 3rd item
-        //String thirdTerm = (String)entityJList.getModel().getElementAt(2);
-        //String thirdTerm = getEntityThirdAutoTerm();
-        String thirdTerm = getQualityThirdAutoTerm();
-        assertNotNull("3rd term from quality combo shouldnt be null",thirdTerm);
-        //entityJList.setSelectedIndex(2);
-        //entityComboBox.doMouseOver(2); // 2 is 3rd - 0 indexing
-        qualityComboBox.doMouseOver(2);
+//   @Ignore @Test public void displayTermInfoOnCompMouseOverTest() throws InterruptedException, InvocationTargetException {
+//     SwingUtilities.invokeAndWait(new Runnable() {
+//       public void run() {
+//         System.out.println("Testing comp list mouse over term info...");
+//         // "he" should have plenty of completion terms associated, heart, head...
+//         boolean doCompletion = true;
+//         System.out.println("set entity text to hea");
+//         //entityComboBox.setText("hea",doCompletion);
+//         // already have list from l from previous test - for some reason 2nd l doesnt jibe
+//         // even though there are lots of quality terms with 'll' ???
+//         //qualityComboBox.simulateLKeyStroke(); // just does 'l'
+//         System.out.println("set text - getting 3rd term");
+//         //JList entityJList = entityComboBox.getJList();
+//         // pick 3rd item
+//         //String thirdTerm = (String)entityJList.getModel().getElementAt(2);
+//         //String thirdTerm = getEntityThirdAutoTerm();
+//         String thirdTerm = getQualityThirdAutoTerm();
+//         assertNotNull("3rd term from quality combo shouldnt be null",thirdTerm);
+//         //entityJList.setSelectedIndex(2);
+//         //entityComboBox.doMouseOver(2); // 2 is 3rd - 0 indexing
+//         qualityComboBox.doMouseOver(2);
 
-        //String info = termInfo.getText();
-        // gets text in term field part where name is displayed
-        String info = termInfo.getTermFieldText();
-        //String properInfoPrefix = "Term: "+thirdTerm;
-        // this doesnt work anymore with mtml stuff in there...
-        //boolean isInfoProper = info.startsWith(properInfoPrefix); 
-        boolean isInfoProper = info.contains(thirdTerm);
+//         //String info = termInfo.getText();
+//         // gets text in term field part where name is displayed
+//         String info = termInfo.getTermNameText();
+//         //String properInfoPrefix = "Term: "+thirdTerm;
+//         // this doesnt work anymore with mtml stuff in there...
+//         //boolean isInfoProper = info.startsWith(properInfoPrefix); 
+//         boolean isInfoProper = info.contains(thirdTerm);
 
-        String msg = "term info should contain '"+thirdTerm
-          +"' not getting mouseover but its ["+info+"]";
-        assertTrue(msg,isInfoProper);
-        System.out.println("Completion mouse over term info test succeeded!");
-      }
-    });
+//         String msg = "term info should contain '"+thirdTerm
+//           +"' not getting mouseover but its ["+info+"]";
+//         assertTrue(msg,isInfoProper);
+//         System.out.println("Completion mouse over term info test succeeded!");
+//       }
+//     });
     
-  }
+//   }
 
   private String getEntityThirdAutoTerm() {
     return entityComboBox.getJComboBox().getModel().getElementAt(2).toString();
@@ -221,9 +221,9 @@ public class TestPhenote {
       public void run() {
         simulatePhenoteHyperlinkUpdate();
         String m = "term info hyper link test fail, term info should have body tone val "
-          +" term info: "+termInfo.getTermFieldText();
+          +" term info: "+termInfo.getTermNameText();
         // how to make this test not so pato specific??
-        assertTrue(m,termInfo.getTermFieldText().contains("body tone value"));
+        assertTrue(m,termInfo.getTermNameText().contains("body tone value"));
       }
     });
   }

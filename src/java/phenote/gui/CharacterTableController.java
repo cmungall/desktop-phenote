@@ -55,9 +55,13 @@ public class CharacterTableController {
   private JPanel filterPanel; // initialized by swix
   private JButton ontolMakerButton;  // initialized by swix
   private OntologyMakerI ontolMaker; // for now just 1 term maker...
+  // hmm... its handy
+  private static CharacterTableController defaultController;
   
   public CharacterTableController(String groupName) {
     if (groupName != null) this.representedGroup = groupName;
+    if (CharFieldManager.isDefaultGroup(groupName))
+      defaultController = this;
     this.loadPanelLayout();
     this.sortedCharacters = new SortedList<CharacterI>(this.getCharacterListManager().getCharacterList().getList(), new EverythingEqualComparator<CharacterI>());
     this.sortedCharacters.setMode(SortedList.AVOID_MOVING_ELEMENTS);
@@ -70,7 +74,12 @@ public class CharacterTableController {
     this.initializeInterface();
     this.addInitialBlankCharacter();
   }
-    
+   
+  // may be null
+  public static CharacterTableController getDefaultController() {
+    return defaultController;
+  }
+
   public JPanel getCharacterTablePanel() {
     return this.characterTablePanel;
   }

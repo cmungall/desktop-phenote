@@ -895,4 +895,15 @@ public class TermInfo2 extends JPanel {
   		catch (TermNotFoundException ex) { return; }
   }
 		
+
+  // for testing
+  String getTermNameText() {
+    return termName==null ? null : termName.getText();
+  }
+
+  /** for testing */
+  void simulateHyperlinkEvent(HyperlinkEvent e) {
+    termHyperlinkListener.hyperlinkUpdate(e);
+  }
+
 }

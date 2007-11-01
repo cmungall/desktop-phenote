@@ -517,6 +517,7 @@ public class Phenote {
   public FieldPanel getFieldPanel() { return mainFieldPanel; }
 //  public TermInfo getTermInfo() { return termInfo; }
   //public CharacterTablePanel getCharacterTablePanel() { return characterTablePanel; }
+  // for TestPhenote - silly method as one created for each group
   public CharacterTableController getCharacterTableController() { return this.tableController; }
 
   public TermInfo2 getTermInfo() {

@@ -136,6 +136,10 @@ public class CharFieldManager {
     return charFields;
   }
 
+  public static boolean isDefaultGroup(String s) {
+    return DEFAULT_GROUP.equals(s);
+  }
+
   public List<Ontology> getAllOntologies() {
     List<Ontology> ontologies = new ArrayList<Ontology>();
     for (CharField cf : charFieldList)
