@@ -4,27 +4,13 @@ package phenote.gui.actions;
 //import javax.swing.JMenu;
 //import javax.swing.JMenuBar;
 //import javax.swing.JMenuItem;
-import javax.swing.ImageIcon;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+
 import javax.swing.AbstractAction;
-import javax.swing.Action;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.Component;
-import java.awt.Point;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-import javax.swing.text.DefaultEditorKit;
-import javax.swing.JTextField;
-import javax.swing.text.JTextComponent;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
-
-
-import phenote.dataadapter.LoadSaveManager;
-import phenote.config.Config;
-import phenote.edit.EditManager;
-import phenote.datamodel.CharFieldValue;
-import phenote.gui.selection.SelectionManager;
+import javax.swing.text.JTextComponent;
 
 
 

@@ -1,16 +1,17 @@
 package phenote.gui;
 
 
-import ca.uvic.csr.shrimp.gui.QueryView.OBOViewer;
-import ca.uvic.csr.shrimp.gui.QueryView.QueryView;
+import javax.swing.JFrame;
+
 import org.obo.datamodel.OBOSession;
-import phenote.datamodel.Ontology;
+
 import phenote.datamodel.CharFieldManager;
+import phenote.datamodel.Ontology;
 import phenote.gui.selection.SelectionManager;
 import phenote.gui.selection.TermSelectionEvent;
 import phenote.gui.selection.TermSelectionListener;
-
-import javax.swing.*;
+import ca.uvic.csr.shrimp.gui.QueryView.OBOViewer;
+import ca.uvic.csr.shrimp.gui.QueryView.QueryView;
 
 public class ShrimpDag {
 

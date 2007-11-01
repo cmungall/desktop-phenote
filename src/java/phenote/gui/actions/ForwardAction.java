@@ -4,33 +4,12 @@ package phenote.gui.actions;
 //import javax.swing.JMenu;
 //import javax.swing.JMenuBar;
 //import javax.swing.JMenuItem;
-import javax.swing.ImageIcon;
+import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
-import javax.swing.Action;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.Component;
-import java.awt.Point;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-import javax.swing.text.DefaultEditorKit;
-import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.text.JTextComponent;
-import javax.swing.JComponent;
 
-import org.geneontology.oboedit.datamodel.OBOClass;
-
-
-import phenote.dataadapter.LoadSaveManager;
-import phenote.config.Config;
-import phenote.edit.EditManager;
-import phenote.datamodel.CharFieldManager;
-import phenote.datamodel.CharFieldValue;
-import phenote.datamodel.TermNotFoundException;
-import phenote.gui.TermInfo;
-import phenote.gui.TermInfo2;
-import phenote.gui.selection.SelectionManager;
 import phenote.main.Phenote;
 
 

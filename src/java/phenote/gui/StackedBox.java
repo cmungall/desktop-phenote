@@ -28,7 +28,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.Rectangle;
-import java.awt.*;
 
 import javax.swing.Action;
 import javax.swing.BorderFactory;
@@ -38,9 +37,8 @@ import javax.swing.Scrollable;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
-import javax.swing.*;
-import org.jdesktop.swingx.*;
-//import org.jdesktop.layout.*;
+
+import ca.uvic.csr.shrimp.DisplayBean.layout.VerticalLayout;
 
 
 /**

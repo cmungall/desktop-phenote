@@ -4,14 +4,11 @@ package phenote.gui.actions;
 //import javax.swing.JMenu;
 //import javax.swing.JMenuBar;
 //import javax.swing.JMenuItem;
-import javax.swing.ImageIcon;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
-import phenote.dataadapter.LoadSaveManager;
-import phenote.config.Config;
+import javax.swing.AbstractAction;
+import javax.swing.ImageIcon;
 
 
 //This is the action for undoing the last action

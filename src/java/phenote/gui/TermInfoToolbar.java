@@ -1,51 +1,29 @@
 package phenote.gui;
 
 
-import phenote.config.Config;
-import phenote.config.ConfigException;
-import phenote.config.ConfigFileQueryGui;
-import phenote.datamodel.CharFieldManager;
-import phenote.datamodel.TermNotFoundException;
-import phenote.gui.TermInfo2;
-import phenote.main.Phenote;
-//import phenote.gui.ActionManager;
-//import phenote.gui.TermInfo.BackNaviActionListener;
-//import phenote.gui.TermInfo.FavoritesNaviActionListener;
-//import phenote.gui.TermInfo.ForwardNaviActionListener;
-//import phenote.gui.TermInfo.TermComboBoxActionListener;
-//import phenote.gui.TermInfo.UseTermActionListener;
-//import phenote.gui.actions.OpenFileAction;
-//import phenote.gui.actions.SaveAsFileAction;
-//import phenote.gui.actions.DuplicateAnnotationAction;
-//import phenote.gui.actions.UndoAction;
-//import phenote.gui.actions.RedoAction;
-//import phenote.gui.actions.CopyAction;
-import phenote.gui.actions.ForwardAction;
-import phenote.gui.actions.BackAction;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Vector;
 
+import javax.swing.Action;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JTextArea;
+import javax.swing.JToolBar;
+import javax.swing.border.EtchedBorder;
+
+import org.obo.datamodel.OBOClass;
+
+import phenote.config.Config;
+import phenote.gui.actions.BackAction;
+import phenote.gui.actions.ForwardAction;
 import phenote.gui.selection.SelectionManager;
 import phenote.gui.selection.UseTermEvent;
 import phenote.gui.selection.UseTermListener;
-
-import java.io.IOException;
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.border.BevelBorder;
-import javax.swing.border.LineBorder;
-import java.awt.BorderLayout;
-import javax.swing.*;
-import javax.swing.BorderFactory;
-import javax.swing.border.EtchedBorder;
-
-import org.geneontology.oboedit.datamodel.OBOClass;
-
-import java.util.Vector;
-import java.awt.*;
-import java.awt.event.*;
 
 
 /**

@@ -1,14 +1,11 @@
 package phenote.util;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.Collections;
+import java.util.List;
 
-
-
-import org.geneontology.oboedit.datamodel.Link;
-import org.geneontology.oboedit.datamodel.OBOProperty;
+import org.obo.datamodel.Link;
+import org.obo.datamodel.OBOProperty;
 
 public class LinkCollection {
 	//a little class to manage links for navigation.  

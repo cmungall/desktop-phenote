@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 
 import org.bbop.framework.GUIComponent;
@@ -14,6 +13,8 @@ import org.bbop.framework.GUIComponentWrapper;
 import org.bbop.framework.ViewMenu;
 import org.bbop.util.CollectionUtil;
 import org.oboedit.gui.tasks.DefaultGUIStartupTask;
+
+import phenote.gui.field.FieldPanel;
 
 public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
@@ -61,9 +62,11 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
   /** PhenoteCompFactory inner class */
   private class PhenoteCompFactory implements GUIComponentFactory {
     public GUIComponent createComponent(String id) {
-      String l = "<html><h1>This is an example component</h1></html>";
+      //String l = "<html><h1>This is an example component</h1></html>";
       // 1st is id, 2nd id -> title bar string
-      return new GUIComponentWrapper(id, id, new JLabel(l));
+      //return new GUIComponentWrapper(id, id, new JLabel(l));
+      FieldPanel groupFieldPanel = new FieldPanel(true,false,group.getName(), this.tableController.getSelectionModel());
+      return new GUIComponentWrapper(id, id, new groupFieldPanel());
     }
 
     public FactoryCategory getCategory() {

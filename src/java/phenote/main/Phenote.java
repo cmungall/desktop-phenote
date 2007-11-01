@@ -1,12 +1,11 @@
 package phenote.main;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.BorderLayout;
-
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -55,10 +54,9 @@ import phenote.gui.SearchParams;
 import phenote.gui.SelectionHistory;
 import phenote.gui.ShrimpDag;
 import phenote.gui.SplashScreen;
-import phenote.gui.TermInfo;
+import phenote.gui.StandardToolbar;
 import phenote.gui.TermInfo2;
 import phenote.gui.field.FieldPanel;
-import phenote.gui.StandardToolbar;
 import phenote.gui.selection.SelectionManager;
 import phenote.servlet.PhenoteWebConfiguration;
 import phenote.util.FileUtil;

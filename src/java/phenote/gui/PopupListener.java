@@ -1,12 +1,10 @@
  package phenote.gui;
  
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
- 
-import javax.swing.JComponent;
+
 import javax.swing.JPopupMenu;
-import java.awt.Point;
  
  
 public class PopupListener extends MouseAdapter {

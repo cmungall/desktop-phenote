@@ -23,10 +23,9 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.bbop.dataadapter.DataAdapterException;
-import org.bbop.dataadapter.IOOperation;
+import org.obo.dataadapter.OBOAdapter;
 import org.obo.dataadapter.OBOFileAdapter;
 import org.obo.dataadapter.OBOMetaData;
-import org.obo.dataadapter.OBOAdapter;
 import org.obo.datamodel.Namespace;
 import org.obo.datamodel.OBOSession;
 

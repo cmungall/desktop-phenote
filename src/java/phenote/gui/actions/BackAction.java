@@ -1,17 +1,11 @@
 package phenote.gui.actions;
 
-import javax.swing.ImageIcon;
+import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
-import javax.swing.Action;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.Component;
-import javax.swing.text.DefaultEditorKit;
-import javax.swing.text.JTextComponent;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
-
-import org.geneontology.oboedit.datamodel.OBOClass;
-
+import javax.swing.text.JTextComponent;
 
 import phenote.main.Phenote;
 
