@@ -38,7 +38,10 @@ import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 
-import ca.uvic.csr.shrimp.DisplayBean.layout.VerticalLayout;
+import org.jdesktop.swingx.JXCollapsiblePane;
+import org.jdesktop.swingx.JXHyperlink;
+import org.jdesktop.swingx.VerticalLayout;
+
 
 
 /**
