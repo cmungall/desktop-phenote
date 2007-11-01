@@ -86,6 +86,11 @@ java - used by shrimp which isnt being used - not needed for webstart i think
 
 swing-layout - (NW) - this is for some swing layout stuff, i believe for the new loading screen, but i don't remember which part
 
+swingx - (NW) this is for some fancy swing components, like collapsible jpanes. 
+For referencing org.jdesktop.*.  You can get the javadocs at 
+http://swinglabs.org/hudson/job/SwingX%20Weekly%20Build/javadoc/
+
+
 swixml - (JB) does swing layout via xml - used in main character table and character template table
 
 te-common - MG - used for command line parsing - actually needed for webstart
