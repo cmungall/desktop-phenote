@@ -64,7 +64,7 @@ public class CharFieldManager {
 
   public void setOboSession(OBOSession s) {
     // set in obo edit
-    SessionManager.getManager().setSession(s);
+    //SessionManager.getManager().setSession(s);
     oboSession = s;
   }
   public OBOSession getOboSession() {

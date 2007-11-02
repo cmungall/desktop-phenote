@@ -17,6 +17,9 @@ import org.bbop.framework.GUIComponentWrapper;
 import org.bbop.framework.ViewMenu;
 import org.bbop.util.CollectionUtil;
 import org.oboedit.gui.tasks.DefaultGUIStartupTask;
+import org.oboedit.gui.factory.DAGViewFactory;
+import org.oboedit.gui.factory.GraphDAGViewFactory;
+import org.oboedit.gui.factory.GraphEditorFactory;
 
 import phenote.config.Config;
 import phenote.gui.CharacterTableController;
@@ -40,6 +43,9 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		factories.add(new FieldPanelFactory());
     factories.add(new TermInfoFactory());
     factories.add(new CharTableFactory());
+    //factories.add(new GraphEditorFactory());
+    factories.add(new DAGViewFactory());
+    //factories.add(new GraphDAGViewFactory());
 		return factories;
 	}
 
