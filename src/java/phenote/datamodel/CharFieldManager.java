@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
 import org.obo.datamodel.OBOSession;
@@ -11,6 +12,7 @@ import org.obo.postcomp.ParseException;
 import org.obo.postcomp.PostcompUtil;
 import org.obo.postcomp.TokenMgrError;
 import org.obo.util.TermUtil;
+import org.oboedit.controller.SessionManager;
 
 import phenote.config.Config;
 
@@ -60,8 +62,16 @@ public class CharFieldManager {
     charFieldList.add(cf);
   }
 
-  public void setOboSession(OBOSession s) { oboSession = s; }
-  public OBOSession getOboSession() { return oboSession; }
+  public void setOboSession(OBOSession s) {
+    // set in obo edit
+    SessionManager.getManager().setSession(s);
+    oboSession = s;
+  }
+  public OBOSession getOboSession() {
+    // get from obo edit?
+    if (oboSession == null) SessionManager.getManager().getSession();
+    return oboSession;
+  }
 
   /** returns relation of id from obo session, null if dont have */
   public OBOProperty getRelation(String id) {
