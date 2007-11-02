@@ -491,6 +491,7 @@ public class Phenote {
     // for testing - thats it
     if (group == null || group.getName().equals("default"))
       mainFieldPanel = groupFieldPanel;
+    // groupFieldPanel gets added to innerSplitPane below...
 
 //    termInfo = new TermInfo();
     termInfo = new TermInfo2();

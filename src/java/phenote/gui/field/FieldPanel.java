@@ -59,7 +59,8 @@ public class FieldPanel extends JPanel {
   }
 
   // Group or String for group?
-  public FieldPanel(boolean doAllFields, boolean addSearchPanel, String grp, EventSelectionModel<CharacterI> model) {
+  public FieldPanel(boolean doAllFields, boolean addSearchPanel, String grp,
+                    EventSelectionModel<CharacterI> model) {
     setGroup(grp);
     init(doAllFields,addSearchPanel,group,SelectionManager.getSelMan(group),
          EditManager.getEditManager(group), model);
@@ -73,7 +74,8 @@ public class FieldPanel extends JPanel {
   }
 
   private void init(boolean doAllFields, boolean addSearchPanel,String group,
-                    SelectionManager selectionManager, EditManager groupEditMan, EventSelectionModel<CharacterI> model) {
+                    SelectionManager selectionManager, EditManager groupEditMan,
+                    EventSelectionModel<CharacterI> model) {
     setGroup(group);
     this.selectionModel = model;
     this.selectionManager = selectionManager;
@@ -90,7 +92,7 @@ public class FieldPanel extends JPanel {
       initSearchPanel();
 
     // should there be a GroupConfig object? cant GroupAdap do this itself?
-    // yea i think group adap can just do this
+    // yea i think group adap can just do this - refactor!
     if (Config.inst().hasGroupAdapter(group)) {
       GroupAdapterI groupAdap = Config.inst().getGroupAdapter(group);
       if (groupAdap.hasCharChangeListener()) {
