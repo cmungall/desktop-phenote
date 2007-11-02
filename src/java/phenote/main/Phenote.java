@@ -87,6 +87,81 @@ public class Phenote {
   public static void main(String[] args) {
     standalone = true; // i think this is ok
  
+    init(args);
+
+
+//     phenote = getPhenote();
+//     boolean enableSplashScreen = !phenote.commandLine.writeIsSpecified();
+//     //System.out.println("splash "+enableSplashScreen);
+//     phenote.splashScreenInit(enableSplashScreen); //initialize the splash screen;
+
+    //phenote.doCommandLine(args); // does config
+
+    //new phenote.gui.ConfigGui(); // testing out
+    
+ /*   set up the overall task of loading the software
+    there will be several events:
+    1.  loading configuration - display config name
+    2.  checking for ontology updates - per ontology display name
+    3.	updating ontologies (name) - downloading... display name
+    4.	loading into datamodel - display name - this is the bulk of the time
+  */    
+
+//     phenote.splashScreen.setProgress("Configuring...", 10);
+//     phenote.loadingScreen.setMessageText("Loading configuration: "+Config.inst().getConfigName());
+//     phenote.loadingScreen.setProgress(5);
+//     phenote.splashScreen.setProgress("Initializing Ontologies...", 20);
+//     phenote.loadingScreen.setMessageText("Initializing Ontologies");
+//     phenote.loadingScreen.setProgress(10);
+//    phenote.loadingScreen.setProgress(20);
+//    boolean done = false;
+    
+//    phenote.initOntologies();
+//     phenote.splashScreen.setProgress("Ontologies Initialized", 70);
+//     phenote.loadingScreen.setMessageText("Ontologies Initialized");
+//    phenote.loadingScreen.setProgress(70);
+//    phenote.loadFromCommandLine();  // aft ontols, reads from cmd line if specified
+//     phenote.splashScreen.setProgress("Phenote Loaded", 100);
+//     phenote.loadingScreen.setMessageText("Phenote Loaded");
+//     phenote.loadingScreen.setProgress(100);
+
+//     if (phenote.commandLine.writeIsSpecified()) {
+//       phenote.writeFromCommandLine();
+//       // it hangs after writing - not sure why
+//       System.out.println("Done writing, exiting phenote");
+//       System.exit(0);
+//     }
+//     else	// init gui if not writing (& reading) from cmd line
+//     {
+//     	phenote.initGui();
+//     	phenote.splashScreenDestruct();
+// //    	phenote.loadingScreenDestruct();
+//     }
+
+//     if (Config.inst().dataInputServletIsEnabled()) 
+//       new phenote.servlet.DataInputServer();
+
+  }	
+
+  /** private constructor -> singleton */
+  private Phenote() {}
+
+  private static void init(String[] args) {
+    initLogger();
+    initLookAndFeel();
+    phenote = getPhenote();
+    phenote.splashScreenInit();
+    phenote.doCommandLine(args); // does config
+    phenote.initOntologies();
+    phenote.loadFromCommandLine(); // if load/file specified from cmd line
+    phenote.setProgress("Phenote Loaded", 100);
+    phenote.writeFromCommandLine(); // if cmd line, writes & exits
+    phenote.initGui();
+    phenote.splashScreenDestruct();
+    phenote.initDataInputServlet();
+  }
+
+  private static void initLogger() {
     // Check whether the root logger has an appender; there does not appear
     // to be a more direct way to check whether Log4J has already been 
     // initialized.  Note that the root logger's appender can always be
@@ -117,6 +192,9 @@ public class Phenote {
     String v = "This is Phenote version "+PhenoteVersion.versionString();
     System.out.println(v);
     LOG.info(v);
+  }
+
+  private static void initLookAndFeel() {
     try {
       final String lookAndFeelClassName = UIManager.getSystemLookAndFeelClassName();
       if (lookAndFeelClassName.equals("apple.laf.AquaLookAndFeel")) {
@@ -136,68 +214,25 @@ public class Phenote {
     } catch (UnsupportedLookAndFeelException e) {
       LOG.error("Look and feel not supported", e);
     }
+  }
 
-    phenote = getPhenote();
-    boolean enableSplashScreen = !phenote.commandLine.writeIsSpecified();
-    //System.out.println("splash "+enableSplashScreen);
-    phenote.splashScreenInit(enableSplashScreen); //initialize the splash screen;
-    phenote.doCommandLine(args); // does config
 
-    //new phenote.gui.ConfigGui(); // testing out
-    
- /*   set up the overall task of loading the software
-    there will be several events:
-    1.  loading configuration - display config name
-    2.  checking for ontology updates - per ontology display name
-    3.	updating ontologies (name) - downloading... display name
-    4.	loading into datamodel - display name - this is the bulk of the time
-  */    
-
-    phenote.splashScreen.setProgress("Configuring...", 10);
-    phenote.loadingScreen.setMessageText("Loading configuration: "+Config.inst().getConfigName());
-    phenote.loadingScreen.setProgress(5);
-    phenote.splashScreen.setProgress("Initializing Ontologies...", 20);
-    phenote.loadingScreen.setMessageText("Initializing Ontologies");
-    phenote.loadingScreen.setProgress(10);
-//    phenote.loadingScreen.setProgress(20);
-//    boolean done = false;
-    
-    phenote.initOntologies();
-    phenote.splashScreen.setProgress("Ontologies Initialized", 70);
-    phenote.loadingScreen.setMessageText("Ontologies Initialized");
-//    phenote.loadingScreen.setProgress(70);
-    phenote.loadFromCommandLine();  // aft ontols, reads from cmd line if specified
-    phenote.splashScreen.setProgress("Phenote Loaded", 100);
-    phenote.loadingScreen.setMessageText("Phenote Loaded");
-    phenote.loadingScreen.setProgress(100);
-    if (phenote.commandLine.writeIsSpecified()) {
-      phenote.writeFromCommandLine();
-      // it hangs after writing - not sure why
-      System.out.println("Done writing, exiting phenote");
-      System.exit(0);
-    }
-    else	// init gui if not writing (& reading) from cmd line
-    {
-    	phenote.initGui();
-    	phenote.splashScreenDestruct();
-//    	phenote.loadingScreenDestruct();
-    }
-
-    if (Config.inst().dataInputServletIsEnabled()) 
-      new phenote.servlet.DataInputServer();
-
-  }	
-
-  /** private constructor -> singleton */
-  private Phenote() {}
 
 
   public void initOntologies() {
+    String m = "Loading configuration: "+Config.inst().getConfigName();
+    setProgress(m, 10);
+    setProgress(5); // 5?? from 10??? nicole?
+    setProgress("Initializing Ontologies...", 20);
+    setProgressMsg("Initializing Ontologies");
+    setProgress(10);
     //OntologyDataAdapter oda = new OntologyDataAdapter(); // singleton?
     // loads up OntologyManager - non intuitive?
     OntologyDataAdapter.initialize();
     // if (config.useShrimpDagViewer())
     // ShrimpDag.inst().initOntologies();
+    setProgress("Ontologies Initialized", 70);
+    //setMessageText("Ontologies Initialized");
   }
 
   private void loadFromCommandLine() {
@@ -210,8 +245,18 @@ public class Phenote {
 
   private void writeFromCommandLine() {
     if (!commandLine.writeIsSpecified()) return;
-   try { commandLine.getWriteAdapter().commit(getCharList()); }
+    try {
+      commandLine.getWriteAdapter().commit(getCharList());
+      System.out.println("Done writing, exiting phenote");
+      LOG.info("Done writing, exiting phenote");
+    }
     catch (Exception e) { LOG.error("Failed to do write via command line "+e); }
+    System.exit(0);
+  }
+
+  private void initDataInputServlet() {
+    if (Config.inst().dataInputServletIsEnabled()) 
+      new phenote.servlet.DataInputServer();
   }
 
   private CharacterListI getCharList() {
@@ -288,17 +333,19 @@ public class Phenote {
   }
 
 
-  private void splashScreenInit(boolean enable) {
+  private void splashScreenInit() {
+    if (commandLine.writeIsSpecified()) return;
+
   	ImageIcon myImage = new ImageIcon();
   	try {
       myImage = new ImageIcon(FileUtil.findUrl(logoFile));
   	}	catch (FileNotFoundException ex) {  }
  	
 //    ImageIcon myImage = new ImageIcon(logoFile);
-    splashScreen = new SplashScreen(myImage,enable);
+    splashScreen = new SplashScreen(myImage); //,enable);
     loadingScreen = new LoadingScreen();
     
-    if (!enable) return;
+    //if (!enable) return;
 //    splashScreen.setLocationRelativeTo(null);
 //    splashScreen.setProgressMax(100);
 //    splashScreen.setScreenVisible(true);
@@ -307,6 +354,25 @@ public class Phenote {
 //    splashScreen.setProgress("Phenote version "+PhenoteVersion.versionString(), 0);
   }
 
+  private void setProgress(int prog) {
+    if (splashScreen != null) splashScreen.setProgress(prog);
+    if (loadingScreen != null) loadingScreen.setProgress(prog);
+  }
+  private void setProgress(String msg, int progress) {
+    setProgress(progress);
+    setProgressMsg(msg);
+//     if (splashScreen != null)  // ????
+//       splashScreen.setProgress(msg,progress);
+//     if (loadingScreen != null) {
+//       loadingScreen.setMessageText(msg); // ??
+//       loadingScreen.setProgress(msg,progress); // ??
+//     }
+  }
+  private void setProgressMsg(String msg) {
+    if (splashScreen != null) splashScreen.setMessage(msg); // ???
+    if (loadingScreen != null) loadingScreen.setMessageText(msg);
+  }
+  
   private void splashScreenDestruct() {
     splashScreen.setScreenVisible(false);
     loadingScreen.setScreenVisible(false);

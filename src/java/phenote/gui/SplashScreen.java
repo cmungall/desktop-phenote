@@ -31,6 +31,11 @@ public class SplashScreen extends JWindow {
   private boolean enable = true;
 
   
+  public SplashScreen(ImageIcon imageIcon) {
+    this(imageIcon,true);
+  }
+  
+  // probably should take enable out
   public SplashScreen(ImageIcon imageIcon, boolean enable) {
     this.enable = enable;
     if (!enable) return;
@@ -100,8 +105,7 @@ public class SplashScreen extends JWindow {
     });
   }
 
-  private void setMessage(String message)
-  {
+  public void setMessage(String message) { // was private ???
     if (message==null)
     {
       message = "";

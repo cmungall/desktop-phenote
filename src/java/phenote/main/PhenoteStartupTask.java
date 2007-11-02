@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.swing.JMenuItem;
 
+import org.apache.log4j.Logger;
+
 import org.bbop.framework.GUIComponent;
 import org.bbop.framework.GUIComponentFactory;
 import org.bbop.framework.GUIComponentWrapper;
@@ -18,6 +20,8 @@ import phenote.gui.field.FieldPanel;
 
 public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
+  Logger LOG =  Logger.getLogger(PhenoteStartupTask.class);
+
 	@Override
 	protected Collection<GUIComponentFactory<?>> getDefaultComponentFactories() {
 		//Collection<GUIComponentFactory<?>> factories = super.getDefaultComponentFactories();
@@ -26,7 +30,23 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		factories.add(new FieldPanelFactory());
 		return factories;
 	}
+
+  /** this is called at initialization i believe */
+	@Override
+	protected void doOtherInstallations() {
+    LOG.debug("doOtherInstallations called");
+    //new Throwable().printStackTrace();
+    initPhenote();
+  }
 	
+  private void initPhenote() {
+    // cmd line??? dont think john/oboedit can use phenotes open src townsend posix
+    // standard stuff so would be good if could have access to cmd line args
+    // oh duh - do from Phenote2!!!
+
+
+  }
+
 	@Override
 	protected String getAppID() {
 		return "phenote";
