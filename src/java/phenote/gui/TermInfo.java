@@ -240,12 +240,11 @@ public class TermInfo {
       	//add the item to the navi history if selected from list only
       	String id=e.getOboClass().getID();
         addTermToNaviHistory(id);
-      	return false;
+      	return;
       }
       setTextFromOboClass(e.getOboClass());
       // This sets who now listens to use term button clicks (only 1 listener)
       setUseTermListener(e.getUseTermListener());
-      return true;
     } 
   }
 

@@ -1,6 +1,5 @@
 package phenote.gui;
 
-
 import javax.swing.JFrame;
 
 import org.obo.datamodel.OBOSession;
@@ -15,92 +14,99 @@ import ca.uvic.csr.shrimp.gui.QueryView.QueryView;
 
 public class ShrimpDag {
 
-  //private JFrame window;
-  private OBOViewer oboViewer;
-  private static ShrimpDag singleton;
+	// private JFrame window;
+	private OBOViewer oboViewer;
+	private static ShrimpDag singleton;
 
-  public static ShrimpDag inst() {
-    if (singleton == null) singleton = new ShrimpDag();
-    return singleton;
-  }
-  
-  public static void reset() {
-    singleton = null;
-  }
+	public static ShrimpDag inst() {
+		if (singleton == null)
+			singleton = new ShrimpDag();
+		return singleton;
+	}
 
-  private ShrimpDag() {
-    //window = new JFrame("Shrimp ontology viewer");
-    //window.pack();
-    //window.setVisible(true);
-    init();
-  }
+	public static void reset() {
+		singleton = null;
+	}
 
-  //public void display() {}
+	private ShrimpDag() {
+		// window = new JFrame("Shrimp ontology viewer");
+		// window.pack();
+		// window.setVisible(true);
+		init();
+	}
 
-  /**
-   * send obo sessions to shrimp so it can set them up in its datamodel
-   */
-  public void initOntologies() {
-    // do this in a separate thread! no need to hold up phenote with this
-    for (Ontology o : CharFieldManager.inst().getAllOntologies()) {
-      // oboViewer.loadOboSession(o.getOboSession());
-    }
-  }
+	// public void display() {}
 
-  private void init() {
-    //initShrimp();
-    SelectionManager.inst().addTermSelectionListener(new ShrimpSelectionListener());
-    //initOntologies();
-  }
+	/**
+	 * send obo sessions to shrimp so it can set them up in its datamodel
+	 */
+	public void initOntologies() {
+		// do this in a separate thread! no need to hold up phenote with this
+		for (Ontology o : CharFieldManager.inst().getAllOntologies()) {
+			// oboViewer.loadOboSession(o.getOboSession());
+		}
+	}
 
-  public void display() {
+	private void init() {
+		// initShrimp();
+		SelectionManager.inst().addTermSelectionListener(
+				new ShrimpSelectionListener());
+		// initOntologies();
+	}
 
-    //queryView = new QueryView(); false - show query view?
-    boolean showQueryPanel = true;
-    oboViewer = new OBOViewer(showQueryPanel);
-    //new OBOViewer("Shrimp ontology viewer",getOboSession(),showQueryPanel);
-    // This doesnt compile as OBOSession has package jumped, shrimp needs change
-    //oboViewer.loadOBOSession(getOboSession()); // change this!
+	public void display() {
 
-    JFrame frame = new JFrame("Shrimp DAG view");
-    //frame.setDefaultCloseOperation(java.awt.WindowListener.DISPOSE_ON_CLOSE);
-    frame.getContentPane().add(oboViewer.getView());
-    frame.pack();
-    frame.setSize(600, 600);
-    frame.setLocation(400, 200);
-    frame.setVisible(true);
+		// queryView = new QueryView(); false - show query view?
+		boolean showQueryPanel = true;
+		oboViewer = new OBOViewer(showQueryPanel);
+		// new OBOViewer("Shrimp ontology
+		// viewer",getOboSession(),showQueryPanel);
+		// This doesnt compile as OBOSession has package jumped, shrimp needs
+		// change
+		// oboViewer.loadOBOSession(getOboSession()); // change this!
 
-  }
+		JFrame frame = new JFrame("Shrimp DAG view");
+		// frame.setDefaultCloseOperation(java.awt.WindowListener.DISPOSE_ON_CLOSE);
+		frame.getContentPane().add(oboViewer.getView());
+		frame.pack();
+		frame.setSize(600, 600);
+		frame.setLocation(400, 200);
+		frame.setVisible(true);
 
-  private OBOSession getOboSession() {
-    // just hard wire to go for now
-    //Ontology o = OntologyManager.inst().getOntologyForName("ZF");
-    // fly causes an endless loop - oh my
-    Ontology o = CharFieldManager.inst().getOntologyForName("Fly");
-    //Ontology o = OntologyManager.inst().getOntologyForName("Human Anatomy");
-    if (o == null) {
-      System.out.println("no ontol for dag");
-      return null;
-    }
-    return o.getOboSession();
-  }
+	}
 
-  private QueryView getQueryView() {
-    return oboViewer.getQueryView();
-  }
+	private OBOSession getOboSession() {
+		// just hard wire to go for now
+		// Ontology o = OntologyManager.inst().getOntologyForName("ZF");
+		// fly causes an endless loop - oh my
+		Ontology o = CharFieldManager.inst().getOntologyForName("Fly");
+		// Ontology o = OntologyManager.inst().getOntologyForName("Human
+		// Anatomy");
+		if (o == null) {
+			System.out.println("no ontol for dag");
+			return null;
+		}
+		return o.getOboSession();
+	}
 
-  private class ShrimpSelectionListener implements TermSelectionListener {
+	private QueryView getQueryView() {
+		return oboViewer.getQueryView();
+	}
 
-    public void termSelected(TermSelectionEvent e) {
-      if (e.isMouseOverEvent()) return false;
-      String term = e.getOboClass().getName();
-      boolean animate = true;
-      //getQueryView().query(term, animate);
-     // This doesnt compile as OBOSession has package jumped, shrimp needs change
-     //oboViewer.query(getOboSession(), e.getOboClass(), animate);
-      return true;
-    }
+	private class ShrimpSelectionListener implements TermSelectionListener {
 
-  }
+		public void termSelected(TermSelectionEvent e) {
+			if (e.isMouseOverEvent())
+				return;
+			String term = e.getOboClass().getName();
+			boolean animate = true;
+			// getQueryView().query(term, animate);
+			// This doesnt compile as OBOSession has package jumped, shrimp
+			// needs change
+			// oboViewer.query(getOboSession(), e.getOboClass(), animate);
+			return;
+		}
+
+	}
 
 }
