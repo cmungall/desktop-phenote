@@ -863,7 +863,7 @@ System.out.println("returning boxI "+boxI+" colI "+colI+" end");
 
       if (foundAllele <= 0) { throw new DataAdapterEx("Worm query of "+joinkey+" of field "+field+" has no match in postgres"); }	// if there is no match for the allele in postgres
         else { 
-          rs = null; int boxes = 0; int columns = 0;		// the number of boxes ; columns 
+          rs = null; int boxes = 0; 		// the number of boxes 
           try { rs = s.executeQuery("SELECT app_box FROM app_term WHERE joinkey = '"+joinkey+"' ORDER BY app_box DESC"); }
           catch (SQLException se) {
             System.out.println("We got an exception while executing our app_term query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
@@ -874,7 +874,9 @@ System.out.println("returning boxI "+boxI+" colI "+colI+" end");
             se.printStackTrace(); System.exit(1); }
 //System.out.println("there are "+boxes+" boxes for "+joinkey+" joinkey"); 
           for (int boxI=1; boxI<boxes+1; boxI++) {					// for each of those columns
+            
             if (group.equals("default")) { 		// these values only go to the Main tab 
+              int columns = 0;
               try { rs = s.executeQuery("SELECT app_column FROM app_term WHERE app_box = '"+boxI+"' AND joinkey = '"+joinkey+"' ORDER BY app_column DESC"); }
               catch (SQLException se) {
                 System.out.println("We got an exception while executing our app_term query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
