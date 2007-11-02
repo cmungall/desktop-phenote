@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import org.bbop.framework.GUIComponent;
 import org.bbop.framework.GUIComponentFactory;
 import org.bbop.framework.GUIComponentWrapper;
+import org.bbop.framework.GUITask;
 import org.bbop.framework.ViewMenu;
 import org.bbop.util.CollectionUtil;
 import org.oboedit.gui.tasks.DefaultGUIStartupTask;
@@ -96,6 +97,12 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		return menus;
 	}
 
+  @Override
+  protected Collection<GUITask> getDefaultTasks() {
+    return new ArrayList<GUITask>();
+  }
+
+
 
   /** FieldPanelFactory inner class */
   private class FieldPanelFactory implements GUIComponentFactory {
@@ -126,7 +133,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
       TermInfo2 ti = new TermInfo2();
       ti.setMinimumSize(new Dimension(200,200));
       ti.setPreferredSize(new Dimension(200,200));
-      return new GUIComponentWrapper(id, id, ti);
+      return new GUIComponentWrapper(id, id, ti.getComponent());
     }
     public FactoryCategory getCategory() { return FactoryCategory.ANNOTATION;  }
     public String getDefaultID() { return "term-info"; }
