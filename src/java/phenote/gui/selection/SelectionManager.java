@@ -83,7 +83,11 @@ public class SelectionManager {
 	}
 
 	private void fireTermSelect(TermSelectionEvent e) {
-		Iterator<TermSelectionListener> it = termListenerList.iterator();
+		// need to make a copy of the term listener list to avoid
+		// co-modification problems
+		List<TermSelectionListener> temp = new ArrayList<TermSelectionListener>(
+				termListenerList);
+		Iterator<TermSelectionListener> it = temp.iterator();
 		while (it.hasNext())
 			it.next().termSelected(e);
 	}
