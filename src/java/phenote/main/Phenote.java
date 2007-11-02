@@ -147,17 +147,21 @@ public class Phenote {
   private Phenote() {}
 
   private static void init(String[] args) {
+    initBackend(args);
+    phenote.initGui();
+    phenote.splashScreenDestruct(); // initBackend startsup splash
+  }
+
+  static void initBackend(String[] args) {
     initLogger();
     initLookAndFeel();
     phenote = getPhenote();
     phenote.splashScreenInit();
-    phenote.doCommandLine(args); // does config
+    phenote.doCommandLineAndConfig(args); // does config
     phenote.initOntologies();
     phenote.loadFromCommandLine(); // if load/file specified from cmd line
     phenote.setProgress("Phenote Loaded", 100);
     phenote.writeFromCommandLine(); // if cmd line, writes & exits
-    phenote.initGui();
-    phenote.splashScreenDestruct();
     phenote.initDataInputServlet();
   }
 
@@ -373,12 +377,14 @@ public class Phenote {
     if (loadingScreen != null) loadingScreen.setMessageText(msg);
   }
   
-  private void splashScreenDestruct() {
-    splashScreen.setScreenVisible(false);
-    loadingScreen.setScreenVisible(false);
+  void splashScreenDestruct() {
+    if (splashScreen!=null) splashScreen.setScreenVisible(false);
+    if (loadingScreen!=null) loadingScreen.setScreenVisible(false);
   }
   
-  private void doCommandLine(String[] args) {
+  /** refactor? separate into doCmdLine and doConfig - cmd line should just set
+      config file name - doConfig should actually read it */
+  private void doCommandLineAndConfig(String[] args) {
     try { commandLine.setArgs(args); } // sets config if specified
     catch (Exception e) { // no log yet - sys.out
       System.out.println("Command line read failed: "+e); }//e.printStackTrace();

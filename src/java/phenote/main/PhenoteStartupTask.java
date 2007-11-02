@@ -20,7 +20,12 @@ import phenote.gui.field.FieldPanel;
 
 public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
-  Logger LOG =  Logger.getLogger(PhenoteStartupTask.class);
+  private Logger LOG =  Logger.getLogger(PhenoteStartupTask.class);
+  private String[] args;
+
+  PhenoteStartupTask(String[] args) {
+    this.args = args;
+  }
 
 	@Override
 	protected Collection<GUIComponentFactory<?>> getDefaultComponentFactories() {
@@ -40,11 +45,9 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
   }
 	
   private void initPhenote() {
-    // cmd line??? dont think john/oboedit can use phenotes open src townsend posix
-    // standard stuff so would be good if could have access to cmd line args
-    // oh duh - do from Phenote2!!!
-
-
+    Phenote.initBackend(args);
+    // init backend sets off splash screent that must be destroyed
+    Phenote.getPhenote().splashScreenDestruct();
   }
 
 	@Override
@@ -84,9 +87,9 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
   /** PhenoteCompFactory inner class */
   private class FieldPanelFactory implements GUIComponentFactory {
     public GUIComponent createComponent(String id) {
-      //String l = "<html><h1>This is an example component</h1></html>";
+      String l = "<html><h1>This is an example component</h1></html>";
       // 1st is id, 2nd id -> title bar string
-      //return new GUIComponentWrapper(id, id, new JLabel(l));
+      //if (true) return new GUIComponentWrapper(id, id, new javax.swing.JLabel(l));
       // for now just doing default group - need to iterate groups
       FieldPanel groupFieldPanel = new FieldPanel(); //true,false,Config.inst().getDefaultGroup(), this.tableController.getSelectionModel());
       return new GUIComponentWrapper(id, id, groupFieldPanel);
