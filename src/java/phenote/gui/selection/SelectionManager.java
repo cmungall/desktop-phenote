@@ -13,77 +13,86 @@ import phenote.datamodel.CharFieldManager;
 /** Controller for term & character selection */
 public class SelectionManager {
 
-  //private static SelectionManager singleton;
-  private static Map<String,SelectionManager> groupToSelMan =
-    new HashMap<String,SelectionManager>();
+	// private static SelectionManager singleton;
+	private static Map<String, SelectionManager> groupToSelMan = new HashMap<String, SelectionManager>();
 
-  private List<TermSelectionListener> termListenerList;
+	private List<TermSelectionListener> termListenerList;
 
-  /** return main/default instance */
-  public static SelectionManager inst() {
-    return getSelMan(CharFieldManager.DEFAULT_GROUP);
-//     if (singleton == null) singleton = new SelectionManager();
-//     return singleton;
-  }
-  
-  public static void reset() {
-    groupToSelMan.clear();
-  }
+	/** return main/default instance */
+	public static SelectionManager inst() {
+		return getSelMan(CharFieldManager.DEFAULT_GROUP);
+		// if (singleton == null) singleton = new SelectionManager();
+		// return singleton;
+	}
 
-  public static SelectionManager getSelMan(String group) {
-    if (group == null) group = CharFieldManager.DEFAULT_GROUP; // ??
-   if (groupToSelMan.get(group) == null) {
-      SelectionManager s = new SelectionManager();
-      groupToSelMan.put(group,s);
-    }
-    return groupToSelMan.get(group);
-  }
-  
+	public static void reset() {
+		groupToSelMan.clear();
+	}
 
-  public SelectionManager() {
-    termListenerList = new ArrayList<TermSelectionListener>(5);
-  }
+	public static SelectionManager getSelMan(String group) {
+		if (group == null)
+			group = CharFieldManager.DEFAULT_GROUP; // ??
+		if (groupToSelMan.get(group) == null) {
+			SelectionManager s = new SelectionManager();
+			groupToSelMan.put(group, s);
+		}
+		return groupToSelMan.get(group);
+	}
 
-  // TERM SELECTION
+	public SelectionManager() {
+		termListenerList = new ArrayList<TermSelectionListener>(5);
+	}
 
-  public void addTermSelectionListener(TermSelectionListener l) {
-    termListenerList.add(l);
-  }
+	// TERM SELECTION
 
-  // void addCharacterSelectionListener(CharacterSelectionListener l) {}
+	public void addTermSelectionListener(TermSelectionListener l) {
+		termListenerList.add(l);
+	}
 
-  public void selectHistoryTerm(Object source, OBOClass oboClass, UseTermListener l) {
-	  boolean isMouseOver = false;
-	  boolean isHyperlink = true;
-	  TermSelectionEvent e = makeTermEvent(source, oboClass, l, isMouseOver, isHyperlink);
-	  fireTermSelect(e);
-  }
+	public void removeTermSelectionListener(TermSelectionListener l) {
+		termListenerList.remove(l);
+	}
 
-  public void selectMouseOverTerm(Object source, OBOClass oboClass,UseTermListener l) {
-    boolean isMouseOver = true;
-    boolean isHyperlink = false;
-    TermSelectionEvent e = makeTermEvent(source,oboClass,l,isMouseOver,isHyperlink);
-    fireTermSelect(e);
-  }
+	// void addCharacterSelectionListener(CharacterSelectionListener l) {}
 
-  public void selectTerm(Object source,OBOClass oboClass, boolean isHyperlink) {
-    boolean isMouseOver = false;
-//  System.out.println("ishyperlink="+isHyperlink);
-    TermSelectionEvent e = makeTermEvent(source,oboClass,null,isMouseOver, isHyperlink);
-    if (!isHyperlink) fireTermSelect(e);
-  }
+	public void selectHistoryTerm(Object source, OBOClass oboClass,
+			UseTermListener l) {
+		boolean isMouseOver = false;
+		boolean isHyperlink = true;
+		TermSelectionEvent e = makeTermEvent(source, oboClass, l, isMouseOver,
+				isHyperlink);
+		fireTermSelect(e);
+	}
 
-  private void fireTermSelect(TermSelectionEvent e) {
-    Iterator<TermSelectionListener> it = termListenerList.iterator();
-    while(it.hasNext())
-      it.next().termSelected(e);
-  }
-  
-  
-  // void selectTerm(String termName) {} ???
+	public void selectMouseOverTerm(Object source, OBOClass oboClass,
+			UseTermListener l) {
+		boolean isMouseOver = true;
+		boolean isHyperlink = false;
+		TermSelectionEvent e = makeTermEvent(source, oboClass, l, isMouseOver,
+				isHyperlink);
+		fireTermSelect(e);
+	}
 
-  private TermSelectionEvent makeTermEvent(Object src, OBOClass oc,UseTermListener l,boolean mouse, boolean link) {
-    return new TermSelectionEvent(src,oc,l,mouse,link);
-  }
+	public void selectTerm(Object source, OBOClass oboClass, boolean isHyperlink) {
+		boolean isMouseOver = false;
+		// System.out.println("ishyperlink="+isHyperlink);
+		TermSelectionEvent e = makeTermEvent(source, oboClass, null,
+				isMouseOver, isHyperlink);
+		if (!isHyperlink)
+			fireTermSelect(e);
+	}
+
+	private void fireTermSelect(TermSelectionEvent e) {
+		Iterator<TermSelectionListener> it = termListenerList.iterator();
+		while (it.hasNext())
+			it.next().termSelected(e);
+	}
+
+	// void selectTerm(String termName) {} ???
+
+	private TermSelectionEvent makeTermEvent(Object src, OBOClass oc,
+			UseTermListener l, boolean mouse, boolean link) {
+		return new TermSelectionEvent(src, oc, l, mouse, link);
+	}
 
 }
