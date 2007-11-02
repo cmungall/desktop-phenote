@@ -183,9 +183,10 @@ public class Phenote {
     if (a != null) System.out.println("log file: "+a.getFile());
     else System.out.println("No MAIN File Appender for log4j");
 
-    if (a.getFile() != null) {
+    if (a != null && a.getFile() != null) {
       File f = new File(a.getFile()); //"phenote_log4j.log");
-      System.out.println("path of file "+f.getPath()+" absolute "+f.getAbsolutePath()+" canWrite "+f.canWrite());
+      System.out.println("path of file "+f.getPath()+" absolute "+f.getAbsolutePath()
+                         +" canWrite "+f.canWrite());
     }
     else {
       System.out.println("file for MAIN log appender is null");
