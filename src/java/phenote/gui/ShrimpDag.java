@@ -91,7 +91,7 @@ public class ShrimpDag {
 
   private class ShrimpSelectionListener implements TermSelectionListener {
 
-    public boolean termSelected(TermSelectionEvent e) {
+    public void termSelected(TermSelectionEvent e) {
       if (e.isMouseOverEvent()) return false;
       String term = e.getOboClass().getName();
       boolean animate = true;

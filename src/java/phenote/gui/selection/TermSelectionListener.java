@@ -1,5 +1,5 @@
 package phenote.gui.selection;
 
 public interface TermSelectionListener {
-  public boolean termSelected(TermSelectionEvent e);
+  public void termSelected(TermSelectionEvent e);
 }

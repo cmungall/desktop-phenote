@@ -399,7 +399,7 @@ public class TermInfo2 extends JPanel {
 
 	/** Listen for selection from phenote (mouse over completion list) */
   private class InfoTermSelectionListener implements TermSelectionListener {
-    public boolean termSelected(TermSelectionEvent e) {
+    public void termSelected(TermSelectionEvent e) {
     	
       if (!e.isMouseOverEvent() ) {
       	//add the item to the navi history if selected from list only
