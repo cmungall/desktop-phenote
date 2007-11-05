@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import org.bbop.framework.GUIManager;
 import org.bbop.swing.AbstractDynamicMenuItem;
+import org.bbop.swing.DynamicActionMenuItem;
 import org.bbop.swing.DynamicMenu;
 
 import phenote.config.Config;
@@ -49,13 +50,13 @@ public class FileMenu extends DynamicMenu {
     newData.addActionListener(actionListener);
     add(newData);
     
-    loadMenuItem = new JMenuItem(new OpenFileAction());
+    loadMenuItem = new DynamicActionMenuItem(new OpenFileAction());
 //****************************************************JOHN LOOK AT THIS
     //if i set the menu item to true, it works just fine.
     //    loadMenuItem.setEnabled(true);
     add(loadMenuItem);
 
-    JMenuItem save = new JMenuItem(new SaveAsFileAction());
+    JMenuItem save = new DynamicActionMenuItem(new SaveAsFileAction());
     //    JMenuItem save = new JMenuItem("Save As...");
 //    save.setEnabled(Config.inst().hasDataAdapters());
 //    save.setActionCommand("save");
@@ -75,7 +76,13 @@ public class FileMenu extends DynamicMenu {
     
     addSeparator();
     
-    JMenuItem exit = new JMenuItem("Exit");
+    JMenuItem exit = new JMenuItem("Exit") {
+    	@Override
+    	public void setEnabled(boolean b) {
+    		// TODO Auto-generated method stub
+    		super.setEnabled(b);
+    	}
+    };
     exit.setEnabled(true);
     exit.setActionCommand("exit");
     exit.addActionListener(new ExitActionListener());

@@ -24,8 +24,13 @@ public class SaveAsFileAction extends AbstractAction {
 		putValue(SHORT_DESCRIPTION, "Save File Dialog"); //tooltip text
 		putValue(NAME, "Save As...");
 		putValue(MNEMONIC_KEY, new Integer(KeyEvent.VK_S));
-    setEnabled(Config.inst().hasDataAdapters());
 	}
+	
+	@Override
+	public boolean isEnabled() {
+		return Config.inst().hasDataAdapters();
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		//if its a button, then do one thing
 		//if its a menu item, do something else
