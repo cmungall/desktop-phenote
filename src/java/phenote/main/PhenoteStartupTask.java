@@ -27,6 +27,7 @@ import phenote.gui.CharacterTableController;
 import phenote.gui.TermInfo2;
 import phenote.gui.field.FieldPanel;
 import phenote.gui.selection.SelectionBridge;
+import phenote.gui.menu.FileMenu;
 
 public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
@@ -96,7 +97,11 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 	protected Collection<? extends JMenuItem> getDefaultMenus() {
 		Collection<JMenuItem> menus = new ArrayList<JMenuItem>();
 		// add any other Phenote menus
+		menus.add(new FileMenu());
+//		menus.add(new EditMenu());
 		menus.add(new ViewMenu());
+//		menus.add(new HelpMenu());
+//		menus.add(new SettingsMenu());
 		return menus;
 	}
 
