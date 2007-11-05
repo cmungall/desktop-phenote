@@ -24,6 +24,9 @@ public class OpenFileAction extends AbstractAction {
 		putValue(NAME, "Open");
 		putValue(MNEMONIC_KEY, new Integer(KeyEvent.VK_O));
     setEnabled(Config.inst().hasDataAdapters());
+//*****************JOHN--- if i set the breakpoint here, it never broke
+//    boolean hasAdapters = Config.inst().hasDataAdapters();
+//    setEnabled(hasAdapters);
 	}
 	public void actionPerformed(ActionEvent e) {
 		//if its a button, then do one thing
