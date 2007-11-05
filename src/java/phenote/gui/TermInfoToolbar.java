@@ -38,8 +38,8 @@ import phenote.gui.selection.UseTermListener;
 public class TermInfoToolbar extends JToolBar {
 
   private Config config = Config.inst();
-  public static int BUTTON_HEIGHT = 30;
-  private static int TERM_INFO_DEFAULT_WIDTH=350;
+  public static final int BUTTON_HEIGHT = 30;
+  private static final int TERM_INFO_DEFAULT_WIDTH=350;
   private UseTermListener useTermListener;
   private SelectionManager selectionManager;
   private OBOClass currentOboClass = null;

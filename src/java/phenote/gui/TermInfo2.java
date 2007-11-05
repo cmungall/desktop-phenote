@@ -51,9 +51,7 @@ import edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException;
 import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
 
 /**
- * @author Nicole Washington
- * 
- * This is the second implementation of the Term Info window to provide
+  * This is the second implementation of the Term Info window to provide
  * read-only information about ontology terms for the user.
  * <p>
  * This constructs the toolbar as well as the information panels.
@@ -73,13 +71,15 @@ import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
  * perhaps regain it again through a right-click menu or something. could be
  * something for the 'configure this panel' when we move to john's gui stuff</li>
  * </ul>
+* @author Nicole Washington
+ * 
  */
 public class TermInfo2 extends JPanel {
 
 	// constants
-	private static int TERM_INFO_DEFAULT_WIDTH = 350;
-	private static int TERM_INFO_DEFAULT_HEIGHT = 400;
-	private static int BUTTON_HEIGHT = 30;
+	private static final int TERM_INFO_DEFAULT_WIDTH = 350;
+	private static final int TERM_INFO_DEFAULT_HEIGHT = 400;
+	private static final int BUTTON_HEIGHT = 30;
 	private static Border contentBorder = BorderFactory.createEmptyBorder(6, 8,
 			6, 8);
 
@@ -203,6 +203,7 @@ public class TermInfo2 extends JPanel {
 		definitionTextArea = new JTextArea();
 		definitionTextArea.setLineWrap(true);
 		definitionTextArea.setWrapStyleWord(true);
+		definitionTextArea.setEditable(false);
 		definitionLabel.setLabelFor(definitionTextArea);
 
 		basicInfoPanel.add(definitionTextArea);

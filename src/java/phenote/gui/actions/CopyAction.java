@@ -14,14 +14,7 @@ import javax.swing.text.JTextComponent;
 
 
 
-
-//This is the action for undoing the last action
-//to be used by menus & button items.
-//public class CopyAction extends AbstractAction {
-
 public class CopyAction extends AbstractAction  {
-	//need a property change listener to see if the file has been modified since 
-	//last saved.  be smart!
 	
 	JComponent textComponent;
 	
@@ -29,7 +22,7 @@ public class CopyAction extends AbstractAction  {
 		super("Copy", new ImageIcon("images/Copy24.gif"));
 		init();
 		textComponent = source;
-		System.out.println("class="+textComponent.getClass());
+//		System.out.println("class="+textComponent.getClass());
 	}
 	
 	

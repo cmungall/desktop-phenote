@@ -19,7 +19,7 @@ public class OpenFileAction extends AbstractAction {
 	public OpenFileAction() {
 		super("Open", new ImageIcon("images/Open24.gif"));
 		putValue(SHORT_DESCRIPTION, "Open a file..."); // tooltip text
-		putValue(NAME, "Open");
+		putValue(NAME, "Open...");
 		putValue(MNEMONIC_KEY, new Integer(KeyEvent.VK_O));
 		// *****************JOHN--- if i set the breakpoint here, it never broke
 		// boolean hasAdapters = Config.inst().hasDataAdapters();

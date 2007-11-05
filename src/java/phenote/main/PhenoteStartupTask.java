@@ -31,6 +31,8 @@ import phenote.gui.TermInfo2;
 import phenote.gui.field.FieldPanel;
 import phenote.gui.selection.SelectionBridge;
 import phenote.gui.menu.FileMenu;
+import phenote.gui.menu.EditMenu;
+
 
 public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
@@ -101,10 +103,10 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		Collection<JMenuItem> menus = new ArrayList<JMenuItem>();
 		// add any other Phenote menus
 		menus.add(new FileMenu());
-//		menus.add(new EditMenu());
+		menus.add(new EditMenu());
 		menus.add(new ViewMenu());
+//	menus.add(new SettingsMenu());
 //		menus.add(new HelpMenu());
-//		menus.add(new SettingsMenu());
 		return menus;
 	}
 
