@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/java"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="jars/BrowserLauncher2-10rc4.jar"/>
+	<classpathentry kind="lib" path="jars/commons-beanutils-1.6.jar"/>
+	<classpathentry kind="lib" path="jars/commons-lang-2.1.jar"/>
+	<classpathentry kind="lib" path="jars/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="jars/glazedlists-1.7.0_java15.jar"/>
+	<classpathentry kind="lib" path="jars/jdom.jar"/>
+	<classpathentry kind="lib" path="jars/jebl-0.4.jar"/>
+	<classpathentry kind="lib" path="jars/jetty-6.1.4.jar"/>
+	<classpathentry kind="lib" path="jars/jetty-util-6.1.4.jar"/>
+	<classpathentry kind="lib" path="jars/jh.jar"/>
+	<classpathentry kind="lib" path="jars/jhindexer.jar"/>
+	<classpathentry kind="lib" path="jars/jlfgr-1_0.jar"/>
+	<classpathentry kind="lib" path="jars/jnlp.jar"/>
+	<classpathentry kind="lib" path="jars/jsp-api.jar"/>
+	<classpathentry kind="lib" path="jars/jsr173_1.0_api.jar"/>
+	<classpathentry kind="lib" path="jars/jstl-1.1.jar"/>
+	<classpathentry kind="lib" path="jars/junit-4.0.jar"/>
+	<classpathentry kind="lib" path="jars/jwf-1.0.1.jar"/>
+	<classpathentry kind="lib" path="jars/layouts.jar"/>
+	<classpathentry kind="lib" path="jars/log4j-1.2.13.jar"/>
+	<classpathentry kind="lib" path="jars/phenoteconfigbeans.jar"/>
+	<classpathentry kind="lib" path="jars/phenoxmlbeans.jar"/>
+	<classpathentry kind="lib" path="jars/postgresql-8.2-504.jdbc3.jar"/>
+	<classpathentry kind="lib" path="jars/quaqua.jar"/>
+	<classpathentry kind="lib" path="jars/quartz-1.5.2.jar"/>
+	<classpathentry kind="lib" path="jars/shrimp.jar"/>
+	<classpathentry kind="lib" path="jars/spring.jar"/>
+	<classpathentry kind="lib" path="jars/standard-1.1.jar"/>
+	<classpathentry kind="lib" path="jars/struts-1.2.9.jar"/>
+	<classpathentry kind="lib" path="jars/sugilayout.jar"/>
+	<classpathentry kind="lib" path="jars/swing-layout.jar"/>
+	<classpathentry kind="lib" path="jars/swingx-2007_10_14.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://swinglabs.org/hudson/job/SwingX%20Continuous%20Build/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="jars/swixml.jar"/>
+	<classpathentry kind="lib" path="jars/te-common.jar"/>
+	<classpathentry kind="lib" path="jars/tomcat-servlet.jar"/>
+	<classpathentry kind="lib" path="jars/treemap.jar"/>
+	<classpathentry kind="lib" path="jars/xbean.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/BBOP"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/OBO"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/OBO-Edit"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
