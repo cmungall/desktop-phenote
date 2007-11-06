@@ -2535,7 +2535,7 @@ is_a: FBcv:0000332 ! sex qualifier
 [Term]
 id: FBcv:0000335
 name: germ-line clone
-namespace: genotype_to_phenotype_relation
+namespace: clone_qualifier
 comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
 subset: camcur
 is_a: FBcv:0000812 ! clone qualifier
@@ -2543,7 +2543,7 @@ is_a: FBcv:0000812 ! clone qualifier
 [Term]
 id: FBcv:0000336
 name: somatic clone
-namespace: genotype_to_phenotype_relation
+namespace: clone_qualifier
 comment: Proforma field: GA56-q. Proforma field: GA28a-q. Proforma field: GA29a-q. Proforma field: GA17-q. Proforma field: GA28b-q. Proforma field: GA29b-q. Proforma field: GAT6-q. Proforma field: GAP5-q.
 subset: camcur
 is_a: FBcv:0000812 ! clone qualifier
@@ -5110,7 +5110,7 @@ is_a: FBcv:0000809 ! phenotype qualifier
 [Term]
 id: FBcv:0000812
 name: clone qualifier
-namespace: genotype_to_phenotype_relation
+namespace: clone_qualifier
 is_a: FBcv:0000809 ! phenotype qualifier
 
 [Term]
