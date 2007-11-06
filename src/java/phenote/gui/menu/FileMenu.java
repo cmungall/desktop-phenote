@@ -78,6 +78,6 @@ public class FileMenu extends DynamicMenu {
   
   // for testing
   public void clickLoad() {
-    loadMenuItem.doClick();
+    //loadMenuItem.doClick();
   }
 }
