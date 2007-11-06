@@ -20,7 +20,8 @@ start =
     field*,
     group*,
     data-input-servlet,
-    character-mode
+    character-mode,
+    field-panel-tabs
   }
 
 ## specify how the master config interacts with local/cached config
@@ -60,6 +61,8 @@ uvic-graph = element uvic-graph { attribute enable { xsd:boolean } }
 data-input-servlet = element data-input-servlet { attribute enable { xsd:boolean } }
 
 term-history = element term-history { attribute enable { xsd:boolean } }
+
+field-panel-tabs = element field-panel-tabs { attribute enable { xsd:boolean } }
 
 auto-update-ontologies = element auto-update-ontologies { attribute enable { xsd:boolean } }
 

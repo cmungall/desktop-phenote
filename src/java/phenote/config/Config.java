@@ -21,9 +21,10 @@ import phenote.config.xml.PhenoteConfigurationDocument;
 import phenote.config.xml.AutoUpdateOntologiesDocument.AutoUpdateOntologies;
 import phenote.config.xml.AutocompleteSettingsDocument.AutocompleteSettings;
 import phenote.config.xml.CharacterModeDocument.CharacterMode;
-import phenote.config.xml.DataadapterDocument.Dataadapter;
 import phenote.config.xml.DataInputServletDocument.DataInputServlet;
+import phenote.config.xml.DataadapterDocument.Dataadapter;
 import phenote.config.xml.FieldDocument.Field;
+import phenote.config.xml.FieldPanelTabsDocument.FieldPanelTabs;
 import phenote.config.xml.GroupDocument.Group;
 import phenote.config.xml.LogDocument.Log;
 import phenote.config.xml.MasterToLocalConfigDocument.MasterToLocalConfig;
@@ -675,6 +676,15 @@ public class Config {
       u.setTimer(0); // default is not to wait???
     }
     return u;
+  }
+  
+  public boolean shouldUseFieldPanelTabs() {
+    FieldPanelTabs bean = phenoConfigBean.getFieldPanelTabs();
+    if (bean != null) {
+      return bean.getEnable();
+    } else {
+      return true;
+    }
   }
 
   /** returns enum from character mode xml bean itself - why not right? */

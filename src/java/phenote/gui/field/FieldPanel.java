@@ -159,10 +159,14 @@ public class FieldPanel extends JPanel {
   }
 
   private boolean isTabbed() {
-    if (this.group != null) {
-      return this.ontologyManager.getCharFieldListForGroup(this.group).size() > FieldPanel.fieldsPerTab;
+    if (Config.inst().shouldUseFieldPanelTabs()) {
+      if (this.group != null) {
+        return this.ontologyManager.getCharFieldListForGroup(this.group).size() > FieldPanel.fieldsPerTab;
+      } else {
+        return ontologyManager.getNumberOfFields() > fieldsPerTab;
+      }
     } else {
-      return ontologyManager.getNumberOfFields() > fieldsPerTab;
+      return false;
     }
   }
 

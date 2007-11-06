@@ -16,6 +16,7 @@
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:group"/>
         <xs:element ref="x:data-input-servlet"/>
         <xs:element ref="x:character-mode"/>
+        <xs:element ref="x:field-panel-tabs"/>
       </xs:sequence>
       <xs:attribute name="version" use="required" type="xs:string"/>
       <xs:attribute name="description" use="required" type="xs:string"/>
@@ -53,6 +54,11 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="term-history">
+    <xs:complexType>
+      <xs:attribute name="enable" use="required" type="xs:boolean"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="field-panel-tabs">
     <xs:complexType>
       <xs:attribute name="enable" use="required" type="xs:boolean"/>
     </xs:complexType>
