@@ -28,6 +28,8 @@ href="phenote.jnlp">
 	<j2se version="1.5+" initial-heap-size="64m" max-heap-size="600m" />
 	<jar href="jars/phenote.jar" />
 	<jar href="jars/oboedit.jar" />
+	<jar href="jars/obo.jar" />
+	<jar href="jars/bbop.jar" />
 	<!-- jar href="jars/org.geneontology.jar" / -->
 	<jar href="jars/BrowserLauncher2-10rc4.jar" />
 	<jar href="jars/jsr173_1.0_api.jar" />
