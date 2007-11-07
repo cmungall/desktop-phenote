@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.obo.datamodel.AnnotatedObject;
+import org.obo.datamodel.Instance;
 import org.obo.datamodel.Namespace;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
@@ -37,6 +39,10 @@ public class Ontology {
   private Collection<OBOClass> sortedTerms; // was List
   private Collection<OBOClass> sortedObsoleteTerms;
   private List<OBOProperty> sortedRelations;
+  private boolean hasInstances;
+  // is it possible to merge sorted instances & sorted terms
+  // as they are both LinkedObjects (and annotated obj)
+  private Collection<Instance> sortedInstances;
   private String slim; 
   private boolean sortById = false;
   private String filterOutString; // phase out
@@ -52,6 +58,10 @@ public class Ontology {
   
   public Ontology(String name) {
     this.name = name;
+  }
+
+  public void setHasInstances(boolean hasInst) {
+    this.hasInstances = hasInst;
   }
 
   /** is it funny to pass in a config object to datamodel - given that config dictates
@@ -119,6 +129,8 @@ public class Ontology {
     //log().debug("name "+name+" terms "+oboSession.getTerms()+" propVals "+oboSession.getPropertyValues()+" rels "+oboSession.getRelationshipTypes());
     sortedTerms = getSortedTerms(TermUtil.getTerms(oboSession));//(oboSession.getTerms());
     sortedObsoleteTerms = getSortedTerms(TermUtil.getObsoletes(oboSession));
+    if (hasInstances)
+      sortedInstances = getSortedInstances(TermUtil.getInstances(oboSession));
   }
 
   private void filterLists() {
@@ -205,6 +217,15 @@ public class Ontology {
     sortedTerms.addAll(terms);
     Collections.sort(sortedTerms);
     return sortedTerms;
+  }
+
+  // can this be merged in with getSortedTerms - return List<AnnotatedObj>?
+  public List<Instance> getSortedInstances(Collection instances) {
+    List<Instance> sortedInstances = new ArrayList<Instance>();
+    sortedInstances.addAll(instances);
+    // Instance doesnt work - Instance is not a Comparable!!!
+    //Collections.sort(sortedInstances);
+    return sortedInstances;
   }
 
   /** might move this elsewhere - subclass? data adap specific wrapper? */

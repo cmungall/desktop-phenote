@@ -11,8 +11,10 @@ import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
 
 import org.apache.log4j.Logger;
+import org.obo.datamodel.Instance;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOSession;
+import org.obo.datamodel.impl.InstanceImpl;
 import org.obo.datamodel.impl.OBOClassImpl;
 import org.obo.datamodel.impl.OBOSessionImpl;
 
@@ -90,6 +92,13 @@ public class ProformaAlleleParser extends OntologyMaker { //extends AbstractGrou
 
 //  protected String makeNameFromChar(phenote.datamodel.CharacterI c) {return null;}
 
+  /** flag to switch between making instances or making classes - should 
+      ultimately make instances - but phenote doesnt yet handle instances
+      just classes */
+  private boolean isInstances() {
+    return false; // true; flip flop flip flop
+  }
+
   /** parse proforma file for alleles and such - make OBOClasses, add to OBOSession,
    set obosession for desitnation fields */
   private void parseProforma(File file) throws FileNotFoundException, IOException {
@@ -105,7 +114,7 @@ public class ProformaAlleleParser extends OntologyMaker { //extends AbstractGrou
       matchAndAddToSession(line,abPat,ses);
     }
     //getDestinationOntology().setOboSession(ses);
-    setOboSession(ses);
+    setOboSession(ses,isInstances());
   }
 
   /** check if pattern matches - and if so get groups, split with " # "
@@ -120,16 +129,36 @@ public class ProformaAlleleParser extends OntologyMaker { //extends AbstractGrou
       Pattern delim = Pattern.compile(" # ");
       String[] alleleArray = delim.split(alleles);
       for (String allele : alleleArray) {
-        // make obo class from allele
-        OBOClass c = makeAlleleTerm(allele);
-        // add to obo session
-        os.addObject(c);
+        // INSTANCE 
+        if (isInstances()) {
+          Instance i = makeAlleleInstance(allele);
+          os.addObject(i);
+        }
+        // CLASS  make obo class from allele
+        else { 
+          OBOClass c = makeAlleleTerm(allele);
+          // add to obo session
+          os.addObject(c);
+        }
+        
       }
     }
   }
 
   private OBOClass makeAlleleTerm(String allele) {
     return new OBOClassImpl(allele,"FBAlelle:"+allele);
+  }
+
+  /** really they should be instances */
+  private Instance makeAlleleInstance(String allele) {
+    Instance i = new InstanceImpl("FBAllele:"+allele,getAlleleClass());
+    i.setName(allele);
+    return i;
+  }
+
+  // this should really come from SO - for now just mimicing this
+  private OBOClass getAlleleClass() {
+    return new OBOClassImpl("allele","SO:0000704");
   }
 
   //private class ParseEx extends E

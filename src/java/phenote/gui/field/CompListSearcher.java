@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.bbop.swing.BackgroundUtil;
 import org.bbop.util.AbstractTaskDelegate;
 import org.bbop.util.TaskDelegate;
+import org.obo.datamodel.AnnotatedObject;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
 
@@ -142,12 +143,19 @@ public class CompListSearcher {
       else {
         // gets term set for currently selected ontology(s)
         //Set ontologyTermList = getCurrentOntologyTermSet();
-        // THIS IS WRONG! or is it?
         for (Ontology ontology : ontologyList) {
-          Collection<OBOClass> ontologyTermList = ontology.getSortedTerms(); // non obsolete
+          // NON OBSOLETE TERMS
+          Collection<OBOClass> ontologyTermList =
+            ontology.getSortedTerms();
           List<CompletionTerm> l =
             getOntSearchTermList(input,ontologyTermList,task);
           searchTerms.addAll(l);
+
+          // INSTANCES?
+//           Collection<OBOClass> instanceList =
+//             ontology.getSortedInstances();
+//           l = getOntSearchTermList(input,instanceList,task);
+//           searchTerms.addAll(l);
           
           // if obsoletes set then add them in addition to regulars
           if (searchParams.searchObsoletes()) {
@@ -191,7 +199,7 @@ public class CompListSearcher {
 
   /** helper fn for CompTaskDelegate, does search for terms from a single ontology */
   private List<CompletionTerm> getOntSearchTermList(String input,
-                                                 Collection<OBOClass> ontologyTermList,
+                                                    Collection<OBOClass> ontologyTermList,
                                                  TaskDelegate task) throws CancelEx {
     SearchTermList searchTermList = new SearchTermList();
     if (ontologyTermList == null)

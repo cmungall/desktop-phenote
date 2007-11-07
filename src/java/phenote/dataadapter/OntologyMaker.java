@@ -33,8 +33,15 @@ public abstract class OntologyMaker implements OntologyMakerI {
   public String getButtonText() { return null; } // ""?
 
   protected void setOboSession(OBOSession os) {
-    for (Ontology o : getDestinationOntologies())
+    setOboSession(os,false); // not instances -> terms
+  }
+
+  protected void setOboSession(OBOSession os,boolean isInstances) {
+    for (Ontology o : getDestinationOntologies()) {
+      // setIsInstances? setHasInstances? hove both?
+      o.setHasInstances(isInstances);
       o.setOboSession(os);
+    }
   }
   
   /** If CharField doesnt have Ontology yet, create one, assumes thers only one ontol
