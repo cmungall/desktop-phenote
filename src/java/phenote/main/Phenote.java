@@ -271,8 +271,8 @@ public class Phenote {
   public void initGui() {
     SwingUtilities.invokeLater(new Runnable() {
       public void run() {
-        makeMainWindow();
-        createGroupWindows();
+        makeMainWindow(); // with tabbed groups
+        createGroupWindows(); // template window
       }
     });
   }
@@ -481,9 +481,11 @@ public class Phenote {
   private JPanel makeGroupPanel(Group group) {
     JPanel mainPanel = new JPanel(new GridLayout());
     
+    // INFO HISTORY
     JPanel infoHistoryPanel = new JPanel(new GridBagLayout());
     infoHistoryPanel.setBorder(new EmptyBorder(10,10,10,10));
     
+    // EDITOR
     this.tableController = new CharacterTableController(group.getName());
     
     // need to do different selection & edit mgrs
@@ -494,11 +496,14 @@ public class Phenote {
       mainFieldPanel = groupFieldPanel;
     // groupFieldPanel gets added to innerSplitPane below...
 
+    // TERM INFO
+      GridBagConstraints ugbc = GridBagUtil.makeFillingConstraint(0,0);
+    if (showTermInfo(group)) {
 //    termInfo = new TermInfo();
-    termInfo = new TermInfo2();
-    GridBagConstraints ugbc = GridBagUtil.makeFillingConstraint(0,0);
-    ugbc.weightx = 5;
-    infoHistoryPanel.add(termInfo.getComponent(),ugbc);
+      termInfo = new TermInfo2();
+      ugbc.weightx = 5;
+      infoHistoryPanel.add(termInfo.getComponent(),ugbc);
+    }
     
     selectionHistory = SelectionHistory.inst();
     ugbc.gridx++;
@@ -509,11 +514,21 @@ public class Phenote {
     innerSplitPane.setDividerLocation(700);
     
     
+    // TABLE
     JPanel ctp =  this.tableController.getCharacterTablePanel();
     JSplitPane outerSplitPane =
       new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, innerSplitPane,ctp);
     mainPanel.add(outerSplitPane);
     return mainPanel;
+  }
+
+  private boolean showTermInfo(Group g) { return showString(g,"TermInfo"); }
+  private boolean showTable(Group g) { return showString(g,"Table"); }
+  private boolean showEditor(Group g) { return showString(g,"Editor"); }
+  private boolean showString(Group g, String gui) {
+    List<String> shows = g.getShow();
+    if (shows == null) return true;
+    return shows.contains(gui); // case insensitive?
   }
   
   /** this doesnt work yet - OntologyManager list of char fields is not getting 
