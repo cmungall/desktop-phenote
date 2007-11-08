@@ -57,6 +57,14 @@ public class Character extends AbstractCharacter implements CharacterI {
     }
   }
 
+  /** delete ith item from list */
+  public void deleteValue(CharField cf, int index) {
+    if (!hasValue(cf)) return;
+    List<CharFieldValue> list = charFieldToValue.get(cf);
+    list.remove(index);
+  }
+
+
   /** generic getter - getting single value or 1st item of list */ 
   public CharFieldValue getValue(CharField cf) {
     List<CharFieldValue> cfvList = charFieldToValue.get(cf);
@@ -70,13 +78,22 @@ public class Character extends AbstractCharacter implements CharacterI {
   }
 
   // make part of CharacterI! return null if not set? empty list?
-  public List<CharFieldValue> getValList(CharField cf) {
+  public List<CharFieldValue> getValueList(CharField cf) {
     return charFieldToValue.get(cf);
   }
 
   /** returns string for charfield value of char field, no matter what type,
       return "" if null value?? throw ex? used for sorting CharList */
   public String getValueString(CharField cf) {
+    if (!hasValue(cf)) return "";
+    if (cf.isList()) {
+      List<CharFieldValue> l = getValueList(cf);
+      if (l == null || l.isEmpty()) return "";
+      String s = l.get(0).getName();
+      for (int i=1; i<l.size(); i++)
+        s+= ", "+l.get(i).getName();
+      return s;
+    }
     CharFieldValue cfv = getValue(cf);
     if (cfv.getName() == null) return ""; // ?? ex?
     return cfv.getName();
@@ -84,8 +101,9 @@ public class Character extends AbstractCharacter implements CharacterI {
 
   public String getValueString(String field) throws CharFieldException {
     CharField cf = getCharFieldForName(field); // throws ex
-    if (!hasValue(cf)) return null; // ?? exception? ""?
-    return getValue(cf).getName();
+    return getValueString(cf);
+    //if (!hasValue(cf)) return null; // ?? exception? ""?
+    //return getValue(cf).getName();
   }
 
   public OBOClass getTerm(String field) throws CharFieldException {

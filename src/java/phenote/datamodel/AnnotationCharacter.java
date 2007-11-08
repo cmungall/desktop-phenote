@@ -1,6 +1,7 @@
 package phenote.datamodel;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -238,6 +239,12 @@ public class AnnotationCharacter extends AbstractCharacter {
       cfv = CharFieldValue.emptyValue(this, cf);
     return cfv;
   }
+
+  public List<CharFieldValue> getValueList(CharField cf) {
+    LOG.error("Lists are not yet implemented in OBO mapping");
+    return null;
+  }
+  
 
 	protected CharFieldValue getCharFieldValue(OBOClass oboClass,
 			CharacterI character, CharField field) {

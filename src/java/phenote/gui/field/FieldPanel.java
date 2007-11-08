@@ -226,9 +226,18 @@ public class FieldPanel extends JPanel {
   
   private void addListGui(CharFieldGui fieldGui, GridBagConstraints constraints) {
     if (!fieldGui.hasListGui()) return;
+    // LIST - to the right of input gui
     constraints.gridx = 3;
     constraints.gridwidth = 2;
+    constraints.gridheight = 2;
     fieldPanel.add(fieldGui.getListGui(),constraints);
+    // DEL BUTTON - put under input gui near list
+    constraints.gridy = ++this.currentGridBagRow; //? put in next row
+    constraints.gridx = 2;
+    constraints.gridwidth = 1;
+    constraints.gridheight = 1;
+    constraints.anchor = GridBagConstraints.EAST;
+    fieldPanel.add(fieldGui.getListDelButton(),constraints);
   }
 
   private void addPostCompButton(CharFieldGui fieldGui, GridBagConstraints constraints) {

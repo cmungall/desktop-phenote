@@ -30,6 +30,7 @@ public interface CharacterI {
   public CharFieldValue setValue(CharField cf, String valueString) throws CharFieldException;
   public CharField getCharFieldForName(String fieldName) throws CharFieldException;
   public CharFieldValue getValue(CharField cf);
+  public List<CharFieldValue> getValueList(CharField cf);
   public String getValueString(CharField cf);
 
   public String getValueString(String fieldName) throws CharFieldException;

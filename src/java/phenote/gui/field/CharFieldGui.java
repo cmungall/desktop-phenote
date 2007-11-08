@@ -6,15 +6,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.AbstractListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -57,6 +61,9 @@ public abstract class CharFieldGui implements ListSelectionListener {
   private boolean hasChangedMultipleValues = true;
   private Color enabledColor;
   private Color disabledColor;
+  private JScrollPane listScroll;
+  private JList listGui;
+  private ValueListModel valueListModel;
 
   /** CharFieldGui for main window not post comp box - factory method */
   public static CharFieldGui makeCharFieldGui(CharField charField,int minCompChars) {
@@ -379,6 +386,7 @@ public abstract class CharFieldGui implements ListSelectionListener {
   private class FieldCharChangeListener implements CharChangeListener {
     public void charChanged(CharChangeEvent e) {
       // check charField is this char field
+      updateListGui();
       if (e.getSource() != CharFieldGui.this && e.isUpdateForCharField(charField)) {
         // i think all we need to do is setText to synch with model
         // for complist dont we also need to set its model (not just text??)
@@ -608,10 +616,72 @@ public abstract class CharFieldGui implements ListSelectionListener {
   /** JList? initialize if configged */
   protected JComponent getListGui() {
     //return null;
-    JList l = new JList();
-    //l.setMinimumSize(new Dimension(400,400));
-    l.setPreferredSize(new Dimension(150,50));
-    return l;
+    if (listScroll == null) {
+      listGui = new JList();
+      valueListModel = new ValueListModel();
+      listGui.setModel(valueListModel);
+      listGui.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+      //l.setMinimumSize(new Dimension(400,400));
+      listScroll = new JScrollPane(listGui);
+      listScroll.setMinimumSize(new Dimension(90,80));
+      listScroll.setPreferredSize(new Dimension(120,80));
+    }
+    return listScroll;
+  }
+
+  JButton getListDelButton() {
+    JButton b = new JButton("DEL");
+    b.addActionListener(new DeleteListActionListener());
+    return b;
+  }
+
+  private class DeleteListActionListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      if (listGui.isSelectionEmpty()) return;
+      int i = listGui.getSelectedIndex();
+      valueListModel.delete(i);
+    }
+  }
+
+  private void updateListGui() {
+    if (!hasListGui()) return;
+    List<CharacterI> l = getSelectedChars();
+    if (l==null || l.size()==0) {
+      valueListModel.clear();
+    }
+    else if (l.size() > 1) {
+      return; // set to multiple values, todo: check if lists are the same
+    }
+    else {
+      CharacterI c = l.get(0);
+      List<CharFieldValue> cfvs = c.getValueList(getCharField());
+      valueListModel.setList(cfvs);
+    }
+  }
+  
+  private class ValueListModel extends AbstractListModel {
+    private List<CharFieldValue> charValueList = new ArrayList<CharFieldValue>();
+    private void setList(List<CharFieldValue> l) { 
+      if (l == null) clear();
+      else charValueList = l;
+      fireContentsChanged(this,0,getSize());
+    }
+    public Object getElementAt(int index) {
+      if (charValueList==null) return null;
+      return charValueList.get(index);
+    }
+    public int getSize() {
+      if (charValueList==null) return 0;
+      return charValueList.size();
+    }
+    private void clear() {
+      if (charValueList==null) return;
+      charValueList.clear();
+      fireContentsChanged(this,0,getSize());
+    }
+    private void delete(int i) {
+      
+    }
   }
   
   
