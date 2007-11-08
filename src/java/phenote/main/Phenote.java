@@ -65,6 +65,7 @@ public class Phenote {
 
   private static Logger LOG = Logger.getLogger(Phenote.class);
   private static boolean standalone = false; // default for servlet
+  private final static int WINDOW_WIDTH = 1220;
 
   private FieldPanel mainFieldPanel;
   private static Phenote phenote;
@@ -430,7 +431,7 @@ public class Phenote {
       frame.getContentPane().add(tabbedGroups);
     }
     MenuManager.createMenuManager(frame);
-    frame.setPreferredSize(new Dimension(1220,800)); //1100,700));
+    frame.setPreferredSize(new Dimension(WINDOW_WIDTH,800)); //1100,700));
     if (standalone) // if stand alone exit java on window close
       frame.addWindowListener(new WindowExit());
     standardToolbar = new StandardToolbar();
@@ -511,14 +512,22 @@ public class Phenote {
     infoHistoryPanel.add(selectionHistory.getComponent(),ugbc); 
     
     JSplitPane innerSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, groupFieldPanel, infoHistoryPanel);
-    innerSplitPane.setDividerLocation(700);
+    // doesnt work???
+    //innerSplitPane.setDividerLocation(showTermInfo(group) ? 0.63 : 1.0);
+    int div = (int)(showTermInfo(group) ? 0.63 * WINDOW_WIDTH : WINDOW_WIDTH);
+    innerSplitPane.setDividerLocation(div);
     
     
     // TABLE
-    JPanel ctp =  this.tableController.getCharacterTablePanel();
-    JSplitPane outerSplitPane =
-      new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, innerSplitPane,ctp);
-    mainPanel.add(outerSplitPane);
+    if (showTable(group))  {
+      JPanel ctp =  this.tableController.getCharacterTablePanel();
+      JSplitPane outerSplitPane =
+        new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, innerSplitPane,ctp);
+      mainPanel.add(outerSplitPane);
+    }
+    else {
+      mainPanel.add(innerSplitPane);
+    }
     return mainPanel;
   }
 

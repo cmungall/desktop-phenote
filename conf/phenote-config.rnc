@@ -161,6 +161,8 @@ ontology =
      attribute destination_field { xsd:string },
      ## what components to show for group, ie TermInfo,Table,Editor
      attribute show { xsd:IDREFS }?,
+     ## number of fields per panel, then make new tab, 0 for all in 1
+     attribute fieldsPerPanel { xsd:int }?,
      templatechooser*
   }
   

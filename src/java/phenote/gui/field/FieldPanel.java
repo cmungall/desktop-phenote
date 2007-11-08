@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
 import phenote.config.Config;
@@ -84,8 +85,9 @@ public class FieldPanel extends JPanel {
     if (doAllFields) {
       initCharFieldGuis();
     }
-    else {
+    else { // used by post comp?
       fieldPanel = new JPanel(new GridBagLayout());
+      //JScrollPane panelScrollPane = new JScrollPane(fieldPanel);
       add(fieldPanel);
     }
     if (addSearchPanel)
@@ -136,7 +138,8 @@ public class FieldPanel extends JPanel {
       add(jTabbedPane);
     }
     else { // no tabs
-      add(fieldPanel);
+      JScrollPane jsp = new JScrollPane(fieldPanel);
+      add(jsp);
     }
 
     int fieldNum = 0;
@@ -144,6 +147,7 @@ public class FieldPanel extends JPanel {
     for (CharField charField : this.getCharFieldList()) {
       if (isTabbed() && fieldNum % fieldsPerTab == 0) {
         fieldPanel = new JPanel(new GridBagLayout());
+        // add scroll pane? or is that wierd with tabs?
         jTabbedPane.addTab("Tab "+tab++,fieldPanel);
       }
       int minCompChars = Config.inst().getMinCompChars(fieldNum);
@@ -168,6 +172,10 @@ public class FieldPanel extends JPanel {
     } else {
       return false;
     }
+  }
+
+  private int fieldsPerPanel() {
+    return fieldsPerTab;
   }
 
   private int currentGridBagRow = 0;

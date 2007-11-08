@@ -208,6 +208,7 @@
           <xs:documentation>what components to show for group, ie TermInfo,Table,Editor</xs:documentation>
         </xs:annotation>
       </xs:attribute>
+      <xs:attribute name="fieldsPerPanel" type="xs:int"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="templatechooser">
