@@ -29,7 +29,19 @@ public class UpdateTransaction implements TransactionI { // extends Transaction?
 
   public UpdateTransaction(CharacterI c, CharField cf, String newVal) {
     newValue = new CharFieldValue(newVal,c,cf);
-    oldValue = c.getValue(cf);
+    //oldValue = c.getValue(cf);
+    setOldValue(c,cf);
+  }
+
+  public UpdateTransaction(CharFieldValue oldVal, CharFieldValue newVal) {
+    oldValue = oldVal;
+    newValue = newVal;
+  }
+
+  protected void setOldValue(CharacterI c, CharField cf) {
+    // if list then there is no old value (as its really an add - cheesy?)
+    if (cf.isList()) oldValue = CharFieldValue.emptyValue(c,cf);
+    else oldValue = c.getValue(cf);
   }
 
   public List<CharacterI> getDeletedAnnotations() {

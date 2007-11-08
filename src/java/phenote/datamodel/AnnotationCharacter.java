@@ -132,6 +132,10 @@ public class AnnotationCharacter extends AbstractCharacter {
       }
     }
   }
+
+  public void deleteValue(CharField cf, CharFieldValue cfv) {
+    LOG.error("AnnotationCharacter.deleteValue() not yet implemented");
+  }
   
   private void setObjectDiff(CharField cf, CharFieldValue cfv) {
     if (cfv == null || cfv.isEmpty()) {

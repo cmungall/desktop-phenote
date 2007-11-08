@@ -8,6 +8,8 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import phenote.dataadapter.CharacterListManager;
+import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterIFactory;
@@ -109,13 +111,21 @@ public class EditManager {
 //     fireChangeEvent(e);
 //   }
 
-  public void updateModel(Object src, CompoundTransaction ct) {
+  public void updateModel(Object src, TransactionI ct) { // CompTrans
     //for (TransactionI t : ct.getTransactions())
     //updateModelUpdateTrans(source,t);
     ct.editModel();
     addTransaction(ct);
     fireChangeEvent(new CharChangeEvent(src,ct));
     // or should we send out a char change event with a char list?? probably
+  }
+
+  public void deleteFromValList(Object src, CharacterI c, CharField cf,
+                                CharFieldValue v) {
+    CharFieldValue newVal = CharFieldValue.emptyValue(c,cf);
+    UpdateTransaction t = new UpdateTransaction(v,newVal);
+    addTransaction(t);
+    fireChangeEvent(t,src);
   }
 
   /** The initial blank character is a fundamental undoable state, so dont
@@ -176,6 +186,10 @@ public class EditManager {
   private void addTransaction(TransactionI t) {
     transactionList.add(t);
     //System.out.println("got trans "+t); new Throwable().printStackTrace();
+  }
+
+  private void fireChangeEvent(TransactionI t, Object src) {
+    fireChangeEvent(new CharChangeEvent(src,t));
   }
 
   private void fireChangeEvent(CharChangeEvent e) {

@@ -31,6 +31,8 @@ public interface CharacterI {
   public CharField getCharFieldForName(String fieldName) throws CharFieldException;
   public CharFieldValue getValue(CharField cf);
   public List<CharFieldValue> getValueList(CharField cf);
+  /** used in particular for lists of values */
+  public void deleteValue(CharField cf, CharFieldValue cfv);
   public String getValueString(CharField cf);
 
   public String getValueString(String fieldName) throws CharFieldException;

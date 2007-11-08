@@ -17,17 +17,29 @@ class DeleteTransaction implements TransactionI {
   private int listOrder;
   private CharacterListManager characterListManager;
   private boolean isUndone = false;
+  private boolean isWholeAnnotationDelete = true;
 
+  /** this is for whole row deletes? not del from list field? */
   public List<CharacterI> getDeletedAnnotations() {
     List<CharacterI> l = new ArrayList<CharacterI>();
-    l.add(delChar);
+    if (isWholeAnnotationDelete)
+      l.add(delChar);
     return l;
   }
 
   DeleteTransaction(CharacterI c, CharacterListManager clManager) {
+    isWholeAnnotationDelete = true;
     this.delChar = c;
     this.characterListManager = clManager;
-    }
+  }
+
+//   /** should deleting an item from a char field value list be a DeleteTrans
+//       or an UpdateTrans? i think delete but not sure - os should delete
+//       only be for deleting whole annots? move to separate FieldListItemDeleteTrans class?  */
+//   public DeleteTransaction(CharacterI c, CharacterListManager cm, CharField cf,
+//                            int index) {
+//     isWholeAnnotationDelete = false;
+//   }
 
   public void editModel() {
     listOrder = getCharList().indexOf(delChar);

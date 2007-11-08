@@ -87,7 +87,7 @@ public class CharFieldValue implements Cloneable {
 //     this.isDifferentia = isDifferentia;
 //   }
 
-  static CharFieldValue emptyValue(CharacterI c,CharField cf) {
+  public static CharFieldValue emptyValue(CharacterI c,CharField cf) {
     // everything is null, type from char field
     return new CharFieldValue(c,cf);
 //     if (cf.isTerm())
@@ -144,7 +144,10 @@ public class CharFieldValue implements Cloneable {
   public OBOClass getTerm() { return oboClassValue; }
 
   public void editModel() {
-    character.setValue(charField,this);
+    if (isEmpty() && charField.isList()) // delete from list - cheesy?
+      character.deleteValue(getCharField(),this);
+    else
+      character.setValue(charField,this);
     // could also edit obo edit annot model at this point! ??
   }
 
