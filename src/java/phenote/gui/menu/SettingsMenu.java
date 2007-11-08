@@ -165,7 +165,8 @@ public class SettingsMenu extends DynamicMenu {
   		menuItem.setToolTipText(sToolTip);
 
 //	Add an action handler to this menu item
-  	menuItem.addActionListener(new SearchActionListener());
+// doesnt compile - taking out for now
+//  	menuItem.addActionListener(new SearchActionListener());
 
   	menu.add(menuItem);
 

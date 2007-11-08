@@ -77,7 +77,9 @@ public class NCBIQueryAction extends AbstractAction {
 			//fetch the info from ncbi
 			String temp = omimAdapter.getOMIMbyID(id);
 			//create an obo instance.
-			oboInstance = (Instance)session.getObjectFactory().createObject(fullID, AnnotationOntology.PUBLICATION(), false);
+                        // doesnt compile - need to check in latest obo jar i think
+                        // also would be great to set your eclipse to use 2 space tabbing - this is going off the end of my page........
+                        //			oboInstance = (Instance)session.getObjectFactory().createObject(fullID, AnnotationOntology.PUBLICATION(), false);
 			oboInstance.setComment(temp);
 			//add the oboinstance to the current session
 			session.addObject(oboInstance);

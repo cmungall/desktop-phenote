@@ -298,7 +298,9 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		}
 
 		public FactoryCategory getCategory() {
-			return FactoryCategory.TOOLBARS;
+                  // donest compile
+                  //			return FactoryCategory.TOOLBARS;
+                  return null;
 		}
 
 		public String getDefaultID() {
