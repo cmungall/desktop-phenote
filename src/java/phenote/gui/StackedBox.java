@@ -55,16 +55,17 @@ import org.jdesktop.swingx.VerticalLayout;
  * <p>
  * Note: this class is not part of the SwingX core classes. It is just an
  * example of what can be achieved with the components.
- * 
+
+ * A helper class i retrieved from the web on 10.15.2007
+ * https://swinglabs.dev.java.net/source/browse/*checkout*
+ * /swinglabs/website/web/docs/components/JXCollapsiblePane/StackedBox.java.txt
+ * <p>
+ * This is to facilitate generating collapsible panels for use in the
+ * TermInfo2 box
+
  * @author <a href="mailto:fred@L2FProd.com">Frederic Lavigne</a>
  * @author Nicole Washington
  *
- *  A helper class i retrieved from the web on 10.15.2007
- *  https://swinglabs.dev.java.net/source/browse/*checkout*
- *  /swinglabs/website/web/docs/components/JXCollapsiblePane/StackedBox.java.txt
- *  <p>
- *  This is to facilitate generating collapsible panels for use in the
- *  TermInfo box
  */
 public class StackedBox extends JPanel implements Scrollable {
 
@@ -112,10 +113,15 @@ public class StackedBox extends JPanel implements Scrollable {
   }
 
   /**
-   * Adds a new component to this <code>StackedBox</code>
+   * Each component that is added to a stacked box includes a link, which
+   * expands/collapses a given {@link JComponent} in a collapsible pane.<p>
    * 
-   * @param title
-   * @param component
+   * Adds a new component and link to this <code>StackedBox</code> <p>
+   * 
+   * @param title the text placed in the hyperlink in the division between 
+   *        content panes
+   * @param component the JComponent that can be hidden/visible, as 
+   *        controlled by the hyperlink given in the title
    */
   public void addBox(String title, Component component) {
     final JXCollapsiblePane collapsible = new JXCollapsiblePane();
@@ -144,7 +150,7 @@ public class StackedBox extends JPanel implements Scrollable {
     link.setClickedColor(getTitleForegroundColor());
 
     link.setBorder(new CompoundBorder(separatorBorder, BorderFactory
-      .createEmptyBorder(2, 4, 2, 4)));
+      .createEmptyBorder(1, 4, 1, 4)));
     link.setBorderPainted(true);
 
     add(link);
@@ -228,30 +234,25 @@ public class StackedBox extends JPanel implements Scrollable {
 
   //Nicole's modifications!
   /**
-   * This method is designed to change the title of a given collapsible
+   * This method is designed to change the title text of a given collapsible
    * pane.
-   * @param title   title of the box
-   * @param i    the pane for which the title will be changed
+   * @param title title of the box
+   * @param i     the pane for which the title will be changed
    */
   public void setBoxTitle(String title, int i) {
   	JXHyperlink link = (JXHyperlink)this.getComponent(i);  //i believe this returns the link for a given pane.
     link.setText(title);
-//    link.setFont(link.getFont().deriveFont(Font.BOLD));
-//    link.setOpaque(true);
-//    link.setFocusPainted(false);
-//    link.setUnclickedColor(getTitleForegroundColor());
-//    link.setClickedColor(getTitleForegroundColor());
-//
-//    link.setBorder(new CompoundBorder(separatorBorder, BorderFactory
-//      .createEmptyBorder(2, 4, 2, 4)));
-//    link.setBorderPainted(true);
-//    this.add(link,i);
+
   }
-  
+  /**
+   * This method is designed to change the title backgroun color of a given 
+   * collapsible pane.
+   * @param i     the pane for which the title will be changed
+   * @param color new color to set the background color of the box
+   */
   public void setBoxTitleBackgroundColor(int i, Color color) {
   	JXHyperlink link = (JXHyperlink)this.getComponent(i);  //i believe this returns the link for a given pane.
-  	link.setBackground(color);
-  	
+  	link.setBackground(color);  	
   }
 
   

@@ -28,10 +28,14 @@ import org.oboedit.gui.factory.GraphEditorFactory;
 import phenote.config.Config;
 import phenote.gui.CharacterTableController;
 import phenote.gui.TermInfo2;
+import phenote.gui.NcbiInfo;
 import phenote.gui.field.FieldPanel;
 import phenote.gui.selection.SelectionBridge;
 import phenote.gui.menu.FileMenu;
 import phenote.gui.menu.EditMenu;
+import phenote.gui.menu.PhenoteHelpMenu;
+import phenote.gui.menu.SettingsMenu;
+import phenote.gui.StandardToolbar;
 
 
 public class PhenoteStartupTask extends DefaultGUIStartupTask {
@@ -51,10 +55,12 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		Collection<GUIComponentFactory<?>> factories = new ArrayList<GUIComponentFactory<?>>();
 		factories.add(new FieldPanelFactory());
 		factories.add(new TermInfoFactory());
+		factories.add(new NCBIInfoFactory());
 		factories.add(new CharTableFactory());
 		factories.add(new GraphEditorFactory());
 		factories.add(new DAGViewFactory());
 		factories.add(new GraphDAGViewFactory());
+		factories.add(new StandardToolbarFactory());
 		return factories;
 	}
 
@@ -105,8 +111,8 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		menus.add(new FileMenu());
 		menus.add(new EditMenu());
 		menus.add(new ViewMenu());
-//	menus.add(new SettingsMenu());
-//		menus.add(new HelpMenu());
+		menus.add(new SettingsMenu());
+		menus.add(new PhenoteHelpMenu());
 		return menus;
 	}
 
@@ -202,6 +208,46 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 			return true;
 		}
 	}
+	
+	/** NCBIInfoFactory inner class */
+	private class NCBIInfoFactory implements GUIComponentFactory {
+		public GUIComponent createComponent(String id) {
+			NcbiInfo info = new NcbiInfo();
+			info.setMinimumSize(new Dimension(200, 200));
+			info.setPreferredSize(new Dimension(200, 200));
+			return new GUIComponentWrapper(id, id, info.getComponent());
+		}
+
+		public FactoryCategory getCategory() {
+			return FactoryCategory.INFO;
+		}
+
+		public String getDefaultID() {
+			return "NCBI";
+		}
+
+		/** These are alias IDs? */
+		public List getIDs() {
+			return CollectionUtil.list("NCBI");
+		}
+
+		public String getName() { //what is displayed in the menu
+			return "OMIM display";
+		}
+
+		public boolean getPreferSeparateWindow() {
+			return false;
+		}
+
+		public boolean isSingleton() {
+			return false;
+		}
+
+		public boolean showInMenus() {
+			return true;
+		}
+	}
+
 
 	/** CharTableFactory inner class */
 	private class CharTableFactory implements GUIComponentFactory {
@@ -228,6 +274,44 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
 		public String getName() {
 			return "Annotation Table";
+		}
+
+		public boolean getPreferSeparateWindow() {
+			return false;
+		}
+
+		public boolean isSingleton() {
+			return false;
+		}
+
+		public boolean showInMenus() {
+			return true;
+		}
+	}
+
+	/** StandardToolbarFactory inner class */
+	private class StandardToolbarFactory implements GUIComponentFactory {
+		public GUIComponent createComponent(String id) {
+			StandardToolbar toolbar = new StandardToolbar();
+			// 1st is id, 2nd id -> title bar string
+			return new GUIComponentWrapper(id, id, toolbar);
+		}
+
+		public FactoryCategory getCategory() {
+			return FactoryCategory.TOOLBARS;
+		}
+
+		public String getDefaultID() {
+			return "StandardToolbar";
+		}
+
+		/** These are alias IDs? */
+		public List getIDs() {
+			return CollectionUtil.list("StandardToolbar");
+		}
+
+		public String getName() {
+			return "Standard Toolbar";
 		}
 
 		public boolean getPreferSeparateWindow() {

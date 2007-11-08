@@ -40,7 +40,7 @@ public class EditMenu extends DynamicMenu {
     add(editMenuItem);
     
     addSeparator();
-
+    
 
     JMenuItem cut = new JMenuItem("Cut");
     cut.setActionCommand("cut");
@@ -77,6 +77,11 @@ public class EditMenu extends DynamicMenu {
     deleteChar.addActionListener(actionListener);
     add(deleteChar);
     
+    JMenuItem selectAll = new JMenuItem("Select All");
+    selectAll.setActionCommand("selectAll");
+    selectAll.addActionListener(actionListener);
+    selectAll.setMnemonic( 'A' );
+
     //set all to disabled until they are working.
     setEnabled(true);
 
