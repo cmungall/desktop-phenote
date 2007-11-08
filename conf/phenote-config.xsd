@@ -203,6 +203,11 @@
       <xs:attribute name="title" use="required" type="xs:string"/>
       <xs:attribute name="group_adapter" use="required" type="xs:string"/>
       <xs:attribute name="destination_field" use="required" type="xs:string"/>
+      <xs:attribute name="show" type="xs:IDREFS">
+        <xs:annotation>
+          <xs:documentation>what components to show for group, ie TermInfo,Table,Editor</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
     </xs:complexType>
   </xs:element>
   <xs:element name="templatechooser">

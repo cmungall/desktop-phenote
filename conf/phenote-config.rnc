@@ -159,6 +159,8 @@ ontology =
      ## which field (in main group) is destination for this group, if its
      ## destiny is a field
      attribute destination_field { xsd:string },
+     ## what components to show for group, ie TermInfo,Table,Editor
+     attribute show { xsd:IDREFS }?,
      templatechooser*
   }
   
