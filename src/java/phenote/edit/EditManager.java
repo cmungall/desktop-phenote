@@ -125,6 +125,7 @@ public class EditManager {
     CharFieldValue newVal = CharFieldValue.emptyValue(c,cf);
     UpdateTransaction t = new UpdateTransaction(v,newVal);
     addTransaction(t);
+    t.editModel(); // will remove old value
     fireChangeEvent(t,src);
   }
 

@@ -665,8 +665,10 @@ public abstract class CharFieldGui implements ListSelectionListener {
   }
 
   private void updateListGui() {
+    log().debug("update list gui called has list"+hasListGui());
     if (!hasListGui()) return;
     List<CharacterI> l = getSelectedChars();
+    log().debug("update list gui called sel list size"+l.size());
     if (l==null || l.size()==0) {
       valueListModel.clear();
     }

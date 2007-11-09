@@ -66,5 +66,8 @@ class IdFieldGui extends FreeTextField implements IDSelectionListener {
     }
   }
   
+  //add to compile 
+  public void IDSelected(IDSelectionEvent e) {}
+
 
 }

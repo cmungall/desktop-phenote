@@ -81,7 +81,12 @@ public class UpdateTransaction implements TransactionI { // extends Transaction?
 //   }
 
   public void editModel() {
-    newValue.editModel();
+    // hmmm??? - delete really - cheap to do through update? cant call edit model
+    // on old or new as new doesnt know old to del, old doesnt know its del
+    if (newValue.isEmpty() && newValue.getCharField().isList())
+      oldValue.editModelDelete(); // ???
+    else
+      newValue.editModel();
     isUndone = false;
     //charFieldEnum.setValue(character,newValue);
   }

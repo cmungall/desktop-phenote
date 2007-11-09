@@ -100,7 +100,7 @@ public class CharFieldValue implements Cloneable {
   void setCharacter(CharacterI c) { character = c; }
   public CharacterI getCharacter() { return character; }
 
-  boolean isEmpty() {
+  public boolean isEmpty() {
     if (isTerm())
       return oboClassValue == null;
     else if (isDate())
@@ -144,11 +144,17 @@ public class CharFieldValue implements Cloneable {
   public OBOClass getTerm() { return oboClassValue; }
 
   public void editModel() {
-    if (isEmpty() && charField.isList()) // delete from list - cheesy?
-      character.deleteValue(getCharField(),this);
-    else
-      character.setValue(charField,this);
+    // doesnt work - this is removing an alreadyempty val from list silly
+//     if (isEmpty() && charField.isList()) // delete from list - cheesy?
+//       character.deleteValue(getCharField(),this);
+//     else
+    character.setValue(charField,this);
     // could also edit obo edit annot model at this point! ??
+  }
+
+  /** remove cfv from list of cfvs in char */
+  public void editModelDelete() {
+    character.deleteValue(getCharField(),this);
   }
 
   public CharField getCharField() { return charField; }

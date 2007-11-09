@@ -121,8 +121,17 @@ public class TableColumnPrefsSaver implements PropertyChangeListener, TableColum
       return;
     }
     for (int i = 0; i < this.table.getColumnModel().getColumnCount(); i++) {
-      this.getOrderPrefs().putInt(this.table.getColumnName(i), i);
+      this.getOrderPrefs().putInt(getColName(i),i);
+                                  //this.table.getColumnName(i), i);
     }
+  }
+
+  /** if name too long then barfs - should use datatags! much shorter */
+  private String getColName(int i) {
+    String n = table.getColumnName(i);
+    int max = 80;
+    if (n.length() > max) n = n.substring(0,max);
+    return n;
   }
   
   private String getColumnName(TableColumn column) {
