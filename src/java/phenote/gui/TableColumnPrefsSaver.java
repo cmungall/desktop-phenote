@@ -82,13 +82,13 @@ public class TableColumnPrefsSaver implements PropertyChangeListener, TableColum
   
   private void sizeColumns() {
     for (TableColumn column : this.getColumns()) {
-      final int width = this.getWidthPrefs().getInt(this.getColumnName(column), this.defaultColumnWidth);
+      final int width = this.getWidthPrefs().getInt(this.getColumnKey(column), this.defaultColumnWidth);
       column.setPreferredWidth(width);
     }
   }
   
   private void saveColumnWidth(TableColumn column) {
-    this.getWidthPrefs().putInt(column.getHeaderValue().toString(), column.getWidth());
+    this.getWidthPrefs().putInt(this.getColumnKey(column), column.getWidth());
   }
   
   private void orderColumns() {
@@ -99,10 +99,10 @@ public class TableColumnPrefsSaver implements PropertyChangeListener, TableColum
       log().error("Failed to read table column order from prefs", e);
       return;
     }
-    final List<String> columnNames = this.getAllColumnNames();
-    if (prefNames.containsAll(columnNames) && columnNames.containsAll(prefNames)) {
+    final List<String> columnKeys = this.getAllColumnKeys();
+    if (prefNames.containsAll(columnKeys) && columnKeys.containsAll(prefNames)) {
       for (TableColumn column : this.getColumns()) {
-        final int newIndex = this.getOrderPrefs().getInt(this.getColumnName(column), 0);
+        final int newIndex = this.getOrderPrefs().getInt(this.getColumnKey(column), 0);
         final int currentIndex = this.getIndexOfColumn(column);
         final int columnCount = this.table.getColumnCount();
         if ((newIndex < columnCount) && (currentIndex < columnCount)) {
@@ -121,29 +121,31 @@ public class TableColumnPrefsSaver implements PropertyChangeListener, TableColum
       return;
     }
     for (int i = 0; i < this.table.getColumnModel().getColumnCount(); i++) {
-      this.getOrderPrefs().putInt(getColName(i),i);
-                                  //this.table.getColumnName(i), i);
+      this.getOrderPrefs().putInt(this.getColumnKey(this.table.getColumnName(i)), i);
     }
-  }
-
-  /** if name too long then barfs - should use datatags! much shorter */
-  private String getColName(int i) {
-    String n = table.getColumnName(i);
-    int max = 80;
-    if (n.length() > max) n = n.substring(0,max);
-    return n;
   }
   
   private String getColumnName(TableColumn column) {
     return column.getHeaderValue().toString();
   }
   
-  private List<String> getAllColumnNames() {
-    List<String> names = new ArrayList<String>();
+  private String getColumnKey(TableColumn column) {
+    return this.getColumnKey(this.getColumnName(column));
+  }
+  
+  private String getColumnKey(String name) {
+    final String hashCode = "" + name.hashCode();
+    final int spaceForName = Preferences.MAX_KEY_LENGTH - hashCode.length();
+    final String shortName = (name.length() > spaceForName) ? name.substring(0, spaceForName) : name;
+    return shortName + hashCode;
+  }
+  
+  private List<String> getAllColumnKeys() {
+    List<String> keys = new ArrayList<String>();
     for (TableColumn column : this.getColumns()) {
-      names.add(this.getColumnName(column));
+      keys.add(this.getColumnKey(column));
     }
-    return names;
+    return keys;
   }
   
   private List<TableColumn> getColumns() {
