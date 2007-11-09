@@ -66,6 +66,7 @@ public class Phenote {
   private static Logger LOG = Logger.getLogger(Phenote.class);
   private static boolean standalone = false; // default for servlet
   private final static int WINDOW_WIDTH = 1220;
+  private final static boolean USE_LOADING_SCREEN = false;
 
   private FieldPanel mainFieldPanel;
   private static Phenote phenote;
@@ -349,14 +350,16 @@ public class Phenote {
  	
 //    ImageIcon myImage = new ImageIcon(logoFile);
     splashScreen = new SplashScreen(myImage); //,enable);
-    loadingScreen = new LoadingScreen();
+    if (USE_LOADING_SCREEN) {
+      loadingScreen = new LoadingScreen();
     
     //if (!enable) return;
 //    splashScreen.setLocationRelativeTo(null);
 //    splashScreen.setProgressMax(100);
 //    splashScreen.setScreenVisible(true);
-    loadingScreen.setScreenVisible(true);
-    loadingScreen.setLocationRelativeTo(null); // centers panel on screen
+      loadingScreen.setScreenVisible(true);
+      loadingScreen.setLocationRelativeTo(null); // centers panel on screen
+    }
 //    splashScreen.setProgress("Phenote version "+PhenoteVersion.versionString(), 0);
   }
 
