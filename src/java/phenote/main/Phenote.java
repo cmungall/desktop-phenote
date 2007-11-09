@@ -66,7 +66,7 @@ public class Phenote {
   private static Logger LOG = Logger.getLogger(Phenote.class);
   private static boolean standalone = false; // default for servlet
   private final static int WINDOW_WIDTH = 1220;
-  private final static boolean USE_LOADING_SCREEN = false;
+  private final static boolean USE_LOADING_SCREEN = true; //false;
 
   private FieldPanel mainFieldPanel;
   private static Phenote phenote;
