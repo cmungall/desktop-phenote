@@ -36,6 +36,7 @@ import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.GroupAdapterI;
 import phenote.dataadapter.OntologyMakerI;
 import phenote.dataadapter.QueryableDataAdapterI;
+import phenote.dataadapter.ncbi.NCBIDataAdapterI;
 import phenote.datamodel.AnnotationMappingDriver;
 import phenote.datamodel.BasicAnnotationMappingDriver;
 import phenote.datamodel.CharField;
@@ -1043,8 +1044,15 @@ public class Config {
     getFileAdapConfigs().add(dac);
   }
 
+  //right now the ncbi adapters are under the queryable flag...need to make their
+  //own flag i think
   public boolean hasQueryableDataAdapter() {
-    return queryAdapConfList != null && getQueryableDataAdapter()!= null;
+    return (queryAdapConfList != null && 
+    			getQueryableDataAdapter()!= null);
+  }
+  
+  public boolean hasNCBIAdapter() {
+  	return getNCBIDataAdapter()!=null;
   }
   
   /** Just get first one thats enabled - for now assume theres one */
@@ -1057,6 +1065,13 @@ public class Config {
     for (DataAdapterConfig q : getQueryAdapCfgs())
       if (q.isEnabled()) return q.getQueryableAdapter();
     return null;
+  }
+  
+  public NCBIDataAdapterI getNCBIDataAdapter() {
+  	if (queryAdapConfList == null) return null;
+  	for (DataAdapterConfig q : getQueryAdapCfgs())
+  		if (q.isEnabled()) return q.getNCBIAdapter();
+  	return null;
   }
 
   /** all configs for query adaps - enabled or not */

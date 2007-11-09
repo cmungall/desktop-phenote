@@ -20,7 +20,7 @@ import org.bbop.framework.ViewMenu;
 import org.bbop.util.CollectionUtil;
 import org.oboedit.gui.Preferences;
 import org.oboedit.gui.tasks.DefaultGUIStartupTask;
-import org.oboedit.gui.tasks.ScreenLockTask;
+import org.bbop.framework.ScreenLockTask;
 import org.oboedit.gui.factory.DAGViewFactory;
 import org.oboedit.gui.factory.GraphDAGViewFactory;
 import org.oboedit.gui.factory.GraphEditorFactory;

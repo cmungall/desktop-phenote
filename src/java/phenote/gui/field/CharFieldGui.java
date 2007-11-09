@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.ImageIcon;
 
 import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOClass;
@@ -30,6 +31,8 @@ import phenote.config.Config;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.DataAdapterEx;
 import phenote.dataadapter.QueryableDataAdapterI;
+import phenote.dataadapter.ncbi.NCBIDataAdapterI;
+import phenote.dataadapter.ncbi.OMIMAdapter;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.CharFieldValue;
@@ -312,19 +315,37 @@ public abstract class CharFieldGui implements ListSelectionListener {
   protected void allowPostCompButton(boolean allow) {}
 
   private void addRetrieveButton() {
-    if (!Config.inst().hasQueryableDataAdapter()) return;
+  	if (!(Config.inst().hasQueryableDataAdapter() || Config.inst().hasNCBIAdapter())) return;
 
-    QueryableDataAdapterI qa = Config.inst().getQueryableDataAdapter(); // for now just one
-    if (qa.isFieldQueryable(getCharField().getName())) {
-      retrieveButton = new JButton("Retrieve");
-      retrieveButton.addActionListener(new RetrieveActionListener(qa));
-      //fieldPanel.addRetrieveButton(b);
-    }
+  	QueryableDataAdapterI qa = Config.inst().getQueryableDataAdapter(); // for now just one
+  	NCBIDataAdapterI na = Config.inst().getNCBIDataAdapter();
+  	//i'm hard-coding this for now...needs to be much slicker, perhaps not
+  	//even the same kind of queryable adapter
+  	if (qa!=null) {
+  		if (qa.isFieldQueryable(getCharField().getName())) {
+  			retrieveButton = new JButton("Retrieve");
+  			retrieveButton.addActionListener(new RetrieveActionListener(qa));
+  			//fieldPanel.addRetrieveButton(b);
+  		}
+  	} else if (na!=null) 
+  		if (na.isFieldQueryable(getCharField().getName())) {
+  				retrieveButton = new JButton(new ImageIcon("images/ncbi_icon.png"));  //would like this to be an action
+  				retrieveButton.setPreferredSize(new Dimension(35,35));
+  				retrieveButton.addActionListener(new NCBIActionListener(na));
+  	}
   }
 
   boolean hasRetrieveButton() { return retrieveButton != null; }
   JButton getRetrieveButton() { return retrieveButton; }
 
+  private class NCBIActionListener implements ActionListener {
+    NCBIDataAdapterI nda;
+    private NCBIActionListener(NCBIDataAdapterI q) { nda = q; }
+    public void actionPerformed(ActionEvent e) {
+        selectionManager.selectID(this, getText(), nda.getName());
+    }
+  }
+  
   private class RetrieveActionListener implements ActionListener {
     QueryableDataAdapterI qda;
     private RetrieveActionListener(QueryableDataAdapterI q) { qda = q; }

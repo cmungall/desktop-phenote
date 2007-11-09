@@ -5,18 +5,22 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
 import phenote.datamodel.CharField;
+//import phenote.gui.field.FreeTextField.FieldActionListener;
+import phenote.gui.selection.IDSelectionListener;
+import phenote.gui.selection.IDSelectionEvent;
 
 /** for now this is just a free text field that checks if theres a ":" present 
     eventually may get more savvy with option of prepending an id prefix and
     using OBOInstance instead of String */
 
-class IdFieldGui extends FreeTextField {
+class IdFieldGui extends FreeTextField implements IDSelectionListener {
 
   private final static String ERR = "Input string must have a colon(':') for ID field";
 
   private InputVerifier idVerifier;//=new IdInputVerifier(); //init after getInVer!
 
-  IdFieldGui(CharField cf) { super(cf); }
+  IdFieldGui(CharField cf) { 
+  	super(cf); }
 
   protected boolean passesConstraints(String input) {
     //new Throwable().printStackTrace();
@@ -61,5 +65,6 @@ class IdFieldGui extends FreeTextField {
       return getText().contains(":");
     }
   }
+  
 
 }

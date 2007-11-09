@@ -1,21 +1,10 @@
 package phenote.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Set;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
@@ -24,34 +13,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SpringLayout;
 import javax.swing.border.Border;
-import javax.swing.event.HyperlinkEvent;
-import javax.swing.event.HyperlinkListener;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeEvent;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-
-
-import org.obo.datamodel.Dbxref;
-import org.obo.datamodel.IdentifiedObject;
-import org.obo.datamodel.Link;
-import org.obo.datamodel.OBOClass;
-import org.obo.datamodel.OBOProperty;
-import org.obo.datamodel.OBORestriction;
-import org.obo.datamodel.ObsoletableObject;
-import org.obo.datamodel.PropertyValue;
-import org.obo.datamodel.Synonym;
+import org.obo.annotation.datamodel.AnnotationOntology;
+import org.obo.datamodel.Instance;
+import org.obo.datamodel.OBOSession;
 import org.obo.util.TermUtil;
 
+import phenote.dataadapter.ncbi.OMIMAdapter;
+import phenote.dataadapter.ncbi.PubMedAdapter;
 import phenote.datamodel.CharFieldManager;
-import phenote.datamodel.TermNotFoundException;
 import phenote.gui.selection.SelectionManager;
-import phenote.gui.selection.TermSelectionEvent;
-import phenote.gui.selection.TermSelectionListener;
-import phenote.gui.selection.UseTermListener;
-import phenote.util.HtmlUtil;
-import phenote.util.LinkCollection;
+import phenote.gui.selection.IDSelectionEvent;
+import phenote.gui.selection.IDSelectionListener;
 import edu.stanford.ejalbert.BrowserLauncher;
 import edu.stanford.ejalbert.BrowserLauncherRunner;
 import edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException;
@@ -76,6 +49,9 @@ public class NcbiInfo extends JPanel {
 
 	// content variables
 	private SelectionManager selectionManager;
+	private OMIMAdapter omimAdapter = new OMIMAdapter();
+	private PubMedAdapter pubmedAdapter = new PubMedAdapter();
+
 
 	// gui components
 	private static JPanel ncbiPanel;
@@ -88,8 +64,15 @@ public class NcbiInfo extends JPanel {
 	 */
 
 	public NcbiInfo() {
-		init();
+		this(SelectionManager.inst());
 	}
+	
+  public NcbiInfo(SelectionManager selManager) {
+    this.selectionManager = selManager;
+    this.selectionManager.addIDSelectionListener(new NCBIIDSelectionListener());
+		init();
+  }
+
 
 	private void init() {
 
@@ -127,9 +110,42 @@ public class NcbiInfo extends JPanel {
 	
 	public void setNCBIInfoText(String text) {
 		ncbiTextArea.setText(text);
+		System.out.println("getting to set text!");
 		ncbiPanel.validate();
 		ncbiPanel.repaint();		
 	}
 	
+  private class NCBIIDSelectionListener implements IDSelectionListener {
+    public void IDSelected(IDSelectionEvent e) {
+    	System.out.println("id="+e.getID());
+    	System.out.println("source="+e.getType());
+    	String id=e.getID();
+    	String temp=null;
+  		OBOSession session = CharFieldManager.inst().getOboSession();
+  		Instance oboInstance;
+  		if  ((oboInstance=(Instance)session.getObject(id))==null) { 
+  			//if (e.getType()=="OMIM") {  ...should really have enumerated NCBI types!
+  			//check the type here...will dictate where to fetch from
+  			//if its not already in the obosession, fetch the info from ncbi
+//  			String temp = NCBIAdapterI.query(id);
+//  			String temp = omimAdapter.getOMIMbyID(id);
+  			if (e.getType().equalsIgnoreCase("pubmed")) {
+  				temp = pubmedAdapter.query(id, "PMID");
+  			} else if (e.getType().equalsIgnoreCase("omim")) {
+  				temp = omimAdapter.query(id, "OMIM");
+  			}
+  			//create an obo instance.
+  			oboInstance = (Instance)session.getObjectFactory().createObject(id, AnnotationOntology.PUBLICATION(), false);
+  			oboInstance.setComment(temp);
+  			//add the oboinstance to the current session
+  			session.addObject(oboInstance);
+  			System.out.println("added ID="+oboInstance.getID()+" to oboSession.");
+  		} else {
+  			System.out.println("retrieved ID="+oboInstance.getID()+" from oboSession.");
+  		}
+    	
+      setNCBIInfoText("ID="+oboInstance.getID()+" Comment="+oboInstance.getComment());
+    } 
+  }
 
 }

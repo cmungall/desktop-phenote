@@ -17,6 +17,7 @@ public class SelectionManager {
 	private static Map<String, SelectionManager> groupToSelMan = new HashMap<String, SelectionManager>();
 
 	private List<TermSelectionListener> termListenerList;
+	private List<IDSelectionListener> IDListenerList;
 
 	/** return main/default instance */
 	public static SelectionManager inst() {
@@ -41,6 +42,7 @@ public class SelectionManager {
 
 	public SelectionManager() {
 		termListenerList = new ArrayList<TermSelectionListener>(5);
+		IDListenerList = new ArrayList<IDSelectionListener>(5);
 	}
 
 	// TERM SELECTION
@@ -51,6 +53,15 @@ public class SelectionManager {
 
 	public void removeTermSelectionListener(TermSelectionListener l) {
 		termListenerList.remove(l);
+	}
+	
+	// ID SELECTION
+	public void addIDSelectionListener(IDSelectionListener l) {
+		IDListenerList.add(l);
+	}
+
+	public void removeIDSelectionListener(IDSelectionListener l) {
+		IDListenerList.remove(l);
 	}
 
 	// void addCharacterSelectionListener(CharacterSelectionListener l) {}
@@ -81,7 +92,22 @@ public class SelectionManager {
 		if (!isHyperlink)
 			fireTermSelect(e);
 	}
+	
+	public void selectID(Object source, String id, String type) {
+		IDSelectionEvent e = makeIDEvent(source, id, type);
+			fireIDSelect(e);
+	}
 
+	private void fireIDSelect(IDSelectionEvent e) {
+		// need to make a copy of the term listener list to avoid
+		// co-modification problems
+		List<IDSelectionListener> temp = new ArrayList<IDSelectionListener>(
+				IDListenerList);
+		Iterator<IDSelectionListener> it = temp.iterator();
+		while (it.hasNext())
+			it.next().IDSelected(e);
+	}
+	
 	private void fireTermSelect(TermSelectionEvent e) {
 		// need to make a copy of the term listener list to avoid
 		// co-modification problems
@@ -97,6 +123,10 @@ public class SelectionManager {
 	private TermSelectionEvent makeTermEvent(Object src, OBOClass oc,
 			UseTermListener l, boolean mouse, boolean link) {
 		return new TermSelectionEvent(src, oc, l, mouse, link);
+	}
+
+	private IDSelectionEvent makeIDEvent(Object src, String id, String type) {
+		return new IDSelectionEvent(src, id, type);
 	}
 
 }

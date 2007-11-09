@@ -159,7 +159,8 @@ public class CharacterTableController {
     new TableComparatorChooser<CharacterI>(characterTable, this.sortedCharacters, false);
     this.characterTable.setSelectionModel(this.selectionModel);
     this.characterTable.putClientProperty("Quaqua.Table.style", "striped");
-    this.commitButton.setText(this.getCommitButtonString());
+    if (!Config.inst().hasNCBIAdapter())
+    	this.commitButton.setText(this.getCommitButtonString());
     if (!Config.inst().uvicGraphIsEnabled()) {
       this.graphButton.getParent().remove(this.graphButton);
     }

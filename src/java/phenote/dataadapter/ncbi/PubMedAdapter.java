@@ -33,20 +33,19 @@ import java.net.URLConnection;
  *
  */
 //public class OMIMAdapter implements QueryableDataAdapterI {
-	public class OMIMAdapter implements NCBIDataAdapterI {
+	public class PubMedAdapter implements NCBIDataAdapterI {
 
 //	private static final String OMIMurlBase = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=omim";
-		private static final String database = "omim";
-	private static final String OMIMurlBase = ncbiURL+"db="+database;
+		private static final String database = "pubmed";
+	private static final String PubMedurlBase = ncbiURL+"db="+database;
 	private static final String returnMode = "&retmode=xml";
 	private static final String testURL = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=omim&id=601653&retmode=xml";
 	//SNOMED access via id=http://terminology.vetmed.vt.edu/SCT/isa.cfm?SCT_ConceptID=190787008
 	//External links for GeneRIF: http://www.ncbi.nlm.nih.gov/sites/entrez?cmd_current=&db=gene&orig_db=genome&term=GeneRIF%3A12551903&cmd=Search
-	
 	private List<String> queryableFields = new ArrayList<String>(2);
   private List<String> queryableGroups = new ArrayList<String>(2);
 
-  public OMIMAdapter() { init(); }
+  public PubMedAdapter() { init(); }
 
   public List<String> getQueryableGroups() {
     return queryableGroups;
@@ -54,7 +53,7 @@ import java.net.URLConnection;
 
   public String getOMIMbyID(String id) {
 //  public String getOMIMbyID(String id) throws DataAdapterEx {
-  	String omimURL = null;
+  	String urlString = null;
   	URL u = null;
     StringBuffer sb = new StringBuffer();
 //  	return "SOME OMIM STUFF HERE";
@@ -62,9 +61,9 @@ import java.net.URLConnection;
     String idSpace= splitID[0];
     String idNum = splitID[1];
     try {
-      omimURL = OMIMurlBase+"&id="+idNum+returnMode;
-      System.out.println(omimURL);
-    	u = new URL(omimURL); // throws MalformedURLEx
+      urlString = PubMedurlBase+"&id="+idNum+returnMode;
+      System.out.println(urlString);
+    	u = new URL(urlString); // throws MalformedURLEx
     } catch (MalformedURLException e) {}
     try {
     URLConnection uc = u.openConnection();
@@ -98,7 +97,7 @@ import java.net.URLConnection;
   	
   }
   public String query(String id, String database) {
-  	String omimURL = null;
+  	String urlString = null;
   	URL u = null;
     StringBuffer sb = new StringBuffer();
     String[] splitID=id.split(":");
@@ -109,9 +108,9 @@ import java.net.URLConnection;
     	System.out.println("same database!");
     }
     try {
-      omimURL = OMIMurlBase+"&id="+idNum+returnMode;
-      System.out.println(omimURL);
-    	u = new URL(omimURL); // throws MalformedURLEx
+      urlString = PubMedurlBase+"&id="+idNum+returnMode;
+      System.out.println(urlString);
+    	u = new URL(urlString); // throws MalformedURLEx
     } catch (MalformedURLException e) {}
     try {
     URLConnection uc = u.openConnection();

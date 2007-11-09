@@ -3,6 +3,7 @@ package phenote.config;
 import phenote.config.xml.DataadapterDocument.Dataadapter;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.QueryableDataAdapterI;
+import phenote.dataadapter.ncbi.NCBIDataAdapterI;
 import phenote.dataadapter.delimited.DelimitedFileAdapter;
 import phenote.dataadapter.fly.FlybaseDataAdapter;
 import phenote.dataadapter.nexus.NEXUSAdapter;
@@ -19,6 +20,7 @@ class DataAdapterConfig {
   // will be null if enabled = false
   private DataAdapterI fileAdapter;
   private QueryableDataAdapterI queryableDataAdapter;
+  private NCBIDataAdapterI ncbiDataAdapter; 
   private Dataadapter xmlBean;
 
   /** construct from Dataadapter xml bean */
@@ -44,6 +46,11 @@ class DataAdapterConfig {
   boolean isQueryable() { return xmlBean.getIsQueryable(); }
   /** Either its a file adapter or its a queryable/database adapter */
   boolean isFileAdapter() { return !isQueryable(); }
+  
+  //this is hardcoded for now...two data adapters for ncbi...omim and pubmed
+  //this should really be expanded to allow specification in the config...
+  //like some "generic" externalAdapter
+  boolean isNCBIAdapter() { return (xmlBean.getIsQueryable() && (getName().equals("OMIM") || getName().equals("PUB"))); }
 
   /** default is true */
   boolean isEnabled() { 
@@ -61,6 +68,8 @@ class DataAdapterConfig {
   }
 
    QueryableDataAdapterI getQueryableAdapter() { return queryableDataAdapter; }
+   
+   NCBIDataAdapterI getNCBIAdapter() { return ncbiDataAdapter; }
 
   // do some other way? DataAdapterManager has mapping? DataAdapter has mapping?
   // DataAdapterManager.getAdapter(name)???
@@ -114,9 +123,15 @@ class DataAdapterConfig {
   private void setQueryableAdapterFromName() {
     try {
       Object o = getInstanceForName();
-      if ( ! (o instanceof QueryableDataAdapterI))
-        throw new Exception("class not instance of QueryableDataAdapterI");
-      queryableDataAdapter = (QueryableDataAdapterI)o;
+      System.out.println("o="+o.getClass());
+      if ( ! (o instanceof QueryableDataAdapterI)) {
+      	if (o instanceof NCBIDataAdapterI) {
+      		ncbiDataAdapter = (NCBIDataAdapterI)o;
+      	} else { 
+          queryableDataAdapter = (QueryableDataAdapterI)o;
+      	}
+      	throw new Exception("class not instance of QueryableDataAdapterI");
+      }
     }
     catch (Exception e) {
       System.out.println("Queryable data adapter not recognized "+getName());
