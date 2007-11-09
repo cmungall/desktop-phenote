@@ -3,6 +3,9 @@
 	<name>Phenote</name>
 	<comment></comment>
 	<projects>
+		<project>BBOP</project>
+		<project>OBO</project>
+		<project>OBO-Edit</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
