@@ -28,6 +28,7 @@ import javax.swing.event.HyperlinkListener;
 
 import org.obo.datamodel.Dbxref;
 import org.obo.datamodel.IdentifiedObject;
+import org.obo.datamodel.DanglingObject;
 import org.obo.datamodel.Link;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
@@ -87,9 +88,9 @@ public class TermInfo2 extends JPanel {
 	private OBOClass currentOboClass;
 	private UseTermListener useTermListener;
 	private TermHyperlinkListener termHyperlinkListener;
-	private List termInfoNaviHistory = new ArrayList<String>();
+	private static List<String> termInfoNaviHistory = new ArrayList<String>();
 	// private List termInfoNaviHistory = new List();
-	private int naviIndex = -1;
+	private static int naviIndex = -1;
 	private SelectionManager selectionManager;
 
 	// gui components
@@ -128,6 +129,8 @@ public class TermInfo2 extends JPanel {
 
 	private JPanel commentsPanel;
 	private JTextArea commentsText;
+	
+	private static TermInfo2 singleton;
 
 	/**
 	 * Create the panel
@@ -144,6 +147,11 @@ public class TermInfo2 extends JPanel {
 		this.selectionManager
 				.addTermSelectionListener(new InfoTermSelectionListener());
 		// ErrorManager.inst().addErrorListener(new InfoErrorListener());
+	}
+	public static TermInfo2 inst() {
+		if (singleton == null)
+			singleton = new TermInfo2();
+		return singleton;
 	}
 
 	private void init() {
@@ -443,7 +451,7 @@ public class TermInfo2 extends JPanel {
 		// System.out.println("tot="+tot+"; naviIndex="+naviIndex);
 	}
 
-	private String getTermFromNaviHistory(int position) {
+	public static String getTermFromNaviHistory(int position) {
 		if (termInfoNaviHistory.size() >= 1)
 			// if (termInfoNaviHistory.getItemCount() >= 1)
 			return termInfoNaviHistory.get(position).toString();
@@ -695,12 +703,23 @@ public class TermInfo2 extends JPanel {
 				} else {
 					temp = (IdentifiedObject) link.getParent();
 				}
-				if (!TermUtil.isIntersection((OBOClass) temp)) {
-					// only put in items that are not xps
-					panelText += HtmlUtil.termLink(temp);
-					itemCount++;
-					if (it.hasNext()) {
-						panelText += ", ";
+				if (TermUtil.isClass(temp)) { //only show actual classes...not danglers
+					if (!TermUtil.isIntersection((OBOClass) temp)) {
+						// only put in items that are not xps
+						panelText += HtmlUtil.termLink(temp);
+						if (it.hasNext()) {
+							panelText += ", ";
+						}
+						itemCount++;
+					}
+				} else if (TermUtil.isDangling(temp)) {
+					if (!TermUtil.isIntersection((DanglingObject) temp)) {
+						panelText += temp.getName();  //dangling objects don't have links
+						//eventually want to be smart and allow user to import the necessary ontology to resolve danglers!
+						if (it.hasNext()) {
+							panelText += ", ";
+						}
+						itemCount++;
 					}
 				}
 			}
@@ -937,6 +956,18 @@ public class TermInfo2 extends JPanel {
 	/** for testing */
 	void simulateHyperlinkEvent(HyperlinkEvent e) {
 		termHyperlinkListener.hyperlinkUpdate(e);
+	}
+	
+	public List<String> getTermInfoNaviHistory() {
+		return termInfoNaviHistory;
+	}
+	
+	public int getNaviIndex() {
+		return naviIndex;
+	}
+	
+	public void setNaviIndex(int index) {
+		naviIndex = index;
 	}
 
 }

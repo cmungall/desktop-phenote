@@ -10,7 +10,7 @@ import phenote.dataadapter.nexus.NEXUSAdapter;
 import phenote.dataadapter.phenosyntax.PhenoSyntaxFileAdapter;
 import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
 
-class DataAdapterConfig {
+public class DataAdapterConfig {
 
   //String name;
   //boolean enabled=true; // enabled by default
@@ -123,14 +123,14 @@ class DataAdapterConfig {
   private void setQueryableAdapterFromName() {
     try {
       Object o = getInstanceForName();
-      System.out.println("o="+o.getClass());
       if ( ! (o instanceof QueryableDataAdapterI)) {
       	if (o instanceof NCBIDataAdapterI) {
       		ncbiDataAdapter = (NCBIDataAdapterI)o;
       	} else { 
-          queryableDataAdapter = (QueryableDataAdapterI)o;
+        	throw new Exception("class not instance of QueryableDataAdapterI");
       	}
-      	throw new Exception("class not instance of QueryableDataAdapterI");
+      } else {
+        queryableDataAdapter = (QueryableDataAdapterI)o;
       }
     }
     catch (Exception e) {

@@ -1052,7 +1052,7 @@ public class Config {
   }
   
   public boolean hasNCBIAdapter() {
-  	return getNCBIDataAdapter()!=null;
+  	return getNCBIDataAdapters()!=null;
   }
   
   /** Just get first one thats enabled - for now assume theres one */
@@ -1067,11 +1067,21 @@ public class Config {
     return null;
   }
   
-  public NCBIDataAdapterI getNCBIDataAdapter() {
-  	if (queryAdapConfList == null) return null;
-  	for (DataAdapterConfig q : getQueryAdapCfgs())
-  		if (q.isEnabled()) return q.getNCBIAdapter();
-  	return null;
+//  /**There can be >1 adapter.  should return a list*/
+//  public NCBIDataAdapterI getNCBIDataAdapter() {
+//  	if (queryAdapConfList == null) return null;
+//  	for (DataAdapterConfig q : getQueryAdapCfgs())
+//  		if (q.isEnabled()) return q.getNCBIAdapter();
+//  	return null;
+//  }
+  public List<NCBIDataAdapterI> getNCBIDataAdapters() {
+    if (queryAdapConfList==null) return null; // ex?
+    ArrayList<NCBIDataAdapterI> qaList = new ArrayList<NCBIDataAdapterI>(queryAdapConfList.size());
+    for (DataAdapterConfig q : queryAdapConfList) {
+      if (q.isEnabled())
+        qaList.add(q.getNCBIAdapter());
+    }
+    return qaList; //new ArrayList(queryAdapConfList);
   }
 
   /** all configs for query adaps - enabled or not */

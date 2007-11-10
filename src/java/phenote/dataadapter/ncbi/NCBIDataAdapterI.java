@@ -4,9 +4,14 @@ import java.util.List;
 
 import phenote.dataadapter.DataAdapterEx;
 
+/**
+ * Note, for retmode, see http://www.ncbi.nlm.nih.gov/entrez/query/static/efetchlit_help.html for options
+ * @author Nicole
+ *
+ */
 public interface NCBIDataAdapterI {
 	
-	public static String ncbiURL = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?";
+	public static String ncbiURL = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?";
 	
   /** return true if data adapter can query for the char field */
   public boolean isFieldQueryable(String field);

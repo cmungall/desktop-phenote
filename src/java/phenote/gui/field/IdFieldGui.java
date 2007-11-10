@@ -13,6 +13,8 @@ import phenote.gui.selection.IDSelectionEvent;
     eventually may get more savvy with option of prepending an id prefix and
     using OBOInstance instead of String */
 
+//NEED TO ADD IN THE SELECTION MANAGER HERE AND selectID()
+
 class IdFieldGui extends FreeTextField implements IDSelectionListener {
 
   private final static String ERR = "Input string must have a colon(':') for ID field";

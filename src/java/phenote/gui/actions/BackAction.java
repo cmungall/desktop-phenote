@@ -7,7 +7,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
 
+import org.obo.datamodel.OBOClass;
+
 import phenote.main.Phenote;
+import phenote.main.Phenote2;
+import phenote.datamodel.CharFieldManager;
+import phenote.datamodel.TermNotFoundException;
+import phenote.gui.TermInfo2;
+import phenote.gui.selection.SelectionManager;
 
 /**
  * @author Nicole Washington
@@ -39,7 +46,24 @@ public class BackAction extends AbstractAction  {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		Phenote.getPhenote().getTermInfo().naviRefresh("back");
+//		TermInfo2.inst().naviRefresh("back");
+		int tot = TermInfo2.inst().getTermInfoNaviHistory().size();
+		int naviIndex = TermInfo2.inst().getNaviIndex();
+		System.out.println("naviIndex before="+naviIndex);
+		if (naviIndex > 0) { //only move the navi if not at beginning
+			naviIndex--;
+			TermInfo2.inst().setNaviIndex(naviIndex);
+		}
+		System.out.println("naviIndex after="+naviIndex);
+		String id = TermInfo2.inst().getTermFromNaviHistory(naviIndex);
+		System.out.println(id);
+		try {
+			OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
+			SelectionManager.inst().selectMouseOverTerm(this, term, null);
+			System.out.println("found back term: "+term);
+		} catch (TermNotFoundException ex) {
+			return;
+		}
 		System.out.println(e.getActionCommand().toString()+" action selected by:\n  "+ e);
 	}
 }  

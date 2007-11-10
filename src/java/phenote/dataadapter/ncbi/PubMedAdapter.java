@@ -38,7 +38,7 @@ import java.net.URLConnection;
 //	private static final String OMIMurlBase = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=omim";
 		private static final String database = "pubmed";
 	private static final String PubMedurlBase = ncbiURL+"db="+database;
-	private static final String returnMode = "&retmode=xml";
+	private static final String returnMode = "&retmode=xml&rettype=abstract";
 	private static final String testURL = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=omim&id=601653&retmode=xml";
 	//SNOMED access via id=http://terminology.vetmed.vt.edu/SCT/isa.cfm?SCT_ConceptID=190787008
 	//External links for GeneRIF: http://www.ncbi.nlm.nih.gov/sites/entrez?cmd_current=&db=gene&orig_db=genome&term=GeneRIF%3A12551903&cmd=Search
@@ -81,12 +81,11 @@ import java.net.URLConnection;
 
 
   private void init() {
-    // dont HAVE to use CharFieldEnum but it does enforce using same strings
-    // across different data adapters which is good to enforce
-    // the worm config needs to have "Pub" and "Object Name"
-  	//might eventually add other ncbi options here
-//  	queryableFields.add(CharFieldEnum.PUB.getName()); // "Pub"
-    queryableFields.add("OMIM");
+  	//should i add charfieldenum type here?  
+  	//should there be an enumerated ncbi type  ...that is defined
+  	//by their list of databases?  how to generalize?
+  	//  	queryableFields.add(CharFieldEnum.PUB.getName()); // "Pub"
+    queryableFields.add("PUB");
   }
   /** return true if data adapter can query for the char field */
   public boolean isFieldQueryable(String field) {
@@ -100,9 +99,15 @@ import java.net.URLConnection;
   	String urlString = null;
   	URL u = null;
     StringBuffer sb = new StringBuffer();
-    String[] splitID=id.split(":");
-    String idSpace= splitID[0];
-    String idNum = splitID[1];
+    String idSpace = null;
+    String idNum = null;
+    if (id!=null) {
+    	String[] splitID=id.split(":");
+    	if (splitID.length>1) {
+    		idSpace= splitID[0];
+    		idNum = splitID[1];
+    	}
+    }
     if (database.equalsIgnoreCase(idSpace)) {
     	//make sure the idspace and database match
     	System.out.println("same database!");

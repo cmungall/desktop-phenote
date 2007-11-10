@@ -28,6 +28,7 @@ import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
 
 import phenote.config.Config;
+import phenote.config.DataAdapterConfig;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.DataAdapterEx;
 import phenote.dataadapter.QueryableDataAdapterI;
@@ -318,7 +319,7 @@ public abstract class CharFieldGui implements ListSelectionListener {
   	if (!(Config.inst().hasQueryableDataAdapter() || Config.inst().hasNCBIAdapter())) return;
 
   	QueryableDataAdapterI qa = Config.inst().getQueryableDataAdapter(); // for now just one
-  	NCBIDataAdapterI na = Config.inst().getNCBIDataAdapter();
+  	List<NCBIDataAdapterI> naList = Config.inst().getNCBIDataAdapters();
   	//i'm hard-coding this for now...needs to be much slicker, perhaps not
   	//even the same kind of queryable adapter
   	if (qa!=null) {
@@ -327,11 +328,15 @@ public abstract class CharFieldGui implements ListSelectionListener {
   			retrieveButton.addActionListener(new RetrieveActionListener(qa));
   			//fieldPanel.addRetrieveButton(b);
   		}
-  	} else if (na!=null) 
-  		if (na.isFieldQueryable(getCharField().getName())) {
+  	} else if (naList.size()>0) {
+  		//add the button if there is a match for the particular adapter
+  		for (NCBIDataAdapterI nda : naList) {
+  			if (nda.isFieldQueryable(getCharField().getName())) {
   				retrieveButton = new JButton(new ImageIcon("images/ncbi_icon.png"));  //would like this to be an action
   				retrieveButton.setPreferredSize(new Dimension(35,35));
-  				retrieveButton.addActionListener(new NCBIActionListener(na));
+  				retrieveButton.addActionListener(new NCBIActionListener(nda));
+  			}
+  		}
   	}
   }
 

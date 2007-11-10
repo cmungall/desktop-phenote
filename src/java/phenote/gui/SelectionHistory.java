@@ -26,6 +26,8 @@ import phenote.edit.TransactionI;
 import phenote.gui.selection.SelectionManager;
 import phenote.gui.selection.UseTermEvent;
 import phenote.gui.selection.UseTermListener;
+import phenote.gui.selection.TermSelectionListener;
+import phenote.gui.selection.TermSelectionEvent;
 import phenote.util.HtmlUtil;
 
 public class SelectionHistory {
@@ -49,7 +51,9 @@ public class SelectionHistory {
   private SelectionHistory(EditManager eManager, SelectionManager selManager) { //TermPanel termPanel) {
     this.editManager = eManager;
     this.selectionManager = selManager;
-    this.editManager.addCharChangeListener(new HistorySelectionListener());
+    this.selectionManager.addTermSelectionListener(new HistorySelectionListener());
+//    this.selectionManager.addCharChangeListener(new HistorySelectionListener());
+    //    this.editManager.addCharChangeListener(new HistorySelectionListener());
 	  }
   
   private static SelectionHistory singleton = new SelectionHistory();
@@ -120,8 +124,19 @@ public class SelectionHistory {
 //	    setText(val,false); // no completion
 	  }
 
+  private void setHistoryFromList(OBOClass term) {
+  	String html="";
+  	if (term!=null) {
+		  String[] idSplit = term.getID().split(":");
+		  String nsID = idSplit[0];
+		  html = html + "<br>"+nsID+":"+term.getName();
+	  }
+	  textArea.setText(html);
+	  textArea.setCaretPosition(0);
+  }
   
-  /* creating a list of links from the transaction history */
+  
+  /** creating a list of links from the transaction history */
   private void setHistoryFromList(List<TransactionI> transList) {
 	  String html = "";
 	  //will move this into HtmlUtil shortly...
@@ -150,25 +165,25 @@ public class SelectionHistory {
     return this.editManager;
   }
 
-private class HistorySelectionListener implements CharChangeListener {
-  public void charChanged(CharChangeEvent e) {
-	  if (e.isUpdate()) {
-		  EditManager em = getEditManager();
-		  List<TransactionI> transList = em.getTransactionList();
-		  String html="";
-		  setHistoryFromList(transList);
-	  }
-  }	
-}
-  
-//  private class HistorySelectionListener implements TermSelectionListener {
-//	  public boolean termSelected(TermSelectionEvent e) {
-////		  System.out.println("link = "+e.isHyperlinkEvent());
-//	      if (e.isMouseOverEvent() ) return false;
-//	      setHistoryFromList(e.getOboClass());
-//           return true;       
+//private class HistorySelectionListener implements CharChangeListener {
+//  public void charChanged(CharChangeEvent e) {
+//	  if (e.isUpdate()) {
+//		  EditManager em = getEditManager();
+//		  List<TransactionI> transList = em.getTransactionList();
+//		  String html="";
+//		  setHistoryFromList(transList);
 //	  }
-//  }
+//  }	
+//}
+  
+  private class HistorySelectionListener implements TermSelectionListener {
+	  public void termSelected(TermSelectionEvent e) {
+//		  System.out.println("link = "+e.isHyperlinkEvent());
+//	      if (!e.isMouseOverEvent() )
+//	      	setHistoryFromList(e.getOboClass());
+	  }
+  }
+  
   private UseTermListener useTermListener;
   private UseTermListener getUseTermListener() {
     if (useTermListener == null) useTermListener = new HistoryUseTermListener();
