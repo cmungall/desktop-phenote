@@ -37,6 +37,7 @@ public class AnnotationCharacter extends AbstractCharacter {
   public AnnotationCharacter(Annotation annotation, AnnotationMappingDriver driver) {
     this.annotation = annotation;
     this.driver = driver;
+    CharFieldManager.inst().getOboSession().addObject(annotation); // CJM: TODO: CHECK with mark/john
   }
 
   /*
@@ -165,9 +166,12 @@ public class AnnotationCharacter extends AbstractCharacter {
 //       OBOClass pc =
 //         OboUtil.makePostCompTerm(objectGenus.toTerm(),rel,objectDifferentia.toTerm());
       OboUtil ou = OboUtil.initPostCompTerm(objectGenus.toTerm());
+      LOG.debug("ou = "+ou+" genus:"+objectGenus.toTerm());
       for (Map.Entry<CharField,CharFieldValue> e : charFieldToObjectDiff.entrySet()) {
         OBOProperty rel = driver.getPropertyForField(e.getKey());
-        ou.addRelDiff(rel,e.getValue().toTerm());
+        LOG.debug("addRelDiff = "+rel+" "+e.getValue());
+        if (e.getValue().toTerm() != null)
+        	ou.addRelDiff(rel,e.getValue().toTerm());
       }
       setAnnotObject(ou.getPostCompTerm());
     }
