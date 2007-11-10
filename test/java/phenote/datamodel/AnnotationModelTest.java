@@ -23,9 +23,12 @@ import phenote.datamodel.CharacterI;
 import phenote.datamodel.TermNotFoundException;
 import phenote.main.Phenote;
 
-public class AnnotationModelTest {
+public class AnnotationModelTest extends AbstractAnnotationModelTest {
   
    protected static OBOSession session;
+   
+   protected static String getConfigFileName() { return "ncbo-test.cfg"; }
+   protected static String getDataFilePath() { return "test/testfiles/Sox9-human-bbop.tab";}
    
   @BeforeClass public static void initialize() throws ConfigException {
     Phenote.resetAllSingletons();
@@ -34,7 +37,9 @@ public class AnnotationModelTest {
     phenote.initOntologies();
     phenote.initGui();
     DelimitedFileAdapter ad = new DelimitedFileAdapter();
-    ad.load(new File("test/testfiles/Sox9-human-bbop.tab"));
+    CharacterListI clist = 
+    	ad.load(new File("test/testfiles/Sox9-human-bbop.tab"));
+    System.err.println("clist size: "+clist.size());
     session = CharFieldManager.inst().getOboSession();
   }
   
@@ -43,8 +48,10 @@ public class AnnotationModelTest {
   
   @Test public void checkAnnotations()   {
 	  Collection<Annotation> annots = AnnotationUtil.getAnnotations(session);
+	  System.err.println("# annots = "+annots.size());
 	  for (Annotation annot : annots) {
-		  System.err.println("annot: "+annot);
+		  System.err.println("annot: "+annot+":: "+annot.getSubject()+" -"+annot.getRelationship()+"-> "+annot.getObject());
+		  
 	  }
 	  Assert.assertTrue(annots.size() > 0);
   }
