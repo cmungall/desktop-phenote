@@ -23,7 +23,7 @@ import phenote.datamodel.CharacterI;
 import phenote.datamodel.TermNotFoundException;
 import phenote.main.Phenote;
 
-public class AnnotationModelTest extends AbstractAnnotationModelTest {
+public class PhenotypeAssociationDriverTest extends AbstractAnnotationModelTest {
   
    protected static OBOSession session;
    
