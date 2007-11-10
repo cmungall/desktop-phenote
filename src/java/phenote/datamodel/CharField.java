@@ -146,7 +146,7 @@ public class CharField {
   /** return true if holds a list of CharFieldValues, false if just 1 char field
       value */
   public boolean isList() {
-    return getTag().equals("NLA") || getTag().equals("GC"); // just testing...
+    return getTag().equals("NLA"); // || getTag().equals("GC"); // just testing...
     //return false;
   }
 
