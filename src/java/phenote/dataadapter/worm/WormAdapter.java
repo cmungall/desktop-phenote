@@ -55,7 +55,7 @@ public class WormAdapter implements QueryableDataAdapterI {
     List<CharacterI> l = EditManager.inst().getDeletedAnnotations();
     try {
       for (CharacterI chr : l) {
-        String pgdbid = chr.getValueString("PGDBID");
+        String pgdbid = chr.getValueString("PgdbBoxColId");
         if (pgdbid == null) continue;
         System.out.println("Delete "+pgdbid+" end"); 
         int colI = 0; int boxI = 0;					// initialize column to zero
@@ -110,6 +110,16 @@ public class WormAdapter implements QueryableDataAdapterI {
       updatePostgresBoxCol(c, postgres_table, joinkey, boxI, colI, null); }
   }
 
+  private void updatePostgresBox(Connection c, String postgres_table, String joinkey, int boxI, String value) {
+    PreparedStatement ps = null;	// intialize postgres insert 
+    System.out.println("INSERT INTO "+postgres_table+" VALUES joinkey "+joinkey+" boxI "+boxI+" value "+value+" end");
+    try { ps = c.prepareStatement("INSERT INTO "+postgres_table+" VALUES (?, ?, ?)"); ps.setString(1, joinkey); ps.setInt(2, boxI); ps.setString(3, value); }
+    catch (SQLException se) {
+      System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+    try { ps.executeUpdate(); } 	
+    catch (SQLException se) { System.out.println("We got an exception while executing an update in updatePostgresBox : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); }
+  } // private void updatePostgresCol(String postgres_table, String joinkey, int colI, String value)
+
   private void updatePostgresBoxCol(Connection c, String postgres_table, String joinkey, int boxI, int colI, String value) {
     PreparedStatement ps = null;	// intialize postgres insert 
     System.out.println("INSERT INTO "+postgres_table+" VALUES joinkey "+joinkey+" boxI "+boxI+" colI "+colI+" value "+value+" end");
@@ -140,15 +150,60 @@ public class WormAdapter implements QueryableDataAdapterI {
     throw new DataAdapterEx("Reference "+refID+" not found"); 	
   }
 
-  public void commitReference(CharacterI cMain) {
+  public void commitReference(CharacterI cMain, Connection c, Statement s) {
     try {
-      String refID = cMain.getTerm("Reference").getID();
-      CharacterI cRef = getCharacterReference(refID);
-      String pub = cRef.getValueString("Pub");
-      String person = cRef.getValueString("Person");
-      String nbp = cRef.getValueString("NBP");
-      String remark = cRef.getValueString("Paper Remark");
-//      System.out.println("Pub "+pub+" Per "+person+" nbp "+nbp+" remark "+remark+" end");
+      String allele = cMain.getValueString("Object Name");	// get the allele value from the character, currently could have a column number
+      String pgdbid = cMain.getValueString("PgdbBoxId");	// get the allele value from the character, currently could have a column number
+      String joinkey = allele; int boxI = 0;			// assign the tempname / allele to the joinkey    boxI to zero
+      if (pgdbid == null) { 
+        String pubID = null; String personID = null; String nbp = null;
+        Integer boxColumn[] = getBoxColumnFromPubPersonNBP(s, joinkey, pubID, personID, nbp);
+        boxI = boxColumn[0]; 
+//        System.out.println( "boxI : "+boxI+" pubID : "+pubID+" end.");
+//        System.out.println( "personID : "+personID+" end.");
+//        System.out.println( "nbp : "+nbp+" end."); 
+      }
+      else {
+        String match = find(".* - ([0-9]+)", pgdbid);  		// Find a tempname followed by space - space number
+        if (match != null) { boxI = Integer.parseInt(match); }	// get the column number if there is one
+//        System.out.println( "PgdbBoxId : "+pgdbid+" Box : "+boxI+" end.");
+        match = find("(.*) - [0-9]+", pgdbid);  		// Find a tempname followed by space - space number
+        if (match != null) { joinkey = match; } }		// query for this, otherwise keep the default value
+      if (boxI == 0) { System.out.println( "Error, joinkey "+joinkey+" has no box number"); }
+
+
+      String app_paper = null; String app_paper_name = cMain.getValueString("Pub");
+      if (app_paper_name != null) { app_paper = cMain.getTerm("Pub").getID(); }
+      String postgres_table = "app_paper"; String postgres_value = null;
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
+      if ( (postgres_value.equals("No postgres value assigned")) || (postgres_value.equals("postgres value is null")) ) { postgres_value = null; }
+      if ( (postgres_value == null) && (app_paper == null) ) { }
+        else if ( (postgres_value == null) || (app_paper == null) ) { updatePostgresBox(c, postgres_table, joinkey, boxI, app_paper); }
+        else if ( (postgres_value.equals(app_paper)) && (app_paper.equals(postgres_value)) ) { } 
+        else { updatePostgresBox(c, postgres_table, joinkey, boxI, app_paper); }
+
+      String app_person = null; String app_person_name = cMain.getValueString("Person");
+      if (app_person_name != null) { app_person = cMain.getTerm("Person").getID(); }
+      postgres_table = "app_person"; postgres_value = null;		
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
+      if ( (postgres_value.equals("No postgres value assigned")) || (postgres_value.equals("postgres value is null")) ) { postgres_value = null; }
+      if ( (postgres_value == null) && (app_person == null) ) { }
+        else if ( (postgres_value == null) || (app_person == null) ) { updatePostgresBox(c, postgres_table, joinkey, boxI, app_person); }
+        else if ( (postgres_value.equals(app_person)) && (app_person.equals(postgres_value)) ) { } 
+        else { updatePostgresBox(c, postgres_table, joinkey, boxI, app_person); }
+
+// FIX deal with nbp and paper remark
+
+//      String app_person = cRef.getValueString("Person");
+//      postgres_table = "app_person"; postgres_value = "No postgres value assigned";
+////      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
+////      if (postgres_value.equals(app_person)) { } else { updatePostgresBox(c, postgres_table, joinkey, boxI, app_person); }
+//      String app_intx_desc = cRef.getValueString("NBP");
+//      postgres_table = "app_intx_desc"; postgres_value = "No postgres value assigned";
+////      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
+////      if (postgres_value.equals(app_intx_desc)) { } else { updatePostgresBox(c, postgres_table, joinkey, boxI, app_intx_desc); }
+//      String app_remark = cRef.getValueString("Paper Remark");		// FIX THIS check all values, not most recent
+//      System.out.println("Joinkey "+joinkey+" pgdbBOXid "+pgdbid+" Pub "+app_paper+" Per "+app_person+" nbp "+app_intx_desc+" remark "+app_remark+" end");
     } catch (Exception e) {
       System.out.println("Could not commit Reference from character: " + e);
     }
@@ -156,11 +211,11 @@ public class WormAdapter implements QueryableDataAdapterI {
 
   static Integer[] getBoxColumnFromPubPersonNBP( Statement s, String joinkey, String pubID, String personID, String nbp ) {
     Integer boxColumn[] = new Integer[2];
-    if (nbp.equals("No postgres val")) { nbp = ""; }
+    if (nbp != null) { if (nbp.equals("No postgres val")) { nbp = ""; } }
     Integer box = 0;
-    String paper = "";
-    String person = "";
-    String intx_desc = "";
+    String app_paper = "";
+    String app_person = "";
+    String app_phenotype = "";
     Integer highestBox = 0;
     ResultSet rs = null;	// intialize postgres query result
     try { rs = s.executeQuery("SELECT app_box FROM app_paper WHERE joinkey = '"+joinkey+"' ORDER BY app_box DESC "); }
@@ -177,59 +232,63 @@ public class WormAdapter implements QueryableDataAdapterI {
     catch (SQLException se) {
       System.out.println("We got an exception while getting a app_box app_person "+joinkey+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
 
-    try { rs = s.executeQuery("SELECT app_box FROM app_intx_desc WHERE joinkey = '"+joinkey+"' ORDER BY app_box DESC "); }
+    try { rs = s.executeQuery("SELECT app_box FROM app_phenotype WHERE joinkey = '"+joinkey+"' ORDER BY app_box DESC "); }
     catch (SQLException se) {
-      System.out.println("We got an exception while executing our app_box app_intx_desc "+joinkey+" query: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while executing our app_box app_phenotype "+joinkey+" query: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
     try { if (rs.next()) { if (rs.getInt(1) > highestBox) { highestBox = rs.getInt(1); } } }	// get the next highest number column for that allele
     catch (SQLException se) {
-      System.out.println("We got an exception while getting a app_box app_intx_desc "+joinkey+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while getting a app_box app_phenotype "+joinkey+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
+
+    if ( (pubID == null) && (personID == null) && (nbp == null) ) {
+      highestBox++;		// there were no matches, return one greater than the highest existing box, and a column of 1
+      boxColumn[0] = highestBox; boxColumn[1] = 1;
+      return boxColumn; }
 
     for (int boxI=1; boxI<highestBox+1; boxI++) {					// for each of those boxes
       Integer three_match = 0;
 
-      System.out.println("SELECT * FROM app_paper WHERE joinkey = '"+joinkey+"' AND app_box = '"+boxI+"' ORDER BY app_timestamp "); 
+//      System.out.println("SELECT * FROM app_paper WHERE joinkey = '"+joinkey+"' AND app_box = '"+boxI+"' ORDER BY app_timestamp "); 
       try { rs = s.executeQuery("SELECT * FROM app_paper WHERE joinkey = '"+joinkey+"' AND app_box = '"+boxI+"' ORDER BY app_timestamp "); }
       catch (SQLException se) {
         System.out.println("We got an exception while executing our app_paper boxI "+boxI+" query: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
-      try { while (rs.next()) { box = rs.getInt(2); paper = rs.getString(3); } }		// assign the new term value
+      try { while (rs.next()) { box = rs.getInt(2); app_paper = rs.getString(3); } }		// assign the new term value
       catch (SQLException se) {
         System.out.println("We got an exception while getting a app_paper boxI "+boxI+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
-      System.out.println("box "+box+" paper "+paper+" end");
-      if (paper.contains(pubID)) { three_match++; }
-//          System.out.println("box "+box+" paper "+paper+" matches pubID "+pubID+" end"); 
+//      System.out.println("box "+box+" app_paper "+app_paper+" end");
+      if (app_paper.contains(pubID)) { three_match++; }
+//          System.out.println("box "+box+" app_paper "+app_paper+" matches pubID "+pubID+" end"); 
 //        else {
-//          System.out.println("box "+box+" paper "+paper+" does not match pubID "+pubID+" end"); }
+//          System.out.println("box "+box+" app_paper "+app_paper+" does not match pubID "+pubID+" end"); }
 
-      System.out.println("SELECT * FROM app_person WHERE joinkey = '"+joinkey+"' AND app_box = '"+boxI+"' ORDER BY app_timestamp "); 
+//      System.out.println("SELECT * FROM app_person WHERE joinkey = '"+joinkey+"' AND app_box = '"+boxI+"' ORDER BY app_timestamp "); 
       try { rs = s.executeQuery("SELECT * FROM app_person WHERE joinkey = '"+joinkey+"' AND app_box = '"+boxI+"' ORDER BY app_timestamp "); }
       catch (SQLException se) {
         System.out.println("We got an exception while executing our app_person boxI "+boxI+" query: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
-      try { while (rs.next()) { box = rs.getInt(2); person = rs.getString(3); } }		// assign the new term value
+      try { while (rs.next()) { box = rs.getInt(2); app_person = rs.getString(3); } }		// assign the new term value
       catch (SQLException se) {
         System.out.println("We got an exception while getting a app_person boxI "+boxI+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
-      System.out.println("box "+box+" person "+person+" end");
-      if (person.contains(personID)) { three_match++; }
-//          System.out.println("box "+box+" person "+person+" matches personID "+personID+" end"); 
+//      System.out.println("box "+box+" app_person "+app_person+" end");
+      if (app_person.contains(personID)) { three_match++; }
+//          System.out.println("box "+box+" app_person "+app_person+" matches personID "+personID+" end"); 
 //        else {
-//          System.out.println("box "+box+" person "+person+" does not match personID "+personID+" end"); }
+//          System.out.println("box "+box+" app_person "+app_person+" does not match personID "+personID+" end"); }
 
-      System.out.println("SELECT * FROM app_intx_desc WHERE joinkey = '"+joinkey+"' AND app_box = '"+boxI+"' ORDER BY app_timestamp "); 
-      try { rs = s.executeQuery("SELECT * FROM app_intx_desc WHERE joinkey = '"+joinkey+"' AND app_box = '"+boxI+"' ORDER BY app_timestamp "); }
+//      System.out.println("SELECT * FROM app_phenotype WHERE joinkey = '"+joinkey+"' AND app_box = '"+boxI+"' ORDER BY app_timestamp "); 
+      try { rs = s.executeQuery("SELECT * FROM app_phenotype WHERE joinkey = '"+joinkey+"' AND app_box = '"+boxI+"' ORDER BY app_timestamp "); }
       catch (SQLException se) {
-        System.out.println("We got an exception while executing our app_intx_desc boxI "+boxI+" query: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
-      try { while (rs.next()) { box = rs.getInt(2); intx_desc = rs.getString(3); } }		// assign the new term value
+        System.out.println("We got an exception while executing our app_phenotype boxI "+boxI+" query: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      try { while (rs.next()) { box = rs.getInt(2); app_phenotype = rs.getString(3); } }		// assign the new term value
       catch (SQLException se) {
-        System.out.println("We got an exception while getting a app_intx_desc boxI "+boxI+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
-      System.out.println("box "+box+" intx_desc "+intx_desc+" end");
-      if (intx_desc.contains(nbp)) { three_match++; }
-//          System.out.println("box "+box+" intx_desc "+intx_desc+" matches nbp "+nbp+" end"); 
+        System.out.println("We got an exception while getting a app_phenotype boxI "+boxI+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
+//      System.out.println("box "+box+" app_phenotype "+app_phenotype+" end");
+      if (app_phenotype.contains(nbp)) { three_match++; }
+//          System.out.println("box "+box+" app_phenotype "+app_phenotype+" matches nbp "+nbp+" end"); 
 //        else {
-//          System.out.println("box "+box+" intx_desc "+intx_desc+" does not match nbp "+nbp+" end"); }
+//          System.out.println("box "+box+" app_phenotype "+app_phenotype+" does not match nbp "+nbp+" end"); }
 //
       if (three_match == 3) { 
         Integer colI = 0;
-        System.out.println("triple match for boxI "+boxI+" pubID "+pubID+" paper "+paper+" person ID "+personID+" person "+person+" NBP "+nbp+" intx_desc "+intx_desc+" end"); 
-System.out.println("SELECT app_column FROM app_term WHERE joinkey = '"+joinkey+"' AND app_box = '"+boxI+"' ORDER BY app_column DESC"); 
+//        System.out.println("triple match for boxI "+boxI+" pubID "+pubID+" app_paper "+app_paper+" personID "+personID+" app_person "+app_person+" NBP "+nbp+" app_phenotype "+app_phenotype+" end"); 
         try { rs = s.executeQuery("SELECT app_column FROM app_term WHERE joinkey = '"+joinkey+"' AND app_box = '"+boxI+"' ORDER BY app_column DESC"); }
         catch (SQLException se) {
           System.out.println("We got an exception while executing our app_term query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
@@ -237,12 +296,13 @@ System.out.println("SELECT app_column FROM app_term WHERE joinkey = '"+joinkey+"
         catch (SQLException se) {
           System.out.println("We got an exception while getting a column/term under three_match joinkey "+joinkey+" result:this shouldn't happen: we've done something really bad."); 
           se.printStackTrace(); System.exit(1); } 
-System.out.println("returning boxI "+boxI+" colI "+colI+" end");
         boxColumn[0] = boxI; boxColumn[1] = colI;		// return the matching boxI and the next highest column in that box
         return boxColumn;
       }
       else { 
-        System.out.println("no triple match for boxI "+boxI+" pubID "+pubID+" paper "+paper+" person ID "+personID+" person "+person+" NBP "+nbp+" intx_desc "+intx_desc+" end"); }
+//        System.out.println("no triple match for boxI "+boxI+" pubID "+pubID+" app_paper "+app_paper+" personID "+personID+" app_person "+app_person+" NBP "+nbp+" app_phenotype "+app_phenotype+" end");
+      }
+       
 
     } // for (int boxI=1; boxI<highestBox+1; boxI++) 
     highestBox++;		// there were no matches, return one greater than the highest existing box, and a column of 1
@@ -251,7 +311,13 @@ System.out.println("returning boxI "+boxI+" colI "+colI+" end");
   } // static String[] getBoxColumnFromPubPersonNBP( Statement s, String joinkey, String pubID, String personID, String nbp )
 
 
+
+
   public void commit(CharacterListI charList) {
+// FIX need to get group here somehow so that it only commits Reference or default, not both all the time
+    // if (group.equals("default")) return queryForDefaultGroup(field,query)
+    // else if (group.equals("referenceMaker")) return queryForReferenceMaker(field,query);
+    
 //    String m = "Worm adapter commit not yet implemented.";
 //    JOptionPane.showMessageDialog(null,m,"Worm stub",JOptionPane.INFORMATION_MESSAGE);
     Connection c = connectToDB();
@@ -262,10 +328,10 @@ System.out.println("returning boxI "+boxI+" colI "+colI+" end");
     for (CharacterI chr : charList.getList()) {
 //      System.out.println("Chr "+chr+" end");
       try {
-        commitReference(chr);
+        commitReference(chr, c, s);
         String app_reference = chr.getTerm("Reference").getID();
         String allele = chr.getValueString("Object Name");	// get the allele value from the character, currently could have a column number
-        String pgdbid = chr.getValueString("PGDBID");	// get the allele value from the character, currently could have a column number
+        String pgdbid = chr.getValueString("PgdbBoxColId");	// get the allele value from the character, currently could have a column number
         String joinkey = allele;			// assign the tempname / allele to the joinkey 
         int colI = 0; int boxI = 0;					// initialize column to zero
         if (pgdbid != null) { 
@@ -273,7 +339,7 @@ System.out.println("returning boxI "+boxI+" colI "+colI+" end");
           if (match != null) { boxI = Integer.parseInt(match); }	// get the column number if there is one
           match = find(".* - [0-9]+ - ([0-9]+)", pgdbid);  	// Find a tempname followed by space - space number
           if (match != null) { colI = Integer.parseInt(match); }	// get the column number if there is one
-//         System.out.println( "PGDBID : "+pgdbid+" Column : "+colI+" end.");
+//         System.out.println( "PgdbBoxColId : "+pgdbid+" Column : "+colI+" end.");
           match = find("(.*) - [0-9]+ - [0-9]+", pgdbid);  	// Find a tempname followed by space - space number
           if (match != null) { joinkey = match; } }		// query for this, otherwise keep the default value
         else { 
@@ -282,9 +348,9 @@ System.out.println("returning boxI "+boxI+" colI "+colI+" end");
           String pubID = refvalue[0]; String personID = refvalue[1]; String nbp = refvalue[2];
           Integer boxColumn[] = getBoxColumnFromPubPersonNBP(s, joinkey, pubID, personID, nbp);
           boxI = boxColumn[0]; colI = boxColumn[1];
-          System.out.println( "pubID : "+pubID+" end.");
-          System.out.println( "personID : "+personID+" end.");
-          System.out.println( "nbp : "+nbp+" end.");
+//          System.out.println( "pubID : "+pubID+" end.");
+//          System.out.println( "personID : "+personID+" end.");
+//          System.out.println( "nbp : "+nbp+" end.");
 //          System.out.println( "pubID : "+pubID+" end.");
           if (colI < 1) {				// if there are no columns, find the highest existing column and add 1 to make the next one
             ResultSet rs = null;
@@ -295,10 +361,10 @@ System.out.println("returning boxI "+boxI+" colI "+colI+" end");
             catch (SQLException se) {
               System.out.println("We got an exception while getting a column/term joinkey "+joinkey+" result:this shouldn't happen: we've done something really bad."); 
               se.printStackTrace(); System.exit(1); } } }
-        System.out.println( "Allele : "+allele+" end.");
-        System.out.println( "Box : "+boxI+" end.");
-        System.out.println( "Column : "+colI+" end.");
-        System.out.println( "Reference : "+app_reference+" end.");
+//        System.out.println( "Allele : "+allele+" end.");
+//        System.out.println( "Box : "+boxI+" end.");
+//        System.out.println( "Column : "+colI+" end.");
+//        System.out.println( "Reference : "+app_reference+" end.");
 //         String app_paper = chr.getValueString("Pub");
 //        String app_paper = chr.getTerm("Pub").getID();
 //        System.out.println( "Pub : "+app_paper+" end.");
@@ -339,7 +405,7 @@ System.out.println("returning boxI "+boxI+" colI "+colI+" end");
         postgres_table = "app_term"; postgres_value = "No postgres value assigned";
         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
         if (postgres_value.equals(app_term)) { } else { updatePostgresBoxCol(c, postgres_table, joinkey, boxI, colI, app_term); }
-        System.out.println( "Phenotype : "+app_term+" end.");
+//        System.out.println( "Phenotype : "+app_term+" end.");
         String app_phen_remark = chr.getValueString("Phenotype Remark");
         postgres_table = "app_phen_remark"; postgres_value = "No postgres value assigned";
         postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
@@ -568,6 +634,7 @@ System.out.println("returning boxI "+boxI+" colI "+colI+" end");
 //      name = queryPostgresName(s, "two_standardname", personID);
   private String queryPostgresName(Statement s, String postgres_table, String personID) {
     String joinkey = find("([0-9]+)", personID);		// Find a WBPaper followed by any amount of digits
+    joinkey = "two"+joinkey;					// joinkey has ``two'' in front of i7
     String name = null;
     ResultSet rs = null;	// intialize postgres query result
     try { rs = s.executeQuery("SELECT * FROM "+postgres_table+" WHERE joinkey = '"+joinkey+"' ORDER BY two_timestamp "); }
@@ -624,6 +691,51 @@ System.out.println("returning boxI "+boxI+" colI "+colI+" end");
     return default_value; 
   }
 
+  private String queryPostgresCharacterDate(Statement s, String postgres_table, String default_value, String query, int boxI, int colI) {
+    ResultSet rs = null;	// intialize postgres query result
+    if (colI > 0) {
+      try { rs = s.executeQuery("SELECT * FROM "+postgres_table+" WHERE joinkey = '"+query+"' AND app_column='"+colI+"' AND app_box='"+boxI+"' ORDER BY app_timestamp"); }
+      catch (SQLException se) {
+        System.out.println("We got an exception while executing our "+postgres_table+" query: that probably means our colI > 0 term SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      try { while (rs.next()) { default_value = rs.getString(5); } }		// assign the new term value
+      catch (SQLException se) {
+        System.out.println("We got an exception while getting a "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); } }
+    else if (boxI > 0) {
+      try { rs = s.executeQuery("SELECT * FROM "+postgres_table+" WHERE joinkey = '"+query+"' AND app_box='"+boxI+"' ORDER BY app_timestamp"); }
+      catch (SQLException se) {
+        System.out.println("We got an exception while executing our "+postgres_table+" query: that probably means our boxI > 0 term SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      try { while (rs.next()) { default_value = rs.getString(4); } }		// assign the new term value
+      catch (SQLException se) {
+        System.out.println("We got an exception while getting a "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); } }
+    else {
+      try { rs = s.executeQuery("SELECT * FROM "+postgres_table+" WHERE joinkey = '"+query+"' ORDER BY app_timestamp"); }
+      catch (SQLException se) {
+        System.out.println("We got an exception while executing our "+postgres_table+" query: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      try { while (rs.next()) { default_value = rs.getString(3); } }		// assign the new term value
+      catch (SQLException se) {
+        System.out.println("We got an exception while getting a "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); } }
+    if (default_value == null) { default_value = "postgres value is null"; }
+    if (default_value == "") { default_value = "postgres value is blank"; }
+    String date_match = find("([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9])", default_value);		// Find a WBPaper followed by any amount of digits
+    if (date_match != null) { default_value = date_match; } 						// query for this, otherwise keep the default value
+    return default_value; 
+  }
+
+//        postgres_value = queryPostgresPapRem(s, postgres_table, joinkey, pubID);
+  private String queryPostgresPapRem(Statement s, String postgres_table, String joinkey, String pubID) {
+    ResultSet rs = null;	// intialize postgres query result
+    String default_value = null;
+    try { rs = s.executeQuery("SELECT * FROM "+postgres_table+" WHERE joinkey = '"+joinkey+"' AND app_wbpaper ~ '"+pubID+"' ORDER BY app_timestamp"); }
+    catch (SQLException se) {
+      System.out.println("We got an exception while executing our "+postgres_table+" query: that probably means our colI > 0 term SQL is invalid"); se.printStackTrace(); System.exit(1); }
+    try { while (rs.next()) { default_value = rs.getString(3); } }		// assign the new term value
+    catch (SQLException se) {
+      System.out.println("We got an exception while getting a "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
+    if (default_value == null) { default_value = "postgres value is null"; }
+    if (default_value == "") { default_value = "postgres value is blank"; }
+    return default_value; 
+  }
+
 //        postgres_value = queryPostgresPapRemHist(s, postgres_table, postgres_value, pubID);
   private String queryPostgresPapRemHist(Statement s, String postgres_table, String pubID) {
     StringBuilder sb = new StringBuilder();
@@ -648,7 +760,7 @@ System.out.println("returning boxI "+boxI+" colI "+colI+" end");
     try {
       CharacterI c1 = CharacterIFactory.makeChar();				// create a new character for a phenote row
 
-      String pubID = null; String title = null; String personID = null; String name = null; String nbp = null;
+      String pubID = null; String title = null; String personID = null; String name = null; String nbp = null; String nbpDate = null; String intxDesc = null;
 
       String postgres_table = "app_paper"; String postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
@@ -659,7 +771,6 @@ System.out.println("returning boxI "+boxI+" colI "+colI+" end");
          title = queryPostgresTitle(s, "wpa_title", pubID); }
 //       c1.setValue("Pub",postgres_value);					// assign the queried value
       if (postgres_value == "No postgres value assigned") { } else { c1.setValue("Pub",postgres_value); }					// assign the queried value
-//System.out.println("pubID "+pubID+" box "+boxI+" is not null"); 
       postgres_table = "app_person"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
       String person_match = find("(WBPerson[0-9]*)", postgres_value);	// Find a WBPerson followed by any amount of digits
@@ -668,14 +779,36 @@ System.out.println("returning boxI "+boxI+" colI "+colI+" end");
         personID = person_match; 
         name = queryPostgresName(s, "two_standardname", personID); }
       if (postgres_value == "No postgres value assigned") { } else { c1.setValue("Person",postgres_value); }					// assign the queried value
-      postgres_table = "app_phenotype"; postgres_value = "No postgres value assigned";
+
+      postgres_table = "app_phenotype"; postgres_value = "No postgres value assigned";		// NBP is phenotype, not intx_desc
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
       if (postgres_value != null) { nbp = postgres_value; }
       c1.setValue("NBP",postgres_value);					// assign the queried value
 
+      postgres_table = "app_phenotype"; postgres_value = "No postgres value assigned";		
+      postgres_value = queryPostgresCharacterDate(s, postgres_table, postgres_value, joinkey, boxI, 0);
+      if (postgres_value != null) { nbpDate = postgres_value; }
+      c1.setValue("NBP Date",postgres_value);					// assign the queried value
+
+      postgres_table = "app_intx_desc"; postgres_value = "No postgres value assigned";	
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
+      if (postgres_value != null) { intxDesc = postgres_value; }
+      c1.setValue("IntxDesc",postgres_value);					// assign the queried value
+
+      c1.setValue("Object Name",joinkey);					// assign the allele and the column
+      String alleleColumn = joinkey+" - "+boxI;
+      c1.setValue("PgdbBoxId",alleleColumn);					// assign the allele and the column
+      postgres_table = "app_type"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, 0, 0);
+      c1.setValue("Object Type",postgres_value);					// assign the queried value
+
       if (pubID != null) {
 //        System.out.println("pubID "+pubID+" is not null"); 
         postgres_table = "app_paper_remark"; 
+        postgres_value = "No postgres value assigned";	
+        postgres_value = queryPostgresPapRem(s, postgres_table, joinkey, pubID);
+        c1.setValue("Paper Remark",postgres_value); 
+        postgres_value = "No postgres value assigned";	
         postgres_value = queryPostgresPapRemHist(s, postgres_table, pubID);
         c1.setValue("Paper Remark History",postgres_value); }					// assign the queried value
 
@@ -699,7 +832,7 @@ System.out.println("returning boxI "+boxI+" colI "+colI+" end");
 
       c1.setValue("Object Name",joinkey);					// assign the allele and the column
       String alleleColumn = joinkey+" - "+boxI+" - "+colI;
-      c1.setValue("PGDBID",alleleColumn);					// assign the allele and the column
+      c1.setValue("PgdbBoxColId",alleleColumn);					// assign the allele and the column
       String postgres_table = "app_type"; String postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, 0, 0);
       c1.setValue("Object Type",postgres_value);					// assign the queried value
@@ -831,8 +964,10 @@ System.out.println("returning boxI "+boxI+" colI "+colI+" end");
 //    String m = "Worm adapter query not yet implemented. field: "+field+" query: "+query;
 //    JOptionPane.showMessageDialog(null,m,"Worm stub",JOptionPane.INFORMATION_MESSAGE);
 
+
     String alleleString = "Object Name";			// the query could be for Allele or Pub
     String pubString = "Pub";
+    String nbpString = "NBP Date";
 //    System.out.println("Querying field "+field+" query "+query+" end");
 //    if (field.equals(alleleString)) { System.out.println("Yes Allele"); } else { System.out.println("Not Allele"); }
 
@@ -842,16 +977,14 @@ System.out.println("returning boxI "+boxI+" colI "+colI+" end");
       Connection c = connectToDB();
       Statement s = null;
       try { s = c.createStatement(); }
-        catch (SQLException se) {
-        System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); System.exit(1); }
+        catch (SQLException se) { System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); System.exit(1); }
 
       ResultSet rs = null;	// intialize postgres query result
 //      String match = find("(.*) - [0-9]+ - [0-9]+", query);  	// Find a tempname followed by space - space number when query by postgres database ID instead of object name like it really should
 //      if (match != null) { query = match; }		// query for this, otherwise keep the default value
       String joinkey = query;
       try { rs = s.executeQuery("SELECT * FROM app_tempname WHERE app_tempname = '"+joinkey+"'");	}	// find the allele that matches the queried allele
-      catch (SQLException se) {
-        System.out.println("We got an exception while executing our app_tempname query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      catch (SQLException se) { System.out.println("We got an exception while executing our app_tempname query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
       int foundAllele = 0;
       try {
         while (rs.next()) {
@@ -865,47 +998,34 @@ System.out.println("returning boxI "+boxI+" colI "+colI+" end");
         else { 
           rs = null; int boxes = 0; 		// the number of boxes 
           try { rs = s.executeQuery("SELECT app_box FROM app_term WHERE joinkey = '"+joinkey+"' ORDER BY app_box DESC"); }
-          catch (SQLException se) {
-            System.out.println("We got an exception while executing our app_term query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
-          try { while (rs.next()) { 
-            if (rs.getInt(1) > boxes) { boxes = rs.getInt(1); } } } 		// assign the highest number boxes for that allele to the number of boxes 
+          catch (SQLException se) { System.out.println("We got an exception while executing our app_term query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
+          try { while (rs.next()) { if (rs.getInt(1) > boxes) { boxes = rs.getInt(1); } } } 		// assign the highest number boxes for that allele to the number of boxes 
           catch (SQLException se) {
             System.out.println("We got an exception while getting a column/term joinkey "+joinkey+" result:this shouldn't happen: we've done something really bad."); 
             se.printStackTrace(); System.exit(1); }
 //System.out.println("there are "+boxes+" boxes for "+joinkey+" joinkey"); 
           for (int boxI=1; boxI<boxes+1; boxI++) {					// for each of those columns
-            
             if (group.equals("default")) { 		// these values only go to the Main tab 
               int columns = 0;
               try { rs = s.executeQuery("SELECT app_column FROM app_term WHERE app_box = '"+boxI+"' AND joinkey = '"+joinkey+"' ORDER BY app_column DESC"); }
-              catch (SQLException se) {
-                System.out.println("We got an exception while executing our app_term query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
-              try { while (rs.next()) { 
-                if (rs.getInt(1) > columns) { columns = rs.getInt(1); } } } 		// assign the highest number boxes for that allele to the number of boxes 
+              catch (SQLException se) { System.out.println("We got an exception while executing our app_term query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
+              try { while (rs.next()) { if (rs.getInt(1) > columns) { columns = rs.getInt(1); } } } 		// assign the highest number boxes for that allele to the number of boxes 
               catch (SQLException se) {
                 System.out.println("We got an exception while getting a column/term joinkey "+joinkey+" result:this shouldn't happen: we've done something really bad."); 
                 se.printStackTrace(); System.exit(1); }
-              for (int colI=1; colI<columns+1; colI++) {					// for each of those columns
-                charList = queryPostgresCharacterMainList(group, charList, s, joinkey, boxI, colI); } }
-            else if (group.equals("referenceMaker")) { 	// these values only go to the referenceMaker tab
-//System.out.println("querying box "+boxI+" for "+joinkey+" joinkey"); 
-              charList = queryPostgresCharacterReferenceList(group, charList, s, joinkey, boxI, 0); } }
+              for (int colI=1; colI<columns+1; colI++) { charList = queryPostgresCharacterMainList(group, charList, s, joinkey, boxI, colI); } }
+            else if (group.equals("referenceMaker")) { charList = queryPostgresCharacterReferenceList(group, charList, s, joinkey, boxI, 0); } }	// these values only go to the referenceMaker tab
           return charList; }	// if there is a match
 
     } else if (field.equals(pubString)) {						// if querying the publication, get paper data
       Connection c = connectToDB();
-      Statement s = null;
+      Statement s = null; Statement s2 = null; Statement s3 = null;
       try { s = c.createStatement(); }
-       catch (SQLException se) {
-        System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); System.exit(1); }
-      Statement s2 = null;
+       catch (SQLException se) { System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); System.exit(1); }
       try { s2 = c.createStatement(); }
-       catch (SQLException se) {
-        System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); System.exit(1); }
-      Statement s3 = null;
+       catch (SQLException se) { System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); System.exit(1); }
       try { s3 = c.createStatement(); }
-       catch (SQLException se) {
-        System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); System.exit(1); }
+       catch (SQLException se) { System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); System.exit(1); }
 
       String match = find("(WBPaper[0-9]*)", query);  	// Find a WBPaper followed by any amount of digits
       if (match != null) { query = match; }		// query for this, otherwise keep the default value
@@ -913,8 +1033,7 @@ System.out.println("returning boxI "+boxI+" colI "+colI+" end");
       ResultSet rs = null;				// initialize result of query
 //       System.out.println("Paper "+query+" end");
       try { rs = s2.executeQuery("SELECT DISTINCT(joinkey) FROM app_paper WHERE app_paper ~ '"+query+"' ORDER BY joinkey;"); }	// get the alleles from a paper
-      catch (SQLException se) {
-        System.out.println("We got an exception while executing our app_paper joinkey query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      catch (SQLException se) { System.out.println("We got an exception while executing our app_paper joinkey query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
       try { if (rs.next()) { foundPaper++; } }
       catch (SQLException se) {
         System.out.println("We got an exception while getting a publication query result joinkey app_paper :this shouldn't happen: we've done something really bad."); 
@@ -923,28 +1042,70 @@ System.out.println("returning boxI "+boxI+" colI "+colI+" end");
         else {
           ResultSet rs2 = null;				// initialize result of query
           try { rs2 = s2.executeQuery("SELECT DISTINCT(joinkey), app_box FROM app_paper WHERE app_paper ~ '"+query+"' ORDER BY joinkey;"); }	// get the alleles from a paper
-          catch (SQLException se) {
-            System.out.println("We got an exception while executing our app_paper joinkey box query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+          catch (SQLException se) { System.out.println("We got an exception while executing our app_paper joinkey box query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
           try { while (rs2.next()) {								// while there's data in postgres
             String joinkey = "No Allele assigned for Publication "+query+".";			// initialize allele in each phenote character Row
             joinkey = rs2.getString(1); 							// get the allele from postgres
             int boxI = rs2.getInt(2);								// get the box from postgres
             ResultSet rs3 = null;								// initialize result of query
             try { rs3 = s3.executeQuery("SELECT app_column FROM app_term WHERE app_box = '"+boxI+"' AND joinkey = '"+joinkey+"' ORDER BY joinkey;"); }	// get the columns from a paper
-            catch (SQLException se) {
-              System.out.println("We got an exception while executing our app_term query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+            catch (SQLException se) { System.out.println("We got an exception while executing our app_term query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
 
             int columns = 0;
-            try { while (rs3.next()) {								// while there's data in postgres
-              if (rs3.getInt(1) > columns) { columns = rs3.getInt(1); } } } 		// assign the highest number column for that allele to the number of columns
+            try { while (rs3.next()) { if (rs3.getInt(1) > columns) { columns = rs3.getInt(1); } } }  // while there's data in postgres assign the highest number column for that allele to the number of columns
             catch (SQLException se) {
               System.out.println("We got an exception while getting a publication query result column app_term :this shouldn't happen: we've done something really bad."); 
-               se.printStackTrace(); System.exit(1); }
-            if (group.equals("default")) { 		// these values only go to the Main tab 
-              for (int colI=1; colI<columns+1; colI++) {					// for each of those columns
-                charList = queryPostgresCharacterMainList(group, charList, s, joinkey, boxI, colI); } }
-            else if (group.equals("referenceMaker")) { 	// these values only go to the referenceMaker tab
-              charList = queryPostgresCharacterReferenceList(group, charList, s, joinkey, boxI, 0); }
+              se.printStackTrace(); System.exit(1); }
+            if (group.equals("default")) { for (int colI=1; colI<columns+1; colI++) { charList = queryPostgresCharacterMainList(group, charList, s, joinkey, boxI, colI); } } 
+	         // these values only go to the Main tab 
+              else if (group.equals("referenceMaker")) { charList = queryPostgresCharacterReferenceList(group, charList, s, joinkey, boxI, 0); }	// these values only go to the referenceMaker tab
+          } }
+          catch (SQLException se) {
+            System.out.println("We got an exception while getting a publication query result joinkey, box app_paper :this shouldn't happen: we've done something really bad."); 
+            se.printStackTrace(); System.exit(1); }
+          return charList; 
+      } // end -- if there's a publication found in postgres
+
+    } else if (field.equals(nbpString)) {						// if querying the app_phenotype NBP Date, get matching data
+      Connection c = connectToDB();
+      Statement s = null; Statement s2 = null; Statement s3 = null;
+      try { s = c.createStatement(); }
+       catch (SQLException se) { System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); System.exit(1); }
+      try { s2 = c.createStatement(); }
+       catch (SQLException se) { System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); System.exit(1); }
+      try { s3 = c.createStatement(); }
+       catch (SQLException se) { System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); System.exit(1); }
+
+      int foundNBPdate = 0;				// flag if there are any papers in postgres that match, otherwise give an error warning
+      ResultSet rs = null;				// initialize result of query
+//      System.out.println("NBP Date "+query+" end");
+      try { rs = s2.executeQuery("SELECT DISTINCT(joinkey) FROM app_phenotype WHERE app_timestamp ~ '"+query+"' ORDER BY joinkey;"); }	// get the alleles from a paper
+      catch (SQLException se) { System.out.println("We got an exception while executing our app_paper joinkey query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      try { if (rs.next()) { foundNBPdate++; } }
+      catch (SQLException se) {
+        System.out.println("We got an exception while getting a publication query result joinkey app_paper : this shouldn't happen: we've done something really bad."); 
+        se.printStackTrace(); System.exit(1); }
+      if (foundNBPdate <= 0) { throw new DataAdapterEx("Worm query of "+query+" of field "+field+" has no match in postgres"); }	// if there is no match for the allele in postgres
+        else {
+          ResultSet rs2 = null;				// initialize result of query
+          try { rs2 = s2.executeQuery("SELECT DISTINCT(joinkey), app_box FROM app_phenotype WHERE app_timestamp ~ '"+query+"' ORDER BY joinkey;"); }	// get the alleles from a paper
+          catch (SQLException se) { System.out.println("We got an exception while executing our app_phenotype date box query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+          try { while (rs2.next()) {								// while there's data in postgres
+            String joinkey = "No Allele assigned for Publication "+query+".";			// initialize allele in each phenote character Row
+            joinkey = rs2.getString(1); 							// get the allele from postgres
+            int boxI = rs2.getInt(2);								// get the box from postgres
+            ResultSet rs3 = null;								// initialize result of query
+            try { rs3 = s3.executeQuery("SELECT app_column FROM app_term WHERE app_box = '"+boxI+"' AND joinkey = '"+joinkey+"' ORDER BY joinkey;"); }	// get the columns from a paper
+            catch (SQLException se) { System.out.println("We got an exception while executing our app_term query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+
+            int columns = 0;
+            try { while (rs3.next()) { if (rs3.getInt(1) > columns) { columns = rs3.getInt(1); } } }  // while there's data in postgres assign the highest number column for that allele to the number of columns
+            catch (SQLException se) {
+              System.out.println("We got an exception while getting a publication query result column app_term : this shouldn't happen: we've done something really bad."); 
+              se.printStackTrace(); System.exit(1); }
+            if (group.equals("default")) { for (int colI=1; colI<columns+1; colI++) { charList = queryPostgresCharacterMainList(group, charList, s, joinkey, boxI, colI); } } 
+	         // these values only go to the Main tab 
+              else if (group.equals("referenceMaker")) { charList = queryPostgresCharacterReferenceList(group, charList, s, joinkey, boxI, 0); }	// these values only go to the referenceMaker tab
           } }
           catch (SQLException se) {
             System.out.println("We got an exception while getting a publication query result joinkey, box app_paper :this shouldn't happen: we've done something really bad."); 

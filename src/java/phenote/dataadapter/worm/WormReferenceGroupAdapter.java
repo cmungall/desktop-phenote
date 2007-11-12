@@ -71,7 +71,7 @@ public class WormReferenceGroupAdapter extends AbstractGroupAdapter {
   }
 
   static String[] getPubPersonNBPFromReference( String reference, String joinkey ) {
-    System.out.println("getBoxFromPubPersonNBP reference --"+reference+"-- end");
+//    System.out.println("getBoxFromPubPersonNBP reference --"+reference+"-- end");
     Integer pubID = 0; String title = null;
     Integer personID = 0; String name = null;
     String nbp = null;
@@ -80,23 +80,23 @@ public class WormReferenceGroupAdapter extends AbstractGroupAdapter {
       try { pubID = Integer.parseInt(match); }
         catch (ArrayIndexOutOfBoundsException e) { System.out.println("this is okay : can't parse pubID "+e); }
         catch (NumberFormatException e) { System.out.println("this is okay : can't parse pubID "+e); } }	// get the pubID number if there is one
-    System.out.println("pubID "+pubID+" end");
+//    System.out.println("pubID "+pubID+" end");
     match = find(":.*_(.*)_.*_.*_.*", reference);
     if (match != null) { title = match; }
-    System.out.println("title "+title+" end");
+//    System.out.println("title "+title+" end");
     match = find(":.*_.*_(.*)_.*_.*", reference);
     if (match != null) { 
     try { personID = Integer.parseInt(match); }
       catch (ArrayIndexOutOfBoundsException e) { System.out.println("this is okay : can't parse personID "+e); }
       catch (NumberFormatException e) { System.out.println("this is okay : can't parse personID "+e); } }	// get the personID number if there is one
-    System.out.println("personID "+personID+" end");
+//    System.out.println("personID "+personID+" end");
     match = find(":.*_.*_.*_(.*)_.*", reference);
     if (match != null) { name = match; }
-    System.out.println("name "+name+" end");
+//    System.out.println("name "+name+" end");
     match = find(":.*_.*_.*_.*_(.*)", reference);
     if (match != null) { nbp = match; }
-    System.out.println("nbp "+nbp+" end");
-    System.out.println("pubID "+pubID+" title "+title+" personID "+personID+" name "+name+" nbp "+nbp+" end");
+//    System.out.println("nbp "+nbp+" end");
+//    System.out.println("pubID "+pubID+" title "+title+" personID "+personID+" name "+name+" nbp "+nbp+" end");
 
     String value[] = new String[3];
     if (pubID < 1) { value[0] = ""; }
