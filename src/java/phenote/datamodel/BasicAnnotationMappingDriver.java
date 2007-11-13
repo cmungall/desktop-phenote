@@ -11,6 +11,7 @@ import org.obo.datamodel.IdentifiedObject;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
 import org.obo.datamodel.Value;
+import org.obo.datamodel.impl.DanglingObjectImpl;
 import org.obo.datamodel.impl.DatatypeValueImpl;
 import org.obo.datamodel.impl.OBOPropertyImpl;
 import org.obo.history.AddPropertyValueHistoryItem;
@@ -91,10 +92,14 @@ public class BasicAnnotationMappingDriver implements AnnotationMappingDriver {
 	public void setPropertyValue(Annotation annotation, OBOProperty property,
 			String value) {
 		clearProperty(annotation, property);
-		if (changeObjectsMode)
-			annotation.addPropertyValue(property, new DatatypeValueImpl(
-					Datatype.STRING, value));
+		if (changeObjectsMode) {
+			//annotation.addPropertyValue(property, new DatatypeValueImpl(
+			//		Datatype.STRING, value));
+			IdentifiedObject valueInst = new DanglingObjectImpl(value);
+			annotation.addPropertyValue(property, valueInst);
+		}
 		if (auditHistoryMode) {
+			// TODO: change to inst
 			historyItems.add(new AddPropertyValueHistoryItem(
 					annotation.getID(), property.getID(), Datatype.STRING
 							.getID(), value));

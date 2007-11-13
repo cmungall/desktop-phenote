@@ -9,6 +9,7 @@ import org.bbop.util.ObjectUtil;
 import org.obo.annotation.datamodel.Annotation;
 import org.obo.annotation.datamodel.impl.AnnotationImpl;
 import org.obo.datamodel.LinkedObject;
+import org.obo.datamodel.Namespace;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
 import org.obo.util.TermUtil;
@@ -31,8 +32,12 @@ public class AnnotationCharacter extends AbstractCharacter {
   }
 
   public AnnotationCharacter(String id, AnnotationMappingDriver driver) {
-    this(new AnnotationImpl(id), driver);
+	  this(new AnnotationImpl(id), driver);
+	  annotation.setNamespace(getNamespace());
+	  
   }
+  
+
   
   public AnnotationCharacter(Annotation annotation, AnnotationMappingDriver driver) {
     this.annotation = annotation;
@@ -40,6 +45,10 @@ public class AnnotationCharacter extends AbstractCharacter {
     CharFieldManager.inst().getOboSession().addObject(annotation); // CJM: TODO: CHECK with mark/john
   }
 
+  private Namespace getNamespace() {
+	  return new Namespace("foo");
+  }
+  
   /*
    * Extend this method to provide more field mappings. This should be all you
    * need to do for simple mappings
@@ -189,8 +198,6 @@ public class AnnotationCharacter extends AbstractCharacter {
       annotation.setObject(term);
     resetRelationshipField();
   }
-  
-
 
   public CharFieldValue getValue(CharField cf) {
     CharFieldValue cfv = null;
