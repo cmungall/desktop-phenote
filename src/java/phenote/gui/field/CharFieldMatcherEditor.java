@@ -3,6 +3,7 @@ package phenote.gui.field;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
@@ -25,6 +26,7 @@ import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOClass;
 import org.swixml.SwingEngine;
 
+import phenote.config.xml.FieldDocument.Field.Type;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
@@ -52,6 +54,7 @@ public class CharFieldMatcherEditor extends AbstractMatcherEditor<CharacterI> {
   private CharField editedCharField;
   private Mode filterMode;
   private String filter;
+  protected static CharField ANY_FIELD = new CharField("Simple Filter", "", Type.FREE_TEXT);
   private boolean ignoreActions = false;
   
   
@@ -61,8 +64,9 @@ public class CharFieldMatcherEditor extends AbstractMatcherEditor<CharacterI> {
   public CharFieldMatcherEditor(List<CharField> charFields) {
     if (charFields.size() < 1) log().error("Filter field initialized with no charfields");
     this.loadPanelLayout();
-    this.charFields = charFields;
-    this.editedCharField = this.charFields.get(0);
+    //this.charFields = charFields;
+    //this.editedCharField = this.charFields.get(0);
+    this.editedCharField = CharFieldMatcherEditor.ANY_FIELD;
     this.filterMode = Mode.INHERIT;
     this.ontologyInputField = (TermCompList)(CharFieldGui.makePostCompTermList(this.editedCharField, "", 0));
     this.ontologyInputField.setSelectionManager(new SelectionManager()); // make sure the TermCompList doesn't update the term info panel
@@ -72,15 +76,16 @@ public class CharFieldMatcherEditor extends AbstractMatcherEditor<CharacterI> {
     this.textInputField.setToolTipText(this.filterContainer.getToolTipText());
     this.textInputField.getDocument().addDocumentListener(new FilterDocumentListener());
     this.charFieldPopup.setRenderer(new CharFieldRenderer());
-    this.updateGUI();
+    this.setCharFields(charFields);
   }
   
   /**
    * Sets the charfields which the user can choose from for filtering characters.
    */
   public void setCharFields(List<CharField> charFields) {
-    this.charFields = charFields;
-    this.setEditedCharField(charFields.get(0));
+    this.charFields = new ArrayList<CharField>(charFields);
+    this.charFields.add(0, CharFieldMatcherEditor.ANY_FIELD);
+    this.setEditedCharField(this.charFields.get(0));
     this.updateGUI();
   }
   

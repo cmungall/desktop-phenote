@@ -1,5 +1,8 @@
 package phenote.gui.field;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.obo.datamodel.Link;
 import org.obo.datamodel.LinkedObject;
 import org.obo.datamodel.OBOClass;
@@ -57,8 +60,26 @@ public class CharFieldMatcher implements Matcher<CharacterI> {
   }
   
   private boolean matchText(CharacterI character) {
-    final String value = character.getValueString(this.charField);
-    return value.toLowerCase().indexOf(this.filter.toLowerCase()) != -1;
+    final String value;
+    if (this.charField.equals(CharFieldMatcherEditor.ANY_FIELD)) {
+      final StringBuffer allFieldValues = new StringBuffer();
+      for (CharField field : character.getAllCharFields()) {
+        allFieldValues.append(character.getValueString(field));
+        allFieldValues.append(" ");
+      }
+      value = allFieldValues.toString();
+    } else {
+      value = character.getValueString(this.charField);
+    }
+    return this.matchFilterList(Arrays.asList(this.filter.split(" ")), value);
+  }
+  
+  /**
+   * Match a value by matching every word in the list
+   */
+  private boolean matchFilterList(List<String> filterList, String value) {
+    final boolean foundElsewhere = filterList.size() > 1 ? this.matchFilterList(filterList.subList(1, filterList.size()), value) : true;
+    return (value.toLowerCase().indexOf(filterList.get(0).toLowerCase()) != -1) && foundElsewhere;
   }
   
   private boolean termIsAncestorOfTerm(LinkedObject ancestor, LinkedObject descendant) {
