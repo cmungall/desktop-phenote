@@ -48,7 +48,7 @@
 	<classpathentry kind="lib" path="jars/tomcat-servlet.jar"/>
 	<classpathentry kind="lib" path="jars/treemap.jar"/>
 	<classpathentry kind="lib" path="jars/xbean.jar"/>
-	<classpathentry kind="lib" path="jars/eutils.jar" sourcepath="/axis-1_4/gov/nih/nlm/ncbi/www/soap/eutils/efetch"/>
+	<classpathentry kind="lib" path="jars/eutils.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/BBOP"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/OBO"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/OBO-Edit"/>
