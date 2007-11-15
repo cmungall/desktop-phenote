@@ -335,6 +335,7 @@ public abstract class CharFieldGui implements ListSelectionListener {
   				retrieveButton = new JButton(new ImageIcon("images/ncbi_icon.png"));  //would like this to be an action
   				retrieveButton.setPreferredSize(new Dimension(35,35));
   				retrieveButton.addActionListener(new NCBIActionListener(nda));
+  				retrieveButton.setToolTipText("Query NCBI for matching ids");
   			}
   		}
   	}

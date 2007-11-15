@@ -1,14 +1,24 @@
+axis - (NW) needed for the eutils software from ncbi
+
 BrowserLauncher2 (added by Mark Gibson MG) is used from term info window http links to launch webpage in
 an external browser
 
 commons-beanutils?
 
+commons-discovery - (NW) needed for the eutils software from ncbi
+
 commons-lang?
 
 commons-logging? and how does this relate to log4j?
 
+eutils- (NW) these are for accessing ncbi eutils via soap interface.  this jar
+was created from the wsdl spec on 11/13/2007.  may need to be updated periodically.
+Some details can be found at: http://www.ncbi.nlm.nih.gov/entrez/query/static/esoap_java_help.html
+
 glazedlists - (added by Jim Balhoff JB) Provides character list change notifications for tables, 
 as well as list selection notifications to charfield guis.
+
+jaxrpc - (NW) needed for the eutils software from ncbi
 
 jdom - (JB) required by swixml for reading swing interface layout files
 
@@ -76,6 +86,8 @@ quartz - CP - for zfin servlet - im forgetting but i think this is a scheduler
 for auto updating ontologies for zfin website - dont think this is needed for
 webstart
 
+saaj - (NW) needed for the eutils software from ncbi
+
 shrimp - MG/Uvic - for uvic graphics for showing dag graphs - many problems
 with it - may end up using oboedits graph stuff instead?? - currently disabled
 so i dont think its needed for webstart - (enable via config)
@@ -101,3 +113,7 @@ te-common - MG - used for command line parsing - actually needed for webstart
 as you can give it cmd line params in application-desc
 
 tomcat-servlet - MG?CP?
+
+wsdl4j-1.5.1 - (NW) all of these are needed for the eutils software from ncbi
+
+

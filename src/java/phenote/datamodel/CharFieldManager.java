@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import org.obo.datamodel.IdentifiedObject;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
 import org.obo.datamodel.OBOSession;
@@ -179,6 +180,10 @@ public class CharFieldManager {
     //while (iter.hasNext()) {
     for (Ontology o : getAllOntologies()) {
       //Ontology o = iter.next();
+    	for(IdentifiedObject temp : o.getOboSession().getObjects()) {
+    		if (temp.getID().startsWith("ZFS"))
+    			System.err.println("WHAT?!");
+    	}
       try { oboClass = o.getTerm(id); }
       catch (TermNotFoundException e) { continue; }
       if (oboClass != null)

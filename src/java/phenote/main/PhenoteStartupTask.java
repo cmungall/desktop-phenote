@@ -201,7 +201,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		}
 
 		public boolean isSingleton() {
-			return false;
+			return true;
 		}
 
 		public boolean showInMenus() {
@@ -232,7 +232,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		}
 
 		public String getName() { //what is displayed in the menu
-			return "OMIM display";
+			return "NCBI Information";
 		}
 
 		public boolean getPreferSeparateWindow() {
@@ -240,7 +240,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		}
 
 		public boolean isSingleton() {
-			return false;
+			return true;
 		}
 
 		public boolean showInMenus() {

@@ -26,6 +26,7 @@ public class HtmlUtil {
 
 	public static final boolean DO_HTML = true; // take out
 	static final String PHENOTE_LINK_PREFIX = "Phenote?id=";
+	
 
 //	/** hmmmm - this is state - should probably do an object? 
 //	should this be somewhere else? gui.Phenote? */

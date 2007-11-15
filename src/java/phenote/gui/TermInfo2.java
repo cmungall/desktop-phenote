@@ -17,15 +17,21 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 import javax.swing.JEditorPane;
+import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.Document;
+import javax.swing.text.html.HTMLDocument;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 import javax.swing.SpringLayout;
 import javax.swing.border.Border;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
+import org.bbop.swing.HyperlinkLabel;
+import org.bbop.swing.StringLinkListener;
 import org.obo.datamodel.Dbxref;
 import org.obo.datamodel.IdentifiedObject;
 import org.obo.datamodel.DanglingObject;
@@ -33,12 +39,14 @@ import org.obo.datamodel.Link;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
 import org.obo.datamodel.OBORestriction;
+import org.obo.datamodel.OBOSession;
 import org.obo.datamodel.ObsoletableObject;
 import org.obo.datamodel.PropertyValue;
 import org.obo.datamodel.Synonym;
 import org.obo.util.TermUtil;
 
 import phenote.datamodel.CharFieldManager;
+import phenote.datamodel.Ontology;
 import phenote.datamodel.TermNotFoundException;
 import phenote.gui.selection.SelectionManager;
 import phenote.gui.selection.TermSelectionEvent;
@@ -52,7 +60,7 @@ import edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException;
 import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
 
 /**
-  * This is the second implementation of the Term Info window to provide
+ * This is the second implementation of the Term Info window to provide
  * read-only information about ontology terms for the user.
  * <p>
  * This constructs the toolbar as well as the information panels.
@@ -72,64 +80,92 @@ import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
  * perhaps regain it again through a right-click menu or something. could be
  * something for the 'configure this panel' when we move to john's gui stuff</li>
  * </ul>
-* @author Nicole Washington
+ * 
+ * @author Nicole Washington
  * 
  */
 public class TermInfo2 extends JPanel {
 
 	// constants
 	private static final int TERM_INFO_DEFAULT_WIDTH = 350;
+
 	private static final int TERM_INFO_DEFAULT_HEIGHT = 400;
+
 	private static final int BUTTON_HEIGHT = 30;
+
 	private static Border contentBorder = BorderFactory.createEmptyBorder(6, 8,
 			6, 8);
 
 	// content variables
 	private OBOClass currentOboClass;
+
 	private UseTermListener useTermListener;
+
 	private TermHyperlinkListener termHyperlinkListener;
+
 	private static List<String> termInfoNaviHistory = new ArrayList<String>();
+
 	// private List termInfoNaviHistory = new List();
 	private static int naviIndex = -1;
+
 	private SelectionManager selectionManager;
 
 	// gui components
 
 	private static JPanel entirePanel;
+
 	private TermInfoToolbar termInfoToolbar;
+
 	private JScrollPane termInfoScroll;
+
 	private StackedBox termInfoPanel;
 
 	private JPanel basicInfoPanel;
+
 	private JLabel termName;
+
 	private JLabel termID;
+
 	private JLabel ontologyName;
-	private JTextArea definitionTextArea;
+
+	private HyperlinkLabel definitionTextArea;
+
 	private JPanel considerReplacePanel;
+
 	private JTextArea considerTerms;
+
 	private JTextArea replacementTerms;
 
 	private JPanel synonymPanel;
+
 	// private JTextArea synonyms;
 
 	private JPanel dbxrefPanel;
+
 	private JTextArea dbxrefText;
 
 	private JPanel xpDefPanel;
+
 	private JTextArea xpDefList;
 
 	private JPanel propertyValuesPanel;
+
 	// private JTextArea propValsList;
 
 	private JPanel ontologyLinksPanel;
+
 	private JPanel parentsPanel;
+
 	private JTextArea parentsText;
+
 	private JPanel childrenPanel;
+
 	private JTextArea childrenText;
 
 	private JPanel commentsPanel;
+
 	private JTextArea commentsText;
-	
+
 	private static TermInfo2 singleton;
 
 	/**
@@ -148,9 +184,9 @@ public class TermInfo2 extends JPanel {
 				.addTermSelectionListener(new InfoTermSelectionListener());
 		// ErrorManager.inst().addErrorListener(new InfoErrorListener());
 	}
+
 	public static TermInfo2 inst() {
-		if (singleton == null)
-			singleton = new TermInfo2();
+		if (singleton == null) singleton = new TermInfo2();
 		return singleton;
 	}
 
@@ -208,12 +244,8 @@ public class TermInfo2 extends JPanel {
 
 		JLabel definitionLabel = new JLabel("Definition: ", JLabel.TRAILING);
 		basicInfoPanel.add(definitionLabel);
-		definitionTextArea = new JTextArea();
-		definitionTextArea.setLineWrap(true);
-		definitionTextArea.setWrapStyleWord(true);
-		definitionTextArea.setEditable(false);
+		definitionTextArea = new HyperlinkLabel();
 		definitionLabel.setLabelFor(definitionTextArea);
-
 		basicInfoPanel.add(definitionTextArea);
 
 		// Lay out the panel.
@@ -233,8 +265,7 @@ public class TermInfo2 extends JPanel {
 		replacementTerms = new JTextArea();
 		considerReplacePanel.add(replacementTerms);
 
-		termInfoPanel.addBox("Consider & Replacement Terms",
-				considerReplacePanel);
+		termInfoPanel.addBox("Consider & Replacement Terms", considerReplacePanel);
 
 		// Add the next section, which is the synonyms
 		synonymPanel = new JPanel();
@@ -272,13 +303,13 @@ public class TermInfo2 extends JPanel {
 		propertyValuesPanel.setLayout(new SpringLayout());
 		propertyValuesPanel.setBorder(contentBorder);
 
-		termInfoPanel.addBox("Property Values", propertyValuesPanel);
+		termInfoPanel.addBox("Other Properties", propertyValuesPanel);
 
 		ontologyLinksPanel = new JPanel();
 		ontologyLinksPanel.setBackground(Color.WHITE);
 
 		ontologyLinksPanel.setLayout(new SpringLayout());
-		termInfoPanel.addBox("Links", ontologyLinksPanel);
+		termInfoPanel.addBox("Parents & Children", ontologyLinksPanel);
 
 		parentsPanel = new JPanel(new SpringLayout());
 		parentsText = new JTextArea();
@@ -293,15 +324,14 @@ public class TermInfo2 extends JPanel {
 		ontologyLinksPanel.add(childrenPanel);
 
 		SpringUtilities.makeCompactGrid(ontologyLinksPanel, 2, 1, // rows,
-																	// cols
+				// cols
 				6, 6, // initX, initY
 				6, 6); // xPad, yPad
 
 		commentsPanel = new JPanel();
 		commentsPanel.setOpaque(false);
 		commentsPanel.setBackground(Color.WHITE);
-		commentsPanel.setLayout(new BoxLayout(commentsPanel,
-				BoxLayout.PAGE_AXIS));
+		commentsPanel.setLayout(new BoxLayout(commentsPanel, BoxLayout.PAGE_AXIS));
 		commentsText = new JTextArea();
 		commentsText.setLineWrap(true);
 		commentsText.setWrapStyleWord(true);
@@ -325,14 +355,12 @@ public class TermInfo2 extends JPanel {
 
 		// basicInfoPanel
 		if (!oboClass.isObsolete()) {
-			termName.setText(oboClass.getName());
 			termInfoPanel.setBoxTitleBackgroundColor(0, Color.LIGHT_GRAY);
 			termInfoPanel.setBoxTitle("Basic Info", 0);
 			// hide the consider/replace panel
 			termInfoPanel.getComponent(2).setVisible(false);
 			considerReplacePanel.setVisible(false);
 		} else {
-			termName.setText(oboClass.getName());
 			termInfoPanel.setBoxTitleBackgroundColor(0, Color.RED);
 			termInfoPanel.setBoxTitle("Basic Info  [OBSOLETE]", 0);
 			// show the consider/replacements
@@ -348,48 +376,52 @@ public class TermInfo2 extends JPanel {
 		// Consider/replace panel
 		makeObsPanel(oboClass);
 		termInfoPanel.setBoxTitle("Consider ("
-				+ oboClass.getConsiderReplacements().size()
-				+ ") & Replacement (" + oboClass.getReplacedBy().size()
-				+ ") Terms", 2);
+				+ oboClass.getConsiderReplacements().size() + ") & Replacement ("
+				+ oboClass.getReplacedBy().size() + ") Terms", 2);
 		// if there are items here, should always expand. perhaps always
 		// collapse
 		// all except comments
+		considerReplacePanel.validate();
 		considerReplacePanel.repaint();
 
 		// SynonymPanel
 		makeSynPanel(oboClass.getSynonyms());
 		termInfoPanel.setBoxTitle("Synonyms (" + oboClass.getSynonyms().size()
 				+ ")", 4);
+		synonymPanel.validate();
 		synonymPanel.repaint();
 
 		// dbxrefsPanel
 		makeDbxrefPanel(oboClass.getDbxrefs());
-		termInfoPanel.setBoxTitle("DBxrefs (" + oboClass.getDbxrefs().size()
-				+ ")", 6);
+		termInfoPanel.setBoxTitle("DBxrefs (" + oboClass.getDbxrefs().size() + ")",
+				6);
+		dbxrefPanel.validate();
 		dbxrefPanel.repaint();
 
 		int linkCount = 0;
 
 		// xpDefPanel
-		linkCount = makeLinksPanel(oboClass.getParents(), true, false,
-				xpDefPanel);
-		termInfoPanel.setBoxTitle("Cross-product Definitions (" + linkCount
-				+ ")", 8);
+		linkCount = makeLinksPanel(oboClass.getParents(), true, false, xpDefPanel);
+		termInfoPanel.setBoxTitle("Cross-product Definitions (" + linkCount + ")",
+				8);
 
 		// propValues
 		// propertyValuesList.setText(oboClass.getPropertyValues().toString());
 		linkCount = makePropValsPanel(oboClass.getPropertyValues());
 		termInfoPanel.setBoxTitle("Property Values (" + linkCount + ")", 10);
+		propertyValuesPanel.validate();
 		propertyValuesPanel.repaint();
 
 		// parentsPanel
 		linkCount = makeLinksPanel(oboClass.getParents(), false, false,
 				parentsPanel);
+		parentsPanel.validate();
 		parentsPanel.repaint();
 
 		// childrenPanel
 		linkCount += makeLinksPanel(oboClass.getChildren(), false, true,
 				childrenPanel);
+		childrenPanel.validate();
 		childrenPanel.repaint();
 
 		termInfoPanel.setBoxTitle("Links (" + linkCount + ")", 12);
@@ -401,12 +433,19 @@ public class TermInfo2 extends JPanel {
 		} else {
 			termInfoPanel.setBoxTitle("Comments*", 14);
 		}
+		commentsPanel.validate();
+		commentsPanel.repaint();
 
 		// this refreshes the main panel
 		// this should move the scrollbar to the top, but it doesn't!
-		// termInfoScroll.getVerticalScrollBar().setValue(0);
-		entirePanel.revalidate();
+		termName.setText(oboClass.getName());
+		basicInfoPanel.validate();
+		basicInfoPanel.repaint();
+		termInfoScroll.getVerticalScrollBar().setValue(0);
 		termInfoScroll.getViewport().setViewPosition(new Point(0, 0));
+		termInfoPanel.validate();
+		termInfoPanel.repaint();
+		entirePanel.validate();
 		entirePanel.repaint();
 		// entirePanel.setVisible(true);
 
@@ -464,11 +503,11 @@ public class TermInfo2 extends JPanel {
 	 * inner class TermHyperlink Listener, listens for clicks on term & external
 	 * hyper links and brings up the term or brings up the external web page
 	 */
-	private class TermHyperlinkListener implements HyperlinkListener {
+	private class TermHyperlinkListener implements StringLinkListener,
+			HyperlinkListener {
 
 		public void hyperlinkUpdate(HyperlinkEvent e) {
-			if (!(e.getEventType() == HyperlinkEvent.EventType.ACTIVATED))
-				return;
+			if (!(e.getEventType() == HyperlinkEvent.EventType.ACTIVATED)) return;
 
 			URL url = e.getURL();
 			// System.out.println("got url "+url+" desc "+e.getDescription());
@@ -489,12 +528,11 @@ public class TermInfo2 extends JPanel {
 		}
 
 		private void bringUpInBrowser(URL url) {
-			if (url == null)
-				return;
+			if (url == null) return;
 			try {
 				BrowserLauncher bl = new BrowserLauncher(null); // no logger
-				BrowserLauncherRunner br = new BrowserLauncherRunner(bl, url
-						.toString(), null);
+				BrowserLauncherRunner br = new BrowserLauncherRunner(bl,
+						url.toString(), null);
 				new Thread(br).start();
 			} catch (BrowserLaunchingInitializingException be) {
 				System.out.println("cant launch browser " + be);
@@ -506,19 +544,47 @@ public class TermInfo2 extends JPanel {
 		private void bringUpTermInTermInfo(HyperlinkEvent e) {
 			// or do through obo session?
 			String id = HtmlUtil.getIdFromHyperlink(e);
-			if (id == null)
-				return;
+			if (id == null) return;
 			try {
 				OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
 				setTextFromOboClass(term);
 				addTermToNaviHistory(id);
 				// send out term selection (non mouse over) for DAG view
-				TermInfo2.this.selectionManager.selectTerm(TermInfo2.this,
-						term, true);
+				TermInfo2.this.selectionManager.selectTerm(TermInfo2.this, term, true);
 			} catch (TermNotFoundException ex) {
 				return;
 			}
 		}
+
+		private void bringUpTermInTermInfo(String id) {
+			// or do through obo session?
+			if (id == null) return;
+//			try {
+				for(Ontology o : CharFieldManager.inst().getAllOntologies()) {
+					OBOSession session = o.getOboSession();
+					IdentifiedObject io = session.getObject(id);
+					if (io instanceof OBOClass) {
+						OBOClass c = (OBOClass) io;
+						setTextFromOboClass(c);
+						break;
+					}
+				}
+//				OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
+//				setTextFromOboClass(term);
+//				addTermToNaviHistory(id);
+//				// send out term selection (non mouse over) for DAG view
+//				TermInfo2.this.selectionManager.selectTerm(TermInfo2.this, term, true);
+//			} catch (TermNotFoundException ex) {
+//				return;
+//			}
+		}
+
+		public void link(String href) {
+			bringUpTermInTermInfo(href);
+			// TODO Auto-generated method stub
+
+		}
+
 	}
 
 	private void makeSynPanel(Set someSet) {
@@ -557,7 +623,7 @@ public class TermInfo2 extends JPanel {
 		// create the synonym items
 		for (int i = 0; i < numSynTypes; i++) {
 			if (syns[i].length() > 0) { // only add the item if there's this
-										// category
+				// category
 				JLabel synTypeLabel = new JLabel(synTypes[i], JLabel.TRAILING);
 				synonymPanel.add(synTypeLabel);
 				JTextArea synList = new JTextArea();
@@ -580,7 +646,7 @@ public class TermInfo2 extends JPanel {
 
 		// Lay out the panel.
 		SpringUtilities.makeCompactGrid(synonymPanel, rowCount, 2, // rows,
-																	// cols
+				// cols
 				6, 6, // initX, initY
 				6, 6); // xPad, yPad
 		synonymPanel.setVisible(true);
@@ -591,7 +657,7 @@ public class TermInfo2 extends JPanel {
 		int rowCount = 0;
 		String tempID;
 		OBOClass tempOboClass = null;
-		String panelText = "";
+		String panelText = "<html>";
 		Dbxref dbxrefObj;
 		dbxrefPanel.removeAll(); // clear out the old ones
 
@@ -600,8 +666,7 @@ public class TermInfo2 extends JPanel {
 			if (dbxrefObj != null) {
 				// will make this linkable - internal & external
 				// eventually, get smart and enable adding ontology!
-				tempID = dbxrefObj.getDatabase() + ":"
-						+ dbxrefObj.getDatabaseID();
+				tempID = dbxrefObj.getDatabase() + ":" + dbxrefObj.getDatabaseID();
 				JLabel dbxrefItem = new JLabel(" (" + tempID + ")");
 
 				// check if the term is in the current obosession
@@ -612,8 +677,11 @@ public class TermInfo2 extends JPanel {
 				}
 
 				if (tempOboClass != null) {
-					panelText += HtmlUtil.termLink(tempOboClass) + " ("
-							+ tempID + ")"; // use the name & link
+					panelText += HtmlUtil.termLink(tempOboClass) + " (" + tempID + ")"; // use
+																																							// the
+																																							// name
+																																							// &
+																																							// link
 				} else {
 					panelText += tempID; // just use the ID for external refs
 				}
@@ -624,16 +692,23 @@ public class TermInfo2 extends JPanel {
 				panelText += "<br>";
 			}
 		}
-
-		JEditorPane textArea = new JEditorPane();
-		textArea.setContentType("text/html");
+		// JEditorPane.registerEditorKitForContentType
+		// ("text/html", "HTMLEditorKit2");
+		// JEditorPane textArea = new JEditorPane();
+		// textArea.setEditorKitForContentType
+		// ("text/html", new HTMLEditorKit2());
+		//
+		// textArea.setContentType("text/html");
+		HyperlinkLabel textArea = new HyperlinkLabel();
 		termHyperlinkListener = new TermHyperlinkListener();
-		textArea.addHyperlinkListener(termHyperlinkListener);
-		textArea.setEditable(false);
+		textArea.addStringLinkListener(termHyperlinkListener);
+		// textArea.setEditable(false);
+		panelText += "</html>";
 		textArea.setText(panelText);
 		// typeLabel.setLabelFor(textArea);
 		dbxrefPanel.add(textArea);
 		dbxrefPanel.validate();
+		dbxrefPanel.repaint();
 
 		// Lay out the panel.
 		if (rowCount > 0) {
@@ -645,21 +720,21 @@ public class TermInfo2 extends JPanel {
 	}
 
 	/**
-	 * Given a collection of links, a {@link JPanel} is return to the
-	 * implementing class that contains a set of hyperlinks that will trigger
-	 * refresh to that new term.
+	 * Given a collection of links, a {@link JPanel} is return to the implementing
+	 * class that contains a set of hyperlinks that will trigger refresh to that
+	 * new term.
 	 * <p>
 	 * 
 	 * @param links
-	 *            a collection of oboclass links to display in a panel
+	 *          a collection of oboclass links to display in a panel
 	 * @param isXP
-	 *            flag to indicate if panel is to display cross-products or
-	 *            regular links
+	 *          flag to indicate if panel is to display cross-products or regular
+	 *          links
 	 * @param isChild
-	 *            flag indicating if a panel displays parent or child links.
-	 *            This may be important in the future for display purposes.
+	 *          flag indicating if a panel displays parent or child links. This
+	 *          may be important in the future for display purposes.
 	 * @param panel
-	 *            The panel into which the links will be placed.
+	 *          The panel into which the links will be placed.
 	 * @return the number of links created
 	 */
 	private int makeLinksPanel(Collection<Link> links, boolean isXP,
@@ -693,7 +768,7 @@ public class TermInfo2 extends JPanel {
 			LinkCollection linkCol = (LinkCollection) lit.next();
 			List<Link> listOfLinks = linkCol.getLinks();
 			// the elements should be sorted in alpha order
-			panelText = ""; // reset the text
+			panelText = "<html>"; // reset the text
 			itemCount = 0;
 			for (Iterator<Link> it = listOfLinks.iterator(); it.hasNext();) {
 				// create all the clickable links first
@@ -703,19 +778,26 @@ public class TermInfo2 extends JPanel {
 				} else {
 					temp = (IdentifiedObject) link.getParent();
 				}
-				if (TermUtil.isClass(temp)) { //only show actual classes...not danglers
-					if (!TermUtil.isIntersection((OBOClass) temp)) {
-						// only put in items that are not xps
-						panelText += HtmlUtil.termLink(temp);
-						if (it.hasNext()) {
-							panelText += ", ";
-						}
-						itemCount++;
+				if (TermUtil.isClass(temp)) { // only show actual classes...not danglers
+					// only put in items that are not xps
+					if (TermUtil.isIntersection((OBOClass) temp)) // {
+						panelText += "<i>";
+					panelText += "<a href='" + temp.getID() + "'>" + temp.getName()
+							+ "</a>";
+					if (TermUtil.isIntersection((OBOClass) temp)) // {
+						panelText += "</i>";
+					// panelText += HtmlUtil.termLink(temp);
+					// panelText += temp.getName();
+					if (it.hasNext()) {
+						panelText += ", ";
 					}
+					itemCount++;
+					// }
 				} else if (TermUtil.isDangling(temp)) {
 					if (!TermUtil.isIntersection((DanglingObject) temp)) {
-						panelText += temp.getName();  //dangling objects don't have links
-						//eventually want to be smart and allow user to import the necessary ontology to resolve danglers!
+						panelText += temp.getName(); // dangling objects don't have links
+						// eventually want to be smart and allow user to import the
+						// necessary ontology to resolve danglers!
 						if (it.hasNext()) {
 							panelText += ", ";
 						}
@@ -725,19 +807,26 @@ public class TermInfo2 extends JPanel {
 			}
 			if (itemCount > 0) {
 				// if there's at least one item, add the section to the pane
+				panelText += "</html>";
 				String tempType = linkCol.getLinkName();
 				typeLabel = new JLabel(tempType, JLabel.TRAILING);
 				typeLabel.setVerticalAlignment(JLabel.TOP);
 				panel.add(typeLabel);
-				JEditorPane textArea = new JEditorPane();
-				textArea.setContentType("text/html");
-				termHyperlinkListener = new TermHyperlinkListener();
-				textArea.addHyperlinkListener(termHyperlinkListener);
-				textArea.setEditable(false);
-				textArea.setText(panelText);
+				// JEditorPane.registerEditorKitForContentType
+				// ("text/html", "HTMLEditorKit2");
+				// JEditorPane textArea = new JEditorPane();
+				// textArea.setEditorKitForContentType
+				// ("text/html", new HTMLEditorKit2());
+				//		 
+				// textArea.setContentType("text/html");
+				// termHyperlinkListener = new TermHyperlinkListener();
+				// textArea.setEditable(false);
+				// textArea.setText(panelText);
+				HyperlinkLabel textArea = new HyperlinkLabel(panelText);
+				textArea.addStringLinkListener(termHyperlinkListener);
+
 				typeLabel.setLabelFor(textArea);
 				panel.add(textArea);
-				textArea.validate();
 				rowCount++;
 				layout = new SpringLayout();
 				// line up the rel type with the items
@@ -757,24 +846,24 @@ public class TermInfo2 extends JPanel {
 			panel.add(new JLabel("(none)"));
 			panel.setLayout(layout);
 		}
-
-		panel.repaint();
+		panel.setVisible(true);
 		panel.validate();
+		panel.repaint();
 		return totalItems;
 	}
 
 	/**
 	 * Given a collection of oboclass links, this processes the collection to
-	 * separate out the links and group by relationship type+parent/child xp
-	 * state It will always put the is_a links in the list first.
+	 * separate out the links and group by relationship type+parent/child xp state
+	 * It will always put the is_a links in the list first.
 	 * 
 	 * @param links
-	 *            a collection of oboclass links
+	 *          a collection of oboclass links
 	 * @param xp
-	 *            specifies if the request is for cross-product-specific list
+	 *          specifies if the request is for cross-product-specific list
 	 * @param isChild
-	 *            specifies if the links are parents or children of the
-	 *            implementing class
+	 *          specifies if the links are parents or children of the implementing
+	 *          class
 	 * @return a list of links sorted by relationship type.
 	 * 
 	 */
@@ -796,8 +885,8 @@ public class TermInfo2 extends JPanel {
 					else
 						allLinks.add(linkSet);
 				} else {
-					for (ListIterator<LinkCollection> lit = allLinks
-							.listIterator(); lit.hasNext();) {
+					for (ListIterator<LinkCollection> lit = allLinks.listIterator(); lit
+							.hasNext();) {
 						LinkCollection temp = (LinkCollection) lit.next();
 						if (temp.get(0).getType() == type) {
 							temp.addLink(link);
@@ -815,9 +904,9 @@ public class TermInfo2 extends JPanel {
 	 * created in a panel.
 	 * 
 	 * @param oboClass
-	 *            the item that is obsoleted
+	 *          the item that is obsoleted
 	 * @param panel
-	 *            the panel to populate with this information
+	 *          the panel to populate with this information
 	 */
 	private void makeObsPanel(OBOClass oboClass) {
 		// to display the replaced-bys and consider term links for obsoleted
@@ -849,11 +938,17 @@ public class TermInfo2 extends JPanel {
 				considerFlag = !obsItems.isEmpty();
 				typeLabel = new JLabel("Consider using: ");
 			}
-			JEditorPane textArea = new JEditorPane();
-			textArea.setContentType("text/html");
+			// JEditorPane.registerEditorKitForContentType
+			// ("text/html", "HTMLEditorKit2");
+			// JEditorPane textArea = new JEditorPane();
+			// textArea.setEditorKitForContentType
+			// ("text/html", new HTMLEditorKit2());
+			//
+			// textArea.setContentType("text/html");
+			HyperlinkLabel textArea = new HyperlinkLabel();
 			termHyperlinkListener = new TermHyperlinkListener();
-			textArea.addHyperlinkListener(termHyperlinkListener);
-			textArea.setEditable(false);
+			textArea.addStringLinkListener(termHyperlinkListener);
+			// textArea.setEditable(false);
 			for (Iterator it = obsItems.iterator(); it.hasNext();) {
 				obsObj = (ObsoletableObject) it.next();
 				if (obsObj != null) {
@@ -879,7 +974,7 @@ public class TermInfo2 extends JPanel {
 		} else {
 
 			SpringUtilities.makeCompactGrid(considerReplacePanel, rowCount, 2, // rows,
-																				// cols
+					// cols
 					6, 6, // initX, initY
 					6, 6); // xPad, yPad
 
@@ -910,7 +1005,7 @@ public class TermInfo2 extends JPanel {
 		}
 		if (rowCount > 0) {
 			SpringUtilities.makeCompactGrid(propertyValuesPanel, rowCount, 2, // rows,
-																				// cols
+					// cols
 					6, 6, // initX, initY
 					6, 6); // xPad, yPad
 		}
@@ -938,8 +1033,7 @@ public class TermInfo2 extends JPanel {
 			OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
 			setTextFromOboClass(term);
 			// send out term selection (non mouse over) for DAG view
-			TermInfo2.this.selectionManager.selectTerm(TermInfo2.this, term,
-					true);
+			TermInfo2.this.selectionManager.selectTerm(TermInfo2.this, term, true);
 			// Since items are added in reverse order, "back" is actually
 			// forward
 			// termComboBox.setSelectedIndex(termComboBox.getSelectedIndex()+1);
@@ -957,17 +1051,24 @@ public class TermInfo2 extends JPanel {
 	void simulateHyperlinkEvent(HyperlinkEvent e) {
 		termHyperlinkListener.hyperlinkUpdate(e);
 	}
-	
+
 	public List<String> getTermInfoNaviHistory() {
 		return termInfoNaviHistory;
 	}
-	
+
 	public int getNaviIndex() {
 		return naviIndex;
 	}
-	
+
 	public void setNaviIndex(int index) {
 		naviIndex = index;
 	}
 
+	class HTMLEditorKit2 extends HTMLEditorKit {
+		public Document createDefaultDocument() {
+			HTMLDocument doc = (HTMLDocument) (super.createDefaultDocument());
+			doc.setAsynchronousLoadPriority(-1); // load synchronously
+			return doc;
+		}
+	}
 }

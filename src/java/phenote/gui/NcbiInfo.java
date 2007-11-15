@@ -110,42 +110,51 @@ public class NcbiInfo extends JPanel {
 	
 	public void setNCBIInfoText(String text) {
 		ncbiTextArea.setText(text);
-		System.out.println("getting to set text!");
 		ncbiPanel.validate();
 		ncbiPanel.repaint();		
 	}
+
+	public void setNCBIInfofromInstance(Instance oboInstance) {
+		String text=null;
+		text="<html>";
+		text+=oboInstance.getComment();
+		text+="<br><br><b>Abstract:</b>"+oboInstance.getDefinition()+" ("+oboInstance.getID()+")";
+		text+="</html>";
+		ncbiTextArea.setText(text);
+		ncbiPanel.validate();
+		ncbiPanel.repaint();		
+	}
+
 	
   private class NCBIIDSelectionListener implements IDSelectionListener {
     public void IDSelected(IDSelectionEvent e) {
-    	System.out.println("id="+e.getID());
-    	System.out.println("source="+e.getType());
     	String id=e.getID();
     	String temp=null;
   		OBOSession session = CharFieldManager.inst().getOboSession();
-  		Instance oboInstance;
+  		Instance oboInstance=null;
+  		Instance tempInstance=null;
   		if  ((oboInstance=(Instance)session.getObject(id))==null) { 
-  			//if (e.getType()=="OMIM") {  ...should really have enumerated NCBI types!
-  			//check the type here...will dictate where to fetch from
-  			//if its not already in the obosession, fetch the info from ncbi
-//  			String temp = NCBIAdapterI.query(id);
-//  			String temp = omimAdapter.getOMIMbyID(id);
+  			//current id not in the session, create it
   			if (e.getType().equalsIgnoreCase("pubmed")) {
-  				temp = pubmedAdapter.query(id, "PMID");
+//				temp = pubmedAdapter.query(id, "pubmed");
+  				tempInstance = pubmedAdapter.query(id);
   			} else if (e.getType().equalsIgnoreCase("omim")) {
-  				temp = omimAdapter.query(id, "OMIM");
+//  				temp = omimAdapter.query(id, "omim");
+  				tempInstance = omimAdapter.query(id);
   			}
-  			//create an obo instance.
-  			oboInstance = (Instance)session.getObjectFactory().createObject(id, AnnotationOntology.PUBLICATION(), false);
-  			oboInstance.setComment(temp);
-  			//add the oboinstance to the current session
-  			session.addObject(oboInstance);
-  			System.out.println("added ID="+oboInstance.getID()+" to oboSession.");
-  		} else {
-  			System.out.println("retrieved ID="+oboInstance.getID()+" from oboSession.");
+  			if (tempInstance!=null) {
+  				//if the id isn't found at ncbi, don't add it to the session
+  				oboInstance = tempInstance;
+  				session.addObject(tempInstance);
+  				System.out.println("added ID="+oboInstance.getID()+" to oboSession.");
+  			}
   		}
-    	
-      setNCBIInfoText("ID="+oboInstance.getID()+" Comment="+oboInstance.getComment());
-    } 
+			if (oboInstance!=null) {
+				setNCBIInfofromInstance(oboInstance);
+			} else {
+				System.out.println("couldn't retrieve or find "+id);
+  			setNCBIInfoText("Error:  "+id+" not found in NCBI database.");
+			}
+    }
   }
-
 }

@@ -13,7 +13,6 @@ import javax.swing.ImageIcon;
 import phenote.config.Config;
 import phenote.dataadapter.LoadSaveManager;
 
-
 //This is the action for opening files to be used by menus & button items.
 
 public class SaveAsFileAction extends AbstractAction {
