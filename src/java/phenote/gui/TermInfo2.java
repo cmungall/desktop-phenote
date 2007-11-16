@@ -32,6 +32,11 @@ import javax.swing.event.HyperlinkListener;
 
 import org.bbop.swing.HyperlinkLabel;
 import org.bbop.swing.StringLinkListener;
+import org.bbop.framework.GUIComponent;
+import org.bbop.framework.GUIComponentWrapper;
+import org.bbop.framework.GUIManager;
+import org.bbop.framework.GUIComponentFactory;
+import org.bbop.framework.ComponentManager;
 import org.obo.datamodel.Dbxref;
 import org.obo.datamodel.IdentifiedObject;
 import org.obo.datamodel.DanglingObject;
@@ -44,6 +49,7 @@ import org.obo.datamodel.ObsoletableObject;
 import org.obo.datamodel.PropertyValue;
 import org.obo.datamodel.Synonym;
 import org.obo.util.TermUtil;
+import org.bbop.swing.SwingUtil;
 
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.Ontology;
@@ -79,6 +85,10 @@ import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
  * <li>should be able to close a panel, and never display if not interested
  * perhaps regain it again through a right-click menu or something. could be
  * something for the 'configure this panel' when we move to john's gui stuff</li>
+ * <li>The whole termInfo panel should probably be an array of panels, or at least
+ * they should be kept track of that way.  that will reduce the size of the code a bit
+ * and will make it easier when it comes time for customization to be able to swap 
+ * panels around, so that particular panels won't be married to a particular position.</li>
  * </ul>
  * 
  * @author Nicole Washington
@@ -167,6 +177,21 @@ public class TermInfo2 extends JPanel {
 	private JTextArea commentsText;
 
 	private static TermInfo2 singleton;
+	
+	private boolean showEmptyPanelsFlag = false;
+	
+	private static final String basicInfoPanelName = "BASIC"; //0
+	private static final String considerReplacePanelName = "CONSIDERS"; //2
+	private static final String synonymPanelName = "SYNONYMS"; //4
+	private static final String xpdefsPanelName = "XPDEFS"; //6
+	private static final String linksPanelName = "LINKS"; //8
+	private static final String dbxrefPanelName = "DBXREFS";  //10
+	private static final String propvalsPanelName = "PROPVALS";  //12
+	private static final String commentsPanelName = "COMMENTS";  //14
+	
+	/** this sets the order of the panels */
+	private static String[] panels = {basicInfoPanelName, considerReplacePanelName, synonymPanelName, xpdefsPanelName, linksPanelName, dbxrefPanelName, propvalsPanelName, commentsPanelName};
+
 
 	/**
 	 * Create the panel
@@ -221,6 +246,7 @@ public class TermInfo2 extends JPanel {
 		basicInfoPanel.setBackground(Color.WHITE);
 		basicInfoPanel.setLayout(new SpringLayout());
 		basicInfoPanel.setBorder(contentBorder);
+		basicInfoPanel.setName(basicInfoPanelName);
 
 		// Create and populate the panel.
 		JLabel nameLabel = new JLabel("Term: ", JLabel.TRAILING);
@@ -264,6 +290,7 @@ public class TermInfo2 extends JPanel {
 		considerReplacePanel.add(considerTerms);
 		replacementTerms = new JTextArea();
 		considerReplacePanel.add(replacementTerms);
+		considerReplacePanel.setName(considerReplacePanelName);
 
 		termInfoPanel.addBox("Consider & Replacement Terms", considerReplacePanel);
 
@@ -272,19 +299,10 @@ public class TermInfo2 extends JPanel {
 		synonymPanel.setOpaque(false);
 		synonymPanel.setLayout(new SpringLayout());
 		synonymPanel.setBorder(contentBorder);
+		synonymPanel.setName(synonymPanelName);
 
 		termInfoPanel.addBox("Synonyms", synonymPanel);
 
-		// dbxrefs
-		dbxrefPanel = new JPanel();
-		dbxrefPanel.setBackground(Color.WHITE);
-		dbxrefPanel.setLayout(new SpringLayout());
-		dbxrefText = new JTextArea();
-		dbxrefPanel.add(dbxrefText);
-
-		// dbxrefPanel.add(dbxrefsList);
-
-		termInfoPanel.addBox("DBxrefs", dbxrefPanel);
 
 		// xp definitions
 		xpDefPanel = new JPanel();
@@ -294,19 +312,15 @@ public class TermInfo2 extends JPanel {
 		xpDefList.setLineWrap(true);
 		xpDefList.setText(" ");
 		xpDefPanel.add(xpDefList);
+		xpDefPanel.setName(xpdefsPanelName);
 
 		termInfoPanel.addBox("Cross Product Definitions", xpDefPanel);
 
-		// propertyValues (often used for OWL ontologies)
-		propertyValuesPanel = new JPanel();
-		propertyValuesPanel.setOpaque(false);
-		propertyValuesPanel.setLayout(new SpringLayout());
-		propertyValuesPanel.setBorder(contentBorder);
 
-		termInfoPanel.addBox("Other Properties", propertyValuesPanel);
-
+		//Links - parents and children
 		ontologyLinksPanel = new JPanel();
 		ontologyLinksPanel.setBackground(Color.WHITE);
+		ontologyLinksPanel.setName(linksPanelName);
 
 		ontologyLinksPanel.setLayout(new SpringLayout());
 		termInfoPanel.addBox("Parents & Children", ontologyLinksPanel);
@@ -327,6 +341,27 @@ public class TermInfo2 extends JPanel {
 				// cols
 				6, 6, // initX, initY
 				6, 6); // xPad, yPad
+		
+		// dbxrefs
+		dbxrefPanel = new JPanel();
+		dbxrefPanel.setBackground(Color.WHITE);
+		dbxrefPanel.setLayout(new SpringLayout());
+		dbxrefText = new JTextArea();
+		dbxrefPanel.add(dbxrefText);
+		dbxrefPanel.setName(dbxrefPanelName);
+		// dbxrefPanel.add(dbxrefsList);
+
+		termInfoPanel.addBox("DBxrefs", dbxrefPanel);
+
+		
+		// propertyValues (often used for OWL ontologies)
+		propertyValuesPanel = new JPanel();
+		propertyValuesPanel.setOpaque(false);
+		propertyValuesPanel.setLayout(new SpringLayout());
+		propertyValuesPanel.setBorder(contentBorder);
+		propertyValuesPanel.setName(propvalsPanelName);
+
+		termInfoPanel.addBox("Other Properties", propertyValuesPanel);
 
 		commentsPanel = new JPanel();
 		commentsPanel.setOpaque(false);
@@ -337,6 +372,8 @@ public class TermInfo2 extends JPanel {
 		commentsText.setWrapStyleWord(true);
 		commentsPanel.add(commentsText);
 		commentsPanel.setBorder(contentBorder);
+		commentsPanel.setName(commentsPanelName);
+
 
 		termInfoPanel.addBox("Comments", commentsPanel);
 
@@ -373,46 +410,56 @@ public class TermInfo2 extends JPanel {
 		ontologyName.setText(oboClass.getNamespace().toString());
 		definitionTextArea.setText(oboClass.getDefinition());
 
-		// Consider/replace panel
-		makeObsPanel(oboClass);
-		termInfoPanel.setBoxTitle("Consider ("
-				+ oboClass.getConsiderReplacements().size() + ") & Replacement ("
-				+ oboClass.getReplacedBy().size() + ") Terms", 2);
-		// if there are items here, should always expand. perhaps always
-		// collapse
-		// all except comments
-		considerReplacePanel.validate();
-		considerReplacePanel.repaint();
-
-		// SynonymPanel
-		makeSynPanel(oboClass.getSynonyms());
-		termInfoPanel.setBoxTitle("Synonyms (" + oboClass.getSynonyms().size()
-				+ ")", 4);
-		synonymPanel.validate();
-		synonymPanel.repaint();
-
-		// dbxrefsPanel
-		makeDbxrefPanel(oboClass.getDbxrefs());
-		termInfoPanel.setBoxTitle("DBxrefs (" + oboClass.getDbxrefs().size() + ")",
-				6);
-		dbxrefPanel.validate();
-		dbxrefPanel.repaint();
-
+		if ((!showEmptyPanelsFlag) && ((oboClass.getConsiderReplacements().size()+oboClass.getReplacedBy().size()) == 0)) {
+			termInfoPanel.getComponent(2).setVisible(false);
+			considerReplacePanel.setVisible(false);
+		} else {
+			termInfoPanel.getComponent(2).setVisible(true);
+			// Consider/replace panel
+			makeObsPanel(oboClass);
+			termInfoPanel.setBoxTitle("Consider ("
+					+ oboClass.getConsiderReplacements().size() + ") & Replacement ("
+					+ oboClass.getReplacedBy().size() + ") Terms", 2);
+			// if there are items here, should always expand. perhaps always
+			// collapse
+			// all except comments
+			considerReplacePanel.validate();
+			considerReplacePanel.repaint();
+			considerReplacePanel.setVisible(true);
+		}
+		
+		if ((!showEmptyPanelsFlag) && (oboClass.getSynonyms().size() == 0)) {
+			termInfoPanel.getComponent(4).setVisible(false);
+			synonymPanel.setVisible(false);
+		} else {
+			// SynonymPanel
+			termInfoPanel.getComponent(4).setVisible(true);
+			makeSynPanel(oboClass.getSynonyms());
+			termInfoPanel.setBoxTitle("Synonyms (" + oboClass.getSynonyms().size()
+					+ ")", 4);
+			synonymPanel.validate();
+			synonymPanel.repaint();
+			synonymPanel.setVisible(true);
+		}
+		
+		
 		int linkCount = 0;
 
 		// xpDefPanel
 		linkCount = makeLinksPanel(oboClass.getParents(), true, false, xpDefPanel);
 		termInfoPanel.setBoxTitle("Cross-product Definitions (" + linkCount + ")",
-				8);
+				6);
+		if ((!showEmptyPanelsFlag) && (linkCount == 0)) {
+			termInfoPanel.getComponent(6).setVisible(false);
+			xpDefPanel.setVisible(false);
+		} else {
+			termInfoPanel.getComponent(6).setVisible(true);
+			xpDefPanel.setVisible(true);
+		}
 
-		// propValues
-		// propertyValuesList.setText(oboClass.getPropertyValues().toString());
-		linkCount = makePropValsPanel(oboClass.getPropertyValues());
-		termInfoPanel.setBoxTitle("Property Values (" + linkCount + ")", 10);
-		propertyValuesPanel.validate();
-		propertyValuesPanel.repaint();
 
 		// parentsPanel
+		//always show the links panels, even if no parents/children
 		linkCount = makeLinksPanel(oboClass.getParents(), false, false,
 				parentsPanel);
 		parentsPanel.validate();
@@ -424,12 +471,49 @@ public class TermInfo2 extends JPanel {
 		childrenPanel.validate();
 		childrenPanel.repaint();
 
-		termInfoPanel.setBoxTitle("Links (" + linkCount + ")", 12);
+
+		termInfoPanel.setBoxTitle("Links (" + linkCount + ")", 8);
+
+		
+		// dbxrefsPanel
+		if ((!showEmptyPanelsFlag) && (oboClass.getDbxrefs().size() == 0)) {
+			termInfoPanel.getComponent(10).setVisible(false);
+			dbxrefPanel.setVisible(false);
+		} else {
+			termInfoPanel.getComponent(10).setVisible(true);
+			makeDbxrefPanel(oboClass.getDbxrefs());
+		termInfoPanel.setBoxTitle("DBxrefs (" + oboClass.getDbxrefs().size() + ")",
+				10);
+		dbxrefPanel.validate();
+		dbxrefPanel.repaint();
+		dbxrefPanel.setVisible(true);
+		}
+
+		// propValues
+		// propertyValuesList.setText(oboClass.getPropertyValues().toString());
+		linkCount = makePropValsPanel(oboClass.getPropertyValues());
+		termInfoPanel.setBoxTitle("Other Properties (" + linkCount + ")", 12);
+		if (!showEmptyPanelsFlag && (linkCount == 0)) {
+			termInfoPanel.getComponent(12).setVisible(false);
+			propertyValuesPanel.setVisible(false);
+		} else {
+			termInfoPanel.getComponent(12).setVisible(true);
+			propertyValuesPanel.setVisible(true);
+		}
+
+		propertyValuesPanel.validate();
+		propertyValuesPanel.repaint();
 
 		// commentsPanel
 		commentsText.setText(oboClass.getComment().toString());
+		termInfoPanel.getComponent(14).setVisible(true);
+		commentsPanel.setVisible(true);
 		if (oboClass.getComment().length() == 0) {
 			termInfoPanel.setBoxTitle("Comments (none)", 14);
+			if (!showEmptyPanelsFlag) {
+				termInfoPanel.getComponent(14).setVisible(false);
+				commentsPanel.setVisible(false);
+			}
 		} else {
 			termInfoPanel.setBoxTitle("Comments*", 14);
 		}
@@ -465,6 +549,14 @@ public class TermInfo2 extends JPanel {
 			// This sets who now listens to use term button clicks (only 1
 			// listener)
 			setUseTermListener(e.getUseTermListener());
+			//change the name of the item being browsed in the term info header
+//			GUIComponent gc = ComponentManager.getManager().getActiveComponent("term-info");
+//			GUIComponent gc2 = SwingUtil.getAncestorOfClass(GUIComponent.class, (JComponent)e.getSource());
+//			if (gc2!=null) {
+//				ComponentManager.getManager().setLabel(gc2,"Term Info: "+e.getOboClass().getName());
+//			} else {
+//				System.out.print("can't find component or not active!");
+//			}
 		}
 	}
 
@@ -692,20 +784,11 @@ public class TermInfo2 extends JPanel {
 				panelText += "<br>";
 			}
 		}
-		// JEditorPane.registerEditorKitForContentType
-		// ("text/html", "HTMLEditorKit2");
-		// JEditorPane textArea = new JEditorPane();
-		// textArea.setEditorKitForContentType
-		// ("text/html", new HTMLEditorKit2());
-		//
-		// textArea.setContentType("text/html");
 		HyperlinkLabel textArea = new HyperlinkLabel();
 		termHyperlinkListener = new TermHyperlinkListener();
 		textArea.addStringLinkListener(termHyperlinkListener);
-		// textArea.setEditable(false);
 		panelText += "</html>";
 		textArea.setText(panelText);
-		// typeLabel.setLabelFor(textArea);
 		dbxrefPanel.add(textArea);
 		dbxrefPanel.validate();
 		dbxrefPanel.repaint();
@@ -756,12 +839,16 @@ public class TermInfo2 extends JPanel {
 		String panelText = "";
 		SpringLayout layout = new SpringLayout();
 
-		if (isChild) {
-			linkLabel = new JLabel("Children");
+		if (isChild) { 
+			linkLabel = new JLabel("<html><b>Children</b></html>");
 		} else {
-			linkLabel = new JLabel("Parents");
+			linkLabel = new JLabel("<html><b>Parents</b></html>");
 		}
-
+		if (!isXP) {
+			panel.add(new JLabel("")); //blank column for spring layout
+			panel.add(linkLabel);
+			rowCount+=1;
+		}
 		for (ListIterator<LinkCollection> lit = allLinks.listIterator(); lit
 				.hasNext();) {
 			// group by each relationship type
@@ -812,16 +899,6 @@ public class TermInfo2 extends JPanel {
 				typeLabel = new JLabel(tempType, JLabel.TRAILING);
 				typeLabel.setVerticalAlignment(JLabel.TOP);
 				panel.add(typeLabel);
-				// JEditorPane.registerEditorKitForContentType
-				// ("text/html", "HTMLEditorKit2");
-				// JEditorPane textArea = new JEditorPane();
-				// textArea.setEditorKitForContentType
-				// ("text/html", new HTMLEditorKit2());
-				//		 
-				// textArea.setContentType("text/html");
-				// termHyperlinkListener = new TermHyperlinkListener();
-				// textArea.setEditable(false);
-				// textArea.setText(panelText);
 				HyperlinkLabel textArea = new HyperlinkLabel(panelText);
 				textArea.addStringLinkListener(termHyperlinkListener);
 
@@ -1071,4 +1148,13 @@ public class TermInfo2 extends JPanel {
 			return doc;
 		}
 	}
+	
+	public void setShowEmptyPanelsFlag (boolean flag) {
+		showEmptyPanelsFlag = flag;
+	}
+	
+	public boolean getShowEmptyPanelsFlag () {
+		return showEmptyPanelsFlag;
+	}
+	
 }
