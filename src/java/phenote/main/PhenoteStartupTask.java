@@ -21,6 +21,8 @@ import org.bbop.util.CollectionUtil;
 import org.oboedit.gui.Preferences;
 import org.oboedit.gui.tasks.DefaultGUIStartupTask;
 import org.bbop.framework.ScreenLockTask;
+import org.oboedit.gui.components.AnnotationSummaryComponent;
+import org.oboedit.gui.factory.AnnotationSummaryComponentFactory;
 import org.oboedit.gui.factory.DAGViewFactory;
 import org.oboedit.gui.factory.GraphDAGViewFactory;
 import org.oboedit.gui.factory.GraphEditorFactory;
@@ -61,6 +63,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		factories.add(new DAGViewFactory());
 		factories.add(new GraphDAGViewFactory());
 		factories.add(new StandardToolbarFactory());
+		factories.add(new AnnotationSummaryComponentFactory());
 		return factories;
 	}
 
