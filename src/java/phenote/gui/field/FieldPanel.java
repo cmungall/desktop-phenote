@@ -105,6 +105,9 @@ public class FieldPanel extends JPanel {
         CharacterListManager.getCharListMan(group).addCharListChangeListener(groupAdap.getCharListChangeListener());
       }
     }
+    //I'm naming the field panel the name of the config
+    this.setName(Config.inst().getConfigName());
+
   } 
 
   private void setGroup(String g) {

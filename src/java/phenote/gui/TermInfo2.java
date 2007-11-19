@@ -32,6 +32,7 @@ import javax.swing.event.HyperlinkListener;
 
 import org.bbop.swing.HyperlinkLabel;
 import org.bbop.swing.StringLinkListener;
+import org.bbop.framework.AbstractGUIComponent;
 import org.bbop.framework.GUIComponent;
 import org.bbop.framework.GUIComponentWrapper;
 import org.bbop.framework.GUIManager;
@@ -94,7 +95,7 @@ import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
  * @author Nicole Washington
  * 
  */
-public class TermInfo2 extends JPanel {
+public class TermInfo2 extends AbstractGUIComponent {
 
 	// constants
 	private static final int TERM_INFO_DEFAULT_WIDTH = 350;
@@ -121,8 +122,6 @@ public class TermInfo2 extends JPanel {
 	private SelectionManager selectionManager;
 
 	// gui components
-
-	private static JPanel entirePanel;
 
 	private TermInfoToolbar termInfoToolbar;
 
@@ -202,8 +201,8 @@ public class TermInfo2 extends JPanel {
 	}
 
 	public TermInfo2(SelectionManager selManager) {
-		// super();
-		init();
+		super("term-info:term-info");
+		initTermInfo();
 		this.selectionManager = selManager;
 		this.selectionManager
 				.addTermSelectionListener(new InfoTermSelectionListener());
@@ -215,19 +214,16 @@ public class TermInfo2 extends JPanel {
 		return singleton;
 	}
 
-	private void init() {
+	private void initTermInfo() {
 
 		// create the panel the whole thing will live in (including toolbars,
 		// etc.)
-		entirePanel = new JPanel(new BorderLayout(0, 0));
-		entirePanel.setBorder(BorderFactory.createTitledBorder("Term Info"));
-		entirePanel.setMinimumSize(new Dimension(200, 200));
-		entirePanel.setPreferredSize(new Dimension(TERM_INFO_DEFAULT_WIDTH,
-				TERM_INFO_DEFAULT_HEIGHT));
+		this.setLayout(new BorderLayout(0,0));
+		this.setPreferredSize(new Dimension(TERM_INFO_DEFAULT_WIDTH,TERM_INFO_DEFAULT_HEIGHT));
 
 		// create the toolbar
 		termInfoToolbar = new TermInfoToolbar();
-		entirePanel.add(termInfoToolbar, BorderLayout.NORTH);
+		this.add(termInfoToolbar, BorderLayout.NORTH);
 
 		// create the stackedbox that the term info will live in
 		termInfoPanel = new StackedBox();
@@ -237,7 +233,7 @@ public class TermInfo2 extends JPanel {
 		termInfoScroll.setBorder(null);
 
 		// put the scrollpane into the whole bucket
-		entirePanel.add(termInfoScroll, BorderLayout.CENTER);
+		this.add(termInfoScroll, BorderLayout.CENTER);
 
 		// The first part, which includes all the basic information,
 		// ontology, id, def
@@ -269,15 +265,24 @@ public class TermInfo2 extends JPanel {
 		basicInfoPanel.add(ontologyName);
 
 		JLabel definitionLabel = new JLabel("Definition: ", JLabel.TRAILING);
+		definitionLabel.setVerticalAlignment(JLabel.TOP);
+
 		basicInfoPanel.add(definitionLabel);
 		definitionTextArea = new HyperlinkLabel();
 		definitionLabel.setLabelFor(definitionTextArea);
 		basicInfoPanel.add(definitionTextArea);
 
+		SpringLayout layout = new SpringLayout();
+		// line up the rel type with the items
+		basicInfoPanel.setLayout(layout);
+
+		
 		// Lay out the panel.
 		SpringUtilities.makeCompactGrid(basicInfoPanel, 4, 2, // rows, cols
 				6, 6, // initX, initY
 				6, 6); // xPad, yPad
+
+		layout.putConstraint(SpringLayout.NORTH, definitionLabel, 0, SpringLayout.NORTH, definitionTextArea);
 
 		termInfoPanel.addBox("Basic Info", basicInfoPanel);
 
@@ -300,6 +305,7 @@ public class TermInfo2 extends JPanel {
 		synonymPanel.setLayout(new SpringLayout());
 		synonymPanel.setBorder(contentBorder);
 		synonymPanel.setName(synonymPanelName);
+
 
 		termInfoPanel.addBox("Synonyms", synonymPanel);
 
@@ -378,14 +384,15 @@ public class TermInfo2 extends JPanel {
 		termInfoPanel.addBox("Comments", commentsPanel);
 
 		// refresh
-		entirePanel.validate();
-		entirePanel.setVisible(true);
+		this.validate();
+		this.setVisible(true);
 
+//		add(entirePanel);
 	}
 
-	public static JComponent getComponent() {
-		return entirePanel;
-	}
+//	public static JComponent getComponent() {
+//		return entirePanel;
+//	}
 
 	private void setTextFromOboClass(OBOClass oboClass) {
 		currentOboClass = oboClass;
@@ -408,7 +415,7 @@ public class TermInfo2 extends JPanel {
 		termInfoToolbar.setTermFieldText(oboClass);
 		termID.setText(oboClass.getID());
 		ontologyName.setText(oboClass.getNamespace().toString());
-		definitionTextArea.setText(oboClass.getDefinition());
+		definitionTextArea.setText("<html>"+oboClass.getDefinition()+"</html>");
 
 		if ((!showEmptyPanelsFlag) && ((oboClass.getConsiderReplacements().size()+oboClass.getReplacedBy().size()) == 0)) {
 			termInfoPanel.getComponent(2).setVisible(false);
@@ -529,9 +536,14 @@ public class TermInfo2 extends JPanel {
 		termInfoScroll.getViewport().setViewPosition(new Point(0, 0));
 		termInfoPanel.validate();
 		termInfoPanel.repaint();
-		entirePanel.validate();
-		entirePanel.repaint();
+		this.validate();
+		this.repaint();
 		// entirePanel.setVisible(true);
+
+	}
+	public void setComponentTitleFromOBOClass (OBOClass oboClass) {
+		String title = "Term Info: "+ oboClass.getName();
+		ComponentManager.getManager().setLabel(this,title);
 
 	}
 
@@ -553,7 +565,7 @@ public class TermInfo2 extends JPanel {
 //			GUIComponent gc = ComponentManager.getManager().getActiveComponent("term-info");
 //			GUIComponent gc2 = SwingUtil.getAncestorOfClass(GUIComponent.class, (JComponent)e.getSource());
 //			if (gc2!=null) {
-//				ComponentManager.getManager().setLabel(gc2,"Term Info: "+e.getOboClass().getName());
+			setComponentTitleFromOBOClass(e.getOboClass());
 //			} else {
 //				System.out.print("can't find component or not active!");
 //			}
@@ -602,7 +614,7 @@ public class TermInfo2 extends JPanel {
 			if (!(e.getEventType() == HyperlinkEvent.EventType.ACTIVATED)) return;
 
 			URL url = e.getURL();
-			// System.out.println("got url "+url+" desc "+e.getDescription());
+			System.out.println("got url "+url+" desc "+e.getDescription());
 
 			// internal link to term...
 			if (HtmlUtil.isPhenoteLink(e)) {
@@ -637,15 +649,17 @@ public class TermInfo2 extends JPanel {
 			// or do through obo session?
 			String id = HtmlUtil.getIdFromHyperlink(e);
 			if (id == null) return;
-			try {
-				OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
-				setTextFromOboClass(term);
-				addTermToNaviHistory(id);
-				// send out term selection (non mouse over) for DAG view
-				TermInfo2.this.selectionManager.selectTerm(TermInfo2.this, term, true);
-			} catch (TermNotFoundException ex) {
-				return;
-			}
+			bringUpTermInTermInfo(id);
+//			try {
+//				OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
+//				setTextFromOboClass(term);
+//				addTermToNaviHistory(id);
+//				// send out term selection (non mouse over) for DAG view
+////				TermInfo2.this.selectionManager.selectTerm(TermInfo2.this, term, true);
+//				//				TermInfo2.this.selectionManager.selectTerm(TermInfo2.this, term, true);
+//			} catch (TermNotFoundException ex) {
+//				return;
+//			}
 		}
 
 		private void bringUpTermInTermInfo(String id) {
@@ -717,6 +731,8 @@ public class TermInfo2 extends JPanel {
 			if (syns[i].length() > 0) { // only add the item if there's this
 				// category
 				JLabel synTypeLabel = new JLabel(synTypes[i], JLabel.TRAILING);
+				synTypeLabel.setVerticalAlignment(JLabel.TOP);
+
 				synonymPanel.add(synTypeLabel);
 				JTextArea synList = new JTextArea();
 				synList.setLineWrap(true);
@@ -1110,7 +1126,8 @@ public class TermInfo2 extends JPanel {
 			OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
 			setTextFromOboClass(term);
 			// send out term selection (non mouse over) for DAG view
-			TermInfo2.this.selectionManager.selectTerm(TermInfo2.this, term, true);
+			this.selectionManager.selectTerm(this, term, true);
+		
 			// Since items are added in reverse order, "back" is actually
 			// forward
 			// termComboBox.setSelectedIndex(termComboBox.getSelectedIndex()+1);

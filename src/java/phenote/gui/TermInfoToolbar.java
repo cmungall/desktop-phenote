@@ -94,20 +94,23 @@ public class TermInfoToolbar extends JToolBar {
     useTermButton.setIcon(new ImageIcon("images/OK.GIF"));
     useTermButton.addActionListener(new UseTermActionListener());
     useTermButton.setToolTipText("Use Term");
-   
-    termField =  new JTextArea();
-    termField.setFont(new Font("Arial", Font.BOLD, 14));
-//    termField.setContentType("text/html");
-    termField.setText("(no term selected)");
-    termField.setPreferredSize(new Dimension((TERM_INFO_DEFAULT_WIDTH-(buttons.size()*BUTTON_HEIGHT)),BUTTON_HEIGHT));
-    termField.setEditable(false);  
 
     buttons.add(backButton);
     buttons.add(forwardButton);
     buttons.add(favoritesButton);  
     buttons.add(useTermButton);
-    
-    add(termField);
+
+    termField =  new JTextArea();
+    termField.setFont(new Font("Arial", Font.BOLD, 12));
+    termField.setWrapStyleWord(true);
+    termField.setLineWrap(true);
+//    termField.setContentType("text/html");
+    termField.setText("(no term selected)");
+    termField.setPreferredSize(new Dimension((TERM_INFO_DEFAULT_WIDTH-(buttons.size()*BUTTON_HEIGHT)),BUTTON_HEIGHT));
+//    termField.setMaximumSize(new Dimension((TERM_INFO_DEFAULT_WIDTH-(buttons.size()*BUTTON_HEIGHT)),BUTTON_HEIGHT));
+    termField.setEditable(false);  
+
+    add(termField,0);
     addSeparator();
 
     JButton tempButton = null;

@@ -187,6 +187,7 @@ public class SpringUtilities {
                         getConstraintsForCell(r, c, parent, cols);
                 constraints.setY(y);
                 constraints.setHeight(height);
+//                constraints.setConstraint(SpringLayout.NORTH, Spring.constant(0));
             }
             y = Spring.sum(y, Spring.sum(height, Spring.constant(yPad)));
         }

@@ -1,10 +1,5 @@
 package phenote.dataadapter.ncbi;
 
-import gov.nih.nlm.ncbi.www.soap.eutils.EUtilsServiceLocator;
-import gov.nih.nlm.ncbi.www.soap.eutils.EUtilsServiceSoap;
-import gov.nih.nlm.ncbi.www.soap.eutils.efetch.EFetchRequest;
-import gov.nih.nlm.ncbi.www.soap.eutils.efetch.EFetchResult;
-
 import java.util.List;
 
 import phenote.dataadapter.DataAdapterEx;
@@ -12,11 +7,14 @@ import org.obo.datamodel.Instance;
 
 /**
  * Note, for retmode, see http://www.ncbi.nlm.nih.gov/entrez/query/static/efetchlit_help.html for options
- * @author Nicole
- *
+ * This is the interface for the NCBI eutils data adapters.  These are for 
+ * reading with the soapy eutils (eutils.jar) or RESTful requests only.  
+ * 
+ * @author Nicole Washington
  */
 public interface NCBIDataAdapterI {
 	
+	//this is the base url for the RESTful eutils calls
 	public static String ncbiURL = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?";
 	
   /** return true if data adapter can query for the char field */
@@ -58,7 +56,8 @@ public interface NCBIDataAdapterI {
 //catch(Exception e) { System.out.println(e.toString()); }
 
   
-  /** The label that gets displayed on the lookup button */
+  /** The label that gets displayed on the lookup button.  Different
+   *  functions might have different buttons in the future. */
   public String getLookupButtonImage();
 
   public String getName();

@@ -86,7 +86,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
 	@Override
 	protected String getAppName() {
-		return "Phenote";
+		return "DScribe";
 	}
 
 	@Override
@@ -127,6 +127,10 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
 	/** FieldPanelFactory inner class */
 	private class FieldPanelFactory implements GUIComponentFactory {
+		
+		private String panelName = "DScribe Editor";
+		private String displayName = null;
+		
 		public GUIComponent createComponent(String id) {
 			String l = "<html><h1>This is an example component</h1></html>";
 			// if (true) return new GUIComponentWrapper(id, id, new
@@ -137,6 +141,8 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 			groupFieldPanel.setMinimumSize(new Dimension(300, 300));
 			groupFieldPanel.setPreferredSize(new Dimension(300, 300));
 			// 1st is id, 2nd id -> title bar string
+			String configName = groupFieldPanel.getName();
+			this.setName(configName);
 			return new GUIComponentWrapper(id, id, groupFieldPanel);
 		}
 
@@ -145,16 +151,16 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		}
 
 		public String getDefaultID() {
-			return "dnote-editor";
+			return "dscribe-editor";
 		}
 
 		/** These are alias IDs? */
 		public List getIDs() {
-			return CollectionUtil.list("dnote-editor");
+			return CollectionUtil.list("dscribe-editor");
 		}
-
+		
 		public String getName() {
-			return "DNote Editor";
+			return displayName;
 		}
 
 		public boolean getPreferSeparateWindow() {
@@ -168,15 +174,24 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		public boolean showInMenus() {
 			return true;
 		}
+		
+		public void setName(String name) {
+			displayName = panelName+" Configuration: "+name;
+		}
 	}
 
 	/** TermInfoFactory inner class */
 	private class TermInfoFactory implements GUIComponentFactory {
+		private String panelName = "Term Info";
+		private String displayName = "Term Info";
+
 		public GUIComponent createComponent(String id) {
 			TermInfo2 ti = new TermInfo2();
 			ti.setMinimumSize(new Dimension(200, 200));
-			ti.setPreferredSize(new Dimension(200, 200));
-			return new GUIComponentWrapper(id, id, ti.getComponent());
+			ti.setTitle(id);
+			ti.setName(id);
+			return ti;
+			//			return new GUIComponentWrapper(id,id, ti.getComponent());
 		}
 
 		public FactoryCategory getCategory() {
@@ -207,14 +222,22 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		public boolean showInMenus() {
 			return true;
 		}
+		
+//		public void setName(String name) {
+//			displayName = panelName+": "+name;
+//		}
 	}
 	
 	/** NCBIInfoFactory inner class */
 	private class NCBIInfoFactory implements GUIComponentFactory {
+		private String panelName = "NCBI";
+		private String displayName = null;
+
 		public GUIComponent createComponent(String id) {
 			NcbiInfo info = new NcbiInfo();
 			info.setMinimumSize(new Dimension(200, 200));
 			info.setPreferredSize(new Dimension(200, 200));
+			this.setName("(none)");
 			return new GUIComponentWrapper(id, id, info.getComponent());
 		}
 
@@ -232,7 +255,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		}
 
 		public String getName() { //what is displayed in the menu
-			return "NCBI Information";
+			return displayName;
 		}
 
 		public boolean getPreferSeparateWindow() {
@@ -246,16 +269,25 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		public boolean showInMenus() {
 			return true;
 		}
+		
+		public void setName(String name) {
+			displayName = panelName+": "+name;
+		}
+
 	}
 
 
 	/** CharTableFactory inner class */
 	private class CharTableFactory implements GUIComponentFactory {
+		private String panelName = "Annotation Table";
+		private String displayName = null;
+
 		public GUIComponent createComponent(String id) {
 			CharacterTableController tableController = new CharacterTableController(
 					getDefaultGroup()); // for now just default
 			JPanel ctp = tableController.getCharacterTablePanel();
 			// 1st is id, 2nd id -> title bar string
+			this.setName("(new)");
 			return new GUIComponentWrapper(id, id, ctp);
 		}
 
@@ -264,16 +296,16 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		}
 
 		public String getDefaultID() {
-			return "DNote-annotation-table-viewer";
+			return "Annotation Table";
 		}
 
 		/** These are alias IDs? */
 		public List getIDs() {
-			return CollectionUtil.list("DNote-annotation-table-viewer");
+			return CollectionUtil.list("Annotation Table");
 		}
 
 		public String getName() {
-			return "Annotation Table";
+			return displayName;
 		}
 
 		public boolean getPreferSeparateWindow() {
@@ -286,6 +318,9 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
 		public boolean showInMenus() {
 			return true;
+		}
+		public void setName(String name) {
+			displayName = panelName +": "+name;
 		}
 	}
 

@@ -180,10 +180,10 @@ public class CharFieldManager {
     //while (iter.hasNext()) {
     for (Ontology o : getAllOntologies()) {
       //Ontology o = iter.next();
-    	for(IdentifiedObject temp : o.getOboSession().getObjects()) {
-    		if (temp.getID().startsWith("ZFS"))
-    			System.err.println("WHAT?!");
-    	}
+//    	for(IdentifiedObject temp : o.getOboSession().getObjects()) {
+//    		if (temp.getID().startsWith("ZFS"))
+//    			System.err.println("WHAT?!");
+//    	}
       try { oboClass = o.getTerm(id); }
       catch (TermNotFoundException e) { continue; }
       if (oboClass != null)

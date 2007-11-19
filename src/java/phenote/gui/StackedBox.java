@@ -150,7 +150,7 @@ public class StackedBox extends JPanel implements Scrollable {
     link.setClickedColor(getTitleForegroundColor());
 
     link.setBorder(new CompoundBorder(separatorBorder, BorderFactory
-      .createEmptyBorder(1, 4, 1, 4)));
+      .createEmptyBorder(0, 4, 1, 0)));
     link.setBorderPainted(true);
 
     add(link);
