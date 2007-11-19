@@ -42,6 +42,7 @@ public class AnnotationCharacter extends AbstractCharacter {
   public AnnotationCharacter(Annotation annotation, AnnotationMappingDriver driver) {
     this.annotation = annotation;
     this.driver = driver;
+    // this is no good as we end up with "null" annotations TODO
     CharFieldManager.inst().getOboSession().addObject(annotation); // CJM: TODO: CHECK with mark/john
   }
 
@@ -131,11 +132,12 @@ public class AnnotationCharacter extends AbstractCharacter {
     }
     // PROPERTIES (not subject or object)
     else {
-      LOG.debug("setting charfield "+cf+" to val +"+cfv);
       OBOProperty prop = getPropertyForField(cf);
+      LOG.debug("setting charfield "+cf+" to val +"+cfv+" using "+prop);
       if (prop != null) {
         if (cfv.isTerm()) {
-          setPropertyValue(annotation, prop, cfv.getOboClass());
+          if (cfv.getOboClass() != null)
+        	  setPropertyValue(annotation, prop, cfv.getOboClass());
         } else {
           setPropertyValue(annotation, prop, cfv.getName());
         }
