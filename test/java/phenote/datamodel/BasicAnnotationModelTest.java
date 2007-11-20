@@ -20,7 +20,7 @@ import phenote.main.Phenote;
 
 public class BasicAnnotationModelTest extends AbstractAnnotationModelTest {
   
-	String jdbcPath = "jdbc:postgresql://localhost:5432/obdtest";
+
 
    protected static String getConfigFileName() { return "basic-test.cfg"; }
    protected static String getDataFilePath() { return "test/testfiles/basic-test-data.tab";}
@@ -42,37 +42,12 @@ public class BasicAnnotationModelTest extends AbstractAnnotationModelTest {
    }
 
    @Test public void testWriteToDatabase() throws DataAdapterException, IOException {
-		OBDSQLDatabaseAdapterConfiguration wconfig = 
-			new OBDSQLDatabaseAdapter.OBDSQLDatabaseAdapterConfiguration();
-		wconfig.setSaveImplied(false);
-		
-		wconfig.setWritePath(jdbcPath);
-		wconfig.setAnnotationMode(OBDSQLDatabaseAdapter.
-				OBDSQLDatabaseAdapterConfiguration.AnnotationMode.ANNOTATIONS_ONLY);
-		OBDSQLDatabaseAdapter wadapter = new OBDSQLDatabaseAdapter();
-		//ReasonedLinkDatabase reasoner = rf.createReasoner();
-		//reasoner.setLinkDatabase(linkDatabase);
-		//wadapter.setReasoner(reasoner);
-		//reasoner.recache();
-		
-		wadapter.doOperation(OBOAdapter.WRITE_ONTOLOGY, wconfig, session);
-		
-		writeTempOBOFile();
-
+	   checkAnnotations();
+	   //writeTempOBOFile();
+	   //writeToDatabase();
 	   Assert.assertTrue(true);
    }
    
-   // lifted from OE. Can we reuse from test
-	public File writeTempOBOFile() throws IOException, DataAdapterException {
-		
-		OBOFileAdapter adapter = new OBOFileAdapter();
-		OBOFileAdapter.OBOAdapterConfiguration config = new OBOFileAdapter.OBOAdapterConfiguration();
-		File outFile = File.createTempFile("foo", "bar");
-		//outFile.deleteOnExit();
-		config.setWritePath(outFile.getAbsolutePath());
-		adapter.doOperation(OBOAdapter.WRITE_ONTOLOGY, config, session);
-		return outFile;
-	}
-
+ 
   
 }

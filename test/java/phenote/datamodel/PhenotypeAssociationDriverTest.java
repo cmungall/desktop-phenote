@@ -1,8 +1,10 @@
 package phenote.datamodel;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 
+import org.bbop.dataadapter.DataAdapterException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -17,9 +19,7 @@ import phenote.dataadapter.delimited.DelimitedFileAdapter;
 import phenote.main.Phenote;
 
 public class PhenotypeAssociationDriverTest extends AbstractAnnotationModelTest {
-  
-   protected static OBOSession session;
-   
+    
    protected static String getConfigFileName() { return "ncbo-test.cfg"; }
    protected static String getDataFilePath() { return "test/testfiles/Sox9-human-bbop.tab";}
    
@@ -33,7 +33,18 @@ public class PhenotypeAssociationDriverTest extends AbstractAnnotationModelTest 
     CharacterListI clist = 
     	ad.load(new File("test/testfiles/Sox9-human-bbop.tab"));
     System.err.println("clist size: "+clist.size());
+    testCharacterList(clist);
     session = CharFieldManager.inst().getOboSession();
+  }
+  
+  public static void testCharacterList(CharacterListI clist) {
+	  for (CharacterI c : clist.getList()) {
+		  System.out.println("character ="+c);
+		  for (CharField cf : c.getAllCharFields()) {
+			  System.out.println("  "+cf.getName()+" "+c.getValueString(cf));
+		  }
+			  
+	  }
   }
   
   @Before public void setup() {
@@ -49,5 +60,11 @@ public class PhenotypeAssociationDriverTest extends AbstractAnnotationModelTest 
 	  Assert.assertTrue(annots.size() > 0);
   }
   
+  @Test public void testWriteToDatabase() throws DataAdapterException, IOException {
+	   //writeTempOBOFile();
+	   //writeToDatabase();
+	   Assert.assertTrue(true);
+  }
+
  
 }
