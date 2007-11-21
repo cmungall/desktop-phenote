@@ -1,5 +1,6 @@
 package phenote.datamodel;
 
+import org.apache.log4j.Logger;
 // configuration drives the mode so what the heck right?
 import phenote.config.Config;
 import phenote.config.xml.CharacterModeDocument.CharacterMode;
@@ -8,13 +9,19 @@ import phenote.config.xml.CharacterModeDocument.CharacterMode;
 
 public class CharacterIFactory {
   
+  private static final Logger LOG = Logger.getLogger(AnnotationCharacter.class);
   private static CharacterIFactory singleton;
 
   public static CharacterIFactory inst() { 
     if (singleton == null) {
-      singleton = new CharacterIFactory(); 
+      singleton = new CharacterIFactory();
+      if (singleton.isOboAnnotationMode())
+        LOG.info("Using OBO Annotation model");
+      else 
+        LOG.info("Using regular character model (not obo annotation)");
     }
-    return singleton; }
+    return singleton;
+  }
   
   public static void reset() {
     singleton = null;
