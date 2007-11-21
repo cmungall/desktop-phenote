@@ -95,6 +95,10 @@ import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
  * @author Nicole Washington
  * 
  */
+/**
+ * @author Nicole
+ *
+ */
 public class TermInfo2 extends AbstractGUIComponent {
 
 	// constants
@@ -104,9 +108,17 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 	private static final int BUTTON_HEIGHT = 30;
 
-	private static Border contentBorder = BorderFactory.createEmptyBorder(6, 8,
-			6, 8);
-
+	private static Border contentBorder = BorderFactory.createEmptyBorder(3, 3,
+			6, 3);  //top, left, bottom, right...orig 6,8,6,8
+	
+	//these are used for the spring layout.
+	private static final int XPAD = 3; //between elements horizontally
+	private static final int YPAD = 3; //between elements vertically
+	private static final int INITX = 3;
+	private static final int INITY = 3;
+	private static final int PREFERREDX = 75;
+	
+	
 	// content variables
 	private OBOClass currentOboClass;
 
@@ -268,9 +280,13 @@ public class TermInfo2 extends AbstractGUIComponent {
 		definitionLabel.setVerticalAlignment(JLabel.TOP);
 
 		basicInfoPanel.add(definitionLabel);
-		definitionTextArea = new HyperlinkLabel();
+		definitionTextArea = new HyperlinkLabel(" ");
+		termHyperlinkListener = new TermHyperlinkListener();
+		definitionTextArea.addStringLinkListener(termHyperlinkListener);
 		definitionLabel.setLabelFor(definitionTextArea);
 		basicInfoPanel.add(definitionTextArea);
+		
+
 
 		SpringLayout layout = new SpringLayout();
 		// line up the rel type with the items
@@ -279,10 +295,19 @@ public class TermInfo2 extends AbstractGUIComponent {
 		
 		// Lay out the panel.
 		SpringUtilities.makeCompactGrid(basicInfoPanel, 4, 2, // rows, cols
-				6, 6, // initX, initY
-				6, 6); // xPad, yPad
+				INITX, INITY, // initX, initY
+				XPAD, YPAD); // xPad, yPad
+		
+		int[] maxX = {PREFERREDX,-1};
+		int[] maxY = null;
+		SpringUtilities.fixCellWidth(basicInfoPanel, 4, 2, // rows,
+				// cols
+				INITX, INITY, // initX, initY
+				XPAD, YPAD,  // xPad, yPad
+        maxX, maxY);
 
-		layout.putConstraint(SpringLayout.NORTH, definitionLabel, 0, SpringLayout.NORTH, definitionTextArea);
+
+//		layout.putConstraint(SpringLayout.NORTH, definitionLabel, 0, SpringLayout.NORTH, definitionTextArea);
 
 		termInfoPanel.addBox("Basic Info", basicInfoPanel);
 
@@ -345,8 +370,8 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 		SpringUtilities.makeCompactGrid(ontologyLinksPanel, 2, 1, // rows,
 				// cols
-				6, 6, // initX, initY
-				6, 6); // xPad, yPad
+				INITX, INITY, // initX, initY
+				XPAD, YPAD); // xPad, yPad
 		
 		// dbxrefs
 		dbxrefPanel = new JPanel();
@@ -412,11 +437,15 @@ public class TermInfo2 extends AbstractGUIComponent {
 			considerReplacePanel.setVisible(true);
 		}
 
-		termInfoToolbar.setTermFieldText(oboClass);
+		termInfoToolbar.setTermFieldText(oboClass); //is the toolbar now out of date b/c of the component title?
+		//always show the basics, even if empty...shouldn't be empty.
 		termID.setText(oboClass.getID());
 		ontologyName.setText(oboClass.getNamespace().toString());
-		definitionTextArea.setText("<html>"+oboClass.getDefinition()+"</html>");
-
+		if (oboClass.getDefinition().length()>0) {
+			definitionTextArea.setText("<html>"+oboClass.getDefinition()+"</html>"); 
+		} else
+			definitionTextArea.setText("<html> (no definition provided) </html>");
+		
 		if ((!showEmptyPanelsFlag) && ((oboClass.getConsiderReplacements().size()+oboClass.getReplacedBy().size()) == 0)) {
 			termInfoPanel.getComponent(2).setVisible(false);
 			considerReplacePanel.setVisible(false);
@@ -427,9 +456,6 @@ public class TermInfo2 extends AbstractGUIComponent {
 			termInfoPanel.setBoxTitle("Consider ("
 					+ oboClass.getConsiderReplacements().size() + ") & Replacement ("
 					+ oboClass.getReplacedBy().size() + ") Terms", 2);
-			// if there are items here, should always expand. perhaps always
-			// collapse
-			// all except comments
 			considerReplacePanel.validate();
 			considerReplacePanel.repaint();
 			considerReplacePanel.setVisible(true);
@@ -477,7 +503,9 @@ public class TermInfo2 extends AbstractGUIComponent {
 				childrenPanel);
 		childrenPanel.validate();
 		childrenPanel.repaint();
-
+		
+		ontologyLinksPanel.validate();
+		ontologyLinksPanel.repaint();
 
 		termInfoPanel.setBoxTitle("Links (" + linkCount + ")", 8);
 
@@ -489,11 +517,11 @@ public class TermInfo2 extends AbstractGUIComponent {
 		} else {
 			termInfoPanel.getComponent(10).setVisible(true);
 			makeDbxrefPanel(oboClass.getDbxrefs());
-		termInfoPanel.setBoxTitle("DBxrefs (" + oboClass.getDbxrefs().size() + ")",
-				10);
-		dbxrefPanel.validate();
-		dbxrefPanel.repaint();
-		dbxrefPanel.setVisible(true);
+			termInfoPanel.setBoxTitle("DBxrefs (" + oboClass.getDbxrefs().size() + ")",
+					10);
+			dbxrefPanel.validate();
+			dbxrefPanel.repaint();
+			dbxrefPanel.setVisible(true);
 		}
 
 		// propValues
@@ -506,10 +534,10 @@ public class TermInfo2 extends AbstractGUIComponent {
 		} else {
 			termInfoPanel.getComponent(12).setVisible(true);
 			propertyValuesPanel.setVisible(true);
+			propertyValuesPanel.validate();
+			propertyValuesPanel.repaint();
 		}
 
-		propertyValuesPanel.validate();
-		propertyValuesPanel.repaint();
 
 		// commentsPanel
 		commentsText.setText(oboClass.getComment().toString());
@@ -523,24 +551,33 @@ public class TermInfo2 extends AbstractGUIComponent {
 			}
 		} else {
 			termInfoPanel.setBoxTitle("Comments*", 14);
+			commentsPanel.validate();
+			commentsPanel.repaint();
 		}
-		commentsPanel.validate();
-		commentsPanel.repaint();
 
 		// this refreshes the main panel
-		// this should move the scrollbar to the top, but it doesn't!
-		termName.setText(oboClass.getName());
+		//this seems a little out of order, but its to get the scrollbar movement right
+		termName.setText("<html><b>"+oboClass.getName()+"</b></html>"); 
+		termName.validate();
+		termName.repaint();  //really trying to make sure the scroll works properly.
 		basicInfoPanel.validate();
 		basicInfoPanel.repaint();
+		basicInfoPanel.setVisible(true);
 		termInfoScroll.getVerticalScrollBar().setValue(0);
 		termInfoScroll.getViewport().setViewPosition(new Point(0, 0));
 		termInfoPanel.validate();
 		termInfoPanel.repaint();
 		this.validate();
 		this.repaint();
-		// entirePanel.setVisible(true);
+		
+
 
 	}
+	
+	/**
+	 * Puts the currently browsed term name into the component title <p>
+	 * @param oboClass the term being browsed 
+	 */
 	public void setComponentTitleFromOBOClass (OBOClass oboClass) {
 		String title = "Term Info: "+ oboClass.getName();
 		ComponentManager.getManager().setLabel(this,title);
@@ -562,13 +599,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 			// listener)
 			setUseTermListener(e.getUseTermListener());
 			//change the name of the item being browsed in the term info header
-//			GUIComponent gc = ComponentManager.getManager().getActiveComponent("term-info");
-//			GUIComponent gc2 = SwingUtil.getAncestorOfClass(GUIComponent.class, (JComponent)e.getSource());
-//			if (gc2!=null) {
 			setComponentTitleFromOBOClass(e.getOboClass());
-//			} else {
-//				System.out.print("can't find component or not active!");
-//			}
 		}
 	}
 
@@ -672,6 +703,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 					if (io instanceof OBOClass) {
 						OBOClass c = (OBOClass) io;
 						setTextFromOboClass(c);
+						setComponentTitleFromOBOClass(c);
 						break;
 					}
 				}
@@ -707,17 +739,17 @@ public class TermInfo2 extends AbstractGUIComponent {
 		for (Iterator it = someSet.iterator(); it.hasNext();) {
 			syn = (Synonym) it.next();
 			if (syn.getScope() == Synonym.BROAD_SYNONYM) {
-				syns[0] += " " + syn + "\n";
+				syns[0] += syn + "\n";
 			} else if (syn.getScope() == Synonym.NARROW_SYNONYM) {
-				syns[1] += " " + syn + "\n";
+				syns[1] += syn + "\n";
 			} else if (syn.getScope() == Synonym.EXACT_SYNONYM) {
-				syns[2] += " " + syn + "\n";
+				syns[2] += syn + "\n";
 			} else if (syn.getScope() == Synonym.RELATED_SYNONYM) {
-				syns[3] += " " + syn + "\n";
+				syns[3] += syn + "\n";
 			} else if (syn.getScope() == Synonym.UNKNOWN_SCOPE) {
-				syns[4] += " " + syn + "\n";
+				syns[4] += syn + "\n";
 			} else {
-				syns[4] += " " + syn + "\n";
+				syns[4] += syn + "\n";
 			}
 		}
 
@@ -755,8 +787,17 @@ public class TermInfo2 extends AbstractGUIComponent {
 		// Lay out the panel.
 		SpringUtilities.makeCompactGrid(synonymPanel, rowCount, 2, // rows,
 				// cols
-				6, 6, // initX, initY
-				6, 6); // xPad, yPad
+				INITX, INITY, // initX, initY
+				XPAD, YPAD); // xPad, yPad
+		
+		int[] maxX = {PREFERREDX,-1};
+		int[] maxY = null;
+		SpringUtilities.fixCellWidth(synonymPanel, rowCount, 2, // rows,
+				// cols
+				INITX, INITY, // initX, initY
+				XPAD, YPAD,  // xPad, yPad
+        maxX, maxY);
+
 		synonymPanel.setVisible(true);
 	}
 
@@ -785,11 +826,9 @@ public class TermInfo2 extends AbstractGUIComponent {
 				}
 
 				if (tempOboClass != null) {
-					panelText += HtmlUtil.termLink(tempOboClass) + " (" + tempID + ")"; // use
-																																							// the
-																																							// name
-																																							// &
-																																							// link
+//					panelText += HtmlUtil.termLink(tempOboClass) + " (" + tempID + ")";
+					panelText+= "<a href='" + tempOboClass.getID() + "'>" + tempOboClass.getName();
+
 				} else {
 					panelText += tempID; // just use the ID for external refs
 				}
@@ -812,9 +851,18 @@ public class TermInfo2 extends AbstractGUIComponent {
 		// Lay out the panel.
 		if (rowCount > 0) {
 			SpringUtilities.makeCompactGrid(dbxrefPanel, 1, 1, // rows, cols
-					6, 6, // initX, initY
-					6, 6); // xPad, yPad
+					INITX, INITY, // initX, initY
+					XPAD, YPAD); // xPad, yPad
 		}
+		
+		int[] maxX = {PREFERREDX,-1};
+		int[] maxY = null;
+		SpringUtilities.fixCellWidth(dbxrefPanel, 1, 1, // rows,
+				// cols
+				INITX, INITY, // initX, initY
+				XPAD, YPAD,  // xPad, yPad
+        maxX, maxY);
+
 		dbxrefPanel.setVisible(true);
 	}
 
@@ -860,7 +908,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 		} else {
 			linkLabel = new JLabel("<html><b>Parents</b></html>");
 		}
-		if (!isXP) {
+		if (!isXP) { //only add the parent/child heading if not cross-products
 			panel.add(new JLabel("")); //blank column for spring layout
 			panel.add(linkLabel);
 			rowCount+=1;
@@ -916,30 +964,38 @@ public class TermInfo2 extends AbstractGUIComponent {
 				typeLabel.setVerticalAlignment(JLabel.TOP);
 				panel.add(typeLabel);
 				HyperlinkLabel textArea = new HyperlinkLabel(panelText);
+				termHyperlinkListener = new TermHyperlinkListener();
 				textArea.addStringLinkListener(termHyperlinkListener);
 
 				typeLabel.setLabelFor(textArea);
 				panel.add(textArea);
 				rowCount++;
-				layout = new SpringLayout();
-				// line up the rel type with the items
-				layout.putConstraint(SpringLayout.NORTH, typeLabel, 5,
-						SpringLayout.NORTH, panel);
-				layout.putConstraint(SpringLayout.NORTH, textArea, 5,
-						SpringLayout.NORTH, panel);
-				panel.setLayout(layout);
+//				layout = new SpringLayout();
+//				// line up the rel type with the items
+//				layout.putConstraint(SpringLayout.NORTH, typeLabel, 5,
+//						SpringLayout.NORTH, panel);
+//				layout.putConstraint(SpringLayout.NORTH, textArea, 5,
+//						SpringLayout.NORTH, panel);
+//				panel.setLayout(layout);
 			}
 			totalItems += itemCount;
 		}
-		if (rowCount > 0) {
+		if (rowCount > 0) {  //first row is the header
 			SpringUtilities.makeCompactGrid(panel, rowCount, 2, // rows, cols
-					5, 5, // initX, initY
-					5, 5); // xPad, yPad
+					INITX, INITY, // initX, initY
+					XPAD, YPAD); // xPad, yPad
+			int[] maxX = {PREFERREDX,-1};
+			int[] maxY = null;
+			SpringUtilities.fixCellWidth(panel, rowCount, 2, // rows,
+					// cols
+					INITX, INITY, // initX, initY
+					XPAD, YPAD,  // xPad, yPad
+	        maxX, maxY);
+
+			panel.setVisible(true);
 		} else {
-			panel.add(new JLabel("(none)"));
-			panel.setLayout(layout);
+			panel.setVisible(false); //hide the parents/children panel if empty
 		}
-		panel.setVisible(true);
 		panel.validate();
 		panel.repaint();
 		return totalItems;
@@ -1045,7 +1101,9 @@ public class TermInfo2 extends AbstractGUIComponent {
 			for (Iterator it = obsItems.iterator(); it.hasNext();) {
 				obsObj = (ObsoletableObject) it.next();
 				if (obsObj != null) {
-					panelText += HtmlUtil.termLink(obsObj);
+//					panelText += HtmlUtil.termLink(obsObj);
+					panelText += "<a href='" + obsObj.getID() + "'>" + obsObj.getName();
+
 				}
 				if (it.hasNext()) {
 					panelText += ", ";
@@ -1068,8 +1126,16 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 			SpringUtilities.makeCompactGrid(considerReplacePanel, rowCount, 2, // rows,
 					// cols
-					6, 6, // initX, initY
-					6, 6); // xPad, yPad
+					INITX, INITY, // initX, initY
+					XPAD, YPAD); // xPad, yPad
+			int[] maxX = {PREFERREDX,-1};
+			int[] maxY = null;
+			
+			SpringUtilities.fixCellWidth(considerReplacePanel, rowCount, 2, // rows,
+					// cols
+					INITX, INITY, // initX, initY
+					XPAD, YPAD,  // xPad, yPad
+	        maxX, maxY);
 
 			considerReplacePanel.validate();
 			considerReplacePanel.setVisible(true);
@@ -1099,9 +1165,18 @@ public class TermInfo2 extends AbstractGUIComponent {
 		if (rowCount > 0) {
 			SpringUtilities.makeCompactGrid(propertyValuesPanel, rowCount, 2, // rows,
 					// cols
-					6, 6, // initX, initY
-					6, 6); // xPad, yPad
+					INITX, INITY, // initX, initY
+					XPAD, YPAD); // xPad, yPad
 		}
+		
+		int[] maxX = {PREFERREDX,-1};
+		int[] maxY = null;
+		SpringUtilities.fixCellWidth(propertyValuesPanel, rowCount, 2, // rows,
+				// cols
+				INITX, INITY, // initX, initY
+				XPAD, YPAD,  // xPad, yPad
+        maxX, maxY);
+
 		propertyValuesPanel.validate();
 		propertyValuesPanel.setVisible(true);
 
@@ -1173,5 +1248,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 	public boolean getShowEmptyPanelsFlag () {
 		return showEmptyPanelsFlag;
 	}
+	
+	
 	
 }
