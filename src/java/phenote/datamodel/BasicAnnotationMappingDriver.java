@@ -41,8 +41,12 @@ public class BasicAnnotationMappingDriver implements AnnotationMappingDriver {
     // First check if configged/in char field
     // if (cf.hasOboRelation()) return cf.getOboRelation();
     if (CharFieldEnum.PUB.equals(cf)) {
-      return AnnotationOntology.EVIDENCE_REL();
-    } else if (CharFieldEnum.GENOTYPE.equals(cf)) {
+      return AnnotationOntology.SOURCE_REL();
+    } else if (CharFieldEnum.EVIDENCE.equals(cf)) {
+        return AnnotationOntology.EVIDENCE_REL();
+    } else if (CharFieldEnum.ASSIGNED_BY.equals(cf)) {
+        return AnnotationOntology.ASSIGNED_BY_REL();
+    } else if (CharFieldEnum.GENOTYPE.equals(cf)) { // TODO: move to a more specific driver
       return GENOTYPE_REL;
     }
     //return null;
