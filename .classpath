@@ -51,15 +51,15 @@
 	<classpathentry kind="lib" path="jars/eutils.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/BBOP"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/OBO"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/OBO-Edit"/>
-	<classpathentry kind="lib" path="axis.jar" sourcepath="/axis-1_4/docs/apiDocs">
+	<classpathentry combineaccessrules="false" kind="src" path="/OBO-Edit2"/>
+	<classpathentry kind="lib" path="jars/axis.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="file:/axis-1_4/docs/apiDocs/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="commons-discovery-0.2.jar"/>
-	<classpathentry kind="lib" path="jaxrpc.jar"/>
-	<classpathentry kind="lib" path="saaj.jar"/>
-	<classpathentry kind="lib" path="wsdl4j-1.5.1.jar"/>
+	<classpathentry kind="lib" path="jars/commons-discovery-0.2.jar"/>
+	<classpathentry kind="lib" path="jars/jaxrpc.jar"/>
+	<classpathentry kind="lib" path="jars/saaj.jar"/>
+	<classpathentry kind="lib" path="jars/wsdl4j-1.5.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
