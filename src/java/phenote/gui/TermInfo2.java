@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
+import org.apache.log4j.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -20,6 +21,7 @@ import javax.swing.JEditorPane;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLDocument;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -33,15 +35,19 @@ import javax.swing.event.HyperlinkListener;
 import org.bbop.swing.HyperlinkLabel;
 import org.bbop.swing.StringLinkListener;
 import org.bbop.framework.AbstractGUIComponent;
+import org.bbop.framework.ComponentConfiguration;
+import org.bbop.framework.ConfigurationPanel;
 import org.bbop.framework.GUIComponent;
 import org.bbop.framework.GUIComponentWrapper;
 import org.bbop.framework.GUIManager;
 import org.bbop.framework.GUIComponentFactory;
 import org.bbop.framework.ComponentManager;
+import org.obo.annotation.datamodel.Annotation;
 import org.obo.datamodel.Dbxref;
 import org.obo.datamodel.IdentifiedObject;
 import org.obo.datamodel.DanglingObject;
 import org.obo.datamodel.Link;
+import org.obo.datamodel.LinkedObject;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
 import org.obo.datamodel.OBORestriction;
@@ -49,9 +55,15 @@ import org.obo.datamodel.OBOSession;
 import org.obo.datamodel.ObsoletableObject;
 import org.obo.datamodel.PropertyValue;
 import org.obo.datamodel.Synonym;
+import org.obo.filters.Filter;
+import org.obo.util.AnnotationUtil;
 import org.obo.util.TermUtil;
+import org.oboedit.gui.components.OntologyEditorConfiguration;
+import org.oboedit.gui.components.SearchComponent.SearchConfig;
+import org.oboedit.gui.filter.RenderedFilter;
 import org.bbop.swing.SwingUtil;
 
+import phenote.dataadapter.OntologyDataAdapter;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.TermNotFoundException;
@@ -101,6 +113,83 @@ import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
  */
 public class TermInfo2 extends AbstractGUIComponent {
 
+	private static final Logger LOG = Logger.getLogger(TermInfo2.class);
+	
+	protected boolean includeImplicitAnnotations = false;
+	
+	public boolean isIncludeImplicitAnnotations() {
+		return includeImplicitAnnotations;
+	}
+
+	public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
+		this.includeImplicitAnnotations = includeImplicitAnnotations;
+	}
+
+	@Override
+	public ConfigurationPanel getConfigurationPanel() {
+		ConfigurationPanel p = new ConfigurationPanel() {
+
+			protected JCheckBox includeImplicitAnnotationsBox = new JCheckBox(
+					"Include implicit annotations",
+					false);
+
+			{
+				setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+				add(includeImplicitAnnotationsBox);
+			}
+
+			@Override
+			public void commit() {
+				TermInfo2Config config = (TermInfo2Config) getComponent()
+						.getConfiguration();
+				config.setIncludeImplicitAnnotations(includeImplicitAnnotationsBox.isSelected());
+				getComponent().setConfiguration(config);
+			}
+
+			@Override
+			public void init() {
+				TermInfo2Config config = (TermInfo2Config) getComponent()
+						.getConfiguration();
+				includeImplicitAnnotationsBox.setSelected(config.isIncludeImplicitAnnotations());
+			}
+		};
+		return p;
+	}
+	
+	@Override
+	public ComponentConfiguration getConfiguration() {
+		return new TermInfo2Config(isIncludeImplicitAnnotations());
+	}
+
+	public void setConfiguration(ComponentConfiguration config) {
+		if (config instanceof TermInfo2Config) {
+			setIncludeImplicitAnnotations(((TermInfo2Config) config)
+					.isIncludeImplicitAnnotations());
+		}
+	}
+
+	
+	public static class TermInfo2Config implements ComponentConfiguration {
+		protected boolean includeImplicitAnnotations;
+
+		public TermInfo2Config(boolean includeImplicitAnnotations) {
+			super();
+			this.includeImplicitAnnotations = includeImplicitAnnotations;
+		}
+
+		public TermInfo2Config() {
+		}
+
+		public boolean isIncludeImplicitAnnotations() {
+			return includeImplicitAnnotations;
+		}
+
+		public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
+			this.includeImplicitAnnotations = includeImplicitAnnotations;
+		}
+
+	}
+	 
 	// constants
 	private static final int TERM_INFO_DEFAULT_WIDTH = 350;
 
@@ -159,6 +248,8 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 	private JPanel synonymPanel;
 
+	private JPanel annotationPanel;
+	
 	// private JTextArea synonyms;
 
 	private JPanel dbxrefPanel;
@@ -199,6 +290,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 	private static final String dbxrefPanelName = "DBXREFS";  //10
 	private static final String propvalsPanelName = "PROPVALS";  //12
 	private static final String commentsPanelName = "COMMENTS";  //14
+	private static final String annotationPanelName = "ANNOTATIONS"; //16
 	
 	/** this sets the order of the panels */
 	private static String[] panels = {basicInfoPanelName, considerReplacePanelName, synonymPanelName, xpdefsPanelName, linksPanelName, dbxrefPanelName, propvalsPanelName, commentsPanelName};
@@ -331,7 +423,6 @@ public class TermInfo2 extends AbstractGUIComponent {
 		synonymPanel.setBorder(contentBorder);
 		synonymPanel.setName(synonymPanelName);
 
-
 		termInfoPanel.addBox("Synonyms", synonymPanel);
 
 
@@ -411,6 +502,17 @@ public class TermInfo2 extends AbstractGUIComponent {
 		// refresh
 		this.validate();
 		this.setVisible(true);
+		
+		// Annotations
+		// Do we want a single panel here?
+		annotationPanel = new JPanel();
+		annotationPanel.setOpaque(false);
+		annotationPanel.setLayout(new SpringLayout());
+		annotationPanel.setBorder(contentBorder);
+		annotationPanel.setName(annotationPanelName);
+
+		termInfoPanel.addBox("annotations", annotationPanel);
+
 
 //		add(entirePanel);
 	}
@@ -421,7 +523,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 	private void setTextFromOboClass(OBOClass oboClass) {
 		currentOboClass = oboClass;
-
+		
 		// basicInfoPanel
 		if (!oboClass.isObsolete()) {
 			termInfoPanel.setBoxTitleBackgroundColor(0, Color.LIGHT_GRAY);
@@ -554,6 +656,24 @@ public class TermInfo2 extends AbstractGUIComponent {
 			commentsPanel.validate();
 			commentsPanel.repaint();
 		}
+
+		// Annotations
+		Collection<Annotation> annots = getAnnotationsByClass(oboClass);
+		if ((!showEmptyPanelsFlag) && (annots.size() == 0)) {
+			termInfoPanel.getComponent(16).setVisible(false);
+			annotationPanel.setVisible(false);
+		} else {
+			// AnnotationPanel
+			termInfoPanel.getComponent(16).setVisible(true);
+			makeAnnotationPanel(annots);
+			termInfoPanel.setBoxTitle("Annotations (" + annots.size()
+					+ ")", 16);
+			annotationPanel.validate();
+			annotationPanel.repaint();
+			annotationPanel.setVisible(true);
+		}
+		
+
 
 		// this refreshes the main panel
 		//this seems a little out of order, but its to get the scrollbar movement right
@@ -799,6 +919,55 @@ public class TermInfo2 extends AbstractGUIComponent {
         maxX, maxY);
 
 		synonymPanel.setVisible(true);
+	}
+
+	private void makeAnnotationPanel(Collection<Annotation> annots) {
+	
+		int rowCount = 0;
+
+		annotationPanel.removeAll(); // clear out the old ones
+		annotationPanel.setBorder(contentBorder);
+		annotationPanel.setOpaque(false);
+		annotationPanel.setBackground(Color.WHITE);
+
+		for (Annotation annot : annots) {
+			LinkedObject ae = annot.getSubject();
+			if (ae == null) {
+				LOG.error("no subject for "+annot);
+				continue;
+			}
+			LinkedObject annotatedTo = annot.getObject();
+			if (annotatedTo == null) {
+				LOG.error("no object for "+annot);
+				continue;
+			}
+			JLabel aeLabel = new JLabel(ae.getID());
+			// TODO: use a method call for this
+			annotationPanel.add(new JLabel(getObjHref(annotatedTo)));
+			annotationPanel.add(aeLabel);
+			rowCount++;
+			SpringLayout layout = new SpringLayout();
+			layout.putConstraint(SpringLayout.NORTH, aeLabel, 5,
+					SpringLayout.NORTH, annotationPanel);
+			annotationPanel.setLayout(layout);
+
+		}
+
+		// Lay out the panel.
+		SpringUtilities.makeCompactGrid(annotationPanel, rowCount, 2, // rows,
+				// cols
+				INITX, INITY, // initX, initY
+				XPAD, YPAD); // xPad, yPad
+		
+		int[] maxX = {PREFERREDX,-1};
+		int[] maxY = null;
+		SpringUtilities.fixCellWidth(annotationPanel, rowCount, 2, // rows,
+				// cols
+				INITX, INITY, // initX, initY
+				XPAD, YPAD,  // xPad, yPad
+        maxX, maxY);
+
+		annotationPanel.setVisible(true);
 	}
 
 	private void makeDbxrefPanel(Set someSet) {
@@ -1214,6 +1383,54 @@ public class TermInfo2 extends AbstractGUIComponent {
 	// for testing
 	String getTermNameText() {
 		return termName == null ? null : termName.getText();
+	}
+	
+	public String getObjHref(LinkedObject obj) {
+		return
+			"<html><a href='" + obj.getID() + "'>" + obj.getName() + "</a></html>";
+	}
+	
+	
+	Collection<Annotation> getAnnotationsByClass(OBOClass oboClass) {
+		OBOSession session = CharFieldManager.inst().getOboSession();
+		Collection<Annotation> allAnnots = AnnotationUtil.getAnnotations(session);
+		Collection<Annotation> matches = new HashSet<Annotation>();
+		
+		/* currently we have a very crude way of matching.
+		 * ideally we would use the reasoner, or at least ancestors.
+		 * however, we don't want to get stuck on explosive cycles so
+		 * lets be safe for now.
+		 * Just use exact matches OR matches to components of a post-comp
+		 */
+		for (Annotation annot : allAnnots) {
+			LOG.debug("annot:" +annot);
+			
+			LinkedObject o = annot.getObject();
+			if (o == null)
+				LOG.error("annotation has null object: "+o);
+			boolean match = false;
+			if (isIncludeImplicitAnnotations()) {
+				//System.out.println("Testing for ancestors: "+o+" -> "+oboClass);
+				if (TermUtil.hasAncestor(o, oboClass))
+					match = true;
+			}
+			else {
+				//System.out.println("Testing for direct: "+o+" -> "+oboClass);
+				if (o.equals(oboClass))
+					match = true;
+				else {
+					for (Link link : o.getParents())
+						if (TermUtil.isIntersection(link) &&
+								link.getParent().equals(oboClass))
+							match = true;
+				}
+			}
+			if (match)
+				matches.add(annot);
+			//System.out.println("match="+match);
+
+		}
+		return matches;
 	}
 
 	/** for testing */
