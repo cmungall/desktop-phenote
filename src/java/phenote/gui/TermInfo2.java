@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -43,6 +44,8 @@ import org.bbop.framework.GUIManager;
 import org.bbop.framework.GUIComponentFactory;
 import org.bbop.framework.ComponentManager;
 import org.obo.annotation.datamodel.Annotation;
+import org.obo.dataadapter.OBDSQLDatabaseAdapter;
+import org.obo.dataadapter.OBDSQLDatabaseAdapter.OBDSQLDatabaseAdapterConfiguration;
 import org.obo.datamodel.Dbxref;
 import org.obo.datamodel.IdentifiedObject;
 import org.obo.datamodel.DanglingObject;
@@ -55,6 +58,7 @@ import org.obo.datamodel.OBOSession;
 import org.obo.datamodel.ObsoletableObject;
 import org.obo.datamodel.PropertyValue;
 import org.obo.datamodel.Synonym;
+import org.obo.datamodel.impl.OBOSessionImpl;
 import org.obo.filters.Filter;
 import org.obo.util.AnnotationUtil;
 import org.obo.util.TermUtil;
@@ -63,6 +67,7 @@ import org.oboedit.gui.components.SearchComponent.SearchConfig;
 import org.oboedit.gui.filter.RenderedFilter;
 import org.bbop.swing.SwingUtil;
 
+import phenote.config.Config;
 import phenote.dataadapter.OntologyDataAdapter;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.Ontology;
@@ -116,6 +121,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 	private static final Logger LOG = Logger.getLogger(TermInfo2.class);
 	
 	protected boolean includeImplicitAnnotations = false;
+	protected boolean includeExternalDatabaseAnnotations = false;
 	
 	public boolean isIncludeImplicitAnnotations() {
 		return includeImplicitAnnotations;
@@ -123,6 +129,35 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 	public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 		this.includeImplicitAnnotations = includeImplicitAnnotations;
+	}
+	
+
+	public boolean isIncludeExternalDatabaseAnnotations() {
+		return includeExternalDatabaseAnnotations;
+	}
+
+	public void setIncludeExternalDatabaseAnnotations(
+			boolean includeExternalDatabaseAnnotations) {
+		this.includeExternalDatabaseAnnotations = includeExternalDatabaseAnnotations;
+		for (OBDSQLDatabaseAdapterConfiguration config : Config.inst().getExternalDatabaseConfigs()) {
+			OBDSQLDatabaseAdapter adapter = new OBDSQLDatabaseAdapter();
+			adapter.setConfiguration(config);
+			config.setAnnotationMode(OBDSQLDatabaseAdapterConfiguration.AnnotationMode.ANNOTATIONS_ONLY);
+			
+			try {
+				adapter.connect();
+				OBOSession session = CharFieldManager.inst().getOboSession();
+				//allAnnots.addAll(adapter.retrieveAllAnnotations(session));
+				adapter.fetchAll(session);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		}
+
 	}
 
 	@Override
@@ -132,10 +167,14 @@ public class TermInfo2 extends AbstractGUIComponent {
 			protected JCheckBox includeImplicitAnnotationsBox = new JCheckBox(
 					"Include implicit annotations",
 					false);
+			protected JCheckBox includeExternalDatabaseAnnotationsBox = new JCheckBox(
+					"Include external database annotations",
+					false);
 
 			{
 				setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 				add(includeImplicitAnnotationsBox);
+				add(includeExternalDatabaseAnnotationsBox);
 			}
 
 			@Override
@@ -143,7 +182,9 @@ public class TermInfo2 extends AbstractGUIComponent {
 				TermInfo2Config config = (TermInfo2Config) getComponent()
 						.getConfiguration();
 				config.setIncludeImplicitAnnotations(includeImplicitAnnotationsBox.isSelected());
+				config.setIncludeExternalDatabaseAnnotations(includeExternalDatabaseAnnotationsBox.isSelected());
 				getComponent().setConfiguration(config);
+				// getComponent().getComponent().updateUI(); TODO: update UI
 			}
 
 			@Override
@@ -151,6 +192,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 				TermInfo2Config config = (TermInfo2Config) getComponent()
 						.getConfiguration();
 				includeImplicitAnnotationsBox.setSelected(config.isIncludeImplicitAnnotations());
+				includeExternalDatabaseAnnotationsBox.setSelected(config.isIncludeExternalDatabaseAnnotations());
 			}
 		};
 		return p;
@@ -158,23 +200,28 @@ public class TermInfo2 extends AbstractGUIComponent {
 	
 	@Override
 	public ComponentConfiguration getConfiguration() {
-		return new TermInfo2Config(isIncludeImplicitAnnotations());
+		return new TermInfo2Config(isIncludeImplicitAnnotations(),
+				isIncludeExternalDatabaseAnnotations());
 	}
 
 	public void setConfiguration(ComponentConfiguration config) {
 		if (config instanceof TermInfo2Config) {
 			setIncludeImplicitAnnotations(((TermInfo2Config) config)
 					.isIncludeImplicitAnnotations());
+			setIncludeExternalDatabaseAnnotations(((TermInfo2Config) config)
+					.isIncludeExternalDatabaseAnnotations());
 		}
 	}
 
 	
 	public static class TermInfo2Config implements ComponentConfiguration {
-		protected boolean includeImplicitAnnotations;
+		protected boolean includeImplicitAnnotations = false;
+		protected boolean includeExternalDatabaseAnnotations = false;
 
-		public TermInfo2Config(boolean includeImplicitAnnotations) {
+		public TermInfo2Config(boolean includeImplicitAnnotations, boolean includeExternalDatabaseAnnotations) {
 			super();
 			this.includeImplicitAnnotations = includeImplicitAnnotations;
+			this.includeExternalDatabaseAnnotations = includeExternalDatabaseAnnotations;
 		}
 
 		public TermInfo2Config() {
@@ -186,6 +233,15 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 		public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 			this.includeImplicitAnnotations = includeImplicitAnnotations;
+		}
+
+		public boolean isIncludeExternalDatabaseAnnotations() {
+			return includeExternalDatabaseAnnotations;
+		}
+
+		public void setIncludeExternalDatabaseAnnotations(
+				boolean includeExternalDatabaseAnnotations) {
+			this.includeExternalDatabaseAnnotations = includeExternalDatabaseAnnotations;
 		}
 
 	}
@@ -943,7 +999,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 			}
 			JLabel aeLabel = new JLabel(ae.getID());
 			// TODO: use a method call for this
-			annotationPanel.add(new JLabel(getObjHref(annotatedTo)));
+			annotationPanel.add(getObjHrefLabel(annotatedTo));
 			annotationPanel.add(aeLabel);
 			rowCount++;
 			SpringLayout layout = new SpringLayout();
@@ -1389,12 +1445,26 @@ public class TermInfo2 extends AbstractGUIComponent {
 		return
 			"<html><a href='" + obj.getID() + "'>" + obj.getName() + "</a></html>";
 	}
+
+	public HyperlinkLabel getObjHrefLabel(LinkedObject obj) {
+
+		HyperlinkLabel textArea = new HyperlinkLabel();
+		termHyperlinkListener = new TermHyperlinkListener();
+		textArea.addStringLinkListener(termHyperlinkListener);
+		textArea.setText(getObjHref(obj));
+		return textArea;
+	}
+
 	
 	
 	Collection<Annotation> getAnnotationsByClass(OBOClass oboClass) {
 		OBOSession session = CharFieldManager.inst().getOboSession();
 		Collection<Annotation> allAnnots = AnnotationUtil.getAnnotations(session);
 		Collection<Annotation> matches = new HashSet<Annotation>();
+		
+		// TODO: complete this. Demo mode only
+		if (isIncludeExternalDatabaseAnnotations()) {
+		}
 		
 		/* currently we have a very crude way of matching.
 		 * ideally we would use the reasoner, or at least ancestors.
@@ -1414,17 +1484,16 @@ public class TermInfo2 extends AbstractGUIComponent {
 				if (TermUtil.hasAncestor(o, oboClass))
 					match = true;
 			}
-			else {
-				//System.out.println("Testing for direct: "+o+" -> "+oboClass);
-				if (o.equals(oboClass))
-					match = true;
-				else {
-					for (Link link : o.getParents())
-						if (TermUtil.isIntersection(link) &&
-								link.getParent().equals(oboClass))
-							match = true;
-				}
+			//System.out.println("Testing for direct: "+o+" -> "+oboClass);
+			if (o.equals(oboClass))
+				match = true;
+			if (!match) {
+				for (Link link : o.getParents())
+					if (TermUtil.isIntersection(link) &&
+							link.getParent().equals(oboClass))
+						match = true;
 			}
+			
 			if (match)
 				matches.add(annot);
 			//System.out.println("match="+match);

@@ -12,10 +12,17 @@ import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.apache.xmlbeans.XmlException;
+import org.obo.dataadapter.OBDSQLDatabaseAdapter;
+import org.obo.dataadapter.OBDSQLDatabaseAdapter.OBDSQLDatabaseAdapterConfiguration;
 
 import phenote.config.xml.PhenoteConfigurationDocument;
 import phenote.config.xml.AutoUpdateOntologiesDocument.AutoUpdateOntologies;
@@ -29,6 +36,7 @@ import phenote.config.xml.GroupDocument.Group;
 import phenote.config.xml.LogDocument.Log;
 import phenote.config.xml.MasterToLocalConfigDocument.MasterToLocalConfig;
 import phenote.config.xml.PhenoteConfigurationDocument.PhenoteConfiguration;
+import phenote.config.xml.ExternaldbDocument.Externaldb;
 import phenote.config.xml.TermHistoryDocument.TermHistory;
 import phenote.config.xml.UpdateTimerDocument.UpdateTimer;
 import phenote.config.xml.UvicGraphDocument.UvicGraph;
@@ -83,7 +91,10 @@ public class Config {
   private boolean configInitialized = false;
   private boolean configModified = false; 
   private boolean alwaysOverride = false;
-  //flag for if any settings during session have changed, such as search params, col widths, etc.
+   //flag for if any settings during session have changed, such as search params, col widths, etc.
+  
+  private static Map<String,OBDSQLDatabaseAdapterConfiguration> jdbcPathToOBDConfiguration = 
+	  new HashMap<String,OBDSQLDatabaseAdapterConfiguration>();
 
   private final static String myphenoteFile = "my-phenote";
 
@@ -537,6 +548,30 @@ public class Config {
     new ConfigWriter().writeConfig(oldCfg,mode.localFile);
   }
 
+  public Collection<String> getExternalDatabasePaths() {
+	  Collection<String> paths = new HashSet<String>();
+	  for (Externaldb x : Arrays.asList(phenoConfigBean.getExternaldbArray())) {
+		  paths.add(x.getPath());
+	  }
+	  return paths;
+  }
+
+
+  public Collection<OBDSQLDatabaseAdapterConfiguration> getExternalDatabaseConfigs() {
+	  Collection<OBDSQLDatabaseAdapterConfiguration> configs = new HashSet<OBDSQLDatabaseAdapterConfiguration>();
+	  for (Externaldb x : Arrays.asList(phenoConfigBean.getExternaldbArray())) {
+		  String jdbcPath = x.getPath();
+		  if (jdbcPathToOBDConfiguration.get(jdbcPath) != null)
+			  configs.add(jdbcPathToOBDConfiguration.get(jdbcPath));
+		  else {
+			  OBDSQLDatabaseAdapterConfiguration config = new OBDSQLDatabaseAdapterConfiguration();
+			  config.setReadPaths(Collections.singletonList(jdbcPath));
+			  jdbcPathToOBDConfiguration.put(jdbcPath,config);
+			  configs.add(config);
+		  }
+	  }
+	  return configs;
+  }
 
 
   // --> hasFileDataAdapters
@@ -699,8 +734,10 @@ public class Config {
   public AnnotationMappingDriver getAnnotMappingDriver() {
     String map = getCharModeBean().getMapping();
     if (map == null) {
-      map = "phenote.datamodel.BasicAnnotationMappingDriver"; // default
-      getCharModeBean().setMapping(map);
+      //map = "phenote.datamodel.BasicAnnotationMappingDriver"; // default
+      map = "phenote.datamodel.DefaultMappingDriver"; // CJM TODO change back!!!
+      //map = "phenote.datamodel.PhenotypeAssociationMappingDriver"; // CJM TODO change back!!!
+           getCharModeBean().setMapping(map);
     }
     try {
       Object o = getInstanceForString(map);
@@ -724,7 +761,8 @@ public class Config {
     CharacterMode mode = phenoConfigBean.getCharacterMode();
     if (mode == null) {
       mode = phenoConfigBean.addNewCharacterMode();
-      mode.setMode(CharacterMode.Mode.CHARACTER); // character default
+      mode.setMode(CharacterMode.Mode.CHARACTER); // character default CJM TODO change back!!!
+      //mode.setMode(CharacterMode.Mode.OBO_ANNOTATION); // character default CJM TODO change back!!!
     }
     return mode;
   }

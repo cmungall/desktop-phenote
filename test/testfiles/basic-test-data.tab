@@ -1,5 +1,5 @@
 Pub	AnnotatedEntity	Term ID	Term Name	Description	Date Created	
-PMID:1	foo:geneA	CL:0000127	astrocyte			
+PMID:1	foo:geneA	CL:0000127	astrocyte	test desc		
 PMID:1	foo:geneA	CL:0000464	epidermoblast			
 PMID:2	foo:geneB	CL:0000125	glial cell			
 PMID:3	foo:geneC	CL:0000031^OBO_REL:derived_into(CL:0000695)	neuroblast^derived_into(Cajal-Retzius cell)			

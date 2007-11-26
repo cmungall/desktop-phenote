@@ -191,7 +191,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		public GUIComponent createComponent(String id) {
 			TermInfo2 ti = new TermInfo2();
 			ti.setMinimumSize(new Dimension(200, 200));
-			ti.setTitle(id);
+//			ti.setTitle(id);
 			ti.setName(id);
 			return ti;
 			//			return new GUIComponentWrapper(id,id, ti.getComponent());
