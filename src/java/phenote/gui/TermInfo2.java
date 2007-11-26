@@ -8,10 +8,12 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.Set;
 import org.apache.log4j.Logger;
 
@@ -120,6 +122,10 @@ import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
 public class TermInfo2 extends AbstractGUIComponent {
 
 	private static final Logger LOG = Logger.getLogger(TermInfo2.class);
+	
+	protected Map<OBOClass,Float> cachedAnnotationInformationContentByClass = new HashMap<OBOClass,Float>();
+	protected Map<OBOClass,Integer> cachedAnnotationCountByClass = new HashMap<OBOClass,Integer>();
+	
 	
 	protected boolean includeImplicitAnnotations = false;
 	protected boolean includeExternalDatabaseAnnotations = false;
@@ -278,6 +284,8 @@ public class TermInfo2 extends AbstractGUIComponent {
 	private JLabel ontologyName;
 
 	private HyperlinkLabel definitionTextArea;
+	
+	private HyperlinkLabel annotationSummaryTextArea;
 
 	private JPanel considerReplacePanel;
 
@@ -418,17 +426,27 @@ public class TermInfo2 extends AbstractGUIComponent {
 		definitionTextArea.addStringLinkListener(termHyperlinkListener);
 		definitionLabel.setLabelFor(definitionTextArea);
 		basicInfoPanel.add(definitionTextArea);
+		
+//		if (this.isIncludeExternalDatabaseAnnotations()) {
+			JLabel annotationSummaryLabel = new JLabel("External Annotations: ", JLabel.TRAILING);
+			annotationSummaryLabel.setVerticalAlignment(JLabel.TOP);
+
+			basicInfoPanel.add(annotationSummaryLabel);
+			annotationSummaryTextArea = new HyperlinkLabel(" ");
+			annotationSummaryLabel.setLabelFor(annotationSummaryTextArea);
+			basicInfoPanel.add(annotationSummaryTextArea);
+//		}
 
 		// Lay out the panel.
 		int[] maxX = {PREFERREDX,-1};
 		int[] maxY = null;
 		SpringLayout layout = new SpringLayout();
 		basicInfoPanel.setLayout(layout);
-		SpringUtilities.makeCompactGrid(basicInfoPanel, 4, 2, // rows, cols
+		SpringUtilities.makeCompactGrid(basicInfoPanel, 5, 2, // rows, cols
 				INITX, INITY, // initX, initY
 				XPAD, YPAD); // xPad, yPad
 
-		SpringUtilities.fixCellWidth(basicInfoPanel, 4, 2, // rows,
+		SpringUtilities.fixCellWidth(basicInfoPanel, 5, 2, // rows,
 				// cols
 				INITX, INITY, // initX, initY
 				XPAD, YPAD,  // xPad, yPad
@@ -598,6 +616,12 @@ public class TermInfo2 extends AbstractGUIComponent {
 			considerReplacePanel.validate();
 			considerReplacePanel.repaint();
 			considerReplacePanel.setVisible(true);
+		}
+		
+		if (isIncludeExternalDatabaseAnnotations()) {
+			annotationSummaryTextArea.setText("<html>annotation count: <b>"+ this.getAnnotationCountByClass(oboClass) + " "+
+				"</b><br>information content: <b>"+this.getAnnotationInformationContentByClass(oboClass) +
+				"</b></html>");
 		}
 
 		if ((!showEmptyPanelsFlag) && (oboClass.getSynonyms().size() == 0)) {
@@ -980,8 +1004,9 @@ public class TermInfo2 extends AbstractGUIComponent {
 				continue;
 			}
 			JLabel aeLabel = new JLabel(ae.getID());
-			// TODO: use a method call for this
-			annotationPanel.add(getObjHrefLabel(annotatedTo));
+			
+			// annotationPanel.add(getObjHrefLabel(annotatedTo));
+			annotationPanel.add(new JLabel("")); // TODO: show blank until we prettify the subj
 			annotationPanel.add(aeLabel);
 			rowCount++;
 			SpringLayout layout = new SpringLayout();
@@ -1424,6 +1449,81 @@ public class TermInfo2 extends AbstractGUIComponent {
 	}
 
 	
+	
+
+	float getAnnotationInformationContentByClass(OBOClass oboClass) {
+		OBOSession session = CharFieldManager.inst().getOboSession();
+		
+		if (!isIncludeExternalDatabaseAnnotations())
+			return 0;
+		
+		if (cachedAnnotationInformationContentByClass.containsKey(oboClass))
+			return cachedAnnotationInformationContentByClass.get(oboClass);
+		
+		// TODO: more sensible behavior when we have >1 externaldb
+		for (OBDSQLDatabaseAdapterConfiguration config : Config.inst().getExternalDatabaseConfigs()) {
+			OBDSQLDatabaseAdapter adapter = new OBDSQLDatabaseAdapter();
+			adapter.setConfiguration(config);
+			config.setAnnotationMode(OBDSQLDatabaseAdapterConfiguration.AnnotationMode.ANNOTATIONS_ONLY);
+			
+			try {
+				adapter.connect();
+				//OBOSession session = CharFieldManager.inst().getOboSession();
+				float ic =
+					adapter.fetchAnnotationInformationContentByObject(session, oboClass);
+
+				cachedAnnotationInformationContentByClass.put(oboClass,ic);
+				adapter.disconnect();
+				return ic;
+				//allAnnots.addAll(adapter.retrieveAllAnnotations(session));
+				//adapter.fetchAll(session);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	
+	int getAnnotationCountByClass(OBOClass oboClass) {
+		OBOSession session = CharFieldManager.inst().getOboSession();
+		
+		if (!isIncludeExternalDatabaseAnnotations())
+			return 0;
+
+		int total = 0;
+		if (cachedAnnotationCountByClass.containsKey(oboClass))
+			return cachedAnnotationCountByClass.get(oboClass);
+
+		for (OBDSQLDatabaseAdapterConfiguration config : Config.inst().getExternalDatabaseConfigs()) {
+			OBDSQLDatabaseAdapter adapter = new OBDSQLDatabaseAdapter();
+			adapter.setConfiguration(config);
+			config.setAnnotationMode(OBDSQLDatabaseAdapterConfiguration.AnnotationMode.ANNOTATIONS_ONLY);
+			
+			try {
+				adapter.connect();
+				//OBOSession session = CharFieldManager.inst().getOboSession();
+				int num =
+					adapter.fetchAnnotationCountByObject(session, oboClass);
+				total += num;
+				adapter.disconnect();
+				//allAnnots.addAll(adapter.retrieveAllAnnotations(session));
+				//adapter.fetchAll(session);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		cachedAnnotationCountByClass.put(oboClass,total);
+		return total;
+	}
+
 	
 	Collection<Annotation> getAnnotationsByClass(OBOClass oboClass) {
 		OBOSession session = CharFieldManager.inst().getOboSession();
