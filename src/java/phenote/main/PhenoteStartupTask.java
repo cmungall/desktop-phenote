@@ -131,7 +131,8 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 	/** FieldPanelFactory inner class */
 	private class FieldPanelFactory implements GUIComponentFactory {
 		
-		private String panelName = "DScribe Editor";
+		// private String panelName = "DScribe Editor";
+		private String panelName = "Phenote Editor";
 		private String displayName = null;
 		
 		public GUIComponent createComponent(String id) {
@@ -154,12 +155,14 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		}
 
 		public String getDefaultID() {
-			return "dscribe-editor";
+			// return "dscribe-editor";
+			return "phenote-editor";
 		}
 
 		/** These are alias IDs? */
 		public List getIDs() {
-			return CollectionUtil.list("dscribe-editor");
+			// return CollectionUtil.list("dscribe-editor");
+			return CollectionUtil.list("phenote-editor");
 		}
 		
 		public String getName() {
