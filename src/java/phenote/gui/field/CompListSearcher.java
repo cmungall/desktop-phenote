@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.bbop.framework.GUIManager;
 import org.bbop.swing.BackgroundUtil;
 import org.bbop.util.AbstractTaskDelegate;
 import org.bbop.util.TaskDelegate;
@@ -88,7 +89,8 @@ public class CompListSearcher {
     // THREADED
     if (threaded) {
       compTaskDelegate = new CompTaskDelegate(input,lis);
-      BackgroundUtil.scheduleTask(compTaskDelegate);
+      //BackgroundUtil.scheduleTask(compTaskDelegate);
+      GUIManager.getManager().scheduleTask(compTaskDelegate,false);
     }
     // NON THREADED - null task, results sent to listener synchronously
     else {
