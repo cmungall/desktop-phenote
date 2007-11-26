@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.text.JTextComponent;
+import javax.swing.JComponent;
 
 import org.obo.datamodel.OBOClass;
 
@@ -28,15 +29,16 @@ import phenote.main.Phenote;
 public class ForwardAction extends AbstractAction  {
 		
 	public ForwardAction(JTextComponent source) {
-		super("Forward", new ImageIcon("images/arrow.small.right.gif"));
+		super("Forward", new ImageIcon("images/Forward24.gif"));
 		init();
+		source.setEnabled(false);
 
 //		System.out.println("class="+textComponent.getClass());
 	}
 	
 	
 	public ForwardAction() {
-		super("Forward", new ImageIcon("images/arrow.small.right.gif"));
+		super("Forward", new ImageIcon("images/Forward24.gif"));
 		init();
 	}
 
@@ -45,6 +47,13 @@ public class ForwardAction extends AbstractAction  {
 		putValue(NAME, "Forward");
 //		putValue(MNEMONIC_KEY, new Integer(KeyEvent.VK_C));
 	}
+	
+//	@Override
+//	public void setEnabled (boolean enabled) {
+//		this.setEnabled(TermInfo2.inst().getNaviIndex() <
+//			TermInfo2.inst().getTermInfoNaviHistory().size()-1);
+//
+//	}
 	
 	public void actionPerformed(ActionEvent e) {
 //		TermInfo2.inst().naviRefresh("forward");
@@ -57,10 +66,11 @@ public class ForwardAction extends AbstractAction  {
 		}
 		System.out.println("naviIndex after="+naviIndex);
 		String id = TermInfo2.inst().getTermFromNaviHistory(naviIndex);
+
 		try {
 			OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
 			SelectionManager.inst().selectMouseOverTerm(this, term, null);
-			System.out.println("found back term: "+term);
+			System.out.println("found forward term: "+term);
 		} catch (TermNotFoundException ex) {
 			return;
 		}

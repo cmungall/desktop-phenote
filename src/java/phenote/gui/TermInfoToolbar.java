@@ -12,6 +12,7 @@ import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
 import javax.swing.border.EtchedBorder;
@@ -43,6 +44,10 @@ public class TermInfoToolbar extends JToolBar {
   private UseTermListener useTermListener;
   private SelectionManager selectionManager;
   private OBOClass currentOboClass = null;
+  private final int BACKBUTTONINDEX = 0;
+  private final int FORWARDBUTTONINDEX = 1;
+  private final int FAVBUTTONINDEX = 2;
+  private final int USETERMBUTTONINDEX = 3;
 
 
 
@@ -95,10 +100,10 @@ public class TermInfoToolbar extends JToolBar {
     useTermButton.addActionListener(new UseTermActionListener());
     useTermButton.setToolTipText("Use Term");
 
-    buttons.add(backButton);
-    buttons.add(forwardButton);
-    buttons.add(favoritesButton);  
-    buttons.add(useTermButton);
+    buttons.add(BACKBUTTONINDEX, backButton);
+    buttons.add(FORWARDBUTTONINDEX, forwardButton);
+    buttons.add(FAVBUTTONINDEX, favoritesButton);  
+    buttons.add(USETERMBUTTONINDEX, useTermButton);
 
     termField =  new JTextArea();
     termField.setFont(new Font("Arial", Font.BOLD, 12));
@@ -140,7 +145,22 @@ public class TermInfoToolbar extends JToolBar {
       useTermListener.useTerm(new UseTermEvent(TermInfoToolbar.this,currentOboClass));
     }
   }
+  
+  public void setButtonStatus(String button, boolean enabled) {
+  	if (button.equals("forward")) {
+  		((JButton)buttons.get(2)).setEnabled(enabled);
+  	} else if (button.equals("back")) {
+  		((JButton)buttons.get(1)).setEnabled(enabled);
+  	}
+  		
+  }
+  public void setNaviButtonStatus() {
+  	int naviIndex = TermInfo2.inst().getNaviIndex();
+  	int tot = TermInfo2.inst().getTermInfoNaviHistory().size();
+  	((JButton)buttons.get(FORWARDBUTTONINDEX)).setEnabled(naviIndex < (tot-1));
+  	((JButton)buttons.get(BACKBUTTONINDEX)).setEnabled(naviIndex>0);
 
+  }
 }
 
 

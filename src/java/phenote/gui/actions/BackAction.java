@@ -27,15 +27,16 @@ public class BackAction extends AbstractAction  {
 	JComponent textComponent;
 	
 	public BackAction(JTextComponent source) {
-		super("Back", new ImageIcon("images/arrow.small.left.gif"));
+		super("Back", new ImageIcon("images/Back24.gif"));
 		init();
+		source.setEnabled(false);
 
 //		System.out.println("class="+textComponent.getClass());
 	}
 	
 	
 	public BackAction() {
-		super("Back", new ImageIcon("images/arrow.small.left.gif"));
+		super("Back", new ImageIcon("images/Back24.gif"));
 		init();
 	}
 
@@ -44,7 +45,7 @@ public class BackAction extends AbstractAction  {
 		putValue(NAME, "Back");
 //		putValue(MNEMONIC_KEY, new Integer(KeyEvent.VK_C));
 	}
-	
+		
 	public void actionPerformed(ActionEvent e) {
 //		TermInfo2.inst().naviRefresh("back");
 		int tot = TermInfo2.inst().getTermInfoNaviHistory().size();
@@ -57,6 +58,7 @@ public class BackAction extends AbstractAction  {
 		System.out.println("naviIndex after="+naviIndex);
 		String id = TermInfo2.inst().getTermFromNaviHistory(naviIndex);
 		System.out.println(id);
+		
 		try {
 			OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
 			SelectionManager.inst().selectMouseOverTerm(this, term, null);

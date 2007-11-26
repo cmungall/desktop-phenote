@@ -255,15 +255,15 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 	private static Border contentBorder = BorderFactory.createEmptyBorder(3, 3,
 			6, 3);  //top, left, bottom, right...orig 6,8,6,8
-	
+
 	//these are used for the spring layout.
-	private static final int XPAD = 3; //between elements horizontally
+	private static final int XPAD = 5; //between elements horizontally
 	private static final int YPAD = 3; //between elements vertically
 	private static final int INITX = 3;
 	private static final int INITY = 3;
 	private static final int PREFERREDX = 75;
-	
-	
+
+
 	// content variables
 	private OBOClass currentOboClass;
 
@@ -335,9 +335,9 @@ public class TermInfo2 extends AbstractGUIComponent {
 	private JTextArea commentsText;
 
 	private static TermInfo2 singleton;
-	
+
 	private boolean showEmptyPanelsFlag = false;
-	
+
 	private static final String basicInfoPanelName = "BASIC"; //0
 	private static final String considerReplacePanelName = "CONSIDERS"; //2
 	private static final String synonymPanelName = "SYNONYMS"; //4
@@ -346,6 +346,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 	private static final String dbxrefPanelName = "DBXREFS";  //10
 	private static final String propvalsPanelName = "PROPVALS";  //12
 	private static final String commentsPanelName = "COMMENTS";  //14
+
 	private static final String annotationPanelName = "ANNOTATIONS"; //16
 	
 	/** this sets the order of the panels */
@@ -410,6 +411,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 		termName = new JLabel();
 		termName.setText("(No Selection)");
 		nameLabel.setLabelFor(termName);
+		nameLabel.setVerticalAlignment(JLabel.TOP);
 		basicInfoPanel.add(termName);
 
 		JLabel idLabel = new JLabel("ID: ", JLabel.TRAILING);
@@ -433,32 +435,25 @@ public class TermInfo2 extends AbstractGUIComponent {
 		definitionTextArea.addStringLinkListener(termHyperlinkListener);
 		definitionLabel.setLabelFor(definitionTextArea);
 		basicInfoPanel.add(definitionTextArea);
-		
 
-
-		SpringLayout layout = new SpringLayout();
-		// line up the rel type with the items
-		basicInfoPanel.setLayout(layout);
-
-		
 		// Lay out the panel.
+		int[] maxX = {PREFERREDX,-1};
+		int[] maxY = null;
+		SpringLayout layout = new SpringLayout();
+		basicInfoPanel.setLayout(layout);
 		SpringUtilities.makeCompactGrid(basicInfoPanel, 4, 2, // rows, cols
 				INITX, INITY, // initX, initY
 				XPAD, YPAD); // xPad, yPad
-		
-		int[] maxX = {PREFERREDX,-1};
-		int[] maxY = null;
+
 		SpringUtilities.fixCellWidth(basicInfoPanel, 4, 2, // rows,
 				// cols
 				INITX, INITY, // initX, initY
 				XPAD, YPAD,  // xPad, yPad
-        maxX, maxY);
-
-
-//		layout.putConstraint(SpringLayout.NORTH, definitionLabel, 0, SpringLayout.NORTH, definitionTextArea);
+				maxX, maxY);
 
 		termInfoPanel.addBox("Basic Info", basicInfoPanel);
 
+		//consider & replacement terms - for obo1.2+ format
 		considerReplacePanel = new JPanel();
 		considerReplacePanel.setOpaque(false);
 		considerReplacePanel.setLayout(new SpringLayout());
@@ -469,15 +464,17 @@ public class TermInfo2 extends AbstractGUIComponent {
 		replacementTerms = new JTextArea();
 		considerReplacePanel.add(replacementTerms);
 		considerReplacePanel.setName(considerReplacePanelName);
+		considerReplacePanel.setVisible(false);
 
 		termInfoPanel.addBox("Consider & Replacement Terms", considerReplacePanel);
 
-		// Add the next section, which is the synonyms
+		// synonyms
 		synonymPanel = new JPanel();
 		synonymPanel.setOpaque(false);
 		synonymPanel.setLayout(new SpringLayout());
 		synonymPanel.setBorder(contentBorder);
 		synonymPanel.setName(synonymPanelName);
+		synonymPanel.setVisible(false);
 
 		termInfoPanel.addBox("Synonyms", synonymPanel);
 
@@ -491,7 +488,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 		xpDefList.setText(" ");
 		xpDefPanel.add(xpDefList);
 		xpDefPanel.setName(xpdefsPanelName);
-
+		xpDefPanel.setVisible(false);
 		termInfoPanel.addBox("Cross Product Definitions", xpDefPanel);
 
 
@@ -514,12 +511,12 @@ public class TermInfo2 extends AbstractGUIComponent {
 		childrenPanel.add(childrenText);
 		childrenPanel.setBackground(Color.WHITE);
 		ontologyLinksPanel.add(childrenPanel);
+		ontologyLinksPanel.setVisible(false);
+		//the two panels are placed in a spring grid within the larger panel
+		SpringUtilities.makeCompactGrid(ontologyLinksPanel, 2, 1, 
+				0, 0, // initX, initY
+				0, 0); // xPad, yPad
 
-		SpringUtilities.makeCompactGrid(ontologyLinksPanel, 2, 1, // rows,
-				// cols
-				INITX, INITY, // initX, initY
-				XPAD, YPAD); // xPad, yPad
-		
 		// dbxrefs
 		dbxrefPanel = new JPanel();
 		dbxrefPanel.setBackground(Color.WHITE);
@@ -527,18 +524,18 @@ public class TermInfo2 extends AbstractGUIComponent {
 		dbxrefText = new JTextArea();
 		dbxrefPanel.add(dbxrefText);
 		dbxrefPanel.setName(dbxrefPanelName);
-		// dbxrefPanel.add(dbxrefsList);
+		dbxrefPanel.setVisible(false);
 
 		termInfoPanel.addBox("DBxrefs", dbxrefPanel);
 
-		
+
 		// propertyValues (often used for OWL ontologies)
 		propertyValuesPanel = new JPanel();
 		propertyValuesPanel.setOpaque(false);
 		propertyValuesPanel.setLayout(new SpringLayout());
 		propertyValuesPanel.setBorder(contentBorder);
 		propertyValuesPanel.setName(propvalsPanelName);
-
+		propertyValuesPanel.setVisible(false);
 		termInfoPanel.addBox("Other Properties", propertyValuesPanel);
 
 		commentsPanel = new JPanel();
@@ -551,12 +548,13 @@ public class TermInfo2 extends AbstractGUIComponent {
 		commentsPanel.add(commentsText);
 		commentsPanel.setBorder(contentBorder);
 		commentsPanel.setName(commentsPanelName);
-
+		commentsPanel.setVisible(false);
 
 		termInfoPanel.addBox("Comments", commentsPanel);
 
 		// refresh
 		this.validate();
+		this.repaint();
 		this.setVisible(true);
 		
 		// Annotations
@@ -574,7 +572,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 	}
 
 //	public static JComponent getComponent() {
-//		return entirePanel;
+//	return entirePanel;
 //	}
 
 	private void setTextFromOboClass(OBOClass oboClass) {
@@ -603,7 +601,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 			definitionTextArea.setText("<html>"+oboClass.getDefinition()+"</html>"); 
 		} else
 			definitionTextArea.setText("<html> (no definition provided) </html>");
-		
+
 		if ((!showEmptyPanelsFlag) && ((oboClass.getConsiderReplacements().size()+oboClass.getReplacedBy().size()) == 0)) {
 			termInfoPanel.getComponent(2).setVisible(false);
 			considerReplacePanel.setVisible(false);
@@ -618,7 +616,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 			considerReplacePanel.repaint();
 			considerReplacePanel.setVisible(true);
 		}
-		
+
 		if ((!showEmptyPanelsFlag) && (oboClass.getSynonyms().size() == 0)) {
 			termInfoPanel.getComponent(4).setVisible(false);
 			synonymPanel.setVisible(false);
@@ -632,8 +630,8 @@ public class TermInfo2 extends AbstractGUIComponent {
 			synonymPanel.repaint();
 			synonymPanel.setVisible(true);
 		}
-		
-		
+
+
 		int linkCount = 0;
 
 		// xpDefPanel
@@ -661,13 +659,14 @@ public class TermInfo2 extends AbstractGUIComponent {
 				childrenPanel);
 		childrenPanel.validate();
 		childrenPanel.repaint();
-		
+
 		ontologyLinksPanel.validate();
 		ontologyLinksPanel.repaint();
+		ontologyLinksPanel.setVisible(true);
 
 		termInfoPanel.setBoxTitle("Links (" + linkCount + ")", 8);
 
-		
+
 		// dbxrefsPanel
 		if ((!showEmptyPanelsFlag) && (oboClass.getDbxrefs().size() == 0)) {
 			termInfoPanel.getComponent(10).setVisible(false);
@@ -745,11 +744,9 @@ public class TermInfo2 extends AbstractGUIComponent {
 		termInfoPanel.repaint();
 		this.validate();
 		this.repaint();
-		
-
 
 	}
-	
+
 	/**
 	 * Puts the currently browsed term name into the component title <p>
 	 * @param oboClass the term being browsed 
@@ -763,12 +760,13 @@ public class TermInfo2 extends AbstractGUIComponent {
 	/** Listen for selection from phenote (mouse over completion list) */
 	private class InfoTermSelectionListener implements TermSelectionListener {
 		public void termSelected(TermSelectionEvent e) {
-
+			//navi selection is a mouseover event
 			if (!e.isMouseOverEvent()) {
 				// add the item to the navi history if selected from list only
 				String id = e.getOboClass().getID();
-				addTermToNaviHistory(id);
-				return;
+				addTermToNaviHistory(id); //only add the item if its not from navigation
+				termInfoToolbar.setNaviButtonStatus();
+				return;					
 			}
 			setTextFromOboClass(e.getOboClass());
 			// This sets who now listens to use term button clicks (only 1
@@ -776,6 +774,8 @@ public class TermInfo2 extends AbstractGUIComponent {
 			setUseTermListener(e.getUseTermListener());
 			//change the name of the item being browsed in the term info header
 			setComponentTitleFromOBOClass(e.getOboClass());
+//			termInfoToolbar.setNaviButtonStatus();
+			termInfoToolbar.setNaviButtonStatus();
 		}
 	}
 
@@ -815,7 +815,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 	 * hyper links and brings up the term or brings up the external web page
 	 */
 	private class TermHyperlinkListener implements StringLinkListener,
-			HyperlinkListener {
+	HyperlinkListener {
 
 		public void hyperlinkUpdate(HyperlinkEvent e) {
 			if (!(e.getEventType() == HyperlinkEvent.EventType.ACTIVATED)) return;
@@ -858,14 +858,14 @@ public class TermInfo2 extends AbstractGUIComponent {
 			if (id == null) return;
 			bringUpTermInTermInfo(id);
 //			try {
-//				OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
-//				setTextFromOboClass(term);
-//				addTermToNaviHistory(id);
-//				// send out term selection (non mouse over) for DAG view
-////				TermInfo2.this.selectionManager.selectTerm(TermInfo2.this, term, true);
-//				//				TermInfo2.this.selectionManager.selectTerm(TermInfo2.this, term, true);
+//			OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
+//			setTextFromOboClass(term);
+//			addTermToNaviHistory(id);
+//			// send out term selection (non mouse over) for DAG view
+////		TermInfo2.this.selectionManager.selectTerm(TermInfo2.this, term, true);
+//			//				TermInfo2.this.selectionManager.selectTerm(TermInfo2.this, term, true);
 //			} catch (TermNotFoundException ex) {
-//				return;
+//			return;
 //			}
 		}
 
@@ -873,23 +873,24 @@ public class TermInfo2 extends AbstractGUIComponent {
 			// or do through obo session?
 			if (id == null) return;
 //			try {
-				for(Ontology o : CharFieldManager.inst().getAllOntologies()) {
-					OBOSession session = o.getOboSession();
-					IdentifiedObject io = session.getObject(id);
-					if (io instanceof OBOClass) {
-						OBOClass c = (OBOClass) io;
-						setTextFromOboClass(c);
-						setComponentTitleFromOBOClass(c);
-						break;
-					}
+			for(Ontology o : CharFieldManager.inst().getAllOntologies()) {
+				OBOSession session = o.getOboSession();
+				IdentifiedObject io = session.getObject(id);
+				if (io instanceof OBOClass) {
+					OBOClass c = (OBOClass) io;
+					setTextFromOboClass(c);
+					setComponentTitleFromOBOClass(c);
+					termInfoToolbar.setNaviButtonStatus();
+					break;
 				}
-//				OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
-//				setTextFromOboClass(term);
-//				addTermToNaviHistory(id);
-//				// send out term selection (non mouse over) for DAG view
-//				TermInfo2.this.selectionManager.selectTerm(TermInfo2.this, term, true);
+			}
+//			OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
+//			setTextFromOboClass(term);
+//			addTermToNaviHistory(id);
+//			// send out term selection (non mouse over) for DAG view
+//			TermInfo2.this.selectionManager.selectTerm(TermInfo2.this, term, true);
 //			} catch (TermNotFoundException ex) {
-//				return;
+//			return;
 //			}
 		}
 
@@ -915,17 +916,17 @@ public class TermInfo2 extends AbstractGUIComponent {
 		for (Iterator it = someSet.iterator(); it.hasNext();) {
 			syn = (Synonym) it.next();
 			if (syn.getScope() == Synonym.BROAD_SYNONYM) {
-				syns[0] += syn + "\n";
+				syns[0] += syn + "<br>";
 			} else if (syn.getScope() == Synonym.NARROW_SYNONYM) {
-				syns[1] += syn + "\n";
+				syns[1] += syn + "<br>";
 			} else if (syn.getScope() == Synonym.EXACT_SYNONYM) {
-				syns[2] += syn + "\n";
+				syns[2] += syn + "<br>";
 			} else if (syn.getScope() == Synonym.RELATED_SYNONYM) {
-				syns[3] += syn + "\n";
+				syns[3] += syn + "<br>";
 			} else if (syn.getScope() == Synonym.UNKNOWN_SCOPE) {
-				syns[4] += syn + "\n";
+				syns[4] += syn + "<br>";
 			} else {
-				syns[4] += syn + "\n";
+				syns[4] += syn + "<br>";
 			}
 		}
 
@@ -942,20 +943,18 @@ public class TermInfo2 extends AbstractGUIComponent {
 				synTypeLabel.setVerticalAlignment(JLabel.TOP);
 
 				synonymPanel.add(synTypeLabel);
-				JTextArea synList = new JTextArea();
-				synList.setLineWrap(true);
-				synList.setWrapStyleWord(true);
-				synList.setText(syns[i]);
+				JLabel synList = new JLabel();
+				synList.setText("<html>"+syns[i]+"</html>");
 				synTypeLabel.setLabelFor(synList);
 				synonymPanel.add(synList);
 				rowCount++;
-				SpringLayout layout = new SpringLayout();
-				// line up the rel type with the items
-				layout.putConstraint(SpringLayout.NORTH, synTypeLabel, 5,
-						SpringLayout.NORTH, synonymPanel);
-				layout.putConstraint(SpringLayout.NORTH, synList, 5,
-						SpringLayout.NORTH, synonymPanel);
-				synonymPanel.setLayout(layout);
+//				SpringLayout layout = new SpringLayout();
+//				// line up the rel type with the items
+//				layout.putConstraint(SpringLayout.NORTH, synTypeLabel, 5,
+//						SpringLayout.NORTH, synonymPanel);
+//				layout.putConstraint(SpringLayout.NORTH, synList, 5,
+//						SpringLayout.NORTH, synonymPanel);
+//				synonymPanel.setLayout(layout);
 
 			}
 		}
@@ -965,14 +964,14 @@ public class TermInfo2 extends AbstractGUIComponent {
 				// cols
 				INITX, INITY, // initX, initY
 				XPAD, YPAD); // xPad, yPad
-		
+
 		int[] maxX = {PREFERREDX,-1};
 		int[] maxY = null;
 		SpringUtilities.fixCellWidth(synonymPanel, rowCount, 2, // rows,
 				// cols
 				INITX, INITY, // initX, initY
 				XPAD, YPAD,  // xPad, yPad
-        maxX, maxY);
+				maxX, maxY);
 
 		synonymPanel.setVisible(true);
 	}
@@ -1076,17 +1075,9 @@ public class TermInfo2 extends AbstractGUIComponent {
 		// Lay out the panel.
 		if (rowCount > 0) {
 			SpringUtilities.makeCompactGrid(dbxrefPanel, 1, 1, // rows, cols
-					INITX, INITY, // initX, initY
+					INITX+10, INITY, // initX, initY
 					XPAD, YPAD); // xPad, yPad
 		}
-		
-		int[] maxX = {PREFERREDX,-1};
-		int[] maxY = null;
-		SpringUtilities.fixCellWidth(dbxrefPanel, 1, 1, // rows,
-				// cols
-				INITX, INITY, // initX, initY
-				XPAD, YPAD,  // xPad, yPad
-        maxX, maxY);
 
 		dbxrefPanel.setVisible(true);
 	}
@@ -1139,7 +1130,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 			rowCount+=1;
 		}
 		for (ListIterator<LinkCollection> lit = allLinks.listIterator(); lit
-				.hasNext();) {
+		.hasNext();) {
 			// group by each relationship type
 			LinkCollection linkCol = (LinkCollection) lit.next();
 			List<Link> listOfLinks = linkCol.getLinks();
@@ -1159,7 +1150,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 					if (TermUtil.isIntersection((OBOClass) temp)) // {
 						panelText += "<i>";
 					panelText += "<a href='" + temp.getID() + "'>" + temp.getName()
-							+ "</a>";
+					+ "</a>";
 					if (TermUtil.isIntersection((OBOClass) temp)) // {
 						panelText += "</i>";
 					// panelText += HtmlUtil.termLink(temp);
@@ -1184,7 +1175,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 			if (itemCount > 0) {
 				// if there's at least one item, add the section to the pane
 				panelText += "</html>";
-				String tempType = linkCol.getLinkName();
+				String tempType = "<html>"+linkCol.getLinkName()+"</html>";
 				typeLabel = new JLabel(tempType, JLabel.TRAILING);
 				typeLabel.setVerticalAlignment(JLabel.TOP);
 				panel.add(typeLabel);
@@ -1195,13 +1186,6 @@ public class TermInfo2 extends AbstractGUIComponent {
 				typeLabel.setLabelFor(textArea);
 				panel.add(textArea);
 				rowCount++;
-//				layout = new SpringLayout();
-//				// line up the rel type with the items
-//				layout.putConstraint(SpringLayout.NORTH, typeLabel, 5,
-//						SpringLayout.NORTH, panel);
-//				layout.putConstraint(SpringLayout.NORTH, textArea, 5,
-//						SpringLayout.NORTH, panel);
-//				panel.setLayout(layout);
 			}
 			totalItems += itemCount;
 		}
@@ -1215,7 +1199,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 					// cols
 					INITX, INITY, // initX, initY
 					XPAD, YPAD,  // xPad, yPad
-	        maxX, maxY);
+					maxX, maxY);
 
 			panel.setVisible(true);
 		} else {
@@ -1260,7 +1244,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 						allLinks.add(linkSet);
 				} else {
 					for (ListIterator<LinkCollection> lit = allLinks.listIterator(); lit
-							.hasNext();) {
+					.hasNext();) {
 						LinkCollection temp = (LinkCollection) lit.next();
 						if (temp.get(0).getType() == type) {
 							temp.addLink(link);
@@ -1355,12 +1339,12 @@ public class TermInfo2 extends AbstractGUIComponent {
 					XPAD, YPAD); // xPad, yPad
 			int[] maxX = {PREFERREDX,-1};
 			int[] maxY = null;
-			
+
 			SpringUtilities.fixCellWidth(considerReplacePanel, rowCount, 2, // rows,
 					// cols
 					INITX, INITY, // initX, initY
 					XPAD, YPAD,  // xPad, yPad
-	        maxX, maxY);
+					maxX, maxY);
 
 			considerReplacePanel.validate();
 			considerReplacePanel.setVisible(true);
@@ -1378,9 +1362,10 @@ public class TermInfo2 extends AbstractGUIComponent {
 		for (Iterator it = propertyValues.iterator(); it.hasNext();) {
 			propVal = (PropertyValue) it.next();
 			if (propVal != null) {
-				propLabel = new JLabel(propVal.getProperty());
-				valLabel = new JLabel(propVal.getValue());
+				propLabel = new JLabel("<html>"+propVal.getProperty()+"</html>");
+				valLabel = new JLabel("<html>"+propVal.getValue()+"</html>");
 				propLabel.setLabelFor(valLabel);
+				propLabel.setVerticalAlignment(JLabel.TOP);
 				propertyValuesPanel.add(propLabel);
 				propertyValuesPanel.add(valLabel);
 				propertyValuesPanel.validate();
@@ -1392,15 +1377,16 @@ public class TermInfo2 extends AbstractGUIComponent {
 					// cols
 					INITX, INITY, // initX, initY
 					XPAD, YPAD); // xPad, yPad
+
+			int[] maxX = {PREFERREDX,-1};
+			int[] maxY = null;
+			SpringUtilities.fixCellWidth(propertyValuesPanel, rowCount, 2, // rows,
+					// cols
+					INITX, INITY, // initX, initY
+					XPAD, YPAD,  // xPad, yPad
+					maxX, maxY);
 		}
-		
-		int[] maxX = {PREFERREDX,-1};
-		int[] maxY = null;
-		SpringUtilities.fixCellWidth(propertyValuesPanel, rowCount, 2, // rows,
-				// cols
-				INITX, INITY, // initX, initY
-				XPAD, YPAD,  // xPad, yPad
-        maxX, maxY);
+
 
 		propertyValuesPanel.validate();
 		propertyValuesPanel.setVisible(true);
@@ -1426,8 +1412,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 			OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
 			setTextFromOboClass(term);
 			// send out term selection (non mouse over) for DAG view
-			this.selectionManager.selectTerm(this, term, true);
-		
+//			this.selectionManager.selectTerm(this, term, true);
 			// Since items are added in reverse order, "back" is actually
 			// forward
 			// termComboBox.setSelectedIndex(termComboBox.getSelectedIndex()+1);
@@ -1526,15 +1511,15 @@ public class TermInfo2 extends AbstractGUIComponent {
 			return doc;
 		}
 	}
-	
+
 	public void setShowEmptyPanelsFlag (boolean flag) {
 		showEmptyPanelsFlag = flag;
 	}
-	
+
 	public boolean getShowEmptyPanelsFlag () {
 		return showEmptyPanelsFlag;
 	}
-	
-	
-	
+
+
+
 }
