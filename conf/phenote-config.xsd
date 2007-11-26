@@ -5,6 +5,7 @@
       <xs:sequence>
         <xs:element ref="x:master-to-local-config"/>
         <xs:element ref="x:log"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:externaldb"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:dataadapter"/>
         <xs:element ref="x:uvic-graph"/>
         <xs:element ref="x:term-history"/>
@@ -36,6 +37,12 @@
       <xs:attribute name="name" use="required" type="xs:string"/>
       <xs:attribute name="is-queryable" use="required" type="xs:boolean"/>
       <xs:attribute name="enable" use="required" type="xs:boolean"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="externaldb">
+    <xs:complexType>
+      <xs:attribute name="name" use="required" type="xs:string"/>
+      <xs:attribute name="path" use="required" type="xs:string"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="log">
@@ -208,7 +215,11 @@
           <xs:documentation>what components to show for group, ie TermInfo,Table,Editor</xs:documentation>
         </xs:annotation>
       </xs:attribute>
-      <xs:attribute name="fieldsPerPanel" type="xs:int"/>
+      <xs:attribute name="fieldsPerPanel" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>number of fields per panel, then make new tab, 0 for all in 1</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
     </xs:complexType>
   </xs:element>
   <xs:element name="templatechooser">

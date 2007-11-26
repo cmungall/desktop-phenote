@@ -10,6 +10,7 @@ start =
     attribute author { xsd:string },
     master-to-local-config,
     log,
+    externaldb*,
     dataadapter*,
     uvic-graph,
     term-history,
@@ -46,6 +47,13 @@ dataadapter =
     attribute is-queryable { xsd:boolean },
     attribute enable { xsd:boolean }
   }
+  
+##
+externaldb =
+ element externaldb {
+   attribute name { xsd:string },
+   attribute path { xsd:string }
+ }
 
 
 ## Where the config file for log4j is
