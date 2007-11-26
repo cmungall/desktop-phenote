@@ -58,6 +58,7 @@ import org.obo.datamodel.OBOSession;
 import org.obo.datamodel.ObsoletableObject;
 import org.obo.datamodel.PropertyValue;
 import org.obo.datamodel.Synonym;
+import org.obo.datamodel.impl.OBOClassImpl;
 import org.obo.datamodel.impl.OBOSessionImpl;
 import org.obo.filters.Filter;
 import org.obo.util.AnnotationUtil;
@@ -139,24 +140,6 @@ public class TermInfo2 extends AbstractGUIComponent {
 	public void setIncludeExternalDatabaseAnnotations(
 			boolean includeExternalDatabaseAnnotations) {
 		this.includeExternalDatabaseAnnotations = includeExternalDatabaseAnnotations;
-		for (OBDSQLDatabaseAdapterConfiguration config : Config.inst().getExternalDatabaseConfigs()) {
-			OBDSQLDatabaseAdapter adapter = new OBDSQLDatabaseAdapter();
-			adapter.setConfiguration(config);
-			config.setAnnotationMode(OBDSQLDatabaseAdapterConfiguration.AnnotationMode.ANNOTATIONS_ONLY);
-			
-			try {
-				adapter.connect();
-				OBOSession session = CharFieldManager.inst().getOboSession();
-				//allAnnots.addAll(adapter.retrieveAllAnnotations(session));
-				adapter.fetchAll(session);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-		}
 
 	}
 
@@ -1449,6 +1432,28 @@ public class TermInfo2 extends AbstractGUIComponent {
 		
 		// TODO: complete this. Demo mode only
 		if (isIncludeExternalDatabaseAnnotations()) {
+			for (OBDSQLDatabaseAdapterConfiguration config : Config.inst().getExternalDatabaseConfigs()) {
+				OBDSQLDatabaseAdapter adapter = new OBDSQLDatabaseAdapter();
+				adapter.setConfiguration(config);
+				config.setAnnotationMode(OBDSQLDatabaseAdapterConfiguration.AnnotationMode.ANNOTATIONS_ONLY);
+				
+				try {
+					adapter.connect();
+					//OBOSession session = CharFieldManager.inst().getOboSession();
+					Collection<Annotation> annots = 
+						adapter.fetchAnnotationsByObject(session, oboClass);
+					matches.addAll(annots);
+					//allAnnots.addAll(adapter.retrieveAllAnnotations(session));
+					//adapter.fetchAll(session);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			}
+
 		}
 		
 		/* currently we have a very crude way of matching.
