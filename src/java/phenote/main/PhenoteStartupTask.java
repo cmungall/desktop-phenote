@@ -89,7 +89,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
 	@Override
 	protected String getAppName() {
-		return "DScribe";
+		return "Phenote"; // "DScribe"???
 	}
 
 	@Override
