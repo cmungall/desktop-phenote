@@ -111,7 +111,7 @@ them into  the classfiles directory. excludes="test/**"  -->
     </target>
 	
 	<target name="src_resources">
-		<copy todir="${outputdir}">
+		<copy todir="${classfiles}">
 			<fileset refid="resource_files" />
 		</copy>
 	</target>
