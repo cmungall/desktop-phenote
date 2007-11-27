@@ -370,7 +370,8 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 		// create the panel the whole thing will live in (including toolbars,
 		// etc.)
-		this.setLayout(new BorderLayout(0,0));
+		//this.setLayout(new BorderLayout(0,0));
+    getComponent().setLayout(new BoxLayout(getComponent(),BoxLayout.Y_AXIS));
 		this.setPreferredSize(new Dimension(TERM_INFO_DEFAULT_WIDTH,TERM_INFO_DEFAULT_HEIGHT));
 
 		// create the toolbar
@@ -754,13 +755,19 @@ public class TermInfo2 extends AbstractGUIComponent {
 	 */
 	public void setComponentTitleFromOBOClass (OBOClass oboClass) {
 		String title = "Term Info: "+ oboClass.getName();
-		ComponentManager.getManager().setLabel(this,title);
-
+    // this only works and only makes sense in phenote2 with docking framework
+    // where each gui item has a border around it with a title - otherwise throws
+    // null pointer - just catch null pointer and do nothing
+    try {	ComponentManager.getManager().setLabel(this,title); }
+    catch (NullPointerException x) {}
 	}
 
 	/** Listen for selection from phenote (mouse over completion list) */
 	private class InfoTermSelectionListener implements TermSelectionListener {
 		public void termSelected(TermSelectionEvent e) {
+
+      clearAnnotations(); // ???
+
 			//navi selection is a mouseover event
 			if (!e.isMouseOverEvent()) {
 				// add the item to the navi history if selected from list only
@@ -962,6 +969,12 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 		synonymPanel.setVisible(true);
 	}
+
+  private void clearAnnotations() {
+    annotationPanel.removeAll();
+		annotationPanel.validate();
+		annotationPanel.repaint();
+  }
 
 	private void makeAnnotationPanel(Collection<Annotation> annots) {
 	
