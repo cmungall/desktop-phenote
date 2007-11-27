@@ -8,6 +8,7 @@ import org.obo.annotation.datamodel.Annotation;
 import org.obo.annotation.datamodel.AnnotationOntology;
 import org.obo.datamodel.Datatype;
 import org.obo.datamodel.IdentifiedObject;
+import org.obo.datamodel.Instance;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
 import org.obo.datamodel.Value;
@@ -74,6 +75,11 @@ public class BasicAnnotationMappingDriver implements AnnotationMappingDriver {
   public CharFieldValue getCharFieldValue(OBOClass oboclass,
                                           CharacterI character, CharField field) {
     return new CharFieldValue(oboclass, character, field);
+  }
+
+  public CharFieldValue getCharFieldValue(Instance oboInst,
+		  CharacterI character, CharField field) {
+	  return new CharFieldValue(oboInst.getID(), character, field);
   }
   
 	public CharFieldValue getCharFieldValue(String s, CharacterI character,

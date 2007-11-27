@@ -8,6 +8,8 @@ import org.apache.log4j.Logger;
 import org.bbop.util.ObjectUtil;
 import org.obo.annotation.datamodel.Annotation;
 import org.obo.annotation.datamodel.impl.AnnotationImpl;
+import org.obo.datamodel.DanglingObject;
+import org.obo.datamodel.Instance;
 import org.obo.datamodel.LinkedObject;
 import org.obo.datamodel.Namespace;
 import org.obo.datamodel.OBOClass;
@@ -247,7 +249,11 @@ public class AnnotationCharacter extends AbstractCharacter {
         
         if (o instanceof OBOClass) {
           cfv = getCharFieldValue((OBOClass) o, this, cf);
-        } else if (o instanceof String) {
+        } else if (o instanceof Instance) {
+        	cfv = getCharFieldValue((Instance) o, this, cf);
+        } else if (o instanceof DanglingObject) {
+        	cfv = getCharFieldValue((DanglingObject) o, this, cf);
+         } else if (o instanceof String) {
           cfv = getCharFieldValue((String) o, this, cf);
         }
       }
@@ -266,6 +272,16 @@ public class AnnotationCharacter extends AbstractCharacter {
 	protected CharFieldValue getCharFieldValue(OBOClass oboClass,
 			CharacterI character, CharField field) {
 		return driver.getCharFieldValue(oboClass, character, field);
+	}
+	
+	protected CharFieldValue getCharFieldValue(Instance oboInst,
+			CharacterI character, CharField field) {
+		return driver.getCharFieldValue(oboInst.getID(), character, field);
+	}
+	
+	protected CharFieldValue getCharFieldValue(DanglingObject oboInst,
+			CharacterI character, CharField field) {
+		return driver.getCharFieldValue(oboInst.getID(), character, field);
 	}
 
 	protected CharFieldValue getCharFieldValue(String s, CharacterI character,
