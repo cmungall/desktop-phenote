@@ -150,7 +150,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 			groupFieldPanel.setPreferredSize(new Dimension(300, 300));
 			// 1st is id, 2nd id -> title bar string
 			String configName = groupFieldPanel.getName();
-			this.setName(configName);
+			groupFieldPanel.setTitle(panelName+" (Configuration: "+configName+")");
 			return groupFieldPanel;
 
 			
@@ -160,19 +160,9 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		public FactoryCategory getCategory() {
 			return FactoryCategory.ANNOTATION;
 		}
-
-		public String getDefaultID() {
-			return "phenote-editor";
-		}
-
-		/** These are alias IDs? */
-		public List getIDs() {
-			// return CollectionUtil.list("dscribe-editor");
-			return CollectionUtil.list("phenote-editor");
-		}
 		
 		public String getName() {
-			return displayName;
+			return panelName;
 		}
 
 		public boolean getPreferSeparateWindow() {
@@ -185,11 +175,6 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
 		public boolean showInMenus() {
 			return true;
-		}
-		
-		public void setName(String name) {
-			displayName = panelName+" Configuration: "+name;
-			displayName = panelName;
 		}
 
 		public String getID() {
@@ -209,15 +194,6 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
 		public FactoryCategory getCategory() {
 			return FactoryCategory.ANNOTATION;
-		}
-
-		public String getDefaultID() {
-			return "term-info";
-		}
-
-		/** These are alias IDs? */
-		public List getIDs() {
-			return CollectionUtil.list("term-info");
 		}
 
 		public String getName() {
@@ -254,7 +230,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 			NcbiInfo info = new NcbiInfo();
 			info.setMinimumSize(new Dimension(200, 200));
 			info.setPreferredSize(new Dimension(200, 200));
-			this.setName("NCBI");
+			info.setTitle("NCBI");
 			return info;
 			
 			//			this.setName("(none)");
@@ -265,17 +241,8 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 			return FactoryCategory.INFO;
 		}
 
-		public String getDefaultID() {
-			return "NCBI";
-		}
-
-		/** These are alias IDs? */
-		public List getIDs() {
-			return CollectionUtil.list("NCBI");
-		}
-
 		public String getName() { //what is displayed in the menu
-			return displayName;
+			return panelName;
 		}
 
 		public boolean getPreferSeparateWindow() {
@@ -288,11 +255,6 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
 		public boolean showInMenus() {
 			return true;
-		}
-		
-		public void setName(String name) {
-//			displayName = panelName+": "+name;
-			displayName = panelName;
 		}
 
 		public String getID() {
@@ -321,17 +283,8 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 			return FactoryCategory.ANNOTATION;
 		}
 
-		public String getDefaultID() {
-			return "Annotation Table";
-		}
-
-		/** These are alias IDs? */
-		public List getIDs() {
-			return CollectionUtil.list("Annotation Table");
-		}
-
 		public String getName() {
-			return displayName;
+			return panelName;
 		}
 
 		public boolean getPreferSeparateWindow() {
@@ -345,10 +298,6 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		public boolean showInMenus() {
 			return true;
 		}
-		public void setName(String name) {
-			displayName = panelName;
-		}
-
 		public String getID() {
 			return "Annotation Table";
 		}
@@ -366,15 +315,6 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
                   // donest compile
                   //			return FactoryCategory.TOOLBARS;
                   return null;
-		}
-
-		public String getDefaultID() {
-			return "StandardToolbar";
-		}
-
-		/** These are alias IDs? */
-		public List getIDs() {
-			return CollectionUtil.list("StandardToolbar");
 		}
 
 		public String getName() {

@@ -146,6 +146,10 @@ public class CharFieldManager {
     }
     return charFields;
   }
+  
+  public static String getDefaultGroup() {
+	  return DEFAULT_GROUP;
+  }
 
   public static boolean isDefaultGroup(String s) {
     return DEFAULT_GROUP.equals(s);
