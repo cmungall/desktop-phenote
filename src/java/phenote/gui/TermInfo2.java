@@ -254,7 +254,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 
 	// content variables
-	private OBOClass currentOboClass;
+	private OBOClass currentOboClass = null;
 
 	private UseTermListener useTermListener;
 
@@ -560,9 +560,10 @@ public class TermInfo2 extends AbstractGUIComponent {
 		annotationPanel.setLayout(new SpringLayout());
 		annotationPanel.setBorder(contentBorder);
 		annotationPanel.setName(annotationPanelName);
+		annotationPanel.setVisible(false);
 
 		termInfoPanel.addBox("Annotations", annotationPanel);
-
+		
 		// refresh
 		this.validate();
 		this.repaint();
@@ -578,7 +579,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 //	}
 
 	private void setTextFromOboClass(OBOClass oboClass) {
-		currentOboClass = oboClass;
+		TermInfo2.this.currentOboClass = oboClass;
 		
 		// basicInfoPanel
 		if (!oboClass.isObsolete()) {
@@ -623,6 +624,8 @@ public class TermInfo2 extends AbstractGUIComponent {
 			annotationSummaryTextArea.setText("<html>annotation count: <b>"+ this.getAnnotationCountByClass(oboClass) + " "+
 				"</b><br>information content: <b>"+this.getAnnotationInformationContentByClass(oboClass) +
 				"</b></html>");
+		} else {
+			annotationSummaryTextArea.setText("");
 		}
 
 		if ((!showEmptyPanelsFlag) && (oboClass.getSynonyms().size() == 0)) {
@@ -721,20 +724,10 @@ public class TermInfo2 extends AbstractGUIComponent {
 		}
 
 		// Annotations
-		Collection<Annotation> annots = getAnnotationsByClass(oboClass);
-		if ((!showEmptyPanelsFlag) && (annots.size() == 0)) {
-			termInfoPanel.getComponent(16).setVisible(false);
-			annotationPanel.setVisible(false);
-		} else {
-			// AnnotationPanel
-			termInfoPanel.getComponent(16).setVisible(true);
-			makeAnnotationPanel(annots);
-			termInfoPanel.setBoxTitle("Annotations (" + annots.size()
-					+ ")", 16);
-			annotationPanel.validate();
-			annotationPanel.repaint();
-			annotationPanel.setVisible(true);
-		}
+		//moving annotations to only show if the button is clicked.
+		//want to hide the annotation panel until the person clicks the button
+//		termInfoPanel.getComponent(16).setVisible(false);
+//		annotationPanel.setVisible(false);
 		
 
 
@@ -997,8 +990,8 @@ public class TermInfo2 extends AbstractGUIComponent {
 			annotationPanel.add(aeLabel);
 			rowCount++;
 			SpringLayout layout = new SpringLayout();
-			layout.putConstraint(SpringLayout.NORTH, aeLabel, 5,
-					SpringLayout.NORTH, annotationPanel);
+//			layout.putConstraint(SpringLayout.NORTH, aeLabel, 5,
+//					SpringLayout.NORTH, annotationPanel);
 			annotationPanel.setLayout(layout);
 
 		}
@@ -1017,7 +1010,9 @@ public class TermInfo2 extends AbstractGUIComponent {
 				XPAD, YPAD,  // xPad, yPad
         maxX, maxY);
 
-		annotationPanel.setVisible(true);
+//		annotationPanel.setVisible(true);
+		annotationPanel.validate();
+		annotationPanel.repaint();
 	}
 
 	private void makeDbxrefPanel(Set someSet) {
@@ -1573,16 +1568,39 @@ public class TermInfo2 extends AbstractGUIComponent {
 			
 			if (match)
 				matches.add(annot);
-			//System.out.println("match="+match);
+			System.out.println("match="+match);
 
 		}
 		return matches;
 	}
 	
 	public void getCurrentAnnotations() {
-		System.out.println("getting annotations!");
-		//		getAnnotationsByClass(currentOboClass);
+		//in this case, you've clicked the button and you want to see the annots,
+		//so want to display if there's none.  but this shouldn't even 
+		//be possible based on the counts
+//		System.out.println("getting annotations!"+currentOboClass);
+		if (currentOboClass!=null) {
+			Collection<Annotation> annots = getAnnotationsByClass(currentOboClass);
+//			if ((!showEmptyPanelsFlag) && (annots.size() == 0)) {
+//				termInfoPanel.getComponent(16).setVisible(false);
+//				annotationPanel.setVisible(false);
+//			} else {
+				// AnnotationPanel
+				termInfoPanel.getComponent(16).setVisible(true);
+
+				makeAnnotationPanel(annots);
+				termInfoPanel.setBoxTitle("Annotations (" + annots.size()
+						+ ")", 16);
+				annotationPanel.validate();
+				annotationPanel.repaint();
+				annotationPanel.setVisible(true);
+			}
+		termInfoPanel.validate();
+		termInfoPanel.repaint();
+		this.validate();
+		this.repaint();
 	}
+
 
 	/** for testing */
 	void simulateHyperlinkEvent(HyperlinkEvent e) {

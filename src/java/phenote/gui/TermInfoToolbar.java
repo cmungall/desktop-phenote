@@ -102,7 +102,7 @@ public class TermInfoToolbar extends JToolBar {
     useTermButton.setToolTipText("Use Term");
     
     JButton getAnnotationsButton = new JButton();
-    getAnnotationsButton.setIcon(new ImageIcon("images/somefile.GIF"));
+    getAnnotationsButton.setIcon(new ImageIcon("images/searchOBD.gif"));
     getAnnotationsButton.setToolTipText("Fetch annoations to this term from OBD");
     getAnnotationsButton.addActionListener(new GetAnnotationsActionListener());
 
