@@ -972,6 +972,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 
   private void clearAnnotations() {
     annotationPanel.removeAll();
+    termInfoPanel.getComponent(16).setVisible(false);
 		annotationPanel.validate();
 		annotationPanel.repaint();
   }
