@@ -8,7 +8,9 @@ import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOSession;
 import org.obo.datamodel.impl.DanglingClassImpl;
 
-// type is from xmlbean Field??
+import phenote.config.FieldConfig;
+import phenote.config.xml.FieldDocument.Field;
+// type is from xmlbean Field
 import phenote.config.xml.FieldDocument.Field.Type;
 import phenote.error.ErrorEvent;
 import phenote.error.ErrorManager;
@@ -36,6 +38,8 @@ public class CharField {
   // should we actually just use xmlbean
   // phenote.config.xml.FieldDocument.Field.Type???
   //public enum Type { TERM, FREE_TEXT, INT, ID }; 
+  private Field fieldXmlBean;
+  private FieldConfig fieldConfig;
   private Type.Enum type = Type.FREE_TEXT; // free text default, bkwrd compat
   // index? orderNumber? for order in gui/datamodel?
 
@@ -53,6 +57,17 @@ public class CharField {
     this.name = name;
     this.tag = tag;
     if (type != null) this.type = type;
+  }
+
+  /** heck why not just pass in the FieldConfig with its xml config bean */
+  public CharField(FieldConfig fc) {
+    if (fc == null) return; // shouldnt happen
+    fieldConfig = fc;
+    fieldXmlBean = fieldConfig.getFieldBean();
+    name = fieldConfig.getLabel();
+    tag = fieldConfig.getDataTag();
+    type = fc.getType();
+    setCopyEnabled(fc.copies());
   }
 
   public void setCopyEnabled(boolean cp) {
@@ -146,7 +161,10 @@ public class CharField {
   /** return true if holds a list of CharFieldValues, false if just 1 char field
       value */
   public boolean isList() {
-    return getTag().equals("NLA"); // || getTag().equals("GC"); // just testing...
+    //return getTag().equals("NLA"); // || getTag().equals("GC"); // just testing...
+    if (fieldXmlBean == null) return false;
+    if (fieldXmlBean.xgetIsList() == null) return false;
+    return fieldXmlBean.getIsList();
     //return false;
   }
 

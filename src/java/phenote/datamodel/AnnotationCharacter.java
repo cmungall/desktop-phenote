@@ -276,7 +276,8 @@ public class AnnotationCharacter extends AbstractCharacter {
   public CharacterI cloneCharacter() {
     Annotation clone = (Annotation) annotation.clone();
     AnnotationCharacter a =  new AnnotationCharacter(clone, driver);
-    a.objectGenus = objectGenus.cloneCharFieldValue();
+    if (objectGenus!=null)
+      a.objectGenus = objectGenus.cloneCharFieldValue();
     //a.objectDifferentia = objectDifferentia.cloneCharFieldValue();
     Map<CharField,CharFieldValue> m = new HashMap<CharField,CharFieldValue>(2);
     for (Map.Entry<CharField,CharFieldValue> e : charFieldToObjectDiff.entrySet()) {
