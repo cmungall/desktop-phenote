@@ -48,6 +48,7 @@ public class TermInfoToolbar extends JToolBar {
   private final int FORWARDBUTTONINDEX = 1;
   private final int FAVBUTTONINDEX = 2;
   private final int USETERMBUTTONINDEX = 3;
+  private final int GETANNOTATIONSBUTTONINDEX = 4;
 
 
 
@@ -99,11 +100,17 @@ public class TermInfoToolbar extends JToolBar {
     useTermButton.setIcon(new ImageIcon("images/OK.GIF"));
     useTermButton.addActionListener(new UseTermActionListener());
     useTermButton.setToolTipText("Use Term");
+    
+    JButton getAnnotationsButton = new JButton();
+    getAnnotationsButton.setIcon(new ImageIcon("images/somefile.GIF"));
+    getAnnotationsButton.setToolTipText("Fetch annoations to this term from OBD");
+    getAnnotationsButton.addActionListener(new GetAnnotationsActionListener());
 
     buttons.add(BACKBUTTONINDEX, backButton);
     buttons.add(FORWARDBUTTONINDEX, forwardButton);
     buttons.add(FAVBUTTONINDEX, favoritesButton);  
     buttons.add(USETERMBUTTONINDEX, useTermButton);
+    buttons.add(GETANNOTATIONSBUTTONINDEX, getAnnotationsButton);
 
     termField =  new JTextArea();
     termField.setFont(new Font("Arial", Font.BOLD, 12));
@@ -148,9 +155,11 @@ public class TermInfoToolbar extends JToolBar {
   
   public void setButtonStatus(String button, boolean enabled) {
   	if (button.equals("forward")) {
-  		((JButton)buttons.get(2)).setEnabled(enabled);
+  		((JButton)buttons.get(FORWARDBUTTONINDEX)).setEnabled(enabled);
   	} else if (button.equals("back")) {
-  		((JButton)buttons.get(1)).setEnabled(enabled);
+  		((JButton)buttons.get(BACKBUTTONINDEX)).setEnabled(enabled);
+  	} else if (button.equals("annotations")) {
+  		((JButton)buttons.get(GETANNOTATIONSBUTTONINDEX)).setEnabled(enabled);
   	}
   		
   }
@@ -161,6 +170,13 @@ public class TermInfoToolbar extends JToolBar {
   	((JButton)buttons.get(BACKBUTTONINDEX)).setEnabled(naviIndex>0);
 
   }
+  
+  private class GetAnnotationsActionListener implements ActionListener {
+  	public void actionPerformed(ActionEvent e) {
+  		TermInfo2.inst().getCurrentAnnotations();
+  	}
+  }
+  
 }
 
 

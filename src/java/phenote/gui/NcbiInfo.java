@@ -14,8 +14,11 @@ import javax.swing.JTextArea;
 import javax.swing.SpringLayout;
 import javax.swing.border.Border;
 
+import org.bbop.framework.AbstractGUIComponent;
+import org.bbop.framework.ComponentManager;
 import org.obo.annotation.datamodel.AnnotationOntology;
 import org.obo.datamodel.Instance;
+import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOSession;
 import org.obo.util.TermUtil;
 
@@ -38,7 +41,7 @@ import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
   * @author Nicole Washington
   * 
   */
-public class NcbiInfo extends JPanel {
+public class NcbiInfo extends AbstractGUIComponent {
 
 	// constants
 	private static final int NCBI_INFO_DEFAULT_WIDTH = 350;
@@ -68,61 +71,89 @@ public class NcbiInfo extends JPanel {
 	}
 	
   public NcbiInfo(SelectionManager selManager) {
+  	super("NCBI:NCBI");
     this.selectionManager = selManager;
     this.selectionManager.addIDSelectionListener(new NCBIIDSelectionListener());
 		init();
   }
 
 
-	private void init() {
+	public void init() {
 
-		ncbiPanel = new JPanel(new BorderLayout(0, 0));
-		ncbiPanel.setMinimumSize(new Dimension(200, 200));
-		ncbiPanel.setPreferredSize(new Dimension(NCBI_INFO_DEFAULT_WIDTH,
-			 NCBI_INFO_DEFAULT_HEIGHT));
+//		ncbiPanel = new JPanel(new BorderLayout(0, 0));
+		this.setLayout(new BorderLayout(0,0));
+		//		ncbiPanel.setMinimumSize(new Dimension(200, 200));
+//		ncbiPanel.setPreferredSize(new Dimension(NCBI_INFO_DEFAULT_WIDTH,
+//			 NCBI_INFO_DEFAULT_HEIGHT));
 
 		//make the text area that the text will sit in
 		ncbiTextArea = new JEditorPane();
 		ncbiTextArea.setContentType("text/html");
 		ncbiTextArea.setEditable(false);
-		setNCBIInfoText("No references loaded");
+		setNCBIInfoText("No references loaded", " ");
 
 		// put it in a scrollpane
 		ncbiInfoScroll = new JScrollPane(ncbiTextArea);
 		ncbiInfoScroll.setBorder(null);
 
 		// put the scrollpane into the whole bucket
-		ncbiPanel.add(ncbiInfoScroll, BorderLayout.CENTER);
+		this.add(ncbiInfoScroll, BorderLayout.CENTER);
+//		ncbiPanel.add(ncbiInfoScroll, BorderLayout.CENTER);
+		
 		
 		// refresh
-		ncbiPanel.validate();
-		ncbiPanel.setVisible(true);
-
+//		ncbiPanel.validate();
+//		ncbiPanel.setVisible(true);
+		
+		this.setTitle("NCBI: Pubmed");
+//		this.add(ncbiPanel);
+		this.validate();
+		this.repaint();
+		
 	}
 
-	public static JComponent getComponent() {
-		return ncbiPanel;
-	}
+//	public static JComponent getComponent() {
+//		return ncbiPanel;
+//	}
 	
 	public void setID(String id) {
 		this.firePropertyChange("ID", null, id);
 	}
 	
-	public void setNCBIInfoText(String text) {
+	public void setNCBIInfoText(String text, String title) {
 		ncbiTextArea.setText(text);
-		ncbiPanel.validate();
-		ncbiPanel.repaint();		
+		if (title==null) {
+			title="Pubmed: (error)";
+		} else {
+			title="Pubmed: "+title;
+		}
+//		ComponentManager.getManager().setLabel(this,title);
+
+		this.validate();
+		this.repaint();		
 	}
 
 	public void setNCBIInfofromInstance(Instance oboInstance) {
 		String text=null;
 		text="<html>";
-		text+=oboInstance.getComment();
-		text+="<br><br><b>Abstract:</b>"+oboInstance.getDefinition()+" ("+oboInstance.getID()+")";
+		text+=oboInstance.getComment(); //comment is overloaded with the citation at the moment
+		text+="<br><br><b>Abstract:</b> "+oboInstance.getDefinition()+" ("+oboInstance.getID()+")";
 		text+="</html>";
 		ncbiTextArea.setText(text);
-		ncbiPanel.validate();
-		ncbiPanel.repaint();		
+		setComponentTitleFromOBOInstance(oboInstance);
+		this.validate();
+		this.repaint();		
+	}
+
+	public void setComponentTitleFromOBOInstance (Instance oboInstance) {
+		String name="";
+		if (oboInstance.getName().length()>35) {
+			name = oboInstance.getName().substring(0, 35)+"...";
+		} else {
+				name = oboInstance.getName();
+		}
+		String title = "Article: "+ name;
+		ComponentManager.getManager().setLabel(this,title);
 	}
 
 	
@@ -153,7 +184,7 @@ public class NcbiInfo extends JPanel {
 				setNCBIInfofromInstance(oboInstance);
 			} else {
 				System.out.println("couldn't retrieve or find "+id);
-  			setNCBIInfoText("Error:  "+id+" not found in NCBI database.");
+  			setNCBIInfoText("Error:  "+id+" not found in NCBI database.", null);
 			}
     }
   }

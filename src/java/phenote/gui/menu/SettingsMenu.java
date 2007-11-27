@@ -120,10 +120,9 @@ public class SettingsMenu extends DynamicMenu {
   	
 
     JMenuItem search = new JMenuItem("Search");
+    search.setEnabled(false);
     add(search);
-    JMenuItem omim = new DynamicActionMenuItem(new NCBIQueryAction());
-    add(omim);
-    addSeparator();
+    
 
   }
 

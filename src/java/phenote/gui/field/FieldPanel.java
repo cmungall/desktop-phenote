@@ -14,6 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
+import org.bbop.framework.AbstractGUIComponent;
+import org.bbop.framework.ComponentManager;
+import org.obo.datamodel.OBOClass;
+
 import phenote.config.Config;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.GroupAdapterI;
@@ -31,7 +35,7 @@ import ca.odell.glazedlists.swing.EventSelectionModel;
  also has SearchParamPanel(?).
  */
 
-public class FieldPanel extends JPanel {
+public class FieldPanel extends AbstractGUIComponent {
   
   private List<CharFieldGui> charFieldGuiList = new ArrayList<CharFieldGui>(8);
   private SearchParamPanel searchParamPanel; // searchParamManager?
@@ -62,6 +66,8 @@ public class FieldPanel extends JPanel {
   // Group or String for group?
   public FieldPanel(boolean doAllFields, boolean addSearchPanel, String grp,
                     EventSelectionModel<CharacterI> model) {
+		super("phenote-editor:phenote-editor");
+
     setGroup(grp);
     init(doAllFields,addSearchPanel,group,SelectionManager.getSelMan(group),
          EditManager.getEditManager(group), model);
@@ -70,7 +76,7 @@ public class FieldPanel extends JPanel {
   public FieldPanel(boolean doAllFields, boolean addSearchPanel,
                     String group, SelectionManager selectionManager,
                     EditManager groupEditMan, EventSelectionModel<CharacterI> model) {
-    
+		super("phenote-editor:phenote-editor");
     init(doAllFields,addSearchPanel,group,selectionManager,groupEditMan, model);
   }
 
@@ -107,7 +113,7 @@ public class FieldPanel extends JPanel {
     }
     //I'm naming the field panel the name of the config
     this.setName(Config.inst().getConfigName());
-
+    this.setTitle("Phenote editor: "+Config.inst().getConfigName());
   } 
 
   private void setGroup(String g) {
@@ -182,16 +188,22 @@ public class FieldPanel extends JPanel {
   }
 
   private int currentGridBagRow = 0;
+  private int currentGridBagCol = 0;
+  private int buttonGridBagCol = 0;
   void addCharFieldGuiToPanel(CharFieldGui fieldGui) {
     // first one does new row
     this.addLabel(fieldGui, getConstraintsNewRow());
     this.addOntologyChooser(fieldGui, getConstraintsSameRow());
     this.addInputGui(fieldGui, getConstraintsSameRow());
     addListGui(fieldGui,getConstraintsSameRow());
-    this.addPostCompButton(fieldGui, getConstraintsSameRow());
-    this.addRetrieveButton(fieldGui, getConstraintsSameRow());
+    addButtons(fieldGui,getConstraintsSameRow()); //put all buttons in same col
   }
-
+  
+  void addButtons(CharFieldGui fieldGui, GridBagConstraints constraints) {
+    this.addPostCompButton(fieldGui, constraints);
+    this.addRetrieveButton(fieldGui, constraints);  	
+  }
+  
   /** set up basic grid bag constraints with insets and increments currentGridBagRow/gridy
    */
   GridBagConstraints getConstraintsNewRow() {
@@ -199,6 +211,7 @@ public class FieldPanel extends JPanel {
     baseConstraints.gridy = ++this.currentGridBagRow;
     return baseConstraints;
   }
+  
   
   /** set up basic grid bag constraints with insets and uses currentGridBagRow for gridy
       (doesnt increment it) */
@@ -208,6 +221,8 @@ public class FieldPanel extends JPanel {
     baseConstraints.gridy = this.currentGridBagRow; // no incrementing
     return baseConstraints;
   }
+  
+  
     
   
   private void addLabel(CharFieldGui fieldGui, GridBagConstraints constraints) {
@@ -259,7 +274,7 @@ public class FieldPanel extends JPanel {
   }
   
   private void addRetrieveButton(CharFieldGui fieldGui, GridBagConstraints constraints) {
-    constraints.gridx = 5;
+    constraints.gridx = 4;
     if (fieldGui.hasRetrieveButton()) {
       fieldPanel.add(fieldGui.getRetrieveButton(), constraints);
     }

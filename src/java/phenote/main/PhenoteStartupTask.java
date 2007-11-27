@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
 
+import org.bbop.framework.AbstractGUIComponent;
 import org.bbop.framework.GUIComponent;
 import org.bbop.framework.GUIComponentFactory;
 import org.bbop.framework.GUIComponentWrapper;
@@ -150,7 +151,10 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 			// 1st is id, 2nd id -> title bar string
 			String configName = groupFieldPanel.getName();
 			this.setName(configName);
-			return new GUIComponentWrapper(id, id, groupFieldPanel);
+			return groupFieldPanel;
+
+			
+//			return new GUIComponentWrapper(id, id, groupFieldPanel);
 		}
 
 		public FactoryCategory getCategory() {
@@ -158,7 +162,6 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		}
 
 		public String getDefaultID() {
-			// return "dscribe-editor";
 			return "phenote-editor";
 		}
 
@@ -186,6 +189,11 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		
 		public void setName(String name) {
 			displayName = panelName+" Configuration: "+name;
+			displayName = panelName;
+		}
+
+		public String getID() {
+			return "phenote-editor";
 		}
 	}
 
@@ -231,6 +239,10 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		public boolean showInMenus() {
 			return true;
 		}
+
+		public String getID() {
+			return "term-info";
+		}
 		
 //		public void setName(String name) {
 //			displayName = panelName+": "+name;
@@ -246,8 +258,11 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 			NcbiInfo info = new NcbiInfo();
 			info.setMinimumSize(new Dimension(200, 200));
 			info.setPreferredSize(new Dimension(200, 200));
-			this.setName("(none)");
-			return new GUIComponentWrapper(id, id, info.getComponent());
+			this.setName("NCBI");
+			return info;
+			
+			//			this.setName("(none)");
+//			return new GUIComponentWrapper(id, id, info.getComponent());
 		}
 
 		public FactoryCategory getCategory() {
@@ -280,7 +295,12 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		}
 		
 		public void setName(String name) {
-			displayName = panelName+": "+name;
+//			displayName = panelName+": "+name;
+			displayName = panelName;
+		}
+
+		public String getID() {
+			return "NCBI";
 		}
 
 	}
@@ -296,8 +316,9 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 					getDefaultGroup()); // for now just default
 			JPanel ctp = tableController.getCharacterTablePanel();
 			// 1st is id, 2nd id -> title bar string
-			this.setName("(new)");
+//			this.setName("(new)");
 			return new GUIComponentWrapper(id, id, ctp);
+//			return (AbstractGUIComponent)ctp;
 		}
 
 		public FactoryCategory getCategory() {
@@ -329,7 +350,11 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 			return true;
 		}
 		public void setName(String name) {
-			displayName = panelName +": "+name;
+			displayName = panelName;
+		}
+
+		public String getID() {
+			return "Annotation Table";
 		}
 	}
 
@@ -370,6 +395,10 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
 		public boolean showInMenus() {
 			return true;
+		}
+
+		public String getID() {
+			return "Standard toolbar";
 		}
 	}
 

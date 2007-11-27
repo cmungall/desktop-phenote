@@ -428,7 +428,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 		basicInfoPanel.add(definitionTextArea);
 		
 //		if (this.isIncludeExternalDatabaseAnnotations()) {
-			JLabel annotationSummaryLabel = new JLabel("External Annotations: ", JLabel.TRAILING);
+			JLabel annotationSummaryLabel = new JLabel("<html><p align=right>External Annotations:</p></html>", JLabel.TRAILING);
 			annotationSummaryLabel.setVerticalAlignment(JLabel.TOP);
 
 			basicInfoPanel.add(annotationSummaryLabel);
@@ -553,11 +553,6 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 		termInfoPanel.addBox("Comments", commentsPanel);
 
-		// refresh
-		this.validate();
-		this.repaint();
-		this.setVisible(true);
-		
 		// Annotations
 		// Do we want a single panel here?
 		annotationPanel = new JPanel();
@@ -566,7 +561,13 @@ public class TermInfo2 extends AbstractGUIComponent {
 		annotationPanel.setBorder(contentBorder);
 		annotationPanel.setName(annotationPanelName);
 
-		termInfoPanel.addBox("annotations", annotationPanel);
+		termInfoPanel.addBox("Annotations", annotationPanel);
+
+		// refresh
+		this.validate();
+		this.repaint();
+		this.setVisible(true);
+		
 
 
 //		add(entirePanel);
@@ -864,16 +865,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 			String id = HtmlUtil.getIdFromHyperlink(e);
 			if (id == null) return;
 			bringUpTermInTermInfo(id);
-//			try {
-//			OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
-//			setTextFromOboClass(term);
-//			addTermToNaviHistory(id);
-//			// send out term selection (non mouse over) for DAG view
-////		TermInfo2.this.selectionManager.selectTerm(TermInfo2.this, term, true);
-//			//				TermInfo2.this.selectionManager.selectTerm(TermInfo2.this, term, true);
-//			} catch (TermNotFoundException ex) {
-//			return;
-//			}
+
 		}
 
 		private void bringUpTermInTermInfo(String id) {
@@ -887,18 +879,13 @@ public class TermInfo2 extends AbstractGUIComponent {
 					OBOClass c = (OBOClass) io;
 					setTextFromOboClass(c);
 					setComponentTitleFromOBOClass(c);
+					addTermToNaviHistory(id);
 					termInfoToolbar.setNaviButtonStatus();
+					// send out term selection (non mouse over) for DAG view
+					selectionManager.selectTerm(TermInfo2.this, c, true);
 					break;
 				}
 			}
-//			OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
-//			setTextFromOboClass(term);
-//			addTermToNaviHistory(id);
-//			// send out term selection (non mouse over) for DAG view
-//			TermInfo2.this.selectionManager.selectTerm(TermInfo2.this, term, true);
-//			} catch (TermNotFoundException ex) {
-//			return;
-//			}
 		}
 
 		public void link(String href) {
@@ -1183,7 +1170,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 			if (itemCount > 0) {
 				// if there's at least one item, add the section to the pane
 				panelText += "</html>";
-				String tempType = "<html>"+linkCol.getLinkName()+"</html>";
+				String tempType = "<html><p align=right>"+linkCol.getLinkName()+"</p></html>";
 				typeLabel = new JLabel(tempType, JLabel.TRAILING);
 				typeLabel.setVerticalAlignment(JLabel.TOP);
 				panel.add(typeLabel);
@@ -1590,6 +1577,11 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 		}
 		return matches;
+	}
+	
+	public void getCurrentAnnotations() {
+		System.out.println("getting annotations!");
+		//		getAnnotationsByClass(currentOboClass);
 	}
 
 	/** for testing */

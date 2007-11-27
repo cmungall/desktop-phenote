@@ -14,6 +14,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import org.apache.log4j.Logger;
+import org.bbop.framework.AbstractGUIComponent;
+import org.bbop.framework.ComponentManager;
 import org.swixml.SwingEngine;
 
 import phenote.config.Config;
@@ -46,6 +48,7 @@ public class CharacterTableController {
   private CharacterTableFormat tableFormat;
   private LoadSaveManager loadSaveManager;
   private CharFieldMatcherEditor filter;
+//  private AbstractGUIComponent characterTablePanel; // initialized by swix
   private JPanel characterTablePanel; // initialized by swix
   private JTable characterTable; // initialized by swix
   private JButton duplicateButton; // initialized by swix
@@ -83,6 +86,9 @@ public class CharacterTableController {
   public JPanel getCharacterTablePanel() {
     return this.characterTablePanel;
   }
+//  public AbstractGUIComponent getCharacterTablePanel() {
+//    return this.characterTablePanel;
+//  }
   
   /** in swixml config conf/character_table_panel.xml the add button New is set up to
       call this method */
@@ -148,6 +154,7 @@ public class CharacterTableController {
     SwingEngine swix = new SwingEngine(this);
     try {
       this.characterTablePanel = (JPanel)swix.render(FileUtil.findUrl("character_table_panel.xml"));
+//      this.characterTablePanel = (AbstractGUIComponent)swix.render(FileUtil.findUrl("character_table_panel.xml"));
     } catch (Exception e) {
       log().fatal("Unable to render character table interface", e);
     }
@@ -265,6 +272,7 @@ public class CharacterTableController {
       if (!CharacterTableController.this.filteredCharacters.isEmpty()) {
         CharacterTableController.this.selectionModel.setSelectionInterval(0, 0);
       }
+      setComponentTitleFromFilename();
     }
   }
   
@@ -299,6 +307,15 @@ public class CharacterTableController {
             e.getX(), e.getY());
       }
     }
+  }
+
+  public void setComponentTitleFromFilename() {
+//  	String title =  CharacterTableController.this.getTableAutoSaveName();
+  	String title = CharacterListManager.inst().getCurrentDataFile().getName();
+//  	if (title==null)
+//  		title="error";
+//  	ComponentManager.getManager().setLabel(this.characterTablePanel,title);
+
   }
   
 }

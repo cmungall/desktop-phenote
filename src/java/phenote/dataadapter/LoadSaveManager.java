@@ -111,6 +111,7 @@ public class LoadSaveManager {
   public void saveData(File f) {
     DataAdapterI adapter = getDataAdapterForFilename(f.getName());
     saveData(f, adapter);
+//    this.characterListManager.setCurrentDataFile(f); //do i need to do this?
   }
   
   /**Saves the document's characters to the given file using the given data adapter.*/
