@@ -45,8 +45,13 @@
     <!-- override this from command line with  -DCONF-FILE=initial-zfin.cfg -->
     <property name="CONF_FILE" value="initial-flybase.cfg"/>
 
+	<!-- a fileset that picks all the resources in the Phenote src directory -->
+	<fileset dir="${src}" id="resource_files">
+		<include name="**/resources/**" />
+	</fileset>
+	
     <!-- The init target makes sure that the prerequisite directories exist. -->
-    <target name="init">
+    <target name="init" depends="src_resources">
         <mkdir dir="${classfiles}"/>
     </target>
 
@@ -104,6 +109,12 @@ them into  the classfiles directory. excludes="test/**"  -->
             </classpath>
         </java>
     </target>
+	
+	<target name="src_resources">
+		<copy todir="${outputdir}">
+			<fileset refid="resource_files" />
+		</copy>
+	</target>
 
     <target name="zfin" depends="compile">
         <java classname="phenote.main.Phenote" fork="yes" jvmargs="-Xmx200M">
