@@ -504,7 +504,7 @@ public class Phenote {
       GridBagConstraints ugbc = GridBagUtil.makeFillingConstraint(0,0);
     if (showTermInfo(group)) {
 //    termInfo = new TermInfo();
-      termInfo = new TermInfo2();
+      termInfo = TermInfo2.inst();
       ugbc.weightx = 5;
       infoHistoryPanel.add(termInfo.getComponent(),ugbc);
     }
