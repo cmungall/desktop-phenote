@@ -135,6 +135,8 @@ field =
     attribute min-completion-chars { xsd:int },
     # for ontol completion what to sort terms by, default is NAME
     attribute sort-by { "NAME" | "ID" },
+    ## if true then field can have multiple values, use list gui
+    attribute isList { xsd:boolean },
     postcomp?,
     ontology*
   } 

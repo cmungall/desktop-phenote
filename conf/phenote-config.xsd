@@ -164,6 +164,11 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="isList" use="required" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>if true then field can have multiple values, use list gui</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
     </xs:complexType>
   </xs:element>
   <xs:element name="ontology">
