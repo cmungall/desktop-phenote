@@ -82,7 +82,7 @@ public class FieldConfig {
   Config getConfig() { return config; }
 
   /** return xml bean for field -always non null */
-  Field getFieldBean() {
+  public Field getFieldBean() {
     if (fieldBean == null) //create one...
       fieldBean = config.addNewFieldBean();
     return fieldBean;
@@ -100,7 +100,7 @@ public class FieldConfig {
     return getLabel();
   }
 
-  private Field.Type.Enum getType() {
+  public Field.Type.Enum getType() {
     // if not configged default to term if have ontols, otherwise free text
     if (fieldBean.getType() == null) {
       if (hasOntologies()) fieldBean.setType(Field.Type.TERM);
@@ -264,9 +264,11 @@ public class FieldConfig {
   /** Actually creates char field if null, as char fields utimately come from field
       configs - so this is funny but its actually not funny */
   public CharField getCharField() {
+    // heck why not just pass in the char field bean itself - simpler!
     if (charField == null)
-      charField = new CharField(getLabel(),getDataTag(),getType());
-    charField.setCopyEnabled(copies());
+      //charField = new CharField(getLabel(),getDataTag(),getType());
+      charField = new CharField(this);
+    //charField.setCopyEnabled(copies());
     return charField;
   }
   boolean hasCharField(CharField cf) { return charField == cf; }
