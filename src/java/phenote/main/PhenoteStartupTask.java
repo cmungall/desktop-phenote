@@ -18,6 +18,8 @@ import org.bbop.framework.GUIManager;
 import org.bbop.framework.GUITask;
 import org.bbop.framework.ViewMenu;
 import org.bbop.util.CollectionUtil;
+import org.oboedit.example.AnnotationNumberFetchBehaviorTask;
+import org.oboedit.example.OBDAnnotationNumberFetchBehaviorTask;
 import org.oboedit.gui.Preferences;
 import org.oboedit.gui.tasks.DefaultGUIStartupTask;
 import org.bbop.framework.ScreenLockTask;
@@ -125,7 +127,8 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 				.getManager().getScreenLockQueue(), GUIManager.getManager()
 				.getFrame(), Preferences.getPreferences()
 				.getUseModalProgressMonitors());
-		return CollectionUtil.list((GUITask) screenLockTask);
+		return CollectionUtil.list((GUITask) screenLockTask, 
+				new OBDAnnotationNumberFetchBehaviorTask()); // TODO: for testing
 	}
 
 	/** FieldPanelFactory inner class */
