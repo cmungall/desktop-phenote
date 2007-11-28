@@ -19,7 +19,7 @@ import org.bbop.framework.GUIManager;
 import org.bbop.framework.GUITask;
 import org.bbop.framework.ViewMenu;
 import org.bbop.util.CollectionUtil;
-import org.oboedit.example.AnnotationNumberFetchBehaviorTask;
+//import org.oboedit.example.AnnotationNumberFetchBehaviorTask;
 import org.oboedit.example.OBDAnnotationNumberFetchBehaviorTask;
 import org.oboedit.gui.Preferences;
 import org.oboedit.gui.tasks.DefaultGUIStartupTask;
