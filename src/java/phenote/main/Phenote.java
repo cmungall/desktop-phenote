@@ -17,6 +17,7 @@ import java.util.Enumeration;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -486,54 +487,59 @@ public class Phenote {
   private JPanel makeGroupPanel(Group group) {
     JPanel mainPanel = new JPanel(new GridLayout());
     
-    // INFO HISTORY
-    JPanel infoHistoryPanel = new JPanel(new GridBagLayout());
-    infoHistoryPanel.setBorder(new EmptyBorder(10,10,10,10));
-    
     // EDITOR
     this.tableController = new CharacterTableController(group.getName());
     
     // need to do different selection & edit mgrs
-    FieldPanel groupFieldPanel = new FieldPanel(true,false,group.getName(), this.tableController.getSelectionModel());
+    FieldPanel groupFieldPanel =
+      new FieldPanel(true,false,group.getName(), this.tableController.getSelectionModel());
     groupFieldPanel.setBorder(new EmptyBorder(10,10,10,10));
     // for testing - thats it
     if (group == null || group.getName().equals("default"))
       mainFieldPanel = groupFieldPanel;
     // groupFieldPanel gets added to innerSplitPane below...
 
+    JComponent upperComponent = groupFieldPanel;
+
     // TERM INFO
-      GridBagConstraints ugbc = GridBagUtil.makeFillingConstraint(0,0);
+    GridBagConstraints ugbc = GridBagUtil.makeFillingConstraint(0,0);
     if (showTermInfo(group)) {
+      // INFO HISTORY
+      JPanel infoHistoryPanel = new JPanel(new GridBagLayout());
+      infoHistoryPanel.setBorder(new EmptyBorder(10,10,10,10));
+
 //    termInfo = new TermInfo();
       termInfo = TermInfo2.inst();
       ugbc.weightx = 5;
       infoHistoryPanel.add(termInfo.getComponent(),ugbc);
+
+      selectionHistory = SelectionHistory.inst();
+      ugbc.gridx++;
+      ugbc.weightx = 3;
+      infoHistoryPanel.add(selectionHistory.getComponent(),ugbc); 
       infoHistoryPanel.setMinimumSize(new Dimension(100,100));
+      JSplitPane innerSplitPane =
+        new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,true,groupFieldPanel,infoHistoryPanel);
+      // doesnt work???
+      //innerSplitPane.setDividerLocation(showTermInfo(group) ? 0.63 : 1.0);
+      int div = (int)(showTermInfo(group) ? 0.63 * WINDOW_WIDTH : WINDOW_WIDTH);
+      innerSplitPane.setDividerLocation(div);
+      upperComponent = innerSplitPane;
     }
     
-    selectionHistory = SelectionHistory.inst();
-    ugbc.gridx++;
-    ugbc.weightx = 3;
-    infoHistoryPanel.add(selectionHistory.getComponent(),ugbc); 
-    
-    JSplitPane innerSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, groupFieldPanel, infoHistoryPanel);
-    // doesnt work???
-    //innerSplitPane.setDividerLocation(showTermInfo(group) ? 0.63 : 1.0);
-    int div = (int)(showTermInfo(group) ? 0.63 * WINDOW_WIDTH : WINDOW_WIDTH);
-    innerSplitPane.setDividerLocation(div);
     
     
     // TABLE
     if (showTable(group))  {
       JPanel ctp =  this.tableController.getCharacterTablePanel();
       JSplitPane outerSplitPane =
-        new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, innerSplitPane,ctp);
+        new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, upperComponent,ctp);
       mainPanel.add(outerSplitPane);
       outerSplitPane.setDividerLocation((int)(0.33 * WINDOW_HEIGHT));
       //outerSplitPane.setDividerLocation(0.3); // proportion doesnt work til draw?
     }
     else {
-      mainPanel.add(innerSplitPane);
+      mainPanel.add(upperComponent);
     }
     return mainPanel;
   }
