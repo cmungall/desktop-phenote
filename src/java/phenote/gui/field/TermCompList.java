@@ -28,7 +28,7 @@ import phenote.gui.selection.UseTermListener;
 
 public class TermCompList extends AbstractAutoCompList {
 
-  private OBOClass currentOboClass = null;
+  private OBOClass currentOboClass = null; // --> AnnotatedObj? OBOObject?
   // only term comp lists need ontology choosers - if that changes move to AACL
   private JComboBox ontologyChooserCombo;
   private static final String ALL = "ALL";

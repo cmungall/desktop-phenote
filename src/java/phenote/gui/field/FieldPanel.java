@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -127,9 +128,9 @@ public class FieldPanel extends AbstractGUIComponent {
     this.setPreferredSize(new Dimension(650,350));//690,490));
     //this.setMinimumSize(new Dimension(700,490));//690,490));
     //this.setMaximumSize(new Dimension(2000,750));
-    //BoxLayout bl = new BoxLayout(this,BoxLayout.X_AXIS); // grid bag?
-    //this.setLayout(bl);
-    this.setLayout(new GridLayout());
+    BoxLayout bl = new BoxLayout(this,BoxLayout.X_AXIS); // grid bag?
+    this.setLayout(bl);
+    //this.setLayout(new GridLayout());
   }
 
   private void initSearchPanel() {

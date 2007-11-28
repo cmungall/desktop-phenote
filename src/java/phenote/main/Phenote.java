@@ -65,7 +65,8 @@ public class Phenote {
 
   private static Logger LOG = Logger.getLogger(Phenote.class);
   private static boolean standalone = false; // default for servlet
-  private final static int WINDOW_WIDTH = 1220;
+  private final static int WINDOW_WIDTH = 1220; // 1100
+  private final static int WINDOW_HEIGHT = 800;  // 700
   private final static boolean USE_LOADING_SCREEN = true; //false;
 
   private FieldPanel mainFieldPanel;
@@ -434,7 +435,7 @@ public class Phenote {
       frame.getContentPane().add(tabbedGroups);
     }
     MenuManager.createMenuManager(frame);
-    frame.setPreferredSize(new Dimension(WINDOW_WIDTH,800)); //1100,700));
+    frame.setPreferredSize(new Dimension(WINDOW_WIDTH,WINDOW_HEIGHT));
     if (standalone) // if stand alone exit java on window close
       frame.addWindowListener(new WindowExit());
     standardToolbar = new StandardToolbar();
@@ -507,6 +508,7 @@ public class Phenote {
       termInfo = TermInfo2.inst();
       ugbc.weightx = 5;
       infoHistoryPanel.add(termInfo.getComponent(),ugbc);
+      infoHistoryPanel.setMinimumSize(new Dimension(100,100));
     }
     
     selectionHistory = SelectionHistory.inst();
@@ -527,6 +529,8 @@ public class Phenote {
       JSplitPane outerSplitPane =
         new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, innerSplitPane,ctp);
       mainPanel.add(outerSplitPane);
+      outerSplitPane.setDividerLocation((int)(0.33 * WINDOW_HEIGHT));
+      //outerSplitPane.setDividerLocation(0.3); // proportion doesnt work til draw?
     }
     else {
       mainPanel.add(innerSplitPane);

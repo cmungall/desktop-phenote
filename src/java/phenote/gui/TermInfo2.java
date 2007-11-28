@@ -376,7 +376,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 		// create the toolbar
 		termInfoToolbar = new TermInfoToolbar();
-		this.add(termInfoToolbar, BorderLayout.NORTH);
+		this.add(termInfoToolbar); //, BorderLayout.NORTH);
 
 		// create the stackedbox that the term info will live in
 		termInfoPanel = new StackedBox();
@@ -386,7 +386,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 		termInfoScroll.setBorder(null);
 
 		// put the scrollpane into the whole bucket
-		this.add(termInfoScroll, BorderLayout.CENTER);
+		this.add(termInfoScroll); //, BorderLayout.CENTER);
 
 		// The first part, which includes all the basic information,
 		// ontology, id, def
