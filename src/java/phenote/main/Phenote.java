@@ -517,6 +517,7 @@ public class Phenote {
       ugbc.gridx++;
       ugbc.weightx = 3;
       infoHistoryPanel.add(selectionHistory.getComponent(),ugbc); 
+      //odd but explicitly setting min causes divider to not get stuck on window resize
       infoHistoryPanel.setMinimumSize(new Dimension(100,100));
       JSplitPane innerSplitPane =
         new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,true,groupFieldPanel,infoHistoryPanel);
@@ -535,7 +536,7 @@ public class Phenote {
       JSplitPane outerSplitPane =
         new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, upperComponent,ctp);
       mainPanel.add(outerSplitPane);
-      outerSplitPane.setDividerLocation((int)(0.33 * WINDOW_HEIGHT));
+      outerSplitPane.setDividerLocation((int)(0.40 * WINDOW_HEIGHT));
       //outerSplitPane.setDividerLocation(0.3); // proportion doesnt work til draw?
     }
     else {

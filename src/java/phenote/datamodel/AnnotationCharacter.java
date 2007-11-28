@@ -264,7 +264,7 @@ public class AnnotationCharacter extends AbstractCharacter {
   }
 
   public List<CharFieldValue> getValueList(CharField cf) {
-    LOG.error("Lists are not yet implemented in OBO mapping");
+    LOG.error("Lists are not yet implemented in OBO mapping"); // ex?
     return null;
   }
   

@@ -77,6 +77,22 @@ public class Character extends AbstractCharacter implements CharacterI {
     return cfvList.get(0);
   }
 
+  /** returns true if value(s) for char field are equal - if list - true if
+      lists are identical */
+  public boolean fieldEquals(CharacterI c, CharField cf) {
+    List<CharFieldValue> list1 = getValueList(cf);
+    List<CharFieldValue> list2 = c.getValueList(cf);
+    if (list1 == null && list2 == null) return true;
+    if (list1 == null || list2 == null) return false;
+    if (list1.size() != list2.size()) return false;
+    // assumes lists are unique - and they should be
+    for (CharFieldValue cfv1 : list1) {
+      if (!list2.contains(cfv1)) // contains does .equals()
+        return false;
+    }
+    return true; // all char field values in list are equal
+  }
+
   // make part of CharacterI! return null if not set? empty list?
   public List<CharFieldValue> getValueList(CharField cf) {
     return charFieldToValue.get(cf);

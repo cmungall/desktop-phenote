@@ -102,6 +102,16 @@ public abstract class AbstractCharacter implements CharacterI {
     return true;
   }
 
+  /** by default check if single char field val from field is equal,
+      eventually should get hip to potential lists of values */
+  public boolean fieldEquals(CharacterI c, CharField cf) {
+    CharFieldValue v1 = getValue(cf);
+    CharFieldValue v2 = c.getValue(cf);
+    if (v1==null && v2==null) return true;
+    if (v1==null || v2==null) return false;
+    return v1.equals(v2);
+  }
+
   /** check if both are null in addition to .equals() */
   protected boolean eq(CharFieldValue c1, CharFieldValue c2) {
     if (c1 == null && c2 == null)

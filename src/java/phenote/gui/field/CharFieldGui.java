@@ -166,6 +166,7 @@ public abstract class CharFieldGui implements ListSelectionListener {
       return;
     }
     this.getUserInputGui().setEnabled(true);
+    // if all characters have same value then set to that value
     if (this.areCharactersEqualForCharField(characters, this.getCharField())) {
       this.setCharFieldValue(characters.get(0).getValue(this.getCharField()));
     } else {
@@ -173,19 +174,24 @@ public abstract class CharFieldGui implements ListSelectionListener {
     }
   }
   
+  /** return true if all values for char field in all characters are the same 
+      value(equal) - used for multi select */
   protected boolean areCharactersEqualForCharField(List<CharacterI> characters, CharField charField) {
     if (characters.isEmpty()) return true;
-    final CharFieldValue firstValue = characters.get(0).getValue(this.getCharField());
+    // why final?
+    //final CharFieldValue firstValue = characters.get(0).getValue(this.getCharField());
+    final CharacterI firstChar = characters.get(0);
     for (CharacterI character : characters) {
-      final CharFieldValue otherValue = character.getValue(this.getCharField());
-      if (otherValue == null) {
-        if (firstValue == null) {
-          continue;
-        } else {
-          return false;
-        }
-      }
-      if (!otherValue.equals(firstValue)) {
+      //final CharFieldValue otherValue = character.getValue(this.getCharField());
+//       if (otherValue == null) {
+//         if (firstValue == null) {
+//           continue;
+//         } else {
+//           return false;
+//         }
+//       }
+      //if (!otherValue.equals(firstValue)) {
+      if (!character.fieldEquals(firstChar,getCharField())) {
         return false;
       }
     }
