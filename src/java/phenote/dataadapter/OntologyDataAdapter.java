@@ -50,7 +50,7 @@ public class OntologyDataAdapter {
 
   private static OntologyDataAdapter singleton;
   //private Config config; cant cache may change
-  private CharFieldManager ontologyManager = CharFieldManager.inst();
+  private CharFieldManager charFieldManager = CharFieldManager.inst();
   private boolean initializingOntologies = false;
   private Map<String,Ontology> fileToOntologyCache = new HashMap<String,Ontology>();
   private OBOMetaData adapterMetaData;
@@ -107,11 +107,16 @@ public class OntologyDataAdapter {
 
   private void initOntolsOneOboSession() {
     try {
+      LOG.debug("loading obo files");
       OBOSession os = loadAllOboFilesIntoOneOboSession();
+      LOG.debug("initializing char fields");
       initCharFields();
-      ontologyManager.setOboSession(os);
+      LOG.debug("setting char field managers obo session");
+      charFieldManager.setOboSession(os);
       // map namespaces to ontologies? 2 methods?
+      LOG.debug("mapping namespaces to ontologies");
       mapNamespacesToOntologies(os);
+      LOG.debug("ontologies initialiazed!");
       // load ontologies from namespaces
     }
     catch (OntologyException e)  { // parse ex - not file not found ex
@@ -160,7 +165,7 @@ public class OntologyDataAdapter {
   private void initCharFields() {
     for (FieldConfig fieldConfig : cfg().getEnbldFieldCfgs()) {
       CharField cf = fieldConfig.getCharField(); // creates char field (if not there)
-      ontologyManager.addField(cf);
+      charFieldManager.addField(cf);
     }
   }
 
@@ -612,7 +617,7 @@ public class OntologyDataAdapter {
         cf.setName(fieldConfig.getLabel());
       }
       // i think this order needs to be same as config order
-      ontologyManager.addField(cf);
+      charFieldManager.addField(cf);
     }
 
 
@@ -688,7 +693,7 @@ public class OntologyDataAdapter {
 
 ///** Checks for new obo files */
 //private void synchOntologies() {
-//for (CharField cf : ontologyManager.getCharFieldList()) {
+//for (CharField cf : charFieldManager.getCharFieldList()) {
 //for (Ontology o : cf.getOntologyList()) {
 //if (o.getSource() == null) continue;
 //String file = o.getSource();

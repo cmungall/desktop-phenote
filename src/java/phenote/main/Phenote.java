@@ -33,6 +33,8 @@ import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import org.oboedit.gui.Preferences;
+
 import phenote.charactertemplate.CharacterTemplateController;
 import phenote.config.Config;
 import phenote.config.ConfigException;
@@ -92,59 +94,6 @@ public class Phenote {
     standalone = true; // i think this is ok
  
     init(args);
-
-
-//     phenote = getPhenote();
-//     boolean enableSplashScreen = !phenote.commandLine.writeIsSpecified();
-//     //System.out.println("splash "+enableSplashScreen);
-//     phenote.splashScreenInit(enableSplashScreen); //initialize the splash screen;
-
-    //phenote.doCommandLine(args); // does config
-
-    //new phenote.gui.ConfigGui(); // testing out
-    
- /*   set up the overall task of loading the software
-    there will be several events:
-    1.  loading configuration - display config name
-    2.  checking for ontology updates - per ontology display name
-    3.	updating ontologies (name) - downloading... display name
-    4.	loading into datamodel - display name - this is the bulk of the time
-  */    
-
-//     phenote.splashScreen.setProgress("Configuring...", 10);
-//     phenote.loadingScreen.setMessageText("Loading configuration: "+Config.inst().getConfigName());
-//     phenote.loadingScreen.setProgress(5);
-//     phenote.splashScreen.setProgress("Initializing Ontologies...", 20);
-//     phenote.loadingScreen.setMessageText("Initializing Ontologies");
-//     phenote.loadingScreen.setProgress(10);
-//    phenote.loadingScreen.setProgress(20);
-//    boolean done = false;
-    
-//    phenote.initOntologies();
-//     phenote.splashScreen.setProgress("Ontologies Initialized", 70);
-//     phenote.loadingScreen.setMessageText("Ontologies Initialized");
-//    phenote.loadingScreen.setProgress(70);
-//    phenote.loadFromCommandLine();  // aft ontols, reads from cmd line if specified
-//     phenote.splashScreen.setProgress("Phenote Loaded", 100);
-//     phenote.loadingScreen.setMessageText("Phenote Loaded");
-//     phenote.loadingScreen.setProgress(100);
-
-//     if (phenote.commandLine.writeIsSpecified()) {
-//       phenote.writeFromCommandLine();
-//       // it hangs after writing - not sure why
-//       System.out.println("Done writing, exiting phenote");
-//       System.exit(0);
-//     }
-//     else	// init gui if not writing (& reading) from cmd line
-//     {
-//     	phenote.initGui();
-//     	phenote.splashScreenDestruct();
-// //    	phenote.loadingScreenDestruct();
-//     }
-
-//     if (Config.inst().dataInputServletIsEnabled()) 
-//       new phenote.servlet.DataInputServer();
-
   }	
 
   /** private constructor -> singleton */
@@ -152,6 +101,7 @@ public class Phenote {
 
   private static void init(String[] args) {
     initBackend(args);
+    LOG.debug("Backend initialized, initializing GUI");
     phenote.initGui();
     phenote.splashScreenDestruct(); // initBackend startsup splash
   }
@@ -163,6 +113,8 @@ public class Phenote {
     phenote.splashScreenInit();
     phenote.doCommandLineAndConfig(args); // does config
     phenote.initOntologies();
+    // phenote sometimes hangs right around here!???!
+    LOG.debug("Ontologies initialized, checking command line for read & write");
     phenote.loadFromCommandLine(); // if load/file specified from cmd line
     phenote.setProgress("Phenote Loaded", 100);
     phenote.writeFromCommandLine(); // if cmd line, writes & exits
@@ -235,9 +187,11 @@ public class Phenote {
     setProgress("Initializing Ontologies...", 20);
     setProgressMsg("Initializing Ontologies");
     setProgress(10);
+    LOG.debug("Initializing ontologies");
     //OntologyDataAdapter oda = new OntologyDataAdapter(); // singleton?
     // loads up OntologyManager - non intuitive?
-    OntologyDataAdapter.initialize();
+    OntologyDataAdapter.initialize(); // this sometimes hangs!!!
+    LOG.debug("Ontologies initialized");
     // if (config.useShrimpDagViewer())
     // ShrimpDag.inst().initOntologies();
     setProgress("Ontologies Initialized", 70);
@@ -275,6 +229,9 @@ public class Phenote {
   public void initGui() {
     SwingUtilities.invokeLater(new Runnable() {
       public void run() {
+        LOG.debug("swing thread for gui started, making main window "+new java.util.Date());
+//         try { Thread.sleep(20000); } catch(Exception e){LOG.debug("interrupt");}
+//         LOG.debug("done sleeping - making main window "+new java.util.Date());
         makeMainWindow(); // with tabbed groups
         createGroupWindows(); // template window
       }
@@ -351,6 +308,10 @@ public class Phenote {
   	}	catch (FileNotFoundException ex) {  }
  	
 //    ImageIcon myImage = new ImageIcon(logoFile);
+    // wacky but oboedit preference 1st call causing setting font which triggers gui stuff
+    // which can deadlock loadingScreen, setOboSession triggers this when checks for
+    // if reasoning, so do here to subdue later call
+    Preferences.getPreferences();
     splashScreen = new SplashScreen(myImage); //,enable);
     if (USE_LOADING_SCREEN) {
       loadingScreen = new LoadingScreen();
@@ -421,7 +382,6 @@ public class Phenote {
   public Frame getFrame() { return frame; }
 
   private void makeMainWindow() {
-    // this may be changed to applet...
     frame = new JFrame("Phenote "+PhenoteVersion.versionString()); 
     if (getNumGroupTabs() < 2) {
       Group g = Config.inst().getDefaultGroup();
@@ -430,7 +390,7 @@ public class Phenote {
     else {
       JTabbedPane tabbedGroups = new JTabbedPane();
       for (Group g : getGroupTabs()) {
-        JPanel p = makeGroupPanel(g); //.getName());
+        JPanel p = makeGroupPanel(g);
         tabbedGroups.add(g.getTitle(),p);
       }
       frame.getContentPane().add(tabbedGroups);
