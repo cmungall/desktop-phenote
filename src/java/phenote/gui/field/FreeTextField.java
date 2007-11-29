@@ -34,7 +34,7 @@ class FreeTextField extends CharFieldGui {
   //private CharFieldGui charFieldGui;
   private boolean guiTextHasChanged = false;
   private boolean selectionChangedBeforeLosingFocus = false;
-  private List<CharacterI> editedCharacters;
+  private List<CharacterI> editedCharacters = new ArrayList<CharacterI>();
   //private boolean updateGuiOnly = false;
 
   //private void initTextField(String label) {
@@ -81,7 +81,7 @@ class FreeTextField extends CharFieldGui {
 
   protected void setValueFromChar(CharacterI chr) {
     if (chr == null) {
-      log().error("ERROR: attempt to set fields from null character"); // ex?
+      log().error("Attempt to set fields from null character"); // ex?
       return;
     }
     //String v = charField.getCharFieldEnum().getValue(chr).getName();
@@ -119,7 +119,6 @@ class FreeTextField extends CharFieldGui {
   @Override
   protected void setValueFromChars(List<CharacterI> characters) {
     if (this.selectionChangedBeforeLosingFocus) {
-      log().debug("Updating with old selection: " + this.editedCharacters);
       final boolean previousUpdateValue = this.updateGuiOnly();
       this.setUpdateGuiOnly(false);
       this.updateModel(this.editedCharacters);
