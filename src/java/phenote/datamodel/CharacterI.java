@@ -30,6 +30,8 @@ public interface CharacterI {
   public CharFieldValue setValue(CharField cf, String valueString) throws CharFieldException;
   public CharField getCharFieldForName(String fieldName) throws CharFieldException;
   public CharFieldValue getValue(CharField cf);
+  /** im wondering if a better way is to make CFVs recursive, so a CFV can be a list of
+      CFV's - that might be easier - not sure */
   public List<CharFieldValue> getValueList(CharField cf);
   public boolean fieldEquals(CharacterI c, CharField cf);
   /** used in particular for lists of values */

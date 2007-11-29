@@ -48,7 +48,8 @@ import ca.odell.glazedlists.swing.EventSelectionModel;
 /** fields can either be text fields for free text or combo boxes if have 
     ontology to browse - CharFieldGui does either - with get/setText - hides the
     details of the gui - just a field that gives text 
-    should there be subclasses for free text, term, & relations? hmmmm */
+    should there be subclasses for free text, term, & relations? hmmmm 
+    ListSelectionListener listening to events from table selection (make inner class?) */
 public abstract class CharFieldGui implements ListSelectionListener {
   private CharField charField;
   private String label;
@@ -151,6 +152,8 @@ public abstract class CharFieldGui implements ListSelectionListener {
     this.setValueFromChars(this.selectionModel.getSelected());
   }
   
+  /** part of ListSelectionListener interface. Receives ListSelectionEvents
+      from selectionModel. Table row selection causes this event to fly */
   public void valueChanged(ListSelectionEvent e) {
     this.updateGuiOnly = true;
     this.setValueFromChars(this.getSelectedChars());
@@ -169,6 +172,7 @@ public abstract class CharFieldGui implements ListSelectionListener {
     // if all characters have same value then set to that value
     if (this.areCharactersEqualForCharField(characters, this.getCharField())) {
       this.setCharFieldValue(characters.get(0).getValue(this.getCharField()));
+      updateListGui();
     } else {
       this.setMultipleValuesConditions();
     }
@@ -191,6 +195,7 @@ public abstract class CharFieldGui implements ListSelectionListener {
 //         }
 //       }
       //if (!otherValue.equals(firstValue)) {
+      // fieldEquals handles lists as well as single values
       if (!character.fieldEquals(firstChar,getCharField())) {
         return false;
       }
@@ -305,6 +310,7 @@ public abstract class CharFieldGui implements ListSelectionListener {
   /** Main method for subclasses to edit model with current value */
   protected abstract void updateModel();
   
+  /** get selected chars from selection model */
   protected List<CharacterI> getSelectedChars() {
     if (this.selectionModel == null) {
       return Collections.emptyList();
@@ -491,6 +497,163 @@ public abstract class CharFieldGui implements ListSelectionListener {
     return label;
   }
 
+
+  protected abstract void setText(String text);
+  protected abstract String getText();
+ 
+
+  /** no-op overridden by TermCompList */
+  protected void setOboClass(OBOClass term) {}
+
+  /** for auto combos (ontol) for relationships (post comp rel)
+   no-op overriddedn by RelationCompList */
+  void setRel(OBOProperty rel) {}
+
+  CharFieldEnum getCharFieldEnum() { return charField.getCharFieldEnum(); }
+  protected CharField getCharField() { return charField; }
+
+  public static class CharFieldGuiEx extends Exception {
+    protected CharFieldGuiEx(String m) { super(m); }
+  }
+
+  /** should define a CharFieldGuiEx! */
+  OBOClass getCurrentOboClass() throws CharFieldGuiEx {
+    //if (!isCompList() || isRelationshipList)
+    //if (!isTermCompList())
+    // overridden by term comp list
+    throw new CharFieldGuiEx("Field has no OBO Class");
+      //return null; 
+    //return getTermComp().getCurrentOboClass(); // throws Ex
+  }
+
+  /** overridden by RelationCompList */
+  OBOProperty getCurrentRelation() throws CharFieldGuiEx {
+    //if (!isCompList() || !isRelationshipList())
+    throw new CharFieldGuiEx("Field has no Relation");
+    //return getRelComp().getCurrentRelation(); // throws Ex
+  }
+
+  protected boolean isTermCompList() {
+    return false; // overridden by term comp list
+    //return isCompList() && !isRelationshipList() && getTermComp()!=null;
+    // && getTermComp != null?
+  }
+
+  /** for post comp gui to set ontol chooser - overridden by term comp */
+  void setOntologyChooserFromTerm(OBOClass term) {}
+    
+  protected boolean hasOntologyChooser() { return false; }
+  protected JComboBox getOntologyChooser() { return null; }
+
+  /** Overridden by TermCompList */
+  protected boolean hasCompButton() { return false; }
+  /** Overridden by TermCompList */
+  protected JButton getCompButton() { return null; }
+
+  /** should get this from config... stub for now */
+  protected boolean hasListGui() {
+    //return false;
+    //return label.equals("Non Locus Alleles"); // testing
+    return charField.isList();
+  }
+  /** JList? initialize if configged
+   list gui is the list that is displayed if the field is multi valued - takes
+   more than one value - NOT the drop down list */
+  protected JComponent getListGui() {
+    if (listScroll == null) {
+      listGui = new JList();
+      listGui.setModel(getValueListModel());
+      listGui.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+      listScroll = new JScrollPane(listGui);
+      listScroll.setMinimumSize(new Dimension(90,40)); // w,h
+      listScroll.setPreferredSize(new Dimension(130,60));
+    }
+    return listScroll;
+  }
+
+  private ValueListModel getValueListModel() {
+    if (valueListModel == null) 
+      valueListModel = new ValueListModel();
+    return valueListModel;
+  }
+
+  JButton getListDelButton() {
+    JButton b = new JButton("DEL");
+    b.addActionListener(new DeleteListActionListener());
+    return b;
+  }
+
+  private class DeleteListActionListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      if (listGui.isSelectionEmpty()) return;
+      int i = listGui.getSelectedIndex();
+      valueListModel.delete(i);
+    }
+  }
+
+  private void updateListGui() {
+    //log().debug("update list gui called has list"+hasListGui());
+    if (!hasListGui()) return;
+    List<CharacterI> l = getSelectedChars();
+    //log().debug("update list gui called sel list size"+l.size());
+    if (l==null || l.size()==0) {
+      valueListModel.clear();
+      return;
+    }
+    else if (l.size() > 1) {
+      return; // set to multiple values, todo: check if lists are the same
+    }
+    else {
+      CharacterI c = l.get(0);
+      List<CharFieldValue> cfvs = c.getValueList(getCharField());
+      getValueListModel().setList(cfvs);
+    }
+  }
+  
+  private class ValueListModel extends AbstractListModel {
+    private List<CharFieldValue> charValueList = new ArrayList<CharFieldValue>();
+    private void setList(List<CharFieldValue> l) { 
+      if (l == null) clear();
+      else charValueList = l;
+      fireContentsChanged(this,0,getSize());
+    }
+    public Object getElementAt(int index) {
+      if (charValueList==null) return null;
+      return charValueList.get(index);
+    }
+    public int getSize() {
+      if (charValueList==null) return 0;
+      return charValueList.size();
+    }
+    private void clear() {
+      if (charValueList==null) return;
+      charValueList.clear();
+      fireContentsChanged(this,0,getSize());
+    }
+    private void delete(int i) {
+      //FieldListItemDeleteTrans t = new FieldListItemDeleteTrans
+      if (i<0 || i>getSize()) return;
+      List<CharacterI> sel = getSelectedChars();
+      if (sel==null || sel.isEmpty()) return;
+      if (sel.size() > 1) log().error("Cant delete list items in multi select");
+      CharacterI chr = sel.get(0);
+      CharFieldValue old = charValueList.get(i);
+      getEditManager().deleteFromValList(this,chr,charField,old);
+    }
+  }
+  
+  
+  /** no op - override in term completion gui */
+  public void setMinCompChars(int minCompChars) {}
+  public int getMinCompChars() { return 0; }
+
+  private static Logger log() {
+    return Logger.getLogger(CharFieldGui.class);
+  }
+}
+
+
+// GARBAGE
   //JLabel getLabelGui() { return new JLabel
 
 //  private void initCombo() { //, Container parent) {
@@ -546,7 +709,6 @@ public abstract class CharFieldGui implements ListSelectionListener {
 //   }
 
 
-
 //  private FreeTextField getFreeTextField() { return freeTextField; }
 
   // ?? was this moved somewhere else?
@@ -570,247 +732,15 @@ public abstract class CharFieldGui implements ListSelectionListener {
 //       }
 //     }
 //   }
-
-
-  protected abstract void setText(String text);// {
+// {
     // set/getText interface to combo & text field?
     //if (isCompList()) getCompList().setText(text);
     //else getFreeTextField().setText(text);}
-  protected abstract String getText();
-    
- 
-
-  protected void setOboClass(OBOClass term) {
-    // no-op overridden by TermCompList
+    // set obo class
     //if (!isCompList() || isRelationshipList()) return; // throw ex?? 
     //getTermComp().setOboClass(term);
     //else textField.setText(term.getName()); // shouldnt happen
-  }
-
-  /** for auto combos (ontol) for relationships (post comp rel)
-   overriddedn by RelationCompList */
-  void setRel(OBOProperty rel) {}
 //     if (!isCompList() || !isRelationshipList()) return; // ex???
 //     getRelComp().setRel(rel);
 //     //else textField.setText(rel.getName()); // shouldnt actually happen
-//   }
-
-  CharFieldEnum getCharFieldEnum() { return charField.getCharFieldEnum(); }
-  protected CharField getCharField() { return charField; }
-
-  public static class CharFieldGuiEx extends Exception {
-    protected CharFieldGuiEx(String m) { super(m); }
-  }
-
-  /** should define a CharFieldGuiEx! */
-  OBOClass getCurrentOboClass() throws CharFieldGuiEx {
-    //if (!isCompList() || isRelationshipList)
-    //if (!isTermCompList())
-    // overridden by term comp list
-    throw new CharFieldGuiEx("Field has no OBO Class");
-      //return null; 
-    //return getTermComp().getCurrentOboClass(); // throws Ex
-  }
-
-  /** overridden by RelationCompList */
-  OBOProperty getCurrentRelation() throws CharFieldGuiEx {
-    //if (!isCompList() || !isRelationshipList())
-    throw new CharFieldGuiEx("Field has no Relation");
-    //return getRelComp().getCurrentRelation(); // throws Ex
-  }
-
-  protected boolean isTermCompList() {
-    return false; // overridden by term comp list
-    //return isCompList() && !isRelationshipList() && getTermComp()!=null;
-    // && getTermComp != null?
-  }
-
-  /** for post comp gui to set ontol chooser */
-  void setOntologyChooserFromTerm(OBOClass term) {
-    //if (!isTermCompList()) return; // shouldnt happen - ex?
-    // overridden by term comp
-    //getTermComp().setOntologyChooserFromTerm(term);
-  }
-    
-  protected boolean hasOntologyChooser() { return false; }
-  protected JComboBox getOntologyChooser() { return null; }
-
-  /** Overridden by TermCompList */
-  protected boolean hasCompButton() { return false; }
-  /** Overridden by TermCompList */
-  protected JButton getCompButton() { return null; }
-
-  /** should get this from config... stub for now */
-  protected boolean hasListGui() {
-    //return false;
-    //return label.equals("Non Locus Alleles"); // testing
-    return charField.isList();
-  }
-  /** JList? initialize if configged */
-  protected JComponent getListGui() {
-    //return null;
-    if (listScroll == null) {
-      listGui = new JList();
-      valueListModel = new ValueListModel();
-      listGui.setModel(valueListModel);
-      listGui.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-      //l.setMinimumSize(new Dimension(400,400));
-      listScroll = new JScrollPane(listGui);
-      listScroll.setMinimumSize(new Dimension(90,40)); // w,h
-      listScroll.setPreferredSize(new Dimension(130,60));
-    }
-    return listScroll;
-  }
-
-  JButton getListDelButton() {
-    JButton b = new JButton("DEL");
-    b.addActionListener(new DeleteListActionListener());
-    return b;
-  }
-
-  private class DeleteListActionListener implements ActionListener {
-    public void actionPerformed(ActionEvent e) {
-      if (listGui.isSelectionEmpty()) return;
-      int i = listGui.getSelectedIndex();
-      valueListModel.delete(i);
-    }
-  }
-
-  private void updateListGui() {
-    //log().debug("update list gui called has list"+hasListGui());
-    if (!hasListGui()) return;
-    List<CharacterI> l = getSelectedChars();
-    //log().debug("update list gui called sel list size"+l.size());
-    if (l==null || l.size()==0) {
-      valueListModel.clear();
-    }
-    else if (l.size() > 1) {
-      return; // set to multiple values, todo: check if lists are the same
-    }
-    else {
-      CharacterI c = l.get(0);
-      List<CharFieldValue> cfvs = c.getValueList(getCharField());
-      valueListModel.setList(cfvs);
-    }
-  }
-  
-  private class ValueListModel extends AbstractListModel {
-    private List<CharFieldValue> charValueList = new ArrayList<CharFieldValue>();
-    private void setList(List<CharFieldValue> l) { 
-      if (l == null) clear();
-      else charValueList = l;
-      fireContentsChanged(this,0,getSize());
-    }
-    public Object getElementAt(int index) {
-      if (charValueList==null) return null;
-      return charValueList.get(index);
-    }
-    public int getSize() {
-      if (charValueList==null) return 0;
-      return charValueList.size();
-    }
-    private void clear() {
-      if (charValueList==null) return;
-      charValueList.clear();
-      fireContentsChanged(this,0,getSize());
-    }
-    private void delete(int i) {
-      //FieldListItemDeleteTrans t = new FieldListItemDeleteTrans
-      if (i<0 || i>getSize()) return;
-      List<CharacterI> sel = getSelectedChars();
-      if (sel==null || sel.isEmpty()) return;
-      if (sel.size() > 1) log().error("Cant delete list items in multi select");
-      CharacterI chr = sel.get(0);
-      CharFieldValue old = charValueList.get(i);
-      getEditManager().deleteFromValList(this,chr,charField,old);
-    }
-  }
-  
-  
-  /** no op - override in term completion gui */
-  public void setMinCompChars(int minCompChars) {}
-  public int getMinCompChars() { return 0; }
-
-  private static Logger log() {
-    return Logger.getLogger(CharFieldGui.class);
-  }
-}
-
-//  void addOntologyChooser(JComboBox oc) { fieldPanel.addOntologyChooser(oc); }
-
-//   private void initOntologyChooser(CharField charField) {
-//     ontologyChooserCombo = new JComboBox();
-//     // add listener....
-//     for (Ontology o : charField.getOntologyList()) {
-//       ontologyChooserCombo.addItem(o.getName());
-//     }
-//     ontologyChooserCombo.addActionListener(new OntologyChooserListener());
-//     fieldPanel.addOntologyChooser(ontologyChooserCombo);
-//   }
-
-//   private void initTextField(String label) {
-//     //isCompList = false;
-//     fieldPanel.addLabel(label);
-//     freeTextField = new FreeTextField(this);
-// //     textField = new JTextField(25);
-// //     textField.setEditable(true);
-// //     textField.getDocument().addDocumentListener(new TextFieldDocumentListener());
-// //     textField.addKeyListener(new TextKeyListener());
-//     fieldPanel.addFieldGui(freeTextField.getComponent());
-//   }
-  // private static CharFieldGui createFreeTextField() {} ??
-
-//   private static CharFieldGui createCompList(CharField charField, SearchParamsI sp) {
-//     // enableListeners - if false then ACB wont directly edit model (post comp)
-//     //compListSearcher = new CompListSearcher(charField.getOntologyList(),sp);
-//       //new CompListSearcher(charField.getFirstOntology(),fieldPanel.getSearchParams());
-//     if (charField.isRelationshipList()) {
-//       return new RelationCompList(sp,enableListeners,charField);
-//     }
-//     else {
-//       return new TermCompList(sp,enableListeners);
-//     }
-//   }
-      //return createCompList(charField,sp);
-//       if (charField.isRelationship()) {
-//         return new RelationCompList(searcher,editModel,charField);
-//       }
-//       else {
-//         return new TermCompList(searcher,editModel,charField);
-//       }
-  //private AutoComboBox comboBox;
-  //private AbstractAutoCompList comboBox; // ???
-  //private RelationCompList relCompList;
-  //private TermCompList termCompList;
-  //private CompListSearcher compListSearcher;
-  //private JTextField textField;
-  //private FreeTextField freeTextField;
-  //private boolean isCompList = false;
-//   protected CharFieldGui(CharField charField,String label) {
-//     init(charField,label);
-//   }
-
-//   protected CharFieldGui(CharField charField,boolean enableListeners) {
-//     //this.enableListeners = enableListeners;
-//     enableListeners(enableListeners);
-//     init(charField);
-//   }
-    
-
-//   CharFieldGui(CharField charField, FieldPanel tp) {/*Container parent,*/
-//     init(charField,tp);
-//   }
-
-//   /** @param enableListeners - a catchall flag for disabling editing model, listening
-//       to model edits, & litening to selection - postcompGui handles these and sets
-//       this false, in main window this is true - rename? more flags? subclass?
-//       postCompGui mode?
-//       @param addCompButton if false override configuration and dont show
-//       post comp button */
-//   CharFieldGui(CharField cf,FieldPanel tp,String label,boolean enableListeners,
-//                boolean addCompButton) {
-//     this.label = label;
-//     this.enableListeners = enableListeners;
-//     this.addCompButton = addCompButton; // post comp button
-//     init(cf,tp);
 //   }
