@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.InputVerifier;
@@ -13,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
 
 import org.apache.log4j.Logger;
 
@@ -31,6 +33,8 @@ class FreeTextField extends CharFieldGui {
   private JTextField textField;
   //private CharFieldGui charFieldGui;
   private boolean guiTextHasChanged = false;
+  private boolean selectionChangedBeforeLosingFocus = false;
+  private List<CharacterI> editedCharacters;
   //private boolean updateGuiOnly = false;
 
   //private void initTextField(String label) {
@@ -99,10 +103,30 @@ class FreeTextField extends CharFieldGui {
     if (!this.shouldResetGuiForMultipleValues()) {
       this.updateModel();
     }
+    this.selectionChangedBeforeLosingFocus = false;
   }
   
   protected boolean hasFocus() {
     return this.getTextField().hasFocus();
+  }
+  
+  @Override
+  public void valueChanged(ListSelectionEvent e) {
+    this.selectionChangedBeforeLosingFocus = true;
+    super.valueChanged(e);
+  }
+  
+  @Override
+  protected void setValueFromChars(List<CharacterI> characters) {
+    if (this.selectionChangedBeforeLosingFocus) {
+      log().debug("Updating with old selection: " + this.editedCharacters);
+      final boolean previousUpdateValue = this.updateGuiOnly();
+      this.setUpdateGuiOnly(false);
+      this.updateModel(this.editedCharacters);
+      this.setUpdateGuiOnly(previousUpdateValue);
+    }
+    this.editedCharacters = new ArrayList<CharacterI>(characters);
+    super.setValueFromChars(characters);
   }
 
   // subclass?
