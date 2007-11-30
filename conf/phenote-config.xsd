@@ -17,6 +17,7 @@
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:group"/>
         <xs:element ref="x:data-input-servlet"/>
         <xs:element ref="x:character-mode"/>
+        <xs:element ref="x:ontologyLoading"/>
         <xs:element ref="x:field-panel-tabs"/>
       </xs:sequence>
       <xs:attribute name="version" use="required" type="xs:string"/>
@@ -68,6 +69,11 @@
   <xs:element name="field-panel-tabs">
     <xs:complexType>
       <xs:attribute name="enable" use="required" type="xs:boolean"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ontologyLoading">
+    <xs:complexType>
+      <xs:attribute name="showLoadingScreen" use="required" type="xs:boolean"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="auto-update-ontologies">
@@ -217,7 +223,7 @@
       <xs:attribute name="destination_field" use="required" type="xs:string"/>
       <xs:attribute name="show" type="xs:IDREFS">
         <xs:annotation>
-          <xs:documentation>what components to show for group, ie TermInfo,Table,Editor</xs:documentation>
+          <xs:documentation>what components to show for group, ie "TermInfo Table Editor" space delim</xs:documentation>
         </xs:annotation>
       </xs:attribute>
       <xs:attribute name="fieldsPerPanel" type="xs:int">

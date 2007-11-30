@@ -22,6 +22,7 @@ start =
     group*,
     data-input-servlet,
     character-mode,
+    ontologyLoading,
     field-panel-tabs
   }
 
@@ -71,6 +72,12 @@ data-input-servlet = element data-input-servlet { attribute enable { xsd:boolean
 term-history = element term-history { attribute enable { xsd:boolean } }
 
 field-panel-tabs = element field-panel-tabs { attribute enable { xsd:boolean } }
+
+## auto-update-ontologies, update-timer should go in here as well... 
+## loading screen sometimes can cause threadlock hang, disable it here              
+ontologyLoading = element ontologyLoading {
+  attribute showLoadingScreen { xsd:boolean }
+}
 
 auto-update-ontologies = element auto-update-ontologies { attribute enable { xsd:boolean } }
 

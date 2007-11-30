@@ -70,7 +70,7 @@ public class Phenote {
   private static boolean standalone = false; // default for servlet
   private final static int WINDOW_WIDTH = 1220; // 1100
   private final static int WINDOW_HEIGHT = 800;  // 700
-  private final static boolean USE_LOADING_SCREEN = true; //false;
+  //private final static boolean USE_LOADING_SCREEN = true; -> Config
 
   private FieldPanel mainFieldPanel;
   private static Phenote phenote;
@@ -110,8 +110,11 @@ public class Phenote {
     initLogger();
     initLookAndFeel();
     phenote = getPhenote();
-    phenote.splashScreenInit();
+    //phenote.splashScreenInit();
     phenote.doCommandLineAndConfig(args); // does config
+    // have to init splash screen after config as config dictates whether to
+    // show splash screen (loading screen can threadlock)
+    phenote.splashScreenInit();
     phenote.initOntologies();
     // phenote sometimes hangs right around here!???!
     LOG.debug("Ontologies initialized, checking command line for read & write");
@@ -312,8 +315,9 @@ public class Phenote {
     // which can deadlock loadingScreen, setOboSession triggers this when checks for
     // if reasoning, so do here to subdue later call
     Preferences.getPreferences();
-    splashScreen = new SplashScreen(myImage); //,enable);
-    if (USE_LOADING_SCREEN) {
+    if (Config.inst().showLoadingScreen()) {
+      // does splash screen belong in here?
+      splashScreen = new SplashScreen(myImage); //,enable);
       loadingScreen = new LoadingScreen();
     
     //if (!enable) return;
@@ -322,6 +326,9 @@ public class Phenote {
 //    splashScreen.setScreenVisible(true);
       loadingScreen.setScreenVisible(true);
       loadingScreen.setLocationRelativeTo(null); // centers panel on screen
+    }
+    else {
+      LOG.info("Loading screen disabled by config, not showing");
     }
 //    splashScreen.setProgress("Phenote version "+PhenoteVersion.versionString(), 0);
   }
@@ -353,6 +360,7 @@ public class Phenote {
   /** refactor? separate into doCmdLine and doConfig - cmd line should just set
       config file name - doConfig should actually read it */
   private void doCommandLineAndConfig(String[] args) {
+    LOG.info("Reading config file(& cmd line)");
     try { commandLine.setArgs(args); } // sets config if specified
     catch (Exception e) { // no log yet - sys.out
       System.out.println("Command line read failed: "+e); }//e.printStackTrace();

@@ -35,6 +35,7 @@ import phenote.config.xml.FieldPanelTabsDocument.FieldPanelTabs;
 import phenote.config.xml.GroupDocument.Group;
 import phenote.config.xml.LogDocument.Log;
 import phenote.config.xml.MasterToLocalConfigDocument.MasterToLocalConfig;
+import phenote.config.xml.OntologyLoadingDocument.OntologyLoading;
 import phenote.config.xml.PhenoteConfigurationDocument.PhenoteConfiguration;
 import phenote.config.xml.ExternaldbDocument.Externaldb;
 import phenote.config.xml.TermHistoryDocument.TermHistory;
@@ -1208,6 +1209,17 @@ public class Config {
   public void setConfigAuthor(String author) {
   	phenoConfigBean.setAuthor(author);
   	return;
+  }
+
+  /** Loading screen is the elephant splash screen that displays when phenote
+      is initializing ontologies & such at startup. The current LoadingScreen
+      can go into threadlock and seize up phenote so need ability to disable it
+      defaults to true (false?) */
+  public boolean showLoadingScreen() {
+    OntologyLoading ol = phenoConfigBean.getOntologyLoading();
+    if (ol == null) return true; 
+    if (ol.xgetShowLoadingScreen() == null) return true;
+    return ol.getShowLoadingScreen(); 
   }
 
   
