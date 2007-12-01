@@ -128,6 +128,7 @@ public class CharFieldValue implements Cloneable {
     return ""; // null?
   }
 
+  /** this is used for danglers on loading data */	
   public void setName(String name) {
     if (isTerm())
       oboClassValue.setName(name);

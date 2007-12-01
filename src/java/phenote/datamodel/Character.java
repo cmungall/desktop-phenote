@@ -30,13 +30,16 @@ public class Character extends AbstractCharacter implements CharacterI {
   /** for generic fields its just a map from char field to char field value */
   public void setValue(CharField cf, CharFieldValue cfv) {
     cfv.setCharacter(this);
-    List<CharFieldValue> newItem = new ArrayList<CharFieldValue>();
-    newItem.add(cfv);
-    List<CharFieldValue> list = charFieldToValue.get(cf);
-    if (!cf.isList() || !hasValue(cf))
+    // not a list or empty list or list with empty value
+    if (!cf.isList() || !hasValue(cf)) {
+      List<CharFieldValue> newItem = new ArrayList<CharFieldValue>();
+      newItem.add(cfv);
       charFieldToValue.put(cf,newItem);
-    else
+    }
+    else {
+      List<CharFieldValue> list = charFieldToValue.get(cf);
       list.add(cfv);
+    }
     //charFieldToValue.put(cf,cfv);
     //System.out.println("Char setVal "+cf+" val "+cfv);
     // setOboEditModel(oboEditAnnotation,cf,cfv);
@@ -71,8 +74,12 @@ public class Character extends AbstractCharacter implements CharacterI {
     // if cfv is null should we construct a CFV w null/"", should field be init to ""?
     // undo needs to be able to undo back to null/""/init somehow
     if (cfvList == null || cfvList.isEmpty()) {
-      //cfv =
-      return CharFieldValue.emptyValue(this,cf); // set in hash-list?
+      CharFieldValue empty = CharFieldValue.emptyValue(this,cf);
+      List<CharFieldValue> list = new ArrayList<CharFieldValue>();
+      list.add(empty);
+      charFieldToValue.put(cf,list); // ??? prevents making new cfv every time
+      return empty;
+      //return CharFieldValue.emptyValue(this,cf); // set in hash-list?
     }
     return cfvList.get(0);
   }
@@ -127,12 +134,13 @@ public class Character extends AbstractCharacter implements CharacterI {
     return getTerm(cf);
   }
 
-  // should this be isNull?
+  /** return false if getValue is null or isEmpty */
   public boolean hasValue(CharField cf) {
     // empty string is a valid value for non-required field - or should there
     // be some sort of somthing to indicate "empty" value?
     //return getValue(cf) != null; // && !getValue(cf).equals("");
     if (getValue(cf) == null) return false;
+    // getValue returns 1st item of list which is sufficent for isEmpty
     return !getValue(cf).isEmpty();
   }
   public boolean hasValue(String fieldName) {
