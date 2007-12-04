@@ -69,6 +69,8 @@ public abstract class CharFieldGui implements ListSelectionListener {
   private JScrollPane listScroll;
   private JList listGui;
   private ValueListModel valueListModel;
+  /** flag for supressing valueChanged if comes from self */
+  private boolean doingInternalEdit = false;
 
   /** CharFieldGui for main window not post comp box - factory method */
   public static CharFieldGui makeCharFieldGui(CharField charField,int minCompChars) {
@@ -155,9 +157,18 @@ public abstract class CharFieldGui implements ListSelectionListener {
   /** part of ListSelectionListener interface. Receives ListSelectionEvents
       from selectionModel. Table row selection causes this event to fly */
   public void valueChanged(ListSelectionEvent e) {
+    // user editing field causes model change cause table change causes valueChanged
+    // which then messes up selection from list, and dont need as change came from
+    // self, so doingInternalEdit supresses listening to this - is there a better way
+    // to do this?
+    if (doingInternalEdit) return;
     this.updateGuiOnly = true;
     this.setValueFromChars(this.getSelectedChars());
     this.updateGuiOnly = false;
+  }
+
+  protected void setDoingInternalEdit(boolean doingEdit) {
+    doingInternalEdit = doingEdit;
   }
   
   /** Set the gui from the model (selection) */
@@ -594,19 +605,20 @@ public abstract class CharFieldGui implements ListSelectionListener {
   private void updateListGui() {
     //log().debug("update list gui called has list"+hasListGui());
     if (!hasListGui()) return;
-    List<CharacterI> l = getSelectedChars();
+    List<CharacterI> sel = getSelectedChars();
     //log().debug("update list gui called sel list size"+l.size());
-    if (l==null || l.size()==0) {
+    if (sel==null || sel.size()==0) {
       valueListModel.clear();
       return;
     }
-    else if (l.size() > 1) {
+    else if (sel.size() > 1) {
       return; // set to multiple values, todo: check if lists are the same
     }
     else {
-      CharacterI c = l.get(0);
-      List<CharFieldValue> cfvs = c.getValueList(getCharField());
-      getValueListModel().setList(cfvs);
+      CharacterI c = sel.get(0); // sole selection
+      //List<CharFieldValue> cfvs = c.getValueList(getCharField());
+      List<CharFieldValue> vals = c.getValue(getCharField()).getCharFieldValueList();
+      getValueListModel().setList(vals);
     }
   }
   
@@ -733,14 +745,3 @@ public abstract class CharFieldGui implements ListSelectionListener {
 //     }
 //   }
 // {
-    // set/getText interface to combo & text field?
-    //if (isCompList()) getCompList().setText(text);
-    //else getFreeTextField().setText(text);}
-    // set obo class
-    //if (!isCompList() || isRelationshipList()) return; // throw ex?? 
-    //getTermComp().setOboClass(term);
-    //else textField.setText(term.getName()); // shouldnt happen
-//     if (!isCompList() || !isRelationshipList()) return; // ex???
-//     getRelComp().setRel(rel);
-//     //else textField.setText(rel.getName()); // shouldnt actually happen
-//   }

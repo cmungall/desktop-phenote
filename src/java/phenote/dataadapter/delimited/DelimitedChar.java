@@ -66,54 +66,45 @@ public class DelimitedChar {
       return ""; //??
     }
     StringBuffer sb = new StringBuffer();
-    //try {
-    // ontology manager should have char fields in order of config which should be
-    // syntax order - hope this isnt too presumptious
     for (CharField cf : CharFieldManager.inst().getCharFieldList()) {
       //if its a free text field - only one col necessary.
       //if its an ontology field - need two cols (one for ID, the other for text)
       // the label from config & char field should be the same, so dont need to get
-      // from config - was there some reason for this???
+      // from config - was there some reason for this?
       //String label = Config.inst().getLabelForCharField(cf);
       String label = cf.getName();
       sb.append(label);
       //for now, i'll call on the syntax abbrev, but i'll want to use the acutal name
-      // if (!isFreeText(cf)) { // }		// now have third type isInt, so can't just negate 2007 07 09
+      // if (!isFreeText(cf)) { // } // now have third type isInt, so can't just negate 2007 07 09
       if (isTerm(cf)) { 
         sb.append(" ID").append(delimiter);
         sb.append(label).append(" Name");
         }
       sb.append(delimiter);
     }
-//     }
-//     catch (ConfigException e) {
-//       throw new BadCharException(e.getMessage());
-//     }
     return sb.toString();
     
   }
   
-  // Character -> String, for writeback of course
+  /** Character -> String, writeback */
   private String makeDelimitedString() throws BadCharException {
     if (character == null) { // shouldnt happen
       log().error("Error: no Character to make delimited string with");
       return ""; //??
     }
     StringBuffer sb = new StringBuffer();
-    //try {
-    // ontology manager should have char fields in order of config which should be
-    // syntax order - hope this isnt too presumptious
     for (CharField cf : CharFieldManager.inst().getCharFieldList()) {
+      // NON-EMPTY
       if (character.hasValue(cf)) {
         sb.append(makeValue(character.getValue(cf)));
       }
-      // if empty term then do 2 delimiters since it takes up 2 spots
-      else if (isTerm(cf)) sb.append(delimiter); 
-      //need to make sure to add extra delimiter for ontology fields
+      // if EMPTY term then do a 2nd delimiter since it takes up 2 spots
+      else if (isTerm(cf)) {
+        sb.append(delimiter);
+      } 
+      // delimiter for empty & non-empty
       sb.append(delimiter);
     }
-    
-//  }catch(ConfigException e){throw new BadCharException(e.getMessage());}
     
     return sb.toString();
   }
@@ -243,33 +234,3 @@ public class DelimitedChar {
   }
 }
 
-//   /** Parse syntax line into character - throw DelimitedEx if blank line/no
-//       columns found - just splitting at tab.  */
-//   void parseLineOld_DELETE(String line) throws DelimitedEx { // cf list?
-//     character = CharacterIFactory.makeChar();
-// //		System.out.println("input line="+line);
-//     String[] items = splitLine(line);
-
-//     // doesnt split always return at least 1 item even for empty line???
-//     boolean found = (items.length>0); //m.find();
-// //		System.out.println("numcols="+items.length);
-//     if (!found)
-//       throw new DelimitedEx(line); // skips whitespace lines ??
-//     int colCount = 0;
-//     int fieldCount = 0;
-//     while (found) {
-//       String value = items[colCount];
-//       // this aint right - this hardwires column # to field, should use column name!
-//       CharField c = Config.inst().getEnbldCharField(fieldCount);
-// //System.out.println("col="+colCount+";  fieldCount="+fieldCount+"; val="+value+"; charfieldname ="+c.getName());
-//       String termName = null;
-//       if (c.isTerm()) {
-//         colCount++; //skip over the Name, only keep ID
-//         termName = items[colCount];
-//       }
-//       addDelValToChar(fieldCount,value,termName); // termName null if not term
-//       colCount++;
-//       fieldCount++;
-//       found = (colCount<items.length); // if parsing last tag found will be false - at end
-//     }
-//  }

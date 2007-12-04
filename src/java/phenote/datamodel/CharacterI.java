@@ -35,7 +35,7 @@ public interface CharacterI {
   public List<CharFieldValue> getValueList(CharField cf);
   public boolean fieldEquals(CharacterI c, CharField cf);
   /** used in particular for lists of values */
-  public void deleteValue(CharField cf, CharFieldValue cfv);
+  //public void deleteValue(CharField cf, CharFieldValue cfv);
   public String getValueString(CharField cf);
 
   public String getValueString(String fieldName) throws CharFieldException;

@@ -10,7 +10,8 @@ import phenote.datamodel.CharacterI;
 
 /** A class that parses a single field out of a tab delimited line.
     Gets its info from header line. static method makeNextParser 
-    is used to iterate */
+    is used to iterate
+    This is for reading/parsing - not writing */
 
 class DelimFieldParser {
 

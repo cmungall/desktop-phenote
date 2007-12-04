@@ -218,8 +218,14 @@ public class TermCompList extends AbstractAutoCompList {
       final boolean equal = (modelTerm == null) ? (modelTerm == oboClass) : (modelTerm.equals(oboClass));
       if (equal) return; // don't edit model - the value is the same
     }
-    final CompoundTransaction ct = CompoundTransaction.makeUpdate(chars, getCharField(), oboClass);
+    final CompoundTransaction ct =
+      CompoundTransaction.makeUpdate(chars, getCharField(), oboClass);
+    // updateModel triggers change event, triggers table to fire valueChanged, if in list then
+    // lose which part of the list is selected, but shouldnt listen to valueChanged in this 
+    // case in the first place, this flag supresses valueChanged - alternative?
+    setDoingInternalEdit(true);
     this.getEditManager().updateModel(this, ct);
+    setDoingInternalEdit(false);
   }
 
   // allow user to nullify field

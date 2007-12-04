@@ -14,8 +14,10 @@ import org.obo.datamodel.OBOClass;
 public class Character extends AbstractCharacter implements CharacterI {
 
   // should there be a CharFieldValList explicit object?
-  private HashMap<CharField,List<CharFieldValue>> charFieldToValue =
-    new HashMap<CharField,List<CharFieldValue>>();
+//   private HashMap<CharField,List<CharFieldValue>> charFieldToValue =
+//     new HashMap<CharField,List<CharFieldValue>>();
+   private HashMap<CharField,CharFieldValue> charFieldToValue =
+     new HashMap<CharField,CharFieldValue>();
   
   /** should only be constrcuted from factory */
   Character() {
@@ -31,15 +33,15 @@ public class Character extends AbstractCharacter implements CharacterI {
   public void setValue(CharField cf, CharFieldValue cfv) {
     cfv.setCharacter(this);
     // not a list or empty list or list with empty value
-    if (!cf.isList() || !hasValue(cf)) {
-      List<CharFieldValue> newItem = new ArrayList<CharFieldValue>();
-      newItem.add(cfv);
-      charFieldToValue.put(cf,newItem);
-    }
-    else {
-      List<CharFieldValue> list = charFieldToValue.get(cf);
-      list.add(cfv);
-    }
+//     if (!cf.isList() || !hasValue(cf)) {
+//       List<CharFieldValue> newItem = new ArrayList<CharFieldValue>();
+//       newItem.add(cfv);
+    charFieldToValue.put(cf,cfv); //newItem);
+//     }
+//     else {
+//       List<CharFieldValue> list = charFieldToValue.get(cf);
+//       list.add(cfv);
+//     }
     //charFieldToValue.put(cf,cfv);
     //System.out.println("Char setVal "+cf+" val "+cfv);
     // setOboEditModel(oboEditAnnotation,cf,cfv);
@@ -49,60 +51,68 @@ public class Character extends AbstractCharacter implements CharacterI {
 
   // add to characterI - for lists - should this have a rank/order - is it possible
   // to have duplicates???
-  public void deleteValue(CharField cf, CharFieldValue cfv) {
-    if (!hasValue(cf)) return;
-    List<CharFieldValue> list = charFieldToValue.get(cf);
-    for (CharFieldValue v : list) {
-      if (v.equals(cfv)) {
-        list.remove(cfv);
-        return;
-      }
-    }
-  }
+//   public void deleteValue(CharField cf, CharFieldValue cfv) {
+//     if (!hasValue(cf)) return;
+//     List<CharFieldValue> list = charFieldToValue.get(cf);
+//     for (CharFieldValue v : list) {
+//       if (v.equals(cfv)) {
+//         list.remove(cfv);
+//         return;
+//       }
+//     }
+//   }
 
-  /** delete ith item from list */
-  public void deleteValue(CharField cf, int index) {
-    if (!hasValue(cf)) return;
-    List<CharFieldValue> list = charFieldToValue.get(cf);
-    list.remove(index);
-  }
+//   /** delete ith item from list */
+//   public void deleteValue(CharField cf, int index) {
+//     if (!hasValue(cf)) return;
+//     List<CharFieldValue> list = charFieldToValue.get(cf);
+//     list.remove(index);
+//   }
 
 
   /** generic getter - getting single value or 1st item of list */ 
   public CharFieldValue getValue(CharField cf) {
-    List<CharFieldValue> cfvList = charFieldToValue.get(cf);
+    CharFieldValue cfv = charFieldToValue.get(cf);
+    // undo needs to be able to undo back to null/""/init somehow
+    if (cfv == null) {
+      cfv = CharFieldValue.emptyValue(this,cf); // set in hash?
+      if (cf.isList()) cfv.setIsList(true);
+    }
+    return cfv;
+    //List<CharFieldValue> cfvList = charFieldToValue.get(cf);
+    
     // if cfv is null should we construct a CFV w null/"", should field be init to ""?
     // undo needs to be able to undo back to null/""/init somehow
-    if (cfvList == null || cfvList.isEmpty()) {
-      CharFieldValue empty = CharFieldValue.emptyValue(this,cf);
-      List<CharFieldValue> list = new ArrayList<CharFieldValue>();
-      list.add(empty);
-      charFieldToValue.put(cf,list); // ??? prevents making new cfv every time
-      return empty;
-      //return CharFieldValue.emptyValue(this,cf); // set in hash-list?
-    }
-    return cfvList.get(0);
+//     if (cfvList == null || cfvList.isEmpty()) {
+//       CharFieldValue empty = CharFieldValue.emptyValue(this,cf);
+//       List<CharFieldValue> list = new ArrayList<CharFieldValue>();
+//       list.add(empty);
+//       charFieldToValue.put(cf,list); // ??? prevents making new cfv every time
+//       return empty;
+//       //return CharFieldValue.emptyValue(this,cf); // set in hash-list?
+//     }
+//     return cfvList.get(0);
   }
 
   /** returns true if value(s) for char field are equal - if list - true if
       lists are identical */
-  public boolean fieldEquals(CharacterI c, CharField cf) {
-    List<CharFieldValue> list1 = getValueList(cf);
-    List<CharFieldValue> list2 = c.getValueList(cf);
-    if (list1 == null && list2 == null) return true;
-    if (list1 == null || list2 == null) return false;
-    if (list1.size() != list2.size()) return false;
-    // assumes lists are unique - and they should be
-    for (CharFieldValue cfv1 : list1) {
-      if (!list2.contains(cfv1)) // contains does .equals()
-        return false;
-    }
-    return true; // all char field values in list are equal
-  }
+//   public boolean fieldEquals(CharacterI c, CharField cf) {
+//     List<CharFieldValue> list1 = getValueList(cf);
+//     List<CharFieldValue> list2 = c.getValueList(cf);
+//     if (list1 == null && list2 == null) return true;
+//     if (list1 == null || list2 == null) return false;
+//     if (list1.size() != list2.size()) return false;
+//     // assumes lists are unique - and they should be
+//     for (CharFieldValue cfv1 : list1) {
+//       if (!list2.contains(cfv1)) // contains does .equals()
+//         return false;
+//     }
+//     return true; // all char field values in list are equal
+//   }
 
-  // make part of CharacterI! return null if not set? empty list?
+  // return null if not set? empty list? ???
   public List<CharFieldValue> getValueList(CharField cf) {
-    return charFieldToValue.get(cf);
+    return charFieldToValue.get(cf).getCharFieldValueList(); // ??
   }
 
   /** returns string for charfield value of char field, no matter what type,
@@ -166,18 +176,24 @@ public class Character extends AbstractCharacter implements CharacterI {
     //try {
     // do OBOClasses clone? do we need to clone them? dont think so - immutable
     Character charClone = new Character(); //(Character)clone();
+
     // WRONG - will use same charFieldVal which points to old char!!
 //    clone.charFieldToValue =(HashMap<CharField,CharFieldValue>)charFieldToValue.clone();
     // clone.setCharFieldValuesCharacterToSelf(); ???
-    for (List<CharFieldValue> list : charFieldToValue.values()) {
-      for (CharFieldValue v : list) {
-        CharFieldValue cfvClone = v.cloneCharFieldValue();
-        // cfvClone.setCharacter(charClone); done by setValue
-        charClone.setValue(cfvClone.getCharField(),cfvClone);
-      }
+    for (CharFieldValue v : charFieldToValue.values()) {
+      CharFieldValue cfvClone = v.cloneCharFieldValue();
+      // cfvClone.setCharacter(charClone); done by setValue
+      charClone.setValue(cfvClone.getCharField(),cfvClone);
     }
+//     for (List<CharFieldValue> list : charFieldToValue.values()) {
+//       for (CharFieldValue v : list) {
+//         CharFieldValue cfvClone = v.cloneCharFieldValue();
+//         // cfvClone.setCharacter(charClone); done by setValue
+//         charClone.setValue(cfvClone.getCharField(),cfvClone);
+//       }
+//     }
     return charClone;
-      //} catch (CloneNotSupportedException e) { return null; }
+
   }
 
   // used by character table panel

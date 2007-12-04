@@ -3,6 +3,10 @@ package phenote.datamodel;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
 
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.impl.DanglingClassImpl;
@@ -19,6 +23,10 @@ import org.obo.util.TermUtil;
     instance of data within the CharField - linked via CharFieldEnum & Character*/
 public class CharFieldValue implements Cloneable {
 
+  private static final Logger LOG = Logger.getLogger(CharFieldValue.class);
+
+  /** trying this out, need lists, one way is recursion - CFV can be a list of CFVs */
+  private List<CharFieldValue> charFieldValueList=null;
   private OBOClass oboClassValue=null;
   private String stringValue=null;
   private Date dateValue=null;
@@ -27,6 +35,7 @@ public class CharFieldValue implements Cloneable {
   private CharField charField;
   // private CharField???
   private CharacterI character;
+  private boolean isList = false;
   //private boolean isDifferentia; // ??
 
   // phase out
@@ -48,9 +57,25 @@ public class CharFieldValue implements Cloneable {
     character = c;
     charFieldEnum = e;
   }
+
+  /** SINGLE VALUE term/class - not list */
   public CharFieldValue(OBOClass o,CharacterI c,CharField cf) {
     this(c,cf);
     oboClassValue = o;
+  }
+
+  /** If list adds to value, if not list just sets it, makes new CFV */
+  public static CharFieldValue makeNewValue(OBOClass o,CharFieldValue oldVal) {
+    CharFieldValue newVal = oldVal.cloneCharFieldValue(); // also clones list
+    if (!newVal.isList()) { // SINGLE TERM
+      newVal.oboClassValue = o;
+    }
+    else { // LIST/MULTI VALUE
+      newVal.isList = true; // only parent
+      CharFieldValue newKid = new CharFieldValue(o,oldVal.character,oldVal.charField);
+      newVal.getCharFieldValueList().add(newKid);
+    }
+    return newVal;
   }
 
   public CharFieldValue(Date d, CharacterI c, CharField cf) {
@@ -63,6 +88,16 @@ public class CharFieldValue implements Cloneable {
     charField = cf;
   }
 
+  /** Parent list returns true, kid leaves false, single term returns false */
+  private boolean isList() { return isList; }
+  void setIsList(boolean isList) { this.isList = isList; }
+
+  public List<CharFieldValue> getCharFieldValueList() {
+    if (charFieldValueList == null) // ???
+      charFieldValueList = new ArrayList<CharFieldValue>();
+    return charFieldValueList;
+  }
+
   /** dateString is a date, if not valid date throws ParseEx */
   static CharFieldValue makeDate(String dateString, CharacterI c, CharField cf) 
     throws ParseException {
@@ -72,12 +107,22 @@ public class CharFieldValue implements Cloneable {
   }
 
   CharFieldValue cloneCharFieldValue() {
+    // some fields may disable copying, eg db id fields
     if (!charField.getCopyEnabled()) {
       CharFieldValue nullCloneValue = new CharFieldValue(character, charField);
       return nullCloneValue;
     }
 //      return null; // null?? new CharFieldValue(character
-    try { return (CharFieldValue)clone(); }
+    try {
+      CharFieldValue clone =  (CharFieldValue)clone();
+      if (charFieldValueList!=null) {
+        clone.charFieldValueList = new ArrayList<CharFieldValue>();
+        for (CharFieldValue v : charFieldValueList) {
+          clone.charFieldValueList.add(v); // should v itself be cloned???
+        }
+      }
+      return clone;
+    }
     catch (CloneNotSupportedException x) { return null; }
   }
 
@@ -101,7 +146,12 @@ public class CharFieldValue implements Cloneable {
   public CharacterI getCharacter() { return character; }
 
   public boolean isEmpty() {
-    if (isTerm())
+    if (isList) {
+      if (charFieldValueList == null || charFieldValueList.isEmpty())
+        return true;
+      return charFieldValueList.get(0).isEmpty();
+    }
+    else if (isTerm())
       return oboClassValue == null;
     else if (isDate())
       return dateValue == null;
@@ -116,6 +166,14 @@ public class CharFieldValue implements Cloneable {
   }
 
   public String getValueAsString() {
+    if (isList()) { // parent true, kids false - stops recursion
+      String s="";
+      for (CharFieldValue kid : getCharFieldValueList())
+        s += kid.getValueAsString() + ", ";
+      s= s.substring(0,s.length()-2);
+      return s;
+    }
+      
     if (isEmpty()) return ""; // null?
     if (isTerm())
       return oboClassValue.getName();
@@ -155,7 +213,18 @@ public class CharFieldValue implements Cloneable {
 
   /** remove cfv from list of cfvs in char */
   public void editModelDelete() {
-    character.deleteValue(getCharField(),this);
+    //....//character.deleteValue(getCharField(),this);
+    // remove self from parent list... back pointer to parent?
+    character.getValue(charField).removeKid(this); // ??
+  }
+
+  /** Remove "kid" from kid list */
+  private void removeKid(CharFieldValue kid) {
+    if (charFieldValueList == null) {
+      LOG.error("cant remove kid - list is null"); // ??
+      return;
+    }
+    charFieldValueList.remove(kid);
   }
 
   public CharField getCharField() { return charField; }
@@ -194,13 +263,26 @@ public class CharFieldValue implements Cloneable {
   //public CharFieldEnum getCharFieldEnum() { return charFieldEnum; }
   
   public boolean equals(Object o) {
+    if (!(o instanceof CharFieldValue)) return false; // just in case
     final CharFieldValue otherValue = (CharFieldValue)o;
     if (this == otherValue) return true;
     if (this.isEmpty()) {
       return otherValue.isEmpty();
     }
+    if (isList) {
+      if (!otherValue.isList) return false;
+      List<CharFieldValue> list2 = otherValue.charFieldValueList;
+      if (charFieldValueList==null && list2==null) return true;
+      if (charFieldValueList==null || list2==null) return false;
+      if (charFieldValueList.size() != list2.size()) return false;
+      for (CharFieldValue v1 : charFieldValueList) {
+        if (!list2.contains(v1)) return false; // does equals on kids
+      }
+      return true; // lists are same
+    }
     if (this.isTerm()) {
-      return ((otherValue.isTerm()) && (this.getTerm().equals(otherValue.getTerm())));
+      return ((otherValue.isTerm()) 
+              && (this.getTerm().equals(otherValue.getTerm())));
     }
     return this.getName().equals(otherValue.getName());
   }
