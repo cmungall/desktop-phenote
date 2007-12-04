@@ -188,6 +188,11 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		public String getID() {
 			return "phenote-editor";
 		}
+
+    public boolean isRestoreOnStartup() {
+      // TODO Auto-generated method stub
+      return true;
+    }
 	}
 
 	/** TermInfoFactory inner class */
@@ -223,6 +228,11 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		public String getID() {
 			return "term-info";
 		}
+
+    public boolean isRestoreOnStartup() {
+      // TODO Auto-generated method stub
+      return true;
+    }
 		
 //		public void setName(String name) {
 //			displayName = panelName+": "+name;
@@ -269,6 +279,11 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 			return "NCBI";
 		}
 
+    public boolean isRestoreOnStartup() {
+      // TODO Auto-generated method stub
+      return true;
+    }
+
 	}
 
 
@@ -309,6 +324,11 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		public String getID() {
 			return "Annotation Table";
 		}
+
+    public boolean isRestoreOnStartup() {
+      // TODO Auto-generated method stub
+      return true;
+    }
 	}
 
 	/** StandardToolbarFactory inner class */
@@ -344,6 +364,11 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		public String getID() {
 			return "Standard toolbar";
 		}
+
+    public boolean isRestoreOnStartup() {
+      // TODO Auto-generated method stub
+      return true;
+    }
 	}
 
 	private String getDefaultGroup() {
