@@ -90,7 +90,7 @@ public class CharFieldValue implements Cloneable {
 
   /** Parent list returns true, kid leaves false, single term returns false */
   private boolean isList() { return isList; }
-  void setIsList(boolean isList) { this.isList = isList; }
+  public void setIsList(boolean isList) { this.isList = isList; }
 
   public List<CharFieldValue> getCharFieldValueList() {
     if (charFieldValueList == null) // ???
@@ -106,7 +106,7 @@ public class CharFieldValue implements Cloneable {
     return cfv;
   }
 
-  CharFieldValue cloneCharFieldValue() {
+  public CharFieldValue cloneCharFieldValue() {
     // some fields may disable copying, eg db id fields
     if (!charField.getCopyEnabled()) {
       CharFieldValue nullCloneValue = new CharFieldValue(character, charField);
@@ -219,7 +219,7 @@ public class CharFieldValue implements Cloneable {
   }
 
   /** Remove "kid" from kid list */
-  private void removeKid(CharFieldValue kid) {
+  public void removeKid(CharFieldValue kid) {
     if (charFieldValueList == null) {
       LOG.error("cant remove kid - list is null"); // ??
       return;

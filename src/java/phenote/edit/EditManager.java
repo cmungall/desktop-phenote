@@ -120,10 +120,14 @@ public class EditManager {
     // or should we send out a char change event with a char list?? probably
   }
 
+
   public void deleteFromValList(Object src, CharacterI c, CharField cf,
-                                CharFieldValue v) {
-    CharFieldValue newVal = CharFieldValue.emptyValue(c,cf);
-    UpdateTransaction t = new UpdateTransaction(v,newVal);
+                                CharFieldValue kidToDelete) {
+    //CharFieldValue newVal = CharFieldValue.emptyValue(c,cf);
+    CharFieldValue oldListParent = c.getValue(cf);
+    CharFieldValue newListParent = oldListParent.cloneCharFieldValue();
+    newListParent.removeKid(kidToDelete);
+    UpdateTransaction t = new UpdateTransaction(oldListParent,newListParent);
     addTransaction(t);
     t.editModel(); // will remove old value
     fireChangeEvent(t,src);
