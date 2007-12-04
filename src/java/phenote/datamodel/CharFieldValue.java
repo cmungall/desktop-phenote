@@ -24,6 +24,7 @@ import org.obo.util.TermUtil;
 public class CharFieldValue implements Cloneable {
 
   private static final Logger LOG = Logger.getLogger(CharFieldValue.class);
+  private static final String LIST_DELIM = ","; // no space after comma?
 
   /** trying this out, need lists, one way is recursion - CFV can be a list of CFVs */
   private List<CharFieldValue> charFieldValueList=null;
@@ -91,6 +92,8 @@ public class CharFieldValue implements Cloneable {
   /** Parent list returns true, kid leaves false, single term returns false */
   private boolean isList() { return isList; }
   public void setIsList(boolean isList) { this.isList = isList; }
+  // initialize if null?
+  private List<CharFieldValue> getList() { return charFieldValueList; }
 
   public List<CharFieldValue> getCharFieldValueList() {
     if (charFieldValueList == null) // ???
@@ -169,8 +172,8 @@ public class CharFieldValue implements Cloneable {
     if (isList()) { // parent true, kids false - stops recursion
       String s="";
       for (CharFieldValue kid : getCharFieldValueList())
-        s += kid.getValueAsString() + ", ";
-      s= s.substring(0,s.length()-2);
+        s += '"'+kid.getValueAsString()+'"' + LIST_DELIM;
+      s= s.substring(0,s.length()-2); // lopp off last comma
       return s;
     }
       
@@ -195,6 +198,21 @@ public class CharFieldValue implements Cloneable {
   }
 
   public boolean isTerm() { return getCharField().isTerm(); }
+  /** convenience fn */
+  public String getID() {
+    if (isEmpty()) return ""; // ??
+    if (!isTerm()) return ""; // null? ex?
+    if (isList()) { // should IDs get quoted? i guess to be consistent seems silly
+      StringBuilder sb = new StringBuilder();
+      for (int i=0; i < getList().size(); i++) {
+        sb.append('"').append(getList().get(i).getID()).append('"');
+        if (i != getList().size() - 1)
+          sb.append(LIST_DELIM);
+      }
+      return sb.toString();
+    }
+    return getTerm().getID();
+  }
 
   public boolean isDate() { return getCharField().isDate(); }
   public Date getDate() { return dateValue; }

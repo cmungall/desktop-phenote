@@ -125,15 +125,15 @@ public class DelimitedChar {
   }
 
   private String makeValue(CharFieldValue v) {
-    if (v.isTerm()) return makeTermValue(v.getOboClass());
+    if (v.isTerm()) return makeTermValue(v);
     return v.getValueAsString();
   }
 
-  private String makeTermValue(OBOClass term) {
-	//if the term comes from an ontology, need to include a col for both
-	//id and name
-    System.out.println("DelimChar term.getID: "+term.getID());
-    return term.getID() + delimiter + term.getName();
+  private String makeTermValue(CharFieldValue termVal) {
+    //for terms need to include a col for both id and name
+    //System.out.println("DelimChar term.getID: "+term.getID());
+    // if termVal is a list, id & name will be quoted & comma separated (by CFV)
+    return termVal.getID() + delimiter + termVal.getName();
   }
 
   // READ - split read & write into 2 classes?
