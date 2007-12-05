@@ -162,7 +162,8 @@ public class DelimitedChar {
     //parse based on tab...will be delimiter in future
     final String delimiter = "\t";
     final Pattern p = Pattern.compile(delimiter);
-    final String trimmedLine = (line.endsWith(delimiter)) ? (line.substring(0, line.length() -1)) : line;
+    final String trimmedLine =
+      (line.endsWith(delimiter)) ? (line.substring(0, line.length() -1)) : line;
     return p.split(trimmedLine, -1);
   }
 
@@ -189,42 +190,6 @@ public class DelimitedChar {
     }
   }
 
-
-  /** READ, if term then value is ID and termName is name of term, if free text then
-      value is free text and termName is null */
-  private void addDelValToChar(int fieldNum, String value, String termName) {
-//  it doesn't really matter if there's a blank column in this mode
-    if (value.equals("")) {
-//      log().error("No value given for column"+fieldNum);
-      return;  //don't need to populate a CharField if no value
-    }    
-    CharFieldManager om = CharFieldManager.inst();
-    //try { // there can be more than one field for a fieldNum??? - MG
-    //List<CharField> fields = Config.inst().getCharFieldsForDelimited(fieldNum);//Ex
-    if (!Config.inst().hasEnbldCharField(fieldNum)) {
-      log().error("No Field configged for column # "+fieldNum);
-      return;
-    }
-    CharField cf = Config.inst().getEnbldCharField(fieldNum);
-    //List<CharField> fields=Config.inst().getCharFieldsForSyntaxAbbrev(tag);//Ex
-    //for (CharField cf : fields) {
-    try {
-      //System.out.println("column="+fieldNum+"; value = "+value);
-      // set String -> for obo class automatically find term
-      // if term not found makes a dangler
-      //this assumes that you are loading data the same order you saved it
-      CharFieldValue v = character.setValue(cf,value); // throws CFEx for bad date
-      if (v.isDangler())
-        v.setName(termName); // ???
-      return; // if no ex thrown were done
-    }
-    // thrown for bad date, not for not found - dangler created instead!
-    catch (CharFieldException e) {
-      System.out.println(e.getMessage()); // ?
-      log().error(e.getMessage());
-    } 
-  }
-
   CharacterI getCharacter() { return character; }
 
   private Logger log;
@@ -234,3 +199,37 @@ public class DelimitedChar {
   }
 }
 
+//   /** READ, if term then value is ID and termName is name of term, if free text then
+//       value is free text and termName is null */
+//   private void addDelValToChar(int fieldNum, String value, String termName) {
+// //  it doesn't really matter if there's a blank column in this mode
+//     if (value.equals("")) {
+// //      log().error("No value given for column"+fieldNum);
+//       return;  //don't need to populate a CharField if no value
+//     }    
+//     CharFieldManager om = CharFieldManager.inst();
+//     //try { // there can be more than one field for a fieldNum??? - MG
+//     //List<CharField> fields = Config.inst().getCharFieldsForDelimited(fieldNum);//Ex
+//     if (!Config.inst().hasEnbldCharField(fieldNum)) {
+//       log().error("No Field configged for column # "+fieldNum);
+//       return;
+//     }
+//     CharField cf = Config.inst().getEnbldCharField(fieldNum);
+//     //List<CharField> fields=Config.inst().getCharFieldsForSyntaxAbbrev(tag);//Ex
+//     //for (CharField cf : fields) {
+//     try {
+//       //System.out.println("column="+fieldNum+"; value = "+value);
+//       // set String -> for obo class automatically find term
+//       // if term not found makes a dangler
+//       //this assumes that you are loading data the same order you saved it
+//       CharFieldValue v = character.setValue(cf,value); // throws CFEx for bad date
+//       if (v.isDangler())
+//         v.setName(termName); // ???
+//       return; // if no ex thrown were done
+//     }
+//     // thrown for bad date, not for not found - dangler created instead!
+//     catch (CharFieldException e) {
+//       System.out.println(e.getMessage()); // ?
+//       log().error(e.getMessage());
+//     } 
+//   }

@@ -47,27 +47,6 @@ public class Character extends AbstractCharacter implements CharacterI {
     // setOboEditModel(oboEditAnnotation,cf,cfv);
   }
 
-  // public void addValue ??? for lists??? is it funny that setVal is used for lists?
-
-  // add to characterI - for lists - should this have a rank/order - is it possible
-  // to have duplicates???
-//   public void deleteValue(CharField cf, CharFieldValue cfv) {
-//     if (!hasValue(cf)) return;
-//     List<CharFieldValue> list = charFieldToValue.get(cf);
-//     for (CharFieldValue v : list) {
-//       if (v.equals(cfv)) {
-//         list.remove(cfv);
-//         return;
-//       }
-//     }
-//   }
-
-//   /** delete ith item from list */
-//   public void deleteValue(CharField cf, int index) {
-//     if (!hasValue(cf)) return;
-//     List<CharFieldValue> list = charFieldToValue.get(cf);
-//     list.remove(index);
-//   }
 
 
   /** generic getter - getting single value or 1st item of list */ 
@@ -94,21 +73,6 @@ public class Character extends AbstractCharacter implements CharacterI {
 //     return cfvList.get(0);
   }
 
-  /** returns true if value(s) for char field are equal - if list - true if
-      lists are identical */
-//   public boolean fieldEquals(CharacterI c, CharField cf) {
-//     List<CharFieldValue> list1 = getValueList(cf);
-//     List<CharFieldValue> list2 = c.getValueList(cf);
-//     if (list1 == null && list2 == null) return true;
-//     if (list1 == null || list2 == null) return false;
-//     if (list1.size() != list2.size()) return false;
-//     // assumes lists are unique - and they should be
-//     for (CharFieldValue cfv1 : list1) {
-//       if (!list2.contains(cfv1)) // contains does .equals()
-//         return false;
-//     }
-//     return true; // all char field values in list are equal
-//   }
 
   // return null if not set? empty list? ???
   public List<CharFieldValue> getValueList(CharField cf) {
@@ -218,28 +182,39 @@ public class Character extends AbstractCharacter implements CharacterI {
     return log;
   }
 }
-  /** Throws CharFieldEx if fieldString not valid field, TermNotFoundEx if valueString
-      not found in ontologies associated with field 
-  returns the constructed CharFieldValue */
-//   public CharFieldValue setValue(String fieldString, String valueString)
-//     throws CharFieldException,TermNotFoundException {
-//     CharField cf = getCharFieldForName(fieldString);
-//     return setValue(cf,valueString);
-//   }
-//   // this is just used for testing at this point
-//   public boolean equals(CharacterI ch) {
-//     //return eq(getGenotype(),ch.getGenotype()) && eq(getEntity(),ch.getEntity())
-//     //  && eq(quality,ch.getQuality()) && eq(geneticContext,ch.getGeneticContext());
-//     for (CharField cf : getAllCharFields()) {
-//       if (!eq(getValue(cf),ch.getValue(cf)))
+  /** returns true if value(s) for char field are equal - if list - true if
+      lists are identical */
+//   public boolean fieldEquals(CharacterI c, CharField cf) {
+//     List<CharFieldValue> list1 = getValueList(cf);
+//     List<CharFieldValue> list2 = c.getValueList(cf);
+//     if (list1 == null && list2 == null) return true;
+//     if (list1 == null || list2 == null) return false;
+//     if (list1.size() != list2.size()) return false;
+//     // assumes lists are unique - and they should be
+//     for (CharFieldValue cfv1 : list1) {
+//       if (!list2.contains(cfv1)) // contains does .equals()
 //         return false;
 //     }
-//     return true;
+//     return true; // all char field values in list are equal
+//   }
+  // public void addValue ??? for lists??? is it funny that setVal is used for lists?
+
+  // add to characterI - for lists - should this have a rank/order - is it possible
+  // to have duplicates???
+//   public void deleteValue(CharField cf, CharFieldValue cfv) {
+//     if (!hasValue(cf)) return;
+//     List<CharFieldValue> list = charFieldToValue.get(cf);
+//     for (CharFieldValue v : list) {
+//       if (v.equals(cfv)) {
+//         list.remove(cfv);
+//         return;
+//       }
+//     }
 //   }
 
-//   /** check if both are null in addition to .equals() */
-//   private boolean eq(CharFieldValue c1,CharFieldValue c2) {
-//     if (c1==null && c2==null) return true;
-//     if (c2 == null) return false;
-//     return c1.equals(c2);
+//   /** delete ith item from list */
+//   public void deleteValue(CharField cf, int index) {
+//     if (!hasValue(cf)) return;
+//     List<CharFieldValue> list = charFieldToValue.get(cf);
+//     list.remove(index);
 //   }

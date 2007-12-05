@@ -3,6 +3,7 @@ package phenote.datamodel;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOSession;
@@ -25,6 +26,7 @@ import phenote.error.ErrorManager;
 public class CharField {
 
   private static boolean DO_DANGLERS = true; // for testing
+  static final String LIST_DELIM = ","; // no space after comma?
 
   private List<Ontology> ontologyList = new ArrayList<Ontology>(3);
   private CharFieldEnum charFieldEnum; // or subclass
@@ -221,16 +223,29 @@ public class CharField {
 
   public Ontology getPostCompRelOntol() { return postCompRelOntol; }
 
+  public CharFieldValue makeValue(CharacterI c, String valueString)
+    throws CharFieldException {
+    return makeValue(c,valueString,true);
+  }
+
   /** if free text returns string charfieldValue, for ontology field valueString is
       id and searches ontologies for id, throws CharFieldException if invalid date for
       date field (used to for term not found but now creates dangler instead)
-      this deals with postcomp too */
-  public CharFieldValue makeValue(CharacterI c, String valueString)
+      this deals with postcomp too
+      if doList is true and char field is a list then parse & add kids,
+      if false then dont -> making kid not parent, kid char field has isList = true
+      not sure how else to do that?
+  */
+  public CharFieldValue makeValue(CharacterI c, String valueString,boolean doList)
     throws CharFieldException {
 
     // empty value
     if (valueString == null || valueString.trim().equals(""))
       return CharFieldValue.emptyValue(c,this);
+
+    if (isList() && doList) {
+      return parseList(valueString,c);
+    }
 
     // TERM
     if (isTerm()) {
@@ -246,6 +261,7 @@ public class CharField {
         catch (TermNotFoundException e) {}
       }
       
+
       // TERM regular, not post comp
       else {
         for (Ontology ont : ontologyList) {
@@ -258,6 +274,8 @@ public class CharField {
       if (oboClass == null && danglerMode()) {
         oboClass =  new DanglingClassImpl(valueString);
         String e = valueString+" not found in loaded obo files. Creating a 'dangler'";
+        // this should be changed to just do log.error and have log appender to error
+        // window i think
         ErrorManager.inst().error(new ErrorEvent(this,e));
       }
 
@@ -277,15 +295,30 @@ public class CharField {
       catch (ParseException e) {
         throw new CharFieldException(e);
       }
-      
     }
 
     // FREE TEXT FIELD
     //if (!hasOntologies()) // -> !isTerm() or isFreeText()
     else
       return new CharFieldValue(valueString,c,this);
+  }
 
-
+  
+  private CharFieldValue parseList(String listString,CharacterI c) throws CharFieldException {
+    // strip quotes
+    listString = listString.trim(); // just in case
+    if (listString.startsWith("\"")) listString = listString.substring(1);
+    if (listString.endsWith("\"")) listString = listString.substring(0,listString.length()-1);
+    String delim = '"'+LIST_DELIM+'"'; // quotes separate each item
+    Pattern p = Pattern.compile(delim);
+    String[] kids = p.split(listString);
+    CharFieldValue listVal = CharFieldValue.makeListParentValue(c,this);
+    for (String kidString : kids) {
+      boolean doList = false;
+      CharFieldValue kid = makeValue(c,kidString,doList); // throws CFEx
+      listVal.addKid(kid);
+    }
+    return listVal;
   }
 
   // i think we eventually will want this always to be so

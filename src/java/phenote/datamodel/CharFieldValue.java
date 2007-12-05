@@ -24,7 +24,6 @@ import org.obo.util.TermUtil;
 public class CharFieldValue implements Cloneable {
 
   private static final Logger LOG = Logger.getLogger(CharFieldValue.class);
-  private static final String LIST_DELIM = ","; // no space after comma?
 
   /** trying this out, need lists, one way is recursion - CFV can be a list of CFVs */
   private List<CharFieldValue> charFieldValueList=null;
@@ -63,6 +62,12 @@ public class CharFieldValue implements Cloneable {
   public CharFieldValue(OBOClass o,CharacterI c,CharField cf) {
     this(c,cf);
     oboClassValue = o;
+  }
+
+  public static CharFieldValue makeListParentValue(CharacterI c, CharField cf) {
+    CharFieldValue v = new CharFieldValue(c,cf);
+    v.setIsList(true);
+    return v;
   }
 
   /** If list adds to value, if not list just sets it, makes new CFV */
@@ -172,7 +177,7 @@ public class CharFieldValue implements Cloneable {
     if (isList()) { // parent true, kids false - stops recursion
       String s="";
       for (CharFieldValue kid : getCharFieldValueList())
-        s += '"'+kid.getValueAsString()+'"' + LIST_DELIM;
+        s += '"'+kid.getValueAsString()+'"' + CharField.LIST_DELIM;
       s= s.substring(0,s.length()-2); // lopp off last comma
       return s;
     }
@@ -207,7 +212,7 @@ public class CharFieldValue implements Cloneable {
       for (int i=0; i < getList().size(); i++) {
         sb.append('"').append(getList().get(i).getID()).append('"');
         if (i != getList().size() - 1)
-          sb.append(LIST_DELIM);
+          sb.append(CharField.LIST_DELIM);
       }
       return sb.toString();
     }
@@ -234,6 +239,11 @@ public class CharFieldValue implements Cloneable {
     //....//character.deleteValue(getCharField(),this);
     // remove self from parent list... back pointer to parent?
     character.getValue(charField).removeKid(this); // ??
+  }
+
+  public void addKid(CharFieldValue kid) {
+    // creates list if null
+    getCharFieldValueList().add(kid);
   }
 
   /** Remove "kid" from kid list */
