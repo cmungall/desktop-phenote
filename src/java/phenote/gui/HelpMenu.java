@@ -15,14 +15,14 @@ import javax.swing.JOptionPane;
 import phenote.main.HelpManager;
 import phenote.main.PhenoteVersion;
 
-class HelpMenu extends JMenu {
+public class HelpMenu extends JMenu {
 
   private JMenuItem help;
   public SplashScreen splashScreen;
   public TermRequestGUI termRequester;
   private String logoFile = "src/java/phenote/images/phenote_logo.jpg";
 
-  HelpMenu() {
+    public HelpMenu() {
     super("Help");
     init();
   }
@@ -76,7 +76,7 @@ class HelpMenu extends JMenu {
 //    	  String m = "This is Phenote v (version here)....[more to come]";
 //    	  JOptionPane.showMessageDialog(null, m, "About", 
 //    			  JOptionPane.INFORMATION_MESSAGE);
-    	  splashScreenInit();
+	    showAboutFrame();
 //    	  splashScreenDestruct();
 //      	  System.out.println("about selected");	
       	}
@@ -95,6 +95,10 @@ class HelpMenu extends JMenu {
     	}
     }
   }
+
+    public void showAboutFrame() {
+	splashScreenInit();  // For now
+    }
 
   private void splashScreenInit() {
   	ImageIcon myImage = new ImageIcon(logoFile);
