@@ -189,6 +189,7 @@ public class CharacterTableController {
 	}
 
 	private void initializeInterface() {
+    // EventTableModel is from glazed list jar
 		final EventTableModel<CharacterI> eventTableModel = new EventTableModel<CharacterI>(
 				this.filteredCharacters, this.tableFormat);
 		this.characterTable.setModel(eventTableModel);
@@ -225,19 +226,6 @@ public class CharacterTableController {
 		this.getEditManager().addInitialCharacter();
 	}
 
-	private void setSelectionWithCharacters(List<CharacterI> characters) {
-		this.clearFilter();
-		this.selectionModel.clearSelection();
-		for (CharacterI character : characters) {
-			final int index = this.filteredCharacters.indexOf(character);
-			if (index > -1) {
-				this.selectionModel.addSelectionInterval(index, index);
-				Rectangle rect = this.characterTable.getCellRect(index, 0,
-						false);
-				this.characterTable.scrollRectToVisible(rect);
-			}
-		}
-	}
 
 	private void updateButtonStates() {
 		final boolean hasSelection = !this.selectionModel.isSelectionEmpty();
@@ -249,14 +237,6 @@ public class CharacterTableController {
 		this.filter.setFilter(null, this);
 	}
 
-	private void updateCharacterForGlazedLists(CharacterI character) {
-		final int index = this.getCharacterListManager().getCharacterList()
-				.getList().indexOf(character);
-		if (index > -1) {
-			this.getCharacterListManager().getCharacterList().getList().set(
-					index, character);
-		}
-	}
 
 	private EditManager getEditManager() {
 		return EditManager.getEditManager(this.representedGroup);
@@ -291,6 +271,8 @@ public class CharacterTableController {
 		return Logger.getLogger(CharacterTableController.class);
 	}
 
+  /** This seems to already know about add & delete - add here is just doing a select of
+      characters added - update i dont understand */
 	private class CharacterChangeListener implements CharChangeListener {
 		public void charChanged(CharChangeEvent e) {
 			if (e.isUpdate()) {
@@ -302,6 +284,30 @@ public class CharacterTableController {
 				CharacterTableController.this.setSelectionWithCharacters(e
 						.getTransaction().getCharacters());
 			}
+		}
+	}
+  /** select characters in table */
+	private void setSelectionWithCharacters(List<CharacterI> characters) {
+		this.clearFilter();
+		this.selectionModel.clearSelection();
+		for (CharacterI character : characters) {
+			final int index = this.filteredCharacters.indexOf(character);
+			if (index > -1) {
+				this.selectionModel.addSelectionInterval(index, index);
+				Rectangle rect = this.characterTable.getCellRect(index, 0,
+						false);
+				this.characterTable.scrollRectToVisible(rect);
+			}
+		}
+	}
+
+  // ????? this seems to be setting what its getting???
+	private void updateCharacterForGlazedLists(CharacterI character) {
+		final int index = this.getCharacterListManager().getCharacterList()
+				.getList().indexOf(character);
+		if (index > -1) {
+			this.getCharacterListManager().getCharacterList().getList().set(
+					index, character);
 		}
 	}
 
@@ -316,6 +322,7 @@ public class CharacterTableController {
 			setComponentTitleFromFilename();
 		}
 	}
+
 
 	private class SelectionListener implements ListSelectionListener {
 		public void valueChanged(ListSelectionEvent e) {
