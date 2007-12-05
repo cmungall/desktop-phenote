@@ -6,6 +6,9 @@ import java.util.Collection;
 import java.util.List;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
@@ -35,6 +38,7 @@ import phenote.gui.CharacterTableController;
 import phenote.gui.TermInfo2;
 import phenote.gui.NcbiInfo;
 import phenote.gui.field.FieldPanel;
+import phenote.gui.HelpMenu;
 import phenote.gui.selection.SelectionBridge;
 import phenote.gui.menu.FileMenu;
 import phenote.gui.menu.EditMenu;
@@ -93,6 +97,15 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 	@Override
 	protected String getAppName() {
 		return "Phenote"; // "DScribe"???
+	}
+
+	protected Action getAboutAction() {
+		return new AbstractAction("About") {
+
+			public void actionPerformed(ActionEvent actionEvent) {
+				(new HelpMenu()).showAboutFrame();
+			}
+		};
 	}
 
 	@Override
