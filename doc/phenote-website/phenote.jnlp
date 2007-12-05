@@ -30,7 +30,6 @@ href="phenote.jnlp">
 	<jar href="jars/oboedit.jar" />
 	<jar href="jars/obo.jar" />
 	<jar href="jars/bbop.jar" />
-	<!-- jar href="jars/org.geneontology.jar" / -->
 	<jar href="jars/BrowserLauncher2-10rc4.jar" />
 	<jar href="jars/jsr173_1.0_api.jar" />
 	<jar href="jars/phenoxmlbeans.jar" />
@@ -50,6 +49,12 @@ href="phenote.jnlp">
 	<jar  href="jars/swing-layout.jar"/>
 	<jar  href="jars/swingx-2007_10_14.jar"/>
 	<nativelib href="jars/phenote-nativelibs.jar"/>
+
+  <!-- jars not needed for webstart(?) axis, commons-beanutils-1.6,  commons-discovery,
+      commons-lang, eutils,jaxrpc, jdom, jebl, jhindexer, jlfgr, jnlp, jsp, jsr
+      jst, junit, jwf, layouts, libquaqua, macify?   -->
+  <!-- jars needed for phenote2 but not phenote1? idw-gpl, commons*? -->
+
 
 
 	<property name="phenote.version" value="@@phenote.version@@"/>
