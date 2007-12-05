@@ -626,7 +626,7 @@ public abstract class CharFieldGui implements ListSelectionListener {
     private List<CharFieldValue> charValueList = new ArrayList<CharFieldValue>();
     private void setList(List<CharFieldValue> l) { 
       if (l == null) clear();
-      else charValueList = l;
+      else charValueList = new ArrayList<CharFieldValue>(l); // clone
       fireContentsChanged(this,0,getSize());
     }
     public Object getElementAt(int index) {
@@ -639,8 +639,9 @@ public abstract class CharFieldGui implements ListSelectionListener {
     }
     private void clear() {
       if (charValueList==null) return;
-      charValueList.clear();
-      fireContentsChanged(this,0,getSize());
+      //charValueList.clear();
+      charValueList = new ArrayList<CharFieldValue>();
+      fireContentsChanged(this,0,getSize()); //update gui
     }
     private void delete(int i) {
       //FieldListItemDeleteTrans t = new FieldListItemDeleteTrans

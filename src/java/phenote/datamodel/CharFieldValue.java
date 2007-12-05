@@ -234,12 +234,12 @@ public class CharFieldValue implements Cloneable {
     // could also edit obo edit annot model at this point! ??
   }
 
-  /** remove cfv from list of cfvs in char */
-  public void editModelDelete() {
-    //....//character.deleteValue(getCharField(),this);
-    // remove self from parent list... back pointer to parent?
-    character.getValue(charField).removeKid(this); // ??
-  }
+//   /** remove cfv from list of cfvs in char */
+//   public void editModelDelete() {
+//     //....//character.deleteValue(getCharField(),this);
+//     // remove self from parent list... back pointer to parent?
+//     character.getValue(charField).removeKid(this); // ??
+//   }
 
   public void addKid(CharFieldValue kid) {
     // creates list if null
