@@ -178,7 +178,7 @@ public class CharFieldValue implements Cloneable {
       String s="";
       for (CharFieldValue kid : getCharFieldValueList())
         s += '"'+kid.getValueAsString()+'"' + CharField.LIST_DELIM;
-      s= s.substring(0,s.length()-2); // lopp off last comma
+      if (s.length() > 0) s= s.substring(0,s.length()-1); // lopp off last comma
       return s;
     }
       

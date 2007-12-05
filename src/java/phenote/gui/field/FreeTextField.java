@@ -214,8 +214,10 @@ class FreeTextField extends CharFieldGui {
 
     //CompoundTransaction ct = new CompoundTransaction(chars,getCharFieldEnum(),v);
     CompoundTransaction ct = CompoundTransaction.makeUpdate(chars,getCharField(),v);
+    setDoingInternalEdit(true);
     this.getEditManager().updateModel(this,ct);//charFieldGui,ct); // cfg source
     guiTextHasChanged = false; // reset flag
+    setDoingInternalEdit(false);
 
   }
 
