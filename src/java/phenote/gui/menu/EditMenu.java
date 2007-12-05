@@ -1,22 +1,23 @@
 package phenote.gui.menu;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-import javax.swing.JMenu;
+import javax.swing.Action;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
+
+import org.bbop.swing.DynamicActionMenuItem;
+import org.bbop.swing.DynamicMenu;
 
 import phenote.config.Config;
 import phenote.edit.EditManager;
-import phenote.gui.actions.UndoAction;
 import phenote.gui.actions.RedoAction;
-
-import org.bbop.framework.GUIManager;
-import org.bbop.swing.AbstractDynamicMenuItem;
-import org.bbop.swing.DynamicActionMenuItem;
-import org.bbop.swing.DynamicMenu;
+import phenote.gui.actions.ResponderChainAction;
+import phenote.gui.actions.UndoAction;
 
 
 //import phenote.gui.prefswindow.PrefsWindowController; ???
@@ -42,39 +43,39 @@ public class EditMenu extends DynamicMenu {
     addSeparator();
     
 
-    JMenuItem cut = new JMenuItem("Cut");
-    cut.setActionCommand("cut");
-    cut.addActionListener(actionListener);
+    JMenuItem cut = new JMenuItem();
+    Action cutAction = new ResponderChainAction("cut", "Cut");
+    cutAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+    cut.setAction(cutAction);
     add(cut);
 
-    JMenuItem copy = new JMenuItem("Copy");
-    copy.setActionCommand("copy");
-    copy.addActionListener(actionListener);
+    JMenuItem copy = new JMenuItem();
+    Action copyAction = new ResponderChainAction("copy", "Copy");
+    copyAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+    copy.setAction(copyAction);
     add(copy);
 
-    JMenuItem paste = new JMenuItem("Paste");
-    paste.setActionCommand("paste");
-    paste.addActionListener(actionListener);
+    JMenuItem paste = new JMenuItem();
+    Action pasteAction = new ResponderChainAction("paste", "Paste");
+    pasteAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_P, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+    paste.setAction(pasteAction);
     add(paste);
     
     addSeparator();
     
     JMenuItem newChar = new JMenuItem("Add Annotation");
-    newChar.setActionCommand("new");
-    newChar.setMnemonic(KeyEvent.VK_A);
-    newChar.addActionListener(actionListener);
+    Action newAction = new ResponderChainAction("addNewCharacter", "Add Annotation");
+    newChar.setAction(newAction);
     add(newChar);
     
-    JMenuItem copyChar = new JMenuItem("Copy Annotation");
-    copyChar.setActionCommand("copyChar");
-    copyChar.setMnemonic( 'C' );
-    copyChar.addActionListener(actionListener);
-    add(copyChar);
+    JMenuItem duplicateChar = new JMenuItem();
+    Action duplicateAction = new ResponderChainAction("duplicateSelectedCharacters", "Duplicate Annotation");
+    duplicateChar.setAction(duplicateAction);
+    add(duplicateChar);
 
-    JMenuItem deleteChar = new JMenuItem("Delete Annotation");
-    deleteChar.setActionCommand("delete");
-    deleteChar.setMnemonic( 'X' );
-    deleteChar.addActionListener(actionListener);
+    JMenuItem deleteChar = new JMenuItem();
+    Action deleteAction = new ResponderChainAction("deleteSelectedCharacters", "Delete Annotation");
+    deleteChar.setAction(deleteAction);
     add(deleteChar);
     
     JMenuItem selectAll = new JMenuItem("Select All");

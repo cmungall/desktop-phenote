@@ -1,50 +1,44 @@
 package phenote.main;
 
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
-
-import org.bbop.framework.AbstractGUIComponent;
 import org.bbop.framework.GUIComponent;
 import org.bbop.framework.GUIComponentFactory;
 import org.bbop.framework.GUIComponentWrapper;
 import org.bbop.framework.GUIManager;
 import org.bbop.framework.GUITask;
+import org.bbop.framework.ScreenLockTask;
 import org.bbop.framework.ViewMenu;
 import org.bbop.util.CollectionUtil;
-//import org.oboedit.example.AnnotationNumberFetchBehaviorTask;
 import org.oboedit.example.OBDAnnotationNumberFetchBehaviorTask;
 import org.oboedit.gui.Preferences;
-import org.oboedit.gui.tasks.DefaultGUIStartupTask;
-import org.bbop.framework.ScreenLockTask;
-import org.oboedit.gui.components.AnnotationSummaryComponent;
 import org.oboedit.gui.factory.AnnotationSummaryComponentFactory;
 import org.oboedit.gui.factory.DAGViewFactory;
 import org.oboedit.gui.factory.GraphDAGViewFactory;
 import org.oboedit.gui.factory.GraphEditorFactory;
+import org.oboedit.gui.tasks.DefaultGUIStartupTask;
 
 import phenote.config.Config;
-import phenote.gui.CharacterTableController;
-import phenote.gui.TermInfo2;
-import phenote.gui.NcbiInfo;
-import phenote.gui.field.FieldPanel;
+import phenote.gui.CharacterTable;
 import phenote.gui.HelpMenu;
-import phenote.gui.selection.SelectionBridge;
-import phenote.gui.menu.FileMenu;
+import phenote.gui.NcbiInfo;
+import phenote.gui.StandardToolbar;
+import phenote.gui.TermInfo2;
+import phenote.gui.field.FieldPanel;
 import phenote.gui.menu.EditMenu;
+import phenote.gui.menu.FileMenu;
 import phenote.gui.menu.PhenoteHelpMenu;
 import phenote.gui.menu.SettingsMenu;
-import phenote.gui.StandardToolbar;
+import phenote.gui.selection.SelectionBridge;
 
 
 public class PhenoteStartupTask extends DefaultGUIStartupTask {
@@ -306,14 +300,8 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		private String displayName = null;
 
 		public GUIComponent createComponent(String id) {
-			CharacterTableController tableController = new CharacterTableController(
-					getDefaultGroup()); // for now just default
-			JPanel ctp = tableController.getCharacterTablePanel();
-			// 1st is id, 2nd id -> title bar string
-//			this.setName("(new)");
-			return new GUIComponentWrapper(id, id, ctp);
-//			return (AbstractGUIComponent)ctp;
-		}
+      return new CharacterTable(getDefaultGroup(), id); // for now just default
+    }
 
 		public FactoryCategory getCategory() {
 			return FactoryCategory.ANNOTATION;
