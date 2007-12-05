@@ -21,7 +21,21 @@ public abstract class AbstractCharacter implements CharacterI {
       be a no dangler mode? probably not right?
       CharFieldEx thrown if improper date for date field */
   public CharFieldValue setValue(CharField cf, String s) throws CharFieldException {
-    CharFieldValue cfv = cf.makeValue(this, s);
+    return setValue(cf,s,null); // null danglerName
+  }
+
+  /** if term field, string should be id, obo class will be searched for, if class
+      not found then dangler is created. if free text field just uses string of
+      course. the dangler makes termNotFound Ex irrelevant - take out? or will there
+      be a no dangler mode? probably not right?
+      CharFieldEx thrown if improper date for date field
+      if cf is a term, can optionally pass in non null danglerName, if term ends up
+      being dangler (not found in ontology) will set dangler id to s and dangler name
+      to danglerName
+  */
+  public CharFieldValue setValue(CharField cf, String s,String danglerName)
+    throws CharFieldException {
+    CharFieldValue cfv = cf.makeValue(this, s, danglerName);
     setValue(cf, cfv);
     return cfv;
   }

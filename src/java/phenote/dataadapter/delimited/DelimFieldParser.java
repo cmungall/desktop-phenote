@@ -68,10 +68,11 @@ class DelimFieldParser {
     // if term, first id then name
     String value = items[columnIndex];
     try {
-      CharFieldValue cfv = chr.setValue(charField,value);
+      String danglerName = charField.isTerm() ? items[columnIndex+1] : null;
+      CharFieldValue cfv = chr.setValue(charField,value,danglerName);
       // if term, and id not found, dangler -> set name of dangler
-      if (cfv.isDangler()) // throw error if not term?
-        cfv.setName(items[columnIndex+1]);
+      //if (cfv.isDangler()) // throw error if not term?
+      //  cfv.setName(items[columnIndex+1]); // or should CF do this?
     }
     // no longer thrown for term not found - dangler created instead!
     // this is thrown for faulty dates

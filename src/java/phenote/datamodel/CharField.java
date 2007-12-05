@@ -223,9 +223,25 @@ public class CharField {
 
   public Ontology getPostCompRelOntol() { return postCompRelOntol; }
 
+  /** if free text returns string charfieldValue, for ontology field valueString is
+      id and searches ontologies for id, throws CharFieldException if invalid date for
+      date field (used to for term not found but now creates dangler instead)
+      this deals with postcomp too)
+      if term is dangler then dangler gets id (valueString) but no name
+      use makeValue(Char,String,String) to get dangler name set as well
+      also deals with lists in format: "xxx","yyy",...
+  */
   public CharFieldValue makeValue(CharacterI c, String valueString)
     throws CharFieldException {
-    return makeValue(c,valueString,true);
+    return makeValue(c,valueString,null,true);
+  }
+
+  /** makes value - value string for term is id - if term is dangler (not in ontology)
+      and danglerName is non null, then danglers name is set to danglerName,
+      danglerName is ONLY used for danglers */
+  public CharFieldValue makeValue(CharacterI c, String valueString, String danglerName) 
+    throws CharFieldException {
+    return makeValue(c,valueString,danglerName,true);
   }
 
   /** if free text returns string charfieldValue, for ontology field valueString is
@@ -236,7 +252,8 @@ public class CharField {
       if false then dont -> making kid not parent, kid char field has isList = true
       not sure how else to do that?
   */
-  public CharFieldValue makeValue(CharacterI c, String valueString,boolean doList)
+  private CharFieldValue makeValue(CharacterI c, String valueString,
+                                   String danglerName, boolean doList)
     throws CharFieldException {
 
     // empty value
@@ -244,7 +261,7 @@ public class CharField {
       return CharFieldValue.emptyValue(c,this);
 
     if (isList() && doList) {
-      return parseList(valueString,c);
+      return parseList(valueString,danglerName,c);
     }
 
     // TERM
@@ -273,10 +290,8 @@ public class CharField {
       // DANGLER if cant find it make a dangler!
       if (oboClass == null && danglerMode()) {
         oboClass =  new DanglingClassImpl(valueString);
-        String e = valueString+" not found in loaded obo files. Creating a 'dangler'";
-        // this should be changed to just do log.error and have log appender to error
-        // window i think
-        ErrorManager.inst().error(new ErrorEvent(this,e));
+        if (danglerName != null) oboClass.setName(danglerName);
+        error(valueString+" not found in loaded obo files. Creating a 'dangler'");
       }
 
       if (oboClass != null)
@@ -303,22 +318,40 @@ public class CharField {
       return new CharFieldValue(valueString,c,this);
   }
 
-  
-  private CharFieldValue parseList(String listString,CharacterI c) throws CharFieldException {
+  private void error(String errMsg) {
+    // this should be changed to just do log.error and have log appender to error
+    // window i think
+    ErrorManager.inst().error(new ErrorEvent(this,errMsg));
+  }
+
+  /** parse listString - should be in format "xxx","yyy",...
+      if danglerNameList non null use it to set names of dangling terms 
+      should be in same format */
+  private CharFieldValue parseList(String listString,String danglerNameList,CharacterI c)
+    throws CharFieldException {
     // strip quotes
-    listString = listString.trim(); // just in case
-    if (listString.startsWith("\"")) listString = listString.substring(1);
-    if (listString.endsWith("\"")) listString = listString.substring(0,listString.length()-1);
+    listString = stripQuotes(listString);
     String delim = '"'+LIST_DELIM+'"'; // quotes separate each item
     Pattern p = Pattern.compile(delim);
     String[] kids = p.split(listString);
+    danglerNameList = stripQuotes(danglerNameList);
+    String[] kidDanglerNames = danglerNameList!=null ? p.split(danglerNameList) : null;
     CharFieldValue listVal = CharFieldValue.makeListParentValue(c,this);
-    for (String kidString : kids) {
+    for (int i=0; i<kids.length; i++) {
       boolean doList = false;
-      CharFieldValue kid = makeValue(c,kidString,doList); // throws CFEx
+      String dngl =
+        (kidDanglerNames!=null && i < kidDanglerNames.length) ? kidDanglerNames[i] : null;
+      CharFieldValue kid = makeValue(c,kids[i],dngl,doList); //tws Ex
       listVal.addKid(kid);
     }
     return listVal;
+  }
+
+  private static String stripQuotes(String s) {
+    s = s.trim(); // just in case
+    if (s.startsWith("\"")) s = s.substring(1);
+    if (s.endsWith("\"")) s = s.substring(0,s.length()-1);
+    return s;
   }
 
   // i think we eventually will want this always to be so

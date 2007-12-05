@@ -28,6 +28,16 @@ public interface CharacterI {
       found will create dangler which actually makes TermNotFoundEx irrelevant
       take out? or do we want a non-dangler mode?? */
   public CharFieldValue setValue(CharField cf, String valueString) throws CharFieldException;
+  /** if term field, string should be id, obo class will be searched for, if class
+      not found then dangler is created. if free text field just uses string of
+      course. the dangler makes termNotFound Ex irrelevant - take out? or will there
+      be a no dangler mode? probably not right?
+      CharFieldEx thrown if improper date for date field
+      if cf is a term, can optionally pass in non null danglerName, if term ends up
+      being dangler (not found in ontology) will set dangler id to s and dangler name
+      to danglerName */
+  public CharFieldValue setValue(CharField cf, String s,String danglerName)
+    throws CharFieldException;
   public CharField getCharFieldForName(String fieldName) throws CharFieldException;
   public CharFieldValue getValue(CharField cf);
   /** im wondering if a better way is to make CFVs recursive, so a CFV can be a list of
