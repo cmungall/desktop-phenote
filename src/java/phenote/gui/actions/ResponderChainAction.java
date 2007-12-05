@@ -84,7 +84,7 @@ public class ResponderChainAction extends AbstractAction {
   }
 
   private Component getFocusOwner() {
-    return KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
+    return KeyboardFocusManager.getCurrentKeyboardFocusManager().getPermanentFocusOwner();
   }
   
   /**
