@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 import org.apache.log4j.Logger;
 import org.bbop.dataadapter.DataAdapterException;
@@ -451,10 +452,18 @@ public class OntologyDataAdapter {
       return os;
     }
     catch (DataAdapterException e) {
+      // cause is crucial!
       String m = "got obo data adapter exception: "+e+" message "+e.getMessage()
-      +" cause "+e.getCause(); // cause is crucial!
+      +" cause "+e.getCause()+"\nTHIS IS FATAL!\nCan not load ontologies. Phenote must"
+      +" exit.\nConsider clearing out bad file from ~/.phenote/obo-files";
       ErrorManager.inst().error(new ErrorEvent(this,m));
       LOG.error(m); // error manager should do this for free 
+      // actually theres really no point in going on i think as we have failed to get
+      // an obo session - todo - give user options for ammending this failure, ignore
+      // failing file, or fetch from somewhere else, but for now throw up popup and exit
+      // is the best we can do - or should this be done by catcher of OntEx?
+      JOptionPane.showMessageDialog(null,m,"Load failure",JOptionPane.ERROR_MESSAGE);
+      System.exit(1);
       throw new OntologyException(e);
     }
   }
