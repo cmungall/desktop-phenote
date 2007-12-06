@@ -12,11 +12,14 @@ import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import org.apache.log4j.Logger;
 import org.bbop.framework.AbstractGUIComponent;
 import org.bbop.framework.ComponentManager;
 import org.swixml.SwingEngine;
+
+import org.obo.datamodel.OBOClass;
 
 import phenote.config.Config;
 import phenote.dataadapter.CharListChangeEvent;
@@ -24,6 +27,7 @@ import phenote.dataadapter.CharListChangeListener;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.LoadSaveManager;
 import phenote.dataadapter.OntologyMakerI;
+import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
 import phenote.edit.CharChangeEvent;
@@ -32,6 +36,7 @@ import phenote.edit.EditManager;
 import phenote.gui.field.CharFieldMatcherEditor;
 import phenote.util.EverythingEqualComparator;
 import phenote.util.FileUtil;
+import phenote.datamodel.OboUtil;
 import ca.odell.glazedlists.FilterList;
 import ca.odell.glazedlists.SortedList;
 import ca.odell.glazedlists.swing.EventSelectionModel;
@@ -40,6 +45,7 @@ import ca.odell.glazedlists.swing.TableComparatorChooser;
 
 public class CharacterTableController {
 
+  private static final int ROW_HEIGHT = 16;
 	private static final String SAVE_STRING = "Save Data";
 	private String representedGroup = "default";
 	private SortedList<CharacterI> sortedCharacters;
@@ -83,6 +89,7 @@ public class CharacterTableController {
 		CharacterListManager.getCharListMan(this.representedGroup)
 				.addCharListChangeListener(new CharacterListChangeListener());
 		this.initializeInterface();
+    characterTable.setDefaultRenderer(Object.class,new CharTableRenderer());
 		this.addInitialBlankCharacter();
 	}
 
@@ -280,18 +287,42 @@ public class CharacterTableController {
    */
 	private class CharacterChangeListener implements CharChangeListener {
 		public void charChanged(CharChangeEvent e) {
+      List<CharacterI> chars = e.getTransaction().getCharacters();
+      setRowHeights(chars);
 			if (e.isUpdate()) {
-				for (CharacterI character : e.getTransaction().getCharacters()) {
+				for (CharacterI character : chars) {
 					CharacterTableController.this
 							.updateCharacterForGlazedLists(character);
 				}
 			} else if (e.isAdd()) {
-				CharacterTableController.this.setSelectionWithCharacters(e
-						.getTransaction().getCharacters());
+				CharacterTableController.this.setSelectionWithCharacters(chars);
 			}
 		}
 	}
-	
+
+  private void setRowHeights(List<CharacterI> chars) {
+    for (CharacterI c : chars) {
+      int i = filteredCharacters.indexOf(c);
+      //if (i < 0) return; // ??
+      int numRows = getNumRowsForChar(c);
+      characterTable.setRowHeight(i,ROW_HEIGHT*numRows);
+    }
+  }
+
+  private int getNumRowsForChar(CharacterI c) {
+    int lines = 1;
+    for (CharField cf : CharFieldManager.inst().getPostCompFields()) {
+      OBOClass term = c.getValue(cf).getTerm();
+      if (term != null) {
+        int termLines = 1 + OboUtil.getNumOfDiffs(term);
+        if (termLines > lines) lines = termLines;
+      }
+    }
+    return lines;
+  }
+    
+  
+
   /** select characters in table */
 	private void setSelectionWithCharacters(List<CharacterI> characters) {
 		this.clearFilter();
@@ -379,4 +410,13 @@ public class CharacterTableController {
 
 	}
 
+  /** Breaks post comps (and should do lists) into multiple lines */
+  private class CharTableRenderer extends DefaultTableCellRenderer {
+    public void setValue(Object value) {
+      if (value == null || value.toString()==null) setText("");
+      String s = value.toString();
+      s = s.replaceAll("\\^","<br>");
+      setText("<html>"+s);
+    }
+  }
 }

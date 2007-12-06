@@ -111,6 +111,14 @@ public class CharFieldManager {
     throw new CharFieldException("No field for "+fieldName);
   }
 
+  /** return list of all char fields that allow post comps */
+  public List<CharField> getPostCompFields() {
+    List<CharField> l = new ArrayList<CharField>();
+    for (CharField cf : charFieldList)
+      if (cf.postCompAllowed()) l.add(cf);
+    return l;
+  }
+
   // ?
   private CharField getCharFieldForEnum(CharFieldEnum en) throws CharFieldException {
     try { return getCharFieldForName(en.getName()); }

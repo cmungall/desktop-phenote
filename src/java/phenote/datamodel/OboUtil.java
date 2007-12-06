@@ -126,6 +126,16 @@ public class OboUtil {
     if (!isOboRestriction(l)) return null;
     return (OBORestriction)l;
   }
+  
+  /** Return number of rel-diffs a term has */
+  public static int getNumOfDiffs(OBOClass term) {
+    if (term == null) return 0;
+    int i=0;
+    for (Link l : term.getParents())
+      if (isLinkToDiff(l)) i++;
+    return i;
+  }
+
 
   /** Assumes theres only one term with diffRel, returns the 1st one it finds
       null if none found - ex? */
