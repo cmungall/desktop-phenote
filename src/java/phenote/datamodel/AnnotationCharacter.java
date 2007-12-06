@@ -242,10 +242,10 @@ public class AnnotationCharacter extends AbstractCharacter {
     }
     else {
       OBOProperty prop = getPropertyForField(cf);
-      LOG.debug("AC.getVal got prop "+prop+" for field "+cf);
+      //LOG.debug("AC.getVal got prop "+prop+" for field "+cf);
       if (prop != null) {
         Object o = TermUtil.getPropValue(annotation, prop);
-        LOG.debug("AC.getVal2 got propval "+o+" for field "+cf);
+        //LOG.debug("AC.getVal2 got propval "+o+" for field "+cf);
         
         if (o instanceof OBOClass) {
           cfv = getCharFieldValue((OBOClass) o, this, cf);
