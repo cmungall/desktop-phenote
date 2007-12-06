@@ -4,6 +4,7 @@ package phenote.config;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Point;
@@ -32,6 +33,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 
 import javax.jnlp.BasicService;
 import java.net.JarURLConnection;
@@ -76,16 +78,15 @@ public class ConfigFileQueryGui {
   public static class CancelEx extends Exception {}
 
   private void makeQueryDialog() {
-    java.awt.Frame f = phenote.main.Phenote.getPhenote().getFrame();
-    // true -> modal -> this is crucial! 
-    dialog = new JDialog(f,true); //"Choose Configuration",true);
-    dialog.setLayout(new GridBagLayout());
-    dialog.setTitle("Phenote Configuration");
+
+    JPanel mainPanel = new JPanel();
+    mainPanel.setLayout(new GridBagLayout());
+
     JLabel text = new JLabel("Please pick a configuration for Phenote: ");
     int center = GridBagConstraints.CENTER;
     GridBagConstraints gbc = GridBagUtil.makeAnchorConstraint(0,0,center);
     gbc.gridwidth=3;
-    dialog.add(text,gbc);
+    mainPanel.add(text,gbc);
 
     JPanel buttonPanel = new JPanel();
     buttonPanel.setLayout(new BoxLayout(buttonPanel,BoxLayout.Y_AXIS));
@@ -94,8 +95,8 @@ public class ConfigFileQueryGui {
     String currentConfig = null;
     try { currentConfig = Config.inst().getMyPhenoteConfigString(); }
     catch (IOException e) { doFirst = true; }
-   for (String cfg : getConfigNames()) {
-     JRadioButton b = new JRadioButton(new BtnAction(cfg)); // makes display name
+    for (String cfg : getConfigNames()) {
+      JRadioButton b = new JRadioButton(new BtnAction(cfg)); // makes display name
       buttonPanel.add(b);
       // select current myphenote if exists, else select first
       if ( (currentConfig != null && cfg.equals(currentConfig)) 
@@ -107,22 +108,37 @@ public class ConfigFileQueryGui {
       buttonGroup.add(b);
     }
     ++gbc.gridy;
-    dialog.add(buttonPanel,gbc);
+    mainPanel.add(buttonPanel,gbc);
     JButton ok = new JButton("OK");
     gbc.gridwidth=1;
     ++gbc.gridy;
-    dialog.add(ok,gbc);
+    mainPanel.add(ok,gbc);
     ok.addActionListener(new OkActionListener());
     if (hasCancelButton) {
       JButton cancel = new JButton("Cancel");
       cancel.addActionListener(new CancelActionListener());
       ++gbc.gridx;
-      dialog.add(cancel,gbc);
+      mainPanel.add(cancel,gbc);
     }
     JButton info = new JButton("Info...");
     info.addActionListener(new InfoActionListener());
     ++gbc.gridx;
-    dialog.add(info,gbc);
+    mainPanel.add(info,gbc);
+
+    Frame f = phenote.main.Phenote.getPhenote().getFrame();
+    // true -> modal -> this is crucial! 
+    dialog = new JDialog(f,true); //"Choose Configuration",true);
+    dialog.setLayout(new GridBagLayout());
+    dialog.setTitle("Phenote Configuration");
+    JScrollPane scroll = new JScrollPane(mainPanel);
+    // shouldnt take up whole screen - tool bars get in the way and dont know if
+    // tool bar is on top or bottom - so subtract 100
+    int height = Math.min(getScreenHeight()-100,1000);
+    scroll.setPreferredSize(new Dimension(280,height));
+    scroll.setMinimumSize(new Dimension(280,(int)(height*0.7))); // just in case
+    //mainPanel.setPreferredSize(new Dimension(200,300));
+    mainPanel.validate();
+    dialog.add(scroll);
     dialog.pack();
     centerOnScreen(dialog);
     dialog.addWindowListener(new WindowCancel());
@@ -267,12 +283,17 @@ public class ConfigFileQueryGui {
 
   /** generic util? */
   private void centerOnScreen(Component c) {
-    Toolkit t = Toolkit.getDefaultToolkit();
-    Dimension screen = t.getScreenSize();
-    int x = (int)screen.getWidth()/2 - c.getWidth()/2;
-    int y = (int)screen.getHeight()/2 - c.getHeight()/2;
+    // toolbars are usually on bottom? should this shift up a bit?
+    int x = (int)getScreenWidth()/2 - c.getWidth()/2;
+    int y = (int)getScreenHeight()/2 - c.getHeight()/2;
     Point p = new Point(x,y);
     c.setLocation(p);
+  }
+
+  private int getScreenWidth() { return (int)getScreenSize().getWidth(); }
+  private int getScreenHeight() { return (int)getScreenSize().getHeight(); }
+  private Dimension getScreenSize() {
+    return Toolkit.getDefaultToolkit().getScreenSize();
   }
 
   private static Logger log() {
