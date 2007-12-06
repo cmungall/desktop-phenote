@@ -1,5 +1,7 @@
 axis - (NW) needed for the eutils software from ncbi
 
+batik* svg graphichs for oboedit graphs (phenote2)
+
 BrowserLauncher2 (added by Mark Gibson MG) is used from term info window http links to launch webpage in
 an external browser
 
@@ -113,6 +115,8 @@ te-common - MG - used for command line parsing - actually needed for webstart
 as you can give it cmd line params in application-desc
 
 tomcat-servlet - MG?CP?
+
+xml-api* - for svg graphics for oboedit graphs
 
 wsdl4j-1.5.1 - (NW) all of these are needed for the eutils software from ncbi
 
