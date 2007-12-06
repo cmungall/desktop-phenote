@@ -58,6 +58,8 @@ class PostCompGui {
   private SelectionManager selectionManager;
   private EventSelectionModel<CharacterI> selectionModel;
   private Frame owner;
+  private CompCharChangeListener compCharChangeListener;
+  private CompCharSelectListener compCharSelectListener;
   /** # of chars to type to get completion in genus & diff - do we need for relation? */
   private int minCompChars=0;
   
@@ -101,8 +103,10 @@ class PostCompGui {
     dialog.setLocationRelativeTo(owner);
     dialog.setVisible(true);
 
-    this.editManager.addCharChangeListener(new CompCharChangeListener());
-    this.selectionModel.addListSelectionListener(new CompCharSelectListener());
+    compCharChangeListener = new CompCharChangeListener();
+    this.editManager.addCharChangeListener(compCharChangeListener);
+    compCharSelectListener = new CompCharSelectListener();
+    this.selectionModel.addListSelectionListener(compCharSelectListener);
   }
 
   private void addRelDiffGui() {
@@ -300,7 +304,7 @@ class PostCompGui {
     private CancelAction() { super("Cancel"); }
     public void actionPerformed(ActionEvent e) {
       //dialog.close();
-      dialog.dispose();
+      dispose();
     }
   }
   private class OkAction extends AbstractAction {
@@ -316,8 +320,15 @@ class PostCompGui {
         JOptionPane.showMessageDialog(dialog,m,"error",JOptionPane.ERROR_MESSAGE);
         return; // dont dispose
       }
-      dialog.dispose(); // keep up if failure?
+      dispose(); // keep up if failure?
     }
+  }
+
+  private void dispose() {
+    // this does not get rid of PostCompGui as connected object
+    dialog.dispose();
+    editManager.removeCharChangeListener(compCharChangeListener);
+    selectionModel.removeListSelectionListener(compCharSelectListener);
   }
 
   private OBOClass makePostCompTerm() throws CompEx {

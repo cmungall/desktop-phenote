@@ -70,9 +70,8 @@ public class EditManager {
     return groupToEditMan.get(group);
   }
 
-  public void addCharChangeListener(CharChangeListener l) {
-    charListeners.add(l);
-  }
+  public void addCharChangeListener(CharChangeListener l) { charListeners.add(l); }
+  public void removeCharChangeListener(CharChangeListener l) {charListeners.remove(l);}
 
   public void undo() {
     if (!haveUndoableTransaction()) {
