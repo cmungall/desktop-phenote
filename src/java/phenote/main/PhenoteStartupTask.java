@@ -11,6 +11,9 @@ import javax.swing.Action;
 import javax.swing.JMenuItem;
 
 import org.apache.log4j.Logger;
+
+import org.bbop.framework.AbstractComponentFactory;
+import org.bbop.framework.AbstractGUIComponent;
 import org.bbop.framework.GUIComponent;
 import org.bbop.framework.GUIComponentFactory;
 import org.bbop.framework.GUIComponentWrapper;
@@ -18,7 +21,7 @@ import org.bbop.framework.GUIManager;
 import org.bbop.framework.GUITask;
 import org.bbop.framework.ScreenLockTask;
 import org.bbop.framework.ViewMenu;
-import org.bbop.util.CollectionUtil;
+import org.bbop.util.CollectionUtil; //import org.oboedit.example.AnnotationNumberFetchBehaviorTask;
 import org.oboedit.example.OBDAnnotationNumberFetchBehaviorTask;
 import org.oboedit.gui.Preferences;
 import org.oboedit.gui.factory.AnnotationSummaryComponentFactory;
@@ -39,7 +42,6 @@ import phenote.gui.menu.FileMenu;
 import phenote.gui.menu.PhenoteHelpMenu;
 import phenote.gui.menu.SettingsMenu;
 import phenote.gui.selection.SelectionBridge;
-
 
 public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
@@ -109,7 +111,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		// "org/phenote/gui/layout/resources";
 		// return System.getProperty("user.home") + "/.phenote";
 	}
-	
+
 	@Override
 	protected String getDefaultPerspectiveResourcePath() {
 		if (getPerspectiveResourceDir() != null)
@@ -143,75 +145,50 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 				.getManager().getScreenLockQueue(), GUIManager.getManager()
 				.getFrame(), Preferences.getPreferences()
 				.getUseModalProgressMonitors());
-		return CollectionUtil.list((GUITask) screenLockTask, 
-				new OBDAnnotationNumberFetchBehaviorTask()); // TODO: for testing
+		return CollectionUtil.list((GUITask) screenLockTask,
+				new OBDAnnotationNumberFetchBehaviorTask()); // TODO: for
+		// testing
 	}
 
 	/** FieldPanelFactory inner class */
-	private class FieldPanelFactory implements GUIComponentFactory {
-		
+	private class FieldPanelFactory extends
+			AbstractComponentFactory<FieldPanel> {
+
 		// private String panelName = "DScribe Editor";
 		private String panelName = "Phenote Editor";
-		private String displayName = null;
-		
-		public GUIComponent createComponent(String id) {
-			String l = "<html><h1>This is an example component</h1></html>";
-			// if (true) return new GUIComponentWrapper(id, id, new
-			// javax.swing.JLabel(l));
-			// for now just doing default group - need to iterate groups
-			FieldPanel groupFieldPanel = new FieldPanel(); // true,false,Config.inst().getDefaultGroup(),
-															// this.tableController.getSelectionModel());
-			groupFieldPanel.setMinimumSize(new Dimension(300, 300));
-			groupFieldPanel.setPreferredSize(new Dimension(300, 300));
-			// 1st is id, 2nd id -> title bar string
-			String configName = groupFieldPanel.getName();
-			groupFieldPanel.setTitle(panelName+" (Configuration: "+configName+")");
-			return groupFieldPanel;
-
-			
-//			return new GUIComponentWrapper(id, id, groupFieldPanel);
-		}
 
 		public FactoryCategory getCategory() {
 			return FactoryCategory.ANNOTATION;
 		}
-		
+
 		public String getName() {
 			return panelName;
-		}
-
-		public boolean getPreferSeparateWindow() {
-			return false;
-		}
-
-		public boolean isSingleton() {
-			return false;
-		}
-
-		public boolean showInMenus() {
-			return true;
 		}
 
 		public String getID() {
 			return "phenote-editor";
 		}
 
-    public boolean isRestoreOnStartup() {
-      // TODO Auto-generated method stub
-      return true;
-    }
+		@Override
+		public FieldPanel doCreateComponent(String id) {
+			String l = "<html><h1>This is an example component</h1></html>";
+			// if (true) return new GUIComponentWrapper(id, id, new
+			// javax.swing.JLabel(l));
+			// for now just doing default group - need to iterate groups
+			FieldPanel groupFieldPanel = new FieldPanel(); // true,false,Config.inst().getDefaultGroup(),
+			// this.tableController.getSelectionModel());
+			groupFieldPanel.setMinimumSize(new Dimension(300, 300));
+			groupFieldPanel.setPreferredSize(new Dimension(300, 300));
+			// 1st is id, 2nd id -> title bar string
+			String configName = groupFieldPanel.getName();
+			groupFieldPanel.setTitle(panelName + " (Configuration: "
+					+ configName + ")");
+			return groupFieldPanel;
+		}
 	}
 
 	/** TermInfoFactory inner class */
-	private class TermInfoFactory implements GUIComponentFactory {
-		private String panelName = "Term Info";
-		private String displayName = "Term Info";
-
-		public GUIComponent createComponent(String id) {
-			return TermInfo2.inst();
-			//			return new GUIComponentWrapper(id,id, ti.getComponent());
-		}
-
+	private class TermInfoFactory extends AbstractComponentFactory<TermInfo2> {
 		public FactoryCategory getCategory() {
 			return FactoryCategory.ANNOTATION;
 		}
@@ -220,15 +197,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 			return "Term Info";
 		}
 
-		public boolean getPreferSeparateWindow() {
-			return false;
-		}
-
 		public boolean isSingleton() {
-			return true;
-		}
-
-		public boolean showInMenus() {
 			return true;
 		}
 
@@ -236,140 +205,79 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 			return "term-info";
 		}
 
-    public boolean isRestoreOnStartup() {
-      // TODO Auto-generated method stub
-      return true;
-    }
-		
-//		public void setName(String name) {
-//			displayName = panelName+": "+name;
-//		}
+		@Override
+		public TermInfo2 doCreateComponent(String id) {
+			return TermInfo2.inst();
+		}
 	}
-	
+
 	/** NCBIInfoFactory inner class */
-	private class NCBIInfoFactory implements GUIComponentFactory {
+	private class NCBIInfoFactory extends AbstractComponentFactory<NcbiInfo> {
 		private String panelName = "NCBI";
 		private String displayName = null;
-
-		public GUIComponent createComponent(String id) {
-			NcbiInfo info = new NcbiInfo();
-			info.setMinimumSize(new Dimension(200, 200));
-			info.setPreferredSize(new Dimension(200, 200));
-			info.setTitle("NCBI");
-			return info;
-			
-			//			this.setName("(none)");
-//			return new GUIComponentWrapper(id, id, info.getComponent());
-		}
 
 		public FactoryCategory getCategory() {
 			return FactoryCategory.INFO;
 		}
 
-		public String getName() { //what is displayed in the menu
+		public String getName() { // what is displayed in the menu
 			return panelName;
-		}
-
-		public boolean getPreferSeparateWindow() {
-			return false;
-		}
-
-		public boolean isSingleton() {
-			return true;
-		}
-
-		public boolean showInMenus() {
-			return true;
 		}
 
 		public String getID() {
 			return "NCBI";
 		}
 
-    public boolean isRestoreOnStartup() {
-      // TODO Auto-generated method stub
-      return true;
-    }
+		@Override
+		public NcbiInfo doCreateComponent(String id) {
+			NcbiInfo info = new NcbiInfo();
+			info.setMinimumSize(new Dimension(200, 200));
+			info.setPreferredSize(new Dimension(200, 200));
+			info.setTitle("NCBI");
+			return info;
+		}
 
 	}
 
-
 	/** CharTableFactory inner class */
-	private class CharTableFactory implements GUIComponentFactory {
-		private String panelName = "Annotation Table";
-		private String displayName = null;
-
-		public GUIComponent createComponent(String id) {
-      return new CharacterTable(getDefaultGroup(), id); // for now just default
-    }
+	private class CharTableFactory extends AbstractComponentFactory<CharacterTable> {
 
 		public FactoryCategory getCategory() {
 			return FactoryCategory.ANNOTATION;
 		}
 
 		public String getName() {
-			return panelName;
-		}
-
-		public boolean getPreferSeparateWindow() {
-			return false;
-		}
-
-		public boolean isSingleton() {
-			return false;
-		}
-
-		public boolean showInMenus() {
-			return true;
-		}
-		public String getID() {
 			return "Annotation Table";
 		}
 
-    public boolean isRestoreOnStartup() {
-      // TODO Auto-generated method stub
-      return true;
-    }
+		public String getID() {
+			return "annotation_table";
+		}
+
+		@Override
+		public CharacterTable doCreateComponent(String id) {
+			return new CharacterTable(getDefaultGroup(), id);
+		}
 	}
 
 	/** StandardToolbarFactory inner class */
-	private class StandardToolbarFactory implements GUIComponentFactory {
-		public GUIComponent createComponent(String id) {
-			StandardToolbar toolbar = new StandardToolbar();
-			// 1st is id, 2nd id -> title bar string
-			return new GUIComponentWrapper(id, id, toolbar);
-		}
+	private class StandardToolbarFactory extends AbstractComponentFactory<GUIComponentWrapper> {
 
 		public FactoryCategory getCategory() {
-                  // donest compile
-                  //			return FactoryCategory.TOOLBARS;
-                  return null;
+			return null;
 		}
 
 		public String getName() {
 			return "Standard Toolbar";
 		}
 
-		public boolean getPreferSeparateWindow() {
-			return false;
-		}
-
-		public boolean isSingleton() {
-			return false;
-		}
-
-		public boolean showInMenus() {
-			return true;
-		}
-
 		public String getID() {
 			return "Standard toolbar";
 		}
-
-    public boolean isRestoreOnStartup() {
-      // TODO Auto-generated method stub
-      return true;
-    }
+		@Override
+		public GUIComponentWrapper doCreateComponent(String id) {
+			return new GUIComponentWrapper(id, id, new StandardToolbar());
+		}
 	}
 
 	private String getDefaultGroup() {
