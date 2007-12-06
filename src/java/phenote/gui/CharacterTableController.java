@@ -271,8 +271,13 @@ public class CharacterTableController {
 		return Logger.getLogger(CharacterTableController.class);
 	}
 
-  /** This seems to already know about add & delete - add here is just doing a select of
-      characters added - update i dont understand */
+  /**
+   * The table is automatically updated through Glazed Lists (with EventList and
+   * EventTableModel).  But this lets us find out when a character is edited, so 
+   * we can tell the table to refresh that row.  Glazed Lists doesn't automatically 
+   * select newly inserted objects, so we listen for the add here and then select
+   * those rows.
+   */
 	private class CharacterChangeListener implements CharChangeListener {
 		public void charChanged(CharChangeEvent e) {
 			if (e.isUpdate()) {
@@ -286,6 +291,7 @@ public class CharacterTableController {
 			}
 		}
 	}
+	
   /** select characters in table */
 	private void setSelectionWithCharacters(List<CharacterI> characters) {
 		this.clearFilter();
@@ -301,7 +307,11 @@ public class CharacterTableController {
 		}
 	}
 
-  // ????? this seems to be setting what its getting???
+	/**
+	 * This method does nothing but tell Glazed Lists that the object has been updated.
+	 * This triggers the EventTableModel, which is part of Glazed Lists, to update the 
+	 * display of the row value in the table.
+	 */
 	private void updateCharacterForGlazedLists(CharacterI character) {
 		final int index = this.getCharacterListManager().getCharacterList()
 				.getList().indexOf(character);
