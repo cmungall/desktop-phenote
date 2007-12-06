@@ -57,8 +57,7 @@ public class FreeTextFieldTest {
           selectionModel.setSelectionInterval(1, 1);
           fieldGui.focusLost();
           final List<CharacterI> characters = CharacterListManager.main().getCharList();
-          System.out.println("Value is: " + characters.get(0).getValueString(charField));
-          Assert.assertEquals(characters.get(0).getValueString(charField), textInput);
+          Assert.assertEquals("Value should have been committed when selection changed", characters.get(0).getValueString(charField), textInput);
         } catch (CharFieldException e) {
           Assert.fail(e.getMessage());
         }

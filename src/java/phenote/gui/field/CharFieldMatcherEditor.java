@@ -64,8 +64,6 @@ public class CharFieldMatcherEditor extends AbstractMatcherEditor<CharacterI> {
   public CharFieldMatcherEditor(List<CharField> charFields) {
     if (charFields.size() < 1) log().error("Filter field initialized with no charfields");
     this.loadPanelLayout();
-    //this.charFields = charFields;
-    //this.editedCharField = this.charFields.get(0);
     this.editedCharField = CharFieldMatcherEditor.ANY_FIELD;
     this.filterMode = Mode.INHERIT;
     this.ontologyInputField = (TermCompList)(CharFieldGui.makePostCompTermList(this.editedCharField, "", 0));

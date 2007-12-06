@@ -70,6 +70,7 @@ public class EditMenu extends DynamicMenu {
     
     JMenuItem duplicateChar = new JMenuItem();
     Action duplicateAction = new ResponderChainAction("duplicateSelectedCharacters", "Duplicate Annotation");
+    duplicateAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_D, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
     duplicateChar.setAction(duplicateAction);
     add(duplicateChar);
 

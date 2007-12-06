@@ -204,6 +204,9 @@ public class CharacterTableController {
 				this.sortedCharacters, false);
 		this.characterTable.setSelectionModel(this.selectionModel);
 		this.characterTable.putClientProperty("Quaqua.Table.style", "striped");
+		// Remove keyboard actions from table since we are custom handling these from menu accelerators
+		this.characterTable.getActionMap().getParent().remove("copy");
+    this.characterTable.getActionMap().getParent().remove("paste");
 		if (!Config.inst().hasNCBIAdapter())
 			this.commitButton.setText(this.getCommitButtonString());
 		if (!Config.inst().uvicGraphIsEnabled()) {

@@ -108,7 +108,8 @@ public class ResponderChainAction extends AbstractAction {
    * Returns the next object which should be queried for an implementation of the
    * actionCommand.  This is typically the parent Component of an existing Component,
    * but in the future we may want to establish a convention for querying a delegate of
-   * the final component.  This would presumably be a controller class.
+   * the final component.  This would presumably be a controller class.  If null is 
+   * passed, the currently focused Component is returned.
    */
   private Object getNextResponder(Object currentResponder) {
     if (currentResponder == null) return this.getFocusOwner();
