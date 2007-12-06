@@ -3,6 +3,7 @@ package phenote.gui.menu;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
 import javax.swing.Action;
@@ -61,10 +62,17 @@ public class EditMenu extends DynamicMenu {
     paste.setAction(pasteAction);
     add(paste);
     
+    JMenuItem selectAll = new JMenuItem();
+    Action selectAllAction = new ResponderChainAction("selectAll", "Select All");
+    selectAllAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_A, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+    selectAll.setAction(selectAllAction);
+    add(selectAll);
+    
     addSeparator();
     
-    JMenuItem newChar = new JMenuItem("Add Annotation");
+    JMenuItem newChar = new JMenuItem();
     Action newAction = new ResponderChainAction("addNewCharacter", "Add Annotation");
+    newAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() | InputEvent.SHIFT_MASK));
     newChar.setAction(newAction);
     add(newChar);
     
@@ -76,14 +84,11 @@ public class EditMenu extends DynamicMenu {
 
     JMenuItem deleteChar = new JMenuItem();
     Action deleteAction = new ResponderChainAction("deleteSelectedCharacters", "Delete Annotation");
+    deleteAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
     deleteChar.setAction(deleteAction);
     add(deleteChar);
     
-    JMenuItem selectAll = new JMenuItem("Select All");
-    selectAll.setActionCommand("selectAll");
-    selectAll.addActionListener(actionListener);
-    selectAll.setMnemonic( 'A' );
-
+    
     //set all to disabled until they are working.
     setEnabled(true);
 
