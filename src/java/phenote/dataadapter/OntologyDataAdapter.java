@@ -457,11 +457,12 @@ public class OntologyDataAdapter {
       +" cause "+e.getCause()+"\nTHIS IS FATAL!\nCan not load ontologies. Phenote must"
       +" exit.\nConsider clearing out bad file from ~/.phenote/obo-files";
       ErrorManager.inst().error(new ErrorEvent(this,m));
-      LOG.error(m); // error manager should do this for free 
+      //LOG.error(m); // error manager should do this for free 
       // actually theres really no point in going on i think as we have failed to get
       // an obo session - todo - give user options for ammending this failure, ignore
       // failing file, or fetch from somewhere else, but for now throw up popup and exit
       // is the best we can do - or should this be done by catcher of OntEx?
+      LOG.fatal(m);
       JOptionPane.showMessageDialog(null,m,"Load failure",JOptionPane.ERROR_MESSAGE);
       System.exit(1);
       throw new OntologyException(e);

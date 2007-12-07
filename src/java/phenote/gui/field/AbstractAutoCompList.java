@@ -142,12 +142,24 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   }
 
   /** this is funny for TermCompList this is a CompletionTerm, for RelationCompList this
-      is a RelationTerm */
+      is a RelationTerm - with new OboObject interface these should be merged! 
+      this returns a String if the user has not selected a term in the list yet 
+      the String is the current User input - rename this! 
+      peculiar that the method called is getSelectedItem as the String was 
+      never actually selected*/
   protected Object getSelectedObject() throws OboException {
     if (compComboBoxModel == null) throw new OboException(); // ??
     Object obj = compComboBoxModel.getSelectedItem();
     if (obj == null) throw new OboException();
     return obj;
+  }
+
+  /** Get first object in comp list, CompTerm for TermCompList, RelationTerm for
+      RelCompList (silly - merge!) - throws ex if list is empty */
+  protected Object getFirstCompListObj() throws OboException {
+    if (compComboBoxModel == null) throw new OboException();
+    if (compComboBoxModel.isEmpty()) throw new OboException();
+    return compComboBoxModel.getElementAt(0);
   }
   
 
@@ -476,6 +488,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     public void	addListDataListener(ListDataListener l) {}
     public Object getElementAt(int index) { return list.get(index); }
     public int getSize() { return list.size(); }
+    private boolean isEmpty() { return getSize()==0; }
     public void removeListDataListener(ListDataListener l) {}
   }
   

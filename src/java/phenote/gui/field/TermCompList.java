@@ -96,7 +96,8 @@ public class TermCompList extends AbstractAutoCompList {
     }
   }
 
-  /** now threaded so cant return - set AbAutoCompList when done */
+  /** now threaded so cant return - when done sets
+      AbstractAutoCompList.ListSearchListener.newResults */
   protected void getSearchItems(String input,SearchListener l,boolean thread) {
     /*return*/ getCompListSearcher().getStringMatchTermList(input,l,thread);
   }
@@ -106,9 +107,9 @@ public class TermCompList extends AbstractAutoCompList {
    * if doesnt validate throw ex
    */
   protected void setCurrentValidItem() throws OboException {
-    setOboClass(getSelectedOboClass()); //this will set text to oboclass
+    setOboClass(getOboClassFromInput()); //this will set text to oboclass
     // send out selection event that is NOT a mouse over event (for DAG view)
-    this.getSelectionManager().selectTerm(this, getSelectedOboClass(), false);
+    this.getSelectionManager().selectTerm(this, getOboClassFromInput(), false);
   }
 
   protected String getCurrentTermRelName() {
@@ -159,23 +160,51 @@ public class TermCompList extends AbstractAutoCompList {
    * this doesnt necasarily stay current with user input hmmm....
    * throws OboException if dont have valid term
    */
-  private OBOClass getSelectedOboClass() throws OboException {
+  private OBOClass getOboClassFromInput() throws OboException {
     Object obj = getSelectedObject(); // throws oboex
     //return oboClassDowncast(obj); // throws oboex
-    CompletionTerm t = completionTermDowncast(obj);
+    CompletionTerm t = getCompTermFromInput(obj);
     return t.getOboClass();
   }
 
 
-  private CompletionTerm completionTermDowncast(Object obj) throws OboException {
+  /** this takes object from user selection and casts it to CompletionTerm, if not
+      CompletionTerm throws OboException. If user hits return in box obj will actually
+      be a String of user input NOT CompTerm. but new request is to go with top 
+      option at that point. So I think this will then go for top CompTerm in
+      comp list and this method needs to be renamed if so.
+      I think i didnt realize previous that returns put Strings out from comp */
+  //private CompletionTerm completionTermDowncast(Object obj) throws OboException {
+  private CompletionTerm getCompTermFromInput(Object obj) throws OboException {
     if (obj == null) throw new OboException();
+    // STRING - user hit return
     if (!(obj instanceof CompletionTerm)) {
       //log.info("Item in completion list not obo class "+obj.getClass());
-      throw new OboException("Item in completion list not obo class " + obj.getClass());
+      //throw new OboException("Item in completion list not obo class " + obj.getClass());
+      // The entry is a string and its what the user has typed so far, 
+      // return 1st item of comp list - should it be exact? syn? only item?
+      if (!(obj instanceof String)) // i dont think this is possible
+        throw new OboException("Item in completion list not obo class nor string"
+                               + obj.getClass());
+      String input = (String)obj;
+      // Constraint: need a least 1 letter/char
+      if (input == null || input.trim().length() == 0)
+        throw new OboException("no input given"); // msg not used
+      CompletionTerm ct = getFirstCompTerm();
+      // compare string with ct?? probably...
+      return ct; // hmmmm
     }
+    // TERM - user selected term
     return (CompletionTerm) obj;
   }
 
+  /** Returns first CompletionTerm in completion list 
+   throws obo exception if list is empty (or not comp term) */
+  private CompletionTerm getFirstCompTerm() throws OboException {
+    Object o = super.getFirstCompListObj(); // throws ex if emtpy
+    if (!(o instanceof CompletionTerm)) throw new OboException();
+    return (CompletionTerm)o;
+  }
 
   /**
    * edits one or more selected chars
