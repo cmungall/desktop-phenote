@@ -11,10 +11,18 @@ public class CharacterTemplateTableFormat extends CharacterTableFormat implement
   
   private static final String SELECTED_COLUMN_NAME = "Use";
   private final CharacterTemplateController controller;
+  private final CharacterTemplateTable tableController;
   
   public CharacterTemplateTableFormat(String groupName, CharacterTemplateController aController) {
     super(groupName);
     this.controller = aController;
+    this.tableController = null;
+  }
+  
+  public CharacterTemplateTableFormat(String groupName, CharacterTemplateTable tableController) {
+    super(groupName);
+    this.tableController = tableController;
+    this.controller = null;
   }
   
   public Class<?> getColumnClass(int columnIndex) {
@@ -47,7 +55,7 @@ public class CharacterTemplateTableFormat extends CharacterTableFormat implement
 
   public Object getColumnValue(CharacterI character, int column) {
     if (column == 0) {
-      return this.controller.isCharacterMarked(character);
+      return this.controller == null ? this.tableController.isCharacterMarked(character): this.controller.isCharacterMarked(character);
     } else {
       return super.getColumnValue(character, (column - 1));
     }
@@ -59,7 +67,11 @@ public class CharacterTemplateTableFormat extends CharacterTableFormat implement
 
   public CharacterI setColumnValue(CharacterI character, Object editedValue, int column) {
     if (column == 0) {
-      this.controller.setCharacterIsMarked(character, (Boolean)editedValue);
+      if (this.controller == null) {
+        this.tableController.setCharacterIsMarked(character, (Boolean)editedValue);
+      } else {
+        this.controller.setCharacterIsMarked(character, (Boolean)editedValue);
+      }
     }
     return character;
   }

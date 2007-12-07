@@ -68,6 +68,7 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
   private JPanel termInfoPanelContainer; // initialized by swix
   private JTable characterTemplateTable; // initialized by swix
   private JPanel filterPanel; // initialized by swix
+  private JPanel tablePanel; // inititalized by swix
   private List<TemplateChooser> templateChoosers = new ArrayList<TemplateChooser>();
   private SortedList<CharacterI> sortedCharacters;
   private FilterList<CharacterI> filteredCharacters;
@@ -201,6 +202,11 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
       this.window.setSize(panel.getSize());
     }
     return this.window;
+  }
+  
+  public JComponent getComponent() {
+    this.getWindow(); //TODO get rid of need for window
+    return this.tablePanel;
   }
   
   public void templateChoiceChanged(TemplateChooser source) {

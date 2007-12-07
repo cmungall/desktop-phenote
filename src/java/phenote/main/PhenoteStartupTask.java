@@ -11,17 +11,14 @@ import javax.swing.Action;
 import javax.swing.JMenuItem;
 
 import org.apache.log4j.Logger;
-
 import org.bbop.framework.AbstractComponentFactory;
-import org.bbop.framework.AbstractGUIComponent;
-import org.bbop.framework.GUIComponent;
 import org.bbop.framework.GUIComponentFactory;
 import org.bbop.framework.GUIComponentWrapper;
 import org.bbop.framework.GUIManager;
 import org.bbop.framework.GUITask;
 import org.bbop.framework.ScreenLockTask;
 import org.bbop.framework.ViewMenu;
-import org.bbop.util.CollectionUtil; //import org.oboedit.example.AnnotationNumberFetchBehaviorTask;
+import org.bbop.util.CollectionUtil;
 import org.oboedit.example.OBDAnnotationNumberFetchBehaviorTask;
 import org.oboedit.gui.Preferences;
 import org.oboedit.gui.factory.AnnotationSummaryComponentFactory;
@@ -30,7 +27,11 @@ import org.oboedit.gui.factory.GraphDAGViewFactory;
 import org.oboedit.gui.factory.GraphEditorFactory;
 import org.oboedit.gui.tasks.DefaultGUIStartupTask;
 
+import phenote.charactertemplate.CharacterTemplateTableFactory;
+import phenote.charactertemplate.TemplateChooserFactory;
 import phenote.config.Config;
+import phenote.config.xml.GroupDocument.Group;
+import phenote.config.xml.TemplatechooserDocument.Templatechooser;
 import phenote.gui.CharacterTable;
 import phenote.gui.HelpMenu;
 import phenote.gui.NcbiInfo;
@@ -51,6 +52,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
 	PhenoteStartupTask(String[] args) {
 		this.args = args;
+		initPhenote();
 	}
 
 	@Override
@@ -67,6 +69,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		factories.add(new GraphDAGViewFactory());
 		factories.add(new StandardToolbarFactory());
 		factories.add(new AnnotationSummaryComponentFactory());
+		factories.addAll(this.getTemplateGroupComponentFactories());
 		return factories;
 	}
 
@@ -149,6 +152,19 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 				new OBDAnnotationNumberFetchBehaviorTask()); // TODO: for
 		// testing
 	}
+	
+	private Collection<GUIComponentFactory<?>> getTemplateGroupComponentFactories() {
+    Collection<GUIComponentFactory<?>> factories = new ArrayList<GUIComponentFactory<?>>();
+    for (Group group : Config.inst().getFieldGroups()) {
+      if (group.getInterface().equals(Group.Interface.CHARACTER_TEMPLATE)) {
+        factories.add(new CharacterTemplateTableFactory(group.getName(), group.getGroupAdapter()));
+        for (Templatechooser chooserConfig : group.getTemplatechooserArray()) {
+          factories.add(new TemplateChooserFactory(group.getName(), chooserConfig.getAdapter(), chooserConfig.getTitle(), chooserConfig.getField()));
+        }
+      }
+    }
+    return factories;
+  }
 
 	/** FieldPanelFactory inner class */
 	private class FieldPanelFactory extends

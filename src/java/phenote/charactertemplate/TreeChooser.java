@@ -1,6 +1,7 @@
 package phenote.charactertemplate;
 
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -42,15 +43,18 @@ import phenote.util.FileUtil;
 
 public class TreeChooser extends AbstractTemplateChooser implements CharListChangeListener {
   
+  private static final long serialVersionUID = 2683680201895012882L;
   private JFrame window;
   private TreeViewer treeViewer;
   private JTextField newickField; // initialized by swix
   private JLabel newickFieldLabel; // initialized by swix
   private JPanel treeViewerContainer; // initialized by swix
   
-  public TreeChooser() {
-    super();
+  public TreeChooser(String id) {
+    super(id);
     CharacterListManager.main().addCharListChangeListener(this);
+    this.setLayout(new GridLayout());
+    this.add(this.createComponent());
   }
   
   public void showChooser() {
@@ -138,12 +142,17 @@ public class TreeChooser extends AbstractTemplateChooser implements CharListChan
   private JFrame getWindow() {
     if (this.window == null) {
       this.window = new JFrame("Phylogeny Chooser");
-      final JComponent component = this.createPanel();
-      this.treeViewerContainer.add(this.getTreeViewer());
+      final JComponent component = this.createComponent();
       this.window.setSize(component.getSize());
       this.window.getContentPane().add(component);
     }
     return this.window;
+  }
+  
+  private JComponent createComponent() {
+    final JComponent component = this.createPanel();
+    this.treeViewerContainer.add(this.getTreeViewer());
+    return component;
   }
   
   private JComponent createPanel() {

@@ -6,7 +6,7 @@
 		<panel id="termInfoPanelContainer" layout="GridLayout" border="EmptyBorder(10,10,10,10)">
 		</panel>
 	</splitpane>
-	<panel constraints="BorderLayout.CENTER" layout="GridBagLayout">
+	<panel id="tablePanel" constraints="BorderLayout.CENTER" layout="GridBagLayout">
 	    <scrollpane horizontalScrollBarPolicy="JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS">
 	    	<gridbagconstraints gridx="0" gridy="0" weightx="1" weighty="1" gridwidth="2" fill="GridBagConstraints.BOTH" insets="0,10,0,10"/>
 	        <table id="characterTemplateTable"/>

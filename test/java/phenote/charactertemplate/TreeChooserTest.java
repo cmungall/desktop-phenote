@@ -29,6 +29,10 @@ public class TreeChooserTest extends TreeChooser {
   
   private TreeChooser treeChooser;
   private static final String[] termIDs = {"TTO:1003114", "TTO:1004143", "TTO:1030110"};
+  
+  public TreeChooserTest() {
+    super("dummy id");
+  }
 
   @BeforeClass public static void initialize() throws ConfigException {
     Phenote.resetAllSingletons();
@@ -41,7 +45,7 @@ public class TreeChooserTest extends TreeChooser {
   @Before public void setup() throws InterruptedException, InvocationTargetException {
     SwingUtilities.invokeAndWait(new Runnable() {
       public void run() {
-        treeChooser = new TreeChooser();
+        treeChooser = new TreeChooser("dummy id");
       }
     });
   }
