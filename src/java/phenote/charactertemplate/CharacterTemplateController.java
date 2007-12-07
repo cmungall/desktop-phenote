@@ -5,6 +5,8 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -362,13 +364,22 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
     final String errorMessage = "Failed creating TemplateChooser";
     try {
       Class<?> adapterClass = Class.forName(className);
-      Object chooser = adapterClass.newInstance();
+      Constructor<?> constructor = adapterClass.getConstructor(String.class);
+      Object chooser = constructor.newInstance("dummy id");
       return (TemplateChooser)chooser;
     } catch (ClassNotFoundException e) {
       this.log().error(errorMessage, e);
     } catch (InstantiationException e) {
       this.log().error(errorMessage, e);
     } catch (IllegalAccessException e) {
+      this.log().error(errorMessage, e);
+    } catch (SecurityException e) {
+      this.log().error(errorMessage, e);
+    } catch (NoSuchMethodException e) {
+      this.log().error(errorMessage, e);
+    } catch (IllegalArgumentException e) {
+      this.log().error(errorMessage, e);
+    } catch (InvocationTargetException e) {
       this.log().error(errorMessage, e);
     }
     return null;
