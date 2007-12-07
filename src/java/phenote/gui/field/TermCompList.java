@@ -23,6 +23,7 @@ import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyException;
 import phenote.datamodel.CharFieldManager;
 import phenote.edit.CompoundTransaction;
+import phenote.gui.SearchParams;
 import phenote.gui.selection.UseTermEvent;
 import phenote.gui.selection.UseTermListener;
 
@@ -191,6 +192,9 @@ public class TermCompList extends AbstractAutoCompList {
       if (input == null || input.trim().length() == 0)
         throw new OboException("no input given"); // msg not used
       CompletionTerm ct = getFirstCompTerm();
+      // dont think this can happen - safety
+      if (!ct.matches(input,SearchParams.inst()))
+        throw new OboException("input & 1st term dont match");
       // compare string with ct?? probably...
       return ct; // hmmmm
     }
