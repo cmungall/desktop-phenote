@@ -7,6 +7,7 @@ import java.awt.FontMetrics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyAdapter;
 import java.util.List;
 
 import javax.accessibility.Accessible;
@@ -77,6 +78,8 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     getJComboBox().addPopupMenuListener(new CompPopupMenuListener());
     //if (hasArrowButton())
     //getArrowButton().addActionListener(new ArrowButtonActionListener());
+    //getJComboBox().addKeyListener(new ReturnKeyListener());
+    //autoTextField.getTextField().addKeyListener(new ReturnKeyListener());
   }
 
   public void setMinCompChars(int minChars) { minCompChars = minChars; }
@@ -146,11 +149,16 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
       this returns a String if the user has not selected a term in the list yet 
       the String is the current User input - rename this! 
       peculiar that the method called is getSelectedItem as the String was 
-      never actually selected*/
+      never actually selected
+      so with KeyListener on JTextField when get key selectedObj is a null state
+      so returns null if so - can get text straight from TextField in this case
+      if need it
+  */
   protected Object getSelectedObject() throws OboException {
     if (compComboBoxModel == null) throw new OboException(); // ??
     Object obj = compComboBoxModel.getSelectedItem();
-    if (obj == null) throw new OboException();
+    // with key listener obj hasnt been set to String yet, so return null
+    //if (obj == null) throw new OboException();
     return obj;
   }
 
@@ -177,6 +185,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
       editor.setForeground(java.awt.Color.RED);
       addDocumentListener(new AutoDocumentListener());
       this.correctInputMapForEditorField(autoTextField);
+      autoTextField.addKeyListener(new ReturnKeyListener());
     }
 
     // editor is protected JTextField - wacky
@@ -431,11 +440,18 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
 
 
    /** Listens for actions from combo boxes and edits model/character 
-   * actions come from mouse select/click of term as well as return & tab  */
+   * actions come from mouse select/click of term in comp list
+   as well as return & tab
+   and loss of focus - action command can distinguish between selection
+   (comboBoxChanged) & the others(comboBoxEdited)
+   but there is no way to distinguish between loss of focus & hitting return - in
+   other words action events are rather crude! what we care about are selection
+   and return - but NOT loss of focus - but cant gleen out focus from return */
    private class ComboBoxActionListener implements ActionListener {
 
     private ComboBoxActionListener() {}
     public void actionPerformed(ActionEvent e) {
+      // comboBoxChanged-> user has selected from list, (cdEdited-> user has edited text box)
       if (e.getActionCommand().equals("comboBoxChanged")) {
         AbstractAutoCompList.this.setHasChangedMultipleValues(true);
       }
@@ -447,14 +463,35 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
       }
     }
   }
+  
+  private class ReturnKeyListener extends KeyAdapter {
+    public void keyPressed(KeyEvent e) {
+      if (!keyForTopPick(e)) return; // tab?
+      log().debug("tab or ret hit");
+      boolean useTopHit = true;
+      updateModel(useTopHit); // use top hit in search list
+    }
+  }
+
+  private boolean keyForTopPick(KeyEvent e) {
+    if (e.getKeyCode() == KeyEvent.VK_ENTER) return true;
+    // todo - tab doesnt go through i think because of focus loss?
+    return e.getKeyCode() == KeyEvent.VK_TAB;
+  }
 
   /** The user has selected a real item (from list) record this in the subclass
       in TermCL set currentSelOboClass, in RelCL set currentSelectedRelation 
-      throws ex if in fact current user input is not a valid item */
-  protected abstract void setCurrentValidItem() throws OboException;
+      throws ex if in fact current user input is not a valid item
+  dont think this needs to be in super class */
+  //protected abstract void setCurrentValidItem() throws OboException;
 
 
-  protected abstract void updateModel();
+  /** updateModel only if have selected from list */
+  protected void updateModel() {
+    boolean useTopHit = false;
+    updateModel(useTopHit);
+  }
+  protected abstract void updateModel(boolean useTopHit);
 
   private Logger log;
   private Logger log() {

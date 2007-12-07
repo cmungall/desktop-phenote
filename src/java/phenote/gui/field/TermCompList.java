@@ -106,11 +106,15 @@ public class TermCompList extends AbstractAutoCompList {
   /**
    * The user has selected a term from the list, validate and set current obo class
    * if doesnt validate throw ex
+   called by updateModel to get valid term.
+   if useTopHit is true then input is partial string and use top hit in
+   comp list. if false only use selected term - throw oboex otherwise
    */
-  protected void setCurrentValidItem() throws OboException {
-    setOboClass(getOboClassFromInput()); //this will set text to oboclass
+  protected void setCurrentValidItem(boolean useTopHit) throws OboException {
+    OBOClass inputTerm = getOboClassFromInput(useTopHit); // throws OboEx
+    setOboClass(inputTerm); //this will set text to oboclass
     // send out selection event that is NOT a mouse over event (for DAG view)
-    this.getSelectionManager().selectTerm(this, getOboClassFromInput(), false);
+    this.getSelectionManager().selectTerm(this, inputTerm, false);
   }
 
   protected String getCurrentTermRelName() {
@@ -161,10 +165,20 @@ public class TermCompList extends AbstractAutoCompList {
    * this doesnt necasarily stay current with user input hmmm....
    * throws OboException if dont have valid term
    */
-  private OBOClass getOboClassFromInput() throws OboException {
+  private OBOClass getOboClassFromInput(boolean useTopHit) throws OboException {
+    // CompletionTerm if selected, String if typed & return
     Object obj = getSelectedObject(); // throws oboex
+    if (obj==null) {
+      if (!useTopHit)
+        throw new OboException("selected obj is null");
+      // just get text straight from textfield, key listen event came in before
+      // sel obj got set
+      else 
+        obj = getText(); 
+    }
+      
     //return oboClassDowncast(obj); // throws oboex
-    CompletionTerm t = getCompTermFromInput(obj);
+    CompletionTerm t = getCompTermFromInput(obj,useTopHit);
     return t.getOboClass();
   }
 
@@ -174,18 +188,24 @@ public class TermCompList extends AbstractAutoCompList {
       be a String of user input NOT CompTerm. but new request is to go with top 
       option at that point. So I think this will then go for top CompTerm in
       comp list and this method needs to be renamed if so.
-      I think i didnt realize previous that returns put Strings out from comp */
+      I think i didnt realize previous that returns put Strings out from comp
+      so if useTopHit is false and input is String not compTerm then throw OboEx
+      if useTopHit is true and input is String grab top compTerm from comp list
+      for user hitting return on partial string - convenience!
+  */
   //private CompletionTerm completionTermDowncast(Object obj) throws OboException {
-  private CompletionTerm getCompTermFromInput(Object obj) throws OboException {
+  private CompletionTerm getCompTermFromInput(Object obj,boolean useTopHit)
+    throws OboException {
     if (obj == null) throw new OboException();
     // STRING - user hit return
     if (!(obj instanceof CompletionTerm)) {
       //log.info("Item in completion list not obo class "+obj.getClass());
-      //throw new OboException("Item in completion list not obo class " + obj.getClass());
+      if (!useTopHit)
+        throw new OboException("Item in comp list not obo class "+obj.getClass());
       // The entry is a string and its what the user has typed so far, 
       // return 1st item of comp list - should it be exact? syn? only item?
       if (!(obj instanceof String)) // i dont think this is possible
-        throw new OboException("Item in completion list not obo class nor string"
+        throw new OboException("Item in comp list not obo class nor string"
                                + obj.getClass());
       String input = (String)obj;
       // Constraint: need a least 1 letter/char
@@ -211,12 +231,20 @@ public class TermCompList extends AbstractAutoCompList {
   }
 
   /**
-   * edits one or more selected chars
+   * edits one or more selected chars if there is valid input, if not sets model to null
+   if useTopHit is false then only set model if have selected comp term (user selected 
+   from list). if useTopHit is true, then input is user string, (user has hit enter)
+   and use the top hit in the list that comes from that partial string
    */
-  protected void updateModel() {
-    try { 
-      this.setCurrentValidItem(); 
+  protected void updateModel(boolean useTopHit) {
+    
+    // TRY to get valid input...
+    try {
+      // sets obo class from selected comp term OR top term in list (if no comp term
+      // selected), throws OboException if invalid term (eg no input)
+      this.setCurrentValidItem(useTopHit); 
     }
+    // NOT VALID input, set model to null, and return
     catch (OboException e) {
       if (!this.editModelEnabled()) {
         return;
@@ -229,6 +257,8 @@ public class TermCompList extends AbstractAutoCompList {
       }
       return;
     }
+    
+    // We have a VALID item - go ahead and commit to datamodel
     if (this.editModelEnabled()) {
       try {
         OBOClass oboClass = getCurrentOboClass();

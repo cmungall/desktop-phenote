@@ -6,6 +6,8 @@ import org.obo.datamodel.OBOProperty;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldValue;
 
+/** with now common superclass OBOObject this should be merged with TermCompList 
+    I think */
 
 class RelationCompList extends AbstractAutoCompList {
 
@@ -72,7 +74,8 @@ class RelationCompList extends AbstractAutoCompList {
     return r.getOboProperty();
   }
    
-  protected void updateModel() {
+  protected void updateModel(boolean useTopHit) {
+    // todo: implement useTopHit for "return" on partial input! list TermComp
     try {
       this.setCurrentValidItem();
     } catch (OboException e) {
