@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.Vector;
 
 import javax.swing.Action;
@@ -17,8 +18,11 @@ import javax.swing.JTextArea;
 import javax.swing.JToolBar;
 import javax.swing.border.EtchedBorder;
 
+import org.apache.log4j.Logger;
+
 import org.obo.datamodel.OBOClass;
 
+import phenote.util.FileUtil;
 import phenote.config.Config;
 import phenote.gui.actions.BackAction;
 import phenote.gui.actions.ForwardAction;
@@ -38,6 +42,7 @@ import phenote.gui.selection.UseTermListener;
  */
 public class TermInfoToolbar extends JToolBar {
 
+  private static final Logger LOG =  Logger.getLogger(TermInfoToolbar.class);
   private Config config = Config.inst();
   public static final int BUTTON_HEIGHT = 30;
   private static final int TERM_INFO_DEFAULT_WIDTH=350;
@@ -82,29 +87,38 @@ public class TermInfoToolbar extends JToolBar {
 
     //Standard things to do for browser
     //The actions ought to be created elsewhere, yeah?
-    Action forwardAction = new ForwardAction();
-    Action backAction = new BackAction();
 //    Action useTermAction = new UseTermAction();    
     
     
     JButton favoritesButton = new JButton();
-    JButton backButton = new JButton(backAction);
-    JButton forwardButton = new JButton(forwardAction);
     JButton useTermButton = new JButton();
 
     /*****************************************/
-    favoritesButton.setIcon(new ImageIcon("images/Bookmarks24.gif"));
     favoritesButton.setToolTipText("Favorites");
 
    
-    useTermButton.setIcon(new ImageIcon("images/OK.GIF"));
     useTermButton.addActionListener(new UseTermActionListener());
     useTermButton.setToolTipText("Use Term");
     
     JButton getAnnotationsButton = new JButton();
-    getAnnotationsButton.setIcon(new ImageIcon("images/searchOBD.gif"));
     getAnnotationsButton.setToolTipText("Fetch annoations to this term from OBD");
     getAnnotationsButton.addActionListener(new GetAnnotationsActionListener());
+
+    ImageIcon backImage=null,fwdImage=null;
+    try {
+      favoritesButton.
+        setIcon(new ImageIcon(FileUtil.findUrl("images/Bookmarks24.gif")));
+      useTermButton.setIcon(new ImageIcon(FileUtil.findUrl("images/OK.GIF")));
+      getAnnotationsButton.
+        setIcon(new ImageIcon(FileUtil.findUrl("images/searchOBD.gif")));
+      backImage = new ImageIcon(FileUtil.findUrl("images/Back24.gif"));
+      fwdImage = new ImageIcon(FileUtil.findUrl("images/Forward24.gif"));
+    }
+    catch (FileNotFoundException e) { LOG.error(e.getMessage()); }
+    Action forwardAction = new ForwardAction(fwdImage);
+    JButton forwardButton = new JButton(forwardAction);
+    Action backAction = new BackAction(backImage);
+    JButton backButton = new JButton(backAction);
 
     buttons.add(BACKBUTTONINDEX, backButton);
     buttons.add(FORWARDBUTTONINDEX, forwardButton);

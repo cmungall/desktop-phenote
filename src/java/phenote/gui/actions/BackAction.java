@@ -1,14 +1,18 @@
 package phenote.gui.actions;
 
 import java.awt.event.ActionEvent;
+import java.io.FileNotFoundException;
 
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
 
+import org.apache.log4j.Logger;
+
 import org.obo.datamodel.OBOClass;
 
+import phenote.util.FileUtil;
 import phenote.main.Phenote;
 import phenote.main.Phenote2;
 import phenote.datamodel.CharFieldManager;
@@ -24,19 +28,24 @@ import phenote.gui.selection.SelectionManager;
  */
 public class BackAction extends AbstractAction  {
 	
+  private static final Logger LOG =  Logger.getLogger(BackAction.class);
+
 	JComponent textComponent;
 	
-	public BackAction(JTextComponent source) {
-		super("Back", new ImageIcon("images/Back24.gif"));
-		init();
-		source.setEnabled(false);
+// 	public BackAction(JTextComponent source) {
+//     super("Back");
+//     try { setImageIcon(new ImageIcon(FileUtil.findUrl("images/Back24.gif"))); }
+//     catch (FileNotFoundException e) { LOG.error(e.getMessage()); }
 
-//		System.out.println("class="+textComponent.getClass());
-	}
+// 		init();
+// 		source.setEnabled(false);
+
+// //		System.out.println("class="+textComponent.getClass());
+// 	}
 	
-	
-	public BackAction() {
-		super("Back", new ImageIcon("images/Back24.gif"));
+	/** Actions only take image icons in their constructor - annoying */
+	public BackAction(ImageIcon icon) {
+		super("Back", icon);
 		init();
 	}
 

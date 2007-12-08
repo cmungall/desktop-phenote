@@ -28,17 +28,17 @@ import phenote.main.Phenote;
  */
 public class ForwardAction extends AbstractAction  {
 		
-	public ForwardAction(JTextComponent source) {
-		super("Forward", new ImageIcon("images/Forward24.gif"));
-		init();
-		source.setEnabled(false);
+// 	public ForwardAction(JTextComponent source) {
+// 		super("Forward", new ImageIcon("images/Forward24.gif"));
+// 		init();
+// 		source.setEnabled(false);
 
-//		System.out.println("class="+textComponent.getClass());
-	}
+// //		System.out.println("class="+textComponent.getClass());
+// 	}
 	
 	
-	public ForwardAction() {
-		super("Forward", new ImageIcon("images/Forward24.gif"));
+	public ForwardAction(ImageIcon icon) {
+		super("Forward",icon);
 		init();
 	}
 
