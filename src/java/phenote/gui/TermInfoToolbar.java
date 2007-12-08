@@ -161,7 +161,8 @@ public class TermInfoToolbar extends JToolBar {
     public void actionPerformed(ActionEvent e) {
       //commitTerm();
       // relation comp list sets to null
-      if (useTermListener == null) return;
+      // this doesnt work because useTermListener is in TermInfo2 not in toolbar
+      if (getUseTermListener() == null) return;
       if (currentOboClass == null) return; // shouldnt happen
       useTermListener.useTerm(new UseTermEvent(TermInfoToolbar.this,currentOboClass));
     }
