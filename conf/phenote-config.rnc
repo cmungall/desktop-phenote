@@ -9,6 +9,7 @@ start =
     attribute name { xsd:string },
     attribute author { xsd:string },
     master-to-local-config,
+    terminology-definitions,
     log,
     externaldb*,
     dataadapter*,
@@ -62,6 +63,33 @@ log =
   element log {
     attribute config-file { xsd:string }
   }
+
+## this is where the ontologies will be defined
+## and then referred to in the field defs
+terminology-definitions = 
+  element terminology-definitions {
+    file*,
+    attribute update { "NONE" | "SOME" | "ALL" }
+}
+
+##this is general enough to use for both ontologies and flat files
+file = 
+  element file {
+    ## the shorthand to be referred to in fields
+    attribute handle { xsd:string },
+    ## the actual name of the file
+    attribute filename { xsd:string },
+    ##would it be useful to differentiate between OBO and OWL?
+    attribute type { "ONTOLOGY" | "FLAT" },
+    ##where to get it from, locally or url
+    attribute location { xsd:string },
+    ## optional - if user wants specific version, they could specify
+    attribute version { xsd:string },
+    ## optional - for eventual fetching of non-whole ontologies
+    attribute root { xsd:string },
+    ## now this is on a per-ontology basis
+    attribute auto-update { xsd:boolean }
+}
 
 ## Weather to enable uvic graphics - not working so well so should stay disabled
 uvic-graph = element uvic-graph { attribute enable { xsd:boolean } }

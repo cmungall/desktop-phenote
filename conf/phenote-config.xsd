@@ -4,6 +4,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="x:master-to-local-config"/>
+        <xs:element ref="x:terminology-definitions"/>
         <xs:element ref="x:log"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:externaldb"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:dataadapter"/>
@@ -49,6 +50,67 @@
   <xs:element name="log">
     <xs:complexType>
       <xs:attribute name="config-file" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="terminology-definitions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:file"/>
+      </xs:sequence>
+      <xs:attribute name="update" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="NONE"/>
+            <xs:enumeration value="SOME"/>
+            <xs:enumeration value="ALL"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="file">
+    <xs:complexType>
+      <xs:attribute name="handle" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>the shorthand to be referred to in fields</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="filename" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>the actual name of the file</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="type" use="required">
+        <xs:annotation>
+          <xs:documentation>would it be useful to differentiate between OBO and OWL?</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="ONTOLOGY"/>
+            <xs:enumeration value="FLAT"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="location" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>where to get it from, locally or url</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="version" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>optional - if user wants specific version, they could specify</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="root" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>optional - for eventual fetching of non-whole ontologies</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="auto-update" use="required" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>now this is on a per-ontology basis</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
     </xs:complexType>
   </xs:element>
   <xs:element name="uvic-graph">
