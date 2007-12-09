@@ -18,6 +18,7 @@ start =
     update-timer,
     obo-repository,
     autocomplete-settings,
+    ontologies,
     field*,
     group*,
     data-input-servlet,
@@ -102,6 +103,35 @@ character-mode = element character-mode {
 ## this is pase and should be phased out
 obo-repository = element obo-repository { attribute url-dir {xsd:string} }
 
+##this is where we'll define all the ontologies to be used throughout the config
+##they'll all be in one nice, neat little place.
+##the namespace will still need to be defined for the fields, not in this def.
+terminology_definitions = 
+  element terminology_definitions {
+    file*,
+    attribute update { "NONE", "SOME", "ALL" }
+  }
+  
+file = 
+  element file {
+    ## we'll refer to the ontology name in the fields to get the appropriate file
+    attribute name { xsd:string },
+    ##so we can use the same xml element for both flat files or ontology files
+    ##would it be useful to differentiate OBO, OWL, etc?
+    attribute type { "ONTOLOGY" | "TXT" }
+    ## the url for the file.  if no url, then only local file
+    attribute url { xsd:string },
+    ## easy enough to swap in and out different repository locations
+##    attribute repository { xsd:string },
+    ## optional - if a specific version is desired.
+    attribute version { xsd:string },
+    ## optional - if a large ontology is desired, then we could grab an
+    ## ontology portion starting with this <root> term to the leaves.
+    attribute root { xsd:string },
+    ## a flag for each individual ontology for whether or not to update automatically
+    attribute auto-update { xsd:boolean },
+}
+
 field = 
   element field {
     ## what relation to use in mapping field to obo annotation
@@ -150,6 +180,8 @@ field =
 
 ontology =
   element ontology {
+    ##in the old style, this is what would be shown in the drop-down menu
+    ##in the new style, this is what will refer to the element ontology_def
     attribute name { xsd:string },
     ## obo file for ontology
     attribute file { xsd:string },
