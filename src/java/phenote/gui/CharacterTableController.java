@@ -15,11 +15,8 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import org.apache.log4j.Logger;
-import org.bbop.framework.AbstractGUIComponent;
-import org.bbop.framework.ComponentManager;
-import org.swixml.SwingEngine;
-
 import org.obo.datamodel.OBOClass;
+import org.swixml.SwingEngine;
 
 import phenote.config.Config;
 import phenote.dataadapter.CharListChangeEvent;
@@ -30,13 +27,13 @@ import phenote.dataadapter.OntologyMakerI;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
+import phenote.datamodel.OboUtil;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
 import phenote.gui.field.CharFieldMatcherEditor;
 import phenote.util.EverythingEqualComparator;
 import phenote.util.FileUtil;
-import phenote.datamodel.OboUtil;
 import ca.odell.glazedlists.FilterList;
 import ca.odell.glazedlists.SortedList;
 import ca.odell.glazedlists.swing.EventSelectionModel;
@@ -180,6 +177,10 @@ public class CharacterTableController {
 
 	public EventSelectionModel<CharacterI> getSelectionModel() {
 		return this.selectionModel;
+	}
+	
+	public String getGroup() {
+	  return this.representedGroup;
 	}
 
 	/** Instantiates interface objects from Swixml file */

@@ -33,6 +33,7 @@ import phenote.config.Config;
 import phenote.config.xml.GroupDocument.Group;
 import phenote.config.xml.TemplatechooserDocument.Templatechooser;
 import phenote.gui.CharacterTable;
+import phenote.gui.CharacterTableFactory;
 import phenote.gui.HelpMenu;
 import phenote.gui.NcbiInfo;
 import phenote.gui.StandardToolbar;
@@ -63,7 +64,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		factories.add(new FieldPanelFactory());
 		factories.add(new TermInfoFactory());
 		factories.add(new NCBIInfoFactory());
-		factories.add(new CharTableFactory());
+		factories.addAll(this.getCharacterTableComponentFactories());
 		factories.add(new GraphEditorFactory());
 		factories.add(new DAGViewFactory());
 		factories.add(new GraphDAGViewFactory());
@@ -151,6 +152,24 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		return CollectionUtil.list((GUITask) screenLockTask,
 				new OBDAnnotationNumberFetchBehaviorTask()); // TODO: for
 		// testing
+	}
+	
+	/**
+	 * Create a character table factory configured for each group in config
+	 */
+	private Collection<CharacterTableFactory> getCharacterTableComponentFactories() {
+	  Collection<CharacterTableFactory> factories = new ArrayList<CharacterTableFactory>();
+    for (Group group : Config.inst().getFieldGroups()) {
+      log().debug("Creating table factory for: " + group.getName());
+      if (!group.getInterface().equals(Group.Interface.CHARACTER_TEMPLATE)) {
+        factories.add(new CharacterTableFactory(group.getName()));
+      }
+    }
+    if (factories.size() < 1) {
+      // no groups have been configured, so just do default
+      factories.add(new CharacterTableFactory(this.getDefaultGroup()));
+    }
+    return factories;
 	}
 	
 	private Collection<GUIComponentFactory<?>> getTemplateGroupComponentFactories() {
@@ -255,27 +274,6 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
 	}
 
-	/** CharTableFactory inner class */
-	private class CharTableFactory extends AbstractComponentFactory<CharacterTable> {
-
-		public FactoryCategory getCategory() {
-			return FactoryCategory.ANNOTATION;
-		}
-
-		public String getName() {
-			return "Annotation Table";
-		}
-
-		public String getID() {
-			return "annotation_table";
-		}
-
-		@Override
-		public CharacterTable doCreateComponent(String id) {
-			return new CharacterTable(getDefaultGroup(), id);
-		}
-	}
-
 	/** StandardToolbarFactory inner class */
 	private class StandardToolbarFactory extends AbstractComponentFactory<GUIComponentWrapper> {
 
@@ -299,4 +297,8 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 	private String getDefaultGroup() {
 		return Config.inst().getDefaultGroup().getName();
 	}
+	
+	private Logger log() {
+    return Logger.getLogger(this.getClass());
+  }
 }

@@ -41,6 +41,7 @@ import phenote.datamodel.CharacterI;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
+import phenote.gui.CharacterTableSource;
 import phenote.gui.TableColumnPrefsSaver;
 import phenote.gui.field.CharFieldMatcherEditor;
 import phenote.gui.field.FieldPanel;
@@ -52,7 +53,7 @@ import ca.odell.glazedlists.swing.EventSelectionModel;
 import ca.odell.glazedlists.swing.EventTableModel;
 import ca.odell.glazedlists.swing.TableComparatorChooser;
 
-public class CharacterTemplateTable extends AbstractGUIComponent implements TemplateChoiceListener {
+public class CharacterTemplateTable extends AbstractGUIComponent implements TemplateChoiceListener, CharacterTableSource {
 
   private static final long serialVersionUID = -3936482953613098775L;
   private String group;
@@ -212,6 +213,10 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     }
   }
   
+  public String getGroup() {
+    return this.group;
+  }
+  
   private void initializeInterface() {
     this.setLayout(new BorderLayout());
     this.add(this.createToolBar(), BorderLayout.NORTH);
@@ -280,8 +285,9 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
   }
   
   private void gainedFocus() {
-    log().debug("I gained focus");
-    //this.getFieldPanel().setSelectionModel(this.getSelectionModel());
+    if (this.getFieldPanel() != null) {
+      this.getFieldPanel().setTableSource(this);
+    }
   }
   
   private CharacterListManager getCharacterListManager() {
@@ -304,7 +310,7 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
   }
   
   private FieldPanel getFieldPanel() {
-    return null; //TODO
+    return FieldPanel.getCurrentFieldPanel();
   }
   
   private JToolBar createToolBar() {
@@ -413,5 +419,5 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     }
     
   }
-  
+
 }

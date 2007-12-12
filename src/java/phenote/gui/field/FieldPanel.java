@@ -3,7 +3,6 @@ package phenote.gui.field;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,18 +14,18 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
+import org.apache.log4j.Logger;
 import org.bbop.framework.AbstractGUIComponent;
-import org.bbop.framework.ComponentManager;
-import org.obo.datamodel.OBOClass;
 
 import phenote.config.Config;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.GroupAdapterI;
 import phenote.datamodel.CharField;
-import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharFieldManager;
+import phenote.datamodel.CharacterI;
 import phenote.edit.EditManager;
 import phenote.gui.CharacterTableController;
+import phenote.gui.CharacterTableSource;
 import phenote.gui.selection.SelectionManager;
 import ca.odell.glazedlists.swing.EventSelectionModel;
 
@@ -47,6 +46,7 @@ public class FieldPanel extends AbstractGUIComponent {
   private SelectionManager selectionManager;
   private EditManager groupEditMan;
   private EventSelectionModel<CharacterI> selectionModel;
+  private static FieldPanel currentFieldPanel;
 
   /** eventually configurable (with default 12) - for now hardwire at 12 */
   private static int fieldsPerTab = 12;
@@ -67,23 +67,29 @@ public class FieldPanel extends AbstractGUIComponent {
   // Group or String for group?
   public FieldPanel(boolean doAllFields, boolean addSearchPanel, String grp,
                     EventSelectionModel<CharacterI> model) {
-		super("phenote-editor:phenote-editor");
-
-    setGroup(grp);
-    init(doAllFields,addSearchPanel,group,SelectionManager.getSelMan(group),
-         EditManager.getEditManager(group), model);
+    this(doAllFields, addSearchPanel, grp, SelectionManager.getSelMan(grp), EditManager.getEditManager(grp), model);
   }
   
   public FieldPanel(boolean doAllFields, boolean addSearchPanel,
                     String group, SelectionManager selectionManager,
                     EditManager groupEditMan, EventSelectionModel<CharacterI> model) {
 		super("phenote-editor:phenote-editor");
+		FieldPanel.currentFieldPanel = this;
     init(doAllFields,addSearchPanel,group,selectionManager,groupEditMan, model);
+  }
+  
+  /**
+   * Returns the most recently created FieldPanel, so that tables can notify it when they gain focus.
+   * There is probably a better way to do this.
+   */
+  public static FieldPanel getCurrentFieldPanel() {
+    return FieldPanel.currentFieldPanel;
   }
 
   private void init(boolean doAllFields, boolean addSearchPanel,String group,
                     SelectionManager selectionManager, EditManager groupEditMan,
                     EventSelectionModel<CharacterI> model) {
+    this.removeAll();
     setGroup(group);
     this.selectionModel = model;
     this.selectionManager = selectionManager;
@@ -313,6 +319,15 @@ public class FieldPanel extends AbstractGUIComponent {
     return getComboBox("Quality");
   }
   
+  /**
+   * Resets the FieldPanel gui to edit the given table.
+   * This works now but is probably wasting a bunch of objects everytime the interface is redone - need to check into this.
+   */
+  public void setTableSource(CharacterTableSource table) {
+    log().debug("setTableSource: " + table);
+    this.init(true, false, table.getGroup(), SelectionManager.getSelMan(table.getGroup()), EditManager.getEditManager(table.getGroup()), table.getSelectionModel());
+  }
+  
   private List<CharField> getCharFieldList() {
     if (this.group != null) {
       return this.ontologyManager.getCharFieldListForGroup(this.group);
@@ -320,8 +335,14 @@ public class FieldPanel extends AbstractGUIComponent {
       return this.ontologyManager.getCharFieldList();
     }
   }
+  
+  private Logger log() {
+    return Logger.getLogger(this.getClass());
+  }
 
 }
+
+
 
 //   boolean hasLumpComboBox() {
 //     //return lumpField.isCombo();

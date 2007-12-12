@@ -21,7 +21,6 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.apache.xmlbeans.XmlException;
-import org.obo.dataadapter.OBDSQLDatabaseAdapter;
 import org.obo.dataadapter.OBDSQLDatabaseAdapter.OBDSQLDatabaseAdapterConfiguration;
 
 import phenote.config.xml.PhenoteConfigurationDocument;
@@ -30,6 +29,7 @@ import phenote.config.xml.AutocompleteSettingsDocument.AutocompleteSettings;
 import phenote.config.xml.CharacterModeDocument.CharacterMode;
 import phenote.config.xml.DataInputServletDocument.DataInputServlet;
 import phenote.config.xml.DataadapterDocument.Dataadapter;
+import phenote.config.xml.ExternaldbDocument.Externaldb;
 import phenote.config.xml.FieldDocument.Field;
 import phenote.config.xml.FieldPanelTabsDocument.FieldPanelTabs;
 import phenote.config.xml.GroupDocument.Group;
@@ -37,7 +37,6 @@ import phenote.config.xml.LogDocument.Log;
 import phenote.config.xml.MasterToLocalConfigDocument.MasterToLocalConfig;
 import phenote.config.xml.OntologyLoadingDocument.OntologyLoading;
 import phenote.config.xml.PhenoteConfigurationDocument.PhenoteConfiguration;
-import phenote.config.xml.ExternaldbDocument.Externaldb;
 import phenote.config.xml.TermHistoryDocument.TermHistory;
 import phenote.config.xml.UpdateTimerDocument.UpdateTimer;
 import phenote.config.xml.UvicGraphDocument.UvicGraph;
@@ -1286,6 +1285,8 @@ public class Config {
 
   private Group createDefaultGroup() {
     Group g = phenoConfigBean.addNewGroup();
+    g.setTitle("Main");
+    g.setInterface(Group.Interface.DEFAULT);
     g.setName(CharFieldManager.DEFAULT_GROUP);
     return g;
   }
