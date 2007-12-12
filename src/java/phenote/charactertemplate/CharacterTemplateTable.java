@@ -1,26 +1,24 @@
 package phenote.charactertemplate;
 
-import java.awt.GridLayout;
+import java.awt.BorderLayout;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.swing.ActionMap;
-import javax.swing.InputMap;
+import javax.swing.AbstractAction;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
-import javax.swing.KeyStroke;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -67,12 +65,12 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
   private Set<CharacterI> markedCharacters = new HashSet<CharacterI>();
   private JPanel tablePanel; // initialized by swix
   private JTable characterTable; // initialized by swix
-  private JButton duplicateButton; // initialized by swix
-  private JButton deleteButton; // initialized by swix
-  private JButton markButton; // initialized by swix
-  private JButton unmarkButton; // initialized by swix
-  private JButton invertSelectionButton; // initialized by swix
-  private JButton generateButton; // initialized by swix
+  private JButton duplicateButton;
+  private JButton deleteButton;
+  private JButton markButton;
+  private JButton unmarkButton;
+  private JButton invertSelectionButton;
+  private JButton generateButton;
   private JPanel filterPanel; // initialized by swix
   private DockingWindowListener focusListener;
 
@@ -215,8 +213,9 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
   }
   
   private void initializeInterface() {
-    this.setLayout(new GridLayout());
-    this.add(this.tablePanel);
+    this.setLayout(new BorderLayout());
+    this.add(this.createToolBar(), BorderLayout.NORTH);
+    this.add(this.tablePanel, BorderLayout.CENTER);
     final EventTableModel<CharacterI> eventTableModel = new EventTableModel<CharacterI>(this.filteredCharacters, this.tableFormat);
     this.characterTable.setModel(eventTableModel);
     new TableComparatorChooser<CharacterI>(characterTable, this.sortedCharacters, false);
@@ -311,6 +310,64 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
   private JToolBar createToolBar() {
     final JToolBar toolBar = new JToolBar("Default Toolbar");
     
+    final JButton addButton = new JButton(new AbstractAction(null, new ImageIcon("images/list-add.png")) {
+      public void actionPerformed(ActionEvent e) {
+        addNewCharacter();
+      }
+    });
+    addButton.setToolTipText("Add");
+    
+    toolBar.add(addButton);
+    
+    this.deleteButton = new JButton(new AbstractAction(null, new ImageIcon("images/list-remove.png")) {
+      public void actionPerformed(ActionEvent e) {
+        deleteSelectedCharacters();
+      }
+    });
+    this.deleteButton.setToolTipText("Delete");
+    toolBar.add(this.deleteButton);
+    
+    this.duplicateButton = new JButton(new AbstractAction(null, new ImageIcon("images/list-duplicate.png")) {
+      public void actionPerformed(ActionEvent e) {
+        duplicateSelectedCharacters();
+      }
+    });
+    this.duplicateButton.setToolTipText("Duplicate");
+    toolBar.add(this.duplicateButton);
+    
+    this.markButton = new JButton(new AbstractAction(null, new ImageIcon("images/square-filled.png")) {
+      public void actionPerformed(ActionEvent e) {
+        markSelectedCharacters();
+      }
+    });
+    this.markButton.setToolTipText("Mark");
+    toolBar.add(this.markButton);
+    
+    this.unmarkButton = new JButton(new AbstractAction(null, new ImageIcon("images/square-empty.png")) {
+      public void actionPerformed(ActionEvent e) {
+        unmarkSelectedCharacters();
+      }
+    });
+    this.unmarkButton.setToolTipText("Unmark");
+    toolBar.add(this.unmarkButton);
+    
+    this.invertSelectionButton = new JButton(new AbstractAction(null, new ImageIcon("images/square-invert.png")) {
+      public void actionPerformed(ActionEvent e) {
+        invertMarkedCharacters();
+      }
+    });
+    this.invertSelectionButton.setToolTipText("Invert marks");
+    toolBar.add(this.invertSelectionButton);
+    
+    this.generateButton = new JButton(new AbstractAction(null, new ImageIcon("images/generate.png")) {
+      public void actionPerformed(ActionEvent e) {
+        generateCharacters();
+      }
+    });
+    this.generateButton.setToolTipText("Generate characters");
+    toolBar.add(this.generateButton);
+    
+    toolBar.setFloatable(false);
     return toolBar;
   }
 

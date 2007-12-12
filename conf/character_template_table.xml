@@ -4,18 +4,7 @@
     	<gridbagconstraints gridx="0" gridy="0" weightx="1" weighty="1" gridwidth="2" fill="GridBagConstraints.BOTH" insets="0,10,0,10"/>
         <table id="characterTable"/>
     </scrollpane>
-    <panel id="buttonPanel">
-    	<gridbagconstraints gridx="0" gridy="1" weightx="0" insets="10,10,10,10" fill="GridBagConstraints.HORIZONTAL"/>
-        <button id="addButton" text="New" action="addNewCharacter" toolTipText="Add new row"/>
-        <button id="duplicateButton" text="Duplicate" action="duplicateSelectedCharacters" toolTipText="Duplicate selected rows"/>
-        <button id="deleteButton" text="Delete" action="deleteSelectedCharacters" toolTipText="Delete selected rows"/>
-        <button id="undoButton" text="Undo" action="undo" toolTipText="Undo previous action"/>
-        <button id="markButton" text="Mark" action="markSelectedCharacters" toolTipText="Mark selected rows for use"/>
-        <button id="unmarkButton" text="Unmark" action="unmarkSelectedCharacters" toolTipText="Unmark selected rows for use"/>
-        <button id="invertSelectionButton" text="Invert" action="invertMarkedCharacters" toolTipText="Invert rows marked for use"/>
-        <button id="generateButton" text="Generate Characters" action="generateCharacters" toolTipText="Generate characters in the main window from marked templates"/>
-    </panel>
     <panel id="filterPanel" layout="GridLayout">
-    	<gridbagconstraints gridx="1" gridy="1" weightx="1" fill="GridBagConstraints.HORIZONTAL" anchor="GridBagConstraints.EAST" insets="0,5,0,10"/>
+    	<gridbagconstraints gridx="0" gridy="1" weightx="1" fill="GridBagConstraints.HORIZONTAL" anchor="GridBagConstraints.EAST" insets="0,5,0,10"/>
    	</panel>
 </panel>
