@@ -206,19 +206,10 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
 		@Override
 		public FieldPanel doCreateComponent(String id) {
-			String l = "<html><h1>This is an example component</h1></html>";
-			// if (true) return new GUIComponentWrapper(id, id, new
-			// javax.swing.JLabel(l));
-			// for now just doing default group - need to iterate groups
-			FieldPanel groupFieldPanel = new FieldPanel(); // true,false,Config.inst().getDefaultGroup(),
-			// this.tableController.getSelectionModel());
-			groupFieldPanel.setMinimumSize(new Dimension(300, 300));
-			groupFieldPanel.setPreferredSize(new Dimension(300, 300));
-			// 1st is id, 2nd id -> title bar string
-			String configName = groupFieldPanel.getName();
-			groupFieldPanel.setTitle(panelName + " (Configuration: "
-					+ configName + ")");
-			return groupFieldPanel;
+			FieldPanel fieldPanel = new FieldPanel(id);
+			fieldPanel.setMinimumSize(new Dimension(300, 300));
+			fieldPanel.setPreferredSize(new Dimension(300, 300));
+			return fieldPanel;
 		}
 	}
 

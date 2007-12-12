@@ -11,17 +11,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
-import org.bbop.swing.DynamicActionMenuItem;
 import org.bbop.swing.DynamicMenu;
 
 import phenote.config.Config;
 import phenote.edit.EditManager;
-import phenote.gui.actions.RedoAction;
 import phenote.gui.actions.ResponderChainAction;
-import phenote.gui.actions.UndoAction;
-
-
-//import phenote.gui.prefswindow.PrefsWindowController; ???
 
 public class EditMenu extends DynamicMenu {
 
@@ -35,15 +29,21 @@ public class EditMenu extends DynamicMenu {
 
   private void init() {
     EditActionListener actionListener = new EditActionListener();
-
-    editMenuItem = new DynamicActionMenuItem(new UndoAction());
-    add(editMenuItem);
-    editMenuItem = new DynamicActionMenuItem(new RedoAction());
-    add(editMenuItem);
+    
+    JMenuItem undo = new JMenuItem();
+    Action undoAction = new ResponderChainAction("undo", "Undo");
+    undoAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+    undo.setAction(undoAction);
+    add(undo);
+    
+    JMenuItem redo = new JMenuItem();
+    Action redoAction = new ResponderChainAction("redo", "Redo");
+    redoAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() | InputEvent.SHIFT_MASK));
+    redo.setAction(redoAction);
+    add(redo);
     
     addSeparator();
     
-
     JMenuItem cut = new JMenuItem();
     Action cutAction = new ResponderChainAction("cut", "Cut");
     cutAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));

@@ -46,6 +46,7 @@ public class FieldPanel extends AbstractGUIComponent {
   private SelectionManager selectionManager;
   private EditManager groupEditMan;
   private EventSelectionModel<CharacterI> selectionModel;
+  private Object responderDelegate;
   private static FieldPanel currentFieldPanel;
 
   /** eventually configurable (with default 12) - for now hardwire at 12 */
@@ -78,6 +79,15 @@ public class FieldPanel extends AbstractGUIComponent {
     init(doAllFields,addSearchPanel,group,selectionManager,groupEditMan, model);
   }
   
+  /**
+   * This constructor is used in Phenote 2.  The init() method is not called until a 
+   * character table becomes active and notifies this field panel using setTableSource.
+   */
+  public FieldPanel(String id) {
+    super(id);
+    FieldPanel.currentFieldPanel = this;
+  }
+
   /**
    * Returns the most recently created FieldPanel, so that tables can notify it when they gain focus.
    * There is probably a better way to do this.
@@ -324,8 +334,8 @@ public class FieldPanel extends AbstractGUIComponent {
    * This works now but is probably wasting a bunch of objects everytime the interface is redone - need to check into this.
    */
   public void setTableSource(CharacterTableSource table) {
-    log().debug("setTableSource: " + table);
     this.init(true, false, table.getGroup(), SelectionManager.getSelMan(table.getGroup()), EditManager.getEditManager(table.getGroup()), table.getSelectionModel());
+    this.setResponderDelegate(table);
   }
   
   private List<CharField> getCharFieldList() {
@@ -334,6 +344,14 @@ public class FieldPanel extends AbstractGUIComponent {
     } else {
       return this.ontologyManager.getCharFieldList();
     }
+  }
+  
+  public Object getResponderDelegate() {
+    return this.responderDelegate;
+  }
+  
+  private void setResponderDelegate(Object delegate) {
+    this.responderDelegate = delegate;
   }
   
   private Logger log() {

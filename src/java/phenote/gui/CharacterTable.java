@@ -69,6 +69,10 @@ public class CharacterTable extends AbstractGUIComponent implements CharacterTab
       clipboard.setContents(stringSelection, null);
     }
   }
+  
+  public void undo() {
+    this.tableController.undo();
+  }
 
   public String getGroup() {
     return this.tableController.getGroup();

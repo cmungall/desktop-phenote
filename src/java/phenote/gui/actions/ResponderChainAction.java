@@ -14,13 +14,16 @@ import org.apache.log4j.Logger;
 /**
  * An action which traverses the component hierarchy, beginning with the currently focused component, 
  * until it finds a object implementing a method with the name of the action's actionCommand.  The
- * method must accept no arguments.
+ * method must accept no arguments.  If an object in the component hierarchy implements the method 
+ * "getResponderDelegate", the object returned by that method will also be queried for an implementation 
+ * of the actionCommand.
  * @author Jim Balhoff
  */
 @SuppressWarnings("serial")
 public class ResponderChainAction extends AbstractAction {
   
   private String actionCommand;
+  public static String DELEGATE_METHOD = "getResponderDelegate";
 
   /**
    * Creates a ResponderChainAction object which will try to invoke a method named by the given actionCommand.
@@ -63,16 +66,8 @@ public class ResponderChainAction extends AbstractAction {
       log().debug("No valid targets");
       return;
     }
-    final Method method = this.getActionMethod(target, this.getActionCommand());
-    try {
-      method.invoke(target);
-    } catch (IllegalArgumentException e) {
-      log().error("Unable to invoke method on target", e);
-    } catch (IllegalAccessException e) {
-      log().error("Unable to invoke method on target", e);
-    } catch (InvocationTargetException e) {
-      log().error("Unable to invoke method on target", e);
-    }
+    final Method method = this.getMethodForName(target, this.getActionCommand());
+    this.callMethod(method, target);
   }
 
   public String getActionCommand() {
@@ -95,8 +90,10 @@ public class ResponderChainAction extends AbstractAction {
     if (this.getActionCommand() == null) return null;
     Object responder = this.getNextResponder(null);
     while (responder != null) {
-      if (this.objectRespondsToActionCommand(responder, this.getActionCommand())) {
+      if (this.objectRespondsToMethod(responder, this.getActionCommand())) {
         return responder;
+      } else if (this.objectHasDelegateForMethod(responder, this.getActionCommand())) {
+        return this.getDelegateForObject(responder);
       } else {
         responder = this.getNextResponder(responder);
       }
@@ -124,19 +121,50 @@ public class ResponderChainAction extends AbstractAction {
     return null;
   }
   
-  private boolean objectRespondsToActionCommand(Object target, String action) {
-    return this.getActionMethod(target, action) != null;
+  private boolean objectRespondsToMethod(Object anObject, String methodName) {
+    return this.getMethodForName(anObject, methodName) != null;
   }
   
-  private Method getActionMethod(Object target, String action) {
+  private boolean objectHasDelegateForMethod(Object anObject, String methodName) {
+    final Object delegate = this.getDelegateForObject(anObject);
+    if (delegate != null) {
+      return this.objectRespondsToMethod(delegate, methodName);
+    } else {
+      return false;
+    }
+  }
+  
+  private Method getMethodForName(Object anObject, String methodName) {
     try {
-      final Method method = target.getClass().getMethod(action);
+      final Method method = anObject.getClass().getMethod(methodName);
       return method;
     } catch (SecurityException e) {
       return null;
     } catch (NoSuchMethodException e) {
       return null;
     }
+  }
+  
+  private Object getDelegateForObject(Object anObject) {
+    if (this.objectRespondsToMethod(anObject, DELEGATE_METHOD)) {
+      final Method method = this.getMethodForName(anObject, DELEGATE_METHOD);
+      return this.callMethod(method, anObject);
+    } else {
+      return null;
+    }
+  }
+  
+  private Object callMethod(Method method, Object anObject) {
+    try {
+      return method.invoke(anObject);
+    } catch (IllegalArgumentException e) {
+      log().error("Unable to invoke method on target", e);
+    } catch (IllegalAccessException e) {
+      log().error("Unable to invoke method on target", e);
+    } catch (InvocationTargetException e) {
+      log().error("Unable to invoke method on target", e);
+    }
+    return null;
   }
   
   private Logger log() {
