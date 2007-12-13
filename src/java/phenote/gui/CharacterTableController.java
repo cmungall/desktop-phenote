@@ -36,6 +36,7 @@ import phenote.util.EverythingEqualComparator;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.FilterList;
 import ca.odell.glazedlists.SortedList;
+import ca.odell.glazedlists.gui.AdvancedTableFormat;
 import ca.odell.glazedlists.swing.EventSelectionModel;
 import ca.odell.glazedlists.swing.EventTableModel;
 import ca.odell.glazedlists.swing.TableComparatorChooser;
@@ -48,7 +49,8 @@ public class CharacterTableController {
 	private SortedList<CharacterI> sortedCharacters;
 	private FilterList<CharacterI> filteredCharacters;
 	private EventSelectionModel<CharacterI> selectionModel;
-	private CharacterTableFormat tableFormat;
+  //private CharacterTableFormat tableFormat;
+  private AdvancedTableFormat<CharacterI> tableFormat;
 	private LoadSaveManager loadSaveManager;
 	private CharFieldMatcherEditor filter;
 	// private AbstractGUIComponent characterTablePanel; // initialized by swix

@@ -9,8 +9,12 @@ import java.util.Collection;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
+
+import main.ProtocolEditor;
+
 import org.bbop.framework.AbstractComponentFactory;
 import org.bbop.framework.GUIComponentFactory;
 import org.bbop.framework.GUIComponentWrapper;
@@ -71,6 +75,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		factories.add(new StandardToolbarFactory());
 		factories.add(new AnnotationSummaryComponentFactory());
 		factories.addAll(this.getTemplateGroupComponentFactories());
+                factories.add(new ProtocolEditorFactory());
 		return factories;
 	}
 
@@ -157,8 +162,8 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 	/**
 	 * Create a character table factory configured for each group in config
 	 */
-	private Collection<CharacterTableFactory> getCharacterTableComponentFactories() {
-	  Collection<CharacterTableFactory> factories = new ArrayList<CharacterTableFactory>();
+  private Collection<CharacterTableFactory> getCharacterTableComponentFactories() {
+    Collection<CharacterTableFactory> factories = new ArrayList<CharacterTableFactory>();
     for (Group group : Config.inst().getFieldGroups()) {
       log().debug("Creating table factory for: " + group.getName());
       if (!group.getInterface().equals(Group.Interface.CHARACTER_TEMPLATE)) {
@@ -284,6 +289,20 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 			return new GUIComponentWrapper(id, id, new StandardToolbar());
 		}
 	}
+
+  private class ProtocolEditorFactory extends AbstractComponentFactory<GUIComponentWrapper> {
+
+    public FactoryCategory getCategory() {
+      return FactoryCategory.ANNOTATION;
+    }
+    public String getName() { return "Protocol Editor"; }
+    public String getID() { return "protocol-editor"; }
+    public GUIComponentWrapper doCreateComponent(String id) {
+      JPanel p = ProtocolEditor.getUniqueInstance().getMainPanel();
+      // 1st is id, 2nd id -> title bar string
+      return new GUIComponentWrapper(id, id, p);
+    }
+  }
 
 	private String getDefaultGroup() {
 		return Config.inst().getDefaultGroup().getName();
