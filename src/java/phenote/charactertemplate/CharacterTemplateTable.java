@@ -26,6 +26,7 @@ import org.apache.log4j.Logger;
 import org.bbop.framework.AbstractGUIComponent;
 import org.bbop.framework.ComponentManager;
 import org.bbop.framework.GUIComponent;
+import org.bbop.framework.dock.LayoutAdapter;
 import org.swixml.SwingEngine;
 
 import phenote.config.Config;
@@ -38,7 +39,6 @@ import phenote.datamodel.CharacterI;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
-import phenote.gui.AbstractLayoutListener;
 import phenote.gui.CharacterTableSource;
 import phenote.gui.TableColumnPrefsSaver;
 import phenote.gui.field.CharFieldMatcherEditor;
@@ -404,7 +404,7 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     }
   }
   
-  private class ComponentLayoutListener extends AbstractLayoutListener {
+  private class ComponentLayoutListener extends LayoutAdapter {
 
     @Override
     public void focusChanged(GUIComponent old, GUIComponent newComponent) {

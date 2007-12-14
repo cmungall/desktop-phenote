@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.bbop.framework.AbstractGUIComponent;
 import org.bbop.framework.ComponentManager;
 import org.bbop.framework.GUIComponent;
+import org.bbop.framework.dock.LayoutAdapter;
 
 import phenote.datamodel.CharacterI;
 import phenote.gui.field.FieldPanel;
@@ -95,7 +96,7 @@ public class CharacterTable extends AbstractGUIComponent implements CharacterTab
     return FieldPanel.getCurrentFieldPanel();
   }
   
-  private class ComponentLayoutListener extends AbstractLayoutListener {
+  private class ComponentLayoutListener extends LayoutAdapter {
 
     @Override
     public void focusChanged(GUIComponent old, GUIComponent newComponent) {
