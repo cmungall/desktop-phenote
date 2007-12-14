@@ -5,13 +5,10 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 
-import net.infonode.docking.DockingWindowAdapter;
-import net.infonode.docking.View;
-
 import org.apache.log4j.Logger;
 import org.bbop.framework.AbstractGUIComponent;
 import org.bbop.framework.ComponentManager;
-import org.bbop.framework.dock.idw.IDWDriver;
+import org.bbop.framework.GUIComponent;
 
 import phenote.datamodel.CharacterI;
 import phenote.gui.field.FieldPanel;
@@ -26,7 +23,7 @@ public class CharacterTable extends AbstractGUIComponent implements CharacterTab
   
   private static final long serialVersionUID = -3970995454868538116L;
   private CharacterTableController tableController;
-  private DockingWindowListener focusListener;
+  private ComponentLayoutListener focusListener;
 
   public CharacterTable(String group, String id) {
     super(id);
@@ -36,8 +33,8 @@ public class CharacterTable extends AbstractGUIComponent implements CharacterTab
   public void init() {
     this.setLayout(new GridLayout());
     this.add(this.tableController.getCharacterTablePanel());
-    this.focusListener = new DockingWindowListener();
-    this.getView().addListener(this.focusListener);
+    this.focusListener = new ComponentLayoutListener();
+    ComponentManager.getManager().addLayoutListener(this.focusListener);
   }
   
   public void addNewCharacter() {
@@ -84,7 +81,7 @@ public class CharacterTable extends AbstractGUIComponent implements CharacterTab
   
   @Override
   public void cleanup() {
-    this.getView().removeListener(this.focusListener);
+    ComponentManager.getManager().removeLayoutListener(this.focusListener);
     super.cleanup();
   }
 
@@ -98,15 +95,11 @@ public class CharacterTable extends AbstractGUIComponent implements CharacterTab
     return FieldPanel.getCurrentFieldPanel();
   }
   
-  private View getView() {
-    return ((IDWDriver)(ComponentManager.getManager().getDriver())).getView(this);
-  }
-
-  private class DockingWindowListener extends DockingWindowAdapter {
+  private class ComponentLayoutListener extends AbstractLayoutListener {
 
     @Override
-    public void viewFocusChanged(View previouslyFocusedView, View focusedView) {
-      if ((focusedView != null) && (CharacterTable.this.getView().equals(focusedView))) {
+    public void focusChanged(GUIComponent old, GUIComponent newComponent) {
+      if ((newComponent != null) && (CharacterTable.this.equals(newComponent))) {
         CharacterTable.this.gainedFocus();
       }
     }

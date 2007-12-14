@@ -22,13 +22,10 @@ import javax.swing.JToolBar;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import net.infonode.docking.DockingWindowAdapter;
-import net.infonode.docking.View;
-
 import org.apache.log4j.Logger;
 import org.bbop.framework.AbstractGUIComponent;
 import org.bbop.framework.ComponentManager;
-import org.bbop.framework.dock.idw.IDWDriver;
+import org.bbop.framework.GUIComponent;
 import org.swixml.SwingEngine;
 
 import phenote.config.Config;
@@ -41,6 +38,7 @@ import phenote.datamodel.CharacterI;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
+import phenote.gui.AbstractLayoutListener;
 import phenote.gui.CharacterTableSource;
 import phenote.gui.TableColumnPrefsSaver;
 import phenote.gui.field.CharFieldMatcherEditor;
@@ -73,7 +71,7 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
   private JButton invertSelectionButton;
   private JButton generateButton;
   private JPanel filterPanel; // initialized by swix
-  private DockingWindowListener focusListener;
+  private ComponentLayoutListener focusListener;
 
   public CharacterTemplateTable(String group, String id) {
     super(id);
@@ -93,13 +91,13 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     CharacterListManager.getCharListMan(this.group).addCharListChangeListener(new CharacterListChangeListener());
     this.initializeInterface();
     this.addInitialBlankCharacter();
-    this.focusListener = new DockingWindowListener();
-    this.getView().addListener(this.focusListener);
+    this.focusListener = new ComponentLayoutListener();
+    ComponentManager.getManager().addLayoutListener(this.focusListener);
   }
   
   @Override
   public void cleanup() {
-    this.getView().removeListener(this.focusListener);
+    ComponentManager.getManager().removeLayoutListener(this.focusListener);
     super.cleanup();
   }
 
@@ -192,6 +190,7 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
   
   public void templateChoiceChanged(TemplateChooser source) {
     this.setMarkedCharacters(source.getChosenTemplates(Collections.unmodifiableList(this.sortedCharacters)));
+    ComponentManager.getManager().showComponent(ComponentManager.getManager().getFactory(this), this);
   //TODO should should come to front
   }
   
@@ -305,10 +304,6 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     return this.loadSaveManager;
   }
   
-  private View getView() {
-    return ((IDWDriver)(ComponentManager.getManager().getDriver())).getView(this);
-  }
-  
   private FieldPanel getFieldPanel() {
     return FieldPanel.getCurrentFieldPanel();
   }
@@ -409,15 +404,15 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     }
   }
   
-  private class DockingWindowListener extends DockingWindowAdapter {
-    
+  private class ComponentLayoutListener extends AbstractLayoutListener {
+
     @Override
-    public void viewFocusChanged(View previouslyFocusedView, View focusedView) {
-      if ((focusedView != null) && (CharacterTemplateTable.this.getView().equals(focusedView))) {
+    public void focusChanged(GUIComponent old, GUIComponent newComponent) {
+      if ((newComponent != null) && (CharacterTemplateTable.this.equals(newComponent))) {
         CharacterTemplateTable.this.gainedFocus();
       }
     }
-    
+
   }
 
 }
