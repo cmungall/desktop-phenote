@@ -334,7 +334,7 @@ public class FieldPanel extends AbstractGUIComponent {
    * This works now but is probably wasting a bunch of objects everytime the interface is redone - need to check into this.
    */
   public void setTableSource(CharacterTableSource table) {
-    this.init(true, false, table.getGroup(), SelectionManager.getSelMan(table.getGroup()), EditManager.getEditManager(table.getGroup()), table.getSelectionModel());
+    this.init(true, false, table.getGroup(), SelectionManager.inst(), EditManager.getEditManager(table.getGroup()), table.getSelectionModel());
     this.setResponderDelegate(table);
   }
   
