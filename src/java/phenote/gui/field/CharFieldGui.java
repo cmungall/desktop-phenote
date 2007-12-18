@@ -500,10 +500,10 @@ public abstract class CharFieldGui implements ListSelectionListener {
 
   String getLabel() {
     if (label == null) {
-      if (charField.hasMoreThanOneOntology() || !charField.hasOntologies())
-        label = charField.getName();
-      else
-        label = charField.getFirstOntology().getName();
+//      if (charField.hasMoreThanOneOntology() || !charField.hasOntologies())
+      label = charField.getName();
+//       else
+//         label = charField.getFirstOntology().getName();
     }
     return label;
   }
