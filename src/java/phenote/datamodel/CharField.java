@@ -125,9 +125,9 @@ public class CharField {
   /** generic fields dont have enums */
   boolean hasCharFieldEnum() { return charFieldEnum != null; }
 
-  public boolean isRelationship() {
-    return charFieldEnum == CharFieldEnum.RELATIONSHIP;
-  }
+//   public boolean isRelationship() {
+//     return charFieldEnum == CharFieldEnum.RELATIONSHIP;
+//   }
 
   //boolean isGeneticContext() { return charFieldEnum == CharFieldEnum.GENETIC_CONTEXT; }
 

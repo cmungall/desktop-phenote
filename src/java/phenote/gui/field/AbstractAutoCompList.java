@@ -264,12 +264,12 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
 
 
 
-  /** If combo box is relationship then the items will be OBOProperties not
-      OBOClasses */
-  private boolean isRelationshipList() {
-    return getCharField().isRelationship();
-  }
-  private boolean isTermList() { return !isRelationshipList(); }
+//   /** If combo box is relationship then the items will be OBOProperties not
+//       OBOClasses */
+//   private boolean isRelationshipList() {
+//     return getCharField().isRelationship();
+//   }
+//   private boolean isTermList() { return !isRelationshipList(); }
 
   /** MAKE COMPLETION LIST FROM USER INPUT
       Populates defaultComboBoxModel with List of CompTerms */

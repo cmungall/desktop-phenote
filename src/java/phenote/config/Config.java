@@ -897,9 +897,12 @@ public class Config {
     }
     return null; // ex?
   }
+
+  /** should first check field with datatag if has one, and if not then label
+      as label may not be unique - fix this - only uses label at the moment */
   FieldConfig getAllFieldCfg(String fieldName) {
     for (FieldConfig fc : getAllFieldCfgs()) {
-      if (fc.getLabel().equals(fieldName))
+      if (fc.getLabel().equals(fieldName)) // bad!
         return fc;
     }
     return null; // ex?

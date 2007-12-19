@@ -32,7 +32,11 @@ public class OntologyConfig {
     
     // for now ignoring if name set as there was a bug where name was getting set
     // to "Entity" in the -u .phenote/conf file - woops
-    if (isPostCompRel()) //&& o.getName()==null // default Relationship name
+    // NO this is bad - as can have multiple rel ontols and now have same name!
+    // but before can change need to see who is relying on this!
+    // i dont think anything is, but really old configs have no name
+    // ok only do if name is null now - for backward compat
+    if (isPostCompRel() && getOntologyBean().getName() == null) //&& o.getName()==null // default Relationship name
       setName("Relationship");
   }
 

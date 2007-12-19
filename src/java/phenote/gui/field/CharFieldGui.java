@@ -471,9 +471,9 @@ public abstract class CharFieldGui implements ListSelectionListener {
   // hasOntology? overridded by AbstractAutoCompList
   boolean isCompList() { return false; }// isCompList; }
 
-  private boolean isRelationshipList() {
-    return charField.isRelationship();
-  }
+//   private boolean isRelationshipList() {
+//     return charField.isRelationship();
+//   }
 
   protected TermCompList getTermComp() {
     // throw ex if null?

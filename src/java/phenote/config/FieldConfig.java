@@ -163,8 +163,16 @@ public class FieldConfig {
   void insertOntologyConfig(int index,OntologyConfig o) {
     // hmmm funny parallel data structures hmm
     // hafta make space in array for new bean
+    //  cause index out of bounds exception
     getFieldBean().insertNewOntology(index);
+//     while (getFieldBean().sizeOfOntologyArray() <= index)
+//       getFieldBean().addNewOntology();
     getFieldBean().setOntologyArray(index,o.getOntologyBean());
+    // fix for now, this can throw index ex in merging field with no ontols
+    // to field with many ontols, with rel-postcomp ontols
+    // may be a better way to fix this - cant add nulls
+    //while (getOntologyConfigList().size() <= index)
+    //  getOntologyConfigList().add(null);
     getOntologyConfigList().add(index,o);
   }
 
@@ -287,7 +295,7 @@ public class FieldConfig {
       // cant just add - need to add in proper place! insert!
       //oldConfig.addFieldConfig(this);
       int index = thisCfg.getAllFieldIndex(this); // enabled??? disabled?
-      System.out.println("index merge "+index+" fc "+this);
+      System.out.println("field config index merge "+index+" fc "+this);
       oldConfig.insertFieldConfig(index,this);
       return;
     }
