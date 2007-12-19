@@ -23,7 +23,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListDataListener;
-import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.plaf.basic.BasicComboBoxEditor;
@@ -52,7 +51,6 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   private CompListSearcher compListSearcher;
   // minimum chars to type for completion to happen - from config
   private int minCompChars = 0;
-  private boolean selectionChangedBeforeLosingFocus = false;
 
   protected AbstractAutoCompList(CharField cf) {
     this(cf,0); // minCompChars = 0
@@ -118,22 +116,9 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     return this.getJComboBox().getEditor().getEditorComponent().hasFocus();
   }
   
-  protected void focusLost() {
-    super.focusLost();
-    this.selectionChangedBeforeLosingFocus = false;
-  }
-  
   protected void setForegroundColor(Color color) {
     this.getJComboBox().setForeground(color); // have to do this with Mac UI
     this.getJComboBox().getEditor().getEditorComponent().setForeground(color); // have to do this with Metal UI
-  }
-  
-  @Override
-  public void valueChanged(ListSelectionEvent e) {
-    if (this.hasFocus()) {
-      this.selectionChangedBeforeLosingFocus = true;
-    }
-    super.valueChanged(e);
   }
   
   /** Set text in editable text field of j combo (eg from table select) */
@@ -503,10 +488,6 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
 
   /** updateModel only if have selected from list */
   protected void updateModel() {
-    if (this.selectionChangedBeforeLosingFocus) {
-      // this will prevent us from losing data by clearing newly selected rows
-      return;
-    }
     boolean useTopHit = false;
     updateModel(useTopHit);
   }
