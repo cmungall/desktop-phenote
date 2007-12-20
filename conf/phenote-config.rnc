@@ -24,7 +24,8 @@ start =
     data-input-servlet,
     character-mode,
     ontologyLoading,
-    field-panel-tabs
+    field-panel-tabs,
+    comparison
   }
 
 ## specify how the master config interacts with local/cached config
@@ -126,6 +127,8 @@ character-mode = element character-mode {
   ## full java class name, eg phenote.datamodel.BasicAnnotationMappingDriver
   attribute mapping { xsd:string }
 }
+
+comparison = element comparison { attribute enable-statement-comparison {xsd:boolean} }
 
 ## this is pase and should be phased out
 obo-repository = element obo-repository { attribute url-dir {xsd:string} }

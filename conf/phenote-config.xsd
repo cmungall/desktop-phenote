@@ -20,6 +20,7 @@
         <xs:element ref="x:character-mode"/>
         <xs:element ref="x:ontologyLoading"/>
         <xs:element ref="x:field-panel-tabs"/>
+        <xs:element ref="x:comparison"/>
       </xs:sequence>
       <xs:attribute name="version" use="required" type="xs:string"/>
       <xs:attribute name="description" use="required" type="xs:string"/>
@@ -170,6 +171,11 @@
         </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="mapping" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="comparison">
+    <xs:complexType>
+      <xs:attribute name="enable-statement-comparison" use="required" type="xs:boolean"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="obo-repository">
