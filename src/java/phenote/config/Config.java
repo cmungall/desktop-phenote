@@ -27,6 +27,7 @@ import phenote.config.xml.PhenoteConfigurationDocument;
 import phenote.config.xml.AutoUpdateOntologiesDocument.AutoUpdateOntologies;
 import phenote.config.xml.AutocompleteSettingsDocument.AutocompleteSettings;
 import phenote.config.xml.CharacterModeDocument.CharacterMode;
+import phenote.config.xml.ComparisonDocument.Comparison;
 import phenote.config.xml.DataInputServletDocument.DataInputServlet;
 import phenote.config.xml.DataadapterDocument.Dataadapter;
 import phenote.config.xml.ExternaldbDocument.Externaldb;
@@ -1337,6 +1338,12 @@ public class Config {
     // testing
     if (!group.equals("genotypeMaker")) return null; // testing
     return new phenote.dataadapter.fly.ProformaAlleleParser();
+  }
+
+  public boolean compareStatementEnabled() {
+    Comparison c = phenoConfigBean.getComparison();
+    if (c == null) return false; // default false?
+    return c.getEnableStatementComparison(); // i think defaults to false
   }
 
   private Logger log;

@@ -61,9 +61,13 @@ public class CharacterTableController {
 	private JButton commitButton; // initialized by swix
 	private JButton graphButton; // initialized by swix
 	private JPanel filterPanel; // initialized by swix
+  private JPanel buttonPanel; // initialized by swix
 	private JButton ontolMakerButton; // initialized by swix
+  private JPanel ontolMakerSpacer;  // initialized by swix
 	private OntologyMakerI ontolMaker; // for now just 1 term maker...
-	// hmm... its handy
+	private JButton compareButton; // initialized by swix
+  private JPanel compareSpacer;	// initialized by swix
+  // hmm... its handy
 	private static CharacterTableController defaultController;
 
 	public CharacterTableController(String groupName) {
@@ -229,10 +233,17 @@ public class CharacterTableController {
 			ontolMaker = om;
 			ontolMakerButton.setText(om.getButtonText());
 		} else {
-			// remove from parent...
+      // this is the awkward side of swixml i suppose - as you then have to 
+      // actively set unvis button and panel spacer, rather than just not adding
+			// remove from parent... - setting vis to false is apparently sufficient
 			ontolMakerButton.setVisible(false);
+      //buttonPanel.remove(ontolMakerButton); // dont need
+      ontolMakerSpacer.setVisible(false);
 		}
-
+    if (!Config.inst().compareStatementEnabled()) {
+			compareButton.setVisible(false);
+      compareSpacer.setVisible(false);
+    }
 	}
 
 	private void addInitialBlankCharacter() {

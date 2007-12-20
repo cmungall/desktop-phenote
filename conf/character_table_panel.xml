@@ -8,7 +8,12 @@
     <panel id="buttonPanel">
     	<gridbagconstraints gridx="0" gridy="1" weightx="0" insets="10,10,10,10" fill="GridBagConstraints.HORIZONTAL"/>
         <button id="ontolMakerButton" text="Make Ontology" action="makeOntology" toolTipText="Make ontology for field(s)"/>
-        <panel size="80,1" preferredSize="80,1" minimumSize="80,1"/>
+        <panel id="ontolMakerSpacer" size="60,1" preferredSize="60,1" minimumSize="60,1"/>
+
+        <button id="compareButton" text="Compare Annots" action="compare" 
+            toolTipText="Make comparison between selected rows"/>
+        <panel id="compareSpacer" size="30,1" preferredSize="30,1" minimumSize="30,1"/>  
+
         <button id="addButton" text="New" action="addNewCharacter" toolTipText="Add new row"/>
         <button id="duplicateButton" text="Duplicate" action="duplicateSelectedCharacters" toolTipText="Duplicate selected rows"/>
         <button id="deleteButton" text="Delete" action="deleteSelectedCharacters" toolTipText="Delete selected rows"/>
