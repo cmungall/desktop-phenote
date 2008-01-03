@@ -17,7 +17,7 @@
 	<h2><a href="http://www.phenote.org/phenote/latest/phenote.jnlp">Launch Phenote in your browser</a></h2>
 	<p> You can run phenote directly from your web browser without a separate installation by selecting one of the following links:</p>
 	<ul>
-<!--	<li><strong>Beta release: <a href="http://www.phenote.org/phenote/1.4-beta3/phenote.jnlp">1.4 beta3</a></strong></li>-->
+	<li><strong>Beta release: <a href="http://www.phenote.org/phenote/1.5-beta2/phenote.jnlp">1.5 beta2</a></strong></li>-->
 	<li><strong>Stable release: <a href="http://www.phenote.org/phenote/1.4/phenote.jnlp">1.4</a> </strong></li>
 	<li><a href="http://www.phenote.org/phenote/phenote.html">Older releases</a></li>
 	</ul>
@@ -26,8 +26,8 @@
 	<h2>Run Phenote at the command line</h2>
 	<p> To run phenote on the command line, linux or MacOSX users will need to checkout Phenote from the subversion repository.  This can be done with the following command:</p>
 	<ul>
-<!--	<li>Beta release: <b>svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/tags/release-1.4-beta3/ phenote</b>
-	</li>-->
+	<li>Beta release: <b>svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/tags/release-1.5-beta2/ phenote</b>
+	</li>
 	<li>Stable release: <b>svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/tags/release-1.4/ phenote</b>
 	</li>
 	<li>Latest: <b>svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/trunk phenote </b>
