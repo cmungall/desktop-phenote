@@ -13,6 +13,7 @@ import org.bbop.framework.dock.LayoutAdapter;
 
 import phenote.datamodel.CharacterI;
 import phenote.gui.field.FieldPanel;
+import phenote.gui.field.FieldPanelContainer;
 import ca.odell.glazedlists.swing.EventSelectionModel;
 
 /**
@@ -87,13 +88,13 @@ public class CharacterTable extends AbstractGUIComponent implements CharacterTab
   }
 
   private void gainedFocus() {
-    if (this.getFieldPanel() != null) {
-      this.getFieldPanel().setTableSource(this);
+    if (this.getFieldPanelContainer() != null) {
+      this.getFieldPanelContainer().setTableSource(this);
     }
   }
   
-  private FieldPanel getFieldPanel() {
-    return FieldPanel.getCurrentFieldPanel();
+  private FieldPanelContainer getFieldPanelContainer() {
+    return FieldPanelContainer.getCurrentFieldPanelContainer();
   }
   
   private class ComponentLayoutListener extends LayoutAdapter {

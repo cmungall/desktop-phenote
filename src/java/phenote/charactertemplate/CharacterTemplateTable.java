@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -43,6 +44,7 @@ import phenote.gui.CharacterTableSource;
 import phenote.gui.TableColumnPrefsSaver;
 import phenote.gui.field.CharFieldMatcherEditor;
 import phenote.gui.field.FieldPanel;
+import phenote.gui.field.FieldPanelContainer;
 import phenote.util.EverythingEqualComparator;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.FilterList;
@@ -89,6 +91,7 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     this.tableFormat = new CharacterTemplateTableFormat(this.group, this);
     this.getEditManager().addCharChangeListener(new CharacterChangeListener());
     CharacterListManager.getCharListMan(this.group).addCharListChangeListener(new CharacterListChangeListener());
+    CharacterListManager.main().addCharListChangeListener(new MainCharacterListChangeListener());
     this.initializeInterface();
     this.addInitialBlankCharacter();
     this.focusListener = new ComponentLayoutListener();
@@ -284,8 +287,24 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
   }
   
   private void gainedFocus() {
-    if (this.getFieldPanel() != null) {
-      this.getFieldPanel().setTableSource(this);
+    if (this.getFieldPanelContainer() != null) {
+      this.getFieldPanelContainer().setTableSource(this);
+    }
+  }
+  
+  private void tryLoadDefaultDataFile() {
+    final File file = CharacterListManager.main().getCurrentDataFile();
+    if (file == null) {
+      return;
+    }
+    final int dotLocation = file.getName().lastIndexOf(".");
+    final boolean hasExtension = dotLocation > 0;
+    final String extension = hasExtension ? file.getName().substring(dotLocation) : "";
+    final String baseName = hasExtension ? file.getName().substring(0, dotLocation) : file.getName();
+    final String defaultFileName = baseName + "-" + this.getGroup() +  extension;
+    File templatesFile = new File(file.getParent(), defaultFileName);
+    if (templatesFile.exists()) {
+      this.getLoadSaveManager().loadData(templatesFile);
     }
   }
   
@@ -304,8 +323,8 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     return this.loadSaveManager;
   }
   
-  private FieldPanel getFieldPanel() {
-    return FieldPanel.getCurrentFieldPanel();
+  private FieldPanelContainer getFieldPanelContainer() {
+    return FieldPanelContainer.getCurrentFieldPanelContainer();
   }
   
   private JToolBar createToolBar() {
@@ -395,6 +414,14 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
       if (!CharacterTemplateTable.this.filteredCharacters.isEmpty()) {
         CharacterTemplateTable.this.selectionModel.setSelectionInterval(0, 0);
       }
+    }
+  }
+  
+  /** Listens for loading of new data files and clears the search filter */
+  private class MainCharacterListChangeListener implements CharListChangeListener {
+    public void newCharList(CharListChangeEvent e) {
+   // this is assumed to be coming from the main CharacterListManager
+     CharacterTemplateTable.this.tryLoadDefaultDataFile();
     }
   }
   

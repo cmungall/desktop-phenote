@@ -11,10 +11,9 @@ import javax.swing.Action;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import org.apache.log4j.Logger;
-
 import main.ProtocolEditor;
 
+import org.apache.log4j.Logger;
 import org.bbop.framework.AbstractComponentFactory;
 import org.bbop.framework.GUIComponentFactory;
 import org.bbop.framework.GUIComponentWrapper;
@@ -36,13 +35,12 @@ import phenote.charactertemplate.TemplateChooserFactory;
 import phenote.config.Config;
 import phenote.config.xml.GroupDocument.Group;
 import phenote.config.xml.TemplatechooserDocument.Templatechooser;
-import phenote.gui.CharacterTable;
 import phenote.gui.CharacterTableFactory;
 import phenote.gui.HelpMenu;
 import phenote.gui.NcbiInfo;
 import phenote.gui.StandardToolbar;
 import phenote.gui.TermInfo2;
-import phenote.gui.field.FieldPanel;
+import phenote.gui.field.FieldPanelContainer;
 import phenote.gui.menu.EditMenu;
 import phenote.gui.menu.FileMenu;
 import phenote.gui.menu.PhenoteHelpMenu;
@@ -75,7 +73,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		factories.add(new StandardToolbarFactory());
 		factories.add(new AnnotationSummaryComponentFactory());
 		factories.addAll(this.getTemplateGroupComponentFactories());
-                factories.add(new ProtocolEditorFactory());
+    factories.add(new ProtocolEditorFactory());
 		return factories;
 	}
 
@@ -162,8 +160,8 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 	/**
 	 * Create a character table factory configured for each group in config
 	 */
-  private Collection<CharacterTableFactory> getCharacterTableComponentFactories() {
-    Collection<CharacterTableFactory> factories = new ArrayList<CharacterTableFactory>();
+	private Collection<CharacterTableFactory> getCharacterTableComponentFactories() {
+	  Collection<CharacterTableFactory> factories = new ArrayList<CharacterTableFactory>();
     for (Group group : Config.inst().getFieldGroups()) {
       log().debug("Creating table factory for: " + group.getName());
       if (!group.getInterface().equals(Group.Interface.CHARACTER_TEMPLATE)) {
@@ -191,10 +189,8 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
   }
 
 	/** FieldPanelFactory inner class */
-	private class FieldPanelFactory extends
-			AbstractComponentFactory<FieldPanel> {
+	private class FieldPanelFactory extends AbstractComponentFactory<FieldPanelContainer> {
 
-		// private String panelName = "DScribe Editor";
 		private String panelName = "Phenote Editor";
 
 		public FactoryCategory getCategory() {
@@ -210,11 +206,8 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		}
 
 		@Override
-		public FieldPanel doCreateComponent(String id) {
-			FieldPanel fieldPanel = new FieldPanel(id);
-			fieldPanel.setMinimumSize(new Dimension(300, 300));
-			fieldPanel.setPreferredSize(new Dimension(300, 300));
-			return fieldPanel;
+		public FieldPanelContainer doCreateComponent(String id) {
+			return new FieldPanelContainer(id);
 		}
 	}
 
