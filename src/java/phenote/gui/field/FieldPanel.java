@@ -63,6 +63,11 @@ public class FieldPanel extends AbstractGUIComponent {
          CharacterTableController.getDefaultController().getSelectionModel());
   }
   
+  /** a panel with none of the features - stripped */
+  public static FieldPanel makeBasicPanel() {
+    return new FieldPanel();
+  }
+  
   public FieldPanel(CharacterTableSource table) {
     this(true, false, table.getGroup(), SelectionManager.inst(), EditManager.getEditManager(table.getGroup()), table.getSelectionModel());
   }
@@ -155,12 +160,14 @@ public class FieldPanel extends AbstractGUIComponent {
     int fieldNum = 0;
     int tab = 1;
     for (CharField charField : this.getCharFieldList()) {
+      // skip hidden fields
+      if (!Config.inst().isVisible(charField)) continue;
       if (isTabbed() && fieldNum % fieldsPerTab == 0) {
         fieldPanel = new JPanel(new GridBagLayout());
         // add scroll pane? or is that wierd with tabs?
         jTabbedPane.addTab("Tab "+tab++,fieldPanel);
       }
-      int minCompChars = Config.inst().getMinCompChars(fieldNum);
+      int minCompChars = Config.inst().getMinCompChars(fieldNum);//fieldnum??
       CharFieldGui gui = CharFieldGui.makeCharFieldGui(charField,minCompChars);
       ++fieldNum;
       

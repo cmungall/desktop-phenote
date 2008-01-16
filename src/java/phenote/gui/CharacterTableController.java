@@ -1,5 +1,7 @@
 package phenote.gui;
 
+import java.awt.Container;
+import java.awt.Frame;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
@@ -65,7 +67,7 @@ public class CharacterTableController {
 	private JButton ontolMakerButton; // initialized by swix
   private JPanel ontolMakerSpacer;  // initialized by swix
 	private OntologyMakerI ontolMaker; // for now just 1 term maker...
-	private JButton compareButton; // initialized by swix
+	private JButton compareButton; // initialized by swix -> compare()
   private JPanel compareSpacer;	// initialized by swix
   // hmm... its handy
 	private static CharacterTableController defaultController;
@@ -180,6 +182,19 @@ public class CharacterTableController {
 		}
 		ontolMaker.makeOntology();
 	}
+
+  /** this method is fired when comparison button is pressed (if configged)
+      set up as action in conf/character_table_panel.xml swixml config
+      bring up comparison window to compare 2 statements - by default only
+      do 1 comparison at a time (may have pref for doing multiple with commit button?
+  */
+  public void compare() {
+    Container c = characterTablePanel.getTopLevelAncestor();
+    Frame frame = null;
+    if (c instanceof Frame) frame = (Frame)frame;
+    else log().error("Top level ancestor of table is not a Frame");
+    new Comparison(frame);
+  }
 
 	public EventSelectionModel<CharacterI> getSelectionModel() {
 		return this.selectionModel;

@@ -11,9 +11,11 @@ import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 
+// couldnt this just be a FreeTextField with editable set to false?
+// or vice versa
 
 class ReadOnlyFieldGui extends CharFieldGui {
-  private JLabel readOnlyLabel = new JLabel();
+  private JLabel readOnlyLabel = new JLabel(); // uneditable JText?
 
   ReadOnlyFieldGui(CharField charfield) {
     super(charfield);

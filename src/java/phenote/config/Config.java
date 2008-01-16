@@ -883,17 +883,20 @@ public class Config {
   public List<FieldConfig> getAllFieldCfgs() { return allFields; }
 
   /** returns true if has field config with same name - contents may differ */
-  boolean hasEnbldFieldCfg(FieldConfig newFC) {
-    return getEnbldFieldCfg(newFC.getLabel()) != null;
-  }
+//   boolean hasEnbldFieldCfg(FieldConfig newFC) {
+//     return getEnbldFieldCfg(newFC.getLabel()) != null;
+//   }
+
   boolean hasFieldCfgAll(FieldConfig fc) {
     return getAllFieldCfg(fc.getLabel()) != null;
   }
 
-  /** returns field config with label fieldName */
-  FieldConfig getEnbldFieldCfg(String fieldName) {
+  /** returns field config with label fieldName or tag */
+  private FieldConfig getEnbldFieldCfg(String nameOrTag) {
     for (FieldConfig fc : getEnbldFieldCfgs()) {
-      if (fc.getLabel().equals(fieldName))
+      if (fc.getLabel().equals(nameOrTag))
+        return fc;
+      if (fc.getDataTag().equals(nameOrTag))
         return fc;
     }
     return null; // ex?
@@ -907,6 +910,20 @@ public class Config {
         return fc;
     }
     return null; // ex?
+  }
+
+  public boolean isVisible(CharField cf) {
+    FieldConfig fc = getFieldConfig(cf);
+    if (fc == null) return false; // ex?
+    return fc.isVisible();
+  }
+
+  /** returns field config for char field - tries both tag & name, returns null
+      if none */
+  private FieldConfig getFieldConfig(CharField cf) {
+    FieldConfig fc = getEnbldFieldCfg(cf.getTag());
+    if (fc != null) return fc;
+    return getEnbldFieldCfg(cf.getName());
   }
 
   /** kinda silly to return list?? so there are 2 fields for "Tag" which perhaps is silly
@@ -945,13 +962,19 @@ public class Config {
 //     throw new ConfigException("Label for "+cf+" not found");
 //   }
   
-  public String getSyntaxAbbrevForCharField(CharField cf) throws ConfigException {
+  public String getSyntaxAbbrevForCharField(CharField cf) { //throws ConfigException {
     for (FieldConfig fc : getEnbldFieldCfgs()) {
       if (fc.hasCharField(cf))
         return fc.getSyntaxAbbrev();
     }
-    // failed to find field config for char field - shouldnt happen
-    throw new ConfigException("Syn Abbrev for "+cf+" not found");
+    // failed to find field config for char field - so currently this happens for
+    // "Date Created" field that is added by CharFieldManager even if not in config
+    // as its thought every annot should have a date create (also owner, and date update!)
+    // this method is solely for pheno syntax adapter which is getting phased out for tab delim
+    // so i think it should then just get tag from char field in this case...
+    return cf.getTag();
+
+    //throw new ConfigException("Syn Abbrev for "+cf+" not found");
   }
 
   // pase - phase out - returns null if doesnt have
@@ -1142,7 +1165,7 @@ public class Config {
     FieldConfig fc = new FieldConfig(field,this);
     addFieldConfig(fc);
   }
-  void addFieldConfig(FieldConfig fc) {
+  public void addFieldConfig(FieldConfig fc) {
     allFields.add(fc);
     if (fc.isEnabled())
       enabledFields.add(fc);

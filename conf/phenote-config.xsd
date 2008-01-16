@@ -217,7 +217,6 @@
             <xs:enumeration value="ID"/>
             <xs:enumeration value="READ_ONLY"/>
             <xs:enumeration value="DATE"/>
-            <xs:enumeration value="HIDDEN"/>
             <xs:enumeration value="free_text"/>
           </xs:restriction>
         </xs:simpleType>
@@ -243,6 +242,7 @@
           <xs:documentation>if true then field can have multiple values, use list gui</xs:documentation>
         </xs:annotation>
       </xs:attribute>
+      <xs:attribute name="isVisible" use="required" type="xs:boolean"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="ontology">

@@ -38,45 +38,44 @@ public class PhenoSyntaxChar {
   }
 
   // WRITE
-  String getPhenoSyntaxString() throws BadCharException {
+  String getPhenoSyntaxString() { //throws BadCharException {
     if (phenoSyntaxString == null) {
       phenoSyntaxString = makeSyntaxString();
     }
     return phenoSyntaxString;
   }
 
-  private String makeSyntaxString() throws BadCharException {
+  private String makeSyntaxString() { //throws BadCharException {
     if (character == null) { // shouldnt happen
       System.out.println("Error: no Character to make phenoSyntax string with");
       return ""; //??
     }
     StringBuffer sb = new StringBuffer();
 
-    try {
+    //try {
 
       // ontology manager should have char fields in order of config which should be
       // syntax order - hope this isnt too presumptious
       for (CharField cf : CharFieldManager.inst().getCharFieldList()) {
         if (character.hasValue(cf)) {
-          sb.append(Config.inst().getSyntaxAbbrevForCharField(cf)).append("=");//ex
-          if (isFreeText(cf)) sb.append('"'); // free text gets quoted
+          // no longer throws ex, uses tag or name if no cfg syn, as data created field
+          // may not be in config (added automatically)
+          sb.append(Config.inst().getSyntaxAbbrevForCharField(cf)).append("=");//CfgEx
+          if (isQuotable(cf)) sb.append('"'); // free text gets quoted
           sb.append(makeValue(character.getValue(cf)));
-          if (isFreeText(cf)) sb.append("\" ");
+          if (isQuotable(cf)) sb.append("\" ");
 //          sb.append("\n");
         }
         // check for entity & quality??
       }
 
-    }
-    catch (ConfigException e) {
-      throw new BadCharException(e.getMessage());
-    }
+      //}catch(ConfigException e){throw new BadCharException(e.getMessage());}
     return sb.toString();
   }
    
   /** If a char field has ontologies it is not free text */
-  private boolean isFreeText(CharField cf) {
-    return cf.isFreeText();//!cf.hasOntologies();
+  private boolean isQuotable(CharField cf) { //isFreeText(CharField cf) {
+    return cf.isFreeText() || cf.isDate();//!cf.hasOntologies();
   }
 
 
@@ -118,9 +117,7 @@ public class PhenoSyntaxChar {
       if (found) tagEnd = m.end(); // dont need if not found (last one)
       String value = line.substring(valueStart,tagStart).trim();
       value = stripComments(value).trim();
-      //value = stripQuotesFromFreeText(value); // free text gets quoted
-      //System.out.println("tag ."+tag+". val ."+value+".");
-      addTagValToChar(tag,value);
+      addTagValToChar(tag,value); // strips quotes
     }
   }
 
@@ -131,8 +128,8 @@ public class PhenoSyntaxChar {
 
   private static final String q = "\"";
 
-  private String stripQuotesFromFreeText(String value,CharField cf) {
-    if (!isFreeText(cf)) return value;
+  private String stripQuotes(String value,CharField cf) {
+    if (!isQuotable(cf)) return value;
     if (value.startsWith(q)) value = value.substring(1);
     //    if (value.endsWith(q)) value = value.substring(0,value.length()-2);
     //  changed this to "-1" because it was messing up the reader
@@ -152,6 +149,7 @@ public class PhenoSyntaxChar {
     }
   }
 
+  /** for parseLine/reading, got tag & value now add to CharacterI */
   private void addTagValToChar(String tag, String value) {
     if (value.equals("")) {
       log().error("No value given for "+tag);
@@ -167,7 +165,7 @@ public class PhenoSyntaxChar {
       List<CharField> fields = Config.inst().getCharFieldsForSyntaxAbbrev(tag);//Ex
       for (CharField cf : fields) {
         
-        value = stripQuotesFromFreeText(value,cf);
+        value = stripQuotes(value,cf);
 
         if (cf.getName().equals("Stage")) {
           // todo - a general relationship extracter?

@@ -86,7 +86,7 @@ class PostCompGui {
     
     // MAIN GENUS TERM
     genusField = CharFieldGui.makePostCompTermList(charField,"Genus",minCompChars);
-    genusField.setSelectionManager(this.selectionManager);
+    genusField.setSelectionManager(this.selectionManager); // ??
     //genusField.setListSelectionModel(this.selectionModel);
     compFieldPanel.addCharFieldGuiToPanel(genusField);
 

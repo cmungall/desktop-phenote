@@ -6,6 +6,7 @@ import java.util.List;
 import phenote.config.xml.FieldDocument.Field;
 import phenote.config.xml.OntologyDocument.Ontology;
 import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldEnum;
 
 public class FieldConfig {
 
@@ -79,14 +80,31 @@ public class FieldConfig {
     this.displayName = displayName;
   }
 
-  Config getConfig() { return config; }
+  /** for auto fields like date_created */
+  public FieldConfig(CharFieldEnum fieldEnum, CharField cf) {
+    initConfig();
+    initFieldBean();
+    setCharField(cf);
+    setLabel(fieldEnum.getName());
+    setDataTag(fieldEnum.getTag());
+    setType(fieldEnum.getType());
+  }
+
+  Config getConfig() {
+    if (config==null) config = Config.inst(); // ?
+    return config;
+  }
+
+  private void initConfig() { getConfig(); }
 
   /** return xml bean for field -always non null */
   public Field getFieldBean() {
     if (fieldBean == null) //create one...
-      fieldBean = config.addNewFieldBean();
+      fieldBean = getConfig().addNewFieldBean();
     return fieldBean;
   } 
+
+  private void initFieldBean() { getFieldBean(); }
 
   // --> getName?
   public String getLabel() { return fieldBean.getName(); } 
@@ -107,6 +125,10 @@ public class FieldConfig {
       else fieldBean.setType(Field.Type.FREE_TEXT);
     }
     return fieldBean.getType();
+  }
+
+  private void setType(Field.Type.Enum type) {
+    getFieldBean().setType(type);
   }
 
   public boolean isID() {
@@ -224,12 +246,12 @@ public class FieldConfig {
   /** DataTag should replace syntax abbrev has a handle to the field, used by
       DataInputServlet (and should be used by syn adapter) */
   void setDataTag(String dt) {
-    fieldBean.setDatatag(dt);
+    getFieldBean().setDatatag(dt);
   }
 
   /** First tries to return explicitly set datatag, 2nd syn abbrev, 3rd label w _ */
   public String getDataTag() {
-    String s = fieldBean.getDatatag();
+    String s = getFieldBean().getDatatag();
     if (s == null) s = getSyntaxAbbrev();
     return s;
   }
@@ -247,6 +269,15 @@ public class FieldConfig {
     if (abbrev.equalsIgnoreCase(s)) return true;
     String underForSpace = s.replace(' ','_');
     return abbrev.equalsIgnoreCase(underForSpace);
+  }
+
+  public boolean isVisible() {
+    if (fieldBean.xgetIsVisible() == null) return true;
+    return fieldBean.getIsVisible();
+  }
+
+  public void setIsVisible(boolean vis) {
+    getFieldBean().setIsVisible(vis);
   }
 
   public  boolean isEnabled() {

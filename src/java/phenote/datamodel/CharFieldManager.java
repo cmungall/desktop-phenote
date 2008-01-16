@@ -16,6 +16,7 @@ import org.obo.util.TermUtil;
 import org.oboedit.controller.SessionManager;
 
 import phenote.config.Config;
+import phenote.config.FieldConfig;
 
 //import phenote.datamodel.CharFieldEnum;
 //import phenote.datamodel.OboUtil;
@@ -58,7 +59,7 @@ public class CharFieldManager {
     singleton = null;
   }
 
-  /** OntologyDataAdapter adds fields */
+  /** OntologyDataAdapter adds fields from field configs */
   public void addField(CharField cf) {
     charFieldList.add(cf);
   }
@@ -101,6 +102,7 @@ public class CharFieldManager {
     return getCharFieldListForGroup(group).get(i);
   }
 
+  /** Actually checks both name & tag of char fields for match - rename getCharField? */
   public CharField getCharFieldForName(String fieldName) throws CharFieldException {
     if (fieldName == null) throw new CharFieldException("Char field string is null");
     for (CharField cf : getCharFieldList()) {
@@ -121,18 +123,28 @@ public class CharFieldManager {
 
   // ?
   private CharField getCharFieldForEnum(CharFieldEnum en) throws CharFieldException {
-    try { return getCharFieldForName(en.getName()); }
-    catch (CharFieldException e) { return getCharFieldForName(en.getTag()); }
+    try { return getCharFieldForName(en.getTag()); } // probably should do tag 1st
+    catch (CharFieldException e) { return getCharFieldForName(en.getName()); }
   }
 
-  /** If date_created doesnt exist then create it - its a fundamental */
+  /** If date_created doesnt exist then create it - its a fundamental
+      may want a configuration for this - presumptious? */
   public CharField getDateCreatedField() {
-    try { return getCharFieldForEnum(CharFieldEnum.DATE_CREATED); }
+    CharFieldEnum dateEnum = CharFieldEnum.DATE_CREATED;
+    try { return getCharFieldForEnum(dateEnum); }
+    // Doesnt exist yet - Add to datamodel and config(?)
     catch (CharFieldException e) {
       // if !config.doCreateDate throw CFex??
-      CharField dateCreated = new CharField(CharFieldEnum.DATE_CREATED);
-      addField(dateCreated);
-      return dateCreated;
+      CharField dateField = new CharField(dateEnum);
+      addField(dateField);
+
+      // should dateCreated then get added to config?? i think so
+      Config cfg = Config.inst();
+      FieldConfig fc = new FieldConfig(dateEnum,dateField);
+      fc.setIsVisible(false); // dont show in field panel
+      cfg.addFieldConfig(fc);
+
+      return dateField;
     }
   }
 

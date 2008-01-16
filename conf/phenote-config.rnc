@@ -154,7 +154,7 @@ field =
     ## ID requires a : and no whitespace 
     ## free_text is just for backward compatibility - phase out
     attribute type { "FREE_TEXT" | "TERM" | "INT" | "ID" | "READ_ONLY" | "DATE"
-                     | "HIDDEN" | "free_text" },  
+                    | "free_text" },  
     ## should this be another type? will there be anything readonly aside from strings?
     ##attribute read-only { xsd:boolean },
     ## file is for single ontology - rename ontology_file?
@@ -176,6 +176,9 @@ field =
     attribute sort-by { "NAME" | "ID" },
     ## if true then field can have multiple values, use list gui
     attribute isList { xsd:boolean },
+    ## whether or not to show field in display, eg dateCreated is not
+    ## necasarily displayed
+    attribute isVisible { xsd:boolean },
     postcomp?,
     ontology*
   } 

@@ -119,14 +119,12 @@ public class PhenoSyntaxFileAdapter extends AbstractFileAdapter {
     System.out.println("Writing pheno syntax to file "+file);
 
     for (CharacterI ch : charList.getList()) {
-      try {
+      //try {
         String c = new PhenoSyntaxChar(ch).getPhenoSyntaxString();
         System.out.println(c);
         pw.println(c);
-      }
-      catch (PhenoSyntaxChar.BadCharException e) {
-        System.out.println(e.getMessage()+" Not writing out character");
-      }
+        //}catch (PhenoSyntaxChar.BadCharException e) { No longer throws
+        //System.out.println(e.getMessage()+" Not writing out character"); }
     }
     pw.close();
     file = null;

@@ -458,15 +458,8 @@ public abstract class CharFieldGui implements ListSelectionListener {
     }
   }
 
-  /** for testing and internal use */
+  /** for testing and internal use - overridden */
   AbstractAutoCompList getCompList() { return null; } // overridden
-//     if (!isCompList())
-//       return null;
-//     if (isRelationshipList())
-//       return getRelComp();
-//     return getTermComp();
-//     //return comboBox;
-//   }
 
   // hasOntology? overridded by AbstractAutoCompList
   boolean isCompList() { return false; }// isCompList; }
@@ -480,17 +473,6 @@ public abstract class CharFieldGui implements ListSelectionListener {
     //return termCompList;
     return null; // overridden by TermCompList
   }
-
-//   private RelationCompList getRelComp() {
-//     //return relCompList;
-//     return null; // overridden
-//   }
-
-  // hardwired in term & rel subclasses now
-//   void enableTermInfoListening(boolean enable) {
-//     if (!isCompList()) return;
-//     getCompList().enableTermInfoListening(enable);
-//   }
 
 
 
@@ -527,27 +509,18 @@ public abstract class CharFieldGui implements ListSelectionListener {
     protected CharFieldGuiEx(String m) { super(m); }
   }
 
-  /** should define a CharFieldGuiEx! */
+  /** overridden by term comp list */
   OBOClass getCurrentOboClass() throws CharFieldGuiEx {
-    //if (!isCompList() || isRelationshipList)
-    //if (!isTermCompList())
-    // overridden by term comp list
     throw new CharFieldGuiEx("Field has no OBO Class");
-      //return null; 
-    //return getTermComp().getCurrentOboClass(); // throws Ex
   }
 
   /** overridden by RelationCompList */
   OBOProperty getCurrentRelation() throws CharFieldGuiEx {
-    //if (!isCompList() || !isRelationshipList())
     throw new CharFieldGuiEx("Field has no Relation");
-    //return getRelComp().getCurrentRelation(); // throws Ex
   }
 
   protected boolean isTermCompList() {
     return false; // overridden by term comp list
-    //return isCompList() && !isRelationshipList() && getTermComp()!=null;
-    // && getTermComp != null?
   }
 
   /** for post comp gui to set ontol chooser - overridden by term comp */
@@ -563,8 +536,6 @@ public abstract class CharFieldGui implements ListSelectionListener {
 
   /** should get this from config... stub for now */
   protected boolean hasListGui() {
-    //return false;
-    //return label.equals("Non Locus Alleles"); // testing
     return charField.isList();
   }
   /** JList? initialize if configged
@@ -603,10 +574,8 @@ public abstract class CharFieldGui implements ListSelectionListener {
   }
 
   private void updateListGui() {
-    //log().debug("update list gui called has list"+hasListGui());
     if (!hasListGui()) return;
     List<CharacterI> sel = getSelectedChars();
-    //log().debug("update list gui called sel list size"+l.size());
     if (sel==null || sel.size()==0) {
       valueListModel.clear();
       return;
@@ -616,7 +585,6 @@ public abstract class CharFieldGui implements ListSelectionListener {
     }
     else {
       CharacterI c = sel.get(0); // sole selection
-      //List<CharFieldValue> cfvs = c.getValueList(getCharField());
       List<CharFieldValue> vals = c.getValue(getCharField()).getCharFieldValueList();
       getValueListModel().setList(vals);
     }
@@ -667,6 +635,17 @@ public abstract class CharFieldGui implements ListSelectionListener {
 
 
 // GARBAGE
+//   private RelationCompList getRelComp() {
+//     //return relCompList;
+//     return null; // overridden
+//   }
+
+  // hardwired in term & rel subclasses now
+//   void enableTermInfoListening(boolean enable) {
+//     if (!isCompList()) return;
+//     getCompList().enableTermInfoListening(enable);
+//   }
+
   //JLabel getLabelGui() { return new JLabel
 
 //  private void initCombo() { //, Container parent) {
@@ -684,65 +663,3 @@ public abstract class CharFieldGui implements ListSelectionListener {
 
     //getCompList().setCharField(charField);
 
-    // POST COMPOSITION button - only get post comp button if both configged for it
-    // AND addCompButton flag is true - PostCompGui sets to false - no post comp of 
-    // post comp yet - and if so probably would do in same window not multiple
-    // windows anyways
-    // this belongs in TermCompList - free text doesnt use
-//     if (charField.postCompAllowed() && addCompButton) {
-//       JButton postCompButton = new JButton("Comp"); // ???
-//       postCompButton.addActionListener(new PostCompListener());
-//       fieldPanel.addPostCompButton(postCompButton);
-      // keep this here for now - may reinstate - this is inpanel post comp
-//       // todo -> get pc differentia ontologies from config, >1 add chooser
-//       AutoComboBox postCompCombo =
-//         new AutoComboBox(charField.getFirstOntology(),fieldPanel.getSearchParams());
-//       // postCompCombo.setVisible(false); // initial state hidden - layout?
-//       postCompCombo.setCharField(harField);
-//       postCompCombo.setIsDifferentia(true); // differentia of genus in post comp
-//       fieldPanel.addFieldGui(postCompCombo);
-//     }
-//   }
-
-//   /** sets up rel or term comp list depending on isRelList(). also set up 
-//       compListSearcher */
-//   private void createCompList() {
-//     //comboBox = new AutoComboBox(charField.getFirstOntology(),
-//     //fieldPanel.getSearchParams(),enableListeners);
-//     // enableListeners - if false then ACB wont directly edit model (post comp)
-//     compListSearcher =
-//       new CompListSearcher(charField.getOntologyList(),fieldPanel.getSearchParams());
-//       //new CompListSearcher(charField.getFirstOntology(),fieldPanel.getSearchParams());
-//     if (isRelationshipList()) {
-//       relCompList = new RelationCompList(compListSearcher,enableListeners,charField);
-//     }
-//     else {
-//       termCompList = new TermCompList(compListSearcher,enableListeners,this);
-//     }
-//   }
-
-
-//  private FreeTextField getFreeTextField() { return freeTextField; }
-
-  // ?? was this moved somewhere else?
-//   /** key listener for free text fields for Cmd-V pasting for macs */
-//   private class TextKeyListener extends java.awt.event.KeyAdapter {
-//     public void keyPressed(java.awt.event.KeyEvent e) {
-//       // on a mac Command-V is paste. this aint so with java/metal look&feel
-//       if (e.getKeyChar() == 'v' 
-//           && e.getKeyModifiersText(e.getModifiers()).equals("Command")) {
-//         //log().debug("got cmd V paste");
-//         //System.getClipboard
-//         Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
-//         try {
-//           Transferable t = c.getContents(null); // null?
-//           Object s = t.getTransferData(DataFlavor.stringFlavor);
-//           // this isnt quite right as it should just insert the text not wipe
-//           // it out - but probably sufficient for now?
-//           if (s != null)
-//             setText(s.toString());
-//         } catch (Exception ex) { System.out.println("failed paste "+ex); }
-//       }
-//     }
-//   }
-// {
