@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
@@ -187,8 +188,18 @@ public class CharacterTableController {
       set up as action in conf/character_table_panel.xml swixml config
       bring up comparison window to compare 2 statements - by default only
       do 1 comparison at a time (may have pref for doing multiple with commit button?
-  */
+      for now if 2 statements not selected then put up error message
+      (eventually put drag & drop in comparator)  */
   public void compare() {
+    List<CharacterI> selChars = getSelectionModel().getSelected();
+    if (selChars.size() != 2) {
+      String m = "You must have exactly 2 rows selected to do comparison(for now)";
+      JOptionPane.showMessageDialog(null,m,"Error",JOptionPane.ERROR_MESSAGE);
+      return;
+    }
+
+    // could just Phenote.inst().getFrame(), but phenote2??
+    // should at least probably make this a util fn
     Container c = characterTablePanel.getTopLevelAncestor();
     Frame frame = null;
     if (c instanceof Frame) frame = (Frame)frame;
