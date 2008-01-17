@@ -36,12 +36,12 @@ import java.sql.PreparedStatement;
 
 
 
-public class WormAdapter implements QueryableDataAdapterI {
+public class WormAdapterReference implements QueryableDataAdapterI {
 
   private List<String> queryableFields = new ArrayList<String>(2);
   private List<String> queryableGroups = new ArrayList<String>(2);
 
-  public WormAdapter() { init(); }
+  public WormAdapterReference() { init(); }
 
   public List<String> getQueryableGroups() {
     return queryableGroups;
