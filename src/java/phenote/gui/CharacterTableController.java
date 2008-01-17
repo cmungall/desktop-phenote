@@ -354,6 +354,11 @@ public class CharacterTableController {
     }
   }
 
+  /** Return # of lines needed for char. If char has post comp then an extra line
+   * 	for every diff
+   * @param c charcterI to examine
+   * @return number of lines
+   */
   private int getNumRowsForChar(CharacterI c) {
     int lines = 1;
     for (CharField cf : CharFieldManager.inst().getPostCompFields()) {

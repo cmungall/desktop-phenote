@@ -105,7 +105,7 @@ public abstract class CharFieldGui implements ListSelectionListener {
 
   /** createPostCompRelationList - will relation lists ever be in main window and if
       so will they ever have listeners enabled - maybe, probably not */
-  static CharFieldGui makeRelationList(CharField cf) {
+  public static CharFieldGui makeRelationList(CharField cf) {
     RelationCompList r = new RelationCompList(cf);
     //r.setSearchParams(sp); // does rel really need search params?
     return r;

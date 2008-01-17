@@ -121,6 +121,23 @@ public class CharFieldManager {
     return l;
   }
 
+  /** Return ontology to use for statement comparisons
+      this needs work. nicole is adding separate declaration of ontols in config
+      with that a rel ontol should have a flag if its to be used for comparisons
+      currently relationship ontols come from post comp
+      would we ever have separate relationship ontol for post comp than comparisons?
+      probably not - probably both use RO - for now just grabbing rel ontol from 
+      post comp - also may want to have more than one obo file for Ontology/field
+      throws exception if none */
+  public Ontology getComparisonRelationOntology() throws CharFieldException {
+    List<CharField> rels = getPostCompFields();
+    if (rels.isEmpty()) throw new CharFieldException("no post comp fields");
+    CharField first = rels.get(0);
+    if (first.getPostCompRelOntol() == null)
+      throw new CharFieldException("no rel ontol");
+    return first.getPostCompRelOntol();
+  }
+
   // ?
   private CharField getCharFieldForEnum(CharFieldEnum en) throws CharFieldException {
     try { return getCharFieldForName(en.getTag()); } // probably should do tag 1st

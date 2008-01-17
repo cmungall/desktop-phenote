@@ -198,7 +198,7 @@ public class FieldPanel extends AbstractGUIComponent {
   private int currentGridBagRow = 0;
   private int currentGridBagCol = 0;
   private int buttonGridBagCol = 0;
-  void addCharFieldGuiToPanel(CharFieldGui fieldGui) {
+  public void addCharFieldGuiToPanel(CharFieldGui fieldGui) {
     // first one does new row
     this.addLabel(fieldGui, getConstraintsNewRow());
     this.addOntologyChooser(fieldGui, getConstraintsSameRow());
@@ -231,11 +231,15 @@ public class FieldPanel extends AbstractGUIComponent {
   }
   
   
-  public void addLabelInNewRow(String label) {
-    addLabel(label,false,getConstraintsNewRow());
+  public void addLabelInNewRow(String label, int anchor) {
+    GridBagConstraints constraints = getConstraintsNewRow();
+    constraints.anchor = anchor;
+    addLabel(label,false,constraints);
   }
   
+  // anchors EAST/right
   private void addLabel(CharFieldGui field, GridBagConstraints constraints) {
+    constraints.anchor = GridBagConstraints.EAST;
     addLabel(field.getLabel(),field.hasOntologyChooser(),constraints);
   }
 
@@ -245,7 +249,7 @@ public class FieldPanel extends AbstractGUIComponent {
     if (!hasOntologyChooser) {
       constraints.gridwidth = 2;
     }
-    constraints.anchor = GridBagConstraints.EAST;
+    //constraints.anchor = GridBagConstraints.EAST;
     fieldPanel.add(new JLabel(label), constraints);
   }
   
