@@ -58,8 +58,8 @@ public class FieldPanel extends AbstractGUIComponent {
 //     this(doAllFields, addSearchPanel, null, SelectionManager.inst(), EditManager.inst());
 //   }
 
-  public FieldPanel() {
-    this(true,false,Config.inst().getDefaultGroup().getName(),
+  private FieldPanel() {
+    this(false,false,Config.inst().getDefaultGroup().getName(),
          CharacterTableController.getDefaultController().getSelectionModel());
   }
   
@@ -231,15 +231,22 @@ public class FieldPanel extends AbstractGUIComponent {
   }
   
   
-    
+  public void addLabelInNewRow(String label) {
+    addLabel(label,false,getConstraintsNewRow());
+  }
   
-  private void addLabel(CharFieldGui fieldGui, GridBagConstraints constraints) {
+  private void addLabel(CharFieldGui field, GridBagConstraints constraints) {
+    addLabel(field.getLabel(),field.hasOntologyChooser(),constraints);
+  }
+
+  private void addLabel(String label, boolean hasOntologyChooser,
+                        GridBagConstraints constraints) {
     constraints.gridx = 0;
-    if (!fieldGui.hasOntologyChooser()) {
+    if (!hasOntologyChooser) {
       constraints.gridwidth = 2;
     }
     constraints.anchor = GridBagConstraints.EAST;
-    fieldPanel.add(new JLabel(fieldGui.getLabel()), constraints);
+    fieldPanel.add(new JLabel(label), constraints);
   }
   
   private void addOntologyChooser(CharFieldGui fieldGui, GridBagConstraints constraints) {

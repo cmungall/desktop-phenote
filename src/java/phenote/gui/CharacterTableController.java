@@ -197,14 +197,16 @@ public class CharacterTableController {
       JOptionPane.showMessageDialog(null,m,"Error",JOptionPane.ERROR_MESSAGE);
       return;
     }
-
     // could just Phenote.inst().getFrame(), but phenote2??
     // should at least probably make this a util fn
     Container c = characterTablePanel.getTopLevelAncestor();
     Frame frame = null;
     if (c instanceof Frame) frame = (Frame)frame;
     else log().error("Top level ancestor of table is not a Frame");
-    new Comparison(frame);
+
+    CharacterI c1 = selChars.get(0);
+    CharacterI c2 = selChars.get(1);
+    new Comparison(frame,c1,c2);
   }
 
 	public EventSelectionModel<CharacterI> getSelectionModel() {
