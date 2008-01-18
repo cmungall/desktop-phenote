@@ -40,12 +40,12 @@ class Comparison {
     FieldPanel fieldPanel = FieldPanel.makeBasicPanel();
     dialog.add(fieldPanel);
     
-    fieldPanel.addLabelInNewRow(charString(c1),GridBagConstraints.WEST);
+    fieldPanel.addLabelForWholeRow(charString(c1));
 
     // Relationship - dislpay rel if comp already made
     addRelGui(fieldPanel); // throws CharFieldException if no rel ontology
 
-    fieldPanel.addLabelInNewRow(charString(c2),GridBagConstraints.WEST);
+    fieldPanel.addLabelForWholeRow(charString(c2));
 
     // Buttons OK & Cancel
 
