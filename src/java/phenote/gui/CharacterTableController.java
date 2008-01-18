@@ -450,8 +450,19 @@ public class CharacterTableController {
 		}
 	}
 
+  /** This is clearly unfinshed as it doesnt do anything - everything is commented
+      out. I think it means to set the title of the component when theres a new
+      data load - current data file is set by loading new files - however loading
+      from a db (eg worm) doesnt set a file - this should be more genereically named
+      so loading from db can utilize this and this should be wired up to actually
+      set component window title in phenote2 as i think john intended here
+      here is his note from cvs commit of this:
+      Fixed some component/factory titling problems, fixed a bug where Phenote Editor
+      couldn't be the first component displayed */
 	public void setComponentTitleFromFilename() {
 		// String title = CharacterTableController.this.getTableAutoSaveName();
+    java.io.File dataSource =  CharacterListManager.inst().getCurrentDataFile();
+    if (dataSource == null) return;
 		String title = CharacterListManager.inst().getCurrentDataFile()
 				.getName();
 		// if (title==null)
