@@ -629,7 +629,7 @@ System.out.println("set Pub to "+postgres_value+" END");
       postgres_table = "app_person"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
 // NEED obo load
-//      c1.setValue("Person",postgres_value);				// assign the queried value
+      c1.setValue("Person",postgres_value);				// assign the queried value
 System.out.println("set Person to "+postgres_value+" END");
 
 //      String pubID = null;
