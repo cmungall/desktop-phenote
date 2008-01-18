@@ -334,7 +334,8 @@ public class CharField {
     String delim = '"'+LIST_DELIM+'"'; // quotes separate each item
     Pattern p = Pattern.compile(delim);
     String[] kids = p.split(listString);
-    danglerNameList = stripQuotes(danglerNameList);
+    if (danglerNameList!= null)
+      danglerNameList = stripQuotes(danglerNameList);
     String[] kidDanglerNames = danglerNameList!=null ? p.split(danglerNameList) : null;
     CharFieldValue listVal = CharFieldValue.makeListParentValue(c,this);
     for (int i=0; i<kids.length; i++) {
@@ -348,6 +349,7 @@ public class CharField {
   }
 
   private static String stripQuotes(String s) {
+    if (s == null) return null;
     s = s.trim(); // just in case
     if (s.startsWith("\"")) s = s.substring(1);
     if (s.endsWith("\"")) s = s.substring(0,s.length()-1);
