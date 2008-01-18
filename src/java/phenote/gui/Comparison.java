@@ -1,7 +1,12 @@
 package phenote.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -35,23 +40,29 @@ class Comparison {
     throws CharFieldException {
     char1 = c1;
     char2 = c2;
-    dialog = new JDialog(owner,"Statement Comparison");
+    boolean modal = true;
+    dialog = new JDialog(owner,"Statement Comparison",modal);
+    dialog.setAlwaysOnTop(true);
 
     FieldPanel fieldPanel = FieldPanel.makeBasicPanel();
     dialog.add(fieldPanel);
     
+    // Statement 1
     fieldPanel.addLabelForWholeRow(charString(c1));
 
     // Relationship - dislpay rel if comp already made
     addRelGui(fieldPanel); // throws CharFieldException if no rel ontology
 
+    // Statement 2
     fieldPanel.addLabelForWholeRow(charString(c2));
 
     // Buttons OK & Cancel
-
+    addButtons(fieldPanel);
+    
     dialog.pack();
     dialog.setLocationRelativeTo(owner);
     dialog.setVisible(true);
+    dialog.pack(); // ?
   }
 
   private void addRelGui(FieldPanel fp) throws CharFieldException {
@@ -61,6 +72,32 @@ class Comparison {
     relChar.addOntology(o);
     CharFieldGui relField = CharFieldGui.makeRelationList(relChar);//"Relationship"?
     fp.addCharFieldGuiToPanel(relField);
+  }
+
+
+  private void addButtons(FieldPanel fieldPanel) {
+    List<JButton> buttons = new ArrayList<JButton>(2);
+    JButton ok = new JButton("OK");
+    ok.addActionListener(new OkListener());
+    buttons.add(ok);
+    JButton cancel = new JButton("Cancel");
+    cancel.addActionListener(new CancelListener());
+    buttons.add(cancel);
+    fieldPanel.addButtonRow(buttons);
+  }
+
+  // OK
+  private class OkListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+
+    }
+  }
+
+  // CANCEL
+  private class CancelListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+
+    }
   }
 
 
@@ -76,8 +113,5 @@ class Comparison {
     return sb.toString().trim();
   }
 
-  // OK
-
-  // Cancel
 
 }

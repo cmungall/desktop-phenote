@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -299,14 +300,17 @@ public class FieldPanel extends AbstractGUIComponent {
     }
   }
 
-//  SearchParamsI getSearchParams() {
-////    if (searchParams == null)
-////      searchParams = getSearchParamPanel().getSearchParams();
-//    return searchParams;
-//	  return SearchParams.inst();
-//  }
+  /** for comparison - add a row of just buttons */
+  public void addButtonRow(List<JButton> buttons) {
+    JPanel buttonPanel = new JPanel();
+    for (JButton b : buttons)
+      buttonPanel.add(b);
+    GridBagConstraints constraints = getConstraintsNewRow();
+    constraints.gridwidth = 5;
+    constraints.gridx = 1; // scoot it over a little?
+    fieldPanel.add(buttonPanel,constraints);
+  }
 
-  //void setSearchParams(SearchParamsI sp) { searchParams = sp; }
 
   public SearchParamPanel getSearchParamPanel() {
     if (searchParamPanel == null)
@@ -347,6 +351,14 @@ public class FieldPanel extends AbstractGUIComponent {
 
 
 
+//  SearchParamsI getSearchParams() {
+////    if (searchParams == null)
+////      searchParams = getSearchParamPanel().getSearchParams();
+//    return searchParams;
+//	  return SearchParams.inst();
+//  }
+
+  //void setSearchParams(SearchParamsI sp) { searchParams = sp; }
 //   boolean hasLumpComboBox() {
 //     //return lumpField.isCombo();
 //     return getLumpComboBox() != null;
