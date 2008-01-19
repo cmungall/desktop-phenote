@@ -69,13 +69,13 @@ log =
 ## and then referred to in the field defs
 terminology-definitions = 
   element terminology-definitions {
-    file*,
+    ontology-file*,
     attribute update { "NONE" | "SOME" | "ALL" }
 }
 
 ##this is general enough to use for both ontologies and flat files
-file = 
-  element file {
+ontology-file = 
+  element ontology-file {
     ## the shorthand to be referred to in fields
     attribute handle { xsd:string },
     ## the actual name of the file
@@ -159,8 +159,8 @@ file =
     ## ontology portion starting with this <root> term to the leaves.
     attribute root { xsd:string },
     ## a flag for each individual ontology for whether or not to update automatically
-    attribute auto-update { xsd:boolean },
-}
+    attribute auto-update { xsd:boolean }
+ }
 
 field = 
   element field {

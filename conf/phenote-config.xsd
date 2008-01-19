@@ -56,7 +56,7 @@
   <xs:element name="terminology-definitions">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:file"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:ontology-file"/>
       </xs:sequence>
       <xs:attribute name="update" use="required">
         <xs:simpleType>
@@ -69,7 +69,7 @@
       </xs:attribute>
     </xs:complexType>
   </xs:element>
-  <xs:element name="file">
+  <xs:element name="ontology-file">
     <xs:complexType>
       <xs:attribute name="handle" use="required" type="xs:string">
         <xs:annotation>
@@ -87,8 +87,9 @@
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:token">
-            <xs:enumeration value="ONTOLOGY"/>
             <xs:enumeration value="FLAT"/>
+            <xs:enumeration value="OBO"/>
+            <xs:enumeration value="OWL"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
@@ -181,6 +182,51 @@
   <xs:element name="obo-repository">
     <xs:complexType>
       <xs:attribute name="url-dir" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="terminology_definitions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:file"/>
+      </xs:sequence>
+      <xs:attribute name="update" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="NONE"/>
+            <xs:enumeration value="SOME"/>
+            <xs:enumeration value="ALL"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="file">
+    <xs:complexType>
+      <xs:attribute name="name" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>we'll refer to the ontology name in the fields to get the appropriate file</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="type" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="ONTOLOGY"/>
+            <xs:enumeration value="TXT"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="url" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>the url for the file.  if no url, then only local file</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="version" use="required" type="xs:string"/>
+      <xs:attribute name="root" use="required" type="xs:string"/>
+      <xs:attribute name="auto-update" use="required" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>a flag for each individual ontology for whether or not to update automatically</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
     </xs:complexType>
   </xs:element>
   <xs:element name="field">
