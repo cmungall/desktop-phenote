@@ -51,88 +51,88 @@ public class WormAdapter implements QueryableDataAdapterI {
     return "Commit To Worm DB";
   }
 
+
   public void delete(Connection c, Statement s) {
     List<CharacterI> l = EditManager.inst().getDeletedAnnotations();
     try {
       for (CharacterI chr : l) {
-        String pgdbid = chr.getValueString("PgdbBoxColId");
-        if (pgdbid == null) continue;
-        System.out.println("Delete "+pgdbid+" end"); 
-        int colI = 0; int boxI = 0;					// initialize column to zero
-        String match = find(".* - ([0-9]+) - [0-9]+", pgdbid);  	// Find a tempname followed by space - space number
-        if (match != null) { boxI = Integer.parseInt(match); }	// get the column number if there is one
-        match = find(".* - [0-9]+ - ([0-9]+)", pgdbid);  	// Find a tempname followed by space - space number
-        if (match != null) { colI = Integer.parseInt(match); }	// get the column number if there is one
-        match = find("(.*) - [0-9]+ - [0-9]+", pgdbid);  	// Find a tempname followed by space - space number
-        if (match != null) { pgdbid = match; }		// query for this, otherwise keep the default value
-        String joinkey = pgdbid;			// assign the tempname / allele to the joinkey 
-        System.out.println("Delete "+pgdbid+" Join "+joinkey+" Box "+boxI+" Col "+colI+" end"); 
-
-//      These have only box and not column
-//        String postgres_table = "app_paper"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-//        postgres_table = "app_person"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-//        postgres_table = "app_phenotype"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-//        postgres_table = "app_paper_remark"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-//        postgres_table = "app_intx_desc"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        String postgres_table = "app_curator"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        postgres_table = "app_term"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        postgres_table = "app_phen_remark"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        postgres_table = "app_anat_term"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        postgres_table = "app_lifestage"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        postgres_table = "app_nature"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        postgres_table = "app_func"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        postgres_table = "app_temperature"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        postgres_table = "app_preparation"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        postgres_table = "app_penetrance"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        postgres_table = "app_percent"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        postgres_table = "app_range"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        postgres_table = "app_quantity"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        postgres_table = "app_quantity_remark"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        postgres_table = "app_heat_sens"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        postgres_table = "app_heat_degree"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        postgres_table = "app_cold_sens"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        postgres_table = "app_cold_degree"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        postgres_table = "app_mat_effect"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        postgres_table = "app_pat_effect"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        postgres_table = "app_genotype"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        postgres_table = "app_strain"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
-        postgres_table = "app_obj_remark"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+        String joinkey = chr.getValueString("PgdbId");
+        if (joinkey == null) continue;
+        System.out.println("Delete "+joinkey+" end"); 
+        String postgres_table = "app_type"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_tempname"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_paper"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+//	ADD paper_remark
+//        postgres_table = "app_person"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_intx_desc"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_curator"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_not"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_term"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_phen_remark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+//        postgres_table = "app_anat_term"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+//        postgres_table = "app_lifestage"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_nature"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_func"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_temperature"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_preparation"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_penetrance"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_percent"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_range"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+// CREATE A TABLE FOR THIS
+//        postgres_table = "app_range"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_quantity_remark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_quantity"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_heat_sens"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_heat_degree"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_cold_sens"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_cold_degree"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_mat_effect"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_pat_effect"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_genotype"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_strain"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_obj_remark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
       }
     } catch (Exception e) {
       System.out.println("Could not delete character: " + e);
     }
   }
 
-  public void nullPostgresBoxCol(Connection c, Statement s, String postgres_table, String joinkey, int boxI, int colI) {
-//    String postgres_value = "No postgres value assigned";
-//    postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-//    if ( (postgres_value.equals("No postgres value assigned")) || (postgres_value.equals("postgres value is null")) ) { } else { 
-//      updatePostgresBoxCol(c, postgres_table, joinkey, boxI, colI, null); }
-  }
-
-//        if (postgres_value.equals(app_paper)) { } else { updatePostgresVal(c, postgres_table, joinkey, app_paper); }
-  private void updatePostgresVal(Connection c, String postgres_table, String joinkey, String value) {
+  private void updatePostgresVal(Connection c, String postgres_table, String postgres_value, String joinkey, String value) {
     PreparedStatement ps = null;	// intialize postgres insert 
     try { ps = c.prepareStatement("INSERT INTO "+postgres_table+"_hst VALUES (?, ?)"); ps.setString(1, joinkey); ps.setString(2, value); }
     catch (SQLException se) {
       System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
     try { ps.executeUpdate(); } 	// write to app_tempname, which is not what we really want, but we need to figure out the pubchunk thing to see what we're going to do
-    catch (SQLException se) { System.out.println("We got an exception while executing an insert update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); }
-//CHECK TO CREATE IF DOESN'T EXIST
-    try { ps = c.prepareStatement("UPDATE "+postgres_table+" SET "+postgres_table+" = ? WHERE joinkey = '"+joinkey+"'"); ps.setString(1, value); }
-    catch (SQLException se) {
-      System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
-    try { ps.executeUpdate(); } 	// write to app_tempname, which is not what we really want, but we need to figure out the pubchunk thing to see what we're going to do
-    catch (SQLException se) { System.out.println("We got an exception while executing a data update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); }
-    try { ps = c.prepareStatement("UPDATE "+postgres_table+" SET app_timestamp = CURRENT_TIMESTAMP WHERE joinkey = '"+joinkey+"'"); }
-    catch (SQLException se) {
-      System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
-    try { ps.executeUpdate(); } 	// write to app_tempname, which is not what we really want, but we need to figure out the pubchunk thing to see what we're going to do
-    catch (SQLException se) { System.out.println("We got an exception while executing a timestamp update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); }
+    catch (SQLException se) { System.out.println("We got an exception while executing a history insert in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); }
+    
+    String postgres_in = "No postgres value assigned";
+//System.out.println("postgres_in "+postgres_in+" postgres_value "+postgres_value+" end");
+    if (postgres_value.equals(postgres_in)) {			// no values in postgres
+        try { ps = c.prepareStatement("INSERT INTO "+postgres_table+" VALUES (?, ?)"); ps.setString(1, joinkey); ps.setString(2, value); }
+        catch (SQLException se) {
+          System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+        try { ps.executeUpdate(); } 	// write to app_tempname, which is not what we really want, but we need to figure out the pubchunk thing to see what we're going to do
+        catch (SQLException se) { System.out.println("We got an exception while executing an insert update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); } }
+      else { 							// some value in postgres, update it
+        try { ps = c.prepareStatement("UPDATE "+postgres_table+" SET "+postgres_table+" = ? WHERE joinkey = '"+joinkey+"'"); ps.setString(1, value); }
+        catch (SQLException se) {
+          System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+        try { ps.executeUpdate(); } 	// write to app_tempname, which is not what we really want, but we need to figure out the pubchunk thing to see what we're going to do
+        catch (SQLException se) { System.out.println("We got an exception while executing a data update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); }
+        try { ps = c.prepareStatement("UPDATE "+postgres_table+" SET app_timestamp = CURRENT_TIMESTAMP WHERE joinkey = '"+joinkey+"'"); }
+        catch (SQLException se) {
+          System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+        try { ps.executeUpdate(); } 	// write to app_tempname, which is not what we really want, but we need to figure out the pubchunk thing to see what we're going to do
+        catch (SQLException se) { System.out.println("We got an exception while executing a timestamp update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); } }
   } // private void updatePostgresVal(String postgres_table, String joinkey, int colI, String value)
 
 
-
+  private void updateNormalField(Connection c, Statement s, String joinkey, String postgres_table, String tag_name, String tag_value) {
+    String postgres_value = "No postgres value assigned";
+    postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+    if (postgres_value.equals(tag_value)) { } else { updatePostgresVal(c, postgres_table, postgres_value, joinkey, tag_value); }
+//    System.out.println( tag_name+" : "+tag_value+" end.");
+  }
 
   public void commit(CharacterListI charList) {
     Connection c = connectToDB();
@@ -146,38 +146,122 @@ public class WormAdapter implements QueryableDataAdapterI {
         String allele = chr.getValueString("Object Name");	// get the allele value from the character, currently could have a column number
         String pgdbid = chr.getValueString("PgdbId");		// get the allele value from the character, currently could have a column number
         String joinkey = pgdbid;
-        if (pgdbid == null) { 
-          Integer joinkeyInt = Integer.parseInt(pgdbid);			// assign the tempname / allele to the joinkey 
+//System.out.println("pgdbid "+pgdbid+" end");
+        if ( (pgdbid == null) || (pgdbid == "") ) { 
+//          Integer joinkeyInt = Integer.parseInt(pgdbid);	// this can't do anything since pgdbid must be blank
+          Integer joinkeyInt = 0;
           ResultSet rs = null;
           try { rs = s.executeQuery("SELECT joinkey FROM app_term "); }
           catch (SQLException se) {
             System.out.println("We got an exception while executing our app_term query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
-          try { if (rs.next()) { if (rs.getInt(1) > joinkeyInt) { joinkeyInt = rs.getInt(1); } } joinkeyInt++; joinkey = Integer.toString(joinkeyInt); }
+          try { while (rs.next()) { if (rs.getInt(1) > joinkeyInt) { joinkeyInt = rs.getInt(1); } } joinkeyInt++; joinkey = Integer.toString(joinkeyInt); }
             // get the next highest number joinkey for that character
           catch (SQLException se) {
             System.out.println("We got an exception while getting a column/term joinkey "+joinkey+" result:this shouldn't happen: we've done something really bad."); 
             se.printStackTrace(); System.exit(1); } }
+//System.out.println("joinkey "+joinkey+" end");
+
+        String postgres_table = "app_type"; String tag_name = "Type"; String tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_tempname"; tag_name = "Name"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_paper"; tag_name = "Pub"; tag_value = chr.getTerm(tag_name).getID();
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+//	ADD paper_remark
+//        postgres_table = "app_person"; tag_name = "Person"; tag_value = chr.getTerm(tag_name).getID();
+//        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_intx_desc"; tag_name = "Genetic Intx Desc"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_curator"; tag_name = "Curator"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_not"; tag_name = "Not"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_term"; tag_name = "Phenotype"; tag_value = chr.getTerm(tag_name).getID();
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_phen_remark"; tag_name = "Phenotype Remark"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+//        postgres_table = "app_anat_term"; tag_name = "Anatomy"; tag_value = chr.getTerm(tag_name).getID();
+//        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+//        postgres_table = "app_lifestage"; tag_name = "Life Stage"; tag_value = chr.getTerm(tag_name).getID();
+//        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_nature"; tag_name = "Allele Nature"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_func"; tag_name = "Functional Change"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_temperature"; tag_name = "Temperature"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_preparation"; tag_name = "Treatment"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_penetrance"; tag_name = "Penetrance"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_percent"; tag_name = "Penetrance Remark"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_range"; tag_name = "Penetrance Range Start"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+// CREATE A TABLE FOR THIS
+//        postgres_table = "app_range"; tag_name = "Penetrance Range End"; tag_value = chr.getValueString(tag_name);
+//        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_quantity_remark"; tag_name = "Quantity Remark"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_quantity"; tag_name = "Quantity"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_heat_sens"; tag_name = "Heat Sensitive"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_heat_degree"; tag_name = "Heat Sensitive Degree"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_cold_sens"; tag_name = "Cold Sensitive"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_cold_degree"; tag_name = "Cold Sensitive Degree"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_mat_effect"; tag_name = "Maternal Effect"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_pat_effect"; tag_name = "Paternal Effect"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_genotype"; tag_name = "Genotype"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_strain"; tag_name = "Strain"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_obj_remark"; tag_name = "Object Remark"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+
+//        String app_tempname = chr.getValueString("Name");
+//        postgres_table = "app_tempname"; postgres_value = "No postgres value assigned";
+//        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+//        if (postgres_value.equals(app_tempname)) { } else { updatePostgresVal(c, postgres_table, postgres_value, joinkey, app_tempname); }
+//        System.out.println( "Name : "+app_tempname+" end.");
 ////        System.out.println( "Allele : "+allele+" end.");
 ////        System.out.println( "Box : "+boxI+" end.");
 ////        System.out.println( "Column : "+colI+" end.");
 ////        System.out.println( "Reference : "+app_reference+" end.");
 ////         String app_paper = chr.getValueString("Pub");
-        String app_paper = chr.getTerm("Pub").getID();
-        System.out.println( "Pub : "+app_paper+" end.");
-        String postgres_table = "app_paper"; String postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-        if (postgres_value.equals(app_paper)) { } else { updatePostgresVal(c, postgres_table, joinkey, app_paper); }
-        System.out.println( "Pub : "+app_paper+" end.");
-        String app_curator = chr.getValueString("Curator");
-        postgres_table = "app_curator"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-        if (postgres_value.equals(app_curator)) { } else { updatePostgresVal(c, postgres_table, joinkey, app_curator); }
-        System.out.println( "Curator : "+app_curator+" end.");
-        String app_person = chr.getTerm("Person").getID();
-        postgres_table = "app_person"; postgres_value = "No postgres value assigned";
-        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-        if (postgres_value.equals(app_person)) { } else { updatePostgresVal(c, postgres_table, joinkey, app_person); }
-        System.out.println( "Person : "+app_person+" end.");
+//        String app_paper = chr.getTerm("Pub").getID();
+////        System.out.println( "Pub : "+app_paper+" end.");
+//        postgres_table = "app_paper"; postgres_value = "No postgres value assigned";
+//        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+//        if (postgres_value.equals(app_paper)) { } else { updatePostgresVal(c, postgres_table, postgres_value, joinkey, app_paper); }
+//        System.out.println( "Pub : "+app_paper+" end.");
+//        String app_curator = chr.getValueString("Curator");
+//        postgres_table = "app_curator"; postgres_value = "No postgres value assigned";
+//        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+//        if (postgres_value.equals(app_curator)) { } else { updatePostgresVal(c, postgres_table, postgres_value, joinkey, app_curator); }
+//        System.out.println( "Curator : "+app_curator+" end.");
+//        String app_person = chr.getTerm("Person").getID();
+//        postgres_table = "app_person"; postgres_value = "No postgres value assigned";
+//        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+//        if (postgres_value.equals(app_person)) { } else { updatePostgresVal(c, postgres_table, postgres_value, joinkey, app_person); }
+//        System.out.println( "Person : "+app_person+" end.");
+//        String app_intx_desc = chr.getValueString("Genetic Intx Desc");
+//        postgres_table = "app_intx_desc"; postgres_value = "No postgres value assigned";
+//        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+//        if (postgres_value.equals(app_intx_desc)) { } else { updatePostgresVal(c, postgres_table, postgres_value, joinkey, app_intx_desc); }
+////        System.out.println( "Genetic Interaction : "+app_intx_desc+" end.");
+//        String app_not = chr.getValueString("Not");
+//        postgres_table = "app_not"; postgres_value = "No postgres value assigned";
+//        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+//        if (postgres_value.equals(app_not)) { } else { updatePostgresVal(c, postgres_table, postgres_value, joinkey, app_not); }
+//        System.out.println( "Not : "+app_not+" end.");
+
+
 ////        String app_phenotype = chr.getValueString("NBP");
 ////        postgres_table = "app_phenotype"; postgres_value = "No postgres value assigned";
 ////        System.out.println( "Phenotype Text Remark : "+app_phenotype+" end.");
@@ -190,23 +274,20 @@ public class WormAdapter implements QueryableDataAdapterI {
 ////        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
 ////        if (postgres_value.equals(app_remark)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_remark); }
 ////        System.out.println( "Reference Remark : "+app_remark+" end.");
-////        String app_intx_desc = chr.getValueString("Genetic Intx Desc");
-////        postgres_table = "app_intx_desc"; postgres_value = "No postgres value assigned";
-////        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, 0);
-////        if (postgres_value.equals(app_intx_desc)) { } else { updatePostgresCol(c, postgres_table, joinkey, colI, app_intx_desc); }
-////        System.out.println( "Genetic Interaction : "+app_intx_desc+" end.");
-//        String app_term_name = chr.getValueString("Phenotype");
+
+////        String app_term_name = chr.getValueString("Phenotype");
 //        String app_term = chr.getTerm("Phenotype").getID();
-//        app_term = app_term+" ("+app_term_name+")";
+////        app_term = app_term+" ("+app_term_name+")";
 //        postgres_table = "app_term"; postgres_value = "No postgres value assigned";
-//        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-//        if (postgres_value.equals(app_term)) { } else { updatePostgresBoxCol(c, postgres_table, joinkey, boxI, colI, app_term); }
+//        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+//        if (postgres_value.equals(app_term)) { } else { updatePostgresVal(c, postgres_table, postgres_value, joinkey, app_term); }
 ////        System.out.println( "Phenotype : "+app_term+" end.");
 //        String app_phen_remark = chr.getValueString("Phenotype Remark");
 //        postgres_table = "app_phen_remark"; postgres_value = "No postgres value assigned";
-//        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
-//        if (postgres_value.equals(app_phen_remark)) { } else { updatePostgresBoxCol(c, postgres_table, joinkey, boxI, colI, app_phen_remark); }
+//        postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+//        if (postgres_value.equals(app_phen_remark)) { } else { updatePostgresVal(c, postgres_table, postgres_value, joinkey, app_phen_remark); }
 ////         System.out.println( "Phenotype Remark : "+app_phen_remark+" end.");
+  
 //        String app_anat_term = chr.getValueString("Anatomy");
 //        if (app_anat_term == null) { app_anat_term = "No postgres value assigned"; }		// MAY NEED THIS FOR ALL FIELDS
 //        postgres_table = "app_anat_term"; postgres_value = "No postgres value assigned";
@@ -429,7 +510,7 @@ public class WormAdapter implements QueryableDataAdapterI {
 
   private String queryPostgresCharacter(Statement s, String postgres_table, String default_value, String joinkey) {
     // get the value corresponding to a phenote cell from a postgres table by column
-System.out.println( "queryPostgresCharacter for "+postgres_table+" "+joinkey+" with default_value "+default_value+" end");
+//System.out.println( "queryPostgresCharacter for "+postgres_table+" "+joinkey+" with default_value "+default_value+" end");
     ResultSet rs = null;	// intialize postgres query result
       // get the phenotype term in timestamp order where the allele and column number match
     try { rs = s.executeQuery("SELECT * FROM "+postgres_table+" WHERE joinkey = '"+joinkey+"' ORDER BY app_timestamp"); }
@@ -441,7 +522,7 @@ System.out.println( "queryPostgresCharacter for "+postgres_table+" "+joinkey+" w
 //  System.out.println("Added in function charList term "+query+" column "+colI+".");		// comment out later
     if (default_value == null) { default_value = "postgres value is null"; }
     if (default_value == "") { default_value = "postgres value is blank"; }
-System.out.println( "queryPostgresCharacter for "+postgres_table+" "+joinkey+" gives "+default_value+" end");
+//System.out.println( "queryPostgresCharacter for "+postgres_table+" "+joinkey+" gives "+default_value+" end");
     return default_value; 
   }
 
@@ -482,7 +563,7 @@ System.out.println( "queryPostgresCharacter for "+postgres_table+" "+joinkey+" g
     try {
       CharacterI c1 = CharacterIFactory.makeChar();				// create a new character for a phenote row
 
-System.out.println("set PgdbId to "+joinkey+" END");
+//System.out.println("set PgdbId to "+joinkey+" END");
       c1.setValue("PgdbId",joinkey);					// assign the allele and the column
       String postgres_table = "app_type"; String postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
@@ -497,29 +578,29 @@ System.out.println("set PgdbId to "+joinkey+" END");
       String phenotype_match = find("(WBPhenotype[0-9]*)", postgres_value);  	// Find a WBPhenotype followed by any amount of digits
       if (phenotype_match != null) { postgres_value = phenotype_match; }		// query for this, otherwise keep the default value
       if (postgres_value == "No postgres value assigned") { } else { c1.setValue("Phenotype",postgres_value); }					// assign the queried value
-System.out.println("set Phenotype to "+postgres_value+" END");
+//System.out.println("set Phenotype to "+postgres_value+" END");
       postgres_table = "app_curator"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Curator",postgres_value);					// assign the queried value
-System.out.println("set Curator to "+postgres_value+" END");
+//System.out.println("set Curator to "+postgres_value+" END");
       postgres_table = "app_phen_remark"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Phenotype Remark",postgres_value);				// assign the queried value
-System.out.println("set PhenotypeRemark to "+postgres_value+" END");
+//System.out.println("set PhenotypeRemark to "+postgres_value+" END");
       postgres_table = "app_anat_term"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-System.out.println("queryied anat_term to "+postgres_value+" END");
+//System.out.println("queryied anat_term to "+postgres_value+" END");
 // NEED obo load
 //      c1.setValue("Anatomy",postgres_value);					// this doesn't work, assigning whatever term name(s) is in postgres
 //      c1.setValue("Anatomy","WBbt:0004758");			 		// this works, assigning a term ID
       postgres_table = "app_lifestage"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-System.out.println("queryied lifestage to "+postgres_value+" END");
+//System.out.println("queryied lifestage to "+postgres_value+" END");
       if (postgres_value != null) {
 // NEED TO DEAL WITH values that don't fit in obo
 //      c1.setValue("Life Stage",postgres_value);					// assign the queried value
 }
-System.out.println("set LifeStage to "+postgres_value+" END");
+//System.out.println("set LifeStage to "+postgres_value+" END");
       postgres_table = "app_nature"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Allele Nature",postgres_value);				// assign the queried value
@@ -529,7 +610,7 @@ System.out.println("set LifeStage to "+postgres_value+" END");
       postgres_table = "app_temperature"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Temperature",postgres_value);				// assign the queried value
-System.out.println("set Temperature to "+postgres_value+" END");
+//System.out.println("set Temperature to "+postgres_value+" END");
       postgres_table = "app_preparation"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Treatment",postgres_value);				// assign the queried value
@@ -539,7 +620,7 @@ System.out.println("set Temperature to "+postgres_value+" END");
       postgres_table = "app_percent"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Penetrance Remark",postgres_value);				// assign the queried value
-System.out.println("set PenetranceRemark to "+postgres_value+" END");
+//System.out.println("set PenetranceRemark to "+postgres_value+" END");
       postgres_table = "app_range"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Penetrance Range Start",postgres_value);				// assign the queried value
@@ -549,7 +630,7 @@ System.out.println("set PenetranceRemark to "+postgres_value+" END");
       postgres_table = "app_quantity"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Quantity",postgres_value);					// assign the queried value
-System.out.println("set Quantity to "+postgres_value+" END");
+//System.out.println("set Quantity to "+postgres_value+" END");
       postgres_table = "app_quantity_remark"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Quantity Remark",postgres_value);				// assign the queried value
@@ -559,7 +640,7 @@ System.out.println("set Quantity to "+postgres_value+" END");
       postgres_table = "app_heat_degree"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Heat Sensitive Degree",postgres_value);				// assign the queried value
-System.out.println("set HeatSens to "+postgres_value+" END");
+//System.out.println("set HeatSens to "+postgres_value+" END");
       postgres_table = "app_cold_sens"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Cold Sensitive",postgres_value);				// assign the queried value
@@ -572,7 +653,7 @@ System.out.println("set HeatSens to "+postgres_value+" END");
       postgres_table = "app_pat_effect"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Paternal Effect",postgres_value);				// assign the queried value
-System.out.println("set PatEffect to "+postgres_value+" END");
+//System.out.println("set PatEffect to "+postgres_value+" END");
       postgres_table = "app_genotype"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Genotype",postgres_value);				// assign the queried value
@@ -582,12 +663,12 @@ System.out.println("set PatEffect to "+postgres_value+" END");
       postgres_table = "app_obj_remark"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("ObjRem",postgres_value);				// assign the queried value
-System.out.println("set ObjRem to "+postgres_value+" END");
+//System.out.println("set ObjRem to "+postgres_value+" END");
 
       postgres_table = "app_paper"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Pub",postgres_value);				// assign the queried value
-System.out.println("set Pub to "+postgres_value+" END");
+//System.out.println("set Pub to "+postgres_value+" END");
       if (postgres_value != null) { 
         postgres_table = "app_paper_remark";
         postgres_value = queryPostgresPapRemHist(s, postgres_table, postgres_value);
@@ -596,7 +677,7 @@ System.out.println("set Pub to "+postgres_value+" END");
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
 // NEED obo load
       c1.setValue("Person",postgres_value);				// assign the queried value
-System.out.println("set Person to "+postgres_value+" END");
+//System.out.println("set Person to "+postgres_value+" END");
       postgres_table = "app_phenotype"; postgres_value = "No postgres value assigned";		// NBP is phenotype, not intx_desc
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("NBP",postgres_value);					// assign the queried value
@@ -662,9 +743,9 @@ System.out.println("set Person to "+postgres_value+" END");
       se.printStackTrace(); System.exit(1); }
 
       for (String joinkey : joinkeys) {
-        System.out.println("J "+joinkey+" List");
+//        System.out.println("J "+joinkey+" List");
         charList = queryPostgresCharacterMainList(charList, s, joinkey); 
-        System.out.println("END "+joinkey+" List");
+//        System.out.println("END "+joinkey+" List");
       }
     if (foundAllele <= 0) { throw new DataAdapterEx("Worm query of "+query+" of field "+field+" has no match in postgres"); }	// if there is no match for the allele in postgres
       else { return charList; } 	// if there is a match
@@ -1280,6 +1361,64 @@ System.out.println("set Person to "+postgres_value+" END");
 //    catch (SQLException se) { System.out.println("We got an exception while executing an update in updatePostgresCol table "+postgres_table+" joinkey "+joinkey+" colI "+colI+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); }
 //  } // private void updatePostgresCol(String postgres_table, String joinkey, int colI, String value)
 
+//  public void delete(Connection c, Statement s) {
+//    List<CharacterI> l = EditManager.inst().getDeletedAnnotations();
+//    try {
+//      for (CharacterI chr : l) {
+//        String pgdbid = chr.getValueString("PgdbBoxColId");
+//        if (pgdbid == null) continue;
+//        System.out.println("Delete "+pgdbid+" end"); 
+//        int colI = 0; int boxI = 0;					// initialize column to zero
+//        String match = find(".* - ([0-9]+) - [0-9]+", pgdbid);  	// Find a tempname followed by space - space number
+//        if (match != null) { boxI = Integer.parseInt(match); }	// get the column number if there is one
+//        match = find(".* - [0-9]+ - ([0-9]+)", pgdbid);  	// Find a tempname followed by space - space number
+//        if (match != null) { colI = Integer.parseInt(match); }	// get the column number if there is one
+//        match = find("(.*) - [0-9]+ - [0-9]+", pgdbid);  	// Find a tempname followed by space - space number
+//        if (match != null) { pgdbid = match; }		// query for this, otherwise keep the default value
+//        String joinkey = pgdbid;			// assign the tempname / allele to the joinkey 
+//        System.out.println("Delete "+pgdbid+" Join "+joinkey+" Box "+boxI+" Col "+colI+" end"); 
+//
+////      These have only box and not column
+////        String postgres_table = "app_paper"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+////        postgres_table = "app_person"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+////        postgres_table = "app_phenotype"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+////        postgres_table = "app_paper_remark"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+////        postgres_table = "app_intx_desc"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        String postgres_table = "app_curator"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_term"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_phen_remark"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_anat_term"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_lifestage"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_nature"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_func"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_temperature"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_preparation"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_penetrance"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_percent"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_range"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_quantity"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_quantity_remark"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_heat_sens"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_heat_degree"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_cold_sens"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_cold_degree"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_mat_effect"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_pat_effect"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_genotype"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_strain"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//        postgres_table = "app_obj_remark"; nullPostgresBoxCol(c, s, postgres_table, joinkey, boxI, colI);
+//      }
+//    } catch (Exception e) {
+//      System.out.println("Could not delete character: " + e);
+//    }
+//  }
+
+//  public void nullPostgresBoxCol(Connection c, Statement s, String postgres_table, String joinkey, int boxI, int colI) {
+//    String postgres_value = "No postgres value assigned";
+//    postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey, boxI, colI);
+//    if ( (postgres_value.equals("No postgres value assigned")) || (postgres_value.equals("postgres value is null")) ) { } else { 
+//      updatePostgresBoxCol(c, postgres_table, joinkey, boxI, colI, null); }
+//  }
 
 
 
