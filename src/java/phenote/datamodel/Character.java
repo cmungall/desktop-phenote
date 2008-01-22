@@ -103,10 +103,11 @@ public class Character extends AbstractCharacter implements CharacterI {
     //return getValue(cf).getName();
   }
 
-  public OBOClass getTerm(String field) throws CharFieldException {
-    CharField cf = getCharFieldForName(field); // throws ex
-    return getTerm(cf);
-  }
+  // --> AbstractCharacter
+//   public OBOClass getTerm(String field) throws CharFieldException {
+//     CharField cf = getCharFieldForName(field); // throws ex
+//     return getTerm(cf);
+//   }
 
   /** return false if getValue is null or isEmpty */
   public boolean hasValue(CharField cf) {

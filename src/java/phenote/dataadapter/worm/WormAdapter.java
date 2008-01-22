@@ -167,9 +167,11 @@ public class WormAdapter implements QueryableDataAdapterI {
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_paper"; tag_name = "Pub"; tag_value = chr.getTerm(tag_name).getID();
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+
 //	ADD paper_remark
-//        postgres_table = "app_person"; tag_name = "Person"; tag_value = chr.getTerm(tag_name).getID();
-//        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_person"; tag_name = "Person"; tag_value = chr.getTerm(tag_name).getID();
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+
         postgres_table = "app_intx_desc"; tag_name = "Genetic Intx Desc"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_curator"; tag_name = "Curator"; tag_value = chr.getValueString(tag_name);
@@ -427,6 +429,7 @@ public class WormAdapter implements QueryableDataAdapterI {
 //            System.out.println("There is no allele for "+chr+" Character"); } 
       } catch (Exception e) {
         System.out.println("Could not get terms from character: " + e);
+        e.printStackTrace(); // helpful for debugging
       }
 
     } // for (CharacterI chr : charList.getList())

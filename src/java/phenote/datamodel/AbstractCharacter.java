@@ -50,9 +50,15 @@ public abstract class AbstractCharacter implements CharacterI {
     return CharFieldManager.inst().getCharFieldForName(fieldName);
   }
 
-  protected OBOClass getTerm(CharField cf) {
+  /** Throws char field exception if char field is not a term, thus lists of terms
+      throw an exception as they are not technically a single term */
+  protected OBOClass getTerm(CharField cf) throws CharFieldException {
+    if (cf.isList())
+      throw new CharFieldException("Cant call getTerm on list for field "+cf.getName());
+    if (!cf.isTerm())
+      throw new CharFieldException("Cant call getTerm on Field "+cf.getName()+" not a term");
     if (!hasValue(cf))
-      return null; // ?? exception?
+      throw new CharFieldException("Char "+toString()+" has no value");//return null;
     return getValue(cf).getOboClass();
   }
 
