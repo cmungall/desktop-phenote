@@ -188,6 +188,10 @@ public class WormAdapter implements QueryableDataAdapterI {
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
 //        postgres_table = "app_anat_term"; tag_name = "Anatomy"; tag_value = chr.getTerm(tag_name).getID();
 //        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_entity"; tag_name = "Entity"; tag_value = chr.getTerm(tag_name).getID();
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_quality"; tag_name = "Quality"; tag_value = chr.getTerm(tag_name).getID();
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
 //        postgres_table = "app_lifestage"; tag_name = "Life Stage"; tag_value = chr.getTerm(tag_name).getID();
 //        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_nature"; tag_name = "Allele Nature"; tag_value = chr.getValueString(tag_name);
@@ -597,8 +601,14 @@ public class WormAdapter implements QueryableDataAdapterI {
       postgres_table = "app_anat_term"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
 //System.out.println("queryied anat_term to "+postgres_value+" END");
-      c1.setValue("Anatomy",postgres_value);					// this doesn't work, assigning whatever term name(s) is in postgres
+      c1.setValue("Anatomy",postgres_value);					// assign the queried IDs
 //      c1.setValue("Anatomy","WBbt:0004758");			 		// this works, assigning a term ID
+      postgres_table = "app_entity"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+      c1.setValue("Entity",postgres_value);					// assign the queried value
+      postgres_table = "app_quality"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+      c1.setValue("Quality",postgres_value);					// assign the queried value
       postgres_table = "app_lifestage"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
 //System.out.println("queryied lifestage to "+postgres_value+" END");
