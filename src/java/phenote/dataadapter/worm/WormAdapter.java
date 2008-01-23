@@ -22,6 +22,7 @@ import phenote.datamodel.Character;
 import phenote.datamodel.CharFieldException;
 import phenote.datamodel.TermNotFoundException;
 import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldValue;
 
 import phenote.edit.EditManager;
 
@@ -131,7 +132,7 @@ public class WormAdapter implements QueryableDataAdapterI {
     String postgres_value = "No postgres value assigned";
     postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
     if (postgres_value.equals(tag_value)) { } else { updatePostgresVal(c, postgres_table, postgres_value, joinkey, tag_value); }
-//    System.out.println( tag_name+" : "+tag_value+" end.");
+    System.out.println( tag_name+" : "+tag_value+" end.");
   }
 
   public void commit(CharacterListI charList) {
@@ -169,8 +170,11 @@ public class WormAdapter implements QueryableDataAdapterI {
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
 
 //	ADD paper_remark
-        postgres_table = "app_person"; tag_name = "Person"; tag_value = chr.getTerm(tag_name).getID();
-        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+//        postgres_table = "app_person"; tag_name = "Person"; // tag_value = chr.getTerm(tag_name).getID();
+//        CharFieldValue list = chr.getValue(tag_name);
+//        tag_value = list.getValueAsString();
+//        tag_value = chr.getValueAsString();
+//        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
 
         postgres_table = "app_intx_desc"; tag_name = "Genetic Intx Desc"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
@@ -593,15 +597,13 @@ public class WormAdapter implements QueryableDataAdapterI {
       postgres_table = "app_anat_term"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
 //System.out.println("queryied anat_term to "+postgres_value+" END");
-// NEED obo load
-//      c1.setValue("Anatomy",postgres_value);					// this doesn't work, assigning whatever term name(s) is in postgres
+      c1.setValue("Anatomy",postgres_value);					// this doesn't work, assigning whatever term name(s) is in postgres
 //      c1.setValue("Anatomy","WBbt:0004758");			 		// this works, assigning a term ID
       postgres_table = "app_lifestage"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
 //System.out.println("queryied lifestage to "+postgres_value+" END");
       if (postgres_value != null) {
-// NEED TO DEAL WITH values that don't fit in obo
-//      c1.setValue("Life Stage",postgres_value);					// assign the queried value
+      c1.setValue("Life Stage",postgres_value);					// assign the queried value
 }
 //System.out.println("set LifeStage to "+postgres_value+" END");
       postgres_table = "app_nature"; postgres_value = "No postgres value assigned";
@@ -678,7 +680,6 @@ public class WormAdapter implements QueryableDataAdapterI {
         c1.setValue("Paper Remark History",postgres_value); }				// assign the queried value
       postgres_table = "app_person"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-// NEED obo load
       c1.setValue("Person",postgres_value);				// assign the queried value
 //System.out.println("set Person to "+postgres_value+" END");
       postgres_table = "app_phenotype"; postgres_value = "No postgres value assigned";		// NBP is phenotype, not intx_desc
