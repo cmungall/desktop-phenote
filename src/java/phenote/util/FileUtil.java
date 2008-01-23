@@ -8,10 +8,14 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.FileChannel;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -221,7 +225,7 @@ public class FileUtil {
    * @param file
    * @param archiveFile
    */
-  synchronized private static boolean copyFileIntoArchive(File file, File archiveFile) {
+  synchronized public static boolean copyFileIntoArchive(File file, File archiveFile) {
       boolean success = true;
       FileInputStream fis = null;
       FileOutputStream fos = null;
@@ -286,6 +290,34 @@ public class FileUtil {
 
     File file = new File(filename);
     return file.getName();
+  }
+  
+  public static String getLastModifiedDate(URL localUrl) {
+  	String display = "(not on local drive)";
+  	if (localUrl!=null) {
+  		
+  		File f = new File(localUrl.getFile());
+  		long timestamp = f.lastModified();
+  		Date when = new Date(timestamp);
+  		System.out.println("date="+when.toString());
+  		SimpleDateFormat sdf = new SimpleDateFormat( "EEEE yyyy/MM/dd hh:mm:ss aa zz : zzzzzz" );
+  		sdf.setTimeZone(TimeZone.getDefault()); // local time
+  		display = sdf.format(when);
+  	}
+  	return display;
+  }
+  
+  public static String getFileSize(URL url) {
+  	String text = "0";
+  	if (url!=null) {
+  		File f = new File(url.getFile());
+  		long size = f.length();
+  		size = size/1000;  //convert to MB
+  		float fv = new Long(size).floatValue();
+  		DecimalFormat df= new DecimalFormat("0.#");
+  		text=df.format(fv);
+  	}
+  	return text;
   }
 
 }

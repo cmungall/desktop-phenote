@@ -8,6 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import java.util.Vector;
 
@@ -25,9 +28,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
@@ -42,6 +47,7 @@ import phenote.config.xml.OntologyFileDocument.OntologyFile;
 import phenote.dataadapter.OntologyDataAdapter;
 import phenote.dataadapter.OntologyDataAdapter2;
 import phenote.datamodel.OntologyException;
+import phenote.util.FileUtil;
 
 
 
@@ -108,15 +114,42 @@ public class OntologyUpdate {
 	
 	private void createWindow() {
 
-		ontologyTable = new JTable();
+		ontologyTable = new JTable() {
+			//Implement table row tool tips.
+			public String getToolTipText(MouseEvent e) {
+				String tip = null;
+				URL localUrl = null;
+				URL reposUrl = null;
+				java.awt.Point p = e.getPoint();
+				int rowIndex = rowAtPoint(p);
+				int colIndex = columnAtPoint(p);
+				int realColumnIndex = convertColumnIndexToModel(colIndex);
+				String handle = getValueAt(rowIndex, 2).toString();
+				OntologyFile ontology = Config.inst().getOntologyFileByHandle(handle);
+				try {
+					if (ontology.getLocation()!=null) {
+						reposUrl = new URL(ontology.getLocation()+ontology.getFilename()); 
+					} else {
+						reposUrl = new URL("no repository location");
+					}
+				} catch(MalformedURLException mue) {}
+				localUrl = getLocalUrl(ontology.getFilename());
+					tip = reposUrl.toString();  //show the repository URL
+					String oldDate = FileUtil.getLastModifiedDate(localUrl);
+					if (oldDate!=null) {//Version - show last date downloaded
+						tip += "<br>Last downloaded: "+oldDate;
+					}
+				return "<html>"+tip+"</html>";
+			}
+		};
 		ontologyTable.setModel(new OntologyUpdateTableModel());
     defaultRenderer = ontologyTable.getDefaultRenderer(JButton.class);
     ontologyTable.setDefaultRenderer(JButton.class,
 			       new JTableButtonRenderer(defaultRenderer));
     ontologyTable.addMouseListener(new JTableButtonMouseListener(ontologyTable));
-		ontologyTable.setMaximumSize(new Dimension(300,200));
+//		ontologyTable.setMaximumSize(new Dimension(300,200));
 		ontologyTable.setMinimumSize(new Dimension(300,100));
-		ontologyTable.setPreferredSize(new Dimension(300,100));
+		ontologyTable.setPreferredSize(new Dimension(300,200));
 		TableColumn column = null;
 		//				"Update","Status", "Name", "Version", "Info","Size"
 		//set the column widths
@@ -128,6 +161,8 @@ public class OntologyUpdate {
 		
 		//throw it in a scrollpane
 		final JScrollPane scrollPane = new JScrollPane(ontologyTable);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setViewportView(ontologyTable);
 		contentPanel.setMinimumSize(new Dimension(200,100));
 		contentPanel.setPreferredSize(new Dimension(200,200));
 		contentPanel.add(scrollPane);
@@ -225,8 +260,8 @@ public class OntologyUpdate {
    * (4) disable the row if the file is up-to-date, and add that as a tooltip
    */
   private void addOntologiesToTable() {
-//		OntologyFileDocument.OntologyFile[] ontologies = Config.inst().getTerminologyDefs().getOntologyFileArray();
 		//first, add all the ontologies to the table
+  	//loop through each ontology, place those in the table for which there's an update
 		for (int i=0; i<ontologies.length; i++) {
 			createOntologyRow(ontologies[i],i);  //i'm using a global to do this...yucky!
 		}
@@ -250,7 +285,7 @@ public class OntologyUpdate {
 
 		JButton infoButton = new JButton();
 		//need to create an imageicon button here
-		infoButton.setSize(1, 1);
+//		infoButton.setSize(1, 1);
 		infoButton.setToolTipText("Get more information for "+ ontology.getHandle());
 		infoButton.addMouseListener(new InfoMouseListener(ontology));
 		boolean status = false;
@@ -266,12 +301,17 @@ public class OntologyUpdate {
 		}
 
 		//temp throwing in the OK icon, but will be other icons, depending on status
-		Object[] rowData = new Object[]{status, " ", 
-  			ontology.getHandle(), ontology.getVersion(), infoButton, 10.0 };
+		//throw it into the table only if there's an update or a need to download
+//		if (status) {
+		URL localUrl = getLocalUrl(ontology.getFilename());
+			String fileSize = FileUtil.getFileSize(localUrl);
+			Object[] rowData = new Object[]{status, " ", 
+					ontology.getHandle(), ontology.getVersion(), infoButton, fileSize+" K" };
 
-  	for (int i=0; i<rowData.length; i++) {
-  		ontologyTable.getModel().setValueAt(rowData[i], row, i);
-  	}
+			for (int i=0; i<rowData.length; i++) {
+				ontologyTable.getModel().setValueAt(rowData[i], row, i);
+//			}
+		}
   	return;
   }
 
@@ -305,6 +345,17 @@ public class OntologyUpdate {
 		   table, value, isSelected, hasFocus, row, column);
 	  }
 	}
+	
+//	public class FileSizeCellRenderer extends DefaultTableCellRenderer {
+//
+//		public FileSizeCellRenderer() {
+//		}
+//
+//		public void setHorizontalAlignment(int alignment) {
+//			setHorizontalAlignment(RIGHT);
+//		}
+//		
+//		}
 	
 	class OntologyUpdateTableModel extends AbstractTableModel {
 		public Vector<Object[]> data = initializeData();
@@ -353,7 +404,8 @@ public class OntologyUpdate {
       } else {
           return false;
       }
-		}		
+		}
+		
 		private Vector<Object[]> initializeData() {
 			Vector<Object[]> allData = new Vector<Object[]>();
 			for (int i=0; i<getRowCount(); i++) {
@@ -362,6 +414,7 @@ public class OntologyUpdate {
 			}
 			return allData;
 		}
+		
 	}
 	
 	private void addUpdateMessage(String message) {
@@ -371,10 +424,9 @@ public class OntologyUpdate {
 		contentPanel.repaint();
 		return;
 	}
+
 	
-	private void doUpdates() {
-		
-	}
+
   
   /* ************************ LISTENERS *****************************/
 
@@ -397,9 +449,14 @@ public class OntologyUpdate {
       			m+= ontologyTable.getValueAt(i, 2)+ " ";
       			try {
       				ontologyTable.setValueAt("...", i, 1); //would like this to be a progress bar in here.
+      				contentPanel.validate();
+      				contentPanel.repaint();
       				addUpdateMessage("Downloading: "+ontologyTable.getValueAt(i,2));
       				OntologyDataAdapter2.getInstance().downloadUpdate(ontologyTable.getValueAt(i, 2).toString());
       				ontologyTable.setValueAt(new ImageIcon("images/OK.GIF"), i, 1);
+      				contentPanel.validate();
+      				contentPanel.repaint();
+
       				addUpdateMessage(" DONE."+newline);
       				up++;
       			} catch(OntologyException oe) {
@@ -443,13 +500,14 @@ public class OntologyUpdate {
       			addUpdateMessage("Downloading: "+ontology.getHandle());
       			OntologyDataAdapter2.getInstance().downloadUpdate(ontology.getHandle());
       			up++;
-      			if (ontologyTable.getValueAt(row, 2).equals(ontology.getHandle())) {
-      				ontologyTable.setValueAt(new ImageIcon("images/OK.GIF"), row, 1);
-      				addUpdateMessage(" DONE."+newline);
-      			} else {
-      				row++; //this is a hack...these *should* be done in order
+      			for (int i=row; i<ontologyTable.getRowCount(); i++) {
+      				if (ontologyTable.getValueAt(i, 2).equals(ontology.getHandle())) {
+      					ontologyTable.setValueAt(new ImageIcon("images/OK.GIF"), i, 1);
+      					addUpdateMessage(" DONE."+newline);
+      					break;
+      				} 
       			}
-    				numUpdates++;
+      			numUpdates++;
       		}
   				row++;
   			} catch(OntologyException oe) {
@@ -594,6 +652,14 @@ public class OntologyUpdate {
       __forwardEventToButton(e);
     }
   }
-  
+
+  private URL getLocalUrl (String filename) {
+  	URL localUrl;
+  	try {
+			localUrl = FileUtil.findUrl(filename);
+			return localUrl;
+  	} catch (FileNotFoundException fnfe) {}
+  	return null;
+  }
 
 }

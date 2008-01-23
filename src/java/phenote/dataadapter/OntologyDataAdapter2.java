@@ -641,30 +641,35 @@ public class OntologyDataAdapter2 {
       throw new OntologyException(ontologyFile.getHandle()+" has null file");
     // throws OntologyEx if file not found -- catch & try url
     URL localUrl = null;
-    try { localUrl = findFile(filename); }
-    catch (OntologyException oe) {
+    try { localUrl = findFile(filename);
+    if (!(localUrl.toString().contains(".phenote"))) {
+    	copyOntologyToDotPhenote(localUrl,filename);
+    }
+    } catch (OntologyException oe) {
       System.out.println(filename+" not found locally, trying url if configured ");
     }
 
     // if repos url configured then check if its more up to date - if so copy
     // repos obo file to .phenote cache
-    if (ontologyFile.getLocation()!=null && !(ontologyFile.getLocation().equals(""))) {
+    if ((ontologyFile.getLocation()!=null) && (!(ontologyFile.getLocation().equals("")))) {
       try {
         URL reposUrl = new URL(ontologyFile.getLocation()+ontologyFile.getFilename());  //should really have a method to check for correctness
         LOG.debug(reposUrl+" checking with repos for newer ontol\n");
-//        this.updateLoadingScreen("checking for updates: "+ontCfg.getName(), true);
         long reposDate = 0;
         long locDate = 0;
         try {
         	reposDate = getOboDate(reposUrl); // throws ex if no date
-        } catch (OntologyException oe) { // no reposDat
+        } catch (OntologyException oe) { // no reposDate
         	LOG.error("got OntEx trying to parse date from repos "+oe); 
             // already have local copy, no date to synch with, dont bother downloading from
             // repos, there should probably be a config to override this (always download)
+        	//i think this should download by default if there's no date in the file
         }
         if (localUrl != null) {
           	try { locDate = getOboDate(localUrl); }
-            catch (OntologyException e2) { locDate = 0; } // no local date - keep as 0
+            catch (OntologyException e2) { 
+            	locDate = -1; // no local date - set to -1 so that if no repos date, will download
+            }
             useRepos=false;
         }	else  //don't have it locally, need to download it.
         	useRepos = true;
@@ -716,8 +721,8 @@ public class OntologyDataAdapter2 {
   		if (ontology.getHandle().equals(handle)) {
   			try {
     		localUrl = new File(FileUtil.getDotPhenoteOboDir(),ontology.getFilename()).toURL();
-  	  	} catch (MalformedURLException e) { throw new OntologyException(e); }
-  	  	break;
+    		break;
+  			} catch (MalformedURLException e) { throw new OntologyException(e); }
   		}
   	}
   	return localUrl;
@@ -740,5 +745,14 @@ public class OntologyDataAdapter2 {
   	} catch (MalformedURLException e) { return false;}
   }
 
+  public boolean copyOntologyToDotPhenote(URL localUrl, String filename) {
+  	File dotPhenoteFile = new File(FileUtil.getDotPhenoteOboDir(),filename);
+  	File phenoteFile = new File(localUrl.getFile());
+
+  	FileUtil.copyFileIntoArchive(phenoteFile, dotPhenoteFile);
+  	LOG.info(filename+" copied from "+localUrl.getPath()+" to "+dotPhenoteFile.getPath());
+  	System.out.println(filename+" copied from "+localUrl.getPath()+" to "+dotPhenoteFile.getPath());
+  	return dotPhenoteFile.exists();
+  }  
 }
 
