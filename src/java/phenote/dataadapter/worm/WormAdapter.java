@@ -135,6 +135,17 @@ public class WormAdapter implements QueryableDataAdapterI {
     System.out.println( tag_name+" : "+tag_value+" end.");
   }
 
+  private void updateListField(Connection c, Statement s, String joinkey, String postgres_table, String tag_name, CharacterI chr) {
+    try {
+      StringBuilder sb = new StringBuilder(); Integer loopcount = 0;
+      CharFieldValue list = chr.getValue(chr.getCharFieldForName(tag_name));
+      List<CharFieldValue> valList = list.getCharFieldValueList();
+      for (CharFieldValue kid : valList) { String kidId = kid.getID(); loopcount++; if (loopcount > 1) { sb.append(","); } sb.append("\"").append(kidId).append("\""); }
+      if (sb != null) { String tag_value = sb.toString(); updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value); } }
+    catch (Exception e) {
+      System.out.println("Could not get terms from character in updateListField : " + e); e.printStackTrace(); }
+  }
+
   public void commit(CharacterListI charList) {
     Connection c = connectToDB();
     Statement s = null;
@@ -168,14 +179,9 @@ public class WormAdapter implements QueryableDataAdapterI {
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_paper"; tag_name = "Pub"; tag_value = chr.getTerm(tag_name).getID();
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-
 //	ADD paper_remark
-//        postgres_table = "app_person"; tag_name = "Person"; // tag_value = chr.getTerm(tag_name).getID();
-//        CharFieldValue list = chr.getValue(tag_name);
-//        tag_value = list.getValueAsString();
-//        tag_value = chr.getValueAsString();
-//        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-
+        postgres_table = "app_person"; tag_name = "Person"; 
+        updateListField(c, s, joinkey, postgres_table, tag_name, chr);
         postgres_table = "app_intx_desc"; tag_name = "Genetic Intx Desc"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_curator"; tag_name = "Curator"; tag_value = chr.getValueString(tag_name);
@@ -186,14 +192,14 @@ public class WormAdapter implements QueryableDataAdapterI {
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_phen_remark"; tag_name = "Phenotype Remark"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-//        postgres_table = "app_anat_term"; tag_name = "Anatomy"; tag_value = chr.getTerm(tag_name).getID();
-//        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_anat_term"; tag_name = "Anatomy";
+        updateListField(c, s, joinkey, postgres_table, tag_name, chr);
         postgres_table = "app_entity"; tag_name = "Entity"; tag_value = chr.getTerm(tag_name).getID();
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_quality"; tag_name = "Quality"; tag_value = chr.getTerm(tag_name).getID();
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-//        postgres_table = "app_lifestage"; tag_name = "Life Stage"; tag_value = chr.getTerm(tag_name).getID();
-//        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_lifestage"; tag_name = "Life Stage"; 
+        updateListField(c, s, joinkey, postgres_table, tag_name, chr);
         postgres_table = "app_nature"; tag_name = "Allele Nature"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_func"; tag_name = "Functional Change"; tag_value = chr.getValueString(tag_name);
