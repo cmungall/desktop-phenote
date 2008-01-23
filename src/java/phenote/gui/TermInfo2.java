@@ -999,6 +999,8 @@ public class TermInfo2 extends AbstractGUIComponent {
 			}
 			JLabel aeLabel = new JLabel(ae.getID());
 			
+//			aeLabel.setToolTipText("Name: "+ae.getName()+"\n"+"Annotated to: "+annotatedTo);
+			
 			// annotationPanel.add(getObjHrefLabel(annotatedTo));
 			annotationPanel.add(new JLabel("")); // TODO: show blank until we prettify the subj
 			annotationPanel.add(aeLabel);

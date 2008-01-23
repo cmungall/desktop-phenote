@@ -1,10 +1,17 @@
 package phenote.config;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 
+import com.sun.tools.javac.tree.Tree.If;
+
+import phenote.config.xml.OntologyFileDocument;
+import phenote.config.xml.ExternaldbDocument.Externaldb;
 import phenote.config.xml.FieldDocument.Field;
 import phenote.config.xml.OntologyDocument.Ontology;
+import phenote.config.xml.TerminologyDefinitionsDocument.TerminologyDefinitions;
 //import phenote.config.xml.PostcompDocument.Postcomp;
 
 /** May not even have ontology file (free text eg genotype) rename FieldConfig? */
@@ -20,6 +27,9 @@ public class OntologyConfig {
   private URL loadUrl;
   private FieldConfig fieldConfig;
   private Ontology ontologyBean; // from xml beans - replaces above fields!
+  private OntologyFileDocument.OntologyFile.Type.Enum ontologyType; //OWL, OBO, should be enum
+  private boolean autoUpdate;  //whether or not to autoupdate this ontology at startup
+  
 
 
   /** confusing - this is xml bean Ontology NOT datamodel Ontology - this is reading
@@ -28,8 +38,14 @@ public class OntologyConfig {
   OntologyConfig(phenote.config.xml.OntologyDocument.Ontology o,FieldConfig fc) {
     ontologyBean = o;
     fieldConfig = fc;
-    setFile(o.getFile());
-    
+
+    TerminologyDefinitions t = fc.getConfig().getTerminologyDefs();
+    if (t!=null) { //terminology defs defined, use these
+      setOntFileFromTermDefs(o.getName(), fc.getConfig().getOntologyList());
+    } else {
+    	setFile(o.getFile());
+    }
+        
     // for now ignoring if name set as there was a bug where name was getting set
     // to "Entity" in the -u .phenote/conf file - woops
     // NO this is bad - as can have multiple rel ontols and now have same name!
@@ -260,6 +276,35 @@ public class OntologyConfig {
     if (fieldConfig.getFieldBean().getSortBy() == null) return false;
     return fieldConfig.getFieldBean().getSortBy() == Field.SortBy.ID;
   }
+  
+  public void setOntFileFromTermDefs(String name, OntologyFileDocument.OntologyFile[] ontologyList) {
+  	boolean foundIt = false;
+	  for (OntologyFileDocument.OntologyFile of : ontologyList) {
+	  	String thisOntol = of.getHandle();
+	  	if (thisOntol.equals(name)) { 
+	  		foundIt=true;  //the current item in the ontology def is the matching ontology
+	  		reposUrlString = of.getLocation();
+	  		ontologyFile = of.getFilename();
+	  		autoUpdate = of.getAutoUpdate();
+	  		//probably should be smart here, and if the type isn't defined, then grab it from the filename extension, or default
+	  		ontologyType = of.getType();  //OBO, OWL or FLAT, need flavor
+	  		//check to see if there's a repository location
+	  		//check to see if there's a file name
+	      if (ontologyFile == null) {
+	        System.out.println("ERROR: "+ name + "ontology filename undefined ");
+	        new Throwable().printStackTrace();
+	        return;
+	      }
+	  	}
+	  }
+	  if (!foundIt) {
+      System.out.println("ERROR: " + name + " terminology not defined");
+      new Throwable().printStackTrace();
+      return;
+
+	  }
+  }
+
 }
 
   //public String name;

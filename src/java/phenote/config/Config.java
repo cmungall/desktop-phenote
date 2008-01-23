@@ -33,9 +33,12 @@ import phenote.config.xml.DataadapterDocument.Dataadapter;
 import phenote.config.xml.ExternaldbDocument.Externaldb;
 import phenote.config.xml.FieldDocument.Field;
 import phenote.config.xml.FieldPanelTabsDocument.FieldPanelTabs;
+import phenote.config.xml.OntologyFileDocument;
 import phenote.config.xml.GroupDocument.Group;
 import phenote.config.xml.LogDocument.Log;
+import phenote.config.xml.TerminologyDefinitionsDocument.TerminologyDefinitions;
 import phenote.config.xml.MasterToLocalConfigDocument.MasterToLocalConfig;
+import phenote.config.xml.OntologyFileDocument.OntologyFile;
 import phenote.config.xml.OntologyLoadingDocument.OntologyLoading;
 import phenote.config.xml.PhenoteConfigurationDocument.PhenoteConfiguration;
 import phenote.config.xml.TermHistoryDocument.TermHistory;
@@ -68,6 +71,8 @@ public class Config {
   private List<FieldConfig> enabledFields = new ArrayList<FieldConfig>();
   /** enabled & disabled */
   private List<FieldConfig> allFields = new ArrayList<FieldConfig>();
+  private List<OntologyConfig> allOntologies = new ArrayList<OntologyConfig>();
+  
   public static final String defaultLogConfigFile = "conf/log4j-standalone.xml";
   // maybe should be using xmlbean where possible?
   //private boolean uvicGraphEnabled = false; // default false for now
@@ -881,6 +886,8 @@ public class Config {
   }
 
   public List<FieldConfig> getAllFieldCfgs() { return allFields; }
+  
+  public List<OntologyConfig> getAllOntologies() { return allOntologies; }
 
   /** returns true if has field config with same name - contents may differ */
 //   boolean hasEnbldFieldCfg(FieldConfig newFC) {
@@ -1368,6 +1375,76 @@ public class Config {
     if (c == null) return false; // default false?
     return c.getEnableStatementComparison(); // i think defaults to false
   }
+  
+  
+  /**
+   * This will retrieve all of the ontology/terminology definitions in a 
+   * configuration file.  Included here will be all ontology files, their
+   * handle, repository location, and whether or not to update.
+   * @return An object that defines all ontologies/terminologies 
+   * utilized in the configuration, together with a convenience flag to indicate 
+   * whether to update some, none, or all ontologies.
+   * 
+   */
+  public TerminologyDefinitions getTerminologyDefs() { 
+    TerminologyDefinitions termDefs = phenoConfigBean.getTerminologyDefinitions();
+    return termDefs; 
+  }
+  public void setTerminologyDefs(TerminologyDefinitions termDefs) {
+  	phenoConfigBean.setTerminologyDefinitions(termDefs);
+  	return;
+  }
+  
+  /**
+   * @return This returns the an array of ontologies themselves, including
+   * the file names, and other metadata (such as version, etc.)
+   */
+  public OntologyFileDocument.OntologyFile[] getOntologyList() { 
+    OntologyFileDocument.OntologyFile[] fileArray;
+    fileArray = phenoConfigBean.getTerminologyDefinitions().getOntologyFileArray();
+    return fileArray; 
+  }
+  
+  public void setOntologyList(OntologyFileDocument.OntologyFile[] ontologyList) {
+  	phenoConfigBean.getTerminologyDefinitions().setOntologyFileArray(ontologyList);
+  	return;
+  }
+  
+  
+  /**
+   * This method will make the "update ontologies" flag pase.
+   * @return Convenience method to determine the global status of updating
+   * ontology files.  This will either be None, Some, or All ontologies.  This
+   * defaults to None if not set in the configuration.
+   */
+  public TerminologyDefinitions.Update.Enum getUpdateTerminologies() {
+  	TerminologyDefinitions.Update.Enum updateStatus;
+  	if (!phenoConfigBean.getTerminologyDefinitions().isNil()) {
+  		updateStatus = 
+  			phenoConfigBean.getTerminologyDefinitions().getUpdate();
+  	} else {
+  		updateStatus = TerminologyDefinitions.Update.NONE;
+  	}
+  	return updateStatus;
+  }
+  
+  public OntologyFile getOntologyFileByHandle(String handle) {
+  	for (OntologyFile ontology : phenoConfigBean.getTerminologyDefinitions().getOntologyFileArray()) {
+    	
+    	if (handle.equals(ontology.getHandle())) {
+    		return ontology;
+    	}
+  	}
+  	return null;
+
+  }
+  
+//this will need to get smarter so that it determines what flags are set for all
+//individual ontologies
+  public void setUpdateTerminologies(TerminologyDefinitions.Update.Enum updateStatus) {
+  	phenoConfigBean.getTerminologyDefinitions().setUpdate(updateStatus);  	
+  }
+  
 
   private Logger log;
   private Logger log() {

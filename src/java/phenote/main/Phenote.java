@@ -42,6 +42,7 @@ import phenote.config.xml.GroupDocument.Group;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.LoadSaveManager;
 import phenote.dataadapter.OntologyDataAdapter;
+import phenote.dataadapter.OntologyDataAdapter2;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterIFactory;
 import phenote.datamodel.CharacterListI;
@@ -53,6 +54,7 @@ import phenote.gui.CharacterTableController;
 import phenote.gui.GridBagUtil;
 import phenote.gui.LoadingScreen;
 import phenote.gui.MenuManager;
+import phenote.gui.OntologyUpdate;
 import phenote.gui.SearchParams;
 import phenote.gui.SelectionHistory;
 import phenote.gui.ShrimpDag;
@@ -63,6 +65,7 @@ import phenote.gui.field.FieldPanel;
 import phenote.gui.selection.SelectionManager;
 import phenote.servlet.PhenoteWebConfiguration;
 import phenote.util.FileUtil;
+import phenote.gui.OntologyUpdate;
 
 public class Phenote {
 
@@ -184,21 +187,32 @@ public class Phenote {
 
 
   public void initOntologies() {
-    String m = "Loading configuration: "+Config.inst().getConfigName();
-    setProgress(m, 10);
-    setProgress(5); // 5?? from 10??? nicole?
-    setProgress("Initializing Ontologies...", 20);
-    setProgressMsg("Initializing Ontologies");
-    setProgress(10);
-    LOG.debug("Initializing ontologies");
-    //OntologyDataAdapter oda = new OntologyDataAdapter(); // singleton?
-    // loads up OntologyManager - non intuitive?
-    OntologyDataAdapter.initialize(); // this sometimes hangs!!!
-    LOG.debug("Ontologies initialized");
-    // if (config.useShrimpDagViewer())
-    // ShrimpDag.inst().initOntologies();
-    setProgress("Ontologies Initialized", 70);
-    //setMessageText("Ontologies Initialized");
+  	//set up new interface here.
+  	String m = "Loading configuration: "+Config.inst().getConfigName();
+  	System.out.println(m);
+
+  	if (Config.inst().getTerminologyDefs()!=null) { //only do this if defined
+  		try {
+  			OntologyDataAdapter2.getInstance().initOntologies();
+  		} catch (Exception e) {
+  			e.printStackTrace();
+  		}
+  	} else { //the old-school config style
+  		setProgress(m, 10);
+  		setProgress(5); // 5?? from 10??? nicole?
+  		setProgress("Initializing Ontologies...", 20);
+  		setProgressMsg("Initializing Ontologies");
+  		setProgress(10);
+  		LOG.debug("Initializing ontologies");
+  		//OntologyDataAdapter oda = new OntologyDataAdapter(); // singleton?
+  		// loads up OntologyManager - non intuitive?
+  		OntologyDataAdapter.initialize(); // this sometimes hangs!!!
+  		LOG.debug("Ontologies initialized");
+  		// if (config.useShrimpDagViewer())
+  		// ShrimpDag.inst().initOntologies();
+  		setProgress("Ontologies Initialized", 70);
+  		//setMessageText("Ontologies Initialized");
+  	}
   }
 
   private void loadFromCommandLine() {

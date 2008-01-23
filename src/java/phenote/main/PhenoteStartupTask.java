@@ -82,7 +82,8 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 	protected void doOtherInstallations() {
 		LOG.debug("doOtherInstallations called");
 		// new Throwable().printStackTrace();
-		initPhenote();
+		//i'm removing this here because i think its being called twice!  yep
+		//		initPhenote();
 	}
 
 	private void initPhenote() {

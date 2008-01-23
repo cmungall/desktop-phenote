@@ -19,7 +19,10 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 import org.apache.log4j.Logger;
@@ -33,12 +36,14 @@ import org.obo.datamodel.OBOSession;
 import phenote.config.Config;
 import phenote.config.FieldConfig;
 import phenote.config.OntologyConfig;
+import phenote.config.xml.OntologyFileDocument.OntologyFile;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyException;
 import phenote.error.ErrorEvent;
 import phenote.error.ErrorManager;
+import phenote.gui.OntologyUpdate;
 import phenote.gui.SynchOntologyDialog;
 import phenote.main.Phenote;
 import phenote.util.FileUtil;
@@ -46,25 +51,26 @@ import phenote.util.FileUtil;
 /** is this really a data adapter? - OntologyLoader? this isnt a data adapter
     it doesnt load & commit character data - just loads ontologies. rename OntologyLoader
     for now can stay in dataadapter package 
-    this is specifically a OboFileLoader - other kinds of ontology loading may com along*/
-public class OntologyDataAdapter {
+    this is specifically a OboFileLoader - other kinds of ontology loading may com along
+    i'm working on refactoring this to work with the new terminology definitions*/
+public class OntologyDataAdapter2 {
 
-  private static OntologyDataAdapter singleton;
+  private static OntologyDataAdapter2 singleton;
   //private Config config; cant cache may change
   private CharFieldManager charFieldManager = CharFieldManager.inst();
   private boolean initializingOntologies = false;
   private Map<String,Ontology> fileToOntologyCache = new HashMap<String,Ontology>();
   private OBOMetaData adapterMetaData;
   private Phenote phenote = Phenote.getPhenote(); 
-  private static final Logger LOG = Logger.getLogger(OntologyDataAdapter.class);
+  private static final Logger LOG = Logger.getLogger(OntologyDataAdapter2.class);
   private int numFiles;
   private int progressFactor=3;
   // does this need to be false for zfin
   private static final boolean DO_ONE_OBO_SESSION = true;
 
-  private OntologyDataAdapter() {
+  private OntologyDataAdapter2() {
     //config = Config.inst();
-    initOntologies(); // loads up all ontologies
+//    initOntologies(); // loads up all ontologies
     //if (config.checkForNewOntologies()){new OntologyFileCheckThread().start();}
   }
 
@@ -73,9 +79,9 @@ public class OntologyDataAdapter {
   /** synchronized so cant reload an ontology while ontologies are being initialized 
    getInstance calls initOntologies - in other words you have to call getInstance to
    initialize the ontologies */
-  public static synchronized OntologyDataAdapter getInstance() {
+  public static synchronized OntologyDataAdapter2 getInstance() {
     if (singleton == null)
-      singleton = new OntologyDataAdapter();
+      singleton = new OntologyDataAdapter2();
     return singleton;
   }
 
@@ -89,10 +95,16 @@ public class OntologyDataAdapter {
   }
   
 
-  // public void setDoOneOboSession(boolean doOneOboSession) ??
+   // public void setDoOneOboSession(boolean doOneOboSession) ??
 
-  private void initOntologies() {
+  public void initOntologies() {
     // to prevent reload during init , maybe dont need with synchronization?
+    Object[] options = {"Cancel", "Update", "Update All"};
+    final Object defaultSelection = "Update All";
+    Object selection = defaultSelection;
+    selection = OntologyUpdate.queryForOntologyUpdate();
+    System.out.println("you've selected:  "+ selection.toString());
+    
     initializingOntologies = true; 
 
     // new paradigm
@@ -135,28 +147,13 @@ public class OntologyDataAdapter {
   private OBOSession loadAllOboFilesIntoOneOboSession() throws OntologyException {
     // get unique list of obo files
     Collection<String> files = new ArrayList<String>();
-    for (FieldConfig fieldConfig : cfg().getEnbldFieldCfgs()) {
-      for (OntologyConfig oc : fieldConfig.getOntologyConfigList()) {
-        try {
-          // this actually does repos synching, should only do once per obo file,
-          // but it wont download something twice as 2nd time it will be in synch
-          String file = findOboUrlString(oc); // throws oex if not found
-          if (!files.contains(file)) { // dont load file twice
-            files.add(file);
-          }
-        }
-        catch (OntologyException e) {
-          String m = e.getMessage()+" Please check config & obo files";
-          LOG.error(m); System.out.println(m);
-        }
-      }
+    OntologyFile[] ontologies = cfg().getOntologyList();
+    //in this paradigm, utilize the ontology defs to get the files
+    //note, in this new way, all files will already be updated, simply load locally
+    for (OntologyFile ontology : ontologies) {
+    	files.add(getLocalFile(ontology).toString());
     }
     // should we have singleOboSession instance var?? or confusing with multi?
-    numFiles = files.size();
-    // i have funny test configs with no ontol files - / 0 exception
-    int div = numFiles == 0 ? 1 : numFiles; 
-    progressFactor = 1+(10/div); //this is kind of a hack right now until we get threading
-    System.out.println("numfiles="+numFiles);
     OBOSession os = getOboSession(files);
     return os;
   }
@@ -174,6 +171,7 @@ public class OntologyDataAdapter {
   /** This actually creates both CharFields and Ontologies and maps namespaces from
       obo file adapter meta data */
   private void mapNamespacesToOntologies(OBOSession oboSession) throws OntologyException {
+  	OntologyFile[] ontologies = cfg().getOntologyList();
     for (FieldConfig fieldConfig : cfg().getEnbldFieldCfgs()) {
       CharField cf = fieldConfig.getCharField(); // creates char field (if not there)
       // ontology manager.addCF???
@@ -184,18 +182,20 @@ public class OntologyDataAdapter {
           if (adapterMetaData == null)
             throw new OntologyException("No namespace/meta data for ontologies");
           // i think we need url it was loaded with
-          if (!oc.hasLoadUrl()) {
-            LOG.error("Failed to find obo for "+oc.getName()+" can not load");
-            // in case log not set up right - need to work on that
-            System.out.println("Failed to find obo for "+oc.getName()+" can not load");
-            continue;
-          }
-          String urlString = oc.getLoadUrl().toString();
+          //i don't think we should be able to get here.
+//          if (!oc.hasLoadUrl()) {
+//            LOG.error("Failed to find obo for "+oc.getName()+" can not load");
+//            // in case log not set up right - need to work on that
+//            System.out.println("Failed to find obo for "+oc.getName()+" can not load");
+//            continue;
+//          }
+//          String urlString = oc.getLoadUrl().toString();
+          
+          String urlString = getLocalFile(oc.getName()).toString();
           Collection<Namespace> spaces = adapterMetaData.getNamespaces(urlString);
           // loads ontology from spaces
           //ah!  but this is loading the ontologies multiple times i think!
           Ontology o = new Ontology(spaces,oc,oboSession);
-          this.updateLoadingScreen("loading: "+o.getName(), true);
 
           // ADD TO CHAR FIELD
           if (oc.isPostCompRel()) { // POST COMP REL ONTOLOGY
@@ -444,8 +444,8 @@ public class OntologyDataAdapter {
     cfg.setReadPaths(fileList);
     cfg.setBasicSave(false);     //i think i need this for dangling references
     cfg.setAllowDangling(true);  //setting this to true for now!  should be configrable
-    this.updateLoadingScreen("loading ontologies into memory", false);
-    
+
+    System.out.println("Loading ontologies");
     try { // throws data adapter exception
       
       OBOSession os = fa.doOperation(OBOAdapter.READ_ONTOLOGY,cfg,null);
@@ -453,16 +453,14 @@ public class OntologyDataAdapter {
       return os;
     }
     catch (DataAdapterException e) {
+    	//this is where we should go back, and replace with the old file.
+    	//need to figure out which is the bad one, and switch it out, then
+    	//try reloading
       // cause is crucial!
       String m = "got obo data adapter exception: "+e+" message "+e.getMessage()
       +" cause "+e.getCause()+"\nTHIS IS FATAL!\nCan not load ontologies. Phenote must"
       +" exit.\nConsider clearing out bad file from ~/.phenote/obo-files";
       ErrorManager.inst().error(new ErrorEvent(this,m));
-      //LOG.error(m); // error manager should do this for free 
-      // actually theres really no point in going on i think as we have failed to get
-      // an obo session - todo - give user options for ammending this failure, ignore
-      // failing file, or fetch from somewhere else, but for now throw up popup and exit
-      // is the best we can do - or should this be done by catcher of OntEx?
       LOG.fatal(m);
       JOptionPane.showMessageDialog(null,m,"Load failure",JOptionPane.ERROR_MESSAGE);
       System.exit(1);
@@ -490,8 +488,6 @@ public class OntologyDataAdapter {
   //private String timerMsg;
   private void startTimer() {
     startTime = Calendar.getInstance();
-    //timerMsg = m;
-    //LOG.debug(timerMsg+" Start clock "+startTime.getTime()); // ??
   }
 
   private void stopTimer(String m) {
@@ -632,102 +628,117 @@ public class OntologyDataAdapter {
     }
 
 
-//  public OntologyPropertyListener() implements PropertyChangeListener {
-//  public void propertyChange(PropertyChangeEvent e) {
-//  String propertyName = e.getPropertyName();
-//  if ("loading".equals(propertyName) {
-//  loadingScreen.
-//  } else if ("config".equals(propertyName) {
-//  } else {
 
-//  }
-//  }
-//  ...
-//  }
   }
 
-//private void loadRelationshipOntology() { hmmmmmm
-//// for now - todo configure! post comp relationship-ontology
-//// FieldConfig rfc = cfg().getRelationshipFieldConfig();
-////CharFieldEnum relEnum = rfc.getCharFieldEnum();
-//CharFieldEnum relEnum = CharFieldEnum.RELATIONSHIP;
-//CharField cf = new CharField(relEnum);
-//}
 
+  //this function will leverage what mark does for snagging the date.  in
+  //the future, this could utilize the bioportal versioning system.
+  public boolean checkForUpdate(OntologyFile ontologyFile) throws OntologyException{
+    String filename = ontologyFile.getFilename();
+    boolean useRepos = false; //by default, i'll say there's no ontologies to update
+    if (filename == null)
+      throw new OntologyException(ontologyFile.getHandle()+" has null file");
+    // throws OntologyEx if file not found -- catch & try url
+    URL localUrl = null;
+    try { localUrl = findFile(filename); }
+    catch (OntologyException oe) {
+      System.out.println(filename+" not found locally, trying url if configured ");
+    }
+
+    // if repos url configured then check if its more up to date - if so copy
+    // repos obo file to .phenote cache
+    if (ontologyFile.getLocation()!=null && !(ontologyFile.getLocation().equals(""))) {
+      try {
+        URL reposUrl = new URL(ontologyFile.getLocation()+ontologyFile.getFilename());  //should really have a method to check for correctness
+        LOG.debug(reposUrl+" checking with repos for newer ontol\n");
+//        this.updateLoadingScreen("checking for updates: "+ontCfg.getName(), true);
+        long reposDate = 0;
+        long locDate = 0;
+        try {
+        	reposDate = getOboDate(reposUrl); // throws ex if no date
+        } catch (OntologyException oe) { // no reposDat
+        	LOG.error("got OntEx trying to parse date from repos "+oe); 
+            // already have local copy, no date to synch with, dont bother downloading from
+            // repos, there should probably be a config to override this (always download)
+        }
+        if (localUrl != null) {
+          	try { locDate = getOboDate(localUrl); }
+            catch (OntologyException e2) { locDate = 0; } // no local date - keep as 0
+            useRepos=false;
+        }	else  //don't have it locally, need to download it.
+        	useRepos = true;
+        if (reposDate > locDate)
+        	useRepos=true;
+      } catch (MalformedURLException m) {
+          LOG.error("URL is malformed "+m);
+      }
+    }
+  	return useRepos; 
+  }
+  
+  public void downloadUpdate(String ontology) throws OntologyException {
+  	OntologyFile[] ontologies = Config.inst().getTerminologyDefs().getOntologyFileArray();
+  	URL reposUrl = null;
+  	URL localUrl = null;
+  	for (OntologyFile of : ontologies) {
+  		if (of.getHandle().equals(ontology)) {
+  			try {
+  				reposUrl = new URL(of.getLocation()+of.getFilename());
+  				localUrl = getLocalFile(of);
+  				startTimer();
+  				//for some reason, this isn't logging
+  				LOG.info("Downloading ontology/n from: "+reposUrl+"/n   to: "+localUrl);
+  				//this uses marks, but maybe this should use john's?
+  				//need to add in here the copying of the old ontology file to temp, in
+  				//case the new one is botched.
+  				copyReposToLocal(reposUrl,localUrl);
+  				stopTimer(of.getFilename());
+  				System.out.println(of.getFilename()+" updated from "+ reposUrl);
+  			} catch (MalformedURLException e) { throw new OntologyException(e); }
+  		}
+  	}
+  	return;
+  }
+  
+  private URL getLocalFile(OntologyFile ontology) throws OntologyException{
+  	URL localUrl = null;
+  	try {
+  		localUrl = new File(FileUtil.getDotPhenoteOboDir(),ontology.getFilename()).toURL();
+    	return localUrl;
+  	} catch (MalformedURLException e) { throw new OntologyException(e); }
+  }
+  
+  private URL getLocalFile(String handle) throws OntologyException{
+  	//given an ontology handle, find the file in the term defs
+  	URL localUrl = null;
+  	for (OntologyFile ontology : cfg().getOntologyList()) {
+  		if (ontology.getHandle().equals(handle)) {
+  			try {
+    		localUrl = new File(FileUtil.getDotPhenoteOboDir(),ontology.getFilename()).toURL();
+  	  	} catch (MalformedURLException e) { throw new OntologyException(e); }
+  	  	break;
+  		}
+  	}
+  	return localUrl;
+  }
+  
+  public boolean checkForLocalFileExists(OntologyFile ontology) {
+  	URL localUrl = null;
+  	try {
+  		localUrl = new File(FileUtil.getDotPhenoteOboDir(),ontology.getFilename()).toURL();
+  		File f = new File(localUrl.getFile());
+    	return f.exists();
+  	} catch (MalformedURLException e) { return false;}
+  }
+  public boolean checkForLocalFileExists(String filename) {
+  	URL localUrl = null;
+  	try {
+  		localUrl = new File(FileUtil.getDotPhenoteOboDir(),filename).toURL();
+  		File f = new File(localUrl.getFile());
+    	return f.exists();
+  	} catch (MalformedURLException e) { return false;}
+  }
 
 }
 
-
-
-
-//GARBAGE
-//// POST COMP
-//if (fieldConfig.isPostComp()) {
-//cf.setPostCompAllowed(true);
-//try {
-////Ontology o = initRelationshipOntology(fieldConfig.getPostCompRelOntCfg());
-//Ontology o = initOntology(fieldConfig.getPostCompRelOntCfg());
-//cf.setPostCompRelOntol(o);
-//} catch (OntologyException e) {
-//LOG.error(e.getMessage()+" ignoring ontology, fix config? ");
-//}
-//}
-// i think this order needs to be same as config order
-//initRelationshipOntology();
-// refactor -> Quartz scheduler, reloadOntology()
-//private class OntologyFileCheckThread extends Thread {
-
-//public void run() {
-
-//int checkMilliSecs = cfg().getOntologyCheckMinutes() * 60000;
-////int checkMilliSecs = 6000;//0.6 * 60000; // debug - 10 secs
-
-//while(true) {
-//// sleep in milliseconds
-//try { sleep(checkMilliSecs); }
-//catch (InterruptedException e) { LOG.error("thread interrupted??"); }
-
-//// if still loading ontologies from previous run then dont bother
-//if (initializingOntologies) {
-////System.out.println("Ontologies are being loaded - ontology checker going "+
-////                 "back to sleep");
-//LOG.info("Ontologies are being initialized - ontology checker going "+
-//"back to sleep");
-//continue;
-//}
-//LOG.info("checking for new obo files..."); 
-////System.out.println("checking for new obo files...");
-//// check for files...
-//synchOntologies();
-//}
-//}
-
-///** Checks for new obo files */
-//private void synchOntologies() {
-//for (CharField cf : charFieldManager.getCharFieldList()) {
-//for (Ontology o : cf.getOntologyList()) {
-//if (o.getSource() == null) continue;
-//String file = o.getSource();
-//long oldTimestamp = o.getTimestamp();
-//long newTimestamp = new File(file).lastModified();
-//if (newTimestamp > oldTimestamp) {
-//Date d = new Date(newTimestamp);
-////System.out.println("loading new obo file "+file+" new date "+d);
-//LOG.info("LOG loading new obo file "+file+" new date "+d);
-//try {
-//loadOboSession(o,file);
-//} catch (FileNotFoundException e) { // shouldnt happen
-////System.out.println(e.getMessage()+" ignoring ontology, fix config! ");
-//LOG.error(e.getMessage()+" ignoring ontology, fix config! ");
-//// LOG.debug(stacktrace)??? no string for stack trace... hmm...
-//}
-//}
-//}
-//}
-//}
-
-
-//if (date > 0) { // jar files have 0 date???
-//ontology.setTimestamp(date);
-//ontology.setSource(file.toString());
-//}
