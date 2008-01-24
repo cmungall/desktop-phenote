@@ -155,7 +155,8 @@ public class OntologyUpdate {
 		//set the column widths
 		for (int i = 0; i < ontologyTable.getColumnCount(); i++) {
 		    column = ontologyTable.getColumnModel().getColumn(i);
-		    int[] widths = {20,20,150,30,30,20};
+//		    int[] widths = {20,20,150,30,30,20};
+		    int[] widths = {20,20,150,30,20};
 		    column.setPreferredWidth(widths[i]);
 		}
 		
@@ -304,9 +305,13 @@ public class OntologyUpdate {
 		//throw it into the table only if there's an update or a need to download
 //		if (status) {
 		URL localUrl = getLocalUrl(ontology.getFilename());
+		URL remoteUrl = getRemoteUrl(ontology);
 			String fileSize = FileUtil.getFileSize(localUrl);
+//			String fileSize = FileUtil.getRemoteFileSize(remoteUrl); //need to do this eventually
+//			Object[] rowData = new Object[]{status, " ", 
+//					ontology.getHandle(), ontology.getVersion(), infoButton, fileSize+" Kb" };
 			Object[] rowData = new Object[]{status, " ", 
-					ontology.getHandle(), ontology.getVersion(), infoButton, fileSize+" K" };
+					ontology.getHandle(), ontology.getVersion(), fileSize};
 
 			for (int i=0; i<rowData.length; i++) {
 				ontologyTable.getModel().setValueAt(rowData[i], row, i);
@@ -359,9 +364,13 @@ public class OntologyUpdate {
 	
 	class OntologyUpdateTableModel extends AbstractTableModel {
 		public Vector<Object[]> data = initializeData();
+//		public final String[] COLUMN_NAMES = new String[] {
+//				"Update","Status", "Name", "Version", "Info","Size"
+//		};
 		public final String[] COLUMN_NAMES = new String[] {
-				"Update","Status", "Name", "Version", "Info","Size"
+				"Update","Status", "Name", "Version", "Size (kb)"
 		};
+		
 		public int getRowCount() {
 			return ontologies.length;
 		}
@@ -409,7 +418,8 @@ public class OntologyUpdate {
 		private Vector<Object[]> initializeData() {
 			Vector<Object[]> allData = new Vector<Object[]>();
 			for (int i=0; i<getRowCount(); i++) {
-				Object[] rowData = {"a","b","c","d","e","f"};				
+//				Object[] rowData = {"a","b","c","d","e","f"};				
+				Object[] rowData = {"a","b","c","d","e"};				
 				allData.add(i,rowData);
 			}
 			return allData;
@@ -662,4 +672,15 @@ public class OntologyUpdate {
   	return null;
   }
 
+  private URL getRemoteUrl (OntologyFile ontology) {
+  	URL remoteUrl=null;
+  	try {
+  		if (ontology.getLocation()!=null) {
+  			remoteUrl = new URL(ontology.getLocation()+ontology.getFilename());
+  		}
+			return remoteUrl;
+  	} catch (MalformedURLException mue) {}
+  	return null;
+  }
+  
 }

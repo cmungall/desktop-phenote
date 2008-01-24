@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.nio.channels.FileChannel;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -308,16 +309,37 @@ public class FileUtil {
   }
   
   public static String getFileSize(URL url) {
-  	String text = "0";
+  	String text = "unknown";
   	if (url!=null) {
   		File f = new File(url.getFile());
   		long size = f.length();
-  		size = size/1000;  //convert to MB
-  		float fv = new Long(size).floatValue();
-  		DecimalFormat df= new DecimalFormat("0.#");
-  		text=df.format(fv);
+  		float dsize = (new Long(size).floatValue())/1000;  //KB
+  		DecimalFormat df= new DecimalFormat("0");
+  		text=df.format(dsize);
   	}
   	return text;
   }
-
+  
+  public static String getRemoteFileSize(URL url) {
+    URLConnection conn;
+    String text = "unknown";
+    int size=0;
+  	if (url!=null) {
+    	try {
+				conn = url.openConnection();
+				conn.connect();
+	    	size = conn.getContentLength();
+	    	conn.getInputStream().close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    	if(size > 0) {
+//    		System.out.println("Could not determine file size for: "+url.toString());
+    		float dsize = size/1000;  //KB
+  			DecimalFormat df= new DecimalFormat("0");
+  			text=df.format(dsize);
+    	}
+  	}
+    return text;
+  }
 }
