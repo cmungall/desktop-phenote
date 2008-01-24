@@ -5,7 +5,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 
-import com.sun.tools.javac.tree.Tree.If;
+//import com.sun.tools.javac.tree.Tree.If;
 
 import phenote.config.xml.OntologyFileDocument;
 import phenote.config.xml.ExternaldbDocument.Externaldb;

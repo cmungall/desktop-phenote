@@ -96,7 +96,7 @@ class Comparison {
   // CANCEL
   private class CancelListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
-
+      dialog.dispose();
     }
   }
 
