@@ -127,6 +127,26 @@ public class WormAdapter implements QueryableDataAdapterI {
         catch (SQLException se) { System.out.println("We got an exception while executing a timestamp update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); } }
   } // private void updatePostgresVal(String postgres_table, String joinkey, int colI, String value)
 
+  private void insertPostgresHistVal(Connection c, Statement s, String postgres_table, String joinkey, String value) {
+    Integer hasMatch = 0;
+    ResultSet rs = null;
+    try { rs = s.executeQuery("SELECT joinkey FROM "+postgres_table+"_hst WHERE joinkey = '"+joinkey+"' AND "+postgres_table+"_hst = '"+value+"' "); }
+    catch (SQLException se) {
+      System.out.println("We got an exception while executing our app_term query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
+    try { if (rs.next()) { hasMatch++; } }
+      // get the next highest number joinkey for that character
+    catch (SQLException se) {
+      System.out.println("We got an exception while getting a column/term joinkey "+joinkey+" result:this shouldn't happen: we've done something really bad."); 
+      se.printStackTrace(); System.exit(1); }
+    if (hasMatch == 0) {
+      PreparedStatement ps = null;	// intialize postgres insert 
+      try { ps = c.prepareStatement("INSERT INTO "+postgres_table+"_hst VALUES (?, ?)"); ps.setString(1, joinkey); ps.setString(2, value); }
+      catch (SQLException se) {
+        System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      try { ps.executeUpdate(); } 	// write to app_tempname, which is not what we really want, but we need to figure out the pubchunk thing to see what we're going to do
+      catch (SQLException se) { System.out.println("We got an exception while executing a history insert in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); } } }
+    
+
 
   private void updateNormalField(Connection c, Statement s, String joinkey, String postgres_table, String tag_name, String tag_value) {
     String postgres_value = "No postgres value assigned";
@@ -180,6 +200,9 @@ public class WormAdapter implements QueryableDataAdapterI {
         postgres_table = "app_paper"; tag_name = "Pub"; tag_value = chr.getTerm(tag_name).getID();
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
 //	ADD paper_remark
+	if (tag_value != null) {  
+          postgres_table = "app_paper_remark"; tag_name = "Paper Remark"; String paprem_value = chr.getValueString(tag_name);
+	  if ( (paprem_value != null) && (paprem_value != "") ) { insertPostgresHistVal(c, s, postgres_table, tag_value, paprem_value); } }
         postgres_table = "app_person"; tag_name = "Person"; 
         updateListField(c, s, joinkey, postgres_table, tag_name, chr);
         postgres_table = "app_intx_desc"; tag_name = "Genetic Intx Desc"; tag_value = chr.getValueString(tag_name);
@@ -596,10 +619,16 @@ public class WormAdapter implements QueryableDataAdapterI {
       if (phenotype_match != null) { postgres_value = phenotype_match; }		// query for this, otherwise keep the default value
       if (postgres_value == "No postgres value assigned") { } else { c1.setValue("Phenotype",postgres_value); }					// assign the queried value
 //System.out.println("set Phenotype to "+postgres_value+" END");
+      postgres_table = "app_intx_desc"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+      c1.setValue("Genetic Intx Desc",postgres_value);					// assign the queried value
       postgres_table = "app_curator"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Curator",postgres_value);					// assign the queried value
 //System.out.println("set Curator to "+postgres_value+" END");
+      postgres_table = "app_not"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+      c1.setValue("Not",postgres_value);					// assign the queried value
       postgres_table = "app_phen_remark"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Phenotype Remark",postgres_value);				// assign the queried value
