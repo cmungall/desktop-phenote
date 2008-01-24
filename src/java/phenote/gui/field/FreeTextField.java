@@ -70,7 +70,10 @@ class FreeTextField extends CharFieldGui {
     return this.textField;
   }
 
+  /** set text from outside source - sel, load,... */
   protected void setText(String text) {
+    // if list clear text(?), though may want to change this for list sel
+    if (hasListGui()) text = ""; 
     this.setUpdateGuiOnly(true);
     textField.setText(text);
     this.setUpdateGuiOnly(false);
