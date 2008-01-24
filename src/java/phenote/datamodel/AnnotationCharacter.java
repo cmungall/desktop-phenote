@@ -16,6 +16,7 @@ import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
 import org.obo.util.TermUtil;
 
+/** CharacterI for OBOAnnotations */
 public class AnnotationCharacter extends AbstractCharacter {
 
   private static final Logger LOG = Logger.getLogger(AnnotationCharacter.class);

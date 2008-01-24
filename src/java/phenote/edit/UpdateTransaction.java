@@ -16,9 +16,18 @@ public class UpdateTransaction implements TransactionI { // extends Transaction?
   // not sure but this may be needed
   private boolean isUndone = false;
 
-  public UpdateTransaction(CharacterI c, CharField cf, String newVal) {
-    newValue = new CharFieldValue(newVal,c,cf);
-    setOldValue(c,cf);
+  public UpdateTransaction(CharacterI c, CharField cf, String newString) {
+//     newValue = new CharFieldValue(newVal,c,cf);
+//     setOldValue(c,cf);
+    oldValue = c.getValue(cf);
+    // if list adds to list, if not just sets it, in either case makes new object
+    newValue = CharFieldValue.makeNewValue(newString,oldValue);
+  }
+
+  public UpdateTransaction(CharacterI c,CharField cf,OBOClass newTerm) {
+    oldValue = c.getValue(cf);
+    // if list adds to list, if not just sets it, in either case makes new object
+    newValue = CharFieldValue.makeNewValue(newTerm,oldValue);//new CharFieldValue(newVal,c,cf);
   }
 
   public UpdateTransaction(CharFieldValue oldVal, CharFieldValue newVal) {
@@ -36,11 +45,6 @@ public class UpdateTransaction implements TransactionI { // extends Transaction?
     return new ArrayList<CharacterI>(0);
   }
 
-  public UpdateTransaction(CharacterI c,CharField cf,OBOClass newTerm) {
-    oldValue = c.getValue(cf);
-    // if list adds to list, if not just sets it, in either case makes new object
-    newValue = CharFieldValue.makeNewValue(newTerm,oldValue);//new CharFieldValue(newVal,c,cf);
-  }
 
   public List<CharacterI> getCharacters() {
     List<CharacterI> l = new ArrayList<CharacterI>();

@@ -83,6 +83,20 @@ public class CharFieldValue implements Cloneable {
     }
     return newVal;
   }
+  /** If list adds to value, if not list just sets it, makes new CFV */
+  public static CharFieldValue makeNewValue(String newString,CharFieldValue oldVal) {
+    CharFieldValue newVal = oldVal.cloneCharFieldValue(); // also clones list
+    if (!newVal.isList()) { // SINGLE TERM
+      newVal.stringValue = newString;
+    }
+    else { // LIST/MULTI VALUE
+      newVal.isList = true; // only parent
+      CharFieldValue newKid =
+        new CharFieldValue(newString,oldVal.character,oldVal.charField);
+      newVal.getCharFieldValueList().add(newKid);
+    }
+    return newVal;
+  }
 
   public CharFieldValue(Date d, CharacterI c, CharField cf) {
     this(c,cf);

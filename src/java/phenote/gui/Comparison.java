@@ -36,6 +36,7 @@ class Comparison {
     }
   }
 
+  /** initialize gui with 2 characters (and frame owner) */
   private void init(Frame owner, CharacterI c1, CharacterI c2) 
     throws CharFieldException {
     char1 = c1;
