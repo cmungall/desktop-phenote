@@ -79,6 +79,10 @@ class RelationCompList extends AbstractAutoCompList {
     try {
       this.setCurrentValidItem();
     } catch (OboException e) {
+      // edit model enabled if in main window (not in pc/comp popups)
+      if (!this.editModelEnabled()) {
+        return;
+      }
       log().debug(e);
       // TODO Auto-generated catch block
     }
