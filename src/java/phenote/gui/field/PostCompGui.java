@@ -336,7 +336,7 @@ class PostCompGui {
       // check that we have a valid genus & differentia
       OBOClass genusTerm;
       try { genusTerm = genusField.getCurrentOboClass(); }
-      catch (CharFieldGui.CharFieldGuiEx e) { throw new CompEx("Genus is unspecified"); }
+      catch (CharFieldGuiEx e) { throw new CompEx("Genus is unspecified"); }
       OboUtil oboUtil = OboUtil.initPostCompTerm(genusTerm);
       for (RelDiffGui rd : relDiffGuis) {
         // check if filled in both rel & diff
@@ -345,7 +345,7 @@ class PostCompGui {
           OBOClass diffTerm = rd.diffField.getCurrentOboClass(); // throws Ex
           oboUtil.addRelDiff(rel,diffTerm);
         }
-        catch (CharFieldGui.CharFieldGuiEx e) {} // try next diff
+        catch (CharFieldGuiEx e) {} // try next diff
       }
       //return OboUtil.makePostCompTerm(genusTerm,rel,diffTerm);
       //if we didnt get a complete comp - genus rel diff - then throw ex

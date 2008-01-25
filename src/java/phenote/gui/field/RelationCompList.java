@@ -46,8 +46,8 @@ class RelationCompList extends AbstractAutoCompList {
   /** Throws exception if there isnt a current relation - for relation lists
       (post comp), if the user
       has typed something that isnt yet a rel - hasnt selected a rel */
-  OBOProperty getCurrentRelation() throws CharFieldGuiEx {
-    if (currentRel == null) throw new CharFieldGuiEx("relation is null");
+  public OBOProperty getCurrentRelation() throws CharFieldGuiEx {
+    if (currentRel == null) throw new CharFieldGuiEx("relation is empty");
     if (!currentRel.getName().equals(getText()))
       throw new CharFieldGuiEx("(relation "+currentRel.getName()+" and input "+getText()+
                           " dont match)");

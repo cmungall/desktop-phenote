@@ -31,7 +31,7 @@ import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.TermNotFoundException;
-import phenote.gui.field.CharFieldGui.CharFieldGuiEx;
+//import phenote.gui.field.CharFieldGui.CharFieldGuiEx;
 import phenote.gui.selection.SelectionManager;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.matchers.AbstractMatcherEditor;

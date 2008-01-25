@@ -277,6 +277,9 @@ class FreeTextField extends CharFieldGui {
     if (log == null) log = Logger.getLogger(getClass());
     return log;
   }
+
+}
+
   // whats this about???
 //  private class PopupListener extends MouseAdapter {
 //  	JPopupMenu popup;
@@ -316,4 +319,4 @@ class FreeTextField extends CharFieldGui {
 ////  		}
 //  	}
 //  }
-}
+

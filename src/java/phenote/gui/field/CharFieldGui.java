@@ -505,9 +505,9 @@ public abstract class CharFieldGui implements ListSelectionListener {
   CharFieldEnum getCharFieldEnum() { return charField.getCharFieldEnum(); }
   protected CharField getCharField() { return charField; }
 
-  public static class CharFieldGuiEx extends Exception {
-    protected CharFieldGuiEx(String m) { super(m); }
-  }
+//   public static class CharFieldGuiEx extends Exception {
+//     protected CharFieldGuiEx(String m) { super(m); }
+//   }
 
   /** overridden by term comp list */
   OBOClass getCurrentOboClass() throws CharFieldGuiEx {
@@ -515,7 +515,7 @@ public abstract class CharFieldGui implements ListSelectionListener {
   }
 
   /** overridden by RelationCompList */
-  OBOProperty getCurrentRelation() throws CharFieldGuiEx {
+  public OBOProperty getCurrentRelation() throws CharFieldGuiEx {
     throw new CharFieldGuiEx("Field has no Relation");
   }
 
@@ -647,19 +647,4 @@ public abstract class CharFieldGui implements ListSelectionListener {
 //   }
 
   //JLabel getLabelGui() { return new JLabel
-
-//  private void initCombo() { //, Container parent) {
-    //isCompList = true;
-
-    //String name = charField.getFirstOntology().getName();JLabel label = 
-    //fieldPanel.addLabel(getLabel(),charField.hasMoreThanOneOntology());
-
-    // if has more than one ontology(entity) then add ontology choose list
-//     if (charField.hasMoreThanOneOntology())
-//       initOntologyChooser(charField);
-
-    //createCompList(); // comp list now makes ontologyChooser (if >1 ont)
-    //fieldPanel.addFieldGui(getCompList());
-
-    //getCompList().setCharField(charField);
 

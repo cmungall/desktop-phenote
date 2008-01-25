@@ -10,6 +10,10 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
+import org.apache.log4j.Logger;
+
+import org.obo.datamodel.OBOProperty;
+
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.CharFieldException;
@@ -18,6 +22,7 @@ import phenote.datamodel.CharacterI;
 import phenote.datamodel.Ontology;
 import phenote.config.Config;
 import phenote.gui.field.CharFieldGui;
+import phenote.gui.field.CharFieldGuiEx;
 import phenote.gui.field.FieldPanel;
 
 /** a gui for making comparisons between 2 statements/annotations */
@@ -27,6 +32,7 @@ class Comparison {
   private JDialog dialog;
   private CharacterI char1;
   private CharacterI char2;
+  private CharFieldGui relFieldGui;
 
   Comparison(Frame owner, CharacterI c1, CharacterI c2) {
     try { init(owner,c1,c2); } 
@@ -71,8 +77,8 @@ class Comparison {
     // throws CharFieldEx if no rel ontol found
     Ontology o = CharFieldManager.inst().getComparisonRelationOntology();
     relChar.addOntology(o);
-    CharFieldGui relField = CharFieldGui.makeRelationList(relChar);//"Relationship"?
-    fp.addCharFieldGuiToPanel(relField);
+    relFieldGui = CharFieldGui.makeRelationList(relChar);//"Relationship"?
+    fp.addCharFieldGuiToPanel(relFieldGui);
   }
 
 
@@ -90,8 +96,20 @@ class Comparison {
   // OK
   private class OkListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
-
+      try {
+        commitComparison();
+      } catch (CharFieldGuiEx x) {
+        String m = "Comparison failed "+x.getMessage();
+        log().debug(m);
+        JOptionPane.showMessageDialog(dialog,m,"error",JOptionPane.ERROR_MESSAGE);
+        return; // leave window up - hit cancel to get rid of
+      }
+      dialog.dispose(); // no ex - ok
     }
+  }
+
+  private void commitComparison() throws CharFieldGuiEx {
+    OBOProperty rel = relFieldGui.getCurrentRelation(); // ex
   }
 
   // CANCEL
@@ -112,6 +130,9 @@ class Comparison {
       sb.append(val).append(" ");
     }
     return sb.toString().trim();
+  }
+  private Logger log() {
+    return Logger.getLogger(getClass());
   }
 
 
