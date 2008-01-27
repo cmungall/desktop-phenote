@@ -87,8 +87,9 @@ public abstract class CharFieldGui implements ListSelectionListener {
     }
     else if (charField.isReadOnly()) {
       fieldGui = new ReadOnlyFieldGui(charField);
-    }
-    else {
+    } else if (charField.isPickList()) {
+      fieldGui = new PickListFieldGui(charField);
+    } else {
       FreeTextField f = new FreeTextField(charField);
       fieldGui = f;
     }

@@ -76,7 +76,11 @@ public class Character extends AbstractCharacter implements CharacterI {
 
   // return null if not set? empty list? ???
   public List<CharFieldValue> getValueList(CharField cf) {
-    return charFieldToValue.get(cf).getCharFieldValueList(); // ??
+    if (charFieldToValue.get(cf) == null) {
+      return new ArrayList<CharFieldValue>();
+    } else {
+      return charFieldToValue.get(cf).getCharFieldValueList(); // ?? 
+    }
   }
 
   /** returns string for charfield value of char field, no matter what type,

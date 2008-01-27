@@ -50,6 +50,7 @@
 	<classpathentry kind="lib" path="jars/xbean.jar"/>
 	<classpathentry kind="lib" path="jars/eutils.jar"/>
 	<classpathentry kind="lib" path="jars/macify-1.1.jar"/>
+	<classpathentry kind="lib" path="jars/ProtocolEditor.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/BBOP"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/OBO"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/OBO-Edit2"/>

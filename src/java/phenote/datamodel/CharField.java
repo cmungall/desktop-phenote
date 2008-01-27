@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOSession;
 import org.obo.datamodel.impl.DanglingClassImpl;
@@ -144,6 +145,21 @@ public class CharField {
     //if ( hasOntologies() || isFreeText() )  return false; 
     //return true; 
     return type == Type.INT;
+  }
+  
+  public boolean isPickList() {
+    return type == Type.PICK;
+  }
+  
+  public CharField getPickListSourceField() {
+    final String fieldName = this.fieldConfig.getPickSourceFieldName();
+    if (fieldName == null) return null;
+    try {
+      return CharFieldManager.inst().getCharFieldForName(fieldName);
+    } catch (CharFieldException e) {
+      log().error("CharField does not exist: " + fieldName, e);
+      return null;
+    }
   }
 
   /** This should be redundant with hasOntologies (though with instances this
@@ -360,5 +376,9 @@ public class CharField {
   private boolean danglerMode() { return true; }
 
   public String toString() { return "CharField: "+getName(); }
+  
+  private Logger log() {
+    return Logger.getLogger(this.getClass());
+  }
 }
 

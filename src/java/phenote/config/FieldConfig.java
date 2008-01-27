@@ -177,6 +177,10 @@ public class FieldConfig {
 //     }
 //     return getOntologyConfigList().get(0);
 //   }
+  
+  public String getPickSourceFieldName() {
+    return fieldBean.getPickSource();
+  }
 
   void addOntologyConfig(OntologyConfig o) {
     if (o == null)  return;

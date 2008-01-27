@@ -263,6 +263,7 @@
             <xs:enumeration value="ID"/>
             <xs:enumeration value="READ_ONLY"/>
             <xs:enumeration value="DATE"/>
+            <xs:enumeration value="PICK"/>
             <xs:enumeration value="free_text"/>
           </xs:restriction>
         </xs:simpleType>
@@ -289,6 +290,11 @@
         </xs:annotation>
       </xs:attribute>
       <xs:attribute name="isVisible" use="required" type="xs:boolean"/>
+      <xs:attribute name="pickSource" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>name of another field which this one uses as pick-list source</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
     </xs:complexType>
   </xs:element>
   <xs:element name="ontology">

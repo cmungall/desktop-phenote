@@ -235,6 +235,15 @@ public class CharFieldValue implements Cloneable {
 
   public boolean isDate() { return getCharField().isDate(); }
   public Date getDate() { return dateValue; }
+  
+  public boolean isPickList() {
+    return this.getCharField().isPickList();
+  }
+  
+  public List<CharFieldValue> getValuePickList() {
+    final CharField sourceField = this.getCharField().getPickListSourceField();
+    return this.getCharacter().getValueList(sourceField);
+  }
 
   public OBOClass getOboClass() { return getTerm(); } // --> getTerm more general
   public OBOClass getTerm() { return oboClassValue; }
@@ -267,6 +276,14 @@ public class CharFieldValue implements Cloneable {
       return;
     }
     charFieldValueList.remove(kid);
+  }
+  
+  public void removeAllKids() {
+    if (charFieldValueList == null) {
+      LOG.error("cant remove kids - list is null"); // ??
+      return;
+    }
+    charFieldValueList.clear();
   }
 
   public CharField getCharField() { return charField; }

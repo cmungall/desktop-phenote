@@ -73,7 +73,8 @@ public abstract class AbstractTemplateChooser extends AbstractGUIComponent imple
     for (TemplateChoiceListener listener : this.templateChoiceListeners) {
       listener.templateChoiceChanged(this);
     }
-    GUIComponent component = ComponentManager.getManager().getActiveComponent(this.getGroup() + ":" + this.getGroup());
+    GUIComponent component = ComponentManager.getManager().getActiveComponent(this.getGroup() + ":main");
+    log().debug("All components are: " + ComponentManager.getManager().getActiveComponentMap().keySet());
     //TODO check for null and class of component
     CharacterTemplateTable template = (CharacterTemplateTable)component;
     template.templateChoiceChanged(this);

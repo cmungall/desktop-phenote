@@ -181,7 +181,7 @@ field =
     ## added term is assumed, otherewise free_text is the default
     ## ID requires a : and no whitespace 
     ## free_text is just for backward compatibility - phase out
-    attribute type { "FREE_TEXT" | "TERM" | "INT" | "ID" | "READ_ONLY" | "DATE"
+    attribute type { "FREE_TEXT" | "TERM" | "INT" | "ID" | "READ_ONLY" | "DATE" | "PICK"
                     | "free_text" },  
     ## should this be another type? will there be anything readonly aside from strings?
     ##attribute read-only { xsd:boolean },
@@ -207,6 +207,8 @@ field =
     ## whether or not to show field in display, eg dateCreated is not
     ## necasarily displayed
     attribute isVisible { xsd:boolean },
+    ## name of another field which this one uses as pick-list source
+    attribute pickSource { xsd:string },
     postcomp?,
     ontology*
   } 
