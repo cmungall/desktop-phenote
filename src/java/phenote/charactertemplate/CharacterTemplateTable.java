@@ -7,6 +7,7 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -340,64 +341,66 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
   @SuppressWarnings("serial")
   private JToolBar createToolBar() {
     final JToolBar toolBar = new JToolBar("Default Toolbar");
-    
-    final JButton addButton = new JButton(new AbstractAction(null, new ImageIcon("images/list-add.png")) {
-      public void actionPerformed(ActionEvent e) {
-        addNewCharacter();
-      }
-    });
-    addButton.setToolTipText("Add");
-    
-    toolBar.add(addButton);
-    
-    this.deleteButton = new JButton(new AbstractAction(null, new ImageIcon("images/list-remove.png")) {
-      public void actionPerformed(ActionEvent e) {
-        deleteSelectedCharacters();
-      }
-    });
-    this.deleteButton.setToolTipText("Delete");
-    toolBar.add(this.deleteButton);
-    
-    this.duplicateButton = new JButton(new AbstractAction(null, new ImageIcon("images/list-duplicate.png")) {
-      public void actionPerformed(ActionEvent e) {
-        duplicateSelectedCharacters();
-      }
-    });
-    this.duplicateButton.setToolTipText("Duplicate");
-    toolBar.add(this.duplicateButton);
-    
-    this.markButton = new JButton(new AbstractAction(null, new ImageIcon("images/square-filled.png")) {
-      public void actionPerformed(ActionEvent e) {
-        markSelectedCharacters();
-      }
-    });
-    this.markButton.setToolTipText("Mark");
-    toolBar.add(this.markButton);
-    
-    this.unmarkButton = new JButton(new AbstractAction(null, new ImageIcon("images/square-empty.png")) {
-      public void actionPerformed(ActionEvent e) {
-        unmarkSelectedCharacters();
-      }
-    });
-    this.unmarkButton.setToolTipText("Unmark");
-    toolBar.add(this.unmarkButton);
-    
-    this.invertSelectionButton = new JButton(new AbstractAction(null, new ImageIcon("images/square-invert.png")) {
-      public void actionPerformed(ActionEvent e) {
-        invertMarkedCharacters();
-      }
-    });
-    this.invertSelectionButton.setToolTipText("Invert marks");
-    toolBar.add(this.invertSelectionButton);
-    
-    this.generateButton = new JButton(new AbstractAction(null, new ImageIcon("images/generate.png")) {
-      public void actionPerformed(ActionEvent e) {
-        generateCharacters();
-      }
-    });
-    this.generateButton.setToolTipText("Generate characters");
-    toolBar.add(this.generateButton);
-    
+    try {
+      final JButton addButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/list-add.png"))) {
+        public void actionPerformed(ActionEvent e) {
+          addNewCharacter();
+        }
+      });
+      addButton.setToolTipText("Add");
+      toolBar.add(addButton);
+
+      this.deleteButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/list-remove.png"))) {
+        public void actionPerformed(ActionEvent e) {
+          deleteSelectedCharacters();
+        }
+      });
+      this.deleteButton.setToolTipText("Delete");
+      toolBar.add(this.deleteButton);
+
+      this.duplicateButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/list-duplicate.png"))) {
+        public void actionPerformed(ActionEvent e) {
+          duplicateSelectedCharacters();
+        }
+      });
+      this.duplicateButton.setToolTipText("Duplicate");
+      toolBar.add(this.duplicateButton);
+
+      this.markButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/square-filled.png"))) {
+        public void actionPerformed(ActionEvent e) {
+          markSelectedCharacters();
+        }
+      });
+      this.markButton.setToolTipText("Mark");
+      toolBar.add(this.markButton);
+
+      this.unmarkButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/square-empty.png"))) {
+        public void actionPerformed(ActionEvent e) {
+          unmarkSelectedCharacters();
+        }
+      });
+      this.unmarkButton.setToolTipText("Unmark");
+      toolBar.add(this.unmarkButton);
+
+      this.invertSelectionButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/square-invert.png"))) {
+        public void actionPerformed(ActionEvent e) {
+          invertMarkedCharacters();
+        }
+      });
+      this.invertSelectionButton.setToolTipText("Invert marks");
+      toolBar.add(this.invertSelectionButton);
+
+      this.generateButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/generate.png"))) {
+        public void actionPerformed(ActionEvent e) {
+          generateCharacters();
+        }
+      });
+      this.generateButton.setToolTipText("Generate characters");
+      toolBar.add(this.generateButton);
+    } catch (FileNotFoundException e) {
+      log().error("Couldn't find toolbar icons", e);
+    }
+
     toolBar.setFloatable(false);
     return toolBar;
   }

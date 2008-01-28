@@ -1,9 +1,16 @@
 package phenote.gui;
 
-import java.awt.GridLayout;
+import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.io.FileNotFoundException;
+
+import javax.swing.AbstractAction;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JToolBar;
 
 import org.apache.log4j.Logger;
 import org.bbop.framework.AbstractGUIComponent;
@@ -12,8 +19,8 @@ import org.bbop.framework.GUIComponent;
 import org.bbop.framework.dock.LayoutAdapter;
 
 import phenote.datamodel.CharacterI;
-import phenote.gui.field.FieldPanel;
 import phenote.gui.field.FieldPanelContainer;
+import phenote.util.FileUtil;
 import ca.odell.glazedlists.swing.EventSelectionModel;
 
 /**
@@ -26,6 +33,8 @@ public class CharacterTable extends AbstractGUIComponent implements CharacterTab
   private static final long serialVersionUID = -3970995454868538116L;
   private CharacterTableController tableController;
   private ComponentLayoutListener focusListener;
+  private JButton duplicateButton;
+  private JButton deleteButton;
 
   public CharacterTable(String group, String id) {
     super(id);
@@ -33,8 +42,10 @@ public class CharacterTable extends AbstractGUIComponent implements CharacterTab
   }
   
   public void init() {
-    this.setLayout(new GridLayout());
-    this.add(this.tableController.getCharacterTablePanel());
+    this.setLayout(new BorderLayout());
+    this.add(this.createToolBar(), BorderLayout.NORTH);
+    this.tableController.removeOldButtons();
+    this.add(this.tableController.getCharacterTablePanel(), BorderLayout.CENTER);
     this.focusListener = new ComponentLayoutListener();
     ComponentManager.getManager().addLayoutListener(this.focusListener);
   }
@@ -95,6 +106,42 @@ public class CharacterTable extends AbstractGUIComponent implements CharacterTab
   
   private FieldPanelContainer getFieldPanelContainer() {
     return FieldPanelContainer.getCurrentFieldPanelContainer();
+  }
+  
+  @SuppressWarnings("serial")
+  private JToolBar createToolBar() {
+    final JToolBar toolBar = new JToolBar("Default Toolbar");
+    
+    try {
+    final JButton addButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/list-add.png"))) {
+      public void actionPerformed(ActionEvent e) {
+        addNewCharacter();
+      }
+    });
+    addButton.setToolTipText("Add");
+    toolBar.add(addButton);
+    
+    this.deleteButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/list-remove.png"))) {
+      public void actionPerformed(ActionEvent e) {
+        deleteSelectedCharacters();
+      }
+    });
+    this.deleteButton.setToolTipText("Delete");
+    toolBar.add(this.deleteButton);
+    
+    this.duplicateButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/list-duplicate.png"))) {
+      public void actionPerformed(ActionEvent e) {
+        duplicateSelectedCharacters();
+      }
+    });
+    this.duplicateButton.setToolTipText("Duplicate");
+    toolBar.add(this.duplicateButton);
+    } catch (FileNotFoundException e) {
+      log().error("Couldn't find toolbar icons", e);
+    }
+    
+    toolBar.setFloatable(false);
+    return toolBar;
   }
   
   private class ComponentLayoutListener extends LayoutAdapter {

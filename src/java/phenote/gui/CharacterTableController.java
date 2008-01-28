@@ -60,8 +60,10 @@ public class CharacterTableController {
 	// private AbstractGUIComponent characterTablePanel; // initialized by swix
 	private JPanel characterTablePanel; // initialized by swix
 	private JTable characterTable; // initialized by swix
+	private JButton addButton; // initialized by swix
 	private JButton duplicateButton; // initialized by swix
 	private JButton deleteButton; // initialized by swix
+	private JButton undoButton; // initialized by swix
 	private JButton commitButton; // initialized by swix
 	private JButton graphButton; // initialized by swix
 	private JPanel filterPanel; // initialized by swix
@@ -217,6 +219,16 @@ public class CharacterTableController {
 	public String getGroup() {
 	  return this.representedGroup;
 	}
+	
+	 /**
+   * This method is temporary and should be removed once we move fully
+   * to Phenote 2.  This method should only be called in Phenote 2; 
+   * the old buttons are left in for compatibility with Phenote 1.
+   */
+  public void removeOldButtons() {
+    this.getCharacterTablePanel().remove(this.buttonPanel);
+    this.getCharacterTablePanel().validate();
+  }
 
 	/** Instantiates interface objects from Swixml file */
 	private void loadPanelLayout() {
