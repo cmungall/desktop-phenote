@@ -97,6 +97,7 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     this.addInitialBlankCharacter();
     this.focusListener = new ComponentLayoutListener();
     ComponentManager.getManager().addLayoutListener(this.focusListener);
+    this.tryLoadDefaultDataFile(CharacterListManager.main().getCurrentDataFile());
   }
   
   @Override

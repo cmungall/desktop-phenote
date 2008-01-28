@@ -35,13 +35,13 @@ import jebl.gui.trees.treeviewer.TreeViewer;
 import org.apache.log4j.Logger;
 import org.swixml.SwingEngine;
 
-import phenote.dataadapter.CharListChangeEvent;
-import phenote.dataadapter.CharListChangeListener;
 import phenote.dataadapter.CharacterListManager;
+import phenote.dataadapter.LoadSaveListener;
+import phenote.dataadapter.LoadSaveManager;
 import phenote.datamodel.CharacterI;
 import phenote.util.FileUtil;
 
-public class TreeChooser extends AbstractTemplateChooser implements CharListChangeListener {
+public class TreeChooser extends AbstractTemplateChooser {
   
   private static final long serialVersionUID = 2683680201895012882L;
   private JFrame window;
@@ -52,9 +52,10 @@ public class TreeChooser extends AbstractTemplateChooser implements CharListChan
   
   public TreeChooser(String id) {
     super(id);
-    CharacterListManager.main().addCharListChangeListener(this);
+    LoadSaveManager.inst().addListener(new FileListener());
     this.setLayout(new GridLayout());
     this.add(this.createComponent());
+    this.tryLoadDefaultDataFile(CharacterListManager.main().getCurrentDataFile());
   }
   
   public void showChooser() {
@@ -100,11 +101,6 @@ public class TreeChooser extends AbstractTemplateChooser implements CharListChan
   public void setTree(Tree tree) {
     this.replaceTaxonUnderscoresWithSpaces(tree);
     this.getTreeViewer().setTree(tree);
-  }
-  
-  public void newCharList(CharListChangeEvent e) {
-    // this is assumed to be coming from the main CharacterListManager
-    this.tryLoadDefaultDataFile();
   }
   
   private Set<String> getSelectedTaxonNames() {
@@ -182,16 +178,11 @@ public class TreeChooser extends AbstractTemplateChooser implements CharListChan
     } 
   }
   
-  private void tryLoadDefaultDataFile() {
-    final File file = CharacterListManager.main().getCurrentDataFile();
-    if (file == null) {
+  private void tryLoadDefaultDataFile(File mainFile) {
+    if (mainFile == null) {
       return;
     }
-    final int dotLocation = file.getName().lastIndexOf(".");
-    final boolean hasExtension = dotLocation > 0;
-    final String baseName = hasExtension ? file.getName().substring(0, dotLocation) : file.getName();
-    final String defaultFileName = baseName + ".tre";
-    File treeFile = new File(file.getParent(), defaultFileName);
+    File treeFile = this.getDefaultDataFile(mainFile);
     if (treeFile.exists()) {
       // the tree file must be in NEXUS format
       try {
@@ -206,6 +197,14 @@ public class TreeChooser extends AbstractTemplateChooser implements CharListChan
         log().error("Could not read tree", e);
       }
     }
+  }
+  
+  private File getDefaultDataFile(File mainFile) {
+    final int dotLocation = mainFile.getName().lastIndexOf(".");
+    final boolean hasExtension = dotLocation > 0;
+    final String baseName = hasExtension ? mainFile.getName().substring(0, dotLocation) : mainFile.getName();
+    final String defaultFileName = baseName + ".tre";
+    return new File(mainFile.getParent(), defaultFileName);
   }
   
   private void replaceTaxonUnderscoresWithSpaces(Tree tree) {
@@ -225,6 +224,17 @@ public class TreeChooser extends AbstractTemplateChooser implements CharListChan
         }
       }
     }
+  }
+  
+  private class FileListener implements LoadSaveListener {
+
+    public void fileLoaded(File f) {
+      tryLoadDefaultDataFile(f);
+    }
+
+    /* tree files are read only - we don't save */
+    public void fileSaved(File f) {}
+    
   }
   
   private static Logger log() {
