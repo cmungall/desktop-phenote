@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOProperty;
 
 /** The Character datamodel is a generic hash of CharField-CharFieldValues
     CharFieldValues are free text or from ontologies
@@ -179,6 +180,14 @@ public class Character extends AbstractCharacter implements CharacterI {
       sb.append(cf.getName()).append(" ").append(charFieldToValue.get(cf)).append(" ");
     }
     return sb.toString();
+  }
+
+  public boolean supportsComparisons() { return false; }
+
+  public void makeComparison(OBOProperty rel, CharacterI relChar) throws CharacterEx {
+    String m = "Character datamodel does not implement comparisons, configure "
+      +"datamodel to OBO Annotations to use comparisons";
+    throw new CharacterEx(m);
   }
 
   private Logger log;

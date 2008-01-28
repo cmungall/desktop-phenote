@@ -1373,6 +1373,7 @@ public class Config {
   public boolean compareStatementEnabled() {
     Comparison c = phenoConfigBean.getComparison();
     if (c == null) return false; // default false?
+    
     return c.getEnableStatementComparison(); // i think defaults to false
   }
   

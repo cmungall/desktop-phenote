@@ -302,4 +302,12 @@ public class AnnotationCharacter extends AbstractCharacter {
     }
     return a;
   }
+
+  public boolean supportsComparisons() { return true; }
+
+  public void makeComparison(OBOProperty relation, CharacterI relatedChar)
+    throws CharacterEx {
+
+  }
+
 }

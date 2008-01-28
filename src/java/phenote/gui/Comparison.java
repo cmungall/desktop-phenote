@@ -19,6 +19,7 @@ import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
+import phenote.datamodel.CharacterEx;
 import phenote.datamodel.Ontology;
 import phenote.config.Config;
 import phenote.gui.field.CharFieldGui;
@@ -109,7 +110,15 @@ class Comparison {
   }
 
   private void commitComparison() throws CharFieldGuiEx {
-    OBOProperty rel = relFieldGui.getCurrentRelation(); // ex
+    OBOProperty rel = relFieldGui.getCurrentRelation(); // ex if not filled in
+    try {
+      char1.makeComparison(rel,char2);
+    } 
+    catch (CharacterEx e) {
+      String m = e.getMessage();
+      JOptionPane.showMessageDialog(dialog,m,"error",JOptionPane.ERROR_MESSAGE);
+      return;
+    }
   }
 
   // CANCEL

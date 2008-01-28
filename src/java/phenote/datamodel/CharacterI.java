@@ -2,6 +2,7 @@ package phenote.datamodel;
 
 import java.util.List;
 import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOProperty;
 
 /** CharacterIs are the building blocks of phenotypes. All the Characters for a 
     genotype make up a Phenotype - at least thats my understanding. 
@@ -59,6 +60,16 @@ public interface CharacterI {
   public CharacterI cloneCharacter();
   public boolean equals(CharacterI c);
   public boolean hasNoContent();
+
+  
+  /** Returns true if charI implementation supports comparisons, eg Character doesnt
+      AnnotChar does */
+  public boolean supportsComparisons();
+
+  /** make comparison statement using relation to relatedChar. throw exception
+      if comparisons are not supported (Character doesnt support) */
+  public void makeComparison(OBOProperty relation,CharacterI relatedChar)
+    throws CharacterEx;
 
   // public void setDBString(String? Object?)??
   // public String getDBString()

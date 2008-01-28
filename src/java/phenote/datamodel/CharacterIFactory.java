@@ -49,6 +49,10 @@ public class CharacterIFactory {
     return Config.inst().getCharacterMode() == CharacterMode.Mode.OBO_ANNOTATION;
   }
 
+  public static boolean supportsComparisons() {
+    return makeChar().supportsComparisons();
+  }
+
 }
 
 

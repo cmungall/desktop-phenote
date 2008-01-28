@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOProperty;
 
 public abstract class AbstractCharacter implements CharacterI {
 
@@ -140,6 +141,11 @@ public abstract class AbstractCharacter implements CharacterI {
       return false;
     return c1.equals(c2);
   }
+  
+  /** throws CharacterEx if not implemented (Character doesnt implement)
+      OBOAnnotation implements */
+  public abstract void makeComparison(OBOProperty relation, CharacterI relatedChar)
+    throws CharacterEx;
 
   /**
    * According to the CharacterI documentation, the methods below are garbage
