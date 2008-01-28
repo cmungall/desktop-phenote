@@ -235,15 +235,14 @@ public class WormAdapter implements QueryableDataAdapterI {
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_percent"; tag_name = "Penetrance Remark"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "app_range"; tag_name = "Penetrance Range Start"; tag_value = chr.getValueString(tag_name);
+        postgres_table = "app_range_start"; tag_name = "Penetrance Range Start"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-// CREATE A TABLE FOR THIS
-//        postgres_table = "app_range"; tag_name = "Penetrance Range End"; tag_value = chr.getValueString(tag_name);
-//        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "app_quantity_remark"; tag_name = "Quantity Remark"; tag_value = chr.getValueString(tag_name);
+        postgres_table = "app_range_end"; tag_name = "Penetrance Range End"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "app_quantity"; tag_name = "Quantity"; tag_value = chr.getValueString(tag_name);
-        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+//        postgres_table = "app_quantity_remark"; tag_name = "Quantity Remark"; tag_value = chr.getValueString(tag_name);
+//        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);	// not for phenote Karen 2008 01 28
+//        postgres_table = "app_quantity"; tag_name = "Quantity"; tag_value = chr.getValueString(tag_name);
+//        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);	// not for phenote Karen 2008 01 28
         postgres_table = "app_heat_sens"; tag_name = "Heat Sensitive"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_heat_degree"; tag_name = "Heat Sensitive Degree"; tag_value = chr.getValueString(tag_name);
@@ -671,19 +670,19 @@ public class WormAdapter implements QueryableDataAdapterI {
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Penetrance Remark",postgres_value);				// assign the queried value
 //System.out.println("set PenetranceRemark to "+postgres_value+" END");
-      postgres_table = "app_range"; postgres_value = "No postgres value assigned";
+      postgres_table = "app_range_start"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Penetrance Range Start",postgres_value);				// assign the queried value
-      postgres_table = "app_quantity"; postgres_value = "No postgres value assigned";
+      postgres_table = "app_range_end"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Penetrance Range End",postgres_value);				// assign the queried value
-      postgres_table = "app_quantity"; postgres_value = "No postgres value assigned";
-      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-      c1.setValue("Quantity",postgres_value);					// assign the queried value
-//System.out.println("set Quantity to "+postgres_value+" END");
-      postgres_table = "app_quantity_remark"; postgres_value = "No postgres value assigned";
-      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-      c1.setValue("Quantity Remark",postgres_value);				// assign the queried value
+//      postgres_table = "app_quantity"; postgres_value = "No postgres value assigned";	// not for phenote, Karen 2008 01 28
+//      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+//      c1.setValue("Quantity",postgres_value);					// assign the queried value
+////System.out.println("set Quantity to "+postgres_value+" END");
+//      postgres_table = "app_quantity_remark"; postgres_value = "No postgres value assigned";	// not for phenote, Karen 2008 01 28
+//      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+//      c1.setValue("Quantity Remark",postgres_value);				// assign the queried value
       postgres_table = "app_heat_sens"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Heat Sensitive",postgres_value);				// assign the queried value
