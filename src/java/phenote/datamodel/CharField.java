@@ -148,7 +148,10 @@ public class CharField {
   }
   
   public boolean isPickList() {
-    return type == Type.PICK;
+    if (fieldXmlBean == null) return false;
+    if (fieldXmlBean.xgetIsPickList() == null) return false;
+    return fieldXmlBean.getIsPickList();
+    //return type == Type.PICK;
   }
   
   public CharField getPickListSourceField() {
@@ -276,7 +279,7 @@ public class CharField {
     if (valueString == null || valueString.trim().equals(""))
       return CharFieldValue.emptyValue(c,this);
 
-    if (isList() && doList) {
+    if ((isList() && doList) || (isPickList() && doList)){
       return parseList(valueString,danglerName,c);
     }
 
@@ -359,6 +362,8 @@ public class CharField {
       String dngl =
         (kidDanglerNames!=null && i < kidDanglerNames.length) ? kidDanglerNames[i] : null;
       CharFieldValue kid = makeValue(c,kids[i],dngl,doList); //tws Ex
+      // if it's a pick list, make sure kids act as single values
+      kid.setOverridePickList(true);
       listVal.addKid(kid);
     }
     return listVal;

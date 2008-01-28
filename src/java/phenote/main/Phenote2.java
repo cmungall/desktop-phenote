@@ -24,6 +24,6 @@ public class Phenote2 {
   }
 
     public static String getAppName() {
-	return "Phenote 2";
+	return "Phenote";
     }
 }

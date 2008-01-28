@@ -204,6 +204,7 @@ field =
     attribute sort-by { "NAME" | "ID" },
     ## if true then field can have multiple values, use list gui
     attribute isList { xsd:boolean },
+    attribute isPickList { xsd:boolean },
     ## whether or not to show field in display, eg dateCreated is not
     ## necasarily displayed
     attribute isVisible { xsd:boolean },

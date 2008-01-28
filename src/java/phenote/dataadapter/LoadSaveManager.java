@@ -1,6 +1,7 @@
 package phenote.dataadapter;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFileChooser;
@@ -16,6 +17,7 @@ public class LoadSaveManager {
   private static LoadSaveManager singleton;
   private JFileChooser fileChooser;
   private CharacterListManager characterListManager;
+  private List<LoadSaveListener> listeners = new ArrayList<LoadSaveListener>();
   
   private LoadSaveManager() {
     this(CharacterListManager.inst());
@@ -91,6 +93,9 @@ public class LoadSaveManager {
       this.characterListManager.setCurrentDataFile(f);
       this.characterListManager.setCharacterList(this,charList);
     }
+    for (LoadSaveListener listener : this.listeners) {
+      listener.fileLoaded(f);
+    }
   }
   
   /**Saves the document's characters to a file, prompting the user to choose a file and data adapter.*/
@@ -118,12 +123,22 @@ public class LoadSaveManager {
   public void saveData(File f, DataAdapterI adapter) {
     CharacterListI charList = this.characterListManager.getCharacterList();
     adapter.commit(charList, f);
+    for (LoadSaveListener listener : this.listeners) {
+      listener.fileSaved(f);
+    }
   }
   
   public void exportData() {
     saveData();
   }
-
+  
+  public void addListener(LoadSaveListener listener) {
+    this.listeners.add(listener);
+  }
+  
+  public void removeListener(LoadSaveListener listener) {
+    this.listeners.remove(listener);
+  }
   
   private File runOpenDialog() {
     fileChooser.setAcceptAllFileFilterUsed(true);

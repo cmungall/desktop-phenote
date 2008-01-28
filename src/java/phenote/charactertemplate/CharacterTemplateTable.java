@@ -34,6 +34,7 @@ import phenote.config.Config;
 import phenote.dataadapter.CharListChangeEvent;
 import phenote.dataadapter.CharListChangeListener;
 import phenote.dataadapter.CharacterListManager;
+import phenote.dataadapter.LoadSaveListener;
 import phenote.dataadapter.LoadSaveManager;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
@@ -43,7 +44,6 @@ import phenote.edit.EditManager;
 import phenote.gui.CharacterTableSource;
 import phenote.gui.TableColumnPrefsSaver;
 import phenote.gui.field.CharFieldMatcherEditor;
-import phenote.gui.field.FieldPanel;
 import phenote.gui.field.FieldPanelContainer;
 import phenote.util.EverythingEqualComparator;
 import phenote.util.FileUtil;
@@ -92,6 +92,7 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     this.getEditManager().addCharChangeListener(new CharacterChangeListener());
     CharacterListManager.getCharListMan(this.group).addCharListChangeListener(new CharacterListChangeListener());
     CharacterListManager.main().addCharListChangeListener(new MainCharacterListChangeListener());
+    LoadSaveManager.inst().addListener(new FileListener());
     this.initializeInterface();
     this.addInitialBlankCharacter();
     this.focusListener = new ComponentLayoutListener();
@@ -110,6 +111,10 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
   
   public void exportCharacters() {
     this.getLoadSaveManager().saveData();
+  }
+  
+  public void saveCharacters(File f) {
+    this.getLoadSaveManager().saveData(f);
   }
   
   public void addNewCharacter() {
@@ -292,20 +297,24 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     }
   }
   
-  private void tryLoadDefaultDataFile() {
-    final File file = CharacterListManager.main().getCurrentDataFile();
+  private void tryLoadDefaultDataFile(File mainFile) {
+    final File file = (mainFile == null) ? CharacterListManager.main().getCurrentDataFile() : mainFile;
     if (file == null) {
       return;
     }
-    final int dotLocation = file.getName().lastIndexOf(".");
-    final boolean hasExtension = dotLocation > 0;
-    final String extension = hasExtension ? file.getName().substring(dotLocation) : "";
-    final String baseName = hasExtension ? file.getName().substring(0, dotLocation) : file.getName();
-    final String defaultFileName = baseName + "-" + this.getGroup() +  extension;
-    File templatesFile = new File(file.getParent(), defaultFileName);
+    File templatesFile = this.getDefaultDataFile(mainFile);
     if (templatesFile.exists()) {
       this.getLoadSaveManager().loadData(templatesFile);
     }
+  }
+  
+  private File getDefaultDataFile(File mainFile) {
+    final int dotLocation = mainFile.getName().lastIndexOf(".");
+    final boolean hasExtension = dotLocation > 0;
+    final String extension = hasExtension ? mainFile.getName().substring(dotLocation) : "";
+    final String baseName = hasExtension ? mainFile.getName().substring(0, dotLocation) : mainFile.getName();
+    final String defaultFileName = baseName + "-" + this.getGroup() +  extension;
+    return new File(mainFile.getParent(), defaultFileName);
   }
   
   private CharacterListManager getCharacterListManager() {
@@ -327,6 +336,7 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     return FieldPanelContainer.getCurrentFieldPanelContainer();
   }
   
+  @SuppressWarnings("serial")
   private JToolBar createToolBar() {
     final JToolBar toolBar = new JToolBar("Default Toolbar");
     
@@ -421,7 +431,8 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
   private class MainCharacterListChangeListener implements CharListChangeListener {
     public void newCharList(CharListChangeEvent e) {
    // this is assumed to be coming from the main CharacterListManager
-     CharacterTemplateTable.this.tryLoadDefaultDataFile();
+     //CharacterTemplateTable.this.tryLoadDefaultDataFile();
+      //TODO get rid of this listener
     }
   }
   
@@ -440,6 +451,18 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
       }
     }
 
+  }
+  
+  private class FileListener implements LoadSaveListener {
+
+    public void fileLoaded(File f) {
+      tryLoadDefaultDataFile(f);
+    }
+
+    public void fileSaved(File f) {
+      saveCharacters(getDefaultDataFile(f));
+    }
+    
   }
 
 }

@@ -36,6 +36,7 @@ public class CharFieldValue implements Cloneable {
   // private CharField???
   private CharacterI character;
   private boolean isList = false;
+  private boolean overridePickList = false;
   //private boolean isDifferentia; // ??
 
   // phase out
@@ -111,6 +112,8 @@ public class CharFieldValue implements Cloneable {
   /** Parent list returns true, kid leaves false, single term returns false */
   private boolean isList() { return isList; }
   public void setIsList(boolean isList) { this.isList = isList; }
+  public void setOverridePickList(boolean flag) { this.overridePickList = flag; }
+  
   // initialize if null?
   private List<CharFieldValue> getList() { return charFieldValueList; }
 
@@ -147,6 +150,15 @@ public class CharFieldValue implements Cloneable {
     }
     catch (CloneNotSupportedException x) { return null; }
   }
+  
+  public CharFieldValue cloneCharFieldValue(CharacterI newCharacter, CharField newField) {
+    LOG.debug("Cloning charfield value: " + this.toString());
+    final CharFieldValue newValue = this.cloneCharFieldValue();
+    if (newValue == null) return null;
+    if (newCharacter != null) newValue.character = newCharacter;
+    if (newField != null) newValue.charField = newField;
+    return newValue;
+  }
 
   // hmmmmm.... needed if post comp done inframe
 //   public CharFieldValue(OBOClass o,CharacterI c,CharFieldEnum e, boolean isDifferentia) {
@@ -168,7 +180,7 @@ public class CharFieldValue implements Cloneable {
   public CharacterI getCharacter() { return character; }
 
   public boolean isEmpty() {
-    if (isList) {
+    if (isList || isPickList()) {
       if (charFieldValueList == null || charFieldValueList.isEmpty())
         return true;
       return charFieldValueList.get(0).isEmpty();
@@ -188,7 +200,7 @@ public class CharFieldValue implements Cloneable {
   }
 
   public String getValueAsString() {
-    if (isList()) { // parent true, kids false - stops recursion
+    if (isList() || isPickList()) { // parent true, kids false - stops recursion
       String s="";
       for (CharFieldValue kid : getCharFieldValueList())
         s += '"'+kid.getValueAsString()+'"' + CharField.LIST_DELIM;
@@ -237,7 +249,11 @@ public class CharFieldValue implements Cloneable {
   public Date getDate() { return dateValue; }
   
   public boolean isPickList() {
-    return this.getCharField().isPickList();
+    if (this.overridePickList) {
+      return false;
+    } else {
+      return this.getCharField().isPickList(); 
+    }
   }
   
   public List<CharFieldValue> getValuePickList() {

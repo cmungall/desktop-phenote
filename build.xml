@@ -35,7 +35,7 @@
 	<property name="dist" value="dist"/>
 	<property name="build-lib" value="build-lib"/>
 	
-	<property name="main-class" value="phenote.main.Phenote"/>
+	<property name="main-class" value="phenote.main.Phenote2"/>
 	<tstamp>
 		<format property="NOW" pattern="yyyy-MM-dd_HH:mm:ss"/>
 	</tstamp>

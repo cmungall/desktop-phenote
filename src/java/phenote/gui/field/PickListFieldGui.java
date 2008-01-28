@@ -56,7 +56,6 @@ public class PickListFieldGui extends CharFieldGui {
 
   @Override
   protected void setCharFieldValue(CharFieldValue value) {
-    log().debug("Set charfieldvalue");
     this.currentValue = value;
     // TODO Auto-generated method stub
     final List<CharFieldValue> values = value.getCharFieldValueList();
@@ -87,10 +86,13 @@ public class PickListFieldGui extends CharFieldGui {
   
   private void updateModel(List<CharFieldValue> chosen) {
     if (this.getSelectedChars().size() != 1) return;
-    final CharFieldValue newValue = this.currentValue.cloneCharFieldValue();
+    final CharFieldValue newValue = this.currentValue.cloneCharFieldValue(null, this.getCharField());
     newValue.removeAllKids();
     for (CharFieldValue item : chosen) {
-      newValue.addKid(item);
+      final CharFieldValue clonedValue = item.cloneCharFieldValue(null, this.getCharField());
+      clonedValue.setIsList(false);
+      clonedValue.setOverridePickList(true);
+      newValue.addKid(clonedValue);
     }
     UpdateTransaction ut = new UpdateTransaction(this.currentValue, newValue);
     this.getEditManager().updateModel(this, ut);
