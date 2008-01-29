@@ -259,6 +259,8 @@ public class WormAdapter implements QueryableDataAdapterI {
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_pat_effect"; tag_name = "Paternal Effect"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_pat_effect"; tag_name = "Haplo"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_genotype"; tag_name = "Genotype"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_strain"; tag_name = "Strain"; tag_value = chr.getValueString(tag_name);
@@ -707,6 +709,9 @@ public class WormAdapter implements QueryableDataAdapterI {
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Paternal Effect",postgres_value);				// assign the queried value
 //System.out.println("set PatEffect to "+postgres_value+" END");
+      postgres_table = "app_haplo"; postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+      c1.setValue("Haplo",postgres_value);				// assign the queried value
       postgres_table = "app_genotype"; postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Genotype",postgres_value);				// assign the queried value
@@ -730,10 +735,10 @@ public class WormAdapter implements QueryableDataAdapterI {
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Person",postgres_value);				// assign the queried value
 //System.out.println("set Person to "+postgres_value+" END");
-      postgres_table = "app_phenotype"; postgres_value = "No postgres value assigned";		// NBP is phenotype, not intx_desc
+      postgres_table = "app_nbp"; postgres_value = "No postgres value assigned";		// NBP is nbp, not intx_desc
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("NBP",postgres_value);					// assign the queried value
-      postgres_table = "app_phenotype"; postgres_value = "No postgres value assigned";		
+      postgres_table = "app_nbp"; postgres_value = "No postgres value assigned";		
       postgres_value = queryPostgresCharacterDate(s, postgres_table, postgres_value, joinkey);
       c1.setValue("NBP Date",postgres_value);					// assign the queried value
 
@@ -778,9 +783,9 @@ public class WormAdapter implements QueryableDataAdapterI {
     } else if (field.equals(pubString)) {						// if querying the publication, get paper data
       try { rs = s.executeQuery("SELECT * FROM app_paper WHERE app_paper ~ '"+query+"' ORDER BY joinkey"); }	// find the allele that matches the queried allele
       catch (SQLException se) { System.out.println("Exception while executing app_paper pubString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
-    } else if (field.equals(nbpString)) {						// if querying the app_phenotype NBP Date, get matching data
-      try { rs = s.executeQuery("SELECT * FROM app_phenotype WHERE app_timestamp ~ '"+query+"' ORDER BY joinkey;"); }	// get the alleles from a paper
-      catch (SQLException se) { System.out.println("Exception while executing app_phenotype nbpString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+    } else if (field.equals(nbpString)) {						// if querying the app_nbp NBP Date, get matching data
+      try { rs = s.executeQuery("SELECT * FROM app_nbp WHERE app_timestamp ~ '"+query+"' ORDER BY joinkey;"); }	// get the alleles from a paper
+      catch (SQLException se) { System.out.println("Exception while executing app_nbp nbpString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
     } else {
       // if query has failed...
       throw new DataAdapterEx("Worm query of "+query+" of field "+field+" failed");
