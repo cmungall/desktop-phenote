@@ -236,8 +236,14 @@ public class WormAdapter implements QueryableDataAdapterI {
         postgres_table = "app_percent"; tag_name = "Penetrance Remark"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_range_start"; tag_name = "Penetrance Range Start"; tag_value = chr.getValueString(tag_name);
+        String range_start = tag_value;
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_range_end"; tag_name = "Penetrance Range End"; tag_value = chr.getValueString(tag_name);
+System.out.println("start : "+range_start+" end: "+tag_value+" end");
+        if ( ( (tag_value == "") || (tag_value == null) ) && (range_start != null)) { tag_value = range_start; 
+    String m = "Penetrance range for ID : "+joinkey+" has no end value, using start value : "+range_start;
+    JOptionPane.showMessageDialog(null,m,"Worm stub",JOptionPane.INFORMATION_MESSAGE);
+}
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
 //        postgres_table = "app_quantity_remark"; tag_name = "Quantity Remark"; tag_value = chr.getValueString(tag_name);
 //        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);	// not for phenote Karen 2008 01 28
