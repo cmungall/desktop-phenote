@@ -14,6 +14,7 @@ import org.obo.datamodel.LinkedObject;
 import org.obo.datamodel.Namespace;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
+import org.obo.datamodel.impl.OBORestrictionImpl;
 import org.obo.util.TermUtil;
 
 /** CharacterI for OBOAnnotations */
@@ -23,6 +24,7 @@ public class AnnotationCharacter extends AbstractCharacter {
 
 	protected static int idgen = 0;
 
+  /** underlying obo annotation - cant be null actually */
   protected Annotation annotation;
   protected AnnotationMappingDriver driver;
   private CharFieldValue objectGenus;
@@ -303,11 +305,23 @@ public class AnnotationCharacter extends AbstractCharacter {
     return a;
   }
 
+
+
   public boolean supportsComparisons() { return true; }
 
+  /** Make comparison relationship between 2 annotations */
   public void makeComparison(OBOProperty relation, CharacterI relatedChar)
     throws CharacterEx {
+    // this actually shouldnt happen but who knows
+    if (!hasOboAnnotation() ||  !relatedChar.hasOboAnnotation())
+      throw new CharacterEx("Character doesnt have Annotation object");
 
+    Annotation relAnn = relatedChar.getOboAnnotation();
+    // thats for terms not instances
+    //OBORestrictionImpl res = new OBORestrictionImpl(annotation,relation,relAnn);
+    //InstancePropertyValue
+    //annotation.addPropertyValue(res,relAnn); 
+    //annotation.addParent(res);
   }
 
 }

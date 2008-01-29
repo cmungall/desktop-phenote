@@ -281,11 +281,13 @@ public class CharacterTableController {
       //buttonPanel.remove(ontolMakerButton); // dont need
       ontolMakerSpacer.setVisible(false);
 		}
+
+    // Take out comparison buttons if not configged for them
     if (!Config.inst().compareStatementEnabled() 
         || !CharacterIFactory.supportsComparisons()) {
 			compareButton.setVisible(false);
       compareSpacer.setVisible(false);
-      // if configured for comparable, but dont have comparable datamodel error
+      // if configured for comparable, but dont have comparable datamodel - error
       if (Config.inst().compareStatementEnabled()) {
         String m="Error: Comparisons are configged, but configged datamodel does not "
           +"support comparisons.\nDisabling.\nTry configging OBO_ANNOTATION mode";

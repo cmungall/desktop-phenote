@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import org.obo.annotation.datamodel.Annotation;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
 
@@ -141,6 +142,13 @@ public abstract class AbstractCharacter implements CharacterI {
       return false;
     return c1.equals(c2);
   }
+
+  /** Whether or not datamodel has obo annotations, returns getOboAnnotation !=
+      null, which is only true for AnnotationCharacter */
+  public boolean hasOboAnnotation() { return getOboAnnotation() != null; }
+
+  /** Return null by default - AnnotationCharacter overrides */
+  public Annotation getOboAnnotation() { return null; }
   
   /** throws CharacterEx if not implemented (Character doesnt implement)
       OBOAnnotation implements */

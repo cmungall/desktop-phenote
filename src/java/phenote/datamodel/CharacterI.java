@@ -1,6 +1,7 @@
 package phenote.datamodel;
 
 import java.util.List;
+import org.obo.annotation.datamodel.Annotation;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
 
@@ -61,6 +62,12 @@ public interface CharacterI {
   public boolean equals(CharacterI c);
   public boolean hasNoContent();
 
+  /** Returns true if in fact charI has OboAnnotation under the hood, and thus
+      getOboAnnotation will have non null return. Char returns false */
+  public boolean hasOboAnnotation();
+
+  /** if hasOboAnnotation() this returns non null Annotation from obo model */
+  public Annotation getOboAnnotation();
   
   /** Returns true if charI implementation supports comparisons, eg Character doesnt
       AnnotChar does */
