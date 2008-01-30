@@ -164,6 +164,12 @@ public class CharacterTableController {
 	 * to call this method
 	 */
 	public void commitCharacters() {
+
+    // ConstraintStatus cs = ConstraintManager.inst().checkCommitConstraints();
+    // if (cs.hasFailed()) { 
+    // JOptionPane.message(cs.getErrorMessage())
+    // return; }
+
 		if (Config.inst().hasQueryableDataAdapter()) {
 			Config.inst().getQueryableDataAdapter().commit(
 					this.getCharacterListManager().getCharacterList());
