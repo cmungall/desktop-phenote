@@ -25,6 +25,8 @@ import phenote.config.Config;
 import phenote.dataadapter.CharListChangeEvent;
 import phenote.dataadapter.CharListChangeListener;
 import phenote.dataadapter.CharacterListManager;
+import phenote.dataadapter.ConstraintManager;
+import phenote.dataadapter.ConstraintStatus;
 import phenote.dataadapter.LoadSaveManager;
 import phenote.dataadapter.OntologyMakerI;
 import phenote.datamodel.CharField;
@@ -165,10 +167,12 @@ public class CharacterTableController {
 	 */
 	public void commitCharacters() {
 
-    // ConstraintStatus cs = ConstraintManager.inst().checkCommitConstraints();
-    // if (cs.hasFailed()) { 
-    // JOptionPane.message(cs.getErrorMessage())
-    // return; }
+    ConstraintStatus cs = ConstraintManager.inst().checkCommitConstraints();
+    if (cs.constraintFailed()) { 
+      JOptionPane.showMessageDialog(null,cs.getMessage(),"Commit failed",
+                                    JOptionPane.ERROR_MESSAGE);
+      return;
+    }
 
 		if (Config.inst().hasQueryableDataAdapter()) {
 			Config.inst().getQueryableDataAdapter().commit(
