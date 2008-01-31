@@ -27,6 +27,10 @@ public class TemplateChooserFactory extends AbstractComponentFactory<TemplateCho
   public String getID() {
     return this.group + "-chooser";
   }
+  
+  public boolean isSingleton() {
+    return true;
+  }
 
   @Override
   public TemplateChooser doCreateComponent(String id) {

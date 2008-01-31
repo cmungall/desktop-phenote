@@ -198,6 +198,10 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		public String getID() {
 			return "phenote-editor";
 		}
+		
+		public boolean isSingleton() {
+      return true;
+    }
 
 		@Override
 		public FieldPanelContainer doCreateComponent(String id) {
