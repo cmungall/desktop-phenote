@@ -52,7 +52,7 @@ public class WormConstraint implements Constraint {
       return new ConstraintStatus(Status.WARNING,message);
     
     else
-      return ConstraintStatus.OK_STATUS;
+      return ConstraintStatus.makeOK();
 
   }
 

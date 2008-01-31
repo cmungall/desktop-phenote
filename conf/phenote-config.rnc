@@ -25,7 +25,8 @@ start =
     character-mode,
     ontologyLoading,
     field-panel-tabs,
-    comparison
+    comparison,
+    constraint-list
   }
 
 ## specify how the master config interacts with local/cached config
@@ -183,6 +184,8 @@ field =
     ## free_text is just for backward compatibility - phase out
     attribute type { "FREE_TEXT" | "TERM" | "INT" | "ID" | "READ_ONLY" | "DATE" | "PICK"
                     | "free_text" },  
+    ## if field is required, then commit will fail if null at commit time (null constraint)
+    attribute isRequired { xsd:boolean },
     ## should this be another type? will there be anything readonly aside from strings?
     ##attribute read-only { xsd:boolean },
     ## file is for single ontology - rename ontology_file?
@@ -280,3 +283,10 @@ postcomp =
     ontology*
   }
 
+## a list of constraints to impose at edit or commit time
+constraint-list = element constraint-list { constraint }
+
+## a constraint is checked at edit or compile time and throws warnings & failures
+## constraints are encoded in java classes but are then enlisted here - so the class
+## attribute is the actual class name, like "phenote.dataadapter.worm.WormConstraint"
+constraint = element constraint { attribute class { xsd:string } }

@@ -19,7 +19,14 @@ public class ConstraintStatus {
   public static enum Status { OK, WARNING, FAILURE };
   
 
-  public static ConstraintStatus OK_STATUS = new ConstraintStatus(Status.OK);
+  // causes endless loops - woops
+  //public static ConstraintStatus OK_STATUS = new ConstraintStatus(Status.OK);
+
+  public static ConstraintStatus makeOK() {
+    return new ConstraintStatus(Status.OK);
+  }
+  /** list & OK same thing really - for clarity */
+  public static ConstraintStatus makeList() { return makeOK(); }
 
   public ConstraintStatus(Status status,String message) {
     this(status);
@@ -49,8 +56,8 @@ public class ConstraintStatus {
     if (!hasKids())
       return this.status == status;
     else {
-      for (ConstraintStatus cs : kids) {
-        if (recursiveCheckForStatus(status)) return true;
+      for (ConstraintStatus kid : kids) {
+        if (kid.recursiveCheckForStatus(status)) return true;
       }
       return this.status == status; // ? self
     }

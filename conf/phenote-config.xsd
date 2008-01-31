@@ -21,6 +21,7 @@
         <xs:element ref="x:ontologyLoading"/>
         <xs:element ref="x:field-panel-tabs"/>
         <xs:element ref="x:comparison"/>
+        <xs:element ref="x:constraint-list"/>
       </xs:sequence>
       <xs:attribute name="version" use="required" type="xs:string"/>
       <xs:attribute name="description" use="required" type="xs:string"/>
@@ -268,6 +269,11 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="isRequired" use="required" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>if field is required, then commit will fail if null at commit time (null constraint)</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
       <xs:attribute name="tab" use="required" type="xs:string"/>
       <xs:attribute name="file" use="required" type="xs:string"/>
       <xs:attribute name="filter-out" use="required" type="xs:string"/>
@@ -379,6 +385,17 @@
         </xs:element>
       </xs:sequence>
       <xs:attribute name="relationship-ontology" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="constraint-list" type="x:constraint"/>
+  <xs:complexType name="constraint">
+    <xs:sequence>
+      <xs:element ref="x:constraint"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="constraint">
+    <xs:complexType>
+      <xs:attribute name="class" use="required" type="xs:string"/>
     </xs:complexType>
   </xs:element>
 </xs:schema>

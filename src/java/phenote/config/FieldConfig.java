@@ -5,6 +5,8 @@ import java.util.List;
 
 import phenote.config.xml.FieldDocument.Field;
 import phenote.config.xml.OntologyDocument.Ontology;
+import phenote.dataadapter.ConstraintManager;
+import phenote.dataadapter.RequiredFieldConstraint;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 
@@ -71,6 +73,9 @@ public class FieldConfig {
         addOntologyConfig(new OntologyConfig(ontBean,this)); // label -> default name
       }
     }
+
+    // REQUIRED CONSTRAINT - if required then make RequiredConstraint
+    makeRequiredConstraint();
   }
 
   // for ConfigGui
@@ -105,6 +110,20 @@ public class FieldConfig {
   } 
 
   private void initFieldBean() { getFieldBean(); }
+
+  /** if required then make RequiredConstraint */
+  private void makeRequiredConstraint() {
+    if (!isRequired()) return; // its not required do nothing
+    RequiredFieldConstraint con = new RequiredFieldConstraint(getCharField());
+    ConstraintManager.inst().addConstraint(con);
+  }
+
+  /** whether field is required for commit, default false, from config bean */
+  private boolean isRequired() {
+    if (getFieldBean().xgetIsRequired() == null) return false; //default
+    return getFieldBean().getIsRequired();
+  }
+
 
   // --> getName?
   public String getLabel() { return fieldBean.getName(); } 
@@ -352,20 +371,3 @@ public class FieldConfig {
 
 }
 
-  // this should come for free with new bean datamodel
-  /** create xml bean and add it to phenCfg for writeback */
-//   void write(PhenoteConfiguration phenCfg) {
-//     Field f = phenCfg.addNewField();
-//     f.setName(getLabel());
-//     f.setSyntaxAbbrev(getSyntaxAbbrev());
-//     f.setEnable(isEnabled());
-//     // f.setType(getType()); // do we need this - no - maybe in future?
-//     // new way is to just write out with other ontol configs - delete this
-// //     if (isPostComp()) getPostCompRelOntCfg().writePostComp(f);
-//     // everything else is in ontology config
-//     // change here - writing out ontology element even for single ontology - phasing
-//     // out shoving ontology in field attribs
-//     // this also will have post comp rel - new way
-//     for (OntologyConfig oc : getOntologyConfigList())
-//       oc.writeOntology(f);
-//   }
