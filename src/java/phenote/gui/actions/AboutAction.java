@@ -22,9 +22,9 @@ public class AboutAction extends AbstractAction {
 
 
 	public AboutAction() {
-		super("About");
+		super("About Phenote");
 		putValue(SHORT_DESCRIPTION, "About Phenote"); //tooltip text
-		putValue(NAME, "About");
+		putValue(NAME, "About Phenote");
 		putValue(MNEMONIC_KEY, new Integer(KeyEvent.VK_A));
 		setEnabled(true);
 	}

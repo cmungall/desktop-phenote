@@ -112,17 +112,28 @@ public class LoadSaveManager {
     }
   }
   
+  /**Saves the document's characters to the file it was loaded from, or prompting the user to choose a file and data adapter if there is no current file.*/
+  public void saveData(boolean useCurrentFile) {
+    if (useCurrentFile && (this.characterListManager.getCurrentDataFile() != null)) {
+      this.saveData(this.characterListManager.getCurrentDataFile());
+    } else {
+      // there isn't a current file or we should choose a new one
+      this.saveData();
+    }
+    
+  }
+  
   /**Saves the document's characters to the given file, using the default data adapter for the file's extension.*/
   public void saveData(File f) {
     DataAdapterI adapter = getDataAdapterForFilename(f.getName());
     saveData(f, adapter);
-//    this.characterListManager.setCurrentDataFile(f); //do i need to do this?
   }
   
   /**Saves the document's characters to the given file using the given data adapter.*/
   public void saveData(File f, DataAdapterI adapter) {
     CharacterListI charList = this.characterListManager.getCharacterList();
     adapter.commit(charList, f);
+    this.characterListManager.setCurrentDataFile(f);
     for (LoadSaveListener listener : this.listeners) {
       listener.fileSaved(f);
     }

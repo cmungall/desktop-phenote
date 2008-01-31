@@ -32,7 +32,6 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import org.oboedit.gui.Preferences;
 
 import phenote.charactertemplate.CharacterTemplateController;
@@ -54,7 +53,6 @@ import phenote.gui.CharacterTableController;
 import phenote.gui.GridBagUtil;
 import phenote.gui.LoadingScreen;
 import phenote.gui.MenuManager;
-import phenote.gui.OntologyUpdate;
 import phenote.gui.SearchParams;
 import phenote.gui.SelectionHistory;
 import phenote.gui.ShrimpDag;
@@ -65,7 +63,6 @@ import phenote.gui.field.FieldPanel;
 import phenote.gui.selection.SelectionManager;
 import phenote.servlet.PhenoteWebConfiguration;
 import phenote.util.FileUtil;
-import phenote.gui.OntologyUpdate;
 
 public class Phenote {
 
@@ -616,6 +613,10 @@ public class Phenote {
 
   public TermInfo2 getTermInfo() {
   	return termInfo;
+  }
+  
+  public static boolean isRunningOnMac() {
+    return (System.getProperty("mrj.version") != null);
   }
 
 }

@@ -3,15 +3,12 @@ package phenote.gui.menu;
 
 import javax.swing.JMenuItem;
 
-import phenote.gui.actions.TermRequestAction;
-import phenote.gui.actions.HelpAction;
-import phenote.gui.actions.AboutAction;
-
-//import org.bbop.framework.HelpMenu;
-//import org.bbop.framework.GUIManager;
-//import org.bbop.swing.AbstractDynamicMenuItem;
-import org.bbop.swing.DynamicActionMenuItem;
 import org.bbop.swing.DynamicMenu;
+
+import phenote.gui.actions.AboutAction;
+import phenote.gui.actions.HelpAction;
+import phenote.gui.actions.TermRequestAction;
+import phenote.main.Phenote;
 
 
 
@@ -38,13 +35,17 @@ public class PhenoteHelpMenu extends DynamicMenu {
 
   private void init() {
 
-    help = new DynamicActionMenuItem(new HelpAction());
+    help = new JMenuItem(new HelpAction());
     add(help); 
 
-    JMenuItem about = new DynamicActionMenuItem(new AboutAction());
-    add(about);
-
-    JMenuItem request = new DynamicActionMenuItem(new TermRequestAction());
+    if (!Phenote.isRunningOnMac()) {
+      // we don't want to add About to the Help menu on Mac
+      // instead there is About under the automatic Phenote menu
+      JMenuItem about = new JMenuItem(new AboutAction());
+      add(about);
+    }
+  
+    JMenuItem request = new JMenuItem(new TermRequestAction());
     add(request);
     
   }

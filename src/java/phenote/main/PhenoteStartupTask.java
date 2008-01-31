@@ -1,12 +1,10 @@
 package phenote.main;
 
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -36,10 +34,10 @@ import phenote.config.Config;
 import phenote.config.xml.GroupDocument.Group;
 import phenote.config.xml.TemplatechooserDocument.Templatechooser;
 import phenote.gui.CharacterTableFactory;
-import phenote.gui.HelpMenu;
 import phenote.gui.NcbiInfo;
 import phenote.gui.StandardToolbar;
 import phenote.gui.TermInfo2;
+import phenote.gui.actions.AboutAction;
 import phenote.gui.field.FieldPanelContainer;
 import phenote.gui.menu.EditMenu;
 import phenote.gui.menu.FileMenu;
@@ -104,12 +102,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 	}
 
 	protected Action getAboutAction() {
-		return new AbstractAction("About") {
-
-			public void actionPerformed(ActionEvent actionEvent) {
-				(new HelpMenu()).showAboutFrame();
-			}
-		};
+		return new AboutAction();
 	}
 
 	@Override

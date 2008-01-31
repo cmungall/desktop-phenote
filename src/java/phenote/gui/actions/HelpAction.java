@@ -26,7 +26,7 @@ public class HelpAction extends AbstractAction {
 	public HelpAction() {
 		super("Phenote Help", new ImageIcon("images/Help24.gif"));
 		putValue(SHORT_DESCRIPTION, "Browse Help Documentation"); // tooltip text
-		putValue(NAME, "Help");
+		putValue(NAME, "Phenote Help");
 		putValue(MNEMONIC_KEY, new Integer(KeyEvent.VK_H));
 	}
 	
