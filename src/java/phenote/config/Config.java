@@ -1446,6 +1446,13 @@ public class Config {
   	phenoConfigBean.getTerminologyDefinitions().setUpdate(updateStatus);  	
   }
   
+  /** load up all constraints from config into ConstraintManager,
+      from constaint list as well as required config fields */
+  public void loadConstraints() {
+    for (FieldConfig fc : getEnbldFieldCfgs())
+      fc.makeRequiredConstraint();
+  }
+
 
   private Logger log;
   private Logger log() {

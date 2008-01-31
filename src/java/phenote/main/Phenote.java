@@ -386,6 +386,8 @@ public class Phenote {
         }
       }
     }
+    // now that config is done, add constraints from it
+    Config.inst().loadConstraints();
   }
 
 //  private void ontologyProgressChangeListener extends PropertyChangeListener {

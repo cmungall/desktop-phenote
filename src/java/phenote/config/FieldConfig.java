@@ -75,7 +75,8 @@ public class FieldConfig {
     }
 
     // REQUIRED CONSTRAINT - if required then make RequiredConstraint
-    makeRequiredConstraint();
+    // cant do this here - as it does it for every config construction - no good
+    //makeRequiredConstraint();
   }
 
   // for ConfigGui
@@ -112,7 +113,7 @@ public class FieldConfig {
   private void initFieldBean() { getFieldBean(); }
 
   /** if required then make RequiredConstraint */
-  private void makeRequiredConstraint() {
+  void makeRequiredConstraint() {
     if (!isRequired()) return; // its not required do nothing
     RequiredFieldConstraint con = new RequiredFieldConstraint(getCharField());
     ConstraintManager.inst().addConstraint(con);
