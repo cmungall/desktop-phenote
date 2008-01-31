@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
+import javax.swing.JComponent;
 
 import org.apache.log4j.Logger;
 
@@ -15,8 +16,8 @@ import org.apache.log4j.Logger;
  * An action which traverses the component hierarchy, beginning with the currently focused component, 
  * until it finds a object implementing a method with the name of the action's actionCommand.  The
  * method must accept no arguments.  If an object in the component hierarchy implements the method 
- * "getResponderDelegate", the object returned by that method will also be queried for an implementation 
- * of the actionCommand.
+ * "getResponderDelegate" or is a JComponent with a client property "responderDelegate", the object 
+ * returned will also be queried for an implementation of the actionCommand.
  * @author Jim Balhoff
  */
 @SuppressWarnings("serial")
@@ -24,6 +25,7 @@ public class ResponderChainAction extends AbstractAction {
   
   private String actionCommand;
   public static String DELEGATE_METHOD = "getResponderDelegate";
+  public static String CLIENT_PROPERTY = "responderDelegate";
 
   /**
    * Creates a ResponderChainAction object which will try to invoke a method named by the given actionCommand.
@@ -103,10 +105,9 @@ public class ResponderChainAction extends AbstractAction {
 
   /**
    * Returns the next object which should be queried for an implementation of the
-   * actionCommand.  This is typically the parent Component of an existing Component,
-   * but in the future we may want to establish a convention for querying a delegate of
-   * the final component.  This would presumably be a controller class.  If null is 
-   * passed, the currently focused Component is returned.
+   * actionCommand. This is typically the parent Component of an existing Component,
+   * but could also be an object returned by getResponderDelegate or the client property 
+   * "responderDelegate". If null is passed, the currently focused Component is returned.
    */
   private Object getNextResponder(Object currentResponder) {
     if (currentResponder == null) return this.getFocusOwner();
@@ -149,7 +150,10 @@ public class ResponderChainAction extends AbstractAction {
     if (this.objectRespondsToMethod(anObject, DELEGATE_METHOD)) {
       final Method method = this.getMethodForName(anObject, DELEGATE_METHOD);
       return this.callMethod(method, anObject);
-    } else {
+    } else if (anObject instanceof JComponent) {
+      return ((JComponent)anObject).getClientProperty(CLIENT_PROPERTY);
+    }
+    else {
       return null;
     }
   }

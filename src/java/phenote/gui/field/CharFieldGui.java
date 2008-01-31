@@ -42,6 +42,7 @@ import phenote.datamodel.CharacterListI;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
+import phenote.gui.actions.ResponderChainAction;
 import phenote.gui.selection.SelectionManager;
 import ca.odell.glazedlists.swing.EventSelectionModel;
 
@@ -95,6 +96,8 @@ public abstract class CharFieldGui implements ListSelectionListener {
     }
     fieldGui.setGuiForNoSelection();
     final JComponent component = fieldGui.getUserInputGui();
+    // set a property so the the field gui can handle responder chain commands sent to component
+    component.putClientProperty(ResponderChainAction.CLIENT_PROPERTY, fieldGui);
     if (component instanceof JComboBox) {
       // JComboBox does not correctly notify its focus listeners - need to use editor instead
       ((JComboBox)component).getEditor().getEditorComponent().addFocusListener(new FieldFocusListener(fieldGui));
@@ -227,6 +230,19 @@ public abstract class CharFieldGui implements ListSelectionListener {
     if (this.isInMultipleValueState()) {
       this.setGuiForMultipleValues();
       this.setHasChangedMultipleValues(false);
+    }
+  }
+  
+  public void commitAndSelectNext() {
+    this.updateModel();
+    if (this.selectionModel == null) return;
+    final int currentMax = this.selectionModel.getMaxSelectionIndex();
+    if (currentMax > -1) {
+      try {
+        this.selectionModel.setSelectionInterval(currentMax + 1, currentMax + 1);
+      } catch (IndexOutOfBoundsException e) {
+        // no big deal, nothing more to select
+      }
     }
   }
 

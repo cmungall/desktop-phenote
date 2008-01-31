@@ -88,6 +88,11 @@ public class EditMenu extends DynamicMenu {
     deleteChar.setAction(deleteAction);
     add(deleteChar);
     
+    JMenuItem nextChar = new JMenuItem();
+    Action nextAction = new ResponderChainAction("commitAndSelectNext", "Enter and Select Next");
+    nextAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+    nextChar.setAction(nextAction);
+    add(nextChar);
     
     //set all to disabled until they are working.
     setEnabled(true);
