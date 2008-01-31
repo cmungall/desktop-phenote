@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.CharacterListI;
 import phenote.dataadapter.DataAdapterEx;
+import phenote.dataadapter.ConstraintManager;
 import phenote.dataadapter.QueryableDataAdapterI;
 import phenote.dataadapter.CharacterListManager;
 
@@ -493,6 +494,10 @@ public class WormAdapter implements QueryableDataAdapterI {
   }
 
   private void init() {
+
+    // for now adding constraints here - take this out when configging is working
+    ConstraintManager.inst().addConstraint(new WormConstraint());
+
     // dont HAVE to use CharFieldEnum but it does enforce using same strings
     // across different data adapters which is good to enforce
     // the worm config needs to have "Pub" and "Object Name"
