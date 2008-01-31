@@ -23,7 +23,7 @@ public class ConstraintManager {
   private ConstraintManager() {}
 
   public ConstraintStatus checkCommitConstraints() {
-    ConstraintStatus statusList = ConstraintStatus.OK; //?
+    ConstraintStatus statusList = ConstraintStatus.OK_STATUS; //?
     for (Constraint c : constraintList) {
       if (c.isCommitConstraint()) {
         ConstraintStatus cs = c.checkCommit();
@@ -34,7 +34,7 @@ public class ConstraintManager {
   }
 
   public ConstraintStatus checkEditConstraints() {
-    ConstraintStatus statusList = ConstraintStatus.OK; //?
+    ConstraintStatus statusList = ConstraintStatus.OK_STATUS; //?
     for (Constraint c : constraintList) {
       if (c.isEditConstraint()) {
         ConstraintStatus cs = c.checkEdit();

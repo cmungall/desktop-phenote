@@ -11,45 +11,73 @@ import java.util.List;
 public class ConstraintStatus {
   
   /** is there more states than OK & Fail? if so will need an enum */
-  private boolean isFailure = false;
+  //private boolean isFailure = false;
+  private Status status = Status.OK;
   private String message = "";
   private List<ConstraintStatus> kids;
 
-  public static ConstraintStatus OK = new ConstraintStatus(false);
+  public static enum Status { OK, WARNING, FAILURE };
+  
 
-  public ConstraintStatus(boolean isFailure,String message) {
-    this(isFailure);
+  public static ConstraintStatus OK_STATUS = new ConstraintStatus(Status.OK);
+
+  public ConstraintStatus(Status status,String message) {
+    this(status);
     if (message!=null) this.message = message;
   }
 
-  public ConstraintStatus(boolean isFailure) {
-    this.isFailure = isFailure;
+  public ConstraintStatus(Status status) {
+    this.status = status;
   }
 
-  public boolean constraintFailed() {
+  /** recurses through kids status's */
+  public boolean isFailure() {
+    return recursiveCheckForStatus(Status.FAILURE);
+  }
+
+  /** non recursive - just for self */
+  private boolean selfIsFailure() { return status == Status.FAILURE; }
+
+  public boolean isWarning() {
+    return recursiveCheckForStatus(Status.WARNING);
+  }
+  private boolean selfIsWarning() { return status == Status.WARNING; }
+
+  
+  /** recurively goes through kids and if any kid or parent has status returns true */
+  private boolean recursiveCheckForStatus(Status status) {
     if (!hasKids())
-      return isFailure;
+      return this.status == status;
     else {
       for (ConstraintStatus cs : kids) {
-        if (cs.constraintFailed()) return true;
+        if (recursiveCheckForStatus(status)) return true;
       }
-      return false; // ?
+      return this.status == status; // ? self
     }
   }
 
-  public String getMessage() {
+  private boolean isSelfStatus(Status status) { return this.status == status; }
+
+  /** recurse through self & kids, append any message from CS that has status */
+  private String getMessage(Status status) {
     if (!hasKids())
       return message;
     else {
       StringBuffer sb = new StringBuffer();
       // can parent have independent message?
-      if (message!=null & !message.equals("")) sb.append(message).append("\n");
+      if (this.status == status && message!=null && !message.equals(""))
+        sb.append(message).append("\n");
       for (ConstraintStatus kid : kids) {
-        sb.append(kid.getMessage()).append("\n\n");
+        if (this.status == status)
+          sb.append(kid.getMessage(status)).append("\n\n");
       }
       return sb.toString();
     }
   }
+
+  public String getFailureMessage() { return getMessage(Status.FAILURE); }
+
+  public String getWarningMessage() { return getMessage(Status.WARNING); }
 
   void addStatusChild(ConstraintStatus kid) {
     getKids().add(kid);

@@ -168,10 +168,25 @@ public class CharacterTableController {
 	public void commitCharacters() {
 
     ConstraintStatus cs = ConstraintManager.inst().checkCommitConstraints();
-    if (cs.constraintFailed()) { 
-      JOptionPane.showMessageDialog(null,cs.getMessage(),"Commit failed",
+    
+    // FAILURE - no commit
+    if (cs.isFailure()) { 
+      JOptionPane.showMessageDialog(null,cs.getFailureMessage(),"Commit failed",
                                     JOptionPane.ERROR_MESSAGE);
       return;
+    }
+
+    // WARNING - ask user if still wants to commit
+    if (cs.isWarning()) {
+      String m = "There is a problem with your commit:\n\n"+cs.getWarningMessage()
+        +"\n\nDo you want to commit anyways?";
+      int ret = JOptionPane.showConfirmDialog(null,
+                                              m,
+                                              "Commit Warning",
+                                              JOptionPane.YES_NO_OPTION,
+                                              JOptionPane.ERROR_MESSAGE);
+      if (ret != JOptionPane.YES_OPTION)
+        return;
     }
 
 		if (Config.inst().hasQueryableDataAdapter()) {
