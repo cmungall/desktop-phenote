@@ -26,8 +26,15 @@ public class WormConstraint implements Constraint {
     String message = ""; // or StringBuffer?
 
     for (CharacterI chr : list) {
-      
 
+      
+      if (chr.hasValue("NBP")) { } else { 
+        warning = true;
+        message += "Character has no NBP"; }
+//       if (chr.hasValue("Object Name")) { } else { 
+//         warning = true;
+//         message += "Character has no Object Name"; }
+// 
       // get fields ya need from chr
       // chr.hasValue("NBP")
       // ...
