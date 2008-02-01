@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -376,7 +377,11 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 		// create the toolbar
 		termInfoToolbar = new TermInfoToolbar();
+		termInfoToolbar.setPreferredSize(new Dimension(TERM_INFO_DEFAULT_WIDTH,termInfoToolbar.BUTTON_HEIGHT));
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		termInfoToolbar.setMaximumSize(new Dimension(screenSize.width,termInfoToolbar.BUTTON_HEIGHT));
 		this.add(termInfoToolbar); //, BorderLayout.NORTH);
+		
 
 		// create the stackedbox that the term info will live in
 		termInfoPanel = new StackedBox();

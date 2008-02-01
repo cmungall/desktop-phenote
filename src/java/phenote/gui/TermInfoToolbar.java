@@ -103,6 +103,8 @@ public class TermInfoToolbar extends JToolBar {
     JButton getAnnotationsButton = new JButton();
     getAnnotationsButton.setToolTipText("Fetch annoations to this term from OBD");
     getAnnotationsButton.addActionListener(new GetAnnotationsActionListener());
+    //this should be set whether or not OBD is connected to.
+    getAnnotationsButton.setEnabled(false);
 
     ImageIcon backImage=null,fwdImage=null;
     try {
@@ -132,8 +134,9 @@ public class TermInfoToolbar extends JToolBar {
     termField.setLineWrap(true);
 //    termField.setContentType("text/html");
     termField.setText("(no term selected)");
-    termField.setPreferredSize(new Dimension((TERM_INFO_DEFAULT_WIDTH-(buttons.size()*BUTTON_HEIGHT)),BUTTON_HEIGHT));
-//    termField.setMaximumSize(new Dimension((TERM_INFO_DEFAULT_WIDTH-(buttons.size()*BUTTON_HEIGHT)),BUTTON_HEIGHT));
+    termField.setPreferredSize(new Dimension(TERM_INFO_DEFAULT_WIDTH-(buttons.size()*BUTTON_HEIGHT),BUTTON_HEIGHT));
+    termField.setMinimumSize(new Dimension(TERM_INFO_DEFAULT_WIDTH-(buttons.size()*BUTTON_HEIGHT),BUTTON_HEIGHT));
+    //    termField.setMaximumSize(new Dimension((TERM_INFO_DEFAULT_WIDTH-(buttons.size()*BUTTON_HEIGHT)),BUTTON_HEIGHT));
     termField.setEditable(false);  
 
     add(termField,0);
