@@ -42,6 +42,7 @@ import phenote.datamodel.CharacterI;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
+import phenote.gui.CharacterTable;
 import phenote.gui.CharacterTableSource;
 import phenote.gui.TableColumnPrefsSaver;
 import phenote.gui.field.CharFieldMatcherEditor;
@@ -187,7 +188,13 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
   
   public void generateCharacters() {
     EditManager.inst().copyChars(this.getMarkedCharacters());
-    //TODO should bring main character table to front - need to find way to do this
+    for (GUIComponent component : ComponentManager.getManager().getActiveComponents()) {
+      //TODO there should be a better way to find particular components
+      if (component instanceof CharacterTable) {
+        ComponentManager.getManager().focusComponent(component);
+        break;
+      }
+    }
   }
   
   public EventSelectionModel<CharacterI> getSelectionModel() {
@@ -200,8 +207,7 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
   
   public void templateChoiceChanged(TemplateChooser source) {
     this.setMarkedCharacters(source.getChosenTemplates(Collections.unmodifiableList(this.sortedCharacters)));
-    ComponentManager.getManager().showComponent(ComponentManager.getManager().getFactory(this), this);
-  //TODO should should come to front
+    ComponentManager.getManager().focusComponent(this);
   }
   
   public void cut() {
