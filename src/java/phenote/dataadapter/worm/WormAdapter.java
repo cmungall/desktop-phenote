@@ -210,7 +210,8 @@ public class WormAdapter implements QueryableDataAdapterI {
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_tempname"; tag_name = "Name"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "app_paper"; tag_name = "Pub"; tag_value = chr.getTerm(tag_name).getID();
+        postgres_table = "app_paper"; tag_name = "Pub"; tag_value = "";
+        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
 //	ADD paper_remark
 	if (tag_value != null) {  
@@ -220,31 +221,38 @@ public class WormAdapter implements QueryableDataAdapterI {
         updateListField(c, s, joinkey, postgres_table, tag_name, chr);
         postgres_table = "app_intx_desc"; tag_name = "Genetic Intx Desc"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "app_curator"; tag_name = "Curator"; tag_value = chr.getTerm(tag_name).getID();
+        postgres_table = "app_curator"; tag_name = "Curator"; tag_value = "";
+        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_not"; tag_name = "Not"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "app_term"; tag_name = "Phenotype"; tag_value = chr.getTerm(tag_name).getID();
+        postgres_table = "app_term"; tag_name = "Phenotype"; tag_value = "";
+        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_phen_remark"; tag_name = "Phenotype Remark"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_anat_term"; tag_name = "Anatomy";
         updateListField(c, s, joinkey, postgres_table, tag_name, chr);
-        postgres_table = "app_entity"; tag_name = "Entity"; tag_value = chr.getTerm(tag_name).getID();
+        postgres_table = "app_entity"; tag_name = "Entity"; tag_value = "";
+        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "app_quality"; tag_name = "Quality"; tag_value = chr.getTerm(tag_name).getID();
+        postgres_table = "app_quality"; tag_name = "Quality"; tag_value = "";
+        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_lifestage"; tag_name = "Life Stage"; 
         updateListField(c, s, joinkey, postgres_table, tag_name, chr);
-        postgres_table = "app_nature"; tag_name = "Allele Nature"; tag_value = chr.getTerm(tag_name).getID();
+        postgres_table = "app_nature"; tag_name = "Allele Nature"; tag_value = "";
+        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "app_func"; tag_name = "Functional Change"; tag_value = chr.getTerm(tag_name).getID();
+        postgres_table = "app_func"; tag_name = "Functional Change"; tag_value = "";
+        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_temperature"; tag_name = "Temperature"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_preparation"; tag_name = "Treatment"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "app_penetrance"; tag_name = "Penetrance"; tag_value = chr.getTerm(tag_name).getID();
+        postgres_table = "app_penetrance"; tag_name = "Penetrance"; tag_value = "";
+        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_percent"; tag_name = "Penetrance Remark"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
@@ -268,7 +276,8 @@ public class WormAdapter implements QueryableDataAdapterI {
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_cold_degree"; tag_name = "Cold Sensitive Degree"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "app_mat_effect"; tag_name = "Maternal Effect"; tag_value = chr.getTerm(tag_name).getID();
+        postgres_table = "app_mat_effect"; tag_name = "Maternal Effect"; tag_value = "";
+        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_pat_effect"; tag_name = "Paternal Effect"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
