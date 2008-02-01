@@ -13,7 +13,7 @@ public class RequiredFieldConstraint extends AbstractCommitConstraint {
     charField = cf;
   }
 
-  ConstraintStatus checkCharCommit(CharacterI chr) {
+  protected ConstraintStatus checkCharCommit(CharacterI chr) {
     if (!chr.hasValue(charField)) {
       String m=chr+" field "+charField+" is required to have a value";
       return new ConstraintStatus(ConstraintStatus.Status.FAILURE,m);

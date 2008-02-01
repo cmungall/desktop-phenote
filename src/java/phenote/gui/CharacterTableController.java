@@ -179,7 +179,7 @@ public class CharacterTableController {
     // WARNING - ask user if still wants to commit
     if (cs.isWarning()) {
       String m = "There is a problem with your commit:\n\n"+cs.getWarningMessage()
-        +"\n\nDo you want to commit anyways?";
+        +"\n\nDo you want to commit anyway?";
       int ret = JOptionPane.showConfirmDialog(null,
                                               m,
                                               "Commit Warning",

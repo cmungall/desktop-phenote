@@ -4,7 +4,7 @@ import java.util.List;
 
 import phenote.datamodel.CharacterI;
 
-abstract class AbstractCommitConstraint implements Constraint {
+public abstract class AbstractCommitConstraint implements Constraint {
 
   /** Return true if constraint should be checked at commit time to 
       dataadapter */
@@ -27,7 +27,7 @@ abstract class AbstractCommitConstraint implements Constraint {
   }
 
   /** Check char and return ConstraintStatus */
-  abstract ConstraintStatus checkCharCommit(CharacterI chr);
+  protected abstract ConstraintStatus checkCharCommit(CharacterI chr);
   
 
   /** false - its just a commit constraint */
