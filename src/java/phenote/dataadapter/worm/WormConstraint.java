@@ -6,7 +6,7 @@ import phenote.datamodel.CharacterI;
 
 import phenote.dataadapter.AbstractCommitConstraint;
 import phenote.dataadapter.ConstraintStatus;
-import phenote.dataadapter.ConstraintStatus.Status;
+import phenote.dataadapter.Status;
 
 public class WormConstraint extends AbstractCommitConstraint {
 

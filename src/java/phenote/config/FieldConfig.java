@@ -112,10 +112,12 @@ public class FieldConfig {
 
   private void initFieldBean() { getFieldBean(); }
 
-  /** if required then make RequiredConstraint */
-  void makeRequiredConstraint() {
-    if (!isRequired()) return; // its not required do nothing
-    RequiredFieldConstraint con = new RequiredFieldConstraint(getCharField());
+  /** if required then make RequiredConstraint
+      if warnIfNull make RequiredConstraint with warning */
+  void makeConstraint() {
+    if (!isRequired() && !isWarnIfNull()) return; // its not required do nothing
+    RequiredFieldConstraint con =
+      new RequiredFieldConstraint(getCharField(),isRequired());
     ConstraintManager.inst().addConstraint(con);
   }
 
@@ -123,6 +125,10 @@ public class FieldConfig {
   private boolean isRequired() {
     if (getFieldBean().xgetIsRequired() == null) return false; //default
     return getFieldBean().getIsRequired();
+  }
+  private boolean isWarnIfNull() {
+    if (getFieldBean().xgetWarnIfNull() == null) return false; //default
+    return getFieldBean().getWarnIfNull();
   }
 
 

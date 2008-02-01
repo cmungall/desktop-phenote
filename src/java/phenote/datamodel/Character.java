@@ -175,10 +175,14 @@ public class Character extends AbstractCharacter implements CharacterI {
   }
  
   public String toString() {
-    StringBuffer sb = new StringBuffer();
+    StringBuilder sb = new StringBuilder();
     for (CharField cf : getAllCharFields()) {
-      sb.append(cf.getName()).append(" ").append(charFieldToValue.get(cf)).append(" ");
+      if (hasValue(cf)) // take out nulls?
+        sb.append(cf.getName()).append(" ").append(charFieldToValue.get(cf)).append(" ");
     }
+    // cut it down to reasonable size
+    if (sb.length() > 50)
+      return sb.substring(0,47) + "...";
     return sb.toString();
   }
 

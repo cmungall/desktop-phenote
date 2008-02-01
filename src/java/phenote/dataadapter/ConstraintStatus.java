@@ -16,7 +16,7 @@ public class ConstraintStatus {
   private String message = "";
   private List<ConstraintStatus> kids;
 
-  public static enum Status { OK, WARNING, FAILURE };
+  //public static enum Status { OK, WARNING, FAILURE };
   
 
   // causes endless loops - woops

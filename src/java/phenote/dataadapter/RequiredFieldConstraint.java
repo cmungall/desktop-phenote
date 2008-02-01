@@ -8,15 +8,21 @@ import phenote.datamodel.CharacterI;
 public class RequiredFieldConstraint extends AbstractCommitConstraint {
 
   private CharField charField;
+  /** if true do failure, false -> warning */
+  private boolean doFailure = true;
 
-  public RequiredFieldConstraint(CharField cf) {
+  /** @param CharField that is required
+      @param doFailure true -> fails, false -> warns */ 
+  public RequiredFieldConstraint(CharField cf,boolean doFailure) {
     charField = cf;
+    this.doFailure = doFailure;
   }
 
   protected ConstraintStatus checkCharCommit(CharacterI chr) {
     if (!chr.hasValue(charField)) {
-      String m=chr+" field "+charField+" is required to have a value";
-      return new ConstraintStatus(ConstraintStatus.Status.FAILURE,m);
+      String m="Field "+charField.getName()+" is required to have a value for row:"+chr;
+      Status st = doFailure ? Status.FAILURE : Status.WARNING;
+      return new ConstraintStatus(st,m);
     }
     else
       return ConstraintStatus.makeOK();

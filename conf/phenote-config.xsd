@@ -269,11 +269,8 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="isRequired" use="required" type="xs:boolean">
-        <xs:annotation>
-          <xs:documentation>if field is required, then commit will fail if null at commit time (null constraint)</xs:documentation>
-        </xs:annotation>
-      </xs:attribute>
+      <xs:attribute name="isRequired" use="required" type="xs:boolean"/>
+      <xs:attribute name="warnIfNull" use="required" type="xs:boolean"/>
       <xs:attribute name="tab" use="required" type="xs:string"/>
       <xs:attribute name="file" use="required" type="xs:string"/>
       <xs:attribute name="filter-out" use="required" type="xs:string"/>

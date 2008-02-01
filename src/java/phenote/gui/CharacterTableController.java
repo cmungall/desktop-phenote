@@ -170,9 +170,10 @@ public class CharacterTableController {
     ConstraintStatus cs = ConstraintManager.inst().checkCommitConstraints();
     
     // FAILURE - no commit
-    if (cs.isFailure()) { 
-      JOptionPane.showMessageDialog(null,cs.getFailureMessage(),"Commit failed",
-                                    JOptionPane.ERROR_MESSAGE);
+    if (cs.isFailure()) {
+      String m = "There is a problem with your commit:\n\n"+cs.getWarningMessage()+
+        "\n\nCommit cancelled. You must fix this.";
+      JOptionPane.showMessageDialog(null,m,"Commit failed",JOptionPane.ERROR_MESSAGE);
       return;
     }
 
@@ -180,9 +181,7 @@ public class CharacterTableController {
     if (cs.isWarning()) {
       String m = "There is a problem with your commit:\n\n"+cs.getWarningMessage()
         +"\n\nDo you want to commit anyway?";
-      int ret = JOptionPane.showConfirmDialog(null,
-                                              m,
-                                              "Commit Warning",
+      int ret = JOptionPane.showConfirmDialog(null,m,"Commit Warning",
                                               JOptionPane.YES_NO_OPTION,
                                               JOptionPane.ERROR_MESSAGE);
       if (ret != JOptionPane.YES_OPTION)

@@ -1450,7 +1450,7 @@ public class Config {
       from constaint list as well as required config fields */
   public void loadConstraints() {
     for (FieldConfig fc : getEnbldFieldCfgs())
-      fc.makeRequiredConstraint();
+      fc.makeConstraint();
   }
 
 
