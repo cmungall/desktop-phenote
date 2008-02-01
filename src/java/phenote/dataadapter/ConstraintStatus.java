@@ -75,7 +75,7 @@ public class ConstraintStatus {
       if (this.status == status && message!=null && !message.equals(""))
         sb.append(message).append("\n");
       for (ConstraintStatus kid : kids) {
-        if (this.status == status)
+        if (kid.recursiveCheckForStatus(status))
           sb.append(kid.getMessage(status)).append("\n\n");
       }
       return sb.toString();
