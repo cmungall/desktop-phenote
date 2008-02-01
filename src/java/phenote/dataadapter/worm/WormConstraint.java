@@ -21,7 +21,7 @@ public class WormConstraint extends AbstractCommitConstraint {
       
     if (chr.hasValue("NBP")) { } else { 
       warning = true;
-      message += "Character has no NBP"; }
+      message += "Character has no NBP for char: "+chr; }
 //       if (chr.hasValue("Object Name")) { } else { 
 //         warning = true;
 //         message += "Character has no Object Name"; }

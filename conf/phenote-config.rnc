@@ -26,7 +26,7 @@ start =
     ontologyLoading,
     field-panel-tabs,
     comparison,
-    constraint-list
+    constraint*
   }
 
 ## specify how the master config interacts with local/cached config
@@ -287,10 +287,7 @@ postcomp =
     ontology*
   }
 
-## a list of constraints to impose at edit or commit time
-constraint-list = element constraint-list { constraint }
-
 ## a constraint is checked at edit or compile time and throws warnings & failures
 ## constraints are encoded in java classes but are then enlisted here - so the class
 ## attribute is the actual class name, like "phenote.dataadapter.worm.WormConstraint"
-constraint = element constraint { attribute class { xsd:string } }
+constraint = element constraint { attribute className { xsd:string } }

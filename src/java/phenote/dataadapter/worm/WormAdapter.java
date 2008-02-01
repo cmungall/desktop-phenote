@@ -516,7 +516,8 @@ public class WormAdapter implements QueryableDataAdapterI {
 
   private void init() {
     // for now adding constraints here - take this out when configging is working
-    ConstraintManager.inst().addConstraint(new WormConstraint());
+    // done now in config
+    //ConstraintManager.inst().addConstraint(new WormConstraint());
     
     // dont HAVE to use CharFieldEnum but it does enforce using same strings
     // across different data adapters which is good to enforce

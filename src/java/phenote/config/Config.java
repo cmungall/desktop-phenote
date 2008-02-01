@@ -28,6 +28,7 @@ import phenote.config.xml.AutoUpdateOntologiesDocument.AutoUpdateOntologies;
 import phenote.config.xml.AutocompleteSettingsDocument.AutocompleteSettings;
 import phenote.config.xml.CharacterModeDocument.CharacterMode;
 import phenote.config.xml.ComparisonDocument.Comparison;
+import phenote.config.xml.ConstraintDocument.Constraint;
 import phenote.config.xml.DataInputServletDocument.DataInputServlet;
 import phenote.config.xml.DataadapterDocument.Dataadapter;
 import phenote.config.xml.ExternaldbDocument.Externaldb;
@@ -44,6 +45,7 @@ import phenote.config.xml.PhenoteConfigurationDocument.PhenoteConfiguration;
 import phenote.config.xml.TermHistoryDocument.TermHistory;
 import phenote.config.xml.UpdateTimerDocument.UpdateTimer;
 import phenote.config.xml.UvicGraphDocument.UvicGraph;
+import phenote.dataadapter.ConstraintManager;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.GroupAdapterI;
 import phenote.dataadapter.OntologyMakerI;
@@ -1055,37 +1057,6 @@ public class Config {
           addFileAdapConfig(dac);
       }
 
-//       QueryableDataadapter[] queryAdaps = phenoConfigBean.getQueryableDataadapterArray();
-//       for (QueryableDataadapter da : queryAdaps) {
-//         QueryableAdapConfig qac = new QueryableAdapConfig(da);
-//         addQueryAdapCfg(qac);
-//       }
-
-
-      // GRAPH - now accesses bean directly
-//       UvicGraph gr = phenoConfigBean.getUvicGraph();
-//       if (gr != null)
-//         uvicGraphEnabled = gr.getEnable();
-
-      // TERM HISTORY
-//       TermHistory history = phenoConfigBean.getTermHistory();
-//       if (history != null)
-//         termHistoryEnabled = history.getEnable();
-
-      // AUTO UPDATE OF ONTOLOGIES
-//       AutoUpdateOntologies autoUpdate = phenoConfigBean.getAutoUpdateOntologies();
-//       if (autoUpdate != null)
-//         autoUpdateEnabled = autoUpdate.getEnable();
-
-      // TIMER for UPDATE OF ONTOLOGIES
-//       UpdateTimer time = phenoConfigBean.getUpdateTimer();
-//       if (time != null)
-// 	  updateTimer = time.getTimer().intValue();
-
-      // Repos url dir
-//       OboRepository or = phenoConfigBean.getOboRepository();
-//       if (or != null && or.getUrlDir() != null)
-//         reposUrlDir = or.getUrlDir();
 
       // FIELDS
       Field[] fields = phenoConfigBean.getFieldArray();
@@ -1449,8 +1420,27 @@ public class Config {
   /** load up all constraints from config into ConstraintManager,
       from constaint list as well as required config fields */
   public void loadConstraints() {
+    // Constraints from FieldConfigs (required/warn fields)
     for (FieldConfig fc : getEnbldFieldCfgs())
       fc.makeConstraint();
+
+    // Explicit constraints listed in config
+    Constraint[] constraints = phenoConfigBean.getConstraintArray();
+    for (Constraint con : constraints) {
+      String className = con.getClassName();
+      try {
+        Object o = getInstanceForString(className);
+        if (!(o instanceof phenote.dataadapter.Constraint))
+          throw new Exception(className+" is not instance of Constraint");
+        phenote.dataadapter.Constraint c = (phenote.dataadapter.Constraint)o;
+        ConstraintManager.inst().addConstraint(c);
+      }
+      catch (Exception e) {
+        log().error("failed to get constraint for "+className+e);
+      }
+
+    }
+    
   }
 
 
@@ -1462,3 +1452,34 @@ public class Config {
 
 }
 
+//       QueryableDataadapter[] queryAdaps = phenoConfigBean.getQueryableDataadapterArray();
+//       for (QueryableDataadapter da : queryAdaps) {
+//         QueryableAdapConfig qac = new QueryableAdapConfig(da);
+//         addQueryAdapCfg(qac);
+//       }
+
+
+      // GRAPH - now accesses bean directly
+//       UvicGraph gr = phenoConfigBean.getUvicGraph();
+//       if (gr != null)
+//         uvicGraphEnabled = gr.getEnable();
+
+      // TERM HISTORY
+//       TermHistory history = phenoConfigBean.getTermHistory();
+//       if (history != null)
+//         termHistoryEnabled = history.getEnable();
+
+      // AUTO UPDATE OF ONTOLOGIES
+//       AutoUpdateOntologies autoUpdate = phenoConfigBean.getAutoUpdateOntologies();
+//       if (autoUpdate != null)
+//         autoUpdateEnabled = autoUpdate.getEnable();
+
+      // TIMER for UPDATE OF ONTOLOGIES
+//       UpdateTimer time = phenoConfigBean.getUpdateTimer();
+//       if (time != null)
+// 	  updateTimer = time.getTimer().intValue();
+
+      // Repos url dir
+//       OboRepository or = phenoConfigBean.getOboRepository();
+//       if (or != null && or.getUrlDir() != null)
+//         reposUrlDir = or.getUrlDir();
