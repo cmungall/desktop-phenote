@@ -6,17 +6,21 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.swing.Action;
+import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JToolBar;
 
 import main.ProtocolEditor;
 
 import org.apache.log4j.Logger;
 import org.bbop.framework.AbstractComponentFactory;
+import org.bbop.framework.GUIComponent;
 import org.bbop.framework.GUIComponentFactory;
 import org.bbop.framework.GUIComponentWrapper;
 import org.bbop.framework.GUIManager;
 import org.bbop.framework.GUITask;
+import org.bbop.framework.MainFrame;
 import org.bbop.framework.ScreenLockTask;
 import org.bbop.framework.ViewMenu;
 import org.bbop.util.CollectionUtil;
@@ -35,6 +39,7 @@ import phenote.config.xml.GroupDocument.Group;
 import phenote.config.xml.TemplatechooserDocument.Templatechooser;
 import phenote.gui.CharacterTableFactory;
 import phenote.gui.NcbiInfo;
+import phenote.gui.PhenoteMainFrame;
 import phenote.gui.StandardToolbar;
 import phenote.gui.TermInfo2;
 import phenote.gui.actions.AboutAction;
@@ -68,7 +73,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		factories.add(new GraphEditorFactory());
 		factories.add(new DAGViewFactory());
 		factories.add(new GraphDAGViewFactory());
-		factories.add(new StandardToolbarFactory());
+//		factories.add(new StandardToolbarFactory());
 		factories.add(new AnnotationSummaryComponentFactory());
 		factories.addAll(this.getTemplateGroupComponentFactories());
     factories.add(new ProtocolEditorFactory());
@@ -79,10 +84,26 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 	@Override
 	protected void doOtherInstallations() {
 		LOG.debug("doOtherInstallations called");
+//	GUIManager.getManager().installToolbar(new StandardToolbar());
+		
 		// new Throwable().printStackTrace();
 		//i'm removing this here because i think its being called twice!  yep
 		//		initPhenote();
 	}
+	
+	/** perhaps this might change in the future so both oboedit and phenote will
+	 *  use the same default toolbars with save, exit, etc. buttons
+	 */
+	@Override
+	protected Collection<JToolBar> getDefaultToolBars() {
+		LOG.debug("getting Default Toolbars");
+		Collection<JToolBar> toolbars = new ArrayList<JToolBar>();
+		GUIComponent tb = new StandardToolbar();
+		toolbars.add((JToolBar) tb.getComponent());
+		return toolbars;
+		// new Throwable().printStackTrace();
+	}
+	
 
 	private void initPhenote() {
 		Phenote.initBackend(args);
@@ -149,6 +170,13 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		return CollectionUtil.list((GUITask) screenLockTask,
 				new OBDAnnotationNumberFetchBehaviorTask()); // TODO: for
 		// testing
+	}
+	
+	@Override
+	protected JFrame createFrame() {
+		JFrame out = new PhenoteMainFrame(getAppID());
+		out.setTitle(getAppName());
+		return out;
 	}
 	
 	/**
@@ -261,25 +289,30 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
 	}
 
-	/** StandardToolbarFactory inner class */
-	private class StandardToolbarFactory extends AbstractComponentFactory<GUIComponentWrapper> {
-
-		public FactoryCategory getCategory() {
-			return null;
-		}
-
-		public String getName() {
-			return "Standard Toolbar";
-		}
-
-		public String getID() {
-			return "Standard toolbar";
-		}
-		@Override
-		public GUIComponentWrapper doCreateComponent(String id) {
-			return new GUIComponentWrapper(id, id, new StandardToolbar());
-		}
-	}
+//	/** StandardToolbarFactory inner class */
+//	private class StandardToolbarFactory extends AbstractComponentFactory<StandardToolbar> {
+//
+//		public FactoryCategory getCategory() {
+//			return FactoryCategory.TOOLBARS;
+//		}
+//
+//		public String getName() {
+//			return "Standard Toolbar";
+//		}
+//
+//		public String getID() {
+//			return "Standard toolbar";
+//		}
+//
+//  	@Override
+//	public StandardToolbar doCreateComponent(String id) {
+//  		return new StandardToolbar();
+//  	}
+////		@Override
+////		public GUIComponentWrapper doCreateComponent(String id) {
+////			return new GUIComponentWrapper(id, id, new StandardToolbar());
+////		}
+//	}
 
   private class ProtocolEditorFactory extends AbstractComponentFactory<GUIComponentWrapper> {
 

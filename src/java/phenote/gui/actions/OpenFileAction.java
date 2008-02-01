@@ -4,11 +4,17 @@ package phenote.gui.actions;
 //import javax.swing.JMenu;
 //import javax.swing.JMenuBar;
 //import javax.swing.JMenuItem;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
+import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
+
+import org.apache.log4j.Logger;
 
 import phenote.config.Config;
 import phenote.dataadapter.LoadSaveManager;
@@ -17,15 +23,13 @@ import phenote.dataadapter.LoadSaveManager;
 
 public class OpenFileAction extends AbstractAction {
 	public OpenFileAction() {
-		super("Open", new ImageIcon("images/Open24.gif"));
+		super("Open...", new ImageIcon("images/Open24.gif"));
 		putValue(SHORT_DESCRIPTION, "Open a file..."); // tooltip text
-		putValue(NAME, "Open...");
-		putValue(MNEMONIC_KEY, new Integer(KeyEvent.VK_O));
-		// *****************JOHN--- if i set the breakpoint here, it never broke
-		// boolean hasAdapters = Config.inst().hasDataAdapters();
-		// setEnabled(hasAdapters);
+//		putValue(NAME, "Open...");
+//		putValue(MNEMONIC_KEY, new Integer(KeyEvent.VK_O));
+		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 	}
-	
+		
 	@Override
 	public boolean isEnabled() {
 		return Config.inst().hasDataAdapters();
@@ -35,7 +39,7 @@ public class OpenFileAction extends AbstractAction {
 		// if its a button, then do one thing
 		// if its a menu item, do something else
 		if (!Config.inst().hasDataAdapters()) {
-			System.out.println("no file data adapter to load/save with");
+			log().error("no file data adapter to load/save with");
 			return;
 		}
 		LoadSaveManager.inst().loadData();
@@ -44,5 +48,10 @@ public class OpenFileAction extends AbstractAction {
 				+ " action selected by:\n  " + e);
 
 	}
+	
+  private Logger log() {
+    return Logger.getLogger(this.getClass());
+  }
+  
 	// return action;
 }

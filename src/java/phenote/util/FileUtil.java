@@ -300,7 +300,6 @@ public class FileUtil {
   		File f = new File(localUrl.getFile());
   		long timestamp = f.lastModified();
   		Date when = new Date(timestamp);
-  		System.out.println("date="+when.toString());
   		SimpleDateFormat sdf = new SimpleDateFormat( "EEEE yyyy/MM/dd hh:mm:ss aa zz : zzzzzz" );
   		sdf.setTimeZone(TimeZone.getDefault()); // local time
   		display = sdf.format(when);

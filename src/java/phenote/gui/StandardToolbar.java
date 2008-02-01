@@ -9,10 +9,15 @@ import javax.swing.JButton;
 import javax.swing.JToolBar;
 import javax.swing.border.BevelBorder;
 
+import org.bbop.framework.AbstractGUIComponent;
+import org.bbop.framework.ComponentManager;
+import org.bbop.framework.GUIManager;
+import org.bbop.framework.dock.idw.IDWUtil;
+
 import phenote.config.Config;
 import phenote.gui.actions.DuplicateAnnotationAction;
 import phenote.gui.actions.OpenFileAction;
-import phenote.gui.actions.SaveAsFileAction;
+import phenote.gui.actions.SaveFileAction;
 import phenote.gui.actions.UndoAction;
 import phenote.gui.actions.RedoAction;
 import phenote.gui.actions.CopyAction;
@@ -23,7 +28,7 @@ import phenote.gui.actions.CopyAction;
 // but doesn't require accessing the menus.
 
 
-public class StandardToolbar extends JToolBar {
+public class StandardToolbar extends AbstractGUIComponent {
 
   private Config config = Config.inst();
 
@@ -31,12 +36,14 @@ public class StandardToolbar extends JToolBar {
   private Vector actions;
   private Vector buttons;
   
+  private JToolBar toolbar;
+  
   public void hideToolbar() {
-  	setVisible(false);
+  	toolbar.setVisible(false);
   }
   
   public void showToolbar() {
-  	setVisible(true);
+  	toolbar.setVisible(true);
   }
 
   public StandardToolbar() {
@@ -44,13 +51,14 @@ public class StandardToolbar extends JToolBar {
     init();
   }
 
-  private void init() {
-
+  
+  public void init() {
+  	toolbar = new JToolBar();
     buttons = new Vector();
 
     //Standard things to do for files
     //The actions ought to be created elsewhere, yeah?
-    Action saveAction = new SaveAsFileAction();
+    Action saveAction = new SaveFileAction();
     Action openAction = new OpenFileAction();
     Action dupAnnotationAction = new DuplicateAnnotationAction();
     Action undoAction = new UndoAction();
@@ -75,29 +83,44 @@ public class StandardToolbar extends JToolBar {
     JButton undoButton = new JButton(undoAction);
     JButton redoButton = new JButton(redoAction);
     JButton copyButton = new JButton(copyAction);
-    buttons.add(undoButton);
-    buttons.add(redoButton);
-    buttons.add(copyButton);
+//    buttons.add(undoButton);
+//    buttons.add(redoButton);
+//    buttons.add(copyButton);
     
     
 //    add(newAnnotButton);
 //    add(dupAnnotButton);
-    buttons.add(dupAnnotButton);
+//    buttons.add(dupAnnotButton);
     JButton tempButton = null;
     for (int i=0; i<buttons.size(); i++) {
     	tempButton = (JButton)buttons.elementAt(i);
     	if (tempButton.getIcon() != null) {
     		tempButton.setText(""); //an icon-only button
     	}
-    		add(tempButton);
+    		toolbar.add(tempButton);
     }
-    addSeparator();
+    toolbar.addSeparator();
     	
-    setBackground(Color.GRAY);
-    setBorder(new BevelBorder(BevelBorder.LOWERED));
-    setRollover(true);
-    hideToolbar();
+    toolbar.setBackground(Color.LIGHT_GRAY);
+//    toolbar.setBackground(GUIManager.getManager().getFrame().getBackground());
+    toolbar.setBorder(new BevelBorder(BevelBorder.LOWERED));
+    toolbar.setRollover(true);
+    showToolbar();
   }
+  
+  @Override
+  public JToolBar getComponent() {
+  	return toolbar;
+  }
+  
+//  @Override
+//  public void setBackground(Color color) {
+//  	if (color!=null) 
+//  		toolbar.setBackground(color);
+//  	else
+//  		toolbar.setBackground(Color.LIGHT_GRAY);
+//  }
+  
 }
 
 //ActionManager am = new ActionManager();

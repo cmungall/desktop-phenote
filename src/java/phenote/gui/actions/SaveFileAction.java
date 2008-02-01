@@ -22,21 +22,15 @@ import phenote.dataadapter.LoadSaveManager;
 
 //This is the action for opening files to be used by menus & button items.
 
-public class SaveAsFileAction extends AbstractAction {
+public class SaveFileAction extends AbstractAction {
 	//need a property change listener to see if the file has been modified since 
 	//last saved.  be smart!
-	public SaveAsFileAction() {
-		super("Save As...", new ImageIcon("images/Save24.gif"));
-		putValue(SHORT_DESCRIPTION, "Save File Dialog"); //tooltip text
+	public SaveFileAction() {
+		super("Save", new ImageIcon("images/Save24.gif"));
+		putValue(SHORT_DESCRIPTION, "Save Current File"); //tooltip text
 //		putValue(NAME, "Save As...");
 //		putValue(MNEMONIC_KEY, new Integer(KeyEvent.VK_S));
-		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() | InputEvent.SHIFT_MASK));
-
-	}
-	
-	@Override
-	public boolean isEnabled() {
-		return Config.inst().hasDataAdapters();
+		putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -47,7 +41,7 @@ public class SaveAsFileAction extends AbstractAction {
       log().error("no file data adapter to load/save with");
       return;
     }
-		LoadSaveManager.inst().saveData();
+		LoadSaveManager.inst().saveData(true);
 		//log this action
 		log().debug(e.getActionCommand().toString()+" action selected by:\n  "+ e);
 	}
