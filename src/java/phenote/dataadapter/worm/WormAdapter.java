@@ -138,11 +138,11 @@ public class WormAdapter implements QueryableDataAdapterI {
     ResultSet rs = null;
     try { rs = s.executeQuery("SELECT joinkey FROM "+postgres_table+"_hst WHERE joinkey = '"+joinkey+"' AND "+postgres_table+"_hst = '"+value+"' "); }
     catch (SQLException se) {
-      System.out.println("We got an exception while executing our app_term query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while executing our "+postgres_table+" query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
     try { if (rs.next()) { hasMatch++; } }
       // get the next highest number joinkey for that character
     catch (SQLException se) {
-      System.out.println("We got an exception while getting a column/term joinkey "+joinkey+" result:this shouldn't happen: we've done something really bad."); 
+      System.out.println("We got an exception while getting a insertPostgresHistVal joinkey "+joinkey+" result:this shouldn't happen: we've done something really bad."); 
       se.printStackTrace(); System.exit(1); }
     if (hasMatch == 0) {
       PreparedStatement ps = null;	// intialize postgres insert 
@@ -197,9 +197,9 @@ public class WormAdapter implements QueryableDataAdapterI {
 //          Integer joinkeyInt = Integer.parseInt(pgdbid);	// this can't do anything since pgdbid must be blank
           Integer joinkeyInt = 0;
           ResultSet rs = null;
-          try { rs = s.executeQuery("SELECT joinkey FROM app_term "); }
+          try { rs = s.executeQuery("SELECT joinkey FROM app_tempname "); }
           catch (SQLException se) {
-            System.out.println("We got an exception while executing our app_term query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
+            System.out.println("We got an exception while executing our app_tempname query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
           try { while (rs.next()) { if (rs.getInt(1) > joinkeyInt) { joinkeyInt = rs.getInt(1); } } joinkeyInt++; joinkey = Integer.toString(joinkeyInt); }
             // get the next highest number joinkey for that character
           catch (SQLException se) {
