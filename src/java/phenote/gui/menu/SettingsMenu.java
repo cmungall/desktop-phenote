@@ -8,10 +8,14 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import org.apache.log4j.Logger;
 import org.bbop.framework.GUIManager;
 import org.bbop.swing.AbstractDynamicMenuItem;
 import org.bbop.swing.DynamicActionMenuItem;
 import org.bbop.swing.DynamicMenu;
+
+import org.apache.log4j.Logger;
+
 
 import phenote.config.Config;
 import phenote.config.ConfigException;
@@ -56,6 +60,7 @@ public class SettingsMenu extends DynamicMenu {
   private JMenuItem menuSearchFilterDefinition;
   private JMenuItem menuSearchFilterObsolete;
   private JMenuItem showHistory;
+  private JMenuItem lockDoc;
   public SearchParams searchParams;
   private SelectionHistory selHist = SelectionHistory.inst();
   private Config config = Config.inst();
@@ -95,6 +100,12 @@ public class SettingsMenu extends DynamicMenu {
     loadConfig.addActionListener(new ConfigActionListener());
     add(loadConfig);
 
+    lockDoc = new JCheckBoxMenuItem("Lock Docking Components");
+    lockDoc.addActionListener(new LockDocActionListener());
+    lockDoc.setSelected(GUIManager.getManager().getDocLockStatus());
+    add(lockDoc);
+
+    
 //    JMenuItem showToolbar = new JMenuItem("Show Toolbar");
 //    showToolbar.addActionListener(new ActionListener() {
 //    	public void actionPerformed(ActionEvent e) {
@@ -240,6 +251,24 @@ public class SettingsMenu extends DynamicMenu {
       }
     }
   }
+  
+
+  /**
+   * This option will be a toggle for allowing the docking elements to lock down
+   * or be movable.  This will be a global property.  If locked, then the user
+   * shouldn't be able to add components.  If unlocked, then can move them around,
+   * snap them off, etc.
+   * @author Nicole Washington
+   *
+   */
+  private class LockDocActionListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+    	GUIManager.getManager().setDocLockStatus(lockDoc.isSelected());
+    	System.out.println("status="+lockDoc.isSelected());
+    	log().debug("Locking the docking panel.");
+    	GUIManager.getManager().getFrame().validate();
+    }
+  }
 
   private void restartMessage() {
     String m = "You must restart phenote for new config to take effect";
@@ -274,6 +303,10 @@ public class SettingsMenu extends DynamicMenu {
   // for testing
   public void clickLoad() {
     //loadMenuItem.doClick();
+  }
+  
+  private Logger log() {
+    return Logger.getLogger(this.getClass());
   }
   
   

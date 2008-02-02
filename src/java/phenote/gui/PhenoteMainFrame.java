@@ -25,6 +25,8 @@ public class PhenoteMainFrame extends MainFrame {
 
 	protected JPanel mainPanel;
 	
+	protected boolean lockDoc;
+	
 	protected JToolBar mainToolBar;
 
 	private int[][] dimensionInfo = { { 620, 460, 160 }, { 760, 560, 300 },
@@ -47,8 +49,10 @@ public class PhenoteMainFrame extends MainFrame {
 
 			menubar = new EnhancedMenuBar();
 			mainToolBar = new StandardToolbar().getComponent();
+			lockDoc=false;  //by default, the doc will not be locked
 			setJMenuBar(menubar);
 			setToolBar(mainToolBar);
+			setLockDoc(false);
 			addMenus();
 			createListeners();
 		} catch (Exception e) {
@@ -85,6 +89,14 @@ public class PhenoteMainFrame extends MainFrame {
 	//right now this is one toolbar.  but could conceiveably be a panel of toolbars
 	public void setToolBar(JToolBar toolbar) {
 		mainToolBar = toolbar;
+	}
+	
+	public void setLockDoc(boolean lock) {
+		lockDoc = lock;
+	}
+	
+	public boolean getLockDoc() {
+		return lockDoc;
 	}
 
 	protected void createListeners() {
