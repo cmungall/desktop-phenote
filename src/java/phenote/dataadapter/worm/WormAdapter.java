@@ -64,39 +64,40 @@ public class WormAdapter implements QueryableDataAdapterI {
         String joinkey = chr.getValueString("PgdbId");
         if (joinkey == null) continue;
         System.out.println("Delete "+joinkey+" end"); 
-        String postgres_table = "app_type"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_tempname"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_paper"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        String blank = "";
+        String postgres_table = "app_type"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_tempname"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_paper"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
 //	ADD paper_remark
-//        postgres_table = "app_person"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_intx_desc"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_curator"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_not"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_term"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_phen_remark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-//        postgres_table = "app_anat_term"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-//        postgres_table = "app_lifestage"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_nature"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_func"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_temperature"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_preparation"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_penetrance"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_percent"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_range_start"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_range_end"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+//        postgres_table = "app_person"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_intx_desc"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_curator"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_not"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_term"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_phen_remark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+//        postgres_table = "app_anat_term"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+//        postgres_table = "app_lifestage"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_nature"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_func"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_temperature"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_preparation"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_penetrance"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_percent"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_range_start"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_range_end"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
 // CREATE A TABLE FOR THIS
-//        postgres_table = "app_range"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_quantity_remark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_quantity"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_heat_sens"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_heat_degree"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_cold_sens"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_cold_degree"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_mat_effect"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_pat_effect"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_genotype"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_strain"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_obj_remark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+//        postgres_table = "app_range"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_quantity_remark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_quantity"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_heat_sens"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_heat_degree"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_cold_sens"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_cold_degree"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_mat_effect"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_pat_effect"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_genotype"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_strain"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_obj_remark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
       }
     } catch (Exception e) {
       System.out.println("Could not delete character: " + e);
@@ -111,16 +112,18 @@ public class WormAdapter implements QueryableDataAdapterI {
     try { ps.executeUpdate(); } 	// write to app_tempname, which is not what we really want, but we need to figure out the pubchunk thing to see what we're going to do
     catch (SQLException se) { System.out.println("We got an exception while executing a history insert in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); }
     
-//    String postgres_in = "No postgres value assigned";
-    String postgres_in = "";
-//System.out.println("postgres_in "+postgres_in+" postgres_value "+postgres_value+" end");
-    if (postgres_value.equals(postgres_in)) {			// no values in postgres
+    String pgisnull = "null";
+    String pgblank = "";
+//System.out.println("pgblank "+pgblank+" postgres_value "+postgres_value+" end");
+    if ( postgres_value.equals(pgisnull) ) {			// no values in postgres
+//        System.out.println("INSERT INTO "+postgres_table+" VALUES "+joinkey+" and "+value+" with postgres_value "+postgres_value+" end");
         try { ps = c.prepareStatement("INSERT INTO "+postgres_table+" VALUES (?, ?)"); ps.setString(1, joinkey); ps.setString(2, value); }
         catch (SQLException se) {
           System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
         try { ps.executeUpdate(); } 	// write to app_tempname, which is not what we really want, but we need to figure out the pubchunk thing to see what we're going to do
         catch (SQLException se) { System.out.println("We got an exception while executing an insert update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); } }
       else { 							// some value in postgres, update it
+//        System.out.println("UPDATING "+postgres_table+" VALUES "+joinkey+" and "+value+" with postgres_value "+postgres_value+" end");
         try { ps = c.prepareStatement("UPDATE "+postgres_table+" SET "+postgres_table+" = ? WHERE joinkey = '"+joinkey+"'"); ps.setString(1, value); }
         catch (SQLException se) {
           System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
@@ -156,12 +159,15 @@ public class WormAdapter implements QueryableDataAdapterI {
 
   private void updateNormalField(Connection c, Statement s, String joinkey, String postgres_table, String tag_name, String tag_value) {
 //    String postgres_value = "No postgres value assigned";
-    String postgres_value = "";
+//    String postgres_value = "";
 //System.out.println("table "+postgres_table+" joinkey "+joinkey+" checking updateNormalField");
-    postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-    if (postgres_value.equals(tag_value)) { 
+    String postgres_value = queryPostgresCharacterNull(s, postgres_table, joinkey);
+    String pgisnull = "null";
+    String pg_value = postgres_value;
+    if (postgres_value.equals(pgisnull)) { pg_value = ""; }	// pg_value converts postgres null into blank to check against tag value
+    if (pg_value.equals(tag_value)) { 
 //System.out.println("table "+postgres_table+" joinkey "+joinkey+" has equal values");
-} else { updatePostgresVal(c, postgres_table, postgres_value, joinkey, tag_value); }
+} else { updatePostgresVal(c, postgres_table, postgres_value, joinkey, tag_value); }	// pass the pgisnull string if pg value is null
     System.out.println( tag_name+" : "+tag_value+" end.");
   }
 
@@ -579,6 +585,19 @@ public class WormAdapter implements QueryableDataAdapterI {
     return c; 
   } // private Connection connectToDB
 
+  private String queryPostgresCharacterNull(Statement s, String postgres_table, String joinkey) {
+    // see if the postgres value corresponding to a phenote cell has an entry at all (@row) ; returns ``null'' if no row
+    String default_value = null;
+    ResultSet rs = null;	// intialize postgres query result
+    try { rs = s.executeQuery("SELECT * FROM "+postgres_table+" WHERE joinkey = '"+joinkey+"' ORDER BY app_timestamp"); }
+    catch (SQLException se) {
+      System.out.println("We got an exception while executing our "+postgres_table+" joinkey: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
+    try { while (rs.next()) { default_value = rs.getString(2); } }		// assign the new term value
+    catch (SQLException se) {
+      System.out.println("We got an exception while getting a queryPostgresCharacter "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); } 
+    if (default_value == null) { default_value = "null"; }
+    return default_value; 
+  }
 
   private String queryPostgresCharacter(Statement s, String postgres_table, String default_value, String joinkey) {
     // get the value corresponding to a phenote cell from a postgres table by column
