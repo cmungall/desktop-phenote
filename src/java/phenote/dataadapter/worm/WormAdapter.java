@@ -82,7 +82,8 @@ public class WormAdapter implements QueryableDataAdapterI {
         postgres_table = "app_preparation"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
         postgres_table = "app_penetrance"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
         postgres_table = "app_percent"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
-        postgres_table = "app_range"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_range_start"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
+        postgres_table = "app_range_end"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
 // CREATE A TABLE FOR THIS
 //        postgres_table = "app_range"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
         postgres_table = "app_quantity_remark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, null);
