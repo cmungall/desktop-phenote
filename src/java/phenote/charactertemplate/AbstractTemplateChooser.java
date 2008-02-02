@@ -9,7 +9,6 @@ import org.apache.log4j.Logger;
 import org.bbop.framework.AbstractGUIComponent;
 import org.bbop.framework.ComponentManager;
 import org.bbop.framework.GUIComponent;
-import org.bbop.framework.GUIComponentFactory;
 
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharacterI;
@@ -89,7 +88,6 @@ public abstract class AbstractTemplateChooser extends AbstractGUIComponent imple
     } else {
       return factoryID;
     }
-    
   }
   
   private Logger log() {

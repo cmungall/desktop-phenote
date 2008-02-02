@@ -1,31 +1,39 @@
 package phenote.charactertemplate;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.swing.AbstractAction;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JToolBar;
 
 import jebl.evolution.graphs.Node;
 import jebl.evolution.io.ImportException;
 import jebl.evolution.io.NewickExporter;
 import jebl.evolution.io.NewickImporter;
+import jebl.evolution.io.NexusExporter;
 import jebl.evolution.io.NexusImporter;
 import jebl.evolution.taxa.Taxon;
 import jebl.evolution.trees.Tree;
@@ -38,7 +46,9 @@ import org.swixml.SwingEngine;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.LoadSaveListener;
 import phenote.dataadapter.LoadSaveManager;
+import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharacterI;
+import phenote.util.Collections;
 import phenote.util.FileUtil;
 
 public class TreeChooser extends AbstractTemplateChooser {
@@ -49,12 +59,15 @@ public class TreeChooser extends AbstractTemplateChooser {
   private JTextField newickField; // initialized by swix
   private JLabel newickFieldLabel; // initialized by swix
   private JPanel treeViewerContainer; // initialized by swix
+  private JButton applyButton;
+  private JButton nexusButton;
   
   public TreeChooser(String id) {
     super(id);
     LoadSaveManager.inst().addListener(new FileListener());
-    this.setLayout(new GridLayout());
-    this.add(this.createComponent());
+    this.setLayout(new BorderLayout());
+    this.add(this.createComponent(), BorderLayout.CENTER);
+    this.add(this.createToolBar(), BorderLayout.NORTH);
     this.tryLoadDefaultDataFile(CharacterListManager.main().getCurrentDataFile());
   }
   
@@ -73,7 +86,7 @@ public class TreeChooser extends AbstractTemplateChooser {
   public Collection<CharacterI> getChosenTemplates(Collection<CharacterI> candidates) {
     if (this.getCharField() == null) {
       log().error("CharField not set for TreeChooser - no matching templates.");
-      return Collections.emptyList();
+      return java.util.Collections.emptyList();
     }
     final Collection<String> selectedTaxa = this.getSelectedTaxonNames();
     final Collection<CharacterI> chosenTemplates = new ArrayList<CharacterI>();
@@ -101,6 +114,7 @@ public class TreeChooser extends AbstractTemplateChooser {
   public void setTree(Tree tree) {
     this.replaceTaxonUnderscoresWithSpaces(tree);
     this.getTreeViewer().setTree(tree);
+    this.updateNewickField(tree);
   }
   
   private Set<String> getSelectedTaxonNames() {
@@ -178,6 +192,18 @@ public class TreeChooser extends AbstractTemplateChooser {
     } 
   }
   
+  private String getNEXUSTree() {
+    final StringWriter writer = new StringWriter();
+    final NexusExporter nexus = new NexusExporter(writer);
+    final Tree tree = this.getTreeViewer().getTreePane().getTree();
+    try {
+      nexus.exportTree(tree);
+    } catch (IOException e) {
+      log().error("Unable to write NEXUS format", e);
+    }
+    return writer.toString(); 
+  }
+  
   private void tryLoadDefaultDataFile(File mainFile) {
     if (mainFile == null) {
       return;
@@ -195,6 +221,52 @@ public class TreeChooser extends AbstractTemplateChooser {
         log().error("Could not open tree file", e);
       } catch (ImportException e) {
         log().error("Could not read tree", e);
+      }
+    }
+  }
+  
+  private void saveDefaultDataFile() {
+    // get the list of taxa
+    final List<String> names = new ArrayList<String>();
+    for (CharacterI character : CharacterListManager.getCharListMan(this.getGroup()).getCharList()) {
+      if (character.hasValue(this.getCharField())) {
+        names.add(character.getValue(this.getCharField()).getTerm().getName());
+      }
+    }
+    // check to see if there are any taxa
+    if (names.size() < 2) {
+      JOptionPane.showMessageDialog(null, "There are too few taxa to export. Enter at least 2 in the Taxon List first.");
+      return;
+    }
+    // check if there is a current data file
+    if (CharacterListManager.main().getCurrentDataFile() == null) {
+      // if not, warn user
+      final Object[] options = { "Save Annotations...", "Cancel" };
+      final int result = JOptionPane.showOptionDialog(null, "You must first choose a location to save your main data file.  The NEXUS file will be saved in the same directory.", null, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+      // cancel -> return
+      if (result != 0) return;
+      // okay -> save main file, continue
+      LoadSaveManager.inst().saveData();
+    }
+    final File mainFile = CharacterListManager.main().getCurrentDataFile();
+    // check if there is a current data file
+    if (mainFile != null) {
+      final File nexusFile = this.getDefaultDataFile(mainFile);
+      if (nexusFile.exists()) {
+        // warn user that they will overwrite their current tree file
+        final Object[] options = { "Replace File", "Cancel" };
+        final int result = JOptionPane.showOptionDialog(null, "A tree file exists at the chosen location.  If you proceed it will be replaced.  This cannot be undone.", "Warning", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+        // okay -> continue
+        // cancel -> return
+        if (result != 0) return;
+      }
+      // if so, write out tree file
+      log().debug("Newick comb: " + this.getNewickComb(names));
+      this.setNewickTree(this.getNewickComb(names));
+      try {
+        (new FileWriter(nexusFile)).write(this.getNEXUSTree());
+      } catch (IOException e) {
+        log().error("Failed to write NEXUS file", e);
       }
     }
   }
@@ -224,6 +296,46 @@ public class TreeChooser extends AbstractTemplateChooser {
         }
       }
     }
+  }
+  
+  private String getNewickComb(List<String> taxonNames) {
+    List<String> quotedNames = new ArrayList<String>();
+    for (String name : taxonNames) {
+      quotedNames.add("'" + name + "'");
+    }
+    final String separator = ",";
+    final String taxonList = Collections.join(quotedNames, separator);
+    final String newick = String.format("(%s)", taxonList);
+    return newick;
+  }
+  
+  @SuppressWarnings("serial")
+  private JToolBar createToolBar() {
+    final JToolBar toolBar = new JToolBar("Default Toolbar");
+    
+    try {
+    this.applyButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/square-filled.png"))) {
+      public void actionPerformed(ActionEvent e) {
+        applySelectionAction();
+      }
+    });
+    this.applyButton.setToolTipText("Apply Selection");
+    toolBar.add(this.applyButton);
+    
+    this.nexusButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/nexus.png"))) {
+      public void actionPerformed(ActionEvent e) {
+        saveDefaultDataFile();
+      }
+    });
+    this.nexusButton.setToolTipText("Write out default NEXUS file");
+    toolBar.add(this.nexusButton);
+    
+    } catch (FileNotFoundException e) {
+      log().error("Couldn't find toolbar icons", e);
+    }
+    
+    toolBar.setFloatable(false);
+    return toolBar;
   }
   
   private class FileListener implements LoadSaveListener {
