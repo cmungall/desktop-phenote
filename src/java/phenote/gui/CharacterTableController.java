@@ -164,36 +164,11 @@ public class CharacterTableController {
 	/**
 	 * in swixml config conf/character_table_panel.xml the save button is set up
 	 * to call this method
+   * calls LoadSaveManager saveToDbOrFile() which if has queryable/db adapter
+   saves to db, otherwise saves to file
 	 */
 	public void commitCharacters() {
-
-    ConstraintStatus cs = ConstraintManager.inst().checkCommitConstraints();
-    
-    // FAILURE - no commit
-    if (cs.isFailure()) {
-      String m = "There is a problem with your commit:\n\n"+cs.getWarningMessage()+
-        "\n\nCommit cancelled. You must fix this.";
-      JOptionPane.showMessageDialog(null,m,"Commit failed",JOptionPane.ERROR_MESSAGE);
-      return;
-    }
-
-    // WARNING - ask user if still wants to commit
-    if (cs.isWarning()) {
-      String m = "There is a problem with your commit:\n\n"+cs.getWarningMessage()
-        +"\n\nDo you want to commit anyway?";
-      int ret = JOptionPane.showConfirmDialog(null,m,"Commit Warning",
-                                              JOptionPane.YES_NO_OPTION,
-                                              JOptionPane.ERROR_MESSAGE);
-      if (ret != JOptionPane.YES_OPTION)
-        return;
-    }
-
-		if (Config.inst().hasQueryableDataAdapter()) {
-			Config.inst().getQueryableDataAdapter().commit(
-					this.getCharacterListManager().getCharacterList());
-		} else {
-			this.getLoadSaveManager().saveData();
-		}
+    getLoadSaveManager().saveToDbOrFile();
 	}
 
 	/**

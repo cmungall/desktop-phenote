@@ -12,6 +12,8 @@ import phenote.config.Config;
 import phenote.datamodel.CharacterListI;
 
 
+/** This was formerly just for files - adding in queryable/database data adapters */
+
 public class LoadSaveManager {
   
   private static LoadSaveManager singleton;
@@ -98,8 +100,12 @@ public class LoadSaveManager {
     }
   }
   
-  /**Saves the document's characters to a file, prompting the user to choose a file and data adapter.*/
+  /**Saves the document's characters to a file, prompting the user to choose a file
+     and data adapter.*/
   public void saveData() {
+    // CONSTRAINT check
+    try { checkConstraints(); } catch (ConstraintEx e) { return; } // failure
+
     File aFile = runSaveDialog();
     if (aFile != null) {
       FileFilter filter = fileChooser.getFileFilter();
@@ -114,6 +120,9 @@ public class LoadSaveManager {
   
   /**Saves the document's characters to the file it was loaded from, or prompting the user to choose a file and data adapter if there is no current file.*/
   public void saveData(boolean useCurrentFile) {
+    // CONSTRAINT check
+    try { checkConstraints(); } catch (ConstraintEx e) { return; } // failure ret
+
     if (useCurrentFile && (this.characterListManager.getCurrentDataFile() != null)) {
       this.saveData(this.characterListManager.getCurrentDataFile());
     } else {
@@ -125,18 +134,81 @@ public class LoadSaveManager {
   
   /**Saves the document's characters to the given file, using the default data adapter for the file's extension.*/
   public void saveData(File f) {
+    // CONSTRAINT check
+    try { checkConstraints(); } catch (ConstraintEx e) { return; } // failure ret
+
     DataAdapterI adapter = getDataAdapterForFilename(f.getName());
     saveData(f, adapter);
   }
   
   /**Saves the document's characters to the given file using the given data adapter.*/
-  public void saveData(File f, DataAdapterI adapter) {
+  private void saveData(File f, DataAdapterI adapter) {
+
+    // COMMIT TO FILE if constraints passed
     CharacterListI charList = this.characterListManager.getCharacterList();
     adapter.commit(charList, f);
     this.characterListManager.setCurrentDataFile(f);
     for (LoadSaveListener listener : this.listeners) {
       listener.fileSaved(f);
     }
+  }
+
+  /** This class needs a little refactoring - the above methods should be renamed
+      saveFileData - this method check if have queryable/db adapter and if so 
+      saves to that - otherwise brings up file chooser */
+  public void saveToDbOrFile() {
+
+    if (Config.inst().hasQueryableDataAdapter()) {
+      saveToDbDataadapter();
+		} else {
+			saveData(); // saveFileData really
+		}
+
+  }
+
+  private void saveToDbDataadapter() {
+		if (!Config.inst().hasQueryableDataAdapter()) return; // err? ex?
+
+    // CONSTRAINT check
+    try { checkConstraints(); }
+    // failure - return
+    catch (ConstraintEx e) { return; } // is this funny?
+
+    // COMMIT TO DB
+    Config.inst().getQueryableDataAdapter().commit(
+      characterListManager.getCharacterList());
+    
+  }
+
+  private class ConstraintEx extends Exception {
+    private ConstraintEx(String m) { super(m); }
+  }
+
+  /** If constraints fail and or warning and user decided to not commit then
+      throws ConstraintEx (or should it just return boolean?)
+      Also puts up error message */
+  private void checkConstraints() throws ConstraintEx {
+    ConstraintStatus cs = ConstraintManager.inst().checkCommitConstraints();
+    
+    // FAILURE - no commit
+    if (cs.isFailure()) {
+      String m = "There is a problem with your commit:\n\n"+cs.getWarningMessage()+
+        "\n\nCommit cancelled. You must fix this.";
+      JOptionPane.showMessageDialog(null,m,"Commit failed",JOptionPane.ERROR_MESSAGE);
+      throw new ConstraintEx(m);
+    }
+
+    // WARNING - ask user if still wants to commit
+    if (cs.isWarning()) {
+      String m = "There is a problem with your commit:\n\n"+cs.getWarningMessage()
+        +"\n\nDo you want to commit anyway?";
+      int ret = JOptionPane.showConfirmDialog(null,m,"Commit Warning",
+                                              JOptionPane.YES_NO_OPTION,
+                                              JOptionPane.ERROR_MESSAGE);
+      if (ret != JOptionPane.YES_OPTION)
+        throw new ConstraintEx(m);
+    }
+    
   }
   
   public void exportData() {
