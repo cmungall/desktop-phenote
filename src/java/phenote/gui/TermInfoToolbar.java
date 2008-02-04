@@ -160,15 +160,17 @@ public class TermInfoToolbar extends JToolBar {
     showToolbar();
   }
   
+  public void setUseTermListener (UseTermListener utl) {
+  	useTermListener = utl;
+  }
+  
   private class UseTermActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
-      //commitTerm();
-      // relation comp list sets to null
-      // this doesnt work because useTermListener is in TermInfo2 not in toolbar
-      //if (getUseTermListener() == null) return;
-      if (useTermListener == null) return;
+//      System.out.println("curent term for use term="+currentOboClass);
+    	UseTermListener utl = useTermListener;
+      if (utl == null) return;
       if (currentOboClass == null) return; // shouldnt happen
-      useTermListener.useTerm(new UseTermEvent(TermInfoToolbar.this,currentOboClass));
+      utl.useTerm(new UseTermEvent(TermInfoToolbar.this,currentOboClass));
     }
   }
   

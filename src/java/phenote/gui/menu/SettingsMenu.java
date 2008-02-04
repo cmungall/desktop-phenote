@@ -102,7 +102,7 @@ public class SettingsMenu extends DynamicMenu {
 
     lockDoc = new JCheckBoxMenuItem("Lock Docking Components");
     lockDoc.addActionListener(new LockDocActionListener());
-//    lockDoc.setSelected(GUIManager.getManager().getDocLockStatus());
+    lockDoc.setSelected(GUIManager.getManager().getDocLockStatus());
     add(lockDoc);
 
     

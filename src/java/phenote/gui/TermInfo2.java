@@ -116,10 +116,6 @@ import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
  * @author Nicole Washington
  * 
  */
-/**
- * @author Nicole
- *
- */
 public class TermInfo2 extends AbstractGUIComponent {
 
 	private static final Logger LOG = Logger.getLogger(TermInfo2.class);
@@ -785,15 +781,19 @@ public class TermInfo2 extends AbstractGUIComponent {
 			// This sets who now listens to use term button clicks (only 1
 			// listener)
 			setUseTermListener(e.getUseTermListener());
+			termInfoToolbar.setUseTermListener(e.getUseTermListener());
 			//change the name of the item being browsed in the term info header
 			setComponentTitleFromOBOClass(e.getOboClass());
-//			termInfoToolbar.setNaviButtonStatus();
 			termInfoToolbar.setNaviButtonStatus();
 		}
 	}
 
 	private void setUseTermListener(UseTermListener utl) {
 		useTermListener = utl;
+	}
+	
+	public UseTermListener getUseTermListener() {
+		return useTermListener;
 	}
 
 	private void addTermToNaviHistory(String link) {

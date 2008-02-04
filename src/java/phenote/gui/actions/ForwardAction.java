@@ -17,6 +17,7 @@ import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.TermNotFoundException;
 import phenote.gui.TermInfo2;
 import phenote.gui.selection.SelectionManager;
+import phenote.gui.selection.UseTermListener;
 import phenote.main.Phenote;
 
 
@@ -69,7 +70,8 @@ public class ForwardAction extends AbstractAction  {
 
 		try {
 			OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
-			SelectionManager.inst().selectMouseOverTerm(this, term, null);
+			UseTermListener utl = TermInfo2.inst().getUseTermListener();
+			SelectionManager.inst().selectMouseOverTerm(this, term, utl);
 			//System.out.println("found forward term: "+term);
 		} catch (TermNotFoundException ex) {
 			return;
