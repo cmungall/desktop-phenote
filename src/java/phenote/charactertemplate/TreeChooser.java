@@ -100,6 +100,7 @@ public class TreeChooser extends AbstractTemplateChooser {
   }
 
   public void setNewickTree(String treeText) {
+    log().debug("Set newick tree: " + treeText);
     try {
       final Tree tree = this.importTree(treeText);
       this.setTree(tree);
@@ -196,11 +197,13 @@ public class TreeChooser extends AbstractTemplateChooser {
     final StringWriter writer = new StringWriter();
     final NexusExporter nexus = new NexusExporter(writer);
     final Tree tree = this.getTreeViewer().getTreePane().getTree();
+    log().debug("Tree is: " + tree);
     try {
       nexus.exportTree(tree);
     } catch (IOException e) {
       log().error("Unable to write NEXUS format", e);
     }
+    log().debug("NEXUS tree is: " + writer.toString());
     return writer.toString(); 
   }
   
@@ -227,7 +230,7 @@ public class TreeChooser extends AbstractTemplateChooser {
   
   private void saveDefaultDataFile() {
     // get the list of taxa
-    final List<String> names = new ArrayList<String>();
+    final Set<String> names = new HashSet<String>();
     for (CharacterI character : CharacterListManager.getCharListMan(this.getGroup()).getCharList()) {
       if (character.hasValue(this.getCharField())) {
         names.add(character.getValue(this.getCharField()).getTerm().getName());
@@ -264,7 +267,10 @@ public class TreeChooser extends AbstractTemplateChooser {
       log().debug("Newick comb: " + this.getNewickComb(names));
       this.setNewickTree(this.getNewickComb(names));
       try {
-        (new FileWriter(nexusFile)).write(this.getNEXUSTree());
+        log().debug("Writing to file: " + nexusFile.getAbsolutePath());
+        FileWriter writer = new FileWriter(nexusFile);
+        writer.write(this.getNEXUSTree());
+        writer.close();
       } catch (IOException e) {
         log().error("Failed to write NEXUS file", e);
       }
@@ -298,7 +304,7 @@ public class TreeChooser extends AbstractTemplateChooser {
     }
   }
   
-  private String getNewickComb(List<String> taxonNames) {
+  private String getNewickComb(Set<String> taxonNames) {
     List<String> quotedNames = new ArrayList<String>();
     for (String name : taxonNames) {
       quotedNames.add("'" + name + "'");
