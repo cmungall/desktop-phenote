@@ -46,7 +46,6 @@ import org.swixml.SwingEngine;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.LoadSaveListener;
 import phenote.dataadapter.LoadSaveManager;
-import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharacterI;
 import phenote.util.Collections;
 import phenote.util.FileUtil;
