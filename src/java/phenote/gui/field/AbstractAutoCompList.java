@@ -316,7 +316,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
       from thread */
   private class ListSearchListener implements SearchListener {
     private boolean showPopup = true;
-    // could have CompletionItem superclass for rel & term??
+    // could have CompletionItem superclass for rel & term?? yes!
     public void newResults(List results) {
       changingCompletionList = true;
       // could just do comboBoxModel.setList(l); ???

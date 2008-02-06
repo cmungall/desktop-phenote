@@ -12,6 +12,7 @@ import org.obo.datamodel.AnnotatedObject;
 import org.obo.datamodel.Instance;
 import org.obo.datamodel.Namespace;
 import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOObject;
 import org.obo.datamodel.OBOProperty;
 import org.obo.datamodel.OBOSession;
 import org.obo.datamodel.TermCategory;
@@ -22,6 +23,7 @@ import org.obo.util.QueryUtil;
 import org.obo.util.TermUtil;
 
 import phenote.config.OntologyConfig;
+import phenote.config.xml.OnTheFlySlimTermDocument.OnTheFlySlimTerm;
 
 /** Ontology represents at this point the contents of a single obo file (which can
     be more than one ontology) an ontology wraps an obo edit OBOSession - at this point
@@ -38,7 +40,8 @@ public class Ontology {
   // maybe have different modes/preferences
   private Collection<OBOClass> sortedTerms; // was List
   private Collection<OBOClass> sortedObsoleteTerms;
-  private List<OBOProperty> sortedRelations;
+  //private List<OBOProperty> sortedRelations;
+  private List<OBOObject> sortedRelations; // more general
   private boolean hasInstances;
   // is it possible to merge sorted instances & sorted terms
   // as they are both LinkedObjects (and annotated obj)
@@ -50,6 +53,7 @@ public class Ontology {
       needs to be some sort of wrapper or subclass? need to think about this...
       for now just shoving in here */
   private String source; // "source" is slightly generic isnt it?
+  private OntologyConfig ontologyConfig;
 
   /** this may be general? maybe should be a real date - this is the time of the ontology
    for files this would be the modification date, for loading from database somewhere
@@ -68,8 +72,9 @@ public class Ontology {
       the model i actually think its ok */
   public Ontology(Collection<Namespace> spaces,OntologyConfig oc,OBOSession os) {
     oboSession = os;
+    ontologyConfig = oc;
     // get id filter, slim, & possible namespace from oc...
-    name = oc.getName();
+    name = oc.getName(); // getName could just call oc.getName?
     slim = oc.getSlim();
     sortById = oc.sortById();
     // if namespace specified and is valid load that
@@ -178,13 +183,15 @@ public class Ontology {
   }
 
 
-  public List<OBOProperty> getSortedRelations() {
+  //public List<OBOProperty> getSortedRelations() { --> OBOObject
+  public List<OBOObject> getSortedRelations() {
     if (sortedRelations == null) {
       //sortedRelations=new ArrayList<OBOProperty>(); not Comparable!
-      List<OBOProperty> sorRel = new ArrayList<OBOProperty>();
+      List<OBOObject> sorRel = new ArrayList<OBOObject>();
       // if (oboSession == null) ? shouldnt happen
       sorRel.addAll(TermUtil.getRelationshipTypes(oboSession));
-      Collections.sort(sorRel,new RelComparator());
+      //Collections.sort(sorRel,new RelComparator());
+      Collections.sort(sorRel,new OboObjComparator());
       sortedRelations = sorRel; // ?
     }
     return sortedRelations;
@@ -196,6 +203,15 @@ public class Ontology {
     }
     public boolean equals(OBOProperty r1, OBOProperty r2) {
       return r1.toString().equals(r2.toString());
+    }
+  }
+
+  private class OboObjComparator implements Comparator<OBOObject> {
+    public int compare(OBOObject r1, OBOObject r2) {
+      return r1.getName().compareTo(r2.getName()); // getName? toString?
+    }
+    public boolean equals(OBOProperty r1, OBOProperty r2) {
+      return r1.getName().equals(r2.getName());
     }
   }
 
@@ -303,46 +319,63 @@ public class Ontology {
     }
     
     // for now just grab 1st namespace as namespacequery only takes 1 namespace
-    //Namespace ns = spaces.toArray(new Namespace[0])[0];
-    //Query<OBOClass, OBOClass> nsQuery =
     Namespace[] spacesArray = spaces.toArray(new Namespace[0]);
     NamespaceQuery nsQuery = new NamespaceQuery(spacesArray);
     if (sortById) nsQuery.setComparator(new IdComparator());
     // create a new query engine on the session we just loaded
     QueryEngine engine = new QueryEngine(oboSession);
     
-    // run the namespace query and cache the results
-    long time = System.currentTimeMillis();
-    //Collection<OBOClass> 
-    // true -> cache result ??? do we need to cache - i dont think so
-    // BUG - this includes obsoletes!
+    // run the namespace query and dont cache the results(false)
+    // BUG - this includes obsoletes! (fixed?)
     nsQuery.setAllowObsoletes(false);
-    // NameSpaceQuery sorts be term name
+    // NameSpaceQuery sorts by term name
     sortedTerms = engine.query(nsQuery, false);
-    //sortedTerms = QueryUtil.getResults(engine.query(nsQuery, false));
-    //log().debug(spacesArray[0]+" Non-obsolete: got " + sortedTerms.size()+" namespace hits in " + (System.currentTimeMillis() - time)+ "ms # of namespaces: "+spaces.size());
-//     int i=0;
-//     for (OBOClass oc : sortedTerms) {
-//       System.out.println(++i +" "+spacesArray[0]+" "+oc.getName()+" ns:"+oc.getNamespace());
-//     }
 
     nsQuery.setAllowObsoletes(true);
     nsQuery.setAllowNonObsoletes(false);
     sortedObsoleteTerms = engine.query(nsQuery, false);
-    //log().debug("Obsolete: got " + sortedTerms.size()+" namespace hits in " + (System.currentTimeMillis() - time)+ "ms # of namespaces: "+spaces.size());
+
+    // if (hasOnTheFlySlim()) {
+    // can either make slim for query below - or just make slim by hand
+    // List<OBOObject> terms =  getOnTheFlySlimObjects()
+    // for (OBOObject term : terms) {
+    // OBOSession.getObject(
+    // sorted
+
 
     if (hasSlim()) {
       CategoryQuery catQuery = new CategoryQuery(slim);
-      //time = System.currentTimeMillis(); // i think bool is for caching
-      sortedTerms = QueryUtil.getResults(engine.query(sortedTerms,catQuery)); //, false);
-//      System.out.println("Category query (" +slim+ ") got "+sortedTerms.size()+" in " + (System.currentTimeMillis() - time) + "ms");
+      sortedTerms = QueryUtil.getResults(engine.query(sortedTerms,catQuery));
       // obsoletes?
-      sortedObsoleteTerms = QueryUtil.getResults(engine.query(sortedObsoleteTerms,catQuery));
+      sortedObsoleteTerms =
+        QueryUtil.getResults(engine.query(sortedObsoleteTerms,catQuery));
     }
 
-    //for (Namespace n : spaces) System.out.println(n);
-    //for (OBOClass o : sortedTerms) System.out.println(o);
-    
+  }
+
+  private boolean hasOnTheFlySlim() {
+    if (ontologyConfig==null) return false;
+    return ontologyConfig.hasOnTheFlySlim();
+  }
+
+  /** returns null if dont have on the fly slim terms */
+  private List<OBOObject> getOnTheFlySlimObjectsSorted() {
+    if (ontologyConfig == null) return null;
+    OnTheFlySlimTerm[] termBeans = ontologyConfig.getOnTheFlySlimTerms();
+    for (OnTheFlySlimTerm termBean : termBeans) {
+      String id = termBean.getTerm();
+      if (id==null) continue;
+      //oboSession.
+    }
+
+    return null;
+  }
+
+
+  private class IdComparator implements Comparator<OBOClass> {
+    public int compare(OBOClass o1, OBOClass o2) {
+      return o1.getID().compareToIgnoreCase(o2.getID());
+    }
   }
 
   /** This is not generic - this looks for ids that have the filterOut string
@@ -369,15 +402,17 @@ public class Ontology {
     return filteredList;
   }
 
-
-  private class IdComparator implements Comparator<OBOClass> {
-    public int compare(OBOClass o1, OBOClass o2) {
-      return o1.getID().compareToIgnoreCase(o2.getID());
-    }
-  }
-
 }
 
+//long time = System.currentTimeMillis();
+    //log().debug("Obsolete: got " + sortedTerms.size()+" namespace hits in " + (System.currentTimeMillis() - time)+ "ms # of namespaces: "+spaces.size());
+    //sortedTerms = QueryUtil.getResults(engine.query(nsQuery, false));
+    //log().debug(spacesArray[0]+" Non-obsolete: got " + sortedTerms.size()+" namespace hits in " + (System.currentTimeMillis() - time)+ "ms # of namespaces: "+spaces.size());
+//     int i=0;
+//     for (OBOClass oc : sortedTerms) {
+//       System.out.println(++i +" "+spacesArray[0]+" "+oc.getName()+" ns:"+oc.getNamespace());
+//     }
+//      System.out.println("Category query (" +slim+ ") got "+sortedTerms.size()+" in " + (System.currentTimeMillis() - time) + "ms");
 //   private class IdSortedNamespaceQuery extends NamespaceQuery {
 //     protected Comparator<OBOClass> comparator = new Comparator<OBOClass>() {
 //       public int compare(OBOClass o1, OBOClass o2) {

@@ -303,21 +303,41 @@
   </xs:element>
   <xs:element name="ontology">
     <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:onTheFlySlimTerm">
+          <xs:annotation>
+            <xs:documentation>can list terms to use for a slim of ontol</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
       <xs:attribute name="name" use="required" type="xs:string"/>
       <xs:attribute name="file" use="required" type="xs:string">
         <xs:annotation>
-          <xs:documentation>obo file for ontology</xs:documentation>
+          <xs:documentation>obo file for ontology - term def ont file replaces this</xs:documentation>
         </xs:annotation>
       </xs:attribute>
       <xs:attribute name="namespace" use="required" type="xs:string"/>
       <xs:attribute name="filter-out" use="required" type="xs:string">
         <xs:annotation>
-          <xs:documentation>filter out replaced by namespace, pase'</xs:documentation>
+          <xs:documentation>filter out replaced by namespace, pase' - phase out</xs:documentation>
         </xs:annotation>
       </xs:attribute>
       <xs:attribute name="slim" use="required" type="xs:string"/>
-      <xs:attribute name="repos-subdir" use="required" type="xs:string"/>
+      <xs:attribute name="repos-subdir" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>this is pase and should be phased out</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
       <xs:attribute name="is-postcomp-rel" use="required" type="xs:boolean"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="onTheFlySlimTerm">
+    <xs:complexType>
+      <xs:attribute name="term" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>id of term for slim</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
     </xs:complexType>
   </xs:element>
   <xs:element name="group">

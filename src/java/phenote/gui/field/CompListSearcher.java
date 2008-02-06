@@ -12,6 +12,7 @@ import org.bbop.util.AbstractTaskDelegate;
 import org.bbop.util.TaskDelegate;
 import org.obo.datamodel.AnnotatedObject;
 import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOObject;
 import org.obo.datamodel.OBOProperty;
 
 import phenote.datamodel.Ontology;
@@ -63,13 +64,27 @@ public class CompListSearcher {
   }
 
   /** relations are short ontologies - dont need threaded optimization */
-  public List<CompletionRelation> getStringMatchRelations(String input) {
-    List<CompletionRelation> matches = new ArrayList<CompletionRelation>();
+//   public List<CompletionRelation> getStringMatchRelations(String input) {
+//     List<CompletionRelation> matches = new ArrayList<CompletionRelation>();
+//     // most likely only 1 relation ontology, but no harm being general
+//     for (Ontology ontology : ontologyList) {
+//       //for (OBOProperty rel : ontology.getSortedRelations()) {
+//       for (OBOObject rel : ontology.getSortedRelations()) {
+//         if (rel.toString().contains(input))
+//           matches.add(new CompletionRelation(rel));
+//       }
+//     }
+//     return matches;
+//   }
+  // --> more general OBOObjects replace OBOProperty
+  public List<CompletionObject> getStringMatchRelations(String input) {
+    List<CompletionObject> matches = new ArrayList<CompletionObject>();
     // most likely only 1 relation ontology, but no harm being general
     for (Ontology ontology : ontologyList) {
-      for (OBOProperty rel : ontology.getSortedRelations()) {
+      //for (OBOProperty rel : ontology.getSortedRelations()) {
+      for (OBOObject rel : ontology.getSortedRelations()) {
         if (rel.toString().contains(input))
-          matches.add(new CompletionRelation(rel));
+          matches.add(new CompletionObject(rel));
       }
     }
     return matches;

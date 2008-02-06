@@ -11,6 +11,7 @@ import phenote.config.xml.OntologyFileDocument;
 import phenote.config.xml.ExternaldbDocument.Externaldb;
 import phenote.config.xml.FieldDocument.Field;
 import phenote.config.xml.OntologyDocument.Ontology;
+import phenote.config.xml.OnTheFlySlimTermDocument.OnTheFlySlimTerm;
 import phenote.config.xml.TerminologyDefinitionsDocument.TerminologyDefinitions;
 //import phenote.config.xml.PostcompDocument.Postcomp;
 
@@ -303,6 +304,15 @@ public class OntologyConfig {
       return;
 
 	  }
+  }
+
+  public boolean hasOnTheFlySlim() {
+    return getOnTheFlySlimTerms()!=null && getOnTheFlySlimTerms().length > 0;
+  }
+  
+  
+  public OnTheFlySlimTerm[] getOnTheFlySlimTerms() {
+    return getOntologyBean().getOnTheFlySlimTermArray();
   }
 
 }

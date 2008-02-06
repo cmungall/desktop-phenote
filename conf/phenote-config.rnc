@@ -224,15 +224,27 @@ field =
 ontology =
   element ontology {
     attribute name { xsd:string },
-    ## obo file for ontology
+    ## obo file for ontology - term def ont file replaces this
     attribute file { xsd:string },
     attribute namespace { xsd:string },
-    ## filter out replaced by namespace, pase'
+    ## filter out replaced by namespace, pase' - phase out
     attribute filter-out { xsd:string },
     attribute slim { xsd:string },
+    ## this is pase and should be phased out
     attribute repos-subdir {xsd:string},
-    attribute is-postcomp-rel {xsd:boolean}
+    attribute is-postcomp-rel {xsd:boolean},
+    ## can list terms to use for a slim of ontol
+    onTheFlySlimTerm*
   }
+
+## for ontology - list terms to use for the ontology, and on the fly slim
+## so only the terms listed here will be seen by user, not the whole ontology
+## this is for simple slims (just a few terms) that you dont wanna bother
+## making an obo for, eventually add useKids to include kids
+onTheFlySlimTerm = element onTheFlySlimTerm {
+  ## id of term for slim
+  attribute term { xsd:string }
+}
   
  group =
    element group {

@@ -56,22 +56,33 @@ class RelationCompList extends AbstractAutoCompList {
   }
 
 
-  private CompletionRelation compRelDowncast(Object obj)  throws OboException {
-    if (obj == null) throw new OboException();
-    if ( ! (obj instanceof CompletionRelation)) {
-      //log.info("Item in completion list not obo class "+obj.getClass());
-      throw new OboException("Item in relation list not CompRel "+obj.getClass());
-    }
-    return (CompletionRelation)obj;
-  }
-
   /** returns currently selected relation, for auto combos of relations,
-      throws obo ex if there is no current relation */
+      throws obo ex if there is no current relation - this must be OBOProperty
+      as OBOObject not sufficient for OBORestrictions */
   private OBOProperty getSelectedRelation() throws OboException {
-    Object obj = getSelectedObject(); // throws oboex
+    Object obj = getSelectedObject(); // throws oboex if no combobox model
     //return oboPropertyDowncast(obj); // throws oboex
-    CompletionRelation r = compRelDowncast(obj);
+    //CompletionRelation r = compRelDowncast(obj);
+    CompletionObject r = compObjDowncast(obj);
+    if (!r.hasOboProperty())
+      throw new OboException("Rel list item is not a relation "+r);
     return r.getOboProperty();
+  }
+//   private CompletionRelation compRelDowncast(Object obj)  throws OboException {
+//     if (obj == null) throw new OboException();
+//     if ( ! (obj instanceof CompletionRelation)) {
+//       //log.info("Item in completion list not obo class "+obj.getClass());
+//       throw new OboException("Item in relation list not CompRel "+obj.getClass());
+//     }
+//     return (CompletionRelation)obj;
+//   }
+  private CompletionObject compObjDowncast(Object obj)  throws OboException {
+    if (obj == null) throw new OboException();
+    if ( ! (obj instanceof CompletionObject)) {
+      //log.info("Item in completion list not obo class "+obj.getClass());
+      throw new OboException("Item in relation list not CompObj "+obj.getClass());
+    }
+    return (CompletionObject)obj;
   }
    
   protected void updateModel(boolean useTopHit) {

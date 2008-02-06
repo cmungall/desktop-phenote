@@ -22,10 +22,10 @@ import phenote.gui.actions.UndoAction;
 import phenote.gui.actions.RedoAction;
 import phenote.gui.actions.CopyAction;
 
-// This is the basic toolbar to be displayed, containing items
+/** This is the basic toolbar to be displayed, containing items
 // such as New, Save, Print, etc.  Could be turned on/off if desired.
 // Basically provides the same functionality as in the menus, 
-// but doesn't require accessing the menus.
+// but doesn't require accessing the menus. */
 
 
 public class StandardToolbar extends AbstractGUIComponent {

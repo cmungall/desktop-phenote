@@ -113,29 +113,37 @@ public class CharacterTable extends AbstractGUIComponent implements CharacterTab
     final JToolBar toolBar = new JToolBar("Default Toolbar");
     
     try {
-    final JButton addButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/list-add.png"))) {
-      public void actionPerformed(ActionEvent e) {
-        addNewCharacter();
-      }
-    });
-    addButton.setToolTipText("Add");
-    toolBar.add(addButton);
-    
-    this.deleteButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/list-remove.png"))) {
-      public void actionPerformed(ActionEvent e) {
-        deleteSelectedCharacters();
-      }
-    });
-    this.deleteButton.setToolTipText("Delete");
-    toolBar.add(this.deleteButton);
-    
-    this.duplicateButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/list-duplicate.png"))) {
-      public void actionPerformed(ActionEvent e) {
-        duplicateSelectedCharacters();
-      }
-    });
-    this.duplicateButton.setToolTipText("Duplicate");
-    toolBar.add(this.duplicateButton);
+      final JButton addButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/list-add.png"))) {
+          public void actionPerformed(ActionEvent e) {
+            addNewCharacter();
+          }
+        });
+      addButton.setToolTipText("Add");
+      toolBar.add(addButton);
+      
+      this.deleteButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/list-remove.png"))) {
+          public void actionPerformed(ActionEvent e) {
+            deleteSelectedCharacters();
+          }
+        });
+      this.deleteButton.setToolTipText("Delete");
+      toolBar.add(this.deleteButton);
+      
+      this.duplicateButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/list-duplicate.png"))) {
+          public void actionPerformed(ActionEvent e) {
+            duplicateSelectedCharacters();
+          }
+        });
+      this.duplicateButton.setToolTipText("Duplicate");
+      toolBar.add(this.duplicateButton);
+      
+      // OntologyMaker optionally configged - todo todo
+//       OntologyMakerI om = Config.inst().getOntMaker(getGroup());
+//       if (om != null && om.useButtonToLaunch()) {
+//         ontolMaker = om;
+//         ontolMakerButton.setText(om.getButtonText());
+//       }      
+
     } catch (FileNotFoundException e) {
       log().error("Couldn't find toolbar icons", e);
     }

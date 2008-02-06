@@ -503,7 +503,7 @@ public class OntologyDataAdapter {
 
   /** Load up/cache Sets for all ontologies used, anatomyOntologyTermSet
    * and patoOntologyTermSet -- move to dataadapter/OntologyDataAdapter... 
-   this is old - phase out? */
+   this is old - for sep obo sessions - phase out? */
   private Ontology initOntology(OntologyConfig ontCfg) throws OntologyException {
     Ontology ontology = new Ontology(ontCfg.getName()); // new Ontology(ontCfg)?
     if (ontCfg.hasFilter()) // set filter before loading obo session

@@ -341,7 +341,9 @@ class PostCompGui {
       for (RelDiffGui rd : relDiffGuis) {
         // check if filled in both rel & diff
         try {
+          // must be an OBOProp!
           OBOProperty rel = rd.relField.getCurrentRelation(); // throws ex
+          // can be an OBOObj
           OBOClass diffTerm = rd.diffField.getCurrentOboClass(); // throws Ex
           oboUtil.addRelDiff(rel,diffTerm);
         }
