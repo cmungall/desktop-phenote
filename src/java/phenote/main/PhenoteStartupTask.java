@@ -70,10 +70,9 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		factories.add(new TermInfoFactory());
 		factories.add(new NCBIInfoFactory());
 		factories.addAll(this.getCharacterTableComponentFactories());
-		factories.add(new GraphEditorFactory());
+//		factories.add(new GraphEditorFactory());  <-- removing this for upcoming 1.5 release
 		factories.add(new DAGViewFactory());
 		factories.add(new GraphDAGViewFactory());
-//		factories.add(new StandardToolbarFactory());
 		factories.add(new AnnotationSummaryComponentFactory());
 		factories.addAll(this.getTemplateGroupComponentFactories());
     factories.add(new ProtocolEditorFactory());
@@ -84,7 +83,6 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 	@Override
 	protected void doOtherInstallations() {
 		LOG.debug("doOtherInstallations called");
-//	GUIManager.getManager().installToolbar(new StandardToolbar());
 		
 		// new Throwable().printStackTrace();
 		//i'm removing this here because i think its being called twice!  yep
