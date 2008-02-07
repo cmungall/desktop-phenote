@@ -213,6 +213,8 @@ public class WormAdapter implements QueryableDataAdapterI {
             se.printStackTrace(); System.exit(1); } }
 //System.out.println("joinkey "+joinkey+" end");
 
+        chr.setValue("PgdbId",joinkey);					// assign the allele and the column
+
         String postgres_table = "app_type"; String tag_name = "Type"; String tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_tempname"; tag_name = "Name"; tag_value = chr.getValueString(tag_name);
