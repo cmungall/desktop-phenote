@@ -107,7 +107,12 @@
       <img src="http://www.phenote.org/images/eclipse-oboedit-project-dependencies.png"
          alt="Phenote in Eclipse"
          class="image" />
-      
+      <h2>Other things to note about Eclipse</h2>
+<p>The source code for Phenote (and for the BBOP and OBO libraries that it depends on) changes frequently. To stay up to date inside Eclipse, use the right mouse menu option "Team -> Update". To update from the shell, use <code>svn update</code>.</p>
+
+<p>Note that if you are using Eclipse but you do an svn update from the shell, or make any other changes outside of Eclipse, you will need to do a "Refresh" in Eclipse to get it in sync. Also note that if new jars are added to the project, you might need to add them to your Java Build Path in Eclipse (see above).</p>
+
+<p>If you wish to stay informed of every single svn commit, you can join the svn-commits list.</p>
       <h1>Getting the Source Code from Subversion on the command line</h1>
       <p><code>svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/trunk phenote</code></p>
       <p>To check out the supporting projects, run these additional commands:</p>
