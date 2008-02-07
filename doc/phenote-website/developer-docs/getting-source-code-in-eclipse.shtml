@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><!--#include virtual="ssi/head.html" -->
+
+
+    
+    
+  <title>Phenote: A Phenotype Annotation Tool using Ontologies</title></head>
+
+<body>
+
+
+    <!--#include virtual="ssi/header.html" -->
+
+    
+  <div id="main_container_aux">
+      
+    <div id="main_content_aux">
+	
+      <div class="catch_phrase">
+        Getting and Running the Source Code
+      </div>
+
+      <h1>Introduction</h1>
+      <p>Phenote is stored in a <a href="http://subversion.tigris.org/project_packages.html">subversion</a> repository.  This section provides instructions for downloading the source code, compiling, and running the software from either the command line or through Eclipse, and is primarily intended for developers.</p>
+     
+      <h1>Getting the Source Code with Eclipse</h1>
+      <h2>Build Paths</h2>
+        <p>The Phenote Eclipse project is designed to be used with the OBO and BBOP Java APIs.  The build path in the Phenote project file refers to projects named "OBO", "BBOP", and "OBO-Edit" as dependencies, so it is highly recommended that you follow the optional instructions below to create these projects as well.</p>
+      <p>However, it is not necessary.  If you prefer, you may check out only the Phenote project, remove the project dependencies, and modify the build path to include jars/bbop.jar, jars/obo.jar, and jars/oboedit.jar.</p>
+      
+      <h2>Installing Subversion Support</h2>
+      <p>Current versions of Eclipse do not automatically support subversion. However, the <a href="http://subclipse.tigris.org/">subclipse plugin</a> adds seamless subversion support to Eclipse, using the existing Team mechanisms. See <a href="http://subclipse.tigris.org/install.html">http://subclipse.tigris.org/install.html</a> for installation instructions.</p>
+      <h2>Getting Phenote from Subclipse</h2>
+      <ol>
+	<li>Choose File -> New -> Project</li>
+	<li>Select "Checkout Projects from SVN" in the New Project Wizard, and click "Next"</li>
+	<li>Choose "Create a New Repository Location" and click "Next"</li>
+	<li>Enter https://geneontology.svn.sourceforge.net/svnroot/geneontology/java/oboedit/ into the location field and click "Next"</li>
+        <li>Choose the trunk directory to get the latest version (choose a branch from the "tags" or "branches" directories to get an earlier version) and click "Next"</li>
+        <li>Enter a name for the Eclipse projet ("Phenote" is recommended) and click "Finish" </li>
+      </ol>
+      <h2>(Optional) Getting the OBO API from Subclipse</h2>
+            <ol>
+	<li>Choose File -> New -> Project</li>
+	<li>Select "Checkout Projects from SVN" in the New Project Wizard, and click "Next"</li>
+	<li>Choose "Create a New Repository Location" and click "Next"</li>
+	<li>Enter https://geneontology.svn.sourceforge.net/svnroot/geneontology/java/obo/ into the location field and click "Next"</li>
+        <li>Choose the trunk directory to get the latest version (choose a branch from the "tags" or "branches" directories to get an earlier version) and click "Next"</li>
+        <li>Enter a name for the Eclipse projet ("OBO" is recommended) and click "Finish" </li>
+      </ol>
+      <h2>(Optional) Getting the BBOP API from Subclipse</h2>
+            <ol>
+	<li>Choose File -> New -> Project</li>
+	<li>Select "Checkout Projects from SVN" in the New Project Wizard, and click "Next"</li>
+	<li>Choose "Create a New Repository Location" and click "Next"</li>
+	<li>Enter https://geneontology.svn.sourceforge.net/svnroot/geneontology/java/bbop/ into the location field and click "Next"</li>
+        <li>Choose the trunk directory to get the latest version (choose a branch from the "tags" or "branches" directories to get an earlier version) and click "Next"</li>
+        <li>Enter a name for the Eclipse projet ("BBOP" is recommended) and click "Finish" </li>
+      </ol>
+      <h2>(Optional) Getting the OBO-Edit API from Subclipse</h2>
+            <ol>
+	<li>Choose File -> New -> Project</li>
+	<li>Select "Checkout Projects from SVN" in the New Project Wizard, and click "Next"</li>
+	<li>Choose "Create a New Repository Location" and click "Next"</li>
+	<li>Enter https://geneontology.svn.sourceforge.net/svnroot/geneontology/java/oboedit/ into the location field and click "Next"</li>
+        <li>Choose the trunk directory to get the latest version (choose a branch from the "tags" or "branches" directories to get an earlier version) and click "Next"</li>
+        <li>Enter a name for the Eclipse projet ("OBO-Edit" is recommended) and click "Finish" </li>
+      </ol>
+
+      <b>Congratulations!  You're done! </b>
+      <h2>Updating the source code via subclipse</h2>
+      <ol>
+	<li>The source code for these projects is updated periodically.  You have to update manually; Eclipse will not do this automatically.</li>
+        <li>Right-click on the project name (e.g. Phenote) in the Package Explorer and choose Team->Update from the menu</li>
+        <li>When the update is complete, right-click on the project name again and choose Refresh</li>
+      </ol>
+      <h1>Running Phenote from Eclipse</h1>
+      <p>When you run Phenote, you need to assign the amount of memory it will use. To do so, select "Open Run Dialog" from the Run menu. Make sure Phenote is selected in the "Java Application" list on the left. Then fill in the following parameter in the VM arguments box according to the amount of memory in your computer:  (1024 is a great amount, if you can spare it)</p>
+      <img src="http://www.phenote.org/images/eclipse-phenote-run.png"
+         alt="Phenote in Eclipse"
+         class="image" />
+      <p>You may also need to set the jars that Phenote uses. From the list of projects in the Package Explorer, choose Phenote, then right-click and select "Properties". In the Properties window, select "Java Build Path" from the list on the left side, and then choose the "Libraries" tab. Click "Add JARs" and add the jars in Phenote/jars.</p>
+      <img src="http://www.phenote.org/images/eclipse-phenote-jars.png"
+         alt="Phenote in Eclipse"
+         class="image" />
+      <p>You will also need to set up the test suite as a separate source tree:</p>
+            <img src="http://www.phenote.org/images/eclipse-phenote-source.png"
+         alt="Phenote in Eclipse"
+         class="image" />
+      <p>If you are running with project dependencies, then you will need to set up some/all of the following:</p>
+      <p>In phenote, the project dependencies could be all of:</p>
+      <img src="http://www.phenote.org/images/eclipse-phenote-project-dependencies.png"
+         alt="Phenote in Eclipse"
+         class="image" />
+      <p>For BBOP, be sure to export some of the jars:</p>
+      <img src="http://www.phenote.org/images/eclipse-bbop-export.png"
+         alt="Phenote in Eclipse"
+         class="image" />
+      <p>For OBO, there are dependencies on BBOP, be sure to include those under "projects"</p>
+      <img src="http://www.phenote.org/images/eclipse-obo-dependencies.png"
+      alt="Phenote in Eclipse"
+      class="image" />
+      <p>For OBO-Edit, there are dependencies on BBOP, OBO, and also be sure to export some of the jars:</p>
+      <img src="http://www.phenote.org/images/eclipse-oboedit-export.png"
+         alt="Phenote in Eclipse"
+         class="image" />
+      <img src="http://www.phenote.org/images/eclipse-oboedit-project-dependencies.png"
+         alt="Phenote in Eclipse"
+         class="image" />
+      
+      <h1>Getting the Source Code from Subversion on the command line</h1>
+      <p><code>svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/trunk phenote</code></p>
+      <p>To check out the supporting projects, run these additional commands:</p>
+      <p><code>svn co https://geneontology.svn.sourceforge.net/svnroot/geneontology/java/bbop/trunk BBOP</code></p>
+     <p><code>svn co https://geneontology.svn.sourceforge.net/svnroot/geneontology/java/obo/trunk OBO</code></p>
+     <p><code>svn co https://geneontology.svn.sourceforge.net/svnroot/geneontology/java/oboedit/trunk OBO-Edit</code></p>
+      <p>You should update the sourcecode periodically, as it changes daily.  You can do that with the <code>svn up</code> command.</p>
+
+      <h1>Running Phenote from the command line with ant</h1>
+      <p>You will need to have <a href="http://ant.apache.org/bindownload.cgi">Apache ant</a> installed on your system.</p>
+      <p>Once installed, you should "build" the project with the command <code>ant build-all</code></p>
+      <p>Then, you can run the software with <code>ant run</code>.</p>
+      <p>Note that is will currently run the "Classic" Phenote interface.  If you would like to run the new "Plus" interface, you'll have to run with the command <code>./phenote2</code>.</p>
+    </div>
+
+  </div>
+
+
+    <!--#include virtual="ssi/footer.html" -->
+
+</body></html>
