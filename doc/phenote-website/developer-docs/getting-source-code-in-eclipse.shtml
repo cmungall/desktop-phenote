@@ -1,5 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head><!--#include virtual="ssi/head.html" -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><!--#include virtual="..ssi/head.html" -->
 
 
     
@@ -9,7 +10,7 @@
 <body>
 
 
-    <!--#include virtual="ssi/header.html" -->
+    <!--#include virtual="../ssi/header.html" -->
 
     
   <div id="main_container_aux">
@@ -131,6 +132,6 @@
   </div>
 
 
-    <!--#include virtual="ssi/footer.html" -->
+    <!--#include virtual="../ssi/footer.html" -->
 
 </body></html>
