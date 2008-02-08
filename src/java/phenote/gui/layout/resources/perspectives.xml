@@ -2,32 +2,32 @@
 <java version="1.5.0_07" class="java.beans.XMLDecoder"> 
  <object class="java.util.LinkedList"> 
   <void method="add"> 
-   <object id="Perspective0" class="org.bbop.framework.dock.Perspective"> 
-    <void property="ID"> 
-     <string>edit</string> 
-    </void> 
-    <void property="name"> 
-     <string>Edit</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="org.bbop.framework.dock.Perspective"> 
-    <void property="ID"> 
-     <string>browse</string> 
-    </void> 
-    <void property="name"> 
-     <string>Browse</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
    <object class="org.bbop.framework.dock.Perspective"> 
     <void property="ID"> 
      <string>phenote_classic</string> 
     </void> 
     <void property="name"> 
      <string>Phenote Classic</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="org.bbop.framework.dock.Perspective"> 
+    <void property="ID"> 
+     <string>alt2</string> 
+    </void> 
+    <void property="name"> 
+     <string>Alternate2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="org.bbop.framework.dock.Perspective"> 
+    <void property="ID"> 
+     <string>alt3</string> 
+    </void> 
+    <void property="name"> 
+     <string>Alternate3</string> 
     </void> 
    </object> 
   </void> 
