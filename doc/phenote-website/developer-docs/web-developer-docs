@@ -1,0 +1,177 @@
+heres how PhenoteServlet makes the auto completion response:
+
+  private String getCompletionList(String userInput,String ontol,String field) {
+    StringBuffer sb = new StringBuffer("<ul>");
+    try {
+      Vector<CompletionTerm> v =
+getCompListSearcher(ontol).getStringMatchTerms(userInput);
+      //Vector<OBOClass> v = ontology.getStringMatchTerms(userInput,
+getSearchParams());
+      for (CompletionTerm ct : v)
+        sb.append(makeCompListHtmlItem(ct, ontol, field));
+    }
+    catch (OntologyException e) { sb.append(e.getMessage()); }
+    sb.append("</ul>");
+    return sb.toString();
+  }
+  private String makeCompListHtmlItem(CompletionTerm term, String ontol,String
+field) {
+    String id = term.getID(), name=term.getName();
+    String display = term.getCompListDisplayString();
+    // pass in id, name & ontology - name for setting field on UseTerm
+    StringBuffer info = dq(fn("getTermInfo",new String[]{id,name,ontol,field}));
+    StringBuffer select = dq(fn("selectTerm",new String[]{name,field}));
+    //String info = "\"getTermInfo("+id +","+q(name)+","+ q(ontol) + ")\"";
+    return "<li onmouseover=" + info + " id=" + q(id) + " " +
+      "onclick=" + select + ">" + display + "</li>\n";
+  }
+
+  private static StringBuffer fn(String fnName, String[] params) {
+    return HtmlUtil.fn(fnName,params);
+  }
+
+
+so basically the ajax autocompleter expects a <ul> list - not a page, not a
+single string. furthermore the <li> elements of the list have onMouseOver
+getTermInfo javascript functions wired into them. Im working on a selectTerm
+fuction on mouse click to get term names to show up on synonym select but that
+isnt working yet. So the response needs to look like this:
+
+<ul>
+  <li onmouseover=getTermInfo('id','name','ontol','field') id='id'       		
+ onclick=selectTerm('name','field') > termName </li>
+  <li ...
+</ul>
+
+
+so if you just want to grab pieces of the javascript
+
+ajax scripts:
+<script src="../javascript/ajax-lib/prototype.js" type="text/javascript"></script>
+<script src="../javascript/ajax-lib/effects.js"   type="text/javascript"></script>
+<script src="../javascript/ajax-lib/dragdrop.js"  type="text/javascript"></script>
+<script src="../javascript/ajax-lib/controls.js"  type="text/javascript"></script>
+
+
+EntityOntology Chooser:
+<script type="text/javascript">
+  function setEntityOntology(selectedOntology) {
+    if (selectedOntology == 'AO') {
+      ontologyName = 'ZF'; <!-- ZF Anatomy -->
+    } else if (selectedOntology == 'GO') {
+      ontologyName = 'GO';
+    }
+
+<!--    entityAutoCompleter.options.parameters = "ontologyName=" +    ontologyName; -->
+   entityAutoCompleter.options.defaultParams = "ontologyName="+ontologyName+"&field=ENTITY";
+    <!-- alert(entityAutoCompleter.options.defaultParams); -->
+
+  }
+
+</script>
+
+
+src/web documentation of js,html,ajax...:
+
+This is a web widget to search ontologies dynamically using Ajax. The
+following describes the various compoents of the widget and how to use it.
+
+Style sheet: /css/control.js
+This contains all the styles used in the widget
+
+Javascript:
+/javascript/dichty-term-info.js contains a method to call Ajax to
+update the Ontology information in the term info panel.
+In this javascript the "var url" should point to the processing script.
+
+/javascript/ajax-lib contains Ajax libraries from Prototype
+for ajax and its auto completer
+http://prototype.conio.net/
+
+Perl
+/perl contains an example of a Ajax request processing script.
+It is written in CGI perl.
+
+
+-------------------
+src/web/html Files: 
+-------------------
+dichty.html  interface.html  ncbo.html  term_completer.html
+
+dichty.html: I think this is old and should be deleted - sohel? replaced by interface.html
+
+
+interface.html:
+--------------- 
+This should be renamed dichty-top.html as this is dichty base's new
+top level html page. The improvement over dichty.html (amongst other additions) is
+that it generically creates fields using the Sever Side Includes(SSI) file 
+term_completer.html. Also has commit & retrieve buttons, that call javascript functions.
+
+term_completer.html
+-------------------
+This is generic server side include stuff for interface.html. It takes vars tag, title,
+ & url. see interface.html for use. This should be renamed term_completion_field.ssi
+ or just field.ssi (are all fields term completion - some may be free text) or
+ field_template.ssi?
+
+
+ncbo.html 
+---------
+This is the top html page for ncbo/zfin (rename zfin.html?). It should use the new
+SSI paradigm and use the term_completer.html SSI stuff. But this does have stuff that
+interface/term_completer lacks. That is it has an entity chooser (dichtybase has no
+need for one), and a UseTerm button. These require both an ontology name and field
+name to be passed into the auto completion function. Also method names are renamed 
+for clarity sake. 
+
+
+So in summary ncbo.html & interface.html need to grab stuff from each other. Both of which
+serve as templates for new groups coming up with there own top level page (mod.html)
+
+
+
+--------------------------
+src/web/javascript readme
+--------------------------
+3 files: dichty-term-info.js ncbo-term-info.js term-completer.js
+one sub directory: ajax-lib
+
+ajax-lib is open source ajax code from scriptaculous that the above files use.
+in theory these shouldnt need to be modified (though ive had my temptations)
+
+The 3 scripts are all for term info retrieval from the backend. They should 
+probably be merged & deleted. The main variant is the backend url to get term info
+from and that url should come from the top page where all mod specific stuff is set,
+rather than here. Once that is done should be able to merge. 
+
+These scripts are called with onMouseOver that is in the completion list that is
+returned by the backend server(be it perl servlet or whatnot) for autocompletion.
+
+dichty-term-info.js might be old and if so should be deleted? sohel?
+
+term_completer.js is the new dichty base script (or old??) should be merged
+with ncbo-term-info.js. Sohel that would require you to change your mouseOver
+function call from the completion list to getTermInfo - would that be ok?
+
+ncbo-term-info.js 
+-----------------
+is used for zfin/ncbo. There are some difference to dichty here.
+The method is called getTermInfo which is a clearer name then set_ontology or 
+set_ontology_term. The url is different and as said above should be set in 
+the top mod specific page not here. 
+
+OntologyName & field are passed as
+parameters. Ontology name is needed for cases where theres an ontology chooser
+(zfin entity - dichty can ignore this). field is needed so the Use Term button
+of TermInfo knows which field to update (its the field the original term came from).
+
+In the top level html (ncbo.html) the form with the terms is given the name 
+termForm and that is used instead of forms[0] which can be presumptious if plugging
+into a mods web page.
+
+The checking of the length of the ontologyid array was scrapped as it was unnecasary.
+
+So these scripts should be merged, and I think the ncbo changes should be incorporated.
+Would you agree sohel?
+

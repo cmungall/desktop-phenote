@@ -274,10 +274,10 @@ entered for field temperature is out of range, yada yada...");</code>
 <br>&lt;/constraint-list&gt;
 </code>
 <p>(this isnt implemented yet) Alternative is to hardwire the adding of your constraint with <code>ConstraintManager.inst().addConstraint(Constraint)</code>.  If you add more than one constraint, the messages from all the failing constraints will be appended and displayed together.</p>
-<code>ConstraintStatus</code> also has a warning state - this causes a warning to display and
+<p><code>ConstraintStatus</code> also has a warning state - this causes a warning to display and
 lets user decide whether to to go through with commit. use
 <code>ConstraintStatus.Status.WARNING</code>. and likewise all warning messages from
-all constraints get lumped into one message.
+all constraints get lumped into one message.</p>
     </div>
 
   </div>
