@@ -15,10 +15,10 @@
 	<div class="catch_phrase">
 	</div>
 	<h2>For Users</h2>
-	<h2><a href="http://www.phenote.org/phenote/latest/phenote.jnlp">Launch Phenote in your browser</a></h2>
+	<p><b><a href="http://www.phenote.org/phenote/latest/phenote.jnlp">Launch Phenote in your browser</a></b></p>
 	<p> You can run phenote directly from your web browser without a separate installation by selecting one of the following links:</p>
 	<ul>
-	<li><strong>Beta release: <a href="http://www.phenote.org/phenote/1.5-beta2/phenote.jnlp">1.5 beta2</a></strong></li>-->
+	<li><strong>Beta release: <a href="http://www.phenote.org/phenote/1.5-beta2/phenote.jnlp">1.5 beta2</a></strong></li>
 	<li><strong>Stable release: <a href="http://www.phenote.org/phenote/1.4/phenote.jnlp">1.4</a> </strong></li>
 	<li><a href="http://www.phenote.org/phenote/phenote.html">Older releases</a></li>
 	</ul>
@@ -36,7 +36,7 @@
 	</ul>
 	<h2>Software requirements</h2>
 	<ul>
-	<li> PC running Windows XP; Mac OSX; Linux </li>
+	<li> PC running Windows XP; Mac OSX; Linux; Solaris </li>
 	<li> Webstart:  Internet browser with webstart installed </li>
 	<li> Command line:  Java 1.5 or later; Ant </li>
 	</ul>	

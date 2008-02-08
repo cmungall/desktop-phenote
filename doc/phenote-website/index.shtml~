@@ -111,7 +111,8 @@
 	    <li class="events">
 	  <p class="quick_link">
 	    <img src="images/star.gif" alt=""  class="icon_green"/>	      
-	    (none scheduled at this time)
+	  <p>01.10.2008 - Seminar presentation at <a href="http://www.nescent.org/">NESCent</a></p>
+	    <!-- (none scheduled at this time)-->
 	    </p>
 	    </li>
 	  </ul>
@@ -129,7 +130,6 @@
 	  <!--No news is good news!-->
 	  
 	  <!-- Do not destry the following event template -->
-	  <p>01.10.2008 - Seminar presentation at <a href="http://www.nescent.org/">NESCent</a></p>
 	  <p>12.20.2007 - <b>New Phenote Beta Release - <a href="http://www.phenote.org/download.shtml">version 1.5-beta2</a></b></p>
 	  <p>10.23-25.2007 - <a href="http://www.cs.uoregon.edu/~dhowe/biocurator/">BioCurator meeting</a>, San Jose, CA 
 	  [<a href="http://www.phenote.org/resources/Biocurator_2007.ppt">Download presentation</a>]</p>
