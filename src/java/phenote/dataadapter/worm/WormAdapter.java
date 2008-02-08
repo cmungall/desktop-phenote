@@ -80,7 +80,7 @@ public class WormAdapter implements QueryableDataAdapterI {
         postgres_table = "app_nature"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "app_func"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "app_temperature"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_preparation"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_treatment"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "app_penetrance"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "app_percent"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "app_range_start"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
@@ -258,7 +258,7 @@ public class WormAdapter implements QueryableDataAdapterI {
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_temperature"; tag_name = "Temperature"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "app_preparation"; tag_name = "Treatment"; tag_value = chr.getValueString(tag_name);
+        postgres_table = "app_treatment"; tag_name = "Treatment"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_penetrance"; tag_name = "Penetrance"; tag_value = "";
         if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
@@ -718,7 +718,7 @@ public class WormAdapter implements QueryableDataAdapterI {
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("Temperature",postgres_value); }				// assign the queried value
 //System.out.println("set Temperature to "+postgres_value+" END");
-      postgres_table = "app_preparation"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+      postgres_table = "app_treatment"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("Treatment",postgres_value); }				// assign the queried value
       postgres_table = "app_penetrance"; postgres_value = ""; // postgres_value = "No postgres value assigned";
