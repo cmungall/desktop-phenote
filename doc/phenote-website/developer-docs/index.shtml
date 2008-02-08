@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
 
-    <!--#include virtual="ssi/head.html" -->
+    <!--#include virtual="../ssi/head.html" -->
     <title>Phenote Developer Docs</title>
 
   </head>
   <body>
 
-    <!--#include virtual="ssi/header.html" -->
+    <!--#include virtual="../ssi/header.html" -->
 
     <div id="main_container">
       <div id="main_content">
@@ -55,7 +55,7 @@
 	 </div>
     </div>
 
-    <!--#include virtual="ssi/footer.html" -->
+    <!--#include virtual="../ssi/footer.html" -->
 
   </body>
 </html>
