@@ -21,6 +21,16 @@
     </void> 
    </object> 
   </void> 
+  <void method="add"> 
+   <object class="org.bbop.framework.dock.Perspective"> 
+    <void property="ID"> 
+     <string>phenote_classic</string> 
+    </void> 
+    <void property="name"> 
+     <string>Phenote Classic</string> 
+    </void> 
+   </object> 
+  </void> 
  </object> 
  <object idref="Perspective0"/> 
 </java> 
