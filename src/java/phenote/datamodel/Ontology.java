@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.obo.datamodel.AnnotatedObject;
+import org.obo.datamodel.IdentifiedObject;
 import org.obo.datamodel.Instance;
 import org.obo.datamodel.Namespace;
 import org.obo.datamodel.OBOClass;
@@ -38,7 +39,10 @@ public class Ontology {
   // if we could limit output(??) then sorting on fly might be fast enough
   // with limiting output may wanna do scoring but then lose alphabetical?
   // maybe have different modes/preferences
+  // should switch from OBOClass to general OBOObject!
   private Collection<OBOClass> sortedTerms; // was List
+  // switch to this!
+  private Collection<OBOObject> sortedObjTerms;
   private Collection<OBOClass> sortedObsoleteTerms;
   //private List<OBOProperty> sortedRelations;
   private List<OBOObject> sortedRelations; // more general
@@ -186,24 +190,37 @@ public class Ontology {
   //public List<OBOProperty> getSortedRelations() { --> OBOObject
   public List<OBOObject> getSortedRelations() {
     if (sortedRelations == null) {
-      //sortedRelations=new ArrayList<OBOProperty>(); not Comparable!
+      //sortedRelations=new ArrayList<OBOProperty>(); 
       List<OBOObject> sorRel = new ArrayList<OBOObject>();
-      // if (oboSession == null) ? shouldnt happen
-      sorRel.addAll(TermUtil.getRelationshipTypes(oboSession));
+      // if on the fly slim than just get terms from there
+      if (hasOnTheFlySlim())
+        sorRel.addAll(getOnTheFlySlimObjects());
+      else
+        sorRel.addAll(TermUtil.getRelationshipTypes(oboSession));
       //Collections.sort(sorRel,new RelComparator());
-      Collections.sort(sorRel,new OboObjComparator());
-      sortedRelations = sorRel; // ?
+      sortedRelations = sortOboObjects(sorRel);
     }
     return sortedRelations;
   }
 
-  private class RelComparator implements Comparator<OBOProperty> {
-    public int compare(OBOProperty r1, OBOProperty r2) {
-      return r1.toString().compareTo(r2.toString());
-    }
-    public boolean equals(OBOProperty r1, OBOProperty r2) {
-      return r1.toString().equals(r2.toString());
-    }
+//   private class RelComparator implements Comparator<OBOProperty> {
+//     public int compare(OBOProperty r1, OBOProperty r2) {
+//       return r1.toString().compareTo(r2.toString());
+//     }
+//     public boolean equals(OBOProperty r1, OBOProperty r2) {
+//       return r1.toString().equals(r2.toString());
+//     }
+//   }
+
+  private List<OBOObject> sortOboObjects(List<OBOObject> list) {
+    Collections.sort(list,new OboObjComparator());
+    return list;
+  }
+
+  /** refactor to use OBOObjects! a bit of work */
+  private List<OBOClass> sortOboClasses(List<OBOClass> list) {
+    Collections.sort(list,new OboClassComparator());
+    return list;
   }
 
   private class OboObjComparator implements Comparator<OBOObject> {
@@ -212,6 +229,14 @@ public class Ontology {
     }
     public boolean equals(OBOProperty r1, OBOProperty r2) {
       return r1.getName().equals(r2.getName());
+    }
+  }
+  private class OboClassComparator implements Comparator<OBOClass> {
+    public int compare(OBOClass o1, OBOClass o2) {
+      return o1.getName().compareTo(o2.getName()); // getName? toString?
+    }
+    public boolean equals(OBOProperty o1, OBOProperty o2) {
+      return o1.getName().equals(o2.getName());
     }
   }
 
@@ -320,6 +345,8 @@ public class Ontology {
     
     // for now just grab 1st namespace as namespacequery only takes 1 namespace
     Namespace[] spacesArray = spaces.toArray(new Namespace[0]);
+    // NamespaceQuery makes OBOClasses, need to change to make OBOObjects!
+    // or make new query
     NamespaceQuery nsQuery = new NamespaceQuery(spacesArray);
     if (sortById) nsQuery.setComparator(new IdComparator());
     // create a new query engine on the session we just loaded
@@ -335,15 +362,14 @@ public class Ontology {
     nsQuery.setAllowNonObsoletes(false);
     sortedObsoleteTerms = engine.query(nsQuery, false);
 
-    // if (hasOnTheFlySlim()) {
-    // can either make slim for query below - or just make slim by hand
-    // List<OBOObject> terms =  getOnTheFlySlimObjects()
-    // for (OBOObject term : terms) {
-    // OBOSession.getObject(
-    // sorted
-
-
-    if (hasSlim()) {
+    if (hasOnTheFlySlim()) {
+      // can either make slim for query below - or just make slim by hand
+      // might as well do by hand
+      sortedTerms = getOnTheFlySlimClassesSorted();
+      // empty out obsoletes?
+    }
+    // shouldnt have both real slim and on the fly slim right?
+    else if (hasSlim()) {
       CategoryQuery catQuery = new CategoryQuery(slim);
       sortedTerms = QueryUtil.getResults(engine.query(sortedTerms,catQuery));
       // obsoletes?
@@ -354,21 +380,73 @@ public class Ontology {
   }
 
   private boolean hasOnTheFlySlim() {
-    if (ontologyConfig==null) return false;
-    return ontologyConfig.hasOnTheFlySlim();
+    //if (ontologyConfig==null) return false; return ontologyConfig.hasOnTheFlySlim();
+    return getOnTheFlySlimObjects()!=null && !getOnTheFlySlimObjects().isEmpty();
   }
 
-  /** returns null if dont have on the fly slim terms */
-  private List<OBOObject> getOnTheFlySlimObjectsSorted() {
+  private List<OBOObject> onTheFlySlimList=null;
+
+  /** an onTheFlySlim is a slim that is set up in the phenote config file rather than
+      in an obo file as most slims are done
+      returns null if dont have on the fly slim terms */
+  private List<OBOObject> getOnTheFlySlimObjects() {
+    if (onTheFlySlimList!=null) return onTheFlySlimList;
     if (ontologyConfig == null) return null;
+    List<OBOObject> list = new ArrayList<OBOObject>();
     OnTheFlySlimTerm[] termBeans = ontologyConfig.getOnTheFlySlimTerms();
     for (OnTheFlySlimTerm termBean : termBeans) {
       String id = termBean.getTerm();
       if (id==null) continue;
-      //oboSession.
+      IdentifiedObject io = oboSession.getObject(id);
+      if (!(io instanceof OBOObject)) {
+        log().error(io+" not instance of OBOObject??"); // shouldnt happen
+        continue;
+      }
+      list.add((OBOObject)io);
     }
+    onTheFlySlimList = list;
+    return onTheFlySlimList;
+  }
+  private List<OBOClass> onTheFlySlimClassList=null;
 
-    return null;
+  /** an onTheFlySlim is a slim that is set up in the phenote config file rather
+      than in an obo file as most slims are done
+      returns null if dont have on the fly slim terms
+      im dying to refactor obo classes to obo objects so dont have this redundancy
+      but that will take a bit of work - for one NamespaceQuery yada yada*/
+  private List<OBOClass> getOnTheFlySlimClasses() {
+    if (onTheFlySlimClassList!=null) return onTheFlySlimClassList;
+    if (ontologyConfig == null) return null;
+    List<OBOClass> list = new ArrayList<OBOClass>();
+    OnTheFlySlimTerm[] termBeans = ontologyConfig.getOnTheFlySlimTerms();
+    for (OnTheFlySlimTerm termBean : termBeans) {
+      String id = termBean.getTerm();
+      if (id==null) continue;
+      IdentifiedObject io = oboSession.getObject(id);
+      if (!(io instanceof OBOClass)) {
+        log().error(io+" not instance of OBOClass??"); // shouldnt happen
+        continue;
+      }
+      list.add((OBOClass)io);
+    }
+    onTheFlySlimClassList = list;
+    return onTheFlySlimClassList;
+  }
+
+  /** returns null if dont have on the fly slim terms
+   cant use this yet for terms - as havent refactored OBOClasses to OBOObjects 
+   bummer */
+  private List<OBOObject> getOnTheFlySlimObjectsSorted() {
+    if (!hasOnTheFlySlim()) return null; // ex?
+    List<OBOObject> list = getOnTheFlySlimObjects();
+    return sortOboObjects(list); // cache?
+  }
+
+  /** redundancy waiting for refactor */
+  private List<OBOClass> getOnTheFlySlimClassesSorted() {
+    if (!hasOnTheFlySlim()) return null; // ex?
+    List<OBOClass> list = getOnTheFlySlimClasses();
+    return sortOboClasses(list); // cache?
   }
 
 

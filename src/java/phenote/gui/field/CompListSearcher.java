@@ -149,9 +149,10 @@ public class CompListSearcher {
       return;
     }
     
-    // optimization - if user has only typed one more letter (common case)
-    // use previous search list - i think this even works with threaded
     try {
+      // optimization - if user has only typed one more letter (common case)
+      // use previous search list - i think this even works with threaded
+      // bug - this wont always sort properly
       if (previousInput != null && input.startsWith(previousInput) 
           && input.length() == previousInput.length() + 1) {
         searchTerms = searchPreviousList(input,previousCompList,task);
