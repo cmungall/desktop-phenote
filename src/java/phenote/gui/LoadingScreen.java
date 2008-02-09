@@ -164,7 +164,7 @@ public class LoadingScreen extends JFrame {
 
   public void setProgressMax(int maxProgress)
   {
-//    ontologyProgressBar.setMaximum(maxProgress);
+  	startupProgressBar.setMaximum(maxProgress);
   }
 
   public void setProgress(int progress)

@@ -37,12 +37,18 @@ import phenote.charactertemplate.TemplateChooserFactory;
 import phenote.config.Config;
 import phenote.config.xml.GroupDocument.Group;
 import phenote.config.xml.TemplatechooserDocument.Templatechooser;
-import phenote.gui.CharacterTableFactory;
 import phenote.gui.NcbiInfo;
 import phenote.gui.PhenoteMainFrame;
 import phenote.gui.StandardToolbar;
 import phenote.gui.TermInfo2;
 import phenote.gui.actions.AboutAction;
+import phenote.gui.factories.CharacterTableFactory;
+import phenote.gui.factories.NCBIInfoFactory;
+import phenote.gui.factories.PhenoteDAGViewFactory;
+import phenote.gui.factories.PhenoteEditorFactory;
+import phenote.gui.factories.PhenoteGraphDAGViewFactory;
+import phenote.gui.factories.ProtocolEditorFactory;
+import phenote.gui.factories.TermInfoFactory;
 import phenote.gui.field.FieldPanelContainer;
 import phenote.gui.menu.EditMenu;
 import phenote.gui.menu.FileMenu;
@@ -66,13 +72,14 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		// Collection<GUIComponentFactory<?>> factories =
 		// super.getDefaultComponentFactories();
 		Collection<GUIComponentFactory<?>> factories = new ArrayList<GUIComponentFactory<?>>();
-		factories.add(new FieldPanelFactory());
+//		factories.add(new FieldPanelFactory());
+		factories.add(new PhenoteEditorFactory());
 		factories.add(new TermInfoFactory());
 		factories.add(new NCBIInfoFactory());
 		factories.addAll(this.getCharacterTableComponentFactories());
 //		factories.add(new GraphEditorFactory());  <-- removing this for upcoming 1.5 release
-		factories.add(new DAGViewFactory());
-		factories.add(new GraphDAGViewFactory());
+		factories.add(new PhenoteDAGViewFactory());
+		factories.add(new PhenoteGraphDAGViewFactory());
 		factories.add(new AnnotationSummaryComponentFactory());
 		factories.addAll(this.getTemplateGroupComponentFactories());
     factories.add(new ProtocolEditorFactory());
@@ -117,7 +124,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
 	@Override
 	protected String getAppName() {
-		return "Phenote"; // "DScribe"???
+		return "Phenote+"; // "DScribe"???
 	}
 
 	protected Action getAboutAction() {
@@ -135,7 +142,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 	@Override
 	protected String getDefaultPerspectiveResourcePath() {
 		if (getPerspectiveResourceDir() != null)
-			return getPerspectiveResourceDir() + "/edit.idw";
+			return getPerspectiveResourceDir() + "/phenote_classic.idw";
 		else
 			return null;
 	}
@@ -208,84 +215,85 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
     return factories;
   }
 
-	/** FieldPanelFactory inner class */
-	private class FieldPanelFactory extends AbstractComponentFactory<FieldPanelContainer> {
+	//The following were moved into external factory classes in phenote.gui.factories
+//	/** FieldPanelFactory inner class */
+//	private class FieldPanelFactory extends AbstractComponentFactory<FieldPanelContainer> {
+//
+//		private String panelName = "Phenote Editor";
+//
+//		public FactoryCategory getCategory() {
+//			return FactoryCategory.ANNOTATION;
+//		}
+//
+//		public String getName() {
+//			return panelName;
+//		}
+//
+//		public String getID() {
+//			return "phenote-editor";
+//		}
+//		
+//		public boolean isSingleton() {
+//      return true;
+//    }
+//
+//		@Override
+//		public FieldPanelContainer doCreateComponent(String id) {
+//			return new FieldPanelContainer(id);
+//		}
+//	}
+//
+//	/** TermInfoFactory inner class */
+//	private class TermInfoFactory extends AbstractComponentFactory<TermInfo2> {
+//		public FactoryCategory getCategory() {
+//			return FactoryCategory.ANNOTATION;
+//		}
+//
+//		public String getName() {
+//			return "Term Info";
+//		}
+//
+//		public boolean isSingleton() {
+//			return true;
+//		}
+//
+//		public String getID() {
+//			return "term-info";
+//		}
+//
+//		@Override
+//		public TermInfo2 doCreateComponent(String id) {
+//			return TermInfo2.inst();
+//		}
+//	}
 
-		private String panelName = "Phenote Editor";
-
-		public FactoryCategory getCategory() {
-			return FactoryCategory.ANNOTATION;
-		}
-
-		public String getName() {
-			return panelName;
-		}
-
-		public String getID() {
-			return "phenote-editor";
-		}
-		
-		public boolean isSingleton() {
-      return true;
-    }
-
-		@Override
-		public FieldPanelContainer doCreateComponent(String id) {
-			return new FieldPanelContainer(id);
-		}
-	}
-
-	/** TermInfoFactory inner class */
-	private class TermInfoFactory extends AbstractComponentFactory<TermInfo2> {
-		public FactoryCategory getCategory() {
-			return FactoryCategory.ANNOTATION;
-		}
-
-		public String getName() {
-			return "Term Info";
-		}
-
-		public boolean isSingleton() {
-			return true;
-		}
-
-		public String getID() {
-			return "term-info";
-		}
-
-		@Override
-		public TermInfo2 doCreateComponent(String id) {
-			return TermInfo2.inst();
-		}
-	}
-
-	/** NCBIInfoFactory inner class */
-	private class NCBIInfoFactory extends AbstractComponentFactory<NcbiInfo> {
-		private String panelName = "NCBI";
-		private String displayName = null;
-
-		public FactoryCategory getCategory() {
-			return FactoryCategory.INFO;
-		}
-
-		public String getName() { // what is displayed in the menu
-			return panelName;
-		}
-
-		public String getID() {
-			return "NCBI";
-		}
-
-		@Override
-		public NcbiInfo doCreateComponent(String id) {
-			NcbiInfo info = new NcbiInfo();
-			info.setMinimumSize(new Dimension(200, 200));
-			info.setPreferredSize(new Dimension(200, 200));
-			info.setTitle("NCBI");
-			return info;
-		}
-
-	}
+//	/** NCBIInfoFactory inner class */
+//	private class NCBIInfoFactory extends AbstractComponentFactory<NcbiInfo> {
+//		private String panelName = "NCBI";
+//		private String displayName = null;
+//
+//		public FactoryCategory getCategory() {
+//			return FactoryCategory.INFO;
+//		}
+//
+//		public String getName() { // what is displayed in the menu
+//			return panelName;
+//		}
+//
+//		public String getID() {
+//			return "NCBI";
+//		}
+//
+//		@Override
+//		public NcbiInfo doCreateComponent(String id) {
+//			NcbiInfo info = new NcbiInfo();
+//			info.setMinimumSize(new Dimension(200, 200));
+//			info.setPreferredSize(new Dimension(200, 200));
+//			info.setTitle("NCBI");
+//			return info;
+//		}
+//
+//	}
 
 //	/** StandardToolbarFactory inner class */
 //	private class StandardToolbarFactory extends AbstractComponentFactory<StandardToolbar> {
@@ -312,19 +320,19 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 ////		}
 //	}
 
-  private class ProtocolEditorFactory extends AbstractComponentFactory<GUIComponentWrapper> {
-
-    public FactoryCategory getCategory() {
-      return FactoryCategory.ANNOTATION;
-    }
-    public String getName() { return "Protocol Editor"; }
-    public String getID() { return "protocol-editor"; }
-    public GUIComponentWrapper doCreateComponent(String id) {
-      JPanel p = ProtocolEditor.getUniqueInstance().getMainPanel();
-      // 1st is id, 2nd id -> title bar string
-      return new GUIComponentWrapper(id, id, p);
-    }
-  }
+//  private class ProtocolEditorFactory extends AbstractComponentFactory<GUIComponentWrapper> {
+//
+//    public FactoryCategory getCategory() {
+//      return FactoryCategory.ANNOTATION;
+//    }
+//    public String getName() { return "Protocol Editor"; }
+//    public String getID() { return "protocol-editor"; }
+//    public GUIComponentWrapper doCreateComponent(String id) {
+//      JPanel p = ProtocolEditor.getUniqueInstance().getMainPanel();
+//      // 1st is id, 2nd id -> title bar string
+//      return new GUIComponentWrapper(id, id, p);
+//    }
+//  }
 
 	private String getDefaultGroup() {
 		return Config.inst().getDefaultGroup().getName();

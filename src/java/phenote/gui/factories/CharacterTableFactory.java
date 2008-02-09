@@ -1,9 +1,10 @@
-package phenote.gui;
+package phenote.gui.factories;
 
 import org.apache.log4j.Logger;
 import org.bbop.framework.AbstractComponentFactory;
 
 import phenote.config.Config;
+import phenote.gui.CharacterTable;
 
 
 public class CharacterTableFactory extends AbstractComponentFactory<CharacterTable> {

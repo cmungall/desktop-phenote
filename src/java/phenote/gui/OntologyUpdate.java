@@ -38,8 +38,12 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import org.apache.log4j.Logger;
+import org.bbop.framework.IOManager;
+import org.bbop.swing.BackgroundEventQueue;
+import org.bbop.swing.BackgroundUtil;
 import org.jdesktop.layout.GroupLayout;
 import org.jdesktop.layout.LayoutStyle;
+import org.obo.datamodel.OBOSession;
 
 import phenote.config.Config;
 import phenote.config.xml.OntologyFileDocument;
@@ -351,6 +355,25 @@ public class OntologyUpdate {
 	  }
 	}
 	
+	class JTableProgressBarRenderer implements TableCellRenderer {
+	  private TableCellRenderer __defaultRenderer;
+
+	  public JTableProgressBarRenderer(TableCellRenderer renderer) {
+	    __defaultRenderer = renderer;
+	  }
+
+	  public Component getTableCellRendererComponent(JTable table, Object value,
+							 boolean isSelected,
+							 boolean hasFocus,
+							 int row, int column)
+	  {
+	    if(value instanceof Component)
+	      return (Component)value;
+	    return __defaultRenderer.getTableCellRendererComponent(
+		   table, value, isSelected, hasFocus, row, column);
+	  }
+	}
+	
 //	public class FileSizeCellRenderer extends DefaultTableCellRenderer {
 //
 //		public FileSizeCellRenderer() {
@@ -449,6 +472,16 @@ public class OntologyUpdate {
       int up = 0;
       String filename = "";
 
+//      BackgroundEventQueue queue = new BackgroundEventQueue();
+//			BackgroundUtil.scheduleTask(queue, null, false, null);
+//			queue.die();
+//			if (eventTask.getResults())
+//				return null;
+
+			TableColumn column=ontologyTable.getColumnModel().getColumn(1);
+			TableCellRenderer defaultRenderer = ontologyTable.getDefaultRenderer(JProgressBar.class);
+			ontologyTable.setDefaultRenderer(JProgressBar.class,
+		       new JTableProgressBarRenderer(defaultRenderer));
 
       for (int i=0; i<ontologyTable.getRowCount(); i++) {
       	OntologyFile ontology = Config.inst().getOntologyFileByHandle(ontologyTable.getValueAt(i,2).toString());
