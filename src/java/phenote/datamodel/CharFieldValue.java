@@ -151,11 +151,16 @@ public class CharFieldValue implements Cloneable {
     catch (CloneNotSupportedException x) { return null; }
   }
   
-  public CharFieldValue cloneCharFieldValue(CharacterI newCharacter, CharField newField) {
+  public CharFieldValue cloneValueForChar(CharacterI newChar) {
     LOG.debug("Cloning charfield value: " + this.toString());
     final CharFieldValue newValue = this.cloneCharFieldValue();
     if (newValue == null) return null;
-    if (newCharacter != null) newValue.character = newCharacter;
+    if (newChar != null) newValue.character = newChar;
+    return newValue;    
+  }
+
+  public CharFieldValue cloneCharFieldValue(CharacterI newCharacter, CharField newField) {
+    CharFieldValue newValue = cloneValueForChar(newCharacter);
     if (newField != null) newValue.charField = newField;
     return newValue;
   }

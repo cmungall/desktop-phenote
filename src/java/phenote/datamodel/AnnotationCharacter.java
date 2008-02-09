@@ -29,6 +29,7 @@ public class AnnotationCharacter extends AbstractCharacter {
   protected AnnotationMappingDriver driver;
   private CharFieldValue objectGenus;
   //private CharFieldValue objectDifferentia;
+  // can have multiple fields in object Diff, eg E & E2
   private Map<CharField,CharFieldValue> charFieldToObjectDiff = new HashMap(2);
 
   public AnnotationCharacter(AnnotationMappingDriver driver) {
@@ -295,13 +296,15 @@ public class AnnotationCharacter extends AbstractCharacter {
   public CharacterI cloneCharacter() {
     Annotation clone = (Annotation) annotation.clone();
     AnnotationCharacter a =  new AnnotationCharacter(clone, driver);
-    if (objectGenus!=null)
-      a.objectGenus = objectGenus.cloneCharFieldValue();
+    if (objectGenus!=null) 
+      a.objectGenus = objectGenus.cloneValueForChar(a);
     //a.objectDifferentia = objectDifferentia.cloneCharFieldValue();
     Map<CharField,CharFieldValue> m = new HashMap<CharField,CharFieldValue>(2);
     for (Map.Entry<CharField,CharFieldValue> e : charFieldToObjectDiff.entrySet()) {
-      a.charFieldToObjectDiff.put(e.getKey(),e.getValue().cloneCharFieldValue());
+      //a.charFieldToObjectDiff.put(e.getKey(),e.getValue().cloneCharFieldValue());
+      m.put(e.getKey(),e.getValue().cloneValueForChar(a));
     }
+    a.charFieldToObjectDiff = m;
     return a;
   }
 
