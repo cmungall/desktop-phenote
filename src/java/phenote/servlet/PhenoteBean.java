@@ -14,6 +14,8 @@ import java.util.ArrayList;
  * This is the main form bean that contains all request parameters.
  * Spring populates these attributes automatically and make them available
  * in the controller class.
+ * This also receives the term completion list which gets populated by comp list
+ searcher do completion using input params - userInput, field, ontology
  */
 public class PhenoteBean {
 

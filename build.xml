@@ -187,6 +187,7 @@ them into  the classfiles directory. excludes="test/**"  -->
         </java>
     </target>
 
+  <!-- terse FAIL or PASS -->
 	<target name="test" depends="build-test" description="Unit tests">
 		<junit fork="yes" printsummary="on" maxmemory="1024m">
 			<classpath>
@@ -201,9 +202,28 @@ them into  the classfiles directory. excludes="test/**"  -->
 			</batchtest>
 		</junit>
 	</target>
+
+  <!-- prints to stdout all messages -->
+	<target name="verbose-test" depends="build-test" description="Unit tests">
+		<junit fork="yes" printsummary="withOutAndErr" maxmemory="1024m">
+			<classpath>
+                <pathelement path="${classfiles}"/>
+                <fileset dir="${lib}">
+                    <include name="*.jar"/>
+                    <exclude name="phenote.jar"/>
+                </fileset>
+            </classpath>
+			<batchtest>
+				<fileset dir="${test}"/>
+			</batchtest>
+		</junit>
+	</target>
 	
+  <!-- set var junit.test.class.name from cmd line for example:
+ ant runatest -Djunit.test.class.name="phenote.servlet.ControllerTest"-->
 	<target name="runatest" depends="build-test">
-		<junit fork="yes" printsummary="on" maxmemory="1024m">
+		<junit fork="yes" printsummary="withOutAndErr" maxmemory="1024m"
+     showoutput="true">
 			<classpath>
                 <pathelement path="${classfiles}"/>
                 <fileset dir="${lib}">

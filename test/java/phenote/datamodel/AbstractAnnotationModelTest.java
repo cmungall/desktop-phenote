@@ -49,7 +49,7 @@ public abstract class AbstractAnnotationModelTest {
     System.err.println("clist size: "+clist.size());
     session = CharFieldManager.inst().getOboSession();
   }
-  
+
   @Before public void setup() {
    }
   

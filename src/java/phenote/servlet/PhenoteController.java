@@ -40,6 +40,8 @@ public class PhenoteController extends AbstractCommandController {
     // Todo: This is needed as the servlet can be configured to not initialize the ontologies (lazy initialization).
     // this logic should go into the OntologyManger that checks if the configuration file has been loaded or not.
     OntologyDataAdapter.initialize();
+
+    // TERM COMPLETION
     if (form.isTermCompletionRequest()) {
       String userInput = form.getTermCompletionTerm();
       LOG.info("ontology: " + ontologyName);
@@ -49,7 +51,10 @@ public class PhenoteController extends AbstractCommandController {
       //form.setCompletionTermList( // this is now done by ContSearchListener
       getCompletionList(userInput, ontologyName, field, form);
       LOG.debug(form.getAjaxReturnList()); // ?? should this go in CSL?
-    } else if (form.isTermInfoRequest()) {
+    }
+
+    // TERM INFO
+    else if (form.isTermInfoRequest()) {
       String termId = form.getTermId();
       LOG.debug("doGet term info param: " + termId + " ont " + ontologyName);
       try {
@@ -64,17 +69,22 @@ public class PhenoteController extends AbstractCommandController {
         LOG.error(e.getMessage(), e);
       }
     }
+
     return new ModelAndView("term_completion", "formBean", form);
   }
 
-  private void getCompletionList(String userInput, String ontologyName, String field,
+  /** @param userInput is the string entered by user, that needs to be "completed"
+      @param form is PhenoteBean from spring that handles input & output to web 
+      @param field is name of char field in datamodel
+      @param ontologyName name of ontology to use in field, can be ALL */
+  void getCompletionList(String userInput, String ontologyName, String field,
                                  PhenoteBean form) {
     //List<CompletionTerm> termList = null;
     SearchListener searchListener = new ContSearchListener(ontologyName,field,form);
     try {
       //termList = its now optionally threaded - term list returned to SearchListener
       // Christian - set this boolean to false to turn off threading
-      boolean thread = true;
+      boolean thread = false; //true; true optimizes but doesnt work for web
       getCompListSearcher(ontologyName).getStringMatchTermList(userInput,searchListener,
                                                                thread);
     } catch (OntologyException e) {
@@ -85,6 +95,8 @@ public class PhenoteController extends AbstractCommandController {
     //return termList;
   }
 
+  /** listens to list searcher and populates PhenoteBean form with comp list
+      results - when threaded this seems to fail (web doesnt get comp list) */
   private class ContSearchListener implements SearchListener {
     private String ontologyName;
     private String field;
