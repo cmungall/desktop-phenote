@@ -1334,11 +1334,21 @@ public class Config {
     // for now hardwire - set up config
     return getOntMaker(group) != null;
   }
-  // OntMaker manager?
+  // OntMaker manager? for now just hardwired, genotypeMaker -> ProformaParser
   public OntologyMakerI getOntMaker(String group) {
     // testing
     if (!group.equals("genotypeMaker")) return null; // testing
     return new phenote.dataadapter.fly.ProformaAlleleParser();
+  }
+
+  public boolean hasOntMakers() {
+    return !getOntMakers().isEmpty();
+  }
+  public List<OntologyMakerI> getOntMakers() {
+    List<OntologyMakerI> l = new ArrayList(2);
+    for (Group g : getFieldGroups())
+      if (hasOntMakerForGroup(g.getName())) l.add(getOntMaker(g.getName()));
+    return l;
   }
 
   public boolean compareStatementEnabled() {

@@ -18,6 +18,8 @@ import org.bbop.swing.DynamicMenu;
 
 import phenote.config.Config;
 import phenote.dataadapter.LoadSaveManager;
+import phenote.dataadapter.OntologyMakerI;
+import phenote.gui.actions.MakeOntolAction;
 import phenote.main.Phenote;
 
 /**
@@ -114,7 +116,10 @@ public class FileMenu extends DynamicMenu {
       add(exit);
     }
 
- 
+    for (OntologyMakerI om : Config.inst().getOntMakers()) {
+      JMenuItem m = new JMenuItem(new MakeOntolAction(om));
+      add(m);
+    }
 
   }
 
