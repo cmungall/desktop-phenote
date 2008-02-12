@@ -313,7 +313,7 @@ public class AnnotationCharacter extends AbstractCharacter {
   public boolean supportsComparisons() { return true; }
 
   /** Make comparison relationship between 2 annotations */
-  public void makeComparison(OBOProperty relation, CharacterI relatedChar)
+  public void addComparison(OBOProperty relation, CharacterI relatedChar)
     throws CharacterEx {
     // this actually shouldnt happen but who knows
     if (!hasOboAnnotation() ||  !relatedChar.hasOboAnnotation())

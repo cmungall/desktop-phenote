@@ -152,7 +152,7 @@ public abstract class AbstractCharacter implements CharacterI {
   
   /** throws CharacterEx if not implemented (Character doesnt implement)
       OBOAnnotation implements */
-  public abstract void makeComparison(OBOProperty relation, CharacterI relatedChar)
+  public abstract void addComparison(OBOProperty relation, CharacterI relatedChar)
     throws CharacterEx;
 
   /**

@@ -19,6 +19,9 @@ public class Character extends AbstractCharacter implements CharacterI {
 //     new HashMap<CharField,List<CharFieldValue>>();
    private HashMap<CharField,CharFieldValue> charFieldToValue =
      new HashMap<CharField,CharFieldValue>();
+
+  /** Comparison is an inner class */
+  private List<Comparison> comparisons;
   
   /** should only be constrcuted from factory */
   Character() {
@@ -186,12 +189,25 @@ public class Character extends AbstractCharacter implements CharacterI {
     return sb.toString();
   }
 
-  public boolean supportsComparisons() { return false; }
+  public boolean supportsComparisons() { return true; }
 
-  public void makeComparison(OBOProperty rel, CharacterI relChar) throws CharacterEx {
-    String m = "Character datamodel does not implement comparisons, configure "
-      +"datamodel to OBO Annotations to use comparisons";
-    throw new CharacterEx(m);
+  public void addComparison(OBOProperty rel, CharacterI relChar) throws CharacterEx {
+//     String m = "Character datamodel does not implement comparisons, configure "
+//       +"datamodel to OBO Annotations to use comparisons";
+//     throw new CharacterEx(m);
+    // for now just allow 1 comparison
+    Comparison c = new Comparison(rel,relChar);
+    if (comparisons==null) comparisons = new ArrayList<Comparison>(2);
+    comparisons.add(c);
+    // do we add reverse comparison to relChar?? not sure
+    // relChar.
+  }
+
+  private class Comparison {
+    // private CharacterI subject? might need?
+    private OBOProperty rel;
+    private CharacterI object;
+    private Comparison(OBOProperty r,CharacterI c) { rel = r; object = c; }
   }
 
   private Logger log;

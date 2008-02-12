@@ -112,7 +112,7 @@ class Comparison {
   private void commitComparison() throws CharFieldGuiEx {
     OBOProperty rel = relFieldGui.getCurrentRelation(); // ex if not filled in
     try {
-      char1.makeComparison(rel,char2);
+      char1.addComparison(rel,char2);
     } 
     catch (CharacterEx e) {
       String m = e.getMessage();

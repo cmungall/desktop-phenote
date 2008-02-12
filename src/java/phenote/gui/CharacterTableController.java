@@ -55,6 +55,7 @@ public class CharacterTableController {
 	private SortedList<CharacterI> sortedCharacters;
 	private FilterList<CharacterI> filteredCharacters;
 	private EventSelectionModel<CharacterI> selectionModel;
+  // provides table headers & table cell values
   //private CharacterTableFormat tableFormat;
   private AdvancedTableFormat<CharacterI> tableFormat;
 	private LoadSaveManager loadSaveManager;
