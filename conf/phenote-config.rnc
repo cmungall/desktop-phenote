@@ -182,8 +182,9 @@ field =
     ## added term is assumed, otherewise free_text is the default
     ## ID requires a : and no whitespace 
     ## free_text is just for backward compatibility - phase out
-    attribute type { "FREE_TEXT" | "TERM" | "INT" | "ID" | "READ_ONLY" | "DATE" | "PICK"
-                    | "free_text" },  
+    ## COMPARISON is a field to display comparison of char w another char
+    attribute type { "FREE_TEXT" | "TERM" | "INT" | "ID" | "READ_ONLY" | "DATE"
+                     | "PICK" | "free_text" },  
     ## if field is required, then commit will fail if null at commit time
     ## (null constraint), warnIfNull similar but gives warning
     attribute isRequired { xsd:boolean },
