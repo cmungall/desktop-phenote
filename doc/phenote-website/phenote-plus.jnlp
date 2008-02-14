@@ -48,12 +48,12 @@ href="phenote.jnlp">
 	<jar href="jars/glazedlists-1.7.0_java15.jar" />
 	<jar  href="jars/swing-layout.jar"/>
 	<jar  href="jars/swingx-2007_10_14.jar"/>
+	<jar  href="jars/eutils.jar"/>
 
-  <!-- for phenote+ 2 only -->
+  <!-- for phenote+ (formerly phenote2) only -->
 	<jar  href="jars/macify-1.1.jar"/>
 	<jar  href="jars/tablelayout.jar"/>
 	<jar  href="jars/idw-gpl.jar"/>
-	<jar  href="jars/eutils.jar"/>
 	<jar  href="jars/jaxrpc.jar"/>
 	<jar  href="jars/axis.jar"/>
 

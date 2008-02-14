@@ -48,6 +48,7 @@ href="phenote.jnlp">
 	<jar href="jars/glazedlists-1.7.0_java15.jar" />
 	<jar  href="jars/swing-layout.jar"/>
 	<jar  href="jars/swingx-2007_10_14.jar"/>
+	<jar  href="jars/eutils.jar"/>
 	<nativelib href="jars/phenote-nativelibs.jar"/>
 
   <!-- jars not needed for webstart(?) axis, commons-beanutils-1.6,  commons-discovery,
