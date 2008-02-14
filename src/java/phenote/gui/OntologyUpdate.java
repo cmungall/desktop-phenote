@@ -496,7 +496,7 @@ public class OntologyUpdate {
       				contentPanel.repaint();
       				addUpdateMessage("Downloading: "+ontologyTable.getValueAt(i,2));
       				OntologyDataAdapter2.getInstance().downloadUpdate(ontologyTable.getValueAt(i, 2).toString());
-      				ontologyTable.setValueAt(new ImageIcon("images/OK.GIF"), i, 1);
+      				ontologyTable.setValueAt(new ImageIcon(FileUtil.findUrl("images/OK.GIF")), i, 1);
       				contentPanel.validate();
       				contentPanel.repaint();
 
@@ -505,7 +505,10 @@ public class OntologyUpdate {
       			} catch(OntologyException oe) {
       				addUpdateMessage(oe.getMessage()+"error with updating ontology");
       				LOG.error(oe.getMessage()+"error with updating ontology");
-      			}
+      			} catch (FileNotFoundException e2) {
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
+						}
       		}
       	} catch (OntologyException oe) {
       		addUpdateMessage(oe.getMessage()+"error with updating ontology");
@@ -545,7 +548,7 @@ public class OntologyUpdate {
       			up++;
       			for (int i=row; i<ontologyTable.getRowCount(); i++) {
       				if (ontologyTable.getValueAt(i, 2).equals(ontology.getHandle())) {
-      					ontologyTable.setValueAt(new ImageIcon("images/OK.GIF"), i, 1);
+      					ontologyTable.setValueAt(new ImageIcon(FileUtil.findUrl("images/OK.GIF")), i, 1);
       					addUpdateMessage(" DONE."+newline);
       					break;
       				} 
@@ -556,7 +559,10 @@ public class OntologyUpdate {
   			} catch(OntologyException oe) {
     			addUpdateMessage(oe.getMessage()+"error with updating ontology");
     			LOG.error(oe.getMessage()+"error with updating ontology");
-    		}
+    		} catch (FileNotFoundException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
       }
         if (up==0) {
         	LOG.info("no ontologies needed updating");
@@ -589,7 +595,7 @@ public class OntologyUpdate {
       			OntologyDataAdapter2.getInstance().downloadUpdate(ontology.getHandle());
       			up++;
       			if (ontologyTable.getValueAt(row, 2).equals(ontology.getHandle())) {
-      				ontologyTable.setValueAt(new ImageIcon("images/OK.GIF"), row, 1);
+      				ontologyTable.setValueAt(new ImageIcon(FileUtil.findUrl("images/OK.GIF")), row, 1);
       				addUpdateMessage(".....DONE."+newline);
       			} else {
       				row++; //this is a hack...these *should* be done in order
@@ -600,7 +606,10 @@ public class OntologyUpdate {
   			} catch(OntologyException oe) {
     			addUpdateMessage(oe.getMessage()+"error with downloading initial copy of ontology");
     			LOG.error(oe.getMessage()+"error with downloading initial copy of ontology");
-    		}
+    		} catch (FileNotFoundException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
       }
         if (up==0) {
         	LOG.info("no ontologies downloaded");

@@ -126,7 +126,7 @@ public class TermInfoToolbar extends JToolBar {
     buttons.add(FORWARDBUTTONINDEX, forwardButton);
     buttons.add(FAVBUTTONINDEX, favoritesButton);  
     buttons.add(USETERMBUTTONINDEX, useTermButton);
-    buttons.add(GETANNOTATIONSBUTTONINDEX, getAnnotationsButton);
+//    buttons.add(GETANNOTATIONSBUTTONINDEX, getAnnotationsButton);
 
     termField =  new JTextArea();
     termField.setFont(new Font("Arial", Font.BOLD, 12));
