@@ -53,6 +53,7 @@ href="phenote.jnlp">
 	<jar  href="jars/macify-1.1.jar"/>
 	<jar  href="jars/tablelayout.jar"/>
 	<jar  href="jars/idw-gpl.jar"/>
+	<jar  href="jars/eutils.jar"/>
 
 	<nativelib href="jars/phenote-nativelibs.jar"/>
 
