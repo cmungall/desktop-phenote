@@ -262,9 +262,10 @@
             <xs:enumeration value="TERM"/>
             <xs:enumeration value="INT"/>
             <xs:enumeration value="ID"/>
-            <xs:enumeration value="READ_ONLY"/>
             <xs:enumeration value="DATE"/>
+            <xs:enumeration value="COMPARISON"/>
             <xs:enumeration value="PICK"/>
+            <xs:enumeration value="READ_ONLY"/>
             <xs:enumeration value="free_text"/>
           </xs:restriction>
         </xs:simpleType>
