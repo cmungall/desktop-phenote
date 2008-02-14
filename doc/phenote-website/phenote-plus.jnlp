@@ -54,6 +54,7 @@ href="phenote.jnlp">
 	<jar  href="jars/tablelayout.jar"/>
 	<jar  href="jars/idw-gpl.jar"/>
 	<jar  href="jars/eutils.jar"/>
+	<jar  href="jars/jaxrpc.jar"/>
 
 	<nativelib href="jars/phenote-nativelibs.jar"/>
 
