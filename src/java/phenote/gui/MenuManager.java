@@ -1,6 +1,8 @@
 package phenote.gui;
 // --> phenote.gui.menu ??
 
+import java.io.FileNotFoundException;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -10,7 +12,7 @@ public class MenuManager {
   
   private JMenuBar menuBar;
 
-  private FileMenu fileMenu;
+  private FileMenu fileMenu=null;
   
   private EditMenu editMenu;
   
@@ -50,7 +52,12 @@ public class MenuManager {
 
   private void initMenus(JFrame frame) {
     this.menuBar = new JMenuBar();
-    fileMenu = new FileMenu();
+    try {
+			fileMenu = new FileMenu();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     editMenu = new EditMenu();
     settingsMenu = new SettingsMenu();
     helpMenu = new HelpMenu();

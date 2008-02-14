@@ -4,6 +4,7 @@ package phenote.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -20,12 +21,12 @@ class FileMenu extends JMenu {
 
   private JMenuItem loadMenuItem;
 
-  FileMenu() {
+  FileMenu() throws FileNotFoundException {
     super("File");
     init();
   }
 
-  private void init() {
+  private void init() throws FileNotFoundException {
     LoadSaveActionListener actionListener = new LoadSaveActionListener();
 
     JMenuItem newData = new JMenuItem("New");

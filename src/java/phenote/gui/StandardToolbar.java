@@ -2,6 +2,7 @@ package phenote.gui;
 
 
 import java.awt.Color;
+import java.io.FileNotFoundException;
 import java.util.Vector;
 
 import javax.swing.Action;
@@ -58,8 +59,20 @@ public class StandardToolbar extends AbstractGUIComponent {
 
     //Standard things to do for files
     //The actions ought to be created elsewhere, yeah?
-    Action saveAction = new SaveFileAction();
-    Action openAction = new OpenFileAction();
+    Action saveAction = null;
+		try {
+			saveAction = new SaveFileAction();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    Action openAction=null;
+		try {
+			openAction = new OpenFileAction();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     Action dupAnnotationAction = new DuplicateAnnotationAction();
     Action undoAction = new UndoAction();
     Action redoAction = new RedoAction();

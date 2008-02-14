@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.io.FileNotFoundException;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -19,14 +20,15 @@ import org.apache.log4j.Logger;
 
 import phenote.config.Config;
 import phenote.dataadapter.LoadSaveManager;
+import phenote.util.FileUtil;
 
 //This is the action for opening files to be used by menus & button items.
 
 public class SaveAsFileAction extends AbstractAction {
 	//need a property change listener to see if the file has been modified since 
 	//last saved.  be smart!
-	public SaveAsFileAction() {
-		super("Save As...", new ImageIcon("images/Save24.gif"));
+	public SaveAsFileAction() throws FileNotFoundException {
+		super("Save As...", new ImageIcon(FileUtil.findUrl("images/Save24.gif")));
 		putValue(SHORT_DESCRIPTION, "Save File Dialog"); //tooltip text
 //		putValue(NAME, "Save As...");
 //		putValue(MNEMONIC_KEY, new Integer(KeyEvent.VK_S));
