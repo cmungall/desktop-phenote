@@ -280,6 +280,8 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 	private JLabel ontologyName;
 
+	private JLabel annotationSummaryLabel;
+	
 	private HyperlinkLabel definitionTextArea;
 	
 	private HyperlinkLabel annotationSummaryTextArea;
@@ -373,9 +375,9 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 		// create the toolbar
 		termInfoToolbar = new TermInfoToolbar();
-		termInfoToolbar.setPreferredSize(new Dimension(TERM_INFO_DEFAULT_WIDTH,termInfoToolbar.BUTTON_HEIGHT));
+		termInfoToolbar.setPreferredSize(new Dimension(TERM_INFO_DEFAULT_WIDTH,termInfoToolbar.BUTTON_HEIGHT+5));
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		termInfoToolbar.setMaximumSize(new Dimension(screenSize.width,termInfoToolbar.BUTTON_HEIGHT));
+		termInfoToolbar.setMaximumSize(new Dimension(screenSize.width,termInfoToolbar.BUTTON_HEIGHT+5));
 		this.add(termInfoToolbar); //, BorderLayout.NORTH);
 		
 
@@ -429,14 +431,17 @@ public class TermInfo2 extends AbstractGUIComponent {
 		definitionLabel.setLabelFor(definitionTextArea);
 		basicInfoPanel.add(definitionTextArea);
 		
+//removing for 1.5 release		
 //		if (this.isIncludeExternalDatabaseAnnotations()) {
-			JLabel annotationSummaryLabel = new JLabel("<html><p align=right>External Annotations:</p></html>", JLabel.TRAILING);
+			annotationSummaryLabel = new JLabel("<html><p align=right>External Annotations:</p></html>", JLabel.TRAILING);
 			annotationSummaryLabel.setVerticalAlignment(JLabel.TOP);
 
 			basicInfoPanel.add(annotationSummaryLabel);
 			annotationSummaryTextArea = new HyperlinkLabel(" ");
 			annotationSummaryLabel.setLabelFor(annotationSummaryTextArea);
 			basicInfoPanel.add(annotationSummaryTextArea);
+			annotationSummaryLabel.setVisible(this.isIncludeExternalDatabaseAnnotations());
+			annotationSummaryTextArea.setVisible(this.isIncludeExternalDatabaseAnnotations());
 //		}
 
 		// Lay out the panel.
@@ -629,6 +634,9 @@ public class TermInfo2 extends AbstractGUIComponent {
 		} else {
 			annotationSummaryTextArea.setText("");
 		}
+		annotationSummaryLabel.setVisible(this.isIncludeExternalDatabaseAnnotations());
+		annotationSummaryTextArea.setVisible(this.isIncludeExternalDatabaseAnnotations());
+
 
 		if ((!showEmptyPanelsFlag) && (oboClass.getSynonyms().size() == 0)) {
 			termInfoPanel.getComponent(4).setVisible(false);

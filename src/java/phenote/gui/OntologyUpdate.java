@@ -519,7 +519,8 @@ public class OntologyUpdate {
       	LOG.info("no ontologies needed updating");
       	m="no ontologies needed updating";
       } else {
-        m = up +" of " + numUpdates + " ontologies have been updated";
+      	m = "Only some ontologies needed updating.";
+        m += up +" of " + numUpdates + " updated";
       }
       	//here, i should just update the window, and switch the button to "done"?
       //or just go on.  perhaps close the window, then display the update
@@ -553,7 +554,7 @@ public class OntologyUpdate {
       					break;
       				} 
       			}
-      			numUpdates++;
+//      			numUpdates++;
       		}
   				row++;
   			} catch(OntologyException oe) {
@@ -565,7 +566,7 @@ public class OntologyUpdate {
 				}
       }
         if (up==0) {
-        	LOG.info("no ontologies needed updating");
+        	LOG.info("no ontologies updated");
         	m="no ontologies needed updating";
         } else {
           m = up +" of " + numUpdates + " ontologies have been updated";
@@ -591,7 +592,7 @@ public class OntologyUpdate {
       		//if there's a new ontology available, it will snag it.
       		exists = OntologyDataAdapter2.getInstance().checkForLocalFileExists(ontology);
       		if (!exists) {
-      			addUpdateMessage("Downloading new ontology: "+ontology.getHandle());
+      			addUpdateMessage(ontology.getHandle()+" not found locally.  Downloading.");
       			OntologyDataAdapter2.getInstance().downloadUpdate(ontology.getHandle());
       			up++;
       			if (ontologyTable.getValueAt(row, 2).equals(ontology.getHandle())) {
@@ -600,7 +601,7 @@ public class OntologyUpdate {
       			} else {
       				row++; //this is a hack...these *should* be done in order
       			}
-    				numUpdates++;
+//    				numUpdates++;
       		}
   				row++;
   			} catch(OntologyException oe) {
@@ -613,9 +614,9 @@ public class OntologyUpdate {
       }
         if (up==0) {
         	LOG.info("no ontologies downloaded");
-        	m="no ontologies needed updating";
+        	m="no ontologies downloaded";
         } else {
-          m = up +" of " + numUpdates + " ontologies have been initially downloaded";
+          m = up +" ontologies were not found locally and downloaded.";
         }
 
       JOptionPane.showMessageDialog(null, m, "Phenote Message",
