@@ -173,6 +173,8 @@ public class DelimitedChar {
     String[] items = splitLine(line);
     if (items.length==0) throw new DelimitedEx(line); // BlankEx?
     for (DelimFieldParser p : fieldParsers) {
+      // throws DelEx if array not long enough for Parser (missing tabs)
+      // should ex be caught and go on?
       p.parseField(items,character); // add cfv to char or ret cfv?
     }
   }

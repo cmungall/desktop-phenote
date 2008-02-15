@@ -64,11 +64,20 @@ class DelimFieldParser {
 
   private boolean isTerm() { return charField.isTerm(); }
 
-  void parseField(String items[],CharacterI chr) {
+  void parseField(String items[],CharacterI chr) throws DelimitedEx {
+    if (columnIndex >= items.length)
+      throw new DelimitedEx("No more fields in line to parse "+items+" "+chr);
     // if term, first id then name
     String value = items[columnIndex];
     try {
-      String danglerName = charField.isTerm() ? items[columnIndex+1] : null;
+      String danglerName = null;
+      // if it is a term then grab next item for dangler name, but 
+      if (charField.isTerm()) {
+        //look out for mangled data that lacks a term name (user mutzed)
+        if (columnIndex+1 >= items.length)
+          throw new DelimitedEx("No more fields in line to parse "+items+" "+chr);
+        danglerName = items[columnIndex+1];
+      }
       CharFieldValue cfv = chr.setValue(charField,value,danglerName);
       // if term, and id not found, dangler -> set name of dangler
       //if (cfv.isDangler()) // throw error if not term?
