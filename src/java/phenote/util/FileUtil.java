@@ -260,6 +260,40 @@ public class FileUtil {
       return success;
   }
 
+  /** some content from @link http://www.java2s.com/Code/Java/File-Input-Output/CopyfilesusingJavaIOAPI.htm */
+  synchronized public static boolean copyFile(File fromFile, File toFile) throws IOException {
+    boolean success = true;
+    FileInputStream from = null;
+    FileOutputStream to = null;
+    if (!fromFile.exists())
+    	throw new IOException("FileCopy: no such source: "+ fromFile.getName());
+    if (!fromFile.canRead())
+    	throw new IOException("FileCopy: source is unreadable: "+ fromFile.getName());
+    
+    try {
+    	from = new FileInputStream(fromFile);
+    	to = new FileOutputStream(toFile);
+    	int bytesWritten = 0;
+    	int bytesRead = 0;
+    	long byteCount = 0;
+    	byte[] buffer = new byte[4096];
+    	while ((bytesRead = from.read(buffer)) != -1)
+    		to.write(buffer, 0, bytesRead);
+    	
+    } finally {
+    	try {
+    		if (from != null)
+    			from.close();
+    		if (to != null)
+    			to.close();
+    	} catch (IOException e) {
+    		LOG.error(e.getMessage(), e);
+    		success = false;
+    	}
+    }
+    return success;
+  }
+  
 
   /**
    * Purge an archive directory for files that are older than the purge time.

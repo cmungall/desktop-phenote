@@ -487,7 +487,7 @@ public class OntologyUpdate {
       	OntologyFile ontology = Config.inst().getOntologyFileByHandle(ontologyTable.getValueAt(i,2).toString());
       	try {
       		//download those that are checked, need updating, and also if they don't exist
-      		if ((ontologyTable.getValueAt(i,0).equals(true) && !OntologyDataAdapter2.getInstance().checkForUpdate(ontology)) ||
+      		if ((ontologyTable.getValueAt(i,0).equals(true) && OntologyDataAdapter2.getInstance().checkForUpdate(ontology)) ||
       				!OntologyDataAdapter2.getInstance().checkForLocalFileExists(ontology.getFilename())) {
       			m+= ontologyTable.getValueAt(i, 2)+ " ";
       			try {

@@ -731,11 +731,14 @@ public class OntologyDataAdapter2 {
   public boolean checkForLocalFileExists(OntologyFile ontology) {
   	URL localUrl = null;
   	try {
-  		localUrl = new File(FileUtil.getDotPhenoteOboDir(),ontology.getFilename()).toURL();
-  		File f = new File(localUrl.getFile());
+  		File f = new File(getLocalFile(ontology).getFile());
     	return f.exists();
-  	} catch (MalformedURLException e) { return false;}
+  	} catch (OntologyException e) {
+			e.printStackTrace();
+			return false;
+		} 
   }
+  
   public boolean checkForLocalFileExists(String filename) {
   	URL localUrl = null;
   	try {
@@ -749,9 +752,13 @@ public class OntologyDataAdapter2 {
   	File dotPhenoteFile = new File(FileUtil.getDotPhenoteOboDir(),filename);
   	File phenoteFile = new File(localUrl.getFile());
 
-  	FileUtil.copyFileIntoArchive(phenoteFile, dotPhenoteFile);
-  	LOG.info(filename+" copied from "+localUrl.getPath()+" to "+dotPhenoteFile.getPath());
-  	System.out.println(filename+" copied from "+localUrl.getPath()+" to "+dotPhenoteFile.getPath());
+  	try {
+			FileUtil.copyFile(phenoteFile, dotPhenoteFile);
+	  	LOG.info(filename+" copied from "+localUrl.getPath()+" to "+dotPhenoteFile.getPath());
+	  	System.out.println(filename+" copied from "+localUrl.getPath()+" to "+dotPhenoteFile.getPath());
+		} catch (IOException e) {
+			LOG.error("error copying from "+localUrl.getPath()+" to "+dotPhenoteFile.getPath());
+		}
   	return dotPhenoteFile.exists();
   }  
 }
