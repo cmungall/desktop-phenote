@@ -573,7 +573,7 @@ public class Config {
 			  configs.add(jdbcPathToOBDConfiguration.get(jdbcPath));
 		  else {
 			  OBDSQLDatabaseAdapterConfiguration config = new OBDSQLDatabaseAdapterConfiguration();
-			  config.setReadPaths(Collections.singletonList(jdbcPath));
+			  config.setReadPath(jdbcPath);
 			  jdbcPathToOBDConfiguration.put(jdbcPath,config);
 			  configs.add(config);
 		  }
