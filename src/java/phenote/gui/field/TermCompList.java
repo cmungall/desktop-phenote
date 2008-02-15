@@ -69,7 +69,7 @@ public class TermCompList extends AbstractAutoCompList {
     return postCompButton;
   }
 
-  protected void allowPostCompButton(boolean allow) {
+  protected void checkPostCompButton(boolean allow) {
     if (!allow) return;
     if (getCharField().postCompAllowed()) {
       postCompButton = new JButton("Comp"); // ???

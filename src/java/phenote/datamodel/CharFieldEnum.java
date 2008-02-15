@@ -19,8 +19,9 @@ import phenote.config.xml.FieldDocument.Field.Type;
     or check this - i dont think there is */
 public enum CharFieldEnum {
 
-  PUB("Pub"), GENOTYPE("Genotype"), ALLELE("Allele"), GENETIC_CONTEXT("Genetic Context"),
-  ENTITY("Entity"), ENTITY2("E2"), QUALITY("Quality"),
+  PUB("Pub"), GENOTYPE("Genotype","GT"), ALLELE("Allele"),
+  GENETIC_CONTEXT("Genetic Context"),
+  ENTITY("Entity","E"), ENTITY2("Add'l Entity","E2"), QUALITY("Quality"),
   DATE_CREATED("Date Created","date_created",Type.DATE),
   ASSIGNED_BY("Assigned by"),
   EVIDENCE("Evidence"),
@@ -28,11 +29,15 @@ public enum CharFieldEnum {
   RELATIONSHIP("Relationship");
   
   // CHAR FIELD ENUM vars & methods (make its own class!)
+  // char field enum should probably only deal in tag, name is a bit display-ey
   private final String name;
   private final String tag;
   private final Type.Enum type;
   private CharFieldEnum(String name) {
-    this(name,null,null);
+    this(name,null);
+  }
+  private CharFieldEnum(String name,String tag) {
+    this(name,tag,null);
   }
   private CharFieldEnum(String name,String tag,Type.Enum type) {
     this.name = name;
@@ -47,7 +52,7 @@ public enum CharFieldEnum {
   public Type.Enum getType() { return type; }
   public boolean equals(String s) {
     if (s == null) return false;
-    return name.equalsIgnoreCase(s) || s.equalsIgnoreCase(tag);
+    return s.equalsIgnoreCase(name) || s.equalsIgnoreCase(tag);
   }
   public boolean equals(CharField cf) {
     return equals(cf.getName()) || equals(cf.getTag());

@@ -1,5 +1,6 @@
 package phenote.datamodel;
 
+import org.apache.log4j.Logger;
 import org.obo.datamodel.Link;
 import org.obo.datamodel.LinkedObject;
 import org.obo.datamodel.OBOClass;
@@ -15,6 +16,7 @@ import org.obo.util.TermUtil;
 
 public class OboUtil {
 
+  private static final Logger LOG = Logger.getLogger(OboUtil.class);
   private OBOClass postCompTerm;
   private String id;
   private String name;
@@ -45,14 +47,19 @@ public class OboUtil {
   }
 
 
+  /** even if genus is null returns an oboutil - should it return null if genus null? ex? */
   public static OboUtil initPostCompTerm(OBOClass genus) {
     OboUtil ou = new OboUtil();
-    ou.addGenus(genus);
+    if (genus!=null) ou.addGenus(genus);
     return ou;
   }
 
 
   private void addGenus(OBOClass genus) {
+  	if (genus==null) {
+  	  LOG.error("Genus is null, cant add to postcomp");
+  	  return;
+  	}
     id = genus.getID();
     name = genus.getName();
     postCompTerm = new OBOClassImpl(name,id);
@@ -62,7 +69,16 @@ public class OboUtil {
     postCompTerm.addParent(gRel);
   }
 
+  private Logger log() {
+    return null;
+  }
+
+
   public void addRelDiff(OBOProperty rel,OBOClass diff) {
+    if (postCompTerm==null){
+      LOG.error("cant add rel diff, post comp term is null");
+      return;
+    }
     OBORestrictionImpl dRel = new OBORestrictionImpl(postCompTerm,rel,diff);
     dRel.setCompletes(true); // post comp
     postCompTerm.addParent(dRel);

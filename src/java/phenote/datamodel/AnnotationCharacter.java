@@ -177,7 +177,7 @@ public class AnnotationCharacter extends AbstractCharacter {
       setAnnotObject(objectGenus.toTerm());
     }
 
-    // GENUS & DIFF - make post comp
+    // OBJECT GENUS & DIFF - make post comp
     else {
 //       OBOProperty rel = driver.getPropertyForField(objectDifferentia.getCharField());
 //       OBOClass pc =
@@ -194,7 +194,9 @@ public class AnnotationCharacter extends AbstractCharacter {
     }
   }
 
-  private boolean hasObjectGenus() { return objectGenus!=null; }
+  private boolean hasObjectGenus() {
+    return objectGenus!=null && !objectGenus.isEmpty();
+  } 
   private boolean hasObjectDiff() { return !charFieldToObjectDiff.isEmpty(); }
 
 

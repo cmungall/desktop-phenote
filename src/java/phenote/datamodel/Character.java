@@ -204,7 +204,7 @@ public class Character extends AbstractCharacter implements CharacterI {
   }
 
   private class Comparison {
-    // private CharacterI subject? might need?
+    private CharacterI subject;
     private OBOProperty rel;
     private CharacterI object;
     private Comparison(OBOProperty r,CharacterI c) { rel = r; object = c; }

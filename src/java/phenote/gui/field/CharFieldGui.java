@@ -49,8 +49,8 @@ import ca.odell.glazedlists.swing.EventSelectionModel;
 /** fields can either be text fields for free text or combo boxes if have 
     ontology to browse - CharFieldGui does either - with get/setText - hides the
     details of the gui - just a field that gives text 
-    should there be subclasses for free text, term, & relations? hmmmm 
-    ListSelectionListener listening to events from table selection (make inner class?) */
+    ListSelectionListener listening to events from table selection (make inner class?)
+    subclasses: TermCompList, FreeTextField,... */
 public abstract class CharFieldGui implements ListSelectionListener {
   private CharField charField;
   private String label;
@@ -73,23 +73,25 @@ public abstract class CharFieldGui implements ListSelectionListener {
   /** flag for supressing valueChanged if comes from self */
   private boolean doingInternalEdit = false;
 
-  /** CharFieldGui for main window not post comp box - factory method */
+  /** CharFieldGui for main window not post comp box - factory method, make appropriate
+      CFG subclass from type of charField - minCompChars is not used at moment - may come
+      back */
   public static CharFieldGui makeCharFieldGui(CharField charField,int minCompChars) {
     CharFieldGui fieldGui;
-    if (charField.isTerm()) { //hasOntologies()) {
-      //return new TermCompList(charField,sp,true); // enable listeners
+    if (charField.isTerm()) {
       TermCompList t = new TermCompList(charField,minCompChars);
-      //t.setSearchParams(sp);
-      t.allowPostCompButton(true);
+      t.checkPostCompButton(true); // check if field has post comp
       fieldGui = t;
     }
     else if (charField.isID()) {
       fieldGui = new IdFieldGui(charField);
     }
+    // this assumes all read only are free text - this will prob need refactoring
     else if (charField.isReadOnly()) {
       fieldGui = new ReadOnlyFieldGui(charField);
     } else if (charField.isPickList()) {
       fieldGui = new PickListFieldGui(charField);
+      // } else if (charField.isComparison())
     } else {
       FreeTextField f = new FreeTextField(charField);
       fieldGui = f;
@@ -126,7 +128,7 @@ public abstract class CharFieldGui implements ListSelectionListener {
     //t.setSearchParams(sp);
     // t.isInSeparateWindow(true) or t.isolate(true)??
     t.enableEditModel(false);
-    t.allowPostCompButton(false); // eventually config for recurse/embed
+    t.checkPostCompButton(false); // todo: false -> config for recurse/embed
     t.setLabel(label);
     return t;
   }
@@ -353,7 +355,7 @@ public abstract class CharFieldGui implements ListSelectionListener {
 
   /** no-op - overridden by term comp list - set to false for now for terms in comp
       window - resursion coming... */
-  protected void allowPostCompButton(boolean allow) {}
+  protected void checkPostCompButton(boolean allow) {}
 
   private void addRetrieveButton() {
   	if (!(Config.inst().hasQueryableDataAdapter() || Config.inst().hasNCBIAdapter())) return;
@@ -656,12 +658,3 @@ public abstract class CharFieldGui implements ListSelectionListener {
 //     //return relCompList;
 //     return null; // overridden
 //   }
-
-  // hardwired in term & rel subclasses now
-//   void enableTermInfoListening(boolean enable) {
-//     if (!isCompList()) return;
-//     getCompList().enableTermInfoListening(enable);
-//   }
-
-  //JLabel getLabelGui() { return new JLabel
-

@@ -16,7 +16,7 @@ class RelationCompList extends AbstractAutoCompList {
   RelationCompList(CharField c) {
     super(c);
     //setLabel("Relationship"); //does it get this from char field?
-    allowPostCompButton(false); // cant post comp rels can you?
+    checkPostCompButton(false); // cant post comp rels can you?
     enableEditModel(false); // doesnt directly edit model i dont think ever?
   }
 

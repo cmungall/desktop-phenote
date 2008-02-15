@@ -17,6 +17,7 @@ import javax.swing.KeyStroke;
 
 import org.apache.log4j.Logger;
 
+import phenote.util.FileUtil;
 import phenote.config.Config;
 import phenote.dataadapter.LoadSaveManager;
 import phenote.util.FileUtil;
@@ -24,6 +25,7 @@ import phenote.util.FileUtil;
 //This is the action for opening files to be used by menus & button items.
 
 public class OpenFileAction extends AbstractAction {
+
 	public OpenFileAction() throws FileNotFoundException {
 		super("Open...", new ImageIcon(FileUtil.findUrl("images/Open24.gif")));
 		putValue(SHORT_DESCRIPTION, "Open a file..."); // tooltip text

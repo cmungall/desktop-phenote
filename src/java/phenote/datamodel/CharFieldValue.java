@@ -18,9 +18,8 @@ import org.obo.util.TermUtil;
     data structure of the value for the field - could be String or OBOClass but can
     still deal with both the same - at least thats the idea... 
     post composition brings up some interesting issues...??? 
-    should this be merged with CharField? im forgetting the rationale for having it be
-    separate??? oh wait CharField is the generic field, CharFieldValue is an actual
-    instance of data within the CharField - linked via CharFieldEnum & Character*/
+    CharField is the generic field, CharFieldValue is an actual
+    instance of data within the CharField - in a Character*/
 public class CharFieldValue implements Cloneable {
 
   private static final Logger LOG = Logger.getLogger(CharFieldValue.class);
@@ -315,7 +314,8 @@ public class CharFieldValue implements Cloneable {
     return TermUtil.isDangling(getTerm());
   }
 
-  /** if cfv is a term just returns it, otherwise makes a dangling term out of 
+  /** if cfv is a term just returns it, returns null if doesnt have term,
+   *  otherwise makes a dangling term out of 
       its value, string or date or whatnot */
   public OBOClass toTerm() {
     if (isTerm()) return getTerm();
