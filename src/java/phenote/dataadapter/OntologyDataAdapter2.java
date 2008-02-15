@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
@@ -642,11 +643,15 @@ public class OntologyDataAdapter2 {
       throw new OntologyException(ontologyFile.getHandle()+" has null file");
     // throws OntologyEx if file not found -- catch & try url
     URL localUrl = null;
-    try { localUrl = findFile(filename);
-    if (!(localUrl.toString().contains(".phenote"))) {
-    	copyOntologyToDotPhenote(localUrl,filename);
-    }
+    try { 
+    	localUrl = findFile(filename);
+    	if (!(localUrl.toString().contains(".phenote"))) {
+    		LOG.info(filename+" found in system at "+localUrl);
+    		System.out.println(filename+" found in system at "+localUrl);
+    		copyOntologyToDotPhenote(localUrl,filename);
+    	}
     } catch (OntologyException oe) {
+    	LOG.info(filename+" not found locally, trying url if configured ");
       System.out.println(filename+" not found locally, trying url if configured ");
     }
 
@@ -694,7 +699,7 @@ public class OntologyDataAdapter2 {
   				localUrl = getLocalFile(of);
   				startTimer();
   				//for some reason, this isn't logging
-  				LOG.info("Downloading ontology/n from: "+reposUrl+"/n   to: "+localUrl);
+  				LOG.info("Downloading ontology from: "+reposUrl+"to: "+localUrl);
   				//this uses marks, but maybe this should use john's?
   				//need to add in here the copying of the old ontology file to temp, in
   				//case the new one is botched.
@@ -751,15 +756,31 @@ public class OntologyDataAdapter2 {
 
   public boolean copyOntologyToDotPhenote(URL localUrl, String filename) {
   	File dotPhenoteFile = new File(FileUtil.getDotPhenoteOboDir(),filename);
-  	File phenoteFile = new File(localUrl.getFile());
+  	File phenoteFile = null;
+//		try {
+			try {
+				phenoteFile = new File(localUrl.toURI());
+			} catch (URISyntaxException e1) {
+			LOG.error("could not find "+filename+" locally using URI "+localUrl.toString());
+				e1.printStackTrace();
+			}
+//			phenoteFile = new File(FileUtil.findUrl(localUrl.getPath()).toString());
+//		} catch (FileNotFoundException e1) {
+//			LOG.error("could not find "+filename+" locally at "+localUrl.toString());
+//	  	System.out.println("could not find "+filename+" locally at "+localUrl.toString());
+//
+//			e1.printStackTrace();
+//		}
 
   	try {
-			FileUtil.copyFile(phenoteFile, dotPhenoteFile);
-	  	LOG.info(filename+" copied from "+localUrl.getFile()+" to "+dotPhenoteFile.getPath());
-	  	System.out.println(filename+" copied from "+localUrl.getFile()+" to "+dotPhenoteFile.getPath());
+//  		FileUtil.copyFileIntoArchive(phenoteFile,dotPhenoteFile);
+  		FileUtil.copyFile(phenoteFile, dotPhenoteFile);
+	  	LOG.info(filename+" copied from "+phenoteFile.getPath()+" to "+dotPhenoteFile.getPath());
+	  	System.out.println(filename+" copied from "+phenoteFile.getPath()+" to "+dotPhenoteFile.getPath());
 		} catch (IOException e) {
-			LOG.error("error copying from "+localUrl.getFile()+" to "+dotPhenoteFile.getPath());
-	  	System.out.println("error copying from "+localUrl.getFile()+" to "+dotPhenoteFile.getPath());
+			LOG.error("error copying from "+phenoteFile.getPath()+" to "+dotPhenoteFile.getPath());
+	  	System.out.println("error copying from "+phenoteFile.getPath()+" to "+dotPhenoteFile.getPath());
+	  	e.printStackTrace();
 			
 		}
   	return dotPhenoteFile.exists();

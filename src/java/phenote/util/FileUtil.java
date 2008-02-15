@@ -266,9 +266,9 @@ public class FileUtil {
     FileInputStream from = null;
     FileOutputStream to = null;
     if (!fromFile.exists())
-    	throw new IOException("FileCopy: no such source: "+ fromFile.getName());
+    	throw new IOException("FileCopy: no such source: "+ fromFile.getPath());
     if (!fromFile.canRead())
-    	throw new IOException("FileCopy: source is unreadable: "+ fromFile.getName());
+    	throw new IOException("FileCopy: source is unreadable: "+ fromFile.getPath());
     
     try {
     	from = new FileInputStream(fromFile);
