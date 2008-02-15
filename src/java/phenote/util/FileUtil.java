@@ -85,7 +85,7 @@ public class FileUtil {
       throw new FileNotFoundException(m);
     }
     List<URL> possibleUrls = getPossibleUrls(filename);
-    for (URL u : possibleUrls) {
+    for (URL u : possibleUrls) {  ///there's no particular order here, is there???
       //System.out.println(u+" url exists "+urlExists(u));
       if (urlExists(u)) return u;
     }

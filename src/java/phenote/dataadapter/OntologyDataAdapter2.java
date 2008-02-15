@@ -634,6 +634,7 @@ public class OntologyDataAdapter2 {
 
   //this function will leverage what mark does for snagging the date.  in
   //the future, this could utilize the bioportal versioning system.
+  /** @return A flag indicating if the given ontology has an update available */
   public boolean checkForUpdate(OntologyFile ontologyFile) throws OntologyException{
     String filename = ontologyFile.getFilename();
     boolean useRepos = false; //by default, i'll say there's no ontologies to update
@@ -754,10 +755,12 @@ public class OntologyDataAdapter2 {
 
   	try {
 			FileUtil.copyFile(phenoteFile, dotPhenoteFile);
-	  	LOG.info(filename+" copied from "+localUrl.getPath()+" to "+dotPhenoteFile.getPath());
-	  	System.out.println(filename+" copied from "+localUrl.getPath()+" to "+dotPhenoteFile.getPath());
+	  	LOG.info(filename+" copied from "+localUrl.getFile()+" to "+dotPhenoteFile.getPath());
+	  	System.out.println(filename+" copied from "+localUrl.getFile()+" to "+dotPhenoteFile.getPath());
 		} catch (IOException e) {
-			LOG.error("error copying from "+localUrl.getPath()+" to "+dotPhenoteFile.getPath());
+			LOG.error("error copying from "+localUrl.getFile()+" to "+dotPhenoteFile.getPath());
+	  	System.out.println("error copying from "+localUrl.getFile()+" to "+dotPhenoteFile.getPath());
+			
 		}
   	return dotPhenoteFile.exists();
   }  
