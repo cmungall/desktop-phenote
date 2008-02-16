@@ -1,6 +1,6 @@
 package phenote.util;
 
-import java.io.BufferedInputStream;
+import java.io.InputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -267,10 +267,9 @@ public class FileUtil {
   /** some content from @link http://www.java2s.com/Code/Java/File-Input-Output/CopyfilesusingJavaIOAPI.htm */
   synchronized public static boolean copyFile(URL fromUrl, File toFile) throws IOException {
     boolean success = true;
-    FileOutputStream to = null;
-    BufferedInputStream content = null;
+    InputStream content = null;
     try {
-    	content = (BufferedInputStream) fromUrl.getContent();
+    	content = (InputStream) fromUrl.getContent();
     } catch (IOException e) {
     	success = false;
     	LOG.error("Can't fetch URL " + fromUrl.getPath());
