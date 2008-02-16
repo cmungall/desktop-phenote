@@ -33,6 +33,7 @@
     <property name="conf" value="conf"/>
     <property name="images" value="images"/>
 	<property name="dist" value="dist"/>
+<property name="icon" value="images/elephant_icon.jpg"/>
 	<property name="build-lib" value="build-lib"/>
 	
 	<property name="main-class" value="phenote.main.Phenote2"/>
@@ -572,7 +573,10 @@ where xsd files are (conf) -->
 	<taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler" classpath="${build-lib}/jarbundler-1.9.jar"/>
 	<!-- Create a competely self-contained double-clickable app bundle for Mac OS X in "dist/Phenote.app" -->
 	<target name="dist-mac" depends="jar, dist-init">
-		<jarbundler dir="${dist}" name="Phenote" mainclass="${main-class}" jvmversion="1.5*" vmoptions="-Xmx1024M -Dphenote.version=${phenote.version} -Dphenote.build=${phenote.build}" screenmenu="true" version="${phenote.version}" build="${phenote.build}">
+		<jarbundler dir="${dist}" name="Phenote"
+mainclass="${main-class}" jvmversion="1.5*" vmoptions="-Xmx1024M
+-Dphenote.version=${phenote.version} -Dphenote.build=${phenote.build}"
+screenmenu="true" version="${phenote.version}" build="${phenote.build}" icon="${icon}">
 			<jarfileset dir="${lib}"/>
 		</jarbundler>
 	</target>
