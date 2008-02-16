@@ -1,10 +1,13 @@
 package phenote.util;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -17,6 +20,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.TimeZone;
+
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -261,35 +265,31 @@ public class FileUtil {
   }
 
   /** some content from @link http://www.java2s.com/Code/Java/File-Input-Output/CopyfilesusingJavaIOAPI.htm */
-  synchronized public static boolean copyFile(File fromFile, File toFile) throws IOException {
+  synchronized public static boolean copyFile(URL fromUrl, File toFile) throws IOException {
     boolean success = true;
-    FileInputStream from = null;
     FileOutputStream to = null;
-    if (!fromFile.exists())
-    	throw new IOException("FileCopy: no such source: "+ fromFile.getPath());
-    if (!fromFile.canRead())
-    	throw new IOException("FileCopy: source is unreadable: "+ fromFile.getPath());
+    BufferedInputStream content = null;
+    try {
+    	content = (BufferedInputStream) fromUrl.getContent();
+    } catch (IOException e) {
+    	success = false;
+    	LOG.error("Can't fetch URL " + fromUrl.getPath());
+    }
     
     try {
-    	from = new FileInputStream(fromFile);
-    	to = new FileOutputStream(toFile);
-    	int bytesWritten = 0;
-    	int bytesRead = 0;
-    	long byteCount = 0;
-    	byte[] buffer = new byte[4096];
-    	while ((bytesRead = from.read(buffer)) != -1)
-    		to.write(buffer, 0, bytesRead);
-    	
-    } finally {
+    	BufferedWriter output = new BufferedWriter(new FileWriter(toFile));
+    	int c;
     	try {
-    		if (from != null)
-    			from.close();
-    		if (to != null)
-    			to.close();
-    	} catch (IOException e) {
-    		LOG.error(e.getMessage(), e);
-    		success = false;
+    		while ((c = content.read()) != -1) {
+    			output.write(c);
+    		}
+    	} catch (IOException e2) {
+    		LOG.error("Can't write byte to " + toFile.getPath());
     	}
+    	output.close();
+    } catch (IOException e) {
+    	success = false;
+    	LOG.error("Couldn't write to file " + toFile.getPath());
     }
     return success;
   }

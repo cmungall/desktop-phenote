@@ -756,14 +756,8 @@ public class OntologyDataAdapter2 {
 
   public boolean copyOntologyToDotPhenote(URL localUrl, String filename) {
   	File dotPhenoteFile = new File(FileUtil.getDotPhenoteOboDir(),filename);
-  	File phenoteFile = null;
+//  	File phenoteFile = null;
 //		try {
-			try {
-				phenoteFile = new File(localUrl.toURI());
-			} catch (URISyntaxException e1) {
-			LOG.error("could not find "+filename+" locally using URI "+localUrl.toString());
-				e1.printStackTrace();
-			}
 //			phenoteFile = new File(FileUtil.findUrl(localUrl.getPath()).toString());
 //		} catch (FileNotFoundException e1) {
 //			LOG.error("could not find "+filename+" locally at "+localUrl.toString());
@@ -774,12 +768,12 @@ public class OntologyDataAdapter2 {
 
   	try {
 //  		FileUtil.copyFileIntoArchive(phenoteFile,dotPhenoteFile);
-  		FileUtil.copyFile(phenoteFile, dotPhenoteFile);
-	  	LOG.info(filename+" copied from "+phenoteFile.getPath()+" to "+dotPhenoteFile.getPath());
-	  	System.out.println(filename+" copied from "+phenoteFile.getPath()+" to "+dotPhenoteFile.getPath());
+  		FileUtil.copyFile(localUrl, dotPhenoteFile);
+	  	LOG.info(filename+" copied from "+localUrl.getPath()+" to "+dotPhenoteFile.getPath());
+	  	System.out.println(filename+" copied from "+localUrl.getPath()+" to "+dotPhenoteFile.getPath());
 		} catch (IOException e) {
-			LOG.error("error copying from "+phenoteFile.getPath()+" to "+dotPhenoteFile.getPath());
-	  	System.out.println("error copying from "+phenoteFile.getPath()+" to "+dotPhenoteFile.getPath());
+			LOG.error("error copying from "+localUrl.getPath()+" to "+dotPhenoteFile.getPath());
+	  	System.out.println("error copying from "+localUrl.getPath()+" to "+dotPhenoteFile.getPath());
 	  	e.printStackTrace();
 			
 		}
