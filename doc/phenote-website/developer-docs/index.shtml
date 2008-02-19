@@ -19,7 +19,7 @@
 	<ul>
 	  <li><a href="getting-source-code-in-eclipse.shtml">Getting the Source code</a> (command line or in Eclipse)  
 	  </li>
-	  <li><a href-"http://www.phenote.org/doc/api/">Browse the API Javadocs</a></li>
+	  <li><a href="http://www.phenote.org/doc/api/">Browse the API Javadocs</a></li>
 	  <li><a href="dataadapter.shtml">Working with Data Adapters</a>
 	  </li>
 	  <li><a href="developer-docs.shtml">Adding new configuration parameters</a>
