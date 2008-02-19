@@ -33,7 +33,7 @@
     <property name="conf" value="conf"/>
     <property name="images" value="images"/>
 	<property name="dist" value="dist"/>
-<property name="icon" value="images/elephant_icon.jpg"/>
+<property name="icon" value="images/phenote_app.icns"/>
 	<property name="build-lib" value="build-lib"/>
 	
 	<property name="main-class" value="phenote.main.Phenote2"/>
@@ -316,6 +316,15 @@ them into  the classfiles directory. excludes="test/**"  -->
             <doctitle><![CDATA[<h1>Phenote</h1>]]></doctitle>
         </javadoc>
     </target>
+
+    <target name="copy-javadoc" depends="javadoc">
+      <!--this isn't really part of webstart, but the website, really-->
+      <copy todir="phenote-webstart/api">
+        <fileset file="doc/api"/>
+      </copy>
+      <replace dir="phenote-webstart/api" />
+    </target>    
+
 
     <property name="dist" value="0.6"/>
 
