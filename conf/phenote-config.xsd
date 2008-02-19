@@ -262,10 +262,9 @@
             <xs:enumeration value="TERM"/>
             <xs:enumeration value="INT"/>
             <xs:enumeration value="ID"/>
+            <xs:enumeration value="READ_ONLY"/>
             <xs:enumeration value="DATE"/>
             <xs:enumeration value="COMPARISON"/>
-            <xs:enumeration value="PICK"/>
-            <xs:enumeration value="READ_ONLY"/>
             <xs:enumeration value="free_text"/>
           </xs:restriction>
         </xs:simpleType>
@@ -294,6 +293,7 @@
         </xs:annotation>
       </xs:attribute>
       <xs:attribute name="isPickList" use="required" type="xs:boolean"/>
+      <xs:attribute name="componentsGroup" use="required" type="xs:ID"/>
       <xs:attribute name="isVisible" use="required" type="xs:boolean"/>
       <xs:attribute name="pickSource" use="required" type="xs:string">
         <xs:annotation>
@@ -364,6 +364,11 @@
         </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="title" use="required" type="xs:string"/>
+      <xs:attribute name="allowEmptyCharacters" use="required" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>default is false - there is always one character</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
       <xs:attribute name="group_adapter" use="required" type="xs:string"/>
       <xs:attribute name="destination_field" use="required" type="xs:string"/>
       <xs:attribute name="show" type="xs:IDREFS">

@@ -43,6 +43,7 @@ import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
 import phenote.gui.CharacterTable;
+import phenote.gui.CharacterTableController;
 import phenote.gui.CharacterTableSource;
 import phenote.gui.TableColumnPrefsSaver;
 import phenote.gui.field.CharFieldMatcherEditor;
@@ -65,6 +66,8 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
   private CharacterTemplateTableFormat tableFormat;
   private LoadSaveManager loadSaveManager;
   private CharFieldMatcherEditor filter;
+  private TableComparatorChooser<CharacterI> sortChooser;
+  private SelectionListener selectionListener;
   private Set<CharacterI> markedCharacters = new HashSet<CharacterI>();
   private JPanel tablePanel; // initialized by swix
   private JTable characterTable; // initialized by swix
@@ -191,8 +194,10 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     for (GUIComponent component : ComponentManager.getManager().getActiveComponents()) {
       //TODO there should be a better way to find particular components
       if (component instanceof CharacterTable) {
-        ComponentManager.getManager().focusComponent(component);
-        break;
+        if (((CharacterTable)component).getGroup().equals(CharacterTableController.getDefaultController().getGroup())) {
+          ComponentManager.getManager().focusComponent(component);
+          break;
+        }
       }
     }
   }
@@ -238,14 +243,15 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     this.add(this.tablePanel, BorderLayout.CENTER);
     final EventTableModel<CharacterI> eventTableModel = new EventTableModel<CharacterI>(this.filteredCharacters, this.tableFormat);
     this.characterTable.setModel(eventTableModel);
-    new TableComparatorChooser<CharacterI>(characterTable, this.sortedCharacters, false);
+    this.sortChooser = new TableComparatorChooser<CharacterI>(characterTable, this.sortedCharacters, false);
     this.characterTable.setSelectionModel(this.selectionModel);
     this.characterTable.putClientProperty("Quaqua.Table.style", "striped");
     this.characterTable.getActionMap().getParent().remove("copy");
     this.characterTable.getActionMap().getParent().remove("paste");
     this.filterPanel.add(this.filter.getComponent());
     this.tablePanel.validate();
-    this.selectionModel.addListSelectionListener(new SelectionListener());
+    this.selectionListener = new SelectionListener();
+    this.selectionModel.addListSelectionListener(this.selectionListener);
     new TableColumnPrefsSaver(this.characterTable, this.getTableAutoSaveName());
   }
   
@@ -268,7 +274,28 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
   }
   
   private void addInitialBlankCharacter() {
+    if (Config.inst().getGroupAllowsEmptyCharacters(this.getGroup()) == true) return;
     this.getEditManager().addInitialCharacter();
+  }
+  
+  /**
+   * Resets everything needed when the CharacterListI has been replaced by a newly loaded file.
+   */
+  private void updateFromNewCharacterList() {
+    this.sortedCharacters = new SortedList<CharacterI>(this.getCharacterListManager().getCharacterList().getList(), new EverythingEqualComparator<CharacterI>());
+    this.sortedCharacters.setMode(SortedList.AVOID_MOVING_ELEMENTS);
+    this.filteredCharacters.dispose();
+    this.filteredCharacters = new FilterList<CharacterI>(this.sortedCharacters, this.filter);
+    if (this.selectionListener != null) this.selectionModel.removeListSelectionListener(this.selectionListener);
+    this.selectionModel = new EventSelectionModel<CharacterI>(this.filteredCharacters);
+    this.selectionListener = new SelectionListener();
+    this.selectionModel.addListSelectionListener(this.selectionListener);
+
+    final EventTableModel<CharacterI> eventTableModel = new EventTableModel<CharacterI>(this.filteredCharacters, this.tableFormat);
+    this.characterTable.setModel(eventTableModel);
+    if (this.sortChooser != null) this.sortChooser.dispose();
+    this.sortChooser = new TableComparatorChooser<CharacterI>(characterTable, this.sortedCharacters, false);
+    this.characterTable.setSelectionModel(this.selectionModel);
   }
   
   private void setSelectionWithCharacters(List<CharacterI> characters) {
@@ -286,6 +313,7 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
   
   private void updateButtonStates() {
     final boolean hasSelection = !this.selectionModel.isSelectionEmpty();
+    log().debug("Update button states: " + hasSelection);
     this.duplicateButton.setEnabled(hasSelection);
     this.deleteButton.setEnabled(hasSelection);
     this.markButton.setEnabled(hasSelection);
@@ -434,6 +462,7 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
       if (!CharacterTemplateTable.this.filteredCharacters.isEmpty()) {
         CharacterTemplateTable.this.selectionModel.setSelectionInterval(0, 0);
       }
+      updateFromNewCharacterList();
     }
   }
   

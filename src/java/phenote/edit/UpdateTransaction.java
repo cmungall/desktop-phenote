@@ -29,6 +29,11 @@ public class UpdateTransaction implements TransactionI { // extends Transaction?
     // if list adds to list, if not just sets it, in either case makes new object
     newValue = CharFieldValue.makeNewValue(newTerm,oldValue);//new CharFieldValue(newVal,c,cf);
   }
+  
+  public UpdateTransaction(CharacterI c, CharField cf, CharFieldValue v) {
+    oldValue = c.getValue(cf);
+    newValue = CharFieldValue.makeNewValue(v, oldValue);
+  }
 
   public UpdateTransaction(CharFieldValue oldVal, CharFieldValue newVal) {
     oldValue = oldVal;

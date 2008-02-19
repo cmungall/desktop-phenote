@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.Box;
@@ -343,27 +344,13 @@ public class FieldPanel extends AbstractGUIComponent {
     }
   }
   
+  public List<CharFieldGui> getCharFieldGuiList() {
+    return Collections.unmodifiableList(this.charFieldGuiList);
+  }
+  
+  @SuppressWarnings("unused")
   private Logger log() {
     return Logger.getLogger(this.getClass());
   }
 
 }
-
-
-
-//  SearchParamsI getSearchParams() {
-////    if (searchParams == null)
-////      searchParams = getSearchParamPanel().getSearchParams();
-//    return searchParams;
-//	  return SearchParams.inst();
-//  }
-
-  //void setSearchParams(SearchParamsI sp) { searchParams = sp; }
-//   boolean hasLumpComboBox() {
-//     //return lumpField.isCombo();
-//     return getLumpComboBox() != null;
-//   }
-//   AbstractAutoCompList getLumpComboBox() {
-//     return getComboBox(CharFieldEnum.LUMP);
-//   }
-

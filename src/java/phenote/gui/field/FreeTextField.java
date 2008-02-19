@@ -14,11 +14,11 @@ import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.event.ListSelectionEvent;
 
 import org.apache.log4j.Logger;
 
 import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 import phenote.edit.CompoundTransaction;
@@ -27,6 +27,7 @@ import phenote.error.ErrorManager;
 import phenote.gui.FieldRightClickMenu;
 import phenote.gui.GuiUtil;
 import phenote.gui.PopupListener;
+import ca.odell.glazedlists.event.ListEvent;
 
 class FreeTextField extends CharFieldGui {
 
@@ -101,6 +102,16 @@ class FreeTextField extends CharFieldGui {
     this.setText(value.getName());
   }
   
+  @Override
+  protected CharFieldValue getCharFieldValue() {
+    try {
+      return this.getCharField().makeValue(null, this.getText());
+    } catch (CharFieldException e) {
+      log().error("Couldn't create charfieldvalue", e);
+    }
+    return CharFieldValue.emptyValue(null, this.getCharField());
+  }
+
   /** If user tabs causes a focus lost as well as mouse clicking,
       (return causes action event) */
   protected void focusLost() {
@@ -116,9 +127,9 @@ class FreeTextField extends CharFieldGui {
   }
   
   @Override
-  public void valueChanged(ListSelectionEvent e) {
+  public void listChanged(ListEvent<CharacterI> listChanges) {
     this.selectionChangedBeforeLosingFocus = true;
-    super.valueChanged(e);
+    super.listChanged(listChanges);
   }
   
   @Override

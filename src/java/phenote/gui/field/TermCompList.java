@@ -17,6 +17,7 @@ import org.obo.datamodel.OBOClass;
 import org.obo.util.TermUtil;
 
 import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.Ontology;
@@ -81,6 +82,17 @@ public class TermCompList extends AbstractAutoCompList {
   protected void setCharFieldValue(CharFieldValue value) {
     this.setOboClass(value.getOboClass());
     this.setOntologyChooserFromTerm(value.getOboClass());
+  }
+  
+  protected CharFieldValue getCharFieldValue() {
+    try {
+      return this.getCharField().makeValue(null, this.getCurrentOboClass().getID(), this.getText());
+    } catch (CharFieldException e) {
+      log().debug("Couldn't create charfieldvalue", e);
+    } catch (CharFieldGuiEx e) {
+      log().debug("Couldn't create charfieldvalue", e);
+    }
+    return CharFieldValue.emptyValue(null, this.getCharField());
   }
 
   void setOntologyChooserFromTerm(OBOClass term) {

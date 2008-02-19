@@ -12,7 +12,6 @@ import org.obo.datamodel.impl.DanglingClassImpl;
 
 import phenote.config.FieldConfig;
 import phenote.config.xml.FieldDocument.Field;
-// type is from xmlbean Field
 import phenote.config.xml.FieldDocument.Field.Type;
 import phenote.error.ErrorEvent;
 import phenote.error.ErrorManager;
@@ -151,7 +150,6 @@ public class CharField {
     if (fieldXmlBean == null) return false;
     if (fieldXmlBean.xgetIsPickList() == null) return false;
     return fieldXmlBean.getIsPickList();
-    //return type == Type.PICK;
   }
   
   public CharField getPickListSourceField() {
@@ -164,7 +162,20 @@ public class CharField {
       return null;
     }
   }
-
+  
+  /**
+   * If a CharField is compound, there is another group of fields in the config which 
+   * the value of this field can be parsed into - this is used by the CharacterListFieldGui.
+   */
+  public boolean isCompound() {
+    if (fieldXmlBean == null) return false;
+    return (fieldXmlBean.xgetComponentsGroup() != null);
+  }
+  
+  public String getComponentsGroup() {
+    return fieldXmlBean.getComponentsGroup();
+  }
+  
   /** This should be redundant with hasOntologies (though with instances this
       may change?) when ontology is added type is automatically set to TERM */
   public boolean isTerm() {

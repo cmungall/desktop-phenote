@@ -1267,6 +1267,17 @@ public class Config {
     if (g == null) return null;
     return g.getTitle();
   }
+  
+  /**
+   * Determines whether the editing interface for this group
+   * should always create a blank character when the last is deleted.
+   */
+  public boolean getGroupAllowsEmptyCharacters(String groupName) {
+    final Group group = this.getGroup(groupName);
+    if (group == null) return false;
+    if (group.xgetAllowEmptyCharacters() == null) return false;
+    return group.getAllowEmptyCharacters();
+  }
 
   /** Returns xmlbean Group for groupName, returns null if no such group
    should it create group for "default" if it doesnt exist - i think so - just 

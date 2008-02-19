@@ -2,12 +2,13 @@ package phenote.datamodel;
 
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
-
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.impl.DanglingClassImpl;
 import org.obo.util.TermUtil;
@@ -83,6 +84,7 @@ public class CharFieldValue implements Cloneable {
     }
     return newVal;
   }
+  
   /** If list adds to value, if not list just sets it, makes new CFV */
   public static CharFieldValue makeNewValue(String newString,CharFieldValue oldVal) {
     CharFieldValue newVal = oldVal.cloneCharFieldValue(); // also clones list
@@ -96,6 +98,19 @@ public class CharFieldValue implements Cloneable {
       newVal.getCharFieldValueList().add(newKid);
     }
     return newVal;
+  }
+  
+  /** If list adds to value, if not list just sets it, makes new CFV */
+  public static CharFieldValue makeNewValue(CharFieldValue newValue, CharFieldValue oldValue) {
+    final CharFieldValue updatedValue = newValue.cloneCharFieldValue(oldValue.getCharacter(), oldValue.getCharField());
+    if (oldValue.isList()) { // LIST/MULTI VALUE
+      CharFieldValue newList = oldValue.cloneCharFieldValue();
+      newList.isList = true; // only parent
+      newValue.getCharFieldValueList().add(updatedValue);
+      return newList;
+    } else {
+      return updatedValue;
+    }
   }
 
   public CharFieldValue(Date d, CharacterI c, CharField cf) {
@@ -185,11 +200,8 @@ public class CharFieldValue implements Cloneable {
 
   public boolean isEmpty() {
     if (isList || isPickList()) {
-      if (charFieldValueList == null || charFieldValueList.isEmpty())
-        return true;
-      return charFieldValueList.get(0).isEmpty();
-    }
-    else if (isTerm())
+      return charFieldValueList == null;
+    } else if (isTerm())
       return oboClassValue == null;
     else if (isDate())
       return dateValue == null;
@@ -260,6 +272,10 @@ public class CharFieldValue implements Cloneable {
     }
   }
   
+  public boolean isCompound() {
+    return this.getCharField().isCompound();
+  }
+  
   public List<CharFieldValue> getValuePickList() {
     final CharField sourceField = this.getCharField().getPickListSourceField();
     return this.getCharacter().getValueList(sourceField);
@@ -287,6 +303,10 @@ public class CharFieldValue implements Cloneable {
   public void addKid(CharFieldValue kid) {
     // creates list if null
     getCharFieldValueList().add(kid);
+  }
+  
+  public void insertKid(int index, CharFieldValue kid) {
+    getCharFieldValueList().add(index, kid);
   }
 
   /** Remove "kid" from kid list */
@@ -369,7 +389,7 @@ public class CharFieldValue implements Cloneable {
   
   public int hashCode() {
     if (this.oboClassValue != null) return this.oboClassValue.hashCode();
-    if ((this.stringValue != null) || (!this.stringValue.equals(""))) return this.stringValue.hashCode();
+    if ((this.stringValue != null) && (!this.stringValue.equals(""))) return this.stringValue.hashCode();
     return 0;
   }
 }

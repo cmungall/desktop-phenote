@@ -33,6 +33,7 @@ public class CharacterTable extends AbstractGUIComponent implements CharacterTab
   private static final long serialVersionUID = -3970995454868538116L;
   private CharacterTableController tableController;
   private ComponentLayoutListener focusListener;
+  private JButton addButton;
   private JButton duplicateButton;
   private JButton deleteButton;
 
@@ -83,6 +84,12 @@ public class CharacterTable extends AbstractGUIComponent implements CharacterTab
   public void undo() {
     this.tableController.undo();
   }
+  
+  public void setControlsEnabled(boolean enable) {
+    addButton.setEnabled(enable);
+    duplicateButton.setEnabled(enable);
+    deleteButton.setEnabled(enable);
+  }
 
   public String getGroup() {
     return this.tableController.getGroup();
@@ -113,13 +120,13 @@ public class CharacterTable extends AbstractGUIComponent implements CharacterTab
     final JToolBar toolBar = new JToolBar("Default Toolbar");
     
     try {
-      final JButton addButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/list-add.png"))) {
+      this.addButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/list-add.png"))) {
           public void actionPerformed(ActionEvent e) {
             addNewCharacter();
           }
         });
-      addButton.setToolTipText("Add");
-      toolBar.add(addButton);
+      this.addButton.setToolTipText("Add");
+      toolBar.add(this.addButton);
       
       this.deleteButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/list-remove.png"))) {
           public void actionPerformed(ActionEvent e) {

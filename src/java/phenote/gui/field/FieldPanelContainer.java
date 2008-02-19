@@ -38,11 +38,15 @@ public class FieldPanelContainer extends AbstractGUIComponent {
    * Resets the FieldPanel gui to edit the given table.
    */
   public void setTableSource(CharacterTableSource table) {
-    if (!panels.containsKey(table)) {
-      panels.put(table, new FieldPanel(table));
+    if (!this.panels.containsKey(table)) {
+      this.panels.put(table, new FieldPanel(table));
     }
     this.removeAll();
-    this.add(panels.get(table));
+    final FieldPanel panel = this.panels.get(table);
+    this.add(panel);
+    for (CharFieldGui gui : panel.getCharFieldGuiList()) {
+      gui.setListSelectionModel(table.getSelectionModel());
+    }
     this.setResponderDelegate(table);
     this.repaint();
   }

@@ -25,8 +25,6 @@ import phenote.config.Config;
 import phenote.dataadapter.CharListChangeEvent;
 import phenote.dataadapter.CharListChangeListener;
 import phenote.dataadapter.CharacterListManager;
-import phenote.dataadapter.ConstraintManager;
-import phenote.dataadapter.ConstraintStatus;
 import phenote.dataadapter.LoadSaveManager;
 import phenote.dataadapter.OntologyMakerI;
 import phenote.datamodel.CharField;
@@ -60,6 +58,8 @@ public class CharacterTableController {
   private AdvancedTableFormat<CharacterI> tableFormat;
 	private LoadSaveManager loadSaveManager;
 	private CharFieldMatcherEditor filter;
+	private TableComparatorChooser<CharacterI> sortChooser;
+	private SelectionListener selectionListener;
 	// private AbstractGUIComponent characterTablePanel; // initialized by swix
 	private JPanel characterTablePanel; // initialized by swix
 	private JTable characterTable; // initialized by swix
@@ -85,23 +85,16 @@ public class CharacterTableController {
 		if (CharFieldManager.isDefaultGroup(groupName))
 			defaultController = this;
 		this.loadPanelLayout();
-		this.sortedCharacters = new SortedList<CharacterI>(this
-				.getCharacterListManager().getCharacterList().getList(),
-				new EverythingEqualComparator<CharacterI>());
-		this.sortedCharacters.setMode(SortedList.AVOID_MOVING_ELEMENTS);
-		this.filter = new CharFieldMatcherEditor(CharFieldManager.inst()
-				.getCharFieldListForGroup(this.representedGroup));
-		this.filteredCharacters = new FilterList<CharacterI>(
-				this.sortedCharacters, this.filter);
-		this.selectionModel = new EventSelectionModel<CharacterI>(
-				this.filteredCharacters);
+		this.filter = new CharFieldMatcherEditor(CharFieldManager.inst().getCharFieldListForGroup(this.representedGroup));
+	  this.sortedCharacters = new SortedList<CharacterI>(this.getCharacterListManager().getCharacterList().getList(), new EverythingEqualComparator<CharacterI>());
+    this.sortedCharacters.setMode(SortedList.AVOID_MOVING_ELEMENTS);
+    this.filteredCharacters = new FilterList<CharacterI>(this.sortedCharacters, this.filter);
+    this.selectionModel = new EventSelectionModel<CharacterI>(this.filteredCharacters);
 		this.tableFormat = new CharacterTableFormat(this.representedGroup);
-		this.getEditManager().addCharChangeListener(
-				new CharacterChangeListener());
-		CharacterListManager.getCharListMan(this.representedGroup)
-				.addCharListChangeListener(new CharacterListChangeListener());
+		this.getEditManager().addCharChangeListener(new CharacterChangeListener());
+		this.getCharacterListManager().addCharListChangeListener(new CharacterListChangeListener());
 		this.initializeInterface();
-    characterTable.setDefaultRenderer(Object.class,new CharTableRenderer());
+    characterTable.setDefaultRenderer(Object.class, new CharTableRenderer());
 		this.addInitialBlankCharacter();
 	}
 
@@ -248,7 +241,7 @@ public class CharacterTableController {
 		final EventTableModel<CharacterI> eventTableModel = new EventTableModel<CharacterI>(
 				this.filteredCharacters, this.tableFormat);
 		this.characterTable.setModel(eventTableModel);
-		new TableComparatorChooser<CharacterI>(characterTable,
+		this.sortChooser = new TableComparatorChooser<CharacterI>(characterTable,
 				this.sortedCharacters, false);
 		this.characterTable.setSelectionModel(this.selectionModel);
 		this.characterTable.putClientProperty("Quaqua.Table.style", "striped");
@@ -264,7 +257,8 @@ public class CharacterTableController {
 		this.characterTable.addMouseListener(new PopupListener(
 				new TableRightClickMenu(this.characterTable)));
 		this.characterTablePanel.validate();
-		this.selectionModel.addListSelectionListener(new SelectionListener());
+		this.selectionListener = new SelectionListener();
+		this.selectionModel.addListSelectionListener(this.selectionListener);
 		new TableColumnPrefsSaver(this.characterTable, this
 				.getTableAutoSaveName());
 
@@ -297,9 +291,30 @@ public class CharacterTableController {
 	}
 
 	private void addInitialBlankCharacter() {
+	  if (Config.inst().getGroupAllowsEmptyCharacters(this.getGroup()) == true) return;
+	  log().debug("Adding initial blank character");
 		this.getEditManager().addInitialCharacter();
 	}
 
+	/**
+   * Resets everything needed when the CharacterListI has been replaced by a newly loaded file.
+   */
+	private void updateFromNewCharacterList() {
+	  this.sortedCharacters = new SortedList<CharacterI>(this.getCharacterListManager().getCharacterList().getList(), new EverythingEqualComparator<CharacterI>());
+	  this.sortedCharacters.setMode(SortedList.AVOID_MOVING_ELEMENTS);
+	  this.filteredCharacters.dispose();
+	  this.filteredCharacters = new FilterList<CharacterI>(this.sortedCharacters, this.filter);
+	  if (this.selectionListener != null) this.selectionModel.removeListSelectionListener(this.selectionListener);
+	  this.selectionModel = new EventSelectionModel<CharacterI>(this.filteredCharacters);
+	  this.selectionListener = new SelectionListener();
+	  this.selectionModel.addListSelectionListener(this.selectionListener);
+
+	  final EventTableModel<CharacterI> eventTableModel = new EventTableModel<CharacterI>(this.filteredCharacters, this.tableFormat);
+	  this.characterTable.setModel(eventTableModel);
+	  if (this.sortChooser != null) this.sortChooser.dispose();
+	  this.sortChooser = new TableComparatorChooser<CharacterI>(characterTable, this.sortedCharacters, false);
+	  this.characterTable.setSelectionModel(this.selectionModel);
+	}
 
 	private void updateButtonStates() {
 		final boolean hasSelection = !this.selectionModel.isSelectionEmpty();
@@ -432,6 +447,7 @@ public class CharacterTableController {
 				CharacterTableController.this.selectionModel
 						.setSelectionInterval(0, 0);
 			}
+			updateFromNewCharacterList();
 			setComponentTitleFromFilename();
 		}
 	}

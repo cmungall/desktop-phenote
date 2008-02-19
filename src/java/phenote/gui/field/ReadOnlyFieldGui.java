@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import org.apache.log4j.Logger;
 
 import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 
@@ -45,6 +46,16 @@ class ReadOnlyFieldGui extends CharFieldGui {
     this.setText(value.getName());
   }
   
+  @Override
+  protected CharFieldValue getCharFieldValue() {
+    try {
+      return this.getCharField().makeValue(null, this.getText());
+    } catch (CharFieldException e) {
+      log().error("Couldn't create charfieldvalue", e);
+    }
+    return CharFieldValue.emptyValue(null, this.getCharField());
+  }
+
   protected void updateModel() {}
   
   protected boolean hasFocus() {

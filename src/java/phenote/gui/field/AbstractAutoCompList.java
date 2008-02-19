@@ -33,6 +33,7 @@ import javax.swing.text.Document;
 import org.apache.log4j.Logger;
 
 import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharFieldValue;
 import phenote.gui.SearchParams;
 import phenote.gui.SearchParamsI;
@@ -138,6 +139,15 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   /** Return text in text field */
   public String getText() {
     return jComboBox.getEditor().getItem().toString(); // or editor.getText() ?
+  }
+  
+  protected CharFieldValue getCharFieldValue() {
+    try {
+      return this.getCharField().makeValue(null, this.getText());
+    } catch (CharFieldException e) {
+      log().error("Couldn't create charfieldvalue", e);
+    }
+    return CharFieldValue.emptyValue(null, this.getCharField());
   }
 
   void clear() {

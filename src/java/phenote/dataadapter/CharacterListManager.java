@@ -56,15 +56,13 @@ public class CharacterListManager {
   }
 
   public void setCharacterList(Object source, CharacterListI charList) {
-    if (charList == null || charList.isEmpty()) {
+    if (charList == null) {
       String m = "Data list is empty, load of data failed";
       // should this send message to gui?
       JOptionPane.showMessageDialog(null,m,"Load failure",JOptionPane.ERROR_MESSAGE);
       return;
     }
-    characterList.getList().clear();
-    characterList.getList().addAll(charList.getList());
-    //characterList = charList;
+    characterList = charList;
     fireChangeEvent(source,charList);
   }
 

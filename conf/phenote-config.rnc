@@ -183,9 +183,8 @@ field =
     ## ID requires a : and no whitespace 
     ## free_text is just for backward compatibility - phase out
     ## COMPARISON is a field to display comparison of char w another char
-    ## read only doesnt belong here - pick is debatable - its a list gui
-    attribute type { "FREE_TEXT" | "TERM" | "INT" | "ID"  | "DATE"
-                     | "COMPARISON" | "PICK"  | "READ_ONLY" | "free_text" },  
+    ## read only doesnt belong here
+    attribute type { "FREE_TEXT" | "TERM" | "INT" | "ID" | "READ_ONLY" | "DATE"| "COMPARISON" | "free_text" },  
     ## if field is required, then commit will fail if null at commit time
     ## (null constraint), warnIfNull similar but gives warning
     attribute isRequired { xsd:boolean },
@@ -214,6 +213,7 @@ field =
     ## if true then field can have multiple values, use list gui
     attribute isList { xsd:boolean },
     attribute isPickList { xsd:boolean },
+    attribute componentsGroup { xsd:ID },
     ## whether or not to show field in display, eg dateCreated is not
     ## necasarily displayed
     attribute isVisible { xsd:boolean },
@@ -254,6 +254,8 @@ onTheFlySlimTerm = element onTheFlySlimTerm {
      attribute container { "window" | "tab" },
      attribute interface { "default" | "character-template" },
      attribute title { xsd:string },
+     ## default is false - there is always one character
+     attribute allowEmptyCharacters { xsd:boolean },
      ## group adapter is a plugin that processes data from group and shoves it
      ## in the main/default group (in field values,field name or row data
      ## since its a plugin this should be a full path java class like

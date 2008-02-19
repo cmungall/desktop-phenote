@@ -57,7 +57,6 @@ public class PickListFieldGui extends CharFieldGui {
   @Override
   protected void setCharFieldValue(CharFieldValue value) {
     this.currentValue = value;
-    // TODO Auto-generated method stub
     final List<CharFieldValue> values = value.getCharFieldValueList();
     if (values == null) return;
     final StringBuffer sb = new StringBuffer();
@@ -69,6 +68,10 @@ public class PickListFieldGui extends CharFieldGui {
     }
     if (removeTrailingSeparator) sb.delete(sb.length() - 2, sb.length());
     textField.setText(sb.toString());
+  }
+  
+  protected CharFieldValue getCharFieldValue() {
+    return this.currentValue.cloneCharFieldValue(null, this.currentValue.getCharField());
   }
   
   @Override
@@ -89,7 +92,7 @@ public class PickListFieldGui extends CharFieldGui {
     final CharFieldValue newValue = this.currentValue.cloneCharFieldValue(null, this.getCharField());
     newValue.removeAllKids();
     for (CharFieldValue item : chosen) {
-      final CharFieldValue clonedValue = item.cloneCharFieldValue(null, this.getCharField());
+      final CharFieldValue clonedValue = item.cloneCharFieldValue(null, null);
       clonedValue.setIsList(false);
       clonedValue.setOverridePickList(true);
       newValue.addKid(clonedValue);

@@ -7,6 +7,7 @@ import org.obo.datamodel.OBOClass;
 
 import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 
 /** used for bulk updating (see TermCompList) */
@@ -36,6 +37,13 @@ public class CompoundTransaction implements TransactionI {
     CompoundTransaction upTrans = new CompoundTransaction();
     for (CharacterI ch : l)
       upTrans.addTransaction(new UpdateTransaction(ch,c,o));
+    return upTrans;
+  }
+  
+  public static CompoundTransaction makeUpdate(List<CharacterI>l,CharField c, CharFieldValue v){
+    CompoundTransaction upTrans = new CompoundTransaction();
+    for (CharacterI ch : l)
+      upTrans.addTransaction(new UpdateTransaction(ch,c,v));
     return upTrans;
   }
 

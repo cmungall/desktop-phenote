@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.swing.AbstractListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -19,21 +20,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.ImageIcon;
 
 import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
 
 import phenote.config.Config;
-import phenote.config.DataAdapterConfig;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.DataAdapterEx;
 import phenote.dataadapter.QueryableDataAdapterI;
 import phenote.dataadapter.ncbi.NCBIDataAdapterI;
-import phenote.dataadapter.ncbi.OMIMAdapter;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.CharFieldValue;
@@ -44,6 +40,8 @@ import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
 import phenote.gui.actions.ResponderChainAction;
 import phenote.gui.selection.SelectionManager;
+import ca.odell.glazedlists.event.ListEvent;
+import ca.odell.glazedlists.event.ListEventListener;
 import ca.odell.glazedlists.swing.EventSelectionModel;
 
 /** fields can either be text fields for free text or combo boxes if have 
@@ -51,7 +49,7 @@ import ca.odell.glazedlists.swing.EventSelectionModel;
     details of the gui - just a field that gives text 
     ListSelectionListener listening to events from table selection (make inner class?)
     subclasses: TermCompList, FreeTextField,... */
-public abstract class CharFieldGui implements ListSelectionListener {
+public abstract class CharFieldGui implements ListEventListener<CharacterI> {
   private CharField charField;
   private String label;
   /** if true then set gui but not model, for clearing on multi, default false */
@@ -72,6 +70,7 @@ public abstract class CharFieldGui implements ListSelectionListener {
   private ValueListModel valueListModel;
   /** flag for supressing valueChanged if comes from self */
   private boolean doingInternalEdit = false;
+  private List<ActionListener> actionListeners = new ArrayList<ActionListener>();
 
   /** CharFieldGui for main window not post comp box - factory method, make appropriate
       CFG subclass from type of charField - minCompChars is not used at moment - may come
@@ -91,8 +90,10 @@ public abstract class CharFieldGui implements ListSelectionListener {
       fieldGui = new ReadOnlyFieldGui(charField);
     } else if (charField.isPickList()) {
       fieldGui = new PickListFieldGui(charField);
-      // } else if (charField.isComparison())
-    } else {
+    } else if (charField.isList() && charField.isCompound()) {
+      fieldGui = new CharacterListFieldGui(charField);
+    }
+    else {
       FreeTextField f = new FreeTextField(charField);
       fieldGui = f;
     }
@@ -155,14 +156,17 @@ public abstract class CharFieldGui implements ListSelectionListener {
   protected abstract JComponent getUserInputGui();
 
   public void setListSelectionModel(EventSelectionModel<CharacterI> model) {
+    if (this.selectionModel != null) this.selectionModel.getSelected().removeListEventListener(this);
     this.selectionModel = model;
-    this.selectionModel.addListSelectionListener(this);
-    this.setValueFromChars(this.selectionModel.getSelected());
+    if (this.selectionModel != null) {
+      this.selectionModel.getSelected().addListEventListener(this);
+      this.setValueFromChars(this.selectionModel.getSelected());
+    }
   }
   
-  /** part of ListSelectionListener interface. Receives ListSelectionEvents
-      from selectionModel. Table row selection causes this event to fly */
-  public void valueChanged(ListSelectionEvent e) {
+  /** part of ListEventListener interface. Receives ListEvents
+  from selectionModel's EventList. Table row selection causes this event to fly */
+  public void listChanged(ListEvent<CharacterI> listChanges) {
     // user editing field causes model change cause table change causes valueChanged
     // which then messes up selection from list, and dont need as change came from
     // self, so doingInternalEdit supresses listening to this - is there a better way
@@ -179,13 +183,12 @@ public abstract class CharFieldGui implements ListSelectionListener {
   
   /** Set the gui from the model (selection) */
   protected void setValueFromChars(List<CharacterI> characters) {
-    this.setForegroundColor(this.getEnabledTextColor());
+    this.setEnabledState();
     this.setInMultipleValueState(false);
     if (characters.isEmpty()) {
       this.setGuiForNoSelection();
       return;
     }
-    this.getUserInputGui().setEnabled(true);
     // if all characters have same value then set to that value
     if (this.areCharactersEqualForCharField(characters, this.getCharField())) {
       this.setCharFieldValue(characters.get(0).getValue(this.getCharField()));
@@ -193,6 +196,11 @@ public abstract class CharFieldGui implements ListSelectionListener {
     } else {
       this.setMultipleValuesConditions();
     }
+  }
+
+  protected void setEnabledState() {
+    this.setForegroundColor(this.getEnabledTextColor());
+    this.getUserInputGui().setEnabled(true);
   }
   
   /** return true if all values for char field in all characters are the same 
@@ -221,6 +229,12 @@ public abstract class CharFieldGui implements ListSelectionListener {
   }
   
   protected abstract void setCharFieldValue(CharFieldValue value);
+  
+  
+  /**
+   * Returns the current value as a "character-independent" value (character is null).
+   */
+  protected abstract CharFieldValue getCharFieldValue();
   
   protected void focusLost() {
     if (this.shouldResetGuiForMultipleValues()) {
@@ -262,7 +276,9 @@ public abstract class CharFieldGui implements ListSelectionListener {
   
   public void setEditManager(EditManager manager) {
     this.editManager = manager;
-    manager.addCharChangeListener(new FieldCharChangeListener());
+    if (this.editManager != null) {
+      manager.addCharChangeListener(new FieldCharChangeListener());
+    }
   }
   
   public EditManager getEditManager() {
@@ -555,7 +571,7 @@ public abstract class CharFieldGui implements ListSelectionListener {
 
   /** should get this from config... stub for now */
   protected boolean hasListGui() {
-    return charField.isList();
+    return charField.isList() && !charField.isCompound();
   }
   /** JList? initialize if configged
    list gui is the list that is displayed if the field is multi valued - takes
@@ -646,6 +662,21 @@ public abstract class CharFieldGui implements ListSelectionListener {
   /** no op - override in term completion gui */
   public void setMinCompChars(int minCompChars) {}
   public int getMinCompChars() { return 0; }
+  
+  public void addActionListener(ActionListener l) {
+    this.actionListeners.add(l);
+  }
+  
+  public void removeActionListener(ActionListener l) {
+    this.actionListeners.remove(l);
+  }
+  
+  protected void fireActionPerformed() {
+    final ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "valueChanged");
+    for (ActionListener listener : this.actionListeners) {
+      listener.actionPerformed(event);
+    }
+  }
 
   private static Logger log() {
     return Logger.getLogger(CharFieldGui.class);

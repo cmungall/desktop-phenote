@@ -1,0 +1,2886 @@
+format-version: 1.2
+encoding: UTF-8
+date: 30:01:2008 22:29
+saved-by: peter
+auto-generated-by: OBO-Edit 1.101
+default-namespace: fish_collection
+
+[Term]
+id: COLLECTION:0000000
+def: "List of collection abbreviations based on Catalog of Fishes (Eschmeyer et al. 1998) with modifications from http://silurus.acnatsci.org/ACSI/museums/abbrev.html" [Phenoscape:curator]
+name: fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000001
+name: ABE
+synonym: "Personal collection of T. Abe; some types are housed at the Tokyo fish market. Collection will be transferred." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000002
+name: ACAP
+synonym: "Aquaculture Center, Aomori, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000003
+name: AFAQ
+synonym: "Amateur Fisheries Association of Queensland, Australia. Most specimens transferred to Queensland Museum (QM), Brisbane." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000004
+name: AFY
+synonym: "Agustín Fernández-Yépez collection. Personal collection; at least some of this collection is at SCN, Venezuela." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000005
+name: AHF
+synonym: "Allan Hancock Foundation, University of Southern California, California, U.S.A. Types incorporated into the LACM collection." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000006
+name: AIM
+synonym: "Auckland Institute and Museum, Auckland, New Zealand." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000007
+name: ALA
+synonym: "University of Alabama Museum of Natural History, University, Alabama, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000008
+name: AMG
+synonym: "Albany Museum, Grahamstown, South Africa." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000009
+name: AMNH
+synonym: "American Museum of Natural History, New York, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000010
+name: AMS
+synonym: "Australian Museum, Sydney, N. S. W., Australia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000011
+name: ANSP
+synonym: "Academy of Natural Sciences, Philadelphia, Pennsylvania, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000012
+name: ARC
+synonym: "Atlantic Reference Centre, New Brunswick, Canada." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000013
+name: ASIO
+synonym: "Academia Sinica Institute of Oceanology, Quingdao, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000014
+name: ASIZB
+synonym: "Academia Sinica Institute of Zoology, Beijing, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000015
+name: ASIZP
+synonym: "See ASIZT." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000016
+name: ASIZT
+synonym: "Academia Sinica Institute of Zoology, Taipei, Taiwan. Also seen as ASIZP." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000017
+name: ASU
+synonym: "Arizona State University, Tempe, Arizona, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000018
+name: AUM
+synonym: "Auburn University Museum, Auburn, Alabama, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000019
+name: BAH
+synonym: "Biologische Anstalt Helgoland Marine Station, Helgoland, Germany." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000020
+name: BCFH
+synonym: "Bureau of Commercial Fisheries, Honlulu, Hawaii. Much of collection transferred to BPBM." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000021
+name: BCPM
+synonym: "British Columbia Provincial Museum, Victoria B. C., Canada. Now RBCM = Royal British Columbia Museum." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000022
+name: BCUE
+synonym: "Department of Biology, Ch’ongju University of Education, Korea." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000023
+name: BKNU
+synonym: "Kunsan National University, Department of Biology, Korea." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000024
+name: BLUZ
+synonym: "Museo de Biologia, Universidad del Zulia, Maracaibo, Zulia, Venezuela." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000025
+name: BMAM
+synonym: "Beijing Natural History Museum, Beijing, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000026
+name: BMNH
+synonym: "Natural History Museum, London. Formerly British Museum Natural History, London. Preferred style BMNH 1945.6.6.3-4, with periods, no colon; year cataloged. month cataloged. day cataloged. specimens." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000027
+name: BNHM
+synonym: "Bombay Natural History Museum, Bombay, India." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000028
+name: BOC
+synonym: "Bingham Oceanographic Collection, now Yale Peabody Museum [YPM]." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000029
+name: BPBM
+synonym: "Bernice P. Bishop Museum, Honolulu, Hawaii, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000030
+name: BSKU
+synonym: "Kochi University, Department of Biology, Faculty of Science, Kochi, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000031
+name: BSMP
+synonym: "Department of Agriculture, Bureau of Science, Manila, Philippines. " RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000032
+name: BSNH
+synonym: "Boston Society of Natural History. Surviving specimens now at MCZ." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000033
+name: BSRM
+synonym: "Biological Station Reference Museum at Porto Novo, Annamalai University, India." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000034
+name: BYU
+synonym: "Brigham Young University, Monte L. Bean Life Science Museum, Provo, Utah, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000035
+name: BZT
+synonym: "Biological Institute Titograd, Yugoslavia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000036
+name: CAS
+synonym: "California Academy of Sciences, San Francisco, California, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000037
+name: CAS-IU
+synonym: "Indiana University. Now mostly at CAS and recataloged with CAS numbers." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000038
+name: CAS-SU
+synonym: "See SU [now at CAS]." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000039
+name: CAUSC
+synonym: "Universidade Federal de Santa Catarina Centro de Agrarias, Santa Catarina, Brazil." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000040
+name: CBD
+synonym: "Collezione Ittiologica Balma-Delmastro. Collection of G.A.C Balma and G. B. Delmastro [Torino, Italy]." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000041
+name: CBF
+synonym: "Colección Boliviana de Fauna, Museo Nacional de Histoire Natural, Instituto de Ecología, Bolivia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000042
+name: CBM
+synonym: "Natural History Museum and Institute, Chiba, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000043
+name: CBSIZA
+synonym: "Caspian Biological Station Institute of Zoology, Azerbijan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000044
+name: CCB
+synonym: "Central College, Bangalore, India." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000045
+name: CCML
+synonym: "Coleccion Ictiologica del Departamento de Ciencias Marinas de la Universidad de la Laguna, Tenerife, Canary Islands." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000046
+name: CEMBP
+synonym: "Centre of Excellence in Marine Biology, University of Karachi, Pakistan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000047
+name: CIB
+synonym: "Academia Sinica, Chengdu Institute of Biology, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000048
+name: CIMAR
+synonym: "Universidad Catolica de Valparaiso, Centro de Investigaciones del Mar, Valparaiso, Chile." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000049
+name: CIP
+synonym: "Centro de Investigaciones Pesqueras, Cartagena, Colombia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000050
+name: CIZ
+synonym: "Centro de Investigaciones Zoológicas, Chile." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000051
+name: CM
+synonym: "Carnegie Museum, Pittsburgh, Pennsylvania, U.S.A. Now mostly at FMNH and CAS." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000052
+name: CMC
+synonym: "Canterbury Museum, Christchurch, New Zealand." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000053
+name: CMFRI
+synonym: "See FMRI." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000054
+name: CMK
+synonym: "Personal collection of Maurice Kottelat [Switzerland]. See also ZSM/CMK." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000055
+name: CMNFI
+synonym: "Canadian Museum of Nature, Ottawa. Same as NMC - National Museums of Canada." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000056
+name: CNRO
+synonym: "Centre National de Recherches Oceanographiques, Nossi-Be, Madagascar." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000057
+name: CNU
+synonym: "Department of Biology, College of Natural Science, Chonbuk National University, Chonju, Korea. Also seen as CNUC." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000058
+name: CNUC
+synonym: "Chonbuk National University, Chonju, Korea. Also seen as CUBK." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000059
+name: CRH
+synonym: "Centre de Recherche en Hydrobiologie, Uvira, Zaire. Also as CRHU." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000060
+name: CRHU
+synonym: "See CRH." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000061
+name: CRRHA
+synonym: "Centre Régional de Recherches en Hydrobiologie Appliquée, Bujumbura, Burandi." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000062
+name: CRS-ZSI
+synonym: "Central Regional Station, Zoological Survey of India, Jabalpur, India." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000063
+name: CSIRO
+synonym: "Commonwealth Science & Industrial Research Organization, Division of Marine Research, Hobart, Tasmania, Australia. Formerly at Cronulla, Australia, also includes specimens from Marine Lab. Sydney." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000064
+name: CSU
+synonym: "Colorado State University, Colorado Cooperative Fishery Unit, Fort Collins, Colorado, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000065
+name: CU
+synonym: "Cornell University Museum of Vertebrates, Ithaca, New York, U.S.A; formerly Cornell University Vertebrate Collections." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000066
+name: CUB
+synonym: "Chulalongkorn University, Bangkok, Thailand." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000067
+name: CUBK
+synonym: "Department of Biology, Chonbuk National University, Korea. Also seen as CNUC and CUB but not our CUB above." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000068
+name: CUP
+synonym: "Charles University, Division of Hydrobiology and Ichthyology, Prague, Czechoslovakia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000069
+name: DBCUCH
+synonym: "Universidad de Chile, Departamento de Biología Celular y Genetica, Santiago, Chile." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000070
+name: DBFFEUCS
+synonym: "Departamento de Biología de la Faculdad de Filosofía y Educación de la Universidad de Chile, Santiago, Chile." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000071
+name: DHISUB
+synonym: "Department of Hydrobiology and Ichthyology, Sofia Univiversity, Bulgaria." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000072
+name: DHMB
+synonym: "Department of Harbours and Marine, Brisbane, Australia. Collection transferred to Queensland Museum (QM), Brisbane, Australia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000073
+name: DISCA
+synonym: "Estación Biológica de Rancho Grande, Ministerio del Ambiente y Recursos Naturales Renovables, Venezuela." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000074
+name: DU
+synonym: "Duke University Vertebrate Collection, Durham, North Carolina, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000075
+name: DVZUT
+synonym: "Department of Vertebrate Zoology, University of Tông-Hop, Hanoi, Vietnam." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000076
+name: DZSASP
+synonym: "Departamento de Zoologia, Secretaria da Agricultura, São Paulo, Brazil. Formerly Museu Paulista." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000077
+name: DZUFRGS
+synonym: "Departamento de Zoologia da Universidade Federal do Rio Grande do Sul, Porto Alegre, Brazil." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000078
+name: DZUH
+synonym: "Departamento de Zoologia, Universidad de Havana, Cuba." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000079
+name: DZVU
+synonym: "Universidad de Uruguay, Departmento de Zoologia Vertebrados, Montevideo, Uruguay." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000080
+name: EBMC
+synonym: "Universidad de Chile, Estación Biología Marina de Montemar, Chile." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000081
+name: EBMTV
+synonym: "Estación de Biología Marina del Instituto Tecnológico de Veracruz, Mexico." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000082
+name: ECSFI
+synonym: "East China Sea Fisheries Institute, Shanghai, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000083
+name: EEBP
+synonym: "Estaçao Experimental de Biologia e Piscicultura de Pirassununga, Brazil." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000084
+name: ENCB
+synonym: "Escuela Nacional Ciencias, Colleccion Herpetozoarios, Mexico." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000085
+name: EPN
+synonym: "Escuela Polytecnica Nacional, Quito, Ecuador." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000086
+name: EUB
+synonym: "Laboratory of Biology, Faculty of Science, Ehime University, Japan.oFAK Department of Fisheries, Faculty of Agriculture, Kinki University." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000087
+name: FAKOU
+synonym: "Faculty of Agriculture, Kochi Univerisity, Kochi, Japan. Specimens now in BSKU." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000088
+name: FAKU
+synonym: "Kyoto University, Department of Fisheries, Faculty of Agriculture, Japan. FAKU has several catalog series, including a K, W, and A series. The collection is housed at Maizuru, Japan, not at Kyoto." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000089
+name: FBQ
+synonym: "Fisheries Branch, Departement of Primary Industries, Brisbane, Australia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000090
+name: FCLR
+synonym: "Fundación Científica Los Roques, Caracas, Venezuela." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000091
+name: FCRM
+synonym: "Fisheries College Reference Museum, Tuticorin Tamil Nadu, India." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000092
+name: FDNR
+synonym: "Florida Department of Natural Resources, St. Petersburg, Florida, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000093
+name: FFSUC
+synonym: "Faculty of Forestry Sciences, Universidad de Chile, Ichthyological Collection, Santiago, Chile." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000094
+name: FML
+synonym: "Instituto Fundacion Miguel Lillo, Tucuman, Argentina (Leviton et al. 1985:806)" RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000095
+name: FMNH
+synonym: "Field Museum of Natural History, Chicago, Illinois, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000096
+name: FMRI
+synonym: "Central Marine Fisheries Marine Research Institute, Mandapam Camp, India." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000097
+name: FNU
+synonym: "Nagasaki University, Faculty of Fisheries, Nakasaki, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000098
+name: FOSJ
+synonym: "Fisheries and Oceans Biological Station, St. John’s, Newfoundland, Canada." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000099
+name: FRCL
+synonym: "Fisheries Research Centre, Likas, Kota Kinabalu, Malaysia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000100
+name: FRIHP
+synonym: "Fisheries Research Institute of Hunan Province, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000101
+name: FRLM
+synonym: "Faculty of Fisheries, Mie University, Fisheries Research Laboratory, Mie-ken, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000102
+name: FRSKU
+synonym: "Kyoto University, Fisheries Research Station, Japan. Same as FAKU." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000103
+name: FSFRL
+synonym: "Far Seas Fisheries Research Laboratory, Shimizu, Japan. Most types now at FAKU." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000104
+name: FSU
+synonym: "Florida State Univeristy. Transferred to Florida State Museum, see UF-FSU." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000105
+name: FUMT
+synonym: "University of Tokyo, Department of Fisheries, University Museum, Tokyo, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000106
+name: GCM
+synonym: "Government College, Department of Zoology, Lahore, Pakistan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000107
+name: GCRL
+synonym: "Gulf Coast Research Laboratory, Ocean Springs, Mississippi, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000108
+name: GMBL
+synonym: "College of Charleston, Grice Marine Biological Laboratory, Charleston, South Carolina, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000109
+name: GMNGZ
+synonym: "Glasgow Museum and Art Galleries, Natural History/Zoology, Glasgow, Scotland." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000110
+name: GNHNA
+synonym: "Gallery of Natural History and Native Art, Medlow Bath, New South Wales, Australia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000111
+name: GNM
+synonym: "See NMG." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000112
+name: GVF
+synonym: "George Vanderbilt Foundation. Specimens now at CAS." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000113
+name: HACW
+synonym: "Department of Fishery, Huazhong Agriculture Collection, Wuhan, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000114
+name: HKFRS
+synonym: "Hong Kong Fisheries Research Station, Aberdeen, Hong Kong." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000115
+name: HSU
+synonym: "Humboldt State University, Arcata, California, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000116
+name: HUJ
+synonym: "Hebrew University, Department of Zoology, Jerusalem, Israel." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000117
+name: HUMZ
+synonym: "Hokkaido University, Laboratory of Marine Zoology, Faculty of Fisheries, Hokkaido, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000118
+name: HZM
+synonym: "Museum of Natural History (Hrvatski Zooloski Muzej), Zagreb, Croatia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000119
+name: IAA
+synonym: "Instituto Antarctico Argentinao, Buenos Aires, Argentina." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000120
+name: IADIZA
+synonym: "Instituto Argentino de Investigación de Zonas Aridas, Mendoza, Argentina (Fernández & Vari 2002:739)" RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000121
+name: IBAUNC
+synonym: "Universidad Nacional de Cuyo, Instituto de Biologia Animal, Medoza, Argentina." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000122
+name: IBH
+synonym: "Universidad Nacional Autonoma de Mexico, Instituto de Biología, Mexico." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000123
+name: IBRP
+synonym: "Institute for Breeding Research, Tokyo University of Agriculture, Tokyo, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000124
+name: IBTS
+synonym: "Institutul de Biologie, Tr. Savulescu, Bucharest, Romania." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000125
+name: IBUNAM
+synonym: "Universidad Nacional Autonoma de Mexico, Departmento de Zoologia, Instituto de Biologia, Mexico, DF, Mexico. Apparently the same as UNAM and IBH." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000126
+name: ICM
+synonym: "Instituto de Ciencias del Mar, Barcelona, Spain." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000127
+name: ICNMHN
+synonym: "Instituto de Ciencias Naturales, Museo de Historia Natural, Universidad Nacional de Colombia, Bogotá, Colombia. Also seen as ICNMNH." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000128
+name: IFAN
+synonym: "Institut Fondamental d’Afrique Noire, Dakar, Senegal." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000129
+name: IFI
+synonym: "Imperial Fisheries Institute, Tokyo University of Fisheries. Matsubara’s collection that was transferred to FAKU in 1947, although some specimens were lost, FAKU catalog numbers = Matsubara numbers." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000130
+name: IHASW
+synonym: "Institute Hydrobiology Academy Sinica, Wuhan, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000131
+name: IIPB
+synonym: "Instituto de Investigaciones Pesqueras de Barcelone, Spain." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000132
+name: ILPLA
+synonym: "Museo de La Plata, Instituto de Limnologia, La Plata, Argentina." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000133
+name: IMARPE
+synonym: "Instituto del Mar del Peru, Lima, Peru." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000134
+name: INALI
+synonym: "Instituto Limnologia, Santo Tomó, Argentina." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000135
+name: INHS
+synonym: "Illinois Natural History Survey, Champaigne, Illinois, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000136
+name: INIBP
+synonym: "Instituto Nacional de Investigaciones Biológico Pesqueras, Mexico." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000137
+name: INIP
+synonym: "Instituto Nacional de Investigaçao das Pescas, Alges, Portugal." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000138
+name: INPA
+synonym: "Instituto Nacional de Pesquisas da Amazonia, Manaus, Amazonas, Brazil." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000139
+name: INVEMAR
+synonym: "Instituto de Investigaciones Marinas de Punta de Betin, Santa Marta, Colombia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000140
+name: IO
+synonym: "Instituto Oceanográfico da Universidade de Sao Paulo, Brazil. Formerly Instituto Paulista de Oceanografia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000141
+name: IOAN
+synonym: "See IOM." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000142
+name: IOH
+synonym: "Academia de Ciencias, Instituto de Oceanologia, Habana, Cuba." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000143
+name: IOM
+synonym: "Institute of Oceanology, Academy of Sciences, Moscow, Russia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000144
+name: IOPM
+synonym: "Izu Oceanic Park Museum, Izu, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000145
+name: IORD
+synonym: "Takai University, Institute of Oceanic Research and Development, Shimuzu, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000146
+name: IOS
+synonym: "Institute of Oceanographic Sciences, Surrey, England." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000147
+name: IPN
+synonym: "Instituto Politecnico, Escuela Nacional de Ciencias Biologícas de Mexico, Mexico." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000148
+name: IRSM
+synonym: "Institut Recherche Scientifique de Madagascar." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000149
+name: IRSNB
+synonym: "Institut Royal des Sciences Natureles de Belgique, Brussels, Belgium." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000150
+name: ISBB
+synonym: "Institutul de Stiinte Biologice, Bucuresti, Romania." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000151
+name: ISC
+synonym: "Iowa State College, Ames, Iowa, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000152
+name: ISER
+synonym: "Institutul Speologie Emil G. Racovita, Bucurest, Romania." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000153
+name: ISH
+synonym: "Universitat Hamburg, Institut für Seefischerei, Hamburg, Germany. Citation of catalog numbers perferred by ISH is to use a complete year, i.e. ISF 130/71 becomes 130-1971." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000154
+name: ISTPM
+synonym: "Institut Scientifique et Technique des Peches Maritimes, Nantes, France." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000155
+name: ISU
+synonym: "Indiana State University, Terre Haute, Indiana, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000156
+name: IU
+synonym: "Indiana University. Now mostly at California Academy of Sciences (CAS)." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000157
+name: IZA
+synonym: "Universita di l’Aguila, Instituto di Zoologia, Aquila, Italy." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000158
+name: IZAC
+synonym: "Academia de Ciencias, Instituto de Zoologia, Habana, Cuba." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000159
+name: IZPAN
+synonym: "Zoological Institute, Polish Academy of Sciences, Warsaw, Poland." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000160
+name: IZUA
+synonym: "Universidad Austral de Chile, Instituto de Zoologia, Valdivia, Chile." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000161
+name: IZUCS
+synonym: "Universita di Cagliari, Instituto de Zoologia, Sardinia, Italy." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000162
+name: JNU
+synonym: "Department of Biology, Ji Nan University, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000163
+name: KFRS
+synonym: "Kanudi Fisheries Research Station, Konedobu, Papua New Guinea." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000164
+name: KHMM
+synonym: "Kultur Historisches Museum, Magdeburg, Germany." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000165
+name: KIFB
+synonym: "Korean Institute of Freshwater Biology, Seoul, Korea." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000166
+name: KIZ
+synonym: "Kunming Institute of Zoology, Yannan, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000167
+name: KMMA
+synonym: "Koninklijk Museum voor Midden-Afrika, Tervuren. Same as MRAC.oKPM-NI Kanagawa Prefectural Museum of Natural History, Kanagawa, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000168
+name: KSHS
+synonym: "Kochi Senior High School, Kochi-shi, Japan. Private collection of Yamakawa; specimens have BSKU catalog numbers 50000-79999." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000169
+name: KU
+synonym: "University of Kansas, Museum of Natural History, Lawrence, Kansas, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000170
+name: KUMF
+synonym: "Kasetsart University Museum of Fisheries, Bangkok, Thailand." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000171
+name: LACM
+synonym: "Los Angeles County Museum of Natural History, Los Angeles, California, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000172
+name: LBN
+synonym: "Lembaga Biologi Nasional, Bogor, Indonesia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000173
+name: LFBKU
+synonym: "Laboratory of Fishery Biology, Kyushu University, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000174
+name: LIAIP
+synonym: "Laboratory of Ichthyology, Akasaka Imperial Palace, Tokyo, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000175
+name: LICPP
+synonym: "The Crown Prince’s Palace, Laboratory of Ichthyology, Tokyo, Japan" RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000176
+name: LON
+synonym: "Lembaga Oseanologie Nasional, Djakarta [National Institute of Oceanology], Indonesia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000177
+name: LS
+synonym: "Linnean Society of London, Piccadilly, London, England." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000178
+name: LSUMZ
+synonym: "Louisiana State University, Museum of Zoology, Baton Rouge, Louisiana, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000179
+name: MAC-APU
+synonym: "Ministerio de Agricultura y Cría, Estación Experimental Apure, San Fernando de Apure, Venezuela." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000180
+name: MAC-PAY
+synonym: "Ministerio de Agricultura y Cría, Estación Experimental Amazonas, Puerto Ayacucho, Venezuela." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000181
+name: MACLPI
+synonym: "Ministerio de Agricultura y Cría, Sección de Pesca Interior y Piscicultura, Venezuela." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000182
+name: MACN
+synonym: "Museo Argentino de Ciencias Naturales, Bernardino Rivadavia, Capital Federal, Argentina." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000183
+name: MAMU
+synonym: "University of Sydney, Macleay Museum, Sydney, New South Wales, Australia. Types are at AMS." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000184
+name: MAPA
+synonym: "Museu Anchieta Porto Alegra, Rio Grande do Sul, Brasil." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000185
+name: MB
+synonym: "Universidade de Lisboa, Museu Bocage, Lisboa, Portugal." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000186
+name: MBLUZ
+synonym: "Museo de Biología de la Universidad del Zulia, Venezuela (Perez & Viloria 1994)" RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000187
+name: MBUCV
+synonym: "Universidad Central de Venezuela, Museo de Biologia, Caracas, Venezuela." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000188
+name: MCLSBB
+synonym: "Museo Colegio La Salle Bonanova de Barcelona, Spain." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000189
+name: MCN
+synonym: "Fundacacao Zoobotanica do Rio Grande do Sul, Museu de Ciencias Naturales, Rio Grande do Sul, Brazil." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000190
+name: MCNC
+synonym: "Museo de Ciencias Naturales, Caracas, Venezuela." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000191
+name: MCNG
+synonym: "Museo de Ciencias Naturales, Portuguesa, Venezuela." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000192
+name: MCP
+synonym: "Pontifícia Universidade Catóica do Rio Grande do Sul, Museu de Ciências, Rio Grande do Sul, Porto Alegre, Brazil." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000193
+name: MCSNC
+synonym: "Museo Civico di Storia Naturale, Carmagnola, Italy." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000194
+name: MCZ
+synonym: "Museum of Comparative Zoology, Harvard University, Cambridge, Massachusetts." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000195
+name: MD
+synonym: "Museo do Dundo, Dundo, Angola." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000196
+name: MDZAU
+synonym: "Museum Deptartment of Zoology, Andhra Univ., India." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000197
+name: MEPAN
+synonym: "Museum of Evolution, Polish Academy of Sciences." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000198
+name: MEPN
+synonym: "Museo Escuela Politécnica Nacional, Quito, Ecuador. Also as Museo de Biología de la Escuela." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000199
+name: MFA
+synonym: "Museo \"Florentino Ameghino\", Santa Fé, Argentina." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000200
+name: MFLB
+synonym: "Marine Fisheries Laboratory, Bangkok, Thailand." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000201
+name: MFRU
+synonym: "Malawi Fisheries Research Unit, Lake Malawi, Africa. Also seen as MFU." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000202
+name: MG
+synonym: "See MGHNL." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000203
+name: MGAB
+synonym: "Muzeul de Istorie Naturala ‘Grigore Antipa’, Bucharest, Romania." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000204
+name: MGHNL
+synonym: "Musée Guimet d’Histoire Naturelle de Lyon, Lyon, France." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000205
+name: MGHSJ
+synonym: "Matuyama Girl’s High School, Matuyama City, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000206
+name: MHN-UNC
+synonym: "Departamento de Ictiología del Museo de Historia Natural de la Universidad Nacional de Colombia, Bogotá, Colombia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000207
+name: MHNG
+synonym: "Museum d’Histoire Naturelle, Geneve, Switzerland." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000208
+name: MHNGA
+synonym: "See MGAB." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000209
+name: MHNI
+synonym: "Museu Hist. Naturales Universidade Federal Minas Gerais, Brazil." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000210
+name: MHNJP
+synonym: "Universidad Nacional Mayor de San Marcos, Museu de Historia Natural ‘Javier Prado’, Lima, Peru. MUSM sometimes used but not equal to MUSM below." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000211
+name: MHNLR
+synonym: "Museum d’Histoire Naturelle, La Rochelle, France." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000212
+name: MHNLS
+synonym: "Museo de Historia Natural de La Salle, Caracas, Venezuela." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000213
+name: MHNM
+synonym: "Museo de Historia Natural de Montevideo, Montevideo, Uruguay." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000214
+name: MHV
+synonym: "Musee de Haute Volta, Ouagadougou, Upper Volta." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000215
+name: MIKU
+synonym: "Marine Biological Institute, Kyoto University, Japan. Specimens now at FAKU." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000216
+name: MLP
+synonym: "Museo de La Plata, La Plata, Argentina." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000217
+name: MLS
+synonym: "Marine Laboratory Sydney. Now at CSIRO." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000218
+name: MM
+synonym: "Museo del Mar, Bogotá, Colombia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000219
+name: MMB
+synonym: "Moravské Muzeum, Brno, Czech Republic." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000220
+name: MMF
+synonym: "Museu Municipal do Funchal, Funchal, Madeira." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000221
+name: MMG
+synonym: "Museo Marino de la Isla de Gorgona, Colombia. Also seen as MMGPe." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000222
+name: MMNHS
+synonym: "Macedonian Museum of Natural History, Skopje, former Yugoslavian Republic of Macedonia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000223
+name: MMNS
+synonym: "Mississippi Museum of Natural Science, Jackson, Mississippi, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000224
+name: MMSU
+synonym: "See ZMMU." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000225
+name: MMTT
+synonym: "Muze-ye Melli-ye Tarikh-i Tabi’i, Tehran, Iran." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000226
+name: MMUS
+synonym: "See MAMU." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000227
+name: MNCN
+synonym: "Museo Nacional de Ciencias Naturales, Madrid, Spain" RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000228
+name: MNHN
+synonym: "Muséum National d’Histoire Naturelle, Paris. Several cataloging systems including numbers only, an A. series and B. series and later a system of year plus lot, MNHN 1899-456 [sometimes as 99-456]." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000229
+name: MNHNC
+synonym: "Museo Nacional de Historia Natural, Santiago, Chile. Also as MNHNCH." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000230
+name: MNHNCH
+synonym: "Museo Nacional de Historia Natural de Chile, Santiago, Chile. Also seen as NMHNC." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000231
+name: MNHNM
+synonym: "Museo Nacional de Historia Natural, Mexico City, Mexico." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000232
+name: MNHNSD
+synonym: "Museo Nacional de Historia Natural, Santo Domingo, Dominican Republic." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000233
+name: MNRJ
+synonym: "Universidade Federal do Rio de Janeiro, Museu Nacional, Rio de Janeiro, Brazil." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000234
+name: MNSB
+synonym: "Museum of Natural Sciences, Budapest, Hungary." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000235
+name: MNZ
+synonym: "Museum of New Zealand Te Papa Tongarewa, Wellington. Formerly NMNZ, continue to use NMNZ on bottle lots." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000236
+name: MOFUNG
+synonym: "Museu Oceanogr. Fundacao Univerdidade Rio Grande, Brazil." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000237
+name: MOM
+synonym: "Musée Oceanographique Monaco, Monaco." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000238
+name: MPEG
+synonym: "Museu Paraenese ‘Emilio Goeldi’, Para, Brazil." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000239
+name: MRAC
+synonym: "Musée Royal de l’Afrique Centrale, Tervuren, Belgium." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000240
+name: MRCN
+synonym: "Museu Rio-Grandense de Ciências Naturais, Brazil." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000241
+name: MSINR
+synonym: "Museum Sichuan Institute of Natural Resources, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000242
+name: MSLH
+synonym: "Chinese University of Hong Kong, Marine Sciences Laboratory, Hong Kong." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000243
+name: MSM
+synonym: "Marine Science Museum, Tokai Univ., Shimizu City, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000244
+name: MSNC
+synonym: "Museo Civico di Storia Naturale, Carmagnola, Italy. Also seen as MCSNC." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000245
+name: MSNG
+synonym: "Museo Civico di Storia Naturale di Genova ‘Giacomo Doria’, Genova, Italy." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000246
+name: MSNM
+synonym: "Museo Civico di Storia Naturale, Milano, Italy." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000247
+name: MSNV
+synonym: "Museo Civico di Storia Naturale, Venezia, Italy." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000248
+name: MSNVR
+synonym: "Museo Civico di Storia Naturale, Verona, Italy." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000249
+name: MSUM
+synonym: "Michigan State University, University Museum, East Lansing, Michigan, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000250
+name: MT
+synonym: "Museum Tinro, Vladyvostok, Russia -- now probably the private collection of Dolganov." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000251
+name: MTD
+synonym: "Museum für Tierkunde, Dresden, Germany. [Staatliches Museum für Tierkunde]." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000252
+name: MTKD
+synonym: "Staatliches Museum für Tierkunde, Dresden, Germany. See MTD." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000253
+name: MTUF
+synonym: "Univeristy Museum, Tokyo University of Fisheries, Tokyo, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000254
+name: MUMF
+synonym: "Department of Life Sciences, Manipur University Museum of Fishes, Canchipur, Manipur, India." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000255
+name: MUSM
+synonym: "Museo de Historia Natural de la Universidad Nacional Mayor de San Marcos, Lima, Peru." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000256
+name: MVZ
+synonym: "University of California at Berkeley, Museum of Vertebrate Zoology, Berkeley, California, U.S.A. Most of collection now at CAS." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000257
+name: MZB
+synonym: "Museum Zoologicum Bogoriense, Bogor, Java, Indonesia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000258
+name: MZH
+synonym: "Zoolgical Museum Helsinki, Finland." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000259
+name: MZN
+synonym: "Musée Zoologie, Nancy, France." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000260
+name: MZUABCS
+synonym: "Museo de Zoología de la Universidad Autómica de Baja California Sur, Mexico." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000261
+name: MZUF
+synonym: "Universita di Firenze, Museo Zoologico de la Specola, Firenze, Italy." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000262
+name: MZUS
+synonym: "Universite de Strasbourg, Musée de Zoologie, Strasbourg, France." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000263
+name: MZUSP
+synonym: "Universidade de Sao Paulo, Museu de Zoologia, Sao Paulo, Brazil." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000264
+name: MZUT
+synonym: "Universita di Torino, Museo Zoologico, Torino, Italy." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000265
+name: MZUTH
+synonym: "Museum of Zoology, University of Thessaloniki, Greece." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000266
+name: MZYU
+synonym: "Museum of Zoology, Yunnan University, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000267
+name: NARA
+synonym: "National Aquatic Resources Agency, Colombo, Sri Lanka." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000268
+name: NCIP
+synonym: "Pusat Penelitian dan Pengembangan Oseanologi, Jakarta, Java, Indonesia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000269
+name: NGI
+synonym: "Nanjing Geographical Institute, Academia Sinica, Nanjing, China. Also as NIGL and NIG." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000270
+name: NHMG
+synonym: "Naturhistoriska Museum Göteborg, Sweden. Also sometimes as GNM and NMG in literature." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000271
+name: NHMR
+synonym: "Natural History Museum, Reykjavik, Iceland." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000272
+name: NHRM
+synonym: "See NRM." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000273
+name: NIFI
+synonym: "National Inland Fisheries Institute, Fish Taxonomy Division, Bangkok, Thailand." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000274
+name: NIG
+synonym: "Nanjing Geographical Institute, Academia Sinica, Nanjing, China. Also as NIGL and NGI." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000275
+name: NIGL
+synonym: "Nanjing Institute of Geography and Limnology, Academia Sinica." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000276
+name: NIWA
+synonym: "National Institute of Water and Atmospheric Research, Christchurch, New Zealand." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000277
+name: NKMC
+synonym: "National Kweiyang Medical College, Division of Biology, Kweichow, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000278
+name: NLU
+synonym: "Northeast Lousiana University, Museum of Zoology, Monroe, Louisiana, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000279
+name: NMBA
+synonym: "Naturhistorisches Museum Basel, Basel, Switzerland." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000280
+name: NMBE
+synonym: "Naturhistorisches Museum Bern, Bern, Switzerland." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000281
+name: NMC
+synonym: "National Museums of Canada, Ottawa, Canada." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000282
+name: NMFSH
+synonym: "National Marine Fisheries Service, Honolulu, Hawaii. Also as BCFH, Bureau of Commercial Fisheries, Honolulu; much of collection at BPBM]." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000283
+name: NMG
+synonym: "Naturhistoriska Riksmuseet, Goteborg, Sweden. Also seen as NHMG." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000284
+name: NMI
+synonym: "National Museum of Ireland, Dublin, Ireland." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000285
+name: NMK
+synonym: "National Museum, Nairobi, Kenya." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000286
+name: NMMH
+synonym: "North Manchurian Museum, Harbin, Manchuria, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000287
+name: NMNH
+synonym: "National Museum of Natural History, New Delhi, India." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000288
+name: NMNZ
+synonym: "National Museum of New Zealand, Wellington, New Zealand. Since 1992: Museum of New Zealand Te Papa Tongarewa." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000289
+name: NMP
+synonym: "Natal Museum, Pietermaritzburg, Natal, South Africa." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000290
+name: NMS
+synonym: "National Museum, Singapore." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000291
+name: NMSL
+synonym: "National Museum, Sir Marcus Fernando Mawatha, Colombo, Sri Lanka. Also seen as CMS." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000292
+name: NMSZ
+synonym: "National Museums of Scotland, Edinburgh, Scotland [after 1985, formerly Royal Scottish Museum]." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000293
+name: NMV
+synonym: "National Museum of Victoria, Melbourne, Victoria, Australia. Style is A2345 with no period after the A; also an R series and straight number system." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000294
+name: NMW
+synonym: "Naturhistorisches Museum, Wien (Vienna), Austria." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000295
+name: NOI
+synonym: "Nanhai Oceanographic Institute, Nanhai, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000296
+name: NPIB
+synonym: "Northwest Plateau Institute of Biology, Xining, Qinghai, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000297
+name: NRIBAS
+synonym: "National Research Institute of Biology, Academia Sinica, Nanking, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000298
+name: NRM
+synonym: "Naturhistoriska Riksmuseet, Stockholm, Sweden." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000299
+name: NRMS
+synonym: "See NRM." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000300
+name: NRS
+synonym: "Northern Regional Station, Zoological Survey of India [also as ZSI/NRS]." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000301
+name: NSMT
+synonym: "National Science Museum, Department of Zoology, Tokyo, Japan. Preferred style is NSMT-P 12345." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000302
+name: NSYU
+synonym: "National Sun Yat-sen University, Kaohsiung, Taiwan. Also as NSYSU." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000303
+name: NTM
+synonym: "Northern Territory Museum of Arts & Sciences, Darwin, Northern Terr., Australia" RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000304
+name: NTUM
+synonym: "National Taiwan University, Department of Zoology, Taipei, Taiwan" RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000305
+name: NUSMBS
+synonym: "Niigata University, Sado Marine Biological Station, Niigata, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000306
+name: NYSM
+synonym: "New York State Museum, Albany, New York, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000307
+name: NYZS
+synonym: "New York Zoological Society, New York, U.S.A. Some specimens at CAS." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000308
+name: NZOI
+synonym: "New Zealand Oceanographic Institute, Wellington, New Zealand." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000309
+name: OM
+synonym: "Otago Museum, Dunedin, New Zealand." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000310
+name: OMNH
+synonym: "Osaka Museum of Natural History, Osaka, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000311
+name: OPM
+synonym: "Okinawa Prefectual Museum, Naha, Okinawa, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000312
+name: ORI
+synonym: "Ocean Research Institute, Durban, South Africa." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000313
+name: ORIT
+synonym: "University of Tokyo, Ocean Research Institute, Tokyo, Japan. Most types now at ZUMT." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000314
+name: ORSTOM
+synonym: "Office de la Recherche scientifique et Technique Outre-mer. Several collections, such as at Nouméa, New Caledonia; Dakar, Senegal; Trinidad, Bolivia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000315
+name: OS
+synonym: "Oregon State University, Museum of Natural History, Corvallis, Oregon, U.S.A. Also seen as OSU." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000316
+name: OSM
+synonym: "Ohio State University Museum, Columbus, Ohio, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000317
+name: OSU
+synonym: "See OS." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000318
+name: OSUO
+synonym: "Oregon State University, School of Oceanography, Corvallis, Oregon, U.S.A. Most specimens transferred to OS main collection." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000319
+name: OSUS
+synonym: "Oklahoma State University, Department of Zoology, Stillwater, Oklahoma, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000320
+name: OUM
+synonym: "Oxford University Museum, Oxford, England." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000321
+name: PEM
+synonym: "Port Elizabeth Museum, Port Elizabeth, South Africa." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000322
+name: PMBC
+synonym: "Phuket Marine Biological Centre, Phuket, Thailand." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000323
+name: PNGM
+synonym: "National Museum and Art Gallery, Port Moresby, Papua New Guinea." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000324
+name: PNM
+synonym: "Philippine National Museum, Manila, Luzon, Philippines." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000325
+name: PPSIO
+synonym: "P. P. Shirshov Institute of Oceanology, Moscow, Russia. Same as IOM." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000326
+name: PSU
+synonym: "Pennsylvania State University, University Park, Philadelphia, Pennsylvania, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000327
+name: PU
+synonym: "Princeton University, Princeton, New Jersey, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000328
+name: QM
+synonym: "Queensland Museum, Brisbane, Queensland, Australia. Sometimes seen as QMB.oQVM Queen Victoria Museum & Art Gallery, Launceston, Tasmania, Australia. Several numbering systems, preferred style 1972:5:44 not 72/5/44." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000329
+name: QVMS
+synonym: "Queen Victoria Museum, Salisbury, Zimbabwe." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000330
+name: RBCM
+synonym: "Royal British Columbia Museum, Victoria, Canada. Formerly BCPM." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000331
+name: RIFFL
+synonym: "Research Institute of Freshwater Fisheries, Liaoning, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000332
+name: RMNH
+synonym: "Rijksmuseum van Natuurlijke Historie, Leiden, Netherlands. Two systems initially, with overlapping numbers, dry collection preceded by a \"D\"." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000333
+name: ROM
+synonym: "Royal Ontario Museum, Toronto, Ontario, Canada." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000334
+name: RUSI
+synonym: "South African Institute for Aquatic Biodiversity (SAIAB); formerly J. L. B. Smith Institute of Ichthyology, Grahamstown, South Africa." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000335
+name: SACON
+synonym: "Salim Ali Centre for Ornithology and Natural History, Tamil Nadu, India." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000336
+name: SAIAB
+synonym: "See RUSI." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000337
+name: SAM
+synonym: "South African Museum, Cape Town, South Africa." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000338
+name: SAMA
+synonym: "South Australian Museum, Adelaide, South Australia, Australia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000339
+name: SAU
+synonym: "Southern Arkansas University, Magnolia, Arkansas, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000340
+name: SBM
+synonym: "Sabah Museum, Sabah, East Malaysia (Ng, Martin-Smith & Ng 2000)" RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000341
+name: SCN
+synonym: "Sociedad de Ciencias Naturales ‘La Salle’, Museo de Historia Natural ‘La Salle’, Caracas, Venezuela." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000342
+name: SCSFRI
+synonym: "South China Sea Fisheries Research Institute, Guangzhau, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000343
+name: SDSU
+synonym: "San Diego State University, San Diego, California, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000344
+name: SFC
+synonym: "Laboratory of Fishes, Shanghai Fisheries University, China [also as Shanghai Fish. College]." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000345
+name: SFRS
+synonym: "Sea Fisheries Research Station, Haifa, Israel." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000346
+name: SIO
+synonym: "Scripps Institution of Oceanography, La Jolla, California, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000347
+name: SIUC
+synonym: "Southern Illinois University (Carbondale), University Museum, Carbondale, Illinois, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000348
+name: SM
+synonym: "Sarawak Museum, Kuching, Sarawak, Malaysia. Also seen as SMK." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000349
+name: SMBL
+synonym: "Kyoto University, Seto Marine Biology Laboratory, Wakayama Prefecture, Japan. Specimens transferred to FAKU, some lost." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000350
+name: SMF
+synonym: "Natur-Museum und Forschungs-Institut Senckenberg, Frankfurt-am-Main, Germany." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000351
+name: SMK
+synonym: "Sarawak Museum, Kuching, Sarawak, Malaysia. See SM." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000352
+name: SMNS
+synonym: "Staatliches Museum fur Naturkunde in Stuttgart, Ludwigsburg, Germany." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000353
+name: SMWU
+synonym: "Sang Miung Women’s University, Seoul, South Korea." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000354
+name: SNHM
+synonym: "Sudan Natural History Museum, Sudan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000355
+name: SNMB
+synonym: "Slovak National Museum, Bratislava, Czechoslovakia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000356
+name: SNMBR
+synonym: "Staatliches Naturhistorisches Museum in Braunschweig, Germany. Also earlier seen as NMB and SNMB." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000357
+name: SNMNH
+synonym: "Saudi Arabian National Museum of Natural History, Riyadh, Saudi Arabia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000358
+name: SPNRI
+synonym: "Sichuan Province, Natrual Resources Institute, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000359
+name: SRS/ZSI
+synonym: "Southern Regional Station, Zoological Survey of India, Madras, India." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000360
+name: SSCN
+synonym: "Musum of the Biological Laboratory, Scientific Society of China, Nanking, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000361
+name: SU
+synonym: "Stanford University. Specimens at CAS." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000362
+name: SUB
+synonym: "Universitat Bonn, Sammlung der Universitat, Bonn, Germany." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000363
+name: SUF
+synonym: "Shimonoseki University of Fisheries, Shimonoseki, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000364
+name: TAU
+synonym: "Tel-Aviv University, Tel-Aviv, Israel." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000365
+name: TCWC
+synonym: "Texas A&M University, Texas Cooperative Wildlife Collection, College Station, Texas, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000366
+name: TFMC
+synonym: "Museo de Ciencias Naturales de Santa Cruz de Tenerife, Canary Islands." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000367
+name: TFRI
+synonym: "Taiwan Fisheries Research Institute, Chilung, Taiwan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000368
+name: THUP
+synonym: "Tunghai University, Department of Zoology, Taichung, Taiwan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000369
+name: TISTR
+synonym: "Thailand Institute for Scientific and Technological Research, Bangkok, Thailand." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000370
+name: TIU
+synonym: "Tokyo Imperial University, Science College Museum, Tokyo, Japan. Now ZMUT." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000371
+name: TMBS
+synonym: "Tatsuo Tanaka Memorial Biological Laboratory, Miyake-jima, Izu Islands, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000372
+name: TMFE
+synonym: "Elasmobranchii Collection of the Department of Fisheries, Faculty of Marine Science and Technology, Tokai University." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000373
+name: TMH
+synonym: "Tasmanian Museum and Art Gallery, Hobart, Tasmania, Australia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000374
+name: TMP
+synonym: "Transvaal Museum, Pretoria, Transvaal, South Africa. Types at AMG." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000375
+name: TNHC
+synonym: "Texas Memorial Museum, Texas Natural History Collection, Austin, Texas, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000376
+name: TU
+synonym: "Tulane University, Department of Zoology, New Orleans, Louisiana; Tulane University, Riverside Research Laboratories, Belle Chasse, Louisiana." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000377
+name: TUFIL
+synonym: "Tokyo University of Fisheries, Ichthyological Laboratory, Tokyo, Japan. Formerly IFI; now FAKU." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000378
+name: UAB
+synonym: "Universidad Autonoma de Barcelona, Departamento de Biología, Barcelona, Spain." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000379
+name: UABCE
+synonym: "Universidad de Autonoma de Baja California, Ensenada, Mexico." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000380
+name: UAIC
+synonym: "Universite Nationale de Cote d’Ivoire, Abidjan, Ivory Coast." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000381
+name: UAM
+synonym: "University of Alaska, Fairbanks, Alaska, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000382
+name: UAMZ
+synonym: "University of Alberta Museum of Zoology, Alberta, Canada." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000383
+name: UANL
+synonym: "Universidad Autonoma de Nuevo Leon, Monterrey, Nuevo Leon, Mexico." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000384
+name: UAZ
+synonym: "University of Arizona, Department of Ecology and Evolutionary Biology, Tucson, Arizona, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000385
+name: UBC
+synonym: "University of British Columbia, Cowan Vertebrate Museum, Vancouver, British Columbia, Canada." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000386
+name: UBJTL
+synonym: "Universidad Bogotá Jorge Tadeo Lozano, Colombia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000387
+name: UCD
+synonym: "University of California, Davis, California, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000388
+name: UCLA
+synonym: "University of California at Los Angeles, Department of Biology, Los Angeles, California. Much of collection now at LACM." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000389
+name: UCR
+synonym: "Universidad de Costa Rica, Museo de Zoologia, Depto. de Biologia, San Jose, Costa Rica." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000390
+name: UDONECI
+synonym: "Universidad de Oriente, Centro de Invest. Cient. del Nucleo de Nueva Esparta, Isla Margarita, Venezuela." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000391
+name: UF
+synonym: "University of Florida, Florida State Museum, Gainesville, Florida, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000392
+name: UF-FSU
+synonym: "See FSU." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000393
+name: UFPB
+synonym: "Universidade Federal da Paraiba, Jaoa Pessoa, Brazil." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000394
+name: UFRGS
+synonym: "Universidade Federale do Rio Grande do Sul, Departamento de Zoologia, Porto Alegre, Rio Grande do Sul, Brazil." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000395
+name: UFRJ
+synonym: "Universidade Federal do Rio de Janeiro, Brazil." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000396
+name: UGAMNH
+synonym: "University of Georgia, Museum of Natural History, Athens, Georgia, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000397
+name: UGM
+synonym: "University of Guam, Mangilao, Guam." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000398
+name: UH
+synonym: "University of Hawaii, Honolulu, Hawaii. Types transferred to BPBM and some to USNM." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000399
+name: UI
+synonym: "University of Ibadan, Ibadan, Nigeria." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000400
+name: UMB
+synonym: "Übersee-Museums, Bremen, Germany." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000401
+name: UMIM
+synonym: "Univeristy of Miami Ichthyological Museum, Coral Gables, Florida, U.S.A. No longer in existence, specimens mostly to USNM and UMML." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000402
+name: UMML
+synonym: "University of Miami Marine Laboratory, Miami, Florida. Most of collection transferred to UF." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000403
+name: UMMZ
+synonym: "University of Michigan Museum of Zoology, Ann Arbor, Michigan, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000404
+name: UMOC
+synonym: "University of Missouri, Museum of Zoology, Columbia, Missouri, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000405
+name: UMUTZ
+synonym: "Department of Zoology, University Museum, University of Tokyo, Tokyo, Japan. This abbreviation sometimes used; same as ZMUT." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000406
+name: UNAM
+synonym: "Universidad Nacional Autonoma de Mexico, Departmento de Zoologia, Instituto de Biologia, Mexico, DF, Mexico. Same as IBUNAM." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000407
+name: UNEFM
+synonym: "Universidad Experimental Francisco de Miranda, Venezuela." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000408
+name: UNOAL
+synonym: "University of Northern Alabama, Tuscalusa, Alabama, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000409
+name: UNOVC
+synonym: "University of New Orleans, Department of Biological Sciences, New Orleans, Lousiania, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000410
+name: UNR
+synonym: "University of Nevada, Museum of Biology, Reno, Nevada, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000411
+name: UOMZ
+synonym: "University of Oklahoma, Stovall Museum of Zoology, Norman, Oklahoma, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000412
+name: URB
+synonym: "Ryukyu University Department of Zoology, Nakagusuku, Okinawa, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000413
+name: URM
+synonym: "University of the Ryukyus, Nishihara, Okinawa, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000414
+name: USA
+synonym: "University of South Alabama, Mobile, Alabama, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000415
+name: USBCF
+synonym: "U. S. Bureau of Commercial Fisheries. Original collection with this abbreviation mostly now at USNM." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000416
+name: USFC
+synonym: "U. S. Fish Commission. Original collection using this abbreviation mostly now at USNM." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000417
+name: USNM
+synonym: "National Museum of Natural History, Washington D.C., U.S.A. Formerly United States National Museum; USNM acronym continues." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000418
+name: USP
+synonym: "University of the South Pacific, Institute of Marine Resources, Suva, Fiji." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000419
+name: UT
+synonym: "University of Tennessee, Department of Zoology, Knoxville, Tennessee, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000420
+name: UTEP
+synonym: "University of Texas at El Paso, Laboratory for Environmental Biology, El Paso, Texas, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000421
+name: UUZM
+synonym: "Uppsala University, Zoological Museum, Uppsala, Sweden." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000422
+name: UW
+synonym: "University of Washington, College of Fisheries, Seattle, Washington, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000423
+name: UZA
+synonym: "Universidad Zoología Aplicada, Departamento de Ecología, Comunidad de Madrid, Madrid, Spain." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000424
+name: VBCM
+synonym: "Universidad Complutense de Madrid, Catedra de Vertebrados, Faculdad de Biologicas, Madrid, Spain." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000425
+name: VIMS
+synonym: "Virginia Institute of Marine Science, Gloucester Point, Virginia, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000426
+name: VMM
+synonym: "Vanderbilt Marine Museum, Centerport, New York, U.S.A. Most type specimens are now housed at the AMNH." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000427
+name: VSM
+synonym: "Det Kgl. Norske Videnskabers Selskab Museet, Trondheim, Norway." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000428
+name: VUW
+synonym: "Victoria University, Wellington, New Zealand." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000429
+name: WAM
+synonym: "Western Australian Museum, Perth, Western Australia, Australia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000430
+name: WHOI
+synonym: "Woods Hole Oceanographic Institution, Woods Hole, Massachusetts, U.S.A. Collection transferred to MCZ." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000431
+name: WIAP
+synonym: "Wistar Institute of Anatomy, Philadelphia, Pennsylvania, U.S.A. Now at ANSP." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000432
+name: WLMH
+synonym: "West Lake Musuem, Hangchow, Chekiang, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000433
+name: XFCFC
+synonym: "Xiamen Fisheries College, Fujian, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000434
+name: YCM
+synonym: "Yokosuka City Museum, Yokosuka, Kanagawa, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000435
+name: YPM
+synonym: "Yale University, Peabody Museum, New Haven, Connecticut, U.S.A." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000436
+name: YU
+synonym: "Yunnan University, Kunming, Yunnan, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000437
+name: ZFMK
+synonym: "Zoologisches Forschunginstitut und Museum Alexander Koenig, Bonn, Germany." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000438
+name: ZIAN
+synonym: "Zoological Institute, Academy of Sciences, Leningrad. Same as ZISP." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000439
+name: ZICUP
+synonym: "Zoological Institute Charles University, Prague, Czechoslovakia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000440
+name: ZIHU
+synonym: "Hiroshima University, Zoological Institute, Hiroshima, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000441
+name: ZIK
+synonym: "Ukrainian Academy of Sciences, Zoological Insitute, Kiev, Ukraine." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000442
+name: ZIKU
+synonym: "Zoological Institute, Kochi University, Kochi, Japan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000443
+name: ZIL
+synonym: "Now ZISP." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000444
+name: ZIN
+synonym: "Zoological Institute, Academy of Sciences, St. Petersburg, Russia [preferred acronym]. Also seen as ZIL and ZISP." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000445
+name: ZISP
+synonym: "See ZIN." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000446
+name: ZIUT
+synonym: "Zoological Institute of the University of Tokyo. Same as ZUMT." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000447
+name: ZLSYU
+synonym: "Zoological Laboratory, Sun Yatsen University, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000448
+name: ZMA
+synonym: "Universiteit van Amsterdam, Zoologisch Museum, Amsterdam, The Netherlands. Usually cited with a period representing a comma, as ZAM 110,456, which we have deleted." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000449
+name: ZMAU
+synonym: "Zoological Museum Andhra University, India." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000450
+name: ZMB
+synonym: "Universitat Humboldt, Museum fur Naturkunde, Berlin, Germany." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000451
+name: ZMC
+synonym: "Deptment of Biology, Zunyi Medical College, Guizhou, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000452
+name: ZMFMIB
+synonym: "Zoological Museum Fan Memorial Institute of Biology, Tsing Hua University, Peiping, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000453
+name: ZMH
+synonym: "Universitat Hamburg, Zoologisches Institut und Museum, Hamburg, Germany." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000454
+name: ZMMGU
+synonym: "Zoological Museum, Moscow State University, Moscow, Russia. Also seen as ZMMU." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000455
+name: ZMMGY
+synonym: "See ZMMU." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000456
+name: ZMMSU
+synonym: "See ZMMU." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000457
+name: ZMMU
+synonym: "Zoological Museum, Moscow University, Russia. Sometimes seen in literature as MMSU, ZMMSU, ZMMGY, ZMMGU." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000458
+name: ZMT
+synonym: "Georgian State Museum, Zoological Section, Tbilisi, (Asiatic) Georgia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000459
+name: ZMUA
+synonym: "Zoological Museum, University of Amoy, China." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000460
+name: ZMUAS
+synonym: "Zoological Museum, Ukrainian Academy of Sciences." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000461
+name: ZMUB
+synonym: "Universitetet i Bergen, Zoologisk Museum, Bergen, Norway." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000462
+name: ZMUC
+synonym: "Kobenhavns Universitet Zoologisk Museum (Zoological Museum, University of Copenhagen), Copenhagen, Denmark." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000463
+name: ZMUH
+synonym: "Zoological Museum, University of Hanoi, Hanoi, Viet Nam." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000464
+name: ZMUI
+synonym: "Zoological Museum, University of Istanbul, Turkey." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000465
+name: ZMUL
+synonym: "Universitetets Lund, Zoologiska Museet, Lund, Sweden." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000466
+name: ZMUO
+synonym: "Universitetets I Oslo, Zoologisk Museum, Oslo, Norway." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000467
+name: ZMUT
+synonym: "University of Tokyo, Department of Zoology, University Museum, Tokyo, Japan. Same as ZUMT." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000468
+name: ZMUU
+synonym: "Uppsala Universitet, Zoologiska Museet, Uppsala, Sweden." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000469
+name: ZRC
+synonym: "Zoological Reference Collection, National University of Singapore, Singapore." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000470
+name: ZSI
+synonym: "Zoological Survey of India, Calcutta, India." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000471
+name: ZSM
+synonym: "Zoologische Museum Staatssammlung, München, Germany." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000472
+name: ZSM/CMK
+synonym: "Zoologische Museum Staatssammlung, München/Collection of Maurice Kottelat." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000473
+name: ZSM/LIPI
+synonym: "Zoologische Museum Staatssammlung, München/specimens eventually to be transferred to Indonesian institution." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000474
+name: ZSP
+synonym: "Zoological Survey of Pakistan, Karachi, Pakistan." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000475
+name: ZUEC
+synonym: "Universidade Estadual de Campinas, Departmento do Zoologia, Sao Paulo, Sao Paulo, Brasil." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000476
+name: ZUFES
+synonym: "Universidad Federal do Espírito Santo, Brazil." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000477
+name: ZUMT
+synonym: "Department of Zoology, University Museum, University of Tokyo, Tokyo, Japan. Also seen as ZMUT." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000478
+name: ZVC
+synonym: "Depto. de Zoologia Vertebrados de la Facultad de Humanidades y Ciencias, Montevideo, Uruguay." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000479
+name: ZZSZ
+synonym: "Zoology Department, Faculty of Natural Sciences, University of Zagreb (Zoologijski Zavod, Priodoslovno-matematicki fakultet, Sveucilista u Zagrebu), Zagreb, Croatia." RELATED []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
