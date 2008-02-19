@@ -13,12 +13,13 @@
     <div id="main_container">
       <div id="main_content">
 	<div class="catch_phrase">
-	  Welcome to the Phenote Developer Documentation Resource Page
+	  Phenote Developer Documentation Resource Page
 	</div>
 	<p>This page is your starting point if you are a developer on the Phenote project.  Some interesting articles can be found below:</p>
 	<ul>
 	  <li><a href="getting-source-code-in-eclipse.shtml">Getting the Source code</a> (command line or in Eclipse)  
 	  </li>
+	  <li><a href-"http://www.phenote.org/doc/api/">Browse the API Javadocs</a></li>
 	  <li><a href="dataadapter.shtml">Working with Data Adapters</a>
 	  </li>
 	  <li><a href="developer-docs.shtml">Adding new configuration parameters</a>
@@ -46,7 +47,7 @@
 
 	    <p class="quick_link">
 	    <img src="images/star.gif" alt=""  class="icon_green"/>
-	    <a href="" title="Java API docs">
+	    <a href="http://www.phenote.org/doc/api/" title="Java API docs">
 	      Java API docs
 	    </a>
 	    </p>
