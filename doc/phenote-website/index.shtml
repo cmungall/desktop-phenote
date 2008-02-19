@@ -108,8 +108,14 @@
 	  </ul>
 	  <h3>Meetings/Demos</h3>
 	  <ul class="events">
-	    <li class="events">
+	    <!-- li class="events">
 	    <p>(none scheduled at this time)</p>
+	    </li -->
+	    <li class="events">
+	    <p><a
+	    href="http://www.nescent.org/phenoscape/Main_Page">Phenoscape</a>
+	    Jamboree Meeting, <a href="http://www.nescent.org/>NESCent</a>,
+	    Durham, NC, April 17-21</p>
 	    </li>
 	  </ul>
 	  <!--h3><a href="http://www.phenote.org/events.shtml">Past Events...</a></h3-->	  
