@@ -54,6 +54,8 @@ href="phenote.jnlp">
 	<jar href="jars/commons-beanutils-1.6.jar"/>
 	<jar href="jars/commons-logging-1.0.4.jar"/>
 	<nativelib href="jars/phenote-nativelibs.jar"/>
+	<jar href="jars/saaj.jar"/>
+	<jar href="jars/jaxrpc.jar"/>
 
   <!-- jars not needed for webstart(?) axis, commons-beanutils-1.6,  commons-discovery,
       commons-lang, eutils,jaxrpc, jdom, jebl, jhindexer, jlfgr, jnlp, jsp, jsr

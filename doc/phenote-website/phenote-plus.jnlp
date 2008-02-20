@@ -53,6 +53,8 @@ href="phenote.jnlp">
 	<jar href="jars/commons-lang-2.1.jar"/>
 	<jar href="jars/commons-beanutils-1.6.jar"/>
 	<jar href="jars/commons-logging-1.0.4.jar"/>
+	<jar href="jars/saaj.jar"/>
+	<jar href="jars/jaxrpc.jar"/>
   <!-- for phenote+ (formerly phenote2) only -->
 	<jar  href="jars/macify-1.1.jar"/>
 	<jar  href="jars/tablelayout.jar"/>
