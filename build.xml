@@ -320,10 +320,10 @@ them into  the classfiles directory. excludes="test/**"  -->
     <target name="copy-javadoc" depends="javadoc">
       <!--this isn't really part of webstart, but the website, really-->
       <!-- this requires a symbolic link to /www/phenote.org_80/www/htdocs -->
-      <copy todir="phenote-website/javadoc">
-        <fileset file="doc/api"/>
+      <copy todir="phenote-website/doc/api">
+        <fileset file="doc/api/"/>
       </copy>
-      <replace dir="phenote-website/javadoc" />
+      <replace dir="phenote-website/doc/api" />
     </target>    
 
 

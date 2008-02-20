@@ -49,7 +49,7 @@ href="phenote.jnlp">
 	<jar  href="jars/swing-layout.jar"/>
 	<jar  href="jars/swingx-2007_10_14.jar"/>
 	<jar  href="jars/eutils.jar"/>
-
+	<jar href="jars/commons-logging-1.0.4.jar"/>
   <!-- for phenote+ (formerly phenote2) only -->
 	<jar  href="jars/macify-1.1.jar"/>
 	<jar  href="jars/tablelayout.jar"/>
