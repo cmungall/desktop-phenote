@@ -63,6 +63,7 @@ href="phenote.jnlp">
 	<jar  href="jars/axis.jar"/>
 	<jar  href="jars/ProtocolEditor.jar"/>
 	<jar  href="jars/ols-client.jar"/>
+	<jar  href="jars/wsdl4j-1.5.1.jar"/>
 
 
 
