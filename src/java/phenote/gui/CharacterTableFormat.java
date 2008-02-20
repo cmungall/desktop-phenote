@@ -6,11 +6,12 @@ import org.apache.log4j.Logger;
 
 import phenote.config.Config;
 import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.OntologyException;
-import phenote.datamodel.CharFieldManager;
-import ca.odell.glazedlists.GlazedLists;
 import ca.odell.glazedlists.gui.AdvancedTableFormat;
+
+import com.eekboom.utils.Strings;
 
 public class CharacterTableFormat implements AdvancedTableFormat<CharacterI> {
   
@@ -44,7 +45,7 @@ public class CharacterTableFormat implements AdvancedTableFormat<CharacterI> {
   }
 
   public Comparator<?> getColumnComparator(int column) {
-    return GlazedLists.caseInsensitiveComparator();
+    return Strings.getNaturalComparator();
   }
 
   private static Logger log() {
