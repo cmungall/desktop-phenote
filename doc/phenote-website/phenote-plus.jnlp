@@ -49,6 +49,9 @@ href="phenote.jnlp">
 	<jar  href="jars/swing-layout.jar"/>
 	<jar  href="jars/swingx-2007_10_14.jar"/>
 	<jar  href="jars/eutils.jar"/>
+	<jar href="jars/commons-discovery-0.2.jar"/>
+	<jar href="jars/commons-lang-2.1.jar"/>
+	<jar href="jars/commons-beanutils-1.6.jar"/>
 	<jar href="jars/commons-logging-1.0.4.jar"/>
   <!-- for phenote+ (formerly phenote2) only -->
 	<jar  href="jars/macify-1.1.jar"/>
@@ -56,6 +59,10 @@ href="phenote.jnlp">
 	<jar  href="jars/idw-gpl.jar"/>
 	<jar  href="jars/jaxrpc.jar"/>
 	<jar  href="jars/axis.jar"/>
+	<jar  href="jars/ProtocolEditor.jar"/>
+	<jar  href="jars/ols-client.jar"/>
+
+
 
 	<nativelib href="jars/phenote-nativelibs.jar"/>
 
