@@ -830,7 +830,7 @@ public class WormAdapter implements QueryableDataAdapterI {
     int foundAllele = 0;
 
     if (field.equals(alleleString)) {			// if querying the allele, get allele data
-      try { rs = s.executeQuery("SELECT * FROM app_tempname WHERE app_tempname = '"+query+"' ORDER BY joinkey"); }	// find the allele that matches the queried allele
+      try { rs = s.executeQuery("SELECT * FROM app_tempname WHERE app_tempname ~ '"+query+"' ORDER BY joinkey"); }	// find the allele that matches the queried allele  switch to substring search for Karen 2008 02 21
       catch (SQLException se) { System.out.println("Exception while executing app_tempname alleleString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
     } else if (field.equals(pubString)) {						// if querying the publication, get paper data
       try { rs = s.executeQuery("SELECT * FROM app_paper WHERE app_paper ~ '"+query+"' ORDER BY joinkey"); }	// find the allele that matches the queried allele
