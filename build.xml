@@ -56,6 +56,27 @@
         <mkdir dir="${classfiles}"/>
     </target>
 
+    <!-- dependency information -->
+    <property name="bbop_dest" location="../BBOP" />
+    <property name="obo_dest" location="../OBO" />
+    <property name="obovocab_dest" location="../obo-vocab-java" />
+
+    <target name="buildbbop" if="bbop_dest">
+        <ant dir="${bbop_dest}" target="jar" inheritAll="false" />
+        <copy file="${bbop_dest}/bbop.jar" todir="${lib}" />
+    </target>
+    <target name="buildobo" if="obo_dest">
+        <ant dir="${obo_dest}" target="jar" inheritAll="false" />
+        <copy file="${obo_dest}/obo.jar" todir="${lib}" />
+    </target>
+    <target name="buildobovocab" if="obovocab_dest">
+        <ant dir="${obovocab_dest}" target="jar" inheritAll="false" />
+        <copy file="${obovocab_dest}/obo-vocab.jar" todir="${lib}" />
+    </target>
+
+    <target name="library_jars" depends="buildbbop, buildobo">
+    </target>
+
 
     <!-- The classpath includes all the jar files jars dir, excluding
 jars/phenote.jar if it exists. -->
@@ -269,8 +290,8 @@ them into  the classfiles directory. excludes="test/**"  -->
             <fileset dir="." includes="obo-files/" excludes="obo-files/old"/>
             <fileset file="${conf}/*.cfg"/>
         	<fileset file="${conf}/log4j.xml"/>
-	    <fileset dir="." includes="${conf}/*.xml"/>
-	    <fileset dir="." includes="images/"/>
+	        <fileset dir="." includes="${conf}/*.xml"/>
+	        <fileset dir="." includes="images/"/>
             <fileset dir="doc/phenote-website" includes="help/**"/>
         </jar>
     </target>
