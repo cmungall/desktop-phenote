@@ -24,6 +24,7 @@ public class ValueCharacterList implements CharacterListI {
   private EventList<CharacterI> characters = new BasicEventList<CharacterI>();
   private CharFieldValue value;
   private CharacterChangeListener listener = new CharacterChangeListener();
+  private static String SEPARATOR = " ";
 
   public ValueCharacterList(CharFieldValue aValue) {
     this.value = aValue;
@@ -97,13 +98,12 @@ public class ValueCharacterList implements CharacterListI {
     boolean firstValue = true;
     final StringBuffer buffer = new StringBuffer();
     for (String fieldName : Config.inst().getFieldsInGroup(this.value.getCharField().getComponentsGroup())) {
-      if (!firstValue) buffer.append(":");
+      if (!firstValue) buffer.append(SEPARATOR);
       firstValue = false;
       try {
         buffer.append(character.getValueString(fieldName));
       } catch (CharFieldException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
+        log().error("Error getting value for charfield: " + fieldName, e);
       }
     }
     final CharFieldValue cfv = new CharFieldValue(buffer.toString(), this.value.getCharacter(), this.value.getCharField());
@@ -113,7 +113,7 @@ public class ValueCharacterList implements CharacterListI {
   
   private CharacterI characterFromValue(CharFieldValue aValue) {
     final List<String> fieldNames = Config.inst().getFieldsInGroup(this.value.getCharField().getComponentsGroup());
-    String[] values = aValue.getValueAsString().split(":", fieldNames.size());
+    String[] values = aValue.getValueAsString().split(SEPARATOR, fieldNames.size());
     final CharacterI character = CharacterIFactory.makeChar();
     for (int i = 0; i < values.length; i++) {
       try {
@@ -126,8 +126,7 @@ public class ValueCharacterList implements CharacterListI {
         }
         character.setValue(currentField, text);
       } catch (CharFieldException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
+        log().error("Couldn't get charfield: " + fieldNames.get(i), e);
       }
     }
     return character;
