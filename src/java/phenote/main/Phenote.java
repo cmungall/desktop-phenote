@@ -469,12 +469,14 @@ public class Phenote {
     JPanel mainPanel = new JPanel(new GridLayout());
     
     // EDITOR
+    // shouldn't this be a local variable? why is it re-assigned for each group?
     this.tableController = new CharacterTableController(group.getName());
     
     // need to do different selection & edit mgrs
     FieldPanel groupFieldPanel =
       new FieldPanel(true,false,group.getName(), this.tableController.getSelectionModel());
     groupFieldPanel.setBorder(new EmptyBorder(10,10,10,10));
+    this.tableController.setFieldPanelForUpdating(groupFieldPanel);
     // for testing - thats it
     if (group == null || group.getName().equals("default"))
       mainFieldPanel = groupFieldPanel;

@@ -36,6 +36,7 @@ import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
 import phenote.gui.field.CharFieldMatcherEditor;
+import phenote.gui.field.FieldPanel;
 import phenote.util.EverythingEqualComparator;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.FilterList;
@@ -76,6 +77,7 @@ public class CharacterTableController {
 	private OntologyMakerI ontolMaker; // for now just 1 term maker...
 	private JButton compareButton; // initialized by swix -> compare()
   private JPanel compareSpacer;	// initialized by swix
+  private FieldPanel panelToUpdate;
   // hmm... its handy
 	private static CharacterTableController defaultController;
 
@@ -314,6 +316,7 @@ public class CharacterTableController {
 	  if (this.sortChooser != null) this.sortChooser.dispose();
 	  this.sortChooser = new TableComparatorChooser<CharacterI>(characterTable, this.sortedCharacters, false);
 	  this.characterTable.setSelectionModel(this.selectionModel);
+	  if (this.panelToUpdate != null) this.panelToUpdate.setListSelectionModel(this.selectionModel);
 	}
 
 	private void updateButtonStates() {
@@ -517,5 +520,14 @@ public class CharacterTableController {
       s = s.replaceAll("\\^","<br>");
       setText("<html>"+s);
     }
+  }
+  
+  
+  /**
+   * Set a FieldPanel which the table should keep up to date when its selection model
+   * is replaced.  This is only necessary within Phenote 1 and shouldn't be used in Phenote 2.
+   */
+  public void setFieldPanelForUpdating(FieldPanel panel) {
+    this.panelToUpdate = panel;
   }
 }

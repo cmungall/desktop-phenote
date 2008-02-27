@@ -344,6 +344,13 @@ public class FieldPanel extends AbstractGUIComponent {
     }
   }
   
+  public void setListSelectionModel(EventSelectionModel<CharacterI> model) {
+    this.selectionModel = model;
+    for (CharFieldGui gui : this.getCharFieldGuiList()) {
+      gui.setListSelectionModel(this.selectionModel);
+    }
+  }
+  
   public List<CharFieldGui> getCharFieldGuiList() {
     return Collections.unmodifiableList(this.charFieldGuiList);
   }

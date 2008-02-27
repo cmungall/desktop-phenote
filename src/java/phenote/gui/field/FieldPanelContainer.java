@@ -44,9 +44,7 @@ public class FieldPanelContainer extends AbstractGUIComponent {
     this.removeAll();
     final FieldPanel panel = this.panels.get(table);
     this.add(panel);
-    for (CharFieldGui gui : panel.getCharFieldGuiList()) {
-      gui.setListSelectionModel(table.getSelectionModel());
-    }
+    panel.setListSelectionModel(table.getSelectionModel());
     this.setResponderDelegate(table);
     this.repaint();
   }
