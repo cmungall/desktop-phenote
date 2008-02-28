@@ -20,8 +20,11 @@
         <xs:element ref="x:character-mode"/>
         <xs:element ref="x:ontologyLoading"/>
         <xs:element ref="x:field-panel-tabs"/>
-        <xs:element ref="x:comparison"/>
-        <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:constraint"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="x:constraint">
+          <xs:annotation>
+            <xs:documentation>   comparison, -&gt; field</xs:documentation>
+          </xs:annotation>
+        </xs:element>
       </xs:sequence>
       <xs:attribute name="version" use="required" type="xs:string"/>
       <xs:attribute name="description" use="required" type="xs:string"/>
@@ -175,11 +178,6 @@
       <xs:attribute name="mapping" use="required" type="xs:string"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="comparison">
-    <xs:complexType>
-      <xs:attribute name="enable-statement-comparison" use="required" type="xs:boolean"/>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="obo-repository">
     <xs:complexType>
       <xs:attribute name="url-dir" use="required" type="xs:string"/>
@@ -262,9 +260,9 @@
             <xs:enumeration value="TERM"/>
             <xs:enumeration value="INT"/>
             <xs:enumeration value="ID"/>
-            <xs:enumeration value="READ_ONLY"/>
             <xs:enumeration value="DATE"/>
             <xs:enumeration value="COMPARISON"/>
+            <xs:enumeration value="READ_ONLY"/>
             <xs:enumeration value="free_text"/>
           </xs:restriction>
         </xs:simpleType>

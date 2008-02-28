@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOProperty; // for comparisons
 import org.obo.datamodel.impl.DanglingClassImpl;
 import org.obo.util.TermUtil;
 
@@ -37,6 +38,8 @@ public class CharFieldValue implements Cloneable {
   private CharacterI character;
   private boolean isList = false;
   private boolean overridePickList = false;
+  //private boolean isComparison = false;
+  private Comparison comparison; // inner class
   //private boolean isDifferentia; // ??
 
   // phase out
@@ -111,6 +114,18 @@ public class CharFieldValue implements Cloneable {
     } else {
       return updatedValue;
     }
+  }
+
+  /** explicit comparison constructor - subclasses i suppose would be good */
+  public static CharFieldValue makeComparison(CharField cf,CharacterI subject,
+                                              OBOProperty rel,CharacterI object) {
+    return new CharFieldValue(cf,subject,rel,object);
+  }
+  /** comparison constructor */
+  private CharFieldValue(CharField cf, CharacterI s,OBOProperty r,CharacterI o) {
+    //isComparison = true;
+    charField = cf; // check if comparison?
+    comparison = new Comparison(s,r,o);
   }
 
   public CharFieldValue(Date d, CharacterI c, CharField cf) {
@@ -205,6 +220,8 @@ public class CharFieldValue implements Cloneable {
       return oboClassValue == null;
     else if (isDate())
       return dateValue == null;
+    else if (isComparison())
+      return comparison == null;
     else 
       return ((stringValue == null) || (stringValue.equals("")));
   }
@@ -229,6 +246,8 @@ public class CharFieldValue implements Cloneable {
       return oboClassValue.getName();
     if (isDate())
       return DateFormat.getDateInstance().format(dateValue);
+    if (isComparison())
+      return comparison.toString();
     if (!isTerm())
       return stringValue;
     if (oboClassValue != null) // obo class may not be set yet
@@ -272,6 +291,8 @@ public class CharFieldValue implements Cloneable {
     }
   }
   
+  public boolean isComparison() { return getCharField().isComparison(); }
+
   public boolean isCompound() {
     return this.getCharField().isCompound();
   }
@@ -349,6 +370,17 @@ public class CharFieldValue implements Cloneable {
 
   public String toString() { return getValueAsString(); }
 
+  private class Comparison {
+    private CharacterI subject;
+    private OBOProperty rel;
+    private CharacterI object;
+    private Comparison(CharacterI s, OBOProperty r,CharacterI o) {
+      subject = s; rel = r; object = o;
+    }
+    public String toString() {
+      return rel+"^("+object+")"; // for now --> fix this!
+    }
+  }
 
 //     if (charFieldEnum == null)
 //       System.out.println("ERROR no datamodel associated with configuration, cant set"+

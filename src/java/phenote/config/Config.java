@@ -27,7 +27,7 @@ import phenote.config.xml.PhenoteConfigurationDocument;
 import phenote.config.xml.AutoUpdateOntologiesDocument.AutoUpdateOntologies;
 import phenote.config.xml.AutocompleteSettingsDocument.AutocompleteSettings;
 import phenote.config.xml.CharacterModeDocument.CharacterMode;
-import phenote.config.xml.ComparisonDocument.Comparison;
+//import phenote.config.xml.ComparisonDocument.Comparison;
 import phenote.config.xml.ConstraintDocument.Constraint;
 import phenote.config.xml.DataInputServletDocument.DataInputServlet;
 import phenote.config.xml.DataadapterDocument.Dataadapter;
@@ -1362,11 +1362,17 @@ public class Config {
     return l;
   }
 
+  /** hmm - so returns true if compare element is set to true or if there
+      is a comparison field - i think the former way maybe should be phased out??
+  commenting out former way for now - may phase back in if need to cfg more stuff 
+  about comparisons */
   public boolean compareStatementEnabled() {
-    Comparison c = phenoConfigBean.getComparison();
-    if (c == null) return false; // default false?
-    
-    return c.getEnableStatementComparison(); // i think defaults to false
+//     Comparison c = phenoConfigBean.getComparison();
+//     if (c == null) return false; // default false?
+//     return c.getEnableStatementComparison(); // i think defaults to false
+    for (FieldConfig f : getEnbldFieldCfgs())
+      if (f.isComparison()) return true;
+    return false;
   }
   
   

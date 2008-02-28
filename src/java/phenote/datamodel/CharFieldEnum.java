@@ -26,7 +26,8 @@ public enum CharFieldEnum {
   ASSIGNED_BY("Assigned by"),
   EVIDENCE("Evidence"),
   /** Its questionable if relationship belongs here ??? */
-  RELATIONSHIP("Relationship");
+  RELATIONSHIP("Relationship"),
+  COMPARISON("Comparison","comparison",Type.COMPARISON);
   
   // CHAR FIELD ENUM vars & methods (make its own class!)
   // char field enum should probably only deal in tag, name is a bit display-ey

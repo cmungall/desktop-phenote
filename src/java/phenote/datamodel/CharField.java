@@ -186,6 +186,8 @@ public class CharField {
 
   public boolean isID() { return type == Type.ID; }
 
+  public boolean isComparison() { return type == Type.COMPARISON; }
+
   public boolean isReadOnly() { 
     return type == Type.READ_ONLY; 
   }

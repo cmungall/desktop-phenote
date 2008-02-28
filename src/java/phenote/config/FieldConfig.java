@@ -162,7 +162,10 @@ public class FieldConfig {
     return getType() == Field.Type.ID;
   }
 
-  
+  public boolean isComparison() {
+    if (getType() == null) return false;
+    return getType() == Field.Type.COMPARISON;
+  }
 
   //public String getLabel() { return label; }
   public String getDesc() { return desc; }

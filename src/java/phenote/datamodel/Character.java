@@ -136,14 +136,15 @@ public class Character extends AbstractCharacter implements CharacterI {
   }
 
   public CharField getCharFieldForName(String fieldName) throws CharFieldException {
-    return CharFieldManager.inst().getCharFieldForName(fieldName);
+    return charFieldMan().getCharFieldForName(fieldName);
   }
 
   /** return all char fields configured, both currently used or null in char */
   public List<CharField> getAllCharFields() {
-    return CharFieldManager.inst().getCharFieldList();
+    return charFieldMan().getCharFieldList();
   }
 
+  private CharFieldManager charFieldMan() { return CharFieldManager.inst(); }
 
   public CharacterI cloneCharacter() {
     //try {
@@ -191,6 +192,7 @@ public class Character extends AbstractCharacter implements CharacterI {
 
   public boolean supportsComparisons() { return true; }
 
+  /** comparison actually goes in charFieldValue like another field */
   public void addComparison(OBOProperty rel, CharacterI relChar) throws CharacterEx {
 //     String m = "Character datamodel does not implement comparisons, configure "
 //       +"datamodel to OBO Annotations to use comparisons";
@@ -201,6 +203,15 @@ public class Character extends AbstractCharacter implements CharacterI {
     comparisons.add(c);
     // do we add reverse comparison to relChar?? not sure
     // relChar.
+    if (!charFieldMan().hasComparisonField()) { // shouldnt happen?
+      // ideally create one...
+      // Config/CharFieldMan.addCompField()
+      log().error("No Comparison field configged, cant add comparison");
+      return; // ex?
+    }
+    CharField cf = charFieldMan().getComparisonField();
+    CharFieldValue v = CharFieldValue.makeComparison(cf,this,rel,relChar);
+    setValue(cf,v); // transaction???
   }
 
   private class Comparison {

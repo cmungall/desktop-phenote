@@ -332,6 +332,22 @@ public class CharFieldManager {
     throw new OntologyException(term+" not found in ontologies");
   }
 
+  public boolean hasComparisonField() {
+    return getComparisonField() != null; // ex?
+  }
+
+  /** return COMPARISON field if have one, if dont should we:
+      1) create one on demand (like date)? sep method?
+      2) return null
+      3) throw ex?
+      returning null for now */
+  public CharField getComparisonField() {
+    CharFieldEnum COMP = CharFieldEnum.COMPARISON;
+    try { return getCharFieldForEnum(COMP); }
+    catch (CharFieldException e) { return null; } // ?
+  }
+
+  // public CharField getCompCreateIfNull() ???
 
   private Logger log;
   private Logger log() {
