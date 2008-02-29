@@ -138,7 +138,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
       come up */
 	@Override
 	protected String getPerspectiveResourceDir() { // not using org
-		return "/phenote/gui/layout/resources"; // need to add this
+		return "phenote/gui/layout/resources"; // need to add this
 		// "org/phenote/gui/layout/resources";
 		// return System.getProperty("user.home") + "/.phenote";
 	}
