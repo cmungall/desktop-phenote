@@ -131,10 +131,14 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 		return new AboutAction();
 	}
 
+	/** in this directory obo/idw expects to find a file named perspectives.xml
+      which then points to idw files in this same directory 
+      obo can get this from a jar but doesnt work from webstart jar???
+      FileNotFoundException printed to stdout if not found and no perspectives
+      come up */
 	@Override
-	// ??
 	protected String getPerspectiveResourceDir() { // not using org
-		return "phenote/gui/layout/resources"; // need to add this
+		return "/phenote/gui/layout/resources"; // need to add this
 		// "org/phenote/gui/layout/resources";
 		// return System.getProperty("user.home") + "/.phenote";
 	}
@@ -148,7 +152,9 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 	}
 
 	@Override
-	/** im not sure about this and svn & webstart? */
+	/** im not sure about this and svn & webstart?
+   so idw/obo adds a perspective subdir here and copies perspectives here
+   from jars/classes */
 	protected File getPrefsDir() {
 		// .phenote/layout?
 		return new File(System.getProperty("user.home") + "/.phenote");
