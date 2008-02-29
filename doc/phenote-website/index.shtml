@@ -134,6 +134,7 @@
 	  <!--No news is good news!-->
 	  
 	  <!-- Do not destry the following event template -->
+	  <p>03.01.2008 - We'd like to know more about what kind of computer you are using.  <a href="http://FreeOnlineSurveys.com/rendersurvey.asp?sid=bf1bbbvdppbjw56402139" onClick="window.open('http://FreeOnlineSurveys.com/rendersurvey.asp?sid=bf1bbbvdppbjw56402139', '','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width=700,height=480');return false" ><b>Please take our survey</b></a></p>
 	  <p>02.19.2008 - <a href="/doc/api">API documentation</a> added to website</p>
 	  <p>02.07.2008 - With our upcoming release, Phenote will be known at <b>Phenote+</b></p>
 	  <p>02.07.2008 - <b>Developer Articles</b> - A new section was added to this website to store articles for Developers.  <a href="developer-docs/">Check it out...</a>.  You'll find it under the "Help" menu on this site.</p>
