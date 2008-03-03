@@ -32,18 +32,8 @@ public class PhenoteMainFrame extends MainFrame {
 	private int[][] dimensionInfo = { { 620, 460, 160 }, { 760, 560, 300 },
 			{ 960, 700, 400 } };
 
-	private class WindowCloser extends WindowAdapter {
-		@Override
-		public void windowClosing(WindowEvent e) {
-			GUIManager.exit(0);
-		}
-	}
-
 	public PhenoteMainFrame(String title) {
 		super(title);
-
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		addWindowListener(new WindowCloser());
 
 		try {
 
