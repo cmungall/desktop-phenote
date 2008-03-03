@@ -458,11 +458,11 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
   /** Listens for loading of new data files and clears the search filter */
   private class CharacterListChangeListener implements CharListChangeListener {
     public void newCharList(CharListChangeEvent e) {
+      updateFromNewCharacterList();
       CharacterTemplateTable.this.clearFilter();
       if (!CharacterTemplateTable.this.filteredCharacters.isEmpty()) {
         CharacterTemplateTable.this.selectionModel.setSelectionInterval(0, 0);
       }
-      updateFromNewCharacterList();
     }
   }
   

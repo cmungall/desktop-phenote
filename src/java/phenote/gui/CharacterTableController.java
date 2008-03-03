@@ -445,12 +445,12 @@ public class CharacterTableController {
 	/** Listens for loading of new data files and clears the search filter */
 	private class CharacterListChangeListener implements CharListChangeListener {
 		public void newCharList(CharListChangeEvent e) {
+      updateFromNewCharacterList();
 			CharacterTableController.this.clearFilter();
 			if (!CharacterTableController.this.filteredCharacters.isEmpty()) {
 				CharacterTableController.this.selectionModel
 						.setSelectionInterval(0, 0);
 			}
-			updateFromNewCharacterList();
 			setComponentTitleFromFilename();
 		}
 	}
