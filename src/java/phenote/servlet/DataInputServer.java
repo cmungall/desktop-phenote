@@ -61,8 +61,11 @@ public class DataInputServer {
     try {
       // Start the http server
       server.start(); // throws MultiException
-      // this doesnt return - stays in it
-      server.join();
+      // this doesnt return - stays in it, turns out this doesnt seem to be neasary
+      // as it still receives requests without - unclear what its for or even why i put
+      // it in - i suspect i was copying igb, anyways if its in it hangs, if we do need
+      // it then we need to thread it or put it after gui (which is threaded)
+      //server.join();
    }
     catch (Exception e) {
       logger.debug("http server wont start", e);
