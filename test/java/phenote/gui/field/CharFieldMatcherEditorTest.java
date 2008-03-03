@@ -70,7 +70,7 @@ public class CharFieldMatcherEditorTest {
   
   private EventList<CharacterI> getTestData() {
     final File f = new File("test/testfiles/CharFieldMatcherEditorTest.tab");
-    final CharacterListManager charManager = new CharacterListManager();
+    final CharacterListManager charManager = CharacterListManager.main();
     new LoadSaveManager(charManager).loadData(f);
     return charManager.getCharacterList().getList();
   }

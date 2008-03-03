@@ -28,6 +28,10 @@ public class CharacterListManager {
   private File currentFile; // can hold source of current character list if loaded from a file
 
 //  public CharacterListManager() {}
+  
+  private CharacterListManager() {
+    super();
+  }
 
   // default()?
   public static CharacterListManager main() {

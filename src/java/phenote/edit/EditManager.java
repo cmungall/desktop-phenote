@@ -37,7 +37,7 @@ public class EditManager {
 //     this(CharacterListManager.inst());
 //   }
   
-  public EditManager(CharacterListManager clManager) {
+  private EditManager(CharacterListManager clManager) {
     this.characterListManager = clManager;
   }
 
@@ -74,7 +74,7 @@ public class EditManager {
   public void removeCharChangeListener(CharChangeListener l) {charListeners.remove(l);}
 
   public void undo() {
-    if (!haveUndoableTransaction()) {
+    if (!hasUndoableTransaction()) {
       log().info("No transactions to undo");
       return;
     }
@@ -84,13 +84,13 @@ public class EditManager {
     transactionList.remove(getCurrentTransaction());
   }
 
-  private boolean haveUndoableTransaction() {
+  public boolean hasUndoableTransaction() {
     return !transactionList.isEmpty(); // for now - no redo
   }
 
   public TransactionI getCurrentTransaction() {
     // for now just return last one - eventually with redo do some tracking
-    if (!haveUndoableTransaction()) return null; // ex?
+    if (!hasUndoableTransaction()) return null; // ex?
     return transactionList.get(transactionList.size()-1);
   }
   

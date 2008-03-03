@@ -82,9 +82,9 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
   public CharacterTemplateController(String groupName) {
     super();
     this.representedGroup = groupName;
-    this.characterListManager = new CharacterListManager();
+    this.characterListManager = CharacterListManager.getCharListMan(this.representedGroup);
     CharacterListManager.main().addCharListChangeListener(this);
-    this.editManager = new EditManager(this.characterListManager);
+    this.editManager = EditManager.getEditManager(this.representedGroup);
     this.editManager.addCharChangeListener(this);
     this.selectionManager = new SelectionManager();
     this.sortedCharacters = new SortedList<CharacterI>(this.characterListManager.getCharacterList().getList(), new EverythingEqualComparator<CharacterI>());

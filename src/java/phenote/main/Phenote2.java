@@ -23,7 +23,7 @@ public class Phenote2 {
     }
   }
 
-    public static String getAppName() {
-	return "Phenote";
-    }
+  public static String getAppName() {
+    return "Phenote+";
+  }
 }
