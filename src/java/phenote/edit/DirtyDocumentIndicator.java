@@ -30,7 +30,7 @@ public class DirtyDocumentIndicator implements CharChangeListener, CharListChang
   
   final private static String WINDOW_MODIFIED = "windowModified";
   private boolean edited = false;
-  private static String BULLET = String.format("%c", '\u2022'); 
+  final private static String BULLET = String.format("%c", '\u2022'); 
   
   public DirtyDocumentIndicator() {
     this.registerListeners();
@@ -66,8 +66,8 @@ public class DirtyDocumentIndicator implements CharChangeListener, CharListChang
   }
   
   private boolean runDialog() {
-    String[] options = {"Save", "Cancel", "Don't Save"};
-    int result = JOptionPane.showOptionDialog(GUIManager.getManager().getFrame(), "You have unsaved changes.  Would you like to save before quitting?", "", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, options, "Save");
+    final String[] options = {"Save", "Cancel", "Don't Save"};
+    final int result = JOptionPane.showOptionDialog(GUIManager.getManager().getFrame(), "You have unsaved changes.  Would you like to save before quitting?", "", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, options, "Save");
     if (result == 0) {
       LoadSaveManager.inst().saveData(true);
       return true;
@@ -91,6 +91,8 @@ public class DirtyDocumentIndicator implements CharChangeListener, CharListChang
     for (Group group : Config.inst().getFieldGroups()) {
       editManagers.add(EditManager.getEditManager(group.getName()));
     }
+    final EditManager defaultEditManager = EditManager.inst();
+    if (!editManagers.contains(defaultEditManager)) editManagers.add(defaultEditManager);
     return editManagers;
   }
   
