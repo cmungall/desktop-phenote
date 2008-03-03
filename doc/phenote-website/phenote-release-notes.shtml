@@ -21,7 +21,51 @@
 	</div>
 
 <h1>1.5</h1>
+<h2>03.03.2008, version <a href="phenote/1.5-release/phenote.jnlp">1.5 - release</a></h2>
+<p>With the release of version 1.5, we are transitioning over to a new interface.  We will continue to support the webstart version of phenote for a couple of releases, but will ultimately switch to the standalone version that is debuting in this release.  The new 'Phenote+' will have at least the same capabilities as the original Phenote, but new components will be only added to the new interface.  Be sure to choose the proper phenote (or phenote plus) when entering bug reports</p>
+<ul>
+<li>feature: if user changes their annotations since previous save, user is prompted for resave [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1810448&group_id=76834&atid=887913">1810448</a>]</li>
+<li>feature: addition of the ProtocolEditor as a plug-in to phenote.  For more information, please see the <a href="http://users.openmicroscopy.org.uk/~ola/720x540/OMERO.ProtocolEditor-new-omero-movie.mov">Protocol Editor demo</a>.  This plugin is being developed by the folks at the <a href="http://openmicroscopy.org/">Open Microscopy Environment</a></li>
+<li>feature: Read-only fields can be configured [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1737572&group_id=76834&atid=887913">1737572</a></li>
+<li>feature: "Save" added as menu item to overwrite currently open file [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1803824&group_id=76834&atid=887913">1803824</a>].  A dot in the titlebar will disappear upon save. [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1893249&group_id=76834&atid=887913">1893249</a></li>
+<li>feature: "Open" and "Save" added as toolbar icons [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1811165&group_id=76834&atid=887913">1811165</a>]</li>
+<li>change: table manipulation actions such as "New", "Delete", and "Duplicate" have been moved to a iconic-toolbar at the top of the table window [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1824391&group_id=76834&atid=887913">1824391</a>]</li>
+<li>feature: new data types added for configuration:  boolean, ints, FILL ME IN </li>
+<li>change: all configurations have been changed to include "terminology definitions" which need to be defined for the new ontology update feature</li>
+<li>feature: A new ontology update interface has been added, similar to the mac-style software update.  The user is presented with a single window that allows them to choose some/all ontologies to update as they start the application [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1694447&group_id=76834&atid=887913">1694447</a>]</li>
+<li>bugfix: Mac-specific problem with "View" menu item names fixed [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1882256&group_id=76834&atid=887913">1882256</a>]</li>
+<li>bugfix: Term Info box used to display empty collapsible panes - these have been removed when there are no items in them [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1833088&group_id=76834&atid=887913">1833088</a>]</li>
+<li>bufgix: Phenote can now accomodate empty E/Q fields when mapping to the annotation model [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1894065&group_id=76834&atid=887913">1894065</a>]</li>
+<li>bugfix: Undo with free-text type fields was broken</li>
+</ul>
+
+<h2>01.30.2008, version <a href="phenote/1.5-beta4/phenote.jnlp">1.5 - beta4</a></h2>
+<ul>
+<li>feature: Added a scrollbar to the config chooser [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1799784&group_id=76834&atid=887913">1799784</a>]</li>
+<li>change: post-compositions are now displayed in multi-line style [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1579357&group_id=76834&atid=887913">1579357</a>]</li>
+<li>bugfix: Use term button now working again</li>
+<li>bugfix: Return/Enter key now selects first item in an auto-completion list before moving to next field [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1574780&group_id=76834&atid=887913">1574780</a>]</li>
+</ul>
+
+<h2>01.22.2008, version <a href="phenote/1.5-beta3/phenote.jnlp">1.5 - beta3</a></h2>
+
 <h2>12.20.2007, version <a href="phenote/1.5-beta2/phenote.jnlp">1.5 - beta2</a></h2>
+<ul>
+<li>feature: Solaris OS now supported</li>
+<li> feature: New look and feel with Phenote+
+  <ul>
+    <li> Ability to move different panels around to customize the user experience. [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1729114&group_id=76834&atid=887913">1729114</a>]  These panels can be "locked" by going to the Settings->Lock Docking Components menu item. [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1882110&group_id=76834&atid=887913">1882110</a>]</li>
+    <li> Panels can be "undocked" so that they can float independently around the screen</li>
+    <li>feature: Phenote can interoperate with some obo-edit components, such as the tree-like dag viewer and the graph editor. [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1822371&group_id=76834&atid=887913">1822371</a>]</li>
+  </ul>
+</li>
+<li>feature: Term info panel updated with collapsible panes.  </li>
+<li>bugfix: Sporatic bug fixed where phenote hangs after loading [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1841122&group_id=76834&atid=887913">1841122</a>]</li>
+<li>bugfix: Field name is now always shown, even if there is only one ontology configured for that field.  It used to default to the ontology name in this instance. [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1852112&group_id=76834&atid=887913">1852112</a>]</li>
+</ul>
+
+<h2>11.09.2007, version <a href="phenote/1.5-beta1/phenote.jnlp">1.5 - beta1</a></h2>
+
 	
 <h1>1.4</h1>
 
