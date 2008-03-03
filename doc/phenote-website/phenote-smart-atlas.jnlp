@@ -4,7 +4,7 @@ spec="1.0+"
 codebase="http://phenote.org/phenote/@@phenote.version@@"
 href="phenote.jnlp">
 <information>
-	<title>Phenote @@phenote.version@@</title>
+	<title>Phenote @@phenote.version@@ for SmartAtlas</title>
 	<vendor>National Center for Biomedical Ontology</vendor>
 	<icon href="/images/elephant_icon.jpg" />
 	<description>Phenote standalone app via webstart</description>
