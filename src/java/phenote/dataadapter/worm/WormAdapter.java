@@ -233,9 +233,9 @@ System.out.println("paper tag_value "+tag_value+" for postgres");
           postgres_table = "app_paper_remark"; tag_name = "Paper Remark"; String paprem_value = chr.getValueString(tag_name);
 System.out.println("paprem_value "+paprem_value+" for postgres");
 	  if ( (paprem_value != null) && (paprem_value != "") ) { insertPostgresHistVal(c, s, postgres_table, tag_value, paprem_value); }
-          postgres_table = "app_finished"; tag_name = "Finished Curating Paper"; String papfin_value = chr.getValueString(tag_name);
-System.out.println("papfin_value "+papfin_value+" for postgres");
-	  if ( (papfin_value != null) && (papfin_value != "") ) { insertPostgresHistVal(c, s, postgres_table, tag_value, papfin_value); } }
+          postgres_table = "app_curation_status"; tag_name = "Curation Status"; String papsta_value = chr.getValueString(tag_name);
+System.out.println("papsta_value "+papsta_value+" for postgres");
+	  if ( (papsta_value != null) && (papsta_value != "") ) { updateNormalField(c, s, tag_value, postgres_table, tag_name, papsta_value); } }
         postgres_table = "app_person"; tag_name = "Person"; 
         updateListField(c, s, joinkey, postgres_table, tag_name, chr);
         postgres_table = "app_laboratory"; tag_name = "Laboratory Evidence"; tag_value = chr.getValueString(tag_name);
@@ -617,9 +617,9 @@ System.out.println("papfin_value "+papfin_value+" for postgres");
         postgres_table = "app_paper_remark";
         postgres_value = queryPostgresPapAll(s, postgres_table, pap_value);
         if (postgres_value == "") { } else { c1.setValue("Paper Remark History",postgres_value); }		// assign the queried value
-        postgres_table = "app_finished";
+        postgres_table = "app_curation_status";
         postgres_value = queryPostgresPap(s, postgres_table, pap_value);
-        if (postgres_value == "") { } else { c1.setValue("Finished Curating Paper",postgres_value); } }		// assign the queried value
+        if (postgres_value == "") { } else { c1.setValue("Curation Status",postgres_value); } }			// assign the queried value
       postgres_table = "app_person"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("Person",postgres_value); }				// assign the queried value
