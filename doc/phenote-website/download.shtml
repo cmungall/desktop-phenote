@@ -15,15 +15,40 @@
 	<div class="catch_phrase">
 	</div>
 	<h2>For Users</h2>
-	<p><b><a href="http://www.phenote.org/phenote/latest/phenote.jnlp">Launch Phenote in your browser</a></b></p>
+	<h2>************Important Message*************<h2>
+	<p>For version 1.5 we will be introducing a new look and feel that we
+	call the "plus" edition.  We will
+	continue to support the old look-and-feel for a couple more versions.
+	So, if you would like to keep using the original Phenote, continue
+	here.  Otherwise, go down the page to the section called "Phenote+"</p> 
 	<p> You can run phenote directly from your web browser without a separate installation by selecting one of the following links:</p>
 	<ul>
-	<li><strong>Beta release: <a href="http://www.phenote.org/phenote/1.5-beta2/phenote.jnlp">1.5 beta2</a></strong></li>
+	<li><strong>Beta release: <a href="http://www.phenote.org/phenote/1.5/phenote.jnlp">1.5 </a></strong></li>
 	<li><strong>Stable release: <a href="http://www.phenote.org/phenote/1.4/phenote.jnlp">1.4</a> </strong></li>
 	<li><a href="http://www.phenote.org/phenote/phenote.html">Older releases</a></li>
 	</ul>
 	<p> You may be prompted to sign a certificate and allow the download.  This will take a few minutes the first time you do this.
 	</p>
+	<h2><strong>Phenote+ beta(v1.5)</strong></h2>
+	<ul>
+	<li>Webstart: <a
+	href="http://www.phenote.org/phenote/1.5/phenote-plus.jnlp">Phenote+
+	webstart</a></li>
+	<li>MacOSX: 
+	  <ul>
+	  <li><a
+	  href="http://www.phenote.org/phenote/1.5/phenote1.5.mac.dmg">Download
+	  the disc image</a>.  This should self-extract.  You should see an
+	  icon for the "drive" that the Phenote+ aplication is on.</li>
+	  <li>Drag the Phenote application icon to your "Applications" folder
+	  (or your favorite spot on your hard drive</li>
+	  <li>That's it!  Double-click the icon and its ready to run.</li>
+	  </ul>
+	</li>
+	<li>Windows: Installer coming soon!</li>
+	<li>Linux/Solaris: Installer coming soon! </li>
+	</ul>
+
 	<h2>For Developers</h2>
 	Check out our special documentation for running either on the 	<a href="developer-docs/getting-source-code-in-eclipse.shtml">command line or in Eclipse</a> 
 
@@ -49,32 +74,27 @@
       <div id="sidebar_content">
 
 	<div class="content_box_head_blue">
-	  Recently added features, version 1.4
+	  Recently added features, Phenote+ version 1.5
 	</div>
 
 	<div class="content_box_blue">
-	 <b>feature</b>: Loading splash more informative about what's going on behind-the-scenes such as which ontologies are loading, if they are being updated, etc.<br />
-	<b>feature</b>: obo edit annotation model can now be optionally configured for backend, which will allow for more sophisticated data to be captured (like comparisons)<br />
-	<b>feature</b>: Error for obo parse failures to info panel <br />
-	<b>feature</b>: Delimited tab adapter uses column headings to map to table, rather than ordering <br />
-	<b>feature</b>: Autocompletion optimized with threading, cancels stale requests (min-comp-chars now pase) <br />
-	<b>feature</b>: Date created automatically added into data (under the hood) <br />
-	<b>feature</b>: If arrow hit with empty input then gets &amp; displays all terms (used to inefficiently pre-load) <br />
-	<b>feature</b>: Can sort completion list by ID, needed for zfin stages<br />
-	<b>feature</b>: Table preserves user ordering of columns, in addition to column widths.<br />
-	<b>feature</b>: Filter search field allows user to narrow down displayed data rows via matching text.<br />
-	<b>feature</b>: See actual value in input field when multiple rows are selected and have the same value.<br />
-	<b>feature</b>: Copy all taxon names in specimen list as an unresolved Newick tree (for PhenoMap/NESCent)<br />
-	<b>feature</b>: Automatically open specimen list and phylogenetic tree files when opening data file (for PhenoMap/NESCent)<br />
-	<b>change</b>: Moved test suites in with source to work with eclipse<br />
-	<b>change</b>: Took a lot of obos out of webstart jar - less bulky - as they get automatically downloaded<br />
-	<b>change</b>: Phenote now follows standard log4j configuration conventions.  Pass a custom log configuration to Phenote via the classpath or the system propery "log4j.configuration".<br />
-	<b>bugfix</b>: Terms not found are no longer dropped, a dangler is created, and error msg to info, show up in red<br />
-	<b>bugfix</b>: if log conf fails use backup default<br />
-	<b>bugfix</b>: Input fields now commit changes with either Return or Tab<br />
-	<b>bugfix</b>: Native lib is loaded properly for Mac interface on webstart, allowing traversal of aliases in file dialog, as well as user sidebar items in file dialog<br />
-	<b>bugfix</b>: Noncontiguous row selection works now on Mac<br />
-</ul>
+	<b>feature:</b> New look and feel with Phenote+ <br />
+	<ul>
+	  <li> Ability to move different panels around to customize the user experience. [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1729114&group_id=76834&atid=887913">1729114</a>]  These panels can be "locked" by going to the Settings->Lock Docking Components menu item. [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1882110&group_id=76834&atid=887913">1882110</a>]</li>
+	  <li> Panels can be "undocked" so that they can float independently around the screen</li>
+	  <li>Phenote can interoperate with some obo-edit components, such as the tree-like dag viewer and the graph editor. [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1822371&group_id=76834&atid=887913">1822371</a>]</li>
+	</ul>
+	<b>feature</b>: New ontology-update window shows the user in one place
+	which ontologies need updating.  <br />
+	<b>feature</b>: if user changes their annotations since previous save, user is prompted for resave [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1810448&group_id=76834&atid=887913">1810448</a>] <br />
+	<b>feature:</b> "Save" added as menu item to overwrite currently open file [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1803824&group_id=76834&atid=887913">1803824</a>].  A dot in the titlebar will disappear upon save. [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1893249&group_id=76834&atid=887913">1893249</a>] <br />
+	<b>feature:</b> Solaris OS now supported for webstart versions <br />
+	<b>feature:</b> addition of the ProtocolEditor as a plug-in to phenote.  For more information, please see the <a href="http://users.openmicroscopy.org.uk/~ola/720x540/OMERO.ProtocolEditor-new-omero-movie.mov">Protocol Editor demo</a>.  This plugin is being developed by the folks at the <a href="http://openmicroscopy.org/">Open Microscopy Environment</a><br />
+	<b>feature:</b> Term info panel updated with collapsible panes.<br />
+	<b>change:</b> post-compositions are now displayed in multi-line style [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1579357&group_id=76834&atid=887913">1579357</a>]<br />
+	<b>feature:</b>Lookup abstracts from PubMed, if Pub field is configured.This can be tried in the "demo" configuration. <br />
+	<b>bugfix:</b> Field name is now always shown, even if there is only one ontology configured for that field.  It used to default to the ontology name in this instance. [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1852112&group_id=76834&atid=887913">1852112</a>]<br />
+	<b>bufgix:</b> Phenote can now accomodate empty E/Q fields when mapping to the annotation model [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1894065&group_id=76834&atid=887913">1894065</a>]<br />
 	</div>
       </div>
     </div>

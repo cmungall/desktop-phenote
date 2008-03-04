@@ -29,6 +29,7 @@
 <li>feature: Read-only fields can be configured [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1737572&group_id=76834&atid=887913">1737572</a></li>
 <li>feature: "Save" added as menu item to overwrite currently open file [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1803824&group_id=76834&atid=887913">1803824</a>].  A dot in the titlebar will disappear upon save. [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1893249&group_id=76834&atid=887913">1893249</a></li>
 <li>feature: "Open" and "Save" added as toolbar icons [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1811165&group_id=76834&atid=887913">1811165</a>]</li>
+<li>feature: User can lookup abstracts from PubMed or OMIM for "Pub" fields configured with the PubMedDataAdapter.  These can be seen in the "ncbo-test" and "demo" configurations</li>  
 <li>change: table manipulation actions such as "New", "Delete", and "Duplicate" have been moved to a iconic-toolbar at the top of the table window [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1824391&group_id=76834&atid=887913">1824391</a>]</li>
 <li>feature: new data types added for configuration:  boolean, ints, FILL ME IN </li>
 <li>change: all configurations have been changed to include "terminology definitions" which need to be defined for the new ontology update feature</li>
