@@ -57,6 +57,9 @@ href="phenote.jnlp">
 	<jar href="jars/saaj.jar"/>
 	<jar href="jars/jaxrpc.jar"/>
 	<jar href="jars/wsdl4j-1.5.1.jar"/>
+	<jar  href="jars/axis.jar"/>
+	<jar  href="jars/owlapi-api.jar"/>
+
 
   <!-- jars not needed for webstart(?) axis, commons-beanutils-1.6,  commons-discovery,
       commons-lang, eutils,jaxrpc, jdom, jebl, jhindexer, jlfgr, jnlp, jsp, jsr
