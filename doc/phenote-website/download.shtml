@@ -15,13 +15,13 @@
 	<div class="catch_phrase">
 	</div>
 	<h2>For Users</h2>
-	<h2>************Important Message*************<h2>
+	<h2>************Important Message*************</h2>
 	<p>For version 1.5 we will be introducing a new look and feel that we
 	call the "plus" edition.  We will
 	continue to support the old look-and-feel for a couple more versions.
 	So, if you would like to keep using the original Phenote, continue
 	here.  Otherwise, go down the page to the section called "Phenote+"</p> 
-	<p> You can run phenote directly from your web browser without a separate installation by selecting one of the following links:</p>
+	<p> You can run phenote directly from your web browser via "webstart" without a separate installation by selecting one of the following links:</p>
 	<ul>
 	<li><strong>Beta release: <a href="http://www.phenote.org/phenote/1.5/phenote.jnlp">1.5 </a></strong></li>
 	<li><strong>Stable release: <a href="http://www.phenote.org/phenote/1.4/phenote.jnlp">1.4</a> </strong></li>
@@ -29,21 +29,21 @@
 	</ul>
 	<p> You may be prompted to sign a certificate and allow the download.  This will take a few minutes the first time you do this.
 	</p>
-	<h2><strong>Phenote+ beta(v1.5)</strong></h2>
+	<h2><strong>Phenote+ (beta) v1.5</strong></h2>
 	<ul>
 	<li>Webstart: <a
 	href="http://www.phenote.org/phenote/1.5/phenote-plus.jnlp">Phenote+
 	webstart</a></li>
 	<li>MacOSX: 
-	  <ul>
+	  <ol>
 	  <li><a
 	  href="http://www.phenote.org/phenote/1.5/phenote1.5.mac.dmg">Download
 	  the disc image</a>.  This should self-extract.  You should see an
-	  icon for the "drive" that the Phenote+ aplication is on.</li>
+	  icon for the "drive" that the Phenote+ application is on.</li>
 	  <li>Drag the Phenote application icon to your "Applications" folder
-	  (or your favorite spot on your hard drive</li>
+	  (or your favorite spot on your hard drive)</li>
 	  <li>That's it!  Double-click the icon and its ready to run.</li>
-	  </ul>
+	  </ol>
 	</li>
 	<li>Windows: Installer coming soon!</li>
 	<li>Linux/Solaris: Installer coming soon! </li>
@@ -95,6 +95,7 @@
 	<b>feature:</b>Lookup abstracts from PubMed, if Pub field is configured.This can be tried in the "demo" configuration. <br />
 	<b>bugfix:</b> Field name is now always shown, even if there is only one ontology configured for that field.  It used to default to the ontology name in this instance. [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1852112&group_id=76834&atid=887913">1852112</a>]<br />
 	<b>bufgix:</b> Phenote can now accomodate empty E/Q fields when mapping to the annotation model [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1894065&group_id=76834&atid=887913">1894065</a>]<br />
+	<b>See the <a href="phenote-release-notes.shtml">phenote release notes</a> for more details...<br />
 	</div>
       </div>
     </div>
