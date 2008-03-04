@@ -79,6 +79,7 @@ public class WormAdapter implements QueryableDataAdapterI {
         postgres_table = "app_anat_term"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "app_entity"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "app_quality"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_suggested"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "app_lifestage"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "app_nature"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "app_func"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
@@ -258,6 +259,8 @@ System.out.println("papfin_value "+papfin_value+" for postgres");
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_quality"; tag_name = "Quality"; tag_value = "";
         if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_suggested"; tag_name = "Suggested"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_lifestage"; tag_name = "Life Stage"; 
         updateListField(c, s, joinkey, postgres_table, tag_name, chr);
@@ -525,6 +528,9 @@ System.out.println("papfin_value "+papfin_value+" for postgres");
       postgres_table = "app_quality"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("Quality",postgres_value); }					// assign the queried value
+      postgres_table = "app_suggested"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+      if (postgres_value == "") { } else { c1.setValue("Suggested",postgres_value); }					// assign the queried value
       postgres_table = "app_lifestage"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
 //System.out.println("queryied lifestage to "+postgres_value+" END");
