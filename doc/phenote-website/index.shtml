@@ -60,7 +60,7 @@
 
 	  <p class="quick_link">
 	    <img src="images/star.gif" alt=""  class="icon_green"/>
-	    <a href="http://www.phenote.org/phenote/1.4/phenote.jnlp"
+	    <a href="http://www.phenote.org/phenote/1.5/phenote.jnlp"
 	       title="Lauch Phenote via Webstart">
 		Launch Phenote via Webstart
 	    </a>
@@ -134,8 +134,8 @@
 	  <!--No news is good news!-->
 	  
 	  <!-- Do not destry the following event template -->
-	  <p>03.03.2008 - NEW<a href="http://www.phenote.org/phenote/1.5/phenote.jnlp">Phenote webstart release 1.5</a></p>
-	  <p>03.03.2008 - Silent release of <a href="http://www.phenote.org/download.shtml">Phenote+ for Mac OSX</a> </p>
+	  <p>03.04.2008 - NEW<a href="http://www.phenote.org/phenote/1.5/phenote.jnlp">Phenote webstart release 1.5</a></p>
+	  <p>03.04.2008 - Release of <a href="http://www.phenote.org/download.shtml">Phenote+</a> with platform-specific installers.</p>
 	  <p>03.01.2008 - We'd like to know more about what kind of computer you are using.  <a href="http://FreeOnlineSurveys.com/rendersurvey.asp?sid=bf1bbbvdppbjw56402139" onClick="window.open('http://FreeOnlineSurveys.com/rendersurvey.asp?sid=bf1bbbvdppbjw56402139', '','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width=700,height=480');return false" ><b>Please take our survey</b></a></p>
 	  <p>02.19.2008 - <a href="/doc/api">API documentation</a> added to website</p>
 	  <p>02.07.2008 - With our upcoming release, Phenote will be known at <b>Phenote+</b></p>

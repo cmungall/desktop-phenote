@@ -16,8 +16,12 @@
 	Phenote Screenshots
 	</div>
 	<div class="clearall"></div>
-	<p><img src="http://www.phenote.org/images/phenote_screenshot.png" title="Phenote in action" alt="Phenote screenshot" width="100%"/></p>
-      </div>
+	<p>Introducing Phenote+</p>
+	<p><img src="http://www.phenote.org/images/screenshots/phenote-plus.png" title="Phenote Plus" alt="Phenote screenshot" width="100%"/></p>
+	<p>Original Phenote Screenshot</p>
+	<p><img src="http://www.phenote.org/images/screenshots/phenote_screenshot.png" title="Phenote in action" alt="Phenote screenshot" width="100%"/></p>
+
+	</div>
     </div>
 
     <!--#include virtual="ssi/footer.html" -->
