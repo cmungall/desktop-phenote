@@ -680,7 +680,7 @@ where xsd files are (conf) -->
 		<mkdir dir="${release_path}" />
 		<taskdef name="install4j" classname="com.install4j.Install4JTask" classpath="${install4j_ant_library_path}" />
 		<!-- Not sure how to get version # automatically.  Hardcoding for now. -->
-		<condition property="install4j_formatted_version_number" value="1.5-beta4" else="1.5-beta4">
+		<condition property="install4j_formatted_version_number" value="test" else="${phenote.version}">
 			<isset property="beta_version" />
 		</condition>
 		<echo message="Phenote version for installer is ${install4j_formatted_version_number}" />
@@ -688,6 +688,13 @@ where xsd files are (conf) -->
 	</target>
 
 	<target name="installers" depends="jar, dist-init, -install4j_installers" description="Build installers">
+	</target>
+
+	<target name="copy-installers" depends="installers" description="This will copy the installers over to the website, same location at webstart files">
+	  <mkdir dir="phenote-webstart/${phenote.version}"/>
+	  <copy todir="phenote-webstart/${phenote.version}">
+	    <fileset file="${release_path}/*"/>
+	  </copy>
 	</target>
 
   <target name="echo-phenote-version">
