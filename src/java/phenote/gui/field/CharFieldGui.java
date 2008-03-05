@@ -1,5 +1,6 @@
 package phenote.gui.field;
 
+import java.io.FileNotFoundException;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -40,6 +41,7 @@ import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
 import phenote.gui.actions.ResponderChainAction;
 import phenote.gui.selection.SelectionManager;
+import phenote.util.FileUtil;
 import ca.odell.glazedlists.event.ListEvent;
 import ca.odell.glazedlists.event.ListEventListener;
 import ca.odell.glazedlists.swing.EventSelectionModel;
@@ -390,7 +392,12 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
   		//add the button if there is a match for the particular adapter
   		for (NCBIDataAdapterI nda : naList) {
   			if (nda.isFieldQueryable(getCharField().getName())) {
-  				retrieveButton = new JButton(new ImageIcon("images/ncbi_icon.png"));  //would like this to be an action
+			    try {
+				ImageIcon icon = new ImageIcon(FileUtil.findUrl("images/ncbi_icon.png"));
+			        retrieveButton = new JButton(icon);  //would like this to be an action
+			    } catch (FileNotFoundException ex) { 
+			    retrieveButton = new JButton();
+			    } 
   				retrieveButton.setPreferredSize(new Dimension(35,35));
   				retrieveButton.addActionListener(new NCBIActionListener(nda));
   				retrieveButton.setToolTipText("Query NCBI for matching ids");
