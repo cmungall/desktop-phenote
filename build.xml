@@ -25,6 +25,7 @@
     <property name="web-jars" value="${env.PHENOTE_WEB_JAR_DIR}"/>
     <property name="web.xml-dir" value="${env.PHENOTE_WEB_XML_DIR}"/>
     <property name="data_transfer" value="src/web/WEB-INF/data_transfer"/>
+    <property name="release_path" location="releases" />
 
     <property name="lib" value="jars"/>
     <property name="jarfile" value="jars/phenote.jar"/>
@@ -33,7 +34,7 @@
     <property name="conf" value="conf"/>
     <property name="images" value="images"/>
 	<property name="dist" value="dist"/>
-<property name="icon" value="images/phenote_app.icns"/>
+	<property name="icon" value="images/phenote_app.icns"/>
 	<property name="build-lib" value="build-lib"/>
 	
 	<property name="main-class" value="phenote.main.Phenote2"/>
@@ -55,6 +56,11 @@
     <target name="init" depends="src_resources">
         <mkdir dir="${classfiles}"/>
     </target>
+
+    <!-- install4j specific properties; these can be deleted if you don't intend to create install4j installers -->
+    <property name="install4j_installation_path" location="/Applications/install4j 4" />
+    <property name="install4j_ant_library_path" location="${install4j_installation_path}/bin/ant.jar" />
+    <property name="install4j_api_library_path" location="${install4j_installation_path}/resource/i4jruntime.jar" />
 
     <!-- dependency information -->
     <property name="bbop_dest" location="../BBOP" />
@@ -104,9 +110,18 @@ jars/phenote.jar if it exists. -->
         </fileset>
     </path>
 
+	<fileset dir="${src}" id="resource_files">
+		<include name="**/resources/**" />
+	</fileset>
+	<target name="resources">
+		<copy todir="${classfiles}">
+			<fileset refid="resource_files" />
+		</copy>
+	</target>
+
     <!-- The compile target runs javac on all the java files, and saves
 them into  the classfiles directory. excludes="test/**"  -->
-    <target name="compile" depends="init">
+    <target name="compile" depends="init,resources">
         <javac srcdir="${src}" destdir="${classfiles}" debug="yes" excludes="test/**">
             <classpath refid="project.classpath3"/>
         </javac>
@@ -640,9 +655,43 @@ where xsd files are (conf) -->
 	
 	<target name="dist" depends="dist-mac, dist-win"/>
 
+	<!-- For building installers using install4j (uses config file install4j_config.install4j) -->
+	<!-- Say "ant installers" -->
+	<target name="-check_install4j_available" if="install4j_installation_path">
+		<condition property="install4j_available">
+			<and>
+				<available file="${install4j_ant_library_path}" />
+				<available file="${install4j_api_library_path}" />
+			</and>
+		</condition>
+	</target>
+
+	<target name="-install4j_custom_actions" depends="-check_install4j_available" if="install4j_available">
+		<javac srcdir="src" destdir="classfiles" includes="**/installer/**" debug="true" debuglevel="lines,vars,source">
+			<classpath>
+				<path refid="classpath" />
+				<pathelement location="${install4j_api_library_path}" />
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="-install4j_installers"
+				depends="-check_install4j_available, -install4j_custom_actions, compile, echo-phenote-version" if="install4j_available">
+		<mkdir dir="${release_path}" />
+		<taskdef name="install4j" classname="com.install4j.Install4JTask" classpath="${install4j_ant_library_path}" />
+		<!-- Not sure how to get version # automatically.  Hardcoding for now. -->
+		<condition property="install4j_formatted_version_number" value="1.5-beta4" else="1.5-beta4">
+			<isset property="beta_version" />
+		</condition>
+		<echo message="Phenote version for installer is ${install4j_formatted_version_number}" />
+		<install4j projectfile="install4j_config.install4j" release="${install4j_formatted_version_number}" />
+	</target>
+
+	<target name="installers" depends="jar, dist-init, -install4j_installers" description="Build installers">
+	</target>
 
   <target name="echo-phenote-version">
-    <echo message="${phenote.version}" />
+    <echo message="Version: ${phenote.version}" />
   </target>
 
 </project>
