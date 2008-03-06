@@ -13,6 +13,35 @@ import phenote.dataadapter.Status;
 
 public class WormConstraint extends AbstractCommitConstraint {
 
+  
+  @Override
+  /** Overrides AbsCC to check deletes */
+  public ConstraintStatus checkCommit() {
+    boolean warning = false;
+    String message = "";
+
+    // Check for DELETES
+    List<CharacterI> l = EditManager.inst().getDeletedAnnotations();
+    try {
+      for (CharacterI echr : l) {
+        String joinkey = echr.getValueString("PgdbId");
+        message += "Deleting character for "+joinkey+".  ";  warning = true;	// give warning for any deleted characters
+      }
+    } catch (Exception e) {
+      System.out.println("Could not delete character: " + e);
+    }
+    ConstraintStatus statusBundle = ConstraintStatus.makeOK();
+    if (warning) 
+      statusBundle.addStatusChild(new ConstraintStatus(Status.WARNING,message));
+   
+    // CHECK EACH CHAR
+    // from abstract - calls checkCharCommit for each char
+    ConstraintStatus charListStatus = checkEachChar();
+    statusBundle.addStatusChild(charListStatus);
+
+    return statusBundle;
+  }
+
   /** do constraint check for commit time on a character
    return ConstraintStatus indication if constraint passed and error msg */
   protected ConstraintStatus checkCharCommit(CharacterI chr) {
@@ -29,18 +58,10 @@ public class WormConstraint extends AbstractCommitConstraint {
       if ( (pgdbid == null) || (pgdbid == "") ) { 
         String allele = chr.getValueString("Object Name");
         message += "New character for "+allele+".  ";  warning = true;	// give warning for any new characters
-        pgdbid = "with new value for "+allele; }
-
-      List<CharacterI> l = EditManager.inst().getDeletedAnnotations();
-      try {
-        for (CharacterI echr : l) {
-          String joinkey = echr.getValueString("PgdbId");
-           message += "Deleting character for "+joinkey+".  ";  warning = true;	// give warning for any deleted characters
-        }
-      } catch (Exception e) {
-        System.out.println("Could not delete character: " + e);
+        pgdbid = "with new value for "+allele;
       }
 
+      
 
   
         

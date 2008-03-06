@@ -15,7 +15,10 @@ public abstract class AbstractCommitConstraint implements Constraint {
    return ConstraintStatus indication if constraint passed and error msg
    should only be called if isCommitConstraint is true */
   public ConstraintStatus checkCommit() {
-
+    return checkEachChar();
+  }
+  
+  protected ConstraintStatus checkEachChar() {
     ConstraintStatus statusBundle = ConstraintStatus.makeOK();
 
     List<CharacterI> list = CharacterListManager.inst().getCharacterList().getList();

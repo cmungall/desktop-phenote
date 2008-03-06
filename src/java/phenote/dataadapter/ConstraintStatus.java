@@ -86,7 +86,7 @@ public class ConstraintStatus {
 
   public String getWarningMessage() { return getMessage(Status.WARNING); }
 
-  void addStatusChild(ConstraintStatus kid) {
+  public void addStatusChild(ConstraintStatus kid) {
     getKids().add(kid);
   }
 
