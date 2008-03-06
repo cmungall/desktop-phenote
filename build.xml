@@ -207,6 +207,16 @@ them into  the classfiles directory. excludes="test/**"  -->
         </classpath>
      </java>
   </target>
+  <target name="run-jar-plus" depends="jar">
+     <java classname="phenote.main.Phenote2" fork="yes" jvmargs="-Xmx300M">
+         <!-- arg value="-c configfilehereventually"/ -->
+        <classpath>
+          <fileset dir="${lib}">
+             <include name="*.jar"/>
+          </fileset>
+        </classpath>
+     </java>
+  </target>
 
     <target name="run-conf" depends="compile">
         <java classname="phenote.main.Phenote" fork="yes" jvmargs="-Xmx200M">

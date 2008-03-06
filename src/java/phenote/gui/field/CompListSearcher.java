@@ -234,7 +234,9 @@ public class CompListSearcher {
       // if input is blank then add all terms (list all terms on empty input)
       // matches records the kind of hit in CompTerm
       if (ct.matches(input, searchParams)) {
-        searchTermList.addTerm(ct);
+        // a term can have multiple synonym hits, so ct makes new comp terms
+        // for each syn hit, getMatches returns list
+        searchTermList.addTerm(ct); //.getMatchList());
       }
 
     }

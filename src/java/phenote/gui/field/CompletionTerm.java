@@ -1,6 +1,8 @@
 package phenote.gui.field;
 // completion package?
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.obo.datamodel.OBOClass;
@@ -23,6 +25,9 @@ public class CompletionTerm {
   private String ontol;
   // Need to track the active gui field for use term in termInfo
   private String field;
+  /** A term can have more than one synonym match, all matches get their owm
+      comp term and are stored in matchList */
+  private List<CompletionTerm> matchList;
 
   CompletionTerm(OBOClass term) {
     this.term = term;
@@ -130,6 +135,21 @@ public class CompletionTerm {
       }
     }
     return false;
+  }
+
+  /** more than one syn is matching, make new comp term for it */
+  private void addMatch(String synonym) {
+
+  }
+
+  private void addMatch(CompletionTerm term) {
+    // size 1 because majority will only have 1 match, 2?
+    if (matchList==null) matchList = new ArrayList<CompletionTerm>(1);
+    matchList.add(term);
+  }
+  
+  List<CompletionTerm> getMatchList() {
+    return matchList;
   }
 
   private boolean isBlank(String s) { return s == null || s.equals(""); }
