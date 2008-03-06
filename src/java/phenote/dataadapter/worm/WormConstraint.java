@@ -3,6 +3,8 @@ package phenote.dataadapter.worm;
 import java.util.List;
 
 import phenote.datamodel.CharacterI;
+import phenote.edit.EditManager;
+
 
 import phenote.dataadapter.AbstractCommitConstraint;
 import phenote.dataadapter.ConstraintStatus;
@@ -28,6 +30,18 @@ public class WormConstraint extends AbstractCommitConstraint {
         String allele = chr.getValueString("Object Name");
         message += "New character for "+allele+".  ";  warning = true;	// give warning for any new characters
         pgdbid = "with new value for "+allele; }
+
+      List<CharacterI> l = EditManager.inst().getDeletedAnnotations();
+      try {
+        for (CharacterI echr : l) {
+          String joinkey = echr.getValueString("PgdbId");
+           message += "Deleting character for "+joinkey+".  ";  warning = true;	// give warning for any deleted characters
+        }
+      } catch (Exception e) {
+        System.out.println("Could not delete character: " + e);
+      }
+
+
   
         
       if (chr.hasValue("NBP")) { 
