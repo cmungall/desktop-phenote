@@ -23,39 +23,40 @@ public class WormConstraint extends AbstractCommitConstraint {
 
 
     try {
-    String pgdbid = chr.getValueString("PgdbId");
-    if ( (pgdbid == null) || (pgdbid == "") ) { 
-      String allele = chr.getValueString("Object Name");
-      pgdbid = "with new value for "+allele; }
+      String pgdbid = chr.getValueString("PgdbId");
+      if ( (pgdbid == null) || (pgdbid == "") ) { 
+        String allele = chr.getValueString("Object Name");
+        message += "New character for "+allele+".  ";  warning = true;	// give warning for any new characters
+        pgdbid = "with new value for "+allele; }
+  
+        
+      if (chr.hasValue("NBP")) { 
+          return ConstraintStatus.makeOK(); }
+        else { 
+          message += "Character "+pgdbid+" has no NBP.  "; }
+  
+      if (chr.hasValue("Phenotype")) { } else { 
+        flagBad++;
+        message += "Character "+pgdbid+" has no Phenotype Term.  "; }
+  
+      if (chr.hasValue("Curator")) { } else { 
+        flagBad++;
+        message += "Character "+pgdbid+" has no Curator.  "; }
+  
+      if ( (chr.hasValue("Person")) || (chr.hasValue("Pub")) ) { } else { 
+        flagBad++;
+        message += "Character "+pgdbid+" has neither Person nor Paper.  "; }
+  
+      if (flagBad > 0) { warning = true; }
 
-      
-    if (chr.hasValue("NBP")) { 
-        return ConstraintStatus.makeOK(); }
-      else { 
-       message += "Character "+pgdbid+" has no NBP.  "; }
 
-    if (chr.hasValue("Phenotype")) { } else { 
-      flagBad++;
-      message += "Character "+pgdbid+" has no Phenotype Term.  "; }
-
-    if (chr.hasValue("Curator")) { } else { 
-      flagBad++;
-      message += "Character "+pgdbid+" has no Curator.  "; }
-
-    if ( (chr.hasValue("Person")) || (chr.hasValue("Pub")) ) { } else { 
-      flagBad++;
-      message += "Character "+pgdbid+" has neither Person nor Paper.  "; }
-
-    if (flagBad > 0) { warning = true; }
-
-
-//    if (chr.hasValue("NBP")) { } else { 
-//      warning = true;
-//      message += "Character has no NBP for char: "+chr; }
-//       if (chr.hasValue("Object Name")) { } else { 
-//         warning = true;
-//         message += "Character has no Object Name"; }
-// 
+//      if (chr.hasValue("NBP")) { } else { 
+//        warning = true;
+//        message += "Character has no NBP for char: "+chr; }
+//         if (chr.hasValue("Object Name")) { } else { 
+//           warning = true;
+//           message += "Character has no Object Name"; }
+//      
     // get fields ya need from chr
     // chr.hasValue("NBP")
       // ...
