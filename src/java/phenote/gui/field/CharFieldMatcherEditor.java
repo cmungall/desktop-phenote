@@ -197,7 +197,7 @@ public class CharFieldMatcherEditor extends AbstractMatcherEditor<CharacterI> {
     this.inheritModeRadioButton.setSelected(this.filterMode.equals(Mode.INHERIT));
     this.inputFieldContainer.removeAll();
     for (AbstractButton button : Collections.list(modeRadioButton.getElements())) {
-      button.setEnabled(this.editedCharField.isTerm());
+      button.setVisible(this.editedCharField.isTerm());
     }
     if (this.editedCharField.isTerm()) {
       this.inputFieldContainer.add(this.ontologyInputField.getJComboBox());
