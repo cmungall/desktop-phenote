@@ -65,7 +65,7 @@ href="phenote.jnlp">
 	<jar  href="jars/ols-client.jar"/>
 	<jar  href="jars/wsdl4j-1.5.1.jar"/>
 	<jar  href="jars/owlapi-api.jar"/>
-  jar   href="jars/piccolo.jar"/>
+  <jar   href="jars/piccolo.jar"/>
 
 
 
