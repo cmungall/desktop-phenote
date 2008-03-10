@@ -2,9 +2,9 @@
 <jnlp
 spec="1.0+"
 codebase="http://phenote.org/phenote/@@phenote.version@@"
-href="phenote.jnlp">
+href="phenote-plus.jnlp">
 <information>
-	<title>Phenote @@phenote.version@@</title>
+	<title>Phenote+ @@phenote.version@@</title>
 	<vendor>National Center for Biomedical Ontology</vendor>
 	<icon href="/images/elephant_icon.jpg" />
 	<description>Phenote standalone app via webstart</description>
@@ -65,7 +65,7 @@ href="phenote.jnlp">
 	<jar  href="jars/ols-client.jar"/>
 	<jar  href="jars/wsdl4j-1.5.1.jar"/>
 	<jar  href="jars/owlapi-api.jar"/>
-  <jar   href="jars/piccolo.jar"/>
+  <jar  href="jars/piccolo.jar"/>
 
 
 
