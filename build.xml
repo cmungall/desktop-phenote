@@ -575,14 +575,20 @@ where xsd files are (conf) -->
       <copy todir="phenote-webstart/latest">
         <fileset file="doc/phenote-website/*.jnlp"/>
       </copy>
-      <replace dir="phenote-webstart/latest" token="@@phenote.version@@" value="${phenote.version}"/>
+      <replace dir="phenote-webstart/latest" token="@@phenote.version@@"
+                value="${phenote.version}" >
+        <include name="*.jnlp" />
+      </replace>
     </target>
 
     <target name="copy-version-jnlps">
       <copy todir="phenote-webstart/${phenote.version}">
         <fileset file="doc/phenote-website/*.jnlp"/>
       </copy>
-      <replace dir="phenote-webstart/${phenote.version}" token="@@phenote.version@@" value="${phenote.version}"/>
+      <replace dir="phenote-webstart/${phenote.version}" token="@@phenote.version@@"
+                value="${phenote.version}" >
+        <include name="*.jnlp" />
+      </replace>
     </target>    
 
 
