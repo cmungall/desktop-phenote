@@ -4,6 +4,7 @@ spec="1.0+"
 codebase="http://phenote.org/phenote/@@phenote.version@@"
 href="phenote-plus.jnlp">
 <information>
+  <!-- phenote.version set by ant -Dphenote.version=".." copy-version-jnlps -->
 	<title>Phenote+ @@phenote.version@@</title>
 	<vendor>National Center for Biomedical Ontology</vendor>
 	<icon href="/images/elephant_icon.jpg" />
