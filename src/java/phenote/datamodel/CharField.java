@@ -192,6 +192,8 @@ public class CharField {
     return type == Type.READ_ONLY; 
   }
 
+  public boolean isAutoAnnotId() { return type == Type.AUTO_ANNOT_ID; }
+
   /** return true if holds a list of CharFieldValues, false if just 1 char field
       value */
   public boolean isList() {

@@ -378,7 +378,7 @@ public class CharFieldValue implements Cloneable {
       subject = s; rel = r; object = o;
     }
     public String toString() {
-      return rel+"^("+object+")"; // for now --> fix this!
+      return rel.getName()+"^("+object+")"; // for now --> fix this!
     }
   }
 

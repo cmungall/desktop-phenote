@@ -262,6 +262,7 @@
             <xs:enumeration value="ID"/>
             <xs:enumeration value="DATE"/>
             <xs:enumeration value="COMPARISON"/>
+            <xs:enumeration value="AUTO_ANNOT_ID"/>
             <xs:enumeration value="READ_ONLY"/>
             <xs:enumeration value="free_text"/>
           </xs:restriction>

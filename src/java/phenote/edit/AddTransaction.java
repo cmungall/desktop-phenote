@@ -36,13 +36,29 @@ public class AddTransaction implements TransactionI {
 
   public void editModel() {
     getCharList().add(addChar);
+    isUndone = false;
     // automatically put in date_created???  //try {
+    setDateCreated();
+    // if has auto id field then, create annot id
+    setAutoAnnotId();
+    // index = getCharList().indexOf(addChar); ??
+  }
+
+  private void setDateCreated() {
     CharField dateField = CharFieldManager.inst().getDateCreatedField();
     CharFieldValue v = new CharFieldValue(getDate(),addChar,dateField);
     addChar.setValue(dateField,v);
     //} catch (CharFieldException e) { System.out.println("no date_created field"); } //?
-    isUndone = false;
-    // index = getCharList().indexOf(addChar); ??
+  }
+
+  /** if char has an auto annot id then set it */
+  private void setAutoAnnotId() {
+    if (!CharFieldManager.inst().hasAutoAnnotField())
+      return;
+    CharField idField = CharFieldManager.inst().getAutoAnnotField();
+    String id = AutoAnnotIdGenerator.getNewId();
+    CharFieldValue idVal = new CharFieldValue(id,addChar,idField);
+    addChar.setValue(idField,idVal);
   }
 
   // get current date

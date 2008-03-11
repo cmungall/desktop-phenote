@@ -88,13 +88,15 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
       fieldGui = new IdFieldGui(charField);
     }
     // this assumes all read only are free text - this will prob need refactoring
-    else if (charField.isReadOnly()) {
+    else if (charField.isReadOnly() || charField.isComparison()
+             || charField.isAutoAnnotId()) {
       fieldGui = new ReadOnlyFieldGui(charField);
     } else if (charField.isPickList()) {
       fieldGui = new PickListFieldGui(charField);
     } else if (charField.isList() && charField.isCompound()) {
       fieldGui = new CharacterListFieldGui(charField);
     }
+    //else if (charField.isAutoAnnotId()){fieldGui=new AutoAnnotIdFieldGui(charField);
     else {
       FreeTextField f = new FreeTextField(charField);
       fieldGui = f;

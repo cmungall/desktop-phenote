@@ -168,6 +168,22 @@ public class CharFieldManager {
     }
   }
 
+  public boolean hasAutoAnnotField() {
+    return getAutoAnnotField() != null;
+  }
+
+  /** Returns char field that is type AUTO_ANNOT_FIELD. configged as such. means
+      field will create itself an unique id on char being created 
+      returns null if dont have one
+      there should only be one of these - though nothing restricts this at moment
+      makes no sense to have more than one. used by comparisons
+      this id is really a session ID, not meant for database */
+  public CharField getAutoAnnotField() {
+    for (CharField cf : getCharFieldList()) {
+      if (cf.isAutoAnnotId()) return cf;
+    }
+    return null;
+  }
 
   /** This is where the ontologies are in a generic fashion. A char field
       has one or more ontologies (entity char field often has more than ontology)*/
