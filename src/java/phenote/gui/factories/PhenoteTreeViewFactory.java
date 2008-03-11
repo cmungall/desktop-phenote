@@ -7,8 +7,8 @@ import java.util.List;
 import org.bbop.framework.AbstractComponentFactory;
 import org.bbop.framework.GUIComponentFactory;
 import org.bbop.framework.GUIComponentFactory.FactoryCategory;
-import org.oboedit.gui.components.DAGView;
-import org.oboedit.gui.factory.DAGViewFactory;
+import org.oboedit.gui.components.TreeView;
+import org.oboedit.gui.factory.TreeViewFactory;
 
 
 /**
@@ -18,13 +18,13 @@ import org.oboedit.gui.factory.DAGViewFactory;
  * @author Nicole
  *
  */
-public class PhenoteDAGViewFactory extends DAGViewFactory {
+public class PhenoteTreeViewFactory extends TreeViewFactory {
 	
-	public PhenoteDAGViewFactory() {
+	public PhenoteTreeViewFactory() {
 	}
 	
-	public DAGView doCreateComponent(String id) {
-		return new DAGView(id);
+	public TreeView doCreateComponent(String id) {
+		return new TreeView(id);
 	}
 
 	@Override
@@ -33,7 +33,8 @@ public class PhenoteDAGViewFactory extends DAGViewFactory {
 	}
 	
 	public String getID() {
-		return "DAG_VIEW";
+//		return "DAG_VIEW";
+		return "TREE_VIEW";
 	}
 	
 	@Override
@@ -47,6 +48,7 @@ public class PhenoteDAGViewFactory extends DAGViewFactory {
 
 	@Override
 	public String getHelpTopicID() {
-		return "The_DAG_Viewer";
+//		return "The_DAG_Viewer";
+		return "Tree_Viewer";
 	}
 }
