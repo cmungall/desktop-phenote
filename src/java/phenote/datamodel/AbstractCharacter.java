@@ -155,6 +155,13 @@ public abstract class AbstractCharacter implements CharacterI {
   public abstract void addComparison(OBOProperty relation, CharacterI relatedChar)
     throws CharacterEx;
 
+  public boolean hasAnnotId() { return getAnnotId() != null; }
+  public String getAnnotId() {
+    if (!CharFieldManager.inst().hasAutoAnnotField()) return null;
+    CharField idField = CharFieldManager.inst().getAutoAnnotField();
+    return getValueString(idField); // returns null if empty
+  }
+
   /**
    * According to the CharacterI documentation, the methods below are garbage
    */

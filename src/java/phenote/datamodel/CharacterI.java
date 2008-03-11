@@ -58,6 +58,11 @@ public interface CharacterI {
   public boolean hasValue(CharField cf);
   public boolean hasValue(String fieldName);//throws CharFieldException?
   
+  /** Returns true if there is auto generated annot ids for character/config */
+  public boolean hasAnnotId();
+  /** Returns auto generated annot id for character, returns null if dont have one */
+  public String getAnnotId();
+
   public CharacterI cloneCharacter();
   public boolean equals(CharacterI c);
   public boolean hasNoContent();

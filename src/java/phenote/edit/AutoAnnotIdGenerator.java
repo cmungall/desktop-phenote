@@ -1,6 +1,7 @@
 package phenote.edit;
 
 
+/** produces unique annot ids for session of form _:# */
 public class AutoAnnotIdGenerator {
 
   private static int currentIdNumber = 1;
@@ -10,5 +11,7 @@ public class AutoAnnotIdGenerator {
     currentIdNumber++;
     return id;
   }
+
+  /** should reset number with new data */
 
 }
