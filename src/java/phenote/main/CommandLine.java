@@ -1,18 +1,24 @@
 package phenote.main;
 
+import org.apache.log4j.Logger;
+
+import com.townleyenterprises.command.CommandOption;
+import com.townleyenterprises.command.CommandParser;
+import com.townleyenterprises.command.DefaultCommandListener;
+
 import phenote.config.Config;
 import phenote.config.ConfigException;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.phenosyntax.PhenoSyntaxFileAdapter;
 import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
 
-import com.townleyenterprises.command.CommandOption;
-import com.townleyenterprises.command.CommandParser;
-import com.townleyenterprises.command.DefaultCommandListener;
 
 /** a lot of this is copied from apollo.main.CommandLine - theres potential for 
     some generic super class but where would it go? in a jar file with one class?
-    org.bdgp? */
+    org.bdgp?
+    I think this should be refactored, currently this actually fires off config parsing
+    this should just keep all the command line state for main to query and use
+    i dont think config parsing should happen here(?) */
 public class CommandLine {
 
   /** the class that parses all the options */
@@ -58,7 +64,7 @@ public class CommandLine {
     if (args.length == 0)
       return;
     if (parser != null) {
-      System.out.println("CommandLine: WARNING multiple calls to setArgs(), ignoring");
+      logErr("CommandLine: WARNING multiple calls to setArgs(), ignoring");
       return; // ?
     }
     parser = new CommandParser("Phenote"); // help text?
@@ -159,13 +165,14 @@ public class CommandLine {
     }
   }
 
-  private void loadDefaultConfig(String m, ConfigException e) {
-    System.out.println("Yikes! Failed to "+m+" config file "+e+" gonna try "
-                       +"loading default config");
+  private void loadDefaultConfig(String cmd, ConfigException e) {
+    String m = "Yikes! Failed to "+cmd+" config file "+e+" gonna try "+"loading "+
+      "default config";
+    logErr(m);
     //e.printStackTrace();
     try { Config.inst().loadDefaultConfigFile(); }
     catch (ConfigException ce) { 
-      System.out.println("bummer - even default config fails. uh oh "+ce);
+      logErr("bummer - even default config fails. uh oh "+ce);
     }
   }
     
@@ -299,7 +306,7 @@ public class CommandLine {
       Class<?> c = Class.forName(classString);
       Object o = c.newInstance();
       if (!(o instanceof DataAdapterI)) // shouldnt happen
-        System.out.println("Class string is not data adapter "+o);
+        logErr("Class string is not data adapter "+o);
       return (DataAdapterI)o;
     } catch (Exception e) { throw new AdapterEx(e); }
   }
@@ -323,11 +330,16 @@ public class CommandLine {
   }
 
   private void error(String m) throws Exception {
-    System.out.println(m);
+    logErr(m);
     printHelp();
     throw new Exception(m);
   }
 
+  private void logErr(String m) {
+    // stdout just in case logger aint jibin
+    System.out.println(m);
+    log().error(m);
+  }
 
   // -----------------------------------------------------------------------
   // IOOptions inner class
@@ -402,5 +414,10 @@ public class CommandLine {
     //private void setDataInput(DataInput dataInput) { this.dataInput = dataInput; }
     //private DataInput getDataInput() { return this.dataInput; }
 
+  } // end of IOOptions inner class
+
+  private static Logger log() {
+    return Logger.getLogger(CommandLine.class);
   }
+
 }

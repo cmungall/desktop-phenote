@@ -59,6 +59,12 @@ public class EditManager {
     groupToEditMan.clear();
   }
 
+  /** clear out all transactions - this should be done after every writeback shouldnt it
+      should be done by default i think */
+  public void clearTransactions() {
+    transactionList.clear();
+  }
+
   // ??
   public static EditManager getEditManager(String group) {
     if (group == null) group = CharFieldManager.DEFAULT_GROUP;

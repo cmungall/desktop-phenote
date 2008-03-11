@@ -10,7 +10,7 @@ import javax.swing.filechooser.FileFilter;
 
 import phenote.config.Config;
 import phenote.datamodel.CharacterListI;
-
+import phenote.edit.EditManager;
 
 /** This was formerly just for files - adding in queryable/database data adapters */
 
@@ -177,6 +177,9 @@ public class LoadSaveManager {
     // COMMIT TO DB
     Config.inst().getQueryableDataAdapter().commit(
       characterListManager.getCharacterList());
+    
+    // after commit should clear out trans, file commit should do same!
+    EditManager.inst().clearTransactions();
     
   }
 

@@ -111,6 +111,7 @@ public class Phenote {
     initLookAndFeel();
     phenote = getPhenote();
     //phenote.splashScreenInit();
+    // command line & config should be separated? - refactor?
     phenote.doCommandLineAndConfig(args); // does config
     // have to init splash screen after config as config dictates whether to
     // show splash screen (loading screen can threadlock)
@@ -153,9 +154,7 @@ public class Phenote {
 
     // writes error events to log
     ErrorManager.inst().addErrorListener(new LogErrorListener());
-    String v = "This is Phenote version "+PhenoteVersion.versionString();
-    System.out.println(v);
-    LOG.info(v);
+    logInfo("This is Phenote version "+PhenoteVersion.versionString());
   }
 
   private static void initLookAndFeel() {
@@ -185,8 +184,8 @@ public class Phenote {
 
   public void initOntologies() {
   	//set up new interface here.
-  	String m = "Loading configuration: "+Config.inst().getConfigName();
-  	System.out.println(m);
+    String m = "Loading configuration: "+Config.inst().getConfigName();
+    logInfo(m);
 
   	if (Config.inst().getTerminologyDefs()!=null) { //only do this if defined
   		try {
@@ -224,8 +223,7 @@ public class Phenote {
     if (!commandLine.writeIsSpecified()) return;
     try {
       commandLine.getWriteAdapter().commit(getCharList());
-      System.out.println("Done writing, exiting phenote");
-      LOG.info("Done writing, exiting phenote");
+      logInfo("Done writing, exiting phenote");
     }
     catch (Exception e) { LOG.error("Failed to do write via command line "+e); }
     System.exit(0);
@@ -373,16 +371,16 @@ public class Phenote {
   private void doCommandLineAndConfig(String[] args) {
     LOG.info("Reading config file(& cmd line)");
     try { commandLine.setArgs(args); } // sets config if specified
-    catch (Exception e) { // no log yet - sys.out
-      System.out.println("Command line read failed: "+e); }//e.printStackTrace();
+    catch (Exception e) {
+      logErr("Command line read failed: "+e); }//e.printStackTrace();
     // no config set from command line use default
     if (!Config.inst().isInitialized()) { 
       try { Config.inst().loadDefaultConfigFile(); }
       catch (ConfigException ce) { 
-        System.out.println("default config has failed. "+ce+" loading flybase default");
+        logErr("default config has failed. "+ce+" loading flybase default");
         try { Config.inst().loadDefaultFlybaseConfigFile(); }
         catch (ConfigException c) { 
-          System.out.println("flybase default config has failed. We're hosed! "+c);
+          logErr("flybase default config has failed. We're hosed! "+c);
         }
       }
     }
@@ -622,6 +620,19 @@ public class Phenote {
   public static boolean isRunningOnMac() {
     return (System.getProperty("mrj.version") != null);
   }
+
+  private static void logInfo(String m) {
+    // stdout just in case logger aint jibin
+    System.out.println(m);
+    LOG.info(m);
+  }
+
+  private static void logErr(String m) {
+    // stdout just in case logger aint jibin
+    System.out.println(m); // err?
+    LOG.error(m);
+  }
+  
 
 }
 
