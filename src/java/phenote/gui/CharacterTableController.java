@@ -1,5 +1,6 @@
 package phenote.gui;
 
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Frame;
 import java.awt.Point;
@@ -9,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -16,6 +18,8 @@ import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOClass;
@@ -32,6 +36,7 @@ import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterIFactory;
 import phenote.datamodel.OboUtil;
+import phenote.datamodel.OntologyException;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
@@ -97,7 +102,8 @@ public class CharacterTableController {
 		this.getEditManager().addCharChangeListener(new CharacterChangeListener());
 		this.getCharacterListManager().addCharListChangeListener(new CharacterListChangeListener());
 		this.initializeInterface();
-    characterTable.setDefaultRenderer(Object.class, new CharTableRenderer());
+    //characterTable.setDefaultRenderer(Object.class, new CharTableRenderer());
+    setRenderers();
 		this.addInitialBlankCharacter();
 	}
 
@@ -262,6 +268,7 @@ public class CharacterTableController {
 		this.characterTablePanel.validate();
 		this.selectionListener = new SelectionListener();
 		this.selectionModel.addListSelectionListener(this.selectionListener);
+    // This actually changes ordering of columns to user prefs for ordering
 		this.tableColumnSaver = new TableColumnPrefsSaver(this.characterTable, this.getTableAutoSaveName());
 
 		OntologyMakerI om = Config.inst().getOntMaker(representedGroup);
@@ -514,15 +521,61 @@ public class CharacterTableController {
 
 	}
 
-  /** Breaks post comps (and should do lists) into multiple lines */
-  private class CharTableRenderer extends DefaultTableCellRenderer {
-    public void setValue(Object value) {
-      if (value == null || value.toString()==null) setText("");
-      String s = value.toString();
-      s = s.replaceAll("\\^","<br>");
-      setText("<html>"+s);
+  private void setRenderers() {
+    // whole table - comparisons shouldnt be broken up
+    //characterTable.setDefaultRenderer(Object.class, new CharTableRenderer());
+    // this assumes display columns in synch with model columns - dont thinks so
+    for (int i=0; i<fieldMan().getNumberOfFields(); i++) {
+      try {
+        CharField cf = fieldMan().getCharField(i);
+        if (cf.postCompAllowed()) {
+          TableColumn c = getColumnForField(cf);
+          c.setCellRenderer(new PostCompCellRenderer());
+        }
+      } catch (OntologyException e) { log().error(e); } // shouldnt happen
     }
   }
+
+  /** TableColumns are not in the order of config, as user can drag & drop columns */
+  private TableColumn getColumnForField(CharField cf) {
+    for (int i=0; i<characterTable.getColumnCount(); i++) {
+      if (characterTable.getColumnName(i).equals(cf.getName()))
+        return characterTable.getColumnModel().getColumn(i);
+    }
+    return null; // char field not found ???
+  }
+
+
+  private CharFieldManager fieldMan() { return CharFieldManager.inst(); }
+
+  private class PostCompCellRenderer extends javax.swing.table.DefaultTableCellRenderer {
+    public Component getTableCellRendererComponent(JTable table, Object value,
+                                                   boolean isSelected,boolean hasFocus,
+                                                   int row, int column) {
+      // takes care of selection
+      Component c =
+        super.getTableCellRendererComponent(table,value,isSelected,hasFocus,row,column);
+      if (!(c instanceof JLabel)) return c; // ??
+      JLabel label = (JLabel)c;
+      if (value == null || value.toString()==null) 
+        return label;
+      String s = value.toString();
+      s = s.replaceAll("\\^","<br>");
+      label.setText("<html>"+s);
+      return label;
+    }
+  }
+
+//   /** Breaks post comps (and should do lists) into multiple lines - this is for whole table
+//    TableCellRenderer works on single columns */
+//   private class CharTableRenderer extends DefaultTableCellRenderer {
+//     public void setValue(Object value) {
+//       if (value == null || value.toString()==null) setText("");
+//       String s = value.toString();
+//       s = s.replaceAll("\\^","<br>");
+//       setText("<html>"+s);
+//     }
+//   }
   
   
   /**

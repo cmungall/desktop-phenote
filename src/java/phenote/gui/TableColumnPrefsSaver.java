@@ -22,7 +22,7 @@ import org.apache.log4j.Logger;
  * Persists user changes to column widths and order for a table using java.util.prefs.  Column
  * titles should be unique within the table.  If the column content (count or titles) is changed
  * between uses of a table, columns will be reset to the default order until the user moves them
- * again.
+ * again. Not only persists changes, but enacts the ordering on the table with orderColumns
  */
 public class TableColumnPrefsSaver implements PropertyChangeListener, TableColumnModelListener {
   
