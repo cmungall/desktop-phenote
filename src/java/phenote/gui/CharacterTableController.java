@@ -78,6 +78,7 @@ public class CharacterTableController {
 	private JButton compareButton; // initialized by swix -> compare()
   private JPanel compareSpacer;	// initialized by swix
   private FieldPanel panelToUpdate;
+  private TableColumnPrefsSaver tableColumnSaver;
   // hmm... its handy
 	private static CharacterTableController defaultController;
 
@@ -261,8 +262,7 @@ public class CharacterTableController {
 		this.characterTablePanel.validate();
 		this.selectionListener = new SelectionListener();
 		this.selectionModel.addListSelectionListener(this.selectionListener);
-		new TableColumnPrefsSaver(this.characterTable, this
-				.getTableAutoSaveName());
+		this.tableColumnSaver = new TableColumnPrefsSaver(this.characterTable, this.getTableAutoSaveName());
 
 		OntologyMakerI om = Config.inst().getOntMaker(representedGroup);
 		if (om != null && om.useButtonToLaunch()) {
@@ -302,6 +302,7 @@ public class CharacterTableController {
    * Resets everything needed when the CharacterListI has been replaced by a newly loaded file.
    */
 	private void updateFromNewCharacterList() {
+	  this.tableColumnSaver.dispose();
 	  this.sortedCharacters = new SortedList<CharacterI>(this.getCharacterListManager().getCharacterList().getList(), new EverythingEqualComparator<CharacterI>());
 	  this.sortedCharacters.setMode(SortedList.AVOID_MOVING_ELEMENTS);
 	  this.filteredCharacters.dispose();
@@ -317,6 +318,7 @@ public class CharacterTableController {
 	  this.sortChooser = new TableComparatorChooser<CharacterI>(characterTable, this.sortedCharacters, false);
 	  this.characterTable.setSelectionModel(this.selectionModel);
 	  if (this.panelToUpdate != null) this.panelToUpdate.setListSelectionModel(this.selectionModel);
+	  this.tableColumnSaver = new TableColumnPrefsSaver(this.characterTable, this.getTableAutoSaveName());
 	}
 
 	private void updateButtonStates() {

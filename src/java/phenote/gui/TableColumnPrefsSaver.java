@@ -80,6 +80,16 @@ public class TableColumnPrefsSaver implements PropertyChangeListener, TableColum
 
   public void columnSelectionChanged(ListSelectionEvent e) {}
   
+  /**
+   * Removes this object from listening to any tables or table columns.
+   */
+  public void dispose() {
+    for (TableColumn column : this.getColumns()) {
+      column.removePropertyChangeListener(this);
+    }
+    this.table.getColumnModel().removeColumnModelListener(this);
+  }
+  
   private void sizeColumns() {
     for (TableColumn column : this.getColumns()) {
       final int width = this.getWidthPrefs().getInt(this.getColumnKey(column), this.defaultColumnWidth);

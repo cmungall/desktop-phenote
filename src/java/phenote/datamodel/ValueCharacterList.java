@@ -15,7 +15,7 @@ import ca.odell.glazedlists.EventList;
 /**
  * A CharacterListI implementation which represents the contents of a CharFieldValue as a 
  * list of characters which can be edited in a separate character table view.  Currently 
- * the field value is parsed into separate fields by splitting on ":" - this is useful for 
+ * the field value is parsed into separate fields by splitting on " " - this is useful for 
  * transparently interacting with the existing CharFieldValue data model, but not very robust.
  * @author Jim Balhoff
  */

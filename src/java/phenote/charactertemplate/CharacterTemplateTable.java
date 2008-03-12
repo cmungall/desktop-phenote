@@ -79,6 +79,7 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
   private JButton generateButton;
   private JPanel filterPanel; // initialized by swix
   private ComponentLayoutListener focusListener;
+  private TableColumnPrefsSaver tableColumnSaver;
 
   public CharacterTemplateTable(String group, String id) {
     super(id);
@@ -252,7 +253,7 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     this.tablePanel.validate();
     this.selectionListener = new SelectionListener();
     this.selectionModel.addListSelectionListener(this.selectionListener);
-    new TableColumnPrefsSaver(this.characterTable, this.getTableAutoSaveName());
+    this.tableColumnSaver = new TableColumnPrefsSaver(this.characterTable, this.getTableAutoSaveName());
   }
   
   /** Instantiate interface objects from Swixml file */
@@ -282,6 +283,7 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
    * Resets everything needed when the CharacterListI has been replaced by a newly loaded file.
    */
   private void updateFromNewCharacterList() {
+    this.tableColumnSaver.dispose();
     this.sortedCharacters = new SortedList<CharacterI>(this.getCharacterListManager().getCharacterList().getList(), new EverythingEqualComparator<CharacterI>());
     this.sortedCharacters.setMode(SortedList.AVOID_MOVING_ELEMENTS);
     this.filteredCharacters.dispose();
@@ -296,6 +298,7 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     if (this.sortChooser != null) this.sortChooser.dispose();
     this.sortChooser = new TableComparatorChooser<CharacterI>(characterTable, this.sortedCharacters, false);
     this.characterTable.setSelectionModel(this.selectionModel);
+    this.tableColumnSaver = new TableColumnPrefsSaver(this.characterTable, this.getTableAutoSaveName());
   }
   
   private void setSelectionWithCharacters(List<CharacterI> characters) {
