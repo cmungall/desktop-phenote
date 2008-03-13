@@ -525,14 +525,11 @@ public class CharacterTableController {
     // whole table - comparisons shouldnt be broken up
     //characterTable.setDefaultRenderer(Object.class, new CharTableRenderer());
     // this assumes display columns in synch with model columns - dont thinks so
-    for (int i=0; i<fieldMan().getNumberOfFields(); i++) {
-      try {
-        CharField cf = fieldMan().getCharField(i);
-        if (cf.postCompAllowed()) {
-          TableColumn c = getColumnForField(cf);
-          c.setCellRenderer(new PostCompCellRenderer());
-        }
-      } catch (OntologyException e) { log().error(e); } // shouldnt happen
+    for (CharField cf : fieldMan().getCharFieldListForGroup(this.representedGroup)) {
+      if (cf.postCompAllowed()) {
+        TableColumn c = getColumnForField(cf);
+        c.setCellRenderer(new PostCompCellRenderer());
+      }
     }
   }
 
