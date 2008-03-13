@@ -211,7 +211,7 @@ public class CharacterTableController {
 
     CharacterI c1 = selChars.get(0);
     CharacterI c2 = selChars.get(1);
-    new Comparison(frame,c1,c2);
+    new ComparisonGui(frame,c1,c2);
   }
 
 	public EventSelectionModel<CharacterI> getSelectionModel() {

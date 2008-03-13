@@ -28,14 +28,14 @@ import phenote.gui.field.FieldPanel;
 
 /** a gui for making comparisons between 2 statements/annotations */
 
-class Comparison {
+class ComparisonGui {
   
   private JDialog dialog;
   private CharacterI char1;
   private CharacterI char2;
   private CharFieldGui relFieldGui;
 
-  Comparison(Frame owner, CharacterI c1, CharacterI c2) {
+  ComparisonGui(Frame owner, CharacterI c1, CharacterI c2) {
     try { init(owner,c1,c2); } 
     catch (CharFieldException x) {
       String m = "No relation ontology configured, cant do comparison";
