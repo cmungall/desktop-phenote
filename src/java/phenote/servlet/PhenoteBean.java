@@ -19,18 +19,27 @@ import java.util.ArrayList;
  */
 public class PhenoteBean {
 
+  public enum View{
+      INTERNAL,EXTERNAL
+  }
+
   private String userInput;
   private String qualityInput;
   private String entityInput;
   private String ontologyName;
   private String termId;
   private String field;
+  private String viewType;
 
   private String ajaxReturn;
   private List<CompletionTerm> completionTermList;
   private OBOClass term;
   private Link startStage;
   private Link endStage;
+
+  public boolean getIsExternalViewType(){
+      return (viewType!=null && viewType.equals(View.EXTERNAL.toString())) ; 
+  }
 
   public boolean isTermCompletionRequest() {
     if (!StringUtils.isEmpty(userInput))
@@ -165,6 +174,16 @@ public class PhenoteBean {
     List<Link> parents = new ArrayList<Link>();
     parents.addAll(term.getParents());
     filterStages(parents);
+  }
+  
+  public String getViewType()
+  {
+      return viewType;
+  }
+  
+  public void setViewType(String view)
+  {
+      this.viewType = view;
   }
 }
 

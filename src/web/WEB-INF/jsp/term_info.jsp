@@ -52,8 +52,15 @@
         <b><phenote:relationhipName beanName="parent" property="type.name" type="parent"/>:</b>
       </td>
       <td>
+      <c:choose>
+      <c:when test="${ formBean.isExternalViewType }">
+        <a href="/phenote/Phenote/?termId=<c:out value='${parent.parent.ID}' />&ontologyName=ZF&field=ENTITY&viewType=EXTERNAL">
+      </c:when>
+      <c:otherwise>
         <a href="javascript:;"
            onclick="phenoteState.updateTermInfo(new Term('<c:out value="${parent.parent.ID}" />','<c:out value="${parent.parent.name}" />','<c:out value="${formBean.ontologyName}" />'));">
+      </c:otherwise>
+      </c:choose>
           <c:out value="${parent.parent.name}"/></a>
       </td>
     </tr>
@@ -67,8 +74,15 @@
         <b><phenote:relationhipName beanName="parent" property="type.name" type="child"/>:</b>
       </td>
       <td>
+      <c:choose>
+      <c:when test="${ formBean.isExternalViewType }">
+        <a href="/phenote/Phenote/?termId=<c:out value='${parent.child.ID}' />&ontologyName=ZF&field=ENTITY&viewType=EXTERNAL">
+      </c:when>
+      <c:otherwise>
         <a href="javascript:;"
            onclick="phenoteState.updateTermInfo(new Term('<c:out value="${parent.child.ID}" />','<c:out value="${parent.child.name}" />','<c:out value="${formBean.ontologyName}" />'));">
+      </c:otherwise>
+      </c:choose>
           <c:out value="${parent.child.name}"/></a>
       </td>
     </tr>
