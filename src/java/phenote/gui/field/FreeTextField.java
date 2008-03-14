@@ -64,7 +64,7 @@ class FreeTextField extends CharFieldGui {
     return this.getTextField();
     }
   
-  private JTextField getTextField() {
+  protected JTextField getTextField() {
     if (this.textField == null) {
       this.textField = new JTextField();
     }
