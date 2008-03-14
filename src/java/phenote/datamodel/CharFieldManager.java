@@ -138,9 +138,6 @@ public class CharFieldManager {
     return first.getPostCompRelOntol();
   }
 
-  /** there should only be 1 comparison */
-  //CharField getComparisonField() { }
-
   // ?
   private CharField getCharFieldForEnum(CharFieldEnum en) throws CharFieldException {
     try { return getCharFieldForName(en.getTag()); } // probably should do tag 1st

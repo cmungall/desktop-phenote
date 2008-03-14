@@ -6,8 +6,10 @@ import java.util.List;
 import org.obo.datamodel.OBOClass;
 
 import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
+import phenote.datamodel.Comparison;
 
 public class UpdateTransaction implements TransactionI { // extends Transaction?
 
@@ -38,6 +40,18 @@ public class UpdateTransaction implements TransactionI { // extends Transaction?
   public UpdateTransaction(CharFieldValue oldVal, CharFieldValue newVal) {
     oldValue = oldVal;
     newValue = newVal;
+  }
+
+  public UpdateTransaction(Comparison comparison) {
+    newValue = new CharFieldValue(comparison);
+    // old value really depends on whats allowed in gui - for now assume 
+    // 1 comp per char but this will need updating
+    // for now just use old comparison of subject - this means only 1 comparison per
+    // character - for now - improve with better gui
+    if (comparison.hasSubject()) {
+      CharField f = CharFieldManager.inst().getComparisonField();
+      oldValue = comparison.getSubject().getValue(f); // might be empty/null(?)
+    }
   }
 
   protected void setOldValue(CharacterI c, CharField cf) {

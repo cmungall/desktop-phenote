@@ -192,34 +192,34 @@ public class Character extends AbstractCharacter implements CharacterI {
 
   public boolean supportsComparisons() { return true; }
 
-  /** comparison actually goes in charFieldValue like another field */
-  public void addComparison(OBOProperty rel, CharacterI relChar) throws CharacterEx {
-//     String m = "Character datamodel does not implement comparisons, configure "
-//       +"datamodel to OBO Annotations to use comparisons";
-//     throw new CharacterEx(m);
-    // for now just allow 1 comparison
-    Comparison c = new Comparison(rel,relChar);
-    if (comparisons==null) comparisons = new ArrayList<Comparison>(2);
-    comparisons.add(c);
-    // do we add reverse comparison to relChar?? not sure
-    // relChar.
-    if (!charFieldMan().hasComparisonField()) { // shouldnt happen?
-      // ideally create one...
-      // Config/CharFieldMan.addCompField()
-      log().error("No Comparison field configged, cant add comparison");
-      return; // ex?
-    }
-    CharField cf = charFieldMan().getComparisonField();
-    CharFieldValue v = CharFieldValue.makeComparison(cf,this,rel,relChar);
-    setValue(cf,v); // transaction???
-  }
+//   /** comparison actually goes in charFieldValue like another field */
+//   public void addComparison(OBOProperty rel, CharacterI relChar) throws CharacterEx {
+// //     String m = "Character datamodel does not implement comparisons, configure "
+// //       +"datamodel to OBO Annotations to use comparisons";
+// //     throw new CharacterEx(m);
+//     // for now just allow 1 comparison
+//     Comparison c = new Comparison(rel,relChar);
+//     if (comparisons==null) comparisons = new ArrayList<Comparison>(2);
+//     comparisons.add(c);
+//     // do we add reverse comparison to relChar?? not sure
+//     // relChar.
+//     if (!charFieldMan().hasComparisonField()) { // shouldnt happen?
+//       // ideally create one...
+//       // Config/CharFieldMan.addCompField()
+//       log().error("No Comparison field configged, cant add comparison");
+//       return; // ex?
+//     }
+//     CharField cf = charFieldMan().getComparisonField();
+//     CharFieldValue v = CharFieldValue.makeComparison(cf,this,rel,relChar);
+//     setValue(cf,v); // transaction???
+//   }
 
-  private class Comparison {
-    private CharacterI subject;
-    private OBOProperty rel;
-    private CharacterI object;
-    private Comparison(OBOProperty r,CharacterI c) { rel = r; object = c; }
-  }
+//   private class Comparison {
+//     private CharacterI subject;
+//     private OBOProperty rel;
+//     private CharacterI object;
+//     private Comparison(OBOProperty r,CharacterI c) { rel = r; object = c; }
+//   }
 
   private Logger log;
   private Logger log() {

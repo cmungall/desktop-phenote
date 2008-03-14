@@ -20,7 +20,9 @@ import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterEx;
+import phenote.datamodel.Comparison;
 import phenote.datamodel.Ontology;
+import phenote.edit.EditManager;
 import phenote.config.Config;
 import phenote.gui.field.CharFieldGui;
 import phenote.gui.field.CharFieldGuiEx;
@@ -31,9 +33,11 @@ import phenote.gui.field.FieldPanel;
 class ComparisonGui {
   
   private JDialog dialog;
-  private CharacterI char1;
-  private CharacterI char2;
+//   private CharacterI char1;
+//   private CharacterI char2;
   private CharFieldGui relFieldGui;
+  /** eventually may do a list of comparisons? */
+  private Comparison comparison;
 
   ComparisonGui(Frame owner, CharacterI c1, CharacterI c2) {
     try { init(owner,c1,c2); } 
@@ -44,10 +48,11 @@ class ComparisonGui {
   }
 
   /** initialize gui with 2 characters (and frame owner) */
-  private void init(Frame owner, CharacterI c1, CharacterI c2) 
+  private void init(Frame owner, CharacterI sub, CharacterI obj) 
     throws CharFieldException {
-    char1 = c1;
-    char2 = c2;
+    comparison = new Comparison();
+    comparison.setSubject(sub);
+    comparison.setObject(obj);
     boolean modal = true;
     dialog = new JDialog(owner,"Statement Comparison",modal);
     dialog.setAlwaysOnTop(true);
@@ -56,13 +61,13 @@ class ComparisonGui {
     dialog.add(fieldPanel);
     
     // Statement 1
-    fieldPanel.addLabelForWholeRow(charString(c1));
+    fieldPanel.addLabelForWholeRow(charString(comparison.getSubject()));
 
     // Relationship - dislpay rel if comp already made
     addRelGui(fieldPanel); // throws CharFieldException if no rel ontology
 
     // Statement 2
-    fieldPanel.addLabelForWholeRow(charString(c2));
+    fieldPanel.addLabelForWholeRow(charString(comparison.getObject()));
 
     // Buttons OK & Cancel
     addButtons(fieldPanel);
@@ -111,8 +116,10 @@ class ComparisonGui {
 
   private void commitComparison() throws CharFieldGuiEx {
     OBOProperty rel = relFieldGui.getCurrentRelation(); // ex if not filled in
+    comparison.setRelation(rel);
     try {
-      char1.addComparison(rel,char2);
+      //char1.addComparison(rel,char2);
+      EditManager.inst().addComparison(this,comparison);
     } 
     catch (CharacterEx e) {
       String m = e.getMessage();

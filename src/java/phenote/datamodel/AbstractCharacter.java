@@ -152,8 +152,7 @@ public abstract class AbstractCharacter implements CharacterI {
   
   /** throws CharacterEx if not implemented (Character doesnt implement)
       OBOAnnotation implements */
-  public abstract void addComparison(OBOProperty relation, CharacterI relatedChar)
-    throws CharacterEx;
+  //public abstractvoid addComparison(OBOProperty r,CharacterI c)throwsCharacterEx;
 
   public boolean hasAnnotId() { return getAnnotId() != null; }
   public String getAnnotId() {

@@ -80,8 +80,7 @@ public interface CharacterI {
 
   /** make comparison statement using relation to relatedChar. throw exception
       if comparisons are not supported (Character doesnt support) */
-  public void addComparison(OBOProperty relation,CharacterI relatedChar)
-    throws CharacterEx;
+  //public void addComparison(OBOProperty r,CharacterI c)throws CharacterEx;
 
   // public void setDBString(String? Object?)??
   // public String getDBString()

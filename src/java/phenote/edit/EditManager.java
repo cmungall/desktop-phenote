@@ -11,8 +11,10 @@ import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharFieldManager;
+import phenote.datamodel.CharacterEx;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterIFactory;
+import phenote.datamodel.Comparison;
 
 /** The way editing works is gui makes update transaction (see CharFieldGui and
     AutoComboBox) and calls
@@ -123,6 +125,11 @@ public class EditManager {
     addTransaction(ct);
     fireChangeEvent(new CharChangeEvent(src,ct));
     // or should we send out a char change event with a char list?? probably
+  }
+
+  public void addComparison(Object src, Comparison c) throws CharacterEx {
+    UpdateTransaction ut = new UpdateTransaction(c);
+    updateModel(src,ut);
   }
 
 

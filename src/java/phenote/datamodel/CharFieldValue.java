@@ -104,7 +104,8 @@ public class CharFieldValue implements Cloneable {
   }
   
   /** If list adds to value, if not list just sets it, makes new CFV */
-  public static CharFieldValue makeNewValue(CharFieldValue newValue, CharFieldValue oldValue) {
+  public static CharFieldValue makeNewValue(CharFieldValue newValue,
+                                            CharFieldValue oldValue) {
     final CharFieldValue updatedValue = newValue.cloneCharFieldValue(oldValue.getCharacter(), oldValue.getCharField());
     if (oldValue.isList()) { // LIST/MULTI VALUE
       CharFieldValue newList = oldValue.cloneCharFieldValue();
@@ -116,17 +117,23 @@ public class CharFieldValue implements Cloneable {
     }
   }
 
-  /** explicit comparison constructor - subclasses i suppose would be good */
-  public static CharFieldValue makeComparison(CharField cf,CharacterI subject,
-                                              OBOProperty rel,CharacterI object) {
-    return new CharFieldValue(cf,subject,rel,object);
+  public CharFieldValue(Comparison comp) {
+    charField = CharFieldManager.inst().getComparisonField();
+    comparison = comp;
+    character = comp.getSubject();
   }
-  /** comparison constructor */
-  private CharFieldValue(CharField cf, CharacterI s,OBOProperty r,CharacterI o) {
-    //isComparison = true;
-    charField = cf; // check if comparison?
-    comparison = new Comparison(s,r,o);
-  }
+
+//   /** explicit comparison constructor - subclasses i suppose would be good */
+//   public static CharFieldValue makeComparison(CharField cf,CharacterI subject,
+//                                               OBOProperty rel,CharacterI object) {
+//     return new CharFieldValue(cf,subject,rel,object);
+//   }
+//   /** comparison constructor */
+//   private CharFieldValue(CharField cf, CharacterI s,OBOProperty r,CharacterI o) {
+//     //isComparison = true;
+//     charField = cf; // check if comparison?
+//     comparison = new Comparison(s,r,o);
+//   }
 
   public CharFieldValue(Date d, CharacterI c, CharField cf) {
     this(c,cf);
@@ -168,7 +175,12 @@ public class CharFieldValue implements Cloneable {
     }
 //      return null; // null?? new CharFieldValue(character
     try {
+      // basic stuff
       CharFieldValue clone =  (CharFieldValue)clone();
+      // comparison
+      if (comparison!=null)
+        clone.comparison = comparison.cloneComparison();
+      // list
       if (charFieldValueList!=null) {
         clone.charFieldValueList = new ArrayList<CharFieldValue>();
         for (CharFieldValue v : charFieldValueList) {
@@ -370,19 +382,19 @@ public class CharFieldValue implements Cloneable {
 
   public String toString() { return getValueAsString(); }
 
-  private class Comparison {
-    private CharacterI subject;
-    private OBOProperty rel;
-    private CharacterI object;
-    private Comparison(CharacterI s, OBOProperty r,CharacterI o) {
-      subject = s; rel = r; object = o;
-    }
-    public String toString() {
-      String objString = object.toString(); // yucky
-      if (object.hasAnnotId()) objString = object.getAnnotId(); // better
-      return rel.getName()+"^("+objString+")";
-    }
-  }
+//   private class Comparison {
+//     private CharacterI subject;
+//     private OBOProperty rel;
+//     private CharacterI object;
+//     private Comparison(CharacterI s, OBOProperty r,CharacterI o) {
+//       subject = s; rel = r; object = o;
+//     }
+//     public String toString() {
+//       String objString = object.toString(); // yucky
+//       if (object.hasAnnotId()) objString = object.getAnnotId(); // better
+//       return rel.getName()+"^("+objString+")";
+//     }
+//   }
 
 //     if (charFieldEnum == null)
 //       System.out.println("ERROR no datamodel associated with configuration, cant set"+
@@ -418,6 +430,7 @@ public class CharFieldValue implements Cloneable {
       return ((otherValue.isTerm()) 
               && (this.getTerm().equals(otherValue.getTerm())));
     }
+    // Comparison??
     return this.getName().equals(otherValue.getName());
   }
   
