@@ -1,5 +1,6 @@
 package phenote.datamodel;
 
+import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.util.List;
 import org.obo.annotation.datamodel.Annotation;
@@ -15,6 +16,8 @@ import org.obo.datamodel.OBOProperty;
     misspelling would end up in a char field
     For drag&drop Character extends Transferable */
 public interface CharacterI extends Transferable {
+
+  public static DataFlavor CHAR_FLAVOR = new DataFlavor(CharacterI.class,"Character");
 
   /** generic fields!!! */
   public List<CharField> getAllCharFields();

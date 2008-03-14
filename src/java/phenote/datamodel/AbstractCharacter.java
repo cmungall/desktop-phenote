@@ -162,8 +162,7 @@ public abstract class AbstractCharacter implements CharacterI {
     return getValueString(idField); // returns null if empty
   }
 
-  //  TRANSFERABLE INTERFACE for drag & drop
-  private static DataFlavor CHAR_FLAVOR = new DataFlavor(CharacterI.class,"Character");
+  //  TRANSFERABLE INTERFACE for drag & drop 
 
   /** Returns an object which represents the data to be transferred.*/
   public Object getTransferData(DataFlavor flavor) {
@@ -172,7 +171,7 @@ public abstract class AbstractCharacter implements CharacterI {
     
   /** Returns an array of DataFlavor objects indicating the flavors the data
       can be provided in. */
-  public DataFlavor[] 	getTransferDataFlavors() {
+  public DataFlavor[] getTransferDataFlavors() {
     return new DataFlavor[] { CHAR_FLAVOR };
   }
   

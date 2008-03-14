@@ -27,6 +27,7 @@ import phenote.config.Config;
 import phenote.gui.field.CharFieldGui;
 import phenote.gui.field.CharFieldGuiEx;
 import phenote.gui.field.FieldPanel;
+import phenote.gui.field.ReadOnlyFieldGui;
 
 /** a gui for making comparisons between 2 statements/annotations */
 
@@ -61,7 +62,11 @@ class ComparisonGui {
     dialog.add(fieldPanel);
     
     // Statement 1
-    fieldPanel.addLabelForWholeRow(charString(comparison.getSubject()));
+    //fieldPanel.addLabelForWholeRow(charString(comparison.getSubject()));
+    ReadOnlyFieldGui r = new ReadOnlyFieldGui(new CharField("Subject",null,null));
+    r.setText(charString(comparison.getSubject()));
+    r.enableCharDropListening(true);
+    fieldPanel.addCharFieldGuiToPanel(r);
 
     // Relationship - dislpay rel if comp already made
     addRelGui(fieldPanel); // throws CharFieldException if no rel ontology

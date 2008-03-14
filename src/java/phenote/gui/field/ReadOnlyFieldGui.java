@@ -1,9 +1,11 @@
 package phenote.gui.field;
 
+import java.awt.datatransfer.DataFlavor;
 import java.awt.Dimension;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.TransferHandler;
 
 import org.apache.log4j.Logger;
 
@@ -18,18 +20,33 @@ this is really read only free text field
 separate class for read only term/rel field???
 hmmmmmm....
 this is backwards - - free text field should probably sublcass read only
+actually this should just be a parameter to free text field - refactor!
+also would there ever be a case of having a term read only?
 */
 
-class ReadOnlyFieldGui extends FreeTextField { // CharFieldGui
+public class ReadOnlyFieldGui extends FreeTextField { // CharFieldGui
   private JLabel readOnlyLabel = new JLabel(); // uneditable JText?
 
-  ReadOnlyFieldGui(CharField charfield) {
+  public ReadOnlyFieldGui(CharField charfield) {
     super(charfield);
 //     this.getReadOnlyLabel().setPreferredSize(new Dimension(200,20));
 //     this.getReadOnlyLabel().setBorder(new javax.swing.border.LineBorder(java.awt.Color.BLACK) );
     getTextField().setEditable(false);
   }
 
+  /** enables to listen to character drag & drop - for comparisons
+      may want to migrate this to super class if needed for other things?? */
+  public void enableCharDropListening(boolean enable) {
+    getTextField().setTransferHandler(new CharDropHandler());
+  }
+
+  private class CharDropHandler extends TransferHandler {
+    public boolean canImport(JComponent c, DataFlavor[] flavors) {
+      for (DataFlavor f : flavors)
+        if (f.equals(CharacterI.CHAR_FLAVOR)) return true;
+      return false;
+    }
+  }
 
 //   protected void setValueFromChar(CharacterI chr) {
 //     if (chr == null) {
