@@ -5,16 +5,19 @@ import java.awt.Container;
 import java.awt.Frame;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.datatransfer.Transferable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
+import javax.swing.TransferHandler;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -197,11 +200,11 @@ public class CharacterTableController {
       (eventually put drag & drop in comparator)  */
   public void compare() {
     List<CharacterI> selChars = getSelectionModel().getSelected();
-    if (selChars.size() != 2) {
-      String m = "You must have exactly 2 rows selected to do comparison(for now)";
-      JOptionPane.showMessageDialog(null,m,"Error",JOptionPane.ERROR_MESSAGE);
-      return;
-    }
+//     if (selChars.size() != 2) {
+//       String m = "You must have exactly 2 rows selected to do comparison(for now)";
+//       JOptionPane.showMessageDialog(null,m,"Error",JOptionPane.ERROR_MESSAGE);
+//       return;
+//     }
     // could just Phenote.inst().getFrame(), but phenote2??
     // should at least probably make this a util fn
     Container c = characterTablePanel.getTopLevelAncestor();
@@ -209,14 +212,21 @@ public class CharacterTableController {
     if (c instanceof Frame) frame = (Frame)frame;
     else log().error("Top level ancestor of table is not a Frame");
 
-    CharacterI c1 = selChars.get(0);
-    CharacterI c2 = selChars.get(1);
+    
+    CharacterI c1 = !selChars.isEmpty() ? selChars.get(0) : null;
+    CharacterI c2 = selChars.size() > 1 ? selChars.get(1) : null;
     new ComparisonGui(frame,c1,c2);
   }
 
 	public EventSelectionModel<CharacterI> getSelectionModel() {
 		return this.selectionModel;
 	}
+
+  private List<CharacterI> getSelectedChars() {
+    return getSelectionModel().getSelected();
+  }
+
+  private boolean hasSelection() { return !getSelectedChars().isEmpty(); }
 	
 	public String getGroup() {
 	  return this.representedGroup;
@@ -297,6 +307,10 @@ public class CharacterTableController {
        JOptionPane.showMessageDialog(null,m,"error",JOptionPane.ERROR_MESSAGE);
       }
     }
+
+    // drag & drop
+    characterTable.setDragEnabled(true);
+    characterTable.setTransferHandler(new CharacterTransferHandler());
 	}
 
 	private void addInitialBlankCharacter() {
@@ -545,6 +559,7 @@ public class CharacterTableController {
 
   private CharFieldManager fieldMan() { return CharFieldManager.inst(); }
 
+  /** post comp terms with ^ are broken across several lines */
   private class PostCompCellRenderer extends javax.swing.table.DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value,
                                                    boolean isSelected,boolean hasFocus,
@@ -582,4 +597,22 @@ public class CharacterTableController {
   public void setFieldPanelForUpdating(FieldPanel panel) {
     this.panelToUpdate = panel;
   }
+  
+  /** Drag & drop CharacterTransferHandler, for dragging characters from table and
+      dropping them on ComparisonGui, to specify characters in comparison */
+  private class CharacterTransferHandler extends TransferHandler {
+    /** Return selected character, char is a transferable, if no selection return null
+      if multi select return 1st selected? null? do list??? */
+    public Transferable createTransferable(JComponent c) { // c is the table
+      if (!hasSelection()) return null; // ?
+      List<CharacterI> chars = getSelectedChars();
+      if (chars.size() > 1) log().info("Using 1st row of selection");
+      CharacterI chr = chars.get(0);
+      return chr; // CharacterI is a transferable
+    }
+    public int getSourceActions(JComponent c) {
+        return COPY;
+    }
+  }
+
 }

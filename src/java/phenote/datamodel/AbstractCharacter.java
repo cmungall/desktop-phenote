@@ -1,5 +1,6 @@
 package phenote.datamodel;
 
+import java.awt.datatransfer.DataFlavor;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -161,8 +162,30 @@ public abstract class AbstractCharacter implements CharacterI {
     return getValueString(idField); // returns null if empty
   }
 
+  //  TRANSFERABLE INTERFACE for drag & drop
+  private static DataFlavor CHAR_FLAVOR = new DataFlavor(CharacterI.class,"Character");
+
+  /** Returns an object which represents the data to be transferred.*/
+  public Object getTransferData(DataFlavor flavor) {
+    return this;
+  }
+    
+  /** Returns an array of DataFlavor objects indicating the flavors the data
+      can be provided in. */
+  public DataFlavor[] 	getTransferDataFlavors() {
+    return new DataFlavor[] { CHAR_FLAVOR };
+  }
+  
+  /** Returns whether or not the specified data flavor is supported for this object*/
+  public boolean isDataFlavorSupported(DataFlavor flavor) {
+    return flavor == CHAR_FLAVOR;
+  }
+
   /**
    * According to the CharacterI documentation, the methods below are garbage
+   They are here for backward compatibility - still used in nexus & phenoxml adapter
+   but they should be upgraded to new generic way at some point
+   need to keep in for now
    */
   
   public boolean hasPub() {

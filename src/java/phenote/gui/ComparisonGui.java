@@ -53,7 +53,7 @@ class ComparisonGui {
     comparison = new Comparison();
     comparison.setSubject(sub);
     comparison.setObject(obj);
-    boolean modal = true;
+    boolean modal = false;//true;
     dialog = new JDialog(owner,"Statement Comparison",modal);
     dialog.setAlwaysOnTop(true);
 
@@ -138,6 +138,7 @@ class ComparisonGui {
 
   // util fn?
   private String charString(CharacterI c) {
+    if (c == null) return "";
     StringBuffer sb = new StringBuffer();
     for (CharField cf : c.getAllCharFields()) {
       if (!Config.inst().isVisible(cf)) continue;

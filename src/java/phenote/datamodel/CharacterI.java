@@ -1,5 +1,6 @@
 package phenote.datamodel;
 
+import java.awt.datatransfer.Transferable;
 import java.util.List;
 import org.obo.annotation.datamodel.Annotation;
 import org.obo.datamodel.OBOClass;
@@ -11,8 +12,9 @@ import org.obo.datamodel.OBOProperty;
     certainly be more generic - hybrid approach would be to retain these fields
     but also have a CharField list that can just come from config (& take out enum
     in config xsd for field names) - downside: lose strong typing, and a config 
-    misspelling would end up in a char field */
-public interface CharacterI {
+    misspelling would end up in a char field
+    For drag&drop Character extends Transferable */
+public interface CharacterI extends Transferable {
 
   /** generic fields!!! */
   public List<CharField> getAllCharFields();
