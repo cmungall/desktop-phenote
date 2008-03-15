@@ -63,16 +63,22 @@ class ComparisonGui {
     
     // Statement 1
     //fieldPanel.addLabelForWholeRow(charString(comparison.getSubject()));
-    ReadOnlyFieldGui r = new ReadOnlyFieldGui(new CharField("Subject",null,null));
-    r.setText(charString(comparison.getSubject()));
-    r.enableCharDropListening(true);
-    fieldPanel.addCharFieldGuiToPanel(r);
+    ReadOnlyFieldGui subGui = new ReadOnlyFieldGui(new CharField("Subject",null,null));
+    //r.setText(charString(comparison.getSubject()));
+    subGui.setCharacter(comparison.getSubject()); // ???
+    subGui.enableCharDropListening(true);
+    fieldPanel.addCharFieldGuiToPanel(subGui);
 
     // Relationship - dislpay rel if comp already made
     addRelGui(fieldPanel); // throws CharFieldException if no rel ontology
 
     // Statement 2
-    fieldPanel.addLabelForWholeRow(charString(comparison.getObject()));
+    //fieldPanel.addLabelForWholeRow(charString(comparison.getObject()));
+    ReadOnlyFieldGui objGui = new ReadOnlyFieldGui(new CharField("Object",null,null));
+    //r.setText(charString(comparison.getSubject()));
+    objGui.setCharacter(comparison.getObject()); // ???
+    objGui.enableCharDropListening(true);
+    fieldPanel.addCharFieldGuiToPanel(objGui);
 
     // Buttons OK & Cancel
     addButtons(fieldPanel);
@@ -142,17 +148,19 @@ class ComparisonGui {
 
 
   // util fn?
-  private String charString(CharacterI c) {
-    if (c == null) return "";
-    StringBuffer sb = new StringBuffer();
-    for (CharField cf : c.getAllCharFields()) {
-      if (!Config.inst().isVisible(cf)) continue;
-      String val = c.getValueString(cf);
-      if (val == null || val.trim().equals("")) continue;
-      sb.append(val).append(" ");
-    }
-    return sb.toString().trim();
-  }
+//   private String charString(CharacterI c) {
+//     return ReadOnlyFieldGui.charString(c);
+//   }
+//     if (c == null) return "";
+//     StringBuffer sb = new StringBuffer();
+//     for (CharField cf : c.getAllCharFields()) {
+//       if (!Config.inst().isVisible(cf)) continue;
+//       String val = c.getValueString(cf);
+//       if (val == null || val.trim().equals("")) continue;
+//       sb.append(val).append(" ");
+//     }
+//     return sb.toString().trim();
+
   private Logger log() {
     return Logger.getLogger(getClass());
   }
