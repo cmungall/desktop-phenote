@@ -58,19 +58,19 @@
      width: 60%;    
    }
 
-   fieldset {
-      border: none;
-      padding: 0;
-      font:80%/1 sans-serif;
-   }
+/*   fieldset {*/
+/*      border: none;*/
+/*      padding: 0;*/
+/*      font:80%/1 sans-serif;*/
+/*   }*/
 
-   label {
-      float:left;
-      width:25%;
-      margin-right:0.5em;
-      text-align:right;
-      font-weight:bold;
-   }
+/*   label {*/
+/*      float:left;*/
+/*      width:25%;*/
+/*      margin-right:0.5em;*/
+/*      text-align:right;*/
+/*      font-weight:bold;*/
+/*   }*/
    fieldset.search {
       width: 150;
    }
