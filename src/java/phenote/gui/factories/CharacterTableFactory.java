@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.bbop.framework.AbstractComponentFactory;
 
 import phenote.config.Config;
+import phenote.datamodel.CharFieldManager;
 import phenote.gui.CharacterTable;
 
 
@@ -30,7 +31,12 @@ public class CharacterTableFactory extends AbstractComponentFactory<CharacterTab
   }
 
   public String getName() {
-    return "Annotation Table (" + Config.inst().getTitleForGroup(this.group) + ")";
+    if (this.group.equals(CharFieldManager.getDefaultGroup())) {
+      return "Annotation Table (" + Config.inst().getTitleForGroup(this.group) + ")";
+    } else {
+      return Config.inst().getTitleForGroup(this.group);
+    }
+    
   }
   
   @Override
