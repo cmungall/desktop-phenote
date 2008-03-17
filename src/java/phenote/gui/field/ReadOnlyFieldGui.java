@@ -31,6 +31,9 @@ also would there ever be a case of having a term read only?
 public class ReadOnlyFieldGui extends FreeTextField { // CharFieldGui
   private JLabel readOnlyLabel = new JLabel(); // uneditable JText?
 
+  /** for now - refactor */
+  private CharacterI character;
+
   public ReadOnlyFieldGui(CharField charfield) {
     super(charfield);
 //     this.getReadOnlyLabel().setPreferredSize(new Dimension(200,20));
@@ -65,10 +68,17 @@ public class ReadOnlyFieldGui extends FreeTextField { // CharFieldGui
     }
   }
 
-  /** hmmmmm - not sure about this */
+  /** hmmmmm - not sure about this - used for comparison gui where jamming a character
+      into a field */
   public void setCharacter(CharacterI c) {
+    character = c;
     setText(charString(c));
   }
+  /** should their be a separate subclass for CharacterGui? */
+  public CharacterI getCharacter() {
+    return character;
+  }
+
   // util fn?
   public static String charString(CharacterI c) {
     if (c == null) return "";

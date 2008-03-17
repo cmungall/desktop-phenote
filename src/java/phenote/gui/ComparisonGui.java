@@ -36,7 +36,9 @@ class ComparisonGui {
   private JDialog dialog;
 //   private CharacterI char1;
 //   private CharacterI char2;
+  private ReadOnlyFieldGui subjectGui;
   private CharFieldGui relFieldGui;
+  private ReadOnlyFieldGui objectGui;
   /** eventually may do a list of comparisons? */
   private Comparison comparison;
 
@@ -63,22 +65,22 @@ class ComparisonGui {
     
     // Statement 1
     //fieldPanel.addLabelForWholeRow(charString(comparison.getSubject()));
-    ReadOnlyFieldGui subGui = new ReadOnlyFieldGui(new CharField("Subject",null,null));
+    subjectGui = new ReadOnlyFieldGui(new CharField("Subject",null,null));
     //r.setText(charString(comparison.getSubject()));
-    subGui.setCharacter(comparison.getSubject()); // ???
-    subGui.enableCharDropListening(true);
-    fieldPanel.addCharFieldGuiToPanel(subGui);
+    subjectGui.setCharacter(comparison.getSubject()); // ???
+    subjectGui.enableCharDropListening(true);
+    fieldPanel.addCharFieldGuiToPanel(subjectGui);
 
     // Relationship - dislpay rel if comp already made
     addRelGui(fieldPanel); // throws CharFieldException if no rel ontology
 
     // Statement 2
     //fieldPanel.addLabelForWholeRow(charString(comparison.getObject()));
-    ReadOnlyFieldGui objGui = new ReadOnlyFieldGui(new CharField("Object",null,null));
+    objectGui = new ReadOnlyFieldGui(new CharField("Object",null,null));
     //r.setText(charString(comparison.getSubject()));
-    objGui.setCharacter(comparison.getObject()); // ???
-    objGui.enableCharDropListening(true);
-    fieldPanel.addCharFieldGuiToPanel(objGui);
+    objectGui.setCharacter(comparison.getObject()); // ???
+    objectGui.enableCharDropListening(true);
+    fieldPanel.addCharFieldGuiToPanel(objectGui);
 
     // Buttons OK & Cancel
     addButtons(fieldPanel);
@@ -126,8 +128,16 @@ class ComparisonGui {
   }
 
   private void commitComparison() throws CharFieldGuiEx {
+    CharacterI sub = subjectGui.getCharacter();
     OBOProperty rel = relFieldGui.getCurrentRelation(); // ex if not filled in
+    CharacterI obj = objectGui.getCharacter();
+    if (sub==null || rel == null || obj == null)
+      throw new CharFieldGuiEx("Comparison not fully filled out");
+    
+    comparison.setSubject(sub);
     comparison.setRelation(rel);
+    comparison.setObject(obj);
+
     try {
       //char1.addComparison(rel,char2);
       EditManager.inst().addComparison(this,comparison);
