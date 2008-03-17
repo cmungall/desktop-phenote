@@ -82,6 +82,10 @@ public class ReadOnlyFieldGui extends FreeTextField { // CharFieldGui
   // util fn?
   public static String charString(CharacterI c) {
     if (c == null) return "";
+    // if has annot id use that (???)
+    if (c.hasAnnotId())
+      return c.getAnnotId();
+    // otherwise string together char fields
     StringBuffer sb = new StringBuffer();
     for (CharField cf : c.getAllCharFields()) {
       if (!Config.inst().isVisible(cf)) continue;
