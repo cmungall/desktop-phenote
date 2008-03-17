@@ -135,11 +135,6 @@ public class DelimitedFileAdapter extends AbstractFileAdapter {
   }
 
   public void commit(CharacterListI charList) {
-    if (charList.isEmpty()) {
-      System.out.println("No Data to save"); // popup!
-      return;
-    }
-
     if (file == null)
       file = getFileFromUserForSave(previousFile);
     if (file == null) return;
@@ -155,16 +150,8 @@ public class DelimitedFileAdapter extends AbstractFileAdapter {
 
     System.out.println("Writing tab-delimited output to file "+file);
     //first write out header, then write out contents
-    //header determined from first CharI
-    try {
-    	CharacterI ch = charList.get(0);
-    	String c = new DelimitedChar(ch).getDelimitedHeaderString();   
-        System.out.println(c);
-        pw.println(c);   	
-    }
-    catch (DelimitedChar.BadCharException e) {
-        System.out.println(e.getMessage()+" Not writing out header");
-      }
+    String c = DelimitedChar.makeDelimitedHeaderString();
+    pw.println(c);   	
 
     for (CharacterI ch : charList.getList()) {
       try {

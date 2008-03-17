@@ -85,7 +85,7 @@ public class LoadSaveManager {
   /**Loads a new document of characters from the given file using the given data adapter.*/
   public void loadData(File f, DataAdapterI adapter) {
     CharacterListI charList = adapter.load(f);
-    if (charList == null || charList.isEmpty()) {
+    if (charList == null) {
       String m = "Failed to load in data for file "+f+" using data adapter "
         +adapter.getDescription();
       JOptionPane.showMessageDialog(null,m,"Load failure",JOptionPane.ERROR_MESSAGE); 

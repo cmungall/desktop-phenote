@@ -5,11 +5,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
-import org.obo.datamodel.OBOClass;
 
-import phenote.config.Config;
 import phenote.datamodel.CharField;
-import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
@@ -27,13 +24,14 @@ public class DelimitedChar {
   private String delimitedString;
   private String delimitedHeaderString;
   private String delimiter;
+  private static final String DEFAULT_DELIMITER = "\t";
   private List<DelimFieldParser> fieldParsers = new ArrayList<DelimFieldParser>();
 
   DelimitedChar() {}
 
   DelimitedChar(CharacterI ch) {
     character = ch;
-    delimiter = "\t";  //delimiter is currently set to tab
+    delimiter = DEFAULT_DELIMITER;  //delimiter is currently set to tab
   }
 
   // WRITE
@@ -60,11 +58,7 @@ public class DelimitedChar {
  * hard return
  * should i include the config file on the first line?...maybe in the future
  * */
-  private String makeDelimitedHeaderString() { //throws BadCharException { 
-    if (character == null) { // shouldnt happen
-      System.out.println("Error: could not make tab-delimited header");
-      return ""; //??
-    }
+  public static String makeDelimitedHeaderString() { //throws BadCharException { 
     StringBuffer sb = new StringBuffer();
     for (CharField cf : CharFieldManager.inst().getCharFieldList()) {
       //if its a free text field - only one col necessary.
@@ -76,11 +70,11 @@ public class DelimitedChar {
       sb.append(label);
       //for now, i'll call on the syntax abbrev, but i'll want to use the acutal name
       // if (!isFreeText(cf)) { // } // now have third type isInt, so can't just negate 2007 07 09
-      if (isTerm(cf)) { 
-        sb.append(" ID").append(delimiter);
+      if (cf.isTerm()) { 
+        sb.append(" ID").append(DEFAULT_DELIMITER);
         sb.append(label).append(" Name");
         }
-      sb.append(delimiter);
+      sb.append(DEFAULT_DELIMITER);
     }
     return sb.toString();
     
