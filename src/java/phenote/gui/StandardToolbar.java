@@ -16,6 +16,7 @@ import org.bbop.framework.GUIManager;
 import org.bbop.framework.dock.idw.IDWUtil;
 
 import phenote.config.Config;
+import phenote.gui.actions.DbCommitAction;
 import phenote.gui.actions.DuplicateAnnotationAction;
 import phenote.gui.actions.OpenFileAction;
 import phenote.gui.actions.SaveFileAction;
@@ -26,7 +27,9 @@ import phenote.gui.actions.CopyAction;
 /** This is the basic toolbar to be displayed, containing items
 // such as New, Save, Print, etc.  Could be turned on/off if desired.
 // Basically provides the same functionality as in the menus, 
-// but doesn't require accessing the menus. */
+// but doesn't require accessing the menus.
+currently this is used in phenote-plus but not yet in old phenote
+only has open & save at the moment */
 
 
 public class StandardToolbar extends AbstractGUIComponent {
@@ -84,6 +87,9 @@ public class StandardToolbar extends AbstractGUIComponent {
     JButton newTermButton = new JButton("New Term", null);
     buttons.add(openButton);
     buttons.add(saveButton);
+    if (Config.inst().hasQueryableDataAdapter()) {
+      buttons.add(new JButton(new DbCommitAction()));
+    }
 //buttons.add(newTermButton);
 
     
@@ -95,6 +101,7 @@ public class StandardToolbar extends AbstractGUIComponent {
     
     JButton undoButton = new JButton(undoAction);
     JButton redoButton = new JButton(redoAction);
+    // whats the diff between copy & dup? same right?
     JButton copyButton = new JButton(copyAction);
 //    buttons.add(undoButton);
 //    buttons.add(redoButton);
@@ -104,6 +111,8 @@ public class StandardToolbar extends AbstractGUIComponent {
 //    add(newAnnotButton);
 //    add(dupAnnotButton);
 //    buttons.add(dupAnnotButton);
+
+    // whats this about???
     JButton tempButton = null;
     for (int i=0; i<buttons.size(); i++) {
     	tempButton = (JButton)buttons.elementAt(i);

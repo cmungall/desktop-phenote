@@ -400,12 +400,15 @@ public class Phenote {
 
   public Frame getFrame() { return frame; }
 
+  /** for old phenote - not phenote plus */
   private void makeMainWindow() {
     frame = new JFrame("Phenote "+PhenoteVersion.versionString()); 
+    // just 1 group/tab
     if (getNumGroupTabs() < 2) {
       Group g = Config.inst().getDefaultGroup();
       frame.getContentPane().add(makeGroupPanel(g));
     }
+    // > 1 group/tab
     else {
       JTabbedPane tabbedGroups = new JTabbedPane();
       for (Group g : getGroupTabs()) {
@@ -414,12 +417,15 @@ public class Phenote {
       }
       frame.getContentPane().add(tabbedGroups);
     }
+    
     MenuManager.createMenuManager(frame);
     frame.setPreferredSize(new Dimension(WINDOW_WIDTH,WINDOW_HEIGHT));
     if (standalone) // if stand alone exit java on window close
       frame.addWindowListener(new WindowExit());
+    // this isnt showing up ???
     standardToolbar = new StandardToolbar();
     frame.add(standardToolbar, BorderLayout.NORTH);
+    //frame.getContentPane().add(standardToolbar); doesnt work
 
     frame.pack();
     frame.setVisible(true);

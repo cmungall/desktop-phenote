@@ -170,7 +170,7 @@ public class LoadSaveManager {
 
   /** Checks contraints and if pass/override then save to QueryableDataAdapter
       and clear transactions */
-  private void saveToDbDataadapter() {
+  public void saveToDbDataadapter() {
 		if (!Config.inst().hasQueryableDataAdapter()) return; // err? ex?
 
     // CONSTRAINT check - puts up error dialog on warn/fail
