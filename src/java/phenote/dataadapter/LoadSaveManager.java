@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.filechooser.FileFilter;
 
 import phenote.config.Config;
@@ -166,10 +168,12 @@ public class LoadSaveManager {
 
   }
 
+  /** Checks contraints and if pass/override then save to QueryableDataAdapter
+      and clear transactions */
   private void saveToDbDataadapter() {
 		if (!Config.inst().hasQueryableDataAdapter()) return; // err? ex?
 
-    // CONSTRAINT check
+    // CONSTRAINT check - puts up error dialog on warn/fail
     try { checkConstraints(); }
     // failure - return
     catch (ConstraintEx e) { return; } // is this funny?
@@ -197,7 +201,12 @@ public class LoadSaveManager {
     if (cs.isFailure()) {
       String m = "There is a problem with your commit:\n\n"+cs.getWarningMessage()+
         "\n\nCommit cancelled. You must fix this.";
-      JOptionPane.showMessageDialog(null,m,"Commit failed",JOptionPane.ERROR_MESSAGE);
+      JTextArea area = new JTextArea(m);
+      area.setRows(10);
+      area.setColumns(50);
+      area.setLineWrap(true);
+      JScrollPane pane = new JScrollPane(area);
+      JOptionPane.showMessageDialog(null,pane,"Commit failed",JOptionPane.ERROR_MESSAGE);
       throw new ConstraintEx(m);
     }
 
@@ -205,7 +214,12 @@ public class LoadSaveManager {
     if (cs.isWarning()) {
       String m = "There is a problem with your commit:\n\n"+cs.getWarningMessage()
         +"\n\nDo you want to commit anyway?";
-      int ret = JOptionPane.showConfirmDialog(null,m,"Commit Warning",
+      JTextArea area = new JTextArea(m);
+      area.setRows(10);
+      area.setColumns(50);
+      area.setLineWrap(true);
+      JScrollPane pane = new JScrollPane(area);
+       int ret = JOptionPane.showConfirmDialog(null,pane,"Commit Warning",
                                               JOptionPane.YES_NO_OPTION,
                                               JOptionPane.ERROR_MESSAGE);
       if (ret != JOptionPane.YES_OPTION)
