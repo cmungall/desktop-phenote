@@ -24,10 +24,15 @@ public class Comparison {
   /** only show rel with object?? assumes being displayed in subject
       silly? another method displayRelativeToObject? ForObject? */
   public String toString() {
-    String objString = object.toString(); // yucky
-    if (object.hasAnnotId()) objString = object.getAnnotId(); // better
     String rel = relation!=null ? relation.getName() : ""; 
-    return rel+"^"+"("+objString+")";
+    // return ^() or "" if all are null?
+    return charStr(subject)+"^"+rel+"("+charStr(object)+")";
+  }
+
+  private String charStr(CharacterI c) {
+    if (c == null) return "";
+    if (c.hasAnnotId()) return c.getAnnotId();
+    return c.toString(); // appending of all fields
   }
 
   public Comparison cloneComparison() {

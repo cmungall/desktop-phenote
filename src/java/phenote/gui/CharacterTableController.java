@@ -213,9 +213,10 @@ public class CharacterTableController {
     else log().error("Top level ancestor of table is not a Frame");
 
     
-    CharacterI c1 = !selChars.isEmpty() ? selChars.get(0) : null;
-    CharacterI c2 = selChars.size() > 1 ? selChars.get(1) : null;
-    new ComparisonGui(frame,c1,c2);
+    // dont think we're gonna use selected chars???
+    //CharacterI c1 = !selChars.isEmpty() ? selChars.get(0) : null;
+    //CharacterI c2 = selChars.size() > 1 ? selChars.get(1) : null;
+    new ComparisonGui(frame);//,c1,c2);
   }
 
 	public EventSelectionModel<CharacterI> getSelectionModel() {

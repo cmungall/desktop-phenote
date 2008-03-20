@@ -116,7 +116,7 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
 
   /** createPostCompRelationList - will relation lists ever be in main window and if
       so will they ever have listeners enabled - maybe, probably not */
-  public static CharFieldGui makeRelationList(CharField cf) {
+  public static RelationCompList makeRelationList(CharField cf) {
     RelationCompList r = new RelationCompList(cf);
     //r.setSearchParams(sp); // does rel really need search params?
     return r;
@@ -253,18 +253,19 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
     }
   }
   
-  public void commitAndSelectNext() {
-    this.updateModel();
-    if (this.selectionModel == null) return;
-    final int currentMax = this.selectionModel.getMaxSelectionIndex();
-    if (currentMax > -1) {
-      try {
-        this.selectionModel.setSelectionInterval(currentMax + 1, currentMax + 1);
-      } catch (IndexOutOfBoundsException e) {
-        // no big deal, nothing more to select
-      }
-    }
-  }
+  // this method doesnt appear to be used - mg
+//   public void commitAndSelectNext() {
+//     this.updateModel();
+//     if (this.selectionModel == null) return;
+//     final int currentMax = this.selectionModel.getMaxSelectionIndex();
+//     if (currentMax > -1) {
+//       try {
+//         this.selectionModel.setSelectionInterval(currentMax + 1, currentMax + 1);
+//       } catch (IndexOutOfBoundsException e) {
+//         // no big deal, nothing more to select
+//       }
+//     }
+//   }
 
   public void setSelectionManager(SelectionManager manager) {
     this.selectionManager = manager;
@@ -634,6 +635,8 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
     }
   }
   
+  /** For fields with lists - this is the model for JList, manages a list of 
+      char field values */
   private class ValueListModel extends AbstractListModel {
     private List<CharFieldValue> charValueList = new ArrayList<CharFieldValue>();
     private void setList(List<CharFieldValue> l) { 

@@ -26,6 +26,9 @@ hmmmmmm....
 this is backwards - - free text field should probably sublcass read only
 actually this should just be a parameter to free text field - refactor!
 also would there ever be a case of having a term read only?
+ive put drop recipient for character data in here for now for comparison gui
+see CharDropHandler inner class
+if other subclasses need this, this can migrate to superclass
 */
 
 public class ReadOnlyFieldGui extends FreeTextField { // CharFieldGui

@@ -1,5 +1,8 @@
 package phenote.gui.field;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOProperty;
 
@@ -9,9 +12,10 @@ import phenote.datamodel.CharFieldValue;
 /** with now common superclass OBOObject this should be merged with TermCompList 
     I think */
 
-class RelationCompList extends AbstractAutoCompList {
+public class RelationCompList extends AbstractAutoCompList {
 
   private OBOProperty currentRel=null;
+  private RelSelectObservable relSelectObservable;
 
   RelationCompList(CharField c) {
     super(c);
@@ -42,6 +46,9 @@ class RelationCompList extends AbstractAutoCompList {
     }
     currentRel = rel;
     setText(rel.getName());
+    // notify observers of new relation (eg comparison gui)
+    getObservable().setChanged();
+    getObservable().notifyObservers();
   }
   /** Throws exception if there isnt a current relation - for relation lists
       (post comp), if the user
@@ -85,6 +92,7 @@ class RelationCompList extends AbstractAutoCompList {
     return (CompletionObject)obj;
   }
    
+  // is this used for rel comp list for post comp? dont think so
   protected void updateModel(boolean useTopHit) {
     // todo: implement useTopHit for "return" on partial input! list TermComp
     try {
@@ -114,6 +122,21 @@ class RelationCompList extends AbstractAutoCompList {
     l.newResults(getCompListSearcher().getStringMatchRelations(input));
   }
 
+  /** Send out notification when a new relation has been selected, used by ComparisonGui
+   avoids hardwiring modifying a particular datamodel like other CharFieldGuis(refactor)
+   this could migrate to superclass if needed there
+  */
+  public RelSelectObservable getObservable() {
+    if (relSelectObservable==null) relSelectObservable = new RelSelectObservable();
+    return relSelectObservable;
+  }
+  public void addObserver(Observer o) { getObservable().addObserver(o); }
+
+  //private class RelSelectObservable extends Observable {}
+  
+  private class RelSelectObservable extends Observable {
+    protected void setChanged() { super.setChanged(); }
+  }
 
   private Logger log;
   private Logger log() {
