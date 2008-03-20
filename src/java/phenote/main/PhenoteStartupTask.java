@@ -10,7 +10,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JToolBar;
 
 import org.apache.log4j.Logger;
-import org.bbop.framework.ComponentManager;
 import org.bbop.framework.GUIComponent;
 import org.bbop.framework.GUIComponentFactory;
 import org.bbop.framework.GUIManager;
@@ -186,15 +185,16 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
   protected void configureUI() {
     // overriding the odd colors in BBOP framework
   }
+  
+  
 
   @Override
-  public void run() {
-    super.run();
-    // driver needs to be set after all of BBOP framework is initialized
-    final LayoutDriver driver = ComponentManager.getManager().getDriver();
+  protected LayoutDriver createLayoutDriver() {
+    final LayoutDriver driver = super.createLayoutDriver();
     if (driver instanceof IDWDriver) {
-      ((IDWDriver)driver).setTheme(new PhenoteDockingTheme());
+      ((IDWDriver)driver).setCustomTheme(new PhenoteDockingTheme());
     }
+    return driver;
   }
 
   /**
