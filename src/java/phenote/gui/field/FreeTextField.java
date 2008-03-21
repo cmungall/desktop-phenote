@@ -1,9 +1,13 @@
 package phenote.gui.field;
 
 import java.awt.Color;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,10 +16,14 @@ import javax.swing.JComponent;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.Timer;
+import javax.swing.TransferHandler;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import org.apache.log4j.Logger;
+import org.obo.datamodel.LinkedObject;
+import org.oboedit.gui.Selection;
+import org.oboedit.gui.SelectionTransferHandler;
 
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldException;
@@ -24,6 +32,7 @@ import phenote.datamodel.CharacterI;
 import phenote.edit.CompoundTransaction;
 import phenote.error.ErrorEvent;
 import phenote.error.ErrorManager;
+import phenote.gui.DelegatingTransferHandler;
 import phenote.gui.FieldRightClickMenu;
 import phenote.gui.GuiUtil;
 import phenote.gui.PopupListener;
@@ -44,6 +53,8 @@ class FreeTextField extends CharFieldGui {
     this.getTextField().setEditable(true);
     this.getTextField().addActionListener(new FieldActionListener());
     this.getTextField().getDocument().addDocumentListener(new TextFieldDocumentListener());
+    final TransferHandler handler = this.getTextField().getTransferHandler();
+    this.getTextField().setTransferHandler(new FieldTransferHandler(handler));
      //Add listener to components that can bring up popup menus.
     JPopupMenu popup = new FieldRightClickMenu(this.textField);
     MouseListener popupListener = new PopupListener(popup);
@@ -281,6 +292,50 @@ class FreeTextField extends CharFieldGui {
         guiTextHasChanged = true;
       }
     }
+  }
+  
+  @SuppressWarnings("serial")
+  private class FieldTransferHandler extends DelegatingTransferHandler {
+        
+    public FieldTransferHandler(TransferHandler parentHandler) {
+      super(parentHandler);
+    }
+
+    @Override
+    public boolean canImport(JComponent comp, DataFlavor[] transferFlavors) {
+      if (super.canImport(comp, transferFlavors)) return true;
+      for (DataFlavor flavor : transferFlavors) {
+        if (flavor.equals(SelectionTransferHandler.SELECTION_FLAVOR)) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    @Override
+    public boolean importData(JComponent comp, Transferable t) {
+      for (DataFlavor flavor : t.getTransferDataFlavors()) {
+        if (flavor.equals(SelectionTransferHandler.SELECTION_FLAVOR)) {
+          try {
+            final Selection selection = (Selection)(t.getTransferData(SelectionTransferHandler.SELECTION_FLAVOR));
+            for (LinkedObject lo : selection.getTerms()) {
+              textField.setText(lo.getName());
+              guiTextHasChanged = true;
+              updateModel();
+              return true;
+            }
+          } catch (UnsupportedFlavorException e) {
+            log().error("Data flavor missing: " + flavor, e);
+            return false;
+          } catch (IOException e) {
+            log().error("Could not read data flavor: " + flavor, e);
+            return false;
+          }
+        }
+      }
+      return super.importData(comp, t);
+    }
+    
   }
 
   private Logger log;

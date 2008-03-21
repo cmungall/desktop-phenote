@@ -1,29 +1,40 @@
 package phenote.gui.field;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Frame;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JList;
+import javax.swing.TransferHandler;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import org.apache.log4j.Logger;
+import org.obo.datamodel.LinkedObject;
 import org.obo.datamodel.OBOClass;
 import org.obo.util.TermUtil;
+import org.oboedit.gui.Selection;
+import org.oboedit.gui.SelectionTransferHandler;
 
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldException;
+import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyException;
-import phenote.datamodel.CharFieldManager;
 import phenote.edit.CompoundTransaction;
+import phenote.gui.DelegatingTransferHandler;
 import phenote.gui.SearchParams;
 import phenote.gui.selection.UseTermEvent;
 import phenote.gui.selection.UseTermListener;
@@ -49,7 +60,7 @@ public class TermCompList extends AbstractAutoCompList {
     if (hasMoreThanOneOntology()) // super AACL
       initOntologyChooser(getCharField());
     // if config.showAllOnEmptyInput...
-    
+    this.configureTransferHandler();
   }
 
 
@@ -393,7 +404,16 @@ public class TermCompList extends AbstractAutoCompList {
   protected JComboBox getOntologyChooser() {
     return ontologyChooserCombo;
   }
-
+  
+  private void configureTransferHandler() {
+    final Component editor = this.getJComboBox().getEditor().getEditorComponent();
+    if (editor instanceof JComponent) {
+      final TransferHandler handler = ((JComponent)editor).getTransferHandler();
+      ((JComponent)editor).setTransferHandler(new FieldTransferHandler(handler));
+    } else {
+      log().error("Could not set transfer handler for JComboBox");
+    }
+  }
 
   private Logger log;
 
@@ -439,6 +459,61 @@ public class TermCompList extends AbstractAutoCompList {
       new PostCompGui(getCharField(), TermCompList.this.getEditManager(),
                       TermCompList.this.getSelectionManager(), TermCompList.this.selectionModel, frame,getMinCompChars());
     }
+  }
+  
+  @SuppressWarnings("serial")
+  private class FieldTransferHandler extends DelegatingTransferHandler {
+        
+    public FieldTransferHandler(TransferHandler parentHandler) {
+      super(parentHandler);
+    }
+
+    @Override
+    public boolean canImport(JComponent comp, DataFlavor[] transferFlavors) {
+      if (super.canImport(comp, transferFlavors)) return true;
+      for (DataFlavor flavor : transferFlavors) {
+        if (flavor.equals(SelectionTransferHandler.SELECTION_FLAVOR)) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    @Override
+    public boolean importData(JComponent comp, Transferable t) {
+      for (DataFlavor flavor : t.getTransferDataFlavors()) {
+        if (flavor.equals(SelectionTransferHandler.SELECTION_FLAVOR)) {
+          try {
+            final Selection selection = (Selection)(t.getTransferData(SelectionTransferHandler.SELECTION_FLAVOR));
+            for (LinkedObject lo : selection.getTerms()) {
+              // just use the first term
+              if ((lo instanceof OBOClass) && this.isValidTerm((OBOClass)lo)) {
+                setOboClass((OBOClass)lo);
+                setModel((OBOClass)lo);
+                return true;
+              } else {
+                return false;
+              }
+            }
+          } catch (UnsupportedFlavorException e) {
+            log().error("Data flavor missing: " + flavor, e);
+            return false;
+          } catch (IOException e) {
+            log().error("Could not read data flavor: " + flavor, e);
+            return false;
+          }
+        }
+      }
+      return super.importData(comp, t);
+    }
+    
+    private boolean isValidTerm(OBOClass term) {
+      for (Ontology ontology : getCharField().getOntologyList()) {
+        if (ontology.getSortedTerms().contains(term)) return true;
+      }
+      return false;
+    }
+    
   }
 
 }

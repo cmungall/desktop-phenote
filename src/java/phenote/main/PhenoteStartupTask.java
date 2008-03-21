@@ -38,6 +38,7 @@ import phenote.gui.factories.CharacterTableFactory;
 import phenote.gui.factories.NCBIInfoFactory;
 import phenote.gui.factories.PhenoteEditorFactory;
 import phenote.gui.factories.PhenoteGraphViewFactory;
+import phenote.gui.factories.PhenoteOntologyTreeEditorFactory;
 import phenote.gui.factories.PhenoteTreeViewFactory;
 import phenote.gui.factories.ProtocolEditorFactory;
 import phenote.gui.factories.TermInfoFactory;
@@ -71,6 +72,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 //  factories.add(new GraphEditorFactory());  <-- removing this for upcoming 1.5 release
     factories.add(new PhenoteTreeViewFactory());
     factories.add(new PhenoteGraphViewFactory());
+    factories.add(new PhenoteOntologyTreeEditorFactory());
     factories.add(new AnnotationSummaryComponentFactory());
     factories.addAll(this.getTemplateGroupComponentFactories());
     factories.add(new ProtocolEditorFactory());
