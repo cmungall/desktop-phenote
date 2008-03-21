@@ -1,12 +1,12 @@
 package phenote.gui.field;
 
-import java.io.FileNotFoundException;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -253,19 +253,23 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
     }
   }
   
-  // this method doesnt appear to be used - mg
-//   public void commitAndSelectNext() {
-//     this.updateModel();
-//     if (this.selectionModel == null) return;
-//     final int currentMax = this.selectionModel.getMaxSelectionIndex();
-//     if (currentMax > -1) {
-//       try {
-//         this.selectionModel.setSelectionInterval(currentMax + 1, currentMax + 1);
-//       } catch (IndexOutOfBoundsException e) {
-//         // no big deal, nothing more to select
-//       }
-//     }
-//   }
+  /**
+   * This method is called by a ResponderChainAction.  It commits the 
+   * currently edited value, then causes the next character to be selected
+   * so that the user can keep editing the same field for each character.
+   */
+  public void commitAndSelectNext() {
+    this.updateModel();
+    if (this.selectionModel == null) return;
+    final int currentMax = this.selectionModel.getMaxSelectionIndex();
+    if (currentMax > -1) {
+      try {
+        this.selectionModel.setSelectionInterval(currentMax + 1, currentMax + 1);
+      } catch (IndexOutOfBoundsException e) {
+        // no big deal, nothing more to select
+      }
+    }
+  }
 
   public void setSelectionManager(SelectionManager manager) {
     this.selectionManager = manager;
@@ -637,6 +641,7 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
   
   /** For fields with lists - this is the model for JList, manages a list of 
       char field values */
+  @SuppressWarnings("serial")
   private class ValueListModel extends AbstractListModel {
     private List<CharFieldValue> charValueList = new ArrayList<CharFieldValue>();
     private void setList(List<CharFieldValue> l) { 
