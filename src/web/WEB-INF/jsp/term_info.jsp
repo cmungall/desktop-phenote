@@ -54,7 +54,7 @@
       <td>
       <c:choose>
       <c:when test="${ formBean.isExternalViewType }">
-        <a href="/phenote/Phenote/?termId=<c:out value='${parent.parent.ID}' />&ontologyName=ZF&field=ENTITY&viewType=EXTERNAL">
+        <a href="/phenote/Phenote/?termId=<c:out value='${parent.parent.ID}' />&ontologyName=<c:out value='${formBean.ontologyName}'/>&field=ENTITY&viewType=EXTERNAL">
       </c:when>
       <c:otherwise>
         <a href="javascript:;"
@@ -76,7 +76,7 @@
       <td>
       <c:choose>
       <c:when test="${ formBean.isExternalViewType }">
-        <a href="/phenote/Phenote/?termId=<c:out value='${parent.child.ID}' />&ontologyName=ZF&field=ENTITY&viewType=EXTERNAL">
+        <a href="/phenote/Phenote/?termId=<c:out value='${parent.child.ID}' />&ontologyName=<c:out value='${formBean.ontologyName}'/>&field=ENTITY&viewType=EXTERNAL">
       </c:when>
       <c:otherwise>
         <a href="javascript:;"
