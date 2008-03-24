@@ -43,7 +43,8 @@ class ComparisonCharacterGui {
 
 
   /** gives thumbs up to CHAR_FLAVOR data - character drag & drop from table
-      and imports it on dropping */
+      and imports it on dropping
+      this is actually controller stuff that could be put in separate class? */
   private class CharDropHandler extends TransferHandler {
     public boolean canImport(JComponent c, DataFlavor[] flavors) {
       for (DataFlavor f : flavors)
@@ -94,4 +95,6 @@ class ComparisonCharacterGui {
     }
     return sb.toString().trim();
   }
+
+
 }

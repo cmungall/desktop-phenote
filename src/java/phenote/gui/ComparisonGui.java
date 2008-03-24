@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.AbstractListModel;
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
@@ -39,7 +40,9 @@ import phenote.gui.field.FieldPanel;
 import phenote.gui.field.ReadOnlyFieldGui;
 import phenote.gui.field.RelationCompList;
 
-/** a gui for making comparisons between 2 statements/annotations */
+/** a gui for making comparisons between 2 statements/annotations
+ there is comparison controller stuff in here - listens to gui elements and modifies
+ model*/
 
 class ComparisonGui {
   
@@ -53,6 +56,7 @@ class ComparisonGui {
   /** eventually may do a list of comparisons? */
   private Comparison currentComparison;
   private ComparisonListModel compListModel = new ComparisonListModel();
+  private FieldPanel fieldPanel;
 
   ComparisonGui(Frame owner) { //, CharacterI c1, CharacterI c2) {
     try { init(owner); } 
@@ -74,18 +78,20 @@ class ComparisonGui {
     dialog = new JDialog(owner,"Statement Comparison",modal);
     dialog.setAlwaysOnTop(true);
 
-    FieldPanel fieldPanel = FieldPanel.makeBasicPanel();
+    fieldPanel = FieldPanel.makeBasicPanel();
     dialog.add(fieldPanel);
     
-    addSubjectGui(fieldPanel);
+    addHelpText();
+
+    addSubjectGui();
 
     // Relationship - dislpay rel if comp already made
     addRelGui(fieldPanel); // throws CharFieldException if no rel ontology
 
-    addObjectGui(fieldPanel);
+    addObjectGui();
 
     // Buttons OK & Cancel
-    addButtons(fieldPanel);
+    addButtons();
     
     dialog.add(createListGui(),BorderLayout.EAST);
 
@@ -95,11 +101,17 @@ class ComparisonGui {
     dialog.pack(); // ?
   }
 
-  private void addSubjectGui(FieldPanel fieldPanel) {
+  private void addHelpText() {
+    String m = "Drag rows from Annotation table and drop on Subject & Object fields:";
+    fieldPanel.addLabelForWholeRow(m);
+    fieldPanel.addLabelForWholeRow(" "); // cheap vert spacing
+  }
+
+  private void addSubjectGui() {
     subjectGui = addField(fieldPanel,"Subject");
     subjectGui.addObserver(new SubjectObserver());
   }
-  private void addObjectGui(FieldPanel fieldPanel) {
+  private void addObjectGui() {
     objectGui = addField(fieldPanel,"Object");
     objectGui.addObserver(new ObjectObserver());
   }
@@ -134,15 +146,19 @@ class ComparisonGui {
     return listScroll;
   }
 
-  private void addButtons(FieldPanel fieldPanel) {
-    List<JButton> buttons = new ArrayList<JButton>(2);
+  private void addButtons() {
+    List<JComponent> buttons = new ArrayList<JComponent>(4);
     JButton ok = new JButton("OK");
     ok.addActionListener(new OkListener());
     buttons.add(ok);
     JButton cancel = new JButton("Cancel");
     cancel.addActionListener(new CancelListener());
     buttons.add(cancel);
-    fieldPanel.addButtonRow(buttons);
+    JButton addComp = new JButton("+");
+    buttons.add(new Box.Filler(new Dimension(10,0),new Dimension(200,0),
+                               new Dimension(400,0)));
+    buttons.add(addComp);
+    fieldPanel.addComponentRow(buttons);
   }
 
   // OK

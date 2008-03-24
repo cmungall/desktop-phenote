@@ -322,6 +322,16 @@ public class FieldPanel extends AbstractGUIComponent {
     fieldPanel.add(buttonPanel,constraints);
   }
 
+  public void addComponentRow(List<JComponent> comps) {
+    JPanel compPanel = new JPanel();
+    for (JComponent c : comps)
+      compPanel.add(c);
+    GridBagConstraints constraints = getConstraintsNewRow();
+    constraints.gridwidth = 5;
+    constraints.gridx = 1; // scoot it over a little?
+    fieldPanel.add(compPanel,constraints);
+  }
+
 
   public SearchParamPanel getSearchParamPanel() {
     if (searchParamPanel == null)
