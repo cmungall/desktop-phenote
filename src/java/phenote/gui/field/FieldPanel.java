@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -209,6 +210,11 @@ public class FieldPanel extends AbstractGUIComponent {
     addButtons(fieldGui,getConstraintsSameRow()); //put all buttons in same col
   }
   
+  public void addRow(String labelStr, JComponent component) {
+    addLabel(labelStr,getConstraintsNewRow());
+    addInputGui(component,getConstraintsSameRow());
+  }
+
   void addButtons(CharFieldGui fieldGui, GridBagConstraints constraints) {
     this.addPostCompButton(fieldGui, constraints);
     this.addRetrieveButton(fieldGui, constraints);  	
@@ -264,11 +270,15 @@ public class FieldPanel extends AbstractGUIComponent {
   }
   
   private void addInputGui(CharFieldGui fieldGui, GridBagConstraints constraints) {
-    constraints.gridx = 2;
     if (!fieldGui.hasListGui()) constraints.gridwidth = 2;
+    addInputGui(fieldGui.getUserInputGui(), constraints);
+  }
+
+  private void addInputGui(JComponent gui, GridBagConstraints constraints) {
+    constraints.gridx = 2;
     constraints.weightx = 1.0;
     constraints.fill = GridBagConstraints.HORIZONTAL;
-    fieldPanel.add(fieldGui.getUserInputGui(), constraints);
+    fieldPanel.add(gui, constraints);
   }
   
   private void addListGui(CharFieldGui fieldGui, GridBagConstraints constraints) {

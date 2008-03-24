@@ -46,9 +46,10 @@ class ComparisonGui {
   private JDialog dialog;
 //   private CharacterI char1;
 //   private CharacterI char2;
-  private ReadOnlyFieldGui subjectGui;
+  //private ReadOnlyFieldGui subjectGui;
+  private ComparisonCharacterGui subjectGui;
   private RelationCompList relFieldGui;
-  private ReadOnlyFieldGui objectGui;
+  private ComparisonCharacterGui objectGui;
   /** eventually may do a list of comparisons? */
   private Comparison currentComparison;
   private ComparisonListModel compListModel = new ComparisonListModel();
@@ -95,19 +96,21 @@ class ComparisonGui {
   }
 
   private void addSubjectGui(FieldPanel fieldPanel) {
-    subjectGui = addField(fieldPanel,"Subject",currentComparison.getSubject());
+    subjectGui = addField(fieldPanel,"Subject");
+    subjectGui.addObserver(new SubjectObserver());
   }
   private void addObjectGui(FieldPanel fieldPanel) {
-    objectGui = addField(fieldPanel,"Object",currentComparison.getObject());
+    objectGui = addField(fieldPanel,"Object");
+    objectGui.addObserver(new ObjectObserver());
   }
 
-  private ReadOnlyFieldGui addField(FieldPanel fieldPanel,String name,CharacterI chr) {
-    ReadOnlyFieldGui fieldGui =
-      new ReadOnlyFieldGui(new CharField("Subject",null,null));
-    fieldGui.setCharacter(currentComparison.getSubject()); // ???
-    fieldGui.enableCharDropListening(true);
-    fieldPanel.addCharFieldGuiToPanel(fieldGui);
-    return fieldGui;
+  private ComparisonCharacterGui addField(FieldPanel fieldPanel,String name) {
+    //ReadOnlyFieldGui fg=new ReadOnlyFieldGui(new CharField("Subject",null,null));
+    ComparisonCharacterGui gui = new ComparisonCharacterGui(name);
+    //fieldGui.setCharacter(currentComparison.getSubject()); // ???
+    //fieldGui.enableCharDropListening(true);
+    fieldPanel.addRow(name,gui.getComponent());
+    return gui;
   }
 
   private void addRelGui(FieldPanel fp) throws CharFieldException {
@@ -195,6 +198,19 @@ class ComparisonGui {
     public void 	update(Observable o, Object arg) {
       try { currentComparison.setRelation(relFieldGui.getCurrentRelation()); }
       catch (CharFieldGuiEx e) { currentComparison.setRelation(null); } // ?
+      compListModel.fireContentsChanged();
+    }
+  }
+
+  private class SubjectObserver implements Observer {
+    public void 	update(Observable o, Object arg) {
+      currentComparison.setSubject(subjectGui.getCharacter());
+      compListModel.fireContentsChanged();
+    }
+  }
+  private class ObjectObserver implements Observer {
+    public void 	update(Observable o, Object arg) {
+      currentComparison.setObject(objectGui.getCharacter());
       compListModel.fireContentsChanged();
     }
   }
