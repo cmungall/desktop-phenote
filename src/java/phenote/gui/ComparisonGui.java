@@ -35,6 +35,7 @@ import phenote.datamodel.CharacterEx;
 import phenote.datamodel.Comparison;
 import phenote.datamodel.Ontology;
 import phenote.edit.EditManager;
+import phenote.dataadapter.CharacterListManager;
 import phenote.config.Config;
 import phenote.gui.field.CharFieldGui;
 import phenote.gui.field.CharFieldGuiEx;
@@ -293,7 +294,10 @@ class ComparisonGui {
     }
   }
 
-  /** INNER CLASS MODEL FOR COMPARISON JList, a list of all comparisons */ 
+
+  /** 
+   *  INNER CLASS MODEL FOR COMPARISON JList, a list of all comparisons
+   */ 
   private class ComparisonListModel extends AbstractListModel {
     private List<Comparison> compList = new ArrayList<Comparison>();
 
@@ -302,7 +306,7 @@ class ComparisonGui {
     }
 
     private void initComparisonList() {
-      compList = getComparisonsFromCharList();
+      compList = getComparisonsFromDatamodel();
       // if non empty select 1st item?
       // if empty then add new item to edit
       if (compList.isEmpty()) {
@@ -317,9 +321,8 @@ class ComparisonGui {
     }
     
     
-    private List<Comparison> getComparisonsFromCharList() {
-      // for now just return empty list
-      return new ArrayList<Comparison>();
+    private List<Comparison> getComparisonsFromDatamodel() {
+      return CharacterListManager.inst().getComparisons();
     }
 
     public Object getElementAt(int index) {
