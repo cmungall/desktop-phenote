@@ -143,15 +143,23 @@ public class EditManager {
     for (CharFieldValue oldToDelete : characterListManager.getComparisonValues())
       t.addTransaction(delFromListTransaction(oldToDelete));
 
-    for (Comparison c : newComps)
-      t.addTransaction(UpdateTransaction.addComparison(c));
+    // funny case but need to do del edit before add or add trans will see state
+    // before delete
+    t.editModel();
+
+    for (Comparison c : newComps) {
+      UpdateTransaction ut = UpdateTransaction.addComparison(c);
+      ut.editModel(); // as half of edits done above
+      t.addTransaction(ut); // for undo
+    }
 
     //CompoundTransaction t = CompoundTransaction.replaceComparisons(old,newComps);
 //     for (Comparison c : )
 //       ct.addTransaction(UpdateTransaction.delComparison(c));
 //     for (Comparison c : newComps)
 //       ct.addTransaction(UpdateTransaction.addComparison(c));
-    editAddAndFire(t,src);
+    addTransaction(t);
+    fireChangeEvent(t,src);
   }
 
 
