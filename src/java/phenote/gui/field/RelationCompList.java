@@ -16,6 +16,7 @@ public class RelationCompList extends AbstractAutoCompList {
 
   private OBOProperty currentRel=null;
   private RelSelectObservable relSelectObservable;
+  private boolean nullOk = false;
 
   RelationCompList(CharField c) {
     super(c);
@@ -38,14 +39,21 @@ public class RelationCompList extends AbstractAutoCompList {
       return "";
   }
 
+  /** by default relation cant be set explicitly to null (but can be null at init)
+      if nullOk then a user can null out relation (or select a comparison with a 
+      null relation) */
+  public void setNullOk(boolean nullOk) {
+    this.nullOk = nullOk;
+  }
+
   /** for relationships (post comp rel) */
   public void setRel(OBOProperty rel) {
-    if (rel == null) {
+    if (!nullOk && rel == null) {
       log().error("Attempt to set term to null");
       return; // debug stack trace?
     }
     currentRel = rel;
-    setText(rel.getName());
+    setText(rel == null ? "" : rel.getName());
     // notify observers of new relation (eg comparison gui)
     getObservable().setChanged();
     getObservable().notifyObservers();

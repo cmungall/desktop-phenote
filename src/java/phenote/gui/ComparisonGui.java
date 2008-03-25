@@ -135,6 +135,8 @@ class ComparisonGui {
     Ontology o = CharFieldManager.inst().getComparisonRelationOntology();
     relChar.addOntology(o);
     relFieldGui = CharFieldGui.makeRelationList(relChar);//"Relationship"?
+    // null have to be ok as comps can be incomplete
+    relFieldGui.setNullOk(true);
     // listen for new selected relations
     relFieldGui.addObserver(new RelationObserver());
     fieldPanel.addCharFieldGuiToPanel(relFieldGui);
