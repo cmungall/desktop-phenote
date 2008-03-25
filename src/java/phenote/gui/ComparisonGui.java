@@ -19,6 +19,8 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import org.apache.log4j.Logger;
 
@@ -54,8 +56,9 @@ class ComparisonGui {
   private RelationCompList relFieldGui;
   private ComparisonCharacterGui objectGui;
   /** eventually may do a list of comparisons? */
-  private Comparison currentComparison;
-  private ComparisonListModel compListModel = new ComparisonListModel();
+  //private Comparison currentComparison;
+  private JList listGui;
+  private ComparisonListModel compListModel;
   private FieldPanel fieldPanel;
 
   ComparisonGui(Frame owner) { //, CharacterI c1, CharacterI c2) {
@@ -80,13 +83,14 @@ class ComparisonGui {
 
     fieldPanel = FieldPanel.makeBasicPanel();
     dialog.add(fieldPanel);
+    // fieldPanel class var used in below methods
     
     addHelpText();
 
     addSubjectGui();
 
     // Relationship - dislpay rel if comp already made
-    addRelGui(fieldPanel); // throws CharFieldException if no rel ontology
+    addRelGui(); // throws CharFieldException if no rel ontology
 
     addObjectGui();
 
@@ -125,7 +129,7 @@ class ComparisonGui {
     return gui;
   }
 
-  private void addRelGui(FieldPanel fp) throws CharFieldException {
+  private void addRelGui() throws CharFieldException {
     CharField relChar = new CharField(CharFieldEnum.RELATIONSHIP);
     // throws CharFieldEx if no rel ontol found
     Ontology o = CharFieldManager.inst().getComparisonRelationOntology();
@@ -133,13 +137,16 @@ class ComparisonGui {
     relFieldGui = CharFieldGui.makeRelationList(relChar);//"Relationship"?
     // listen for new selected relations
     relFieldGui.addObserver(new RelationObserver());
-    fp.addCharFieldGuiToPanel(relFieldGui);
+    fieldPanel.addCharFieldGuiToPanel(relFieldGui);
   }
 
   private JComponent createListGui() {
-    JList listGui = new JList();
+    listGui = new JList();
+    compListModel = new ComparisonListModel();
     listGui.setModel(compListModel);
     listGui.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    listGui.addListSelectionListener(new CompListSelectListener());
+    selectFirstComp();
     JScrollPane listScroll = new JScrollPane(listGui);
     listScroll.setMinimumSize(new Dimension(90,40)); // w,h
     listScroll.setPreferredSize(new Dimension(130,60));
@@ -154,11 +161,26 @@ class ComparisonGui {
     JButton cancel = new JButton("Cancel");
     cancel.addActionListener(new CancelListener());
     buttons.add(cancel);
-    JButton addComp = new JButton("+");
     buttons.add(new Box.Filler(new Dimension(10,0),new Dimension(200,0),
                                new Dimension(400,0)));
+    JButton addComp = new JButton("+");
+    addComp.addActionListener(new AddListener());
     buttons.add(addComp);
     fieldPanel.addComponentRow(buttons);
+  }
+
+  private void updateFieldsToSelection() {
+    Comparison c = getSelectedComparison();
+    subjectGui.setCharacter(c.getSubject());
+    relFieldGui.setRel(c.getRelation());
+    objectGui.setCharacter(c.getObject());
+  }
+
+  private Comparison getSelectedComparison() {
+    Object o = listGui.getSelectedValue();
+    //if (o==null) return null; // can this happen?
+    Comparison c = (Comparison)o;
+    return c;
   }
 
   // OK
@@ -176,20 +198,36 @@ class ComparisonGui {
     }
   }
 
+  private class AddListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      compListModel.addNewModelComp();
+      selectLastComp();
+    }
+  }
+
+  private void selectLastComp() {
+    listGui.setSelectedIndex(compListModel.getSize()-1);
+  }
+  private void selectFirstComp() {
+    listGui.setSelectedIndex(0);
+  }
+
   private void commitComparison() throws CharFieldGuiEx {
-    CharacterI sub = subjectGui.getCharacter();
-    OBOProperty rel = relFieldGui.getCurrentRelation(); // ex if not filled in
-    CharacterI obj = objectGui.getCharacter();
-    if (sub==null || rel == null || obj == null)
-      throw new CharFieldGuiEx("Comparison not fully filled out");
+//     CharacterI sub = subjectGui.getCharacter();
+//     OBOProperty rel = relFieldGui.getCurrentRelation(); // ex if not filled in
+//     CharacterI obj = objectGui.getCharacter();
+//     if (sub==null || rel == null || obj == null)
+//       throw new CharFieldGuiEx("Comparison not fully filled out");
     
-    currentComparison.setSubject(sub);
-    currentComparison.setRelation(rel);
-    currentComparison.setObject(obj);
+//     currentComparison.setSubject(sub);
+//     currentComparison.setRelation(rel);
+//     currentComparison.setObject(obj);
 
     try {
       //char1.addComparison(rel,char2);
-      EditManager.inst().addComparison(this,currentComparison);
+      // change this - only do 1st selection - actually should do transaction with
+      // every edit in new paradigm
+      EditManager.inst().addComparison(this,getSelectedComparison());
     } 
     catch (CharacterEx e) {
       String m = e.getMessage();
@@ -212,22 +250,31 @@ class ComparisonGui {
       could also do this with event/listener of course - very similar */
   private class RelationObserver implements Observer {
     public void 	update(Observable o, Object arg) {
-      try { currentComparison.setRelation(relFieldGui.getCurrentRelation()); }
-      catch (CharFieldGuiEx e) { currentComparison.setRelation(null); } // ?
+      try { getSelectedComparison().setRelation(relFieldGui.getCurrentRelation()); }
+      catch (CharFieldGuiEx e) { getSelectedComparison().setRelation(null); } // ?
       compListModel.fireContentsChanged();
     }
   }
 
   private class SubjectObserver implements Observer {
     public void 	update(Observable o, Object arg) {
-      currentComparison.setSubject(subjectGui.getCharacter());
+      getSelectedComparison().setSubject(subjectGui.getCharacter());
       compListModel.fireContentsChanged();
     }
   }
   private class ObjectObserver implements Observer {
     public void 	update(Observable o, Object arg) {
-      currentComparison.setObject(objectGui.getCharacter());
+      getSelectedComparison().setObject(objectGui.getCharacter());
       compListModel.fireContentsChanged();
+    }
+  }
+
+
+  /** INNER CLASS Listen for list selection, fields update */
+  private class CompListSelectListener implements ListSelectionListener {
+    public void valueChanged(ListSelectionEvent e) {
+      if (e.getValueIsAdjusting()) return; // multi-events - ignore
+      updateFieldsToSelection();
     }
   }
 
@@ -244,11 +291,16 @@ class ComparisonGui {
       // if non empty select 1st item?
       // if empty then add new item to edit
       if (compList.isEmpty()) {
-        currentComparison = new Comparison();
-        compList.add(currentComparison);
+        addNewModelComp();
       }
-      // else select 1st item and set to currentComparison
     }
+
+    private void addNewModelComp() {
+      Comparison c = new Comparison();
+      compList.add(c);
+      fireContentsChanged();
+    }
+    
     
     private List<Comparison> getComparisonsFromCharList() {
       // for now just return empty list
@@ -268,8 +320,8 @@ class ComparisonGui {
     private void fireContentsChanged() {
       fireContentsChanged(this,0,getSize()-1);
     }
-    
-  }
+  } // end of ComparisonListModel inner class
+
 
   private Logger log() {
     return Logger.getLogger(getClass());

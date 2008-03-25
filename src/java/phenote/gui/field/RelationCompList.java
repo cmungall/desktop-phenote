@@ -39,7 +39,7 @@ public class RelationCompList extends AbstractAutoCompList {
   }
 
   /** for relationships (post comp rel) */
-  void setRel(OBOProperty rel) {
+  public void setRel(OBOProperty rel) {
     if (rel == null) {
       log().error("Attempt to set term to null");
       return; // debug stack trace?

@@ -34,7 +34,7 @@ class ComparisonCharacterGui {
   JComponent getComponent() { return textField; }
 
   CharacterI getCharacter() { return character; }
-  private void setCharacter(CharacterI c) {
+  void setCharacter(CharacterI c) {
     character = c;
     textField.setText(charString(c));
     getObservable().setChanged();

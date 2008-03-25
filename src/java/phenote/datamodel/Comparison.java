@@ -18,6 +18,7 @@ public class Comparison {
   public CharacterI getSubject() { return subject; }
   public boolean hasSubject() { return subject!=null; }
   public void setRelation(OBOProperty r) { relation = r; }
+  public OBOProperty getRelation() { return relation; }
   public void setObject(CharacterI o) { object = o; }
   public CharacterI getObject() { return object; }
   
