@@ -80,8 +80,16 @@ public interface CharacterI extends Transferable {
   public Annotation getOboAnnotation();
   
   /** Returns true if charI implementation supports comparisons, eg Character doesnt
-      AnnotChar does */
+      AnnotChar does, this can return true even if hasComparison is false */
   public boolean supportsComparisons();
+  /** Returns true if character is a SUBJECT of a comparison, NOT object
+      in otherwords returns false if getComparison is null */
+  public boolean hasComparison();
+  /** Return Comparisons if char is subject of comparisons, not object.
+      returns null otherwise */
+  public List<Comparison> getComparisons();
+  /** CharFieldValue may hold a list of values, with char as subject */
+  public List<CharFieldValue> getComparisonValueKidList();
 
   /** make comparison statement using relation to relatedChar. throw exception
       if comparisons are not supported (Character doesnt support) */

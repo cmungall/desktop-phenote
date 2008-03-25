@@ -198,6 +198,8 @@ public class CharField {
       value */
   public boolean isList() {
     //return getTag().equals("NLA"); // || getTag().equals("GC"); // just testing...
+    // Comparisons have to be lists!
+    if (isComparison()) return true;
     if (fieldXmlBean == null) return false;
     if (fieldXmlBean.xgetIsList() == null) return false;
     return fieldXmlBean.getIsList();

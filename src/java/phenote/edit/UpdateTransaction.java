@@ -32,6 +32,10 @@ public class UpdateTransaction implements TransactionI { // extends Transaction?
     newValue = CharFieldValue.makeNewValue(newTerm,oldValue);//new CharFieldValue(newVal,c,cf);
   }
   
+  /** used by character list field gui in character template, v is new value
+      also used by comparisons
+      deals with lists via CFV.makeNewValue
+      im not sure how this works as makeNewValue seems funny */
   public UpdateTransaction(CharacterI c, CharField cf, CharFieldValue v) {
     oldValue = c.getValue(cf);
     newValue = CharFieldValue.makeNewValue(v, oldValue);
@@ -42,17 +46,33 @@ public class UpdateTransaction implements TransactionI { // extends Transaction?
     newValue = newVal;
   }
 
-  public UpdateTransaction(Comparison comparison) {
-    newValue = new CharFieldValue(comparison);
+  /** add comparison to potentially a list of comparisons in subject comparison
+      char field */
+  static UpdateTransaction addComparison(Comparison comparison) {
+    CharFieldValue newKid = new CharFieldValue(comparison);
+    CharacterI sub = comparison.getSubject();
+    CharField cf = newKid.getCharField();
+
+    CharFieldValue oldParent = sub.getValue(cf);
+    CharFieldValue newParent = oldParent.cloneCharFieldValue();
+    newParent.addKid(newKid);
+
+    return new UpdateTransaction(oldParent,newParent);
     // old value really depends on whats allowed in gui - for now assume 
     // 1 comp per char but this will need updating
     // for now just use old comparison of subject - this means only 1 comparison per
     // character - for now - improve with better gui
-    if (comparison.hasSubject()) {
-      CharField f = CharFieldManager.inst().getComparisonField();
-      oldValue = comparison.getSubject().getValue(f); // might be empty/null(?)
-    }
+//     if (comparison.hasSubject()) { // it should have subject!
+//       CharField f = CharFieldManager.inst().getComparisonField();
+//       oldValue = comparison.getSubject().getValue(f); // might be empty/null(?)
+//     }
+    //oldValue = comparison.getValue(); // could be null, could be a list of comps
   }
+
+//   /** delete comparison from list of comparisons, comparisons are always in lists */
+//   static UpdateTransaction deleteComparison(Comparison oldComp) {
+//     CharFieldValue deletedComp
+//   }
 
   protected void setOldValue(CharacterI c, CharField cf) {
     // if list then there is no old value (as its really an add - cheesy?)

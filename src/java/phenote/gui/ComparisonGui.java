@@ -200,18 +200,19 @@ class ComparisonGui {
     }
   }
 
-  private class AddListener implements ActionListener {
-    public void actionPerformed(ActionEvent e) {
-      compListModel.addNewModelComp();
-      selectLastComp();
-    }
-  }
 
   private void selectLastComp() {
     listGui.setSelectedIndex(compListModel.getSize()-1);
   }
   private void selectFirstComp() {
     listGui.setSelectedIndex(0);
+  }
+
+  /** get list of comparisons from gui not datamodel, in other words
+      comparisons user is currently working on. This can have incomplete
+      comparisons */
+  private List<Comparison> getGuiComparisonList() {
+    return compListModel.compList; // null check?
   }
 
   private void commitComparison() throws CharFieldGuiEx {
@@ -225,16 +226,28 @@ class ComparisonGui {
 //     currentComparison.setRelation(rel);
 //     currentComparison.setObject(obj);
 
-    try {
+    //try {
       //char1.addComparison(rel,char2);
       // change this - only do 1st selection - actually should do transaction with
       // every edit in new paradigm
-      EditManager.inst().addComparison(this,getSelectedComparison());
-    } 
-    catch (CharacterEx e) {
-      String m = e.getMessage();
-      JOptionPane.showMessageDialog(dialog,m,"error",JOptionPane.ERROR_MESSAGE);
-      return;
+      //EditManager.inst().addComparison(this,getSelectedComparison());
+      // check if all comparisons are complete
+      //checkGuiComparisons(); or checkForIncompleteComps()
+      // delete all existing comparisons and add new gui comparisons
+      EditManager.inst().replaceAllComparisons(this,getGuiComparisonList());
+//     } ???
+//     catch (CharacterEx e) {
+//       String m = e.getMessage();
+//       JOptionPane.showMessageDialog(dialog,m,"error",JOptionPane.ERROR_MESSAGE);
+//       return;
+//     }
+  }
+
+  /** listener to +/add button for adding a new blank comparison */
+  private class AddListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      compListModel.addNewModelComp();
+      selectLastComp();
     }
   }
 

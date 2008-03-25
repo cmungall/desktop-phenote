@@ -103,10 +103,13 @@ public class CharFieldValue implements Cloneable {
     return newVal;
   }
   
-  /** If list adds to value, if not list just sets it, makes new CFV */
+  /** If list adds to value, if not list just sets it, makes new CFV 
+   This is used by CharacterListFieldGui (for template) but i dont understand how it
+  works for lists - newList and newValue never seem to connect - jim???*/
   public static CharFieldValue makeNewValue(CharFieldValue newValue,
                                             CharFieldValue oldValue) {
-    final CharFieldValue updatedValue = newValue.cloneCharFieldValue(oldValue.getCharacter(), oldValue.getCharField());
+    final CharFieldValue updatedValue =
+      newValue.cloneCharFieldValue(oldValue.getCharacter(), oldValue.getCharField());
     if (oldValue.isList()) { // LIST/MULTI VALUE
       CharFieldValue newList = oldValue.cloneCharFieldValue();
       newList.isList = true; // only parent
@@ -304,6 +307,20 @@ public class CharFieldValue implements Cloneable {
   }
   
   public boolean isComparison() { return getCharField().isComparison(); }
+  
+  /** From cfv comparison parent */
+  public List<Comparison> getComparisonList() {
+    if (!isList()) { // shouldnt happen
+      LOG.error("Calling getCompList on non-list");
+      return null; // ex? empty list?
+    }
+    List<Comparison> l = new ArrayList<Comparison>();
+    for (CharFieldValue kid : getCharFieldValueList())
+      l.add(kid.getComparison());
+    return l;
+  }
+  /** from comparison kid */
+  private Comparison getComparison() { return comparison; }
 
   public boolean isCompound() {
     return this.getCharField().isCompound();

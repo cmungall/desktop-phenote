@@ -9,6 +9,7 @@ import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
+import phenote.datamodel.Comparison;
 
 /** used for bulk updating (see TermCompList) */
 public class CompoundTransaction implements TransactionI {
@@ -47,15 +48,25 @@ public class CompoundTransaction implements TransactionI {
     return upTrans;
   }
 
+//   public static CompoundTransaction replaceComparisons(List<Comparison> old,
+//                                                        List<Comparison> newComps) {
+//     CompoundTransaction ct = new CompoundTransaction();
+//     for (Comparison c : old)
+//       ct.addTransaction(UpdateTransaction.deleteComparison(c));
+//     for (Comparison c : newComps)
+//       ct.addTransaction(UpdateTransaction.addComparison(c));
+//     return ct;
+//   }
+
   public List<CharacterI> getDeletedAnnotations() {
     List<CharacterI>l = new ArrayList<CharacterI>();
     for (TransactionI ch : childTransactions) { l.addAll(ch.getDeletedAnnotations()); }
     return l;
   }
 
-  private CompoundTransaction() {}
+  CompoundTransaction() {}
 
-  private void addTransaction(TransactionI trans) {
+  void addTransaction(TransactionI trans) {
     childTransactions.add(trans);
   }
 

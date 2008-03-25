@@ -671,7 +671,7 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
       if (sel.size() > 1) log().error("Cant delete list items in multi select");
       CharacterI chr = sel.get(0);
       CharFieldValue old = charValueList.get(i);
-      getEditManager().deleteFromValList(this,chr,charField,old);
+      getEditManager().deleteFromValList(this,old);
     }
   }
   

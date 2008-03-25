@@ -162,6 +162,30 @@ public abstract class AbstractCharacter implements CharacterI {
     return getValueString(idField); // returns null if empty
   }
 
+  public boolean hasComparison() { return getComparisons() != null; }
+
+  /** get all comparisons with char as subject */
+  public List<Comparison> getComparisons() {
+    CharFieldValue v = getComparisonParentValue();
+    if (v == null) return null; // shouldnt happen?
+    return v.getComparisonList(); // gets comparisons from cfv kids
+  }
+
+  /** Returns a list of CharFieldValue comparison kids (not parent CFV) */
+  public List<CharFieldValue> getComparisonValueKidList() {
+    CharFieldValue v = getComparisonParentValue();
+    if (v == null) return null;
+    return v.getCharFieldValueList();
+  }
+
+  /** return parent char field value for comparisons that holds a list of 
+      comparison char field values */
+  private CharFieldValue getComparisonParentValue() {
+    if (!supportsComparisons()) return null; // ??
+    if (!CharFieldManager.inst().hasComparisonField()) return null;
+    return getValue(CharFieldManager.inst().getComparisonField());
+  }
+
   //  TRANSFERABLE INTERFACE for drag & drop 
 
   /** Returns an object which represents the data to be transferred.*/

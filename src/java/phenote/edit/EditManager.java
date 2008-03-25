@@ -127,22 +127,51 @@ public class EditManager {
     // or should we send out a char change event with a char list?? probably
   }
 
-  public void addComparison(Object src, Comparison c) throws CharacterEx {
-    UpdateTransaction ut = new UpdateTransaction(c);
-    updateModel(src,ut);
+//   // pase - remove - need to deal with list of comps
+//   public void addComparison(Object src, Comparison c) throws CharacterEx {
+//     UpdateTransaction ut = new UpdateTransaction(c);
+//     updateModel(src,ut);
+//   }
+
+  /** delete all existing comparisons and add new comparisons, and put all this
+      in one undoable transaction */
+  public void replaceAllComparisons(Object src,List<Comparison> newComps) {
+    CompoundTransaction t = new CompoundTransaction();
+    
+    //List<Comparison> old = characterListManager.getComparisons();
+    // do this in compoundTrans?
+    for (CharFieldValue oldToDelete : characterListManager.getComparisonValues())
+      t.addTransaction(delFromListTransaction(oldToDelete));
+
+    for (Comparison c : newComps)
+      t.addTransaction(UpdateTransaction.addComparison(c));
+
+    //CompoundTransaction t = CompoundTransaction.replaceComparisons(old,newComps);
+//     for (Comparison c : )
+//       ct.addTransaction(UpdateTransaction.delComparison(c));
+//     for (Comparison c : newComps)
+//       ct.addTransaction(UpdateTransaction.addComparison(c));
+    editAddAndFire(t,src);
   }
 
 
-  public void deleteFromValList(Object src, CharacterI c, CharField cf,
-                                CharFieldValue kidToDelete) {
-    //CharFieldValue newVal = CharFieldValue.emptyValue(c,cf);
+  public void deleteFromValList(Object src, CharFieldValue kidToDelete) {
+//     CharFieldValue oldListParent = c.getValue(cf);
+//     CharFieldValue newListParent = oldListParent.cloneCharFieldValue();
+//     newListParent.removeKid(kidToDelete);
+//     UpdateTransaction t = new UpdateTransaction(oldListParent,newListParent);
+    UpdateTransaction t = delFromListTransaction(kidToDelete);
+    editAddAndFire(t,src); // sets new value that has kid removed
+  }
+
+  private UpdateTransaction delFromListTransaction(CharFieldValue kidToDelete) {
+    CharacterI c = kidToDelete.getCharacter();
+    CharField cf = kidToDelete.getCharField();
     CharFieldValue oldListParent = c.getValue(cf);
     CharFieldValue newListParent = oldListParent.cloneCharFieldValue();
-    newListParent.removeKid(kidToDelete);
+    newListParent.removeKid(kidToDelete); // crucial!
     UpdateTransaction t = new UpdateTransaction(oldListParent,newListParent);
-    addTransaction(t);
-    t.editModel(); // will remove old value
-    fireChangeEvent(t,src);
+    return t;
   }
 
   /** The initial blank character is a fundamental undoable state, so dont
@@ -203,6 +232,14 @@ public class EditManager {
   private void addTransaction(TransactionI t) {
     transactionList.add(t);
     //System.out.println("got trans "+t); new Throwable().printStackTrace();
+  }
+
+  /** edit model via transaction, add transaction to transaction list, and
+      fire change event with transaction & src */
+  private void editAddAndFire(TransactionI t, Object src) {
+    t.editModel();
+    addTransaction(t);
+    fireChangeEvent(t,src);
   }
 
   private void fireChangeEvent(TransactionI t, Object src) {

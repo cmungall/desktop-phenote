@@ -21,6 +21,16 @@ public class Comparison {
   public OBOProperty getRelation() { return relation; }
   public void setObject(CharacterI o) { object = o; }
   public CharacterI getObject() { return object; }
+
+//   public boolean hasValue() { return getValues() != null; }
+//   /** convenience method for getting CharFieldValue of comparison, if in datamodel
+//       if not yet in datamodel returns null(?)
+//       The datamodel stores the charFieldValue in the subject (not object)
+//       CharFieldValue holds a list of CharFieldValue kid comparisons */
+//   public List<CharFieldValue> getValues() {
+//     if (!hasSubject()) return null;
+//     return getSubject().getComparisonValueKidList();
+//   }
   
   /** only show rel with object?? assumes being displayed in subject
       silly? another method displayRelativeToObject? ForObject? */

@@ -14,6 +14,8 @@ import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterList;
 import phenote.datamodel.CharacterListI;
 import phenote.datamodel.CharFieldManager;
+import phenote.datamodel.CharFieldValue;
+import phenote.datamodel.Comparison;
 
 /** Contains current CharacterList. sends out CharacterListChanged events
     when character list has changed */
@@ -97,5 +99,22 @@ public class CharacterListManager {
     this.currentFile = aFile;
   }
 
-
+  /** Return all comparisons. go through all characters and extract their comparisons
+      if they have them. returns empty list if there are no comparisons. */
+  public List<Comparison> getComparisons() {
+    List<Comparison> l = new ArrayList<Comparison>();
+    for (CharacterI c : getCharList())
+      if (c.hasComparison()) l.addAll(c.getComparisons());
+    return l;
+  }
+  /** Returns all kid CharFieldValue comparisons. there are a list of comparisons
+      for each character. Theres a CharFieldValue parent that is the list of kid 
+      CharFieldValues, and then theres the kid char field values that actually contain
+      the Comparisons. that is what is returned here. refactor? */
+  public List<CharFieldValue> getComparisonValues() {
+    List<CharFieldValue> l = new ArrayList<CharFieldValue>();
+    for (CharacterI c : getCharList())
+      if (c.hasComparison()) l.addAll(c.getComparisonValueKidList());
+    return l;
+  }
 }
