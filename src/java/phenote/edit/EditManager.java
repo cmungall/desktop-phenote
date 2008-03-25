@@ -140,12 +140,13 @@ public class EditManager {
     
     //List<Comparison> old = characterListManager.getComparisons();
     // do this in compoundTrans?
-    for (CharFieldValue oldToDelete : characterListManager.getComparisonValues())
-      t.addTransaction(delFromListTransaction(oldToDelete));
-
-    // funny case but need to do del edit before add or add trans will see state
-    // before delete
-    t.editModel();
+    for (CharFieldValue oldToDelete : characterListManager.getComparisonValues()) {
+      UpdateTransaction ut = delFromListTransaction(oldToDelete);
+      // funny case but need to do del edit before add or add trans will see state
+      // before delete, also other deletes will see state pre previous del
+      ut.editModel();
+      t.addTransaction(ut);
+    }
 
     for (Comparison c : newComps) {
       UpdateTransaction ut = UpdateTransaction.addComparison(c);
