@@ -191,8 +191,8 @@ class ComparisonGui {
     public void actionPerformed(ActionEvent e) {
       try {
         commitComparison();
-      } catch (CharFieldGuiEx x) {
-        String m = "Comparison failed "+x.getMessage();
+      } catch (CommitEx x) {
+        String m = "Comparison failed\n"+x.getMessage()+"\nPlease fix";
         log().debug(m);
         JOptionPane.showMessageDialog(dialog,m,"error",JOptionPane.ERROR_MESSAGE);
         return; // leave window up - hit cancel to get rid of
@@ -216,7 +216,7 @@ class ComparisonGui {
     return compListModel.compList; // null check?
   }
 
-  private void commitComparison() throws CharFieldGuiEx {
+  private void commitComparison() throws CommitEx {
 //     CharacterI sub = subjectGui.getCharacter();
 //     OBOProperty rel = relFieldGui.getCurrentRelation(); // ex if not filled in
 //     CharacterI obj = objectGui.getCharacter();
@@ -233,15 +233,32 @@ class ComparisonGui {
       // every edit in new paradigm
       //EditManager.inst().addComparison(this,getSelectedComparison());
       // check if all comparisons are complete
-      //checkGuiComparisons(); or checkForIncompleteComps()
+    checkForIncompleteComps();
       // delete all existing comparisons and add new gui comparisons
-      EditManager.inst().replaceAllComparisons(this,getGuiComparisonList());
+    EditManager.inst().replaceAllComparisons(this,getGuiComparisonList());
 //     } ???
 //     catch (CharacterEx e) {
 //       String m = e.getMessage();
 //       JOptionPane.showMessageDialog(dialog,m,"error",JOptionPane.ERROR_MESSAGE);
 //       return;
 //     }
+  }
+
+  private class CommitEx extends Exception {
+    CommitEx(String m) { super(m); }
+  }
+
+  /** thorws CommitEx with error msg if ant comparisons are incomplete */
+  private void checkForIncompleteComps() throws CommitEx {
+    StringBuffer sb = new StringBuffer("");
+    boolean failed = false;
+    for (Comparison c : getGuiComparisonList()) {
+      if (!c.isComplete()) {
+        sb.append(c+" is incomplete\n");
+        failed = true;
+      }
+    }
+    if (failed) throw new CommitEx(sb.toString());
   }
 
   /** listener to +/add button for adding a new blank comparison */

@@ -19,8 +19,15 @@ public class Comparison {
   public boolean hasSubject() { return subject!=null; }
   public void setRelation(OBOProperty r) { relation = r; }
   public OBOProperty getRelation() { return relation; }
+  private boolean hasRelation() { return relation != null; }
   public void setObject(CharacterI o) { object = o; }
   public CharacterI getObject() { return object; }
+  private boolean hasObject() { return object!=null; }
+
+  /** returns true if has sub rel & obj */
+  public boolean isComplete() {
+    return hasSubject() && hasRelation() && hasObject();
+  }
 
 //   public boolean hasValue() { return getValues() != null; }
 //   /** convenience method for getting CharFieldValue of comparison, if in datamodel
