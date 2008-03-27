@@ -3,6 +3,7 @@ package phenote.gui;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
+import java.util.Collection;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -12,6 +13,7 @@ import javax.swing.TransferHandler;
 
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharField;
+import phenote.datamodel.TransferableCharacterCollection;
 
 import phenote.config.Config;
 
@@ -45,19 +47,26 @@ class ComparisonCharacterGui {
   /** gives thumbs up to CHAR_FLAVOR data - character drag & drop from table
       and imports it on dropping
       this is actually controller stuff that could be put in separate class? */
+  @SuppressWarnings("serial")
   private class CharDropHandler extends TransferHandler {
     public boolean canImport(JComponent c, DataFlavor[] flavors) {
       for (DataFlavor f : flavors)
-        if (f.equals(CharacterI.CHAR_FLAVOR)) return true;
+        if (f.equals(TransferableCharacterCollection.CHARACTER_LIST_FLAVOR)) return true;
       return false;
     }
+    
+    @SuppressWarnings("unchecked")
     public boolean importData(JComponent comp, Transferable t) {
       if (!canImport(comp,t.getTransferDataFlavors())) return false;
       try {
-        Object o = t.getTransferData(CharacterI.CHAR_FLAVOR);
-        if (!(o instanceof CharacterI)) return false;
-        setCharacter((CharacterI) o);
-        return true;
+        Object o = t.getTransferData(TransferableCharacterCollection.CHARACTER_LIST_FLAVOR);
+        if (o instanceof Collection) {
+          for (CharacterI character : (Collection<CharacterI>)o) {
+            setCharacter(character);
+            return true; // only use the first character
+          }
+        }
+        return false;
       }
       catch (UnsupportedFlavorException e) { return false; }
       catch (java.io.IOException e) { return false; }

@@ -1,6 +1,7 @@
 package phenote.gui;
 
 import phenote.datamodel.CharacterI;
+import phenote.edit.EditManager;
 import ca.odell.glazedlists.swing.EventSelectionModel;
 
 /**
@@ -11,5 +12,7 @@ public interface CharacterTableSource {
   public String getGroup();
   
   public EventSelectionModel<CharacterI> getSelectionModel();
+  
+  public EditManager getEditManager();
 
 }

@@ -18,7 +18,9 @@ import org.bbop.framework.ComponentManager;
 import org.bbop.framework.GUIComponent;
 import org.bbop.framework.dock.LayoutAdapter;
 
+import phenote.dataadapter.ScratchGroup;
 import phenote.datamodel.CharacterI;
+import phenote.edit.EditManager;
 import phenote.gui.field.FieldPanelContainer;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.swing.EventSelectionModel;
@@ -42,7 +44,14 @@ public class CharacterTable extends AbstractGUIComponent implements CharacterTab
     this.tableController = new CharacterTableController(group);
   }
   
+  public CharacterTable(ScratchGroup group, String id) {
+    super(id);
+    this.tableController = new CharacterTableController(group);
+  }
+  
+  @Override
   public void init() {
+    super.init();
     this.setLayout(new BorderLayout());
     this.add(this.createToolBar(), BorderLayout.NORTH);
     this.tableController.removeOldButtons();
@@ -97,6 +106,10 @@ public class CharacterTable extends AbstractGUIComponent implements CharacterTab
 
   public EventSelectionModel<CharacterI> getSelectionModel() {
     return this.tableController.getSelectionModel();
+  }
+  
+  public EditManager getEditManager() {
+    return this.tableController.getEditManager();
   }
   
   @Override

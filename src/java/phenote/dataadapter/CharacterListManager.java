@@ -10,32 +10,28 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
+import phenote.datamodel.CharFieldManager;
+import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterList;
 import phenote.datamodel.CharacterListI;
-import phenote.datamodel.CharFieldManager;
-import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.Comparison;
 
 /** Contains current CharacterList. sends out CharacterListChanged events
     when character list has changed */
 public class CharacterListManager {
 
-  //private static CharacterListManager singleton;
   private static Map<String,CharacterListManager> groupToListMan =
     new HashMap<String,CharacterListManager>();
 
   private CharacterListI characterList = new CharacterList();
   private List<CharListChangeListener> listenerList = new ArrayList<CharListChangeListener>(6);
   private File currentFile; // can hold source of current character list if loaded from a file
-
-//  public CharacterListManager() {}
   
   private CharacterListManager() {
     super();
   }
 
-  // default()?
   public static CharacterListManager main() {
     return getCharListMan(CharFieldManager.DEFAULT_GROUP);
   }
@@ -43,9 +39,6 @@ public class CharacterListManager {
   /** Returns "default" CharacterListManager */ 
   public static CharacterListManager inst() {
     return main();
-//     if (singleton == null)
-//       singleton = new CharacterListManager();
-//     return singleton;
   }
   
   public static void reset() {

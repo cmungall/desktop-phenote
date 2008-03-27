@@ -29,7 +29,7 @@ public class CharacterTableControllerTest {
   @Before public void setup() throws InterruptedException, InvocationTargetException {
     SwingUtilities.invokeAndWait(new Runnable() {
       public void run() {
-        controller = new CharacterTableController(null);
+        controller = CharacterTableController.getDefaultController();
         CharacterListManager.main().getCharacterList().clear();
       }
     });

@@ -72,7 +72,7 @@ public class FieldPanel extends AbstractGUIComponent {
   }
   
   public FieldPanel(CharacterTableSource table) {
-    this(true, false, table.getGroup(), SelectionManager.inst(), EditManager.getEditManager(table.getGroup()), table.getSelectionModel());
+    this(true, false, table.getGroup(), SelectionManager.inst(), table.getEditManager(), table.getSelectionModel());
   }
 
   // Group or String for group?

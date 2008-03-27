@@ -5,9 +5,14 @@ import java.awt.Container;
 import java.awt.Frame;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -16,12 +21,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.TransferHandler;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 import org.apache.log4j.Logger;
@@ -34,12 +38,13 @@ import phenote.dataadapter.CharListChangeListener;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.LoadSaveManager;
 import phenote.dataadapter.OntologyMakerI;
+import phenote.dataadapter.ScratchGroup;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterIFactory;
 import phenote.datamodel.OboUtil;
-import phenote.datamodel.OntologyException;
+import phenote.datamodel.TransferableCharacterCollection;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
@@ -49,7 +54,6 @@ import phenote.util.EverythingEqualComparator;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.FilterList;
 import ca.odell.glazedlists.SortedList;
-import ca.odell.glazedlists.gui.AdvancedTableFormat;
 import ca.odell.glazedlists.swing.EventSelectionModel;
 import ca.odell.glazedlists.swing.EventTableModel;
 import ca.odell.glazedlists.swing.TableComparatorChooser;
@@ -63,8 +67,7 @@ public class CharacterTableController {
 	private FilterList<CharacterI> filteredCharacters;
 	private EventSelectionModel<CharacterI> selectionModel;
   // provides table headers & table cell values
-  //private CharacterTableFormat tableFormat;
-  private AdvancedTableFormat<CharacterI> tableFormat;
+  private CharacterTableFormat tableFormat;
 	private LoadSaveManager loadSaveManager;
 	private CharFieldMatcherEditor filter;
 	private TableComparatorChooser<CharacterI> sortChooser;
@@ -72,10 +75,9 @@ public class CharacterTableController {
 	// private AbstractGUIComponent characterTablePanel; // initialized by swix
 	private JPanel characterTablePanel; // initialized by swix
 	private JTable characterTable; // initialized by swix
-	private JButton addButton; // initialized by swix
+	private JScrollPane scrollPane; // initialized by swix
 	private JButton duplicateButton; // initialized by swix
 	private JButton deleteButton; // initialized by swix
-	private JButton undoButton; // initialized by swix
 	private JButton commitButton; // initialized by swix
 	private JButton graphButton; // initialized by swix
 	private JPanel filterPanel; // initialized by swix
@@ -87,27 +89,40 @@ public class CharacterTableController {
   private JPanel compareSpacer;	// initialized by swix
   private FieldPanel panelToUpdate;
   private TableColumnPrefsSaver tableColumnSaver;
+  private CharacterListManager characterListManager;
+  private EditManager editManager;
   // hmm... its handy
 	private static CharacterTableController defaultController;
 
 	public CharacterTableController(String groupName) {
-		if (groupName != null)
-			this.representedGroup = groupName;
-		if (CharFieldManager.isDefaultGroup(groupName))
-			defaultController = this;
-		this.loadPanelLayout();
-		this.filter = new CharFieldMatcherEditor(CharFieldManager.inst().getCharFieldListForGroup(this.representedGroup));
-	  this.sortedCharacters = new SortedList<CharacterI>(this.getCharacterListManager().getCharacterList().getList(), new EverythingEqualComparator<CharacterI>());
+	   if (groupName != null)
+	      this.representedGroup = groupName;
+	    if (CharFieldManager.isDefaultGroup(groupName))
+	      defaultController = this;
+	    this.init();
+	}
+	
+	public CharacterTableController(ScratchGroup group) {
+	  this.setCharacterListManager(CharacterListManager.getCharListMan(group.getId()));
+	  this.setEditManager(EditManager.getEditManager(group.getId()));
+	  this.representedGroup = Config.inst().getDefaultGroup().getName();
+	  this.init();
+	}
+	
+	private void init() {
+    this.loadPanelLayout();
+    this.filter = new CharFieldMatcherEditor(CharFieldManager.inst().getCharFieldListForGroup(this.representedGroup));
+    this.sortedCharacters = new SortedList<CharacterI>(this.getCharacterListManager().getCharacterList().getList(), new EverythingEqualComparator<CharacterI>());
     this.sortedCharacters.setMode(SortedList.AVOID_MOVING_ELEMENTS);
     this.filteredCharacters = new FilterList<CharacterI>(this.sortedCharacters, this.filter);
     this.selectionModel = new EventSelectionModel<CharacterI>(this.filteredCharacters);
-		this.tableFormat = new CharacterTableFormat(this.representedGroup);
-		this.getEditManager().addCharChangeListener(new CharacterChangeListener());
-		this.getCharacterListManager().addCharListChangeListener(new CharacterListChangeListener());
-		this.initializeInterface();
+    this.tableFormat = new CharacterTableFormat(this.representedGroup);
+    this.getEditManager().addCharChangeListener(new CharacterChangeListener());
+    this.getCharacterListManager().addCharListChangeListener(new CharacterListChangeListener());
+    this.initializeInterface();
     //characterTable.setDefaultRenderer(Object.class, new CharTableRenderer());
     setRenderers();
-		this.addInitialBlankCharacter();
+    this.addInitialBlankCharacter();
 	}
 
 	// may be null
@@ -121,10 +136,6 @@ public class CharacterTableController {
 	public JPanel getCharacterTablePanel() {
 		return this.characterTablePanel;
 	}
-
-	// public AbstractGUIComponent getCharacterTablePanel() {
-	// return this.characterTablePanel;
-	// }
 
 	/**
 	 * in swixml config conf/character_table_panel.xml the add button New is set
@@ -311,7 +322,10 @@ public class CharacterTableController {
 
     // drag & drop
     characterTable.setDragEnabled(true);
-    characterTable.setTransferHandler(new CharacterTransferHandler());
+    final TransferHandler handler = new CharacterTransferHandler();
+    characterTable.setTransferHandler(handler);
+    // scrollpane also needs transfer handler to receive drop on empty table rows
+    scrollPane.setTransferHandler(new DelegatingTransferHandler(handler));
 	}
 
 	private void addInitialBlankCharacter() {
@@ -353,13 +367,26 @@ public class CharacterTableController {
 		this.filter.setFilter(null, this);
 	}
 
+	private void setEditManager(EditManager manager) {
+	  this.editManager = manager;
+	}
 
-	private EditManager getEditManager() {
-		return EditManager.getEditManager(this.representedGroup);
+	public EditManager getEditManager() {
+	  if (this.editManager == null) {
+	    this.editManager = EditManager.getEditManager(this.representedGroup);
+	  }
+		return this.editManager;
+	}
+	
+	private void setCharacterListManager(CharacterListManager manager) {
+	  this.characterListManager = manager;
 	}
 
 	private CharacterListManager getCharacterListManager() {
-		return CharacterListManager.getCharListMan(this.representedGroup);
+	  if (this.characterListManager == null) {
+	    this.characterListManager = CharacterListManager.getCharListMan(this.representedGroup);
+	  }
+		return this.characterListManager;
 	}
 
 	private LoadSaveManager getLoadSaveManager() {
@@ -561,6 +588,7 @@ public class CharacterTableController {
   private CharFieldManager fieldMan() { return CharFieldManager.inst(); }
 
   /** post comp terms with ^ are broken across several lines */
+  @SuppressWarnings("serial")
   private class PostCompCellRenderer extends javax.swing.table.DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value,
                                                    boolean isSelected,boolean hasFocus,
@@ -601,19 +629,53 @@ public class CharacterTableController {
   
   /** Drag & drop CharacterTransferHandler, for dragging characters from table and
       dropping them on ComparisonGui, to specify characters in comparison */
+  @SuppressWarnings("serial")
   private class CharacterTransferHandler extends TransferHandler {
-    /** Return selected character, char is a transferable, if no selection return null
-      if multi select return 1st selected? null? do list??? */
+    /** 
+     * Return selected characters, char is a transferable, if no selection return null
+     */
+    @Override
     public Transferable createTransferable(JComponent c) { // c is the table
       if (!hasSelection()) return null; // ?
       List<CharacterI> chars = getSelectedChars();
-      if (chars.size() > 1) log().info("Using 1st row of selection");
-      CharacterI chr = chars.get(0);
-      return chr; // CharacterI is a transferable
+      return new TransferableCharacterCollection(chars);
     }
+    
+    @Override
     public int getSourceActions(JComponent c) {
-        return COPY;
+      return COPY;
     }
+
+    @Override
+    public boolean canImport(JComponent comp, DataFlavor[] transferFlavors) {
+      if (Arrays.asList(transferFlavors).contains(TransferableCharacterCollection.CHARACTER_LIST_FLAVOR)) {
+        return true;
+      } else {
+        return super.canImport(comp, transferFlavors);
+      }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public boolean importData(JComponent comp, Transferable t) {
+      if (t.isDataFlavorSupported(TransferableCharacterCollection.CHARACTER_LIST_FLAVOR)) {
+        try {
+          Object o = t.getTransferData(TransferableCharacterCollection.CHARACTER_LIST_FLAVOR);
+          if (o instanceof Collection) {
+            for (CharacterI character : (Collection<CharacterI>)o) {
+              getEditManager().addCharacter(character);
+            }
+            return true;
+          }
+        } catch (UnsupportedFlavorException e) {
+          log().error("Data flavor not present, but should have been: " + TransferableCharacterCollection.CHARACTER_LIST_FLAVOR, e);
+        } catch (IOException e) {
+          log().error("Error reading data flavor", e);
+        }
+      }
+      return super.importData(comp, t);
+    }
+    
   }
 
 }

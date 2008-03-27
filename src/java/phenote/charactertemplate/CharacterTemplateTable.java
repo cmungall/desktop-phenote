@@ -360,7 +360,7 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     return CharacterListManager.getCharListMan(this.group);
   }
   
-  private EditManager getEditManager() {
+  public EditManager getEditManager() {
     return EditManager.getEditManager(this.group);
   }
   
