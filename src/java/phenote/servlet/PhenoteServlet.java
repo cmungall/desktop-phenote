@@ -21,6 +21,7 @@ public class PhenoteServlet extends DispatcherServlet {
   private static final String LOG4J_FILE_NAME = "log4j.xml";
   private static String webInfDir;
   private static boolean lazyLoading = false;
+  private static boolean useLog4j = false ; 
 
   /**
    * Initialization of this servlet upon server startup.
@@ -57,10 +58,14 @@ public class PhenoteServlet extends DispatcherServlet {
     // Ensure the Ontologies are read during start up. This takes a while and should be done
     // before a different client calls and has to wait.
     // ToDo: Shall we create a new method called  OntologyDataAdapter.start()? YES
-    if (!lazyLoading)
+    if (!lazyLoading){
       OntologyDataAdapter.initialize();
+    }
 
-    initLog4j();
+    // zfin does not use log4j
+    if(useLog4j){
+        initLog4j();
+    }
   }
 
   private void getIntialParameters() {
