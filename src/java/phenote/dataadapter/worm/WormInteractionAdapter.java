@@ -65,42 +65,23 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
         if (joinkey == null) continue;
         System.out.println("Delete "+joinkey+" end"); 
         String blank = "";
-        String postgres_table = "app_type"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_tempname"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_paper"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_person"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_laboratory"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_intx_desc"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_nbp"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_curator"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_not"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_term"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_phen_remark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_anat_term"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_entity"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_quality"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_suggested"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_lifestage"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_nature"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_func"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_temperature"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_treatment"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_penetrance"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_percent"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_range_start"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_range_end"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-//        postgres_table = "app_quantity_remark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-//        postgres_table = "app_quantity"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_heat_sens"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_heat_degree"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_cold_sens"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_cold_degree"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_mat_effect"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_pat_effect"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_haplo"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_genotype"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_strain"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_obj_remark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        String postgres_table = "int_name"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_effector"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_torvariation"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_tortransgene"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_torremark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_effected"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_tedvariation"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_tedtransgene"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_tedremark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_type"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_phenotype"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_rnai"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_remark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_paper"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_curator"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_person"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_otherevi"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
       }
     } catch (Exception e) {
       System.out.println("Could not delete character: " + e);
@@ -112,7 +93,7 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
     try { ps = c.prepareStatement("INSERT INTO "+postgres_table+"_hst VALUES (?, ?)"); ps.setString(1, joinkey); ps.setString(2, value); }
     catch (SQLException se) {
       System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
-    try { ps.executeUpdate(); } 	// write to app_tempname, which is not what we really want, but we need to figure out the pubchunk thing to see what we're going to do
+    try { ps.executeUpdate(); }
     catch (SQLException se) { System.out.println("We got an exception while executing a history insert in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); }
     
     String pgisnull = "null";
@@ -123,49 +104,27 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
         try { ps = c.prepareStatement("INSERT INTO "+postgres_table+" VALUES (?, ?)"); ps.setString(1, joinkey); ps.setString(2, value); }
         catch (SQLException se) {
           System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
-        try { ps.executeUpdate(); } 	// write to app_tempname, which is not what we really want, but we need to figure out the pubchunk thing to see what we're going to do
+        try { ps.executeUpdate(); }
         catch (SQLException se) { System.out.println("We got an exception while executing an insert update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); } }
       else { 							// some value in postgres, update it
 //        System.out.println("UPDATING "+postgres_table+" VALUES "+joinkey+" and "+value+" with postgres_value "+postgres_value+" end");
         try { ps = c.prepareStatement("UPDATE "+postgres_table+" SET "+postgres_table+" = ? WHERE joinkey = '"+joinkey+"'"); ps.setString(1, value); }
         catch (SQLException se) {
           System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
-        try { ps.executeUpdate(); } 	// write to app_tempname, which is not what we really want, but we need to figure out the pubchunk thing to see what we're going to do
+        try { ps.executeUpdate(); }
         catch (SQLException se) { System.out.println("We got an exception while executing a data update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); }
-        try { ps = c.prepareStatement("UPDATE "+postgres_table+" SET app_timestamp = CURRENT_TIMESTAMP WHERE joinkey = '"+joinkey+"'"); }
+        try { ps = c.prepareStatement("UPDATE "+postgres_table+" SET int_timestamp = CURRENT_TIMESTAMP WHERE joinkey = '"+joinkey+"'"); }
         catch (SQLException se) {
           System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
-        try { ps.executeUpdate(); } 	// write to app_tempname, which is not what we really want, but we need to figure out the pubchunk thing to see what we're going to do
+        try { ps.executeUpdate(); }
         catch (SQLException se) { System.out.println("We got an exception while executing a timestamp update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); } }
   } // private void updatePostgresVal(String postgres_table, String joinkey, int colI, String value)
-
-  private void insertPostgresHistVal(Connection c, Statement s, String postgres_table, String joinkey, String value) {
-    Integer hasMatch = 0;
-    ResultSet rs = null;
-    System.out.println("SELECT joinkey FROM "+postgres_table+"_hst WHERE joinkey = '"+joinkey+"' AND "+postgres_table+"_hst = '"+value+"' "); 
-    try { rs = s.executeQuery("SELECT joinkey FROM "+postgres_table+"_hst WHERE joinkey = '"+joinkey+"' AND "+postgres_table+"_hst = '"+value+"' "); }
-    catch (SQLException se) {
-      System.out.println("We got an exception while executing our "+postgres_table+" query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
-    try { if (rs.next()) { hasMatch++; } }
-      // get the next highest number joinkey for that character
-    catch (SQLException se) {
-      System.out.println("We got an exception while getting a insertPostgresHistVal joinkey "+joinkey+" result:this shouldn't happen: we've done something really bad."); 
-      se.printStackTrace(); System.exit(1); }
-    if (hasMatch == 0) {
-      PreparedStatement ps = null;	// intialize postgres insert 
-      System.out.println("INSERT INTO "+postgres_table+"_hst VALUES "+joinkey+" and "+value+" end");
-      try { ps = c.prepareStatement("INSERT INTO "+postgres_table+"_hst VALUES (?, ?)"); ps.setString(1, joinkey); ps.setString(2, value); }
-      catch (SQLException se) {
-        System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
-      try { ps.executeUpdate(); } 	// write to app_tempname, which is not what we really want, but we need to figure out the pubchunk thing to see what we're going to do
-      catch (SQLException se) { System.out.println("We got an exception while executing a history insert in insertPostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); } } }
-    
 
   private String queryPostgresCharacterNull(Statement s, String postgres_table, String joinkey) {
     // see if the postgres value corresponding to a phenote cell has an entry at all (@row) ; returns ``null'' if no row
     String default_value = null;
     ResultSet rs = null;	// intialize postgres query result
-    try { rs = s.executeQuery("SELECT * FROM "+postgres_table+" WHERE joinkey = '"+joinkey+"' ORDER BY app_timestamp"); }
+    try { rs = s.executeQuery("SELECT * FROM "+postgres_table+" WHERE joinkey = '"+joinkey+"' ORDER BY int_timestamp"); }
     catch (SQLException se) {
       System.out.println("We got an exception while executing our "+postgres_table+" joinkey: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
     try { while (rs.next()) { default_value = rs.getString(2); } }		// assign the new term value
@@ -185,7 +144,7 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
     if (postgres_value.equals(pgisnull)) { pg_value = ""; }	// pg_value converts postgres null into blank to check against tag value
     if (pg_value.equals(tag_value)) { 
 //System.out.println("table "+postgres_table+" joinkey "+joinkey+" has equal values");
-} else { updatePostgresVal(c, postgres_table, postgres_value, joinkey, tag_value); }	// pass the pgisnull string if pg value is null
+    } else { updatePostgresVal(c, postgres_table, postgres_value, joinkey, tag_value); }	// pass the pgisnull string if pg value is null
     System.out.println( tag_name+" : "+tag_value+" end.");
   }
 
@@ -194,7 +153,8 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
       StringBuilder sb = new StringBuilder(); Integer loopcount = 0;
       CharFieldValue list = chr.getValue(chr.getCharFieldForName(tag_name));
       List<CharFieldValue> valList = list.getCharFieldValueList();
-      for (CharFieldValue kid : valList) { String kidId = kid.getID(); loopcount++; if (loopcount > 1) { sb.append(","); } sb.append("\"").append(kidId).append("\""); }
+//      for (CharFieldValue kid : valList) { String kidId = kid.getID(); loopcount++; if (loopcount > 1) { sb.append(","); } sb.append("\"").append(kidId).append("\""); }
+      for (CharFieldValue kid : valList) { String kidId = kid.getID(); loopcount++; if (loopcount > 1) { sb.append("|"); } sb.append(kidId); }
       if (sb != null) { String tag_value = sb.toString(); updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value); } }
     catch (Exception e) {
       System.out.println("Could not get terms from character in updateListField : " + e); e.printStackTrace(); }
@@ -227,36 +187,50 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
             System.out.println("We got an exception while getting a column/term joinkey "+joinkey+" result:this shouldn't happen: we've done something really bad."); 
             se.printStackTrace(); System.exit(1); } }
 //System.out.println("joinkey "+joinkey+" end");
-
         chr.setValue("PgdbId",joinkey);					// assign the postgres database ID
 
         String postgres_table = "int_name"; String tag_name = "Name"; String tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "int_paper"; tag_name = "Pub"; tag_value = "";
-        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
-        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-System.out.println("paper tag_value "+tag_value+" for postgres");
-        postgres_table = "int_person"; tag_name = "Person"; 
+        postgres_table = "int_effector"; tag_name = "Effector"; 
         updateListField(c, s, joinkey, postgres_table, tag_name, chr);
-        postgres_table = "int_curator"; tag_name = "Curator"; tag_value = "";
-        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
+        postgres_table = "int_torvariation"; tag_name = "tor Variation"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "int_tortransgene"; tag_name = "tor Transgene"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "int_torremark"; tag_name = "tor Remark"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "int_effected"; tag_name = "Effected"; 
+        updateListField(c, s, joinkey, postgres_table, tag_name, chr);
+        postgres_table = "int_tedvariation"; tag_name = "ted Variation"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "int_tedtransgene"; tag_name = "ted Transgene"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "int_tedremark"; tag_name = "ted Remark"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "int_type"; tag_name = "Interaction Type"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "int_phenotype"; tag_name = "Phenotype"; 
         updateListField(c, s, joinkey, postgres_table, tag_name, chr);
-        postgres_table = "int_remark"; tag_name = "Remark"; tag_value = chr.getValueString(tag_name);
-        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "int_rnai"; tag_name = "RNAi"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "int_remark"; tag_name = "Remark"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "int_paper"; tag_name = "Pub"; tag_value = "";
+        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+//System.out.println("paper tag_value "+tag_value+" for postgres");
+        postgres_table = "int_curator"; tag_name = "Curator"; tag_value = "";
+        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "int_person"; tag_name = "Person"; 
+        updateListField(c, s, joinkey, postgres_table, tag_name, chr);
         postgres_table = "int_otherevi"; tag_name = "Other Evidence"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-
       } catch (Exception e) {
         System.out.println("Could not get terms from character: " + e);
         e.printStackTrace(); // helpful for debugging
       }
-
     } // for (CharacterI chr : charList.getList())
-
     delete(c, s);
   } // public void commit(CharacterListI charList)
 
@@ -342,7 +316,10 @@ System.out.println("paper tag_value "+tag_value+" for postgres");
 
       postgres_table = "int_effector"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-      if (postgres_value == "") { } else { c1.setValue("Effector",postgres_value); }					// assign the queried value
+      if (postgres_value == "") { } else { 
+        postgres_value = postgres_value.replaceAll("\\|", "\\\",\\\"");
+        postgres_value = "\""+postgres_value+"\"";
+        c1.setValue("Effector",postgres_value); }					// assign the queried value
       postgres_table = "int_torvariation"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("tor Variation",postgres_value); }					// assign the queried value
@@ -355,7 +332,10 @@ System.out.println("paper tag_value "+tag_value+" for postgres");
 
       postgres_table = "int_effected"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-      if (postgres_value == "") { } else { c1.setValue("Effected",postgres_value); }					// assign the queried value
+      if (postgres_value == "") { } else { 
+        postgres_value = postgres_value.replaceAll("\\|", "\\\",\\\"");
+        postgres_value = "\""+postgres_value+"\"";
+        c1.setValue("Effected",postgres_value); }					// assign the queried value
       postgres_table = "int_tedvariation"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("ted Variation",postgres_value); }					// assign the queried value
@@ -373,12 +353,15 @@ System.out.println("paper tag_value "+tag_value+" for postgres");
       postgres_value = ""; 								// postgres_value = "No postgres value assigned";
       postgres_table = "int_phenotype";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-      String phenotype_match = find("(WBPhenotype[0-9]*)", postgres_value);  	// Find a WBPhenotype followed by any amount of digits
-      if (phenotype_match != null) { postgres_value = phenotype_match; }		// query for this, otherwise keep the default value
+//      String phenotype_match = find("(WBPhenotype[0-9]*)", postgres_value);  	// Find a WBPhenotype followed by any amount of digits
+//      if (phenotype_match != null) { postgres_value = phenotype_match; }		// query for this, otherwise keep the default value
 //      if (postgres_value == "No postgres value assigned") { } else { c1.setValue("Phenotype",postgres_value); }					// assign the queried value
-      if (postgres_value == "") { } else { c1.setValue("Phenotype",postgres_value); }					// assign the queried value
+      if (postgres_value == "") { } else { 
+        postgres_value = postgres_value.replaceAll("\\|", "\\\",\\\"");
+        postgres_value = "\""+postgres_value+"\"";
 //System.out.println("set Phenotype to "+postgres_value+" END");
-//
+        c1.setValue("Phenotype",postgres_value); }					// assign the queried value
+
       postgres_value = ""; 								// postgres_value = "No postgres value assigned";
       postgres_table = "int_rnai";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
@@ -396,7 +379,11 @@ System.out.println("paper tag_value "+tag_value+" for postgres");
 //System.out.println("set Pub to "+postgres_value+" END");
       postgres_table = "int_person"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-      if (postgres_value == "") { } else { c1.setValue("Person",postgres_value); }				// assign the queried value
+      if (postgres_value == "") { } else { 
+        postgres_value = postgres_value.replaceAll("\\|", "\\\",\\\"");
+        postgres_value = "\""+postgres_value+"\"";
+//System.out.println("set Person to "+postgres_value+" END");
+        c1.setValue("Person",postgres_value); }				// assign the queried value
 //System.out.println("set Person to "+postgres_value+" END");
       postgres_table = "int_curator"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
@@ -405,6 +392,8 @@ System.out.println("paper tag_value "+tag_value+" for postgres");
       postgres_table = "int_otherevi"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("Other Evidence",postgres_value); }					// assign the queried value
+
+// WBInteraction0000074
 
       charList.add(c1);								// add the character to the character list
     }
@@ -518,6 +507,28 @@ System.out.println("paper tag_value "+tag_value+" for postgres");
 //    if (date_match != null) { default_value = date_match; } 						// query for this, otherwise keep the default value
 //    return default_value; 
 //  }
+
+//  private void insertPostgresHistVal(Connection c, Statement s, String postgres_table, String joinkey, String value) {
+//    Integer hasMatch = 0;
+//    ResultSet rs = null;
+//    System.out.println("SELECT joinkey FROM "+postgres_table+"_hst WHERE joinkey = '"+joinkey+"' AND "+postgres_table+"_hst = '"+value+"' "); 
+//    try { rs = s.executeQuery("SELECT joinkey FROM "+postgres_table+"_hst WHERE joinkey = '"+joinkey+"' AND "+postgres_table+"_hst = '"+value+"' "); }
+//    catch (SQLException se) {
+//      System.out.println("We got an exception while executing our "+postgres_table+" query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
+//    try { if (rs.next()) { hasMatch++; } }
+//      // get the next highest number joinkey for that character
+//    catch (SQLException se) {
+//      System.out.println("We got an exception while getting a insertPostgresHistVal joinkey "+joinkey+" result:this shouldn't happen: we've done something really bad."); 
+//      se.printStackTrace(); System.exit(1); }
+//    if (hasMatch == 0) {
+//      PreparedStatement ps = null;	// intialize postgres insert 
+//      System.out.println("INSERT INTO "+postgres_table+"_hst VALUES "+joinkey+" and "+value+" end");
+//      try { ps = c.prepareStatement("INSERT INTO "+postgres_table+"_hst VALUES (?, ?)"); ps.setString(1, joinkey); ps.setString(2, value); }
+//      catch (SQLException se) {
+//        System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+//      try { ps.executeUpdate(); } 	// write to app_tempname, which is not what we really want, but we need to figure out the pubchunk thing to see what we're going to do
+//      catch (SQLException se) { System.out.println("We got an exception while executing a history insert in insertPostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); } } }
+    
 
 
 
