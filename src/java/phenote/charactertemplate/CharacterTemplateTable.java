@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -245,6 +246,7 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     final EventTableModel<CharacterI> eventTableModel = new EventTableModel<CharacterI>(this.filteredCharacters, this.tableFormat);
     this.characterTable.setModel(eventTableModel);
     this.sortChooser = new TableComparatorChooser<CharacterI>(characterTable, this.sortedCharacters, false);
+    this.sortChooser.addSortActionListener(new SortListener());
     this.characterTable.setSelectionModel(this.selectionModel);
     this.characterTable.putClientProperty("Quaqua.Table.style", "striped");
     this.characterTable.getActionMap().getParent().remove("copy");
@@ -297,10 +299,12 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     this.characterTable.setModel(eventTableModel);
     if (this.sortChooser != null) this.sortChooser.dispose();
     this.sortChooser = new TableComparatorChooser<CharacterI>(characterTable, this.sortedCharacters, false);
+    this.sortChooser.addSortActionListener(new SortListener());
     this.characterTable.setSelectionModel(this.selectionModel);
     this.tableColumnSaver = new TableColumnPrefsSaver(this.characterTable, this.getTableAutoSaveName());
   }
   
+  /** select characters in table */
   private void setSelectionWithCharacters(List<CharacterI> characters) {
     this.clearFilter();
     this.selectionModel.clearSelection();
@@ -308,6 +312,16 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
       final int index = this.filteredCharacters.indexOf(character);
       if (index > -1) {
         this.selectionModel.addSelectionInterval(index, index);
+      }
+    }
+    this.makeSelectedRowsVisible();
+  }
+  
+  private void makeSelectedRowsVisible() {
+    final List<CharacterI> selected = this.getSelectionModel().getSelected();
+    for (CharacterI character : selected) {
+      final int index = this.filteredCharacters.indexOf(character);
+      if (index > -1) {
         Rectangle rect = this.characterTable.getCellRect(index, 0, false);
         this.characterTable.scrollRectToVisible(rect);
       }
@@ -503,6 +517,14 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
 
     public void fileSaved(File f) {
       saveCharacters(getDefaultDataFile(f));
+    }
+    
+  }
+  
+  private class SortListener implements ActionListener {
+
+    public void actionPerformed(ActionEvent e) {
+      makeSelectedRowsVisible();
     }
     
   }

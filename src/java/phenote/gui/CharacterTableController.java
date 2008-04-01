@@ -8,6 +8,8 @@ import java.awt.Rectangle;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -274,6 +276,7 @@ public class CharacterTableController {
 		this.characterTable.setModel(eventTableModel);
 		this.sortChooser = new TableComparatorChooser<CharacterI>(characterTable,
 				this.sortedCharacters, false);
+		this.sortChooser.addSortActionListener(new SortListener());
 		this.characterTable.setSelectionModel(this.selectionModel);
 		this.characterTable.putClientProperty("Quaqua.Table.style", "striped");
 		// Remove keyboard actions from table since we are custom handling these from menu accelerators
@@ -341,6 +344,7 @@ public class CharacterTableController {
 	  this.tableColumnSaver.dispose();
 	  this.sortedCharacters = new SortedList<CharacterI>(this.getCharacterListManager().getCharacterList().getList(), new EverythingEqualComparator<CharacterI>());
 	  this.sortedCharacters.setMode(SortedList.AVOID_MOVING_ELEMENTS);
+	  this.sortChooser.addSortActionListener(new SortListener());
 	  this.filteredCharacters.dispose();
 	  this.filteredCharacters = new FilterList<CharacterI>(this.sortedCharacters, this.filter);
 	  if (this.selectionListener != null) this.selectionModel.removeListSelectionListener(this.selectionListener);
@@ -461,8 +465,6 @@ public class CharacterTableController {
     }
     return lines;
   }
-    
-  
 
   /** select characters in table */
 	private void setSelectionWithCharacters(List<CharacterI> characters) {
@@ -472,11 +474,20 @@ public class CharacterTableController {
 			final int index = this.filteredCharacters.indexOf(character);
 			if (index > -1) {
 				this.selectionModel.addSelectionInterval(index, index);
-				Rectangle rect = this.characterTable.getCellRect(index, 0,
-						false);
-				this.characterTable.scrollRectToVisible(rect);
 			}
 		}
+		this.makeSelectedRowsVisible();
+	}
+	
+	private void makeSelectedRowsVisible() {
+	  final List<CharacterI> selected = this.getSelectionModel().getSelected();
+	  for (CharacterI character : selected) {
+	    final int index = this.filteredCharacters.indexOf(character);
+	    if (index > -1) {
+	      Rectangle rect = this.characterTable.getCellRect(index, 0, false);
+	      this.characterTable.scrollRectToVisible(rect);
+	    }
+	  }
 	}
 
 	/**
@@ -674,6 +685,14 @@ public class CharacterTableController {
         }
       }
       return super.importData(comp, t);
+    }
+    
+  }
+  
+  private class SortListener implements ActionListener {
+
+    public void actionPerformed(ActionEvent e) {
+      makeSelectedRowsVisible();
     }
     
   }
