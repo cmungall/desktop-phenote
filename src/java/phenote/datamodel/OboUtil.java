@@ -1,11 +1,16 @@
 package phenote.datamodel;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.log4j.Logger;
 import org.obo.datamodel.Link;
 import org.obo.datamodel.LinkedObject;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
 import org.obo.datamodel.OBORestriction;
+import org.obo.datamodel.TermCategory;
 import org.obo.datamodel.impl.OBOClassImpl;
 import org.obo.datamodel.impl.OBORestrictionImpl;
 import org.obo.util.TermUtil;
@@ -68,11 +73,6 @@ public class OboUtil {
     gRel.setCompletes(true); // post comp flag
     postCompTerm.addParent(gRel);
   }
-
-  private Logger log() {
-    return null;
-  }
-
 
   public void addRelDiff(OBOProperty rel,OBOClass diff) {
     if (postCompTerm==null){
@@ -168,6 +168,37 @@ public class OboUtil {
       }
     }
     return null; // diff not found - OboEx?
+  }
+  
+  /**
+   * Finds and returns the closest attribute ancestor for a value term from PATO.
+   * Returns the input term if it is itself an attribute, or null if no attribute is found.
+   */
+  public static OBOClass getAttributeForValue(OBOClass valueTerm) {
+    final Set<TermCategory> categories = valueTerm.getCategories();
+    final Set<String> categoryNames = new HashSet<String>();
+    for (TermCategory category : categories) {
+      categoryNames.add(category.getName());
+    }
+    if (categoryNames.contains("attribute_slim")) {
+      return valueTerm;
+    } else if ((categoryNames.contains("value_slim"))) {
+      return getAttributeForValue(getIsaParentForTerm(valueTerm));
+    }
+    return null;
+  }
+  
+  /**
+   * Returns the "is_a" parent for an OBO term, or null if one is not found.
+   */
+  public static OBOClass getIsaParentForTerm(OBOClass term) {
+    final Collection<Link> parents = term.getParents();
+    for (Link link : parents) {
+      if (link.getType().getName().equals("is_a")) {
+        return (OBOClass)(link.getParent());
+      }
+    }
+    return null;
   }
 
 }
