@@ -1,12 +1,5 @@
 package phenote.gui.factories;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
-import org.bbop.framework.AbstractComponentFactory;
-import org.bbop.framework.GUIComponentFactory;
-import org.bbop.framework.GUIComponentFactory.FactoryCategory;
 import org.oboedit.gui.components.TreeView;
 import org.oboedit.gui.factory.TreeViewFactory;
 

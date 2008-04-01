@@ -1,5 +1,6 @@
 package phenote.config;
 
+@SuppressWarnings("serial")
 public class ConfigException extends Exception {
   private Exception wrappedEx;
   public ConfigException(String m) { super(m); }

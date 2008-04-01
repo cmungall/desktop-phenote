@@ -1,13 +1,6 @@
 package phenote.dataadapter.annotation;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.LineNumberReader;
-import java.io.PrintWriter;
-import java.util.Collection;
 
 import org.apache.log4j.Logger;
 import org.bbop.dataadapter.DataAdapterException;
@@ -23,10 +16,8 @@ import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
 import phenote.datamodel.AnnotationCharacter;
 import phenote.datamodel.AnnotationMappingDriver;
 import phenote.datamodel.CharFieldManager;
-import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterList;
 import phenote.datamodel.CharacterListI;
-import phenote.datamodel.OntologyException;
 import phenote.error.ErrorEvent;
 import phenote.error.ErrorManager;
 

@@ -1,37 +1,25 @@
 package phenote.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.JComponent;
 import javax.swing.JEditorPane;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.SpringLayout;
 import javax.swing.border.Border;
 
 import org.bbop.framework.AbstractGUIComponent;
 import org.bbop.framework.ComponentManager;
-import org.obo.annotation.datamodel.AnnotationOntology;
 import org.obo.datamodel.Instance;
-import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOSession;
-import org.obo.util.TermUtil;
 
 import phenote.dataadapter.ncbi.OMIMAdapter;
 import phenote.dataadapter.ncbi.PubMedAdapter;
 import phenote.datamodel.CharFieldManager;
-import phenote.gui.selection.SelectionManager;
 import phenote.gui.selection.IDSelectionEvent;
 import phenote.gui.selection.IDSelectionListener;
-import edu.stanford.ejalbert.BrowserLauncher;
-import edu.stanford.ejalbert.BrowserLauncherRunner;
-import edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException;
-import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
+import phenote.gui.selection.SelectionManager;
 
 /**
   * This is a trial implementation of a simple window to display the contents

@@ -2,9 +2,9 @@ package phenote.dataadapter.fly;
 
 import org.apache.log4j.Logger;
 
-import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharFieldException;
 import phenote.dataadapter.AbstractGroupAdapter;
+import phenote.datamodel.CharFieldException;
+import phenote.datamodel.CharacterI;
 
 /** Makes fly style genotype from locus allele 1, locus allele 2, non locus allele,
     and accesories - with datatags LA1, LA2, NLA, ACC */

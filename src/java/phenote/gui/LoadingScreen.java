@@ -183,8 +183,6 @@ public class LoadingScreen extends JFrame {
 
   public void setProgress(String message, int progress)
   {
-    final int theProgress = progress;
-    final String theMessage = message;
     setProgress(progress);
     SwingUtilities.invokeLater(new Runnable() {
       public void run() {

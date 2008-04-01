@@ -6,7 +6,6 @@ import java.util.List;
 import org.obo.datamodel.OBOClass;
 
 import phenote.datamodel.CharField;
-import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.Comparison;

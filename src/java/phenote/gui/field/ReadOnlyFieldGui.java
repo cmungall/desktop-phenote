@@ -1,16 +1,8 @@
 package phenote.gui.field;
 
-import java.awt.Dimension;
-
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-
 import org.apache.log4j.Logger;
 
 import phenote.datamodel.CharField;
-import phenote.datamodel.CharFieldException;
-import phenote.datamodel.CharFieldValue;
-import phenote.datamodel.CharacterI;
 
 
 /** couldnt this just be a FreeTextField with editable set to false? yes!
@@ -27,7 +19,6 @@ if other subclasses need this, this can migrate to superclass
 */
 
 public class ReadOnlyFieldGui extends FreeTextField { // CharFieldGui
-  private JLabel readOnlyLabel = new JLabel(); // uneditable JText?
 
   /** for now - refactor */
   //private CharacterI character;

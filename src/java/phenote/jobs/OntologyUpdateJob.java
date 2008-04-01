@@ -1,15 +1,16 @@
 package phenote.jobs;
 
+import java.io.File;
+import java.util.Date;
+
 import org.apache.log4j.Logger;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
-import phenote.dataadapter.OntologyDataAdapter;
-import phenote.datamodel.Ontology;
-import phenote.datamodel.CharFieldManager;
 
-import java.io.File;
-import java.util.Date;
+import phenote.dataadapter.OntologyDataAdapter;
+import phenote.datamodel.CharFieldManager;
+import phenote.datamodel.Ontology;
 
 /**
  * Job that reloads and archives a specified ontology. This job is scheduled via Quartz.

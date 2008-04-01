@@ -1,9 +1,9 @@
 package phenote.util;
 
+import java.util.Comparator;
+
 import org.obo.datamodel.Link;
 import org.obo.datamodel.OBOProperty;
-
-import java.util.Comparator;
 
 /**
  * Sort term

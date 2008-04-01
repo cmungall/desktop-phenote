@@ -1,8 +1,8 @@
 package phenote.servlet;
 
-import phenote.datamodel.Ontology;
-
 import java.util.List;
+
+import phenote.datamodel.Ontology;
 
 /**
  * Bean used on the admin page that shows information about the ontologies

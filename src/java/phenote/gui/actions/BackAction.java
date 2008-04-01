@@ -1,20 +1,14 @@
 package phenote.gui.actions;
 
 import java.awt.event.ActionEvent;
-import java.io.FileNotFoundException;
 
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
-import javax.swing.text.JTextComponent;
 
 import org.apache.log4j.Logger;
-
 import org.obo.datamodel.OBOClass;
 
-import phenote.util.FileUtil;
-import phenote.main.Phenote;
-import phenote.main.Phenote2;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.TermNotFoundException;
 import phenote.gui.TermInfo2;
@@ -29,6 +23,7 @@ import phenote.gui.selection.UseTermListener;
  */
 public class BackAction extends AbstractAction  {
 	
+  @SuppressWarnings("unused")
   private static final Logger LOG =  Logger.getLogger(BackAction.class);
 
 	JComponent textComponent;
@@ -58,7 +53,6 @@ public class BackAction extends AbstractAction  {
 		
 	public void actionPerformed(ActionEvent e) {
 //		TermInfo2.inst().naviRefresh("back");
-		int tot = TermInfo2.inst().getTermInfoNaviHistory().size();
 		int naviIndex = TermInfo2.inst().getNaviIndex();
 //		System.out.println("naviIndex before="+naviIndex);
 		if (naviIndex > 0) { //only move the navi if not at beginning
@@ -66,7 +60,7 @@ public class BackAction extends AbstractAction  {
 			TermInfo2.inst().setNaviIndex(naviIndex);
 		}
 //		System.out.println("naviIndex after="+naviIndex);
-		String id = TermInfo2.inst().getTermFromNaviHistory(naviIndex);
+		String id = TermInfo2.getTermFromNaviHistory(naviIndex);
 //		System.out.println(id);
 		
 		try {

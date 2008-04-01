@@ -5,7 +5,6 @@ import org.apache.log4j.Logger;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharFieldManager;
-import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 
 /** A class that parses a single field out of a tab delimited line.
@@ -78,7 +77,7 @@ class DelimFieldParser {
           throw new DelimitedEx("No more fields in line to parse "+items+" "+chr);
         danglerName = items[columnIndex+1];
       }
-      CharFieldValue cfv = chr.setValue(charField,value,danglerName);
+      chr.setValue(charField,value,danglerName);
       // if term, and id not found, dangler -> set name of dangler
       //if (cfv.isDangler()) // throw error if not term?
       //  cfv.setName(items[columnIndex+1]); // or should CF do this?

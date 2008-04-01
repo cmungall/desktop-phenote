@@ -1,6 +1,5 @@
 package phenote.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -16,42 +15,35 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
-import org.apache.log4j.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.JComponent;
-import javax.swing.JEditorPane;
-import javax.swing.text.html.HTMLEditorKit;
-import javax.swing.text.Document;
-import javax.swing.text.html.HTMLDocument;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextPane;
 import javax.swing.SpringLayout;
 import javax.swing.border.Border;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
+import javax.swing.text.Document;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.HTMLEditorKit;
 
-import org.bbop.swing.HyperlinkLabel;
-import org.bbop.swing.StringLinkListener;
+import org.apache.log4j.Logger;
 import org.bbop.framework.AbstractGUIComponent;
 import org.bbop.framework.ComponentConfiguration;
-import org.bbop.framework.ConfigurationPanel;
-import org.bbop.framework.GUIComponent;
-import org.bbop.framework.GUIComponentWrapper;
-import org.bbop.framework.GUIManager;
-import org.bbop.framework.GUIComponentFactory;
 import org.bbop.framework.ComponentManager;
+import org.bbop.framework.ConfigurationPanel;
+import org.bbop.swing.HyperlinkLabel;
+import org.bbop.swing.StringLinkListener;
 import org.obo.annotation.datamodel.Annotation;
 import org.obo.dataadapter.OBDSQLDatabaseAdapter;
 import org.obo.dataadapter.OBDSQLDatabaseAdapter.OBDSQLDatabaseAdapterConfiguration;
+import org.obo.datamodel.DanglingObject;
 import org.obo.datamodel.Dbxref;
 import org.obo.datamodel.IdentifiedObject;
-import org.obo.datamodel.DanglingObject;
 import org.obo.datamodel.Link;
 import org.obo.datamodel.LinkedObject;
 import org.obo.datamodel.OBOClass;
@@ -61,18 +53,10 @@ import org.obo.datamodel.OBOSession;
 import org.obo.datamodel.ObsoletableObject;
 import org.obo.datamodel.PropertyValue;
 import org.obo.datamodel.Synonym;
-import org.obo.datamodel.impl.OBOClassImpl;
-import org.obo.datamodel.impl.OBOSessionImpl;
-import org.obo.filters.Filter;
 import org.obo.util.AnnotationUtil;
 import org.obo.util.TermUtil;
-import org.oboedit.gui.components.OntologyEditorConfiguration;
-import org.oboedit.gui.components.SearchComponent.SearchConfig;
-import org.oboedit.gui.filter.RenderedFilter;
-import org.bbop.swing.SwingUtil;
 
 import phenote.config.Config;
-import phenote.dataadapter.OntologyDataAdapter;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.TermNotFoundException;
@@ -909,7 +893,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 	}
 
-	private void makeSynPanel(Set someSet) {
+	private void makeSynPanel(Set<Synonym> someSet) {
 		// private JList makeSynList (Set someSet) {
 
 		String[] synTypes = { "BROAD", "NARROW", "EXACT", "RELATED", "OTHER" };
@@ -919,9 +903,8 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 		Synonym syn;
 
-		int index = -1;
-		for (Iterator it = someSet.iterator(); it.hasNext();) {
-			syn = (Synonym) it.next();
+		for (Iterator<Synonym> it = someSet.iterator(); it.hasNext();) {
+			syn = it.next();
 			if (syn.getScope() == Synonym.BROAD_SYNONYM) {
 				syns[0] += syn + "<br>";
 			} else if (syn.getScope() == Synonym.NARROW_SYNONYM) {
@@ -1044,8 +1027,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 		annotationPanel.repaint();
 	}
 
-	private void makeDbxrefPanel(Set someSet) {
-		String[] dbxrefSources = {};
+	private void makeDbxrefPanel(Set<Dbxref> someSet) {
 		int rowCount = 0;
 		String tempID;
 		OBOClass tempOboClass = null;
@@ -1053,13 +1035,12 @@ public class TermInfo2 extends AbstractGUIComponent {
 		Dbxref dbxrefObj;
 		dbxrefPanel.removeAll(); // clear out the old ones
 
-		for (Iterator it = someSet.iterator(); it.hasNext();) {
-			dbxrefObj = (Dbxref) it.next();
+		for (Iterator<Dbxref> it = someSet.iterator(); it.hasNext();) {
+			dbxrefObj = it.next();
 			if (dbxrefObj != null) {
 				// will make this linkable - internal & external
 				// eventually, get smart and enable adding ontology!
 				tempID = dbxrefObj.getDatabase() + ":" + dbxrefObj.getDatabaseID();
-				JLabel dbxrefItem = new JLabel(" (" + tempID + ")");
 
 				// check if the term is in the current obosession
 				try {
@@ -1136,7 +1117,6 @@ public class TermInfo2 extends AbstractGUIComponent {
 		int itemCount = 0;
 		int totalItems = 0;
 		String panelText = "";
-		SpringLayout layout = new SpringLayout();
 
 		if (isChild) { 
 			linkLabel = new JLabel("<html><b>Children</b></html>");
@@ -1298,7 +1278,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 		considerReplacePanel.removeAll();
 		String panelText = "";
-		Set obsItems;
+		Set<ObsoletableObject> obsItems;
 		int rowCount = 0;
 		JLabel typeLabel;
 		boolean replaceFlag = false;
@@ -1326,8 +1306,8 @@ public class TermInfo2 extends AbstractGUIComponent {
 			termHyperlinkListener = new TermHyperlinkListener();
 			textArea.addStringLinkListener(termHyperlinkListener);
 			// textArea.setEditable(false);
-			for (Iterator it = obsItems.iterator(); it.hasNext();) {
-				obsObj = (ObsoletableObject) it.next();
+			for (Iterator<ObsoletableObject> it = obsItems.iterator(); it.hasNext();) {
+				obsObj = it.next();
 				if (obsObj != null) {
 //					panelText += HtmlUtil.termLink(obsObj);
 					panelText += "<a href='" + obsObj.getID() + "'>" + obsObj.getName();
@@ -1378,8 +1358,8 @@ public class TermInfo2 extends AbstractGUIComponent {
 		PropertyValue propVal;
 
 		propertyValuesPanel.removeAll();
-		for (Iterator it = propertyValues.iterator(); it.hasNext();) {
-			propVal = (PropertyValue) it.next();
+		for (Iterator<PropertyValue> it = propertyValues.iterator(); it.hasNext();) {
+			propVal = it.next();
 			if (propVal != null) {
 				propLabel = new JLabel("<html>"+propVal.getProperty()+"</html>");
 				valLabel = new JLabel("<html>"+propVal.getValue()+"</html>");

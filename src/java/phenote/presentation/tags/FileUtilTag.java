@@ -1,13 +1,15 @@
 package phenote.presentation.tags;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.struts.taglib.TagUtils;
-import phenote.util.FileUtil;
+import java.io.IOException;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.Tag;
 import javax.servlet.jsp.tagext.TagSupport;
-import java.io.IOException;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.struts.taglib.TagUtils;
+
+import phenote.util.FileUtil;
 
 /**
  * Tag that creates the display name for a relationship of a term to a child or a parent.

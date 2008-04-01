@@ -13,22 +13,18 @@ import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
 import javax.swing.border.EtchedBorder;
 
 import org.apache.log4j.Logger;
-
 import org.obo.datamodel.OBOClass;
 
-import phenote.util.FileUtil;
-import phenote.config.Config;
 import phenote.gui.actions.BackAction;
 import phenote.gui.actions.ForwardAction;
-import phenote.gui.selection.SelectionManager;
 import phenote.gui.selection.UseTermEvent;
 import phenote.gui.selection.UseTermListener;
+import phenote.util.FileUtil;
 
 
 /**
@@ -43,24 +39,17 @@ import phenote.gui.selection.UseTermListener;
 public class TermInfoToolbar extends JToolBar {
 
   private static final Logger LOG =  Logger.getLogger(TermInfoToolbar.class);
-  private Config config = Config.inst();
   public static final int BUTTON_HEIGHT = 30;
   private static final int TERM_INFO_DEFAULT_WIDTH=350;
   private UseTermListener useTermListener;
-  private SelectionManager selectionManager;
   private OBOClass currentOboClass = null;
   private final int BACKBUTTONINDEX = 0;
   private final int FORWARDBUTTONINDEX = 1;
   private final int FAVBUTTONINDEX = 2;
   private final int USETERMBUTTONINDEX = 3;
   private final int GETANNOTATIONSBUTTONINDEX = 4;
-
-
-
-
-  // Vector for holding all the actions.
-  private Vector actions;
-  private Vector buttons;
+  
+  private Vector<JButton> buttons;
   private JTextArea termField;
   
   public void hideToolbar() {
@@ -83,7 +72,7 @@ public class TermInfoToolbar extends JToolBar {
 
   private void init() {
 
-    buttons = new Vector();
+    buttons = new Vector<JButton>();
 
     //Standard things to do for browser
     //The actions ought to be created elsewhere, yeah?

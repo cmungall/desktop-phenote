@@ -28,7 +28,6 @@ class SettingsMenu extends JMenu {
   private JMenuItem menuSearchFilterDefinition;
   private JMenuItem menuSearchFilterObsolete;
   private JMenuItem showHistory;
-  public SearchParams searchParams;
   private SelectionHistory selHist = SelectionHistory.inst();
   private Config config = Config.inst();
   
@@ -158,7 +157,7 @@ class SettingsMenu extends JMenu {
   }
 
   SearchParamsI getSearchParams() {
-    return searchParams.inst();
+    return SearchParams.inst();
   }
 
   private class SearchActionListener implements ActionListener {

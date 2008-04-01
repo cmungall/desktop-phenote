@@ -2,9 +2,10 @@ package phenote.dataadapter.fly;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharacterListI;
 import phenote.datamodel.CharacterList;
+import phenote.datamodel.CharacterListI;
 
 /** Has a list of FlyCharacterIs for the clipboard for proformae */
 public class FlyCharList {

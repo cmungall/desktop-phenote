@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.obo.annotation.datamodel.Annotation;
-import org.obo.datamodel.OBOSession;
 import org.obo.util.AnnotationUtil;
 
 import phenote.config.Config;

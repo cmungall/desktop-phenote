@@ -1,6 +1,7 @@
 package phenote.gui.actions;
 
 import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
 
 import org.apache.log4j.Logger;

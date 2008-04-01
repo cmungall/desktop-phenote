@@ -6,35 +6,14 @@ package phenote.gui.actions;
 //import javax.swing.JMenuItem;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeSupport;
-
 
 import javax.swing.AbstractAction;
-import javax.swing.ImageIcon;
-
-import phenote.config.Config;
-import org.bbop.framework.GUIManager;
-
-import phenote.dataadapter.ncbi.OMIMAdapter;
-import phenote.gui.NcbiInfo;
-import phenote.datamodel.CharFieldManager;
-
 
 import org.obo.datamodel.Instance;
-import org.obo.datamodel.LinkedObject;
-import org.obo.datamodel.IdentifiedObject;
-import org.obo.annotation.datamodel.Annotation;
-import org.obo.annotation.datamodel.AnnotationOntology;
-
-import org.obo.annotation.datamodel.impl.AnnotationImpl;
-import org.obo.datamodel.ObjectFactory;
-import org.obo.datamodel.OBOClass;
-
-import phenote.datamodel.TermNotFoundException;
-
 import org.obo.datamodel.OBOSession;
-import org.obo.datamodel.impl.OBOClassImpl;
+
+import phenote.dataadapter.ncbi.OMIMAdapter;
+import phenote.datamodel.CharFieldManager;
 
 //This is the first pass at creating action items for NCBI retrieveal of
 //information using their RESTful interface

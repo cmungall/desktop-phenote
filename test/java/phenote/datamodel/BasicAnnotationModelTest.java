@@ -8,10 +8,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.obo.dataadapter.OBDSQLDatabaseAdapter;
-import org.obo.dataadapter.OBOAdapter;
-import org.obo.dataadapter.OBOFileAdapter;
-import org.obo.dataadapter.OBDSQLDatabaseAdapter.OBDSQLDatabaseAdapterConfiguration;
 
 import phenote.config.Config;
 import phenote.config.ConfigException;

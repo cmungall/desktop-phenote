@@ -13,7 +13,6 @@ import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
 import org.obo.datamodel.Value;
 import org.obo.datamodel.impl.DanglingObjectImpl;
-import org.obo.datamodel.impl.DatatypeValueImpl;
 import org.obo.datamodel.impl.OBOPropertyImpl;
 import org.obo.history.AddPropertyValueHistoryItem;
 import org.obo.history.DeletePropertyValueHistoryItem;
@@ -117,9 +116,9 @@ public class BasicAnnotationMappingDriver implements AnnotationMappingDriver {
 	}
 
 	public void clearProperty(Annotation annotation, OBOProperty property) {
-		Collection<Value> values = new LinkedList<Value>(annotation
+		Collection<Value<?>> values = new LinkedList<Value<?>>(annotation
 				.getValues(property));
-		for (Value v : values) {
+		for (Value<?> v : values) {
 			if (auditHistoryMode) {
 				String stringVal = null;
 				if (v.getType() instanceof Datatype) {

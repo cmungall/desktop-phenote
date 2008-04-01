@@ -3,7 +3,6 @@ package phenote.gui.factories;
 import java.awt.Dimension;
 
 import org.bbop.framework.AbstractComponentFactory;
-import org.bbop.framework.GUIComponentFactory.FactoryCategory;
 
 import phenote.gui.NcbiInfo;
 

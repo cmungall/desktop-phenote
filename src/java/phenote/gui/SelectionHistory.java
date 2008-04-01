@@ -19,15 +19,13 @@ import org.obo.datamodel.OBOClass;
 import phenote.config.Config;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.TermNotFoundException;
-import phenote.edit.CharChangeEvent;
-import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
 import phenote.edit.TransactionI;
 import phenote.gui.selection.SelectionManager;
+import phenote.gui.selection.TermSelectionEvent;
+import phenote.gui.selection.TermSelectionListener;
 import phenote.gui.selection.UseTermEvent;
 import phenote.gui.selection.UseTermListener;
-import phenote.gui.selection.TermSelectionListener;
-import phenote.gui.selection.TermSelectionEvent;
 import phenote.util.HtmlUtil;
 
 public class SelectionHistory {
@@ -39,7 +37,6 @@ public class SelectionHistory {
   private TermHyperlinkListener termHyperlinkListener;
   // current obo class being navigated
   private OBOClass currentOboClass;
-  private TermInfo termInfo;
   public boolean isInitialized = false;
   private EditManager editManager;
   private SelectionManager selectionManager;
@@ -115,13 +112,7 @@ public class SelectionHistory {
   void setOboClass(OBOClass term) {
 	    // actually i think null is valid for non-required fields - undo & blanking field
 	    // right even if required field should still be able to undo back to init/null
-//	     if (term == null) {
-//	       log().error("Attempt to set term to null");
-//	       return; // debug stack trace?
-//	     }
 	    currentOboClass = term;
-	    String val = term == null ? "" : term.getName();
-//	    setText(val,false); // no completion
 	  }
 
   private void setHistoryFromList(OBOClass term) {
@@ -160,10 +151,6 @@ public class SelectionHistory {
   private SelectionManager getSelectionManager() {
     return this.selectionManager;
 	  }
-  
-  private EditManager getEditManager() {
-    return this.editManager;
-  }
 
 //private class HistorySelectionListener implements CharChangeListener {
 //  public void charChanged(CharChangeEvent e) {

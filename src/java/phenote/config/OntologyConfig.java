@@ -1,19 +1,13 @@
 package phenote.config;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
-
-//import com.sun.tools.javac.tree.Tree.If;
 
 import phenote.config.xml.OntologyFileDocument;
-import phenote.config.xml.ExternaldbDocument.Externaldb;
 import phenote.config.xml.FieldDocument.Field;
-import phenote.config.xml.OntologyDocument.Ontology;
 import phenote.config.xml.OnTheFlySlimTermDocument.OnTheFlySlimTerm;
+import phenote.config.xml.OntologyDocument.Ontology;
 import phenote.config.xml.TerminologyDefinitionsDocument.TerminologyDefinitions;
-//import phenote.config.xml.PostcompDocument.Postcomp;
 
 /** May not even have ontology file (free text eg genotype) rename FieldConfig? */
 public class OntologyConfig {
@@ -252,7 +246,6 @@ public class OntologyConfig {
   void mergeWithOldConfig(FieldConfig oldFC) {
     // NEW - ADD
     if (!oldFC.hasOntConfig(this)) {
-      boolean addBean = true;
       oldFC.insertOntologyConfig(fieldConfig.getOntCfgIndex(this),this);
       return;
     }

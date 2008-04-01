@@ -1,7 +1,7 @@
 package phenote.dataadapter;
 
-import java.util.List;
 import java.io.File;
+import java.util.List;
 
 import phenote.datamodel.CharacterListI;
 

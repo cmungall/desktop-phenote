@@ -50,7 +50,6 @@ import phenote.main.Phenote;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.FilterList;
 import ca.odell.glazedlists.SortedList;
-import ca.odell.glazedlists.TextFilterator;
 import ca.odell.glazedlists.swing.EventSelectionModel;
 import ca.odell.glazedlists.swing.EventTableModel;
 import ca.odell.glazedlists.swing.TableComparatorChooser;
@@ -416,14 +415,6 @@ public class CharacterTemplateController implements ActionListener, TemplateChoi
   private static class EverythingEqualComparator<T> implements Comparator<T> {
     public int compare(T o1, T o2) {
       return 0;
-    }
-  }
-  
-  private static class CharacterFilterator implements TextFilterator<CharacterI> {
-    public void getFilterStrings(List<String> baseList, CharacterI character) {
-      for (CharField charField : character.getAllCharFields()) {
-        baseList.add(character.getValueString(charField));
-      }
     }
   }
 

@@ -1,20 +1,15 @@
 package phenote.gui.menu;
 
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
 import javax.swing.Action;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import org.bbop.swing.DynamicMenu;
 
-import phenote.config.Config;
-import phenote.edit.EditManager;
 import phenote.gui.actions.ResponderChainAction;
 
 public class EditMenu extends DynamicMenu {
@@ -28,7 +23,6 @@ public class EditMenu extends DynamicMenu {
   }
 
   private void init() {
-    EditActionListener actionListener = new EditActionListener();
     
     JMenuItem undo = new JMenuItem();
     Action undoAction = new ResponderChainAction("undo", "Undo");
@@ -98,28 +92,6 @@ public class EditMenu extends DynamicMenu {
     setEnabled(true);
 
  }
-
-  private class EditActionListener implements ActionListener {
-    public void actionPerformed(ActionEvent e) {
-      int selectRow = 1;
-      if (!Config.inst().hasDataAdapters()) {
-        System.out.println("no file data adapter to load/save with");
-        return;
-      }
-      else if (e.getActionCommand().equals("undo")) {
-    	  EditManager.inst().undo();
-    	  repaint();
-      	}
-      else if(e.getActionCommand().equals("new")) {
-  		String m = "Add a row.";
-		JOptionPane.showMessageDialog(null, m, "Phenote Help",
-			JOptionPane.INFORMATION_MESSAGE);
-
-//          selectRow = characterTablePanel.characterTableModel.addNewBlankRow();
-//          characterTablePanel.scrollToNewLastRowOnRepaint = true;//scrollToLastRow(); // scroll to new row
-      }
-    }
-  }
 
 
   // for testing

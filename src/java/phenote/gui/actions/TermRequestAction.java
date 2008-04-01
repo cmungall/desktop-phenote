@@ -8,7 +8,6 @@ import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-//import phenote.config.Config;
 import phenote.gui.TermRequestGUI;
 
 

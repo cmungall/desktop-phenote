@@ -5,9 +5,8 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
 import phenote.datamodel.CharField;
-//import phenote.gui.field.FreeTextField.FieldActionListener;
-import phenote.gui.selection.IDSelectionListener;
 import phenote.gui.selection.IDSelectionEvent;
+import phenote.gui.selection.IDSelectionListener;
 
 /** for now this is just a free text field that checks if theres a ":" present 
     eventually may get more savvy with option of prepending an id prefix and

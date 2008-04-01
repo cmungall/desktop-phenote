@@ -1,8 +1,8 @@
 package phenote.dataadapter;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class AbstractFileAdapter implements DataAdapterI {

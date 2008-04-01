@@ -11,18 +11,14 @@ import javax.swing.JToolBar;
 import javax.swing.border.BevelBorder;
 
 import org.bbop.framework.AbstractGUIComponent;
-import org.bbop.framework.ComponentManager;
-import org.bbop.framework.GUIManager;
-import org.bbop.framework.dock.idw.IDWUtil;
 
 import phenote.config.Config;
+import phenote.gui.actions.CopyAction;
 import phenote.gui.actions.DbCommitAction;
-import phenote.gui.actions.DuplicateAnnotationAction;
 import phenote.gui.actions.OpenFileAction;
+import phenote.gui.actions.RedoAction;
 import phenote.gui.actions.SaveFileAction;
 import phenote.gui.actions.UndoAction;
-import phenote.gui.actions.RedoAction;
-import phenote.gui.actions.CopyAction;
 
 /** This is the basic toolbar to be displayed, containing items
 // such as New, Save, Print, etc.  Could be turned on/off if desired.
@@ -34,11 +30,7 @@ only has open & save at the moment */
 
 public class StandardToolbar extends AbstractGUIComponent {
 
-  private Config config = Config.inst();
-
-  // Vector for holding all the actions.
-  private Vector actions;
-  private Vector buttons;
+  private Vector<JButton> buttons;
   
   private JToolBar toolbar;
   
@@ -58,7 +50,7 @@ public class StandardToolbar extends AbstractGUIComponent {
   
   public void init() {
   	toolbar = new JToolBar();
-    buttons = new Vector();
+    buttons = new Vector<JButton>();
 
     //Standard things to do for files
     //The actions ought to be created elsewhere, yeah?
@@ -76,7 +68,6 @@ public class StandardToolbar extends AbstractGUIComponent {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    Action dupAnnotationAction = new DuplicateAnnotationAction();
     Action undoAction = new UndoAction();
     Action redoAction = new RedoAction();
     Action copyAction = new CopyAction();
@@ -84,20 +75,11 @@ public class StandardToolbar extends AbstractGUIComponent {
     
     JButton saveButton = new JButton(saveAction);
     JButton openButton = new JButton(openAction);
-    JButton newTermButton = new JButton("New Term", null);
     buttons.add(openButton);
     buttons.add(saveButton);
     if (Config.inst().hasQueryableDataAdapter()) {
       buttons.add(new JButton(new DbCommitAction()));
     }
-//buttons.add(newTermButton);
-
-    
-    //Standard things for annotations
-    //probably ought to be its own toolbar
-    JButton newAnnotButton = new JButton("New Annot");
-    JButton dupAnnotButton = new JButton(dupAnnotationAction);
-    JButton delAnnotButton = new JButton("Del Annot");
     
     JButton undoButton = new JButton(undoAction);
     JButton redoButton = new JButton(redoAction);

@@ -1,15 +1,15 @@
 package phenote.servlet;
 
-import org.springframework.web.servlet.mvc.Controller;
-import org.springframework.web.servlet.ModelAndView;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import phenote.datamodel.Ontology;
-import phenote.datamodel.CharFieldManager;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.Controller;
 
-import java.util.List;
+import phenote.datamodel.CharFieldManager;
+import phenote.datamodel.Ontology;
 
 /**
  * Controller that serves the version page: lists ontologies and their

@@ -279,18 +279,6 @@ public class Phenote {
     return null;
   }
 
-  /** do group guis specified for a tab(not window) - for tab in main window */
-  private void createGroupTabs() {
-    for (Group group : getGroupsByContainer(Group.Container.TAB)) {
-      
-    }
-
-  }
-
-  private boolean hasGroupTabs() {
-    return !getGroupTabs().isEmpty();
-  }
-
   private int getNumGroupTabs() {
     if (getGroupTabs() == null) return 0;
     return getGroupTabs().size();
@@ -536,7 +524,7 @@ public class Phenote {
   private boolean showTable(Group g) { return showString(g,"Table"); }
   private boolean showEditor(Group g) { return showString(g,"Editor"); }
   private boolean showString(Group g, String gui) {
-    List<String> shows = g.getShow();
+    List<?> shows = g.getShow();
     if (shows == null) return true;
     return shows.contains(gui); // case insensitive?
   }

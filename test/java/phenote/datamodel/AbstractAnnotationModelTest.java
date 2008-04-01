@@ -2,10 +2,7 @@ package phenote.datamodel;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
-
-import javax.swing.SwingUtilities;
 
 import org.bbop.dataadapter.DataAdapterException;
 import org.junit.Assert;
@@ -22,11 +19,7 @@ import org.obo.util.AnnotationUtil;
 
 import phenote.config.Config;
 import phenote.config.ConfigException;
-import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.delimited.DelimitedFileAdapter;
-import phenote.datamodel.CharFieldException;
-import phenote.datamodel.CharacterI;
-import phenote.datamodel.TermNotFoundException;
 import phenote.main.Phenote;
 
 public abstract class AbstractAnnotationModelTest {

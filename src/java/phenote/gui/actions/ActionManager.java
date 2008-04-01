@@ -12,11 +12,7 @@ import javax.swing.ImageIcon;
 //This is to help centralize actions that appear in buttons, menus, etc.
 
 public class ActionManager {
-  
-  private Action saveAction;
-
-  private Action openAction;
-  
+    
   private static ActionManager singleton;
 
   public ActionManager() {}

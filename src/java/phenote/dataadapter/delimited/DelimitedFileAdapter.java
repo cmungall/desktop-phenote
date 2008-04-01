@@ -129,10 +129,6 @@ public class DelimitedFileAdapter extends AbstractFileAdapter {
   private File getFileFromUserForSave(File dir) {
     return PhenoXmlAdapter.getFileFromUserForSave(dir);
   }
-  
-  private File getFileFromUserForOpen(File dir) {
-    return PhenoXmlAdapter.getFileFromUserForOpen(dir);
-  }
 
   public void commit(CharacterListI charList) {
     if (file == null)

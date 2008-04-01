@@ -4,13 +4,10 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOClass;
-import org.obo.datamodel.OBOProperty; // for comparisons
 import org.obo.datamodel.impl.DanglingClassImpl;
 import org.obo.util.TermUtil;
 
@@ -32,7 +29,6 @@ public class CharFieldValue implements Cloneable {
   private String stringValue=null;
   private Date dateValue=null;
   //private boolean isOboClass=true;
-  private CharFieldEnum charFieldEnum;
   private CharField charField;
   // private CharField???
   private CharacterI character;
@@ -42,24 +38,10 @@ public class CharFieldValue implements Cloneable {
   private Comparison comparison; // inner class
   //private boolean isDifferentia; // ??
 
-  // phase out
-  public CharFieldValue(String s,CharacterI c, CharFieldEnum e) {
-    stringValue = s;
-    character = c;
-    charFieldEnum = e;
-  }
-
   // for string field 
   public CharFieldValue(String value,CharacterI c,CharField cf) {
     this(c,cf);
     stringValue = value;
-  }
-
-  // phase out
-  public CharFieldValue(OBOClass o,CharacterI c,CharFieldEnum e) {
-    oboClassValue = o;
-    character = c;
-    charFieldEnum = e;
   }
 
   /** SINGLE VALUE term/class - not list */

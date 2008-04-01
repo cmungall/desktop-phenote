@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.Synonym;
 
 import phenote.gui.SearchParamsI;
 
@@ -99,7 +100,7 @@ public class CompletionTerm {
   public String getName() { return term.getName(); }
   public String getEscapedName() { return term.getName().replaceAll("\\'","\\\\'"); }
 	
-  private Set getSyns() { return term.getSynonyms(); }
+  private Set<Synonym> getSyns() { return term.getSynonyms(); }
   private boolean hasDefinition() {
     return getDefinition() != null && !getDefinition().equals("");
   }

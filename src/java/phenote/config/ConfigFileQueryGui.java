@@ -16,6 +16,7 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.net.JarURLConnection;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Enumeration;
@@ -24,6 +25,8 @@ import java.util.TreeSet;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import javax.jnlp.BasicService;
+import javax.jnlp.ServiceManager;
 import javax.swing.AbstractAction;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -35,10 +38,6 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 
-import javax.jnlp.BasicService;
-import java.net.JarURLConnection;
-import javax.jnlp.ServiceManager;
-
 import org.apache.log4j.Logger;
 
 import phenote.gui.GridBagUtil;
@@ -49,7 +48,6 @@ public class ConfigFileQueryGui {
   //private String selection;
   private String selectedFile;
   private JDialog dialog;
-  private JPanel infoPanel;
   //private boolean okPressed = false;
   private ButtonGroup buttonGroup;
   private boolean hasCancelButton = false;
@@ -250,7 +248,6 @@ public class ConfigFileQueryGui {
       // JAR
       // should only go into jar if actually running from jar hmmmmm
       // will this work with webstart??? probably not
-      File jf = new File("jars/phenote.jar");
       try {
         BasicService bs = (BasicService)ServiceManager.lookup("javax.jnlp.BasicService");      
         URL codeBaseUrl = bs.getCodeBase(); // this is the url to phenote webstart

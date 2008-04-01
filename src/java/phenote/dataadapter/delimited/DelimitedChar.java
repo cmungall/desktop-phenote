@@ -102,12 +102,6 @@ public class DelimitedChar {
     
     return sb.toString();
   }
-   
-  /** If a char field has ontologies it is not free text */
-  private boolean isFreeText(CharField cf) {
-    // return !cf.hasOntologies();	// now have third type isInt, so can't just negate 2007 07 09
-    return cf.isFreeText();
-  }
   
   private boolean isTerm(CharField cf) {
     return cf.isTerm(); //hasOntologies();

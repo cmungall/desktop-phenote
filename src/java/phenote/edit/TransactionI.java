@@ -2,9 +2,10 @@ package phenote.edit;
 
 import java.util.List;
 
-import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharField;
 import org.obo.datamodel.OBOClass;
+
+import phenote.datamodel.CharField;
+import phenote.datamodel.CharacterI;
 
 
 // interface? class?

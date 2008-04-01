@@ -14,7 +14,6 @@ import org.obo.datamodel.LinkedObject;
 import org.obo.datamodel.Namespace;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
-import org.obo.datamodel.impl.OBORestrictionImpl;
 import org.obo.util.TermUtil;
 
 /** CharacterI for OBOAnnotations */
@@ -30,7 +29,7 @@ public class AnnotationCharacter extends AbstractCharacter {
   private CharFieldValue objectGenus;
   //private CharFieldValue objectDifferentia;
   // can have multiple fields in object Diff, eg E & E2
-  private Map<CharField,CharFieldValue> charFieldToObjectDiff = new HashMap(2);
+  private Map<CharField,CharFieldValue> charFieldToObjectDiff = new HashMap<CharField,CharFieldValue>(2);
 
   public AnnotationCharacter(AnnotationMappingDriver driver) {
     this("__temp__:" + idgen++, driver);

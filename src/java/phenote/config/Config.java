@@ -13,7 +13,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -23,26 +22,25 @@ import org.apache.log4j.Logger;
 import org.apache.xmlbeans.XmlException;
 import org.obo.dataadapter.OBDSQLDatabaseAdapter.OBDSQLDatabaseAdapterConfiguration;
 
+import phenote.config.xml.OntologyFileDocument;
 import phenote.config.xml.PhenoteConfigurationDocument;
 import phenote.config.xml.AutoUpdateOntologiesDocument.AutoUpdateOntologies;
 import phenote.config.xml.AutocompleteSettingsDocument.AutocompleteSettings;
 import phenote.config.xml.CharacterModeDocument.CharacterMode;
-//import phenote.config.xml.ComparisonDocument.Comparison;
 import phenote.config.xml.ConstraintDocument.Constraint;
 import phenote.config.xml.DataInputServletDocument.DataInputServlet;
 import phenote.config.xml.DataadapterDocument.Dataadapter;
 import phenote.config.xml.ExternaldbDocument.Externaldb;
 import phenote.config.xml.FieldDocument.Field;
 import phenote.config.xml.FieldPanelTabsDocument.FieldPanelTabs;
-import phenote.config.xml.OntologyFileDocument;
 import phenote.config.xml.GroupDocument.Group;
 import phenote.config.xml.LogDocument.Log;
-import phenote.config.xml.TerminologyDefinitionsDocument.TerminologyDefinitions;
 import phenote.config.xml.MasterToLocalConfigDocument.MasterToLocalConfig;
 import phenote.config.xml.OntologyFileDocument.OntologyFile;
 import phenote.config.xml.OntologyLoadingDocument.OntologyLoading;
 import phenote.config.xml.PhenoteConfigurationDocument.PhenoteConfiguration;
 import phenote.config.xml.TermHistoryDocument.TermHistory;
+import phenote.config.xml.TerminologyDefinitionsDocument.TerminologyDefinitions;
 import phenote.config.xml.UpdateTimerDocument.UpdateTimer;
 import phenote.config.xml.UvicGraphDocument.UvicGraph;
 import phenote.dataadapter.ConstraintManager;
@@ -1356,7 +1354,7 @@ public class Config {
     return !getOntMakers().isEmpty();
   }
   public List<OntologyMakerI> getOntMakers() {
-    List<OntologyMakerI> l = new ArrayList(2);
+    List<OntologyMakerI> l = new ArrayList<OntologyMakerI>(2);
     for (Group g : getFieldGroups())
       if (hasOntMakerForGroup(g.getName())) l.add(getOntMaker(g.getName()));
     return l;

@@ -2,13 +2,11 @@ package phenote.dataadapter.worm;
 
 import java.util.List;
 
-import phenote.datamodel.CharacterI;
-import phenote.edit.EditManager;
-
-
 import phenote.dataadapter.AbstractCommitConstraint;
 import phenote.dataadapter.ConstraintStatus;
 import phenote.dataadapter.Status;
+import phenote.datamodel.CharacterI;
+import phenote.edit.EditManager;
 
 
 public class WormConstraint extends AbstractCommitConstraint {

@@ -3,9 +3,9 @@ package phenote.datamodel;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.util.List;
+
 import org.obo.annotation.datamodel.Annotation;
 import org.obo.datamodel.OBOClass;
-import org.obo.datamodel.OBOProperty;
 
 /** CharacterIs are the building blocks of phenotypes. All the Characters for a 
     genotype make up a Phenotype - at least thats my understanding. 

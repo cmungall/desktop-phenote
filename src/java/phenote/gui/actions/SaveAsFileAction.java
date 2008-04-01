@@ -13,7 +13,6 @@ import java.io.FileNotFoundException;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
-import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 import org.apache.log4j.Logger;

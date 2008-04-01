@@ -1,15 +1,15 @@
 package phenote.gui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Frame;
-import java.awt.GridBagConstraints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+
 import javax.swing.AbstractListModel;
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -24,23 +24,17 @@ import javax.swing.event.ListSelectionListener;
 
 import org.apache.log4j.Logger;
 
-import org.obo.datamodel.OBOProperty;
-
+import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharFieldManager;
-import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharacterEx;
 import phenote.datamodel.Comparison;
 import phenote.datamodel.Ontology;
 import phenote.edit.EditManager;
-import phenote.dataadapter.CharacterListManager;
-import phenote.config.Config;
 import phenote.gui.field.CharFieldGui;
 import phenote.gui.field.CharFieldGuiEx;
 import phenote.gui.field.FieldPanel;
-import phenote.gui.field.ReadOnlyFieldGui;
 import phenote.gui.field.RelationCompList;
 
 /** a gui for making comparisons between 2 statements/annotations

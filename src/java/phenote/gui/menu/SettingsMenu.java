@@ -2,38 +2,27 @@ package phenote.gui.menu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButtonMenuItem;
 
 import org.apache.log4j.Logger;
 import org.bbop.framework.GUIManager;
-import org.bbop.swing.AbstractDynamicMenuItem;
-import org.bbop.swing.DynamicActionMenuItem;
 import org.bbop.swing.DynamicMenu;
-
-import org.apache.log4j.Logger;
-
 
 import phenote.config.Config;
 import phenote.config.ConfigException;
 import phenote.config.ConfigFileQueryGui;
-import phenote.dataadapter.LoadSaveManager;
-import phenote.gui.ConfigGui;
 import phenote.gui.SearchFilterType;
 import phenote.gui.SearchParams;
 import phenote.gui.SearchParamsI;
 import phenote.gui.SelectionHistory;
-import phenote.gui.actions.NCBIQueryAction;
 import phenote.main.Phenote;
-
-import java.io.IOException;
-
-import javax.swing.ImageIcon;
-
-import javax.swing.JRadioButtonMenuItem;
 
 
 /**

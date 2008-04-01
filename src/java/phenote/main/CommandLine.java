@@ -2,15 +2,15 @@ package phenote.main;
 
 import org.apache.log4j.Logger;
 
-import com.townleyenterprises.command.CommandOption;
-import com.townleyenterprises.command.CommandParser;
-import com.townleyenterprises.command.DefaultCommandListener;
-
 import phenote.config.Config;
 import phenote.config.ConfigException;
 import phenote.dataadapter.DataAdapterI;
 import phenote.dataadapter.phenosyntax.PhenoSyntaxFileAdapter;
 import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
+
+import com.townleyenterprises.command.CommandOption;
+import com.townleyenterprises.command.CommandParser;
+import com.townleyenterprises.command.DefaultCommandListener;
 
 
 /** a lot of this is copied from apollo.main.CommandLine - theres potential for 

@@ -6,7 +6,6 @@ import org.apache.log4j.Logger;
 import org.bbop.dataadapter.DataAdapterException;
 import org.obo.annotation.datamodel.Annotation;
 import org.obo.dataadapter.OBOAdapter;
-import org.obo.dataadapter.OBOFileAdapter;
 import org.obo.datamodel.OBOSession;
 import org.obo.owl.dataadapter.OWLAdapter;
 import org.obo.util.AnnotationUtil;

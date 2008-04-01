@@ -17,7 +17,7 @@ public class TermSelectionEvent extends EventObject {
     this.oboClass = oboClass;
     useTermListener = utl;
     isMouseOverEvent = isMouse;
-    isHyperlink = isHyperlink;
+    isHyperlinkEvent = isHyperlink;
   }
 
   public OBOClass getOboClass() { return oboClass; }

@@ -12,7 +12,7 @@ public class ConstraintManager {
   
   private static ConstraintManager singleton;
 
-  private List<Constraint> constraintList = new ArrayList(4);
+  private List<Constraint> constraintList = new ArrayList<Constraint>(4);
 
   public static ConstraintManager inst() {
     if (singleton==null) singleton = new ConstraintManager();

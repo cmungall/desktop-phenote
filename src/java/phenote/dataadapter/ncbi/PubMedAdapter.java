@@ -1,41 +1,27 @@
 package phenote.dataadapter.ncbi;
 
-import java.util.regex.*;
-
-// add http://jdbc.postgresql.org/download/postgresql-8.2-504.jdbc4.jar to trunk/jars/ directory
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import phenote.datamodel.CharFieldManager;
-import phenote.datamodel.CharacterListI;
-import phenote.dataadapter.DataAdapterEx;
-import phenote.dataadapter.QueryableDataAdapterI;
-import phenote.dataadapter.ncbi.NCBIDataAdapterI;
-
-import gov.nih.nlm.ncbi.www.soap.eutils.efetch.*;
 import gov.nih.nlm.ncbi.www.soap.eutils.EUtilsServiceLocator;
 import gov.nih.nlm.ncbi.www.soap.eutils.EUtilsServiceSoap;
+import gov.nih.nlm.ncbi.www.soap.eutils.efetch.ArticleType;
+import gov.nih.nlm.ncbi.www.soap.eutils.efetch.AuthorListType;
+import gov.nih.nlm.ncbi.www.soap.eutils.efetch.EFetchRequest;
+import gov.nih.nlm.ncbi.www.soap.eutils.efetch.EFetchResult;
+import gov.nih.nlm.ncbi.www.soap.eutils.efetch.JournalType;
 
-import phenote.edit.EditManager;
-
-import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
-
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.obo.annotation.datamodel.AnnotationOntology;
-
 import org.obo.datamodel.Instance;
-import org.obo.datamodel.NestedValue;
-import org.obo.datamodel.OBOProperty;
 import org.obo.datamodel.OBOSession;
-import org.obo.datamodel.PropertyValue;
+
+import phenote.datamodel.CharFieldManager;
 
 
 /**

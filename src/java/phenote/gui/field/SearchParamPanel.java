@@ -3,10 +3,11 @@ package phenote.gui.field;
 // also used by servlet - repackage to phenote.ontologysearch?
 
 import java.awt.Dimension;
+
 import javax.swing.BoxLayout;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JCheckBox;
 
 /** this isnt used at the moment - nicole moved search params to menu - maybe delete?
     or maybe this is something for the docking interface */

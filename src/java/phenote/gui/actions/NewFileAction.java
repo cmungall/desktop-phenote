@@ -10,9 +10,6 @@ import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 
-import phenote.config.Config;
-import phenote.dataadapter.LoadSaveManager;
-
 /**
  * This is the action for creating a new annotation file to begin editing.
  * When a new annotation file is created, it should:<p>

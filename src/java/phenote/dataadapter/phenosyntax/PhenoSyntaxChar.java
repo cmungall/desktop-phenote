@@ -155,9 +155,7 @@ public class PhenoSyntaxChar {
       log().error("No value given for "+tag);
       return;
     }
-    
-    CharFieldManager om = CharFieldManager.inst();
-    
+        
     try {
       // so this is funny but there can be more than one char field for an abbrev - for
       // instance Tag is for both abormal and absent. with setValue only the proper char

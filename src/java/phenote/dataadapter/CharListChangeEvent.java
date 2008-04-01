@@ -1,6 +1,7 @@
 package phenote.dataadapter;
 
 import java.util.EventObject;
+
 import phenote.datamodel.CharacterListI;
 
 /** this is for dataloading - contains the newly loaded char list - not necasarily

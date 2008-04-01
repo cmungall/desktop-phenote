@@ -1,24 +1,26 @@
 package phenote.servlet;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOClass;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractCommandController;
+
 import phenote.dataadapter.OntologyDataAdapter;
+import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyException;
-import phenote.datamodel.CharFieldManager;
 import phenote.gui.SearchFilterType;
 import phenote.gui.SearchParams;
 import phenote.gui.field.CompListSearcher;
 import phenote.gui.field.CompletionTerm;
 import phenote.gui.field.SearchListener;
 import phenote.util.HtmlUtil;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  * The main controller that receives Ajax ontology requests.

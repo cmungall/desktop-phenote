@@ -7,13 +7,10 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.bbop.framework.GUIManager;
-import org.bbop.swing.BackgroundUtil;
 import org.bbop.util.AbstractTaskDelegate;
 import org.bbop.util.TaskDelegate;
-import org.obo.datamodel.AnnotatedObject;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOObject;
-import org.obo.datamodel.OBOProperty;
 
 import phenote.datamodel.Ontology;
 import phenote.gui.SearchParams;

@@ -46,7 +46,6 @@ public class CopyAction extends AbstractAction  {
 	public void actionPerformed(ActionEvent e) {
 			JTextComponent tc = (JTextComponent)textComponent;
 			tc.copy();
-			String s= tc.getSelectedText();
 
 		//different cases:
 		//if this is called from the spreadsheet

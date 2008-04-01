@@ -78,17 +78,6 @@ public abstract class AbstractTemplateChooser extends AbstractGUIComponent imple
     CharacterTemplateTable template = (CharacterTemplateTable)component;
     template.templateChoiceChanged(this);
   }
-
-  private String getTemplateTableFactoryID() {
-    //final String factoryID = ComponentManager.getFactoryID(this.getID());
-    final String factoryID = this.getID();
-    final int index = factoryID.lastIndexOf("-chooser");
-    if (index > 0) {
-      return factoryID.substring(0, index);
-    } else {
-      return factoryID;
-    }
-  }
   
   private Logger log() {
     return Logger.getLogger(this.getClass());

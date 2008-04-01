@@ -12,8 +12,8 @@ import javax.swing.JOptionPane;
 
 import phenote.config.Config;
 import phenote.edit.EditManager;
-import phenote.gui.actions.UndoAction;
 import phenote.gui.actions.RedoAction;
+import phenote.gui.actions.UndoAction;
 
 
 
@@ -86,7 +86,6 @@ class EditMenu extends JMenu {
 
   private class EditActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
-      int selectRow = 1;
       if (!Config.inst().hasDataAdapters()) {
         System.out.println("no file data adapter to load/save with");
         return;

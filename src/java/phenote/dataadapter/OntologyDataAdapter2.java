@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
@@ -20,10 +19,8 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 import org.apache.log4j.Logger;
@@ -735,7 +732,6 @@ public class OntologyDataAdapter2 {
   }
   
   public boolean checkForLocalFileExists(OntologyFile ontology) {
-  	URL localUrl = null;
   	try {
   		File f = new File(getLocalFile(ontology).getFile());
     	return f.exists();

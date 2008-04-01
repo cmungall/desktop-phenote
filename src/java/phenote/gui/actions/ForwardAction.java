@@ -8,8 +8,6 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
-import javax.swing.text.JTextComponent;
-import javax.swing.JComponent;
 
 import org.obo.datamodel.OBOClass;
 
@@ -18,7 +16,6 @@ import phenote.datamodel.TermNotFoundException;
 import phenote.gui.TermInfo2;
 import phenote.gui.selection.SelectionManager;
 import phenote.gui.selection.UseTermListener;
-import phenote.main.Phenote;
 
 
 /**

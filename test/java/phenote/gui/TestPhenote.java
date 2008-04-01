@@ -35,7 +35,6 @@ import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
 import phenote.gui.field.AbstractAutoCompList;
 import phenote.gui.field.FieldPanel;
-import phenote.gui.field.SearchParamPanel;
 import phenote.main.Phenote;
 import phenote.util.HtmlUtil;
 
@@ -47,7 +46,6 @@ public class TestPhenote {
   // dont have handle on instance - have to do statics - wierd
   private static Phenote phenote;
   private static FieldPanel fieldPanel;
-  private static SearchParamPanel searchParamPanel;
   private static AbstractAutoCompList entityComboBox;
   private static AbstractAutoCompList qualityComboBox;
   private static TermInfo2 termInfo;
@@ -66,7 +64,6 @@ public class TestPhenote {
     SwingUtilities.invokeAndWait(new Runnable() {
       public void run() {
         fieldPanel = phenote.getFieldPanel();
-        searchParamPanel = fieldPanel.getSearchParamPanel();
         entityComboBox = fieldPanel.getEntityComboBox();
         entityComboBox.setTestMode(true); // turns off popup, hanging bug only in test
         qualityComboBox = fieldPanel.getQualityComboBox();
@@ -115,10 +112,6 @@ public class TestPhenote {
 //     });
     
 //   }
-
-  private String getEntityThirdAutoTerm() {
-    return entityComboBox.getJComboBox().getModel().getElementAt(2).toString();
-  }
 
   private String getQualityThirdAutoTerm() {
     assertNotNull(qualityComboBox.getJComboBox().getModel());

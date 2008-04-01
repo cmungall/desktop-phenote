@@ -28,6 +28,7 @@ public class AllFieldsGroupAdapter extends AbstractGroupAdapter {
   }
 
   private Logger log;
+  @SuppressWarnings("unused")
   private Logger log() {
     if (log == null) log = Logger.getLogger(getClass());
     return log;

@@ -6,7 +6,6 @@ import main.ProtocolEditor;
 
 import org.bbop.framework.AbstractComponentFactory;
 import org.bbop.framework.GUIComponentWrapper;
-import org.bbop.framework.GUIComponentFactory.FactoryCategory;
 
 public class ProtocolEditorFactory extends AbstractComponentFactory<GUIComponentWrapper> {
 

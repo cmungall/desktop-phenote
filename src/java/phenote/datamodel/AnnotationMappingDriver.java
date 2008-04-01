@@ -3,9 +3,9 @@ package phenote.datamodel;
 import java.util.List;
 
 import org.obo.annotation.datamodel.Annotation;
-import org.obo.history.HistoryItem;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
+import org.obo.history.HistoryItem;
 
 public interface AnnotationMappingDriver {
 	public OBOProperty getPropertyForField(CharField cf);

@@ -157,6 +157,7 @@ public abstract class AbstractGroupAdapter extends OntologyMaker implements Grou
   }
   
   private Logger log;
+  @SuppressWarnings("unused")
   private Logger log() {
     if (log == null) log = Logger.getLogger(getClass());
     return log;

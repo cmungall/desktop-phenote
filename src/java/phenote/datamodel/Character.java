@@ -3,10 +3,8 @@ package phenote.datamodel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import org.apache.log4j.Logger;
 
-import org.obo.datamodel.OBOClass;
-import org.obo.datamodel.OBOProperty;
+import org.apache.log4j.Logger;
 
 /** The Character datamodel is a generic hash of CharField-CharFieldValues
     CharFieldValues are free text or from ontologies
@@ -23,7 +21,7 @@ public class Character extends AbstractCharacter implements CharacterI {
   /** Comparison is an inner class */
   private List<Comparison> comparisons;
   
-  /** should only be constrcuted from factory */
+  /** should only be constructed from factory */
   Character() {
     // automatically add date was constructed
   }
@@ -222,6 +220,7 @@ public class Character extends AbstractCharacter implements CharacterI {
 //   }
 
   private Logger log;
+  @SuppressWarnings("unused")
   private Logger log() {
     if (log == null) log = Logger.getLogger(getClass());
     return log;

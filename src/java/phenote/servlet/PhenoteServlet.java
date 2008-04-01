@@ -1,18 +1,20 @@
 package phenote.servlet;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-import org.apache.log4j.xml.DOMConfigurator;
-import org.springframework.web.servlet.DispatcherServlet;
-import phenote.config.Config;
-import phenote.config.ConfigException;
-import phenote.dataadapter.OntologyDataAdapter;
-import phenote.util.HtmlUtil;
+import java.io.File;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import java.io.File;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.apache.log4j.xml.DOMConfigurator;
+import org.springframework.web.servlet.DispatcherServlet;
+
+import phenote.config.Config;
+import phenote.config.ConfigException;
+import phenote.dataadapter.OntologyDataAdapter;
+import phenote.util.HtmlUtil;
 
 public class PhenoteServlet extends DispatcherServlet {
 

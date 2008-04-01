@@ -1,7 +1,7 @@
 package phenote.datamodel;
 
 import org.apache.log4j.Logger;
-// configuration drives the mode so what the heck right?
+
 import phenote.config.Config;
 import phenote.config.xml.CharacterModeDocument.CharacterMode;
 

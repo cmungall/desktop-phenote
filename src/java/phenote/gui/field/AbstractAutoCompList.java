@@ -6,8 +6,8 @@ import java.awt.Dimension;
 import java.awt.FontMetrics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.accessibility.Accessible;
@@ -525,10 +525,10 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
 
   private class CompComboBoxModel implements ComboBoxModel {
     //private List<CompletionTerm>, cant do - may also be CompletionRelation!
-    private List list;
+    private List<Object> list;
     private Object selectedItem;
 
-    private CompComboBoxModel(List l) { list = l; }
+    private CompComboBoxModel(List<Object> l) { list = l; }
 
     public Object getSelectedItem() { return selectedItem; }
     public void setSelectedItem(Object anItem) { selectedItem = anItem; }

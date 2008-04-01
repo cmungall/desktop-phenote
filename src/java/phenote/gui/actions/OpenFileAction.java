@@ -12,12 +12,10 @@ import java.io.FileNotFoundException;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
-import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 import org.apache.log4j.Logger;
 
-import phenote.util.FileUtil;
 import phenote.config.Config;
 import phenote.dataadapter.LoadSaveManager;
 import phenote.util.FileUtil;

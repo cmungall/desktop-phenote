@@ -76,7 +76,6 @@ public class SynchOntologyDialog {
     JPanel buttonPanel = new JPanel();
     buttonPanel.setLayout(new BoxLayout(buttonPanel,BoxLayout.Y_AXIS));
     buttonGroup = new ButtonGroup();
-    boolean doFirst = false;
     ++gbc.gridy;
     dialog.add(buttonPanel,gbc);
     JButton ok = new JButton("Yes");

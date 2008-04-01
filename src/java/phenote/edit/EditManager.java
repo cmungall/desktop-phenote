@@ -9,9 +9,8 @@ import org.apache.log4j.Logger;
 
 import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.CharField;
-import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharFieldManager;
-import phenote.datamodel.CharacterEx;
+import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterIFactory;
 import phenote.datamodel.Comparison;

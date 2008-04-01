@@ -2,8 +2,9 @@ package phenote.dataadapter.ncbi;
 
 import java.util.List;
 
-import phenote.dataadapter.DataAdapterEx;
 import org.obo.datamodel.Instance;
+
+import phenote.dataadapter.DataAdapterEx;
 
 /**
  * Note, for retmode, see http://www.ncbi.nlm.nih.gov/entrez/query/static/efetchlit_help.html for options

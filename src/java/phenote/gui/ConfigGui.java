@@ -1,12 +1,13 @@
 package phenote.gui;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -19,7 +20,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
-import javax.swing.event.ListDataListener;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.DocumentEvent;
@@ -30,10 +30,10 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import phenote.config.Config;
+import phenote.config.ConfigException;
+import phenote.config.ConfigFileQueryGui;
 import phenote.config.FieldConfig;
 import phenote.config.OntologyConfig;
-import phenote.config.ConfigException;
-import phenote.config.ConfigFileQueryGui; // phase out
 
 public class ConfigGui {
 

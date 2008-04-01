@@ -346,7 +346,7 @@ public class FieldConfig {
   boolean hasCharField(CharField cf) { return charField == cf; }
 
   boolean inGroup(String group) {
-    List<String> l = fieldBean.getGroups();
+    List<?> l = fieldBean.getGroups();
     if (group == null && l == null) return true;
     if (group == null && l.contains("default")) return true;
     if (l == null) return group.equals("default");

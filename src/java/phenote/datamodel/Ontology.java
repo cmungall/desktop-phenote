@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.obo.datamodel.AnnotatedObject;
 import org.obo.datamodel.IdentifiedObject;
 import org.obo.datamodel.Instance;
 import org.obo.datamodel.Namespace;

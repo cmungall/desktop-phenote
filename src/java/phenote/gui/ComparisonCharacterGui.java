@@ -11,11 +11,10 @@ import javax.swing.JComponent;
 import javax.swing.JTextField;
 import javax.swing.TransferHandler;
 
-import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharField;
-import phenote.datamodel.TransferableCharacterCollection;
-
 import phenote.config.Config;
+import phenote.datamodel.CharField;
+import phenote.datamodel.CharacterI;
+import phenote.datamodel.TransferableCharacterCollection;
 
 /** a gui box for characters - cant type in it but can drop characters from main table
     in it. this is for subject & object characters of comparison gui */

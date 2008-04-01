@@ -1,14 +1,15 @@
 package phenote.servlet;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
-import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.Link;
+import org.obo.datamodel.OBOClass;
+
 import phenote.gui.field.CompletionTerm;
 import phenote.util.TermLinkComparator;
-
-import java.util.List;
-import java.util.Collections;
-import java.util.ArrayList;
 
 /**
  * This is the main form bean that contains all request parameters.

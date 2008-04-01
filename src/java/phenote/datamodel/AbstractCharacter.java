@@ -4,10 +4,8 @@ import java.awt.datatransfer.DataFlavor;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-
 import org.obo.annotation.datamodel.Annotation;
 import org.obo.datamodel.OBOClass;
-import org.obo.datamodel.OBOProperty;
 
 public abstract class AbstractCharacter implements CharacterI {
 

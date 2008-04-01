@@ -16,7 +16,6 @@ import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -27,23 +26,17 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import org.apache.log4j.Logger;
-import org.bbop.framework.IOManager;
-import org.bbop.swing.BackgroundEventQueue;
-import org.bbop.swing.BackgroundUtil;
 import org.jdesktop.layout.GroupLayout;
 import org.jdesktop.layout.LayoutStyle;
-import org.obo.datamodel.OBOSession;
 
 import phenote.config.Config;
 import phenote.config.xml.OntologyFileDocument;
@@ -85,7 +78,6 @@ public class OntologyUpdate {
 	private JPanel contentPanel = new JPanel(new BorderLayout());
 	List<String> ontsToUpdate = null;
   private static final Logger LOG = Logger.getLogger(OntologyDataAdapter.class);
-  private JOptionPane optionPane = new JOptionPane();
   private java.awt.Frame f = phenote.main.Phenote.getPhenote().getFrame();
   // true -> modal -> this is crucial! 
   private JDialog dialog = new JDialog(f, true);
@@ -126,8 +118,6 @@ public class OntologyUpdate {
 				URL reposUrl = null;
 				java.awt.Point p = e.getPoint();
 				int rowIndex = rowAtPoint(p);
-				int colIndex = columnAtPoint(p);
-				int realColumnIndex = convertColumnIndexToModel(colIndex);
 				String handle = getValueAt(rowIndex, 2).toString();
 				OntologyFile ontology = Config.inst().getOntologyFileByHandle(handle);
 				try {
@@ -401,7 +391,7 @@ public class OntologyUpdate {
 			return COLUMN_NAMES.length;
 		}
 
-		public Class getColumnClass(int c) {
+		public Class<?> getColumnClass(int c) {
 			if (getValueAt(0,c)==null)
 				return String.class;
 			else
@@ -470,7 +460,6 @@ public class OntologyUpdate {
     	//current.  will change this so it won't even show up as a possibility
       String m ="";
       int up = 0;
-      String filename = "";
 
 //      BackgroundEventQueue queue = new BackgroundEventQueue();
 //			BackgroundUtil.scheduleTask(queue, null, false, null);
@@ -478,7 +467,6 @@ public class OntologyUpdate {
 //			if (eventTask.getResults())
 //				return null;
 
-			TableColumn column=ontologyTable.getColumnModel().getColumn(1);
 			TableCellRenderer defaultRenderer = ontologyTable.getDefaultRenderer(JProgressBar.class);
 			ontologyTable.setDefaultRenderer(JProgressBar.class,
 		       new JTableProgressBarRenderer(defaultRenderer));

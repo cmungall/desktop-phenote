@@ -3,16 +3,14 @@ package phenote.servlet;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import phenote.config.Config;
 import phenote.config.ConfigException;
-import phenote.main.Phenote;
-
-// should be in gui??
 import phenote.gui.field.CompletionTerm;
+import phenote.main.Phenote;
 
 /** test phenote serlet used for gui components like term completion - for zfin
 run test with ant with:

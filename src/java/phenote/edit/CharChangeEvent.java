@@ -1,7 +1,9 @@
 package phenote.edit;
 
 import java.util.EventObject;
+
 import org.obo.datamodel.OBOClass;
+
 import phenote.datamodel.CharField;
 
 /** This actually is for a CharField change - rename this CharFieldChangeEvent?

@@ -194,13 +194,7 @@ public class FieldPanel extends AbstractGUIComponent {
     }
   }
 
-  private int fieldsPerPanel() {
-    return fieldsPerTab;
-  }
-
   private int currentGridBagRow = 0;
-  private int currentGridBagCol = 0;
-  private int buttonGridBagCol = 0;
   public void addCharFieldGuiToPanel(CharFieldGui fieldGui) {
     // first one does new row
     this.addLabel(fieldGui, getConstraintsNewRow());

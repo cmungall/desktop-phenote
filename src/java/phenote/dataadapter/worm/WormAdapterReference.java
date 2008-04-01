@@ -1,36 +1,29 @@
 package phenote.dataadapter.worm;
 
-import java.util.regex.*;
-
-// add http://jdbc.postgresql.org/download/postgresql-8.2-504.jdbc4.jar to trunk/jars/ directory
-
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 
-import phenote.datamodel.CharFieldEnum;
-import phenote.datamodel.CharacterListI;
+import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.DataAdapterEx;
 import phenote.dataadapter.QueryableDataAdapterI;
-import phenote.dataadapter.CharacterListManager;
-
+import phenote.datamodel.CharFieldEnum;
+import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterIFactory;
 import phenote.datamodel.CharacterList;
-import phenote.datamodel.Character;
-import phenote.datamodel.CharFieldException;
+import phenote.datamodel.CharacterListI;
 import phenote.datamodel.TermNotFoundException;
-import phenote.datamodel.CharField;
-
 import phenote.edit.EditManager;
-
-import java.sql.DriverManager;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.ResultSet;
-import java.sql.PreparedStatement;
 
 
 

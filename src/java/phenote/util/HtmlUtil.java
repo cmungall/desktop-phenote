@@ -129,8 +129,8 @@ public class HtmlUtil {
 	private static String getPropertiesString(Set<PropertyValue> properties) {
 		StringBuffer sb = new StringBuffer();
 		PropertyValue propVal;
-		for (Iterator it = properties.iterator(); it.hasNext(); ) {
-			propVal = (PropertyValue)it.next();
+		for (Iterator<PropertyValue> it = properties.iterator(); it.hasNext(); ) {
+			propVal = it.next();
 			sb.append(makeRow(makeLeftCol(bold(propVal.getProperty()+":"))+makeRightCol(propVal.getValue())));
 		}
 		return sb.toString();
@@ -139,13 +139,13 @@ public class HtmlUtil {
 	private static String makeObsLinks(OBOClass oboClass) {
 		//to display the replaced-bys and consider term links for obsoleted terms
 		StringBuffer sb = new StringBuffer();
-		Set obsReplacements = oboClass.getReplacedBy();
+		Set<ObsoletableObject> obsReplacements = oboClass.getReplacedBy();
 		StringBuffer replace = new StringBuffer();
 		boolean replaceFlag = false;
 		boolean considerFlag = false;
 		ObsoletableObject obsObj;
-		for (Iterator it = obsReplacements.iterator(); it.hasNext(); ) {
-			obsObj = (ObsoletableObject)it.next();
+		for (Iterator<ObsoletableObject> it = obsReplacements.iterator(); it.hasNext(); ) {
+			obsObj = it.next();
 			replaceFlag = true;
 			if (obsObj!=null) {
 				replace.append(termLink(obsObj)+"<br>");
@@ -154,10 +154,10 @@ public class HtmlUtil {
 		if (replaceFlag)			
 			sb.append(makeRow(makeLeftCol(bold(italic("Replaced by:")))+makeRightCol(replace.toString())));
 
-		Set obsConsiders = oboClass.getConsiderReplacements();
+		Set<ObsoletableObject> obsConsiders = oboClass.getConsiderReplacements();
 		StringBuffer considers = new StringBuffer();
-		for (Iterator it = obsConsiders.iterator(); it.hasNext(); ) {
-			obsObj = (ObsoletableObject)it.next();
+		for (Iterator<ObsoletableObject> it = obsConsiders.iterator(); it.hasNext(); ) {
+			obsObj = it.next();
 			considerFlag = true;
 			if (obsObj!=null) {
 				considers.append(termLink(obsObj)+"<br>");
@@ -174,14 +174,13 @@ public class HtmlUtil {
 	private static String makeDbxrefs(OBOClass oboClass) {
 		//will display any dbxrefs.  
 		//this will eventually resolve to clickable URL refs, but not yet
-		Set dbxrefs = oboClass.getDbxrefs();
-		StringBuffer sb = new StringBuffer();
+		Set<Dbxref> dbxrefs = oboClass.getDbxrefs();
 		StringBuffer dbxrefString = new StringBuffer();
 		boolean dbxrefFlag = false;
 		if (dbxrefs != null) {
 			Dbxref dbxrefObj;
-			for (Iterator it = dbxrefs.iterator(); it.hasNext(); ) {
-				dbxrefObj = (Dbxref)it.next();
+			for (Iterator<Dbxref> it = dbxrefs.iterator(); it.hasNext(); ) {
+				dbxrefObj = it.next();
 				dbxrefFlag=true;
 				if (dbxrefObj!=null) {
 					dbxrefString.append(dbxrefObj.getDatabase()+":"+dbxrefObj.getID()+"<br>");
@@ -194,14 +193,13 @@ public class HtmlUtil {
 			return "";
 	}
 	
-	private static String makeSyns(boolean sortByScope, Set syns) {
+	private static String makeSyns(boolean sortByScope, Set<Synonym> syns) {
 		//This method creates a table of synonyms for a term, sorted by scope as
 		//defined in the oboedit class Synonym
 		//will expand this method to be able to sort by category, not just scope
 		//kinda ugly right now...need to clean up.  
 		StringBuffer sb = new StringBuffer();
 		if (sortByScope) {
-			StringBuffer temp = new StringBuffer();
 			Synonym syn;
 			int broadSynCount = 0;
 			StringBuffer broadBuf = new StringBuffer();
@@ -213,8 +211,8 @@ public class HtmlUtil {
 			StringBuffer relatedBuf = new StringBuffer();
 			int unknownScopeCount = 0;
 			StringBuffer unknownBuf = new StringBuffer();
-			for (Iterator it = syns.iterator(); it.hasNext(); ) {
-				syn = (Synonym)it.next();
+			for (Iterator<Synonym> it = syns.iterator(); it.hasNext(); ) {
+				syn = it.next();
 				if (syn.getScope()==Synonym.BROAD_SYNONYM) {
 					broadSynCount++;
 					broadBuf.append(syn.toString());
@@ -314,8 +312,6 @@ public class HtmlUtil {
 		if (!DO_HTML) return text;
 		return "<table>"+text+"</table>";
 	}
-
-	private static String nl() { return newLine(); }
 
 	private static String newLine() {
 		if (DO_HTML) return "\n<br>";
@@ -502,13 +498,12 @@ public class HtmlUtil {
 		StringBuffer sb = new StringBuffer();
 		String genusLink = "";
 		String differentiaLink = "";
-		for (ListIterator lit=allLinks.listIterator();lit.hasNext();) {
-			LinkCollection temp = (LinkCollection)lit.next();
-			String tempType = temp.getLinkName();
+		for (ListIterator<LinkCollection> lit=allLinks.listIterator();lit.hasNext();) {
+			LinkCollection temp = lit.next();
 			List<Link> links = temp.getLinks();
 			StringBuffer tempSB = new StringBuffer();
-			for (Iterator it = links.iterator(); it.hasNext(); ) {
-				Link link = (Link)it.next();
+			for (Iterator<Link> it = links.iterator(); it.hasNext(); ) {
+				Link link = it.next();
 				appendLink(tempSB,false,link,true);
 			}
 			if (temp.getLinkName().contains("is_a")) {
@@ -522,7 +517,6 @@ public class HtmlUtil {
 	}
 
 	private static void appendLink(StringBuffer sb, boolean isChild, Link link, boolean xp) {
-		OBORestriction res = (OBORestriction) link;
 		IdentifiedObject term;
 		if (isChild)
 			term = link.getChild();

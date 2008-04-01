@@ -1,7 +1,6 @@
 package phenote.gui.selection;
 
 import java.util.EventObject;
-import java.util.List;
 
 
 public class IDSelectionEvent extends EventObject {

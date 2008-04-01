@@ -42,9 +42,9 @@ public class ShrimpDag {
 	 */
 	public void initOntologies() {
 		// do this in a separate thread! no need to hold up phenote with this
-		for (Ontology o : CharFieldManager.inst().getAllOntologies()) {
+		//for (Ontology o : CharFieldManager.inst().getAllOntologies()) {
 			// oboViewer.loadOboSession(o.getOboSession());
-		}
+		//}
 	}
 
 	private void init() {
@@ -98,8 +98,8 @@ public class ShrimpDag {
 		public void termSelected(TermSelectionEvent e) {
 			if (e.isMouseOverEvent())
 				return;
-			String term = e.getOboClass().getName();
-			boolean animate = true;
+			//String term = e.getOboClass().getName();
+			//boolean animate = true;
 			// getQueryView().query(term, animate);
 			// This doesnt compile as OBOSession has package jumped, shrimp
 			// needs change

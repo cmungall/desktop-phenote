@@ -9,7 +9,6 @@ import phenote.dataadapter.CharacterListManager;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldValue;
 import phenote.datamodel.CharacterI;
-import phenote.datamodel.Comparison;
 
 /** used for bulk updating (see TermCompList) */
 public class CompoundTransaction implements TransactionI {

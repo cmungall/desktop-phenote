@@ -44,6 +44,7 @@ public class CharacterTableFactory extends AbstractComponentFactory<CharacterTab
     return true;
   }
 
+  @SuppressWarnings("unused")
   private Logger log() {
     return Logger.getLogger(this.getClass());
   }

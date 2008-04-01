@@ -1,6 +1,7 @@
 package phenote.gui.factories;
 
 import org.bbop.framework.AbstractComponentFactory;
+
 import phenote.gui.TermInfo2;
 
 public class TermInfoFactory extends AbstractComponentFactory<TermInfo2> {
