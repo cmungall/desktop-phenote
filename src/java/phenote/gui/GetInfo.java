@@ -173,7 +173,7 @@ public class GetInfo extends JDialog {
 	private void setGeneralInfo() {
 		String info = "<html>";
 		info+="Phenote+ version 1.5<br>";  //figure out what variable this is
-		info+="# ontologies loaded: " + loadedOntologies.size()+"<br>";
+		info+="# ontologies loaded: " + ontologies.length+"<br>";
 //		info+="# annotations: "+charListManager.getCharList().size();
 		try {
 			info+="Configuration Name: "+config.getConfigName()+": "+config.getMyPhenoteConfigString()+"<br>";
@@ -196,7 +196,14 @@ public class GetInfo extends JDialog {
 //    	System.out.println("added "+listData.lastElement());
 //    }
 		for (Ontology o : loadedOntologies) {
-			listData.add(o.getName());
+			boolean alreadyInList = false;
+			for (String s : listData) {
+				if (s.equals(o.getName())) {
+					alreadyInList=true;
+				}
+			}
+			if (!alreadyInList)
+				listData.add(o.getName());
 		}
     
 		JList ontologyList = new JList(listData);
@@ -232,65 +239,66 @@ public class GetInfo extends JDialog {
 		long date=0;
 //		List<Ontology> loadedOntologies = charFieldManager.getAllOntologies();
 
-		
-		for (Ontology o : loadedOntologies) {
-			if (o.getName().equals(ontologyList.getSelectedValue().toString())) {
-				selectedOntology = o;
-				found = true;
-				for (OntologyFile ontology : ontologies) {  //find the ontology file
-					if (ontology.getHandle().equals(ontologyList.getSelectedValue().toString())) {
-						List<OntologyConfig> oc = config.getAllOntologyConfigs();
-						for (OntologyConfig c : oc) {
-							if (ontology.getHandle().equals(c.getName())) {
-								if (c.hasNamespace()) {
-									namespaces+=c.getNamespace()+" ";
-								}
-								localUrl = c.getLocalUrl();
-								date = c.getUpdateDate();
-								break;
-							}
-						}    			    	      
-						details+="Ontology Name: "+ontology.getHandle()+"<br>";
-						details+="Repository URL: "+ontology.getLocation()+"<br>";
-						if (localUrl==null) {
-								localFile = new File(FileUtil.getDotPhenoteOboDir(),ontology.getFilename());
-								try {
-									localUrl = localFile.toURL();
-								} catch (MalformedURLException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
+		for (OntologyFile ontology : ontologies) {  //loop through the term defs
+			if (ontology.getHandle().equals(ontologyList.getSelectedValue().toString())) {
+				List<OntologyConfig> oc = config.getAllOntologyConfigs();
+				for (OntologyConfig c : oc) {
+					if (ontology.getHandle().equals(c.getName())) {
+						if (c.hasNamespace()) {
+							namespaces+=c.getNamespace()+" ";
 						}
-						details+="Local cache: "+localUrl+"<br>";
-						
-						details+="Filename: "+ontology.getFilename()+"<br>";
-						details+="Format: "+ontology.getType()+"<br>";
-//						details+="Source: "+selectedOntology.getSource()+"<br>";
+						localUrl = c.getLocalUrl();
+						date = c.getUpdateDate();
+						break;
+					}
+				}    			    	      
+				for (Ontology o : loadedOntologies) {  //find the matching loaded ontology
+					if (o.getName().equals(ontologyList.getSelectedValue().toString())) {
+						selectedOntology = o;
+						found = true;
+					}
+				}
+				details+="Ontology Name: "+ontology.getHandle()+"<br>";
+				details+="Repository URL: "+ontology.getLocation()+"<br>";
+				if (localUrl==null) {
+					localFile = new File(FileUtil.getDotPhenoteOboDir(),ontology.getFilename());
+					try {
+						localUrl = localFile.toURL();
+					} catch (MalformedURLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				details+="Local cache: "+localUrl+"<br>";
+				
+				details+="Filename: "+ontology.getFilename()+"<br>";
+				details+="Format: "+ontology.getType()+"<br>";
+//			details+="Source: "+selectedOntology.getSource()+"<br>";
 //						details+="Version: "+selectedOntology.getVersion()+"<br>";
-						details+="Date in Header: "+df.format(selectedOntology.getOntologyDate())+"<br>";
-						date = localFile.lastModified();
-						Date d = new Date(date);
+				if (found)
+				{
+
+				details+="Date in Header: "+df.format(selectedOntology.getOntologyDate())+"<br>";
+				date = localFile.lastModified();
+				Date d = new Date(date);
 //						long now = new Date().getTime();
-						details+="Last Download: "+df.format(d)+"<br>";
-						details+="<br>";
-						details+="# terms: "+selectedOntology.getSortedTerms().size()+"<br>";
-						details+="# obsoletes: "+ selectedOntology.getSortedObsoleteTerms().size()+"<br>";
-//						for (CharacterI c : charListManager.getCharList()) {
-//							for (CharField cf : c.getAllCharFields()) {
+				details+="Last Download: "+df.format(d)+"<br>";
+				details+="<br>";
+					details+="# terms: "+selectedOntology.getSortedTerms().size()+"<br>";
+					details+="# obsoletes: "+ selectedOntology.getSortedObsoleteTerms().size()+"<br>";
+//							for (CharacterI c : charListManager.getCharList()) {
+//								for (CharField cf : c.getAllCharFields()) {
 //								if (cf.isTerm())
 //									if (c.getValue(cf).getOboClass().get)
 //							}
 //						}
 //						details+="# annotations: "+"<br>";
 
-						details+="<br>Automatically update when Phenote starts? "+ontology.getAutoUpdate()+"<br>";
-						break;
-					}
+					details+="<br>Automatically update when Phenote starts? "+ontology.getAutoUpdate()+"<br>";
+				} else {
+					details +="<br>Ontology defined in configuration, but not mapped to any field.  No details retrieved.<br>";
 				}
 			}
-		}
-		if (!found) {
-			details +="Ontology defined in configuration, but not mapped to any field.  No details retrieved.";
 		}
 		details+= "</html>";
 		return details;
