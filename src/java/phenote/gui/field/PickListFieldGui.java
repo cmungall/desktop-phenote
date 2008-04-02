@@ -3,6 +3,8 @@ package phenote.gui.field;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -157,6 +159,11 @@ public class PickListFieldGui extends CharFieldGui {
     
     final JDialog dialog = new JDialog(this.getFrame(this.getUserInputGui()), true);
     dialog.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+    dialog.addWindowListener(new WindowAdapter() {
+      @Override
+      public void windowClosing(WindowEvent e) {
+        endListDialog(dialog, false, choicesList); }
+    });
     dialog.setLayout(new BorderLayout());
     dialog.setSize(400, 600);
     
