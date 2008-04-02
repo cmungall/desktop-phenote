@@ -41,7 +41,7 @@ import phenote.gui.factories.PhenoteGraphViewFactory;
 import phenote.gui.factories.PhenoteOntologyTreeEditorFactory;
 import phenote.gui.factories.PhenoteTreeViewFactory;
 import phenote.gui.factories.ProtocolEditorFactory;
-//import phenote.gui.factories.ScratchGroupsViewFactory;
+import phenote.gui.factories.ScratchGroupsViewFactory;
 import phenote.gui.factories.TermInfoFactory;
 import phenote.gui.menu.EditMenu;
 import phenote.gui.menu.FileMenu;
@@ -77,7 +77,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
     factories.add(new AnnotationSummaryComponentFactory());
     factories.addAll(this.getTemplateGroupComponentFactories());
     factories.add(new ProtocolEditorFactory());
-//    factories.add(new ScratchGroupsViewFactory());
+    factories.add(new ScratchGroupsViewFactory());
     return factories;
   }
 

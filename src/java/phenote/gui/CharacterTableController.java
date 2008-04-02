@@ -14,7 +14,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -46,7 +45,7 @@ import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterIFactory;
 import phenote.datamodel.OboUtil;
-import phenote.datamodel.TransferableCharacterCollection;
+import phenote.datamodel.TransferableCharacterList;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
@@ -649,7 +648,7 @@ public class CharacterTableController {
     public Transferable createTransferable(JComponent c) { // c is the table
       if (!hasSelection()) return null; // ?
       List<CharacterI> chars = getSelectedChars();
-      return new TransferableCharacterCollection(chars);
+      return new TransferableCharacterList(chars);
     }
     
     @Override
@@ -659,7 +658,7 @@ public class CharacterTableController {
 
     @Override
     public boolean canImport(JComponent comp, DataFlavor[] transferFlavors) {
-      if (Arrays.asList(transferFlavors).contains(TransferableCharacterCollection.CHARACTER_LIST_FLAVOR)) {
+      if (Arrays.asList(transferFlavors).contains(TransferableCharacterList.CHARACTER_LIST_FLAVOR)) {
         return true;
       } else {
         return super.canImport(comp, transferFlavors);
@@ -669,17 +668,15 @@ public class CharacterTableController {
     @SuppressWarnings("unchecked")
     @Override
     public boolean importData(JComponent comp, Transferable t) {
-      if (t.isDataFlavorSupported(TransferableCharacterCollection.CHARACTER_LIST_FLAVOR)) {
+      if (t.isDataFlavorSupported(TransferableCharacterList.CHARACTER_LIST_FLAVOR)) {
         try {
-          Object o = t.getTransferData(TransferableCharacterCollection.CHARACTER_LIST_FLAVOR);
-          if (o instanceof Collection) {
-            for (CharacterI character : (Collection<CharacterI>)o) {
-              getEditManager().addCharacter(character);
-            }
+          Object o = t.getTransferData(TransferableCharacterList.CHARACTER_LIST_FLAVOR);
+          if (o instanceof List) {
+            getEditManager().copyChars((List<CharacterI>)o);
             return true;
           }
         } catch (UnsupportedFlavorException e) {
-          log().error("Data flavor not present, but should have been: " + TransferableCharacterCollection.CHARACTER_LIST_FLAVOR, e);
+          log().error("Data flavor not present, but should have been: " + TransferableCharacterList.CHARACTER_LIST_FLAVOR, e);
         } catch (IOException e) {
           log().error("Error reading data flavor", e);
         }

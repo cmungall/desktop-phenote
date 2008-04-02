@@ -3,7 +3,7 @@ package phenote.gui;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
-import java.util.Collection;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -14,7 +14,7 @@ import javax.swing.TransferHandler;
 import phenote.config.Config;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharacterI;
-import phenote.datamodel.TransferableCharacterCollection;
+import phenote.datamodel.TransferableCharacterList;
 
 /** a gui box for characters - cant type in it but can drop characters from main table
     in it. this is for subject & object characters of comparison gui */
@@ -50,7 +50,7 @@ class ComparisonCharacterGui {
   private class CharDropHandler extends TransferHandler {
     public boolean canImport(JComponent c, DataFlavor[] flavors) {
       for (DataFlavor f : flavors)
-        if (f.equals(TransferableCharacterCollection.CHARACTER_LIST_FLAVOR)) return true;
+        if (f.equals(TransferableCharacterList.CHARACTER_LIST_FLAVOR)) return true;
       return false;
     }
     
@@ -58,9 +58,9 @@ class ComparisonCharacterGui {
     public boolean importData(JComponent comp, Transferable t) {
       if (!canImport(comp,t.getTransferDataFlavors())) return false;
       try {
-        Object o = t.getTransferData(TransferableCharacterCollection.CHARACTER_LIST_FLAVOR);
-        if (o instanceof Collection) {
-          for (CharacterI character : (Collection<CharacterI>)o) {
+        Object o = t.getTransferData(TransferableCharacterList.CHARACTER_LIST_FLAVOR);
+        if (o instanceof List) {
+          for (CharacterI character : (List<CharacterI>)o) {
             setCharacter(character);
             return true; // only use the first character
           }
