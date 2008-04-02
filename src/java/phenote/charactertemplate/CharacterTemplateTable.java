@@ -4,12 +4,17 @@ import java.awt.BorderLayout;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -19,9 +24,12 @@ import java.util.Set;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
+import javax.swing.TransferHandler;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -40,12 +48,14 @@ import phenote.dataadapter.LoadSaveListener;
 import phenote.dataadapter.LoadSaveManager;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
+import phenote.datamodel.TransferableCharacterList;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
 import phenote.gui.CharacterTable;
 import phenote.gui.CharacterTableController;
 import phenote.gui.CharacterTableSource;
+import phenote.gui.DelegatingTransferHandler;
 import phenote.gui.TableColumnPrefsSaver;
 import phenote.gui.field.CharFieldMatcherEditor;
 import phenote.gui.field.FieldPanelContainer;
@@ -72,6 +82,7 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
   private Set<CharacterI> markedCharacters = new HashSet<CharacterI>();
   private JPanel tablePanel; // initialized by swix
   private JTable characterTable; // initialized by swix
+  private JScrollPane scrollPane; // initialized by swix
   private JButton duplicateButton;
   private JButton deleteButton;
   private JButton markButton;
@@ -256,6 +267,11 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     this.selectionListener = new SelectionListener();
     this.selectionModel.addListSelectionListener(this.selectionListener);
     this.tableColumnSaver = new TableColumnPrefsSaver(this.characterTable, this.getTableAutoSaveName());
+    this.characterTable.setDragEnabled(true);
+    final TransferHandler handler = new CharacterTransferHandler();
+    this.characterTable.setTransferHandler(handler);
+    // scrollpane also needs transfer handler to receive drop on empty table rows
+    scrollPane.setTransferHandler(new DelegatingTransferHandler(handler));
   }
   
   /** Instantiate interface objects from Swixml file */
@@ -517,6 +533,52 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
 
     public void fileSaved(File f) {
       saveCharacters(getDefaultDataFile(f));
+    }
+    
+  }
+  
+  @SuppressWarnings("serial")
+  private class CharacterTransferHandler extends TransferHandler {
+    /** 
+     * Return selected characters, char is a transferable, if no selection return null
+     */
+    @Override
+    public Transferable createTransferable(JComponent c) { // c is the table
+      if (getSelectionModel().getSelected().isEmpty()) return null; // ?
+      return new TransferableCharacterList(getSelectionModel().getSelected());
+    }
+    
+    @Override
+    public int getSourceActions(JComponent c) {
+      return COPY;
+    }
+
+    @Override
+    public boolean canImport(JComponent comp, DataFlavor[] transferFlavors) {
+      if (Arrays.asList(transferFlavors).contains(TransferableCharacterList.CHARACTER_LIST_FLAVOR)) {
+        return true;
+      } else {
+        return super.canImport(comp, transferFlavors);
+      }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public boolean importData(JComponent comp, Transferable t) {
+      if (t.isDataFlavorSupported(TransferableCharacterList.CHARACTER_LIST_FLAVOR)) {
+        try {
+          Object o = t.getTransferData(TransferableCharacterList.CHARACTER_LIST_FLAVOR);
+          if (o instanceof List) {
+            getEditManager().copyChars((List<CharacterI>)o);
+            return true;
+          }
+        } catch (UnsupportedFlavorException e) {
+          log().error("Data flavor not present, but should have been: " + TransferableCharacterList.CHARACTER_LIST_FLAVOR, e);
+        } catch (IOException e) {
+          log().error("Error reading data flavor", e);
+        }
+      }
+      return super.importData(comp, t);
     }
     
   }
