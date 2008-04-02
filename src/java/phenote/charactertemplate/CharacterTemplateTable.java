@@ -585,10 +585,29 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
   
   private class SortListener implements ActionListener {
 
+    private boolean previousSortWasReverse = false;
+    private int previouslySortedColumn = -1;
+
     public void actionPerformed(ActionEvent e) {
+      Object source = e.getSource();
+      if (source instanceof TableComparatorChooser) {
+        this.turnOffSortingIfNeeded((TableComparatorChooser<?>)source);
+      }
       makeSelectedRowsVisible();
     }
-    
+
+    private void turnOffSortingIfNeeded(TableComparatorChooser<?> sorter) {
+      final int sortedColumn = (sorter.getSortingColumns().isEmpty()) ? -1 : sorter.getSortingColumns().get(0);
+      if (this.previousSortWasReverse && this.previouslySortedColumn == sortedColumn) {
+        this.previousSortWasReverse = false;
+        sorter.clearComparator();
+      }
+      if (sortedColumn > -1) {
+        this.previousSortWasReverse = sorter.isColumnReverse(sortedColumn);
+        this.previouslySortedColumn = sortedColumn;
+      }
+    }
+
   }
 
 }
