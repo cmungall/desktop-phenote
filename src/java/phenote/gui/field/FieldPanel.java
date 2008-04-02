@@ -29,6 +29,7 @@ import phenote.datamodel.CharacterI;
 import phenote.edit.EditManager;
 import phenote.gui.CharacterTableController;
 import phenote.gui.CharacterTableSource;
+import phenote.gui.VerticalScrollingOnlyPanel;
 import phenote.gui.selection.SelectionManager;
 import ca.odell.glazedlists.swing.EventSelectionModel;
 
@@ -149,8 +150,7 @@ public class FieldPanel extends AbstractGUIComponent {
 
 
   private void initCharFieldGuis() {
-
-    fieldPanel = new JPanel(new GridBagLayout());
+    fieldPanel = new VerticalScrollingOnlyPanel(new GridBagLayout());
     if (isTabbed()) {
       jTabbedPane  = new JTabbedPane();
       add(jTabbedPane);
