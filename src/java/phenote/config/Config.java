@@ -53,6 +53,7 @@ import phenote.datamodel.AnnotationMappingDriver;
 import phenote.datamodel.BasicAnnotationMappingDriver;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldManager;
+import phenote.datamodel.Ontology;
 import phenote.gui.SearchFilterType;
 import phenote.gui.SearchParams;
 import phenote.main.PhenoteVersion;
@@ -71,7 +72,8 @@ public class Config {
   private List<FieldConfig> enabledFields = new ArrayList<FieldConfig>();
   /** enabled & disabled */
   private List<FieldConfig> allFields = new ArrayList<FieldConfig>();
-  private List<OntologyConfig> allOntologies = new ArrayList<OntologyConfig>();
+  private List<Ontology> allOntologies = new ArrayList<Ontology>();
+  private List<OntologyConfig>allOntologyConfigs = new ArrayList<OntologyConfig>();
   
   public static final String defaultLogConfigFile = "conf/log4j-standalone.xml";
   // maybe should be using xmlbean where possible?
@@ -887,8 +889,23 @@ public class Config {
 
   public List<FieldConfig> getAllFieldCfgs() { return allFields; }
   
-  public List<OntologyConfig> getAllOntologies() { return allOntologies; }
+  public List<Ontology> getAllOntologies() { return allOntologies; }
 
+  public List<OntologyConfig> getAllOntologyConfigs() { return allOntologyConfigs; }
+  
+  public void setAllOntologies(List<Ontology> onts) {
+  	allOntologies = onts;
+  	return;
+  }
+  
+  public void addOntologyConfig(OntologyConfig oc) {
+  	allOntologyConfigs.add(oc);
+  }
+  
+  public void setAllOntologyConfigs(List<OntologyConfig> oc) {
+  	allOntologyConfigs = oc;
+  }
+  
   /** returns true if has field config with same name - contents may differ */
 //   boolean hasEnbldFieldCfg(FieldConfig newFC) {
 //     return getEnbldFieldCfg(newFC.getLabel()) != null;
@@ -1398,7 +1415,10 @@ public class Config {
    */
   public OntologyFileDocument.OntologyFile[] getOntologyList() { 
     OntologyFileDocument.OntologyFile[] fileArray;
-    fileArray = phenoConfigBean.getTerminologyDefinitions().getOntologyFileArray();
+    if (phenoConfigBean.getTerminologyDefinitions()!=null) {
+    	fileArray = phenoConfigBean.getTerminologyDefinitions().getOntologyFileArray();
+    } else
+    	fileArray = null;
     return fileArray; 
   }
   
@@ -1468,6 +1488,10 @@ public class Config {
     
   }
 
+  public void addOntology(Ontology o) {
+  	allOntologies.add(o);
+  	System.out.println("added: "+o.getName());
+  }
 
   private Logger log;
   private Logger log() {

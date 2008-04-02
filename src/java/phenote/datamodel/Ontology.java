@@ -448,6 +448,9 @@ public class Ontology {
     return sortOboClasses(list); // cache?
   }
 
+  public OntologyConfig getOntologyConfig() {
+  	return ontologyConfig;
+  }
 
   private class IdComparator implements Comparator<OBOClass> {
     public int compare(OBOClass o1, OBOClass o2) {

@@ -16,6 +16,7 @@ import phenote.config.ConfigFileQueryGui;
 import phenote.dataadapter.LoadSaveManager;
 import phenote.gui.actions.OpenFileAction;
 import phenote.gui.actions.SaveAsFileAction;
+import phenote.gui.GetInfo;
 
 class FileMenu extends JMenu {
 
@@ -60,6 +61,18 @@ class FileMenu extends JMenu {
 //    loadConfig.addActionListener(new ConfigActionListener());
 //    add(loadConfig);
     
+    JMenuItem preferences = new JMenuItem("Preferences");
+    preferences.addActionListener(new ActionListener() {
+    	public void actionPerformed(ActionEvent e) {
+    		GetInfo getInfo = new GetInfo();
+//    		getInfo.setVisible(true);
+//    		getInfo.setEnabled(true);
+//    		getInfo.setAlwaysOnTop(true);
+    	}
+    });
+    add(preferences);
+    
+    
     addSeparator();
     
     JMenuItem exit = new JMenuItem("Exit");
@@ -67,6 +80,8 @@ class FileMenu extends JMenu {
     exit.setActionCommand("exit");
     exit.addActionListener(new ExitActionListener());
     add(exit);
+    
+    
 
   }
 

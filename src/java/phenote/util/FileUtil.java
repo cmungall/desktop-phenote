@@ -151,7 +151,7 @@ public class FileUtil {
     
 
 
-  private static boolean urlExists(URL u) {
+  public static boolean urlExists(URL u) {
     try { u.openStream(); }
     catch (IOException e) { return false; }
     return true;

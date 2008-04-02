@@ -188,13 +188,17 @@ public class OntologyDataAdapter2 {
 //            continue;
 //          }
 //          String urlString = oc.getLoadUrl().toString();
-          
+          URL localUrl = getLocalFile(oc.getName());
           String urlString = getLocalFile(oc.getName()).toString();
+          oc.setLocalUrl(localUrl);
           Collection<Namespace> spaces = adapterMetaData.getNamespaces(urlString);
           // loads ontology from spaces
           //ah!  but this is loading the ontologies multiple times i think!
           Ontology o = new Ontology(spaces,oc,oboSession);
-
+          cfg().addOntology(o);
+          long date = new File(urlString).lastModified();
+          o.setTimestamp(getOboDate(localUrl));
+          oc.setUpdateDate(date);
           // ADD TO CHAR FIELD
           if (oc.isPostCompRel()) { // POST COMP REL ONTOLOGY
             cf.setPostCompAllowed(true);
@@ -257,6 +261,7 @@ public class OntologyDataAdapter2 {
         // in cache ~/.phenote/obo-files
         url = synchWithRepositoryUrl(url,reposUrl,ontCfg.getName(),filename);
         //} catch (/*MalfURL & Ontol*/Exception e) { LOG.error(e); e.printStackTrace(); }
+        ontCfg.setLocalUrl(url);
       } catch (MalformedURLException m) {
         LOG.error("URL is malformed "+m);
       }
@@ -335,6 +340,7 @@ public class OntologyDataAdapter2 {
         this.updateLoadingScreen("downloading from repository: "+ontol, true);
 
         copyReposToLocal(reposUrl,localUrl);
+
       }
       catch (MalformedURLException e) { throw new OntologyException(e); }
     }
@@ -415,7 +421,7 @@ public class OntologyDataAdapter2 {
 
   /** Look for file in current directory (.) and jar file 
       throws OntologyException if file not found - wraps FileNFEx */
-  private URL findFile(String fileName) throws OntologyException {
+  public URL findFile(String fileName) throws OntologyException {
     if (fileName == null) throw new OntologyException("file is null");
     try { return FileUtil.findUrl(fileName); }
     catch (FileNotFoundException e) { throw new OntologyException(e); }
@@ -584,7 +590,11 @@ public class OntologyDataAdapter2 {
     if (filename!=null)
       fileToOntologyCache.put(filename,o); // ??
     File file = new File(url.getFile());
-    long date = file.lastModified();
+//    long date = file.lastModified();
+    //this should really be setting the time stamp of the ontology itself
+    long date = getOboDate(url);
+//    if (date<=0)
+//    	date = file.lastModified();
     if (date > 0) { // jar files have 0 date???
       o.setTimestamp(date);
       o.setSource(file.toString());
@@ -684,7 +694,7 @@ public class OntologyDataAdapter2 {
     }
   	return useRepos; 
   }
-  
+    
   public void downloadUpdate(String ontology) throws OntologyException {
   	OntologyFile[] ontologies = Config.inst().getTerminologyDefs().getOntologyFileArray();
   	URL reposUrl = null;
@@ -717,7 +727,7 @@ public class OntologyDataAdapter2 {
   	} catch (MalformedURLException e) { throw new OntologyException(e); }
   }
   
-  private URL getLocalFile(String handle) throws OntologyException{
+  public URL getLocalFile(String handle) throws OntologyException{
   	//given an ontology handle, find the file in the term defs
   	URL localUrl = null;
   	for (OntologyFile ontology : cfg().getOntologyList()) {

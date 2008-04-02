@@ -21,6 +21,7 @@ import phenote.dataadapter.LoadSaveManager;
 import phenote.dataadapter.OntologyMakerI;
 import phenote.gui.actions.MakeOntolAction;
 import phenote.main.Phenote;
+import phenote.gui.GetInfo;
 
 /**
  * This is the standard File menu for the main Phenote2 configuration.  It is
@@ -116,11 +117,24 @@ public class FileMenu extends DynamicMenu {
       add(exit);
     }
 
+    addSeparator();
+    JMenuItem preferences = new JMenuItem("Preferences");
+    preferences.addActionListener(new ActionListener() {
+    	public void actionPerformed(ActionEvent e) {
+    		GetInfo getInfo = new GetInfo();
+//    		getInfo.setVisible(true);
+//    		getInfo.setEnabled(true);
+//    		getInfo.setAlwaysOnTop(true);
+    	}
+    });
+    add(preferences);
+
+    
     for (OntologyMakerI om : Config.inst().getOntMakers()) {
       JMenuItem m = new JMenuItem(new MakeOntolAction(om));
       add(m);
     }
-
+    
   }
 
   // for testing

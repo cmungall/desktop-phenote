@@ -2,6 +2,7 @@ package phenote.config;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 
 import phenote.config.xml.OntologyFileDocument;
 import phenote.config.xml.FieldDocument.Field;
@@ -20,10 +21,13 @@ public class OntologyConfig {
   /** load url is url where ontol loaded from, repos or local file cache or jar 
       this is handy for ontology adapter to record - i forget why */
   private URL loadUrl;
+  private URL localUrl;
   private FieldConfig fieldConfig;
   private Ontology ontologyBean; // from xml beans - replaces above fields!
   private OntologyFileDocument.OntologyFile.Type.Enum ontologyType; //OWL, OBO, should be enum
   private boolean autoUpdate;  //whether or not to autoupdate this ontology at startup
+  private Date mostRecentFileDate;
+  private long fileDate;
   
 
 
@@ -218,6 +222,8 @@ public class OntologyConfig {
   /** The actual url used to load ontology - this may be file: or http:
    so if from file cache this is different than repository url */
   public void setLoadUrl(URL u) { loadUrl = u; }
+  public void setLocalUrl(URL u) {localUrl = u; }
+  public URL getLocalUrl() { return localUrl; }
   public URL getLoadUrl() { return loadUrl; }
   public boolean hasLoadUrl() { return loadUrl != null; }
 
@@ -307,7 +313,15 @@ public class OntologyConfig {
   public OnTheFlySlimTerm[] getOnTheFlySlimTerms() {
     return getOntologyBean().getOnTheFlySlimTermArray();
   }
-
+  
+  public void setUpdateDate(long date) {
+  	fileDate = date;
+  }
+  
+  public long getUpdateDate() {
+  	return fileDate;
+  }
+  
 }
 
   //public String name;
