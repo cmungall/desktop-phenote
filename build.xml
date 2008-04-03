@@ -146,6 +146,25 @@ them into  the classfiles directory. excludes="test/**"  -->
             </classpath>
         </java>
     </target>
+
+    <target name="run-plus" depends="compile">
+        <java classname="phenote.main.Phenote2" fork="yes">
+        	<jvmarg value="-Xmx500M"/>
+        	<jvmarg value="-Dphenote.version=${phenote.version}"/>
+        	<jvmarg value="-Dphenote.build=${phenote.build}"/>
+        	<jvmarg value="-Djava.library.path=${lib}"/>
+            <!-- arg value="-c configfilehereventually"/ -->
+            <classpath>
+                <pathelement path="${classfiles}"/>
+            	<!-- for log4j -->
+            	<pathelement path="${conf}"/>
+                <fileset dir="${lib}">
+                    <include name="*.jar"/>
+                    <exclude name="phenote.jar"/>
+                </fileset>
+            </classpath>
+        </java>
+    </target>
 	
 	<target name="src_resources">
 		<copy todir="${classfiles}">
