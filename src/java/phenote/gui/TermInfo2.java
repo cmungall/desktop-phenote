@@ -359,9 +359,9 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 		// create the toolbar
 		termInfoToolbar = new TermInfoToolbar();
-		termInfoToolbar.setPreferredSize(new Dimension(TERM_INFO_DEFAULT_WIDTH,termInfoToolbar.BUTTON_HEIGHT+5));
+		termInfoToolbar.setPreferredSize(new Dimension(TERM_INFO_DEFAULT_WIDTH, BUTTON_HEIGHT+5));
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		termInfoToolbar.setMaximumSize(new Dimension(screenSize.width,termInfoToolbar.BUTTON_HEIGHT+5));
+		termInfoToolbar.setMaximumSize(new Dimension(screenSize.width, BUTTON_HEIGHT+5));
 		this.add(termInfoToolbar); //, BorderLayout.NORTH);
 		
 
@@ -767,7 +767,6 @@ public class TermInfo2 extends AbstractGUIComponent {
 				String id = e.getOboClass().getID();
 				addTermToNaviHistory(id); //only add the item if its not from navigation
 				termInfoToolbar.setNaviButtonStatus();
-				return;					
 			}
 			setTextFromOboClass(e.getOboClass());
 			// This sets who now listens to use term button clicks (only 1
