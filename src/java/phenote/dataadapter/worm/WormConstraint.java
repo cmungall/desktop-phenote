@@ -2,11 +2,13 @@ package phenote.dataadapter.worm;
 
 import java.util.List;
 
+import phenote.datamodel.CharacterI;
+import phenote.edit.EditManager;
+
+
 import phenote.dataadapter.AbstractCommitConstraint;
 import phenote.dataadapter.ConstraintStatus;
 import phenote.dataadapter.Status;
-import phenote.datamodel.CharacterI;
-import phenote.edit.EditManager;
 
 
 public class WormConstraint extends AbstractCommitConstraint {
@@ -23,6 +25,7 @@ public class WormConstraint extends AbstractCommitConstraint {
     try {
       for (CharacterI echr : l) {
         String joinkey = echr.getValueString("PgdbId");
+        if (joinkey.equals("")) { continue; }
         message += "Deleting character for "+joinkey+".  ";  warning = true;	// give warning for any deleted characters
       }
     } catch (Exception e) {
@@ -47,6 +50,7 @@ public class WormConstraint extends AbstractCommitConstraint {
     boolean warning = false;
 
     String message = ""; // or StringBuffer?
+    String temp_message = "";
 
     Integer flagBad = 0;
 
@@ -59,14 +63,18 @@ public class WormConstraint extends AbstractCommitConstraint {
         pgdbid = "with new value for "+allele;
       }
 
-      
+      String tag_name = "Allele Status";
+      if ( chr.hasValue(tag_name) ) { 
+        String allele_status = chr.getTerm(tag_name).getID(); 
+        if (allele_status.equals("mapped_wrong")) { 
+          if (chr.hasValue("Object Remark")) { } else {
+            warning = true; message += "Character "+pgdbid+" Mapped Wrong and has no Object Remark.  "; } } }
 
-  
-        
+
       if (chr.hasValue("NBP")) { 
           return ConstraintStatus.makeOK(); }
         else { 
-          message += "Character "+pgdbid+" has no NBP.  "; }
+          temp_message += "Character "+pgdbid+" has no NBP.  "; }	// only add this if flagBad is bad (no NBP is okay if other fields are okay)
   
       if (chr.hasValue("Phenotype")) { } else { 
         flagBad++;
@@ -80,7 +88,7 @@ public class WormConstraint extends AbstractCommitConstraint {
         flagBad++;
         message += "Character "+pgdbid+" has neither Person nor Paper.  "; }
   
-      if (flagBad > 0) { warning = true; }
+      if (flagBad > 0) { warning = true; message += temp_message; }
 
 
 //      if (chr.hasValue("NBP")) { } else { 
