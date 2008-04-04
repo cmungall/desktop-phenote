@@ -10,10 +10,11 @@ import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.OntologyException;
 import ca.odell.glazedlists.gui.AdvancedTableFormat;
+import ca.odell.glazedlists.gui.WritableTableFormat;
 
 import com.eekboom.utils.Strings;
 
-public class CharacterTableFormat implements AdvancedTableFormat<CharacterI> {
+public class CharacterTableFormat implements AdvancedTableFormat<CharacterI> , WritableTableFormat<CharacterI> {
   
   private String representedGroup = "default";
   
@@ -30,14 +31,8 @@ public class CharacterTableFormat implements AdvancedTableFormat<CharacterI> {
   }
 
   public Object getColumnValue(CharacterI character, int column) {
-    try {
-      CharField cf = CharFieldManager.inst().getCharField(column, this.representedGroup);
+      final CharField cf = this.getCharFieldForColumn(column);
       return character.getValueString(cf);
-    } 
-    catch (OntologyException e) {
-      log().error("Column " + column + " not configured properly in " + "character table, can't retrieve value ", e);
-      return "";
-    }
   }
   
   public Class<?> getColumnClass(int column) {
@@ -47,7 +42,26 @@ public class CharacterTableFormat implements AdvancedTableFormat<CharacterI> {
   public Comparator<?> getColumnComparator(int column) {
     return Strings.getNaturalComparator();
   }
+  
+  public boolean isEditable(CharacterI character, int column) {
+    final CharField cf = this.getCharFieldForColumn(column);
+    return cf.isFreeText() || cf.isTerm();
+  }
 
+  public CharacterI setColumnValue(CharacterI arg0, Object arg1, int arg2) {
+    return null;
+  }
+  
+  private CharField getCharFieldForColumn(int column) {
+    try {
+      return CharFieldManager.inst().getCharField(column, this.representedGroup);
+    } 
+    catch (OntologyException e) {
+      log().error("Column " + column + " not configured properly in " + "character table, can't retrieve value ", e);
+      return null;
+    }
+  }
+  
   private static Logger log() {
     return Logger.getLogger(CharacterTableFormat.class);
   }

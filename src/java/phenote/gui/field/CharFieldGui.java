@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.TableCellEditor;
 
 import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOClass;
@@ -297,6 +298,8 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
     return this.editManager;
     }
   }
+  
+  public abstract TableCellEditor getTableCellEditor();
   
   protected void setMultipleValuesConditions() {
     this.setInMultipleValueState(true);

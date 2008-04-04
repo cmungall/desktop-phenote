@@ -14,6 +14,7 @@ import javax.accessibility.Accessible;
 import javax.accessibility.AccessibleContext;
 import javax.swing.AbstractButton;
 import javax.swing.ComboBoxModel;
+import javax.swing.DefaultCellEditor;
 import javax.swing.InputMap;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -28,6 +29,7 @@ import javax.swing.event.PopupMenuListener;
 import javax.swing.plaf.basic.BasicComboBoxEditor;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import javax.swing.plaf.basic.ComboPopup;
+import javax.swing.table.TableCellEditor;
 import javax.swing.text.Document;
 
 import org.apache.log4j.Logger;
@@ -81,6 +83,11 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     //getArrowButton().addActionListener(new ArrowButtonActionListener());
     //getJComboBox().addKeyListener(new ReturnKeyListener());
     //autoTextField.getTextField().addKeyListener(new ReturnKeyListener());
+  }
+
+  @Override
+  public TableCellEditor getTableCellEditor() {
+    return new DefaultCellEditor(this.getJComboBox());
   }
 
   public void setMinCompChars(int minChars) { minCompChars = minChars; }
@@ -285,6 +292,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
       Populates defaultComboBoxModel with List of CompTerms */
   private void doCompletion() {
     // showPopup can hang during test but not during real run - bizarre
+    log().debug("Do completion");
     doCompletion(!inTestMode);
   }
 
@@ -461,6 +469,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
 
     private ComboBoxActionListener() {}
     public void actionPerformed(ActionEvent e) {
+      log().debug("Action performed: " + e);
       // comboBoxChanged-> user has selected from list, (cdEdited-> user has edited text box)
       if (e.getActionCommand().equals("comboBoxChanged")) {
         AbstractAutoCompList.this.setHasChangedMultipleValues(true);
@@ -469,6 +478,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
         AbstractAutoCompList.this.setGuiForMultipleValues();
         return;
       } else {
+        log().debug("Action updating model: " + e);
         AbstractAutoCompList.this.updateModel();
       }
     }

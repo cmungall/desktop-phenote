@@ -1,6 +1,7 @@
 package phenote.gui.field;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -11,14 +12,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.DefaultCellEditor;
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import javax.swing.JPopupMenu;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.TransferHandler;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.TableCellEditor;
 
 import org.apache.log4j.Logger;
 import org.obo.datamodel.LinkedObject;
@@ -62,6 +66,11 @@ class FreeTextField extends CharFieldGui {
 
     if (hasInputVerifier())
       this.getTextField().setInputVerifier(getInputVerifier());
+  }
+  
+  @Override
+  public TableCellEditor getTableCellEditor() {
+    return new DefaultCellEditor(this.getTextField());
   }
 
   protected boolean hasInputVerifier() {

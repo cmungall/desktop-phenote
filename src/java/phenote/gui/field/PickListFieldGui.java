@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.TableCellEditor;
 
 import org.apache.log4j.Logger;
 
@@ -44,6 +45,12 @@ public class PickListFieldGui extends CharFieldGui {
   public PickListFieldGui(CharField charField) {
     super(charField);
     this.initializeGui();
+  }
+  
+  @Override
+  public TableCellEditor getTableCellEditor() {
+    // can't edit lists in the table
+    return null;
   }
 
   @Override

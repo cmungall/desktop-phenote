@@ -27,10 +27,11 @@ import javax.swing.JTable;
 import javax.swing.TransferHandler;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 
 import org.apache.log4j.Logger;
-import org.bbop.framework.GUIManager;
 import org.obo.datamodel.OBOClass;
 import org.swixml.SwingEngine;
 
@@ -50,8 +51,10 @@ import phenote.datamodel.TransferableCharacterList;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
+import phenote.gui.field.CharFieldGui;
 import phenote.gui.field.CharFieldMatcherEditor;
 import phenote.gui.field.FieldPanel;
+import phenote.gui.selection.SelectionManager;
 import phenote.util.EverythingEqualComparator;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.FilterList;
@@ -331,6 +334,8 @@ public class CharacterTableController {
     characterTable.setTransferHandler(handler);
     // scrollpane also needs transfer handler to receive drop on empty table rows
     scrollPane.setTransferHandler(new DelegatingTransferHandler(handler));
+    
+    this.setUpTableEditors();
 	}
 
 	private void addInitialBlankCharacter() {
@@ -505,6 +510,19 @@ public class CharacterTableController {
 					index, character);
 		}
 	}
+	
+	private void setUpTableEditors() {
+	  for (CharField cf : fieldMan().getCharFieldListForGroup(this.representedGroup)) {
+	    final CharFieldGui cfg = CharFieldGui.makeCharFieldGui(cf, 0);
+	    final TableCellEditor editor = cfg.getTableCellEditor();
+	    if (editor == null) { return; }
+	    cfg.setListSelectionModel(this.getSelectionModel()); //TODO this will need to be updated for new sel models
+	    cfg.setEditManager(this.getEditManager());
+	    cfg.setSelectionManager(SelectionManager.inst());
+	    final TableColumn c = getColumnForField(cf);
+	    c.setCellEditor(editor);
+	  }
+	}
 
 	/** Listens for loading of new data files and clears the search filter */
 	private class CharacterListChangeListener implements CharListChangeListener {
@@ -602,7 +620,7 @@ public class CharacterTableController {
 
   /** post comp terms with ^ are broken across several lines */
   @SuppressWarnings("serial")
-  private class PostCompCellRenderer extends javax.swing.table.DefaultTableCellRenderer {
+  private class PostCompCellRenderer extends DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value,
                                                    boolean isSelected,boolean hasFocus,
                                                    int row, int column) {
@@ -619,18 +637,6 @@ public class CharacterTableController {
       return label;
     }
   }
-
-//   /** Breaks post comps (and should do lists) into multiple lines - this is for whole table
-//    TableCellRenderer works on single columns */
-//   private class CharTableRenderer extends DefaultTableCellRenderer {
-//     public void setValue(Object value) {
-//       if (value == null || value.toString()==null) setText("");
-//       String s = value.toString();
-//       s = s.replaceAll("\\^","<br>");
-//       setText("<html>"+s);
-//     }
-//   }
-  
   
   /**
    * Set a FieldPanel which the table should keep up to date when its selection model

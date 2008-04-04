@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JTextField;
+import javax.swing.table.TableCellEditor;
 
 import org.apache.log4j.Logger;
 import org.bbop.framework.ComponentManager;
@@ -32,6 +33,12 @@ public class CharacterListFieldGui extends CharFieldGui {
     super(charField);
     this.textField = new JTextField();
     this.textField.setEditable(false);
+  }
+
+  @Override
+  public TableCellEditor getTableCellEditor() {
+    // can't edit lists in the table
+    return null;
   }
 
   @Override
