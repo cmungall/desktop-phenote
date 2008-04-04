@@ -335,6 +335,8 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
     queryableFields.add(CharFieldEnum.PUB.getName()); // "Pub"
 //    queryableFields.add(CharFieldEnum.ALLELE.getName()); // "Allele"
     queryableFields.add("Object Name"); // "Object Name"
+    queryableFields.add("Phenotype"); 
+    queryableFields.add("Phenotype Remark"); 
     // should their be a check that the current char fields have pub & allele?
     queryableFields.add("NBP Date"); 
 //    queryableGroups.add("referenceMaker");		// populate reference obo for the main
@@ -646,6 +648,8 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
     String alleleString = "Object Name";			// the query could be for Allele or Pub
     String pubString = "Pub";
     String nbpString = "NBP Date";
+    String phenotypeString = "Phenotype";
+    String phenotypeRemarkString = "Phenotype Remark";
 
     CharacterListI charList = new CharacterList();	// create the CharacterList that we will return
 
@@ -664,7 +668,14 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
     } else if (field.equals(pubString)) {						// if querying the publication, get paper data
       try { rs = s.executeQuery("SELECT * FROM app_paper WHERE app_paper ~ '"+query+"' ORDER BY joinkey"); }	// find the allele that matches the queried allele
       catch (SQLException se) { System.out.println("Exception while executing app_paper pubString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
-    } else if (field.equals(nbpString)) {						// if querying the app_nbp NBP Date, get matching data
+    } else if (field.equals(phenotypeString)) {						// if querying the publication, get paper data
+      try { rs = s.executeQuery("SELECT * FROM app_term WHERE app_term ~ '"+query+"' ORDER BY joinkey"); }	// find the allele that matches the queried allele
+      catch (SQLException se) { System.out.println("Exception while executing app_term phenotypeString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+    } else if (field.equals(phenotypeRemarkString)) {
+      try { rs = s.executeQuery("SELECT * FROM app_phen_remark WHERE app_phen_remark ~ '"+query+"' ORDER BY joinkey"); }	// find the allele that matches the queried allele
+      catch (SQLException se) { System.out.println("Exception while executing app_phen_remark phenotypeRemarkString "+query+" query: that probably means our SQL is invalid"); 
+        se.printStackTrace(); System.exit(1); }
+    } else if (field.equals(nbpString)) {	
       try { rs = s.executeQuery("SELECT * FROM app_nbp WHERE app_timestamp ~ '"+query+"' ORDER BY joinkey;"); }	// get the alleles from a paper
       catch (SQLException se) { System.out.println("Exception while executing app_nbp nbpString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
     } else {
