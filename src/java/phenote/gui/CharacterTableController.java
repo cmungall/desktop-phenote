@@ -30,6 +30,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableColumn;
 
 import org.apache.log4j.Logger;
+import org.bbop.framework.GUIManager;
 import org.obo.datamodel.OBOClass;
 import org.swixml.SwingEngine;
 
@@ -219,6 +220,8 @@ public class CharacterTableController {
 //     }
     // could just Phenote.inst().getFrame(), but phenote2??
     // should at least probably make this a util fn
+    // when Phenote1 support goes away, we can do:
+    // GUIManager.getManager().getFrame()
     Container c = characterTablePanel.getTopLevelAncestor();
     Frame frame = null;
     if (c instanceof Frame) frame = (Frame)frame;
