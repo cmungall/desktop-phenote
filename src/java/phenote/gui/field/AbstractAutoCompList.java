@@ -24,6 +24,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListDataListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.plaf.basic.BasicComboBoxEditor;
@@ -52,8 +54,10 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   private AutoTextField autoTextField;
   private SearchParamsI searchParams = SearchParams.inst();
   private CompListSearcher compListSearcher;
+  private boolean actionHappened = true; // JComboBox sets value twice upon mouse selection - second time is wrong item
   // minimum chars to type for completion to happen - from config
   private int minCompChars = 0;
+  private Object highlightedItem; // last item highlighted in popup menu of JComboBox
 
   protected AbstractAutoCompList(CharField cf) {
     this(cf,0); // minCompChars = 0
@@ -71,6 +75,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     this.getJComboBox().setEditor(autoTextFieldEditor);
     this.getJComboBox().setRenderer(new ResizingComboBoxRenderer());
     this.getJComboBox().addActionListener(new ComboBoxActionListener());
+    this.getUIJList().addListSelectionListener(new PopupListListener());
     compListSearcher = new CompListSearcher(getCharField().getOntologyList());
     // init with all terms if config.showAllOnEmptyInput...
     // this can take a while (post comp gui) do on demand with popup menu listener
@@ -469,10 +474,18 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
 
     private ComboBoxActionListener() {}
     public void actionPerformed(ActionEvent e) {
-      log().debug("Action performed: " + e);
+      log().debug("Action performed: " + e.getActionCommand());
+      actionHappened = true;
       // comboBoxChanged-> user has selected from list, (cdEdited-> user has edited text box)
       if (e.getActionCommand().equals("comboBoxChanged")) {
         AbstractAutoCompList.this.setHasChangedMultipleValues(true);
+      }
+      if (e.getActionCommand().equals("comboBoxEdited")) {
+        // user pressed Return to send combobox action
+        // JComboBox is buggy and won't set the correct item using keyboard,
+        // so we force it to set the item that was highlighted in the menu
+        // this is kept up to date by PopupListListener
+        getJComboBox().setSelectedItem(highlightedItem);
       }
       if (AbstractAutoCompList.this.shouldResetGuiForMultipleValues()) {
         AbstractAutoCompList.this.setGuiForMultipleValues();
@@ -541,7 +554,14 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     private CompComboBoxModel(List<Object> l) { list = l; }
 
     public Object getSelectedItem() { return selectedItem; }
-    public void setSelectedItem(Object anItem) { selectedItem = anItem; }
+    public void setSelectedItem(Object anItem) {
+      // this is incorrectly called twice by JComboBox before action is sent
+      // first time has correct value, second time wrong value
+      if (actionHappened) {
+      selectedItem = anItem;
+      actionHappened = false;
+      }
+    }
     public void	addListDataListener(ListDataListener l) {}
     public Object getElementAt(int index) { return list.get(index); }
     public int getSize() { return list.size(); }
@@ -618,6 +638,26 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
       boolean doThreaded = false;
       doCompletion(showPopup,doThreaded);
     }
+  }
+  
+  /**
+   * Keeps track of the item last highlighted in the combobox menu. 
+   * This is needed because of a bug in JComboBox which selects the 
+   * wrong item when choosing via keyboard.
+   */
+  private class PopupListListener implements ListSelectionListener {
+
+    public void valueChanged(ListSelectionEvent e) {
+      Object source = e.getSource();
+      if (!(source instanceof JList)) {
+        log().error("Source of combo box mouse over event is not JList "
+                + source.getClass());
+        return;
+      }
+      JList jList = (JList) source;
+      highlightedItem = jList.getSelectedValue();
+    }
+    
   }
   
 }
