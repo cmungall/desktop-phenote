@@ -366,6 +366,7 @@ public class CharacterTableController {
 	  this.characterTable.setSelectionModel(this.selectionModel);
 	  if (this.panelToUpdate != null) this.panelToUpdate.setListSelectionModel(this.selectionModel);
 	  this.tableColumnSaver = new TableColumnPrefsSaver(this.characterTable, this.getTableAutoSaveName());
+	  this.setUpTableEditors();
 	}
 
 	private void updateButtonStates() {

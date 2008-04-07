@@ -368,6 +368,11 @@
           <xs:documentation>default is false - there is always one character</xs:documentation>
         </xs:annotation>
       </xs:attribute>
+      <xs:attribute name="useFieldPanel" use="required" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>default is true - if false, this table is only edited inline</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
       <xs:attribute name="group_adapter" use="required" type="xs:string"/>
       <xs:attribute name="destination_field" use="required" type="xs:string"/>
       <xs:attribute name="show" type="xs:IDREFS">

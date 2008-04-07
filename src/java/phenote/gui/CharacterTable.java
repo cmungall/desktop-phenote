@@ -18,6 +18,7 @@ import org.bbop.framework.ComponentManager;
 import org.bbop.framework.GUIComponent;
 import org.bbop.framework.dock.LayoutAdapter;
 
+import phenote.config.Config;
 import phenote.dataadapter.ScratchGroup;
 import phenote.datamodel.CharacterI;
 import phenote.edit.EditManager;
@@ -119,7 +120,7 @@ public class CharacterTable extends AbstractGUIComponent implements CharacterTab
   }
 
   private void gainedFocus() {
-    if (this.getFieldPanelContainer() != null) {
+    if ((this.getFieldPanelContainer() != null) && (Config.inst().getGroupUsesFieldPanel(this.getGroup()))) {
       this.getFieldPanelContainer().setTableSource(this);
     }
   }

@@ -1293,6 +1293,17 @@ public class Config {
     if (group.xgetAllowEmptyCharacters() == null) return false;
     return group.getAllowEmptyCharacters();
   }
+  
+  /**
+   * Determines whether the editing interface for this group
+   * should use the field panel, or else edit only in the table.
+   */
+  public boolean getGroupUsesFieldPanel(String groupName) {
+    final Group group = this.getGroup(groupName);
+    if (group == null) return true;
+    if (group.xgetUseFieldPanel() == null) return true;
+    return group.getUseFieldPanel();
+  }
 
   /** Returns xmlbean Group for groupName, returns null if no such group
    should it create group for "default" if it doesnt exist - i think so - just 
