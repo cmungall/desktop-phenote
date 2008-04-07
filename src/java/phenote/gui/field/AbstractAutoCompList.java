@@ -39,6 +39,7 @@ import org.apache.log4j.Logger;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharFieldValue;
+import phenote.gui.CorrectRowHeightCellEditor;
 import phenote.gui.SearchParams;
 import phenote.gui.SearchParamsI;
 /** has a jcombobox that does auto completion - i had to do some tricks(hacks) to get it
@@ -92,7 +93,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
 
   @Override
   public TableCellEditor getTableCellEditor() {
-    return new DefaultCellEditor(this.getJComboBox());
+    return new CorrectRowHeightCellEditor(this.getJComboBox());
   }
 
   public void setMinCompChars(int minChars) { minCompChars = minChars; }
