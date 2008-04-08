@@ -117,6 +117,7 @@ public class OboUtil {
   }
 
   public static boolean isPostCompTerm(OBOClass term) {
+    if (!term.isAnonymous()) return false;
     for (Link l : term.getParents()) {
       if (isLinkToDiff(l))
         return true;
