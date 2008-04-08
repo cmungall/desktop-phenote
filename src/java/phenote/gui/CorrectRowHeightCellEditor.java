@@ -30,7 +30,7 @@ public class CorrectRowHeightCellEditor extends DefaultCellEditor {
   public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
     final Component component = super.getTableCellEditorComponent(table, value, isSelected, row, column);
     if (table != null) {
-      // JTable makes text editor too small, so we have to force it
+      // JTable makes editor too small, so we have to force it
       table.setRowHeight(row, (int)(Math.ceil(component.getPreferredSize().getHeight())));
     }
     return component;

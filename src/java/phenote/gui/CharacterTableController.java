@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.CellEditor;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -524,6 +525,13 @@ public class CharacterTableController {
 	    c.setCellEditor(editor);
 	  }
 	}
+	
+	private void endCellEditing() {
+	  final CellEditor editor = this.characterTable.getCellEditor();
+	  if (editor != null) {
+	    editor.stopCellEditing();
+	  }
+	}
 
 	/** Listens for loading of new data files and clears the search filter */
 	private class CharacterListChangeListener implements CharListChangeListener {
@@ -542,6 +550,9 @@ public class CharacterTableController {
 	private class SelectionListener implements ListSelectionListener {
 		public void valueChanged(ListSelectionEvent e) {
 			CharacterTableController.this.updateButtonStates();
+			// if selection changes, we need to end cell editing, otherwise the wrong value will
+			// be shown in the editor cell
+			CharacterTableController.this.endCellEditing();
 		}
 	}
 

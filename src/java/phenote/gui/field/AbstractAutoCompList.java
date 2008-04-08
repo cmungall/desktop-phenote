@@ -93,7 +93,9 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
 
   @Override
   public TableCellEditor getTableCellEditor() {
-    return new CorrectRowHeightCellEditor(this.getJComboBox());
+    final DefaultCellEditor editor = new CorrectRowHeightCellEditor(this.getJComboBox());
+    editor.setClickCountToStart(2);
+    return editor;
   }
 
   public void setMinCompChars(int minChars) { minCompChars = minChars; }
