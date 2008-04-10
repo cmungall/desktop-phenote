@@ -682,6 +682,7 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
       CharFieldValue old = charValueList.get(i);
       getEditManager().deleteFromValList(this,old);
     }
+    /** return true if one of char field values has obj */
     private boolean hasObject(OBOObject obj) {
       for (CharFieldValue v : charValueList) {
         if (v.hasObject(obj)) return true;
