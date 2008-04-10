@@ -25,6 +25,7 @@ import javax.swing.table.TableCellEditor;
 
 import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOObject;
 import org.obo.datamodel.OBOProperty;
 
 import phenote.config.Config;
@@ -625,6 +626,7 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
     }
   }
 
+  /** update/synch jlist gui for list from char change/edit or selection */
   private void updateListGui() {
     if (!hasListGui()) return;
     List<CharacterI> sel = getSelectedChars();
@@ -640,6 +642,11 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
       List<CharFieldValue> vals = c.getValue(getCharField()).getCharFieldValueList();
       getValueListModel().setList(vals);
     }
+  }
+
+  protected boolean alreadyInList(OBOObject obj) {
+    if (!hasListGui()) return false;
+    return getValueListModel().hasObject(obj);
   }
   
   /** For fields with lists - this is the model for JList, manages a list of 
@@ -674,6 +681,12 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
       if (sel.size() > 1) log().error("Cant delete list items in multi select");
       CharFieldValue old = charValueList.get(i);
       getEditManager().deleteFromValList(this,old);
+    }
+    private boolean hasObject(OBOObject obj) {
+      for (CharFieldValue v : charValueList) {
+        if (v.hasObject(obj)) return true;
+      }
+      return false;
     }
   }
   

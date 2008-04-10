@@ -500,6 +500,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
     }
   }
   
+  /** this listens for return key and edits model with top hit in comp list */ 
   private class ReturnKeyListener extends KeyAdapter {
     public void keyPressed(KeyEvent e) {
       if (!keyForTopPick(e)) return; // tab?

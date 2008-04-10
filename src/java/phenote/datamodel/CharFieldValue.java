@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOObject;
 import org.obo.datamodel.impl.DanglingClassImpl;
 import org.obo.util.TermUtil;
 
@@ -260,7 +261,6 @@ public class CharFieldValue implements Cloneable {
       stringValue = name;
   }
 
-  public boolean isTerm() { return getCharField().isTerm(); }
   /** convenience fn */
   public String getID() {
     if (isEmpty()) return ""; // ??
@@ -314,7 +314,18 @@ public class CharFieldValue implements Cloneable {
   }
 
   public OBOClass getOboClass() { return getTerm(); } // --> getTerm more general
+  public boolean isTerm() { return getCharField().isTerm(); }
   public OBOClass getTerm() { return oboClassValue; }
+
+  /** an OBOObject can be an OBOClass or an OBOProperty and other obo thingies 
+      return true if is term and obj is oboClassValue
+  using oboObject instead of OBOClass so can use same method for other obo objects */
+  public boolean hasObject(OBOObject obj) {
+    if (isTerm())
+      return getTerm().equals(obj);
+    // if isRelation...
+    return false;
+  }
 
   public void editModel() {
     // doesnt work - this is removing an alreadyempty val from list silly

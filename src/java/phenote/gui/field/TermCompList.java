@@ -297,6 +297,7 @@ public class TermCompList extends AbstractAutoCompList {
 
   /** oc may be null - for nullifying model */
   private void setModel(OBOClass oboClass) {
+    if (alreadyInList(oboClass)) return; // if list, cancel if non unique
     if (this.getCharField() == null) return; // shouldn't happen
     final List<CharacterI> chars = this.getSelectedChars();
     if (chars.isEmpty()) return;
@@ -314,6 +315,7 @@ public class TermCompList extends AbstractAutoCompList {
     this.getEditManager().updateModel(this, ct);
     setDoingInternalEdit(false);
   }
+
 
   // allow user to nullify field
   protected void setModelToNull() {
