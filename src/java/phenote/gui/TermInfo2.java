@@ -592,7 +592,16 @@ public class TermInfo2 extends AbstractGUIComponent {
 		termID.setText(oboClass.getID());
 		ontologyName.setText(oboClass.getNamespace().toString());
 		if (oboClass.getDefinition().length()>0) {
-			definitionTextArea.setText("<html>"+oboClass.getDefinition()+"</html>"); 
+      String def = oboClass.getDefinition();
+      // definitions can have refs in brackets after def
+      Set<Dbxref> defRefs = oboClass.getDefDbxrefs();
+      if (defRefs!=null && !defRefs.isEmpty()) {
+        int i=1;
+        for (Dbxref x : defRefs) {
+          def  += "<br>Definition ref "+ i++ +": " +x; 
+        }
+      }        
+			definitionTextArea.setText("<html>"+def+"</html>"); 
 		} else
 			definitionTextArea.setText("<html> (no definition provided) </html>");
 
