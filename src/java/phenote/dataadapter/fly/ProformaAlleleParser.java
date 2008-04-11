@@ -146,24 +146,28 @@ public class ProformaAlleleParser extends OntologyMaker { //extends AbstractGrou
     }
   }
 
+  // ???
+  private static final Namespace ALLELE_NAMESPACE = new Namespace("Allele");
+
   private OBOClass makeAlleleTerm(String allele) {
-    return new OBOClassImpl(allele,"FBAlelle:"+allele);
+    OBOClass oc = new OBOClassImpl(allele,"FBAlelle:"+allele);
+    oc.setNamespace(ALLELE_NAMESPACE);
+    return oc;
   }
 
-  /** really they should be instances */
+  /** really they should be instances - not used yet */
   private Instance makeAlleleInstance(String allele) {
     Instance i = new InstanceImpl("FBAllele:"+allele,getAlleleClass());
     i.setName(allele);
     return i;
   }
 
-  // ???
-  private static final Namespace ALLELE_NAMESPACE = new Namespace("Allele");
 
   // this should really come from SO - for now just mimicing this
+  // not used yet - needed for instances
   private OBOClass getAlleleClass() {
     OBOClass oc = new OBOClassImpl("allele","SO:0000704");
-    oc.setNamespace(ALLELE_NAMESPACE);
+    oc.setNamespace(ALLELE_NAMESPACE); // ??
     return oc;
   }
 
