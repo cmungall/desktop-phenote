@@ -12,6 +12,7 @@ import javax.swing.JFileChooser;
 
 import org.apache.log4j.Logger;
 import org.obo.datamodel.Instance;
+import org.obo.datamodel.Namespace;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOSession;
 import org.obo.datamodel.impl.InstanceImpl;
@@ -156,9 +157,14 @@ public class ProformaAlleleParser extends OntologyMaker { //extends AbstractGrou
     return i;
   }
 
+  // ???
+  private static final Namespace ALLELE_NAMESPACE = new Namespace("Allele");
+
   // this should really come from SO - for now just mimicing this
   private OBOClass getAlleleClass() {
-    return new OBOClassImpl("allele","SO:0000704");
+    OBOClass oc = new OBOClassImpl("allele","SO:0000704");
+    oc.setNamespace(ALLELE_NAMESPACE);
+    return oc;
   }
 
   //private class ParseEx extends E

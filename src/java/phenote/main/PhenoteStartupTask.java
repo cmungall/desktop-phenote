@@ -65,12 +65,12 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
     // Collection<GUIComponentFactory<?>> factories =
     // super.getDefaultComponentFactories();
     Collection<GUIComponentFactory<?>> factories = new ArrayList<GUIComponentFactory<?>>();
-//  factories.add(new FieldPanelFactory());
     factories.add(new PhenoteEditorFactory());
     factories.add(new TermInfoFactory());
     factories.add(new NCBIInfoFactory());
+    // annot table, genotype maker, ...
     factories.addAll(this.getCharacterTableComponentFactories());
-//  factories.add(new GraphEditorFactory());  <-- removing this for upcoming 1.5 release
+    //factories.add(new GraphEditorFactory()); // removing this for 1.5 release
     factories.add(new PhenoteTreeViewFactory());
     factories.add(new PhenoteGraphViewFactory());
     factories.add(new PhenoteOntologyTreeEditorFactory());

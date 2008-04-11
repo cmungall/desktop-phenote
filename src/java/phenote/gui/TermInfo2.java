@@ -590,7 +590,13 @@ public class TermInfo2 extends AbstractGUIComponent {
 		termInfoToolbar.setTermFieldText(oboClass); //is the toolbar now out of date b/c of the component title?
 		//always show the basics, even if empty...shouldn't be empty.
 		termID.setText(oboClass.getID());
-		ontologyName.setText(oboClass.getNamespace().toString());
+		if (oboClass.getNamespace()!=null) {
+		  ontologyName.setText(oboClass.getNamespace().toString());
+    }
+		else {
+      ontologyName.setText("No namespace/ontology specified");
+		  LOG.error("No namespace for term "+oboClass);
+    }
 		if (oboClass.getDefinition().length()>0) {
       String def = oboClass.getDefinition();
       // definitions can have refs in brackets after def
