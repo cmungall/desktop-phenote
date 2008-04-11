@@ -198,6 +198,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
     if (driver instanceof IDWDriver) {
       ((IDWDriver)driver).setCustomTheme(new PhenoteDockingTheme());
     }
+    driver.setSaveLayoutOnExit(false);
     return driver;
   }
 
