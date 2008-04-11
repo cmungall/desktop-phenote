@@ -300,7 +300,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
       Populates defaultComboBoxModel with List of CompTerms */
   private void doCompletion() {
     // showPopup can hang during test but not during real run - bizarre
-    log().debug("Do completion");
+    //log().debug("Do completion");
     doCompletion(!inTestMode);
   }
 
