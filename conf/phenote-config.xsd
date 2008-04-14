@@ -271,7 +271,11 @@
       <xs:attribute name="isRequired" use="required" type="xs:boolean"/>
       <xs:attribute name="warnIfNull" use="required" type="xs:boolean"/>
       <xs:attribute name="tab" use="required" type="xs:string"/>
-      <xs:attribute name="file" use="required" type="xs:string"/>
+      <xs:attribute name="file" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>phase these 4 out - redundant with single ontology</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
       <xs:attribute name="filter-out" use="required" type="xs:string"/>
       <xs:attribute name="slim" use="required" type="xs:string"/>
       <xs:attribute name="repos-subdir" use="required" type="xs:string"/>
@@ -299,6 +303,7 @@
           <xs:documentation>name of another field which this one uses as pick-list source</xs:documentation>
         </xs:annotation>
       </xs:attribute>
+      <xs:attribute name="enableBigTextBox" use="required" type="xs:boolean"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="ontology">

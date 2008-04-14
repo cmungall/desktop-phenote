@@ -2,6 +2,7 @@ package phenote.gui.field;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -29,6 +30,7 @@ import org.obo.datamodel.OBOObject;
 import org.obo.datamodel.OBOProperty;
 
 import phenote.config.Config;
+import phenote.config.xml.FieldDocument.Field;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.DataAdapterEx;
 import phenote.dataadapter.QueryableDataAdapterI;
@@ -59,6 +61,7 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
   /** if true then set gui but not model, for clearing on multi, default false */
   private boolean updateGuiOnly = false;
   private JButton retrieveButton;
+  private JButton editButton;
   static int fieldHeight = 17;
   static Dimension inputSize = new Dimension(390,fieldHeight); // size of user input box
   private boolean editModel = true;
@@ -75,10 +78,13 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
   /** flag for supressing valueChanged if comes from self */
   private boolean doingInternalEdit = false;
   private List<ActionListener> actionListeners = new ArrayList<ActionListener>();
+  /** bean from xml conguration for field */
+  private Field fieldXmlBean;
+  
 
   /** CharFieldGui for main window not post comp box - factory method, make appropriate
-      CFG subclass from type of charField - minCompChars is not used at moment - may come
-      back */
+      CFG subclass from type of charField - minCompChars is not used at moment - may
+      come back */
   public static CharFieldGui makeCharFieldGui(CharField charField,int minCompChars) {
     CharFieldGui fieldGui;
     if (charField.isTerm()) {
@@ -149,9 +155,7 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
 
   private void init(CharField cf) { //, FieldPanel tp) {
     charField = cf;
-    //fieldPanel = tp;
-    //if (!charField.hasOntologies()) initTextField(charField.getName());
-    //else initCombo();
+    fieldXmlBean = charField.getFieldXmlConfigBean();
     // check queryableAdapter if charField is queryable
     addRetrieveButton();
     // enableListeners(true)
@@ -586,6 +590,31 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
   protected boolean hasCompButton() { return false; }
   /** Overridden by TermCompList */
   protected JButton getCompButton() { return null; }
+
+  boolean hasEditButton() { return getEditButton() != null; }
+  JButton getEditButton() {
+    if (!editButtonConfigged()) return null;
+    if (editButton == null) {
+      editButton = new JButton("Edit");
+      editButton.addActionListener(new EditButtonActionListener());
+    }
+    return editButton;
+  }
+  
+  private boolean editButtonConfigged() {
+    return fieldXmlBean!=null && fieldXmlBean.xgetEnableBigTextBox()!=null
+      && fieldXmlBean.getEnableBigTextBox();
+  }
+  
+  /** launch big text field window when edit button pressed */
+  private class EditButtonActionListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      // we should have a getParentFrame method for app
+      Frame frame = (Frame)(CharFieldGui.this.editButton.getTopLevelAncestor());
+      new BigTextPopup(frame,getCharField(),getSelectedChars());
+    }
+  }
+
 
   /** should get this from config... stub for now */
   protected boolean hasListGui() {

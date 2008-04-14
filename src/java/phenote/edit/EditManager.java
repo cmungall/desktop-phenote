@@ -117,6 +117,11 @@ public class EditManager {
 //     fireChangeEvent(e);
 //   }
 
+  public void updateModel(List<CharacterI> l,CharField cf, String s, Object src) {
+    CompoundTransaction ct = CompoundTransaction.makeUpdate(l,cf,s);
+    updateModel(src,ct);
+  }
+
   public void updateModel(Object src, TransactionI ct) { // CompTrans
     //for (TransactionI t : ct.getTransactions())
     //updateModelUpdateTrans(source,t);

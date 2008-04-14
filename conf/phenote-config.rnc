@@ -197,9 +197,8 @@ field =
     attribute warnIfNull { xsd:boolean },
     ## should this be another type? will there be anything readonly aside from strings?
     ##attribute read-only { xsd:boolean },
-    ## file is for single ontology - rename ontology_file?
-    ## phase these 4 out - redundant with single ontology
     attribute tab { xsd:string },
+    ## phase these 4 out - redundant with single ontology
     attribute file { xsd:string },
     attribute filter-out { xsd:string },
     attribute slim { xsd:string },
@@ -213,6 +212,7 @@ field =
     ## with new threading optimization this is being phased out, its been disabled
     attribute min-completion-chars { xsd:int },
     # for ontol completion what to sort terms by, default is NAME
+    # id sorting is admittedly suspect
     attribute sort-by { "NAME" | "ID" },
     ## if true then field can have multiple values, use list gui
     attribute isList { xsd:boolean },
@@ -223,6 +223,10 @@ field =
     attribute isVisible { xsd:boolean },
     ## name of another field which this one uses as pick-list source
     attribute pickSource { xsd:string },
+    ## if true then give user big popup box activated by button to type
+    ## multilines of text - comments, descriptions
+    attribute enableBigTextBox { xsd:boolean },
+
     postcomp?,
     ontology*
   } 

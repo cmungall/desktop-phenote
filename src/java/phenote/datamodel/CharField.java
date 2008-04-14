@@ -72,6 +72,12 @@ public class CharField {
     setCopyEnabled(fc.copies());
   }
 
+  /** returns xml bean from configuration used to make field, null if doesnt
+      have one */
+  public Field getFieldXmlConfigBean() {
+    return fieldXmlBean;
+  }
+
   public void setCopyEnabled(boolean cp) {
     copies = cp;
   }

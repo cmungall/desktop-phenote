@@ -210,8 +210,10 @@ public class FieldPanel extends AbstractGUIComponent {
   }
 
   void addButtons(CharFieldGui fieldGui, GridBagConstraints constraints) {
+    constraints.gridx = 4;
     this.addPostCompButton(fieldGui, constraints);
-    this.addRetrieveButton(fieldGui, constraints);  	
+    this.addRetrieveButton(fieldGui, constraints);
+    addEditButton(fieldGui, constraints);
   }
   
   /** set up basic grid bag constraints with insets and increments currentGridBagRow/gridy
@@ -292,16 +294,21 @@ public class FieldPanel extends AbstractGUIComponent {
   }
 
   private void addPostCompButton(CharFieldGui fieldGui, GridBagConstraints constraints) {
-    constraints.gridx = 4;
     if (fieldGui.hasCompButton()) {
       fieldPanel.add(fieldGui.getCompButton(), constraints);
     }
   }
   
   private void addRetrieveButton(CharFieldGui fieldGui, GridBagConstraints constraints) {
-    constraints.gridx = 4;
     if (fieldGui.hasRetrieveButton()) {
       fieldPanel.add(fieldGui.getRetrieveButton(), constraints);
+    }
+  }
+
+  /** edit button brings up big text field popup, may do other things in future? */
+  private void addEditButton(CharFieldGui fieldGui, GridBagConstraints constraints) {
+    if (fieldGui.hasEditButton()) {
+      fieldPanel.add(fieldGui.getEditButton(),constraints);
     }
   }
 

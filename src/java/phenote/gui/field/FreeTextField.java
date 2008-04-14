@@ -204,10 +204,10 @@ class FreeTextField extends CharFieldGui {
 //       return; // failed - dont edit model - clear out field?
 //     }
 
-    //CompoundTransaction ct = new CompoundTransaction(chars,getCharFieldEnum(),v);
     CompoundTransaction ct = CompoundTransaction.makeUpdate(chars,getCharField(),v);
     setDoingInternalEdit(true);
-    this.getEditManager().updateModel(this,ct);//charFieldGui,ct); // cfg source
+    //this.getEditManager().updateModel(chars,getCharField(),v,this);
+    this.getEditManager().updateModel(this,ct);
     guiTextHasChanged = false; // reset flag
     setDoingInternalEdit(false);
 
