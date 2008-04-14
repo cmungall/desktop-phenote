@@ -31,6 +31,16 @@
     </void> 
    </object> 
   </void> 
- </object> 
- <object idref="Perspective0"/> 
+ <void method="add"> 
+   <object class="org.bbop.framework.dock.Perspective"> 
+    <void property="ID"> 
+     <string>phenoscape_layout</string> 
+    </void> 
+    <void property="name"> 
+     <string>Phenoscape</string> 
+    </void> 
+   </object> 
+  </void>
+ </object>
+ 
 </java> 
