@@ -52,7 +52,7 @@ public class FieldPanel extends AbstractGUIComponent {
   private EventSelectionModel<CharacterI> selectionModel;
 
   /** eventually configurable (with default 12) - for now hardwire at 12 */
-  private static int fieldsPerTab = 12;
+  private static int fieldsPerTab = 11;
 
 //   public FieldPanel() {
 //     this(true,false); // false - no search panel - in menu now
@@ -210,11 +210,11 @@ public class FieldPanel extends AbstractGUIComponent {
     this.addLabel(fieldGui, getConstraintsNewRow()); // gridx 0
     // add ontology chooser x 1 width 1 if present
     int gridx = 1;
-    this.addOntologyChooser(fieldGui, getConstraintsSameRow(gridx));
+    this.addOntologyChooser(fieldGui, getConstraintsSameRow(gridx)); // 1
     //int width = 2; // in case need to slip in edit button if too many buttons
     this.addInputGui(fieldGui, getConstraintsSameRow(++gridx)); // 2
     gridx += 2;  // 4 (input is width 2, label/ont is width 2
-    addListGui(fieldGui,getConstraintsSameRow(gridx));
+    addListGui(fieldGui,getConstraintsSameRow(gridx-1));
     addButtons(fieldGui,getConstraintsSameRow(gridx)); //put all buttons in same col
   }
   
@@ -287,6 +287,21 @@ public class FieldPanel extends AbstractGUIComponent {
     constraints.gridwidth = inputGuiWidth(fieldGui);
     //if (!fieldGui.hasListGui()) constraints.gridwidth = 2;
     addInputGui(fieldGui.getUserInputGui(), constraints);
+    if (shortenInputGui(fieldGui)) {
+      hackForAnnoyingGridBagLayout(fieldGui,constraints);
+    }
+  }
+
+  private void hackForAnnoyingGridBagLayout(CharFieldGui fieldGui,
+                                            GridBagConstraints constraints) {
+    ++constraints.gridx;
+    constraints.fill = GridBagConstraints.NONE;
+    constraints.insets = new Insets(0,0,0,0);
+    constraints.weightx = 0.01;
+    JLabel l = new JLabel();
+    l.setMinimumSize(new Dimension(0,0));
+    l.setPreferredSize(new Dimension(0,0));
+    fieldPanel.add(l,constraints);
   }
 
   private int inputGuiWidth(CharFieldGui fieldGui) {
@@ -302,8 +317,9 @@ public class FieldPanel extends AbstractGUIComponent {
 
   private void addInputGui(JComponent gui, GridBagConstraints constraints) {
     // constraints.gridx = 2; now pre-set in constraints
-    constraints.weightx = 1.0;
+    constraints.weightx = 10.0;
     constraints.fill = GridBagConstraints.HORIZONTAL;
+    //constraints.anchor = GridBagConstraints.FIRST_LINE_END;
     fieldPanel.add(gui, constraints);
   }
   
@@ -311,7 +327,8 @@ public class FieldPanel extends AbstractGUIComponent {
     if (!fieldGui.hasListGui()) return;
     // LIST - to the right of input gui
     constraints.gridx = 3;
-    constraints.gridwidth = 1; // 2??
+    // width of 2 so it takes up part of input and buttons...
+    constraints.gridwidth = 2; // 2?? // 1?
     constraints.gridheight = 2;
     fieldPanel.add(fieldGui.getListGui(),constraints);
     // DEL BUTTON - put under input gui near list
@@ -342,6 +359,7 @@ public class FieldPanel extends AbstractGUIComponent {
     // scrunched input field
     if (fieldGui.hasRetrieveButton())
       --constraints.gridx;
+    constraints.fill = GridBagConstraints.HORIZONTAL;
     fieldPanel.add(fieldGui.getEditButton(),constraints);
   }
 

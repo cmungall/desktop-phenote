@@ -629,8 +629,8 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
       listGui.setModel(getValueListModel());
       listGui.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
       listScroll = new JScrollPane(listGui);
-      listScroll.setMinimumSize(new Dimension(90,40)); // w,h
-      listScroll.setPreferredSize(new Dimension(130,60));
+      listScroll.setMinimumSize(new Dimension(130,60)); // w,h
+      listScroll.setPreferredSize(new Dimension(230,90)); // 130,60 small?
     }
     return listScroll;
   }

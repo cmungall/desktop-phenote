@@ -511,7 +511,7 @@ public class Phenote {
       JSplitPane outerSplitPane =
         new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, upperComponent,ctp);
       mainPanel.add(outerSplitPane);
-      outerSplitPane.setDividerLocation((int)(0.40 * WINDOW_HEIGHT));
+      outerSplitPane.setDividerLocation((int)(0.50 * WINDOW_HEIGHT)); // .4 -> .5
       //outerSplitPane.setDividerLocation(0.3); // proportion doesnt work til draw?
     }
     else {
