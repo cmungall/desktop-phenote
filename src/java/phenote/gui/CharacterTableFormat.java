@@ -48,8 +48,8 @@ public class CharacterTableFormat implements AdvancedTableFormat<CharacterI> , W
     return cf.isFreeText() || cf.isTerm();
   }
 
-  public CharacterI setColumnValue(CharacterI arg0, Object arg1, int arg2) {
-    return null;
+  public CharacterI setColumnValue(CharacterI character, Object editedValue, int column) {
+    return character;
   }
   
   private CharField getCharFieldForColumn(int column) {

@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.swing.AbstractAction;
+import javax.swing.CellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -32,6 +33,8 @@ import javax.swing.JToolBar;
 import javax.swing.TransferHandler;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableColumn;
 
 import org.apache.log4j.Logger;
 import org.bbop.framework.AbstractGUIComponent;
@@ -46,6 +49,7 @@ import phenote.dataadapter.CharListChangeListener;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.LoadSaveListener;
 import phenote.dataadapter.LoadSaveManager;
+import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.TransferableCharacterList;
@@ -57,8 +61,10 @@ import phenote.gui.CharacterTableController;
 import phenote.gui.CharacterTableSource;
 import phenote.gui.DelegatingTransferHandler;
 import phenote.gui.TableColumnPrefsSaver;
+import phenote.gui.field.CharFieldGui;
 import phenote.gui.field.CharFieldMatcherEditor;
 import phenote.gui.field.FieldPanelContainer;
+import phenote.gui.selection.SelectionManager;
 import phenote.util.EverythingEqualComparator;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.FilterList;
@@ -272,6 +278,7 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     this.characterTable.setTransferHandler(handler);
     // scrollpane also needs transfer handler to receive drop on empty table rows
     scrollPane.setTransferHandler(new DelegatingTransferHandler(handler));
+    this.setUpTableEditors();
   }
   
   /** Instantiate interface objects from Swixml file */
@@ -318,6 +325,7 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     this.sortChooser.addSortActionListener(new SortListener());
     this.characterTable.setSelectionModel(this.selectionModel);
     this.tableColumnSaver = new TableColumnPrefsSaver(this.characterTable, this.getTableAutoSaveName());
+    this.setUpTableEditors();
   }
   
   /** select characters in table */
@@ -358,6 +366,35 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
     if (index > -1) {
       this.getCharacterListManager().getCharacterList().getList().set(index, character);
     }
+  }
+  
+  private void setUpTableEditors() {
+    for (CharField cf : CharFieldManager.inst().getCharFieldListForGroup(this.getGroup())) {
+      if (cf.isList()) continue; // bad things happen if multiple characterlistfieldguis are made - should fix how this is designed
+      final CharFieldGui cfg = CharFieldGui.makeCharFieldGui(cf, 0);
+      final TableCellEditor editor = cfg.getTableCellEditor();
+      if (editor == null) { continue; }
+      cfg.setListSelectionModel(this.getSelectionModel());
+      cfg.setEditManager(this.getEditManager());
+      cfg.setSelectionManager(SelectionManager.inst());
+      final TableColumn c = getColumnForField(cf);
+      c.setCellEditor(editor);
+    }
+  }
+  
+  private void endCellEditing() {
+    final CellEditor editor = this.characterTable.getCellEditor();
+    if (editor != null) {
+      editor.stopCellEditing();
+    }
+  }
+  
+  private TableColumn getColumnForField(CharField cf) {
+    for (int i=0; i<characterTable.getColumnCount(); i++) {
+      if (characterTable.getColumnName(i).equals(cf.getName()))
+        return characterTable.getColumnModel().getColumn(i);
+    }
+    return null; // char field not found ???
   }
   
   private void gainedFocus() {
@@ -511,6 +548,7 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
   private class SelectionListener implements ListSelectionListener {
     public void valueChanged(ListSelectionEvent e) {
       CharacterTemplateTable.this.updateButtonStates();
+      CharacterTemplateTable.this.endCellEditing();
     }
   }
   

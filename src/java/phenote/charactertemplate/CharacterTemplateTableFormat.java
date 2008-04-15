@@ -62,7 +62,11 @@ public class CharacterTemplateTableFormat extends CharacterTableFormat implement
   }
   
   public boolean isEditable(CharacterI character, int column) {
-    return column == 0;
+    if (column == 0) {
+      return true;
+    } else {
+      return super.isEditable(character, (column - 1));
+    }
   }
 
   public CharacterI setColumnValue(CharacterI character, Object editedValue, int column) {
@@ -72,8 +76,10 @@ public class CharacterTemplateTableFormat extends CharacterTableFormat implement
       } else {
         this.controller.setCharacterIsMarked(character, (Boolean)editedValue);
       }
+      return character;
+    } else {
+      return super.setColumnValue(character, editedValue, column);
     }
-    return character;
   }
 
 }

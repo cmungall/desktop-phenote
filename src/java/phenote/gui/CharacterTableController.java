@@ -517,8 +517,8 @@ public class CharacterTableController {
 	  for (CharField cf : fieldMan().getCharFieldListForGroup(this.representedGroup)) {
 	    final CharFieldGui cfg = CharFieldGui.makeCharFieldGui(cf, 0);
 	    final TableCellEditor editor = cfg.getTableCellEditor();
-	    if (editor == null) { return; }
-	    cfg.setListSelectionModel(this.getSelectionModel()); //TODO this will need to be updated for new sel models
+	    if (editor == null) { continue; }
+	    cfg.setListSelectionModel(this.getSelectionModel());
 	    cfg.setEditManager(this.getEditManager());
 	    cfg.setSelectionManager(SelectionManager.inst());
 	    final TableColumn c = getColumnForField(cf);
