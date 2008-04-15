@@ -158,30 +158,62 @@ public class WormGoAdapter implements QueryableDataAdapterI {
       System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); System.exit(1); }
     for (CharacterI chr : charList.getList()) {
 ////      System.out.println("Chr "+chr+" end");
-//      try {
+      try {
+
 //        String objname = chr.getValueString("Object Name");	// get the objname value from the character, currently could have a column number
-//        String pgdbid = chr.getValueString("PgdbId");		// get the postgres database ID for that character
-//        String joinkey = pgdbid;
-////System.out.println("pgdbid "+pgdbid+" end");
-//        if ( (pgdbid == null) || (pgdbid == "") ) { 
+        String pgdbid = chr.getValueString("PgdbId");		// get the postgres database ID for that character
+        String joinkey = pgdbid;
+//System.out.println("pgdbid "+pgdbid+" end");
+        if ( (pgdbid == null) || (pgdbid == "") ) { 
 ////          Integer joinkeyInt = Integer.parseInt(pgdbid);	// this can't do anything since pgdbid must be blank
-//          Integer joinkeyInt = 0;
-//          ResultSet rs = null;
-//          try { rs = s.executeQuery("SELECT joinkey FROM int_name "); }
-//          catch (SQLException se) {
-//            System.out.println("We got an exception while executing our int_name query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
-//          try { while (rs.next()) { if (rs.getInt(1) > joinkeyInt) { joinkeyInt = rs.getInt(1); } } joinkeyInt++; joinkey = Integer.toString(joinkeyInt); }
-//            // get the next highest number joinkey for that character
-//          catch (SQLException se) {
-//            System.out.println("We got an exception while getting a column/term joinkey "+joinkey+" result:this shouldn't happen: we've done something really bad."); 
-//            se.printStackTrace(); System.exit(1); } }
-////System.out.println("joinkey "+joinkey+" end");
-//        chr.setValue("PgdbId",joinkey);					// assign the postgres database ID
-//
-//        String postgres_table = "int_name"; String tag_name = "Name"; String tag_value = chr.getValueString(tag_name);
-//        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-//        postgres_table = "int_effector"; tag_name = "Effector"; 
-//        updateListField(c, s, joinkey, postgres_table, tag_name, chr);
+          Integer joinkeyInt = 0;
+          ResultSet rs = null;
+          try { rs = s.executeQuery("SELECT joinkey FROM gop_wbgene "); }	// everything must have a wbgene
+          catch (SQLException se) {
+            System.out.println("We got an exception while executing our int_name query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
+          try { while (rs.next()) { if (rs.getInt(1) > joinkeyInt) { joinkeyInt = rs.getInt(1); } } joinkeyInt++; joinkey = Integer.toString(joinkeyInt); }
+            // get the next highest number joinkey for that character
+          catch (SQLException se) {
+            System.out.println("We got an exception while getting a column/term joinkey "+joinkey+" result:this shouldn't happen: we've done something really bad."); 
+            se.printStackTrace(); System.exit(1); } }
+System.out.println("joinkey "+joinkey+" end");
+        chr.setValue("PgdbId",joinkey);					// assign the postgres database ID
+
+        String postgres_table = "gop_wbgene"; String tag_name = "Gene"; String tag_value = "";
+        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "gop_goontology"; tag_name = "GO Ontology"; tag_value = "";
+        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "gop_goid"; tag_name = "GO Term"; tag_value = "";
+        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "gop_paper_evidence"; tag_name = "Paper"; tag_value = "";
+        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "gop_person_evidence"; tag_name = "Person"; 
+        updateListField(c, s, joinkey, postgres_table, tag_name, chr);
+        postgres_table = "gop_curator_evidence"; tag_name = "Curator"; tag_value = "";
+        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "gop_goinference"; tag_name = "GO Evidence"; tag_value = "";
+        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "gop_dbtype"; tag_name = "DB Object Type"; tag_value = "";
+        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "gop_protein"; tag_name = "Gene Product"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "gop_with"; tag_name = "with"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "gop_qualifier"; tag_name = "Qualifier"; tag_value = "";
+        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "gop_comment"; tag_name = "Comment"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "gop_lastupdate"; tag_name = "Last Updated"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+
 //        postgres_table = "int_torvariation"; tag_name = "tor Variation"; tag_value = chr.getValueString(tag_name);
 //        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
 //        postgres_table = "int_tortransgene"; tag_name = "tor Transgene"; tag_value = chr.getValueString(tag_name);
@@ -215,10 +247,10 @@ public class WormGoAdapter implements QueryableDataAdapterI {
 //        updateListField(c, s, joinkey, postgres_table, tag_name, chr);
 //        postgres_table = "int_otherevi"; tag_name = "Other Evidence"; tag_value = chr.getValueString(tag_name);
 //        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-//      } catch (Exception e) {
-//        System.out.println("Could not get terms from character: " + e);
-//        e.printStackTrace(); // helpful for debugging
-//      }
+      } catch (Exception e) {
+        System.out.println("Could not get terms from character: " + e);
+        e.printStackTrace(); // helpful for debugging
+      }
     } // for (CharacterI chr : charList.getList())
     delete(c, s);
   } // public void commit(CharacterListI charList)
