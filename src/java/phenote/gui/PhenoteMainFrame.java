@@ -24,8 +24,11 @@ public class PhenoteMainFrame extends MainFrame {
 	
 	protected JToolBar mainToolBar;
 
+  /** config size? 3 arrays of numbers to try for frame size - compare with
+      screen size, first # in array is width, 2nd is height, the 3rd one doesnt
+      seem to be used??? */
 	private int[][] dimensionInfo = { { 620, 460, 160 }, { 760, 560, 300 },
-			{ 960, 700, 400 } };
+			{ 960, 700, 400 }, { 1220, 800, 400 } };
 
 	public PhenoteMainFrame(String title) {
 		super(title);
@@ -87,6 +90,9 @@ public class PhenoteMainFrame extends MainFrame {
 	protected void createListeners() {
 	}
 
+  /** Tries out dimensionInfo array trying to find biggest dimensions for 
+      frame/window that will fit on screen - couldnt this also just do a 
+      percentage of screen size - also should have configurable override */
 	protected void initGUI() {
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());

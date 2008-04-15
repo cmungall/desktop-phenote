@@ -195,22 +195,37 @@ public class FieldPanel extends AbstractGUIComponent {
   }
 
   private int currentGridBagRow = 0;
+
+  /** 0: label
+      1: ont chooser or rest of label
+      2: input field
+      3: edit button(if dont fit), rest of input, list del, list?
+      4: buttons, list?
+      todo: move list to below input not to right of it - too scrunched
+  */
+
   public void addCharFieldGuiToPanel(CharFieldGui fieldGui) {
     // first one does new row
-    this.addLabel(fieldGui, getConstraintsNewRow());
-    this.addOntologyChooser(fieldGui, getConstraintsSameRow());
-    this.addInputGui(fieldGui, getConstraintsSameRow());
-    addListGui(fieldGui,getConstraintsSameRow());
-    addButtons(fieldGui,getConstraintsSameRow()); //put all buttons in same col
+    // label is x 0, width 1 with ont chooser, width 2 otherwise
+    this.addLabel(fieldGui, getConstraintsNewRow()); // gridx 0
+    // add ontology chooser x 1 width 1 if present
+    int gridx = 1;
+    this.addOntologyChooser(fieldGui, getConstraintsSameRow(gridx));
+    //int width = 2; // in case need to slip in edit button if too many buttons
+    this.addInputGui(fieldGui, getConstraintsSameRow(++gridx)); // 2
+    gridx += 2;  // 4 (input is width 2, label/ont is width 2
+    addListGui(fieldGui,getConstraintsSameRow(gridx));
+    addButtons(fieldGui,getConstraintsSameRow(gridx)); //put all buttons in same col
   }
   
+  /** make row of label & component, used by comparison gui */
   public void addRow(String labelStr, JComponent component) {
     addLabel(labelStr,getConstraintsNewRow());
-    addInputGui(component,getConstraintsSameRow());
+    addInputGui(component,getConstraintsSameRow(1));
   }
 
   void addButtons(CharFieldGui fieldGui, GridBagConstraints constraints) {
-    constraints.gridx = 4;
+    //constraints.gridx = 5; - set above and its 4
     this.addPostCompButton(fieldGui, constraints);
     this.addRetrieveButton(fieldGui, constraints);
     addEditButton(fieldGui, constraints);
@@ -219,18 +234,21 @@ public class FieldPanel extends AbstractGUIComponent {
   /** set up basic grid bag constraints with insets and increments currentGridBagRow/gridy
    */
   GridBagConstraints getConstraintsNewRow() {
-    GridBagConstraints baseConstraints = getConstraintsSameRow();
+    GridBagConstraints baseConstraints = getConstraintsSameRow(0);
     baseConstraints.gridy = ++this.currentGridBagRow;
+    //baseConstraints.gridx = 0; // new row
     return baseConstraints;
   }
   
   
   /** set up basic grid bag constraints with insets and uses currentGridBagRow for gridy
       (doesnt increment it) */
-  GridBagConstraints getConstraintsSameRow() {
+  GridBagConstraints getConstraintsSameRow(int gridx) {
     GridBagConstraints baseConstraints = new GridBagConstraints();
     baseConstraints.insets = new Insets(2,3,2,3);
     baseConstraints.gridy = this.currentGridBagRow; // no incrementing
+    baseConstraints.gridx = gridx;
+    baseConstraints.gridwidth = 1; // default
     return baseConstraints;
   }
   
@@ -266,12 +284,24 @@ public class FieldPanel extends AbstractGUIComponent {
   }
   
   private void addInputGui(CharFieldGui fieldGui, GridBagConstraints constraints) {
-    if (!fieldGui.hasListGui()) constraints.gridwidth = 2;
+    constraints.gridwidth = inputGuiWidth(fieldGui);
+    //if (!fieldGui.hasListGui()) constraints.gridwidth = 2;
     addInputGui(fieldGui.getUserInputGui(), constraints);
   }
 
+  private int inputGuiWidth(CharFieldGui fieldGui) {
+    if (shortenInputGui(fieldGui)) return 1;
+    return 2;
+  }
+
+  private boolean shortenInputGui(CharFieldGui fieldGui) {
+    if (fieldGui.hasListGui()) return true;
+    // this needs to be generalized!
+    return fieldGui.hasEditButton() && fieldGui.hasRetrieveButton();
+  }
+
   private void addInputGui(JComponent gui, GridBagConstraints constraints) {
-    constraints.gridx = 2;
+    // constraints.gridx = 2; now pre-set in constraints
     constraints.weightx = 1.0;
     constraints.fill = GridBagConstraints.HORIZONTAL;
     fieldPanel.add(gui, constraints);
@@ -281,7 +311,7 @@ public class FieldPanel extends AbstractGUIComponent {
     if (!fieldGui.hasListGui()) return;
     // LIST - to the right of input gui
     constraints.gridx = 3;
-    constraints.gridwidth = 2;
+    constraints.gridwidth = 1; // 2??
     constraints.gridheight = 2;
     fieldPanel.add(fieldGui.getListGui(),constraints);
     // DEL BUTTON - put under input gui near list
@@ -307,9 +337,12 @@ public class FieldPanel extends AbstractGUIComponent {
 
   /** edit button brings up big text field popup, may do other things in future? */
   private void addEditButton(CharFieldGui fieldGui, GridBagConstraints constraints) {
-    if (fieldGui.hasEditButton()) {
-      fieldPanel.add(fieldGui.getEditButton(),constraints);
-    }
+    if (!fieldGui.hasEditButton()) return;
+    // if have retrieve button then shove edit button in previous column against
+    // scrunched input field
+    if (fieldGui.hasRetrieveButton())
+      --constraints.gridx;
+    fieldPanel.add(fieldGui.getEditButton(),constraints);
   }
 
   /** for comparison - add a row of just buttons */
