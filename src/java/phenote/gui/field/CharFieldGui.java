@@ -210,7 +210,31 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
 
   protected void setEnabledState() {
     this.setForegroundColor(this.getEnabledTextColor());
-    this.getUserInputGui().setEnabled(true);
+    //this.getUserInputGui().setEnabled(true);
+    getUserInputGui().setEnabled(isConstraintEnabled());
+  }
+
+  /** check enabling constraints, return true if dont have constraints or constraints
+      say ok to enable. constraint is like only enable if field X has a value...
+      currently this is hardwired to flybase genotype maker, todo: make configurable*/
+  private boolean isConstraintEnabled() {
+    // hardwire for now - make this configurable!
+    // LA2 requires either LA1 or NLA to be filled in to be active
+    if (charField.isField("LA2")) {
+      for (CharacterI c : getSelectedChars()) {
+        if (!c.hasValue("LA1") && !c.hasValue("NLA"))
+          return false;
+      }
+    }
+    // same constraint for ACC
+    if (charField.isField("ACC")) {
+      for (CharacterI c : getSelectedChars()) {
+        if (!c.hasValue("LA1") && !c.hasValue("NLA"))
+          return false;
+      }
+    }
+
+    return true; // passed all constraints
   }
   
   /** return true if all values for char field in all characters are the same 
