@@ -133,26 +133,32 @@ public class Phenote {
     // the logging in any way.
     Logger rl = LogManager.getRootLogger();
     Enumeration<?> appenders = rl.getAllAppenders();
-    if (!appenders.hasMoreElements()) {
+    if (appenders==null || !appenders.hasMoreElements()) {
       System.out.println("Log4J configuration failed, using default configuration settings");
       BasicConfigurator.configure(); 
       rl.setLevel(Level.DEBUG);
       LOG = LogManager.getLogger(Phenote.class);
     }
+
+    // hmm dont knwo about this code, tries to write out filepath of log file to
+    // stdout, but assumes its configured with MAIN which may not be the case.
+    // maybe should just get whatever appender it can get rather than just MAIN
+    // maybe do getAllAppenders and do this for each one? in any case taking out
+    // misleading error messages
     org.apache.log4j.FileAppender a = (org.apache.log4j.FileAppender)rl.getAppender("MAIN");
     if (a != null) System.out.println("log file: "+a.getFile());
-    else System.out.println("No MAIN File Appender for log4j");
+    //else System.out.println("No MAIN File Appender for log4j");
 
     if (a != null && a.getFile() != null) {
       File f = new File(a.getFile()); //"phenote_log4j.log");
       System.out.println("path of file "+f.getPath()+" absolute "+f.getAbsolutePath()
                          +" canWrite "+f.canWrite());
     }
-    else {
-      System.out.println("file for MAIN log appender is null");
-    }
+    //else { System.out.println("file for MAIN log appender is null"); }
 
-    // writes error events to log
+    // writes error events to log - this should probably be refactored to just use
+    // log4j straight up, and have log4j appender for an error window
+    // error maanager used to go to term info but no longer
     ErrorManager.inst().addErrorListener(new LogErrorListener());
     logInfo("This is Phenote version "+PhenoteVersion.versionString());
   }

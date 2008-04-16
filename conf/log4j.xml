@@ -3,6 +3,7 @@
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 <log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
 
+<!-- writes to file - rename this FILE? -->
     <appender name="MAIN" class="org.apache.log4j.RollingFileAppender">
         <param name="File" value="${user.home}/.phenote/log/phenote_log4j.log" />
         <param name="Append" value="true" />
@@ -13,6 +14,7 @@
         </layout>
     </appender>
 
+<!-- writes out to console/stdout -->
     <appender name="console" class="org.apache.log4j.ConsoleAppender">
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d [%t] %-5p %c{2} - %m%n"/>
@@ -21,12 +23,15 @@
 
     <category name="phenote" additivity="false">
         <priority value="debug"/>
+        <appender-ref ref="MAIN" />
         <appender-ref ref="console"/>
     </category>
 
     <root>
         <priority value="info" />
-        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="MAIN" />
+        <!-- appender-ref ref="CONSOLE" / this barfs - chris??? -->
+        <appender-ref ref="console" />
     </root>
 </log4j:configuration>
 
