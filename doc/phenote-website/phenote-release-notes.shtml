@@ -23,7 +23,7 @@
 <h1>1.6</h1>
 <h2>04.15.2008, version <a href="phenote/1.6-beta4/phenote-plus.jnlp">1.6 - beta4</a></h2>
 <ul>
-<li>feature: in-table editing added [<a href="</li>
+<li>feature: in-table editing added, complete with auto-completion </li>
 <li>feature: large text fields can now be viewed/edited in separate panel when configured [<a
 href="http://sourceforge.net/tracker/index.php?func=detail&aid=1873002&group_id=76834&atid=887913">1873002</a>
 | <a
@@ -37,7 +37,7 @@ href="http://sourceforge.net/tracker/index.php?func=detail&aid=1933810&group_id=
 application close [<a
 href="http://sourceforge.net/tracker/index.php?func=detail&aid=1909013&group_id=76834&atid=887913">1909013</a>]</li>
 <li>bugfix: post-composition window is no longer automatically displaying terms
-in their intersection style when selected</li>
+in their intersection style when selected [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1927441&group_id=76834&atid=887913">1927441</a>] </li>
 <li>bugfix:  a strange bug where a change to the configuration with the "select
 config" option in phenote was not preserving the change with the new
 windows-installer.  this was a specific problem to the ncbo.cfg
