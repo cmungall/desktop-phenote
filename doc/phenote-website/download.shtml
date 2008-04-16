@@ -15,29 +15,22 @@
 	<div class="catch_phrase">
 	</div>
 	<h2>For Users</h2>
-	<h2>************Important Message*************</h2>
-	<p>For version 1.5 we will be introducing a new look and feel that we
-	call the "plus" edition.  We will
-	continue to support the old look-and-feel for a couple more versions.
-	So, if you would like to keep using the original Phenote, continue
-	here.  Otherwise, go down the page to the section called "Phenote+"</p> 
-	<p> You can run phenote directly from your web browser via "webstart" without a separate installation by selecting one of the following links:</p>
+	<h3>Phenote and Phenote+ webstart edition</h3>
 	<ul>
-	<li><strong>NEW release: <a href="http://www.phenote.org/phenote/1.5/phenote.jnlp">1.5</a> </strong></li>
+	<li>1.6-beta4 release: <a href="http://www.phenote.org/phenote/1.6-beta4/phenote.jnlp">Phenote</a> | <a href="http://www.phenote.org/phenote/1.6-beta4/phenote-plus.jnlp">Phenote+</a></li>
+	<li>1.5 stable release: <a href="http://www.phenote.org/phenote/1.5/phenote.jnlp">Phenote</a> | <a href="http://www.phenote.org/phenote/1.5/phenote-plus.jnlp">Phenote+</a></li>
 	<li><a href="http://www.phenote.org/phenote/phenote.html">Older releases</a></li>
 	</ul>
 	<p> You may be prompted to sign a certificate and allow the download.  This will take a few minutes the first time you do this.
 	</p>
-	<h2><strong>Phenote+ (beta) v1.5</strong></h2>
+	<h3>Phenote+ installer edition</h3>
 	<ul>
-	<li>Webstart: <a
-	href="http://www.phenote.org/phenote/1.5/phenote-plus.jnlp">Phenote+
-	webstart</a></li>
-	<li>Platform-specific installers:
+	<li>Platform-specific installers are available for Phenote+ v1.5 at<a href="https://sourceforge.net/project/showfiles.php?group_id=76834">sourceforge</a> or here:  	
 	<a href="http://www.phenote.org/phenote/1.5/Phenote+_1_5_macos_installer.dmg">MacOS X</a> |
 	<a href="http://www.phenote.org/phenote/1.5/Phenote+_1_5_windows_installer.exe">Windows</a> |
 	<a href="http://www.phenote.org/phenote/1.5/Phenote+_1_5_linux_installer.rpm">Linux</a> |
 	<a href="http://www.phenote.org/phenote/1.5/Phenote+_1_5_unix_installer.sh">Unix</a>
+	</li>
 	<ol>
 	  <li>Download your platform-specific package.  (For MacOS, this should self-extract into a disk image. If it doesn't, double-click on the file.  You should see an
 	  icon for the "drive" that the Phenote+ application is on.</li>
@@ -46,6 +39,16 @@
 	  </ol>
 	</li>
 	</ul>
+	<p>Phenote+ v1.6:  We will be distributing Phenote+ using the Sourceforge download system.  You can now find Phenote <a href="https://sourceforge.net/project/showfiles.php?group_id=76834&package_id=270424">betas</a> and <a href="https://sourceforge.net/project/showfiles.php?group_id=76834&package_id=272237">releases</a> by visiting their pages.  </p>
+
+	<p> We will continue to post links to major releases on this website, but you are invited to download the software by directly connecting to the <a href="https://sourceforge.net/project/showfiles.php?group_id=76834">Phenote Sourceforge Project page</a></p>
+
+	<h3>Important Message</h3>
+	<p>For version 1.5 we will be introducing a new look and feel that we
+	call the "plus" edition.  We will
+	continue to support the old look-and-feel for a couple more versions.
+	So, if you would like to keep using the original Phenote, launch
+	the webstart edition through the link above.</p>
 
 	<h2>For Developers</h2>
 	Check out our special documentation for running either on the 	<a href="developer-docs/getting-source-code-in-eclipse.shtml">command line or in Eclipse</a> 

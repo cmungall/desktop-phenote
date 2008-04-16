@@ -20,6 +20,41 @@
 	  Phenote Release Notes
 	</div>
 
+<h1>1.6</h1>
+<h2>04.15.2008, version <a href="phenote/1.6-beta4/phenote-plus.jnlp">1.6 - beta4</a></h2>
+<ul>
+<li>feature: in-table editing added [<a href="</li>
+<li>feature: large text fields can now be viewed/edited in separate panel when configured [<a
+href="http://sourceforge.net/tracker/index.php?func=detail&aid=1873002&group_id=76834&atid=887913">1873002</a>
+| <a
+href="http://sourceforge.net/tracker/index.php?func=detail&aid=1610324&group_id=76834&atid=887913">1610324</a>]</li>
+<li>feature: ontology tree browser is a new component, and all ontologies can
+be browsed. terms can be dragged/dropped from the tree to the editor [<a
+href="http://sourceforge.net/tracker/index.php?func=detail&aid=1933810&group_id=76834&atid=887913"<1933810</a>]</li>
+<li>change:  configurations birn, worm, ncbo, etc., were all updated with the
+"big text box" for the "description" field</li>
+<li>bugfix: layouts/perspectives are no longer automatically overwritten at
+application close [<a
+href="http://sourceforge.net/tracker/index.php?func=detail&aid=1909013&group_id=76834&atid=887913">1909013</a>]</li>
+<li>bugfix: post-composition window is no longer automatically displaying terms
+in their intersection style when selected</li>
+<li>bugfix:  a strange bug where a change to the configuration with the "select
+config" option in phenote was not preserving the change with the new
+windows-installer.  this was a specific problem to the ncbo.cfg
+configuration. this originated with a bug in the configuration file, and has
+now been remedied. [<a
+href="http://sourceforge.net/tracker/index.php?func=detail&aid=1911327&group_id=76834&atid=887913">1911327</a>]</li>
+<li>bugfix: column content was being sorted with case-sensitivity. [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1890712&group_id=76834&atid=887913">1890712</a>]</li>
+<li>bugfix: selection of a row in the annotation table is preserved when
+sorting on different columns. [<a
+href="http://sourceforge.net/tracker/index.php?func=detail&aid=1922443&group_id=76834&atid=887913">1922443</a>]</li>
+<li>bugfix: field widths in editor panel are maxed to the size of the panel so
+that scrolling horizontally won't have to happen. [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1922353&group_id=76834&atid=887913">1922353</a>]</li> 
+<li>bugfix: terms from the autocompletion pick-list were not
+highlighted in the genotype maker
+[<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1909007&group_id=76834&atid=887913">1909007</a>]</li>
+</ul>
+
 <h1>1.5</h1>
 <h2>03.03.2008, version <a href="phenote/1.5-release/phenote.jnlp">1.5 - release</a></h2>
 <p>With the release of version 1.5, we are transitioning over to a new interface.  We will continue to support the webstart version of phenote for a couple of releases, but will ultimately switch to the standalone version that is debuting in this release.  The new 'Phenote+' will have at least the same capabilities as the original Phenote, but new components will be only added to the new interface.  Be sure to choose the proper phenote (or phenote plus) when entering bug reports</p>
