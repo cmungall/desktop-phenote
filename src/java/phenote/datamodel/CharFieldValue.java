@@ -384,8 +384,8 @@ public class CharFieldValue implements Cloneable {
     if (isTerm()) return getTerm();
     else {
       OBOClass term =
-        new DanglingClassImpl(getCharField().getTag()+":"+getValueAsString());
-      term.setName(getName());
+        new DanglingClassImpl(getValueAsString()); // TODO - cjm - use normal OBO class?
+      //term.setName(getName());
       return term;
     }
   }

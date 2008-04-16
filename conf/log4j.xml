@@ -21,13 +21,12 @@
 
     <category name="phenote" additivity="false">
         <priority value="debug"/>
-        <appender-ref ref="MAIN" />
         <appender-ref ref="console"/>
     </category>
 
     <root>
         <priority value="info" />
-        <appender-ref ref="MAIN" />
+        <appender-ref ref="CONSOLE" />
     </root>
 </log4j:configuration>
 

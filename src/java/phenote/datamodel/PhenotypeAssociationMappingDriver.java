@@ -9,8 +9,8 @@ public class PhenotypeAssociationMappingDriver extends BasicAnnotationMappingDri
   /** inheres_in is not in RO which is surprising - but its in RO proposed */
   private final OBOProperty INHERES_IN_REL =
   getRelation("OBO_REL:inheres_in","inheres_in");
-  private final OBOProperty INFLUENCES_REL = getRelation("OBOL:influences","influences");
-  private final OBOProperty TOWARDS_REL = getRelation("OBOL:towards","towards");
+  private final OBOProperty INFLUENCES_REL = getRelation("OBO_REL:influences","influences");
+  private final OBOProperty TOWARDS_REL = getRelation("OBO_REL:towards","towards");
   
 
   public OBOProperty getPropertyForField(CharField cf) {

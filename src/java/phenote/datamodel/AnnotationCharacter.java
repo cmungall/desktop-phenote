@@ -52,7 +52,7 @@ public class AnnotationCharacter extends AbstractCharacter {
   }
 
   private Namespace getNamespace() {
-	  return new Namespace("foo");
+	  return new Namespace("annotation"); // TODO - this should come from config
   }
   
   /*

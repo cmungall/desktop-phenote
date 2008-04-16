@@ -15,35 +15,36 @@ import phenote.dataadapter.delimited.DelimitedFileAdapter;
 import phenote.main.Phenote;
 
 public class BasicAnnotationModelTest extends AbstractAnnotationModelTest {
-  
 
 
-   protected static String getConfigFileName() { return "basic-test.cfg"; }
-   protected static String getDataFilePath() { return "test/testfiles/basic-test-data.tab";}
-  
-   @BeforeClass public static void initialize() throws ConfigException {
-	    Phenote.resetAllSingletons();
-	    Config.inst().setConfigFile(getConfigFileName());
-	    Phenote phenote = Phenote.getPhenote();
-	    phenote.initOntologies();
-	    phenote.initGui();
-	    DelimitedFileAdapter ad = new DelimitedFileAdapter();
-	    CharacterListI clist = 
-	    	ad.load(new File(getDataFilePath()));
-	    System.err.println("clist size: "+clist.size());
-	    session = CharFieldManager.inst().getOboSession();
-   }
-   
-   @Before public void setup() {
-   }
 
-   @Test public void testWriteToDatabase() throws DataAdapterException, IOException {
-	   checkAnnotations();
-	   //writeTempOBOFile();
-	   //writeToDatabase();
-	   Assert.assertTrue(true);
-   }
-   
- 
-  
+
+	protected static String getConfigFileName() { return "basic-test.cfg"; }
+	protected static String getDataFilePath() { return "test/testfiles/basic-test-data.tab";}
+
+	@BeforeClass public static void initialize() throws ConfigException {
+		Phenote.resetAllSingletons();
+		Config.inst().setConfigFile(getConfigFileName());
+		Phenote phenote = Phenote.getPhenote();
+		phenote.initOntologies();
+		phenote.initGui();
+		DelimitedFileAdapter ad = new DelimitedFileAdapter();
+		CharacterListI clist = 
+			ad.load(new File(getDataFilePath()));
+		System.err.println("clist size: "+clist.size());
+		session = CharFieldManager.inst().getOboSession();
+	}
+
+	@Before public void setup() {
+	}
+
+	@Test public void testWriteToDatabase() throws DataAdapterException, IOException {
+		checkAnnotations();
+		//writeTempOBOFile();
+		//writeToDatabase();
+		Assert.assertTrue(true);
+	}
+
+
+
 }

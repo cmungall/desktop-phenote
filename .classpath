@@ -54,6 +54,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/BBOP"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/OBO"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/OBO-Edit2"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/OBDAPI"/>
 	<classpathentry kind="lib" path="jars/axis.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="file:/axis-1_4/docs/apiDocs/"/>
@@ -63,5 +64,6 @@
 	<classpathentry kind="lib" path="jars/jaxrpc.jar"/>
 	<classpathentry kind="lib" path="jars/saaj.jar"/>
 	<classpathentry kind="lib" path="jars/wsdl4j-1.5.1.jar"/>
+	<classpathentry kind="lib" path="jars/mysql-connector-java-5.1.5-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
