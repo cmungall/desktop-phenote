@@ -65,7 +65,7 @@
     <!-- dependency information -->
     <property name="bbop_dest" location="../BBOP" />
  	<property name="obo_dest" location="../OBO" />
-	<property name="obo_dest" location="../OBDAPI" />
+	<property name="obdapi_dest" location="../OBDAPI" />
 	<property name="obovocab_dest" location="../obo-vocab-java" />
 
     <target name="buildbbop" if="bbop_dest">
@@ -80,7 +80,7 @@
 	
 	   <target name="buildobdapi" if="obdapi_dest">
 	        <ant dir="${obdapi_dest}" target="jar" inheritAll="false" />
-	        <copy file="${obdapi_dest}/lib/runtime/obdapi.jar" todir="${lib}" />
+	        <copy file="${obdapi_dest}/lib/runlibs/obdapi.jar" todir="${lib}" />
 	    </target>
 	
     <target name="buildobovocab" if="obovocab_dest">
