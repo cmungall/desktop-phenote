@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import phenote.datamodel.CharField;
@@ -41,7 +42,8 @@ class BigTextPopup {
     textArea.setLineWrap(true);
     textArea.setWrapStyleWord(true);
     populateTextFromModel();
-    dialog.add(textArea,BorderLayout.CENTER);
+    JScrollPane jsp = new JScrollPane(textArea);
+    dialog.add(jsp,BorderLayout.CENTER);
 
     JButton ok = new JButton("OK");
     ok.addActionListener(new OkListener());
