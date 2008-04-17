@@ -72,6 +72,8 @@ public class OntologyUpdateJob extends QuartzJobBean {
    */
   private File newOntologyFile(Ontology ontology) {
     String fileName = ontology.getSource();
+    if(fileName == null || fileName.length() == 0)
+      return null;
     File file = new File(fileName);
     long timestamp = file.lastModified();
     long timestampOldFile = ontology.getTimestamp();
