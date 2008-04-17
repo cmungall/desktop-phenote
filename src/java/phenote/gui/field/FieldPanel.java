@@ -51,8 +51,8 @@ public class FieldPanel extends AbstractGUIComponent {
   private EditManager groupEditMan;
   private EventSelectionModel<CharacterI> selectionModel;
 
-  /** eventually configurable (with default 12) - for now hardwire at 12 */
-  private static int fieldsPerTab = 11;
+  /** eventually configurable (with default 10) - for now hardwire at 10 */
+  private static int fieldsPerTab = 10;
 
 //   public FieldPanel() {
 //     this(true,false); // false - no search panel - in menu now

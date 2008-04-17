@@ -653,7 +653,7 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
       listGui.setModel(getValueListModel());
       listGui.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
       listScroll = new JScrollPane(listGui);
-      listScroll.setMinimumSize(new Dimension(130,60)); // w,h
+      listScroll.setMinimumSize(new Dimension(180,75)); // w,h
       listScroll.setPreferredSize(new Dimension(230,90)); // 130,60 small?
     }
     return listScroll;
@@ -731,7 +731,8 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
       if (i<0 || i>getSize()) return;
       List<CharacterI> sel = getSelectedChars();
       if (sel==null || sel.isEmpty()) return;
-      if (sel.size() > 1) log().error("Cant delete list items in multi select");
+      // need to be able to delete from multi select
+      //if (sel.size() > 1) log().error("Cant delete list items in multi select");
       CharFieldValue old = charValueList.get(i);
       getEditManager().deleteFromValList(this,old);
     }
