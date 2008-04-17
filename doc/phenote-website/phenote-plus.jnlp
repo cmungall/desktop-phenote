@@ -67,6 +67,8 @@ href="phenote-plus.jnlp">
 	<jar  href="jars/wsdl4j-1.5.1.jar"/>
 	<jar  href="jars/owlapi-api.jar"/>
   <jar  href="jars/piccolo.jar"/>
+  <!-- for worm adapter -->
+	<jar  href="jars/postgresql-8.2-504.jdbc3.jar"/>
 
 
 

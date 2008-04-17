@@ -59,6 +59,9 @@ href="phenote.jnlp">
 	<jar href="jars/wsdl4j-1.5.1.jar"/>
 	<jar  href="jars/axis.jar"/>
 	<jar  href="jars/owlapi-api.jar"/>
+  <!-- for worm adapter -->
+	<jar  href="jars/postgresql-8.2-504.jdbc3.jar"/>
+  
 
 
   <!-- jars not needed for webstart(?) axis, commons-beanutils-1.6,  commons-discovery,
