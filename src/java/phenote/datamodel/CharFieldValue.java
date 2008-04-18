@@ -369,6 +369,20 @@ public class CharFieldValue implements Cloneable {
     charFieldValueList.clear();
   }
 
+  public boolean hasKid(CharFieldValue kid) {
+    return getCharFieldValueList().contains(kid);
+  }
+
+  /** return kid that has same value/class/string as val. if none return null */
+  public CharFieldValue getKidWithSameValue(CharFieldValue val) {
+    if (getList() == null) return null; // shouldnt happen
+    for (CharFieldValue kid : getList()) {
+      if (kid.equals(val)) // equals tests values
+        return kid;
+    }
+    return null;
+  }
+
   public CharField getCharField() { return charField; }
 
   public boolean isDangler() {
@@ -418,6 +432,10 @@ public class CharFieldValue implements Cloneable {
   // phase out...
   //public CharFieldEnum getCharFieldEnum() { return charFieldEnum; }
   
+  /** returns true if the actual values are equal. 1st of all o must be a 
+      CharFieldValue. then tests for equality of of value, that is term,string,
+      list items, .... So CharFieldValues from 2 different characters with same
+      obo class are equal */
   public boolean equals(Object o) {
     if (!(o instanceof CharFieldValue)) return false; // just in case
     final CharFieldValue otherValue = (CharFieldValue)o;
@@ -432,7 +450,8 @@ public class CharFieldValue implements Cloneable {
       if (charFieldValueList==null || list2==null) return false;
       if (charFieldValueList.size() != list2.size()) return false;
       for (CharFieldValue v1 : charFieldValueList) {
-        if (!list2.contains(v1)) return false; // does equals on kids
+        // works because unique and same size list
+        if (!list2.contains(v1)) return false; // does equals on kids,
       }
       return true; // lists are same
     }

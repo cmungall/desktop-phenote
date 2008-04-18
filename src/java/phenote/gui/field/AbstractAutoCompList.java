@@ -310,10 +310,13 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
 
   /** This completion is threaded */
   private void doCompletion(boolean showPopup, boolean thread) {
-    this.setHasChangedMultipleValues(true);
+    //this.setHasChangedMultipleValues(true);
     if (settingTextExternally) // flag set if text filled in externally (from table sel)
       return;
-    // too soon - text field doesnt have text yet.... hmmmm....
+    // i think if we are setting text externally(from selection) we dont want to set
+    // has changed multiple values do we?  else multisel will cause edit in CmBxAcLstnr
+    this.setHasChangedMultipleValues(true);
+    // too soon - text field doesnt have text yet.... hmmmm.... ??
     String input = getText();
     // If length of input is shorter than minimum required for completion do nothing
     // disabling this - with threading dont need - and its buggy

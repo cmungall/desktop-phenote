@@ -331,13 +331,17 @@ public class FieldPanel extends AbstractGUIComponent {
     constraints.gridwidth = 2; // 2?? // 1?
     constraints.gridheight = 2;
     fieldPanel.add(fieldGui.getListGui(),constraints);
-    // DEL BUTTON - put under input gui near list
+
+    // LIST MESSAGE & DEL BUTTON - put under input gui near list
     constraints.gridy = ++this.currentGridBagRow; //? put in next row
     constraints.gridx = 2;
     constraints.gridwidth = 1;
     constraints.gridheight = 1;
     constraints.anchor = GridBagConstraints.EAST;
-    fieldPanel.add(fieldGui.getListDelButton(),constraints);
+    JPanel msgAndDelPanel = new JPanel();
+    msgAndDelPanel.add(fieldGui.getListMessage());
+    msgAndDelPanel.add(fieldGui.getListDelButton());
+    fieldPanel.add(msgAndDelPanel,constraints);
   }
 
   private void addPostCompButton(CharFieldGui fieldGui, GridBagConstraints constraints) {

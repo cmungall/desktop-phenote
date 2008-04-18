@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -80,6 +81,7 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
   private List<ActionListener> actionListeners = new ArrayList<ActionListener>();
   /** bean from xml conguration for field */
   private Field fieldXmlBean;
+  private JLabel listMessage;
   
 
   /** CharFieldGui for main window not post comp box - factory method, make appropriate
@@ -653,8 +655,8 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
       listGui.setModel(getValueListModel());
       listGui.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
       listScroll = new JScrollPane(listGui);
-      listScroll.setMinimumSize(new Dimension(180,75)); // w,h
-      listScroll.setPreferredSize(new Dimension(230,90)); // 130,60 small?
+      listScroll.setMinimumSize(new Dimension(180,53)); // w,h
+      listScroll.setPreferredSize(new Dimension(230,57)); // 130,60 small?
     }
     return listScroll;
   }
@@ -682,19 +684,56 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
   /** update/synch jlist gui for list from char change/edit or selection */
   private void updateListGui() {
     if (!hasListGui()) return;
+    setListMessage("");
     List<CharacterI> sel = getSelectedChars();
+    // NO SELECTION
     if (sel==null || sel.size()==0) {
       valueListModel.clear();
       return;
     }
+    // MULTI SELECT
+    // clear? show intersection? union? first? message?
+    // if same show list
     else if (sel.size() > 1) {
-      return; // set to multiple values, todo: check if lists are the same
+      //return; // set to multiple values, todo: check if lists are the same
+      CharFieldValue first = sel.get(0).getValue(getCharField());
+      List<CharFieldValue> intersection  = first.getCharFieldValueList();
+      boolean sameLists = true;
+      for (int i=1; i<sel.size(); i++) { // skip 1st
+        CharFieldValue cfvList = sel.get(i).getValue(getCharField());
+        if (!cfvList.equals(first)) {
+          sameLists = false;
+          // intersection - remove kids not in both lists!
+          for (CharFieldValue kid : intersection) {
+            // can we remove from intersection while iterating on it?
+            if (!cfvList.hasKid(kid)) intersection.remove(kid);
+          }
+        }
+      }
+      getValueListModel().setList(intersection);
+      if (!sameLists)
+        setListMessage("Multi select list differs. Showing overlap ");
     }
+    // SELECT SINGLE
     else {
       CharacterI c = sel.get(0); // sole selection
       List<CharFieldValue> vals = c.getValue(getCharField()).getCharFieldValueList();
       getValueListModel().setList(vals);
     }
+  }
+
+  /** list message is to display message to user on multi select that not all 
+      lists selected are same - if so */
+  JLabel getListMessage() {
+    if (listMessage==null) {
+      listMessage = new JLabel();
+      listMessage.setForeground(Color.RED);
+    }
+    return listMessage;
+  }
+
+  private void setListMessage(String m) {
+    getListMessage().setText(m);
   }
 
   protected boolean alreadyInList(OBOObject obj) {
@@ -734,7 +773,8 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
       // need to be able to delete from multi select
       //if (sel.size() > 1) log().error("Cant delete list items in multi select");
       CharFieldValue old = charValueList.get(i);
-      getEditManager().deleteFromValList(this,old);
+      // delete value in old from all selected characters
+      getEditManager().deleteFromValList(this,old,sel);
     }
     /** return true if one of char field values has obj */
     private boolean hasObject(OBOObject obj) {

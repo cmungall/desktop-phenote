@@ -168,13 +168,25 @@ public class EditManager {
   }
 
 
-  public void deleteFromValList(Object src, CharFieldValue kidToDelete) {
+  /** Ok this is funny, so from each char in chars if they have a CFV with same
+      value/class/string as valToDelete then delete it */
+  public void deleteFromValList(Object src, CharFieldValue valToDelete,
+                                List<CharacterI> chars) {
 //     CharFieldValue oldListParent = c.getValue(cf);
 //     CharFieldValue newListParent = oldListParent.cloneCharFieldValue();
 //     newListParent.removeKid(kidToDelete);
 //     UpdateTransaction t = new UpdateTransaction(oldListParent,newListParent);
-    UpdateTransaction t = delFromListTransaction(kidToDelete);
-    editAddAndFire(t,src); // sets new value that has kid removed
+    CharField cf = valToDelete.getCharField();
+    CompoundTransaction ct = new CompoundTransaction();
+    for (CharacterI c : chars) {
+      CharFieldValue kid = c.getValue(cf).getKidWithSameValue(valToDelete);
+      if (kid != null) {
+        UpdateTransaction u = delFromListTransaction(kid);
+        ct.addTransaction(u);
+      }
+    }
+    //UpdateTransaction t = delFromListTransaction(valToDelete);
+    editAddAndFire(ct,src); // sets new value that has kid removed
   }
 
   private UpdateTransaction delFromListTransaction(CharFieldValue kidToDelete) {
