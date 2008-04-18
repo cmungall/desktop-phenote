@@ -315,6 +315,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
       return;
     // i think if we are setting text externally(from selection) we dont want to set
     // has changed multiple values do we?  else multisel will cause edit in CmBxAcLstnr
+    // which can cause null values to go into list (which should be caught anyways)
     this.setHasChangedMultipleValues(true);
     // too soon - text field doesnt have text yet.... hmmmm.... ??
     String input = getText();

@@ -295,8 +295,16 @@ public class TermCompList extends AbstractAutoCompList {
   }
 
 
-  /** oc may be null - for nullifying model */
+  /** oc may be null - for nullifying model, though lists dont accept nulls
+      as they have explicit delete */
   private void setModel(OBOClass oboClass) {
+     // null for list shouldnt happen, give stack for debug and return
+    if (getCharField().isList() && oboClass==null) {
+      log().error("Got null term for list, shouldnt happen. Ignoring. "
+                  +"StackTrace for debug:");
+      new Throwable().printStackTrace();
+      return;
+    }
     if (alreadyInList(oboClass)) return; // if list, cancel if non unique
     if (this.getCharField() == null) return; // shouldn't happen
     final List<CharacterI> chars = this.getSelectedChars();

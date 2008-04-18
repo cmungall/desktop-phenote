@@ -712,7 +712,7 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
       }
       getValueListModel().setList(intersection);
       if (!sameLists)
-        setListMessage("Multi select list differs. Showing overlap ");
+        setListMessage("Multi select list differs. Showing common terms ");
     }
     // SELECT SINGLE
     else {
