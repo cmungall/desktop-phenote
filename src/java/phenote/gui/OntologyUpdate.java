@@ -85,6 +85,9 @@ public class OntologyUpdate {
   private Object selection = options[0];  //Update All, Update, Cancel
   int numUpdates = 0;
   private OntologyFile[] ontologies = Config.inst().getTerminologyDefs().getOntologyFileArray();
+  private boolean[] updateavailable = {};
+	JProgressBar progressBar;
+
 
 	
 	public static Object queryForOntologyUpdate() {
@@ -104,12 +107,15 @@ public class OntologyUpdate {
       dialog.setEnabled(true);
 			dialog.setVisible(true);
 			dialog.pack();
+		} else {
+			closeWindow();
 		}
 		return selection;
 	}
 	
 	private void createWindow() {
 
+		checkOntologiesForUpdate();
 		ontologyTable = new JTable() {
 			//Implement table row tool tips.
 			public String getToolTipText(MouseEvent e) {
@@ -136,6 +142,8 @@ public class OntologyUpdate {
 				return "<html>"+tip+"</html>";
 			}
 		};
+		
+		
 		ontologyTable.setModel(new OntologyUpdateTableModel());
     defaultRenderer = ontologyTable.getDefaultRenderer(JButton.class);
     ontologyTable.setDefaultRenderer(JButton.class,
@@ -197,6 +205,13 @@ public class OntologyUpdate {
 		messageTextArea.setEditable(false);
 		messageTextArea.setBorder(new LineBorder(Color.GRAY, 1, true));
 		
+		progressBar = new JProgressBar();
+		progressBar.setString("");
+		progressBar.setStringPainted(true);
+		progressBar.setMaximum(100);
+		progressBar.setValue(0);
+
+		
 		//layout for button panel
 		final GroupLayout groupLayout_1 = new GroupLayout((JComponent) buttonPanel);
 		groupLayout_1.setHorizontalGroup(
@@ -254,16 +269,29 @@ public class OntologyUpdate {
    * (3) flag if they are to be autodownloaded
    * (4) disable the row if the file is up-to-date, and add that as a tooltip
    */
-  private void addOntologiesToTable() {
+  private void checkOntologiesForUpdate() {
 		//first, add all the ontologies to the table
   	//loop through each ontology, place those in the table for which there's an update
 		for (int i=0; i<ontologies.length; i++) {
-			createOntologyRow(ontologies[i],i);  //i'm using a global to do this...yucky!
+			boolean needsUpdate = checkForUpdates(ontologies[i]);
+			if (needsUpdate)
+				numUpdates++;
+
 		}
-		
   }
 
-
+  private void addOntologiesToTable() {
+		//first, add all the ontologies to the table
+  	//loop through each ontology, place those in the table for which there's an update
+  	int updateCount = 0;
+		for (int i=0; i<ontologies.length; i++) {
+			boolean needsUpdate = checkForUpdates(ontologies[i]);
+			if (needsUpdate) {
+				createOntologyRow(ontologies[i],updateCount);  //i'm using a global to do this...yucky!
+				updateCount++;
+			}
+		}
+  }
 
 	/**
    * This function creates a new row in the Ontology Update frame, based
@@ -283,17 +311,6 @@ public class OntologyUpdate {
 //		infoButton.setSize(1, 1);
 		infoButton.setToolTipText("Get more information for "+ ontology.getHandle());
 		infoButton.addMouseListener(new InfoMouseListener(ontology));
-		boolean status = false;
-		try {
-			//if there's a new ontology available, it will flag it here.
-			status = OntologyDataAdapter2.getInstance().checkForUpdate(ontology);
-			if (status) {
-				System.out.println("Update available for "+ontology.getFilename());
-				numUpdates++;
-			}
-		} catch (OntologyException e) {
-			e.printStackTrace();
-		}
 
 		//temp throwing in the OK icon, but will be other icons, depending on status
 		//throw it into the table only if there's an update or a need to download
@@ -304,14 +321,26 @@ public class OntologyUpdate {
 //			String fileSize = FileUtil.getRemoteFileSize(remoteUrl); //need to do this eventually
 //			Object[] rowData = new Object[]{status, " ", 
 //					ontology.getHandle(), ontology.getVersion(), infoButton, fileSize+" Kb" };
-			Object[] rowData = new Object[]{status, " ", 
+			Object[] rowData = new Object[]{true, " ", 
 					ontology.getHandle(), ontology.getVersion(), fileSize};
-
-			for (int i=0; i<rowData.length; i++) {
-				ontologyTable.getModel().setValueAt(rowData[i], row, i);
-//			}
-		}
+				for (int i=0; i<rowData.length; i++) {
+					ontologyTable.getModel().setValueAt(rowData[i], row, i);
+				}
   	return;
+  }
+  
+  public boolean checkForUpdates(OntologyFileDocument.OntologyFile ontology) {
+  	boolean status = false;
+		try {
+			//if there's a new ontology available, it will flag it here.
+			status = OntologyDataAdapter2.getInstance().checkForUpdate(ontology);
+			if (status) {
+				System.out.println("Update available for "+ontology.getFilename());
+			}
+		} catch (OntologyException e) {
+			e.printStackTrace();
+		}
+		return status;
   }
 
   /**helper function for getting column index by name */
@@ -385,7 +414,7 @@ public class OntologyUpdate {
 		};
 		
 		public int getRowCount() {
-			return ontologies.length;
+			return numUpdates;
 		}
 		public int getColumnCount() {
 			return COLUMN_NAMES.length;
@@ -445,6 +474,7 @@ public class OntologyUpdate {
 		messageTextArea.setText(sb.toString());
 		contentPanel.validate();
 		contentPanel.repaint();
+		dialog.pack();
 		return;
 	}
 
@@ -713,5 +743,18 @@ public class OntologyUpdate {
   	} catch (MalformedURLException mue) {}
   	return null;
   }
+  
+  public void setProgress(int progress, String message)
+  {
+    final int theProgress = progress;
+    final String m = message;
+    SwingUtilities.invokeLater(new Runnable() {
+      public void run() {
+        progressBar.setValue(theProgress);
+        addUpdateMessage(m);
+      }
+    });
+  }
+
   
 }

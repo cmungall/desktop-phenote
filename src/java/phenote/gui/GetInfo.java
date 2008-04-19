@@ -2,6 +2,8 @@ package phenote.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -153,13 +155,14 @@ public class GetInfo extends JDialog {
 		final JPanel buttonPanel = new JPanel();
 		getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 
-//		final JButton cancelButton = new JButton();
-//		cancelButton.setText("Cancel");
-//		buttonPanel.add(cancelButton);
-
 		final JButton okButton = new JButton();
 		okButton.setText("OK");
 		buttonPanel.add(okButton);
+		okButton.addActionListener(new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+	    	closeWindow();
+	    }
+	  });
 		//
 		setFirstOntologySelected();
 		setEnabled(true);
@@ -168,6 +171,11 @@ public class GetInfo extends JDialog {
 		pack();
 		repaint();
 		setVisible(true);
+	}
+	
+	private void closeWindow() {
+		this.setVisible(false);
+		this.dispose();
 	}
 	
 	private void setGeneralInfo() {
