@@ -204,10 +204,11 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
     // if all characters have same value then set to that value
     if (this.areCharactersEqualForCharField(characters, this.getCharField())) {
       this.setCharFieldValue(characters.get(0).getValue(this.getCharField()));
-      updateListGui();
     } else {
       this.setMultipleValuesConditions();
     }
+    // in both cases update list gui needs calling, it sorts it out
+    updateListGui();
   }
 
   protected void setEnabledState() {
@@ -655,8 +656,9 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
       listGui.setModel(getValueListModel());
       listGui.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
       listScroll = new JScrollPane(listGui);
-      listScroll.setMinimumSize(new Dimension(180,53)); // w,h
-      listScroll.setPreferredSize(new Dimension(230,57)); // 130,60 small?
+      // enough for 3 rows with no scroll (karen request) 54 pixels
+      listScroll.setMinimumSize(new Dimension(180,54)); // w,h
+      listScroll.setPreferredSize(new Dimension(230,54)); // 130,60 small?
     }
     return listScroll;
   }
@@ -697,21 +699,24 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
     else if (sel.size() > 1) {
       //return; // set to multiple values, todo: check if lists are the same
       CharFieldValue first = sel.get(0).getValue(getCharField());
-      List<CharFieldValue> intersection  = first.getCharFieldValueList();
-      boolean sameLists = true;
+      List<CharFieldValue> intersection =
+        first.cloneCharFieldValue().getCharFieldValueList();
+      boolean notSameLists = false;
       for (int i=1; i<sel.size(); i++) { // skip 1st
         CharFieldValue cfvList = sel.get(i).getValue(getCharField());
-        if (!cfvList.equals(first)) {
-          sameLists = false;
-          // intersection - remove kids not in both lists!
-          for (CharFieldValue kid : intersection) {
-            // can we remove from intersection while iterating on it?
-            if (!cfvList.hasKid(kid)) intersection.remove(kid);
-          }
-        }
+        // retainAll does intersection, returns true if changed
+        notSameLists &= intersection.retainAll(cfvList.getCharFieldValueList());
+//         if (!cfvList.equals(first)) {
+//           sameLists = false;
+//           // intersection - remove kids not in both lists!
+//           for (CharFieldValue kid : intersection) {
+//             // can we remove from intersection while iterating on it?
+//             if (!cfvList.hasKid(kid)) intersection.remove(kid);
+//           }
+//         }
       }
       getValueListModel().setList(intersection);
-      if (!sameLists)
+      if (notSameLists)
         setListMessage("Multi select list differs. Showing common terms ");
     }
     // SELECT SINGLE

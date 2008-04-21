@@ -300,9 +300,11 @@ public class TermCompList extends AbstractAutoCompList {
   private void setModel(OBOClass oboClass) {
      // null for list shouldnt happen, give stack for debug and return
     if (getCharField().isList() && oboClass==null) {
-      log().error("Got null term for list, shouldnt happen. Ignoring. "
-                  +"StackTrace for debug:");
-      new Throwable().printStackTrace();
+      // actually this is normal, if lose focus on empty field, so just return
+      // no need for error message
+//       log().error("Got null term for list, shouldnt happen. Ignoring. "
+//                   +"StackTrace for debug:");
+//       new Throwable().printStackTrace();
       return;
     }
     if (alreadyInList(oboClass)) return; // if list, cancel if non unique

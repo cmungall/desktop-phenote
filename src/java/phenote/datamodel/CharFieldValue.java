@@ -378,6 +378,9 @@ public class CharFieldValue implements Cloneable {
     charFieldValueList.clear();
   }
 
+  /** uses contains which uses equals, which tests the value/term/string in 
+      CharFieldValue, NOT if its the same CharFieldValue object!
+      so if CFV with same term but different Character will be true */
   public boolean hasKid(CharFieldValue kid) {
     return getCharFieldValueList().contains(kid);
   }
