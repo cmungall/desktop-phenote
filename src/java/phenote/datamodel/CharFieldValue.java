@@ -170,7 +170,8 @@ public class CharFieldValue implements Cloneable {
       if (charFieldValueList!=null) {
         clone.charFieldValueList = new ArrayList<CharFieldValue>();
         for (CharFieldValue v : charFieldValueList) {
-          clone.charFieldValueList.add(v); // should v itself be cloned???
+          CharFieldValue kidClone = v.cloneCharFieldValue(); //  clone the kids
+          clone.charFieldValueList.add(kidClone);
         }
       }
       return clone;
@@ -182,7 +183,8 @@ public class CharFieldValue implements Cloneable {
     LOG.debug("Cloning charfield value: " + this.toString());
     final CharFieldValue newValue = this.cloneCharFieldValue();
     if (newValue == null) return null;
-    if (newChar != null) newValue.character = newChar;
+    // for lists this recurses to set kids char as well
+    if (newChar != null) newValue.setCharacter(newChar);
     return newValue;    
   }
 
@@ -208,7 +210,14 @@ public class CharFieldValue implements Cloneable {
 //       return new CharFieldValue((String)null,c,cf); // ""?
   }
 
-  void setCharacter(CharacterI c) { character = c; }
+  /** set selfs character as well as kids/list(recurse) */
+  void setCharacter(CharacterI c) {
+    character = c;
+    // get the kids/list
+    if (charFieldValueList==null) return;
+    for (CharFieldValue v : charFieldValueList)
+      v.setCharacter(c);
+  }
   public CharacterI getCharacter() { return character; }
 
   public boolean isEmpty() {

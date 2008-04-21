@@ -153,8 +153,9 @@ public class Character extends AbstractCharacter implements CharacterI {
 //    clone.charFieldToValue =(HashMap<CharField,CharFieldValue>)charFieldToValue.clone();
     // clone.setCharFieldValuesCharacterToSelf(); ???
     for (CharFieldValue v : charFieldToValue.values()) {
-      CharFieldValue cfvClone = v.cloneCharFieldValue();
-      // cfvClone.setCharacter(charClone); done by setValue
+      // charClone actually set twice for cfv, cloneCFC & setValue, what the heck
+      // sets kids characters as well
+      CharFieldValue cfvClone = v.cloneValueForChar(charClone);
       charClone.setValue(cfvClone.getCharField(),cfvClone);
     }
 //     for (List<CharFieldValue> list : charFieldToValue.values()) {
