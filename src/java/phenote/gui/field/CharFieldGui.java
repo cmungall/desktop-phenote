@@ -703,9 +703,12 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
         first.cloneCharFieldValue().getCharFieldValueList();
       boolean notSameLists = false;
       for (int i=1; i<sel.size(); i++) { // skip 1st
-        CharFieldValue cfvList = sel.get(i).getValue(getCharField());
+        CharFieldValue cfvParent = sel.get(i).getValue(getCharField());
         // retainAll does intersection, returns true if changed
-        notSameLists &= intersection.retainAll(cfvList.getCharFieldValueList());
+        List<CharFieldValue> list = cfvParent.getCharFieldValueList();
+        notSameLists |= intersection.retainAll(list);
+        // retainAll doesnt catch case where list has vals inter doesnt
+        notSameLists |= intersection.size() != list.size();
 //         if (!cfvList.equals(first)) {
 //           sameLists = false;
 //           // intersection - remove kids not in both lists!
