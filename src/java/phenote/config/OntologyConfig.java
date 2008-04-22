@@ -4,6 +4,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
 
+import org.apache.log4j.Logger;
+
 import phenote.config.xml.OntologyFileDocument;
 import phenote.config.xml.FieldDocument.Field;
 import phenote.config.xml.OnTheFlySlimTermDocument.OnTheFlySlimTerm;
@@ -277,10 +279,16 @@ public class OntologyConfig {
     return fieldConfig.getFieldBean().getSortBy() == Field.SortBy.ID;
   }
   
-  public void setOntFileFromTermDefs(String name, OntologyFileDocument.OntologyFile[] ontologyList) {
+  /** get ontology files from ontologyFile */
+  public void setOntFileFromTermDefs(String name,
+                                     OntologyFileDocument.OntologyFile[] ontologyList) {
   	boolean foundIt = false;
 	  for (OntologyFileDocument.OntologyFile of : ontologyList) {
 	  	String thisOntol = of.getHandle();
+      if (thisOntol==null) {
+        log().error("Ontology config "+of+" lacks a handle, cant use");
+        continue;
+      }
 	  	if (thisOntol.equals(name)) { 
 	  		foundIt=true;  //the current item in the ontology def is the matching ontology
 	  		reposUrlString = of.getLocation();
@@ -321,6 +329,10 @@ public class OntologyConfig {
   public long getUpdateDate() {
   	return fileDate;
   }
+
+	private static Logger log() {
+		return Logger.getLogger(OntologyConfig.class);
+	}
   
 }
 
