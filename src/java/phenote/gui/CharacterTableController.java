@@ -452,7 +452,7 @@ public class CharacterTableController {
   private void setRowHeights(List<CharacterI> chars) {
     for (CharacterI c : chars) {
       int i = filteredCharacters.indexOf(c);
-      //if (i < 0) return; // ??
+      if (i < 0) continue; // deleted character
       int numRows = getNumRowsForChar(c);
       characterTable.setRowHeight(i,ROW_HEIGHT*numRows);
     }
