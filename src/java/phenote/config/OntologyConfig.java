@@ -279,7 +279,8 @@ public class OntologyConfig {
     return fieldConfig.getFieldBean().getSortBy() == Field.SortBy.ID;
   }
   
-  /** get ontology files from ontologyFile */
+  /** look for ontology in ontology list with name, and set OntConfig state from that
+      ontology */
   public void setOntFileFromTermDefs(String name,
                                      OntologyFileDocument.OntologyFile[] ontologyList) {
   	boolean foundIt = false;

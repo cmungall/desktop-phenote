@@ -115,6 +115,114 @@ public class TermInfo2 extends AbstractGUIComponent {
 	
 	protected boolean includeImplicitAnnotations = false;
 	protected boolean includeExternalDatabaseAnnotations = false;
+	// constants
+	private static final int TERM_INFO_DEFAULT_WIDTH = 350;
+
+	private static final int TERM_INFO_DEFAULT_HEIGHT = 400;
+
+	private static final int BUTTON_HEIGHT = 30;
+
+	private static Border contentBorder = BorderFactory.createEmptyBorder(3, 3,
+			6, 3);  //top, left, bottom, right...orig 6,8,6,8
+
+	//these are used for the spring layout.
+	private static final int XPAD = 5; //between elements horizontally
+	private static final int YPAD = 3; //between elements vertically
+	private static final int INITX = 3;
+	private static final int INITY = 3;
+	private static final int PREFERREDX = 75;
+
+
+	// content variables
+	private OBOClass currentOboClass = null;
+
+	private UseTermListener useTermListener;
+
+	private TermHyperlinkListener termHyperlinkListener;
+
+	private static List<String> termInfoNaviHistory = new ArrayList<String>();
+
+	// private List termInfoNaviHistory = new List();
+	private static int naviIndex = -1;
+
+	private SelectionManager selectionManager;
+
+	// gui components
+
+	private TermInfoToolbar termInfoToolbar;
+
+	private JScrollPane termInfoScroll;
+
+	private StackedBox termInfoPanel;
+
+	private JPanel basicInfoPanel;
+
+	private JLabel termName;
+
+	private JLabel termID;
+
+	private JLabel ontologyName;
+
+	private JLabel annotationSummaryLabel;
+	
+	private HyperlinkLabel definitionTextArea;
+	
+	private HyperlinkLabel annotationSummaryTextArea;
+
+	private JPanel considerReplacePanel;
+
+	private JTextArea considerTerms;
+
+	private JTextArea replacementTerms;
+
+	private JPanel synonymPanel;
+	private JPanel annotationPanel;
+	
+	// private JTextArea synonyms;
+
+	private JPanel dbxrefPanel;
+
+	private JTextArea dbxrefText;
+
+	private JPanel xpDefPanel;
+
+	private JTextArea xpDefList;
+
+	private JPanel propertyValuesPanel;
+
+	// private JTextArea propValsList;
+
+	private JPanel ontologyLinksPanel;
+
+	private JPanel parentsPanel;
+
+	private JTextArea parentsText;
+
+	private JPanel childrenPanel;
+
+	private JTextArea childrenText;
+
+	private JPanel commentsPanel;
+
+	private JTextArea commentsText;
+
+	private static TermInfo2 singleton;
+
+	private boolean showEmptyPanelsFlag = false;
+
+	private static final String basicInfoPanelName = "BASIC"; //0
+	private static final String considerReplacePanelName = "CONSIDERS"; //2
+	private static final String synonymPanelName = "SYNONYMS"; //4
+	private static final String xpdefsPanelName = "XPDEFS"; //6
+	private static final String linksPanelName = "LINKS"; //8
+	private static final String dbxrefPanelName = "DBXREFS";  //10
+	private static final String propvalsPanelName = "PROPVALS";  //12
+	private static final String commentsPanelName = "COMMENTS";  //14
+
+	private static final String annotationPanelName = "ANNOTATIONS"; //16
+	
+	/** this sets the order of the panels */
+	private static String[] panels = {basicInfoPanelName, considerReplacePanelName, synonymPanelName, xpdefsPanelName, linksPanelName, dbxrefPanelName, propvalsPanelName, commentsPanelName};
 	
 	public boolean isIncludeImplicitAnnotations() {
 		return includeImplicitAnnotations;
@@ -221,115 +329,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 	}
 	 
-	// constants
-	private static final int TERM_INFO_DEFAULT_WIDTH = 350;
 
-	private static final int TERM_INFO_DEFAULT_HEIGHT = 400;
-
-	private static final int BUTTON_HEIGHT = 30;
-
-	private static Border contentBorder = BorderFactory.createEmptyBorder(3, 3,
-			6, 3);  //top, left, bottom, right...orig 6,8,6,8
-
-	//these are used for the spring layout.
-	private static final int XPAD = 5; //between elements horizontally
-	private static final int YPAD = 3; //between elements vertically
-	private static final int INITX = 3;
-	private static final int INITY = 3;
-	private static final int PREFERREDX = 75;
-
-
-	// content variables
-	private OBOClass currentOboClass = null;
-
-	private UseTermListener useTermListener;
-
-	private TermHyperlinkListener termHyperlinkListener;
-
-	private static List<String> termInfoNaviHistory = new ArrayList<String>();
-
-	// private List termInfoNaviHistory = new List();
-	private static int naviIndex = -1;
-
-	private SelectionManager selectionManager;
-
-	// gui components
-
-	private TermInfoToolbar termInfoToolbar;
-
-	private JScrollPane termInfoScroll;
-
-	private StackedBox termInfoPanel;
-
-	private JPanel basicInfoPanel;
-
-	private JLabel termName;
-
-	private JLabel termID;
-
-	private JLabel ontologyName;
-
-	private JLabel annotationSummaryLabel;
-	
-	private HyperlinkLabel definitionTextArea;
-	
-	private HyperlinkLabel annotationSummaryTextArea;
-
-	private JPanel considerReplacePanel;
-
-	private JTextArea considerTerms;
-
-	private JTextArea replacementTerms;
-
-	private JPanel synonymPanel;
-
-	private JPanel annotationPanel;
-	
-	// private JTextArea synonyms;
-
-	private JPanel dbxrefPanel;
-
-	private JTextArea dbxrefText;
-
-	private JPanel xpDefPanel;
-
-	private JTextArea xpDefList;
-
-	private JPanel propertyValuesPanel;
-
-	// private JTextArea propValsList;
-
-	private JPanel ontologyLinksPanel;
-
-	private JPanel parentsPanel;
-
-	private JTextArea parentsText;
-
-	private JPanel childrenPanel;
-
-	private JTextArea childrenText;
-
-	private JPanel commentsPanel;
-
-	private JTextArea commentsText;
-
-	private static TermInfo2 singleton;
-
-	private boolean showEmptyPanelsFlag = false;
-
-	private static final String basicInfoPanelName = "BASIC"; //0
-	private static final String considerReplacePanelName = "CONSIDERS"; //2
-	private static final String synonymPanelName = "SYNONYMS"; //4
-	private static final String xpdefsPanelName = "XPDEFS"; //6
-	private static final String linksPanelName = "LINKS"; //8
-	private static final String dbxrefPanelName = "DBXREFS";  //10
-	private static final String propvalsPanelName = "PROPVALS";  //12
-	private static final String commentsPanelName = "COMMENTS";  //14
-
-	private static final String annotationPanelName = "ANNOTATIONS"; //16
-	
-	/** this sets the order of the panels */
-	private static String[] panels = {basicInfoPanelName, considerReplacePanelName, synonymPanelName, xpdefsPanelName, linksPanelName, dbxrefPanelName, propvalsPanelName, commentsPanelName};
 
 
 	/**

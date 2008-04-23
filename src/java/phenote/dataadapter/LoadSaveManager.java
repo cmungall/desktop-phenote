@@ -10,6 +10,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.filechooser.FileFilter;
 
+import org.apache.log4j.Logger;
+
 import phenote.config.Config;
 import phenote.datamodel.CharacterListI;
 import phenote.edit.EditManager;
@@ -31,6 +33,10 @@ public class LoadSaveManager {
     this.characterListManager = clManager;
     fileChooser = new JFileChooser();
     List<DataAdapterI> adapters = Config.inst().getDataAdapters();
+    if (adapters == null) {
+      log().error("No adapters configged, cant load or save");
+      return;
+    }
     boolean first = true;
     FileFilter filt1=null;
     for (DataAdapterI adapter: adapters) {
@@ -314,5 +320,9 @@ public class LoadSaveManager {
       return dataAdapter;
     }
   }
+
+	private static Logger log() {
+		return Logger.getLogger(LoadSaveManager.class);
+	}
 
 }

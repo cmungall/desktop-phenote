@@ -612,8 +612,9 @@ public class Config {
 
   /** Returns enabled data adapters - empty list if none enabled */
   public List<DataAdapterI> getDataAdapters() {
-    if (dataAdapConfList==null) return null; // ex?
-    ArrayList<DataAdapterI> daList = new ArrayList<DataAdapterI>(dataAdapConfList.size());
+    int size = dataAdapConfList!=null ? dataAdapConfList.size() : 0;
+    ArrayList<DataAdapterI> daList = new ArrayList<DataAdapterI>();
+    if (dataAdapConfList==null) return daList; // empty list -  ex? na
     for (DataAdapterConfig d : dataAdapConfList) {
       if (d.isEnabled())
         daList.add(d.getFileAdapter());
