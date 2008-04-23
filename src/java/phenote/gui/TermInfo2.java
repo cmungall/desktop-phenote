@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,11 +22,13 @@ import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SpringLayout;
+import javax.swing.TransferHandler;
 import javax.swing.border.Border;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
@@ -50,16 +53,24 @@ import org.obo.datamodel.DanglingObject;
 import org.obo.datamodel.Dbxref;
 import org.obo.datamodel.IdentifiedObject;
 import org.obo.datamodel.Link;
+import org.obo.datamodel.LinkDatabase;
 import org.obo.datamodel.LinkedObject;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
 import org.obo.datamodel.OBORestriction;
 import org.obo.datamodel.OBOSession;
 import org.obo.datamodel.ObsoletableObject;
+import org.obo.datamodel.PathCapable;
 import org.obo.datamodel.PropertyValue;
+import org.obo.datamodel.RootAlgorithm;
 import org.obo.datamodel.Synonym;
 import org.obo.util.AnnotationUtil;
 import org.obo.util.TermUtil;
+
+import org.oboedit.gui.ObjectSelector;
+import org.oboedit.gui.Selection;
+import org.oboedit.gui.event.ExpandCollapseListener;
+import org.oboedit.gui.event.SelectionListener;
 
 import phenote.config.Config;
 import phenote.datamodel.CharFieldManager;
@@ -153,6 +164,8 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 	private JScrollPane termInfoScroll;
 
+  /** StackedBox is a class in the phenote.gui package, that nicole got from
+      web & modified */
 	private StackedBox termInfoPanel;
 
 	private JPanel basicInfoPanel;
@@ -330,8 +343,6 @@ public class TermInfo2 extends AbstractGUIComponent {
 	}
 	 
 
-
-
 	/**
 	 * Create the panel
 	 */
@@ -397,6 +408,8 @@ public class TermInfo2 extends AbstractGUIComponent {
 		nameLabel.setLabelFor(termName);
 		nameLabel.setVerticalAlignment(JLabel.TOP);
 		basicInfoPanel.add(termName);
+    // make nameLabel draggable to drag term to fields
+    //nameLabel.setTransferHandler(new InfoTransferHandler());
 
 		JLabel idLabel = new JLabel("ID: ", JLabel.TRAILING);
 		basicInfoPanel.add(idLabel);
@@ -1704,6 +1717,38 @@ public class TermInfo2 extends AbstractGUIComponent {
 		return showEmptyPanelsFlag;
 	}
 
+  /** To drag main term (not yet parents/kids) from term info to fields
+   subcalss SelectionTransferHandler, or just use straight up? */
+  private class InfoTransferHandler extends TransferHandler {
 
+    /** does a copy operation */
+    public int getSourceActions(JComponent c) {
+      return COPY;
+    }
+
+  }
+
+  /** attempting to model oboedit selection to use for drag & drop of terms from term
+      info to fields to mimic whats already done between graph and fields */
+  private class InfoSelector implements ObjectSelector {
+    public void select(Selection selection) {}
+    /**
+     * Most object selectors will just use this method as a delegate to
+     * {@link #getSelection()}. This method should be overridden if a special
+     * selection should be used for right-clicks, drags, etc based on mouse position
+     */
+    public Selection getSelection(MouseEvent e) { return null; }
+    public Selection getSelection() { return null; }
+    public LinkDatabase getLinkDatabase() { return null; }
+    public RootAlgorithm getRootAlgorithm() { return null; }
+    public void setLive(boolean isLive) {}
+    public boolean isLive() { return false; }
+    public void addSelectionListener(SelectionListener listener) {}
+    public void removeSelectionListener(SelectionListener listener) {}
+    public boolean hasCombinedTermsAndLinks() { return false; }
+    public void addExpansionListener(ExpandCollapseListener listener) {}
+    public void removeExpansionListener(ExpandCollapseListener listener) {}
+    public Collection<PathCapable> getVisibleObjects() { return null; }
+  }
 
 }

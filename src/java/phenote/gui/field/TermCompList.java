@@ -474,6 +474,10 @@ public class TermCompList extends AbstractAutoCompList {
     }
   }
   
+  /** Takes drops from oboedits tree graph which uses
+      oboedit.gui.SelectionTransferHandler.SELECTION_FLAVOR and contains a 
+      org.oboedit.gui.Selection which may have LinkedObjects/OBOClasses
+      (even better would be if it had OBOObjects) */
   @SuppressWarnings("serial")
   private class FieldTransferHandler extends DelegatingTransferHandler {
         
