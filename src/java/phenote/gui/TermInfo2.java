@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.StringTokenizer;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -40,7 +42,10 @@ import org.bbop.swing.HyperlinkLabel;
 import org.bbop.swing.StringLinkListener;
 import org.obo.annotation.datamodel.Annotation;
 import org.obo.dataadapter.OBDSQLDatabaseAdapter;
+import org.obo.dataadapter.OBOParseException;
+import org.obo.dataadapter.OBOParser;
 import org.obo.dataadapter.OBDSQLDatabaseAdapter.OBDSQLDatabaseAdapterConfiguration;
+import org.obo.dataadapter.OBOParseEngine.SOPair;
 import org.obo.datamodel.DanglingObject;
 import org.obo.datamodel.Dbxref;
 import org.obo.datamodel.IdentifiedObject;
@@ -710,9 +715,9 @@ public class TermInfo2 extends AbstractGUIComponent {
 			propertyValuesPanel.setVisible(false);
 		} else {
 			termInfoPanel.getComponent(12).setVisible(true);
-			propertyValuesPanel.setVisible(true);
 			propertyValuesPanel.validate();
 			propertyValuesPanel.repaint();
+			propertyValuesPanel.setVisible(true);
 		}
 
 
@@ -1370,41 +1375,82 @@ public class TermInfo2 extends AbstractGUIComponent {
 		JLabel propLabel;
 		JLabel valLabel;
 		PropertyValue propVal;
+		String name="";
+		String value="";
 
 		propertyValuesPanel.removeAll();
+		//right now property values on terms are stored as tag value where the tag 
+		//is property_value, and the value is the tag+value.  these need to be
+		//split
 		for (Iterator<PropertyValue> it = propertyValues.iterator(); it.hasNext();) {
 			propVal = it.next();
 			if (propVal != null) {
-				propLabel = new JLabel("<html>"+propVal.getProperty()+"</html>");
-				valLabel = new JLabel("<html>"+propVal.getValue()+"</html>");
-				propLabel.setLabelFor(valLabel);
-				propLabel.setVerticalAlignment(JLabel.TOP);
-				propertyValuesPanel.add(propLabel);
-				propertyValuesPanel.add(valLabel);
-				propertyValuesPanel.validate();
-				rowCount++;
+				if (propVal.getProperty().equals("property_value")) {
+					/*
+					 * property_value: married_to heather
+					 * property_value: shoe_size "8" xsd:positiveInteger			
+					 * 
+					 * these go into propertyValSet
+					 */
+//					int quoteIndex = findUnescaped(propVal.getValue(), '"', 0, propVal.getValue().length());
+					int quoteIndex = -1;
+					if (quoteIndex == -1) {
+						/* no quotes: 
+						 * this means we have a pv of the following form:
+						 * property_value: eats id:1234
+						 * 
+						 * ie linking two instanes
+						 */
+						StringTokenizer tokenizer = new StringTokenizer(propVal.getValue());
+						List tokens = new Vector();
+						while (tokenizer.hasMoreTokens()) {
+							tokens.add(tokenizer.nextToken());
+						}
+						name = (String)tokens.get(0);
+						value = (String)tokens.get(1);
+					} else {
+//						/*  quotes: 
+//						* this means we have a pv of the following form:
+//						* property_value:  shoe_size "8" xsd:positiveInteger
+//						* 
+//						* ie linking an instance with a property value
+//						*/
+//						SOPair p = unescape(value, '"', quoteIndex + 1, value
+//						.length(), true);
+//						String propID = value.substring(0, quoteIndex).trim();
+//						String optional = value.substring(p.index + 1,
+//						value.length()).trim();
+					}
+					propLabel = new JLabel("<html>"+name+"</html>");
+					valLabel = new JLabel("<html>"+value+"</html>");
+					propLabel.setLabelFor(valLabel);
+					propLabel.setVerticalAlignment(JLabel.TOP);
+					propertyValuesPanel.add(propLabel);
+					propertyValuesPanel.add(valLabel);
+					propertyValuesPanel.validate();
+					rowCount++;
+				}
+			}
+			if (rowCount > 0) {
+				SpringUtilities.makeCompactGrid(propertyValuesPanel, rowCount, 2, // rows,
+						// cols
+						INITX, INITY, // initX, initY
+						XPAD, YPAD); // xPad, yPad
+
+				int[] maxX = {PREFERREDX,-1};
+				int[] maxY = null;
+				SpringUtilities.fixCellWidth(propertyValuesPanel, rowCount, 2, // rows,
+						// cols
+						INITX, INITY, // initX, initY
+						XPAD, YPAD,  // xPad, yPad
+						maxX, maxY);
 			}
 		}
-		if (rowCount > 0) {
-			SpringUtilities.makeCompactGrid(propertyValuesPanel, rowCount, 2, // rows,
-					// cols
-					INITX, INITY, // initX, initY
-					XPAD, YPAD); // xPad, yPad
+			propertyValuesPanel.validate();
+			propertyValuesPanel.repaint();
+			propertyValuesPanel.setVisible(true);
 
-			int[] maxX = {PREFERREDX,-1};
-			int[] maxY = null;
-			SpringUtilities.fixCellWidth(propertyValuesPanel, rowCount, 2, // rows,
-					// cols
-					INITX, INITY, // initX, initY
-					XPAD, YPAD,  // xPad, yPad
-					maxX, maxY);
-		}
-
-
-		propertyValuesPanel.validate();
-		propertyValuesPanel.setVisible(true);
-
-		return rowCount;
+			return rowCount;
 	}
 
 	public void naviRefresh(String action) {

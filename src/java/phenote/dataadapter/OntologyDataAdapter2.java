@@ -195,9 +195,14 @@ public class OntologyDataAdapter2 {
           // loads ontology from spaces
           //ah!  but this is loading the ontologies multiple times i think!
           Ontology o = new Ontology(spaces,oc,oboSession);
-          cfg().addOntology(o);
+//          cfg().addOntology(o);
           long date = new File(urlString).lastModified();
+          try {
           o.setTimestamp(getOboDate(localUrl));
+          } catch (OntologyException oe) {
+          	System.out.println("Caught OntologyException: "+oe.getMessage());
+//          	continue;
+          }
           oc.setUpdateDate(date);
           // ADD TO CHAR FIELD
           if (oc.isPostCompRel()) { // POST COMP REL ONTOLOGY
@@ -451,7 +456,6 @@ public class OntologyDataAdapter2 {
 
     System.out.println("Loading ontologies");
     try { // throws data adapter exception
-      
       OBOSession os = fa.doOperation(OBOAdapter.READ_ONTOLOGY,cfg,null);
       adapterMetaData = fa.getMetaData(); // check for null?
       return os;
@@ -461,7 +465,23 @@ public class OntologyDataAdapter2 {
     	//need to figure out which is the bad one, and switch it out, then
     	//try reloading
       // cause is crucial!
-      String m = "got obo data adapter exception: "+e+" message "+e.getMessage()
+    	String m = "Got obo data adapter exception: "+ e.getMessage() +"\n" +
+    		"Cause: "+e.getCause()+"\n" +
+    		"Do you want to retry without following imports?\n";
+    	int resp = JOptionPane.showConfirmDialog(null,m,"Load failure",JOptionPane.ERROR_MESSAGE,JOptionPane.YES_NO_OPTION);    	
+    	if (resp==JOptionPane.YES_OPTION) {
+    		cfg.setFollowImports(false);
+    		System.out.println("Retrying ontology load w/o imports");
+        try { // throws data adapter exception
+          OBOSession os = fa.doOperation(OBOAdapter.READ_ONTOLOGY,cfg,null);
+          adapterMetaData = fa.getMetaData(); // check for null?
+          return os;
+        } catch (DataAdapterException ex) {
+        	System.out.println("Removing imports didn't fix things.");
+        	e.printStackTrace();
+        }
+    	}
+      m = "got obo data adapter exception: "+e+" message "+e.getMessage()
       +" cause "+e.getCause()+"\nTHIS IS FATAL!\nCan not load ontologies. Phenote must"
       +" exit.\nConsider clearing out bad file from ~/.phenote/obo-files";
       ErrorManager.inst().error(new ErrorEvent(this,m));
