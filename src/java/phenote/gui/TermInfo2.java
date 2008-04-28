@@ -218,6 +218,8 @@ public class TermInfo2 extends AbstractGUIComponent {
 	private JPanel commentsPanel;
 
 	private JTextArea commentsText;
+	
+	private JPanel emptyPanel;
 
 	private static TermInfo2 singleton;
 
@@ -241,11 +243,12 @@ public class TermInfo2 extends AbstractGUIComponent {
 		return includeImplicitAnnotations;
 	}
 
-	public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
+
+
+public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 		this.includeImplicitAnnotations = includeImplicitAnnotations;
 	}
 	
-
 	public boolean isIncludeExternalDatabaseAnnotations() {
 		return includeExternalDatabaseAnnotations;
 	}
@@ -573,14 +576,15 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 		termInfoPanel.addBox("Annotations", annotationPanel);
 		
+		//okay, this is a hack to make the refresh work properly... one extra panel
+		//does it
+		emptyPanel = new JPanel();
+		termInfoPanel.add(emptyPanel);
 		// refresh
-		this.validate();
-		this.repaint();
-		this.setVisible(true);
+		validate();
+		repaint();
+		setVisible(true);
 		
-
-
-//		add(entirePanel);
 	}
 
 //	public static JComponent getComponent() {
@@ -670,9 +674,8 @@ public class TermInfo2 extends AbstractGUIComponent {
 		}
 
 
-		int linkCount = 0;
-
 		// xpDefPanel
+		int linkCount = 0;
 		linkCount = makeLinksPanel(oboClass.getParents(), true, false, xpDefPanel);
 		termInfoPanel.setBoxTitle("Cross-product Definitions (" + linkCount + ")",
 				6);
@@ -684,9 +687,8 @@ public class TermInfo2 extends AbstractGUIComponent {
 			xpDefPanel.setVisible(true);
 		}
 
-
 		// parentsPanel
-		//always show the links panels, even if no parents/children
+		linkCount = 0;
 		linkCount = makeLinksPanel(oboClass.getParents(), false, false,
 				parentsPanel);
 		parentsPanel.validate();
@@ -697,26 +699,30 @@ public class TermInfo2 extends AbstractGUIComponent {
 				childrenPanel);
 		childrenPanel.validate();
 		childrenPanel.repaint();
-
-		ontologyLinksPanel.validate();
-		ontologyLinksPanel.repaint();
-		ontologyLinksPanel.setVisible(true);
-
 		termInfoPanel.setBoxTitle("Links (" + linkCount + ")", 8);
 
+		if ((!showEmptyPanelsFlag) && (linkCount == 0)) {
+			termInfoPanel.getComponent(8).setVisible(false);
+			ontologyLinksPanel.setVisible(false);
+		} else {
+			ontologyLinksPanel.validate();
+			ontologyLinksPanel.repaint();
+			ontologyLinksPanel.setVisible(true);
+			termInfoPanel.getComponent(8).setVisible(true);
+		}
 
 		// dbxrefsPanel
 		if ((!showEmptyPanelsFlag) && (oboClass.getDbxrefs().size() == 0)) {
 			termInfoPanel.getComponent(10).setVisible(false);
 			dbxrefPanel.setVisible(false);
 		} else {
-			termInfoPanel.getComponent(10).setVisible(true);
 			makeDbxrefPanel(oboClass.getDbxrefs());
 			termInfoPanel.setBoxTitle("DBxrefs (" + oboClass.getDbxrefs().size() + ")",
 					10);
 			dbxrefPanel.validate();
 			dbxrefPanel.repaint();
 			dbxrefPanel.setVisible(true);
+			termInfoPanel.getComponent(10).setVisible(true);
 		}
 
 		// propValues
@@ -727,17 +733,14 @@ public class TermInfo2 extends AbstractGUIComponent {
 			termInfoPanel.getComponent(12).setVisible(false);
 			propertyValuesPanel.setVisible(false);
 		} else {
-			termInfoPanel.getComponent(12).setVisible(true);
 			propertyValuesPanel.validate();
 			propertyValuesPanel.repaint();
 			propertyValuesPanel.setVisible(true);
+			termInfoPanel.getComponent(12).setVisible(true);
 		}
 
 
 		// commentsPanel
-		commentsText.setText(oboClass.getComment().toString());
-		termInfoPanel.getComponent(14).setVisible(true);
-		commentsPanel.setVisible(true);
 		if (oboClass.getComment().length() == 0) {
 			termInfoPanel.setBoxTitle("Comments (none)", 14);
 			if (!showEmptyPanelsFlag) {
@@ -746,6 +749,9 @@ public class TermInfo2 extends AbstractGUIComponent {
 			}
 		} else {
 			termInfoPanel.setBoxTitle("Comments*", 14);
+			commentsText.setText(oboClass.getComment().toString());
+			termInfoPanel.getComponent(14).setVisible(true);
+			commentsPanel.setVisible(true);
 			commentsPanel.validate();
 			commentsPanel.repaint();
 		}
@@ -770,8 +776,11 @@ public class TermInfo2 extends AbstractGUIComponent {
 		termInfoScroll.getViewport().setViewPosition(new Point(0, 0));
 		termInfoPanel.validate();
 		termInfoPanel.repaint();
-		this.validate();
-		this.repaint();
+		
+		emptyPanel.repaint();
+		
+		validate();
+		repaint();
 
 	}
 
@@ -1101,8 +1110,6 @@ public class TermInfo2 extends AbstractGUIComponent {
 		panelText += "</html>";
 		textArea.setText(panelText);
 		dbxrefPanel.add(textArea);
-		dbxrefPanel.validate();
-		dbxrefPanel.repaint();
 
 		// Lay out the panel.
 		if (rowCount > 0) {
@@ -1110,7 +1117,9 @@ public class TermInfo2 extends AbstractGUIComponent {
 					INITX+10, INITY, // initX, initY
 					XPAD, YPAD); // xPad, yPad
 		}
-
+		
+		dbxrefPanel.validate();
+		dbxrefPanel.repaint();
 		dbxrefPanel.setVisible(true);
 	}
 
@@ -1433,17 +1442,23 @@ public class TermInfo2 extends AbstractGUIComponent {
 //						String propID = value.substring(0, quoteIndex).trim();
 //						String optional = value.substring(p.index + 1,
 //						value.length()).trim();
+						//testing to see if in someproperty: value
 					}
-					propLabel = new JLabel("<html>"+name+"</html>");
-					valLabel = new JLabel("<html>"+value+"</html>");
-					propLabel.setLabelFor(valLabel);
-					propLabel.setVerticalAlignment(JLabel.TOP);
-					propertyValuesPanel.add(propLabel);
-					propertyValuesPanel.add(valLabel);
-					propertyValuesPanel.validate();
-					rowCount++;
+				} else {
+					name = propVal.getProperty();
+					value = propVal.getValue();
 				}
+				propLabel = new JLabel("<html>"+name+"</html>");
+				propLabel.validate();
+				valLabel = new JLabel("<html>"+value+"</html>");
+				valLabel.validate();
+				propLabel.setLabelFor(valLabel);
+				propLabel.setVerticalAlignment(JLabel.TOP);
+				propertyValuesPanel.add(propLabel);
+				propertyValuesPanel.add(valLabel);
+				rowCount++;
 			}
+		}
 			if (rowCount > 0) {
 				SpringUtilities.makeCompactGrid(propertyValuesPanel, rowCount, 2, // rows,
 						// cols
@@ -1457,12 +1472,14 @@ public class TermInfo2 extends AbstractGUIComponent {
 						INITX, INITY, // initX, initY
 						XPAD, YPAD,  // xPad, yPad
 						maxX, maxY);
+				propertyValuesPanel.validate();
+				propertyValuesPanel.repaint();
+				propertyValuesPanel.setVisible(true);
+			} else {
+				propertyValuesPanel.removeAll();
+				propertyValuesPanel.setVisible(false);
 			}
-		}
-			propertyValuesPanel.validate();
-			propertyValuesPanel.repaint();
-			propertyValuesPanel.setVisible(true);
-
+			System.out.println ("rows= "+ rowCount);
 			return rowCount;
 	}
 
