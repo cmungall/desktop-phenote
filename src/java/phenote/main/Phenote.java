@@ -190,16 +190,19 @@ public class Phenote {
 
   public void initOntologies() {
   	//set up new interface here.
+	
     String m = "Loading configuration: "+Config.inst().getConfigName();
     logInfo(m);
-
+    
   	if (Config.inst().getTerminologyDefs()!=null) { //only do this if defined
+  		
   		try {
   			OntologyDataAdapter2.getInstance().initOntologies();
   		} catch (Exception e) {
   			e.printStackTrace();
   		}
   	} else { //the old-school config style
+  		
   		setProgress(m, 10);
   		setProgress(5); // 5?? from 10??? nicole?
   		setProgress("Initializing Ontologies...", 20);
@@ -216,6 +219,38 @@ public class Phenote {
   		//setMessageText("Ontologies Initialized");
   	}
   }
+  
+  public void simpleInitOntologies() {
+	  	//set up new interface here.
+		
+	    String m = "Loading configuration: "+Config.inst().getConfigName();
+	    logInfo(m);
+	    
+	  	if (Config.inst().getTerminologyDefs()!=null) { //only do this if defined
+	  		
+	  		try {
+	  			OntologyDataAdapter2.getInstance().initOntologies(false);
+	  		} catch (Exception e) {
+	  			e.printStackTrace();
+	  		}
+	  	} else { //the old-school config style
+	  		
+	  		setProgress(m, 10);
+	  		setProgress(5); // 5?? from 10??? nicole?
+	  		setProgress("Initializing Ontologies...", 20);
+	  		setProgressMsg("Initializing Ontologies");
+	  		setProgress(10);
+	  		LOG.debug("Initializing ontologies");
+	  		//OntologyDataAdapter oda = new OntologyDataAdapter(); // singleton?
+	  		// loads up OntologyManager - non intuitive?
+	  		OntologyDataAdapter.initialize(); // this sometimes hangs!!!
+	  		LOG.debug("Ontologies initialized");
+	  		// if (config.useShrimpDagViewer())
+	  		// ShrimpDag.inst().initOntologies();
+	  		setProgress("Ontologies Initialized", 70);
+	  		//setMessageText("Ontologies Initialized");
+	  	}
+	  }
 
   private void loadFromCommandLine() {
     //LOG.debug("read spec "+commandLine.readIsSpecified());
