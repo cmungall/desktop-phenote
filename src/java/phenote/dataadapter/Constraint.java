@@ -10,7 +10,8 @@ public interface Constraint {
    should only be called if isCommitConstraint is true */
   public ConstraintStatus checkCommit();
 
-  /** Return true if constraint should be checked after user edits */
+  /** Return true if constraint should be checked after user edits 
+   *  move to a separate interface! */
   public boolean isEditConstraint();
   /** do constraint check after user edit - should char list be passed in? 
    return ConstraintStatus indication if constraint passed and error msg

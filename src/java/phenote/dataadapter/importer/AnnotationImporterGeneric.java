@@ -52,7 +52,8 @@ public class AnnotationImporterGeneric{
 		Phenote.resetAllSingletons();
 		Config.inst().setConfigFile(configurationFile);
 		Phenote phenote = Phenote.getPhenote();
-		phenote.simpleInitOntologies();
+                // rob - i think you need to commit this method
+		//phenote.simpleInitOntologies();
 		//phenote.initGui();
 		System.out.println("OUT1");
 		this.clist = ad.load(f);
