@@ -114,7 +114,26 @@ public class OntologyDataAdapter2 {
     }
     initializingOntologies = false;
   }
+  
+  public void initOntologies(boolean updateAll) {
+		
+	  String selection = "Cancel";
+	  if (updateAll){
+		  selection = "Update All";
+	  }
+	  System.out.println("you've selected:  "+ selection.toString());
+	    
+	  initializingOntologies = true; 
 
+	    // new paradigm
+	  if (DO_ONE_OBO_SESSION) {
+	      initOntolsOneOboSession();
+	  } else { // pase - phase out
+	      initOntolsSeparateOboSessions();
+	  }
+	  initializingOntologies = false;
+  }
+		
 
 
   private void initOntolsOneOboSession() {
