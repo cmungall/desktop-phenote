@@ -1406,8 +1406,11 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 		//split
 		for (Iterator<PropertyValue> it = propertyValues.iterator(); it.hasNext();) {
 			propVal = it.next();
+
+                        System.out.println("prop val "+propVal+" prop "+propVal.getProperty());
 			if (propVal != null) {
 				if (propVal.getProperty().equals("property_value")) {
+                                  System.out.println("prop val ok");
 					/*
 					 * property_value: married_to heather
 					 * property_value: shoe_size "8" xsd:positiveInteger			

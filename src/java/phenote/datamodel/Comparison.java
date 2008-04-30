@@ -5,9 +5,11 @@ import org.obo.datamodel.OBOProperty;
 /** for making relations between statements */
 
 public class Comparison {
+
   private CharacterI subject;
   private OBOProperty relation;
   private CharacterI object;
+  
   public Comparison() {}
   Comparison(CharacterI sub, OBOProperty r,CharacterI obj) {
     subject = sub;

@@ -29,6 +29,7 @@ public class CharFieldValue implements Cloneable {
   private OBOClass oboClassValue=null;
   private String stringValue=null;
   private Date dateValue=null;
+  // need to add private int intValue... & booleanValue
   //private boolean isOboClass=true;
   private CharField charField;
   // private CharField???
