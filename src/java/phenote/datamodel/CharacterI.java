@@ -56,6 +56,10 @@ public interface CharacterI extends Transferable {
   public String getValueString(CharField cf);
 
   public String getValueString(String fieldName) throws CharFieldException;
+  /** convenience function, if field is a term then return ID, otherwise
+      return field value as String
+      throws ex if field doesnt exist */
+  public String getIdOrValue(String field) throws CharFieldException;
   public OBOClass getTerm(String fieldName) throws CharFieldException;
   // public void setTerm(String field, OBOClass term);
   // needed for protege plugin

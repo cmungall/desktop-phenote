@@ -175,10 +175,11 @@ them into  the classfiles directory. excludes="test/**"  -->
     </target>
 	
 	<target name="src_resources">
-		<copy todir="${classfiles}">
-			<fileset refid="resource_files" />
-		</copy>
-	</target>
+          <mkdir dir="${classfiles}"/>
+          <copy todir="${classfiles}">
+            <fileset refid="resource_files" />
+          </copy>
+        </target>
 
     <target name="zfin" depends="compile">
         <java classname="phenote.main.Phenote" fork="yes" jvmargs="-Xmx200M">

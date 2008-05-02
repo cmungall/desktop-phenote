@@ -54,7 +54,11 @@ public class SoapAdapter implements QueryableDataAdapterI {
   }
 
   private String get(CharacterI c, String fieldName) {
-    try { return c.getValueString(fieldName);}
+    //try { log().debug("field "+ fieldName+" val "+c.getValueString(fieldName)); 
+    // return c.getValueString(fieldName);}
+    // gets id for terms, strings/value for free text
+    try { log().debug("field "+ fieldName+" val "+c.getIdOrValue(fieldName));
+      return c.getIdOrValue(fieldName);}
     catch (CharFieldException e) { log().error("Config error "+e); return null; }
   }
   /** makes number out of slicenumber for slice id

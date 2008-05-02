@@ -87,6 +87,15 @@ public abstract class AbstractCharacter implements CharacterI {
 		return getValue(cf).getName();
 	}
 
+  /** convenience function, if field is a term then return ID, otherwise
+      return field value as String
+      throws ex if field doesnt exist */
+  public String getIdOrValue(String field) throws CharFieldException {
+    CharField cf = getCharFieldForName(field); // throws ex
+    if (!cf.isTerm())
+      return getValueString(cf);
+    return getValue(cf).getID();
+  }
 
 	public boolean hasNoContent() {
 		for (CharField cf : getAllCharFields()) {

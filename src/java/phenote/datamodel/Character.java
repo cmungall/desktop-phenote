@@ -86,7 +86,8 @@ public class Character extends AbstractCharacter implements CharacterI {
   }
 
   /** returns string for charfield value of char field, no matter what type,
-      return "" if null value?? throw ex? used for sorting CharList */
+      return "" if null value?? throw ex? used for sorting CharList
+      this returns names not ids for terms */
   public String getValueString(CharField cf) {
     if (!hasValue(cf)) return "";
     if (cf.isList()) {
@@ -102,12 +103,14 @@ public class Character extends AbstractCharacter implements CharacterI {
     return cfv.getName();
   }
 
+  /** throws exception if field doesnt exist */
   public String getValueString(String field) throws CharFieldException {
     CharField cf = getCharFieldForName(field); // throws ex
     return getValueString(cf);
     //if (!hasValue(cf)) return null; // ?? exception? ""?
     //return getValue(cf).getName();
   }
+
 
   // --> AbstractCharacter
 //   public OBOClass getTerm(String field) throws CharFieldException {
