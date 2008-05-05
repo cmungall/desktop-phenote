@@ -149,9 +149,16 @@ public class TermInfoToolbar extends JToolBar {
     showToolbar();
   }
   
+  /** use term listener comes from selection events, and it listens for useTerm
+      events, this is how UseTerm button sets terms in char field guis.
+      I think this should ignore setting to null, which right now is what
+      happens from normal select events (as opposed to mouse over events) */
   public void setUseTermListener (UseTermListener utl) {
-  	useTermListener = utl;
+    if (utl == null) return; // ignore nulling, keep previous nonnull (??)
+    useTermListener = utl;
   }
+
+  UseTermListener getUseTermListener() { return useTermListener; }
   
   private class UseTermActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {

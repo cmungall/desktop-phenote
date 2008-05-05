@@ -813,7 +813,7 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 			setTextFromOboClass(e.getOboClass());
 			// This sets who now listens to use term button clicks (only 1
 			// listener)
-			setUseTermListener(e.getUseTermListener());
+			//setUseTermListener(e.getUseTermListener());
 			termInfoToolbar.setUseTermListener(e.getUseTermListener());
 			//change the name of the item being browsed in the term info header
 			setComponentTitleFromOBOClass(e.getOboClass());
@@ -821,13 +821,13 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 		}
 	}
 
-	private void setUseTermListener(UseTermListener utl) {
-		useTermListener = utl;
-	}
-	
-	public UseTermListener getUseTermListener() {
-		return useTermListener;
-	}
+  /** just gets useTermListener from terminfotoolbar, which back & forward
+      action use, which actually probably isnt right as back & forward
+      might be hitting terms with different use term listeners 
+      but good enough for now */
+  public UseTermListener getUseTermListener() {
+    return termInfoToolbar.getUseTermListener();
+  }
 
 	private void addTermToNaviHistory(String link) {
 		int tot = termInfoNaviHistory.size();
@@ -1772,3 +1772,19 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
   }
 
 }
+
+
+//   /** use term listener comes from selection events, and it listens for useTerm
+//       events, this is how UseTerm button sets terms in char field guis.
+//       I think this should ignore setting to null, which right now is what
+//       happens from normal select events (as opposed to mouse over events)
+//   actually i think this isnt used anymore and should be taken out
+//   replaced by term info toolbar.setUseTermListener */
+//   private void setUseTermListener(UseTermListener utl) {
+//     // ignore null useTermListeners??, this means keep using one set previous
+//     LOG.debug("setting use term "+utl);
+//     if (utl == null) return;
+//     useTermListener = utl;
+//   }
+	
+

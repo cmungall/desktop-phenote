@@ -53,28 +53,31 @@ public class ForwardAction extends AbstractAction  {
 //
 //	}
 	
-	public void actionPerformed(ActionEvent e) {
-//		TermInfo2.inst().naviRefresh("forward");
-		int tot = TermInfo2.inst().getTermInfoNaviHistory().size();
-		int naviIndex = TermInfo2.inst().getNaviIndex();
-		//System.out.println("naviIndex before="+naviIndex);
-		if (naviIndex < (tot - 1)) { //only move the navi if not at end
-			naviIndex++;
-			TermInfo2.inst().setNaviIndex(naviIndex);
-		}
-		//System.out.println("naviIndex after="+naviIndex);
-		String id = TermInfo2.inst().getTermFromNaviHistory(naviIndex);
-
-		try {
-			OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
-			UseTermListener utl = TermInfo2.inst().getUseTermListener();
-			SelectionManager.inst().selectMouseOverTerm(this, term, utl);
-			//System.out.println("found forward term: "+term);
-		} catch (TermNotFoundException ex) {
-			return;
-		}
-		//System.out.println(e.getActionCommand().toString()+" action selected by:\n  "+ e);
-	}
+  public void actionPerformed(ActionEvent e) {
+    // TermInfo2.inst().naviRefresh("forward");
+    int tot = TermInfo2.inst().getTermInfoNaviHistory().size();
+    int naviIndex = TermInfo2.inst().getNaviIndex();
+    //System.out.println("naviIndex before="+naviIndex);
+    if (naviIndex < (tot - 1)) { //only move the navi if not at end
+      naviIndex++;
+      TermInfo2.inst().setNaviIndex(naviIndex);
+    }
+    //System.out.println("naviIndex after="+naviIndex);
+    String id = TermInfo2.inst().getTermFromNaviHistory(naviIndex);
+    
+    try {
+      OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
+      // so this isnt quite right as the forward term might have a different
+      // use term listener, really use term listeners need to be tracked for
+      // history of all terms, but for now this will do
+      UseTermListener utl = TermInfo2.inst().getUseTermListener();
+      SelectionManager.inst().selectMouseOverTerm(this, term, utl);
+      //System.out.println("found forward term: "+term);
+    } catch (TermNotFoundException ex) {
+      return;
+    }
+    //System.out.println(e.getActionCommand().toString()+" action selected by:\n  "+ e);
+  }
 }  
 
 
