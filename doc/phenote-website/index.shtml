@@ -108,10 +108,10 @@
 	  </ul>
 	  <h3>Meetings/Demos</h3>
 	  <ul class="events">
-	    < li class="events">
+	    <li class="events">
 	    <p>(none scheduled at this time)</p>
 	    </li>
-	    <!--li class="events">
+	    <!-- li class="events">
 	    <p class="quick_link">
 	    <img src="images/star.gif" alt=""  class="icon_green"/>	      
 	    <a
