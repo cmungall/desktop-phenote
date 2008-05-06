@@ -31,6 +31,7 @@ public class PhenoteBean {
   private String termId;
   private String field;
   private String viewType;
+  private boolean useTerm;
 
   private String ajaxReturn;
   private List<CompletionTerm> completionTermList;
@@ -185,6 +186,17 @@ public class PhenoteBean {
   public void setViewType(String view)
   {
       this.viewType = view;
+  }
+
+  
+  public boolean getUseTerm()
+  {
+      return useTerm;
+  }
+  
+  public void setUseTerm(boolean useTerm)
+  {
+      this.useTerm = useTerm;
   }
 }
 

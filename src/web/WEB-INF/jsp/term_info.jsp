@@ -4,11 +4,18 @@
 <body>
 
 <table width="90%">
+<c:if test="${formBean.useTerm}">
+ <tr>
+ <td colspan=2 align=right>
+      <a href="javascript:;" onclick="window.parent.useTerm('<c:out value="${formBean.term.name}"/>');  " >[Add Term]</a>
+ </td>
+ </tr>
+</c:if>
   <tr>
     <td width="110">
       <FONT SIZE=+1><STRONG>TERM:</STRONG></FONT></td>
     <td>
-      <FONT SIZE=+1><STRONG><c:out value="${formBean.term.name}"/></STRONG></FONT>
+      <FONT SIZE=+1><STRONG><div id="termid"><c:out value="${formBean.term.name}"/></div></STRONG></FONT>
     </td>
   </tr>
   <tr valign="top">
