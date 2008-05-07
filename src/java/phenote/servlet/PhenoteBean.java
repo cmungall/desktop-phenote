@@ -131,6 +131,11 @@ public class PhenoteBean {
     this.completionTermList = completionTermList;
   }
 
+  public String getTermEscaped() {
+    String returnString = new String(term.getName()) ; 
+    return returnString.replaceAll("'","\\\\'") ;
+  }
+
   public OBOClass getTerm() {
     return term;
   }

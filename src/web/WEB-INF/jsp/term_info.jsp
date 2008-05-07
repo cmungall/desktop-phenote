@@ -7,7 +7,10 @@
 <c:if test="${formBean.useTerm}">
  <tr>
  <td colspan=2 align=right>
-      <a href="javascript:;" onclick="window.parent.useTerm('<c:out value="${formBean.term.name}"/>');  " >[Add Term]</a>
+      <a href="javascript:;" onclick="window.parent.useTerm('<c:out value="${formBean.termEscaped}"/>');  " >[Add Term]</a>
+      &nbsp;
+      &nbsp;
+           <a href="javascript:;" onclick="window.parent.hideTerm(); " >[Close]</a> 
  </td>
  </tr>
 </c:if>
