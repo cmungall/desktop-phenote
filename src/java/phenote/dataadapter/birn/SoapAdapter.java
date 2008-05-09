@@ -1,5 +1,6 @@
 package phenote.dataadapter.birn;
 
+import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,10 @@ import edu.ucsd.ccdb.PhenoWS;
 import edu.ucsd.ccdb.PhenoWSService;
 import edu.ucsd.ccdb.PhenoWSServiceLocator;
 
+import org.obo.owl.dataadapter.OWLAdapter;
+
+import phenote.datamodel.CharField;
+import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
 import phenote.datamodel.CharFieldException;
@@ -21,6 +26,7 @@ import phenote.dataadapter.QueryableDataAdapterI;
 
 public class SoapAdapter implements QueryableDataAdapterI {
 
+  private OWLAdapter owlAdapter = new OWLAdapter();
 
   public void commit(CharacterListI charList) {
     PhenoWSService soap = new PhenoWSServiceLocator();
@@ -33,7 +39,8 @@ public class SoapAdapter implements QueryableDataAdapterI {
           String comm = get(c,"comm");
           String own = get(c,"userName");
           String e = get(c,"E");
-          String q = get(c,"Q");
+          //String q = get(c,"Q");
+          String q = "http://purl.org/obo/owl/PATO#PATO_0000639";
           String e2 = get(c,"E2");
           String rawIm = get(c,"imagename"); // imagename?
           String warpIm = null; // add to config
@@ -43,7 +50,11 @@ public class SoapAdapter implements QueryableDataAdapterI {
 
           String id = ws.createPhenoTypeFromSmartAtlas
             (poly,isCoronal,comm,own,e,q,e2,rawIm,warpIm,thumb,0,imRegId);
-          log().info("Commit ok, got id "+id);
+          if (id==null)
+            log().error("Commit failed, got null id from ckb/soap");
+          else
+            log().info("Commit ok, got id "+id);
+          
         }
         catch (RemoteException e) { log().error("soap failed "+e); }
       }
@@ -57,10 +68,31 @@ public class SoapAdapter implements QueryableDataAdapterI {
     //try { log().debug("field "+ fieldName+" val "+c.getValueString(fieldName)); 
     // return c.getValueString(fieldName);}
     // gets id for terms, strings/value for free text
-    try { log().debug("field "+ fieldName+" val "+c.getIdOrValue(fieldName));
-      return c.getIdOrValue(fieldName);}
+    try {
+      CharField cf = CharFieldManager.inst().getCharFieldForName(fieldName);
+      String v = c.getIdOrValue(fieldName);
+      if (cf.isTerm())
+        v = oboToCkbId(v);
+      
+      log().debug("field "+ fieldName+" val "+v);
+      return v;
+    }
     catch (CharFieldException e) { log().error("Config error "+e); return null; }
   }
+
+  private String oboToCkbId(String oboId) {
+    if (oboId==null || oboId.equals("")) return oboId; // ??
+    try {
+      String ckbId = owlAdapter.getURI(oboId).toString();
+      log().debug("converted "+oboId+" to "+ckbId);
+      return ckbId;
+    }
+    catch (UnsupportedEncodingException e) {
+      log().error("Failed to convert obo id to owl uri "+e);
+      return oboId; // ??
+    }
+  }
+
   /** makes number out of slicenumber for slice id
       slice number chould probably be renamed slice id?
       when int type implemented this should be int type
