@@ -187,8 +187,7 @@ public class Ontology {
     return true; // no exception - it has it
   }
 
-
-  //public List<OBOProperty> getSortedRelations() { --> OBOObject
+  /** gets relations, OBOProperties as OBOObjects */
   public List<OBOObject> getSortedRelations() {
     if (sortedRelations == null) {
       //sortedRelations=new ArrayList<OBOProperty>(); 
@@ -198,7 +197,8 @@ public class Ontology {
         sorRel.addAll(getOnTheFlySlimObjects());
       // this is bad, gets all rels, only want from configged field/ont
       else
-        sorRel.addAll(TermUtil.getRelationshipTypes(oboSession));
+        //sorRel.addAll(TermUtil.getRelationshipTypes(oboSession));
+        sorRel.addAll(sortedTerms); // OBOObjects can be rels/props, rename!
       //Collections.sort(sorRel,new RelComparator());
       sortedRelations = sortOboObjects(sorRel);
     }
@@ -350,6 +350,8 @@ public class Ontology {
     loadNamespaces(c);
   }
 
+  /** this is the workhorse. this loads namespaces (usually come from obo file)
+      as in all terms & such from namespace, uses QueryEngine */
   private void loadNamespaces(Collection<Namespace> spaces) {
     if (spaces == null || spaces.isEmpty()) {
       log().error("No namespace to load"); // ex?

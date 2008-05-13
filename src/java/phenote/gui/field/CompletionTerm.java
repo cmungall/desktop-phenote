@@ -10,7 +10,9 @@ import org.obo.datamodel.Synonym;
 
 import phenote.gui.SearchParamsI;
 
-/** This is basically a view object for the auto completer for terms/OBOClass */
+/** This is basically a view object for the auto completer for terms/OBOClass
+ this has been replaced by CompletionObject - i dont think its used anymore?
+and should probably be deleted */
 
 public class CompletionTerm {
   private OBOClass term;
