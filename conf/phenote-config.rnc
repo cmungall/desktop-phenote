@@ -200,7 +200,8 @@ field =
     attribute tab { xsd:string },
     ## phase these 4 out - redundant with single ontology
     attribute file { xsd:string },
-    attribute filter-out { xsd:string },
+    ## this is pase! dont use, todo: take out of phenote code
+    ## attribute filter-out { xsd:string },
     attribute slim { xsd:string },
     attribute repos-subdir {xsd:string},
     attribute groups { xsd:IDREFS }?,

@@ -3,7 +3,7 @@ package phenote.datamodel;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOObject;
 
 import phenote.config.Config;
 import phenote.edit.CharChangeEvent;
@@ -140,7 +140,7 @@ public class ValueCharacterList implements CharacterListI {
   }
   
   private String getTermID(String termName, Ontology ontology) {
-    for (OBOClass term :ontology.getSortedTerms()) {
+    for (OBOObject term :ontology.getSortedTerms()) {
       if (term.getName().equals(termName)) return term.getID();
     }
     return null;

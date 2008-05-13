@@ -201,15 +201,16 @@ public class TermCompList extends AbstractAutoCompList {
     }
       
     //return oboClassDowncast(obj); // throws oboex
-    CompletionTerm t = getCompTermFromInput(obj,useTopHit);
+    CompletionObject t = getCompTermFromInput(obj,useTopHit);
+    if (!t.hasOboClass()) throw new OboException("Selected obj doesnt have obo class");
     return t.getOboClass();
   }
 
 
-  /** this takes object from user selection and casts it to CompletionTerm, if not
-      CompletionTerm throws OboException. If user hits return in box obj will actually
+  /** this takes object from user selection and casts it to CompletionObject, if not
+      CompletionObject throws OboException. If user hits return in box obj will actually
       be a String of user input NOT CompTerm. but new request is to go with top 
-      option at that point. So I think this will then go for top CompTerm in
+      option at that point. So I think this will then go for top CompObj in
       comp list and this method needs to be renamed if so.
       I think i didnt realize previous that returns put Strings out from comp
       so if useTopHit is false and input is String not compTerm then throw OboEx
@@ -217,11 +218,11 @@ public class TermCompList extends AbstractAutoCompList {
       for user hitting return on partial string - convenience!
   */
   //private CompletionTerm completionTermDowncast(Object obj) throws OboException {
-  private CompletionTerm getCompTermFromInput(Object obj,boolean useTopHit)
+  private CompletionObject getCompTermFromInput(Object obj,boolean useTopHit)
     throws OboException {
     if (obj == null) throw new OboException();
     // STRING - user hit return
-    if (!(obj instanceof CompletionTerm)) {
+    if (!(obj instanceof CompletionObject)) {
       //log.info("Item in completion list not obo class "+obj.getClass());
       if (!useTopHit)
         throw new OboException("Item in comp list not obo class "+obj.getClass());
@@ -234,7 +235,7 @@ public class TermCompList extends AbstractAutoCompList {
       // Constraint: need a least 1 letter/char
       if (input == null || input.trim().length() == 0)
         throw new OboException("no input given"); // msg not used
-      CompletionTerm ct = getFirstCompTerm();
+      CompletionObject ct = getFirstCompTerm();
       // dont think this can happen - safety
       if (!ct.matches(input,SearchParams.inst()))
         throw new OboException("input & 1st term dont match");
@@ -242,15 +243,15 @@ public class TermCompList extends AbstractAutoCompList {
       return ct; // hmmmm
     }
     // TERM - user selected term
-    return (CompletionTerm) obj;
+    return (CompletionObject) obj;
   }
 
   /** Returns first CompletionTerm in completion list 
    throws obo exception if list is empty (or not comp term) */
-  private CompletionTerm getFirstCompTerm() throws OboException {
+  private CompletionObject getFirstCompTerm() throws OboException {
     Object o = super.getFirstCompListObj(); // throws ex if emtpy
-    if (!(o instanceof CompletionTerm)) throw new OboException();
-    return (CompletionTerm)o;
+    if (!(o instanceof CompletionObject)) throw new OboException();
+    return (CompletionObject)o;
   }
 
   /**
@@ -369,11 +370,15 @@ public class TermCompList extends AbstractAutoCompList {
         return;
       //System.out.println("sel val "+selectedValue.getClass()+" name "+selectedValue);
       // the selected item should be an OBOClass
-      if (!(selectedValue instanceof CompletionTerm)) {
-        log().debug("selected completion term is not CompTerm " + selectedValue.getClass());
+      if (!(selectedValue instanceof CompletionObject)) {
+        log().debug("selected completion term is not CompObj " + selectedValue.getClass());
         return;
       }
-      CompletionTerm ct = (CompletionTerm) selectedValue;
+      CompletionObject ct = (CompletionObject) selectedValue;
+      if (!ct.hasOboClass()) { // shouldnt happen
+        log().debug("selected completion term does not have OBOClass "+ct.getOboObject());
+        return;
+      }
       OBOClass oboClass = ct.getOboClass();
       Object src = TermCompList.this;
       getSelectionManager().selectMouseOverTerm(src, oboClass, getUseTermListener());
@@ -435,6 +440,7 @@ public class TermCompList extends AbstractAutoCompList {
     return log;
   }
 
+  /** listens for selection from ontology chooser drop down list */
   private class OntologyChooserListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       String s = ontologyChooserCombo.getSelectedItem().toString();

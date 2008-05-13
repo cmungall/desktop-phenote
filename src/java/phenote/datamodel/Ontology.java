@@ -17,8 +17,8 @@ import org.obo.datamodel.OBOProperty;
 import org.obo.datamodel.OBOSession;
 import org.obo.datamodel.TermCategory;
 import org.obo.query.QueryEngine;
-import org.obo.query.impl.CategoryQuery;
-import org.obo.query.impl.NamespaceQuery;
+import org.obo.query.impl.CategoryObjQuery;
+import org.obo.query.impl.NamespaceObjQuery;
 import org.obo.util.QueryUtil;
 import org.obo.util.TermUtil;
 
@@ -39,10 +39,12 @@ public class Ontology {
   // with limiting output may wanna do scoring but then lose alphabetical?
   // maybe have different modes/preferences
   // should switch from OBOClass to general OBOObject!
-  private Collection<OBOClass> sortedTerms; // was List
+  //private Collection<OBOClass> sortedTerms; // was List
+  private Collection<OBOObject> sortedTerms; // was List
   // switch to this!
-  private Collection<OBOObject> sortedObjTerms;
-  private Collection<OBOClass> sortedObsoleteTerms;
+  //private Collection<OBOObject> sortedObjTerms;
+  //private Collection<OBOClass> sortedObsoleteTerms;
+  private Collection<OBOObject> sortedObsoleteTerms;
   //private List<OBOProperty> sortedRelations;
   private List<OBOObject> sortedRelations; // more general
   private boolean hasInstances;
@@ -51,7 +53,7 @@ public class Ontology {
   private Collection<Instance> sortedInstances;
   private String slim; 
   private boolean sortById = false;
-  private String filterOutString; // phase out
+//  private String filterOutString; // phase out
   /** well this stuff is specific to ontologies from files (eg obo), perhaps there
       needs to be some sort of wrapper or subclass? need to think about this...
       for now just shoving in here */
@@ -106,7 +108,7 @@ public class Ontology {
     oboSession = os;
     //System.out.println("Ont cats "+os.getCategories());
     makeSortedLists(oboSession);
-    filterLists();
+    //filterLists();
   }
 
   public Date getOntologyDate() { return new Date(ontologyTimestamp); }
@@ -135,34 +137,34 @@ public class Ontology {
 
   private void makeSortedLists(OBOSession oboSession) {
     //log().debug("name "+name+" terms "+oboSession.getTerms()+" propVals "+oboSession.getPropertyValues()+" rels "+oboSession.getRelationshipTypes());
-    sortedTerms = getSortedTerms(TermUtil.getTerms(oboSession));//(oboSession.getTerms());
-    sortedObsoleteTerms = getSortedTerms(TermUtil.getObsoletes(oboSession));
-    if (hasInstances)
+    //sortedTerms = sortTerms(TermUtil.getTerms(oboSession));
+    sortedTerms = sortObjects(TermUtil.getTerms(oboSession));
+    sortedObsoleteTerms = sortObjects(TermUtil.getObsoletes(oboSession));
+    if (hasInstances) // work in progress
       sortedInstances = getSortedInstances(TermUtil.getInstances(oboSession));
   }
 
-  private void filterLists() {
-    //if (!haveFilter() && !hasSlim()) return; // froboSession.getTerm(id)om config
-    if (doFiltering())
-      sortedTerms = filterList(sortedTerms);
-  }
+//   private void filterLists() {
+//     //if (!haveFilter() && !hasSlim()) return; // froboSession.getTerm(id)om config
+//     if (doFiltering())
+//       sortedTerms = filterList(sortedTerms);
+//   }
 
 
   public String getName() { return name; }
 
-  /** throws TermNotFoundException if id is not
-      found 
+  /** throws TermNotFoundException if id is not found 
       searches non-obsolete & obsoletes*/
   public OBOClass getTerm(String id) throws TermNotFoundException {
     // this aint right - if its a slim should only search slim
     //OBOClass oc = oboSession.getTerm(id);
-    for (OBOClass term : sortedTerms) {
-      if (term.getID().equals(id))
-        return term;
+    for (OBOObject term : sortedTerms) {
+      if (term.getID().equals(id) && term instanceof OBOClass)
+        return (OBOClass)term;
     }
-    for (OBOClass obs : sortedObsoleteTerms) {
-      if (obs.getID().equals(id))
-        return obs;
+    for (OBOObject obs : sortedObsoleteTerms) {
+      if (obs.getID().equals(id) && obs instanceof OBOClass)
+        return (OBOClass)obs;
     }
     //if (term == null)
 
@@ -194,6 +196,7 @@ public class Ontology {
       // if on the fly slim than just get terms from there
       if (hasOnTheFlySlim())
         sorRel.addAll(getOnTheFlySlimObjects());
+      // this is bad, gets all rels, only want from configged field/ont
       else
         sorRel.addAll(TermUtil.getRelationshipTypes(oboSession));
       //Collections.sort(sorRel,new RelComparator());
@@ -241,25 +244,36 @@ public class Ontology {
 
 
   /** non obsolete terms - sorted */
-  public Collection<OBOClass> getSortedTerms() {
+  //public Collection<OBOClass> getSortedTerms() {
+  public Collection<OBOObject> getSortedTerms() { // getSortedObjects?
     return sortedTerms;
   }
 
-  public Collection<OBOClass> getSortedObsoleteTerms() {
+  public Collection<OBOObject> getSortedObsoleteTerms() {
     return sortedObsoleteTerms;
   }
 
 
   public OBOSession getOboSession() { return oboSession; }
 
-  public List<OBOClass> getSortedTerms(Collection terms) {
+  private List<OBOClass> sortTerms(Collection terms) {
     List<OBOClass> sortedTerms = new ArrayList<OBOClass>();
     sortedTerms.addAll(terms);
     Collections.sort(sortedTerms);
     return sortedTerms;
   }
 
-  // can this be merged in with getSortedTerms - return List<AnnotatedObj>?
+  private List<OBOObject> sortObjects(Collection terms) {
+    List<OBOObject> sortedTerms = new ArrayList<OBOObject>();
+    sortedTerms.addAll(terms);
+    Collections.sort(sortedTerms);
+    return sortedTerms;
+  }
+
+
+  // can this be merged in with sortTerms - return List<AnnotatedObj>?
+  // this isnt used yet - work in progress, instance is not a comparable
+  // also should be renamed sortInstances as this is doing the sorting or should be
   public List<Instance> getSortedInstances(Collection instances) {
     List<Instance> sortedInstances = new ArrayList<Instance>();
     sortedInstances.addAll(instances);
@@ -296,24 +310,24 @@ public class Ontology {
     return false; // none of the terms slims are in
   }
 
-  public void setFilter(String filterOutString) {
-    this.filterOutString = filterOutString;
-  }
-  private String getFilter() { return filterOutString; }
+//   public void setFilter(String filterOutString) {
+//     this.filterOutString = filterOutString;
+//   }
+//   private String getFilter() { return filterOutString; }
   
-  private boolean filterOut(OBOClass term) {
-    if (!hasFilter()) return false;
-    return term.getID().startsWith(getFilter());
-  }
+//   private boolean filterOut(OBOClass term) {
+//     if (!hasFilter()) return false;
+//     return term.getID().startsWith(getFilter());
+//   }
 
-  private boolean hasFilter() {
-    return filterOutString != null;
-    // minimally filter out obo: obo edit internal terms
-    //return true;
-  }
+//   private boolean hasFilter() {
+//     return filterOutString != null;
+//     // minimally filter out obo: obo edit internal terms
+//     //return true;
+//   }
 
   private boolean doFiltering() {
-    return filterOboArtifacts() || hasFilter() || hasSlim();
+    return filterOboArtifacts() || hasSlim(); // || hasFilter()
   }
 
   private boolean filterOboArtifacts() { return true; }
@@ -346,8 +360,11 @@ public class Ontology {
     Namespace[] spacesArray = spaces.toArray(new Namespace[0]);
     // NamespaceQuery makes OBOClasses, need to change to make OBOObjects!
     // or make new query
-    NamespaceQuery nsQuery = new NamespaceQuery(spacesArray);
-    if (sortById) nsQuery.setComparator(new IdComparator());
+    //NamespaceQuery nsQuery = new NamespaceQuery(spacesArray);
+    NamespaceObjQuery nsQuery = new NamespaceObjQuery(spacesArray);
+    // sortById is really a hack so zfin can have stages sorted (which happen to be
+    // sorted by id), obo needs to have a sorting thingy
+    if (sortById) nsQuery.setComparator(new IdComparator()); // inner class
     // create a new query engine on the session we just loaded
     QueryEngine engine = new QueryEngine(oboSession);
     
@@ -364,12 +381,13 @@ public class Ontology {
     if (hasOnTheFlySlim()) {
       // can either make slim for query below - or just make slim by hand
       // might as well do by hand
-      sortedTerms = getOnTheFlySlimClassesSorted();
+      sortedTerms = getOnTheFlySlimObjectsSorted();
       // empty out obsoletes?
     }
     // shouldnt have both real slim and on the fly slim right?
+    // Category is what obo calls slim
     else if (hasSlim()) {
-      CategoryQuery catQuery = new CategoryQuery(slim);
+      CategoryObjQuery catQuery = new CategoryObjQuery(slim);
       sortedTerms = QueryUtil.getResults(engine.query(sortedTerms,catQuery));
       // obsoletes?
       sortedObsoleteTerms =
@@ -452,35 +470,39 @@ public class Ontology {
   	return ontologyConfig;
   }
 
-  private class IdComparator implements Comparator<OBOClass> {
-    public int compare(OBOClass o1, OBOClass o2) {
+  // hacky id sort for zfin stages
+  private class IdComparator implements Comparator<OBOObject> {
+    public int compare(OBOObject o1, OBOObject o2) {
       return o1.getID().compareToIgnoreCase(o2.getID());
     }
   }
 
-  /** This is not generic - this looks for ids that have the filterOut string
-      as a prefix and tosses them - for example "ZFS" filters out all zf stage
-      terms - can add more flexibility as needed - this is all thats needed for now
-      also filters out obo: terms - those are obo edit artifacts i think 
-      also filters for slim! - phase out for obo edit stuff  */
-  private List<OBOClass> filterList(Collection<OBOClass> list) {
-    List<OBOClass> filteredList = new ArrayList<OBOClass>();
-    for (OBOClass term : list) {
-      // or could do remove on list?
-      // also filter out obo: terms as they are internal obo edit thingies it seems
-      // funny logic but more efficient to do in one pass - refactor somehow?
-      //if (term.getName().startsWith("obo:"))
-      if (isOboArtifact(term))
-        continue; // filter our obo:
-      //if (hasFilter() && term.getID().startsWith(getFilter()))
-      if (filterOut(term))
-        continue;
-      if (!inSlim(term))
-        continue;
-      filteredList.add(term); // passed 2 filters above - add it
-    }
-    return filteredList;
-  }
+//   /** This is not generic - this looks for ids that have the filterOut string
+//       as a prefix and tosses them - for example "ZFS" filters out all zf stage
+//       terms - can add more flexibility as needed - this is all thats needed for now
+//       also filters out obo: terms - those are obo edit artifacts i think 
+//       also filters for slim! - phase out for obo edit stuff
+//       this is pase now im pretty sure as loadNamespaces takes care of all this
+//       via namespace & slim querying
+//   */
+//   private List<OBOClass> filterList(Collection<OBOClass> list) {
+//     List<OBOClass> filteredList = new ArrayList<OBOClass>();
+//     for (OBOClass term : list) {
+//       // or could do remove on list?
+//       // also filter out obo: terms as they are internal obo edit thingies it seems
+//       // funny logic but more efficient to do in one pass - refactor somehow?
+//       //if (term.getName().startsWith("obo:"))
+//       if (isOboArtifact(term))
+//         continue; // filter our obo:
+//       // this is no longer used
+// //       if (filterOut(term))
+// //         continue;
+//       if (!inSlim(term))
+//         continue;
+//       filteredList.add(term); // passed 2 filters above - add it
+//     }
+//     return filteredList;
+//   }
 
 }
 

@@ -9,8 +9,12 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import phenote.gui.SearchFilterType;
+import phenote.gui.SearchParamsI;
+
 /** this isnt used at the moment - nicole moved search params to menu - maybe delete?
-    or maybe this is something for the docking interface */
+    or maybe this is something for the docking interface 
+SearchParams need to get up to snuff with new interface if we bring this back*/
 //import phenote.datamodel.SearchParamsI;
 // only public for TestPhenote
 public class SearchParamPanel {
@@ -73,6 +77,9 @@ public class SearchParamPanel {
     public boolean searchObsoletes() {
       return obsoleteButton.isSelected();
     }
+    public boolean verifySettings() { return false; } // ?
+    public boolean getParam(SearchFilterType filter) { return false; } // ?
+    public void setParam(SearchFilterType filter, boolean setting) {} // ?
   }
 
   // these are actually for TestPhenote

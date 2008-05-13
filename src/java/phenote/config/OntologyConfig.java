@@ -82,7 +82,7 @@ public class OntologyConfig {
     // downside of strongly types xml beans is filterOut has to be dealt with 
     // separately for field & ontology - annoying - & all other attribs
     //filterOut = field.getFilterOut()!=null ? field.getFilterOut() : null;
-    setFilter(field.getFilterOut());
+    //setFilter(field.getFilterOut());
     //slim = field.getSlim()!=null ? field.getSlim() : null;
     setSlim(field.getSlim());
     //reposSubdir = field.getReposSubdir()!=null ? field.getReposSubdir() : null;
@@ -210,9 +210,10 @@ public class OntologyConfig {
   public String getNamespace() { return getOntologyBean().getNamespace(); }
   public void setNamespace(String n) { getOntologyBean().setNamespace(n); }
 
-  public boolean hasFilter() { return getFilter() != null; }
-  public String getFilter() { return getOntologyBean().getFilterOut(); } 
-  public void setFilter(String f) { getOntologyBean().setFilterOut(f); }
+  // --> namespace
+//   public boolean hasFilter() { return getFilter() != null; }
+//   public String getFilter() { return getOntologyBean().getFilterOut(); } 
+//   public void setFilter(String f) { getOntologyBean().setFilterOut(f); }
 
   public boolean hasSlim() { return getSlim() != null; }
   public String getSlim() { return getOntologyBean().getSlim(); }

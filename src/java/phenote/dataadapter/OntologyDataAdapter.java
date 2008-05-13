@@ -507,8 +507,9 @@ public class OntologyDataAdapter {
    this is old - for sep obo sessions - phase out? */
   private Ontology initOntology(OntologyConfig ontCfg) throws OntologyException {
     Ontology ontology = new Ontology(ontCfg.getName()); // new Ontology(ontCfg)?
-    if (ontCfg.hasFilter()) // set filter before loading obo session
-      ontology.setFilter(ontCfg.getFilter());
+    // pase -> namespace
+//     if (ontCfg.hasFilter()) // set filter before loading obo session 
+//       ontology.setFilter(ontCfg.getFilter());
     if (ontCfg.hasSlim())
       ontology.setSlim(ontCfg.getSlim());
 

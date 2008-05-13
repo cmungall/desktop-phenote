@@ -106,6 +106,8 @@ public class FieldPanel extends AbstractGUIComponent {
       //JScrollPane panelScrollPane = new JScrollPane(fieldPanel);
       add(fieldPanel);
     }
+
+    // search params now done in menu - this is always false - phase out?
     if (addSearchPanel)
       initSearchPanel();
 

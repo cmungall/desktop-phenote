@@ -30,7 +30,7 @@ public class CompListSearcher {
   private List<Ontology> ontologyList = new ArrayList<Ontology>(3);
   private SearchParamsI searchParams = SearchParams.inst(); // singleton
   private String previousInput = null;
-  private List<CompletionTerm> previousCompList = new ArrayList<CompletionTerm>();
+  private List<CompletionObject> previousCompList = new ArrayList<CompletionObject>();
 
   /** Ontology - the initial ontology to search, setOntology changes this,
       initially only searches the one ontology (not ALL) - used by servlet which
@@ -136,7 +136,7 @@ public class CompListSearcher {
       is cancelled - when done passes results to SearchListener */
   private void getSearchTermList(String input, SearchListener searchListener,
                                  TaskDelegate task) {
-    List<CompletionTerm> searchTerms = new ArrayList<CompletionTerm>();
+    List<CompletionObject> searchTerms = new ArrayList<CompletionObject>();
     
     // if no input should phenote give no terms? or all terms?
     boolean nothingForNothing = false; // get from FieldConfig!!
@@ -160,9 +160,9 @@ public class CompListSearcher {
         //Set ontologyTermList = getCurrentOntologyTermSet();
         for (Ontology ontology : ontologyList) {
           // NON OBSOLETE TERMS
-          Collection<OBOClass> ontologyTermList =
+          Collection<OBOObject> ontologyTermList =
             ontology.getSortedTerms();
-          List<CompletionTerm> l =
+          List<CompletionObject> l =
             getOntSearchTermList(input,ontologyTermList,task);
           searchTerms.addAll(l);
 
@@ -175,7 +175,7 @@ public class CompListSearcher {
           // if obsoletes set then add them in addition to regulars
           if (searchParams.searchObsoletes()) {
             ontologyTermList = ontology.getSortedObsoleteTerms();
-            List<CompletionTerm> obsoletes =
+            List<CompletionObject> obsoletes =
               getOntSearchTermList(input,ontologyTermList,task);
             searchTerms.addAll(obsoletes);
           }
@@ -213,21 +213,21 @@ public class CompListSearcher {
   
 
   /** helper fn for CompTaskDelegate, does search for terms from a single ontology */
-  private List<CompletionTerm> getOntSearchTermList(String input,
-                                                    Collection<OBOClass> ontologyTermList,
+  private List<CompletionObject> getOntSearchTermList(String input,
+                                                    Collection<OBOObject> ontologyTermList,
                                                  TaskDelegate task) throws CancelEx {
-    SearchTermList searchTermList = new SearchTermList();
+    SearchTermList searchTermList = new SearchTermList(); // inner class
     if (ontologyTermList == null)
       return searchTermList.getList();
 
     int i =0;
     // ontologyTermList (from Ontology) is presorted already by term name
     // if sorted by term id (eg zf stage) SearchTermList i think needs to know that?
-    for (OBOClass oboClass : ontologyTermList) {
-    //for (int i=0; i<ontologyTermList.size(); i++) {
+    for (OBOObject oboClass : ontologyTermList) {
 
       if (i++ % 50 == 0 && isCancelled(task)) throw new CancelEx(); 
-      CompletionTerm ct = new CompletionTerm(oboClass);
+      //CompletionTerm ct = new CompletionTerm(oboClass);
+      CompletionObject ct = new CompletionObject(oboClass);
       // if input is blank then add all terms (list all terms on empty input)
       // matches records the kind of hit in CompTerm
       if (ct.matches(input, searchParams)) {
@@ -240,8 +240,8 @@ public class CompListSearcher {
     return searchTermList.getList();
   }
 
-  private List<CompletionTerm> searchPreviousList(String input,
-                                                  List<CompletionTerm> prevList,
+  private List<CompletionObject> searchPreviousList(String input,
+                                                  List<CompletionObject> prevList,
                                                   TaskDelegate task)
     throws CancelEx {
 
@@ -250,7 +250,7 @@ public class CompListSearcher {
     //for (CompletionTerm ct : prevList) {
     for (int i=0; i<prevList.size(); i++) {
       if (i % 50 == 0 && isCancelled(task)) throw new CancelEx();
-      CompletionTerm ct = prevList.get(i);
+      CompletionObject ct = prevList.get(i);
       ct.resetMatchState(); // reusing ct has stale match state from previous search
       if (ct.matches(input,searchParams))
         newList.addTerm(ct);
@@ -287,16 +287,16 @@ public class CompListSearcher {
       this data structure is handy for putting starts with
       before contains! UniqueTermList -> SearchTermList*/
   private class SearchTermList {
-    private List<CompletionTerm> startsWithTerms = new ArrayList<CompletionTerm>();
+    private List<CompletionObject> startsWithTerms = new ArrayList<CompletionObject>();
     //private Map<OBOClass,OBOClass> uniqueCheck = new HashMap<OBOClass,OBOClass>();
     // list of terms that are contained but NOT startsWith
-    private List<CompletionTerm> containTerms = new ArrayList<CompletionTerm>();
-    private List<CompletionTerm> startsWithSyns = new ArrayList<CompletionTerm>();
-    private List<CompletionTerm> containSyns = new ArrayList<CompletionTerm>();
-    private List<CompletionTerm> obsoletes = new ArrayList<CompletionTerm>();
-    private List<CompletionTerm> definitions = new ArrayList<CompletionTerm>();
+    private List<CompletionObject> containTerms = new ArrayList<CompletionObject>();
+    private List<CompletionObject> startsWithSyns = new ArrayList<CompletionObject>();
+    private List<CompletionObject> containSyns = new ArrayList<CompletionObject>();
+    private List<CompletionObject> obsoletes = new ArrayList<CompletionObject>();
+    private List<CompletionObject> definitions = new ArrayList<CompletionObject>();
 
-    private void addTerm(CompletionTerm ct) {
+    private void addTerm(CompletionObject ct) {
       if (ct.isObsolete())
         obsoletes.add(ct); // start with/contains?
       else if (ct.isTermMatch())
@@ -307,8 +307,8 @@ public class CompListSearcher {
         definitions.add(ct); // start with/contains?
     }
 
-    private void addTerm(CompletionTerm ct, List<CompletionTerm> startsWith,
-                         List<CompletionTerm> contains) {
+    private void addTerm(CompletionObject ct, List<CompletionObject> startsWith,
+                         List<CompletionObject> contains) {
       if (ct.isExactMatch()) // for syns as well? sure why not?
         startsWith.add(0,ct);
       else if (ct.isStartsWithMatch())
@@ -317,9 +317,9 @@ public class CompListSearcher {
         contains.add(ct);
     }
 
-//     private Vector<CompletionTerm> getVector() { 
+//     private Vector<CompletionObject> getVector() { 
 //       //startsWithTerms.addAll(containTerms); return startsWithTerms; 
-//       Vector<CompletionTerm> sortedTerms = new Vector<CompletionTerm>();
+//       Vector<CompletionObject> sortedTerms = new Vector<CompletionObject>();
 //       sortedTerms.addAll(startsWithTerms);
 //       sortedTerms.addAll(containTerms);
 //       sortedTerms.addAll(startsWithSyns);
@@ -329,9 +329,9 @@ public class CompListSearcher {
 //       return sortedTerms;
 //     }
 
-    private List<CompletionTerm> getList() {
+    private List<CompletionObject> getList() {
       //startsWithTerms.addAll(containTerms); return startsWithTerms;
-      List<CompletionTerm> sortedTerms = new ArrayList<CompletionTerm>();
+      List<CompletionObject> sortedTerms = new ArrayList<CompletionObject>();
       sortedTerms.addAll(startsWithTerms);
       sortedTerms.addAll(containTerms);
       sortedTerms.addAll(startsWithSyns);
