@@ -39,8 +39,8 @@ public class SoapAdapter implements QueryableDataAdapterI {
           String comm = get(c,"comm");
           String own = get(c,"userName");
           String e = get(c,"E");
-          //String q = get(c,"Q");
-          String q = "http://purl.org/obo/owl/PATO#PATO_0000639";
+          String q = get(c,"Q");
+          //String q = "http://purl.org/obo/owl/PATO#PATO_0000639";
           String e2 = get(c,"E2");
           String rawIm = get(c,"imagename"); // imagename?
           String warpIm = null; // add to config
@@ -74,6 +74,8 @@ public class SoapAdapter implements QueryableDataAdapterI {
       if (cf.isTerm())
         v = oboToCkbId(v);
       
+      if (v==null || v.equals("")) v = null;
+      
       log().debug("field "+ fieldName+" val "+v);
       return v;
     }
@@ -81,7 +83,7 @@ public class SoapAdapter implements QueryableDataAdapterI {
   }
 
   private String oboToCkbId(String oboId) {
-    if (oboId==null || oboId.equals("")) return oboId; // ??
+    if (oboId==null || oboId.equals("")) return null; // oboId; // ??
     try {
       String ckbId = owlAdapter.getURI(oboId).toString();
       log().debug("converted "+oboId+" to "+ckbId);
