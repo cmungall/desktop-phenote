@@ -363,7 +363,10 @@ public class Ontology {
     // NamespaceQuery makes OBOClasses, need to change to make OBOObjects!
     // or make new query
     //NamespaceQuery nsQuery = new NamespaceQuery(spacesArray);
-    NamespaceObjQuery nsQuery = new NamespaceObjQuery(spacesArray);
+    boolean justTerms = true; // terms no rels
+    if (ontologyConfig!=null && ontologyConfig.isPostCompRel())
+      justTerms = false; // just rels/props, no terms
+    NamespaceObjQuery nsQuery = new NamespaceObjQuery(justTerms,spacesArray);
     // sortById is really a hack so zfin can have stages sorted (which happen to be
     // sorted by id), obo needs to have a sorting thingy
     if (sortById) nsQuery.setComparator(new IdComparator()); // inner class
