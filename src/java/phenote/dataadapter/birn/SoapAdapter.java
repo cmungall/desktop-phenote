@@ -21,6 +21,7 @@ import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterListI;
 import phenote.datamodel.CharFieldException;
+import phenote.datamodel.TermNotFoundException;
 import phenote.dataadapter.DataAdapterEx;
 import phenote.dataadapter.QueryableDataAdapterI;
 
@@ -50,10 +51,14 @@ public class SoapAdapter implements QueryableDataAdapterI {
 
           String id = ws.createPhenoTypeFromSmartAtlas
             (poly,isCoronal,comm,own,e,q,e2,rawIm,warpIm,thumb,0,imRegId);
-          if (id==null)
+          if (id==null) {
             log().error("Commit failed, got null id from ckb/soap");
-          else
+            return;
+          }
+          else {
             log().info("Commit ok, got id "+id);
+            setId(id,c);
+          }
           
         }
         catch (RemoteException e) { log().error("soap failed "+e); }
@@ -80,6 +85,13 @@ public class SoapAdapter implements QueryableDataAdapterI {
       return v;
     }
     catch (CharFieldException e) { log().error("Config error "+e); return null; }
+  }
+
+  /** commit suceeded, got id from commit, set it in phenote datamodel */
+  private void setId(String id, CharacterI c) {
+    try { c.setValue("CKB_ID",id); }
+    catch (CharFieldException e) { log().error("Failed to set ckb id in phenote "+e); }
+    catch (TermNotFoundException x) { log().error(x); } // shouldnt happen
   }
 
   private String oboToCkbId(String oboId) {
