@@ -27,46 +27,82 @@ import phenote.dataadapter.QueryableDataAdapterI;
 
 public class SoapAdapter implements QueryableDataAdapterI {
 
+  private static final String CKB_ID_FIELD = "CKB_ID";
+
   private OWLAdapter owlAdapter = new OWLAdapter();
 
   public void commit(CharacterListI charList) {
-    PhenoWSService soap = new PhenoWSServiceLocator();
-    try {
-      PhenoWS ws = soap.getphenoWSPort();
-      for (CharacterI c : charList.getList()) {
-        try {
-          boolean isCoronal = isCoronal(c); // need config field for this?
-          String poly = get(c,"coordinates");
-          String comm = get(c,"comm");
-          String own = get(c,"userName");
-          String e = get(c,"E");
-          String q = get(c,"Q");
-          //String q = "http://purl.org/obo/owl/PATO#PATO_0000639";
-          String e2 = get(c,"E2");
-          String rawIm = get(c,"imagename"); // imagename?
-          String warpIm = null; // add to config
-          String thumb = null;
-          int sliceId = getSliceId(c);
-          String imRegId = get(c,"regions"); // regions? int?
 
-          String id = ws.createPhenoTypeFromSmartAtlas
-            (poly,isCoronal,comm,own,e,q,e2,rawIm,warpIm,thumb,0,imRegId);
-          if (id==null) {
-            log().error("Commit failed, got null id from ckb/soap");
-            return;
-          }
-          else {
-            log().info("Commit ok, got id "+id);
-            setId(id,c);
-          }
-          
-        }
-        catch (RemoteException e) { log().error("soap failed "+e); }
-      }
-    } 
+    try {
+      PhenoWSService soap = new PhenoWSServiceLocator();
+      PhenoWS ws = soap.getphenoWSPort();
+      doDeletes(ws); // go thru transaction list
+      doInsertsAndUpdates(ws,charList);
+    }
     catch (ServiceException e) {
       log().error("soap failed "+e);
     }
+    
+    // clear out transactions!
+
+  }
+
+  /** do inserts & updates to database with soap */
+  private void doInsertsAndUpdates(PhenoWS ws, CharacterListI charList) {
+    for (CharacterI c : charList.getList()) {
+      // new character -> insert
+      if (isNew(c)) insertNewCharacter(ws,c);
+      // existing character -> update, check if character has actually changed?
+      else updateCharacter(ws,c);
+    }
+  }
+
+  private boolean isNew(CharacterI c) {
+    return !c.hasValue(CKB_ID_FIELD);
+  }
+
+  /** new character (no db id), insert into ckb via soap */
+  private void insertNewCharacter(PhenoWS ws, CharacterI c) {
+    try {
+      boolean isCoronal = isCoronal(c); // need config field for this?
+      String poly = get(c,"coordinates");
+      String comm = get(c,"comm");
+      String own = get(c,"userName");
+      String e = get(c,"E");
+      String q = get(c,"Q");
+      String e2 = get(c,"E2");
+      String rawIm = get(c,"imagename"); // imagename?
+      String warpIm = null; // add to config
+      String thumb = null;
+      int sliceId = getSliceId(c);
+      String imRegId = get(c,"regions"); // regions? int?
+      
+      String id = ws.createPhenoTypeFromSmartAtlas
+        (poly,isCoronal,comm,own,e,q,e2,rawIm,warpIm,thumb,0,imRegId);
+      if (id==null) {
+        log().error("Commit failed, got null id from ckb/soap");
+        return;
+      }
+      else {
+        log().info("Commit ok, got id "+id);
+        setId(id,c);
+      }
+      
+    }
+    catch (RemoteException e) { log().error("soap failed "+e); }
+  }
+
+
+  /** character has db id, therefore already exists in database, so update it
+      should we check if theres actually been changes to char? */
+  private void updateCharacter(PhenoWS ws, CharacterI c) {
+    log().info("Updates not yet implemented");
+  }
+
+  /** go thru delete transactions and send delete to soap if there is a valid 
+      ckb id */
+  private void doDeletes(PhenoWS ws) {
+    log().info("Deletes not yet implemented");
   }
 
   private String get(CharacterI c, String fieldName) {
@@ -89,7 +125,7 @@ public class SoapAdapter implements QueryableDataAdapterI {
 
   /** commit suceeded, got id from commit, set it in phenote datamodel */
   private void setId(String id, CharacterI c) {
-    try { c.setValue("CKB_ID",id); }
+    try { c.setValue(CKB_ID_FIELD,id); }
     catch (CharFieldException e) { log().error("Failed to set ckb id in phenote "+e); }
     catch (TermNotFoundException x) { log().error(x); } // shouldnt happen
   }
