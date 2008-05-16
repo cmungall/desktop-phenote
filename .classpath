@@ -2,68 +2,92 @@
 <classpath>
 	<classpathentry kind="src" path="src/java"/>
 	<classpathentry kind="src" path="test/java"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="jars/BrowserLauncher2-10rc4.jar"/>
-	<classpathentry kind="lib" path="jars/commons-beanutils-1.6.jar"/>
-	<classpathentry kind="lib" path="jars/commons-lang-2.1.jar"/>
-	<classpathentry kind="lib" path="jars/commons-logging-1.0.4.jar"/>
-	<classpathentry kind="lib" path="jars/glazedlists-1.7.0_java15.jar">
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="jars/BrowserLauncher2-10rc4.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/commons-beanutils-1.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/commons-lang-2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/commons-logging-1.0.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/glazedlists-1.7.0_java15.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="http://publicobject.com/glazedlists/glazedlists-1.7.0/api/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="jars/jdom.jar"/>
-	<classpathentry kind="lib" path="jars/jebl-0.4.jar"/>
-	<classpathentry kind="lib" path="jars/jetty-6.1.4.jar"/>
-	<classpathentry kind="lib" path="jars/jetty-util-6.1.4.jar"/>
-	<classpathentry kind="lib" path="jars/jh.jar"/>
-	<classpathentry kind="lib" path="jars/jhindexer.jar"/>
-	<classpathentry kind="lib" path="jars/jlfgr-1_0.jar"/>
-	<classpathentry kind="lib" path="jars/jnlp.jar"/>
-	<classpathentry kind="lib" path="jars/jsp-api.jar"/>
-	<classpathentry kind="lib" path="jars/jsr173_1.0_api.jar"/>
-	<classpathentry kind="lib" path="jars/jstl-1.1.jar"/>
-	<classpathentry kind="lib" path="jars/junit-4.0.jar"/>
-	<classpathentry kind="lib" path="jars/jwf-1.0.1.jar"/>
-	<classpathentry kind="lib" path="jars/layouts.jar"/>
-	<classpathentry kind="lib" path="jars/log4j-1.2.13.jar"/>
-	<classpathentry kind="lib" path="jars/phenoteconfigbeans.jar"/>
-	<classpathentry kind="lib" path="jars/phenoxmlbeans.jar"/>
-	<classpathentry kind="lib" path="jars/postgresql-8.2-504.jdbc3.jar"/>
-	<classpathentry kind="lib" path="jars/quaqua.jar"/>
-	<classpathentry kind="lib" path="jars/quartz-1.5.2.jar"/>
-	<classpathentry kind="lib" path="jars/shrimp.jar"/>
-	<classpathentry kind="lib" path="jars/spring.jar"/>
-	<classpathentry kind="lib" path="jars/standard-1.1.jar"/>
-	<classpathentry kind="lib" path="jars/struts-1.2.9.jar"/>
-	<classpathentry kind="lib" path="jars/sugilayout.jar"/>
-	<classpathentry kind="lib" path="jars/swing-layout.jar"/>
-	<classpathentry kind="lib" path="jars/swingx-2007_10_14.jar">
+	<classpathentry exported="true" kind="lib" path="jars/jdom.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/jebl-0.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/jetty-6.1.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/jetty-util-6.1.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/jh.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/jhindexer.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/jlfgr-1_0.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/jnlp.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/jsp-api.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/jsr173_1.0_api.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/jstl-1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/junit-4.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/jwf-1.0.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/layouts.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/log4j-1.2.13.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/phenoteconfigbeans.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/phenoxmlbeans.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/postgresql-8.2-504.jdbc3.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/quaqua.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/quartz-1.5.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/shrimp.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/spring.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/standard-1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/struts-1.2.9.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/sugilayout.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/swing-layout.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/swingx-2007_10_14.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="http://swinglabs.org/hudson/job/SwingX%20Continuous%20Build/javadoc/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="jars/swixml.jar"/>
-	<classpathentry kind="lib" path="jars/te-common.jar"/>
-	<classpathentry kind="lib" path="jars/tomcat-servlet.jar"/>
-	<classpathentry kind="lib" path="jars/treemap.jar"/>
-	<classpathentry kind="lib" path="jars/xbean.jar"/>
-	<classpathentry kind="lib" path="jars/eutils.jar"/>
-	<classpathentry kind="lib" path="jars/macify-1.1.jar"/>
-	<classpathentry kind="lib" path="jars/ProtocolEditor.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/BBOP"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/OBO"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/OBO-Edit2"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/OBDAPI"/>
-	<classpathentry kind="lib" path="jars/axis.jar">
+	<classpathentry exported="true" kind="lib" path="jars/swixml.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/te-common.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/tomcat-servlet.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/treemap.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/xbean.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/eutils.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/macify-1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/ProtocolEditor.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/axis.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="file:/axis-1_4/docs/apiDocs/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="jars/commons-discovery-0.2.jar"/>
-	<classpathentry kind="lib" path="jars/jaxrpc.jar"/>
-	<classpathentry kind="lib" path="jars/saaj.jar"/>
-	<classpathentry kind="lib" path="jars/wsdl4j-1.5.1.jar"/>
-	<classpathentry kind="lib" path="jars/mysql-connector-java-5.1.5-bin.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/commons-discovery-0.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/jaxrpc.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/saaj.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/wsdl4j-1.5.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/obdapi.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/batik-anim.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/batik-awt-util.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/batik-bridge.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/batik-css.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/batik-dom.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/batik-ext.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/batik-gvt.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/batik-parser.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/batik-script.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/batik-svg-dom.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/batik-svggen.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/batik-util.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/batik-xml.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/birn-soap.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/commons-cli-1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/idw-gpl.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/mysql-connector-java-5.1.6-bin.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/obo.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/obo-vocab.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/ols-client.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/owlapi-api.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/piccolo.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/piccolox.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/tablelayout.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/xml-apis.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/xml-apis-ext.jar"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/BBOP"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/OBO-Edit2"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
