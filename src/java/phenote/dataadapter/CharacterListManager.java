@@ -45,6 +45,17 @@ public class CharacterListManager {
     groupToListMan.clear();
   }
 
+  /** should this clear only main group or all groups - 
+      for now all groups i guess */
+  public static void clearAnnotations() {
+    for (String group : groupToListMan.keySet()) {
+      CharacterListManager m = getCharListMan(group);
+      m.clear();
+    }
+  }
+
+
+
   public static CharacterListManager getCharListMan(String group) {
     if (group == null) group = CharFieldManager.DEFAULT_GROUP; // ??
     if (groupToListMan.get(group) == null) {
@@ -81,7 +92,8 @@ public class CharacterListManager {
 
   public void clear() {
     characterList.clear();
-    // notify listeners???
+    // notify listeners??? - i think so, need to clear out gui
+    fireChangeEvent(this,characterList); // empty char list
   }
   
   public File getCurrentDataFile() {

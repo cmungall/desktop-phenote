@@ -17,6 +17,7 @@ import org.bbop.framework.GUIManager;
 import org.bbop.swing.DynamicMenu;
 
 import phenote.config.Config;
+import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.LoadSaveManager;
 import phenote.dataadapter.OntologyMakerI;
 import phenote.gui.actions.MakeOntolAction;
@@ -46,21 +47,10 @@ public class FileMenu extends DynamicMenu {
 
   @SuppressWarnings("serial")
   private void init() {
-    final Action openAction = new AbstractAction("Open...") {
-      public void actionPerformed(ActionEvent e) {
-        if (!Config.inst().hasDataAdapters()) {
-          log().error("No file data adapter to load/save with");
-          return;
-        }
-        LoadSaveManager.inst().loadData();
-      }
-      @Override
-      public boolean isEnabled() {
-        return Config.inst().hasDataAdapters();
-      }  
-    };
-    openAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-    add(new JMenuItem(openAction));
+
+    addOpenItem();
+
+    addClearAnnotsItem();
 
     add(new JSeparator());
     
@@ -135,6 +125,48 @@ public class FileMenu extends DynamicMenu {
       add(m);
     }
     
+  }
+
+  /** Open Menu item, for getting new data */
+  private void addOpenItem() {
+    final Action openAction = new AbstractAction("Open...") {
+      public void actionPerformed(ActionEvent e) {
+        if (!Config.inst().hasDataAdapters()) {
+          log().error("No file data adapter to load/save with");
+          return;
+        }
+        LoadSaveManager.inst().loadData();
+      }
+      @Override
+      public boolean isEnabled() {
+        return Config.inst().hasDataAdapters();
+      }  
+    };
+    
+    openAction.putValue(Action.ACCELERATOR_KEY,getKeyStroke(KeyEvent.VK_O));
+    add(new JMenuItem(openAction));
+
+  }
+  
+  private KeyStroke getKeyStroke(int keyCode) {
+    int modifiers =  Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+    return KeyStroke.getKeyStroke(keyCode,modifiers);
+  }
+
+  /** Menu to clear out all annotations, start anew */
+  private void addClearAnnotsItem() {
+    JMenuItem clear = new JMenuItem("Clear All Annotations");
+    clear.addActionListener(new ClearAnnots());
+    add(clear);
+  }
+  
+
+  /** clear out all annots - should this bring up a are you sure popup?
+      also clears transactions */
+  private class ClearAnnots implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      CharacterListManager.clearAnnotations(); // ??
+    }
   }
 
   // for testing

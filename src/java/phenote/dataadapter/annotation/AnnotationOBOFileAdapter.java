@@ -21,10 +21,9 @@ import phenote.datamodel.CharacterListI;
 import phenote.error.ErrorEvent;
 import phenote.error.ErrorManager;
 
-/** Originated with PhenoSyntaxFileAdapter and modified.  Writes the basic text to 
- *  a file, with 'tab' delimiters.  First line is column headings, only printed 
- *  once.
- *  e.g. E=head Q=large */
+/** I think chris wrote this? reads & writes obo files with annotations,
+ I believe this currently writes out the whole obo session terms and all,
+ which need to be filtered out */
 
 public class AnnotationOBOFileAdapter extends AbstractFileAdapter {
 
@@ -100,7 +99,8 @@ public class AnnotationOBOFileAdapter extends AbstractFileAdapter {
     previousFile = file;
     
     OBOFileAdapter fa = new OBOFileAdapter();
-    OBOFileAdapter.OBOAdapterConfiguration cfg = new OBOFileAdapter.OBOAdapterConfiguration();
+    OBOFileAdapter.OBOAdapterConfiguration cfg =
+      new OBOFileAdapter.OBOAdapterConfiguration();
     cfg.setWritePath(file.getAbsolutePath());
     //cfg.setBasicSave(false);     
     cfg.setAllowDangling(true); 
