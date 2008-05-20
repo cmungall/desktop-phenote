@@ -16,6 +16,7 @@ import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterList;
 import phenote.datamodel.CharacterListI;
 import phenote.datamodel.Comparison;
+import phenote.edit.EditManager; // not sure if EM should be used here
 
 /** Contains current CharacterList. sends out CharacterListChanged events
     when character list has changed */
@@ -52,6 +53,7 @@ public class CharacterListManager {
       CharacterListManager m = getCharListMan(group);
       m.clear();
     }
+    EditManager.clearAllGroupTransactions();
   }
 
 

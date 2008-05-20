@@ -60,6 +60,12 @@ public class EditManager {
     groupToEditMan.clear();
   }
 
+  /** clear transactions for all groups */
+  public static void clearAllGroupTransactions() {
+    for (String group : groupToEditMan.keySet())
+      groupToEditMan.get(group).clearTransactions();
+  }
+
   /** clear out all transactions - this should be done after every writeback shouldnt it
       should be done by default i think */
   public void clearTransactions() {
