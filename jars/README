@@ -2,6 +2,11 @@ axis - (NW) needed for the eutils software from ncbi
 
 batik* svg graphichs for oboedit graphs (phenote2)
 
+bbop.jar - part of bbop/obo/oboedit trio of jars
+
+birn-soap.jar - for birn soap adapter that talks to birns ckb database via soap.
+
+
 BrowserLauncher2 (added by Mark Gibson MG) is used from term info window http links to launch webpage in
 an external browser
 
