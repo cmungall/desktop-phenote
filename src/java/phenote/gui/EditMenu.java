@@ -18,6 +18,7 @@ import phenote.gui.actions.UndoAction;
 
 
 //import phenote.gui.prefswindow.PrefsWindowController; ???
+// delete -> taken over by menu.EditMenu?
 
 class EditMenu extends JMenu {
 

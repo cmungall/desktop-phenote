@@ -53,7 +53,10 @@ public class CharacterListManager {
       CharacterListManager m = getCharListMan(group);
       m.clear();
     }
+    // clear out transactions
     EditManager.clearAllGroupTransactions();
+    // add blank row
+    EditManager.inst().addNewCharacter();
   }
 
 

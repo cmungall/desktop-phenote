@@ -18,6 +18,9 @@ import phenote.gui.actions.OpenFileAction;
 import phenote.gui.actions.SaveAsFileAction;
 import phenote.gui.GetInfo;
 
+
+/** This is old and only used by old non-plus regular phenote,
+    phenote-plus uses phenote.gui.menu.FileMenu */
 class FileMenu extends JMenu {
 
   private JMenuItem loadMenuItem;
