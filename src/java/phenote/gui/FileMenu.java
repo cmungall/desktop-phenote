@@ -20,7 +20,9 @@ import phenote.gui.GetInfo;
 
 
 /** This is old and only used by old non-plus regular phenote,
-    phenote-plus uses phenote.gui.menu.FileMenu */
+    phenote-plus uses phenote.gui.menu.FileMenu
+    ok so old is now using new menu.FileMenu so this should probably be removed
+    from svn once the new file menu checks out ok on old phenote*/
 class FileMenu extends JMenu {
 
   private JMenuItem loadMenuItem;

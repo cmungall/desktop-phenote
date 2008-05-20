@@ -8,6 +8,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+/** this is old regular phenote - not used in plus - phase out eventually */
 public class MenuManager {
   
   private JMenuBar menuBar;
@@ -52,16 +53,18 @@ public class MenuManager {
 
   private void initMenus(JFrame frame) {
     this.menuBar = new JMenuBar();
-    try {
-			fileMenu = new FileMenu();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//     try {
+// 			fileMenu = new FileMenu();
+// 		} catch (FileNotFoundException e) {
+// 			// TODO Auto-generated catch block
+// 			e.printStackTrace();
+// 		}
+//    this.menuBar.add(fileMenu);
+
     editMenu = new EditMenu();
+    menuBar.add(new phenote.gui.menu.FileMenu()); // phenote2 file menu
     settingsMenu = new SettingsMenu();
     helpMenu = new HelpMenu();
-    this.menuBar.add(fileMenu);
     this.menuBar.add(editMenu);
     this.menuBar.add(settingsMenu);
     this.menuBar.add(helpMenu);

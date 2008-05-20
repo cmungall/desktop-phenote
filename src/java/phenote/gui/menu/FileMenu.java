@@ -48,12 +48,15 @@ public class FileMenu extends DynamicMenu {
   @SuppressWarnings("serial")
   private void init() {
 
+    // OPEN
     addOpenItem();
 
+    // CLEAR
     addClearAnnotsItem();
 
     add(new JSeparator());
     
+    // SAVE
     final Action saveAction = new AbstractAction("Save") {
       public void actionPerformed(ActionEvent e) {
         LoadSaveManager.inst().saveData(true);
@@ -62,6 +65,7 @@ public class FileMenu extends DynamicMenu {
     saveAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
     add(new JMenuItem(saveAction));
 
+    // SAVE AS
     final Action saveAsAction = new AbstractAction("Save As...") {
       public void actionPerformed(ActionEvent e) {
         if (!Config.inst().hasDataAdapters()) {
@@ -86,6 +90,7 @@ public class FileMenu extends DynamicMenu {
 //  export.addActionListener(actionListener);
 //  add(export);
     
+    // EXIT
     if (!Phenote.isRunningOnMac()) {
       // we don't want to add "Exit" to the File menu on Mac
       // instead there is "Quit" under the automatic Phenote menu
@@ -106,19 +111,9 @@ public class FileMenu extends DynamicMenu {
         } });
       add(exit);
     }
-
-    addSeparator();
-    JMenuItem preferences = new JMenuItem("Preferences");
-    preferences.addActionListener(new ActionListener() {
-    	public void actionPerformed(ActionEvent e) {
-    		GetInfo getInfo = new GetInfo();
-//    		getInfo.setVisible(true);
-//    		getInfo.setEnabled(true);
-//    		getInfo.setAlwaysOnTop(true);
-    	}
-    });
-    add(preferences);
-
+    
+    // PREFERENCES this doesnt work - throws null pointer - commenting out for now
+    //addPreferencesItem();
     
     for (OntologyMakerI om : Config.inst().getOntMakers()) {
       JMenuItem m = new JMenuItem(new MakeOntolAction(om));
@@ -158,6 +153,21 @@ public class FileMenu extends DynamicMenu {
     JMenuItem clear = new JMenuItem("Clear All Annotations");
     clear.addActionListener(new ClearAnnots());
     add(clear);
+  }
+
+  /** this currently doesnt work - throws null pointer - commented out above */
+  private void addPreferencesItem() {
+    addSeparator();
+    JMenuItem preferences = new JMenuItem("Preferences");
+    preferences.addActionListener(new ActionListener() {
+    	public void actionPerformed(ActionEvent e) {
+    		GetInfo getInfo = new GetInfo();
+//    		getInfo.setVisible(true);
+//    		getInfo.setEnabled(true);
+//    		getInfo.setAlwaysOnTop(true);
+    	}
+    });
+    add(preferences);
   }
   
 
