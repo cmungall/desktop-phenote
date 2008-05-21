@@ -175,7 +175,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
   @Override
   protected void installSystemListeners() {
-    GUIManager.addVetoableShutdownListener(new DirtyDocumentIndicator());
+    GUIManager.addVetoableShutdownListener(DirtyDocumentIndicator.inst());
   }
 
   @Override

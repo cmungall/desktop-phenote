@@ -26,21 +26,28 @@ import phenote.main.Phenote2;
  * the document.  Implements VetoableShutdownListener to be used by GUIManager when a user attempts to quit.
  * @author Jim Balhoff
  */
-public class DirtyDocumentIndicator implements CharChangeListener, CharListChangeListener, LoadSaveListener, VetoableShutdownListener {
+public class DirtyDocumentIndicator implements CharChangeListener, CharListChangeListener,
+  LoadSaveListener, VetoableShutdownListener {
   
   final private static String WINDOW_MODIFIED = "windowModified";
   private boolean edited = false;
   final private static String BULLET = String.format("%c", '\u2022'); 
-  
-  public DirtyDocumentIndicator() {
+  private static DirtyDocumentIndicator singleton;
+
+  private DirtyDocumentIndicator() {
     this.registerListeners();
+  }
+
+  public static DirtyDocumentIndicator inst() {
+    if (singleton == null) singleton = new DirtyDocumentIndicator();
+    return singleton;
   }
 
   /** charChanged comes from user edit, so set edited to true, BUT... if just an
       Add - adding a blank row - its an irrelevant edit and not really a dirtying
       of the document, so ignore adds */
   public void charChanged(CharChangeEvent e) {
-    if (e.isAdd()) return;
+    if (e.isAdd()) return; // ignore adding blank row
     this.edited = true;
     this.updateDirtyDocumentStatus();
   }
@@ -57,26 +64,50 @@ public class DirtyDocumentIndicator implements CharChangeListener, CharListChang
     this.updateDirtyDocumentStatus();
   }
   
+  /** Currently this returns true if there has been any non-add(add blank row) edits
+      However if one does an edit and then does undo this will still return true.
+      Even better would be to check the Transaction list in EditManager for non-add
+      edits */
   public boolean isDocumentDirty() {
     return this.edited;
   }
-  
+  /** from VetoableShutdownListener interface, this method is called from plus/obo/bbop
+      framework on exit, if document is dirty it calls up user dialog to query about
+      saving changes and cancelling exit, if false is returned(cancel) then shutdown
+      is cancelled/vetoed */
   public boolean willShutdown() {
     if (this.isDocumentDirty()) {
-      return this.runDialog();
+      return this.runDialog(true);
     } else {
       return true;
     }
   }
   
-  private boolean runDialog() {
+  /** brings up dialog asking user if they want to save changes or cancel operation
+      (shutdown or new), returning false indicates cancellation
+      shutdown is true if this is for shutdown, and false for clearing out data
+  */
+  private boolean runDialog(boolean shutdown) {
     final String[] options = {"Save", "Cancel", "Don't Save"};
-    final int result = JOptionPane.showOptionDialog(GUIManager.getManager().getFrame(), "You have unsaved changes.  Would you like to save before quitting?", "", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, options, "Save");
+    String saveClear = shutdown ? "quitting?" : "clearing?";
+    String m = "You have unsaved changes.  Would you like to save before "+saveClear;
+    final int result = 
+      JOptionPane.showOptionDialog(GUIManager.getManager().getFrame(),m, "",
+                                   JOptionPane.YES_NO_CANCEL_OPTION,
+                                   JOptionPane.WARNING_MESSAGE, null, options, "Save");
     if (result == 0) {
       LoadSaveManager.inst().saveData(true);
       return true;
     } else if (result == 1) {
       return false;
+    } else {
+      return true;
+    }
+  }
+
+  public boolean okToClearData() {
+    if (this.isDocumentDirty()) {
+      return this.runDialog(false);
     } else {
       return true;
     }

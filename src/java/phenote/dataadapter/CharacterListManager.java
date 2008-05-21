@@ -16,6 +16,7 @@ import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterList;
 import phenote.datamodel.CharacterListI;
 import phenote.datamodel.Comparison;
+import phenote.edit.DirtyDocumentIndicator;
 import phenote.edit.EditManager; // not sure if EM should be used here
 
 /** Contains current CharacterList. sends out CharacterListChanged events
@@ -47,8 +48,10 @@ public class CharacterListManager {
   }
 
   /** should this clear only main group or all groups - 
-      for now all groups i guess */
+      for now all groups i guess, checks for unsaved data and asks user if ok */
   public static void clearAnnotations() {
+    // check for unsaved and allow cancel - popup
+    if (!DirtyDocumentIndicator.inst().okToClearData()) return;
     for (String group : groupToListMan.keySet()) {
       CharacterListManager m = getCharListMan(group);
       m.clear();
