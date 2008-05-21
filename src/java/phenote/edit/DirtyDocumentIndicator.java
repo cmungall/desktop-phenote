@@ -36,7 +36,11 @@ public class DirtyDocumentIndicator implements CharChangeListener, CharListChang
     this.registerListeners();
   }
 
+  /** charChanged comes from user edit, so set edited to true, BUT... if just an
+      Add - adding a blank row - its an irrelevant edit and not really a dirtying
+      of the document, so ignore adds */
   public void charChanged(CharChangeEvent e) {
+    if (e.isAdd()) return;
     this.edited = true;
     this.updateDirtyDocumentStatus();
   }

@@ -167,6 +167,31 @@ public class FileMenu extends DynamicMenu {
       CharacterListManager.clearAnnotations(); // ??
     }
   }
+  
+  /** EXIT - are you sure you wanna exit?, dont add for mac */
+  private void addExitItem() {
+    // we don't want to add "Exit" to the File menu on Mac
+    // instead there is "Quit" under the automatic Phenote menu
+    if (Phenote.isRunningOnMac()) return;
+
+    addSeparator();
+    
+    JMenuItem exit = new JMenuItem("Exit") {
+        @Override
+        public void setEnabled(boolean b) {
+          // TODO Auto-generated method stub
+          super.setEnabled(b);
+        }
+      };
+    exit.setEnabled(true);
+    exit.setActionCommand("exit");
+    exit.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+          GUIManager.exit(0); 
+        } });
+    add(exit);
+  }
+
 
   /** this currently doesnt work - throws null pointer - commented out above */
   private void addPreferencesItem() {
