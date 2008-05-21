@@ -62,7 +62,7 @@ public class FileMenu extends DynamicMenu {
         LoadSaveManager.inst().saveData(true);
       }
     };
-    saveAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+    saveAction.putValue(Action.ACCELERATOR_KEY, getKeyStroke(KeyEvent.VK_S));
     add(new JMenuItem(saveAction));
 
     // SAVE AS
@@ -150,7 +150,7 @@ public class FileMenu extends DynamicMenu {
 
   /** Menu to clear out all annotations, start anew */
   private void addClearAnnotsItem() {
-    JMenuItem clear = new JMenuItem("Clear All Annotations");
+    JMenuItem clear = new JMenuItem("New");
     clear.addActionListener(new ClearAnnots());
     add(clear);
   }
