@@ -57,13 +57,7 @@ public class FileMenu extends DynamicMenu {
     add(new JSeparator());
     
     // SAVE
-    final Action saveAction = new AbstractAction("Save") {
-      public void actionPerformed(ActionEvent e) {
-        LoadSaveManager.inst().saveData(true);
-      }
-    };
-    saveAction.putValue(Action.ACCELERATOR_KEY, getKeyStroke(KeyEvent.VK_S));
-    add(new JMenuItem(saveAction));
+    addSaveItem();
 
     // SAVE AS
     final Action saveAsAction = new AbstractAction("Save As...") {
@@ -122,6 +116,18 @@ public class FileMenu extends DynamicMenu {
     
   }
 
+  /** Save to previously saved/loaded file name */
+  private void addSaveItem() {
+    final Action saveAction = new AbstractAction("Save") {
+        public void actionPerformed(ActionEvent e) {
+          LoadSaveManager.inst().saveData(true);
+        }
+      };
+    saveAction.putValue(Action.ACCELERATOR_KEY, getKeyStroke(KeyEvent.VK_S));
+    add(new JMenuItem(saveAction));
+  }
+
+
   /** Open Menu item, for getting new data */
   private void addOpenItem() {
     final Action openAction = new AbstractAction("Open...") {
@@ -154,6 +160,13 @@ public class FileMenu extends DynamicMenu {
     clear.addActionListener(new ClearAnnots());
     add(clear);
   }
+  /** clear out all annots - should this bring up a are you sure popup?
+      also clears transactions */
+  private class ClearAnnots implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      CharacterListManager.clearAnnotations(); // ??
+    }
+  }
 
   /** this currently doesnt work - throws null pointer - commented out above */
   private void addPreferencesItem() {
@@ -171,13 +184,6 @@ public class FileMenu extends DynamicMenu {
   }
   
 
-  /** clear out all annots - should this bring up a are you sure popup?
-      also clears transactions */
-  private class ClearAnnots implements ActionListener {
-    public void actionPerformed(ActionEvent e) {
-      CharacterListManager.clearAnnotations(); // ??
-    }
-  }
 
   // for testing
   public void clickLoad() {
