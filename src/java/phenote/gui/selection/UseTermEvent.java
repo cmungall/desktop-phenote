@@ -3,6 +3,7 @@ package phenote.gui.selection;
 import java.util.EventObject;
 
 import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOObject;
 
 /** im not sure if this belongs in selection package - a use term listener listens
     for UseTermEvents - this is from the term browser saying basically the user wants
@@ -11,10 +12,22 @@ import org.obo.datamodel.OBOClass;
     for an ok to actually edit the model */
 
 public class UseTermEvent extends EventObject {
-  private OBOClass term;
+  private OBOObject oboObject;
+  //private OBOClass term;
   public UseTermEvent(Object source,OBOClass term) {
     super(source);
-    this.term = term;
+    //this.term = term;
+    oboObject = term;
   }
-  public OBOClass getTerm() { return term; }
+  public UseTermEvent(Object source, OBOObject obj) {
+    super(source);
+    oboObject = obj;
+  }
+  /** if possible phase this out for getObject? */
+  public OBOClass getTerm() {
+    if (isTerm()) return (OBOClass)oboObject;
+    return null;
+  }
+  public boolean isTerm() { return oboObject instanceof OBOClass; }
+  public OBOObject getObject() { return oboObject; }
 }

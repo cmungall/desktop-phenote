@@ -56,6 +56,7 @@ import org.obo.datamodel.Link;
 import org.obo.datamodel.LinkDatabase;
 import org.obo.datamodel.LinkedObject;
 import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOObject;
 import org.obo.datamodel.OBOProperty;
 import org.obo.datamodel.OBORestriction;
 import org.obo.datamodel.OBOSession;
@@ -120,8 +121,8 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 	private static final Logger LOG = Logger.getLogger(TermInfo2.class);
 	
-	protected Map<OBOClass,Float> cachedAnnotationInformationContentByClass = new HashMap<OBOClass,Float>();
-	protected Map<OBOClass,Integer> cachedAnnotationCountByClass = new HashMap<OBOClass,Integer>();
+	protected Map<OBOObject,Float> cachedAnnotationInformationContentByClass = new HashMap<OBOObject,Float>();
+	protected Map<OBOObject,Integer> cachedAnnotationCountByClass = new HashMap<OBOObject,Integer>();
 	
 	
 	protected boolean includeImplicitAnnotations = false;
@@ -145,7 +146,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 
 	// content variables
-	private OBOClass currentOboClass = null;
+	private OBOObject currentOboClass = null;
 
 	private UseTermListener useTermListener;
 
@@ -591,7 +592,7 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 //	return entirePanel;
 //	}
 
-	private void setTextFromOboClass(OBOClass oboClass) {
+	private void setTextFromOboClass(OBOObject oboClass) {
 		TermInfo2.this.currentOboClass = oboClass;
 		
 		// basicInfoPanel
@@ -788,7 +789,7 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 	 * Puts the currently browsed term name into the component title <p>
 	 * @param oboClass the term being browsed 
 	 */
-	public void setComponentTitleFromOBOClass (OBOClass oboClass) {
+	public void setComponentTitleFromOBOObject (OBOObject oboClass) {
 		String title = "Term Info: "+ oboClass.getName();
     // this only works and only makes sense in phenote2 with docking framework
     // where each gui item has a border around it with a title - otherwise throws
@@ -816,7 +817,7 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 			//setUseTermListener(e.getUseTermListener());
 			termInfoToolbar.setUseTermListener(e.getUseTermListener());
 			//change the name of the item being browsed in the term info header
-			setComponentTitleFromOBOClass(e.getOboClass());
+			setComponentTitleFromOBOObject(e.getOboClass());
 			termInfoToolbar.setNaviButtonStatus();
 		}
 	}
@@ -913,14 +914,18 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 			for(Ontology o : CharFieldManager.inst().getAllOntologies()) {
 				OBOSession session = o.getOboSession();
 				IdentifiedObject io = session.getObject(id);
-				if (io instanceof OBOClass) {
-					OBOClass c = (OBOClass) io;
+				if (io instanceof OBOObject) {
+					OBOObject c = (OBOObject) io;
 					setTextFromOboClass(c);
-					setComponentTitleFromOBOClass(c);
+					setComponentTitleFromOBOObject(c);
 					addTermToNaviHistory(id);
 					termInfoToolbar.setNaviButtonStatus();
 					// send out term selection (non mouse over) for DAG view
-					selectionManager.selectTerm(TermInfo2.this, c, true);
+          // im guessing this is a work in progress as currently true for isHyperLink
+          // causes SelMan to not fireTermSelect and thus this does nothing
+          // whats the idea here?? - MG
+          if (c instanceof OBOClass)
+            selectionManager.selectTerm(TermInfo2.this, (OBOClass)c, true);
 					break;
 				}
 			}
@@ -932,7 +937,7 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 
 		}
 
-	}
+	} // end of inner class TermHyperlinkListener
 
 	private void makeSynPanel(Set<Synonym> someSet) {
 		// private JList makeSynList (Set someSet) {
@@ -1071,7 +1076,7 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 	private void makeDbxrefPanel(Set<Dbxref> someSet) {
 		int rowCount = 0;
 		String tempID;
-		OBOClass tempOboClass = null;
+		OBOObject tempOboClass = null;
 		String panelText = "<html>";
 		Dbxref dbxrefObj;
 		dbxrefPanel.removeAll(); // clear out the old ones
@@ -1187,11 +1192,11 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 				}
 				if (TermUtil.isClass(temp)) { // only show actual classes...not danglers
 					// only put in items that are not xps
-					if (TermUtil.isIntersection((OBOClass) temp)) // {
+					if (TermUtil.isIntersection((OBOObject) temp)) // {
 						panelText += "<i>";
 					panelText += "<a href='" + temp.getID() + "'>" + temp.getName()
 					+ "</a>";
-					if (TermUtil.isIntersection((OBOClass) temp)) // {
+					if (TermUtil.isIntersection((OBOObject) temp)) // {
 						panelText += "</i>";
 					// panelText += HtmlUtil.termLink(temp);
 					// panelText += temp.getName();
@@ -1306,7 +1311,7 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 	 * @param panel
 	 *          the panel to populate with this information
 	 */
-	private void makeObsPanel(OBOClass oboClass) {
+	private void makeObsPanel(OBOObject oboClass) {
 		// to display the replaced-bys and consider term links for obsoleted
 		// terms
 		// need to make this its own panel so i can hide/show it as well as
@@ -1501,7 +1506,7 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 		String id = getTermFromNaviHistory(naviIndex);
 		System.out.println(id);
 		try {
-			OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
+			OBOObject term = CharFieldManager.inst().getOboClass(id); // ex
 			setTextFromOboClass(term);
 			// send out term selection (non mouse over) for DAG view
 //			this.selectionManager.selectTerm(this, term, true);
@@ -1535,7 +1540,7 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 	
 	
 
-	float getAnnotationInformationContentByClass(OBOClass oboClass) {
+	float getAnnotationInformationContentByClass(OBOObject oboClass) {
 		OBOSession session = CharFieldManager.inst().getOboSession();
 		
 		if (!isIncludeExternalDatabaseAnnotations())
@@ -1572,7 +1577,7 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 		return 0;
 	}
 	
-	int getAnnotationCountByClass(OBOClass oboClass) {
+	int getAnnotationCountByClass(OBOObject oboClass) {
 		OBOSession session = CharFieldManager.inst().getOboSession();
 		
 		if (!isIncludeExternalDatabaseAnnotations())
@@ -1609,7 +1614,7 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 	}
 
 	
-	Collection<Annotation> getAnnotationsByClass(OBOClass oboClass) {
+	Collection<Annotation> getAnnotationsByClass(OBOObject oboClass) {
 		OBOSession session = CharFieldManager.inst().getOboSession();
 		Collection<Annotation> allAnnots = AnnotationUtil.getAnnotations(session);
 		Collection<Annotation> matches = new HashSet<Annotation>();

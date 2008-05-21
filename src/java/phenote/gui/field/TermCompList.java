@@ -398,6 +398,7 @@ public class TermCompList extends AbstractAutoCompList {
    */
   private class ComboUseTermListener implements UseTermListener {
     public void useTerm(UseTermEvent e) {
+      if (!e.isTerm()) return;
       if ((TermCompList.this.editModelEnabled()) && (TermCompList.this.getSelectedChars().isEmpty())) return;
       TermCompList.this.setOboClass(e.getTerm());
       if (TermCompList.this.editModelEnabled()) TermCompList.this.setModel(e.getTerm());

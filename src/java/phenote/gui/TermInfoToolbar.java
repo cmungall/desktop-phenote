@@ -19,6 +19,7 @@ import javax.swing.border.EtchedBorder;
 
 import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOObject;
 
 import phenote.gui.actions.BackAction;
 import phenote.gui.actions.ForwardAction;
@@ -42,7 +43,7 @@ public class TermInfoToolbar extends JToolBar {
   public static final int BUTTON_HEIGHT = 30;
   private static final int TERM_INFO_DEFAULT_WIDTH=350;
   private UseTermListener useTermListener;
-  private OBOClass currentOboClass = null;
+  private OBOObject currentOboClass = null;
   private final int BACKBUTTONINDEX = 0;
   private final int FORWARDBUTTONINDEX = 1;
   private final int FAVBUTTONINDEX = 2;
@@ -60,7 +61,7 @@ public class TermInfoToolbar extends JToolBar {
   	setVisible(true);
   }
 
-  public void setTermFieldText(OBOClass oboClass) {
+  public void setTermFieldText(OBOObject oboClass) {
   	termField.setText(oboClass.getName());
   	currentOboClass = oboClass;
   }
