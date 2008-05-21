@@ -77,7 +77,6 @@
 	<classpathentry exported="true" kind="lib" path="jars/birn-soap.jar"/>
 	<classpathentry exported="true" kind="lib" path="jars/commons-cli-1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="jars/idw-gpl.jar"/>
-	<classpathentry exported="true" kind="lib" path="jars/mysql-connector-java-5.1.6-bin.jar"/>
 	<classpathentry exported="true" kind="lib" path="jars/obo.jar"/>
 	<classpathentry exported="true" kind="lib" path="jars/obo-vocab.jar"/>
 	<classpathentry exported="true" kind="lib" path="jars/ols-client.jar"/>
