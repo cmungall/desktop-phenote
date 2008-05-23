@@ -11,7 +11,7 @@
 		<radiobutton id="exactModeRadioButton" text="Exact" action="setExactFilterMode" toolTipText="Match ontology term exactly">
 			<gridbagconstraints gridx="2" gridy="0" fill="GridBagConstraints.HORIZONTAL"/>
 		</radiobutton>
-		<radiobutton id="inheritModeRadioButton" text="Inherit" action="setInheritFilterMode" toolTipText="Match all descendant ontology terms">
+		<radiobutton id="broadModeRadioButton" text="Inherit" action="setInheritFilterMode" toolTipText="Match all descendant ontology terms">
 			<gridbagconstraints gridx="2" gridy="1" fill="GridBagConstraints.HORIZONTAL"/>		
 		</radiobutton>
 	</buttongroup>

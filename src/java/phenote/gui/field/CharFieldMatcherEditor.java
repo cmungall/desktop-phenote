@@ -4,12 +4,9 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
-import javax.swing.AbstractButton;
-import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -44,9 +41,8 @@ public class CharFieldMatcherEditor extends AbstractMatcherEditor<CharacterI> {
   private JPanel filterContainer; // initialized by swix
   private JComboBox charFieldPopup; // initialized by swix
   private JPanel inputFieldContainer; // initialized by swix
-  private ButtonGroup modeRadioButton; // initialized by swix
   private JRadioButton exactModeRadioButton;
-  private JRadioButton inheritModeRadioButton;
+  private JRadioButton broadModeRadioButton;
   private TermCompList ontologyInputField;
   private JTextField textInputField;
   private List<CharField> charFields;
@@ -64,7 +60,7 @@ public class CharFieldMatcherEditor extends AbstractMatcherEditor<CharacterI> {
     if (charFields.size() < 1) log().error("Filter field initialized with no charfields");
     this.loadPanelLayout();
     this.editedCharField = CharFieldMatcherEditor.ANY_FIELD;
-    this.filterMode = Mode.INHERIT;
+    this.filterMode = Mode.BROAD;
     this.ontologyInputField = (TermCompList)(CharFieldGui.makePostCompTermList(this.editedCharField, "", 0));
     this.ontologyInputField.setSelectionManager(new SelectionManager()); // make sure the TermCompList doesn't update the term info panel
     this.ontologyInputField.getJComboBox().setToolTipText(this.filterContainer.getToolTipText());
@@ -158,7 +154,7 @@ public class CharFieldMatcherEditor extends AbstractMatcherEditor<CharacterI> {
    */
   public void setInheritFilterMode() {
     if (this.ignoreActions) return;
-    this.setFilterMode(Mode.INHERIT);
+    this.setFilterMode(Mode.BROAD);
   }
   
   /**
@@ -185,7 +181,7 @@ public class CharFieldMatcherEditor extends AbstractMatcherEditor<CharacterI> {
   }
   
   private void fireChange() {
-    this.fireChanged(new CharFieldMatcher(this.editedCharField, this.filter, this.filterMode.equals(Mode.INHERIT)));
+    this.fireChanged(new CharFieldMatcher(this.editedCharField, this.filter, this.filterMode.equals(Mode.BROAD)));
   }
   
   private void updateGUI() {
@@ -193,16 +189,15 @@ public class CharFieldMatcherEditor extends AbstractMatcherEditor<CharacterI> {
     this.charFieldPopup.setModel(new DefaultComboBoxModel(new Vector<CharField>(this.charFields)));
     this.charFieldPopup.setSelectedItem(this.editedCharField);
     this.exactModeRadioButton.setSelected(this.filterMode.equals(Mode.EXACT));
-    this.inheritModeRadioButton.setSelected(this.filterMode.equals(Mode.INHERIT));
+    this.broadModeRadioButton.setSelected(this.filterMode.equals(Mode.BROAD));
     this.inputFieldContainer.removeAll();
-    for (AbstractButton button : Collections.list(modeRadioButton.getElements())) {
-      button.setVisible(this.editedCharField.isTerm());
-    }
     if (this.editedCharField.isTerm()) {
+      this.broadModeRadioButton.setText("Inherit");
       this.inputFieldContainer.add(this.ontologyInputField.getJComboBox());
       this.ontologyInputField.setText(this.labelForTermID(this.getFilter()));
       this.ontologyInputField.getCompListSearcher().setOntologies(this.editedCharField.getOntologyList());
     } else {
+      this.broadModeRadioButton.setText("Partial");
       this.textInputField.setText(this.getFilter());
       this.inputFieldContainer.add(this.textInputField);
     }
@@ -233,9 +228,9 @@ public class CharFieldMatcherEditor extends AbstractMatcherEditor<CharacterI> {
   /**
    * Mode for filtering characters with ontology terms.
    * EXACT matches only the same term.
-   * INHERIT matches the same term and any that are descendants.
+   * BROAD matches the same term and any that are descendants, or partial text.
    */
-  protected static enum Mode {EXACT, INHERIT}
+  protected static enum Mode {EXACT, BROAD}
   
   /**
    * Listens to actions from JComboBox of ontologyInputField.

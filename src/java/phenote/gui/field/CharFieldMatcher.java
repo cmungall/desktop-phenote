@@ -15,24 +15,24 @@ import phenote.datamodel.TermNotFoundException;
 import ca.odell.glazedlists.matchers.Matcher;
 
 /**
- * @author Jim Balhoff
  * A GlazedLists Matcher implementation which matches characters using a given charfield.
+ * @author Jim Balhoff
  */
 public class CharFieldMatcher implements Matcher<CharacterI> {
   
   private final CharField charField;
   private final String filter;
-  private final boolean inherit;
+  private final boolean broad;
 
   /**
    * @param charField The charfield examined to match characters.
    * @param filter The value required for character to match.  For free text charfields, this will match substrings.
-   * @param inherit Whether to match all descendants of an ontology term in addition to matching the exact ontology term.
+   * @param broad Whether to match all descendants of an ontology term in addition to matching the exact ontology term, or for text, whether to match substrings in addition to exactly.
    */
-  public CharFieldMatcher(CharField charField, String filter, boolean inherit) {
+  public CharFieldMatcher(CharField charField, String filter, boolean broad) {
     this.charField = charField;
     this.filter = filter;
-    this.inherit = inherit;
+    this.broad = broad;
   }
 
   public boolean matches(CharacterI character) {
@@ -49,7 +49,7 @@ public class CharFieldMatcher implements Matcher<CharacterI> {
       final CharFieldValue value = character.getValue(this.charField);
       final OBOClass candidateTerm = value.getTerm();
       final OBOClass filterTerm = CharFieldManager.inst().getOboClass(this.filter);
-      if (this.inherit) {
+      if (this.broad) {
         return this.termIsAncestorOfTerm(filterTerm, candidateTerm);
       } else {
         return filterTerm.equals(candidateTerm);
@@ -71,7 +71,11 @@ public class CharFieldMatcher implements Matcher<CharacterI> {
     } else {
       value = character.getValueString(this.charField);
     }
-    return this.matchFilterList(Arrays.asList(this.filter.split(" ")), value);
+    if (this.broad) {
+      return this.matchFilterList(Arrays.asList(this.filter.split(" ")), value);
+    } else {
+      return value.equals(this.filter);
+    }
   }
   
   /**

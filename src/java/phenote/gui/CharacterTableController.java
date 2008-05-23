@@ -352,6 +352,7 @@ public class CharacterTableController {
 	  this.tableColumnSaver.dispose();
 	  this.sortedCharacters = new SortedList<CharacterI>(this.getCharacterListManager().getCharacterList().getList(), new EverythingEqualComparator<CharacterI>());
 	  this.sortedCharacters.setMode(SortedList.AVOID_MOVING_ELEMENTS);
+	  this.sortChooser = new TableComparatorChooser<CharacterI>(characterTable, this.sortedCharacters, false);
 	  this.sortChooser.addSortActionListener(new SortListener());
 	  this.filteredCharacters.dispose();
 	  this.filteredCharacters = new FilterList<CharacterI>(this.sortedCharacters, this.filter);
@@ -515,6 +516,7 @@ public class CharacterTableController {
 	
 	private void setUpTableEditors() {
 	  for (CharField cf : fieldMan().getCharFieldListForGroup(this.representedGroup)) {
+	    if (cf.isList()) continue; // bad things happen if multiple characterlistfieldguis are made - should fix how this is designed
 	    final CharFieldGui cfg = CharFieldGui.makeCharFieldGui(cf, 0);
 	    final TableCellEditor editor = cfg.getTableCellEditor();
 	    if (editor == null) { continue; }
