@@ -97,7 +97,11 @@ ontology-file =
 uvic-graph = element uvic-graph { attribute enable { xsd:boolean } }
 
 ## Whether to enable DataInputServlet - used by SmartAtlas
-data-input-servlet = element data-input-servlet { attribute enable { xsd:boolean } }
+data-input-servlet = element data-input-servlet {
+   attribute enable { xsd:boolean },
+   ## which http port to use
+   attribute port { xsd:int }
+}
 
 term-history = element term-history { attribute enable { xsd:boolean } }
 

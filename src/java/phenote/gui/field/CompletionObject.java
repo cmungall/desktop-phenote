@@ -33,7 +33,32 @@ class CompletionObject {
 
   OBOObject getOboObject() { return obj; }
 
-  public String toString() { return obj.getName(); }
+  public String toString() {
+    return getCompListDisplayString();
+  }
+
+  private String getCompListDisplayString() {
+    final StringBuffer display = new StringBuffer(this.getCompListDisplayName());
+    final String appends = this.getCompListDisplaySuffix();
+    final int allowedLength = 61 - appends.length(); // keep room for appends
+    if (display.length() > allowedLength) {
+      display.setLength(allowedLength-2); // -2 for ... ???
+      display.append("...");
+    }
+    display.append(appends);
+    return display.toString();
+  }
+
+  private String getCompListDisplayName() {
+    return (this.isSynMatch()) ? this.synMatchString : this.getName(); 
+  }
+  private String getCompListDisplaySuffix() {
+    final StringBuffer appends = new StringBuffer();
+    if (this.isSynMatch()) appends.append("[syn]");
+    if (this.isDefinitionMatch()) appends.append("[def]");
+    if (this.obj.isObsolete()) appends.append("[obs]");
+    return appends.toString();
+  }
 
   public boolean hasOboProperty() {
     return getOboObject() instanceof OBOProperty;

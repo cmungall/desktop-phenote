@@ -127,6 +127,11 @@
   <xs:element name="data-input-servlet">
     <xs:complexType>
       <xs:attribute name="enable" use="required" type="xs:boolean"/>
+      <xs:attribute name="port" use="required" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>which http port to use</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
     </xs:complexType>
   </xs:element>
   <xs:element name="term-history">

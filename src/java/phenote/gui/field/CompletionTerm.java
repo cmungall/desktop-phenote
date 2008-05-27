@@ -74,6 +74,7 @@ public class CompletionTerm {
   }
 	
 	
+  /** used by servlet.PhenoteController as well as CompTermList */
   public String getCompListDisplayString() {
     final StringBuffer display = new StringBuffer(this.getCompListDisplayName());
     final String appends = this.getCompListDisplaySuffix();
@@ -86,11 +87,11 @@ public class CompletionTerm {
     return display.toString();
   }
   
-  public String getCompListDisplayName() {
+  String getCompListDisplayName() {
     return (this.isSynMatch()) ? this.synMatchString : this.getName(); 
   }
   
-  public String getCompListDisplaySuffix() {
+  String getCompListDisplaySuffix() {
     final StringBuffer appends = new StringBuffer();
     if (this.isSynMatch()) appends.append("[syn]");
     if (this.isDefinitionMatch()) appends.append("[def]");
