@@ -56,6 +56,7 @@ import phenote.datamodel.TransferableCharacterList;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
+import phenote.gui.BugWorkaroundTable;
 import phenote.gui.CharacterTable;
 import phenote.gui.CharacterTableController;
 import phenote.gui.CharacterTableSource;
@@ -284,6 +285,7 @@ public class CharacterTemplateTable extends AbstractGUIComponent implements Temp
   /** Instantiate interface objects from Swixml file */
   private void loadPanelLayout() {
     SwingEngine swix = new SwingEngine(this);
+    swix.getTaglib().registerTag("bugworkaroundtable", BugWorkaroundTable.class);
     try {
       this.tablePanel = (JPanel)swix.render(FileUtil.findUrl("character_template_table.xml"));
     } catch (Exception e) {

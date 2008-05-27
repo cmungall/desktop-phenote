@@ -265,6 +265,7 @@ public class CharacterTableController {
 	/** Instantiates interface objects from Swixml file */
 	private void loadPanelLayout() {
 		SwingEngine swix = new SwingEngine(this);
+		swix.getTaglib().registerTag("bugworkaroundtable", BugWorkaroundTable.class);
 		try {
 			this.characterTablePanel = (JPanel) swix.render(FileUtil
 					.findUrl("character_table_panel.xml"));

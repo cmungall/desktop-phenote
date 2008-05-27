@@ -2,7 +2,7 @@
 <panel id="tablePanel" constraints="BorderLayout.CENTER" layout="GridBagLayout">
     <scrollpane id="scrollPane" horizontalScrollBarPolicy="JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS">
     	<gridbagconstraints gridx="0" gridy="0" weightx="1" weighty="1" gridwidth="2" fill="GridBagConstraints.BOTH" insets="0,10,0,10"/>
-        <table id="characterTable"/>
+        <bugworkaroundtable id="characterTable"/>
     </scrollpane>
     <panel id="filterPanel" layout="GridLayout">
     	<gridbagconstraints gridx="0" gridy="1" weightx="1" fill="GridBagConstraints.HORIZONTAL" anchor="GridBagConstraints.EAST" insets="0,5,0,10"/>
