@@ -20,8 +20,13 @@ import org.bioontologies.obd.schema.pheno.PhenotypeCharacterDocument.PhenotypeCh
 import org.bioontologies.obd.schema.pheno.PhenotypeDocument.Phenotype;
 import org.bioontologies.obd.schema.pheno.PhenotypeManifestationDocument.PhenotypeManifestation;
 import org.bioontologies.obd.schema.pheno.ProvenanceDocument.Provenance;
+import org.bioontologies.obd.schema.pheno.QualifierDocument.Qualifier;
 import org.bioontologies.obd.schema.pheno.QualityDocument.Quality;
 import org.bioontologies.obd.schema.pheno.TyperefDocument.Typeref;
+import org.obo.datamodel.Link;
+import org.obo.datamodel.LinkedObject;
+import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOProperty;
 
 import phenote.dataadapter.AbstractFileAdapter;
 import phenote.dataadapter.CharacterListManager;
@@ -32,15 +37,13 @@ import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterIFactory;
 import phenote.datamodel.CharacterList;
 import phenote.datamodel.CharacterListI;
+import phenote.datamodel.OboUtil;
 import phenote.datamodel.TermNotFoundException;
-
-
 
 public class PhenoXmlAdapter extends AbstractFileAdapter {
 
   private Set<String> genotypesAlreadyAdded = new HashSet<String>(); 
   private File previousFile;
-  //private File file;
   private static String[] extensions = {"pxml", "xml"};
   private static final String description =  "PhenoXML [.pxml, .xml]";
 
@@ -94,26 +97,22 @@ public class PhenoXmlAdapter extends AbstractFileAdapter {
   }
   
   private CharacterI newCharacterFromPhenotypeManifestation(PhenotypeManifestation pm) {
-    CharFieldManager ontologyManager = CharFieldManager.inst();
     CharacterI character = CharacterIFactory.makeChar();
     ManifestIn mi = pm.getManifestIn();
     if (mi != null) {
       String genotype = mi.getGenotype();
       if (genotype != null) {
-      character.setGenotype(genotype);
+        character.setGenotype(genotype);
       }
       List<Typeref> typerefList = mi.getTyperefList();
       if ((typerefList != null) && (typerefList.size() > 0)) {
         // only load the first typeref
         Typeref typeref = typerefList.get(0);
-        String geneticContextID = typeref.getAbout();
-        if (geneticContextID != null) {
-          try {
-            character.setGeneticContext(ontologyManager.getOboClassWithExcep(geneticContextID));
-          }
-          catch (TermNotFoundException e) {
-            System.out.println("Genetic context term not found " + e);
-          }
+        try {
+          character.setGeneticContext(this.getTermForTyperef(typeref));
+        }
+        catch (TermNotFoundException e) {
+          log().error("Genetic context term not found ", e);
         }
       }
     }
@@ -126,41 +125,20 @@ public class PhenoXmlAdapter extends AbstractFileAdapter {
         phenotypeCharacter = phenotypeCharacters.get(0);
       }
     }   
-    String entityID = null;
-    String qualityID = null;
-    if (phenotypeCharacter != null) {
-      Bearer bearer = phenotypeCharacter.getBearer();
-      if (bearer != null) {
-        Typeref typeref = bearer.getTyperef();
-        if (typeref != null) {
-          entityID = typeref.getAbout();
-        }
-      }
+    try {
+      character.setEntity(this.getTermForTyperef(phenotypeCharacter.getBearer().getTyperef()));
+    } catch (TermNotFoundException e) {
+      System.out.println("Entity term not found " + e);
+    }
+    try {
       List<Quality> qualityList = phenotypeCharacter.getQualityList();
       if ((qualityList != null) && (qualityList.size() > 0)) {
         // we only load the first quality for now
         Quality quality = qualityList.get(0);
-        Typeref qualityTyperef = quality.getTyperef();
-        if (qualityTyperef != null) {
-          qualityID = qualityTyperef.getAbout();
-        }
+        character.setQuality(this.getTermForTyperef(quality.getTyperef()));
       }
-    }
-    if (entityID != null) {
-      try {
-        character.setEntity(ontologyManager.getOboClassWithExcep(entityID));
-      }
-      catch (TermNotFoundException e) {
-        System.out.println("Entity term not found " + e);
-      }
-    }
-    if (qualityID != null) {
-      try {
-        character.setQuality(ontologyManager.getOboClassWithExcep(qualityID));
-      }
-      catch (TermNotFoundException e) {
-        System.out.println("Quality term not found " + e);
-      }
+    } catch (TermNotFoundException e) {
+      System.out.println("Quality term not found " + e);
     }
     List<Provenance> provenanceList = pm.getProvenanceList();
     if ((provenanceList != null) && (provenanceList.size() > 0)) {
@@ -275,11 +253,11 @@ public class PhenoXmlAdapter extends AbstractFileAdapter {
 
     String gc = CharFieldEnum.GENETIC_CONTEXT.toString();
     if (chr.hasValue(gc)) { // hasGeneticCont
-      Typeref typeref = mi.addNewTyperef();
-      //typeref.setAbout(chr.getGeneticContext().getID());
-      try { typeref.setAbout(chr.getTerm(gc).getID()); }
-      catch (CharFieldException e) {
-        log().debug("failed to get gc field");  // shouldnt happen with hasValue
+      try {
+        final Typeref typeref = this.getTyperefForTerm(chr.getTerm(gc));
+        mi.setTyperefArray(new Typeref[] {typeref});
+      } catch (CharFieldException e) {
+        log().error("failed to get gc field");  // shouldnt happen with hasValue
       }
     }
   }
@@ -300,20 +278,18 @@ public class PhenoXmlAdapter extends AbstractFileAdapter {
     // should entity-less phenotypes even be saved?
     if (chr.getEntity() != null) {
       Bearer b = pc.addNewBearer();
-      Typeref tr = b.addNewTyperef();
-      tr.setAbout(chr.getEntity().getID());
+      b.setTyperef(this.getTyperefForTerm(chr.getEntity()));
     }
     else {
-      System.out.println("Character "+chr+" has no entity");
+      log().warn("Character "+chr+" has no entity");
     }
 
     if (chr.getQuality() != null) {
       Quality q = pc.addNewQuality();
-      Typeref trq = q.addNewTyperef();
-      trq.setAbout(chr.getQuality().getID());
+      q.setTyperef(this.getTyperefForTerm(chr.getQuality()));
     }
     else {
-      System.out.println("Character "+chr+" has no quality");
+      log().warn("Character "+chr+" has no quality");
     }
   }
   
@@ -321,6 +297,53 @@ public class PhenoXmlAdapter extends AbstractFileAdapter {
     if (!chr.hasPub()) return;  // no pub, early return
     Provenance provenance = pm.addNewProvenance();
     provenance.setId(chr.getPub());
+  }
+  
+  private Typeref getTyperefForTerm(OBOClass term) {
+    final Typeref tr = Typeref.Factory.newInstance();
+    if (OboUtil.isPostCompTerm(term)) {
+      tr.setAbout(OboUtil.getGenusTerm(term).getID());
+      for (Link link : OboUtil.getAllDifferentia(term)) {
+        final LinkedObject parent = link.getParent();
+        if (!(parent instanceof OBOClass)) continue;
+        final OBOClass differentia = (OBOClass)parent;
+        final Qualifier qualifier = tr.addNewQualifier();
+        qualifier.setRelation(link.getType().getID());
+        qualifier.addNewHoldsInRelationTo().setTyperef(this.getTyperefForTerm(differentia));
+      }
+    } else {
+      tr.setAbout(term.getID());
+    }
+    return tr;
+  }
+  
+  private OBOClass getTermForTyperef(Typeref tr) throws TermNotFoundException {
+    final OBOClass genus = this.getTerm(tr.getAbout());
+    if (tr.sizeOfQualifierArray() > 0) {
+      // need to create post-comp
+      final OboUtil postCompUtil = OboUtil.initPostCompTerm(genus);
+      for (Qualifier qualifier : tr.getQualifierList()) {
+        final OBOProperty relation = this.getRelation(qualifier.getRelation());
+        final OBOClass differentia = this.getTermForTyperef(qualifier.getHoldsInRelationTo().getTyperef());
+        postCompUtil.addRelDiff(relation, differentia);
+      }
+      return postCompUtil.getPostCompTerm();
+    } else {
+      return genus;
+    }
+  }
+  
+  private OBOClass getTerm(String id) throws TermNotFoundException {
+    return CharFieldManager.inst().getOboClass(id);
+  }
+  
+  private OBOProperty getRelation(String id) throws TermNotFoundException {
+    final OBOProperty relation = CharFieldManager.inst().getRelation(id);
+    if (relation != null) {
+      return relation;
+    } else {
+      throw new TermNotFoundException(id);
+    }
   }
   
   private Logger log;

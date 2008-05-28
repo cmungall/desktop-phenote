@@ -1,7 +1,9 @@
 package phenote.datamodel;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -117,7 +119,7 @@ public class OboUtil {
   }
 
   public static boolean isPostCompTerm(OBOClass term) {
-    if (!term.isAnonymous()) return false;
+    //if (!term.isAnonymous()) return false;
     for (Link l : term.getParents()) {
       if (isLinkToDiff(l))
         return true;
@@ -169,6 +171,14 @@ public class OboUtil {
       }
     }
     return null; // diff not found - OboEx?
+  }
+  
+  public static List<Link> getAllDifferentia(OBOClass postComp) {
+    final List<Link> restrictions = new ArrayList<Link>();
+    for (Link l : postComp.getParents()) {
+      if (isLinkToDiff(l)) restrictions.add(l);
+    }
+    return restrictions;
   }
   
   /**
