@@ -100,8 +100,6 @@ public class CharacterListManager {
 
   public void clear() {
     characterList.clear();
-    // notify listeners??? - i think so, need to clear out gui
-    fireChangeEvent(this,characterList); // empty char list
     currentFile = null; // i think this belongs here?
   }
   
