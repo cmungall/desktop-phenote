@@ -131,7 +131,10 @@ public class DirtyDocumentIndicator implements CharChangeListener, CharListChang
     return editManagers;
   }
   
+  /** Update window gui in some way to show modified, different for mac and others
+   doesnt work for old phenote, just plus */
   private void updateDirtyDocumentStatus() {
+    if (getRootPane()==null) return;
     // this client property is used on the Mac platform to put a dot inside the close
     // button
     this.getRootPane().putClientProperty(WINDOW_MODIFIED, this.edited);
@@ -147,6 +150,9 @@ public class DirtyDocumentIndicator implements CharChangeListener, CharListChang
   }
   
   private JRootPane getRootPane() {
+    if (GUIManager.getManager()==null || GUIManager.getManager().getFrame()==null) {
+      return null;
+    }
     return GUIManager.getManager().getFrame().getRootPane();
   }
   
