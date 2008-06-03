@@ -57,7 +57,7 @@ public class Character extends AbstractCharacter implements CharacterI {
     // undo needs to be able to undo back to null/""/init somehow
     if (cfv == null) {
       cfv = CharFieldValue.emptyValue(this,cf); // set in hash?
-      if (cf.isList()) cfv.setIsList(true);
+      //if (cf.isList()) cfv.setIsList(true); // emptyVal now does this
     }
     return cfv;
     //List<CharFieldValue> cfvList = charFieldToValue.get(cf);

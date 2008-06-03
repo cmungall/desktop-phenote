@@ -203,7 +203,10 @@ public class CharFieldValue implements Cloneable {
 
   public static CharFieldValue emptyValue(CharacterI c,CharField cf) {
     // everything is null, type from char field
-    return new CharFieldValue(c,cf);
+    CharFieldValue empty = new CharFieldValue(c,cf);
+    if (cf.isList()) empty.setIsList(true);
+    return empty;
+    //return new CharFieldValue(c,cf);
 //     if (cf.isTerm())
 //       return new CharFieldValue((OBOClass)null,c,cf);
 //     else if (cf.isDate())
