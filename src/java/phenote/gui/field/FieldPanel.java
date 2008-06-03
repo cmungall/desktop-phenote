@@ -43,7 +43,7 @@ public class FieldPanel extends AbstractGUIComponent {
   
   private List<CharFieldGui> charFieldGuiList = new ArrayList<CharFieldGui>(8);
   private SearchParamPanel searchParamPanel; // searchParamManager?
-  private CharFieldManager ontologyManager = CharFieldManager.inst();
+  private CharFieldManager charFieldManager = CharFieldManager.inst();
   private JPanel fieldPanel;
   private JTabbedPane jTabbedPane;
   private String group;
@@ -187,9 +187,9 @@ public class FieldPanel extends AbstractGUIComponent {
   private boolean isTabbed() {
     if (Config.inst().shouldUseFieldPanelTabs()) {
       if (this.group != null) {
-        return this.ontologyManager.getCharFieldListForGroup(this.group).size() > FieldPanel.fieldsPerTab;
+        return this.charFieldManager.getCharFieldListForGroup(this.group).size() > FieldPanel.fieldsPerTab;
       } else {
-        return ontologyManager.getNumberOfFields() > fieldsPerTab;
+        return charFieldManager.getNumberOfFields() > fieldsPerTab;
       }
     } else {
       return false;
@@ -416,9 +416,9 @@ public class FieldPanel extends AbstractGUIComponent {
   
   private List<CharField> getCharFieldList() {
     if (this.group != null) {
-      return this.ontologyManager.getCharFieldListForGroup(this.group);
+      return this.charFieldManager.getCharFieldListForGroup(this.group);
     } else {
-      return this.ontologyManager.getCharFieldList();
+      return this.charFieldManager.getCharFieldList();
     }
   }
   

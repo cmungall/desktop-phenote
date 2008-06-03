@@ -518,6 +518,7 @@ public class CharacterTableController {
 	private void setUpTableEditors() {
 	  for (CharField cf : fieldMan().getCharFieldListForGroup(this.representedGroup)) {
 	    if (cf.isList()) continue; // bad things happen if multiple characterlistfieldguis are made - should fix how this is designed
+      if (!Config.inst().isVisible(cf)) continue; // no editor if not vis
 	    final CharFieldGui cfg = CharFieldGui.makeCharFieldGui(cf, 0);
 	    final TableCellEditor editor = cfg.getTableCellEditor();
 	    if (editor == null) { continue; }

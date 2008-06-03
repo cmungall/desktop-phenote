@@ -868,7 +868,7 @@ public class Config {
     return getEnbldFieldCfgs().get(index);
   }
 
-  private FieldConfig getEnbldFieldCfg(int index,String group) {
+  public FieldConfig getEnbldFieldCfg(int index,String group) {
     if (index >= getEnbldFieldsNum(group)) return null;
     return getFieldCfgsInGroup(group).get(index);
   }
@@ -1268,7 +1268,7 @@ public class Config {
   }
 
   /** get enabled field configs for a group - or should we just use Field? */
-  private List<FieldConfig> getFieldCfgsInGroup(String group) {
+  public List<FieldConfig> getFieldCfgsInGroup(String group) {
     List<FieldConfig> fCfgs = new ArrayList<FieldConfig>();
     for (FieldConfig fc : getEnbldFieldCfgs()) {
       if (fc.inGroup(group))
