@@ -24,6 +24,7 @@ import org.apache.log4j.Logger;
 public class ResponderChainAction extends AbstractAction {
   
   private String actionCommand;
+  private Object finalResponder = null;
   public static String DELEGATE_METHOD = "getResponderDelegate";
   public static String CLIENT_PROPERTY = "responderDelegate";
 
@@ -79,6 +80,14 @@ public class ResponderChainAction extends AbstractAction {
   public void setActionCommand(String actionCommand) {
     this.actionCommand = actionCommand;
   }
+  
+  public Object getFinalResponder() {
+    return this.finalResponder;
+  }
+  
+  public void setFinalResponder(Object anObject) {
+    this.finalResponder = anObject;
+  }
 
   private Component getFocusOwner() {
     return KeyboardFocusManager.getCurrentKeyboardFocusManager().getPermanentFocusOwner();
@@ -115,11 +124,9 @@ public class ResponderChainAction extends AbstractAction {
       final Component parent = ((Component)currentResponder).getParent();
       if (parent != null) {
         return parent;
-      } else {
-        // in the future we may want to establish conventions for delegate objects to search here after exhausting the component hierarchy
       }
     }
-    return null;
+    return this.getFinalResponder();
   }
   
   private boolean objectRespondsToMethod(Object anObject, String methodName) {
