@@ -1,26 +1,19 @@
 package org.phenoscape.main;
 
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.KeyStroke;
 
 import org.bbop.framework.GUIComponentFactory;
-import org.bbop.framework.ViewMenu;
 import org.bbop.framework.dock.LayoutDriver;
 import org.bbop.framework.dock.idw.IDWDriver;
 import org.oboedit.gui.tasks.DefaultGUIStartupTask;
 import org.phenoscape.model.PhenoscapeController;
 import org.phenoscape.view.CharacterBrowserComponentFactory;
+import org.phenoscape.view.MenuFactory;
 import org.phenoscape.view.PhenotypeTableComponentFactory;
 import org.phenoscape.view.SpecimenTableComponentFactory;
 import org.phenoscape.view.TaxonTableComponentFactory;
@@ -95,29 +88,13 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
   
   @Override
   protected void installSystemListeners() {
+    //TODO make dirty document indicator work
     //GUIManager.addVetoableShutdownListener(DirtyDocumentIndicator.inst());
   }
   
   @Override
   protected Collection<? extends JMenuItem> getDefaultMenus() {
-    Collection<JMenuItem> menus = new ArrayList<JMenuItem>();
-    menus.add(this.createFileMenu());
-    menus.add(new ViewMenu());
-    return menus;
-  }
-  
-  private JMenuItem createFileMenu() {
-    final JMenu menu = new JMenu("File");
-    final Action openAction = new AbstractAction("Open...") {
-      public void actionPerformed(ActionEvent e) { controller.open(); }
-      };
-    openAction.putValue(Action.ACCELERATOR_KEY, this.getKeyStroke(KeyEvent.VK_O));
-    menu.add(new JMenuItem(openAction));
-    return menu;
-  }
-  
-  private KeyStroke getKeyStroke(int keyCode) {
-    return KeyStroke.getKeyStroke(keyCode, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+    return (new MenuFactory(this.controller)).createMenus();
   }
   
 }

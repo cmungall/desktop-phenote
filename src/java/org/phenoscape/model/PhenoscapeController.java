@@ -139,8 +139,8 @@ public class PhenoscapeController extends DocumentController {
   }
   
   @Override
-  public void writeData(File aFile) {
-    
+  public boolean writeData(File aFile) {
+    return false;
   }
   
   private Logger log() {
