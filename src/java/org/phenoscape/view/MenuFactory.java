@@ -13,7 +13,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import org.bbop.framework.GUIManager;
 import org.bbop.framework.ViewMenu;
+import org.phenoscape.app.CrossPlatform;
 import org.phenoscape.model.PhenoscapeController;
 
 import phenote.gui.actions.ResponderChainAction;
@@ -48,16 +50,21 @@ public class MenuFactory {
     saveAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
     menu.add(new JMenuItem(saveAction));
     final Action saveAsAction = new AbstractAction("Save As...") {
-      public void actionPerformed(ActionEvent e) {
-      }
+      public void actionPerformed(ActionEvent e) { controller.saveAs(); }
     };
     saveAsAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() | InputEvent.SHIFT_MASK));
     menu.add(new JMenuItem(saveAsAction));
+    if (CrossPlatform.shouldPutExitInFileMenu()) {
+      menu.addSeparator();
+      final Action exitAction = new AbstractAction("Exit"){
+        public void actionPerformed(ActionEvent e) { GUIManager.exit(0); }
+      };
+      menu.add(new JMenuItem(exitAction));
+    }
     return menu;
   }
   
   private JMenuItem createEditMenu() {
-    //TODO finish deleting lines
     final JMenu menu = new JMenu("Edit");
     final Action undoAction = new ResponderChainAction("undo", "Undo");
     undoAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
@@ -66,26 +73,18 @@ public class MenuFactory {
     redoAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() | InputEvent.SHIFT_MASK));
     menu.add(new JMenuItem(redoAction));
     menu.addSeparator();
-    JMenuItem cut = new JMenuItem();
-    Action cutAction = new ResponderChainAction("cut", "Cut");
+    final Action cutAction = new ResponderChainAction("cut", "Cut");
     cutAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-    cut.setAction(cutAction);
-    menu.add(cut);
-    JMenuItem copy = new JMenuItem();
-    Action copyAction = new ResponderChainAction("copy", "Copy");
+    menu.add(new JMenuItem(cutAction));
+    final Action copyAction = new ResponderChainAction("copy", "Copy");
     copyAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-    copy.setAction(copyAction);
-    menu.add(copy);
-    JMenuItem paste = new JMenuItem();
-    Action pasteAction = new ResponderChainAction("paste", "Paste");
+    menu.add(new JMenuItem(copyAction));
+    final Action pasteAction = new ResponderChainAction("paste", "Paste");
     pasteAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_P, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-    paste.setAction(pasteAction);
-    menu.add(paste);
-    JMenuItem selectAll = new JMenuItem();
-    Action selectAllAction = new ResponderChainAction("selectAll", "Select All");
+    menu.add(new JMenuItem(pasteAction));
+    final Action selectAllAction = new ResponderChainAction("selectAll", "Select All");
     selectAllAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_A, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-    selectAll.setAction(selectAllAction);
-    menu.add(selectAll);
+    menu.add(new JMenuItem(selectAllAction));
     return menu;
   }
 
