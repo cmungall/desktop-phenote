@@ -79,6 +79,12 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
     final EventTableModel<Specimen> specimensTableModel = new EventTableModel<Specimen>(this.getController().getSpecimensForCurrentTaxonSelection(), new SpecimensTableFormat());
     final JTable specimensTable = new JTable(specimensTableModel);
     specimensTable.setSelectionModel(this.getController().getCurrentSpecimensSelectionModel());
+    for (int i = 0; i < specimensTable.getColumnCount(); i++) {
+      Class<?> classs = specimensTable.getColumnClass(i);
+      if (classs.equals(OBOClass.class)) {
+        specimensTable.getColumnModel().getColumn(i).setCellRenderer(new TermRenderer());
+      }
+    }
     specimensTable.putClientProperty("Quaqua.Table.style", "striped");
     this.add(new JScrollPane(specimensTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);
@@ -119,6 +125,7 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
       case 0: specimen.setCollectionCode((OBOClass)editedValue); break;
       case 1: specimen.setCatalogID(editedValue.toString()); break;
       }
+      updateObjectForGlazedLists(specimen, getController().getSpecimensForCurrentTaxonSelection());
       return specimen;
     }
 
@@ -144,7 +151,7 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
 
     public Class<?> getColumnClass(int column) {
       switch(column) {
-      case 0: return String.class;//OBOClass.class;
+      case 0: return OBOClass.class;
       case 1: return String.class;
       default: return null;
       }

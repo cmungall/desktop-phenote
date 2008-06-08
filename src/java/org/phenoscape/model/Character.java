@@ -4,13 +4,11 @@ import org.nexml.x10.StandardChar;
 
 import ca.odell.glazedlists.BasicEventList;
 import ca.odell.glazedlists.EventList;
-import ca.odell.glazedlists.swing.EventSelectionModel;
 
 public class Character {
   
   private final StandardChar storedXML;
   private final EventList<State> states = new BasicEventList<State>();
-  private final EventSelectionModel<State> statesSelectionModel = new EventSelectionModel<State>(this.states);
   private String label;
   
   public Character() {
@@ -41,10 +39,6 @@ public class Character {
   
   public EventList<State> getStates() {
     return this.states;
-  }
-  
-  public EventSelectionModel<State> getStatesSelectionModel() {
-    return this.statesSelectionModel;
   }
   
   public String getLabel() {

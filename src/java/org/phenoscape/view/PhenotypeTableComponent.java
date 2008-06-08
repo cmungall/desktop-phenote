@@ -44,6 +44,12 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
     final EventTableModel<Phenotype> phenotypesTableModel = new EventTableModel<Phenotype>(this.getController().getPhenotypesForCurrentStateSelection(), new PhenotypesTableFormat());
     final JTable phenotypesTable = new JTable(phenotypesTableModel);
     phenotypesTable.setSelectionModel(this.getController().getCurrentPhenotypesSelectionModel());
+    for (int i = 0; i < phenotypesTable.getColumnCount(); i++) {
+      Class<?> classs = phenotypesTable.getColumnClass(i);
+      if (classs.equals(OBOClass.class)) {
+        phenotypesTable.getColumnModel().getColumn(i).setCellRenderer(new TermRenderer());
+      }
+    }
     phenotypesTable.putClientProperty("Quaqua.Table.style", "striped");
     this.add(new JScrollPane(phenotypesTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);
@@ -159,12 +165,12 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
 
     public Class<?> getColumnClass(int column) {
       switch (column) {
-      case 0: return String.class;//return OBOClass.class;
-      case 1: return String.class;//return OBOClass.class;
-      case 2: return String.class;//return OBOClass.class;
+      case 0: return OBOClass.class;
+      case 1: return OBOClass.class;
+      case 2: return OBOClass.class;
       case 3: return Integer.class;
       case 4: return Float.class;
-      case 5: return String.class;//return OBOClass.class;
+      case 5: return OBOClass.class;
       case 6: return String.class;
       default: return null;
       }

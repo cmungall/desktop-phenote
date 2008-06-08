@@ -42,7 +42,7 @@ public class CharacterBrowserComponent extends PhenoscapeGUIComponent {
 
   private void initializeInterface() {
     this.setLayout(new BorderLayout());
-    final EventTableModel<Character> charactersTableModel = new EventTableModel<Character>(this.getController().getCharacters(), new CharactersTableFormat());
+    final EventTableModel<Character> charactersTableModel = new EventTableModel<Character>(this.getController().getDataSet().getCharacters(), new CharactersTableFormat());
     final JTable charactersTable = new JTable(charactersTableModel);
     charactersTable.setSelectionModel(this.getController().getCharactersSelectionModel());
     charactersTable.putClientProperty("Quaqua.Table.style", "striped");
@@ -60,14 +60,14 @@ public class CharacterBrowserComponent extends PhenoscapeGUIComponent {
   }
 
   private void addCharacter() {
-    final Character character = this.getController().newCharacter();
-    final int index = this.getController().getCharacters().indexOf(character);
+    final Character character = this.getController().getDataSet().newCharacter();
+    final int index = this.getController().getDataSet().getCharacters().indexOf(character);
     this.getController().getCharactersSelectionModel().setSelectionInterval(index, index);
   }
   
   private void deleteSelectedCharacter() {
     final Character character = this.getSelectedCharacter();
-    if (character != null) { this.getController().removeCharacter(character); }
+    if (character != null) { this.getController().getDataSet().removeCharacter(character); }
   }
   
   private void addState() {
@@ -183,7 +183,7 @@ public class CharacterBrowserComponent extends PhenoscapeGUIComponent {
 
     public Object getColumnValue(Character character, int column) {
       if (column == NUMBER) {
-        return getController().getCharacters().indexOf(character) + 1;
+        return getController().getDataSet().getCharacters().indexOf(character) + 1;
       } else if (column == DESCRIPTION) {
         return character.getLabel();
       } else {

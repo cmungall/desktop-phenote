@@ -10,15 +10,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
 import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOClass;
 import org.phenoscape.model.PhenoscapeController;
+import org.phenoscape.model.Specimen;
 import org.phenoscape.model.Taxon;
 
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.EventList;
+import ca.odell.glazedlists.event.ListEvent;
+import ca.odell.glazedlists.event.ListEventListener;
 import ca.odell.glazedlists.gui.AdvancedTableFormat;
 import ca.odell.glazedlists.gui.WritableTableFormat;
 import ca.odell.glazedlists.swing.EventTableModel;
@@ -35,18 +39,19 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
   @Override
   public void init() {
     super.init();
+    this.getController().getSpecimensForCurrentTaxonSelection().addListEventListener(new SpecimenListListener());
     this.initializeInterface();
   }
   
   private void addTaxon() {
-    final Taxon taxon = this.getController().newTaxon();
-    final int index = this.getController().getTaxa().indexOf(taxon);
+    final Taxon taxon = this.getController().getDataSet().newTaxon();
+    final int index = this.getController().getDataSet().getTaxa().indexOf(taxon);
     this.getController().getTaxaSelectionModel().setSelectionInterval(index, index);
   }
   
   private void deleteSelectedTaxon() {
     final Taxon taxon = this.getSelectedTaxon();
-    if (taxon != null) { this.getController().removeTaxon(taxon); }
+    if (taxon != null) { this.getController().getDataSet().removeTaxon(taxon); }
   }
   
   private Taxon getSelectedTaxon() {
@@ -60,9 +65,16 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
 
   private void initializeInterface() {
     this.setLayout(new BorderLayout());
-    final EventTableModel<Taxon> taxaTableModel = new EventTableModel<Taxon>(this.getController().getTaxa(), new TaxaTableFormat());
+    final EventTableModel<Taxon> taxaTableModel = new EventTableModel<Taxon>(this.getController().getDataSet().getTaxa(), new TaxaTableFormat());
     final JTable taxaTable = new JTable(taxaTableModel);
     taxaTable.setSelectionModel(this.getController().getTaxaSelectionModel());
+    for (int i = 0; i < taxaTable.getColumnCount(); i++) {
+      Class<?> classs = taxaTable.getColumnClass(i);
+      if (classs.equals(OBOClass.class)) {
+        taxaTable.getColumnModel().getColumn(i).setCellRenderer(new TermRenderer());
+        taxaTable.getColumnModel().getColumn(i).setCellEditor(new TermEditor(new JTextField()));
+      }
+    }
     taxaTable.putClientProperty("Quaqua.Table.style", "striped");
     this.add(new JScrollPane(taxaTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);
@@ -130,7 +142,7 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
 
     public Class<?> getColumnClass(int column) {
       switch (column) {
-      case 0: return String.class;//return OBOClass.class;
+      case 0: return OBOClass.class;
       case 1: return String.class;
       case 2: return String.class;
       default: return null;
@@ -140,6 +152,15 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
     public Comparator<?> getColumnComparator(int column) {
       // TODO Auto-generated method stub
       return null;
+    }
+    
+  }
+  
+  private class SpecimenListListener implements ListEventListener<Specimen> {
+
+    public void listChanged(ListEvent<Specimen> event) {
+      // make sure the list of specimens for the taxon containing the updated specimen is updated in the interface
+      updateObjectForGlazedLists(getSelectedTaxon(), getController().getDataSet().getTaxa());
     }
     
   }

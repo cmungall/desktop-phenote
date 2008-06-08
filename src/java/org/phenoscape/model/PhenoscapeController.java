@@ -9,64 +9,56 @@ import org.apache.xmlbeans.XmlException;
 import org.phenoscape.app.DocumentController;
 import org.phenoscape.io.NeXMLReader;
 
-import ca.odell.glazedlists.BasicEventList;
 import ca.odell.glazedlists.CollectionList;
 import ca.odell.glazedlists.EventList;
 import ca.odell.glazedlists.swing.EventSelectionModel;
 
 public class PhenoscapeController extends DocumentController {
   
-  private final EventList<Character> characters = new BasicEventList<Character>();
-  private final EventList<Taxon> taxa = new BasicEventList<Taxon>();
-  private final EventSelectionModel<Character> charactersSelectionModel = new EventSelectionModel<Character>(this.characters);
-  private final EventSelectionModel<Taxon> taxaSelectionModel = new EventSelectionModel<Taxon>(this.taxa);
-  private final EventList<Specimen> currentSpecimens = new CollectionList<Taxon, Specimen>(this.taxaSelectionModel.getSelected(),
-      new CollectionList.Model<Taxon, Specimen>(){
-    public List<Specimen> getChildren(Taxon parent) {
-      return parent.getSpecimens();
-    }
-  } 
-  );
-  private final EventSelectionModel<Specimen> currentSpecimensSelectionModel = new EventSelectionModel<Specimen>(this.currentSpecimens);
-  private final EventList<State> currentStates = new CollectionList<Character, State>(this.charactersSelectionModel.getSelected(),
-      new CollectionList.Model<Character, State>() {
-    public List<State> getChildren(Character parent) {
-      return parent.getStates();
-    }
-  }
-  );
-  private final EventSelectionModel<State> currentStatesSelectionModel = new EventSelectionModel<State>(this.currentStates);
-  private final EventList<Phenotype> currentPhenotypes = new CollectionList<State, Phenotype>(this.currentStatesSelectionModel.getSelected(),
-      new CollectionList.Model<State, Phenotype>() {
-    public List<Phenotype> getChildren(State parent) {
-      return parent.getPhenotypes();
-    }
-  }
-  );
-  private final EventSelectionModel<Phenotype> currentPhenotypesSelectionModel = new EventSelectionModel<Phenotype>(this.currentPhenotypes);
+  private final DataSet dataSet = new DataSet();
+  private final EventSelectionModel<Character> charactersSelectionModel;
+  private final EventSelectionModel<Taxon> taxaSelectionModel;
+  private final EventList<Specimen> currentSpecimens;
+  private final EventSelectionModel<Specimen> currentSpecimensSelectionModel;
+  private final EventList<State> currentStates;
+  private final EventSelectionModel<State> currentStatesSelectionModel;
+  private final EventList<Phenotype> currentPhenotypes;
+  private final EventSelectionModel<Phenotype> currentPhenotypesSelectionModel;
 
   public PhenoscapeController() {
+    this.charactersSelectionModel = new EventSelectionModel<Character>(this.dataSet.getCharacters());
     this.charactersSelectionModel.setSelectionMode(EventSelectionModel.SINGLE_SELECTION);
+    this.taxaSelectionModel = new EventSelectionModel<Taxon>(this.dataSet.getTaxa());
+    this.currentSpecimens = new CollectionList<Taxon, Specimen>(this.taxaSelectionModel.getSelected(),
+        new CollectionList.Model<Taxon, Specimen>(){
+      public List<Specimen> getChildren(Taxon parent) {
+        return parent.getSpecimens();
+      }
+    } 
+    );
+    this.currentSpecimensSelectionModel = new EventSelectionModel<Specimen>(this.currentSpecimens);
+    this.currentStates = new CollectionList<Character, State>(this.charactersSelectionModel.getSelected(),
+        new CollectionList.Model<Character, State>() {
+      public List<State> getChildren(Character parent) {
+        return parent.getStates();
+      }
+    }
+    );
+    this.currentStatesSelectionModel = new EventSelectionModel<State>(this.currentStates);
     this.currentStatesSelectionModel.setSelectionMode(EventSelectionModel.SINGLE_SELECTION);
+    this.currentPhenotypes = new CollectionList<State, Phenotype>(this.currentStatesSelectionModel.getSelected(),
+        new CollectionList.Model<State, Phenotype>() {
+      public List<Phenotype> getChildren(State parent) {
+        return parent.getPhenotypes();
+      }
+    }
+    );
+    this.currentPhenotypesSelectionModel = new EventSelectionModel<Phenotype>(this.currentPhenotypes);
     this.currentPhenotypesSelectionModel.setSelectionMode(EventSelectionModel.MULTIPLE_INTERVAL_SELECTION);
   }
   
-  public Character newCharacter() {
-    final Character newCharacter = new Character();
-    this.addCharacter(newCharacter);
-    return newCharacter;
-  }
-  
-  public void addCharacter(Character aCharacter) {
-    this.characters.add(aCharacter);
-  }
-  
-  public void removeCharacter(Character aCharacter) {
-    this.characters.remove(aCharacter);
-  }
-  
-  public EventList<Character> getCharacters() {
-    return this.characters;
+  public DataSet getDataSet() {
+    return this.dataSet;
   }
 
   public EventSelectionModel<Character> getCharactersSelectionModel() {
@@ -89,24 +81,6 @@ public class PhenoscapeController extends DocumentController {
     return this.currentPhenotypesSelectionModel;
   }
   
-  public Taxon newTaxon() {
-    final Taxon newTaxon = new Taxon();
-    this.addTaxon(newTaxon);
-    return newTaxon;
-  }
-  
-  public void addTaxon(Taxon aTaxon) {
-    this.taxa.add(aTaxon);
-  }
-  
-  public void removeTaxon(Taxon aTaxon) {
-    this.taxa.remove(aTaxon);
-  }
-  
-  public EventList<Taxon> getTaxa() {
-    return this.taxa;
-  }
-  
   public EventSelectionModel<Taxon> getTaxaSelectionModel() {
     return this.taxaSelectionModel;
   }
@@ -125,10 +99,10 @@ public class PhenoscapeController extends DocumentController {
     try {
       final NeXMLReader reader = new NeXMLReader(aFile);
       this.setCurrentFile(aFile);
-      this.characters.clear();
-      this.characters.addAll(reader.getCharacters());
-      this.taxa.clear();
-      this.taxa.addAll(reader.getTaxa());
+      this.dataSet.getCharacters().clear(); //TODO this is not well encapsulated
+      this.dataSet.getCharacters().addAll(reader.getCharacters());
+      this.getDataSet().getTaxa().clear(); //TODO this is not well encapsulated
+      this.getDataSet().getTaxa().addAll(reader.getTaxa());
       return true;
     } catch (XmlException e) {
       log().error("Unable to parse XML", e);
