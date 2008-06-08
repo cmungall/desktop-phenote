@@ -155,17 +155,12 @@ public class CharacterBrowserComponent extends PhenoscapeGUIComponent {
 
   private class CharactersTableFormat implements WritableTableFormat<Character> {
 
-    private static final int NUMBER = 0;
-    private static final int DESCRIPTION = 1;
-
     public boolean isEditable(Character character, int column) {
-      return column == DESCRIPTION;
+      return column == 1;
     }
 
     public Character setColumnValue(Character character, Object editedValue, int column) {
-      if (column == DESCRIPTION) {
-        character.setLabel(editedValue.toString());
-      }
+      if (column == 1) { character.setLabel(editedValue.toString()); }
       return character;
     }
 
@@ -174,20 +169,18 @@ public class CharacterBrowserComponent extends PhenoscapeGUIComponent {
     }
 
     public String getColumnName(int column) {
-      if (column == NUMBER) {
-        return "Number";
-      } else {
-        return "Character Description";
+      switch(column) {
+      case 0: return "Number";
+      case 1: return "Character Description";
+      default: return null;
       }
     }
 
     public Object getColumnValue(Character character, int column) {
-      if (column == NUMBER) {
-        return getController().getDataSet().getCharacters().indexOf(character) + 1;
-      } else if (column == DESCRIPTION) {
-        return character.getLabel();
-      } else {
-        return null;
+      switch(column) {
+      case 0: return getController().getDataSet().getCharacters().indexOf(character) + 1;
+      case 1: return character.getLabel();
+      default: return null;
       }
     }
 
@@ -195,18 +188,14 @@ public class CharacterBrowserComponent extends PhenoscapeGUIComponent {
 
   private class StatesTableFormat implements WritableTableFormat<State> {
 
-    private static final int SYMBOL = 0;
-    private static final int DESCRIPTION = 1;
-
     public boolean isEditable(State state, int column) {
       return true;
     }
 
     public State setColumnValue(State state, Object editedValue, int column) {
-      if (column == SYMBOL) {
-        state.setSymbol(editedValue.toString());
-      } else if (column == DESCRIPTION) {
-        state.setLabel(editedValue.toString());
+      switch(column) {
+      case 0: state.setSymbol(editedValue.toString()); break;
+      case 1: state.setLabel(editedValue.toString()); break;
       }
       return state;
     }
@@ -216,24 +205,21 @@ public class CharacterBrowserComponent extends PhenoscapeGUIComponent {
     }
 
     public String getColumnName(int column) {
-      if (column == SYMBOL) {
-        return "Symbol";
-      } else if (column == DESCRIPTION) {
-        return "State Description";
-      } else {
-        return null;
+      switch(column) {
+      case 0: return "Symbol";
+      case 1: return "State Description";
+      default: return null;
       }
     }
 
     public Object getColumnValue(State state, int column) {
-      if (column == SYMBOL) {
-        return state.getSymbol();
-      } else if (column == DESCRIPTION) {
-        return state.getLabel();
-      } else {
-        return null;
+      switch(column) {
+      case 0: return state.getSymbol();
+      case 1: return state.getLabel();
+      default: return null;
       }
     }
+    
   }
   
   private Logger log() {
