@@ -3,6 +3,8 @@ package phenote.gui.field;
 
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOObject;
 import org.obo.datamodel.OBOProperty;
@@ -38,6 +40,10 @@ class CompletionObject {
   }
 
   private String getCompListDisplayString() {
+    if (getCompListDisplayName()==null) {
+      log().error("no display string for term match "+obj);
+      return "";
+    }
     final StringBuffer display = new StringBuffer(this.getCompListDisplayName());
     final String appends = this.getCompListDisplaySuffix();
     final int allowedLength = 61 - appends.length(); // keep room for appends
@@ -153,4 +159,9 @@ class CompletionObject {
   }
 
   private boolean isBlank(String s) { return s == null || s.equals(""); }
+
+  private Logger log() {
+    return Logger.getLogger(getClass());
+  }
+
 }

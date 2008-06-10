@@ -9,10 +9,12 @@ import javax.xml.rpc.ServiceException;
 import org.apache.log4j.Logger;
 
 /** birn soap class */
-//import edu.PhenoWSService;
-import edu.ucsd.ccdb.PhenoWS;
-import edu.ucsd.ccdb.PhenoWSService;
-import edu.ucsd.ccdb.PhenoWSServiceLocator;
+import edu.PhenoWSService;
+import edu.PhenoWS;
+import edu.Exception_Exception;
+//import edu.ucsd.ccdb.PhenoWS;
+//import edu.ucsd.ccdb.PhenoWSService;
+//import edu.ucsd.ccdb.PhenoWSServiceLocator;
 
 import org.obo.owl.dataadapter.OWLAdapter;
 
@@ -33,15 +35,17 @@ public class SoapAdapter implements QueryableDataAdapterI {
 
   public void commit(CharacterListI charList) {
 
-    try {
-      PhenoWSService soap = new PhenoWSServiceLocator();
-      PhenoWS ws = soap.getphenoWSPort();
+    //    try {
+      //PhenoWSService soap = new PhenoWSServiceLocator();
+      PhenoWSService soap = new PhenoWSService();
+      //PhenoWS ws = soap.getphenoWSPort();
+      PhenoWS ws = soap.getPhenoWSPort();
       doDeletes(ws); // go thru transaction list
       doInsertsAndUpdates(ws,charList);
-    }
-    catch (ServiceException e) {
-      log().error("soap failed "+e);
-    }
+      //   }
+//     catch (ServiceException e) {
+//       log().error("soap failed "+e);
+//     }
     
     // clear out transactions!
 
@@ -68,15 +72,19 @@ public class SoapAdapter implements QueryableDataAdapterI {
       String poly = get(c,"coordinates");
       String comm = get(c,"comm");
       String own = get(c,"userName");
-      String e = get(c,"E");
-      String q = get(c,"Q");
-      String e2 = get(c,"E2");
+      String dummy = "http://purl.org/obo/owl/CL#CL_0000161";
+      String e = dummy;//get(c,"E");
+      //      String q = get(c,"Q");
+      String q = dummy;
+      //String e2 = get(c,"E2");
+      String e2 = dummy;
       String rawIm = get(c,"imagename"); // imagename?
       String warpIm = null; // add to config
       String thumb = null;
       int sliceId = getSliceId(c);
       String imRegId = get(c,"regions"); // regions? int?
       
+
       String id = ws.createPhenoTypeFromSmartAtlas
         (poly,isCoronal,comm,own,e,q,e2,rawIm,warpIm,thumb,0,imRegId);
       if (id==null) {
@@ -88,8 +96,8 @@ public class SoapAdapter implements QueryableDataAdapterI {
         setId(id,c);
       }
       
-    }
-    catch (RemoteException e) { log().error("soap failed "+e); }
+      }
+    catch (Exception_Exception e) { log().error("soap failed "+e); }
   }
 
 
