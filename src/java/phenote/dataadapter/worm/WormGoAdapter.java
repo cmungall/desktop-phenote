@@ -52,8 +52,9 @@ public class WormGoAdapter implements QueryableDataAdapterI {
       for (CharacterI chr : l) {
         String joinkey = chr.getValueString("PgdbId");
         if (joinkey == null) continue;
-        System.out.println("Delete "+joinkey+" end"); 
         String blank = "";
+        if (joinkey.equals(blank)) { continue; }
+        System.out.println("Delete "+joinkey+" end"); 
         String postgres_table = "int_name"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "int_effector"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "int_torvariation"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
