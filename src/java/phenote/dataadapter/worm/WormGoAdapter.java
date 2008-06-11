@@ -55,23 +55,19 @@ public class WormGoAdapter implements QueryableDataAdapterI {
         String blank = "";
         if (joinkey.equals(blank)) { continue; }
         System.out.println("Delete "+joinkey+" end"); 
-        String postgres_table = "int_name"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_effector"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_torvariation"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_tortransgene"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_torremark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_effected"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_tedvariation"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_tedtransgene"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_tedremark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_type"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_phenotype"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_rnai"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_remark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_paper"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_curator"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_person"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_otherevi"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        String postgres_table = "gop_wbgene"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "gop_curator_evidence"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "gop_dbtype"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "gop_goid"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "gop_goinference"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "gop_goontology"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "gop_lastupdate"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "gop_paper_evidence"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "gop_person_evidence"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "gop_protein"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "gop_qualifier"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "gop_with"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "gop_comment"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
       }
     } catch (Exception e) {
       System.out.println("Could not delete character: " + e);
@@ -114,6 +110,7 @@ public class WormGoAdapter implements QueryableDataAdapterI {
     // see if the postgres value corresponding to a phenote cell has an entry at all (@row) ; returns ``null'' if no row
     String default_value = null;
     ResultSet rs = null;	// intialize postgres query result
+    System.out.println("SELECT * FROM "+postgres_table+" WHERE joinkey = '"+joinkey+"' ORDER BY gop_timestamp"); 
     try { rs = s.executeQuery("SELECT * FROM "+postgres_table+" WHERE joinkey = '"+joinkey+"' ORDER BY gop_timestamp"); }
     catch (SQLException se) {
       System.out.println("We got an exception while executing our "+postgres_table+" joinkey: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
@@ -171,7 +168,7 @@ public class WormGoAdapter implements QueryableDataAdapterI {
           ResultSet rs = null;
           try { rs = s.executeQuery("SELECT joinkey FROM gop_wbgene "); }	// everything must have a wbgene
           catch (SQLException se) {
-            System.out.println("We got an exception while executing our int_name query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
+            System.out.println("We got an exception while executing our gop_wbgene query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
           try { while (rs.next()) { if (rs.getInt(1) > joinkeyInt) { joinkeyInt = rs.getInt(1); } } joinkeyInt++; joinkey = Integer.toString(joinkeyInt); }
             // get the next highest number joinkey for that character
           catch (SQLException se) {
