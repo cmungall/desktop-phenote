@@ -125,7 +125,8 @@ public class CompListSearcher {
         getSearchTermList(input,searchListener,this);
       } // TaskDelegates dont yet deal with runtime exceptions
       catch (RuntimeException x) {
-        log().error("got runtime exception in completion "+x);
+        log().error("got runtime exception in completion "+x+"\nStack trace: ");
+        x.printStackTrace();
       }
     
     } // end of execute method
