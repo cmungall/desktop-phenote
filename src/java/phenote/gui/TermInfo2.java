@@ -27,6 +27,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.TransferHandler;
 import javax.swing.border.Border;
@@ -173,7 +174,8 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 	private JLabel termName;
 
-	private JLabel termID;
+	//private JLabel termID;
+  private JTextField termID;
 
 	private JLabel ontologyName;
 
@@ -417,7 +419,10 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 
 		JLabel idLabel = new JLabel("ID: ", JLabel.TRAILING);
 		basicInfoPanel.add(idLabel);
-		termID = new JLabel();
+		termID = new JTextField(); //Label(); -> selectable text!
+    termID.setEditable(false);
+    termID.setBorder(null); // ?
+    termID.setBackground(Color.WHITE);
 		idLabel.setLabelFor(termID);
 		basicInfoPanel.add(termID);
 
