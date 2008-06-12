@@ -41,7 +41,9 @@ class CompletionObject {
 
   private String getCompListDisplayString() {
     if (getCompListDisplayName()==null) {
-      log().error("no display string for term match "+obj);
+      // can print out lots of these - slows things down. should deal
+      // better with anon terms with no name
+      //log().error("no display string for term match "+obj);
       return "";
     }
     final StringBuffer display = new StringBuffer(this.getCompListDisplayName());
@@ -130,7 +132,10 @@ class CompletionObject {
 
   private boolean stringMatches(String input, String item) {
     // if configged for adding terms on blanks??
-    if (isBlank(input)) return true; 
+    if (isBlank(input)) return true;
+    // blank items shouldnt even exist, but happens with names for
+    // anonymous terms - need to do something upstream for those
+    if (isBlank(item)) return false; // log error?
     input = input.toLowerCase().trim();
     item = item.toLowerCase().trim();
     if (input.equals(item)) {

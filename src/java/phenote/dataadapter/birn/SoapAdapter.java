@@ -26,11 +26,13 @@ import phenote.datamodel.CharFieldException;
 import phenote.datamodel.TermNotFoundException;
 import phenote.dataadapter.DataAdapterEx;
 import phenote.dataadapter.QueryableDataAdapterI;
+import phenote.edit.EditManager;
 
 public class SoapAdapter implements QueryableDataAdapterI {
 
   private static final String CKB_ID_FIELD = "CKB_ID";
 
+  /** for converting obo ids to owly uris for ckb */ 
   private OWLAdapter owlAdapter = new OWLAdapter();
 
   public void commit(CharacterListI charList) {
@@ -68,8 +70,8 @@ public class SoapAdapter implements QueryableDataAdapterI {
   /** new character (no db id), insert into ckb via soap */
   private void insertNewCharacter(PhenoWS ws, CharacterI c) {
     try {
-      boolean isCoronal = isCoronal(c); // need config field for this?
       String poly = get(c,"coordinates");
+      boolean isCoronal = isCoronal(c); // need config field for this?
       String comm = get(c,"comm");
       String own = get(c,"userName");
       //String dummy = "http://purl.org/obo/owl/CL#CL_0000161";
@@ -96,7 +98,7 @@ public class SoapAdapter implements QueryableDataAdapterI {
         setId(id,c);
       }
       
-      }
+    }
     catch (Exception_Exception e) { log().error("soap failed "+e); }
   }
 
@@ -104,13 +106,48 @@ public class SoapAdapter implements QueryableDataAdapterI {
   /** character has db id, therefore already exists in database, so update it
       should we check if theres actually been changes to char? */
   private void updateCharacter(PhenoWS ws, CharacterI c) {
-    log().info("Updates not yet implemented");
+    //log().info("Updates not yet implemented");
+    String ckbID = get(c,CKB_ID_FIELD);
+    String poly = get(c,"coordinates");
+    boolean isCoronal = isCoronal(c); // need config field for this?
+    String comm = get(c,"comm");
+    String own = get(c,"userName");
+    //String dummy = "http://purl.org/obo/owl/CL#CL_0000161";
+    String e = get(c,"E");
+    String q = get(c,"Q");
+    //String q = dummy;
+    String e2 = get(c,"E2");
+    //String e2 = dummy;
+    String rawIm = get(c,"imagename"); // imagename?
+    String warpIm = null; // add to config
+    String thumb = null;
+    int sliceId = getSliceId(c);
+    String imRegId = get(c,"regions"); // regions? int?
+    try {
+      ws.updatePhenoType(ckbID,poly, isCoronal, comm, own, e, q, e2,rawIm,
+                         warpIm,thumb,sliceId,imRegId);
+      // no exception - success?
+      log.info("Update for "+ckbID+" seems to have succeeded");
+    } catch (Exception_Exception x) {
+      log().error("Update failed for CKB ID "+ckbID);
+    }
   }
 
   /** go thru delete transactions and send delete to soap if there is a valid 
       ckb id */
   private void doDeletes(PhenoWS ws) {
-    log().info("Deletes not yet implemented");
+    for (CharacterI del : EditManager.inst().getDeletedAnnotations()) {
+      if (del.hasValue(CKB_ID_FIELD)) { // dont delete if doesnt have id
+        String id = get(del,CKB_ID_FIELD);
+        try {
+          ws.deletePhenotype(id);
+          log().info("Deleted "+id);
+        }
+        catch (Exception_Exception e) {
+          log().error("Delete failed for "+id);
+        }
+      }
+    }
   }
 
   private String get(CharacterI c, String fieldName) {
