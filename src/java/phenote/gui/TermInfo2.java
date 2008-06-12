@@ -23,6 +23,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
+import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -172,7 +173,9 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 	private JPanel basicInfoPanel;
 
-	private JLabel termName;
+	//private JLabel termName; // no selection
+  //private JTextField termName; // doesnt do html
+  private JEditorPane termName;
 
 	//private JLabel termID;
   private JTextField termID;
@@ -409,7 +412,11 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 		// Create and populate the panel.
 		JLabel nameLabel = new JLabel("Term: ", JLabel.TRAILING);
 		basicInfoPanel.add(nameLabel);
-		termName = new JLabel();
+		termName = new JEditorPane(); // handles html & text select/copy
+    termName.setEditable(false);
+    termName.setBorder(null);
+    termName.setBackground(Color.WHITE);
+    termName.setContentType("text/html");
 		termName.setText("(No Selection)");
 		nameLabel.setLabelFor(termName);
 		nameLabel.setVerticalAlignment(JLabel.TOP);
