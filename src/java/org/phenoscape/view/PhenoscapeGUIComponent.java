@@ -23,11 +23,11 @@ public class PhenoscapeGUIComponent extends AbstractGUIComponent {
   }
   
   /**
-   * Prod an event list to send change notifications for an object it contatins.
+   * Prod an event list to send change notifications for an object it contains.
    * This will cause interface objects displaying items in that list to display the
    * changed value.  This is a Glazed Lists convention.
    */
-  public <T> void updateObjectForGlazedLists(T anObject, EventList<T> aList) {
+  protected <T> void updateObjectForGlazedLists(T anObject, EventList<T> aList) {
     final int index = aList.indexOf(anObject);
     if (index > -1) { aList.set(index, anObject); }
   }

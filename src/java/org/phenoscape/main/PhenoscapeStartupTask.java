@@ -18,10 +18,12 @@ import org.bbop.framework.dock.LayoutDriver;
 import org.bbop.framework.dock.idw.IDWDriver;
 import org.oboedit.gui.tasks.DefaultGUIStartupTask;
 import org.phenoscape.model.PhenoscapeController;
-import org.phenoscape.view.CharacterBrowserComponentFactory;
+import org.phenoscape.view.CharacterTableComponentFactory;
 import org.phenoscape.view.MenuFactory;
+import org.phenoscape.view.OntologyPreferencesComponentFactory;
 import org.phenoscape.view.PhenotypeTableComponentFactory;
 import org.phenoscape.view.SpecimenTableComponentFactory;
+import org.phenoscape.view.StateTableComponentFactory;
 import org.phenoscape.view.TaxonTableComponentFactory;
 
 import phenote.gui.PhenoteDockingTheme;
@@ -29,15 +31,17 @@ import phenote.gui.factories.TermInfoFactory;
 
 public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
   
-  private PhenoscapeController controller = new PhenoscapeController();
+  private PhenoscapeController controller;
   
   @Override
   protected Collection<GUIComponentFactory<?>> getDefaultComponentFactories() {
     Collection<GUIComponentFactory<?>> factories = new ArrayList<GUIComponentFactory<?>>();
-    factories.add(new CharacterBrowserComponentFactory(this.controller));
+    factories.add(new CharacterTableComponentFactory(this.controller));
+    factories.add(new StateTableComponentFactory(this.controller));
     factories.add(new PhenotypeTableComponentFactory(this.controller));
     factories.add(new TaxonTableComponentFactory(this.controller));
     factories.add(new SpecimenTableComponentFactory(this.controller));
+    factories.add(new OntologyPreferencesComponentFactory());
     factories.add(new TermInfoFactory());
     return factories;
   }
@@ -71,6 +75,13 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
     } catch (UnsupportedLookAndFeelException e) {
       log().error("Look and feel not supported", e);
     }
+  }
+  
+  @Override
+  protected void configureSystem() {
+    super.configureSystem();
+    //TODO load ontologies
+    this.controller = new PhenoscapeController(); // initializing here because eventually we'll probably need to pass some ontology reference to it
   }
   
   @Override
@@ -113,7 +124,7 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
   }
 
   @Override
-  protected File getPrefsDir() {
+  public File getPrefsDir() {
     //TODO should be platform specific
     return new File(System.getProperty("user.home") + "/.phenote");
   }

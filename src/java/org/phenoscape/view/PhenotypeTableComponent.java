@@ -18,6 +18,7 @@ import org.phenoscape.model.PhenoscapeController;
 import org.phenoscape.model.Phenotype;
 import org.phenoscape.model.State;
 
+import phenote.gui.BugWorkaroundTable;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.EventList;
 import ca.odell.glazedlists.gui.AdvancedTableFormat;
@@ -42,7 +43,7 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
   private void initializeInterface() {
     this.setLayout(new BorderLayout());
     final EventTableModel<Phenotype> phenotypesTableModel = new EventTableModel<Phenotype>(this.getController().getPhenotypesForCurrentStateSelection(), new PhenotypesTableFormat());
-    final JTable phenotypesTable = new JTable(phenotypesTableModel);
+    final JTable phenotypesTable = new BugWorkaroundTable(phenotypesTableModel);
     phenotypesTable.setSelectionModel(this.getController().getCurrentPhenotypesSelectionModel());
     for (int i = 0; i < phenotypesTable.getColumnCount(); i++) {
       Class<?> classs = phenotypesTable.getColumnClass(i);

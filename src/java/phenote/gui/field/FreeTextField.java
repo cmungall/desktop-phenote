@@ -33,7 +33,7 @@ import phenote.datamodel.CharacterI;
 import phenote.edit.CompoundTransaction;
 import phenote.error.ErrorEvent;
 import phenote.error.ErrorManager;
-import phenote.gui.CorrectRowHeightCellEditor;
+import phenote.gui.CorrectLineBorderCellEditor;
 import phenote.gui.DelegatingTransferHandler;
 import phenote.gui.FieldRightClickMenu;
 import phenote.gui.GuiUtil;
@@ -68,7 +68,7 @@ class FreeTextField extends CharFieldGui {
   
   @Override
   public TableCellEditor getTableCellEditor() {
-    return new CorrectRowHeightCellEditor(this.getTextField());
+    return new CorrectLineBorderCellEditor(this.getTextField());
   }
 
   protected boolean hasInputVerifier() {

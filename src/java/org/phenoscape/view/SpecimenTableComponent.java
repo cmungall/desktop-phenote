@@ -18,6 +18,7 @@ import org.phenoscape.model.PhenoscapeController;
 import org.phenoscape.model.Specimen;
 import org.phenoscape.model.Taxon;
 
+import phenote.gui.BugWorkaroundTable;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.EventList;
 import ca.odell.glazedlists.gui.AdvancedTableFormat;
@@ -77,7 +78,7 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
   private void initializeInterface() {
     this.setLayout(new BorderLayout());
     final EventTableModel<Specimen> specimensTableModel = new EventTableModel<Specimen>(this.getController().getSpecimensForCurrentTaxonSelection(), new SpecimensTableFormat());
-    final JTable specimensTable = new JTable(specimensTableModel);
+    final JTable specimensTable = new BugWorkaroundTable(specimensTableModel);
     specimensTable.setSelectionModel(this.getController().getCurrentSpecimensSelectionModel());
     for (int i = 0; i < specimensTable.getColumnCount(); i++) {
       Class<?> classs = specimensTable.getColumnClass(i);

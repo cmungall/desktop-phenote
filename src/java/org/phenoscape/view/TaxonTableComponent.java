@@ -19,6 +19,7 @@ import org.phenoscape.model.PhenoscapeController;
 import org.phenoscape.model.Specimen;
 import org.phenoscape.model.Taxon;
 
+import phenote.gui.BugWorkaroundTable;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.EventList;
 import ca.odell.glazedlists.event.ListEvent;
@@ -66,15 +67,10 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
   private void initializeInterface() {
     this.setLayout(new BorderLayout());
     final EventTableModel<Taxon> taxaTableModel = new EventTableModel<Taxon>(this.getController().getDataSet().getTaxa(), new TaxaTableFormat());
-    final JTable taxaTable = new JTable(taxaTableModel);
+    final JTable taxaTable = new BugWorkaroundTable(taxaTableModel);
     taxaTable.setSelectionModel(this.getController().getTaxaSelectionModel());
-    for (int i = 0; i < taxaTable.getColumnCount(); i++) {
-      Class<?> classs = taxaTable.getColumnClass(i);
-      if (classs.equals(OBOClass.class)) {
-        taxaTable.getColumnModel().getColumn(i).setCellRenderer(new TermRenderer());
-        taxaTable.getColumnModel().getColumn(i).setCellEditor(new TermEditor(new JTextField()));
-      }
-    }
+    taxaTable.setDefaultRenderer(OBOClass.class, new TermRenderer());
+    taxaTable.setDefaultEditor(OBOClass.class, new TermEditor(new JTextField(), this.getController().getOntologyController().getTaxonTermSet()));
     taxaTable.putClientProperty("Quaqua.Table.style", "striped");
     this.add(new JScrollPane(taxaTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);

@@ -15,6 +15,7 @@ import ca.odell.glazedlists.swing.EventSelectionModel;
 
 public class PhenoscapeController extends DocumentController {
   
+  private final OntologyController ontologyController = new OntologyController();
   private final DataSet dataSet = new DataSet();
   private final EventSelectionModel<Character> charactersSelectionModel;
   private final EventSelectionModel<Taxon> taxaSelectionModel;
@@ -24,7 +25,7 @@ public class PhenoscapeController extends DocumentController {
   private final EventSelectionModel<State> currentStatesSelectionModel;
   private final EventList<Phenotype> currentPhenotypes;
   private final EventSelectionModel<Phenotype> currentPhenotypesSelectionModel;
-
+  
   public PhenoscapeController() {
     this.charactersSelectionModel = new EventSelectionModel<Character>(this.dataSet.getCharacters());
     this.charactersSelectionModel.setSelectionMode(EventSelectionModel.SINGLE_SELECTION);
@@ -55,6 +56,10 @@ public class PhenoscapeController extends DocumentController {
     );
     this.currentPhenotypesSelectionModel = new EventSelectionModel<Phenotype>(this.currentPhenotypes);
     this.currentPhenotypesSelectionModel.setSelectionMode(EventSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+  }
+  
+  public OntologyController getOntologyController() {
+    return this.ontologyController;
   }
   
   public DataSet getDataSet() {
