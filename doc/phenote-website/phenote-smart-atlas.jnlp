@@ -58,7 +58,6 @@ href="phenote.jnlp">
 	<jar href="jars/saaj.jar"/>
 	<jar href="jars/jaxrpc.jar"/>
 	<jar href="jars/wsdl4j-1.5.1.jar"/>
-  <jar href="jars/macify-1.1.jar"/>
 
   <!-- for soap adapter to ckb -->
 	<jar href="jars/jsr181-api.jar"/>
@@ -73,6 +72,18 @@ href="phenote.jnlp">
 	<jar href="jars/sjsxp.jar"/>
 	<jar href="jars/streambuffer.jar"/>
 	<jar href="jars/saaj-api.jar"/>
+
+  <!-- plus jars -->
+	<jar  href="jars/macify-1.1.jar"/>
+	<jar  href="jars/tablelayout.jar"/>
+	<jar  href="jars/idw-gpl.jar"/>
+	<jar  href="jars/jaxrpc.jar"/>
+	<jar  href="jars/axis.jar"/>
+	<jar  href="jars/ProtocolEditor.jar"/>
+	<jar  href="jars/ols-client.jar"/>
+	<jar  href="jars/wsdl4j-1.5.1.jar"/>
+	<jar  href="jars/owlapi-api.jar"/>
+  <jar  href="jars/piccolo.jar"/>
 
 </resources>
 <!-- was smart-atlas.cfg, merged into birn.cfg  -->

@@ -62,13 +62,12 @@ href="phenote.jnlp">
   <!-- for worm adapter -->
 	<jar  href="jars/postgresql-8.2-504.jdbc3.jar"/>
   
-  <jar href="jars/macify-1.1.jar"/>
-
 
   <!-- jars not needed for webstart(?) axis, commons-beanutils-1.6,  commons-discovery,
       commons-lang, eutils,jaxrpc, jdom, jebl, jhindexer, jlfgr, jnlp, jsp, jsr
       jst, junit, jwf, layouts, libquaqua, macify?   -->
-  <!-- jars needed for phenote2 but not phenote1? idw-gpl, commons*? -->
+  <!-- jars needed for phenote2 but not phenote1? idw-gpl, commons*? see
+      phenote-plus.jnlp  -->
 
 
 
