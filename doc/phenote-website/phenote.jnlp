@@ -62,6 +62,7 @@ href="phenote.jnlp">
   <!-- for worm adapter -->
 	<jar  href="jars/postgresql-8.2-504.jdbc3.jar"/>
   
+  <jar href="jars/macify-1.1.jar"/>
 
 
   <!-- jars not needed for webstart(?) axis, commons-beanutils-1.6,  commons-discovery,
