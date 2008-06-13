@@ -100,13 +100,19 @@ public class Phenote {
   private Phenote() {}
 
   private static void init(String[] args) {
-    initBackend(args);
+    initBackend(args,true);
     LOG.debug("Backend initialized, initializing GUI");
     phenote.initGui();
     phenote.splashScreenDestruct(); // initBackend startsup splash
   }
 
-  static void initBackend(String[] args) {
+  /** args are command line arguments
+      if doSplash is true then display phenote elephant splash screen
+      the splash screen comes up blank for plus - needs to be fixed as
+      its a nice splash. even worse on some linuxes the splash is blank
+      and hangs in front of phenote - so doSplash false allows for
+      disabling the splash til these bugs are fixed */
+  static void initBackend(String[] args,boolean doSplash) {
     initLogger();
     initLookAndFeel();
     phenote = getPhenote();
@@ -115,7 +121,7 @@ public class Phenote {
     phenote.doCommandLineAndConfig(args); // does config
     // have to init splash screen after config as config dictates whether to
     // show splash screen (loading screen can threadlock)
-    phenote.splashScreenInit();
+    if (doSplash) phenote.splashScreenInit();
     phenote.initOntologies();
     // phenote sometimes hangs right around here!???!
     LOG.debug("Ontologies initialized, checking command line for read & write");

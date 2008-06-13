@@ -101,10 +101,13 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
 
   private void initPhenote() {
-    Phenote.initBackend(args);
+    // false - supress splash screen, bug in plus comes up blank and on linux it
+    // hangs in front of phenote - need to fix, supress for now
+    boolean doSplash = false;
+    Phenote.initBackend(args,doSplash);
     selectionBridge.install();
     // init backend sets off splash screent that must be destroyed
-    Phenote.getPhenote().splashScreenDestruct();
+    if (doSplash) Phenote.getPhenote().splashScreenDestruct();
   }
 
   @Override
