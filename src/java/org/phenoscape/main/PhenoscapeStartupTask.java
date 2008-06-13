@@ -94,7 +94,7 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
   
   @Override
   protected String getAppName() {
-    return "Phenoscape";
+    return "Phenoscape Annotator";
   }
   
   @Override
@@ -129,7 +129,7 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
 
   @Override
   public File getPrefsDir() {
-    return CrossPlatform.getUserPreferencesFolder(this.getAppName());
+    return CrossPlatform.getUserPreferencesFolder(this.getAppID());
   }
   
   @Override

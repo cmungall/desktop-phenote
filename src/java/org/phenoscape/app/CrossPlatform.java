@@ -25,6 +25,10 @@ public class CrossPlatform {
     return !getCurrentPlatform().equals(Platform.MAC);
   }
   
+  /**
+   * Returns a folder suitable for storing per-user application support files.
+   * This is unrelated to the storage location for java.util.prefs.
+   */
   public static File getUserPreferencesFolder(String name) {
     final String homePath = System.getProperty("user.home");
     switch(getCurrentPlatform()) {
