@@ -60,6 +60,7 @@ href="phenote.jnlp">
 	<jar href="jars/wsdl4j-1.5.1.jar"/>
 
   <!-- for soap adapter to ckb -->
+	<jar href="jars/birn-soap.jar"/>
 	<jar href="jars/jsr181-api.jar"/>
 	<jar href="jars/jaxws-api.jar"/>
 	<jar href="jars/jaxb-api.jar"/>
