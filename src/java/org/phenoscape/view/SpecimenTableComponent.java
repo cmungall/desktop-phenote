@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
 import org.apache.log4j.Logger;
@@ -19,6 +20,7 @@ import org.phenoscape.model.Specimen;
 import org.phenoscape.model.Taxon;
 
 import phenote.gui.BugWorkaroundTable;
+import phenote.gui.TableColumnPrefsSaver;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.EventList;
 import ca.odell.glazedlists.gui.AdvancedTableFormat;
@@ -80,13 +82,10 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
     final EventTableModel<Specimen> specimensTableModel = new EventTableModel<Specimen>(this.getController().getSpecimensForCurrentTaxonSelection(), new SpecimensTableFormat());
     final JTable specimensTable = new BugWorkaroundTable(specimensTableModel);
     specimensTable.setSelectionModel(this.getController().getCurrentSpecimensSelectionModel());
-    for (int i = 0; i < specimensTable.getColumnCount(); i++) {
-      Class<?> classs = specimensTable.getColumnClass(i);
-      if (classs.equals(OBOClass.class)) {
-        specimensTable.getColumnModel().getColumn(i).setCellRenderer(new TermRenderer());
-      }
-    }
+    specimensTable.setDefaultRenderer(OBOClass.class, new TermRenderer());
+    specimensTable.getColumnModel().getColumn(0).setCellEditor(new TermEditor(new JTextField(), this.getController().getOntologyController().getCollectionTermSet()));
     specimensTable.putClientProperty("Quaqua.Table.style", "striped");
+    new TableColumnPrefsSaver(specimensTable, this.getClass().getName());
     this.add(new JScrollPane(specimensTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);
   }

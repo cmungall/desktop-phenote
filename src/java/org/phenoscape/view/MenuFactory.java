@@ -68,9 +68,11 @@ public class MenuFactory {
     final JMenu menu = new JMenu("Edit");
     final Action undoAction = new ResponderChainAction("undo", "Undo");
     undoAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+    undoAction.setEnabled(false); //TODO add Undo support
     menu.add(new JMenuItem(undoAction));
     final Action redoAction = new ResponderChainAction("redo", "Redo");
     redoAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() | InputEvent.SHIFT_MASK));
+    redoAction.setEnabled(false); //TODO add Redo support
     menu.add(new JMenuItem(redoAction));
     menu.addSeparator();
     final Action cutAction = new ResponderChainAction("cut", "Cut");

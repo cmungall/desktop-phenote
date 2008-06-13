@@ -9,6 +9,7 @@ import org.apache.xmlbeans.XmlException;
 import org.phenoscape.app.DocumentController;
 import org.phenoscape.io.NeXMLReader;
 
+import phenote.gui.selection.SelectionManager;
 import ca.odell.glazedlists.CollectionList;
 import ca.odell.glazedlists.EventList;
 import ca.odell.glazedlists.swing.EventSelectionModel;
@@ -120,6 +121,10 @@ public class PhenoscapeController extends DocumentController {
   @Override
   public boolean writeData(File aFile) {
     return false;
+  }
+  
+  public SelectionManager getPhenoteSelectionManager() {
+    return SelectionManager.inst();
   }
   
   private Logger log() {

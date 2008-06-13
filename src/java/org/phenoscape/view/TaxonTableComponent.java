@@ -20,6 +20,7 @@ import org.phenoscape.model.Specimen;
 import org.phenoscape.model.Taxon;
 
 import phenote.gui.BugWorkaroundTable;
+import phenote.gui.TableColumnPrefsSaver;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.EventList;
 import ca.odell.glazedlists.event.ListEvent;
@@ -70,8 +71,9 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
     final JTable taxaTable = new BugWorkaroundTable(taxaTableModel);
     taxaTable.setSelectionModel(this.getController().getTaxaSelectionModel());
     taxaTable.setDefaultRenderer(OBOClass.class, new TermRenderer());
-    taxaTable.setDefaultEditor(OBOClass.class, new TermEditor(new JTextField(), this.getController().getOntologyController().getTaxonTermSet()));
+    taxaTable.getColumnModel().getColumn(0).setCellEditor(new TermEditor(new JTextField(), this.getController().getOntologyController().getTaxonTermSet()));
     taxaTable.putClientProperty("Quaqua.Table.style", "striped");
+    new TableColumnPrefsSaver(taxaTable, this.getClass().getName());
     this.add(new JScrollPane(taxaTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);
   }
@@ -103,7 +105,7 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
   private class TaxaTableFormat implements WritableTableFormat<Taxon>, AdvancedTableFormat<Taxon> {
 
     public boolean isEditable(Taxon taxon, int column) {
-      return column != 2;
+      return true;
     }
 
     public Taxon setColumnValue(Taxon taxon, Object editedValue, int column) {
@@ -115,14 +117,13 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
     }
 
     public int getColumnCount() {
-      return 3;
+      return 2;
     }
 
     public String getColumnName(int column) {
       switch (column) {
       case 0: return "Valid Taxon";
       case 1: return "Publication Taxon";
-      case 2: return "Specimens";
       default: return null;
       }
     }
@@ -131,7 +132,6 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
       switch (column) {
       case 0: return taxon.getValidName();
       case 1: return taxon.getPublicationName();
-      case 2: return taxon.getSpecimens().toString();
       default: return null;
       }
     }
@@ -140,7 +140,6 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
       switch (column) {
       case 0: return OBOClass.class;
       case 1: return String.class;
-      case 2: return String.class;
       default: return null;
       }
     }

@@ -17,6 +17,7 @@ import org.phenoscape.model.PhenoscapeController;
 import org.phenoscape.model.State;
 
 import phenote.gui.BugWorkaroundTable;
+import phenote.gui.TableColumnPrefsSaver;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.EventList;
 import ca.odell.glazedlists.gui.WritableTableFormat;
@@ -43,6 +44,7 @@ public class StateTableComponent extends PhenoscapeGUIComponent {
     final JTable statesTable = new BugWorkaroundTable(statesTableModel);
     statesTable.setSelectionModel(this.getController().getCurrentStatesSelectionModel());
     statesTable.putClientProperty("Quaqua.Table.style", "striped");
+    new TableColumnPrefsSaver(statesTable, this.getClass().getName());
     this.add(new JScrollPane(statesTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);
   }

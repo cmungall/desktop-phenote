@@ -16,6 +16,7 @@ import org.phenoscape.model.Character;
 import org.phenoscape.model.PhenoscapeController;
 
 import phenote.gui.BugWorkaroundTable;
+import phenote.gui.TableColumnPrefsSaver;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.EventList;
 import ca.odell.glazedlists.gui.WritableTableFormat;
@@ -42,6 +43,7 @@ public class CharacterTableComponent extends PhenoscapeGUIComponent {
     final JTable charactersTable = new BugWorkaroundTable(charactersTableModel);
     charactersTable.setSelectionModel(this.getController().getCharactersSelectionModel());
     charactersTable.putClientProperty("Quaqua.Table.style", "striped");
+    new TableColumnPrefsSaver(charactersTable, this.getClass().getName());
     this.add(new JScrollPane(charactersTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);
   }

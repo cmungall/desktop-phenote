@@ -28,6 +28,7 @@ import org.phenoscape.view.TaxonTableComponentFactory;
 
 import phenote.gui.PhenoteDockingTheme;
 import phenote.gui.factories.TermInfoFactory;
+import phenote.gui.selection.SelectionBridge;
 
 public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
   
@@ -110,15 +111,16 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
     driver.setSaveLayoutOnExit(false);
     return driver;
   }
+  
   @Override
   protected String getPerspectiveResourceDir() {
-    return "phenote/gui/layout/resources";
+    return "org/phenoscape/view/layouts";
   }
 
   @Override
   protected String getDefaultPerspectiveResourcePath() {
     if (getPerspectiveResourceDir() != null)
-      return getPerspectiveResourceDir() + "/phenote_classic.idw";
+      return getPerspectiveResourceDir() + "/default.idw";
     else
       return null;
   }
@@ -126,7 +128,7 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
   @Override
   public File getPrefsDir() {
     //TODO should be platform specific
-    return new File(System.getProperty("user.home") + "/.phenote");
+    return new File(System.getProperty("user.home") + "/.phenoscape");
   }
   
   @Override
@@ -135,6 +137,12 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
     //GUIManager.addVetoableShutdownListener(DirtyDocumentIndicator.inst());
   }
   
+  @Override
+  protected void doOtherInstallations() {
+    super.doOtherInstallations();
+    new SelectionBridge().install();
+  }
+
   @Override
   protected Collection<? extends JMenuItem> getDefaultMenus() {
     return (new MenuFactory(this.controller)).createMenus();

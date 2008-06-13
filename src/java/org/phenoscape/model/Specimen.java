@@ -22,7 +22,10 @@ public class Specimen {
   
   public String toString() {
     final StringBuffer buffer = new StringBuffer();
-    if (this.collectionCode != null) { buffer.append(this.collectionCode.getName()); }
+    if (this.collectionCode != null) {
+      buffer.append(this.collectionCode.getName());
+      buffer.append(" ");
+    }
     if (this.catalogID != null) { buffer.append(this.catalogID); }
     return buffer.toString();
   }
