@@ -109,6 +109,7 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
     }
 
     public Taxon setColumnValue(Taxon taxon, Object editedValue, int column) {
+      if (editedValue instanceof OBOClass) { updateGlobalTermSelection((OBOClass)editedValue); }
       switch (column) {
       case 0: taxon.setValidName((OBOClass)editedValue); break;
       case 1: taxon.setPublicationName(editedValue.toString()); break;

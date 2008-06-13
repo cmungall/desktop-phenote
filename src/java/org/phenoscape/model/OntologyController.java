@@ -11,12 +11,12 @@ import org.obo.dataadapter.OBOFileAdapter;
 import org.obo.dataadapter.OBOMetaData;
 import org.obo.datamodel.Namespace;
 import org.obo.datamodel.OBOSession;
+import org.oboedit.controller.SessionManager;
 
 public class OntologyController {
 
-  private OBOSession session;
-  private OBOFileAdapter fileAdapter;
-  private OBOMetaData metadata;
+  private final OBOFileAdapter fileAdapter;
+  private final OBOMetaData metadata;
   
   private static String TTO = "http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/taxonomy/teleost_taxonomy.obo";
   //TODO get proper path for COLLECTION
@@ -36,7 +36,7 @@ public class OntologyController {
     config.setBasicSave(false);
     config.setAllowDangling(true);
     try {
-      this.session = this.fileAdapter.doOperation(OBOAdapter.READ_ONTOLOGY, config, null);
+      SessionManager.getManager().setSession(this.fileAdapter.doOperation(OBOAdapter.READ_ONTOLOGY, config, null));
     } catch (DataAdapterException e) {
       log().fatal("Failed to load ontologies", e);
     }
@@ -44,7 +44,7 @@ public class OntologyController {
   }
 
   public OBOSession getOBOSession() {
-    return this.session;
+    return SessionManager.getManager().getSession();
   }
 
   public TermSet getTaxonTermSet() {

@@ -1,5 +1,7 @@
 package org.phenoscape.app;
 
+import java.io.File;
+
 public class CrossPlatform {
   
   public static enum Platform { MAC, WINDOWS, UNIX; }
@@ -21,6 +23,17 @@ public class CrossPlatform {
    */
   public static boolean shouldPutExitInFileMenu() {
     return !getCurrentPlatform().equals(Platform.MAC);
+  }
+  
+  public static File getUserPreferencesFolder(String name) {
+    final String homePath = System.getProperty("user.home");
+    switch(getCurrentPlatform()) {
+    // it would be much better to find a supported method for obtaining the Application Support folder
+    case MAC: return new File(homePath, "Library/Application Support/" + name);
+    case WINDOWS: return new File(homePath, name);
+      // UNIX behavior is default
+    default: return new File(homePath, "." + name.toLowerCase());
+    }
   }
 
 }

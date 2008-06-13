@@ -1,6 +1,7 @@
 package org.phenoscape.view;
 
 import org.bbop.framework.AbstractGUIComponent;
+import org.obo.datamodel.OBOClass;
 import org.phenoscape.model.PhenoscapeController;
 
 import ca.odell.glazedlists.EventList;
@@ -32,4 +33,12 @@ public class PhenoscapeGUIComponent extends AbstractGUIComponent {
     if (index > -1) { aList.set(index, anObject); }
   }
 
+  /**
+   * Update SelectionManager with current term selection.  This allows components
+   * like the Term Info panel to display information about the term.
+   */
+  protected void updateGlobalTermSelection(OBOClass term) {
+    this.getController().getPhenoteSelectionManager().selectTerm(this, term, false);
+  }
+  
 }

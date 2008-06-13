@@ -17,6 +17,7 @@ import org.bbop.framework.GUIComponentFactory;
 import org.bbop.framework.dock.LayoutDriver;
 import org.bbop.framework.dock.idw.IDWDriver;
 import org.oboedit.gui.tasks.DefaultGUIStartupTask;
+import org.phenoscape.app.CrossPlatform;
 import org.phenoscape.model.PhenoscapeController;
 import org.phenoscape.view.CharacterTableComponentFactory;
 import org.phenoscape.view.MenuFactory;
@@ -27,6 +28,7 @@ import org.phenoscape.view.StateTableComponentFactory;
 import org.phenoscape.view.TaxonTableComponentFactory;
 
 import phenote.gui.PhenoteDockingTheme;
+import phenote.gui.factories.PhenoteOntologyTreeEditorFactory;
 import phenote.gui.factories.TermInfoFactory;
 import phenote.gui.selection.SelectionBridge;
 
@@ -44,6 +46,7 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
     factories.add(new SpecimenTableComponentFactory(this.controller));
     factories.add(new OntologyPreferencesComponentFactory());
     factories.add(new TermInfoFactory());
+    factories.add(new PhenoteOntologyTreeEditorFactory());
     return factories;
   }
   
@@ -81,13 +84,12 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
   @Override
   protected void configureSystem() {
     super.configureSystem();
-    //TODO load ontologies
-    this.controller = new PhenoscapeController(); // initializing here because eventually we'll probably need to pass some ontology reference to it
+    this.controller = new PhenoscapeController();
   }
   
   @Override
   protected String getAppID() {
-    return "phenoscape";
+    return "Phenoscape";
   }
   
   @Override
@@ -127,13 +129,12 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
 
   @Override
   public File getPrefsDir() {
-    //TODO should be platform specific
-    return new File(System.getProperty("user.home") + "/.phenoscape");
+    return CrossPlatform.getUserPreferencesFolder(this.getAppName());
   }
   
   @Override
   protected void installSystemListeners() {
-    //TODO make dirty document indicator work
+    //TODO make dirty document indicator work (and Undo/Redo)
     //GUIManager.addVetoableShutdownListener(DirtyDocumentIndicator.inst());
   }
   

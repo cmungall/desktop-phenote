@@ -10,12 +10,12 @@ package org.phenoscape.app;
 public interface CompletionItem<T> {
   
   /**
-   * Returns text to be displayed in autocompletion interface component.
+   * Returns text to be displayed in an autocompletion interface component.
    */
   public String getDescription();
   
   /**
-   * Returns value object matched by this autocompletion.
+   * Returns the value object matched by this autocompletion.
    */
   public T getValue();
   
