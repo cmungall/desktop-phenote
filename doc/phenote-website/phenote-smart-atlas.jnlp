@@ -25,7 +25,7 @@ href="phenote.jnlp">
          (JRE) that are supported by the application.
          Multiple entries of this kind are allowed, in which
          case they are considered to be in order of preference -->
-	<j2se version="1.5+" initial-heap-size="64m" max-heap-size="600m" />
+	<j2se version="1.5+" initial-heap-size="100m" max-heap-size="700m" />
 	<jar href="jars/phenote.jar" />
 	<jar href="jars/oboedit.jar" />
 	<jar href="jars/obo.jar" />
@@ -59,10 +59,24 @@ href="phenote.jnlp">
 	<jar href="jars/jaxrpc.jar"/>
 	<jar href="jars/wsdl4j-1.5.1.jar"/>
 
+  <!-- for soap adapter to ckb -->
+	<jar href="jsr181-api.jar"/>
+	<jar href="jaxws-api.jar"/>
+	<jar href="jaxb-api.jar"/>
+	<jar href="jaxws-rt.jar"/>
+	<jar href="jaxb-impl.jar"/>
+	<jar href="activation.jar"/>
+	<jar href="jaxb-xjc.jar"/>
+	<jar href="stax-ex.jar"/>
+	<jar href="saaj-impl.jar"/>
+	<jar href="sjsxp.jar"/>
+	<jar href="stat-ex.jar"/>
+	<jar href="streambuffer.jar"/>
+	<jar href="saaj-api.jar"/>
 
 </resources>
 <!-- was smart-atlas.cfg, merged into birn.cfg  -->
-<application-desc main-class="phenote.main.Phenote">
+<application-desc main-class="phenote.main.Phenote2">
         <argument>-c</argument>
         <argument>/birn.cfg</argument>
 </application-desc>

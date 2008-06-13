@@ -25,10 +25,12 @@ href="phenote.jnlp">
          (JRE) that are supported by the application.
          Multiple entries of this kind are allowed, in which
          case they are considered to be in order of preference -->
-	<j2se version="1.5+" initial-heap-size="64m" max-heap-size="600m" />
+	<j2se version="1.5+" initial-heap-size="100m" max-heap-size="700m" />
 	<jar href="jars/phenote.jar" />
 	<jar href="jars/oboedit.jar" />
-	<jar href="jars/org.geneontology.jar" />
+	<jar href="jars/obo.jar" />
+	<jar href="jars/bbop.jar" />
+
 	<jar href="jars/BrowserLauncher2-10rc4.jar" />
 	<jar href="jars/jsr173_1.0_api.jar" />
 	<jar href="jars/phenoxmlbeans.jar" />
@@ -44,9 +46,33 @@ href="phenote.jnlp">
 	<jar href="jars/jdom.jar" />
 	<jar href="jars/quaqua.jar" />
 	<jar href="jars/jebl-0.4.jar" />
-	<jar href="jars/swing-layout.jar" />
 	<jar href="jars/glazedlists-1.7.0_java15.jar" />
+	<jar  href="jars/swing-layout.jar"/>
+	<jar  href="jars/swingx-2007_10_14.jar"/>
+	<jar  href="jars/eutils.jar"/>
+	<jar href="jars/commons-discovery-0.2.jar"/>
+	<jar href="jars/commons-lang-2.1.jar"/>
+	<jar href="jars/commons-beanutils-1.6.jar"/>
+	<jar href="jars/commons-logging-1.0.4.jar"/>
 	<nativelib href="jars/phenote-nativelibs.jar"/>
+	<jar href="jars/saaj.jar"/>
+	<jar href="jars/jaxrpc.jar"/>
+	<jar href="jars/wsdl4j-1.5.1.jar"/>
+
+  <!-- for soap adapter to ckb -->
+	<jar href="jsr181-api.jar"/>
+	<jar href="jaxws-api.jar"/>
+	<jar href="jaxb-api.jar"/>
+	<jar href="jaxws-rt.jar"/>
+	<jar href="jaxb-impl.jar"/>
+	<jar href="activation.jar"/>
+	<jar href="jaxb-xjc.jar"/>
+	<jar href="stax-ex.jar"/>
+	<jar href="saaj-impl.jar"/>
+	<jar href="sjsxp.jar"/>
+	<jar href="stat-ex.jar"/>
+	<jar href="streambuffer.jar"/>
+	<jar href="saaj-api.jar"/>
 
 </resources>
 <!-- was smart-atlas.cfg, merged into birn.cfg  -->
