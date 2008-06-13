@@ -70,7 +70,6 @@ href="phenote.jnlp">
 	<jar href="jars/stax-ex.jar"/>
 	<jar href="jars/saaj-impl.jar"/>
 	<jar href="jars/sjsxp.jar"/>
-	<jar href="jars/stat-ex.jar"/>
 	<jar href="jars/streambuffer.jar"/>
 	<jar href="jars/saaj-api.jar"/>
 

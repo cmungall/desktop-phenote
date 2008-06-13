@@ -57,10 +57,9 @@ jaxws-rt.jar (ProviderImpl)
 jaxb-impl.jar (ContextFactory)
 activation.jar (DataSource)
 jaxb-xjc.jar (CatalogManager)
-stax-ex.jar (for xml input factory)
 saaj-impl.jar (SaajMetaFactoryImpl)
 sjsxp.jar (for setting up parser?)
-stat-ex.jar (XMLStreamReaderEx)
+stax-ex.jar (XMLStreamReaderEx)
 streambuffer.jar (XMLStreamBuffer)
 so saaj-api.jar has same classes as exsiting saaj.jar BUT birn soap will not run off 
 existing saaj.jar 
