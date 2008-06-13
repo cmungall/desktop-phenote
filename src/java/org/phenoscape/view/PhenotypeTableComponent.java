@@ -21,20 +21,29 @@ import org.phenoscape.model.Phenotype;
 import org.phenoscape.model.State;
 
 import phenote.gui.BugWorkaroundTable;
+import phenote.gui.SortDisabler;
 import phenote.gui.TableColumnPrefsSaver;
+import phenote.util.EverythingEqualComparator;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.EventList;
+import ca.odell.glazedlists.GlazedLists;
+import ca.odell.glazedlists.SortedList;
 import ca.odell.glazedlists.gui.AdvancedTableFormat;
 import ca.odell.glazedlists.gui.WritableTableFormat;
 import ca.odell.glazedlists.swing.EventTableModel;
+import ca.odell.glazedlists.swing.TableComparatorChooser;
+
+import com.eekboom.utils.Strings;
 
 public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
 
   private JButton addPhenotypeButton;
   private JButton deletePhenotypeButton;
+  private final SortedList<Phenotype> sortedPhenotypes;
   
   public PhenotypeTableComponent(String id, PhenoscapeController controller) {
     super(id, controller);
+    this.sortedPhenotypes = new SortedList<Phenotype>(controller.getPhenotypesForCurrentStateSelection(), new EverythingEqualComparator<Phenotype>());
   }
   
   @Override
@@ -46,7 +55,7 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
   private void initializeInterface() {
     this.setLayout(new BorderLayout());
     final PhenotypesTableFormat tableFormat = new PhenotypesTableFormat();
-    final EventTableModel<Phenotype> phenotypesTableModel = new EventTableModel<Phenotype>(this.getController().getPhenotypesForCurrentStateSelection(), tableFormat);
+    final EventTableModel<Phenotype> phenotypesTableModel = new EventTableModel<Phenotype>(this.sortedPhenotypes, tableFormat);
     final JTable phenotypesTable = new BugWorkaroundTable(phenotypesTableModel);
     phenotypesTable.setSelectionModel(this.getController().getCurrentPhenotypesSelectionModel());
     phenotypesTable.setDefaultRenderer(OBOClass.class, new TermRenderer());
@@ -56,6 +65,8 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
     }
     phenotypesTable.putClientProperty("Quaqua.Table.style", "striped");
     new TableColumnPrefsSaver(phenotypesTable, this.getClass().getName());
+    final TableComparatorChooser<Phenotype> sortChooser = new TableComparatorChooser<Phenotype>(phenotypesTable, this.sortedPhenotypes, false);
+    sortChooser.addSortActionListener(new SortDisabler());
     this.add(new JScrollPane(phenotypesTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);
   }
@@ -195,9 +206,17 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
       }
     }
 
-    public Comparator<?> getColumnComparator(int arg0) {
-      // TODO Auto-generated method stub
-      return null;
+    public Comparator<?> getColumnComparator(int column) {
+      switch (column) {
+      case 0: return GlazedLists.comparableComparator();
+      case 1: return GlazedLists.comparableComparator();
+      case 2: return GlazedLists.comparableComparator();
+      case 3: return GlazedLists.comparableComparator();
+      case 4: return GlazedLists.comparableComparator();
+      case 5: return GlazedLists.comparableComparator();
+      case 6: return Strings.getNaturalComparator();
+      default: return null;
+      }
     }
     
   }

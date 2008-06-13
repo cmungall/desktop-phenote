@@ -190,6 +190,12 @@ public final class Strings {
      *         and a value larger than zero iff <code>s</code> lexicographically follows <code>t</code>
      */
     private static int compareNatural(String s, String t, boolean caseSensitive, Collator collator) {
+        if (s == null) {
+          return -1;
+        } else if (t == null) {
+          return 1;
+        }
+      
         int sIndex = 0;
         int tIndex = 0;
 

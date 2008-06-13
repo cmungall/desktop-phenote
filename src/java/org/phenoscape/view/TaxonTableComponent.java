@@ -20,22 +20,31 @@ import org.phenoscape.model.Specimen;
 import org.phenoscape.model.Taxon;
 
 import phenote.gui.BugWorkaroundTable;
+import phenote.gui.SortDisabler;
 import phenote.gui.TableColumnPrefsSaver;
+import phenote.util.EverythingEqualComparator;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.EventList;
+import ca.odell.glazedlists.GlazedLists;
+import ca.odell.glazedlists.SortedList;
 import ca.odell.glazedlists.event.ListEvent;
 import ca.odell.glazedlists.event.ListEventListener;
 import ca.odell.glazedlists.gui.AdvancedTableFormat;
 import ca.odell.glazedlists.gui.WritableTableFormat;
 import ca.odell.glazedlists.swing.EventTableModel;
+import ca.odell.glazedlists.swing.TableComparatorChooser;
+
+import com.eekboom.utils.Strings;
 
 public class TaxonTableComponent extends PhenoscapeGUIComponent {
 
   private JButton addTaxonButton;
   private JButton deleteTaxonButton;
+  private final SortedList<Taxon> sortedTaxa;
 
   public TaxonTableComponent(String id, PhenoscapeController controller) {
     super(id, controller);
+    this.sortedTaxa = new SortedList<Taxon>(controller.getDataSet().getTaxa(), new EverythingEqualComparator<Taxon>());
   }
 
   @Override
@@ -67,13 +76,15 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
 
   private void initializeInterface() {
     this.setLayout(new BorderLayout());
-    final EventTableModel<Taxon> taxaTableModel = new EventTableModel<Taxon>(this.getController().getDataSet().getTaxa(), new TaxaTableFormat());
+    final EventTableModel<Taxon> taxaTableModel = new EventTableModel<Taxon>(this.sortedTaxa, new TaxaTableFormat());
     final JTable taxaTable = new BugWorkaroundTable(taxaTableModel);
     taxaTable.setSelectionModel(this.getController().getTaxaSelectionModel());
     taxaTable.setDefaultRenderer(OBOClass.class, new TermRenderer());
     taxaTable.getColumnModel().getColumn(0).setCellEditor(new TermEditor(new JTextField(), this.getController().getOntologyController().getTaxonTermSet()));
     taxaTable.putClientProperty("Quaqua.Table.style", "striped");
     new TableColumnPrefsSaver(taxaTable, this.getClass().getName());
+    final TableComparatorChooser<Taxon> sortChooser = new TableComparatorChooser<Taxon>(taxaTable, this.sortedTaxa, false);
+    sortChooser.addSortActionListener(new SortDisabler());
     this.add(new JScrollPane(taxaTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);
   }
@@ -146,8 +157,11 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
     }
 
     public Comparator<?> getColumnComparator(int column) {
-      // TODO Auto-generated method stub
-      return null;
+      switch (column) {
+      case 0: return GlazedLists.comparableComparator();
+      case 1: return Strings.getNaturalComparator();
+      default: return null;
+      }
     }
     
   }

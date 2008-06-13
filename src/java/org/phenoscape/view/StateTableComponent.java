@@ -3,6 +3,7 @@ package org.phenoscape.view;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
+import java.util.Comparator;
 
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
@@ -17,19 +18,28 @@ import org.phenoscape.model.PhenoscapeController;
 import org.phenoscape.model.State;
 
 import phenote.gui.BugWorkaroundTable;
+import phenote.gui.SortDisabler;
 import phenote.gui.TableColumnPrefsSaver;
+import phenote.util.EverythingEqualComparator;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.EventList;
+import ca.odell.glazedlists.SortedList;
+import ca.odell.glazedlists.gui.AdvancedTableFormat;
 import ca.odell.glazedlists.gui.WritableTableFormat;
 import ca.odell.glazedlists.swing.EventTableModel;
+import ca.odell.glazedlists.swing.TableComparatorChooser;
+
+import com.eekboom.utils.Strings;
 
 public class StateTableComponent extends PhenoscapeGUIComponent {
   
   private JButton addStateButton;
   private JButton deleteStateButton;
+  private final SortedList<State> sortedStates;
 
   public StateTableComponent(String id, PhenoscapeController controller) {
     super(id, controller);
+    this.sortedStates = new SortedList<State>(controller.getStatesForCurrentCharacterSelection(), new EverythingEqualComparator<State>());
   }
 
   @Override
@@ -40,11 +50,13 @@ public class StateTableComponent extends PhenoscapeGUIComponent {
   
   private void initializeInterface() {
     this.setLayout(new BorderLayout());
-    final EventTableModel<State> statesTableModel = new EventTableModel<State>(this.getController().getStatesForCurrentCharacterSelection(), new StatesTableFormat());
+    final EventTableModel<State> statesTableModel = new EventTableModel<State>(this.sortedStates, new StatesTableFormat());
     final JTable statesTable = new BugWorkaroundTable(statesTableModel);
     statesTable.setSelectionModel(this.getController().getCurrentStatesSelectionModel());
     statesTable.putClientProperty("Quaqua.Table.style", "striped");
     new TableColumnPrefsSaver(statesTable, this.getClass().getName());
+    final TableComparatorChooser<State> sortChooser = new TableComparatorChooser<State>(statesTable, this.sortedStates, false);
+    sortChooser.addSortActionListener(new SortDisabler());
     this.add(new JScrollPane(statesTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);
   }
@@ -108,7 +120,7 @@ public class StateTableComponent extends PhenoscapeGUIComponent {
     return toolBar;
   }
 
-  private class StatesTableFormat implements WritableTableFormat<State> {
+  private class StatesTableFormat implements WritableTableFormat<State>, AdvancedTableFormat<State> {
 
     public boolean isEditable(State state, int column) {
       return true;
@@ -138,6 +150,22 @@ public class StateTableComponent extends PhenoscapeGUIComponent {
       switch(column) {
       case 0: return state.getSymbol();
       case 1: return state.getLabel();
+      default: return null;
+      }
+    }
+
+    public Class<?> getColumnClass(int column) {
+      switch(column) {
+      case 0: return String.class;
+      case 1: return String.class;
+      default: return null;
+      }
+    }
+
+    public Comparator<?> getColumnComparator(int column) {
+      switch(column) {
+      case 0: return Strings.getNaturalComparator();
+      case 1: return Strings.getNaturalComparator();
       default: return null;
       }
     }

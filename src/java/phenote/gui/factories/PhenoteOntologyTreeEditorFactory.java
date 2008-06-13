@@ -12,6 +12,13 @@ public class PhenoteOntologyTreeEditorFactory extends TermPanelFactory {
   @Override
   public String getName() {
     return "Complete Ontology Tree View";
-  }  
+  }
+
+  @Override
+  public org.bbop.framework.GUIComponentFactory.FactoryCategory getCategory() {
+    return FactoryCategory.ONTOLOGY;
+  }
+  
+  
 
 }

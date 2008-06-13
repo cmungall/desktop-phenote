@@ -283,7 +283,7 @@ public class CharacterTableController {
 		this.characterTable.setModel(eventTableModel);
 		this.sortChooser = new TableComparatorChooser<CharacterI>(characterTable,
 				this.sortedCharacters, false);
-		this.sortChooser.addSortActionListener(new SortListener());
+		this.sortChooser.addSortActionListener(new SortDisabler());
 		this.characterTable.setSelectionModel(this.selectionModel);
 		this.characterTable.putClientProperty("Quaqua.Table.style", "striped");
 		// Remove keyboard actions from table since we are custom handling these from menu accelerators
@@ -354,7 +354,7 @@ public class CharacterTableController {
 	  this.sortedCharacters = new SortedList<CharacterI>(this.getCharacterListManager().getCharacterList().getList(), new EverythingEqualComparator<CharacterI>());
 	  this.sortedCharacters.setMode(SortedList.AVOID_MOVING_ELEMENTS);
 	  this.sortChooser = new TableComparatorChooser<CharacterI>(characterTable, this.sortedCharacters, false);
-	  this.sortChooser.addSortActionListener(new SortListener());
+	  this.sortChooser.addSortActionListener(new SortDisabler());
 	  this.filteredCharacters.dispose();
 	  this.filteredCharacters = new FilterList<CharacterI>(this.sortedCharacters, this.filter);
 	  if (this.selectionListener != null) this.selectionModel.removeListSelectionListener(this.selectionListener);
@@ -711,7 +711,7 @@ public class CharacterTableController {
     
   }
   
-  private class SortListener implements ActionListener {
+  private class SortDisabler implements ActionListener {
 
     private boolean previousSortWasReverse = false;
     private int previouslySortedColumn = -1;
