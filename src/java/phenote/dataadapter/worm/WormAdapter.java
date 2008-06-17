@@ -490,7 +490,7 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
       postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_table = "app_term";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-      String phenotype_match = find("(WBPhenotype[0-9]*)", postgres_value);  	// Find a WBPhenotype followed by any amount of digits
+      String phenotype_match = find("(WBPhenotype:[0-9]*)", postgres_value);  	// Find a WBPhenotype followed by any amount of digits
       if (phenotype_match != null) { postgres_value = phenotype_match; }		// query for this, otherwise keep the default value
 //      if (postgres_value == "No postgres value assigned") { } else { c1.setValue("Phenotype",postgres_value); }					// assign the queried value
       if (postgres_value == "") { } else { c1.setValue("Phenotype",postgres_value); }					// assign the queried value
