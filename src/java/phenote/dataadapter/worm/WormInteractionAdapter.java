@@ -160,7 +160,7 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
     for (CharacterI chr : charList.getList()) {
 //      System.out.println("Chr "+chr+" end");
       try {
-        String objname = chr.getValueString("Object Name");	// get the objname value from the character, currently could have a column number
+        String objname = chr.getValueString("Interaction ID");	// get the objname value from the character, currently could have a column number
         String pgdbid = chr.getValueString("PgdbId");		// get the postgres database ID for that character
         String joinkey = pgdbid;
 //System.out.println("pgdbid "+pgdbid+" end");
@@ -235,9 +235,9 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
   }
 
   private void init() {
-    // dont HAVE to use CharFieldEnum but it does enforce using same strings across different data adapters which is good to enforce  the worm config needs to have "Pub" and "Object Name"
+    // dont HAVE to use CharFieldEnum but it does enforce using same strings across different data adapters which is good to enforce  the worm config needs to have "Pub" and "Interaction ID"
     queryableFields.add(CharFieldEnum.PUB.getName()); // "Pub"
-    queryableFields.add("Object Name"); // "Object Name"
+    queryableFields.add("Interaction ID"); // "Interaction ID"
     // should their be a check that the current char fields have pub & allele?
 //    queryableFields.add("NBP Date"); 
 //    queryableGroups.add("referenceMaker");		// populate reference obo for the main
@@ -302,7 +302,7 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
       c1.setValue("PgdbId",joinkey);					// assign the allele and the column
       String postgres_table = "int_name"; String postgres_value = ""; 			// postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-      c1.setValue("Object Name",postgres_value);					// assign the allele and the column
+      c1.setValue("Interaction ID",postgres_value);					// assign the allele and the column
 
       postgres_table = "int_effector"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
@@ -399,7 +399,7 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
 //    String m = "Worm adapter query not yet implemented. field: "+field+" query: "+query;
 //    JOptionPane.showMessageDialog(null,m,"Worm stub",JOptionPane.INFORMATION_MESSAGE);
 
-    String nameString = "Object Name";			// the query could be for Allele or Pub
+    String nameString = "Interaction ID";			// the query could be for Allele or Pub
     String pubString = "Pub";
 
     CharacterListI charList = new CharacterList();	// create the CharacterList that we will return
