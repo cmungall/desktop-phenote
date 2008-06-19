@@ -238,6 +238,8 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
     // dont HAVE to use CharFieldEnum but it does enforce using same strings across different data adapters which is good to enforce  the worm config needs to have "Pub" and "Interaction ID"
     queryableFields.add(CharFieldEnum.PUB.getName()); // "Pub"
     queryableFields.add("Interaction ID"); // "Interaction ID"
+    queryableFields.add("Remark"); // "Interaction ID"
+    // queryableFields.add(CharFieldEnum.PHENOTYPE.getName()); // "Phenotype"	not a CharFieldEnum, what is it  2008 06 19
     // should their be a check that the current char fields have pub & allele?
 //    queryableFields.add("NBP Date"); 
 //    queryableGroups.add("referenceMaker");		// populate reference obo for the main
@@ -401,6 +403,8 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
 
     String nameString = "Interaction ID";			// the query could be for Allele or Pub
     String pubString = "Pub";
+    String remString = "Remark";
+    String phenString = "Phenotype";
 
     CharacterListI charList = new CharacterList();	// create the CharacterList that we will return
 
@@ -416,6 +420,12 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
     if (field.equals(nameString)) {			// if querying the name, get name data
       try { rs = s.executeQuery("SELECT * FROM int_name WHERE int_name ~ '"+query+"' ORDER BY joinkey"); }	// find the substring name that matches the queried name  
       catch (SQLException se) { System.out.println("Exception while executing int_name nameString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+    } else if (field.equals(phenString)) {						// if querying the phenotype, get paper data
+      try { rs = s.executeQuery("SELECT * FROM int_paper WHERE int_phenotype ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried phenotype
+      catch (SQLException se) { System.out.println("Exception while executing int_phenotype phenString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+    } else if (field.equals(remString)) {						// if querying the remark, get paper data
+      try { rs = s.executeQuery("SELECT * FROM int_remark WHERE int_remark ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried remark
+      catch (SQLException se) { System.out.println("Exception while executing int_paper pubString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
     } else if (field.equals(pubString)) {						// if querying the publication, get paper data
       try { rs = s.executeQuery("SELECT * FROM int_paper WHERE int_paper ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried name
       catch (SQLException se) { System.out.println("Exception while executing int_paper pubString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
