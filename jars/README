@@ -64,8 +64,7 @@ streambuffer.jar (XMLStreamBuffer)
 so willy sent new soap jar compiled with jaxb 2.0 as compiling with 2.1
 is not compatible with some web servers for webstart like berkeleys phenote
 server - i think this jaxb jar is still 2.1 though - dont know if it needs 
-to be changed or if backward compatible in this direction
-jaxb-api.jar for birn soap (XmlSeeAlso)
+to be changed or if backward compatible in this directionjaxb-api.jar for birn soap (XmlSeeAlso)
 so saaj-api.jar has same classes as exsiting saaj.jar BUT birn soap will not run off 
 existing saaj.jar 
 Caused by: java.lang.LinkageError: You are loading old SAAJ from jar:file:/Users/mgibson/pato/svn2/trunk/jars/saaj.jar!/javax/xml/soap/MessageFactory.class
