@@ -100,6 +100,8 @@ public class SoapAdapter implements QueryableDataAdapterI {
       
     }
     catch (Exception_Exception e) { log().error("soap failed "+e); }
+    catch (NullPointerException n) { log().error("soap failed "+n); }
+    catch (javax.xml.ws.soap.SOAPFaultException x) { log().error("soap failed "+x); }
   }
 
 
