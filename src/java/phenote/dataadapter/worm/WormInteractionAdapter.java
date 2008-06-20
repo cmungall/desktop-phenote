@@ -72,6 +72,7 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
         postgres_table = "int_curator"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "int_person"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "int_otherevi"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_treatment"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
       }
     } catch (Exception e) {
       System.out.println("Could not delete character: " + e);
@@ -215,6 +216,8 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
         postgres_table = "int_person"; tag_name = "Person"; 
         updateListField(c, s, joinkey, postgres_table, tag_name, chr);
         postgres_table = "int_otherevi"; tag_name = "Other Evidence"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "int_treatment"; tag_name = "Treatment"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
       } catch (Exception e) {
         System.out.println("Could not get terms from character: " + e);
@@ -385,6 +388,9 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
       postgres_table = "int_otherevi"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("Other Evidence",postgres_value); }					// assign the queried value
+      postgres_table = "int_treatment"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+      if (postgres_value == "") { } else { c1.setValue("Treatment",postgres_value); }					// assign the queried value
 
 // WBInteraction0000074
 
