@@ -239,6 +239,7 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
     queryableFields.add(CharFieldEnum.PUB.getName()); // "Pub"
     queryableFields.add("Interaction ID"); // "Interaction ID"
     queryableFields.add("Remark"); // "Interaction ID"
+    queryableFields.add("Phenotype"); // "Phenotype"
     // queryableFields.add(CharFieldEnum.PHENOTYPE.getName()); // "Phenotype"	not a CharFieldEnum, what is it  2008 06 19
     // should their be a check that the current char fields have pub & allele?
 //    queryableFields.add("NBP Date"); 
