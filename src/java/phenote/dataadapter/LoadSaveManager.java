@@ -205,7 +205,7 @@ public class LoadSaveManager {
     
     // FAILURE - no commit
     if (cs.isFailure()) {
-      String m = "There is a problem with your commit:\n\n"+cs.getWarningMessage()+
+      String m = "There is a problem with your commit:\n\n"+cs.getFailureMessage()+
         "\n\nCommit cancelled. You must fix this.";
       JTextArea area = new JTextArea(m);
       area.setRows(10);
