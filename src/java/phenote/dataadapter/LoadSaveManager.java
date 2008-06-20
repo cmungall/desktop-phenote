@@ -205,8 +205,8 @@ public class LoadSaveManager {
     
     // FAILURE - no commit
     if (cs.isFailure()) {
-      String m = "There is a problem with your commit:\n\n"+cs.getFailureMessage()+
-        "\n\nCommit cancelled. You must fix this.";
+      String m = "There is a problem with your commit:\n"+cs.getFailureMessage()+
+        "\nCommit cancelled. You must fix this.";
       JTextArea area = new JTextArea(m);
       area.setRows(10);
       area.setColumns(50);
@@ -218,8 +218,8 @@ public class LoadSaveManager {
 
     // WARNING - ask user if still wants to commit
     if (cs.isWarning()) {
-      String m = "There is a problem with your commit:\n\n"+cs.getWarningMessage()
-        +"\n\nDo you want to commit anyway?";
+      String m = "There is a problem with your commit:\n"+cs.getWarningMessage()
+        +"\nDo you want to commit anyway?";
       JTextArea area = new JTextArea(m);
       area.setRows(10);
       area.setColumns(50);
