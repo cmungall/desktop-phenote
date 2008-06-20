@@ -5,7 +5,10 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import javax.xml.rpc.ServiceException;
+import javax.xml.ws.soap.SOAPFaultException;
 import org.apache.log4j.Logger;
 
 /** birn soap class */
@@ -55,20 +58,25 @@ public class SoapAdapter implements QueryableDataAdapterI {
 
   /** do inserts & updates to database with soap */
   private void doInsertsAndUpdates(PhenoWS ws, CharacterListI charList) {
+    boolean success = true;
     for (CharacterI c : charList.getList()) {
       // new character -> insert
-      if (isNew(c)) insertNewCharacter(ws,c);
+      if (isNew(c))
+        success &= insertNewCharacter(ws,c);
       // existing character -> update, check if character has actually changed?
       else updateCharacter(ws,c);
     }
+    // should actually return true and do from callee for dels as well
+    if (success) successPopup("New inserts succeeded");
   }
 
   private boolean isNew(CharacterI c) {
     return !c.hasValue(CKB_ID_FIELD);
   }
 
-  /** new character (no db id), insert into ckb via soap */
-  private void insertNewCharacter(PhenoWS ws, CharacterI c) {
+  /** new character (no db id), insert into ckb via soap 
+   return true with success, false with failure */
+  private boolean insertNewCharacter(PhenoWS ws, CharacterI c) {
     try {
       String poly = get(c,"coordinates");
       boolean isCoronal = isCoronal(c); // need config field for this?
@@ -90,18 +98,32 @@ public class SoapAdapter implements QueryableDataAdapterI {
       String id = ws.createPhenoTypeFromSmartAtlas
         (poly,isCoronal,comm,own,e,q,e2,rawIm,warpIm,thumb,0,imRegId);
       if (id==null) {
-        log().error("Commit failed, got null id from ckb/soap");
-        return;
+        //log().error("Commit failed, got null id from ckb/soap");
+        errorPopup("Commit failed, got null id from ckb/soap");
+        return false;
       }
       else {
-        log().info("Commit ok, got id "+id);
+        //sucessPopup("Commit ok, got id "+id);
         setId(id,c);
+        return true;
       }
       
     }
-    catch (Exception_Exception e) { log().error("soap failed "+e); }
-    catch (NullPointerException n) { log().error("soap failed "+n); }
-    catch (javax.xml.ws.soap.SOAPFaultException x) { log().error("soap failed "+x); }
+    catch (Exception_Exception e) { errorPopup("soap failed "+e); return false; }
+    catch (NullPointerException n) { errorPopup("soap failed "+n); return false; }
+    catch (SOAPFaultException x) { errorPopup("soap failed "+x); return false; }
+  }
+
+  
+  private void errorPopup(String e) {
+    log().error(e);
+    JOptionPane.showMessageDialog(null,e,"Soap Error",JOptionPane.ERROR_MESSAGE);
+  }
+
+  private void successPopup(String s) {
+    log().info(s);
+    JOptionPane.showMessageDialog(null,s,"Soap Success",
+                                  JOptionPane.INFORMATION_MESSAGE);
   }
 
 
