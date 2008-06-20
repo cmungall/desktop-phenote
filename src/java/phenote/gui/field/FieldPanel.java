@@ -229,7 +229,7 @@ public class FieldPanel extends AbstractGUIComponent {
   void addButtons(CharFieldGui fieldGui, GridBagConstraints constraints) {
     //constraints.gridx = 5; - set above and its 4
     this.addPostCompButton(fieldGui, constraints);
-    this.addRetrieveButton(fieldGui, constraints);
+    if (!fieldGui.hasListGui()) this.addRetrieveButton(fieldGui, constraints);
     addEditButton(fieldGui, constraints);
   }
   
@@ -341,6 +341,8 @@ public class FieldPanel extends AbstractGUIComponent {
     constraints.gridheight = 1;
     constraints.anchor = GridBagConstraints.EAST;
     JPanel msgAndDelPanel = new JPanel();
+    // list gui wipes out buttons, need to add them here
+    if (fieldGui.hasRetrieveButton()) msgAndDelPanel.add(fieldGui.getRetrieveButton());
     msgAndDelPanel.add(fieldGui.getListMessage());
     msgAndDelPanel.add(fieldGui.getListDelButton());
     fieldPanel.add(msgAndDelPanel,constraints);
