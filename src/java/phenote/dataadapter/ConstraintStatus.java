@@ -73,10 +73,10 @@ public class ConstraintStatus {
       StringBuffer sb = new StringBuffer();
       // can parent have independent message?
       if (this.status == status && message!=null && !message.equals(""))
-        sb.append(message).append("\n");
+        sb.append(message);//.append("\n");
       for (ConstraintStatus kid : kids) {
         if (kid.recursiveCheckForStatus(status))
-          sb.append(kid.getMessage(status)).append("\n\n");
+          sb.append(kid.getMessage(status)).append("\n");
       }
       return sb.toString();
     }
