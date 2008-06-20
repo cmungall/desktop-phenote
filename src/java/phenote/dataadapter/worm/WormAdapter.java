@@ -340,6 +340,7 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
     queryableFields.add("Phenotype Remark"); 
     // should their be a check that the current char fields have pub & allele?
     queryableFields.add("NBP Date"); 
+    queryableFields.add("Genetic Intx Desc"); 
 //    queryableGroups.add("referenceMaker");		// populate reference obo for the main
     queryableGroups.add("default");			// default last
   }
@@ -651,6 +652,7 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
     String nbpString = "NBP Date";
     String phenotypeString = "Phenotype";
     String phenotypeRemarkString = "Phenotype Remark";
+    String intxdescString = "Genetic Intx Desc";
 
     CharacterListI charList = new CharacterList();	// create the CharacterList that we will return
 
@@ -679,6 +681,15 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
     } else if (field.equals(nbpString)) {	
       try { rs = s.executeQuery("SELECT * FROM app_nbp WHERE app_timestamp ~ '"+query+"' ORDER BY joinkey;"); }	// get the alleles from a paper
       catch (SQLException se) { System.out.println("Exception while executing app_nbp nbpString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+    } else if (field.equals(intxdescString)) {	
+      String not_null = "NOT NULL";
+      if (query.equals(not_null)) { 
+        try { rs = s.executeQuery("SELECT * FROM app_intx_desc WHERE app_intx_desc IS NOT NULL ORDER BY joinkey;"); 
+        System.out.println("SELECT * FROM app_intx_desc WHERE app_intx_desc IS NOT NULL ORDER BY joinkey;"); }	// get the alleles from a paper
+        catch (SQLException se) { System.out.println("Exception while executing app_nbp NOT NULL nbpString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      } else {
+        try { rs = s.executeQuery("SELECT * FROM app_intx_desc WHERE app_intx_desc ~ '"+query+"' ORDER BY joinkey;"); }	// get the alleles from a paper
+        catch (SQLException se) { System.out.println("Exception while executing app_nbp nbpString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); } }
     } else {
       // if query has failed...
       throw new DataAdapterEx("Worm query of "+query+" of field "+field+" failed");
