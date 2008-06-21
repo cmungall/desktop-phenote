@@ -427,15 +427,23 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
     if (field.equals(nameString)) {			// if querying the name, get name data
       try { rs = s.executeQuery("SELECT * FROM int_name WHERE int_name ~ '"+query+"' ORDER BY joinkey"); }	// find the substring name that matches the queried name  
       catch (SQLException se) { System.out.println("Exception while executing int_name nameString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
-    } else if (field.equals(phenString)) {						// if querying the phenotype, get paper data
-      try { rs = s.executeQuery("SELECT * FROM int_paper WHERE int_phenotype ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried phenotype
-      catch (SQLException se) { System.out.println("Exception while executing int_phenotype phenString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
     } else if (field.equals(remString)) {						// if querying the remark, get paper data
       try { rs = s.executeQuery("SELECT * FROM int_remark WHERE int_remark ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried remark
       catch (SQLException se) { System.out.println("Exception while executing int_paper pubString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
     } else if (field.equals(pubString)) {						// if querying the publication, get paper data
       try { rs = s.executeQuery("SELECT * FROM int_paper WHERE int_paper ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried name
       catch (SQLException se) { System.out.println("Exception while executing int_paper pubString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+//    } else if (field.equals(phenString)) {						// if querying the phenotype, get paper data
+//      String tag_name = "Phenotype"; StringBuilder sb = new StringBuilder(); Integer loopcount = 0;
+//      CharFieldValue list = chr.getValue(chr.getCharFieldForName(tag_name));
+//      List<CharFieldValue> valList = list.getCharFieldValueList();
+//      for (CharFieldValue kid : valList) { String kidId = kid.getID(); loopcount++; if (loopcount > 1) { sb.append("' OR int_phenotype ~'"); } sb.append(kidId); }
+//      if (sb == null) { System.out.println("No input phenotypes found in list for phenString query"); }
+//      else {
+//        query = sb.toString(); 
+//        try { rs = s.executeQuery("SELECT * FROM int_phenotype WHERE int_phenotype ~ '"+query+"' ORDER BY joinkey"); 
+//              System.out.println("SELECT * FROM int_phenotype WHERE int_phenotype ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried phenotype
+//      catch (SQLException se) { System.out.println("Exception while executing int_phenotype phenString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); } }
     } else {
       throw new DataAdapterEx("Worm query of "+query+" of field "+field+" failed");
     }
