@@ -243,6 +243,10 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
     queryableFields.add("Interaction ID"); // "Interaction ID"
     queryableFields.add("Remark"); // "Interaction ID"
     queryableFields.add("Phenotype"); // "Phenotype"
+    queryableFields.add("Effector"); // "Effector"
+    queryableFields.add("Effected"); // "Effected"
+    queryableFields.add("tor Variation"); // "tor Variation"
+    queryableFields.add("ted Variation"); // "ted Variation"
     // queryableFields.add(CharFieldEnum.PHENOTYPE.getName()); // "Phenotype"	not a CharFieldEnum, what is it  2008 06 19
     // should their be a check that the current char fields have pub & allele?
 //    queryableFields.add("NBP Date"); 
@@ -408,10 +412,8 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
 //    String m = "Worm adapter query not yet implemented. field: "+field+" query: "+query;
 //    JOptionPane.showMessageDialog(null,m,"Worm stub",JOptionPane.INFORMATION_MESSAGE);
 
-    String nameString = "Interaction ID";			// the query could be for Allele or Pub
-    String pubString = "Pub";
-    String remString = "Remark";
-    String phenString = "Phenotype";
+    String nameString = "Interaction ID"; String pubString = "Pub"; String remString = "Remark"; String phenString = "Phenotype";
+    String effectorString = "Effector"; String effectedString = "Effected"; String tedvString = "ted Variation"; String torvString = "tor Variation";
 
     CharacterListI charList = new CharacterList();	// create the CharacterList that we will return
 
@@ -429,7 +431,19 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
       catch (SQLException se) { System.out.println("Exception while executing int_name nameString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
     } else if (field.equals(remString)) {						// if querying the remark, get paper data
       try { rs = s.executeQuery("SELECT * FROM int_remark WHERE int_remark ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried remark
-      catch (SQLException se) { System.out.println("Exception while executing int_paper pubString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      catch (SQLException se) { System.out.println("Exception while executing int_remark remString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+    } else if (field.equals(effectorString)) {						// if querying the effector, get paper data
+      try { rs = s.executeQuery("SELECT * FROM int_effector WHERE int_effector ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried effector
+      catch (SQLException se) { System.out.println("Exception while executing int_effector effectorString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+    } else if (field.equals(effectedString)) {						// if querying the effected, get paper data
+      try { rs = s.executeQuery("SELECT * FROM int_effected WHERE int_effected ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried effected
+      catch (SQLException se) { System.out.println("Exception while executing int_effected effectedString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+    } else if (field.equals(torvString)) {						// if querying the torvariation, get paper data
+      try { rs = s.executeQuery("SELECT * FROM int_torvariation WHERE int_torvariation ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried torvariation
+      catch (SQLException se) { System.out.println("Exception while executing int_torvariation torvString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+    } else if (field.equals(tedvString)) {						// if querying the tedvariation, get paper data
+      try { rs = s.executeQuery("SELECT * FROM int_tedvariation WHERE int_tedvariation ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried tedvariation
+      catch (SQLException se) { System.out.println("Exception while executing int_tedvariation tedvString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
     } else if (field.equals(pubString)) {						// if querying the publication, get paper data
       try { rs = s.executeQuery("SELECT * FROM int_paper WHERE int_paper ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried name
       catch (SQLException se) { System.out.println("Exception while executing int_paper pubString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
