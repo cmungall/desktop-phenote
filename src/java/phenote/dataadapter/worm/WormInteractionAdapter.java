@@ -447,7 +447,9 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
     } else if (field.equals(pubString)) {						// if querying the publication, get paper data
       try { rs = s.executeQuery("SELECT * FROM int_paper WHERE int_paper ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried name
       catch (SQLException se) { System.out.println("Exception while executing int_paper pubString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
-//    } else if (field.equals(phenString)) {						// if querying the phenotype, get paper data
+    } else if (field.equals(phenString)) {						// if querying the phenotype, get paper data
+      try { rs = s.executeQuery("SELECT * FROM int_phenotype WHERE int_phenotype ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried name
+      catch (SQLException se) { System.out.println("Exception while executing int_phenotype phenString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
 //      String tag_name = "Phenotype"; StringBuilder sb = new StringBuilder(); Integer loopcount = 0;
 //      CharFieldValue list = chr.getValue(chr.getCharFieldForName(tag_name));
 //      List<CharFieldValue> valList = list.getCharFieldValueList();
