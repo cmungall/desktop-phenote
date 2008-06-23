@@ -59,11 +59,9 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
         postgres_table = "int_effector"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "int_torvariation"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "int_tortransgene"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_torremark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "int_effected"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "int_tedvariation"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "int_tedtransgene"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_tedremark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "int_type"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "int_phenotype"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "int_rnai"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
@@ -188,15 +186,11 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "int_tortransgene"; tag_name = "tor Transgene"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "int_torremark"; tag_name = "tor Remark"; tag_value = chr.getValueString(tag_name);
-        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "int_effected"; tag_name = "Effected"; 
         updateListField(c, s, joinkey, postgres_table, tag_name, chr);
         postgres_table = "int_tedvariation"; tag_name = "ted Variation"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "int_tedtransgene"; tag_name = "ted Transgene"; tag_value = chr.getValueString(tag_name);
-        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "int_tedremark"; tag_name = "ted Remark"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "int_type"; tag_name = "Interaction Type"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
@@ -326,10 +320,6 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
       postgres_table = "int_tortransgene"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("tor Transgene",postgres_value); }					// assign the queried value
-      postgres_table = "int_torremark"; postgres_value = ""; // postgres_value = "No postgres value assigned";
-      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-      if (postgres_value == "") { } else { c1.setValue("tor Remark",postgres_value); }					// assign the queried value
-
       postgres_table = "int_effected"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { 
@@ -342,10 +332,6 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
       postgres_table = "int_tedtransgene"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("ted Transgene",postgres_value); }					// assign the queried value
-      postgres_table = "int_tedremark"; postgres_value = ""; // postgres_value = "No postgres value assigned";
-      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-      if (postgres_value == "") { } else { c1.setValue("ted Remark",postgres_value); }					// assign the queried value
-
       postgres_table = "int_type"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("Type",postgres_value); }					// assign the queried value
