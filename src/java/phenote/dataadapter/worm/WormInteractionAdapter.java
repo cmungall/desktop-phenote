@@ -310,10 +310,11 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
 
       postgres_table = "int_effector"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-      if (postgres_value == "") { } else { 
-        postgres_value = postgres_value.replaceAll("\\|", "\\\",\\\"");
-        postgres_value = "\""+postgres_value+"\"";
-        c1.setValue("Effector",postgres_value); }					// assign the queried value
+      if (postgres_value == "") { } else { c1.setValue("Effector",postgres_value); }					// assign the queried value
+//      if (postgres_value == "") { } else { 
+//        postgres_value = postgres_value.replaceAll("\\|", "\\\",\\\"");
+//        postgres_value = "\""+postgres_value+"\"";
+//        c1.setValue("Effector",postgres_value); }					// assign the queried value
       postgres_table = "int_torvariation"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("tor Variation",postgres_value); }					// assign the queried value
@@ -322,10 +323,11 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
       if (postgres_value == "") { } else { c1.setValue("tor Transgene",postgres_value); }					// assign the queried value
       postgres_table = "int_effected"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-      if (postgres_value == "") { } else { 
-        postgres_value = postgres_value.replaceAll("\\|", "\\\",\\\"");
-        postgres_value = "\""+postgres_value+"\"";
-        c1.setValue("Effected",postgres_value); }					// assign the queried value
+      if (postgres_value == "") { } else { c1.setValue("Effected",postgres_value); }					// assign the queried value
+//      if (postgres_value == "") { } else { 
+//        postgres_value = postgres_value.replaceAll("\\|", "\\\",\\\"");
+//        postgres_value = "\""+postgres_value+"\"";
+//        c1.setValue("Effected",postgres_value); }					// assign the queried value
       postgres_table = "int_tedvariation"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("ted Variation",postgres_value); }					// assign the queried value
