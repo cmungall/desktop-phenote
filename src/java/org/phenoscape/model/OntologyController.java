@@ -18,15 +18,24 @@ public class OntologyController {
   private final OBOFileAdapter fileAdapter;
   private final OBOMetaData metadata;
   
-  private static String TTO = "http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/taxonomy/teleost_taxonomy.obo";
-  //TODO get proper path for COLLECTION
-  private static String COLLECTION = "http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/taxonomy/teleost_taxonomy.obo";
-  private static String TAO = "http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/anatomy/gross_anatomy/animal_gross_anatomy/fish/teleost_anatomy.obo";
-  private static String PATO = "http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/phenotype/quality.obo";
-  private static String SPATIAL = "http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/anatomy/caro/spatial.obo";
-  private static String UNIT = "http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/phenotype/unit.obo";
-  private static String REL = "http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/OBO_REL/ro.obo";
-  private static String REL_PROPOSED = "http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/OBO_REL/ro_proposed.obo";
+//  private static String TTO = "http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/taxonomy/teleost_taxonomy.obo";
+//  //TODO get proper path for COLLECTION
+//  private static String COLLECTION = "http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/taxonomy/teleost_taxonomy.obo";
+//  private static String TAO = "http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/anatomy/gross_anatomy/animal_gross_anatomy/fish/teleost_anatomy.obo";
+//  private static String PATO = "http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/phenotype/quality.obo";
+//  private static String SPATIAL = "http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/anatomy/caro/spatial.obo";
+//  private static String UNIT = "http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/phenotype/unit.obo";
+//  private static String REL = "http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/OBO_REL/ro.obo";
+//  private static String REL_PROPOSED = "http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/OBO_REL/ro_proposed.obo";
+  
+  private static String TTO = "/Users/jim/.phenote/obo-files/teleost_taxonomy.obo";
+  private static String COLLECTION = "/Users/jim/.phenote/obo-files/fish_collection_abbreviation.obo";
+  private static String TAO = "/Users/jim/.phenote/obo-files/teleost_anatomy.obo";
+  private static String PATO = "/Users/jim/.phenote/obo-files/quality.obo";
+  private static String SPATIAL = "/Users/jim/.phenote/obo-files/spatial.obo";
+  private static String UNIT = "/Users/jim/.phenote/obo-files/unit.obo";
+  private static String REL = "/Users/jim/.phenote/obo-files/ro.obo";
+  private static String REL_PROPOSED = "/Users/jim/.phenote/obo-files/ro_proposed.obo";
   private static String[] URLS = {TTO, COLLECTION, TAO, PATO, SPATIAL, UNIT, REL, REL_PROPOSED};
 
   public OntologyController() {

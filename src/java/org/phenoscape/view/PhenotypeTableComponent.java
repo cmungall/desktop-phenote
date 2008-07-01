@@ -10,7 +10,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.table.TableCellEditor;
 
@@ -169,12 +168,12 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
     
     public TableCellEditor getColumnEditor(int column) {
       switch (column) {
-      case 0: return new TermEditor(new JTextField(), getController().getOntologyController().getEntityTermSet());
-      case 1: return new TermEditor(new JTextField(), getController().getOntologyController().getQualityTermSet());
-      case 2: return new TermEditor(new JTextField(), getController().getOntologyController().getRelatedEntityTermSet());
+      case 0: return createAutocompleteEditor(getController().getOntologyController().getEntityTermSet().getTerms());
+      case 1: return createAutocompleteEditor(getController().getOntologyController().getQualityTermSet().getTerms());
+      case 2: return createAutocompleteEditor(getController().getOntologyController().getRelatedEntityTermSet().getTerms());
       case 3: return null;
       case 4: return null;
-      case 5: return new TermEditor(new JTextField(), getController().getOntologyController().getUnitTermSet());
+      case 5: return createAutocompleteEditor(getController().getOntologyController().getUnitTermSet().getTerms());
       case 6: return null;
       default: return null;
       }

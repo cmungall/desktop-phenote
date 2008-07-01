@@ -94,7 +94,8 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
   
   @Override
   protected String getAppName() {
-    return "Phenoscape Annotator";
+    //return "Phenoscape Annotator";
+    return "Phenote";
   }
   
   @Override

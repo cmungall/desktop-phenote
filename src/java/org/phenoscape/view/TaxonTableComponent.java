@@ -10,13 +10,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
 import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOClass;
 import org.phenoscape.model.PhenoscapeController;
-import org.phenoscape.model.Specimen;
 import org.phenoscape.model.Taxon;
 
 import phenote.gui.BugWorkaroundTable;
@@ -27,8 +25,6 @@ import phenote.util.FileUtil;
 import ca.odell.glazedlists.EventList;
 import ca.odell.glazedlists.GlazedLists;
 import ca.odell.glazedlists.SortedList;
-import ca.odell.glazedlists.event.ListEvent;
-import ca.odell.glazedlists.event.ListEventListener;
 import ca.odell.glazedlists.gui.AdvancedTableFormat;
 import ca.odell.glazedlists.gui.WritableTableFormat;
 import ca.odell.glazedlists.swing.EventTableModel;
@@ -50,7 +46,6 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
   @Override
   public void init() {
     super.init();
-    this.getController().getSpecimensForCurrentTaxonSelection().addListEventListener(new SpecimenListListener());
     this.initializeInterface();
   }
   
@@ -80,7 +75,7 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
     final JTable taxaTable = new BugWorkaroundTable(taxaTableModel);
     taxaTable.setSelectionModel(this.getController().getTaxaSelectionModel());
     taxaTable.setDefaultRenderer(OBOClass.class, new TermRenderer());
-    taxaTable.getColumnModel().getColumn(0).setCellEditor(new TermEditor(new JTextField(), this.getController().getOntologyController().getTaxonTermSet()));
+    taxaTable.getColumnModel().getColumn(0).setCellEditor(this.createAutocompleteEditor(this.getController().getOntologyController().getTaxonTermSet().getTerms()));
     taxaTable.putClientProperty("Quaqua.Table.style", "striped");
     new TableColumnPrefsSaver(taxaTable, this.getClass().getName());
     final TableComparatorChooser<Taxon> sortChooser = new TableComparatorChooser<Taxon>(taxaTable, this.sortedTaxa, false);
@@ -162,15 +157,6 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
       case 1: return Strings.getNaturalComparator();
       default: return null;
       }
-    }
-    
-  }
-  
-  private class SpecimenListListener implements ListEventListener<Specimen> {
-
-    public void listChanged(ListEvent<Specimen> event) {
-      // make sure the list of specimens for the taxon containing the updated specimen is updated in the interface
-      updateObjectForGlazedLists(getSelectedTaxon(), getController().getDataSet().getTaxa());
     }
     
   }

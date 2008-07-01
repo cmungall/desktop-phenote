@@ -1,10 +1,25 @@
 package org.phenoscape.view;
 
+import java.util.Collection;
+
+import javax.accessibility.Accessible;
+import javax.accessibility.AccessibleContext;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
+import javax.swing.JList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.plaf.basic.ComboPopup;
+import javax.swing.table.TableCellEditor;
+
+import org.apache.log4j.Logger;
 import org.bbop.framework.AbstractGUIComponent;
 import org.obo.datamodel.OBOClass;
 import org.phenoscape.model.PhenoscapeController;
+import org.phenoscape.swing.AutoCompleteSupport;
 
 import ca.odell.glazedlists.EventList;
+import ca.odell.glazedlists.GlazedLists;
 
 public class PhenoscapeGUIComponent extends AbstractGUIComponent {
   
@@ -39,6 +54,54 @@ public class PhenoscapeGUIComponent extends AbstractGUIComponent {
    */
   protected void updateGlobalTermSelection(OBOClass term) {
     this.getController().getPhenoteSelectionManager().selectTerm(this, term, false);
+  }
+  
+  protected TableCellEditor createAutocompleteEditor(Collection<OBOClass> terms) {
+    final JComboBox comboBox = new JComboBox();
+    final AutoCompleteSupport<OBOClass> acs = AutoCompleteSupport.install(comboBox, GlazedLists.eventList(terms), new TermFilterator());
+    acs.setValidItemClass(OBOClass.class);
+    final DefaultCellEditor editor = new DefaultCellEditor(comboBox);
+    editor.setClickCountToStart(2);
+    final ComboPopup popup = this.getComboPopup(comboBox);
+    if (popup != null) { popup.getList().addListSelectionListener(new CompletionListListener()); }
+    return editor;
+  }
+  
+  protected ComboPopup getComboPopup(JComboBox comboBox) {
+    final AccessibleContext ac = comboBox.getAccessibleContext();
+    for (int i = 0; i < ac.getAccessibleChildrenCount(); i++) {
+      final Accessible a = ac.getAccessibleChild(i);
+      if (a instanceof ComboPopup) { return (ComboPopup)a; }
+    }
+    log().error("Can't retrieve popup from combobox; can't do mouse overs");
+    return null;
+  }
+  
+  protected class CompletionListListener implements ListSelectionListener {
+
+    public void valueChanged(ListSelectionEvent event) {
+      final Object source = event.getSource();
+      if (source instanceof JList) {
+        final JList menu = (JList)source;
+        try {
+          final Object value = menu.getSelectedValue();
+          if (value instanceof OBOClass) {
+            updateGlobalTermSelection((OBOClass)value);
+          } else {
+            // sometimes the selection is a String instead
+          }
+        } catch (IndexOutOfBoundsException e) {
+          // for some reason sometimes the menu selection is not valid
+        }
+      } else {
+        log().error("Source of combobox mouse over event is not JList");
+      }
+    }
+    
+  }
+  
+  private Logger log() {
+    return Logger.getLogger(this.getClass());
   }
   
 }

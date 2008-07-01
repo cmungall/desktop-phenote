@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 public class URLProxy {
   
   private final File cacheFolder;
-  private enum CacheOption {
+  public enum CacheOption {
     FORCE_CACHE,
     USE_CACHE,
     NO_CACHE;

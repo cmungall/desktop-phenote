@@ -10,7 +10,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
 import org.apache.log4j.Logger;
@@ -92,7 +91,7 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
     final JTable specimensTable = new BugWorkaroundTable(specimensTableModel);
     specimensTable.setSelectionModel(this.getController().getCurrentSpecimensSelectionModel());
     specimensTable.setDefaultRenderer(OBOClass.class, new TermRenderer());
-    specimensTable.getColumnModel().getColumn(0).setCellEditor(new TermEditor(new JTextField(), this.getController().getOntologyController().getCollectionTermSet()));
+    specimensTable.getColumnModel().getColumn(0).setCellEditor(this.createAutocompleteEditor(this.getController().getOntologyController().getCollectionTermSet().getTerms()));
     specimensTable.putClientProperty("Quaqua.Table.style", "striped");
     new TableColumnPrefsSaver(specimensTable, this.getClass().getName());
     final TableComparatorChooser<Specimen> sortChooser = new TableComparatorChooser<Specimen>(specimensTable, this.sortedSpecimens, false);

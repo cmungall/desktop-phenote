@@ -11,16 +11,17 @@ import java.util.Set;
 import org.apache.xmlbeans.XmlException;
 import org.nexml.x10.AbstractBlock;
 import org.nexml.x10.AbstractChar;
+import org.nexml.x10.AbstractState;
+import org.nexml.x10.AbstractStates;
 import org.nexml.x10.NexmlDocument;
 import org.nexml.x10.StandardCells;
 import org.nexml.x10.StandardChar;
 import org.nexml.x10.StandardFormat;
 import org.nexml.x10.StandardState;
 import org.nexml.x10.StandardStates;
-import org.nexml.x10.AbstractStates;
-import org.nexml.x10.AbstractState;
 import org.nexml.x10.Taxa;
 import org.phenoscape.model.Character;
+import org.phenoscape.model.DataSet;
 import org.phenoscape.model.State;
 import org.phenoscape.model.Taxon;
 
@@ -49,6 +50,10 @@ public class NeXMLReader {
     return this.taxa;
   }
   
+  public DataSet getDataSet() {
+    return null;
+  }
+  
   private void parseNeXML() {
     for (AbstractBlock block : this.xmlDoc.getNexml().getCharactersArray()) {
       if (block instanceof StandardCells) {
@@ -67,7 +72,7 @@ public class NeXMLReader {
     for (AbstractChar abstractChar : format.getCharArray()) {
       if (!(abstractChar instanceof StandardChar)) continue;
       final StandardChar standardChar = (StandardChar)abstractChar;
-      final Character newCharacter = new Character(standardChar);
+      //final Character newCharacter = new Character(standardChar);
       final AbstractStates states = this.findOrCreateStates(standardChar.getStates(), format);
       if (states instanceof StandardStates) {
         //TODO
