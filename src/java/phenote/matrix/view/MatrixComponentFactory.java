@@ -11,22 +11,18 @@ public class MatrixComponentFactory extends AbstractComponentFactory<MatrixCompo
 		this.controller = controller;
 	}
 	
-	@Override
 	public MatrixComponent doCreateComponent(String id) {
 		return new MatrixComponent(id, this.controller);
 	}
 
-	@Override
 	public FactoryCategory getCategory() {
 		return FactoryCategory.ANNOTATION;
 	}
 
-	@Override
 	public String getID() {
 		return "phenoscape_matrix_viewer";
 	}
 
-	@Override
 	public String getName() {
 		return "Matrix Viewer";
 	}

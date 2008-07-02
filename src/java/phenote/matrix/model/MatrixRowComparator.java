@@ -13,7 +13,6 @@ public class MatrixRowComparator implements Comparator<MatrixRow> {
 	 * @return the result of the String comparison between the two rows
 	 * @see String.compareTo(String anotherString)
 	 */
-	@Override
 	public int compare(MatrixRow r1, MatrixRow r2) {
 		int result = r1.getRowFieldName().compareTo(r2.getRowFieldName());	
 		if (result == 0) {

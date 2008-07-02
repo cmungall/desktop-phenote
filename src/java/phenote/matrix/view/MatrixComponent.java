@@ -112,43 +112,36 @@ public class MatrixComponent extends AbstractGUIComponent {
 	//--------------------------------------------------------------------------------------------------------------------------------------
 	private class MatrixTableFormat implements WritableTableFormat<MatrixRow>, AdvancedTableFormat<MatrixRow> {
 
-		@Override
 		public boolean isEditable(MatrixRow arg0, int arg1) {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
-		@Override
 		public MatrixRow setColumnValue(MatrixRow arg0, Object arg1, int arg2) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
-		@Override
 		public int getColumnCount() {
 			// TODO Auto-generated method stub
 			return 0;
 		}
 
-		@Override
 		public String getColumnName(int column) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
-		@Override
 		public Object getColumnValue(MatrixRow baseObject, int column) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
-		@Override
 		public Class getColumnClass(int arg0) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
-		@Override
 		public Comparator getColumnComparator(int arg0) {
 			// TODO Auto-generated method stub
 			return null;
@@ -158,7 +151,7 @@ public class MatrixComponent extends AbstractGUIComponent {
 	
 	//--------------------------------------------------------------------------------------------------------------------------------------
 	private class MatrixListener implements ListEventListener<MatrixRow> {
-		@Override
+
 		public void listChanged(ListEvent<MatrixRow> arg0) {
 			updateObjectForGlazedLists((MatrixRow) arg0.getSource(), arg0.getSourceList());
 		}

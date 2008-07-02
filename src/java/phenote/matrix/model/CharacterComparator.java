@@ -12,7 +12,6 @@ public class CharacterComparator implements Comparator<CharacterI> {
 		comparisonField = field;
 	}
 	
-	@Override
 	/**
 	 * A method to perform a String-style comparison on two Characters
 	 * 
