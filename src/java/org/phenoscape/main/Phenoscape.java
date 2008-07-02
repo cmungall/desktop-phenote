@@ -6,6 +6,9 @@ import org.bbop.framework.GUIManager;
 
 public class Phenoscape {
 
+  /**
+   * Start the Phenoscape version of Phenote.
+   */
   public static void main(String[] args) {
     SwingUtilities.invokeLater(new PhenoscapeRunnable());
   }

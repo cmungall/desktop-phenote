@@ -5,6 +5,12 @@ import org.nexml.x10.StandardState;
 import ca.odell.glazedlists.BasicEventList;
 import ca.odell.glazedlists.EventList;
 
+/**
+ * A State is a possible evolutionary state for a Character, and represents a possible cell 
+ * value in an evolutionary character matrix.
+ * A State is described by free text as well as zero or more ontology-based Phenotypes.
+ * @author Jim Balhoff
+ */
 public class State {
   
   private final StandardState storedXML;
@@ -50,11 +56,20 @@ public class State {
     this.label = aLabel;
   }
   
+  /**
+   * Returns the single-character symbol used as shorthand for this
+   * state in an evolutionary character matrix.
+   */
   public String getSymbol() {
     return this.symbol;
   }
 
+  /**
+   * Set the shorthand symbol for this state. The symbol should be 
+   * a single-character string.
+   */
   public void setSymbol(String aSymbol) {
     this.symbol = aSymbol;
   }
+  
 }

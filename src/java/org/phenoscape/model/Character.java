@@ -6,6 +6,11 @@ import org.nexml.x10.StandardStates;
 import ca.odell.glazedlists.BasicEventList;
 import ca.odell.glazedlists.EventList;
 
+/**
+ * A Character is a unit of evolutionary change, and represents a column in an evolutionary character matrix.
+ * A Character has zero or more States.
+ * @author Jim Balhoff
+ */
 public class Character {
   
   private final StandardChar storedCharacterXML;

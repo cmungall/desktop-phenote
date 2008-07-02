@@ -2,6 +2,10 @@ package org.phenoscape.app;
 
 import java.io.File;
 
+/**
+ * A collection of static methods providing platform-specific functionality.
+ * @author Jim Balhoff
+ */
 public class CrossPlatform {
   
   public static enum Platform { MAC, WINDOWS, UNIX; }
@@ -32,7 +36,7 @@ public class CrossPlatform {
   public static File getUserPreferencesFolder(String name) {
     final String homePath = System.getProperty("user.home");
     switch(getCurrentPlatform()) {
-    // it would be much better to find a supported method for obtaining the Application Support folder
+    // it would be much better to find a supported API for obtaining the Application Support folder
     case MAC: return new File(homePath, "Library/Application Support/" + name);
     case WINDOWS: return new File(homePath, name);
       // UNIX behavior is default

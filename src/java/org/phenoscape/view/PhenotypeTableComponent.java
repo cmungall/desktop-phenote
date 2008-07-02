@@ -18,6 +18,7 @@ import org.obo.datamodel.OBOClass;
 import org.phenoscape.model.PhenoscapeController;
 import org.phenoscape.model.Phenotype;
 import org.phenoscape.model.State;
+import org.phenoscape.swing.PlaceholderRenderer;
 
 import phenote.gui.BugWorkaroundTable;
 import phenote.gui.SortDisabler;
@@ -57,7 +58,8 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
     final EventTableModel<Phenotype> phenotypesTableModel = new EventTableModel<Phenotype>(this.sortedPhenotypes, tableFormat);
     final JTable phenotypesTable = new BugWorkaroundTable(phenotypesTableModel);
     phenotypesTable.setSelectionModel(this.getController().getCurrentPhenotypesSelectionModel());
-    phenotypesTable.setDefaultRenderer(OBOClass.class, new TermRenderer());
+    phenotypesTable.setDefaultRenderer(Object.class, new PlaceholderRenderer("None"));
+    phenotypesTable.setDefaultRenderer(OBOClass.class, new TermRenderer("None"));
     for (int i = 0; i < phenotypesTable.getColumnCount(); i++) {
       final TableCellEditor editor = tableFormat.getColumnEditor(i);
       if (editor != null) { phenotypesTable.getColumnModel().getColumn(i).setCellEditor(editor); }

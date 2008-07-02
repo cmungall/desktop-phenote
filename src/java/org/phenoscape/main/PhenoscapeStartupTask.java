@@ -32,6 +32,10 @@ import phenote.gui.factories.PhenoteOntologyTreeEditorFactory;
 import phenote.gui.factories.TermInfoFactory;
 import phenote.gui.selection.SelectionBridge;
 
+/**
+ * This startup task does all the work of starting the Phenoscape version of Phenote.
+ * @author Jim Balhoff
+ */
 public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
   
   private PhenoscapeController controller;

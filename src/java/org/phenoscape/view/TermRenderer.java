@@ -1,21 +1,33 @@
 package org.phenoscape.view;
 
-import javax.swing.table.DefaultTableCellRenderer;
+import java.awt.Component;
+
+import javax.swing.JTable;
 
 import org.obo.datamodel.OBOClass;
+import org.phenoscape.swing.PlaceholderRenderer;
 
-public class TermRenderer extends DefaultTableCellRenderer {
+/**
+ * A table cell renderer for displaying cell values which are ontology terms (OBOClass).
+ * The term name is displayed, and the term ID is provided as a tooltip.
+ * @author Jim Balhoff
+ */
+public class TermRenderer extends PlaceholderRenderer {
+
+  public TermRenderer(String placeholder) {
+    super(placeholder);
+  }
 
   @Override
-  protected void setValue(Object value) {
+  public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
     if (value != null) {
       final OBOClass term = (OBOClass)value;
-      this.setText(term.getName());
       this.setToolTipText(term.getID());
+      return super.getTableCellRendererComponent(table, term.getName(), isSelected, hasFocus, row, column);
     } else {
-      this.setText("");
       this.setToolTipText(null);
-    }
+      return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+    }  
   }
   
 }

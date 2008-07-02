@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 import org.phenoscape.model.Character;
 import org.phenoscape.model.PhenoscapeController;
 import org.phenoscape.model.State;
+import org.phenoscape.swing.PlaceholderRenderer;
 
 import phenote.gui.BugWorkaroundTable;
 import phenote.gui.SortDisabler;
@@ -53,6 +54,7 @@ public class StateTableComponent extends PhenoscapeGUIComponent {
     final EventTableModel<State> statesTableModel = new EventTableModel<State>(this.sortedStates, new StatesTableFormat());
     final JTable statesTable = new BugWorkaroundTable(statesTableModel);
     statesTable.setSelectionModel(this.getController().getCurrentStatesSelectionModel());
+    statesTable.setDefaultRenderer(Object.class, new PlaceholderRenderer("None"));
     statesTable.putClientProperty("Quaqua.Table.style", "striped");
     new TableColumnPrefsSaver(statesTable, this.getClass().getName());
     final TableComparatorChooser<State> sortChooser = new TableComparatorChooser<State>(statesTable, this.sortedStates, false);

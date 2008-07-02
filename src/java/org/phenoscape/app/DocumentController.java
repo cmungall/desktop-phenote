@@ -7,6 +7,10 @@ import javax.swing.JFileChooser;
 import org.apache.log4j.Logger;
 import org.bbop.framework.GUIManager;
 
+/**
+ * A general class managing reading and writing of files and the data loaded from those files.
+ * @author Jim Balhoff
+ */
 public abstract class DocumentController {
   
   private File currentFile;

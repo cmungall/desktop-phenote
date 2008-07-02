@@ -15,6 +15,7 @@ import javax.swing.JToolBar;
 import org.apache.log4j.Logger;
 import org.phenoscape.model.Character;
 import org.phenoscape.model.PhenoscapeController;
+import org.phenoscape.swing.PlaceholderRenderer;
 
 import phenote.gui.BugWorkaroundTable;
 import phenote.gui.SortDisabler;
@@ -53,6 +54,7 @@ public class CharacterTableComponent extends PhenoscapeGUIComponent {
     final EventTableModel<Character> charactersTableModel = new EventTableModel<Character>(this.sortedCharacters, new CharactersTableFormat());
     final JTable charactersTable = new BugWorkaroundTable(charactersTableModel);
     charactersTable.setSelectionModel(this.getController().getCharactersSelectionModel());
+    charactersTable.setDefaultRenderer(Object.class, new PlaceholderRenderer("None"));
     charactersTable.putClientProperty("Quaqua.Table.style", "striped");
     new TableColumnPrefsSaver(charactersTable, this.getClass().getName());
     final TableComparatorChooser<Character> sortChooser = new TableComparatorChooser<Character>(charactersTable, this.sortedCharacters, false);

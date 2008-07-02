@@ -1,7 +1,8 @@
 package org.phenoscape.swing;
 // This local copy of this class is needed to wrap a RangeList around the FilterList shown in
 // the popup menu.  When there are thousands of terms the combobox takes too long to draw if the
-// items are not limited in this way -- Jim Balhoff.
+// items are not limited in this way.  Several other behavioral modifications are included as well.
+// -- Jim Balhoff
 
 /* Glazed Lists                                                 (c) 2003-2006 */
 /* http://publicobject.com/glazedlists/                      publicobject.com,*/

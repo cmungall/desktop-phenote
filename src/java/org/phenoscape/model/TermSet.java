@@ -11,6 +11,11 @@ import org.obo.query.QueryEngine;
 import org.obo.query.impl.CategoryQuery;
 import org.obo.query.impl.NamespaceQuery;
 
+/**
+ * A TermSet is used to define a collection of ontology terms.  Currently the collection 
+ * can be defined using both OBO namespaces and categories (aka "slims" or "subsets").
+ * @author Jim Balhoff
+ */
 public class TermSet {
 
   private OBOSession session;

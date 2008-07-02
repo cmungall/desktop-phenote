@@ -9,6 +9,7 @@ import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 /**
+ * Static methods for storing arbitrary objects using the Java Preferences api.
  * Downloaded from http://www.ibm.com/developerworks/java/library/j-prefapi.html
  */
 public class PrefObj {

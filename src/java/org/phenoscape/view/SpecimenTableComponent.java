@@ -17,6 +17,7 @@ import org.obo.datamodel.OBOClass;
 import org.phenoscape.model.PhenoscapeController;
 import org.phenoscape.model.Specimen;
 import org.phenoscape.model.Taxon;
+import org.phenoscape.swing.PlaceholderRenderer;
 
 import phenote.gui.BugWorkaroundTable;
 import phenote.gui.SortDisabler;
@@ -90,7 +91,8 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
     final EventTableModel<Specimen> specimensTableModel = new EventTableModel<Specimen>(this.sortedSpecimens, new SpecimensTableFormat());
     final JTable specimensTable = new BugWorkaroundTable(specimensTableModel);
     specimensTable.setSelectionModel(this.getController().getCurrentSpecimensSelectionModel());
-    specimensTable.setDefaultRenderer(OBOClass.class, new TermRenderer());
+    specimensTable.setDefaultRenderer(Object.class, new PlaceholderRenderer("None"));
+    specimensTable.setDefaultRenderer(OBOClass.class, new TermRenderer("None"));
     specimensTable.getColumnModel().getColumn(0).setCellEditor(this.createAutocompleteEditor(this.getController().getOntologyController().getCollectionTermSet().getTerms()));
     specimensTable.putClientProperty("Quaqua.Table.style", "striped");
     new TableColumnPrefsSaver(specimensTable, this.getClass().getName());

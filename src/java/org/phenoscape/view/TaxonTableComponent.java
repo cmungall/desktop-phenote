@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOClass;
 import org.phenoscape.model.PhenoscapeController;
 import org.phenoscape.model.Taxon;
+import org.phenoscape.swing.PlaceholderRenderer;
 
 import phenote.gui.BugWorkaroundTable;
 import phenote.gui.SortDisabler;
@@ -74,7 +75,8 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
     final EventTableModel<Taxon> taxaTableModel = new EventTableModel<Taxon>(this.sortedTaxa, new TaxaTableFormat());
     final JTable taxaTable = new BugWorkaroundTable(taxaTableModel);
     taxaTable.setSelectionModel(this.getController().getTaxaSelectionModel());
-    taxaTable.setDefaultRenderer(OBOClass.class, new TermRenderer());
+    taxaTable.setDefaultRenderer(Object.class, new PlaceholderRenderer("None"));
+    taxaTable.setDefaultRenderer(OBOClass.class, new TermRenderer("None"));
     taxaTable.getColumnModel().getColumn(0).setCellEditor(this.createAutocompleteEditor(this.getController().getOntologyController().getTaxonTermSet().getTerms()));
     taxaTable.putClientProperty("Quaqua.Table.style", "striped");
     new TableColumnPrefsSaver(taxaTable, this.getClass().getName());
