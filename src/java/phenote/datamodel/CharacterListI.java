@@ -18,5 +18,11 @@ public interface CharacterListI {
   public boolean isEmpty();
   public int indexOf(CharacterI c);
   public EventList<CharacterI> getList();
+   /** return all characters that arent blanks. this is handy as blanks are really
+      just an artifact of the gui. a character that has auto-generated fields filled
+      in is still considered blank (like date_created). uses hasNoContent() */
+  public EventList<CharacterI> getNonBlankList();
+  // should CharacterListI just be collapsed into List<CharacterI>?
+  public CharacterListI getNonBlankCharList();
   public boolean equals(CharacterListI cl);
 }

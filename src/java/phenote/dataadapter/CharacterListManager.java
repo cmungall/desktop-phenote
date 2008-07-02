@@ -88,6 +88,17 @@ public class CharacterListManager {
 
   public CharacterListI getCharacterList() { return characterList; }
 
+  /** return all characters that arent blanks. this is handy as blanks are really
+      just an artifact of the gui. a character that has auto-generated fields filled
+      in is still considered blank (like date_created). uses hasNoContent() */
+  public List<CharacterI> getNonBlankList() {
+    return characterList.getNonBlankList();
+  }
+  
+  public CharacterListI getNonBlankCharList() {
+    return characterList.getNonBlankCharList();
+  }
+
   private void fireChangeEvent(Object source, CharacterListI charList) {
     CharListChangeEvent e = new CharListChangeEvent(source,charList);
     for (CharListChangeListener l : listenerList)

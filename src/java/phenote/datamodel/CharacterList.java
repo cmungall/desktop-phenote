@@ -11,6 +11,8 @@ public class CharacterList implements CharacterListI {
 
   private EventList<CharacterI> characterList = new BasicEventList<CharacterI>();
 
+  
+
   public CharacterI get(int i) {
     // should this check if i is out of range - throw ex, or print error msg??
     return characterList.get(i);
@@ -36,6 +38,25 @@ public class CharacterList implements CharacterListI {
         return false;
     }
     return true;
+  }
+
+  /** return all characters that arent blanks. this is handy as blanks are really
+      just an artifact of the gui. a character that has auto-generated fields filled
+      in is still considered blank (like date_created). uses hasNoContent() */
+  public EventList<CharacterI> getNonBlankList() {
+    EventList<CharacterI> nonBlanks = new BasicEventList<CharacterI>(size());
+    if (characterList == null) return nonBlanks; // can this happen?
+    for (CharacterI c : characterList) {
+      if (!c.hasNoContent()) // hasNoCont skips auto-gen fields
+        nonBlanks.add(c);
+    }
+    return nonBlanks;
+  }
+  
+  public CharacterListI getNonBlankCharList() {
+    CharacterList l = new CharacterList();
+    l.characterList = getNonBlankList();
+    return l;
   }
 
 }

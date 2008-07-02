@@ -17,11 +17,15 @@ public abstract class AbstractCommitConstraint implements Constraint {
   public ConstraintStatus checkCommit() {
     return checkEachChar();
   }
-  
+
+  /** Checks all "non-blank" chars. blanks are just an artifact of the gui
+      and should be filtered out before committing. auto-gen fields (date_created)
+      dont factor into blankness. */
   protected ConstraintStatus checkEachChar() {
     ConstraintStatus statusBundle = ConstraintStatus.makeOK();
 
-    List<CharacterI> list = CharacterListManager.inst().getCharacterList().getList();
+    // get list with no blanks
+    List<CharacterI> list = CharacterListManager.inst().getNonBlankList();
     for (CharacterI chr : list) {
       ConstraintStatus charStatus = checkCharCommit(chr);
       statusBundle.addStatusChild(charStatus);

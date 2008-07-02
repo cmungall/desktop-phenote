@@ -185,8 +185,8 @@ public class LoadSaveManager {
     catch (ConstraintEx e) { return; } // is this funny?
 
     // COMMIT TO DB
-    Config.inst().getQueryableDataAdapter().commit(
-      characterListManager.getCharacterList());
+    CharacterListI nonBlankList = characterListManager.getNonBlankCharList();
+    Config.inst().getQueryableDataAdapter().commit(nonBlankList);
     
     // after commit should clear out trans, file commit should do same!
     EditManager.inst().clearTransactions();

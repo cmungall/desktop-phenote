@@ -1,5 +1,6 @@
 package phenote.datamodel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -154,6 +155,22 @@ public class ValueCharacterList implements CharacterListI {
         }
       }
     }
+  }
+
+  /** return all characters that arent blanks. this is handy as blanks are really
+      just an artifact of the gui. a character that has auto-generated fields filled
+      in is still considered blank (like date_created). uses hasNoContent() */
+  public EventList<CharacterI> getNonBlankList() {
+    EventList<CharacterI> nonBlanks = new BasicEventList<CharacterI>(size());
+    if (characters == null) return nonBlanks; // can this happen?
+    for (CharacterI c : characters)
+      if (!c.hasNoContent()) nonBlanks.add(c);
+    return nonBlanks;
+  }
+  public CharacterListI getNonBlankCharList() {
+    ValueCharacterList l = new ValueCharacterList(value);
+    l.characters = getNonBlankList();
+    return l;
   }
   
   @SuppressWarnings("unused")

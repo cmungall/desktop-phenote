@@ -38,6 +38,8 @@ public class SoapAdapter implements QueryableDataAdapterI {
   /** for converting obo ids to owly uris for ckb */ 
   private OWLAdapter owlAdapter = new OWLAdapter();
 
+  /** charList may contain rows with no content - should those be filtered out
+      why not? no need to commit blank rows, should just be ignored */
   public void commit(CharacterListI charList) {
 
     //    try {
@@ -60,6 +62,9 @@ public class SoapAdapter implements QueryableDataAdapterI {
   private void doInsertsAndUpdates(PhenoWS ws, CharacterListI charList) {
     boolean success = true;
     for (CharacterI c : charList.getList()) {
+      // skip blank rows, just artifact of user editing
+      if (c.hasNoContent()) continue;
+
       // new character -> insert
       if (isNew(c))
         success &= insertNewCharacter(ws,c);
