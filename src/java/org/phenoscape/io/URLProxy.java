@@ -61,14 +61,6 @@ public class URLProxy {
   public boolean isOutOfDate(URL url) throws IOException {
     if (!this.isCached(url)) { return true; }
     final URLConnection connection = url.openConnection();
-    if (connection instanceof HttpURLConnection) {
-      return this.isOutOfDate((HttpURLConnection)connection);
-    } else {
-      return false;
-    }
-  }
-  
-  private boolean isOutOfDate(HttpURLConnection connection) {
     final long lastModifiedRaw = connection.getLastModified();
     final Date cacheDate = this.getCacheDate(connection.getURL());
     if ((lastModifiedRaw > 0) && (cacheDate != null)) {
@@ -80,7 +72,7 @@ public class URLProxy {
     if ((eTag != null) && (cacheETag != null)) {
       return !eTag.equals(cacheETag);
     }
-    return true;
+    return false;
   }
   
   /**
@@ -125,7 +117,7 @@ public class URLProxy {
       this.setCacheETag(url, connection.getHeaderField("ETag"));
       this.setCacheDate(url, new Date(connection.getDate()));
     } else {
-      this.setCacheDate(url, new Date());
+      this.setCacheDate(url, new Date(connection.getLastModified()));
     }
     final InputStream input = connection.getInputStream();
     final ReadableByteChannel readChannel = Channels.newChannel(input);
