@@ -10,18 +10,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
@@ -48,6 +47,9 @@ public class URLProxy {
    * Create a URLProxy which uses the given folder as its cache location.
    */
   public URLProxy(File cacheLocation) {
+    if (!cacheLocation.exists()) {
+      cacheLocation.mkdir();
+    }
     if (!cacheLocation.isDirectory()) {
       throw new IllegalArgumentException("Cache location must be a directory.");
     }
@@ -93,7 +95,7 @@ public class URLProxy {
    */
   public File get(URL url, CacheOption option) throws IOException {
     if ((option.equals(CacheOption.NO_CACHE)) || ((option.equals(CacheOption.USE_CACHE)) && (this.isOutOfDate(url)))) {
-      log().debug("Need to download from web");
+      log().debug("Need to download from web: " + url);
       this.downloadToCache(url);
     }
     return this.getCacheFile(url);
@@ -103,7 +105,6 @@ public class URLProxy {
    * Returns true if a cached version of the given URL is available. 
    */
   public boolean isCached(URL url) {
-    log().debug("Is cached? " + this.getCacheFile(url).exists());
     return this.getCacheFile(url).exists();
   }
   
@@ -132,13 +133,7 @@ public class URLProxy {
   }
   
   private String getCacheFileName(URL url) {
-    // using HTML form encoding as convenient way to make URL safe for use as filename
-    try {
-      return URLEncoder.encode(url.toString(), "UTF-8");
-    } catch (UnsupportedEncodingException e) {
-      log().error("UTF-8 encoding not supported", e);
-      return null;
-    }
+    return (String)this.getCacheMetadata(url).get("uuid");
   }
   
   private File getCacheMetadataFile() throws IOException {
@@ -174,17 +169,18 @@ public class URLProxy {
   
   @SuppressWarnings("unchecked")
   private Map<String, Object> getCacheMetadata(URL url) {
-    final Map<String, Object> metadata = (Map<String, Object>)(this.getCacheMetadata());
-    log().debug("Cache metadata: " + metadata);
-    final String key = this.getCacheFileName(url);
-    return metadata.containsKey(key) ? (Map<String, Object>)(metadata.get(key)) : (new HashMap<String, Object>());
+    final Map<String, Object> metadata = this.getCacheMetadata();
+    if (!metadata.containsKey(url.toString())) {
+      this.writeCacheMetadata(url, "uuid", UUID.randomUUID().toString());
+    }
+    return (Map<String, Object>)this.getCacheMetadata().get(url.toString());    
   }
   
   @SuppressWarnings("unchecked")
   private void writeCacheMetadata(URL url, String key, Object value) {
     try {
       final Map<String, Object> metadata = this.getCacheMetadata();
-      final String urlKey = this.getCacheFileName(url);
+      final String urlKey = url.toString();
       final Map<String, Object> urlMetadata;
       if (metadata.containsKey(urlKey)) {
        urlMetadata = (Map<String, Object>)(metadata.get(urlKey));
@@ -206,22 +202,18 @@ public class URLProxy {
   }
   
   private Date getCacheDate(URL url) {
-    log().debug("Date is: " + this.getCacheMetadata(url).get("date"));
     return (Date)(this.getCacheMetadata(url).get("date"));
   }
   
   private void setCacheDate(URL url, Date date) {
-    log().debug("Setting cache date: " + date);
     this.writeCacheMetadata(url, "date", date);
   }
   
   private String getCacheETag(URL url) {
-    log().debug("ETag is: " + this.getCacheMetadata(url).get("etag"));
     return (String)(this.getCacheMetadata(url).get("etag"));
   }
   
   private void setCacheETag(URL url, String eTag) {
-    log().debug("Setting cache ETag: " + eTag);
     this.writeCacheMetadata(url, "etag", eTag);
   }
   
