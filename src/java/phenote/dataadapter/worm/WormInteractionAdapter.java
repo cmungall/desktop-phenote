@@ -81,9 +81,9 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
     PreparedStatement ps = null;	// intialize postgres insert 
     try { ps = c.prepareStatement("INSERT INTO "+postgres_table+"_hst VALUES (?, ?)"); ps.setString(1, joinkey); ps.setString(2, value); }
     catch (SQLException se) {
-      System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("updatePostgresVal INSERT"); return; }
     try { ps.executeUpdate(); }
-    catch (SQLException se) { System.out.println("We got an exception while executing a history insert in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); }
+    catch (SQLException se) { System.out.println("We got an exception while executing a history insert in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); errorPopup("updatePostgresVal ps.executeUpdate"); return; }
     
     String pgisnull = "null";
     String pgblank = "";
@@ -92,21 +92,21 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
 //        System.out.println("INSERT INTO "+postgres_table+" VALUES "+joinkey+" and "+value+" with postgres_value "+postgres_value+" end");
         try { ps = c.prepareStatement("INSERT INTO "+postgres_table+" VALUES (?, ?)"); ps.setString(1, joinkey); ps.setString(2, value); }
         catch (SQLException se) {
-          System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+          System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("updatePostgresVal INSERT "+postgres_table+" "); return; }
         try { ps.executeUpdate(); }
-        catch (SQLException se) { System.out.println("We got an exception while executing an insert update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); } }
+        catch (SQLException se) { System.out.println("We got an exception while executing an insert update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); errorPopup("updatePostgresVal ps.executeUpdate()"); return; } }
       else { 							// some value in postgres, update it
 //        System.out.println("UPDATING "+postgres_table+" VALUES "+joinkey+" and "+value+" with postgres_value "+postgres_value+" end");
         try { ps = c.prepareStatement("UPDATE "+postgres_table+" SET "+postgres_table+" = ? WHERE joinkey = '"+joinkey+"'"); ps.setString(1, value); }
         catch (SQLException se) {
-          System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+          System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("updatePostgresVal UPDATE "+postgres_table+" "); return; }
         try { ps.executeUpdate(); }
-        catch (SQLException se) { System.out.println("We got an exception while executing a data update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); }
+        catch (SQLException se) { System.out.println("We got an exception while executing a data update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); errorPopup("updatePostgresVal ps.executeUpdate()"); return; }
         try { ps = c.prepareStatement("UPDATE "+postgres_table+" SET int_timestamp = CURRENT_TIMESTAMP WHERE joinkey = '"+joinkey+"'"); }
         catch (SQLException se) {
-          System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+          System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("updatePostgresVal UPDATE timestamp "+postgres_table+" "); return; }
         try { ps.executeUpdate(); }
-        catch (SQLException se) { System.out.println("We got an exception while executing a timestamp update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); } }
+        catch (SQLException se) { System.out.println("We got an exception while executing a timestamp update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); errorPopup("updatePostgresVal ps.executeUpdate()"); return; } }
   } // private void updatePostgresVal(String postgres_table, String joinkey, int colI, String value)
 
   private String queryPostgresCharacterNull(Statement s, String postgres_table, String joinkey) {
@@ -115,10 +115,10 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
     ResultSet rs = null;	// intialize postgres query result
     try { rs = s.executeQuery("SELECT * FROM "+postgres_table+" WHERE joinkey = '"+joinkey+"' ORDER BY int_timestamp"); }
     catch (SQLException se) {
-      System.out.println("We got an exception while executing our "+postgres_table+" joinkey: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while executing our "+postgres_table+" joinkey: that probably means our term SQL is invalid"); se.printStackTrace(); errorPopup("queryPostgresCharacterNull SELECT "+postgres_table+" "); }
     try { while (rs.next()) { default_value = rs.getString(2); } }		// assign the new term value
     catch (SQLException se) {
-      System.out.println("We got an exception while getting a queryPostgresCharacter "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); } 
+      System.out.println("We got an exception while getting a queryPostgresCharacter "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); errorPopup("queryPostgresCharacterNull rs.getString"); } 
     if (default_value == null) { default_value = "null"; }
     return default_value; 
   }
@@ -149,13 +149,35 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
       System.out.println("Could not get terms from character in updateListField : " + e); e.printStackTrace(); }
   }
 
+  public void errorPopup(String errType) {
+    String errText = errType + " : invalid SQL problem";
+    JOptionPane.showMessageDialog(null,errText,errText,JOptionPane.INFORMATION_MESSAGE);
+  }
+//
+//    try {
+//      // The second and third arguments are the username and password, respectively. They should be whatever is necessary to connect to the database.
+//      c = DriverManager.getConnection("jdbc:postgresql://131.215.52.76:5432/testdb", "postgres", "");     // tazendra
+//    } catch (SQLException se) {
+//      System.out.println("Couldn't connect: print out a stack trace and exit.");
+//      se.printStackTrace();
+//      System.out.println("Couldn't connect: stack trace done.");
+//      String getMessage = se.getMessage();
+//      getMessage = getMessage + " \nYour IP is not recognized by the postgres database, please contact help@wormbase.org if you're a valid Phenotype WormBase curator.";
+//      JOptionPane.showMessageDialog(null,getMessage,"Postgres connection error",JOptionPane.INFORMATION_MESSAGE);
+//    }
+
   public void commit(CharacterListI charList) {
     Connection c = connectToDB();
     Statement s = null;
+    ResultSet rs = null;
+    boolean bool = true;
 
     try { s = c.createStatement(); }
       catch (SQLException se) {
-      System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); errorPopup("commit createStatement"); return ; }
+    try { bool = s.execute("BEGIN WORK"); }
+    catch (SQLException se) {
+      System.out.println("We got an exception while executing our int_name query: that probably means our column SQL is invalid"); se.printStackTrace(); errorPopup("commit BEGIN WORK"); return ; }
     for (CharacterI chr : charList.getList()) {
 //      System.out.println("Chr "+chr+" end");
       try {
@@ -166,33 +188,35 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
         if ( (pgdbid == null) || (pgdbid == "") ) { 
 //          Integer joinkeyInt = Integer.parseInt(pgdbid);	// this can't do anything since pgdbid must be blank
           Integer joinkeyInt = 0;
-          ResultSet rs = null;
+//          ResultSet rs = null;
           try { rs = s.executeQuery("SELECT joinkey FROM int_name "); }
           catch (SQLException se) {
-            System.out.println("We got an exception while executing our int_name query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
+            System.out.println("We got an exception while executing our int_name query: that probably means our column SQL is invalid"); se.printStackTrace(); errorPopup("commit SELECT int_name"); return ; }
           try { while (rs.next()) { if (rs.getInt(1) > joinkeyInt) { joinkeyInt = rs.getInt(1); } } joinkeyInt++; joinkey = Integer.toString(joinkeyInt); }
             // get the next highest number joinkey for that character
           catch (SQLException se) {
             System.out.println("We got an exception while getting a column/term joinkey "+joinkey+" result:this shouldn't happen: we've done something really bad."); 
-            se.printStackTrace(); System.exit(1); } }
+            se.printStackTrace(); errorPopup("commit rs.next"); return ; } }
 //System.out.println("joinkey "+joinkey+" end");
         chr.setValue("PgdbId",joinkey);					// assign the postgres database ID
 
         String postgres_table = "int_name"; String tag_name = "Name"; String tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "int_effector"; tag_name = "Effector"; 
-        updateListField(c, s, joinkey, postgres_table, tag_name, chr);
+        postgres_table = "int_effector"; tag_name = "Effector"; tag_value = "";
+        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "int_torvariation"; tag_name = "tor Variation"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "int_tortransgene"; tag_name = "tor Transgene"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "int_effected"; tag_name = "Effected"; 
-        updateListField(c, s, joinkey, postgres_table, tag_name, chr);
+        postgres_table = "int_effected"; tag_name = "Effected"; tag_value = "";
+        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "int_tedvariation"; tag_name = "ted Variation"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "int_tedtransgene"; tag_name = "ted Transgene"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "int_type"; tag_name = "Interaction Type"; tag_value = chr.getValueString(tag_name);
+        postgres_table = "int_type"; tag_name = "Type"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "int_phenotype"; tag_name = "Phenotype"; 
         updateListField(c, s, joinkey, postgres_table, tag_name, chr);
@@ -218,6 +242,9 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
         e.printStackTrace(); // helpful for debugging
       }
     } // for (CharacterI chr : charList.getList())
+    try { bool = s.execute("COMMIT WORK"); }
+    catch (SQLException se) {
+      System.out.println("We got an exception while executing our int_name query: that probably means our column SQL is invalid"); se.printStackTrace(); errorPopup("commit COMMIT WORK"); return ; }
     delete(c, s);
   } // public void commit(CharacterListI charList)
 
@@ -260,7 +287,7 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
       System.out.println("Couldn't find the driver!");
       System.out.println("Let's print a stack trace, and exit.");
       cnfe.printStackTrace();
-      System.exit(1);
+      errorPopup("connectToDB failure");
     }
     System.out.println("Registered the driver ok, so let's make a connection.");
     Connection c = null;
@@ -288,10 +315,10 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
       // get the phenotype term in timestamp order where the allele and column number match
     try { rs = s.executeQuery("SELECT * FROM "+postgres_table+" WHERE joinkey = '"+joinkey+"' ORDER BY int_timestamp"); }
     catch (SQLException se) {
-      System.out.println("We got an exception while executing our "+postgres_table+" joinkey: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while executing our "+postgres_table+" joinkey: that probably means our term SQL is invalid"); se.printStackTrace(); errorPopup("queryPostgresCharacter SELECT"); }
     try { while (rs.next()) { default_value = rs.getString(2); } }		// assign the new term value
     catch (SQLException se) {
-      System.out.println("We got an exception while getting a queryPostgresCharacter "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); } 
+      System.out.println("We got an exception while getting a queryPostgresCharacter "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); errorPopup("queryPostgresCharacter rs.next()"); }
     if (default_value == null) { default_value = ""; }
 //System.out.println( "queryPostgresCharacter for "+postgres_table+" "+joinkey+" gives "+default_value+" end");
     return default_value; 
@@ -408,7 +435,7 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
     Connection c = connectToDB();
     Statement s = null;
     try { s = c.createStatement(); }
-      catch (SQLException se) { System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); System.exit(1); }
+      catch (SQLException se) { System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); errorPopup("query cannot create statement"); }
 
     ResultSet rs = null;	// intialize postgres query result
     List<String> joinkeys = new ArrayList<String>(2);
@@ -416,28 +443,29 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
 
     if (field.equals(nameString)) {			// if querying the name, get name data
       try { rs = s.executeQuery("SELECT * FROM int_name WHERE int_name ~ '"+query+"' ORDER BY joinkey"); }	// find the substring name that matches the queried name  
-      catch (SQLException se) { System.out.println("Exception while executing int_name nameString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+//      catch (SQLException se) { System.out.println("Exception while executing int_name nameString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      catch (SQLException se) { System.out.println("Exception while executing int_name nameString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query int_name"); }
     } else if (field.equals(remString)) {						// if querying the remark, get paper data
       try { rs = s.executeQuery("SELECT * FROM int_remark WHERE int_remark ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried remark
-      catch (SQLException se) { System.out.println("Exception while executing int_remark remString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      catch (SQLException se) { System.out.println("Exception while executing int_remark remString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query int_remark"); }
     } else if (field.equals(effectorString)) {						// if querying the effector, get paper data
       try { rs = s.executeQuery("SELECT * FROM int_effector WHERE int_effector ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried effector
-      catch (SQLException se) { System.out.println("Exception while executing int_effector effectorString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      catch (SQLException se) { System.out.println("Exception while executing int_effector effectorString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query int_effector"); }
     } else if (field.equals(effectedString)) {						// if querying the effected, get paper data
       try { rs = s.executeQuery("SELECT * FROM int_effected WHERE int_effected ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried effected
-      catch (SQLException se) { System.out.println("Exception while executing int_effected effectedString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      catch (SQLException se) { System.out.println("Exception while executing int_effected effectedString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query int_effected"); }
     } else if (field.equals(torvString)) {						// if querying the torvariation, get paper data
       try { rs = s.executeQuery("SELECT * FROM int_torvariation WHERE int_torvariation ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried torvariation
-      catch (SQLException se) { System.out.println("Exception while executing int_torvariation torvString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      catch (SQLException se) { System.out.println("Exception while executing int_torvariation torvString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query int_torvariation"); }
     } else if (field.equals(tedvString)) {						// if querying the tedvariation, get paper data
       try { rs = s.executeQuery("SELECT * FROM int_tedvariation WHERE int_tedvariation ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried tedvariation
-      catch (SQLException se) { System.out.println("Exception while executing int_tedvariation tedvString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      catch (SQLException se) { System.out.println("Exception while executing int_tedvariation tedvString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query int_tedvariation"); }
     } else if (field.equals(pubString)) {						// if querying the publication, get paper data
       try { rs = s.executeQuery("SELECT * FROM int_paper WHERE int_paper ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried name
-      catch (SQLException se) { System.out.println("Exception while executing int_paper pubString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      catch (SQLException se) { System.out.println("Exception while executing int_paper pubString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query int_paper"); }
     } else if (field.equals(phenString)) {						// if querying the phenotype, get paper data
       try { rs = s.executeQuery("SELECT * FROM int_phenotype WHERE int_phenotype ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried name
-      catch (SQLException se) { System.out.println("Exception while executing int_phenotype phenString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      catch (SQLException se) { System.out.println("Exception while executing int_phenotype phenString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query int_phenotype"); }
 //      String tag_name = "Phenotype"; StringBuilder sb = new StringBuilder(); Integer loopcount = 0;
 //      CharFieldValue list = chr.getValue(chr.getCharFieldForName(tag_name));
 //      List<CharFieldValue> valList = list.getCharFieldValueList();
@@ -458,7 +486,7 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
         foundResults++; } }
     catch (SQLException se) {
       System.out.println("We got an exception while getting a query catch while rs.next tempname joinkey "+query+" result:this shouldn't happen: we've done something really bad."); 
-      se.printStackTrace(); System.exit(1); }
+      se.printStackTrace(); errorPopup("query cannot get values"); }
 
       for (String joinkey : joinkeys) {
 //        System.out.println("J "+joinkey+" List");
