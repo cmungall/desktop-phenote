@@ -101,9 +101,9 @@ public class WormAdapter implements QueryableDataAdapterI {
     PreparedStatement ps = null;	// intialize postgres insert 
     try { ps = c.prepareStatement("INSERT INTO "+postgres_table+"_hst VALUES (?, ?)"); ps.setString(1, joinkey); ps.setString(2, value); }
     catch (SQLException se) {
-      System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("updatePostgresVal INSERT "+postgres_table+"_hst "); return; }
     try { ps.executeUpdate(); } 	// write to app_tempname, which is not what we really want, but we need to figure out the pubchunk thing to see what we're going to do
-    catch (SQLException se) { System.out.println("We got an exception while executing a history insert in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); }
+    catch (SQLException se) { System.out.println("We got an exception while executing a history insert in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); errorPopup("updatePostgresVal ps.executeUpdate() "+postgres_table+" "); return; }
     
     String pgisnull = "null";
     String pgblank = "";
@@ -112,21 +112,21 @@ public class WormAdapter implements QueryableDataAdapterI {
 //        System.out.println("INSERT INTO "+postgres_table+" VALUES "+joinkey+" and "+value+" with postgres_value "+postgres_value+" end");
         try { ps = c.prepareStatement("INSERT INTO "+postgres_table+" VALUES (?, ?)"); ps.setString(1, joinkey); ps.setString(2, value); }
         catch (SQLException se) {
-          System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+          System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("updatePostgresVal INSERT "+postgres_table+" "); return; }
         try { ps.executeUpdate(); } 	// write to app_tempname, which is not what we really want, but we need to figure out the pubchunk thing to see what we're going to do
-        catch (SQLException se) { System.out.println("We got an exception while executing an insert update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); } }
+        catch (SQLException se) { System.out.println("We got an exception while executing an insert update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); errorPopup("updatePostgresVal ps.executeUpdate() "+postgres_table+" "); return; } }
       else { 							// some value in postgres, update it
 //        System.out.println("UPDATING "+postgres_table+" VALUES "+joinkey+" and "+value+" with postgres_value "+postgres_value+" end");
         try { ps = c.prepareStatement("UPDATE "+postgres_table+" SET "+postgres_table+" = ? WHERE joinkey = '"+joinkey+"'"); ps.setString(1, value); }
         catch (SQLException se) {
-          System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+          System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("updatePostgresVal UPDATE "+postgres_table+" "); return; }
         try { ps.executeUpdate(); } 	// write to app_tempname, which is not what we really want, but we need to figure out the pubchunk thing to see what we're going to do
-        catch (SQLException se) { System.out.println("We got an exception while executing a data update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); }
+        catch (SQLException se) { System.out.println("We got an exception while executing a data update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); errorPopup("updatePostgresVal ps.executeUpdate "+postgres_table+" "); return; }
         try { ps = c.prepareStatement("UPDATE "+postgres_table+" SET app_timestamp = CURRENT_TIMESTAMP WHERE joinkey = '"+joinkey+"'"); }
         catch (SQLException se) {
-          System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+          System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("updatePostgresVal UPDATE timestamp "+postgres_table+" "); return; }
         try { ps.executeUpdate(); } 	// write to app_tempname, which is not what we really want, but we need to figure out the pubchunk thing to see what we're going to do
-        catch (SQLException se) { System.out.println("We got an exception while executing a timestamp update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); } }
+        catch (SQLException se) { System.out.println("We got an exception while executing a timestamp update in updatePostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); errorPopup("updatePostgresVal ps.executeUpdate timestamp "+postgres_table+" "); return; } }
   } // private void updatePostgresVal(String postgres_table, String joinkey, int colI, String value)
 
   private void insertPostgresHistVal(Connection c, Statement s, String postgres_table, String joinkey, String value) {
@@ -135,20 +135,20 @@ public class WormAdapter implements QueryableDataAdapterI {
     System.out.println("SELECT joinkey FROM "+postgres_table+"_hst WHERE joinkey = '"+joinkey+"' AND "+postgres_table+"_hst = '"+value+"' "); 
     try { rs = s.executeQuery("SELECT joinkey FROM "+postgres_table+"_hst WHERE joinkey = '"+joinkey+"' AND "+postgres_table+"_hst = '"+value+"' "); }
     catch (SQLException se) {
-      System.out.println("We got an exception while executing our "+postgres_table+" query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while executing our "+postgres_table+" query: that probably means our column SQL is invalid"); se.printStackTrace(); errorPopup("insertPostgresHistVal SELECT "+postgres_table+"_hst"); return; }
     try { if (rs.next()) { hasMatch++; } }
       // get the next highest number joinkey for that character
     catch (SQLException se) {
       System.out.println("We got an exception while getting a insertPostgresHistVal joinkey "+joinkey+" result:this shouldn't happen: we've done something really bad."); 
-      se.printStackTrace(); System.exit(1); }
+      se.printStackTrace(); errorPopup("insertPostgresHistVal rs.next "+postgres_table+"_hst"); return; }
     if (hasMatch == 0) {
       PreparedStatement ps = null;	// intialize postgres insert 
       System.out.println("INSERT INTO "+postgres_table+"_hst VALUES "+joinkey+" and "+value+" end");
       try { ps = c.prepareStatement("INSERT INTO "+postgres_table+"_hst VALUES (?, ?)"); ps.setString(1, joinkey); ps.setString(2, value); }
       catch (SQLException se) {
-        System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+        System.out.println("We got an exception while preparing our insert: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("insertPostgresHistVal INSERT "+postgres_table+"_hst"); return; }
       try { ps.executeUpdate(); } 	// write to app_tempname, which is not what we really want, but we need to figure out the pubchunk thing to see what we're going to do
-      catch (SQLException se) { System.out.println("We got an exception while executing a history insert in insertPostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); System.exit(1); } } }
+      catch (SQLException se) { System.out.println("We got an exception while executing a history insert in insertPostgresVal table "+postgres_table+" joinkey "+joinkey+" value "+value+" : possibly bad SQL, or check the connection."); se.printStackTrace(); errorPopup("insertPostgresHistVal ps.executeUpdate() "+postgres_table+"_hst"); return; } } }
     
 
 
@@ -180,13 +180,18 @@ public class WormAdapter implements QueryableDataAdapterI {
   public void commit(CharacterListI charList) {
     Connection c = connectToDB();
     Statement s = null;
+    boolean bool = true;
+
 
 //    Constraint const;
 //    ConstraintManager.addConstraint(const);
 
     try { s = c.createStatement(); }
       catch (SQLException se) {
-      System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); errorPopup("commit createStatement"); return; }
+    try { bool = s.execute("BEGIN WORK"); }
+    catch (SQLException se) {
+      System.out.println("We got an exception while executing our int_name query: that probably means our column SQL is invalid"); se.printStackTrace(); errorPopup("commit BEGIN WORK"); return ; }
     for (CharacterI chr : charList.getList()) {
 //      System.out.println("Chr "+chr+" end");
       try {
@@ -200,12 +205,12 @@ public class WormAdapter implements QueryableDataAdapterI {
           ResultSet rs = null;
           try { rs = s.executeQuery("SELECT joinkey FROM app_tempname "); }
           catch (SQLException se) {
-            System.out.println("We got an exception while executing our app_tempname query: that probably means our column SQL is invalid"); se.printStackTrace(); System.exit(1); }
+            System.out.println("We got an exception while executing our app_tempname query: that probably means our column SQL is invalid"); se.printStackTrace(); errorPopup("commit SELECT app_tempname"); return; }
           try { while (rs.next()) { if (rs.getInt(1) > joinkeyInt) { joinkeyInt = rs.getInt(1); } } joinkeyInt++; joinkey = Integer.toString(joinkeyInt); }
             // get the next highest number joinkey for that character
           catch (SQLException se) {
             System.out.println("We got an exception while getting a column/term joinkey "+joinkey+" result:this shouldn't happen: we've done something really bad."); 
-            se.printStackTrace(); System.exit(1); } }
+            se.printStackTrace(); errorPopup("commit rs.next()"); return; } }
 //System.out.println("joinkey "+joinkey+" end");
 
         chr.setValue("PgdbId",joinkey);					// assign the allele and the column
@@ -311,6 +316,9 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
       }
 
     } // for (CharacterI chr : charList.getList())
+    try { bool = s.execute("COMMIT WORK"); }
+    catch (SQLException se) {
+      System.out.println("We got an exception while executing our int_name query: that probably means our column SQL is invalid"); se.printStackTrace(); errorPopup("commit COMMIT WORK"); return ; }
 
     delete(c, s);
   } // public void commit(CharacterListI charList)
@@ -349,6 +357,11 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
     return queryableFields.contains(field);
   }
 
+  public void errorPopup(String errType) {
+    String errText = errType + " : invalid SQL problem";
+    JOptionPane.showMessageDialog(null,errText,errText,JOptionPane.INFORMATION_MESSAGE);
+  }
+
   private Connection connectToDB() {
     System.out.println("Checking if Driver is registered with DriverManager.");	// open postgres database connection
     try {
@@ -357,7 +370,7 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
       System.out.println("Couldn't find the driver!");
       System.out.println("Let's print a stack trace, and exit.");
       cnfe.printStackTrace();
-      System.exit(1);
+      errorPopup("connectToDB"); return null;
     }
     System.out.println("Registered the driver ok, so let's make a connection.");
     Connection c = null;
@@ -398,10 +411,10 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
     ResultSet rs = null;	// intialize postgres query result
     try { rs = s.executeQuery("SELECT * FROM "+postgres_table+" WHERE joinkey = '"+joinkey+"' ORDER BY app_timestamp"); }
     catch (SQLException se) {
-      System.out.println("We got an exception while executing our "+postgres_table+" joinkey: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while executing our "+postgres_table+" joinkey: that probably means our term SQL is invalid"); se.printStackTrace(); errorPopup("queryPostgresCharacterNull "+postgres_table+" "); }
     try { while (rs.next()) { default_value = rs.getString(2); } }		// assign the new term value
     catch (SQLException se) {
-      System.out.println("We got an exception while getting a queryPostgresCharacter "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); } 
+      System.out.println("We got an exception while getting a queryPostgresCharacter "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); errorPopup("queryPostgresCharacterNull rs.next()"); } 
     if (default_value == null) { default_value = "null"; }
     return default_value; 
   }
@@ -413,10 +426,10 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
       // get the phenotype term in timestamp order where the allele and column number match
     try { rs = s.executeQuery("SELECT * FROM "+postgres_table+" WHERE joinkey = '"+joinkey+"' ORDER BY app_timestamp"); }
     catch (SQLException se) {
-      System.out.println("We got an exception while executing our "+postgres_table+" joinkey: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while executing our "+postgres_table+" joinkey: that probably means our term SQL is invalid"); se.printStackTrace(); errorPopup("queryPostgresCharacter "+postgres_table+" "); }
     try { while (rs.next()) { default_value = rs.getString(2); } }		// assign the new term value
     catch (SQLException se) {
-      System.out.println("We got an exception while getting a queryPostgresCharacter "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); } 
+      System.out.println("We got an exception while getting a queryPostgresCharacter "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); errorPopup("queryPostgresCharacter rs.next()"); } 
 //  System.out.println("Added in function charList term "+query+" column "+colI+".");		// comment out later
 //    if (default_value == null) { default_value = "postgres value is null"; }
 //    if (default_value == "") { default_value = "postgres value is blank"; }
@@ -429,10 +442,10 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
     ResultSet rs = null;	// intialize postgres query result
     try { rs = s.executeQuery("SELECT * FROM "+postgres_table+" WHERE joinkey = '"+joinkey+"' ORDER BY app_timestamp"); }
     catch (SQLException se) {
-      System.out.println("We got an exception while executing our "+postgres_table+" query: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while executing our "+postgres_table+" query: that probably means our term SQL is invalid"); se.printStackTrace(); errorPopup("queryPostgresCharacterDate "+postgres_table+" "); }
     try { while (rs.next()) { default_value = rs.getString(3); } }		// assign the new term value
     catch (SQLException se) {
-      System.out.println("We got an exception while getting a queryPostgresCharacterDate "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while getting a queryPostgresCharacterDate "+postgres_table+" result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); errorPopup("queryPostgresCharacterDate rs.next()"); }
 //    if (default_value == null) { default_value = "postgres value is null"; }
 //    if (default_value == "") { default_value = "postgres value is blank"; }
     if (default_value == null) { default_value = ""; }
@@ -447,10 +460,10 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
 //    System.out.println("SELECT * FROM "+postgres_table+"_hst WHERE joinkey = '"+joinkey+"' ORDER BY app_timestamp"); 
     try { rs = s.executeQuery("SELECT * FROM "+postgres_table+"_hst WHERE joinkey = '"+joinkey+"' ORDER BY app_timestamp"); }
     catch (SQLException se) {
-      System.out.println("We got an exception while executing our "+postgres_table+"_hst query: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while executing our "+postgres_table+"_hst query: that probably means our term SQL is invalid"); se.printStackTrace(); errorPopup("queryPostgresCharacterPapAll "+postgres_table+" "); }
     try { while (rs.next()) { sb.append(rs.getString(2)).append(" -- "); } }		// append the new term value
     catch (SQLException se) {
-      System.out.println("We got an exception while getting a queryPostgresPapAll"+postgres_table+"_hst result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); } 
+      System.out.println("We got an exception while getting a queryPostgresPapAll"+postgres_table+"_hst result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); errorPopup("queryPostgresCharacterPapAll rs.next()"); } 
     String pap_hist = sb.toString();
 //    System.out.println("pap_hist "+pap_hist+" is not null"); 
 //    if (pap_hist == null) { pap_hist = "postgres value is null"; }
@@ -465,10 +478,10 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
 //    System.out.println("SELECT * FROM "+postgres_table+"_hst WHERE joinkey = '"+joinkey+"' ORDER BY app_timestamp"); 
     try { rs = s.executeQuery("SELECT * FROM "+postgres_table+"_hst WHERE joinkey = '"+joinkey+"' ORDER BY app_timestamp"); }
     catch (SQLException se) {
-      System.out.println("We got an exception while executing our "+postgres_table+"_hst query: that probably means our term SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      System.out.println("We got an exception while executing our "+postgres_table+"_hst query: that probably means our term SQL is invalid"); se.printStackTrace(); errorPopup("queryPostgresCharacterPap "+postgres_table+" "); }
     try { while (rs.next()) { pap_latest = rs.getString(2); } }		// append the new term value
     catch (SQLException se) {
-      System.out.println("We got an exception while getting a queryPostgresPap"+postgres_table+"_hst result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); System.exit(1); } 
+      System.out.println("We got an exception while getting a queryPostgresPap"+postgres_table+"_hst result:this shouldn't happen: we've done something really bad."); se.printStackTrace(); errorPopup("queryPostgresCharacterPap rs.next()"); } 
 //System.out.println("pap_latest "+pap_latest+" for joinkey "+joinkey+" end");
     if (pap_latest == null) { pap_latest = ""; }
     return pap_latest; 
@@ -659,7 +672,7 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
     Connection c = connectToDB();
     Statement s = null;
     try { s = c.createStatement(); }
-      catch (SQLException se) { System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); System.exit(1); }
+      catch (SQLException se) { System.out.println("We got an exception while creating a statement: that probably means we're no longer connected."); se.printStackTrace(); errorPopup("query createStatement"); }
 
     ResultSet rs = null;	// intialize postgres query result
     List<String> joinkeys = new ArrayList<String>(2);
@@ -667,29 +680,29 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
 
     if (field.equals(alleleString)) {			// if querying the allele, get allele data
       try { rs = s.executeQuery("SELECT * FROM app_tempname WHERE app_tempname ~ '"+query+"' ORDER BY joinkey"); }	// find the allele that matches the queried allele  switch to substring search for Karen 2008 02 21
-      catch (SQLException se) { System.out.println("Exception while executing app_tempname alleleString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      catch (SQLException se) { System.out.println("Exception while executing app_tempname alleleString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query SELECT app_tempname"); }
     } else if (field.equals(pubString)) {						// if querying the publication, get paper data
       try { rs = s.executeQuery("SELECT * FROM app_paper WHERE app_paper ~ '"+query+"' ORDER BY joinkey"); }	// find the allele that matches the queried allele
-      catch (SQLException se) { System.out.println("Exception while executing app_paper pubString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      catch (SQLException se) { System.out.println("Exception while executing app_paper pubString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query SELECT app_paper"); }
     } else if (field.equals(phenotypeString)) {						// if querying the publication, get paper data
       try { rs = s.executeQuery("SELECT * FROM app_term WHERE app_term ~ '"+query+"' ORDER BY joinkey"); }	// find the allele that matches the queried allele
-      catch (SQLException se) { System.out.println("Exception while executing app_term phenotypeString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      catch (SQLException se) { System.out.println("Exception while executing app_term phenotypeString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query SELECT app_term"); }
     } else if (field.equals(phenotypeRemarkString)) {
       try { rs = s.executeQuery("SELECT * FROM app_phen_remark WHERE app_phen_remark ~ '"+query+"' ORDER BY joinkey"); }	// find the allele that matches the queried allele
       catch (SQLException se) { System.out.println("Exception while executing app_phen_remark phenotypeRemarkString "+query+" query: that probably means our SQL is invalid"); 
-        se.printStackTrace(); System.exit(1); }
+        se.printStackTrace(); errorPopup("query SELECT app_phen_remark"); }
     } else if (field.equals(nbpString)) {	
       try { rs = s.executeQuery("SELECT * FROM app_nbp WHERE app_timestamp ~ '"+query+"' ORDER BY joinkey;"); }	// get the alleles from a paper
-      catch (SQLException se) { System.out.println("Exception while executing app_nbp nbpString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+      catch (SQLException se) { System.out.println("Exception while executing app_nbp nbpString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query SELECT app_nbp"); }
     } else if (field.equals(intxdescString)) {	
       String not_null = "NOT NULL";
       if (query.equals(not_null)) { 
         try { rs = s.executeQuery("SELECT * FROM app_intx_desc WHERE app_intx_desc IS NOT NULL ORDER BY joinkey;"); 
         System.out.println("SELECT * FROM app_intx_desc WHERE app_intx_desc IS NOT NULL ORDER BY joinkey;"); }	// get the alleles from a paper
-        catch (SQLException se) { System.out.println("Exception while executing app_nbp NOT NULL nbpString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); }
+        catch (SQLException se) { System.out.println("Exception while executing app_nbp NOT NULL nbpString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query SELECT app_intx_desc NOT NULL"); }
       } else {
         try { rs = s.executeQuery("SELECT * FROM app_intx_desc WHERE app_intx_desc ~ '"+query+"' ORDER BY joinkey;"); }	// get the alleles from a paper
-        catch (SQLException se) { System.out.println("Exception while executing app_nbp nbpString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); System.exit(1); } }
+        catch (SQLException se) { System.out.println("Exception while executing app_nbp nbpString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query SELECT app_intx_desc"); } }
     } else {
       // if query has failed...
       throw new DataAdapterEx("Worm query of "+query+" of field "+field+" failed");
@@ -701,7 +714,7 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
         foundAllele++; } }
     catch (SQLException se) {
       System.out.println("We got an exception while getting a query catch while rs.next tempname joinkey "+query+" result:this shouldn't happen: we've done something really bad."); 
-      se.printStackTrace(); System.exit(1); }
+      se.printStackTrace(); errorPopup("query rs.next()"); }
 
       for (String joinkey : joinkeys) {
 //        System.out.println("J "+joinkey+" List");

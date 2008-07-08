@@ -153,23 +153,10 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
     String errText = errType + " : invalid SQL problem";
     JOptionPane.showMessageDialog(null,errText,errText,JOptionPane.INFORMATION_MESSAGE);
   }
-//
-//    try {
-//      // The second and third arguments are the username and password, respectively. They should be whatever is necessary to connect to the database.
-//      c = DriverManager.getConnection("jdbc:postgresql://131.215.52.76:5432/testdb", "postgres", "");     // tazendra
-//    } catch (SQLException se) {
-//      System.out.println("Couldn't connect: print out a stack trace and exit.");
-//      se.printStackTrace();
-//      System.out.println("Couldn't connect: stack trace done.");
-//      String getMessage = se.getMessage();
-//      getMessage = getMessage + " \nYour IP is not recognized by the postgres database, please contact help@wormbase.org if you're a valid Phenotype WormBase curator.";
-//      JOptionPane.showMessageDialog(null,getMessage,"Postgres connection error",JOptionPane.INFORMATION_MESSAGE);
-//    }
 
   public void commit(CharacterListI charList) {
     Connection c = connectToDB();
     Statement s = null;
-    ResultSet rs = null;
     boolean bool = true;
 
     try { s = c.createStatement(); }
@@ -188,7 +175,7 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
         if ( (pgdbid == null) || (pgdbid == "") ) { 
 //          Integer joinkeyInt = Integer.parseInt(pgdbid);	// this can't do anything since pgdbid must be blank
           Integer joinkeyInt = 0;
-//          ResultSet rs = null;
+          ResultSet rs = null;
           try { rs = s.executeQuery("SELECT joinkey FROM int_name "); }
           catch (SQLException se) {
             System.out.println("We got an exception while executing our int_name query: that probably means our column SQL is invalid"); se.printStackTrace(); errorPopup("commit SELECT int_name"); return ; }
