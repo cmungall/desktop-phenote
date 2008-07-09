@@ -1,6 +1,6 @@
 package org.phenoscape.model;
 
-import org.nexml.x10.StandardState;
+import java.util.UUID;
 
 import ca.odell.glazedlists.BasicEventList;
 import ca.odell.glazedlists.EventList;
@@ -13,21 +13,21 @@ import ca.odell.glazedlists.EventList;
  */
 public class State {
   
-  private final StandardState storedXML;
+  private final String nexmlID;
   private final EventList<Phenotype> phenotypes = new BasicEventList<Phenotype>();
   private String label;
   private String symbol;
   
   public State() {
-   this(StandardState.Factory.newInstance()); 
+   this(UUID.randomUUID().toString()); 
   }
   
-  public State(StandardState stateXML) {
-    this.storedXML = stateXML;
+  public State(String nexmlID) {
+    this.nexmlID = nexmlID;
   }
   
-  public StandardState getStoredXML() {
-    return this.storedXML;
+  public String getNexmlID() {
+    return this.nexmlID;
   }
   
   public Phenotype newPhenotype() {

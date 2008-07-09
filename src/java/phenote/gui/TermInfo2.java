@@ -47,10 +47,7 @@ import org.bbop.swing.HyperlinkLabel;
 import org.bbop.swing.StringLinkListener;
 import org.obo.annotation.datamodel.Annotation;
 import org.obo.dataadapter.OBDSQLDatabaseAdapter;
-import org.obo.dataadapter.OBOParseException;
-import org.obo.dataadapter.OBOParser;
 import org.obo.dataadapter.OBDSQLDatabaseAdapter.OBDSQLDatabaseAdapterConfiguration;
-import org.obo.dataadapter.OBOParseEngine.SOPair;
 import org.obo.datamodel.DanglingObject;
 import org.obo.datamodel.Dbxref;
 import org.obo.datamodel.IdentifiedObject;
@@ -69,7 +66,7 @@ import org.obo.datamodel.RootAlgorithm;
 import org.obo.datamodel.Synonym;
 import org.obo.util.AnnotationUtil;
 import org.obo.util.TermUtil;
-
+import org.oboedit.controller.SessionManager;
 import org.oboedit.gui.ObjectSelector;
 import org.oboedit.gui.Selection;
 import org.oboedit.gui.event.ExpandCollapseListener;
@@ -77,7 +74,6 @@ import org.oboedit.gui.event.SelectionListener;
 
 import phenote.config.Config;
 import phenote.datamodel.CharFieldManager;
-import phenote.datamodel.Ontology;
 import phenote.datamodel.TermNotFoundException;
 import phenote.gui.selection.SelectionManager;
 import phenote.gui.selection.TermSelectionEvent;
@@ -242,6 +238,8 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 	private static final String annotationPanelName = "ANNOTATIONS"; //16
 	
+	private boolean useOBOSessionManager = false;
+	
 	/** this sets the order of the panels */
 	private static String[] panels = {basicInfoPanelName, considerReplacePanelName, synonymPanelName, xpdefsPanelName, linksPanelName, dbxrefPanelName, propvalsPanelName, commentsPanelName};
 	
@@ -367,6 +365,16 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 		this.selectionManager
 				.addTermSelectionListener(new InfoTermSelectionListener());
 		// ErrorManager.inst().addErrorListener(new InfoErrorListener());
+	}
+	
+	/**
+	 * @param useOBOSessionManager When true, the TermInfo panel uses the global SessionManager
+	 * to get the OBO session for looking up term IDs.  This allows the panel to be used when 
+	 * the CharFieldManager is not in use.
+	 */
+	public TermInfo2(boolean useOBOSessionManager) {
+	  this();
+	  this.useOBOSessionManager = useOBOSessionManager;
 	}
 
 	public static TermInfo2 inst() {
@@ -920,27 +928,35 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 		}
 
 		private void bringUpTermInTermInfo(String id) {
-			// or do through obo session?
-			if (id == null) return;
-//			try {
-			for(Ontology o : CharFieldManager.inst().getAllOntologies()) {
-				OBOSession session = o.getOboSession();
-				IdentifiedObject io = session.getObject(id);
-				if (io instanceof OBOObject) {
-					OBOObject c = (OBOObject) io;
-					setTextFromOboClass(c);
-					setComponentTitleFromOBOObject(c);
-					addTermToNaviHistory(id);
-					termInfoToolbar.setNaviButtonStatus();
-					// send out term selection (non mouse over) for DAG view
-          // im guessing this is a work in progress as currently true for isHyperLink
-          // causes SelMan to not fireTermSelect and thus this does nothing
-          // whats the idea here?? - MG
-          if (c instanceof OBOClass)
-            selectionManager.selectTerm(TermInfo2.this, (OBOClass)c, true);
-					break;
-				}
-			}
+		  // or do through obo session?
+		  if (id == null) return;
+//		  try {
+		  OBOSession session = null;
+		  if (TermInfo2.this.useOBOSessionManager) {
+		    session = SessionManager.getManager().getSession();
+		  } else if (!CharFieldManager.inst().getAllOntologies().isEmpty()) {
+		    session = CharFieldManager.inst().getAllOntologies().get(0).getOboSession();
+		  }
+		  if (session != null) {
+		    IdentifiedObject io = session.getObject(id);
+		    if (io instanceof OBOObject) {
+		      OBOObject c = (OBOObject) io;
+		      setTextFromOboClass(c);
+		      setComponentTitleFromOBOObject(c);
+		      addTermToNaviHistory(id);
+		      termInfoToolbar.setNaviButtonStatus();
+		      // send out term selection (non mouse over) for DAG view
+		      // im guessing this is a work in progress as currently true for isHyperLink
+		      // causes SelMan to not fireTermSelect and thus this does nothing
+		      // whats the idea here?? - MG
+		      if (c instanceof OBOClass)
+		        selectionManager.selectTerm(TermInfo2.this, (OBOClass)c, true);
+		    }
+		  }
+		}
+		
+		private void selectTerm(OBOObject term) {
+		  
 		}
 
 		public void link(String href) {

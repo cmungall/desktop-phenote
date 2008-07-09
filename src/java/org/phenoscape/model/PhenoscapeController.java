@@ -3,9 +3,11 @@ package org.phenoscape.model;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.log4j.Logger;
 import org.apache.xmlbeans.XmlException;
+import org.nexml.x10.NexmlDocument;
 import org.phenoscape.app.DocumentController;
 import org.phenoscape.io.NeXMLReader;
 
@@ -26,6 +28,8 @@ public class PhenoscapeController extends DocumentController {
   private final EventSelectionModel<State> currentStatesSelectionModel;
   private final EventList<Phenotype> currentPhenotypes;
   private final EventSelectionModel<Phenotype> currentPhenotypesSelectionModel;
+  private String charactersBlockID = UUID.randomUUID().toString();
+  private NexmlDocument xmlDoc;
   
   public PhenoscapeController() {
     this.charactersSelectionModel = new EventSelectionModel<Character>(this.dataSet.getCharacters());
@@ -105,6 +109,8 @@ public class PhenoscapeController extends DocumentController {
     try {
       final NeXMLReader reader = new NeXMLReader(aFile);
       this.setCurrentFile(aFile);
+      this.xmlDoc = reader.getXMLDoc();
+      this.charactersBlockID = reader.getCharactersBlockID();
       this.dataSet.getCharacters().clear(); //TODO this is not well encapsulated
       this.dataSet.getCharacters().addAll(reader.getCharacters());
       this.getDataSet().getTaxa().clear(); //TODO this is not well encapsulated

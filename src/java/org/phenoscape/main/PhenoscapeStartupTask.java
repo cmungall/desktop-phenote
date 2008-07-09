@@ -23,13 +23,13 @@ import org.phenoscape.view.CharacterTableComponentFactory;
 import org.phenoscape.view.MenuFactory;
 import org.phenoscape.view.OntologyPreferencesComponentFactory;
 import org.phenoscape.view.PhenotypeTableComponentFactory;
+import org.phenoscape.view.SessionTermInfoFactory;
 import org.phenoscape.view.SpecimenTableComponentFactory;
 import org.phenoscape.view.StateTableComponentFactory;
 import org.phenoscape.view.TaxonTableComponentFactory;
 
 import phenote.gui.PhenoteDockingTheme;
 import phenote.gui.factories.PhenoteOntologyTreeEditorFactory;
-import phenote.gui.factories.TermInfoFactory;
 import phenote.gui.selection.SelectionBridge;
 
 /**
@@ -49,7 +49,7 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
     factories.add(new TaxonTableComponentFactory(this.controller));
     factories.add(new SpecimenTableComponentFactory(this.controller));
     factories.add(new OntologyPreferencesComponentFactory());
-    factories.add(new TermInfoFactory());
+    factories.add(new SessionTermInfoFactory());
     factories.add(new PhenoteOntologyTreeEditorFactory());
     return factories;
   }

@@ -11,7 +11,6 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.channels.Channels;
@@ -22,9 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
-import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 /**
@@ -48,7 +44,7 @@ public class URLProxy {
    */
   public URLProxy(File cacheLocation) {
     if (!cacheLocation.exists()) {
-      cacheLocation.mkdir();
+      cacheLocation.mkdirs();
     }
     if (!cacheLocation.isDirectory()) {
       throw new IllegalArgumentException("Cache location must be a directory.");
@@ -148,23 +144,23 @@ public class URLProxy {
   
   @SuppressWarnings("unchecked")
   private Map<String, Object> getCacheMetadata() {
-      try {
-        final ObjectInputStream input = new ObjectInputStream(new FileInputStream(this.getCacheMetadataFile()));
-        return (Map<String, Object>)(input.readObject());
-      } catch (EOFException e){
-        // haven't serialized a map before
-        return new HashMap<String, Object>();
-      } catch (FileNotFoundException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      } catch (IOException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      } catch (ClassNotFoundException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-      return null;
+    try {
+      final ObjectInputStream input = new ObjectInputStream(new FileInputStream(this.getCacheMetadataFile()));
+      return (Map<String, Object>)(input.readObject());
+    } catch (EOFException e){
+      // haven't serialized a map before
+      return new HashMap<String, Object>();
+    } catch (FileNotFoundException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (ClassNotFoundException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    return null;
   }
   
   @SuppressWarnings("unchecked")
@@ -176,6 +172,11 @@ public class URLProxy {
     return (Map<String, Object>)this.getCacheMetadata().get(url.toString());    
   }
   
+  /**
+   * All edits to the metadata dictionaries should be done through this method, 
+   * which handles persistence.  After editing the metadata, it should be refetched 
+   * using getCacheMetadata.
+   */
   @SuppressWarnings("unchecked")
   private void writeCacheMetadata(URL url, String key, Object value) {
     try {
@@ -219,14 +220,6 @@ public class URLProxy {
   
   private Logger log() {
     return Logger.getLogger(this.getClass());
-  }
-  
-  public static void main(String[] args) throws MalformedURLException, IOException {
-    BasicConfigurator.configure();
-    final Logger rl = LogManager.getRootLogger();
-    rl.setLevel(Level.DEBUG);
-    final URLProxy proxy = new URLProxy(new File("/Users/jim/Desktop"));
-    proxy.get(new URL("http://java.sun.com/j2se/1.5.0/docs/api/java/net/URL.html"));
   }
 
 }

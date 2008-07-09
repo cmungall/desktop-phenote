@@ -1,5 +1,7 @@
 package org.phenoscape.model;
 
+import java.util.UUID;
+
 import org.obo.datamodel.OBOClass;
 
 import ca.odell.glazedlists.BasicEventList;
@@ -7,9 +9,22 @@ import ca.odell.glazedlists.EventList;
 
 public class Taxon {
   
+  private final String nexmlID;
   private OBOClass validName;
   private String publicationName;
   private final EventList<Specimen> specimens = new BasicEventList<Specimen>();
+  
+  public Taxon() {
+    this(UUID.randomUUID().toString());
+  }
+  
+  public Taxon(String nexmlID) {
+    this.nexmlID = nexmlID;
+  }
+  
+  public String getNexmlID() {
+    return this.nexmlID;
+  }
   
   public OBOClass getValidName() {
     return this.validName;
