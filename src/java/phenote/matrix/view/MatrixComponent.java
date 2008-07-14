@@ -2,7 +2,7 @@ package phenote.matrix.view;
 
 import org.bbop.framework.AbstractGUIComponent;
 
-import phenote.dataadapter.CharacterListManager;
+//import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.LoadSaveListener;
 import phenote.dataadapter.LoadSaveManager;
 import phenote.datamodel.CharFieldException;
@@ -16,18 +16,19 @@ import java.io.File;
 import java.util.Comparator;
 
 import javax.swing.JTable;
-import javax.swing.JScrollPane;
-import ca.odell.glazedlists.EventList;
-import ca.odell.glazedlists.event.ListEvent;
-import ca.odell.glazedlists.event.ListEventListener;
-import ca.odell.glazedlists.gui.AdvancedTableFormat;
-import ca.odell.glazedlists.gui.WritableTableFormat;
-import ca.odell.glazedlists.swing.EventTableModel;
+import javax.swing.table.AbstractTableModel;
+//import javax.swing.JScrollPane;
+//import ca.odell.glazedlists.EventList;
+//import ca.odell.glazedlists.event.ListEvent;
+//import ca.odell.glazedlists.event.ListEventListener;
+//import ca.odell.glazedlists.gui.AdvancedTableFormat;
+//import ca.odell.glazedlists.gui.WritableTableFormat;
+//import ca.odell.glazedlists.swing.EventTableModel;
 
 public class MatrixComponent extends AbstractGUIComponent {
 	
 	private final MatrixController controller;
-	private EventTableModel<MatrixRow> matrixTableModel;
+	private MatrixTableModel matrixTableModel;
 	private JTable matrixTable;
 	
 	public MatrixComponent(String id, MatrixController controller) {
@@ -61,52 +62,35 @@ public class MatrixComponent extends AbstractGUIComponent {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-		matrixTableModel = new EventTableModel<MatrixRow>(this.getController().getMatrix(), new MatrixTableFormat());
+    
+    // Just use a TableModel (built into Swing) instead?
+		matrixTableModel = new MatrixTableModel();
 		matrixTable = new JTable(matrixTableModel);
 		System.out.println("The table has this many rows: " + matrixTable.getRowCount());
 		// ************** When testing with the Group Exercise data, the above println tells me
 		// the matrix has six rows, but nothing shows up in the GUI!! ************************
 		matrixTable.putClientProperty("Quaqua.Table.style", "striped");
-		this.add(new JScrollPane(matrixTable), BorderLayout.CENTER);
+		this.add(matrixTable, BorderLayout.CENTER);
 	}
 		
 	//--------------------------------------------------------------------------------------------------------------------------------------
-	private class MatrixTableFormat implements WritableTableFormat<MatrixRow>, AdvancedTableFormat<MatrixRow> {
+	// rewrite this to subclass AbstractTableModel instead
+	private class MatrixTableModel extends AbstractTableModel {
 
-		public boolean isEditable(MatrixRow arg0, int arg1) {
-			// TODO Auto-generated method stub
-			return false;
-		}
+    public int getColumnCount() {
+      // TODO Auto-generated method stub
+      return 0;
+    }
 
-		public MatrixRow setColumnValue(MatrixRow arg0, Object arg1, int arg2) {
-			// TODO Auto-generated method stub
-			return null;
-		}
+    public int getRowCount() {
+      // TODO Auto-generated method stub
+      return 0;
+    }
 
-		public int getColumnCount() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
-		public String getColumnName(int column) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		public Object getColumnValue(MatrixRow baseObject, int column) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		public Class getColumnClass(int arg0) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		public Comparator getColumnComparator(int arg0) {
-			// TODO Auto-generated method stub
-			return null;
-		}
+    public Object getValueAt(int rowIndex, int columnIndex) {
+      // TODO Auto-generated method stub
+      return null;
+    }
 	}
 	
 	//--------------------------------------------------------------------------------------------------------------------------------------
