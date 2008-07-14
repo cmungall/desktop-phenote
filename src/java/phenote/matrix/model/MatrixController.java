@@ -1,8 +1,7 @@
 package phenote.matrix.model;
 
+import phenote.datamodel.CharFieldException;
 import ca.odell.glazedlists.BasicEventList;
-
-// Should I extend PhenoscapeController?
 
 public class MatrixController {
 	MatrixBuilder mb;
@@ -10,12 +9,10 @@ public class MatrixController {
 	/**
 	 *  A new MatrixController creates a new MatrixBuilder with the specified grouping field string.
 	 *  This should be refactored to be more general (use a String parameter of something instead of 
-	 *  hard-coding Taxon).
+	 *  hard-coding Taxa).
 	 */
 	public MatrixController () {
-		System.out.println("******************** Controller created ********************");
-		mb = new MatrixBuilder("Taxon");
-		System.out.println("******************** Builder created ********************");
+		mb = new MatrixBuilder("Valid Taxon");
 	}
 	
 	/**
@@ -25,5 +22,14 @@ public class MatrixController {
 	 */
 	public BasicEventList<MatrixRow> getMatrix() {
 		return mb.getMatrix();
+	}
+	
+	public void buildMatrixCharList() throws CharFieldException {
+	  mb.buildSortedList();
+	  mb.buildMatrix();
+	}
+	
+	public int getMatrixSize() {
+	  return mb.getNumRows();
 	}
 }

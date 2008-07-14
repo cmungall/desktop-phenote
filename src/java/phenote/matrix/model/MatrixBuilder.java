@@ -27,13 +27,13 @@ public class MatrixBuilder {
 		// Is String best here? I was thinking of "taxa" as a parameter, but should I use OBOClass type instead, as in the NEXUSAdapter?
 		groupingField = gf;
 		clm = CharacterListManager.main();
-		System.out.println("Got the character manager");
 		ccompare = new CharacterComparator (groupingField);
-		list = (EventList<CharacterI>) clm.getCharList();
-		System.out.println("Got the character list");
-		sorted = new SortedList<CharacterI>(list, ccompare);
-		System.out.println("Created the sorted list");
-		matrix = new BasicEventList<MatrixRow>();
+		buildSortedList();
+	}
+	
+	public void buildSortedList() {
+	  list = (EventList<CharacterI>) clm.getCharList();
+    sorted = new SortedList<CharacterI>(list, ccompare);
 	}
 	
 	/**
@@ -42,25 +42,21 @@ public class MatrixBuilder {
 	 * @throws CharFieldException
 	 */
 	public void buildMatrix () throws CharFieldException {
-		MatrixRow currRow = null;
+	  matrix = new BasicEventList<MatrixRow>();
+	  MatrixRow currRow = null;
 		String currGroup, prevGroup = "";
-		for ( CharacterI ch : sorted) {
+		for (CharacterI ch : sorted) {
 			currGroup = ch.getValue(ch.getCharFieldForName(groupingField)).getName();
 			if (!currGroup.equals(prevGroup)) {
 				currRow = new MatrixRow (groupingField, currGroup);
 				addRowToMatrix(currRow);
-				System.out.println("Added a row");
 				prevGroup = currGroup;
 				addColumnToRow (currRow, ch);
-				System.out.println("Added a column");
-
 			}
 			else {
 				addColumnToRow (currRow, ch);		
-				System.out.println("Added a column");
-
 			}
-		}			
+		}
 	}
 	
 	/**
@@ -82,6 +78,7 @@ public class MatrixBuilder {
 	public void addColumnToRow (MatrixRow row, CharacterI character) throws CharFieldException {
 		OBOClass entityTerm, valueTerm, attributeTerm;
 		entityTerm = character.getTerm("Entity");
+		// We have a problem if a term is null - it causes a CharFieldException ... has no value
 		valueTerm = character.getTerm("Quality");
 		attributeTerm = OboUtil.getAttributeForValue(valueTerm);
 		row.addColumn(entityTerm, attributeTerm, valueTerm);
@@ -94,5 +91,9 @@ public class MatrixBuilder {
 	 */
 	public BasicEventList<MatrixRow> getMatrix() {
 		return this.matrix;
+	}
+	
+	public int getNumRows() {
+	  return matrix.size();
 	}
 }

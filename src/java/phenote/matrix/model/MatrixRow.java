@@ -1,16 +1,17 @@
 package phenote.matrix.model;
 
-import ca.odell.glazedlists.EventList;
+import ca.odell.glazedlists.BasicEventList;
 import org.obo.datamodel.OBOClass;
 
 public class MatrixRow {
 	private String rowFieldName;
 	private String rowValue;
-	private EventList<MatrixRowElement> columns;
+	private BasicEventList<MatrixRowElement> columns;
 	
 	public MatrixRow (String rfn, String rv) {
 		rowFieldName = rfn;
 		rowValue = rv;
+		columns = new BasicEventList<MatrixRowElement>();
 	}
 		
 	/**
@@ -22,8 +23,10 @@ public class MatrixRow {
 	 * @param valueTerm An OBOClass representing the value
 	 */
 	public void addColumn(OBOClass entityTerm, OBOClass attributeTerm, OBOClass valueTerm) {
-		String name, value;
-		name = entityTerm.getName() + " " + attributeTerm.getName();
+	  String name, name1, name2, value;
+	  name1 = entityTerm != null ? entityTerm.getName() : "";
+	  name2 = attributeTerm != null ? attributeTerm.getName() : "";
+	  name = name1 + " " + name2;
 		value = valueTerm.getName();
 		columns.add(new MatrixRowElement(name, value));
 	}

@@ -5,6 +5,10 @@ import org.bbop.framework.AbstractGUIComponent;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.LoadSaveListener;
 import phenote.dataadapter.LoadSaveManager;
+import phenote.datamodel.CharFieldException;
+import phenote.edit.CharChangeEvent;
+import phenote.edit.CharChangeListener;
+import phenote.edit.EditManager;
 import phenote.matrix.model.MatrixController;
 import phenote.matrix.model.MatrixRow;
 import java.awt.BorderLayout;
@@ -25,7 +29,6 @@ public class MatrixComponent extends AbstractGUIComponent {
 	private final MatrixController controller;
 	private EventTableModel<MatrixRow> matrixTableModel;
 	private JTable matrixTable;
-	private LoadSaveManager loadSaveManager;
 	
 	public MatrixComponent(String id, MatrixController controller) {
 		super(id);
@@ -42,73 +45,31 @@ public class MatrixComponent extends AbstractGUIComponent {
 	 */
 	public void init() {
 		super.init();
-		this.getController().getMatrix().addListEventListener(new MatrixListener());
-	    LoadSaveManager.inst().addListener(new FileListener());
+	  EditManager.inst().addCharChangeListener(new MatrixListener());
+		LoadSaveManager.inst().addListener(new FileListener());
 		this.initializeInterface();
 	}
 	
 	/**
-	 * Creates the table model for the matrix and add the table to the interface component
+	 * Creates the table model for the matrix and adds the table to the interface component
 	 */
 	public void initializeInterface() {
 		this.setLayout(new BorderLayout());
+	   try {
+      controller.buildMatrixCharList();
+    } catch (CharFieldException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
 		matrixTableModel = new EventTableModel<MatrixRow>(this.getController().getMatrix(), new MatrixTableFormat());
 		matrixTable = new JTable(matrixTableModel);
+		System.out.println("The table has this many rows: " + matrixTable.getRowCount());
+		// ************** When testing with the Group Exercise data, the above println tells me
+		// the matrix has six rows, but nothing shows up in the GUI!! ************************
 		matrixTable.putClientProperty("Quaqua.Table.style", "striped");
 		this.add(new JScrollPane(matrixTable), BorderLayout.CENTER);
 	}
-	
-	public <T> void updateObjectForGlazedLists(T anObject, EventList<T> aList) {
-		final int index = aList.indexOf(anObject);
-		if (index > -1) {
-			aList.set(index, anObject);
-		}
-	}
-	
-	/**
-	 * Mostly copied from CharacterTemplateTable.java
-	 * @param mainFile
-	 */
-	private void tryLoadDefaultDataFile(File mainFile) {
-	    final File file = (mainFile == null) ? CharacterListManager.main().getCurrentDataFile() : mainFile;
-	    if (file == null) {
-	      return;
-	    }
-	    File templatesFile = this.getDefaultDataFile(mainFile);
-	    if (templatesFile.exists()) {
-	      this.getLoadSaveManager().loadData(templatesFile);
-	    }
-	  }
-	
-	/**
-	 * Mostly copied from CharacterTemplateTable.java
-	 * @param mainFile
-	 */  
-	  private File getDefaultDataFile(File mainFile) {
-	    final int dotLocation = mainFile.getName().lastIndexOf(".");
-	    final boolean hasExtension = dotLocation > 0;
-	    final String extension = hasExtension ? mainFile.getName().substring(dotLocation) : "";
-	    final String baseName = hasExtension ? mainFile.getName().substring(0, dotLocation) : mainFile.getName();
-	    //final String defaultFileName = baseName + "-" + this.getGroup() +  extension;
-	    final String defaultFileName = baseName + extension;
-	    return new File(mainFile.getParent(), defaultFileName);
-	  }
-	
-	  private LoadSaveManager getLoadSaveManager() {
-		  if (this.loadSaveManager == null) {
-		      this.loadSaveManager = new LoadSaveManager(this.getCharacterListManager());
-		  }
-		  return this.loadSaveManager;
-	  }
-	  
-	  private CharacterListManager getCharacterListManager() {
-		    return CharacterListManager.main();
-		  }
-	  
-	  public void saveCharacters(File f) {
-		    this.getLoadSaveManager().saveData(f);
-		  }
-	
+		
 	//--------------------------------------------------------------------------------------------------------------------------------------
 	private class MatrixTableFormat implements WritableTableFormat<MatrixRow>, AdvancedTableFormat<MatrixRow> {
 
@@ -146,24 +107,40 @@ public class MatrixComponent extends AbstractGUIComponent {
 			// TODO Auto-generated method stub
 			return null;
 		}
-		
 	}
 	
 	//--------------------------------------------------------------------------------------------------------------------------------------
-	private class MatrixListener implements ListEventListener<MatrixRow> {
-
-		public void listChanged(ListEvent<MatrixRow> arg0) {
-			updateObjectForGlazedLists((MatrixRow) arg0.getSource(), arg0.getSourceList());
-		}
+	private class MatrixListener implements CharChangeListener {
+    public void charChanged(CharChangeEvent e) {
+      System.out.println("Matrix Listener fired");
+      try {
+        controller.buildMatrixCharList();
+      } catch (CharFieldException e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+      }
+    }
 	}
 	
 	//--------------------------------------------------------------------------------------------------------------------------------------
 	private class FileListener implements LoadSaveListener {
 	    public void fileLoaded(File f) {
-	      tryLoadDefaultDataFile(f);
+	      System.out.println("File Listener, file loaded fired");
+	      try {
+          controller.buildMatrixCharList();
+        } catch (CharFieldException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
 	    }
 	    public void fileSaved(File f) {
-	      saveCharacters(getDefaultDataFile(f));
+        System.out.println("File Listener, file saved fired");
+	      try {
+          controller.buildMatrixCharList();
+        } catch (CharFieldException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
 	    }
 	  }
 }
