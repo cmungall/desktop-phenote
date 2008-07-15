@@ -20,6 +20,7 @@ import org.oboedit.gui.tasks.DefaultGUIStartupTask;
 import org.phenoscape.app.CrossPlatform;
 import org.phenoscape.model.PhenoscapeController;
 import org.phenoscape.view.CharacterTableComponentFactory;
+import org.phenoscape.view.DataSetComponentFactory;
 import org.phenoscape.view.MenuFactory;
 import org.phenoscape.view.OntologyPreferencesComponentFactory;
 import org.phenoscape.view.PhenotypeTableComponentFactory;
@@ -43,6 +44,7 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
   @Override
   protected Collection<GUIComponentFactory<?>> getDefaultComponentFactories() {
     Collection<GUIComponentFactory<?>> factories = new ArrayList<GUIComponentFactory<?>>();
+    factories.add(new DataSetComponentFactory(this.controller));
     factories.add(new CharacterTableComponentFactory(this.controller));
     factories.add(new StateTableComponentFactory(this.controller));
     factories.add(new PhenotypeTableComponentFactory(this.controller));
