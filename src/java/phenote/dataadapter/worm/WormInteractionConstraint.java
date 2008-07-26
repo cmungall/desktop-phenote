@@ -90,9 +90,10 @@ public class WormInteractionConstraint extends AbstractCommitConstraint {
         flagBad++;
         message += "Character "+pgdbid+" has neither Effected nor ted Variation nor ted Transgene.  "; }
 
-      if (chr.hasValue("Phenotype")) { } else { 
-        flagBad++;
-        message += "Character "+pgdbid+" has no Phenotype Term.  "; }
+// no longer needed, textpresso interactions don't have phenotype -- Jolene   2007 07 25
+//     if (chr.hasValue("Phenotype")) { } else { 
+//       flagBad++;
+//       message += "Character "+pgdbid+" has no Phenotype Term.  "; }
 
 
 //      if (chr.hasValue("NBP")) { 
