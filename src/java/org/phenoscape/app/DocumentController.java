@@ -3,24 +3,31 @@ package org.phenoscape.app;
 import java.io.File;
 
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 
 import org.apache.log4j.Logger;
 import org.bbop.framework.GUIManager;
 
 /**
- * A general class managing reading and writing of files and the data loaded from those files.
+ * A general class managing reading and writing of document files and the data loaded from those files.
  * @author Jim Balhoff
  */
 public abstract class DocumentController {
   
   private File currentFile;
   
+  public DocumentController() {
+    this.setWindowTitle(null);
+  }
+  
   public void open() {
     final JFileChooser fileChooser = new JFileChooser();
     final int result = fileChooser.showOpenDialog(GUIManager.getManager().getFrame());
     if (result == JFileChooser.APPROVE_OPTION) {
-      final boolean success = this.readData(fileChooser.getSelectedFile());
-      if (!success) { this.runFileReadErrorMessage(); }
+      final File file = fileChooser.getSelectedFile();
+      final boolean success = this.readData(file);
+      if (success) { this.setCurrentFile(file); }
+      else { this.runFileReadErrorMessage(); }
     }
   }
   
@@ -36,8 +43,10 @@ public abstract class DocumentController {
     final JFileChooser fileChooser = new JFileChooser();
     final int result = fileChooser.showSaveDialog(GUIManager.getManager().getFrame());
     if (result == JFileChooser.APPROVE_OPTION) {
-      final boolean success = this.writeData(fileChooser.getSelectedFile());
-      if (!success) { this.runFileWriteErrorMessage(); }
+      final File file = fileChooser.getSelectedFile();
+      final boolean success = this.writeData(file);
+      if (success) { this.setCurrentFile(file); }
+      else { this.runFileWriteErrorMessage(); }
     }
   }
 
@@ -47,11 +56,25 @@ public abstract class DocumentController {
   
   public void setCurrentFile(File aFile) {
     this.currentFile = aFile;
+    this.setWindowTitle(aFile);
   }
   
   public abstract boolean readData(File aFile);
   
   public abstract boolean writeData(File aFile);
+  
+  public abstract JFrame getWindow();
+  
+  private void setWindowTitle(File aFile) {
+    final JFrame window = this.getWindow();
+    if (window != null) {
+      if (aFile != null) {
+        window.setTitle(aFile.getName());
+      } else {
+        window.setTitle("Untitled");
+      }
+    }
+  }
   
   private void runFileReadErrorMessage() {
     log().error("Failed to load file data");

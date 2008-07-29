@@ -1,6 +1,7 @@
 package org.phenoscape.view;
 
 import java.awt.BorderLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
 import java.util.Comparator;
@@ -8,6 +9,8 @@ import java.util.Comparator;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
@@ -15,10 +18,13 @@ import javax.swing.table.TableCellEditor;
 
 import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOObject;
 import org.phenoscape.model.PhenoscapeController;
 import org.phenoscape.model.Phenotype;
 import org.phenoscape.model.State;
+import org.phenoscape.model.TermSet;
 import org.phenoscape.swing.PlaceholderRenderer;
+import org.phenoscape.swing.PopupListener;
 
 import phenote.gui.BugWorkaroundTable;
 import phenote.gui.SortDisabler;
@@ -39,6 +45,9 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
 
   private JButton addPhenotypeButton;
   private JButton deletePhenotypeButton;
+  private PopupListener tablePopup;
+  private PhenotypesTableFormat tableFormat;
+  private JTable phenotypesTable;
   private final SortedList<Phenotype> sortedPhenotypes;
   
   public PhenotypeTableComponent(String id, PhenoscapeController controller) {
@@ -54,21 +63,23 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
 
   private void initializeInterface() {
     this.setLayout(new BorderLayout());
-    final PhenotypesTableFormat tableFormat = new PhenotypesTableFormat();
-    final EventTableModel<Phenotype> phenotypesTableModel = new EventTableModel<Phenotype>(this.sortedPhenotypes, tableFormat);
-    final JTable phenotypesTable = new BugWorkaroundTable(phenotypesTableModel);
-    phenotypesTable.setSelectionModel(this.getController().getCurrentPhenotypesSelectionModel());
-    phenotypesTable.setDefaultRenderer(Object.class, new PlaceholderRenderer("None"));
-    phenotypesTable.setDefaultRenderer(OBOClass.class, new TermRenderer("None"));
-    for (int i = 0; i < phenotypesTable.getColumnCount(); i++) {
-      final TableCellEditor editor = tableFormat.getColumnEditor(i);
-      if (editor != null) { phenotypesTable.getColumnModel().getColumn(i).setCellEditor(editor); }
+    this.tableFormat = new PhenotypesTableFormat();
+    final EventTableModel<Phenotype> phenotypesTableModel = new EventTableModel<Phenotype>(this.sortedPhenotypes, this.tableFormat);
+    this.phenotypesTable = new BugWorkaroundTable(phenotypesTableModel);
+    this.phenotypesTable.setSelectionModel(this.getController().getCurrentPhenotypesSelectionModel());
+    this.phenotypesTable.setDefaultRenderer(Object.class, new PlaceholderRenderer("None"));
+    this.phenotypesTable.setDefaultRenderer(OBOObject.class, new TermRenderer("None"));
+    for (int i = 0; i < this.phenotypesTable.getColumnCount(); i++) {
+      final TableCellEditor editor = this.tableFormat.getColumnEditor(i);
+      if (editor != null) { this.phenotypesTable.getColumnModel().getColumn(i).setCellEditor(editor); }
     }
-    phenotypesTable.putClientProperty("Quaqua.Table.style", "striped");
-    new TableColumnPrefsSaver(phenotypesTable, this.getClass().getName());
-    final TableComparatorChooser<Phenotype> sortChooser = new TableComparatorChooser<Phenotype>(phenotypesTable, this.sortedPhenotypes, false);
+    this.phenotypesTable.putClientProperty("Quaqua.Table.style", "striped");
+    new TableColumnPrefsSaver(this.phenotypesTable, this.getClass().getName());
+    this.tablePopup = new PopupListener(this.createTablePopupMenu());
+    this.phenotypesTable.addMouseListener(this.tablePopup);
+    final TableComparatorChooser<Phenotype> sortChooser = new TableComparatorChooser<Phenotype>(this.phenotypesTable, this.sortedPhenotypes, false);
     sortChooser.addSortActionListener(new SortDisabler());
-    this.add(new JScrollPane(phenotypesTable), BorderLayout.CENTER);
+    this.add(new JScrollPane(this.phenotypesTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);
   }
   
@@ -106,6 +117,20 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
       return null;
     }
   }
+  
+  private void runPostCompositionForTermAtPoint(Point p) {
+    final int column = this.phenotypesTable.getTableHeader().columnAtPoint(p);
+    final int row = this.phenotypesTable.rowAtPoint(p);
+    if (!this.tableFormat.getColumnClass(column).equals(OBOObject.class)) return;
+    final Phenotype phenotype = this.sortedPhenotypes.get(row);
+    final OBOClass term = (OBOClass)(this.tableFormat.getColumnValue(phenotype, column));
+    final PostCompositionEditor pce = new PostCompositionEditor(this.getController(), tableFormat.getColumnTermSet(column));
+    pce.setTerm(term);
+    final int result = pce.runPostCompositionDialog();
+    if (result == JOptionPane.OK_OPTION) {
+      this.tableFormat.setColumnValue(phenotype, pce.getTerm(), column);
+    }
+  }
 
   private JToolBar createToolBar() {
     final JToolBar toolBar = new JToolBar();
@@ -129,6 +154,16 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
     }
     toolBar.setFloatable(false);
     return toolBar;
+  }
+  
+  private JPopupMenu createTablePopupMenu() {
+    final JPopupMenu menu = new JPopupMenu();
+    menu.add(new AbstractAction("Create Post-composed Term") {
+      public void actionPerformed(ActionEvent e) {
+        runPostCompositionForTermAtPoint(tablePopup.getLocation());
+      }
+    });
+    return menu;
   }
   
   private class PhenotypesTableFormat implements WritableTableFormat<Phenotype>, AdvancedTableFormat<Phenotype> {
@@ -168,14 +203,27 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
       }
     }
     
-    public TableCellEditor getColumnEditor(int column) {
+    public TermSet getColumnTermSet(int column) {
       switch (column) {
-      case 0: return createAutocompleteEditor(getController().getOntologyController().getEntityTermSet().getTerms());
-      case 1: return createAutocompleteEditor(getController().getOntologyController().getQualityTermSet().getTerms());
-      case 2: return createAutocompleteEditor(getController().getOntologyController().getRelatedEntityTermSet().getTerms());
+      case 0: return getController().getOntologyController().getEntityTermSet();
+      case 1: return getController().getOntologyController().getQualityTermSet();
+      case 2: return getController().getOntologyController().getRelatedEntityTermSet();
       case 3: return null;
       case 4: return null;
-      case 5: return createAutocompleteEditor(getController().getOntologyController().getUnitTermSet().getTerms());
+      case 5: return getController().getOntologyController().getUnitTermSet();
+      case 6: return null;
+      default: return null;
+      }
+    }
+    
+    public TableCellEditor getColumnEditor(int column) {
+      switch (column) {
+      case 0: return createAutocompleteEditor(this.getColumnTermSet(column).getTerms());
+      case 1: return createAutocompleteEditor(this.getColumnTermSet(column).getTerms());
+      case 2: return createAutocompleteEditor(this.getColumnTermSet(column).getTerms());
+      case 3: return null;
+      case 4: return null;
+      case 5: return createAutocompleteEditor(this.getColumnTermSet(column).getTerms());
       case 6: return null;
       default: return null;
       }
@@ -196,12 +244,12 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
 
     public Class<?> getColumnClass(int column) {
       switch (column) {
-      case 0: return OBOClass.class;
-      case 1: return OBOClass.class;
-      case 2: return OBOClass.class;
+      case 0: return OBOObject.class;
+      case 1: return OBOObject.class;
+      case 2: return OBOObject.class;
       case 3: return Integer.class;
       case 4: return Float.class;
-      case 5: return OBOClass.class;
+      case 5: return OBOObject.class;
       case 6: return String.class;
       default: return null;
       }
@@ -221,7 +269,7 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
     }
     
   }
-  
+    
   private Logger log() {
     return Logger.getLogger(this.getClass());
   }

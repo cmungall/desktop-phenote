@@ -5,11 +5,11 @@ import java.util.Collection;
 import java.util.List;
 
 import org.obo.datamodel.Namespace;
-import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOObject;
 import org.obo.datamodel.OBOSession;
 import org.obo.query.QueryEngine;
-import org.obo.query.impl.CategoryQuery;
-import org.obo.query.impl.NamespaceQuery;
+import org.obo.query.impl.CategoryObjQuery;
+import org.obo.query.impl.NamespaceObjQuery;
 
 /**
  * A TermSet is used to define a collection of ontology terms.  Currently the collection 
@@ -21,6 +21,7 @@ public class TermSet {
   private OBOSession session;
   private Collection<Namespace> namespaces = new ArrayList<Namespace>();
   private Collection<String> categories = new ArrayList<String>();
+  private boolean includesProperties = false;
 
   /**
    * @return The OBOSession from which this TermSet draws its terms.
@@ -63,18 +64,27 @@ public class TermSet {
   public void setCategories(Collection<String> categories) {
     this.categories = categories;
   }
+
+  public boolean includesProperties() {
+    return this.includesProperties;
+  }
+
+  public void setIncludesProperties(boolean includeProperties) {
+    this.includesProperties = includeProperties;
+  }
   
   /**
    * @return All terms matching the search criteria of this TermSet, such as its namespaces and categories.
    */
-  public Collection<OBOClass> getTerms() {
+  public Collection<OBOObject> getTerms() {
     final QueryEngine engine = new QueryEngine(this.getOBOSession());
     final List<String> namespaceIDs = new ArrayList<String>();
     for (Namespace ns : this.getNamespaces()) { namespaceIDs.add(ns.getID()); }
-    final NamespaceQuery query = new NamespaceQuery(namespaceIDs, false, true);
-    final Collection<OBOClass> termsInNamespaces = engine.query(query);
+    final NamespaceObjQuery query = new NamespaceObjQuery(namespaceIDs, false, true);
+    query.setJustTerms(!this.includesProperties());
+    final Collection<OBOObject> termsInNamespaces = engine.query(query);
     if (this.hasAnyCategory()) {
-      return engine.subquery(termsInNamespaces, new CategoryQuery(this.getCategories())).getResults();
+      return engine.subquery(termsInNamespaces, new CategoryObjQuery(this.getCategories())).getResults();
     } else {
       return termsInNamespaces;
     }

@@ -15,6 +15,7 @@ import javax.swing.table.TableCellEditor;
 import org.apache.log4j.Logger;
 import org.bbop.framework.AbstractGUIComponent;
 import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOObject;
 import org.phenoscape.model.PhenoscapeController;
 import org.phenoscape.swing.AutoCompleteSupport;
 
@@ -56,14 +57,24 @@ public class PhenoscapeGUIComponent extends AbstractGUIComponent {
     this.getController().getPhenoteSelectionManager().selectTerm(this, term, false);
   }
   
-  protected TableCellEditor createAutocompleteEditor(Collection<OBOClass> terms) {
+  protected JComboBox createAutocompleteBox(Collection<OBOObject> terms) {
+    return this.createAutocompleteBox(terms, false);
+  }
+  
+  private JComboBox createAutocompleteBox(Collection<OBOObject> terms, boolean cellEditor) {
     final JComboBox comboBox = new JComboBox();
-    final AutoCompleteSupport<OBOClass> acs = AutoCompleteSupport.install(comboBox, GlazedLists.eventList(terms), new TermFilterator());
-    acs.setValidItemClass(OBOClass.class);
-    final DefaultCellEditor editor = new DefaultCellEditor(comboBox);
-    editor.setClickCountToStart(2);
+    comboBox.putClientProperty("JComboBox.isTableCellEditor", cellEditor);
+    final AutoCompleteSupport<OBOObject> acs = AutoCompleteSupport.install(comboBox, GlazedLists.eventList(terms), new TermFilterator());
+    acs.setValidItemClass(OBOObject.class);
     final ComboPopup popup = this.getComboPopup(comboBox);
     if (popup != null) { popup.getList().addListSelectionListener(new CompletionListListener()); }
+    return comboBox;
+  }
+  
+  protected TableCellEditor createAutocompleteEditor(Collection<OBOObject> terms) {
+    final JComboBox comboBox = this.createAutocompleteBox(terms, true);
+    final DefaultCellEditor editor = new DefaultCellEditor(comboBox);
+    editor.setClickCountToStart(2);
     return editor;
   }
   

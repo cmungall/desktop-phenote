@@ -14,6 +14,7 @@ import javax.swing.JToolBar;
 
 import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOObject;
 import org.phenoscape.model.PhenoscapeController;
 import org.phenoscape.model.Taxon;
 import org.phenoscape.swing.PlaceholderRenderer;
@@ -76,7 +77,7 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
     final JTable taxaTable = new BugWorkaroundTable(taxaTableModel);
     taxaTable.setSelectionModel(this.getController().getTaxaSelectionModel());
     taxaTable.setDefaultRenderer(Object.class, new PlaceholderRenderer("None"));
-    taxaTable.setDefaultRenderer(OBOClass.class, new TermRenderer("None"));
+    taxaTable.setDefaultRenderer(OBOObject.class, new TermRenderer("None"));
     taxaTable.getColumnModel().getColumn(0).setCellEditor(this.createAutocompleteEditor(this.getController().getOntologyController().getTaxonTermSet().getTerms()));
     taxaTable.putClientProperty("Quaqua.Table.style", "striped");
     new TableColumnPrefsSaver(taxaTable, this.getClass().getName());
@@ -147,7 +148,7 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
 
     public Class<?> getColumnClass(int column) {
       switch (column) {
-      case 0: return OBOClass.class;
+      case 0: return OBOObject.class;
       case 1: return String.class;
       default: return null;
       }

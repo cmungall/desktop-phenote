@@ -5,8 +5,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+import javax.swing.JFrame;
+
 import org.apache.log4j.Logger;
 import org.apache.xmlbeans.XmlException;
+import org.bbop.framework.GUIManager;
 import org.nexml.x10.NexmlDocument;
 import org.phenoscape.app.DocumentController;
 import org.phenoscape.io.NeXMLReader;
@@ -32,6 +35,7 @@ public class PhenoscapeController extends DocumentController {
   private NexmlDocument xmlDoc;
   
   public PhenoscapeController() {
+    super();
     this.charactersSelectionModel = new EventSelectionModel<Character>(this.dataSet.getCharacters());
     this.charactersSelectionModel.setSelectionMode(EventSelectionModel.SINGLE_SELECTION);
     this.taxaSelectionModel = new EventSelectionModel<Taxon>(this.dataSet.getTaxa());
@@ -102,13 +106,12 @@ public class PhenoscapeController extends DocumentController {
   public EventSelectionModel<Specimen> getCurrentSpecimensSelectionModel() {
     return this.currentSpecimensSelectionModel;
   }
-  
+
   @Override
   public boolean readData(File aFile) {
     log().debug("Read file: " + aFile);
     try {
       final NeXMLReader reader = new NeXMLReader(aFile);
-      this.setCurrentFile(aFile);
       this.xmlDoc = reader.getXMLDoc();
       this.charactersBlockID = reader.getCharactersBlockID();
       this.dataSet.getCharacters().clear(); //TODO this is not well encapsulated
@@ -127,6 +130,10 @@ public class PhenoscapeController extends DocumentController {
   @Override
   public boolean writeData(File aFile) {
     return false;
+  }
+  
+  public JFrame getWindow() {
+    return GUIManager.getManager().getFrame();
   }
   
   public SelectionManager getPhenoteSelectionManager() {

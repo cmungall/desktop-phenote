@@ -4,7 +4,7 @@ import java.awt.Component;
 
 import javax.swing.JTable;
 
-import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOObject;
 import org.phenoscape.swing.PlaceholderRenderer;
 
 /**
@@ -21,7 +21,7 @@ public class TermRenderer extends PlaceholderRenderer {
   @Override
   public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
     if (value != null) {
-      final OBOClass term = (OBOClass)value;
+      final OBOObject term = (OBOObject)value;
       this.setToolTipText(term.getID());
       return super.getTableCellRendererComponent(table, term.getName(), isSelected, hasFocus, row, column);
     } else {

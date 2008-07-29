@@ -43,6 +43,7 @@ public class OntologyController {
     config.setReadPaths(Arrays.asList(this.getPaths()));
     config.setBasicSave(false);
     config.setAllowDangling(true);
+    config.setFollowImports(false); // this is required because OBO currently fails if it tries to follow an import and there is no network connection
     try {
       SessionManager.getManager().setSession(this.fileAdapter.doOperation(OBOAdapter.READ_ONTOLOGY, config, null));
     } catch (DataAdapterException e) {
@@ -103,7 +104,9 @@ public class OntologyController {
   }
   
   public TermSet getRelationsTermSet() {
-    return this.getTermSet(REL, REL_PROPOSED);
+    final TermSet set = this.getTermSet(REL, REL_PROPOSED);
+    set.setIncludesProperties(true);
+    return set;
   }
   
   private TermSet getTermSet(String... urls) {

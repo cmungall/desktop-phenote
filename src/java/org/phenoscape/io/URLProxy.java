@@ -91,7 +91,7 @@ public class URLProxy {
    */
   public File get(URL url, CacheOption option) throws IOException {
     if ((option.equals(CacheOption.NO_CACHE)) || ((option.equals(CacheOption.USE_CACHE)) && (this.isOutOfDate(url)))) {
-      log().debug("Need to download from web: " + url);
+      log().info("Need to download from web: " + url);
       this.downloadToCache(url);
     }
     return this.getCacheFile(url);

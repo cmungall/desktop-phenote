@@ -421,8 +421,7 @@ public final class AutoCompleteSupport<E> {
         this.renderer = format == null && defaultRendererInstalled ? null : new StringFunctionRenderer();
 
         // is this combo box a TableCellEditor?
-        this.isTableCellEditor = true;
-        //this.isTableCellEditor = Boolean.TRUE.equals(comboBox.getClientProperty("JComboBox.isTableCellEditor"));
+        this.isTableCellEditor = Boolean.TRUE.equals(comboBox.getClientProperty("JComboBox.isTableCellEditor"));
 
         // build the ComboBoxModel capable of filtering its values
         this.filterMatcherEditor = new TextMatcherEditor<E>(filterator == null ? new DefaultTextFilterator() : filterator);

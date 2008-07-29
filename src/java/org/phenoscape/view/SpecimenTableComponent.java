@@ -14,6 +14,7 @@ import javax.swing.JToolBar;
 
 import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOObject;
 import org.phenoscape.model.PhenoscapeController;
 import org.phenoscape.model.Specimen;
 import org.phenoscape.model.Taxon;
@@ -92,7 +93,7 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
     final JTable specimensTable = new BugWorkaroundTable(specimensTableModel);
     specimensTable.setSelectionModel(this.getController().getCurrentSpecimensSelectionModel());
     specimensTable.setDefaultRenderer(Object.class, new PlaceholderRenderer("None"));
-    specimensTable.setDefaultRenderer(OBOClass.class, new TermRenderer("None"));
+    specimensTable.setDefaultRenderer(OBOObject.class, new TermRenderer("None"));
     specimensTable.getColumnModel().getColumn(0).setCellEditor(this.createAutocompleteEditor(this.getController().getOntologyController().getCollectionTermSet().getTerms()));
     specimensTable.putClientProperty("Quaqua.Table.style", "striped");
     new TableColumnPrefsSaver(specimensTable, this.getClass().getName());
@@ -164,7 +165,7 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
 
     public Class<?> getColumnClass(int column) {
       switch(column) {
-      case 0: return OBOClass.class;
+      case 0: return OBOObject.class;
       case 1: return String.class;
       default: return null;
       }

@@ -9,16 +9,17 @@ import javax.swing.JMenuItem;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.bbop.framework.GUIComponentFactory;
+import org.bbop.framework.GUIManager;
 import org.bbop.framework.dock.LayoutDriver;
 import org.bbop.framework.dock.idw.IDWDriver;
 import org.oboedit.gui.tasks.DefaultGUIStartupTask;
 import org.phenoscape.app.CrossPlatform;
 import org.phenoscape.model.PhenoscapeController;
+import org.phenoscape.swing.WindowSizePrefsSaver;
 import org.phenoscape.view.CharacterTableComponentFactory;
 import org.phenoscape.view.DataSetComponentFactory;
 import org.phenoscape.view.MenuFactory;
@@ -59,7 +60,7 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
   @Override
   protected void configureLogging() {
     //TODO configure logging properly
-    BasicConfigurator.configure();
+    // actually just need to set desired level in configuration file
     final Logger rl = LogManager.getRootLogger();
     rl.setLevel(Level.DEBUG);
   }
@@ -95,22 +96,29 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
   
   @Override
   protected String getAppID() {
-    return "Phenoscape";
+    return "Phenex";
   }
   
   @Override
   protected String getAppName() {
-    //return "Phenoscape Annotator";
-    return "Phenote";
+    return "Phenex";
   }
   
   @Override
   protected JFrame createFrame() {
     final JFrame frame = super.createFrame();
     frame.setTitle(getAppName());
+    // the window prefs saver is not currently working because the BBOP MainFrame is trying to be too smart
+    new WindowSizePrefsSaver(frame, this.getClass().getName() + "mainwindow");
     return frame;
   }
   
+  @Override
+  protected void showFrame() {
+    // BBOP centers and makes frame a certain size - we are overriding this
+    GUIManager.getManager().getFrame().setVisible(true);
+  }
+
   @Override
   protected LayoutDriver createLayoutDriver() {
     final LayoutDriver driver = super.createLayoutDriver();
