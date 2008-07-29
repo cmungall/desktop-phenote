@@ -176,7 +176,7 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
 //          Integer joinkeyInt = Integer.parseInt(pgdbid);	// this can't do anything since pgdbid must be blank
           Integer joinkeyInt = 0;
           ResultSet rs = null;
-          try { rs = s.executeQuery("SELECT joinkey FROM int_name "); }
+          try { rs = s.executeQuery("SELECT joinkey FROM int_curator "); }
           catch (SQLException se) {
             System.out.println("We got an exception while executing our int_name query: that probably means our column SQL is invalid"); se.printStackTrace(); errorPopup("commit SELECT int_name"); return ; }
           try { while (rs.next()) { if (rs.getInt(1) > joinkeyInt) { joinkeyInt = rs.getInt(1); } } joinkeyInt++; joinkey = Integer.toString(joinkeyInt); }
