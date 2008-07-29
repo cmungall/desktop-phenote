@@ -173,7 +173,6 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
     }
 
     public Phenotype setColumnValue(Phenotype phenotype, Object editedValue, int column) {
-      if (editedValue instanceof OBOClass) { updateGlobalTermSelection((OBOClass)editedValue); }
       switch (column) {
       case 0: phenotype.setEntity((OBOClass)editedValue); break;
       case 1: phenotype.setQuality((OBOClass)editedValue); break;

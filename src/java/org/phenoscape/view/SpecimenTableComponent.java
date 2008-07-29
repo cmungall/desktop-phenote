@@ -134,7 +134,6 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
     }
 
     public Specimen setColumnValue(Specimen specimen, Object editedValue, int column) {
-      if (editedValue instanceof OBOClass) { updateGlobalTermSelection((OBOClass)editedValue); }
       switch(column) {
       case 0: specimen.setCollectionCode((OBOClass)editedValue); break;
       case 1: specimen.setCatalogID(editedValue.toString()); break;
