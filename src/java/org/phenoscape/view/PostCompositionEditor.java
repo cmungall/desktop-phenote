@@ -205,7 +205,7 @@ public class PostCompositionEditor extends PhenoscapeGUIComponent {
     }
     
     public boolean isComplete() {
-      return (this.relation == null) || (this.term == null);
+      return (this.relation != null) && (this.term != null);
     }
     
   }
