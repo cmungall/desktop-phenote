@@ -1,0 +1,84 @@
+package phenote.matrix.model;
+
+import org.apache.log4j.Logger;
+import org.obo.datamodel.OBOClass;
+
+import phenote.datamodel.CharFieldException;
+import phenote.datamodel.CharacterI;
+import phenote.datamodel.OboUtil;
+
+public class PhenotypeMatrixColumn implements MatrixColumn {
+
+  private OBOClass entity;
+  private OBOClass quality;
+  private OBOClass entity2;
+  
+  public PhenotypeMatrixColumn(OBOClass entity, OBOClass quality, OBOClass entity2) {
+    this.setEntity(entity);
+    this.setQuality(quality);
+    this.setEntity2(entity2);
+  }
+  
+  public boolean isValue(CharacterI character) {
+    if (!this.areEqualOrNull(this.getEntity(), character.getEntity())) {
+      return false;
+    }
+    try {
+      if (!this.areEqualOrNull(this.getEntity2(), character.getTerm("E2"))) {
+        return false;
+      }
+    } catch (CharFieldException e) {
+      log().error("Entity2 field is not properly configured", e);
+      return false;
+    }
+    if (!this.areEqualOrNull(this.getQuality(), OboUtil.getAttributeForValue(character.getQuality()))) {
+      return false;
+    }
+    return true;
+  }
+  
+  private boolean areEqualOrNull(Object o1, Object o2) {
+    if ((o1 == null) && (o2 == null)) {
+      return true;
+    } else if ((o1 == null) || (o2 == null)) {
+      return false;
+    }
+    return o1.equals(o2);
+  }
+  
+  public Object getValue(CharacterI character) {
+    // here it just returns the quality
+    // it would be better to define a MatrixCell interface and a PhenotypeMatrixCell
+    // implementation which you return - it would contain the quality, the count, and 
+    // the measurement and unit
+    return character.getQuality();
+  }
+  
+  private Logger log() {
+    return Logger.getLogger(this.getClass());
+  }
+
+  public void setEntity(OBOClass entity) {
+    this.entity = entity;
+  }
+
+  public OBOClass getEntity() {
+    return entity;
+  }
+
+  public void setQuality(OBOClass quality) {
+    this.quality = quality;
+  }
+
+  public OBOClass getQuality() {
+    return quality;
+  }
+
+  public void setEntity2(OBOClass entity2) {
+    this.entity2 = entity2;
+  }
+
+  public OBOClass getEntity2() {
+    return entity2;
+  }
+}

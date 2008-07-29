@@ -2,7 +2,7 @@ package phenote.matrix.model;
 
 import java.util.Comparator;
 
-public class MatrixRowComparator implements Comparator<MatrixRow> {
+public class MatrixRowComparator_old implements Comparator<MatrixRow_old> {
 	
 	/**
 	 * Use standard String comparison logic to compare two rows in the Matrix.
@@ -13,7 +13,7 @@ public class MatrixRowComparator implements Comparator<MatrixRow> {
 	 * @return the result of the String comparison between the two rows
 	 * @see String.compareTo(String anotherString)
 	 */
-	public int compare(MatrixRow r1, MatrixRow r2) {
+	public int compare(MatrixRow_old r1, MatrixRow_old r2) {
 		int result = r1.getRowFieldName().compareTo(r2.getRowFieldName());	
 		if (result == 0) {
 			result = r1.getRowValue().compareTo(r2.getRowValue());

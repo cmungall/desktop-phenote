@@ -9,25 +9,25 @@ import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharFieldException;
 import phenote.datamodel.OboUtil;
 
-public class MatrixBuilder {
+public class MatrixBuilder_old {
 
 	String groupingField;
 	CharacterListManager clm;
-	CharacterComparator ccompare;
+	CharacterComparator_old ccompare;
 	EventList<CharacterI> list;
 	SortedList<CharacterI> sorted;
-	BasicEventList<MatrixRow> matrix;
+	BasicEventList<MatrixRow_old> matrix;
 	
 	/**
 	 * Initialize the MatrixBuilder object
 	 * 
 	 * @param gf the grouping field to use for this matrix (the field that will determine rows in the matrix)
 	 */
-	public MatrixBuilder (String gf) {
+	public MatrixBuilder_old (String gf) {
 		// Is String best here? I was thinking of "taxa" as a parameter, but should I use OBOClass type instead, as in the NEXUSAdapter?
 		groupingField = gf;
 		clm = CharacterListManager.main();
-		ccompare = new CharacterComparator (groupingField);
+		ccompare = new CharacterComparator_old (groupingField);
 		buildSortedList();
 	}
 	
@@ -42,13 +42,13 @@ public class MatrixBuilder {
 	 * @throws CharFieldException
 	 */
 	public void buildMatrix () throws CharFieldException {
-	  matrix = new BasicEventList<MatrixRow>();
-	  MatrixRow currRow = null;
+	  matrix = new BasicEventList<MatrixRow_old>();
+	  MatrixRow_old currRow = null;
 		String currGroup, prevGroup = "";
 		for (CharacterI ch : sorted) {
 			currGroup = ch.getValue(ch.getCharFieldForName(groupingField)).getName();
 			if (!currGroup.equals(prevGroup)) {
-				currRow = new MatrixRow (groupingField, currGroup);
+				currRow = new MatrixRow_old (groupingField, currGroup);
 				addRowToMatrix(currRow);
 				prevGroup = currGroup;
 				addColumnToRow (currRow, ch);
@@ -64,7 +64,7 @@ public class MatrixBuilder {
 	 * 
 	 * @param row the row object to be added to the current matrix
 	 */
-	public void addRowToMatrix (MatrixRow row) {
+	public void addRowToMatrix (MatrixRow_old row) {
 		matrix.add(row);
 	}
 	
@@ -75,7 +75,7 @@ public class MatrixBuilder {
 	 * @param character the character that needs to be added to the row
 	 * @throws CharFieldException
 	 */
-	public void addColumnToRow (MatrixRow row, CharacterI character) throws CharFieldException {
+	public void addColumnToRow (MatrixRow_old row, CharacterI character) throws CharFieldException {
 		OBOClass entityTerm, valueTerm, attributeTerm;
 		entityTerm = character.getTerm("Entity");
 		// We have a problem if a term is null - it causes a CharFieldException ... has no value
@@ -89,7 +89,7 @@ public class MatrixBuilder {
 	 * 
 	 * @return the matrix being built
 	 */
-	public BasicEventList<MatrixRow> getMatrix() {
+	public BasicEventList<MatrixRow_old> getMatrix() {
 		return this.matrix;
 	}
 	

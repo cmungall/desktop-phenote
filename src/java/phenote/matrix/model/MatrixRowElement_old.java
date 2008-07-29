@@ -1,12 +1,12 @@
 package phenote.matrix.model;
 
-public class MatrixRowElement {
+public class MatrixRowElement_old {
 	
 	// Could/Should this class use OBOClass objects instead of Strings
 	private String elementFieldName;
 	private String elementValue;
 	
-	public MatrixRowElement (String cnf, String cnv) {
+	public MatrixRowElement_old (String cnf, String cnv) {
 		setColNameField(cnf);
 		setColNameValue(cnv);
 	}
