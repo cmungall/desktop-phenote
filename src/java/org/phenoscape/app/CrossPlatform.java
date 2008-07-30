@@ -22,10 +22,18 @@ public class CrossPlatform {
   }
   
   /**
-   * We don't want to add "Exit" to the File menu on Mac.
+   * Don't add "Exit" to the File menu on Mac.
    * Instead there is "Quit" under the automatic app menu.
    */
   public static boolean shouldPutExitInFileMenu() {
+    return !getCurrentPlatform().equals(Platform.MAC);
+  }
+  
+  /**
+   * Don't put the application name in the window title on Mac.
+   * Instead it is visible in the menubar.
+   */
+  public static boolean shouldPutAppNameInWindowTitle() {
     return !getCurrentPlatform().equals(Platform.MAC);
   }
   

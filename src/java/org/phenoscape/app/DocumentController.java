@@ -65,14 +65,19 @@ public abstract class DocumentController {
   
   public abstract JFrame getWindow();
   
+  public abstract String getAppName();
+  
   private void setWindowTitle(File aFile) {
     final JFrame window = this.getWindow();
+    final String docTitle = aFile != null ? aFile.getName() : "Untitled";
+    final String windowTitle;
+    if (CrossPlatform.shouldPutAppNameInWindowTitle()) {
+      windowTitle = this.getAppName() + docTitle;
+    } else {
+      windowTitle = docTitle;
+    }
     if (window != null) {
-      if (aFile != null) {
-        window.setTitle(aFile.getName());
-      } else {
-        window.setTitle("Untitled");
-      }
+      window.setTitle(windowTitle);
     }
   }
   

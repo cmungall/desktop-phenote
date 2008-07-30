@@ -92,6 +92,7 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
   protected void configureSystem() {
     super.configureSystem();
     this.controller = new PhenoscapeController();
+    this.controller.setAppName(this.getAppName());
   }
   
   @Override

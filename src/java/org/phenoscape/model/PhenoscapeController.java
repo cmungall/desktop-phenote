@@ -33,6 +33,7 @@ public class PhenoscapeController extends DocumentController {
   private final EventSelectionModel<Phenotype> currentPhenotypesSelectionModel;
   private String charactersBlockID = UUID.randomUUID().toString();
   private NexmlDocument xmlDoc;
+  private String appName;
   
   public PhenoscapeController() {
     super();
@@ -135,7 +136,16 @@ public class PhenoscapeController extends DocumentController {
   public JFrame getWindow() {
     return GUIManager.getManager().getFrame();
   }
+    
+  @Override
+  public String getAppName() {
+    return this.appName;
+  }
   
+  public void setAppName(String name) {
+    this.appName = name;
+  }
+
   public SelectionManager getPhenoteSelectionManager() {
     return SelectionManager.inst();
   }
