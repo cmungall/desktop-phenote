@@ -145,10 +145,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
   }
 
   @Override
-  /** im not sure about this and svn & webstart?
-   so idw/obo adds a perspective subdir here and copies perspectives here
-   from jars/classes */
-  protected File getPrefsDir() {
+public File getPrefsDir() {
     // .phenote/layout?
     return new File(System.getProperty("user.home") + "/.phenote");
   }
