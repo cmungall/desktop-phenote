@@ -37,6 +37,17 @@ public class CrossPlatform {
     return !getCurrentPlatform().equals(Platform.MAC);
   }
   
+  public static String getDocumentWindowTitle(String docName, String appName) {
+    final String docTitle = docName != null ? docName : "Untitled";
+    final String windowTitle;
+    if (CrossPlatform.shouldPutAppNameInWindowTitle()) {
+      windowTitle = docTitle + " - " + appName;
+    } else {
+      windowTitle = docTitle;
+    }
+    return windowTitle;
+  }
+  
   /**
    * Returns a folder suitable for storing per-user application support files.
    * This is unrelated to the storage location for java.util.prefs.
