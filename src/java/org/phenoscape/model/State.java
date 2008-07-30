@@ -72,4 +72,10 @@ public class State {
     this.symbol = aSymbol;
   }
   
+  public String toString() {
+    final String prefix = this.getSymbol() != null ? this.getSymbol() + ", " : "";
+    final String suffix = this.getLabel() != null ? this.getLabel() : "untitled";
+    return prefix + suffix;
+  }
+  
 }

@@ -888,7 +888,7 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 			if (!(e.getEventType() == HyperlinkEvent.EventType.ACTIVATED)) return;
 
 			URL url = e.getURL();
-			System.out.println("got url "+url+" desc "+e.getDescription());
+			LOG.debug("got url "+url+" desc "+e.getDescription());
 
 			// internal link to term...
 			if (HtmlUtil.isPhenoteLink(e)) {
@@ -897,7 +897,7 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 			}
 
 			if (url == null) { // relative urls are null
-				System.out.println("invalid url " + url);
+				LOG.error("invalid url " + url);
 				return;
 			}
 
@@ -913,9 +913,9 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 						url.toString(), null);
 				new Thread(br).start();
 			} catch (BrowserLaunchingInitializingException be) {
-				System.out.println("cant launch browser " + be);
+				LOG.error("cant launch browser ", be);
 			} catch (UnsupportedOperatingSystemException ue) {
-				System.out.println("cant launch browser " + ue);
+			  LOG.error("cant launch browser ", ue);
 			}
 		}
 
@@ -1438,62 +1438,62 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 		//is property_value, and the value is the tag+value.  these need to be
 		//split
 		for (Iterator<PropertyValue> it = propertyValues.iterator(); it.hasNext();) {
-			propVal = it.next();
+		  propVal = it.next();
 
-                        System.out.println("prop val "+propVal+" prop "+propVal.getProperty());
-			if (propVal != null) {
-				if (propVal.getProperty().equals("property_value")) {
-                                  System.out.println("prop val ok");
-					/*
-					 * property_value: married_to heather
-					 * property_value: shoe_size "8" xsd:positiveInteger			
-					 * 
-					 * these go into propertyValSet
-					 */
-//					int quoteIndex = findUnescaped(propVal.getValue(), '"', 0, propVal.getValue().length());
-					int quoteIndex = -1;
-					if (quoteIndex == -1) {
-						/* no quotes: 
-						 * this means we have a pv of the following form:
-						 * property_value: eats id:1234
-						 * 
-						 * ie linking two instanes
-						 */
-						StringTokenizer tokenizer = new StringTokenizer(propVal.getValue());
-						List tokens = new Vector();
-						while (tokenizer.hasMoreTokens()) {
-							tokens.add(tokenizer.nextToken());
-						}
-						name = (String)tokens.get(0);
-						value = (String)tokens.get(1);
-					} else {
-//						/*  quotes: 
-//						* this means we have a pv of the following form:
-//						* property_value:  shoe_size "8" xsd:positiveInteger
-//						* 
-//						* ie linking an instance with a property value
-//						*/
-//						SOPair p = unescape(value, '"', quoteIndex + 1, value
-//						.length(), true);
-//						String propID = value.substring(0, quoteIndex).trim();
-//						String optional = value.substring(p.index + 1,
-//						value.length()).trim();
-						//testing to see if in someproperty: value
-					}
-				} else {
-					name = propVal.getProperty();
-					value = propVal.getValue();
-				}
-				propLabel = new JLabel("<html>"+name+"</html>");
-				propLabel.validate();
-				valLabel = new JLabel("<html>"+value+"</html>");
-				valLabel.validate();
-				propLabel.setLabelFor(valLabel);
-				propLabel.setVerticalAlignment(JLabel.TOP);
-				propertyValuesPanel.add(propLabel);
-				propertyValuesPanel.add(valLabel);
-				rowCount++;
-			}
+		  LOG.trace("prop val "+propVal+" prop "+propVal.getProperty());
+		  if (propVal != null) {
+		    if (propVal.getProperty().equals("property_value")) {
+		      LOG.trace("prop val ok");
+		      /*
+		       * property_value: married_to heather
+		       * property_value: shoe_size "8" xsd:positiveInteger			
+		       * 
+		       * these go into propertyValSet
+		       */
+//		      int quoteIndex = findUnescaped(propVal.getValue(), '"', 0, propVal.getValue().length());
+		      int quoteIndex = -1;
+		      if (quoteIndex == -1) {
+		        /* no quotes: 
+		         * this means we have a pv of the following form:
+		         * property_value: eats id:1234
+		         * 
+		         * ie linking two instanes
+		         */
+		        StringTokenizer tokenizer = new StringTokenizer(propVal.getValue());
+		        List tokens = new Vector();
+		        while (tokenizer.hasMoreTokens()) {
+		          tokens.add(tokenizer.nextToken());
+		        }
+		        name = (String)tokens.get(0);
+		        value = (String)tokens.get(1);
+		      } else {
+//		        /*  quotes: 
+//		        * this means we have a pv of the following form:
+//		        * property_value:  shoe_size "8" xsd:positiveInteger
+//		        * 
+//		        * ie linking an instance with a property value
+//		        */
+//		        SOPair p = unescape(value, '"', quoteIndex + 1, value
+//		        .length(), true);
+//		        String propID = value.substring(0, quoteIndex).trim();
+//		        String optional = value.substring(p.index + 1,
+//		        value.length()).trim();
+		        //testing to see if in someproperty: value
+		      }
+		    } else {
+		      name = propVal.getProperty();
+		      value = propVal.getValue();
+		    }
+		    propLabel = new JLabel("<html>"+name+"</html>");
+		    propLabel.validate();
+		    valLabel = new JLabel("<html>"+value+"</html>");
+		    valLabel.validate();
+		    propLabel.setLabelFor(valLabel);
+		    propLabel.setVerticalAlignment(JLabel.TOP);
+		    propertyValuesPanel.add(propLabel);
+		    propertyValuesPanel.add(valLabel);
+		    rowCount++;
+		  }
 		}
 			if (rowCount > 0) {
 				SpringUtilities.makeCompactGrid(propertyValuesPanel, rowCount, 2, // rows,
@@ -1515,7 +1515,7 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 				propertyValuesPanel.removeAll();
 				propertyValuesPanel.setVisible(false);
 			}
-			System.out.println ("rows= "+ rowCount);
+			LOG.trace("rows= "+ rowCount);
 			return rowCount;
 	}
 
@@ -1532,7 +1532,6 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 			}
 		}
 		String id = getTermFromNaviHistory(naviIndex);
-		System.out.println(id);
 		try {
 			OBOObject term = CharFieldManager.inst().getOboClass(id); // ex
 			setTextFromOboClass(term);
@@ -1703,7 +1702,7 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 			
 			if (match)
 				matches.add(annot);
-			System.out.println("match="+match);
+			LOG.trace("match="+match);
 
 		}
 		return matches;

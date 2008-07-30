@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
 import java.util.Comparator;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
@@ -11,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOClass;
@@ -87,6 +90,18 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
     }
   }
   
+  private void updatePanelTitle() {
+    final String unselectedTitle = "Specimens";
+    final String selectedPrefix = "Specimens for Taxon: ";
+    final List<Taxon> taxa = this.getController().getTaxaSelectionModel().getSelected();
+    if (taxa.isEmpty()) {
+      this.updatePanelTitle(unselectedTitle);
+    } else {
+      final Taxon taxon = taxa.get(0);
+      this.updatePanelTitle(selectedPrefix + taxon);
+    }
+  }
+  
   private void initializeInterface() {
     this.setLayout(new BorderLayout());
     final EventTableModel<Specimen> specimensTableModel = new EventTableModel<Specimen>(this.sortedSpecimens, new SpecimensTableFormat());
@@ -101,6 +116,7 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
     sortChooser.addSortActionListener(new SortDisabler());
     this.add(new JScrollPane(specimensTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);
+    this.getController().getTaxaSelectionModel().addListSelectionListener(new TaxonSelectionListener());
   }
   
   private JToolBar createToolBar() {
@@ -176,6 +192,18 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
       case 1: return Strings.getNaturalComparator();
       default: return null;
       }
+    }
+    
+  }
+  
+  private class TaxonSelectionListener implements ListSelectionListener {
+    
+    public TaxonSelectionListener() {
+      updatePanelTitle();
+    }
+
+    public void valueChanged(ListSelectionEvent e) {
+      updatePanelTitle();      
     }
     
   }

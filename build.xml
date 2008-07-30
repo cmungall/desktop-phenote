@@ -744,6 +744,62 @@ where xsd files are (conf) -->
   <target name="echo-phenote-version">
     <echo message="Version: ${phenote.version}" />
   </target>
+	
+<property name="phenex-main-class" value="org.phenoscape.main.Phenoscape"/>
+<property name="phenexjarfile" value="jars/phenex.jar"/>
+<property name="phenex.version" value="1.0-beta1"/>
+<property name="phenex.build" value="${NOW}"/>
+	
+    <target name="jar-phenex" depends="compile">
+        <jar destfile="${phenexjarfile}">
+             <fileset dir="${classfiles}"/>
+             <fileset dir="." includes="images/"/>
+        	 <fileset file="conf/log4j.xml"/>
+        	<manifest>
+        	  <attribute name="Main-Class" value="${phenex-main-class}"/>
+        	</manifest>
+        </jar>
+    </target>
+	
+    <!-- Create a self-contained double-clickable app bundle for Mac OS X in "dist/Phenex.app" -->
+    <target name="dist-phenex-mac" depends="jar-phenex, dist-init">
+        <jarbundler dir="${dist}" name="Phenex" mainclass="${phenex-main-class}" jvmversion="1.5*" vmoptions="-Xmx1024M" version="${phenex.version}" build="${phenex.build}">
+            <jarfileset dir="${lib}">
+            	<exclude name="phenote.jar"/>
+            </jarfileset>
+            <javaproperty name="apple.laf.useScreenMenuBar" value="true"/>
+            <javaproperty name="phenex.version" value="${phenex.version}"/>
+            <javaproperty name="phenex.build" value="${phenex.build}"/>
+        </jarbundler>
+    </target>
+    
+    <!-- Create a double-clickable batch file for Windows in "dist/Phenex".  Jars are placed in a nested lib folder. -->
+    <target name="dist-phenex-win" depends="jar-phenex, dist-init">
+        <mkdir dir="${dist}/Phenex/lib"/>
+        <copy todir="${dist}/Phenex" file="Phenex.bat"/>
+        <replace file="${dist}/Phenex/Phenex.bat" token="@@phenex.version@@" value="${phenex.version}"/>
+        <replace file="${dist}/Phenex/Phenex.bat" token="@@phenex.build@@" value="${phenex.build}"/>
+        <copy todir="${dist}/Phenex/lib">
+            <fileset dir="${lib}">
+            	<exclude name="phenote.jar"/>
+            </fileset>
+        </copy>
+        <path id="libclasses">
+            <fileset dir="${dist}/Phenex/lib">
+            	<exclude name="phenex.jar"/>
+            </fileset>
+        </path>
+        <manifestclasspath property="jar.classpath" jarfile="${dist}/Phenex/lib/phenex.jar">
+            <classpath refid="libclasses"/>
+        </manifestclasspath>
+        <jar destfile="${dist}/Phenex/lib/phenex.jar" update="yes">
+            <manifest>
+                <attribute name="Class-Path" value="${jar.classpath}"/>
+            </manifest>
+        </jar>
+    </target>
+    
+    <target name="dist-phenex" depends="dist-phenex-mac, dist-phenex-win"/>
 
 </project>
 

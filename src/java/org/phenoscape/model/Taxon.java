@@ -59,5 +59,9 @@ public class Taxon {
   public EventList<Specimen> getSpecimens() {
     return this.specimens;
   }
+  
+  public String toString() {
+    return this.getValidName() != null ? this.getValidName().toString() : "untitled";
+  }
 
 }

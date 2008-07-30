@@ -64,4 +64,8 @@ public class Character {
     this.label = aLabel;
   }
   
+  public String toString() {
+    return this.getLabel() != null ? this.getLabel() : "untitled";
+  }
+  
 }

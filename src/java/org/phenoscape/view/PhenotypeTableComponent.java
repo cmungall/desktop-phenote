@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
 import java.util.Comparator;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
@@ -14,6 +15,8 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableCellEditor;
 
 import org.apache.log4j.Logger;
@@ -81,6 +84,7 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
     sortChooser.addSortActionListener(new SortDisabler());
     this.add(new JScrollPane(this.phenotypesTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);
+    this.getController().getCurrentStatesSelectionModel().addListSelectionListener(new StateSelectionListener());
   }
   
   private void addPhenotype() {
@@ -115,6 +119,17 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
       return selected.get(0);
     } else {
       return null;
+    }
+  }
+  
+  private void updatePanelTitle() {
+    final String unselectedTitle = "Phenotypes";
+    final String selectedPrefix = "Phenotypes for State: ";
+    final List<State> states = this.getController().getCurrentStatesSelectionModel().getSelected();
+    if (states.isEmpty()) {
+      this.updatePanelTitle(unselectedTitle);
+    } else {
+      this.updatePanelTitle(selectedPrefix + states.get(0));
     }
   }
   
@@ -265,6 +280,18 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
       case 6: return Strings.getNaturalComparator();
       default: return null;
       }
+    }
+    
+  }
+  
+  private class StateSelectionListener implements ListSelectionListener {
+    
+    public StateSelectionListener() {
+      updatePanelTitle();
+    }
+
+    public void valueChanged(ListSelectionEvent e) {
+      updatePanelTitle();      
     }
     
   }

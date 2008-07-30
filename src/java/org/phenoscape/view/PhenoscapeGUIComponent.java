@@ -14,6 +14,7 @@ import javax.swing.table.TableCellEditor;
 
 import org.apache.log4j.Logger;
 import org.bbop.framework.AbstractGUIComponent;
+import org.bbop.framework.ComponentManager;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOObject;
 import org.phenoscape.model.PhenoscapeController;
@@ -55,6 +56,13 @@ public class PhenoscapeGUIComponent extends AbstractGUIComponent {
    */
   protected void updateGlobalTermSelection(OBOClass term) {
     this.getController().getPhenoteSelectionManager().selectTerm(this, term, false);
+  }
+  
+  /**
+   * Change the title for the tab of this component;
+   */
+  protected void updatePanelTitle(String title) {
+    ComponentManager.getManager().setLabel(this, title);
   }
   
   protected JComboBox createAutocompleteBox(Collection<OBOObject> terms) {

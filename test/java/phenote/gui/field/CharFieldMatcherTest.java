@@ -26,14 +26,13 @@ public class CharFieldMatcherTest {
     final CharField pubField = CharFieldManager.inst().getCharFieldForName("Publication");
     final CharacterI character = CharacterIFactory.makeChar();
     character.setValue(pubField, "testpub");
-    final CharFieldMatcher internalMatcher = new CharFieldMatcher(pubField, "stp", false);
+    final CharFieldMatcher internalMatcher = new CharFieldMatcher(pubField, "stp", true);
+    Assert.assertNotNull("Matcher should not be null", internalMatcher);
     Assert.assertTrue("Should match internal string", internalMatcher.matches(character));
-    final CharFieldMatcher unMatcher = new CharFieldMatcher(pubField, "akz", false);
+    final CharFieldMatcher unMatcher = new CharFieldMatcher(pubField, "akz", true);
     Assert.assertFalse("Shouldn't match unmatching text", unMatcher.matches(character));
-    final CharFieldMatcher upperMatcher = new CharFieldMatcher(pubField, "TEST", false);
+    final CharFieldMatcher upperMatcher = new CharFieldMatcher(pubField, "TEST", true);
     Assert.assertTrue("Should match case-insensitive", upperMatcher.matches(character));
-    final CharFieldMatcher inheritMatcher = new CharFieldMatcher(pubField, "test", true);
-    Assert.assertTrue("Should ignore inherit flag", inheritMatcher.matches(character));
     final CharFieldMatcher nullMatcher = new CharFieldMatcher(pubField, null, false);
     Assert.assertTrue("Null search should match anything", nullMatcher.matches(character));
     final CharFieldMatcher emptyMatcher = new CharFieldMatcher(pubField, "", false);

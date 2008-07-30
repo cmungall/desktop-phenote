@@ -1,9 +1,12 @@
 package org.phenoscape.main;
 
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.UIManager;
@@ -105,6 +108,15 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
     return "Phenex";
   }
   
+  @Override
+  protected Action getAboutAction() {
+    //TODO make an about panel
+    return new AbstractAction() {
+      public void actionPerformed(ActionEvent e) {
+      }
+    };
+  }
+
   @Override
   protected JFrame createFrame() {
     final JFrame frame = super.createFrame();

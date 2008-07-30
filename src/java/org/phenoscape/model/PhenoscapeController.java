@@ -40,6 +40,7 @@ public class PhenoscapeController extends DocumentController {
     this.charactersSelectionModel = new EventSelectionModel<Character>(this.dataSet.getCharacters());
     this.charactersSelectionModel.setSelectionMode(EventSelectionModel.SINGLE_SELECTION);
     this.taxaSelectionModel = new EventSelectionModel<Taxon>(this.dataSet.getTaxa());
+    this.taxaSelectionModel.setSelectionMode(EventSelectionModel.SINGLE_SELECTION);
     this.currentSpecimens = new CollectionList<Taxon, Specimen>(this.taxaSelectionModel.getSelected(),
         new CollectionList.Model<Taxon, Specimen>(){
       public List<Specimen> getChildren(Taxon parent) {
