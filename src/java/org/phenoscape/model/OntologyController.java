@@ -104,7 +104,7 @@ public class OntologyController {
   }
   
   public TermSet getRelationsTermSet() {
-    final TermSet set = this.getTermSet(REL, REL_PROPOSED);
+    final TermSet set = this.getTermSet();
     set.setIncludesProperties(true);
     return set;
   }
