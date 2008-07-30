@@ -77,7 +77,6 @@
 	<classpathentry exported="true" kind="lib" path="jars/birn-soap.jar"/>
 	<classpathentry exported="true" kind="lib" path="jars/commons-cli-1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="jars/idw-gpl.jar"/>
-	<classpathentry exported="true" kind="lib" path="jars/obo.jar"/>
 	<classpathentry exported="true" kind="lib" path="jars/obo-vocab.jar"/>
 	<classpathentry exported="true" kind="lib" path="jars/ols-client.jar"/>
 	<classpathentry exported="true" kind="lib" path="jars/owlapi-api.jar"/>
@@ -86,6 +85,10 @@
 	<classpathentry exported="true" kind="lib" path="jars/tablelayout.jar"/>
 	<classpathentry exported="true" kind="lib" path="jars/xml-apis.jar"/>
 	<classpathentry exported="true" kind="lib" path="jars/xml-apis-ext.jar"/>
+	<classpathentry kind="lib" path="jars/nexmlbeans.jar"/>
+	<classpathentry kind="lib" path="jars/sjsxp.jar"/>
+	<classpathentry kind="lib" path="jars/jaxws-api.jar"/>
+	<classpathentry kind="lib" path="jars/jlibeps.jar"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/BBOP"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/OBO-Edit2"/>
 	<classpathentry kind="output" path="bin"/>
