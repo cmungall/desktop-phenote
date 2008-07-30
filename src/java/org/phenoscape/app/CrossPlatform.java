@@ -2,6 +2,8 @@ package org.phenoscape.app;
 
 import java.io.File;
 
+import javax.swing.JFrame;
+
 /**
  * A collection of static methods providing platform-specific functionality.
  * @author Jim Balhoff
@@ -35,6 +37,18 @@ public class CrossPlatform {
    */
   public static boolean shouldPutAppNameInWindowTitle() {
     return !getCurrentPlatform().equals(Platform.MAC);
+  }
+  
+  public static void titleWindowForFile(JFrame window, File file, String appName) {
+    final String docName = file != null ? file.getName() : "Untitled";
+    final String windowTitle;
+    if (CrossPlatform.shouldPutAppNameInWindowTitle()) {
+      windowTitle = docName + " - " + appName;
+    } else {
+      windowTitle = docName;
+    }
+    window.setTitle(windowTitle);
+    window.getRootPane().putClientProperty("Window.documentFile", file);
   }
   
   public static String getDocumentWindowTitle(String docName, String appName) {
