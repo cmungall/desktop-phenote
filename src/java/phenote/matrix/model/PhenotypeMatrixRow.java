@@ -16,7 +16,7 @@ public class PhenotypeMatrixRow implements MatrixRow {
   
   public boolean isValue(CharacterI character) {
     try {
-      return areEqualOrNull (getTaxon(), character.getTerm("Taxon"));
+      return areEqualOrNull (getTaxon(), character.getTerm("Valid Taxon"));
     } catch (CharFieldException e) {
       log().error("Entity2 field is not properly configured", e);
       return false;
@@ -25,7 +25,7 @@ public class PhenotypeMatrixRow implements MatrixRow {
   
   public Object getValue(CharacterI character) {
     try {
-      return character.getTerm("Taxon");
+      return character.getTerm("Valid Taxon");
     } catch (CharFieldException e) {
       log().error("Entity2 field is not properly configured", e);
       return null;

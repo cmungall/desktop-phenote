@@ -47,11 +47,7 @@ public class PhenotypeMatrixColumn implements MatrixColumn {
   }
   
   public Object getValue(CharacterI character) {
-    // here it just returns the quality
-    // it would be better to define a MatrixCell interface and a PhenotypeMatrixCell
-    // implementation which you return - it would contain the quality, the count, and 
-    // the measurement and unit
-    return character.getQuality();
+    return new PhenotypeMatrixCell (character);
   }
   
   private Logger log() {
