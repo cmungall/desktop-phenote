@@ -70,6 +70,13 @@ public class WormConstraint extends AbstractCommitConstraint {
           if (chr.hasValue("Object Remark")) { } else {
             warning = true; message += "Character "+pgdbid+" Mapped Wrong and has no Object Remark.  "; } } }
 
+      tag_name = "Object Type";
+      if ( chr.hasValue(tag_name) ) { 
+        String object_type = chr.getValueString(tag_name);
+        if (object_type.equals("Strain")) { 
+          if (chr.hasValue("Host Strain")) {
+            warning = true; message += "Character "+pgdbid+" is of type Strain and has data for Host Strain.  "; } } }
+
 
       if (chr.hasValue("NBP")) { 
           return ConstraintStatus.makeOK(); }

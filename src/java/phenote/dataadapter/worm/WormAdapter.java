@@ -303,7 +303,7 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_genotype"; tag_name = "Genotype"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "app_strain"; tag_name = "Strain"; tag_value = chr.getValueString(tag_name);
+        postgres_table = "app_strain"; tag_name = "Host Strain"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_obj_remark"; tag_name = "Object Remark"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
@@ -605,7 +605,7 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
       if (postgres_value == "") { } else { c1.setValue("Genotype",postgres_value); }				// assign the queried value
       postgres_table = "app_strain"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-      if (postgres_value == "") { } else { c1.setValue("Strain",postgres_value); }				// assign the queried value
+      if (postgres_value == "") { } else { c1.setValue("Host Strain",postgres_value); }				// assign the queried value
       postgres_table = "app_obj_remark"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("Object Remark",postgres_value); }				// assign the queried value
