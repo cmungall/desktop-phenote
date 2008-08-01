@@ -56,6 +56,10 @@ public class MatrixComponent extends AbstractGUIComponent {
 		matrixTable = new JTable(matrixTableModel);
 		System.out.println("The table has this many rows: " + matrixTable.getRowCount());
 		System.out.println("The table has this many columns: " + matrixTable.getColumnCount());
+		for (int i=0; i < matrixTable.getRowCount(); i++)
+		  for (int j=0; j < matrixTable.getColumnCount(); j++)
+		    System.out.println(matrixTable.getValueAt(i, j).toString());
+		      
 		matrixTable.putClientProperty("Quaqua.Table.style", "striped");
 		this.add(matrixTable, BorderLayout.CENTER);
 	}

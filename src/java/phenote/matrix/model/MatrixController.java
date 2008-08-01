@@ -20,11 +20,11 @@ public class MatrixController {
   ArrayList<MatrixColumn> columns; 
   ArrayList<MatrixRow> rows;
   
-  public MatrixController () throws CharFieldException {
+  public MatrixController () {
     clm = CharacterListManager.main();
     columns = new ArrayList<MatrixColumn>();
     rows = new ArrayList<MatrixRow>();
-    buildMatrix();
+    //buildMatrix();
   }
   
   public void buildMatrix () throws CharFieldException {
@@ -48,18 +48,35 @@ public class MatrixController {
     }
   }
   
-  public void buildColumns () throws CharFieldException {
+  public void buildColumns () {
     columnString = "Quality";
     columnCompare = new CharacterComparator (columnString);
     sortedQuality = new SortedList<CharacterI>(list, columnCompare);
     String currGroup, prevGroup = "";
+    OBOClass currEntity, currQuality, currEntity2;
     int i = 0;
     for (CharacterI ch : sortedQuality) {
-      currGroup = ch.getValue(ch.getCharFieldForName(columnString)).getName();
+      try {
+        currGroup = ch.getValue(ch.getCharFieldForName(columnString)).getName();
+      } catch (CharFieldException e1) {
+        currGroup = prevGroup;
+      }
       if (!currGroup.equals(prevGroup)) {
-        OBOClass currEntity = ch.getTerm("Entity");
-        OBOClass currQuality = ch.getTerm("Quality");
-        //OBOClass currEntity2 = ch.getTerm("E2");
+        try {
+          currEntity = ch.getTerm("Entity");
+        } catch (CharFieldException e) {
+          currEntity = null;
+        }
+        try {
+          currQuality = ch.getTerm("Quality");
+        } catch (CharFieldException e) {
+          currQuality = null;
+        }
+        try {
+          currEntity2 = ch.getTerm("E2");
+        } catch (CharFieldException e) {
+          currEntity2 = null;
+        }
         columns.add(new PhenotypeMatrixColumn(currEntity, currQuality, null));
         i++;
         prevGroup = currGroup;
@@ -86,5 +103,4 @@ public class MatrixController {
   public int getNumColumns() {
     return columns.size();
   }
-  
 }
