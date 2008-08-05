@@ -85,6 +85,7 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
     this.add(new JScrollPane(this.phenotypesTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);
     this.getController().getCurrentStatesSelectionModel().addListSelectionListener(new StateSelectionListener());
+    this.getController().getCurrentPhenotypesSelectionModel().addListSelectionListener(new PhenotypeSelectionListener());
   }
   
   private void addPhenotype() {
@@ -122,7 +123,7 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
     }
   }
   
-  private void updatePanelTitle() {
+  private void stateSelectionDidChange() {
     final String unselectedTitle = "Phenotypes";
     final String selectedPrefix = "Phenotypes for State: ";
     final List<State> states = this.getController().getCurrentStatesSelectionModel().getSelected();
@@ -130,7 +131,24 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
       this.updatePanelTitle(unselectedTitle);
     } else {
       this.updatePanelTitle(selectedPrefix + states.get(0));
+      this.selectAPhenotypeIfPossible();
     }
+    this.updateButtonStates();
+  }
+  
+  private void phenotypeSelectionDidChange() {
+    this.updateButtonStates();
+  }
+  
+  private void selectAPhenotypeIfPossible() {
+    if ((this.getSelectedPhenotype() == null) && (this.getController().getPhenotypesForCurrentStateSelection().size() > 0)) {
+      this.getController().getCurrentPhenotypesSelectionModel().setSelectionInterval(0, 0);
+    }
+  }
+  
+  private void updateButtonStates() {
+    this.addPhenotypeButton.setEnabled(this.getSelectedState() != null);
+    this.deletePhenotypeButton.setEnabled(this.getSelectedPhenotype() != null);
   }
   
   private void runPostCompositionForTermAtPoint(Point p) {
@@ -139,7 +157,7 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
     if (!this.tableFormat.getColumnClass(column).equals(OBOObject.class)) return;
     final Phenotype phenotype = this.sortedPhenotypes.get(row);
     final OBOClass term = (OBOClass)(this.tableFormat.getColumnValue(phenotype, column));
-    final PostCompositionEditor pce = new PostCompositionEditor(this.getController(), tableFormat.getColumnTermSet(column));
+    final PostCompositionEditor pce = new PostCompositionEditor(this.getController(), this.tableFormat.getColumnTermSet(column));
     pce.setTerm(term);
     final int result = pce.runPostCompositionDialog();
     if (result == JOptionPane.OK_OPTION) {
@@ -287,11 +305,23 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
   private class StateSelectionListener implements ListSelectionListener {
     
     public StateSelectionListener() {
-      updatePanelTitle();
+      stateSelectionDidChange();
     }
 
     public void valueChanged(ListSelectionEvent e) {
-      updatePanelTitle();      
+      stateSelectionDidChange();      
+    }
+    
+  }
+  
+  private class PhenotypeSelectionListener implements ListSelectionListener {
+    
+    public PhenotypeSelectionListener() {
+      phenotypeSelectionDidChange();
+    }
+
+    public void valueChanged(ListSelectionEvent e) {
+      phenotypeSelectionDidChange();      
     }
     
   }

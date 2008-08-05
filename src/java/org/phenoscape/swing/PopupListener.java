@@ -7,13 +7,13 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPopupMenu;
 
 public class PopupListener extends MouseAdapter {
-  final JPopupMenu menu;
-  Point p;
+  private final JPopupMenu menu;
+  private Point p;
   
   public PopupListener(JPopupMenu popupMenu) {
     this.menu = popupMenu;
   }
-
+  
   public void mousePressed(MouseEvent e) {
     maybeShowPopup(e);
   }
@@ -26,7 +26,7 @@ public class PopupListener extends MouseAdapter {
     return this.p;
   }
   
-  private void maybeShowPopup(MouseEvent e) {
+  protected void maybeShowPopup(MouseEvent e) {
     p = e.getPoint();
     if (e.isPopupTrigger()) {
       this.menu.show(e.getComponent(), e.getX(), e.getY());

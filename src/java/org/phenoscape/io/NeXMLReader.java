@@ -12,6 +12,7 @@ import org.nexml.x10.AbstractBlock;
 import org.nexml.x10.AbstractChar;
 import org.nexml.x10.AbstractState;
 import org.nexml.x10.AbstractStates;
+import org.nexml.x10.Dict;
 import org.nexml.x10.NexmlDocument;
 import org.nexml.x10.StandardCells;
 import org.nexml.x10.StandardChar;
@@ -21,6 +22,10 @@ import org.nexml.x10.Taxa;
 import org.phenoscape.model.Character;
 import org.phenoscape.model.State;
 import org.phenoscape.model.Taxon;
+import org.w3c.dom.CharacterData;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class NeXMLReader {
   
@@ -28,6 +33,9 @@ public class NeXMLReader {
   private final List<Taxon> taxa = new ArrayList<Taxon>();
   private final NexmlDocument xmlDoc;
   private String charactersBlockID = UUID.randomUUID().toString();
+  private String curatorsText;
+  private String publicationText;
+  private String pubNotesText; 
 
   public NeXMLReader(File aFile) throws XmlException, IOException {
     this.xmlDoc = NexmlDocument.Factory.parse(aFile);
@@ -54,8 +62,22 @@ public class NeXMLReader {
   public List<Taxon> getTaxa() {
     return this.taxa;
   }
+
+  public String getCuratorsText() {
+    return this.curatorsText;
+  }
+
+  public String getPublicationText() {
+    return this.publicationText;
+  }
+
+  public String getPubNotesText() {
+    return this.pubNotesText;
+  }
   
   private void parseNeXML() {
+    final Dict metadata = this.findMetadataDict();
+    if (metadata != null) { this.parseMetadata(metadata); }
     for (AbstractBlock block : this.xmlDoc.getNexml().getCharactersArray()) {
       if (block instanceof StandardCells) {
         this.charactersBlockID = block.getId();
@@ -100,6 +122,28 @@ public class NeXMLReader {
       newTaxon.setPublicationName(xmlTaxon.getLabel());
       this.taxa.add(newTaxon);
     }
+  }
+  
+  private void parseMetadata(Dict metadataDict) {
+    final Element any = NeXMLUtil.getFirstChildWithTagName(((Element)(metadataDict.getDomNode())), "any");
+    if (any != null) {
+      final Element curators = NeXMLUtil.getFirstChildWithTagName(any, "curators");
+      this.curatorsText = curators != null ? NeXMLUtil.getTextContent(curators) : null;
+      final Element publication = NeXMLUtil.getFirstChildWithTagName(any, "publication");
+      this.publicationText = publication != null ? NeXMLUtil.getTextContent(publication) : null;
+      final Element pubNotes = NeXMLUtil.getFirstChildWithTagName(any, "publicationNotes");
+      this.pubNotesText = pubNotes != null ? NeXMLUtil.getTextContent(pubNotes) : null;
+    }
+  }
+  
+  private Dict findMetadataDict() {
+    for (Dict dict : this.xmlDoc.getNexml().getDictArray()) {
+      final String[] keys = dict.getKeyArray();
+      if ((keys.length > 0) && (keys[0].equals("phenex-metadata"))) {
+        return dict;
+      }
+    }
+    return null;
   }
   
 }

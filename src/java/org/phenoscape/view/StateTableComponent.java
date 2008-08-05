@@ -65,6 +65,7 @@ public class StateTableComponent extends PhenoscapeGUIComponent {
     this.add(new JScrollPane(statesTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);
     this.getController().getCharactersSelectionModel().addListSelectionListener(new CharacterSelectionListener());
+    this.getController().getCurrentStatesSelectionModel().addListSelectionListener(new StateSelectionListener());
   }
   
   private void addState() {
@@ -102,7 +103,7 @@ public class StateTableComponent extends PhenoscapeGUIComponent {
     }
   }
   
-  private void updatePanelTitle() {
+  private void characterSelectionDidChange() {
     final String unselectedTitle = "States";
     final String selectedPrefix = "States for Character: ";
     final List<Character> characters = this.getController().getCharactersSelectionModel().getSelected();
@@ -110,7 +111,24 @@ public class StateTableComponent extends PhenoscapeGUIComponent {
       this.updatePanelTitle(unselectedTitle);
     } else {
       this.updatePanelTitle(selectedPrefix + characters.get(0));
+      this.selectAStateIfPossible();
     }
+    this.updateButtonStates();
+  }
+  
+  private void stateSelectionDidChange() {
+    this.updateButtonStates();
+  }
+  
+  private void selectAStateIfPossible() {
+    if ((this.getSelectedState() == null) && (this.getController().getStatesForCurrentCharacterSelection().size() > 0)) {
+      this.getController().getCurrentStatesSelectionModel().setSelectionInterval(0, 0);
+    }
+  }
+  
+  private void updateButtonStates() {
+    this.addStateButton.setEnabled(this.getSelectedCharacter() != null);
+    this.deleteStateButton.setEnabled(this.getSelectedState() != null);
   }
   
   private JToolBar createToolBar() {
@@ -192,11 +210,23 @@ public class StateTableComponent extends PhenoscapeGUIComponent {
   private class CharacterSelectionListener implements ListSelectionListener {
     
     public CharacterSelectionListener() {
-      updatePanelTitle();
+      characterSelectionDidChange();
     }
 
     public void valueChanged(ListSelectionEvent e) {
-      updatePanelTitle();      
+      characterSelectionDidChange();      
+    }
+    
+  }
+  
+ private class StateSelectionListener implements ListSelectionListener {
+    
+    public StateSelectionListener() {
+      stateSelectionDidChange();
+    }
+
+    public void valueChanged(ListSelectionEvent e) {
+      stateSelectionDidChange();      
     }
     
   }

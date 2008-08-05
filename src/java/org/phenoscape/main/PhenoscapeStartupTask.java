@@ -62,8 +62,7 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
   
   @Override
   protected void configureLogging() {
-    //TODO configure logging properly
-    // actually just need to set desired level in configuration file
+    //TODO should the desired level be set in the configuration file?
     final Logger rl = LogManager.getRootLogger();
     rl.setLevel(Level.DEBUG);
   }

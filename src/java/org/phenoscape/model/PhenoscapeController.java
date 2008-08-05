@@ -2,6 +2,7 @@ package org.phenoscape.model;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,6 +14,7 @@ import org.bbop.framework.GUIManager;
 import org.nexml.x10.NexmlDocument;
 import org.phenoscape.app.DocumentController;
 import org.phenoscape.io.NeXMLReader;
+import org.phenoscape.swing.ListSelectionMaintainer;
 
 import phenote.gui.selection.SelectionManager;
 import ca.odell.glazedlists.CollectionList;
@@ -34,12 +36,15 @@ public class PhenoscapeController extends DocumentController {
   private String charactersBlockID = UUID.randomUUID().toString();
   private NexmlDocument xmlDoc;
   private String appName;
+  private final List<NewDataListener> newDataListeners = new ArrayList<NewDataListener>();
   
   public PhenoscapeController() {
     super();
     this.charactersSelectionModel = new EventSelectionModel<Character>(this.dataSet.getCharacters());
+    new ListSelectionMaintainer<Character>(this.dataSet.getCharacters(), this.charactersSelectionModel);
     this.charactersSelectionModel.setSelectionMode(EventSelectionModel.SINGLE_SELECTION);
     this.taxaSelectionModel = new EventSelectionModel<Taxon>(this.dataSet.getTaxa());
+    new ListSelectionMaintainer<Taxon>(this.dataSet.getTaxa(), this.taxaSelectionModel);
     this.taxaSelectionModel.setSelectionMode(EventSelectionModel.SINGLE_SELECTION);
     this.currentSpecimens = new CollectionList<Taxon, Specimen>(this.taxaSelectionModel.getSelected(),
         new CollectionList.Model<Taxon, Specimen>(){
@@ -49,6 +54,7 @@ public class PhenoscapeController extends DocumentController {
     } 
     );
     this.currentSpecimensSelectionModel = new EventSelectionModel<Specimen>(this.currentSpecimens);
+    new ListSelectionMaintainer<Specimen>(this.currentSpecimens, this.currentSpecimensSelectionModel);
     this.currentStates = new CollectionList<Character, State>(this.charactersSelectionModel.getSelected(),
         new CollectionList.Model<Character, State>() {
       public List<State> getChildren(Character parent) {
@@ -57,6 +63,7 @@ public class PhenoscapeController extends DocumentController {
     }
     );
     this.currentStatesSelectionModel = new EventSelectionModel<State>(this.currentStates);
+    new ListSelectionMaintainer<State>(this.currentStates, this.currentStatesSelectionModel);
     this.currentStatesSelectionModel.setSelectionMode(EventSelectionModel.SINGLE_SELECTION);
     this.currentPhenotypes = new CollectionList<State, Phenotype>(this.currentStatesSelectionModel.getSelected(),
         new CollectionList.Model<State, Phenotype>() {
@@ -66,6 +73,7 @@ public class PhenoscapeController extends DocumentController {
     }
     );
     this.currentPhenotypesSelectionModel = new EventSelectionModel<Phenotype>(this.currentPhenotypes);
+    new ListSelectionMaintainer<Phenotype>(this.currentPhenotypes, this.currentPhenotypesSelectionModel);
     this.currentPhenotypesSelectionModel.setSelectionMode(EventSelectionModel.MULTIPLE_INTERVAL_SELECTION);
   }
   
@@ -120,6 +128,11 @@ public class PhenoscapeController extends DocumentController {
       this.dataSet.getCharacters().addAll(reader.getCharacters());
       this.getDataSet().getTaxa().clear(); //TODO this is not well encapsulated
       this.getDataSet().getTaxa().addAll(reader.getTaxa());
+      this.getDataSet().setCurators(reader.getCuratorsText());
+      this.getDataSet().setPublication(reader.getPublicationText());
+      this.getDataSet().setPublicationNotes(reader.getPubNotesText());
+      
+      this.fireDataChanged();
       return true;
     } catch (XmlException e) {
       log().error("Unable to parse XML", e);
@@ -149,6 +162,20 @@ public class PhenoscapeController extends DocumentController {
 
   public SelectionManager getPhenoteSelectionManager() {
     return SelectionManager.inst();
+  }
+  
+  public void addNewDataListener(NewDataListener listener) {
+    this.newDataListeners.add(listener);
+  }
+  
+  public void removeNewDataListener(NewDataListener listener) {
+    this.newDataListeners.remove(listener);
+  }
+  
+  private void fireDataChanged() {
+    for (NewDataListener listener : this.newDataListeners) {
+      listener.reloadData();
+    }
   }
   
   private Logger log() {

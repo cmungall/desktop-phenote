@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import org.apache.log4j.Logger;
 import org.phenoscape.model.Character;
@@ -61,6 +63,7 @@ public class CharacterTableComponent extends PhenoscapeGUIComponent {
     sortChooser.addSortActionListener(new SortDisabler());
     this.add(new JScrollPane(charactersTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);
+    this.getController().getCharactersSelectionModel().addListSelectionListener(new CharacterSelectionListener());
   }
 
   private void addCharacter() {
@@ -81,6 +84,10 @@ public class CharacterTableComponent extends PhenoscapeGUIComponent {
     } else {
       return null;
     }
+  }
+  
+  private void updateButtonStates() {
+    this.deleteCharacterButton.setEnabled(this.getSelectedCharacter() != null);
   }
   
   private JToolBar createToolBar() {
@@ -154,6 +161,18 @@ public class CharacterTableComponent extends PhenoscapeGUIComponent {
       }
     }
 
+  }
+  
+ private class CharacterSelectionListener implements ListSelectionListener {
+    
+    public CharacterSelectionListener() {
+      updateButtonStates();
+    }
+
+    public void valueChanged(ListSelectionEvent e) {
+      updateButtonStates();      
+    }
+    
   }
 
   private Logger log() {

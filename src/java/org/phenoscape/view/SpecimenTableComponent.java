@@ -90,7 +90,7 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
     }
   }
   
-  private void updatePanelTitle() {
+  private void taxonSelectionDidChange() {
     final String unselectedTitle = "Specimens";
     final String selectedPrefix = "Specimens for Taxon: ";
     final List<Taxon> taxa = this.getController().getTaxaSelectionModel().getSelected();
@@ -99,7 +99,24 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
     } else {
       final Taxon taxon = taxa.get(0);
       this.updatePanelTitle(selectedPrefix + taxon);
+      this.selectASpecimenIfPossible();
     }
+    this.updateButtonStates();
+  }
+  
+  private void specimenSelectionDidChange() {
+    this.updateButtonStates();
+  }
+  
+  private void selectASpecimenIfPossible() {
+    if ((this.getSelectedSpecimen() == null) && (this.getController().getSpecimensForCurrentTaxonSelection().size() > 0)) {
+      this.getController().getCurrentSpecimensSelectionModel().setSelectionInterval(0, 0);
+    }
+  }
+  
+  private void updateButtonStates() {
+    this.addSpecimenButton.setEnabled(this.getSelectedTaxon() != null);
+    this.deleteSpecimenButton.setEnabled(this.getSelectedSpecimen() != null);
   }
   
   private void initializeInterface() {
@@ -117,6 +134,7 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
     this.add(new JScrollPane(specimensTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);
     this.getController().getTaxaSelectionModel().addListSelectionListener(new TaxonSelectionListener());
+    this.getController().getCurrentSpecimensSelectionModel().addListSelectionListener(new SpecimenSelectionListener());
   }
   
   private JToolBar createToolBar() {
@@ -199,11 +217,23 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
   private class TaxonSelectionListener implements ListSelectionListener {
     
     public TaxonSelectionListener() {
-      updatePanelTitle();
+      taxonSelectionDidChange();
     }
 
     public void valueChanged(ListSelectionEvent e) {
-      updatePanelTitle();      
+      taxonSelectionDidChange();      
+    }
+    
+  }
+  
+ private class SpecimenSelectionListener implements ListSelectionListener {
+    
+    public SpecimenSelectionListener() {
+      specimenSelectionDidChange();
+    }
+
+    public void valueChanged(ListSelectionEvent e) {
+      specimenSelectionDidChange();      
     }
     
   }

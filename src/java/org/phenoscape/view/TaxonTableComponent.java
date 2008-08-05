@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOClass;
@@ -70,6 +72,10 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
       return null;
     }
   }
+  
+  private void updateButtonStates() {
+    this.deleteTaxonButton.setEnabled(this.getSelectedTaxon() != null);
+  }
 
   private void initializeInterface() {
     this.setLayout(new BorderLayout());
@@ -85,6 +91,7 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
     sortChooser.addSortActionListener(new SortDisabler());
     this.add(new JScrollPane(taxaTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);
+    this.getController().getTaxaSelectionModel().addListSelectionListener(new TaxonSelectionListener());
   }
   
   private JToolBar createToolBar() {
@@ -159,6 +166,18 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
       case 1: return Strings.getNaturalComparator();
       default: return null;
       }
+    }
+    
+  }
+  
+  private class TaxonSelectionListener implements ListSelectionListener {
+    
+    public TaxonSelectionListener() {
+      updateButtonStates();
+    }
+
+    public void valueChanged(ListSelectionEvent e) {
+      updateButtonStates();
     }
     
   }

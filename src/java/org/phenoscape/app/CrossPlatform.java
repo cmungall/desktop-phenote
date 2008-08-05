@@ -39,7 +39,11 @@ public class CrossPlatform {
     return !getCurrentPlatform().equals(Platform.MAC);
   }
   
-  public static void titleWindowForFile(JFrame window, File file, String appName) {
+  /**
+   * Titles this window appropriately to represent the given file, or as untitled 
+   * if the file is null.  Also adds a proxy document icon on supported platforms (Mac OS X).
+   */
+  public static void setTitleOnWindowForFile(JFrame window, File file, String appName) {
     final String docName = file != null ? file.getName() : "Untitled";
     final String windowTitle;
     if (CrossPlatform.shouldPutAppNameInWindowTitle()) {
@@ -49,17 +53,6 @@ public class CrossPlatform {
     }
     window.setTitle(windowTitle);
     window.getRootPane().putClientProperty("Window.documentFile", file);
-  }
-  
-  public static String getDocumentWindowTitle(String docName, String appName) {
-    final String docTitle = docName != null ? docName : "Untitled";
-    final String windowTitle;
-    if (CrossPlatform.shouldPutAppNameInWindowTitle()) {
-      windowTitle = docTitle + " - " + appName;
-    } else {
-      windowTitle = docTitle;
-    }
-    return windowTitle;
   }
   
   /**

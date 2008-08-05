@@ -9,6 +9,10 @@ import org.nexml.x10.NexmlDocument;
 import org.nexml.x10.StandardCells;
 import org.nexml.x10.StandardFormat;
 import org.nexml.x10.Taxa;
+import org.w3c.dom.CharacterData;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class NeXMLUtil {
   
@@ -44,6 +48,27 @@ public class NeXMLUtil {
     final AbstractStates newStates = format.addNewStates();
     newStates.setId(id);
     return newStates;
+  }
+  
+  public static Element getFirstChildWithTagName(Element parent, String tagName) {
+    final NodeList elements = parent.getElementsByTagName(tagName);
+    return (elements.getLength() > 0) ? (Element)(elements.item(0)) : null;
+  }
+  
+  public static String getTextContent(Node node) {
+    // this method is useful when DOM Level 3 "getTextContent" is not implemented
+    if (node.getNodeType() == Node.TEXT_NODE) { return ((CharacterData)node).getData(); }
+    final StringBuffer pieces = new StringBuffer();
+    final NodeList children = node.getChildNodes();
+    for (int i = 0; i < children.getLength(); i++) {
+      final Node child = children.item(i);
+      if (child.getNodeType() == Node.TEXT_NODE) {
+        pieces.append(((CharacterData)child).getData());
+      } else {
+        pieces.append(getTextContent(child));
+      }
+    }
+    return pieces.toString();
   }
 
 }

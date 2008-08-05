@@ -8,6 +8,8 @@ public class DataSet {
   private final EventList<Character> characters = new BasicEventList<Character>();
   private final EventList<Taxon> taxa = new BasicEventList<Taxon>();
   private String publication;
+  private String publicationNotes;
+  private String curators;
   
   public Character newCharacter() {
     final Character newCharacter = new Character();
@@ -51,6 +53,22 @@ public class DataSet {
   
   public void setPublication(String aPublication) {
     this.publication = aPublication;
+  }
+
+  public String getPublicationNotes() {
+    return this.publicationNotes;
+  }
+
+  public void setPublicationNotes(String publicationNotes) {
+    this.publicationNotes = publicationNotes;
+  }
+
+  public String getCurators() {
+    return this.curators;
+  }
+
+  public void setCurators(String curators) {
+    this.curators = curators;
   }
 
 }

@@ -5,8 +5,13 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import org.nexml.x10.AbstractBlock;
+import org.nexml.x10.AbstractChar;
+import org.nexml.x10.AbstractState;
+import org.nexml.x10.AbstractStates;
 import org.nexml.x10.NexmlDocument;
 import org.phenoscape.model.Character;
 import org.phenoscape.model.Taxon;
@@ -49,7 +54,12 @@ public class NeXMLWriter {
   
   private NexmlDocument constructXMLDoc() {
     final NexmlDocument newDoc = (NexmlDocument)(xmlDoc.copy());
-    
+    final AbstractBlock charBlock = NeXMLUtil.findOrCreateCharactersBlock(newDoc, this.charactersBlockID);
+    final List<AbstractChar> existingChars = new ArrayList<AbstractChar>(Arrays.asList(charBlock.getFormat().getCharArray()));
+    final List<AbstractStates> existingStatesLists = new ArrayList<AbstractStates>(Arrays.asList(charBlock.getFormat().getStatesArray()));
+    for (Character character : this.characters) {
+      //charBlock.getFormat().setc
+    }
     return newDoc;
   }
   

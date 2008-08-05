@@ -70,7 +70,7 @@ public abstract class DocumentController {
   private void setWindowTitle(File aFile) {
     final JFrame window = this.getWindow();
     if (window != null) {
-      CrossPlatform.titleWindowForFile(window, aFile, this.getAppName());
+      CrossPlatform.setTitleOnWindowForFile(window, aFile, this.getAppName());
     }
   }
   

@@ -1118,6 +1118,11 @@ public final class AutoCompleteSupport<E> {
         public void setValidItemClass(Class<?> clazz) {
           this.validItemClass = clazz;
         }
+        
+        public Class<?> getValidItemClass() {
+          return this.validItemClass;
+        }
+        
     }
 
     /**
@@ -1266,7 +1271,10 @@ public final class AutoCompleteSupport<E> {
 
                 return;
             }
-
+            // this fixes the post-comp problem but not the core problem of setting an item not in the list
+            if ((selectedItemBeforeEdit != null) && (comboBoxModel.getValidItemClass().isInstance(selectedItemBeforeEdit))) {
+              return;
+            }
             // reset the selection since we couldn't find the prefix in the model
             // (this has the side-effect of scrolling the popup to the top)
             final boolean silently = isTableCellEditor || selectedItemBeforeEdit == null;
