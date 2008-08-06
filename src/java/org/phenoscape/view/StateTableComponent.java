@@ -70,11 +70,7 @@ public class StateTableComponent extends PhenoscapeGUIComponent {
   
   private void addState() {
     final Character character = this.getSelectedCharacter();
-    if (character != null) {
-      final State state = character.newState();
-      final int index = this.getController().getStatesForCurrentCharacterSelection().indexOf(state);
-      this.getController().getCurrentStatesSelectionModel().setSelectionInterval(index, index);
-    }
+    if (character != null) { character.newState(); }
   }
   
   private void deleteSelectedState() {
@@ -111,19 +107,12 @@ public class StateTableComponent extends PhenoscapeGUIComponent {
       this.updatePanelTitle(unselectedTitle);
     } else {
       this.updatePanelTitle(selectedPrefix + characters.get(0));
-      this.selectAStateIfPossible();
     }
     this.updateButtonStates();
   }
   
   private void stateSelectionDidChange() {
     this.updateButtonStates();
-  }
-  
-  private void selectAStateIfPossible() {
-    if ((this.getSelectedState() == null) && (this.getController().getStatesForCurrentCharacterSelection().size() > 0)) {
-      this.getController().getCurrentStatesSelectionModel().setSelectionInterval(0, 0);
-    }
   }
   
   private void updateButtonStates() {

@@ -13,9 +13,11 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import org.apache.log4j.Logger;
 import org.phenoscape.model.NewDataListener;
 import org.phenoscape.model.PhenoscapeController;
 import org.phenoscape.swing.PlaceholderText;
+import org.phenoscape.swing.TabActionTextField;
 
 public class DataSetComponent extends PhenoscapeGUIComponent {
   
@@ -36,14 +38,15 @@ public class DataSetComponent extends PhenoscapeGUIComponent {
 
   private void initializeInterface() {
     this.setLayout(new GridBagLayout());
-    this.curatorsField = new JTextField();
+    this.curatorsField = new TabActionTextField();
     new PlaceholderText(this.curatorsField, "None");
     this.curatorsField.setAction(new AbstractAction() {
       public void actionPerformed(ActionEvent e) {
+        log().debug("Action performed");
         getController().getDataSet().setCurators(curatorsField.getText());
       }
     });
-    this.publicationField = new JTextField();
+    this.publicationField = new TabActionTextField();
     new PlaceholderText(this.publicationField, "None");
     this.publicationField.setAction(new AbstractAction() {
       public void actionPerformed(ActionEvent e) {
@@ -136,6 +139,10 @@ public class DataSetComponent extends PhenoscapeGUIComponent {
       updateInterface();      
     }
     
+  }
+  
+  private Logger log() {
+    return Logger.getLogger(this.getClass());
   }
   
 }

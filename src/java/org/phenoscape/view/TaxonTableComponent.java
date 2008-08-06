@@ -54,9 +54,7 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
   }
   
   private void addTaxon() {
-    final Taxon taxon = this.getController().getDataSet().newTaxon();
-    final int index = this.getController().getDataSet().getTaxa().indexOf(taxon);
-    this.getController().getTaxaSelectionModel().setSelectionInterval(index, index);
+    this.getController().getDataSet().newTaxon();
   }
   
   private void deleteSelectedTaxon() {

@@ -3,13 +3,16 @@ package org.phenoscape.io;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.nexml.x10.AbstractBlock;
 import org.nexml.x10.AbstractStates;
+import org.nexml.x10.Dict;
 import org.nexml.x10.NexmlDocument;
 import org.nexml.x10.StandardCells;
 import org.nexml.x10.StandardFormat;
 import org.nexml.x10.Taxa;
 import org.w3c.dom.CharacterData;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -55,6 +58,26 @@ public class NeXMLUtil {
     return (elements.getLength() > 0) ? (Element)(elements.item(0)) : null;
   }
   
+  public static Dict findOrCreateMetadataDict(NexmlDocument doc) {
+    for (Dict dict : doc.getNexml().getDictArray()) {
+      final String[] keys = dict.getKeyArray();
+      if ((keys.length > 0) && (keys[0].equals("phenex-metadata"))) {
+        log().debug("Found metadata");
+        return dict;
+      }
+    }
+    // no metadata dict was found, so create
+    log().debug("Creating new metadata");
+    final Dict newDict = doc.getNexml().addNewDict();
+    newDict.setKeyArray(new String[] {"phenex-metadata"});
+    final Element any = (Element)(newDict.addNewAny().getDomNode());
+    final Document dom = any.getOwnerDocument();
+    any.appendChild(dom.createElement("curators"));
+    any.appendChild(dom.createElement("publication"));
+    any.appendChild(dom.createElement("publicationNotes"));
+    return newDict;
+  }
+  
   public static String getTextContent(Node node) {
     // this method is useful when DOM Level 3 "getTextContent" is not implemented
     if (node.getNodeType() == Node.TEXT_NODE) { return ((CharacterData)node).getData(); }
@@ -70,5 +93,18 @@ public class NeXMLUtil {
     }
     return pieces.toString();
   }
-
+  
+  public static void setTextContent(Element node, String text) {
+    // this method is useful when DOM Level 3 "setTextContent" is not implemented
+    final NodeList children = node.getChildNodes();
+    for (int i = (children.getLength() - 1); i > -1; i--) {
+      node.removeChild(children.item(i));
+    }
+    node.appendChild(node.getOwnerDocument().createTextNode(text));
+  }
+  
+  private static Logger log() {
+    return Logger.getLogger(NeXMLUtil.class);
+  }
+  
 }

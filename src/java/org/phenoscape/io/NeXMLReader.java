@@ -76,8 +76,8 @@ public class NeXMLReader {
   }
   
   private void parseNeXML() {
-    final Dict metadata = this.findMetadataDict();
-    if (metadata != null) { this.parseMetadata(metadata); }
+    final Dict metadata = NeXMLUtil.findOrCreateMetadataDict(this.xmlDoc);
+    this.parseMetadata(metadata);
     for (AbstractBlock block : this.xmlDoc.getNexml().getCharactersArray()) {
       if (block instanceof StandardCells) {
         this.charactersBlockID = block.getId();
@@ -136,14 +136,5 @@ public class NeXMLReader {
     }
   }
   
-  private Dict findMetadataDict() {
-    for (Dict dict : this.xmlDoc.getNexml().getDictArray()) {
-      final String[] keys = dict.getKeyArray();
-      if ((keys.length > 0) && (keys[0].equals("phenex-metadata"))) {
-        return dict;
-      }
-    }
-    return null;
-  }
   
 }

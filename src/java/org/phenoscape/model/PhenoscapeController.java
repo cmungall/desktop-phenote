@@ -14,6 +14,7 @@ import org.bbop.framework.GUIManager;
 import org.nexml.x10.NexmlDocument;
 import org.phenoscape.app.DocumentController;
 import org.phenoscape.io.NeXMLReader;
+import org.phenoscape.io.NeXMLWriter;
 import org.phenoscape.swing.ListSelectionMaintainer;
 
 import phenote.gui.selection.SelectionManager;
@@ -144,7 +145,15 @@ public class PhenoscapeController extends DocumentController {
   
   @Override
   public boolean writeData(File aFile) {
-    return false;
+    final NeXMLWriter writer = new NeXMLWriter(this.charactersBlockID, this.xmlDoc);
+    writer.setDataSet(this.dataSet);
+    try {
+      writer.write(aFile);
+      return true;
+    } catch (IOException e) {
+      log().error("Unable to write NeXML file", e);
+      return false;
+    }
   }
   
   public JFrame getWindow() {

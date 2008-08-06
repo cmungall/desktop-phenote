@@ -57,11 +57,7 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
   
   private void addSpecimen() {
     final Taxon taxon = this.getSelectedTaxon();
-    if (taxon != null) {
-      final Specimen specimen = taxon.newSpecimen();
-      final int index = this.getController().getSpecimensForCurrentTaxonSelection().indexOf(specimen);
-      this.getController().getCurrentSpecimensSelectionModel().setSelectionInterval(index, index);
-    }
+    if (taxon != null) { taxon.newSpecimen(); }
   }
   
   private void deleteSelectedSpecimen() {
@@ -99,19 +95,12 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
     } else {
       final Taxon taxon = taxa.get(0);
       this.updatePanelTitle(selectedPrefix + taxon);
-      this.selectASpecimenIfPossible();
     }
     this.updateButtonStates();
   }
   
   private void specimenSelectionDidChange() {
     this.updateButtonStates();
-  }
-  
-  private void selectASpecimenIfPossible() {
-    if ((this.getSelectedSpecimen() == null) && (this.getController().getSpecimensForCurrentTaxonSelection().size() > 0)) {
-      this.getController().getCurrentSpecimensSelectionModel().setSelectionInterval(0, 0);
-    }
   }
   
   private void updateButtonStates() {

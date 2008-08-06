@@ -90,11 +90,7 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
   
   private void addPhenotype() {
     final State state = this.getSelectedState();
-    if (state != null) {
-      final Phenotype phenotype = state.newPhenotype();
-      final int index = this.getController().getPhenotypesForCurrentStateSelection().indexOf(phenotype);
-      this.getController().getCurrentPhenotypesSelectionModel().setSelectionInterval(index, index);
-    }
+    if (state != null) { state.newPhenotype(); }
   }
   
   private void deleteSelectedPhenotype() {
@@ -131,19 +127,12 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
       this.updatePanelTitle(unselectedTitle);
     } else {
       this.updatePanelTitle(selectedPrefix + states.get(0));
-      this.selectAPhenotypeIfPossible();
     }
     this.updateButtonStates();
   }
   
   private void phenotypeSelectionDidChange() {
     this.updateButtonStates();
-  }
-  
-  private void selectAPhenotypeIfPossible() {
-    if ((this.getSelectedPhenotype() == null) && (this.getController().getPhenotypesForCurrentStateSelection().size() > 0)) {
-      this.getController().getCurrentPhenotypesSelectionModel().setSelectionInterval(0, 0);
-    }
   }
   
   private void updateButtonStates() {

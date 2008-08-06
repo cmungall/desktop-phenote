@@ -67,9 +67,7 @@ public class CharacterTableComponent extends PhenoscapeGUIComponent {
   }
 
   private void addCharacter() {
-    final Character character = this.getController().getDataSet().newCharacter();
-    final int index = this.getController().getDataSet().getCharacters().indexOf(character);
-    this.getController().getCharactersSelectionModel().setSelectionInterval(index, index);
+    this.getController().getDataSet().newCharacter();
   }
   
   private void deleteSelectedCharacter() {
