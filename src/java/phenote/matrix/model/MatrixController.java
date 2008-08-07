@@ -1,6 +1,8 @@
 package phenote.matrix.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.obo.datamodel.OBOClass;
 
@@ -18,6 +20,7 @@ public class MatrixController {
   SortedList<CharacterI> sortedTaxa, sortedQuality;
   String columnString, rowString;
   CharacterComparator columnCompare, rowCompare;
+  Set<MatrixColumn> columnSet;
   ArrayList<MatrixColumn> columns; 
   ArrayList<MatrixRow> rows;
   
@@ -25,6 +28,7 @@ public class MatrixController {
     clm = CharacterListManager.main();
     columns = new ArrayList<MatrixColumn>();
     rows = new ArrayList<MatrixRow>();
+    columnSet = new HashSet<MatrixColumn>();
   }
   
   public void buildMatrix () throws CharFieldException {
@@ -69,17 +73,10 @@ public class MatrixController {
       }
       PhenotypeMatrixColumn newColumn = new PhenotypeMatrixColumn(currEntity, currQuality, currEntity2);
       System.out.println("Created a new candidate column");
-      // Now that we have the new column formed, check to see if this column is already present in the list of columns
-      boolean newColNeeded = true;
-      for (MatrixColumn mc : columns) {
-        if (newColumn.hashCode() == mc.hashCode())
-          newColNeeded = false;
-      }
-      // If the column didn't show up, then newColNeeded will still be true, so we need to added to our list of columns
-      if (newColNeeded) {
-        System.out.println("Created a new ACTUAL column");
-        columns.add(newColumn);
-      }
+      columnSet.add(newColumn);
+    }
+    for (MatrixColumn mc : columnSet) {
+      columns.add(mc);
     }
   }
   

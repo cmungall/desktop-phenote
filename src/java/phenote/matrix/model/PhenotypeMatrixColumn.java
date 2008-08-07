@@ -80,13 +80,14 @@ public class PhenotypeMatrixColumn implements MatrixColumn {
   
   // New stuff!
   public int hashCode() {
-    if (quality != null)
-      return quality.hashCode();
-    else
-      return 0;
+    int entityHash, qualityHash, entity2Hash;
+    entityHash = entity != null ? entity.hashCode() : 0;
+    qualityHash = quality != null ? quality.hashCode() : 0;
+    entity2Hash = entity2 != null ? entity2.hashCode() : 0;
+    return entityHash ^ qualityHash ^ entity2Hash;
   }
   
-  public boolean isEqual(CharacterI ch) {
-     return this.hashCode() == OboUtil.getAttributeForValue(ch.getQuality()).hashCode();
+  public boolean isEqual(PhenotypeMatrixColumn pmc) {
+     return this.entity.equals(pmc.getEntity()) && this.quality.equals(pmc.getQuality()) && this.entity2.equals(pmc.getEntity2());
   }
 }
