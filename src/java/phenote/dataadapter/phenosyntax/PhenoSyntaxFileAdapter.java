@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.LineNumberReader;
 import java.io.PrintWriter;
 
+import org.apache.log4j.Logger;
+
 import phenote.dataadapter.AbstractFileAdapter;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
@@ -27,7 +29,6 @@ import phenote.datamodel.CharacterListI;
 public class PhenoSyntaxFileAdapter extends AbstractFileAdapter {
 
   private File previousFile;
-  //private File file;
   /** psx phenosyntax, syn syntax, tv tag-value, ptv phenotagvalue */
   private static String[] extensions = {"psx", "syn","tv","ptv","tagval"};
   private static String description = "PhenoSyntax [.psx, .syn]";
@@ -38,10 +39,10 @@ public class PhenoSyntaxFileAdapter extends AbstractFileAdapter {
   /** this should return CharacterList and caller should load CharListMan
       or CLM makes the call itself? */
   public void load() {
-
-    if (file == null)
-      file = getFileFromUserForOpen(previousFile);
-    if (file == null) return;
+    if (file == null) {
+      log().error("No file was specified");
+      return;
+    }
     previousFile = file;
     try {
       CharacterListI charList = new CharacterList();
@@ -53,14 +54,14 @@ public class PhenoSyntaxFileAdapter extends AbstractFileAdapter {
         CharacterI ch = synChar.getCharacter();
         charList.add(ch);
         } catch (PhenoSyntaxChar.SyntaxParseException e) {
-          System.out.println(e.getMessage()); // jut "" for whitespace line
+          log().error("Error parsing phenosyntax", e);
         }
       }
       CharacterListManager.inst().setCharacterList(this,charList);
       lnr.close();
     }
     catch (IOException e) {
-      System.out.println("PhenoSyntax read failure "+e);
+      log().error("PhenoSyntax read failure ", e);
     }
     file = null; // null it for next load/commit
   }
@@ -77,54 +78,38 @@ public class PhenoSyntaxFileAdapter extends AbstractFileAdapter {
         CharacterI ch = synChar.getCharacter();
         charList.add(ch);
         } catch (PhenoSyntaxChar.SyntaxParseException e) {
-          System.out.println(e.getMessage()); // jut "" for whitespace line
+          log().error("Error parsing phenosyntax", e);
         }
       }
       lnr.close();
     }
     catch (IOException e) {
-      System.out.println("PhenoSyntax read failure "+e);
+      log().error("PhenoSyntax read failure ", e);
     }
     return charList;
   }
 
-  /** returns null if user fails to pick a file */
- // private File getFileFromUser(File dir) {
- //   return PhenoXmlAdapter.getFileFromUser(dir); // perhaps a util class
- // }
-  
-  private File getFileFromUserForSave(File dir) {
-    return PhenoXmlAdapter.getFileFromUserForSave(dir);
-  }
-  
-  private File getFileFromUserForOpen(File dir) {
-    return PhenoXmlAdapter.getFileFromUserForOpen(dir);
-  }
-
   public void commit(CharacterListI charList) {
-    
-    if (file == null)
-      file = getFileFromUserForSave(previousFile);
-    if (file == null) return;
+    if (file == null) {
+      log().error("No file was specified");
+      return;
+    }
     previousFile = file;
 
     PrintWriter pw;
     try {
       pw = new PrintWriter(new BufferedWriter(new FileWriter(file)));
     } catch (IOException e) {
-      System.out.println("Failed to open file "+file);
+      log().error("Failed to open file ", e);
       return;
     }
 
-    System.out.println("Writing pheno syntax to file "+file);
+    log().info("Writing pheno syntax to file " + file);
 
     for (CharacterI ch : charList.getList()) {
-      //try {
-        String c = new PhenoSyntaxChar(ch).getPhenoSyntaxString();
-        System.out.println(c);
-        pw.println(c);
-        //}catch (PhenoSyntaxChar.BadCharException e) { No longer throws
-        //System.out.println(e.getMessage()+" Not writing out character"); }
+      String c = new PhenoSyntaxChar(ch).getPhenoSyntaxString();
+      log().debug(c);
+      pw.println(c);
     }
     pw.close();
     file = null;
@@ -133,6 +118,10 @@ public class PhenoSyntaxFileAdapter extends AbstractFileAdapter {
   public void commit(CharacterListI charList, File f) {
     file = f;
     commit(charList);
+  }
+  
+  private Logger log() {
+    return Logger.getLogger(this.getClass());
   }
   
 }

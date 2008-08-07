@@ -11,7 +11,6 @@ import java.io.PrintWriter;
 import org.apache.log4j.Logger;
 
 import phenote.dataadapter.AbstractFileAdapter;
-import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterList;
 import phenote.datamodel.CharacterListI;
@@ -121,51 +120,40 @@ public class DelimitedFileAdapter extends AbstractFileAdapter {
 //     return parsers;
 //   }
 
-  /** returns null if user fails to pick a file */
- // private File getFileFromUser(File dir) {
- //   return PhenoXmlAdapter.getFileFromUser(dir); // perhaps a util class
- // }
-  
-  private File getFileFromUserForSave(File dir) {
-    return PhenoXmlAdapter.getFileFromUserForSave(dir);
-  }
-
   public void commit(CharacterListI charList) {
-    if (file == null)
-      file = getFileFromUserForSave(previousFile);
-    if (file == null) return;
-    previousFile = file;
-
-    PrintWriter pw;
-    try {
-      pw = new PrintWriter(new BufferedWriter(new FileWriter(file)));
-    } catch (IOException e) {
-      System.out.println("Failed to open file "+file);
+    if (file == null) {
+      LOG.error("No file was specified");
       return;
     }
-
-    System.out.println("Writing tab-delimited output to file "+file);
-    //first write out header, then write out contents
-    String c = DelimitedChar.makeDelimitedHeaderString();
-    pw.println(c);   	
-
-    for (CharacterI ch : charList.getList()) {
-      try {
-        String c2 = new DelimitedChar(ch).getDelimitedString();
-        System.out.println(c2);
-        pw.println(c2);
-      }
-      catch (DelimitedChar.BadCharException e) {
-        System.out.println(e.getMessage()+" Not writing out character");
-      }
-    }
-    pw.close();
+    this.commit(charList, file);
+    previousFile = file;
     file = null;
   }
   
   public void commit(CharacterListI charList, File f) {
-    file = f;
-    commit(charList);
+    PrintWriter pw;
+    try {
+      pw = new PrintWriter(new BufferedWriter(new FileWriter(file)));
+    } catch (IOException e) {
+      LOG.error("Failed to open file "+ file, e);
+      return;
+    }
+    LOG.info("Writing tab-delimited output to file " + file);
+    //first write out header, then write out contents
+    String c = DelimitedChar.makeDelimitedHeaderString();
+    pw.println(c);    
+
+    for (CharacterI ch : charList.getList()) {
+      try {
+        String c2 = new DelimitedChar(ch).getDelimitedString();
+        LOG.info(c2);
+        pw.println(c2);
+      }
+      catch (DelimitedChar.BadCharException e) {
+        LOG.error("Not writing out character", e);
+      }
+    }
+    pw.close();
   }
   
   // im changing my mind - should just go to log and have appender from log

@@ -78,48 +78,35 @@ public class GOAssociationFileAdapter extends AbstractFileAdapter {
     return charList;
     
   }
-  
-
-
-  private File getFileFromUserForSave(File dir) {
-    return PhenoXmlAdapter.getFileFromUserForSave(dir);
-  }
-  
-  private File getFileFromUserForOpen(File dir) {
-    return PhenoXmlAdapter.getFileFromUserForOpen(dir);
-  }
 
   public void commit(CharacterListI charList) {
-    if (charList.isEmpty()) {
-      System.out.println("No Data to save"); // popup!
+    if (file == null) {
+      LOG.error("No file was specified");
       return;
     }
-
-    if (file == null)
-      file = getFileFromUserForSave(previousFile);
-    if (file == null) return;
+    this.commit(charList, file);
     previousFile = file;
-    
+    file = null;
+  }
+  
+  public void commit(CharacterListI charList, File f) {
+    if (charList.isEmpty()) {
+      LOG.warn("No Data to save"); // popup!
+      return;
+    }
     GOStyleAnnotationFileAdapter fa = new GOStyleAnnotationFileAdapter();
     OBOFileAdapter.OBOAdapterConfiguration cfg = new OBOFileAdapter.OBOAdapterConfiguration();
     cfg.setWritePath(file.getAbsolutePath());
     //cfg.setBasicSave(false);     
     cfg.setAllowDangling(true); 
     cfg.setSerializer("OBO_1_2");
-   	try {
-		fa.doOperation(OBOAdapter.WRITE_ONTOLOGY, cfg,
-				CharFieldManager.inst().getOboSession());
-	} catch (DataAdapterException e) {
-		// TODO : !!!
-		e.printStackTrace();
-	}
-
-
-  }
-  
-  public void commit(CharacterListI charList, File f) {
-    file = f;
-    commit(charList);
+    try {
+      fa.doOperation(OBOAdapter.WRITE_ONTOLOGY, cfg,
+          CharFieldManager.inst().getOboSession());
+    } catch (DataAdapterException e) {
+      // TODO : !!!
+      e.printStackTrace();
+    }
   }
   
   // im changing my mind - should just go to log and have appender from log

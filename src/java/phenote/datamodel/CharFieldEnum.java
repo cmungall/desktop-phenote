@@ -20,8 +20,8 @@ import phenote.config.xml.FieldDocument.Field.Type;
 public enum CharFieldEnum {
 
   PUB("Pub"), GENOTYPE("Genotype","GT"), ALLELE("Allele"),
-  GENETIC_CONTEXT("Genetic Context"),
-  ENTITY("Entity","E"), ENTITY2("Add'l Entity","E2"), QUALITY("Quality"),
+  GENETIC_CONTEXT("Genetic Context", "GC"),
+  ENTITY("Entity","E"), ENTITY2("Add'l Entity","E2"), QUALITY("Quality", "Q"),
   DATE_CREATED("Date Created","date_created",Type.DATE),
   ASSIGNED_BY("Assigned by"),
   EVIDENCE("Evidence"),

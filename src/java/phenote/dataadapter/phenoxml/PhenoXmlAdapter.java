@@ -2,11 +2,12 @@ package phenote.dataadapter.phenoxml;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import javax.swing.JFileChooser;
 
 import org.apache.log4j.Logger;
 import org.apache.xmlbeans.XmlException;
@@ -15,6 +16,7 @@ import org.bioontologies.obd.schema.pheno.PhenosetDocument;
 import org.bioontologies.obd.schema.pheno.BearerDocument.Bearer;
 import org.bioontologies.obd.schema.pheno.GenotypeDocument.Genotype;
 import org.bioontologies.obd.schema.pheno.ManifestInDocument.ManifestIn;
+import org.bioontologies.obd.schema.pheno.MeasurementDocument.Measurement;
 import org.bioontologies.obd.schema.pheno.PhenosetDocument.Phenoset;
 import org.bioontologies.obd.schema.pheno.PhenotypeCharacterDocument.PhenotypeCharacter;
 import org.bioontologies.obd.schema.pheno.PhenotypeDocument.Phenotype;
@@ -22,6 +24,7 @@ import org.bioontologies.obd.schema.pheno.PhenotypeManifestationDocument.Phenoty
 import org.bioontologies.obd.schema.pheno.ProvenanceDocument.Provenance;
 import org.bioontologies.obd.schema.pheno.QualifierDocument.Qualifier;
 import org.bioontologies.obd.schema.pheno.QualityDocument.Quality;
+import org.bioontologies.obd.schema.pheno.RelatedEntityDocument.RelatedEntity;
 import org.bioontologies.obd.schema.pheno.TyperefDocument.Typeref;
 import org.obo.datamodel.Link;
 import org.obo.datamodel.LinkedObject;
@@ -30,240 +33,181 @@ import org.obo.datamodel.OBOProperty;
 
 import phenote.dataadapter.AbstractFileAdapter;
 import phenote.dataadapter.CharacterListManager;
-import phenote.datamodel.CharFieldEnum;
-import phenote.datamodel.CharFieldException;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.CharacterIFactory;
 import phenote.datamodel.CharacterList;
 import phenote.datamodel.CharacterListI;
 import phenote.datamodel.OboUtil;
+import phenote.datamodel.PhenotypeCharacterWrapper;
 import phenote.datamodel.TermNotFoundException;
 
 public class PhenoXmlAdapter extends AbstractFileAdapter {
 
   private Set<String> genotypesAlreadyAdded = new HashSet<String>(); 
-  private File previousFile;
   private static String[] extensions = {"pxml", "xml"};
   private static final String description =  "PhenoXML [.pxml, .xml]";
 
   public PhenoXmlAdapter() { super(extensions,description); }
   
   public CharacterListI load(File f) {
-    // this method temporarily duplicates code from load(), which will soon be removed
-    CharacterListI charList = new CharacterList();  // we will return this empty one if we fail reading the xml
+    CharacterListI charList = new CharacterList(); // we will return this empty one if we fail reading the xml
     try {
       PhenosetDocument doc = PhenosetDocument.Factory.parse(f);
       charList = newCharacterListFromPhenosetDocument(doc);
     }
     catch (XmlException e) {
-      System.out.println("Failed to load file as phenoxml " + e);
+      log().error("Failed to load file as phenoxml ", e);
     }
     catch (IOException e) {
-      System.out.println("PhenoXml read failure " + e);
+      log().error("PhenoXml read failure ", e);
     }
     return charList;
   }
 
   public void load() {
-	  try {
-		  if (file == null) {
-			  file = getFileFromUserForOpen(previousFile);
-		  }
-		  if (file == null) return;
-		  previousFile = file;
-		  PhenosetDocument doc = PhenosetDocument.Factory.parse(file);
-		  CharacterListI charList = newCharacterListFromPhenosetDocument(doc);
-		  CharacterListManager.inst().setCharacterList(this,charList);
-	  }
-	  catch (XmlException e) {
-		  System.out.println("Failed to load file as phenoxml " + e);
-	  }
-	  catch (IOException e) {
-		  System.out.println("PhenoXml read failure " + e);
-	  }
-	  file = null; // null it for next load/commit
+    if (file == null) {
+      log().error("No file specified");
+      return;
+    }
+    CharacterListManager.inst().setCharacterList(this, this.load(file));
+    file = null; // null it for next load/commit
   }
   
   private CharacterListI newCharacterListFromPhenosetDocument(PhenosetDocument doc) {
-    Phenoset phenoset = doc.getPhenoset();
-    List<PhenotypeManifestation> phenotypeManifestations = phenoset.getPhenotypeManifestationList();
-    CharacterListI charList = new CharacterList();
-    for (PhenotypeManifestation aManifestation : phenotypeManifestations) {
-      CharacterI newCharacter = newCharacterFromPhenotypeManifestation(aManifestation);
-      charList.add(newCharacter); 
+    final CharacterListI charList = new CharacterList();
+    for (Phenotype aPhenotype : doc.getPhenoset().getPhenotypeList()) {
+      final List<CharacterI> newCharacters = this.createCharactersFromPhenotype(aPhenotype);
+      for (CharacterI character : newCharacters) { charList.add(character); }
+    }
+    for (PhenotypeManifestation aManifestation : doc.getPhenoset().getPhenotypeManifestationList()) {
+      final List<CharacterI> newCharacters = this.createCharactersFromPhenotypeManifestation(aManifestation);
+      for (CharacterI character : newCharacters) { charList.add(character); }
     }
     return charList;
   }
   
-  private CharacterI newCharacterFromPhenotypeManifestation(PhenotypeManifestation pm) {
-    CharacterI character = CharacterIFactory.makeChar();
-    ManifestIn mi = pm.getManifestIn();
-    if (mi != null) {
-      String genotype = mi.getGenotype();
-      if (genotype != null) {
-        character.setGenotype(genotype);
-      }
-      List<Typeref> typerefList = mi.getTyperefList();
-      if ((typerefList != null) && (typerefList.size() > 0)) {
+  private List<CharacterI> createCharactersFromPhenotypeManifestation(PhenotypeManifestation pm) {
+    final CharacterI template = CharacterIFactory.makeChar();
+    final PhenotypeCharacterWrapper phenoTemplate = new PhenotypeCharacterWrapper(template);
+    if ((pm.getManifestIn() != null) && (pm.getManifestIn().getGenotype() != null)) {
+      phenoTemplate.setGenotype(pm.getManifestIn().getGenotype());
+      if (!pm.getManifestIn().getTyperefList().isEmpty()) {
         // only load the first typeref
-        Typeref typeref = typerefList.get(0);
         try {
-          character.setGeneticContext(this.getTermForTyperef(typeref));
+          phenoTemplate.setGeneticContext(this.getTermForTyperef(pm.getManifestIn().getTyperefList().get(0)));
         }
         catch (TermNotFoundException e) {
           log().error("Genetic context term not found ", e);
         }
       }
     }
-    Phenotype phenotype = pm.getPhenotype();
-    PhenotypeCharacter phenotypeCharacter = null;
-    if (phenotype != null) {
-      List<PhenotypeCharacter> phenotypeCharacters = phenotype.getPhenotypeCharacterList();
-      if ((phenotypeCharacters != null) && (phenotypeCharacters.size() > 0)) {
-        // we only load the first character in the phenotype for now
-        phenotypeCharacter = phenotypeCharacters.get(0);
-      }
-    }   
-    try {
-      character.setEntity(this.getTermForTyperef(phenotypeCharacter.getBearer().getTyperef()));
-    } catch (TermNotFoundException e) {
-      System.out.println("Entity term not found " + e);
-    }
-    try {
-      List<Quality> qualityList = phenotypeCharacter.getQualityList();
-      if ((qualityList != null) && (qualityList.size() > 0)) {
-        // we only load the first quality for now
-        Quality quality = qualityList.get(0);
-        character.setQuality(this.getTermForTyperef(quality.getTyperef()));
-      }
-    } catch (TermNotFoundException e) {
-      System.out.println("Quality term not found " + e);
-    }
-    List<Provenance> provenanceList = pm.getProvenanceList();
-    if ((provenanceList != null) && (provenanceList.size() > 0)) {
+    if (!pm.getProvenanceList().isEmpty()) {
       // only load the first provenance for now
-      Provenance provenance = provenanceList.get(0);
-      String id = provenance.getId();
-      if (id != null) {
-        character.setPub(id);
+      if (pm.getProvenanceList().get(0).getId() != null) {
+        phenoTemplate.setPub(pm.getProvenanceList().get(0).getId());
       }
     }
-    return character;  
+    if (pm.getPhenotype() != null) {
+      final List<CharacterI> phenotypes = this.createCharactersFromPhenotype(pm.getPhenotype(), template);
+      if (!phenotypes.isEmpty()) return phenotypes;
+    }
+    return Collections.singletonList(template); // only if we didn't return any phenotypes for this genotype
+  }
+  
+  private List<CharacterI> createCharactersFromPhenotype(Phenotype phenotype) {
+    return this.createCharactersFromPhenotype(phenotype, null);
+  }
+  
+  private List<CharacterI> createCharactersFromPhenotype(Phenotype phenotype, CharacterI template) {
+    final List<CharacterI> characters = new ArrayList<CharacterI>();
+    for (PhenotypeCharacter phenotypeCharacter : phenotype.getPhenotypeCharacterList()) {
+      final CharacterI character = (template == null) ? CharacterIFactory.makeChar() : template.cloneCharacter();
+      final PhenotypeCharacterWrapper phenoCharacter = new PhenotypeCharacterWrapper(character);
+      try {
+        if ((phenotypeCharacter.getBearer() != null) && (phenotypeCharacter.getBearer().getTyperef() != null)) {
+          phenoCharacter.setEntity(this.getTermForTyperef(phenotypeCharacter.getBearer().getTyperef()));
+        }
+      } catch (TermNotFoundException e) {
+        log().error("Entity term not found ", e);
+      }
+      try {
+        if (!phenotypeCharacter.getQualityList().isEmpty()) {
+          // we only load the first quality for now
+          final Quality quality = phenotypeCharacter.getQualityList().get(0);
+          if (quality.getTyperef() != null) {
+            phenoCharacter.setQuality(this.getTermForTyperef(quality.getTyperef()));
+          }
+          if (quality.getCount() != null) {
+            phenoCharacter.setCount(quality.getCount().intValue());
+          }
+        }
+      } catch (TermNotFoundException e) {
+        log().error("Quality term not found ", e);
+      }
+      characters.add(character);
+    }
+    return characters;
   }
 
   public void commit(CharacterListI charList) {
-    if (file == null)
-      file = getFileFromUserForSave(previousFile);
-    if (file == null)
+    if (file == null) {
+      log().error("No file specified");
       return;
-    previousFile = file;
-
-    PhenosetDocument doc = PhenosetDocument.Factory.newInstance();
-    Phenoset phenoset = doc.addNewPhenoset();
-    
-    for (CharacterI chr : charList.getList()) {
-      // builds Phenoset from characters
-      addCharAndGenotypeToPhenoset(chr,phenoset);
     }
-
-    System.out.println("doc schme type "+doc.schemaType()+" name "+doc.schemaType().getName());
-
-    try {
-      doc.save(file,getXmlOptions());
-      System.out.println("Wrote file "+file);
-    }
-    catch (IOException e) {
-      System.out.println("Failed to save "+e);
-    }
+    this.commit(charList, file);
+    file = null;
   }
   
   public void commit(CharacterListI charList, File f) {
-    file = f;
-    commit(charList);
-  }
-
-  public static File getFileFromUserIsSave(File dir, boolean isSave) {
-    // todo - remember last accessed dir
-    JFileChooser fileChooser = new JFileChooser(dir);
-    
-    //String[] dataAdapterNames = {"PhenoSyntax", "PhenoXML"};
-    //JComboBox comboBox = new JComboBox(dataAdapterNames);
-    //fileChooser.setAccessory(comboBox);
-    //FileFilter phenoXMLFilter = new FileNameExtensionFilter("PhenoXML file", "pxml");
-    //FileFilter phenoSyntaxFilter = new FileNameExtensionFilter("PhenoSyntax file", "psx", "syn");
-    //fileChooser.addChoosableFileFilter(phenoXMLFilter);
-    //fileChooser.addChoosableFileFilter(phenoSyntaxFilter);
-    
-    
-    // todo - file filter - only .xml or .phenoxml?
-    int returnVal;
-    if (isSave) {
-      returnVal = fileChooser.showSaveDialog(null);
-    } else {
-      returnVal = fileChooser.showOpenDialog(null);
+    final PhenosetDocument doc = PhenosetDocument.Factory.newInstance();
+    final Phenoset phenoset = doc.addNewPhenoset();
+    for (CharacterI chr : charList.getList()) {
+      // builds Phenoset from characters
+      this.addCharAndGenotypeToPhenoset(chr, phenoset);
     }
-    if (returnVal == JFileChooser.APPROVE_OPTION)
-      return fileChooser.getSelectedFile();
-    else {
-      System.out.println("no file chosen");
-      return null;
+    try {
+      doc.save(f, this.getXmlOptions());
+    } catch (IOException e) {
+      log().error("Failed to save ", e);
     }
-  }
-  
-  public static File getFileFromUserForSave(File dir) {
-    return getFileFromUserIsSave(dir, true);
-  }
-  
-  public static File getFileFromUserForOpen(File dir) {
-    return getFileFromUserIsSave(dir, false);
   }
 
   private XmlOptions getXmlOptions() {
-    XmlOptions options = new XmlOptions();
+    final XmlOptions options = new XmlOptions();
     options.setSavePrettyPrint();
     options.setSavePrettyPrintIndent(2);
-    // cant get rid of ns: ??
-//     java.util.HashMap m = new java.util.HashMap(2);
-//     m.put("ns:","");
-//     options.setSaveImplicitNamespaces(m);
-//     options.setSaveAggressiveNamespaces();
-//     options.setUseDefaultNamespace();
     return options;
   }
 
-
   private void addCharAndGenotypeToPhenoset(CharacterI chr, Phenoset phenoset) {
+    final PhenotypeCharacterWrapper phenoCharacter = new PhenotypeCharacterWrapper(chr);
     PhenotypeManifestation pm = phenoset.addNewPhenotypeManifestation();
     addGenotypeAndContext(chr, phenoset, pm);
-    addPhenotype(chr,pm);
-    addPub(chr, pm);
+    addPhenotype(chr, pm);
+    final Provenance provenance = this.getProvenance(phenoCharacter);
+    if (provenance != null) { pm.setProvenanceArray(new Provenance[] {provenance}); }
   }
   
   private void addGenotypeAndContext(CharacterI chr, Phenoset ps, PhenotypeManifestation pm) {
-    ManifestIn mi = pm.addNewManifestIn(); // only add if have gt or gc?
-    try {
-      //chr.getGenotype(); unfortunate new way due to new generic datamodel
-      String genotype = chr.getValueString("Genotype"); // CFEx
-      // check if its there??
-      addGenotypeToPhenoset(genotype, ps);
-      mi.setGenotype(genotype);
-    }
-    catch (CharFieldException e) {} // do nothing just skip it (??)
-
-    String gc = CharFieldEnum.GENETIC_CONTEXT.toString();
-    if (chr.hasValue(gc)) { // hasGeneticCont
-      try {
-        final Typeref typeref = this.getTyperefForTerm(chr.getTerm(gc));
+    final PhenotypeCharacterWrapper character = new PhenotypeCharacterWrapper(chr);
+    final String genotype = character.getGenotype();
+    final OBOClass geneticContext = character.getGeneticContext();
+    if ((genotype != null) || (geneticContext != null)) {
+      final ManifestIn mi = pm.addNewManifestIn();
+      if (genotype != null) {
+        addGenotypeToPhenoset(genotype, ps);
+        mi.setGenotype(genotype);
+      }
+      if (character.getGeneticContext() != null) {
+        final Typeref typeref = this.getTyperefForTerm(character.getGeneticContext());
         mi.setTyperefArray(new Typeref[] {typeref});
-      } catch (CharFieldException e) {
-        log().error("failed to get gc field");  // shouldnt happen with hasValue
       }
     }
   }
   
   private void addGenotypeToPhenoset(String genotype, Phenoset ps) {
-    // check if we've already added this genotype, if so dont need to add again
+    // check if we've already added this genotype, if so don't need to add again
     if (!genotypesAlreadyAdded.contains(genotype)) {
       Genotype gt = ps.addNewGenotype();
       gt.setName(genotype);
@@ -272,31 +216,74 @@ public class PhenoXmlAdapter extends AbstractFileAdapter {
   }
   
   private void addPhenotype(CharacterI chr, PhenotypeManifestation pm) {
-    Phenotype p = pm.addNewPhenotype();
-    PhenotypeCharacter pc = p.addNewPhenotypeCharacter();
-
-    // should entity-less phenotypes even be saved?
-    if (chr.getEntity() != null) {
-      Bearer b = pc.addNewBearer();
-      b.setTyperef(this.getTyperefForTerm(chr.getEntity()));
+    PhenotypeCharacterWrapper character = new PhenotypeCharacterWrapper(chr);
+    // don't make a phenotype if no entity or quality
+    if ((character.getEntity() == null) && (character.getQuality() == null)) return;
+    final Phenotype p = pm.addNewPhenotype();
+    final PhenotypeCharacter pc = p.addNewPhenotypeCharacter();
+    if (character.getEntity() != null) {
+      final Bearer b = pc.addNewBearer();
+      b.setTyperef(this.getTyperefForTerm(character.getEntity()));
+    } else {
+      log().warn("Character " + chr + " has no entity");
     }
-    else {
-      log().warn("Character "+chr+" has no entity");
-    }
-
-    if (chr.getQuality() != null) {
-      Quality q = pc.addNewQuality();
-      q.setTyperef(this.getTyperefForTerm(chr.getQuality()));
-    }
-    else {
-      log().warn("Character "+chr+" has no quality");
-    }
+    if (character.getQuality() != null) {
+      final Quality q = pc.addNewQuality();
+      q.setTyperef(this.getTyperefForTerm(character.getQuality()));
+      if (character.getAdditionalEntity() != null) {
+        final RelatedEntity relatedEntity = q.addNewRelatedEntity();
+        relatedEntity.setTyperef(this.getTyperefForTerm(character.getAdditionalEntity()));
+      }
+      if (character.hasCount()) {
+        q.setCount(BigInteger.valueOf(character.getCount()));
+      }
+      if (character.hasMeasurement()) {
+        final Measurement measurement = q.addNewMeasurement();
+        measurement.setValue(character.getMeasurement());
+        if (character.getUnit() != null) {
+          measurement.setUnit(character.getUnit().getName());
+        }
+      }
+    } else {
+      log().warn("Character " + chr + " has no quality");
+    }    
   }
   
-  private void addPub(CharacterI chr, PhenotypeManifestation pm) {
-    if (!chr.hasPub()) return;  // no pub, early return
-    Provenance provenance = pm.addNewProvenance();
-    provenance.setId(chr.getPub());
+  private PhenotypeCharacter getPhenotypeCharacter(PhenotypeCharacterWrapper phenoCharacter) {
+    if ((phenoCharacter.getEntity() == null) && (phenoCharacter.getQuality() == null)) {
+      return null;
+    }
+    final PhenotypeCharacter phenotypeCharacter = PhenotypeCharacter.Factory.newInstance();
+    if (phenoCharacter.getEntity() != null) {
+      final Bearer bearer = phenotypeCharacter.addNewBearer();
+      bearer.setTyperef(this.getTyperefForTerm(phenoCharacter.getEntity()));
+    }
+    if (phenoCharacter.getQuality() != null) {
+      final Quality quality = phenotypeCharacter.addNewQuality();
+      quality.setTyperef(this.getTyperefForTerm(phenoCharacter.getQuality()));
+      if (phenoCharacter.getAdditionalEntity() != null) {
+        final RelatedEntity relatedEntity = quality.addNewRelatedEntity();
+        relatedEntity.setTyperef(this.getTyperefForTerm(phenoCharacter.getAdditionalEntity()));
+      }
+      if (phenoCharacter.hasCount()) {
+        quality.setCount(BigInteger.valueOf(phenoCharacter.getCount()));
+      }
+      if (phenoCharacter.hasMeasurement()) {
+        final Measurement measurement = quality.addNewMeasurement();
+        measurement.setValue(phenoCharacter.getMeasurement());
+        if (phenoCharacter.getUnit() != null) {
+          measurement.setUnit(phenoCharacter.getUnit().getName());
+        }
+      }
+    }
+    return phenotypeCharacter;
+  }
+  
+  private Provenance getProvenance(PhenotypeCharacterWrapper phenoCharacter) {
+    if (phenoCharacter.getPub() == null) return null;
+    final Provenance provenance = Provenance.Factory.newInstance();
+    provenance.setId(phenoCharacter.getPub());
+    return provenance;
   }
   
   private Typeref getTyperefForTerm(OBOClass term) {
