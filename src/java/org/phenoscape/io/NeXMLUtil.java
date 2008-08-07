@@ -1,11 +1,14 @@
 package org.phenoscape.io;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.apache.xmlbeans.XmlString;
 import org.nexml.x10.AbstractBlock;
 import org.nexml.x10.AbstractStates;
+import org.nexml.x10.Annotated;
 import org.nexml.x10.Dict;
 import org.nexml.x10.NexmlDocument;
 import org.nexml.x10.StandardCells;
@@ -35,12 +38,14 @@ public class NeXMLUtil {
     }
     // no characters block was found, so create one for that id
     final AbstractBlock newBlock = StandardCells.Factory.newInstance();
+    newBlock.addNewFormat();
+    newBlock.setId(id);
     final AbstractBlock[] currentBlocksArray = doc.getNexml().getCharactersArray();
-    final List<AbstractBlock> currentBlocks = Arrays.asList(currentBlocksArray);
+    final List<AbstractBlock> currentBlocks = new ArrayList<AbstractBlock>(Arrays.asList(currentBlocksArray));
     currentBlocks.add(newBlock);
     doc.getNexml().setCharactersArray(currentBlocks.toArray(currentBlocksArray));
-    newBlock.setId(id);
-    return newBlock;
+    // need to find it again, as a copy is made and we'll be making more edits
+    return findOrCreateCharactersBlock(doc, id);
   }
   
   public static AbstractStates findOrCreateStates(StandardFormat format, String id) {
@@ -59,23 +64,42 @@ public class NeXMLUtil {
   }
   
   public static Dict findOrCreateMetadataDict(NexmlDocument doc) {
-    for (Dict dict : doc.getNexml().getDictArray()) {
-      final String[] keys = dict.getKeyArray();
-      if ((keys.length > 0) && (keys[0].equals("phenex-metadata"))) {
-        log().debug("Found metadata");
-        return dict;
-      }
-    }
-    // no metadata dict was found, so create
-    log().debug("Creating new metadata");
-    final Dict newDict = doc.getNexml().addNewDict();
-    newDict.setKeyArray(new String[] {"phenex-metadata"});
-    final Element any = (Element)(newDict.addNewAny().getDomNode());
-    final Document dom = any.getOwnerDocument();
+    final Document dom = doc.getNexml().getDomNode().getOwnerDocument();
+    final Element any = dom.createElement("any");
     any.appendChild(dom.createElement("curators"));
     any.appendChild(dom.createElement("publication"));
     any.appendChild(dom.createElement("publicationNotes"));
+    final Dict newDict = findOrCreateDict(doc.getNexml(), "phenex-metadata", any);
     return newDict;
+  }
+  
+  public static Dict findOrCreateDict(Annotated node, String key, Element defaultValue) {
+    for (Dict dict : node.getDictArray()) {
+      final String[] keys = dict.getKeyArray();
+      if ((keys.length > 0) && (keys[0].equals(key))) {
+        return dict;
+      }
+    }
+    // no such dict was found, so create
+    final Dict newDict = node.addNewDict();
+    newDict.setKeyArray(new String[] {key});
+    newDict.getDomNode().appendChild(defaultValue);
+    return newDict;
+  }
+  
+  public static Element getDictValueNode(Dict dict) {
+    final NodeList children = dict.getDomNode().getChildNodes();
+    int elementsFound = 0;
+    for (int i = 0; i < children.getLength(); i++) {
+      final Node child = children.item(i);
+      if (child.getNodeType() == Node.ELEMENT_NODE) {
+        elementsFound++;
+        if (elementsFound == 2) {
+          return (Element)child;
+        }
+      }
+    }
+    return null;
   }
   
   public static String getTextContent(Node node) {
@@ -101,6 +125,14 @@ public class NeXMLUtil {
       node.removeChild(children.item(i));
     }
     node.appendChild(node.getOwnerDocument().createTextNode(text));
+  }
+  
+  public static void clearChildren(Element node) {
+    final NodeList children = node.getChildNodes();
+    for (int i = (children.getLength() - 1); i > -1; i--) {
+      final Node child = children.item(i);
+      node.removeChild(child);
+    }
   }
   
   private static Logger log() {

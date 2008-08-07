@@ -183,7 +183,6 @@ public class PostCompositionEditor extends PhenoscapeGUIComponent {
     this.popupListener = new TablePopupListener(this.createTablePopupMenu(), this.diffTable);
     this.popupListener.setPopupColumns(Arrays.asList(new Integer[] {1}));
     this.diffTable.addMouseListener(this.popupListener);
-    //this.genusBox.addMouseListener(this.popupListener);
   }
   
   private JToolBar createToolBar() {

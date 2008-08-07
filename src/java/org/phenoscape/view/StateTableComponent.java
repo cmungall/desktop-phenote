@@ -27,6 +27,7 @@ import phenote.gui.TableColumnPrefsSaver;
 import phenote.util.EverythingEqualComparator;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.EventList;
+import ca.odell.glazedlists.GlazedLists;
 import ca.odell.glazedlists.SortedList;
 import ca.odell.glazedlists.gui.AdvancedTableFormat;
 import ca.odell.glazedlists.gui.WritableTableFormat;
@@ -152,7 +153,7 @@ public class StateTableComponent extends PhenoscapeGUIComponent {
 
     public State setColumnValue(State state, Object editedValue, int column) {
       switch(column) {
-      case 0: state.setSymbol(editedValue.toString()); break;
+      case 0: state.setSymbol((Integer)editedValue); break;
       case 1: state.setLabel(editedValue.toString()); break;
       }
       return state;
@@ -180,7 +181,7 @@ public class StateTableComponent extends PhenoscapeGUIComponent {
 
     public Class<?> getColumnClass(int column) {
       switch(column) {
-      case 0: return String.class;
+      case 0: return Integer.class;
       case 1: return String.class;
       default: return null;
       }
@@ -188,7 +189,7 @@ public class StateTableComponent extends PhenoscapeGUIComponent {
 
     public Comparator<?> getColumnComparator(int column) {
       switch(column) {
-      case 0: return Strings.getNaturalComparator();
+      case 0: return GlazedLists.comparableComparator();
       case 1: return Strings.getNaturalComparator();
       default: return null;
       }

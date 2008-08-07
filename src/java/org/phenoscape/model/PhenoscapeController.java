@@ -35,7 +35,7 @@ public class PhenoscapeController extends DocumentController {
   private final EventList<Phenotype> currentPhenotypes;
   private final EventSelectionModel<Phenotype> currentPhenotypesSelectionModel;
   private String charactersBlockID = UUID.randomUUID().toString();
-  private NexmlDocument xmlDoc;
+  private NexmlDocument xmlDoc = NexmlDocument.Factory.newInstance();
   private String appName;
   private final List<NewDataListener> newDataListeners = new ArrayList<NewDataListener>();
   
@@ -122,7 +122,7 @@ public class PhenoscapeController extends DocumentController {
   public boolean readData(File aFile) {
     log().debug("Read file: " + aFile);
     try {
-      final NeXMLReader reader = new NeXMLReader(aFile);
+      final NeXMLReader reader = new NeXMLReader(aFile, this.getOntologyController().getOBOSession());
       this.xmlDoc = reader.getXMLDoc();
       this.charactersBlockID = reader.getCharactersBlockID();
       this.dataSet.getCharacters().clear(); //TODO this is not well encapsulated

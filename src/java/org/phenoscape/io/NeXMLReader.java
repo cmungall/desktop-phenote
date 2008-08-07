@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.log4j.Logger;
 import org.apache.xmlbeans.XmlException;
+import org.apache.xmlbeans.XmlObject;
 import org.nexml.x10.AbstractBlock;
 import org.nexml.x10.AbstractChar;
 import org.nexml.x10.AbstractState;
@@ -19,12 +21,14 @@ import org.nexml.x10.StandardChar;
 import org.nexml.x10.StandardFormat;
 import org.nexml.x10.StandardStates;
 import org.nexml.x10.Taxa;
+import org.obo.datamodel.IdentifiedObject;
+import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOSession;
 import org.phenoscape.model.Character;
+import org.phenoscape.model.Specimen;
 import org.phenoscape.model.State;
 import org.phenoscape.model.Taxon;
-import org.w3c.dom.CharacterData;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class NeXMLReader {
@@ -32,17 +36,20 @@ public class NeXMLReader {
   private final List<Character> characters = new ArrayList<Character>();
   private final List<Taxon> taxa = new ArrayList<Taxon>();
   private final NexmlDocument xmlDoc;
+  private final OBOSession session;
   private String charactersBlockID = UUID.randomUUID().toString();
   private String curatorsText;
   private String publicationText;
   private String pubNotesText; 
 
-  public NeXMLReader(File aFile) throws XmlException, IOException {
+  public NeXMLReader(File aFile, OBOSession session) throws XmlException, IOException {
+    this.session = session;
     this.xmlDoc = NexmlDocument.Factory.parse(aFile);
     this.parseNeXML();
   }
   
-  public NeXMLReader(Reader aReader) throws XmlException, IOException {
+  public NeXMLReader(Reader aReader, OBOSession session) throws XmlException, IOException {
+    this.session = session;
     this.xmlDoc = NexmlDocument.Factory.parse(aReader);
     this.parseNeXML();
   }
@@ -107,7 +114,7 @@ public class NeXMLReader {
       if (states instanceof StandardStates) {
         for (AbstractState abstractState : states.getStateArray()) {
           final State newState = new State(abstractState.getId());
-          newState.setSymbol(abstractState.getSymbol().getStringValue());
+          newState.setSymbol(Integer.parseInt(abstractState.getSymbol().getStringValue()));
           newState.setLabel(abstractState.getLabel());
           newCharacter.addState(newState);
         }
@@ -120,6 +127,31 @@ public class NeXMLReader {
     for (org.nexml.x10.Taxon xmlTaxon : taxa.getOtuArray()) {
       final Taxon newTaxon = new Taxon(xmlTaxon.getId());
       newTaxon.setPublicationName(xmlTaxon.getLabel());
+      final Dict oboIDDict = NeXMLUtil.findOrCreateDict(xmlTaxon, "OBO_ID", xmlTaxon.getDomNode().getOwnerDocument().createElement("string"));
+      for (String id : oboIDDict.getStringArray()) {
+        final IdentifiedObject term = this.session.getObject(id.trim());
+        if (term instanceof OBOClass) {
+          newTaxon.setValidName((OBOClass)term);
+        } else {
+          log().error("ID for " + newTaxon.getPublicationName() + " is not an OBOClass: " + term);
+        }
+        break; // there should only be one String element anyway
+      }
+      final Dict specimensDict = NeXMLUtil.findOrCreateDict(xmlTaxon, "OBO_specimens", xmlTaxon.getDomNode().getOwnerDocument().createElement("any"));
+      for (XmlObject xmlObj : specimensDict.getAnyArray()) {
+        final NodeList nodes = ((Element)(xmlObj.getDomNode())).getElementsByTagName("specimen");
+        for (int i = 0; i < nodes.getLength(); i++) {
+          final Specimen newSpecimen = newTaxon.newSpecimen();
+          final Element specimenXML = (Element)(nodes.item(i));
+          final IdentifiedObject term = this.session.getObject(specimenXML.getAttribute("collection"));
+          if (term instanceof OBOClass) {
+            newSpecimen.setCollectionCode((OBOClass)term);
+          } else {
+            log().error("ID for collection code is not an OBOClass: " + term);
+          }
+          newSpecimen.setCatalogID(specimenXML.getAttribute("accession"));
+        }
+      }
       this.taxa.add(newTaxon);
     }
   }
@@ -136,5 +168,8 @@ public class NeXMLReader {
     }
   }
   
+  private Logger log() {
+    return Logger.getLogger(this.getClass());
+  }
   
 }

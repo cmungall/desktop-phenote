@@ -180,7 +180,7 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
   
   private JPopupMenu createTablePopupMenu() {
     final JPopupMenu menu = new JPopupMenu();
-    menu.add(new AbstractAction("Create Post-composed Term") {
+    menu.add(new AbstractAction("Edit Post-composed Term") {
       public void actionPerformed(ActionEvent e) {
         runPostCompositionForTermAtPoint(tablePopup.getLocation());
       }
