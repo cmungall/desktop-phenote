@@ -1,5 +1,5 @@
 format-version: 1.2
-date: 30:03:2008 21:06
+date: 17:04:2008 10:47
 saved-by: peter
 auto-generated-by: OBO-Edit 1.101
 default-namespace: fish_collection
@@ -228,6 +228,7 @@ is_a: COLLECTION:0000000 ! fish_collection_abbreviation
 [Term]
 id: COLLECTION:0000037
 name: CAS-IU
+synonym: "CAS-IUM" EXACT []
 synonym: "Indiana University. Now mostly at CAS and recataloged with CAS numbers." EXACT []
 is_a: COLLECTION:0000000 ! fish_collection_abbreviation
 
@@ -2893,5 +2894,11 @@ is_a: COLLECTION:0000000 ! fish_collection_abbreviation
 id: COLLECTION:0000481
 name: UAIC
 synonym: "University of Alabama Ichthyological Collection" EXACT []
+is_a: COLLECTION:0000000 ! fish_collection_abbreviation
+
+[Term]
+id: COLLECTION:0000482
+name: LU
+synonym: "Loyola University Chicago, Department of Biology, Chicago, Illinois, U.S.A." EXACT []
 is_a: COLLECTION:0000000 ! fish_collection_abbreviation
 
