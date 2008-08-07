@@ -9,6 +9,7 @@ import phenote.dataadapter.ncbi.NCBIDataAdapterI;
 import phenote.dataadapter.nexus.NEXUSAdapter;
 import phenote.dataadapter.phenosyntax.PhenoSyntaxFileAdapter;
 import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
+import phenote.datamodel.CharFieldManager;
 
 public class DataAdapterConfig {
 
@@ -102,7 +103,7 @@ public class DataAdapterConfig {
       // backward compatibility, merge/update replaces these with class names
       // PLEASE DONT ADD NEW ADAPTERS TO THIS LIST - FORCE THEM TO USE NEW WAY
       if (getName().equalsIgnoreCase("phenoxml"))
-        fileAdapter = new PhenoXmlAdapter();
+        fileAdapter = new PhenoXmlAdapter(CharFieldManager.inst().getOboSession());
       else if (getName().equalsIgnoreCase("phenosyntax"))
         fileAdapter = new PhenoSyntaxFileAdapter();
       else if (getName().equalsIgnoreCase("flybase")) // pase??

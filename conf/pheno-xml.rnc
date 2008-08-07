@@ -40,7 +40,7 @@ genotype =
    element genotype {
       attribute id { identifier_Type }?,
 
-      ## NCBI TAxon ID
+      ## NCBI Taxon ID
       attribute organism { identifier_Type }?,
 
       ## another genotype
@@ -329,13 +329,11 @@ measurement =
 ## real-world measurements (exlcuding count measurements) are inexact
 ## and hence ranges.
   element measurement {
-
-    ## the unit should be a reference to an SI unit
-    ## Q: do SI units have an identifier system,
-    ##    or do we just use eg "mm"
-    ## Q: do we need the ability to specify composite units,
-    ##    eg lb/kg - or is this handled by SI?
-    attribute unit { xsd:NMTOKEN },
+    
+    ## the unit should come from an SI unit ontology
+      element unit { 
+         typeref
+      },
 
     ##   the only time this would be omitted is if we only have a range
     attribute value { xsd:float }?,
@@ -352,6 +350,7 @@ measurement =
     ## TODO: reference to a particular experiment
     attribute assay { identifier_Type }?
   }
+
 
 provenance =
 ## evidence: could refer to papers, figures in papers, raw images, etc

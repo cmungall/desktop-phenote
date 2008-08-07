@@ -14,6 +14,7 @@ import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlOptions;
 import org.bioontologies.obd.schema.pheno.PhenosetDocument;
 import org.bioontologies.obd.schema.pheno.BearerDocument.Bearer;
+import org.bioontologies.obd.schema.pheno.DescriptionDocument.Description;
 import org.bioontologies.obd.schema.pheno.GenotypeDocument.Genotype;
 import org.bioontologies.obd.schema.pheno.ManifestInDocument.ManifestIn;
 import org.bioontologies.obd.schema.pheno.MeasurementDocument.Measurement;
@@ -26,10 +27,13 @@ import org.bioontologies.obd.schema.pheno.QualifierDocument.Qualifier;
 import org.bioontologies.obd.schema.pheno.QualityDocument.Quality;
 import org.bioontologies.obd.schema.pheno.RelatedEntityDocument.RelatedEntity;
 import org.bioontologies.obd.schema.pheno.TyperefDocument.Typeref;
+import org.bioontologies.obd.schema.pheno.UnitDocument.Unit;
+import org.obo.datamodel.IdentifiedObject;
 import org.obo.datamodel.Link;
 import org.obo.datamodel.LinkedObject;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
+import org.obo.datamodel.OBOSession;
 
 import phenote.dataadapter.AbstractFileAdapter;
 import phenote.dataadapter.CharacterListManager;
@@ -39,16 +43,22 @@ import phenote.datamodel.CharacterIFactory;
 import phenote.datamodel.CharacterList;
 import phenote.datamodel.CharacterListI;
 import phenote.datamodel.OboUtil;
+import phenote.datamodel.PhenotypeCharacterI;
 import phenote.datamodel.PhenotypeCharacterWrapper;
 import phenote.datamodel.TermNotFoundException;
+import phenote.datamodel.PhenotypeCharacterI.PhenotypeCharacterFactory;
 
 public class PhenoXmlAdapter extends AbstractFileAdapter {
 
   private Set<String> genotypesAlreadyAdded = new HashSet<String>(); 
   private static String[] extensions = {"pxml", "xml"};
   private static final String description =  "PhenoXML [.pxml, .xml]";
+  private final OBOSession session;
 
-  public PhenoXmlAdapter() { super(extensions,description); }
+  public PhenoXmlAdapter(OBOSession session) {
+    super(extensions,description);
+    this.session = session;
+  }
   
   public CharacterListI load(File f) {
     CharacterListI charList = new CharacterList(); // we will return this empty one if we fail reading the xml
@@ -200,7 +210,7 @@ public class PhenoXmlAdapter extends AbstractFileAdapter {
         mi.setGenotype(genotype);
       }
       if (character.getGeneticContext() != null) {
-        final Typeref typeref = this.getTyperefForTerm(character.getGeneticContext());
+        final Typeref typeref = getTyperefForTerm(character.getGeneticContext());
         mi.setTyperefArray(new Typeref[] {typeref});
       }
     }
@@ -216,54 +226,29 @@ public class PhenoXmlAdapter extends AbstractFileAdapter {
   }
   
   private void addPhenotype(CharacterI chr, PhenotypeManifestation pm) {
-    PhenotypeCharacterWrapper character = new PhenotypeCharacterWrapper(chr);
+    PhenotypeCharacterI character = new PhenotypeCharacterWrapper(chr);
+    final PhenotypeCharacter pc = createPhenotypeCharacter(character);
     // don't make a phenotype if no entity or quality
-    if ((character.getEntity() == null) && (character.getQuality() == null)) return;
+    if (pc == null) return;
     final Phenotype p = pm.addNewPhenotype();
-    final PhenotypeCharacter pc = p.addNewPhenotypeCharacter();
-    if (character.getEntity() != null) {
-      final Bearer b = pc.addNewBearer();
-      b.setTyperef(this.getTyperefForTerm(character.getEntity()));
-    } else {
-      log().warn("Character " + chr + " has no entity");
-    }
-    if (character.getQuality() != null) {
-      final Quality q = pc.addNewQuality();
-      q.setTyperef(this.getTyperefForTerm(character.getQuality()));
-      if (character.getAdditionalEntity() != null) {
-        final RelatedEntity relatedEntity = q.addNewRelatedEntity();
-        relatedEntity.setTyperef(this.getTyperefForTerm(character.getAdditionalEntity()));
-      }
-      if (character.hasCount()) {
-        q.setCount(BigInteger.valueOf(character.getCount()));
-      }
-      if (character.hasMeasurement()) {
-        final Measurement measurement = q.addNewMeasurement();
-        measurement.setValue(character.getMeasurement());
-        if (character.getUnit() != null) {
-          measurement.setUnit(character.getUnit().getName());
-        }
-      }
-    } else {
-      log().warn("Character " + chr + " has no quality");
-    }    
+    p.setPhenotypeCharacterArray(new PhenotypeCharacter[] {pc});
   }
   
-  private PhenotypeCharacter getPhenotypeCharacter(PhenotypeCharacterWrapper phenoCharacter) {
+  public static PhenotypeCharacter createPhenotypeCharacter(PhenotypeCharacterI phenoCharacter) {
     if ((phenoCharacter.getEntity() == null) && (phenoCharacter.getQuality() == null)) {
       return null;
     }
     final PhenotypeCharacter phenotypeCharacter = PhenotypeCharacter.Factory.newInstance();
     if (phenoCharacter.getEntity() != null) {
       final Bearer bearer = phenotypeCharacter.addNewBearer();
-      bearer.setTyperef(this.getTyperefForTerm(phenoCharacter.getEntity()));
+      bearer.setTyperef(getTyperefForTerm(phenoCharacter.getEntity()));
     }
     if (phenoCharacter.getQuality() != null) {
       final Quality quality = phenotypeCharacter.addNewQuality();
-      quality.setTyperef(this.getTyperefForTerm(phenoCharacter.getQuality()));
+      quality.setTyperef(getTyperefForTerm(phenoCharacter.getQuality()));
       if (phenoCharacter.getAdditionalEntity() != null) {
         final RelatedEntity relatedEntity = quality.addNewRelatedEntity();
-        relatedEntity.setTyperef(this.getTyperefForTerm(phenoCharacter.getAdditionalEntity()));
+        relatedEntity.setTyperef(getTyperefForTerm(phenoCharacter.getAdditionalEntity()));
       }
       if (phenoCharacter.hasCount()) {
         quality.setCount(BigInteger.valueOf(phenoCharacter.getCount()));
@@ -272,11 +257,75 @@ public class PhenoXmlAdapter extends AbstractFileAdapter {
         final Measurement measurement = quality.addNewMeasurement();
         measurement.setValue(phenoCharacter.getMeasurement());
         if (phenoCharacter.getUnit() != null) {
-          measurement.setUnit(phenoCharacter.getUnit().getName());
+          final Unit unit = measurement.addNewUnit();
+          unit.setTyperef(getTyperefForTerm(phenoCharacter.getUnit()));
         }
       }
     }
+    if (phenoCharacter.getDescription() != null) {
+      final Description description = phenotypeCharacter.addNewDescription();
+      description.setStringValue(phenoCharacter.getDescription());
+    }
     return phenotypeCharacter;
+  }
+  
+  public static Phenotype createPhenotype(List<PhenotypeCharacter> phenotypeCharacters) {
+    final Phenotype phenotype = Phenotype.Factory.newInstance();
+    phenotype.setPhenotypeCharacterArray(phenotypeCharacters.toArray(new PhenotypeCharacter[] {}));
+    return phenotype;
+  }
+  
+  public List<PhenotypeCharacterI> parsePhenotype(Phenotype phenotype, PhenotypeCharacterFactory factory) {
+    final List<PhenotypeCharacterI> characters = new ArrayList<PhenotypeCharacterI>();
+    for (PhenotypeCharacter pc : phenotype.getPhenotypeCharacterList()) {
+      characters.add(parsePhenotypeCharacter(pc, factory));
+    }
+    return characters;
+  }
+  
+  public PhenotypeCharacterI parsePhenotypeCharacter(PhenotypeCharacter pc, PhenotypeCharacterFactory factory) {
+      final PhenotypeCharacterI newCharacter = factory.newPhenotypeCharacter();
+      try {
+        if ((pc.getBearer() != null) && (pc.getBearer().getTyperef() != null)) {
+          newCharacter.setEntity(this.getTermForTyperef(pc.getBearer().getTyperef()));
+        }
+      } catch (TermNotFoundException e) {
+        log().error("Entity term not found ", e);
+      }
+      try {
+        if (!pc.getQualityList().isEmpty()) {
+          // we only load the first quality for now
+          final Quality quality = pc.getQualityList().get(0);
+          if (quality.getTyperef() != null) {
+            newCharacter.setQuality(this.getTermForTyperef(quality.getTyperef()));
+          }
+          if (!quality.getRelatedEntityList().isEmpty()) {
+            //we only use one related entity for now
+            final RelatedEntity e2 = quality.getRelatedEntityList().get(0);
+            if (e2.getTyperef() != null) {
+              newCharacter.setAdditionalEntity(this.getTermForTyperef(e2.getTyperef()));
+            }
+          }
+          if (quality.getCount() != null) {
+            newCharacter.setCount(quality.getCount().intValue());
+          }
+          if (!quality.getMeasurementList().isEmpty()) {
+            // we only use one measurement for now
+            final Measurement measurement = quality.getMeasurementList().get(0);
+            newCharacter.setMeasurement(measurement.getValue());
+            if ((measurement.getUnit() != null) && (measurement.getUnit().getTyperef() != null)) {
+              newCharacter.setUnit(this.getTermForTyperef(measurement.getUnit().getTyperef()));
+            }
+                
+          }
+        }
+      } catch (TermNotFoundException e) {
+        log().error("Quality term not found ", e);
+      }
+      if (pc.getDescription() != null) {
+        newCharacter.setDescription(pc.getDescription().getStringValue());
+      }
+      return newCharacter;
   }
   
   private Provenance getProvenance(PhenotypeCharacterWrapper phenoCharacter) {
@@ -286,7 +335,7 @@ public class PhenoXmlAdapter extends AbstractFileAdapter {
     return provenance;
   }
   
-  private Typeref getTyperefForTerm(OBOClass term) {
+  private static Typeref getTyperefForTerm(OBOClass term) {
     final Typeref tr = Typeref.Factory.newInstance();
     if (OboUtil.isPostCompTerm(term)) {
       tr.setAbout(OboUtil.getGenusTerm(term).getID());
@@ -296,7 +345,7 @@ public class PhenoXmlAdapter extends AbstractFileAdapter {
         final OBOClass differentia = (OBOClass)parent;
         final Qualifier qualifier = tr.addNewQualifier();
         qualifier.setRelation(link.getType().getID());
-        qualifier.addNewHoldsInRelationTo().setTyperef(this.getTyperefForTerm(differentia));
+        qualifier.addNewHoldsInRelationTo().setTyperef(getTyperefForTerm(differentia));
       }
     } else {
       tr.setAbout(term.getID());
@@ -321,7 +370,12 @@ public class PhenoXmlAdapter extends AbstractFileAdapter {
   }
   
   private OBOClass getTerm(String id) throws TermNotFoundException {
-    return CharFieldManager.inst().getOboClass(id);
+    final IdentifiedObject term = this.session.getObject(id);
+    if (term instanceof OBOClass) {
+      return (OBOClass)term;
+    } else {
+      throw new TermNotFoundException(id);
+    }
   }
   
   private OBOProperty getRelation(String id) throws TermNotFoundException {
@@ -333,9 +387,9 @@ public class PhenoXmlAdapter extends AbstractFileAdapter {
     }
   }
   
-  private Logger log;
-  private Logger log() {
-    if (log == null) log = Logger.getLogger(getClass());
+  private static Logger log;
+  private static Logger log() {
+    if (log == null) log = Logger.getLogger(PhenoXmlAdapter.class);
     return log;
   }
 
