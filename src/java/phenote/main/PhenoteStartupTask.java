@@ -48,6 +48,8 @@ import phenote.gui.menu.FileMenu;
 import phenote.gui.menu.PhenoteHelpMenu;
 import phenote.gui.menu.SettingsMenu;
 import phenote.gui.selection.SelectionBridge;
+import phenote.matrix.model.MatrixController;
+import phenote.matrix.view.MatrixComponentFactory;
 
 public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
@@ -78,6 +80,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
     factories.addAll(this.getTemplateGroupComponentFactories());
     factories.add(new ProtocolEditorFactory());
     factories.add(new ScratchGroupsViewFactory());
+    factories.add(new MatrixComponentFactory(new MatrixController()));
     return factories;
   }
 

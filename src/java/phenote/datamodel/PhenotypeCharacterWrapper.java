@@ -9,7 +9,7 @@ import org.obo.datamodel.OBOClass;
  * are provided by CharacterI, but putting everything here will allow CharacterI to remain generic.
  * @author Jim Balhoff
  */
-public class PhenotypeCharacterWrapper {
+public class PhenotypeCharacterWrapper implements PhenotypeCharacterI {
   
   private static final String ENTITY = "E";
   private static final String QUALITY = "Q";
@@ -31,6 +31,9 @@ public class PhenotypeCharacterWrapper {
     return character;
   }
   
+  /* (non-Javadoc)
+   * @see phenote.datamodel.PhenotypeCharacterI#getEntity()
+   */
   public OBOClass getEntity() {
     return this.getTerm(ENTITY);
   }
@@ -39,6 +42,9 @@ public class PhenotypeCharacterWrapper {
     this.setTerm(ENTITY, term);
   }
   
+  /* (non-Javadoc)
+   * @see phenote.datamodel.PhenotypeCharacterI#getQuality()
+   */
   public OBOClass getQuality() {
     return this.getTerm(QUALITY);
   }
@@ -47,6 +53,9 @@ public class PhenotypeCharacterWrapper {
     this.setTerm(QUALITY, term);
   }
   
+  /* (non-Javadoc)
+   * @see phenote.datamodel.PhenotypeCharacterI#getAdditionalEntity()
+   */
   public OBOClass getAdditionalEntity() {
     return this.getTerm(ADDL_ENTITY);
   }
@@ -55,11 +64,17 @@ public class PhenotypeCharacterWrapper {
     this.setTerm(ADDL_ENTITY, term);
   }
   
+  /* (non-Javadoc)
+   * @see phenote.datamodel.PhenotypeCharacterI#hasCount()
+   */
   public boolean hasCount() {
     final String text = this.getText(COUNT);
     return (text != null) && (text != "");
   }
   
+  /* (non-Javadoc)
+   * @see phenote.datamodel.PhenotypeCharacterI#getCount()
+   */
   public int getCount() {
     return new Integer(this.getText(COUNT));
   }
@@ -68,11 +83,17 @@ public class PhenotypeCharacterWrapper {
     this.setText(COUNT, "" + count);
   }
   
+  /* (non-Javadoc)
+   * @see phenote.datamodel.PhenotypeCharacterI#hasMeasurement()
+   */
   public boolean hasMeasurement() {
     final String text = this.getText(MEASUREMENT);
     return (text != null) && (text != "");
   }
   
+  /* (non-Javadoc)
+   * @see phenote.datamodel.PhenotypeCharacterI#getMeasurement()
+   */
   public float getMeasurement() {
     return new Float(this.getText(MEASUREMENT));
   }
@@ -81,6 +102,9 @@ public class PhenotypeCharacterWrapper {
     this.setText(MEASUREMENT, "" + measurement);
   }
   
+  /* (non-Javadoc)
+   * @see phenote.datamodel.PhenotypeCharacterI#getUnit()
+   */
   public OBOClass getUnit() {
     return this.getTerm(UNIT);
   }
@@ -149,6 +173,12 @@ public class PhenotypeCharacterWrapper {
       log().warn("No charfield configured with tag: " + tag, e);
     }
   }
+  
+  public String getDescription() {
+    return "";
+  }
+  
+  public void setDescription(String desc) {}
   
   private Logger log() {
     return Logger.getLogger(this.getClass());

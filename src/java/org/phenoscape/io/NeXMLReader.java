@@ -10,6 +10,7 @@ import java.util.UUID;
 import org.apache.log4j.Logger;
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
+import org.bioontologies.obd.schema.pheno.PhenotypeDocument;
 import org.nexml.x10.AbstractBlock;
 import org.nexml.x10.AbstractChar;
 import org.nexml.x10.AbstractState;
@@ -24,12 +25,16 @@ import org.nexml.x10.Taxa;
 import org.obo.datamodel.IdentifiedObject;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOSession;
+import org.phenoscape.io.PhenoXMLPhenotypeWrapper.PhenotypeWrapperFactory;
 import org.phenoscape.model.Character;
 import org.phenoscape.model.Specimen;
 import org.phenoscape.model.State;
 import org.phenoscape.model.Taxon;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
+import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
+import phenote.datamodel.PhenotypeCharacterI;
 
 public class NeXMLReader {
   
@@ -114,8 +119,25 @@ public class NeXMLReader {
       if (states instanceof StandardStates) {
         for (AbstractState abstractState : states.getStateArray()) {
           final State newState = new State(abstractState.getId());
+          try {
           newState.setSymbol(Integer.parseInt(abstractState.getSymbol().getStringValue()));
+          } catch (NumberFormatException e) {
+            
+          }
           newState.setLabel(abstractState.getLabel());
+          final Dict phenotypeDict = NeXMLUtil.findOrCreateDict(abstractState, "OBO_phenotype", abstractState.getDomNode().getOwnerDocument().createElement("any"));
+          final Element any = NeXMLUtil.getFirstChildWithTagName((Element)(phenotypeDict.getDomNode()), "any");
+          final Element phenoXML = NeXMLUtil.getFirstChildWithTagNameNS(any, "http://www.bioontologies.org/obd/schema/pheno", "phenotype");
+          try {
+            PhenotypeDocument xmlPhen = org.bioontologies.obd.schema.pheno.PhenotypeDocument.Factory.parse(phenoXML);
+            PhenoXmlAdapter adapter = new PhenoXmlAdapter(this.session);
+            List<PhenotypeCharacterI> phenotypes = adapter.parsePhenotype(xmlPhen.getPhenotype(), new PhenotypeWrapperFactory());
+            for (PhenotypeCharacterI phenotype : phenotypes) {
+              newState.addPhenotype(((PhenoXMLPhenotypeWrapper)phenotype).getPhenotype());
+            }
+          } catch (XmlException e) {
+            log().error("Failed to parse OBO phenotype", e);
+          }
           newCharacter.addState(newState);
         }
       }

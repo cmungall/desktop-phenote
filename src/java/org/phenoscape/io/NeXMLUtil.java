@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.apache.xmlbeans.XmlString;
 import org.nexml.x10.AbstractBlock;
 import org.nexml.x10.AbstractStates;
 import org.nexml.x10.Annotated;
@@ -62,6 +61,13 @@ public class NeXMLUtil {
     final NodeList elements = parent.getElementsByTagName(tagName);
     return (elements.getLength() > 0) ? (Element)(elements.item(0)) : null;
   }
+  
+  public static Element getFirstChildWithTagNameNS(Element parent, String namespaceURI, String localName) {
+    final NodeList elements = parent.getElementsByTagNameNS(namespaceURI, localName);
+    return (elements.getLength() > 0) ? (Element)(elements.item(0)) : null;
+  }
+  
+  
   
   public static Dict findOrCreateMetadataDict(NexmlDocument doc) {
     final Document dom = doc.getNexml().getDomNode().getOwnerDocument();
@@ -135,6 +141,7 @@ public class NeXMLUtil {
     }
   }
   
+  @SuppressWarnings("unused")
   private static Logger log() {
     return Logger.getLogger(NeXMLUtil.class);
   }

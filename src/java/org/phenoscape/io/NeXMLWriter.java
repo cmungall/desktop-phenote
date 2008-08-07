@@ -13,6 +13,8 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 import org.apache.xmlbeans.XmlOptions;
+import org.bioontologies.obd.schema.pheno.PhenotypeCharacterDocument.PhenotypeCharacter;
+import org.bioontologies.obd.schema.pheno.PhenotypeManifestationDocument.PhenotypeManifestation;
 import org.nexml.x10.AbstractBlock;
 import org.nexml.x10.AbstractChar;
 import org.nexml.x10.AbstractState;
@@ -26,10 +28,14 @@ import org.nexml.x10.StandardToken;
 import org.nexml.x10.Taxa;
 import org.phenoscape.model.Character;
 import org.phenoscape.model.DataSet;
+import org.phenoscape.model.Phenotype;
 import org.phenoscape.model.Specimen;
 import org.phenoscape.model.State;
 import org.phenoscape.model.Taxon;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
+import phenote.dataadapter.phenoxml.PhenoXmlAdapter;
 
 public class NeXMLWriter {
   
@@ -70,7 +76,6 @@ public class NeXMLWriter {
     Dict metadata = NeXMLUtil.findOrCreateMetadataDict(newDoc);
     this.writeToMetadata(metadata, this.data.getCurators(), this.data.getPublication(), this.data.getPublicationNotes());
     final AbstractBlock charBlock = NeXMLUtil.findOrCreateCharactersBlock(newDoc, this.charactersBlockID);
-    log().debug("Charblock id is: " + charBlock.getId());
     this.writeCharacters(charBlock);
     final String taxaID;
     if ((charBlock.getOtus() == null) || (charBlock.getOtus().equals(""))) {
@@ -112,6 +117,7 @@ public class NeXMLWriter {
         newStates.add(xmlState);
         xmlState.setLabel(state.getLabel());
         xmlState.setSymbol(StandardToken.Factory.newValue(state.getSymbol()));
+        this.writePhenotypes(xmlState, state);
       }
       usableStatesBlock.setStateArray(newStates.toArray(new AbstractState[] {}));
     }
@@ -196,6 +202,24 @@ public class NeXMLWriter {
     }
   }
   
+  private void writePhenotypes(AbstractState xmlState, State state) {
+    final Dict phenotypeDict = NeXMLUtil.findOrCreateDict(xmlState, "OBO_phenotype", xmlState.getDomNode().getOwnerDocument().createElement("any"));
+    final Element any = NeXMLUtil.getFirstChildWithTagName((Element)(phenotypeDict.getDomNode()), "any");
+    NeXMLUtil.clearChildren(any);
+    final List<PhenotypeCharacter> pcs = new ArrayList<PhenotypeCharacter>();
+    for (Phenotype phenotype : state.getPhenotypes()) {
+      final PhenotypeCharacter pc = PhenoXmlAdapter.createPhenotypeCharacter(new PhenoXMLPhenotypeWrapper(phenotype));
+      if (pc != null) { pcs.add(pc); }
+    }
+    final org.bioontologies.obd.schema.pheno.PhenotypeDocument.Phenotype phenoXML = PhenoXmlAdapter.createPhenotype(pcs);
+    // for some reason the PhenoXML Phenotype appears only as a DocumentFragment instead of Element until it's stuck into a PhenotypeManifestation
+    final PhenotypeManifestation scratchPM = PhenotypeManifestation.Factory.newInstance();
+    scratchPM.setPhenotype(phenoXML);
+    final Node importedPhenoXML = any.getOwnerDocument().importNode(scratchPM.getPhenotype().getDomNode(), true);
+    any.appendChild(importedPhenoXML);
+  }
+  
+  @SuppressWarnings("unused")
   private Logger log() {
     return Logger.getLogger(this.getClass());
   }
