@@ -119,10 +119,9 @@ public class OboUtil {
   }
 
   public static boolean isPostCompTerm(OBOClass term) {
-    //if (!term.isAnonymous()) return false;
+    if (term.getID().indexOf('^') < 0) { return false; }
     for (Link l : term.getParents()) {
-      if (isLinkToDiff(l))
-        return true;
+      if (isLinkToDiff(l)) { return true; }
     }
     return false;
   }
