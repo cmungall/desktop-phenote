@@ -77,4 +77,16 @@ public class PhenotypeMatrixColumn implements MatrixColumn {
   public OBOClass getEntity2() {
     return entity2;
   }
+  
+  // New stuff!
+  public int hashCode() {
+    if (quality != null)
+      return quality.hashCode();
+    else
+      return 0;
+  }
+  
+  public boolean isEqual(CharacterI ch) {
+     return this.hashCode() == OboUtil.getAttributeForValue(ch.getQuality()).hashCode();
+  }
 }
