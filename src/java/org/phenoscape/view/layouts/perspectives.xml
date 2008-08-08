@@ -10,6 +10,26 @@
      <string>Default</string> 
     </void> 
    </object> 
+  </void>
+    <void method="add"> 
+   <object class="org.bbop.framework.dock.Perspective"> 
+    <void property="ID"> 
+     <string>character</string> 
+    </void> 
+    <void property="name"> 
+     <string>Character</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="org.bbop.framework.dock.Perspective"> 
+    <void property="ID"> 
+     <string>taxon</string> 
+    </void> 
+    <void property="name"> 
+     <string>Taxon</string> 
+    </void> 
+   </object> 
   </void> 
  </object> 
  <object idref="Perspective0"/> 
