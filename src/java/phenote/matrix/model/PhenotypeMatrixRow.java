@@ -52,4 +52,14 @@ public class PhenotypeMatrixRow implements MatrixRow {
   public OBOClass getTaxon() {
     return taxon;
   }
+  
+  public int hashCode() {
+    int taxonHash;
+    taxonHash = taxon != null ? taxon.hashCode() : 0;
+    return taxonHash;
+  }
+  
+  public boolean equals(PhenotypeMatrixRow pmr) {
+     return this.taxon.equals(pmr.getTaxon());
+  }
 }

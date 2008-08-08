@@ -78,7 +78,6 @@ public class PhenotypeMatrixColumn implements MatrixColumn {
     return entity2;
   }
   
-  // New stuff!
   public int hashCode() {
     int entityHash, qualityHash, entity2Hash;
     entityHash = entity != null ? entity.hashCode() : 0;
@@ -87,7 +86,7 @@ public class PhenotypeMatrixColumn implements MatrixColumn {
     return entityHash ^ qualityHash ^ entity2Hash;
   }
   
-  public boolean isEqual(PhenotypeMatrixColumn pmc) {
-     return this.entity.equals(pmc.getEntity()) && this.quality.equals(pmc.getQuality()) && this.entity2.equals(pmc.getEntity2());
+  public boolean equals(PhenotypeMatrixColumn pmc) {
+     return entity.equals(pmc.getEntity()) && quality.equals(pmc.getQuality()) && entity2.equals(pmc.getEntity2());
   }
 }
