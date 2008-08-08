@@ -131,6 +131,15 @@ public class PostCompositionEditor extends PhenoscapeGUIComponent {
     return JOptionPane.showConfirmDialog(null, this, "Post-composition Editor", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
   }
   
+  private void runPostCompositionForGenus() {
+    final PostCompositionEditor pce = new PostCompositionEditor(this.getController(), this.termSet);
+    pce.setTerm(this.genus);
+    final int result = pce.runPostCompositionDialog();
+    if (result == JOptionPane.OK_OPTION) {
+      this.genusBox.setSelectedItem(pce.getTerm());
+    }
+  }
+  
   private void runPostCompositionForTermAtPoint(Point p) {
     final int column = this.diffTable.getTableHeader().columnAtPoint(p);
     final int row = this.diffTable.rowAtPoint(p);
@@ -160,6 +169,15 @@ public class PostCompositionEditor extends PhenoscapeGUIComponent {
       }
     });
     this.add(this.genusBox, comboConstraints);
+    final GridBagConstraints postComposeGenusConstraints = new GridBagConstraints();
+    postComposeGenusConstraints.gridx = 2;
+    final JButton postComposeGenusButton = new JButton();
+    postComposeGenusButton.setAction(new AbstractAction("PC...") {
+      public void actionPerformed(ActionEvent e) {
+        runPostCompositionForGenus();
+      }
+    });
+    this.add(postComposeGenusButton, postComposeGenusConstraints);
     this.tableFormat = new DifferentiaTableFormat();
     final EventTableModel<Differentia> model = new EventTableModel<Differentia>(this.diffs, this.tableFormat);
     this.diffTable = new BugWorkaroundTable(model);
@@ -170,7 +188,7 @@ public class PostCompositionEditor extends PhenoscapeGUIComponent {
     this.diffTable.getColumnModel().getColumn(1).setCellEditor(this.tableFormat.getColumnEditor(1));
     final GridBagConstraints tableConstraints = new GridBagConstraints();
     tableConstraints.gridy = 1;
-    tableConstraints.gridwidth = 2;
+    tableConstraints.gridwidth = 3;
     tableConstraints.fill = GridBagConstraints.BOTH;
     tableConstraints.weighty = 1.0;
     this.add(new JScrollPane(diffTable), tableConstraints);
