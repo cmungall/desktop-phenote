@@ -69,10 +69,10 @@ public class OntologyController {
       // TODO Auto-generated catch block
       e.printStackTrace();
     } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
+      //TODO alert user somehow
+      log().fatal("Unable to read one or more ontologies", e);
     }
-    return null;
+    return new String[] {};
   }
 
   public OBOSession getOBOSession() {

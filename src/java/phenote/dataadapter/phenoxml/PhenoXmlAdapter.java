@@ -55,9 +55,17 @@ public class PhenoXmlAdapter extends AbstractFileAdapter {
   private static final String description =  "PhenoXML [.pxml, .xml]";
   private final OBOSession session;
 
+  /**
+   * This constructor is used when the OBOSession needs to be specified, 
+   * such as when the CharFieldManager is not in use.
+   */
   public PhenoXmlAdapter(OBOSession session) {
     super(extensions,description);
     this.session = session;
+  }
+  
+  public PhenoXmlAdapter() {
+    this(CharFieldManager.inst().getOboSession());
   }
   
   public CharacterListI load(File f) {
