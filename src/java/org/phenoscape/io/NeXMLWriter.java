@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
+import org.apache.xmlbeans.XmlAnySimpleType;
 import org.apache.xmlbeans.XmlOptions;
 import org.bioontologies.obd.schema.pheno.PhenotypeCharacterDocument.PhenotypeCharacter;
 import org.bioontologies.obd.schema.pheno.PhenotypeManifestationDocument.PhenotypeManifestation;
@@ -24,7 +25,6 @@ import org.nexml.x10.NexmlDocument;
 import org.nexml.x10.StandardChar;
 import org.nexml.x10.StandardState;
 import org.nexml.x10.StandardStates;
-import org.nexml.x10.StandardToken;
 import org.nexml.x10.Taxa;
 import org.phenoscape.model.Character;
 import org.phenoscape.model.DataSet;
@@ -32,6 +32,7 @@ import org.phenoscape.model.Phenotype;
 import org.phenoscape.model.Specimen;
 import org.phenoscape.model.State;
 import org.phenoscape.model.Taxon;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -116,7 +117,7 @@ public class NeXMLWriter {
         final AbstractState xmlState = this.findOrCreateStateWithID(existingStates, state.getNexmlID());
         newStates.add(xmlState);
         xmlState.setLabel(state.getLabel());
-        xmlState.setSymbol(StandardToken.Factory.newValue(state.getSymbol()));
+        this.writeSymbol(xmlState, state.getSymbol() != null ? state.getSymbol() : "0");
         this.writePhenotypes(xmlState, state);
       }
       usableStatesBlock.setStateArray(newStates.toArray(new AbstractState[] {}));
@@ -217,6 +218,17 @@ public class NeXMLWriter {
     scratchPM.setPhenotype(phenoXML);
     final Node importedPhenoXML = any.getOwnerDocument().importNode(scratchPM.getPhenotype().getDomNode(), true);
     any.appendChild(importedPhenoXML);
+  }
+  
+  /**
+   * The NeXML schema forces symbols to be an integer, but I 
+   * believe this is incorrect.  This method should allow us 
+   * to write any kind of symbol.
+   */
+  private void writeSymbol(AbstractState state, String symbolValue) {
+    final XmlAnySimpleType symbol = state.getSymbol() != null ? state.getSymbol() : state.addNewSymbol();
+    final Attr attribute = (Attr)(symbol.getDomNode());
+    attribute.setValue(symbolValue);
   }
   
   @SuppressWarnings("unused")

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
+import org.apache.xmlbeans.XmlAnySimpleType;
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
 import org.bioontologies.obd.schema.pheno.PhenotypeDocument;
@@ -30,6 +31,7 @@ import org.phenoscape.model.Character;
 import org.phenoscape.model.Specimen;
 import org.phenoscape.model.State;
 import org.phenoscape.model.Taxon;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -119,30 +121,39 @@ public class NeXMLReader {
       if (states instanceof StandardStates) {
         for (AbstractState abstractState : states.getStateArray()) {
           final State newState = new State(abstractState.getId());
-          try {
-          newState.setSymbol(Integer.parseInt(abstractState.getSymbol().getStringValue()));
-          } catch (NumberFormatException e) {
-            
-          }
+          newState.setSymbol(this.readSymbol(abstractState));
           newState.setLabel(abstractState.getLabel());
           final Dict phenotypeDict = NeXMLUtil.findOrCreateDict(abstractState, "OBO_phenotype", abstractState.getDomNode().getOwnerDocument().createElement("any"));
           final Element any = NeXMLUtil.getFirstChildWithTagName((Element)(phenotypeDict.getDomNode()), "any");
           final Element phenoXML = NeXMLUtil.getFirstChildWithTagNameNS(any, "http://www.bioontologies.org/obd/schema/pheno", "phenotype");
-          try {
-            PhenotypeDocument xmlPhen = org.bioontologies.obd.schema.pheno.PhenotypeDocument.Factory.parse(phenoXML);
-            PhenoXmlAdapter adapter = new PhenoXmlAdapter(this.session);
-            List<PhenotypeCharacterI> phenotypes = adapter.parsePhenotype(xmlPhen.getPhenotype(), new PhenotypeWrapperFactory());
-            for (PhenotypeCharacterI phenotype : phenotypes) {
-              newState.addPhenotype(((PhenoXMLPhenotypeWrapper)phenotype).getPhenotype());
+          if (phenoXML != null) {
+            try {
+              PhenotypeDocument xmlPhen = org.bioontologies.obd.schema.pheno.PhenotypeDocument.Factory.parse(phenoXML);
+              PhenoXmlAdapter adapter = new PhenoXmlAdapter(this.session);
+              List<PhenotypeCharacterI> phenotypes = adapter.parsePhenotype(xmlPhen.getPhenotype(), new PhenotypeWrapperFactory());
+              for (PhenotypeCharacterI phenotype : phenotypes) {
+                newState.addPhenotype(((PhenoXMLPhenotypeWrapper)phenotype).getPhenotype());
+              }
+            } catch (XmlException e) {
+              log().error("Failed to parse OBO phenotype", e);
             }
-          } catch (XmlException e) {
-            log().error("Failed to parse OBO phenotype", e);
           }
           newCharacter.addState(newState);
         }
       }
       this.characters.add(newCharacter);
     }
+  }
+  
+  /**
+   * The NeXML schema forces symbols to be an integer, but I 
+   * believe this is incorrect.  This method should allow us 
+   * to read any kind of symbol.
+   */
+  private String readSymbol(AbstractState state) {
+    final XmlAnySimpleType symbol = state.getSymbol();
+    final Attr attribute = (Attr)(symbol.getDomNode());
+    return attribute.getValue();
   }
   
   private void parseTaxa(Taxa taxa) {

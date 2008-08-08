@@ -16,7 +16,7 @@ public class State {
   private final String nexmlID;
   private final EventList<Phenotype> phenotypes = new BasicEventList<Phenotype>();
   private String label;
-  private Integer symbol;
+  private String symbol;
   
   public State() {
    this(UUID.randomUUID().toString()); 
@@ -57,18 +57,18 @@ public class State {
   }
   
   /**
-   * Returns the single-character symbol used as shorthand for this
+   * Returns the symbol used as shorthand for this
    * state in an evolutionary character matrix.
    */
-  public Integer getSymbol() {
+  public String getSymbol() {
     return this.symbol;
   }
 
   /**
    * Set the shorthand symbol for this state. The symbol should be 
-   * a single-character string.
+   * an single-character string. A symbol is required for each state.
    */
-  public void setSymbol(Integer aSymbol) {
+  public void setSymbol(String aSymbol) {
     this.symbol = aSymbol;
   }
   
