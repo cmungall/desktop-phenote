@@ -387,9 +387,9 @@ public class PhenoXmlAdapter extends AbstractFileAdapter {
   }
   
   private OBOProperty getRelation(String id) throws TermNotFoundException {
-    final OBOProperty relation = CharFieldManager.inst().getRelation(id);
-    if (relation != null) {
-      return relation;
+    final IdentifiedObject relation = this.session.getObject(id);
+    if (relation instanceof OBOProperty) {
+      return (OBOProperty)relation;
     } else {
       throw new TermNotFoundException(id);
     }
