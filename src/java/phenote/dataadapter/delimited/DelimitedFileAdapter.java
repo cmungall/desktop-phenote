@@ -133,12 +133,12 @@ public class DelimitedFileAdapter extends AbstractFileAdapter {
   public void commit(CharacterListI charList, File f) {
     PrintWriter pw;
     try {
-      pw = new PrintWriter(new BufferedWriter(new FileWriter(file)));
+      pw = new PrintWriter(new BufferedWriter(new FileWriter(f)));
     } catch (IOException e) {
-      LOG.error("Failed to open file "+ file, e);
+      LOG.error("Failed to open file "+ f, e);
       return;
     }
-    LOG.info("Writing tab-delimited output to file " + file);
+    LOG.info("Writing tab-delimited output to file " + f);
     //first write out header, then write out contents
     String c = DelimitedChar.makeDelimitedHeaderString();
     pw.println(c);    
