@@ -86,7 +86,14 @@ public class PhenotypeMatrixColumn implements MatrixColumn {
     return entityHash ^ qualityHash ^ entity2Hash;
   }
   
-  public boolean equals(PhenotypeMatrixColumn pmc) {
-     return entity.equals(pmc.getEntity()) && quality.equals(pmc.getQuality()) && entity2.equals(pmc.getEntity2());
+  @Override
+  public boolean equals(Object o) {
+    if (o instanceof PhenotypeMatrixColumn) {
+      PhenotypeMatrixColumn pmc = (PhenotypeMatrixColumn)o;
+      return entity.equals(pmc.getEntity()) && quality.equals(pmc.getQuality()) && entity2.equals(pmc.getEntity2());
+    } else {
+      return false;
+    }
   }
+  
 }
