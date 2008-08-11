@@ -18,11 +18,17 @@ import org.bioontologies.obd.schema.pheno.PhenotypeCharacterDocument.PhenotypeCh
 import org.bioontologies.obd.schema.pheno.PhenotypeManifestationDocument.PhenotypeManifestation;
 import org.nexml.x10.AbstractBlock;
 import org.nexml.x10.AbstractChar;
+import org.nexml.x10.AbstractObs;
+import org.nexml.x10.AbstractObsMatrix;
+import org.nexml.x10.AbstractObsRow;
 import org.nexml.x10.AbstractState;
 import org.nexml.x10.AbstractStates;
 import org.nexml.x10.Dict;
 import org.nexml.x10.NexmlDocument;
+import org.nexml.x10.StandardCells;
 import org.nexml.x10.StandardChar;
+import org.nexml.x10.StandardMatrixObsRow;
+import org.nexml.x10.StandardObs;
 import org.nexml.x10.StandardState;
 import org.nexml.x10.StandardStates;
 import org.nexml.x10.Taxa;
@@ -124,6 +130,34 @@ public class NeXMLWriter {
     }
     charBlock.getFormat().setCharArray(newCharacters.toArray(new AbstractChar[] {}));
     charBlock.getFormat().setStatesArray(newStatesBlocks.toArray(new AbstractStates[] {}));
+    if (charBlock instanceof StandardCells) {
+      final StandardCells cells = (StandardCells)charBlock;
+      final AbstractObsMatrix matrix = cells.getMatrix() != null ? cells.getMatrix() : cells.addNewMatrix();
+      this.writeMatrix(matrix);
+    }
+  }
+  
+  private void writeMatrix(AbstractObsMatrix matrix) {
+    final List<AbstractObsRow> existingRows = Arrays.asList(matrix.getRowArray());
+    final List<AbstractObsRow> newRows = new ArrayList<AbstractObsRow>();
+    for (Taxon taxon : this.data.getTaxa()) {
+      final AbstractObsRow xmlRow = this.findOrCreateRowForTaxon(existingRows, taxon.getNexmlID());
+      newRows.add(xmlRow);
+      final List<AbstractObs> existingCells = Arrays.asList(xmlRow.getCellArray());
+      final List<AbstractObs> newCells = new ArrayList<AbstractObs>();
+      for (Character character : this.data.getCharacters()) {
+        final State state = this.data.getStateForTaxon(taxon, character);
+        if (state != null) {
+          final AbstractObs xmlCell = this.findOrCreateCellForCharacter(existingCells, character.getNexmlID());
+          final XmlAnySimpleType xmlState = XmlAnySimpleType.Factory.newInstance();
+          xmlState.setStringValue(state.getNexmlID());
+          xmlCell.setState(xmlState);
+          newCells.add(xmlCell);
+        }
+      }
+      xmlRow.setCellArray(newCells.toArray(new AbstractObs[] {}));
+    }
+    matrix.setRowArray(newRows.toArray(new AbstractObsRow[] {}));
   }
   
   private void writeTaxa(Taxa taxaBlock) {
@@ -137,6 +171,27 @@ public class NeXMLWriter {
       this.writeSpecimens(otu, taxon);
     }
     taxaBlock.setOtuArray(newOTUs.toArray(new org.nexml.x10.Taxon[] {}));
+  }
+  
+  private AbstractObsRow findOrCreateRowForTaxon(List<AbstractObsRow> list, String id) {
+    for (AbstractObsRow row : list) {
+      if (id.equals(row.getOtu())) { return row; }
+    }
+    final AbstractObsRow newRow = StandardMatrixObsRow.Factory.newInstance();
+    newRow.setId(UUID.randomUUID().toString());
+    newRow.setOtu(id);
+    return newRow;
+  }
+  
+  private AbstractObs findOrCreateCellForCharacter(List<AbstractObs> list, String id) {
+    for (AbstractObs cell : list) {
+      if (id.equals(cell.getChar().getStringValue())) { return cell; }
+    }
+    final AbstractObs newCell = StandardObs.Factory.newInstance();
+    final XmlAnySimpleType charXML = XmlAnySimpleType.Factory.newInstance();
+    charXML.setStringValue(id);
+    newCell.setChar(charXML);
+    return newCell;
   }
   
   private org.nexml.x10.Taxon findOrCreateOTUWithID(List<org.nexml.x10.Taxon> list, String id) {

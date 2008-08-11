@@ -132,6 +132,7 @@ public class PhenoscapeController extends DocumentController {
       this.getDataSet().setCurators(reader.getCuratorsText());
       this.getDataSet().setPublication(reader.getPublicationText());
       this.getDataSet().setPublicationNotes(reader.getPubNotesText());
+      this.getDataSet().setMatrix(reader.getMatrix());
       
       this.fireDataChanged();
       return true;

@@ -1,5 +1,8 @@
 package org.phenoscape.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import ca.odell.glazedlists.BasicEventList;
 import ca.odell.glazedlists.EventList;
 
@@ -7,6 +10,11 @@ public class DataSet {
   
   private final EventList<Character> characters = new BasicEventList<Character>();
   private final EventList<Taxon> taxa = new BasicEventList<Taxon>();
+  /**
+   * The matrix is represented as a map using this format:
+   * <taxonID, Map<characterID, stateID>>
+   */
+  private final Map<String, Map<String, String>> matrix = new HashMap<String, Map<String, String>>();
   private String publication;
   private String publicationNotes;
   private String curators;
@@ -69,6 +77,34 @@ public class DataSet {
 
   public void setCurators(String curators) {
     this.curators = curators;
+  }
+  
+  public void setMatrix(Map<String, Map<String, String>> aMatrix) {
+    this.matrix.clear();
+    this.matrix.putAll(aMatrix);
+  }
+  
+  public State getStateForTaxon(Taxon taxon, Character character) {
+    final Map<String, String> states = this.matrix.get(taxon.getNexmlID());
+    if (states != null) {
+      final String stateID = states.get(character.getNexmlID());
+      for (State state : character.getStates()) {
+        if (state.getNexmlID().equals(stateID)) { return state; }
+      }
+    }
+    return null;
+  }
+  
+  public void setStateForTaxon(Taxon taxon, Character character, State state) {
+    if (taxon == null || character == null) { return; }
+    final Map<String, String> states;
+    if (this.matrix.containsKey(taxon.getNexmlID())) {
+      states = this.matrix.get(taxon.getNexmlID());
+    } else {
+      states = new HashMap<String, String>();
+    }
+    this.matrix.put(taxon.getNexmlID(), states);
+    states.put(character.getNexmlID(), (state != null ? state.getNexmlID() : null));
   }
 
 }

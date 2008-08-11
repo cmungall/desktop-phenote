@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
@@ -14,6 +16,9 @@ import org.apache.xmlbeans.XmlObject;
 import org.bioontologies.obd.schema.pheno.PhenotypeDocument;
 import org.nexml.x10.AbstractBlock;
 import org.nexml.x10.AbstractChar;
+import org.nexml.x10.AbstractObs;
+import org.nexml.x10.AbstractObsMatrix;
+import org.nexml.x10.AbstractObsRow;
 import org.nexml.x10.AbstractState;
 import org.nexml.x10.AbstractStates;
 import org.nexml.x10.Dict;
@@ -42,6 +47,7 @@ public class NeXMLReader {
   
   private final List<Character> characters = new ArrayList<Character>();
   private final List<Taxon> taxa = new ArrayList<Taxon>();
+  private final Map<String, Map<String, String>> matrix = new HashMap<String, Map<String, String>>();
   private final NexmlDocument xmlDoc;
   private final OBOSession session;
   private String charactersBlockID = UUID.randomUUID().toString();
@@ -76,6 +82,10 @@ public class NeXMLReader {
   public List<Taxon> getTaxa() {
     return this.taxa;
   }
+  
+  public Map<String, Map<String, String>> getMatrix() {
+    return this.matrix;
+  }
 
   public String getCuratorsText() {
     return this.curatorsText;
@@ -99,6 +109,10 @@ public class NeXMLReader {
         this.parseStandardCells(cells);
         final Taxa taxa = NeXMLUtil.findOrCreateTaxa(this.xmlDoc, cells.getOtus());
         this.parseTaxa(taxa);
+        final AbstractObsMatrix abstractMatrix = cells.getMatrix();
+        if (abstractMatrix != null) {
+          this.parseMatrix(abstractMatrix);
+        }
         break;
       }
     }
@@ -186,6 +200,23 @@ public class NeXMLReader {
         }
       }
       this.taxa.add(newTaxon);
+    }
+  }
+  
+  private void parseMatrix(AbstractObsMatrix matrix) {
+    for (AbstractObsRow row : matrix.getRowArray()) {
+      final String otuID = row.getOtu();
+      if (otuID != null) {
+        final Map<String, String> currentTaxonMap = new HashMap<String, String>();
+        this.matrix.put(otuID, currentTaxonMap);
+        for (AbstractObs cell : row.getCellArray()) {
+          final String characterID = cell.getChar() != null ? cell.getChar().getStringValue() : null;
+          final String stateID = cell.getState() != null ? cell.getState().getStringValue() : null;
+          if (characterID != null && stateID != null) {
+            currentTaxonMap.put(characterID, stateID);
+          }
+        }
+      }
     }
   }
   

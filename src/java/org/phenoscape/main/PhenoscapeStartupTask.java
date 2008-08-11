@@ -23,6 +23,7 @@ import org.oboedit.gui.tasks.DefaultGUIStartupTask;
 import org.phenoscape.app.CrossPlatform;
 import org.phenoscape.model.PhenoscapeController;
 import org.phenoscape.swing.WindowSizePrefsSaver;
+import org.phenoscape.view.CharacterMatrixComponentFactory;
 import org.phenoscape.view.CharacterTableComponentFactory;
 import org.phenoscape.view.DataSetComponentFactory;
 import org.phenoscape.view.MenuFactory;
@@ -54,6 +55,7 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
     factories.add(new PhenotypeTableComponentFactory(this.controller));
     factories.add(new TaxonTableComponentFactory(this.controller));
     factories.add(new SpecimenTableComponentFactory(this.controller));
+    factories.add(new CharacterMatrixComponentFactory(this.controller));
     factories.add(new OntologyPreferencesComponentFactory());
     factories.add(new SessionTermInfoFactory());
     factories.add(new PhenoteOntologyTreeEditorFactory());
