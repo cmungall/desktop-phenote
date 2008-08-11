@@ -59,7 +59,12 @@ public class PhenotypeMatrixRow implements MatrixRow {
     return taxonHash;
   }
   
-  public boolean equals(PhenotypeMatrixRow pmr) {
-     return this.taxon.equals(pmr.getTaxon());
+  public boolean equals(Object o) {
+    if (o instanceof PhenotypeMatrixRow) {
+      PhenotypeMatrixRow pmr = (PhenotypeMatrixRow)o;
+      return areEqualOrNull(taxon, pmr.getTaxon());
+    } else {
+      return false;
+    }
   }
 }

@@ -20,14 +20,11 @@ public class MatrixController {
   ArrayList<MatrixRow> rows;
   
   public MatrixController () {
-    clm = CharacterListManager.main();
-    columnSet = new HashSet<MatrixColumn>();
-    columns = new ArrayList<MatrixColumn>();
-    rowSet = new HashSet<MatrixRow>();
-    rows = new ArrayList<MatrixRow>();
+    initializeVars();
   }
   
   public void buildMatrix () throws CharFieldException {
+    initializeVars();
     list = (EventList<CharacterI>) clm.getCharList();
     buildRows();
     buildColumns();
@@ -89,5 +86,13 @@ public class MatrixController {
   
   public int getNumColumns() {
     return columns.size();
+  }
+  
+  public void initializeVars () {
+    clm = CharacterListManager.main();
+    columnSet = new HashSet<MatrixColumn>();
+    columns = new ArrayList<MatrixColumn>();
+    rowSet = new HashSet<MatrixRow>();
+    rows = new ArrayList<MatrixRow>();
   }
 }

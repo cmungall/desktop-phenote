@@ -30,8 +30,7 @@ public class MatrixComponent extends AbstractGUIComponent {
 	}
 	
 	/**
-	 * This method should set up the event listeners and call the proper methods to create the interface
-	 * I don't think it is working correctly!
+	 * This method sets up the event listeners and call the proper methods to create the interface
 	 */
 	public void init() {
 		super.init();
@@ -53,13 +52,7 @@ public class MatrixComponent extends AbstractGUIComponent {
     }
     
 		matrixTableModel = new MatrixTableModel();
-		matrixTable = new JTable(matrixTableModel);
-		System.out.println("The table has this many rows: " + matrixTable.getRowCount());
-		System.out.println("The table has this many columns: " + matrixTable.getColumnCount());
-//		for (int i=0; i < matrixTable.getRowCount(); i++)
-//		  for (int j=0; j < matrixTable.getColumnCount(); j++)
-//		    System.out.println(matrixTable.getValueAt(i, j).toString());
-		      
+		matrixTable = new JTable(matrixTableModel); 
 		matrixTable.putClientProperty("Quaqua.Table.style", "striped");
 		this.add(matrixTable, BorderLayout.CENTER);
 	}
