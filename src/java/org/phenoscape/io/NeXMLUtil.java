@@ -21,6 +21,8 @@ import org.w3c.dom.NodeList;
 
 public class NeXMLUtil {
   
+  public static String TAXON_COMMENT_KEY = "phenex_comment";
+  
   public static Taxa findOrCreateTaxa(NexmlDocument doc, String id) {
     for (Taxa taxaBlock : doc.getNexml().getOtusArray()) {
       if (taxaBlock.getId().equals(id)) return taxaBlock;
@@ -91,6 +93,12 @@ public class NeXMLUtil {
     newDict.setKeyArray(new String[] {key});
     newDict.getDomNode().appendChild(defaultValue);
     return newDict;
+  }
+  
+  public static void removeDict(Annotated node, Dict dict) {
+    final List<Dict> dicts = new ArrayList<Dict>(Arrays.asList(node.getDictArray()));
+    dicts.remove(dict);
+    node.setDictArray(dicts.toArray(new Dict[] {}));
   }
   
   public static Element getDictValueNode(Dict dict) {

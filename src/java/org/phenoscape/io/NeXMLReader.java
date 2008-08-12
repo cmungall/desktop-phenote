@@ -184,6 +184,11 @@ public class NeXMLReader {
         }
         break; // there should only be one String element anyway
       }
+      final Dict commentDict = NeXMLUtil.findOrCreateDict(xmlTaxon, NeXMLUtil.TAXON_COMMENT_KEY, xmlTaxon.getDomNode().getOwnerDocument().createElement("string"));
+      for (String comment : commentDict.getStringArray()) {
+        newTaxon.setComment(comment);
+        break; // there should only be one String element anyway
+      }
       final Dict specimensDict = NeXMLUtil.findOrCreateDict(xmlTaxon, "OBO_specimens", xmlTaxon.getDomNode().getOwnerDocument().createElement("any"));
       for (XmlObject xmlObj : specimensDict.getAnyArray()) {
         final NodeList nodes = ((Element)(xmlObj.getDomNode())).getElementsByTagName("specimen");

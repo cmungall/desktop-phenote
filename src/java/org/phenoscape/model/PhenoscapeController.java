@@ -148,6 +148,7 @@ public class PhenoscapeController extends DocumentController {
   public boolean writeData(File aFile) {
     final NeXMLWriter writer = new NeXMLWriter(this.charactersBlockID, this.xmlDoc);
     writer.setDataSet(this.dataSet);
+    writer.setGenerator(this.getAppName() + " " + this.getAppVersion());
     try {
       writer.write(aFile);
       return true;
@@ -168,6 +169,10 @@ public class PhenoscapeController extends DocumentController {
   
   public void setAppName(String name) {
     this.appName = name;
+  }
+  
+  public String getAppVersion() {
+    return System.getProperty("phenex.version");
   }
 
   public SelectionManager getPhenoteSelectionManager() {

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -49,6 +50,7 @@ public class NeXMLWriter {
   private final NexmlDocument xmlDoc;
   private final String charactersBlockID;
   private DataSet data;
+  private String generator;
   private final XmlOptions options = new XmlOptions();
   
   public NeXMLWriter(String charactersBlockID) {
@@ -63,6 +65,10 @@ public class NeXMLWriter {
   
   public void setDataSet(DataSet data) {
     this.data = data;
+  }
+  
+  public void setGenerator(String appName) {
+    this.generator = appName;
   }
   
   public void write(File aFile) throws IOException {
@@ -80,6 +86,8 @@ public class NeXMLWriter {
   private NexmlDocument constructXMLDoc() {
     final NexmlDocument newDoc = (NexmlDocument)(xmlDoc.copy());
     if (newDoc.getNexml() == null) { newDoc.addNewNexml(); }
+    if (this.generator != null) { newDoc.getNexml().setGenerator(this.generator); }
+    newDoc.getNexml().setVersion(BigDecimal.valueOf(1.0));
     Dict metadata = NeXMLUtil.findOrCreateMetadataDict(newDoc);
     this.writeToMetadata(metadata, this.data.getCurators(), this.data.getPublication(), this.data.getPublicationNotes());
     final AbstractBlock charBlock = NeXMLUtil.findOrCreateCharactersBlock(newDoc, this.charactersBlockID);
@@ -169,6 +177,7 @@ public class NeXMLWriter {
       otu.setLabel(taxon.getPublicationName());
       this.writeOBOID(otu, taxon);
       this.writeSpecimens(otu, taxon);
+      this.writeComment(otu, taxon);
     }
     taxaBlock.setOtuArray(newOTUs.toArray(new org.nexml.x10.Taxon[] {}));
   }
@@ -242,19 +251,37 @@ public class NeXMLWriter {
   
   private void writeOBOID(org.nexml.x10.Taxon otu, Taxon taxon) {
     final Dict oboIDDict = NeXMLUtil.findOrCreateDict(otu, "OBO_ID", otu.getDomNode().getOwnerDocument().createElement("string"));
-    final Element stringNode = NeXMLUtil.getFirstChildWithTagName((Element)(oboIDDict.getDomNode()), "string");
-    NeXMLUtil.setTextContent(stringNode, (taxon.getValidName() != null ? taxon.getValidName().getID() : null));
+    if (taxon.getValidName() == null) {
+      NeXMLUtil.removeDict(otu, oboIDDict);
+    } else {
+      final Element stringNode = NeXMLUtil.getFirstChildWithTagName((Element)(oboIDDict.getDomNode()), "string");
+      NeXMLUtil.setTextContent(stringNode, taxon.getValidName().getID());
+    }
   }
   
   private void writeSpecimens(org.nexml.x10.Taxon otu, Taxon taxon) {
     final Dict specimensDict = NeXMLUtil.findOrCreateDict(otu, "OBO_specimens", otu.getDomNode().getOwnerDocument().createElement("any"));
     final Element any = NeXMLUtil.getFirstChildWithTagName((Element)(specimensDict.getDomNode()), "any");
     NeXMLUtil.clearChildren(any);
-    for (Specimen specimen : taxon.getSpecimens()) {
-      final Element specimenXML = any.getOwnerDocument().createElement("specimen");
-      specimenXML.setAttribute("collection", specimen.getCollectionCode() != null ? specimen.getCollectionCode().getID() : null);
-      specimenXML.setAttribute("accession", specimen.getCatalogID());
-      any.appendChild(specimenXML);
+    if (taxon.getSpecimens().isEmpty()) {
+      NeXMLUtil.removeDict(otu, specimensDict);
+    } else {
+      for (Specimen specimen : taxon.getSpecimens()) {
+        final Element specimenXML = any.getOwnerDocument().createElement("specimen");
+        specimenXML.setAttribute("collection", specimen.getCollectionCode() != null ? specimen.getCollectionCode().getID() : null);
+        specimenXML.setAttribute("accession", specimen.getCatalogID());
+        any.appendChild(specimenXML);
+      }
+    }
+  }
+  
+  private void writeComment(org.nexml.x10.Taxon otu, Taxon taxon) {
+    final Dict commentDict = NeXMLUtil.findOrCreateDict(otu, NeXMLUtil.TAXON_COMMENT_KEY, otu.getDomNode().getOwnerDocument().createElement("string"));
+    if (taxon.getComment() == null) {
+      NeXMLUtil.removeDict(otu, commentDict);
+    } else {
+      final Element stringNode = NeXMLUtil.getFirstChildWithTagName((Element)(commentDict.getDomNode()), "string");
+      NeXMLUtil.setTextContent(stringNode, taxon.getComment());
     }
   }
   
