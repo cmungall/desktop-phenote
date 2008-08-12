@@ -12,6 +12,7 @@ public class Taxon {
   private final String nexmlID;
   private OBOClass validName;
   private String publicationName;
+  private String comment;
   private final EventList<Specimen> specimens = new BasicEventList<Specimen>();
   
   public Taxon() {
@@ -40,6 +41,14 @@ public class Taxon {
   
   public void setPublicationName(String publicationName) {
     this.publicationName = publicationName;
+  }
+  
+  public String getComment() {
+    return this.comment;
+  }
+  
+  public void setComment(String comment) {
+    this.comment = comment;
   }
   
   public Specimen newSpecimen() {

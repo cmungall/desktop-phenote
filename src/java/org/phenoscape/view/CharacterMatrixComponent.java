@@ -22,7 +22,6 @@ import org.phenoscape.model.Taxon;
 import org.phenoscape.swing.PlaceholderRenderer;
 
 import phenote.gui.BugWorkaroundTable;
-import phenote.gui.TableColumnPrefsSaver;
 import ca.odell.glazedlists.CollectionList;
 import ca.odell.glazedlists.EventList;
 import ca.odell.glazedlists.event.ListEvent;
@@ -71,7 +70,8 @@ public class CharacterMatrixComponent extends PhenoscapeGUIComponent {
     editor.setClickCountToStart(2);
     matrixTable.setDefaultEditor(State.class, editor);
     matrixTable.putClientProperty("Quaqua.Table.style", "striped");
-    new TableColumnPrefsSaver(matrixTable, this.getClass().getName(), 100);
+    //TODO column saver is causing problems when a new file is loaded
+    //new TableColumnPrefsSaver(matrixTable, this.getClass().getName(), 100);
     this.getController().getDataSet().getCharacters().addListEventListener(new ListEventListener<Character>() {
       public void listChanged(ListEvent<Character> listChanges) {
         matrixTableModel.fireTableStructureChanged();
