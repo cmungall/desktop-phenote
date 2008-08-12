@@ -754,6 +754,7 @@ where xsd files are (conf) -->
         <jar destfile="${phenexjarfile}">
              <fileset dir="${classfiles}"/>
              <fileset dir="." includes="images/"/>
+        	 <fileset dir="src/java" includes="org/phenoscape/view/layouts/" />
         	 <fileset file="conf/log4j.xml"/>
         	<manifest>
         	  <attribute name="Main-Class" value="${phenex-main-class}"/>
