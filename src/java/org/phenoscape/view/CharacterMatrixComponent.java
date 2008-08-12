@@ -2,9 +2,11 @@ package org.phenoscape.view;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.swing.AbstractAction;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -12,6 +14,7 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
+import javax.swing.JToolBar;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 import org.apache.log4j.Logger;
@@ -31,9 +34,20 @@ import ca.odell.glazedlists.gui.WritableTableFormat;
 import ca.odell.glazedlists.swing.EventTableModel;
 
 public class CharacterMatrixComponent extends PhenoscapeGUIComponent {
-  
+
+  private EventTableModel<Taxon> headerModel;
   private EventTableModel<Taxon> matrixTableModel;
   private final EventList<State> allStates;
+  private static enum TaxonDisplay {
+    PUBLICATION_NAME { public String toString() { return "Display Publication Name"; }},
+    VALID_NAME { public String toString() { return "Display Valid Name"; }}
+  }
+  private static enum CharacterDisplay {
+    CHARACTER_NUMBER { public String toString() { return "Display Character Number"; }},
+    CHARACTER_DESCRIPTION { public String toString() { return "Display Character Description"; }}
+  }
+  private TaxonDisplay taxonOption = TaxonDisplay.VALID_NAME;
+  private CharacterDisplay characterOption = CharacterDisplay.CHARACTER_NUMBER;
 
   public CharacterMatrixComponent(String id, PhenoscapeController controller) {
     super(id, controller);
@@ -51,12 +65,11 @@ public class CharacterMatrixComponent extends PhenoscapeGUIComponent {
     super.init();
     this.initializeInterface();
   }
-  
+
   private void initializeInterface() {
     this.setLayout(new BorderLayout());
-    
-    final EventTableModel<Taxon> headerModel = new EventTableModel<Taxon>(this.getController().getDataSet().getTaxa(), new HeaderTableFormat());
-    final JTable headerTable = new BugWorkaroundTable(headerModel);
+    this.headerModel = new EventTableModel<Taxon>(this.getController().getDataSet().getTaxa(), new HeaderTableFormat());
+    final JTable headerTable = new BugWorkaroundTable(this.headerModel);
     headerTable.putClientProperty("Quaqua.Table.style", "striped");
     headerTable.setDefaultRenderer(Taxon.class, new TaxonRenderer());
     this.matrixTableModel = new EventTableModel<Taxon>(this.getController().getDataSet().getTaxa(), new MatrixTableFormat());
@@ -70,8 +83,7 @@ public class CharacterMatrixComponent extends PhenoscapeGUIComponent {
     editor.setClickCountToStart(2);
     matrixTable.setDefaultEditor(State.class, editor);
     matrixTable.putClientProperty("Quaqua.Table.style", "striped");
-    //TODO column saver is causing problems when a new file is loaded
-    //new TableColumnPrefsSaver(matrixTable, this.getClass().getName(), 100);
+    matrixTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     this.getController().getDataSet().getCharacters().addListEventListener(new ListEventListener<Character>() {
       public void listChanged(ListEvent<Character> listChanges) {
         matrixTableModel.fireTableStructureChanged();
@@ -90,6 +102,31 @@ public class CharacterMatrixComponent extends PhenoscapeGUIComponent {
     splitPane.setDividerLocation(150);
     splitPane.setDividerSize(3);
     this.add(splitPane, BorderLayout.CENTER);
+    this.add(this.createToolBar(), BorderLayout.SOUTH);
+  }
+  
+  private JToolBar createToolBar() {
+    final JToolBar toolBar = new JToolBar();
+    final JComboBox taxonBox = new JComboBox(TaxonDisplay.values());
+    taxonBox.setSelectedItem(this.taxonOption);
+    taxonBox.setAction(new AbstractAction() {
+      public void actionPerformed(ActionEvent e) {
+        taxonOption = (TaxonDisplay)(taxonBox.getSelectedItem());
+        headerModel.fireTableDataChanged();
+      }
+    });
+    final JComboBox characterBox = new JComboBox(CharacterDisplay.values());
+    characterBox.setSelectedItem(this.characterOption);
+    characterBox.setAction(new AbstractAction() {
+      public void actionPerformed(ActionEvent e) {
+        characterOption = (CharacterDisplay)(characterBox.getSelectedItem());
+        matrixTableModel.fireTableStructureChanged();
+      }
+    });
+    toolBar.add(taxonBox);
+    toolBar.add(characterBox);
+    toolBar.setFloatable(false);
+    return toolBar;
   }
   
   private class HeaderTableFormat implements AdvancedTableFormat<Taxon> {
@@ -99,7 +136,6 @@ public class CharacterMatrixComponent extends PhenoscapeGUIComponent {
     }
 
     public Comparator<?> getColumnComparator(int column) {
-      // TODO Auto-generated method stub
       return null;
     }
 
@@ -128,12 +164,16 @@ public class CharacterMatrixComponent extends PhenoscapeGUIComponent {
     }
 
     public Comparator<?> getColumnComparator(int column) {
-      // TODO Auto-generated method stub
       return null;
     }
 
     public String getColumnName(int column) {
-      return (column + 1) + ": " + this.getCharacter(column).getLabel();
+      if (characterOption.equals(CharacterDisplay.CHARACTER_DESCRIPTION)) {
+        return this.getCharacter(column).toString();
+      } else if (characterOption.equals(CharacterDisplay.CHARACTER_NUMBER)) {
+        return "" + (column + 1);
+      }
+      return null;
     }
 
     public Object getColumnValue(Taxon taxon, int column) {
@@ -195,16 +235,21 @@ public class CharacterMatrixComponent extends PhenoscapeGUIComponent {
 
   }
   
-  private class TaxonRenderer extends PlaceholderRenderer {
+  private class TaxonRenderer extends TermRenderer {
 
     public TaxonRenderer() {
-      super("Untitled");
+      super("untitled");
     }
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-      final Object newValue = value != null ? ((Taxon)value).getPublicationName() : value;
-      return super.getTableCellRendererComponent(table, newValue, isSelected, hasFocus, row, column);
+      if (taxonOption.equals(TaxonDisplay.VALID_NAME)) {
+        final Object newValue = value != null ? ((Taxon)value).getValidName() : value;
+        return super.getTableCellRendererComponent(table, newValue, isSelected, hasFocus, row, column);
+      } else {
+        final Object newValue = value != null ? ((Taxon)value).getPublicationName() : value;
+        return super.getTableCellRendererComponent(table, newValue, isSelected, hasFocus, row, column);
+      }
     }
     
   }
