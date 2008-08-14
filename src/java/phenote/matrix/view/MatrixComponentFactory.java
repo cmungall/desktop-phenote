@@ -26,6 +26,4 @@ public class MatrixComponentFactory extends AbstractComponentFactory<MatrixCompo
 	public String getName() {
 		return "Matrix Viewer";
 	}
-
-	// Do I need to implement a isSingleton method like Jim does in his factory classes?
 }

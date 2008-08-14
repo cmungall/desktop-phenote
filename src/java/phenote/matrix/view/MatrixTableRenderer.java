@@ -1,7 +1,8 @@
 package phenote.matrix.view;
 
 import javax.swing.table.DefaultTableCellRenderer;
-import org.obo.datamodel.OBOClass;
+import phenote.matrix.model.MatrixCell;
+import phenote.matrix.model.PhenotypeMatrixCell;
 
 public class MatrixTableRenderer extends DefaultTableCellRenderer {
 
@@ -12,13 +13,23 @@ public class MatrixTableRenderer extends DefaultTableCellRenderer {
 	/**
 	 *  Assuming the entry to put into the matrix element is of type OBOClass,
 	 *  the name representation (a String) is retrieved and used
-	 *  My MatrixRowElement class will have to be rewritten to use this if this is preferable
 	 */
 	public void setValue (Object value) {
-		if (value!= null && value instanceof OBOClass) {
-			OBOClass cellValue = (OBOClass) value;
-			value = cellValue.getName();
+	  String strValue = "";
+	  if (value!= null && value instanceof MatrixCell) {
+		  PhenotypeMatrixCell cellValue = (PhenotypeMatrixCell) value;
+			strValue = cellValue.getQuality().getName();
 		}
-		super.setValue(value);
+	  if (! (value instanceof MatrixCell)) {
+	    strValue = "Not a Matrix Cell";
+	    //strValue = value.getClass().getName();
+	  }
+	  if (value == null) {
+	    strValue = "I'm null!";
+	  }
+	  if (value instanceof String) {
+	    strValue = (String) value;
+	  }
+		super.setText(strValue);
 	}
 }

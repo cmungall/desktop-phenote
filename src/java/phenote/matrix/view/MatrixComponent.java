@@ -1,6 +1,7 @@
 package phenote.matrix.view;
 
 import org.bbop.framework.AbstractGUIComponent;
+import org.phenoscape.swing.PlaceholderRenderer;
 
 import phenote.dataadapter.LoadSaveListener;
 import phenote.dataadapter.LoadSaveManager;
@@ -9,8 +10,12 @@ import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
 import phenote.matrix.model.MatrixController;
+import phenote.matrix.model.PhenotypeMatrixRow;
+
 import java.awt.BorderLayout;
 import java.io.File;
+
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
@@ -19,6 +24,7 @@ public class MatrixComponent extends AbstractGUIComponent {
 	private final MatrixController controller;
 	private MatrixTableModel matrixTableModel;
 	private JTable matrixTable;
+	private JScrollPane matrixPane;
 	
 	public MatrixComponent(String id, MatrixController controller) {
 		super(id);
@@ -53,23 +59,42 @@ public class MatrixComponent extends AbstractGUIComponent {
     
 		matrixTableModel = new MatrixTableModel();
 		matrixTable = new JTable(matrixTableModel); 
+		matrixTable.setDefaultRenderer(Object.class, new MatrixTableRenderer());
 		matrixTable.putClientProperty("Quaqua.Table.style", "striped");
-		this.add(matrixTable, BorderLayout.CENTER);
+		matrixPane = new JScrollPane (matrixTable);
+		matrixTable.setFillsViewportHeight(true);
+		this.add(matrixTable.getTableHeader(), BorderLayout.PAGE_START);
+		this.add(matrixPane, BorderLayout.CENTER);
 	}
 		
 	//--------------------------------------------------------------------------------------------------------------------------------------
 	private class MatrixTableModel extends AbstractTableModel {
 
     public int getColumnCount() {
-      return controller.getNumColumns();
+      return controller.getNumColumns() + 1;
     }
 
     public int getRowCount() {
       return controller.getNumRows();
     }
+    
+    public String getColumnName(int columnIndex) {
+      if (columnIndex == 0) {
+        return "Taxon";
+      }
+      else {
+        return controller.getColumnHeader(columnIndex-1);        
+      }
+    }
 
     public Object getValueAt(int rowIndex, int columnIndex) {
-      return controller.getValueAt(rowIndex, columnIndex);
+      if (columnIndex == 0) {
+        // Yes, this is tightly coupled with the PhenotypeMatrixRow class, I know...
+        return ((PhenotypeMatrixRow) controller.getRows().get(rowIndex)).getTaxon().getName();
+      }
+      else {
+        return controller.getValueAt(rowIndex, columnIndex-1);        
+      }
     }
 	}
 	

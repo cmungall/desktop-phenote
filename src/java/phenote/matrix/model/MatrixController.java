@@ -17,7 +17,7 @@ public class MatrixController {
   Set<MatrixColumn> columnSet;
   Set<MatrixRow> rowSet;
   ArrayList<MatrixColumn> columns; 
-  ArrayList<MatrixRow> rows;
+  private ArrayList<MatrixRow> rows;
   
   public MatrixController () {
     initializeVars();
@@ -33,7 +33,7 @@ public class MatrixController {
   public void buildRows () throws CharFieldException {
     for (CharacterI ch : list) {
       OBOClass currTaxa;
-      currTaxa = ch.getTerm("Valid Taxon");
+      currTaxa = ch.getTerm("GC");
       PhenotypeMatrixRow pmr = new PhenotypeMatrixRow (currTaxa);
       rowSet.add (pmr);
     }
@@ -47,15 +47,11 @@ public class MatrixController {
       // Build the matrix column from the current Character in the list
       OBOClass currEntity, currQuality, currEntity2;
       try {
-        currEntity = ch.getTerm("Entity");
+        currEntity = ch.getTerm("E");
       } catch (CharFieldException e) {
         currEntity = null;
       }
-      try {
-        currQuality = OboUtil.getAttributeForValue(ch.getTerm("Quality"));
-      } catch (CharFieldException e) {
-        currQuality = null;
-      }
+      currQuality = OboUtil.getAttributeForValue(ch.getQuality());
       try {
         currEntity2 = ch.getTerm("E2");
       } catch (CharFieldException e) {
@@ -74,9 +70,12 @@ public class MatrixController {
     MatrixColumn column = columns.get(colIndex);
     for (CharacterI ch : list) {
      if (row.isValue(ch) && column.isValue(ch)) {
+       // This println statement only happens for the character that has an entity2 - why?
+       System.out.println("Found a match for " + rowIndex + ", " + colIndex + ".");
        return column.getValue(ch);
      }
     }
+    // This gets returned WAY too often - why?
     return null;
   }
   
@@ -88,11 +87,20 @@ public class MatrixController {
     return columns.size();
   }
   
+  public String getColumnHeader (int index) {
+    PhenotypeMatrixColumn pmc = (PhenotypeMatrixColumn) columns.get(index);
+    return pmc.getEntity().getName();
+  }
+  
   public void initializeVars () {
     clm = CharacterListManager.main();
     columnSet = new HashSet<MatrixColumn>();
     columns = new ArrayList<MatrixColumn>();
     rowSet = new HashSet<MatrixRow>();
     rows = new ArrayList<MatrixRow>();
+  }
+
+  public ArrayList<MatrixRow> getRows() {
+    return rows;
   }
 }
