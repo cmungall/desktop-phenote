@@ -28,7 +28,7 @@ public class NeXMLUtil {
       if (taxaBlock.getId().equals(id)) return taxaBlock;
     }
     // no taxa block was found, so create one for that id
-    final Taxa newTaxa = doc.getNexml().addNewOtus();
+    final Taxa newTaxa = doc.getNexml().insertNewOtus(0);
     newTaxa.setId(id);
     return newTaxa;
   }

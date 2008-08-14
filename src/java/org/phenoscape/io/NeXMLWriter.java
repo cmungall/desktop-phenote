@@ -7,13 +7,16 @@ import java.io.Writer;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
 import org.apache.xmlbeans.XmlAnySimpleType;
+import org.apache.xmlbeans.XmlCursor;
 import org.apache.xmlbeans.XmlOptions;
 import org.bioontologies.obd.schema.pheno.PhenotypeCharacterDocument.PhenotypeCharacter;
 import org.bioontologies.obd.schema.pheno.PhenotypeManifestationDocument.PhenotypeManifestation;
@@ -61,6 +64,11 @@ public class NeXMLWriter {
     this.charactersBlockID = charactersBlockID;
     this.xmlDoc = startingDoc;
     this.options.setSavePrettyPrint();
+    Map<String, String> suggestedPrefixes = new HashMap<String, String>();
+    suggestedPrefixes.put("http://www.nexml.org/1.0", "nex");
+    this.options.setSaveAggressiveNamespaces();
+    this.options.setSaveSuggestedPrefixes(suggestedPrefixes);
+    this.options.setSaveNamespacesFirst();
   }
   
   public void setDataSet(DataSet data) {
@@ -101,6 +109,10 @@ public class NeXMLWriter {
     }
     final Taxa taxaBlock = NeXMLUtil.findOrCreateTaxa(newDoc, taxaID);
     this.writeTaxa(taxaBlock);
+    // move taxa ahead of characters
+    final XmlCursor firstCharCursor = newDoc.getNexml().getCharactersArray()[0].newCursor();
+    final XmlCursor taxaCursor = taxaBlock.newCursor();
+    taxaCursor.moveXml(firstCharCursor);
     return newDoc;
   }
   
