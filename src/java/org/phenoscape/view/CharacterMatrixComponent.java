@@ -46,8 +46,13 @@ public class CharacterMatrixComponent extends PhenoscapeGUIComponent {
     CHARACTER_NUMBER { public String toString() { return "Display Character Number"; }},
     CHARACTER_DESCRIPTION { public String toString() { return "Display Character Description"; }}
   }
+  private static enum StateDisplay {
+    STATE_SYMBOL { public String toString() { return "Display State Symbol"; }},
+    STATE_DESCRIPTION { public String toString() { return "Display State Description"; }}
+  }
   private TaxonDisplay taxonOption = TaxonDisplay.VALID_NAME;
   private CharacterDisplay characterOption = CharacterDisplay.CHARACTER_NUMBER;
+  private StateDisplay stateOption = StateDisplay.STATE_SYMBOL;
 
   public CharacterMatrixComponent(String id, PhenoscapeController controller) {
     super(id, controller);
@@ -123,8 +128,17 @@ public class CharacterMatrixComponent extends PhenoscapeGUIComponent {
         matrixTableModel.fireTableStructureChanged();
       }
     });
+    final JComboBox stateBox = new JComboBox(StateDisplay.values());
+    stateBox.setSelectedItem(this.stateOption);
+    stateBox.setAction(new AbstractAction() {
+      public void actionPerformed(ActionEvent e) {
+        stateOption = (StateDisplay)(stateBox.getSelectedItem());
+        matrixTableModel.fireTableDataChanged();
+      }
+    });
     toolBar.add(taxonBox);
     toolBar.add(characterBox);
+    toolBar.add(stateBox);
     toolBar.setFloatable(false);
     return toolBar;
   }
@@ -199,6 +213,23 @@ public class CharacterMatrixComponent extends PhenoscapeGUIComponent {
 
     public StateCellRenderer() {
       super("?");
+    }
+
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+      final State state = (State)value;
+      if (state != null) {
+        final Object newValue;
+        if (stateOption.equals(StateDisplay.STATE_SYMBOL)) {
+          newValue = state.getSymbol() != null ? state.getSymbol() : "#";
+        }  else {
+          newValue = state.getLabel() != null ? state.getLabel() : "untitled";
+        }
+        return super.getTableCellRendererComponent(table, newValue, isSelected, hasFocus, row, column);
+      } else {
+        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+      }
+
     }
 
   }

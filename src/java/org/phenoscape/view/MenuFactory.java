@@ -43,6 +43,21 @@ public class MenuFactory {
     };
     openAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
     menu.add(new JMenuItem(openAction));
+    final Action importNEXUSAction = new AbstractAction("Import NEXUS...") {
+      public void actionPerformed(ActionEvent e) { controller.importFile(); }
+    };
+    menu.add(new JMenuItem(importNEXUSAction));
+    final Action mergeTaxaAction = new AbstractAction("Tab-delimited Taxa...") {
+      public void actionPerformed(ActionEvent e) { controller.openMergeTaxa(); }
+    };
+    final Action mergeCharactersAction = new AbstractAction("Tab-delimited Characters...") {
+      public void actionPerformed(ActionEvent e) { controller.openMergeCharacters(); }
+    };
+    mergeCharactersAction.setEnabled(false); //TODO this is temporary until the functionality is implemented
+    final JMenu mergeMenu = new JMenu("Merge");
+    mergeMenu.add(new JMenuItem(mergeTaxaAction));
+    mergeMenu.add(new JMenuItem(mergeCharactersAction));
+    menu.add(mergeMenu);
     menu.addSeparator();
     final Action saveAction = new AbstractAction("Save") {
       public void actionPerformed(ActionEvent e) { controller.save(); }

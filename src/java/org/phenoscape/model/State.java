@@ -73,7 +73,7 @@ public class State {
   }
   
   public String toString() {
-    final String prefix = this.getSymbol() != null ? this.getSymbol() + ", " : "";
+    final String prefix = this.getSymbol() != null ? this.getSymbol() + " - " : "";
     final String suffix = this.getLabel() != null ? this.getLabel() : "untitled";
     return prefix + suffix;
   }

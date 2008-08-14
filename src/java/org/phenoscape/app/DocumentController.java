@@ -31,6 +31,17 @@ public abstract class DocumentController {
     }
   }
   
+  public void importFile() {
+    final JFileChooser fileChooser = new JFileChooser();
+    final int result = fileChooser.showOpenDialog(GUIManager.getManager().getFrame());
+    if (result == JFileChooser.APPROVE_OPTION) {
+      final File file = fileChooser.getSelectedFile();
+      final boolean success = this.readData(file);
+      if (success) { this.setCurrentFile(null); }
+      else { this.runFileReadErrorMessage(); }
+    }
+  }
+  
   public void save() {
     if (this.getCurrentFile() == null) {
       this.saveAs();

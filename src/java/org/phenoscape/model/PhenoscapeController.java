@@ -6,15 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 import org.apache.log4j.Logger;
 import org.apache.xmlbeans.XmlException;
 import org.bbop.framework.GUIManager;
+import org.biojava.bio.seq.io.ParseException;
 import org.nexml.x10.NexmlDocument;
 import org.phenoscape.app.DocumentController;
+import org.phenoscape.io.NEXUSReader;
 import org.phenoscape.io.NeXMLReader;
 import org.phenoscape.io.NeXMLWriter;
+import org.phenoscape.io.TaxonTabReader;
 import org.phenoscape.swing.ListSelectionMaintainer;
 
 import phenote.gui.selection.SelectionManager;
@@ -118,9 +122,16 @@ public class PhenoscapeController extends DocumentController {
     return this.currentSpecimensSelectionModel;
   }
 
-  @Override
+  //@Override
   public boolean readData(File aFile) {
     log().debug("Read file: " + aFile);
+    if (aFile.getName().endsWith(".nex") || aFile.getName().endsWith(".nxs")) {
+      return this.readNEXUS(aFile);
+    }
+    return this.readNeXML(aFile);
+  }
+  
+  private boolean readNeXML(File aFile) {
     try {
       final NeXMLReader reader = new NeXMLReader(aFile, this.getOntologyController().getOBOSession());
       this.xmlDoc = reader.getXMLDoc();
@@ -144,6 +155,30 @@ public class PhenoscapeController extends DocumentController {
     return false;
   }
   
+  private boolean readNEXUS(File aFile) {
+    try {
+      final NEXUSReader reader = new NEXUSReader(aFile);
+      this.dataSet.getCharacters().clear();
+      this.dataSet.getCharacters().addAll(reader.getCharacters());
+      this.dataSet.getTaxa().clear();
+      this.dataSet.getTaxa().addAll(reader.getTaxa());
+      this.dataSet.setCurators(null);
+      this.dataSet.setPublication(null);
+      this.dataSet.setPublicationNotes(null);
+      this.getDataSet().setMatrix(reader.getMatrix());
+      
+      this.fireDataChanged();
+      return true;
+    } catch (ParseException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    return false;
+  }
+  
   @Override
   public boolean writeData(File aFile) {
     final NeXMLWriter writer = new NeXMLWriter(this.charactersBlockID, this.xmlDoc);
@@ -155,6 +190,24 @@ public class PhenoscapeController extends DocumentController {
     } catch (IOException e) {
       log().error("Unable to write NeXML file", e);
       return false;
+    }
+  }
+  
+  public void openMergeTaxa() {
+    final JFileChooser fileChooser = new JFileChooser();
+    final int result = fileChooser.showOpenDialog(GUIManager.getManager().getFrame());
+    if (result == JFileChooser.APPROVE_OPTION) {
+      final File file = fileChooser.getSelectedFile();
+      this.mergeTaxa(file);
+    }
+  }
+  
+  public void openMergeCharacters() {
+    final JFileChooser fileChooser = new JFileChooser();
+    final int result = fileChooser.showOpenDialog(GUIManager.getManager().getFrame());
+    if (result == JFileChooser.APPROVE_OPTION) {
+      final File file = fileChooser.getSelectedFile();
+      this.mergeCharacters(file);
     }
   }
   
@@ -191,6 +244,36 @@ public class PhenoscapeController extends DocumentController {
     for (NewDataListener listener : this.newDataListeners) {
       listener.reloadData();
     }
+  }
+  
+  private void mergeTaxa(File aFile) {
+    try {
+      final TaxonTabReader reader = new TaxonTabReader(aFile, this.getOntologyController().getOBOSession(), this.getOntologyController().getCollectionTermSet());
+      final List<Taxon> importedTaxa = reader.getTaxa();
+      for (Taxon importedTaxon : importedTaxa) {
+        boolean matched = false;
+        for (Taxon taxon : this.getDataSet().getTaxa()) {
+          if (taxon.getPublicationName() != null && importedTaxon.getPublicationName() != null) {
+            if (taxon.getPublicationName().equals(importedTaxon.getPublicationName())) {
+              matched = true;
+              taxon.setValidName(importedTaxon.getValidName());
+              for (Specimen specimen : importedTaxon.getSpecimens()) {
+                taxon.addSpecimen(specimen);
+              }
+            }
+          }
+        }
+        if (!matched) { this.getDataSet().addTaxon(importedTaxon); }
+      }
+ 
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+  }
+  
+  private void mergeCharacters(File aFile) {
+    
   }
   
   private Logger log() {
