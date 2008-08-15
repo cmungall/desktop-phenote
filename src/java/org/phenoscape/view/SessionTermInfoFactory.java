@@ -10,4 +10,14 @@ public class SessionTermInfoFactory extends TermInfoFactory {
     return new TermInfo2(true);
   }
 
+  @Override
+  public FactoryCategory getCategory() {
+    return FactoryCategory.ONTOLOGY;
+  }
+
+  @Override
+  public String getName() {
+    return "Term Info";
+  }
+
 }

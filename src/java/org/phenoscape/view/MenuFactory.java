@@ -32,7 +32,13 @@ public class MenuFactory {
     Collection<JMenuItem> menus = new ArrayList<JMenuItem>();
     menus.add(this.createFileMenu());
     menus.add(this.createEditMenu());
-    menus.add(new ViewMenu());
+    final ViewMenu bbopViewMenu = new ViewMenu();
+    final JMenuItem perspectivesMenu = bbopViewMenu.getItem(0);
+    final JMenuItem showMenu = bbopViewMenu.getItem(1);
+    perspectivesMenu.setText("Window");
+    showMenu.setText("View");
+    menus.add(showMenu);
+    menus.add(perspectivesMenu);
     return menus;
   }
 
@@ -97,7 +103,7 @@ public class MenuFactory {
     copyAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
     menu.add(new JMenuItem(copyAction));
     final Action pasteAction = new ResponderChainAction("paste", "Paste");
-    pasteAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_P, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+    pasteAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
     menu.add(new JMenuItem(pasteAction));
     final Action selectAllAction = new ResponderChainAction("selectAll", "Select All");
     selectAllAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_A, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
