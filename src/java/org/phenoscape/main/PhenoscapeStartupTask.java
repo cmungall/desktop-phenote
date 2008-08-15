@@ -35,6 +35,7 @@ import org.phenoscape.view.StateTableComponentFactory;
 import org.phenoscape.view.TaxonTableComponentFactory;
 
 import phenote.gui.PhenoteDockingTheme;
+import phenote.gui.factories.PhenoteGraphViewFactory;
 import phenote.gui.factories.PhenoteOntologyTreeEditorFactory;
 import phenote.gui.selection.SelectionBridge;
 
@@ -59,6 +60,7 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
     //factories.add(new OntologyPreferencesComponentFactory());
     factories.add(new SessionTermInfoFactory());
     factories.add(new PhenoteOntologyTreeEditorFactory());
+    factories.add(new PhenoteGraphViewFactory());
     return factories;
   }
   
