@@ -26,6 +26,12 @@ public class ListSelectionMaintainer<T> {
     this.selectionModel = selectionModel;
     this.list.addListEventListener(new ListListener<T>());
   }
+  
+  private void selectIndex(int index) {
+    if (index < this.list.size()) {
+      selectionModel.setSelectionInterval(index, index);
+    }
+  }
 
   private class ListListener<E> implements ListEventListener<E> {
 
@@ -40,7 +46,7 @@ public class ListSelectionMaintainer<T> {
         // must use invokeLater because the selection model will not have found out about the inserted item yet
         SwingUtilities.invokeLater(new Runnable() {
           public void run() {
-            selectionModel.setSelectionInterval(selectionIndex, selectionIndex);
+            selectIndex(selectionIndex);
           }
         });
       }

@@ -42,7 +42,6 @@ public class DataSetComponent extends PhenoscapeGUIComponent {
     new PlaceholderText(this.curatorsField, "None");
     this.curatorsField.setAction(new AbstractAction() {
       public void actionPerformed(ActionEvent e) {
-        log().debug("Action performed");
         getController().getDataSet().setCurators(curatorsField.getText());
       }
     });
@@ -141,6 +140,7 @@ public class DataSetComponent extends PhenoscapeGUIComponent {
     
   }
   
+  @SuppressWarnings("unused")
   private Logger log() {
     return Logger.getLogger(this.getClass());
   }
