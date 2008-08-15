@@ -103,6 +103,8 @@ public class CharacterMatrixComponent extends PhenoscapeGUIComponent {
     final JScrollPane matrixScroller = new JScrollPane(matrixTable);
     headerScroller.getVerticalScrollBar().setModel(matrixScroller.getVerticalScrollBar().getModel());
     headerScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+    headerScroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+    matrixScroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
     final JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, headerScroller, matrixScroller);
     splitPane.setDividerLocation(150);
     splitPane.setDividerSize(3);
