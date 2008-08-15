@@ -1,7 +1,13 @@
 package phenote.matrix.view;
 
+import java.awt.BorderLayout;
+import java.io.File;
+
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
+
 import org.bbop.framework.AbstractGUIComponent;
-import org.phenoscape.swing.PlaceholderRenderer;
 
 import phenote.dataadapter.LoadSaveListener;
 import phenote.dataadapter.LoadSaveManager;
@@ -11,13 +17,6 @@ import phenote.edit.CharChangeListener;
 import phenote.edit.EditManager;
 import phenote.matrix.model.MatrixController;
 import phenote.matrix.model.PhenotypeMatrixRow;
-
-import java.awt.BorderLayout;
-import java.io.File;
-
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.AbstractTableModel;
 
 public class MatrixComponent extends AbstractGUIComponent {
 	
@@ -62,7 +61,8 @@ public class MatrixComponent extends AbstractGUIComponent {
 		matrixTable.setDefaultRenderer(Object.class, new MatrixTableRenderer());
 		matrixTable.putClientProperty("Quaqua.Table.style", "striped");
 		matrixPane = new JScrollPane (matrixTable);
-		matrixTable.setFillsViewportHeight(true);
+		//this doesn't compile
+		//matrixTable.setFillsViewportHeight(true);
 		this.add(matrixTable.getTableHeader(), BorderLayout.PAGE_START);
 		this.add(matrixPane, BorderLayout.CENTER);
 	}
