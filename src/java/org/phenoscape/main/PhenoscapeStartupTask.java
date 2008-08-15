@@ -17,6 +17,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.bbop.framework.GUIComponentFactory;
 import org.bbop.framework.GUIManager;
+import org.bbop.framework.GUITask;
 import org.bbop.framework.dock.LayoutDriver;
 import org.bbop.framework.dock.idw.IDWDriver;
 import org.oboedit.gui.tasks.DefaultGUIStartupTask;
@@ -27,7 +28,6 @@ import org.phenoscape.view.CharacterMatrixComponentFactory;
 import org.phenoscape.view.CharacterTableComponentFactory;
 import org.phenoscape.view.DataSetComponentFactory;
 import org.phenoscape.view.MenuFactory;
-import org.phenoscape.view.OntologyPreferencesComponentFactory;
 import org.phenoscape.view.PhenotypeTableComponentFactory;
 import org.phenoscape.view.SessionTermInfoFactory;
 import org.phenoscape.view.SpecimenTableComponentFactory;
@@ -56,7 +56,7 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
     factories.add(new TaxonTableComponentFactory(this.controller));
     factories.add(new SpecimenTableComponentFactory(this.controller));
     factories.add(new CharacterMatrixComponentFactory(this.controller));
-    factories.add(new OntologyPreferencesComponentFactory());
+    //factories.add(new OntologyPreferencesComponentFactory());
     factories.add(new SessionTermInfoFactory());
     factories.add(new PhenoteOntologyTreeEditorFactory());
     return factories;
@@ -178,6 +178,13 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
     return (new MenuFactory(this.controller)).createMenus();
   }
   
+  @Override
+  protected Collection<GUITask> getDefaultTasks() {
+    // OBO-Edit startup task adds some things we don't want
+    // hopefully none of these tasks are needed for operations in Phenex
+    return new ArrayList<GUITask>();
+  }
+
   private Logger log() {
     return Logger.getLogger(this.getClass());
   }
