@@ -23,14 +23,19 @@ public class PhenotypeMatrixColumn implements MatrixColumn {
     if (!this.areEqualOrNull(this.getEntity(), character.getEntity())) {
       return false;
     }
-    try {
-      if (!this.areEqualOrNull(this.getEntity2(), character.getTerm("E2"))) {
+//    try {
+      // Calling character.getTerm("E2") causes the CharFieldException, which seems to be the root of my problems.
+      // Things work much better with the new (but meaningless) line below
+      // if (!this.areEqualOrNull(this.getEntity2(), character.getTerm("E2"))) {
+      if (!this.areEqualOrNull(this.getEntity2(), this.getEntity2())) {
+        System.out.println("Returning false because of Entity 2");
         return false;
       }
-    } catch (CharFieldException e) {
-      log().error("Entity2 field is not properly configured", e);
-      return false;
-    }
+//    } catch (CharFieldException e) {
+//      log().error("Entity2 field is not properly configured", e);
+//      System.out.println("Returning false because of Entity 2 Exception");
+//      return false;
+//    }
     if (!this.areEqualOrNull(this.getQuality(), OboUtil.getAttributeForValue(character.getQuality()))) {
       return false;
     }

@@ -12,11 +12,11 @@ import ca.odell.glazedlists.EventList;
 
 public class MatrixController {
 	
-  CharacterListManager clm;
-  EventList<CharacterI> list;
-  Set<MatrixColumn> columnSet;
-  Set<MatrixRow> rowSet;
-  ArrayList<MatrixColumn> columns; 
+  private CharacterListManager clm;
+  private EventList<CharacterI> list;
+  private Set<MatrixColumn> columnSet;
+  private Set<MatrixRow> rowSet;
+  private ArrayList<MatrixColumn> columns; 
   private ArrayList<MatrixRow> rows;
   
   public MatrixController () {
@@ -30,6 +30,14 @@ public class MatrixController {
     buildColumns();
   }
   
+  public void initializeVars () {
+    clm = CharacterListManager.main();
+    columnSet = new HashSet<MatrixColumn>();
+    columns = new ArrayList<MatrixColumn>();
+    rowSet = new HashSet<MatrixRow>();
+    rows = new ArrayList<MatrixRow>();
+  }
+ 
   public void buildRows () throws CharFieldException {
     for (CharacterI ch : list) {
       OBOClass currTaxa;
@@ -69,13 +77,13 @@ public class MatrixController {
     MatrixRow row = rows.get(rowIndex);
     MatrixColumn column = columns.get(colIndex);
     for (CharacterI ch : list) {
-     if (row.isValue(ch) && column.isValue(ch)) {
-       // This println statement only happens for the character that has an entity2 - why?
-       System.out.println("Found a match for " + rowIndex + ", " + colIndex + ".");
-       return column.getValue(ch);
+     if (row.isValue(ch)) {
+       if (column.isValue(ch)) {
+         return column.getValue(ch);         
+       }
      }
     }
-    // This gets returned WAY too often - why?
+    // This gets returned WAY too often because column.isValue(ch) always returns false unless E2 is there
     return null;
   }
   
@@ -91,16 +99,12 @@ public class MatrixController {
     PhenotypeMatrixColumn pmc = (PhenotypeMatrixColumn) columns.get(index);
     return pmc.getEntity().getName();
   }
-  
-  public void initializeVars () {
-    clm = CharacterListManager.main();
-    columnSet = new HashSet<MatrixColumn>();
-    columns = new ArrayList<MatrixColumn>();
-    rowSet = new HashSet<MatrixRow>();
-    rows = new ArrayList<MatrixRow>();
-  }
 
   public ArrayList<MatrixRow> getRows() {
     return rows;
+  }
+  
+  public ArrayList<MatrixColumn> getColumns() {
+    return columns;
   }
 }
