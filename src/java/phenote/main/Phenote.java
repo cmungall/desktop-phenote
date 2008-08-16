@@ -10,8 +10,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -34,7 +32,6 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.oboedit.gui.Preferences;
 
-import phenote.charactertemplate.CharacterTemplateController;
 import phenote.config.Config;
 import phenote.config.ConfigException;
 import phenote.config.xml.GroupDocument.Group;
@@ -292,40 +289,10 @@ public class Phenote {
 //         try { Thread.sleep(20000); } catch(Exception e){LOG.debug("interrupt");}
 //         LOG.debug("done sleeping - making main window "+new java.util.Date());
         makeMainWindow(); // with tabbed groups
-        createGroupWindows(); // template window
       }
     });
   }
-
-  private void createGroupWindows() {
-    for (Group group : getGroupsByContainer(Group.Container.WINDOW)) {
-      if (group.getInterface().equals(Group.Interface.CHARACTER_TEMPLATE)) {
-        createTemplateController(group.getGroupAdapter(), group.getName());
-      }
-    }
-  }
   
-  private CharacterTemplateController createTemplateController(String className, String groupName) {
-    final String errorMessage = "Failed creating CharacterTemplate";
-    try {
-      Class<?> adapterClass = Class.forName(className);
-      Constructor<?> constructor = adapterClass.getConstructor(String.class);
-      Object templateController = constructor.newInstance(groupName);
-      return (CharacterTemplateController)templateController;
-    } catch (ClassNotFoundException e) {
-      LOG.error(errorMessage, e);
-    } catch (InstantiationException e) {
-      LOG.error(errorMessage, e);
-    } catch (IllegalAccessException e) {
-      LOG.error(errorMessage, e);
-    } catch (NoSuchMethodException e) {
-      LOG.error(errorMessage, e);
-    } catch (InvocationTargetException e) {
-      LOG.error(errorMessage, e);
-    }
-    return null;
-  }
-
   private int getNumGroupTabs() {
     if (getGroupTabs() == null) return 0;
     return getGroupTabs().size();

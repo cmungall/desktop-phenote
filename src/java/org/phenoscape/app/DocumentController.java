@@ -6,7 +6,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 import org.apache.log4j.Logger;
-import org.bbop.framework.GUIManager;
 
 /**
  * A general class managing reading and writing of document files and the data loaded from those files.
@@ -22,7 +21,7 @@ public abstract class DocumentController {
   
   public void open() {
     final JFileChooser fileChooser = new JFileChooser();
-    final int result = fileChooser.showOpenDialog(GUIManager.getManager().getFrame());
+    final int result = fileChooser.showOpenDialog(this.getWindow());
     if (result == JFileChooser.APPROVE_OPTION) {
       final File file = fileChooser.getSelectedFile();
       final boolean success = this.readData(file);
@@ -33,7 +32,7 @@ public abstract class DocumentController {
   
   public void importFile() {
     final JFileChooser fileChooser = new JFileChooser();
-    final int result = fileChooser.showOpenDialog(GUIManager.getManager().getFrame());
+    final int result = fileChooser.showOpenDialog(this.getWindow());
     if (result == JFileChooser.APPROVE_OPTION) {
       final File file = fileChooser.getSelectedFile();
       final boolean success = this.readData(file);
@@ -52,7 +51,7 @@ public abstract class DocumentController {
   
   public void saveAs() {
     final JFileChooser fileChooser = new JFileChooser();
-    final int result = fileChooser.showSaveDialog(GUIManager.getManager().getFrame());
+    final int result = fileChooser.showSaveDialog(this.getWindow());
     if (result == JFileChooser.APPROVE_OPTION) {
       final File file = fileChooser.getSelectedFile();
       final boolean success = this.writeData(file);
