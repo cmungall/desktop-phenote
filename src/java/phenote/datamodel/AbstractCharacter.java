@@ -59,7 +59,7 @@ public abstract class AbstractCharacter implements CharacterI {
     if (!cf.isTerm())
       throw new CharFieldException("Cant call getTerm on Field "+cf.getName()+" not a term");
     if (!hasValue(cf))
-      throw new CharFieldException("Char "+toString()+" has no value");//return null;
+      return null;
     return getValue(cf).getOboClass();
   }
 
