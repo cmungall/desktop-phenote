@@ -30,7 +30,7 @@ public class MatrixComponent extends AbstractGUIComponent {
 		this.controller = controller;
 	}
 
-	private MatrixController getController() {
+	public MatrixController getController() {
 		return controller;
 	}
 	
@@ -52,7 +52,6 @@ public class MatrixComponent extends AbstractGUIComponent {
 	   try {
       controller.buildMatrix();
     } catch (CharFieldException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
     
@@ -61,13 +60,10 @@ public class MatrixComponent extends AbstractGUIComponent {
 		matrixTable.setDefaultRenderer(Object.class, new MatrixTableRenderer());
 		matrixTable.putClientProperty("Quaqua.Table.style", "striped");
 		matrixPane = new JScrollPane (matrixTable);
-		//this doesn't compile
-		//matrixTable.setFillsViewportHeight(true);
 		this.add(matrixTable.getTableHeader(), BorderLayout.PAGE_START);
 		this.add(matrixPane, BorderLayout.CENTER);
 	}
 		
-	//--------------------------------------------------------------------------------------------------------------------------------------
 	private class MatrixTableModel extends AbstractTableModel {
 
     public int getColumnCount() {
@@ -98,38 +94,30 @@ public class MatrixComponent extends AbstractGUIComponent {
     }
 	}
 	
-	//--------------------------------------------------------------------------------------------------------------------------------------
 	private class MatrixListener implements CharChangeListener {
     public void charChanged(CharChangeEvent e) {
-      System.out.println("Matrix Listener fired");
       try {
         controller.buildMatrix();
       } catch (CharFieldException e1) {
-        // TODO Auto-generated catch block
         e1.printStackTrace();
       }
     }
 	}
 	
-	//--------------------------------------------------------------------------------------------------------------------------------------
 	private class FileListener implements LoadSaveListener {
 	  
 	  public void fileLoaded(File f) {
-	      System.out.println("File Listener, file loaded fired");
 	      try {
           controller.buildMatrix();
         } catch (CharFieldException e) {
-          // TODO Auto-generated catch block
           e.printStackTrace();
         }
 	    }
 	  
 	  public void fileSaved(File f) {
-        System.out.println("File Listener, file saved fired");
 	      try {
           controller.buildMatrix();
         } catch (CharFieldException e) {
-          // TODO Auto-generated catch block
           e.printStackTrace();
         }
 	    }

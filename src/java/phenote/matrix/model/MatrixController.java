@@ -38,10 +38,17 @@ public class MatrixController {
     rows = new ArrayList<MatrixRow>();
   }
  
-  public void buildRows () throws CharFieldException {
+  public void buildRows () {
     for (CharacterI ch : list) {
       OBOClass currTaxa;
-      currTaxa = ch.getTerm("GC");
+      try {
+        currTaxa = ch.getTerm("GC");
+      } catch (CharFieldException e ) {
+        currTaxa = null;
+      }
+      catch (NullPointerException e) {
+        currTaxa = null;
+      }
       PhenotypeMatrixRow pmr = new PhenotypeMatrixRow (currTaxa);
       rowSet.add (pmr);
     }
@@ -52,14 +59,18 @@ public class MatrixController {
 
   public void buildColumns () {
     for (CharacterI ch : list) {
-      // Build the matrix column from the current Character in the list
       OBOClass currEntity, currQuality, currEntity2;
       try {
         currEntity = ch.getTerm("E");
       } catch (CharFieldException e) {
         currEntity = null;
       }
-      currQuality = OboUtil.getAttributeForValue(ch.getQuality());
+      try{
+        currQuality = OboUtil.getAttributeForValue(ch.getQuality());
+      }
+      catch (NullPointerException e) {
+        currQuality = null;
+      }
       try {
         currEntity2 = ch.getTerm("E2");
       } catch (CharFieldException e) {
@@ -83,7 +94,6 @@ public class MatrixController {
        }
      }
     }
-    // This gets returned WAY too often because column.isValue(ch) always returns false unless E2 is there
     return null;
   }
   

@@ -19,14 +19,16 @@ public class MatrixTableRenderer extends DefaultTableCellRenderer {
 	  if (value!= null && value instanceof MatrixCell) {
 		  PhenotypeMatrixCell cellValue = (PhenotypeMatrixCell) value;
 			strValue = cellValue.getQuality().getName();
-			System.out.println(strValue);
-			if (strValue.equalsIgnoreCase("count")) {
-			    try{
-			      strValue = strValue + "=" + cellValue.getCount().getName();
-			    } catch (NullPointerException e) {
-			      System.out.println("ERROR - String was null.");
-			    }
-			}
+			try{
+			  if (strValue.equalsIgnoreCase("count")) { 
+			      strValue = strValue + " = " + cellValue.getCount();
+			  } 
+			  if (cellValue.getEntity2() != null) {
+			    strValue = strValue + " " + cellValue.getEntity2();
+			  }
+			} catch (NullPointerException e) {
+          System.out.println("ERROR - String was null.");
+      }
 	  }
 	  else if (value instanceof String) {
 	    strValue = (String) value;

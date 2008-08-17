@@ -9,19 +9,21 @@ import phenote.datamodel.CharacterI;
 public class PhenotypeMatrixCell implements MatrixCell {
 
   private OBOClass quality;
-  private OBOClass count;
-  private OBOClass measurement;
-  private OBOClass unit;
+  private OBOClass entity2;
+  private String count;
+  private String measurement;
+  private String unit;
   
   public PhenotypeMatrixCell (CharacterI ch) {
     setQuality(ch.getQuality());
     try {
-      setCount(ch.getTerm("C"));
-      setMeasurement(ch.getTerm("M"));
-      setUnit(ch.getTerm("U"));
-    }catch (CharFieldException e) {
-      log().error("Matrix Cell Character is not properly configured", e);
-    }
+      setEntity2(ch.getTerm("E2"));
+      setCount(ch.getValueString("C"));
+      setMeasurement(ch.getValueString("M"));
+      setUnit(ch.getValueString("U"));
+    } catch (CharFieldException e) {
+      e.printStackTrace();
+    }  
   }
   
   private Logger log() {
@@ -35,28 +37,36 @@ public class PhenotypeMatrixCell implements MatrixCell {
   public OBOClass getQuality() {
     return quality;
   }
+  
+  public OBOClass getEntity2() {
+    return entity2;
+  }
+  
+  public void setEntity2(OBOClass entity2) {
+    this.entity2 = entity2;
+  }
 
-  public void setCount(OBOClass count) {
+  public void setCount(String count) {
     this.count = count;
   }
 
-  public OBOClass getCount() {
+  public String getCount() {
     return count;
   }
 
-  public void setMeasurement(OBOClass measurement) {
+  public void setMeasurement(String measurement) {
     this.measurement = measurement;
   }
 
-  public OBOClass getMeasurement() {
+  public String getMeasurement() {
     return measurement;
   }
 
-  public void setUnit(OBOClass unit) {
+  public void setUnit(String unit) {
     this.unit = unit;
   }
 
-  public OBOClass getUnit() {
+  public String getUnit() {
     return unit;
   }
   
