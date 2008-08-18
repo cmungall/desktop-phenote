@@ -95,7 +95,7 @@ public class AnnotationOBOFileAdapter extends AbstractFileAdapter {
     OBOFileAdapter fa = new OBOFileAdapter();
     OBOFileAdapter.OBOAdapterConfiguration cfg =
       new OBOFileAdapter.OBOAdapterConfiguration();
-    cfg.setWritePath(file.getAbsolutePath());
+    cfg.setWritePath(f.getAbsolutePath());
     //cfg.setBasicSave(false);     
     cfg.setAllowDangling(true); 
     cfg.setSerializer("OBO_1_2");
