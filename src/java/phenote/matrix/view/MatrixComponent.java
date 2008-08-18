@@ -25,17 +25,26 @@ public class MatrixComponent extends AbstractGUIComponent {
 	private JTable matrixTable;
 	private JScrollPane matrixPane;
 	
+	/**
+	 * Creates a new GUI component with the given ID and controller
+	 * 
+	 * @param id the String identifier for this component
+	 * @param controller the controller object for this component
+	 */
 	public MatrixComponent(String id, MatrixController controller) {
 		super(id);
 		this.controller = controller;
 	}
 
+	/**
+	 * @return the controller associated with this GUI component
+	 */
 	public MatrixController getController() {
 		return controller;
 	}
 	
 	/**
-	 * This method sets up the event listeners and call the proper methods to create the interface
+	 * This method sets up the event listeners and calls the proper methods to create the interface
 	 */
 	public void init() {
 		super.init();
@@ -45,7 +54,7 @@ public class MatrixComponent extends AbstractGUIComponent {
 	}
 	
 	/**
-	 * Creates the table model for the matrix and adds the table to the interface component
+	 * This method creates the table model for the matrix and adds the table to the interface component
 	 */
 	public void initializeInterface() {
 		this.setLayout(new BorderLayout());
@@ -66,6 +75,9 @@ public class MatrixComponent extends AbstractGUIComponent {
 		
 	private class MatrixTableModel extends AbstractTableModel {
 
+	  /**
+	   * Returns one greater than the count of the ArrayList because the Valid Taxon column isn't in there
+	   */
     public int getColumnCount() {
       return controller.getNumColumns() + 1;
     }
@@ -74,6 +86,10 @@ public class MatrixComponent extends AbstractGUIComponent {
       return controller.getNumRows();
     }
     
+    /**
+     * Since the Taxon column isn't part of the columns ArrayList, this method handles that special case individually, or 
+     * otherwise subtracts one from the requested index and retrieves the value from the ArrayList
+     */
     public String getColumnName(int columnIndex) {
       if (columnIndex == 0) {
         return "Taxon";
@@ -83,6 +99,10 @@ public class MatrixComponent extends AbstractGUIComponent {
       }
     }
 
+    /**
+     * If the requested value is located in column 0, then it is a Valid Taxon name and it is retrieved from the ArrayList of PhenotypeMatrixRows
+     * Otherwise, the columnIndex value is adjusted (by subtracting one) and the value is retrieved from the controller using the getValueAt method
+     */
     public Object getValueAt(int rowIndex, int columnIndex) {
       if (columnIndex == 0) {
         // Yes, this is tightly coupled with the PhenotypeMatrixRow class, I know...

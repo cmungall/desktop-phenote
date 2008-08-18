@@ -11,8 +11,13 @@ public class MatrixTableRenderer extends DefaultTableCellRenderer {
 	}
 	
 	/**
-	 *  Assuming the entry to put into the matrix element is of type OBOClass,
-	 *  the name representation (a String) is retrieved and used
+	 * If the Object is a MatrixCell, the relevant information is extracted from the object to form the cell's contents
+	 * I only tested examples of counts and additional entities; this method should be expanded to include unit,
+	 * measurement, etc. values, but I did not append them to the cell value because I was not sure which conditions to test.
+	 * 
+	 * If a String object is given as the parameter, the contents of the string are used as the contents of the cell.
+	 * 
+	 * @param value the Object used to set the value inside the table cell
 	 */
 	public void setValue (Object value) {
 	  String strValue = "";

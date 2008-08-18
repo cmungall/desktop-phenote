@@ -26,9 +26,8 @@ public class CharacterComparator implements Comparator<CharacterI> {
 			c1value = c1.getValue(c1.getCharFieldForName(comparisonField)).getName();
 			c2value = c2.getValue(c2.getCharFieldForName(comparisonField)).getName();
 		} catch (CharFieldException e) {
-			// TO-DO: Do something here! Probably log it...
-		} finally {
-			return c1value.compareTo(c2value);	
+			// Do something here! Probably log it...
 		}
+		return c1value.compareTo(c2value);	
 	}
 }

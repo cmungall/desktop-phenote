@@ -15,5 +15,4 @@ public interface MatrixRow {
    * @return the Character's value for this particular row
    */
   public Object getValue (CharacterI aCharacter);
-
 }
