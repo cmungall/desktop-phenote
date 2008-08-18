@@ -88,6 +88,13 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
   @Override
   protected void doOtherInstallations() {
   }
+  
+  
+
+  @Override
+  protected void configureLogging() {
+    // override OBO-Edit logging
+  }
 
   /** perhaps this might change in the future so both oboedit and phenote will
    *  use the same default toolbars with save, exit, etc. buttons
