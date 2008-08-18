@@ -139,7 +139,7 @@ public class MatrixController {
    */
   public String getColumnHeader (int index) {
     PhenotypeMatrixColumn pmc = (PhenotypeMatrixColumn) columns.get(index);
-    return pmc.getEntity().getName();
+    return pmc.toString();
   }
   
   /** 

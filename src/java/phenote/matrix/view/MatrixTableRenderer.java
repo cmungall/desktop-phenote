@@ -26,7 +26,7 @@ public class MatrixTableRenderer extends DefaultTableCellRenderer {
 			strValue = cellValue.getQuality().getName();
 			try{
 			  if (strValue.equalsIgnoreCase("count")) { 
-			      strValue = strValue + " = " + cellValue.getCount();
+			      strValue = cellValue.getCount();
 			  } 
 			  if (cellValue.getEntity2() != null) {
 			    strValue = strValue + " " + cellValue.getEntity2();

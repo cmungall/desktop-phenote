@@ -146,4 +146,15 @@ public class PhenotypeMatrixColumn implements MatrixColumn {
   private Logger log() {
     return Logger.getLogger(this.getClass());
   }
+  
+  public String toString() {
+    String entityString, qualityString;
+    entityString = entity.getName();
+    try {
+      qualityString = quality.getName();
+    } catch (NullPointerException e) {
+      qualityString = "";
+    }
+    return entityString + " " + qualityString;
+  }
 }

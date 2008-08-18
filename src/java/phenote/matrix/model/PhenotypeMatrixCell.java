@@ -98,5 +98,5 @@ public class PhenotypeMatrixCell implements MatrixCell {
    */
   public void setUnit(String unit) {
     this.unit = unit;
-  }  
+  }
 }
