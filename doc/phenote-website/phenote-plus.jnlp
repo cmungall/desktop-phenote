@@ -57,7 +57,7 @@ href="phenote-plus.jnlp">
 	<jar href="jars/saaj.jar"/>
 	<jar href="jars/jaxrpc.jar"/>
 
-  <!-- for phenote+ (formerly phenote2) only -->
+  <!-- for phenote+ -->
 	<jar  href="jars/macify-1.1.jar"/>
 	<jar  href="jars/tablelayout.jar"/>
 	<jar  href="jars/idw-gpl.jar"/>
@@ -78,7 +78,7 @@ href="phenote-plus.jnlp">
   <!-- jars not needed for webstart(?) axis, commons-beanutils-1.6,  commons-discovery,
       commons-lang, eutils,jaxrpc, jdom, jebl, jhindexer, jlfgr, jnlp, jsp, jsr
       jst, junit, jwf, layouts, libquaqua, macify?   -->
-  <!-- jars needed for phenote2 but not phenote1? idw-gpl, commons*? -->
+  <!-- jars needed for phenoteplus but not phenote1? idw-gpl, commons*? -->
 
 
 
@@ -86,7 +86,7 @@ href="phenote-plus.jnlp">
     <property name="phenote.build" value="@@phenote.build@@"/>
 </resources>
 <!-- no cmd line param will ask user for config at initialization -->
-<application-desc main-class="phenote.main.Phenote2">
+<application-desc main-class="phenote.main.PhenotePlus">
 </application-desc>
 </jnlp>
 

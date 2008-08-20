@@ -156,7 +156,7 @@ them into  the classfiles directory. excludes="test/**"  -->
     </target>
 
     <target name="run-plus" depends="compile">
-        <java classname="phenote.main.Phenote2" fork="yes">
+        <java classname="phenote.main.PhenotePlus" fork="yes">
         	<jvmarg value="-Xmx500M"/>
         	<jvmarg value="-Dphenote.version=${phenote.version}"/>
         	<jvmarg value="-Dphenote.build=${phenote.build}"/>
@@ -236,7 +236,7 @@ them into  the classfiles directory. excludes="test/**"  -->
      </java>
   </target>
   <target name="run-jar-plus" depends="jar">
-     <java classname="phenote.main.Phenote2" fork="yes" jvmargs="-Xmx300M">
+     <java classname="phenote.main.PhenotePlus" fork="yes" jvmargs="-Xmx300M">
          <!-- arg value="-c configfilehereventually"/ -->
         <classpath>
           <fileset dir="${lib}">
