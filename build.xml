@@ -41,7 +41,7 @@
 	<tstamp>
 		<format property="NOW" pattern="yyyy-MM-dd_HH:mm:ss"/>
 	</tstamp>
-	<property name="phenote.version" value="1.6-beta7"/>
+	<property name="phenote.version" value="1.6-beta8"/>
 	<property name="phenote.build" value="${NOW}"/>
 
     <!-- override this from command line with  -DCONF-FILE=initial-zfin.cfg -->
@@ -636,17 +636,17 @@ where xsd files are (conf) -->
                 storepass="plumper" keypass="plumper"/>
     </target>
 
-     <path id="jars-and-oboedit-classes">
-        <fileset dir="${lib}">
-            <patternset id="non-phenote-jars">
-                <include name="**/*.jar"/>
-                <exclude name="**/phenote.jar"/>
-                <exclude name="test/**"/>
-                <exclude name="**/oboedit.jar"/>
-                <exclude name="**/org.geneontology.jar"/>
-            </patternset>
-        </fileset>
-        <fileset dir="/srv/home/mgibson/phenote/go-dev/java/oboedit/classes"/>
+    <path id="jars-and-oboedit-classes">
+      <fileset dir="${lib}">
+        <patternset id="non-phenote-jars">
+          <include name="**/*.jar"/>
+          <exclude name="**/phenote.jar"/>
+          <exclude name="test/**"/>
+          <exclude name="**/oboedit.jar"/>
+          <exclude name="**/org.geneontology.jar"/>
+        </patternset>
+      </fileset>
+      <fileset dir="/srv/home/mgibson/phenote/go-dev/java/oboedit/classes"/>
     </path>
 
   <target name="compile-with-oboedit-classes" depends="init">
@@ -654,13 +654,12 @@ where xsd files are (conf) -->
             <classpath refid="jars-and-oboedit-classes"/>
         </javac>
     </target>
-	
 		
-	<target name="dist-init">
-		<mkdir dir="${dist}"/>
-	</target>
+  <target name="dist-init">
+    <mkdir dir="${dist}"/>
+  </target>
 	
-	<taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler" classpath="${build-lib}/jarbundler-1.9.jar"/>
+  <taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler" classpath="${build-lib}/jarbundler-1.9.jar"/>
 	<!-- Create a competely self-contained double-clickable app bundle for Mac OS X in "dist/Phenote.app" -->
 	<target name="dist-mac" depends="jar, dist-init">
 		<jarbundler dir="${dist}" name="Phenote" mainclass="${main-class}" jvmversion="1.5*" vmoptions="-Xmx1024M" version="${phenote.version}" build="${phenote.build}" icon="${icon}">
