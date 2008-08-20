@@ -1,2 +1,6 @@
+Changes in version 1.6-beta8:
 - Renaming Phenote2 configuration to PhenotePlus to avoid any confusion with a future Phenote 2.0 release
 - Renaming "Comp" button to "Compose" in AnnotationEditor Panel which more intuitively suggests composition of ontology terms with relationships.
+- - Layout menu now has "Import perspective" to add a new perspective (from an
+.idw file)--phenote request
+https://sourceforge.net/tracker/index.php?func=detail&aid=1909081&group_id=76834&atid=887913
