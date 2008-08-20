@@ -84,7 +84,8 @@ public class TermCompList extends AbstractAutoCompList {
   protected void checkPostCompButton(boolean allow) {
     if (!allow) return;
     if (getCharField().postCompAllowed()) {
-      postCompButton = new JButton("Comp"); // ???
+       postCompButton = new JButton("Compose"); 
+       //aabdulla: renaming comp to compose suggesting composition of ontology terms with relationships.
       postCompButton.addActionListener(new PostCompListener());
       //fieldPanel.addPostCompButton(postCompButton);
     }
