@@ -26,7 +26,7 @@ import phenote.main.Phenote;
 
 
 /**
- * This is the standard Settings menu for the main Phenote2 configuration.  It is
+ * This is the standard Settings menu for the main PhenotePlus configuration.  It is
  * to include basic accessory operations such as setting the term-completion
  * searching capabilities (name, syn, def, obsolete), configuration setting, 
  * etc.<p>

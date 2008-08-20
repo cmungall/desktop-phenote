@@ -127,7 +127,7 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
 
   @Override
   protected String getAppName() {
-    return Phenote2.getAppName();
+    return PhenotePlus.getAppName();
   }
 
   protected Action getAboutAction() {

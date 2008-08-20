@@ -86,7 +86,7 @@
           <versionLine x="20" y="40" text="version ${compiler:sys.version}" font="Arial" fontSize="8" fontColor="0,0,0" fontWeight="500" />
         </text>
       </splashScreen>
-      <java mainClass="phenote.main.Phenote2" vmParameters="&quot;-Dcom.apple.mrj.application.apple.menu.about.name=Phenote+&quot;" arguments="" allowVMPassthroughParameters="true" preferredVM="">
+      <java mainClass="phenote.main.PhenotePlus" vmParameters="&quot;-Dcom.apple.mrj.application.apple.menu.about.name=Phenote+&quot;" arguments="" allowVMPassthroughParameters="true" preferredVM="">
         <classPath>
           <scanDirectory location="jars" failOnError="true" />
         </classPath>

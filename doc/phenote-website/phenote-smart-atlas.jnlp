@@ -88,7 +88,7 @@ href="phenote.jnlp">
 
 </resources>
 <!-- was smart-atlas.cfg, merged into birn.cfg  -->
-<application-desc main-class="phenote.main.Phenote2">
+<application-desc main-class="phenote.main.PhenotePlus">
         <argument>-c</argument>
         <argument>/birn.cfg</argument>
 </application-desc>

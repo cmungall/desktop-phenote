@@ -19,7 +19,7 @@ import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.LoadSaveListener;
 import phenote.dataadapter.LoadSaveManager;
 import phenote.main.Phenote;
-import phenote.main.Phenote2;
+import phenote.main.PhenotePlus;
 
 /**
  * Listens for editing by the user to indicate that the document needs saving before it's closed. Editing state is reset anytime a user saves
@@ -142,9 +142,9 @@ public class DirtyDocumentIndicator implements CharChangeListener, CharListChang
     // so we put a bullet in front of the window title
     if (!Phenote.isRunningOnMac()) {
       if (this.edited) {
-        GUIManager.getManager().getFrame().setTitle(BULLET + " " + Phenote2.getAppName());
+        GUIManager.getManager().getFrame().setTitle(BULLET + " " + PhenotePlus.getAppName());
       } else {
-        GUIManager.getManager().getFrame().setTitle(Phenote2.getAppName());
+        GUIManager.getManager().getFrame().setTitle(PhenotePlus.getAppName());
       }      
     }
   }

@@ -25,7 +25,7 @@ import phenote.main.Phenote;
 import phenote.gui.GetInfo;
 
 /**
- * This is the standard File menu for the main Phenote2 configuration.  It is
+ * This is the standard File menu for the main PhenotePlus configuration.  It is
  * to include basic file and software operations:  New, Open, Save As, Exit.<p>
  * 
  * Future items will include (re)Save, Print, Properties?, Close, list of

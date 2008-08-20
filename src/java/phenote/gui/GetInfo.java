@@ -42,7 +42,7 @@ import phenote.datamodel.CharacterI;
 import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyException;
 import phenote.main.Phenote;
-import phenote.main.Phenote2;
+import phenote.main.PhenotePlus;
 import phenote.util.FileUtil;
 import phenote.config.Config;
 import phenote.config.xml.OntologyFileDocument.OntologyFile;

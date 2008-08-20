@@ -37,7 +37,7 @@
 	<property name="icon" value="images/phenote_app.icns"/>
 	<property name="build-lib" value="build-lib"/>
 	
-	<property name="main-class" value="phenote.main.Phenote2"/>
+	<property name="main-class" value="phenote.main.PhenotePlus"/>
 	<tstamp>
 		<format property="NOW" pattern="yyyy-MM-dd_HH:mm:ss"/>
 	</tstamp>

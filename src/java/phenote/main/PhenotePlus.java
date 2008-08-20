@@ -4,12 +4,12 @@ import javax.swing.SwingUtilities;
 
 import org.bbop.framework.GUIManager;
 
-public class Phenote2 {
+public class PhenotePlus {
   
   private static String[] args;
 
   public static void main(String[] args) {
-    Phenote2.args = args;
+    PhenotePlus.args = args;
     Runnable r = new PhenoteRunnable();
     // Set application name on Mac so it doesn't use the ugly Java class name
     System.setProperty("com.apple.mrj.application.apple.menu.about.name", getAppName());
