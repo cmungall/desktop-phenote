@@ -37,11 +37,11 @@
 	  </li>
 	  <li>Additional export formats:  phenosyntax, xml
 	  </li>
-	  <li>configurable input fields to allow custom data entry and user-specified ontologies
+	  <li>Configurable input fields to allow custom data entry and user-specified ontologies
 	  </li>
 	  <li>Preconfigurations available for different communities
 	  </li>
-	  <li>Customized configurations easily added
+	  <li>Easy to customize your own configuration
 	  </li>
 	</ul>
 
@@ -102,14 +102,14 @@
 	    <li class="events">
 	  <p class="quick_link">
 	    <img src="images/star.gif" alt=""  class="icon_green"/>	      
-	    <a href="http://www.bioontology.org/wiki/index.php/Phenote:Main_Page#Phenote_Working_Group">User's Group Monthly Meeting</a>, June 5, 8:30am, Online </p>
-<p>Topic: modifying configuration files</p>
+	    Next <a href="http://www.bioontology.org/wiki/index.php/Phenote:Main_Page#Phenote_Working_Group">User's
+	    Group Monthly Meeting</a>, Online, September date TBA </p>
 	    </li> 
 	  </ul>
 	  <h3>Meetings/Demos</h3>
 	  <ul class="events">
 	    <li class="events">
-	    <p>(none scheduled at this time)</p>
+	      None scheduled at this time</li>
 	    </li>
 	    <!-- li class="events">
 	    <p class="quick_link">
@@ -137,7 +137,7 @@
 	  <p>04.16.2008 - Phenote will receive a "Google Summer of Code" student through our hosting organization, NESCent.  Welcome Michael Wallinga to our team for the summer.  You can find a description of his project <a href="http://www.nescent.org/wg_phyloinformatics/Phyloinformatics_summer_of_Code_2008#Matrix_display_of_phenotype_annotations_using_ontologies_in_Phenote">here</a></p>
 	  <p>04.15.2008 - Phenote 1.6-beta4 <a href="http://www.phenote.org/phenote/1.6-beta4/phenote.jnlp">Phenote webstart release 1.6-beta4</a></p>
 	  <p>04.15.2008 - <a href="https://sourceforge.net/project/showfiles.php?group_id=76834">Phenote sourceforge page</a> introducted to house beta releases</p>
-	  <p>03.04.2008 - NEW<a href="http://www.phenote.org/phenote/1.5/phenote.jnlp">Phenote webstart release 1.5</a></p>
+	  <p>03.04.2008 - <a href="http://www.phenote.org/phenote/1.5/phenote.jnlp">Phenote webstart release 1.5</a></p>
 	  <p>03.04.2008 - Release of <a href="http://www.phenote.org/download.shtml">Phenote+</a> with platform-specific installers.</p>
 	  <p>03.01.2008 - We'd like to know more about what kind of computer you are using.  <a href="http://FreeOnlineSurveys.com/rendersurvey.asp?sid=bf1bbbvdppbjw56402139" onClick="window.open('http://FreeOnlineSurveys.com/rendersurvey.asp?sid=bf1bbbvdppbjw56402139', '','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width=700,height=480');return false" ><b>Please take our survey</b></a></p>
 	  <!--

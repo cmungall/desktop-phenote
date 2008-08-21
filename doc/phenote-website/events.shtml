@@ -16,15 +16,12 @@
 	  News and Events
 	</div>
 
-	<h1>Upcoming Events, 2008</h1>
-	<h2>March, 2008</h2>
-	<ul>
-	  <li>03.06.2008 - Phenote Users Group, Online
-	  </li>
-	  <li>03.03.2008 - NEW<a href="http://www.phenote.org/phenote/1.5/phenote.jnlp">Phenote webstart release 1.5</a></li>
-	  <li>03.03.2008 - Silent release of <a href="http://www.phenote.org/download.shtml">Phenote+ for Mac OSX</a> </li>
-	  <li>03.01.2008 - We'd like to know more about what kind of computer you are using.  <a href="http://FreeOnlineSurveys.com/rendersurvey.asp?sid=bf1bbbvdppbjw56402139" onClick="window.open('http://FreeOnlineSurveys.com/rendersurvey.asp?sid=bf1bbbvdppbjw56402139', '','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width=700,height=480');return false" ><b>Please take our survey</b></a></li>	  
+	<h1>Past News and Events</h1>
+	  <h2>June, 2008</h2>
+	  <ul>
+	    <li>06.05.2008, 8:30am PDT - Phenote Users Group, Online</li>
 	  </ul>
+
 	  <h2>April, 2008</h2>
 	  <ul>
 	    <li>04.03.2008 - Phenote Users Group, Online</li>
@@ -33,7 +30,15 @@
 	    Jamboree Meeting, <a href="http://www.nescent.org/">NESCent</a>,
 	    Durham, NC </li>
 	  </ul>
-	<h1>Past News and Events</h1>
+
+	<h2>March, 2008</h2>
+	<ul>
+	  <li>03.06.2008 - Phenote Users Group, Online
+	  </li>
+	  <li>03.03.2008 - NEW<a href="http://www.phenote.org/phenote/1.5/phenote.jnlp">Phenote webstart release 1.5</a></li>
+	  <li>03.03.2008 - Silent release of <a href="http://www.phenote.org/download.shtml">Phenote+ for Mac OSX</a> </li>
+	  <li>03.01.2008 - We'd like to know more about what kind of computer you are using.  <a href="http://FreeOnlineSurveys.com/rendersurvey.asp?sid=bf1bbbvdppbjw56402139" onClick="window.open('http://FreeOnlineSurveys.com/rendersurvey.asp?sid=bf1bbbvdppbjw56402139', '','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width=700,height=480');return false" ><b>Please take our survey</b></a></li>	  
+	  </ul>
 	
 	<h2>February, 2008</h2>
 	<ul>
@@ -50,10 +55,12 @@
 	  </li>
 	</ul>
 	<h2>December, 2007</h2>
+	  <ul>
 	  <li>Dec 20, New Phenote Beta - <a href="http://www.phenote.org/download.shtml">version 1.5-beta2</a>
 	  </li>
 	  <li>Dec 6, Phenote Users Group, Online
 	  </li>
+	  </ul>
 	<h2>November</h2>
 	<ul>
 	  <li>Nov 1, Phenote Users Group, Online via WebEx
