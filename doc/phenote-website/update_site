@@ -4,6 +4,9 @@
 ## Script to update phenote.org based on script from berkeleybop.org
 ## WARNING: This script depends on subversion acting a certain way.
 ##
+## 8/21/2008: Now allows optional command-line arg(s) specifying particular
+## file(s) to be copied (e.g. "update_site events.shtml").
+## If no args specified, it will copy all of the files that are checked into svn.
 
 use strict;
 
@@ -15,11 +18,21 @@ system("find ./ -type d -exec chmod 775 {} \\;")
 system("find ./ -type f -exec chmod 664 {} \\;")
   and die;
 
+my @requested_files = ();
+if ($#ARGV >= 0) {
+    @requested_files = `svn status --verbose @ARGV`;
+    print "requested files: @requested_files\n";
+}
+else {
+    @requested_files = `svn status --verbose`;
+}
+
 ## Find all the files that are _currently_ taken care of by subversion.
-foreach $_ (`svn status --verbose`){
+foreach $_ (@requested_files){
   my @fields = split(/\s+/);
   # Make sure to throw out uncommited files and directories.
-  if ( $fields[0] eq '' && ! -d $fields[4] ){
+  if (($fields[0] eq '' || $fields[0] eq 'M')  # M means locally changed, not yet committed
+       && ! -d $fields[4] ){
     push @files, $fields[4];
   }
 }
@@ -32,5 +45,7 @@ foreach $_ (@files){ $string .=  $_ . " "; }
 #foreach $_ (@files){ print "(" . $_ . ")\n"; }
 
 ## rsync it over...
-system("rsync -lptgoDvzPR -e ssh " . $string . "lsc.lbl.gov:/local/phenote.org_80/www/htdocs")
+my $cmd = "rsync -lptgoDvzPR -e ssh " . $string . "lsc.lbl.gov:/local/phenote.org_80/www/htdocs";
+print "$cmd\n\n";
+system($cmd)
   and die;
