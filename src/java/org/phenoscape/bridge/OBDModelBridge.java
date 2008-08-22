@@ -117,6 +117,7 @@ public class OBDModelBridge {
 					annotLink.setTargetId(phenotypeIdMap.get(p));
 					annotLink.setRelationId(TAXON_PHENOTYPE_REL_ID);
 					annotLink.addSubLinkStatement("posited_by", dsId);
+					graph.addStatement(annotLink);
 					
 					// link description of biology back to data
 					Node cellNode = createInstanceNode(UUID.randomUUID().toString(),CELL_TYPE_ID);
