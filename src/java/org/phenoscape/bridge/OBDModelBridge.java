@@ -35,7 +35,7 @@ public class OBDModelBridge {
 	protected String REFERS_TO_TAXON_REL_ID = "cdao:hasTaxon"; // has_TU? TODO
 	protected String HAS_CHARACTER_REL_ID = "cdao:has_Character"; // 
 	protected String HAS_PHENOTYPE_REL_ID = "cdao:has_Phenotype"; // TODO
-	protected String TAXON_PHENOTYPE_REL_ID = "encodes"; // TODO
+	protected String TAXON_PHENOTYPE_REL_ID = "exhibits"; // TODO
 	protected String CELL_TO_STATE_REL_ID = "cdao:has_State"; // TODO
 	protected String ANNOT_TO_CELL_REL_ID = "has_source"; // TODO
 	private static TermVocabulary vocab = new TermVocabulary();
@@ -91,7 +91,7 @@ public class OBDModelBridge {
 
 			for (State state : character.getStates()) {
 				String sid = UUID.randomUUID().toString();
-				Node stateNode = createInstanceNode(cid,STATE_TYPE_ID);
+				Node stateNode = createInstanceNode(sid,STATE_TYPE_ID);
 				stateNode.setLabel(state.getLabel());
 				stateIdMap.put(state, sid);
 				LinkStatement c2s = new LinkStatement(cid, HAS_STATE_REL_ID, sid);
