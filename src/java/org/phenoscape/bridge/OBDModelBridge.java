@@ -83,14 +83,16 @@ public class OBDModelBridge {
 		// link dataset to characters used in that dataset
 		for (Character character : ds.getCharacters()) {
 			String cid = UUID.randomUUID().toString();
-			createInstanceNode(cid,CHARACTER_TYPE_ID);
+			Node characterNode = createInstanceNode(cid,CHARACTER_TYPE_ID);
+			characterNode.setLabel(character.getLabel());
 			characterIdMap.put(character, cid);
 			LinkStatement ds2c = new LinkStatement(dsId, HAS_CHARACTER_REL_ID, cid);
 			graph.addStatement(ds2c);
 
 			for (State state : character.getStates()) {
 				String sid = UUID.randomUUID().toString();
-				createInstanceNode(cid,STATE_TYPE_ID);
+				Node stateNode = createInstanceNode(cid,STATE_TYPE_ID);
+				stateNode.setLabel(state.getLabel());
 				stateIdMap.put(state, sid);
 				LinkStatement c2s = new LinkStatement(cid, HAS_STATE_REL_ID, sid);
 				graph.addStatement(c2s);
