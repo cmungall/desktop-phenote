@@ -37,6 +37,7 @@ public class OBDModelBridge {
 	protected String HAS_PHENOTYPE_REL_ID = "cdao:has_Phenotype"; // TODO
 	protected String TAXON_PHENOTYPE_REL_ID = "encodes"; // TODO
 	protected String CELL_TO_STATE_REL_ID = "cdao:has_State"; // TODO
+	protected String ANNOT_TO_CELL_REL_ID = "has_source"; // TODO
 	private static TermVocabulary vocab = new TermVocabulary();
 	private static RelationVocabulary relationVocabulary = new RelationVocabulary();
 	private Map<Character,String> characterIdMap = new HashMap<Character,String>();
@@ -122,7 +123,7 @@ public class OBDModelBridge {
 					
 					// link description of biology back to data
 					Node cellNode = createInstanceNode(UUID.randomUUID().toString(),CELL_TYPE_ID);
-					
+					annotLink.addSubLinkStatement(CELL_TO_STATE_REL_ID,cellNode.getId());
 					
 					// cell to state
 					LinkStatement cell2s = new LinkStatement(cellNode.getId(), CELL_TO_STATE_REL_ID, stateIdMap.get(state)); // TODO
