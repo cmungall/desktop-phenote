@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 
 import javax.swing.JFileChooser;
@@ -15,6 +17,7 @@ import org.bbop.framework.GUIManager;
 import org.biojava.bio.seq.io.ParseException;
 import org.nexml.x10.NexmlDocument;
 import org.phenoscape.app.DocumentController;
+import org.phenoscape.io.CharacterTabReader;
 import org.phenoscape.io.NEXUSReader;
 import org.phenoscape.io.NeXMLReader;
 import org.phenoscape.io.NeXMLWriter;
@@ -257,6 +260,7 @@ public class PhenoscapeController extends DocumentController {
             if (taxon.getPublicationName().equals(importedTaxon.getPublicationName())) {
               matched = true;
               taxon.setValidName(importedTaxon.getValidName());
+              taxon.setComment(importedTaxon.getComment());
               for (Specimen specimen : importedTaxon.getSpecimens()) {
                 taxon.addSpecimen(specimen);
               }
@@ -267,13 +271,27 @@ public class PhenoscapeController extends DocumentController {
       }
  
     } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
+      log().error("Error reading taxon list file", e);
     }
   }
   
   private void mergeCharacters(File aFile) {
-    
+    try {
+      final CharacterTabReader reader = new CharacterTabReader(aFile, this.getOntologyController().getOBOSession());
+      final Map<Integer, Character> characterMap = reader.getCharacters();
+      for (Entry<Integer, Character> entry : characterMap.entrySet()) {
+        if (this.dataSet.getCharacters().size() >= entry.getKey()) {
+          final Character character = this.dataSet.getCharacters().get(entry.getKey());
+          // merge
+          character.setLabel(entry.getValue().getLabel());
+          
+        } else {
+          // add in some fashion
+        }
+      }
+    } catch (IOException e) {
+      log().error("Error reading character list file", e);
+    }
   }
   
   private Logger log() {
