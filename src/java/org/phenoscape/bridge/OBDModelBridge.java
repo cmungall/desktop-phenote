@@ -12,12 +12,13 @@ import org.obd.model.CompositionalDescription.Predicate;
 import org.obd.model.Node.Metatype;
 import org.obd.model.vocabulary.TermVocabulary;
 import org.obo.datamodel.OBOClass;
-import org.phenoscape.model.Character;
 import org.phenoscape.model.DataSet;
 import org.phenoscape.model.Phenotype;
 import org.phenoscape.model.State;
+import org.phenoscape.model.Character;
 import org.phenoscape.model.Taxon;
 import org.purl.obo.vocab.RelationVocabulary;
+
 
 public class OBDModelBridge {
 
@@ -160,7 +161,7 @@ public class OBDModelBridge {
 	}
 	
 	public Node translate(Taxon taxon) {
-		Node n = new Node(taxon.getNexmlID());
+		Node n = new Node(taxon.getValidName().getID());
 		n.setLabel(taxon.getValidName().getName());
 		graph.addNode(n);
 		return n;
