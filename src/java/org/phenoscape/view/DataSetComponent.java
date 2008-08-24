@@ -53,6 +53,8 @@ public class DataSetComponent extends PhenoscapeGUIComponent {
       }
     });
     this.pubNotesField = new JTextArea();
+    this.pubNotesField.setLineWrap(true);
+    this.pubNotesField.setWrapStyleWord(true);
     this.pubNotesField.getDocument().addDocumentListener(new PubNotesListener());
     this.applyButton = new JButton();
     this.applyButton.setEnabled(false);
