@@ -659,10 +659,10 @@ where xsd files are (conf) -->
     <mkdir dir="${dist}"/>
   </target>
 	
-  <taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler" classpath="${build-lib}/jarbundler-1.9.jar"/>
+	<taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler" classpath="${build-lib}/jarbundler-2.0.0.jar"/>
 	<!-- Create a competely self-contained double-clickable app bundle for Mac OS X in "dist/Phenote.app" -->
 	<target name="dist-mac" depends="jar, dist-init">
-		<jarbundler dir="${dist}" name="Phenote" mainclass="${main-class}" jvmversion="1.5*" vmoptions="-Xmx1024M" version="${phenote.version}" build="${phenote.build}" icon="${icon}">
+		<jarbundler dir="${dist}" name="Phenote" mainclass="${main-class}" jvmversion="1.5+" vmoptions="-Xmx1024M" version="${phenote.version}" build="${phenote.build}" icon="${icon}">
 			<jarfileset dir="${lib}"/>
 			<javaproperty name="apple.laf.useScreenMenuBar" value="true"/>
 			<javaproperty name="phenote.version" value="${phenote.version}"/>
@@ -746,7 +746,7 @@ where xsd files are (conf) -->
 	
 <property name="phenex-main-class" value="org.phenoscape.main.Phenoscape"/>
 <property name="phenexjarfile" value="jars/phenex.jar"/>
-<property name="phenex.version" value="1.0-beta3"/>
+<property name="phenex.version" value="1.0-beta4"/>
 <property name="phenex.build" value="${NOW}"/>
 	
     <target name="jar-phenex" depends="compile">
@@ -757,16 +757,18 @@ where xsd files are (conf) -->
         	 <fileset file="conf/log4j.xml"/>
         	<manifest>
         	  <attribute name="Main-Class" value="${phenex-main-class}"/>
+        	  <attribute name="SplashScreen-Image" value="images/phenote_logo.jpg"/>
         	</manifest>
         </jar>
     </target>
 	
     <!-- Create a self-contained double-clickable app bundle for Mac OS X in "dist/Phenex.app" -->
     <target name="dist-phenex-mac" depends="jar-phenex, dist-init">
-        <jarbundler dir="${dist}" name="Phenex" mainclass="${phenex-main-class}" jvmversion="1.5*" vmoptions="-Xmx1024M" version="${phenex.version}" build="${phenex.build}">
+        <jarbundler dir="${dist}" name="Phenex" mainclass="${phenex-main-class}" jvmversion="1.5+" vmoptions="-Xmx1024M" version="${phenex.version}" build="${phenex.build}" splashfile="$JAVAROOT/phenote_logo.jpg">
             <jarfileset dir="${lib}">
             	<exclude name="phenote.jar"/>
             </jarfileset>
+        	<javafilelist dir="images" files="phenote_logo.jpg"/>
             <javaproperty name="apple.laf.useScreenMenuBar" value="true"/>
             <javaproperty name="phenex.version" value="${phenex.version}"/>
             <javaproperty name="phenex.build" value="${phenex.build}"/>
