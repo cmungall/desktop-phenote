@@ -56,12 +56,21 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
         if (joinkey.equals(blank)) { continue; }
         System.out.println("Delete "+joinkey+" end"); 
         String postgres_table = "int_name"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_effector"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_torvariation"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_tortransgene"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_effected"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_tedvariation"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "int_tedtransgene"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+//        postgres_table = "int_effector"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+//        postgres_table = "int_torvariation"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+//        postgres_table = "int_tortransgene"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+//        postgres_table = "int_effected"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+//        postgres_table = "int_tedvariation"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+//        postgres_table = "int_tedtransgene"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_geneone"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_variationone"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_transgeneone"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_genetwo"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_variationtwo"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_transgenetwo"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_geneextra"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_variationextra"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "int_transgeneextra"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "int_type"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "int_phenotype"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "int_rnai"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
@@ -189,19 +198,31 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
 
         String postgres_table = "int_name"; String tag_name = "Name"; String tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "int_effector"; tag_name = "Effector"; tag_value = "";
+//        postgres_table = "int_effector"; tag_name = "Effector"; tag_value = "";
+        postgres_table = "int_geneone"; tag_name = "Effector"; tag_value = "";
         if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "int_torvariation"; tag_name = "tor Variation"; tag_value = chr.getValueString(tag_name);
+//        postgres_table = "int_torvariation"; tag_name = "tor Variation"; tag_value = chr.getValueString(tag_name);
+        postgres_table = "int_variationone"; tag_name = "tor Variation"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "int_tortransgene"; tag_name = "tor Transgene"; tag_value = chr.getValueString(tag_name);
+//        postgres_table = "int_tortransgene"; tag_name = "tor Transgene"; tag_value = chr.getValueString(tag_name);
+        postgres_table = "int_transgeneone"; tag_name = "tor Transgene"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "int_effected"; tag_name = "Effected"; tag_value = "";
+//        postgres_table = "int_effected"; tag_name = "Effected"; tag_value = "";
+        postgres_table = "int_genetwo"; tag_name = "Effected"; tag_value = "";
         if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "int_tedvariation"; tag_name = "ted Variation"; tag_value = chr.getValueString(tag_name);
+//        postgres_table = "int_tedvariation"; tag_name = "ted Variation"; tag_value = chr.getValueString(tag_name);
+        postgres_table = "int_variationtwo"; tag_name = "ted Variation"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "int_tedtransgene"; tag_name = "ted Transgene"; tag_value = chr.getValueString(tag_name);
+//        postgres_table = "int_tedtransgene"; tag_name = "ted Transgene"; tag_value = chr.getValueString(tag_name);
+        postgres_table = "int_transgenetwo"; tag_name = "ted Transgene"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "int_geneextra"; tag_name = "Gene Extra"; tag_value = "";
+        updateListField(c, s, joinkey, postgres_table, tag_name, chr);
+        postgres_table = "int_variationextra"; tag_name = "Variation Extra"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "int_transgeneextra"; tag_name = "Transgene Extra"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "int_type"; tag_name = "Type"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
@@ -322,32 +343,48 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       c1.setValue("Interaction ID",postgres_value);					// assign the allele and the column
 
-      postgres_table = "int_effector"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+//      postgres_table = "int_effector"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+      postgres_table = "int_geneone"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("Effector",postgres_value); }					// assign the queried value
 //      if (postgres_value == "") { } else { 
 //        postgres_value = postgres_value.replaceAll("\\|", "\\\",\\\"");
 //        postgres_value = "\""+postgres_value+"\"";
 //        c1.setValue("Effector",postgres_value); }					// assign the queried value
-      postgres_table = "int_torvariation"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+//      postgres_table = "int_torvariation"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+      postgres_table = "int_variationone"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("tor Variation",postgres_value); }					// assign the queried value
-      postgres_table = "int_tortransgene"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+//      postgres_table = "int_tortransgene"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+      postgres_table = "int_transgeneone"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("tor Transgene",postgres_value); }					// assign the queried value
-      postgres_table = "int_effected"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+//      postgres_table = "int_effected"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+      postgres_table = "int_genetwo"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("Effected",postgres_value); }					// assign the queried value
 //      if (postgres_value == "") { } else { 
 //        postgres_value = postgres_value.replaceAll("\\|", "\\\",\\\"");
 //        postgres_value = "\""+postgres_value+"\"";
 //        c1.setValue("Effected",postgres_value); }					// assign the queried value
-      postgres_table = "int_tedvariation"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+      postgres_table = "int_variationtwo"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("ted Variation",postgres_value); }					// assign the queried value
-      postgres_table = "int_tedtransgene"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+//      postgres_table = "int_tedtransgene"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+      postgres_table = "int_transgenetwo"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("ted Transgene",postgres_value); }					// assign the queried value
+
+      postgres_table = "int_geneextra"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+      if (postgres_value == "") { } else { postgres_value = postgres_value.replaceAll("\\|", "\\\",\\\""); postgres_value = "\""+postgres_value+"\""; c1.setValue("Gene Extra",postgres_value); }
+      postgres_table = "int_variationextra"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+      if (postgres_value == "") { } else { c1.setValue("Variation Extra",postgres_value); }					// assign the queried value
+      postgres_table = "int_transgeneextra"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+      if (postgres_value == "") { } else { c1.setValue("Transgene Extra",postgres_value); }					// assign the queried value
+
       postgres_table = "int_type"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("Type",postgres_value); }					// assign the queried value
@@ -415,7 +452,8 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
 //    JOptionPane.showMessageDialog(null,m,"Worm stub",JOptionPane.INFORMATION_MESSAGE);
 
     String nameString = "Interaction ID"; String pubString = "Pub"; String remString = "Remark"; String phenString = "Phenotype";
-    String effectorString = "Effector"; String effectedString = "Effected"; String tedvString = "ted Variation"; String torvString = "tor Variation";
+//    String effectorString = "Effector"; String effectedString = "Effected"; String tedvString = "ted Variation"; String torvString = "tor Variation";
+    String geneoneString = "Effector"; String genetwoString = "Effected"; String vtwoString = "ted Variation"; String voneString = "tor Variation";
 
     CharacterListI charList = new CharacterList();	// create the CharacterList that we will return
 
@@ -435,18 +473,30 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
     } else if (field.equals(remString)) {						// if querying the remark, get paper data
       try { rs = s.executeQuery("SELECT * FROM int_remark WHERE int_remark ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried remark
       catch (SQLException se) { System.out.println("Exception while executing int_remark remString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query int_remark"); }
-    } else if (field.equals(effectorString)) {						// if querying the effector, get paper data
-      try { rs = s.executeQuery("SELECT * FROM int_effector WHERE int_effector ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried effector
-      catch (SQLException se) { System.out.println("Exception while executing int_effector effectorString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query int_effector"); }
-    } else if (field.equals(effectedString)) {						// if querying the effected, get paper data
-      try { rs = s.executeQuery("SELECT * FROM int_effected WHERE int_effected ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried effected
-      catch (SQLException se) { System.out.println("Exception while executing int_effected effectedString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query int_effected"); }
-    } else if (field.equals(torvString)) {						// if querying the torvariation, get paper data
-      try { rs = s.executeQuery("SELECT * FROM int_torvariation WHERE int_torvariation ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried torvariation
-      catch (SQLException se) { System.out.println("Exception while executing int_torvariation torvString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query int_torvariation"); }
-    } else if (field.equals(tedvString)) {						// if querying the tedvariation, get paper data
-      try { rs = s.executeQuery("SELECT * FROM int_tedvariation WHERE int_tedvariation ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried tedvariation
-      catch (SQLException se) { System.out.println("Exception while executing int_tedvariation tedvString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query int_tedvariation"); }
+//    } else if (field.equals(effectorString)) {						// if querying the effector, get paper data
+//      try { rs = s.executeQuery("SELECT * FROM int_effector WHERE int_effector ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried effector
+//      catch (SQLException se) { System.out.println("Exception while executing int_effector effectorString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query int_effector"); }
+    } else if (field.equals(geneoneString)) {						// if querying the geneone, get paper data
+      try { rs = s.executeQuery("SELECT * FROM int_geneone WHERE int_geneone ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried geneone
+      catch (SQLException se) { System.out.println("Exception while executing int_geneone geneoneString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query int_geneone"); }
+//    } else if (field.equals(effectedString)) {						// if querying the effected, get paper data
+//      try { rs = s.executeQuery("SELECT * FROM int_effected WHERE int_effected ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried effected
+//      catch (SQLException se) { System.out.println("Exception while executing int_effected effectedString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query int_effected"); }
+    } else if (field.equals(genetwoString)) {						// if querying the genetwo, get paper data
+      try { rs = s.executeQuery("SELECT * FROM int_genetwo WHERE int_genetwo ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried genetwo
+      catch (SQLException se) { System.out.println("Exception while executing int_genetwo genetwoString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query int_genetwo"); }
+//    } else if (field.equals(torvString)) {						// if querying the torvariation, get paper data
+//      try { rs = s.executeQuery("SELECT * FROM int_torvariation WHERE int_torvariation ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried torvariation
+//      catch (SQLException se) { System.out.println("Exception while executing int_torvariation torvString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query int_torvariation"); }
+    } else if (field.equals(voneString)) {						// if querying the variationone, get paper data
+      try { rs = s.executeQuery("SELECT * FROM int_variationone WHERE int_variationone ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried variationone
+      catch (SQLException se) { System.out.println("Exception while executing int_variationone voneString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query int_variationone"); }
+//    } else if (field.equals(tedvString)) {						// if querying the tedvariation, get paper data
+//      try { rs = s.executeQuery("SELECT * FROM int_tedvariation WHERE int_tedvariation ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried tedvariation
+//      catch (SQLException se) { System.out.println("Exception while executing int_tedvariation tedvString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query int_tedvariation"); }
+    } else if (field.equals(vtwoString)) {						// if querying the variationtwo, get paper data
+      try { rs = s.executeQuery("SELECT * FROM int_variationtwo WHERE int_variationtwo ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried variationtwo
+      catch (SQLException se) { System.out.println("Exception while executing int_variationtwo vtwoString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query int_variationtwo"); }
     } else if (field.equals(pubString)) {						// if querying the publication, get paper data
       try { rs = s.executeQuery("SELECT * FROM int_paper WHERE int_paper ~ '"+query+"' ORDER BY joinkey"); }	// find the name that matches the queried name
       catch (SQLException se) { System.out.println("Exception while executing int_paper pubString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query int_paper"); }
