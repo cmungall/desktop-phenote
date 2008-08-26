@@ -63,7 +63,6 @@ public class NEXUSReader {
         for (int i = 0; i < charactersBlock.getDimensionsNChar(); i++) {
           this.characters.add(new Character());
         }
-        System.err.println(charactersBlock.getAllCharStates().size());
         for (Object o : charactersBlock.getAllCharStates()) {
           final String charNumberString = o.toString();
           final Character newChar = this.characters.get(Integer.parseInt(charNumberString) - 1);
@@ -84,7 +83,6 @@ public class NEXUSReader {
           this.matrix.put(taxon.getNexmlID(), currentMap);
           List states = charactersBlock.getMatrixData(taxon.getPublicationName());
           states.remove(0);
-          System.err.println(states.size());
           for (int i = 0; i < states.size(); i++) {
             if (states.get(i) instanceof String) {
               final String symbol = (String)(states.get(i));
