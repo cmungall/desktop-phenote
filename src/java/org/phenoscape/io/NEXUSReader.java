@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.biojava.bio.seq.io.ParseException;
 import org.biojavax.bio.phylo.io.nexus.CharactersBlock;
 import org.biojavax.bio.phylo.io.nexus.NexusBlock;
@@ -59,33 +60,22 @@ public class NEXUSReader {
       }
       if (block instanceof CharactersBlock) {
         final CharactersBlock charactersBlock = (CharactersBlock)block;
+        for (int i = 0; i < charactersBlock.getDimensionsNChar(); i++) {
+          this.characters.add(new Character());
+        }
+        System.err.println(charactersBlock.getAllCharStates().size());
         for (Object o : charactersBlock.getAllCharStates()) {
-          final String charNumber = o.toString();
-          final Character newChar = new Character();
-          this.characters.add(newChar);
-          newChar.setLabel(charactersBlock.getCharStateLabel(charNumber));
+          final String charNumberString = o.toString();
+          final Character newChar = this.characters.get(Integer.parseInt(charNumberString) - 1);
+          newChar.setLabel(charactersBlock.getCharStateLabel(charNumberString));
           for (int i = 0; i < charactersBlock.getSymbols().size(); i++) {
             final String symbol = (String)(charactersBlock.getSymbols().get(i));
             final State newState = new State();
             newState.setSymbol(symbol);
-            if (i < charactersBlock.getCharStateLabelKeywords(charNumber).size()) {
-              newState.setLabel(charactersBlock.getCharStateLabelKeywords(charNumber).get(i).toString());
+            if (i < charactersBlock.getCharStateLabelKeywords(charNumberString).size()) {
+              newState.setLabel(charactersBlock.getCharStateLabelKeywords(charNumberString).get(i).toString());
             }            
             newChar.addState(newState);
-          }
-        }
-        if (this.characters.isEmpty()) {
-          int nchar = charactersBlock.getDimensionsNChar();
-          while (nchar > 0) {
-            final Character newChar = new Character();
-            this.characters.add(newChar);
-            for (int i = 0; i < charactersBlock.getSymbols().size(); i++) {
-              final String symbol = (String)(charactersBlock.getSymbols().get(i));
-              final State newState = new State();
-              newState.setSymbol(symbol);           
-              newChar.addState(newState);
-            }
-            nchar--;
           }
         }
         final Set<State> usedStates = new HashSet<State>();
@@ -94,6 +84,7 @@ public class NEXUSReader {
           this.matrix.put(taxon.getNexmlID(), currentMap);
           List states = charactersBlock.getMatrixData(taxon.getPublicationName());
           states.remove(0);
+          System.err.println(states.size());
           for (int i = 0; i < states.size(); i++) {
             if (states.get(i) instanceof String) {
               final String symbol = (String)(states.get(i));
@@ -107,8 +98,6 @@ public class NEXUSReader {
                 }
               } 
             } // else should handle polymorphism
-    
-            
           }
         }
         // remove unused states
@@ -125,19 +114,9 @@ public class NEXUSReader {
     }
   }
   
-  public static void main(String[] args) {
-    try {
-      //new NEXUSReader(new File("/Users/jim/Desktop/Lundberg_Akama.nex"));
-      //new NEXUSReader(new File("/Users/jim/Desktop/untitled.nex"));
-      //new NEXUSReader(new File("/Users/jim/Desktop/Britto.nex"));
-      new NEXUSReader(new File("/Users/jim/Desktop/character matrices/Bornbusch_1995.nex"));
-    } catch (ParseException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+  @SuppressWarnings("unused")
+  private Logger log() {
+    return Logger.getLogger(this.getClass());
   }
-
+  
 }
