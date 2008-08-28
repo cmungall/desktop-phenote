@@ -39,6 +39,12 @@ public class CharacterTabReaderTest {
     Assert.assertNotNull("A term ID in the OBOSession should have been found", character3.getStates().get(0).getPhenotypes().get(0).getEntity());
     // PATO:0001653 is not in the test ontology
     Assert.assertNull("A term ID not in the OBOSession should result in a null value", character3.getStates().get(0).getPhenotypes().get(0).getQuality());
+    final Character character22 = reader.getCharacters().get(22);
+    Assert.assertEquals("A parsable integer should be put in the Count field of the phenotype", 1, character22.getStates().get(0).getPhenotypes().get(0).getCount());
+    Assert.assertNull("An unparsable count value should be null in the Count field of the phenotype", character22.getStates().get(1).getPhenotypes().get(0).getCount());
+    Assert.assertEquals("An unparsable count value should be appended prefixed with a semicolon and 'count=' to the Note field of the phenotype", "need to complete; count=2 >/= 5", character22.getStates().get(1).getPhenotypes().get(0).getNotes());
+    final Character character41 = reader.getCharacters().get(41);
+    Assert.assertEquals("An unparsable count value prefixed by 'count=' should be the entire note when no other note is present", "count=13, 14=/>17,18", character41.getStates().get(2).getPhenotypes().get(0).getNotes());
   }
   
 }

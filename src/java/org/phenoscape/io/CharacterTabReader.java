@@ -45,16 +45,17 @@ public class CharacterTabReader {
       final String entityID = cells[fields.indexOf("Entity ID")];
       final String qualityID = cells[fields.indexOf("Quality ID")];
       final String relatedEntityID = cells[fields.indexOf("Additional Entity ID")];
-      Integer count;
+      Integer count = null;
       final String countFieldValue = cells[fields.indexOf("Count")].trim();
+      boolean putCountInNotesField = false;
       if ((countFieldValue != null) && (!countFieldValue.equals(""))) {
         try {
           count = Integer.parseInt(countFieldValue);
         } catch (NumberFormatException e) {
-          count = null;
-          log().error("Could not create number from Count field value: " + countFieldValue);
+          log().warn("Could not create number from Count field value: " + countFieldValue + ", adding to Notes field");
+          putCountInNotesField = true;
         }
-      } else { count = null; }
+      }
       final Float measurement;
       final String measurementFieldValue = cells[fields.indexOf("Measurement")].trim();
       if ((measurementFieldValue != null) && (!measurementFieldValue.equals(""))) {
@@ -78,8 +79,14 @@ public class CharacterTabReader {
       phenotype.setRelatedEntity((OBOClass)session.getObject(relatedEntityID));
       phenotype.setCount(count);
       phenotype.setMeasurement(measurement);
-      phenotype.setUnit((OBOClass)session.getObject(unitID));
-      phenotype.setNotes(notes);
+      phenotype.setUnit((OBOClass)session.getObject(unitID)); 
+      if (putCountInNotesField) {
+        final String countNote = "count=" + countFieldValue;
+        final String addedNotes = (notes != null && !notes.equals("")) ? (notes + "; " + countNote) : countNote;
+        phenotype.setNotes(addedNotes);
+      } else {
+        phenotype.setNotes(notes);
+      }
     }
   }
   
