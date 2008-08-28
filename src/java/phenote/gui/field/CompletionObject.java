@@ -16,7 +16,7 @@ import phenote.gui.SearchParamsI;
 OBOProperty as subclasses - thats the idea at least - simplify! 
 */
 
-class CompletionObject {
+public class CompletionObject {
   private OBOObject obj;
   private boolean termMatch = false;
   private boolean isSynMatch = false;

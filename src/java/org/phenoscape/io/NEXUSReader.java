@@ -18,6 +18,7 @@ import org.biojavax.bio.phylo.io.nexus.NexusFileBuilder;
 import org.biojavax.bio.phylo.io.nexus.NexusFileFormat;
 import org.biojavax.bio.phylo.io.nexus.TaxaBlock;
 import org.phenoscape.model.Character;
+import org.phenoscape.model.DataSet;
 import org.phenoscape.model.State;
 import org.phenoscape.model.Taxon;
 
@@ -41,6 +42,15 @@ public class NEXUSReader {
   
   public Map<String, Map<String, String>> getMatrix() {
     return this.matrix;
+  }
+  
+  public DataSet getDataSet() {
+    //TODO should really just manipulate the dataset directly in the parse method
+    final DataSet data = new DataSet();
+    data.getCharacters().addAll(this.characters);
+    data.getTaxa().addAll(this.taxa);
+    data.setMatrixData(this.matrix);
+    return data;
   }
   
   @SuppressWarnings("unchecked")

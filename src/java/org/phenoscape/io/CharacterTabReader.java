@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOSession;
 import org.phenoscape.model.Character;
@@ -37,15 +38,28 @@ public class CharacterTabReader {
       final String line = reader.readLine();
       if (line == null) break;
       if (line.trim().equals("")) continue;
-      final String[] cells = line.split("\t");
-      final int characterNumber = Integer.parseInt(cells[fields.indexOf("Character Number")]);
-      final String stateSymbol = cells[fields.indexOf("State Number")];
+      final String[] cells = line.split("\t", -1);
+      final int characterNumber = Integer.parseInt(cells[fields.indexOf("Character Number")].trim());
+      final String stateSymbol = cells[fields.indexOf("State Number")].trim();
       final String textDescription = cells[fields.indexOf("Textual Description")];
       final String entityID = cells[fields.indexOf("Entity ID")];
       final String qualityID = cells[fields.indexOf("Quality ID")];
       final String relatedEntityID = cells[fields.indexOf("Additional Entity ID")];
-      final int count = Integer.parseInt(cells[fields.indexOf("Count")]);
-      final float measurement = Float.parseFloat(cells[fields.indexOf("Measurement")]);
+      Integer count;
+      final String countFieldValue = cells[fields.indexOf("Count")].trim();
+      if ((countFieldValue != null) && (!countFieldValue.equals(""))) {
+        try {
+          count = Integer.parseInt(countFieldValue);
+        } catch (NumberFormatException e) {
+          count = null;
+          log().error("Could not create number from Count field value: " + countFieldValue);
+        }
+      } else { count = null; }
+      final Float measurement;
+      final String measurementFieldValue = cells[fields.indexOf("Measurement")].trim();
+      if ((measurementFieldValue != null) && (!measurementFieldValue.equals(""))) {
+        measurement = Float.parseFloat(measurementFieldValue);
+      } else { measurement = null; }
       final String unitID = cells[fields.indexOf("Unit ID")];
       final String notes = cells[fields.indexOf("Curator Notes")];
       final Character character;
@@ -54,10 +68,10 @@ public class CharacterTabReader {
       } else {
         character = new Character();
         this.characterMap.put(characterNumber, character);
-        character.setLabel(textDescription); //maybe don't do this
+        character.setLabel(textDescription); //maybe don't do this?
       }
       final State state = this.getState(stateSymbol, character);
-      state.setLabel(textDescription); //maybe don't do this
+      state.setLabel(textDescription); //maybe don't do this?
       final Phenotype phenotype = state.newPhenotype();
       phenotype.setEntity((OBOClass)(session.getObject(entityID)));
       phenotype.setQuality((OBOClass)session.getObject(qualityID));
@@ -78,6 +92,10 @@ public class CharacterTabReader {
     final State state = character.newState();
     state.setSymbol(symbol);
     return state;
+  }
+  
+  private Logger log() {
+    return Logger.getLogger(this.getClass());
   }
 
 }

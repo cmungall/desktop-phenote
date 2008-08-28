@@ -213,10 +213,10 @@ public class TestPhenote {
     SwingUtilities.invokeAndWait(new Runnable() {
       public void run() {
         simulatePhenoteHyperlinkUpdate();
-        String m = "term info hyper link test fail, term info should have body tone val "
+        String m = "term info hyper link test fail, term info should have urostyle val "
           +" term info: "+termInfo.getTermNameText();
         // how to make this test not so pato specific??
-        assertTrue(m,termInfo.getTermNameText().contains("body tone value"));
+        assertTrue(m,termInfo.getTermNameText().contains("urostyle"));
       }
     });
   }
@@ -224,7 +224,7 @@ public class TestPhenote {
   private void simulatePhenoteHyperlinkUpdate() {
     HyperlinkEvent.EventType type = HyperlinkEvent.EventType.ACTIVATED;
     // 0000732 -> "BodyToneValue"
-    String desc = HtmlUtil.makePhenoIdLink("PATO:0000732");
+    String desc = HtmlUtil.makePhenoIdLink("TAO:0000158");
     HyperlinkEvent e = new HyperlinkEvent(termInfo,type,null,desc);
     termInfo.simulateHyperlinkEvent(e);
   }

@@ -28,13 +28,14 @@ import phenote.main.Phenote;
 public class TreeChooserTest extends TreeChooser {
   
   private TreeChooser treeChooser;
-  private static final String[] termIDs = {"TTO:1003114", "TTO:1004143", "TTO:1030110"};
+  private static final String[] termIDs = {"TAO:0000332", "TAO:0000333", "TAO:0000158"};
   
   public TreeChooserTest() {
     super("dummy id");
   }
 
-  @BeforeClass public static void initialize() throws ConfigException {
+  @BeforeClass
+  public static void initialize() throws ConfigException {
     Phenote.resetAllSingletons();
     Config.inst().setConfigFile("test.cfg");
     Phenote phenote = Phenote.getPhenote();
@@ -95,6 +96,7 @@ public class TreeChooserTest extends TreeChooser {
       character.setValue("Textual Description", character.getTerm("Taxon").getName());
       characters.add(character);
     }
+    System.out.println(characters);
     return characters;
   }
   

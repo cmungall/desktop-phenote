@@ -4,8 +4,7 @@ import java.io.File;
 import java.util.Collection;
 
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.obo.annotation.datamodel.Annotation;
 import org.obo.datamodel.OBOSession;
@@ -16,16 +15,19 @@ import phenote.config.ConfigException;
 import phenote.dataadapter.delimited.DelimitedFileAdapter;
 import phenote.main.Phenote;
 
-public class EnvironmentalAssociationDriverTest extends AbstractAnnotationModelTest {
-
-
+/**
+ * This test is "disabled" at the moment because it has not been maintained 
+ * and the required config file ("ncbo-test.cfg") no longer exists.
+ */
+public class EnvironmentalAssociationDriverTest {
 
 	protected static OBOSession session;
 
 	protected static String getConfigFileName() { return "ncbo-test.cfg"; }
 	protected static String getDataFilePath() { return "test/testfiles/Sox9-human-bbop.tab";}
 
-	@BeforeClass public static void initialize() throws ConfigException {
+	//@BeforeClass
+	public static void initialize() throws ConfigException {
 		Phenote.resetAllSingletons();
 		Config.inst().setConfigFile("ncbo-test.cfg");
 		Phenote phenote = Phenote.getPhenote();
@@ -38,10 +40,8 @@ public class EnvironmentalAssociationDriverTest extends AbstractAnnotationModelT
 		session = CharFieldManager.inst().getOboSession();
 	}
 
-	@Before public void setup() {
-	}
-
-	@Test public void checkAnnotations()   {
+	@Ignore @Test
+	public void checkAnnotations()   {
 		Collection<Annotation> annots = AnnotationUtil.getAnnotations(session);
 		System.err.println("# annots = "+annots.size());
 		for (Annotation annot : annots) {
@@ -51,5 +51,8 @@ public class EnvironmentalAssociationDriverTest extends AbstractAnnotationModelT
 		Assert.assertTrue(annots.size() > 0);
 	}
 
+	public void testMe() throws Exception {
+	  throw new Exception();
+	}
 
 }

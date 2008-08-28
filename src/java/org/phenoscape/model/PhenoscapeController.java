@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
 
 import javax.swing.JFileChooser;
@@ -23,6 +21,7 @@ import org.phenoscape.io.NeXMLReader;
 import org.phenoscape.io.NeXMLWriter;
 import org.phenoscape.io.TaxonTabReader;
 import org.phenoscape.swing.ListSelectionMaintainer;
+import org.phenoscape.util.DataMerger;
 
 import phenote.gui.selection.SelectionManager;
 import ca.odell.glazedlists.CollectionList;
@@ -140,13 +139,13 @@ public class PhenoscapeController extends DocumentController {
       this.xmlDoc = reader.getXMLDoc();
       this.charactersBlockID = reader.getCharactersBlockID();
       this.dataSet.getCharacters().clear(); //TODO this is not well encapsulated
-      this.dataSet.getCharacters().addAll(reader.getCharacters());
+      this.dataSet.getCharacters().addAll(reader.getDataSet().getCharacters());
       this.getDataSet().getTaxa().clear(); //TODO this is not well encapsulated
-      this.getDataSet().getTaxa().addAll(reader.getTaxa());
-      this.getDataSet().setCurators(reader.getCuratorsText());
-      this.getDataSet().setPublication(reader.getPublicationText());
-      this.getDataSet().setPublicationNotes(reader.getPubNotesText());
-      this.getDataSet().setMatrix(reader.getMatrix());
+      this.getDataSet().getTaxa().addAll(reader.getDataSet().getTaxa());
+      this.getDataSet().setCurators(reader.getDataSet().getCurators());
+      this.getDataSet().setPublication(reader.getDataSet().getPublication());
+      this.getDataSet().setPublicationNotes(reader.getDataSet().getPublicationNotes());
+      this.getDataSet().setMatrixData(reader.getDataSet().getMatrixData());
       
       this.fireDataChanged();
       return true;
@@ -168,7 +167,7 @@ public class PhenoscapeController extends DocumentController {
       this.dataSet.setCurators(null);
       this.dataSet.setPublication(null);
       this.dataSet.setPublicationNotes(null);
-      this.getDataSet().setMatrix(reader.getMatrix());
+      this.getDataSet().setMatrixData(reader.getMatrix());
       
       this.fireDataChanged();
       return true;
@@ -211,6 +210,15 @@ public class PhenoscapeController extends DocumentController {
     if (result == JFileChooser.APPROVE_OPTION) {
       final File file = fileChooser.getSelectedFile();
       this.mergeCharacters(file);
+    }
+  }
+  
+  public void openMergeMatrix() {
+    final JFileChooser fileChooser = new JFileChooser();
+    final int result = fileChooser.showOpenDialog(GUIManager.getManager().getFrame());
+    if (result == JFileChooser.APPROVE_OPTION) {
+      final File file = fileChooser.getSelectedFile();
+      this.mergeMatrix(file);
     }
   }
   
@@ -278,24 +286,67 @@ public class PhenoscapeController extends DocumentController {
   private void mergeCharacters(File aFile) {
     try {
       final CharacterTabReader reader = new CharacterTabReader(aFile, this.getOntologyController().getOBOSession());
-      final Map<Integer, Character> characterMap = reader.getCharacters();
-      for (Entry<Integer, Character> entry : characterMap.entrySet()) {
-        if (this.dataSet.getCharacters().size() >= entry.getKey()) {
-          final Character character = this.dataSet.getCharacters().get(entry.getKey());
-          // merge
-          character.setLabel(entry.getValue().getLabel());
-          
-        } else {
-          // add in some fashion
-        }
-      }
+      DataMerger.mergeCharacters(reader, this.getDataSet());
     } catch (IOException e) {
       log().error("Error reading character list file", e);
     }
   }
   
+  /**
+   * Merge matrix values into an existing data set.  The matrix must have the same number of 
+   * characters as the existing data set. Characters are matched via their index.  Values are 
+   * matched by comparing the symbol - if a state with that symbol is not available for the 
+   * character in the existing data set, the taxon's state will be set to null.  Taxa are matched 
+   * via their Publication Name.  Matrix values for unmatched taxa are unaltered.
+   */
+  private void mergeMatrix(File aFile) {
+    try {
+      final NEXUSReader reader = new NEXUSReader(aFile);
+      final DataSet newData = reader.getDataSet();
+      if (newData.getCharacters().size() != this.dataSet.getCharacters().size()) {
+        log().error("Matrix has incorrect number of characters - aborting merge");
+        return;
+      }
+      for (int i = 0; i < this.dataSet.getCharacters().size(); i++) {
+        for (Taxon taxon : this.dataSet.getTaxa()) {
+          final String taxonName = taxon.getPublicationName();
+          if (taxonName == null) continue;
+          final Taxon newTaxon = this.findTaxon(newData.getTaxa(), taxonName);
+          if (newTaxon == null) continue;
+          final State newStateValue = newData.getStateForTaxon(newTaxon, newData.getCharacters().get(i));
+          if (newStateValue == null) continue;
+          final String valueSymbol = newStateValue.getSymbol();
+          final State state = this.findState(this.dataSet.getCharacters().get(i).getStates(), valueSymbol);
+          if (state == null) {
+            //TODO perhaps we should report this in interface
+            log().error("No state exists matching symbol in matrix, setting to null");
+          }
+          this.dataSet.setStateForTaxon(taxon, this.dataSet.getCharacters().get(i), state);
+        }
+      }
+    } catch (ParseException e) {
+      log().error("Error parsing NEXUS file", e);
+    } catch (IOException e) {
+      log().error("Error reading NEXUS file", e);
+    }
+  }
+  
+  private Taxon findTaxon(List<Taxon> taxa, String pubName) {
+    for (Taxon taxon : taxa) {
+      if (pubName.equals(taxon.getPublicationName())) { return taxon; }
+    }
+    return null;
+  }
+  
+  private State findState(List<State> states, String symbol) {
+    for (State state: states) {
+      if (symbol.equals(state.getSymbol())) { return state; }
+    }
+    return null;
+  }
+  
   private Logger log() {
     return Logger.getLogger(this.getClass());
   }
-
+ 
 }

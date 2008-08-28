@@ -12,14 +12,8 @@ import org.obo.datamodel.impl.InstancePropertyValue;
 import org.obo.datamodel.impl.OBOPropertyImpl;
 
 
-/**
- * Unit test class for FileUtil.
- */
 public class TermLinkComparatorTest {
 
-  /**
-   * Create a single file and archive it. Make sure it moved into the archive directory.
-   */
   @Test public void testIS_A_Before_PART_Of() {
     List<InstancePropertyValue> links = new ArrayList<InstancePropertyValue>();
     links.add(getLinkUnknownOne());
@@ -31,15 +25,15 @@ public class TermLinkComparatorTest {
     Collections.sort(links, new TermLinkComparator());
 
     Link link = (Link) links.get(0);
-    Assert.assertEquals("IS a first", "is_a", link.getType().getName());
+    Assert.assertEquals("IS a first", "is_a", link.getType().getID());
     link = (Link) links.get(1);
-    Assert.assertEquals("Part of is second", "part of", link.getType().getName());
+    Assert.assertEquals("Part of is second", "part of", link.getType().getID());
     link = (Link) links.get(2);
-    Assert.assertEquals("Part of is second", "develops from", link.getType().getName());
+    Assert.assertEquals("Part of is second", "develops from", link.getType().getID());
     link = (Link) links.get(3);
-    Assert.assertEquals("IS a first", "Unknown A", link.getType().getName());
+    Assert.assertEquals("IS a first", "Unknown A", link.getType().getID());
     link = (Link) links.get(4);
-    Assert.assertEquals("IS a first", "Unknown B", link.getType().getName());
+    Assert.assertEquals("IS a first", "Unknown B", link.getType().getID());
 
   }
 

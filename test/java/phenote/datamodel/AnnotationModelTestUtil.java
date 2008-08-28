@@ -8,8 +8,7 @@ import java.util.LinkedList;
 
 import org.bbop.dataadapter.DataAdapterException;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.obo.annotation.datamodel.Annotation;
 import org.obo.dataadapter.OBDSQLDatabaseAdapter;
@@ -19,41 +18,36 @@ import org.obo.dataadapter.OBDSQLDatabaseAdapter.OBDSQLDatabaseAdapterConfigurat
 import org.obo.datamodel.IdentifiedObject;
 import org.obo.datamodel.Instance;
 import org.obo.datamodel.OBOSession;
-import org.obo.test.AbstractAnnotationTest;
 import org.obo.util.AnnotationUtil;
 
-import phenote.config.Config;
-import phenote.config.ConfigException;
-import phenote.dataadapter.delimited.DelimitedFileAdapter;
-import phenote.main.Phenote;
+/**
+ * This test is "disabled" at the moment because it has not been maintained 
+ * and its subclass tests don't work.  Also, not sure if we want a test class hierarchy.  
+ * Update -- made this non-abstract and into more of a util class (don't think abstract is 
+ * a good way to go with tests).  These tests need attention.
+ */
+public class AnnotationModelTestUtil  {
 
-public abstract class AbstractAnnotationModelTest  {
-
-
-
-	protected static OBOSession session;
 	protected static String getConfigFileName() { return ""; }
 	protected static String getDataFilePath() { return "";}
+	private final OBOSession session;
 
 	String jdbcPath = "jdbc:postgresql://localhost:5432/obdtest";
-
-	@BeforeClass public static void initialize() throws ConfigException {
-		Phenote.resetAllSingletons();
-		Config.inst().setConfigFile(getConfigFileName());
-		Phenote phenote = Phenote.getPhenote();
-		phenote.initOntologies();
-		phenote.initGui();
-		DelimitedFileAdapter ad = new DelimitedFileAdapter();
-		CharacterListI clist = 
-			ad.load(new File(getDataFilePath()));
-		System.err.println("clist size: "+clist.size());
-		session = CharFieldManager.inst().getOboSession();
+	
+	/**
+	 * This constructor keeps the Ant JUnit runner happy. This class 
+	 * shouldn't run tests and is just used by other tests.
+	 */
+	public AnnotationModelTestUtil() {
+	  this.session = null;
+	}
+	
+	public AnnotationModelTestUtil(OBOSession session) {
+	  this.session = session;
 	}
 
-	@Before public void setup() {
-	}
-
-	@Test public void checkAnnotations()   {
+	@Ignore @Test
+	public void checkAnnotations()   {
 		Collection<Annotation> annots = AnnotationUtil.getAnnotations(session);
 		System.err.println("# annots = "+annots.size());
 		for (Annotation annot : annots) {

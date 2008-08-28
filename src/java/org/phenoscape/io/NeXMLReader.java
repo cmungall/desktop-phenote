@@ -3,7 +3,6 @@ package org.phenoscape.io;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +32,7 @@ import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOSession;
 import org.phenoscape.io.PhenoXMLPhenotypeWrapper.PhenotypeWrapperFactory;
 import org.phenoscape.model.Character;
+import org.phenoscape.model.DataSet;
 import org.phenoscape.model.Specimen;
 import org.phenoscape.model.State;
 import org.phenoscape.model.Taxon;
@@ -45,15 +45,10 @@ import phenote.datamodel.PhenotypeCharacterI;
 
 public class NeXMLReader {
   
-  private final List<Character> characters = new ArrayList<Character>();
-  private final List<Taxon> taxa = new ArrayList<Taxon>();
-  private final Map<String, Map<String, String>> matrix = new HashMap<String, Map<String, String>>();
+  private final DataSet data = new DataSet();
   private final NexmlDocument xmlDoc;
   private final OBOSession session;
   private String charactersBlockID = UUID.randomUUID().toString();
-  private String curatorsText;
-  private String publicationText;
-  private String pubNotesText; 
 
   public NeXMLReader(File aFile, OBOSession session) throws XmlException, IOException {
     this.session = session;
@@ -67,36 +62,16 @@ public class NeXMLReader {
     this.parseNeXML();
   }
   
+  public DataSet getDataSet() {
+    return this.data;
+  }
+  
   public NexmlDocument getXMLDoc() {
     return this.xmlDoc;
   }
   
   public String getCharactersBlockID() {
     return this.charactersBlockID;
-  }
-  
-  public List<Character> getCharacters() {
-    return this.characters;
-  }
-  
-  public List<Taxon> getTaxa() {
-    return this.taxa;
-  }
-  
-  public Map<String, Map<String, String>> getMatrix() {
-    return this.matrix;
-  }
-
-  public String getCuratorsText() {
-    return this.curatorsText;
-  }
-
-  public String getPublicationText() {
-    return this.publicationText;
-  }
-
-  public String getPubNotesText() {
-    return this.pubNotesText;
   }
   
   private void parseNeXML() {
@@ -155,7 +130,7 @@ public class NeXMLReader {
           newCharacter.addState(newState);
         }
       }
-      this.characters.add(newCharacter);
+      this.data.addCharacter(newCharacter);
     }
   }
   
@@ -204,16 +179,17 @@ public class NeXMLReader {
           newSpecimen.setCatalogID(specimenXML.getAttribute("accession"));
         }
       }
-      this.taxa.add(newTaxon);
+      this.data.addTaxon(newTaxon);
     }
   }
   
   private void parseMatrix(AbstractObsMatrix matrix) {
+    final Map<String, Map<String, String>> matrixMap = new HashMap<String, Map<String, String>>();
     for (AbstractObsRow row : matrix.getRowArray()) {
       final String otuID = row.getOtu();
       if (otuID != null) {
         final Map<String, String> currentTaxonMap = new HashMap<String, String>();
-        this.matrix.put(otuID, currentTaxonMap);
+        matrixMap.put(otuID, currentTaxonMap);
         for (AbstractObs cell : row.getCellArray()) {
           final String characterID = cell.getChar() != null ? cell.getChar().getStringValue() : null;
           final String stateID = cell.getState() != null ? cell.getState().getStringValue() : null;
@@ -223,17 +199,18 @@ public class NeXMLReader {
         }
       }
     }
+    this.data.setMatrixData(matrixMap);
   }
   
   private void parseMetadata(Dict metadataDict) {
     final Element any = NeXMLUtil.getFirstChildWithTagName(((Element)(metadataDict.getDomNode())), "any");
     if (any != null) {
       final Element curators = NeXMLUtil.getFirstChildWithTagName(any, "curators");
-      this.curatorsText = curators != null ? NeXMLUtil.getTextContent(curators) : null;
+      this.data.setCurators(curators != null ? NeXMLUtil.getTextContent(curators) : null);
       final Element publication = NeXMLUtil.getFirstChildWithTagName(any, "publication");
-      this.publicationText = publication != null ? NeXMLUtil.getTextContent(publication) : null;
+      this.data.setPublication(publication != null ? NeXMLUtil.getTextContent(publication) : null);
       final Element pubNotes = NeXMLUtil.getFirstChildWithTagName(any, "publicationNotes");
-      this.pubNotesText = pubNotes != null ? NeXMLUtil.getTextContent(pubNotes) : null;
+      this.data.setPublicationNotes(pubNotes != null ? NeXMLUtil.getTextContent(pubNotes) : null);
     }
   }
   

@@ -79,7 +79,11 @@ public class DataSet {
     this.curators = curators;
   }
   
-  public void setMatrix(Map<String, Map<String, String>> aMatrix) {
+  public Map<String, Map<String, String>> getMatrixData() {
+    return this.matrix;
+  }
+  
+  public void setMatrixData(Map<String, Map<String, String>> aMatrix) {
     this.matrix.clear();
     this.matrix.putAll(aMatrix);
   }

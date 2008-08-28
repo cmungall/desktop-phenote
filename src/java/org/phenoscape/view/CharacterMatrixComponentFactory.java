@@ -33,4 +33,5 @@ public class CharacterMatrixComponentFactory extends AbstractComponentFactory<Ch
   public boolean isSingleton() {
     return true;
   }
+  
 }

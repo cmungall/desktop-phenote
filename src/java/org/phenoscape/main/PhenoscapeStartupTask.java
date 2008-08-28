@@ -27,6 +27,7 @@ import org.phenoscape.swing.WindowSizePrefsSaver;
 import org.phenoscape.view.CharacterMatrixComponentFactory;
 import org.phenoscape.view.CharacterTableComponentFactory;
 import org.phenoscape.view.DataSetComponentFactory;
+import org.phenoscape.view.LogViewComponentFactory;
 import org.phenoscape.view.MenuFactory;
 import org.phenoscape.view.PhenotypeTableComponentFactory;
 import org.phenoscape.view.SessionTermInfoFactory;
@@ -61,6 +62,7 @@ public class PhenoscapeStartupTask extends DefaultGUIStartupTask {
     factories.add(new SessionTermInfoFactory());
     factories.add(new PhenoteOntologyTreeEditorFactory());
     factories.add(new PhenoteGraphViewFactory());
+    factories.add(new LogViewComponentFactory());
     return factories;
   }
   

@@ -2,13 +2,11 @@ package phenote.dataadapter.annotation;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Collection;
 
 import org.bbop.dataadapter.DataAdapterException;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.obd.model.Graph;
 import org.obd.model.Statement;
@@ -17,24 +15,25 @@ import org.obd.query.Shard;
 import org.obd.query.impl.OBDSQLShard;
 import org.obo.annotation.datamodel.Annotation;
 import org.obo.datamodel.IdentifiedObject;
-import org.obo.util.AnnotationUtil;
-import org.obo.util.TermUtil;
+import org.obo.datamodel.OBOSession;
 
 import phenote.config.Config;
 import phenote.config.ConfigException;
 import phenote.dataadapter.delimited.DelimitedFileAdapter;
-import phenote.datamodel.AbstractAnnotationModelTest;
+import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharacterI;
-import phenote.datamodel.CharField;
 import phenote.datamodel.CharacterListI;
 import phenote.main.Phenote;
 
-public class OBDSavePhenotypeTest extends AbstractAnnotationModelTest {
-
-
+/**
+ * This test is "disabled" at the moment because it has not been maintained 
+ * and the required config file ("ncbo-test.cfg") no longer exists.
+ */
+public class OBDSavePhenotypeTest {
 
 	protected static Shard shard;
+	private static OBOSession session;
 	static String jdbcPath = "jdbc:postgresql://localhost:5432/obdtest";
 	// Set these values if you don't want to use the environmental user / no password database connection defaults. 
 	static String dbUsername;
@@ -44,7 +43,8 @@ public class OBDSavePhenotypeTest extends AbstractAnnotationModelTest {
 	protected static String getConfigFileName() { return "ncbo-test.cfg"; }
 	protected static String getDataFilePath() { return "test/testfiles/Sox9-human-bbop.tab";}
 
-	@BeforeClass public static void initialize() throws ConfigException {
+	//@BeforeClass
+	public static void initialize() throws ConfigException {
 		Phenote.resetAllSingletons();
 		Config.inst().setConfigFile("ncbo-test.cfg");
 		Phenote phenote = Phenote.getPhenote();
@@ -58,7 +58,8 @@ public class OBDSavePhenotypeTest extends AbstractAnnotationModelTest {
 		session = CharFieldManager.inst().getOboSession();
 	}
 
-	@BeforeClass public static void setUp() throws Exception  {
+	//@BeforeClass
+	public static void setUp() throws Exception  {
 		OBDSQLShard obd = new OBDSQLShard();
 		obd.connect(jdbcPath,dbUsername,dbPassword);
 		shard = obd;
@@ -75,10 +76,8 @@ public class OBDSavePhenotypeTest extends AbstractAnnotationModelTest {
 		}
 	}
 
-	@Before public void setup() {
-	}
-
-	@Test public void saveAnnotations()   {
+	@Ignore @Test
+	public void saveAnnotations()   {
 		// first translate all annotation objects to statements
 		// and store them in the graph
 		Graph g = OBOBridge.getAnnotationGraph(session);
@@ -102,7 +101,8 @@ public class OBDSavePhenotypeTest extends AbstractAnnotationModelTest {
 
 	}
 
-	@Test public void checkAnnotationsInDatabase() throws DataAdapterException, IOException {
+	@Ignore @Test
+	public void checkAnnotationsInDatabase() throws DataAdapterException, IOException {
 		String id = "OMIM:608160.0002";
 		Collection<Statement> stmts = shard.getAnnotationStatementsForAnnotatedEntity(id, null, null);
 		for (Statement s : stmts) {
