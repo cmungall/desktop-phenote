@@ -260,24 +260,7 @@ public class PhenoscapeController extends DocumentController {
   private void mergeTaxa(File aFile) {
     try {
       final TaxonTabReader reader = new TaxonTabReader(aFile, this.getOntologyController().getOBOSession(), this.getOntologyController().getCollectionTermSet());
-      final List<Taxon> importedTaxa = reader.getTaxa();
-      for (Taxon importedTaxon : importedTaxa) {
-        boolean matched = false;
-        for (Taxon taxon : this.getDataSet().getTaxa()) {
-          if (taxon.getPublicationName() != null && importedTaxon.getPublicationName() != null) {
-            if (taxon.getPublicationName().equals(importedTaxon.getPublicationName())) {
-              matched = true;
-              taxon.setValidName(importedTaxon.getValidName());
-              taxon.setComment(importedTaxon.getComment());
-              for (Specimen specimen : importedTaxon.getSpecimens()) {
-                taxon.addSpecimen(specimen);
-              }
-            }
-          }
-        }
-        if (!matched) { this.getDataSet().addTaxon(importedTaxon); }
-      }
- 
+      DataMerger.mergeTaxa(reader, this.getDataSet());
     } catch (IOException e) {
       log().error("Error reading taxon list file", e);
     }
@@ -292,57 +275,15 @@ public class PhenoscapeController extends DocumentController {
     }
   }
   
-  /**
-   * Merge matrix values into an existing data set.  The matrix must have the same number of 
-   * characters as the existing data set. Characters are matched via their index.  Values are 
-   * matched by comparing the symbol - if a state with that symbol is not available for the 
-   * character in the existing data set, the taxon's state will be set to null.  Taxa are matched 
-   * via their Publication Name.  Matrix values for unmatched taxa are unaltered.
-   */
   private void mergeMatrix(File aFile) {
     try {
       final NEXUSReader reader = new NEXUSReader(aFile);
-      final DataSet newData = reader.getDataSet();
-      if (newData.getCharacters().size() != this.dataSet.getCharacters().size()) {
-        log().error("Matrix has incorrect number of characters - aborting merge");
-        return;
-      }
-      for (int i = 0; i < this.dataSet.getCharacters().size(); i++) {
-        for (Taxon taxon : this.dataSet.getTaxa()) {
-          final String taxonName = taxon.getPublicationName();
-          if (taxonName == null) continue;
-          final Taxon newTaxon = this.findTaxon(newData.getTaxa(), taxonName);
-          if (newTaxon == null) continue;
-          final State newStateValue = newData.getStateForTaxon(newTaxon, newData.getCharacters().get(i));
-          if (newStateValue == null) continue;
-          final String valueSymbol = newStateValue.getSymbol();
-          final State state = this.findState(this.dataSet.getCharacters().get(i).getStates(), valueSymbol);
-          if (state == null) {
-            //TODO perhaps we should report this in interface
-            log().error("No state exists matching symbol in matrix, setting to null");
-          }
-          this.dataSet.setStateForTaxon(taxon, this.dataSet.getCharacters().get(i), state);
-        }
-      }
+      DataMerger.mergeMatrix(reader, this.getDataSet());
     } catch (ParseException e) {
       log().error("Error parsing NEXUS file", e);
     } catch (IOException e) {
       log().error("Error reading NEXUS file", e);
     }
-  }
-  
-  private Taxon findTaxon(List<Taxon> taxa, String pubName) {
-    for (Taxon taxon : taxa) {
-      if (pubName.equals(taxon.getPublicationName())) { return taxon; }
-    }
-    return null;
-  }
-  
-  private State findState(List<State> states, String symbol) {
-    for (State state: states) {
-      if (symbol.equals(state.getSymbol())) { return state; }
-    }
-    return null;
   }
   
   private Logger log() {

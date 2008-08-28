@@ -9,18 +9,48 @@ import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 import org.phenoscape.io.CharacterTabReader;
+import org.phenoscape.io.NEXUSReader;
+import org.phenoscape.io.TaxonTabReader;
 import org.phenoscape.model.Character;
 import org.phenoscape.model.DataSet;
+import org.phenoscape.model.Specimen;
 import org.phenoscape.model.State;
+import org.phenoscape.model.Taxon;
 
 public class DataMerger {
+  
+  /**
+   * Merge an annotated taxon list from a tab file into an existing data set.  Taxa are matched 
+   * via their "Publication Name".  TTO identifiers and specimen lists are applied to the matched 
+   * taxa.  Any taxa in the tab file that do not match a taxon in the existing data set are added 
+   * to the data set.
+   */
+  public static void mergeTaxa(TaxonTabReader reader, DataSet existingData) {
+    final List<Taxon> importedTaxa = reader.getTaxa();
+    for (Taxon importedTaxon : importedTaxa) {
+      boolean matched = false;
+      for (Taxon taxon : existingData.getTaxa()) {
+        if (taxon.getPublicationName() != null && importedTaxon.getPublicationName() != null) {
+          if (taxon.getPublicationName().equals(importedTaxon.getPublicationName())) {
+            matched = true;
+            taxon.setValidName(importedTaxon.getValidName());
+            taxon.setComment(importedTaxon.getComment());
+            for (Specimen specimen : importedTaxon.getSpecimens()) {
+              taxon.addSpecimen(specimen);
+            }
+          }
+        }
+      }
+      if (!matched) { existingData.addTaxon(importedTaxon); }
+    }
+  }
 
   /**
    * Merge EQ annotations from a tab file into an existing data set. The "Character Number" 
    * and "State Number" columns are used to match a character (by index) and state (by symbol) 
    * in the existing data set.  If the index falls outside the current range of characters, 
    * a new character is appended to the existing data set.  If a state with the given symbol does 
-   * not exist a new state is appended to the given character.
+   * not exist, a new state is appended to the given character.
    */
   public static void mergeCharacters(CharacterTabReader reader, DataSet existingData) {
     final Map<Integer, Character> characterMap = reader.getCharacters();
@@ -55,7 +85,45 @@ public class DataMerger {
       log().debug("Adding new character originally numbered: " + entry.getKey());
       existingData.addCharacter(entry.getValue());
     }
-
+  }
+  
+  /**
+   * Merge matrix values into an existing data set.  The matrix must have the same number of 
+   * characters as the existing data set. Characters are matched via their index.  Values are 
+   * matched by comparing the symbol - if a state with that symbol is not available for the 
+   * character in the existing data set, the taxon's state will be set to null.  Taxa are matched 
+   * via their Publication Name.  Matrix values for unmatched taxa are unaltered.
+   */
+  public static void mergeMatrix(NEXUSReader reader, DataSet existingData) {
+    final DataSet newData = reader.getDataSet();
+    if (newData.getCharacters().size() != existingData.getCharacters().size()) {
+      log().error("Matrix has incorrect number of characters - aborting merge");
+      return;
+    }
+    for (int i = 0; i < existingData.getCharacters().size(); i++) {
+      for (Taxon taxon : existingData.getTaxa()) {
+        final String taxonName = taxon.getPublicationName();
+        if (taxonName == null) continue;
+        final Taxon newTaxon = findTaxon(newData.getTaxa(), taxonName);
+        if (newTaxon == null) continue;
+        final State newStateValue = newData.getStateForTaxon(newTaxon, newData.getCharacters().get(i));
+        if (newStateValue == null) continue;
+        final String valueSymbol = newStateValue.getSymbol();
+        final State state = findState(existingData.getCharacters().get(i).getStates(), valueSymbol);
+        if (state == null) {
+          //TODO perhaps we should report this in interface, or instead add the state?
+          log().error("No state exists matching symbol in matrix, setting to null");
+        }
+        existingData.setStateForTaxon(taxon, existingData.getCharacters().get(i), state);
+      }
+    }
+  }
+  
+  private static Taxon findTaxon(List<Taxon> taxa, String pubName) {
+    for (Taxon taxon : taxa) {
+      if (pubName.equals(taxon.getPublicationName())) { return taxon; }
+    }
+    return null;
   }
 
   private static State findState(List<State> states, String symbol) {
