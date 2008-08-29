@@ -13,6 +13,8 @@ import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 
+import java.lang.Object;
+
 import phenote.dataadapter.DataAdapterEx;
 import phenote.dataadapter.QueryableDataAdapterI;
 import phenote.datamodel.CharFieldEnum;
@@ -132,10 +134,25 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
     return default_value; 
   }
 
+  public static String stripLeadTrailDoublequote(String s) {
+    String doublequote = "\"";
+    String result = "";
+    int length = s.length();  int lastindex = length - 1;
+    for ( int i = 0; i < s.length(); i++ ) {
+      if ( (i == 0) || (i == lastindex) ) { if ( doublequote.indexOf(s.charAt(i)) >= 0 ) { } else { result += s.charAt(i); } }
+        else { result += s.charAt(i); }
+    }
+    return result;
+  }
+
+
   private void updateNormalField(Connection c, Statement s, String joinkey, String postgres_table, String tag_name, String tag_value) {
 //    String postgres_value = "No postgres value assigned";
 //    String postgres_value = "";
 //System.out.println("table "+postgres_table+" joinkey "+joinkey+" checking updateNormalField");
+//    tag_value = Strip.DoubleQuote(tag_value,Strip.BOTH);
+//    tag_value = stripLeading(tag_value,doublequote);
+    tag_value = stripLeadTrailDoublequote(tag_value);
     String postgres_value = queryPostgresCharacterNull(s, postgres_table, joinkey);
     String pgisnull = "null";
     String pg_value = postgres_value;
