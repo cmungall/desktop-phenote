@@ -73,6 +73,7 @@ public class NEXUSReader {
         for (int i = 0; i < charactersBlock.getDimensionsNChar(); i++) {
           this.characters.add(new Character());
         }
+        final String missing = charactersBlock.getMissing();
         for (Object o : charactersBlock.getAllCharStates()) {
           final String charNumberString = o.toString();
           final Character newChar = this.characters.get(Integer.parseInt(charNumberString) - 1);
@@ -91,18 +92,26 @@ public class NEXUSReader {
         for (Taxon taxon : this.taxa) {
           final Map<String, String> currentMap = new HashMap<String, String>();
           this.matrix.put(taxon.getNexmlID(), currentMap);
-          List states = charactersBlock.getMatrixData(taxon.getPublicationName());
-          states.remove(0);
-          for (int i = 0; i < states.size(); i++) {
-            if (states.get(i) instanceof String) {
-              final String symbol = (String)(states.get(i));
+          List cells = charactersBlock.getMatrixData(taxon.getPublicationName());
+          cells.remove(0);
+          for (int i = 0; i < cells.size(); i++) {
+            if (cells.get(i) instanceof String) {
+              final String symbol = (String)(cells.get(i));
               if (i < this.characters.size()) {
                 final Character character = this.characters.get(i);
-                for (State state : character.getStates()) {
-                  if (state.getSymbol().equals(symbol)) {
-                    currentMap.put(character.getNexmlID(), state.getNexmlID());
-                    usedStates.add(state);
-                  }
+                final State existingState = this.findState(character.getStates(), symbol);
+                final State state;
+                if (existingState != null) {
+                  state = existingState;
+                } else if (!symbol.equals(missing)) {
+                  state = character.newState();
+                  state.setSymbol(symbol);
+                } else {
+                  state = null;
+                }
+                if (state != null) {
+                  currentMap.put(character.getNexmlID(), state.getNexmlID());
+                  usedStates.add(state);
                 }
               } 
             } // else should handle polymorphism
@@ -120,6 +129,13 @@ public class NEXUSReader {
         }
       }
     }
+  }
+  
+  private  State findState(List<State> states, String symbol) {
+    for (State state: states) {
+      if (symbol.equals(state.getSymbol())) { return state; }
+    }
+    return null;
   }
   
   @SuppressWarnings("unused")

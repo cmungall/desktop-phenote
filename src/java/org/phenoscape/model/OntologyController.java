@@ -92,7 +92,7 @@ public class OntologyController {
   }
 
   public TermSet getQualityTermSet() {
-    return this.getTermSet(PATO, SPATIAL);
+    return this.getTermSet(PATO, SPATIAL, TAO);
   }
 
   public TermSet getRelatedEntityTermSet() {

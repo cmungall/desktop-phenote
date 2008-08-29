@@ -5,11 +5,13 @@ import java.io.IOException;
 import java.util.List;
 
 import org.apache.xmlbeans.XmlException;
+import org.biojava.bio.seq.io.ParseException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.obo.datamodel.OBOSession;
 import org.obo.datamodel.impl.OBOSessionImpl;
 import org.phenoscape.io.CharacterTabReader;
+import org.phenoscape.io.NEXUSReader;
 import org.phenoscape.io.NeXMLReader;
 import org.phenoscape.model.DataSet;
 import org.phenoscape.model.Phenotype;
@@ -21,9 +23,9 @@ public class DataMergerTest {
   public void mergeCharacters() throws IOException, XmlException {
     final OBOSession session = new OBOSessionImpl();
     final CharacterTabReader reader = new CharacterTabReader(new File("test/testfiles/CharacterTabReaderTestFile1.tab"), session);
-    final NeXMLReader nexmlReader = new NeXMLReader(new File("test/testfiles/DataMergerTest.xml"), session);
+    final NeXMLReader nexmlReader = new NeXMLReader(new File("test/testfiles/DataMergerTestFile1.xml"), session);
     final DataSet data = nexmlReader.getDataSet();
-    Assert.assertNull("Character 2, State 0, should  not exist in the original data set", this.findState(data.getCharacters().get(1).getStates(), "0"));
+    Assert.assertNull("Character 2, State 0, should not exist in the original data set", this.findState(data.getCharacters().get(1).getStates(), "0"));
     final Phenotype originalPhenotypeC1S0 = data.getCharacters().get(0).getStates().get(0).getPhenotypes().get(0);
     final int originalPhenotypeCountC2S0 = data.getCharacters().get(1).getStates().get(0).getPhenotypes().size();
     Assert.assertEquals("Character 2, State 1, should not have any Phenotypes", 0, originalPhenotypeCountC2S0);
@@ -35,11 +37,31 @@ public class DataMergerTest {
     Assert.assertEquals("Character 2, State 1, should have had a Phenotype added", 1, newPhenotypeCountC2S0);
   }
   
+  @Test
+  public void mergeMatrix() throws ParseException, IOException, XmlException {
+    final OBOSession session = new OBOSessionImpl();
+    final NEXUSReader nexusReader = new NEXUSReader(new File("test/testfiles/DataMergerTestFile3.nex"));
+    final NeXMLReader nexmlReader = new NeXMLReader(new File("test/testfiles/DataMergerTestFile2.xml"), session);
+    final DataSet data = nexmlReader.getDataSet();
+    Assert.assertEquals("Original data set should have 3 characters", 3, data.getCharacters().size());
+    Assert.assertNull("Cell 0,0 should be empty in the original data set", this.getCellValue(data, 0, 0));
+    Assert.assertEquals("Cell 0,1 should have state with symbol 1 in original data set", "1", this.getCellValue(data, 1, 0).getSymbol());
+    DataMerger.mergeMatrix(nexusReader, data);
+    Assert.assertEquals("Merged data set should have 5 characters", 5, data.getCharacters().size());
+    Assert.assertEquals("Cell 0,0 should have state with symbol 0", "0", this.getCellValue(data, 0, 0).getSymbol());
+    Assert.assertEquals("Cell 0,1 should have state with symbol 0", "0", this.getCellValue(data, 1, 0).getSymbol());
+    Assert.assertEquals("Cell 0,4 should have state with symbol 1", "1", this.getCellValue(data, 0, 4).getSymbol());
+  }
+  
   private  State findState(List<State> states, String symbol) {
     for (State state: states) {
       if (symbol.equals(state.getSymbol())) { return state; }
     }
     return null;
+  }
+  
+  private State getCellValue(DataSet data, int row, int column) {
+    return data.getStateForTaxon(data.getTaxa().get(row), data.getCharacters().get(column));
   }
 
 }
