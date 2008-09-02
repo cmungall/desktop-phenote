@@ -34,7 +34,7 @@
         </state>
       </states>
       <states id="52bd2b9d-d4ef-48a6-8a97-b6f4d9d5797f">
-        <state id="ab84ed16-e518-4536-864c-a8ea0625c3c5" label="" symbol="0">
+        <state id="ab84ed16-e518-4536-864c-a8ea0625c3c5" label="xml state 0" symbol="0">
           <dict>
             <key>OBO_phenotype</key>
             <any>
@@ -77,7 +77,7 @@
           </dict>
         </state>
       </states>
-      <char id="a0319a96-0639-4b65-91d5-8625a0ef959a" label="" states="89b376f8-57ab-4adf-a3c3-33b18df31623"/>
+      <char id="a0319a96-0639-4b65-91d5-8625a0ef959a" label="label in xml" states="89b376f8-57ab-4adf-a3c3-33b18df31623"/>
       <char id="a93cd328-9c78-41b6-9ffa-8f3aeb44bf8d" label="" states="52bd2b9d-d4ef-48a6-8a97-b6f4d9d5797f"/>
       <char id="d42fa0b8-1a69-4024-81f9-81f746826120" label="" states="713597f7-5dd1-4960-9fbd-23b9d943f8c6"/>
     </format>

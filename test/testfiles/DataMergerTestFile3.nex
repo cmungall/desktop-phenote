@@ -1,5 +1,5 @@
 #NEXUS
-[written Fri Aug 29 11:11:25 EDT 2008 by Mesquite  version 2.01 (build j28) at dyn-152-3-59-44.bootp.duke.edu/152.3.59.44]
+[written Tue Sep 02 18:04:42 EDT 2008 by Mesquite  version 2.01 (build j28) at dyn-152-3-59-44.bootp.duke.edu/152.3.59.44]
 
 BEGIN TAXA;
 	TITLE Untitled_Taxa_Block;
@@ -16,7 +16,7 @@ BEGIN CHARACTERS;
 	DIMENSIONS  NCHAR=5;
 	FORMAT DATATYPE = STANDARD GAP = - MISSING = ? SYMBOLS = "  0 1 2";
 	CHARSTATELABELS 
-		1 char1, 2 char2, 3 char3, 4 char4, 5 char5 ; 
+		1 char1, 2 char2 /  'label 2,0' 'label 2,1' 'label 2,2', 3 char3 / , 4 char4, 5 char5 ; 
 	MATRIX
 	Species_1             021?1
 	Species_not_in_NeXML  000?1
@@ -66,7 +66,7 @@ Begin MESQUITE;
 					setFontIncAnnot 0;
 					setFontIncExp 0;
 					setSize 600 450;
-					setLocation 1220 478;
+					setLocation 963 437;
 					setFont SanSerif;
 					setFontSize 10;
 					getToolPalette;
@@ -137,23 +137,18 @@ Begin MESQUITE;
 			tell It;
 				getWindow;
 				tell It;
-					getTable;
-					tell It;
-						columnWidth 2 63;
-					endTell;
 					setExplanationSize 30;
 					setAnnotationSize 20;
 					setFontIncAnnot 0;
 					setFontIncExp 0;
 					setSize 600 450;
-					setLocation 1220 478;
+					setLocation 963 437;
 					setFont SanSerif;
 					setFontSize 10;
 					getToolPalette;
 					tell It;
 						setTool mesquite.charMatrices.BasicDataWindowMaker.BasicDataWindow.ibeam;
 					endTell;
-					setActive;
 					setTool mesquite.charMatrices.BasicDataWindowMaker.BasicDataWindow.ibeam;
 					colorCells  #mesquite.charMatrices.NoColor.NoColor;
 					setBackground White;
@@ -174,6 +169,31 @@ Begin MESQUITE;
 					toggleScrollLinkedTables off;
 				endTell;
 				showWindow;
+				getEmployee #mesquite.categ.StateNamesEditor.StateNamesEditor;
+				tell It;
+					makeWindow;
+					tell It;
+						setExplanationSize 30;
+						setAnnotationSize 20;
+						setFontIncAnnot 0;
+						setFontIncExp 0;
+						setSize 600 450;
+						setLocation 963 437;
+						setFont SanSerif;
+						setFontSize 10;
+						getToolPalette;
+						tell It;
+							setTool mesquite.categ.StateNamesEditor.StateNamesWindow.ibeam;
+						endTell;
+						setActive;
+						rowsAreCharacters on;
+						toggleConstrainChar on;
+						toggleConstrainCharNum 3;
+						togglePanel off;
+						toggleSummaryPanel off;
+					endTell;
+					showWindow;
+				endTell;
 				getEmployee #mesquite.categ.StateNamesStrip.StateNamesStrip;
 				tell It;
 					showStrip off;

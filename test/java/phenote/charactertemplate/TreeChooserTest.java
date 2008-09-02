@@ -43,7 +43,8 @@ public class TreeChooserTest extends TreeChooser {
     phenote.initGui();
   }
 
-  @Before public void setup() throws InterruptedException, InvocationTargetException {
+  @Before
+  public void setup() throws InterruptedException, InvocationTargetException {
     SwingUtilities.invokeAndWait(new Runnable() {
       public void run() {
         treeChooser = new TreeChooser("dummy id");
@@ -51,7 +52,8 @@ public class TreeChooserTest extends TreeChooser {
     });
   }
 
-  @Test public void getChosenTemplates() throws InterruptedException, InvocationTargetException {
+  @Test
+  public void getChosenTemplates() throws InterruptedException, InvocationTargetException {
     SwingUtilities.invokeAndWait(new Runnable() {
       public void run() {
         try {
@@ -64,7 +66,6 @@ public class TreeChooserTest extends TreeChooser {
           for (Taxon taxon : tree.getTaxa()) {
             if ((taxon.getName().equals(characters.get(0).getValueString("Taxon"))) || (taxon.getName().equals(characters.get(2).getValueString("Taxon")))) {
               treePane.addSelectedNode(tree.getNode(taxon));
-              System.out.println("Adding selected taxon: " + taxon);
             }
           }
           // test a term field

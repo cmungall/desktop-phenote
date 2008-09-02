@@ -46,11 +46,18 @@ public class DataMergerTest {
     Assert.assertEquals("Original data set should have 3 characters", 3, data.getCharacters().size());
     Assert.assertNull("Cell 0,0 should be empty in the original data set", this.getCellValue(data, 0, 0));
     Assert.assertEquals("Cell 0,1 should have state with symbol 1 in original data set", "1", this.getCellValue(data, 1, 0).getSymbol());
+    Assert.assertEquals("First character starts with this label", "label in xml", data.getCharacters().get(0).getLabel());
+    Assert.assertNull("Second character should not have a state with symbol '2'", this.findState(data.getCharacters().get(1).getStates(), "2"));
     DataMerger.mergeMatrix(nexusReader, data);
     Assert.assertEquals("Merged data set should have 5 characters", 5, data.getCharacters().size());
     Assert.assertEquals("Cell 0,0 should have state with symbol 0", "0", this.getCellValue(data, 0, 0).getSymbol());
     Assert.assertEquals("Cell 0,1 should have state with symbol 0", "0", this.getCellValue(data, 1, 0).getSymbol());
     Assert.assertEquals("Cell 0,4 should have state with symbol 1", "1", this.getCellValue(data, 0, 4).getSymbol());
+    Assert.assertEquals("First character label should not have changed", "label in xml", data.getCharacters().get(0).getLabel());
+    Assert.assertNotNull("Second character should now have a state with symbol '2'", this.findState(data.getCharacters().get(1).getStates(), "2"));
+    Assert.assertEquals("Second character state '0' should have original label since it was already there", "xml state 0", this.findState(data.getCharacters().get(1).getStates(), "0").getLabel());
+    Assert.assertEquals("Second character state '2' should have imported label since it was added", "label 2,2", this.findState(data.getCharacters().get(1).getStates(), "2").getLabel());
+    Assert.assertEquals("Fourth character should have label from NEXUS file, since a new character was added", "char4", data.getCharacters().get(3).getLabel());
   }
   
   private  State findState(List<State> states, String symbol) {

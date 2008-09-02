@@ -88,17 +88,17 @@ public class DataMerger {
   }
   
   /**
-   * Merge matrix values into an existing data set.  The matrix must have the same number of 
-   * characters as the existing data set. Characters are matched via their index.  Values are 
-   * matched by comparing the symbol - if a state with that symbol is not available for the 
-   * character in the existing data set, a new state with that symbol is added to the character. 
-   * Taxa are matched via their Publication Name.  Matrix values for unmatched taxa are unaltered.
+   * Merge matrix values into an existing data set.  Characters are matched via their index. 
+   * Extra characters are appended to the existing data. Values are matched by comparing the symbol 
+   * - if a state with that symbol is not available for the character in the existing data set, a 
+   * new state with that symbol is added to the character. Taxa are matched via their Publication 
+   * Name.  Matrix values for unmatched taxa are unaltered.
    */
   public static void mergeMatrix(NEXUSReader reader, DataSet existingData) {
     final DataSet newData = reader.getDataSet();
     for (int i = 0; i < newData.getCharacters().size(); i++) {
       while (i >= existingData.getCharacters().size()) {
-        existingData.newCharacter();
+        existingData.addCharacter(newData.getCharacters().get(i));
       }
       for (Taxon taxon : existingData.getTaxa()) {
         final String taxonName = taxon.getPublicationName();
@@ -112,8 +112,8 @@ public class DataMerger {
         final State existingState = findState(currentCharacter.getStates(), valueSymbol);
         final State state;
         if (existingState == null) {
-          state = currentCharacter.newState();
-          state.setSymbol(valueSymbol);
+          state = newStateValue;
+          currentCharacter.addState(state);
         } else {
           state = existingState;
         }
