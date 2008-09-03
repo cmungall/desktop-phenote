@@ -134,7 +134,7 @@ public class WormInteractionAdapter implements QueryableDataAdapterI {
     return default_value; 
   }
 
-  public static String stripLeadTrailDoublequote(String s) {
+  public static String stripLeadTrailDoublequote(String s) {		// Strip Leading and Trailing doublequotes
     String doublequote = "\"";
     String result = "";
     int length = s.length();  int lastindex = length - 1;
