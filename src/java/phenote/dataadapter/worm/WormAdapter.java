@@ -70,6 +70,8 @@ public class WormAdapter implements QueryableDataAdapterI {
         postgres_table = "app_entity"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "app_quality"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "app_suggested"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_suggested_definition"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_child_of"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "app_lifestage"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "app_nature"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "app_func"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
@@ -258,6 +260,10 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_suggested"; tag_name = "Suggested"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_suggested_definition"; tag_name = "Suggested Definition"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "app_child_of"; tag_name = "Child Of"; 
+        updateListField(c, s, joinkey, postgres_table, tag_name, chr);
         postgres_table = "app_lifestage"; tag_name = "Life Stage"; 
         updateListField(c, s, joinkey, postgres_table, tag_name, chr);
         postgres_table = "app_nature"; tag_name = "Allele Nature"; tag_value = "";
@@ -540,6 +546,12 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
       postgres_table = "app_suggested"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("Suggested",postgres_value); }					// assign the queried value
+      postgres_table = "app_suggested_definition"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+      if (postgres_value == "") { } else { c1.setValue("Suggested Definition",postgres_value); }					// assign the queried value
+      postgres_table = "app_child_of"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+      if (postgres_value == "") { } else { c1.setValue("Child Of",postgres_value); }					// assign the queried IDs
       postgres_table = "app_lifestage"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
 //System.out.println("queryied lifestage to "+postgres_value+" END");
