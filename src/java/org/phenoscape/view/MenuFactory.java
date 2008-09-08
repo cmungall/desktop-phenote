@@ -49,10 +49,6 @@ public class MenuFactory {
     };
     openAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
     menu.add(new JMenuItem(openAction));
-    final Action importNEXUSAction = new AbstractAction("Import NEXUS...") {
-      public void actionPerformed(ActionEvent e) { controller.importFile(); }
-    };
-    menu.add(new JMenuItem(importNEXUSAction));
     final Action mergeTaxaAction = new AbstractAction("Tab-delimited Taxa...") {
       public void actionPerformed(ActionEvent e) { controller.openMergeTaxa(); }
     };
@@ -60,7 +56,7 @@ public class MenuFactory {
       public void actionPerformed(ActionEvent e) { controller.openMergeCharacters(); }
     };
     final Action mergeMatrixAction = new AbstractAction("NEXUS Matrix...") {
-      public void actionPerformed(ActionEvent e) { controller.openMergeMatrix(); }
+      public void actionPerformed(ActionEvent e) { controller.openMergeNEXUS(); }
     };
     final JMenu mergeMenu = new JMenu("Merge");
     mergeMenu.add(new JMenuItem(mergeTaxaAction));

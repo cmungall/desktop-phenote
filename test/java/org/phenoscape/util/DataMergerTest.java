@@ -16,6 +16,7 @@ import org.phenoscape.io.NeXMLReader;
 import org.phenoscape.model.DataSet;
 import org.phenoscape.model.Phenotype;
 import org.phenoscape.model.State;
+import org.phenoscape.model.Taxon;
 
 public class DataMergerTest {
   
@@ -48,7 +49,8 @@ public class DataMergerTest {
     Assert.assertEquals("Cell 0,1 should have state with symbol 1 in original data set", "1", this.getCellValue(data, 1, 0).getSymbol());
     Assert.assertEquals("First character starts with this label", "label in xml", data.getCharacters().get(0).getLabel());
     Assert.assertNull("Second character should not have a state with symbol '2'", this.findState(data.getCharacters().get(1).getStates(), "2"));
-    DataMerger.mergeMatrix(nexusReader, data);
+    Assert.assertEquals("Original data set should have 3 taxa", 3, data.getTaxa().size());
+    DataMerger.mergeDataSets(nexusReader.getDataSet(), data);
     Assert.assertEquals("Merged data set should have 5 characters", 5, data.getCharacters().size());
     Assert.assertEquals("Cell 0,0 should have state with symbol 0", "0", this.getCellValue(data, 0, 0).getSymbol());
     Assert.assertEquals("Cell 0,1 should have state with symbol 0", "0", this.getCellValue(data, 1, 0).getSymbol());
@@ -58,11 +60,20 @@ public class DataMergerTest {
     Assert.assertEquals("Second character state '0' should have original label since it was already there", "xml state 0", this.findState(data.getCharacters().get(1).getStates(), "0").getLabel());
     Assert.assertEquals("Second character state '2' should have imported label since it was added", "label 2,2", this.findState(data.getCharacters().get(1).getStates(), "2").getLabel());
     Assert.assertEquals("Fourth character should have label from NEXUS file, since a new character was added", "char4", data.getCharacters().get(3).getLabel());
+    Assert.assertEquals("Merged data set should have 4 taxa", 4, data.getTaxa().size());
+    Assert.assertNotNull("New taxon should have been added", this.findTaxon(data.getTaxa(), "Species not in NeXML"));
   }
   
   private  State findState(List<State> states, String symbol) {
-    for (State state: states) {
+    for (State state : states) {
       if (symbol.equals(state.getSymbol())) { return state; }
+    }
+    return null;
+  }
+  
+  private Taxon findTaxon(List<Taxon> taxa, String publicationName) {
+    for (Taxon taxon : taxa) {
+      if (publicationName.equals(taxon.getPublicationName())) { return taxon; }
     }
     return null;
   }

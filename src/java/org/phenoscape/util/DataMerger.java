@@ -9,7 +9,6 @@ import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 import org.phenoscape.io.CharacterTabReader;
-import org.phenoscape.io.NEXUSReader;
 import org.phenoscape.io.TaxonTabReader;
 import org.phenoscape.model.Character;
 import org.phenoscape.model.DataSet;
@@ -94,17 +93,21 @@ public class DataMerger {
    * new state with that symbol is added to the character. Taxa are matched via their Publication 
    * Name.  Matrix values for unmatched taxa are unaltered.
    */
-  public static void mergeMatrix(NEXUSReader reader, DataSet existingData) {
-    final DataSet newData = reader.getDataSet();
+  public static void mergeDataSets(DataSet newData, DataSet existingData) {
     for (int i = 0; i < newData.getCharacters().size(); i++) {
       while (i >= existingData.getCharacters().size()) {
         existingData.addCharacter(newData.getCharacters().get(i));
       }
-      for (Taxon taxon : existingData.getTaxa()) {
-        final String taxonName = taxon.getPublicationName();
-        if (taxonName == null) continue;
-        final Taxon newTaxon = findTaxon(newData.getTaxa(), taxonName);
-        if (newTaxon == null) continue;
+      for (Taxon newTaxon : newData.getTaxa()) {
+        final String taxonName = newTaxon.getPublicationName();
+        final Taxon taxon;
+        final Taxon existingTaxon = findTaxon(existingData.getTaxa(), taxonName);
+        if (existingTaxon == null) { 
+          taxon = newTaxon;
+          existingData.addTaxon(newTaxon);
+        } else {
+          taxon = existingTaxon;
+        }
         final State newStateValue = newData.getStateForTaxon(newTaxon, newData.getCharacters().get(i));
         if (newStateValue == null) continue;
         final String valueSymbol = newStateValue.getSymbol();

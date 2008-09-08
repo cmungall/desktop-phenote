@@ -127,9 +127,6 @@ public class PhenoscapeController extends DocumentController {
   //@Override
   public boolean readData(File aFile) {
     log().debug("Read file: " + aFile);
-    if (aFile.getName().endsWith(".nex") || aFile.getName().endsWith(".nxs")) {
-      return this.readNEXUS(aFile);
-    }
     return this.readNeXML(aFile);
   }
   
@@ -153,30 +150,6 @@ public class PhenoscapeController extends DocumentController {
       log().error("Unable to parse XML", e);
     } catch (IOException e) {
       log().error("Unable to read file", e);
-    }
-    return false;
-  }
-  
-  private boolean readNEXUS(File aFile) {
-    try {
-      final NEXUSReader reader = new NEXUSReader(aFile);
-      this.dataSet.getCharacters().clear();
-      this.dataSet.getCharacters().addAll(reader.getCharacters());
-      this.dataSet.getTaxa().clear();
-      this.dataSet.getTaxa().addAll(reader.getTaxa());
-      this.dataSet.setCurators(null);
-      this.dataSet.setPublication(null);
-      this.dataSet.setPublicationNotes(null);
-      this.getDataSet().setMatrixData(reader.getMatrix());
-      
-      this.fireDataChanged();
-      return true;
-    } catch (ParseException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
     }
     return false;
   }
@@ -213,12 +186,12 @@ public class PhenoscapeController extends DocumentController {
     }
   }
   
-  public void openMergeMatrix() {
+  public void openMergeNEXUS() {
     final JFileChooser fileChooser = new JFileChooser();
     final int result = fileChooser.showOpenDialog(GUIManager.getManager().getFrame());
     if (result == JFileChooser.APPROVE_OPTION) {
       final File file = fileChooser.getSelectedFile();
-      this.mergeMatrix(file);
+      this.mergeNEXUS(file);
     }
   }
   
@@ -264,6 +237,7 @@ public class PhenoscapeController extends DocumentController {
     } catch (IOException e) {
       log().error("Error reading taxon list file", e);
     }
+    this.fireDataChanged();
   }
   
   private void mergeCharacters(File aFile) {
@@ -273,17 +247,19 @@ public class PhenoscapeController extends DocumentController {
     } catch (IOException e) {
       log().error("Error reading character list file", e);
     }
+    this.fireDataChanged();
   }
   
-  private void mergeMatrix(File aFile) {
+  private void mergeNEXUS(File aFile) {
     try {
       final NEXUSReader reader = new NEXUSReader(aFile);
-      DataMerger.mergeMatrix(reader, this.getDataSet());
+      DataMerger.mergeDataSets(reader.getDataSet(), this.getDataSet());
     } catch (ParseException e) {
       log().error("Error parsing NEXUS file", e);
     } catch (IOException e) {
       log().error("Error reading NEXUS file", e);
     }
+    this.fireDataChanged();
   }
   
   private Logger log() {
