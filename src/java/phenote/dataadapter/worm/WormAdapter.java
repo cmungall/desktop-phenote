@@ -358,6 +358,8 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
     // should their be a check that the current char fields have pub & allele?
     queryableFields.add("NBP Date"); 
     queryableFields.add("Genetic Intx Desc"); 
+    queryableFields.add("Suggested"); 
+    queryableFields.add("Suggested Definition"); 
 //    queryableGroups.add("referenceMaker");		// populate reference obo for the main
     queryableGroups.add("default");			// default last
   }
@@ -684,6 +686,8 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
     String phenotypeString = "Phenotype";
     String phenotypeRemarkString = "Phenotype Remark";
     String intxdescString = "Genetic Intx Desc";
+    String suggestedString = "Suggested";
+    String sugdefString = "Suggested Definition";
 
     CharacterListI charList = new CharacterList();	// create the CharacterList that we will return
 
@@ -712,6 +716,12 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
     } else if (field.equals(nbpString)) {	
       try { rs = s.executeQuery("SELECT * FROM app_nbp WHERE app_timestamp ~ '"+query+"' ORDER BY joinkey;"); }	// get the alleles from a paper
       catch (SQLException se) { System.out.println("Exception while executing app_nbp nbpString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query SELECT app_nbp"); }
+    } else if (field.equals(suggestedString)) {	
+      try { rs = s.executeQuery("SELECT * FROM app_suggested WHERE app_suggested ~ '"+query+"' ORDER BY joinkey;"); }	// get the alleles from a paper
+      catch (SQLException se) { System.out.println("Exception while executing app_suggested suggestedString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query SELECT app_suggested"); }
+    } else if (field.equals(sugdefString)) {	
+      try { rs = s.executeQuery("SELECT * FROM app_suggested_definition WHERE app_suggested_definition ~ '"+query+"' ORDER BY joinkey;"); }	// get the alleles from a paper
+      catch (SQLException se) { System.out.println("Exception while executing app_suggested_definition sugdefString "+query+" query: that probably means our SQL is invalid"); se.printStackTrace(); errorPopup("query SELECT app_suggested_definition"); }
     } else if (field.equals(intxdescString)) {	
       String not_null = "NOT NULL";
       if (query.equals(not_null)) { 
