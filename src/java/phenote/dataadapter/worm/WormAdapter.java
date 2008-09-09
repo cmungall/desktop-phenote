@@ -94,6 +94,7 @@ public class WormAdapter implements QueryableDataAdapterI {
         postgres_table = "app_genotype"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
 //        postgres_table = "app_strain"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "app_obj_remark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+        postgres_table = "app_allele_status"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
       }
     } catch (Exception e) {
       System.out.println("Could not delete character: " + e);
