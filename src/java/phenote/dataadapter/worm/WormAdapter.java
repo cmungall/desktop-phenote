@@ -80,8 +80,8 @@ public class WormAdapter implements QueryableDataAdapterI {
         postgres_table = "app_control_isolate"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "app_penetrance"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "app_percent"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_range_start"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_range_end"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+//        postgres_table = "app_range_start"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+//        postgres_table = "app_range_end"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
 //        postgres_table = "app_quantity_remark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
 //        postgres_table = "app_quantity"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "app_heat_sens"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
@@ -92,7 +92,7 @@ public class WormAdapter implements QueryableDataAdapterI {
         postgres_table = "app_pat_effect"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "app_haplo"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "app_genotype"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "app_strain"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
+//        postgres_table = "app_strain"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "app_obj_remark"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
       }
     } catch (Exception e) {
@@ -283,14 +283,14 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_percent"; tag_name = "Penetrance Remark"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "app_range_start"; tag_name = "Penetrance Range Start"; tag_value = chr.getValueString(tag_name);
-        String range_start = tag_value;
-        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "app_range_end"; tag_name = "Penetrance Range End"; tag_value = chr.getValueString(tag_name);
-        if ( ( (tag_value == "") || (tag_value == null) ) && (range_start != null) && (range_start != "")) { tag_value = range_start; 
-          String m = "Penetrance range for ID : "+joinkey+" has no end value, using start value : "+range_start;
-          JOptionPane.showMessageDialog(null,m,"Worm stub",JOptionPane.INFORMATION_MESSAGE); }
-        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+//        postgres_table = "app_range_start"; tag_name = "Penetrance Range Start"; tag_value = chr.getValueString(tag_name);
+//        String range_start = tag_value;
+//        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+//        postgres_table = "app_range_end"; tag_name = "Penetrance Range End"; tag_value = chr.getValueString(tag_name);
+//        if ( ( (tag_value == "") || (tag_value == null) ) && (range_start != null) && (range_start != "")) { tag_value = range_start; 
+//          String m = "Penetrance range for ID : "+joinkey+" has no end value, using start value : "+range_start;
+//          JOptionPane.showMessageDialog(null,m,"Worm stub",JOptionPane.INFORMATION_MESSAGE); }
+//        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
 //        postgres_table = "app_quantity_remark"; tag_name = "Quantity Remark"; tag_value = chr.getValueString(tag_name);
 //        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);	// not for phenote Karen 2008 01 28
 //        postgres_table = "app_quantity"; tag_name = "Quantity"; tag_value = chr.getValueString(tag_name);
@@ -312,8 +312,8 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_genotype"; tag_name = "Genotype"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "app_strain"; tag_name = "Host Strain"; tag_value = chr.getValueString(tag_name);
-        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+//        postgres_table = "app_strain"; tag_name = "Host Strain"; tag_value = chr.getValueString(tag_name);
+//        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_obj_remark"; tag_name = "Object Remark"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_allele_status"; tag_name = "Allele Status"; tag_value = chr.getValueString(tag_name);
@@ -584,12 +584,12 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("Penetrance Remark",postgres_value); }				// assign the queried value
 //System.out.println("set PenetranceRemark to "+postgres_value+" END");
-      postgres_table = "app_range_start"; postgres_value = ""; // postgres_value = "No postgres value assigned";
-      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-      if (postgres_value == "") { } else { c1.setValue("Penetrance Range Start",postgres_value); }				// assign the queried value
-      postgres_table = "app_range_end"; postgres_value = ""; // postgres_value = "No postgres value assigned";
-      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-      if (postgres_value == "") { } else { c1.setValue("Penetrance Range End",postgres_value); }				// assign the queried value
+//      postgres_table = "app_range_start"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+//      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+//      if (postgres_value == "") { } else { c1.setValue("Penetrance Range Start",postgres_value); }				// assign the queried value
+//      postgres_table = "app_range_end"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+//      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+//      if (postgres_value == "") { } else { c1.setValue("Penetrance Range End",postgres_value); }				// assign the queried value
 //      postgres_table = "app_quantity"; postgres_value = ""; // postgres_value = "No postgres value assigned";	// not for phenote, Karen 2008 01 28
 //      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
 //      c1.setValue("Quantity",postgres_value);					// assign the queried value
@@ -623,9 +623,9 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
       postgres_table = "app_genotype"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("Genotype",postgres_value); }				// assign the queried value
-      postgres_table = "app_strain"; postgres_value = ""; // postgres_value = "No postgres value assigned";
-      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-      if (postgres_value == "") { } else { c1.setValue("Host Strain",postgres_value); }				// assign the queried value
+//      postgres_table = "app_strain"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+//      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+//      if (postgres_value == "") { } else { c1.setValue("Host Strain",postgres_value); }				// assign the queried value
       postgres_table = "app_obj_remark"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("Object Remark",postgres_value); }				// assign the queried value
