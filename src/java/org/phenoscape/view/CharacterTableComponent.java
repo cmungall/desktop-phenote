@@ -22,11 +22,9 @@ import org.phenoscape.swing.PlaceholderRenderer;
 import phenote.gui.BugWorkaroundTable;
 import phenote.gui.SortDisabler;
 import phenote.gui.TableColumnPrefsSaver;
-import phenote.util.EverythingEqualComparator;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.EventList;
 import ca.odell.glazedlists.GlazedLists;
-import ca.odell.glazedlists.SortedList;
 import ca.odell.glazedlists.gui.AdvancedTableFormat;
 import ca.odell.glazedlists.gui.WritableTableFormat;
 import ca.odell.glazedlists.swing.EventTableModel;
@@ -38,11 +36,9 @@ public class CharacterTableComponent extends PhenoscapeGUIComponent {
 
   private JButton addCharacterButton;
   private JButton deleteCharacterButton;
-  private final SortedList<Character> sortedCharacters;
 
   public CharacterTableComponent(String id, PhenoscapeController controller) {
     super(id, controller);
-    this.sortedCharacters = new SortedList<Character>(controller.getDataSet().getCharacters(), new EverythingEqualComparator<Character>());
   }
   
   @Override
@@ -53,13 +49,13 @@ public class CharacterTableComponent extends PhenoscapeGUIComponent {
 
   private void initializeInterface() {
     this.setLayout(new BorderLayout());
-    final EventTableModel<Character> charactersTableModel = new EventTableModel<Character>(this.sortedCharacters, new CharactersTableFormat());
+    final EventTableModel<Character> charactersTableModel = new EventTableModel<Character>(this.getController().getSortedCharacters(), new CharactersTableFormat());
     final JTable charactersTable = new BugWorkaroundTable(charactersTableModel);
     charactersTable.setSelectionModel(this.getController().getCharactersSelectionModel());
     charactersTable.setDefaultRenderer(Object.class, new PlaceholderRenderer("None"));
     charactersTable.putClientProperty("Quaqua.Table.style", "striped");
     new TableColumnPrefsSaver(charactersTable, this.getClass().getName());
-    final TableComparatorChooser<Character> sortChooser = new TableComparatorChooser<Character>(charactersTable, this.sortedCharacters, false);
+    final TableComparatorChooser<Character> sortChooser = new TableComparatorChooser<Character>(charactersTable, this.getController().getSortedCharacters(), false);
     sortChooser.addSortActionListener(new SortDisabler());
     this.add(new JScrollPane(charactersTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);

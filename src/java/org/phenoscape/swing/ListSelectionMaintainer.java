@@ -39,6 +39,9 @@ public class ListSelectionMaintainer<T> {
       int index = -1;
       while (listChanges.hasNext()) {
         listChanges.next();
+        if ((listChanges.getType() == ListEvent.UPDATE) || (listChanges.isReordering())) {
+          return;
+        }
         index = listChanges.getIndex();
       }
       final int selectionIndex = (index > (list.size() - 1)) ? (list.size() - 1) : index;

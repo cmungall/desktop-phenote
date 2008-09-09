@@ -24,21 +24,24 @@ import org.phenoscape.swing.ListSelectionMaintainer;
 import org.phenoscape.util.DataMerger;
 
 import phenote.gui.selection.SelectionManager;
+import phenote.util.EverythingEqualComparator;
 import ca.odell.glazedlists.CollectionList;
-import ca.odell.glazedlists.EventList;
+import ca.odell.glazedlists.SortedList;
 import ca.odell.glazedlists.swing.EventSelectionModel;
 
 public class PhenoscapeController extends DocumentController {
   
   private final OntologyController ontologyController = new OntologyController();
   private final DataSet dataSet = new DataSet();
+  private final SortedList<Character> sortedCharacters;
   private final EventSelectionModel<Character> charactersSelectionModel;
+  private final SortedList<Taxon> sortedTaxa;
   private final EventSelectionModel<Taxon> taxaSelectionModel;
-  private final EventList<Specimen> currentSpecimens;
+  private final SortedList<Specimen> currentSpecimens;
   private final EventSelectionModel<Specimen> currentSpecimensSelectionModel;
-  private final EventList<State> currentStates;
+  private final SortedList<State> currentStates;
   private final EventSelectionModel<State> currentStatesSelectionModel;
-  private final EventList<Phenotype> currentPhenotypes;
+  private final SortedList<Phenotype> currentPhenotypes;
   private final EventSelectionModel<Phenotype> currentPhenotypesSelectionModel;
   private String charactersBlockID = UUID.randomUUID().toString();
   private NexmlDocument xmlDoc = NexmlDocument.Factory.newInstance();
@@ -47,38 +50,40 @@ public class PhenoscapeController extends DocumentController {
   
   public PhenoscapeController() {
     super();
-    this.charactersSelectionModel = new EventSelectionModel<Character>(this.dataSet.getCharacters());
-    new ListSelectionMaintainer<Character>(this.dataSet.getCharacters(), this.charactersSelectionModel);
+    this.sortedCharacters = new SortedList<Character>(this.dataSet.getCharacters(), new EverythingEqualComparator<Character>());
+    this.charactersSelectionModel = new EventSelectionModel<Character>(this.sortedCharacters);
+    new ListSelectionMaintainer<Character>(this.sortedCharacters, this.charactersSelectionModel);
     this.charactersSelectionModel.setSelectionMode(EventSelectionModel.SINGLE_SELECTION);
-    this.taxaSelectionModel = new EventSelectionModel<Taxon>(this.dataSet.getTaxa());
-    new ListSelectionMaintainer<Taxon>(this.dataSet.getTaxa(), this.taxaSelectionModel);
+    this.sortedTaxa = new SortedList<Taxon>(this.dataSet.getTaxa(), new EverythingEqualComparator<Taxon>());
+    this.taxaSelectionModel = new EventSelectionModel<Taxon>(this.sortedTaxa);
+    new ListSelectionMaintainer<Taxon>(this.sortedTaxa, this.taxaSelectionModel);
     this.taxaSelectionModel.setSelectionMode(EventSelectionModel.SINGLE_SELECTION);
-    this.currentSpecimens = new CollectionList<Taxon, Specimen>(this.taxaSelectionModel.getSelected(),
+    this.currentSpecimens = new SortedList<Specimen>(new CollectionList<Taxon, Specimen>(this.taxaSelectionModel.getSelected(),
         new CollectionList.Model<Taxon, Specimen>(){
       public List<Specimen> getChildren(Taxon parent) {
         return parent.getSpecimens();
       }
     } 
-    );
+    ), new EverythingEqualComparator<Specimen>());
     this.currentSpecimensSelectionModel = new EventSelectionModel<Specimen>(this.currentSpecimens);
     new ListSelectionMaintainer<Specimen>(this.currentSpecimens, this.currentSpecimensSelectionModel);
-    this.currentStates = new CollectionList<Character, State>(this.charactersSelectionModel.getSelected(),
+    this.currentStates = new SortedList<State>(new CollectionList<Character, State>(this.charactersSelectionModel.getSelected(),
         new CollectionList.Model<Character, State>() {
       public List<State> getChildren(Character parent) {
         return parent.getStates();
       }
     }
-    );
+    ), new EverythingEqualComparator<State>());
     this.currentStatesSelectionModel = new EventSelectionModel<State>(this.currentStates);
     new ListSelectionMaintainer<State>(this.currentStates, this.currentStatesSelectionModel);
     this.currentStatesSelectionModel.setSelectionMode(EventSelectionModel.SINGLE_SELECTION);
-    this.currentPhenotypes = new CollectionList<State, Phenotype>(this.currentStatesSelectionModel.getSelected(),
+    this.currentPhenotypes = new SortedList<Phenotype>(new CollectionList<State, Phenotype>(this.currentStatesSelectionModel.getSelected(),
         new CollectionList.Model<State, Phenotype>() {
       public List<Phenotype> getChildren(State parent) {
         return parent.getPhenotypes();
       }
     }
-    );
+    ), new EverythingEqualComparator<Phenotype>());
     this.currentPhenotypesSelectionModel = new EventSelectionModel<Phenotype>(this.currentPhenotypes);
     new ListSelectionMaintainer<Phenotype>(this.currentPhenotypes, this.currentPhenotypesSelectionModel);
     this.currentPhenotypesSelectionModel.setSelectionMode(EventSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -91,12 +96,16 @@ public class PhenoscapeController extends DocumentController {
   public DataSet getDataSet() {
     return this.dataSet;
   }
+  
+  public SortedList<Character> getSortedCharacters() {
+    return this.sortedCharacters;
+  }
 
   public EventSelectionModel<Character> getCharactersSelectionModel() {
     return this.charactersSelectionModel;
   }
   
-  public EventList<State> getStatesForCurrentCharacterSelection() {
+  public SortedList<State> getStatesForCurrentCharacterSelection() {
     return this.currentStates;
   }
   
@@ -104,7 +113,7 @@ public class PhenoscapeController extends DocumentController {
     return this.currentStatesSelectionModel;
   }
   
-  public EventList<Phenotype> getPhenotypesForCurrentStateSelection() {
+  public SortedList<Phenotype> getPhenotypesForCurrentStateSelection() {
     return this.currentPhenotypes;
   }
   
@@ -112,11 +121,15 @@ public class PhenoscapeController extends DocumentController {
     return this.currentPhenotypesSelectionModel;
   }
   
+  public SortedList<Taxon> getSortedTaxa() {
+    return this.sortedTaxa;
+  }
+  
   public EventSelectionModel<Taxon> getTaxaSelectionModel() {
     return this.taxaSelectionModel;
   }
   
-  public EventList<Specimen> getSpecimensForCurrentTaxonSelection() {
+  public SortedList<Specimen> getSpecimensForCurrentTaxonSelection() {
     return this.currentSpecimens;
   }
   

@@ -24,10 +24,8 @@ import org.phenoscape.swing.PlaceholderRenderer;
 import phenote.gui.BugWorkaroundTable;
 import phenote.gui.SortDisabler;
 import phenote.gui.TableColumnPrefsSaver;
-import phenote.util.EverythingEqualComparator;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.EventList;
-import ca.odell.glazedlists.SortedList;
 import ca.odell.glazedlists.gui.AdvancedTableFormat;
 import ca.odell.glazedlists.gui.WritableTableFormat;
 import ca.odell.glazedlists.swing.EventTableModel;
@@ -39,11 +37,9 @@ public class StateTableComponent extends PhenoscapeGUIComponent {
   
   private JButton addStateButton;
   private JButton deleteStateButton;
-  private final SortedList<State> sortedStates;
 
   public StateTableComponent(String id, PhenoscapeController controller) {
     super(id, controller);
-    this.sortedStates = new SortedList<State>(controller.getStatesForCurrentCharacterSelection(), new EverythingEqualComparator<State>());
   }
 
   @Override
@@ -54,13 +50,13 @@ public class StateTableComponent extends PhenoscapeGUIComponent {
   
   private void initializeInterface() {
     this.setLayout(new BorderLayout());
-    final EventTableModel<State> statesTableModel = new EventTableModel<State>(this.sortedStates, new StatesTableFormat());
+    final EventTableModel<State> statesTableModel = new EventTableModel<State>(this.getController().getStatesForCurrentCharacterSelection(), new StatesTableFormat());
     final JTable statesTable = new BugWorkaroundTable(statesTableModel);
     statesTable.setSelectionModel(this.getController().getCurrentStatesSelectionModel());
     statesTable.setDefaultRenderer(Object.class, new PlaceholderRenderer("None"));
     statesTable.putClientProperty("Quaqua.Table.style", "striped");
     new TableColumnPrefsSaver(statesTable, this.getClass().getName());
-    final TableComparatorChooser<State> sortChooser = new TableComparatorChooser<State>(statesTable, this.sortedStates, false);
+    final TableComparatorChooser<State> sortChooser = new TableComparatorChooser<State>(statesTable, this.getController().getStatesForCurrentCharacterSelection(), false);
     sortChooser.addSortActionListener(new SortDisabler());
     this.add(new JScrollPane(statesTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);

@@ -32,11 +32,9 @@ import org.phenoscape.swing.PopupListener;
 import phenote.gui.BugWorkaroundTable;
 import phenote.gui.SortDisabler;
 import phenote.gui.TableColumnPrefsSaver;
-import phenote.util.EverythingEqualComparator;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.EventList;
 import ca.odell.glazedlists.GlazedLists;
-import ca.odell.glazedlists.SortedList;
 import ca.odell.glazedlists.gui.AdvancedTableFormat;
 import ca.odell.glazedlists.gui.WritableTableFormat;
 import ca.odell.glazedlists.swing.EventTableModel;
@@ -51,11 +49,9 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
   private PopupListener tablePopup;
   private PhenotypesTableFormat tableFormat;
   private JTable phenotypesTable;
-  private final SortedList<Phenotype> sortedPhenotypes;
   
   public PhenotypeTableComponent(String id, PhenoscapeController controller) {
     super(id, controller);
-    this.sortedPhenotypes = new SortedList<Phenotype>(controller.getPhenotypesForCurrentStateSelection(), new EverythingEqualComparator<Phenotype>());
   }
   
   @Override
@@ -67,7 +63,7 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
   private void initializeInterface() {
     this.setLayout(new BorderLayout());
     this.tableFormat = new PhenotypesTableFormat();
-    final EventTableModel<Phenotype> phenotypesTableModel = new EventTableModel<Phenotype>(this.sortedPhenotypes, this.tableFormat);
+    final EventTableModel<Phenotype> phenotypesTableModel = new EventTableModel<Phenotype>(this.getController().getPhenotypesForCurrentStateSelection(), this.tableFormat);
     this.phenotypesTable = new BugWorkaroundTable(phenotypesTableModel);
     this.phenotypesTable.setSelectionModel(this.getController().getCurrentPhenotypesSelectionModel());
     this.phenotypesTable.setDefaultRenderer(Object.class, new PlaceholderRenderer("None"));
@@ -80,7 +76,7 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
     new TableColumnPrefsSaver(this.phenotypesTable, this.getClass().getName());
     this.tablePopup = new PopupListener(this.createTablePopupMenu());
     this.phenotypesTable.addMouseListener(this.tablePopup);
-    final TableComparatorChooser<Phenotype> sortChooser = new TableComparatorChooser<Phenotype>(this.phenotypesTable, this.sortedPhenotypes, false);
+    final TableComparatorChooser<Phenotype> sortChooser = new TableComparatorChooser<Phenotype>(this.phenotypesTable, this.getController().getPhenotypesForCurrentStateSelection(), false);
     sortChooser.addSortActionListener(new SortDisabler());
     this.add(new JScrollPane(this.phenotypesTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);
@@ -144,7 +140,7 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
     final int column = this.phenotypesTable.getTableHeader().columnAtPoint(p);
     final int row = this.phenotypesTable.rowAtPoint(p);
     if (!this.tableFormat.getColumnClass(column).equals(OBOObject.class)) return;
-    final Phenotype phenotype = this.sortedPhenotypes.get(row);
+    final Phenotype phenotype = this.getController().getPhenotypesForCurrentStateSelection().get(row);
     final OBOClass term = (OBOClass)(this.tableFormat.getColumnValue(phenotype, column));
     final PostCompositionEditor pce = new PostCompositionEditor(this.getController(), this.tableFormat.getColumnTermSet(column));
     pce.setTerm(term);

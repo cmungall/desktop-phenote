@@ -26,11 +26,9 @@ import org.phenoscape.swing.PlaceholderRenderer;
 import phenote.gui.BugWorkaroundTable;
 import phenote.gui.SortDisabler;
 import phenote.gui.TableColumnPrefsSaver;
-import phenote.util.EverythingEqualComparator;
 import phenote.util.FileUtil;
 import ca.odell.glazedlists.EventList;
 import ca.odell.glazedlists.GlazedLists;
-import ca.odell.glazedlists.SortedList;
 import ca.odell.glazedlists.gui.AdvancedTableFormat;
 import ca.odell.glazedlists.gui.WritableTableFormat;
 import ca.odell.glazedlists.swing.EventTableModel;
@@ -42,11 +40,9 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
 
   private JButton addSpecimenButton;
   private JButton deleteSpecimenButton;
-  private final SortedList<Specimen> sortedSpecimens;
 
   public SpecimenTableComponent(String id, PhenoscapeController controller) {
     super(id, controller);
-    this.sortedSpecimens = new SortedList<Specimen>(controller.getSpecimensForCurrentTaxonSelection(), new EverythingEqualComparator<Specimen>());
   }
   
   @Override
@@ -110,7 +106,7 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
   
   private void initializeInterface() {
     this.setLayout(new BorderLayout());
-    final EventTableModel<Specimen> specimensTableModel = new EventTableModel<Specimen>(this.sortedSpecimens, new SpecimensTableFormat());
+    final EventTableModel<Specimen> specimensTableModel = new EventTableModel<Specimen>(this.getController().getSpecimensForCurrentTaxonSelection(), new SpecimensTableFormat());
     final JTable specimensTable = new BugWorkaroundTable(specimensTableModel);
     specimensTable.setSelectionModel(this.getController().getCurrentSpecimensSelectionModel());
     specimensTable.setDefaultRenderer(Object.class, new PlaceholderRenderer("None"));
@@ -118,7 +114,7 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
     specimensTable.getColumnModel().getColumn(0).setCellEditor(this.createAutocompleteEditor(this.getController().getOntologyController().getCollectionTermSet().getTerms()));
     specimensTable.putClientProperty("Quaqua.Table.style", "striped");
     new TableColumnPrefsSaver(specimensTable, this.getClass().getName());
-    final TableComparatorChooser<Specimen> sortChooser = new TableComparatorChooser<Specimen>(specimensTable, this.sortedSpecimens, false);
+    final TableComparatorChooser<Specimen> sortChooser = new TableComparatorChooser<Specimen>(specimensTable, this.getController().getSpecimensForCurrentTaxonSelection(), false);
     sortChooser.addSortActionListener(new SortDisabler());
     this.add(new JScrollPane(specimensTable), BorderLayout.CENTER);
     this.add(this.createToolBar(), BorderLayout.NORTH);
