@@ -1,6 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head><!--#include virtual="../ssi/head.html" -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><!--#include virtual="../ssi/head.html" -->
   
   <title>Phenote Developer Docs: Creating a Phenote data adapter</title></head>
 
@@ -33,34 +32,34 @@ important subdirectories under <code>src/java</code> for creating a data adapter
 
 
 <code>
-public interface DataAdapterI {<br>
-&nbsp; public void load();<br>
-&nbsp; public CharacterListI load(File f);<br>
-&nbsp; public void commit(CharacterListI charList);<br>
-&nbsp; public void commit(CharacterListI charList, File f);<br>
-&nbsp; /** Set value to use for loading or writeback, for a file adapter this would be<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the file name */<br>
-&nbsp; public void setAdapterValue(String adapterValue);<br>
-&nbsp; public List&lt;String&gt; getExtensions();<br>
-&nbsp; public String getDescription();<br>
-}<br>
+public interface DataAdapterI {<br />
+&nbsp; public void load();<br />
+&nbsp; public CharacterListI load(File f);<br />
+&nbsp; public void commit(CharacterListI charList);<br />
+&nbsp; public void commit(CharacterListI charList, File f);<br />
+&nbsp; /** Set value to use for loading or writeback, for a file adapter this would be<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the file name */<br />
+&nbsp; public void setAdapterValue(String adapterValue);<br />
+&nbsp; public List&lt;String&gt; getExtensions();<br />
+&nbsp; public String getDescription();<br />
+}<br />
 </code>
 
 <p>The most important methods are load and commit.
 &nbsp;load()/load(File) will be called by phenote to load up a
 <code>phenote.datamodel.CharacterListI</code> (see below)</p>
-<br>
+<br />
 <h2>Queryable Data Adapter</h2>
 <p>The other kind of data adapter is the queryable data adapter. Typically
 this is a data adapter hooked into a database. Here is
 <code>phenote.dataadapter.QueryableDataadapterI</code> interface:</p>
 
-<code>public interface QueryableDataAdapterI {<br>
-&nbsp; /** return true if data adapter can query for the char field */<br>
-&nbsp; public boolean isFieldQueryable(String field);<br>
-&nbsp; /** Throws exception if query fails, and no data to return */<br>
-&nbsp; public CharacterListI query(String field, String query) throws DataAdapterEx;<br>
-}<br>
+<code>public interface QueryableDataAdapterI {<br />
+&nbsp; /** return true if data adapter can query for the char field */<br />
+&nbsp; public boolean isFieldQueryable(String field);<br />
+&nbsp; /** Throws exception if query fails, and no data to return */<br />
+&nbsp; public CharacterListI query(String field, String query) throws DataAdapterEx;<br />
+}<br />
 </code>
 
 <p><code>isFieldQueryable</code> returns true for strings of fields that are queryable
@@ -80,7 +79,7 @@ then return a CharacterList using this query, which will then be loaded
 into phenote.</p>
 (todo: if there is unsaved data, phenote should ask if the user wants to save before loading).
 
-<h1>Reading & Writing with a Data Adapter</h1>
+<h1>Reading &amp; Writing with a Data Adapter</h1>
 <h2>Reading in data</h2>
 
 <p>A <code>CharacterListI</code> is just a list of
@@ -104,10 +103,10 @@ fits with it (or make sure it fits with an existing configuration).</p>
 <p>To set a field in a character use:</p>
 <code>setValue(CharField cf, String valueString)</code> which throws a
 <code>phenote.datamodel.TermNotFoundException</code> if the valueString is not found in the ontologies associated with the CharField(via configuration)
-where <code>phenote.datamodel.CharField</code> is an object that represents a field in a character. </p>
+where <code>phenote.datamodel.CharField</code> is an object that represents a field in a character. 
 <p>To get a char field you can call</p>
 <code>getCharFieldForName(String fieldName)</code> which throws a
-<code>phenote.datamodel.CharFieldException</code> if you give it a string that is not from the configuration. </p>
+<code>phenote.datamodel.CharFieldException</code> if you give it a string that is not from the configuration. 
 <p>Even better, this is combined this into one convenience method:</p>
 
 <p><code>setValue(String fieldString, String valueString) throws TermNotFoundException, CharFieldException</code>.</p>
@@ -117,34 +116,34 @@ where <code>phenote.datamodel.CharField</code> is an object that represents a fi
 <p>So thats basically it for making characters. Some code might look like this:</p>
 
 <code>
-try {<br>
-&nbsp;&nbsp;&nbsp; Character c = new Character();<br>
+try {<br />
+&nbsp;&nbsp;&nbsp; Character c = new Character();<br />
 
-&nbsp;&nbsp;&nbsp; c.setValue("Entity","GO:123");<br>
+&nbsp;&nbsp;&nbsp; c.setValue("Entity","GO:123");<br />
 
-&nbsp;&nbsp;&nbsp; c.setValue("Quality","PATO:345");<br>
+&nbsp;&nbsp;&nbsp; c.setValue("Quality","PATO:345");<br />
 
-&nbsp;&nbsp;&nbsp; c.setValue("Genotype","somegenotypehere");<br>
+&nbsp;&nbsp;&nbsp; c.setValue("Genotype","somegenotypehere");<br />
 
-&nbsp;&nbsp;&nbsp; ....<br>
+&nbsp;&nbsp;&nbsp; ....<br />
 
-} <br>
-catch (CharFieldException e) {...} // may want to do this per field - error msg?<br>
-catch (TermNotFoundException e) {...} // perhaps per field - error message?<br>
+} <br />
+catch (CharFieldException e) {...} // may want to do this per field - error msg?<br />
+catch (TermNotFoundException e) {...} // perhaps per field - error message?<br />
 
-<br>
+<br />
 </code>
 
 <p>and for CharacterLists just add the characters made above to it:</p>
 
 <code>
-CharacterList cl = new CharacterList();<br>
+CharacterList cl = new CharacterList();<br />
 
-cl.add(character1);<br>
+cl.add(character1);<br />
 
-cl.add(character2);<br>
+cl.add(character2);<br />
 
-...<br>
+...<br />
 </code>
 
 <h2>Writing out data</h2>
@@ -160,7 +159,7 @@ you can call <code>getTerm(String fieldName)</code>. This returns an
 <code>org.geneontology.oboedit.datamodel.OBOClass</code> from the obo edit datamodel
 (I may eventually wrap this in a phenote object - not sure).</p>
 
-<br>
+<br />
 
 <p>You can also query the OntologyManager for all existing character
 fields with <code>OntologyManager.inst().getCharFieldList()</code> which returns a
@@ -176,23 +175,23 @@ a term with <code>charFieldValue.isTerm()</code> and if so get its OBOClass with
 <p>And thats about it. As you can see theres several way of getting at this data. Heres what some code may look like:</p>
 
 <code>
-&nbsp;&nbsp;&nbsp; for (CharacterI ch : characterList.getList()) {<br>
+&nbsp;&nbsp;&nbsp; for (CharacterI ch : characterList.getList()) {<br />
 
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; try {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; try {<br />
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String genotype = ch.getValueString("Genotype");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String genotype = ch.getValueString("Genotype");<br />
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OBOClass entityTerm = ch.getTerm("Entity");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OBOClass entityTerm = ch.getTerm("Entity");<br />
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OBOClass valueTerm = ch.getTerm("Value");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OBOClass valueTerm = ch.getTerm("Value");<br />
 
-<br>
+<br />
 
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; // write this data out to data source...<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; // write this data out to data source...<br />
 
-<br>
+<br />
 
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; } catch (CharFieldException ex) { ...error&nbsp; processing... }<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; } catch (CharFieldException ex) { ...error&nbsp; processing... }<br />
 
 </code>
 
@@ -243,22 +242,25 @@ the commit is made the constraints are checked and if there is a
 problem an error message pops up and the commit is cancelled, or
 possibly a warning is given and user has option to still commit.</p>
 <p>To add a constraint you need to implement phenote.dataadapter.Constraint:</p>
-<p><code>public interface Constraint {<br>
+<p><code>public interface Constraint {<br />
 &nbsp; /** Return true if constraint should be checked at commit time to dataadapter */
-<br>&nbsp; public boolean isCommitConstraint();
-<br><br>&nbsp; /** do constraint check for commit time - should char list be passed in? 
-<br>&nbsp;&nbsp; return ConstraintStatus indication if constraint passed and error msg
-<br>&nbsp;&nbsp; should only be called if isCommitConstraint is true */
-<br>&nbsp; public ConstraintStatus checkCommit();<br>
-<br><br>&nbsp; /** Return true if constraint should be checked after user edits */
-<br>&nbsp; public boolean isEditConstraint();
-<br><br>&nbsp; /** do constraint check after user edit - should char list be passed in? 
-<br>&nbsp;&nbsp; return ConstraintStatus indication if constraint passed and error msg
-<br>&nbsp;&nbsp; should only be called if isEditConstraint is true */
-<br>&nbsp; public ConstraintStatus checkEdit();
-<br>}
+<br />&nbsp; public boolean isCommitConstraint();
+<br /><br />&nbsp; /** do constraint check for commit time - should char list be passed in? 
+<br />&nbsp;&nbsp; return ConstraintStatus indication if constraint passed and error msg
+<br />&nbsp;&nbsp; should only be called if isCommitConstraint is true */
+<br />&nbsp; public ConstraintStatus checkCommit();<br />
+<br /><br />&nbsp; /** Return true if constraint should be checked after user edits */
+<br />&nbsp; public boolean isEditConstraint();
+<br /><br />&nbsp; /** do constraint check after user edit - should char list be passed in? 
+<br />&nbsp;&nbsp; return ConstraintStatus indication if constraint passed and error msg
+<br />&nbsp;&nbsp; should only be called if isEditConstraint is true */
+<br />&nbsp; public ConstraintStatus checkEdit();
+<br />}
 </code>
-<p>If its a commit constraint (and its allowed to be both edit &amp; commit) then return true for isCommitConstraint.  And then put your constraint code into checkCommit(). You can access the datamodel (as you probably will want to) with <code>phenote.dataadapter.CharacterListManager.inst().getCharacterList()</code> which returns a <code>CharacterListI</code>.  checkCommit returns a <code>phenote.dataadapter.ConstraintStatus</code> - here is its constructor</p>
+</p><p>If its a commit constraint (and its allowed to be both edit
+&amp; commit) then return true for isCommitConstraint. And then put
+your constraint code into checkCommit(). You can access the datamodel
+(as you probably will want to) with <code>phenote.dataadapter.CharacterListManager.inst().getCharacterList()</code> which returns a <code>CharacterListI</code>.  checkCommit returns a <code>phenote.dataadapter.ConstraintStatus</code> - here is its constructor</p>
 
 <code>
 &nbsp; public ConstraintStatus(Status status,String message)</code>
@@ -267,17 +269,26 @@ possibly a warning is given and user has option to still commit.</p>
 entered for field temperature is out of range, yada yada...");</code>
 <p>To add your constraint to the ConstraintManager you need only config it (not implemented yet coming soon) with
 <code>
-<br>&lt;constraint-list&gt;
-<br>&nbsp;&nbsp;&nbsp; &lt;constraint class="phenote.dataadapter.worm.WormRangeConstraint"&gt;
-<br>&nbsp;&nbsp;&nbsp; &lt;constraint class="phenote.dataadapter.worm.WormNameConstraint"&gt;
-<br> &nbsp; ...
-<br>&lt;/constraint-list&gt;
+<br />&lt;constraint-list&gt;
+<br />&nbsp;&nbsp;&nbsp; &lt;constraint class="phenote.dataadapter.worm.WormRangeConstraint"&gt;
+<br />&nbsp;&nbsp;&nbsp; &lt;constraint class="phenote.dataadapter.worm.WormNameConstraint"&gt;
+<br /> &nbsp; ...
+<br />&lt;/constraint-list&gt;
 </code>
-<p>(this isnt implemented yet) Alternative is to hardwire the adding of your constraint with <code>ConstraintManager.inst().addConstraint(Constraint)</code>.  If you add more than one constraint, the messages from all the failing constraints will be appended and displayed together.</p>
+</p><p>(this isnt implemented yet) Alternative is to hardwire the adding of your constraint with <code>ConstraintManager.inst().addConstraint(Constraint)</code>.  If you add more than one constraint, the messages from all the failing constraints will be appended and displayed together.</p>
 <p><code>ConstraintStatus</code> also has a warning state - this causes a warning to display and
 lets user decide whether to to go through with commit. use
 <code>ConstraintStatus.Status.WARNING</code>. and likewise all warning messages from
-all constraints get lumped into one message.</p>
+all constraints get lumped into one message.</p><h3>Http data adapter</h3>So there is a way to send data to phenote via http. This is currently how BIRN's smart atlas sends data to phenote. <br />In
+hindsight I realize this is in fact a data adapter - seems obvious
+right. Its erroneously in the phenote.servlet package (as phenote
+starts up a servlet to receive the http requests).<br /><br />phenote.servlet.DataInputServer starts up DataInputServlet to recieve http.<br />phenote.servlet.DataInputServlet receives the http.<br />doGet() sends request to inner class EditRunnable which is a thread.<br />EditRunnable
+takes the request - which is really just a hash - and expects the keys
+to be field names in phenote, and then sets the fields in phenote with
+the values from the keys in the request. So its rather simple. And what
+you send to it as to align with the phenote configuration.<br />And the request then manifests as a new row in phenote.<br /><br />The data input servlet is currently configured as such:<br />&nbsp; &lt;ns:data-input-servlet enable="true"/&gt;<br /><br />but
+this should be refactored to just be another dataadapter config, and
+DataInputServlet should be moved to a dataadapter/http package.<br /><br /><br /><br /><br /><br /><br /><p></p>
     </div>
 
   </div>
