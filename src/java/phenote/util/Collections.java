@@ -16,5 +16,13 @@ public class Collections {
     }
     return buffer.toString();
   }
+  
+  public static <T> T get(T[] array, int index) {
+    if (index < array.length) {
+      return array[index];
+    } else {
+      return null;
+    }
+  }
 
 }

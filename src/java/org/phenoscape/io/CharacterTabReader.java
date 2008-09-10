@@ -16,6 +16,8 @@ import org.phenoscape.model.Character;
 import org.phenoscape.model.Phenotype;
 import org.phenoscape.model.State;
 
+import phenote.util.Collections;
+
 public class CharacterTabReader {
 
   private final OBOSession session;
@@ -39,14 +41,14 @@ public class CharacterTabReader {
       if (line == null) break;
       if (line.trim().equals("")) continue;
       final String[] cells = line.split("\t", -1);
-      final int characterNumber = Integer.parseInt(cells[fields.indexOf("Character Number")].trim());
-      final String stateSymbol = cells[fields.indexOf("State Number")].trim();
-      final String textDescription = cells[fields.indexOf("Textual Description")];
-      final String entityID = cells[fields.indexOf("Entity ID")];
-      final String qualityID = cells[fields.indexOf("Quality ID")];
-      final String relatedEntityID = cells[fields.indexOf("Additional Entity ID")];
+      final int characterNumber = Integer.parseInt(Collections.get(cells, fields.indexOf("Character Number")).trim());
+      final String stateSymbol = Collections.get(cells, fields.indexOf("State Number")).trim();
+      final String textDescription = Collections.get(cells, fields.indexOf("Textual Description"));
+      final String entityID = Collections.get(cells, fields.indexOf("Entity ID"));
+      final String qualityID = Collections.get(cells, fields.indexOf("Quality ID"));
+      final String relatedEntityID = Collections.get(cells, fields.indexOf("Additional Entity ID"));
       Integer count = null;
-      final String countFieldValue = cells[fields.indexOf("Count")].trim();
+      final String countFieldValue = Collections.get(cells, fields.indexOf("Count")).trim();
       boolean putCountInNotesField = false;
       if ((countFieldValue != null) && (!countFieldValue.equals(""))) {
         try {
@@ -57,12 +59,12 @@ public class CharacterTabReader {
         }
       }
       final Float measurement;
-      final String measurementFieldValue = cells[fields.indexOf("Measurement")].trim();
+      final String measurementFieldValue = Collections.get(cells, fields.indexOf("Measurement")).trim();
       if ((measurementFieldValue != null) && (!measurementFieldValue.equals(""))) {
         measurement = Float.parseFloat(measurementFieldValue);
       } else { measurement = null; }
-      final String unitID = cells[fields.indexOf("Unit ID")];
-      final String notes = cells[fields.indexOf("Curator Notes")];
+      final String unitID = Collections.get(cells, fields.indexOf("Unit ID"));
+      final String notes = Collections.get(cells, fields.indexOf("Curator Notes"));
       final Character character;
       if (this.characterMap.containsKey(characterNumber)) {
         character = this.characterMap.get(characterNumber);

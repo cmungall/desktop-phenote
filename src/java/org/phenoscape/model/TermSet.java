@@ -21,6 +21,7 @@ public class TermSet {
   private OBOSession session;
   private Collection<Namespace> namespaces = new ArrayList<Namespace>();
   private Collection<String> categories = new ArrayList<String>();
+  private Collection<OBOObject> cachedTerms = null;
   private boolean includesProperties = false;
 
   /**
@@ -35,6 +36,7 @@ public class TermSet {
    */
   public void setOBOSession(OBOSession oboSession) {
     this.session = oboSession;
+    this.invalidateTerms();
   }
   
   /**
@@ -49,6 +51,7 @@ public class TermSet {
    */
   public void setNamespaces(Collection<Namespace> namespaces) {
     this.namespaces = namespaces;
+    this.invalidateTerms();
   }
   
   /**
@@ -63,6 +66,7 @@ public class TermSet {
    */
   public void setCategories(Collection<String> categories) {
     this.categories = categories;
+    this.invalidateTerms();
   }
 
   public boolean includesProperties() {
@@ -71,12 +75,16 @@ public class TermSet {
 
   public void setIncludesProperties(boolean includeProperties) {
     this.includesProperties = includeProperties;
+    this.invalidateTerms();
   }
   
   /**
    * @return All terms matching the search criteria of this TermSet, such as its namespaces and categories.
    */
   public Collection<OBOObject> getTerms() {
+    if (this.cachedTerms != null) {
+      return this.cachedTerms;
+    }
     final QueryEngine engine = new QueryEngine(this.getOBOSession());
     final List<String> namespaceIDs = new ArrayList<String>();
     for (Namespace ns : this.getNamespaces()) { namespaceIDs.add(ns.getID()); }
@@ -84,14 +92,19 @@ public class TermSet {
     query.setJustTerms(!this.includesProperties());
     final Collection<OBOObject> termsInNamespaces = engine.query(query);
     if (this.hasAnyCategory()) {
-      return engine.subquery(termsInNamespaces, new CategoryObjQuery(this.getCategories())).getResults();
+      this.cachedTerms = engine.subquery(termsInNamespaces, new CategoryObjQuery(this.getCategories())).getResults();
     } else {
-      return termsInNamespaces;
+      this.cachedTerms = termsInNamespaces;
     }
+    return this.cachedTerms;
   }
   
   private boolean hasAnyCategory() {
     return !this.getCategories().isEmpty();
+  }
+  
+  private void invalidateTerms() {
+    this.cachedTerms = null;
   }
   
 }

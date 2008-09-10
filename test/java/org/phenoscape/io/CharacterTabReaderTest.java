@@ -47,4 +47,11 @@ public class CharacterTabReaderTest {
     Assert.assertEquals("An unparsable count value prefixed by 'count=' should be the entire note when no other note is present", "count=13, 14=/>17,18", character41.getStates().get(2).getPhenotypes().get(0).getComment());
   }
   
+  @Test
+  public void testReadLineLackingSomeTabs() throws IOException {
+    // if this doesn't work an ArrayIndexOutOfBoundsException will be thrown
+    final CharacterTabReader reader = new CharacterTabReader(new File("test/testfiles/CharacterTabReaderTestFile2.tab"), session);
+    reader.getCharacters();
+  }
+  
 }

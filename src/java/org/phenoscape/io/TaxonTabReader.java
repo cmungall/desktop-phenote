@@ -15,6 +15,8 @@ import org.phenoscape.model.Specimen;
 import org.phenoscape.model.Taxon;
 import org.phenoscape.model.TermSet;
 
+import phenote.util.Collections;
+
 public class TaxonTabReader {
   
   private final OBOSession session;
@@ -40,15 +42,15 @@ public class TaxonTabReader {
       if (line == null) break;
       if (line.trim().equals("")) continue;
       final Taxon taxon = new Taxon();
-      final String[] cells = line.split("\t");
-      final String taxonID = cells[fields.indexOf("Valid Taxon ID")];
+      final String[] cells = line.split("\t", -1);
+      final String taxonID = Collections.get(cells, fields.indexOf("Valid Taxon ID"));
       taxon.setValidName((OBOClass)(session.getObject(taxonID)));
-      final String pubName = cells[fields.indexOf("Publication Taxon")];
+      final String pubName = Collections.get(cells, fields.indexOf("Publication Taxon"));
       taxon.setPublicationName(pubName);
-      final String comments = cells[fields.indexOf("Taxon Comments")];
+      final String comments = Collections.get(cells, fields.indexOf("Taxon Comments"));
       taxon.setComment(comments);
-      final String specimensString = cells[fields.indexOf("Specimens")];
-      if ((!specimensString.equals("")) && (specimensString != null)) {
+      final String specimensString = Collections.get(cells, fields.indexOf("Specimens"));
+      if ((specimensString != null) && (!specimensString.equals(""))) {
         final String[] specimens = specimensString.split(",");
         for (String specimenString : specimens) {
           final Specimen specimen = new Specimen();
