@@ -198,7 +198,7 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
       case 3: phenotype.setCount((Integer)editedValue); break;
       case 4: phenotype.setMeasurement((Float)editedValue); break;
       case 5: phenotype.setUnit((OBOClass)editedValue); break;
-      case 6: phenotype.setNotes(editedValue.toString()); break;
+      case 6: phenotype.setComment(editedValue.toString()); break;
       }
       return phenotype;
     }
@@ -215,7 +215,7 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
       case 3: return "Count";
       case 4: return "Measurement";
       case 5: return "Unit";
-      case 6: return "Notes";
+      case 6: return "Comment";
       default: return null;
       }
     }
@@ -254,7 +254,7 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
       case 3: return phenotype.getCount();
       case 4: return phenotype.getMeasurement();
       case 5: return phenotype.getUnit();
-      case 6: return phenotype.getNotes();
+      case 6: return phenotype.getComment();
       default: return null;
       }
     }

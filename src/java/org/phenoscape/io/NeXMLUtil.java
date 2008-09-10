@@ -21,7 +21,7 @@ import org.w3c.dom.NodeList;
 
 public class NeXMLUtil {
   
-  public static String TAXON_COMMENT_KEY = "phenex_comment";
+  public static String COMMENT_KEY = "phenex_comment";
   
   public static Taxa findOrCreateTaxa(NexmlDocument doc, String id) {
     for (Taxa taxaBlock : doc.getNexml().getOtusArray()) {

@@ -83,9 +83,9 @@ public class CharacterTabReader {
       if (putCountInNotesField) {
         final String countNote = "count=" + countFieldValue;
         final String addedNotes = (notes != null && !notes.equals("")) ? (notes + "; " + countNote) : countNote;
-        phenotype.setNotes(addedNotes);
+        phenotype.setComment(addedNotes);
       } else {
-        phenotype.setNotes(notes);
+        phenotype.setComment(notes);
       }
     }
   }

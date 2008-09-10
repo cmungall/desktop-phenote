@@ -111,22 +111,27 @@ public class CharacterTableComponent extends PhenoscapeGUIComponent {
   private class CharactersTableFormat implements WritableTableFormat<Character>, AdvancedTableFormat<Character> {
 
     public boolean isEditable(Character character, int column) {
-      return column == 1;
+      return column != 0;
     }
 
     public Character setColumnValue(Character character, Object editedValue, int column) {
-      if (column == 1) { character.setLabel(editedValue.toString()); }
+      switch(column) {
+      case 0: break;
+      case 1: character.setLabel(editedValue.toString()); break;
+      case 2: character.setComment(editedValue.toString()); break;
+      }
       return character;
     }
 
     public int getColumnCount() {
-      return 2;
+      return 3;
     }
 
     public String getColumnName(int column) {
       switch(column) {
       case 0: return "Number";
       case 1: return "Character Description";
+      case 2: return "Comment";
       default: return null;
       }
     }
@@ -135,6 +140,7 @@ public class CharacterTableComponent extends PhenoscapeGUIComponent {
       switch(column) {
       case 0: return getController().getDataSet().getCharacters().indexOf(character) + 1;
       case 1: return character.getLabel();
+      case 2: return character.getComment();
       default: return null;
       }
     }
@@ -143,6 +149,7 @@ public class CharacterTableComponent extends PhenoscapeGUIComponent {
       switch(column) {
       case 0: return Integer.class;
       case 1: return String.class;
+      case 2: return String.class;
       default: return null;
       }
     }
@@ -151,6 +158,7 @@ public class CharacterTableComponent extends PhenoscapeGUIComponent {
       switch(column) {
       case 0: return GlazedLists.comparableComparator();
       case 1: return Strings.getNaturalComparator();
+      case 2: return Strings.getNaturalComparator();
       default: return null;
       }
     }

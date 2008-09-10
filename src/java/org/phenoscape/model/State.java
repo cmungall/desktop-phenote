@@ -17,6 +17,7 @@ public class State {
   private final EventList<Phenotype> phenotypes = new BasicEventList<Phenotype>();
   private String label;
   private String symbol;
+  private String comment;
   
   public State() {
    this(UUID.randomUUID().toString()); 
@@ -70,6 +71,14 @@ public class State {
    */
   public void setSymbol(String aSymbol) {
     this.symbol = aSymbol;
+  }
+  
+  public String getComment() {
+    return this.comment;
+  }
+  
+  public void setComment(String notes) {
+    this.comment = notes;
   }
   
   public String toString() {

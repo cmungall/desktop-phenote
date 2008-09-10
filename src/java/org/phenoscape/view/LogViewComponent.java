@@ -3,6 +3,7 @@ package org.phenoscape.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.util.Comparator;
 import java.util.Date;
 
@@ -52,6 +53,7 @@ public class LogViewComponent extends AbstractGUIComponent {
     logTable.putClientProperty("Quaqua.Table.style", "striped");
     logTable.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
     logTable.getColumnModel().getColumn(0).setWidth(15);
+    logTable.setFont(new Font("Monospaced", Font.PLAIN, 12));
     this.add(new JScrollPane(logTable), BorderLayout.CENTER);
   }
   

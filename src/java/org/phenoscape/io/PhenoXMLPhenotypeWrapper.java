@@ -30,11 +30,11 @@ public class PhenoXMLPhenotypeWrapper implements PhenotypeCharacterI {
   }
 
   public String getDescription() {
-    return this.phenotype.getNotes();
+    return this.phenotype.getComment();
   }
 
   public void setDescription(String desc) {
-    this.phenotype.setNotes(desc);
+    this.phenotype.setComment(desc);
   }
 
   public OBOClass getEntity() {

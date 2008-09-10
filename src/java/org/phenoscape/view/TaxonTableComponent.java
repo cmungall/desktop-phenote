@@ -135,7 +135,7 @@ public class TaxonTableComponent extends PhenoscapeGUIComponent {
       switch (column) {
       case 0: return "Valid Taxon";
       case 1: return "Publication Taxon";
-      case 2: return "Comments";
+      case 2: return "Comment";
       default: return null;
       }
     }

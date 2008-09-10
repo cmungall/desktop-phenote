@@ -20,6 +20,7 @@ import org.nexml.x10.AbstractObsMatrix;
 import org.nexml.x10.AbstractObsRow;
 import org.nexml.x10.AbstractState;
 import org.nexml.x10.AbstractStates;
+import org.nexml.x10.Annotated;
 import org.nexml.x10.Dict;
 import org.nexml.x10.NexmlDocument;
 import org.nexml.x10.StandardCells;
@@ -106,12 +107,14 @@ public class NeXMLReader {
         newCharacter = new Character(standardChar.getId());
       }
       newCharacter.setLabel(standardChar.getLabel());
+      newCharacter.setComment(this.getComment(standardChar));
       final AbstractStates states = NeXMLUtil.findOrCreateStates(format, newCharacter.getStatesNexmlID());
       if (states instanceof StandardStates) {
         for (AbstractState abstractState : states.getStateArray()) {
           final State newState = new State(abstractState.getId());
           newState.setSymbol(this.readSymbol(abstractState));
           newState.setLabel(abstractState.getLabel());
+          newState.setComment(this.getComment(abstractState));
           final Dict phenotypeDict = NeXMLUtil.findOrCreateDict(abstractState, "OBO_phenotype", abstractState.getDomNode().getOwnerDocument().createElement("any"));
           final Element any = NeXMLUtil.getFirstChildWithTagName((Element)(phenotypeDict.getDomNode()), "any");
           final Element phenoXML = NeXMLUtil.getFirstChildWithTagNameNS(any, "http://www.bioontologies.org/obd/schema/pheno", "phenotype");
@@ -159,11 +162,7 @@ public class NeXMLReader {
         }
         break; // there should only be one String element anyway
       }
-      final Dict commentDict = NeXMLUtil.findOrCreateDict(xmlTaxon, NeXMLUtil.TAXON_COMMENT_KEY, xmlTaxon.getDomNode().getOwnerDocument().createElement("string"));
-      for (String comment : commentDict.getStringArray()) {
-        newTaxon.setComment(comment);
-        break; // there should only be one String element anyway
-      }
+      newTaxon.setComment(this.getComment(xmlTaxon));
       final Dict specimensDict = NeXMLUtil.findOrCreateDict(xmlTaxon, "OBO_specimens", xmlTaxon.getDomNode().getOwnerDocument().createElement("any"));
       for (XmlObject xmlObj : specimensDict.getAnyArray()) {
         final NodeList nodes = ((Element)(xmlObj.getDomNode())).getElementsByTagName("specimen");
@@ -212,6 +211,14 @@ public class NeXMLReader {
       final Element pubNotes = NeXMLUtil.getFirstChildWithTagName(any, "publicationNotes");
       this.data.setPublicationNotes(pubNotes != null ? NeXMLUtil.getTextContent(pubNotes) : null);
     }
+  }
+  
+  private String getComment(Annotated node) {
+    final Dict commentDict = NeXMLUtil.findOrCreateDict(node, NeXMLUtil.COMMENT_KEY, node.getDomNode().getOwnerDocument().createElement("string"));
+    for (String comment : commentDict.getStringArray()) {
+      return comment;
+    }
+    return null;
   }
   
   private Logger log() {

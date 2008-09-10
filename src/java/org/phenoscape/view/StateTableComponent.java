@@ -150,18 +150,20 @@ public class StateTableComponent extends PhenoscapeGUIComponent {
       switch(column) {
       case 0: state.setSymbol(editedValue.toString()); break;
       case 1: state.setLabel(editedValue.toString()); break;
+      case 2: state.setComment(editedValue.toString()); break;
       }
       return state;
     }
 
     public int getColumnCount() {
-      return 2;
+      return 3;
     }
 
     public String getColumnName(int column) {
       switch(column) {
       case 0: return "Symbol";
       case 1: return "State Description";
+      case 2: return "Comment";
       default: return null;
       }
     }
@@ -170,6 +172,7 @@ public class StateTableComponent extends PhenoscapeGUIComponent {
       switch(column) {
       case 0: return state.getSymbol();
       case 1: return state.getLabel();
+      case 2: return state.getComment();
       default: return null;
       }
     }
@@ -178,6 +181,7 @@ public class StateTableComponent extends PhenoscapeGUIComponent {
       switch(column) {
       case 0: return String.class;
       case 1: return String.class;
+      case 2: return String.class;
       default: return null;
       }
     }
@@ -186,6 +190,7 @@ public class StateTableComponent extends PhenoscapeGUIComponent {
       switch(column) {
       case 0: return Strings.getNaturalComparator();
       case 1: return Strings.getNaturalComparator();
+      case 2: return Strings.getNaturalComparator();
       default: return null;
       }
     }

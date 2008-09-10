@@ -27,6 +27,7 @@ import org.nexml.x10.AbstractObsMatrix;
 import org.nexml.x10.AbstractObsRow;
 import org.nexml.x10.AbstractState;
 import org.nexml.x10.AbstractStates;
+import org.nexml.x10.Annotated;
 import org.nexml.x10.Dict;
 import org.nexml.x10.NexmlDocument;
 import org.nexml.x10.StandardCells;
@@ -126,6 +127,7 @@ public class NeXMLWriter {
       final AbstractChar xmlChar = this.findOrCreateCharWithID(existingChars, character.getNexmlID());
       newCharacters.add(xmlChar);
       xmlChar.setLabel(character.getLabel());
+      this.writeComment(xmlChar, character.getComment());
       final AbstractStates statesBlock = this.findOrCreateStatesBlockWithID(existingStatesList, character.getStatesNexmlID());
       final AbstractStates usableStatesBlock;
       if (usedStatesIDs.contains(statesBlock.getId())) {
@@ -143,6 +145,7 @@ public class NeXMLWriter {
         final AbstractState xmlState = this.findOrCreateStateWithID(existingStates, state.getNexmlID());
         newStates.add(xmlState);
         xmlState.setLabel(state.getLabel());
+        this.writeComment(xmlState, state.getComment());
         this.writeSymbol(xmlState, state.getSymbol() != null ? state.getSymbol() : "0");
         this.writePhenotypes(xmlState, state);
       }
@@ -189,7 +192,7 @@ public class NeXMLWriter {
       otu.setLabel(taxon.getPublicationName());
       this.writeOBOID(otu, taxon);
       this.writeSpecimens(otu, taxon);
-      this.writeComment(otu, taxon);
+      this.writeComment(otu, taxon.getComment());
     }
     taxaBlock.setOtuArray(newOTUs.toArray(new org.nexml.x10.Taxon[] {}));
   }
@@ -287,18 +290,22 @@ public class NeXMLWriter {
     }
   }
   
-  private void writeComment(org.nexml.x10.Taxon otu, Taxon taxon) {
-    final Dict commentDict = NeXMLUtil.findOrCreateDict(otu, NeXMLUtil.TAXON_COMMENT_KEY, otu.getDomNode().getOwnerDocument().createElement("string"));
-    if (taxon.getComment() == null) {
-      NeXMLUtil.removeDict(otu, commentDict);
+  private void writeComment(Annotated node, String comment) {
+    final Dict commentDict = NeXMLUtil.findOrCreateDict(node, NeXMLUtil.COMMENT_KEY, node.getDomNode().getOwnerDocument().createElement("string"));
+    if ((comment == null) || (comment.equals(""))) {
+      NeXMLUtil.removeDict(node, commentDict);
     } else {
       final Element stringNode = NeXMLUtil.getFirstChildWithTagName((Element)(commentDict.getDomNode()), "string");
-      NeXMLUtil.setTextContent(stringNode, taxon.getComment());
+      NeXMLUtil.setTextContent(stringNode, comment);
     }
   }
   
   private void writePhenotypes(AbstractState xmlState, State state) {
     final Dict phenotypeDict = NeXMLUtil.findOrCreateDict(xmlState, "OBO_phenotype", xmlState.getDomNode().getOwnerDocument().createElement("any"));
+    if (state.getPhenotypes().isEmpty()) {
+      NeXMLUtil.removeDict(xmlState, phenotypeDict);
+      return;
+    }
     final Element any = NeXMLUtil.getFirstChildWithTagName((Element)(phenotypeDict.getDomNode()), "any");
     NeXMLUtil.clearChildren(any);
     final List<PhenotypeCharacter> pcs = new ArrayList<PhenotypeCharacter>();

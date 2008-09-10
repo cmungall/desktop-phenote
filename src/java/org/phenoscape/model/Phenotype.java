@@ -14,7 +14,7 @@ public class Phenotype {
   private Integer count;
   private Float measurement;
   private OBOClass unit;
-  private String notes;
+  private String comment;
   
   public OBOClass getEntity() {
     return entity;
@@ -64,12 +64,12 @@ public class Phenotype {
     this.unit = unit;
   }
   
-  public String getNotes() {
-    return this.notes;
+  public String getComment() {
+    return this.comment;
   }
   
-  public void setNotes(String notes) {
-    this.notes = notes;
+  public void setComment(String notes) {
+    this.comment = notes;
   }
   
 }

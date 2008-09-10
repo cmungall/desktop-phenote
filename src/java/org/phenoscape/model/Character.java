@@ -16,6 +16,7 @@ public class Character {
   private final String statesNexmlID;
   private final EventList<State> states = new BasicEventList<State>();
   private String label;
+  private String comment;
   
   public Character() {
     this(UUID.randomUUID().toString(), UUID.randomUUID().toString());
@@ -62,6 +63,14 @@ public class Character {
 
   public void setLabel(String aLabel) {
     this.label = aLabel;
+  }
+  
+  public String getComment() {
+    return this.comment;
+  }
+  
+  public void setComment(String notes) {
+    this.comment = notes;
   }
   
   public String toString() {
