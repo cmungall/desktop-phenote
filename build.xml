@@ -746,7 +746,7 @@ where xsd files are (conf) -->
 	
 <property name="phenex-main-class" value="org.phenoscape.main.Phenoscape"/>
 <property name="phenexjarfile" value="jars/phenex.jar"/>
-<property name="phenex.version" value="1.0-beta8"/>
+<property name="phenex.version" value="1.0-beta9"/>
 <property name="phenex.build" value="${NOW}"/>
 	
     <target name="jar-phenex" depends="compile">
