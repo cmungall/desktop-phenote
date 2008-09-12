@@ -12,10 +12,10 @@ import org.obd.model.CompositionalDescription.Predicate;
 import org.obd.model.Node.Metatype;
 import org.obd.model.vocabulary.TermVocabulary;
 import org.obo.datamodel.OBOClass;
+import org.phenoscape.model.Character;
 import org.phenoscape.model.DataSet;
 import org.phenoscape.model.Phenotype;
 import org.phenoscape.model.State;
-import org.phenoscape.model.Character;
 import org.phenoscape.model.Taxon;
 import org.purl.obo.vocab.RelationVocabulary;
 
@@ -24,20 +24,20 @@ public class OBDModelBridge {
 
 	protected Graph graph;
 	// CDAO vacab : TODO
-	protected String DATASET_TYPE_ID = "cdao:CharacterStateDataMatrix";
-	protected String STATE_TYPE_ID = "cdao:CharacterStateDomain";
-	protected String CELL_TYPE_ID = "cdao:CharacterStateDatum";
-	protected String CHARACTER_TYPE_ID = "cdao:Character";
-	protected String PUBLICATION_TYPE_ID = "cdao:Pub"; // TODO
+	public static String DATASET_TYPE_ID = "cdao:CharacterStateDataMatrix";
+	public static String STATE_TYPE_ID = "cdao:CharacterStateDomain";
+	public static String CELL_TYPE_ID = "cdao:CharacterStateDatum";
+	public static String CHARACTER_TYPE_ID = "cdao:Character";
+	public static String PUBLICATION_TYPE_ID = "cdao:Pub"; // TODO
 	
-	protected String HAS_PUB_REL_ID = "cdao:hasPub";
-	protected String HAS_STATE_REL_ID = "cdao:has_Datum";
-	protected String REFERS_TO_TAXON_REL_ID = "cdao:hasTaxon"; // has_TU? TODO
-	protected String HAS_CHARACTER_REL_ID = "cdao:has_Character"; // 
-	protected String HAS_PHENOTYPE_REL_ID = "cdao:has_Phenotype"; // TODO
-	protected String TAXON_PHENOTYPE_REL_ID = "exhibits"; // TODO
-	protected String CELL_TO_STATE_REL_ID = "cdao:has_State"; // TODO
-	protected String ANNOT_TO_CELL_REL_ID = "has_source"; // TODO
+	public static String HAS_PUB_REL_ID = "cdao:hasPub";
+	public static String HAS_STATE_REL_ID = "cdao:has_Datum";
+	public static String REFERS_TO_TAXON_REL_ID = "cdao:hasTaxon"; // has_TU? TODO
+	public static String HAS_CHARACTER_REL_ID = "cdao:has_Character"; // 
+	public static String HAS_PHENOTYPE_REL_ID = "cdao:has_Phenotype"; // TODO
+	public static String TAXON_PHENOTYPE_REL_ID = "exhibits"; // TODO
+	public static String CELL_TO_STATE_REL_ID = "cdao:has_State"; // TODO
+	public static String ANNOT_TO_CELL_REL_ID = "has_source"; // TODO
 	private static TermVocabulary vocab = new TermVocabulary();
 	private static RelationVocabulary relationVocabulary = new RelationVocabulary();
 	private Map<Character,String> characterIdMap = new HashMap<Character,String>();
