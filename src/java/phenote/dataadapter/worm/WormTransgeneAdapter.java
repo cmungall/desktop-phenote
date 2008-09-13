@@ -185,8 +185,8 @@ public class WormTransgeneAdapter implements QueryableDataAdapterI {
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "trp_driven_by_gene"; tag_name = "Driven by Gene"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "trp_reporter_product"; tag_name = "Reporter Product"; tag_value = chr.getValueString(tag_name);
-        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "trp_reporter_product"; tag_name = "Reporter Product";
+        updateListField(c, s, joinkey, postgres_table, tag_name, chr);
         postgres_table = "trp_other_reporter"; tag_name = "Other Reporter"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "trp_gene"; tag_name = "Gene"; tag_value = chr.getValueString(tag_name);
@@ -197,8 +197,8 @@ public class WormTransgeneAdapter implements QueryableDataAdapterI {
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "trp_strain"; tag_name = "Strain"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "trp_map"; tag_name = "Map"; tag_value = chr.getValueString(tag_name);
-        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "trp_map"; tag_name = "Map";
+        updateListField(c, s, joinkey, postgres_table, tag_name, chr);
         postgres_table = "trp_map_paper"; tag_name = "Map Paper"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "trp_map_person"; tag_name = "Map Person"; tag_value = chr.getValueString(tag_name);
