@@ -181,6 +181,34 @@ public class WormAdapter implements QueryableDataAdapterI {
       System.out.println("Could not get terms from character in updateListField : " + e); e.printStackTrace(); }
   }
 
+  private void updateMultiListField(Connection c, Statement s, String joinkey, String tag_name, CharacterI chr) {
+    try {
+      CharFieldValue list = chr.getValue(chr.getCharFieldForName(tag_name));
+      List<CharFieldValue> valList = list.getCharFieldValueList();
+      String heatString = "Heat_sensitive"; String coldString = "Cold_sensitive"; 
+      String matString = "WBmat_effect000001"; String smatString = "WBmat_effect000002"; String wmatString = "WBmat_effect000003";
+      String patString = "Paternal_effect"; String hapString = "Haploinsufficient";
+      String coldValue = ""; String heatValue = ""; String matValue = ""; String patValue = ""; String haploValue = "";
+      for (CharFieldValue kid : valList) { 
+        String kidId = kid.getID(); 
+        if (kidId.equals(heatString)) { heatValue = kidId; }
+        else if (kidId.equals(coldString)) { coldValue = kidId; }
+        else if (kidId.equals(matString)) { matValue = kidId; }
+        else if (kidId.equals(smatString)) { matValue = kidId; }
+        else if (kidId.equals(wmatString)) { matValue = kidId; }
+        else if (kidId.equals(patString)) { patValue = kidId; }
+        else if (kidId.equals(hapString)) { haploValue = kidId; }
+        else { errorPopup("invalid value "+kidId+" for "+tag_name); }
+      }
+      String postgres_table = "app_heat_sens"; updateNormalField(c, s, joinkey, postgres_table, tag_name, heatValue); 
+      postgres_table = "app_cold_sens"; updateNormalField(c, s, joinkey, postgres_table, tag_name, coldValue); 
+      postgres_table = "app_mat_effect"; updateNormalField(c, s, joinkey, postgres_table, tag_name, matValue); 
+      postgres_table = "app_pat_effect"; updateNormalField(c, s, joinkey, postgres_table, tag_name, patValue); 
+      postgres_table = "app_haplo"; updateNormalField(c, s, joinkey, postgres_table, tag_name, haploValue); }
+    catch (Exception e) {
+      System.out.println("Could not get terms from character in updateListField : " + e); e.printStackTrace(); }
+  }
+
   public void commit(CharacterListI charList) {
     Connection c = connectToDB();
     Statement s = null;
@@ -284,6 +312,7 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_percent"; tag_name = "Penetrance Remark"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        tag_name = "Other Attributes"; updateMultiListField(c, s, joinkey, tag_name, chr);
 //        postgres_table = "app_range_start"; tag_name = "Penetrance Range Start"; tag_value = chr.getValueString(tag_name);
 //        String range_start = tag_value;
 //        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
@@ -296,21 +325,21 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
 //        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);	// not for phenote Karen 2008 01 28
 //        postgres_table = "app_quantity"; tag_name = "Quantity"; tag_value = chr.getValueString(tag_name);
 //        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);	// not for phenote Karen 2008 01 28
-        postgres_table = "app_heat_sens"; tag_name = "Heat Sensitive"; tag_value = chr.getValueString(tag_name);
-        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+//        postgres_table = "app_heat_sens"; tag_name = "Heat Sensitive"; tag_value = chr.getValueString(tag_name);
+//        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_heat_degree"; tag_name = "Heat Sensitive Degree"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "app_cold_sens"; tag_name = "Cold Sensitive"; tag_value = chr.getValueString(tag_name);
-        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+//        postgres_table = "app_cold_sens"; tag_name = "Cold Sensitive"; tag_value = chr.getValueString(tag_name);
+//        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_cold_degree"; tag_name = "Cold Sensitive Degree"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "app_mat_effect"; tag_name = "Maternal Effect"; tag_value = "";
-        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
-        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "app_pat_effect"; tag_name = "Paternal Effect"; tag_value = chr.getValueString(tag_name);
-        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "app_haplo"; tag_name = "Haplo"; tag_value = chr.getValueString(tag_name);
-        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+//        postgres_table = "app_mat_effect"; tag_name = "Maternal Effect"; tag_value = "";
+//        if ( chr.hasValue(tag_name) ) { tag_value = chr.getTerm(tag_name).getID(); }
+//        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+//        postgres_table = "app_pat_effect"; tag_name = "Paternal Effect"; tag_value = chr.getValueString(tag_name);
+//        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+//        postgres_table = "app_haplo"; tag_name = "Haplo"; tag_value = chr.getValueString(tag_name);
+//        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "app_genotype"; tag_name = "Genotype"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
 //        postgres_table = "app_strain"; tag_name = "Host Strain"; tag_value = chr.getValueString(tag_name);
@@ -499,6 +528,22 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
     return pap_latest; 
   }
 
+  private String queryPostgresOtherAttributes(Statement s, String joinkey) {
+    StringBuilder sb = new StringBuilder(); Integer hasValue = 0; String returnValue = ""; String blank_value = "";
+    String postgres_table = "app_heat_sens"; String postgres_value = queryPostgresCharacter(s, postgres_table, blank_value, joinkey);
+    if ( (postgres_value != null) && (!postgres_value.equals(blank_value)) ) { if (hasValue > 0) { sb.append(","); } sb.append("\"").append(postgres_value).append("\""); hasValue++; }
+    postgres_table = "app_cold_sens"; postgres_value = queryPostgresCharacter(s, postgres_table, blank_value, joinkey);
+    if ( (postgres_value != null) && (!postgres_value.equals(blank_value)) ) { if (hasValue > 0) { sb.append(","); } sb.append("\"").append(postgres_value).append("\""); hasValue++; }
+    postgres_table = "app_mat_effect"; postgres_value = queryPostgresCharacter(s, postgres_table, blank_value, joinkey);
+    if ( (postgres_value != null) && (!postgres_value.equals(blank_value)) ) { if (hasValue > 0) { sb.append(","); } sb.append("\"").append(postgres_value).append("\""); hasValue++; }
+    postgres_table = "app_pat_effect"; postgres_value = queryPostgresCharacter(s, postgres_table, blank_value, joinkey);
+    if ( (postgres_value != null) && (!postgres_value.equals(blank_value)) ) { if (hasValue > 0) { sb.append(","); } sb.append("\"").append(postgres_value).append("\""); hasValue++; }
+    postgres_table = "app_haplo"; postgres_value = queryPostgresCharacter(s, postgres_table, blank_value, joinkey);
+    if ( (postgres_value != null) && (!postgres_value.equals(blank_value)) ) { if (hasValue > 0) { sb.append(","); } sb.append("\"").append(postgres_value).append("\""); hasValue++; }
+    if (sb != null) { returnValue = sb.toString(); }
+    return returnValue;
+  }
+
   private CharacterListI queryPostgresCharacterMainList(CharacterListI charList, Statement s, String joinkey) {
       // populate a phenote character based on postgres value by joinkey, then append to character list
     try {
@@ -598,29 +643,35 @@ System.out.println("papsta_value "+papsta_value+" for postgres");
 //      postgres_table = "app_quantity_remark"; postgres_value = ""; // postgres_value = "No postgres value assigned";	// not for phenote, Karen 2008 01 28
 //      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
 //      c1.setValue("Quantity Remark",postgres_value);				// assign the queried value
-      postgres_table = "app_heat_sens"; postgres_value = ""; // postgres_value = "No postgres value assigned";
-      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-      if (postgres_value == "") { } else { c1.setValue("Heat Sensitive",postgres_value); }				// assign the queried value
+
+      postgres_value = queryPostgresOtherAttributes(s, joinkey);
+      if (postgres_value == "") { } else { c1.setValue("Other Attributes",postgres_value); }		// assign the queried value
+
+
+//      postgres_table = "app_heat_sens"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+//      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+//      if (postgres_value == "") { } else { c1.setValue("Heat Sensitive",postgres_value); }				// assign the queried value
       postgres_table = "app_heat_degree"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("Heat Sensitive Degree",postgres_value); }				// assign the queried value
 //System.out.println("set HeatSens to "+postgres_value+" END");
-      postgres_table = "app_cold_sens"; postgres_value = ""; // postgres_value = "No postgres value assigned";
-      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-      if (postgres_value == "") { } else { c1.setValue("Cold Sensitive",postgres_value); }				// assign the queried value
+//      postgres_table = "app_cold_sens"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+//      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+//      if (postgres_value == "") { } else { c1.setValue("Cold Sensitive",postgres_value); }				// assign the queried value
+
       postgres_table = "app_cold_degree"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("Cold Sensitive Degree",postgres_value); }			// assign the queried value
-      postgres_table = "app_mat_effect"; postgres_value = ""; // postgres_value = "No postgres value assigned";
-      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-      if (postgres_value == "") { } else { c1.setValue("Maternal Effect",postgres_value); }				// assign the queried value
-      postgres_table = "app_pat_effect"; postgres_value = ""; // postgres_value = "No postgres value assigned";
-      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-      if (postgres_value == "") { } else { c1.setValue("Paternal Effect",postgres_value); }				// assign the queried value
+//      postgres_table = "app_mat_effect"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+//      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+//      if (postgres_value == "") { } else { c1.setValue("Maternal Effect",postgres_value); }				// assign the queried value
+//      postgres_table = "app_pat_effect"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+//      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+//      if (postgres_value == "") { } else { c1.setValue("Paternal Effect",postgres_value); }				// assign the queried value
 //System.out.println("set PatEffect to "+postgres_value+" END");
-      postgres_table = "app_haplo"; postgres_value = ""; // postgres_value = "No postgres value assigned";
-      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
-      if (postgres_value == "") { } else { c1.setValue("Haplo",postgres_value); }				// assign the queried value
+//      postgres_table = "app_haplo"; postgres_value = ""; // postgres_value = "No postgres value assigned";
+//      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
+//      if (postgres_value == "") { } else { c1.setValue("Haplo",postgres_value); }				// assign the queried value
       postgres_table = "app_genotype"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey);
       if (postgres_value == "") { } else { c1.setValue("Genotype",postgres_value); }				// assign the queried value
