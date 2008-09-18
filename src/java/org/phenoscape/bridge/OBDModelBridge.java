@@ -1,5 +1,6 @@
 package org.phenoscape.bridge;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -10,8 +11,12 @@ import org.obd.model.LinkStatement;
 import org.obd.model.Node;
 import org.obd.model.CompositionalDescription.Predicate;
 import org.obd.model.Node.Metatype;
+import org.obd.model.bridge.OBOBridge;
 import org.obd.model.vocabulary.TermVocabulary;
+import org.obo.datamodel.Link;
 import org.obo.datamodel.OBOClass;
+import org.obo.util.ReasonerUtil;
+import org.obo.util.TermUtil;
 import org.phenoscape.model.Character;
 import org.phenoscape.model.DataSet;
 import org.phenoscape.model.Phenotype;
@@ -20,6 +25,20 @@ import org.phenoscape.model.Taxon;
 import org.purl.obo.vocab.RelationVocabulary;
 
 
+/**
+ * Bridges between phenoscape objects and a model expressed using OBO primitives.
+ * 
+ * OBD Instances and the relations between them generally reflect java instances of the
+ * corresponding phenoscape model. We model cells, states and matrixes/datasets using instances
+ * of CDAO owl classes. We go beyond the phenoscape model and CDAO in positing an annotation link
+ * between the phenotype and the taxon. The annotation is linked to the cell.
+ * 
+ * TODO: reverse mapping
+ * TODO: finalize relations and classes; both from OBO_REL and CDAO
+ * TODO: make this subclass a generic bridge framework
+ * @author cjm
+ *
+ */
 public class OBDModelBridge {
 
 	protected Graph graph;
@@ -29,7 +48,7 @@ public class OBDModelBridge {
 	public static String CELL_TYPE_ID = "cdao:CharacterStateDatum";
 	public static String CHARACTER_TYPE_ID = "cdao:Character";
 	public static String PUBLICATION_TYPE_ID = "cdao:Pub"; // TODO
-	
+
 	public static String HAS_PUB_REL_ID = "cdao:hasPub";
 	public static String HAS_STATE_REL_ID = "cdao:has_Datum";
 	public static String REFERS_TO_TAXON_REL_ID = "cdao:hasTaxon"; // has_TU? TODO
@@ -44,15 +63,12 @@ public class OBDModelBridge {
 	private Map<State,String> stateIdMap = new HashMap<State,String>();
 	private Map<Taxon,String> taxonIdMap = new HashMap<Taxon,String>();
 	private Map<Phenotype,String> phenotypeIdMap = new HashMap<Phenotype,String>();
-	
-	
+
 	public OBDModelBridge() {
 		super();
 		graph = new Graph();
 	}
 
-	
-	
 	public Graph getGraph() {
 		return graph;
 	}
@@ -63,10 +79,10 @@ public class OBDModelBridge {
 
 	public Graph translate(DataSet ds) {
 		String dsId = UUID.randomUUID().toString();
-		
+
 		// Dataset metadata
 		Node dsNode = createInstanceNode(dsId,DATASET_TYPE_ID);
-		
+
 		// link publication to dataset
 		Node pubNode = createInstanceNode(ds.getPublication(),PUBLICATION_TYPE_ID);
 		LinkStatement ds2p = new LinkStatement(dsId, HAS_PUB_REL_ID, pubNode.getId());
@@ -103,7 +119,7 @@ public class OBDModelBridge {
 					graph.addStatement(s2p);
 				}
 			}
-			
+
 		}
 
 		// Matrix -> annotations
@@ -122,11 +138,11 @@ public class OBDModelBridge {
 					annotLink.setRelationId(TAXON_PHENOTYPE_REL_ID);
 					annotLink.addSubLinkStatement("posited_by", dsId);
 					graph.addStatement(annotLink);
-					
+
 					// link description of biology back to data
 					Node cellNode = createInstanceNode(UUID.randomUUID().toString(),CELL_TYPE_ID);
 					annotLink.addSubLinkStatement(CELL_TO_STATE_REL_ID,cellNode.getId());
-					
+
 					// cell to state
 					LinkStatement cell2s = new LinkStatement(cellNode.getId(), CELL_TO_STATE_REL_ID, stateIdMap.get(state)); // TODO
 					graph.addStatement(cell2s);
@@ -135,7 +151,7 @@ public class OBDModelBridge {
 		}
 		return graph;
 	}
-	
+
 	public CompositionalDescription translate(Phenotype p) {
 		OBOClass e = p.getEntity();
 		OBOClass q = p.getQuality();
@@ -146,9 +162,9 @@ public class OBDModelBridge {
 
 		CompositionalDescription cd = new CompositionalDescription(Predicate.INTERSECTION);
 		cd.addArgument(q.getID());
-		cd.addArgument(relationVocabulary.inheres_in(),e.getID());
+		cd.addArgument(relationVocabulary.inheres_in(),translateOBOClass(e));
 		if (e2 != null)
-			cd.addArgument(relationVocabulary.towards(),e2.getID());
+			cd.addArgument(relationVocabulary.towards(),translateOBOClass(e2));
 		if (false) {
 			if (u == null && m != null) {
 				// TODO : throw
@@ -162,14 +178,42 @@ public class OBDModelBridge {
 		getGraph().addStatements(cd);
 		return cd;
 	}
-	
+
+	public CompositionalDescription translateOBOClass(OBOClass c) {
+		if (TermUtil.isIntersection(c)) {
+			CompositionalDescription cd = new CompositionalDescription(Predicate.INTERSECTION);
+			cd.setId(c.getID());
+			OBOClass g = ReasonerUtil.getGenus(c);
+			cd.addArgument(translateOBOClass(g));
+			Collection<Link> diffs = ReasonerUtil.getDifferentia(c);
+			for (Link diff : diffs) {
+				cd.addArgument(diff.getType().getID(),translateOBOClass((OBOClass)diff.getParent()));
+				/*
+				CompositionalDescription restr = new CompositionalDescription(Predicate.RESTRICTION);
+				CompositionalDescription diffCD = );
+				LinkStatement ls = 
+					new LinkStatement(null,diff.getType().getID(), diffCD.getId());
+				restr.setRestriction(ls);
+				restr.addArgument(ls.getTargetId());
+				cd.addArgument(restr);
+				*/
+			}
+			return cd;
+		}
+		else {
+			CompositionalDescription d = new CompositionalDescription(Predicate.ATOM);
+			d.setNodeId(c.getID());
+			return d;
+		}
+	}
+
 	public Node translate(Taxon taxon) {
 		Node n = new Node(taxon.getValidName().getID());
 		n.setLabel(taxon.getValidName().getName());
 		graph.addNode(n);
 		return n;
 	}
-	
+
 	protected Node createInstanceNode(String id, String typeId) {
 		Node n = new Node(id);
 		n.setMetatype(Metatype.CLASS);
