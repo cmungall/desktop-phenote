@@ -7,6 +7,19 @@ public class Specimen {
   private OBOClass collectionCode;
   private String catalogID;
   
+  public Specimen() {
+    super();
+  }
+  
+  /**
+   * Create a new specimen with the same collection code and 
+   * catalog ID as the given specimen.
+   */
+  public Specimen(Specimen template) {
+    this.collectionCode = template.getCollectionCode();
+    this.catalogID = template.getCatalogID();
+  }
+  
   public OBOClass getCollectionCode() {
     return this.collectionCode;
   }

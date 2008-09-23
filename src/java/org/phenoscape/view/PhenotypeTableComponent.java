@@ -86,7 +86,21 @@ public class PhenotypeTableComponent extends PhenoscapeGUIComponent {
   
   private void addPhenotype() {
     final State state = this.getSelectedState();
-    if (state != null) { state.newPhenotype(); }
+    if (state != null) {
+      final Phenotype phenotype = state.newPhenotype();
+      phenotype.setEntity(this.getAutofillEntity());
+    }
+  }
+  
+  private OBOClass getAutofillEntity() {
+    for (State state : this.getController().getStatesForCurrentCharacterSelection()) {
+      for (Phenotype phenotype : state.getPhenotypes()) {
+        if (phenotype.getEntity() != null) {
+          return phenotype.getEntity();
+        }
+      }
+    }
+    return null;
   }
   
   private void deleteSelectedPhenotype() {

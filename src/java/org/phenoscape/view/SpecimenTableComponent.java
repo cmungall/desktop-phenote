@@ -39,6 +39,7 @@ import com.eekboom.utils.Strings;
 public class SpecimenTableComponent extends PhenoscapeGUIComponent {
 
   private JButton addSpecimenButton;
+  private JButton duplicateSpecimenButton;
   private JButton deleteSpecimenButton;
 
   public SpecimenTableComponent(String id, PhenoscapeController controller) {
@@ -54,6 +55,16 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
   private void addSpecimen() {
     final Taxon taxon = this.getSelectedTaxon();
     if (taxon != null) { taxon.newSpecimen(); }
+  }
+  
+  private void duplicateSelectedSpecimen() {
+    final Taxon taxon = this.getSelectedTaxon();
+    if (taxon != null) {
+      final Specimen specimen = this.getSelectedSpecimen();
+      if (specimen != null) {
+        taxon.addSpecimen(new Specimen(specimen));
+      }
+    }
   }
   
   private void deleteSelectedSpecimen() {
@@ -132,6 +143,15 @@ public class SpecimenTableComponent extends PhenoscapeGUIComponent {
       });
       this.addSpecimenButton.setToolTipText("Add Specimen");
       toolBar.add(this.addSpecimenButton);
+      
+      this.duplicateSpecimenButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/list-duplicate.png"))) {
+        public void actionPerformed(ActionEvent e) {
+          duplicateSelectedSpecimen();
+        }
+      });
+      this.duplicateSpecimenButton.setToolTipText("Duplicate Specimen");
+      toolBar.add(this.duplicateSpecimenButton);
+      
       this.deleteSpecimenButton = new JButton(new AbstractAction(null, new ImageIcon(FileUtil.findUrl("images/list-remove.png"))) {
         public void actionPerformed(ActionEvent e) {
           deleteSelectedSpecimen();
