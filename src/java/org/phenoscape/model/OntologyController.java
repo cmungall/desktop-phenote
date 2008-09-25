@@ -88,11 +88,15 @@ public class OntologyController {
   }
 
   public TermSet getEntityTermSet() {
-    return this.getTermSet(TAO, SPATIAL, PATO);
+    final TermSet terms = this.getTermSet(TAO, SPATIAL, PATO);
+    terms.setTermFilter(new AnatomyTermFilter(this.getOBOSession()));
+    return terms;
   }
 
   public TermSet getQualityTermSet() {
-    return this.getTermSet(PATO, SPATIAL, TAO);
+    final TermSet terms = this.getTermSet(PATO, SPATIAL, TAO);
+    terms.setTermFilter(new AnatomyTermFilter(this.getOBOSession()));
+    return terms;
   }
 
   public TermSet getRelatedEntityTermSet() {
@@ -105,6 +109,7 @@ public class OntologyController {
   
   public TermSet getRelationsTermSet() {
     final TermSet set = this.getTermSet();
+    set.setTermFilter(new RelationTermFilter(this.getOBOSession()));
     set.setIncludesProperties(true);
     return set;
   }

@@ -23,6 +23,7 @@ public class TermSet {
   private Collection<String> categories = new ArrayList<String>();
   private Collection<OBOObject> cachedTerms = null;
   private boolean includesProperties = false;
+  private TermFilter filter = null;
 
   /**
    * @return The OBOSession from which this TermSet draws its terms.
@@ -78,6 +79,14 @@ public class TermSet {
     this.invalidateTerms();
   }
   
+  public TermFilter getTermFilter() {
+    return this.filter;
+  }
+  
+  public void setTermFilter(TermFilter filter) {
+    this.filter = filter;
+  }
+  
   /**
    * @return All terms matching the search criteria of this TermSet, such as its namespaces and categories.
    */
@@ -95,6 +104,13 @@ public class TermSet {
       this.cachedTerms = engine.subquery(termsInNamespaces, new CategoryObjQuery(this.getCategories())).getResults();
     } else {
       this.cachedTerms = termsInNamespaces;
+    }
+    if (this.filter != null) {
+      final List<OBOObject> keeps = new ArrayList<OBOObject>();
+      for (OBOObject term : this.cachedTerms) {
+        if (this.filter.include(term)) { keeps.add(term); }
+      }
+      this.cachedTerms = keeps;
     }
     return this.cachedTerms;
   }

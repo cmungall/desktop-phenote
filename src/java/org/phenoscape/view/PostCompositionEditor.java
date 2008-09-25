@@ -177,7 +177,7 @@ public class PostCompositionEditor extends PhenoscapeGUIComponent {
         runPostCompositionForGenus();
       }
     });
-    this.add(postComposeGenusButton, postComposeGenusConstraints);
+    //this.add(postComposeGenusButton, postComposeGenusConstraints);
     this.tableFormat = new DifferentiaTableFormat();
     final EventTableModel<Differentia> model = new EventTableModel<Differentia>(this.diffs, this.tableFormat);
     this.diffTable = new BugWorkaroundTable(model);
