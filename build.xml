@@ -764,7 +764,7 @@ where xsd files are (conf) -->
 	
     <!-- Create a self-contained double-clickable app bundle for Mac OS X in "dist/Phenex.app" -->
     <target name="dist-phenex-mac" depends="jar-phenex, dist-init">
-        <jarbundler dir="${dist}" name="Phenex" mainclass="${phenex-main-class}" jvmversion="1.5+" vmoptions="-Xmx1024M" version="${phenex.version}" build="${phenex.build}" splashfile="$JAVAROOT/phenote_logo.jpg">
+        <jarbundler dir="${dist}" name="Phenex" mainclass="${phenex-main-class}" jvmversion="1.5+" vmoptions="-Xmx1024M" version="${phenex.version}" build="${phenex.build}" splashfile="$JAVAROOT/phenote_logo.jpg" icon="images/Seal-of-Phenex.icns">
             <jarfileset dir="${lib}">
             	<exclude name="phenote.jar"/>
             </jarfileset>
