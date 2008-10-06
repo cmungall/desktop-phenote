@@ -203,7 +203,9 @@ public class WormTransgeneAdapter implements QueryableDataAdapterI {
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "trp_map_person"; tag_name = "Map Person"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "trp_marker_for"; tag_name = "Marker for Paper"; tag_value = chr.getValueString(tag_name);
+        postgres_table = "trp_marker_for"; tag_name = "Marker for"; tag_value = chr.getValueString(tag_name);
+        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
+        postgres_table = "trp_marker_for_paper"; tag_name = "Marker Paper"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "trp_reference"; tag_name = "Reference"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
@@ -403,7 +405,7 @@ public class WormTransgeneAdapter implements QueryableDataAdapterI {
       postgres_table = "trp_marker_for"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey); c1.setValue("Marker for",postgres_value);
       postgres_table = "trp_marker_for_paper"; postgres_value = ""; // postgres_value = "No postgres value assigned";
-      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey); c1.setValue("Marker for Paper",postgres_value);
+      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey); c1.setValue("Marker Paper",postgres_value);
       postgres_table = "trp_reference"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey); c1.setValue("Reference",postgres_value);
       postgres_table = "trp_remark"; postgres_value = ""; // postgres_value = "No postgres value assigned";
