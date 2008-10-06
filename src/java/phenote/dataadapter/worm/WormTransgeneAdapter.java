@@ -62,7 +62,6 @@ public class WormTransgeneAdapter implements QueryableDataAdapterI {
         postgres_table = "trp_other_reporter"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "trp_gene"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "trp_integrated_by"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
-        postgres_table = "trp_particle_bombardment"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "trp_strain"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "trp_map"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
         postgres_table = "trp_map_paper"; updateNormalField(c, s, joinkey, postgres_table, postgres_table, blank);
@@ -192,8 +191,6 @@ public class WormTransgeneAdapter implements QueryableDataAdapterI {
         postgres_table = "trp_gene"; tag_name = "Gene"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "trp_integrated_by"; tag_name = "Integrated by"; tag_value = chr.getValueString(tag_name);
-        updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
-        postgres_table = "trp_particle_bombardment"; tag_name = "Particle Bombardment"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
         postgres_table = "trp_strain"; tag_name = "Strain"; tag_value = chr.getValueString(tag_name);
         updateNormalField(c, s, joinkey, postgres_table, tag_name, tag_value);
@@ -392,8 +389,6 @@ public class WormTransgeneAdapter implements QueryableDataAdapterI {
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey); c1.setValue("Gene",postgres_value);
       postgres_table = "trp_integrated_by"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey); c1.setValue("Integrated by",postgres_value);
-      postgres_table = "trp_particle_bombardment"; postgres_value = ""; // postgres_value = "No postgres value assigned";
-      postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey); c1.setValue("Particle Bombardment",postgres_value);
       postgres_table = "trp_strain"; postgres_value = ""; // postgres_value = "No postgres value assigned";
       postgres_value = queryPostgresCharacter(s, postgres_table, postgres_value, joinkey); c1.setValue("Strain",postgres_value);
       postgres_table = "trp_map"; postgres_value = ""; // postgres_value = "No postgres value assigned";
