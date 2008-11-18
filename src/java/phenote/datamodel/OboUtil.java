@@ -12,7 +12,7 @@ import org.obo.datamodel.LinkedObject;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOProperty;
 import org.obo.datamodel.OBORestriction;
-import org.obo.datamodel.TermCategory;
+import org.obo.datamodel.TermSubset;
 import org.obo.datamodel.impl.OBOClassImpl;
 import org.obo.datamodel.impl.OBORestrictionImpl;
 import org.obo.util.TermUtil;
@@ -185,9 +185,9 @@ public class OboUtil {
    * Returns the input term if it is itself an attribute, or null if no attribute is found.
    */
   public static OBOClass getAttributeForValue(OBOClass valueTerm) {
-    final Set<TermCategory> categories = valueTerm.getCategories();
+    final Set<TermSubset> categories = valueTerm.getSubsets();
     final Set<String> categoryNames = new HashSet<String>();
-    for (TermCategory category : categories) {
+    for (TermSubset category : categories) {
       categoryNames.add(category.getName());
     }
     if (categoryNames.contains("attribute_slim")) {

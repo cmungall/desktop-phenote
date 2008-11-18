@@ -15,7 +15,7 @@ import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOObject;
 import org.obo.datamodel.OBOProperty;
 import org.obo.datamodel.OBOSession;
-import org.obo.datamodel.TermCategory;
+import org.obo.datamodel.TermSubset;
 import org.obo.query.QueryEngine;
 import org.obo.query.impl.CategoryObjQuery;
 import org.obo.query.impl.NamespaceObjQuery;
@@ -303,8 +303,8 @@ public class Ontology {
   private boolean hasSlim() { return slim != null; }
   private boolean inSlim(OBOClass term) {
     if (!hasSlim()) return true; // no slim - everything qualifies/doesnt get filtered
-    for (Object category : term.getCategories()) {
-      if (((TermCategory)category).getName().equalsIgnoreCase(slim))
+    for (Object category : term.getSubsets()) {
+      if (((TermSubset)category).getName().equalsIgnoreCase(slim))
         return true;
     }
     return false; // none of the terms slims are in

@@ -18,7 +18,7 @@ import java.util.Map.Entry;
 import org.apache.log4j.Logger;
 import org.obo.datamodel.Link;
 import org.obo.datamodel.OBOClass;
-import org.obo.datamodel.TermCategory;
+import org.obo.datamodel.TermSubset;
 
 import phenote.dataadapter.AbstractFileAdapter;
 import phenote.datamodel.CharFieldException;
@@ -185,14 +185,14 @@ public class NEXUSAdapter extends AbstractFileAdapter {
   }
   
   private OBOClass getAttributeForValue(OBOClass valueTerm) {
-    Set<TermCategory> categories = valueTerm.getCategories();
-    Set<String> categoryNames = new HashSet<String>();
-    for (TermCategory category : categories) {
-      categoryNames.add(category.getName());
+    Set<TermSubset> subsets = valueTerm.getSubsets();
+    Set<String> subsetNames = new HashSet<String>();
+    for (TermSubset subset : subsets) {
+      subsetNames.add(subset.getName());
     }
-    if (categoryNames.contains("attribute_slim")) {
+    if (subsetNames.contains("attribute_slim")) {
       return valueTerm;
-    } else if ((categoryNames.contains("value_slim"))) {
+    } else if ((subsetNames.contains("value_slim"))) {
       return this.getAttributeForValue(this.getParentForTerm(valueTerm));
     }
     return null;

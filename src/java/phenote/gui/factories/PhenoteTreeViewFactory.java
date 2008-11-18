@@ -1,6 +1,6 @@
 package phenote.gui.factories;
 
-import org.oboedit.gui.components.TreeView;
+import org.oboedit.gui.components.treeView.TreeView;
 import org.oboedit.gui.factory.TreeViewFactory;
 
 

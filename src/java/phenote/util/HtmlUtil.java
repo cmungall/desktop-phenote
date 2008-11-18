@@ -216,36 +216,36 @@ public class HtmlUtil {
 				if (syn.getScope()==Synonym.BROAD_SYNONYM) {
 					broadSynCount++;
 					broadBuf.append(syn.toString());
-					if (syn.getSynonymCategory()!=null) 
-						broadBuf.append(italic(" ["+syn.getSynonymCategory().getName()+"]"));
+					if (syn.getSynonymType()!=null) 
+						broadBuf.append(italic(" ["+syn.getSynonymType().getName()+"]"));
 					broadBuf.append("<br>");
 				}
 				else if (syn.getScope()==Synonym.NARROW_SYNONYM) {
 					narrowSynCount++;
 					narrowBuf.append(syn.toString());
-					if (syn.getSynonymCategory()!=null) 
-						narrowBuf.append(italic(" ["+syn.getSynonymCategory().getName()+"]"));
+					if (syn.getSynonymType()!=null) 
+						narrowBuf.append(italic(" ["+syn.getSynonymType().getName()+"]"));
 					narrowBuf.append("<br>");
 				}
 				else if (syn.getScope()==Synonym.EXACT_SYNONYM) {
 					exactSynCount++;
 					exactBuf.append(syn.toString());
-					if (syn.getSynonymCategory()!=null) 
-						exactBuf.append(italic(" ["+syn.getSynonymCategory().getName()+"]"));
+					if (syn.getSynonymType()!=null) 
+						exactBuf.append(italic(" ["+syn.getSynonymType().getName()+"]"));
 					exactBuf.append("<br>");
 				}
 				else if (syn.getScope()==Synonym.RELATED_SYNONYM) {
 					relatedSynCount++;
 					relatedBuf.append(syn.toString());
-					if (syn.getSynonymCategory()!=null) 
-						relatedBuf.append(italic(" ["+syn.getSynonymCategory().getName()+"]"));
+					if (syn.getSynonymType()!=null) 
+						relatedBuf.append(italic(" ["+syn.getSynonymType().getName()+"]"));
 					relatedBuf.append("<br>");
 				}
 				else if (syn.getScope()==Synonym.UNKNOWN_SCOPE) {
 					unknownScopeCount++;
 					unknownBuf.append(syn.toString());
-					if (syn.getSynonymCategory()!=null) 
-						unknownBuf.append(italic(" ["+syn.getSynonymCategory().getName()+"]"));
+					if (syn.getSynonymType()!=null) 
+						unknownBuf.append(italic(" ["+syn.getSynonymType().getName()+"]"));
 					unknownBuf.append("<br>");
 				}
 			}
