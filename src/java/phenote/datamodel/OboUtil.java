@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.obo.datamodel.Link;
 import org.obo.datamodel.LinkedObject;
 import org.obo.datamodel.OBOClass;
+import org.obo.datamodel.OBOObject;
 import org.obo.datamodel.OBOProperty;
 import org.obo.datamodel.OBORestriction;
 import org.obo.datamodel.TermSubset;
@@ -118,7 +119,7 @@ public class OboUtil {
     return term;
   }
 
-  public static boolean isPostCompTerm(OBOClass term) {
+  public static boolean isPostCompTerm(OBOObject term) {
     if (term.getID().indexOf('^') < 0) { return false; }
     for (Link l : term.getParents()) {
       if (isLinkToDiff(l)) { return true; }
