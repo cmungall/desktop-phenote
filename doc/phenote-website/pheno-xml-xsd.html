@@ -1,0 +1,783 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<style>
+          body { background: white;
+                 color: black; }
+          h2   { border-top: black solid 1px;
+                 margin-top: 2em;
+                 padding-top: 1em; }
+        </style>
+</head>
+<body>
+<h2>Table of Contents</h2>
+<h3>Elements</h3>
+<ul>
+<li><a href="#element-type-bearer">bearer</a></li>
+<li><a href="#element-type-description">description</a></li>
+<li><a href="#element-type-envirotype">envirotype</a></li>
+<li><a href="#element-type-genetic_feature">genetic_feature</a></li>
+<li><a href="#element-type-genotype">genotype</a></li>
+<li><a href="#element-type-genotype_feature_link">genotype_feature_link</a></li>
+<li><a href="#element-type-holds_in_relation_to">holds_in_relation_to</a></li>
+<li><a href="#element-type-in_comparison_to">in_comparison_to</a></li>
+<li><a href="#element-type-manifest_in">manifest_in</a></li>
+<li><a href="#element-type-measurement">measurement</a></li>
+<li><a href="#element-type-modifier">modifier</a></li>
+<li><a href="#element-type-name">name</a></li>
+<li><a href="#element-type-on_condition">on_condition</a></li>
+<li><a href="#element-type-phenoset">phenoset</a></li>
+<li><a href="#element-type-phenotype">phenotype</a></li>
+<li><a href="#element-type-phenotype_character">phenotype_character</a></li>
+<li><a href="#element-type-phenotype_manifestation">phenotype_manifestation</a></li>
+<li><a href="#element-type-provenance">provenance</a></li>
+<li><a href="#element-type-qualifier">qualifier</a></li>
+<li><a href="#element-type-quality">quality</a></li>
+<li><a href="#element-type-related_entity">related_entity</a></li>
+<li><a href="#element-type-temporal_qualifier">temporal_qualifier</a></li>
+<li><a href="#element-type-time_range">time_range</a></li>
+<li><a href="#element-type-typeref">typeref</a></li>
+</ul>
+  
+  
+  <h2 id="element-type-phenoset">Element Type: phenoset</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+      <p>A document consists of some combination of genotypes and
+phenotypes, manifestations of phenotypes via genotypes, and
+genetic features</p>
+    <table border="1">
+<caption>Attributes</caption>
+<tr valign="baseline">
+<th align="left" rowspan="2">version</th>
+<td>Built-in type string</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2">
+          <p>: File format version :
+  should match this schema version (eg 0.01)</p>
+        </td></tr>
+</table>
+<h3>Content Model</h3>
+      <p>Exactly 1 sequences of:</p>
+<ol>
+        <li>Optional repeatable <a href="#element-type-pheno:genotype">pheno:genotype</a>
+</li>
+        <li>Optional repeatable <a href="#element-type-pheno:genetic_feature">pheno:genetic_feature</a>
+</li>
+        <li>Optional repeatable <a href="#element-type-pheno:phenotype">pheno:phenotype</a>
+</li>
+        <li>Optional repeatable <a href="#element-type-pheno:phenotype_manifestation">pheno:phenotype_manifestation</a>
+</li>
+      </ol>
+      
+    
+  <h2 id="element-type-genotype">Element Type: genotype</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+      <p>Each genotype record represents a single individual or group of genetically similar individuals</p>
+    <table border="1">
+<caption>Attributes</caption>
+<tr valign="baseline">
+<th align="left" rowspan="2">id</th>
+<td>Simple type <a href="#simple-type-pheno:identifier_Type">pheno:identifier_Type</a>
+</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2"></td></tr>
+<tr valign="baseline">
+<th align="left" rowspan="2">organism</th>
+<td>Simple type <a href="#simple-type-pheno:identifier_Type">pheno:identifier_Type</a>
+</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2">
+          <p>NCBI TAxon ID</p>
+        </td></tr>
+<tr valign="baseline">
+<th align="left" rowspan="2">background</th>
+<td>Simple type <a href="#simple-type-pheno:identifier_Type">pheno:identifier_Type</a>
+</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2">
+          <p>another genotype</p>
+        </td></tr>
+</table>
+<h3>Content Model</h3>
+      <p>Exactly 1 sequences of:</p>
+<ol>
+        <li>An optional <a href="#element-type-pheno:name">pheno:name</a>
+</li>
+        <li>Optional repeatable <a href="#element-type-pheno:genotype_feature_link">pheno:genotype_feature_link</a>
+</li>
+      </ol>
+      
+      
+      
+    
+  <h2 id="element-type-name">Element Type: name</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+<h3>Content Model</h3>
+<p>Simple type <a href="#simple-type-pheno:name_Type">pheno:name_Type</a></p>
+  <h2 id="element-type-genotype_feature_link">Element Type: genotype_feature_link</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+      <p>A genotype is a collection of alleles
+In general, only the mutant alleles are specified.
+sequence variants can also be specified</p>
+    <table border="1">
+<caption>Attributes</caption>
+<tr valign="baseline">
+<th align="left" rowspan="2">copy_count</th>
+<td>Built-in type int</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2"></td></tr>
+<tr valign="baseline">
+<th align="left" rowspan="2">feature</th>
+<td>Simple type <a href="#simple-type-pheno:identifier_Type">pheno:identifier_Type</a>
+</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2">
+          <p>a reference to a genetic feature</p>
+        </td></tr>
+</table>
+<h3>Content Model</h3>
+<p>Empty</p>
+  <h2 id="element-type-genetic_feature">Element Type: genetic_feature</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+      <p>A genetic feature may be a gene (allele), transcript, SNP, etc
+typed by SO
+This is a partial model of genetic features - a full
+model can be found in Chado</p>
+    <table border="1">
+<caption>Attributes</caption>
+<tr valign="baseline">
+<th align="left" rowspan="2">id</th>
+<td>Simple type <a href="#simple-type-pheno:identifier_Type">pheno:identifier_Type</a>
+</td>
+<td>required</td>
+</tr>
+<tr valign="baseline"><td colspan="2">
+          <p>unique stable global identifier - this can be used to
+reference more detailed info in a sequence/genetics db</p>
+        </td></tr>
+<tr valign="baseline">
+<th align="left" rowspan="2">organism</th>
+<td>Simple type <a href="#simple-type-pheno:identifier_Type">pheno:identifier_Type</a>
+</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2">
+          <p>optional: same as genotype.organism_id if not specified</p>
+        </td></tr>
+</table>
+<h3>Content Model</h3>
+      <p>Exactly 1 sequences of:</p>
+<ol>
+        <li>An optional <a href="#element-type-pheno:typeref">pheno:typeref</a>
+</li>
+        <li>An optional <a href="#element-type-pheno:name">pheno:name</a>
+</li>
+      </ol>
+      
+      
+    
+  <h2 id="element-type-manifest_in">Element Type: manifest_in</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+      <p>a single genotype can be associated with multiple phenotypes
+in different experiments and different environments</p>
+    <table border="1">
+<caption>Attributes</caption>
+<tr valign="baseline">
+<th align="left" rowspan="2">penetrance_percentage</th>
+<td>Built-in type float</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2"></td></tr>
+<tr valign="baseline">
+<th align="left" rowspan="2">genotype</th>
+<td>Simple type <a href="#simple-type-pheno:identifier_Type">pheno:identifier_Type</a>
+</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2"></td></tr>
+</table>
+<h3>Content Model</h3>
+      <p>Exactly 1 sequences of:</p>
+<ol>
+        <li>Optional repeatable <a href="#element-type-pheno:typeref">pheno:typeref</a>
+</li>
+      </ol>
+      
+      
+    
+  <h2 id="element-type-phenotype_manifestation">Element Type: phenotype_manifestation</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+      <p>A phenotype manifestation is an observation of a phenotype in one
+more individual organisms under experimental conditions, linked
+with the genetic and environmental causes of that phenotype</p>
+    <table border="1">
+<caption>Attributes</caption>
+<tr valign="baseline">
+<th align="left" rowspan="2">id</th>
+<td>Simple type <a href="#simple-type-pheno:identifier_Type">pheno:identifier_Type</a>
+</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2">
+          <p>Each manifestation can be identified, but this is optional.
+Note that the ID is for the manifestation of the phenotype
+in either a single individual organism, or in a population of
+indistinguishable individuals in an experiment or trial</p>
+        </td></tr>
+</table>
+<h3>Content Model</h3>
+      <p>Exactly 1 sequences of:</p>
+<ol>
+        <li>An optional <a href="#element-type-pheno:description">pheno:description</a>
+</li>
+        <li>Exactly 1 <a href="#element-type-pheno:manifest_in">pheno:manifest_in</a>
+</li>
+        <li>Exactly 1 <a href="#element-type-pheno:phenotype">pheno:phenotype</a>
+</li>
+        <li>Optional repeatable <a href="#element-type-pheno:provenance">pheno:provenance</a>
+</li>
+        <li>Optional repeatable <a href="#element-type-pheno:envirotype">pheno:envirotype</a>
+</li>
+      </ol>
+      
+    
+  <h2 id="element-type-phenotype">Element Type: phenotype</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+      <p>a phenotype is a collection of characteristics possessed by
+an organism or collection of organisms
+(or in some cases, the environment of the organism, as a 
+result of that organism's actions - for example a termite's nest)
+the phenotype arises as a result of the organism's genotype
+and the environment of the organism
+
+Examples of phenotypes are:
+  * "red eyes and notched wings"
+  * "reduced apoptosis and increased susceptibility to cancer"
+  * "Initially a single lateral is formed, but it is thicker than normal
+     and sometimes individual bundles of actin filaments can be seen. The
+     laterals split near the distal tip as they elongate and at later
+     stages they appear to be split over more of their length."
+  *  "interrupted imaginal disc development and stunted wings at the adult stage"
+
+The phenotype is the entire collection of characteristics exhibited
+by that organism (or collection of effectively indistinguishable
+organsisms). Each organism has a single phenotype throughout
+its lifespan - the characteristics that comprise that phenotype
+may change, this is reflected in the phenotype_character records
+
+each phenotype record represents a specific phenotype which
+may be instantiated in one or more organisms. If two or more organisms have
+indistinguishable phenotypes, the same
+record may be used. If phenotypes are distinguishable then a
+different record should be used.</p>
+    <h3>Content Model</h3>
+      <p>Exactly 1 sequences of:</p>
+<ol>
+        <li>An optional <a href="#element-type-pheno:typeref">pheno:typeref</a>
+</li>
+        <li>Optional repeatable <a href="#element-type-pheno:phenotype_character">pheno:phenotype_character</a>
+</li>
+      </ol>
+    
+  <h2 id="element-type-phenotype_character">Element Type: phenotype_character</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+      <p>A phenotype character is one or more qualities inhering in a single
+bearer entity. For example, a PC with quality type "red" and bearer
+type "eye" (written here for convenience as "red eye") represents a
+particular instantiation of "red eye"/"red eyes" in a particular
+organism or collection of like organisms
+
+examples of phenotype character types:
+   red hair, low bone mass, square jaw, long thick bristle,
+   2cm long tail, spermatocyte devoid of asters, elevated blood pressure,
+   lacking wings, having an additional digit relative to a wild type individual,
+   having a brain size during embryonic development that is larger than
+   a typical individual of the same genus/order, short attention span, having
+   an abnormal shape, abnormal fusion between digits, lacking red spots, 
+   abnormally low numbers of B-cells after infection, lacking circularity in
+   the cross-section of an arista lateral
+
+A phenotype character record represents an instance of a characteristic
+possessed by a single organism, or a collection of identical characteristics
+possessed by like organisms.</p>
+    <table border="1">
+<caption>Attributes</caption>
+<tr valign="baseline">
+<th align="left" rowspan="2">id</th>
+<td>Simple type <a href="#simple-type-pheno:identifier_Type">pheno:identifier_Type</a>
+</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2"></td></tr>
+<tr valign="baseline">
+<th align="left" rowspan="2">expressivity_percentage</th>
+<td>Built-in type float</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2"></td></tr>
+</table>
+<h3>Content Model</h3>
+      <p>Exactly 1 sequences of:</p>
+<ol>
+        <li>An optional <a href="#element-type-pheno:description">pheno:description</a>
+</li>
+        <li>Exactly 1 <a href="#element-type-pheno:bearer">pheno:bearer</a>
+</li>
+        <li>Optional repeatable <a href="#element-type-pheno:quality">pheno:quality</a>
+</li>
+      </ol>
+      
+      
+    
+  <h2 id="element-type-bearer">Element Type: bearer</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+      <p>  each 'bearer' record represents a particular bearer of some
+  general bearer type: for example, a particular wing of a
+  particular fly
+
+  entities can be spatial objects (3D e.g. anatomical parts)
+  or spatiotemporal entities (4D e.g. processes)</p>
+    <h3>Content Model</h3>
+      <p>Exactly 1 sequences of:</p>
+<ol>
+        <li>Exactly 1 <a href="#element-type-pheno:typeref">pheno:typeref</a>
+</li>
+      </ol>
+    
+  <h2 id="element-type-quality">Element Type: quality</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+      <p>aka attribute aka property
+any one particular bearer can have multiple qualities inhering
+in it. For example, a particular tail can have qualities such
+as shape, length, etc
+
+each quality inheres in a single bearer throughout the duration
+of that entities existence. For example, my height is a single
+quality that inheres in my body throughout my life. This
+quality can take on different states throughout the lifetime
+of the bearer.
+</p>
+    <table border="1">
+<caption>Attributes</caption>
+<tr valign="baseline">
+<th align="left" rowspan="2">determinable</th>
+<td>Simple type <a href="#simple-type-pheno:classId_Type">pheno:classId_Type</a>
+</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2">
+          <p>not required: it can be deduced from the quality type.
+if provided, the value of this field is always an OBO-style identifier from PATO
+may be useful for report purposes; eg the color of this entity is red
+(where 'color' is the determinable)</p>
+        </td></tr>
+<tr valign="baseline">
+<th align="left" rowspan="2">count</th>
+<td>Built-in type integer</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2">
+          <p>certain kinds of quality implicitly or explicitly refer to
+numbers. Examples of these are the qualities of "having 
+supernumery parts" or the qualities of "lacking parts". It
+can be useful to state the exact number here, rather than
+overloading the ontology of qualities.
+
+the number will refer to either the relative or absolute
+quantity....?
+
+This is purely optional, as it is usually sufficient to
+state that a particular hand has supernumery fingers,
+without saying how many extra</p>
+        </td></tr>
+</table>
+<h3>Content Model</h3>
+      <p>Exactly 1 sequences of:</p>
+<ol>
+        <li>Exactly 1 <a href="#element-type-pheno:typeref">pheno:typeref</a>
+</li>
+        <li>An optional <a href="#element-type-pheno:description">pheno:description</a>
+</li>
+        <li>Optional repeatable <a href="#element-type-pheno:related_entity">pheno:related_entity</a>
+</li>
+        <li>Optional repeatable <a href="#element-type-pheno:on_condition">pheno:on_condition</a>
+</li>
+        <li>Optional repeatable <a href="#element-type-pheno:in_comparison_to">pheno:in_comparison_to</a>
+</li>
+        <li>Optional repeatable <a href="#element-type-pheno:measurement">pheno:measurement</a>
+</li>
+        <li>Optional repeatable <a href="#element-type-pheno:temporal_qualifier">pheno:temporal_qualifier</a>
+</li>
+        <li>Optional repeatable <a href="#element-type-pheno:modifier">pheno:modifier</a>
+</li>
+      </ol>
+      
+      
+    
+  <h2 id="element-type-related_entity">Element Type: related_entity</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+      <p>Relational qualities inhere in additional entities.
+This should be used for relational qualities
+(e.g. sensitivity, distance_from)
+and not for monadic entities.
+
+other examples include:
+"spermatocytes *devoid_of* asters", "thorax *lacks* wing",
+hand *has-supernumerary-parts* finger
+in these cases, the related_entity records the _type_ of part
+that is lacking or present in lower or higher numbers</p>
+    <h3>Content Model</h3>
+      <p>Exactly 1 sequences of:</p>
+<ol>
+        <li>Exactly 1 <a href="#element-type-pheno:typeref">pheno:typeref</a>
+</li>
+      </ol>
+    
+  <h2 id="element-type-on_condition">Element Type: on_condition</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+      <p>sometimes a state is only instantiated if a certain condition holds</p>
+    <h3>Content Model</h3>
+      <p>Exactly 1 sequences of:</p>
+<ol>
+        <li>Exactly 1 <a href="#element-type-pheno:typeref">pheno:typeref</a>
+</li>
+      </ol>
+    
+  <h2 id="element-type-in_comparison_to">Element Type: in_comparison_to</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+      <p>quality types can be absolutist (square, red) or
+relative (high pressure, short height). relative
+always implies a context. The default context is
+always an equivalent phenotype character in a
+typical individual of the same species. We can be
+more explicit if we like by specifying in_comparison_to
+
+Examples:
+  an allele which has more or less pronounced effects
+  in different genetic backgrounds;
+  A yellow eye which is red in wildtype;</p>
+    <table border="1">
+<caption>Attributes</caption>
+<tr valign="baseline">
+<th align="left" rowspan="2">relation</th>
+<td>Simple type <a href="#simple-type-pheno:classId_Type">pheno:classId_Type</a>
+</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2">
+          <p>if left blank, this is inferred from the quality type;
+for example, if Q="high pressure", then the relation is
+higher-than or increased-with-respect-to</p>
+        </td></tr>
+<tr valign="baseline">
+<th align="left" rowspan="2">about</th>
+<td>Simple type <a href="#simple-type-pheno:identifier_Type">pheno:identifier_Type</a>
+</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2">
+          <p>Can be an ID of a particular phenotype manifestation, or
+an ID for a whole taxon</p>
+        </td></tr>
+</table>
+<h3>Content Model</h3>
+      <p>Exactly 1 sequences of:</p>
+<ol>
+        <li>Optional repeatable <a href="#element-type-pheno:typeref">pheno:typeref</a>
+</li>
+        <li>Optional repeatable <a href="#element-type-pheno:measurement">pheno:measurement</a>
+</li>
+      </ol>
+      
+      
+    
+  <h2 id="element-type-modifier">Element Type: modifier</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+      <p>for abnormal/normal
+these should come from the PATO modifier terminology</p>
+    <table border="1">
+<caption>Attributes</caption>
+<tr valign="baseline">
+<th align="left" rowspan="2">about</th>
+<td>Simple type <a href="#simple-type-pheno:classId_Type">pheno:classId_Type</a>
+</td>
+<td>required</td>
+</tr>
+<tr valign="baseline"><td colspan="2"></td></tr>
+</table>
+<h3>Content Model</h3>
+<p>Empty</p>
+  <h2 id="element-type-measurement">Element Type: measurement</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+      <p>: measurement :
+
+examples: 
+  length measurement (with ruler, in cm)
+  spot intensity
+real-world measurements (exlcuding count measurements) are inexact
+and hence ranges.</p>
+    <table border="1">
+<caption>Attributes</caption>
+<tr valign="baseline">
+<th align="left" rowspan="2">unit</th>
+<td>Built-in type NMTOKEN</td>
+<td>required</td>
+</tr>
+<tr valign="baseline"><td colspan="2">
+          <p>the unit should be a reference to an SI unit
+Q: do SI units have an identifier system,
+   or do we just use eg "mm"
+Q: do we need the ability to specify composite units,
+   eg lb/kg - or is this handled by SI?</p>
+        </td></tr>
+<tr valign="baseline">
+<th align="left" rowspan="2">value</th>
+<td>Built-in type float</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2">
+          <p>  the only time this would be omitted is if we only have a range</p>
+        </td></tr>
+<tr valign="baseline">
+<th align="left" rowspan="2">min_value</th>
+<td>Built-in type float</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2">
+          <p>Q: does the range reflect our lack of knowledge (eg accuracy
+   of measuring instrument) or an actual range of values?
+   or should we represent an actual range as multiple measurements?</p>
+        </td></tr>
+<tr valign="baseline">
+<th align="left" rowspan="2">max_value</th>
+<td>Built-in type float</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2"></td></tr>
+<tr valign="baseline">
+<th align="left" rowspan="2">standard_deviation</th>
+<td>Built-in type float</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2"></td></tr>
+<tr valign="baseline">
+<th align="left" rowspan="2">standard_error</th>
+<td>Built-in type float</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2"></td></tr>
+<tr valign="baseline">
+<th align="left" rowspan="2">assay</th>
+<td>Simple type <a href="#simple-type-pheno:identifier_Type">pheno:identifier_Type</a>
+</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2">
+          <p>TODO: reference to a particular experiment</p>
+        </td></tr>
+</table>
+<h3>Content Model</h3>
+<p>Empty</p>
+  <h2 id="element-type-provenance">Element Type: provenance</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+      <p>evidence: could refer to papers, figures in papers, raw images, etc</p>
+    <table border="1">
+<caption>Attributes</caption>
+<tr valign="baseline">
+<th align="left" rowspan="2">id</th>
+<td>Simple type <a href="#simple-type-pheno:identifier_Type">pheno:identifier_Type</a>
+</td>
+<td>required</td>
+</tr>
+<tr valign="baseline"><td colspan="2"></td></tr>
+<tr valign="baseline">
+<th align="left" rowspan="2">type</th>
+<td>Simple type <a href="#simple-type-pheno:classId_Type">pheno:classId_Type</a>
+</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2"></td></tr>
+</table>
+<h3>Content Model</h3>
+<p>Empty</p>
+  <h2 id="element-type-envirotype">Element Type: envirotype</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+      <p>The type of environment.
+For now this is just a pre or post coordinated type reference. In future
+We may want to add more under here</p>
+    <h3>Content Model</h3>
+      <p>Exactly 1 sequences of:</p>
+<ol>
+        <li>Exactly 1 <a href="#element-type-pheno:typeref">pheno:typeref</a>
+</li>
+      </ol>
+    
+  <h2 id="element-type-typeref">Element Type: typeref</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+      <p>A reference to a type. Here type is used in the ontology sense of
+a "kind" or "universal". A type can be referenced simply by giving a
+term ID from an ontology. More complex types can be "post-coordinated"</p>
+    <table border="1">
+<caption>Attributes</caption>
+<tr valign="baseline">
+<th align="left" rowspan="2">about</th>
+<td>Simple type <a href="#simple-type-pheno:classId_Type">pheno:classId_Type</a>
+</td>
+<td>required</td>
+</tr>
+<tr valign="baseline"><td colspan="2">
+          <p>Base/generic type. This is often all that is required.
+the ID is OBO-compliant and can be from any ontology</p>
+        </td></tr>
+</table>
+<h3>Content Model</h3>
+      <p>Exactly 1 sequences of:</p>
+<ol>
+        <li>Optional repeatable <a href="#element-type-pheno:qualifier">pheno:qualifier</a>
+</li>
+      </ol>
+      
+    
+  <h2 id="element-type-qualifier">Element Type: qualifier</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+      <p>for cross-products
+these are the characteristics that distinguish a specific type
+from a general type
+ e.g. if we want to annotate to an bearer "scutum bristle" and the
+anatomical ontology does not contain this term, only "scutum" and
+"bristle". In this case the bearer type_id (ie the primary term) would
+be the ID for "bristle". We would have one differentium "part_of scutum"</p>
+    <table border="1">
+<caption>Attributes</caption>
+<tr valign="baseline">
+<th align="left" rowspan="2">relation</th>
+<td>Simple type <a href="#simple-type-pheno:classId_Type">pheno:classId_Type</a>
+</td>
+<td>required</td>
+</tr>
+<tr valign="baseline"><td colspan="2"></td></tr>
+</table>
+<h3>Content Model</h3>
+      <p>Exactly 1 sequences of:</p>
+<ol>
+        <li>Exactly 1 <a href="#element-type-pheno:holds_in_relation_to">pheno:holds_in_relation_to</a>
+</li>
+      </ol>
+      
+    
+  <h2 id="element-type-holds_in_relation_to">Element Type: holds_in_relation_to</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+<h3>Content Model</h3>
+      <p>Exactly 1 sequences of:</p>
+<ol>
+        <li>Exactly 1 <a href="#element-type-pheno:typeref">pheno:typeref</a>
+</li>
+      </ol>
+    
+  <h2 id="element-type-temporal_qualifier">Element Type: temporal_qualifier</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+      <p>temporal_qualifier
+  examples:
+     during larval stage;
+     after pupal stage;
+     at 7pm on 2000/01/01;
+     overlapping M1-phase;
+ we do not tie ourself to any one theory of time - time ranges and points are represented using time_range</p>
+    <table border="1">
+<caption>Attributes</caption>
+<tr valign="baseline">
+<th align="left" rowspan="2">relation</th>
+<td>Simple type <a href="#simple-type-pheno:classId_Type">pheno:classId_Type</a>
+</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2">
+          <p>e.g. before, after, during - would come from an ontology of temporal relations
+this is optional. If not specified, treated as *overlap* relation</p>
+        </td></tr>
+</table>
+<h3>Content Model</h3>
+      <p>Exactly 1 sequences of:</p>
+<ol>
+        <li>An optional <a href="#element-type-pheno:time_range">pheno:time_range</a>
+</li>
+      </ol>
+      
+    
+  <h2 id="element-type-time_range">Element Type: time_range</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+      <p>represents an interval or point in time 
+(we are neutral w.r.t points vs intervals)</p>
+    <table border="1">
+<caption>Attributes</caption>
+<tr valign="baseline">
+<th align="left" rowspan="2">id</th>
+<td>Simple type <a href="#simple-type-pheno:identifier_Type">pheno:identifier_Type</a>
+</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2">
+          <p>: id : OPTIONAL
+this is typically not used. You would use it if you wish to grant an identifier to
+a particular time point or range. This would allow you to make partial-order statements;
+e.g. t1 before t2</p>
+        </td></tr>
+</table>
+<h3>Content Model</h3>
+      <p>Exactly 1 sequences of:</p>
+<ol>
+        <li>An optional <a href="#element-type-pheno:typeref">pheno:typeref</a>
+</li>
+        <li>An optional <a href="#element-type-pheno:measurement">pheno:measurement</a>
+</li>
+      </ol>
+      
+    
+  <h2 id="element-type-description">Element Type: description</h2>
+<p>Namespace: <code>http://www.bioontologies.org/obd/schema/pheno</code></p>
+      <p>an optionally-attributed textual description</p>
+    <table border="1">
+<caption>Attributes</caption>
+<tr valign="baseline">
+<th align="left" rowspan="2">id</th>
+<td>Built-in type NMTOKEN</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2"></td></tr>
+<tr valign="baseline">
+<th align="left" rowspan="2">attribution</th>
+<td>Simple type <a href="#simple-type-pheno:identifier_Type">pheno:identifier_Type</a>
+</td>
+<td>optional</td>
+</tr>
+<tr valign="baseline"><td colspan="2">
+              <p>e.g pubmed ID</p>
+            </td></tr>
+</table>
+<h3>Content Model</h3>
+      
+        
+          
+          
+        
+      
+    
+  
+  
+    <p>Built-in type string</p>
+  
+  
+    <p>Built-in type string</p>
+  
+  
+    <p>Built-in type NMTOKEN</p>
+  
+</body>
+</html>

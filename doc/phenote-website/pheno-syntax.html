@@ -1,0 +1,883 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<meta name="generator" content="AsciiDoc 7.0.0"/>
+<style type="text/css">
+/* Debug borders */
+p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
+/*
+  border: 1px solid red;
+*/
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a { color: blue; }
+a:visited { color: fuchsia; }
+
+span.emphasis {
+  font-style: italic;
+}
+
+span.strong {
+  font-weight: bold;
+}
+
+span.monospaced {
+  font-family: monospace;
+  color: navy;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  font-family: sans-serif;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  border-bottom: 2px solid silver;
+  padding-top: 0.5em;
+}
+
+div.sectionbody {
+  font-family: serif;
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+span#author {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+span#email {
+}
+span#revision {
+  font-family: sans-serif;
+}
+
+div#footer {
+  font-family: sans-serif;
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+div#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+div#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+div#preamble,
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-right: 10%;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title {
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock > div.content {
+  padding-left: 2.0em;
+}
+div.quoteblock .attribution {
+  text-align: right;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 2px solid silver;
+}
+
+div.exampleblock > div.content {
+  border-left: 2px solid silver;
+  padding: 0.5em;
+}
+
+div.verseblock div.content {
+  white-space: pre;
+}
+
+div.imageblock div.content { padding-left: 0; }
+div.imageblock img { border: 1px solid silver; }
+span.image img { border-style: none; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: italic;
+}
+dd > *:first-child {
+  margin-top: 0;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.olist2 {
+  list-style-type: lower-alpha;
+}
+
+div.tableblock > table {
+  border-color: #527bbd;
+  border-width: 3px;
+}
+thead {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+tfoot {
+  font-weight: bold;
+}
+
+div.hlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+td.hlist1 {
+  vertical-align: top;
+  font-style: italic;
+  padding-right: 0.8em;
+}
+td.hlist2 {
+  vertical-align: top;
+}
+
+@media print {
+  div#footer-badges { display: none; }
+}
+/* Workarounds for IE6's broken and incomplete CSS2. */
+
+div.sidebar-content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+div.sidebar-title, div.image-title {
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 0.0em;
+  margin-bottom: 0.5em;
+}
+
+div.listingblock div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock-content {
+  padding-left: 2.0em;
+}
+
+div.exampleblock-content {
+  border-left: 2px solid silver;
+  padding-left: 0.5em;
+}
+</style>
+<title>Phenotype Syntax</title>
+</head>
+<body>
+<div id="header">
+<h1>Phenotype Syntax</h1>
+<span id="author">Revision $Id$</span><br />
+verson 0.11
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<p>Chris Mungall 2006</p>
+</div>
+</div>
+<h2>Abstract</h2>
+<div class="sectionbody">
+<p>Pheno-syntax is a formal syntax for representing phenotypes. The
+syntax is designed to be compact, human-readable and writable. Use of
+pheno-xml over pheno-syntax is encouraged, but a concrete syntax
+offers advantages over an XML representation:</p>
+<ul>
+<li>
+<p>
+human readability (as opposed to human legibility in XML)
+</p>
+</li>
+<li>
+<p>
+human writeability (without use of a specialised XML editor)
+</p>
+</li>
+</ul>
+<p>The syntax was designed in response to curator need after the May 2006
+phenotype ontology meeting in Hinxton. XML was perceived to be
+unsuitable for certain users needs.</p>
+<p>The syntax has a formal grammar, described below. The grammar
+indicates which tags are allowed in which contexts, and the
+cardinality of those tags. These should be in agreement with the XML.</p>
+<p>This document primarily describes the syntax. Some mention is made of
+the interpretation of the syntax in terms of real-world
+entities. However, care has been taken not to be too redundant with
+the pheno-xml documentation. In addition, the documentation regarding
+the precise logical interpretation of pheno-xml and pheno-syntax will
+reside elsewhere (this may take the form of a transformation to
+either/both description logic or full first order logic); the
+documentation here is intended for both savvy users (eg advanced
+curators) and programmers.</p>
+</div>
+<h2>Scope</h2>
+<div class="sectionbody">
+<p>Unlike pheno-xml, pheno-syntax does not attempt to describe genotypes
+or specific manifestations of phenotypes. Rather, pheno-syntax is
+intended to be embedded into existing file formats. The details of
+that embedding are not part of pheno-syntax.</p>
+<p>Pheno-syntax may be slightly less expressive than pheno-xml in some
+places. There are tradeoffs to keep the language simple.</p>
+</div>
+<h2>Grammar</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre><span class="monospaced">phenotype ::= phenotype_typeref? phenotype_character*</span></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><span class="monospaced">phenotype_character ::= description? expressivity? bearer quality*
+expressivity ::= 'Expressivity=' float '%'
+bearer ::= 'E=' typeref
+quality ::= 'Q=' typeref count? related_entity* on_condition* in_comparison_to* measurement* temporal_qualifier* modifier*
+count ::= 'C=' integer
+related_entity ::= 'E2=' typeref
+on_condition ::= 'On=' typeref
+in_comparison_to ::= 'Compar=' typeref comparison_target?
+measurement ::= 'M=' float unit
+temporal_qualifier ::= 'T=' qualifier
+modifier ::= 'Tag=' id
+phenotype_typeref ::= 'P=' typeref</span></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><span class="monospaced">comparison_target ::= '{' relation? typeref '}'</span></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><span class="monospaced">description ::= 'Desc=' '"' text '"'</span></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><span class="monospaced">relation ::= typeref
+typeref ::= id conjunction*
+conjunction ::= '^' qualifier
+qualifier ::= relation '(' typeref ')'</span></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><span class="monospaced">id ::= prefix ':' local_id
+prefix ::= word
+local_id ::= word
+unit ::= word</span></pre>
+</div></div>
+</div>
+<h2>Tokenization rules</h2>
+<div class="sectionbody">
+<p>The syntax is not newline or formatting sensitive. All whitespace is
+treated equally. Can be arranged/formatted as desired</p>
+</div>
+<h2>Informal Description</h2>
+<div class="sectionbody">
+<p>Pheno-syntax consists of a collection of tag-values, which look
+something like this:</p>
+<div class="literalblock">
+<div class="content">
+<pre><span class="monospaced">E= GO:0012345 Q= PATO:0000001</span></pre>
+</div></div>
+<p>The syntax is whitespace-neutral, so the above can be written as</p>
+<div class="literalblock">
+<div class="content">
+<pre><span class="monospaced">E= GO:0012345
+  Q= PATO:0000001</span></pre>
+</div></div>
+<p>However, there should be no space between the tag name and the
+<span class="strong">=</span>. Also, tag names are case sensitive</p>
+<p>A phenotype can be broken down into an _optional_ text description
+followed by zero or more phenotype characters. Descriptions use the
+Desc tag, and the description must be enclosed in double quotes</p>
+<div class="literalblock">
+<div class="content">
+<pre><span class="monospaced">Desc= "Heterozygous flies have very short and highly branched arista
+       laterals."</span></pre>
+</div></div>
+<p>A phenotype character consists of a single E= (bearer) tag, and zero or
+more Q= (quality/attribute) tags. Each Q= tag can be followed by
+additional optional tags</p>
+<p>Note that no additional separators are required - the "nesting" is
+completely unambiguous and is specified by the formal grammar,
+above. In the following example whitespace is used to indicate the
+structure of the annotation. However, a parser ignores the whitespace
+and can umambiguously retrieve the structure</p>
+<div class="literalblock">
+<div class="content">
+<pre><span class="monospaced">Desc="foo"
+E= GO:0012345
+  Q= PATO:0000001
+  Q= PATO:0000002
+    E2= CHEBI:345
+E= GO:0099999
+  Q= PATO:0000003
+  Q= PATO:0000004</span></pre>
+</div></div>
+<h3>Elements</h3>
+<div class="tableblock">
+<table rules="none"
+frame="hsides"
+cellspacing="0" cellpadding="4">
+<col width="182" />
+<col width="91" />
+<col width="685" />
+<thead>
+  <tr>
+    <th align="left">
+    Element
+    </th>
+    <th align="left">
+    Parent
+    </th>
+    <th align="left">
+    Description
+    </th>
+  </tr>
+</thead>
+<tbody valign="top">
+  <tr>
+    <td align="left">
+    E
+    </td>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    The "bearer" entity type
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    - can be from any ontology of processes or continuants
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    for example GO, CL, anatomy, ChEBI
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    Q
+    </td>
+    <td align="left">
+    E
+    </td>
+    <td align="left">
+    The quality type, which <span class="strong">inheres_in</span> the entity
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    - a PATO ID
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    * multiple Qs can be specified for any E
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    C
+    </td>
+    <td align="left">
+    Q
+    </td>
+    <td align="left">
+    Count - an integer
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    Only for certain PATO types like <span class="strong">supernumerary</span>
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    * zero-or-one C per Q
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    E2
+    </td>
+    <td align="left">
+    Q
+    </td>
+    <td align="left">
+    Related entity type -
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    For use with relational qualities such as "sensitivity"
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    or "lacking part"
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    * zero or more per Q (more than 1 will be rare)
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    On
+    </td>
+    <td align="left">
+    Q
+    </td>
+    <td align="left">
+    A condition which must be satisfied for the phenotype
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    to be expressed; may be a term from an
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    environment ontology
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    * zero or more per Q
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    Compar
+    </td>
+    <td align="left">
+    Q
+    </td>
+    <td align="left">
+    In comparison to. Can specify an additional
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    quality type here. Optionally followed by a
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    typeref from a taxonomy (the target org type)
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    * zero or more per Q
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    M
+    </td>
+    <td align="left">
+    Q
+    </td>
+    <td align="left">
+    Measurement. A number followed by a unit name
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    * zero or more per Q
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    T
+    </td>
+    <td align="left">
+    Q
+    </td>
+    <td align="left">
+    Temporal qualifier
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    Takes the form of a qualifier (see below)
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    for example: <span class="strong">during(GO:cell_cycle)</span>
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    * zero or more per Q
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    Tag
+    </td>
+    <td align="left">
+    Q
+    </td>
+    <td align="left">
+    Modifier ID. Taken from PATO
+    </td>
+  </tr>
+  <tr>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    
+    </td>
+    <td align="left">
+    eg absent, abnormal
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<h3>Type references</h3>
+<p>A type reference is typically an OBO ID which references a
+representation of a type, drawn from some ontology. These are
+specified in normal OBO ID form, eg <span class="strong">GO:0000001</span></p>
+<p>If sufficiently expressive terms have not been pre-coordinated within
+the ontology, we can post-coordinate them in pheno-syntax. This is
+done by specifying the <span class="strong">core</span> terms (aka <span class="strong">generic</span>/<span class="strong">genus</span> term),
+followed by one or more <span class="strong">qualifiers</span> (aka <span class="strong">discriminating
+characteristics</span> or <span class="strong">differentiae</span>). Each is separated with the <span class="strong">^</span>
+symbol.</p>
+<p>For example - if CL:123 represents the type "sperm" and GO:234
+represents the type "nucleus" we can write:</p>
+<div class="literalblock">
+<div class="content">
+<pre><span class="monospaced">GO:234^part_of(CL:123)</span></pre>
+</div></div>
+<p>to represent "a nucleus which is part of a sperm cell"</p>
+<p>Order is important.</p>
+<p>Relations are assumed to come from the OBO relation ontology. If other
+relations are required, a full OBO ID can be specified here (although
+use of relations outside OBO REL is highly discouraged)</p>
+</div>
+<h2>Examples</h2>
+<div class="sectionbody">
+<p>In the examples that follow we do not use actual numeric OBO IDs - we
+"fake" the IDs for the sake of clarity</p>
+<h3>Example</h3>
+<p>"Heterozygous flies have very short and highly branched arista
+laterals."</p>
+<p>"The decreased length of the laterals is associated with a decreased
+rate of elongation and premature cessation of elongation."</p>
+<div class="literalblock">
+<div class="content">
+<pre><span class="monospaced">E= FBbt:arista_lateral
+   Q= PATO:short
+E= GO:elongation_of_arista_lateral
+   Q= PATO:low_rate Q= PATO:premature_cessation</span></pre>
+</div></div>
+<p>What if GO did not contain the pre-coordinated term "elongation of
+arista lateral" (GO:0035016)? We could post-coordinate a similar type,
+in this way:</p>
+<div class="literalblock">
+<div class="content">
+<pre><span class="monospaced">E= GO:growth ^ has_participant(FBbt:arista_lateral)
+   Q= PATO:low_rate
+   Q= PATO:premature_cessation</span></pre>
+</div></div>
+<p>"There is no delay in lateral outgrowth."</p>
+<div class="literalblock">
+<div class="content">
+<pre><span class="monospaced">E=FBbt:arisra_lateral Q=PATO:width Tag=PATO:normal</span></pre>
+</div></div>
+<p>"Initially a single lateral is formed, but it is thicker than normal
+and sometimes individual bundles of actin filaments can be seen. The
+laterals split near the distal tip as they elongate and at later
+stages they appear to be split over more of their length."</p>
+<div class="literalblock">
+<div class="content">
+<pre><span class="monospaced">E=ASPO:distal_region ^ part_of(FBbt:arista_lateral)
+  Q=PATO:branched</span></pre>
+</div></div>
+<p>"The shape of the laterals in cross section is often irregular, in
+contrast to the circular wild-type laterals."</p>
+<div class="literalblock">
+<div class="content">
+<pre><span class="monospaced">E= ASPO:cross_section ^ part_of(FBbt:arista_lateral)
+  Q= PATO:irregular_shape
+  Tag= PATO:abnormal
+  Compar= PATO:circular {NCBITaxon:7227}</span></pre>
+</div></div>
+<p>"The actin bundles are irregular in shape and extend further into the
+centre of the lateral than normal, although most are still associated
+with the plasma membrane.  The actin filaments occupy more of the
+lateral cross section than normal, although they appear less tightly
+packed than wild type. The density of microtubules is significantly
+reduced and their distribution is more irregular compared to wild
+type."</p>
+<div class="literalblock">
+<div class="content">
+<pre><span class="monospaced">E=GO:actin_filament_organisation
+ Q=PATO:packed</span></pre>
+</div></div>
+<h3>Example</h3>
+<p>"In uncrowded conditions 48% eclose as adults although development is
+delayed by 1-2 days. Wings are usually unexpanded and many flies are
+found stuck in the food. The remaining 52% have difficulty eclosing
+and die as pharate adults. Transheterozygotes with Ca-&amp;agr;1D[X7]
+are almost all able to escape the puparium but few transheterozygotes
+with Ca-&amp;agr;1D[X10] succeed."</p>
+<div class="literalblock">
+<div class="content">
+<pre><span class="monospaced">E= GO:eclosion
+ Q= PATO:arrested
+E= FBbt:whole_organism
+ Q= PATO:lethal
+ T= during(FBdv:adult_stage)</span></pre>
+</div></div>
+<p>Notes: to annotate transheterozygotes a seperate phenotype entry would
+be used, and this phenotype entry would be associated with
+Ca-&amp;agr;1D[X7]. The annotation of the genotype is outwith the scope of
+pheno-syntax</p>
+<p>"A few homozygotes exhibit neurons in the longitudinal tracts that appear
+to stall at some of the commissures, forming nodular growths. Motoneurons
+in the SNb branch of the developing PNS also show stalling at stage
+17. The defects may be due to a second lesion on the chromosome or
+generated by altered channel properties caused by the missense
+mutation."</p>
+<ol>
+<li>
+<p><span class="strong">
+???
+</span></p>
+<p>
+ E= GO:development<sup>has_participant(FBbt:motor_neuron</sup>has_location(FBbt:abdominal_posterior_fascicle))
+  Q= PATO:stalled
+  T= during(FBdv:stage_17)
+</p>
+</li>
+</ol>
+</div>
+<h2>Changes</h2>
+<div class="sectionbody">
+<h3>version 0.11</h3>
+<p>Changed cardinality of Compar tag to zero-or-more</p>
+<h3>version 0.10</h3>
+<p>original release</p>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 31-Jul-2006 17:09:19 PDT
+</div>
+</div>
+</body>
+</html>
