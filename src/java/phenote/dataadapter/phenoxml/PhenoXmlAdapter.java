@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -374,11 +375,29 @@ public class PhenoXmlAdapter extends AbstractFileAdapter {
     if (term instanceof OBOClass) {
       return (OBOClass)term;
     } else {
-      log().warn("Term not found; creating dangler for " + id);
-      this.danglers.add(id);
-      final OBOClass dangler = new DanglingClassImpl(id);
-      return dangler;
+      final OBOClass altTerm = this.findTermByAltID(id);
+      if (altTerm != null) {
+        return altTerm;
+      } else {
+        log().warn("Term not found; creating dangler for " + id);
+        this.danglers.add(id);
+        final OBOClass dangler = new DanglingClassImpl(id.trim());
+        return dangler;
+      }
     }
+  }
+  
+  private OBOClass findTermByAltID(String id) {
+    final Collection<IdentifiedObject> terms = this.session.getObjects();
+    for (IdentifiedObject object : terms) {
+      if (object instanceof OBOClass) {
+        final OBOClass term = (OBOClass)object;
+        if (term.getSecondaryIDs().contains(id)) {
+          return term;
+        }
+      }
+    }
+    return null;
   }
   
   private OBOProperty getRelation(String id) {
