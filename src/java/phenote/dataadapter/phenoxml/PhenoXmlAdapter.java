@@ -55,7 +55,8 @@ public class PhenoXmlAdapter extends AbstractFileAdapter {
   private Set<String> genotypesAlreadyAdded = new HashSet<String>(); 
   private static String[] extensions = {"pxml", "xml"};
   private static final String description =  "PhenoXML [.pxml, .xml]";
-  private final List<String> danglers = new ArrayList<String>();
+  private final Set<String> danglers = new HashSet<String>();
+  private final Set<String> secondaryIDs = new HashSet<String>();
   private final OBOSession session;
 
   /**
@@ -99,8 +100,16 @@ public class PhenoXmlAdapter extends AbstractFileAdapter {
     return !this.danglers.isEmpty();
   }
 
-  public List<String> getDanglersList() {
+  public Collection<String> getDanglersList() {
     return this.danglers;
+  }
+
+  public boolean didMigrateSecondaryIDs() {
+    return !this.secondaryIDs.isEmpty();
+  }
+
+  public Collection<String> getMigratedSecondaryIDsList() {
+    return this.secondaryIDs;
   }
 
   private CharacterListI newCharacterListFromPhenosetDocument(PhenosetDocument doc) {
@@ -393,6 +402,7 @@ public class PhenoXmlAdapter extends AbstractFileAdapter {
       if (object instanceof OBOClass) {
         final OBOClass term = (OBOClass)object;
         if (term.getSecondaryIDs().contains(id)) {
+          this.secondaryIDs.add(id);
           return term;
         }
       }
