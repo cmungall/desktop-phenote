@@ -2,6 +2,7 @@ package phenote.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
@@ -180,7 +181,7 @@ public class TermInfo2 extends AbstractGUIComponent {
 
 	private JLabel annotationSummaryLabel;
 	
-	private HyperlinkLabel definitionTextArea;
+	private JEditorPane definitionTextArea;
 	
 	private HyperlinkLabel annotationSummaryTextArea;
 
@@ -451,9 +452,14 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 		definitionLabel.setVerticalAlignment(JLabel.TOP);
 
 		basicInfoPanel.add(definitionLabel);
-		definitionTextArea = new HyperlinkLabel(" ");
+		definitionTextArea = new JEditorPane();
+		definitionTextArea.setText(" ");
+		definitionTextArea.setEditable(false);
+		definitionTextArea.setBorder(null);
+		definitionTextArea.setBackground(Color.WHITE);
+		definitionTextArea.setContentType("text/html");
+		
 		termHyperlinkListener = new TermHyperlinkListener();
-		definitionTextArea.addStringLinkListener(termHyperlinkListener);
 		definitionLabel.setLabelFor(definitionTextArea);
 		basicInfoPanel.add(definitionTextArea);
 		
@@ -651,8 +657,11 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
         }
       }        
 			definitionTextArea.setText("<html>"+def+"</html>"); 
-		} else
+			
+		} else {
 			definitionTextArea.setText("<html> (no definition provided) </html>");
+		}
+
 
 		if ((!showEmptyPanelsFlag) && ((oboClass.getConsiderReplacements().size()+oboClass.getReplacedBy().size()) == 0)) {
 			termInfoPanel.getComponent(2).setVisible(false);
