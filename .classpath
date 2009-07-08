@@ -89,7 +89,8 @@
 	<classpathentry kind="lib" path="jars/sjsxp.jar"/>
 	<classpathentry kind="lib" path="jars/jaxws-api.jar"/>
 	<classpathentry kind="lib" path="jars/jlibeps.jar"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/BBOP"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/OBO-Edit2"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/BBOP"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/OBO-Edit"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/OBO"/>
+	<classpathentry kind="output" path="classfiles"/>
 </classpath>
