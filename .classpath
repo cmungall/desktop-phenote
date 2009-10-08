@@ -85,12 +85,15 @@
 	<classpathentry exported="true" kind="lib" path="jars/tablelayout.jar"/>
 	<classpathentry exported="true" kind="lib" path="jars/xml-apis.jar"/>
 	<classpathentry exported="true" kind="lib" path="jars/xml-apis-ext.jar"/>
-	<classpathentry kind="lib" path="jars/nexmlbeans.jar"/>
-	<classpathentry kind="lib" path="jars/sjsxp.jar"/>
-	<classpathentry kind="lib" path="jars/jaxws-api.jar"/>
-	<classpathentry kind="lib" path="jars/jlibeps.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/BBOP"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/OBO-Edit"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/OBO"/>
+
+	<classpathentry exported="true" kind="lib" path="jars/sjsxp.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/jaxws-api.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/jlibeps.jar"/>
+	<classpathentry exported="true" kind="lib" path="build-lib/jarbundler-2.0.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/bbop.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/obo.jar"/>
+	<classpathentry exported="true" kind="lib" path="jars/oboedit.jar"/>
+	<classpathentry kind="output" path="bin"/>
 	<classpathentry kind="output" path="classfiles"/>
+
 </classpath>
