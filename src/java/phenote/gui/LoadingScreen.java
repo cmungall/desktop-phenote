@@ -131,11 +131,8 @@ public class LoadingScreen extends JFrame {
 		footerTextPane.setFont(new Font("Helvetica", Font.PLAIN, 9));
 		footerTextPane.setAutoscrolls(false);
 		footerTextPane.setEditable(false);
-		footerTextPane.setText("<html><body><center><font size=2>Phenote is part of the <a href='http://www.bioontology.org'>" +
-				"National Center for Biomedical Ontology</a>, <br>" +
-				"a part of the <a href='http://www.bisti.nih.gov/ncbc/index.cfm'> National " +
-				"Centers for Biomedical Computing</a>, and is supported by the <a href='http://nihroadmap.nih.gov/'> NIH Roadmap</a>.<br> " +
-				"Developed at the Berkeley Bioinformatics and Ontologies Project (<a href='http://www.berkeleybop.org'>BBOP</a>)</font></center></body></html>");
+		footerTextPane.setText("<html><body><center><font size=2>Phenote is a project of the Berkeley Bioinformatics Opensource Projects" +
+				       " (<a href='http://www.berkeleybop.org'>BBOP</a>).</font></center></body></html>");
 
 		final GroupLayout groupLayout = new GroupLayout((JComponent) footerPanel);
 		groupLayout.setHorizontalGroup(
