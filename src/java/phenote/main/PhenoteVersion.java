@@ -9,13 +9,14 @@ import org.apache.log4j.Logger;
 
 public class PhenoteVersion {
 
-  private static String hardwiredDefaultVersion = "1.6-beta7";
+  private static String hardwiredDefaultVersion = "1.6-beta10";
 
   public static String versionString() {
     final String version = System.getProperty("phenote.version");
     if (version != null) {
       return version;
     } else {
+      // This seems to happen every time--can we fix it?
       log().info("Version information not found as property, going with hardwired default of "+hardwiredDefaultVersion);
       
       return hardwiredDefaultVersion;
