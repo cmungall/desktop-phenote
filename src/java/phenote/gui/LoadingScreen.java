@@ -50,7 +50,7 @@ public class LoadingScreen extends JFrame {
     super();
     setBackground(Color.WHITE);
     getContentPane().setBackground(Color.WHITE);
-    setBounds(100, 100, 500, 375);
+    setBounds(100, 100, 600, 375);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setResizable(false);
     
