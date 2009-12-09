@@ -3,7 +3,7 @@
   <head>
 
     <!--#include virtual="ssi/head.html" -->
-    <title>Phenote: A Phenotype Annotation Tool using Ontologies</title>
+    <title>Phenote: Past News and Events</title>
 
   </head>
   <body>
@@ -12,11 +12,9 @@
 
     <div id="main_container_aux">
       <div id="main_content_aux">
-	<div class="catch_phrase">
-	  News and Events
-	</div>
 
 	<h1>Past News and Events</h1>
+
 	  <h2>June, 2008</h2>
 	  <ul>
 	    <li>06.05.2008, 8:30am PDT - Phenote Users Group, Online</li>
@@ -25,6 +23,8 @@
 	  <h2>April, 2008</h2>
 	  <ul>
 	    <li>04.03.2008 - Phenote Users Group, Online</li>
+	    <li>04.15.2008 - <a href="http://www.phenote.org/phenote/1.6-beta4/phenote.jnlp">Phenote webstart release 1.6-beta4</a></li>
+	    <li>04.16.2008 - Phenote will receive a "Google Summer of Code" student through our hosting organization, NESCent.  Welcome Michael Wallinga to our team for the summer.  You can find a description of his project <a href="http://www.nescent.org/wg_phyloinformatics/Phyloinformatics_summer_of_Code_2008#Matrix_display_of_phenotype_annotations_using_ontologies_in_Phenote">here</a>.</li>
 	    <li>04.17-21.2008 <a
 	    href="http://www.nescent.org/phenoscape/Main_Page">Phenoscape</a>
 	    Jamboree Meeting, <a href="http://www.nescent.org/">NESCent</a>,
@@ -35,7 +35,7 @@
 	<ul>
 	  <li>03.06.2008 - Phenote Users Group, Online
 	  </li>
-	  <li>03.03.2008 - NEW<a href="http://www.phenote.org/phenote/1.5/phenote.jnlp">Phenote webstart release 1.5</a></li>
+	  <li>03.03.2008 - <a href="http://www.phenote.org/phenote/1.5/phenote.jnlp">Phenote webstart release 1.5</a></li>
 	  <li>03.03.2008 - Silent release of <a href="http://www.phenote.org/download.shtml">Phenote+ for Mac OSX</a> </li>
 	  <li>03.01.2008 - We'd like to know more about what kind of computer you are using.  <a href="http://FreeOnlineSurveys.com/rendersurvey.asp?sid=bf1bbbvdppbjw56402139" onClick="window.open('http://FreeOnlineSurveys.com/rendersurvey.asp?sid=bf1bbbvdppbjw56402139', '','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width=700,height=480');return false" ><b>Please take our survey</b></a></li>	  
 	  </ul>
@@ -129,7 +129,7 @@
 	  </li>
 	<li>Apr 5, <a href="http://www.bioontology.org/">NCBO</a> Scientific Advisory Board meeting</li>
 	</ul>
-	<h2>March</h2>
+	<h2>March 2007</h2>
 	<ul>
 	  <li>Mar 28-29, site visit, <a href="http://zfin.org">ZFin</a>, Eugene, OR
 	  </li>

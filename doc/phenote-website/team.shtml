@@ -15,55 +15,54 @@
 	<div class="catch_phrase">
 	Project Team
 	</div>
-       <h2 class="bio"><a name="exec" id="exec"></a>
-	Development</h2>
 	<div class="fourth_bio">
-	<p><img src="http://www.bioontology.org/images/team/gibson.jpg" title="Mark Gibson" alt="Mark Gibson" height="130" /></p>
-      <p><a href="http://www.berkeleybop.org/content/about/people/" title="Mark Gibson">Mark Gibson</a>, MSE</p>
-	</div>	
-	<div class="fourth_bio">
-	<p><img src="http://www.bioontology.org/images/team/washington.jpg" title="Nicole Washington" alt="Nicole Washington" height="130" /> </p>
-      <p><a href="http://berkeleybop.org/content/about/people/nlwashington/" title="Nicole Washington">Nicole Washington</a>, PhD </p>
+	<p><img src="http://berkeleybop.org/images/people/nicole.jpg" title="Nicole Washington" alt="Nicole Washington" height="130" /> </p>
+      <p><a href="http://berkeleybop.org/people.html" title="Nicole Washington">Nicole Washington</a></p>
 	</div>	
       <div class="fourth_bio">
-      <p><img src="http://www.bioontology.org/images/team/mungall.jpg" title="Chris Mungall" alt="Chris Mungall" height="130" /></p>
-      <p><a href="http://www.fruitfly.org/%7Ecjm/" title="Chris Mungall">Chris Mungall</a>, BSc</p>
+      <p><img src="http://berkeleybop.org/images/people/chris.jpg" title="Chris Mungall" alt="Chris Mungall" height="130" /></p>
+      <p><a href="http://berkeleybop.org/people.html" title="Chris Mungall">Chris Mungall</a></p>
     </div>
     <div class="fourth_bio">
-      <p><img src="http://www.bioontology.org/images/team/lewis.jpg" title="Suzanna Lewis" alt="Suzanna Lewis" height="130" /> </p>
-      <p><a href="http://www.berkeleybop.org/content/about/people/" title="Suzanna Lewis">Suzanna Lewis</a>, MS</p>
+      <p><img src="http://berkeleybop.org/images/people/nomi.jpg" title="Nomi Harris" alt="Nomi Harris" height="130" /> </p>
+      <p><a href="http://berkeleybop.org/people.html" title="Nomi Harris">Nomi Harris</a></p>
     </div>
+    <div class="fourth_bio">
+      <p><img src="http://berkeleybop.org/images/people/amina.jpg" title="Amina Abdulla" alt="Amina Abdulla" height="130" /> </p>
+      <p><a href="http://berkeleybop.org/people.html" title="Amina Abdulla">Amina Abdulla</a></p>
+    </div>
+
+    <div class="fourth_bio">
+      <p><img src="http://berkeleybop.org/images/people/suzi-icon.png" title="Suzanna Lewis" alt="Suzanna Lewis" height="130" /> </p>
+      <p><a href="http://berkeleybop.org/people.html" title="Suzanna Lewis">Suzanna Lewis</a></p>
+    </div>
+	<div class="catch_phrase">
+	Former Team Members
+	</div>
+
+       <div class="fourth_bio">
+	  <p><img src="http://berkeleybop.org/images/people/mark.jpg" title="Mark Gibson" alt="Mark Gibson" height="130" /></p>
+	  <p><a href="http://berkeleybop.org/people.html" title="Mark
+	  Gibson">Mark Gibson</a> (former lead developer)</p>
+       </div>	
+
     <div class="clearall"></div>
+<p></
     <h2><a href="contact.shtml">Contact us...</a></h2>
 
-      <h1>Affiliations</h1>
-
-	<h3>
-	  <a href="http://bioontology.org/">
-	    National Center for Biomedical Ontology (NCBO)
-	  </a>
-	</h3> 
-	<p>
-	  The NCBO is a consortium of leading biologists, clinicians,
-	  informaticians, and ontologists who develop innovative
-	  technology and methods that allow scientists to create,
-	  disseminate, and manage biomedical information and knowledge
-	  in machine-processable form.
-	</p>
-
+<br /><br /><br />
 	<h3>
 	  <a href="http://www.berkeleybop.org/">
-	    Berkeley Bioinformatics and Ontologies Project (BBOP)
+	    Berkeley Bioinformatics and Open-Source Projects (BBOP)
 	  </a>
 	</h3> 
 	<p>
-	  The BBOP is located at the Lawrence Berkeley National Labs,
+	  The BBOP, based at the Lawrence Berkeley National Labs,
 	  is a diverse group of scientific researchers and software
 	  engineers dedicated to developing tools and applying
 	  computational technologies to solve biological
 	  problems. Members of the group contribute to a number of
-	  projects, including The Gene Ontology, The National Center
-	  for Biomedical Ontology, the Model Organism Encyclopedia
+	  projects, including The Gene Ontology (GO), the Model Organism Encyclopedia
 	  of DNA Elements (modENCODE), and the Generic Model Organism
 	  Database Project.
 	</p>

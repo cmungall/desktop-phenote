@@ -3,7 +3,7 @@
   <head>
 
     <!--#include virtual="ssi/head.html" -->
-    <title>Phenote</title>
+    <title>Phenote ontology resources</title>
 
   </head>
   <body>
@@ -15,19 +15,8 @@
 	<div class="catch_phrase">
 	  Ontology Resources
 	</div>
-	<p>You can find out more about available ontologies for use during
-	annotation with Phenote software:</p>
-	<h3>
-	  <a href="http://www.bioontology.org/ncbo/faces/pages/ontology_list.xhtml">
-	    NCBO Bioportal
-	  </a>
-	</h3> 
-	<p>
-	  On this page you can find a listing of biomedical ontologies 
-	  that have been submitted to the NCBO.  From there you can link
-	  to their project websites, download the ontology files, and search
-	  their contents.
-	</p>
+	<p>More information about ontologies that can be used for
+	annotation with Phenote software can be found at:</p>
 
         <h3>
 	  <a href="http://www.obofoundry.org">OBO Foundry
@@ -62,6 +51,17 @@
 	location with a unified output format.
 	</p>
 	
+	<h3>
+	  <a href="http://www.bioontology.org/ncbo/faces/pages/ontology_list.xhtml">
+	    NCBO Bioportal
+	  </a>
+	</h3> 
+	<p>
+	  On this page you can find a listing of biomedical ontologies 
+	  that have been submitted to the NCBO.  From there you can link
+	  to their project websites, download the ontology files, and search
+	  their contents.
+	</p>
       </div>
     </div>
 

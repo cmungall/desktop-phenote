@@ -3,7 +3,7 @@
   <head>
 
     <!--#include virtual="ssi/head.html" -->
-    <title>Phenote: A Phenotype Annotation Tool using Ontologies</title>
+    <title>Phenote: Downloads</title>
 
   </head>
   <body>
@@ -39,9 +39,9 @@
 	  </ol>
 	</li>
 	</ul>
-	<p>Phenote+ v1.6:  We will be distributing Phenote+ using the Sourceforge download system.  You can now find Phenote <a href="https://sourceforge.net/project/showfiles.php?group_id=76834&package_id=270424">betas</a> and <a href="https://sourceforge.net/project/showfiles.php?group_id=76834&package_id=272237">releases</a> by visiting their pages.  </p>
+	<p>Phenote+ v1.6:  We will be distributing Phenote+ using the SourceForge download system.  You can now find Phenote <a href="https://sourceforge.net/project/showfiles.php?group_id=76834&package_id=270424">betas</a> and <a href="https://sourceforge.net/project/showfiles.php?group_id=76834&package_id=272237">releases</a> by visiting their pages.  </p>
 
-	<p> We will continue to post links to major releases on this website, but you are invited to download the software by directly connecting to the <a href="https://sourceforge.net/project/showfiles.php?group_id=76834">Phenote Sourceforge Project page</a></p>
+	<p> We will continue to post links to major releases on this website, but you are invited to download the software by directly connecting to the <a href="https://sourceforge.net/project/showfiles.php?group_id=76834">Phenote SourceForge Project page</a></p>
 
 	<h3>Important Message</h3>
 	<p>For version 1.5 we will be introducing a new look and feel that we

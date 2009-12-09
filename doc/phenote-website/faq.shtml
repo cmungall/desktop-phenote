@@ -3,7 +3,7 @@
   <head>
 
     <!--#include virtual="ssi/head.html" -->
-    <title>Phenote: A Phenotype Annotation Tool</title>
+    <title>Phenote FAQ</title>
 
   </head>
   <body>
@@ -61,8 +61,8 @@
 	<p>
 	Yep! There are several online resources that can help you learn more.  Some of these include:</p>
 	  <ul>
-	    <li><a href="http://www.bioontology.org/">National Center for Biomedical Ontology</a></li>
 	    <li><a href="http://www.obofoundry.org/">OBO Foundry</a></li>
+	    <li><a href="http://www.bioontology.org/">National Center for Biomedical Ontology</a></li>
 	  </ul>
 	<h1>Using Phenote</h1>
 	<h3>Is there some online documentation?</h3>
@@ -76,14 +76,14 @@
 	<p>
 	Not yet, but that feature is coming soon.
 	</p>
-	<h3>Are there any tools that allow me to analyze my annotations?</h3>
-	<p> Presently Phenote does not include any analysis tools.  However,
-	<a href="http://www.bioontology.org/wiki/index.php/OBD:Main_Page">tools</a> 
-	are being developed within the NCBO that will allow
-	for data warehousing, querying, and analysis.  Our hope is to have
-	them integrated in Phenote whenever possible.  Please stay tuned 
-	for future updates and take a look at our <a href="roadmap.shtml">
-	roadmap</a> to find out more.</p>
+<!-- 	<h3>Are there any tools that allow me to analyze my annotations?</h3> -->
+<!-- 	<p> Presently Phenote does not include any analysis tools.  However, -->
+<!-- 	<a href="http://www.bioontology.org/wiki/index.php/OBD:Main_Page">tools</a>  -->
+<!-- 	are being developed within the NCBO that will allow -->
+<!-- 	for data warehousing, querying, and analysis.  Our hope is to have -->
+<!-- 	them integrated in Phenote whenever possible.  Please stay tuned  -->
+<!-- 	for future updates and take a look at our <a href="roadmap.shtml"> -->
+<!-- 	roadmap</a> to find out more.</p> -->
       </div>
     </div>
 
