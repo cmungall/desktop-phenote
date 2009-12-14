@@ -2,6 +2,7 @@ package phenote.config;
 
 // this should be moved to gui - actually i think ConfigGui may more or less replace it?
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Frame;
@@ -43,6 +44,8 @@ import org.apache.log4j.Logger;
 import phenote.gui.GridBagUtil;
 import phenote.util.FileUtil;
 
+import phenote.config.ProxyDialog;
+
 public class ConfigFileQueryGui {
 
   //private String selection;
@@ -52,6 +55,7 @@ public class ConfigFileQueryGui {
   private ButtonGroup buttonGroup;
   private boolean hasCancelButton = false;
   private boolean isCancelled = false;
+  private static final Logger LOG = Logger.getLogger(ConfigFileQueryGui.class);
 
   public static String queryUserForConfigFile() {
     try { return queryUserForConfigFile(false); }
@@ -79,8 +83,9 @@ public class ConfigFileQueryGui {
 
     JPanel mainPanel = new JPanel();
     mainPanel.setLayout(new GridBagLayout());
+    mainPanel.setBackground(Color.white);
 
-    JLabel text = new JLabel("Please pick a configuration for Phenote: ");
+    JLabel text = new JLabel("Choose a configuration for Phenote: ");
     int center = GridBagConstraints.CENTER;
     GridBagConstraints gbc = GridBagUtil.makeAnchorConstraint(0,0,center);
     gbc.gridwidth=3;
@@ -107,21 +112,33 @@ public class ConfigFileQueryGui {
     }
     ++gbc.gridy;
     mainPanel.add(buttonPanel,gbc);
-    JButton ok = new JButton("OK");
+
+    JButton proxyButton = new JButton("Set proxy...");
     gbc.gridwidth=1;
     ++gbc.gridy;
+    mainPanel.add(proxyButton,gbc);
+    proxyButton.addActionListener( new ActionListener() {
+		    public void actionPerformed(ActionEvent evt) {
+			    ProxyDialog pd = new ProxyDialog(null);
+			    pd.setVisible(true);
+		    }
+	    }
+	    );
+
+    JButton ok = new JButton("OK");
+    ++gbc.gridx;
     mainPanel.add(ok,gbc);
     ok.addActionListener(new OkActionListener());
+
     if (hasCancelButton) {
       JButton cancel = new JButton("Cancel");
       cancel.addActionListener(new CancelActionListener());
-      ++gbc.gridx;
-      mainPanel.add(cancel,gbc);
+//      mainPanel.add(cancel,gbc);
     }
-    JButton info = new JButton("Info...");
-    info.addActionListener(new InfoActionListener());
-    ++gbc.gridx;
-    mainPanel.add(info,gbc);
+//    JButton info = new JButton("Info...");
+//    info.addActionListener(new InfoActionListener());
+//    ++gbc.gridx;
+//    mainPanel.add(info,gbc);
 
     Frame f = phenote.main.Phenote.getPhenote().getFrame();
     // true -> modal -> this is crucial! 
@@ -131,12 +148,20 @@ public class ConfigFileQueryGui {
     JScrollPane scroll = new JScrollPane(mainPanel);
     // shouldnt take up whole screen - tool bars get in the way and dont know if
     // tool bar is on top or bottom - so subtract 100
-    int height = Math.min(getScreenHeight()-100,1000);
-    scroll.setPreferredSize(new Dimension(280,height));
-    scroll.setMinimumSize(new Dimension(280,(int)(height*0.7))); // just in case
+    int height = Math.min(getScreenHeight()-100,900);
+//    System.out.println("Phenote config window height: " + height);  // DEL
+    scroll.setPreferredSize(new Dimension(300,height));
+    scroll.setMinimumSize(new Dimension(300,(int)(height*0.7))); // just in case
     //mainPanel.setPreferredSize(new Dimension(200,300));
+//    mainPanel.setPreferredSize(new Dimension(300,height+50));
+//    mainPanel.setPreferredSize(buttonPanel.getSize());
     mainPanel.validate();
     dialog.add(scroll);
+
+//    dialog.add(info);
+//    dialog.add(cancel);
+
+    dialog.setPreferredSize(new Dimension(300,height+30));
     dialog.pack();
     centerOnScreen(dialog);
     dialog.addWindowListener(new WindowCancel());
@@ -150,9 +175,9 @@ public class ConfigFileQueryGui {
   private class OkActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       //selection = g.getSelection().getActionCommand(); 
-      //String selectedFile = (String)(buttonGroup.getSelection().getValue("filename"));
+//	    String selectedFile = (String)(buttonGroup.getSelection()).getValue(); // DEL
       //okPressed = true;
-      //System.out.println("ok pressed in ok action listener "+okPressed);
+//	    System.out.println("ok pressed in ok action listener--selectedfile = " + selectedFile); // DEL
       dialog.dispose();
     }  
   }
@@ -193,6 +218,7 @@ public class ConfigFileQueryGui {
     }
     public void actionPerformed(ActionEvent e) {
       selectedFile = configFilename;
+      LOG.debug("User selected config file " + selectedFile);
     }
   }
   private String makeDisplayFromFile(String f) {
