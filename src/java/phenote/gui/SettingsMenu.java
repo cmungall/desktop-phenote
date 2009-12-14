@@ -209,8 +209,8 @@ class SettingsMenu extends JMenu {
           throw new ConfigException("ERROR: Got no config from user");
 
         if (currentConfig != null && newCfg.equals(currentConfig))
-          throw new ConfigException("Config not changed"); // ?? or do nothing?
-
+//          throw new ConfigException("Config not changed"); // ?? or do nothing?
+		return;
 
         Config.writeMyPhenoteDefaultFile(newCfg);
         
@@ -219,7 +219,7 @@ class SettingsMenu extends JMenu {
       }
       catch (ConfigFileQueryGui.CancelEx ex) {} // its cancelled do nothing
       catch (ConfigException x) {
-        String m = "Failed to change configuration " + x.getMessage();
+        String m = "Failed to change configuration: " + x.getMessage();
         JOptionPane.showMessageDialog(null, m, "Config error",
                 JOptionPane.ERROR_MESSAGE);
       }
