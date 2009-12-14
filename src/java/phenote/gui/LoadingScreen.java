@@ -50,7 +50,7 @@ public class LoadingScreen extends JFrame {
     super();
     setBackground(Color.WHITE);
     getContentPane().setBackground(Color.WHITE);
-    setBounds(100, 100, 600, 375);
+    setBounds(100, 100, 700, 375);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setResizable(false);
     
@@ -131,7 +131,7 @@ public class LoadingScreen extends JFrame {
 		footerTextPane.setFont(new Font("Helvetica", Font.PLAIN, 9));
 		footerTextPane.setAutoscrolls(false);
 		footerTextPane.setEditable(false);
-		footerTextPane.setText("<html><body><center><font size=2>Phenote is a project of the Berkeley Bioinformatics Opensource Projects" +
+		footerTextPane.setText("<html><body><center><font size=2>Phenote is a project of the Berkeley Bioinformatics Open-Source Projects" +
 				       " (<a href='http://www.berkeleybop.org'>BBOP</a>).</font></center></body></html>");
 
 		final GroupLayout groupLayout = new GroupLayout((JComponent) footerPanel);
