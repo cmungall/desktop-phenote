@@ -342,8 +342,8 @@ public class CharacterTableController {
 
 	private void addInitialBlankCharacter() {
 	  if (Config.inst().getGroupAllowsEmptyCharacters(this.getGroup()) == true) return;
-	  log().debug("Adding initial blank character");
-		this.getEditManager().addInitialCharacter();
+//	  log().debug("Adding initial blank character");
+	  this.getEditManager().addInitialCharacter();
 	}
 
 	/**
