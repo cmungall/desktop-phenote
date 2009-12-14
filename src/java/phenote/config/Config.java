@@ -59,7 +59,6 @@ import phenote.gui.SearchParams;
 import phenote.main.PhenoteVersion;
 import phenote.util.FileUtil;
 
-
 public class Config {
 
   public final static String  FLYBASE_DEFAULT_CONFIG_FILE = "flybase.cfg";
@@ -181,6 +180,7 @@ public class Config {
   // --update - set up cmd line!
   public void updateConfigFileWithNewVersion(String configFile) throws ConfigException {
     if (configFile==null) configFile = getDefaultFile();
+    log().info("Updating config file " + configFile + " with newer version");
     setConfigFile(configFile,true,false,true);
   }
 
@@ -247,7 +247,7 @@ public class Config {
     if (usePersonalConfig) { // for standalone not servlet
       configFile = getMyPhenoteConfig(configFile,overwritePersonalConfig,mergeConfigs);
     }
-    System.out.println("Attempting to read config from "+configFile);
+    System.out.println("Attempting to read config from "+configFile + ".  usePersonal = " + usePersonalConfig + ", overwritePersonal = " + overwritePersonalConfig);
     //parseXmlFileWithDom(configFile); // do parse here?
     //URL configUrl = getConfigUrl(filename);
     //System.out.println("config file: "+configUrl);
