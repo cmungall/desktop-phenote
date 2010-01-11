@@ -285,8 +285,8 @@ public class Ontology {
   /** might move this elsewhere - subclass? data adap specific wrapper? */
   public void setTimestamp(long t) {
     ontologyTimestamp = t;
-    log().info("\n"+getName()+" Ontology date: "+getOntologyDate()
-               +"\nVersion: "+getVersion());
+    log().info(getName()+" Ontology date: "+getOntologyDate()
+               +", Version: "+getVersion());
   }
   public long getTimestamp() { return ontologyTimestamp; }
   /** for obo files this is the filename */
