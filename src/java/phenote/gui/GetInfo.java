@@ -43,6 +43,7 @@ import phenote.datamodel.Ontology;
 import phenote.datamodel.OntologyException;
 import phenote.main.Phenote;
 import phenote.main.PhenotePlus;
+import phenote.main.PhenoteVersion;
 import phenote.util.FileUtil;
 import phenote.config.Config;
 import phenote.config.xml.OntologyFileDocument.OntologyFile;
@@ -180,7 +181,7 @@ public class GetInfo extends JDialog {
 	
 	private void setGeneralInfo() {
 		String info = "<html>";
-		info+="Phenote+ version 1.5<br>";  //figure out what variable this is
+		info+="Phenote version " + PhenoteVersion.versionString() + "<br>";
 		info+="# ontologies loaded: " + ontologies.length+"<br>";
 //		info+="# annotations: "+charListManager.getCharList().size();
 		try {
