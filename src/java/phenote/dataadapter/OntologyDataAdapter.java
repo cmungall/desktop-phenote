@@ -254,7 +254,7 @@ public class OntologyDataAdapter {
       try {
         URL reposUrl = ontCfg.getReposUrl(); // throws MalfUrlEx
         //long mem = Runtime.getRuntime().totalMemory()/1000000; //startTimer();
-        LOG.debug(reposUrl+": checking repository for newer version\n");
+        LOG.debug(reposUrl+": checking repository for newer version");
         this.updateLoadingScreen("Checking for updates: "+ontCfg.getName(), true);
         // if out of synch copies repos to local(.phenote/obo-files)
         // url may be jar/obo-files or svn/obo-files but this function will put file
@@ -307,20 +307,26 @@ public class OntologyDataAdapter {
       if (localUrl != null) {
         try { loc = getOboDate(localUrl); }
         catch (OntologyException e2) { loc = 0; } // no local date - keep as 0
-	LOG.debug("For " + localUrl + ", obodate = " + loc);
+	LOG.debug("Date of localURL " + localUrl + "= " + loc);
       }
       else
         useRepos = true;
+
       //if autoupdate without popup
       //LOG.debug("repos date "+reposDate+" local date "+loc);
       if ((autoUpdate && (timer==0)) && (reposDate > loc)) {
-        useRepos = true;
-      } else if (reposDate > loc || useRepos) {
+	  useRepos = true;
+      } 
+      else if ((autoUpdate && (timer==0)) && (loc == 0 || reposDate == 0)) {
+	      LOG.debug("Couldn't determine update time of both local copy and repository--updating local copy " + localUrl);
+	      useRepos = true;
+      }
+      else if (reposDate > loc || useRepos) {
         useRepos = SynchOntologyDialog.queryUserForOntologyUpdate(ontol);
       }
+      LOG.debug("autoUpdate = " + autoUpdate + ", timer = " + timer + ", reposDate = " + reposDate + ", loc = " + loc + ", useRepos = " + useRepos); // DEL
     }
     if (useRepos) {
-
       // i think its always better to download as http/repos is slow
 //    boolean downloadToLocal = false; // from Config!
 //    if (!downloadToLocal) {
@@ -378,7 +384,13 @@ public class OntologyDataAdapter {
           throw new OntologyException("getOboDate: couldn't parse date line from " + oboUrl + ": "+line);
         return d.getTime();
       }
-      throw new OntologyException("No date found in "+oboUrl);
+      // If we can't find a date: line, can we open an urlConnection and ask for the date?
+      URLConnection urlConnection = oboUrl.openConnection();
+      long date = urlConnection.getDate();  // number of milliseconds since January 1, 1970 GMT
+      // Doesn't seem to work--returns 0.
+      LOG.debug("Couldn't find a date line in " + oboUrl + "--getDate returned " + date);
+      return date;
+//      throw new OntologyException("No date found in "+oboUrl);
     } catch (IOException e) { throw new OntologyException(e); }
   }
 
