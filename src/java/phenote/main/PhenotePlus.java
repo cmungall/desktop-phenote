@@ -24,6 +24,6 @@ public class PhenotePlus {
   }
 
   public static String getAppName() {
-    return "Phenote+";
+    return "Phenote";
   }
 }
