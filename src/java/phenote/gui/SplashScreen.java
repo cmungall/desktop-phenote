@@ -6,6 +6,7 @@ http://www.devdaily.com/java/edu/SplashScreen/SplashScreen.java
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.ImageIcon;
@@ -29,7 +30,10 @@ public class SplashScreen extends JWindow {
 //  JTextArea messagePanel = new JTextArea();
   ImageIcon imageIcon;
   private boolean enable = true;
-
+	private final static int DEFAULT_WIDTH = 800;
+	private final static int DEFAULT_HEIGHT = 400;
+	private static int windowWidth;
+	private static int windowHeight;
   
   public SplashScreen(ImageIcon imageIcon) {
     this(imageIcon,true);
@@ -37,9 +41,17 @@ public class SplashScreen extends JWindow {
   
   // probably should take enable out
   public SplashScreen(ImageIcon imageIcon, boolean enable) {
+	  this(imageIcon,enable,DEFAULT_WIDTH,DEFAULT_HEIGHT);
+  }
+
+
+  public SplashScreen(ImageIcon imageIcon, boolean enable, int width, int height) {
     this.enable = enable;
     if (!enable) return;
     this.imageIcon = imageIcon;
+    windowWidth = width;
+    windowHeight = height;
+    this.setPreferredSize(new Dimension(width,height));
     try {
       jbInit();
     }
@@ -48,6 +60,10 @@ public class SplashScreen extends JWindow {
     }
   }
 
+ public static Dimension getPreferredDimension() {
+    return new Dimension(windowWidth,windowHeight);
+ }
+
   // note - this class created with JBuilder
   void jbInit() throws Exception {
     imageLabel.setIcon(imageIcon);
@@ -55,11 +71,12 @@ public class SplashScreen extends JWindow {
     southPanel.setLayout(southPanelFlowLayout);
     southPanel.setBackground(Color.BLUE);
 //    messagePanel.setBackground(Color.BLACK);
-    this.getContentPane().add(imageLabel, BorderLayout.CENTER);
+    this.getContentPane().add(imageLabel, BorderLayout.CENTER);  // I would like the image to actually be centered, and it's not--it's all the way to the left.
     this.getContentPane().add(southPanel, BorderLayout.SOUTH);
 //    this.getContentPane().add(messagePanel, BorderLayout.NORTH);
     southPanel.add(progressBar, null);
     this.pack();
+    this.getContentPane().repaint(); // ?
     setAlwaysOnTop(false); // doesnt work on linux??? stays on top! annoying!
     ErrorManager.inst().addErrorListener(new SplashErrorListener());
   }
