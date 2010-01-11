@@ -1,57 +1,89 @@
 package phenote.gui.menu;
 
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.File;
 
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.WindowConstants;
 
+import org.bbop.framework.GUIManager;
+import org.bbop.framework.HelpManager;
+import org.bbop.swing.BackgroundImagePanel;
 import org.bbop.swing.DynamicMenu;
+import org.bbop.swing.SwingUtil;
 
-import phenote.gui.actions.AboutAction;
-import phenote.gui.actions.HelpAction;
-import phenote.gui.actions.TermRequestAction;
+import org.apache.log4j.*;
+
+import phenote.config.Preferences;
+import phenote.gui.SplashScreen;
 import phenote.main.Phenote;
+import phenote.main.PhenoteVersion;
 
-
-
-/**
- * The basic Help menu for the main set of menus.  This is to include functions
- * of About, Help, etc.  Currently, the "Term Request" gui is in here, but
- * probably ought to be in a different menu.<p>
- * This should utilize the basic Help infrastructure that is included in the 
- * bbop framework...but it doesn't yet.<p>
- * Additional features for this menu in the future might include the ability
- * to query the repository for updates to the software.<p>
- * 
- * @author Nicole Washington
- *
- */
+//public class PhenoteHelpMenu extends HelpMenu {
 public class PhenoteHelpMenu extends DynamicMenu {
 
-	private JMenuItem help;
-	
-  public PhenoteHelpMenu() {
-    super("Help");
-    init();
-  }
+	public static SplashScreen splashScreen;
 
-  private void init() {
+	private static String logoFile = "src/java/phenote/images/phenote_logo.jpg";
 
-    help = new JMenuItem(new HelpAction());
-    add(help); 
+	//initialize logger
+	protected final static Logger logger = Logger.getLogger(PhenoteHelpMenu.class);
 
-    if (!Phenote.isRunningOnMac()) {
-      // we don't want to add About to the Help menu on Mac
-      // instead there is About under the automatic Phenote menu
-      JMenuItem about = new JMenuItem(new AboutAction());
-      add(about);
-    }
-  
-    JMenuItem request = new JMenuItem(new TermRequestAction());
-    add(request);
-    
-  }
+	public PhenoteHelpMenu() {
+		super("Help");
+		JMenuItem helpItem = new JMenuItem("User Guide");
+		helpItem.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					HelpManager.getManager().displayHelp();
+				}
+			});
+		add(helpItem);
 
-//   for testing
-  public void clickLoad() {
-    help.doClick();
-  }
+		HelpManager.getManager().setHelpSetFile(
+			new File(Preferences.getInstallationDirectory() + 
+				 "/doc/phenote-website/help/Phenote.hs"));
+
+		JMenuItem aboutItem = new JMenuItem("About");
+		aboutItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showAboutFrame();
+//				AboutAction.splashScreenInit();
+			}
+		});
+
+		add(aboutItem);
+	}
+
+	public static void showAboutFrame() {
+//		logger.debug("showAboutFrame: calling Phenote.splashScreenInit()"); // DEL
+		ImageIcon myImage = new ImageIcon(logoFile);
+		SplashScreenListener splashScreenListener = new SplashScreenListener();
+		splashScreen = new SplashScreen(myImage,true,230,210); // true->enable
+		splashScreen.setLocationRelativeTo(null);
+//	splashScreen.setProgressMax(100);
+		splashScreen.setScreenVisible(true);
+		splashScreen.addMouseListener(splashScreenListener);
+		splashScreen.setProgress(" Phenote version "+PhenoteVersion.versionString() + " ", 0);
+	}
+
+	private static class SplashScreenListener implements MouseListener {
+		public void mouseClicked(MouseEvent e) {
+			//the splash screen will go away when clicked w/ mouse
+			splashScreen.setScreenVisible(false);
+			splashScreen = null;
+			return;
+		}
+		public void mouseExited(MouseEvent e) {;}
+		public void mousePressed(MouseEvent e) {;}
+		public void mouseReleased(MouseEvent e) {;}
+		public void mouseEntered(MouseEvent e) {;}
+	}
 }
