@@ -1,5 +1,9 @@
 package phenote.gui;
 
+/** 
+ * This is the Help menu for the old Phenote (Phenote 1, not plus)
+ */
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -12,17 +16,17 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
-import phenote.main.HelpManager;
+import phenote.main.OldHelpManager;
 import phenote.main.PhenoteVersion;
 
-public class HelpMenu extends JMenu {
+public class OldHelpMenu extends JMenu {
 
   private JMenuItem help;
   public SplashScreen splashScreen;
   public TermRequestGUI termRequester;
   private String logoFile = "src/java/phenote/images/phenote_logo.jpg";
 
-    public HelpMenu() {
+    public OldHelpMenu() {
     super("Help");
     init();
   }
@@ -35,12 +39,12 @@ public class HelpMenu extends JMenu {
     help = new JMenuItem("Phenote Help");
     help.setEnabled(true);
     help.setActionCommand("help");
-    HelpBroker hb = HelpManager.getHelpBroker();
+    HelpBroker hb = OldHelpManager.getHelpBroker();
     if (hb == null) {
       System.out.println("Unable to retrieve help broker");
     }
     else {
-      help.addActionListener(new CSH.DisplayHelpFromSource(HelpManager.getHelpBroker()));
+      help.addActionListener(new CSH.DisplayHelpFromSource(OldHelpManager.getHelpBroker()));
       //help.addActionListener(actionListener);
       add(help); 
     }

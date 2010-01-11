@@ -19,7 +19,7 @@ public class MenuManager {
   
   private JMenu viewMenu;
   
-  private HelpMenu helpMenu;
+  private OldHelpMenu helpMenu;
 
   private SettingsMenu settingsMenu;
   
@@ -64,7 +64,7 @@ public class MenuManager {
     editMenu = new EditMenu();
     menuBar.add(new phenote.gui.menu.FileMenu()); // phenote2 file menu
     settingsMenu = new SettingsMenu();
-    helpMenu = new HelpMenu();
+    helpMenu = new OldHelpMenu();
     this.menuBar.add(editMenu);
     this.menuBar.add(settingsMenu);
     this.menuBar.add(helpMenu);
