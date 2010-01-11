@@ -534,10 +534,10 @@ public class OntologyUpdate {
       	}
       }
       if (up==0) {
-      	LOG.info("no ontologies needed updating");
-      	m="no ontologies needed updating";
+      	m="No ontologies needed updating";
+      	LOG.info(m);
       } else {
-      	m = "Only some ontologies needed updating.";
+      	m = "Only some ontologies needed updating.  ";
         m += up +" of " + numUpdates + " updated";
       }
       	//here, i should just update the window, and switch the button to "done"?
@@ -584,8 +584,8 @@ public class OntologyUpdate {
 				}
       }
         if (up==0) {
-        	LOG.info("no ontologies updated");
-        	m="no ontologies needed updating";
+        	m="No ontologies needed updating";
+        	LOG.info(m);
         } else {
           m = up +" of " + numUpdates + " ontologies have been updated";
         }
@@ -631,10 +631,10 @@ public class OntologyUpdate {
 				}
       }
         if (up==0) {
-        	LOG.info("no ontologies downloaded");
-        	m="no ontologies downloaded";
+        	m="No ontologies downloaded";
+        	LOG.info(m);
         } else {
-          m = up +" ontologies were not found locally and downloaded.";
+          m = up +" ontologies were not found locally and were downloaded.";
         }
 
       JOptionPane.showMessageDialog(null, m, "Phenote Message",
