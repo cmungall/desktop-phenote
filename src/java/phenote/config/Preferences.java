@@ -96,7 +96,7 @@ public class Preferences {
 	protected boolean useModalProgressMonitors = !System.getProperty(
 			"useModalProgressMonitors", "true").equals("false");
 
-	protected static String appName = "Phenote";
+	protected static String appName = "Old Phenote"; // PhenotePlus now returns "Phenote" (1/7/2010)
 
 	protected static boolean batchMode = false;  // true for applications like obo2obo that don't have a gui, false for OBO-Edit and Phenote
 
@@ -430,6 +430,7 @@ public class Preferences {
 		while (tokenizer.hasMoreTokens()) {
 			String token = tokenizer.nextToken();
 			File file = new File(token);
+			// For some reason, when you run Phenote from the command line, the classpath contains all the jars EXCEPT phenote.jar!
 			if (file.getName().equals("phenote.jar")) {
 				try {
 					installationDir = file.getCanonicalFile().getParentFile()
@@ -440,6 +441,8 @@ public class Preferences {
 				}
 			}
 		}
+		// If we still haven't found it, try "."
+		installationDir = new File(".");
 	}
 
 	/** This is not how Phenote records its version (though maybe it should be) */
@@ -522,7 +525,6 @@ public class Preferences {
 	}
 
 	public String getProxyHost() {
-//		System.out.println("Preferences.getProxyHost: " + proxyHost);
 		return proxyHost;
 	}
 	public int getProxyPort() {
@@ -534,7 +536,6 @@ public class Preferences {
 	}
 
 	public void setProxyHost(String proxyHost) {
-//		System.out.println("Preferences.setProxyHost " + proxyHost);
 		this.proxyHost = proxyHost;
 	}
 	public void setProxyPort(int proxyPort) {
@@ -545,7 +546,6 @@ public class Preferences {
 	}
 	public void setProxyProtocol(String protocol) {
 		this.proxyProtocol = protocol;
-//		System.out.println("Preferences.setProxyProtocol " + protocol);
 	}
 
 }
