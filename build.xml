@@ -41,7 +41,7 @@
 	<tstamp>
 		<format property="NOW" pattern="yyyy-MM-dd_HH:mm:ss"/>
 	</tstamp>
-	<property name="phenote.version" value="1.6-beta10"/>
+	<property name="phenote.version" value="1.7-beta1"/>
 	<property name="phenote.build" value="${NOW}"/>
 
     <!-- override this from command line with  -DCONF-FILE=initial-zfin.cfg -->
@@ -136,7 +136,7 @@ them into  the classfiles directory. excludes="test/**"  -->
     </target>
 
     <!-- runs off classfiles not jar, todo: run-jar -->
-    <target name="run" depends="compile">
+    <target name="run-old" depends="compile">
         <java classname="phenote.main.Phenote" fork="yes">
         	<jvmarg value="-Xmx500M"/>
         	<jvmarg value="-Dphenote.version=${phenote.version}"/>
@@ -155,7 +155,7 @@ them into  the classfiles directory. excludes="test/**"  -->
         </java>
     </target>
 
-    <target name="run-plus" depends="compile">
+    <target name="run" depends="compile">
         <java classname="phenote.main.PhenotePlus" fork="yes">
         	<jvmarg value="-Xmx500M"/>
         	<jvmarg value="-Dphenote.version=${phenote.version}"/>
@@ -225,7 +225,7 @@ them into  the classfiles directory. excludes="test/**"  -->
             </classpath>
         </java>
     </target>
-  <target name="run-jar" depends="jar">
+  <target name="run-jar-old" depends="jar">
      <java classname="phenote.main.Phenote" fork="yes" jvmargs="-Xmx300M">
          <!-- arg value="-c configfilehereventually"/ -->
         <classpath>
@@ -235,7 +235,7 @@ them into  the classfiles directory. excludes="test/**"  -->
         </classpath>
      </java>
   </target>
-  <target name="run-jar-plus" depends="jar">
+  <target name="run-jar" depends="jar">
      <java classname="phenote.main.PhenotePlus" fork="yes" jvmargs="-Xmx300M">
          <!-- arg value="-c configfilehereventually"/ -->
         <classpath>
@@ -733,7 +733,7 @@ where xsd files are (conf) -->
 	<target name="installers" depends="jar, dist-init, -install4j_installers" description="Build installers">
 	</target>
 
-	<target name="copy-installers" depends="installers" description="This will copy the installers over to the website, same location at webstart files">
+	<target name="copy-installers" depends="installers" description="This will copy the installers over to the website, same location as webstart files">
 	  <mkdir dir="phenote-webstart/${phenote.version}"/>
 	  <copy todir="phenote-webstart/${phenote.version}">
 	    <fileset file="${release_path}/*"/>
