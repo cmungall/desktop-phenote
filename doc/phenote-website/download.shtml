@@ -25,7 +25,7 @@
 	</p>
 	<h3>Phenote+ installer edition</h3>
 	<ul>
-	<li>Platform-specific installers are available for Phenote+ v1.5 at<a href="https://sourceforge.net/project/showfiles.php?group_id=76834">sourceforge</a> or here:  	
+	<li>Platform-specific installers are available for Phenote+ v1.5 at <a href="https://sourceforge.net/project/showfiles.php?group_id=76834">sourceforge</a> or here:  	
 	<a href="http://www.phenote.org/phenote/1.5/Phenote+_1_5_macos_installer.dmg">MacOS X</a> |
 	<a href="http://www.phenote.org/phenote/1.5/Phenote+_1_5_windows_installer.exe">Windows</a> |
 	<a href="http://www.phenote.org/phenote/1.5/Phenote+_1_5_linux_installer.rpm">Linux</a> |
@@ -33,9 +33,10 @@
 	</li>
 	<ol>
 	  <li>Download your platform-specific package.  (For MacOS, this should self-extract into a disk image. If it doesn't, double-click on the file.  You should see an
-	  icon for the "drive" that the Phenote+ application is on.</li>
+	  icon for the "drive" that the Phenote+ application is on.)</li>
 	  <li>Double-click on the Phenote installer icon.  This will open up the installer software.  You will be asked a few questions, such as the installation location.</li>
-	  <li>When its finished installing, you are ready to go!  Double-click the Phenote application icon and its ready to run.</li>
+	  <li>When it's finished installing, you are ready to go!
+	  Double-click the Phenote application icon to launch Phenote.</li>
 	  </ol>
 	</li>
 	</ul>
@@ -43,15 +44,14 @@
 
 	<p> We will continue to post links to major releases on this website, but you are invited to download the software by directly connecting to the <a href="https://sourceforge.net/project/showfiles.php?group_id=76834">Phenote SourceForge Project page</a></p>
 
-	<h3>Important Message</h3>
-	<p>For version 1.5 we will be introducing a new look and feel that we
-	call the "plus" edition.  We will
-	continue to support the old look-and-feel for a couple more versions.
-	So, if you would like to keep using the original Phenote, launch
+	<h3>Important message</h3>
+	<p>Starting with version 1.5, we have introduced a new look and feel that we
+	call the "plus" edition.  
+	If you would prefer to keep using the original Phenote, launch
 	the webstart edition through the link above.</p>
 
-	<h2>For Developers</h2>
-	Check out our special documentation for running either on the 	<a href="developer-docs/getting-source-code-in-eclipse.shtml">command line or in Eclipse</a> 
+	<h2>For developers</h2>
+	Check out our special documentation for running Phenote from the <a href="developer-docs/getting-source-code-in-eclipse.shtml">command line or in Eclipse</a> 
 
 	<h2>Hardware requirements</h2>
 	<ul>
@@ -62,10 +62,10 @@
 	</ul>
 	<h2>Software requirements</h2>
 	<ul>
-	<li> PC running Windows XP; Mac OSX; Linux; Solaris </li>
-	<li> Webstart:  Internet browser with webstart installed </li>
-	<li> Command line:  Java 1.5 or later; Ant </li>
-	</ul>	
+	<li> Any of these operating systems:  Windows XP; Mac OSX; Linux; Solaris </li>
+	<li> To use webstart:  Internet browser with webstart installed </li>
+	<li> To run from the command line:  Java 1.5 or later; Ant </li>
+	</ul>
 	
       </div>
     </div>
