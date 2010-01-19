@@ -77,17 +77,16 @@ public class OntologyUpdate {
 	private JTable ontologyTable;
 	private JPanel contentPanel = new JPanel(new BorderLayout());
 	List<String> ontsToUpdate = null;
-  private static final Logger LOG = Logger.getLogger(OntologyDataAdapter.class);
-  private java.awt.Frame f = phenote.main.Phenote.getPhenote().getFrame();
-  // true -> modal -> this is crucial! 
-  private JDialog dialog = new JDialog(f, true);
-  private Object[] options = {"Update All","Update","Cancel"};
-  private Object selection = options[0];  //Update All, Update, Cancel
-  int numUpdates = 0;
-  private OntologyFile[] ontologies = Config.inst().getTerminologyDefs().getOntologyFileArray();
-  private boolean[] updateavailable = {};
+        private static final Logger LOG = Logger.getLogger(OntologyDataAdapter.class);
+        private java.awt.Frame f = phenote.main.Phenote.getPhenote().getFrame();
+        // true -> modal -> this is crucial! 
+        private JDialog dialog = new JDialog(f, true);
+        private Object[] options = {"Update All","Update","Cancel"};
+        private Object selection = options[0];  //Update All, Update, Cancel
+        int numUpdates = 0;
+        private OntologyFile[] ontologies = Config.inst().getTerminologyDefs().getOntologyFileArray();
+        private boolean[] updateavailable = {};
 	JProgressBar progressBar;
-
 
 	
 	public static Object queryForOntologyUpdate() {
@@ -103,8 +102,8 @@ public class OntologyUpdate {
 			dialog.setBounds(100, 100, 500, 300);
 			dialog.setResizable(true);
 			dialog.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-      dialog.setLocationRelativeTo(null); // centers panel on screen
-      dialog.setEnabled(true);
+                        dialog.setLocationRelativeTo(null); // centers panel on screen
+                        dialog.setEnabled(true);
 			dialog.setVisible(true);
 			dialog.pack();
 		} else {
@@ -145,10 +144,10 @@ public class OntologyUpdate {
 		
 		
 		ontologyTable.setModel(new OntologyUpdateTableModel());
-    defaultRenderer = ontologyTable.getDefaultRenderer(JButton.class);
-    ontologyTable.setDefaultRenderer(JButton.class,
-			       new JTableButtonRenderer(defaultRenderer));
-    ontologyTable.addMouseListener(new JTableButtonMouseListener(ontologyTable));
+                defaultRenderer = ontologyTable.getDefaultRenderer(JButton.class);
+                ontologyTable.setDefaultRenderer(JButton.class,
+                                                 new JTableButtonRenderer(defaultRenderer));
+                ontologyTable.addMouseListener(new JTableButtonMouseListener(ontologyTable));
 //		ontologyTable.setMaximumSize(new Dimension(300,200));
 		ontologyTable.setMinimumSize(new Dimension(300,100));
 		ontologyTable.setPreferredSize(new Dimension(300,200));
@@ -249,9 +248,8 @@ public class OntologyUpdate {
 		contentPanel.add(messagePanel, BorderLayout.NORTH);
 
 		final JLabel updatesForTheLabel = new JLabel();
-		updatesForTheLabel.setText("Updates for the following ontologies are available!");
+		updatesForTheLabel.setText("Updates for the following ontologies are available:");
 		messagePanel.add(updatesForTheLabel);
-		
 		contentPanel.validate();
 		contentPanel.repaint();
 	}
