@@ -7,9 +7,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.WindowConstants;
@@ -26,13 +26,14 @@ import phenote.config.Preferences;
 import phenote.gui.SplashScreen;
 import phenote.main.Phenote;
 import phenote.main.PhenoteVersion;
+import phenote.util.FileUtil;
 
 //public class PhenoteHelpMenu extends HelpMenu {
 public class PhenoteHelpMenu extends DynamicMenu {
 
 	public static SplashScreen splashScreen;
 
-	private static String logoFile = "src/java/phenote/images/phenote_logo.jpg";
+	private static String logoFile = "images/phenote_logo.jpg";
 
 	//initialize logger
 	protected final static Logger logger = Logger.getLogger(PhenoteHelpMenu.class);
@@ -42,11 +43,14 @@ public class PhenoteHelpMenu extends DynamicMenu {
 		JMenuItem helpItem = new JMenuItem("User Guide");
 		helpItem.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+                                        logger.debug("About to call HelpManager.getManager().displayHelp()"); // DEL
 					HelpManager.getManager().displayHelp();
 				}
 			});
 		add(helpItem);
 
+                logger.debug("PhenoteHelpMenu: setting helpfile to " + Preferences.getInstallationDirectory() + 
+                             "/doc/phenote-website/help/Phenote.hs"); // DEL
 		HelpManager.getManager().setHelpSetFile(
 			new File(Preferences.getInstallationDirectory() + 
 				 "/doc/phenote-website/help/Phenote.hs"));
@@ -64,12 +68,21 @@ public class PhenoteHelpMenu extends DynamicMenu {
 
 	public static void showAboutFrame() {
 //		logger.debug("showAboutFrame: calling Phenote.splashScreenInit()"); // DEL
-		ImageIcon myImage = new ImageIcon(logoFile);
-		SplashScreenListener splashScreenListener = new SplashScreenListener();
+//		ImageIcon myImage = new ImageIcon(logoFile);
+//		URL imageURL = ClassLoader.getSystemResource(logoFile);
+		ImageIcon myImage = null;
+		try {
+			URL imageURL = FileUtil.findUrl(logoFile);
+//			logger.debug("imageURL = " + imageURL); // DEL
+			myImage = new ImageIcon(imageURL);
+		} catch (Exception e) {
+			logger.error("Error trying to find logo file " + logoFile + ": " + e.getMessage());
+		}
 		splashScreen = new SplashScreen(myImage,true,230,210); // true->enable
 		splashScreen.setLocationRelativeTo(null);
 //	splashScreen.setProgressMax(100);
 		splashScreen.setScreenVisible(true);
+		SplashScreenListener splashScreenListener = new SplashScreenListener();
 		splashScreen.addMouseListener(splashScreenListener);
 		splashScreen.setProgress(" Phenote version "+PhenoteVersion.versionString() + " ", 0);
 	}
