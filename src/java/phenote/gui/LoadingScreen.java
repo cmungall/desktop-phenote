@@ -2,6 +2,7 @@ package phenote.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.io.FileNotFoundException;
 
@@ -47,12 +48,18 @@ public class LoadingScreen extends JFrame {
 	 * Create the frame
 	 */
   public LoadingScreen() {
+//	  LoadingScreen(700, 375);  // Default size
+	  this(new Dimension(400, 275));  // Default size
+  }
+
+  public LoadingScreen(Dimension dimension) {
     super();
     setBackground(Color.WHITE);
     getContentPane().setBackground(Color.WHITE);
-    setBounds(100, 100, 700, 375);
+    LOG.debug("LoadingScreen: set bounds to 100, 100, " + (int)dimension.getWidth() + ", " + (int)dimension.getHeight()); // DEL
+    setBounds(100, 100, (int)dimension.getWidth(), (int)dimension.getHeight());
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setResizable(false);
+//    setResizable(false);
     
     final JPanel panel = new JPanel();
     panel.setBackground(Color.WHITE);
@@ -132,7 +139,7 @@ public class LoadingScreen extends JFrame {
 		footerTextPane.setAutoscrolls(false);
 		footerTextPane.setEditable(false);
 		footerTextPane.setText("<html><body><center><font size=2>Phenote is a project of the Berkeley Bioinformatics Open-Source Projects" +
-				       " (<a href='http://www.berkeleybop.org'>BBOP</a>).</font></center></body></html>");
+				       " (<a href='http://www.berkeleybop.org'>BBOP</a>).<br>It is distributed under the FreeBSD license.</font></center></body></html>");
 
 		final GroupLayout groupLayout = new GroupLayout((JComponent) footerPanel);
 		groupLayout.setHorizontalGroup(
@@ -150,8 +157,9 @@ public class LoadingScreen extends JFrame {
 					.addContainerGap())
 		);
 		footerPanel.setLayout(groupLayout);
-		//
 		pack();
+		getContentPane().repaint(); // ?
+		show(); // ?
 	}
 	
 	public void setMessageText(String m) {
@@ -170,6 +178,8 @@ public class LoadingScreen extends JFrame {
     SwingUtilities.invokeLater(new Runnable() {
       public void run() {
         startupProgressBar.setValue(theProgress);
+	getContentPane().repaint(); // ?
+	show(); // ?
       }
     });
   }
@@ -194,6 +204,7 @@ public class LoadingScreen extends JFrame {
     final boolean boo = b;
     SwingUtilities.invokeLater(new Runnable() {
       public void run() {
+	      LOG.debug("LoadingScreen.setScreenVisible " + boo);  // DEL
         setVisible(boo);
       }
     });
