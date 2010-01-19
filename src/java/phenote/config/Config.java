@@ -247,7 +247,7 @@ public class Config {
     if (usePersonalConfig) { // for standalone not servlet
       configFile = getMyPhenoteConfig(configFile,overwritePersonalConfig,mergeConfigs);
     }
-    System.out.println("Attempting to read config from "+configFile + ".  usePersonal = " + usePersonalConfig + ", overwritePersonal = " + overwritePersonalConfig);
+    log().debug("Attempting to read config from "+configFile + ".  usePersonal = " + usePersonalConfig + ", overwritePersonal = " + overwritePersonalConfig);
     //parseXmlFileWithDom(configFile); // do parse here?
     //URL configUrl = getConfigUrl(filename);
     //System.out.println("config file: "+configUrl);
@@ -400,7 +400,7 @@ public class Config {
     }
 
     private void sameVersionMessage(String type) {
-      System.out.println("Template & local config have same version "+phenoteVersion()+
+      log().info("Template & local config have same version "+phenoteVersion()+
                          ", not "+type+" local cfg");
     }
 
@@ -421,7 +421,7 @@ public class Config {
 
     private void doWipeoutMessage() {
       String s = !localFileExists() ? " does not exist" : " getting overwritten";
-      System.out.println(localFile+s+" Copying "+masterUrl);
+      log().debug(localFile+s+"--copying "+masterUrl);
     }
 
     private boolean isUpdate() {
@@ -527,7 +527,7 @@ public class Config {
       return;
     }
     else
-      System.out.println("System config is newer than user, updating user config");
+      log().info("System config is newer than user, updating user config");
 
     // File Adapters - preserves enable state of old/local - should it?
     for (DataAdapterConfig dac : newCfg.getFileAdapConfigs()) {
@@ -827,7 +827,7 @@ public class Config {
   /** Gives name of field at index, 0 based (for table heading) */
   public String getFieldLabel(int index,String group) {
     if (getEnbldFieldCfg(index,group)==null) {
-      System.out.println("ERROR: no field for col "+index+" group "+group);
+      log().info("ERROR: no field for col "+index+" group "+group);
       return null; // ? ex? ""?
     }
     return getEnbldFieldCfg(index,group).getLabel();
@@ -1035,7 +1035,7 @@ public class Config {
       
   private void parseXmlUrl(URL configUrl) throws ConfigException {
     try {
-      System.out.println("config file: "+configUrl);
+      log().debug("Parsing config file: "+configUrl);
       //PhenoteConfigurationDocument pcd = 
       phenoDocBean = PhenoteConfigurationDocument.Factory.parse(configUrl);
       phenoDocBean.validate(); //???
@@ -1082,11 +1082,11 @@ public class Config {
 
     }
     catch (IOException ie) {
-      System.out.println("IOException on config parse "+ie);
+      log().info("IOException on config parse "+ie);
       throw new ConfigException("io exception with config file "+ie.getMessage());
     }
     catch (XmlException xe) {
-      System.out.println("Parse of config xml file failed "+xe);
+      log().info("Parse of config xml file failed "+xe);
       throw new ConfigException("Xml exception in config file "+xe.getMessage());
     }
   }
@@ -1237,7 +1237,9 @@ public class Config {
       defaults to true (false?) */
   public boolean showLoadingScreen() {
     OntologyLoading ol = phenoConfigBean.getOntologyLoading();
+    log().debug("showLoadingScreen: ol = " + ol);
     if (ol == null) return true; 
+    log().debug("showLoadingScreen: ol.xgetShowLoadingScreen() = " + ol.xgetShowLoadingScreen());
     if (ol.xgetShowLoadingScreen() == null) return true;
     return ol.getShowLoadingScreen(); 
   }
@@ -1502,7 +1504,7 @@ public class Config {
 
   public void addOntology(Ontology o) {
   	allOntologies.add(o);
-  	System.out.println("added: "+o.getName());
+  	log().debug("addOntology: added "+o.getName());
   }
 
   private Logger log;
@@ -1512,35 +1514,3 @@ public class Config {
   }
 
 }
-
-//       QueryableDataadapter[] queryAdaps = phenoConfigBean.getQueryableDataadapterArray();
-//       for (QueryableDataadapter da : queryAdaps) {
-//         QueryableAdapConfig qac = new QueryableAdapConfig(da);
-//         addQueryAdapCfg(qac);
-//       }
-
-
-      // GRAPH - now accesses bean directly
-//       UvicGraph gr = phenoConfigBean.getUvicGraph();
-//       if (gr != null)
-//         uvicGraphEnabled = gr.getEnable();
-
-      // TERM HISTORY
-//       TermHistory history = phenoConfigBean.getTermHistory();
-//       if (history != null)
-//         termHistoryEnabled = history.getEnable();
-
-      // AUTO UPDATE OF ONTOLOGIES
-//       AutoUpdateOntologies autoUpdate = phenoConfigBean.getAutoUpdateOntologies();
-//       if (autoUpdate != null)
-//         autoUpdateEnabled = autoUpdate.getEnable();
-
-      // TIMER for UPDATE OF ONTOLOGIES
-//       UpdateTimer time = phenoConfigBean.getUpdateTimer();
-//       if (time != null)
-// 	  updateTimer = time.getTimer().intValue();
-
-      // Repos url dir
-//       OboRepository or = phenoConfigBean.getOboRepository();
-//       if (or != null && or.getUrlDir() != null)
-//         reposUrlDir = or.getUrlDir();
