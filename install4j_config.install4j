@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="4.0.8" transformSequenceNumber="1">
-  <directoryPresets config="./images" />
-  <application name="Phenote" distributionSourceDir="" applicationId="7283-8148-3557-1500" mediaDir="./releases" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.version}_${compiler:sys.platform}_install4j" compression="9" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" keepModificationTimes="false" shortName="Phenote" publisher="BBOP" version="1.7-beta1" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" javaMinVersion="1.5" javaMaxVersion="" allowBetaVM="true">
+  <directoryPresets config="./doc/LICENSE" />
+  <application name="Phenote" distributionSourceDir="" applicationId="7283-8148-3557-1500" mediaDir="./releases" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.version}_${compiler:sys.platform}_install4j" compression="9" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" keepModificationTimes="false" shortName="Phenote" publisher="BBOP" publisherWeb="" version="1.7-beta1" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" javaMinVersion="1.5" javaMaxVersion="" allowBetaVM="true">
     <languages skipLanguageSelection="false">
       <principalLanguage id="en" customLocalizationFile="" />
       <additionalLanguages />
@@ -17,49 +17,54 @@
     <roots />
     <mountPoints>
       <mountPoint id="3" root="" location="jars" mode="755" />
-      <mountPoint id="4" root="" location="doc" mode="755" />
+      <mountPoint id="9322" root="" location="doc" mode="755" />
+      <mountPoint id="9323" root="" location="doc/phenote-website" mode="755" />
+      <mountPoint id="4" root="" location="doc/phenote-website/help" mode="755" />
       <mountPoint id="5" root="" location="conf" mode="755" />
       <mountPoint id="6" root="" location="images" mode="755" />
       <mountPoint id="11" root="" location="data" mode="755" />
+      <mountPoint id="9324" root="" location="" mode="755" />
     </mountPoints>
     <entries>
       <dirEntry mountPoint="3" file="./jars" overwrite="4" shared="false" mode="644" uninstallMode="0" excludeSuffixes="CVS, .svn" dirMode="755">
         <exclude>
-          <entry location="CVS" launcher="false" />
+          <entry location=".svn" launcher="false" />
         </exclude>
       </dirEntry>
-      <dirEntry mountPoint="4" file="./doc" overwrite="4" shared="false" mode="644" uninstallMode="0" excludeSuffixes="CVS, .svn" dirMode="755">
+      <dirEntry mountPoint="4" file="./doc/phenote-website/help" overwrite="4" shared="false" mode="644" uninstallMode="0" excludeSuffixes="CVS, .svn" dirMode="755">
         <exclude>
-          <entry location="api" launcher="false" />
-          <entry location="CVS" launcher="false" />
-          <entry location="phenote-website" launcher="false" />
+          <entry location=".svn" launcher="false" />
         </exclude>
       </dirEntry>
+      <fileEntry mountPoint="9322" file="./doc/LICENSE" overwrite="1" shared="false" mode="644" uninstallMode="0" />
       <dirEntry mountPoint="5" file="./conf" overwrite="4" shared="false" mode="644" uninstallMode="0" excludeSuffixes="CVS, .svn" dirMode="755">
         <exclude>
-          <entry location="CVS" launcher="false" />
+          <entry location=".svn" launcher="false" />
         </exclude>
       </dirEntry>
       <dirEntry mountPoint="6" file="./images" overwrite="4" shared="false" mode="644" uninstallMode="0" excludeSuffixes="CVS, .svn" dirMode="755">
         <exclude>
-          <entry location="CVS" launcher="false" />
+          <entry location=".svn" launcher="false" />
         </exclude>
       </dirEntry>
       <dirEntry mountPoint="11" file="./data" overwrite="4" shared="false" mode="644" uninstallMode="0" excludeSuffixes="CVS, .svn" dirMode="755">
         <exclude>
-          <entry location="CVS" launcher="false" />
+          <entry location=".svn" launcher="false" />
         </exclude>
       </dirEntry>
+      <fileEntry mountPoint="9324" file="./phenote" overwrite="1" shared="false" mode="644" uninstallMode="0" />
     </entries>
     <components>
-      <component name="Phenote" id="61" displayDescription="false" selected="true" mandatory="true" downloadable="false">
+      <component name="Phenote" id="62" displayDescription="false" selected="true" mandatory="true" downloadable="false">
         <description>Phenote</description>
         <include all="false">
           <entry location="jars" launcher="false" />
-          <entry location="doc" launcher="false" />
+          <entry location="doc/phenote-website/help" launcher="false" />
+          <entry location="doc/LICENSE" launcher="false" />
           <entry location="conf" launcher="false" />
           <entry location="images" launcher="false" />
           <entry location="data" launcher="false" />
+          <entry location="phenote" launcher="false" />
           <entry location="Phenote" launcher="true" />
         </include>
         <dependencies />
@@ -70,7 +75,7 @@
           <entry location="doc/api" launcher="false" />
         </include>
         <dependencies>
-          <component id="61" />
+          <component id="62" />
         </dependencies>
       </component>
     </components>
@@ -359,7 +364,6 @@ configurationObject.setValue(val);</initScript>
                     </object>
                   </void>
                   <void property="text">
-<!--                    <string>-Xmx${installer:phenote.memoryAlloc}M</string> -->
                     <string>-Xmx1024M</string>
                   </void>
                 </object>
@@ -519,3 +523,4 @@ configurationObject.setValue(val);</initScript>
     <mediaSet refId="24" />
   </buildIds>
 </install4j>
+
