@@ -3,7 +3,7 @@
   <head>
 
     <!--#include virtual="ssi/head.html" -->
-    <title>Phenote</title>
+    <title>Phenote User Community</title>
 
   </head>
   <body>
@@ -20,7 +20,7 @@
       <p>Phenote development is a community effort.  We welcome input and feedback from our users.  The following groups are using Phenote:</p>
       <table border="0">
         <tr>
-	<td><a href="http://flybase.bio.indiana.edu/"> <img height="50" src="/images/fly_logo.png" alt="Flybase" /></a>
+	<td><a href="http://flybase.bio.indiana.edu/"> <img height="50" src="/images/fly_logo.png" alt="FlyBase" /></a>
 	</td>
     <td>Flybase</td>
     </tr>		
@@ -43,7 +43,7 @@
     <tr>
     <td><a href="http://www.geneontology.org/"><img  height="50" src="/images/go_logo.gif"  alt="GO" /></a>
     </td>
-    <td>The Gene Ontology</td>
+    <td>The Gene Ontology Project (GO)</td>
     </tr>
     <tr>
     <td><a href="http://www.wormbase.org/"><img   src="/images/worm_logo.jpg" height="50" alt="WB" /></a>
@@ -68,7 +68,8 @@
     </tr>
 </table>
 
-      <p>If you are an active user and would like to be listed on our webpage, please <a href="contact.shtml">contact us</a>.</p>
+      <p>If you are an active Phenote user and would like to be listed on this
+      page, please <a href="contact.shtml">contact us</a>.</p>
 	
       </div>
     </div>
