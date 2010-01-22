@@ -4,8 +4,9 @@ spec="1.0+"
 codebase="http://phenote.org/phenote/@@phenote.version@@"
 href="phenote.jnlp">
 <information>
+  <!-- phenote.version set by ant -Dphenote.version=".." copy-version-jnlps -->
 	<title>Phenote @@phenote.version@@</title>
-	<vendor>National Center for Biomedical Ontology</vendor>
+	<vendor>Berkeley Bioinformatics Open Source Projects (BBOP)</vendor>
 	<icon href="/images/elephant_icon.jpg" />
 	<description>Phenote standalone app via webstart</description>
  	 <!-- Declares that the application can run without
@@ -53,29 +54,39 @@ href="phenote.jnlp">
 	<jar href="jars/commons-lang-2.1.jar"/>
 	<jar href="jars/commons-beanutils-1.6.jar"/>
 	<jar href="jars/commons-logging-1.0.4.jar"/>
-	<nativelib href="jars/phenote-nativelibs.jar"/>
 	<jar href="jars/saaj.jar"/>
 	<jar href="jars/jaxrpc.jar"/>
-	<jar href="jars/wsdl4j-1.5.1.jar"/>
+
+  <!-- for phenote+ -->
+	<jar  href="jars/macify-1.1.jar"/>
+	<jar  href="jars/tablelayout.jar"/>
+	<jar  href="jars/idw-gpl.jar"/>
+	<jar  href="jars/jaxrpc.jar"/>
 	<jar  href="jars/axis.jar"/>
+	<jar  href="jars/ProtocolEditor.jar"/>
+	<jar  href="jars/ols-client.jar"/>
+	<jar  href="jars/wsdl4j-1.5.1.jar"/>
 	<jar  href="jars/owlapi-api.jar"/>
+	<jar  href="jars/piccolo.jar"/>
   <!-- for worm adapter -->
 	<jar  href="jars/postgresql-8.2-504.jdbc3.jar"/>
-  
+
+
+
+	<nativelib href="jars/phenote-nativelibs.jar"/>
 
   <!-- jars not needed for webstart(?) axis, commons-beanutils-1.6,  commons-discovery,
       commons-lang, eutils,jaxrpc, jdom, jebl, jhindexer, jlfgr, jnlp, jsp, jsr
       jst, junit, jwf, layouts, libquaqua, macify?   -->
-  <!-- jars needed for phenote2 but not phenote1? idw-gpl, commons*? see
-      phenote-plus.jnlp  -->
+  <!-- jars needed for phenoteplus but not phenote1? idw-gpl, commons*? -->
 
 
 
-	<property name="phenote.version" value="@@phenote.version@@"/>
-    <property name="phenote.build" value="@@phenote.build@@"/>
+  <property name="phenote.version" value="@@phenote.version@@"/>
+  <property name="phenote.build" value="@@phenote.build@@"/>
 </resources>
 <!-- no cmd line param will ask user for config at initialization -->
-<application-desc main-class="phenote.main.Phenote">
+<application-desc main-class="phenote.main.PhenotePlus">
 </application-desc>
 </jnlp>
 
