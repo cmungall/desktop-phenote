@@ -1,15 +1,15 @@
 format-version: 1.0
-date: 09:08:2005 16:09
+date: 01:30:2008 16:09
 saved-by: gwg
 auto-generated-by: DAG-Edit 1.419 rev 3
 default-namespace: worm_development
-remark: Version: 1.03
-remark: Date: 05/24/02
+remark: Version: 1.04
+remark: Date: 01/25/08
 remark: Editors: Wen J. Chen, WormBase, Caltech
 remark: This DAG flat files is created for Lifestage system used in WormBase
 
 [Term]
-id: LS:0000041
+id: WBls:0000041
 name: adult
 is_a: WBls:0000022 ! postembryonic
 
@@ -58,6 +58,21 @@ id: WBls:0000008
 name: 4-cell embryo
 def: "20-40min after first cleavage at 20 Centigrade.  Contains 4 cells." [wb:wjc]
 is_a: WBls:0000005 ! blastula embryo
+
+
+[Term]
+id: WBls:00000071
+name: 8-cell embryo
+def: "~50 min after first cleavage at 20 Centigrade.  Contains 8 cells." [wb:wjc]
+is_a: WBls:0000005 ! blastula embryo
+
+
+[Term]
+id: WBls:00000072
+name: 12-cell embryo
+def: "~55 min after first cleavage at 20 Centigrade.  Contains 12 cells." [wb:wjc]
+is_a: WBls:0000005 ! blastula embryo
+
 
 [Term]
 id: WBls:0000009
@@ -239,6 +254,14 @@ name: L4 larva
 def: "The fourth stage larva. At 25 Centigrade\, it ranges 40-49.5 hours after fertilization\, 26-35.5 hours after hatch." [wb:wjc]
 is_a: WBls:0000023 ! larva
 
+
+[Term]
+id: WBls:0000073
+name: L4 larva male
+def: "The fourth stage larva male. At 25 Centigrade\, it ranges 40-49.5 hours after fertilization\, 26-35.5 hours after hatch." [wb:wjc]
+is_a: WBls:0000038 ! L4 larva
+
+
 [Term]
 id: WBls:0000039
 name: L4-adult lethargus
@@ -250,6 +273,8 @@ id: WBls:0000040
 name: L4-adult molt
 def: "The stage when an animal shifts from L4 larva to adult. It includes the synthesis of new cuticle\, cease of phrayngeal pumping during a lethargus stage\, and the shed off of old cuticle." [wb:wjc]
 is_a: WBls:0000038 ! L4 larva
+
+
 
 [Term]
 id: WBls:0000042
@@ -339,13 +364,13 @@ is_a: WBls:0000053 ! L2d-L3 molt
 id: WBls:0000056
 name: adult male
 def: "The stage after an male animal is fully-developed and reaches maturity." [wb:wjc]
-is_a: LS:0000041 ! adult
+is_a: WBls:0000041 ! adult
 
 [Term]
 id: WBls:0000057
 name: adult hermaphrodite
 def: "The stage after an hermaphrodite animal is fully-developed and reaches maturity." [wb:wjc]
-is_a: LS:0000041 ! adult
+is_a: WBls:0000041 ! adult
 
 [Term]
 id: WBls:0000058
