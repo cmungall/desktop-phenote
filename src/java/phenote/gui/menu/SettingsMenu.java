@@ -223,18 +223,22 @@ public class SettingsMenu extends DynamicMenu {
         if (newCfg == null || newCfg.equals(""))
           throw new ConfigException("ERROR: Got no config from user");
 
-        if (currentConfig != null && newCfg.equals(currentConfig))
-          throw new ConfigException("Config not changed"); // ?? or do nothing?
-
+        if (currentConfig != null && newCfg.equals(currentConfig)) {
+//          throw new ConfigException("Config not changed"); // ?? or do nothing?
+                // Maybe they just changed the proxy setting.
+                log().info("Configuration unchanged from " + newCfg);
+                return;
+        }
 
         Config.writeMyPhenoteDefaultFile(newCfg);
         
         restartMessage();
         //changeConfig(newCfg); // not working yet
       }
-      catch (ConfigFileQueryGui.CancelEx ex) {} // its cancelled do nothing
+      catch (ConfigFileQueryGui.CancelEx ex) {} // it's cancelled--do nothing
       catch (ConfigException x) {
         String m = "Failed to change configuration " + x.getMessage();
+        log().error(m);
         JOptionPane.showMessageDialog(null, m, "Config error",
                 JOptionPane.ERROR_MESSAGE);
       }
@@ -260,7 +264,7 @@ public class SettingsMenu extends DynamicMenu {
   }
 
   private void restartMessage() {
-    String m = "You must restart phenote for new config to take effect";
+    String m = "You must quit and restart Phenote for this new configuration to take effect.";
     JOptionPane.showMessageDialog(null, m, "Restart Phenote",
                 JOptionPane.INFORMATION_MESSAGE);    
   }
