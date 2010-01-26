@@ -8,6 +8,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import phenote.gui.menu.SettingsMenu;
+import phenote.gui.menu.FileMenu;
+
 /** this is old regular phenote - not used in plus - phase out eventually */
 public class MenuManager {
   
