@@ -86,7 +86,7 @@ public class ProxyDialog extends JDialog implements ActionListener {
 		    socksButton.setSelected(false);
 		    httpButton.setSelected(true);
 	    }
-	    LOG.info("Restoring saved proxy " + proxyProtocol + ": " + proxyHost + ":" + proxyPort);
+	    LOG.info("Restoring saved proxy " + proxyProtocol + ": " + proxyHost + ":" + proxyPort + " (on = " + hasProxy + ")");
     }
     else {
 	    // See if there is a proxy defined on this system--if so, pre-set the server and port fields.
@@ -202,10 +202,10 @@ public class ProxyDialog extends JDialog implements ActionListener {
     }
     setVisible(false);
     dispose();
+    showProxyChangedDialog();
   }
 
   public void init() {
-
     server   = new JTextField(30);
     server.setText(proxyHost);
     port     = new JTextField(6);
@@ -371,4 +371,10 @@ public class ProxyDialog extends JDialog implements ActionListener {
 			}
 		} catch (Exception e) { LOG.info("Exception trying to find proxy: " + e.getMessage()); }
 	}
+
+        private void showProxyChangedDialog() {
+                JOptionPane.showMessageDialog(null, "Your new proxy setting has been saved.", "Proxy setting saved",
+                                              JOptionPane.INFORMATION_MESSAGE);
+        }
+                
 }
