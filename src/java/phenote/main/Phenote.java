@@ -32,7 +32,8 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.oboedit.gui.Preferences;
+//import org.oboedit.gui.Preferences;
+import phenote.config.Preferences;
 
 import phenote.config.Config;
 import phenote.config.ConfigException;
@@ -214,63 +215,60 @@ public class Phenote {
     String m = "initOntologies: loading configuration: "+Config.inst().getConfigName();
     logInfo(m);
     
-  	if (Config.inst().getTerminologyDefs()!=null) { //only do this if defined
-  		
-  		try {
-  			OntologyDataAdapter2.getInstance().initOntologies();
-  		} catch (Exception e) {
-  			e.printStackTrace();
-  		}
-  	} else { //the old-school config style
-  		
-  		setProgress(m, 10);
-  		setProgress(5); // 5?? from 10??? nicole?
-  		setProgress("Initializing Ontologies...", 20);
-  		setProgressMsg("Initializing Ontologies");
-  		setProgress(10);
-  		LOG.debug("Initializing ontologies");
-  		//OntologyDataAdapter oda = new OntologyDataAdapter(); // singleton?
-  		// loads up OntologyManager - non intuitive?
-  		OntologyDataAdapter.initialize(); // this sometimes hangs!!!
-  		LOG.debug("Ontologies initialized");
-  		// if (config.useShrimpDagViewer())
-  		// ShrimpDag.inst().initOntologies();
-  		setProgress("Ontologies Initialized", 70);
-  		//setMessageText("Ontologies Initialized");
-  	}
+    if (Config.inst().getTerminologyDefs()!=null) { //only do this if defined
+            try {
+                    OntologyDataAdapter2.getInstance().initOntologies();
+            } catch (Exception e) {
+                    e.printStackTrace();
+            }
+    } else { //the old-school config style
+            setProgress(m, 10);
+            setProgress(5); // 5?? from 10??? nicole?
+            setProgress("Initializing Ontologies...", 20);
+            setProgressMsg("Initializing Ontologies");
+            setProgress(10);
+            LOG.debug("Initializing ontologies");
+            //OntologyDataAdapter oda = new OntologyDataAdapter(); // singleton?
+            // loads up OntologyManager - non intuitive?
+            OntologyDataAdapter.initialize(); // this sometimes hangs!!!
+//  		LOG.debug("Ontologies initialized");
+            setProgress("Ontologies Initialized", 70);
+            //setMessageText("Ontologies Initialized");
+    }
   }
-  
-  public void simpleInitOntologies() {
-	  	//set up new interface here.
+
+  /** Not currently used (and looks pretty much identical to initOntologies (above), anyway */
+//   public void simpleInitOntologies() {
+// 	  	//set up new interface here.
 		
-	    String m = "simpleInitOntologies: loading configuration: "+Config.inst().getConfigName();
-	    logInfo(m);
+// 	    String m = "simpleInitOntologies: loading configuration: "+Config.inst().getConfigName();
+// 	    logInfo(m);
 	    
-	  	if (Config.inst().getTerminologyDefs()!=null) { //only do this if defined
+// 	  	if (Config.inst().getTerminologyDefs()!=null) { //only do this if defined
 	  		
-	  		try {
-	  			OntologyDataAdapter2.getInstance().initOntologies(false);
-	  		} catch (Exception e) {
-	  			e.printStackTrace();
-	  		}
-	  	} else { //the old-school config style
+// 	  		try {
+// 	  			OntologyDataAdapter2.getInstance().initOntologies(false);
+// 	  		} catch (Exception e) {
+// 	  			e.printStackTrace();
+// 	  		}
+// 	  	} else { //the old-school config style
 	  		
-	  		setProgress(m, 10);
-	  		setProgress(5); // 5?? from 10??? nicole?
-	  		setProgress("Initializing Ontologies...", 20);
-	  		setProgressMsg("Initializing Ontologies");
-	  		setProgress(10);
-	  		LOG.debug("Initializing ontologies");
-	  		//OntologyDataAdapter oda = new OntologyDataAdapter(); // singleton?
-	  		// loads up OntologyManager - non intuitive?
-	  		OntologyDataAdapter.initialize(); // this sometimes hangs!!!
-	  		LOG.debug("Ontologies initialized");
-	  		// if (config.useShrimpDagViewer())
-	  		// ShrimpDag.inst().initOntologies();
-	  		setProgress("Ontologies Initialized", 70);
-	  		//setMessageText("Ontologies Initialized");
-	  	}
-	  }
+// 	  		setProgress(m, 10);
+// 	  		setProgress(5); // 5?? from 10??? nicole?
+// 	  		LOG.debug("Initializing ontologies");
+// 	  		setProgress("Initializing Ontologies...", 20);
+// 	  		setProgressMsg("Initializing Ontologies");
+// 	  		setProgress(10);
+// 	  		//OntologyDataAdapter oda = new OntologyDataAdapter(); // singleton?
+// 	  		// loads up OntologyManager - non intuitive?
+// 	  		OntologyDataAdapter.initialize(); // this sometimes hangs!!!
+// //	  		LOG.debug("Ontologies initialized");
+// 	  		// if (config.useShrimpDagViewer())
+// 	  		// ShrimpDag.inst().initOntologies();
+// 	  		setProgress("Ontologies Initialized", 70);
+// 	  		//setMessageText("Ontologies Initialized");
+// 	  	}
+// 	  }
 
   private void loadFromCommandLine() {
     //LOG.debug("read spec "+commandLine.readIsSpecified());
@@ -401,7 +399,7 @@ public class Phenote {
     if (!Config.inst().isInitialized()) { 
       try { Config.inst().loadDefaultConfigFile(); }
       catch (ConfigException ce) { 
-        logErr("default config has failed. "+ce+" loading flybase default");
+        logErr("default config has failed: "+ce+".  Loading flybase default");
         try { Config.inst().loadDefaultFlybaseConfigFile(); }
         catch (ConfigException c) { 
           logErr("flybase default config has failed. We're hosed! "+c);
@@ -419,7 +417,6 @@ public class Phenote {
 //  			String m = "some ontology";
 //  			loadingScreen.setProgress(m, progress);
 //    }
-
 
 
   public Frame getFrame() { return frame; }
@@ -588,6 +585,7 @@ public class Phenote {
     }
     catch (ConfigException e) { // throw it??
       String m = "Failed to change configuration " + e.getMessage();
+      LOG.error(m);
       JOptionPane.showMessageDialog(null, m, "Config error",
                                     JOptionPane.ERROR_MESSAGE);
     }
