@@ -126,13 +126,13 @@ public class Preferences {
 				preferences = (Preferences) p;
 				d.close();
 			} catch (Exception e) {
-				LOG.info("Could not read preferences file from "
+				LOG.info("Couldn't read preferences file "
 					 + Preferences.getPrefsXMLFile());
 			}
 			if (preferences == null)
 				preferences = new Preferences();
-			else // DEL
-				System.out.println("Read preferences from " + Preferences.getPrefsXMLFile()); // DEL
+			else
+				LOG.info("Read preferences from " + Preferences.getPrefsXMLFile());
 
 			GUIManager.addShutdownHook(new Runnable() {
 				public void run() {
@@ -469,6 +469,7 @@ public class Preferences {
 	public static File getInstallationDirectory() {
 		if (installationDir == null)
 			fillInInstallationDirectory();
+//                LOG.debug("Installation directory is " + installationDir); // DEL
 		return installationDir;
 	}
 
@@ -521,10 +522,12 @@ public class Preferences {
 	}
 
 	public boolean getProxyIsSet() {
+//                LOG.debug("getProxyIsSet: " + proxyIsSet); // DEL
 		return proxyIsSet;
 	}
 
 	public String getProxyHost() {
+//                LOG.debug("getProxyHost: " + proxyHost); // DEL
 		return proxyHost;
 	}
 	public int getProxyPort() {
@@ -536,6 +539,11 @@ public class Preferences {
 	}
 
 	public void setProxyHost(String proxyHost) {
+//                LOG.debug("setProxyHost " + proxyHost); // DEL
+                if (proxyHost.startsWith("http://")) {
+                        proxyHost = proxyHost.substring(7);
+                        LOG.debug("setProxyHost: http:// stripped, now proxyHost is " + proxyHost); // DEL
+                }
 		this.proxyHost = proxyHost;
 	}
 	public void setProxyPort(int proxyPort) {
