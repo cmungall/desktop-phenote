@@ -7,6 +7,7 @@ import java.util.Collection;
 import javax.swing.Action;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
+import javax.swing.JLabel;
 import javax.swing.JToolBar;
 
 import org.apache.log4j.Logger;
@@ -19,14 +20,16 @@ import org.bbop.framework.ViewMenu;
 import org.bbop.framework.dock.LayoutDriver;
 import org.bbop.framework.dock.idw.IDWDriver;
 import org.bbop.util.CollectionUtil;
+import org.bbop.util.OSUtil;
 import org.oboedit.example.OBDAnnotationNumberFetchBehaviorTask;
-import org.oboedit.gui.Preferences;
+//import org.oboedit.gui.Preferences;
 import org.oboedit.gui.factory.AnnotationSummaryComponentFactory;
 import org.oboedit.gui.tasks.DefaultGUIStartupTask;
 
 import phenote.charactertemplate.CharacterTemplateTableFactory;
 import phenote.charactertemplate.TemplateChooserFactory;
 import phenote.config.Config;
+import phenote.config.Preferences;
 import phenote.config.xml.GroupDocument.Group;
 import phenote.config.xml.TemplatechooserDocument.Templatechooser;
 import phenote.edit.DirtyDocumentIndicator;
@@ -113,12 +116,34 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
   private void initPhenote() {
     // false - supress splash screen, bug in plus comes up blank and on linux it
     // hangs in front of phenote - need to fix, supress for now
-    boolean doSplash = false;
-    Phenote.initBackend(args,doSplash);
+    // 12/17/2009:  Splash screen comes up blank on Mac only when you run from installed version.  If you run from command line, it's fine.
+//    boolean doSplash = OSUtil.isLinux() ? false : true;
+    Phenote.initBackend(args, showSplash());
     selectionBridge.install();
-    // init backend sets off splash screent that must be destroyed
-    if (doSplash) Phenote.getPhenote().splashScreenDestruct();
+    // init backend sets off splash screen that must be destroyed
+//    if (doSplash) 
+    Phenote.getPhenote().splashScreenDestruct();
   }
+
+  // 12/17/2009:  Splash screen comes up blank on Mac only when you run from installed version.  If you run from command line, it's fine.
+  // Apparently on Linux the splash screen is problematic as well.
+  // Until those issues are fixed, suppress showing the splash screen if it's not going to go well.
+  // 01/22/2010:  Now even from the command line, the splash screen is showing up empty on Mac.  Just disable it for now.
+  // I have no idea whether it's working on Windows.
+  private boolean showSplash() {
+//           return false;
+           if (OSUtil.isLinux()) {
+                   return false;
+           }
+//           else if (Preferences.getInstallationDirectory().getName().equals(".")) // We're running from the shell, not from the installed version
+           else if (OSUtil.isMacOSX()) // Right now, the splash screen is empty most of the time even on Mac.  :-(
+                   return false;
+           else {
+//                   LOG.debug("showSplash: isLinux = " + OSUtil.isLinux() + ", installdir = " + Preferences.getInstallationDirectory() + ", = . is " + Preferences.getInstallationDirectory().equals('.')); // DEL
+                   return true;
+           }
+   }
+
 
   @Override
   protected String getAppID() {
