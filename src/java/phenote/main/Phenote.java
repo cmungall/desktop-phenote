@@ -391,10 +391,10 @@ public class Phenote {
   /** refactor? separate into doCmdLine and doConfig - cmd line should just set
       config file name - doConfig should actually read it */
   private void doCommandLineAndConfig(String[] args) {
-    LOG.info("Reading config file(& cmd line)");
+    LOG.info("Parsing command-line args");
     try { commandLine.setArgs(args); } // sets config if specified
     catch (Exception e) {
-      logErr("Command line read failed: "+e); }//e.printStackTrace();
+      logErr("Command line arg parse failed: "+e); }//e.printStackTrace();
     // no config set from command line use default
     if (!Config.inst().isInitialized()) { 
       try { Config.inst().loadDefaultConfigFile(); }
