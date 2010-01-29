@@ -8,10 +8,14 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
+import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
+import java.nio.channels.ReadableByteChannel;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,6 +27,9 @@ import java.util.TimeZone;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+
+import phenote.config.Preferences;
+import phenote.datamodel.OntologyException;
 
 public class FileUtil {
 
@@ -230,37 +237,37 @@ public class FileUtil {
    * @param archiveFile
    */
   synchronized public static boolean copyFileIntoArchive(File file, File archiveFile) {
-      boolean success = true;
-      FileInputStream fis = null;
-      FileOutputStream fos = null;
+    boolean success = true;
+    FileInputStream fis = null;
+    FileOutputStream fos = null;
+    try {
+      fis = new FileInputStream(file);
+      fos = new FileOutputStream(archiveFile);
+      FileChannel inChannel = fis.getChannel();
+      FileChannel outChannel = fos.getChannel();
+      int bytesWritten = 0;
+      long byteCount = 0;
+      while(bytesWritten < byteCount)
+        bytesWritten +=inChannel.transferTo(bytesWritten, byteCount - bytesWritten, outChannel);
+
+      fos.close();
+      fis.close();
+
+    } catch (Exception e) {
+      LOG.error(e.getMessage(), e);
+      return false;
+    } finally {
       try {
-        fis = new FileInputStream(file);
-        fos = new FileOutputStream(archiveFile);
-        FileChannel inChannel = fis.getChannel();
-        FileChannel outChannel = fos.getChannel();
-        int bytesWritten = 0;
-        long byteCount = 0;
-        while(bytesWritten < byteCount)
-          bytesWritten +=inChannel.transferTo(bytesWritten, byteCount - bytesWritten, outChannel);
-
-        fos.close();
-        fis.close();
-
-      } catch (Exception e) {
-          LOG.error(e.getMessage(), e);
-          return false;
-      } finally {
-          try {
-              if (fis != null)
-                  fis.close();
-              if (fos != null)
-                  fos.close();
-          } catch (IOException e) {
-              LOG.error(e.getMessage(), e);
-              success = false;
-          }
+        if (fis != null)
+          fis.close();
+        if (fos != null)
+          fos.close();
+      } catch (IOException e) {
+        LOG.error(e.getMessage(), e);
+        success = false;
       }
-      return success;
+    }
+    return success;
   }
 
   /** some content from @link http://www.java2s.com/Code/Java/File-Input-Output/CopyfilesusingJavaIOAPI.htm */
@@ -268,26 +275,26 @@ public class FileUtil {
     boolean success = true;
     InputStream content = null;
     try {
-    	content = (InputStream) fromUrl.getContent();
+      content = (InputStream) fromUrl.getContent();
     } catch (IOException e) {
-    	success = false;
-    	LOG.error("Can't fetch URL " + fromUrl.getPath());
+      success = false;
+      LOG.error("Can't fetch URL " + fromUrl.getPath());
     }
     
     try {
-    	BufferedWriter output = new BufferedWriter(new FileWriter(toFile));
-    	int c;
-    	try {
-    		while ((c = content.read()) != -1) {
-    			output.write(c);
-    		}
-    	} catch (IOException e2) {
-    		LOG.error("Can't write byte to " + toFile.getPath());
-    	}
-    	output.close();
+      BufferedWriter output = new BufferedWriter(new FileWriter(toFile));
+      int c;
+      try {
+        while ((c = content.read()) != -1) {
+          output.write(c);
+        }
+      } catch (IOException e2) {
+        LOG.error("Can't write byte to " + toFile.getPath());
+      }
+      output.close();
     } catch (IOException e) {
-    	success = false;
-    	LOG.error("Couldn't write to file " + toFile.getPath());
+      success = false;
+      LOG.error("Couldn't write to file " + toFile.getPath());
     }
     return success;
   }
@@ -326,51 +333,158 @@ public class FileUtil {
   }
   
   public static String getLastModifiedDate(URL localUrl) {
-  	String display = "(not on local drive)";
-  	if (localUrl!=null) {
-  		
-  		File f = new File(localUrl.getFile());
-  		long timestamp = f.lastModified();
-  		Date when = new Date(timestamp);
-  		SimpleDateFormat sdf = new SimpleDateFormat( "EEEE yyyy/MM/dd hh:mm:ss aa zz : zzzzzz" );
-  		sdf.setTimeZone(TimeZone.getDefault()); // local time
-  		display = sdf.format(when);
-  	}
-  	return display;
+    String display = "(not on local drive)";
+    if (localUrl!=null) {
+      // Will this always work?  What if we need to use a proxy?  		
+      File f = new File(localUrl.getFile());
+      long timestamp = f.lastModified();
+      Date when = new Date(timestamp);
+      SimpleDateFormat sdf = new SimpleDateFormat( "EEEE yyyy/MM/dd hh:mm:ss aa zz : zzzzzz" );
+      sdf.setTimeZone(TimeZone.getDefault()); // local time
+      display = sdf.format(when);
+    }
+    return display;
   }
   
   public static String getFileSize(URL url) {
-  	String text = "unknown";
-  	if (url!=null) {
-  		File f = new File(url.getFile());
-  		long size = f.length();
-  		float dsize = (new Long(size).floatValue())/1000;  //KB
-  		DecimalFormat df= new DecimalFormat("0");
-  		text=df.format(dsize);
-  	}
-  	return text;
+    String text = "unknown";
+    if (url!=null) {
+      // Will this always work?  What if we need to use a proxy?
+      File f = new File(url.getFile());
+      long size = f.length();
+      float dsize = (new Long(size).floatValue())/1000;  //KB
+      DecimalFormat df= new DecimalFormat("0");
+      text=df.format(dsize);
+    }
+    return text;
+  }
+
+  /** Should merge with getFileSize and getRemoteFileSize */
+  public static int getBufferSize(URLConnection urlConnection) {
+    int size = urlConnection.getContentLength();
+//	LOG.info("For " + url + ", Content-Length = " + size);
+    // The sourceforge URLs don't give the content length (apparently that's optional for servers to provide).
+    if (size < 1) {
+      size = Integer.MAX_VALUE;
+    }
+    return size;
   }
   
-  public static String getRemoteFileSize(URL url) {
-    URLConnection conn;
-    String text = "unknown";
-    int size=0;
-  	if (url!=null) {
-    	try {
-				conn = url.openConnection();
-				conn.connect();
-	    	size = conn.getContentLength();
-	    	conn.getInputStream().close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-    	if(size > 0) {
-//    		System.out.println("Could not determine file size for: "+url.toString());
-    		float dsize = size/1000;  //KB
-  			DecimalFormat df= new DecimalFormat("0");
-  			text=df.format(dsize);
-    	}
-  	}
-    return text;
+  // Not currently used
+//   public static String getRemoteFileSize(URL url) {
+//     URLConnection conn;
+//     String text = "unknown";
+//     int size=0;
+//     if (url!=null) {
+//       try {
+//         conn = url.openConnection();
+//         conn.connect();
+//         size = conn.getContentLength();
+//         conn.getInputStream().close();
+//       } catch (IOException e) {
+//         e.printStackTrace();
+//       }
+//       if(size > 0) {
+// //    		System.out.println("Could not determine file size for: "+url.toString());
+//         float dsize = size/1000;  //KB
+//         DecimalFormat df= new DecimalFormat("0");
+//         text=df.format(dsize);
+//       }
+//     }
+//     return text;
+// }
+
+  /** local url may be from distrib/jar dir, but needs to be set to 
+      .phenote/obo-files dir as thats where the user cache is */
+  public static void copyReposToLocal(URL reposUrl, URL localUrl)
+    throws OntologyException {
+    try {
+      URLConnection urlConnection = getURLConnectionWithOrWithoutProxy(reposUrl);
+      InputStream is = urlConnection.getInputStream();
+      ReadableByteChannel r = Channels.newChannel(is);
+      //BufferedReader br = new BufferedReader(new InputStreamReader(is));
+      File f = new File(localUrl.getFile());
+      FileOutputStream fos = new FileOutputStream(f);
+      FileChannel w = fos.getChannel();
+      int size = getBufferSize(urlConnection);
+      w.transferFrom(r,0,size);
+      r.close();
+      is.close(); // ??
+      w.close();
+      fos.close(); // ??
+    } catch (IOException e) { throw new OntologyException(e); }
+  }
+
+  public static InputStream getInputStreamWithOrWithoutProxy(URL url) throws IOException {
+    URLConnection urlConnection = getURLConnectionWithOrWithoutProxy(url);
+    return urlConnection.getInputStream();
+  }
+
+  public static URLConnection getURLConnectionWithOrWithoutProxy(URL url) throws IOException {
+    Proxy proxy = null;
+    Preferences prefs = Preferences.getPreferences();
+
+    if (prefs.getProxyIsSet() && !url.getProtocol().equals("file")) {
+      String proxyHost = prefs.getProxyHost();
+      int proxyPort = prefs.getProxyPort();
+      String proxyProtocol = prefs.getProxyProtocol();
+      if (proxyHost != null && proxyHost.length()>0) {
+        if (proxyProtocol.equals("SOCKS"))
+          proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(proxyHost,proxyPort));
+        else
+          proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHost,proxyPort));
+      }
+      if (proxy != null)
+        LOG.info("Using proxy " + proxyProtocol + ": " + proxyHost + ":" + proxyPort + " to open connection to " + url);
+    }
+	
+    URLConnection urlConnection;
+    if (proxy != null) {
+      urlConnection = url.openConnection(proxy);
+    }
+    else {
+      LOG.debug("Opening connection (without proxy) to " + url);
+      urlConnection = url.openConnection();
+    }
+
+    urlConnection.setConnectTimeout(30000); // 30 seconds
+//    urlConnection.setReadTimeout(1800000);  // 30 minutes (is that long enough)
+    return urlConnection;
+  }
+
+  /** Look for file in current directory (.) and jar file 
+      throws OntologyException if file not found - wraps FileNFEx */
+  public static URL findFile(String fileName) throws OntologyException {
+    if (fileName == null) throw new OntologyException("findFile: file is null");
+    try { return findUrl(fileName); }
+    catch (FileNotFoundException e) { throw new OntologyException(e); }
+  }
+
+  /** goes thru url line by line and copies to file - is there a better way to 
+      do this? actually should do copy anymore should read in and write out xml
+      adding version along the way */
+  /** Used by Config */
+  public static void copyUrlToFile(URL configUrl, File myPhenote) throws IOException {
+    LOG.info("About to copy "+configUrl+" to "+myPhenote);
+//       InputStream is = configUrl.openStream();
+//       FileOutputStream os = new FileOutputStream(myPhenote);
+//       for(int next = is.read(); next != -1; next = is.read()) {
+//         os.write(next);
+//       }
+//       is.close();
+//       os.flush();
+//      os.close();
+    // 1/25/2010: Might need to use a proxy.
+    URLConnection urlConnection = getURLConnectionWithOrWithoutProxy(configUrl);
+    InputStream is = urlConnection.getInputStream();
+    ReadableByteChannel r = Channels.newChannel(is);
+    FileOutputStream fos = new FileOutputStream(myPhenote);
+    FileChannel w = fos.getChannel();
+    int size = getBufferSize(urlConnection);
+    w.transferFrom(r,0,size);
+    r.close();
+    is.close(); // ??
+    w.close();
+    fos.close(); // ??
   }
 }
