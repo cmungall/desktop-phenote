@@ -247,7 +247,7 @@ public class Config {
     if (usePersonalConfig) { // for standalone not servlet
       configFile = getMyPhenoteConfig(configFile,overwritePersonalConfig,mergeConfigs);
     }
-    log().debug("Attempting to read config from "+configFile + ".  usePersonal = " + usePersonalConfig + ", overwritePersonal = " + overwritePersonalConfig);
+//    log().debug("Attempting to read config from "+configFile + ".  usePersonal = " + usePersonalConfig + ", overwritePersonal = " + overwritePersonalConfig);
     //parseXmlFileWithDom(configFile); // do parse here?
     //URL configUrl = getConfigUrl(filename);
     //System.out.println("config file: "+configUrl);
@@ -269,22 +269,6 @@ public class Config {
   private String getMyPhenoteConfig(String masterConfig,boolean overwritePersonalCfg,
                                     boolean mergeConfigs)
     throws ConfigException {
-    
-//       boolean masterExists = true;
-//       URL masterUrl=null;
-//       // currently getConfigUrl doesnt search .phenote/conf - which is handy here
-//       // if passed in conf doesnt exist, carry on with dotConf - funny logic?
-//       try { masterUrl = getConfigUrl(masterConfig); }
-//       catch (FileNotFoundException fe) { masterExists = false; }
-
-//       // strips path to just file (but isnt it already stripped??)
-//       String nameOfFile = FileUtil.getNameOfFile(masterConfig); 
-//       // this is the "species" conf file - eg ~/.phenote/conf/flybase.cfg
-//       File dotConfFile = new File(getDotPhenoteConfDir(),nameOfFile);
-
-//       if (!masterExists && !dotConfFile.exists())
-//         throw new ConfigException("Cfg file doesnt exist in app nor .phenote/conf");
-
     // master conf may have attribute that overrides merge/overwrite settings - need to
     // check those before going through with below -- throws Ex
     ConfigMode mode = new ConfigMode(masterConfig,mergeConfigs,overwritePersonalCfg);
@@ -292,15 +276,13 @@ public class Config {
     //if (mergeConfigs && masterExists) {
     if (mode.isUpdate())
       mergeMasterWithLocal(mode); // eventuall pass in mode as well
-    
       
     // if file doesnt exist yet or overwrite, copy over masterConfig
     else if (mode.isWipeout()) {
       mode.doWipeout(); // ?? thorws ConfigEx
       // this should probably do a read & write of cfg to get version in there
       // however if writeback is missing something its problematic
-      // mode.doWipeout?
-      //copyUrlToFile(mode.masterUrl,mode.localFile); // Exx
+      // copyUrlToFile(mode.masterUrl,mode.localFile); // Exx
     }
     
     // new way - set new default(no param) config file name in my-phenote.cfg
@@ -363,7 +345,7 @@ public class Config {
       if (urlString==null) return;
       try {
         URL u = new URL(urlString); // throws MalformedURLEx
-        u.openStream(); // throws IOEx
+//        u.openStream(); // throws IOEx  // Don't do this here--might need to use a proxy
         masterUrl = u; // no exception thrown - we're ok
         masterExists = true; // actually this has to be true silly
       } catch (Exception e) {} // masterUrl not set
@@ -388,7 +370,6 @@ public class Config {
 
     /** not sure if this belongs in this class?? */
     private void doWipeout() throws ConfigException {
-      
       if (!isAlways() && versionSame()) {
         sameVersionMessage("writing over");
         return;
@@ -396,7 +377,10 @@ public class Config {
 
       doWipeoutMessage();
       // this shouldnt be copy!!! read in write out to get version!
-      copyUrlToFile(masterUrl,localFile); // Ex  put method in inner class?
+      try {
+        log().debug("doWipeout: about to copy " + masterUrl + " to " + localFile); // DEL
+        FileUtil.copyUrlToFile(masterUrl,localFile); // Ex  put method in inner class?
+      } catch (IOException e) { throw new ConfigException(e); }
     }
 
     private void sameVersionMessage(String type) {
@@ -483,35 +467,11 @@ public class Config {
     } catch (FileNotFoundException e) { throw new ConfigException(e); }
   }
 
-  /** goes thru url line by line and copies to file - is there a better way to 
-      do this? actually should do copy anymore should read in and write out xml
-      adding version along the way */
-  private void copyUrlToFile(URL configUrl,File myPhenote) throws ConfigException {
-    log().info("Copying "+configUrl+" to "+myPhenote);
-    try {
-      InputStream is = configUrl.openStream();
-      FileOutputStream os = new FileOutputStream(myPhenote);
-      for(int next = is.read(); next != -1; next = is.read()) {
-        os.write(next);
-      }
-      is.close();
-      os.flush();
-      os.close();
-    } catch (Exception e) { throw new ConfigException(e); }
-  }
-
 
   /** MERGING/UPDATING Load in 2 configs, anything new in newConfig gets put into my phenote 
       only merge if versions are different(?) in other words only merge on version
       change/phenote upgrade - if version same then leave in users mucking */
   private void mergeMasterWithLocal(ConfigMode mode) throws ConfigException { //URL newConfig,File oldDotConfFile
-    // this actually is redundant as covered in isWipeout()
-//     if (!mode.localFileExists()) { 
-//       System.out.println(mode.localFile+" doesnt exist, creating");
-//       // this should actually do a read in and writeback to get version in there...
-//       copyUrlToFile(mode.masterUrl,mode.localFile);
-//       return;
-//     }
     Config newCfg = new Config();
     newCfg.parseXmlUrl(mode.masterUrl); //??
     Config oldCfg = new Config();
@@ -527,7 +487,8 @@ public class Config {
       return;
     }
     else
-      log().info("System config is newer than user, updating user config");
+      // !! It keeps saying this when the "master" is NOT in fact newer.
+      log().info("Master config " + mode.masterUrl + " is newer than user config " + mode.localFileString() + "--updating user config");
 
     // File Adapters - preserves enable state of old/local - should it?
     for (DataAdapterConfig dac : newCfg.getFileAdapConfigs()) {
@@ -1036,31 +997,13 @@ public class Config {
   private void parseXmlUrl(URL configUrl) throws ConfigException {
     try {
       log().debug("Parsing config file: "+configUrl);
-      //PhenoteConfigurationDocument pcd = 
+      // Is this getting stuff straight from the URL?  I guess it's a local URL, so we don't ever need to worry about a proxy?
+      // I can't find PhenoteConfigurationDocument--must be in phenoteconfigbeans.jar or phenoxmlbeans.jar
       phenoDocBean = PhenoteConfigurationDocument.Factory.parse(configUrl);
       phenoDocBean.validate(); //???
       phenoConfigBean = phenoDocBean.getPhenoteConfiguration();
 
-      version = phenoConfigBean.getVersion();
-      
-//      configName = phenoConfigBean.getName();
-      
-//      configDesc = phenoConfigBean.getDescription();
-      
-//      configAuthor = phenoConfigBean.getAuthor();
-
-//      System.out.println("version:  "+version+"\nname:  "+configName+"\nDesc:  "+
-//      		configDesc+"\nAuthor:  "+getConfigAuthor());
-      //MasterToLocalConfig m 
-//         = phenoConfigBean.getMasterToLocalConfig();
-//       if (m != null && m.getMode() != null)
-//         masterToLocalConfigMode = m.getMode();
-
-      // LOG CONFIG FILE
-//       Log log = phenoConfigBean.getLog();
-//       if (log != null && log.getConfigFile() != null) {
-//         logConfigFile = log.getConfigFile();
-//       }
+//      version = phenoConfigBean.getVersion();
       
       // DATA ADAPTERS  <dataadapter name="phenoxml" enable="true"/>
 
@@ -1072,7 +1015,6 @@ public class Config {
         else
           addFileAdapConfig(dac);
       }
-
 
       // FIELDS
       Field[] fields = phenoConfigBean.getFieldArray();
@@ -1237,7 +1179,7 @@ public class Config {
       defaults to true (false?) */
   public boolean showLoadingScreen() {
     OntologyLoading ol = phenoConfigBean.getOntologyLoading();
-    log().debug("showLoadingScreen: ol = " + ol);
+//    log().debug("showLoadingScreen: ol = " + ol);
     if (ol == null) return true; 
     log().debug("showLoadingScreen: ol.xgetShowLoadingScreen() = " + ol.xgetShowLoadingScreen());
     if (ol.xgetShowLoadingScreen() == null) return true;
