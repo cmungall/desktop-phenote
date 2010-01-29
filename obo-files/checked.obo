@@ -1,0 +1,11 @@
+default-namespace: WBchecked
+date: 20:02:2008 17:44
+
+[Term]
+id: 
+name: blank
+
+[Term]
+id: checked
+name: checked
+

@@ -1,7 +1,7 @@
 format-version: 1.0
-version: $Revision: 1.36 $
-date: 09:04:2007 14:08
-saved-by: Pankaj Jaiswal
+version: $Revision: 1.146 $
+date: 17:08:2009 16:32
+saved-by: cwt6
 auto-generated-by: DAG-Edit 1.419 rev 3
 default-namespace: plant_trait_ontology
 
@@ -94,11 +94,11 @@ is_a: TO:0000252 ! non-mineral nutrient sensitivity
 [Term]
 id: TO:0000013
 name: resistance to disease by mycoplasma-like organism
-def: "the reaction of a certain genotype to infection can be assessed by a skilled worker based on visible symptoms after inoculation under natural conditions (infield) or under controlled conditions (in green house or growth chamber). " [GR:pj, IRRI:SES]
+def: "An assay to determine the resistance exhibited by a plant or a group of plants (population) in response to the disease caused by a mycoplasma-like pathogen infection as compared to the susceptible and/or the reference plants of the same species." [GR:pj, IRRI:SES]
 comment: The factors needed for successful test are the presence of sources and vectors\, inoculation at the susceptible growth stage of the test plants and favorable environmental conditions.
 related_synonym: "MLO" []
 related_synonym: "MLORS" []
-is_a: TO:0000112 ! disease resistance trait
+is_a: TO:0000112 ! disease resistance
 
 [Term]
 id: TO:0000014
@@ -125,7 +125,9 @@ is_a: TO:0000247 ! other nutrient sensitivity
 [Term]
 id: TO:0000017
 name: anatomy and morphology related trait
-def: "This category belongs to traits  associated with changes in the anatomy or structure of the plant at organ\, tissue or cellular level." [GR:pj]
+def: "This category belongs to traits associated with changes in the anatomy or structure of the plant at organ\, tissue or cellular level." [GR:pj]
+related_synonym: "plant architecture trait" []
+related_synonym: "plant structure trait" []
 is_a: TO:0000387 ! trait ontology
 
 [Term]
@@ -174,10 +176,10 @@ is_a: TO:0000439 ! fungal disease resistance
 [Term]
 id: TO:0000024
 name: ligule length
-def: "The actual measurement of ligules measured in millimeters from the base of the collar to the tip. " [IRRI:SES]
+def: "The actual measurement of ligules measured in millimeters from the base of the leaf collar to the ligule tip. " [IRRI:SES]
 related_synonym: "LIGLG" []
 related_synonym: "LgL" []
-is_a: TO:0002637 ! leaf size
+is_a: TO:0002748 ! ligule anatomy and morphology trait
 
 [Term]
 id: TO:0000025
@@ -202,8 +204,13 @@ is_a: TO:0000654 ! shoot development trait
 
 [Term]
 id: TO:0000028
-name: unfilled grain
-is_a: TO:0000345 ! seed viability
+name: unfilled grain number
+def: "Number of unfilled florets in a grass inflorescence. " [GR:pj]
+synonym: "UNFILGRNB" []
+synonym: "unfilled florets per panicle" []
+synonym: "unfilled grain" []
+is_a: TO:0000357 ! growth and development trait
+is_a: TO:0002759 ! grain number
 
 [Term]
 id: TO:0000029
@@ -286,7 +293,7 @@ name: brown rice length
 def: "Length of the grain monitored after dehulling but before polishing. The grain should contain pericarp." [ICIS:1259, IRRI:SES]
 related_synonym: "BRWLG" []
 related_synonym: "Len" []
-is_a: TO:0000146 ! seed length
+is_a: TO:0000734 ! grain length
 
 [Term]
 id: TO:0000042
@@ -297,6 +304,7 @@ is_a: TO:0000036 ! hybrid incompatibility
 [Term]
 id: TO:0000043
 name: root anatomy and morphology trait
+def: "Traits associated with changes in the anatomy or structure of the root and its parts." [GR:pj]
 is_a: TO:0000017 ! anatomy and morphology related trait
 
 [Term]
@@ -306,7 +314,7 @@ def: "Trait is monitored by counting number of flowers or florets that have comp
 comment: Scale\,  (%)\, Stigma exsertion; 1- Above 70\, Well exserted; 3- 41-70\, Moderately well exserted; 5- 21-40\, Just exserted; 7- 11-20\, Partly exserted; 9- 0-10\, Enclosed.  Evaluated at growth stage\:6 and 7 in rice
 related_synonym: "STIEX" []
 related_synonym: "stigma exsertion of male sterile lines" []
-is_a: TO:0000223 ! pistil related trait
+is_a: TO:0006012 ! carpel anatomy and morphology trait
 
 [Term]
 id: TO:0000045
@@ -344,6 +352,7 @@ is_a: TO:0000310 ! self-incompatibility
 id: TO:0000050
 name: inflorescence branching
 alt_id: TO:0000263
+def: "The extent of branching usually sets the tone for shape and compactness of the inflorescence." [GR:pj]
 related_synonym: "panicle branching" []
 is_a: TO:0000373 ! inflorescence anatomy and morphology trait
 is_a: TO:0000621 ! inflorescence development trait
@@ -352,6 +361,7 @@ is_a: TO:0000621 ! inflorescence development trait
 id: TO:0000051
 name: stem strength
 def: "The test gives indication of culm stiffness and resilience" [GR:pj, ICIS:1014, IRRI:Rice SES (1996)]
+synonym: "STEMSTR" []
 related_synonym: "CULMSTR" []
 related_synonym: "Cs" []
 related_synonym: "culm strength" []
@@ -363,6 +373,7 @@ is_a: TO:0000597 ! quality trait
 id: TO:0000052
 name: primary branching of inflorescence
 def: "The extent of primary branching usually sets the tone for shape and compactness of the inflorescence (rice panicle)" [GR:pj]
+synonym: "PBR" []
 related_synonym: "primary branching of panicle" []
 is_a: TO:0000050 ! inflorescence branching
 
@@ -377,20 +388,22 @@ id: TO:0000054
 name: animal damage resistance
 def: "Response by the plant in terms of resistivity or sensitivity to the animals infesting them." [GR:pj]
 synonym: "pest resistance" []
-is_a: TO:0000236 ! crop damage resistance trait
+is_a: TO:0000236 ! crop damage resistance
 
 [Term]
 id: TO:0000055
 name: leaf lamina pubescence
-def: "Extent of presence  (presence of hairs)  on the leaf blade surface." [IRRI:SES]
+def: "Extent of pubescence  (presence of hairs)  on the leaf blade surface." [IRRI:SES]
+synonym: "LFLPUBES" []
 related_synonym: "LBP" []
 related_synonym: "LFLHR" []
 related_synonym: "leaf blade pubescence" []
-is_a: TO:0000419 ! leaf anatomy and morphology trait
+is_a: TO:0002722 ! leaf pubescence
 
 [Term]
 id: TO:0000056
 name: stem color
+def: "Variation in color of the stem." [GR:pj]
 is_a: TO:0000361 ! stem anatomy and morphology trait
 
 [Term]
@@ -411,9 +424,9 @@ is_a: TO:0000482 ! chemical stress sensitivity
 [Term]
 id: TO:0000059
 name: node color
-def: "The color on outer surface of the nodes on the culm is recorded." [GR:pj]
-is_a: TO:0000056 ! stem color
-relationship: part_of TO:0000534 ! culm color (sensu Poaceae)
+def: "Color of the stem node." [GR:pj]
+synonym: "NDCL" []
+relationship: part_of TO:0000056 ! stem color
 
 [Term]
 id: TO:0000060
@@ -440,7 +453,7 @@ name: mimic response
 related_synonym: "MIRP" []
 related_synonym: "disease mimic response" []
 related_synonym: "lesion mimic" []
-is_a: TO:0000236 ! crop damage resistance trait
+is_a: TO:0000236 ! crop damage resistance
 
 [Term]
 id: TO:0000064
@@ -450,6 +463,7 @@ is_a: TO:0000184 ! seed anatomy and morphology trait
 [Term]
 id: TO:0000065
 name: root color
+def: "The color of the root." [GR:pj]
 related_synonym: "RTCL" []
 is_a: TO:0000043 ! root anatomy and morphology trait
 
@@ -484,16 +498,18 @@ is_a: TO:0000326 ! leaf color
 [Term]
 id: TO:0000070
 name: variegated leaf necrosis
+def: "Variegated leaf necrosis or scorching observed in response to stresses like drought\, insecticides and cold temperature as evidenced by chlorotic and/or necrotic tissue." [GR:pj]
 comment: In maize this trait is observed for chlorotic tissue between veins or older leaves\, causing holes and torn appearance
+synonym: "VLFNEC" []
 synonym: "ragged leaf" []
-related_synonym: "leaf necrosis" []
 is_a: TO:0000069 ! variegated leaf
 is_a: TO:0000652 ! leaf necrosis
 
 [Term]
 id: TO:0000071
 name: anthocyanin content
-def: "Anthocyanin is the red to purple pigments composed of soluble glycosides of anthocyanidins\, present in leaves and floral tissue. Usually the pigment is produced under stress conditions. Amounts of anthocyanin produced depend on stored sugar and sunlight. The more stored sugar in the leaf and brighter the autumn days\, the more intense red. Anthocyanin production also increases as phosphates move out of the leaves; the lack of phosphates in young leaves can also lead to the production of anthocyanin." [ISBN:198506732]
+def: "The anthocyanin content in a plant or plant part." [ISBN:198506732]
+comment: Anthocyanin is the red to purple pigments composed of soluble glycosides of anthocyanidins\, present in leaves and floral tissue. Usually the pigment is produced under stress conditions. Amounts of anthocyanin produced depend on stored sugar and sunlight. The more stored sugar in the leaf and brighter the autumn days\, the more intense red. Anthocyanin production also increases as phosphates move out of the leaves; the lack of phosphates in young leaves can also lead to the production of anthocyanin.
 related_synonym: "ANTHCN" []
 is_a: TO:0000290 ! flavonoid content
 is_a: TO:0000494 ! pigment content
@@ -505,7 +521,7 @@ def: "Defines the length of awn." [ICIS:1063, IRRI:SES]
 related_synonym: "AWNLG" []
 related_synonym: "An" []
 related_synonym: "awning" []
-is_a: TO:0000079 ! lemma and palea related traits
+is_a: TO:0002718 ! awn anatomy and morphology trait
 
 [Term]
 id: TO:0000073
@@ -517,6 +533,7 @@ is_a: TO:0000080 ! micronutrient sensitivity
 [Term]
 id: TO:0000074
 name: blast disease
+def: "Causal agent\: Magnaporthe grisea" [GR:pj]
 related_synonym: "BLRS" []
 related_synonym: "blast disease resistance" []
 related_synonym: "blast disease susceptibility" []
@@ -537,12 +554,14 @@ is_obsolete: true
 [Term]
 id: TO:0000077
 name: shoot anatomy and morphology trait
+def: "Traits associated with changes in the anatomy or structure of the shoot and its parts." [GR:pj]
+comment: Does not include traits on fruit\, fruit parts and adventitious roots whcih are borne on the shoot.
 is_a: TO:0000017 ! anatomy and morphology related trait
 
 [Term]
 id: TO:0000078
 name: root dry weight
-def: "The average dry weight of the root determined per tiller from a green house study" [GR:jcl, GR:pj]
+def: "The average dry weight of the root determined in a study." [GR:jcl, GR:pj]
 related_synonym: "RTDWT" []
 related_synonym: "rdw" []
 related_synonym: "rdw/t" []
@@ -553,8 +572,10 @@ relationship: part_of TO:0000352 ! plant dry weight
 
 [Term]
 id: TO:0000079
-name: lemma and palea related traits
-is_a: TO:0000274 ! floret related trait
+name: lemma and palea anatomy and morphology trait
+def: "Traits associated with changes in the anatomy or structure of the lemma and palea and their parts." [GR:pj]
+synonym: "lemma and palea related trait" []
+is_a: TO:0000274 ! floret anatomy and morphology trait
 
 [Term]
 id: TO:0000080
@@ -567,10 +588,11 @@ is_a: TO:0000480 ! nutrient sensitivity
 id: TO:0000081
 name: deep root dry weight
 def: "The average dry weight of the root\, (for the root part 30cm below the soil surface) determined per tiller in a green house study." [GR:jcl, GR:pj]
-related_synonym: "DRTDWT" []
-related_synonym: "deep root dry weight per tiller" []
-related_synonym: "drw" []
-related_synonym: "drw/t" []
+exact_synonym: "DRTDWT" []
+exact_synonym: "deep root dry weight per tiller" []
+exact_synonym: "deep root weight" []
+exact_synonym: "drw" []
+exact_synonym: "drw/t" []
 is_a: TO:0000078 ! root dry weight
 
 [Term]
@@ -601,7 +623,7 @@ is_a: TO:0000168 ! abiotic stress trait
 [Term]
 id: TO:0000085
 name: leaf rolling
-def: "Leaf rolling is a feature observed in response to drought or water stress. It precedes leaf drying stage. " [GR:jcl, GR:pj]
+def: "Leaf rolling is a feature observed in response to stresses like drought\, water and temperature. It precedes leaf drying stage. " [GR:jcl, GR:pj]
 synonym: "wilting" []
 related_synonym: "LFRL" []
 is_a: TO:0000168 ! abiotic stress trait
@@ -617,14 +639,14 @@ is_a: TO:0000439 ! fungal disease resistance
 [Term]
 id: TO:0000087
 name: aroma
-def: "Assay to detrmine the aroma of the cooked/uncooked grains." [GR:pj, ICIS:1252, IRRI:SES]
+def: "The aroma of the cooked/uncooked grains." [GR:pj, ICIS:1252, IRRI:SES]
 comment: It is often associated with the accumulation of the aromatic compound 2-acetyl-1-pyrroline.
 related_synonym: "AROMA" []
 related_synonym: "Sct" []
 related_synonym: "odour" []
 exact_synonym: "scent" []
-is_a: TO:0000281 ! metabolite content related trait
 is_a: TO:0000488 ! seed composition based quality trait
+is_a: TO:0002694 ! fruit flavor trait
 
 [Term]
 id: TO:0000088
@@ -638,6 +660,8 @@ is_a: TO:0000148 ! viral disease resistance
 id: TO:0000089
 name: panicle type
 def: "Panicle types are classified according to their mode of branching\, angle of primary branches\, and spikelet density." [ICIS:1066, IRRI:SES]
+synonym: "PNTYPE" []
+synonym: "Panicle attitude of branches" []
 related_synonym: "PnT" []
 is_a: TO:0000267 ! inflorescence type
 is_a: TO:0000621 ! inflorescence development trait
@@ -658,6 +682,8 @@ is_obsolete: true
 [Term]
 id: TO:0000092
 name: deep root to shoot ratio
+def: "The ratio of deep root root length (for the roots found 30cm below the soil surface) and the shoot length determined in a study." [GR:pj]
+synonym: "deep root length to shoot length ratio" []
 related_synonym: "DRTSHRO" []
 related_synonym: "deep root ratio" []
 related_synonym: "deep root/shoot ratio" []
@@ -701,11 +727,12 @@ is_a: TO:0000654 ! shoot development trait
 [Term]
 id: TO:0000097
 name: amylopectin content
-def: "Measures the amylopectin content in a plant or plant part. It is a polysaccharide present in starch. Amylopectin is a polymer of alpha(1\,4)-linked glucose units\, as is amylose (see amylose). Unlike amylose\, amylopectin contains branches of 2430 glucose units connected to the main chain by an alpha(1\,6) linkage." [ISBN:198506732]
+def: "Amount of amylopectin present in the plant or plant part. " [ISBN:198506732]
+comment: It is a polysaccharide present in starch. Amylopectin is a polymer of alpha(1\,4)-linked glucose units\, as is amylose (see amylose). Unlike amylose\, amylopectin contains branches of 2430 glucose units connected to the main chain by an alpha(1\,6) linkage.
 related_synonym: "AMYPCTCN" []
-is_a: TO:0000333 ! sugar content
 is_a: TO:0000489 ! carbohydrate composition related trait
 is_a: TO:0000667 ! cooking or brewing quality
+is_a: TO:0006007 ! polysaccharide content
 
 [Term]
 id: TO:0000098
@@ -810,10 +837,13 @@ is_a: TO:0000106 ! male sterility type
 
 [Term]
 id: TO:0000112
-name: disease resistance trait
-synonym: "disease control" []
-related_synonym: "disease susceptibility" []
-related_synonym: "disease tolerance" []
+name: disease resistance
+def: "An assay to determine the resistance exhibited by a plant or a group of plants (population) in response to the disease caused by a pathogen infection as compared to the susceptible and/or the reference plants of the same species." [GR:pj]
+comment: It represents the damage done by the diease and/or the pathogen to the plant. The damage is a direct measure of resistance to the particular pathogen variety causing the disease.
+exact_synonym: "disease control" []
+exact_synonym: "disease resistance trait" []
+exact_synonym: "disease tolerance" []
+narrow_synonym: "disease susceptibility" []
 is_a: TO:0000242 ! microbial damage resistance
 
 [Term]
@@ -830,6 +860,7 @@ is_a: TO:0000237 ! water stress trait
 [Term]
 id: TO:0000115
 name: root mass density
+def: "Determined as the dry mass of roots per unit soil volume at a given soil section." [GR:pj]
 related_synonym: "RTMD" []
 related_synonym: "rmd" []
 is_a: TO:0000043 ! root anatomy and morphology trait
@@ -866,6 +897,7 @@ is_a: TO:0000115 ! root mass density
 [Term]
 id: TO:0000120
 name: percent root mass density
+def: "Calculated as percent of root mass density over the total root mass density. Both parameters scored at the same depth." [GR:pj]
 related_synonym: "PCENTRTMD" []
 related_synonym: "prmd" []
 is_a: TO:0000115 ! root mass density
@@ -896,9 +928,9 @@ is_a: TO:0000120 ! percent root mass density
 
 [Term]
 id: TO:0000124
-name: flag leaf angle (sensu Poaceae)
-def: "Leaf angle is measured near the collar as the angle of attachment between the flag leaf blade and the main panicle axis" [ICIS:1065, IRRI:SES]
-related_synonym: "FLA" []
+name: flag leaf angle
+def: "In grasses the flag leaf angle is measured near the collar as the angle of attachment between the flag leaf blade and the main inflorescence axis in grass plants." [ICIS:1065, IRRI:SES]
+related_synonym: "FLFAG" []
 is_a: TO:0000206 ! leaf angle
 
 [Term]
@@ -952,6 +984,7 @@ is_a: TO:0000265 ! light quality sensitivity
 [Term]
 id: TO:0000131
 name: leaf water potential
+def: "Water potential of a leaf." [GR:pj]
 related_synonym: "LFWP" []
 related_synonym: "lwp" []
 is_a: TO:0000168 ! abiotic stress trait
@@ -960,7 +993,7 @@ is_a: TO:0000349 ! physiological process related trait
 [Term]
 id: TO:0000132
 name: basal internode diameter
-def: "Actual measurements in millimeters from the outer diameter of the culms at the basal portion of the main culm. Sample size = 3" [IRRI:SES]
+def: "Actual measurements in millimeters from the outer diameter of the stem at the basal portion of the main stem." [IRRI:SES]
 related_synonym: "BAINDIA" []
 related_synonym: "DBI" []
 is_a: TO:0000361 ! stem anatomy and morphology trait
@@ -999,11 +1032,11 @@ is_a: TO:0000131 ! leaf water potential
 [Term]
 id: TO:0000137
 name: days to heading
-def: "Number of days required to 50 percent panicles/tassel exsertion from the flag leaf in a field or study." [GR:pj]
-comment: Number of days is calculated from either the day of sowing of seeds or from the day of transplanting the seedlings depending on type of study.
+def: "Number of days required for the inflorescence (head/cob/panicle) to emerge from the flag leaf of a plant or a group of plants in a study." [GR:pj]
+comment: Often determined when the 50% length of the inflorescence has emerged as compared to its full length. Number of days is calculated from either the day of sowing of seeds or from the day of transplanting the seedlings (in case of rice) depending on type of study.
 related_synonym: "DTHD" []
 related_synonym: "heading date" []
-is_a: TO:0000621 ! inflorescence development trait
+is_a: TO:0001021 ! days to inflorescence exsertion
 
 [Term]
 id: TO:0000138
@@ -1013,15 +1046,16 @@ related_synonym: "BRWRPROT" []
 related_synonym: "BrP" []
 related_synonym: "Prt" []
 related_synonym: "brown rice protein content" []
-is_a: TO:0000490 ! protein composition related trait
+is_a: TO:0000598 ! protein content
+is_a: TO:0002728 ! fruit quality trait
 
 [Term]
 id: TO:0000140
 name: apiculus color
-def: "Defines the change in color of  apiculus." [IRRI:SES]
+def: "Color of the apiculus." [IRRI:SES]
 related_synonym: "APICL" []
 related_synonym: "ApC" []
-is_a: TO:0000079 ! lemma and palea related traits
+is_a: TO:0000079 ! lemma and palea anatomy and morphology trait
 relationship: part_of TO:0000536 ! floret color
 
 [Term]
@@ -1029,13 +1063,15 @@ id: TO:0000141
 name: awn color
 def: "Describes the change in color of the awn." [IRRI:SES]
 related_synonym: "AWNCL" []
-is_a: TO:0000079 ! lemma and palea related traits
+is_a: TO:0002718 ! awn anatomy and morphology trait
 relationship: part_of TO:0000536 ! floret color
 
 [Term]
 id: TO:0000142
 name: secondary branching of inflorescence
-def: "The extent of secondary branching usually determines the shape and compactness of the inflorescence (rice panicle)" [GR:pj, IRRI:SES]
+def: "The extent of secondary branching usually determines the shape and compactness of the inflorescence (such as in rice panicle)." [GR:pj, IRRI:SES]
+synonym: "SBR" []
+synonym: "panicle secondary branching" []
 related_synonym: "PnBr" []
 related_synonym: "secondary branching of panicle" []
 is_a: TO:0000050 ! inflorescence branching
@@ -1085,8 +1121,9 @@ is_a: TO:0000148 ! viral disease resistance
 [Term]
 id: TO:0000148
 name: viral disease resistance
-def: "The assessment of the response to a virus infection based on visible symptoms after inoculation under natural conditions (infield) or under controlled conditions (in green house). " [GR:pj, IRRI:SES]
-is_a: TO:0000112 ! disease resistance trait
+def: "An assay to determine the resistance exhibited by a plant or a group of plants (population) in response to the disease caused by a viral pathogen infection as compared to the susceptible and/or the reference plants of the same species." [GR:pj, IRRI:SES]
+comment: It represents the damage done by the diease and/or the viral pathogen to the plant. The damage is a direct measure of resistance to the particular viral strain causing the diease.
+is_a: TO:0000112 ! disease resistance
 
 [Term]
 id: TO:0000149
@@ -1146,6 +1183,7 @@ def: "The index is calculated as\, DSI = (1-Yds/Yns)\, where Yds and Yns are mea
 related_synonym: "DRSID" []
 related_synonym: "DRSSID" []
 related_synonym: "DSI" []
+related_synonym: "drought score" []
 related_synonym: "drought sensitivity index" []
 is_a: TO:0000188 ! drought sensitivity
 
@@ -1202,7 +1240,7 @@ is_a: TO:0000168 ! abiotic stress trait
 id: TO:0000162
 name: seed quality
 alt_id: TO:0000588
-def: "The quality assessment of the seed commonly called as kernel or grain in case of cereals\, as well as those of the dehulled grains.  The quality can be associated with the commercial value either directly or indirectly." [GR:pj]
+def: "The quality assessment of the seed commonly called as kernel or grain in case of cereals\, as well as those of the dehulled grains.  Often associated with the commercial value either directly or indirectly." [GR:pj]
 related_synonym: "grain quality" []
 is_a: TO:0000597 ! quality trait
 
@@ -1210,10 +1248,12 @@ is_a: TO:0000597 ! quality trait
 id: TO:0000163
 name: auxin sensitivity
 def: "Response with respect to application of auxin." [GR:pj]
+comment: The most important auxin produced by plants is indole-3-acetic acid (IAA)
+synonym: "indole-3-acetic acid response" []
 related_synonym: "AUXSN" []
 related_synonym: "IAA response" []
 related_synonym: "IAA sensitivity" []
-related_synonym: "IAA3 response" []
+related_synonym: "indole-3-acetic acid sensitivity" []
 is_a: TO:0000401 ! plant growth hormone sensitivity
 
 [Term]
@@ -1278,6 +1318,7 @@ is_a: TO:0000114 ! flooding related trait
 [Term]
 id: TO:0000171
 name: height related trait
+def: "Height related traits" [GR:pj]
 is_a: TO:0000133 ! stature or vigor trait
 
 [Term]
@@ -1353,7 +1394,7 @@ is_a: TO:0000657 ! spikelet anatomy and morphology trait
 id: TO:0000181
 name: seed weight
 def: "Average weight of seeds obtained from a plant\, representing the overall yields or produce from the field." [GR:pj, ICIS:1058]
-is_a: TO:0000396 ! grain yield
+is_a: TO:0000371 ! yield trait
 
 [Term]
 id: TO:0000182
@@ -1370,15 +1411,16 @@ is_a: TO:0000387 ! trait ontology
 [Term]
 id: TO:0000184
 name: seed anatomy and morphology trait
+def: "Traits associated with changes in the anatomy or structure of the seed and its parts." [GR:pj]
 is_a: TO:0000017 ! anatomy and morphology related trait
 
 [Term]
 id: TO:0000185
 name: stigma color
-def: "Stigma color is determined from blooming flowers or florets. " [IRRI:SES]
+def: "Color of the stigma in a blossoming flower." [IRRI:SES, GR:pj]
 related_synonym: "STICL" []
 related_synonym: "SgC" []
-is_a: TO:0000223 ! pistil related trait
+is_a: TO:0006012 ! carpel anatomy and morphology trait
 
 [Term]
 id: TO:0000186
@@ -1390,7 +1432,7 @@ id: TO:0000187
 name: anther color
 def: "Variation in color of the anther." [GR:pj]
 related_synonym: "ANTCL" []
-is_a: TO:0000215 ! stamen related trait
+is_a: TO:0000215 ! stamen anatomy and morphology trait
 
 [Term]
 id: TO:0000188
@@ -1416,6 +1458,7 @@ def: "The color of the seed coat" [GR:pj, IRRI:SES]
 related_synonym: "SCC" []
 related_synonym: "SDCCL" []
 related_synonym: "bran color" []
+is_a: TO:0000162 ! seed quality
 is_a: TO:0000184 ! seed anatomy and morphology trait
 relationship: part_of TO:0000486 ! seed color
 
@@ -1455,19 +1498,21 @@ is_a: TO:0000620 ! embryo development trait
 [Term]
 id: TO:0000196
 name: amylose content
-def: "Amylose content in actual percentage. It is a water-dispersible component of starch and is a polymer of alpha(1\,4)-linked glucose units." [ICIS:1251, IRRI:SES, ISBN:198506732]
+def: "Amount of amylose present in the plant or plant part.  " [ICIS:1251, IRRI:SES, ISBN:198506732]
+comment: It is a water-dispersible component of starch and is a polymer of alpha(1\,4)-linked glucose units.
 related_synonym: "AMYCN" []
 related_synonym: "Amy" []
-is_a: TO:0000333 ! sugar content
 is_a: TO:0000489 ! carbohydrate composition related trait
 is_a: TO:0000667 ! cooking or brewing quality
+is_a: TO:0006007 ! polysaccharide content
 
 [Term]
 id: TO:0000197
 name: ligule color
-def: "Changes observed in ligule color" [GR:pj, IRRI:SES]
+def: "Color of the ligule." [GR:pj, IRRI:SES]
 related_synonym: "LIGCL" []
 related_synonym: "LgC" []
+is_a: TO:0002748 ! ligule anatomy and morphology trait
 relationship: part_of TO:0000326 ! leaf color
 
 [Term]
@@ -1486,7 +1531,8 @@ is_a: TO:0000106 ! male sterility type
 
 [Term]
 id: TO:0000200
-name: brittle culm (sensu Poaceae)
+name: brittle culm
+def: "A measure of brittleness of the stem of a grass plant." [GR:pj]
 is_a: TO:0000051 ! stem strength
 
 [Term]
@@ -1519,7 +1565,7 @@ def: "Causal agent\: Xanthomonas oryzae pv. oryzae. symptoms\: lesions usually s
 related_synonym: "SDLBTRS" []
 related_synonym: "kresek" []
 related_synonym: "leaf blight" []
-is_a: TO:0000315 ! bacterial disease resistance
+is_a: TO:0000175 ! bacterial blight disease resistance
 
 [Term]
 id: TO:0000205
@@ -1541,7 +1587,7 @@ is_a: TO:0000492 ! leaf shape
 [Term]
 id: TO:0000207
 name: plant height
-def: "actual measurement of plant height from soil surface to the highest point in plant as identified in the study." [ICIS:1006, IRRI:SES]
+def: "Actual measurement of plant height from soil surface to the highest point in plant as identified in the study." [ICIS:1006, IRRI:SES]
 synonym: "shoot height" []
 related_synonym: "Ht" []
 related_synonym: "PTHT" []
@@ -1551,23 +1597,29 @@ is_a: TO:0000171 ! height related trait
 [Term]
 id: TO:0000208
 name: lemma number
-is_a: TO:0000079 ! lemma and palea related traits
-is_a: TO:0000622 ! flower development trait
+def: "Number of lemma in the grass flower (floret)." [GR:pj]
+is_a: TO:0000079 ! lemma and palea anatomy and morphology trait
+is_a: TO:0002613 ! reproductive homeotic development trait
+is_a: TO:0006026 ! floral bract number
+is_a: TO:0006038 ! floral organ number
 
 [Term]
 id: TO:0000209
 name: palea number
-def: "Number of palea in the floret." [GR:pj]
+def: "Number of palea in the grass flower (floret)." [GR:pj]
 related_synonym: "PALNB" []
-is_a: TO:0000079 ! lemma and palea related traits
-is_a: TO:0000622 ! flower development trait
+is_a: TO:0000079 ! lemma and palea anatomy and morphology trait
+is_a: TO:0002613 ! reproductive homeotic development trait
+is_a: TO:0006026 ! floral bract number
+is_a: TO:0006038 ! floral organ number
 
 [Term]
 id: TO:0000210
 name: anther number
 def: "Variation in the number of anthers in androecium." [GR:pj]
 related_synonym: "ANTNB" []
-is_a: TO:0000215 ! stamen related trait
+is_a: TO:0000215 ! stamen anatomy and morphology trait
+is_a: TO:0006038 ! floral organ number
 
 [Term]
 id: TO:0000211
@@ -1598,12 +1650,13 @@ id: TO:0000214
 name: anther shape
 def: "Variation in the shape of anthers compared to the normal or reference type." [GR:pj]
 related_synonym: "ANTSHP" []
-is_a: TO:0000215 ! stamen related trait
+is_a: TO:0000215 ! stamen anatomy and morphology trait
 
 [Term]
 id: TO:0000215
-name: stamen related trait
-is_a: TO:0000274 ! floret related trait
+name: stamen anatomy and morphology trait
+def: "Traits associated with changes in the anatomy or structure of the stamen and its parts." [GR:pj]
+synonym: "stamen related trait" []
 is_a: TO:0000499 ! flower anatomy and morphology trait
 
 [Term]
@@ -1644,6 +1697,7 @@ is_a: TO:0000261 ! insect damage resistance
 [Term]
 id: TO:0000221
 name: glume color
+def: "Color of the glume." [GR:pj]
 related_synonym: "GLCL" []
 related_synonym: "glume discoloration" []
 related_synonym: "glume pigmentation" []
@@ -1661,8 +1715,9 @@ is_a: TO:0000162 ! seed quality
 
 [Term]
 id: TO:0000223
-name: pistil related trait
-is_a: TO:0000274 ! floret related trait
+name: pistil anatomy and morphology trait
+def: "Traits associated with changes in the anatomy or structure of the pistil and its parts." [GR:pj]
+synonym: "pistil related trait  " []
 is_a: TO:0000499 ! flower anatomy and morphology trait
 
 [Term]
@@ -1679,15 +1734,20 @@ id: TO:0000225
 name: stamen number
 def: "Number of stamens present in the flower." [GR:pj]
 related_synonym: "STANB" []
-is_a: TO:0000215 ! stamen related trait
-is_a: TO:0000622 ! flower development trait
+is_a: TO:0000215 ! stamen anatomy and morphology trait
+is_a: TO:0002613 ! reproductive homeotic development trait
+is_a: TO:0006022 ! floral organ development trait
+is_a: TO:0006038 ! floral organ number
 
 [Term]
 id: TO:0000226
 name: auricleless
+def: "A measure of either the absence of auricle or the length of auricle neing zero." [GR:pj]
 related_synonym: "AUMIN" []
-is_a: TO:0000419 ! leaf anatomy and morphology trait
+exact_synonym: "auricle absence" []
+exact_synonym: "auricle absent" []
 is_a: TO:0000655 ! leaf development trait
+is_a: TO:0002717 ! auricle morphology and anatomy trait
 
 [Term]
 id: TO:0000227
@@ -1718,6 +1778,7 @@ name: crown rootless
 def: "Absence of crown roots in the plant" [GR:pj]
 related_synonym: "CWRTMIN" []
 is_a: TO:0000198 ! rootless
+is_a: TO:0002685 ! crown root number
 
 [Term]
 id: TO:0000231
@@ -1752,12 +1813,12 @@ id: TO:0000235
 name: liguleless
 def: "Absence of ligule." [GR:pj]
 related_synonym: "LIGMIN" []
-is_a: TO:0000419 ! leaf anatomy and morphology trait
-is_a: TO:0000655 ! leaf development trait
+is_a: TO:0002748 ! ligule anatomy and morphology trait
 
 [Term]
 id: TO:0000236
-name: crop damage resistance trait
+name: crop damage resistance
+exact_synonym: "crop damage resistance trait" []
 is_a: TO:0000179 ! biotic stress trait
 
 [Term]
@@ -1780,10 +1841,10 @@ is_obsolete: true
 [Term]
 id: TO:0000240
 name: sterile lemma length
-def: "Describes the length of the sterile lemma. The measurement is made on each of the two sterile lemmas." [IRRI:SES]
+def: "Length of the sterile lemma. The measurement is made on each of the two sterile lemmas." [IRRI:SES]
 related_synonym: "SLmL" []
 related_synonym: "STLEMLG" []
-is_a: TO:0000079 ! lemma and palea related traits
+is_a: TO:0000079 ! lemma and palea anatomy and morphology trait
 
 [Term]
 id: TO:0000241
@@ -1796,7 +1857,7 @@ is_a: TO:0000419 ! leaf anatomy and morphology trait
 id: TO:0000242
 name: microbial damage resistance
 def: "Response by the plant in terms of resistivity or sensitivity to microbes." [GR:pj]
-is_a: TO:0000236 ! crop damage resistance trait
+is_a: TO:0000236 ! crop damage resistance
 
 [Term]
 id: TO:0000243
@@ -1882,9 +1943,10 @@ is_a: TO:0000238 ! growth media composition sensitivity
 [Term]
 id: TO:0000255
 name: sheath blight disease resistance
+def: "Causal agent\: Rhizoctonia solani. Symptom\: Grayish-green lesions may enlarge and coalesce with other lesions\, mostly on lower leaf sheaths\, but occasionally on the leaves." [IRRI:SES]
 related_synonym: "SHBTRS" []
 related_synonym: "ShB" []
-is_a: TO:0000315 ! bacterial disease resistance
+is_a: TO:0000439 ! fungal disease resistance
 
 [Term]
 id: TO:0000256
@@ -1895,6 +1957,7 @@ is_obsolete: true
 [Term]
 id: TO:0000257
 name: root branching
+def: "The extent of the root branching as determined under variable treatments and environments." [GR:pj]
 related_synonym: "RTBR" []
 related_synonym: "rbr" []
 is_a: TO:0000043 ! root anatomy and morphology trait
@@ -1922,21 +1985,28 @@ is_a: TO:0000054 ! animal damage resistance
 [Term]
 id: TO:0000261
 name: insect damage resistance
-def: "represents the damage done  by the insects to the crop. The damage is a direct measure of resistance to the particular insect variety. The test evaluation is valid if insect population is uniformly distributed at a high level across the screening box or the field. " [GR:pj, IRRI:SES]
-related_synonym: "insect resistance" []
+def: "An assay to determine the resistance exhibited by a plant or a group of plants (population) in response to insect infestation as compared to the susceptible and/or the reference plants of the same species." [GR:pj, IRRI:SES]
+comment: It represents the damage done by the insects to the plant. The damage is a direct measure of resistance to the particular insect variety. The test evaluation is valid if insect population is uniformly distributed at a high level across the screening box or the field.
+narrow_synonym: "insect resistance" []
 is_a: TO:0000054 ! animal damage resistance
 
 [Term]
 id: TO:0000262
 name: panicle shape
+def: "Shape of the panicle inflorescence" [GR:pj]
 is_a: TO:0000268 ! inflorescence shape
 
 [Term]
 id: TO:0000264
 name: lemma and palea color
-def: "At growth stage\: 9\, " [IRRI:SES]
+def: "Color of the lemma and the palea." [IRRI:SES, GR:pj]
+synonym: "LEMCL" []
+synonym: "LEMPALCL" []
+synonym: "Lemma color" []
+synonym: "PALCL" []
+synonym: "palea color" []
 related_synonym: "LmPC" []
-is_a: TO:0000079 ! lemma and palea related traits
+is_a: TO:0000079 ! lemma and palea anatomy and morphology trait
 relationship: part_of TO:0000536 ! floret color
 
 [Term]
@@ -1951,6 +2021,7 @@ is_a: TO:0000075 ! light sensitivity
 id: TO:0000266
 name: chalky endosperm
 def: "Defines a representative milled sample for the degree (extent) of chalkiness that will best describe the sample with respect to (a) white belly\, (b) white center\, (c) white back." [GR:pj, ICIS:1253, IRRI:SES]
+synonym: "CHALK" []
 related_synonym: "Clk" []
 related_synonym: "chalkiness of endosperm" []
 is_a: TO:0000489 ! carbohydrate composition related trait
@@ -1959,11 +2030,16 @@ is_a: TO:0000587 ! endosperm quality
 [Term]
 id: TO:0000267
 name: inflorescence type
+alt_id: TO:0000500
+def: "Variation in the type of inflorescence\, wither due to extent and number of branching\, branch angles or modified form of the inflorescence." [GR:pj]
+synonym: "inflorescence type" []
+exact_synonym: "INFLOTYPE" []
 is_a: TO:0000373 ! inflorescence anatomy and morphology trait
 
 [Term]
 id: TO:0000268
 name: inflorescence shape
+def: "Shape of the inflorescence" [GR:pj]
 is_a: TO:0000373 ! inflorescence anatomy and morphology trait
 
 [Term]
@@ -1981,12 +2057,13 @@ is_a: TO:0000589 ! seed weight (sensu Poaceae)
 [Term]
 id: TO:0000270
 name: inflorescence axis angle
+def: "Angle of the inflorescence axis." [GR:pj]
 is_a: TO:0000373 ! inflorescence anatomy and morphology trait
 
 [Term]
 id: TO:0000271
 name: inflorescence length
-is_a: TO:0000268 ! inflorescence shape
+is_a: TO:0006031 ! inflorescence size
 
 [Term]
 id: TO:0000272
@@ -2003,12 +2080,16 @@ is_a: TO:0000261 ! insect damage resistance
 
 [Term]
 id: TO:0000274
-name: floret related trait
+name: floret anatomy and morphology trait
+def: "Traits associated with changes in the anatomy or structure of the grass floret and its parts." [GR:pj]
+synonym: "floret related trait" []
 is_a: TO:0000499 ! flower anatomy and morphology trait
 
 [Term]
 id: TO:0000275
-name: perianth related trait
+name: perianth anatomy and morphology trait
+def: "Traits associated with changes in the anatomy or structure of the perianth and its parts." [GR:pj]
+synonym: "perianth related trait" []
 is_a: TO:0000499 ! flower anatomy and morphology trait
 
 [Term]
@@ -2017,26 +2098,29 @@ name: drought tolerance
 def: "Becoming tolerant to drought like conditions of minimal or no water content in the growth environment." [GR:pj]
 comment: Often  the plants exhibiting high salt tolerance also exhibit drought tolerance.
 related_synonym: "DRTL" []
-related_synonym: "drought resistance" []
+exact_synonym: "drought resistance" []
 is_a: TO:0000394 ! drought related trait
 
 [Term]
 id: TO:0000277
 name: biochemical trait
-def: "The traits associated with assay of either of the effected metabolite profile or enzymatic activity or  biological processes." [GR:pj]
+def: "The traits associated with assay of either of the effected metabolite profile\, enzymatic activity and  biological processes which includes the physiological processes." [GR:pj]
 is_a: TO:0000387 ! trait ontology
 
 [Term]
 id: TO:0000278
 name: root to shoot ratio
-related_synonym: "RTSHRO" []
-related_synonym: "r/s" []
-related_synonym: "root/shoot ratio" []
+def: "The ratio determined from the parameters evaluated for root length and the shoot length in a study." [GR:pj]
+exact_synonym: "RTSHRO" []
+exact_synonym: "r/s" []
+exact_synonym: "root length to shoot length ratio" []
+exact_synonym: "root/shoot ratio" []
 is_a: TO:0000043 ! root anatomy and morphology trait
 
 [Term]
 id: TO:0000279
 name: root weight
+def: "The average dry or fresh weight of the root determined in a study." [GR:pj]
 related_synonym: "RTWT" []
 related_synonym: "TRW" []
 related_synonym: "total root weight" []
@@ -2059,14 +2143,14 @@ is_a: TO:0000277 ! biochemical trait
 
 [Term]
 id: TO:0000282
-name: enzymatic activity/protein content related trait
+name: enzymatic activity and protein content related trait
 def: "The trait associated with an assay to determine the effected enzymatic activity." [GR:pj]
 is_a: TO:0000277 ! biochemical trait
 
 [Term]
 id: TO:0000283
 name: biological process related trait
-def: "The trait associated with assay to determine the effected biological process." [GR:pj]
+def: "The trait associated with assay to determine the affected biological process." [GR:pj]
 is_a: TO:0000277 ! biochemical trait
 
 [Term]
@@ -2104,7 +2188,7 @@ name: brown rice shape
 def: "Shape of the brown rice. Measure after harvesting\, cleaning\, and dehulling." [ICIS:1258, IRRI:SES]
 related_synonym: "BRWSHP" []
 related_synonym: "BrS" []
-is_a: TO:0000484 ! seed shape
+is_a: TO:0002730 ! grain shape
 
 [Term]
 id: TO:0000288
@@ -2122,19 +2206,21 @@ relationship: part_of TO:0000336 ! total amylase activity
 [Term]
 id: TO:0000289
 name: carotene content
-def: "Measures the carotene content in a plant or plant part. These are any group of naturally occurring tetraterpenes (carotenoids) that are synthesized only in plants. " [ISBN:198506732]
+def: "The carotene content in a plant or plant part. " [ISBN:198506732]
+comment: These are any group of naturally occurring tetraterpenes (carotenoids) that are synthesized only in plants and differ from xanthophyll by not having oxygen in their molecule.
 is_a: TO:0000496 ! carotenoid content
 
 [Term]
 id: TO:0000290
 name: flavonoid content
-def: "Flavonoids are water soluble polyphenolic molecules containing 15 carbon atoms. Flavonoids belong to the polyphenol family and have antioxidant activity." [GR:pj]
+def: "The flavonoid content in a plant or plant part." [GR:pj]
+comment: Flavonoids are water soluble polyphenolic molecules containing 15 carbon atoms. Flavonoids belong to the polyphenol family and have antioxidant activity.
 is_a: TO:0000674 ! phytochemical compound content
 
 [Term]
 id: TO:0000291
 name: carbohydrate content
-def: "Measures the carbohydrate content in a plant or plant part. " [GR:pj]
+def: "Trait asssociated with the carbohydrate content\, concentration and/or yeild from the plant or plant part.  " [GR:pj]
 related_synonym: "CARBCN" []
 is_a: TO:0000281 ! metabolite content related trait
 
@@ -2159,6 +2245,7 @@ name: auricle color
 def: "The changes in the color of auricle" [IRRI:SES]
 related_synonym: "AC" []
 related_synonym: "AUCL" []
+is_a: TO:0002717 ! auricle morphology and anatomy trait
 relationship: part_of TO:0000326 ! leaf color
 
 [Term]
@@ -2179,10 +2266,12 @@ is_a: TO:0000250 ! vigor related trait
 [Term]
 id: TO:0000297
 name: glucosamine content
-def: "Measures the glucosamine content. It is one of the most abundant natural polysaccharide. " [GR:pj, ISBN:198506732]
+def: "Amount of glucosamine present in the plant or plant part. " [GR:pj, ISBN:198506732]
+comment: It is one of the most abundant natural polysaccharide.
 related_synonym: "2-amino-2-deoxyglucopyranose content" []
 related_synonym: "GLUCNCN" []
-is_a: TO:0000333 ! sugar content
+is_a: TO:0006003 ! oligosaccharide content
+is_a: TO:0006008 ! carbohydrate derivative content
 
 [Term]
 id: TO:0000298
@@ -2197,7 +2286,7 @@ is_a: TO:0000495 ! chlorophyll content
 [Term]
 id: TO:0000299
 name: leaf lamina color
-def: "Change observed in leaf blade color  " [ICIS:1054, IRRI:SES]
+def: "Color of the leaf lamina/blade. " [ICIS:1054, IRRI:SES]
 related_synonym: "LBC" []
 related_synonym: "LFLCL" []
 related_synonym: "leaf blade color" []
@@ -2207,16 +2296,18 @@ relationship: part_of TO:0000326 ! leaf color
 [Term]
 id: TO:0000300
 name: glucose content
-def: "Measures the content of glucose in a plant or a plant part. It is a common monosaccharide that is a component of disaccharides (sucrose\, lactose\, and maltose) and various complex carbohydrates" [GR:pj]
+def: "Amount of glucose present in the plant or plant part." [GR:pj]
+comment: It is a common monosaccharide that is a component of oligo/disaccharides (sucrose\, lactose\, and maltose) and various complex carbohydrates
 related_synonym: "D-glucose content" []
 related_synonym: "GLUCCN" []
 related_synonym: "dextrose content" []
-is_a: TO:0000333 ! sugar content
+is_a: TO:0000307 ! hexose content
 
 [Term]
 id: TO:0000301
 name: xanthophyll content
-def: "Measures the xanthophyll content in a plant or plant part. These are any group of naturally occurring tetraterpenes (carotenoids) that are synthesized only in plants and contain oxygen in various forms. " [ISBN:198506732]
+def: "The xanthophyll content in a plant or plant part.  " [ISBN:198506732]
+comment: These are any group of naturally occurring tetraterpenes (carotenoids) that are synthesized only in plants and contain oxygen in various forms.
 related_synonym: "XANCN" []
 is_a: TO:0000496 ! carotenoid content
 
@@ -2261,9 +2352,10 @@ is_a: TO:0000043 ! root anatomy and morphology trait
 [Term]
 id: TO:0000307
 name: hexose content
-def: "Measures the hexose content in a plant or plant part. Hexose is any aldose having a chain of six carbon atoms in a molecule." [ISBN:198506732]
+def: "Amount of hexose present in the plant or plant part. " [ISBN:198506732]
+comment: Hexose is any aldose having a chain of six carbon atoms in a molecule.
 related_synonym: "HEXCN" []
-is_a: TO:0000333 ! sugar content
+is_a: TO:0006006 ! monosaccharide content
 
 [Term]
 id: TO:0000308
@@ -2333,11 +2425,15 @@ is_a: TO:0000598 ! protein content
 [Term]
 id: TO:0000315
 name: bacterial disease resistance
-is_a: TO:0000112 ! disease resistance trait
+def: "The resistance exhibited by a plant or a group of plants (population) in response to the disease caused by a bacterial pathogen infection as compared to the susceptible and/or the reference plants of the same species." [GR:pj]
+comment: It represents the damage done by the diease and/or the pathogen to the plant. The damage is a direct measure of resistance to the particular bacterial strain causing the disease.
+is_a: TO:0000112 ! disease resistance
 
 [Term]
 id: TO:0000316
 name: photosynthetic ability
+def: "The photosynthesis ability determined on a plant or the plant part under stress." [GR:pj]
+comment: Methods may include actual measurements on photosynthesis\, pigment content or the content and composition of enzymes associated with photosynthesis.
 related_synonym: "PHOTOSYNAB" []
 is_a: TO:0000349 ! physiological process related trait
 
@@ -2351,6 +2447,8 @@ is_a: TO:0000261 ! insect damage resistance
 [Term]
 id: TO:0000318
 name: reducing sugar content
+def: "Amount of reducing sugar present in the plant or plant part." [GR:pj]
+comment: A reducing sugar is any sugar which in basic solution forms contain aldehyde or ketone groups that are oxidised to carboxylic acids.
 related_synonym: "REDSUGCN" []
 is_a: TO:0000333 ! sugar content
 
@@ -2382,7 +2480,7 @@ name: phenotypic acceptability
 def: "Breeding objectives for each variety and trait varies. The evaluation should reflect the overall acceptability of the variety." [ICIS:1005, IRRI:SES]
 related_synonym: "PAcp" []
 related_synonym: "overall liking" []
-is_a: TO:0000183 ! other miscellaneous trait
+is_a: TO:0000597 ! quality trait
 
 [Term]
 id: TO:0000323
@@ -2428,7 +2526,7 @@ name: sucrose content
 def: "The amount of sucrose present in the plant or the plant part." [GR:pj]
 related_synonym: "SUCROSECN" []
 related_synonym: "saccharose content" []
-is_a: TO:0000333 ! sugar content
+is_a: TO:0006007 ! polysaccharide content
 
 [Term]
 id: TO:0000329
@@ -2490,7 +2588,7 @@ name: ligule shape
 def: "Defines the actual shape of the ligule" [IRRI:SES]
 related_synonym: "LIGSHP" []
 related_synonym: "LS" []
-is_a: TO:0000492 ! leaf shape
+is_a: TO:0002748 ! ligule anatomy and morphology trait
 
 [Term]
 id: TO:0000336
@@ -2504,7 +2602,8 @@ relationship: part_of TO:0000606 ! diastatic power
 [Term]
 id: TO:0000337
 name: kneeing ability
-def: "Represents the angle of the tiller in the submerged water fields (flash flooding). Less is the tiller angle compared to water surface the least is the chance of survivability" [ICIS:1212, IRRI:SES]
+def: "Represents the angle of the tiller in the submerged water fields (flash flooding). " [ICIS:1212, IRRI:SES]
+comment: Less is the tiller angle compared to water surface the least is the chance of plant's survivability.
 related_synonym: "KNEAB" []
 related_synonym: "KnA" []
 related_synonym: "tiller angle" []
@@ -2522,6 +2621,8 @@ relationship: part_of TO:0000336 ! total amylase activity
 id: TO:0000339
 name: stem thickness
 alt_id: TO:0000535
+def: "Thickness of the stem." [GR:pj]
+synonym: "STEMTH" []
 related_synonym: "CULMTH" []
 related_synonym: "culm thickness" []
 related_synonym: "culm thickness (sensu Poaceae)" []
@@ -2547,7 +2648,6 @@ id: TO:0000342
 name: panicle axis angle
 def: "Represents the angle of panicle axis." [IRRI:SES]
 related_synonym: "PnAk" []
-related_synonym: "panicle axis" []
 is_a: TO:0000270 ! inflorescence axis angle
 
 [Term]
@@ -2559,9 +2659,12 @@ is_a: TO:0000347 ! weed damage
 [Term]
 id: TO:0000344
 name: days to flower
-def: "Number of days required to 50 percent blooming or flowering in a field." [GR:pj]
+def: "Number of days from the seed sowing or the seedling transplant date (in some cases of rice)  to the anthesis (flowering) stage. " [GR:pj]
+comment: Often determinded by either pollen shedding\, exsertion of the anthers or simply opening of the flower.
 related_synonym: "DTFL" []
-is_a: TO:0000622 ! flower development trait
+exact_synonym: "days to flowering" []
+narrow_synonym: "Delay in flowering time" []
+is_a: TO:0002616 ! flowering time
 
 [Term]
 id: TO:0000345
@@ -2580,7 +2683,7 @@ relationship: part_of TO:0000027 ! culm number
 id: TO:0000347
 name: weed damage
 def: "Weeds reduce the yield regardless of planting season. They compete for sunlight\, nutrients and water. If any of these is lacking\, the others cannot be used effectively\, even if a lot are present. Thus\, the competition results in poor plant growth and less yield." [GR:pj, ISBN:9712200299]
-is_a: TO:0000236 ! crop damage resistance trait
+is_a: TO:0000236 ! crop damage resistance
 
 [Term]
 id: TO:0000348
@@ -2671,13 +2774,15 @@ is_a: TO:0000485 ! sterility related trait
 [Term]
 id: TO:0000359
 name: female flowering
+def: "Traits associated with the timing of the flowering  (anthesis) of female flowers." [GR:pj]
+comment: Ofetn influenced by the environemnt that includes\, day light\, temperature and geographic location.
 related_synonym: "DTSLK" []
 related_synonym: "FEMFLW" []
 related_synonym: "FFLW" []
 related_synonym: "Female flower anthesis" []
 related_synonym: "Female flower flowering" []
 related_synonym: "days to silk" []
-is_a: TO:0002616 ! flowering
+is_a: TO:0002616 ! flowering time
 
 [Term]
 id: TO:0000360
@@ -2690,6 +2795,7 @@ is_a: TO:0000655 ! leaf development trait
 [Term]
 id: TO:0000361
 name: stem anatomy and morphology trait
+def: "Traits associated with changes in the anatomy or structure of the stem and its parts." [GR:pj]
 is_a: TO:0000077 ! shoot anatomy and morphology trait
 
 [Term]
@@ -2709,11 +2815,13 @@ relationship: part_of TO:0000326 ! leaf color
 [Term]
 id: TO:0000365
 name: male flowering
+def: "Traits associated with the timing of the flowering  (anthesis) of male flowers." [GR:pj]
+comment: Ofetn influenced by the environemnt that includes\, day light\, temperature and geographic location.
 related_synonym: "MALEFLW" []
 related_synonym: "MFLW" []
 related_synonym: "male flower anthesis" []
 related_synonym: "male flower flowering" []
-is_a: TO:0002616 ! flowering
+is_a: TO:0002616 ! flowering time
 
 [Term]
 id: TO:0000366
@@ -2725,10 +2833,10 @@ is_a: TO:0000357 ! growth and development trait
 [Term]
 id: TO:0000367
 name: basal leaf sheath color
-def: "The changes in the color of basal leaf sheath color. " [ICIS:1306, IRRI:SES]
+def: "The changes in the color of basal leaf sheath. " [ICIS:1306, IRRI:SES]
 related_synonym: "BALFSCL" []
 related_synonym: "BLSC" []
-relationship: part_of TO:0000326 ! leaf color
+is_a: TO:0002724 ! leaf sheath color
 
 [Term]
 id: TO:0000368
@@ -2747,7 +2855,7 @@ is_a: TO:0000357 ! growth and development trait
 [Term]
 id: TO:0000370
 name: leaf width
-def: "Actual measurements\, in centimeters of the widest portion of the leaf blade." [ICIS:1308, IRRI:SES]
+def: "Actual measurements\, in centimeters of the widest portion of the leaf. To be precise use the children terms leaf lamina width (TO\:0002720) or  'leaf sheath width (TO\:0002721)." [ICIS:1308, IRRI:SES]
 related_synonym: "LFWD" []
 related_synonym: "LW" []
 is_a: TO:0002637 ! leaf size
@@ -2755,7 +2863,7 @@ is_a: TO:0002637 ! leaf size
 [Term]
 id: TO:0000371
 name: yield trait
-def: "Traits that contribute directly or indirectly to the yield or the produce from a plant." [GR:pj]
+def: "Traits that contribute directly or indirectly to the yield or the produce from a plant. IT may be determined in terms of weight or the number of grains/seed." [GR:pj]
 related_synonym: "YLD" []
 is_a: TO:0000387 ! trait ontology
 
@@ -2764,8 +2872,7 @@ id: TO:0000372
 name: amylose to amylopectin ratio
 def: "Ratio of amount of amylose to amylopectin content." [GR:pj]
 related_synonym: "AMYAMYPCTRO" []
-is_a: TO:0000097 ! amylopectin content
-is_a: TO:0000196 ! amylose content
+is_a: TO:0000291 ! carbohydrate content
 
 [Term]
 id: TO:0000373
@@ -2773,6 +2880,8 @@ name: inflorescence anatomy and morphology trait
 alt_id: TO:0000363
 alt_id: TO:0000584
 alt_id: TO:0000585
+def: "Traits associated with changes in the anatomy or structure of the inflorescence and its parts." [GR:pj]
+synonym: "inflorescence structure trait" []
 related_synonym: "ear anatomy and morphology trait" []
 related_synonym: "inflorescence anatomy and morphology trait (sensu Oryza)" []
 related_synonym: "inflorescence anatomy and morphology trait (sensu Zea)" []
@@ -2791,8 +2900,10 @@ is_a: TO:0000667 ! cooking or brewing quality
 [Term]
 id: TO:0000375
 name: brown rice ratio
+def: "Determined from grain length and grain width on dehulled unpolished rice grain." [GR:pj]
+synonym: "brown rice length to width ratio" []
 related_synonym: "BRWRRO" []
-is_a: TO:0000162 ! seed quality
+is_a: TO:0002731 ! grain length to width ratio
 
 [Term]
 id: TO:0000376
@@ -2856,17 +2967,18 @@ is_a: TO:0000587 ! endosperm quality
 [Term]
 id: TO:0000384
 name: nematode damage resistance
-def: "crop damage done by nematode infection" [GR:pj]
+def: "An assay to determine the resistance exhibited by a plant or a group of plants (population) in response to nematode infestation as compared to the susceptible and/or the reference plants of the same species." [GR:pj]
 related_synonym: "NDRS" []
 is_a: TO:0000054 ! animal damage resistance
 
 [Term]
 id: TO:0000385
-name: grain color
+name: milled grain color
 def: "Color of the dehulled\, milled grain\, which does not have pericarp." [GR:pj]
+comment: Based on the definition the term name was changed to milled grain color instead of grain color. For color of the dehulled grain please see pericarp color (TO\:0000707).
+synonym: "MGRCL" []
 related_synonym: "GRCL" []
-is_a: TO:0000162 ! seed quality
-relationship: part_of TO:0000486 ! seed color
+is_a: TO:0002617 ! fruit color
 
 [Term]
 id: TO:0000386
@@ -2909,6 +3021,7 @@ id: TO:0000391
 name: seed size
 def: "seed size is determined by  its length to width ratio" [GR:pj, ICIS:1302]
 synonym: "kernel size" []
+is_a: TO:0000162 ! seed quality
 is_a: TO:0000653 ! seed development trait
 
 [Term]
@@ -2925,6 +3038,7 @@ is_obsolete: true
 [Term]
 id: TO:0000394
 name: drought related trait
+def: "Response by the plant in terms of  sensitivity to sufficiently prolonged water deficit/scarcity or scanty water content in the soil or growth medium\, that can cause damage to the plant." [GR:pj]
 related_synonym: "dessication related trait" []
 is_a: TO:0000237 ! water stress trait
 
@@ -2942,8 +3056,7 @@ id: TO:0000397
 name: grain size
 def: "Size of the dehulled\, milled grain without pericarp." [GR:pj]
 related_synonym: "GRSZ" []
-is_a: TO:0000162 ! seed quality
-relationship: part_of TO:0000391 ! seed size
+is_a: TO:0002625 ! fruit size
 
 [Term]
 id: TO:0000398
@@ -2953,19 +3066,19 @@ is_obsolete: true
 [Term]
 id: TO:0000399
 name: grain thickness
-def: "Thickness of the dehulled\, milled grain without pericarp." [GR:pj]
+def: "Thickness of the dehulled grain with pericarp." [GR:pj]
 related_synonym: "GRTH" []
-is_a: TO:0000162 ! seed quality
-relationship: part_of TO:0000304 ! seed thickness
+is_a: TO:0000357 ! growth and development trait
+is_a: TO:0002728 ! fruit quality trait
 relationship: part_of TO:0000397 ! grain size
 
 [Term]
 id: TO:0000400
 name: sterile lemma color
-def: "Describes color of the sterile lemma" [IRRI:SES]
+def: "Color of the sterile lemma" [IRRI:SES]
 related_synonym: "SLmC" []
 related_synonym: "STLEMCL" []
-is_a: TO:0000079 ! lemma and palea related traits
+is_a: TO:0000079 ! lemma and palea anatomy and morphology trait
 relationship: part_of TO:0000536 ! floret color
 
 [Term]
@@ -2978,10 +3091,14 @@ is_a: TO:0000482 ! chemical stress sensitivity
 [Term]
 id: TO:0000402
 name: grain width
-def: "Width of the dehulled\, milled grain without pericarp." [GR:pj]
+def: "Width of the dehulled grain with pericarp." [GR:pj]
+synonym: "DHULGRWD" []
+synonym: "dehulled grain curved width" []
+synonym: "dehulled-grain width" []
+synonym: "width of grain without hull" []
 related_synonym: "GRWD" []
-is_a: TO:0000162 ! seed quality
-relationship: part_of TO:0000149 ! seed width
+is_a: TO:0000357 ! growth and development trait
+is_a: TO:0002627 ! fruit width
 relationship: part_of TO:0000397 ! grain size
 
 [Term]
@@ -2995,6 +3112,7 @@ is_a: TO:0000261 ! insect damage resistance
 [Term]
 id: TO:0000404
 name: nodal rooting
+def: "Extent of rooting from the nodes on a stem." [GR:pj]
 is_a: TO:0000361 ! stem anatomy and morphology trait
 is_a: TO:0000656 ! root development trait
 
@@ -3040,6 +3158,7 @@ name: polished rice protein content
 def: "Total protein content of the polished rice." [GR:pj]
 related_synonym: "POLRPROTCN" []
 is_a: TO:0000490 ! protein composition related trait
+is_a: TO:0000598 ! protein content
 
 [Term]
 id: TO:0000411
@@ -3074,6 +3193,7 @@ related_synonym: "WHTRPROTCN" []
 related_synonym: "polished rice protein" []
 related_synonym: "protein content for polished rice" []
 is_a: TO:0000490 ! protein composition related trait
+is_a: TO:0000598 ! protein content
 
 [Term]
 id: TO:0000415
@@ -3093,9 +3213,9 @@ is_a: TO:0000358 ! female sterility
 [Term]
 id: TO:0000417
 name: lemma and palea pubescence
-def: "Describes the extent of pubescence (hairs) on the lemma and palea" [IRRI:SES]
+def: "Extent of pubescence (hairs) on the lemma and palea" [IRRI:SES]
 related_synonym: "LmPb" []
-is_a: TO:0000079 ! lemma and palea related traits
+is_a: TO:0000079 ! lemma and palea anatomy and morphology trait
 
 [Term]
 id: TO:0000418
@@ -3108,6 +3228,7 @@ is_a: TO:0000439 ! fungal disease resistance
 [Term]
 id: TO:0000419
 name: leaf anatomy and morphology trait
+def: "Traits associated with changes in the anatomy or structure of the leaf and its parts." [GR:pj]
 is_a: TO:0000077 ! shoot anatomy and morphology trait
 
 [Term]
@@ -3155,18 +3276,17 @@ is_a: TO:0000250 ! vigor related trait
 [Term]
 id: TO:0000426
 name: internode color
-def: "The color on outer surface of the internodes on the culm is recorded." [ICIS:1064, IRRI:SES]
+def: "Color of the stem internode." [ICIS:1064, IRRI:SES]
 related_synonym: "CmlC" []
 related_synonym: "INCL" []
 related_synonym: "culm internode color" []
 related_synonym: "stem internode color" []
-is_a: TO:0000056 ! stem color
-relationship: part_of TO:0000534 ! culm color (sensu Poaceae)
+relationship: part_of TO:0000056 ! stem color
 
 [Term]
 id: TO:0000427
-name: culm angle (sensu Poaceae)
-def: "The angle of the culm with respect to the ground surface." [IRRI:SES]
+name: culm angle
+def: "The angle of the culm with respect to the ground surface in a grass plant." [IRRI:SES]
 related_synonym: "CULMAG" []
 related_synonym: "CmA" []
 is_a: TO:0000577 ! stem angle
@@ -3189,6 +3309,7 @@ is_a: TO:0000480 ! nutrient sensitivity
 [Term]
 id: TO:0000430
 name: germination rate
+def: "Rate of germination of the seed." [GR:pj]
 related_synonym: "GERMRATE" []
 related_synonym: "GERMSP" []
 related_synonym: "germination speed" []
@@ -3236,28 +3357,24 @@ is_a: TO:0000485 ! sterility related trait
 id: TO:0000437
 name: male sterility
 def: "In plants\, it represents the incompetence of the pollen to fertilize the ovum. Reasons could be non-viable pollen\, incompatibility\, pollen abortion\, toxicity\, genetic etc. Usually determined by either the pollen sterility or spikelet fertility (percent seed set)." [GR:pj]
+synonym: "MALEST" []
 related_synonym: "degree of male sterility of male sterile lines" []
 related_synonym: "male sterility measure" []
 is_a: TO:0000485 ! sterility related trait
 
 [Term]
-id: TO:0000438
-name: grain number per panicle (sensu Oryza)
-def: "Number of grains (full grain with hull) present in one rice panicle." [GR:pj37]
-related_synonym: "GRNBPPN" []
-is_a: TO:0000445 ! seed number
-
-[Term]
 id: TO:0000439
 name: fungal disease resistance
-is_a: TO:0000112 ! disease resistance trait
+def: "The resistance exhibited by a plant or a group of plants (population) in response to the disease caused by a fungal pathogen infection as compared to the susceptible and/or the reference plants of the same species." [GR:pj]
+comment: It represents the damage done by the diease and/or the pathogen to the plant. The damage is a direct measure of resistance to the particular fungal strain causing the disease.
+is_a: TO:0000112 ! disease resistance
 
 [Term]
 id: TO:0000440
 name: grain number per plant
 def: "Number of grains (full grain with hull) present in one plant." [GR:pj37]
 related_synonym: "GRNBPPT" []
-is_a: TO:0000445 ! seed number
+is_a: TO:0002759 ! grain number
 
 [Term]
 id: TO:0000441
@@ -3293,12 +3410,11 @@ is_a: TO:0000347 ! weed damage
 id: TO:0000445
 name: seed number
 alt_id: TO:0000139
-def: "Number of seeds in the fruit or the number of caryopsis found in a fertilized grass inflorescence." [GR:pj]
-related_synonym: "GRNB" []
+def: "Number of seeds in the fruit or those sampled from a given inflorescence in a grass plant." [GR:pj]
+comment: It is directly related to the filled grain number (TO\:0000447) and grain number (TO\:0002759).
+synonym: "seeds per panicle" []
 related_synonym: "SDNB" []
-related_synonym: "grain number" []
-related_synonym: "kernel number" []
-is_a: TO:0000396 ! grain yield
+is_a: TO:0000371 ! yield trait
 
 [Term]
 id: TO:0000446
@@ -3309,46 +3425,53 @@ is_a: TO:0000168 ! abiotic stress trait
 [Term]
 id: TO:0000447
 name: filled grain number
-def: "Determined by counting the number of spikelets filled with grain in one panicle." [GR:pj]
-related_synonym: "FGRNB" []
-related_synonym: "filled grain number per panicle" []
-is_a: TO:0000445 ! seed number
+alt_id: TO:0000438
+def: "Determined by counting the number of spikelets filled with grain in one Inflorescence (panicle)." [GR:pj]
+comment: Another trait seed number (TO\:0000445) is directly associated with it.
+synonym: "FILGRNB" []
+synonym: "filled fruit number" []
+synonym: "grain number per panicle (sensu Oryza)" []
+related_synonym: "GRNBPPN" []
+exact_synonym: "FGRNB" []
+exact_synonym: "filled grain number per panicle" []
+exact_synonym: "number of grains per panicle" []
+is_a: TO:0002759 ! grain number
 
 [Term]
 id: TO:0000448
 name: filled grain percentage
-def: "Determined by counting the percent  spikelets filled with grain in one panicle or plant." [GR:pj]
+def: "Determined by counting the percent  spikelets filled with grain in one grass inflorescence (panicle) or plant." [GR:pj]
 related_synonym: "FGRPCENT" []
 related_synonym: "Filled grain percent per panicle" []
-is_a: TO:0000445 ! seed number
+is_a: TO:0002759 ! grain number
 
 [Term]
 id: TO:0000449
 name: grain yield per plant
+def: "Average weight of dehulled grains per plant." [GR:pj]
 related_synonym: "GRYLDPPL" []
-is_a: TO:0000396 ! grain yield
+is_a: TO:0000371 ! yield trait
 
 [Term]
 id: TO:0000450
 name: grain yield per panicle
-def: "Number of filled spikelets per panicle." [GR:pj]
-synonym: "grains per panicle" []
-related_synonym: "GRYLDPPN" []
-is_a: TO:0000396 ! grain yield
+def: "Average weight of dehulled grains per panicle." [GR:pj]
+exact_synonym: "GRYLDPPN" []
+is_a: TO:0000371 ! yield trait
 
 [Term]
 id: TO:0000451
-name: large vascular bundle number to spikelet number ratio (sensu Poaceae)
-def: "A ratio of number of large vascular bundles present in the spikelets to the number of spikelets in a panicle." [GR:pj]
+name: large vascular bundle number to spikelet number ratio
+def: "A ratio of number of large vascular bundles present in the spikelets to the number of spikelets in a grass inflorescence." [GR:pj]
 related_synonym: "LVBNBSPKNBRO" []
-is_a: TO:0000371 ! yield trait
 is_a: TO:0000456 ! spikelet number
 is_a: TO:0000472 ! vascular bundle number
 
 [Term]
 id: TO:0000452
-name: leaf area to spikelet number ratio (sensu Poaceae)
-def: "A ratio of flag leaf area to the number of spikelets in a panicle." [GR:pj]
+name: leaf area to spikelet number ratio
+def: "A ratio of leaf area to the number of spikelets in a grass inflorescence." [GR:pj]
+comment: Often measured using the flag leaf.
 related_synonym: "LFARSPKNBRO" []
 is_a: TO:0000540 ! leaf area
 
@@ -3380,10 +3503,13 @@ is_a: TO:0000445 ! seed number
 [Term]
 id: TO:0000456
 name: spikelet number
-def: "Number of spikelets in an inflorescence (e.g. rice panicle)" [GR:pj]
+def: "Average number of spikelets in one or more inflorescence (e.g. rice panicle) found in a plant or on all plants of a study." [GR:pj]
+synonym: "number of spikelets per panicle" []
+synonym: "spikelet number per panicle" []
 related_synonym: "SPKNB" []
 is_a: TO:0000371 ! yield trait
 is_a: TO:0000621 ! inflorescence development trait
+is_a: TO:0000657 ! spikelet anatomy and morphology trait
 
 [Term]
 id: TO:0000457
@@ -3430,10 +3556,11 @@ is_a: TO:0000667 ! cooking or brewing quality
 [Term]
 id: TO:0000463
 name: anthesis silking interval
+def: "A difference of the average number of days between the maize tassel flowering and the first visible silk (stigma) on the maize ear." [GR:pj]
 related_synonym: "ANTSKIT" []
 related_synonym: "ASI" []
 related_synonym: "FLWSLKINTER" []
-is_a: TO:0000622 ! flower development trait
+is_a: TO:0002616 ! flowering time
 
 [Term]
 id: TO:0000464
@@ -3443,8 +3570,8 @@ is_a: TO:0000357 ! growth and development trait
 
 [Term]
 id: TO:0000465
-name: mineral or ion content related trait
-def: "The total mineral or ion content measured in a plant or a plant part." [GR:pj]
+name: mineral and ion content related trait
+def: "The total mineral and/or ion content measured in a plant or a plant part." [GR:pj]
 comment: May be measured in a dry mass or in a fresh tissue.
 is_a: TO:0000277 ! biochemical trait
 
@@ -3453,18 +3580,20 @@ id: TO:0000466
 name: carbon content
 def: "Amount of carbon present in the dry mass." [GR:pj]
 related_synonym: "CBCN" []
-is_a: TO:0000465 ! mineral or ion content related trait
+is_a: TO:0000465 ! mineral and ion content related trait
 
 [Term]
 id: TO:0000467
 name: cell membrane stability
+def: "Stability of the cell membrane under the impact of temperature (heat) and water deficit stress. " [GR:pj, web:http\://www.plantstress.com/methods/CMS_method.htm]
+comment: The trait is often observed in plants as a measure of drought and heat tolerance by determining the amount of solutes/electrolyte leaked from the cell.
 related_synonym: "CELMBSTB" []
 is_a: TO:0000349 ! physiological process related trait
 
 [Term]
 id: TO:0000468
 name: leaf blast disease resistance
-def: "Causal agent\: Magnaporthe grisea (Pyricularia oryzae - the imperfect/anamorphic stage name). " [GR:pj, IRRI:SES]
+def: "Causal agent\: Magnaporthe grisea. Symptoms\: Can affect either or both the leaf and panicles." [GR:pj, IRRI:SES]
 related_synonym: "Bl" []
 related_synonym: "LFBLRS" []
 is_a: TO:0000074 ! blast disease
@@ -3480,6 +3609,7 @@ is_a: TO:0000653 ! seed development trait
 [Term]
 id: TO:0000470
 name: vascular tissue related trait
+def: "Traits associated with changes in the anatomy or structure of the vascular tissue and its parts." [GR:pj]
 is_a: TO:0000017 ! anatomy and morphology related trait
 
 [Term]
@@ -3499,12 +3629,13 @@ is_a: TO:0000470 ! vascular tissue related trait
 
 [Term]
 id: TO:0000473
-name: seed shattering
-def: "Measurement of extent of grain shattering\, which depends on development of abscission zone." [GR:pj]
+name: grain shattering
+def: "Measurement of extent of grain shattering\, which depends on development of abscission zone. This trait often refers to shattering or the premature or ease of shedding of the grass fruit called caryopsis from the inflorescence." [GR:pj]
+synonym: "caryopsis shattering" []
 related_synonym: "GRSH" []
 related_synonym: "SDSH" []
-related_synonym: "grain shattering" []
-is_a: TO:0000162 ! seed quality
+related_synonym: "seed shattering" []
+is_a: TO:0002729 ! fruit senescing quality trait
 
 [Term]
 id: TO:0000474
@@ -3512,7 +3643,7 @@ name: glume opening
 def: "Angle of opening of glumes is measured on each floret\, assessment based on mean angle of glume opening. " [GR:pj, IRRI:SES]
 related_synonym: "glume angle" []
 related_synonym: "opening of glume of male sterile lines" []
-is_a: TO:0000079 ! lemma and palea related traits
+is_a: TO:0000079 ! lemma and palea anatomy and morphology trait
 
 [Term]
 id: TO:0000475
@@ -3523,6 +3654,7 @@ is_a: TO:0000306 ! root thickness
 [Term]
 id: TO:0000476
 name: growth hormone content
+def: "Measures the growth hormone content in a plant or plant part. " [GR:pj]
 is_a: TO:0000281 ! metabolite content related trait
 
 [Term]
@@ -3536,6 +3668,7 @@ is_a: TO:0000074 ! blast disease
 [Term]
 id: TO:0000478
 name: abscisic acid concentration
+def: "Measures the growth hormone concentration in a plant or plant part. " [GR:pj]
 related_synonym: "ABA concentration" []
 related_synonym: "ABACONC" []
 related_synonym: "abscisic acid accumulation" []
@@ -3575,12 +3708,13 @@ name: germinability at low temperature
 def: "Measure of the seed's germination ability at sub-permissive temperature levels." [GR:pj]
 related_synonym: "GERMABITMP" []
 related_synonym: "germination ability at low temperature" []
+is_a: TO:0000162 ! seed quality
 is_a: TO:0000653 ! seed development trait
 
 [Term]
 id: TO:0000484
 name: seed shape
-def: "Defines shape of the seed or fruit caryopsis." [GR:pj]
+def: "Defines shape of the seed." [GR:pj]
 related_synonym: "SDSHP" []
 is_a: TO:0000162 ! seed quality
 is_a: TO:0000184 ! seed anatomy and morphology trait
@@ -3594,7 +3728,7 @@ is_a: TO:0000392 ! sterility or fertility trait
 [Term]
 id: TO:0000486
 name: seed color
-def: "The color of the seed or the fruit caryopsis in cereals\, which has not been dehulled." [GR:pj]
+def: "The color of the seed." [GR:pj]
 related_synonym: "SDCL" []
 is_a: TO:0000162 ! seed quality
 is_a: TO:0000184 ! seed anatomy and morphology trait
@@ -3654,10 +3788,10 @@ is_a: TO:0000674 ! phytochemical compound content
 [Term]
 id: TO:0000496
 name: carotenoid content
-def: "Measures the carotenoid content in a plant or plant part. These are any group of naturally occurring tetraterpenes that are synthesized only in plants. " [ISBN:198506732]
+def: "The carotenoid content in a plant or plant part. Includes naturally occurring tetraterpenes that are synthesized only in plants. " [ISBN:198506732]
 related_synonym: "CRTCN" []
-is_a: TO:0000290 ! flavonoid content
 is_a: TO:0000494 ! pigment content
+is_a: TO:0000674 ! phytochemical compound content
 
 [Term]
 id: TO:0000497
@@ -3675,16 +3809,13 @@ is_a: TO:0000497 ! fertility restoration trait
 [Term]
 id: TO:0000499
 name: flower anatomy and morphology trait
+def: "Traits associated with changes in the anatomy or structure of the flower and its parts." [GR:pj]
 relationship: part_of TO:0000373 ! inflorescence anatomy and morphology trait
-
-[Term]
-id: TO:0000500
-name: inflorescence type
-is_obsolete: true
 
 [Term]
 id: TO:0000501
 name: spikelet weight
+def: "Weight of the spikelet." [GR:pj]
 related_synonym: "SPKWT" []
 is_a: TO:0000657 ! spikelet anatomy and morphology trait
 
@@ -3699,7 +3830,7 @@ is_a: TO:0000429 ! salt sensitivity
 [Term]
 id: TO:0000503
 name: leaf rolling time
-def: "Measure time taken by the leaf to roll completely under drought or water stress." [GR:pj]
+def: "Measureof  time taken by the leaf to roll completely under drought or water stress." [GR:pj]
 related_synonym: "LFRLTM" []
 is_a: TO:0000085 ! leaf rolling
 
@@ -3720,18 +3851,23 @@ is_a: TO:0000168 ! abiotic stress trait
 [Term]
 id: TO:0000506
 name: nitrogen recycling
+def: "It is a measure of reduced net ammonium production in response to the receipt of photosynthate" [GR:pj]
+synonym: "nitrogen conservation" []
 related_synonym: "NIRCYC" []
 is_a: TO:0000349 ! physiological process related trait
 
 [Term]
 id: TO:0000507
 name: osmotic adjustment capacity
+def: "The ability of the plant to adust the osmotic potential under stress conditions. " [GR:pj]
+comment: The main role of osmotic adjustment in the plant is to assist in the maintenance of turgor and volume as organs lose water during desiccation\, i.e. to provide dehydration tolerance. Often determined by relative water or the amount of solute accumulated at a given water potential.
 related_synonym: "OSADJCAP" []
 is_a: TO:0000349 ! physiological process related trait
 
 [Term]
 id: TO:0000508
 name: penetrated root length
+def: "Average maximum length of the root of a plant in a study that have penetrated to a predetermined soil depth." [GR:pj]
 related_synonym: "PENRTLG" []
 is_a: TO:0000227 ! root length
 
@@ -3762,7 +3898,7 @@ id: TO:0000513
 name: potassium concentration
 def: "The total potassium ion concentration measured in a plant or a plant part or plant extract." [GR:pj]
 related_synonym: "KCONC" []
-is_a: TO:0000465 ! mineral or ion content related trait
+is_a: TO:0000465 ! mineral and ion content related trait
 
 [Term]
 id: TO:0000514
@@ -3774,6 +3910,7 @@ is_a: TO:0000349 ! physiological process related trait
 [Term]
 id: TO:0000515
 name: relative growth rate
+def: "The relative growth of the plant determined after a given treatment as compared to the one determined under normal conditions." [GR:pj]
 related_synonym: "RELGRATE" []
 is_a: TO:0000168 ! abiotic stress trait
 is_a: TO:0000250 ! vigor related trait
@@ -3781,12 +3918,14 @@ is_a: TO:0000250 ! vigor related trait
 [Term]
 id: TO:0000516
 name: relative root length
+def: "The relative length of the root determined after a given treatment as compared to the one determined under normal conditions." [GR:pj]
 related_synonym: "RELRTLG" []
 is_a: TO:0000227 ! root length
 
 [Term]
 id: TO:0000517
 name: relative shoot elongation under submergence
+def: "Elongation of the shoot under submergence condition against a reference without submergence." [GR:pj]
 related_synonym: "RELSHELSUB" []
 is_a: TO:0000077 ! shoot anatomy and morphology trait
 is_a: TO:0000114 ! flooding related trait
@@ -3794,31 +3933,38 @@ is_a: TO:0000114 ! flooding related trait
 [Term]
 id: TO:0000519
 name: rooting depth
+def: "It is calculated from the deepest soil layer where roots were present and the longest root measured in the layer." [GR:pj, PMID:12582650]
 related_synonym: "RTDP" []
+narrow_synonym: "maximum rooting depth" []
 is_a: TO:0000043 ! root anatomy and morphology trait
 is_a: TO:0000168 ! abiotic stress trait
 
 [Term]
 id: TO:0000520
 name: stomatal closure rate
+def: "The rate of closure of stomata due to stress or coupled to the rate of photosynthesis and/or transpiration." [GR:pj]
 related_synonym: "STOCSRRATE" []
 is_a: TO:0000349 ! physiological process related trait
 
 [Term]
 id: TO:0000521
 name: stomatal closure time
+def: "Average time taken for closure of stomata due to stress or coupled to the rate of photosynthesis and/or transpiration." [GR:pj]
 related_synonym: "STOCSRTM" []
 is_a: TO:0000349 ! physiological process related trait
 
 [Term]
 id: TO:0000522
 name: stomatal conductance
+def: "It is a numerical measure of the maximum rate of passage of either water vapour or carbon dioxide through the stomata" [GR:pj]
 related_synonym: "STOCOND" []
 is_a: TO:0000349 ! physiological process related trait
 
 [Term]
 id: TO:0000523
 name: stomatal resistance
+def: "Stomatal resistance (or its inverse\, stomatal conductance) can therefore be calculated from the transpiration rate and humidity gradient. (The humidity gradient is the humidity inside the leaf\, determined from leaf temperature based on the assumption that the leaf's air spaces are saturated with vapor\, minus the humidity of the ambient air\, which is measured directly.) " [web:http\://en.wikipedia.org/wiki/Stomata]
+comment: This allows scientists to learn how stomata respond to changes in environmental conditions\, such as light intensity\, humidity\, or carbon dioxide concentration.
 related_synonym: "STORS" []
 is_a: TO:0000349 ! physiological process related trait
 
@@ -3826,7 +3972,7 @@ is_a: TO:0000349 ! physiological process related trait
 id: TO:0000524
 name: submergence tolerance
 related_synonym: "SUBTL" []
-is_a: TO:0000114 ! flooding related trait
+is_a: TO:0000286 ! submergence sensitivity
 
 [Term]
 id: TO:0000525
@@ -3835,14 +3981,14 @@ def: "The ratio of total sodium to potassium ion content measured in a plant or 
 related_synonym: "NAKRO" []
 related_synonym: "Na/K ratio" []
 related_synonym: "sodium to potassium ratio" []
-is_a: TO:0000465 ! mineral or ion content related trait
+is_a: TO:0000465 ! mineral and ion content related trait
 
 [Term]
 id: TO:0000526
 name: sodium concentration
 def: "The total sodium ion concentration measured in a given volume of a plant or a plant part or plant extract." [GR:pj]
 related_synonym: "NACONC" []
-is_a: TO:0000465 ! mineral or ion content related trait
+is_a: TO:0000465 ! mineral and ion content related trait
 
 [Term]
 id: TO:0000527
@@ -3874,19 +4020,21 @@ is_a: TO:0000566 ! stomatal frequency
 [Term]
 id: TO:0000531
 name: anther length
-def: "Variation in the length of the anther." [GR:pj]
+def: "Variation in the length of anther." [GR:pj]
 related_synonym: "ANTLG" []
-is_a: TO:0000215 ! stamen related trait
+is_a: TO:0000215 ! stamen anatomy and morphology trait
 
 [Term]
 id: TO:0000532
 name: apiculus hair length
+def: "Length of the apiculus hair." [GR:pj]
+synonym: "APIHRLG" []
 related_synonym: "APIHLG" []
-is_a: TO:0000079 ! lemma and palea related traits
+is_a: TO:0000079 ! lemma and palea anatomy and morphology trait
 
 [Term]
 id: TO:0000534
-name: culm color (sensu Poaceae)
+name: culm color
 def: "Variation in the color of the culm of a grass plant." [GR:pj]
 related_synonym: "CULMCL" []
 is_a: TO:0000056 ! stem color
@@ -3896,7 +4044,7 @@ id: TO:0000536
 name: floret color
 def: "The color of the floret." [GR:pj]
 related_synonym: "FLCL" []
-is_a: TO:0000274 ! floret related trait
+is_a: TO:0000274 ! floret anatomy and morphology trait
 is_a: TO:0000537 ! flower color
 
 [Term]
@@ -3925,7 +4073,6 @@ id: TO:0000540
 name: leaf area
 def: "Measurement of the total area of a leaf." [GR:pj]
 related_synonym: "LFAR" []
-is_a: TO:0000371 ! yield trait
 is_a: TO:0000419 ! leaf anatomy and morphology trait
 
 [Term]
@@ -3952,6 +4099,7 @@ is_a: TO:0000493 ! leaf composition trait
 [Term]
 id: TO:0000544
 name: mesocotyl length
+def: "The length of the mesocotyl." [GR:pj]
 related_synonym: "MCTLG" []
 is_a: TO:0000064 ! embryo related trait
 is_a: TO:0000077 ! shoot anatomy and morphology trait
@@ -3989,7 +4137,7 @@ is_a: TO:0000052 ! primary branching of inflorescence
 [Term]
 id: TO:0000548
 name: rhizome number
-def: "Number of rhizomes present in a  plant." [GR:pj]
+def: "Number of rhizomes present in a plant." [GR:pj]
 related_synonym: "RHZNB" []
 related_synonym: "rhizome number per plant" []
 is_a: TO:0000549 ! rhizome anatomy and morphology trait
@@ -3997,11 +4145,13 @@ is_a: TO:0000549 ! rhizome anatomy and morphology trait
 [Term]
 id: TO:0000549
 name: rhizome anatomy and morphology trait
+def: "Traits associated with changes in the anatomy or structure of the rhizomatic stem and its parts." [GR:pj]
 is_a: TO:0000361 ! stem anatomy and morphology trait
 
 [Term]
 id: TO:0000550
 name: rhizome branching angle
+def: "Angle of branches on a rhizhomatic stem." [GR:pj]
 related_synonym: "RHZBRAG" []
 related_synonym: "rhizome branching degree" []
 is_a: TO:0000549 ! rhizome anatomy and morphology trait
@@ -4009,6 +4159,7 @@ is_a: TO:0000549 ! rhizome anatomy and morphology trait
 [Term]
 id: TO:0000551
 name: rhizome branching number
+def: "Number of branches on a rhizhomatic stem." [GR:pj]
 related_synonym: "RHZBRNB" []
 related_synonym: "rhizome branching number per plant" []
 is_a: TO:0000549 ! rhizome anatomy and morphology trait
@@ -4025,6 +4176,7 @@ relationship: part_of TO:0000352 ! plant dry weight
 [Term]
 id: TO:0000553
 name: rhizome length
+def: "Length of the rhizhomatic stem." [GR:pj]
 related_synonym: "RHZLG" []
 related_synonym: "average rhizome length" []
 is_a: TO:0000549 ! rhizome anatomy and morphology trait
@@ -4032,6 +4184,7 @@ is_a: TO:0000549 ! rhizome anatomy and morphology trait
 [Term]
 id: TO:0000554
 name: rhizome internode length
+def: "Length of internodes on a rhizhomatic stem." [GR:pj]
 related_synonym: "RHZINLG" []
 related_synonym: "average rhizome internode length" []
 is_a: TO:0000549 ! rhizome anatomy and morphology trait
@@ -4039,6 +4192,7 @@ is_a: TO:0000549 ! rhizome anatomy and morphology trait
 [Term]
 id: TO:0000555
 name: rhizome internode number
+def: "Number of internodes on a rhizhomatic stem." [GR:pj]
 related_synonym: "RHZINNB" []
 related_synonym: "average rhizome internode number" []
 is_a: TO:0000549 ! rhizome anatomy and morphology trait
@@ -4079,14 +4233,14 @@ name: space per culm
 def: "Space occupied by each culm or the tiller in a plant." [GR:pj]
 related_synonym: "SPPCULM" []
 related_synonym: "tiller volume" []
-is_a: TO:0000596 ! plant volume (sensu Poaceae)
+is_a: TO:0000559 ! plant volume
 
 [Term]
 id: TO:0000561
 name: space to culm ratio
 def: "A ratio of total space or volume occupied by the whole plant to the total number of culms or tiller in the plant." [GR:pj]
 related_synonym: "SPCULMRO" []
-is_a: TO:0000596 ! plant volume (sensu Poaceae)
+is_a: TO:0000559 ! plant volume
 
 [Term]
 id: TO:0000562
@@ -4112,6 +4266,7 @@ is_a: TO:0000657 ! spikelet anatomy and morphology trait
 id: TO:0000565
 name: spikelets per panicle length
 def: "Number of spikelets present in the rice panicle per unit length." [GR:pj]
+synonym: "spikelet number per panicle length" []
 related_synonym: "SPKPPNLG" []
 related_synonym: "number of spikelets per cm panicle length" []
 is_a: TO:0000456 ! spikelet number
@@ -4119,6 +4274,7 @@ is_a: TO:0000456 ! spikelet number
 [Term]
 id: TO:0000566
 name: stomatal frequency
+def: "Number of stomata present on the leaf surface" [GR:pj]
 related_synonym: "STOFQ" []
 is_a: TO:0000168 ! abiotic stress trait
 is_a: TO:0000419 ! leaf anatomy and morphology trait
@@ -4163,19 +4319,22 @@ relationship: part_of TO:0000442 ! plant fresh weight
 [Term]
 id: TO:0000572
 name: petal color
-is_a: TO:0000275 ! perianth related trait
+def: "Color of the petal." [GR:pj]
+is_a: TO:0000275 ! perianth anatomy and morphology trait
 relationship: part_of TO:0000537 ! flower color
 
 [Term]
 id: TO:0000573
 name: sepal color
-is_a: TO:0000275 ! perianth related trait
+def: "Color of sepals in a flower." [GR:pj]
+is_a: TO:0000275 ! perianth anatomy and morphology trait
 relationship: part_of TO:0000537 ! flower color
 
 [Term]
 id: TO:0000574
 name: tepal color
-is_a: TO:0000275 ! perianth related trait
+def: "Color of tepals in a flower." [GR:pj]
+is_a: TO:0000275 ! perianth anatomy and morphology trait
 relationship: part_of TO:0000537 ! flower color
 
 [Term]
@@ -4187,7 +4346,9 @@ is_a: TO:0000184 ! seed anatomy and morphology trait
 id: TO:0000576
 name: stem length
 alt_id: TO:0000309
-def: "Measure from soil surface to highest point on stem." [GR:pj37]
+def: "Length of the stem. " [GR:pj37]
+comment: Often measured from soil surface to highest point on stem.
+synonym: "STEMLG" []
 synonym: "culm height" []
 synonym: "stem height" []
 related_synonym: "CULMLG" []
@@ -4201,12 +4362,14 @@ relationship: part_of TO:0000207 ! plant height
 [Term]
 id: TO:0000577
 name: stem angle
+def: "Angle of the stem." [GR:pj]
+synonym: "STEMAG" []
 is_a: TO:0000361 ! stem anatomy and morphology trait
 
 [Term]
 id: TO:0000578
 name: root fresh weight
-def: "The average fresh weight of the root determined per tiller from a green house study" [GR:pj37]
+def: "The average fresh weight of the root determined in a study." [GR:pj37]
 related_synonym: "RTFWT" []
 related_synonym: "total root fresh weight" []
 is_a: TO:0000279 ! root weight
@@ -4228,11 +4391,13 @@ is_a: TO:0000106 ! male sterility type
 [Term]
 id: TO:0000581
 name: inflorescence color
+def: "Color of the inflorescence." [GR:pj]
 is_a: TO:0000373 ! inflorescence anatomy and morphology trait
 
 [Term]
 id: TO:0000582
 name: inflorescence number
+def: "Average number of inflorescence per plant in a study." [GR:pj]
 related_synonym: "INFLONB" []
 is_a: TO:0000371 ! yield trait
 is_a: TO:0000373 ! inflorescence anatomy and morphology trait
@@ -4255,6 +4420,7 @@ is_a: TO:0000227 ! root length
 id: TO:0000587
 name: endosperm quality
 alt_id: TO:0000150
+def: "Qualities of the endosperm associated with texture\, content\, composition\, size\, etc." [GR:pj]
 related_synonym: "End" []
 related_synonym: "endosperm quality (sensu Poaceae)" []
 is_a: TO:0000162 ! seed quality
@@ -4272,24 +4438,33 @@ is_a: TO:0000181 ! seed weight
 
 [Term]
 id: TO:0000590
-name: dehulled grain weight
+name: grain weight
 def: "Weight of the dehulled grains." [GR:pj]
+synonym: "GRWT" []
+synonym: "dehulled grain weight" []
 related_synonym: "DHULGRWT" []
-relationship: part_of TO:0000589 ! seed weight (sensu Poaceae)
+is_a: TO:0000371 ! yield trait
+is_a: TO:0002746 ! fruit weight
 
 [Term]
 id: TO:0000591
 name: 100-dehulled grain weight
 def: "Weight of the 100-dehulled grain having pericarp (seed coat)" [GR:pj]
+synonym: "HDGRWT" []
+synonym: "hundred dehulled-grain weight" []
+synonym: "hundred grain weight" []
 related_synonym: "HDHULGRWT" []
-is_a: TO:0000590 ! dehulled grain weight
+is_a: TO:0000590 ! grain weight
 
 [Term]
 id: TO:0000592
 name: 1000-dehulled grain weight
 def: "Weight of the 1000-dehulled grains having pericarp (seed coat)." [GR:pj]
+synonym: "TDGRWT" []
+synonym: "thousand dehulled-grain weight" []
+synonym: "thousand grain weight" []
 related_synonym: "TDHULGRWT" []
-is_a: TO:0000590 ! dehulled grain weight
+is_a: TO:0000590 ! grain weight
 
 [Term]
 id: TO:0000593
@@ -4317,12 +4492,12 @@ is_a: TO:0000593 ! polished grain weight
 [Term]
 id: TO:0000596
 name: plant volume (sensu Poaceae)
-is_a: TO:0000559 ! plant volume
+is_obsolete: true
 
 [Term]
 id: TO:0000597
 name: quality trait
-def: "Any trait contributing to the improvement of overall improvement of the product economical and or commercial importance." [GR:pj]
+def: "Any trait contributing to the overall improvement of the product. Often associated to economical and or commercial importance." [GR:pj]
 is_a: TO:0000387 ! trait ontology
 
 [Term]
@@ -4331,7 +4506,7 @@ name: protein content
 def: "The total protein content measured in a plant or a plant part." [GR:pj37]
 related_synonym: "PROTCN" []
 related_synonym: "total protein content" []
-is_a: TO:0000282 ! enzymatic activity/protein content related trait
+is_a: TO:0000282 ! enzymatic activity and protein content related trait
 
 [Term]
 id: TO:0000599
@@ -4339,7 +4514,7 @@ name: enzyme activity
 def: "Catalysis of a biochemical reaction at physiological temperatures. In biologically catalyzed reactions\, the reactants are known as substrates\, and the catalysts are naturally occurring macromolecular substances known as enzymes. Enzymes possess specific binding sites for substrates\, and are usually composed wholly or largely of protein\, but RNA that has catalytic activity (ribozyme) is often also regarded as enzymatic." [GO:GO\:0003824]
 synonym: "enzymatic activity" []
 synonym: "enzyme catalytic activity" []
-is_a: TO:0000282 ! enzymatic activity/protein content related trait
+is_a: TO:0000282 ! enzymatic activity and protein content related trait
 
 [Term]
 id: TO:0000600
@@ -4377,7 +4552,7 @@ def: "The ratio of total magnesium to potassium ion content measured in a plant 
 related_synonym: "MGKCNRO" []
 related_synonym: "Magnesium to potassium ratio" []
 related_synonym: "ratio of magnesium to potassium" []
-is_a: TO:0000465 ! mineral or ion content related trait
+is_a: TO:0000465 ! mineral and ion content related trait
 
 [Term]
 id: TO:0000604
@@ -4405,19 +4580,19 @@ is_a: TO:0000599 ! enzyme activity
 id: TO:0000607
 name: ash content
 def: "The total mineral or ion content measured after drying and burning the plant or a plant part. " [GR:pj]
-is_a: TO:0000465 ! mineral or ion content related trait
+is_a: TO:0000465 ! mineral and ion content related trait
 
 [Term]
 id: TO:0000608
 name: sodium content
 def: "The total sodium ion content measured in a plant or a plant part." [GR:pj]
-is_a: TO:0000465 ! mineral or ion content related trait
+is_a: TO:0000465 ! mineral and ion content related trait
 
 [Term]
 id: TO:0000609
 name: potassium content
 def: "The total potassium ion content measured in a plant or a plant part." [GR:pj]
-is_a: TO:0000465 ! mineral or ion content related trait
+is_a: TO:0000465 ! mineral and ion content related trait
 
 [Term]
 id: TO:0000610
@@ -4428,6 +4603,7 @@ related_synonym: "STPROTRO" []
 related_synonym: "Soluble protein to total protein content ratio" []
 is_a: TO:0000325 ! soluble protein content
 is_a: TO:0000490 ! protein composition related trait
+is_a: TO:0000598 ! protein content
 
 [Term]
 id: TO:0000611
@@ -4456,14 +4632,14 @@ related_synonym: "GROATPCENT" []
 related_synonym: "caryopsis percentage" []
 related_synonym: "groat proportion" []
 related_synonym: "hull percentage" []
-is_a: TO:0000162 ! seed quality
-is_a: TO:0000396 ! grain yield
+is_a: TO:0000371 ! yield trait
+is_a: TO:0002728 ! fruit quality trait
 
 [Term]
 id: TO:0000614
 name: lemma shape
-def: "A measure of shape of the lemma in a floret." [GR:pj]
-is_a: TO:0000079 ! lemma and palea related traits
+def: "Shape of the lemma in a floret." [GR:pj]
+is_a: TO:0000079 ! lemma and palea anatomy and morphology trait
 
 [Term]
 id: TO:0000615
@@ -4486,15 +4662,21 @@ is_a: TO:0000492 ! leaf shape
 id: TO:0000617
 name: colored grain percentage
 def: "Percentage of colored de-hulled grains in a sample of grains with reference color." [GR:pj]
+synonym: "percentage of colored grains" []
 related_synonym: "percentage of damaged yellow rice grains" []
 related_synonym: "percentage of green rice grains" []
 related_synonym: "percentage of red rice grains" []
-is_a: TO:0000385 ! grain color
+is_a: TO:0000707 ! pericarp color
 
 [Term]
 id: TO:0000618
 name: crushed grain percentage
 def: "The percentage of cracked dehulled grain with at least one fourth of the size still intact." [GR:pj]
+synonym: "CRUSHDHULGRPCENT" []
+synonym: "cracked dehulled-grain percentage" []
+synonym: "cracked grain percentage" []
+synonym: "crushed dehulled-grain percentage" []
+synonym: "percent broken" []
 synonym: "percentage brokens" []
 related_synonym: "CRUSHGRPCENT" []
 is_a: TO:0000162 ! seed quality
@@ -4517,11 +4699,13 @@ is_a: TO:0000357 ! growth and development trait
 [Term]
 id: TO:0000621
 name: inflorescence development trait
-is_a: TO:0000357 ! growth and development trait
+def: "Traits associated with observing effects on the development of the inflorescence and its parts." [GR:pj]
+is_a: TO:0000654 ! shoot development trait
 
 [Term]
 id: TO:0000622
 name: flower development trait
+def: "Traits associated with observing effects on the development of the flower and its parts." [GR:pj]
 related_synonym: "floret development trait" []
 is_a: TO:0000621 ! inflorescence development trait
 
@@ -4545,6 +4729,7 @@ is_a: TO:0000347 ! weed damage
 [Term]
 id: TO:0000625
 name: spikelet density
+def: "Density of the spikelets in the inflorescence or on the given inflorescence branch order." [GR:pj]
 related_synonym: "SPKDN" []
 is_a: TO:0000657 ! spikelet anatomy and morphology trait
 
@@ -4553,7 +4738,7 @@ id: TO:0000626
 name: relative phosphorus distribution between shoot and root
 related_synonym: "RELPHOCONCSHRT" []
 is_a: TO:0000102 ! phosphorus sensitivity
-is_a: TO:0000465 ! mineral or ion content related trait
+is_a: TO:0001024 ! phosphorus content
 
 [Term]
 id: TO:0000627
@@ -4571,11 +4756,16 @@ is_a: TO:0000439 ! fungal disease resistance
 [Term]
 id: TO:0000629
 name: days to tassel
+def: "It is determined as the number of days from the seed sowing to the stage when eiher the pollen shedding or anther exsertion occurs on the maize tassel." [GR:pj]
+comment: Depends on the study type. For a study with multiple plants\, on average 50% of the plants must have sheeding of pollen or anther exsertion.
+exact_synonym: "days to tassel flowering" []
 is_a: TO:0000344 ! days to flower
+is_a: TO:0000365 ! male flowering
 
 [Term]
 id: TO:0000630
 name: pedicel length
+def: "Length of the pedicel." [GR:pj]
 related_synonym: "PDCLG" []
 is_a: TO:0000657 ! spikelet anatomy and morphology trait
 
@@ -4600,6 +4790,7 @@ is_a: TO:0000352 ! plant dry weight
 [Term]
 id: TO:0000634
 name: node number
+def: "Number of nodes on stem." [GR:pj]
 related_synonym: "NDNB" []
 is_a: TO:0000361 ! stem anatomy and morphology trait
 
@@ -4621,7 +4812,7 @@ id: TO:0000637
 name: inflorescence width
 synonym: "panicle width" []
 related_synonym: "INFLWD" []
-is_a: TO:0000268 ! inflorescence shape
+is_a: TO:0006031 ! inflorescence size
 
 [Term]
 id: TO:0000638
@@ -4640,30 +4831,35 @@ is_a: TO:0000420 ! fertility related trait
 [Term]
 id: TO:0000640
 name: total root number
+def: "Total sum of number of roots in a plant derived per experiment." [GR:pj]
 related_synonym: "TRTNB" []
 is_a: TO:0000084 ! root number
 
 [Term]
 id: TO:0000641
 name: primary branch length
+def: "Length of the primary barnch of inflorescence." [GR:pj]
 related_synonym: "PBRLG" []
 is_a: TO:0000373 ! inflorescence anatomy and morphology trait
 
 [Term]
 id: TO:0000642
 name: leaf sheath diameter
+def: "Actual measurements\, in centimeters of the leaf sheath diameter." [GR:pj]
 related_synonym: "LFSDIA" []
 is_a: TO:0002637 ! leaf size
 
 [Term]
 id: TO:0000643
 name: bristle length
+def: "Length of the bristles found in inflorescence." [GR:pj]
 related_synonym: "BRLG" []
 is_a: TO:0000050 ! inflorescence branching
 
 [Term]
 id: TO:0000644
-name: Relative root dry weight
+name: relative root dry weight
+def: "The relative (dry)weight of the root determined after a given treatment as compared to the one determined under normal conditions." [GR:pj]
 related_synonym: "RELRTDWT" []
 is_a: TO:0000078 ! root dry weight
 
@@ -4672,6 +4868,7 @@ id: TO:0000645
 name: relative phosphorus concentration
 related_synonym: "RELPHOCONC" []
 is_a: TO:0000102 ! phosphorus sensitivity
+is_a: TO:0001024 ! phosphorus content
 
 [Term]
 id: TO:0000646
@@ -4687,21 +4884,23 @@ is_a: TO:0000705 ! acid phosphatase activity
 
 [Term]
 id: TO:0000648
-name: relative Phosphorus uptake
+name: relative phosphorus uptake
 related_synonym: "RELPHOUP" []
 is_a: TO:0000102 ! phosphorus sensitivity
 
 [Term]
 id: TO:0000649
 name: peduncle width
+def: "Width of the peduncle." [GR:pj]
 related_synonym: "PDCWD" []
 is_a: TO:0000373 ! inflorescence anatomy and morphology trait
 
 [Term]
 id: TO:0000650
 name: lemma length
+def: "Length of the lemma." [GR:pj]
 related_synonym: "LEMLG" []
-is_a: TO:0000079 ! lemma and palea related traits
+is_a: TO:0000079 ! lemma and palea anatomy and morphology trait
 
 [Term]
 id: TO:0000651
@@ -4712,39 +4911,48 @@ is_a: TO:0000667 ! cooking or brewing quality
 [Term]
 id: TO:0000652
 name: leaf necrosis
-def: "Leaf surface area affected by insecticides as evidenced by chlorotic and/or necrotic tissue" [GR:pj]
+def: "Leaf surface area affected by abiotic stresses like insecticides and cold temperature as evidenced by chlorotic and/or necrotic tissue." [GR:pj]
+synonym: "LFNEC" []
 synonym: "leaf scorch" []
 is_a: TO:0000419 ! leaf anatomy and morphology trait
 
 [Term]
 id: TO:0000653
 name: seed development trait
+def: "Traits associated with observing effects on the development of the seed and its parts." [GR:pj]
 is_a: TO:0000357 ! growth and development trait
 
 [Term]
 id: TO:0000654
 name: shoot development trait
+def: "Traits associated with observing effects on the development of the shoot and its parts." [GR:pj]
 is_a: TO:0000357 ! growth and development trait
 
 [Term]
 id: TO:0000655
 name: leaf development trait
+def: "Traits associated with observing effects on the development of the leaf and its parts." [GR:pj]
 is_a: TO:0000654 ! shoot development trait
 
 [Term]
 id: TO:0000656
 name: root development trait
+def: "Traits associated with observing effects on the development of the root and its parts." [GR:pj]
 is_a: TO:0000357 ! growth and development trait
 
 [Term]
 id: TO:0000657
 name: spikelet anatomy and morphology trait
+def: "Traits associated with changes in the anatomy or structure of the spikelet and its parts." [GR:pj]
 is_a: TO:0000373 ! inflorescence anatomy and morphology trait
 
 [Term]
 id: TO:0000658
 name: days to silk
+def: "It is determined as the number of days from the seed sowing to the first visible silk (stigma) on the maize ear." [GR:pj]
+comment: Depends on the study type. For a study with multiple plants\, on average 50% of the plants must have exposed silks.
 is_a: TO:0000344 ! days to flower
+is_a: TO:0000359 ! female flowering
 
 [Term]
 id: TO:0000659
@@ -4793,7 +5001,7 @@ is_a: TO:0000587 ! endosperm quality
 id: TO:0000666
 name: brown rice yield
 related_synonym: "BRWRYLD" []
-is_a: TO:0000396 ! grain yield
+is_a: TO:0000449 ! grain yield per plant
 
 [Term]
 id: TO:0000667
@@ -4816,11 +5024,11 @@ is_a: TO:0000668 ! mycotoxin content
 
 [Term]
 id: TO:0000670
-name: flower number
+name: floret number
 def: "The number of flowers present on a inflorescence branch or in the inflorescence itself." [GR:pj]
 related_synonym: "FLNB" []
-related_synonym: "floret number" []
-is_a: TO:0000499 ! flower anatomy and morphology trait
+is_a: TO:0000622 ! flower development trait
+is_a: TO:0002736 ! flower number
 
 [Term]
 id: TO:0000671
@@ -4868,7 +5076,7 @@ related_synonym: "STYCL" []
 related_synonym: "color of silk" []
 related_synonym: "color of style" []
 related_synonym: "silk color" []
-is_a: TO:0000223 ! pistil related trait
+is_a: TO:0006012 ! carpel anatomy and morphology trait
 
 [Term]
 id: TO:0000677
@@ -4889,13 +5097,13 @@ relationship: part_of TO:0000433 ! ear diameter
 [Term]
 id: TO:0000679
 name: inflorescence diameter
-is_a: TO:0000268 ! inflorescence shape
+is_a: TO:0006031 ! inflorescence size
 
 [Term]
 id: TO:0000680
 name: inflorescence circumference
 related_synonym: "INFLOCIRCUM" []
-is_a: TO:0000268 ! inflorescence shape
+is_a: TO:0006031 ! inflorescence size
 
 [Term]
 id: TO:0000681
@@ -4906,6 +5114,7 @@ is_a: TO:0000680 ! inflorescence circumference
 [Term]
 id: TO:0000682
 name: inflorescence height
+def: "The height of the inflorescence in a plant measured from ground to the attachment point." [GR:pj]
 related_synonym: "INFLOHT" []
 is_a: TO:0000373 ! inflorescence anatomy and morphology trait
 
@@ -4922,14 +5131,15 @@ name: grassy flavor
 def: "An assay to test for aroma and flavor reminiscent of freshly cut grass." [GR:pj]
 related_synonym: "GRASSYFLVOR" []
 related_synonym: "grassy flavour" []
-is_a: TO:0000597 ! quality trait
+is_a: TO:0002694 ! fruit flavor trait
 
 [Term]
 id: TO:0000685
-name: tenderness
+name: fruit tenderness
 def: "An assay for the soft and juicy texture." [GR:pj]
+synonym: "FRTENDER" []
 related_synonym: "TENDER" []
-is_a: TO:0000597 ! quality trait
+is_a: TO:0002728 ! fruit quality trait
 
 [Term]
 id: TO:0000686
@@ -4937,7 +5147,7 @@ name: juiciness
 def: "An assay for a juicy appetizingness." [GR:pj]
 synonym: "succulence" []
 related_synonym: "JUICE" []
-is_a: TO:0000597 ! quality trait
+is_a: TO:0002728 ! fruit quality trait
 
 [Term]
 id: TO:0000687
@@ -4957,11 +5167,13 @@ id: TO:0000689
 name: grain tenderness
 related_synonym: "GRTENDER" []
 related_synonym: "kernel tenderness" []
-is_a: TO:0000685 ! tenderness
+is_a: TO:0000685 ! fruit tenderness
 
 [Term]
 id: TO:0000690
 name: Maysin content
+def: "Measures the maysin content in a plant or plant part. " [GR:pj]
+comment: Maysin is a coagulable globulin protein produced by the maize plant. It has insecticide properties.
 related_synonym: "MAYSINCN" []
 is_a: TO:0000281 ! metabolite content related trait
 
@@ -4986,10 +5198,10 @@ relationship: part_of TO:0000691 ! Zea mays northern leaf blight disease resista
 
 [Term]
 id: TO:0000694
-name: crispness
-def: "An assay of firmness and freshness." [GR:pj]
+name: fruit crispness
+def: "An assay of firmness and freshness of the fruit." [GR:pj]
 related_synonym: "CRISP" []
-is_a: TO:0000597 ! quality trait
+is_a: TO:0002728 ! fruit quality trait
 
 [Term]
 id: TO:0000695
@@ -5002,10 +5214,10 @@ relationship: part_of TO:0000326 ! leaf color
 [Term]
 id: TO:0000696
 name: starch content
-def: "Amount of starch present in the source of the sink parts of a plant. For example amount of stored starch in the seed endosperm." [GR:pj]
+def: "Amount of starch present in the plant or plant part. " [GR:pj]
 related_synonym: "STARCHCN" []
-is_a: TO:0000291 ! carbohydrate content
 is_a: TO:0000489 ! carbohydrate composition related trait
+is_a: TO:0006007 ! polysaccharide content
 
 [Term]
 id: TO:0000697
@@ -5021,7 +5233,7 @@ id: TO:0000698
 name: starchiness
 related_synonym: "STARCH" []
 related_synonym: "mealiness" []
-is_a: TO:0000696 ! starch content
+is_a: TO:0000291 ! carbohydrate content
 
 [Term]
 id: TO:0000699
@@ -5032,10 +5244,11 @@ is_a: TO:0000599 ! enzyme activity
 
 [Term]
 id: TO:0000700
-name: sweetness
+name: fruit sweetness
 def: "The quality of having the pleasant taste characteristic of sugar." [GR:pj]
+synonym: "FRSWEET" []
 related_synonym: "SWEET" []
-is_a: TO:0000597 ! quality trait
+is_a: TO:0002694 ! fruit flavor trait
 
 [Term]
 id: TO:0000701
@@ -5047,8 +5260,9 @@ is_a: TO:0000349 ! physiological process related trait
 [Term]
 id: TO:0000702
 name: starch concentration
+def: "Concentration of starch present in the plant or plant part." [GR:pj]
 related_synonym: "STARCHCONC" []
-is_a: TO:0000291 ! carbohydrate content
+is_a: TO:0006007 ! polysaccharide content
 
 [Term]
 id: TO:0000703
@@ -5074,7 +5288,7 @@ is_a: TO:0000704 ! phosphatase activity
 id: TO:0000706
 name: hull color
 def: "Describes the color of hull." [GR:pj]
-comment: Hull is the dry outer covering of a grass fruit/grain. The hull is comprised of lemma and palea\, the two parts of a grass floret.
+comment: Hull is the dry outer covering of a grass fruit/grain. The hull is comprised of dry lemma and palea\, the two parts of a grass floret.
 synonym: "HULCL" []
 is_a: TO:0000597 ! quality trait
 
@@ -5082,13 +5296,18 @@ is_a: TO:0000597 ! quality trait
 id: TO:0000707
 name: pericarp color
 def: "Describes the color of fruit wall (pericarp)." [GR:pj]
-comment: Pericarp is the wall of a fruit\, developed from the ovary or carpel wall.
+comment: Pericarp is the wall of a fruit\, developed from the ovary or carpel wall. Also scored for grain color or color of the dehulled grain in grasses.
+synonym: "DHULGRCL" []
 synonym: "PERICARPCL" []
+synonym: "bran color" []
+synonym: "dehulled grain color" []
+synonym: "grain color" []
 is_a: TO:0002617 ! fruit color
 
 [Term]
 id: TO:0000708
 name: plant color
+def: "The color of the plant." [GR:pj]
 is_a: TO:0000077 ! shoot anatomy and morphology trait
 
 [Term]
@@ -5129,6 +5348,7 @@ is_a: TO:0000587 ! endosperm quality
 [Term]
 id: TO:0000714
 name: seminal rootless
+def: "Absence of seminal roots in the plant" [GR:pj]
 synonym: "absence of seminal roots" []
 is_a: TO:0000198 ! rootless
 
@@ -5173,52 +5393,68 @@ is_a: TO:0000419 ! leaf anatomy and morphology trait
 [Term]
 id: TO:0000722
 name: sporocyte development trait
+def: "Traits associated with observing effects on the sporocyte development." [GR:pj]
 is_a: TO:0000357 ! growth and development trait
 
 [Term]
 id: TO:0000723
 name: microsporocyte development trait
+def: "Traits associated with observing effects on the microsporocyte development." [GR:pj]
 is_a: TO:0000722 ! sporocyte development trait
 
 [Term]
 id: TO:0000724
 name: megasporocyte development trait
+def: "Traits associated with observing effects on the megasporocyte development." [GR:pj]
 is_a: TO:0000722 ! sporocyte development trait
 
 [Term]
 id: TO:0000725
 name: megasporocyte number
+def: "A count of the number of megasporocyte that is done to determine any increase or decrease in number." [GR:pj]
 is_a: TO:0000724 ! megasporocyte development trait
 
 [Term]
 id: TO:0000726
 name: microsporocyte number
+def: "A count of the number of microsporocyte that is done to determine any increase or decrease in number." [GR:pj]
 is_a: TO:0000723 ! microsporocyte development trait
 
 [Term]
 id: TO:0000727
 name: sporogenesis
+def: "The formation of spores." [GR:pj]
 is_a: TO:0000283 ! biological process related trait
 
 [Term]
 id: TO:0000728
 name: cell cycle trait
+def: "The traits associated with various developmental landmarks and processes of cell division during either the meiotic cell cycle or mitotic cell cycle." [R:pj]
+synonym: "cell division cycle" []
+xref_analog: GO:GO\:0007049
 is_a: TO:0000283 ! biological process related trait
-is_a: TO:0000357 ! growth and development trait
+is_a: TO:0002686 ! cell growth and development trait
 
 [Term]
 id: TO:0000729
 name: meiotic cell cycle trait
+def: "The traits associated with various developmental landmarks and processes of cell division during either the meiotic cell cycle." [GR:pj]
+comment: Meiosis is a type of cell division in which haploid gametes and spores are formed. The process involves a single duplication of the genetic material followed by two mitotic divisions. As a result each daughter cell receives half the chromosomal content (haploid) as the parent cell.
+xref_analog: GO:GO\:0051321
 is_a: TO:0000728 ! cell cycle trait
 
 [Term]
 id: TO:0000730
 name: mitotic cell cycle trait
+def: "The traits associated with various developmental landmarks and processes of cell division during the mitotic cell cycle." [GO:pj]
+comment: Mitosis is a type of cell division in which a cell duplicates its genetic information (DNA)\, in order to generate two\, identical\, daughter cells. Each daughter cell receives the same chromosome number / genetic content as the parent cell.
+xref_analog: GO:GO\:0000278
 is_a: TO:0000728 ! cell cycle trait
 
 [Term]
 id: TO:0000731
 name: lignin content
+def: "Measures the lignin content in a plant or plant part. " [GR:pj]
 is_a: TO:0000281 ! metabolite content related trait
 
 [Term]
@@ -5228,13 +5464,24 @@ is_a: TO:0000731 ! lignin content
 
 [Term]
 id: TO:0000733
-name: lignin biosynthesis
+name: lignin biosynthesis trait
+def: "Traits associated with the biosynthesis of lignin in a plant or plant part." [GR:pj]
+synonym: "lignin biosynthesis" []
+xref_analog: GO:GO\:0009809
 is_a: TO:0000349 ! physiological process related trait
 
 [Term]
 id: TO:0000734
 name: grain length
-relationship: part_of TO:0000146 ! seed length
+alt_id: TO:0002760
+def: "length of the dehulled grain with pericarp." [GR:pj]
+synonym: "DHULGRLG" []
+synonym: "GRLG" []
+synonym: "KERLG" []
+synonym: "kernel length" []
+synonym: "length of dehulled grain" []
+synonym: "length of grain without hull" []
+is_a: TO:0002626 ! fruit length
 relationship: part_of TO:0000397 ! grain size
 
 [Term]
@@ -5281,108 +5528,333 @@ synonym: "basal tiller height" []
 is_a: TO:0000576 ! stem length
 
 [Term]
+id: TO:0001006
+name: adventitious root number
+def: "Average sum of number of adventitious roots in a plant derived per experiment." [GR:pj]
+is_a: TO:0000084 ! root number
+
+[Term]
+id: TO:0001007
+name: coleoptile length
+def: "Measurement of the length of the coleoptile in the germinating seed." [GR:pj]
+is_a: TO:0000077 ! shoot anatomy and morphology trait
+
+[Term]
+id: TO:0001008
+name: days to flag leaf emergence
+def: "In grass plants the number of days required for the full emergence of the flag leaf in a field or study. It can be counted from date of seed sowing or the transplant (in case of rice)." [GR:pj]
+is_a: TO:0000655 ! leaf development trait
+
+[Term]
+id: TO:0001009
+name: deep root number
+def: "A count of number of roots present below a giiven depth from the soil surface." [GR:pj]
+is_a: TO:0000084 ! root number
+
+[Term]
+id: TO:0001010
+name: senesced leaf number
+def: "Number of leaves in a plant that have undergone leaf senescence stage or are considered dead." [GR:pj]
+narrow_synonym: "dead leaf number" []
+is_a: TO:0000241 ! leaf number
+
+[Term]
+id: TO:0001011
+name: deep root weight ratio
+def: "A ration of the deep root dry weight to total root dry weight per plant." [GR:pj]
+exact_synonym: "deep root dry weight to total root dry weight ratio" []
+is_a: TO:0000279 ! root weight
+
+[Term]
+id: TO:0001012
+name: lateral root length
+def: "Average maximum length of the lateral root of a plant in a study." [GR:pj]
+is_a: TO:0000227 ! root length
+
+[Term]
+id: TO:0001013
+name: lateral root number
+def: "Average sum of number of lateral roots in a plant derived per experiment." [GR:pj]
+is_a: TO:0000084 ! root number
+
+[Term]
+id: TO:0001014
+name: leaf dry weight
+def: "Measure of the dry weight of leaf." [GR:pj]
+is_a: TO:0000505 ! leaf weight
+
+[Term]
+id: TO:0001015
+name: photosynthetic rate
+def: "The total amount of carbon fixed by the plant per unit time and is measured by determining the changes in CO2 concentration over a plant leaf in a glass enclosure." [GR:pj]
+synonym: "leaf photosynthetic rate" []
+related_synonym: "gross photosynthetic rate" []
+is_a: TO:0000349 ! physiological process related trait
+
+[Term]
+id: TO:0001016
+name: relative chlorophyll content
+def: "The relative chlorophyll content of the plant determined after a given treatment as compared to the one determined under normal conditions." [GR:pj]
+is_a: TO:0000495 ! chlorophyll content
+
+[Term]
+id: TO:0001017
+name: water use efficiency
+def: "As determined by the ratio of photosynthetic rate to transpiration rate." [GR:pj]
+exact_synonym: "photosynthetic rate to transpiration rate ratio" []
+is_a: TO:0000349 ! physiological process related trait
+
+[Term]
+id: TO:0001018
+name: transpiration rate
+def: "The rate of  transpiration." [GR:pj]
+xref_analog: GO:GO\:0010148
+is_a: TO:0000349 ! physiological process related trait
+
+[Term]
+id: TO:0001019
+name: root to total biomass ratio
+def: "A ratio of root dry weight to total plant dry weight." [GR:pj]
+synonym: "root dry weight to total plant dry weight ratio" []
+is_a: TO:0000327 ! biomass yield
+
+[Term]
+id: TO:0001020
+name: exudate sap volume
+def: "Volume of the sap exudate collected from the cut parts of a plant." [GR:pj]
+related_synonym: "Sap per tiller" []
+is_a: TO:0000349 ! physiological process related trait
+
+[Term]
+id: TO:0001021
+name: days to inflorescence exsertion
+def: "Number of days required for the emergence of inflorescence to become visible on the plant. " [GR:pj]
+comment: Often in grasses it emerges from the flag leaf whcih is the top most leaft on the shoot.
+synonym: "days to inflorescence emergence" []
+is_a: TO:0000621 ! inflorescence development trait
+
+[Term]
+id: TO:0001022
+name: days to tassel emergence
+def: "Number of days required for the tassel to emerge from the flag leaf in a maize plant or a group of plants in a study." [GR:pj]
+comment: Often determined when the 50% length of the tassel has emerged as compared to its full length. Number of days is calculated from the day of sowing of the seeds
+is_a: TO:0001021 ! days to inflorescence exsertion
+
+[Term]
+id: TO:0001023
+name: days to ear shoot emergence
+def: "Number of days required for the ear shoot to emerge from the given leaf sheath in a maize plant or a group of plants in a study." [GR:pj]
+comment: Often determined when the 50% length of the ear has emerged as compared to its full length. Number of days is calculated from the day of sowing of the seeds
+is_a: TO:0001021 ! days to inflorescence exsertion
+
+[Term]
+id: TO:0001024
+name: phosphorus content
+def: "Amount of phosphorus in the plant or the plant parts." [GR:pj]
+synonym: "PHOCN" []
+is_a: TO:0000465 ! mineral and ion content related trait
+
+[Term]
+id: TO:0001025
+name: leaf phosphorus content
+def: "Amount of phosphorus in the leaf." [GR:pj]
+comment: Often measured in per unit dry weight.
+synonym: "LFPHOCN" []
+is_a: TO:0001024 ! phosphorus content
+
+[Term]
+id: TO:0001026
+name: respiration rate
+def: "The total amount of carbon lost metabolically by the plant per unit time and is measured by determining the increase in CO2 concentration over a plant leaf in a glass enclosure." [GR:pj]
+is_a: TO:0000349 ! physiological process related trait
+
+[Term]
+id: TO:0001027
+name: net photosynthetic rate
+def: "It is measured as the difference between gross photosynthesis (the total amount of carbon fixed by the plant per unit time) and the respiration (the total amount of carbon lost metabolically during that same time)." [GR:pj]
+is_a: TO:0000349 ! physiological process related trait
+
+[Term]
+id: TO:0001028
+name: osmotic adjustment break point
+def: "Break point of leaf water potential in the regression of leaf water potential against leaf relative water content." [CIRAD:Brigitte Courtois]
+synonym: "Break point of osmotic adjustment" []
+is_a: TO:0000349 ! physiological process related trait
+
+[Term]
+id: TO:0001029
+name: relative harvest index
+def: "It is a ratio of harvest index in stress to that of control environment." [GR:pj]
+is_a: TO:0000128 ! harvest index
+
+[Term]
+id: TO:0001030
+name: relative leaf area
+def: "It is a ratio of leaf area determined from a stressed plant to that grown in normal environment." [GR:pj]
+is_a: TO:0000540 ! leaf area
+
+[Term]
+id: TO:0001031
+name: relative leaf dry weight
+def: "It is a ratio of leaf dry weight determined from a stressed plant to that grown in normal environment." [GR:pj]
+is_a: TO:0001014 ! leaf dry weight
+
+[Term]
+id: TO:0001032
+name: relative panicle number
+def: "It is a ratio of panicle number determined from a stressed plant to that grown in normal environment." [GR:pj]
+is_a: TO:0000152 ! panicle number
+
+[Term]
+id: TO:0001033
+name: relative spikelet number
+def: "It is a ratio of spikelet number per panicle/inflorescence determined from a stressed plant to that grown in normal environment." [GR:pj]
+synonym: "relative number of spikelet per panicle" []
+is_a: TO:0000456 ! spikelet number
+
+[Term]
+id: TO:0001034
+name: relative plant height
+def: "It is a ratio of the plant height determined from a stressed plant to that grown in normal environment." [GR:pj]
+is_a: TO:0000207 ! plant height
+
+[Term]
+id: TO:0001035
+name: stem width
+def: "Measurement of width of the stem" [GR:cwt]
+synonym: "culm diameter" []
+synonym: "culm width" []
+is_a: TO:0000361 ! stem anatomy and morphology trait
+
+[Term]
+id: TO:0001036
+name: stem senescence
+def: "A measurement of aging of stem. " [GR:cwt]
+synonym: "culm senescence" []
+is_a: TO:0000361 ! stem anatomy and morphology trait
+
+[Term]
 id: TO:0002600
 name: flower organ size
+def: "Size of the given floral organ type." [GR:pj]
+exact_synonym: "floral organ size" []
 is_a: TO:0000499 ! flower anatomy and morphology trait
 
 [Term]
 id: TO:0002601
 name: stamen size
-is_a: TO:0000215 ! stamen related trait
+def: "Size of the stamen." [GR:pj]
+is_a: TO:0000215 ! stamen anatomy and morphology trait
 is_a: TO:0002600 ! flower organ size
 
 [Term]
 id: TO:0002602
 name: pistil size
-is_a: TO:0000223 ! pistil related trait
+def: "Size of the pistil." [GR:pj]
+is_a: TO:0000223 ! pistil anatomy and morphology trait
 is_a: TO:0002600 ! flower organ size
 
 [Term]
 id: TO:0002603
 name: petal size
-is_a: TO:0000275 ! perianth related trait
+def: "Size of the petal." [GR:pj]
+is_a: TO:0000275 ! perianth anatomy and morphology trait
 is_a: TO:0002600 ! flower organ size
 
 [Term]
 id: TO:0002604
 name: sepal size
-is_a: TO:0000275 ! perianth related trait
+def: "Size of the sepal." [GR:pj]
+is_a: TO:0000275 ! perianth anatomy and morphology trait
 is_a: TO:0002600 ! flower organ size
 
 [Term]
 id: TO:0002605
 name: petal length
+def: "Length of the petal." [GR:pj]
 is_a: TO:0002603 ! petal size
 is_a: TO:0002614 ! floral organ length
 
 [Term]
 id: TO:0002606
 name: petal width
+def: "Width of petals in a flower." [GR:pj]
 is_a: TO:0002603 ! petal size
 is_a: TO:0002615 ! floral organ width
 
 [Term]
 id: TO:0002607
 name: sepal length
+def: "Length of the sepal." [GR:pj]
 is_a: TO:0002604 ! sepal size
 is_a: TO:0002614 ! floral organ length
 
 [Term]
 id: TO:0002608
 name: sepal width
+def: "Width of sepals in a flower." [GR:pj]
 is_a: TO:0002604 ! sepal size
 is_a: TO:0002615 ! floral organ width
 
 [Term]
 id: TO:0002609
 name: stamen length
+def: "Length of the stamen." [GR:pj]
 is_a: TO:0002601 ! stamen size
 is_a: TO:0002614 ! floral organ length
 
 [Term]
 id: TO:0002610
 name: pistil length
+def: "Length of the pistil." [GR:pj]
 is_a: TO:0002602 ! pistil size
 is_a: TO:0002614 ! floral organ length
 
 [Term]
 id: TO:0002611
 name: homeotic development trait
+def: "A developmental trait resulting development of increased\, decreased or new organs and organ parts due to a mutation that causes one member of a repetitive series to assume the identity of another member \, for example\, the transformation of sepals into petals." [GR:pj]
 synonym: "homeotic mutation" []
 is_a: TO:0000357 ! growth and development trait
 
 [Term]
 id: TO:0002612
 name: vegetative homeotic development trait
+def: "A developmental trait resulting development of increased\, decreased or new vegetative organs and organ parts due to a mutation that causes one member of a repetitive series to assume the identity of another member \, for example\, the transformation of leaves into scales." [GR:pj]
 is_a: TO:0002611 ! homeotic development trait
 
 [Term]
 id: TO:0002613
 name: reproductive homeotic development trait
+def: "A developmental trait resulting development of increased\, decreased or new reproductive organs and organ parts due to a mutation that causes one member of a repetitive series to assume the identity of another member \, for example\, the transformation of sepals into petals." [GR:pj]
 is_a: TO:0002611 ! homeotic development trait
 
 [Term]
 id: TO:0002614
 name: floral organ length
+def: "Length of the given floral organ type." [GR:pj]
 is_a: TO:0002600 ! flower organ size
 
 [Term]
 id: TO:0002615
 name: floral organ width
+def: "Width of the given floral organ type." [GR:pj]
 is_a: TO:0002600 ! flower organ size
 
 [Term]
 id: TO:0002616
-name: flowering
-synonym: "flowering timing" []
+name: flowering time
+def: "Traits associated with the timing of the flowering (anthesis)." [GR:pj]
+comment: Ofetn influenced by the environemnt that includes\, day light\, temperature and geographic location.
 synonym: "time of flowering" []
+related_synonym: "anthesis" []
 is_a: TO:0000622 ! flower development trait
 
 [Term]
 id: TO:0002617
 name: fruit color
 def: "An assay for the color of the fruit and its parts." [GR:pj]
-is_a: TO:0000597 ! quality trait
+is_a: TO:0002728 ! fruit quality trait
 
 [Term]
 id: TO:0002618
@@ -5409,12 +5881,12 @@ id: TO:0002622
 name: locular tissue trait
 def: "The traits observed for the locular tissue present around the seeds as found in Solanaceae." [SGN:nm]
 comment: The values observed in tomato and pepper fruits may be defined differently.
-is_a: TO:0000597 ! quality trait
+is_a: TO:0002728 ! fruit quality trait
 
 [Term]
 id: TO:0002623
 name: pericarp texture
-is_a: TO:0000597 ! quality trait
+is_a: TO:0002728 ! fruit quality trait
 
 [Term]
 id: TO:0002624
@@ -5424,80 +5896,100 @@ is_a: TO:0002623 ! pericarp texture
 [Term]
 id: TO:0002625
 name: fruit size
-is_a: TO:0000597 ! quality trait
-is_a: TO:0002629 ! fruit anatomy and morphology trait
+def: "An assay to determine the variation in the size of the fruit." [GR:pj]
+synonym: "FRSZ" []
+is_a: TO:0002629 ! fruit structure trait
+is_a: TO:0002728 ! fruit quality trait
 
 [Term]
 id: TO:0002626
 name: fruit length
+def: "An assay to determine the variation in the length of the fruit." [GR:pj]
 is_a: TO:0002625 ! fruit size
 
 [Term]
 id: TO:0002627
 name: fruit width
+def: "An assay to determine the variation in the width of the fruit." [GR:pj]
+synonym: "FRWD" []
 is_a: TO:0002625 ! fruit size
 
 [Term]
 id: TO:0002628
 name: fruit shape
-is_a: TO:0000597 ! quality trait
-is_a: TO:0002629 ! fruit anatomy and morphology trait
+def: "An assay to determine the variation in the shape of the fruit." [GR:pj]
+is_a: TO:0002629 ! fruit structure trait
+is_a: TO:0002728 ! fruit quality trait
 
 [Term]
 id: TO:0002629
-name: fruit anatomy and morphology trait
+name: fruit structure trait
+def: "Traits associated with changes in the anatomy or structure of the fruit and its parts." [GR:pj]
+synonym: "fruit anatomy and morphology trait" []
 synonym: "fruit morphology" []
 is_a: TO:0000017 ! anatomy and morphology related trait
 
 [Term]
 id: TO:0002630
 name: fruit distal end shape
+def: "An assay to determine the variation in the shape of the fruit's distal end." [GR:pj]
 is_a: TO:0002628 ! fruit shape
 
 [Term]
 id: TO:0002631
 name: fruit proximal end shape
+def: "An assay to determine the variation in the shape of the fruit's proximal end." [GR:pj]
 is_a: TO:0002628 ! fruit shape
 
 [Term]
 id: TO:0002632
 name: fruit abscission zone size
+def: "An assay to determine the variation in the size of the fruit abscission zone." [GR:pj]
 synonym: "size stem scar size" []
-is_a: TO:0000597 ! quality trait
-is_a: TO:0002629 ! fruit anatomy and morphology trait
+is_a: TO:0002629 ! fruit structure trait
+is_a: TO:0002729 ! fruit senescing quality trait
 
 [Term]
 id: TO:0002633
-name: fruit ripening
+name: fruit ripening trait
+def: "An assay to determin the variation in the extent of fruit ripening." [GR:pj]
+synonym: "fruit ripening" []
+is_a: TO:0000349 ! physiological process related trait
 is_a: TO:0000357 ! growth and development trait
-is_a: TO:0000597 ! quality trait
+is_a: TO:0002728 ! fruit quality trait
 
 [Term]
 id: TO:0002634
 name: fruit firmness
 def: "In addition to the fruit color\, firmness is the best measurement of ripeness. It is assayed as the force necessary to break the flesh tissues\nand depends on the different growth stages during the ripening process." [BR:pj]
-is_a: TO:0000597 ! quality trait
+is_a: TO:0002728 ! fruit quality trait
 
 [Term]
 id: TO:0002635
 name: leaf margin trait
+def: "Traits associated with changes in the anatomy or structure of the leaf margin. Often associated with leaf margin curvature." [GR:pj]
+synonym: "leaf margin curvature" []
 is_a: TO:0000419 ! leaf anatomy and morphology trait
 
 [Term]
 id: TO:0002636
 name: leaflet number
+def: "An assay to detrmine the variation the number of leaves." [GR:pj]
 is_a: TO:0000419 ! leaf anatomy and morphology trait
 
 [Term]
 id: TO:0002637
 name: leaf size
+def: "Variation in sizes of leaf. " [GR:pj]
 is_a: TO:0000419 ! leaf anatomy and morphology trait
 
 [Term]
 id: TO:0002638
 name: shoot meristem development
+def: "An assay to associate observing effects on the development of shoot meristem." [GR:pj]
 synonym: "shoot meristem abortion" []
 is_a: TO:0000654 ! shoot development trait
+is_a: TO:0006016 ! meristem tissue development trait
 
 [Term]
 id: TO:0002639
@@ -5529,7 +6021,7 @@ id: TO:0002643
 name: carbon isotope discrimination
 def: "It is a measure of the C isotopic composition in plant material relative to the value of the same ratio in the air of the environment where the plant is grown." [GR:pj, PMID:11756262, GrainGenes_trait:Carbon isotope discrimination]
 synonym: "CBISOTPDISC" []
-is_a: TO:0000466 ! carbon content
+is_a: TO:0000465 ! mineral and ion content related trait
 
 [Term]
 id: TO:0002644
@@ -5544,7 +6036,7 @@ name: malt tenderness
 def: "Percentage of soft malt\, measured from micro malting 50g of barley." [PMID:12677407, GrainGenes_trait:Malt tenderness]
 synonym: "MALTTENDER" []
 is_a: TO:0000667 ! cooking or brewing quality
-is_a: TO:0000685 ! tenderness
+is_a: TO:0000685 ! fruit tenderness
 
 [Term]
 id: TO:0002646
@@ -5636,12 +6128,15 @@ is_a: TO:0000283 ! biological process related trait
 [Term]
 id: TO:0002659
 name: pistil number
-def: "Variation in the number of pistils in the gynoecium." [GR:pj]
-is_a: TO:0000223 ! pistil related trait
+def: "Number of pistils in the gynoecium." [GR:pj]
+is_a: TO:0000223 ! pistil anatomy and morphology trait
+is_a: TO:0002613 ! reproductive homeotic development trait
+is_a: TO:0006022 ! floral organ development trait
 
 [Term]
 id: TO:0002660
 name: cytokinin content
+def: "Measures the cytokinin content in a plant or plant part. " [GR:pj]
 is_a: TO:0000476 ! growth hormone content
 
 [Term]
@@ -5653,6 +6148,776 @@ synonym: "asynchronous seed maturation" []
 synonym: "nonsynchronous seed maturation" []
 synonym: "synchronous seed maturation" []
 is_a: TO:0000653 ! seed development trait
+
+[Term]
+id: TO:0002662
+name: leaf rolling tolerance
+def: "Tolerance for leaf rolling or wilting observed in response to stresses like drought\, water and temperature. It precedes leaf drying stage. " [GR:pj]
+exact_synonym: "LFRLTL" []
+narrow_synonym: "wilting tolerance" []
+broad_synonym: "Cold-induced wilting tolerance" []
+is_a: TO:0000085 ! leaf rolling
+
+[Term]
+id: TO:0002663
+name: leaf necrosis tolerance
+def: "Tolerance for leaf necrosis or scorching observed in response to stresses like drought\, insecticides and cold temperature as evidenced by less number or chlorotic and/or necrotic tissue." [GR:pj]
+synonym: "Cold-induced necrosis tolerance" []
+synonym: "LFNECTL" []
+synonym: "necrosis tolerance" []
+is_a: TO:0000652 ! leaf necrosis
+
+[Term]
+id: TO:0002664
+name: leaf yellowing tolerance
+def: "Tolerance for leaf color yellowing observed in response to stresses like drought\, water and temperature. It may precedes leaf drying stage. " [GR:pj]
+synonym: "LFYTL" []
+broad_synonym: "Cold-induced yellowing tolerance" []
+is_a: TO:0000326 ! leaf color
+
+[Term]
+id: TO:0002665
+name: root hair length
+def: "Average maximum length of the root hair present in the root of a plant in a study." [GR:pj]
+synonym: "RTHLG" []
+synonym: "RTHRLG" []
+is_a: TO:0000043 ! root anatomy and morphology trait
+
+[Term]
+id: TO:0002666
+name: seed phosphorus content
+def: "Amount of phosphorus in the seed." [GR:pj]
+synonym: "SDPHOCN" []
+is_a: TO:0001024 ! phosphorus content
+
+[Term]
+id: TO:0002667
+name: abscisic acid content
+def: "Measures the abscisic acid content in a plant or plant part. " [GR:pj]
+synonym: "ABA content" []
+synonym: "ABACN" []
+is_a: TO:0000476 ! growth hormone content
+
+[Term]
+id: TO:0002668
+name: jasmonic acid content
+def: "Measures the jasmonic acid content in a plant or plant part. " [GR:pj, PMID:17031029]
+synonym: "JA content" []
+synonym: "jasmonate content" []
+is_a: TO:0000476 ! growth hormone content
+
+[Term]
+id: TO:0002669
+name: diterpenoid phytoalexin content
+def: "Measures the diterpenoid phytoalexin content in a plant or plant part." [GR:pj]
+comment: Diterpenoid phytoalexins are polycyclic diterpenes involved in pathogen response.
+is_a: TO:0000290 ! flavonoid content
+
+[Term]
+id: TO:0002670
+name: momilactone A content
+def: "Measures the momilactone A content in a plant or plant part." [PMID:16569039]
+comment: momilactone A is a instance of diterpenoid phytoalexin.
+synonym: "phytoalexin momilactone A content" []
+is_a: TO:0002669 ! diterpenoid phytoalexin content
+
+[Term]
+id: TO:0002671
+name: momilactone B content
+def: "Measures the momilactone A content in a plant or plant part." [PMID:16569039]
+comment: momilactone B is a instance of diterpenoid phytoalexin.
+synonym: "phytoalexin momilactone B content" []
+is_a: TO:0002669 ! diterpenoid phytoalexin content
+
+[Term]
+id: TO:0002672
+name: auxin content
+def: "Measures the auxin content in a plant or plant part. " [GR:pj, PMID:16908506]
+comment: The most important auxin produced by plants is indole-3-acetic acid (IAA)
+synonym: "AUXCN" []
+synonym: "IAA content" []
+synonym: "indole-3-acetic acid content" []
+is_a: TO:0000476 ! growth hormone content
+
+[Term]
+id: TO:0002673
+name: amino acid content
+def: "The amino acid content in a plant or plant part. " [GR:pj]
+is_a: TO:0000281 ! metabolite content related trait
+
+[Term]
+id: TO:0002674
+name: tryptophan content
+def: "Amino acid tryptophan content in a plant or plant part. " [GR:pj]
+is_a: TO:0002673 ! amino acid content
+
+[Term]
+id: TO:0002675
+name: gibberellic acid content
+def: "Measures the gibberellic acid content in a plant or plant part. " [GR:pj]
+synonym: "GA content" []
+synonym: "GACN" []
+synonym: "gibberellin content" []
+is_a: TO:0000476 ! growth hormone content
+
+[Term]
+id: TO:0002676
+name: brassinosteroid content
+def: "Measures the brassinosteroid content in a plant or plant part. " [GR:pj]
+comment: Brassinosteroids (BR) are a group of steroidal plant hormones.
+synonym: "BRCN" []
+is_a: TO:0000476 ! growth hormone content
+
+[Term]
+id: TO:0002677
+name: brassinosteroid sensitivity
+def: "Response with respect to application of Brassinosteroid." [GR:pj]
+comment: Brassinosteroids (BR) are a group of steroidal plant hormones.
+synonym: "BRSN" []
+is_a: TO:0000401 ! plant growth hormone sensitivity
+
+[Term]
+id: TO:0002678
+name: panicleless
+def: "The absence of panicle in the plant\, either due to the abortion of the developmental process and/or due to environmental factors." [GR:pj]
+is_a: TO:0000152 ! panicle number
+is_a: TO:0002679 ! inflorescenceless
+
+[Term]
+id: TO:0002679
+name: inflorescenceless
+def: "The absence of inflorescence in the plant\, either due to the abortion of the inflorescence developmental process and/or due to environmental factors." [GR:pj]
+is_a: TO:0000582 ! inflorescence number
+
+[Term]
+id: TO:0002680
+name: albumin content
+def: "Assay to detrmine the amount of albumin protein. " [GR:pj]
+synonym: "albumen content" []
+is_a: TO:0000325 ! soluble protein content
+
+[Term]
+id: TO:0002681
+name: leaf curling
+def: "An assay to measure the extent of curling of the leaf lamina. " [GR:pj]
+comment: This is due to the changes in the leaf developmental process and is different from the leaf rolling (TO\:0000085) observed due to the water deficient or dorught linke conditions.
+synonym: "curled leaf trait" []
+synonym: "frizzled leaf trait" []
+is_a: TO:0000655 ! leaf development trait
+
+[Term]
+id: TO:0002682
+name: plant cell shape
+def: "An assay to determine the variation in the shape of the given plant cell type." [GR:pj]
+is_a: TO:0002683 ! plant cell anatomy and morphology trait
+
+[Term]
+id: TO:0002683
+name: plant cell anatomy and morphology trait
+def: "Traits associated with changes in the anatomy or structure of the plant cell and its parts." [GR:pj]
+is_a: TO:0000017 ! anatomy and morphology related trait
+
+[Term]
+id: TO:0002684
+name: plant cell size
+def: "An assay to determine the variation in the size of the given plant cell type." [GR:pj]
+is_a: TO:0002683 ! plant cell anatomy and morphology trait
+
+[Term]
+id: TO:0002685
+name: crown root number
+def: "A count of number of crown roots present in the seedling." [GR:pj]
+is_a: TO:0000084 ! root number
+
+[Term]
+id: TO:0002686
+name: cell growth and development trait
+def: "Traits associated with observing effects on the growth and development of the plant cell and its parts." [GR:pj]
+is_a: TO:0000357 ! growth and development trait
+
+[Term]
+id: TO:0002687
+name: cell elongation trait
+def: "An assay to determine the variation in the length of the plant cell due to cell growth and elongation." [GR:pj]
+synonym: "cell length" []
+is_a: TO:0002686 ! cell growth and development trait
+
+[Term]
+id: TO:0002688
+name: leaf lamina joint bending
+def: "An assay to determine the extent of the bending that occurrs to the leaf lamina joint in degrees." [GR:pj, PMID:14615594]
+comment: It may happen due to environmental stress such as upon brassinosteroid treatment.
+is_a: TO:0000492 ! leaf shape
+
+[Term]
+id: TO:0002689
+name: leaf sheath length
+def: "Actual length measurements\, in centimeters of the leaf sheath." [GR:pj]
+synonym: "LFSLG" []
+is_a: TO:0002637 ! leaf size
+relationship: part_of TO:0000135 ! leaf length
+
+[Term]
+id: TO:0002690
+name: leaf lamina length
+def: "Actual length measurements\, in centimeters of the leaf laimina." [GR:pj]
+synonym: "LFLLG" []
+exact_synonym: "leaf blade length" []
+is_a: TO:0002637 ! leaf size
+relationship: part_of TO:0000135 ! leaf length
+
+[Term]
+id: TO:0002691
+name: peduncle length
+def: "An assay to determin the variation in the length of the peduncle." [GR:pj]
+comment: Peduncle is the stalk of an inflorescence; that part of the inflorescence below the first flower or inflorescence branch and above the last foliage leaf/pair of foliage leaves.
+exact_synonym: "neck internode length" [PMID:17303594]
+is_a: TO:0000621 ! inflorescence development trait
+
+[Term]
+id: TO:0002692
+name: root meristem development
+def: "An assay to determine the variation in the root meristem development." [GR:pj, PMID:17303594]
+comment: The variation may be due to both the genotypic and/or environmental effects.
+is_a: TO:0000656 ! root development trait
+is_a: TO:0006016 ! meristem tissue development trait
+
+[Term]
+id: TO:0002693
+name: gravity response trait
+def: "An assay to determine the variation in the gravitropism under the influence of gravity or zero gravity" [GR:pj]
+is_a: TO:0000168 ! abiotic stress trait
+
+[Term]
+id: TO:0002694
+name: fruit flavor trait
+def: "An assay to determine the sensory impression of a fruit by the chemical senses of taste and smell." [GR:pj]
+is_a: TO:0000281 ! metabolite content related trait
+is_a: TO:0002728 ! fruit quality trait
+
+[Term]
+id: TO:0002695
+name: beta-carotene content
+def: "The beta-carotene content in a plant or plant part. " [GR:pj]
+comment: beta-carotene is the most common form of carotenoid.
+exact_synonym: "beta-carotenoid content" []
+is_a: TO:0002697 ! cyclic carotene content
+
+[Term]
+id: TO:0002696
+name: alpha carotene content
+def: "The alpha-carotene content in a plant or plant part. " [GR:pj]
+comment: alpha-carotene is the second most common form of carotenoid.
+exact_synonym: "alpha-carotenoid content" []
+is_a: TO:0002697 ! cyclic carotene content
+
+[Term]
+id: TO:0002697
+name: cyclic carotene content
+def: "The cyclic carotene content in a plant or plant part. " [GR:pj]
+is_a: TO:0000289 ! carotene content
+
+[Term]
+id: TO:0002698
+name: acyclic carotene content
+def: "The acyclic carotene content in a plant or plant part. " [GR:pj]
+is_a: TO:0000289 ! carotene content
+
+[Term]
+id: TO:0002699
+name: lycopene content
+def: "The lycopene content in a plant or plant part. " [GR:pj]
+comment: Lycopene is the most efficient quencher of singlet oxygen free radicals.
+is_a: TO:0002698 ! acyclic carotene content
+
+[Term]
+id: TO:0002700
+name: pungency
+def: "The quality of producing a sharp sensation of taste or smell." [GR:pj]
+is_a: TO:0002694 ! fruit flavor trait
+
+[Term]
+id: TO:0002701
+name: lutein content
+def: "The leutein content in a plant or plant part. " [GR:pj]
+is_a: TO:0000301 ! xanthophyll content
+
+[Term]
+id: TO:0002702
+name: cercospora leaf spot resistance
+def: "Causal agent\: Cercospora spp." [GR:pj]
+is_a: TO:0000439 ! fungal disease resistance
+
+[Term]
+id: TO:0002703
+name: protist disease resistance
+def: "The resistance exhibited by a plant or a group of plants (population) in response to the disease caused by a protist infection as compared to the susceptible and/or the reference plants of the same species." [GR:pj]
+is_a: TO:0000112 ! disease resistance
+
+[Term]
+id: TO:0002704
+name: Meloidogyne incognita resistance
+def: "Causal agent\: Meloidogyne incognita. Symptom\: resistant to damage caused by the pathogen Meloidogyne incognita (root knot nematode). It  produces characteristic galls (swellings) on roots." [GR:pj]
+is_a: TO:0000384 ! nematode damage resistance
+
+[Term]
+id: TO:0002705
+name: cucurbit downy mildew resistance
+def: "Causal agent\: Pseudoperonospora cubensis. It causes the downy mildew disease in cucurbits." [GR:pj]
+is_a: TO:0000439 ! fungal disease resistance
+
+[Term]
+id: TO:0002706
+name: Meloidogyne javanica resistance
+def: "Causal agent\: Meloidogyne javanica. Symptom\: resistant to damage caused by the pathogen Meloidogyne javanica (root knot nematode). It  produces characteristic galls (swellings) on roots." [GR:pj]
+is_a: TO:0000384 ! nematode damage resistance
+
+[Term]
+id: TO:0002707
+name: petiole color
+def: "The color of the petiole." [GR:pj]
+relationship: part_of TO:0000326 ! leaf color
+
+[Term]
+id: TO:0002708
+name: xylem color
+def: "The color of the xylem tissue." [GR:pj]
+is_a: TO:0000470 ! vascular tissue related trait
+
+[Term]
+id: TO:0002709
+name: phloem color
+def: "The color of the phloem tissue." [GR:pj]
+is_a: TO:0000470 ! vascular tissue related trait
+
+[Term]
+id: TO:0002710
+name: root shape
+def: "The shape of the plant root system.\n" [GR:pj]
+is_a: TO:0000043 ! root anatomy and morphology trait
+
+[Term]
+id: TO:0002711
+name: total water soluble content
+def: "The concentration of water soluble components in the plant as determined by refractive index. " [GR:pj]
+is_a: TO:0000281 ! metabolite content related trait
+
+[Term]
+id: TO:0002712
+name: stay green trait
+def: "The color of plant and the photosynthetic organs remain green compared to turning yellow and or brown at the time of senescing. " [GR:pj]
+relationship: part_of TO:0000326 ! leaf color
+
+[Term]
+id: TO:0002713
+name: cell organelle structure trait
+def: "Trait(s) associated with phenotypes observed for abnormal development of organelle structure and biogenesis." [GR:pj]
+synonym: "cell organelle development trait" []
+narrow_synonym: "organelle biogenesis trait" []
+narrow_synonym: "organelle structure trait" []
+is_a: TO:0000017 ! anatomy and morphology related trait
+
+[Term]
+id: TO:0002714
+name: plastid development trait
+def: "Trait(s) associated with phenotypes observed for abnormal development of plastid structure and its biogenesis." [GR:pj]
+narrow_synonym: "plastid biogenesis trait" []
+narrow_synonym: "plastid structure trait" []
+is_a: TO:0002713 ! cell organelle structure trait
+is_a: TO:0002755 ! cell organelle development trait
+
+[Term]
+id: TO:0002715
+name: chloroplast development trait
+def: "Trait(s) associated with phenotypes observed for abnormal development of chloroplast structure and biogenesis." [GR:pj]
+narrow_synonym: "chloroplast biogenesis trait" []
+narrow_synonym: "chloroplast structure trait" []
+is_a: TO:0002714 ! plastid development trait
+
+[Term]
+id: TO:0002716
+name: auricle pubescence
+def: "Extent of pubescence  (presence of hairs)  on the auricle." [GR:pj]
+synonym: "AUPUBES" []
+is_a: TO:0002717 ! auricle morphology and anatomy trait
+
+[Term]
+id: TO:0002717
+name: auricle morphology and anatomy trait
+def: "Traits associated with changes in the anatomy or structure of the auricle." [GR:pj]
+is_a: TO:0000419 ! leaf anatomy and morphology trait
+
+[Term]
+id: TO:0002718
+name: awn anatomy and morphology trait
+def: "Traits associated with changes in the anatomy or structure of the awn." [GR:pj]
+is_a: TO:0000079 ! lemma and palea anatomy and morphology trait
+
+[Term]
+id: TO:0002719
+name: awn thickness
+def: "Thickness of the awn measured at a given distance from the apiculus." [GR:pj]
+synonym: "AWNTH" []
+is_a: TO:0002718 ! awn anatomy and morphology trait
+
+[Term]
+id: TO:0002720
+name: leaf lamina width
+def: "Actual measurements\, in centimeters of the widest portion of the leaf lamina." [GR:pj]
+synonym: "leaf blade width" []
+exact_synonym: "LFLWD" []
+is_a: TO:0000370 ! leaf width
+
+[Term]
+id: TO:0002721
+name: leaf sheath width
+def: "Actual measurements\, in centimeters of the widest portion of the leaf sheath in a grass plant." [GR:pj]
+is_a: TO:0000370 ! leaf width
+
+[Term]
+id: TO:0002722
+name: leaf pubescence
+def: "Extent of pubescence  (presence of hairs)  on the leaf surface." [GR:pj]
+is_a: TO:0000419 ! leaf anatomy and morphology trait
+
+[Term]
+id: TO:0002723
+name: leaf lamina margin pubescence
+def: "Extent of pubescence  (presence of hairs)  on the leaf blade margin." [GR:pj]
+synonym: "LFLMPUBES" []
+synonym: "leaf blade margin pubescence" []
+is_a: TO:0002722 ! leaf pubescence
+
+[Term]
+id: TO:0002724
+name: leaf sheath color
+def: "Color of the leaf sheath. " [GR:pj]
+synonym: "LFSCL" []
+is_a: TO:0000326 ! leaf color
+
+[Term]
+id: TO:0002725
+name: life cycle habit
+def: "Determined for type of life cycle being annual\, binneal\, perennial etc." [GR:pj]
+synonym: "LIFECYCHAB" []
+is_a: TO:0000357 ! growth and development trait
+
+[Term]
+id: TO:0002726
+name: sterile lemma shape
+def: "Shape of the sterile lemma." [GR:pj]
+synonym: "STLEMSHP" []
+is_a: TO:0000079 ! lemma and palea anatomy and morphology trait
+
+[Term]
+id: TO:0002727
+name: sterile lemma width
+def: "Width of the sterile lemma. Measured in the widest portion of the sterile lemma." [GR:pj]
+synonym: "STLEMWD" []
+is_a: TO:0000079 ! lemma and palea anatomy and morphology trait
+
+[Term]
+id: TO:0002728
+name: fruit quality trait
+def: "Any trait contributing to overall improvement of the fruit. Often associated to economical and or commercial importance." [GR:pj]
+is_a: TO:0000597 ! quality trait
+
+[Term]
+id: TO:0002729
+name: fruit senescing quality trait
+def: "Traits associated with the fruit abscission zone." [GR:pj]
+is_a: TO:0002728 ! fruit quality trait
+
+[Term]
+id: TO:0002730
+name: grain shape
+def: "An assay to determine the variation in the shape of the dehulled grain." [GR:pj]
+synonym: "DHULGRSHP" []
+synonym: "GRSHP" []
+synonym: "dehulled-grain shape" []
+is_a: TO:0002628 ! fruit shape
+
+[Term]
+id: TO:0002731
+name: grain length to width ratio
+def: "Determined from grain length and grain width on dehulled grain." [GR:pj]
+synonym: "DHULGRLGWDRO" []
+synonym: "GRLHWDRO" []
+synonym: "dehulled-grain length to width ratio" []
+is_a: TO:0000397 ! grain size
+
+[Term]
+id: TO:0002732
+name: flag leaf angle: early stage
+def: "In grasses the flag leaf angle is measured near the collar as the angle of attachment between the flag leaf blade and the main inflorescence axis in grass plants. Observed around anthesis stage." [GR:pj]
+synonym: "FLFAGERLY" []
+synonym: "flag leaf attitude\: early stage" []
+is_a: TO:0000124 ! flag leaf angle
+
+[Term]
+id: TO:0002733
+name: flag leaf angle: late stage
+def: "In grasses the flag leaf angle is measured near the collar as the angle of attachment between the flag leaf blade and the main inflorescence axis in grass plants. Observed at maturity stage." [GR:pj]
+synonym: "FLFAGLATE" []
+synonym: "flag leaf attitude\: late stage" []
+is_a: TO:0000124 ! flag leaf angle
+
+[Term]
+id: TO:0002734
+name: awn presence
+def: "The presence or absence of awn. Observation may include relative awn size." [GR:pj]
+synonym: "AWNPLU" []
+is_a: TO:0002718 ! awn anatomy and morphology trait
+
+[Term]
+id: TO:0002735
+name: straighthead
+def: "Malformed inflorescence (panicle in rice)\, by staying upright/straight at the time of maturity and may carry infertile seeds." [GR:pj, web:http\://plantpathology.tamu.edu/Texlab/Grains/Rice/rices.html]
+comment: For rice\: Straighthead is a physiological disorder that causes the entire head to be blank and remain upright at maturity in rice. Straighthead generally occurs in spots scattered throughout a field and is most easily recognized near harvest when normal plants have downturned heads (from the weight of the grain in the panicle). The disease is frequently found on sandy loam soils but seldom on clay soils. Old cotton fields with arsenic residues can have a severe incidence of straighthead. Other\, as yet unknown\, soil factors are also involved in causing straighthead. Often it is found in fields where excessive non-decayed vegetation has been plowed under just before planting. The disease is characterized by upright heads when the rice matures due to infertile seed. Hulls may be distorted into a crescent shape or \"parrot beak\". One or both hulls may be missing. Affected plants continue to grow\, are a darker green\, and often produce shoots from a lower portion of the plant. First year crops of rice grown on \"new ground\" are more likely to be affected. Some varieties are more tolerant than others. Control measures include planting resistant varieties and draining fields with a history of the disorder just prior to internode elongation.
+is_a: TO:0000168 ! abiotic stress trait
+
+[Term]
+id: TO:0002736
+name: flower number
+def: "The number of flowers." [GR:pj]
+is_a: TO:0000499 ! flower anatomy and morphology trait
+
+[Term]
+id: TO:0002737
+name: floret number per branch
+def: "Average number of flowers (florets) per branch in a grass inflorescence." [GR:pj]
+synonym: "FLNBPBR" []
+is_a: TO:0000670 ! floret number
+
+[Term]
+id: TO:0002738
+name: floret number per inflorescence
+def: "Average number of flowers (florets) in a grass inflorescence." [GR:pj]
+synonym: "FLNBPINFLO" []
+synonym: "FLNBPPN" []
+synonym: "floret number per panicle" []
+synonym: "florets per inflorescence" []
+exact_synonym: "florets per panicle" []
+is_a: TO:0000670 ! floret number
+
+[Term]
+id: TO:0002739
+name: fruit surface area
+def: "Average whole fruit surface area." [GR:pj]
+synonym: "FRUTSURFAR" []
+is_a: TO:0002728 ! fruit quality trait
+
+[Term]
+id: TO:0002741
+name: grain surface area
+alt_id: TO:0002740
+def: "The average surface area of the grain without hull (dehulled) in a grass fruit caryopsis." [GR:pj]
+synonym: "DHULGRSURFAR" []
+synonym: "GRSURFAR" []
+synonym: "dehulled-grain surface area" []
+synonym: "hulled-grain surface area" []
+synonym: "kernel surface area" []
+is_a: TO:0002728 ! fruit quality trait
+is_a: TO:0002739 ! fruit surface area
+
+[Term]
+id: TO:0002742
+name: fruit volume
+def: "Volume of the fruit." [GR:pj]
+is_a: TO:0002728 ! fruit quality trait
+
+[Term]
+id: TO:0002743
+name: grain volume
+def: "Volume of the grain without hull (dehulled)." [GR:pj]
+synonym: "DHULGRVOL" []
+synonym: "GRVOL" []
+exact_synonym: "dehulled-grain volume" []
+is_a: TO:0002742 ! fruit volume
+
+[Term]
+id: TO:0002744
+name: fruit curved length
+def: "Average length of the curved surface of fruit." [GR:pj]
+is_a: TO:0002625 ! fruit size
+is_a: TO:0002728 ! fruit quality trait
+
+[Term]
+id: TO:0002745
+name: grain curved length
+def: "Average length of the curved surface of grain without hull (dehulled)." [GR:pj]
+synonym: "DHULGRCURVLG" []
+exact_synonym: "curved length of dehulled-grain" []
+exact_synonym: "dehulled-grain curved length" []
+is_a: TO:0002744 ! fruit curved length
+
+[Term]
+id: TO:0002746
+name: fruit weight
+def: "Average weight of the given number of fruits." [GR:pj]
+is_a: TO:0002728 ! fruit quality trait
+
+[Term]
+id: TO:0002747
+name: 10-dehulled grain weight
+def: "Weight of 10-dehulled grain having pericarp (seed coat)" [GR:pj]
+synonym: "10-grain weight" []
+synonym: "TENGRWT" []
+synonym: "ten dehulled-grain weight" []
+synonym: "ten grain weight" []
+exact_synonym: "TENDHULGRWT" []
+is_a: TO:0000590 ! grain weight
+
+[Term]
+id: TO:0002748
+name: ligule anatomy and morphology trait
+def: "Traits associated with changes in the anatomy or structure of the ligule." [GR:pj]
+is_a: TO:0000419 ! leaf anatomy and morphology trait
+
+[Term]
+id: TO:0002749
+name: ligule pubescence
+def: "Extent of pubescence  (presence of hairs)  on the ligule." [GR:pj]
+synonym: "LIGPUBES" []
+is_a: TO:0002748 ! ligule anatomy and morphology trait
+
+[Term]
+id: TO:0002750
+name: ligule margin pubescence
+def: "Extent of pubescence  (presence of hairs)  on the ligule margin." [GR:pj]
+synonym: "LIGMPUBES" []
+exact_synonym: "ligule margin hairiness" []
+is_a: TO:0002748 ! ligule anatomy and morphology trait
+
+[Term]
+id: TO:0002751
+name: inflorescence branch arrangement
+alt_id: TO:0002752
+def: "Arrangement of inflorescence branches." [GR:pj]
+synonym: "INFLBRARANGE" []
+synonym: "panicle branch arrangement" []
+is_a: TO:0000373 ! inflorescence anatomy and morphology trait
+
+[Term]
+id: TO:0002753
+name: arrangement of inflorescence primary branch
+def: "Arrangement of primary branches in an inflorescence." [GR:pj]
+synonym: "PBRARANGE" []
+synonym: "arrangement of primary branch" []
+synonym: "primary branch arrangement" []
+is_a: TO:0002751 ! inflorescence branch arrangement
+
+[Term]
+id: TO:0002754
+name: inflorescence axis texture
+def: "Texture of the inflorescence axis." [GR:pj]
+synonym: "INFLOAXISTEX" []
+synonym: "PNAXISTEX" []
+exact_synonym: "panicle axis texture" []
+is_a: TO:0000373 ! inflorescence anatomy and morphology trait
+
+[Term]
+id: TO:0002755
+name: cell organelle development trait
+def: "Trait(s) associated with phenotypes observed for abnormal development of cell organelle structure and its biogenesis." [GR:pj]
+is_a: TO:0000357 ! growth and development trait
+
+[Term]
+id: TO:0002756
+name: shoot habit
+def: "Estimated by the angle of inclination of the main shoot/stem against the soil/growth medium surface." [GR:pj]
+synonym: "CULMHAB" []
+synonym: "STEMHAB" []
+synonym: "culm habit" []
+synonym: "growth habit" []
+synonym: "stem habit" []
+is_a: TO:0000077 ! shoot anatomy and morphology trait
+
+[Term]
+id: TO:0002757
+name: flag leaf length
+def: "Length of the flag leaf in the grass plant." [GR:pj]
+exact_synonym: "FLFLG" []
+is_a: TO:0000135 ! leaf length
+
+[Term]
+id: TO:0002758
+name: flag leaf lamina width
+def: "Actual measurements\, in centimeters of the widest portion of the flag leaf lamina." [GR:pj]
+exact_synonym: "FLFLWD" []
+exact_synonym: "flag leaf blade width" []
+is_a: TO:0002720 ! leaf lamina width
+
+[Term]
+id: TO:0002759
+name: grain number
+def: "Number of grains dehulled/with hull in a given inflorescence." [GR:pj]
+synonym: "GRNB" []
+synonym: "fruit number" []
+synonym: "kernel number" []
+is_a: TO:0000371 ! yield trait
+
+[Term]
+id: TO:0002761
+name: length of grain with hull
+def: "Length of the grain with hull." [GR:pj]
+synonym: "HULGRLG" []
+synonym: "hulled grain length" []
+synonym: "hulled-grain length" []
+is_a: TO:0002626 ! fruit length
+
+[Term]
+id: TO:0002762
+name: width of grain with hull
+def: "Width of the grain with hull." [GR:pj]
+synonym: "HULGRWD" []
+synonym: "hulled grain curved width" []
+synonym: "hulled grain width" []
+is_a: TO:0002627 ! fruit width
+
+[Term]
+id: TO:0002763
+name: curved length of grain with hull
+def: "Average length of the curved surface of grain with hull (hulled)." [GR:pj]
+synonym: "HULGRCURVLG" []
+synonym: "hulled grain curved length" []
+is_a: TO:0002744 ! fruit curved length
+
+[Term]
+id: TO:0002764
+name: surface area of grain with hull
+def: "The average surface area of the grain with hull (hulled) in a grass fruit caryopsis." [GR:pj]
+synonym: "HULGRSURFAR" []
+synonym: "hulled-grain surface area" []
+is_a: TO:0002739 ! fruit surface area
+
+[Term]
+id: TO:0002765
+name: volume of grain with hull
+def: "Volume of the grain with hull (hulled)." [GR:pj]
+synonym: "HULGRVOL" []
+synonym: "hulled grain volume" []
+is_a: TO:0002742 ! fruit volume
+
+[Term]
+id: TO:0002766
+name: ligule margin shape
+def: "Shape of the ligule margin." [GR:pj]
+synonym: "LIGMSHP" []
+is_a: TO:0002748 ! ligule anatomy and morphology trait
+
+[Term]
+id: TO:0002767
+name: rhizome formation
+synonym: "RHZFORM" []
+is_a: TO:0000549 ! rhizome anatomy and morphology trait
+
+[Term]
+id: TO:0002768
+name: spikelet length
+def: "Length of the spikelet." [GR:pj]
+synonym: "SPKLG" []
+is_a: TO:0000657 ! spikelet anatomy and morphology trait
 
 [Term]
 id: TO:0005001
@@ -5756,10 +7021,574 @@ narrow_synonym: "acetolactate synthase inhibitor tolerance" []
 is_a: TO:0000058 ! herbicide sensitivity
 
 [Term]
+id: TO:0005009
+name: european corn borer resistance
+def: "causal agent\: agent\: Ostrinia nubialis" [GR:pj]
+exact_synonym: "ECB resistance" []
+is_a: TO:0000261 ! insect damage resistance
+
+[Term]
+id: TO:0005010
+name: rootworm resistance
+def: "causal agent\: Diabrotica spp." [GR:pj]
+is_a: TO:0000261 ! insect damage resistance
+
+[Term]
+id: TO:0006001
+name: salt tolerance
+def: "Tolerance to the high salt content in the growth medium." [GR:pj]
+exact_synonym: "SALTTL" []
+is_a: TO:0000429 ! salt sensitivity
+
+[Term]
+id: TO:0006002
+name: proline content
+def: "Amino acid proline content in a plant or plant part. " [GR:pj]
+is_a: TO:0002673 ! amino acid content
+
+[Term]
+id: TO:0006003
+name: oligosaccharide content
+def: "Amount of oligosaccharides present in the plant or its parts." [GR:pj]
+comment: Oligosaccharide is a carbohydrate polymer that on hydrolysis yields a small number of monosaccharide molecules.
+is_a: TO:0000333 ! sugar content
+
+[Term]
+id: TO:0006004
+name: raffinose content
+def: "Amount of raffinose present in the plant or plant part." [GR:pj]
+is_a: TO:0006003 ! oligosaccharide content
+
+[Term]
+id: TO:0006005
+name: fructose content
+def: "Amount of fructose present in the plant or plant part." [GR:pj]
+is_a: TO:0006003 ! oligosaccharide content
+
+[Term]
+id: TO:0006006
+name: monosaccharide content
+def: "Amount of monosaccharide present in the plant or plant part." [GR:pj]
+is_a: TO:0000333 ! sugar content
+
+[Term]
+id: TO:0006007
+name: polysaccharide content
+def: "Amount of polysaccharide present in the plant or plant part." [GR:pj]
+is_a: TO:0000333 ! sugar content
+
+[Term]
+id: TO:0006008
+name: carbohydrate derivative content
+def: "Total amount of carbohydrate derivatives present in the plant or plant part." [GR:pj]
+is_a: TO:0000291 ! carbohydrate content
+
+[Term]
+id: TO:0006009
+name: lodicule anatomy and morphology trait
+def: "Traits associated with changes in the anatomy or structure of the lodicule and its parts." [GR:pj]
+is_a: TO:0000274 ! floret anatomy and morphology trait
+
+[Term]
+id: TO:0006010
+name: lodicule number
+def: "Average number of lodicules per grass flower (floret) in a study." [GR:pj]
+is_a: TO:0002613 ! reproductive homeotic development trait
+is_a: TO:0006009 ! lodicule anatomy and morphology trait
+is_a: TO:0006023 ! lodicule development trait
+
+[Term]
+id: TO:0006011
+name: lodicule shape
+def: "Shape of the lodicule" [GR:pj]
+is_a: TO:0006009 ! lodicule anatomy and morphology trait
+
+[Term]
+id: TO:0006012
+name: carpel anatomy and morphology trait
+def: "Traits associated with changes in the anatomy or structure of the carpel and its parts." [GR:pj]
+is_a: TO:0000223 ! pistil anatomy and morphology trait
+
+[Term]
+id: TO:0006013
+name: carpel number
+def: "Number of carpels in a pistil in the gynoecium." [GR:pj]
+is_a: TO:0006012 ! carpel anatomy and morphology trait
+is_a: TO:0006038 ! floral organ number
+
+[Term]
+id: TO:0006014
+name: phyllotaxy
+def: "Arrangement of the leaves on the shoot of a plant." [GR:pj]
+exact_synonym: "leaf arrangement" []
+is_a: TO:0000419 ! leaf anatomy and morphology trait
+
+[Term]
+id: TO:0006015
+name: tissue development trait
+def: "Traits associated with observing effects on the development of a given tissue type." [GR:pj]
+is_a: TO:0000357 ! growth and development trait
+
+[Term]
+id: TO:0006016
+name: meristem tissue development trait
+def: "An assay to determine the variation in the  meristematic tissue development." [GR:pj]
+is_a: TO:0006015 ! tissue development trait
+
+[Term]
+id: TO:0006017
+name: meristem identity
+def: "Trait to determine the variation or effect on the establishment of meristem identity or determinacy." [GR:pj]
+exact_synonym: "meristem determinacy" []
+is_a: TO:0006016 ! meristem tissue development trait
+
+[Term]
+id: TO:0006018
+name: organ identity
+def: "Trait associated with observing effects on the establishment of organ identity." [GR:pj]
+comment: Identity is considered to be the aggregate of characteristics by which a structure is recognized
+is_a: TO:0000357 ! growth and development trait
+
+[Term]
+id: TO:0006019
+name: floral organ identity
+def: "Trait associated with observing effects on the establishment of floral organ identity." [GR:pj]
+is_a: TO:0006018 ! organ identity
+
+[Term]
+id: TO:0006020
+name: shoot apical meristem development
+def: "An assay to associate observing effects on the development of shoot apical (SAM) meristem." [GR:pj]
+is_a: TO:0002638 ! shoot meristem development
+
+[Term]
+id: TO:0006021
+name: vegetative to reproductive phase transition trait
+def: "Trait associated with the transition of vegetative growth phase to the reproductive growth phase. " [GR:pj]
+comment: Usually observed at the time of transition of shoot apical meristem (a vegetative meristem) to the inflorescence apical meristem (a reproductive meristem).
+is_a: TO:0000654 ! shoot development trait
+
+[Term]
+id: TO:0006022
+name: floral organ development trait
+def: "Traits associated with observing effects on the development of the floral organ and its parts." [GR:pj]
+is_a: TO:0000622 ! flower development trait
+
+[Term]
+id: TO:0006023
+name: lodicule development trait
+def: "Traits associated with observing effects on the development of the lodicule in a grass flower (floret)." [GR:pj]
+is_a: TO:0006022 ! floral organ development trait
+
+[Term]
+id: TO:0006024
+name: ectopic lodicule development
+def: "Ectopic development of lodicule in a grass flower (floret)." [GR:pj]
+is_a: TO:0002613 ! reproductive homeotic development trait
+is_a: TO:0006023 ! lodicule development trait
+
+[Term]
+id: TO:0006025
+name: floral bract development trait
+def: "Traits associated with observing effects on the development of the floral bracts." [GR:pj]
+is_a: TO:0006022 ! floral organ development trait
+
+[Term]
+id: TO:0006026
+name: floral bract number
+def: "Number of bracts in a flower." [GR:pj]
+is_a: TO:0006025 ! floral bract development trait
+
+[Term]
+id: TO:0006027
+name: inflorescence bract development trait
+def: "Traits associated with observing effects on the development of the floral bracts." [GR:pj]
+is_a: TO:0000621 ! inflorescence development trait
+
+[Term]
+id: TO:0006028
+name: inflorescence bract number
+def: "Number of given type of bracts in a inflorescence." [GR:pj]
+is_a: TO:0006027 ! inflorescence bract development trait
+
+[Term]
+id: TO:0006029
+name: glume number
+def: "Number of glumes in an inflorescence of grass\, sedge or similar plant." [GR:pj]
+is_a: TO:0006028 ! inflorescence bract number
+
+[Term]
+id: TO:0006030
+name: spikelet meristem identity
+def: "Trait associated to observed effect on the establishment of spikelet meristem identity or determinacy." [GR:pj]
+is_a: TO:0000621 ! inflorescence development trait
+is_a: TO:0002638 ! shoot meristem development
+is_a: TO:0006017 ! meristem identity
+
+[Term]
+id: TO:0006031
+name: inflorescence size
+def: "Variation in size of inflorescence. " [GR:pj]
+is_a: TO:0000373 ! inflorescence anatomy and morphology trait
+
+[Term]
+id: TO:0006032
+name: panicle size
+def: "Variation in size of panicle inflorescence. " [GR:pj]
+is_a: TO:0006031 ! inflorescence size
+
+[Term]
+id: TO:0006033
+name: floret number per spikelet
+def: "Number of florets in a grass spikelet." [GR:pj]
+synonym: "FLNBPSPK" []
+is_a: TO:0000670 ! floret number
+
+[Term]
+id: TO:0006034
+name: tertiary branch number
+def: "Number of tertiary branches in an inflorescence." [GR:pj]
+is_a: TO:0006035 ! tertiary branching of inflorescence
+
+[Term]
+id: TO:0006035
+name: tertiary branching of inflorescence
+def: "The extent of tertiary branching usually determines the shape and compactness of the inflorescence (such as in rice panicle)." [GR:pj]
+is_a: TO:0000050 ! inflorescence branching
+
+[Term]
+id: TO:0006036
+name: stem elongation
+def: "Elongation of the stem." [GR:pj]
+comment: Alternative associated traits are stem length (TO\:0000576) and shoot elongation rate (TO\:0000368).
+is_a: TO:0000654 ! shoot development trait
+
+[Term]
+id: TO:0006037
+name: carpel shape
+def: "Shape of the carpel." [GR:pj]
+is_a: TO:0006012 ! carpel anatomy and morphology trait
+
+[Term]
+id: TO:0006038
+name: floral organ number
+def: "Number of given floral organ type in a flower." [GR:pj]
+is_a: TO:0000499 ! flower anatomy and morphology trait
+
+[Term]
+id: TO:0006039
+name: petal number
+def: "Number of the petals in a flower." [GR:pj]
+is_a: TO:0000275 ! perianth anatomy and morphology trait
+
+[Term]
+id: TO:0006040
+name: sepal number
+def: "Number of the sepals in a flower." [GR:pj]
+is_a: TO:0000275 ! perianth anatomy and morphology trait
+
+[Term]
+id: TO:0006041
+name: tepal number
+def: "Number of the tepals in a flower." [GR:pj]
+is_a: TO:0000275 ! perianth anatomy and morphology trait
+
+[Term]
 id: TO:0010001
 name: percent germination
 def: "The percentage of seeds that germinate against the total number of seeds planted." [GR:pj]
 is_a: TO:0000250 ! vigor related trait
+
+[Term]
+id: TO:0011001
+name: leaf lamina color distribution
+def: "Describes the the way different colors\, their hue and shades are distributed on a leaf lamina and its parts such as leaf margin\, leaf tip\, leaf veins." [GR:pj]
+synonym: "LFLCLDIST" []
+is_a: TO:0000299 ! leaf lamina color
+
+[Term]
+id: TO:0011002
+name: inflorescence primary branch attitude
+def: "The attitude of the inflorescence primary branch in terms of upright and drooping characters." [GR:pj]
+comment: Associated to the trait inflorescence type (TO\:0000267).
+synonym: "INFLPBRAATT" []
+is_a: TO:0000373 ! inflorescence anatomy and morphology trait
+
+[Term]
+id: TO:0011003
+name: inflorescence axis color
+def: "Color of the inflorescence axis." [GR:pj]
+synonym: "INFLAXISCL" []
+relationship: part_of TO:0000581 ! inflorescence color
+
+[Term]
+id: TO:0011004
+name: inflorescence branch color
+def: "Color of the inflorescence branch." [GR:pj]
+synonym: "INFLBRACL" []
+synonym: "panicle branch color" []
+relationship: part_of TO:0000581 ! inflorescence color
+
+[Term]
+id: TO:0011005
+name: penultimate leaf length
+def: "Length of the leaf penultimate to the first leaf below the inflorescence. " [GR:pj]
+comment: In case of cereal crop plants such as rice\, corn\, wheat etc.\, first leaf below the inflorescence or the last leaf on the shoot is called the flag leaf. Penultimate leaf is the one below flag leaf.
+synonym: "PENLFLG" []
+synonym: "second leaf length" []
+is_a: TO:0000135 ! leaf length
+
+[Term]
+id: TO:0011006
+name: penultimate leaf lamina width
+def: "lamina width of the leaf penultimate to the first leaf below the inflorescence. " [GR:pj]
+comment: In case of cereal crop plants such as rice\, corn\, wheat etc.\, first leaf below the inflorescence or the last leaf on the shoot is called the flag leaf. Penultimate leaf is the one below flag leaf.
+synonym: "PENLFLWD" []
+synonym: "second leaf width" []
+is_a: TO:0002720 ! leaf lamina width
+
+[Term]
+id: TO:0011007
+name: awn width
+def: "Width of the awn." [GR:pj]
+synonym: "AWNWD" []
+is_a: TO:0002718 ! awn anatomy and morphology trait
+
+[Term]
+id: TO:0011008
+name: stigma length
+def: "Length of the stigma in a pistil." [GR:pj]
+synonym: "STIGLG" []
+is_a: TO:0002600 ! flower organ size
+
+[Term]
+id: TO:0011009
+name: style length
+def: "length of the style in a pistil." [GR:pj]
+synonym: "STYLLG" []
+is_a: TO:0002600 ! flower organ size
+
+[Term]
+id: TO:0011010
+name: internode color in proxomity to colored node
+def: "Color of the spatial section of the internode that is found proximal (next) to the colored node of a stem." [GR:pj]
+synonym: "INCLPROXNDCL" []
+is_a: TO:0000426 ! internode color
+
+[Term]
+id: TO:0020001
+name: panicle compactness and shape
+is_a: TO:0000373 ! inflorescence anatomy and morphology trait
+
+[Term]
+id: TO:0020002
+name: grain weight to panicle weight ratio
+is_a: TO:0000014 ! panicle weight
+is_a: TO:0000590 ! grain weight
+
+[Term]
+id: TO:0020003
+name: shoot potassium content
+def: "The percent content of potassium ion measured in the shoots of the plant" [GR:cwt, ICRIS:019]
+is_a: TO:0000609 ! potassium content
+
+[Term]
+id: TO:0020004
+name: shoot sodium content
+def: "The percent sodium ion content measured in the shoot" [GR:cwt, ICRIS:018]
+is_a: TO:0000608 ! sodium content
+
+[Term]
+id: TO:0020005
+name: sorghum stem borer resistance
+def: "Causative agent\:Chilo partellus. Infections causes the appearance of small elongated holes in young whorl leaves\, tunelling of earheads results in breakage or chaffy earheads affecting grain development" [GR:cwt6, GCP:053]
+is_a: TO:0000454 ! stem borer resistance
+
+[Term]
+id: TO:0020006
+name: chickpea pod borer
+is_a: TO:0000261 ! insect damage resistance
+
+[Term]
+id: TO:0020007
+name: sorghum shoot fly resistance
+def: "Causative agent\:Atherigona soccata. Larval feeding results in central leaf wilting and drying causing the typical deadheart symptom." [GR:cwt6, GCP:051]
+is_a: TO:0000261 ! insect damage resistance
+
+[Term]
+id: TO:0020008
+name: sorghum grain mold
+def: "Causative agent\: Aspergillus spp and Penicillium spp. Trait is measured as extent of grain surface covered with mold" [ICRIS:050, GR:cwt]
+is_a: TO:0000023 ! fungal infection related grain discoloration
+
+[Term]
+id: TO:0020009
+name: sorghum rust resistance
+def: "Causative agent\: Puccinia purpurea. Infection causes purple\, red or tan flecks on both surfaces of leaves\, leaving a reddish powder on fingers when passed over it" [GR:cwt, ICRIS:049]
+is_a: TO:0000439 ! fungal disease resistance
+
+[Term]
+id: TO:0020010
+name: sorghum downy mildew resistance
+def: "Causative agent\:Peronospora sp.It causes abundant downy white growth on the under surfaces of infected portions of leaves during humid weather\, mature infected leaves become necrotic and intervenal tissues disintegrate to give the typical shredded leaf symptom." [GR:cwt, ICRIS:047]
+is_a: TO:0000439 ! fungal disease resistance
+
+[Term]
+id: TO:0020011
+name: chickpea botrytis grey mold resistance
+is_a: TO:0000664 ! fungal blight disease resistance
+
+[Term]
+id: TO:0020012
+name: chickpea fusarium wild resistance
+is_a: TO:0000664 ! fungal blight disease resistance
+
+[Term]
+id: TO:0020013
+name: chickpea colleotrichum blight resistance
+is_a: TO:0000664 ! fungal blight disease resistance
+
+[Term]
+id: TO:0020014
+name: chickpea ascochyta blight resistance
+is_a: TO:0000664 ! fungal blight disease resistance
+
+[Term]
+id: TO:0020015
+name: Sorghum leaf blight resistance
+is_a: TO:0000664 ! fungal blight disease resistance
+
+[Term]
+id: TO:0020016
+name: seed texture
+is_a: TO:0000184 ! seed anatomy and morphology trait
+
+[Term]
+id: TO:0020017
+name: seed coat spots
+is_a: TO:0000190 ! seed coat color
+
+[Term]
+id: TO:0020018
+name: tertiary shoot branch number
+is_a: TO:0002639 ! shoot branching
+
+[Term]
+id: TO:0020019
+name: secondary shoot branch number
+is_a: TO:0002639 ! shoot branching
+
+[Term]
+id: TO:0020020
+name: primary shoot branch number
+is_a: TO:0002639 ! shoot branching
+
+[Term]
+id: TO:0020021
+name: basal axillary tertiary branch number
+is_a: TO:0020018 ! tertiary shoot branch number
+is_a: TO:0020024 ! basal axillary branch number
+
+[Term]
+id: TO:0020022
+name: basal axillary secondary branch number
+is_a: TO:0020019 ! secondary shoot branch number
+is_a: TO:0020024 ! basal axillary branch number
+
+[Term]
+id: TO:0020023
+name: basal axillary primary branch number
+is_a: TO:0020020 ! primary shoot branch number
+is_a: TO:0020024 ! basal axillary branch number
+
+[Term]
+id: TO:0020024
+name: basal axillary branch number
+is_a: TO:0002639 ! shoot branching
+
+[Term]
+id: TO:0020025
+name: apical axillary tertiary branch number
+is_a: TO:0020018 ! tertiary shoot branch number
+is_a: TO:0020028 ! apical axillary branch number
+
+[Term]
+id: TO:0020026
+name: apical axillary secondary branch number
+is_a: TO:0020019 ! secondary shoot branch number
+is_a: TO:0020028 ! apical axillary branch number
+
+[Term]
+id: TO:0020027
+name: apical axillary primary branch number
+is_a: TO:0020020 ! primary shoot branch number
+is_a: TO:0020028 ! apical axillary branch number
+
+[Term]
+id: TO:0020028
+name: apical axillary branch number
+xref_analog: GR:cwt6
+is_a: TO:0002639 ! shoot branching
+
+[Term]
+id: TO:0020029
+name: leaf lamina pubscence length
+def: "Length of pubescence (presence of hairs) on the leaf blade surface" [GR:cwt]
+is_a: TO:0000055 ! leaf lamina pubescence
+
+[Term]
+id: TO:0020030
+name: leaf lamina pubescence density
+def: "Density of pubescence (presence of hairs) on the leaf blade surface" [GR:cwt]
+is_a: TO:0000055 ! leaf lamina pubescence
+
+[Term]
+id: TO:0020031
+name: leaf lamina margin pubescence length
+def: "length of pubescence (presence of hairs) on the leaf blade margin" [GR:cwt]
+is_a: TO:0002723 ! leaf lamina margin pubescence
+
+[Term]
+id: TO:0020032
+name: leaf lamina margin pubescence density
+def: "Density of pubescence (presence of hairs) on the leaf blade margin" [GR:cwt6]
+is_a: TO:0002723 ! leaf lamina margin pubescence
+
+[Term]
+id: TO:0020033
+name: glume length
+def: "the length of glume measured in mm (millimeter)" [GR:cwt, IWIS:1420]
+is_a: TO:0000657 ! spikelet anatomy and morphology trait
+
+[Term]
+id: TO:0020034
+name: glume width
+def: "Measurement of width of glume in mm (millimeter)" [GR:cwt, IWIS:1421]
+is_a: TO:0000657 ! spikelet anatomy and morphology trait
+
+[Term]
+id: TO:0020035
+name: glume pubescence density
+def: "Measurement of glume hairines density on outer side of sterile glume" [GR:cwt, IWIS:1422]
+is_a: TO:0020036 ! glume pubescence
+
+[Term]
+id: TO:0020036
+name: glume pubescence
+def: "Extent of pubescence  (presence of hairs)  on the glume surface" [GR:cwt]
+is_a: TO:0000657 ! spikelet anatomy and morphology trait
+
+[Term]
+id: TO:0020037
+name: glume pubescence length
+def: "measurement of length of hairs on glume" [GR:cwt, IWIS:1423]
+is_a: TO:0020036 ! glume pubescence
+
+[Term]
+id: TO:0020038
+name: glume waxiness
+def: "Measurement of presence of wax on glume" [GR:cwt, IWIS:1412]
+is_a: TO:0000657 ! spikelet anatomy and morphology trait
 
 [Typedef]
 id: part_of

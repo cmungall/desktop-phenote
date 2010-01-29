@@ -1,0 +1,55 @@
+default-namespace: WBfunc
+date: 23:01:2008 17:14
+
+[Term]
+id: WBfunc000001
+name: Amorph
+
+[Term]
+id: WBfunc000002 
+name: Hypomorph
+
+[Term]
+id: WBfunc000003 
+name: Isoallele
+
+[Term]
+id: WBfunc000004 
+name: Uncharacterised_loss_of_function
+
+[Term]
+id: WBfunc000005 
+name: Wild_type
+
+[Term]
+id: WBfunc000006
+name: Hypermorph
+
+[Term]
+id: WBfunc000007 
+name: Uncharacterised_gain_of_function
+
+[Term]
+id: WBfunc000008 
+name: Neomorph
+
+[Term]
+id: WBfunc000009 
+name: Dominant_negative
+
+[Term]
+id: WBfunc0000010 
+name: Mixed
+
+[Term]
+id: WBfunc000011 
+name: Gain_of_function
+
+[Term]
+id: WBfunc000012 
+name: Loss_of_function
+
+[Term]
+id: WBfunc000013 
+name: Haploinsufficient
+

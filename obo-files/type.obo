@@ -1,0 +1,19 @@
+default-namespace: WBtype
+date: 05:01:2009 14:43
+
+[Term]
+id: Allele
+name: Allele
+
+[Term]
+id: Transgene
+name: Transgene
+
+[Term]
+id: Rearrangement
+name: Rearrangement
+
+[Term]
+id: Strain
+name: Strain
+

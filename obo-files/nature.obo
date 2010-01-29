@@ -1,0 +1,19 @@
+default-namespace: WBnature
+date: 23:01:2008 17:14
+
+[Term]
+id: WBnature000001
+name: Recessive
+
+[Term]
+id: WBnature000002
+name: Semi_dominant
+
+[Term]
+id: WBnature000003
+name: Dominant
+
+[Term]
+id: WBnature000004
+name: Haploinsufficient
+

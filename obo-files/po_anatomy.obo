@@ -1,6 +1,6 @@
 format-version: 1.0
-version: $Revision: 1.41 $
-date: 25:04:2007 12:40
+version: $Revision: 1.64 $
+date: 04:08:2009 13:44
 saved-by: cwt6
 auto-generated-by: DAG-Edit 1.419 rev 3
 default-namespace: plant_ontology
@@ -135,6 +135,7 @@ id: PO:0000016
 name: lateral root primordium
 namespace: plant_structure
 def: "An organized group of cells derived from the root pericycle that will differentiate into a new root. " [TAIR:ki]
+is_a: PO:0005029 ! root primordium
 is_a: PO:0020121 ! lateral root
 
 [Term]
@@ -142,6 +143,7 @@ id: PO:0000017
 name: leaf primordium
 namespace: plant_structure
 def: "An organized group of cells that will differentiate into leaf that are emerging as an outgrowth in the shoot apex (flanking the meristem). " [TAIR:ki]
+synonym: "leaf meristem" []
 is_a: PO:0009025 ! leaf
 relationship: part_of PO:0000037 ! shoot apex
 
@@ -226,7 +228,7 @@ id: PO:0000028
 name: pollen tube tip
 namespace: plant_structure
 def: "Tip portion of the pollen tube that is rapidly growing." [TAIR:ki]
-is_a: PO:0006345 ! pollen tube
+relationship: part_of PO:0006345 ! pollen tube
 
 [Term]
 id: PO:0000029
@@ -277,7 +279,7 @@ id: PO:0000035
 name: cotyledon vascular system
 namespace: plant_structure
 def: "Vascular system of the cotyledon." [TAIR:ki]
-is_a: PO:0000034 ! vascular system
+relationship: part_of PO:0008011 ! embryo vascular system
 relationship: part_of PO:0020030 ! cotyledon
 
 [Term]
@@ -287,6 +289,7 @@ namespace: plant_structure
 def: "Vascular system of the leaf." [TAIR:ki]
 is_a: PO:0000034 ! vascular system
 relationship: part_of PO:0009025 ! leaf
+relationship: part_of PO:0020138 ! leaf vein
 
 [Term]
 id: PO:0000037
@@ -394,6 +397,7 @@ id: PO:0000048
 name: leaf lamina vascular system
 namespace: plant_structure
 def: "Vascular system of the leaf lamina." [TAIR:ki]
+is_a: PO:0000034 ! vascular system
 relationship: part_of PO:0000036 ! leaf vascular system
 relationship: part_of PO:0020039 ! leaf lamina
 
@@ -424,6 +428,7 @@ id: PO:0000052
 name: petiole vascular system
 namespace: plant_structure
 def: "Vascular system of the leaf petiole." [TAIR:ki]
+is_a: PO:0000034 ! vascular system
 relationship: part_of PO:0000036 ! leaf vascular system
 relationship: part_of PO:0020038 ! petiole
 
@@ -622,6 +627,7 @@ id: PO:0000115
 name: socket cell
 namespace: plant_structure
 def: "Cell that surrounds a trichome and provides its support." [ISBN:0471245208, PMID:15319479]
+synonym: "cell located at the base of the trichome" []
 synonym: "trichome support cell" []
 xref_analog: CL:0000297
 is_a: PO:0004013 ! epidermal cell
@@ -1030,7 +1036,7 @@ relationship: part_of PO:0020020 ! nucellus
 id: PO:0002000
 name: stomatal complex
 namespace: plant_structure
-def: "An opening in the epidermis of leaves and stems bordered by two guard cells and serving in gas exchange." [ISBN:0471245208]
+def: "An opening pore on the epidermis of leaves and stems bordered by two guard cells and serving in gas exchange." [ISBN:0471245208]
 synonym: "stoma" []
 synonym: "stomata" []
 relationship: part_of PO:0000049 ! leaf lamina abaxial epidermis
@@ -1065,6 +1071,14 @@ def: "One of the cellular components of a vessel\, a dead cell with the wall bet
 synonym: "vessel element" []
 synonym: "vessel segment" []
 is_a: PO:0000290 ! tracheary element
+
+[Term]
+id: PO:0002004
+name: silk scar
+namespace: plant_structure
+def: "The silk scar is composed of the shrivelled remains of the intercalary region of the silk\, together with the base of the silk which is the true stylar tissue of the silk arising from the distal end of the developing kernel (caryopsis). " [GR:cwt6]
+is_a: PO:0008001 ! fruit distal end
+relationship: part_of PO:0009084 ! pericarp
 
 [Term]
 id: PO:0003000
@@ -1106,6 +1120,7 @@ name: root vascular system
 namespace: plant_structure
 def: "Total of the vascular tissues in their specific arrangements in the root." [ISBN:0471245208, TAIR:ki]
 comment: This term was brought back from OBSOLETE node (original reason for OBSOLETE\: synonym of term stele). Since stele encompasses both\, vascular system and the pith\, in roots with pith\, vascular system and stele are not synonymous.
+synonym: "root vein" []
 is_a: PO:0000034 ! vascular system
 relationship: part_of PO:0020124 ! root stele
 
@@ -2042,6 +2057,21 @@ is_a: PO:0009002 ! plant cell
 relationship: part_of PO:0003011 ! root vascular system
 
 [Term]
+id: PO:0005028
+name: inflorescence vascular system
+namespace: plant_structure
+def: "Total of the vascular tissues in their specific arrangement in the inflorescence." [GR:pj]
+is_a: PO:0000034 ! vascular system
+relationship: part_of PO:0009049 ! inflorescence
+
+[Term]
+id: PO:0005029
+name: root primordium
+namespace: plant_structure
+def: "An organized group of cells that will differentiate into a new root. " [GR:pj]
+is_a: PO:0009005 ! root
+
+[Term]
 id: PO:0005039
 name: primary thickening meristem
 namespace: plant_structure
@@ -2431,7 +2461,7 @@ is_a: PO:0005352 ! xylem
 id: PO:0006000
 name: hull (sensu Poaceae)
 namespace: plant_structure
-def: "A leaf like structure often found enclosing\nthe grass fruit\, caryopsis. It is derived from the dried lemma (PO\:0009037) and palea (PO\:0009038) floral bracts found in the grass floret (PO\:0006318)." [GR:pj]
+def: "A leaf like structure often found enclosing the grass fruit\, caryopsis. It is derived from the dried lemma (PO\:0009037) and palea (PO\:0009038) floral bracts found in the grass floret (PO\:0006318)." [GR:pj]
 subset: Maize
 subset: Poaceae
 subset: Rice
@@ -2720,7 +2750,7 @@ id: PO:0006040
 name: sepal epidermis
 namespace: plant_structure
 def: "The outermost cell layer of the sepal." [GR:pj]
-is_a: PO:0006035 ! shoot epidermis
+is_a: PO:0008043 ! floral epidermis
 relationship: part_of PO:0009031 ! sepal
 
 [Term]
@@ -2728,7 +2758,7 @@ id: PO:0006041
 name: petal epidermis
 namespace: plant_structure
 def: "The epidermal layer of the petal." [GR:pj]
-is_a: PO:0006035 ! shoot epidermis
+is_a: PO:0008043 ! floral epidermis
 relationship: part_of PO:0009032 ! petal
 
 [Term]
@@ -2860,7 +2890,7 @@ id: PO:0006061
 name: stigma epidermis
 namespace: plant_structure
 def: "The epidermal cell layer of the stigma." [GR:pj, PMID:11951033]
-is_a: PO:0006035 ! shoot epidermis
+is_a: PO:0008043 ! floral epidermis
 relationship: part_of PO:0009073 ! stigma
 
 [Term]
@@ -2869,7 +2899,7 @@ name: style epidermis
 namespace: plant_structure
 def: "The epidermal cell layer of the style." [GR:pj]
 synonym: "transmitting tract epidermis" []
-is_a: PO:0006035 ! shoot epidermis
+is_a: PO:0008043 ! floral epidermis
 relationship: part_of PO:0009074 ! style
 
 [Term]
@@ -2877,7 +2907,7 @@ id: PO:0006063
 name: ovary epidermis
 namespace: plant_structure
 def: "The epidermal cell layer of the ovary." [GR:pj]
-is_a: PO:0006035 ! shoot epidermis
+is_a: PO:0008043 ! floral epidermis
 relationship: part_of PO:0005022 ! ovary wall
 
 [Term]
@@ -3191,6 +3221,7 @@ name: protoderm
 namespace: plant_structure
 def: "The undifferentiated surface cell layer of the primary plant body\, which gives rise to epidermis." [GR:pj, ISBN:047124529]
 comment: It may or may not arise from independent initials.  Some researchers also call it an epidermis in meristematic state.
+synonym: "Dermatogen cell" []
 relationship: part_of PO:0009013 ! meristem
 
 [Term]
@@ -3586,6 +3617,7 @@ name: inflorescence bract of ear
 namespace: plant_structure
 def: "The leaf subtending an ear of corn and acting as outer envelope of the ear." [GR:pj]
 synonym: "corn husk" []
+synonym: "husk" []
 synonym: "husk leaf" []
 is_a: PO:0009054 ! inflorescence bract
 relationship: part_of PO:0020136 ! ear (sensu Zea)
@@ -3668,6 +3700,7 @@ namespace: plant_structure
 def: "Meristematic tissue in the primary body of stem separated from the apical meristem by more or less mature tissues." [GR:pj]
 is_a: PO:0006073 ! intercalary meristem
 relationship: part_of PO:0009047 ! stem
+relationship: part_of PO:0020142 ! stem internode
 
 [Term]
 id: PO:0006348
@@ -3788,7 +3821,7 @@ id: PO:0006362
 name: embryonic shoot apical meristem
 namespace: plant_structure
 def: "Meristem at the apex of the embryonic axis." [GR:pj]
-is_a: PO:0020148 ! shoot apical meristem
+is_a: PO:0008016 ! vegetative shoot apical meristem
 relationship: part_of PO:0019018 ! embryo axis
 
 [Term]
@@ -5017,10 +5050,296 @@ subset: Rice
 relationship: part_of PO:0008007 ! nucellar projection
 
 [Term]
+id: PO:0008011
+name: embryo vascular system
+namespace: plant_structure
+def: "Vascular system of embryo" [GR:cwt]
+is_a: PO:0000034 ! vascular system
+relationship: part_of PO:0009009 ! embryo
+
+[Term]
+id: PO:0008012
+name: stigma vascular system
+namespace: plant_structure
+def: "Vascular system of stigma" [GR:cwt]
+synonym: "stigma vein" []
+is_a: PO:0005017 ! flower vascular system
+relationship: part_of PO:0005019 ! carpel vascular system
+
+[Term]
+id: PO:0008013
+name: anther vascular system
+namespace: plant_structure
+def: "Vascular system of the anther" [GR:cwt]
+is_a: PO:0005017 ! flower vascular system
+relationship: part_of PO:0005018 ! stamen vascular system
+
+[Term]
+id: PO:0008014
+name: filament vascular system
+namespace: plant_structure
+def: "Vascular system of filament in the stamen" [GR:cwt]
+synonym: "filament vein" []
+is_a: PO:0005017 ! flower vascular system
+relationship: part_of PO:0005018 ! stamen vascular system
+
+[Term]
+id: PO:0008015
+name: hypocotyl vascular system
+namespace: plant_structure
+def: "Vascular system of the hypocotyl" [GR:cwt]
+is_a: PO:0000034 ! vascular system
+relationship: part_of PO:0020100 ! hypocotyl
+
+[Term]
+id: PO:0008016
+name: vegetative shoot apical meristem
+namespace: plant_structure
+def: "the meristem which gives rise to the apical growth of vegetative tissues and organs.\n" [GR:cwt]
+synonym: "vegetative meristem" []
+is_a: PO:0020148 ! shoot apical meristem
+
+[Term]
+id: PO:0008017
+name: leaf sheath pulvinus
+namespace: plant_structure
+def: "A more or less abrupt swelling\, especially at the apex or base of a leaf sheath" [GR:cwt]
+is_a: PO:0009000 ! pulvinus
+relationship: part_of PO:0020104 ! leaf sheath
+
+[Term]
+id: PO:0008018
+name: transition leaf
+namespace: plant_structure
+def: "A leaf that is part of an heteroblastic series\, and is characterized by anatomical features that are intermediate between juvenile and adult leaves." [GR:cwt]
+is_a: PO:0009025 ! leaf
+
+[Term]
+id: PO:0008019
+name: leaf lamina base
+namespace: plant_structure
+def: "The region of the leaf lamina proximal to the stem and usually connected to it by means of a petiole. " [GR:cwt]
+relationship: part_of PO:0020039 ! leaf lamina
+
+[Term]
+id: PO:0008020
+name: central zone of the leaf lamina
+namespace: plant_structure
+def: "Region that includes the widest or majority portion of leaf lamina and that does not include leaf apex and leaf lamina base." [GR:cwt]
+relationship: part_of PO:0020039 ! leaf lamina
+
+[Term]
+id: PO:0008021
+name: tertiary vein
+namespace: plant_structure
+def: "The leaf vein arising from the secondary vein" [GR:cwt]
+synonym: "third order leaf vein" []
+relationship: develops_from PO:0020140 ! secondary vein
+
+[Term]
+id: PO:0008022
+name: quaternary vein
+namespace: plant_structure
+def: "The leaf vein arising from the tertiary vein" [GR:cwt]
+synonym: "fourth order leaf vein" []
+relationship: develops_from PO:0008021 ! tertiary vein
+
+[Term]
+id: PO:0008023
+name: higher order vein
+namespace: plant_structure
+def: "The leaf vein arising from the quaternary or higher vein order" [GR:cwt]
+synonym: "fifth and higher order leaf vein" []
+relationship: develops_from PO:0008022 ! quaternary vein
+
+[Term]
+id: PO:0008024
+name: petiole proximal end
+namespace: plant_structure
+def: "The region of the petiole proximal to its stem attachment site." [GR:cwt]
+synonym: "petiole base" []
+relationship: part_of PO:0020038 ! petiole
+
+[Term]
+id: PO:0008025
+name: central zone of the petiole
+namespace: plant_structure
+def: "Regions of the petiole that does not include petiole distal end and petiole proximal end." [GR:cwt]
+relationship: part_of PO:0020038 ! petiole
+
+[Term]
+id: PO:0008026
+name: petiole distal end
+namespace: plant_structure
+def: "The region of the petiole distal to its stem attachment site or proximal to the leaf lamina." [GR:cwt]
+synonym: "petiole apex" []
+relationship: part_of PO:0020038 ! petiole
+
+[Term]
+id: PO:0008027
+name: petiole adaxial epidermis
+namespace: plant_structure
+def: "The epidermal layer of adaxial/upper surface of the petiole" [GR:cwt]
+relationship: part_of PO:0000051 ! petiole epidermis
+
+[Term]
+id: PO:0008028
+name: reproductive shoot apical meristem
+namespace: plant_structure
+def: "the meristem which gives rise to the apical growth of reproductive tissues and organs.\n" [GR:cwt]
+is_a: PO:0020148 ! shoot apical meristem
+
+[Term]
+id: PO:0008029
+name: petiole abaxial epidermis
+namespace: plant_structure
+def: "The epidermal layer of the abaxial/lower surface of the petiole" [GR:cwt]
+relationship: part_of PO:0000051 ! petiole epidermis
+
+[Term]
+id: PO:0008030
+name: trichome cell
+namespace: plant_structure
+def: "Each cell which is part of a trichome" [GR:cwt]
+relationship: part_of PO:0000282 ! trichome
+
+[Term]
+id: PO:0008031
+name: trichome branch
+namespace: plant_structure
+def: "The branch on a trichome" [GR:cwt]
+relationship: part_of PO:0000282 ! trichome
+
+[Term]
+id: PO:0008032
+name: stomatal pore
+namespace: plant_structure
+def: "The space of variable size controlled by stomatal guard cells in response to environmental clues.	" [GR:cwt]
+synonym: "stomatal aperture" []
+relationship: part_of PO:0002000 ! stomatal complex
+
+[Term]
+id: PO:0008033
+name: phyllome whorl
+namespace: plant_structure
+def: "a circular arrangement of phyllome" [GR:cwt]
+is_a: PO:0006001 ! phyllome
+
+[Term]
+id: PO:0008034
+name: leaf whorl
+namespace: plant_structure
+def: "A cluster of leaves in crowded circles or spirals arising basally from a crown" [GR:cwt]
+synonym: "rosette" []
+is_a: PO:0008033 ! phyllome whorl
+
+[Term]
+id: PO:0008035
+name: plerome
+namespace: plant_structure
+def: "The meristem forming the core of the axis composed of the primary vascular tissues and associated ground tissue\, such as pith and interfascicular regions. " [ISBN:0471245208 "Anatomy of seed plants by K.Esau \[2nd Edition\]"]
+is_a: PO:0009013 ! meristem
+
+[Term]
+id: PO:0008036
+name: periblem
+namespace: plant_structure
+def: "The meristem forming the cortex" [ISBN:0471245208 "Anatomy of seed plants by K. Esau \[2nd edition\]"]
+is_a: PO:0009013 ! meristem
+
+[Term]
+id: PO:0008037
+name: seedling
+namespace: plant_structure
+def: "A young plant derived from a newly germinated seed" [GR:cwt]
+relationship: develops_from PO:0009009 ! embryo
+
+[Term]
+id: PO:0008038
+name: adventitious root primordium
+namespace: plant_structure
+def: "An organized group of cells that will differentiate into adventitious root." [GR:cwt]
+is_a: PO:0005029 ! root primordium
+
+[Term]
+id: PO:0008039
+name: stem base
+namespace: plant_structure
+def: "The basal part of stem" [GR:cwt]
+relationship: part_of PO:0009047 ! stem
+
+[Term]
+id: PO:0008040
+name: lodicule primordium
+namespace: plant_structure
+def: "The primordium will differentiat into lodicule" [GR:cwt]
+is_a: PO:0009036 ! lodicule
+
+[Term]
+id: PO:0008041
+name: stem internode elongation zone
+namespace: plant_structure
+def: "Zone of pronounced cell elongation in stem internode" [GR:cwt "PMID\:14520573"]
+relationship: part_of PO:0020142 ! stem internode
+
+[Term]
+id: PO:0008042
+name: stem internode differentiation zone
+namespace: plant_structure
+def: "Region in stem internode where cells are becoming specialzed to form cortex\,\, endodermis or\, vascular tissue" [GR:cwt "PMID\:14520573"]
+relationship: part_of PO:0020142 ! stem internode
+
+[Term]
+id: PO:0008043
+name: floral epidermis
+namespace: plant_structure
+def: "Epidermal layer of the floral organs" [GR:cwt]
+is_a: PO:0006035 ! shoot epidermis
+relationship: part_of PO:0009046 ! flower
+
+[Term]
+id: PO:0008044
+name: floral stomatal complex
+namespace: plant_structure
+def: "An opening pore on the epidermis of floral organs bordered by two guard cells and serving in gas exchange" [GR:cwt]
+relationship: part_of PO:0008043 ! floral epidermis
+
+[Term]
+id: PO:0008045
+name: floral guard cell
+namespace: plant_structure
+def: "One of a pair of cells flanking the stomatal pore of floral organs" [GR:cwt]
+relationship: part_of PO:0008044 ! floral stomatal complex
+
+[Term]
+id: PO:0008046
+name: floral stomatal pore
+namespace: plant_structure
+def: "The space of variable size controlled by floral stomatal guard cells in response to environmental clues" [GR:cwt]
+relationship: part_of PO:0008044 ! floral stomatal complex
+
+[Term]
+id: PO:0008047
+name: scutellar vascular system
+namespace: plant_structure
+def: "The vascular system in scutellum" [GR:cwt]
+synonym: "scutellum vascular system" []
+relationship: part_of PO:0008011 ! embryo vascular system
+relationship: part_of PO:0020110 ! scutellum
+
+[Term]
+id: PO:0008048
+name: scutellar epithelium
+namespace: plant_structure
+def: "A continuous layer of cylindrical cells covering the endosperm side of the scutellum. Thought to act as a secretory and absortive organ" [GR:cwt]
+synonym: "scutellum epithelium" []
+relationship: part_of PO:0020110 ! scutellum
+
+[Term]
 id: PO:0009000
 name: pulvinus
 namespace: plant_structure
-def: " a more or less abrupt swelling\, especially at the apex or base of a petiole or leaf sheath\, often glandular and/or being the place where a plant responds to touch\, gravity or light\, in panicoid grasses a swollen region in the stem above the intercalary meristem - such a definition would also include stems of Chloranthaceae\, Acanthaceae\, Caryophyllaceae\, Amaranthaceae\, etc.\, cf. articulation.\n" [APWeb:Glossary]
+def: " A more or less abrupt swelling\, especially at the apex or base of a petiole or leaf sheath\, often glandular and/or being the place where a plant responds to touch\, gravity or light\, in panicoid grasses a swollen region in the stem above the intercalary meristem - such a definition would also include stems of Chloranthaceae\, Acanthaceae\, Caryophyllaceae\, Amaranthaceae\, etc.\, cf. articulation.\n" [APWeb:Glossary]
 is_a: PO:0009008 ! organ
 
 [Term]
@@ -5169,18 +5488,11 @@ namespace: plant_structure
 def: "Any morphological or anatomical feature of a plant." [Poc:curators]
 
 [Term]
-id: PO:0009012
-name: petiole pulvinus
-namespace: plant_structure
-def: "Pulvinus of the petiole" [GR:cwt]
-is_a: PO:0009000 ! pulvinus
-relationship: part_of PO:0020038 ! petiole
-
-[Term]
 id: PO:0009013
 name: meristem
 namespace: plant_structure
 def: "Regions of a plant in which cells that have retained their embryonic characteristics\, or have reverted to them secondarily\, and that divide to produce new cells that can undergo differentiation to form mature tissues\, i.e. they have a capacity for morphogenesis and growth." [APWeb:Glossary, GR:pj]
+synonym: "meristematic tissue" []
 is_a: PO:0009007 ! tissue
 
 [Term]
@@ -5250,6 +5562,19 @@ name: meristem L3
 namespace: plant_structure
 def: "The multicellular layer beneath the L2 layer in the shoot meristem which gives rise to internal tissues of leaf and stem." [GR:pj, PMID:12221985]
 relationship: part_of PO:0020148 ! shoot apical meristem
+
+[Term]
+id: PO:0009023
+name: leaf axil
+namespace: plant_structure
+def: "The angle between the petiole of a leaf and the stem to which it is attached.\n" [GR:cwt]
+relationship: part_of PO:0020040 ! leaf base
+
+[Term]
+id: PO:0009024
+name: stylar ridge of lower floret of pedicellate spikelet of ear
+namespace: plant_structure
+relationship: part_of PO:0006424 ! gynoecium of lower floret of pedicellate spikelet of ear
 
 [Term]
 id: PO:0009025
@@ -5711,6 +6036,12 @@ def: "OBSOLETE. A controlled vocabulary to describe the various plant parts and 
 is_obsolete: true
 
 [Term]
+id: PO:0009076
+name: stylar ridge of lower floret of sessile spikelet of ear
+namespace: plant_structure
+relationship: part_of PO:0006423 ! gynoecium of lower floret of sessile spikelet of ear
+
+[Term]
 id: PO:0009077
 name: staminode
 namespace: plant_structure
@@ -5725,6 +6056,12 @@ namespace: plant_structure
 def: "A sterile pistil\, often rudimentary." [APWeb:Glossary]
 subset: reference
 is_a: PO:0009062 ! gynoecium
+
+[Term]
+id: PO:0009079
+name: stylar ridge of upper floret of pedicellate spikelet of ear
+namespace: plant_structure
+relationship: part_of PO:0006426 ! gynoecium of upper floret of pedicellate spikelet of ear
 
 [Term]
 id: PO:0009080
@@ -5851,6 +6188,12 @@ def: "OBSOLETE. provisional term" [Poc:curators]
 is_obsolete: true
 
 [Term]
+id: PO:0009092
+name: stylar ridge of upper floret of sessile spikelet of ear
+namespace: plant_structure
+relationship: part_of PO:0006425 ! gynoecium of upper floret of sessile spikelet of ear
+
+[Term]
 id: PO:0009100
 name: involucre
 namespace: plant_structure
@@ -5933,7 +6276,8 @@ name: inflorescence apical meristem
 namespace: plant_structure
 def: "The meristem which gives rise to the apical growth of the inflorescence. It develops from the shoot apical meristem (SAM) after it undergoes transition from vegetative to reproductive phase." [MaizeGDB:lv, GR:pj]
 is_a: PO:0000230 ! inflorescence meristem
-is_a: PO:0020148 ! shoot apical meristem
+is_a: PO:0008028 ! reproductive shoot apical meristem
+relationship: develops_from PO:0008016 ! vegetative shoot apical meristem
 
 [Term]
 id: PO:0009109
@@ -5954,12 +6298,20 @@ is_a: PO:0009105 ! inflorescence lateral meristem
 is_a: PO:0009109 ! ear meristem
 
 [Term]
+id: PO:0009111
+name: petiole pulvinus
+namespace: plant_structure
+def: "Pulvinus of the petiole" [GR:cwt]
+is_a: PO:0009000 ! pulvinus
+relationship: part_of PO:0020038 ! petiole
+
+[Term]
 id: PO:0019018
 name: embryo axis
 namespace: plant_structure
 def: "Axial part of the young sporophyte comprising the hypocotyl\, and the root meristem\, or the radicle if one is present." [ISBN:0471245208]
 synonym: "hypocotyl-root axis" []
-relationship: part_of PO:0009009 ! embryo
+relationship: part_of PO:0008037 ! seedling
 
 [Term]
 id: PO:0019022
@@ -6250,7 +6602,7 @@ namespace: plant_structure
 def: "A leaf or leaves formed at the first node of a sporophyte." [APWeb:Glossary, GR:pj]
 subset: reference
 is_a: PO:0006001 ! phyllome
-relationship: part_of PO:0009009 ! embryo
+relationship: part_of PO:0008037 ! seedling
 
 [Term]
 id: PO:0020031
@@ -6862,6 +7214,7 @@ namespace: plant_structure
 def: "The distal part of a lateral (axillary) branch in Zea that bears the functionally-carpellate florets in a highly contracted inflorescence." [MaizeGDB:lv]
 subset: Maize
 subset: reference
+synonym: "cob" []
 is_a: PO:0009049 ! inflorescence
 
 [Term]

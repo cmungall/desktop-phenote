@@ -1,0 +1,19 @@
+default-namespace: WBpenetrance
+date: 23:01:2008 17:10
+
+[Term]
+id: WBpenetrance000001
+name: Incomplete
+
+[Term]
+id: WBpenetrance000002
+name: Low
+
+[Term]
+id: WBpenetrance000003
+name: High
+
+[Term]
+id: WBpenetrance000004
+name: Complete
+
