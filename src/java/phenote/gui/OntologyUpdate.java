@@ -333,7 +333,7 @@ public class OntologyUpdate {
 			//if there's a new ontology available, it will flag it here.
 			status = OntologyDataAdapter2.getInstance().checkForUpdate(ontology);
 			if (status) {
-				System.out.println("Update available for "+ontology.getFilename());
+				LOG.info("Update available for "+ontology.getFilename());
 			}
 		} catch (OntologyException e) {
 			e.printStackTrace();
@@ -488,6 +488,7 @@ public class OntologyUpdate {
     	//current.  will change this so it won't even show up as a possibility
       String m ="";
       int up = 0;
+      short error = 0;
 
 //      BackgroundEventQueue queue = new BackgroundEventQueue();
 //			BackgroundUtil.scheduleTask(queue, null, false, null);
@@ -495,9 +496,9 @@ public class OntologyUpdate {
 //			if (eventTask.getResults())
 //				return null;
 
-			TableCellRenderer defaultRenderer = ontologyTable.getDefaultRenderer(JProgressBar.class);
-			ontologyTable.setDefaultRenderer(JProgressBar.class,
-		       new JTableProgressBarRenderer(defaultRenderer));
+      TableCellRenderer defaultRenderer = ontologyTable.getDefaultRenderer(JProgressBar.class);
+      ontologyTable.setDefaultRenderer(JProgressBar.class,
+                                       new JTableProgressBarRenderer(defaultRenderer));
 
       for (int i=0; i<ontologyTable.getRowCount(); i++) {
       	OntologyFile ontology = Config.inst().getOntologyFileByHandle(ontologyTable.getValueAt(i,2).toString());
@@ -519,19 +520,26 @@ public class OntologyUpdate {
       				addUpdateMessage(" DONE."+newline);
       				up++;
       			} catch(OntologyException oe) {
-      				addUpdateMessage(oe.getMessage()+"error with updating ontology");
-      				LOG.error(oe.getMessage()+"error with updating ontology");
+                                ++error;
+      				addUpdateMessage("Error updating ontology: " + oe.getMessage());
+      				LOG.error("Error updating ontology: " + oe.getMessage());
       			} catch (FileNotFoundException e2) {
-							// TODO Auto-generated catch block
-							e2.printStackTrace();
-						}
+                                ++error;
+                                // TODO Auto-generated catch block
+                                e2.printStackTrace();
+                        }
       		}
       	} catch (OntologyException oe) {
-      		addUpdateMessage(oe.getMessage()+"error with updating ontology");
-  				LOG.error(oe.getMessage()+"error with updating ontology");
+                ++error;
+      		addUpdateMessage("Error updating ontology: " + oe.getMessage());
+                LOG.error("Error updating ontology: " + oe.getMessage());
       	}
       }
-      if (up==0) {
+      if (error > 0) {
+              m = "Error updating ontologies!";
+              LOG.info(m);
+      }
+      else if (up==0) {
       	m="No ontologies needed updating";
       	LOG.info(m);
       } else {
@@ -554,6 +562,7 @@ public class OntologyUpdate {
       boolean status = false;
       int row = 0;
       int up=0;
+      short error=0;
       //reselect those in the table that have updates.
       for (OntologyFile ontology : ontologies) {
       	try {
@@ -572,21 +581,28 @@ public class OntologyUpdate {
       			}
 //      			numUpdates++;
       		}
-  				row++;
-  			} catch(OntologyException oe) {
-    			addUpdateMessage(oe.getMessage()+"error with updating ontology");
-    			LOG.error(oe.getMessage()+"error with updating ontology");
-    		} catch (FileNotFoundException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
-      }
-        if (up==0) {
-        	m="No ontologies needed updating";
-        	LOG.info(m);
-        } else {
-          m = up +" of " + numUpdates + " ontologies have been updated";
+                row++;
+        } catch(OntologyException oe) {
+                addUpdateMessage("Error updating ontology: " + oe.getMessage());
+                LOG.error("Error updating ontology: " + oe.getMessage());
+		++error;
+        } catch (FileNotFoundException e2) {
+                // TODO Auto-generated catch block
+                e2.printStackTrace();
+		++error;
         }
+      }
+
+      if (error > 0) {
+              m = "Error updating ontologies!";
+              LOG.info(m);
+      }
+      else if (up==0) {
+	      m="No ontologies needed updating";
+	      LOG.info(m);
+      } else {
+	      m = up +" of " + numUpdates + " ontologies have been updated";
+      }
 
       JOptionPane.showMessageDialog(null, m, "Phenote Message",
                                     JOptionPane.INFORMATION_MESSAGE);
@@ -619,14 +635,14 @@ public class OntologyUpdate {
       			}
 //    				numUpdates++;
       		}
-  				row++;
-  			} catch(OntologyException oe) {
-    			addUpdateMessage(oe.getMessage()+"error with downloading initial copy of ontology");
-    			LOG.error(oe.getMessage()+"error with downloading initial copy of ontology");
-    		} catch (FileNotFoundException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
+                row++;
+        } catch(OntologyException oe) {
+                addUpdateMessage("Error downloading initial copy of ontology: " + oe.getMessage());
+                LOG.error("Error downloading initial copy of ontology: " + oe.getMessage());
+        } catch (FileNotFoundException e2) {
+                // TODO Auto-generated catch block
+                e2.printStackTrace();
+        }
       }
         if (up==0) {
         	m="No ontologies downloaded";
