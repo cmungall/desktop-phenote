@@ -14,9 +14,6 @@ import java.net.Proxy;
 import java.net.ProxySelector;
 import java.net.URL;
 import java.net.URLConnection;
-import java.nio.channels.Channels;
-import java.nio.channels.FileChannel;
-import java.nio.channels.ReadableByteChannel;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,8 +36,6 @@ import org.obo.datamodel.OBOSession;
 import phenote.config.Config;
 import phenote.config.FieldConfig;
 import phenote.config.OntologyConfig;
-import phenote.config.Preferences;
-import phenote.config.ProxyDialog;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.Ontology;
@@ -73,8 +68,6 @@ public class OntologyDataAdapter {
   private int progressFactor=3;
   // does this need to be false for zfin/web??
   //private static final boolean DO_ONE_OBO_SESSION = true;
-
-  private Preferences prefs = Preferences.getPreferences();
 
   private OntologyDataAdapter() {
     initOntologies(); // loads up all ontologies
@@ -113,11 +106,11 @@ public class OntologyDataAdapter {
 
   private void initOntolsOneOboSession() {
     try {
-      LOG.debug("loading obo files");
+      LOG.debug("Loading obo files");
       OBOSession os = loadAllOboFilesIntoOneOboSession();
       LOG.debug("initializing char fields");
       initCharFields();
-      LOG.debug("setting char field managers obo session");
+//      LOG.debug("setting char field managers obo session");
       charFieldManager.setOboSession(os);
       // map namespaces to ontologies? 2 methods?
       LOG.debug("mapping namespaces to ontologies");
@@ -158,7 +151,7 @@ public class OntologyDataAdapter {
     // i have funny test configs with no ontol files - / 0 exception
     int div = numFiles == 0 ? 1 : numFiles; 
     progressFactor = 1+(10/div); //this is kind of a hack right now until we get threading
-    System.out.println("numfiles="+numFiles);
+//    System.out.println("numfiles="+numFiles);
     OBOSession os = getOboSession(files);
     return os;
   }
@@ -243,7 +236,7 @@ public class OntologyDataAdapter {
       throw new OntologyException(ontCfg.getName()+" has null file");
     // throws OntologyEx if file not found -- catch & try url
     URL url = null;
-    try { url = findFile(filename); }
+    try { url = FileUtil.findFile(filename); }
     catch (OntologyException oe) {
       System.out.println(filename+" not found locally, trying url if configured ");
     }
@@ -324,15 +317,15 @@ public class OntologyDataAdapter {
       else if (reposDate > loc || useRepos) {
         useRepos = SynchOntologyDialog.queryUserForOntologyUpdate(ontol);
       }
-      LOG.debug("autoUpdate = " + autoUpdate + ", timer = " + timer + ", reposDate = " + reposDate + ", loc = " + loc + ", useRepos = " + useRepos); // DEL
+//      LOG.debug("autoUpdate = " + autoUpdate + ", timer = " + timer + ", reposDate = " + reposDate + ", loc = " + loc + ", useRepos = " + useRepos); // DEL
     }
     if (useRepos) {
       // i think its always better to download as http/repos is slow
 //    boolean downloadToLocal = false; // from Config!
 //    if (!downloadToLocal) {
-//    LOG.info("Using obo file straight from repository "+reposUrl+
-//    " NOT downloading to local cache");
-//    return reposUrl; // just use straight from repos
+//       LOG.info("Using obo file straight from repository "+reposUrl+
+//       " NOT downloading to local cache");
+//       return reposUrl; // just use straight from repos
 //    }
 
       // download obo to local cache (takes time!)
@@ -340,30 +333,32 @@ public class OntologyDataAdapter {
       //String file = FileUtil.getNameOfFile(localUrl);
       this.updateLoadingScreen("updating ontology file: "+ontol, true);
 
-
       try { 
         localUrl = new File(FileUtil.getDotPhenoteOboDir(),file).toURL();
         LOG.info("Downloading new ontology from repository "+reposUrl+" to "+localUrl);
         this.updateLoadingScreen("Downloading " + ontol + " ontology from "+ reposUrl + "...", true);
 
-        copyReposToLocal(reposUrl,localUrl);
+        FileUtil.copyReposToLocal(reposUrl,localUrl);
       }
       catch (MalformedURLException e) { 
 	      LOG.error("Got error while trying to download ontology from repository "+reposUrl+" to "+localUrl);
 	      throw new OntologyException(e); 
       }
     }
+    else  // useRepos is false
+      LOG.debug("Ontology file " + filename + " doesn't need to be updated.");
+
     return localUrl;
   }
-
 
 
   /** Get the date of the file from the header of the obo file - just read header dont
       read in whole file. should it also query urlConnection for date first? 
       throws OntologyException if unable to parse date DateEx?*/
-  private long getOboDate(URL oboUrl) throws OntologyException {
+  public long getOboDate(URL oboUrl) throws OntologyException {
     try {
-      InputStream is = oboUrl.openStream();
+//      InputStream is = oboUrl.openStream();
+      InputStream is = FileUtil.getInputStreamWithOrWithoutProxy(oboUrl);
       BufferedReader br = new BufferedReader(new InputStreamReader(is));
       // just try first 15 lines? try til hit [Term]?
       for (int i=1; i<=15; i++) {
@@ -393,89 +388,6 @@ public class OntologyDataAdapter {
 //      throw new OntologyException("No date found in "+oboUrl);
     } catch (IOException e) { throw new OntologyException(e); }
   }
-
-  /** local url may be from distrib/jar dir, but needs to be set to 
-      .phenote/obo-files dir as thats where the user cache is */
-  private void copyReposToLocal(URL reposUrl, URL localUrl)
-  throws OntologyException {
-    try {
-	Proxy proxy = null;
-	if (ProxyDialog.proxyIsSet()) {
-		String proxyHost = prefs.getProxyHost();  // "proxy.charite.de";
-		int proxyPort = prefs.getProxyPort();  // 888;
-		String proxyProtocol = prefs.getProxyProtocol();
-		if (proxyHost != null && proxyHost.length()>0) {
-			if (proxyProtocol.equals("SOCKS"))
-				proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(proxyHost,proxyPort));
-			else
-				proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHost,proxyPort));
-		}
-		if (proxy != null)
-			LOG.info("Using proxy " + proxyProtocol + ": " + proxyHost + ":" + proxyPort + " to open connection to " + reposUrl);
-	}
-	
-	URLConnection urlConnection;
-	if (proxy != null) {
-		urlConnection = reposUrl.openConnection(proxy);
-	}
-	else {
-		LOG.info("Opening connection to " + reposUrl);
-		urlConnection = reposUrl.openConnection();
-	}
-
-	urlConnection.setConnectTimeout(30000);
-
-	int size = urlConnection.getContentLength();
-	LOG.info("For " + reposUrl + ", Content-Length = " + size);
-	// The sourceforge URLs don't give the content length (apparently that's optional for servers to provide).
-	if (size < 1) {
-		size = Integer.MAX_VALUE;
-	}
-
-	InputStream is = urlConnection.getInputStream();
-
-      // nio & old io do the same time - oh well (~1 minute for GO)
-      //startTimer("nio file copy "+reposUrl+" to "+localUrl);
-//      InputStream is = reposUrl.openStream();
-      // nio actually does the same with the buffer
-      //BufferedInputStream bis = new BufferedInputStream(is);
-      ReadableByteChannel r = Channels.newChannel(is);
-      //BufferedReader br = new BufferedReader(new InputStreamReader(is));
-      File f = new File(localUrl.getFile());
-      FileOutputStream fos = new FileOutputStream(f);
-      //BufferedOutputStream bos = new BufferedOutputStream(fos);
-      //OutputStreamWriter osw = new OutputStreamWriter(fos);
-      //FileWriter fw = new FileWriter(f);
-      //BufferedWriter bw = new BufferedWriter(fw);
-      //PrintStream ps = new PrintStream(bos);
-      FileChannel w = fos.getChannel();
-//      long size = 99999999999999l; // cant get actual size - whole file
-      w.transferFrom(r,0,size);
-      //byte[] buf = new byte[1024];
-//    int i = 0;
-//    //while((i=br.read())!=-1) {
-//    String line;
-//    while ((line=br.readLine())!=null) {
-//    //bos.write(i); //buf, 0, i);
-//    ps.print(line+"\n");
-//    }
-      //stopTimer();
-      r.close();
-      is.close(); // ??
-      w.close();
-      fos.close(); // ??
-    } catch (IOException e) { throw new OntologyException(e); }
-  }
-
-  /** Look for file in current directory (.) and jar file 
-      throws OntologyException if file not found - wraps FileNFEx */
-  private URL findFile(String fileName) throws OntologyException {
-    if (fileName == null) throw new OntologyException("file is null");
-    try { return FileUtil.findUrl(fileName); }
-    catch (FileNotFoundException e) { throw new OntologyException(e); }
-  }
-
-
 
   // String -> url to handle web start jar obo files
   private OBOSession getOboSession(URL oboUrl) throws OntologyException {
@@ -538,18 +450,18 @@ public class OntologyDataAdapter {
   }
 
   // eventually move to util class
-  private Calendar startTime;
-  //private String timerMsg;
-  private void startTimer() {
-    startTime = Calendar.getInstance();
-    //timerMsg = m;
-    //LOG.debug(timerMsg+" Start clock "+startTime.getTime()); // ??
-  }
+  // Not currently used
+//   private Calendar startTime;
+//   //private String timerMsg;
+//   private void startTimer() {
+//     startTime = Calendar.getInstance();
+//     //timerMsg = m;
+//     //LOG.debug(timerMsg+" Start clock "+startTime.getTime()); // ??
+//   }
 
-  private void stopTimer(String m) {
-    Calendar endTime = Calendar.getInstance();
-    long seconds = (endTime.getTimeInMillis() - startTime.getTimeInMillis())/1000;
-    LOG.debug(m+" number of seconds: "+seconds);
-  }
-
+//   private void stopTimer(String m) {
+//     Calendar endTime = Calendar.getInstance();
+//     long seconds = (endTime.getTimeInMillis() - startTime.getTimeInMillis())/1000;
+//     LOG.debug(m+" number of seconds: "+seconds);
+//   }
 }
