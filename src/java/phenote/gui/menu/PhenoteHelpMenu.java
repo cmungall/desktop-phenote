@@ -43,14 +43,13 @@ public class PhenoteHelpMenu extends DynamicMenu {
 		JMenuItem helpItem = new JMenuItem("User Guide");
 		helpItem.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-                                        logger.debug("About to call HelpManager.getManager().displayHelp()"); // DEL
 					HelpManager.getManager().displayHelp();
 				}
 			});
 		add(helpItem);
 
                 logger.debug("PhenoteHelpMenu: setting helpfile to " + Preferences.getInstallationDirectory() + 
-                             "/doc/phenote-website/help/Phenote.hs"); // DEL
+                             "/doc/phenote-website/help/Phenote.hs");
 		HelpManager.getManager().setHelpSetFile(
 			new File(Preferences.getInstallationDirectory() + 
 				 "/doc/phenote-website/help/Phenote.hs"));
@@ -67,7 +66,6 @@ public class PhenoteHelpMenu extends DynamicMenu {
 	}
 
 	public static void showAboutFrame() {
-//		logger.debug("showAboutFrame: calling Phenote.splashScreenInit()"); // DEL
 //		ImageIcon myImage = new ImageIcon(logoFile);
 //		URL imageURL = ClassLoader.getSystemResource(logoFile);
 		ImageIcon myImage = null;
