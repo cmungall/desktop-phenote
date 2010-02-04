@@ -1,5 +1,5 @@
 format-version: 1.2
-date: 25:01:2010 17:02
+date: 03:02:2010 17:20
 saved-by: George Gkoutos
 auto-generated-by: OBO-Edit 2.0
 subsetdef: abnormal_slim "Abnormal/normal slim"
@@ -2305,11 +2305,9 @@ is_a: PATO:0002009 ! branchiness
 [Term]
 id: PATO:0000403
 name: cleft
-alt_id: PATO:0001572
-def: "A concave quality inhering in a bearer by virtue of the bearer's being partially split or divided." [gmbis:gmbis "http://gmbis.marinebiodiversity.ca/"]
+def: "A concave quality inhering in a bearer by virtue of the bearer's resembling a groove or fissure." [WordNet:WordNet "http://wordnet.princeton.edu/"]
 subset: cell_quality
 subset: value_slim
-synonym: "bifid" EXACT []
 is_a: PATO:0001857 ! concave
 
 [Term]
@@ -11387,9 +11385,17 @@ id: PATO:0001786
 name: split
 def: "A shape quality inhering in a bearer by virtue of the bearer's being divided or broken up into parts or divisions." [die.net:die.net "http://dict.die.net"]
 subset: value_slim
+synonym: "clefted" EXACT []
 synonym: "divided" RELATED []
 synonym: "septate" NARROW []
 is_a: PATO:0000052 ! shape
+
+[Term]
+id: PATO:0001572
+name: bifid
+def: "A shape quality inhering in a bearer by virtue of the bearer's being forked or partially split into two parts." [PATOC:GVG]
+subset: value_slim
+is_a: PATO:0001786 ! split
 
 [Term]
 id: PATO:0001787
@@ -14509,6 +14515,42 @@ subset: relational_slim
 is_a: PATO:0001631 ! relational spatial quality
 created_by: george
 creation_date: 2010-01-14T04:45:18Z
+
+[Term]
+id: PATO:0002169
+name: split medially
+def: "A shape quality inhering in a bearer by virtue of the bearer's being split along the median axis." [PATOC:GVG]
+subset: value_slim
+is_a: PATO:0001786 ! split
+created_by: george
+creation_date: 2010-02-03T04:37:15Z
+
+[Term]
+id: PATO:0002170
+name: split laterally
+def: "A shape quality inhering in a bearer by virtue of the bearer's being split asymmetrically on one side." [PATOC:GVG]
+subset: value_slim
+is_a: PATO:0001786 ! split
+created_by: george
+creation_date: 2010-02-03T04:37:40Z
+
+[Term]
+id: PATO:0002171
+name: split bilaterally
+def: "A shape quality inhering in a bearer by virtue of the bearer's being split on two side." [PATOC:GVG]
+subset: value_slim
+is_a: PATO:0001786 ! split
+created_by: george
+creation_date: 2010-02-03T04:37:53Z
+
+[Term]
+id: PATO:0002172
+name: split radially
+def: "A shape quality inhering in a bearer by virtue of the bearer's being split along the radial axis." [PATOC:GVG]
+subset: value_slim
+is_a: PATO:0001786 ! split
+created_by: george
+creation_date: 2010-02-03T04:42:35Z
 
 [Typedef]
 id: decreased_in_magnitude_relative_to
