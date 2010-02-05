@@ -379,12 +379,16 @@ public class OntologyDataAdapter {
           throw new OntologyException("getOboDate: couldn't parse date line from " + oboUrl + ": "+line);
         return d.getTime();
       }
-      // If we can't find a date: line, can we open an urlConnection and ask for the date?
-      URLConnection urlConnection = oboUrl.openConnection();
-      long date = urlConnection.getDate();  // number of milliseconds since January 1, 1970 GMT
-      // Doesn't seem to work--returns 0.
-      LOG.debug("Couldn't find a date line in " + oboUrl + "--getDate returned " + date);
-      return date;
+
+//       URLConnection urlConnection = FileUtil.getURLConnectionWithOrWithoutProxy(oboUrl);
+//       // Doesn't seem to work--returns 0.
+//       long date = urlConnection.getDate();  // number of milliseconds since January 1, 1970 GMT
+//       if (date == 0) {
+// 	      date = urlConnection.getLastModified();
+// 	      LOG.debug("OntologyDataAdapter.getOboDate: couldn't find a date line in " + oboUrl + ". last modified = " + date);
+//       }
+//       return date;
+      return 0;
 //      throw new OntologyException("No date found in "+oboUrl);
     } catch (IOException e) { throw new OntologyException(e); }
   }

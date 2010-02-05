@@ -339,17 +339,20 @@ public class OntologyDataAdapter2 {
       if (localUrl != null) {
         try { loc = getOboDate(localUrl); }
         catch (OntologyException e2) { loc = 0; } // no local date - keep as 0
+	LOG.debug("synchWithRepositoryUrl: For " + filename + ", repos date "+reposDate+", local date "+loc); // DEL
       }
       else
         useRepos = true;
       //if autoupdate without popup
-      //LOG.debug("repos date "+reposDate+" local date "+loc);
+
       if ((autoUpdate && (timer==0)) && (reposDate > loc)) {
         useRepos = true;
       } else if (reposDate > loc || useRepos) {
         useRepos = SynchOntologyDialog.queryUserForOntologyUpdate(ontol);
       }
+      LOG.debug("synchWithRepositoryUrl: For " + filename + ", repos date "+reposDate+", local date "+loc + ", useRepos = " + useRepos);
     }
+
     if (useRepos) {
 
       // i think its always better to download as http/repos is slow
@@ -430,16 +433,23 @@ public class OntologyDataAdapter2 {
         Date d = dateFormat.parse(line, new ParsePosition(6));
         //LOG.debug("date "+d+" for url "+oboUrl+" line "+line);
         br.close();
-        if (d == null)
-          throw new OntologyException("getOboDate: couldn't parse date line from " + oboUrl + ": "+line);
+        if (d == null) {
+		LOG.error("getOboDate: couldn't parse date line from " + oboUrl + ": "+line);
+		throw new OntologyException("getOboDate: couldn't parse date line from " + oboUrl + ": "+line);
+	}
         return d.getTime();
       }
-      // If we can't find a date: line, can we open an urlConnection and ask for the date?
-      URLConnection urlConnection = oboUrl.openConnection();
-      long date = urlConnection.getDate();  // number of milliseconds since January 1, 1970 GMT
-      // Doesn't seem to work--returns 0.
-      LOG.debug("Couldn't find a date line in " + oboUrl + "--getDate returned " + date);
-      return date;
+      // If we can't find a "date:" line, can we open an urlConnection and ask for the date?
+      // (getDate() doesn't seem to return anything.  getLastModified seems to return the current date/time.)
+//       URLConnection urlConnection = FileUtil.getURLConnectionWithOrWithoutProxy(oboUrl);
+//       // Doesn't seem to work--returns 0.
+//       long date = urlConnection.getDate();  // number of milliseconds since January 1, 1970 GMT
+//       if (date == 0) {
+// 	      date = urlConnection.getLastModified();
+// 	      LOG.debug("Couldn't find a date line in " + oboUrl + ". Using last modified = " + date);
+//       }
+//       return date;
+      return 0;
 //      throw new OntologyException("No date found in "+oboUrl);
     } catch (IOException e) { throw new OntologyException(e); }
   }
@@ -780,19 +790,23 @@ public class OntologyDataAdapter2 {
         }
         if (localUrl != null) {
           	try { locDate = getOboDate(localUrl); }
-            catch (OntologyException e2) { 
-            	locDate = -1; // no local date - set to -1 so that if no repos date, will download
-            }
-            useRepos=false;
-        }	else  //don't have it locally, need to download it.
+		catch (OntologyException e2) { 
+			locDate = -1; // no local date - set to -1 so that if no repos date, will download
+		}
+		useRepos=false;
+        }
+	else  //don't have it locally, need to download it.
         	useRepos = true;
-        if (reposDate > locDate)
+
+	// If both dates are 0 (couldn't determine either date), then useRepos should be true.
+        if (reposDate > locDate || (reposDate == locDate && locDate == 0))
         	useRepos=true;
+	LOG.debug("checkForUpdate: locDate for " + localUrl + " = " + locDate + ", reposDate = " + reposDate + ", useRepos = " + useRepos);
       } catch (MalformedURLException m) {
           LOG.error("URL is malformed "+m);
       }
     }
-  	return useRepos; 
+    return useRepos;
   }
     
   public void downloadUpdate(String ontology) throws OntologyException {
