@@ -21,6 +21,7 @@ import org.obo.datamodel.Instance;
 import org.obo.datamodel.OBOSession;
 
 import phenote.datamodel.CharFieldManager;
+import phenote.util.FileUtil;
 
 /**
  * This adapter will utilize the NCBI RESTful toolkit to query OMIM IDs and
@@ -67,7 +68,8 @@ import phenote.datamodel.CharFieldManager;
     	u = new URL(omimURL); // throws MalformedURLEx
     } catch (MalformedURLException e) {}
     try {
-    URLConnection uc = u.openConnection();
+//    URLConnection uc = u.openConnection();
+    URLConnection uc = getURLConnectionWithOrWithoutProxy(u);
     BufferedReader in = new BufferedReader(new InputStreamReader(
         uc.getInputStream()));
     String inputLine;
