@@ -47,7 +47,6 @@ import phenote.datamodel.OntologyException;
 import phenote.util.FileUtil;
 
 
-
 /**
  * @author Nicole Washington
  * 
@@ -77,7 +76,7 @@ public class OntologyUpdate {
 	private JTable ontologyTable;
 	private JPanel contentPanel = new JPanel(new BorderLayout());
 	List<String> ontsToUpdate = null;
-        private static final Logger LOG = Logger.getLogger(OntologyDataAdapter.class);
+        private static final Logger LOG = Logger.getLogger(OntologyUpdate.class);
         private java.awt.Frame f = phenote.main.Phenote.getPhenote().getFrame();
         // true -> modal -> this is crucial! 
         private JDialog dialog = new JDialog(f, true);
@@ -329,16 +328,16 @@ public class OntologyUpdate {
   
   public boolean checkForUpdates(OntologyFileDocument.OntologyFile ontology) {
   	boolean status = false;
-		try {
-			//if there's a new ontology available, it will flag it here.
-			status = OntologyDataAdapter2.getInstance().checkForUpdate(ontology);
-			if (status) {
-				LOG.info("Update available for "+ontology.getFilename());
-			}
-		} catch (OntologyException e) {
-			e.printStackTrace();
+	try {
+		//if there's a new ontology available, it will flag it here.
+		status = OntologyDataAdapter2.getInstance().checkForUpdate(ontology);
+		if (status) {
+			LOG.info("Update available for "+ontology.getFilename());
 		}
-		return status;
+	} catch (OntologyException e) {
+		e.printStackTrace();
+	}
+	return status;
   }
 
   /**helper function for getting column index by name */
@@ -741,8 +740,8 @@ public class OntologyUpdate {
   private URL getLocalUrl (String filename) {
   	URL localUrl;
   	try {
-			localUrl = FileUtil.findUrl(filename);
-			return localUrl;
+		localUrl = FileUtil.findUrl(filename);
+		return localUrl;
   	} catch (FileNotFoundException fnfe) {}
   	return null;
   }
@@ -770,5 +769,4 @@ public class OntologyUpdate {
     });
   }
 
-  
 }
