@@ -64,7 +64,6 @@
           <entry location="conf" launcher="false" />
           <entry location="images" launcher="false" />
           <entry location="data" launcher="false" />
-          <entry location="phenote" launcher="false" />
           <entry location="Phenote" launcher="true" />
         </include>
         <dependencies />
