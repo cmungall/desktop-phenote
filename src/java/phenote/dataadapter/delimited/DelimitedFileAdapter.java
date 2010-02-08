@@ -48,7 +48,7 @@ public class DelimitedFileAdapter extends AbstractFileAdapter {
     try {
       LineNumberReader lnr = new LineNumberReader(new FileReader(f));
       DelimitedChar delChar = new DelimitedChar();
-      System.out.println("Reading tab-delimited data from file "+f);
+      LOG.debug("Reading tab-delimited data from file "+f);
       //List<CharField> fields;
       try {
         // the header is being tossed and it should be used for char field mapping!
@@ -58,24 +58,24 @@ public class DelimitedFileAdapter extends AbstractFileAdapter {
         while (!isHeader) {
           String headerLine=lnr.readLine(); //reading header line
           if (headerLine == null) // EndOfFile no header!
-            throw new DelimitedEx("No valid header found");
+            throw new DelimitedEx("No valid header found in file " + f);
           try { 
             delChar.setHeader(headerLine);
             isHeader = true; // no ex thrown - success
           } catch (DelimitedEx e) {
             isHeader = false;
-            LOG.error("Invalid header: "+headerLine); //for debug?log?  
+            LOG.error("Invalid header in file " + f + ": "+headerLine); //for debug?log?  
           }
         }
         //fields = headerToCharFields(headerLine);
       } catch (DelimitedEx x) {
-        LOG.error("Tab-delimited read failure "+x);
+        LOG.error("Tab-delimited read failure for file " + f + ": "+x);
         // failed to get header(?) - shouldnt go on i think
         // return null??? throw ex?? return empty charList?
         return charList;
       }
       catch (IOException e) {
-        LOG.error("Tab-delimited read failure "+e);
+        LOG.error("Tab-delimited read failure for file " + f + ": "+e);
         return charList;
       }
       for (String line=lnr.readLine(); line != null; line = lnr.readLine()) {
@@ -83,7 +83,7 @@ public class DelimitedFileAdapter extends AbstractFileAdapter {
           delChar.parseLine(line);
           CharacterI ch = delChar.getCharacter();
           charList.add(ch);
-          System.out.println(line);
+//          System.out.println(line);
         } catch (DelimitedEx e) { // thrown for blank line - who cares right
           // log? errorEvent? do nothing - does it even throw for blanks?
           //(e.getMessage()); // jut "" for whitespace line
@@ -92,7 +92,7 @@ public class DelimitedFileAdapter extends AbstractFileAdapter {
       lnr.close();
     }	
     catch (IOException e) {
-      System.out.println("Tab-delimited read failure "+e);
+      LOG.error("Tab-delimited read failure on file " + f + ": "+e);
     }
     return charList;
   }
@@ -146,11 +146,11 @@ public class DelimitedFileAdapter extends AbstractFileAdapter {
     for (CharacterI ch : charList.getList()) {
       try {
         String c2 = new DelimitedChar(ch).getDelimitedString();
-        LOG.info(c2);
-        pw.println(c2);
+//        LOG.info(c2);
+//        pw.println(c2);
       }
       catch (DelimitedChar.BadCharException e) {
-        LOG.error("Not writing out character", e);
+        LOG.error("Problem writing out character to tab-delimited file " + f + ": ", e);
       }
     }
     pw.close();
