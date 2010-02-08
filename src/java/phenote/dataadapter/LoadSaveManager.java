@@ -11,10 +11,12 @@ import javax.swing.JTextArea;
 import javax.swing.filechooser.FileFilter;
 
 import org.apache.log4j.Logger;
+import org.bbop.framework.GUIManager;
 
 import phenote.config.Config;
 import phenote.datamodel.CharacterListI;
 import phenote.edit.EditManager;
+import phenote.main.PhenotePlus;
 
 /** This was formerly just for files - adding in queryable/database data adapters */
 
@@ -106,6 +108,7 @@ public class LoadSaveManager {
     for (LoadSaveListener listener : this.listeners) {
       listener.fileLoaded(f);
     }
+    setTitleOnPhenoteWindowForFile(f);
   }
   
   /**Saves the document's characters to a file, prompting the user to choose a file
@@ -123,6 +126,7 @@ public class LoadSaveManager {
       } else {
         saveData(aFile);
       }
+      setTitleOnPhenoteWindowForFile(aFile);
     }
   }
   
@@ -279,7 +283,7 @@ public class LoadSaveManager {
     // just try first adapter if none match extension
     DataAdapterI da = Config.inst().getDefaultFileAdapter();
     String m = "Data adapter has not been specified, and file suffix does not map to any"
-      +" data adapter, using default/first data adapter: "+da.getDescription();
+      +" known data adapter.  Using default/first data adapter: "+da.getDescription();
     JOptionPane.showMessageDialog(null,m,"No data adapter specified",
                             JOptionPane.INFORMATION_MESSAGE);
     return da;
@@ -321,8 +325,16 @@ public class LoadSaveManager {
     }
   }
 
-	private static Logger log() {
-		return Logger.getLogger(LoadSaveManager.class);
-	}
+  private static Logger log() {
+    return Logger.getLogger(LoadSaveManager.class);
+  }
+
+  private static void setTitleOnPhenoteWindowForFile(File file) {
+    final String docName = file != null ? file.getName() : "Untitled";
+    final String windowTitle;
+//    windowTitle = docName + " - " + PhenoteStartupTask.getAppName();  // This would be better, but that method can't be static.
+    windowTitle = PhenotePlus.getAppName() + ": " + docName;
+    GUIManager.getManager().getFrame().setTitle(windowTitle);
+  }
 
 }
