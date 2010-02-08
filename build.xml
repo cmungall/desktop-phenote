@@ -41,7 +41,7 @@
 	<tstamp>
 		<format property="NOW" pattern="yyyy-MM-dd_HH:mm:ss"/>
 	</tstamp>
-	<property name="phenote.version" value="1.7-beta2"/>
+	<property name="phenote.version" value="1.7-beta3"/>
 	<property name="phenote.build" value="${NOW}"/>
 
     <!-- override this from command line with  -DCONF-FILE=initial-zfin.cfg -->
@@ -429,21 +429,20 @@ them into  the classfiles directory. excludes="test/**"  -->
         <tar destfile="tars/${dist}/phenote-${dist}-src.tar">
             <tarfileset dir=".">
                 <exclude name="${dist}/**"/>
-                <exclude name="svn-phenote/**"/>
-                <exclude name="tars/**"/>
-                <exclude name="src/obo-files/**"/>
+<!--                <exclude name="svn-phenote/**"/> -->
+<!--                <exclude name="tars/**"/> -->
+<!--                <exclude name="src/obo-files/**"/> -->
                 <!-- for now take out go as its 8.5M & not being used yet -->
                 <exclude name="obo-files/gene_ontology.obo"/>
                 <exclude name="*.tar"/>
                 <exclude name="*.jar"/>
-                <exclude name="garbage/**"/>
-                <exclude name="oldjars/**"/>
+                <exclude name="old/**"/>
                 <!-- exclude name="jars/phenote.jar"/ -->
                 <exclude name="doc/**"/>
                 <exclude name="classfiles/**"/>
-                <exclude name="web-classfiles/**"/>
-                <exclude name="web-interface/**"/>
-                <exclude name="web-deployment/**"/>
+<!--                <exclude name="web-classfiles/**"/> -->
+<!--                <exclude name="web-interface/**"/> -->
+<!--                <exclude name="web-deployment/**"/> -->
             </tarfileset>
         </tar>
         <gzip zipfile="tars/${dist}/phenote-${dist}-src.tar.gz" src="tars/${dist}/phenote-${dist}-src.tar"/>
