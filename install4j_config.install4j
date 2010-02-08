@@ -23,7 +23,6 @@
       <mountPoint id="5" root="" location="conf" mode="755" />
       <mountPoint id="6" root="" location="images" mode="755" />
       <mountPoint id="11" root="" location="data" mode="755" />
-      <mountPoint id="9324" root="" location="" mode="755" />
     </mountPoints>
     <entries>
       <dirEntry mountPoint="3" file="./jars" overwrite="4" shared="false" mode="644" uninstallMode="0" excludeSuffixes="CVS, .svn" dirMode="755">
@@ -52,7 +51,6 @@
           <entry location=".svn" launcher="false" />
         </exclude>
       </dirEntry>
-      <fileEntry mountPoint="9324" file="./phenote" overwrite="1" shared="false" mode="644" uninstallMode="0" />
     </entries>
     <components>
       <component name="Phenote" id="62" displayDescription="false" selected="true" mandatory="true" downloadable="false">
