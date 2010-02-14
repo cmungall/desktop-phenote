@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 
 public class PhenoteVersion {
 
-  private static String hardwiredDefaultVersion = "1.7-beta3";
+  private static String hardwiredDefaultVersion = "1.7-beta7";
 
   public static String versionString() {
     final String version = System.getProperty("phenote.version");
