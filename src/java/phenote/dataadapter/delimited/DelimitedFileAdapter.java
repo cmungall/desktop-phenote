@@ -147,7 +147,7 @@ public class DelimitedFileAdapter extends AbstractFileAdapter {
       try {
         String c2 = new DelimitedChar(ch).getDelimitedString();
 //        LOG.info(c2);
-//        pw.println(c2);
+        pw.println(c2);
       }
       catch (DelimitedChar.BadCharException e) {
         LOG.error("Problem writing out character to tab-delimited file " + f + ": ", e);
