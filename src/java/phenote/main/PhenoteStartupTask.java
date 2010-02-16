@@ -130,18 +130,21 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
   // Until those issues are fixed, suppress showing the splash screen if it's not going to go well.
   // 01/22/2010:  Now even from the command line, the splash screen is showing up empty on Mac.  Just disable it for now.
   // I have no idea whether it's working on Windows.
+  // 2/9/2010:  On Windows it apparently freezes up the whole application, so
+  // for now just disable it for everyone.
   private boolean showSplash() {
-//           return false;
-           if (OSUtil.isLinux()) {
-                   return false;
-           }
-//           else if (Preferences.getInstallationDirectory().getName().equals(".")) // We're running from the shell, not from the installed version
-           else if (OSUtil.isMacOSX()) // Right now, the splash screen is empty most of the time even on Mac.  :-(
-                   return false;
-           else {
-//                   LOG.debug("showSplash: isLinux = " + OSUtil.isLinux() + ", installdir = " + Preferences.getInstallationDirectory() + ", = . is " + Preferences.getInstallationDirectory().equals('.')); // DEL
-                   return true;
-           }
+    return false;
+
+//     if (OSUtil.isLinux()) {
+//       return false;
+//     }
+// //           else if (Preferences.getInstallationDirectory().getName().equals(".")) // We're running from the shell, not from the installed version
+//     else if (OSUtil.isMacOSX()) // Right now, the splash screen is empty most of the time even on Mac.  :-(
+//       return false;
+//     else {
+// //                   LOG.debug("showSplash: isLinux = " + OSUtil.isLinux() + ", installdir = " + Preferences.getInstallationDirectory() + ", = . is " + Preferences.getInstallationDirectory().equals('.')); // DEL
+//       return true;
+//     }
    }
 
 
