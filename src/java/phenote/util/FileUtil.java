@@ -335,7 +335,7 @@ public class FileUtil {
   public static String getLastModifiedDate(URL localUrl) {
     String display = "(not on local drive)";
     if (localUrl!=null) {
-      // Will this always work?  What if we need to use a proxy?  		
+      // Will this always work?  What if we need to use a proxy?  Is this only called on local URLs (file://...)?
       File f = new File(localUrl.getFile());
       long timestamp = f.lastModified();
       Date when = new Date(timestamp);
@@ -424,7 +424,8 @@ public class FileUtil {
     Proxy proxy = null;
     Preferences prefs = Preferences.getPreferences();
 
-    if (prefs.getProxyIsSet() && !url.getProtocol().equals("file")) {
+    if (prefs.getProxyIsSet() && !(url.getProtocol().equals("file") ||
+                                   url.toString().startsWith("jar:file"))) {
       String proxyHost = prefs.getProxyHost();
       int proxyPort = prefs.getProxyPort();
       String proxyProtocol = prefs.getProxyProtocol();
