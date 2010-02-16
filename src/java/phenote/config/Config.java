@@ -62,6 +62,7 @@ import phenote.util.FileUtil;
 public class Config {
 
   public final static String  FLYBASE_DEFAULT_CONFIG_FILE = "flybase.cfg";
+//  public final static String  DEFAULT_CONFIG_FILE = "hpo.cfg";
   private static Config singleton;
 
   private String configFile = FLYBASE_DEFAULT_CONFIG_FILE; // default
@@ -104,6 +105,8 @@ public class Config {
 	  new HashMap<String,OBDSQLDatabaseAdapterConfiguration>();
 
   private final static String myphenoteFile = "my-phenote";
+
+  private static final Logger LOG =  Logger.getLogger(Config.class);
 
   public static Config inst() {
     if (singleton == null) {
@@ -200,7 +203,7 @@ public class Config {
     setConfigFile(getDefaultFile(),true,false,updatePersonalFromMainCfg);
   }
 
-  /** if all else fails revert to flybase which should be there */
+  /** if all else fails revert to default flybase config file which should be there */
   public void loadDefaultFlybaseConfigFile() throws ConfigException {
     setConfigFile(FLYBASE_DEFAULT_CONFIG_FILE,true,false,false); // merge true?
   }
@@ -279,10 +282,25 @@ public class Config {
       
     // if file doesnt exist yet or overwrite, copy over masterConfig
     else if (mode.isWipeout()) {
-      mode.doWipeout(); // ?? thorws ConfigEx
+      try {  // Try to get master config from URL
+        mode.doWipeout(); // ?? thorws ConfigEx
+      }
+      catch (ConfigException ce) {
+        LOG.error("Failed to get master config " + masterConfig + " to update local copy " + mode.localFileString());
+        // If we can find a local copy, that should be good enough for now
+        File localFile = new File(mode.localFileString());
+        if (localFile.exists()) {
+          LOG.info("Using (possibly stale) local copy " + mode.localFileString());
+          return mode.localFileString();
+        }
+        else {
+          LOG.error("Also failed to open local copy: " + mode.localFileString());
+          throw new ConfigException(ce);
+        }
       // this should probably do a read & write of cfg to get version in there
       // however if writeback is missing something its problematic
       // copyUrlToFile(mode.masterUrl,mode.localFile); // Exx
+      }
     }
     
     // new way - set new default(no param) config file name in my-phenote.cfg
@@ -375,6 +393,7 @@ public class Config {
         return;
       }
 
+      log().info("Config file " + localFile + " specifies wipeout.");
       doWipeoutMessage();
       // this shouldnt be copy!!! read in write out to get version!
       try {
@@ -404,7 +423,7 @@ public class Config {
     }
 
     private void doWipeoutMessage() {
-      String s = !localFileExists() ? " does not exist" : " getting overwritten";
+      String s = !localFileExists() ? " does not exist" : " about to be overwritten";
       log().debug(localFile+s+"--copying "+masterUrl);
     }
 
