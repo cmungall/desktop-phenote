@@ -169,10 +169,13 @@ public class OntologyDataAdapter {
   /** This actually creates both CharFields and Ontologies and maps namespaces from
       obo file adapter meta data */
   private void mapNamespacesToOntologies(OBOSession oboSession) throws OntologyException {
+    Map<String, Ontology> ontologies = new HashMap<String, Ontology>(); // So that we don't load ontology files multiple times
+
     for (FieldConfig fieldConfig : cfg().getEnbldFieldCfgs()) {
       CharField cf = fieldConfig.getCharField(); // creates char field (if not there)
       // ontology manager.addCF???
       if (fieldConfig.hasOntologies()) {
+//        LOG.info("mapNamespacesToOntologies: fieldConfig = " + fieldConfig + ", ont list = " + fieldConfig.getOntologyConfigList() + ", charfield = " + cf); // DEL
         for (OntologyConfig oc : fieldConfig.getOntologyConfigList()) {
           // get namespaces for ont cfg
           // if adapterMetaData == null print err? throw ex? return?
@@ -187,10 +190,14 @@ public class OntologyDataAdapter {
           }
           String urlString = oc.getLoadUrl().toString();
           Collection<Namespace> spaces = adapterMetaData.getNamespaces(urlString);
-          // loads ontology from spaces
-          //ah!  but this is loading the ontologies multiple times i think!
-          Ontology o = new Ontology(spaces,oc,oboSession);
-          this.updateLoadingScreen("Loading: "+o.getName(), true);
+          // load ontology from spaces (if we didn't already load it)
+          Ontology o = ontologies.get(oc.getName());
+          if (o == null) {
+            o = new Ontology(spaces,oc,oboSession);
+            LOG.info("Loading ontology " + oc.getName() + " from url " + urlString); // DEL
+            this.updateLoadingScreen("Loading: "+oc.getName(), true);
+            ontologies.put(oc.getName(), o);  // Save in case we need it again
+          }
 
           // ADD TO CHAR FIELD
           if (oc.isPostCompRel()) { // POST COMP REL ONTOLOGY

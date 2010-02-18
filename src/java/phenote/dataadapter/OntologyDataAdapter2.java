@@ -196,7 +196,9 @@ public class OntologyDataAdapter2 {
   /** This actually creates both CharFields and Ontologies and maps namespaces from
       obo file adapter meta data */
   private void mapNamespacesToOntologies(OBOSession oboSession) throws OntologyException {
-  	OntologyFile[] ontologies = cfg().getOntologyList();
+//    OntologyFile[] ontologies = cfg().getOntologyList();  // not used
+    Map<String, Ontology> ontologies = new HashMap<String, Ontology>(); // So that we don't load ontology files multiple times
+
     for (FieldConfig fieldConfig : cfg().getEnbldFieldCfgs()) {
       CharField cf = fieldConfig.getCharField(); // creates char field (if not there)
       // ontology manager.addCF???
@@ -219,17 +221,21 @@ public class OntologyDataAdapter2 {
           String urlString = getLocalFile(oc.getName()).toString();
           oc.setLocalUrl(localUrl);
           Collection<Namespace> spaces = adapterMetaData.getNamespaces(urlString);
-          // loads ontology from spaces
-          //ah!  but this is loading the ontologies multiple times i think!
-          Ontology o = new Ontology(spaces,oc,oboSession);
+          // load ontology from spaces (if we didn't already load it)
+          Ontology o = ontologies.get(oc.getName());
+          if (o == null) {
+            o = new Ontology(spaces,oc,oboSession);
+            LOG.info("Loading " + o.getName() + " from url " + urlString); // DEL
 //          cfg().addOntology(o);
-          long date = new File(urlString).lastModified();
-          try {
-          o.setTimestamp(getOboDate(localUrl));
-          } catch (OntologyException oe) {
-                  LOG.error("Caught OntologyException: "+oe.getMessage());
+            try {
+              o.setTimestamp(getOboDate(localUrl));
+            } catch (OntologyException oe) {
+              LOG.error("Caught OntologyException: "+oe.getMessage());
 //          	continue;
+            }
+            ontologies.put(oc.getName(), o);  // Save in case we need it again
           }
+          long date = new File(urlString).lastModified();
           oc.setUpdateDate(date);
           // ADD TO CHAR FIELD
           if (oc.isPostCompRel()) { // POST COMP REL ONTOLOGY
@@ -327,11 +333,19 @@ public class OntologyDataAdapter2 {
         reposDate = getOboDate(reposUrl); // throws ex if no date
       }
       catch (OntologyException oe) { // no reposDate
-        LOG.error("got OntEx trying to parse date from repos "+oe); 
+        LOG.error("got OntEx trying to parse date from master version of " + ontol + ": "+oe);
         // already have local copy, no date to synch with, dont bother downloading from
         // repos, there should probably be a config to override this (always download)
-        if (localUrl != null)
-          useRepos = false; 
+        if (localUrl != null) {
+          LOG.info("Using local copy instead: " + localUrl);
+          useRepos = false;
+        }
+        else {
+          LOG.info("Bad news--couldn't find local copy " + localUrl + " either.  Will try to run without the " + ontol + " ontology.");
+          useRepos = false; // ?
+          // return??
+          return localUrl;  // null?
+        }
       }
       long loc = 0;
       int timer = cfg().getUpdateTimer();
@@ -783,7 +797,8 @@ public class OntologyDataAdapter2 {
         try {
         	reposDate = getOboDate(reposUrl); // throws ex if no date
         } catch (OntologyException oe) { // no reposDate
-        	LOG.error("Got OntEx trying to parse date from repos " + reposUrl + ": "+oe); 
+        	LOG.error("Got OntEx trying to parse date from repos " + reposUrl + ": "+oe);
+                LOG.info("Using (possibly stale) local copy " + ontologyFile.getFilename());
             // already have local copy, no date to synch with, dont bother downloading from
             // repos, there should probably be a config to override this (always download)
         	//i think this should download by default if there's no date in the file
