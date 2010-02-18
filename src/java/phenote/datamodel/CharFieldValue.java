@@ -1,6 +1,7 @@
 package phenote.datamodel;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -150,7 +151,14 @@ public class CharFieldValue implements Cloneable {
   static CharFieldValue makeDate(String dateString, CharacterI c, CharField cf) 
     throws ParseException {
     CharFieldValue cfv = new CharFieldValue(c,cf);
-    cfv.dateValue = DateFormat.getDateInstance().parse(dateString);
+    try {
+      cfv.dateValue = DateFormat.getDateInstance().parse(dateString);
+    } catch (ParseException e) {
+      LOG.error("makeDate: couldn't parse date " + dateString + " with default date format--trying dd.MM.yyyy");
+      SimpleDateFormat euroDate = new SimpleDateFormat("dd.MM.yyy");
+      cfv.dateValue = euroDate.parse(dateString);
+    }
+      
     return cfv;
   }
 
