@@ -264,7 +264,7 @@ public class SettingsMenu extends DynamicMenu {
   }
 
   private void restartMessage() {
-    String m = "You must quit and restart Phenote for this new configuration to take effect.";
+    String m = "New configuration saved.  You must quit and restart Phenote for this new configuration to take effect.";
     JOptionPane.showMessageDialog(null, m, "Restart Phenote",
                 JOptionPane.INFORMATION_MESSAGE);    
   }
