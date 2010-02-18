@@ -2,7 +2,7 @@ package phenote.config;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import org.apache.log4j.Logger;
 import phenote.config.xml.FieldDocument.Field;
 import phenote.config.xml.OntologyDocument.Ontology;
 import phenote.dataadapter.ConstraintManager;
@@ -26,6 +26,7 @@ public class FieldConfig {
   private Field fieldBean;
   private String displayName;
 
+  private static final Logger LOG = Logger.getLogger(FieldConfig.class);
 
   // from gui config
   // public FieldConfig(Config cfg) ?? { 
@@ -359,7 +360,7 @@ public class FieldConfig {
       // cant just add - need to add in proper place! insert!
       //oldConfig.addFieldConfig(this);
       int index = thisCfg.getAllFieldIndex(this); // enabled??? disabled?
-      System.out.println("field config index merge "+index+" fc "+this);
+      LOG.debug("field config index merge "+index+" fc "+this);
       oldConfig.insertFieldConfig(index,this);
       return;
     }

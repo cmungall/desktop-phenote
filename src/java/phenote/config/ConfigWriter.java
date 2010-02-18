@@ -3,6 +3,7 @@ package phenote.config;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.log4j.Logger;
 import org.apache.xmlbeans.XmlOptions;
 
 import phenote.config.xml.PhenoteConfigurationDocument;
@@ -15,6 +16,7 @@ import phenote.main.PhenoteVersion;
     hindsight is 20 20 */
 class ConfigWriter {
 
+  private static final Logger LOG = Logger.getLogger(FieldConfig.class);
 
   void writeConfig(Config config, File file) { //throws IOException? {
     //this.config = config; // convenience
@@ -28,9 +30,9 @@ class ConfigWriter {
 
     try { // xmlOptions? pretty print
     doc.save(file,getXmlOptions()); 
-    System.out.println("Saved changes to config file "+file);} 
+    LOG.info("Saved changes to config file "+file);} 
     catch (IOException e) { 
-      System.out.println("Failed to save config file "+e); }
+      LOG.error("Failed to save config file "+e); }
   }
 
   private XmlOptions getXmlOptions() {
