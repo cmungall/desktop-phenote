@@ -138,7 +138,7 @@ public class AnnotationCharacter extends AbstractCharacter {
     // PROPERTIES (not subject or object)
     else {
       OBOProperty prop = getPropertyForField(cf);
-      LOG.debug("setting charfield "+cf+" to val +"+cfv+" using "+prop);
+//      LOG.debug("setting charfield "+cf+" to val +"+cfv+" using "+prop);
       if (prop != null) {
         if (cfv.isTerm()) {
           if (cfv.getOboClass() != null)
@@ -182,10 +182,10 @@ public class AnnotationCharacter extends AbstractCharacter {
 //       OBOClass pc =
 //         OboUtil.makePostCompTerm(objectGenus.toTerm(),rel,objectDifferentia.toTerm());
       OboUtil ou = OboUtil.initPostCompTerm(objectGenus.toTerm());
-      LOG.debug("ou = "+ou+" genus:"+objectGenus.toTerm());
+//      LOG.debug("ou = "+ou+" genus:"+objectGenus.toTerm());
       for (Map.Entry<CharField,CharFieldValue> e : charFieldToObjectDiff.entrySet()) {
         OBOProperty rel = driver.getPropertyForField(e.getKey());
-        LOG.debug("addRelDiff = "+rel+" "+e.getValue());
+//        LOG.debug("addRelDiff = "+rel+" "+e.getValue());
         if (e.getValue().toTerm() != null)
         	ou.addRelDiff(rel,e.getValue().toTerm());
       }
