@@ -1,4 +1,4 @@
-Changes in versions 1.7-beta1-3:
+Changes in versions 1.7-beta1-5:
 - Phenote+ is now just called Phenote.  The old Phenote will be de-supported.
 - Added support for proxies.  Users can now set proxy via a GUI.  All
 ontology-fetching, date-checking, etc. will then be done via the proxy that is
@@ -17,9 +17,15 @@ SOMETHING so that new Phenote users don't think it's crashed.
 - Fixed some out-of-date stuff in some config files (e.g. plant.cfg)
 - Made "Date created" field show up in Annotation Table for
   zfin-standalone.cfg (at request of ZFIN curator David Fashena).
-- Title bar now shows name of last file loaded (or saved).
 
-1.7-beta7: Fixed save bug (introduced around 1.7-beta2)
+1.7-beta6:
+- If we fail to get a new copy of the config file from the repository,
+  just use the local copy--don't give up and use the flybase config.
+- Phenote title bar now shows name of last file loaded (or saved).
+
+1.7-beta7:
+Fixed save bug (introduced around 1.7-beta2)
+
 1.7-beta8: 
 - Greatly improved startup speed by loading each ontology once, rather than
 multiple times, in OntologyDataAdapter.mapNamespacesToOntologies
