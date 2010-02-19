@@ -1,6 +1,31 @@
-Changes in version 1.6-beta8:
-- Renaming Phenote2 configuration to PhenotePlus to avoid any confusion with a future Phenote 2.0 release
-- Renaming "Comp" button to "Compose" in AnnotationEditor Panel which more intuitively suggests composition of ontology terms with relationships.
-- - Layout menu now has "Import perspective" to add a new perspective (from an
-.idw file)--phenote request
-https://sourceforge.net/tracker/index.php?func=detail&aid=1909081&group_id=76834&atid=887913
+Changes in versions 1.7-beta1-3:
+- Phenote+ is now just called Phenote.  The old Phenote will be de-supported.
+- Added support for proxies.  Users can now set proxy via a GUI.  All
+ontology-fetching, date-checking, etc. will then be done via the proxy that is
+set.  Proxy setting saved in user's config.xml.
+- Fixed Help/User Guide (wasn't working at all) in standalone version.
+(Still problematic in webstart.)
+- Improved About.
+- Fixed Apple->Exit (was doing nothing)
+- When you ran Phenote for the first time from the installed version, it would
+let you choose your config and then shows nothing at all for several minutes
+while it downloads the ontology files.  Now it at least pops up a dialog box
+that says "Updating ontology files--please wait".  Unfortunately, I can't get
+it to put anything inside the dialog box until it's done downloading the
+ontology files (by which point it's pointless), but at least it now shows
+SOMETHING so that new Phenote users don't think it's crashed.
+- Fixed some out-of-date stuff in some config files (e.g. plant.cfg)
+- Made "Date created" field show up in Annotation Table for
+  zfin-standalone.cfg (at request of ZFIN curator David Fashena).
+- Title bar now shows name of last file loaded (or saved).
+
+1.7-beta7: Fixed save bug (introduced around 1.7-beta2)
+1.7-beta8: 
+- Greatly improved startup speed by loading each ontology once, rather than
+multiple times, in OntologyDataAdapter.mapNamespacesToOntologies
+- Europen-style dates in input (e.g., "20.10.2009") could not be parsed, and
+thus were lost and not saved in the output.
+Phenote can now handle THAT SPECIFIC DATE FORMAT (dd.MM.yyyy) as well as the
+default SimpleDateFormat.  Any other date format will still fail.  Note that
+if you save, the date will be saved in SimpleDateFormat default format ("Oct
+20, 2009"), not in the original input format ("20.10.2009").
