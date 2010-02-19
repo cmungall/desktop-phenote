@@ -1,5 +1,6 @@
 format-version: 1.2
-date: 17:12:2009 18:50
+date: 05:02:2010 21:49
+saved-by: peter
 auto-generated-by: OBO-Edit 2.0
 subsetdef: secondary_consequence "Consequence of a disorder in another organ system."
 default-namespace: file:/home/peter/projects/hpo/trunk/human-phenotype-ontology.obo
@@ -4687,10 +4688,11 @@ is_a: HP:0000597 ! Ophthalmoparesis
 
 [Term]
 id: HP:0000512
-name: Abnormal electroretinogram (ERG)
+name: Abnormal electroretinogram
 namespace: medical_genetics
 alt_id: HP:0003285
-synonym: "Abnormal electroretinogram" EXACT []
+def: "Any abnormality of the electrical responses of various cell types in the retina as measured by electroretinography." [HPO:curators]
+synonym: "Abnormal electroretinogram (ERG)" EXACT []
 synonym: "Abnormal ERG" EXACT []
 xref: UMLS:C0476397
 xref: UMLS:C1837719
@@ -5034,7 +5036,7 @@ synonym: "Extinguished electroretinogram" EXACT []
 xref: UMLS:C1855685
 xref: UMLS:C1859827
 xref: UMLS:C1969818
-is_a: HP:0000512 ! Abnormal electroretinogram (ERG)
+is_a: HP:0000512 ! Abnormal electroretinogram
 
 [Term]
 id: HP:0000551
@@ -5585,6 +5587,7 @@ is_a: HP:0000589 ! Coloboma
 id: HP:0000613
 name: Photophobia
 namespace: medical_genetics
+def: "Excessive sensitivity to light with the sensation of discomfort or pain in the eyes due to exposure to bright light." [HPO:curators]
 xref: UMLS:C0085636
 is_a: HP:0000504 ! Abnormality of vision
 is_a: HP:0000707 ! Neurological abnormality
@@ -5935,7 +5938,7 @@ xref: UMLS:C0392756
 xref: UMLS:C0871261
 xref: UMLS:C1704632
 xref: UMLS:C1836859
-is_a: HP:0000512 ! Abnormal electroretinogram (ERG)
+is_a: HP:0000512 ! Abnormal electroretinogram
 
 [Term]
 id: HP:0000655
@@ -8871,6 +8874,7 @@ is_a: HP:0000951 ! Skin abnormality
 id: HP:0000989
 name: Pruritus
 namespace: medical_genetics
+def: "Pruritus is an itch or a sensation that makes a person want to scratch. This term refers to an abnormally increased disposition to experience pruritus." [HPO:curators]
 xref: UMLS:C0033774
 is_a: HP:0000951 ! Skin abnormality
 
@@ -9544,8 +9548,10 @@ id: HP:0001065
 name: Striae distensae
 namespace: medical_genetics
 alt_id: HP:0001023
-def: "Thinned, erythematous, depressed bands of atrophic skin. Striae distensae occur most often in areas that have been subject to distension such as the lower back, buttocks, thighs, breast, abdomen, and shoulders." [HPO:curators]
+def: "Thinned, erythematous, depressed bands of atrophic skin. Initially, striae appear as flattened and thinned, pinkish linear regions of the skin. Striae tend to enlarge in length and become reddish or purplish. Later, striae tend to appear as white, depressed bands that are parallel to the lines of skin tension. Striae distensae occur most often in areas that have been subject to distension such as the lower back, buttocks, thighs, breast, abdomen, and shoulders." [HPO:curators]
+synonym: "Stretch marks" RELATED []
 synonym: "Striae" EXACT []
+synonym: "striae atrophicae" EXACT []
 synonym: "Striae cutis distensae" EXACT []
 xref: UMLS:C0152459
 xref: UMLS:C1410270
@@ -10707,12 +10713,19 @@ is_a: HP:0009835 ! Aplasia/Hypoplasia of the distal phalanges of the hand
 id: HP:0001204
 name: Distal symphalangism
 namespace: medical_genetics
+alt_id: HP:0006079
 def: "The term distal symphalangism refers to a bony fusion of the distal and middle phalanges of the digits of the hand, in other words the distal interphalangeal joint (DIJ) is missing which can be seen either on x-rays or as an absence of the distal interphalangeal finger creases." [HPO:curators]
+synonym: "Synostosis of distal phalanges" EXACT []
 synonym: "Terminal symphalangism" EXACT []
+xref: UMLS:C0039093
+xref: UMLS:C0391889
+xref: UMLS:C0576464
+xref: UMLS:C1368355
 xref: UMLS:C1843683
 xref: UMLS:C1861401
 xref: UMLS:C1862158
 is_a: HP:0009700 ! Synostosis involving bones of the fingers
+is_a: HP:0009773 ! Symphalangism affecting the phalanges of the hand
 
 [Term]
 id: HP:0001211
@@ -11340,6 +11353,7 @@ is_a: HP:0002615 ! Hypotension
 id: HP:0001279
 name: Syncope
 namespace: medical_genetics
+def: "Syncope refers to a generalized weakness of muscles with loss of postural tone, inability to stand upright, and loss of consciousness. Once the patient is in a horizontal position, blood flow to the brain is no longer hindered by gravitation and consciousness is regained. Unconsciousness usually lasts for seconds to minutes. Headache and drowsiness (which usually follow seizures) do not follow a syncopal attack. Syncope results from a sudden impairment of brain metabolism usually due to a reduction in cerebral blood flow. This term refers to an abnormally increased disposition to syncope." [HPO:curators]
 xref: UMLS:C0039070
 is_a: HP:0001626 ! Abnormality of the cardiovascular system
 created_by: peter
@@ -11570,7 +11584,7 @@ synonym: "Dandy-walker anomaly" EXACT []
 synonym: "Dandy-Walker cyst" EXACT []
 xref: UMLS:C0010964
 xref: UMLS:C1856021
-is_a: HP:0001312 ! Giant somatosensory evoked potentials (SEPS)
+is_a: HP:0001312 ! Giant somatosensory evoked potentials
 is_a: HP:0002350 ! Cerebellar cysts
 
 [Term]
@@ -11620,9 +11634,10 @@ is_a: HP:0002011 ! Abnormality of the central nervous system
 
 [Term]
 id: HP:0001312
-name: Giant somatosensory evoked potentials (SEPS)
+name: Giant somatosensory evoked potentials
 namespace: medical_genetics
-synonym: "Giant somatosensory evoked potentials" EXACT []
+def: "An abnormal enlargement (i.e. increase in measured voltage) of somatosensory evoked potentials." [HPO:curators]
+synonym: "Giant somatosensory evoked potentials (SEPS)" EXACT []
 xref: UMLS:C0015216
 xref: UMLS:C0017547
 xref: UMLS:C1305867
@@ -18293,6 +18308,7 @@ is_a: HP:0002086 ! Respiratory abnormality
 id: HP:0002088
 name: Abnormality of the lungs
 namespace: medical_genetics
+def: "An abnormality of the lungs or pulmonary system." [HPO:curators]
 xref: UMLS:C0024109
 xref: UMLS:C1704258
 is_a: HP:0002086 ! Respiratory abnormality
@@ -18434,6 +18450,7 @@ is_a: HP:0002103 ! Abnormality of the pleura
 id: HP:0002103
 name: Abnormality of the pleura
 namespace: medical_genetics
+def: "An abnormality of the pleura, the thin, transparent membrane which covers the lungs and lines the inside of the chest walls." [HPO:curators]
 xref: UMLS:C0032225
 xref: UMLS:C1279036
 xref: UMLS:C1704258
@@ -18456,6 +18473,7 @@ is_a: HP:0002795 ! Functional respiratory abnormality
 id: HP:0002105
 name: Hemoptysis
 namespace: medical_genetics
+def: "Coughing up (expectoration) of blood or blood-streaked sputum from the larynx, trachea, bronchi, or lungs." [HPO:curators]
 xref: UMLS:C0019079
 is_a: HP:0002088 ! Abnormality of the lungs
 
@@ -25183,6 +25201,7 @@ is_a: HP:0003220 ! Tendency to chromosomal breakage
 id: HP:0002916
 name: Abnormality of the chromosomes
 namespace: medical_genetics
+def: "A cytogenetically visible chromosomal abnormality." [HPO:curators]
 xref: UMLS:C0008625
 xref: UMLS:C0008633
 xref: UMLS:C1704258
@@ -50637,14 +50656,6 @@ xref: UMLS:C1864788
 is_a: HP:0010049 ! Hypoplastic/short metacarpal bones
 
 [Term]
-id: HP:0006005
-name: Proximal interphalangeal joint synostoses
-namespace: medical_genetics
-xref: UMLS:C0039093
-xref: UMLS:C0932508
-is_a: HP:0009773 ! Symphalangism affecting the phalanges of the hand
-
-[Term]
 id: HP:0006006
 name: Hypotrophy of the small hand muscles
 namespace: medical_genetics
@@ -51035,16 +51046,6 @@ id: HP:0006078
 name: Ivory and cone-shaped epiphyses
 namespace: medical_genetics
 is_a: HP:0005924 ! Abnormality of the epiphyses of the hand
-
-[Term]
-id: HP:0006079
-name: Synostosis of distal phalanges
-namespace: medical_genetics
-xref: UMLS:C0039093
-xref: UMLS:C0391889
-xref: UMLS:C0576464
-xref: UMLS:C1368355
-is_a: HP:0009773 ! Symphalangism affecting the phalanges of the hand
 
 [Term]
 id: HP:0006081
@@ -51508,9 +51509,14 @@ is_a: HP:0001156 ! Brachydactyly
 id: HP:0006152
 name: Proximal symphalangism
 namespace: medical_genetics
+alt_id: HP:0006005
 def: "The term proximal symphalangism refers to a bony fusion of the middle and proximal phalanges of the digits of the hand, in other words the proximal interphalangeal joint (PIJ) is missing which can be seen either on x-rays or as an absence of the proximal interphalangeal finger creases." [HPO:curators]
+synonym: "Proximal interphalangeal joint synostoses" EXACT []
+xref: UMLS:C0039093
+xref: UMLS:C0932508
 xref: UMLS:C1861385
 is_a: HP:0009700 ! Synostosis involving bones of the fingers
+is_a: HP:0009773 ! Symphalangism affecting the phalanges of the hand
 
 [Term]
 id: HP:0006153
@@ -54337,6 +54343,7 @@ id: HP:0006521
 name: Pulmonary lymphangiectasia
 namespace: medical_genetics
 alt_id: HP:0006526
+def: "Abnormal dilatation of the pulmonary lymphatic vessels. Lymphatic fluid in the lung is derived from normal leakage of fluid out of the blood capillaries in the lung. In pulmonary lymphangiectasia, the pulmonary lymphatics are not properly connected and become dilated with fluid." [HPO:curators]
 synonym: "Pulmonary lymphangiectasis" EXACT []
 xref: UMLS:C1855480
 xref: UMLS:C1856167
@@ -54578,6 +54585,7 @@ is_a: HP:0006703 ! Aplasia/Hypoplasia of the lungs
 id: HP:0006551
 name: Pulmonary lymphangiectasia, congenital
 namespace: medical_genetics
+def: "A developmental disorder characterized by pulmonary lymphatic dilatation." [HPO:curators]
 xref: UMLS:C0009678
 xref: UMLS:C1744681
 xref: UMLS:C1855480
@@ -61203,6 +61211,7 @@ creation_date: 2008-04-01T10:52:00Z
 id: HP:0007377
 name: Abnormality of somatosensory evoked potentials
 namespace: medical_genetics
+def: "An abnormality of somatosensory evoked potentials (SSEP), i.e., of the electrical signals of sensation going from the body to the brain in response to a defined stimulus. Recording electrodes are placed over the scalp, spine, and peripheral nerves proximal to the stimulation site. Clinical studies generally use electrical stimulation of peripheral nerves to elicit potentials. SSEP testing determines whether peripheral sensory nerves are able to transmit sensory information like pain, temperature, and touch to the brain. Abnormal SSEPs can result from dysfunction at the level of the peripheral nerve, plexus, spinal root, spinal cord, brain stem, thalamocortical projections, or primary somatosensory cortex." [HPO:curators]
 xref: UMLS:C0015216
 xref: UMLS:C1305867
 xref: UMLS:C1704258
@@ -63707,7 +63716,7 @@ xref: UMLS:C1552915
 xref: UMLS:C1704638
 xref: UMLS:C1705186
 xref: UMLS:C1947942
-is_a: HP:0000512 ! Abnormal electroretinogram (ERG)
+is_a: HP:0000512 ! Abnormal electroretinogram
 
 [Term]
 id: HP:0007689
@@ -66079,7 +66088,7 @@ is_a: HP:0000505 ! Impaired vision
 id: HP:0007984
 name: Electroretinogram shows a reduced b-wave in most cases
 namespace: medical_genetics
-is_a: HP:0000512 ! Abnormal electroretinogram (ERG)
+is_a: HP:0000512 ! Abnormal electroretinogram
 
 [Term]
 id: HP:0007985
@@ -66524,7 +66533,7 @@ xref: UMLS:C1306462
 xref: UMLS:C1444748
 xref: UMLS:C1518425
 xref: UMLS:C1704632
-is_a: HP:0000512 ! Abnormal electroretinogram (ERG)
+is_a: HP:0000512 ! Abnormal electroretinogram
 
 [Term]
 id: HP:0008043
@@ -68400,7 +68409,7 @@ xref: UMLS:C0206428
 xref: UMLS:C0330095
 xref: UMLS:C0476397
 xref: UMLS:C1704638
-is_a: HP:0000512 ! Abnormal electroretinogram (ERG)
+is_a: HP:0000512 ! Abnormal electroretinogram
 
 [Term]
 id: HP:0008276
@@ -68461,7 +68470,7 @@ xref: UMLS:C1552915
 xref: UMLS:C1704638
 xref: UMLS:C1705186
 xref: UMLS:C1947942
-is_a: HP:0000512 ! Abnormal electroretinogram (ERG)
+is_a: HP:0000512 ! Abnormal electroretinogram
 
 [Term]
 id: HP:0008281
@@ -68822,7 +68831,7 @@ xref: UMLS:C1552915
 xref: UMLS:C1704638
 xref: UMLS:C1705186
 xref: UMLS:C1947942
-is_a: HP:0000512 ! Abnormal electroretinogram (ERG)
+is_a: HP:0000512 ! Abnormal electroretinogram
 
 [Term]
 id: HP:0008325

@@ -1,5 +1,5 @@
 format-version: 1.2
-date: 03:02:2010 17:20
+date: 17:02:2010 12:50
 saved-by: George Gkoutos
 auto-generated-by: OBO-Edit 2.0
 subsetdef: abnormal_slim "Abnormal/normal slim"
@@ -3293,7 +3293,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000573
 name: increased length
-def: "A length quality which is relative large." [PATOC:GVG]
+def: "A length quality which is relatively large." [PATOC:GVG]
 subset: value_slim
 synonym: "long" EXACT []
 is_a: PATO:0000122 ! length
@@ -3302,7 +3302,7 @@ relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
 [Term]
 id: PATO:0000574
 name: decreased length
-def: "A length quality which is relative small." [PATOC:GVG]
+def: "A length quality which is relatively small." [PATOC:GVG]
 subset: value_slim
 synonym: "short" EXACT []
 synonym: "shortened" RELATED []
@@ -3480,7 +3480,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000599
 name: decreased width
-def: "A width which is relative small." [PATOC:GVG]
+def: "A width which is relatively small." [PATOC:GVG]
 subset: value_slim
 synonym: "narrow" RELATED []
 is_a: PATO:0000921 ! width
@@ -3489,7 +3489,7 @@ relationship: decreased_in_magnitude_relative_to PATO:0000461 ! normal
 [Term]
 id: PATO:0000600
 name: increased width
-def: "A width which is relative large." [PATOC:GVG]
+def: "A width which is relatively large." [PATOC:GVG]
 subset: value_slim
 synonym: "broad" RELATED []
 synonym: "wide" RELATED []
@@ -6666,7 +6666,7 @@ is_obsolete: true
 [Term]
 id: PATO:0001161
 name: diluted
-def: "A concentration which relative low." [PATOC:GVG]
+def: "A concentration which relatively low." [PATOC:GVG]
 subset: relational_slim
 subset: value_slim
 is_a: PATO:0000033 ! concentration of
@@ -7666,7 +7666,7 @@ relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
 [Term]
 id: PATO:0001306
 name: decreased temperature
-def: "A temperature which is relative low compared to average or normal." [PATOC:GVG]
+def: "A temperature which is relatively low compared to average or normal." [PATOC:GVG]
 subset: value_slim
 synonym: "low temperature" EXACT []
 is_a: PATO:0000146 ! temperature
@@ -9709,6 +9709,13 @@ def: "A size quality inhering in a bearer by virtue of the bearer's being made w
 is_a: PATO:0000586 ! increased size
 
 [Term]
+id: PATO:0001572
+name: bifid
+def: "A shape quality inhering in a bearer by virtue of the bearer's being forked or partially split into two parts." [PATOC:GVG]
+subset: value_slim
+is_a: PATO:0001786 ! split
+
+[Term]
 id: PATO:0001573
 name: isometrical
 def: "A symmetry quality inhering in a bearer by virtue of the bearer's having equal dimensions or measurements." [WordNet:WordNet "http://wordnet.princeton.edu/"]
@@ -10393,8 +10400,7 @@ name: decreased action potential
 def: "An action potential which is relatively low." [PATOC:GVG]
 subset: value_slim
 synonym: "low action potential" EXACT []
-is_a: PATO:0001463 ! action potential
-relationship: decreased_in_magnitude_relative_to PATO:0000461 ! normal
+is_obsolete: true
 
 [Term]
 id: PATO:0001661
@@ -10402,8 +10408,7 @@ name: increased action potential
 def: "An action potential which is relatively high." [PATOC:GVG]
 subset: value_slim
 synonym: "high action potential" EXACT []
-is_a: PATO:0001463 ! action potential
-relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
+is_obsolete: true
 
 [Term]
 id: PATO:0001662
@@ -10663,7 +10668,7 @@ is_a: PATO:0001595 ! depth
 [Term]
 id: PATO:0001693
 name: increased viscosity
-def: "A viscosity which relative high." [PATOC:GVG]
+def: "A viscosity which relatively high." [PATOC:GVG]
 subset: value_slim
 synonym: "high viscosity" EXACT []
 is_a: PATO:0000998 ! viscous
@@ -10672,7 +10677,7 @@ relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
 [Term]
 id: PATO:0001694
 name: decreased viscosity
-def: "A viscosity which relative low." [PATOC:GVG]
+def: "A viscosity which relatively low." [PATOC:GVG]
 subset: value_slim
 synonym: "low viscosity" EXACT []
 is_a: PATO:0000998 ! viscous
@@ -10826,7 +10831,7 @@ relationship: decreased_in_magnitude_relative_to PATO:0000461 ! normal
 [Term]
 id: PATO:0001714
 name: increased diameter
-def: "A diameter which is relative large." [PATOC:GVG]
+def: "A diameter which is relatively large." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001334 ! diameter
 relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
@@ -10834,7 +10839,7 @@ relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
 [Term]
 id: PATO:0001715
 name: decreased diameter
-def: "A diameter which is relative small." [PATOC:GVG]
+def: "A diameter which is relatively small." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001334 ! diameter
 relationship: decreased_in_magnitude_relative_to PATO:0000461 ! normal
@@ -11391,13 +11396,6 @@ synonym: "septate" NARROW []
 is_a: PATO:0000052 ! shape
 
 [Term]
-id: PATO:0001572
-name: bifid
-def: "A shape quality inhering in a bearer by virtue of the bearer's being forked or partially split into two parts." [PATOC:GVG]
-subset: value_slim
-is_a: PATO:0001786 ! split
-
-[Term]
 id: PATO:0001787
 name: rotational curvature
 def: "A curvature quality inhering in a bearer by virtue of the bearer's being curved around an axis." [PATOC:GVG]
@@ -11697,7 +11695,7 @@ is_a: PATO:0001822 ! wetness
 [Term]
 id: PATO:0001825
 name: increased wetness
-def: "A wetness quality that is relative high." [PATOC:GVG]
+def: "A wetness quality that is relatively high." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001823 ! wet
 relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
@@ -11705,7 +11703,7 @@ relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
 [Term]
 id: PATO:0001826
 name: decreased wetness
-def: "A wetness quality that is relative low." [PATOC:GVG]
+def: "A wetness quality that is relatively low." [PATOC:GVG]
 subset: value_slim
 synonym: "low wetness" EXACT []
 is_a: PATO:0001823 ! wet
@@ -11796,7 +11794,7 @@ is_a: PATO:0000141 ! structure
 [Term]
 id: PATO:0001838
 name: decreased flow
-def: "A flow that is relative low." [PATOC:GVG]
+def: "A flow that is relatively low." [PATOC:GVG]
 subset: value_slim
 synonym: "low flow" EXACT []
 is_a: PATO:0001574 ! flow
@@ -11805,7 +11803,7 @@ relationship: decreased_in_magnitude_relative_to PATO:0000461 ! normal
 [Term]
 id: PATO:0001839
 name: increased flow
-def: "A flow that is relative high." [PATOC:GVG]
+def: "A flow that is relatively high." [PATOC:GVG]
 subset: value_slim
 synonym: "high flow" EXACT []
 is_a: PATO:0001574 ! flow
@@ -11957,7 +11955,7 @@ is_a: PATO:0002076 ! movement bahavioral quality
 [Term]
 id: PATO:0001859
 name: increased coordination
-def: "A coordination which is relative high." [PATOC:GVG]
+def: "A coordination which is relatively high." [PATOC:GVG]
 synonym: "high coordination" EXACT []
 is_a: PATO:0000769 ! coordinated
 relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
@@ -11965,7 +11963,7 @@ relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
 [Term]
 id: PATO:0001860
 name: decreased coordination
-def: "A coordination which is relative low." [PATOC:GVG]
+def: "A coordination which is relatively low." [PATOC:GVG]
 synonym: "low coordination" EXACT []
 is_a: PATO:0000769 ! coordinated
 relationship: decreased_in_magnitude_relative_to PATO:0000461 ! normal
@@ -13341,7 +13339,7 @@ is_a: PATO:0001334 ! diameter
 [Term]
 id: PATO:0002042
 name: decreased anterior-posterior diameter
-def: "An anterior-posterior diameter quality which is relative small." [PATOC:GVG]
+def: "An anterior-posterior diameter quality which is relatively small." [PATOC:GVG]
 subset: value_slim
 synonym: "low anterior-posterior diameter" EXACT []
 is_a: PATO:0002041 ! anterior-posterior diameter
@@ -13349,7 +13347,7 @@ is_a: PATO:0002041 ! anterior-posterior diameter
 [Term]
 id: PATO:0002043
 name: increased anterior-posterior diameter
-def: "An anterior-posterior diameter quality which is relative large." [PATOC:GVG]
+def: "An anterior-posterior diameter quality which is relatively large." [PATOC:GVG]
 subset: value_slim
 synonym: "high anterior-posterior diameter" EXACT []
 is_a: PATO:0002041 ! anterior-posterior diameter
@@ -13773,7 +13771,7 @@ creation_date: 2009-10-01T03:00:20Z
 [Term]
 id: PATO:0002089
 name: polycystic
-def: "A structure quality inhering in a bearer by virtue of the bearer's body consisting of more than one sac." [mondofacto:mondofacto "http://www.mondofacto.com/facts/dictionary?query=polycystic"]
+def: "A structure quality inhering in a bearer by virtue of the bearer's body containing more than one cyst - formations of an epithelium bounded cavity not associated with neoplasia." [PATOC:GVG]
 subset: value_slim
 synonym: "multicystic" EXACT []
 is_a: PATO:0001673 ! cystic
@@ -14272,7 +14270,7 @@ creation_date: 2009-10-30T02:18:39Z
 [Term]
 id: PATO:0002144
 name: increased radiopacity
-def: "A radiopacity that is relative high." [PATOC:GVG]
+def: "A radiopacity that is relatively high." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0002136 ! radiopacity
 relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
@@ -14282,7 +14280,7 @@ creation_date: 2009-10-30T03:30:39Z
 [Term]
 id: PATO:0002145
 name: decreased radiopacity
-def: "A radiopacity that is relative low." [PATOC:GVG]
+def: "A radiopacity that is relatively low." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0002136 ! radiopacity
 relationship: decreased_in_magnitude_relative_to PATO:0000461 ! normal
@@ -14301,7 +14299,7 @@ creation_date: 2009-10-30T05:04:06Z
 [Term]
 id: PATO:0002147
 name: reduced virulence
-def: "A virulence that is relative low." [PATOC:GVG]
+def: "A virulence that is relatively low." [PATOC:GVG]
 subset: value_slim
 synonym: "attenuated" EXACT []
 is_a: PATO:0002146 ! virulence
@@ -14312,7 +14310,7 @@ creation_date: 2009-10-30T05:05:02Z
 [Term]
 id: PATO:0002148
 name: increased virulence
-def: "A virulence that is relative high." [PATOC:GVG]
+def: "A virulence that is relatively high." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0002146 ! virulence
 relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal

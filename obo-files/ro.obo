@@ -6,8 +6,6 @@ remark: <p>This ontology contains logical relations to be shared across the diff
 idspace: OBO_REL http://www.obofoundry.org/ro/ro.owl# "OBO Relation ontology official home on OBO Foundry"
 remark: cvs version $Revision: 1.13 $
 remark: release version 1.01
-date: 20:3:2009 18:23
-remark: Date added manually by NH (based on the CVS repository)
 
 [Typedef]
 id: OBO_REL:is_a

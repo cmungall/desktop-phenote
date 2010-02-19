@@ -1,5 +1,6 @@
 format-version: 1.2
-date: 14:01:2010 13:38
+date: 07:02:2010 13:12
+saved-by: kareneilbeck
 auto-generated-by: OBO-Edit 2.1-beta1
 subsetdef: biosapiens "biosapiens protein feature ontology"
 subsetdef: SOFA "SO feature annotation"
@@ -6701,6 +6702,7 @@ is_a: SO:0000240 ! chromosome_variation
 id: SO:0000804
 name: engineered_region
 def: "A region that is engineered." [SO:xp]
+synonym: "construct" EXACT []
 synonym: "engineered region" EXACT []
 synonym: "engineered sequence" EXACT []
 is_a: SO:0001409 ! biomaterial_region
