@@ -399,7 +399,9 @@ public class Config {
       try {
         log().debug("doWipeout: about to copy " + masterUrl + " to " + localFile); // DEL
         FileUtil.copyUrlToFile(masterUrl,localFile); // Ex  put method in inner class?
-      } catch (IOException e) { throw new ConfigException(e); }
+      } catch (IOException e) { 
+        log().error("doWipeout: got IO exception trying to copy " + masterUrl + ": " + e.getMessage());
+        throw new ConfigException(e); }
     }
 
     private void sameVersionMessage(String type) {
