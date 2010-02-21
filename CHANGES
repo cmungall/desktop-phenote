@@ -32,6 +32,10 @@ multiple times, in OntologyDataAdapter.mapNamespacesToOntologies
 - Europen-style dates in input (e.g., "20.10.2009") could not be parsed, and
 thus were lost and not saved in the output.
 Phenote can now handle THAT SPECIFIC DATE FORMAT (dd.MM.yyyy) as well as the
-default SimpleDateFormat.  Any other date format will still fail.  Note that
-if you save, the date will be saved in SimpleDateFormat default format ("Oct
-20, 2009"), not in the original input format ("20.10.2009").
+default SimpleDateFormat.  Any other date format will still fail.
+
+1.7-beta9:
+In beta6, I enabled Phenote to use the config file in .phenote if it couldn't
+update it from the master repository.  This version adds similar robustness
+for the ontology files: if we can't get new ones from the repository for some
+reason, just use the local copies.
