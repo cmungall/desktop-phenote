@@ -461,20 +461,10 @@ public class FileUtil {
     catch (FileNotFoundException e) { throw new OntologyException(e); }
   }
 
-  /** goes thru url line by line and copies to file - is there a better way to 
-      do this? actually should do copy anymore should read in and write out xml
-      adding version along the way */
+  /** Copies contents of an URL to a file (using proxy if configured) */
   /** Used by Config */
   public static void copyUrlToFile(URL configUrl, File myPhenote) throws IOException {
     LOG.info("About to copy "+configUrl+" to "+myPhenote);
-//       InputStream is = configUrl.openStream();
-//       FileOutputStream os = new FileOutputStream(myPhenote);
-//       for(int next = is.read(); next != -1; next = is.read()) {
-//         os.write(next);
-//       }
-//       is.close();
-//       os.flush();
-//      os.close();
     // 1/25/2010: Might need to use a proxy.
     URLConnection urlConnection = getURLConnectionWithOrWithoutProxy(configUrl);
     InputStream is = urlConnection.getInputStream();
