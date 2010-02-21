@@ -283,7 +283,7 @@ public class OntologyDataAdapter2 {
     URL url = null;
     try { url = FileUtil.findFile(filename); }
     catch (OntologyException oe) {
-      System.out.println(filename+" not found locally, trying url if configured ");
+      LOG.error(filename+" not found locally, trying url if configured ");
     }
 
     // if repos url configured then check if its more up to date - if so copy
@@ -385,7 +385,7 @@ public class OntologyDataAdapter2 {
 
       try { 
         localUrl = new File(FileUtil.getDotPhenoteOboDir(),file).toURL();
-        LOG.info("Downloading new ontology from repository "+reposUrl+" to "+localUrl);
+        LOG.info("About to download new ontology from repository "+reposUrl+" to "+localUrl);
         this.updateLoadingScreen("downloading from repository: "+ontol, true);
 
 //        copyReposToLocal(reposUrl,localUrl);
