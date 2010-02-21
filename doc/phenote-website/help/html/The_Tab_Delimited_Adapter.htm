@@ -8,18 +8,20 @@
 <BODY BGCOLOR=#ffffff>
 <H1>The Tab-Delimited Adapter</H1>
 <P>Purpose:&nbsp; For loading and saving annotation data in a 
-easy-to-read format.</P>
+simple, easy-to-read format.</P>
 <P>Extensions:&nbsp; <STRONG>.xls</STRONG> 
 <STRONG>.tab</STRONG></P>
 <P>Notes:&nbsp; These files can be directly imported to external spreadsheet 
 applications like Microsoft Excel.</P>
 <P>You must make sure that you are using the same Phenote configuration when 
-loading a file as was used to save it.&nbsp; For example, if you had "demo" 
-configuration loaded when you saved your data file, then you must have the demo 
-configuration loaded when you try opening your data file.&nbsp; If, in the 
-meantime, you have changed your configuration, you must change it back.</P>
+loading a file as was used to save it.&nbsp; For example, if you were using
+  the "demo" 
+configuration when you saved your data file, then you must be using the demo 
+configuration when you try opening your data file.&nbsp; If, in the 
+meantime, you have changed your configuration, you must change it back, or
+  your data will not load correctly.</P>
 <P>&nbsp;</P>
-<P>When saving your annotations, the first line of the file will contain the 
+<P>When your save annotations in tab-delimited format, the first line of the file will contain the 
 column headings.&nbsp; These column headings are derived from the field names 
 specified in the configuration file.</P>
 <P>&nbsp;</P>
@@ -37,7 +39,7 @@ file.&nbsp; These are both placed in the file as a conveniece to read
 for&nbsp;the user.</P>
 <P>Upon reading the file, only the ID column is used and the 
 "Name" column is skipped over; column headings are thrown out.</P>
-<P>You can generate your own tab-delimited files from 
-external applications so long as they follow this format.</P>
+<P>Phenote can load tab-delimited files from 
+external applications as long as they follow this format.</P>
 </BODY>
 </HTML>

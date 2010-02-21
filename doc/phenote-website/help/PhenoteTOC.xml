@@ -11,7 +11,7 @@
      <tocitem text="Licensing Information" target="Licensing_Information"/>
 </tocitem>
 <tocitem text="Getting Started" target="Getting_Phenote_Started">
-     <tocitem text="Phenote Webstart" target="Phenote_Webstart"/>
+     <tocitem text="Installing Phenote" target="Installing"/>
      <tocitem text="Phenote from the Command Line" target="Phenote_from_the_Command_Line"/>
      <tocitem text="Ontologies included with Phenote" target="Ontologies_included_with_Phenote"/>
      <tocitem text="Running Phenote for the First Time" target="Running_Phenote_for_the_First_Time"/>

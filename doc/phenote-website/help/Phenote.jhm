@@ -36,7 +36,7 @@
    <mapID target="Ontologies" url="html/Ontologies.htm"/>
    <mapID target="Ontologies_included_with_Phenote" url="html/Ontologies_included_with_Phenote.htm"/>
    <mapID target="Phenote_from_the_Command_Line" url="html/Phenote_from_the_Command_Line.htm"/>
-   <mapID target="Phenote_Webstart" url="html/Phenote_Webstart.htm"/>
+   <mapID target="Installing" url="html/Installing.htm"/>
    <mapID target="Running_Phenote_for_the_First_Time" url="html/Running_Phenote_for_the_First_Time.htm"/>
    <mapID target="Sample_Annotations" url="html/Sample_Annotations.htm"/>
    <mapID target="Sample_Configuration_1" url="html/Sample_Configuration_1.htm"/>

@@ -19,11 +19,11 @@
 	Phenote is both a complete piece of software and a software toolkit designed to facilitate the <b>annotation of biological phenotypes using ontologies</b>.  It provides an interface and infrastructure to record genotype-phenotype pairs, together with the provenance for the annotation.  Typical users of Phenote include literature curators, laboratory researchers, and clinicians looking for a method to record data in a <b>user-friendly</b> and <b>computable</b> way.
 	</p>
 	<p>
-	Annotations recorded by Phenote are based on the <a href="http://www.fruitfly.org/~cjm/obd/formats.html">EQ model</a> for representing phenotypes, combining entities from any ontology with qualities (such as PATO).
+	Annotations recorded by Phenote are based on the <a target="_new" href="http://genomebiology.com/2010/11/1/R2/">EQ model</a> for representing phenotypes, combining entities from any ontology with qualities (such as PATO).
 	</p>
 	<h2>Features include:</h2>
 	<ul>
-	  <li>Friendly spreadsheet-like interface
+	  <li>Spreadsheet-like interface
 	  </li>
 	  <li>Type-ahead-suggest (autocompletion) for terms within ontologies
 	  </li>
@@ -118,7 +118,7 @@
 	    <a
 	    href="http://www.nescent.org/phenoscape/Main_Page">Phenoscape</a>
 	    Jamboree Meeting, <a href="http://www.nescent.org/">NESCent</a>,
-	    Durham, NC, April 17-21</p>
+	    Durham, NC, April 17-21, 2008</p>
 	    </li -->
 	  </ul>
 	  <h3><a href="http://www.phenote.org/events.shtml">Past Events...</a></h3>	  
