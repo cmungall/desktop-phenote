@@ -106,7 +106,7 @@ public class OntologyDataAdapter {
 
   private void initOntolsOneOboSession() {
     try {
-      LOG.debug("Loading obo files");
+      LOG.debug("Loading ontology files");
       OBOSession os = loadAllOboFilesIntoOneOboSession();
       LOG.debug("initializing char fields");
       initCharFields();
@@ -130,15 +130,23 @@ public class OntologyDataAdapter {
   private OBOSession loadAllOboFilesIntoOneOboSession() throws OntologyException {
     // get unique list of obo files
     Collection<String> files = new ArrayList<String>();
+//    Collection<String> ontologies = new ArrayList<String>();
     for (FieldConfig fieldConfig : cfg().getEnbldFieldCfgs()) {
       for (OntologyConfig oc : fieldConfig.getOntologyConfigList()) {
+        // We should be able to avoid looking for ontology file twice, but findOboUrlString actually does other stuff, too,
+        // so it's non-trivial to change this behavior (and the amount of time wasted is small), so I'm leaving it as-is for now.
+//        if (ontologies.contains(oc.getName())) {
+//          LOG.debug("loadallOboFilesIntoOneOboSession: already looked for ontology file for " + oc.getName());
+//        }
         try {
           // this actually does repos synching, should only do once per obo file,
           // but it wont download something twice as 2nd time it will be in synch
-          String file = findOboUrlString(oc); // throws oex if not found
+          String file = findOboUrlString(oc); // throws oex if not found.  (If found, sets loadUrl for oc.)
           if (!files.contains(file)) { // dont load file twice
             files.add(file);
           }
+//          if (!ontologies.contains(oc.getName()))
+//            ontologies.add(oc.getName());
         }
         catch (OntologyException e) {
           String m = "Got exception while trying to load obo file--please check config & obo files.  Exception: " + e.getMessage();
@@ -241,11 +249,12 @@ public class OntologyDataAdapter {
     String filename = ontCfg.getFile();
     if (filename == null)
       throw new OntologyException(ontCfg.getName()+" has null file");
+
     // throws OntologyEx if file not found -- catch & try url
     URL url = null;
     try { url = FileUtil.findFile(filename); }
     catch (OntologyException oe) {
-      System.out.println(filename+" not found locally, trying url if configured ");
+      LOG.error(filename+" not found locally, trying url if configured ");
     }
 
     // if repos url configured then check if its more up to date - if so copy
@@ -254,7 +263,7 @@ public class OntologyDataAdapter {
       try {
         URL reposUrl = ontCfg.getReposUrl(); // throws MalfUrlEx
         //long mem = Runtime.getRuntime().totalMemory()/1000000; //startTimer();
-        LOG.debug(reposUrl+": checking repository for newer version");
+        LOG.info("Checking repository for newer version of " + ontCfg.getName() + ": " + reposUrl);
         this.updateLoadingScreen("Checking for updates: "+ontCfg.getName(), true);
         // if out of synch copies repos to local(.phenote/obo-files)
         // url may be jar/obo-files or svn/obo-files but this function will put file
@@ -285,6 +294,7 @@ public class OntologyDataAdapter {
   throws OntologyException {
 
     boolean useRepos = false;
+    boolean downloadFailed = false;
     if (localUrl == null) {
       useRepos = true;
     }
@@ -292,22 +302,29 @@ public class OntologyDataAdapter {
       long reposDate = 0;
       try {
         reposDate = getOboDate(reposUrl); // throws ex if no date
+        LOG.debug("For " + reposUrl + ", obodate = " + reposDate);
       }
       catch (OntologyException oe) { // no reposDate
         LOG.error("got OntEx trying to parse date from " + reposUrl + ": "+oe); 
         // already have local copy, no date to synch with, dont bother downloading from
         // repos, there should probably be a config to override this (always download)
-        if (localUrl != null)
-          useRepos = false; 
+        if (localUrl != null) {
+          useRepos = false;
+          downloadFailed = true;
+          LOG.error("Failed to read " + reposUrl + "--using (possibly out-of-date) local version " + localUrl + " instead.");
+        }
+        else
+          LOG.error("Uh oh--localUrl is null for " + ontol);
       }
-      LOG.debug("For " + reposUrl + ", obodate = " + reposDate);
       long loc = 0;
       int timer = cfg().getUpdateTimer();
       boolean autoUpdate = cfg().autoUpdateIsEnabled();
       if (localUrl != null) {
-        try { loc = getOboDate(localUrl); }
+        try { 
+          loc = getOboDate(localUrl);
+          LOG.debug("Date of localURL " + localUrl + " = " + loc);
+        }
         catch (OntologyException e2) { loc = 0; } // no local date - keep as 0
-	LOG.debug("Date of localURL " + localUrl + "= " + loc);
       }
       else
         useRepos = true;
@@ -315,11 +332,12 @@ public class OntologyDataAdapter {
       //if autoupdate without popup
       //LOG.debug("repos date "+reposDate+" local date "+loc);
       if ((autoUpdate && (timer==0)) && (reposDate > loc)) {
-	  useRepos = true;
+        LOG.debug("Repository is newer than local copy " + localUrl);
+        useRepos = true;
       } 
-      else if ((autoUpdate && (timer==0)) && (loc == 0 || reposDate == 0)) {
-	      LOG.debug("Couldn't determine update time of both local copy and repository--updating local copy " + localUrl);
-	      useRepos = true;
+      else if ((autoUpdate && (timer==0) && !downloadFailed) && (loc == 0 || reposDate == 0)) {
+        LOG.debug("Couldn't determine update time of both local copy and repository--will update local from repository.");
+        useRepos = true;
       }
       else if (reposDate > loc || useRepos) {
         useRepos = SynchOntologyDialog.queryUserForOntologyUpdate(ontol);
@@ -342,18 +360,18 @@ public class OntologyDataAdapter {
 
       try { 
         localUrl = new File(FileUtil.getDotPhenoteOboDir(),file).toURL();
-        LOG.info("Downloading new ontology from repository "+reposUrl+" to "+localUrl);
+        LOG.info("About to download new ontology from repository "+reposUrl+" to "+localUrl);
         this.updateLoadingScreen("Downloading " + ontol + " ontology from "+ reposUrl + "...", true);
 
         FileUtil.copyReposToLocal(reposUrl,localUrl);
       }
       catch (MalformedURLException e) { 
-	      LOG.error("Got error while trying to download ontology from repository "+reposUrl+" to "+localUrl);
-	      throw new OntologyException(e); 
+        LOG.error("Got error while trying to download ontology from repository "+reposUrl+" to "+localUrl);
+        throw new OntologyException(e); 
       }
     }
     else  // useRepos is false
-      LOG.debug("Ontology file " + filename + " doesn't need to be updated.");
+      LOG.debug("Ontology file " + localUrl + " not updated.");
 
     return localUrl;
   }
