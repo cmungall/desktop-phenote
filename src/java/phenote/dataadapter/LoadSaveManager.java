@@ -33,7 +33,9 @@ public class LoadSaveManager {
   
   public LoadSaveManager(CharacterListManager clManager) {
     this.characterListManager = clManager;
-    fileChooser = new JFileChooser();
+    // I tried making the file chooser open at ".", hoping that would make it start in the Phenote dir rather than in the user's home dir,
+    // but it didn't help.
+    fileChooser = new JFileChooser("");
     List<DataAdapterI> adapters = Config.inst().getDataAdapters();
     if (adapters == null) {
       log().error("No adapters configged, cant load or save");
@@ -252,6 +254,7 @@ public class LoadSaveManager {
   
   private File runOpenDialog() {
     fileChooser.setAcceptAllFileFilterUsed(true);
+//    log().debug("runOpenDialog: current dir = " + fileChooser.getCurrentDirectory()); // DEL
     int returnValue = fileChooser.showOpenDialog(null);
     if (returnValue == JFileChooser.APPROVE_OPTION) {
       return fileChooser.getSelectedFile();
