@@ -8,7 +8,7 @@ set.  Proxy setting saved in user's config.xml.
 - Improved About.
 - Fixed Apple->Exit (was doing nothing)
 - When you ran Phenote for the first time from the installed version, it would
-let you choose your config and then shows nothing at all for several minutes
+let you choose your config and then would show nothing at all for several minutes
 while it downloads the ontology files.  Now it at least pops up a dialog box
 that says "Updating ontology files--please wait".  Unfortunately, I can't get
 it to put anything inside the dialog box until it's done downloading the
@@ -35,7 +35,8 @@ Phenote can now handle THAT SPECIFIC DATE FORMAT (dd.MM.yyyy) as well as the
 default SimpleDateFormat.  Any other date format will still fail.
 
 1.7-beta9:
-In beta6, I enabled Phenote to use the config file in .phenote if it couldn't
-update it from the master repository.  This version adds similar robustness
-for the ontology files: if we can't get new ones from the repository for some
-reason, just use the local copies.
+- In 1.7-beta6, we enabled Phenote to use the config file in .phenote if it
+couldn't update it from the master repository.  This version adds similar
+robustness for the ontology files: if Phenote can't get new ones from the
+repository for some reason, it just uses the local copies.
+- Updated help pages and website
