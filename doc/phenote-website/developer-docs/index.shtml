@@ -15,46 +15,24 @@
 	<div class="catch_phrase">
 	  Phenote Developer Documentation Resource Page
 	</div>
-	<p>This page is your starting point if you are a developer on the Phenote project.  Some interesting articles can be found below:</p>
+	<p>This page is your starting point if you are a developer on the
+	Phenote project.  Here are some useful reference pages:</p>
 	<ul>
 	  <li><a href="getting-source-code-in-eclipse.shtml">Getting the Source code</a> (command line or in Eclipse)  
 	  </li>
-	  <li><a href="http://www.phenote.org/doc/api/">Browse the API Javadocs</a></li>
+	  <li><a href="doc/api/">Browse the API Javadocs</a></li>
 	  <li><a href="dataadapter.shtml">Working with Data Adapters</a>
 	  </li>
-	  <li><a href="developer-docs.shtml">Adding new configuration parameters</a>
+	  <li><a href="developer-docs.shtml">Notes on adding new configuration
+	  parameters and other developer issues</a>
+            <li>	    <a href="http://sourceforge.net/tracker/?group_id=76834&atid=887913"
+	       title="Bug Tracker">
+		Bug Tracker
+	    </a>
 	  </li>
 	</ul>
       </div>
     </div>
-	<div id="sidebar_container">
-
-	  <div id="sidebar_content">
-
-	    <div class="content_box_head_blue">
-	    Quick Links
-	    </div>
-
-	    <div class="content_box_blue">
-
-	    <p class="quick_link">
-	    <img src="images/star.gif" alt=""  class="icon_green"/>
-	    <a href="http://sourceforge.net/tracker/?group_id=76834&atid=887913"
-	       title="Bug Tracker">
-		Bug Tracker
-	    </a>
-	    </p>
-
-	    <p class="quick_link">
-	    <img src="images/star.gif" alt=""  class="icon_green"/>
-	    <a href="http://www.phenote.org/doc/api/" title="Java API docs">
-	      Java API docs
-	    </a>
-	    </p>
-
-	    </div>
-
-	   </div>
     </div>
 
     <!--#include virtual="../ssi/footer.html" -->

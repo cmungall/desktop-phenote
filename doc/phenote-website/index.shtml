@@ -3,7 +3,7 @@
   <head>
 
     <!--#include virtual="ssi/head.html" -->
-    <title>Phenote: A Phenotype Annotation Tool using Ontologies</title>
+    <title>Phenote: A Phenotype Annotation Tool Using Ontologies</title>
 
   </head>
   <body>
@@ -60,9 +60,9 @@
 
 	  <p class="quick_link">
 	    <img src="images/star.gif" alt=""  class="icon_green"/>
-	    <a href="http://www.phenote.org/phenote/1.5/phenote.jnlp"
-	       title="Lauch Phenote via Webstart">
-		Launch Phenote via Webstart
+	    <a href="download.shtml"
+	       title="How to download and install Phenote">
+              How to download and install Phenote
 	    </a>
 	  </p>
 
@@ -79,7 +79,7 @@
 	  <img src="images/calendar.gif"
 	       alt="Upcoming Events" 
 	       class="icon_blue"/>
-	  <a href="events.shtml">Upcoming Events</a>
+	  <a href="events.shtml">Phenote Events</a>
 	</div>
 
 	<div class="content_box_green">
@@ -121,7 +121,7 @@
 	    Durham, NC, April 17-21, 2008</p>
 	    </li -->
 	  </ul>
-	  <h3><a href="http://www.phenote.org/events.shtml">Past Events...</a></h3>	  
+	  <h3><a href="events.shtml">Past Events...</a></h3>	  
 	</div>
 
 	<div class="content_box_head_green">
@@ -135,12 +135,11 @@
 	  <!--No news is good news!-->
 	  
 	  <!-- Do not destry the following event template -->
-	  <p>06.11.2008 - Phenote 1.6-beta6 available
-	  on <a href="https://sourceforge.net/project/showfiles.php?group_id=76834&package_id=270424">SourceForge</a>
-	  for Mac and Windows.  (Source tar file available for Unix users to compile.)
-	  <p>04.15.2008 - <a href="https://sourceforge.net/project/showfiles.php?group_id=76834">Phenote SourceForge page</a> introducted to house beta releases.</p>
-	  <p>03.04.2008 - First release of <a href="download.shtml">Phenote+</a> with platform-specific installers.</p>
-	  <p>03.01.2008 - We'd like to know more about what kind of computer you are using.  <a href="http://FreeOnlineSurveys.com/rendersurvey.asp?sid=bf1bbbvdppbjw56402139" onClick="window.open('http://FreeOnlineSurveys.com/rendersurvey.asp?sid=bf1bbbvdppbjw56402139', '','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width=700,height=480');return false" ><b>Please take our survey</b></a>.</p>
+	  <p>06.11.2008 - Phenote 1.7-beta9 available
+	  on <a href="https://sourceforge.net/project/showfiles.php?group_id=76834&package_id=270424">SourceForge</a>.
+	  Improvements include support for proxies.</p>
+
+	  <h3><a href="events.shtml">Past News...</a></h3>	  
 	  <!--
 	  <h3>Event Title</h3>
 	  <ul class="events">

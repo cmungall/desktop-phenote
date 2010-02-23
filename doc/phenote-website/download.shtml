@@ -14,57 +14,58 @@
       <div id="main_content">
 	<div class="catch_phrase">
 	</div>
-	<h2>For Users</h2>
-	<h3>Phenote and Phenote+ webstart edition</h3>
-	<ul>
-	<li>1.6-beta4 release: <a href="http://www.phenote.org/phenote/1.6-beta4/phenote.jnlp">Phenote</a> | <a href="http://www.phenote.org/phenote/1.6-beta4/phenote-plus.jnlp">Phenote+</a></li>
-	<li>1.5 stable release: <a href="http://www.phenote.org/phenote/1.5/phenote.jnlp">Phenote</a> | <a href="http://www.phenote.org/phenote/1.5/phenote-plus.jnlp">Phenote+</a></li>
-	<li><a href="http://www.phenote.org/phenote/phenote.html">Older releases</a></li>
-	</ul>
-	<p> You may be prompted to sign a certificate and allow the download.  This will take a few minutes the first time you do this.
-	</p>
-	<h3>Phenote+ installer edition</h3>
-	<ul>
-	<li>Platform-specific installers are available for Phenote+ v1.5 at <a href="https://sourceforge.net/project/showfiles.php?group_id=76834">sourceforge</a> or here:  	
-	<a href="http://www.phenote.org/phenote/1.5/Phenote+_1_5_macos_installer.dmg">MacOS X</a> |
-	<a href="http://www.phenote.org/phenote/1.5/Phenote+_1_5_windows_installer.exe">Windows</a> |
-	<a href="http://www.phenote.org/phenote/1.5/Phenote+_1_5_linux_installer.rpm">Linux</a> |
-	<a href="http://www.phenote.org/phenote/1.5/Phenote+_1_5_unix_installer.sh">Unix</a>
-	</li>
+<h1>Downloading Phenote</h1>
+	<h2>For users</h2>
+	<h3>Phenote installer edition</h3>
+	Platform-specific installers are available for Phenote v1.7-b9 at <a href="https://sourceforge.net/project/showfiles.php?group_id=76834">SourceForge</a> or here:
+	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta9_macos_installer.dmg">MacOS X</a> |
+	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta9_windows_installer.exe">Windows</a> |
+	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta9_linux_installer.rpm">Linux</a> |
+	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta9_unix_installer.sh">Unix</a>
 	<ol>
 	  <li>Download your platform-specific package.  (For MacOS, this should self-extract into a disk image. If it doesn't, double-click on the file.  You should see an
-	  icon for the "drive" that the Phenote+ application is on.)</li>
+	  icon for the "drive" that the Phenote application is on.)</li>
 	  <li>Double-click on the Phenote installer icon.  This will open up the installer software.  You will be asked a few questions, such as the installation location.</li>
 	  <li>When it's finished installing, you are ready to go!
 	  Double-click the Phenote application icon to launch Phenote.</li>
 	  </ol>
 	</li>
 	</ul>
-	<p>Phenote+ v1.6:  We will be distributing Phenote+ using the SourceForge download system.  You can now find Phenote <a href="https://sourceforge.net/project/showfiles.php?group_id=76834&package_id=270424">betas</a> and <a href="https://sourceforge.net/project/showfiles.php?group_id=76834&package_id=272237">releases</a> by visiting their pages.  </p>
 
-	<p> We will continue to post links to major releases on this website, but you are invited to download the software by directly connecting to the <a href="https://sourceforge.net/project/showfiles.php?group_id=76834">Phenote SourceForge Project page</a></p>
+	<p> We will continue to post links to major releases on this website.
+	You can also install new releases from the <a href="https://sourceforge.net/project/showfiles.php?group_id=76834">Phenote SourceForge Project page</a>.</p>
 
-	<h3>Important message</h3>
-	<p>Starting with version 1.5, we have introduced a new look and feel that we
-	call the "plus" edition.  
-	If you would prefer to keep using the original Phenote, launch
-	the webstart edition through the link above.</p>
+	<h3>Webstart edition</h3>
+        <p>The webstart edition is currently unavailable while we resolve some
+        problems.  Please use the installer edition instead.</p>
+
+	<h3>Note about Phenote and Phenote+</h3>
+        <p>There's a small nomenclature change starting in v1.7.  In 2008, the
+        Phenote developers introduced a new "look and feel" to the Phenote
+        user interface.  They called this new version "Phenote+".  At that
+        time, Phenote+ was considered a still-experimental version, and
+        "regular" Phenote was still available.  We have decided that it's time
+        to retire the old Phenote interface and make the Phenote+ interface
+        the default.  (Phenote+ will henceforth be referred to as "Phenote";
+        there won't be anything called "Phenote+".)
+</p>
 
 	<h2>For developers</h2>
 	Check out our special documentation for running Phenote from the <a href="developer-docs/getting-source-code-in-eclipse.shtml">command line or in Eclipse</a> 
 
 	<h2>Hardware requirements</h2>
 	<ul>
-	<li> 400 Mhz processor or faster.</li>
+	<li> 400 Mhz processor or faster</li>
 	<li> 500+ MB RAM </li>
 	<li> 200 MB free disk space on your computer </li>
 	<li> Internet connection (broadband is best).  Required for automatic updates of ontologies and some functions. </li>
 	</ul>
 	<h2>Software requirements</h2>
 	<ul>
-	<li> Any of these operating systems:  Windows XP; Mac OSX; Linux; Solaris </li>
-	<li> To use webstart:  Internet browser with webstart installed </li>
-	<li> To run from the command line:  Java 1.5 or later; Ant </li>
+	<li> Any of these operating systems:  Windows XP; Mac OSX; Linux;
+	Solaris </li>
+        <li> Java 1.5 or later </li>
+	<li> To run from the command line:  Ant </li>
 	</ul>
 	
       </div>
@@ -75,28 +76,23 @@
       <div id="sidebar_content">
 
 	<div class="content_box_head_blue">
-	  Recently added features, Phenote+ version 1.5
+	  Recently added features and bug fixes, Phenote version 1.7-b9
 	</div>
 
 	<div class="content_box_blue">
-	<b>feature:</b> New look and feel with Phenote+ <br />
-	<ul>
-	  <li> Ability to move different panels around to customize the user experience. [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1729114&group_id=76834&atid=887913">1729114</a>]  These panels can be "locked" by going to the Settings->Lock Docking Components menu item. [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1882110&group_id=76834&atid=887913">1882110</a>]</li>
-	  <li> Panels can be "undocked" so that they can float independently around the screen</li>
-	  <li>Phenote can interoperate with some obo-edit components, such as the tree-like dag viewer and the graph editor. [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1822371&group_id=76834&atid=887913">1822371</a>]</li>
-	</ul>
-	<b>feature</b>: New ontology-update window shows the user in one place
-	which ontologies need updating.  <br />
-	<b>feature</b>: if user changes their annotations since previous save, user is prompted for resave [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1810448&group_id=76834&atid=887913">1810448</a>] <br />
-	<b>feature:</b> "Save" added as menu item to overwrite currently open file [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1803824&group_id=76834&atid=887913">1803824</a>].  A dot in the titlebar will disappear upon save. [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1893249&group_id=76834&atid=887913">1893249</a>] <br />
-	<b>feature:</b> Solaris OS now supported for webstart versions <br />
-	<b>feature:</b> addition of the ProtocolEditor as a plug-in to phenote.  For more information, please see the <a href="http://users.openmicroscopy.org.uk/~ola/720x540/OMERO.ProtocolEditor-new-omero-movie.mov">Protocol Editor demo</a>.  This plugin is being developed by the folks at the <a href="http://openmicroscopy.org/">Open Microscopy Environment</a><br />
-	<b>feature:</b> Term info panel updated with collapsible panes.<br />
-	<b>change:</b> post-compositions are now displayed in multi-line style [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1579357&group_id=76834&atid=887913">1579357</a>]<br />
-	<b>feature:</b>Lookup abstracts from PubMed, if Pub field is configured.This can be tried in the "demo" configuration. <br />
-	<b>bugfix:</b> Field name is now always shown, even if there is only one ontology configured for that field.  It used to default to the ontology name in this instance. [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1852112&group_id=76834&atid=887913">1852112</a>]<br />
-	<b>bufgix:</b> Phenote can now accomodate empty E/Q fields when mapping to the annotation model [<a href="http://sourceforge.net/tracker/index.php?func=detail&aid=1894065&group_id=76834&atid=887913">1894065</a>]<br />
-	<b>See the <a href="phenote-release-notes.shtml">phenote release notes</a> for more details...<br />
+          <ul>
+            <li><b>Phenote+ is now just called Phenote.  The old Phenote UI will be de-supported.</b>
+            </li><li><b>Added support for proxies.</b>  Users can now set proxy via a GUI.  All
+              ontology-fetching, date-checking, etc. will then be done via the
+              proxy that is set.
+              </li><li>Deals better with failure to update ontology files from remote
+            URLs (falls back on local copies instead).
+              </li><li>Improved startup speed by loading each ontology once at startup, rather than
+              multiple times.
+            </li><li>Now handles Europen-style dates in annotation files
+            (e.g., "20.10.2009").
+            </ul>   
+	<b>See the <a href="phenote-release-notes.shtml">release notes</a> for more details...<br />
 	</div>
       </div>
     </div>

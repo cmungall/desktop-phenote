@@ -3,7 +3,7 @@
   <head>
 
     <!--#include virtual="ssi/head.html" -->
-    <title>Phenote</title>
+    <title>Phenote:  Contact Us</title>
 
   </head>
   <body>
@@ -23,7 +23,7 @@
 	</script></p>
 	<p>Requirements, Analysis, Documentation:
 	<script type="text/javascript">
-	obfuscate("lbl.gov", "nlwashington", "Nicole Washington");
+	obfuscate("berkeleybop.org", "nlharris", "Nomi Harris");
 	</script></p>
 	<p>Phenotype EQ model and XML data formats:
 	<script type="text/javascript">
@@ -31,30 +31,37 @@
 	</script></p>
 	<p>General Questions:
 	<script type="text/javascript">
-	obfuscate("lists.sourceforge.org", "obo-phenote", "Phenote Mailing List");
+	obfuscate("lists.sourceforge.net", "obo-phenote", "Phenote Mailing List");
 	</script></p>
 <br>
 	<h1>Mailing lists</h1>
-	<p> There are several relevant mailing lists user's and/or developers
+	<p> There are several relevant mailing lists users and/or developers
 	might be interested in joining:</p>
 	<p>General phenote discussion and announcements
 	[ <script type="text/javascript">
-	obfuscate("lists.sourceforge.org", "obo-phenote", "Email");
+	obfuscate("lists.sourceforge.net", "obo-phenote", "Email");
 	</script> ]
 	[ <a href="https://lists.sourceforge.net/lists/listinfo/obo-phenote">Join</a> ]</p>
 	<p>Phenote software development
 	[ <script type="text/javascript">
-	obfuscate("lists.sourceforge.org", "obo-phenote-dev", "Email");
+	obfuscate("lists.sourceforge.net", "obo-phenote-dev", "Email");
 	</script> ]
-	[ <a href="https://lists.sourceforge.net/lists/listinfo/obo-phenote-dev">Join</a> ]</p>
+	[ <a href="https://lists.sourceforge.net/lists/listinfo/obo-phenote-dev">Join</a>
+	]</p>
+	<p>SourceForge svn commit mailing list
+	[ <script type="text/javascript">
+	obfuscate("lists.sourceforge.net", "obo-svn-commit", "Email");
+	</script> ]
+	[ <a href="https://lists.sourceforge.net/lists/listinfo/obo-svn-commit">Join</a>
+	]</p>
 	<p>Phenotype annotation discussion list
 	[ <script type="text/javascript">
-	obfuscate("lists.sourceforge.org", "obo-phenotype", "Email");
+	obfuscate("lists.sourceforge.net", "obo-phenotype", "Email");
 	</script> ] 
 	[ <a href="https://lists.sourceforge.net/lists/listinfo/obo-phenotype">Join</a> ]</p>
 	<p>General OBO ontology discussion
 	[ <script type="text/javascript">
-	obfuscate("lists.sourceforge.org", "obo-discuss", "Email");
+	obfuscate("lists.sourceforge.net", "obo-discuss", "Email");
 	</script> ]
 	[ <a href="https://lists.sourceforge.net/lists/listinfo/obo-discuss">Join</a> ]</p>
 	</p>

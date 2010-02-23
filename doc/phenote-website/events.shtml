@@ -3,7 +3,7 @@
   <head>
 
     <!--#include virtual="ssi/head.html" -->
-    <title>Phenote: Past News and Events</title>
+    <title>Phenote: News and Events</title>
 
   </head>
   <body>
@@ -13,26 +13,34 @@
     <div id="main_container_aux">
       <div id="main_content_aux">
 
+	<h1>Current News and Events</h1>
+	  <h2>February, 2010</h2>
+	  <ul>
+	    <li>02.25.2010, <a href="download.shtml">version 1.7-b9
+	    released</a> </li>
+	  </ul>
+<br>
+
 	<h1>Past News and Events</h1>
 
 	  <h2>September, 2008</h2>
 	  <ul>
-	    <li>09.10.2008, 9am PDT - Phenote Users Group, Online</li>
+	    <li>09.10.2008, 9am PDT - Phenote Users Group, online meeting</li>
 	  </ul>
 
 	  <h2>July, 2008</h2>
 	  <ul>
-	    <li>08.01.2008, 8:30am PDT - Phenote Users Group, Online</li>
+	    <li>08.01.2008, 8:30am PDT - Phenote Users Group, online meeting</li>
 	  </ul>
 
 	  <h2>June, 2008</h2>
 	  <ul>
-	    <li>06.05.2008, 8:30am PDT - Phenote Users Group, Online</li>
+	    <li>06.05.2008, 8:30am PDT - Phenote Users Group, online meeting</li>
 	  </ul>
 
 	  <h2>April, 2008</h2>
 	  <ul>
-	    <li>04.03.2008 - Phenote Users Group, Online</li>
+	    <li>04.03.2008 - Phenote Users Group, online meeting</li>
 	    <li>04.15.2008 - <a href="http://www.phenote.org/phenote/1.6-beta4/phenote.jnlp">Phenote webstart release 1.6-beta4</a></li>
 	    <li>04.16.2008 - Phenote will receive a "Google Summer of Code" student through our hosting organization, NESCent.  Welcome Michael Wallinga to our team for the summer.  You can find a description of his project <a href="http://www.nescent.org/wg_phyloinformatics/Phyloinformatics_summer_of_Code_2008#Matrix_display_of_phenotype_annotations_using_ontologies_in_Phenote">here</a>.</li>
 	    <li>04.17-21.2008 <a
@@ -43,11 +51,11 @@
 
 	<h2>March, 2008</h2>
 	<ul>
-	  <li>03.06.2008 - Phenote Users Group, Online
+	  <li>03.06.2008 - Phenote Users Group, online meeting
 	  </li>
 	  <li>03.03.2008 - <a href="http://www.phenote.org/phenote/1.5/phenote.jnlp">Phenote webstart release 1.5</a></li>
 	  <li>03.03.2008 - Silent release of <a href="http://www.phenote.org/download.shtml">Phenote+ for Mac OSX</a> </li>
-	  <li>03.01.2008 - We'd like to know more about what kind of computer you are using.  <a href="http://FreeOnlineSurveys.com/rendersurvey.asp?sid=bf1bbbvdppbjw56402139" onClick="window.open('http://FreeOnlineSurveys.com/rendersurvey.asp?sid=bf1bbbvdppbjw56402139', '','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width=700,height=480');return false" ><b>Please take our survey</b></a></li>	  
+	  <li>03.01.2008 - We'd like to know more about what kind of computer you are using.  <a href="http://Freeonline meetingSurveys.com/rendersurvey.asp?sid=bf1bbbvdppbjw56402139" onClick="window.open('http://Freeonline meetingSurveys.com/rendersurvey.asp?sid=bf1bbbvdppbjw56402139', '','toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width=700,height=480');return false" ><b>Please take our survey</b></a></li>	  
 	  </ul>
 	
 	<h2>February, 2008</h2>
@@ -55,25 +63,25 @@
 	  <li>02.19.2008 - <a href="/doc/api">API documentation</a> added to website</li>
 	  <li>02.07.2008 - With our upcoming release, Phenote will be known at <b>Phenote+</b></li>
 	  <li>02.07.2008 - <b>Developer Articles</b> - A new section was added to this website to store articles for Developers.  <a href="developer-docs/">Check it out...</a>.  You'll find it under the "Help" menu on this site.</li>
-	  <li>02.07.2008 - Phenote Users Group, Online
+	  <li>02.07.2008 - Phenote Users Group, online meeting
 	  </li>
 	</ul>
 	<h2>January, 2008</h2>
 	<ul>
 	  <li>January 10, Seminar, <a href="http://www.nescent.org/">NESCent</a>, Duke University, NC</li>
-	  <li>January 3, Phenote Users Group, Online
+	  <li>January 3, Phenote Users Group, online meeting
 	  </li>
 	</ul>
 	<h2>December, 2007</h2>
 	  <ul>
 	  <li>Dec 20, New Phenote Beta - <a href="http://www.phenote.org/download.shtml">version 1.5-beta2</a>
 	  </li>
-	  <li>Dec 6, Phenote Users Group, Online
+	  <li>Dec 6, Phenote Users Group, online meeting
 	  </li>
 	  </ul>
 	<h2>November</h2>
 	<ul>
-	  <li>Nov 1, Phenote Users Group, Online via WebEx
+	  <li>Nov 1, Phenote Users Group, online meeting via WebEx
 	  </li>
 	  <li>Nov 4, Talk, <a href="http://meetings.cshl.edu/meetings/info07.shtml">Genome Informatics</a>, Cold Spring Harbor, NY
 	  </li>	 
@@ -88,7 +96,7 @@
 	</li>
 	  <li>Oct 10, New Phenote Release - <a href="http://www.phenote.org/download.shtml">version 1.4</a>
 	  </li>
-	  <li>Oct 2, Phenote Users Group, Online via WebEx
+	  <li>Oct 2, Phenote Users Group, online meeting via WebEx
 	  </li>
 	</ul>
 
@@ -96,7 +104,7 @@
 	<h2>September</h2>
 	<ul>
 	  <li>Sept 17, - New website rolled out!  The website has the same content as the old one, just with a new look-and-feel.</li>
-	  <li>Sept 4, Phenote Users Group, Online
+	  <li>Sept 4, Phenote Users Group, online meeting
 	  </li>
 	</ul>
 	<h2>August</h2>
@@ -109,24 +117,24 @@
 	  </li>
 	  <li>Aug 13-15, site visit, <a href="http://www.nbirn.net/research/mouse/index.shtm">BIRN</a>, San Diego, CA
 	  </li>
-	  <li>Aug 7, <a href="http://www.bioontology.org/wiki/index.php/Phenote:Main_Page#Phenote:Agendas_.26_Transcripts">Phenote Users Group</a>, Online
+	  <li>Aug 7, <a href="http://www.bioontology.org/wiki/index.php/Phenote:Main_Page#Phenote:Agendas_.26_Transcripts">Phenote Users Group</a>, online meeting
 	  </li>
 	</ul>	
 	<h2>July</h2>
 	<ul>
-	  <li>July 3, <a href="http://www.bioontology.org/wiki/index.php/Phenote:Main_Page#Phenote:Agendas_.26_Transcripts">Phenote Users Group</a>, Online
+	  <li>July 3, <a href="http://www.bioontology.org/wiki/index.php/Phenote:Main_Page#Phenote:Agendas_.26_Transcripts">Phenote Users Group</a>, online meeting
 	  </li>
 	</ul>
 	<h2>June</h2>
 	<ul>
 	  <li>June 6, "Representing Phenotypes in OWL", <a href="http://owled2007.iut-velizy.uvsq.fr">OWL: Experiences and Directions Conference</a> Presentation, Innsbruck, Austria.  [<a href="http://owled2007.iut-velizy.uvsq.fr/PapersPDF/paper_40.pdf">PDF</a>] 
 	  </li>
-	  <li>June 5, <a href="http://www.bioontology.org/wiki/index.php/Phenote:Main_Page#Phenote:Agendas_.26_Transcripts">Phenote Users Group</a>, Online
+	  <li>June 5, <a href="http://www.bioontology.org/wiki/index.php/Phenote:Main_Page#Phenote:Agendas_.26_Transcripts">Phenote Users Group</a>, online meeting
 	  </li>
 	</ul>
 	<h2>May</h2>
 	<ul>
-	  <li>May 1, <a href="http://www.bioontology.org/wiki/index.php/Phenote:Main_Page#Phenote:Agendas_.26_Transcripts">Phenote Users Group</a>, Online
+	  <li>May 1, <a href="http://www.bioontology.org/wiki/index.php/Phenote:Main_Page#Phenote:Agendas_.26_Transcripts">Phenote Users Group</a>, online meeting
 	  </li>
 	</ul>
 	<h2>April</h2>
@@ -135,7 +143,7 @@
 	  </li>
 	  <li>Apr 11-12, site visit, <a href="http://www.wormbase.org">Wormbase</a>, Pasadena, CA
 	  </li>
-	  <li>Apr 10, <a href="http://www.bioontology.org/wiki/index.php/Phenote:Main_Page#Phenote:Agendas_.26_Transcripts">Phenote Users Group</a>, Online
+	  <li>Apr 10, <a href="http://www.bioontology.org/wiki/index.php/Phenote:Main_Page#Phenote:Agendas_.26_Transcripts">Phenote Users Group</a>, online meeting
 	  </li>
 	<li>Apr 5, <a href="http://www.bioontology.org/">NCBO</a> Scientific Advisory Board meeting</li>
 	</ul>

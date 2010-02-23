@@ -17,7 +17,7 @@
 	</div>
 
 	<p>
-	Phenote is both a complete piece of software and a software toolkit designed to facilitate the annotation of biological phenotypes using ontologies.  It provides an interface to record genotype-phenotype pairs, together with the provenance for the annotation.  Typical users of Phenote include literature curators, laboratory researchers, and clinicians looking for a method to record data in a user-friendly and computable way.
+	Phenote is both a complete piece of software and a software toolkit designed to facilitate the annotation of biological phenotypes using ontologies.  It provides an interface for recording record genotype-phenotype pairs, together with the provenance for the annotation.  Typical users of Phenote include literature curators, laboratory researchers, and clinicians looking for a method to record data in a user-friendly and computable way.
 	</p>
 	<p>
 	Data annotated with Phenote is based on the <a href="http://www.fruitfly.org/~cjm/obd/pheno-syntax.html">EQ model</a> for representing phenotypes, combining entities from any ontology with qualities (such as PATO).

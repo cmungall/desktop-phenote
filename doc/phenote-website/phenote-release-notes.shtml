@@ -4,7 +4,7 @@
 
     
     
-  <title>Phenote: A Phenotype Annotation Tool using Ontologies</title></head>
+  <title>Phenote Release Notes</title></head>
 
 <body>
 
@@ -20,7 +20,89 @@
 	  Phenote Release Notes
 	</div>
 
+<h1>1.7</h1>
+
+<h2>02.23.2010, Version 1.7-beta9</h2>
+<ul>
+<li>bugfix: In 1.7-beta6, we enabled Phenote to use the config file in .phenote if it couldn't
+update it from the master repository.  This version adds similar robustness
+for the ontology files: if Phenote can't get new ones from the repository for some
+reason, it just uses the local copies.</li>
+</ul>
+
+<h2>02.18.2010, Version 1.7-beta8</h2>
+<ul>
+<li> feature: Greatly improved startup speed by loading each ontology once, rather than
+multiple times, in OntologyDataAdapter.mapNamespacesToOntologies
+</li><li> bugfix: Europen-style dates in input (e.g., "20.10.2009") could not be parsed, and
+thus were lost and not saved in the output.
+Phenote can now handle THAT SPECIFIC DATE FORMAT (dd.MM.yyyy) as well as the
+default SimpleDateFormat.  Any other date format will still fail.
+</li><li> change/bugfix: Turned off splash screen, which was causing some computers to freeze up.  Would like to fix and restore at some point.
+</ul>
+
+<h2>Jan-Feb 2010: 1.7-beta1 through beta7 (internal releases)</h2>
+<ul>
+<li>change: <b>Phenote+ is now just called Phenote.  The old Phenote UI will be de-supported.</b>
+</li><li> feature: <b>Added support for proxies.</b>  Users can now set proxy via a GUI.  All
+ontology-fetching, date-checking, etc. will then be done via the proxy that is
+set.  Proxy setting is saved in user's config.xml.
+</li><li> bugfix: Fixed Help/User Guide (wasn't working at all) in standalone version.
+(Still problematic in webstart.)
+</li><li> bugfix: Improved About.
+</li><li> bugfix: Fixed Apple->Exit (was doing nothing)
+</li><li> bugfix: When you ran Phenote for the first time from the installed version, it would
+let you choose your config and then would show nothing at all for several minutes
+while it downloads the ontology files.  Now it at least pops up a dialog box
+that says "Updating ontology files--please wait".  Unfortunately, I can't get
+it to put anything inside the dialog box until it's done downloading the
+ontology files (by which point it's pointless), but at least it now shows
+SOMETHING so that new Phenote users don't think it's crashed.
+</li><li> bugfix: Fixed some out-of-date stuff in some config files (e.g. plant.cfg)
+</li><li> change: Made "Date created" field show up in Annotation Table for
+zfin-standalone.cfg (at request of ZFIN curator David Fashena).
+</li><li> change: If we fail to get a new copy of the config file from the repository,
+just use the local copy--don't give up and use the flybase config.
+</li><li> change: Phenote title bar now shows name of last file loaded (or saved).
+</li><li>bugfix: In 1.7-b7, fixed save bug introduced some time around 1.7-beta2
+</li>
+</ul>
+
 <h1>1.6</h1>
+
+<h2>08.20.2008, version 1.6 - beta8</h2>
+<ul>
+<li>change: Renaming Phenote2 configuration to PhenotePlus to avoid any
+  confusion with a future Phenote 2.0 release
+</li><li>change: Renaming "Comp" button to "Compose" in AnnotationEditor Panel which more
+  intuitively suggests composition of ontology terms with relationships.
+</li><li>feature: Layout menu now has "Import perspective" to add a new perspective (from an
+.idw file)--phenote request https://sourceforge.net/tracker/index.php?func=detail&aid=1909081&group_id=76834&atid=887913.
+</li><li>change: "ncbo" config renamed "human" 
+</ul>
+
+<h2>06.11.2008, version 1.6 - beta6</h2>
+<ul>
+<li>feature: term name and id now selectable & copyable 
+</li><li>feature: added updates & deletes to birn soap adapter 
+</li><li>bugfix: fixed constraint message bug for failure constraints 
+</li><li>feature: popups to user on birn soap success & failure per asifs request 
+</li><li>bugfix: if field has both retrieve button and list the list was laying on top of retrieve button </li><li>now retrieve is left of del button in this case 
+</li><li>bugfix: commits to query/db adapters are now ignoring blank rows as they should 
+</li><li>bugfix: Fixed problem with TermInfo panel not following clicks on links. 
+</li><li>bugfix: Change to OboUtil so that pre-composed terms are not expanded in post-comp editor. 
+</li><li>bugfix: Catching IOException so that the application can start up even though neither an ontology URL or cached file is available.  Need to devise a user alert for this situation. 
+</ul>
+Worm adapter changes:
+<ul>
+</li><li>bugfix: Phenotype retrieves now work. 
+</li><li>feature: added Genetic Intx Desc retrieve for Jolene.  It also searches for ``NOT NULL'' if the words typed are exactly ``NOT NULL''.  
+</li><li>bugfix: Commit uses transactions. If sql fails, get a popup instead of a crash. 
+</li><li>change: Changed Strain to Host Strain, added new type called Strain 
+</li><li>change: took out from worm.cfg host strain, penetrance range start, penetrance range end. added app_control_isolate to postgres, .cfg, WormAdapter.java  
+</li><li>change: Added ``suggested definition'' (text) and ``child of'' (phenotype obo) fields. Moved ``Paper Remark'' and ``Paper Remark History'' to the end. 
+</ul>
+
 <h2>04.15.2008, version <a href="phenote/1.6-beta4/phenote-plus.jnlp">1.6 - beta4</a></h2>
 <ul>
 <li>feature: in-table editing added, complete with auto-completion </li>
@@ -255,11 +337,6 @@ can then be bulk edited.</li>
 
 
 </ul>
-
-
-
-<h2>version 1.4-beta1 - oops - skipped!</h2>
-
 
 
 

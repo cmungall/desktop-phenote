@@ -17,7 +17,8 @@
 	</div>
       <h1>Collaborations</h1>
 
-      <p>Phenote development is a community effort.  We welcome input and feedback from our users.  The following groups are using Phenote:</p>
+      <p>Phenote development is a community effort.  We welcome input and
+      feedback from our users.  Below are some of the groups that are using Phenote:</p>
       <table border="0">
         <tr>
 	<td><a href="http://flybase.bio.indiana.edu/"> <img height="50" src="/images/fly_logo.png" alt="FlyBase" /></a>
