@@ -89,6 +89,8 @@ public class OboUtil {
     postCompTerm.setName(name);
     id += relDiffString(rel.getID(),diff.getID());
     // just for now
+    // !! Note:  this is now causing a compile error: setID(java.lang.String) is not public in org.obo.datamodel.impl.AnnotatedObjectImpl; cannot be accessed from outside package
+    // I temporarily made that method public, but we need to figure out how to fix this.
     ((OBOClassImpl)postCompTerm).setID(id);
     hasRelAndDiff = true;
   }
