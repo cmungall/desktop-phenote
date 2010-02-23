@@ -18,10 +18,10 @@
 	<h2>For users</h2>
 	<h3>Phenote installer edition</h3>
 	Platform-specific installers are available for Phenote v1.7-b9 at <a href="https://sourceforge.net/project/showfiles.php?group_id=76834">SourceForge</a> or here:
-	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta9_macos_installer.dmg">MacOS X</a> |
-	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta9_windows_installer.exe">Windows</a> |
-	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta9_linux_installer.rpm">Linux</a> |
-	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta9_unix_installer.sh">Unix</a>
+	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta9_macos_install4j.dmg">MacOS X</a> |
+	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta9_windows_install4j.exe">Windows</a> |
+	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta9_linux_install4j.rpm">Linux</a> |
+	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta9_unix_install4j.sh">Unix</a>
 	<ol>
 	  <li>Download your platform-specific package.  (For MacOS, this should self-extract into a disk image. If it doesn't, double-click on the file.  You should see an
 	  icon for the "drive" that the Phenote application is on.)</li>

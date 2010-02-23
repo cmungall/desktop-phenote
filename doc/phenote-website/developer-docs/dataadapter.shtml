@@ -15,7 +15,10 @@
       Creating a Phenote Data Adapter
       </div>
 
-<p>First off if youve just downloaded phenote from sourceforge obo svn,
+<p><b>2/23/2010</b>:  Please note that this document has not been checked
+  recently for accuracy.</p>
+
+<p>If you've just downloaded phenote from sourceforge obo svn,
 the (latest) source is located in <code>phenote/trunk/src/java</code>. The most
 important subdirectories under <code>src/java</code> for creating a data adapter are
 <code>phenote/dataadapter</code> and <code>phenote/datamodel</code>. 

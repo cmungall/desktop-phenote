@@ -40,8 +40,6 @@
       <P>If you go
       to <a href="http://obo.svn.sourceforge.net/viewvc/obo/phenote/trunk/">http://obo.svn.sourceforge.net/viewvc/obo/phenote/trunk/</a>,
       you can browse the Phenote source code and examine the change history.</p>
-    </div>
-
      
       <h1>Getting the Source Code with Eclipse</h1>
       <h2>Build Paths</h2>
@@ -135,6 +133,7 @@
 <p>If you wish to stay informed of every single svn commit, you can <a href="https://lists.sourceforge.net/lists/listinfo/obo-svn-commit">join the svn commits mailing list</a>.</p>
 
   </div>
+    </div>
 
 
     <!--#include virtual="../ssi/footer.html" -->
