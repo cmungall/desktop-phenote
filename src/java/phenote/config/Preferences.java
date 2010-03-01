@@ -392,6 +392,7 @@ public class Preferences {
 		return appName;
 	}
 
+        // Not used?
 	public static void setAppName(String app) {
 		appName = app;
 	}
