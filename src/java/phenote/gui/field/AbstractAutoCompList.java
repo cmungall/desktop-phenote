@@ -481,7 +481,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
 
     private ComboBoxActionListener() {}
     public void actionPerformed(ActionEvent e) {
-      log().debug("Action performed: " + e.getActionCommand());
+//      log().debug("Action performed: " + e.getActionCommand());
       actionHappened = true;
       // comboBoxChanged-> user has selected from list, (cdEdited-> user has edited text box)
       if (e.getActionCommand().equals("comboBoxChanged")) {
@@ -498,7 +498,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
         AbstractAutoCompList.this.setGuiForMultipleValues();
         return;
       } else {
-        log().debug("Action updating model: " + e);
+//        log().debug("Action updating model: " + e);
         AbstractAutoCompList.this.updateModel();
       }
     }

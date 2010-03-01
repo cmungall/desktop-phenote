@@ -262,7 +262,6 @@ public class TermCompList extends AbstractAutoCompList {
    and use the top hit in the list that comes from that partial string
    */
   protected void updateModel(boolean useTopHit) {
-    log().debug("update model");
     // TRY to get valid input...
     try {
       // sets obo class from selected comp term OR top term in list (if no comp term
