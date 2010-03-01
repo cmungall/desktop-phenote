@@ -100,6 +100,7 @@ public class Phenote {
     LOG.debug("Backend initialized, initializing GUI");
     phenote.initGui();
     phenote.splashScreenDestruct(); // initBackend startsup splash
+    LOG.info("Done with init--ready to go!");
   }
 
   /** args are command line arguments
@@ -117,7 +118,7 @@ public class Phenote {
     phenote.doCommandLineAndConfig(args); // does config
     // have to init splash screen after config as config dictates whether to
     // show splash screen (loading screen can threadlock)
-    LOG.debug("initBackend: doSplash = " + doSplash);  // DEL
+//    LOG.debug("initBackend: doSplash = " + doSplash);  // DEL
     if (doSplash)
 	    phenote.splashScreenInit();
     else
