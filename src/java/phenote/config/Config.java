@@ -10,6 +10,7 @@ import java.io.LineNumberReader;
 import java.io.PrintStream;
 import java.lang.reflect.Constructor;
 import java.net.URL;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -275,6 +276,7 @@ public class Config {
     // master conf may have attribute that overrides merge/overwrite settings - need to
     // check those before going through with below -- throws Ex
     ConfigMode mode = new ConfigMode(masterConfig,mergeConfigs,overwritePersonalCfg);
+//    LOG.debug("getMyPhenoteConfig: master = " + masterConfig + ", mode = " + mode); // DEL
 
     //if (mergeConfigs && masterExists) {
     if (mode.isUpdate())
@@ -294,8 +296,30 @@ public class Config {
           return mode.localFileString();
         }
         else {
-          LOG.error("Also failed to open local copy: " + mode.localFileString());
-          throw new ConfigException(ce);
+          try {
+            String jarConfig = getConfigUrl(configFile).getFile();
+            LOG.error("Also failed to open config file in user's .phenote: " + mode.localFileString() + "--trying to use one from jar: " + jarConfig);
+            // Try to copy jar one to .phenote
+//            LOG.debug("About to try copying " + jarConfig + " to " + localFile); // DEL
+            URL jarConfigUrl = null;
+            try {
+              jarConfigUrl = new URL("file://" + jarConfig);
+            } catch (MalformedURLException me) {
+              LOG.debug("Couldn't make URL for jar config " + jarConfigUrl);
+              writeMyPhenoteDefaultFile(masterConfig); // ? master?
+              return jarConfig;
+            }
+            try {
+              FileUtil.copyUrlToFile(jarConfigUrl, localFile);
+            } catch (IOException io) {
+              LOG.debug("Couldn't copy jar config " + jarConfig + " to " + localFile);
+            }
+            writeMyPhenoteDefaultFile(masterConfig); // ? master?
+            return jarConfig;
+          } catch (FileNotFoundException fnf) {
+            LOG.error("Couldn't find conf file from jar?!: " + fnf.getMessage());
+            throw new ConfigException(fnf);
+          }
         }
       // this should probably do a read & write of cfg to get version in there
       // however if writeback is missing something its problematic
@@ -400,7 +424,7 @@ public class Config {
         log().debug("doWipeout: about to copy " + masterUrl + " to " + localFile); // DEL
         FileUtil.copyUrlToFile(masterUrl,localFile); // Ex  put method in inner class?
       } catch (IOException e) { 
-        log().error("doWipeout: got IO exception trying to copy " + masterUrl + ": " + e.getMessage());
+        log().error("doWipeout: got IO exception trying to get " + masterUrl + ": " + e.getMessage());
         throw new ConfigException(e); }
     }
 
@@ -482,6 +506,7 @@ public class Config {
     throws ConfigException {
     try {
       File myPhenote = getMyPhenoteFile();
+      LOG.debug("writeMyPhenoteDefaultFile: saving config choice " + newDefaultFileString + " to " + myPhenote); // DEL
       PrintStream os = new PrintStream(new FileOutputStream(myPhenote));
       os.print(newDefaultFileString);
       os.close();
@@ -1019,12 +1044,10 @@ public class Config {
     try {
       log().debug("Parsing config file: "+configUrl);
       // Is this getting stuff straight from the URL?  I guess it's a local URL, so we don't ever need to worry about a proxy?
-      // I can't find PhenoteConfigurationDocument--must be in phenoteconfigbeans.jar or phenoxmlbeans.jar
+      // I can't find PhenoteConfigurationDocument--must be in phenoteconfigbeans.jar or phenoxmlbeans.jararsexmlurl
       phenoDocBean = PhenoteConfigurationDocument.Factory.parse(configUrl);
       phenoDocBean.validate(); //???
       phenoConfigBean = phenoDocBean.getPhenoteConfiguration();
-
-//      version = phenoConfigBean.getVersion();
       
       // DATA ADAPTERS  <dataadapter name="phenoxml" enable="true"/>
 

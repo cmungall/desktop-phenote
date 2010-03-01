@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.JarURLConnection;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Enumeration;
@@ -259,12 +260,31 @@ public class ConfigFileQueryGui {
   }
   
   private static JarFile getJarFile() {
+    URL jarUrl = null;
     try {
-      URL jarUrl = ConfigFileQueryGui.class.getProtectionDomain().getCodeSource().getLocation();
+      // !! This doesn't seem to be finding it!  I'm getting "Jar URL is file:/Users/nomi/Documents/workspace/Phenote/classfiles/"
+      // (This is when testing in offline mode)
+      jarUrl = ConfigFileQueryGui.class.getProtectionDomain().getCodeSource().getLocation();
       log().debug("Jar URL is " + jarUrl);
       return new JarFile(new File(jarUrl.toURI()));
     } catch (IOException e) {
-      log().debug("No Phenote jar file found");
+      log().debug("No Phenote jar file found in " + jarUrl);
+      if (jarUrl.toString().indexOf("/classfiles") > 0) {
+        String jarfile = jarUrl.toString().substring(0, jarUrl.toString().indexOf("/classfiles")) + "/jars/phenote.jar";
+        log().debug("Trying jar URL " + jarfile);
+        try {
+          jarUrl = new URL(jarfile);
+        } catch (MalformedURLException mue) {
+          log().debug("Jar URL didn't work: " + jarfile);
+          return null;
+        }
+        try {
+          return new JarFile(new File(jarUrl.toURI()));
+        } catch (Exception uhoh) {
+          log().debug("Couldn't convert jar URL to URI: " + jarUrl);
+          return null;
+        }
+      }
     } catch (URISyntaxException e) {
       log().error("Could not convert jar URL to URI", e);
     }
@@ -278,15 +298,17 @@ public class ConfigFileQueryGui {
         BasicService bs = (BasicService)ServiceManager.lookup("javax.jnlp.BasicService");      
         URL codeBaseUrl = bs.getCodeBase(); // this is the url to phenote webstart
         String s = "jar:"+codeBaseUrl.toString()+"/jars/phenote.jar!/";
-        URL jarUrl = new URL(s);
+        log().debug("Jar URL from codebase is " + s);
+        jarUrl = new URL(s);
         JarURLConnection juc = (JarURLConnection)jarUrl.openConnection();
         JarFile jar = juc.getJarFile();//new JarFile(jf);
         return jar;
         //} catch (IOException e) {}//System.out.println("io cant open phen jar "+e);}
-      } catch (Exception e) {}//log().debug("cant open phenote jar from webstart");} 
+      } catch (Exception e) {
+        log().debug("Failed to get jar file: " + e.getMessage());
+      }//log().debug("cant open phenote jar from webstart");} 
       //System.out.println("cant open phen jar "+e); } // ???
     }
-
 
     return null;
   }
