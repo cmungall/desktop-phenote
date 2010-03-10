@@ -76,7 +76,7 @@ public class Config {
   private List<Ontology> allOntologies = new ArrayList<Ontology>();
   private List<OntologyConfig>allOntologyConfigs = new ArrayList<OntologyConfig>();
   
-  public static final String defaultLogConfigFile = "conf/log4j-standalone.xml";
+  public static final String defaultLogConfigFile = "conf/log4j.xml";
   // maybe should be using xmlbean where possible?
   //private boolean uvicGraphEnabled = false; // default false for now
   //private boolean termHistoryEnabled = false;   //default to false for now
