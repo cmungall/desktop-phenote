@@ -189,9 +189,10 @@ public class CharFieldValue implements Cloneable {
   }
   
   public CharFieldValue cloneValueForChar(CharacterI newChar) {
-    LOG.debug("Cloning charfield value: " + this.toString());
     final CharFieldValue newValue = this.cloneCharFieldValue();
     if (newValue == null) return null;
+    if (this.toString().length() > 2)
+      LOG.debug("Cloning charfield value: " + this.toString());
     // for lists this recurses to set kids char as well
     if (newChar != null) newValue.setCharacter(newChar);
     return newValue;    
