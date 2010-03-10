@@ -40,3 +40,8 @@ couldn't update it from the master repository.  This version adds similar
 robustness for the ontology files: if Phenote can't get new ones from the
 repository for some reason, it just uses the local copies.
 - Updated help pages and website
+
+1.7-beta10:
+This verison of Phenote can run offline, even if you're launching it for the
+first time.  Now it can get the config out of the jar (not just from your
+.phenote).
