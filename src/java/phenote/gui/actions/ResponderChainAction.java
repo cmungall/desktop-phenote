@@ -66,10 +66,11 @@ public class ResponderChainAction extends AbstractAction {
   public void actionPerformed(ActionEvent event) {
     final Object target = this.getValidResponder();
     if (target == null) {
-      log().debug("No valid targets");
+      log().debug("No valid targets for action " + event);
       return;
     }
     final Method method = this.getMethodForName(target, this.getActionCommand());
+    log().debug(name + " called--action command " + this.getActionCommand());
     this.callMethod(method, target);
   }
 
