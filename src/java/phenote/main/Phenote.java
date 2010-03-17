@@ -198,7 +198,7 @@ public class Phenote {
           // If modal=true, the dialog shows up with text filled in, but the dimensions are too small so you can't see most of the text.
           // (modal=true isn't good, though, because the user has to make it go away before Phenote continues doing its thing.)
           // Oh well, it's better than having NOTHING up while the ontologies are updated.
-          bePatientDialog = new JDialog((Frame)null, "Updating ontology files--please wait", false);
+          bePatientDialog = new JDialog((Frame)null, "Reading ontology files--please wait", false);
           bePatientDialog.setPreferredSize(new Dimension(400, 100));
           bePatientDialog.add(new JLabel("<html>Phenote needs to download local copies of the ontology files required by this configuration.<br>This process will take a while (possibly several minutes).</html>"));
           bePatientDialog.pack();
