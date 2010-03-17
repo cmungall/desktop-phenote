@@ -70,7 +70,7 @@ public class ResponderChainAction extends AbstractAction {
       return;
     }
     final Method method = this.getMethodForName(target, this.getActionCommand());
-    log().debug(name + " called--action command " + this.getActionCommand());
+    log().debug(target + " called--action command " + this.getActionCommand());
     this.callMethod(method, target);
   }
 
