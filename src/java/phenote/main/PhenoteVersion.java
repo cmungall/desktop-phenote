@@ -9,7 +9,8 @@ import org.apache.log4j.Logger;
 
 public class PhenoteVersion {
 
-  private static String hardwiredDefaultVersion = "1.7-beta10";
+  private static String hardwiredDefaultVersion = "1.7-beta11";
+  private static final Logger LOG = Logger.getLogger(PhenoteVersion.class);
 
   public static String versionString() {
     final String version = System.getProperty("phenote.version");
@@ -17,7 +18,7 @@ public class PhenoteVersion {
       return version;
     } else {
       // This seems to happen every time--can we fix it?
-      log().info("Version information not found as property, going with hardwired default of "+hardwiredDefaultVersion);
+      LOG.info("Version information not found as property, going with hardwired default of "+hardwiredDefaultVersion);
       
       return hardwiredDefaultVersion;
     }
@@ -28,7 +29,7 @@ public class PhenoteVersion {
     if (build != null) {
       return build;
     } else {
-      log().error("Build information not found");
+      LOG.error("Build information not found");
       return "";
     }
   }
@@ -36,9 +37,5 @@ public class PhenoteVersion {
   public static Date getDateOfVersion(){
     GregorianCalendar cal = new GregorianCalendar(2008, GregorianCalendar.APRIL, 15);
     return cal.getTime();
-  }
-
-  private static Logger log() {
-    return Logger.getLogger(PhenoteVersion.class);
   }
 }
