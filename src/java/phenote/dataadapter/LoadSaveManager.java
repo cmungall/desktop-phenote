@@ -126,7 +126,7 @@ public class LoadSaveManager {
         DataAdapterI adapter = ((DataAdapterFileFilter)filter).getAdapter();
         saveData(aFile, adapter);
       } else {
-        saveData(aFile);
+        saveData(aFile, false);
       }
       setTitleOnPhenoteWindowForFile(aFile);
     }
@@ -138,7 +138,7 @@ public class LoadSaveManager {
     try { checkConstraints(); } catch (ConstraintEx e) { return; } // failure ret
 
     if (useCurrentFile && (this.characterListManager.getCurrentDataFile() != null)) {
-      this.saveData(this.characterListManager.getCurrentDataFile());
+      this.saveData(this.characterListManager.getCurrentDataFile(), false);
     } else {
       // there isn't a current file or we should choose a new one
       this.saveData();
@@ -148,8 +148,14 @@ public class LoadSaveManager {
   
   /**Saves the document's characters to the given file, using the default data adapter for the file's extension.*/
   public void saveData(File f) {
+    saveData(f, true); // check constraints
+  }
+
+  public void saveData(File f, boolean checkConstraints) {
     // CONSTRAINT check
-    try { checkConstraints(); } catch (ConstraintEx e) { return; } // failure ret
+    if (checkConstraints) {
+      try { checkConstraints(); } catch (ConstraintEx e) { return; } // failure ret
+    }
 
     DataAdapterI adapter = getDataAdapterForFilename(f.getName());
     saveData(f, adapter);
@@ -174,16 +180,16 @@ public class LoadSaveManager {
 
     if (Config.inst().hasQueryableDataAdapter()) {
       saveToDbDataadapter();
-		} else {
-			saveData(); // saveFileData really
-		}
+    } else {
+      saveData(); // saveFileData really
+    }
 
   }
 
   /** Checks contraints and if pass/override then save to QueryableDataAdapter
       and clear transactions */
   public void saveToDbDataadapter() {
-		if (!Config.inst().hasQueryableDataAdapter()) return; // err? ex?
+    if (!Config.inst().hasQueryableDataAdapter()) return; // err? ex?
 
     // CONSTRAINT check - puts up error dialog on warn/fail
     try { checkConstraints(); }
@@ -209,6 +215,9 @@ public class LoadSaveManager {
   private void checkConstraints() throws ConstraintEx {
     ConstraintStatus cs = ConstraintManager.inst().checkCommitConstraints();
     
+//    log().debug("checkConstraints:"); // DEL
+//    new Throwable().printStackTrace(); // DEL
+
     // FAILURE - no commit
     if (cs.isFailure()) {
       String m = "There is a problem with your commit:\n"+cs.getFailureMessage()+
@@ -224,8 +233,8 @@ public class LoadSaveManager {
 
     // WARNING - ask user if still wants to commit
     if (cs.isWarning()) {
-      String m = "There is a problem with your commit:\n"+cs.getWarningMessage()
-        +"\nDo you want to commit anyway?";
+      String m = "There is a problem with your commit--save anyway?\n" +
+        cs.getWarningMessage();
       JTextArea area = new JTextArea(m);
       area.setRows(10);
       area.setColumns(50);
