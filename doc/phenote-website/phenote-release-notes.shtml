@@ -22,6 +22,12 @@
 
 <h1>1.7</h1>
 
+<h2>03.01.2010, Version 1.7-beta10</h2>
+<ul>
+<li>bugfix: Can now run Phenote when you're offline (even if it's the first
+  time you've launched it).</li>
+</ul>
+
 <h2>02.23.2010, Version 1.7-beta9</h2>
 <ul>
 <li>bugfix: In 1.7-beta6, we enabled Phenote to use the config file in .phenote if it couldn't
