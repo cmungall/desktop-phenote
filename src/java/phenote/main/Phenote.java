@@ -200,7 +200,7 @@ public class Phenote {
           // Oh well, it's better than having NOTHING up while the ontologies are updated.
           bePatientDialog = new JDialog((Frame)null, "Reading ontology files--please wait", false);
           bePatientDialog.setPreferredSize(new Dimension(400, 100));
-          bePatientDialog.add(new JLabel("<html>Phenote needs to download local copies of the ontology files required by this configuration.<br>This process will take a while (possibly several minutes).</html>"));
+          bePatientDialog.add(new JLabel("<html>Phenote may need to download the ontology files required by this configuration.<br>This process will take a while (possibly several minutes).</html>"));
           bePatientDialog.pack();
           bePatientDialog.setLocationRelativeTo(null); // centers panel on screen
           bePatientDialog.setEnabled(true);

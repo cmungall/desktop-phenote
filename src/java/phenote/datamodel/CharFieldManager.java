@@ -322,7 +322,7 @@ public class CharFieldManager {
         catch (ParseException x) { log().error("Inserting ^OBO_REL: didnt work"); }
       }
 
-      String m = "\nInvalid post comp expression "+id+" "+e.getMessage();
+      String m = "Invalid post comp expression "+id+" "+e.getMessage();
       log().error(m);
       throw new TermNotFoundException(m);
     }
