@@ -179,7 +179,7 @@ public class OldTermInfo {
       // relation comp list sets to null
       if (useTermListener == null) return;
       if (currentOboClass == null) return; // shouldnt happen
-      useTermListener.useTerm(new UseTermEvent(TermInfo.this,currentOboClass));
+      useTermListener.useTerm(new UseTermEvent(OldTermInfo.this,currentOboClass));
 
     }
   }
@@ -194,7 +194,7 @@ public class OldTermInfo {
     			OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
     			setTextFromOboClass(term);
     			// send out term selection (non mouse over) for DAG view
-          TermInfo.this.selectionManager.selectTerm(TermInfo.this, term, true);
+          OldTermInfo.this.selectionManager.selectTerm(OldTermInfo.this, term, true);
     		}
     		catch (TermNotFoundException ex) { return; }
     	}
@@ -210,7 +210,7 @@ public class OldTermInfo {
     			OBOClass term = CharFieldManager.inst().getOboClass(id); // ex
     			setTextFromOboClass(term);
     			// send out term selection (non mouse over) for DAG view
-          TermInfo.this.selectionManager.selectTerm(TermInfo.this, term, true);
+          OldTermInfo.this.selectionManager.selectTerm(OldTermInfo.this, term, true);
     		}
     		catch (TermNotFoundException ex) { return; }
     	}
@@ -331,7 +331,7 @@ public class OldTermInfo {
         setTextFromOboClass(term);
         addTermToNaviHistory(id);
         // send out term selection (non mouse over) for DAG view
-        TermInfo.this.selectionManager.selectTerm(TermInfo.this, term, true);
+        OldTermInfo.this.selectionManager.selectTerm(OldTermInfo.this, term, true);
       }
       catch (TermNotFoundException ex) { return; }
     }
