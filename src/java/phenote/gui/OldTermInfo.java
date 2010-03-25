@@ -1,5 +1,7 @@
 package phenote.gui;
 
+/** Obsolete--used only by old Phenote interface. */
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -40,7 +42,7 @@ import edu.stanford.ejalbert.BrowserLauncherRunner;
 import edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException;
 import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
 
-public class TermInfo {
+public class OldTermInfo {
 
   //private JEditorPane textArea;
   private JTextComponent textArea;
@@ -60,11 +62,11 @@ public class TermInfo {
   private int naviIndex=-1;
   private SelectionManager selectionManager;
   
-  public TermInfo() { //TermPanel termPanel) {
+  public OldTermInfo() { //TermPanel termPanel) {
     this(SelectionManager.inst());
   }
   
-  public TermInfo(SelectionManager selManager) {
+  public OldTermInfo(SelectionManager selManager) {
     this.selectionManager = selManager;
     this.selectionManager.addTermSelectionListener(new InfoTermSelectionListener());
     //ErrorManager.inst().addErrorListener(new InfoErrorListener());
