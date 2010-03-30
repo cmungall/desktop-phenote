@@ -15,6 +15,7 @@ import org.bbop.framework.GUIManager;
 
 import phenote.config.Config;
 import phenote.datamodel.CharacterListI;
+import phenote.edit.DirtyDocumentIndicator;
 import phenote.edit.EditManager;
 import phenote.main.PhenotePlus;
 
@@ -233,7 +234,7 @@ public class LoadSaveManager {
 
     // WARNING - ask user if still wants to commit
     if (cs.isWarning()) {
-      String m = "There is a problem with your commit--save anyway?\n" +
+      String m = "There is a problem with your commit--save anyway?\n\n" +
         cs.getWarningMessage();
       JTextArea area = new JTextArea(m);
       area.setRows(10);
@@ -262,6 +263,11 @@ public class LoadSaveManager {
   }
   
   private File runOpenDialog() {
+    // First check that user didn't make any changes to the current dataset (if any)
+    if (!DirtyDocumentIndicator.inst().okToClearData()) {
+      log().debug("Data was dirty--user cancelled load."); // DEL
+      return null;
+    }
     fileChooser.setAcceptAllFileFilterUsed(true);
 //    log().debug("runOpenDialog: current dir = " + fileChooser.getCurrentDirectory()); // DEL
     int returnValue = fileChooser.showOpenDialog(null);
@@ -284,7 +290,10 @@ public class LoadSaveManager {
   
   private DataAdapterI getDataAdapterForFilename(String filename) {
     List<DataAdapterI> adapters = Config.inst().getDataAdapters();
+    String adapterList = "\n\nAvailable data adapters and file suffixes:";
     for (DataAdapterI adapter: adapters) {
+      adapterList += "\n" + adapter.getDescription();
+
       List<String> extensions = adapter.getExtensions();
       for (String extension: extensions) {
         if (filename.endsWith("." + extension)) {
@@ -294,10 +303,14 @@ public class LoadSaveManager {
     }
     // just try first adapter if none match extension
     DataAdapterI da = Config.inst().getDefaultFileAdapter();
-    String m = "Data adapter has not been specified, and file suffix does not map to any"
+    String suffix = "";
+    if (filename.indexOf(".") > 0)
+      suffix = filename.substring(filename.indexOf("."));
+    String m = "File suffix " + suffix + " does not map to any"
       +" known data adapter.  Using default/first data adapter: "+da.getDescription();
+    m += adapterList;
     JOptionPane.showMessageDialog(null,m,"No data adapter specified",
-                            JOptionPane.INFORMATION_MESSAGE);
+                                  JOptionPane.INFORMATION_MESSAGE);
     return da;
   }
   
