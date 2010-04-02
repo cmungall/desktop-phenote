@@ -48,7 +48,7 @@
 <!-- <tocitem text="What to do after Phenote"> -->
 <!--     <tocitem text="I've entered my data, now what?"/> -->
 <!--     <tocitem text="Other Uses for Phenote" target="Other_Uses_for_Phenote"/> -->
-</tocitem>
+<!-- </tocitem> -->
 <tocitem text="Customizing Phenote">
      <tocitem text="What is a Configuration?" target="What_is_a_Configuration_"/>
      <tocitem text="How To Edit a Configuration File" target="How_To_Edit_a_Configuration_File"/>
