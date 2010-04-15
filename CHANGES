@@ -45,3 +45,25 @@ repository for some reason, it just uses the local copies.
 This verison of Phenote can run offline, even if you're launching it for the
 first time.  Now it can get the config out of the jar (not just from your
 .phenote).
+
+1.7-beta11:
+- Fixed bug 2972252: When you save, if Phenote has any issues with your data
+(e.g., missing field), it pops up a dialog showing the errors and asking you
+if you still want to save.  After you click "Yes", you get the same dialog
+again and have to click "Yes" again.
+- Fixed bug 2970581: updating files message displayed when no updating set
+(by making the "please wait" message more general)
+- Fixed bug 2975530: 
+If you change some data and try to quit, Phenote will warn you that you've
+made changes and ask if you want to save. However, if you make changes and
+then load a new file, it doesn't warn you, and loses any changes you may
+have made.
+- Fixed bug 2970568 (Term info browser fails to sync with other components properly when browsing by clicking parent or child terms).
+Now OE components like Graph Editor change to show selected term when we follow hyperlinks
+to parent or child terms in the Term Info browser.
+- Fixed bug 986638 (Term info browser doesn't show current term unless you edit)
+Now you can double-click a term in the annotation table and the term info browser AND any open OBO-Edit
+components such as the Graph Editor will change to show that term!  Before, you had to edit the term and
+get a dropdown completion list and pick something from it before you could convince the Term Info and
+other windows to show the term.
+- Fixed bug 2982845 (Green checkmark in Term Info doesn't work at first)
