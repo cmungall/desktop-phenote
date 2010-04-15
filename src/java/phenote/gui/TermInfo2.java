@@ -620,6 +620,8 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 
 	private void setTextFromOboClass(OBOObject oboClass) {
 		TermInfo2.this.currentOboClass = oboClass;
+                if (oboClass == null)
+                  return;
 		
 		// basicInfoPanel
 		if (!oboClass.isObsolete()) {
@@ -638,15 +640,16 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 
 		termInfoToolbar.setTermFieldText(oboClass); //is the toolbar now out of date b/c of the component title?
 		//always show the basics, even if empty...shouldn't be empty.
-		termID.setText(oboClass.getID());
 		if (oboClass.getNamespace()!=null) {
+                  termID.setText(oboClass.getID());
 		  ontologyName.setText(oboClass.getNamespace().toString());
-    }
+                }
 		else {
-      ontologyName.setText("No namespace/ontology specified");
-		  LOG.error("No namespace for term "+oboClass);
-    }
-		if (oboClass.getDefinition().length()>0) {
+                  ontologyName.setText("No namespace/ontology specified");
+                  termID.setText("");
+		  // LOG.error("No namespace for term "+oboClass);
+                }
+		if (oboClass.getDefinition() != null && oboClass.getDefinition().length()>0) {
       String def = oboClass.getDefinition();
       // definitions can have refs in brackets after def
       Set<Dbxref> defRefs = oboClass.getDefDbxrefs();
@@ -771,7 +774,7 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 
 
 		// commentsPanel
-		if (oboClass.getComment().length() == 0) {
+		if (oboClass.getComment() == null || oboClass.getComment().length() == 0) {
 			termInfoPanel.setBoxTitle("Comments (none)", 14);
 			if (!showEmptyPanelsFlag) {
 				termInfoPanel.getComponent(14).setVisible(false);
@@ -819,6 +822,8 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 	 * @param oboClass the term being browsed 
 	 */
 	public void setComponentTitleFromOBOObject (OBOObject oboClass) {
+          if (oboClass == null)
+            return;
 		String title = "Term Info: "+ oboClass.getName();
     // this only works and only makes sense in phenote2 with docking framework
     // where each gui item has a border around it with a title - otherwise throws
@@ -830,8 +835,9 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 	/** Listen for selection from phenote (mouse over completion list) */
 	private class InfoTermSelectionListener implements TermSelectionListener {
 		public void termSelected(TermSelectionEvent e) {
+                  clearAnnotations(); // ???
 
-      clearAnnotations(); // ???
+//                  LOG.debug("TermInfo2.termSelected " + e); // DEL
 
 			//navi selection is a mouseover event
 			if (!e.isMouseOverEvent()) {
@@ -840,15 +846,17 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 				addTermToNaviHistory(id); //only add the item if its not from navigation
 				termInfoToolbar.setNaviButtonStatus();
 			}
-			setTextFromOboClass(e.getOboClass());
-			// This sets who now listens to use term button clicks (only 1
-			// listener)
-			//setUseTermListener(e.getUseTermListener());
-			termInfoToolbar.setUseTermListener(e.getUseTermListener());
-			//change the name of the item being browsed in the term info header
-			setComponentTitleFromOBOObject(e.getOboClass());
-			termInfoToolbar.setNaviButtonStatus();
-		}
+                        if (e.getOboClass() != null) {
+                          setTextFromOboClass(e.getOboClass());
+                          // This sets who now listens to use term button clicks (only 1
+                          // listener)
+                          //setUseTermListener(e.getUseTermListener());
+                          termInfoToolbar.setUseTermListener(e.getUseTermListener());
+                          //change the name of the item being browsed in the term info header
+                          setComponentTitleFromOBOObject(e.getOboClass());
+                          termInfoToolbar.setNaviButtonStatus();
+                        }
+                }
 	}
 
   /** just gets useTermListener from terminfotoolbar, which back & forward
@@ -946,10 +954,14 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 		  } else if (!CharFieldManager.inst().getAllOntologies().isEmpty()) {
 		    session = CharFieldManager.inst().getAllOntologies().get(0).getOboSession();
 		  }
+
 		  if (session != null) {
 		    IdentifiedObject io = session.getObject(id);
 		    if (io instanceof OBOObject) {
 		      OBOObject c = (OBOObject) io;
+                      if (c == null)
+                        return;
+
 		      setTextFromOboClass(c);
 		      setComponentTitleFromOBOObject(c);
 		      addTermToNaviHistory(id);
@@ -959,13 +971,16 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 		      // causes SelMan to not fireTermSelect and thus this does nothing
 		      // whats the idea here?? - MG
 		      if (c instanceof OBOClass)
-		        selectionManager.selectTerm(TermInfo2.this, (OBOClass)c, true);
+//		        selectionManager.selectTerm(TermInfo2.this, (OBOClass)c, true);
+                        // This fixes bug 2970568 (Term info browser fails to sync with other components properly when browsing by clicking parent or child terms).
+                        // Makes OE components like Graph Editor change to show selected term when we follow hyperlinks
+                        // to parent or child terms in the Term Info browser.
+		        selectionManager.selectTerm(TermInfo2.this, (OBOClass)c, false);
 		    }
 		  }
 		}
 		
 		private void selectTerm(OBOObject term) {
-		  
 		}
 
 		public void link(String href) {
@@ -1688,7 +1703,7 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 		 * Just use exact matches OR matches to components of a post-comp
 		 */
 		for (Annotation annot : allAnnots) {
-			LOG.debug("annot:" +annot);
+//			LOG.debug("annot:" +annot);
 			
 			LinkedObject o = annot.getObject();
 			if (o == null)
@@ -1793,6 +1808,7 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
       info to fields to mimic whats already done between graph and fields */
   private class InfoSelector implements ObjectSelector {
     public void select(Selection selection) {}
+
     /**
      * Most object selectors will just use this method as a delegate to
      * {@link #getSelection()}. This method should be overridden if a special
