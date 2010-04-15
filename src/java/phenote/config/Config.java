@@ -251,7 +251,7 @@ public class Config {
     if (usePersonalConfig) { // for standalone not servlet
       configFile = getMyPhenoteConfig(configFile,overwritePersonalConfig,mergeConfigs);
     }
-//    log().debug("Attempting to read config from "+configFile + ".  usePersonal = " + usePersonalConfig + ", overwritePersonal = " + overwritePersonalConfig);
+    log().debug("Attempting to read config from "+configFile + ".  usePersonal = " + usePersonalConfig + ", overwritePersonal = " + overwritePersonalConfig);
     //parseXmlFileWithDom(configFile); // do parse here?
     //URL configUrl = getConfigUrl(filename);
     //System.out.println("config file: "+configUrl);
@@ -276,7 +276,7 @@ public class Config {
     // master conf may have attribute that overrides merge/overwrite settings - need to
     // check those before going through with below -- throws Ex
     ConfigMode mode = new ConfigMode(masterConfig,mergeConfigs,overwritePersonalCfg);
-//    LOG.debug("getMyPhenoteConfig: master = " + masterConfig + ", mode = " + mode); // DEL
+    LOG.debug("getMyPhenoteConfig: master = " + masterConfig + ", mode.isWipeout = " + mode.isWipeout()); // DEL
 
     //if (mergeConfigs && masterExists) {
     if (mode.isUpdate())
