@@ -90,7 +90,7 @@ public class DirtyDocumentIndicator implements CharChangeListener, CharListChang
   private boolean runDialog(boolean shutdown) {
     final String[] options = {"Save", "Cancel", "Don't Save"};
     String saveClear = shutdown ? "quitting?" : "clearing?";
-    String m = "You have unsaved changes.  Would you like to save before "+saveClear;
+    String m = "There are unsaved changes.  Would you like to save before "+saveClear;
     final int result = 
       JOptionPane.showOptionDialog(GUIManager.getManager().getFrame(),m, "",
                                    JOptionPane.YES_NO_CANCEL_OPTION,
