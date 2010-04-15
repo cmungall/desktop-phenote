@@ -135,10 +135,36 @@ public class TermCompList extends AbstractAutoCompList {
    comp list. if false only use selected term - throw oboex otherwise
    */
   protected void setCurrentValidItem(boolean useTopHit) throws OboException {
-    OBOClass inputTerm = getOboClassFromInput(useTopHit); // throws OboEx
+    OBOClass inputTerm;
+    // I'm not sure why we have to try to get the obo class from input, since we seem to already have it stored as currentOboClass,
+    // but I'll leave this call here for now until I figure out why it's needed.
+    // My change is to catch the exception so that we can use currentOboClass if we can't find it via getOboClassFromInput.
+    // This allows the Term Info Browser to show the selected term when a user simply double-clicks it rather than the previous
+    // requirement that they edit the term and select something from the resulting dropdown list.  --NH, 4/7/2010
+    try {
+      inputTerm = getOboClassFromInput(useTopHit); // may throw OboEx if selection wasn't from dropdown
+    }
+    catch (Exception e) {
+//      log().debug("Couldn't get obo class from input--currentOboClass is " + currentOboClass + ". Exception: " + e);
+      if (currentOboClass == null)
+        return;
+
+      // User must have double-clicked the combobox field but not generated a pulldown list.
+      selectItemFromComboBox(currentOboClass);
+      // Now try it again
+      inputTerm = getOboClassFromInput(useTopHit); // throws OboEx
+      if (inputTerm == null)
+        throw new OboException("no current obo class to use");
+    }
     setOboClass(inputTerm); //this will set text to oboclass
     // send out selection event that is NOT a mouse over event (for DAG view)
     this.getSelectionManager().selectTerm(this, inputTerm, false);
+  }
+
+  // Allow term that's in combobox to be selected by double-clicking (without user needing to edit it)
+  // so that it can be shown in Term Info window and OE-related windows.
+  protected void selectItemFromComboBox(OBOClass oboClass) {
+     getSelectionManager().selectTerm(this, oboClass, false, getUseTermListener());
   }
 
   protected String getCurrentTermRelName() {
@@ -200,10 +226,10 @@ public class TermCompList extends AbstractAutoCompList {
       else 
         obj = getText(); 
     }
-      
+
     //return oboClassDowncast(obj); // throws oboex
     CompletionObject t = getCompTermFromInput(obj,useTopHit);
-    if (!t.hasOboClass()) throw new OboException("Selected obj doesnt have obo class");
+    if (!t.hasOboClass()) throw new OboException("Selected obj doesnt have obo class: " + obj);
     return t.getOboClass();
   }
 
@@ -238,8 +264,11 @@ public class TermCompList extends AbstractAutoCompList {
         throw new OboException("no input given"); // msg not used
       CompletionObject ct = getFirstCompTerm();
       // dont think this can happen - safety
-      if (!ct.matches(input,SearchParams.inst()))
+      // Actually, it does happen.  If we take out this exception, then sometimes when you double-click a term, it gets changed!
+      if (!ct.matches(input,SearchParams.inst())) {
+//        log().error("input & 1st term dont match: " + input + ", " + ct); // DEL
         throw new OboException("input & 1st term dont match");
+      }
       // compare string with ct?? probably...
       return ct; // hmmmm
     }
@@ -286,7 +315,7 @@ public class TermCompList extends AbstractAutoCompList {
     if (this.editModelEnabled()) {
       try {
         OBOClass oboClass = getCurrentOboClass();
-        log().debug("Setting model: " + oboClass);
+//        log().debug("Setting model: " + oboClass);
         this.setModel(oboClass);
       }
       catch (CharFieldGuiEx e) {
@@ -317,6 +346,7 @@ public class TermCompList extends AbstractAutoCompList {
       final boolean equal = (modelTerm == null) ? (modelTerm == oboClass) : (modelTerm.equals(oboClass));
       if (equal) return; // don't edit model - the value is the same
     }
+
     final CompoundTransaction ct =
       CompoundTransaction.makeUpdate(chars, getCharField(), oboClass);
     // updateModel triggers change event, triggers table to fire valueChanged, if in list then
@@ -397,9 +427,9 @@ public class TermCompList extends AbstractAutoCompList {
    * Listens for UseTermEvents from term info,if editModel is true then edits model
    */
   private class ComboUseTermListener implements UseTermListener {
+    // This is what happens when user chooses a term in the Term Info window (by selecting a parent or child) and then hits the green checkmark.
     public void useTerm(UseTermEvent e) {
       if (!e.isTerm()) return;
-      if ((TermCompList.this.editModelEnabled()) && (TermCompList.this.getSelectedChars().isEmpty())) return;
       TermCompList.this.setOboClass(e.getTerm());
       if (TermCompList.this.editModelEnabled()) TermCompList.this.setModel(e.getTerm());
     }

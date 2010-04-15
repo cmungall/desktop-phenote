@@ -88,14 +88,18 @@ public class SelectionManager {
   /** select oboClass, if its not a hyperlink then fireTermSelect
    if it is a hyperlink and its not getting fired its unclear to me what the point
    of this is??? - MG */
-	public void selectTerm(Object source, OBOClass oboClass, boolean isHyperlink) {
+  public void selectTerm(Object source, OBOClass oboClass, boolean isHyperlink, UseTermListener useTermListener) {
 		boolean isMouseOver = false;
 		// System.out.println("ishyperlink="+isHyperlink);
-		TermSelectionEvent e = makeTermEvent(source, oboClass, null,
+		TermSelectionEvent e = makeTermEvent(source, oboClass, useTermListener,
 				isMouseOver, isHyperlink);
 		if (!isHyperlink) // and if it is a hyperlink that whats the point???
 			fireTermSelect(e);
 	}
+
+	public void selectTerm(Object source, OBOClass oboClass, boolean isHyperlink) {
+          selectTerm(source, oboClass, isHyperlink, null);
+        }
 	
 	public void selectID(Object source, String id, String type) {
 		IDSelectionEvent e = makeIDEvent(source, id, type);
