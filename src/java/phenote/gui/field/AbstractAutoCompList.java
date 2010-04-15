@@ -353,9 +353,12 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
       compComboBoxModel = new CompComboBoxModel(results);
       jComboBox.setModel(compComboBoxModel);
       changingCompletionList = false;
+//      if (showPopup && jComboBox.isPopupVisible()) { //only show popup on key events actually only do com
       if (showPopup) { //only show popup on key events actually only do com
         doingPopupForCompletion = true; // otherwise doComp endless loop
-        jComboBox.showPopup();
+        try {
+          jComboBox.showPopup(); // Might throw exception if we're faking the selection from the combobox
+        } catch (Exception e) {}
         doingPopupForCompletion = false;
       }
       //jComboBox.revalidate();
@@ -481,9 +484,10 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
 
     private ComboBoxActionListener() {}
     public void actionPerformed(ActionEvent e) {
-//      log().debug("Action performed: " + e.getActionCommand());
+//      log().debug("AbstractAutoCompList: Action performed: " + e); // DEL
       actionHappened = true;
       // comboBoxChanged-> user has selected from list, (cdEdited-> user has edited text box)
+      // comboBoxChanged is also triggered if user simply double-clicked the combo box
       if (e.getActionCommand().equals("comboBoxChanged")) {
         AbstractAutoCompList.this.setHasChangedMultipleValues(true);
       }
@@ -494,16 +498,19 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
         // this is kept up to date by PopupListListener
         getJComboBox().setSelectedItem(highlightedItem);
       }
+
       if (AbstractAutoCompList.this.shouldResetGuiForMultipleValues()) {
         AbstractAutoCompList.this.setGuiForMultipleValues();
         return;
       } else {
-//        log().debug("Action updating model: " + e);
+        // At some point I tried "true", but it doesn't seem to be needed.  --NH, 4/15
+//        AbstractAutoCompList.this.updateModel(true);
         AbstractAutoCompList.this.updateModel();
       }
     }
   }
-  
+ 
+
   /** this listens for return key and edits model with top hit in comp list */ 
   private class ReturnKeyListener extends KeyAdapter {
     public void keyPressed(KeyEvent e) {
