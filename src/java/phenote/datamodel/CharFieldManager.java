@@ -323,7 +323,7 @@ public class CharFieldManager {
       }
 
       String m = "Invalid post comp expression "+id+" "+e.getMessage();
-      log().error(m);
+//      log().error(m);
       throw new TermNotFoundException(m);
     }
     // post comp parser can throw a plain old exception on parse failure

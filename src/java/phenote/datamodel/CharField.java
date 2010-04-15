@@ -335,7 +335,7 @@ public class CharField {
       if (oboClass == null && danglerMode()) {
         oboClass =  new DanglingClassImpl(valueString);
         if (danglerName != null) oboClass.setName(danglerName);
-        error(valueString+" not found in loaded obo files. Creating a 'dangler'");
+//        error(valueString+" not found in loaded obo files. Creating a 'dangler'");
       }
 
       if (oboClass != null)
