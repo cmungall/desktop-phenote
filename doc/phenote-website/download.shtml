@@ -17,11 +17,11 @@
 <h1>Downloading Phenote</h1>
 	<h2>For users</h2>
 	<h3>Phenote installer edition</h3>
-	Platform-specific installers are available for Phenote v1.7-b10 at <a href="https://sourceforge.net/project/showfiles.php?group_id=76834">SourceForge</a> or here:
-	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta10_macos_install4j.dmg">MacOS X</a> |
-	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta10_windows_install4j.exe">Windows</a> |
-	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta10_linux_install4j.rpm">Linux</a> |
-	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta10_unix_install4j.sh">Unix</a>
+	Platform-specific installers are available for Phenote v1.7-b11 at <a href="https://sourceforge.net/project/showfiles.php?group_id=76834">SourceForge</a> or here:
+	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta11_macos_install4j.dmg">MacOS X</a> |
+	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta11_windows_install4j.exe">Windows</a> |
+	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta11_linux_install4j.rpm">Linux</a> |
+	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta11_unix_install4j.sh">Unix</a>
 	<ol>
 	  <li>Download your platform-specific package.  (For MacOS, this should self-extract into a disk image. If it doesn't, double-click on the file.  You should see an
 	  icon for the "drive" that the Phenote application is on.)</li>
@@ -76,22 +76,20 @@
       <div id="sidebar_content">
 
 	<div class="content_box_head_blue">
-	  Recently added features and bug fixes, Phenote version 1.7-b10
+	  Recently added features and bug fixes, Phenote version 1.7-b11
 	</div>
 
 	<div class="content_box_blue">
           <ul>
-            <li><b>Phenote+ is now just called Phenote.  The old Phenote UI will be de-supported.</b>
-            </li><li><b>Added support for proxies.</b>  Users can now set proxy via a GUI.  All
-              ontology-fetching, date-checking, etc. will then be done via the
-              proxy that is set.
-            </li><li>Deals better with failure to update ontology files from remote
-            URLs (falls back on local copies instead).
-            </li><li>Improved startup speed by loading each ontology once at startup, rather than
-              multiple times.
-            </li><li>Now handles Europen-style dates in annotation files
-            (e.g., "20.10.2009").
-            </li><li> Can run even if you're offline
+          <li> Can run even if you're offline</li>
+          <li>Will now warn you when you try to load a new data file if you've made changes in the current file.</li>
+          <li>Term info browser now syncs with other components (such as Graph Editor)
+            to show the selected term when we follow parent/child hyperlinks in the Term Info window.</li>
+          <li>Now you can double-click a term in the annotation table and the Term Info
+            browser AND any open OBO-Edit components such as the Graph Editor will change
+            to show that term.  Before, you had to edit the term and get a dropdown
+            completion list and pick something from it (even if you just picked what was already there) before you could convince the Term
+            Info and other windows to show the term.</li>
             </ul>   
 	<b>See the <a href="phenote-release-notes.shtml">release notes</a> for more details...<br />
 	</div>

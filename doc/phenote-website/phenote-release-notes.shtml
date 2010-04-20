@@ -22,6 +22,21 @@
 
 <h1>1.7</h1>
 
+<h2>04.19.2010, Version 1.7-beta11</h2>
+<ul>
+<li>bugfix: Elimanted double warning popup if there are issues when you save (e.g., missing fields).</li>
+<li>bugfix: Will now warn you when you try to load a new data file if you've made changes in the current file.</li>
+<li>bugfix: Term info browser now syncs with other components (such as Graph Editor)
+to show the selected term when we follow parent/child hyperlinks in the Term Info window.</li>
+<li>feature/bugfix: Now you can double-click a term in the annotation table and the Term Info
+browser AND any open OBO-Edit components such as the Graph Editor will change
+to show that term!  Before, you had to edit the term and get a dropdown
+completion list and pick something from it (even if you just picked what was already there) before you could convince the Term
+Info and other windows to show the term.</li>
+<li>bugfix: Green checkmark in Term Info (to use currently shown term, which may have been reached by
+following parent/child hyperlinks) now functions correctly.</li>
+</ul>
+
 <h2>03.01.2010, Version 1.7-beta10</h2>
 <ul>
 <li>bugfix: Can now run Phenote when you're offline (even if it's the first
