@@ -173,7 +173,7 @@ public class Phenote {
   private static void initLookAndFeel() {
     try {
       final String lookAndFeelClassName = UIManager.getSystemLookAndFeelClassName();
-      if (lookAndFeelClassName.equals("apple.laf.AquaLookAndFeel")) {
+      if (lookAndFeelClassName.equals("com.apple.laf.AquaLookAndFeel")) {
         // We are running on Mac OS X - use the Quaqua look and feel
         System.setProperty("apple.laf.useScreenMenuBar", "true");
         UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
