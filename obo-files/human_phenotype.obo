@@ -1,5 +1,5 @@
 format-version: 1.2
-date: 05:02:2010 21:49
+date: 09:03:2010 12:12
 saved-by: peter
 auto-generated-by: OBO-Edit 2.0
 subsetdef: secondary_consequence "Consequence of a disorder in another organ system."
@@ -152,6 +152,9 @@ is_a: HP:0000009 ! Functional abnormality of the bladder
 id: HP:0000017
 name: Nocturia
 namespace: medical_genetics
+def: "Abnormaly increased production of urine during the night leading to an unusually frequent need to urinate." [HPO:sdoelken]
+comment: Often occuring as a result of heart insufficiency.
+synonym: "Nycturia" EXACT [HPO:sdoelken]
 xref: UMLS:C0028734
 is_a: HP:0000009 ! Functional abnormality of the bladder
 
@@ -174,9 +177,13 @@ is_a: HP:0000009 ! Functional abnormality of the bladder
 id: HP:0000020
 name: Urinary incontinence
 namespace: medical_genetics
+alt_id: HP:0008681
+def: "Loss of the ability to control the urinary bladder leading to involuntary urination." [HPO:sdoelken]
 synonym: "Incontinence" EXACT []
+synonym: "Mild urinary incontinence" EXACT []
 xref: UMLS:C0021167
 xref: UMLS:C0042024
+xref: UMLS:C0547040
 xref: UMLS:C1962973
 is_a: HP:0000009 ! Functional abnormality of the bladder
 
@@ -1479,10 +1486,10 @@ namespace: medical_genetics
 alt_id: HP:0000203
 def: "Increased length and width of the tongue." [pmid:19125428]
 comment: Normal standards do not exist. Large size usually leads to protrusion of the tongue. This is an acknowledged bundled term, but due to its frequent usage and relative paucity of situations that would call for separate individual assessments of tongue dimensions, the bundled term is retained. Micrognathia may give the false appearance of a large tongue.
-synonym: "Hyperplasia of the tongue" EXACT []
-synonym: "Hypertrophy of the tongue" EXACT []
-synonym: "Protruding tongue" EXACT []
-synonym: "Tongue hypertrophy" EXACT []
+synonym: "Hyperplasia of the tongue" RELATED []
+synonym: "Hypertrophy of the tongue" RELATED []
+synonym: "Protruding tongue" RELATED []
+synonym: "Tongue hypertrophy" RELATED []
 xref: UMLS:C0009677
 xref: UMLS:C0024421
 xref: UMLS:C0563387
@@ -1914,6 +1921,7 @@ is_a: HP:0000159 ! Lip abnormality
 id: HP:0000206
 name: Glossitis
 namespace: medical_genetics
+def: "Inflammation of the tongue." [HPO:sdoelken]
 xref: UMLS:C0017675
 is_a: HP:0000157 ! Abnormality of the tongue
 
@@ -2860,13 +2868,27 @@ is_a: HP:0000271 ! Abnormality of the face
 id: HP:0000316
 name: Hypertelorism
 namespace: medical_genetics
+alt_id: HP:0000578
+alt_id: HP:0002001
 alt_id: HP:0004657
+alt_id: HP:0007871
+synonym: "Hypertelorism, mild" EXACT []
 synonym: "Increased interpupillary distance" EXACT []
+synonym: "Marked hypertelorism" EXACT []
+synonym: "Mild hypertelorism" EXACT []
 synonym: "Ocular hypertelorism" EXACT []
+synonym: "Wide-set eyes" RELATED []
+xref: UMLS:C0015392
 xref: UMLS:C0020534
+xref: UMLS:C0036849
 xref: UMLS:C0205217
+xref: UMLS:C0332464
 xref: UMLS:C0442805
+xref: UMLS:C0547040
 xref: UMLS:C1275637
+xref: UMLS:C1442518
+xref: UMLS:C1854711
+xref: UMLS:C1855908
 is_a: HP:0000489 ! Abnormality of globe location or size
 
 [Term]
@@ -2957,7 +2979,7 @@ is_a: HP:0001999 ! Facial dysmorphism
 id: HP:0000326
 name: Abnormality of the maxilla
 namespace: medical_genetics
-def: "An abnormality of the two bones that form the upper jaw." [HPO:curators]
+def: "An abnormality of the `Maxilla` (FMA:9711) (upper jaw bone)." [HPO:probinson]
 xref: UMLS:C0024947
 xref: UMLS:C1279060
 xref: UMLS:C1704258
@@ -2967,6 +2989,7 @@ is_a: HP:0000209 ! Abnormality of the jaws
 id: HP:0000327
 name: Maxillary hypoplasia
 namespace: medical_genetics
+def: "Underdevelopment of the `Maxilla` (FMA:9711)." [HPO:probinson]
 synonym: "Hypoplastic maxilla" EXACT []
 synonym: "Hypoplastic maxillary bones" EXACT []
 synonym: "Maxillar hypoplasia" EXACT []
@@ -3927,8 +3950,10 @@ is_a: HP:0000422 ! Abnormality of the nasal bridge
 
 [Term]
 id: HP:0000429
-name: Abnormality of the nasal alae
+name: Abnormality of the nasal ala
 namespace: medical_genetics
+def: "An abnormality of the `Ala of nose` (FMA:59519)." [HPO:probinson]
+synonym: "Abnormality of the nasal alae" EXACT []
 xref: UMLS:C0028429
 xref: UMLS:C0521140
 xref: UMLS:C0702172
@@ -3956,7 +3981,7 @@ xref: UMLS:C1837825
 xref: UMLS:C1839547
 xref: UMLS:C1856229
 xref: UMLS:C1865990
-is_a: HP:0000429 ! Abnormality of the nasal alae
+is_a: HP:0000429 ! Abnormality of the nasal ala
 is_a: HP:0009924 ! Aplasia/Hypoplasia involving the nose
 
 [Term]
@@ -4156,7 +4181,7 @@ id: HP:0000454
 name: Flared nostrils
 namespace: medical_genetics
 xref: UMLS:C0277873
-is_a: HP:0000429 ! Abnormality of the nasal alae
+is_a: HP:0000429 ! Abnormality of the nasal ala
 
 [Term]
 id: HP:0000455
@@ -4220,7 +4245,7 @@ synonym: "Nostrils anteverted" EXACT []
 xref: UMLS:C1837721
 xref: UMLS:C1849216
 xref: UMLS:C1853244
-is_a: HP:0000429 ! Abnormality of the nasal alae
+is_a: HP:0000429 ! Abnormality of the nasal ala
 is_a: HP:0005288 ! Abnormality of the nares
 
 [Term]
@@ -4644,14 +4669,6 @@ synonym: "Dystopia canthorum" EXACT []
 xref: UMLS:C0423113
 xref: UMLS:C1857498
 is_a: HP:0000492 ! Abnormality of the eyelid
-
-[Term]
-id: HP:0000507
-name: Short palpebral fissure
-namespace: medical_genetics
-synonym: "Short palpebral fissures" EXACT []
-xref: UMLS:C0423112
-is_a: HP:0008050 ! Abnormality of the palpebral fissures
 
 [Term]
 id: HP:0000508
@@ -5267,16 +5284,6 @@ xref: UMLS:C0015310
 is_a: HP:0000486 ! Strabismus
 
 [Term]
-id: HP:0000578
-name: Hypertelorism, mild
-namespace: medical_genetics
-synonym: "Mild hypertelorism" EXACT []
-xref: UMLS:C0020534
-xref: UMLS:C0547040
-xref: UMLS:C1854711
-is_a: HP:0000316 ! Hypertelorism
-
-[Term]
 id: HP:0000579
 name: Nasolacrimal duct obstruction
 namespace: medical_genetics
@@ -5296,7 +5303,12 @@ is_a: HP:0000479 ! Abnormality of the retina
 id: HP:0000581
 name: Blepharophimosis
 namespace: medical_genetics
+alt_id: HP:0000507
+def: "Reduced width of the palpebral fissures." [HPO:sdoelken]
+synonym: "Short palpebral fissure" EXACT []
+synonym: "Short palpebral fissures" EXACT []
 xref: UMLS:C0005744
+xref: UMLS:C0423112
 is_a: HP:0008050 ! Abnormality of the palpebral fissures
 
 [Term]
@@ -5657,6 +5669,7 @@ is_a: HP:0000614 ! Lacrimal duct abnormalities
 id: HP:0000621
 name: Entropion
 namespace: medical_genetics
+def: "An abnormal turning inward of the upper and/or lower eyelid." [HPO:sdoelken]
 xref: UMLS:C0014390
 is_a: HP:0000492 ! Abnormality of the eyelid
 
@@ -5951,6 +5964,7 @@ is_a: HP:0000546 ! Retinal degeneration
 id: HP:0000656
 name: Ectropion
 namespace: medical_genetics
+def: "An abnormal turning outward of the lower eyelid." [HPO:sdoelken]
 comment: Ectropion irefers to a turning outwards of lower eyelid.
 xref: UMLS:C0013592
 is_a: HP:0000492 ! Abnormality of the eyelid
@@ -6139,6 +6153,7 @@ is_a: HP:0000676 ! Abnormality of the incisors
 id: HP:0000676
 name: Abnormality of the incisors
 namespace: medical_genetics
+def: "An abnormality of the `Incisor tooth` (FMA:12823)." [HPO:probinson]
 xref: UMLS:C0021156
 xref: UMLS:C1704258
 is_a: HP:0000164 ! Abnormality of the teeth
@@ -7225,6 +7240,7 @@ is_a: HP:0000787 ! Kidney stones
 id: HP:0000805
 name: Enuresis
 namespace: medical_genetics
+def: "Lack of the ability to control the urinary bladder leading to involuntary urination at an age where control of the bladder should already be possible." [HPO:sdoelken]
 xref: UMLS:C0014394
 is_a: HP:0000009 ! Functional abnormality of the bladder
 
@@ -8453,9 +8469,14 @@ is_a: HP:0008428 ! Vertebral clefts
 id: HP:0000943
 name: Dysostosis multiplex
 namespace: medical_genetics
+alt_id: HP:0002760
 synonym: "Dyostosis multiplex" EXACT []
+synonym: "Mild dysostosis multiplex" EXACT []
+synonym: "Mild dysotosis multiplex" EXACT []
 xref: UMLS:C0086795
 xref: UMLS:C1854746
+xref: UMLS:C1854823
+xref: UMLS:C1854833
 is_a: HP:0000924 ! Abnormality of the musculoskeletal system
 
 [Term]
@@ -8504,6 +8525,7 @@ is_a: HP:0002813 ! Abnormality of the extremities
 id: HP:0000948
 name: Metaphyseal dysplasia
 namespace: medical_genetics
+def: "The presence of dysplastic regions in metaphyseal bones." [HPO:curators]
 xref: UMLS:C0265294
 is_a: HP:0000944 ! Abnormality of the metaphyses
 
@@ -8792,8 +8814,9 @@ is_a: HP:0000964 ! Eczema
 id: HP:0000977
 name: Soft skin
 namespace: medical_genetics
+synonym: "Velvety skin" RELATED []
 xref: UMLS:C1844592
-is_a: HP:0000951 ! Skin abnormality
+is_a: HP:0010647 ! Abnormality of skin texture
 
 [Term]
 id: HP:0000978
@@ -9265,15 +9288,17 @@ is_a: HP:0001012 ! Lipomas
 
 [Term]
 id: HP:0001032
-name: Absent distal interphalangeal creases
+name: Aplasia of the distal interphalangeal creases
 namespace: medical_genetics
+def: "Absence of the distal interphalangeal flexion creases of the fingers." [HPO:curators]
 synonym: "Absence of skin creases over distal interphalangeal joints" EXACT []
+synonym: "Absent distal interphalangeal creases" RELATED []
 synonym: "Distal finger flexion creases absent" EXACT []
 xref: UMLS:C0459397
 xref: UMLS:C0932510
 xref: UMLS:C1689985
 xref: UMLS:C1861349
-is_a: HP:0006143 ! Abnormal finger flexion creases
+is_a: HP:0006031 ! Aplasia/Hypoplastia of the interphalangeal creases
 
 [Term]
 id: HP:0001033
@@ -10748,12 +10773,6 @@ xref: UMLS:C1969197
 is_a: HP:0001211 ! Abnormality of the fingertips
 
 [Term]
-id: HP:0001213
-name: Clinodactyly of isolated digits
-namespace: medical_genetics
-is_a: HP:0001157 ! Clinodactyly
-
-[Term]
 id: HP:0001215
 name: Camptodactyly (2nd-5th fingers)
 namespace: medical_genetics
@@ -10898,6 +10917,7 @@ name: 2-3 finger syndactyly
 namespace: medical_genetics
 alt_id: HP:0006039
 alt_id: HP:0006122
+def: "`Syndactyly` (HP:0001159) with fusion of fingers two and three." [HPO:sdoelken]
 synonym: "Syndactyly 2nd-3rd fingers" EXACT []
 synonym: "Syndactyly, 2-3 finger" EXACT []
 xref: UMLS:C0016129
@@ -13239,6 +13259,7 @@ xref: UMLS:C1837886
 xref: UMLS:C1855653
 is_a: HP:0000236 ! Abnormality of the anterior fontanelle
 is_a: HP:0000270 ! Delayed closure of fontanelles
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0001477
@@ -13386,6 +13407,7 @@ synonym: "Carpal bone osteolysis" EXACT []
 xref: UMLS:C1833734
 xref: UMLS:C1854608
 is_a: HP:0001191 ! Abnormality of the carpal bones
+is_a: HP:0010660 ! Abnormality of the mineralisation and ossification of bones of the hand
 
 [Term]
 id: HP:0001497
@@ -13589,11 +13611,12 @@ is_a: HP:0001823 ! Low weight
 
 [Term]
 id: HP:0001519
-name: Marfanoid habitus
+name: Dolichostenomelia
 namespace: medical_genetics
 alt_id: HP:0003511
-def: "Marfanoid habitus refers to a tall and slim body build with increased arm span to height ratio (>1.05) and a reduced upper-to-lower segment ratio (<0.85), i.e., unusually long arms and legs. The extremities as well as the hands and feet are un usually slim." [HPO:curators]
+def: "A tall and slim body build with increased arm span to height ratio (>1.05) and a reduced upper-to-lower segment ratio (<0.85), i.e., unusually long arms and legs. The extremities as well as the hands and feet are unusually slim." [HPO:curators]
 synonym: "Marfanoid body habitus" EXACT []
+synonym: "Marfanoid habitus" EXACT []
 xref: UMLS:C1836996
 xref: UMLS:C1839796
 is_a: HP:0001527 ! Tall stature
@@ -13997,13 +14020,6 @@ id: HP:0001567
 name: Primary and secondary teeth affected
 namespace: medical_genetics
 is_a: HP:0000164 ! Abnormality of the teeth
-
-[Term]
-id: HP:0001568
-name: Single central upper incisor
-namespace: medical_genetics
-xref: UMLS:C1865568
-is_a: HP:0000676 ! Abnormality of the incisors
 
 [Term]
 id: HP:0001569
@@ -14504,6 +14520,7 @@ is_a: HP:0001630 ! Abnormality of the atrial septum
 id: HP:0001633
 name: Abnormality of the mitral valve
 namespace: medical_genetics
+def: "An abnormality of the `mitral valve` (FMA:7235)." [HPO:probinson]
 xref: UMLS:C0026264
 xref: UMLS:C1269004
 xref: UMLS:C1704258
@@ -14623,7 +14640,7 @@ is_a: HP:0001695 ! Cardiac arrest
 id: HP:0001646
 name: Abnormality of the aortic valve
 namespace: medical_genetics
-def: "Any abnormality of the aortic valve." [HPO:curators]
+def: "Any abnormality of the `aortic valve` (FMA:7236)." [HPO:curators]
 xref: UMLS:C0003501
 xref: UMLS:C1269005
 xref: UMLS:C1704258
@@ -14671,6 +14688,7 @@ is_a: HP:0001646 ! Abnormality of the aortic valve
 id: HP:0001651
 name: Dextrocardia
 namespace: medical_genetics
+def: "A left-right reversal (or \"mirror reflection\") of the anatomical location of the heart in which the heart is locate on the right side in stead of the left." [HPO:sdoelken]
 xref: UMLS:C0011813
 is_a: HP:0004307 ! Abnormal anatomic location of the heart
 
@@ -14678,6 +14696,8 @@ is_a: HP:0004307 ! Abnormal anatomic location of the heart
 id: HP:0001653
 name: Mitral regurgitation
 namespace: medical_genetics
+def: "An `abnormality of the mitral valve` (HP:0001633) characterized by insufficiency or incompetence of the mitral valve resulting in retrograde leaking of blood through the mitral valve upon ventricular contraction." [HPO:probinson]
+synonym: "Mitral incompetence" EXACT []
 synonym: "Mitral insufficiency" EXACT []
 synonym: "Mitral valve insufficiency" EXACT []
 synonym: "Mitral valve regurgitation" EXACT []
@@ -14689,6 +14709,7 @@ id: HP:0001654
 name: Abnormality of the heart valves
 namespace: medical_genetics
 alt_id: HP:0001703
+def: "An abnormality of a `Cardiac valve` (FMA:7110)." [HPO:probinson]
 synonym: "Valvular abnormality" EXACT []
 synonym: "Valvular heart disease" EXACT []
 xref: UMLS:C0018824
@@ -15621,7 +15642,7 @@ id: HP:0001767
 name: Short toes
 namespace: medical_genetics
 xref: UMLS:C1836195
-is_a: HP:0004701 ! Hypoplastic toes
+is_a: HP:0004701 ! Hypoplasia of the toes
 
 [Term]
 id: HP:0001769
@@ -15766,6 +15787,7 @@ id: HP:0001788
 name: Premature rupture of membranes
 namespace: medical_genetics
 alt_id: HP:0002163
+def: "Premature rupture of membranes (PROM) is a condition which occurs in pregnancy when the amniotic sac ruptures more than an hour before the onset of labor." [HPO:probinson]
 xref: UMLS:C0025255
 xref: UMLS:C0035955
 xref: UMLS:C0205252
@@ -16564,6 +16586,7 @@ is_a: HP:0001911 ! Abnormality of granulocytes
 id: HP:0001880
 name: Eosinophilia
 namespace: medical_genetics
+def: "Increased count of eosinophile granulocytes in the blood." [HPO:sdoelken]
 xref: UMLS:C0014457
 xref: UMLS:C1636667
 is_a: HP:0001879 ! Abnormality of eosinophils
@@ -17329,6 +17352,7 @@ is_a: HP:0001873 ! Thrombocytopenia
 id: HP:0001974
 name: Leukocytosis
 namespace: medical_genetics
+def: "An abnormal increase in the number of `leukocytes` (CL:0000738) in the `blood` (FMA:9670)." [HPO:probinson]
 xref: UMLS:C0023518
 is_a: HP:0001881 ! Abnormality of leukocytes
 
@@ -17563,16 +17587,6 @@ namespace: medical_genetics
 def: "Abnormally short columnella (i.e., the fleshy external end of the nasal septum)." [HPO:curators]
 xref: UMLS:C1857479
 is_a: HP:0009929 ! Abnormality of the columella
-
-[Term]
-id: HP:0002001
-name: Wide-set eyes
-namespace: medical_genetics
-xref: UMLS:C0015392
-xref: UMLS:C0036849
-xref: UMLS:C0332464
-xref: UMLS:C1442518
-is_a: HP:0000316 ! Hypertelorism
 
 [Term]
 id: HP:0002002
@@ -18443,6 +18457,8 @@ is_a: HP:0002088 ! Abnormality of the lungs
 id: HP:0002102
 name: Pleuritis
 namespace: medical_genetics
+def: "Inflammation of the pleura." [HPO:sdoelken]
+synonym: "Pleurisy" EXACT [HPO:sdoelken]
 xref: UMLS:C0032231
 is_a: HP:0002103 ! Abnormality of the pleura
 
@@ -20200,6 +20216,7 @@ is_a: HP:0001250 ! Seizures
 id: HP:0002307
 name: Drooling
 namespace: medical_genetics
+synonym: "sialorrhea" EXACT [HPO:sdoelken]
 xref: UMLS:C0013132
 is_a: HP:0000708 ! Behavioural/Psychiatric Abnormality
 is_a: HP:0003781 ! Excessive salivation
@@ -22508,7 +22525,7 @@ id: HP:0002590
 name: Paralytic ileus
 namespace: medical_genetics
 xref: UMLS:C0030446
-is_a: HP:0002242 ! Abnormality of the intestines
+is_a: HP:0002595 ! Ileus
 
 [Term]
 id: HP:0002591
@@ -22554,6 +22571,7 @@ is_a: HP:0001732 ! Abnormality of the pancreas
 id: HP:0002595
 name: Ileus
 namespace: medical_genetics
+def: "Acute obstruction of the intestines preventing passage of the contents of the intestines." [HPO:sdoelken]
 xref: UMLS:C1258215
 is_a: HP:0002242 ! Abnormality of the intestines
 
@@ -22979,15 +22997,26 @@ is_a: HP:0000929 ! Abnormality of the skull
 id: HP:0002650
 name: Scoliosis
 namespace: medical_genetics
+alt_id: HP:0002770
+alt_id: HP:0003303
+alt_id: HP:0003317
 alt_id: HP:0003415
 def: "The presence of an abnormal lateral curvature of the spine." [HPO:curators]
+synonym: "Mild scoliosis" EXACT []
+synonym: "Progressive scoliosis" EXACT []
 synonym: "Scoliosis may be present" EXACT []
+synonym: "Severe scoliosis" EXACT []
 xref: UMLS:C0036439
 xref: UMLS:C0150312
+xref: UMLS:C0205082
 xref: UMLS:C0449450
 xref: UMLS:C0559260
 xref: UMLS:C0700208
-is_a: HP:0000925 ! Abnormality of the vertebral column
+xref: UMLS:C1519275
+xref: UMLS:C1561581
+xref: UMLS:C1839253
+xref: UMLS:C1855221
+is_a: HP:0010674 ! Abnormality of the curvature of the vertebral collumn
 
 [Term]
 id: HP:0002651
@@ -23038,17 +23067,6 @@ name: Spondylometaphyseal dysplasia
 namespace: medical_genetics
 xref: UMLS:C0700635
 is_a: HP:0002652 ! Skeletal dysplasia
-
-[Term]
-id: HP:0002658
-name: Stippled epiphyses
-namespace: medical_genetics
-alt_id: HP:0010586
-synonym: "Epiphyseal stippling" EXACT []
-synonym: "Stippling of the epiphyses" EXACT []
-xref: UMLS:C0008445
-xref: UMLS:C1844845
-is_a: HP:0005930 ! Abnormality of the epiphyses
 
 [Term]
 id: HP:0002659
@@ -23115,6 +23133,7 @@ xref: UMLS:C1561567
 xref: UMLS:C1833001
 xref: UMLS:C1865200
 xref: UMLS:C1882150
+is_a: HP:0004348 ! Abnormality of bone mineral density
 is_a: HP:0005930 ! Abnormality of the epiphyses
 
 [Term]
@@ -23861,9 +23880,26 @@ is_a: HP:0000927 ! Abnormality of skeletal maturation
 id: HP:0002751
 name: Kyphoscoliosis
 namespace: medical_genetics
+alt_id: HP:0003412
+alt_id: HP:0003424
+alt_id: HP:0004593
+alt_id: HP:0005728
+synonym: "Kyphoscoliosis may be present" EXACT []
+synonym: "Kyphoscoliosis may occur" EXACT []
+synonym: "Progressive kyphoscoliosis" EXACT []
+synonym: "severe, progressive kyphoscoliosis" EXACT []
+synonym: "Slight kyphoscoliosis" EXACT []
+xref: UMLS:C0150312
+xref: UMLS:C0205082
 xref: UMLS:C0345392
+xref: UMLS:C0449450
+xref: UMLS:C0547040
 xref: UMLS:C0575158
 xref: UMLS:C0600033
+xref: UMLS:C1519275
+xref: UMLS:C1561581
+xref: UMLS:C1709305
+xref: UMLS:C1849028
 is_a: HP:0002650 ! Scoliosis
 is_a: HP:0002808 ! Kyphosis
 
@@ -23942,15 +23978,6 @@ namespace: medical_genetics
 is_a: HP:0002804 ! Arthrogryposis multiplex congenita
 
 [Term]
-id: HP:0002760
-name: Mild dysostosis multiplex
-namespace: medical_genetics
-synonym: "Mild dysotosis multiplex" EXACT []
-xref: UMLS:C1854823
-xref: UMLS:C1854833
-is_a: HP:0000943 ! Dysostosis multiplex
-
-[Term]
 id: HP:0002761
 name: Generalized joint laxity
 namespace: medical_genetics
@@ -23985,36 +24012,13 @@ xref: UMLS:C1533591
 xref: UMLS:C1879982
 xref: UMLS:C1979978
 is_a: HP:0002763 ! Abnormality of cartilage
+is_a: HP:0002832 ! Calcific stippling
 
 [Term]
 id: HP:0002766
 name: Relatively short spine
 namespace: medical_genetics
 is_a: HP:0008518 ! Aplasia/Hypoplasia involving the vertebral column
-
-[Term]
-id: HP:0002769
-name: Severe kyphosis
-namespace: medical_genetics
-xref: UMLS:C0022821
-xref: UMLS:C0022822
-xref: UMLS:C0205082
-xref: UMLS:C0265673
-xref: UMLS:C1519275
-xref: UMLS:C1561581
-is_a: HP:0002808 ! Kyphosis
-
-[Term]
-id: HP:0002770
-name: Severe scoliosis
-namespace: medical_genetics
-xref: UMLS:C0036439
-xref: UMLS:C0205082
-xref: UMLS:C0559260
-xref: UMLS:C0700208
-xref: UMLS:C1519275
-xref: UMLS:C1561581
-is_a: HP:0002650 ! Scoliosis
 
 [Term]
 id: HP:0002771
@@ -24207,14 +24211,6 @@ xref: UMLS:C1260922
 is_a: HP:0002086 ! Respiratory abnormality
 
 [Term]
-id: HP:0002796
-name: Osteosclerosis
-namespace: medical_genetics
-def: "Osteosclerosis refers to an abnormal increase in bone density. Osteosclerosis can be detected on radiological examination as an increased whiteness (density) of affected bones." [HPO:curators]
-xref: UMLS:C0029464
-is_a: HP:0004350 ! Increased bone mineral density
-
-[Term]
 id: HP:0002797
 name: Osteolysis
 namespace: medical_genetics
@@ -24271,10 +24267,15 @@ is_a: HP:0005616 ! Accelerated skeletal maturation
 id: HP:0002808
 name: Kyphosis
 namespace: medical_genetics
+alt_id: HP:0002769
+synonym: "Severe kyphosis" EXACT []
 xref: UMLS:C0022821
 xref: UMLS:C0022822
+xref: UMLS:C0205082
 xref: UMLS:C0265673
-is_a: HP:0000925 ! Abnormality of the vertebral column
+xref: UMLS:C1519275
+xref: UMLS:C1561581
+is_a: HP:0010674 ! Abnormality of the curvature of the vertebral collumn
 
 [Term]
 id: HP:0002809
@@ -24476,6 +24477,7 @@ def: "An abnormal punctate (speckled, dot-like) pattern of calcifications in sof
 synonym: "Discrete calcific stippling" EXACT []
 xref: UMLS:C1849993
 is_a: HP:0000924 ! Abnormality of the musculoskeletal system
+is_a: HP:0004350 ! Increased bone mineral density
 
 [Term]
 id: HP:0002833
@@ -25433,7 +25435,7 @@ name: Lordosis
 namespace: medical_genetics
 xref: UMLS:C0024003
 xref: UMLS:C0599412
-is_a: HP:0000925 ! Abnormality of the vertebral column
+is_a: HP:0010674 ! Abnormality of the curvature of the vertebral collumn
 
 [Term]
 id: HP:0002940
@@ -25482,7 +25484,21 @@ is_a: HP:0002942 ! Thoracic kyphosis
 id: HP:0002944
 name: Thoracolumbar scoliosis
 namespace: medical_genetics
+alt_id: HP:0004567
+alt_id: HP:0004585
+synonym: "mild thoracolumbar scoliosis" EXACT []
+synonym: "scoliosis, thoracolumbar, severe, progressive" EXACT []
+xref: UMLS:C0036439
+xref: UMLS:C0205082
+xref: UMLS:C0205329
+xref: UMLS:C0450219
+xref: UMLS:C0547040
+xref: UMLS:C0559260
+xref: UMLS:C0700208
 xref: UMLS:C0749379
+xref: UMLS:C1519275
+xref: UMLS:C1561581
+xref: UMLS:C1839253
 is_a: HP:0002650 ! Scoliosis
 
 [Term]
@@ -25878,7 +25894,10 @@ is_a: HP:0002992 ! Abnormality of the tibia
 id: HP:0002983
 name: Micromelia
 namespace: medical_genetics
+alt_id: HP:0003030
+synonym: "Severe micromelia" EXACT []
 xref: UMLS:C0025995
+xref: UMLS:C1832986
 is_a: HP:0009826 ! Hypoplasia involving bones of the extremities
 
 [Term]
@@ -26159,18 +26178,31 @@ is_a: HP:0005792 ! Humeral hypoplasia
 id: HP:0003015
 name: Metaphyseal flaring
 namespace: medical_genetics
+alt_id: HP:0003047
+alt_id: HP:0005095
+def: "The presence of splayed (i.e.,flared) metaphyseal segments of the long bones." [HPO:curators]
+synonym: "marked metaphyseal flaring of long bones" EXACT []
+synonym: "Metaphyseal flaring of long bones" EXACT []
 synonym: "Metaphyseal splaying" EXACT []
+xref: UMLS:C0222647
+xref: UMLS:C0522501
+xref: UMLS:C1282773
+xref: UMLS:C1706089
 xref: UMLS:C1846802
 xref: UMLS:C1859139
-is_a: HP:0003016 ! Widened metaphyses
+is_a: HP:0003016 ! Metaphyseal widening
 
 [Term]
 id: HP:0003016
-name: Widened metaphyses
+name: Metaphyseal widening
 namespace: medical_genetics
-synonym: "Metaphyseal widening" EXACT []
+alt_id: HP:0005074
+def: "Abnormal widening of the metaphyseal regions of long bones." [HPO:curators]
 synonym: "Wide metaphyses" EXACT []
+synonym: "Widened long bone metaphyses" EXACT []
+synonym: "Widened metaphyses" EXACT []
 xref: UMLS:C1846158
+xref: UMLS:C1848447
 xref: UMLS:C1849039
 xref: UMLS:C1855248
 is_a: HP:0000944 ! Abnormality of the metaphyses
@@ -26261,6 +26293,7 @@ is_a: HP:0009826 ! Hypoplasia involving bones of the extremities
 id: HP:0003027
 name: Mesomelia
 namespace: medical_genetics
+def: "Shortening of the middle parts of the limbs (forearm and lower leg) in relation to the upper and terminal segments." [HPO:sdoelken]
 comment: Shortening of the limbs where the predominant shortness is in the middle bones.
 synonym: "Mesomelic limb shortening" EXACT []
 synonym: "Mesomelic shortening of limbs" EXACT []
@@ -26287,13 +26320,6 @@ xref: UMLS:C0003086
 xref: UMLS:C0020564
 xref: UMLS:C1293134
 is_a: HP:0003028 ! Abnormality of the ankles
-
-[Term]
-id: HP:0003030
-name: Severe micromelia
-namespace: medical_genetics
-xref: UMLS:C1832986
-is_a: HP:0002983 ! Micromelia
 
 [Term]
 id: HP:0003031
@@ -26339,6 +26365,7 @@ name: Diaphyseal sclerosis
 namespace: medical_genetics
 xref: UMLS:C0011989
 is_a: HP:0000940 ! Abnormality of the diaphyses
+is_a: HP:0004350 ! Increased bone mineral density
 
 [Term]
 id: HP:0003037
@@ -26441,19 +26468,6 @@ xref: UMLS:C1704258
 is_a: HP:0002815 ! Abnormality of the knees
 
 [Term]
-id: HP:0003047
-name: Metaphyseal flaring of long bones
-namespace: medical_genetics
-alt_id: HP:0005095
-synonym: "marked metaphyseal flaring of long bones" EXACT []
-xref: UMLS:C0222647
-xref: UMLS:C0522501
-xref: UMLS:C1282773
-xref: UMLS:C1706089
-xref: UMLS:C1846802
-is_a: HP:0003015 ! Metaphyseal flaring
-
-[Term]
 id: HP:0003048
 name: Radial head subluxation
 namespace: medical_genetics
@@ -26519,8 +26533,10 @@ is_a: HP:0009826 ! Hypoplasia involving bones of the extremities
 
 [Term]
 id: HP:0003057
-name: Tetra-amelia
+name: Tetraamelia
 namespace: medical_genetics
+def: "`Amelia` (HP:0009827) of all four limbs." [HPO:sdoelken]
+synonym: "Tetra-amelia" EXACT [HPO:sdoelken]
 xref: UMLS:C1848875
 is_a: HP:0009827 ! Amelia
 
@@ -27116,8 +27132,14 @@ is_a: HP:0003110 ! Urinary laboratory abnormality
 id: HP:0003128
 name: Lactic acidemia
 namespace: medical_genetics
+alt_id: HP:0003255
+def: "An abnormal buildup of `lactic acid` (CHEBI:28358) in the body, leading to `acidification` (GO:0045851) of the blood." [HPO:probinson]
+comment: Note that the term acidemia is used to describe the state of low pH in the blood, whereas acidosis is used to describe the processes that lead to acidemia. In medical jargon, however, the two terms are used interchangeably.
 synonym: "Hyperlacticacidemia" EXACT []
+synonym: "Lactic acidosis" EXACT []
 synonym: "Lacticacidemia" EXACT []
+synonym: "Lacticacidosis" EXACT []
+xref: UMLS:C0001125
 xref: UMLS:C0347959
 xref: UMLS:C1855560
 is_a: HP:0001941 ! Acidosis
@@ -27357,7 +27379,7 @@ alt_id: HP:0003636
 alt_id: HP:0008296
 synonym: "Greatly elevated alkaline phosphatase" EXACT []
 synonym: "High serum alkaline phosphatase" EXACT []
-synonym: "Hyperphosphatasemia" EXACT []
+synonym: "Hyperphosphatasia" EXACT [HPO:curators]
 synonym: "Increased alkaline phosphatase" EXACT []
 synonym: "Increased serum alkaline phosphatase" EXACT []
 xref: UMLS:C0036776
@@ -27652,6 +27674,8 @@ is_a: HP:0002867 ! Abnormality of the ilium
 id: HP:0003186
 name: Inverted nipples
 namespace: medical_genetics
+def: "The presence of nipples that instead of pointing outward are retracted inwards." [HPO:sdoelken]
+synonym: "Invaginated nipples" EXACT [HPO:curators]
 xref: UMLS:C0269269
 is_a: HP:0004404 ! Abnormality of the nipples
 
@@ -27681,7 +27705,7 @@ id: HP:0003191
 name: Notched nasal alae
 namespace: medical_genetics
 xref: UMLS:C1844537
-is_a: HP:0000429 ! Abnormality of the nasal alae
+is_a: HP:0000429 ! Abnormality of the nasal ala
 
 [Term]
 id: HP:0003192
@@ -28248,14 +28272,6 @@ xref: UMLS:C1704258
 is_a: HP:0001939 ! Metabolism abnormality
 
 [Term]
-id: HP:0003255
-name: Lactic acidosis
-namespace: medical_genetics
-synonym: "Lacticacidosis" EXACT []
-xref: UMLS:C0001125
-is_a: HP:0001941 ! Acidosis
-
-[Term]
 id: HP:0003256
 name: Abnormalities of the clotting factors
 namespace: medical_genetics
@@ -28639,13 +28655,6 @@ xref: UMLS:C0038016
 is_a: HP:0000925 ! Abnormality of the vertebral column
 
 [Term]
-id: HP:0003303
-name: Mild scoliosis
-namespace: medical_genetics
-xref: UMLS:C1839253
-is_a: HP:0002650 ! Scoliosis
-
-[Term]
 id: HP:0003304
 name: Spondylolysis
 namespace: medical_genetics
@@ -28755,13 +28764,6 @@ name: Butterfly vertebrae
 namespace: medical_genetics
 xref: UMLS:C1844752
 is_a: HP:0003312 ! Abnormal form of the vertebral bodies
-
-[Term]
-id: HP:0003317
-name: Progressive scoliosis
-namespace: medical_genetics
-xref: UMLS:C1855221
-is_a: HP:0002650 ! Scoliosis
 
 [Term]
 id: HP:0003318
@@ -29481,6 +29483,7 @@ is_a: HP:0000763 ! Sensory neuropathy
 id: HP:0003391
 name: Gower sign
 namespace: medical_genetics
+def: "A phenomen whereby patients are not able to stand up without the use of the hands owing to weakness of the proximal muscles of the lower limbs." [HPO:probinson]
 synonym: "Gowers sign" EXACT []
 synonym: "Positive Gower sign" EXACT []
 synonym: "Positive Gowers sign" EXACT []
@@ -29639,19 +29642,6 @@ xref: UMLS:C1836320
 is_a: HP:0003366 ! Abnormality of the femoral neck and head region
 
 [Term]
-id: HP:0003412
-name: Kyphoscoliosis may occur
-namespace: medical_genetics
-synonym: "Kyphoscoliosis may be present" EXACT []
-xref: UMLS:C0150312
-xref: UMLS:C0345392
-xref: UMLS:C0449450
-xref: UMLS:C0575158
-xref: UMLS:C0600033
-xref: UMLS:C1709305
-is_a: HP:0002751 ! Kyphoscoliosis
-
-[Term]
 id: HP:0003413
 name: Atlantoaxial abnormality
 namespace: medical_genetics
@@ -29736,13 +29726,6 @@ namespace: medical_genetics
 synonym: "Dorsolumbar kyphosis" EXACT []
 xref: UMLS:C1854939
 xref: UMLS:C1859335
-is_a: HP:0002751 ! Kyphoscoliosis
-
-[Term]
-id: HP:0003424
-name: Progressive kyphoscoliosis
-namespace: medical_genetics
-xref: UMLS:C1849028
 is_a: HP:0002751 ! Kyphoscoliosis
 
 [Term]
@@ -31661,7 +31644,7 @@ is_a: HP:0003287 ! Abnormality of mitochondrial metabolism
 id: HP:0003648
 name: Lacticaciduria
 namespace: medical_genetics
-is_a: HP:0003255 ! Lactic acidosis
+is_a: HP:0003128 ! Lactic acidemia
 
 [Term]
 id: HP:0003649
@@ -33285,6 +33268,7 @@ xref: UMLS:C1140618
 xref: UMLS:C1254042
 xref: UMLS:C1969348
 is_a: HP:0003839 ! Abnormality involving the epiphyses of the upper limbs
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0003841
@@ -33469,6 +33453,7 @@ is_a: HP:0009808 ! Abnormality involving the diaphyses of the upper limbs
 id: HP:0003862
 name: Absent ossification/absent humeri
 namespace: medical_genetics
+is_a: HP:0004348 ! Abnormality of bone mineral density
 is_a: HP:0006507 ! Aplasia/Hypoplasia of the humerus
 
 [Term]
@@ -33734,6 +33719,7 @@ id: HP:0003892
 name: Absent ossification/Absence of the humeral epiphyses
 namespace: medical_genetics
 is_a: HP:0003891 ! Abnormality of the humeral epiphyses
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0003893
@@ -33787,6 +33773,7 @@ xref: UMLS:C0029433
 xref: UMLS:C0205271
 xref: UMLS:C1846449
 is_a: HP:0003891 ! Abnormality of the humeral epiphyses
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0003898
@@ -33838,6 +33825,7 @@ xref: UMLS:C0020164
 xref: UMLS:C0029433
 xref: UMLS:C1979978
 is_a: HP:0003891 ! Abnormality of the humeral epiphyses
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0003903
@@ -33953,6 +33941,7 @@ xref: UMLS:C0029433
 xref: UMLS:C0205271
 xref: UMLS:C0222671
 is_a: HP:0003907 ! Abnormality of the humeral metaphyses
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0003915
@@ -34356,6 +34345,7 @@ name: Absent ossification/absent forearm bones
 namespace: medical_genetics
 synonym: "Aplasia of the forearm bones " EXACT []
 is_a: HP:0002973 ! Abnormality of the forearm
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0003954
@@ -34520,6 +34510,7 @@ synonym: "Radial aplasia" EXACT []
 xref: UMLS:C1405984
 xref: UMLS:C1838608
 is_a: HP:0003953 ! Absent ossification/absent forearm bones
+is_a: HP:0004348 ! Abnormality of bone mineral density
 is_a: HP:0006501 ! Aplasia/Hypoplasia of the radius
 
 [Term]
@@ -34597,6 +34588,7 @@ name: Absent ossification/absent ulna
 namespace: medical_genetics
 synonym: "Aplasia of the ulna" EXACT []
 is_a: HP:0003953 ! Absent ossification/absent forearm bones
+is_a: HP:0004348 ! Abnormality of bone mineral density
 is_a: HP:0006495 ! Aplasia/Hypoplasia of the ulna
 
 [Term]
@@ -34940,6 +34932,7 @@ xref: UMLS:C0442038
 xref: UMLS:C0920847
 xref: UMLS:C1846448
 is_a: HP:0004015 ! Abnormality of radial metaphyses
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0004021
@@ -35257,8 +35250,10 @@ is_a: HP:0005921 ! Abnormal ossification of hand bones
 
 [Term]
 id: HP:0004054
-name: Sclerosis of hand bones
+name: Hand bone sclerosis
 namespace: medical_genetics
+def: "Osteosclerosis affecting one or more bones of the hand." [HPO:curators]
+synonym: "Sclerosis of hand bones" EXACT []
 xref: UMLS:C0036429
 xref: UMLS:C0448064
 is_a: HP:0001155 ! Abnormality of the hand
@@ -35269,7 +35264,7 @@ name: Generalized sclerosis of hand bones
 namespace: medical_genetics
 xref: UMLS:C0448064
 xref: UMLS:C1859152
-is_a: HP:0004054 ! Sclerosis of hand bones
+is_a: HP:0004054 ! Hand bone sclerosis
 
 [Term]
 id: HP:0004057
@@ -36125,6 +36120,7 @@ xref: UMLS:C0332500
 xref: UMLS:C0870861
 xref: UMLS:C1254042
 xref: UMLS:C1306528
+is_a: HP:0001216 ! Delayed maturation/delayed ossification of carpal bones
 is_a: HP:0004243 ! Abnormality of the scaphoid
 
 [Term]
@@ -36182,6 +36178,7 @@ namespace: medical_genetics
 synonym: "Absent trapezium bone" EXACT []
 xref: UMLS:C1847190
 is_a: HP:0004252 ! Abnormality of the trapezium
+is_a: HP:0006257 ! Abnormality of carpal bone ossification
 
 [Term]
 id: HP:0004254
@@ -36193,6 +36190,7 @@ xref: UMLS:C0223736
 xref: UMLS:C0870861
 xref: UMLS:C1254042
 xref: UMLS:C1306478
+is_a: HP:0001216 ! Delayed maturation/delayed ossification of carpal bones
 is_a: HP:0004252 ! Abnormality of the trapezium
 
 [Term]
@@ -36221,6 +36219,7 @@ xref: UMLS:C0205421
 xref: UMLS:C0223741
 xref: UMLS:C0870861
 xref: UMLS:C1254042
+is_a: HP:0001216 ! Delayed maturation/delayed ossification of carpal bones
 is_a: HP:0004256 ! Abnormality of the trapezoid bone
 
 [Term]
@@ -36424,6 +36423,7 @@ namespace: medical_genetics
 xref: UMLS:C0029433
 xref: UMLS:C0205271
 xref: UMLS:C0448064
+is_a: HP:0004348 ! Abnormality of bone mineral density
 is_a: HP:0005921 ! Abnormal ossification of hand bones
 
 [Term]
@@ -36493,7 +36493,7 @@ is_a: HP:0004281 ! Irregular sclerosis of hand bones
 id: HP:0004290
 name: Sclerosis of hand bones with transverse striations
 namespace: medical_genetics
-is_a: HP:0004054 ! Sclerosis of hand bones
+is_a: HP:0004054 ! Hand bone sclerosis
 
 [Term]
 id: HP:0004291
@@ -36949,6 +36949,7 @@ def: "An increase in the magnitude or amount of ossification of the skull." [HPO
 xref: UMLS:C0037303
 xref: UMLS:C0699812
 is_a: HP:0002703 ! Abnormality of skull ossification
+is_a: HP:0004348 ! Abnormality of bone mineral density
 created_by: peter
 creation_date: 2008-02-28T11:54:00Z
 
@@ -36975,6 +36976,7 @@ xref: UMLS:C1859123
 xref: UMLS:C1860201
 xref: UMLS:C1969678
 is_a: HP:0002703 ! Abnormality of skull ossification
+is_a: HP:0004348 ! Abnormality of bone mineral density
 created_by: peter
 creation_date: 2008-02-28T11:54:00Z
 
@@ -37156,9 +37158,11 @@ creation_date: 2008-03-11T08:03:00Z
 
 [Term]
 id: HP:0004348
-name: Abnormality of bone mineral density.
+name: Abnormality of bone mineral density
 namespace: medical_genetics
-def: "An abnormality of the amount of matter per cubic centimeter of bones, which is usually measured by densitometry of the lumbar spine or hip. The measurements are usually reported as g/cm3 or as a Z-score (the number of standard deviations above or below the mean for the patient's age and sex)." [HPO:curators]
+alt_id: HP:0010649
+def: "This term applies to all changes in bone mineralisation and or ossification which (depending on severity) can be seen on x-rays as a change in density and or structure of the bone. Changes may affect all bones of the organism, just certain bones or only parts of bones and include decreased mineralisation as may be seen in osteoporosis or increased mineralisation and or ossification as in osteopetrosis, exostoses or any kind of atypic calicfications of different origin and distribution. The overall amount of mineralisation of the bone-organ can be measured as the amount of matter per cubic centimeter of bones, usually measured by densitometry of the lumbar spine or hip. The measurements are usually reported as g/cm3 or as a Z-score (the number of standard deviations above or below the mean for the patient's age and sex). Note that measurement with this method does not reflect local changes in other bones, and as such might not be correct with regard the hole bone-organ." [HPO:curators]
+synonym: "Abnormality of bone mineralisation and ossification" EXACT []
 xref: UMLS:C0005938
 xref: UMLS:C0177804
 xref: UMLS:C1704258
@@ -37177,7 +37181,7 @@ xref: UMLS:C0177804
 xref: UMLS:C0392756
 xref: UMLS:C0871421
 xref: UMLS:C1968854
-is_a: HP:0004348 ! Abnormality of bone mineral density.
+is_a: HP:0004348 ! Abnormality of bone mineral density
 created_by: peter
 creation_date: 2008-03-11T08:10:00Z
 
@@ -37185,18 +37189,27 @@ creation_date: 2008-03-11T08:10:00Z
 id: HP:0004350
 name: Increased bone mineral density
 namespace: medical_genetics
-def: "An abnormal increase of bone mineral density, that is, of the amount of matter per cubic centimeter of bones." [HPO:curators]
+alt_id: HP:0002796
+alt_id: HP:0005741
+def: "An abnormal increase of bone mineral density, that is, of the amount of matter per cubic centimeter of bones which is often refered to as Osteosclerosis. Osteosclerosis can be detected on radiological examination as an increased whiteness (density) of affected bones." [HPO:curators]
+comment: This term may be merged with Increased bone density in the future or made obsolete.
 synonym: "Increased bone density" EXACT []
+synonym: "Increased bone density, mild-moderate" EXACT []
+synonym: "Osteosclerosis" EXACT []
 xref: UMLS:C0005938
 xref: UMLS:C0029053
+xref: UMLS:C0029464
+xref: UMLS:C0205081
 xref: UMLS:C0205217
 xref: UMLS:C0262950
 xref: UMLS:C0391978
 xref: UMLS:C0442805
+xref: UMLS:C0547040
 xref: UMLS:C1266908
 xref: UMLS:C1266909
 xref: UMLS:C1865344
-is_a: HP:0004348 ! Abnormality of bone mineral density.
+xref: UMLS:C1881878
+is_a: HP:0004348 ! Abnormality of bone mineral density
 created_by: peter
 creation_date: 2008-03-11T08:10:00Z
 
@@ -37718,20 +37731,12 @@ creation_date: 2008-03-18T09:15:00Z
 id: HP:0004401
 name: Meconium ileus
 namespace: medical_genetics
-xref: UMLS:C0270246
-xref: UMLS:C0546982
-is_a: HP:0002242 ! Abnormality of the intestines
-created_by: peter
-creation_date: 2008-03-18T09:16:00Z
-
-[Term]
-id: HP:0004402
-name: Meconium ileus in neonates
-namespace: medical_genetics
+alt_id: HP:0004402
+synonym: "Meconium ileus in neonates" EXACT []
 xref: UMLS:C0021289
 xref: UMLS:C0270246
 xref: UMLS:C0546982
-is_a: HP:0004401 ! Meconium ileus
+is_a: HP:0010676 ! Mechanical ileus
 created_by: peter
 creation_date: 2008-03-18T09:16:00Z
 
@@ -37827,7 +37832,7 @@ name: Alar clefts
 namespace: medical_genetics
 xref: UMLS:C0205242
 xref: UMLS:C0702172
-is_a: HP:0000429 ! Abnormality of the nasal alae
+is_a: HP:0000429 ! Abnormality of the nasal ala
 created_by: peter
 creation_date: 2008-03-18T09:23:00Z
 
@@ -39243,20 +39248,6 @@ xref: UMLS:C1849076
 is_a: HP:0003312 ! Abnormal form of the vertebral bodies
 
 [Term]
-id: HP:0004567
-name: scoliosis, thoracolumbar, severe, progressive
-namespace: medical_genetics
-xref: UMLS:C0036439
-xref: UMLS:C0205082
-xref: UMLS:C0205329
-xref: UMLS:C0450219
-xref: UMLS:C0559260
-xref: UMLS:C0700208
-xref: UMLS:C1519275
-xref: UMLS:C1561581
-is_a: HP:0002944 ! Thoracolumbar scoliosis
-
-[Term]
 id: HP:0004568
 name: Beaking of vertebral bodies
 namespace: medical_genetics
@@ -39372,16 +39363,6 @@ namespace: medical_genetics
 is_a: HP:0003301 ! Irregular vertebral endplates
 
 [Term]
-id: HP:0004585
-name: mild thoracolumbar scoliosis
-namespace: medical_genetics
-xref: UMLS:C0450219
-xref: UMLS:C0547040
-xref: UMLS:C0749379
-xref: UMLS:C1839253
-is_a: HP:0002944 ! Thoracolumbar scoliosis
-
-[Term]
 id: HP:0004586
 name: Biconcave vertebral bodies
 namespace: medical_genetics
@@ -39435,16 +39416,6 @@ xref: UMLS:C1862428
 is_a: HP:0000926 ! Platyspondyly
 
 [Term]
-id: HP:0004593
-name: severe, progressive kyphoscoliosis
-namespace: medical_genetics
-xref: UMLS:C0205082
-xref: UMLS:C1519275
-xref: UMLS:C1561581
-xref: UMLS:C1849028
-is_a: HP:0003424 ! Progressive kyphoscoliosis
-
-[Term]
 id: HP:0004594
 name: hump-shaped mound of bone in central and posterior portions of vertebral endplate
 namespace: medical_genetics
@@ -39487,6 +39458,7 @@ id: HP:0004598
 name: platyspondyly with multiple extra ossification centers
 namespace: medical_genetics
 is_a: HP:0000926 ! Platyspondyly
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0004599
@@ -39689,7 +39661,7 @@ xref: UMLS:C0024090
 xref: UMLS:C0036439
 xref: UMLS:C0559260
 xref: UMLS:C0700208
-is_a: HP:0002650 ! Scoliosis
+is_a: HP:0002944 ! Thoracolumbar scoliosis
 
 [Term]
 id: HP:0004628
@@ -39826,6 +39798,7 @@ is_a: HP:0000272 ! Malar hypoplasia
 id: HP:0004644
 name: Mild maxillary hypoplasia
 namespace: medical_genetics
+def: "A mild degree of HPO_0000327_Maxillary_hypoplasia." [HPO:probinson]
 xref: UMLS:C1848099
 is_a: HP:0000327 ! Maxillary hypoplasia
 
@@ -40237,7 +40210,8 @@ id: HP:0004695
 name: calcaneal epiphyseal stippling
 namespace: medical_genetics
 xref: UMLS:C1861708
-is_a: HP:0002658 ! Stippled epiphyses
+is_a: HP:0002832 ! Calcific stippling
+is_a: HP:0010656 ! Abnormality of the mineralisation or ossification of the epiphyses
 
 [Term]
 id: HP:0004696
@@ -40270,8 +40244,10 @@ is_a: HP:0001861 ! Short, broad halluces
 
 [Term]
 id: HP:0004701
-name: Hypoplastic toes
+name: Hypoplasia of the toes
 namespace: medical_genetics
+def: "Underdevelopment of the toes." [HPO:curators]
+synonym: "Hypoplastic toes" EXACT []
 xref: UMLS:C1835156
 is_a: HP:0001991 ! Aplasia/Hypoplasia of toes
 
@@ -41466,7 +41442,7 @@ is_a: HP:0001889 ! Megaloblastic anemia
 
 [Term]
 id: HP:0004852
-name: low leukocyte alkaline phosphatase
+name: Low leukocyte alkaline phosphatase
 namespace: medical_genetics
 xref: UMLS:C1850780
 is_a: HP:0003282 ! Low alkaline phosphatase
@@ -41843,7 +41819,7 @@ xref: UMLS:C0038435
 xref: UMLS:C0723460
 xref: UMLS:C1556682
 xref: UMLS:C1709305
-is_a: HP:0003255 ! Lactic acidosis
+is_a: HP:0003128 ! Lactic acidemia
 
 [Term]
 id: HP:0004898
@@ -41851,7 +41827,7 @@ name: persistent lactic acidosis
 namespace: medical_genetics
 xref: UMLS:C0001125
 xref: UMLS:C0205322
-is_a: HP:0003255 ! Lactic acidosis
+is_a: HP:0003128 ! Lactic acidemia
 
 [Term]
 id: HP:0004899
@@ -41860,7 +41836,7 @@ namespace: medical_genetics
 xref: UMLS:C0001675
 xref: UMLS:C1706450
 xref: UMLS:C1839437
-is_a: HP:0003255 ! Lactic acidosis
+is_a: HP:0003128 ! Lactic acidemia
 
 [Term]
 id: HP:0004900
@@ -41870,7 +41846,7 @@ xref: UMLS:C0001125
 xref: UMLS:C0205082
 xref: UMLS:C1519275
 xref: UMLS:C1561581
-is_a: HP:0003255 ! Lactic acidosis
+is_a: HP:0003128 ! Lactic acidemia
 
 [Term]
 id: HP:0004901
@@ -41889,7 +41865,7 @@ namespace: medical_genetics
 xref: UMLS:C0001125
 xref: UMLS:C0009678
 xref: UMLS:C1744681
-is_a: HP:0003255 ! Lactic acidosis
+is_a: HP:0003128 ! Lactic acidemia
 
 [Term]
 id: HP:0004903
@@ -42104,7 +42080,7 @@ xref: UMLS:C0001125
 xref: UMLS:C0205191
 xref: UMLS:C1547296
 xref: UMLS:C1555457
-is_a: HP:0003255 ! Lactic acidosis
+is_a: HP:0003128 ! Lactic acidemia
 
 [Term]
 id: HP:0004926
@@ -42535,7 +42511,7 @@ is_a: HP:0003974 ! Absent ossification/absence of radius
 id: HP:0004978
 name: Splayed epiphyses and metaphyses
 namespace: medical_genetics
-is_a: HP:0003016 ! Widened metaphyses
+is_a: HP:0003016 ! Metaphyseal widening
 
 [Term]
 id: HP:0004979
@@ -42543,7 +42519,7 @@ name: Sclerotic, widened metaphyses
 namespace: medical_genetics
 xref: UMLS:C0334135
 xref: UMLS:C1846158
-is_a: HP:0003016 ! Widened metaphyses
+is_a: HP:0003016 ! Metaphyseal widening
 
 [Term]
 id: HP:0004980
@@ -42615,8 +42591,9 @@ is_a: HP:0002990 ! Fibular aplasia
 
 [Term]
 id: HP:0004987
-name: mesomelic lower limb shortening
+name: Mesomelia of the lower limbs
 namespace: medical_genetics
+def: "Shortening of the middle parts of the leg in relation to the upper and terminal segments." [HPO:sdoelken]
 xref: UMLS:C1969178
 is_a: HP:0003027 ! Mesomelia
 
@@ -42693,6 +42670,7 @@ xref: UMLS:C0029433
 xref: UMLS:C0439743
 xref: UMLS:C0588209
 is_a: HP:0003897 ! Irregular ossification of the humeral epiphyses
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0004998
@@ -42796,9 +42774,16 @@ is_a: HP:0002754 ! Osteomyelitis
 
 [Term]
 id: HP:0005011
-name: upper limb mesomelic shortening
+name: Mesomelia of the upper limbs
 namespace: medical_genetics
+alt_id: HP:0005024
+alt_id: HP:0006455
+def: "Shortening of the middle parts of the arm in relation to the upper and terminal segments." [HPO:sdoelken]
+synonym: "mesomelic arm shortening" EXACT []
+synonym: "Upper limb brachymesomelia" EXACT []
+xref: UMLS:C1862087
 xref: UMLS:C1865031
+xref: UMLS:C1969395
 is_a: HP:0003027 ! Mesomelia
 
 [Term]
@@ -42882,13 +42867,6 @@ xref: UMLS:C1857527
 is_a: HP:0003039 ! Small, irregular epiphyses
 
 [Term]
-id: HP:0005024
-name: mesomelic arm shortening
-namespace: medical_genetics
-xref: UMLS:C1969395
-is_a: HP:0003027 ! Mesomelia
-
-[Term]
 id: HP:0005025
 name: hypoplastic distal humerii
 namespace: medical_genetics
@@ -42908,7 +42886,7 @@ id: HP:0005028
 name: Widened proximal tibial metaphyses
 namespace: medical_genetics
 xref: UMLS:C1836187
-is_a: HP:0003016 ! Widened metaphyses
+is_a: HP:0003016 ! Metaphyseal widening
 
 [Term]
 id: HP:0005029
@@ -43146,7 +43124,7 @@ is_a: HP:0001372 ! Joint contractures
 id: HP:0005054
 name: Wide metaphyses with lateral spurs
 namespace: medical_genetics
-is_a: HP:0003016 ! Widened metaphyses
+is_a: HP:0003016 ! Metaphyseal widening
 
 [Term]
 id: HP:0005055
@@ -43284,7 +43262,7 @@ is_a: HP:0003083 ! Dislocated radial head
 id: HP:0005071
 name: Dumbbell widening of long bone metaphyses, especially femurs and humeri
 namespace: medical_genetics
-is_a: HP:0003016 ! Widened metaphyses
+is_a: HP:0003016 ! Metaphyseal widening
 
 [Term]
 id: HP:0005072
@@ -43309,13 +43287,6 @@ xref: UMLS:C1305417
 xref: UMLS:C1880641
 xref: UMLS:C1881878
 is_a: HP:0001377 ! Limited elbow extension
-
-[Term]
-id: HP:0005074
-name: Widened long bone metaphyses
-namespace: medical_genetics
-xref: UMLS:C1848447
-is_a: HP:0003016 ! Widened metaphyses
 
 [Term]
 id: HP:0005075
@@ -43415,7 +43386,7 @@ name: Metaphyseal widening with spurs
 namespace: medical_genetics
 xref: UMLS:C0222032
 xref: UMLS:C1855248
-is_a: HP:0003016 ! Widened metaphyses
+is_a: HP:0003016 ! Metaphyseal widening
 
 [Term]
 id: HP:0005089
@@ -44869,7 +44840,7 @@ namespace: medical_genetics
 xref: UMLS:C0028429
 xref: UMLS:C0231561
 xref: UMLS:C1278896
-is_a: HP:0000429 ! Abnormality of the nasal alae
+is_a: HP:0000429 ! Abnormality of the nasal ala
 
 [Term]
 id: HP:0005277
@@ -46244,6 +46215,7 @@ is_a: HP:0002719 ! Recurrent infections
 id: HP:0005439
 name: Maxillozygomatic hypoplasia
 namespace: medical_genetics
+def: "Hypoplasia of the maxillozygomatic complex." [HPO:probinson]
 xref: UMLS:C1848908
 is_a: HP:0000327 ! Maxillary hypoplasia
 
@@ -46304,7 +46276,7 @@ name: Calvarial osteosclerosis
 namespace: medical_genetics
 def: "An increase in bone density affecting the calvaria (roof of the skull)." [HPO:curators]
 xref: UMLS:C1855657
-is_a: HP:0002796 ! Osteosclerosis
+is_a: HP:0004350 ! Increased bone mineral density
 
 [Term]
 id: HP:0005451
@@ -46312,6 +46284,7 @@ name: Decreased cranial base ossification
 namespace: medical_genetics
 xref: UMLS:C1835442
 is_a: HP:0004331 ! Decreased skull ossification
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0005452
@@ -46505,6 +46478,7 @@ xref: UMLS:C1848658
 xref: UMLS:C1850176
 is_a: HP:0002683 ! Abnormality of the calvarium
 is_a: HP:0004331 ! Decreased skull ossification
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0005475
@@ -47537,7 +47511,7 @@ name: Hypoplastic big toes
 namespace: medical_genetics
 xref: UMLS:C0549177
 xref: UMLS:C1835156
-is_a: HP:0004701 ! Hypoplastic toes
+is_a: HP:0004701 ! Hypoplasia of the toes
 
 [Term]
 id: HP:0005611
@@ -47664,7 +47638,7 @@ xref: UMLS:C0332464
 xref: UMLS:C0522503
 xref: UMLS:C1282773
 xref: UMLS:C1846802
-is_a: HP:0003047 ! Metaphyseal flaring of long bones
+is_a: HP:0003015 ! Metaphyseal flaring
 
 [Term]
 id: HP:0005623
@@ -47676,6 +47650,7 @@ xref: UMLS:C0037303
 xref: UMLS:C0332197
 xref: UMLS:C1550319
 is_a: HP:0004331 ! Decreased skull ossification
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0005624
@@ -47756,6 +47731,7 @@ is_a: HP:0003953 ! Absent ossification/absent forearm bones
 id: HP:0005636
 name: Generalized metaphyseal skeletal dysplasia
 namespace: medical_genetics
+def: "Metaphyseal dysplasia affecting all metaphyses." [HPO:curators]
 xref: UMLS:C0037253
 xref: UMLS:C0205246
 xref: UMLS:C0265294
@@ -47892,6 +47868,7 @@ xref: UMLS:C0007776
 xref: UMLS:C0022655
 xref: UMLS:C0036429
 is_a: HP:0003103 ! Abnormality of cortical bone
+is_a: HP:0004350 ! Increased bone mineral density
 
 [Term]
 id: HP:0005653
@@ -48191,9 +48168,11 @@ is_a: HP:0002652 ! Skeletal dysplasia
 id: HP:0005686
 name: Patchy osteosclerosis
 namespace: medical_genetics
-def: "Patchy (irregular) increase in bone density." [HPO:curators]
+def: "Patchy (irregular) increase in bone density. This can take on many forms depending on severity and distribution as can be seen on x-rays." [HPO:curators]
+synonym: "Patchy increase of bone mineral density" EXACT [HPO:curators]
 xref: UMLS:C1855845
-is_a: HP:0002796 ! Osteosclerosis
+is_a: HP:0004350 ! Increased bone mineral density
+is_a: HP:0010658 ! Patchy changes of bone mineral density
 
 [Term]
 id: HP:0005687
@@ -48315,6 +48294,7 @@ namespace: medical_genetics
 xref: UMLS:C0013366
 xref: UMLS:C0014084
 is_a: HP:0002763 ! Abnormality of cartilage
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0005704
@@ -48371,7 +48351,7 @@ namespace: medical_genetics
 def: "Generalized increase in bone density (as opposed to localized osteosclerosis of individual bones or portions of bones, which can be seen following some types of injury, with osteoarthritis, or osteoma)." [HPO:curators]
 xref: UMLS:C0029464
 xref: UMLS:C0205246
-is_a: HP:0002796 ! Osteosclerosis
+is_a: HP:0004350 ! Increased bone mineral density
 
 [Term]
 id: HP:0005712
@@ -48511,16 +48491,6 @@ xref: UMLS:C0347981
 is_a: HP:0001156 ! Brachydactyly
 
 [Term]
-id: HP:0005728
-name: Slight kyphoscoliosis
-namespace: medical_genetics
-xref: UMLS:C0345392
-xref: UMLS:C0547040
-xref: UMLS:C0575158
-xref: UMLS:C0600033
-is_a: HP:0002751 ! Kyphoscoliosis
-
-[Term]
 id: HP:0005731
 name: Cortical irregularity
 namespace: medical_genetics
@@ -48542,18 +48512,6 @@ id: HP:0005733
 name: Narrowed spinal canal with reduced interpedicular distance
 namespace: medical_genetics
 is_a: HP:0003416 ! Spinal canal stenosis
-
-[Term]
-id: HP:0005735
-name: Hypoplasia/agenesis of distal phalanges of toes
-namespace: medical_genetics
-xref: UMLS:C0000846
-xref: UMLS:C0040357
-xref: UMLS:C0243069
-xref: UMLS:C0332907
-xref: UMLS:C0543481
-xref: UMLS:C0576464
-is_a: HP:0001857 ! Hypoplastic distal phalanges (feet)
 
 [Term]
 id: HP:0005736
@@ -48585,25 +48543,6 @@ xref: UMLS:C0020889
 xref: UMLS:C0700321
 xref: UMLS:C1995017
 is_a: HP:0000946 ! Hypoplastic ilia
-
-[Term]
-id: HP:0005741
-name: Increased bone density, mild-moderate
-namespace: medical_genetics
-def: "A mild-moderate increase of bone mineral density, that is, of the amount of matter per cubic centimeter of bones." [HPO:curators]
-comment: This term may be merged with Increased bone density in the future or made obsolete.
-xref: UMLS:C0005938
-xref: UMLS:C0029053
-xref: UMLS:C0205081
-xref: UMLS:C0205217
-xref: UMLS:C0262950
-xref: UMLS:C0391978
-xref: UMLS:C0442805
-xref: UMLS:C0547040
-xref: UMLS:C1266908
-xref: UMLS:C1266909
-xref: UMLS:C1881878
-is_a: HP:0004350 ! Increased bone mineral density
 
 [Term]
 id: HP:0005743
@@ -48718,7 +48657,8 @@ name: Epiphyseal stippling in neonates
 namespace: medical_genetics
 xref: UMLS:C0021289
 xref: UMLS:C1844845
-is_a: HP:0002658 ! Stippled epiphyses
+is_a: HP:0002832 ! Calcific stippling
+is_a: HP:0010656 ! Abnormality of the mineralisation or ossification of the epiphyses
 
 [Term]
 id: HP:0005757
@@ -48889,7 +48829,7 @@ is_a: HP:0003302 ! Spondylolisthesis
 id: HP:0005780
 name: No fourth finger distal interphalangeal crease
 namespace: medical_genetics
-is_a: HP:0001032 ! Absent distal interphalangeal creases
+is_a: HP:0001032 ! Aplasia of the distal interphalangeal creases
 
 [Term]
 id: HP:0005781
@@ -48953,7 +48893,7 @@ xref: UMLS:C0029464
 xref: UMLS:C0205219
 xref: UMLS:C0332516
 xref: UMLS:C1843331
-is_a: HP:0002796 ! Osteosclerosis
+is_a: HP:0004350 ! Increased bone mineral density
 
 [Term]
 id: HP:0005790
@@ -49001,7 +48941,7 @@ xref: UMLS:C0347981
 xref: UMLS:C0543481
 xref: UMLS:C1861339
 xref: UMLS:C1866004
-is_a: HP:0001857 ! Hypoplastic distal phalanges (feet)
+is_a: HP:0001991 ! Aplasia/Hypoplasia of toes
 
 [Term]
 id: HP:0005794
@@ -49173,12 +49113,21 @@ is_a: HP:0001830 ! Postaxial polydactyly (feet)
 
 [Term]
 id: HP:0005818
-name: Absent/hypoplastic terminal phalanges of toes
+name: Aplasia/Hypoplastia of the distal phalanges of the toes
 namespace: medical_genetics
+alt_id: HP:0005735
+def: "Absence or underdevelopment of the distal phalanges of the toes." [HPO:curators]
+synonym: "Absent/hypoplastic terminal phalanges of toes" EXACT []
+synonym: "Hypoplasia/agenesis of distal phalanges of toes" RELATED []
+xref: UMLS:C0000846
 xref: UMLS:C0040357
+xref: UMLS:C0243069
 xref: UMLS:C0332197
+xref: UMLS:C0332907
+xref: UMLS:C0543481
+xref: UMLS:C0576464
 xref: UMLS:C1837681
-is_a: HP:0001857 ! Hypoplastic distal phalanges (feet)
+is_a: HP:0001991 ! Aplasia/Hypoplasia of toes
 
 [Term]
 id: HP:0005819
@@ -49649,6 +49598,7 @@ xref: UMLS:C0205064
 xref: UMLS:C0223199
 xref: UMLS:C0332197
 xref: UMLS:C1305451
+is_a: HP:0004348 ! Abnormality of bone mineral density
 is_a: HP:0004599 ! Absent or minimally ossified vertebral bodies
 
 [Term]
@@ -50006,6 +49956,7 @@ creation_date: 2008-03-27T02:27:00Z
 id: HP:0005924
 name: Abnormality of the epiphyses of the hand
 namespace: medical_genetics
+def: "Any abnormality of the epiphyses of the phalanges or metacarpal bones." [HPO:curators]
 xref: UMLS:C0000769
 xref: UMLS:C0014570
 xref: UMLS:C0018563
@@ -50332,7 +50283,7 @@ name: Lactic acidosis, may be mild
 namespace: medical_genetics
 xref: UMLS:C0001125
 xref: UMLS:C0547040
-is_a: HP:0003255 ! Lactic acidosis
+is_a: HP:0003128 ! Lactic acidemia
 
 [Term]
 id: HP:0005961
@@ -50728,8 +50679,9 @@ is_a: HP:0001156 ! Brachydactyly
 
 [Term]
 id: HP:0006018
-name: 2-3 and 3-4 finger syndactyly
+name: 2-4 finger syndactyly
 namespace: medical_genetics
+def: "`Syndactyly` (HP:0001159) with fusion of the fingers two to four." [HPO:sdoelken]
 is_a: HP:0001233 ! 2-3 finger syndactyly
 is_a: HP:0006097 ! 3-4 finger syndactyly
 
@@ -50802,8 +50754,10 @@ is_a: HP:0009803 ! Hypoplastic/small phalanges of the hand
 
 [Term]
 id: HP:0006031
-name: Hypoplastic or absent interphalangeal creases
+name: Aplasia/Hypoplastia of the interphalangeal creases
 namespace: medical_genetics
+def: "Absence or underdevelopment of the interphalangeal creases (i.e., of the transverse lines in the skin between the phalanges of the fingers)." [HPO:curators]
+synonym: "Hypoplastic or absent interphalangeal creases" EXACT []
 is_a: HP:0006143 ! Abnormal finger flexion creases
 
 [Term]
@@ -50871,10 +50825,11 @@ is_a: HP:0010049 ! Hypoplastic/short metacarpal bones
 id: HP:0006048
 name: Distal widening of metacarpals
 namespace: medical_genetics
+def: "Abnormal increase in width of the distal region of the metacarpal bones." [HPO:curators]
 xref: UMLS:C0025526
 xref: UMLS:C0205108
 xref: UMLS:C0332464
-is_a: HP:0003016 ! Widened metaphyses
+is_a: HP:0001163 ! Abnormality of the metacarpal bones
 
 [Term]
 id: HP:0006049
@@ -50889,13 +50844,6 @@ name: Metacarpal periosteal thickening
 namespace: medical_genetics
 xref: UMLS:C1834347
 is_a: HP:0001163 ! Abnormality of the metacarpal bones
-
-[Term]
-id: HP:0006053
-name: Second finger clinodactyly
-namespace: medical_genetics
-xref: UMLS:C1844709
-is_a: HP:0001157 ! Clinodactyly
 
 [Term]
 id: HP:0006055
@@ -50967,6 +50915,7 @@ id: HP:0006067
 name: Multiple carpal ossification centers
 namespace: medical_genetics
 xref: UMLS:C1835573
+is_a: HP:0004348 ! Abnormality of bone mineral density
 is_a: HP:0005921 ! Abnormal ossification of hand bones
 
 [Term]
@@ -50975,6 +50924,7 @@ name: Severe carpal ossification delay
 namespace: medical_genetics
 xref: UMLS:C1866703
 is_a: HP:0001216 ! Delayed maturation/delayed ossification of carpal bones
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0006070
@@ -51039,7 +50989,7 @@ id: HP:0006077
 name: Absent proximal finger flexion creases
 namespace: medical_genetics
 xref: UMLS:C1850048
-is_a: HP:0006143 ! Abnormal finger flexion creases
+is_a: HP:0006031 ! Aplasia/Hypoplastia of the interphalangeal creases
 
 [Term]
 id: HP:0006078
@@ -51152,6 +51102,7 @@ is_a: HP:0009473 ! Joint contractures involving the joints of the hand
 id: HP:0006097
 name: 3-4 finger syndactyly
 namespace: medical_genetics
+def: "`Syndactyly` (HP:0001159) with fusion of fingers three and four." [HPO:sdoelken]
 xref: UMLS:C0205437
 xref: UMLS:C0205438
 xref: UMLS:C0221352
@@ -51224,10 +51175,12 @@ is_a: HP:0010049 ! Hypoplastic/short metacarpal bones
 
 [Term]
 id: HP:0006109
-name: Absent phalangeal creases
+name: Aplasia of the interphalangeal creases
 namespace: medical_genetics
+def: "Absence of the interphalangeal creases of the fingers." [HPO:curators]
+synonym: "Absent phalangeal creases" RELATED []
 xref: UMLS:C1862479
-is_a: HP:0006143 ! Abnormal finger flexion creases
+is_a: HP:0006031 ! Aplasia/Hypoplastia of the interphalangeal creases
 
 [Term]
 id: HP:0006110
@@ -51419,6 +51372,7 @@ xref: UMLS:C0223792
 xref: UMLS:C0332466
 xref: UMLS:C1293131
 is_a: HP:0005920 ! Abnormality of the epiphyses of the phalanges of the hand
+is_a: HP:0010656 ! Abnormality of the mineralisation or ossification of the epiphyses
 
 [Term]
 id: HP:0006141
@@ -51682,6 +51636,7 @@ name: Metacarpal diaphyseal endosteal sclerosis
 namespace: medical_genetics
 xref: UMLS:C1840419
 is_a: HP:0001163 ! Abnormality of the metacarpal bones
+is_a: HP:0010660 ! Abnormality of the mineralisation and ossification of bones of the hand
 
 [Term]
 id: HP:0006175
@@ -51846,6 +51801,7 @@ xref: UMLS:C0223724
 xref: UMLS:C0332500
 xref: UMLS:C1306528
 is_a: HP:0004243 ! Abnormality of the scaphoid
+is_a: HP:0010660 ! Abnormality of the mineralisation and ossification of bones of the hand
 
 [Term]
 id: HP:0006203
@@ -51953,7 +51909,7 @@ is_a: HP:0009834 ! Abnormality of the proximal phalanges of the hand
 id: HP:0006216
 name: Single interphalangeal crease of fifth finger
 namespace: medical_genetics
-is_a: HP:0006143 ! Abnormal finger flexion creases
+is_a: HP:0006031 ! Aplasia/Hypoplastia of the interphalangeal creases
 
 [Term]
 id: HP:0006217
@@ -52099,7 +52055,7 @@ id: HP:0006245
 name: Fifth finger single interphalangeal crease
 namespace: medical_genetics
 xref: UMLS:C1850336
-is_a: HP:0006143 ! Abnormal finger flexion creases
+is_a: HP:0006031 ! Aplasia/Hypoplastia of the interphalangeal creases
 
 [Term]
 id: HP:0006247
@@ -52186,6 +52142,7 @@ xref: UMLS:C0242416
 xref: UMLS:C1322271
 xref: UMLS:C1704258
 is_a: HP:0001191 ! Abnormality of the carpal bones
+is_a: HP:0010660 ! Abnormality of the mineralisation and ossification of bones of the hand
 created_by: peter
 creation_date: 2008-03-28T02:29:00Z
 
@@ -52643,10 +52600,16 @@ is_a: HP:0000687 ! Widely spaced teeth
 id: HP:0006315
 name: Single median maxillary central incisor
 namespace: medical_genetics
+alt_id: HP:0001568
+alt_id: HP:0006356
+def: "The presence of a single, centrally located maxillary `Incisor tooth` (FMA:12823) instead of the normal complement of a left and a right maxillary incisor tooth." [HPO:curators]
+synonym: "Single central upper incisor" EXACT []
+synonym: "Single maxillary central incisor" EXACT []
 xref: UMLS:C0549183
 xref: UMLS:C0876920
 xref: UMLS:C1840235
-is_a: HP:0001568 ! Single central upper incisor
+xref: UMLS:C1865568
+is_a: HP:0001573 ! Single central incisor
 
 [Term]
 id: HP:0006316
@@ -52941,13 +52904,6 @@ xref: UMLS:C0447273
 xref: UMLS:C1541679
 xref: UMLS:C1548802
 is_a: HP:0006485 ! Absence of incisors
-
-[Term]
-id: HP:0006356
-name: Single maxillary central incisor
-namespace: medical_genetics
-xref: UMLS:C1840235
-is_a: HP:0001573 ! Single central incisor
 
 [Term]
 id: HP:0006357
@@ -53539,6 +53495,7 @@ xref: UMLS:C0029053
 xref: UMLS:C0222647
 xref: UMLS:C0242696
 xref: UMLS:C1282773
+is_a: HP:0004350 ! Increased bone mineral density
 is_a: HP:0006504 ! Abnormality involving the diaphyses of the limbs
 
 [Term]
@@ -53613,6 +53570,7 @@ xref: UMLS:C0029433
 xref: UMLS:C0223879
 xref: UMLS:C0439743
 xref: UMLS:C1304926
+is_a: HP:0004348 ! Abnormality of bone mineral density
 is_a: HP:0010589 ! Abnormality of the proximal femoral epiphysis
 
 [Term]
@@ -53651,13 +53609,7 @@ name: Severely delayed patellae ossification
 namespace: medical_genetics
 xref: UMLS:C1863744
 is_a: HP:0003045 ! Abnormality of the patella
-
-[Term]
-id: HP:0006455
-name: Upper limb brachymesomelia
-namespace: medical_genetics
-xref: UMLS:C1862087
-is_a: HP:0005011 ! upper limb mesomelic shortening
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0006456
@@ -54946,6 +54898,7 @@ xref: UMLS:C1272693
 xref: UMLS:C1508663
 xref: UMLS:C1522314
 is_a: HP:0000772 ! Abnormality of the ribs
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0006599
@@ -54999,6 +54952,7 @@ name: Precocious costochondral ossification
 namespace: medical_genetics
 xref: UMLS:C1849049
 is_a: HP:0000919 ! Abnormalities of the costochondral junction
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0006608
@@ -55043,6 +54997,7 @@ xref: UMLS:C1184744
 xref: UMLS:C1305744
 xref: UMLS:C1554106
 is_a: HP:0000766 ! Abnormality of the sternum
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0006612
@@ -55073,6 +55028,7 @@ id: HP:0006615
 name: Absent in utero rib ossification
 namespace: medical_genetics
 is_a: HP:0000772 ! Abnormality of the ribs
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0006619
@@ -55126,6 +55082,7 @@ name: Sternal ossification center abnormalities
 namespace: medical_genetics
 xref: UMLS:C1860243
 is_a: HP:0000766 ! Abnormality of the sternum
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0006625
@@ -55156,6 +55113,7 @@ namespace: medical_genetics
 alt_id: HP:0006666
 synonym: "Lack of sternal ossification" EXACT []
 xref: UMLS:C1857666
+is_a: HP:0004348 ! Abnormality of bone mineral density
 is_a: HP:0006714 ! Aplasia/Hypoplasia of the sternum
 
 [Term]
@@ -55257,6 +55215,7 @@ name: Large sternal ossification centers
 namespace: medical_genetics
 xref: UMLS:C1865241
 is_a: HP:0000766 ! Abnormality of the sternum
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0006643
@@ -55264,6 +55223,7 @@ name: Fused sternal ossification centers
 namespace: medical_genetics
 xref: UMLS:C1859376
 is_a: HP:0000766 ! Abnormality of the sternum
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0006644
@@ -55394,6 +55354,7 @@ xref: UMLS:C0035561
 xref: UMLS:C0231561
 xref: UMLS:C1281577
 is_a: HP:0000772 ! Abnormality of the ribs
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0006663
@@ -55701,6 +55662,7 @@ creation_date: 2008-03-29T03:33:00Z
 id: HP:0006705
 name: Abnormality of the atrioventricular valves
 namespace: medical_genetics
+def: "An abnormality of an `atrioventricular valve` (FMA:7233)." [HPO:probinson]
 xref: UMLS:C0225924
 xref: UMLS:C1704258
 is_a: HP:0001654 ! Abnormality of the heart valves
@@ -65187,13 +65149,6 @@ xref: UMLS:C1862425
 is_a: HP:0001090 ! Large eyes
 
 [Term]
-id: HP:0007871
-name: Marked hypertelorism
-namespace: medical_genetics
-xref: UMLS:C1855908
-is_a: HP:0000316 ! Hypertelorism
-
-[Term]
 id: HP:0007872
 name: Choroidal hemangiomata
 namespace: medical_genetics
@@ -67001,7 +66956,7 @@ id: HP:0008083
 name: 2nd-5th toe middle phalangeal hypoplasia
 namespace: medical_genetics
 xref: UMLS:C1861376
-is_a: HP:0001991 ! Aplasia/Hypoplasia of toes
+is_a: HP:0004701 ! Hypoplasia of the toes
 
 [Term]
 id: HP:0008085
@@ -67016,6 +66971,7 @@ name: Nonossified fifth metatarsal
 namespace: medical_genetics
 def: "The presence of a fifth metatarsal bone that has not undergone ossification at an age when ossification is usually visible." [HPO:curators]
 xref: UMLS:C1844712
+is_a: HP:0004348 ! Abnormality of bone mineral density
 is_a: HP:0008371 ! Abnormal ossification involving metatarsal bones
 
 [Term]
@@ -67361,7 +67317,7 @@ xref: UMLS:C0039277
 xref: UMLS:C0231330
 xref: UMLS:C0332197
 xref: UMLS:C1269053
-is_a: HP:0008370 ! Abnormal ossification involving bones of the feet
+is_a: HP:0010675 ! Abnormality of the mineralisation and ossification of bones of the feet
 
 [Term]
 id: HP:0008144
@@ -67503,7 +67459,7 @@ name: Absent leukocyte alkaline phosphatase
 namespace: medical_genetics
 xref: UMLS:C0332197
 xref: UMLS:C0369599
-is_a: HP:0004852 ! low leukocyte alkaline phosphatase
+is_a: HP:0004852 ! Low leukocyte alkaline phosphatase
 
 [Term]
 id: HP:0008162
@@ -69285,23 +69241,9 @@ namespace: medical_genetics
 xref: UMLS:C0039316
 xref: UMLS:C0231557
 is_a: HP:0001850 ! Abnormality of the tarsal bones
-is_a: HP:0008370 ! Abnormal ossification involving bones of the feet
+is_a: HP:0010675 ! Abnormality of the mineralisation and ossification of bones of the feet
 created_by: peter
 creation_date: 2008-04-04T11:53:00Z
-
-[Term]
-id: HP:0008370
-name: Abnormal ossification involving bones of the feet
-namespace: medical_genetics
-xref: UMLS:C0016504
-xref: UMLS:C0231557
-xref: UMLS:C0262950
-xref: UMLS:C0347981
-xref: UMLS:C1266909
-xref: UMLS:C1314939
-is_a: HP:0001760 ! Abnormality of the feet
-created_by: peter
-creation_date: 2008-04-04T11:58:00Z
 
 [Term]
 id: HP:0008371
@@ -69312,7 +69254,7 @@ xref: UMLS:C0025584
 xref: UMLS:C0231557
 xref: UMLS:C1314939
 is_a: HP:0001832 ! Abnormality of the metatarsal bones
-is_a: HP:0008370 ! Abnormal ossification involving bones of the feet
+is_a: HP:0010675 ! Abnormality of the mineralisation and ossification of bones of the feet
 created_by: peter
 creation_date: 2008-04-04T11:59:00Z
 
@@ -69843,6 +69785,7 @@ is_a: HP:0003319 ! Abnormality of the cervical spine
 id: HP:0008435
 name: Absent in utero ossification of vertebral bodies
 namespace: medical_genetics
+is_a: HP:0004348 ! Abnormality of bone mineral density
 is_a: HP:0004606 ! Unossified vertebral bodies
 
 [Term]
@@ -70730,6 +70673,7 @@ xref: UMLS:C0231561
 xref: UMLS:C0928075
 xref: UMLS:C1047272
 xref: UMLS:C1706219
+is_a: HP:0004348 ! Abnormality of bone mineral density
 is_a: HP:0005103 ! Cartilaginous ossification of pinnae
 
 [Term]
@@ -71728,15 +71672,6 @@ xref: UMLS:C0332907
 is_a: HP:0000104 ! Renal agenesis
 
 [Term]
-id: HP:0008681
-name: Mild urinary incontinence
-namespace: medical_genetics
-xref: UMLS:C0042024
-xref: UMLS:C0547040
-xref: UMLS:C1962973
-is_a: HP:0000020 ! Urinary incontinence
-
-[Term]
 id: HP:0008682
 name: Renal tubular necrosis
 namespace: medical_genetics
@@ -72551,6 +72486,7 @@ is_a: HP:0006393 ! Flat proximal femoral epiphyses
 id: HP:0008785
 name: Delayed ossification of pubic rami
 namespace: medical_genetics
+is_a: HP:0004348 ! Abnormality of bone mineral density
 is_a: HP:0009105 ! Abnormal ossification of the pubic bone
 
 [Term]
@@ -72575,6 +72511,7 @@ id: HP:0008788
 name: Delayed pubic bone ossification
 namespace: medical_genetics
 xref: UMLS:C1866710
+is_a: HP:0004348 ! Abnormality of bone mineral density
 is_a: HP:0009105 ! Abnormal ossification of the pubic bone
 
 [Term]
@@ -72637,6 +72574,7 @@ xref: UMLS:C0029433
 xref: UMLS:C1279919
 xref: UMLS:C1282299
 is_a: HP:0002644 ! Abnormality of the pelvis
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0008798
@@ -72799,6 +72737,7 @@ xref: UMLS:C0006909
 xref: UMLS:C0029433
 xref: UMLS:C0332197
 xref: UMLS:C1282299
+is_a: HP:0004348 ! Abnormality of bone mineral density
 is_a: HP:0010589 ! Abnormality of the proximal femoral epiphysis
 
 [Term]
@@ -72844,6 +72783,7 @@ xref: UMLS:C0029433
 xref: UMLS:C0034014
 xref: UMLS:C0231330
 xref: UMLS:C0332197
+is_a: HP:0004348 ! Abnormality of bone mineral density
 is_a: HP:0009105 ! Abnormal ossification of the pubic bone
 
 [Term]
@@ -72852,6 +72792,7 @@ name: Delayed ossification proximal femoral epiphyses
 namespace: medical_genetics
 xref: UMLS:C1855222
 is_a: HP:0002644 ! Abnormality of the pelvis
+is_a: HP:0004348 ! Abnormality of bone mineral density
 
 [Term]
 id: HP:0008829
@@ -72859,6 +72800,7 @@ name: Delayed femoral head ossification
 namespace: medical_genetics
 xref: UMLS:C1846446
 is_a: HP:0003368 ! Abnormality of the femoral head
+is_a: HP:0004348 ! Abnormality of bone mineral density
 is_a: HP:0009107 ! Abnormal ossification involving the femoral head and neck
 
 [Term]
@@ -72902,6 +72844,7 @@ id: HP:0008835
 name: Multicentric femoral head ossification
 namespace: medical_genetics
 xref: UMLS:C1846447
+is_a: HP:0004348 ! Abnormality of bone mineral density
 is_a: HP:0009107 ! Abnormal ossification involving the femoral head and neck
 
 [Term]
@@ -74598,6 +74541,7 @@ is_a: HP:0009125 ! Lipodystrophy
 id: HP:0009060
 name: Scapular muscle atrophy
 namespace: medical_genetics
+def: "Atrophy of the muscles that are responsible for moving the scapula, which are the levator scapulae, the infraspinatus muscle, the teres major, the teres minor, and the supraspinatus muscle." [HPO:curators]
 xref: UMLS:C0026846
 xref: UMLS:C0036277
 xref: UMLS:C1281575
@@ -74944,6 +74888,7 @@ def: "Abnormal ossification (bone tissue formation) affecting the pubic bone." [
 xref: UMLS:C0034014
 xref: UMLS:C0231557
 is_a: HP:0003172 ! Abnormality of the pubic bones
+is_a: HP:0004348 ! Abnormality of bone mineral density
 is_a: HP:0009106 ! Abnormal ossification involving the bones of the pelvis
 created_by: peter
 creation_date: 2008-04-04T08:41:00Z
@@ -74961,6 +74906,7 @@ xref: UMLS:C1279864
 xref: UMLS:C1305772
 xref: UMLS:C1314939
 is_a: HP:0002644 ! Abnormality of the pelvis
+is_a: HP:0004348 ! Abnormality of bone mineral density
 created_by: peter
 creation_date: 2008-04-04T08:42:00Z
 
@@ -74974,6 +74920,7 @@ xref: UMLS:C0231557
 xref: UMLS:C1281592
 xref: UMLS:C1314939
 is_a: HP:0003366 ! Abnormality of the femoral neck and head region
+is_a: HP:0004348 ! Abnormality of bone mineral density
 is_a: HP:0009106 ! Abnormal ossification involving the bones of the pelvis
 created_by: peter
 creation_date: 2008-04-04T08:42:00Z
@@ -75095,6 +75042,7 @@ creation_date: 2008-04-05T10:53:00Z
 id: HP:0009117
 name: Aplasia/Hypoplasia of the maxilla
 namespace: medical_genetics
+def: "Absence or underdevelopment of the `Maxilla` (FMA:9711)." [HPO:probinson]
 xref: UMLS:C0024947
 xref: UMLS:C0243065
 xref: UMLS:C0243069
@@ -75328,25 +75276,9 @@ xref: UMLS:C0177804
 xref: UMLS:C1314939
 xref: UMLS:C1704258
 is_a: HP:0001850 ! Abnormality of the tarsal bones
-is_a: HP:0009133 ! Abnormality of bone mineral density involving bones of the feet
+is_a: HP:0010675 ! Abnormality of the mineralisation and ossification of bones of the feet
 created_by: peter
 creation_date: 2008-04-17T02:39:00Z
-
-[Term]
-id: HP:0009133
-name: Abnormality of bone mineral density involving bones of the feet
-namespace: medical_genetics
-xref: UMLS:C0005938
-xref: UMLS:C0016504
-xref: UMLS:C0177804
-xref: UMLS:C0262950
-xref: UMLS:C0347981
-xref: UMLS:C1266909
-xref: UMLS:C1314939
-xref: UMLS:C1704258
-is_a: HP:0001760 ! Abnormality of the feet
-created_by: peter
-creation_date: 2008-04-17T02:41:00Z
 
 [Term]
 id: HP:0009134
@@ -75786,6 +75718,7 @@ xref: UMLS:C1861320
 xref: UMLS:C1879982
 xref: UMLS:C1968592
 is_a: HP:0001191 ! Abnormality of the carpal bones
+is_a: HP:0010660 ! Abnormality of the mineralisation and ossification of bones of the hand
 created_by: peter
 creation_date: 2008-12-22T06:53:39Z
 
@@ -76243,6 +76176,7 @@ def: "Sclerosis of the epiphyses of the metacarpals, leading to an increased deg
 xref: UMLS:C0025526
 xref: UMLS:C1856911
 is_a: HP:0005913 ! Abnormality of metacarpal epiphyses
+is_a: HP:0010660 ! Abnormality of the mineralisation and ossification of bones of the hand
 created_by: doelkens
 creation_date: 2008-12-30T02:03:34Z
 
@@ -76297,6 +76231,7 @@ xref: UMLS:C0014570
 xref: UMLS:C0025526
 xref: UMLS:C1979978
 is_a: HP:0005913 ! Abnormality of metacarpal epiphyses
+is_a: HP:0010660 ! Abnormality of the mineralisation and ossification of bones of the hand
 created_by: doelkens
 creation_date: 2008-12-30T02:03:34Z
 
@@ -76313,6 +76248,7 @@ xref: UMLS:C0332197
 xref: UMLS:C1184744
 xref: UMLS:C1269064
 xref: UMLS:C1305744
+is_a: HP:0004348 ! Abnormality of bone mineral density
 is_a: HP:0005913 ! Abnormality of metacarpal epiphyses
 created_by: doelkens
 creation_date: 2008-12-30T02:03:34Z
@@ -80886,7 +80822,9 @@ creation_date: 2009-01-15T09:39:43Z
 id: HP:0009466
 name: Radial deviation of fingers
 namespace: medical_genetics
+alt_id: HP:0001213
 alt_id: HP:0001503
+synonym: "Clinodactyly of isolated digits" EXACT []
 synonym: "Radially deviated fingers" EXACT []
 synonym: "Radially deviated phalanges" EXACT []
 xref: UMLS:C0016129
@@ -80904,8 +80842,10 @@ id: HP:0009467
 name: Radial deviation of the 2nd finger
 namespace: medical_genetics
 alt_id: HP:0004103
+alt_id: HP:0006053
 def: "Displacement of the 2nd finger towards the radial side." [HPO:curators]
 synonym: "Radially deviated index finger" EXACT []
+synonym: "Second finger clinodactyly" EXACT []
 xref: UMLS:C0016129
 xref: UMLS:C0205436
 xref: UMLS:C0449751
@@ -80915,6 +80855,8 @@ xref: UMLS:C1281584
 xref: UMLS:C1552854
 xref: UMLS:C1637833
 xref: UMLS:C1836189
+xref: UMLS:C1844709
+is_a: HP:0001157 ! Clinodactyly
 is_a: HP:0009466 ! Radial deviation of fingers
 is_a: HP:0009468 ! Deviation of the 2nd finger
 created_by: doelkens
@@ -85580,6 +85522,7 @@ xref: UMLS:C1281583
 xref: UMLS:C1518633
 xref: UMLS:C1552914
 is_a: HP:0005918 ! Abnormality of the phalanges of the hand
+is_a: HP:0010660 ! Abnormality of the mineralisation and ossification of bones of the hand
 created_by: doelkens
 creation_date: 2009-02-02T11:38:04Z
 
@@ -85598,6 +85541,7 @@ xref: UMLS:C1281583
 xref: UMLS:C1552914
 xref: UMLS:C1857508
 is_a: HP:0005918 ! Abnormality of the phalanges of the hand
+is_a: HP:0010660 ! Abnormality of the mineralisation and ossification of bones of the hand
 created_by: doelkens
 creation_date: 2009-02-02T11:38:04Z
 
@@ -86119,7 +86063,7 @@ creation_date: 2009-02-23T04:59:43Z
 id: HP:0009812
 name: Amelia involving the upper limbs
 namespace: medical_genetics
-def: "Complete absence of one or both upper limbs." [HPO:curators]
+def: "`Amelia` (HP:0009827) of one or both upper limbs." [HPO:curators]
 xref: UMLS:C0002447
 xref: UMLS:C1140618
 xref: UMLS:C1314939
@@ -86219,7 +86163,7 @@ creation_date: 2009-02-23T05:10:03Z
 id: HP:0009818
 name: Amelia involving the lower limbs
 namespace: medical_genetics
-def: "A developmental defect resulting in lacking one or both legs." [HPO:curators]
+def: "`Amelia` (HP:0009827) of one or both legs." [HPO:curators]
 xref: UMLS:C0002447
 xref: UMLS:C0023216
 xref: UMLS:C1314939
@@ -86361,7 +86305,7 @@ creation_date: 2009-02-23T05:16:44Z
 id: HP:0009827
 name: Amelia
 namespace: medical_genetics
-def: "Complete absence of one or more limbs." [HPO:curators]
+def: "Congenital absence (aplasis) of one or more limbs." [HPO:sdoelken]
 xref: UMLS:C0002447
 is_a: HP:0009815 ! Aplasia/Hypoplasia of the extremities
 created_by: doelkens
@@ -87575,7 +87519,7 @@ def: "Ab abnormal thickening of the nasal wings." [HPO:curators]
 xref: UMLS:C0205400
 xref: UMLS:C0458563
 xref: UMLS:C1283890
-is_a: HP:0000429 ! Abnormality of the nasal alae
+is_a: HP:0000429 ! Abnormality of the nasal ala
 created_by: peter
 creation_date: 2009-05-05T06:47:43Z
 
@@ -89429,6 +89373,7 @@ xref: UMLS:C0205435
 xref: UMLS:C1269064
 is_a: HP:0009655 ! Patchy sclerosis of the phalanges of the thumb
 is_a: HP:0010009 ! Abnormality of the 1st metacarpal
+is_a: HP:0010660 ! Abnormality of the mineralisation and ossification of bones of the hand
 created_by: doelkens
 creation_date: 2009-05-27T04:24:30Z
 
@@ -91357,6 +91302,7 @@ namespace: medical_genetics
 xref: UMLS:C0040357
 xref: UMLS:C1856911
 is_a: HP:0010160 ! Abnormality of the epiphyses of the toes
+is_a: HP:0010583 ! Ivory epiphyses
 created_by: doelkens
 creation_date: 2009-05-29T01:34:06Z
 
@@ -91389,6 +91335,7 @@ xref: UMLS:C0014570
 xref: UMLS:C0040357
 xref: UMLS:C1979978
 is_a: HP:0010160 ! Abnormality of the epiphyses of the toes
+is_a: HP:0010656 ! Abnormality of the mineralisation or ossification of the epiphyses
 created_by: doelkens
 creation_date: 2009-05-29T01:34:06Z
 
@@ -92219,6 +92166,8 @@ xref: UMLS:C0549188
 xref: UMLS:C1856911
 xref: UMLS:C1857651
 is_a: HP:0005920 ! Abnormality of the epiphyses of the phalanges of the hand
+is_a: HP:0010583 ! Ivory epiphyses
+is_a: HP:0010660 ! Abnormality of the mineralisation and ossification of bones of the hand
 created_by: doelkens
 creation_date: 2009-07-06T03:31:52Z
 
@@ -92233,6 +92182,7 @@ xref: UMLS:C0016129
 xref: UMLS:C0549188
 xref: UMLS:C1841685
 is_a: HP:0005920 ! Abnormality of the epiphyses of the phalanges of the hand
+is_a: HP:0010656 ! Abnormality of the mineralisation or ossification of the epiphyses
 created_by: doelkens
 creation_date: 2009-07-06T03:31:52Z
 
@@ -92263,6 +92213,8 @@ xref: UMLS:C0016129
 xref: UMLS:C0549188
 xref: UMLS:C1979978
 is_a: HP:0005920 ! Abnormality of the epiphyses of the phalanges of the hand
+is_a: HP:0010656 ! Abnormality of the mineralisation or ossification of the epiphyses
+is_a: HP:0010660 ! Abnormality of the mineralisation and ossification of bones of the hand
 created_by: doelkens
 creation_date: 2009-07-06T03:31:52Z
 
@@ -95398,6 +95350,7 @@ id: HP:0010583
 name: Ivory epiphyses
 namespace: medical_genetics
 is_a: HP:0005930 ! Abnormality of the epiphyses
+is_a: HP:0010651 ! Abnormality of the meninges
 created_by: sandra1
 creation_date: 2009-10-22T02:53:19Z
 
@@ -95904,7 +95857,7 @@ creation_date: 2009-12-07T03:20:51Z
 id: HP:0010638
 name: Elevated alkaline phosphatase of hepatic origin
 namespace: medical_genetics
-is_a: HP:0003155 ! Elevated alkaline phosphatase
+is_a: HP:0010679 ! Elevated tissue non-specific alkaline phosphatase
 created_by: doelkens
 creation_date: 2009-12-11T03:47:19Z
 
@@ -95915,7 +95868,7 @@ namespace: medical_genetics
 alt_id: HP:0008266
 synonym: "Increased serum bone-specific alkaline phosphatase" EXACT []
 xref: UMLS:C1833667
-is_a: HP:0003155 ! Elevated alkaline phosphatase
+is_a: HP:0010679 ! Elevated tissue non-specific alkaline phosphatase
 created_by: doelkens
 creation_date: 2009-12-11T03:47:19Z
 
@@ -95963,4 +95916,452 @@ def: "Abnormal narrowing of the midnasal cavity." [HPO:curators]
 is_a: HP:0010642 ! Midnasal atresia or stenosis
 created_by: doelkens
 creation_date: 2009-12-17T05:06:01Z
+
+[Term]
+id: HP:0010645
+name: Aplasia of the distal phalanges of the toes
+namespace: medical_genetics
+def: "Absence of the distal phalanges of the toes." [HPO:curators]
+is_a: HP:0010185 ! Aplasia/Hypoplasia of the distal phalanges of the toes
+created_by: peter
+creation_date: 2010-02-17T02:41:47Z
+
+[Term]
+id: HP:0010646
+name: Cervical spine instability
+namespace: medical_genetics
+def: "An abnormal lack of stability of the cervical spine." [HPO:curators]
+comment: The cervical spine is made up of two anatomically and functionally distinct segments: the upper cervical spine (C1and C2), which possesses the most rotational mobility with some degrees of frontal and sagittal plane mobility, and the lower cervical spine, which allows for two types of movements - flexion-extension and inclination-rotation. Cervical instability mainly involves the upper cervical spine, particularly between C1 and C2. Craniocervical ligaments are the main determinants of cervical spine stability.
+is_a: HP:0003319 ! Abnormality of the cervical spine
+created_by: doelkens
+creation_date: 2010-02-23T11:15:32Z
+
+[Term]
+id: HP:0010647
+name: Abnormality of skin texture
+namespace: medical_genetics
+def: "Any abnormality of the appearance and feel (texture) of the surface of the skin." [HPO:curators]
+is_a: HP:0000951 ! Skin abnormality
+created_by: doelkens
+creation_date: 2010-02-23T11:42:34Z
+
+[Term]
+id: HP:0010648
+name: Dermal translucency
+namespace: medical_genetics
+def: "An abnormally increased ability of the skin to permit light to pass through (translucency) such that subcutaneous structures such as veins display an increased degree of visibility." [HPO:curator]
+is_a: HP:0000951 ! Skin abnormality
+created_by: doelkens
+creation_date: 2010-02-23T11:50:37Z
+
+[Term]
+id: HP:0010649
+name: Flat nasal alae
+namespace: medical_genetics
+def: "An abnormal degree of flatness of the `Ala of nose` (FMA:59519), which can be defined as a reduced nasal elevation index (lateral depth of the nose from the tip of the nose to the insertion of the nasal ala in the cheek x 100 divided by the side-to-side breadth of the nasal alae)." [HPO:probinson]
+is_a: HP:0000429 ! Abnormality of the nasal ala
+created_by: peter
+creation_date: 2010-02-25T10:01:47Z
+
+[Term]
+id: HP:0010650
+name: Premaxillary hypoplasia
+namespace: medical_genetics
+def: "Underdevelopment of the `Premaxilla` (FMA:76869), which is the embryonic structure that forms the anterior part of the maxilla." [HPO:probinson]
+synonym: "Hypoplastic_premaxilla" EXACT []
+is_a: HP:0000327 ! Maxillary hypoplasia
+created_by: peter
+creation_date: 2010-02-25T10:11:43Z
+
+[Term]
+id: HP:0010651
+name: Abnormality of the meninges
+namespace: medical_genetics
+def: "An abnormality of the `Meninges` (FMA:231572), including any abnormality of the `Dura mater` (FMA:9592), the `Arachnoid mater` (FMA:9591), and the `Pia mater` (FMA:9590)." [HPO:probinson]
+is_a: HP:0002011 ! Abnormality of the central nervous system
+created_by: peter
+creation_date: 2010-02-25T10:19:40Z
+
+[Term]
+id: HP:0010652
+name: Abnormality of the dura mater
+namespace: medical_genetics
+def: "An abnormality of the `Dura mater` (FMA:9592)." [HPO:probinson]
+is_a: HP:0010651 ! Abnormality of the meninges
+created_by: peter
+creation_date: 2010-02-25T10:29:40Z
+
+[Term]
+id: HP:0010653
+name: Abnormality of the falx cerebri
+namespace: medical_genetics
+def: "An abnormality of the `Falx cerebri` (FMA:83967), which refers to the fold of dura mater which descends vertically in the longitudinal fissure between the cerebral hemispheres." [HPO:probinson]
+synonym: "Abnormality of the cerebral falx " EXACT []
+is_a: HP:0010652 ! Abnormality of the dura mater
+created_by: peter
+creation_date: 2010-02-25T10:32:52Z
+
+[Term]
+id: HP:0010654
+name: Aplasia of the falx cerebri
+namespace: medical_genetics
+def: "A developmental defect characterized by the absence of the `Falx cerebri` (FMA:83967)." [HPO:probinson]
+is_a: HP:0010653 ! Abnormality of the falx cerebri
+created_by: peter
+creation_date: 2010-02-25T10:35:26Z
+
+[Term]
+id: HP:0010655
+name: Stippling of the epiphyses
+namespace: medical_genetics
+alt_id: HP:0002658
+alt_id: HP:0010586
+def: "The presence of abnormal punctate (speckled, dot-like) calcifications in the epiphyses (FMA:24012)." [HPO:curators]
+synonym: "Epiphyseal stippling" EXACT []
+synonym: "Stippled epiphyses" EXACT []
+xref: UMLS:C0008445
+xref: UMLS:C1844845
+is_a: HP:0002832 ! Calcific stippling
+is_a: HP:0005930 ! Abnormality of the epiphyses
+is_a: HP:0010651 ! Abnormality of the meninges
+created_by: doelkens
+creation_date: 2010-02-25T09:41:24Z
+
+[Term]
+id: HP:0010656
+name: Abnormality of the mineralisation or ossification of the epiphyses
+namespace: medical_genetics
+def: "Abnormal mineralisation/calicfication and ossification affecting the epiphyses." [HPO:curators]
+is_a: HP:0004348 ! Abnormality of bone mineral density
+created_by: doelkens
+creation_date: 2010-02-25T09:43:04Z
+
+[Term]
+id: HP:0010657
+name: Patchy reduction of bone mineral density
+namespace: medical_genetics
+def: "Patchy (irregular) reduction in bone density. This can take on many forms depending on severity and distribution as can be seen on x-rays." [HPO:curators]
+is_a: HP:0004349 ! Reduced bone mineral density
+is_a: HP:0010658 ! Patchy changes of bone mineral density
+created_by: doelkens
+creation_date: 2010-02-25T10:32:54Z
+
+[Term]
+id: HP:0010658
+name: Patchy changes of bone mineral density
+namespace: medical_genetics
+def: "Patchy (irregular) changes in bone mineral density. These changes can either be patchy reduction or increase of mineral density as seen on x-rays. Depending on the pathomechanism and the underlying disease, these changes can either appear solely as reduction or increase or as a combination of both (patches of bone showing an increased density while others are affected by reduction of mineral density)." [HPO:curators]
+is_a: HP:0004348 ! Abnormality of bone mineral density
+created_by: doelkens
+creation_date: 2010-02-25T10:42:39Z
+
+[Term]
+id: HP:0010659
+name: Patchy increased and decreased bone mineral density
+namespace: medical_genetics
+def: "Patchy (irregular) changes in bone mineral density which in this case include patches of bone showing an increased density side to side with pathches that are affected by reduction of mineral density. This can take on many forms depending on severity and distribution as can be seen on x-rays and sometimes is revered to as a moth-eaten appearance on x-rays." [HPO:curators]
+is_a: HP:0004349 ! Reduced bone mineral density
+is_a: HP:0010658 ! Patchy changes of bone mineral density
+created_by: doelkens
+creation_date: 2010-02-25T10:49:23Z
+
+[Term]
+id: HP:0010660
+name: Abnormality of the mineralisation and ossification of bones of the hand
+namespace: medical_genetics
+is_a: HP:0001155 ! Abnormality of the hand
+is_a: HP:0004348 ! Abnormality of bone mineral density
+created_by: doelkens
+creation_date: 2010-02-25T05:18:19Z
+
+[Term]
+id: HP:0010661
+name: Absence of the third cerebral ventricle
+namespace: medical_genetics
+def: "A developmental defect characterized by the absence of the `Third ventricle` (FMA:78454)." [HPO:probinson]
+is_a: HP:0002118 ! Abnormality of the cerebral ventricles
+created_by: peter
+creation_date: 2010-02-26T08:00:47Z
+
+[Term]
+id: HP:0010662
+name: Abnormality of the diencephalon
+namespace: medical_genetics
+def: "An abnormality of the `Diencephalon` (FMA:62001), which together with the cerebrum (telencephalon) makes up the forebrain." [HPO:probinson]
+comment: The diencephalon comprises the thalamus, hypothalamus, epithalamus, prethalamus or subthalamus and pretectum.
+is_a: HP:0002011 ! Abnormality of the central nervous system
+created_by: peter
+creation_date: 2010-02-26T08:02:38Z
+
+[Term]
+id: HP:0010663
+name: Abnormality of the thalamus
+namespace: medical_genetics
+def: "An abnormality of the `thalamus` (FMA:62007)." [HPO:probinson]
+is_a: HP:0010662 ! Abnormality of the diencephalon
+created_by: peter
+creation_date: 2010-02-26T08:03:50Z
+
+[Term]
+id: HP:0010664
+name: Fusion of the left and right thalami
+namespace: medical_genetics
+def: "A developmental defect characterized by fusion of the left and right halves of the `thalamus` (FMA:62007)." [HPO:probinson]
+synonym: "Fused thalami" EXACT []
+synonym: "Undivided thalami" EXACT []
+is_a: HP:0010663 ! Abnormality of the thalamus
+created_by: peter
+creation_date: 2010-02-26T08:04:37Z
+
+[Term]
+id: HP:0010665
+name: Bilateral coxa valga
+namespace: medical_genetics
+def: "The presence of bilateral `coxa_valga` (HPO:0002673)." [HPO:probinson]
+is_a: HP:0002673 ! Coxa valga
+created_by: peter
+creation_date: 2010-02-26T08:07:03Z
+
+[Term]
+id: HP:0010666
+name: Hypoplasia of the anterior nasal spine
+namespace: medical_genetics
+def: "Underdevelopment of the `anterior nasal spine of maxilla` (FMA:75770)." [HPO:probinson]
+is_a: HP:0000327 ! Maxillary hypoplasia
+created_by: peter
+creation_date: 2010-02-26T08:10:11Z
+
+[Term]
+id: HP:0010667
+name: Aplasia of the maxilla
+namespace: medical_genetics
+def: "A congenital defect characterized by absence of the `Maxilla` (FMA:9711)." [HPO:probinson]
+is_a: HP:0009117 ! Aplasia/Hypoplasia of the maxilla
+created_by: peter
+creation_date: 2010-02-26T08:11:45Z
+
+[Term]
+id: HP:0010668
+name: Abnormality of the zygomatic bone
+namespace: medical_genetics
+def: "An abnormality of the `zygomatic bone` (FMA:52747)." [HPO:curators]
+is_a: HP:0005557 ! Abnormality of the zygomatic arch
+created_by: peter
+creation_date: 2010-02-26T08:13:11Z
+
+[Term]
+id: HP:0010669
+name: Hypoplasia of the zygomatic bone
+namespace: medical_genetics
+def: "Underdevelopment of the `zygomatic bone` (FMA:52747)." [HPO:probinson]
+is_a: HP:0010668 ! Abnormality of the zygomatic bone
+created_by: peter
+creation_date: 2010-02-26T08:14:04Z
+
+[Term]
+id: HP:0010670
+name: Aplasia/Hypoplasia of the fifth metatarsal bone
+namespace: medical_genetics
+def: "A developmental abnormality characterized by the absence or underdevelopment of the `Fifth metatarsal bone` (FMA:24506)." [HPO:probinson]
+is_a: HP:0001964 ! Aplasia/Hypoplasia of metatarsal bones
+created_by: peter
+creation_date: 2010-02-26T08:20:35Z
+
+[Term]
+id: HP:0010671
+name: Hypoplasia of the fifth metatarsal bone
+namespace: medical_genetics
+def: "Underdevelopment of the `Fifth metatarsal bone` (FMA:24506)." [HPO:probinson]
+is_a: HP:0010670 ! Aplasia/Hypoplasia of the fifth metatarsal bone
+created_by: peter
+creation_date: 2010-02-26T08:21:39Z
+
+[Term]
+id: HP:0010672
+name: Abnormality of the 3rd metatarsal bone
+namespace: medical_genetics
+def: "An abnormality of the `Third metatarsal bone` (FMA:24504)." [HPO:probinson]
+is_a: HP:0001832 ! Abnormality of the metatarsal bones
+created_by: peter
+creation_date: 2010-02-26T08:22:51Z
+
+[Term]
+id: HP:0010673
+name: Hypoplasia of the 3rd metatarsal bone
+namespace: medical_genetics
+def: "Underdevelopment of the `Third metatarsal bone` (FMA:24504)." [HPO:probinson]
+is_a: HP:0010672 ! Abnormality of the 3rd metatarsal bone
+created_by: peter
+creation_date: 2010-02-26T08:23:37Z
+
+[Term]
+id: HP:0010674
+name: Abnormality of the curvature of the vertebral collumn
+namespace: medical_genetics
+is_a: HP:0000925 ! Abnormality of the vertebral column
+created_by: sandra1
+creation_date: 2010-02-27T06:28:19Z
+
+[Term]
+id: HP:0010675
+name: Abnormality of the mineralisation and ossification of bones of the feet
+namespace: medical_genetics
+alt_id: HP:0008370
+alt_id: HP:0009133
+synonym: "Abnormal ossification involving bones of the feet" RELATED []
+synonym: "Abnormality of bone mineral density involving bones of the feet" RELATED []
+xref: UMLS:C0005938
+xref: UMLS:C0016504
+xref: UMLS:C0177804
+xref: UMLS:C0231557
+xref: UMLS:C0262950
+xref: UMLS:C0347981
+xref: UMLS:C1266909
+xref: UMLS:C1314939
+xref: UMLS:C1704258
+is_a: HP:0001760 ! Abnormality of the feet
+is_a: HP:0004348 ! Abnormality of bone mineral density
+created_by: sandra1
+creation_date: 2010-02-28T05:27:47Z
+
+[Term]
+id: HP:0010676
+name: Mechanical ileus
+namespace: medical_genetics
+is_a: HP:0002595 ! Ileus
+created_by: sandra1
+creation_date: 2010-03-01T08:43:38Z
+
+[Term]
+id: HP:0010677
+name: Enuresis nocturna
+namespace: medical_genetics
+def: "`Enuresis` (HP:0000805) occuring during sleeping hours." [HPO:sdoelken]
+is_a: HP:0000805 ! Enuresis
+created_by: sandra1
+creation_date: 2010-03-01T09:11:31Z
+
+[Term]
+id: HP:0010678
+name: Enuresis diurna
+namespace: medical_genetics
+def: "`Enuresis` (HP:0000805) occuring during waking hours of the day." [HPO:sdoelken]
+is_a: HP:0000805 ! Enuresis
+created_by: sandra1
+creation_date: 2010-03-01T09:11:51Z
+
+[Term]
+id: HP:0010679
+name: Elevated tissue non-specific alkaline phosphatase
+namespace: medical_genetics
+is_a: HP:0003155 ! Elevated alkaline phosphatase
+created_by: doelkens
+creation_date: 2010-03-05T11:08:35Z
+
+[Term]
+id: HP:0010680
+name: Elevated alkaline phosphatase of renal origin
+namespace: medical_genetics
+is_a: HP:0010679 ! Elevated tissue non-specific alkaline phosphatase
+created_by: doelkens
+creation_date: 2010-03-05T11:09:59Z
+
+[Term]
+id: HP:0010681
+name: Elevated intestinal alkaline phosphatase
+namespace: medical_genetics
+is_a: HP:0003155 ! Elevated alkaline phosphatase
+created_by: doelkens
+creation_date: 2010-03-05T11:10:34Z
+
+[Term]
+id: HP:0010682
+name: Elevated placental alkaline phosphatase
+namespace: medical_genetics
+is_a: HP:0003155 ! Elevated alkaline phosphatase
+created_by: doelkens
+creation_date: 2010-03-05T11:11:06Z
+
+[Term]
+id: HP:0010683
+name: Low tissue non-specific alkaline phosphatase
+namespace: medical_genetics
+is_a: HP:0003282 ! Low alkaline phosphatase
+created_by: doelkens
+creation_date: 2010-03-05T11:12:08Z
+
+[Term]
+id: HP:0010684
+name: Low alkaline phosphatase of bone origin
+namespace: medical_genetics
+is_a: HP:0010683 ! Low tissue non-specific alkaline phosphatase
+created_by: doelkens
+creation_date: 2010-03-05T11:12:47Z
+
+[Term]
+id: HP:0010685
+name: Low alkaline phosphatase of renal origin
+namespace: medical_genetics
+is_a: HP:0010683 ! Low tissue non-specific alkaline phosphatase
+created_by: doelkens
+creation_date: 2010-03-05T11:12:47Z
+
+[Term]
+id: HP:0010686
+name: Low alkaline phosphatase of hepatic origin
+namespace: medical_genetics
+is_a: HP:0010683 ! Low tissue non-specific alkaline phosphatase
+created_by: doelkens
+creation_date: 2010-03-05T11:12:47Z
+
+[Term]
+id: HP:0010687
+name: Low intestinal alkaline phosphatase
+namespace: medical_genetics
+is_a: HP:0003282 ! Low alkaline phosphatase
+created_by: doelkens
+creation_date: 2010-03-05T11:13:10Z
+
+[Term]
+id: HP:0010688
+name: Low placental alkaline phosphatase
+namespace: medical_genetics
+is_a: HP:0003282 ! Low alkaline phosphatase
+created_by: doelkens
+creation_date: 2010-03-05T11:13:28Z
+
+[Term]
+id: HP:0010689
+name: Mirror image dupliction of digits
+namespace: medical_genetics
+is_a: HP:0010442 ! Polydactyly
+created_by: doelkens
+creation_date: 2010-03-05T05:03:16Z
+
+[Term]
+id: HP:0010690
+name: Mirror image dupliction of fingers
+namespace: medical_genetics
+is_a: HP:0001161 ! Polydactyly (hands)
+is_a: HP:0010689 ! Mirror image dupliction of digits
+created_by: doelkens
+creation_date: 2010-03-05T05:05:05Z
+
+[Term]
+id: HP:0010691
+name: Mirror image dupliction of toes
+namespace: medical_genetics
+is_a: HP:0001829 ! Polydactyly (feet)
+is_a: HP:0010689 ! Mirror image dupliction of digits
+created_by: doelkens
+creation_date: 2010-03-05T05:05:05Z
+
+[Term]
+id: HP:0010692
+name: 2-5 finger syndactyly
+namespace: medical_genetics
+def: "`Syndactyly` (HP:0001159) with fusion of fingers two to fife." [HPO:sdoelken]
+is_a: HP:0006101 ! Finger syndactyly
+created_by: doelkens
+creation_date: 2010-03-05T06:41:50Z
 

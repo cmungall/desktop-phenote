@@ -1,5 +1,5 @@
 format-version: 1.2
-date: 08:02:2010 10:12
+date: 11:02:2010 10:12
 saved-by: George Gkoutos
 auto-generated-by: OBO-Edit 2.000-beta55
 subsetdef: abnormal_slim "Abnormal/normal slim"
@@ -1605,7 +1605,7 @@ is_a: UO:0000111 ! energy unit
 
 [Term]
 id: UO:0000225
-name: magnetic flux
+name: magnetic flux unit
 def: "A derived unit which is a standard measure of quantity of magnetism, taking account of the strength and the extent of a magnetic field." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
 is_a: UO:0000046 ! derived unit
 relationship: unit_of PATO:0001682 ! magnetism
@@ -1923,6 +1923,22 @@ synonym: "AU" EXACT []
 is_a: UO:0000186 ! dimensionless unit
 created_by: gg295
 creation_date: 2009-07-14T12:33:48Z
+
+[Term]
+id: UO:0000270
+name: volumetric flow rate unit
+def: "A derived unit which is a standard measure of the volume of fluid which passes through a given surface per unit time ." [Wikipedia:Wikipedia "http://www.wikipedia.org/"]
+is_a: UO:0000046 ! derived unit
+relationship: unit_of PATO:0001574 ! flow
+created_by: george gkoutos
+
+[Term]
+id: UO:0000271
+name: microliters per minute
+def: "A volumetric flow rate unit which is equal to one microliter volume through a given surface in one minute." [PATOC:GVG]
+synonym: "uL/min" EXACT []
+is_a: UO:0000270 ! volumetric flow rate unit
+created_by: george gkoutos
 
 [Typedef]
 id: decreased_in_magnitude_relative_to

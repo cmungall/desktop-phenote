@@ -1,5 +1,5 @@
 format-version: 1.2
-date: 14:01:2010 17:30
+date: 25:03:2010 09:47
 saved-by: George Gkoutos
 auto-generated-by: OBO-Edit 2.0
 subsetdef: abnormal_slim "Abnormal/normal slim"
@@ -805,7 +805,7 @@ synonym: "angle" RELATED []
 synonym: "angular magnitude" RELATED []
 synonym: "orientation" EXACT []
 synonym: "plane angle" RELATED []
-is_a: PATO:0001631 ! relational spatial quality
+is_a: PATO:0002168 ! displaced to
 
 [Term]
 id: PATO:0000134
@@ -858,10 +858,8 @@ is_obsolete: true
 
 [Term]
 id: PATO:0000143
-name: straight
-def: "A shape quality inhering in a bearer by virtue of the bearer's being free of curves, bends, or angles." [merriam-webster:merriam-webster "http://www.merriam-webster.com/dictionary/straight"]
-subset: value_slim
-is_a: PATO:0000052 ! shape
+name: addictive substance
+is_obsolete: true
 
 [Term]
 id: PATO:0000144
@@ -2305,11 +2303,9 @@ is_a: PATO:0002009 ! branchiness
 [Term]
 id: PATO:0000403
 name: cleft
-alt_id: PATO:0001572
-def: "A concave quality inhering in a bearer by virtue of the bearer's being partially split or divided." [gmbis:gmbis "http://gmbis.marinebiodiversity.ca/"]
+def: "A concave quality inhering in a bearer by virtue of the bearer's resembling a groove or fissure." [WordNet:WordNet "http://wordnet.princeton.edu/"]
 subset: cell_quality
 subset: value_slim
-synonym: "bifid" EXACT []
 is_a: PATO:0001857 ! concave
 
 [Term]
@@ -3295,7 +3291,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000573
 name: increased length
-def: "A length quality which is relative large." [PATOC:GVG]
+def: "A length quality which is relatively large." [PATOC:GVG]
 subset: value_slim
 synonym: "long" EXACT []
 is_a: PATO:0000122 ! length
@@ -3304,7 +3300,7 @@ relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
 [Term]
 id: PATO:0000574
 name: decreased length
-def: "A length quality which is relative small." [PATOC:GVG]
+def: "A length quality which is relatively small." [PATOC:GVG]
 subset: value_slim
 synonym: "short" EXACT []
 synonym: "shortened" RELATED []
@@ -3482,7 +3478,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000599
 name: decreased width
-def: "A width which is relative small." [PATOC:GVG]
+def: "A width which is relatively small." [PATOC:GVG]
 subset: value_slim
 synonym: "narrow" RELATED []
 is_a: PATO:0000921 ! width
@@ -3491,7 +3487,7 @@ relationship: decreased_in_magnitude_relative_to PATO:0000461 ! normal
 [Term]
 id: PATO:0000600
 name: increased width
-def: "A width which is relative large." [PATOC:GVG]
+def: "A width which is relatively large." [PATOC:GVG]
 subset: value_slim
 synonym: "broad" RELATED []
 synonym: "wide" RELATED []
@@ -3681,11 +3677,11 @@ is_a: PATO:0000140 ! position
 id: PATO:0000628
 name: mislocalised
 alt_id: PATO:0000621
-def: "A positional quality inhering in a bearer by virtue of the bearer's being placed in an abnormal location." [PATOC:MAH]
+def: "A positional quality inhering in a bearer by virtue the bearer's being changed in abnormal position." [PATOC:GVG]
 subset: value_slim
 synonym: "ectopic" EXACT []
 synonym: "mislocalized" EXACT []
-is_a: PATO:0000140 ! position
+is_a: PATO:0002181 ! displaced
 
 [Term]
 id: PATO:0000629
@@ -3841,13 +3837,6 @@ name: obstructed
 def: "A morphological quality inhering in a bearer by virtue of the bearer's being blocked or filled with obstacles or an obstacle." [thefreedictionary.com:thefreedictionary.com "http://www.thefreedictionary.com/"]
 subset: value_slim
 is_a: PATO:0000608 ! closed
-
-[Term]
-id: PATO:0000649
-name: permeable
-def: "A structural quality inhering in a bearer by virtue of the bearer's having a hole or holes, especially a row or array of small holes." [answers.com:answers.com "http://www.answers.com/"]
-subset: value_slim
-is_a: PATO:0002014 ! structure, cavities
 
 [Term]
 id: PATO:0000651
@@ -6668,7 +6657,7 @@ is_obsolete: true
 [Term]
 id: PATO:0001161
 name: diluted
-def: "A concentration which relative low." [PATOC:GVG]
+def: "A concentration which relatively low." [PATOC:GVG]
 subset: relational_slim
 subset: value_slim
 is_a: PATO:0000033 ! concentration of
@@ -7358,6 +7347,7 @@ id: PATO:0001264
 name: light yellow
 def: "A color consisting of yellow hue and high brightness." [PATOC:GVG]
 subset: value_slim
+synonym: "blond" RELATED []
 is_a: PATO:0000324 ! yellow
 
 [Term]
@@ -7668,7 +7658,7 @@ relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
 [Term]
 id: PATO:0001306
 name: decreased temperature
-def: "A temperature which is relative low compared to average or normal." [PATOC:GVG]
+def: "A temperature which is relatively low compared to average or normal." [PATOC:GVG]
 subset: value_slim
 synonym: "low temperature" EXACT []
 is_a: PATO:0000146 ! temperature
@@ -7919,7 +7909,7 @@ name: mixed sex
 def: "A biological sex quality inhering in a population of multiple sexes." [MGED:MGED]
 comment: For example a mixture of females and male or males and hermaphrodites.
 subset: value_slim
-is_a: PATO:0001894 ! phenotypic sex
+is_a: PATO:0002003 ! population quality
 
 [Term]
 id: PATO:0001339
@@ -9523,7 +9513,7 @@ name: quality of a solid
 def: "A physical quality inhering in a bearer by virtue of the bearer's exhibiting the physical characteristics of an entity characterized by particles arranged such that their shape and volume are relatively stable." [Chemistry:http\://chemistry.about.com/od/chemistryglossary/a/soliddefinition.htm]
 subset: attribute_slim
 synonym: "solidity" EXACT []
-is_a: PATO:0001018 ! physical quality
+is_a: PATO:0002198 ! quality of a substance
 
 [Term]
 id: PATO:0001547
@@ -9531,7 +9521,7 @@ name: quality of a gas
 def: "A physical quality inhering in a bearer by virtue of the bearer's exhibiting the physical characteristics of an entity consisting of particles that have neither a defined volume nor defined shape." [Chemistry:http\://chemistry.about.com/od/chemistryglossary/a/gasdefinition.htm, PATOC:GVG]
 subset: attribute_slim
 synonym: "gaseous" EXACT []
-is_a: PATO:0001018 ! physical quality
+is_a: PATO:0002198 ! quality of a substance
 
 [Term]
 id: PATO:0001548
@@ -9539,7 +9529,7 @@ name: quality of a liquid
 def: "A physical quality inhering in an entity exhibiting the physical characteristics of an amorphous (non-crystalline) form of matter between a gas and a solid that has a definite volume, but no definite shape." [Chemistry dictionary:http\://www.chemistry-dictionary.com/definition/liquid.php]
 subset: attribute_slim
 synonym: "liquidity" EXACT []
-is_a: PATO:0001018 ! physical quality
+is_a: PATO:0002198 ! quality of a substance
 
 [Term]
 id: PATO:0001549
@@ -9709,6 +9699,13 @@ id: PATO:0001571
 name: dilated
 def: "A size quality inhering in a bearer by virtue of the bearer's being made wider or larger in all dimensions." [WordNet:WordNet "http://wordnet.princeton.edu/"]
 is_a: PATO:0000586 ! increased size
+
+[Term]
+id: PATO:0001572
+name: bifid
+def: "A shape quality inhering in a bearer by virtue of the bearer's being forked or partially split into two parts." [PATOC:GVG]
+subset: value_slim
+is_a: PATO:0001786 ! split
 
 [Term]
 id: PATO:0001573
@@ -10185,7 +10182,6 @@ name: posterior to
 def: "A relational spatial quality inhering in a bearer by virtue of the bearer's being located toward the rear of an organism relative to another entity." [PATOC:nw]
 subset: relational_slim
 subset: value_slim
-synonym: "dorsal_to" EXACT []
 synonym: "posterior (human torso)" EXACT []
 synonym: "superior (human head)" EXACT []
 is_a: PATO:0001631 ! relational spatial quality
@@ -10321,7 +10317,7 @@ relationship: decreased_in_magnitude_relative_to PATO:0000461 ! normal
 [Term]
 id: PATO:0001652
 name: alignment
-def: "A relational spatial quality inhering in a bearer by virtue of the bearer's spatial positioning with respect to an additional entity." [PATOC:nw]
+def: "A relational spatial quality inhering in a bearer by virtue of the bearer's spatial positioning with respect to an additional entity." [PATOC:GVG]
 subset: attribute_slim
 subset: relational_slim
 is_a: PATO:0001631 ! relational spatial quality
@@ -10330,7 +10326,7 @@ relationship: has_part PATO:0000133 ! angular placement
 [Term]
 id: PATO:0001653
 name: aligned with
-def: "An alignment quality inhering in a bearer by virtue of the bearer's being in proper spatial positioning with respect to an additional entity." [PATO:nw]
+def: "An alignment quality inhering in a bearer by virtue of the bearer's being in a proper spatial positioning with respect to an additional entity." [PATO:GVG]
 subset: relational_slim
 subset: value_slim
 synonym: "aligned " EXACT []
@@ -10340,7 +10336,7 @@ is_a: PATO:0001652 ! alignment
 [Term]
 id: PATO:0001654
 name: misaligned with
-def: "An alignment quality inhering in a bearer by virtue of the bearer's being in improper spatial positioning with respect to an additional entity." [PATOC:nw]
+def: "An alignment quality inhering in a bearer by virtue of the bearer's being in a improper spatial positioning with respect to an additional entity." [PATOC:GVG]
 subset: relational_slim
 subset: value_slim
 synonym: "misaligned " EXACT []
@@ -10396,8 +10392,7 @@ name: decreased action potential
 def: "An action potential which is relatively low." [PATOC:GVG]
 subset: value_slim
 synonym: "low action potential" EXACT []
-is_a: PATO:0001463 ! action potential
-relationship: decreased_in_magnitude_relative_to PATO:0000461 ! normal
+is_obsolete: true
 
 [Term]
 id: PATO:0001661
@@ -10405,8 +10400,7 @@ name: increased action potential
 def: "An action potential which is relatively high." [PATOC:GVG]
 subset: value_slim
 synonym: "high action potential" EXACT []
-is_a: PATO:0001463 ! action potential
-relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
+is_obsolete: true
 
 [Term]
 id: PATO:0001662
@@ -10666,7 +10660,7 @@ is_a: PATO:0001595 ! depth
 [Term]
 id: PATO:0001693
 name: increased viscosity
-def: "A viscosity which relative high." [PATOC:GVG]
+def: "A viscosity which relatively high." [PATOC:GVG]
 subset: value_slim
 synonym: "high viscosity" EXACT []
 is_a: PATO:0000998 ! viscous
@@ -10675,7 +10669,7 @@ relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
 [Term]
 id: PATO:0001694
 name: decreased viscosity
-def: "A viscosity which relative low." [PATOC:GVG]
+def: "A viscosity which relatively low." [PATOC:GVG]
 subset: value_slim
 synonym: "low viscosity" EXACT []
 is_a: PATO:0000998 ! viscous
@@ -10829,7 +10823,7 @@ relationship: decreased_in_magnitude_relative_to PATO:0000461 ! normal
 [Term]
 id: PATO:0001714
 name: increased diameter
-def: "A diameter which is relative large." [PATOC:GVG]
+def: "A diameter which is relatively large." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001334 ! diameter
 relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
@@ -10837,7 +10831,7 @@ relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
 [Term]
 id: PATO:0001715
 name: decreased diameter
-def: "A diameter which is relative small." [PATOC:GVG]
+def: "A diameter which is relatively small." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001334 ! diameter
 relationship: decreased_in_magnitude_relative_to PATO:0000461 ! normal
@@ -11388,6 +11382,7 @@ id: PATO:0001786
 name: split
 def: "A shape quality inhering in a bearer by virtue of the bearer's being divided or broken up into parts or divisions." [die.net:die.net "http://dict.die.net"]
 subset: value_slim
+synonym: "clefted" EXACT []
 synonym: "divided" RELATED []
 synonym: "septate" NARROW []
 is_a: PATO:0000052 ! shape
@@ -11692,7 +11687,7 @@ is_a: PATO:0001822 ! wetness
 [Term]
 id: PATO:0001825
 name: increased wetness
-def: "A wetness quality that is relative high." [PATOC:GVG]
+def: "A wetness quality that is relatively high." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001823 ! wet
 relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
@@ -11700,7 +11695,7 @@ relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
 [Term]
 id: PATO:0001826
 name: decreased wetness
-def: "A wetness quality that is relative low." [PATOC:GVG]
+def: "A wetness quality that is relatively low." [PATOC:GVG]
 subset: value_slim
 synonym: "low wetness" EXACT []
 is_a: PATO:0001823 ! wet
@@ -11791,7 +11786,7 @@ is_a: PATO:0000141 ! structure
 [Term]
 id: PATO:0001838
 name: decreased flow
-def: "A flow that is relative low." [PATOC:GVG]
+def: "A flow that is relatively low." [PATOC:GVG]
 subset: value_slim
 synonym: "low flow" EXACT []
 is_a: PATO:0001574 ! flow
@@ -11800,7 +11795,7 @@ relationship: decreased_in_magnitude_relative_to PATO:0000461 ! normal
 [Term]
 id: PATO:0001839
 name: increased flow
-def: "A flow that is relative high." [PATOC:GVG]
+def: "A flow that is relatively high." [PATOC:GVG]
 subset: value_slim
 synonym: "high flow" EXACT []
 is_a: PATO:0001574 ! flow
@@ -11904,7 +11899,7 @@ synonym: "dislocation" EXACT []
 synonym: "displaced" EXACT []
 synonym: "luxated" EXACT []
 synonym: "luxation" EXACT []
-is_a: PATO:0000140 ! position
+is_a: PATO:0002181 ! displaced
 
 [Term]
 id: PATO:0001853
@@ -11952,7 +11947,7 @@ is_a: PATO:0002076 ! movement bahavioral quality
 [Term]
 id: PATO:0001859
 name: increased coordination
-def: "A coordination which is relative high." [PATOC:GVG]
+def: "A coordination which is relatively high." [PATOC:GVG]
 synonym: "high coordination" EXACT []
 is_a: PATO:0000769 ! coordinated
 relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
@@ -11960,7 +11955,7 @@ relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
 [Term]
 id: PATO:0001860
 name: decreased coordination
-def: "A coordination which is relative low." [PATOC:GVG]
+def: "A coordination which is relatively low." [PATOC:GVG]
 synonym: "low coordination" EXACT []
 is_a: PATO:0000769 ! coordinated
 relationship: decreased_in_magnitude_relative_to PATO:0000461 ! normal
@@ -13092,9 +13087,9 @@ is_a: PATO:0000150 ! texture
 
 [Term]
 id: PATO:0002011
-name: tumorous
+name: neoplastic
 def: "A structural quality which is held by a bearer when the latter exhibits the presence of abnormally proliferating masses of cells." [PATOC:MAH]
-synonym: "neoplastic" EXACT []
+synonym: "tumorous" EXACT []
 is_a: PATO:0000141 ! structure
 
 [Term]
@@ -13336,7 +13331,7 @@ is_a: PATO:0001334 ! diameter
 [Term]
 id: PATO:0002042
 name: decreased anterior-posterior diameter
-def: "An anterior-posterior diameter quality which is relative small." [PATOC:GVG]
+def: "An anterior-posterior diameter quality which is relatively small." [PATOC:GVG]
 subset: value_slim
 synonym: "low anterior-posterior diameter" EXACT []
 is_a: PATO:0002041 ! anterior-posterior diameter
@@ -13344,7 +13339,7 @@ is_a: PATO:0002041 ! anterior-posterior diameter
 [Term]
 id: PATO:0002043
 name: increased anterior-posterior diameter
-def: "An anterior-posterior diameter quality which is relative large." [PATOC:GVG]
+def: "An anterior-posterior diameter quality which is relatively large." [PATOC:GVG]
 subset: value_slim
 synonym: "high anterior-posterior diameter" EXACT []
 is_a: PATO:0002041 ! anterior-posterior diameter
@@ -13488,6 +13483,7 @@ name: decreased area
 def: "An area which is relatively low." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001323 ! area
+relationship: decreased_in_magnitude_relative_to PATO:0000461 ! normal
 created_by: George Gkoutos
 creation_date: 2009-03-30T04:12:11Z
 
@@ -13768,7 +13764,7 @@ creation_date: 2009-10-01T03:00:20Z
 [Term]
 id: PATO:0002089
 name: polycystic
-def: "A structure quality inhering in a bearer by virtue of the bearer's body consisting of more than one sac." [mondofacto:mondofacto "http://www.mondofacto.com/facts/dictionary?query=polycystic"]
+def: "A structure quality inhering in a bearer by virtue of the bearer's body containing more than one cyst - formations of an epithelium bounded cavity not associated with neoplasia." [PATOC:GVG]
 subset: value_slim
 synonym: "multicystic" EXACT []
 is_a: PATO:0001673 ! cystic
@@ -13826,34 +13822,39 @@ id: PATO:0002095
 name: neoplasm disposition
 def: "A disposition inhering in a tumour to progress or fail to progress during it's life time." [PATOC:GVG]
 subset: attribute_slim
-is_a: PATO:0001727 ! disposition
+is_obsolete: true
 created_by: george
 creation_date: 2009-10-05T12:15:02Z
 
 [Term]
 id: PATO:0002096
-name: benign
+name: neoplastic, non-malignant
 def: "A disposition inhering in a tumour by virtue of the bearer's disposition not to progress, invade surrounding tissues or metastasize." [PATOC:GVG]
 subset: value_slim
-is_a: PATO:0002095 ! neoplasm disposition
+synonym: "benign" RELATED []
+is_a: PATO:0002011 ! neoplastic
 created_by: george
 creation_date: 2009-10-05T12:47:14Z
 
 [Term]
 id: PATO:0002097
-name: malignant
+name: neoplastic, malignant
 def: "A disposition inhering in a tumour by virtue of the bearer's disposition to progress, invade surrounding tissues or metastasize." [PATOC:GVG]
 subset: value_slim
-is_a: PATO:0002095 ! neoplasm disposition
+is_a: PATO:0002011 ! neoplastic
+disjoint_from: PATO:0002096 ! neoplastic, non-malignant
+disjoint_from: PATO:0002132 ! neoplastic, non-invasive
 created_by: george
 creation_date: 2009-10-05T12:50:22Z
 
 [Term]
 id: PATO:0002098
-name: metastatic
+name: neoplastic, metastatic
 def: "A disposition inhering in a tumour by virtue of the bearer's disposition to spread and invade distant tissues." [PATOC:GVG]
 subset: value_slim
-is_a: PATO:0002095 ! neoplasm disposition
+is_a: PATO:0002011 ! neoplastic
+disjoint_from: PATO:0002096 ! neoplastic, non-malignant
+disjoint_from: PATO:0002132 ! neoplastic, non-invasive
 created_by: george
 creation_date: 2009-10-05T12:54:48Z
 
@@ -13980,8 +13981,10 @@ creation_date: 2009-10-05T03:29:42Z
 [Term]
 id: PATO:0002112
 name: perforate
-def: "A structural quality inhering in a bearer by virtue of the bearer's having a hole or holes." [answers.com:answers.com "http://www.answers.com/topic/perforated"]
+alt_id: PATO:0000649
+def: "A structural quality inhering in a bearer by virtue of the bearer's having a hole or holes, especially a row or array of small holes." [answers.com:answers.com "http://www.answers.com/topic/perforated"]
 subset: value_slim
+synonym: "permeable" EXACT []
 synonym: "pieerced" RELATED []
 is_a: PATO:0002014 ! structure, cavities
 created_by: george
@@ -14134,19 +14137,21 @@ creation_date: 2009-10-06T04:51:16Z
 
 [Term]
 id: PATO:0002129
-name: invasive
+name: neoplastic, invasive
 def: "A disposition inhering in a tumour by virtue of the bearer's disposition to invade surrounding tissues." [PATOC:GVG]
 subset: value_slim
-is_a: PATO:0002095 ! neoplasm disposition
+is_a: PATO:0002011 ! neoplastic
+disjoint_from: PATO:0002096 ! neoplastic, non-malignant
+disjoint_from: PATO:0002132 ! neoplastic, non-invasive
 created_by: george
 creation_date: 2009-10-06T05:02:45Z
 
 [Term]
 id: PATO:0002130
-name: deeply invasive
+name: neoplastic, deeply invasive
 def: "A disposition inhering in a tumour by virtue of the bearer's disposition to invade surrounding tissues to a large extend." [PATOC:GVG]
 subset: value_slim
-is_a: PATO:0002129 ! invasive
+is_a: PATO:0002129 ! neoplastic, invasive
 created_by: george
 creation_date: 2009-10-06T05:03:13Z
 
@@ -14161,10 +14166,10 @@ creation_date: 2009-10-13T06:38:53Z
 
 [Term]
 id: PATO:0002132
-name: non-invasive
+name: neoplastic, non-invasive
 def: "A disposition inhering in a tumour by virtue of the bearer's disposition not to invade surrounding tissues." [PATOC:GVG]
 subset: value_slim
-is_a: PATO:0002095 ! neoplasm disposition
+is_a: PATO:0002011 ! neoplastic
 created_by: george
 creation_date: 2009-10-06T05:04:18Z
 
@@ -14267,7 +14272,7 @@ creation_date: 2009-10-30T02:18:39Z
 [Term]
 id: PATO:0002144
 name: increased radiopacity
-def: "A radiopacity that is relative high." [PATOC:GVG]
+def: "A radiopacity that is relatively high." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0002136 ! radiopacity
 relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
@@ -14277,7 +14282,7 @@ creation_date: 2009-10-30T03:30:39Z
 [Term]
 id: PATO:0002145
 name: decreased radiopacity
-def: "A radiopacity that is relative low." [PATOC:GVG]
+def: "A radiopacity that is relatively low." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0002136 ! radiopacity
 relationship: decreased_in_magnitude_relative_to PATO:0000461 ! normal
@@ -14296,7 +14301,7 @@ creation_date: 2009-10-30T05:04:06Z
 [Term]
 id: PATO:0002147
 name: reduced virulence
-def: "A virulence that is relative low." [PATOC:GVG]
+def: "A virulence that is relatively low." [PATOC:GVG]
 subset: value_slim
 synonym: "attenuated" EXACT []
 is_a: PATO:0002146 ! virulence
@@ -14307,7 +14312,7 @@ creation_date: 2009-10-30T05:05:02Z
 [Term]
 id: PATO:0002148
 name: increased virulence
-def: "A virulence that is relative high." [PATOC:GVG]
+def: "A virulence that is relatively high." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0002146 ! virulence
 relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
@@ -14504,12 +14509,346 @@ creation_date: 2009-12-02T05:19:32Z
 
 [Term]
 id: PATO:0002168
-name: mislocalised to
-def: "A relational spatial quality inhering in a bearer by virtue being placed in an abnormal location in relation to another entity." [PATOC:GVG]
+name: displaced to
+def: "A relational spatial quality inhering in a bearer by virtue being changed in position in relation to another entity." [PATOC:GVG]
 subset: relational_slim
+synonym: "mislocalised to" RELATED []
 is_a: PATO:0001631 ! relational spatial quality
 created_by: george
 creation_date: 2010-01-14T04:45:18Z
+
+[Term]
+id: PATO:0002169
+name: split medially
+def: "A shape quality inhering in a bearer by virtue of the bearer's being split along the median axis." [PATOC:GVG]
+subset: value_slim
+is_a: PATO:0001786 ! split
+created_by: george
+creation_date: 2010-02-03T04:37:15Z
+
+[Term]
+id: PATO:0002170
+name: split laterally
+def: "A shape quality inhering in a bearer by virtue of the bearer's being split asymmetrically on one side." [PATOC:GVG]
+subset: value_slim
+is_a: PATO:0001786 ! split
+created_by: george
+creation_date: 2010-02-03T04:37:40Z
+
+[Term]
+id: PATO:0002171
+name: split bilaterally
+def: "A shape quality inhering in a bearer by virtue of the bearer's being split on two side." [PATOC:GVG]
+subset: value_slim
+is_a: PATO:0001786 ! split
+created_by: george
+creation_date: 2010-02-03T04:37:53Z
+
+[Term]
+id: PATO:0002172
+name: split radially
+def: "A shape quality inhering in a bearer by virtue of the bearer's being split along the radial axis." [PATOC:GVG]
+subset: value_slim
+is_a: PATO:0001786 ! split
+created_by: george
+creation_date: 2010-02-03T04:42:35Z
+
+[Term]
+id: PATO:0002173
+name: misaligned towards
+def: "An alignment quality inhering in a bearer by virtue of the bearer's being in a improper spatial positioning towards an additional entity." [PATOC:GVG]
+subset: attribute_slim
+subset: relational_slim
+is_a: PATO:0001654 ! misaligned with
+created_by: George Gkoutos
+creation_date: 2010-02-22T03:18:17Z
+
+[Term]
+id: PATO:0002174
+name: misaligned away from
+def: "An alignment quality inhering in a bearer by virtue of the bearer's being in a improper spatial positioning away from an additional entity." [PATOC:GVG]
+subset: attribute_slim
+subset: relational_slim
+is_a: PATO:0001654 ! misaligned with
+created_by: George Gkoutos
+creation_date: 2010-02-22T03:18:48Z
+
+[Term]
+id: PATO:0002175
+name: deviation
+def: "A spatial quality inhering in a bearer by virtue of the bearer's changed direction of position towards another entity." [PATO:GVG]
+subset: attribute_slim
+is_a: PATO:0000060 ! spatial pattern
+created_by: George Gkoutos
+creation_date: 2010-02-25T09:14:42Z
+
+[Term]
+id: PATO:0002176
+name: deviation towards the lateral side
+def: "A deviation quality inhering in a bearer by virtue of the bearer's changed direction of position towards the side." [PATOC:GVG]
+subset: value_slim
+is_a: PATO:0002175 ! deviation
+created_by: George Gkoutos
+creation_date: 2010-02-25T09:16:04Z
+
+[Term]
+id: PATO:0002177
+name: deviation towards the medial side
+def: "A deviation quality inhering in a bearer by virtue of the bearer's changed direction of position towards the middle." [PATOC:GVG]
+subset: value_slim
+is_a: PATO:0002175 ! deviation
+created_by: George Gkoutos
+creation_date: 2010-02-25T09:16:56Z
+
+[Term]
+id: PATO:0002178
+name: mislocalised radially
+def: "A positional quality inhering in a bearer by virtue of the bearer's being out of its usual or proper place, or position around a central point or axis." [PATOC:GVG]
+subset: value_slim
+is_a: PATO:0000628 ! mislocalised
+created_by: George Gkoutos
+creation_date: 2010-02-25T11:24:58Z
+
+[Term]
+id: PATO:0002179
+name: mislocalised proximally
+def: "A positional quality inhering in a bearer by virtue of the bearer's being positioned towards to point of attachment or origin." [PATOC:GVG]
+subset: value_slim
+is_a: PATO:0000628 ! mislocalised
+created_by: George Gkoutos
+creation_date: 2010-02-25T12:34:48Z
+
+[Term]
+id: PATO:0002180
+name: straight
+def: "A shape quality inhering in a bearer by virtue of the bearer's being free of curves, bends, or angles." [merriam-webster:merriam-webster "http://www.merriam-webster.com/dictionary/straight"]
+subset: value_slim
+is_a: PATO:0000052 ! shape
+created_by: George Gkoutos
+creation_date: 2010-02-28T08:54:59Z
+
+[Term]
+id: PATO:0002181
+name: displaced
+def: "A positional quality inhering in a bearer by virtue the bearer's being changed in position." [PATOC:GVG]
+subset: attribute_slim
+is_a: PATO:0000140 ! position
+created_by: George Gkoutos
+creation_date: 2010-03-01T02:56:33Z
+
+[Term]
+id: PATO:0002182
+name: molecular quality
+def: "A quality which inheres in a molecular entity, viz. a single molecule, atom, ion, radical etc." [PATOC:JH]
+subset: attribute_slim
+is_a: PATO:0001237 ! quality of a single physical entity
+created_by: George Gkoutos
+creation_date: 2010-03-10T03:18:15Z
+
+[Term]
+id: PATO:0002183
+name: cyclicity
+def: "A molecular quality that inheres in a molecular entity by virtue of whether that there is a presence of cycles in the connection of the atoms within the molecular entity." [PATOC:JH]
+subset: value_slim
+is_a: PATO:0002182 ! molecular quality
+created_by: George Gkoutos
+creation_date: 2010-03-10T03:19:46Z
+
+[Term]
+id: PATO:0002184
+name: cyclic cyclicity
+def: "Cyclic cyclicity inheres in a molecule when the atoms of the molecule do contain at least one cycle in the atom-atom connection paths (through bonds)." [PATOC:JH]
+subset: value_slim
+is_a: PATO:0002183 ! cyclicity
+created_by: George Gkoutos
+creation_date: 2010-03-10T03:20:54Z
+
+[Term]
+id: PATO:0002185
+name: acyclic cyclicity
+def: "Acyclic cyclicity inheres in a molecule when the atoms within the molecule do not contain at least one cycle in the atom-atom connection paths (through the bonds)." [PATOC:JH]
+subset: value_slim
+is_a: PATO:0002183 ! cyclicity
+created_by: George Gkoutos
+creation_date: 2010-03-10T03:21:39Z
+
+[Term]
+id: PATO:0002186
+name: polarity
+def: "A molecular quality that inheres in a molecular entity by virtue of whether or not the molecular entity has a separation of electric charge which leads to the molecule having an electric dipole" [PATOC:JH]
+subset: attribute_slim
+is_a: PATO:0002182 ! molecular quality
+created_by: George Gkoutos
+creation_date: 2010-03-10T03:22:04Z
+
+[Term]
+id: PATO:0002187
+name: polar polarity
+def: "Polar polarity is a quality that inheres in a molecular entity when the molecular entity is polar, i.e. does possess an electric dipole." [PATOC:JH]
+subset: value_slim
+is_a: PATO:0002186 ! polarity
+created_by: George Gkoutos
+creation_date: 2010-03-10T03:22:49Z
+
+[Term]
+id: PATO:0002188
+name: nonpolar polarity
+def: "A molecular quality which inheres in a molecular entity when the molecular entity does not possess an electrical dipole." [PATOC:JH]
+subset: value_slim
+is_a: PATO:0002186 ! polarity
+created_by: George Gkoutos
+creation_date: 2010-03-10T03:24:01Z
+
+[Term]
+id: PATO:0002189
+name: polarizability
+def: "The ease of distortion of the electron cloud of a molecular entity by an electric field." [PATOC:JH]
+subset: attribute_slim
+is_a: PATO:0002182 ! molecular quality
+created_by: George Gkoutos
+creation_date: 2010-03-10T03:24:47Z
+
+[Term]
+id: PATO:0002190
+name: aromaticity
+def: "A molecular quality that inheres in a molecular entity by virtue of the presence of a conjugated ring of unsaturated bonds, lone pairs, or empty orbitals that exhibit a stabilization stronger than would be expected by the stabilization of conjugation alone." [PATOC:JH]
+subset: attribute_slim
+is_a: PATO:0002182 ! molecular quality
+created_by: George Gkoutos
+creation_date: 2010-03-10T03:25:27Z
+
+[Term]
+id: PATO:0002191
+name: aromatic
+def: "A molecular quality that inheres in a molecular entity when it possesses at least one ring that is aromatic, i.e. a conjugated ring of unsaturated bonds, lone pairs, or empty orbitals that exhibit a stabilization stronger than would be expected by the stabilization of conjugation alone." [PATOC:JH]
+subset: value_slim
+is_a: PATO:0002190 ! aromaticity
+created_by: George Gkoutos
+creation_date: 2010-03-10T03:25:59Z
+
+[Term]
+id: PATO:0002192
+name: non aromatic
+def: "A quality that inheres in a molecular entity by virtue of the molecule possessing no rings that are aromatic." [PATOC:JH]
+subset: value_slim
+is_a: PATO:0002190 ! aromaticity
+created_by: George Gkoutos
+creation_date: 2010-03-10T03:26:41Z
+
+[Term]
+id: PATO:0002193
+name: charge
+def: "A molecular quality that inheres in a molecular entity by virtue of the overall electric charge of the molecule, which is due to a comparison between the total number of electrons and the total number of protons." [PATOC:JH]
+subset: attribute_slim
+is_a: PATO:0002182 ! molecular quality
+created_by: George Gkoutos
+creation_date: 2010-03-10T03:28:54Z
+
+[Term]
+id: PATO:0002194
+name: neutral charge
+def: "A quality which inheres in a molecular entity by virtue of the molecular entity possessing the same amount of electrons overall as protons, thus having an overall neutral charge." [PATOC:JH]
+subset: value_slim
+is_a: PATO:0002193 ! charge
+created_by: George Gkoutos
+creation_date: 2010-03-10T03:29:37Z
+
+[Term]
+id: PATO:0002195
+name: positive charge
+def: "A quality which inheres in a molecular entity by virtue of the molecular entity possessing more protons overall than electrons, thus having an overall positive charge." [PATOC:JH]
+subset: value_slim
+is_a: PATO:0002193 ! charge
+created_by: George Gkoutos
+creation_date: 2010-03-10T03:30:06Z
+
+[Term]
+id: PATO:0002196
+name: negative charge
+def: "A quality which inheres in a molecular entity by virtue of the molecular entity possessing more electrons overall than protons, thus having an overall negative charge." [PATOC:JH]
+subset: value_slim
+is_a: PATO:0002193 ! charge
+created_by: George Gkoutos
+creation_date: 2010-03-10T03:30:39Z
+
+[Term]
+id: PATO:0002197
+name: electronegativity
+def: "A quality that describes the power of an atom to attract electrons to itself ." [PATOC:JH]
+subset: attribute_slim
+is_a: PATO:0002182 ! molecular quality
+created_by: George Gkoutos
+creation_date: 2010-03-10T03:31:15Z
+
+[Term]
+id: PATO:0002198
+name: quality of a substance
+def: "A quality inhering in a bearer by virtue of its constitution." [PATOC:GVG]
+subset: attribute_slim
+is_a: PATO:0001018 ! physical quality
+created_by: George Gkoutos
+creation_date: 2010-03-15T04:35:27Z
+
+[Term]
+id: PATO:0002199
+name: meltability
+def: "A quality which inheres in a substance by virtue of the ease with which the substance can be changed from a solid to a liquid state especially by the application of heat." [PATOC:JH]
+subset: attribute_slim
+is_a: PATO:0002198 ! quality of a substance
+created_by: George Gkoutos
+creation_date: 2010-03-15T04:36:57Z
+
+[Term]
+id: PATO:0002200
+name: vaporizability
+def: "A quality which inheres in a substance by virtue of the ease with which the substance can be changed into a gaseous state." [PATOC:JH]
+subset: attribute_slim
+is_a: PATO:0002198 ! quality of a substance
+created_by: George Gkoutos
+creation_date: 2010-03-15T04:38:02Z
+
+[Term]
+id: PATO:0002201
+name: handedness
+def: "Behavioral quality that is the unequal distribution of fine motor skill between the left and right hands or feet." [birnlex:2178]
+comment: Adapted from Wikipedia and the birnlex term that is dbxref'd. Added on behalf of OBI at March 2010 workshop.
+is_a: PATO:0000186 ! behavioral quality
+created_by: haendel
+creation_date: 2010-03-22T05:48:33Z
+
+[Term]
+id: PATO:0002202
+name: left handedness
+def: "Handedness where the organism preferentially uses the left hand or foot for tasks requiring the use of a single hand or foot or a dominant hand or foot." [birnlex:2038]
+is_a: PATO:0002201 ! handedness
+created_by: haendel
+creation_date: 2010-03-22T05:49:06Z
+
+[Term]
+id: PATO:0002203
+name: right handedness
+def: "Handedness where the organism preferentially uses the right hand or foot for tasks requiring the use of a single hand or foot or a dominant hand or foot." [birnlex:2184]
+is_a: PATO:0002201 ! handedness
+created_by: haendel
+creation_date: 2010-03-22T05:49:19Z
+
+[Term]
+id: PATO:0002204
+name: ambidextrous handedness
+def: "Handedness where the organism exhibits no overall dominance in the use of right or left hand or foot in the performance of tasks that require one hand or foot or a dominant hand or foot." [birnlex:2042]
+is_a: PATO:0002201 ! handedness
+created_by: haendel
+creation_date: 2010-03-22T05:49:30Z
+
+[Term]
+id: PATO:0002205
+name: capacitance
+def: "A quality inhering in a bearer by virtue of the bearer's ability to hold an electrical charge." [Wikipedia:Wikipedia "http://en.wikipedia.org/wiki/Capacitance"]
+comment: Capacitance is also a measure of the amount of electrical energy stored (or separated) for a given electric potential.
+subset: attribute_slim
+is_a: PATO:0002182 ! molecular quality
+created_by: George Gkoutos
+creation_date: 2010-03-25T09:42:51Z
 
 [Typedef]
 id: decreased_in_magnitude_relative_to
