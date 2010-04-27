@@ -20,7 +20,7 @@ public class RequiredFieldConstraint extends AbstractCommitConstraint {
 
   protected ConstraintStatus checkCharCommit(CharacterI chr) {
     if (!chr.hasValue(charField)) {
-      String m="Field "+charField.getName()+" is required to have a value for row:"+chr;
+      String m="Field '"+charField.getName()+"' is required to have a value.  Row: "+chr;
       Status st = doFailure ? Status.FAILURE : Status.WARNING;
       return new ConstraintStatus(st,m);
     }
