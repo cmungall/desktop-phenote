@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOSession;
 import org.obo.datamodel.impl.DanglingClassImpl;
+import org.obo.datamodel.impl.OBOClassImpl;
 
 import phenote.config.FieldConfig;
 import phenote.config.xml.FieldDocument.Field;
@@ -333,9 +334,19 @@ public class CharField {
       
       // DANGLER if cant find it make a dangler!
       if (oboClass == null && danglerMode()) {
-        oboClass =  new DanglingClassImpl(valueString);
-        if (danglerName != null) oboClass.setName(danglerName);
-//        error(valueString+" not found in loaded obo files. Creating a 'dangler'");
+        // Danglers are second-class citizens!  Their names don't show up in the annotation table.
+//        oboClass =  new DanglingClassImpl(valueString);
+        // Instead, make the danglers real oboClasses.  There's no isDangler field in OBOClass, so instead
+        // the lack of namespace as the indicator.  TermInfo2:setTextFromOboClass will use that to visually 
+        // mark danglers in the Term Info window.
+        if (danglerName != null) {
+          oboClass =  new OBOClassImpl(danglerName, valueString);
+          error("Term with ID=" + valueString+" and name=" + danglerName + " not found in loaded ontology files. Creating a dangler.");
+        }
+        else { // no danglerName
+          error("Term with ID=" + valueString+" not found in loaded ontology files and doesn't even have a danglerName!");
+          oboClass =  new DanglingClassImpl(valueString); // ?
+        }
       }
 
       if (oboClass != null)
