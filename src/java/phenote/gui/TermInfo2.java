@@ -624,29 +624,34 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
                   return;
 		
 		// basicInfoPanel
-		if (!oboClass.isObsolete()) {
-			termInfoPanel.setBoxTitleBackgroundColor(0, Color.LIGHT_GRAY);
-			termInfoPanel.setBoxTitle("Basic Info", 0);
-			// hide the consider/replace panel
-			termInfoPanel.getComponent(2).setVisible(false);
-			considerReplacePanel.setVisible(false);
-		} else {
+		if (oboClass.isObsolete()) {  // Obsolete term
 			termInfoPanel.setBoxTitleBackgroundColor(0, Color.RED);
 			termInfoPanel.setBoxTitle("Basic Info  [OBSOLETE]", 0);
 			// show the consider/replacements
 			termInfoPanel.getComponent(2).setVisible(true);
 			considerReplacePanel.setVisible(true);
+		} else if (oboClass.getNamespace() == null) { // No namespace == dangler
+			termInfoPanel.setBoxTitleBackgroundColor(0, Color.ORANGE);
+			termInfoPanel.setBoxTitle("UNKNOWN TERM", 0);
+			// hide the consider/replace panel
+			termInfoPanel.getComponent(2).setVisible(false);
+			considerReplacePanel.setVisible(false);
+                } else { // Normal term
+			termInfoPanel.setBoxTitleBackgroundColor(0, Color.LIGHT_GRAY);
+			termInfoPanel.setBoxTitle("Basic Info", 0);
+			// hide the consider/replace panel
+			termInfoPanel.getComponent(2).setVisible(false);
+			considerReplacePanel.setVisible(false);
 		}
 
 		termInfoToolbar.setTermFieldText(oboClass); //is the toolbar now out of date b/c of the component title?
 		//always show the basics, even if empty...shouldn't be empty.
+                termID.setText(oboClass.getID() == null ? "" : oboClass.getID());
 		if (oboClass.getNamespace()!=null) {
-                  termID.setText(oboClass.getID());
 		  ontologyName.setText(oboClass.getNamespace().toString());
                 }
 		else {
                   ontologyName.setText("No namespace/ontology specified");
-                  termID.setText("");
 		  // LOG.error("No namespace for term "+oboClass);
                 }
 		if (oboClass.getDefinition() != null && oboClass.getDefinition().length()>0) {
