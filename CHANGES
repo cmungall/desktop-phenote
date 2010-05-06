@@ -69,3 +69,16 @@ to show that term!  Before, you had to edit the term and get a dropdown
 completion list and pick something from it before you could convince the Term
 Info and other windows to show the term.)
 - Fixed bug 2982845: Green checkmark in Term Info doesn't work at first.
+
+1.7-beta12
+- Fixed bug 2993230: terms used in annotations that are not in any currently
+loaded ontology were getting lost.
+Sandra is modifying an ontology (human_phenotype.obo) and wants to use her new
+terms to annotate before the terms have made it into the cvs repository.
+However, if she used new terms in her annotation files, and then one of her
+collaborators opened her annotations without having her updated
+human_phenotype.obo file, the new annotation terms didn't show up in the
+display and were lost if the collaborator saved the data.
+Now these unknown terms are not lost, and they are visually indicated in the
+Term Info window with an orange bar that says "UNKNOWN TERM".
+- Fixed bug 2990121: restored gridlines in tables (on Mac with JDK 1.6).
