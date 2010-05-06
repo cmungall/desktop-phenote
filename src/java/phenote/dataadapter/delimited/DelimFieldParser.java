@@ -68,6 +68,7 @@ class DelimFieldParser {
       throw new DelimitedEx("No more fields in line to parse "+items+" "+chr);
     // if term, first id then name
     String value = items[columnIndex];
+    // If value is empty, can't we just return now?  Or is it important to create a record with charField="" for this field?
     try {
       String danglerName = null;
       // if it is a term then grab next item for dangler name, but 

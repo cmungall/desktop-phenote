@@ -18,6 +18,7 @@ public class RequiredFieldConstraint extends AbstractCommitConstraint {
     this.doFailure = doFailure;
   }
 
+  // !! If it's a term field, should check that it has a namespace.
   protected ConstraintStatus checkCharCommit(CharacterI chr) {
     if (!chr.hasValue(charField)) {
       String m="Field '"+charField.getName()+"' is required to have a value.  Row: "+chr;
