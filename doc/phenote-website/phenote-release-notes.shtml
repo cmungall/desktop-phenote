@@ -22,6 +22,15 @@
 
 <h1>1.7</h1>
 
+<h2>05.06.2010, Version 1.7-beta12</h2>
+<ul>
+<li>Fixed bug 2993230: terms used in annotations that are not in any currently
+loaded ontology were getting lost (not shown in annotation table; not saved in
+roundtrip).
+Now these unknown terms are not lost, and they are visually indicated in the
+Term Info window with an orange bar that says "UNKNOWN TERM".</li>
+</ul>
+
 <h2>04.19.2010, Version 1.7-beta11</h2>
 <ul>
 <li>bugfix: Elimanted double warning popup if there are issues when you save (e.g., missing fields).</li>
