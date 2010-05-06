@@ -181,11 +181,13 @@ public class Character extends AbstractCharacter implements CharacterI {
     StringBuilder sb = new StringBuilder();
     for (CharField cf : getAllCharFields()) {
       if (hasValue(cf)) // take out nulls?
-        sb.append(cf.getName()).append(" ").append(charFieldToValue.get(cf)).append(" ");
+        sb.append(cf.getName() + ": " + charFieldToValue.get(cf) + CharField.LIST_DELIM + " ");
     }
+    if (sb.length() > 0)
+      sb.deleteCharAt(sb.length()-2); // lop off last comma
     // cut it down to reasonable size
-    if (sb.length() > 50)
-      return sb.substring(0,47) + "...";
+    if (sb.length() > 100)
+      return sb.substring(0,97) + "...";
     return sb.toString();
   }
 
