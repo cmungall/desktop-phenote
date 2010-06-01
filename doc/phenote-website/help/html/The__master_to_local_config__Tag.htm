@@ -48,10 +48,14 @@
     <td><font face="Courier">overriding-master-url</font></td>
     <td>
       <p>The config file located at this&nbsp;URL will override the config file 
-      of the same name in webstart jar (or svn/app conf).&nbsp; If the URL 
-      points to the phenote&nbsp;svn checkout for the config, it means one can 
-      just commit updates to a config to subversion and it will become the new 
-      template/master</p></td>
+      of the same name in your .phenote directory.&nbsp; If the URL 
+      points to the Phenote&nbsp;svn checkout for the config, it means that
+        the Phenote repository is the home of the template/master
+      configuration files.  If a configuration file is updated by Phenote
+      developers and committed to the repository, you will automatically get
+      the new version the next time you start up Phenote, if your
+      configuration file has this option set.
+</p></td>
     <td align="left"><em>any valid URL</em></td>
     <td align="middle">no</td>
     <td></td></tr></table>

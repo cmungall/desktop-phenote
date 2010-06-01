@@ -8,8 +8,7 @@
 <body bgcolor="#ffffff">
 <h1>How To Edit a Configuration File</h1>
 <DIV id=page_body>
-<H2>
-<H2>Getting Started</H2></H2></DIV>
+<H2>Getting started</H2></DIV>
 <P>You can&nbsp;see&nbsp;sample configuration files and their corresponding 
 Phenote screenshots in <A href="Sample_Configuration_1.htm">Sample Configuration 
 1</A> and <A href="Sample_Configuration_2.htm">Sample Configuration 2</A> 
@@ -23,26 +22,29 @@ server&nbsp;when you upgrade to a new Phenote version.</FONT>&nbsp; </STRONG><!-
 <DIV>
 <H2>The basics</H2>
 
-<p>Make sure you've already tried running the webstart 
-edition of phenote (you can also run phenote from the command line). Running 
-this once should leave a directory on your computer called ".phenote". 
+<p>Before you try editing a configuration file, make sure you've launched
+  Phenote at least once.  This should create a directory
+on your computer called ".phenote". 
 <DIV>        
                           
   <ul>
-    <li>On a Mac, you will find this located under the <FONT 
-  color=#ff0000>MacintoshHD:Users:YourAccount</FONT>          
-   directory, although you probably will not see it 
-  in a "finder" window. You do have access to it if you run a "terminal" window. 
-  It will be located in your user directory. 
-    <li>On a PC, this is located in the <FONT 
+    <li>On a Mac, you will find your .phenote directory in <FONT 
+  color=#ff0000>MacintoshHD:Users:YourUsername</FONT>,
+      although you probably will not see it 
+  in a "finder" window, because finder windows do not show directories that
+  start with ".". You do have access to it from a "terminal" window. 
+      </li>
+    <li>On other Unix systems, your .phenote directory will be in your home
+    directory (~).</li>
+    <li>On a PC, look in <FONT 
   color=#ff0000>C:/Documents and Settings/YourAccount/</FONT>          
     </li>
   </ul></DIV>
-<p></p>
 
 <h2>Location of your configuration file</h2>
 <p> The configuration files used by Phenote are located in 
-the <FONT color=#ff0000>".phenote/conf</FONT>           " directory.
+the <FONT color=#ff0000>".phenote/conf</FONT>           " directory in your
+  home directory.
 </p>
 <p>
 Within 
@@ -52,25 +54,18 @@ this directory you can store any number of configuration files. The  default fil
 <h2>How to change your Phenote configuration</h2>
 <p>
 Once you have placed or modified your configuration file 
-in the <FONT color=#ff0000>".phenote/conf</FONT>
-                      
-
-                   
-                      
-                 
-                   
-                     
-   " directory, you need to tell Phenote to use that particular file.  
+in the <FONT color=#ff0000>.phenote/conf</FONT>
+directory, you need to tell Phenote to use that particular configuration file.  
 </p>
-<P>See <A href="Changing_your_Configuration.htm">Changing your Configuration</A> 
+<P>See <A href="Changing_your_Configuration.htm">Changing your configuration</A> 
 for instructions.</P>
 <P>If you have created your own custom configuration file with a ".cfg" 
-extension, it should be listed in the list.&nbsp; Any changes to your 
-configuration settings will take effect the next time Phenote is 
-loaded.&nbsp;&nbsp;</P>
-<h2>Location to put your personal obo files</h2>
-<p>To get a custom ontology that is local and not on SF, 
-you'll have to copy it into "<FONT color=#ff0000>.phenote/obo-files/</FONT>                  ".  Any reference to this ontology within your configuration file must match the filename.
+extension, it should be shown in the list of known configurations.&nbsp; Any changes to your 
+configuration settings will take effect the next time you launch Phenote
+</P>
+<h2>Where to put personal ontology files</h2>
+<p>To use a custom ontology file in Phenote, 
+copy the file into <FONT color=#ff0000>.phenote/obo-files/</FONT>.  Any reference to this ontology within your configuration file must match the filename.
 </p></DIV>
 
 </body>
