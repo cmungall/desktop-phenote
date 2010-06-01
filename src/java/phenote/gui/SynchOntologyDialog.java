@@ -144,7 +144,7 @@ public class SynchOntologyDialog {
   private class SetLimit extends TimerTask {
   	public void run () {
   		dialog.dispose();
-  		System.out.println("timer done.  moving along...");
+//  		System.out.println("timer done.  moving along...");
   		return ;
   	}
   }

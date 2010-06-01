@@ -515,7 +515,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   private class ReturnKeyListener extends KeyAdapter {
     public void keyPressed(KeyEvent e) {
       if (!keyForTopPick(e)) return; // tab?
-      log().debug("AbstractAutoCompList.keyPressed: tab or ret hit: " + e); // DEL
+//      log().debug("AbstractAutoCompList.keyPressed: tab or ret hit: " + e); // DEL
       boolean useTopHit = true;
       updateModel(useTopHit); // use top hit in search list
     }
