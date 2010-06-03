@@ -1,5 +1,5 @@
 format-version: 1.2
-date: 25:03:2010 09:47
+date: 15:05:2010 19:17
 saved-by: George Gkoutos
 auto-generated-by: OBO-Edit 2.0
 subsetdef: abnormal_slim "Abnormal/normal slim"
@@ -4464,7 +4464,7 @@ name: paralysed
 def: "A behavioral quality inhering in a bearer by virtue of the bearer's being affected by loss of the ability to move a body part." [PATOC:GVG]
 subset: value_slim
 synonym: "palsy" NARROW []
-is_a: PATO:0002076 ! movement bahavioral quality
+is_a: PATO:0002076 ! movement behavioral quality
 
 [Term]
 id: PATO:0000764
@@ -9324,7 +9324,7 @@ name: sound amplitude
 def: "A physical quality inhering in a sound wave by virtue of the maximum magnitude (value without regard to sign) of its disturbance." [answers.com:answers.com "http://www.answers.com/"]
 subset: attribute_slim
 synonym: "loudness" BROAD []
-is_a: PATO:0001519 ! sound quality
+is_a: PATO:0000080 ! amplitude
 
 [Term]
 id: PATO:0001522
@@ -11942,7 +11942,7 @@ is_a: PATO:0002005 ! concavity
 id: PATO:0001858
 name: partially paralysed
 def: "A functionality quality inhering in a bearer by virtue of being not completely paralysed." [PATOC:GVG]
-is_a: PATO:0002076 ! movement bahavioral quality
+is_a: PATO:0002076 ! movement behavioral quality
 
 [Term]
 id: PATO:0001859
@@ -12370,7 +12370,7 @@ id: PATO:0001911
 name: circling
 def: "A behavioral quality inhering in a bearer by virtue of the bearer's exhibiting movement in a circular course." [PATOC:mb]
 subset: value_slim
-is_a: PATO:0002076 ! movement bahavioral quality
+is_a: PATO:0002076 ! movement behavioral quality
 
 [Term]
 id: PATO:0001912
@@ -12935,6 +12935,7 @@ is_a: PATO:0001309 ! duration quality of a process
 id: PATO:0001991
 name: immortal
 def: "A quality inhering in a bearer by virtue of the bearer's being capable of indefinite growth or division." [answers.com:answers.com "http://www.answers.com/"]
+comment: This refers to the disposition of the bearer.
 is_a: PATO:0000169 ! viability
 
 [Term]
@@ -13643,9 +13644,9 @@ creation_date: 2009-09-18T01:45:59Z
 
 [Term]
 id: PATO:0002076
-name: movement bahavioral quality
+name: movement behavioral quality
 def: "A behavioral quality inhering in a bearer by virtue of the bearer's movement." [PATOC:GVG]
-synonym: "movement bahavioural quality" EXACT []
+synonym: "movement behavioural quality" EXACT []
 is_a: PATO:0000186 ! behavioral quality
 created_by: George Gkoutos
 creation_date: 2009-09-18T02:04:48Z
@@ -14849,6 +14850,25 @@ subset: attribute_slim
 is_a: PATO:0002182 ! molecular quality
 created_by: George Gkoutos
 creation_date: 2010-03-25T09:42:51Z
+
+[Term]
+id: PATO:0002206
+name: neonatal
+def: "A maturity quality inhering to a bearer by virtue of the bearer's being at the point or short after birth." [PATOC:GVG]
+subset: value_slim
+is_a: PATO:0000261 ! maturity
+created_by: George Gkoutos
+creation_date: 2010-05-07T12:11:47Z
+
+[Term]
+id: PATO:0002207
+name: insertion depth 
+def: "A relational quality that is the distance between the end of the inserted object and the surface of the object into which it penetrates." [PATOC:GVG]
+subset: attribute_slim
+subset: relational_slim
+is_a: PATO:0001452 ! relational structural quality
+created_by: George Gkoutos
+creation_date: 2010-05-14T11:40:24Z
 
 [Typedef]
 id: decreased_in_magnitude_relative_to
