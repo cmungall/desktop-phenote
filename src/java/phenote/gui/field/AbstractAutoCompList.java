@@ -505,17 +505,22 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
       } else {
         // At some point I tried "true", but it doesn't seem to be needed.  --NH, 4/15
 //        AbstractAutoCompList.this.updateModel(true);
+//      log().debug("actionPerformed: about to call updateModel"); // DEL
         AbstractAutoCompList.this.updateModel();
       }
     }
   }
  
 
-  /** this listens for return key and edits model with top hit in comp list */ 
+  /** this listens for return key and edits model with top hit in comp list.
+      Would like it to also hear tab, but tab doesn't seem to trigger keyPressed--tab
+      changes the focus to the next field, so we have to detect that via focusLost
+      (defined in TermCompList). */
   private class ReturnKeyListener extends KeyAdapter {
     public void keyPressed(KeyEvent e) {
+//      log().debug("keyPressed(" + e + "): keycode = " + e.getKeyCode() + ", keyForTopPick = " + keyForTopPick(e)); // DEL
       if (!keyForTopPick(e)) return; // tab?
-//      log().debug("AbstractAutoCompList.keyPressed: tab or ret hit: " + e); // DEL
+//      log().debug("AbstractAutoCompList.keyPressed: ret hit: " + e); // DEL
       boolean useTopHit = true;
       updateModel(useTopHit); // use top hit in search list
     }
@@ -524,6 +529,7 @@ public abstract class AbstractAutoCompList extends CharFieldGui {
   private boolean keyForTopPick(KeyEvent e) {
     if (e.getKeyCode() == KeyEvent.VK_ENTER) return true;
     // todo - tab doesnt go through i think because of focus loss?
+    // Right, can't detect tab here--it's not a KeyEvent.  --NH, 6/10/10
     return e.getKeyCode() == KeyEvent.VK_TAB;
   }
 

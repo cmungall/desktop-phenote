@@ -218,6 +218,7 @@ public class TermCompList extends AbstractAutoCompList {
   private OBOClass getOboClassFromInput(boolean useTopHit) throws OboException {
     // CompletionTerm if selected, String if typed & return
     Object obj = getSelectedObject(); // throws oboex
+//    log().debug("getOboClassfromInput: obj = " + obj); // DEL
     if (obj==null) {
       if (!useTopHit)
         throw new OboException("selected obj is null");
@@ -225,11 +226,14 @@ public class TermCompList extends AbstractAutoCompList {
       // sel obj got set
       else 
         obj = getText(); 
+//      log().debug("getOboClassfromInput: getText = " + obj); // DEL
     }
 
     //return oboClassDowncast(obj); // throws oboex
     CompletionObject t = getCompTermFromInput(obj,useTopHit);
+//    if (!t.hasOboClass()) log().debug("No oboclass for obj " + obj); // DEL
     if (!t.hasOboClass()) throw new OboException("Selected obj doesnt have obo class: " + obj);
+//    log().debug("oboclass for obj " + obj + ": " + t.getOboClass()); // DEL
     return t.getOboClass();
   }
 
@@ -247,6 +251,7 @@ public class TermCompList extends AbstractAutoCompList {
   //private CompletionTerm completionTermDowncast(Object obj) throws OboException {
   private CompletionObject getCompTermFromInput(Object obj,boolean useTopHit)
     throws OboException {
+//    log().debug("getCompTermfromInput: obj = " + obj); // DEL
     if (obj == null) throw new OboException();
     // STRING - user hit return
     if (!(obj instanceof CompletionObject)) {
@@ -263,10 +268,11 @@ public class TermCompList extends AbstractAutoCompList {
       if (input == null || input.trim().length() == 0)
         throw new OboException("no input given"); // msg not used
       CompletionObject ct = getFirstCompTerm();
+//      log().debug("getCompTermfromInput: input = " + input + ", ct = " + ct); // DEL
       // dont think this can happen - safety
       // Actually, it does happen.  If we take out this exception, then sometimes when you double-click a term, it gets changed!
       if (!ct.matches(input,SearchParams.inst())) {
-//        log().error("input & 1st term dont match: " + input + ", " + ct); // DEL
+//        log().error("input & 1st term dont match: " + input + ", " + ct + ". obj = " + obj); // DEL
         throw new OboException("input & 1st term dont match");
       }
       // compare string with ct?? probably...
@@ -293,6 +299,7 @@ public class TermCompList extends AbstractAutoCompList {
   protected void updateModel(boolean useTopHit) {
     // TRY to get valid input...
     try {
+//      log().debug("updateModel was called (useTopHit = " + useTopHit + ")"); // DEL
       // sets obo class from selected comp term OR top term in list (if no comp term
       // selected), throws OboException if invalid term (eg no input)
       this.setCurrentValidItem(useTopHit); 
@@ -302,6 +309,7 @@ public class TermCompList extends AbstractAutoCompList {
       if (!this.editModelEnabled()) {
         return;
       }
+//      log().debug("updateModel: getText = " + this.getText() + "."); // DEL
       if ((this.getText() == null) || (this.getText().equals(""))) {
         this.setModelToNull();
         return;
@@ -324,6 +332,12 @@ public class TermCompList extends AbstractAutoCompList {
     }
   }
 
+  /** This is what happens when user tabs out of a field (which doesn't register as a KeyEvent--see keyPressed method in AbstractAutoCompList) */
+  protected void focusLost() {
+//    log().debug("focusLost"); // DEL
+    boolean useTopHit = true; // ?
+    updateModel(useTopHit); // use top hit in search list
+  }
 
   /** oc may be null - for nullifying model, though lists dont accept nulls
       as they have explicit delete */
