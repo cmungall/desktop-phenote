@@ -1,5 +1,5 @@
 format-version: 1.0
-date: 18:12:2009 14:10
+date: 07:05:2010 09:43
 saved-by: raymond
 auto-generated-by: DAG-Edit 1.417
 default-namespace: worm_anatomy
@@ -472,13 +472,6 @@ relationship: part_of WBbt:0004573
 relationship: part_of WBbt:0007034
 
 [Term]
-id: WBbt:0002721
-name: AB.alpapapaa nucleus
-def: "nucleus of pedigree AB.alpapapaa" [WB:rynl]
-relationship: DESCENDENTOF WBbt:0001120
-relationship: part_of WBbt:0005039
-
-[Term]
 id: WBbt:0002829
 name: AB.alpapapapp nucleus
 def: "nucleus of pedigree AB.alpapapapp" [WB:rynl]
@@ -558,13 +551,6 @@ relationship: DESCENDENTOF WBbt:0001144
 relationship: part_of WBbt:0004918
 
 [Term]
-id: WBbt:0002725
-name: AB.alppapaaa nucleus
-def: "nucleus of pedigree AB.alppapaaa" [WB:rynl]
-relationship: DESCENDENTOF WBbt:0001148
-relationship: part_of WBbt:0005031
-
-[Term]
 id: WBbt:0002121
 name: AB.alppapaap nucleus
 def: "nucleus of pedigree AB.alppapaap" [WB:rynl]
@@ -626,20 +612,6 @@ name: AB.alpppaapd nucleus
 def: "nucleus of pedigree AB.alpppaapd" [WB:rynl]
 relationship: DESCENDENTOF WBbt:0001159
 relationship: part_of WBbt:0004443
-
-[Term]
-id: WBbt:0002723
-name: AB.alpppapad nucleus
-def: "nucleus of pedigree AB.alpppapad" [WB:rynl]
-relationship: DESCENDENTOF WBbt:0001162
-relationship: part_of WBbt:0005037
-
-[Term]
-id: WBbt:0001633
-name: AB.alpppapav nucleus
-def: "nucleus of pedigree AB.alpppapav" [WB:rynl]
-relationship: DESCENDENTOF WBbt:0001162
-relationship: part_of WBbt:0003993
 
 [Term]
 id: WBbt:0001687
@@ -885,7 +857,7 @@ id: WBbt:0002299
 name: AB.araappaaa nucleus
 def: "nucleus of pedigree AB.araappaaa" [WB:rynl]
 relationship: DESCENDENTOF WBbt:0001212
-relationship: part_of WBbt:0004459
+relationship: part_of WBbt:0003664
 
 [Term]
 id: WBbt:0002246
@@ -1062,13 +1034,6 @@ relationship: DESCENDENTOF WBbt:0001246
 relationship: part_of WBbt:0004694
 
 [Term]
-id: WBbt:0002722
-name: AB.arappapaa nucleus
-def: "nucleus of pedigree AB.arappapaa" [WB:rynl]
-relationship: DESCENDENTOF WBbt:0001249
-relationship: part_of WBbt:0005038
-
-[Term]
 id: WBbt:0002830
 name: AB.arappapapp nucleus
 def: "nucleus of pedigree AB.arappapapp" [WB:rynl]
@@ -1088,13 +1053,6 @@ name: AB.arappappp nucleus
 def: "nucleus of pedigree AB.arappappp" [WB:rynl]
 relationship: DESCENDENTOF WBbt:0001252
 relationship: part_of WBbt:0004973
-
-[Term]
-id: WBbt:0002726
-name: AB.arapppaaa nucleus
-def: "nucleus of pedigree AB.arapppaaa" [WB:rynl]
-relationship: DESCENDENTOF WBbt:0001255
-relationship: part_of WBbt:0005029
 
 [Term]
 id: WBbt:0002122
@@ -1186,20 +1144,6 @@ name: AB.arpappaa nucleus
 def: "nucleus of pedigree AB.arpappaa" [WB:rynl]
 relationship: DESCENDENTOF WBbt:0001291
 relationship: part_of WBbt:0004579
-
-[Term]
-id: WBbt:0001648
-name: AB.arppaappa nucleus
-def: "nucleus of pedigree AB.arppaappa" [WB:rynl]
-relationship: DESCENDENTOF WBbt:0001300
-relationship: part_of WBbt:0003954
-
-[Term]
-id: WBbt:0001649
-name: AB.arpppappa nucleus
-def: "nucleus of pedigree AB.arpppappa" [WB:rynl]
-relationship: DESCENDENTOF WBbt:0001309
-relationship: part_of WBbt:0003953
 
 [Term]
 id: WBbt:0005430
@@ -1418,13 +1362,6 @@ relationship: DESCENDENTOF WBbt:0001404
 relationship: part_of WBbt:0003956
 
 [Term]
-id: WBbt:0001639
-name: AB.plpaapppa nucleus
-def: "nucleus of pedigree AB.plpaapppa" [WB:rynl]
-relationship: DESCENDENTOF WBbt:0001405
-relationship: part_of WBbt:0003983
-
-[Term]
 id: WBbt:0001899
 name: AB.plpaappppa nucleus
 def: "nucleus of pedigree AB.plpaappppa" [WB:rynl]
@@ -1439,13 +1376,6 @@ relationship: DESCENDENTOF WBbt:0001411
 relationship: part_of WBbt:0004972
 
 [Term]
-id: WBbt:0001643
-name: AB.plpapaaap nucleus
-def: "nucleus of pedigree AB.plpapaaap" [WB:rynl]
-relationship: DESCENDENTOF WBbt:0001411
-relationship: part_of WBbt:0003963
-
-[Term]
 id: WBbt:0002746
 name: AB.plpapaapa nucleus
 def: "nucleus of pedigree AB.plpapaapa" [WB:rynl]
@@ -1458,13 +1388,6 @@ name: AB.plpapaapp nucleus
 def: "nucleus of pedigree AB.plpapaapp" [WB:rynl]
 relationship: DESCENDENTOF WBbt:0001412
 relationship: part_of WBbt:0004978
-
-[Term]
-id: WBbt:0001704
-name: AB.plpapapap nucleus
-def: "nucleus of pedigree AB.plpapapap" [WB:rynl]
-relationship: DESCENDENTOF WBbt:0001414
-relationship: part_of WBbt:0003845
 
 [Term]
 id: WBbt:0002748
@@ -1690,13 +1613,6 @@ name: AB.praaaaapd nucleus
 def: "nucleus of pedigree AB.praaaaapd" [WB:rynl]
 relationship: DESCENDENTOF WBbt:0001468
 relationship: part_of WBbt:0004442
-
-[Term]
-id: WBbt:0002724
-name: AB.praaaapad nucleus
-def: "nucleus of pedigree AB.praaaapad" [WB:rynl]
-relationship: DESCENDENTOF WBbt:0001471
-relationship: part_of WBbt:0005033
 
 [Term]
 id: WBbt:0001634
@@ -1944,13 +1860,6 @@ relationship: DESCENDENTOF WBbt:0001563
 relationship: part_of WBbt:0003942
 
 [Term]
-id: WBbt:0001640
-name: AB.prpaapppa nucleus
-def: "nucleus of pedigree AB.prpaapppa" [WB:rynl]
-relationship: DESCENDENTOF WBbt:0001564
-relationship: part_of WBbt:0003969
-
-[Term]
 id: WBbt:0001900
 name: AB.prpaappppa nucleus
 def: "nucleus of pedigree AB.prpaappppa" [WB:rynl]
@@ -1965,13 +1874,6 @@ relationship: DESCENDENTOF WBbt:0001570
 relationship: part_of WBbt:0004971
 
 [Term]
-id: WBbt:0001644
-name: AB.prpapaaap nucleus
-def: "nucleus of pedigree AB.prpapaaap" [WB:rynl]
-relationship: DESCENDENTOF WBbt:0001570
-relationship: part_of WBbt:0003961
-
-[Term]
 id: WBbt:0002747
 name: AB.prpapaapa nucleus
 def: "nucleus of pedigree AB.prpapaapa" [WB:rynl]
@@ -1984,13 +1886,6 @@ name: AB.prpapaapp nucleus
 def: "nucleus of pedigree AB.prpapaapp" [WB:rynl]
 relationship: DESCENDENTOF WBbt:0001571
 relationship: part_of WBbt:0004977
-
-[Term]
-id: WBbt:0001705
-name: AB.prpapapap nucleus
-def: "nucleus of pedigree AB.prpapapap" [WB:rynl]
-relationship: DESCENDENTOF WBbt:0001573
-relationship: part_of WBbt:0003844
 
 [Term]
 id: WBbt:0002749
@@ -2019,13 +1914,6 @@ name: AB.prpappaap nucleus
 def: "nucleus of pedigree AB.prpappaap" [WB:rynl]
 relationship: DESCENDENTOF WBbt:0001577
 relationship: part_of WBbt:0003843
-
-[Term]
-id: WBbt:0002718
-name: AB.prpappapa nucleus
-def: "nucleus of pedigree AB.prpappapa" [WB:rynl]
-relationship: DESCENDENTOF WBbt:0001578
-relationship: part_of WBbt:0005045
 
 [Term]
 id: WBbt:0001960
@@ -3785,6 +3673,13 @@ relationship: DESCENDENTOF WBbt:0001119
 relationship: part_of WBbt:0006632
 
 [Term]
+id: WBbt:0002721
+name: ABalpapapaa nucleus
+def: "nucleus of pedigree ABalpapapaa" [WB:rynl]
+relationship: DESCENDENTOF WBbt:0001120
+relationship: part_of WBbt:0005039
+
+[Term]
 id: WBbt:0006582
 name: ABalpapapap
 def: "embryonic cell" [WB:rynl]
@@ -4157,6 +4052,13 @@ relationship: DESCENDENTOF WBbt:0001147
 relationship: part_of WBbt:0006543
 
 [Term]
+id: WBbt:0002725
+name: ABalppapaaa nucleus
+def: "nucleus of pedigree ABalppapaaa" [WB:rynl]
+relationship: DESCENDENTOF WBbt:0001148
+relationship: part_of WBbt:0005031
+
+[Term]
 id: WBbt:0006188
 name: ABalppapap
 def: "embryonic cell" [WB:rynl]
@@ -4346,6 +4248,20 @@ name: ABalpppapa nucleus
 def: "nucleus of pedigree ABalpppapa" [WB:rynl]
 relationship: DESCENDENTOF WBbt:0001161
 relationship: part_of WBbt:0005930
+
+[Term]
+id: WBbt:0002723
+name: ABalpppapad nucleus
+def: "nucleus of pedigree AB.alpppapad" [WB:rynl]
+relationship: DESCENDENTOF WBbt:0001162
+relationship: part_of WBbt:0005037
+
+[Term]
+id: WBbt:0001633
+name: ABalpppapav nucleus
+def: "nucleus of pedigree AB.alpppapav" [WB:rynl]
+relationship: DESCENDENTOF WBbt:0001162
+relationship: part_of WBbt:0003993
 
 [Term]
 id: WBbt:0006156
@@ -5496,6 +5412,13 @@ relationship: DESCENDENTOF WBbt:0001248
 relationship: part_of WBbt:0006230
 
 [Term]
+id: WBbt:0002722
+name: ABarappapaa nucleus
+def: "nucleus of pedigree ABarappapaa" [WB:rynl]
+relationship: DESCENDENTOF WBbt:0001249
+relationship: part_of WBbt:0005038
+
+[Term]
 id: WBbt:0006369
 name: ABarappapap
 def: "embryonic cell" [WB:rynl]
@@ -5573,6 +5496,13 @@ name: ABarapppaa nucleus
 def: "nucleus of pedigree ABarapppaa" [WB:rynl]
 relationship: DESCENDENTOF WBbt:0001254
 relationship: part_of WBbt:0006074
+
+[Term]
+id: WBbt:0002726
+name: ABarapppaaa nucleus
+def: "nucleus of pedigree ABarapppaaa" [WB:rynl]
+relationship: DESCENDENTOF WBbt:0001255
+relationship: part_of WBbt:0005029
 
 [Term]
 id: WBbt:0005855
@@ -5962,8 +5892,14 @@ relationship: part_of WBbt:0006207
 [Term]
 id: WBbt:0005992
 name: ABarpapaaap
-def: "embryonic cell" [WB:rynl]
+def: "embryonic cell\, dies in hermaphrodite\, becomes CEMDR in male." [WB:rynl]
 is_a: WBbt:0007028
+
+[Term]
+id: WBbt:0008369
+name: ABarpapaaap hermaphrodite
+def: "cell born in embryo that dies in hermaphrodite but counterpart becomes CEMDR in male." [WB:rynl ""]
+is_a: WBbt:0006925
 
 [Term]
 id: WBbt:0001283
@@ -5972,6 +5908,7 @@ def: "nucleus of pedigree ABarpapaaap" [WB:rynl]
 relationship: DESCENDENTOF WBbt:0001282
 relationship: part_of WBbt:0004943
 relationship: part_of WBbt:0005992
+relationship: part_of WBbt:0008369
 
 [Term]
 id: WBbt:0006674
@@ -6241,6 +6178,13 @@ relationship: DESCENDENTOF WBbt:0001298
 relationship: part_of WBbt:0006393
 
 [Term]
+id: WBbt:0001648
+name: ABarppaappa nucleus
+def: "nucleus of pedigree ABarppaappa" [WB:rynl]
+relationship: DESCENDENTOF WBbt:0001300
+relationship: part_of WBbt:0003954
+
+[Term]
 id: WBbt:0001763
 name: ABarppaappp nucleus
 def: "nucleus of pedigree ABarppaappp" [WB:rynl]
@@ -6413,6 +6357,13 @@ name: ABarpppapp nucleus
 def: "nucleus of pedigree ABarpppapp" [WB:rynl]
 relationship: DESCENDENTOF WBbt:0001307
 relationship: part_of WBbt:0006572
+
+[Term]
+id: WBbt:0001649
+name: ABarpppappa nucleus
+def: "nucleus of pedigree ABarpppappa" [WB:rynl]
+relationship: DESCENDENTOF WBbt:0001309
+relationship: part_of WBbt:0003953
 
 [Term]
 id: WBbt:0001764
@@ -6599,8 +6550,14 @@ relationship: part_of WBbt:0006330
 [Term]
 id: WBbt:0006541
 name: ABplaaaaaap
-def: "embryonic cell" [WB:rynl]
+def: "embryonic cell\, dies in hermaphrodite but comes a cephalic neuron in male." [WB:rynl]
 is_a: WBbt:0007028
+
+[Term]
+id: WBbt:0008370
+name: ABplaaaaaap hermaphrodite
+def: "cell that is born in embryo\, dies in hermaphrodite but counter part becomes CDMDL in male." [WB:rynl ""]
+is_a: WBbt:0006925
 
 [Term]
 id: WBbt:0001321
@@ -6609,6 +6566,7 @@ def: "nucleus of pedigree ABplaaaaaap" [WB:rynl]
 relationship: DESCENDENTOF WBbt:0001320
 relationship: part_of WBbt:0004945
 relationship: part_of WBbt:0006541
+relationship: part_of WBbt:0008370
 
 [Term]
 id: WBbt:0005845
@@ -7806,8 +7764,13 @@ relationship: part_of WBbt:0003931
 id: WBbt:0006294
 name: ABplpaapapp
 def: "embryonic cell" [WB:rynl]
-is_a: WBbt:0006925
 is_a: WBbt:0007028
+
+[Term]
+id: WBbt:0008371
+name: ABplpaapapp hermaphrodite
+def: "cell that is born in embryo\, dies in hermaphrodite\, but counterpart becomes CEMVL in male." [WB:rynl ""]
+is_a: WBbt:0006925
 
 [Term]
 id: WBbt:0001888
@@ -7816,6 +7779,7 @@ def: "nucleus of pedigree ABplpaapapp" [WB:rynl]
 relationship: DESCENDENTOF WBbt:0001402
 relationship: part_of WBbt:0004941
 relationship: part_of WBbt:0006294
+relationship: part_of WBbt:0008371
 
 [Term]
 id: WBbt:0006421
@@ -7855,6 +7819,13 @@ name: ABplpaappp nucleus
 def: "nucleus of pedigree ABplpaappp" [WB:rynl]
 relationship: DESCENDENTOF WBbt:0001403
 relationship: part_of WBbt:0006568
+
+[Term]
+id: WBbt:0001639
+name: ABplpaapppa nucleus
+def: "nucleus of pedigree ABplpaapppa" [WB:rynl]
+relationship: DESCENDENTOF WBbt:0001405
+relationship: part_of WBbt:0003983
 
 [Term]
 id: WBbt:0006336
@@ -7936,6 +7907,13 @@ relationship: DESCENDENTOF WBbt:0001410
 relationship: part_of WBbt:0006679
 
 [Term]
+id: WBbt:0001643
+name: ABplpapaaap nucleus
+def: "nucleus of pedigree ABplpapaaap" [WB:rynl]
+relationship: DESCENDENTOF WBbt:0001411
+relationship: part_of WBbt:0003963
+
+[Term]
 id: WBbt:0006403
 name: ABplpapaap
 def: "embryonic cell" [WB:rynl]
@@ -7973,6 +7951,13 @@ name: ABplpapapa nucleus
 def: "nucleus of pedigree ABplpapapa" [WB:rynl]
 relationship: DESCENDENTOF WBbt:0001413
 relationship: part_of WBbt:0005908
+
+[Term]
+id: WBbt:0001704
+name: ABplpapapap nucleus
+def: "nucleus of pedigree ABplpapapap" [WB:rynl]
+relationship: DESCENDENTOF WBbt:0001414
+relationship: part_of WBbt:0003845
 
 [Term]
 id: WBbt:0006693
@@ -8779,6 +8764,13 @@ name: ABpraaaapa nucleus
 def: "nucleus of pedigree ABpraaaapa" [WB:rynl]
 relationship: DESCENDENTOF WBbt:0001470
 relationship: part_of WBbt:0006376
+
+[Term]
+id: WBbt:0002724
+name: ABpraaaapad nucleus
+def: "nucleus of pedigree AB.praaaapad" [WB:rynl]
+relationship: DESCENDENTOF WBbt:0001471
+relationship: part_of WBbt:0005033
 
 [Term]
 id: WBbt:0006690
@@ -10066,8 +10058,13 @@ relationship: part_of WBbt:0003929
 id: WBbt:0006292
 name: ABprpaapapp
 def: "embryonic cell" [WB:rynl]
-is_a: WBbt:0006925
 is_a: WBbt:0007028
+
+[Term]
+id: WBbt:0008372
+name: ABprpaapapp hermaphrodite
+def: "cell that is born in embryo\, dies in hermaphrodite\, but counterpart becomes CEMVR in male." [WB:rynl ""]
+is_a: WBbt:0006925
 
 [Term]
 id: WBbt:0001561
@@ -10076,6 +10073,7 @@ def: "nucleus of pedigree ABprpaapapp" [WB:rynl]
 relationship: DESCENDENTOF WBbt:0001560
 relationship: part_of WBbt:0004939
 relationship: part_of WBbt:0006292
+relationship: part_of WBbt:0008372
 
 [Term]
 id: WBbt:0006605
@@ -10115,6 +10113,13 @@ name: ABprpaappp nucleus
 def: "nucleus of pedigree ABprpaappp" [WB:rynl]
 relationship: DESCENDENTOF WBbt:0001562
 relationship: part_of WBbt:0006280
+
+[Term]
+id: WBbt:0001640
+name: ABprpaapppa nucleus
+def: "nucleus of pedigree ABprpaapppa" [WB:rynl]
+relationship: DESCENDENTOF WBbt:0001564
+relationship: part_of WBbt:0003969
 
 [Term]
 id: WBbt:0006508
@@ -10196,6 +10201,13 @@ relationship: DESCENDENTOF WBbt:0001569
 relationship: part_of WBbt:0006588
 
 [Term]
+id: WBbt:0001644
+name: ABprpapaaap nucleus
+def: "nucleus of pedigree ABprpapaaap" [WB:rynl]
+relationship: DESCENDENTOF WBbt:0001570
+relationship: part_of WBbt:0003961
+
+[Term]
 id: WBbt:0006010
 name: ABprpapaap
 def: "embryonic cell" [WB:rynl]
@@ -10233,6 +10245,13 @@ name: ABprpapapa nucleus
 def: "nucleus of pedigree ABprpapapa" [WB:rynl]
 relationship: DESCENDENTOF WBbt:0001572
 relationship: part_of WBbt:0006487
+
+[Term]
+id: WBbt:0001705
+name: ABprpapapap nucleus
+def: "nucleus of pedigree ABprpapapap" [WB:rynl]
+relationship: DESCENDENTOF WBbt:0001573
+relationship: part_of WBbt:0003844
 
 [Term]
 id: WBbt:0006651
@@ -10298,6 +10317,13 @@ name: ABprpappap nucleus
 def: "nucleus of pedigree ABprpappap" [WB:rynl]
 relationship: DESCENDENTOF WBbt:0001576
 relationship: part_of WBbt:0006561
+
+[Term]
+id: WBbt:0002718
+name: ABprpappapa nucleus
+def: "nucleus of pedigree ABprpappapa" [WB:rynl]
+relationship: DESCENDENTOF WBbt:0001578
+relationship: part_of WBbt:0005045
 
 [Term]
 id: WBbt:0005847
@@ -10921,6 +10947,7 @@ def: "Ring interneuron" [ISBN:0-87969-307-X]
 synonym: "lineage name\: AB.plapaaaapp" []
 is_a: WBbt:0006751
 is_a: WBbt:0006811
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0004011
@@ -10929,6 +10956,7 @@ def: "Ring interneuron" [ISBN:0-87969-307-X]
 synonym: "lineage name\: AB.prapaaaapp" []
 is_a: WBbt:0006751
 is_a: WBbt:0006811
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0005415
@@ -10946,6 +10974,7 @@ def: "Anterior deirid\, sensory neuron\, dopaminergic" [ISBN:0-87969-307-X]
 synonym: "lineage name\: AB.plapaaaapa" []
 is_a: WBbt:0005415
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0004007
@@ -10954,6 +10983,7 @@ def: "Anterior deirid\, sensory neuron\, dopaminergic" [ISBN:0-87969-307-X]
 synonym: "lineage name\: AB.prapaaaapa" []
 is_a: WBbt:0005415
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0004005
@@ -10995,6 +11025,7 @@ name: ADF
 def: "ADF is a set of two neurons that have dual ciliated endings in the amphid sensillum. The endings are in the amphid channel\, which is open to the outside. Processes from lateral cell bodies enter the ventral cord via the amphidial commissures and turn anteriorly to enter the nerve ring. The processes of ADF run near the outside surface and posterior face of the ring\, in close association with those of AIZ. They meet at the dorsal mid-line and terminate; there is a gap junction at the point or contact. The main synaptic output is to RIA and AIZ; there are also synapses to SMB\, AUA and RIR\, usually in dyadic combinations with RIA or AIZ. AWB synapses onto ADF in several places\,  and there are gap junctions to RIH\, ADA and AIA." [WB:\[cgc938\]]
 comment: LINKOUT\:\:WORMATLAS\:\:<http\://www.wormatlas.org/neurons/Individual%20Neurons/ADFframeset.html>
 is_a: WBbt:0005394
+is_a: WBbt:0005837
 is_a: WBbt:0006837
 
 [Term]
@@ -11005,6 +11036,7 @@ synonym: "lineage name\: AB.alpppppaa" []
 is_a: WBbt:0005102
 is_a: WBbt:0005660
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005395
 
 [Term]
@@ -11015,6 +11047,7 @@ synonym: "lineage name\: AB.praaappaa" []
 is_a: WBbt:0005100
 is_a: WBbt:0005660
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005392
 
 [Term]
@@ -11023,6 +11056,7 @@ name: ADL
 def: "neuron type\, a set of two neurons that have dual ciliated endings in the amphid sensillum; the endings are in the amphid channel\, which is open to the outside." [WB:Paper00000938 ""]
 comment: LINKOUT\:\:WORMATLAS\:\:<http\://www.wormatlas.org/neurons/Individual%20Neurons/ADLframeset.html>
 is_a: WBbt:0005394
+is_a: WBbt:0005837
 
 [Term]
 id: WBbt:0003997
@@ -11032,6 +11066,7 @@ synonym: "lineage name\: AB.alppppaad" []
 is_a: WBbt:0005102
 is_a: WBbt:0005661
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005395
 
 [Term]
@@ -11042,6 +11077,7 @@ synonym: "lineage name\: AB.praaapaad" []
 is_a: WBbt:0005100
 is_a: WBbt:0005661
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005392
 
 [Term]
@@ -11060,6 +11096,7 @@ synonym: "lineage name\: AB.alpppapav" []
 is_a: WBbt:0005102
 is_a: WBbt:0005662
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005395
 
 [Term]
@@ -11070,6 +11107,7 @@ synonym: "lineage name\: AB.praaaapav" []
 is_a: WBbt:0005100
 is_a: WBbt:0005662
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005392
 
 [Term]
@@ -11086,6 +11124,7 @@ def: "Amphid interneuron" [ISBN:0-87969-307-X]
 synonym: "lineage name\: AB.plppaappa" []
 is_a: WBbt:0006751
 is_a: WBbt:0006812
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005266
 
 [Term]
@@ -11095,6 +11134,7 @@ def: "Amphid interneuron" [ISBN:0-87969-307-X]
 synonym: "lineage name\: AB.prppaappa" []
 is_a: WBbt:0006751
 is_a: WBbt:0006812
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005266
 
 [Term]
@@ -11112,6 +11152,7 @@ synonym: "lineage name\: AB.plaapappa" []
 is_a: WBbt:0005102
 is_a: WBbt:0006751
 is_a: WBbt:0006813
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0003984
@@ -11121,6 +11162,7 @@ synonym: "lineage name\: AB.praapappa" []
 is_a: WBbt:0005100
 is_a: WBbt:0006751
 is_a: WBbt:0006813
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0006814
@@ -11138,6 +11180,7 @@ def: "Ring interneuron" [ISBN:0-87969-307-X]
 synonym: "lineage name\: AB.plpaapppa" []
 is_a: WBbt:0006751
 is_a: WBbt:0006814
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005264
 
 [Term]
@@ -11147,6 +11190,7 @@ def: "Ring interneuron" [ISBN:0-87969-307-X]
 synonym: "lineage name\: AB.prpaapppa" []
 is_a: WBbt:0006751
 is_a: WBbt:0006814
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005264
 
 [Term]
@@ -11165,6 +11209,7 @@ synonym: "lineage name\: AB.alaaaalal" []
 is_a: WBbt:0005102
 is_a: WBbt:0006751
 is_a: WBbt:0006815
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0003965
@@ -11174,6 +11219,7 @@ synonym: "lineage name\: AB.alaapaaar" []
 is_a: WBbt:0005100
 is_a: WBbt:0006751
 is_a: WBbt:0006815
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0005413
@@ -11189,6 +11235,7 @@ def: "Amphid interneuron" [ISBN:0-87969-307-X]
 synonym: "lineage name\: AB.plpapaaap" []
 is_a: WBbt:0005413
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005264
 
 [Term]
@@ -11198,6 +11245,7 @@ def: "Amphid interneuron" [ISBN:0-87969-307-X]
 synonym: "lineage name\: AB.prpapaaap" []
 is_a: WBbt:0005413
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005264
 
 [Term]
@@ -11215,6 +11263,7 @@ synonym: "lineage name\: AB.plapaaapav" []
 is_a: WBbt:0005102
 is_a: WBbt:0005836
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0003957
@@ -11224,6 +11273,7 @@ synonym: "lineage name\: AB.prapaaapav" []
 is_a: WBbt:0005100
 is_a: WBbt:0005836
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0003955
@@ -11233,6 +11283,7 @@ comment: LINKOUT\:\:WORMATLAS\:\:<http\://www.wormatlas.org/neurons/Individual%2
 synonym: "lineage name\: AB.alapppaaa" []
 is_a: WBbt:0003679
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005214
 
 [Term]
@@ -11250,6 +11301,7 @@ comment: LINKOUT\:\:WORMATLAS\:\:<http\://www.wormatlas.org/neurons/Individual%2
 synonym: "lineage name\: AB.arppaappa" []
 is_a: WBbt:0005406
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005264
 
 [Term]
@@ -11259,13 +11311,14 @@ def: "Anterior lateral microtubule cell\, touch receptor" [ISBN:0-87969-307-X]
 synonym: "lineage name\: AB.arpppappa" []
 is_a: WBbt:0005406
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005264
 
 [Term]
 id: WBbt:0006851
 name: ALN
 def: "neuron type\, a set of neurons with cell bodies situated in the lumbar ganglion\, send processes anteriorly\, which eventually enter the nerve ring; they also have posteriorly directed processes that run into the tailspike." [WB:Paper00000938 ""]
-comment: LINKOUT\:\:WORMATLAS\:\:<http\://www.wormatlas.org/neurons/Individual%20Neurons/alframeset.html>
+comment: LINKOUT\:\:WORMATLAS\:\:<http\://www.wormatlas.org/neurons/Individual%20Neurons/ALNframeset.html>
 is_a: WBbt:0006840
 
 [Term]
@@ -11445,6 +11498,7 @@ synonym: "lineage name\: AB.alppppppaa" []
 is_a: WBbt:0005102
 is_a: WBbt:0005663
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005395
 
 [Term]
@@ -11455,6 +11509,7 @@ synonym: "lineage name\: AB.praaapppaa" []
 is_a: WBbt:0005100
 is_a: WBbt:0005663
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005392
 
 [Term]
@@ -11463,6 +11518,7 @@ name: ASG
 def: "neuron type\, a set of two ciliated neurons that are part of the amphid sensilla; the endings are in the amphid channel\, which is open to the outside." [WB:Paper00000938 ""]
 comment: LINKOUT\:\:WORMATLAS\:\:<http\://www.wormatlas.org/neurons/Individual%20Neurons/ASGframeset.html>
 is_a: WBbt:0005394
+is_a: WBbt:0005837
 
 [Term]
 id: WBbt:0003892
@@ -11472,6 +11528,7 @@ synonym: "lineage name\: AB.plaapapap" []
 is_a: WBbt:0005102
 is_a: WBbt:0005664
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005395
 
 [Term]
@@ -11482,6 +11539,7 @@ synonym: "lineage name\: AB.praapapap" []
 is_a: WBbt:0005100
 is_a: WBbt:0005664
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005392
 
 [Term]
@@ -11490,6 +11548,8 @@ name: ASH
 def: "neuron type\, a set of two ciliated neurons that are part of the amphid sensilla; the endings are in the amphid channel\, which is open to the outside." [WB:Paper00000938 ""]
 comment: LINKOUT\:\:WORMATLAS\:\:<http\://www.wormatlas.org/neurons/Individual%20Neurons/ASHframeset.html>
 is_a: WBbt:0005394
+is_a: WBbt:0005837
+is_a: WBbt:0005839
 is_a: WBbt:0006829
 
 [Term]
@@ -11500,6 +11560,7 @@ synonym: "lineage name\: AB.plpaappaa" []
 is_a: WBbt:0005102
 is_a: WBbt:0005665
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005395
 
 [Term]
@@ -11510,6 +11571,7 @@ synonym: "lineage name\: AB.prpaappaa" []
 is_a: WBbt:0005100
 is_a: WBbt:0005665
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005392
 
 [Term]
@@ -11518,6 +11580,7 @@ name: ASI
 def: "neuron type\, a set of two ciliated neurons that are part of the amphid sensilla; the endings are in the amphid channel\, which is open to the outside." [WB:Paper00000938 ""]
 comment: LINKOUT\:\:WORMATLAS\:\:<http\://www.wormatlas.org/neurons/Individual%20Neurons/ASIframeset.html>
 is_a: WBbt:0005394
+is_a: WBbt:0005837
 
 [Term]
 id: WBbt:0003888
@@ -11527,6 +11590,7 @@ synonym: "lineage name\: AB.plaapapppa" []
 is_a: WBbt:0005102
 is_a: WBbt:0005666
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005395
 
 [Term]
@@ -11537,6 +11601,7 @@ synonym: "lineage name\: AB.praapapppa" []
 is_a: WBbt:0005100
 is_a: WBbt:0005666
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005392
 
 [Term]
@@ -11545,6 +11610,7 @@ name: ASJ
 def: "neuron type\, a set of two ciliated neurons that are part of the amphid sensilla. The endings are in the amphid channel\, which is open to the outside." [WB:Paper00000938 ""]
 comment: LINKOUT\:\:WORMATLAS\:\:<http\://www.wormatlas.org/neurons/Individual%20Neurons/ASJframeset.html>
 is_a: WBbt:0005394
+is_a: WBbt:0005837
 
 [Term]
 id: WBbt:0003886
@@ -11554,6 +11620,7 @@ synonym: "lineage name\: AB.alpppppppa" []
 is_a: WBbt:0005102
 is_a: WBbt:0005667
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005395
 
 [Term]
@@ -11564,6 +11631,7 @@ synonym: "lineage name\: AB.praaappppa" []
 is_a: WBbt:0005100
 is_a: WBbt:0005667
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005392
 
 [Term]
@@ -11572,6 +11640,7 @@ name: ASK
 def: "neuron type\, a set of two ciliated neurons that are part of the amphid sensilla. The endings are in the amphid channel\, which is open to the outside." [WB:Paper00000938 ""]
 comment: LINKOUT\:\:WORMATLAS\:\:<http\://www.wormatlas.org/neurons/Individual%20Neurons/ASKframeset.html>
 is_a: WBbt:0005394
+is_a: WBbt:0005837
 
 [Term]
 id: WBbt:0003884
@@ -11581,6 +11650,7 @@ synonym: "lineage name\: AB.alpppapppa" []
 is_a: WBbt:0005102
 is_a: WBbt:0005668
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005395
 
 [Term]
@@ -11591,6 +11661,7 @@ synonym: "lineage name\: AB.praaaapppa" []
 is_a: WBbt:0005100
 is_a: WBbt:0005668
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005392
 
 [Term]
@@ -11608,6 +11679,7 @@ synonym: "lineage name\: AB.alpppppppp" []
 is_a: WBbt:0005102
 is_a: WBbt:0006751
 is_a: WBbt:0006817
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0003871
@@ -11617,6 +11689,7 @@ synonym: "lineage name\: AB.praaappppp" []
 is_a: WBbt:0005100
 is_a: WBbt:0006751
 is_a: WBbt:0006817
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0005842
@@ -11642,6 +11715,7 @@ synonym: "lineage name\: AB.alaappapa" []
 is_a: WBbt:0005100
 is_a: WBbt:0005842
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0005841
@@ -11658,6 +11732,7 @@ synonym: "lineage name\: AB.plpaapaap" []
 is_a: WBbt:0005102
 is_a: WBbt:0005841
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0003867
@@ -11667,6 +11742,7 @@ synonym: "lineage name\: AB.prpaapaap" []
 is_a: WBbt:0005100
 is_a: WBbt:0005841
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0006818
@@ -11683,6 +11759,7 @@ synonym: "lineage name\: AB.alaaapalr" []
 is_a: WBbt:0005102
 is_a: WBbt:0006751
 is_a: WBbt:0006818
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0003865
@@ -11692,6 +11769,7 @@ synonym: "lineage name\: AB.alaaapprl" []
 is_a: WBbt:0005100
 is_a: WBbt:0006751
 is_a: WBbt:0006818
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0006819
@@ -11708,6 +11786,7 @@ synonym: "lineage name\: AB.alpppaaaa" []
 is_a: WBbt:0005102
 is_a: WBbt:0006751
 is_a: WBbt:0006819
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0003863
@@ -11717,6 +11796,7 @@ synonym: "lineage name\: AB.praaaaaaa" []
 is_a: WBbt:0005100
 is_a: WBbt:0006751
 is_a: WBbt:0006819
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0003851
@@ -11793,6 +11873,7 @@ synonym: "lineage name\: AB.alapaaaaa" []
 is_a: WBbt:0005102
 is_a: WBbt:0006751
 is_a: WBbt:0006821
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0003848
@@ -11802,6 +11883,7 @@ synonym: "lineage name\: AB.alappapaa" []
 is_a: WBbt:0005100
 is_a: WBbt:0006751
 is_a: WBbt:0006821
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0006822
@@ -11819,6 +11901,7 @@ synonym: "lineage name\: AB.alapapppa" []
 is_a: WBbt:0005102
 is_a: WBbt:0006751
 is_a: WBbt:0006822
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0003846
@@ -11828,6 +11911,7 @@ synonym: "lineage name\: AB.alapppppa" []
 is_a: WBbt:0005100
 is_a: WBbt:0006751
 is_a: WBbt:0006822
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0006823
@@ -11844,6 +11928,7 @@ def: "Ring and ventral cord interneuron" [ISBN:0-87969-307-X]
 synonym: "lineage name\: AB.plpapapap" []
 is_a: WBbt:0006751
 is_a: WBbt:0006823
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005264
 
 [Term]
@@ -11853,6 +11938,7 @@ def: "Ring and ventral cord interneuron" [ISBN:0-87969-307-X]
 synonym: "lineage name\: AB.prpapapap" []
 is_a: WBbt:0006751
 is_a: WBbt:0006823
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005264
 
 [Term]
@@ -18077,6 +18163,7 @@ name: IL2 neuron
 def: "neuron type\, a set of six ciliated neurons\, each of which is one of the two component neurons of the six inner labial sensilla." [WB:Paper00000938 ""]
 comment: LINKOUT\:\:WORMATLAS\:\:<http\://www.wormatlas.org/neurons/Individual%20Neurons/IL2frameset.html>
 is_a: WBbt:0005117
+is_a: WBbt:0005837
 
 [Term]
 id: WBbt:0004545
@@ -18459,8 +18546,8 @@ name: M.dlpaa
 def: "post-embryonic cell of pedigree M.dlpaa\, only present in male." [WB:rynl]
 synonym: "SM1L" []
 synonym: "left SM1" []
-is_a: WBbt:0005757
 is_a: WBbt:0007030
+is_a: WBbt:0008373
 
 [Term]
 id: WBbt:0002754
@@ -18476,8 +18563,8 @@ name: M.dlpap
 def: "post-embryonic cell of pedigree M.dlpap\, only present in male." [WB:rynl]
 synonym: "SM2L" []
 synonym: "left SM2" []
-is_a: WBbt:0005757
 is_a: WBbt:0007030
+is_a: WBbt:0008373
 
 [Term]
 id: WBbt:0002784
@@ -18610,8 +18697,8 @@ name: M.drpaa
 def: "post-embryonic cell of pedigree M.drpaa\, only present in male." [WB:rynl]
 synonym: "SM1R" []
 synonym: "right SM1" []
-is_a: WBbt:0005757
 is_a: WBbt:0007030
+is_a: WBbt:0008373
 
 [Term]
 id: WBbt:0002769
@@ -18627,8 +18714,8 @@ name: M.drpap
 def: "post-embryonic cell of pedigree M.drpap\, only present in male." [WB:rynl]
 synonym: "SM2R" []
 synonym: "right SM2" []
-is_a: WBbt:0005757
 is_a: WBbt:0007030
+is_a: WBbt:0008373
 
 [Term]
 id: WBbt:0002796
@@ -19320,9 +19407,11 @@ relationship: part_of WBbt:0003732
 [Term]
 id: WBbt:0003638
 name: MC
+alt_id: WBbt:0003651
 def: "neuron type\, marginal cell neuron of the pharynx." [WB:Paper00000009 ""]
 comment: LINKOUT\:\:WORMATLAS\:\:<http\://www.wormatlas.org/neurons/Individual%20Neurons/MCframeset.html>
-is_a: WBbt:0003651
+synonym: "marginal cell neuron" []
+is_a: WBbt:0005439
 is_a: WBbt:0006840
 relationship: part_of WBbt:0003711
 
@@ -19351,16 +19440,17 @@ synonym: "lineage name\: AB.arapaappp" []
 is_a: WBbt:0003638
 
 [Term]
-id: WBbt:0004459
+id: WBbt:0003664
 name: MI
 alt_id: WBbt:0003747
-def: "Pharyngeal motor neuron/interneuron" [ISBN:0-87969-307-X]
+alt_id: WBbt:0004459
+def: "Pharyngeal motor neuron/interneuron." [ISBN:0-87969-307-X ""]
 comment: LINKOUT\:\:WORMATLAS\:\:<http\://www.wormatlas.org/neurons/Individual%20Neurons/MIframeset.html>
-synonym: "MI" []
 synonym: "lineage name\: AB.araappaaa" []
-is_a: WBbt:0003664
+synonym: "pharyngeal motor-interneuron" []
 is_a: WBbt:0005113
 is_a: WBbt:0005409
+is_a: WBbt:0005439
 relationship: part_of WBbt:0003711
 
 [Term]
@@ -21688,11 +21778,13 @@ relationship: DESCENDENTOF WBbt:0002432
 relationship: part_of WBbt:0006449
 
 [Term]
-id: WBbt:0003746
+id: WBbt:0003666
 name: NSM
+alt_id: WBbt:0003746
 def: "neuron type\, a set of two pharyngeal neurosecretory-motor neurons." [WB:Paper00000009 ""]
 comment: LINKOUT\:\:WORMATLAS\:\:<http\://www.wormatlas.org/neurons/Individual%20Neurons/NSMframeset.html>
-is_a: WBbt:0003666
+synonym: "neurosecretory-motor neuron" []
+is_a: WBbt:0005439
 is_a: WBbt:0006837
 relationship: part_of WBbt:0003711
 
@@ -21706,7 +21798,7 @@ id: WBbt:0004457
 name: NSML
 def: "Pharyngeal neurosecretory motorneuron\, contain serotonin" [ISBN:0-87969-307-X]
 synonym: "lineage name\: AB.araapapaav" []
-is_a: WBbt:0003746
+is_a: WBbt:0003666
 
 [Term]
 id: WBbt:0003637
@@ -21718,7 +21810,7 @@ id: WBbt:0004446
 name: NSMR
 def: "Pharyngeal neurosecretory motorneuron\, contain serotonin" [ISBN:0-87969-307-X]
 synonym: "lineage name\: AB.araapppaav" []
-is_a: WBbt:0003746
+is_a: WBbt:0003666
 
 [Term]
 id: WBbt:0006803
@@ -25077,6 +25169,7 @@ is_a: WBbt:0005757
 id: WBbt:0007807
 name: PHA
 def: "neuron type\, phasmid." [WB:rynl ""]
+is_a: WBbt:0005837
 is_a: WBbt:0006753
 
 [Term]
@@ -25085,7 +25178,6 @@ name: PHAL
 def: "Phasmid neurons\, probably chemosensory" [ISBN:0-87969-307-X]
 synonym: "lineage name\: AB.plpppaapp" []
 is_a: WBbt:0005097
-is_a: WBbt:0005837
 is_a: WBbt:0007807
 relationship: part_of WBbt:0005431
 
@@ -25095,7 +25187,6 @@ name: PHAR
 def: "Phasmid neurons\, probably chemosensory" [ISBN:0-87969-307-X]
 synonym: "lineage name\: AB.prpppaapp" []
 is_a: WBbt:0005600
-is_a: WBbt:0005837
 is_a: WBbt:0007807
 relationship: part_of WBbt:0005427
 
@@ -25103,6 +25194,7 @@ relationship: part_of WBbt:0005427
 id: WBbt:0007808
 name: PHB
 def: "neuron type\, phasmid." [WB:rynl ""]
+is_a: WBbt:0005837
 is_a: WBbt:0006753
 
 [Term]
@@ -25111,7 +25203,6 @@ name: PHBL
 def: "Phasmid neurons\, probably chemosensory" [ISBN:0-87969-307-X]
 synonym: "lineage name\: AB.plapppappp" []
 is_a: WBbt:0005097
-is_a: WBbt:0005837
 is_a: WBbt:0007808
 relationship: part_of WBbt:0005431
 
@@ -25124,7 +25215,6 @@ synonym: "PHRB" []
 synonym: "lineage name\: AB.prapppappp" []
 xref_analog: ISBN:0-87969-307-X
 is_a: WBbt:0005600
-is_a: WBbt:0005837
 is_a: WBbt:0007808
 relationship: part_of WBbt:0005427
 
@@ -25134,7 +25224,6 @@ name: PHCL
 def: "Neuron\, striated rootlet in male\, possibly sensory in tail spike" [ISBN:0-87969-307-X]
 synonym: "lineage name\: TL.pppaa" []
 is_a: WBbt:0005097
-is_a: WBbt:0005837
 
 [Term]
 id: WBbt:0004118
@@ -25142,7 +25231,6 @@ name: PHCR
 def: "Neuron\, striated rootlet in male\, possibly sensory in tail spike" [ISBN:0-87969-307-X]
 synonym: "lineage name\: TR.pppaa" []
 is_a: WBbt:0005600
-is_a: WBbt:0005837
 
 [Term]
 id: WBbt:0004116
@@ -26686,6 +26774,7 @@ is_a: WBbt:0005113
 is_a: WBbt:0006751
 is_a: WBbt:0006837
 is_a: WBbt:0006974
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005266
 
 [Term]
@@ -26749,6 +26838,7 @@ synonym: "lineage name\: AB.prpapppaa" []
 is_a: WBbt:0005113
 is_a: WBbt:0006751
 is_a: WBbt:0006974
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005266
 
 [Term]
@@ -26761,6 +26851,7 @@ is_a: WBbt:0005113
 is_a: WBbt:0005190
 is_a: WBbt:0006751
 is_a: WBbt:0006974
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005264
 
 [Term]
@@ -26805,6 +26896,7 @@ def: "Ring motor neuron/interneuron\, many synapses" [ISBN:0-87969-307-X]
 synonym: "lineage name\: AB.alpapapaa" []
 is_a: WBbt:0005400
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005266
 
 [Term]
@@ -26814,6 +26906,7 @@ def: "Ring motor neuron/interneuron\, many synapses" [ISBN:0-87969-307-X]
 synonym: "lineage name\: AB.arappapaa" []
 is_a: WBbt:0005400
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005266
 
 [Term]
@@ -26824,6 +26917,7 @@ synonym: "lineage name\: AB.alpppapad" []
 is_a: WBbt:0005102
 is_a: WBbt:0005400
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0005033
@@ -26833,6 +26927,7 @@ synonym: "lineage name\: AB.praaaapad" []
 is_a: WBbt:0005100
 is_a: WBbt:0005400
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0005031
@@ -26842,6 +26937,7 @@ synonym: "lineage name\: AB.alppapaaa" []
 is_a: WBbt:0005102
 is_a: WBbt:0005400
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0005029
@@ -26851,6 +26947,7 @@ synonym: "lineage name\: AB.arapppaaa" []
 is_a: WBbt:0005100
 is_a: WBbt:0005400
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0005399
@@ -26988,6 +27085,7 @@ def: "Ring interneuron\, anteriorly projecting process that runs sublaterally" [
 synonym: "lineage name\: AB.alppapapa" []
 is_a: WBbt:0005397
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005266
 
 [Term]
@@ -26997,6 +27095,7 @@ def: "Ring interneuron\, anteriorly projecting process that runs sublaterally" [
 synonym: "lineage name\: AB.arapppapa" []
 is_a: WBbt:0005397
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005266
 
 [Term]
@@ -27090,6 +27189,7 @@ def: "Receives a few synapses in the ring\, has a posteriorly directed process t
 synonym: "lineage name\: AB.plpapaapa" []
 is_a: WBbt:0005361
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005266
 
 [Term]
@@ -27099,6 +27199,7 @@ def: "Receives a few synapses in the ring\, has a posteriorly directed process t
 synonym: "lineage name\: AB.prpapaapa" []
 is_a: WBbt:0005361
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005266
 
 [Term]
@@ -27108,6 +27209,7 @@ def: "Receives a few synapses in the ring\, has a posteriorly directed process t
 synonym: "lineage name\: AB.plpapappa" []
 is_a: WBbt:0005361
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005266
 
 [Term]
@@ -27117,6 +27219,7 @@ def: "Receives a few synapses in the ring\, has a posteriorly directed process t
 synonym: "lineage name\: AB.prpapappa" []
 is_a: WBbt:0005361
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005266
 
 [Term]
@@ -27153,6 +27256,7 @@ def: "Receives a few synapses in the ring\, has a posteriorly directed process t
 synonym: "lineage name\: AB.plpapaapp" []
 is_a: WBbt:0005359
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005266
 
 [Term]
@@ -27162,6 +27266,7 @@ def: "Receives a few synapses in the ring\, has a posteriorly directed process t
 synonym: "lineage name\: AB.prpapaapp" []
 is_a: WBbt:0005359
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005266
 
 [Term]
@@ -27932,7 +28037,7 @@ id: WBbt:0007817
 name: SM3L
 def: "male-specific sex myoblast\, third\, left\, of pedigree M.vlpaa." [WB:rynl ""]
 synonym: "left SM3" []
-is_a: WBbt:0006783
+is_a: WBbt:0008373
 
 [Term]
 id: WBbt:0007336
@@ -28089,7 +28194,7 @@ id: WBbt:0007818
 name: SM3R
 def: "male-specific sex myoblast\, third\, right\, of pedigree M.vrpaa." [WB:rynl ""]
 synonym: "right SM3" []
-is_a: WBbt:0006783
+is_a: WBbt:0008373
 
 [Term]
 id: WBbt:0007346
@@ -28257,6 +28362,7 @@ def: "Ring motor neuron/interneuron\, has a posteriorly direct ed process that r
 synonym: "lineage name\: AB.alpapapapp" []
 is_a: WBbt:0005355
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005266
 
 [Term]
@@ -28266,6 +28372,7 @@ def: "Ring motor neuron/interneuron\, has a posteriorly direct ed process that r
 synonym: "lineage name\: AB.arappapapp" []
 is_a: WBbt:0005355
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005266
 
 [Term]
@@ -28275,6 +28382,7 @@ def: "Ring motor neuron/interneuron\, has a posteriorly direct ed process that r
 synonym: "lineage name\: AB.alpapappp" []
 is_a: WBbt:0005355
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005266
 
 [Term]
@@ -28284,6 +28392,7 @@ def: "Ring motor neuron/interneuron\, has a posteriorly direct ed process that r
 synonym: "lineage name\: AB.arappappp" []
 is_a: WBbt:0005355
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005266
 
 [Term]
@@ -28302,6 +28411,7 @@ def: "Ring motor neuron/interneuron\, has a posteriorly direct ed process that r
 synonym: "lineage name\: AB.plpapaaaa" []
 is_a: WBbt:0005353
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005266
 
 [Term]
@@ -28311,6 +28421,7 @@ def: "Ring motor neuron/interneuron\, has a posteriorly direct ed process that r
 synonym: "lineage name\: AB.prpapaaaa" []
 is_a: WBbt:0005353
 is_a: WBbt:0006751
+is_a: WBbt:0007028
 relationship: part_of WBbt:0005266
 
 [Term]
@@ -35183,6 +35294,25 @@ def: "post-embryonic cell of pedigree Z1.paa" [WB:rynl]
 is_a: WBbt:0007030
 
 [Term]
+id: WBbt:0008363
+name: Z1.paa hermaphrodite
+def: "cell of pedigree Z1.paa in hermaphrodite." [WB:rynl ""]
+is_a: WBbt:0007595
+
+[Term]
+id: WBbt:0008364
+name: Z1.paa male
+def: "cell of pedigree Z1.paa in male." [WB:rynl ""]
+is_a: WBbt:0007595
+
+[Term]
+id: WBbt:0008365
+name: Z1.paa male 4L
+def: "cell of pedigree Z1.paa that follows the 4L configuration (Z4.aaa becomes the linker cell) of development in male." [WB:rynl ""]
+is_a: WBbt:0008359
+is_a: WBbt:0008364
+
+[Term]
 id: WBbt:0003310
 name: Z1.paa nucleus
 def: "nucleus of pedigree Z1.paa" [WB:rynl]
@@ -35193,13 +35323,13 @@ relationship: part_of WBbt:0007595
 id: WBbt:0007931
 name: Z1.paa nucleus hermaphrodite
 is_a: WBbt:0003310
-relationship: part_of WBbt:0007595
+relationship: part_of WBbt:0008363
 
 [Term]
 id: WBbt:0007930
 name: Z1.paa nucleus male
 is_a: WBbt:0003310
-relationship: part_of WBbt:0007595
+relationship: part_of WBbt:0008364
 
 [Term]
 id: WBbt:0007983
@@ -35207,6 +35337,7 @@ name: Z1.paa nucleus male non-terminal
 def: "nucleus of pedigree Z1.paa\, not terminally divided in male." [WB:rynl ""]
 is_a: WBbt:0007930
 is_a: WBbt:0008252
+relationship: part_of WBbt:0008365
 
 [Term]
 id: WBbt:0007982
@@ -35767,13 +35898,27 @@ relationship: DESCINHERM WBbt:0003349
 relationship: part_of WBbt:0004183
 
 [Term]
-id: WBbt:0007607
+id: WBbt:0008361
 name: Z1.pap
-def: "post-embryonic cell of pedigree Z1.pap" [WB:rynl]
+def: "cell of pedigree Z1.pap." [WB:rynl ""]
+is_a: WBbt:0007030
+
+[Term]
+id: WBbt:0007607
+name: Z1.pap hermaphrodite
+def: "post-embryonic cell of pedigree Z1.pap in hermaphrodite." [WB:rynl]
 synonym: "DU cell" []
 synonym: "dorsal unterine precursor cell" []
 is_a: WBbt:0006781
-is_a: WBbt:0007030
+is_a: WBbt:0008361
+
+[Term]
+id: WBbt:0008360
+name: Z1.pap male
+def: "cell of pedigree Z1.pap in male." [WB:rynl ""]
+is_a: WBbt:0008358
+is_a: WBbt:0008359
+is_a: WBbt:0008361
 
 [Term]
 id: WBbt:0003352
@@ -35781,6 +35926,7 @@ name: Z1.pap nucleus
 def: "nucleus of pedigree Z1.pap" [WB:rynl]
 relationship: DESCENDENTOF WBbt:0003309
 relationship: part_of WBbt:0007607
+relationship: part_of WBbt:0008360
 
 [Term]
 id: WBbt:0007608
@@ -38265,6 +38411,13 @@ def: "post-embryonic cell of pedigree Z4.aaa in male." [WB:rynl ""]
 is_a: WBbt:0007688
 
 [Term]
+id: WBbt:0008362
+name: Z4.aaa male 1L
+def: "cell of pedigree Z4.aaa that follows the 1L configuration (Z1.paa becomes the linker cell) of development in male." [WB:rynl ""]
+is_a: WBbt:0008295
+is_a: WBbt:0008358
+
+[Term]
 id: WBbt:0007978
 name: Z4.aaa nucleus
 relationship: DESCENDENTOF WBbt:0003464
@@ -38289,6 +38442,7 @@ name: Z4.aaa nucleus male non-terminal
 def: "nucleus of pedigree Z4.aaa\, not terminally divided in male." [WB:rynl ""]
 is_a: WBbt:0007980
 is_a: WBbt:0008251
+relationship: part_of WBbt:0008362
 
 [Term]
 id: WBbt:0007984
@@ -38855,6 +39009,8 @@ id: WBbt:0008297
 name: Z4.aap male
 def: "post-embryonic cell of pedigree Z4.aap in male." [WB:rynl ""]
 is_a: WBbt:0007707
+is_a: WBbt:0008358
+is_a: WBbt:0008359
 
 [Term]
 id: WBbt:0007979
@@ -41532,7 +41688,7 @@ relationship: part_of WBbt:0004506
 [Term]
 id: WBbt:0005762
 name: accessory cell
-def: "cells that support sensory neurons\, similar to glial cells in vertebrates.\nA category which collectively refers to socket cells\, sheath cells\, and structural cells\, or their processes.  All of these cells extend long processes which serve a supporting role\, rather like glia\, to form a protective environment around sensory neuron endings.  In addition\, some of these cells extend broad thin processes from their somata which wrap around neuronal ganglia\, again in a glia-like fashion" [WB:rynl, WA:dh]
+def: "cells that support sensory neurons\, similar to glial cells in vertebrates. A category which collectively refers to socket cells\, sheath cells\, and structural cells\, or their processes.  All of these cells extend long processes which serve a supporting role\, rather like glia\, to form a protective environment around sensory neuron endings.  In addition\, some of these cells extend broad thin processes from their somata which wrap around neuronal ganglia\, again in a glia-like fashion" [WB:rynl, WA:dh]
 synonym: "support cell" []
 xref_analog: WA:dh
 relationship: part_of WBbt:0005735
@@ -41709,6 +41865,11 @@ name: anterior arcade cell
 def: "Interface between pharynx and hypodermis\, form anterior part of the buccal cavity." [ISBN:0-87969-307-X ""]
 synonym: "arc ant" []
 is_a: WBbt:0005793
+
+[Term]
+id: WBbt:0008376
+name: anterior arcade ring
+is_a: WBbt:0008375
 
 [Term]
 id: WBbt:0006927
@@ -41931,6 +42092,12 @@ def: "Interfacial (hypodermal) cells which connect the hypodermal epithelium of 
 is_a: WBbt:0005754
 
 [Term]
+id: WBbt:0008375
+name: arcade ring
+def: "cytoplamic ring that surrounds the anterior of the buccal cavity." [WA:dh ""]
+relationship: part_of WBbt:0008374
+
+[Term]
 id: WBbt:0005768
 name: axis
 def: "spatial axis" [WB:rynl]
@@ -42116,6 +42283,7 @@ name: buccal cavity
 def: "cuticle-lined lumenal region surrounded by pharyngeal epithelium\, situated at the anterior end of pharynx." [WA:dh, WB:rynl]
 is_a: WBbt:0005732
 relationship: part_of WBbt:0005748
+relationship: part_of WBbt:0008374
 
 [Term]
 id: WBbt:0005254
@@ -43094,13 +43262,13 @@ is_a: WBbt:0008209
 [Term]
 id: WBbt:0008253
 name: gon male vdef 1L
-def: "cell of vas deferens that followed the 1L lineage configuration of development." [WB:rynl ""]
+def: "cell of vas deferens that followed the 1L lineage configuration (Z1.paa becomes the linker cell) of development." [WB:rynl ""]
 is_a: WBbt:0008202
 
 [Term]
 id: WBbt:0008254
 name: gon male vdef 4L
-def: "cell of vas deferens that followed the 4L lineage configuration of development." [WB:rynl ""]
+def: "cell of vas deferens that followed the 4L lineage configuration (Z4.aaa becomes the linker cell) of development." [WB:rynl ""]
 is_a: WBbt:0008202
 
 [Term]
@@ -43849,6 +44017,24 @@ relationship: part_of WBbt:0005744
 relationship: part_of WBbt:0005747
 
 [Term]
+id: WBbt:0008366
+name: gonadal premordium
+def: "a region around premature germline\, consists of cells of pedigree Z1 and Z4\, which develops to become the somatic gonad." [WB:rynl ""]
+is_a: WBbt:0005738
+
+[Term]
+id: WBbt:0008368
+name: gonadal premordium hermaphrodite
+def: "gonadal premordium in hermaphrodite." [WB:rynl ""]
+is_a: WBbt:0008366
+
+[Term]
+id: WBbt:0008367
+name: gonadal premordium male
+def: "gonadal premordium in male." [WB:rynl ""]
+is_a: WBbt:0008366
+
+[Term]
 id: WBbt:0005828
 name: gonadal sheath cell
 def: "five pairs of thin gonadal sheath cells form a single layer covering the germ line component of each arm\, each pair occupying a stereotyped position along the gonad proximal-distal axis." [WA:dh ""]
@@ -43906,7 +44092,7 @@ id: WBbt:0005135
 name: head ganglion
 def: "ganglion in the head." [WB:rynl ""]
 is_a: WBbt:0005189
-is_a: WBbt:0005739
+relationship: part_of WBbt:0005739
 
 [Term]
 id: WBbt:0005134
@@ -45691,6 +45877,7 @@ name: int9R
 def: "Intestinal cell" [ISBN:0-87969-307-X]
 synonym: "lineage name\: E.prppp" []
 is_a: WBbt:0005792
+is_a: WBbt:0007028
 
 [Term]
 id: WBbt:0008238
@@ -45860,12 +46047,14 @@ id: WBbt:0008239
 name: linker cell Z1
 def: "linker cell of the pedigree Z1.paa." [WB:rynl ""]
 is_a: WBbt:0005062
+is_a: WBbt:0008364
 
 [Term]
 id: WBbt:0008240
 name: linker cell Z4
 def: "linker cell of the pedigree Z4.aaa." [WB:rynl ""]
 is_a: WBbt:0005062
+is_a: WBbt:0008295
 
 [Term]
 id: WBbt:0004339
@@ -46018,6 +46207,7 @@ is_a: WBbt:0005175
 id: WBbt:0008209
 name: male gonadal cell
 def: "cell of male gonad." [WB:rynl ""]
+synonym: "male somatic gonadal cell" []
 is_a: WBbt:0004017
 is_a: WBbt:0005757
 
@@ -46238,11 +46428,6 @@ is_a: WBbt:0005460
 is_a: WBbt:0005754
 
 [Term]
-id: WBbt:0003651
-name: marginal cell neuron
-is_a: WBbt:0005439
-
-[Term]
 id: WBbt:0003709
 name: mc1
 def: "marginal cell\, type 1." [WB:rynl ""]
@@ -46375,6 +46560,7 @@ is_obsolete: true
 [Term]
 id: WBbt:0003711
 name: metacorpus
+def: "posterior segment of pharyngeal corpus." [WB:rynl ""]
 relationship: part_of WBbt:0003733
 
 [Term]
@@ -46903,11 +47089,6 @@ is_a: WBbt:0005754
 is_a: WBbt:0005762
 
 [Term]
-id: WBbt:0003666
-name: neurosecretory-motor neuron
-is_a: WBbt:0005439
-
-[Term]
 id: WBbt:0005511
 name: non-pharyngeal muscle
 is_obsolete: true
@@ -47054,6 +47235,7 @@ is_a: WBbt:0005460
 [Term]
 id: WBbt:0003668
 name: pharyngeal interneuron
+def: "interneuron of the pharyngeal nervous system." [WB:rynl ""]
 is_a: WBbt:0005439
 
 [Term]
@@ -47086,11 +47268,6 @@ is_a: WBbt:0005439
 id: WBbt:0005453
 name: pharyngeal motor neurons
 is_obsolete: true
-
-[Term]
-id: WBbt:0003664
-name: pharyngeal motor-interneuron
-is_a: WBbt:0005439
 
 [Term]
 id: WBbt:0005451
@@ -47807,6 +47984,11 @@ synonym: "arc post" []
 is_a: WBbt:0005793
 
 [Term]
+id: WBbt:0008377
+name: posterior arcade ring
+is_a: WBbt:0008375
+
+[Term]
 id: WBbt:0005469
 name: posterior body wall muscle
 is_obsolete: true
@@ -47927,6 +48109,7 @@ relationship: part_of WBbt:0005448
 [Term]
 id: WBbt:0003713
 name: procorpus
+def: "anterior section of pharyngeal corpus." [WB:rynl ""]
 relationship: part_of WBbt:0003733
 
 [Term]
@@ -48567,6 +48750,8 @@ is_a: WBbt:0003760
 [Term]
 id: WBbt:0005759
 name: sensory neuron
+def: "neuron that senses external stimuli and transduce them to signals internal to the organism." [WB:rynl ""]
+comment: WormAtlas NeuroTABLE 1 classification used.
 is_a: WBbt:0003679
 
 [Term]
@@ -48600,6 +48785,13 @@ def: "syncytial seam cell in male tail\, right." [WB:rynl ""]
 is_a: WBbt:0006912
 
 [Term]
+id: WBbt:0008373
+name: sex myoblast
+def: "male-specific blast cell which divides to product muscle cell." [WB:rynl ""]
+is_a: WBbt:0005757
+is_a: WBbt:0006783
+
+[Term]
 id: WBbt:0005363
 name: sheath cell
 is_obsolete: true
@@ -48628,6 +48820,13 @@ name: somatic cell
 is_obsolete: true
 
 [Term]
+id: WBbt:0008378
+name: somatic cell
+def: "Nucleated cell which has a diploid set of chromosomes." [WB:rynl ""]
+narrow_synonym: "FMA\:72300" []
+is_a: WBbt:0004017
+
+[Term]
 id: WBbt:0005349
 name: somatic cells
 is_obsolete: true
@@ -48646,11 +48845,12 @@ relationship: part_of WBbt:0005175
 
 [Term]
 id: WBbt:0007854
-name: somatic gonad precursor cell
+name: somatic gonad precursor
 def: "any of two cells that generate all somatic tissues of the gonad proper (i.e. ovary or testis ) and genital ducts (e.g. uterus\, vas deferens)." [WB:paper00006002 ""]
 synonym: "SGP" []
 synonym: "somatic gonadal precursor cell" []
 is_a: WBbt:0006783
+relationship: part_of WBbt:0008366
 
 [Term]
 id: WBbt:0005345
@@ -48796,6 +48996,7 @@ relationship: part_of WBbt:0005312
 id: WBbt:0008072
 name: spike
 def: "a binuclear syncytium\, used during embryogenesis to make tail spike\, then die." [WB:rynl ""]
+synonym: "tail spike cell" []
 is_a: WBbt:0006925
 is_a: WBbt:0008074
 
@@ -48816,6 +49017,12 @@ synonym: "lineage name\: AB.prppppppa" []
 synonym: "lineage name\: ABprppppppa" []
 is_a: WBbt:0008073
 relationship: part_of WBbt:0006979
+
+[Term]
+id: WBbt:0008374
+name: stoma
+def: "portion of the digestive tract between the oral opening and the definitely tri-radiate beginning of the esophagus (pharynx). " [ISBN:0-8391-0697-1 ""]
+relationship: part_of WBbt:0005743
 
 [Term]
 id: WBbt:0005779
@@ -49364,6 +49571,25 @@ xref_analog: WA:dh
 relationship: part_of WBbt:0006794
 
 [Term]
+id: WBbt:0008357
+name: vas deferens precursor
+def: "blast cell that divides to become mostly vas deferens cells (and a few seminal vesicle cells)." [WB:rynl ""]
+is_a: WBbt:0006783
+relationship: part_of WBbt:0008367
+
+[Term]
+id: WBbt:0008358
+name: vas deferens precursor 1L
+def: "vas deferens precursor that follows the 1L configuration (Z1.paa becomes the linker cell) of development." [WB:rynl ""]
+is_a: WBbt:0008357
+
+[Term]
+id: WBbt:0008359
+name: vas deferens precursor 4L
+def: "vas deferens precursor that follows the 4L configuration (Z4.aaa becomes the linker cell) of development." [WB:rynl ""]
+is_a: WBbt:0008357
+
+[Term]
 id: WBbt:0008115
 name: ventral cord blast cell
 synonym: "P cell" []
@@ -49439,6 +49665,7 @@ def: "Ventral Uterine precursor cell." [WB:paper00002608 ""]
 synonym: "VU" []
 is_a: WBbt:0005758
 is_a: WBbt:0006783
+relationship: part_of WBbt:0008368
 
 [Term]
 id: WBbt:0004511
@@ -49857,6 +50084,7 @@ id: WBbt:0007809
 name: vulval precursor cell
 def: "cell that has the potential to form structural part of a vulva." [WB:rynl ""]
 synonym: "VPC" []
+synonym: "vulval precursor" []
 is_a: WBbt:0006783
 
 [Term]

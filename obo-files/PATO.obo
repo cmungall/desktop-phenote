@@ -1,5 +1,5 @@
 format-version: 1.2
-date: 25:03:2010 09:47
+date: 07:05:2010 13:36
 saved-by: George Gkoutos
 auto-generated-by: OBO-Edit 2.0
 subsetdef: abnormal_slim "Abnormal/normal slim"
@@ -14849,6 +14849,15 @@ subset: attribute_slim
 is_a: PATO:0002182 ! molecular quality
 created_by: George Gkoutos
 creation_date: 2010-03-25T09:42:51Z
+
+[Term]
+id: PATO:0002206
+name: neonatal
+def: "A maturity quality inhering to a bearer by virtue of the bearer's being at the point or short after birth." [PATOC:GVG]
+subset: value_slim
+is_a: PATO:0000261 ! maturity
+created_by: George Gkoutos
+creation_date: 2010-05-07T12:11:47Z
 
 [Typedef]
 id: decreased_in_magnitude_relative_to

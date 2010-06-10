@@ -1,5 +1,5 @@
 format-version: 1.2
-date: 13:11:2009 09:27
+date: 02:04:2010 14:36
 saved-by: terryh
 auto-generated-by: OBO-Edit 1.101
 default-namespace: adult_mouse_anatomy.gxd
@@ -108,7 +108,7 @@ is_a: MA:0000003 ! organ system
 [Term]
 id: MA:0000020
 name: back of trunk
-synonym: "<new synonym>" RELATED []
+synonym: "body" RELATED []
 relationship: part_of MA:0000004 ! trunk
 
 [Term]
@@ -753,8 +753,7 @@ relationship: part_of MA:0000328 ! intestine
 [Term]
 id: MA:0000138
 name: lymphatic vessel
-relationship: part_of MA:0002435 ! lymphoid system
-relationship: part_of MA:0002718 ! vascular system
+relationship: part_of MA:0002961 ! lymphatic system
 
 [Term]
 id: MA:0000139
@@ -771,6 +770,7 @@ relationship: part_of MA:0002436 ! lymphoid tissue
 id: MA:0000141
 name: spleen
 is_a: MA:0000522 ! abdomen organ
+is_a: MA:0002962 ! hemolymphoid system gland
 relationship: part_of MA:0002434 ! hematopoietic system
 relationship: part_of MA:0002711 ! immune system
 
@@ -778,6 +778,7 @@ relationship: part_of MA:0002711 ! immune system
 id: MA:0000142
 name: thymus
 is_a: MA:0000557 ! thoracic cavity organ
+is_a: MA:0002962 ! hemolymphoid system gland
 relationship: part_of MA:0002434 ! hematopoietic system
 relationship: part_of MA:0002711 ! immune system
 
@@ -1104,7 +1105,7 @@ relationship: part_of MA:0000198 ! cerebellum
 
 [Term]
 id: MA:0000200
-name: cerebellar hemisphere
+name: cerebellum hemisphere
 relationship: part_of MA:0000199 ! cerebellar cortex
 
 [Term]
@@ -1114,7 +1115,7 @@ relationship: part_of MA:0000199 ! cerebellar cortex
 
 [Term]
 id: MA:0000202
-name: cerebellar vermis
+name: cerebellum vermis
 relationship: part_of MA:0000199 ! cerebellar cortex
 
 [Term]
@@ -1171,7 +1172,7 @@ relationship: part_of MA:0000207 ! midbrain
 
 [Term]
 id: MA:0000212
-name: tegmentum
+name: midbrain tegmentum
 relationship: part_of MA:0000207 ! midbrain
 
 [Term]
@@ -5027,13 +5028,13 @@ relationship: part_of MA:0000184 ! basal ganglia
 id: MA:0000892
 name: accumbens nucleus
 synonym: "nucleus accumbens" RELATED []
-relationship: part_of MA:0000891 ! striatum
+relationship: part_of MA:0002972 ! ventral striatum
 
 [Term]
 id: MA:0000893
 name: caudate-putamen
 synonym: "caudate putamen" RELATED []
-relationship: part_of MA:0000891 ! striatum
+relationship: part_of MA:0002971 ! dorsal striatum
 
 [Term]
 id: MA:0000894
@@ -5048,7 +5049,7 @@ relationship: part_of MA:0000893 ! caudate-putamen
 [Term]
 id: MA:0000896
 name: lentiform nucleus
-relationship: part_of MA:0000891 ! striatum
+relationship: part_of MA:0002972 ! ventral striatum
 
 [Term]
 id: MA:0000897
@@ -5105,6 +5106,7 @@ is_a: MA:0000187 ! neocortex region
 [Term]
 id: MA:0000906
 name: frontal association cortex
+synonym: "prefrontal cortex" RELATED []
 relationship: part_of MA:0000905 ! frontal cortex
 
 [Term]
@@ -5198,15 +5200,15 @@ relationship: part_of MA:0000920 ! retrohippocampal cortex
 
 [Term]
 id: MA:0000924
-name: septal cortex
+name: septum of telencephalon
 synonym: "septal area" RELATED []
-synonym: "septal nucleus" RELATED []
-is_a: MA:0000187 ! neocortex region
+synonym: "septum" RELATED []
+relationship: part_of MA:0000133 ! cerebral hemisphere
 
 [Term]
 id: MA:0000925
 name: bed nucleus of stria terminalis
-relationship: part_of MA:0000924 ! septal cortex
+is_a: MA:0002978 ! septal nucleus
 
 [Term]
 id: MA:0000926
@@ -5246,12 +5248,12 @@ relationship: part_of MA:0000930 ! posterior division
 [Term]
 id: MA:0000933
 name: lateral septal complex
-relationship: part_of MA:0000924 ! septal cortex
+is_a: MA:0002978 ! septal nucleus
 
 [Term]
 id: MA:0000934
 name: medial septal complex
-relationship: part_of MA:0000924 ! septal cortex
+is_a: MA:0002978 ! septal nucleus
 
 [Term]
 id: MA:0000935
@@ -5266,7 +5268,7 @@ relationship: part_of MA:0000934 ! medial septal complex
 [Term]
 id: MA:0000937
 name: posterior septal complex
-relationship: part_of MA:0000924 ! septal cortex
+is_a: MA:0002978 ! septal nucleus
 
 [Term]
 id: MA:0000938
@@ -5276,13 +5278,13 @@ relationship: part_of MA:0000937 ! posterior septal complex
 [Term]
 id: MA:0000939
 name: septohippocampal nucleus
-relationship: part_of MA:0000924 ! septal cortex
+is_a: MA:0002978 ! septal nucleus
 
 [Term]
 id: MA:0000940
 name: subfornical organ
 is_a: MA:0002944 ! sensory circumventricular organ
-relationship: part_of MA:0000924 ! septal cortex
+is_a: MA:0002978 ! septal nucleus
 
 [Term]
 id: MA:0000941
@@ -5561,12 +5563,12 @@ relationship: part_of MA:0000987 ! hindbrain meninges
 [Term]
 id: MA:0000991
 name: cerebellum anterior lobe
-relationship: part_of MA:0000200 ! cerebellar hemisphere
+is_a: MA:0002963 ! cerebellum lobe
 
 [Term]
 id: MA:0000992
 name: flocculus
-relationship: part_of MA:0000200 ! cerebellar hemisphere
+relationship: part_of MA:0000200 ! cerebellum hemisphere
 
 [Term]
 id: MA:0000993
@@ -5595,63 +5597,71 @@ is_a: MA:0000201 ! cerebellar layer
 
 [Term]
 id: MA:0000998
-name: cerebellum lobule I
+name: cerebellum vermis lobule I
 synonym: "lingula" RELATED []
-relationship: part_of MA:0000202 ! cerebellar vermis
+is_a: MA:0002968 ! cerebellum vermis lobule
+relationship: part_of MA:0002969 ! anterior cerebellum vermis
 
 [Term]
 id: MA:0000999
-name: cerebellum lobule II
+name: cerebellum vermis lobule II
 synonym: "central lobule" RELATED []
-relationship: part_of MA:0000202 ! cerebellar vermis
+is_a: MA:0002968 ! cerebellum vermis lobule
+relationship: part_of MA:0002969 ! anterior cerebellum vermis
 
 [Term]
 id: MA:0001000
-name: cerebellum lobule III
+name: cerebellum vermis lobule III
 synonym: "central lobule" RELATED []
-relationship: part_of MA:0000202 ! cerebellar vermis
+is_a: MA:0002968 ! cerebellum vermis lobule
+relationship: part_of MA:0002969 ! anterior cerebellum vermis
 
 [Term]
 id: MA:0001001
-name: cerebellum lobule IV
+name: cerebellum vermis lobule IV
 synonym: "culmen" RELATED []
-relationship: part_of MA:0000202 ! cerebellar vermis
+is_a: MA:0002968 ! cerebellum vermis lobule
+relationship: part_of MA:0002969 ! anterior cerebellum vermis
 
 [Term]
 id: MA:0001002
-name: cerebellum lobule V
+name: cerebellum vermis lobule V
 synonym: "culmen" RELATED []
-relationship: part_of MA:0000202 ! cerebellar vermis
+is_a: MA:0002968 ! cerebellum vermis lobule
+relationship: part_of MA:0002969 ! anterior cerebellum vermis
 
 [Term]
 id: MA:0001003
-name: cerebellum lobule VI
+name: cerebellum vermis lobule VI
 synonym: "declive" RELATED []
-relationship: part_of MA:0000202 ! cerebellar vermis
+is_a: MA:0002968 ! cerebellum vermis lobule
+relationship: part_of MA:0002970 ! posterior cerebellum vermis
 
 [Term]
 id: MA:0001004
-name: cerebellum lobule VII
+name: cerebellum vermis lobule VII
 synonym: "folium" RELATED []
-relationship: part_of MA:0000202 ! cerebellar vermis
+is_a: MA:0002968 ! cerebellum vermis lobule
+relationship: part_of MA:0002970 ! posterior cerebellum vermis
 
 [Term]
 id: MA:0001005
-name: cerebellum lobule VIII
+name: cerebellum vermis lobule VIII
 synonym: "pyramus" RELATED []
-relationship: part_of MA:0000202 ! cerebellar vermis
+is_a: MA:0002968 ! cerebellum vermis lobule
+relationship: part_of MA:0002970 ! posterior cerebellum vermis
 
 [Term]
 id: MA:0001006
-name: cerebellum lobule IX
+name: cerebellum vermis lobule IX
 synonym: "uvula" RELATED []
-relationship: part_of MA:0000202 ! cerebellar vermis
+is_a: MA:0002968 ! cerebellum vermis lobule
 
 [Term]
 id: MA:0001007
-name: cerebellum lobule X
+name: cerebellum vermis lobule X
 synonym: "nodulus" RELATED []
-relationship: part_of MA:0000202 ! cerebellar vermis
+is_a: MA:0002968 ! cerebellum vermis lobule
 
 [Term]
 id: MA:0001008
@@ -5751,7 +5761,7 @@ relationship: part_of MA:0000204 ! pons
 id: MA:0001024
 name: raphe magnus nucleus
 is_a: MA:0000821 ! brainstem nucleus
-relationship: part_of MA:0000204 ! pons
+relationship: part_of MA:0000206 ! medulla oblongata
 
 [Term]
 id: MA:0001025
@@ -5980,7 +5990,7 @@ relationship: part_of MA:0000207 ! midbrain
 id: MA:0001063
 name: red nucleus
 is_a: MA:0000821 ! brainstem nucleus
-relationship: part_of MA:0000212 ! tegmentum
+relationship: part_of MA:0000212 ! midbrain tegmentum
 
 [Term]
 id: MA:0001064
@@ -6011,42 +6021,42 @@ relationship: part_of MA:0002567 ! corpora quadrigemina
 id: MA:0001069
 name: interpeduncular nucleus
 is_a: MA:0000821 ! brainstem nucleus
-relationship: part_of MA:0000212 ! tegmentum
+relationship: part_of MA:0000212 ! midbrain tegmentum
 
 [Term]
 id: MA:0001070
 name: nucleus related to visual cortex
-relationship: part_of MA:0000212 ! tegmentum
+relationship: part_of MA:0000212 ! midbrain tegmentum
 
 [Term]
 id: MA:0001071
 name: edinger-westphal nucleus
 is_a: MA:0000821 ! brainstem nucleus
-relationship: part_of MA:0000212 ! tegmentum
+relationship: part_of MA:0000212 ! midbrain tegmentum
 
 [Term]
 id: MA:0001072
 name: nucleus of darkschewitsch
 is_a: MA:0000821 ! brainstem nucleus
-relationship: part_of MA:0000212 ! tegmentum
+relationship: part_of MA:0000212 ! midbrain tegmentum
 
 [Term]
 id: MA:0001073
 name: oculomotor III nucleus
 is_a: MA:0000821 ! brainstem nucleus
-relationship: part_of MA:0000212 ! tegmentum
+relationship: part_of MA:0000212 ! midbrain tegmentum
 
 [Term]
 id: MA:0001074
 name: parabigeminal nucleus
 is_a: MA:0000821 ! brainstem nucleus
-relationship: part_of MA:0000212 ! tegmentum
+relationship: part_of MA:0000212 ! midbrain tegmentum
 
 [Term]
 id: MA:0001075
 name: trochlear IV nucleus
 is_a: MA:0000821 ! brainstem nucleus
-relationship: part_of MA:0000212 ! tegmentum
+relationship: part_of MA:0000212 ! midbrain tegmentum
 
 [Term]
 id: MA:0001076
@@ -10259,11 +10269,15 @@ is_a: MA:0000070 ! venous sinus
 [Term]
 id: MA:0001869
 name: left atrium auricular region
+synonym: "left atrial appendage" RELATED []
+is_a: MA:0002955 ! atrium auricular region
 relationship: part_of MA:0000074 ! heart left atrium
 
 [Term]
 id: MA:0001870
 name: right atrium auricular region
+synonym: "right atrial appendage" RELATED []
+is_a: MA:0002955 ! atrium auricular region
 relationship: part_of MA:0000075 ! heart right atrium
 
 [Term]
@@ -13085,7 +13099,6 @@ relationship: part_of MA:0000013 ! hemolymphoid system
 [Term]
 id: MA:0002435
 name: lymphoid system
-synonym: "lymphatic system" RELATED []
 relationship: part_of MA:0000013 ! hemolymphoid system
 relationship: part_of MA:0002711 ! immune system
 
@@ -13270,6 +13283,9 @@ is_a: MA:0000220 ! autonomic ganglion
 [Term]
 id: MA:0002470
 name: submandibular ganglion
+synonym: "lingual ganglion" RELATED []
+synonym: "maxillary ganglion" RELATED []
+synonym: "submaxillary ganglion" RELATED []
 is_a: MA:0002469 ! parasympathetic ganglion
 
 [Term]
@@ -15260,7 +15276,8 @@ relationship: part_of MA:0001459 ! bone
 
 [Term]
 id: MA:0002839
-name: epiphyseal plate
+name: long bone epiphyseal plate
+synonym: "epiphyseal plate" RELATED []
 synonym: "growth plate" RELATED []
 relationship: part_of MA:0002802 ! long bone
 
@@ -15863,6 +15880,190 @@ relationship: part_of MA:0001609 ! stomach cardiac region
 id: MA:0002952
 name: pyloric sphincter
 relationship: part_of MA:0002560 ! stomach pyloric region
+
+[Term]
+id: MA:0002953
+name: parametrial fat pad
+is_a: MA:0002481 ! fat pad
+
+[Term]
+id: MA:0002954
+name: cervical vertebra 1 arcus anterior
+synonym: "anterior arch of atlas" RELATED []
+synonym: "arcus anterior atlantis" RELATED []
+relationship: part_of MA:0001421 ! cervical vertebra 1
+
+[Term]
+id: MA:0002955
+name: atrium auricular region
+relationship: part_of MA:0000073 ! heart atrium
+
+[Term]
+id: MA:0002956
+name: omental fat pad
+is_a: MA:0000472 ! abdominal fat pad
+
+[Term]
+id: MA:0002957
+name: stylohyoid ligament
+synonym: "stylo-hyoid ligament" RELATED []
+is_a: MA:0000113 ! ligament
+
+[Term]
+id: MA:0002958
+name: hyoid bone body
+synonym: "base of hyoid bone" RELATED []
+synonym: "basihyal bone" RELATED []
+synonym: "basihyoid bone" RELATED []
+synonym: "body of hyoid bone" RELATED []
+synonym: "hyoid bone base" RELATED []
+relationship: part_of MA:0001484 ! hyoid bone
+
+[Term]
+id: MA:0002959
+name: hyoid bone greater horn
+synonym: "hyoid bone greater cornu" RELATED []
+synonym: "hyoid bone superior horn" RELATED []
+synonym: "hyoid bone upper horn" RELATED []
+relationship: part_of MA:0001484 ! hyoid bone
+
+[Term]
+id: MA:0002960
+name: hyoid bone lesser horn
+synonym: "hyoid bone lesser cornu" RELATED []
+synonym: "hyoid bone lower horn" RELATED []
+relationship: part_of MA:0001484 ! hyoid bone
+
+[Term]
+id: MA:0002961
+name: lymphatic system
+relationship: part_of MA:0002435 ! lymphoid system
+relationship: part_of MA:0002718 ! vascular system
+
+[Term]
+id: MA:0002962
+name: hemolymphoid system gland
+relationship: part_of MA:0000013 ! hemolymphoid system
+
+[Term]
+id: MA:0002963
+name: cerebellum lobe
+relationship: part_of MA:0000199 ! cerebellar cortex
+
+[Term]
+id: MA:0002964
+name: cerebellum posterior lobe
+is_a: MA:0002963 ! cerebellum lobe
+
+[Term]
+id: MA:0002965
+name: cerebellum flocculonodular lobe
+is_a: MA:0002963 ! cerebellum lobe
+
+[Term]
+id: MA:0002966
+name: cerebellum lobule
+relationship: part_of MA:0000199 ! cerebellar cortex
+
+[Term]
+id: MA:0002967
+name: cerebellum hemisphere lobule
+is_a: MA:0002966 ! cerebellum lobule
+relationship: part_of MA:0000200 ! cerebellum hemisphere
+
+[Term]
+id: MA:0002968
+name: cerebellum vermis lobule
+is_a: MA:0002966 ! cerebellum lobule
+relationship: part_of MA:0000202 ! cerebellum vermis
+
+[Term]
+id: MA:0002969
+name: anterior cerebellum vermis
+relationship: part_of MA:0000202 ! cerebellum vermis
+relationship: part_of MA:0000991 ! cerebellum anterior lobe
+
+[Term]
+id: MA:0002970
+name: posterior cerebellum vermis
+relationship: part_of MA:0000202 ! cerebellum vermis
+relationship: part_of MA:0002964 ! cerebellum posterior lobe
+
+[Term]
+id: MA:0002971
+name: dorsal striatum
+relationship: part_of MA:0000891 ! striatum
+
+[Term]
+id: MA:0002972
+name: ventral striatum
+relationship: part_of MA:0000891 ! striatum
+
+[Term]
+id: MA:0002973
+name: frontonasal suture
+is_a: MA:0001475 ! cranial suture
+
+[Term]
+id: MA:0002974
+name: pararenal fat
+synonym: "paranephric fat" RELATED []
+synonym: "pararenal fascia" RELATED []
+synonym: "pararenal fat body" RELATED []
+is_a: MA:0000009 ! adipose tissue
+
+[Term]
+id: MA:0002975
+name: perirenal fat
+synonym: "<new synonym>" RELATED []
+synonym: "adipose capsule of kidney" RELATED []
+synonym: "fatty capsule of kidney" RELATED []
+synonym: "perinephric fat" RELATED []
+synonym: "periphrenic fascia" RELATED []
+synonym: "perirenal fascia" RELATED []
+synonym: "perirenal fat capsule" RELATED []
+is_a: MA:0000009 ! adipose tissue
+
+[Term]
+id: MA:0002976
+name: long bone epiphyseal plate proliferative zone
+synonym: "zone of proliferation" RELATED []
+relationship: part_of MA:0002839 ! long bone epiphyseal plate
+
+[Term]
+id: MA:0002977
+name: long bone epiphyseal plate hypertrophic zone
+synonym: "maturation zone" RELATED []
+synonym: "zone of hypertrophic chondrocytes" RELATED []
+relationship: part_of MA:0002839 ! long bone epiphyseal plate
+
+[Term]
+id: MA:0002978
+name: septal nucleus
+relationship: part_of MA:0000924 ! septum of telencephalon
+
+[Term]
+id: MA:0002979
+name: septum pellucidum
+synonym: "septum lucidum" RELATED []
+relationship: part_of MA:0000924 ! septum of telencephalon
+
+[Term]
+id: MA:0002980
+name: dorsal raphe nucleus
+is_a: MA:0000821 ! brainstem nucleus
+relationship: part_of MA:0000212 ! midbrain tegmentum
+
+[Term]
+id: MA:0002981
+name: raphe obscurus nucleus
+is_a: MA:0000821 ! brainstem nucleus
+relationship: part_of MA:0000206 ! medulla oblongata
+
+[Term]
+id: MA:0002982
+name: sublingual ganglion
+is_a: MA:0002469 ! parasympathetic ganglion
 
 [Typedef]
 id: part_of

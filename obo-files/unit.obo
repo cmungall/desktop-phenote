@@ -1,5 +1,5 @@
 format-version: 1.2
-date: 11:02:2010 10:12
+date: 14:03:2010 10:12
 saved-by: George Gkoutos
 auto-generated-by: OBO-Edit 2.000-beta55
 subsetdef: abnormal_slim "Abnormal/normal slim"
@@ -1850,6 +1850,7 @@ relationship: unit_of PATO:0001521 ! sound amplitude
 [Term]
 id: UO:0000260
 name: effective dose unit
+def: "A derived unit which is a standard measure of the estimate of the stochastic effect that a non-uniform radiation dose has on a human." [Wikipedia:Wikipedia "http://www.wikipedia.org"]
 is_a: UO:0000127 ! radiation unit
 relationship: unit_of PATO:0001747 ! radiation effective dose
 

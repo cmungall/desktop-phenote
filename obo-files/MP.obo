@@ -1,6 +1,6 @@
 format-version: 1.2
-date: 30:03:2010 16:10
-auto-generated-by: OBO-Edit 2.1-beta3
+date: 12:05:2010 16:19
+auto-generated-by: OBO-Edit 2.1-beta4
 default-namespace: MPheno.ontology
 remark: The Mammalian Phenotype Ontology is being developed by Cynthia L. Smith, Susan M. Bello, Carroll W. Goldsmith and Janan T. Eppig, as part of the Mouse Genome Database (MGD) Project, Mouse Genome Informatics (MGI), The Jackson Laboratory, Bar Harbor, ME. Copyright 2007 The Jackson Laboratory. This file contains pre-coordinated phenotype terms, definitions and synonyms that can be used to describe mammalian phenotypes. The ontology is represented as a directed acyclic graph (DAG). It organizes phenotype terms into major biological system headers such as nervous system and respiratory system.  Behavior and lethality terms are also represented. This ontology is currently under development. Daily updates are available at the Mouse Genome Informatics (MGI) ftp site (ftp://ftp.informatics.jax.org/pub/reports/index.html#pheno) as well as the OBO Foundry site (http://obofoundry.org/). Questions, comments and suggestions are welcome, and should be directed to pheno@informatics.jax.org MGD is funded by NIH/NHGRI grant HG000330.
 
@@ -649,7 +649,6 @@ name: abnormal tooth development
 def: "any anomaly in the formation of the teeth" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 synonym: "tooth development abnormalities" EXACT []
 is_a: MP:0002100 ! abnormal tooth morphology
-is_a: MP:0002113 ! abnormal skeleton development
 is_a: MP:0003935 ! abnormal craniofacial development
 
 [Term]
@@ -1165,6 +1164,10 @@ def: "any anomaly in the concentration in the blood of the enzyme which catalyze
 synonym: "abnormal aspartate aminotransferase level" EXACT []
 synonym: "abnormal aspartate transaminase level" EXACT []
 synonym: "abnormal AST level" EXACT []
+synonym: "abnormal circulating AAT level" EXACT []
+synonym: "abnormal circulating ASAT level" EXACT []
+synonym: "abnormal circulating serum glutamic oxaloacetic transaminase level" EXACT []
+synonym: "abnormal circulating SGOT level" EXACT []
 is_a: MP:0001570 ! abnormal circulating enzyme level
 
 [Term]
@@ -2478,7 +2481,7 @@ is_a: MP:0002073 ! abnormal hair growth
 [Term]
 id: MP:0000427
 name: abnormal hair cycle
-def: "aberrant timing of growth and loss of hair (coat)" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+def: "aberrant timing of growth and regression of the hair follicles" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator", MGI:Sanger_Karp "Submission from Natasha Karp"]
 is_a: MP:0002073 ! abnormal hair growth
 
 [Term]
@@ -2862,8 +2865,7 @@ id: MP:0000478
 name: delayed intestine development
 def: "slowed progression to a structurally mature intestine" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 synonym: "developmental retardation of the intestine" EXACT []
-is_a: MP:0000477 ! abnormal intestine morphology
-is_a: MP:0003119 ! abnormal digestive system development
+is_a: MP:0010158 ! abnormal intestine development
 
 [Term]
 id: MP:0000479
@@ -4416,10 +4418,12 @@ name: increased thymocyte number
 alt_id: MP:0000326
 alt_id: MP:0000721
 alt_id: MP:0001827
-def: "greater than expected number of precursors to T cells" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "greater than expected number of immature T cells located in the thymus" [CL:0000893]
 synonym: "increased thymocyte count" EXACT []
+xref: CL:0000893
 is_a: MP:0000703 ! abnormal thymus morphology
 is_a: MP:0005015 ! increased T cell number
+is_a: MP:0005090 ! increased double-negative T cell number
 
 [Term]
 id: MP:0000715
@@ -4427,11 +4431,12 @@ name: decreased thymocyte number
 alt_id: MP:0000338
 alt_id: MP:0000725
 alt_id: MP:0001826
-def: "fewer than expected number of precursors to T cells; these cells are lymphoid cells found in the thymus" [ISBN:0-8153-1691-7 "Immunobiology, The Immune System in Health and Disease", MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
-synonym: "decreased thymocyte number" EXACT []
+def: "fewer than expected number of immature T cells located in the thymus" [CL:0000893]
 synonym: "reduced thymocyte number" EXACT []
+xref: CL:0000893
 is_a: MP:0000703 ! abnormal thymus morphology
 is_a: MP:0005018 ! decreased T cell number
+is_a: MP:0005089 ! decreased double-negative T cell number
 
 [Term]
 id: MP:0000716
@@ -4787,7 +4792,7 @@ is_a: MP:0000780 ! abnormal corpus callosum morphology
 [Term]
 id: MP:0000783
 name: abnormal forebrain morphology
-def: "any structural anomaly of the anterior primitive cerebral vesicle; most rostral of three primary vesicles of the embryonic neural tube" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", PMID:9010203]
+def: "any structural anomaly of the part of the brain developed from the most rostral of the three primary vesicles of the embryonic neural tube from which the diencephalon and telencephalon are derived" [NLX:birnlex_1509 "NeuroLex.org", PMID:9010203]
 synonym: "abnormal forebrain" EXACT []
 synonym: "forebrain dysplasia" EXACT []
 is_a: MP:0002152 ! abnormal brain morphology
@@ -4970,7 +4975,7 @@ def: "improper differentiation of the hippocampus" [MGI:tc "Teresa Chu, Mouse Ge
 synonym: "Abnormal Hippocampal Development" EXACT []
 synonym: "Hippocampal Dysgenesis" EXACT []
 is_a: MP:0000807 ! abnormal hippocampus morphology
-is_a: MP:0000913 ! abnormal brain development
+is_a: MP:0003232 ! abnormal forebrain development
 
 [Term]
 id: MP:0000809
@@ -5233,7 +5238,7 @@ id: MP:0000844
 name: abnormal pontine flexure
 def: "any structural anomaly of the bend in the developing neural tube that produces a thinning of the roof of the pons and medulla oblongata and defines the boundary between the metencephalon and medulla oblongata in the embryo" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 is_a: MP:0000841 ! abnormal hindbrain morphology
-is_a: MP:0000913 ! abnormal brain development
+is_a: MP:0006108 ! abnormal hindbrain development
 
 [Term]
 id: MP:0000846
@@ -5305,7 +5310,7 @@ name: abnormal cerebellum development
 def: "aberrant or incomplete differentiation of the part of the metencephalon that lies dorsal to the pons and medulla behind the brain stem and controls balance for walking and standing, modulates the force and range of movement and is involved in the learning of motor skills" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "abnormal cerebellar development" EXACT []
 is_a: MP:0000849 ! abnormal cerebellum morphology
-is_a: MP:0000913 ! abnormal brain development
+is_a: MP:0006108 ! abnormal hindbrain development
 
 [Term]
 id: MP:0000855
@@ -6030,7 +6035,6 @@ synonym: "abnormal spinal ganglia" EXACT []
 synonym: "abnormal spinal ganglion morphology" EXACT []
 synonym: "dorsal root ganglia abnormalities" EXACT []
 synonym: "spinal ganglia abnormalities" EXACT []
-is_a: MP:0000959 ! abnormal somatic sensory system morphology
 is_a: MP:0000960 ! abnormal sensory ganglion morphology
 
 [Term]
@@ -6543,7 +6547,6 @@ name: abnormal adrenergic neuron morphology
 def: "any structural anomaly of the neurons that release catecholamines at a synapse after an impulse" [MESH:National Library of Medicine_Medical Subject Headings]
 synonym: "abnormal adrenergic neurons" EXACT []
 synonym: "adrenergic neuron abnormalities" EXACT []
-is_a: MP:0001025 ! abnormal sympathetic neuron morphology
 is_a: MP:0002882 ! abnormal neuron morphology
 
 [Term]
@@ -6568,7 +6571,6 @@ name: abnormal peptidergic neuron morphology
 def: "any structural anomaly of the nerve fibers that release small peptides as their neurotransmitter" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 synonym: "abnormal peptidergic neurons" EXACT []
 synonym: "peptidergic neuron abnormalities" EXACT []
-is_a: MP:0001025 ! abnormal sympathetic neuron morphology
 is_a: MP:0002882 ! abnormal neuron morphology
 
 [Term]
@@ -6592,10 +6594,11 @@ is_a: MP:0001033 ! abnormal parasympathetic system morphology
 [Term]
 id: MP:0001035
 name: abnormal submandibular ganglion morphology
-def: "any structural anomaly of the ganglion associated with the lingual nerve" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "any structural anomaly of the ganglion associated with the lingual nerve that provides postsynaptic fibers to the submandibular and sublingual glands" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "abnormal submandibular ganglia" EXACT []
 synonym: "abnormal submandibular ganglion" EXACT []
 synonym: "abnormal submaxillary ganglion" EXACT []
+xref: MA:0002470
 is_a: MP:0001034 ! abnormal parasympathetic ganglion morphology
 
 [Term]
@@ -6618,7 +6621,6 @@ name: abnormal cholinergic neuron morphology
 alt_id: MP:0001029
 def: "any structural anomaly of the neurons that utilize acetylcholine as a neurotransmitter" [ISBN:0838580343 "Kandel ER, et al. Principles of Neural Science, 3rd edition"]
 synonym: "cholinergic neuron abnormalities" EXACT []
-is_a: MP:0001037 ! abnormal parasympathetic neuron morphology
 is_a: MP:0002882 ! abnormal neuron morphology
 
 [Term]
@@ -6676,12 +6678,14 @@ name: abnormal enteric neuron morphology
 def: "any structural anomaly of the neurons that innervate the esophagus, stomach, small and large bowel" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "abnormal enteric neurons" EXACT []
 is_a: MP:0001044 ! abnormal enteric nervous system morphology
+is_a: MP:0002882 ! abnormal neuron morphology
 
 [Term]
 id: MP:0001047
 name: abnormal enteric cholinergic neuron morphology
 def: "any structural anomaly of the neurons that utilize acetylcholine as a neurotransmitter and innervate the esophagus, stomach, small and large bowel" [ISBN:0838580343 "Kandel ER, et al. Principles of Neural Science, 3rd edition"]
 synonym: "abnormal enteric cholinergic neurons" EXACT []
+is_a: MP:0001038 ! abnormal cholinergic neuron morphology
 is_a: MP:0001046 ! abnormal enteric neuron morphology
 
 [Term]
@@ -8490,7 +8494,7 @@ is_obsolete: true
 [Term]
 id: MP:0001324
 name: abnormal eye pigmentation
-def: "change in the normal black pigmentation of the eye to another color, or lack of color" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+def: "change in the normal pigmentation of the eye to another color, or lack of color" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "abnormal ocular pigmentation" EXACT []
 is_a: MP:0002092 ! abnormal eye morphology
 is_a: MP:0009389 ! abnormal extracutaneous pigmentation
@@ -9020,7 +9024,7 @@ is_a: MP:0001440 ! abnormal grooming behavior
 [Term]
 id: MP:0001413
 name: abnormal response to new environment
-def: "altered investigative behavior from controls in reactions associated with placing an animal in a new location" [MGI:CFG "Submission, Center for Functional Genomics at Northwestern University"]
+def: "altered behavioral reaction associated with placing an animal in a new location" [MGI:CFG "Submission, Center for Functional Genomics at Northwestern University"]
 synonym: "abnormal transfer arousal" EXACT []
 synonym: "transfer arousal" EXACT []
 is_a: MP:0001449 ! abnormal learning/ memory
@@ -9820,11 +9824,14 @@ is_a: MP:0005416 ! abnormal circulating protein level
 id: MP:0001573
 name: abnormal circulating alanine transaminase level
 alt_id: MP:0000204
-def: "aberrant concentration in the blood of this enzyme, which transfers amino groups from l-alanine to 2-ketoglutarate, or the reverse (from l-glutamate to pyruvate); serum concentration is increased in viral hepatitis and myocardial infarction" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "aberrant concentration in the blood of the enzyme which transfers amino groups from l-alanine to 2-ketoglutarate, or the reverse (from l-glutamate to pyruvate); serum concentration is increased in viral hepatitis and myocardial infarction" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "abnormal alanine aminotransferase level" EXACT []
 synonym: "abnormal alanine transaminase level" EXACT []
 synonym: "abnormal ALT level" EXACT []
+synonym: "abnormal glutamate pyruvate transaminase level" EXACT []
 synonym: "abnormal glutamic-pyruvic transaminase level" EXACT []
+synonym: "abnormal GPT level" EXACT []
+synonym: "abnormal SGPT level" EXACT []
 is_a: MP:0001570 ! abnormal circulating enzyme level
 
 [Term]
@@ -10050,7 +10057,7 @@ id: MP:0001636
 name: irregular heartbeat
 def: "uneven timing of heart contraction" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "altered heart rhythm" EXACT []
-synonym: "arrhythmia" EXACT []
+synonym: "arrhythmia" BROAD []
 is_a: MP:0004085 ! abnormal heartbeat
 
 [Term]
@@ -11298,8 +11305,8 @@ def: "local accumulation of fluid, plasma proteins, and leukocytes in the intest
 synonym: "g.i. inflammation" EXACT []
 synonym: "gastrointestinal inflammation" EXACT []
 synonym: "inflammation of intestine" EXACT []
-is_a: MP:0001663 ! abnormal digestive system physiology
 is_a: MP:0001846 ! increased inflammatory response
+is_a: MP:0010155 ! abnormal intestine physiology
 
 [Term]
 id: MP:0001859
@@ -11345,6 +11352,7 @@ is_a: MP:0001846 ! increased inflammatory response
 id: MP:0001864
 name: vasculitis
 def: "inflammation of a blood or lymph vessel" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+synonym: "angiitis" EXACT []
 is_a: MP:0001863 ! vascular inflammation
 
 [Term]
@@ -11439,7 +11447,7 @@ is_obsolete: true
 id: MP:0001878
 name: allergic response
 def: "hypersensitivity caused by exposure to a specific antigen (allergen) resulting in a marked increase in reactivity to that antigen upon subsequent exposure" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
-is_a: MP:0002531 ! type I hypersensitivity reaction
+is_a: MP:0002531 ! abnormal type I hypersensitivity reaction
 
 [Term]
 id: MP:0001879
@@ -11822,11 +11830,11 @@ is_a: MP:0001147 ! small testis
 
 [Term]
 id: MP:0001942
-name: abnormal lung capacity
+name: abnormal lung volume
 def: "anomaly in the amount of air that the lungs contain at various points of the respiratory cycle" [MESH:E01.370.386.700.485, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
-synonym: "abnormal lung volume" RELATED []
+synonym: "abnormal lung capacity" RELATED []
 synonym: "abnormal lung volume measurements" EXACT []
-is_a: MP:0002327 ! abnormal respiratory function
+is_a: MP:0001943 ! abnormal respiration
 
 [Term]
 id: MP:0001943
@@ -11840,7 +11848,6 @@ name: abnormal pancreas morphology
 def: "any structural anomaly of the organ that secretes pancreatic juice into the duodenum and secretes glucagon and insulin into the bloodstream" [MESH:A03.734, MGI:il "Ira Lu, Mouse Genome Informatics Curator"]
 synonym: "abnormal pancreas" EXACT []
 synonym: "pancreatic dysplasia" EXACT []
-is_a: MP:0000462 ! abnormal digestive system morphology
 is_a: MP:0002163 ! abnormal gland morphology
 
 [Term]
@@ -11873,15 +11880,15 @@ is_a: MP:0002314 ! abnormal respiratory mechanics
 id: MP:0001950
 name: abnormal respiratory sounds
 def: "any anomaly in the noises heard over any part of the respiratory tract" [MESH:C23.888.852.779]
-is_a: MP:0002315 ! abnormal respiratory signs/symptoms
+is_a: MP:0001943 ! abnormal respiration
 
 [Term]
 id: MP:0001951
-name: abnormal breathing
+name: abnormal breathing pattern
 alt_id: MP:0001955
 def: "irregular or atypical breathing pattern, or absence of breathing" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", PMID:7914451]
 synonym: "irregular breathing" EXACT []
-is_a: MP:0002315 ! abnormal respiratory signs/symptoms
+is_a: MP:0002327 ! abnormal respiratory function
 
 [Term]
 id: MP:0001952
@@ -11903,19 +11910,19 @@ alt_id: MP:0002317
 def: "physical difficulty or inability to breathe; shortness of breath" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:C08.618.326, PMID:10357937]
 synonym: "dyspnea" EXACT []
 synonym: "gasping" EXACT []
-is_a: MP:0001951 ! abnormal breathing
+is_a: MP:0001951 ! abnormal breathing pattern
 
 [Term]
 id: MP:0001956
 name: hypopnea
 def: "breathing that is shallower and/or slower than normal" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:64289]
-is_a: MP:0001951 ! abnormal breathing
+is_a: MP:0001951 ! abnormal breathing pattern
 
 [Term]
 id: MP:0001957
 name: apnea
 def: "temporary cessation of breathing; sometimes episodic" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:C08.618.085]
-is_a: MP:0001951 ! abnormal breathing
+is_a: MP:0001951 ! abnormal breathing pattern
 
 [Term]
 id: MP:0001958
@@ -13010,7 +13017,7 @@ id: MP:0002111
 name: abnormal tail morphology
 alt_id: MP:0000584
 alt_id: MP:0005173
-def: "abnormal development of the tail resulting in structural abnormality" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+def: "any structural anomaly of the flexible elongated appendage located at the rostral end of the torso in many species; it is usually continuous with the vertebral column" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "abnormal tail" EXACT []
 synonym: "abnormal tail structure" EXACT []
 synonym: "extremities: tail dysmorphology" EXACT []
@@ -13339,7 +13346,7 @@ is_obsolete: true
 
 [Term]
 id: MP:0002148
-name: hypersensitivity
+name: abnormal hypersensitivity reaction
 def: "immune response that results in tissue injury" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "immune system: hypersensitivity" EXACT []
 synonym: "immunologically mediated tissue injury" EXACT []
@@ -14395,7 +14402,7 @@ is_obsolete: true
 id: MP:0002304
 name: abnormal total lung capacity
 def: "anomaly in the volume of air contained in the lungs at the end of maximal inspiration" [MESH:G09.772.765.850]
-is_a: MP:0001942 ! abnormal lung capacity
+is_a: MP:0001942 ! abnormal lung volume
 is_a: MP:0002314 ! abnormal respiratory mechanics
 
 [Term]
@@ -14407,7 +14414,7 @@ is_obsolete: true
 id: MP:0002306
 name: abnormal functional residual capacity
 def: "anomaly in the volume of air remaining in the lungs at the end of a normal expiration" [MESH:G09.772.765.850.390, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
-is_a: MP:0001942 ! abnormal lung capacity
+is_a: MP:0001942 ! abnormal lung volume
 
 [Term]
 id: MP:0002307
@@ -14419,13 +14426,13 @@ is_obsolete: true
 id: MP:0002308
 name: abnormal residual volume
 def: "anomaly in the volume of air remaining in the lungs at the end of maximal expiration" [MESH:G09.772.765.850.390.820, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
-is_a: MP:0002306 ! abnormal functional residual capacity
+is_a: MP:0001942 ! abnormal lung volume
 
 [Term]
 id: MP:0002309
 name: abnormal vital capacity
 def: "anomaly in the amount of air that is exhaled by a maximal expiration following a maximal inspiration" [MESH:G09.772.765.850.970, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
-is_a: MP:0001942 ! abnormal lung capacity
+is_a: MP:0001942 ! abnormal lung volume
 
 [Term]
 id: MP:0002310
@@ -14440,19 +14447,19 @@ is_a: MP:0000609 ! abnormal liver physiology
 id: MP:0002311
 name: abnormal inspiratory capacity
 def: "anomaly in the maximal volume of air that can be inspired after the end of a normal expiration" [MESH:E01.370.386.700.485.750.900.350, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
-is_a: MP:0002309 ! abnormal vital capacity
+is_a: MP:0001942 ! abnormal lung volume
 
 [Term]
 id: MP:0002312
 name: abnormal inspiratory reserve volume
 def: "anomaly in the extra volume of air that can be inspired with maximal effort after reaching the end of a normal inspiration" [MESH:G09.772.765.850.970.500.375, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
-is_a: MP:0002311 ! abnormal inspiratory capacity
+is_a: MP:0001942 ! abnormal lung volume
 
 [Term]
 id: MP:0002313
 name: abnormal tidal volume
 def: "anomaly in the volume of air inspired or expired during each normal respiratory cycle" [MESH:G09.772.765.850.970.500.700, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
-is_a: MP:0002311 ! abnormal inspiratory capacity
+is_a: MP:0001942 ! abnormal lung volume
 
 [Term]
 id: MP:0002314
@@ -14464,7 +14471,7 @@ is_a: MP:0001943 ! abnormal respiration
 id: MP:0002315
 name: abnormal respiratory signs/symptoms
 def: "manifestations of diseases of the respiratory tract" [MESH:C23.888.852, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
-is_a: MP:0001943 ! abnormal respiration
+is_obsolete: true
 
 [Term]
 id: MP:0002316
@@ -14489,16 +14496,16 @@ is_a: MP:0001574 ! abnormal oxygen level
 [Term]
 id: MP:0002320
 name: hyperventilation
-def: "increased alveolar ventilation relative to metabolic carbon dioxide production; results in carbon dioxide pressure decreasing below normal" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
-is_a: MP:0002315 ! abnormal respiratory signs/symptoms
-is_a: MP:0002338 ! abnormal pulmonary ventilation
+def: "a state in which there is a increased amount of air entering the pulmonary alveoli (increased alveolar ventilation), which causes an decrease in arterial carbon dioxide level" [http://www.dorlands.com/ "Dorland's Illustrated Medical Dictionary, 31st edition"]
+synonym: "increased alveolar ventilation" EXACT []
+is_a: MP:0005575 ! increased pulmonary ventilation
 
 [Term]
 id: MP:0002321
 name: hypoventilation
-def: "reduced alveolar ventilation relative to metabolic carbon dioxide production; results in alveolar carbon dioxide pressure increasing above normal" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
-is_a: MP:0002315 ! abnormal respiratory signs/symptoms
-is_a: MP:0002338 ! abnormal pulmonary ventilation
+def: "a state in which there is a reduced amount of air entering the pulmonary alveoli (decreased alveolar ventilation), which causes an increase in arterial carbon dioxide level" [http://www.dorlands.com/ "Dorland's Illustrated Medical Dictionary, 31st edition"]
+synonym: "decreased alveolar ventilation" EXACT []
+is_a: MP:0005576 ! decreased pulmonary ventilation
 
 [Term]
 id: MP:0002322
@@ -14601,12 +14608,12 @@ is_a: MP:0002322 ! abnormal respiratory transport
 id: MP:0002337
 name: abnormal whole-body plethysmography
 def: "anomaly in the measurements gathered in a chamber that encloses the body and in which changes in volume are recorded" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:E01.370.386.700.615, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
-is_a: MP:0002327 ! abnormal respiratory function
+is_obsolete: true
 
 [Term]
 id: MP:0002338
 name: abnormal pulmonary ventilation
-def: "anomaly in the total volume of gas per minute inspired or expired" [MESH:G09.772.765.650, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "anomaly of the rate of ventilation, usually in liters per minute, referring to the total exchange of air between the lungs and the environment" [http://www.dorlands.com/ "Dorland's Illustrated Medical Dictionary, 31st edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 is_a: MP:0002314 ! abnormal respiratory mechanics
 
 [Term]
@@ -16041,39 +16048,39 @@ is_obsolete: true
 
 [Term]
 id: MP:0002531
-name: type I hypersensitivity reaction
-def: "a reaction manifested by localized or generalized reaction that occurs immediately (minutes) after exposure to an antigen to which the person/animal was previously sensitized; it is IgE-mediated, and mast cell activation and degranulation are hallmarks" [ISBN:0-397-51047-0 "Rubin E, et al. Pathology, 2nd edition"]
+name: abnormal type I hypersensitivity reaction
+def: "anomaly in a reaction manifested by localized or generalized reaction that occurs immediately (minutes) after exposure to an antigen to which the person/animal was previously sensitized; it is IgE-mediated, and mast cell activation and degranulation are hallmarks" [ISBN:0-397-51047-0 "Rubin E, et al. Pathology, 2nd edition"]
 comment: Examples: hay fever, asthma, and anaphylaxis.
 synonym: "anaphylaxis" EXACT []
 synonym: "immediate type hypersensitivity" EXACT []
-is_a: MP:0002148 ! hypersensitivity
+is_a: MP:0002148 ! abnormal hypersensitivity reaction
 
 [Term]
 id: MP:0002532
-name: type II hypersensitivity reaction
-def: "response caused by an Ag-Ab reaction; antibodies are directly or indirectly cytotoxic to antigens on cell surfaces or in connective tissues; most often involves IgG and IgM; complement activation is usually involved" [ISBN:0-397-51047-0 "Rubin E, et al. Pathology, 2nd edition"]
+name: abnormal type II hypersensitivity reaction
+def: "anomaly in the response caused by an Ag-Ab reaction; antibodies are directly or indirectly cytotoxic to antigens on cell surfaces or in connective tissues; most often involves IgG and IgM; complement activation is usually involved" [ISBN:0-397-51047-0 "Rubin E, et al. Pathology, 2nd edition"]
 comment: Examples: autoimmune diseases: autoimmune hemolytic anemias, antibody-dependent cellular cytotoxicity (ADCC), Goodpasture disease, myasthenia gravis, Graves disease, pemphigous, and pemphigoid.
 synonym: "antibody-mediated cellular toxicity" EXACT []
 synonym: "cytotoxic type hypersensitivity" EXACT []
-is_a: MP:0002148 ! hypersensitivity
+is_a: MP:0002148 ! abnormal hypersensitivity reaction
 
 [Term]
 id: MP:0002533
-name: type III hypersensitivity reaction
-def: "tissue injury mediated by immune complexes; generally involves immune complexes formed in the blood via Abs encountering circulating Ag; Ag-Ab complexes then deposit in tissues (especially blood vessels and glomeruli), induce complement activation, and result in tissue injury" [ISBN:0-397-51047-0 "Rubin E, et al. Pathology, 2nd edition"]
+name: abnormal type III hypersensitivity reaction
+def: "anomaly in the tissue injury mediated by immune complexes; generally involves immune complexes formed in the blood via Abs encountering circulating Ag-Ab complexes then deposit in tissues (especially blood vessels and glomeruli), induce complement activation, and result in tissue injury" [ISBN:0-397-51047-0 "Rubin E, et al. Pathology, 2nd edition"]
 comment: Examples: Autoimmune diseases: systemic lupus erythmatosus (SLE), rheumatoid arthritis, sjogren syndrome, scleroderma and glomerulonephritis.
 synonym: "immune complex mediated hypersensitivity" EXACT []
-is_a: MP:0002148 ! hypersensitivity
+is_a: MP:0002148 ! abnormal hypersensitivity reaction
 
 [Term]
 id: MP:0002534
-name: type IV hypersensitivity reaction
-def: "an antigen-elicited cellular immune reaction that results in tissue damage, but does not require Ab participation; the response is seen at the area of contact" [ISBN:0-397-51047-0 "Rubin E, et al. Pathology, 2nd edition"]
+name: abnormal type IV hypersensitivity reaction
+def: "anomaly in an antigen-elicited cellular immune reaction that results in tissue damage, but does not require Ab participation; the response is seen at the area of contact" [ISBN:0-397-51047-0 "Rubin E, et al. Pathology, 2nd edition"]
 comment: Examples: granulomatous diseases: tuberculosis, sarcoidosis. contact dermatitis: elicited by poison ivy, detergents, clothing, etc.
 synonym: "cell-mediated hypersensitivity" EXACT []
 synonym: "contact hypersensitivity" EXACT []
 synonym: "delayed type hypersensitivity" EXACT []
-is_a: MP:0002148 ! hypersensitivity
+is_a: MP:0002148 ! abnormal hypersensitivity reaction
 
 [Term]
 id: MP:0002535
@@ -16308,7 +16315,8 @@ is_a: MP:0003313 ! abnormal locomotor activation
 [Term]
 id: MP:0002575
 name: increased circulating ketone body level
-def: "greater than the normal amount of acetoacetate, 3-hydroxybutyrate and acteone in the blood; produced by fatty acid and carbohydrate metabolism and seen in conditions such as starvation and diabetes mellitus" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "greater than the normal amount of acetoacetate, 3-hydroxybutyrate (beta-hydroxybutyrate) and/or acteone in the blood; produced by fatty acid and carbohydrate metabolism and seen in conditions such as starvation and diabetes mellitus" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+comment: Although 3-hydroxybutyrate is not a ketone, it is classed as a ketone body because it exists in an equilibrium with acetoacetate.
 synonym: "elevated circulating ketone body level" EXACT []
 synonym: "elevated plasma ketone body level" EXACT []
 synonym: "elevated serum ketone body level" EXACT []
@@ -16668,6 +16676,7 @@ name: persistent truncus arteriosis
 def: "complete failure of the common arterial trunk opening out of both ventricles to divide into the aorta and pulmonary artery during development" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
 synonym: "persistent truncus arteriosus" EXACT []
 synonym: "PTA" EXACT []
+synonym: "single outflow tract" EXACT []
 is_a: MP:0005674 ! abnormal outflow tract septation
 
 [Term]
@@ -16807,7 +16816,6 @@ name: abnormal ependyma morphology
 def: "any structural anomaly of the cellular membrane that lines the brain ventricles and the central canal of the spinal cord" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:il "Ira Lu, Mouse Genome Informatics Curator"]
 synonym: "abnormal ependyma" EXACT []
 synonym: "ependyma dysplasia" EXACT []
-is_a: MP:0002200 ! abnormal brain ventricle/choroid plexus morphology
 is_a: MP:0003632 ! abnormal nervous system morphology
 
 [Term]
@@ -17098,7 +17106,6 @@ id: MP:0002693
 name: abnormal pancreas physiology
 def: "aberrant function of the organ that secretes pancreatic juice into the duodenum and secretes glucagon and insulin into the bloodstream" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "abnormal pancreas function" EXACT []
-is_a: MP:0001663 ! abnormal digestive system physiology
 is_a: MP:0002164 ! abnormal gland physiology
 
 [Term]
@@ -17583,12 +17590,10 @@ id: MP:0002759
 name: abnormal caudal vertebrae morphology
 alt_id: MP:0000456
 def: "any structural anomaly of the bony segments of the coccyx or tail" [J:82849, MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
-comment: There are usually 27-30 caudal vertebrae present in rodents and only 3-5 fused caudal vertebrae in human.
-synonym: "abnormal coccygeal vertebrae" EXACT []
+comment: There are usually 27-30 caudal vertebrae present in rodents.
 synonym: "abnormal tail vertebrae morphology" EXACT []
 is_a: MP:0000137 ! abnormal vertebrae morphology
 is_a: MP:0002111 ! abnormal tail morphology
-is_a: MP:0002115 ! abnormal skeleton extremities morphology
 
 [Term]
 id: MP:0002760
@@ -18325,6 +18330,7 @@ is_a: MP:0001731 ! abnormal postnatal growth
 id: MP:0002866
 name: abnormal glutamic acid decarboxylase level
 def: "aberrant concentration of this enzyme, which catalyzes the conversion of glutamate to gamma-aminobutyric acid (GABA) and carbon dioxide; determines GABA levels in nervous tissues" [MESH:D08.811.520.224.125.250, RGD:cur "Rat Genome Database submission"]
+synonym: "abnormal GAD level" EXACT []
 synonym: "abnormal glutamate decarboxylase level" EXACT []
 is_a: MP:0005319 ! abnormal enzyme/ coenzyme level
 
@@ -18332,6 +18338,7 @@ is_a: MP:0005319 ! abnormal enzyme/ coenzyme level
 id: MP:0002867
 name: increased glutamic acid decarboxylase level
 def: "greater than normal concentration of this enzyme, which catalyzes the conversion of glutamate to gamma-aminobutyric acid (GABA) and carbon dioxide; determines GABA levels in nervous tissues" [MESH:D08.811.520.224.125.250, RGD:cur "Rat Genome Database submission"]
+synonym: "increased GAD level" EXACT []
 synonym: "increased glutamate decarboxylase level" EXACT []
 is_a: MP:0002866 ! abnormal glutamic acid decarboxylase level
 
@@ -18339,6 +18346,7 @@ is_a: MP:0002866 ! abnormal glutamic acid decarboxylase level
 id: MP:0002868
 name: decreased glutamic acid decarboxylase level
 def: "less than normal concentration of this enzyme, which catalyzes the conversion of glutamate to gamma-aminobutyric acid (GABA) and carbon dioxide; determines GABA levels in nervous tissues" [MESH:D08.811.520.224.125.250, RGD:cur "Rat Genome Database submission"]
+synonym: "decreased GAD level" RELATED []
 synonym: "decreased glutamate decarboxylase level" EXACT []
 synonym: "reduced glutamate decarboxylase level" EXACT []
 synonym: "reduced glutamic acid decarboxylase level" EXACT []
@@ -18392,6 +18400,8 @@ def: "reduced number of the cells in the blood that carry oxygen, red blood cell
 synonym: "decreased erythrocyte count" EXACT []
 synonym: "decreased RBC count" EXACT []
 synonym: "decreased red blood cell count" EXACT []
+synonym: "erythrocytopenia" EXACT []
+synonym: "erythropenia" EXACT []
 synonym: "reduced erythrocyte cell number" EXACT []
 synonym: "reduced erythrocyte count" EXACT []
 synonym: "reduced RBC count" EXACT []
@@ -18709,7 +18719,7 @@ name: abnormal paired-pulse facilitation
 def: "defects in the enhanced response of central synapses when activated twice in rapid succession; indicative of defects in short-term plasticity due to lack of increase of neurotransmitter release at the second stimulus" [ISBN:0838580343 "Kandel ER, et al. Principles of Neural Science, 3rd edition"]
 synonym: "abnormal paired pulse facilitation" EXACT []
 synonym: "abnormal PPF" EXACT []
-is_a: MP:0002206 ! abnormal CNS synaptic transmission
+is_a: MP:0003635 ! abnormal synaptic transmission
 
 [Term]
 id: MP:0002919
@@ -18867,17 +18877,37 @@ is_a: MP:0002938 ! white spotting
 [Term]
 id: MP:0002941
 name: increased circulating alanine transaminase level
-def: "increased concentration in the blood of this enzyme, which transfers amino groups from l-alanine to 2 ketoglutarate, or the reverse (from l-glutamate to pyruvate); serum concentration is increased in viral hepatitis and myocardial infarction" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
+def: "increased concentration in the blood of the enzyme which transfers amino groups from l-alanine to 2 ketoglutarate, or the reverse (from l-glutamate to pyruvate); serum concentration is increased in viral hepatitis and myocardial infarction" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
 synonym: "elevated alanine transaminase level" EXACT []
+synonym: "elevated ALT level" EXACT []
 synonym: "elevated circulating alanine transaminase level" EXACT []
+synonym: "elevated glutamate pyruvate transaminase level" EXACT []
+synonym: "elevated glutamic-pyruvic transaminase level" EXACT []
+synonym: "elevated GPT level" EXACT []
+synonym: "elevated SGPT level" EXACT []
+synonym: "increased ALT level" EXACT []
+synonym: "increased glutamate pyruvate transaminase level" EXACT []
+synonym: "increased glutamic-pyruvic transaminase level" EXACT []
+synonym: "increased GPT level" EXACT []
+synonym: "increased SGPT level" EXACT []
 is_a: MP:0001573 ! abnormal circulating alanine transaminase level
 
 [Term]
 id: MP:0002942
 name: decreased circulating alanine transaminase level
-def: "decreased concentration in the blood of this enzyme, which transfers amino groups from l-alanine to 2 ketoglutarate, or the reverse (from l-glutamate to pyruvate); serum concentration is increased in viral hepatitis and myocardial infarction" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
+def: "decreased concentration in the blood of the enzyme which transfers amino groups from l-alanine to 2 ketoglutarate, or the reverse (from l-glutamate to pyruvate); serum concentration is increased in viral hepatitis and myocardial infarction" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
+synonym: "decreased ALT level" EXACT []
+synonym: "decreased glutamate pyruvate transaminase level" EXACT []
+synonym: "decreased glutamic-pyruvic transaminase level" EXACT []
+synonym: "decreased GPT level" EXACT []
+synonym: "decreased SGPT level" EXACT []
 synonym: "reduced alanine transaminase level" EXACT []
+synonym: "reduced ALT level" EXACT []
 synonym: "reduced circulating alanine transaminase level" EXACT []
+synonym: "reduced glutamate pyruvate transaminase level" EXACT []
+synonym: "reduced glutamic-pyruvic transaminase level" EXACT []
+synonym: "reduced GPT level" EXACT []
+synonym: "reduced SGPT level" EXACT []
 is_a: MP:0001573 ! abnormal circulating alanine transaminase level
 
 [Term]
@@ -19595,12 +19625,11 @@ is_a: MP:0002111 ! abnormal tail morphology
 [Term]
 id: MP:0003052
 name: omphalocele
-def: "protrusion of abdominal viscera at the base of the umbilical cord, with a covering membranous sac of peritoneum-amnion" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:C16.614.390, MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+def: "protrusion of abdominal viscera at the base of the umbilical cord, with a covering membranous sac of peritoneum-amnion, that is caused by a severe body wall defect" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator", PMID:20333300]
+comment: Do not confuse with umbilical hernia - caused by a failure to retract the umbilical hernia that occurs normally during development.
 synonym: "amniocele" EXACT []
 synonym: "exomphalos" EXACT []
 synonym: "exumbilication" EXACT []
-synonym: "umbilical hernia" EXACT []
-is_a: MP:0001725 ! abnormal umbilical cord morphology
 is_a: MP:0003257 ! abnormal abdominal wall
 
 [Term]
@@ -20100,9 +20129,7 @@ is_a: MP:0000537 ! abnormal urethra morphology
 id: MP:0003125
 name: abnormal septation of the cloaca
 def: "absence of or reduction in the separation of the single opening of the digestive, urinary, and reproductive tracts (cloaca) into multiple isolated openings during development, may result in hypospadia, reduced anogenital distance, or persistent cloaca" [J:91491, MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
-is_a: MP:0003119 ! abnormal digestive system development
-is_a: MP:0003936 ! abnormal reproductive system development
-is_a: MP:0003942 ! abnormal urinary system development
+is_a: MP:0010115 ! abnormal embryonic cloaca morphology
 
 [Term]
 id: MP:0003126
@@ -20133,8 +20160,10 @@ is_a: MP:0003127 ! abnormal clitoris morphology
 id: MP:0003129
 name: persistent cloaca
 def: "the presence of a single external opening to which the urinary, digestive and reproductive tracts all connect" [J:91491, MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
+comment: Note that the term "urogenital sinus" may refer to the primitive urogenital sinus present as a transient developmental structure in most mammals or it may refer to a condition in which an unseptated cloaca persists in animals longer than normal.
+synonym: "urogenital sinus" RELATED []
 is_a: MP:0000516 ! abnormal urinary system morphology
-is_a: MP:0003125 ! abnormal septation of the cloaca
+is_a: MP:0003119 ! abnormal digestive system development
 is_a: MP:0003936 ! abnormal reproductive system development
 
 [Term]
@@ -20663,7 +20692,7 @@ name: abnormal neuron apoptosis
 def: "change in the timing or the number of neurons undergoing programmed cell death" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "abnormal neuronal apoptosis" EXACT []
 synonym: "abnormal neuronal cell death" RELATED []
-is_a: MP:0002882 ! abnormal neuron morphology
+is_a: MP:0004811 ! abnormal neuron physiology
 
 [Term]
 id: MP:0003203
@@ -20790,7 +20819,8 @@ is_a: MP:0008840 ! abnormal spike wave discharge
 id: MP:0003221
 name: abnormal cardiomyocyte apoptosis
 def: "change in the timing or the number of cardiac muscle cells undergoing programmed cell death" [RGD:cur "Rat Genome Database submission"]
-is_a: MP:0000278 ! abnormal myocardial fiber morphology
+is_a: MP:0002106 ! abnormal muscle physiology
+is_a: MP:0004215 ! abnormal myocardial fiber physiology
 
 [Term]
 id: MP:0003222
@@ -21211,8 +21241,9 @@ is_a: MP:0003883 ! enlarged stomach
 [Term]
 id: MP:0003286
 name: gastroesophageal reflux
-def: "retrograde movement of gastric or duodenal contents into the esophagus" [MESH:C06.405.117.119.500.484, NCBI:matt "Matthew Mailman"]
+def: "retrograde movement of gastric contents into the esophagus" [MESH:C06.405.117.119.500.484, NCBI:matt "Matthew Mailman"]
 is_a: MP:0001664 ! abnormal digestion
+is_a: MP:0010154 ! abnormal gastroesophageal sphincter physiology
 
 [Term]
 id: MP:0003287
@@ -21224,9 +21255,9 @@ is_a: MP:0002947 ! hemangioma
 [Term]
 id: MP:0003288
 name: intestinal edema
-def: "an accumulation of an excessive amount of serous fluid in the intestine or intestinal cells " [NCBI:matt "Matthew Mailman"]
-is_a: MP:0001663 ! abnormal digestive system physiology
+def: "an accumulation of an excessive amount of serous fluid in the intestine or intestinal cells" [NCBI:matt "Matthew Mailman"]
 is_a: MP:0001785 ! edema
+is_a: MP:0010155 ! abnormal intestine physiology
 
 [Term]
 id: MP:0003289
@@ -21551,7 +21582,7 @@ is_a: MP:0001944 ! abnormal pancreas morphology
 id: MP:0003335
 name: exocrine pancreatic insufficiency
 def: "reduced or absent function of the organ that secretes pancreatic juice into the duodenum and secretes glucagon and insulin into the bloodstream" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", NCBI:matt "Matthew Mailman"]
-is_a: MP:0002693 ! abnormal pancreas physiology
+is_a: MP:0010148 ! abnormal exocrine pancreas physiology
 
 [Term]
 id: MP:0003336
@@ -21858,7 +21889,7 @@ is_a: MP:0001937 ! abnormal sexual maturation
 id: MP:0003380
 name: abnormal intestine regeneration
 def: "deviation from the normal ability of the intestine to regenerate healthy tissue following injury" [J:93428, MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
-is_a: MP:0001663 ! abnormal digestive system physiology
+is_a: MP:0010155 ! abnormal intestine physiology
 
 [Term]
 id: MP:0003381
@@ -22363,14 +22394,16 @@ is_a: MP:0002111 ! abnormal tail morphology
 [Term]
 id: MP:0003457
 name: abnormal circulating ketone body level
-def: "aberrant amount of acetoacetate, 3-hydroxybutyrate and acteone in the blood; produced by fatty acid and carbohydrate metabolism and seen in conditions such as starvation and diabetes mellitus" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
-is_a: MP:0001547 ! abnormal lipid level
-is_a: MP:0003949 ! abnormal circulating lipid level
+def: "aberrant amount of acetoacetate, 3-hydroxybutyrate (beta-hydroxybutyrate) and/or acteone in the blood; produced by fatty acid and carbohydrate metabolism and seen in conditions such as starvation and diabetes mellitus" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+comment: Although 3-hydroxybutyrate is not a ketone, it is classed as a ketone body because it exists in an equilibrium with acetoacetate.
+is_a: MP:0002118 ! abnormal lipid homeostasis
+is_a: MP:0009642 ! abnormal blood homeostasis
 
 [Term]
 id: MP:0003458
 name: decreased circulating ketone body level
-def: "less than the normal amount of acetoacetate, 3-hydroxybutyrate and acteone in the blood; produced by fatty acid and carbohydrate metabolism and seen in conditions such as starvation and diabetes mellitus" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "less than the normal amount of acetoacetate, 3-hydroxybutyrate (beta-hydroxybutyrate) and/or acteone in the blood; produced by fatty acid and carbohydrate metabolism and seen in conditions such as starvation and diabetes mellitus" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+comment: Although 3-hydroxybutyrate is not a ketone, it is classed as a ketone body because it exists in an equilibrium with acetoacetate.
 synonym: "reduced circulating ketone body level" EXACT []
 is_a: MP:0003457 ! abnormal circulating ketone body level
 
@@ -22390,13 +22423,13 @@ is_a: MP:0003106 ! abnormal fear-related response
 [Term]
 id: MP:0003461
 name: abnormal response to novel object
-def: "altered investigative behavior from controls in reactions associated with exposing an animal to a novel object" [MGI:CFG "Submission, Center for Functional Genomics at Northwestern University"]
+def: "altered behavioral reaction associated with exposing an animal to a novel object" [MGI:CFG "Submission, Center for Functional Genomics at Northwestern University"]
 is_a: MP:0003107 ! abnormal response to novelty
 
 [Term]
 id: MP:0003462
 name: abnormal response to novel odor
-def: "altered investigative behavior from controls in reactions associated with exposing an animal to a novel odor" [MGI:CFG "Submission, Center for Functional Genomics at Northwestern University"]
+def: "altered behavioral reaction associated with exposing an animal to a novel odor" [MGI:CFG "Submission, Center for Functional Genomics at Northwestern University"]
 is_a: MP:0003107 ! abnormal response to novelty
 
 [Term]
@@ -23038,7 +23071,7 @@ name: abnormal pancreatic beta cell physiology
 def: "anomaly in the function of the insulin-producing cells of the islets of Langerhans in the pancreas" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 synonym: "abnormal insulin-secreting cell physiology" EXACT []
 synonym: "abnormal pancreatic B cell physiology" EXACT []
-is_a: MP:0002693 ! abnormal pancreas physiology
+is_a: MP:0010147 ! abnormal endocrine pancreas physiology
 
 [Term]
 id: MP:0003563
@@ -23046,7 +23079,7 @@ name: abnormal pancreatic alpha cell physiology
 def: "anomaly in the function of the glucagon-producing cells of the islets of Langerhans in the pancreas" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 synonym: "abnormal glucagon secreting cell physiology" EXACT []
 synonym: "abnormal pancreatic A cell physiology" EXACT []
-is_a: MP:0002693 ! abnormal pancreas physiology
+is_a: MP:0010147 ! abnormal endocrine pancreas physiology
 
 [Term]
 id: MP:0003564
@@ -23523,8 +23556,8 @@ is_a: MP:0003014 ! abnormal kidney medulla morphology
 
 [Term]
 id: MP:0003627
-name: abnormal leukocyte rolling
-def: "anomaly in the number or velocity of leukocytes rolling along the luminal aspects of high endothelial venules" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
+name: abnormal leukocyte tethering or rolling
+def: "anomaly in the transient adhesive interactions between leukocytes and endothelial cells lining blood vessels mediated primarily by selectins and which are typically the first step in cellular extravasation" [GO:0050901, MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 synonym: "abnormal leukocyte tethering" EXACT []
 synonym: "abnormal lymphocyte rolling" NARROW []
 is_a: MP:0009858 ! abnormal cellular extravasation
@@ -23705,7 +23738,7 @@ synonym: "absent oligodendroglia" EXACT []
 synonym: "absent oligodendroglial cells" EXACT []
 synonym: "absent oligoglia" EXACT []
 synonym: "absent oligoglia cells" EXACT []
-is_a: MP:0009808 ! reduced oligodendrocyte number
+is_a: MP:0009808 ! decreased oligodendrocyte number
 
 [Term]
 id: MP:0003648
@@ -24776,7 +24809,7 @@ is_a: MP:0000297 ! abnormal endocardial cushion morphology
 id: MP:0003809
 name: abnormal hair shaft morphology
 alt_id: MP:0002854
-def: "irregular or unusual structure of the cuticle, and/or cortex and/or medulla of a hair" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+def: "any structural anomaly of the cuticle, cortex and/or medulla of a hair" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
 synonym: "abnormal hair shaft" EXACT []
 synonym: "hair shaft dysplasia" EXACT []
 is_a: MP:0000367 ! abnormal coat/ hair morphology
@@ -25600,7 +25633,6 @@ id: MP:0003934
 name: abnormal pancreas development
 def: "anomaly in the formation of the organ that secretes pancreatic juice into the duodenum and secretes glucagon and insulin into the bloodstream" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 is_a: MP:0001944 ! abnormal pancreas morphology
-is_a: MP:0003119 ! abnormal digestive system development
 
 [Term]
 id: MP:0003935
@@ -25757,19 +25789,19 @@ is_a: MP:0000285 ! abnormal cardiac valve morphology
 [Term]
 id: MP:0003959
 name: abnormal lean body mass
-def: "aberrant fat-free physical bulk or volume of the body including all its components except adipose tissue" [MGI:honda "Hiraoki Onda, Mouse Genome Informatics Curator"]
+def: "aberrant fat-free physical bulk or volume of the body including all its components except adipose and bone tissue" [MGI:honda "Hiraoki Onda, Mouse Genome Informatics Curator"]
 is_a: MP:0002089 ! abnormal postnatal growth/weight/body size
 
 [Term]
 id: MP:0003960
 name: increased lean body mass
-def: "more than average fat-free physical bulk or volume of the body including all its components except adipose tissue" [MGI:honda "Hiraoki Onda, Mouse Genome Informatics Curator"]
+def: "more than average fat-free physical bulk or volume of the body including all its components except adipose and bone tissue" [MGI:honda "Hiraoki Onda, Mouse Genome Informatics Curator"]
 is_a: MP:0003959 ! abnormal lean body mass
 
 [Term]
 id: MP:0003961
 name: decreased lean body mass
-def: "less than average fat-free physical bulk or volume of the body including all its components except adipose tissue" [MGI:honda "Hiraoki Onda, Mouse Genome Informatics Curator"]
+def: "less than average fat-free physical bulk or volume of the body including all its components except adipose and bone tissue" [MGI:honda "Hiraoki Onda, Mouse Genome Informatics Curator"]
 synonym: "reduced lean body mass" EXACT []
 is_a: MP:0003959 ! abnormal lean body mass
 
@@ -27114,7 +27146,7 @@ is_a: MP:0006357 ! abnormal circulating mineral level
 id: MP:0004153
 name: increased renal tubule apoptosis
 def: "increase in the number of renal tubule cells undergoing programmed cell death" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
-is_a: MP:0002703 ! abnormal renal tubule morphology
+is_a: MP:0002136 ! abnormal kidney physiology
 
 [Term]
 id: MP:0004154
@@ -27771,6 +27803,7 @@ id: MP:0004249
 name: abnormal crista ampullaris morphology
 def: "anomaly in the elevation found on the inner surface of the ampullae of each semicircular duct; filaments of the vestibular nerve pass through the crista to reach hair cells on its surface; the hair cells are capped by the cupula, a gelatinous protein-polysaccharide mass" [J:60193, MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
 synonym: "abnormal cristae" EXACT []
+xref: MA:0002771
 is_a: MP:0008488 ! abnormal semicircular canal ampulla morphology
 
 [Term]
@@ -28613,7 +28646,7 @@ synonym: "abnormal stria vascularis melanocytes" RELATED []
 synonym: "abnormal strial melanocytes" EXACT []
 is_a: MP:0000048 ! abnormal stria vascularis
 is_a: MP:0002877 ! abnormal melanocyte morphology
-is_a: MP:0009390 ! abnormal auditory pigmentation
+is_a: MP:0009390 ! abnormal otic pigmentation
 
 [Term]
 id: MP:0004368
@@ -28932,8 +28965,11 @@ is_a: MP:0004406 ! abnormal cochlear hair cell number
 
 [Term]
 id: MP:0004409
-name: abnormal neuroepithelium of ampullary crest
+name: abnormal crista ampullaris neuroepithelium morphology
 def: "any structural abnormality in the specialized sensory hair cells of the ampullary crest of the ampulla of each semicircular duct" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+synonym: "abnormal ampullary crest neuroepithelium morphology" EXACT []
+synonym: "abnormal neuroepithelium of ampullary crest" EXACT []
+xref: MA:0002870
 is_a: MP:0004249 ! abnormal crista ampullaris morphology
 
 [Term]
@@ -29628,16 +29664,11 @@ is_a: MP:0009250 ! abnormal appendicular skeleton morphology
 id: MP:0004510
 name: myositis
 alt_id: MP:0001865
-def: "inflammation of skeletal muscle; local accumulation of fluid, plasma proteins, and leukocytes in the striated muscle" [MESH:C05.651.594]
+alt_id: MP:0004511
+def: "inflammation of muscle; local accumulation of fluid, plasma proteins, and leukocytes in muscle" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "muscle inflammation" EXACT []
 synonym: "skeletal muscle inflammation" EXACT []
 synonym: "striated muscle inflammation" EXACT []
-is_a: MP:0001846 ! increased inflammatory response
-is_a: MP:0004511 ! muscle inflammation
-
-[Term]
-id: MP:0004511
-name: muscle inflammation
-def: "local accumulation of fluid, plasma proteins, and leukocytes in muscle" [MESH:National Library of Medicine_Medical Subject Headings]
 is_a: MP:0001846 ! increased inflammatory response
 is_a: MP:0002106 ! abnormal muscle physiology
 
@@ -30219,14 +30250,14 @@ id: MP:0004594
 name: abnormal mandibular coronoid process morphology
 def: "any structural anomaly of the thin, flattened, triangular eminence that arises from the upper surface of the mandibular ramus (perpendicular portion); includes the attachment site to the temporal muscle" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "abnormal coronoid process of the mandible" EXACT []
-is_a: MP:0000458 ! abnormal mandible morphology
+is_a: MP:0010150 ! abnormal mandibule ramus morphology
 
 [Term]
 id: MP:0004595
 name: abnormal mandibular condyloid process morphology
 def: "any structural anomaly of the round bump of bone and constricted neck portion that arises from the upper surface of the mandibular ramus (perpendicular portion) and articulates with the articular disk of the temporomandibular joint" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "abnormal condyloid process of the mandible" EXACT []
-is_a: MP:0000458 ! abnormal mandible morphology
+is_a: MP:0010150 ! abnormal mandibule ramus morphology
 
 [Term]
 id: MP:0004596
@@ -30695,7 +30726,7 @@ is_a: MP:0004608 ! abnormal cervical axis morphology
 id: MP:0004660
 name: absent thyroid follicular cells
 def: "absence of the thyroxine-producing follicular cells derived from the thyroid diverticulum which evaginates from the endodermal epithelium of the embryonic pharyngeal floor" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
-is_a: MP:0004697 ! abnormal thyroid follicular cell
+is_a: MP:0004697 ! abnormal thyroid follicular cell morphology
 
 [Term]
 id: MP:0004661
@@ -30932,8 +30963,10 @@ is_a: MP:0000681 ! abnormal thyroid gland morphology
 
 [Term]
 id: MP:0004697
-name: abnormal thyroid follicular cell
+name: abnormal thyroid follicular cell morphology
 def: "any structural anomaly of the thyroxine-producing follicular cells derived from the thyroid diverticulum which evaginates from the endodermal epithelium of the embryonic pharyngeal floor" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+synonym: "abnormal thyrocyte morphology" EXACT []
+synonym: "abnormal thyroid principal cell morphology" EXACT []
 is_a: MP:0004696 ! abnormal thyroid follicle morphology
 
 [Term]
@@ -31778,7 +31811,7 @@ def: "defects in the suppressive response of central synapses when activated twi
 synonym: "abnormal paired pulse depression" EXACT []
 synonym: "abnormal paired pulse inhibition" EXACT []
 synonym: "abnormal PPI" EXACT []
-is_a: MP:0002206 ! abnormal CNS synaptic transmission
+is_a: MP:0003635 ! abnormal synaptic transmission
 
 [Term]
 id: MP:0004808
@@ -33209,7 +33242,7 @@ is_a: MP:0005001 ! abnormal clonal deletion
 id: MP:0004996
 name: abnormal CNS synapse formation
 def: "any anomaly in the process of generating the initial connections between an axon and effector tissue or neuron" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-is_a: MP:0000913 ! abnormal brain development
+is_a: MP:0003861 ! abnormal nervous system development
 
 [Term]
 id: MP:0004997
@@ -34660,7 +34693,7 @@ is_a: MP:0002075 ! abnormal coat/hair pigmentation
 [Term]
 id: MP:0005172
 name: reduced eye pigmentation
-def: "visual organs have severely reduced coloring pigment, usually resulting in a red or pink color" [J:83500]
+def: "the eye has less pigmentation than normal with a possible range of color from dark red, somewhat reduced in pigment, to pink, typical of albinism or ocular albinism" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
 is_a: MP:0001324 ! abnormal eye pigmentation
 
 [Term]
@@ -35040,6 +35073,7 @@ id: MP:0005220
 name: abnormal exocrine pancreas morphology
 def: "any structural anomaly of the acinar gland portion of the pancreas that secretes digestive enzymes" [MESH:A03.734.540]
 synonym: "abnormal exocrine pancreas" EXACT []
+is_a: MP:0000462 ! abnormal digestive system morphology
 is_a: MP:0001944 ! abnormal pancreas morphology
 
 [Term]
@@ -35384,10 +35418,8 @@ is_a: MP:0005376 ! homeostasis/metabolism phenotype
 [Term]
 id: MP:0005267
 name: abnormal olfactory cortex morphology
-def: "any structural anomaly of piriform cortex, which receives its major afferents from the olfactory bulb, and is primarily responsible for the identification of odors" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:83884]
+def: "any structural anomaly of cortex area which receives its major afferents from the olfactory bulb, and is primarily responsible for the identification of odors" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:83884]
 synonym: "abnormal olfactory cortex" EXACT []
-synonym: "abnormal piriform area" EXACT []
-synonym: "abnormal piriform cortex" EXACT []
 xref: MA:0000193
 is_a: MP:0009944 ! abnormal olfactory lobe morphology
 
@@ -35469,20 +35501,20 @@ is_a: MP:0001501 ! abnormal sleep pattern
 [Term]
 id: MP:0005280
 name: abnormal fatty acid level
-def: "any anomaly in the concentration of organic, monobasic acids derived from hydrocarbons and which are in a complex with serum albumin for transport" [MESH:National Library of Medicine_Medical Subject Headings]
+def: "any anomaly in the concentration of aliphatic monocarboxylic acids derived from or contained in esterified form in an animal or vegetable fat, oil or wax; natural fatty acids commonly have a chain of 4 to 28 carbons (usually unbranched and even-numbered), which may be saturated or unsaturated" [CHEBI:24024]
 is_a: MP:0001547 ! abnormal lipid level
 
 [Term]
 id: MP:0005281
 name: increased fatty acid level
-def: "higher than normal non-circulating level of organic, monobasic acids derived from hydrocarbons; they are saturated and unsaturated" [MESH:National Library of Medicine_Medical Subject Headings]
+def: "elevated concentration of aliphatic monocarboxylic acids derived from or contained in esterified form in an animal or vegetable fat, oil or wax; natural fatty acids commonly have a chain of 4 to 28 carbons (usually unbranched and even-numbered), which may be saturated or unsaturated" [CHEBI:24024]
 synonym: "elevated fatty acid level" EXACT []
 is_a: MP:0005280 ! abnormal fatty acid level
 
 [Term]
 id: MP:0005282
 name: decreased fatty acid level
-def: "less than normal non-circulating level of organic, monobasic acids derived from hydrocarbons; they are saturated and unsaturated" [MESH:National Library of Medicine_Medical Subject Headings]
+def: "reduction in the concentration of aliphatic monocarboxylic acids derived from or contained in esterified form in an animal or vegetable fat, oil or wax; natural fatty acids commonly have a chain of 4 to 28 carbons (usually unbranched and even-numbered), which may be saturated or unsaturated" [CHEBI:24024]
 synonym: "lowered fatty acid level" EXACT []
 synonym: "reduced fatty acid level" EXACT []
 is_a: MP:0005280 ! abnormal fatty acid level
@@ -35490,21 +35522,21 @@ is_a: MP:0005280 ! abnormal fatty acid level
 [Term]
 id: MP:0005283
 name: increased unsaturated fatty acid level
-def: "greater than normal non-circulating level of organic, monobasic acids derived from hydrocarbons in which the carbon chain has one or more double or triple carbon-carbon bonds" [MESH:National Library of Medicine_Medical Subject Headings]
+def: "elevated concentration of unsaturated aliphatic monocarboxylic acids derived from or contained in esterified form in an animal or vegetable fat, oil or wax; unsaturated fatty acids commonly have a chain of 4 to 28 carbons which possess one or more double or triple bonds between carbon atoms" [CHEBI:24024, ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "elevated unsaturated fatty acid level" EXACT []
 is_a: MP:0005281 ! increased fatty acid level
 
 [Term]
 id: MP:0005284
 name: increased saturated fatty acid level
-def: "greater than normal non-circulating level of organic, monobasic acids derived from hydrocarbons in which the carbon chain contains only single carbon-carbon bonds" [MESH:National Library of Medicine_Medical Subject Headings]
+def: "elevated concentration of saturated aliphatic monocarboxylic acids derived from or contained in esterified form in an animal or vegetable fat, oil or wax; saturated fatty acids commonly have a chain of 4 to 28 carbons which contains no ethylenic or other unsaturated linkages between carbon atoms" [CHEBI:24024, ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "elevated saturated fatty acid level" EXACT []
 is_a: MP:0005281 ! increased fatty acid level
 
 [Term]
 id: MP:0005285
 name: decreased unsaturated fatty acid level
-def: "less than normal non-circulating level of organic, monobasic acids derived from hydrocarbons in which the carbon chain has one or more double or triple carbon-carbon bonds" [MESH:National Library of Medicine_Medical Subject Headings]
+def: "reduced concentration of unsaturated aliphatic monocarboxylic acids derived from or contained in esterified form in an animal or vegetable fat, oil or wax; unsaturated fatty acids commonly have a chain of 4 to 28 carbons which possess one or more double or triple bonds between carbon atoms" [CHEBI:24024, ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "lowered unsaturated fatty acid level" EXACT []
 synonym: "reduced unsaturated fatty acid level" EXACT []
 is_a: MP:0005282 ! decreased fatty acid level
@@ -35512,7 +35544,7 @@ is_a: MP:0005282 ! decreased fatty acid level
 [Term]
 id: MP:0005286
 name: decreased saturated fatty acid level
-def: "less than normal non-circulating level of organic, monobasic acids derived from hydrocarbons in which the carbon chain contains only single carbon-carbon bonds" [MESH:National Library of Medicine_Medical Subject Headings]
+def: "reduced concentration of saturated aliphatic monocarboxylic acids derived from or contained in esterified form in an animal or vegetable fat, oil or wax; saturated fatty acids commonly have a chain of 4 to 28 carbons which contains no ethylenic or other unsaturated linkages between carbon atoms" [CHEBI:24024, ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "lowered saturated fatty acid level" EXACT []
 synonym: "reduced saturated fatty acid level" EXACT []
 is_a: MP:0005282 ! decreased fatty acid level
@@ -35946,7 +35978,17 @@ name: increased circulating aspartate transaminase level
 def: "greater than normal concentration in the blood of this enzyme, which catalyzes the reversible transfer of an amine group from l-glutamic acid to oxaloacetic acid, forming alpha-ketoglutaric acid and l-aspartic acid; aids in diagnosis of viral hepatitis and myocardial infarction" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:85204, MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
 synonym: "elevated aspartate transaminase level" EXACT []
 synonym: "elevated AST level" EXACT []
+synonym: "elevated circulating AAT level" EXACT []
+synonym: "elevated circulating ASAT level" EXACT []
 synonym: "elevated circulating aspartate transaminase level" EXACT []
+synonym: "elevated circulating serum glutamic oxaloacetic transaminase level" EXACT []
+synonym: "elevated circulating SGOT level" EXACT []
+synonym: "increased AST level" EXACT []
+synonym: "increased circulating AAT level" EXACT []
+synonym: "increased circulating ASAT level" EXACT []
+synonym: "increased circulating aspartate aminotransferase level" EXACT []
+synonym: "increased circulating serum glutamic oxaloacetic transaminase level" EXACT []
+synonym: "increased circulating SGOT level" EXACT []
 is_a: MP:0000203 ! abnormal circulating aspartate transaminase level
 
 [Term]
@@ -37306,7 +37348,6 @@ def: "any structural anomaly of the channel in the mesencephalon that connects t
 synonym: "abnormal aqueduct of Sylvius" EXACT []
 synonym: "abnormal mesencephalic duct morphology" EXACT []
 synonym: "abnormal mesencephalic vesicle morphology" EXACT []
-is_a: MP:0000826 ! abnormal third ventricle morphology
 is_a: MP:0000897 ! abnormal midbrain morphology
 
 [Term]
@@ -37559,7 +37600,7 @@ is_a: MP:0002943 ! abnormal lactate dehydrogenase level
 id: MP:0005572
 name: abnormal breathing frequency
 def: "deviation from the normal number of breaths in a given period of time" [RGD:cur "Rat Genome Database submission"]
-is_a: MP:0001951 ! abnormal breathing
+is_a: MP:0001951 ! abnormal breathing pattern
 
 [Term]
 id: MP:0005573
@@ -37577,13 +37618,13 @@ is_a: MP:0005572 ! abnormal breathing frequency
 [Term]
 id: MP:0005575
 name: increased pulmonary ventilation
-def: "greater than the normal total volume of gas per minute inspired or expired" [RGD:cur "Rat Genome Database submission"]
+def: "increased rate of ventilation, usually in liters per minute, referring to the total exchange of air between the lungs and the environment" [http://www.dorlands.com/ "Dorland's Illustrated Medical Dictionary, 31st edition", RGD:cur "Rat Genome Database submission"]
 is_a: MP:0002338 ! abnormal pulmonary ventilation
 
 [Term]
 id: MP:0005576
 name: decreased pulmonary ventilation
-def: "less than the normal total volume of gas per minute inspired or expired" [RGD:cur "Rat Genome Database submission"]
+def: "reduced rate of ventilation, usually in liters per minute, referring to the total exchange of air between the lungs and the environment" [http://www.dorlands.com/ "Dorland's Illustrated Medical Dictionary, 31st edition", RGD:cur "Rat Genome Database submission"]
 synonym: "reduced pulmonary ventilation" EXACT []
 is_a: MP:0002338 ! abnormal pulmonary ventilation
 
@@ -37707,7 +37748,7 @@ synonym: "decreased resistance to immediate type hypersensitivity" EXACT []
 synonym: "decreased resistance to type I hypersensitivity reaction" EXACT []
 synonym: "increased susceptibility to anaphylaxis" EXACT []
 synonym: "increased susceptibility to immediate type hypersensitivity" EXACT []
-is_a: MP:0002531 ! type I hypersensitivity reaction
+is_a: MP:0002531 ! abnormal type I hypersensitivity reaction
 
 [Term]
 id: MP:0005597
@@ -37720,7 +37761,7 @@ synonym: "increased resistance to anaphylaxis" EXACT []
 synonym: "increased resistance to immediate type hypersensitivity" EXACT []
 synonym: "increased resistance to type I hypersensitivity reaction" EXACT []
 synonym: "reduced susceptibility to type I hypersensitivity reaction" EXACT []
-is_a: MP:0002531 ! type I hypersensitivity reaction
+is_a: MP:0002531 ! abnormal type I hypersensitivity reaction
 
 [Term]
 id: MP:0005598
@@ -37845,7 +37886,7 @@ synonym: "increased resistance to antibody-mediated cellular toxicity" EXACT []
 synonym: "increased resistance to cytotoxic type hypersensitivity" EXACT []
 synonym: "increased resistance to type II hypersensitivity reaction" EXACT []
 synonym: "reduced susceptibility to type II hypersensitivity reaction" EXACT []
-is_a: MP:0002532 ! type II hypersensitivity reaction
+is_a: MP:0002532 ! abnormal type II hypersensitivity reaction
 
 [Term]
 id: MP:0005613
@@ -37857,7 +37898,7 @@ synonym: "decreased resistance to cytotoxic type hypersensitivity" EXACT []
 synonym: "decreased resistance to type II hypersensitivity reaction" EXACT []
 synonym: "increased susceptibility to antibody-mediated cellular toxicity" EXACT []
 synonym: "increased susceptibility to cytotoxic type hypersensitivity" EXACT []
-is_a: MP:0002532 ! type II hypersensitivity reaction
+is_a: MP:0002532 ! abnormal type II hypersensitivity reaction
 
 [Term]
 id: MP:0005614
@@ -37868,7 +37909,7 @@ synonym: "decreased susceptibility to immune complex mediated hypersensitivity" 
 synonym: "increased resistance to immune complex mediated hypersensitivity" EXACT []
 synonym: "increased resistance to type III hypersensitivity reaction" EXACT []
 synonym: "reduced susceptibility to type III hypersensitivity reaction" EXACT []
-is_a: MP:0002533 ! type III hypersensitivity reaction
+is_a: MP:0002533 ! abnormal type III hypersensitivity reaction
 
 [Term]
 id: MP:0005615
@@ -37878,7 +37919,7 @@ comment: Examples of this include: Autoimmune diseases: systemic lupus erythmato
 synonym: "decreased resistance to immune complex mediated hypersensitivity" EXACT []
 synonym: "decreased resistance to type III hypersensitivity reaction" EXACT []
 synonym: "increased susceptibility to immune complex mediated hypersensitivity" EXACT []
-is_a: MP:0002533 ! type III hypersensitivity reaction
+is_a: MP:0002533 ! abnormal type III hypersensitivity reaction
 
 [Term]
 id: MP:0005616
@@ -37891,7 +37932,7 @@ synonym: "increased resistance to cell-mediated hypersensitivity" EXACT []
 synonym: "increased resistance to delayed type hypersensitivity" EXACT []
 synonym: "increased resistance to type IV hypersensitivity reaction" EXACT []
 synonym: "reduced susceptibility to type IV hypersensitivity reaction" EXACT []
-is_a: MP:0002534 ! type IV hypersensitivity reaction
+is_a: MP:0002534 ! abnormal type IV hypersensitivity reaction
 
 [Term]
 id: MP:0005617
@@ -37903,7 +37944,7 @@ synonym: "decreased resistance to delayed type hypersensitivity" EXACT []
 synonym: "decreased resistance to type IV hypersensitivity reaction" EXACT []
 synonym: "increased susceptibility to cell-mediated hypersensitivity" EXACT []
 synonym: "increased susceptibility to delayed type hypersensitivity" EXACT []
-is_a: MP:0002534 ! type IV hypersensitivity reaction
+is_a: MP:0002534 ! abnormal type IV hypersensitivity reaction
 
 [Term]
 id: MP:0005618
@@ -37997,19 +38038,33 @@ is_a: MP:0005629 ! abnormal lung weight
 id: MP:0005632
 name: decreased circulating aspartate transaminase level
 def: "less than normal concentration in the blood of this enzyme, which catalyzes the reversible transfer of an amine group from l-glutamic acid to oxaloacetic acid, forming alpha-ketoglutaric acid and l-aspartic acid; aids in diagnosis of viral hepatitis and myocardial infarction" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", RGD:cur "Rat Genome Database submission"]
+synonym: "decreased AST level" EXACT []
+synonym: "decreased circulating AAT level" EXACT []
+synonym: "decreased circulating ASAT level" EXACT []
+synonym: "decreased circulating aspartate aminotransferase level" EXACT []
+synonym: "decreased circulating serum glutamic oxaloacetic transaminase level" EXACT []
+synonym: "decreased circulating SGOT level" EXACT []
+synonym: "reduced AST level" EXACT []
+synonym: "reduced circulating AAT level" EXACT []
+synonym: "reduced circulating ASAT level" EXACT []
+synonym: "reduced circulating aspartate aminotransferase level" EXACT []
 synonym: "reduced circulating aspartate transaminase level" EXACT []
+synonym: "reduced circulating serum glutamic oxaloacetic transaminase level" EXACT []
+synonym: "reduced circulating SGOT level" EXACT []
 is_a: MP:0000203 ! abnormal circulating aspartate transaminase level
 
 [Term]
 id: MP:0005633
 name: increased circulating sodium level
 def: "greater than the normal concentration in the blood of this metallic element, the most plentiful extracellular ion in the body and the principal determinant of extracellular fluid volume" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", RGD:cur "Rat Genome Database submission"]
+synonym: "hypernatremia" EXACT []
 is_a: MP:0001776 ! abnormal circulating sodium level
 
 [Term]
 id: MP:0005634
 name: decreased circulating sodium level
 def: "less than the normal concentration in the blood of this metallic element, the most plentiful extracellular ion in the body and the principal determinant of extracellular fluid volume" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", RGD:cur "Rat Genome Database submission"]
+synonym: "hyponatremia" EXACT []
 synonym: "reduced circulating sodium level" EXACT []
 is_a: MP:0001776 ! abnormal circulating sodium level
 
@@ -38092,7 +38147,6 @@ is_a: MP:0002211 ! abnormal primary sex determination
 id: MP:0005645
 name: abnormal hypothalamus physiology
 def: "any functional anomaly of the ventral and medial region of the diencephalon forming the walls of the ventral half of the third ventricle, which is normally involved in the functions of the autonomic (visceral motor) nervous system and, through its vascular link with the anterior lobe of the pituitary gland, in endocrine mechanisms" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
-is_a: MP:0002164 ! abnormal gland physiology
 is_a: MP:0003633 ! abnormal nervous system physiology
 
 [Term]
@@ -38835,7 +38889,7 @@ is_a: MP:0009772 ! abnormal retinal development
 id: MP:0006072
 name: abnormal retinal apoptosis
 def: "increase or decrease in the number of cells in the retina undergoing programmed cell death" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", PMID:15363391]
-is_a: MP:0001325 ! abnormal retina morphology
+is_a: MP:0005253 ! abnormal eye physiology
 
 [Term]
 id: MP:0006073
@@ -43611,7 +43665,7 @@ is_a: MP:0001932 ! abnormal spermiogenesis
 id: MP:0008280
 name: male germ cell apoptosis
 def: "presence of male germs cells that undergo programmed cell death" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-is_a: MP:0006362 ! abnormal male germ cell morphology
+is_a: MP:0003698 ! abnormal male reproductive system physiology
 
 [Term]
 id: MP:0008281
@@ -48693,7 +48747,7 @@ is_a: MP:0008790 ! abnormal NK cell degranulation
 id: MP:0008793
 name: abnormal lens epithelium apoptosis
 def: "anomaly in the number of lens epithelial cells undergoing programmed cell death" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-is_a: MP:0003237 ! abnormal lens epithelium morphology
+is_a: MP:0005253 ! abnormal eye physiology
 
 [Term]
 id: MP:0008794
@@ -48705,7 +48759,7 @@ is_a: MP:0008793 ! abnormal lens epithelium apoptosis
 id: MP:0008795
 name: abnormal lens fiber apoptosis
 def: "anomaly in the number of lens fibers cells undergoing programmed cell death" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-is_a: MP:0002840 ! abnormal lens fiber morphology
+is_a: MP:0005253 ! abnormal eye physiology
 
 [Term]
 id: MP:0008796
@@ -48737,7 +48791,7 @@ is_a: MP:0008797 ! facial cleft
 id: MP:0008800
 name: increased small intestinal crypt cell apoptosis
 def: "increase in the number of small intestinal crypt cells undergoing programmed cell death" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-is_a: MP:0004841 ! abnormal small intestine crypts of Lieberkuhn morphology
+is_a: MP:0010156 ! abnormal small intestinal crypt cell physiology
 
 [Term]
 id: MP:0008801
@@ -49358,7 +49412,7 @@ name: abnormal enterocyte physiology
 def: "any functional anomaly of the epithelial cells that have an apical plasma membrane folded into microvilli to provide ample surface for the absorption of nutrients from the intestinal lumen" [CL:0000584, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "abnormal intestinal cell physiology" EXACT []
 synonym: "abnormal intestinal epithelial cell physiology" EXACT []
-is_a: MP:0001663 ! abnormal digestive system physiology
+is_a: MP:0010155 ! abnormal intestine physiology
 
 [Term]
 id: MP:0008883
@@ -49372,7 +49426,6 @@ is_a: MP:0008882 ! abnormal enterocyte physiology
 id: MP:0008884
 name: abnormal enterocyte apoptosis
 def: "change in the timing or the number of enterocytes undergoing programmed cell death" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-synonym: "abnormal enterocyte programmed cell death" EXACT []
 synonym: "abnormal intestinal cell apoptosis" EXACT []
 synonym: "abnormal intestinal epithelial cell apoptosis" EXACT []
 is_a: MP:0008882 ! abnormal enterocyte physiology
@@ -49889,7 +49942,7 @@ def: "any functional anomaly of the cells found in the pancreas that secrete som
 synonym: "abnormal D cell physiology" EXACT []
 synonym: "abnormal pancreatic D cell physiology" EXACT []
 synonym: "abnormal somatostatin-secreting cell physiology" EXACT []
-is_a: MP:0002693 ! abnormal pancreas physiology
+is_a: MP:0010147 ! abnormal endocrine pancreas physiology
 
 [Term]
 id: MP:0008953
@@ -51611,7 +51664,7 @@ is_a: MP:0009145 ! abnormal pancreatic acinus morphology
 id: MP:0009147
 name: abnormal pancreatic acinar cell physiology
 def: "any functional anomaly of the secretory cells of the exocrine pancreas that produce fluid containing digestive enzymes" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-is_a: MP:0002693 ! abnormal pancreas physiology
+is_a: MP:0010148 ! abnormal exocrine pancreas physiology
 
 [Term]
 id: MP:0009148
@@ -52016,7 +52069,7 @@ id: MP:0009194
 name: abnormal pancreatic epsilon cell physiology
 def: "any functional anomaly of the endocrine cells found in the Islets of Langerhans that produce the hormone ghrelin" [PMID:14970313]
 synonym: "abnormal ghrelin-secreting cell physiology" EXACT []
-is_a: MP:0002693 ! abnormal pancreas physiology
+is_a: MP:0010147 ! abnormal endocrine pancreas physiology
 
 [Term]
 id: MP:0009195
@@ -52025,7 +52078,7 @@ def: "any functional anomaly of the polygonal pancreatic polypeptide producing c
 synonym: "abnormal F cell physiology" EXACT []
 synonym: "abnormal pancreatic polypeptide cell physiology" EXACT []
 synonym: "abnormal pancreatic polypeptide-secreting cell physiology" EXACT []
-is_a: MP:0002693 ! abnormal pancreas physiology
+is_a: MP:0010147 ! abnormal endocrine pancreas physiology
 
 [Term]
 id: MP:0009196
@@ -53562,7 +53615,10 @@ is_a: MP:0001186 ! pigmentation phenotype
 
 [Term]
 id: MP:0009390
-name: abnormal auditory pigmentation
+name: abnormal otic pigmentation
+def: "any anomaly in the pigment or pigment-producing cells of the inner ear resulting in abnormal melanoblast numbers, distribution, or pigment during development" [ISBN-13:978-1-4051-2034-0 "The Pigmentary System, Second Edition"]
+synonym: "abnormal auditory pigmentation" EXACT []
+synonym: "abnormal inner ear pigmentation" EXACT []
 is_a: MP:0009389 ! abnormal extracutaneous pigmentation
 
 [Term]
@@ -54109,7 +54165,9 @@ is_a: MP:0003574 ! abnormal oviduct morphology
 id: MP:0009467
 name: abnormal magnocellular neurosecretory cell morphology
 def: "any structural anomaly of the cells residing mainly in the hypothalamic supraoptic and paraventricular nuclei and in a number of smaller accessory cell groups between these two nuclei, and secrete the hormones oxytocin and vasopressin" [PMID:10711808]
+synonym: "abnormal magnocellular neuron morphology" EXACT []
 is_a: MP:0000837 ! abnormal hypothalamus morphology
+is_a: MP:0002882 ! abnormal neuron morphology
 
 [Term]
 id: MP:0009468
@@ -55293,6 +55351,7 @@ is_a: MP:0009616 ! abnormal brain zinc level
 id: MP:0009619
 name: abnormal optokinetic reflex
 def: "any anomaly in the nystagmus or deviation of the eyes in response to stimulation of the visual system by movement; normally, this reflex functions to stabilize a moving image on the retina" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
+synonym: "abnormal OKR " EXACT []
 is_a: MP:0001961 ! abnormal reflex
 
 [Term]
@@ -56674,8 +56733,13 @@ is_a: MP:0005504 ! abnormal ligament morphology
 
 [Term]
 id: MP:0009808
-name: reduced oligodendrocyte number
-def: "significantly fewer than the expected number of cells of the central nervous system that form the insulating myelin sheath of axons in the CNS are present" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+name: decreased oligodendrocyte number
+def: "reduced number of cells of the central nervous system that form the insulating myelin sheath of axons in the CNS" [MESH:A08.637.600, MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+synonym: "decreased oligodendroglia number" EXACT []
+synonym: "decreased oligodendroglial cell number" EXACT []
+synonym: "decreased oligoglia number" EXACT []
+synonym: "decreased oligoglial cell number" EXACT []
+synonym: "reduced oligodendrocyte number" EXACT []
 synonym: "reduced oligodendroglia number" EXACT []
 synonym: "reduced oligodendroglial cell number" EXACT []
 synonym: "reduced oligoglia number" EXACT []
@@ -57047,6 +57111,7 @@ creation_date: 2009-11-23T12:23:19Z
 id: MP:0009861
 name: abnormal pyloric sphincter morphology
 def: "any structural anomaly of the thick circular layer of gastric musculature encircling the gastroduodenal junction at the gastric outlet of the stomach" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+xref: MA:0002952
 is_a: MP:0000470 ! abnormal stomach morphology
 created_by: csmith
 creation_date: 2009-11-23T04:05:01Z
@@ -57997,6 +58062,7 @@ creation_date: 2010-02-04T11:38:44Z
 [Term]
 id: MP:0009953
 name: abnormal olfactory tubercle morphology
+def: "any structural anomaly of the region in the ventral telencephalon, prominent in rodents, but present in all mammals, consisting of a laminated cortical part and the cap/hilus region; it is traditionally viewed as part of the olfactory cortex but recognized by some as having a striatal character; according to many authors, the structure of the OT transitions from cortical like to striatal like along the lateral medial axis" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", NLX:Maryann Martone "NeuroLex.org"]
 comment: This structure does not exist in primates.
 xref: MA:0000976
 is_a: MP:0005267 ! abnormal olfactory cortex morphology
@@ -58544,7 +58610,11 @@ creation_date: 2010-02-15T11:34:30Z
 [Term]
 id: MP:0010009
 name: abnormal piriform cortex morphology
+def: "any structural anomaly of the subdivision of the laminated olfactory cortex with only three main layers that receive monosynaptic input from the olfactory bulb via the lateral olfactory tract; it is located bilaterally in the ventrolateral forebrain and is commonly divided into anterior and posterior regions" [PMID:17714095]
+synonym: "abnormal lateral olfactory gyrus morphology" RELATED []
 synonym: "abnormal piriform area morphology" EXACT []
+synonym: "abnormal primary olfactory cortex morphology" EXACT []
+synonym: "abnormal pyriform cortex morphology" EXACT []
 xref: MA:0000978
 is_a: MP:0005267 ! abnormal olfactory cortex morphology
 created_by: csmith
@@ -59210,6 +59280,7 @@ creation_date: 2010-03-12T03:38:16Z
 id: MP:0010075
 name: abnormal circulating plant sterol concentration
 def: "anomaly in the amount per unit of phytosterols in the blood" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal circulating phytosterol concentration" EXACT []
 is_a: MP:0003949 ! abnormal circulating lipid level
 is_a: MP:0010076 ! abnormal plant sterol concentration
 created_by: csmith
@@ -59237,6 +59308,7 @@ creation_date: 2010-03-12T03:55:49Z
 id: MP:0010078
 name: increased circulating plant sterol concentration
 def: "increase in the amount per unit of phytosterols in the blood" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased circulating phytosterol concentration" EXACT []
 is_a: MP:0010075 ! abnormal circulating plant sterol concentration
 is_a: MP:0010077 ! increased plant sterol concentration
 created_by: csmith
@@ -59269,7 +59341,7 @@ creation_date: 2010-03-26T03:59:01Z
 [Term]
 id: MP:0010082
 name: sternebra fusion
-def: "appearance of one or more sternebrae as a single structure" [MGI:Anna]
+def: "appearance of one or more sternebrae as a single structure" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
 synonym: "fused sternebrae " EXACT []
 synonym: "sternebrae fusion" EXACT []
 synonym: "sternebral fusion" EXACT []
@@ -59486,12 +59558,660 @@ creation_date: 2010-03-29T03:40:58Z
 id: MP:0010102
 name: increased caudal vertebrae number
 def: "increased number of the bony segments of the coccyx or tail" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-synonym: "increased coccygeal vertebrae number" EXACT []
 synonym: "increased tail vertebrae number" EXACT []
 is_a: MP:0002759 ! abnormal caudal vertebrae morphology
 is_a: MP:0004644 ! increased vertebrae number
 created_by: csmith
 creation_date: 2010-03-29T03:41:53Z
+
+[Term]
+id: MP:0010103
+name: small thoracic cage
+def: "reduced size of the bony and cartilaginous structure enclosing the thoracic cavity, consisting of the thoracic vertebrae, ribs, costal cartilages, and sternum" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "small rib cage" EXACT []
+synonym: "small ribcage" EXACT []
+is_a: MP:0004624 ! abnormal thoracic cage
+created_by: csmith
+creation_date: 2010-04-01T09:37:12Z
+
+[Term]
+id: MP:0010104
+name: enlarged thoracic cage
+def: "increased size of the bony and cartilaginous structure enclosing the thoracic cavity, consisting of the thoracic vertebrae, ribs, costal cartilages, and sternum" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "enlarged rib cage" EXACT []
+synonym: "enlarged ribcage" EXACT []
+is_a: MP:0004624 ! abnormal thoracic cage
+created_by: csmith
+creation_date: 2010-04-01T09:37:36Z
+
+[Term]
+id: MP:0010105
+name: abnormal sublingual ganglion morphology
+def: "any structural anomaly of the small parasympathetic ganglion found anterior to the submandibular gland that provides postsynaptic fibers to the sublingual gland" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "abnormal lingual ganglion morphology" EXACT []
+xref: MA:0002982
+is_a: MP:0001034 ! abnormal parasympathetic ganglion morphology
+created_by: csmith
+creation_date: 2010-04-08T12:19:52Z
+
+[Term]
+id: MP:0010106
+name: abnormal circulating pyruvate kinase level
+def: "abnormal concentration in the blood of the phosphotransferase in the glycolytic pathway that catalyzes the transfer of phosphate from phosphoenolpyruvate to ADP, forming ATP and p; deficiency results in hemolytic anemia" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "abnormal circulating ATP:pyruvate 2-O-phosphotransferase level" EXACT []
+synonym: "abnormal circulating phosphoenol transphosphorylase level" EXACT []
+synonym: "abnormal circulating phosphoenolpyruvate kinase level" EXACT []
+is_a: MP:0001570 ! abnormal circulating enzyme level
+created_by: csmith
+creation_date: 2010-04-08T01:26:15Z
+
+[Term]
+id: MP:0010107
+name: abnormal renal reabsorption
+def: "any anomaly in the two-step process beginning with the active or passive extraction of substances (such as water, glucose, oligopeptides, amino acids, sodium (Na+) and other ions) from the renal tubule fluid into the renal interstitium, and the subsequent transport of these substances out of the renal interstitium back into the bloodstream; reabsorption begins in the proximal convoluted tubules and continues in the loop of Henle, distal convoluted tubules, and collecting tubules" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+synonym: "abnormal kidney reabsorption" EXACT []
+is_a: MP:0002136 ! abnormal kidney physiology
+created_by: csmith
+creation_date: 2010-04-09T10:41:11Z
+
+[Term]
+id: MP:0010108
+name: abnormal renal water reabsorption
+def: "any anomaly in the process by which water is passively transported out of the renal tubules back into the bloodstream" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+synonym: "abnormal kidney water reabsorption" EXACT []
+is_a: MP:0010107 ! abnormal renal reabsorption
+created_by: csmith
+creation_date: 2010-04-09T10:46:15Z
+
+[Term]
+id: MP:0010109
+name: abnormal renal sodium reabsorption
+def: "any anomaly in the process by which sodium ions are transported out of the renal tubules back into the bloodstream" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+synonym: "abnormal kidney sodium reabsorption" EXACT []
+synonym: "abnormal renal sodium ion reabsorption" EXACT []
+is_a: MP:0010107 ! abnormal renal reabsorption
+created_by: csmith
+creation_date: 2010-04-09T10:47:28Z
+
+[Term]
+id: MP:0010110
+name: abnormal renal phosphate reabsorption
+def: "any anomaly in the process by which phosphate (salt or ester of phosphoric acid) is transported out of the renal tubules back into the bloodstream" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+synonym: "abnormal kidney phosphate reabsorption" EXACT []
+is_a: MP:0010107 ! abnormal renal reabsorption
+created_by: csmith
+creation_date: 2010-04-09T10:48:24Z
+
+[Term]
+id: MP:0010111
+name: abnormal renal calcium reabsorption
+def: "any anomaly in the process by which calcium ions are transported out of the renal tubules back into the bloodstream" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+synonym: "abnormal kidney calcium reabsorption" EXACT []
+synonym: "abnormal renal calcium ion reabsorption" EXACT []
+is_a: MP:0010107 ! abnormal renal reabsorption
+created_by: csmith
+creation_date: 2010-04-09T10:49:27Z
+
+[Term]
+id: MP:0010112
+name: abnormal coccygeal vertebrae morphology
+def: "any structural anomaly of the 3-5 separate or fused bony segments of the coccyx" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+comment: In humans and other tailless primates (e.g. great apes), the coccyx is the remnant of a vestigial tail. It consists of 3-5 separate or fused vertebrae (the coccygeal vertebrae) below the sacrum.
+synonym: "abnormal coccyx vertebra" EXACT []
+is_a: MP:0000137 ! abnormal vertebrae morphology
+is_a: MP:0010114 ! abnormal coccyx morphology
+created_by: csmith
+creation_date: 2010-04-09T12:38:05Z
+
+[Term]
+id: MP:0010113
+name: abnormal sacrum morphology
+def: "any structural anomaly of the segment of the vertebral column that is formed by the fusion of five sacral vertebrae in adult humans and tailless primates" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal vertebra magna morphology" EXACT []
+is_a: MP:0004703 ! abnormal vertebral column
+created_by: csmith
+creation_date: 2010-04-09T12:50:12Z
+
+[Term]
+id: MP:0010114
+name: abnormal coccyx morphology
+def: "any structural anomaly of the rostral-most segment of the vertebral column that is formed by the fusion of three to five coccygeal vertebrae in adult humans and tailless primates" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+comment: In humans and other tailless primates (e.g. great apes), the coccyx is the remnant of a vestigial tail. It consists of 3-5 separate or fused vertebrae (the coccygeal vertebrae) below the sacrum.
+synonym: "abnormal tail bone morphology" EXACT []
+is_a: MP:0004703 ! abnormal vertebral column
+created_by: csmith
+creation_date: 2010-04-09T01:06:05Z
+
+[Term]
+id: MP:0010115
+name: abnormal embryonic cloaca morphology
+def: "any strucutral anomaly of the endoderm-lined chamber into which the hidgut and allantois empty in early embryos" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+is_a: MP:0002085 ! abnormal embryonic tissue morphology
+created_by: csmith
+creation_date: 2010-04-12T12:32:44Z
+
+[Term]
+id: MP:0010116
+name: abnormal primitive urogenital sinus morphology
+def: "any structural anomaly of the ventral part of the cloaca remaining after septation of the rectum, which further develops into part of the bladder, part of the prostatic part of the male urethra and the urethra and vestibule in females" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+comment: Note that the term "urogenital sinus" may refer to the primitive urogenital sinus present as a transient developmental structure in most mammals or it may refer to a condition in which an unseptated cloaca persists in animals longer than normal.
+synonym: "abnormal UGS morphology" EXACT []
+is_a: MP:0010115 ! abnormal embryonic cloaca morphology
+created_by: csmith
+creation_date: 2010-04-12T12:33:14Z
+
+[Term]
+id: MP:0010117
+name: abnormal lateral plate mesoderm
+def: "anomaly of the portion of the middle of the three primary germ layers of the embryo that resides on the periphery of the embryo, is continuous with the extra-embryonic mesoderm, splits into two layers enclosing the intra-embryonic coelom, and gives rise to body wall structures" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "abnormal lateral mesenchyme " EXACT []
+synonym: "abnormal lateral mesoderm" EXACT []
+synonym: "abnormal lateral plate mesenchyme " EXACT []
+synonym: "abnormal LPM morphology" EXACT []
+is_a: MP:0001680 ! abnormal mesoderm development
+created_by: csmith
+creation_date: 2010-04-12T01:16:08Z
+
+[Term]
+id: MP:0010118
+name: abnormal intermediate mesoderm
+def: "any anomaly of the band of mesoderm located between the segmented paraxial mesoderm and the lateral plate mesoderm, that develops into the nephrogenic cord" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "intermediate cell mass" EXACT []
+is_a: MP:0001680 ! abnormal mesoderm development
+created_by: csmith
+creation_date: 2010-04-12T01:16:29Z
+
+[Term]
+id: MP:0010119
+name: abnormal bone mineral density
+def: "anomaly in the amount of mineral per square centimeter of bone (usually g/cm2), used as a measure of structural strength and screen for osteoporosis; bone mineral density is the ratio of bone mineral content to bone size" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "abnormal BMD" EXACT []
+is_a: MP:0003795 ! abnormal bone structure
+created_by: csmith
+creation_date: 2010-04-12T01:56:16Z
+
+[Term]
+id: MP:0010120
+name: increased bone mineral density
+def: "elevation in the amount of mineral per square centimeter of bone (usually g/cm2), used as a measure of structural strength and screen for osteoporosis; bone mineral density is the ratio of bone mineral content to bone size" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "elevated BMD" EXACT []
+synonym: "elevated bone mineral density" EXACT []
+synonym: "increased BMD" EXACT []
+is_a: MP:0010119 ! abnormal bone mineral density
+created_by: csmith
+creation_date: 2010-04-12T01:59:24Z
+
+[Term]
+id: MP:0010121
+name: decreased bone mineral density
+def: "reduction in the amount of mineral per square centimeter of bone (usually g/cm2), used as a measure of structural strength and screen for osteoporosis; bone mineral density is the ratio of bone mineral content to bone size" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "decreased BMD" EXACT []
+synonym: "osteopenia" EXACT []
+synonym: "reduced BMD" EXACT []
+synonym: "reduced bone mineral density" EXACT []
+is_a: MP:0010119 ! abnormal bone mineral density
+created_by: csmith
+creation_date: 2010-04-12T02:00:11Z
+
+[Term]
+id: MP:0010122
+name: abnormal bone mineral content
+def: "any anomaly in the amount (usually in grams/cm) of bone mineral divided by a bone-scanned area" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal BMC" EXACT []
+is_a: MP:0003795 ! abnormal bone structure
+created_by: csmith
+creation_date: 2010-04-12T02:01:05Z
+
+[Term]
+id: MP:0010123
+name: increased bone mineral content
+def: "elevation in the amount (usually in grams/cm) of bone mineral divided by a bone-scanned area" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "elevated BMC" EXACT []
+synonym: "elevated bone mineral content" EXACT []
+synonym: "increased BMC" EXACT []
+is_a: MP:0010122 ! abnormal bone mineral content
+created_by: csmith
+creation_date: 2010-04-12T02:01:31Z
+
+[Term]
+id: MP:0010124
+name: decreased bone mineral content
+def: "reduction in the amount (usually in grams/cm) of bone mineral divided by a bone-scanned area" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "decreased BMC" EXACT []
+synonym: "reduced BMC" EXACT []
+synonym: "reduced bone mineral content" EXACT []
+is_a: MP:0010122 ! abnormal bone mineral content
+created_by: csmith
+creation_date: 2010-04-12T02:02:01Z
+
+[Term]
+id: MP:0010125
+name: abnormal parvocellular neurosecretory cell morphology
+def: "any structural anomaly of the secretory neurons of the paraventricular nucleus that synthesize and secrete vasopressin, corticotropin-releasing factor (CRF) and thyrotropin-releasing hormone (TRH) into blood vessels in the hypothalamo-pituitary portal system" [PMID:8543155]
+synonym: "abnormal parvocellular neuron morphology" EXACT []
+synonym: "abnormal parvocellular neurosecretory neuron morphology" EXACT []
+is_a: MP:0002882 ! abnormal neuron morphology
+is_a: MP:0008845 ! abnormal paraventricular hypothalamic nucleus morphology
+created_by: csmith
+creation_date: 2010-04-12T03:13:01Z
+
+[Term]
+id: MP:0010126
+name: abnormal distal visceral endoderm morphology
+def: "any structural anomaly of the precursors of the anterior visceral endoderm that arises at the distal tip of the embryo" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", PMID:17387317]
+synonym: "abnormal DVE morphology" EXACT []
+is_a: MP:0001724 ! abnormal extraembryonic endoderm formation
+created_by: csmith
+creation_date: 2010-04-12T04:06:42Z
+
+[Term]
+id: MP:0010127
+name: hypervolemia
+def: "an abnormally increased amount of space occupied by blood in the vessels" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+synonym: "high blood volume" EXACT []
+is_a: MP:0001599 ! abnormal blood volume
+created_by: csmith
+creation_date: 2010-04-13T03:58:30Z
+
+[Term]
+id: MP:0010128
+name: hypovolemia
+def: "an abnormally decreased amount of space occupied by blood in the vessels" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+synonym: "hyphemia" EXACT []
+is_a: MP:0001599 ! abnormal blood volume
+created_by: csmith
+creation_date: 2010-04-13T03:59:21Z
+
+[Term]
+id: MP:0010129
+name: increased DN1 thymic pro-T cell number
+def: "increased number of pro-T cells that have the cell surface marker phenotype CD4-negative, CD8-negative, CD44-positive, and CD25-negative" [CL:0000894]
+synonym: "increased DN1 thymic pro-T lymphocyte number" EXACT []
+synonym: "increased DN1 thymic pro-T-cell number" EXACT []
+synonym: "increased DN1 thymic pro-T-lymphocyte number" EXACT []
+synonym: "increased DN1 thymic progenitor T cell number" EXACT []
+synonym: "increased DN1 thymocyte number" EXACT []
+xref: CL:0000894
+is_a: MP:0000714 ! increased thymocyte number
+created_by: csmith
+creation_date: 2010-04-14T02:51:59Z
+
+[Term]
+id: MP:0010130
+name: decreased DN1 thymic pro-T cell number
+def: "reduced number of pro-T cells that have the cell surface marker phenotype CD4-negative, CD8-negative, CD44-positive, and CD25-negative" [CL:0000894]
+synonym: "decreased DN1 thymic pro-T lymphocyte number" EXACT []
+synonym: "decreased DN1 thymic pro-T-cell number" EXACT []
+synonym: "decreased DN1 thymic pro-T-lymphocyte number" EXACT []
+synonym: "decreased DN1 thymic progenitor T cell number" EXACT []
+synonym: "decreased DN1 thymocyte number" EXACT []
+synonym: "reduced DN1 thymic pro-T cell number" EXACT []
+synonym: "reduced DN1 thymic pro-T lymphocyte number" EXACT []
+synonym: "reduced DN1 thymic pro-T-cell number" EXACT []
+synonym: "reduced DN1 thymic pro-T-lymphocyte number" EXACT []
+synonym: "reduced DN1 thymic progenitor T cell number" EXACT []
+synonym: "reduced DN1 thymocyte number" EXACT []
+xref: CL:0000894
+is_a: MP:0000715 ! decreased thymocyte number
+created_by: csmith
+creation_date: 2010-04-14T02:53:53Z
+
+[Term]
+id: MP:0010131
+name: increased DN2 thymocyte number
+def: "increased number of thymocytes that have the cell surface marker phenotype CD4-negative, CD8-negative, CD44-positive, and CD25-positive" [CL:0000806]
+comment: Note that this type of thymocyte is at the earliest stage of T cell receptor rearrangement of the beta, gamma, and delta T cell receptor chains.
+synonym: "increased DN2 alpha-beta immature T lymphocyte number" EXACT []
+synonym: "increased DN2 alpha-beta immature T-cell number" EXACT []
+synonym: "increased DN2 alpha-beta immature T-lymphocyte number" EXACT []
+synonym: "increased DN2 cell number" EXACT []
+synonym: "increased DN2 immature T cell number" EXACT []
+synonym: "increased TN2 cell number" EXACT []
+synonym: "increased TN2 thymocyte number" EXACT []
+xref: CL:0000806
+is_a: MP:0000714 ! increased thymocyte number
+created_by: csmith
+creation_date: 2010-04-14T02:57:06Z
+
+[Term]
+id: MP:0010132
+name: decreased DN2 thymocyte number
+def: "reduced number of thymocytes that have the cell surface marker phenotype CD4-negative, CD8-negative, CD44-positive, and CD25-positive" [CL:0000806]
+comment: Note that this type of thymocyte is at the earliest stage of T cell receptor rearrangement of the beta, gamma, and delta T cell receptor chains.
+synonym: "decreased DN2 alpha-beta immature T lymphocyte number" EXACT []
+synonym: "decreased DN2 alpha-beta immature T-cell number" EXACT []
+synonym: "decreased DN2 alpha-beta immature T-lymphocyte number" EXACT []
+synonym: "decreased DN2 cell number" EXACT []
+synonym: "decreased DN2 immature T cell number" EXACT []
+synonym: "decreased TN2 cell number" EXACT []
+synonym: "decreased TN2 thymocyte number" EXACT []
+synonym: "reduced DN2 alpha-beta immature T lymphocyte number" EXACT []
+synonym: "reduced DN2 alpha-beta immature T-cell number" EXACT []
+synonym: "reduced DN2 alpha-beta immature T-lymphocyte number" EXACT []
+synonym: "reduced DN2 cell number" EXACT []
+synonym: "reduced DN2 immature T cell number" EXACT []
+synonym: "reduced DN2 thymocyte number" EXACT []
+synonym: "reduced TN2 cell number" EXACT []
+synonym: "reduced TN2 thymocyte number" EXACT []
+xref: CL:0000806
+is_a: MP:0000715 ! decreased thymocyte number
+created_by: csmith
+creation_date: 2010-04-14T02:59:07Z
+
+[Term]
+id: MP:0010133
+name: increased DN3 thymocyte number
+def: "increased number of thymocytes that have the cell surface marker phenotype CD4-negative, CD8-negative, CD44-positive, and CD25-negative and expressing the T cell receptor beta-chain in complex with the pre-T cell receptor alpha chain." [CL:0000807]
+synonym: "increased DN3 alpha-beta immature T lymphocyte number" EXACT []
+synonym: "increased DN3 alpha-beta immature T-cell number" EXACT []
+synonym: "increased DN3 alpha-beta immature T-lymphocyte number" EXACT []
+synonym: "increased DN3 cell number" EXACT []
+synonym: "increased DN3 immature T cell number" EXACT []
+synonym: "increased TN3 cell number" EXACT []
+synonym: "increased TN3 thymocyte number" EXACT []
+xref: CL:0000807
+is_a: MP:0000714 ! increased thymocyte number
+created_by: csmith
+creation_date: 2010-04-14T02:59:28Z
+
+[Term]
+id: MP:0010134
+name: decreased DN3 thymocyte number
+def: "reduced number of thymocytes that have the cell surface marker phenotype CD4-negative, CD8-negative, CD44-positive, and CD25-negative and expressing the T cell receptor beta-chain in complex with the pre-T cell receptor alpha chain." [CL:0000807]
+synonym: "decreased DN3 alpha-beta immature T lymphocyte number" EXACT []
+synonym: "decreased DN3 alpha-beta immature T-cell number" EXACT []
+synonym: "decreased DN3 alpha-beta immature T-lymphocyte number" EXACT []
+synonym: "decreased DN3 cell number" EXACT []
+synonym: "decreased DN3 immature T cell number" EXACT []
+synonym: "decreased TN3 cell number" EXACT []
+synonym: "decreased TN3 thymocyte number" EXACT []
+synonym: "reduced DN3 alpha-beta immature T lymphocyte number" EXACT []
+synonym: "reduced DN3 alpha-beta immature T-cell number" EXACT []
+synonym: "reduced DN3 alpha-beta immature T-lymphocyte number" EXACT []
+synonym: "reduced DN3 cell number" EXACT []
+synonym: "reduced DN3 immature T cell number" EXACT []
+synonym: "reduced DN3 thymocyte number" EXACT []
+synonym: "reduced TN3 cell number" EXACT []
+synonym: "reduced TN3 thymocyte number" EXACT []
+xref: CL:0000807
+is_a: MP:0000715 ! decreased thymocyte number
+created_by: csmith
+creation_date: 2010-04-14T02:59:48Z
+
+[Term]
+id: MP:0010135
+name: increased DN4 thymocyte number
+def: "increased number of thymocytes that have the cell surface marker phenotype CD4-negative, CD8-negative, CD44-negative, CD25-negative, and pre-TCR-positive." [CL:0000808]
+comment: Note that this type of thymocyte has passed the beta-selection checkpoint and is rapidly proliferating and beginning to rearrange the T cell receptor alpha chain.
+synonym: "increased DN4 alpha-beta immature T lymphocyte number" EXACT []
+synonym: "increased DN4 alpha-beta immature T-lymphocyte number" EXACT []
+synonym: "increased DN4 cell number" EXACT []
+synonym: "increased DN4 immature T cell number" EXACT []
+synonym: "increased DN4 immature T-cell number" EXACT []
+xref: CL:0000808
+is_a: MP:0000714 ! increased thymocyte number
+created_by: csmith
+creation_date: 2010-04-14T03:00:10Z
+
+[Term]
+id: MP:0010136
+name: decreased DN4 thymocyte number
+def: "reduced number of thymocytes that have the cell surface marker phenotype CD4-negative, CD8-negative, CD44-negative, CD25-negative, and pre-TCR-positive." [CL:0000808]
+comment: Note that this type of thymocyte has passed the beta-selection checkpoint and is rapidly proliferating and beginning to rearrange the T cell receptor alpha chain.
+synonym: "decreased DN4 alpha-beta immature T lymphocyte number" EXACT []
+synonym: "decreased DN4 alpha-beta immature T-lymphocyte number" EXACT []
+synonym: "decreased DN4 cell number" EXACT []
+synonym: "decreased DN4 immature T cell number" EXACT []
+synonym: "decreased DN4 immature T-cell number" EXACT []
+synonym: "reduced DN4 alpha-beta immature T lymphocyte number" EXACT []
+synonym: "reduced DN4 alpha-beta immature T-lymphocyte number" EXACT []
+synonym: "reduced DN4 cell number" EXACT []
+synonym: "reduced DN4 immature T cell number" EXACT []
+synonym: "reduced DN4 immature T-cell number" EXACT []
+synonym: "reduced DN4 thymocyte number" EXACT []
+xref: CL:0000808
+is_a: MP:0000715 ! decreased thymocyte number
+created_by: csmith
+creation_date: 2010-04-14T03:00:30Z
+
+[Term]
+id: MP:0010137
+name: delayed exit from anagen phase
+def: "anomaly in the growth phase of the hair cycle resulting a prolonged anagen phase" [MGI:Sanger_Karp "Submission from Natasha Karp"]
+is_a: MP:0008858 ! abnormal hair cycle anagen phase
+created_by: csmith
+creation_date: 2010-05-05T11:20:34Z
+
+[Term]
+id: MP:0010138
+name: arteritis
+def: "inflammation of the walls of arteries, usually as a result of infection or auto-immune response" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+synonym: "arterial inflammation" EXACT []
+is_a: MP:0001864 ! vasculitis
+created_by: csmith
+creation_date: 2010-05-05T11:33:59Z
+
+[Term]
+id: MP:0010139
+name: aortitis
+def: "inflammation of the aorta" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+synonym: "aorta inflammation" EXACT []
+is_a: MP:0010138 ! arteritis
+created_by: csmith
+creation_date: 2010-05-05T11:35:09Z
+
+[Term]
+id: MP:0010140
+name: phlebitis
+def: "inflammation of a vein" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+synonym: "vein inflammation" EXACT []
+is_a: MP:0001864 ! vasculitis
+created_by: csmith
+creation_date: 2010-05-05T11:37:22Z
+
+[Term]
+id: MP:0010141
+name: lymphangitis
+def: "inflammation of the lymphatic vessels/channels" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+synonym: "lymphatic channel inflammation" EXACT []
+synonym: "lymphatic vessel inflammation" EXACT []
+is_a: MP:0001864 ! vasculitis
+created_by: csmith
+creation_date: 2010-05-05T11:38:46Z
+
+[Term]
+id: MP:0010142
+name: disorganized hair shaft
+def: "derangement of the normal pattern of the layered structure of the cuticle, cortex and/or medulla of a hair" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0003809 ! abnormal hair shaft morphology
+created_by: csmith
+creation_date: 2010-05-05T03:27:36Z
+
+[Term]
+id: MP:0010143
+name: enhanced fertility
+def: "increased ability to produce live offspring" [MGI:mnk "Michelle Knowlton, Mouse Genome Informatics Curator"]
+is_a: MP:0002161 ! abnormal fertility/fecundity
+created_by: csmith
+creation_date: 2010-05-10T12:43:08Z
+
+[Term]
+id: MP:0010144
+name: abnormal tumor vascularization
+def: "aberrant process of blood vessel formation and the subsequent remodeling process within and/or around tumors" [MGI:mnk "Michelle Knowlton, Mouse Genome Informatics Curator"]
+synonym: "abnormal tumor angiogenesis" EXACT []
+is_a: MP:0000260 ! abnormal angiogenesis
+is_a: MP:0003448 ! altered tumor morphology
+created_by: csmith
+creation_date: 2010-05-10T01:02:25Z
+
+[Term]
+id: MP:0010145
+name: abnormal spermatic cord morphology
+def: "any structural anomaly of the cord-like structure in males comprising the vas deferens and associated tissue that runs from the abdomen down to each testis" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+is_a: MP:0009205 ! abnormal internal male genitalia morphology
+created_by: csmith
+creation_date: 2010-05-10T02:31:11Z
+
+[Term]
+id: MP:0010146
+name: umbilical hernia
+def: "an outward bulging (protrusion) of the abdominal lining or part of the abdominal organ(s) through the area around the umbilicus; occurs when the muscle through which blood vessels pass to feed the developing fetus fails to completely close" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", PMID:20333300]
+comment: Do not confuse with omphalocele - a severe body wall defect that results in an abnormally large umbilical ring usually exposing the gut and liver.
+is_a: MP:0001725 ! abnormal umbilical cord morphology
+created_by: csmith
+creation_date: 2010-05-10T02:40:34Z
+
+[Term]
+id: MP:0010147
+name: abnormal endocrine pancreas physiology
+def: "any functional anomaly of the smaller portion of the pancreas that secretes a number of hormones into the blood stream that are produced by the cells in the islets of Langerhans" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0002693 ! abnormal pancreas physiology
+created_by: csmith
+creation_date: 2010-05-10T03:24:28Z
+
+[Term]
+id: MP:0010148
+name: abnormal exocrine pancreas physiology
+def: "any functional anomaly of the acinar gland portion of the pancreas that secretes digestive enzymes" [MESH:A03.734.540, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0001663 ! abnormal digestive system physiology
+is_a: MP:0002693 ! abnormal pancreas physiology
+created_by: csmith
+creation_date: 2010-05-10T03:24:55Z
+
+[Term]
+id: MP:0010149
+name: abnormal synaptic dopamine release
+def: "aberrant secretion across synapses of the catecholamine neurotransmitter and neurohormone, derived from tyrosine and the precursor to norepinephrine and epinephrine; functions as a neurotransmitter in the brain and as a hormone to inhibit the release of prolactin from the anterior lobe of the pituitary" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0005445 ! abnormal neurotransmitter secretion
+created_by: csmith
+creation_date: 2010-05-10T03:41:12Z
+
+[Term]
+id: MP:0010150
+name: abnormal mandibule ramus morphology
+def: "any structural anomaly of the upturned perpendicular extremity of the mandible" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "abnormal mandibular ramus morphology" EXACT []
+is_a: MP:0000458 ! abnormal mandible morphology
+created_by: csmith
+creation_date: 2010-05-10T04:12:38Z
+
+[Term]
+id: MP:0010151
+name: abnormal spinal cord ependymal layer morphology
+def: "any structural anomaly of the cellular membrane that lines the central canal of the spinal cord" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "abnormal spinal cord ventricular layer morphology" EXACT []
+is_a: MP:0000955 ! abnormal spinal cord morphology
+is_a: MP:0002653 ! abnormal ependyma morphology
+created_by: csmith
+creation_date: 2010-05-11T10:47:16Z
+
+[Term]
+id: MP:0010152
+name: abnormal brain ependyma morphology
+def: "any structural anomaly of the cellular membrane that lines the brain ventricles" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+is_a: MP:0002200 ! abnormal brain ventricle/choroid plexus morphology
+is_a: MP:0002653 ! abnormal ependyma morphology
+created_by: csmith
+creation_date: 2010-05-11T12:21:52Z
+
+[Term]
+id: MP:0010153
+name: abnormal gastroesophageal sphincter morphology
+def: "any structural anomaly of the thick circular layer of gastric musculature encircling the gastroesophageal junction that functions to reduce backflow into the esophagus from the stomach" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "abnormal cardiac sphincter morphology" EXACT []
+synonym: "abnormal constrictor cardiae morphology" RELATED []
+synonym: "abnormal esophageal sphincter morphology" BROAD []
+synonym: "abnormal inferior esophageal sphincter morphology" EXACT []
+synonym: "abnormal lower esophageal sphincter morphology" EXACT []
+xref: MA:0002951
+is_a: MP:0000470 ! abnormal stomach morphology
+created_by: csmith
+creation_date: 2010-05-11T03:05:45Z
+
+[Term]
+id: MP:0010154
+name: abnormal gastroesophageal sphincter physiology
+def: "any functional anomaly of the thick circular layer of gastric musculature encircling the gastroesophageal junction that functions to reduce backflow into the esophagus from the stomach" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "abnormal cardiac sphincter physiology" EXACT []
+synonym: "abnormal constrictor cardiae physiology" RELATED []
+synonym: "abnormal esophageal sphincter physiology" BROAD []
+synonym: "abnormal inferior esophageal sphincter physiology" EXACT []
+synonym: "abnormal lower esophageal sphincter physiology" EXACT []
+xref: MA:0002951
+is_a: MP:0001663 ! abnormal digestive system physiology
+created_by: csmith
+creation_date: 2010-05-11T03:14:07Z
+
+[Term]
+id: MP:0010155
+name: abnormal intestine physiology
+def: "any functional anomaly of the digestive tube passing from the stomach to the anus" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0001663 ! abnormal digestive system physiology
+created_by: csmith
+creation_date: 2010-05-12T02:04:15Z
+
+[Term]
+id: MP:0010156
+name: abnormal small intestinal crypt cell physiology
+def: "altered function of the cells that make up the tubular intestinal glands found in the mucosal membranes of the small intestine" [MGI:jbubier "Jason Bubier, Mouse Genome Informatics Curator"]
+is_a: MP:0010155 ! abnormal intestine physiology
+created_by: csmith
+creation_date: 2010-05-12T02:13:57Z
+
+[Term]
+id: MP:0010157
+name: abnormal small intestinal crypt cell proliferation
+def: "anomaly in the ability of the cells that make up the tubular intestinal glands found in the mucosal membranes of the small intestine to undergo expansion by cell division" [MGI:jbubier "Jason Bubier, Mouse Genome Informatics Curator"]
+is_a: MP:0010156 ! abnormal small intestinal crypt cell physiology
+created_by: csmith
+creation_date: 2010-05-12T02:15:31Z
+
+[Term]
+id: MP:0010158
+name: abnormal intestine development
+def: "abnormal formation of the digestive tube passing from the stomach to the anus" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
+is_a: MP:0000477 ! abnormal intestine morphology
+is_a: MP:0003119 ! abnormal digestive system development
+created_by: csmith
+creation_date: 2010-05-12T02:19:24Z
+
+[Term]
+id: MP:0010159
+name: abnormal enterocyte differentiation
+def: "abnormal formation of the epithelial cells that have an apical plasma membrane folded into microvilli to provide ample surface for the absorption of nutrients from the intestinal lumen" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
+is_a: MP:0010158 ! abnormal intestine development
+created_by: csmith
+creation_date: 2010-05-12T02:20:02Z
+
+[Term]
+id: MP:0010160
+name: increased oligodendrocyte number
+def: "greater number of cells of the central nervous system that form the insulating myelin sheath of axons in the CNS" [MESH:A08.637.600, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased oligodendroglia number" EXACT []
+synonym: "increased oligodendroglial cell number" EXACT []
+synonym: "increased oligoglia number" EXACT []
+synonym: "increased oligoglial cell number" EXACT []
+is_a: MP:0000953 ! abnormal oligodendrocyte morphology
+created_by: csmith
+creation_date: 2010-05-12T02:58:43Z
+
+[Term]
+id: MP:0010161
+name: decreased brain cholesterol level
+def: "less than normal amount in the brain of the principal sterol of vertebrates and the precursor of many steroids, including bile acids and steroid hormones; it is a component of the plasma membrane lipid bilayer and of plasma lipoproteins and can be found in all animal tissues" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "reduced brain cholesterol level" EXACT []
+is_a: MP:0003983 ! decreased cholesterol level
+created_by: csmith
+creation_date: 2010-05-12T03:17:01Z
+
+[Term]
+id: MP:0010162
+name: increased brain cholesterol level
+def: "greater than normal amount in the brain of the principal sterol of vertebrates and the precursor of many steroids, including bile acids and steroid hormones; it is a component of the plasma membrane lipid bilayer and of plasma lipoproteins and can be found in all animal tissues" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0003982 ! increased cholesterol level
+created_by: csmith
+creation_date: 2010-05-12T03:18:53Z
 
 [Typedef]
 id: part_of
