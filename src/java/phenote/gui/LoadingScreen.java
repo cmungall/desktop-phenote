@@ -68,14 +68,14 @@ public class LoadingScreen extends JFrame {
     JLabel logo = new JLabel();
     try {
       ImageIcon imageIcon = new ImageIcon(FileUtil.findUrl(
-                                            "images/elephant_header.jpg"));
+                                            "images/phenote_logo.jpg"));
       
 //		logo.createTitle("");
       logo.setIcon(imageIcon);
       //		logo.setIcon(SwingResourceManager.getIcon(LoadingScreen.class, "images/elephant_header.jpg"));
     }
     catch (FileNotFoundException e) {
-      LOG.error("Unable to find elephant image");
+      LOG.error("Unable to find Phenote logo (images/phenote_logo.png)");
     }
 
 		startupProgressBar = new JProgressBar();
