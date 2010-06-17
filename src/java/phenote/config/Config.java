@@ -1217,7 +1217,7 @@ public class Config {
   	return;
   }
 
-  /** Loading screen is the elephant splash screen that displays when phenote
+  /** Loading screen is the splash screen that displays when phenote
       is initializing ontologies & such at startup. The current LoadingScreen
       can go into threadlock and seize up phenote so need ability to disable it
       defaults to true (false?) */

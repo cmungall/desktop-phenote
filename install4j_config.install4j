@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="4.0.8" transformSequenceNumber="1">
   <directoryPresets config="./doc/LICENSE" />
-  <application name="Phenote" distributionSourceDir="" applicationId="7283-8148-3557-1500" mediaDir="./releases" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.version}_${compiler:sys.platform}_install4j" compression="9" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" keepModificationTimes="false" shortName="Phenote" publisher="BBOP" publisherWeb="" version="1.7-beta13" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" javaMinVersion="1.5" javaMaxVersion="" allowBetaVM="true">
+  <application name="Phenote" distributionSourceDir="" applicationId="7283-8148-3557-1500" mediaDir="./releases" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.version}_${compiler:sys.platform}_install4j" compression="9" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" keepModificationTimes="false" shortName="Phenote" publisher="BBOP" publisherWeb="" version="1.7-beta14" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" javaMinVersion="1.5" javaMaxVersion="" allowBetaVM="true">
     <languages skipLanguageSelection="false">
       <principalLanguage id="en" customLocalizationFile="" />
       <additionalLanguages />
@@ -78,7 +78,7 @@
     </components>
   </files>
   <launchers>
-    <launcher name="Phenote" id="8" external="false" excludeFromMenu="false" menuName="Phenote" icnsFile="images/phenote_app.icns" pngIcon16File="images/obedit_installer_icon_16x16.png" pngIcon32File="images/obedit_installer_icon_32x32.png" macServiceDependencies="" swtApp="false">
+    <launcher name="Phenote" id="8" external="false" excludeFromMenu="false" menuName="Phenote" icnsFile="images/PhenoteIcon_Medium.icns" pngIcon16File="images/PhenoteIcon_16x16.png" pngIcon32File="images/PhenoteIcon_32x32.png" macServiceDependencies="" swtApp="false">
       <executable name="Phenote" type="1" iconSet="true" iconFile="" executableDir="." redirectStderr="false" stderrFile="error.log" redirectStdout="false" stdoutFile="output.log" failOnStderrOutput="false" executableMode="1" changeWorkingDirectory="false" workingDirectory="." singleInstance="false" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker">
         <versionInfo include="false" fileVersion="" fileDescription="" legalCopyright="" internalName="" />
       </executable>
@@ -101,7 +101,7 @@
       </customScript>
     </launcher>
   </launchers>
-  <installerGui installerType="1" suggestPreviousProgramGroup="true" addOnAppId="" suggestPreviousLocations="true" allowUnattended="true" allowConsole="true" useCustomInstallerHeaderImage="false" customInstallerHeaderImage="" useCustomUninstallerHeaderImage="false" customUninstallerHeaderImage="" customSize="false" customWidth="500" customHeight="390" useCustomIcon="true" customIcnsFile="./images/phenote_app.icns" customPngIcon16File="images/obedit_installer_icon_16x16.png" customPngIcon32File="images/obedit_installer_icon_32x32.png" customIcoFile="" vmParameters="" watermark="true" resizable="true" suppressProgressDialog="false">
+  <installerGui installerType="1" suggestPreviousProgramGroup="true" addOnAppId="" suggestPreviousLocations="true" allowUnattended="true" allowConsole="true" useCustomInstallerHeaderImage="false" customInstallerHeaderImage="" useCustomUninstallerHeaderImage="false" customUninstallerHeaderImage="" customSize="false" customWidth="500" customHeight="390" useCustomIcon="true" customIcnsFile="./images/PhenoteIcon_Medium.icns" customPngIcon16File="images/PhenoteIcon_16x16.png" customPngIcon32File="images/PhenoteIcon_32x32.png" customIcoFile="" vmParameters="" watermark="true" resizable="true" suppressProgressDialog="false">
     <customCode useInstalledFiles="false" />
     <installerScreens>
       <screen name="" id="26" beanClass="com.install4j.runtime.beans.screens.WelcomeScreen" rollbackBarrier="false" backButton="2" finishScreen="false">
