@@ -82,3 +82,31 @@ display and were lost if the collaborator saved the data.
 Now these unknown terms are not lost, and they are visually indicated in the
 Term Info window with an orange bar that says "UNKNOWN TERM".
 - Fixed bug 2990121: restored gridlines in tables (on Mac with JDK 1.6).
+
+1.7-beta13
+- Changes to zfin configs to fix problems reported by Ceri Van Slyke.
+
+1.7-beta14
+- Partial fix (improvement, at least) for several related bug reports:
+  - 3013449--Can't delete ontology-constrained terms in Annotation Editor
+  - 1850306--cell contents disappear in row selection
+  - 2972788--Field edits sometimes get lost unless you hit enter
+  - 1874953--multi select wipes out data
+
+The failure to commit changes made in annotation-constrained fields in the
+Annotation Editor mostly happened if, rather than hitting return in the newly
+empty field, you hit tab (to go to the next field) or clicked on something
+else. (However, it didn't reliably happen even then--sometimes it worked
+fine.)  I noticed the behavior the most when selecting multiple rows, and then
+clicking on the field in the Annot Editor to empty it, and hitting tab.
+Usually, the terms were not deleted as desired (but sometimes they were!).
+
+I have improved the behavior somewhat by checking TermCompLists (these
+annotation-constrained fields) for focusLost (i.e., user tabbed or clicked out
+of the field--these weren't registering as KeyEvents) and not just for return,
+but it still sometimes seems not to do the right thing.
+
+- New Phenote logo
+- New splah screen (bePatientDialog) that stays up while Phenote is loading
+(well, actually, it still seems to show up blank when you run the installed
+version, though it looks fine when you launch Phenote from the shell).
