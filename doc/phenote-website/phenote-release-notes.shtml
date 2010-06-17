@@ -22,6 +22,34 @@
 
 <h1>1.7</h1>
 
+<h2>06.17.2010, Version 1.7-beta14</h2>
+<ul>
+<li>Changes to zfin configs to fix problems reported by Ceri Van Slyke</li>
+<li>Partial fix (improvement, at least) for several related bug reports:
+<ul>
+<li>3013449--Can't delete ontology-constrained terms in Annotation Editor</li>
+<li>1850306--cell contents disappear in row selection</li>
+<li>2972788--Field edits sometimes get lost unless you hit enter</li>
+<li>1874953--multi select wipes out data</li>
+</ul>
+The failure to commit changes made in annotation-constrained fields in the
+Annotation Editor mostly happened if, rather than hitting return in the newly
+empty field, you hit tab (to go to the next field) or clicked on something
+else. (However, it didn't reliably happen even then--sometimes it worked
+fine.)  I noticed the behavior the most when selecting multiple rows, and then
+clicking on the field in the Annot Editor to empty it, and hitting tab.
+Usually, the terms were not deleted as desired (but sometimes they were!).
+<br>
+I have improved the behavior somewhat by checking TermCompLists (these
+annotation-constrained fields) for focusLost (i.e., user tabbed or clicked out
+of the field--these weren't registering as KeyEvents) and not just for return,
+but it still sometimes seems not to do the right thing.
+</li>
+<li>New Phenote logo</li>
+<li>Updated dialog that comes up while Phenote is loading (but it still
+  sometimes comes up blank)</li>
+</ul>
+
 <h2>05.06.2010, Version 1.7-beta12</h2>
 <ul>
 <li>Fixed bug 2993230: terms used in annotations that are not in any currently
