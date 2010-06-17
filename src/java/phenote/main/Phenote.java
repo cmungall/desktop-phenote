@@ -1,7 +1,9 @@
 package phenote.main;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -10,6 +12,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -23,6 +26,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -83,7 +87,7 @@ public class Phenote {
   public StandardToolbar standardToolbar;
   public SplashScreen splashScreen;
   public LoadingScreen loadingScreen;
-  private String logoFile = "images/phenote_logo.jpg";    
+  private static String logoFile = "images/phenote_logo.png";
   private static JDialog bePatientDialog = null;        
 
   public static void main(String[] args) {
@@ -104,7 +108,7 @@ public class Phenote {
   }
 
   /** args are command line arguments
-      if doSplash is true then display phenote elephant splash screen
+      if doSplash is true then display phenote splash screen.
       the splash screen comes up blank for plus - needs to be fixed as
       its a nice splash. even worse on some linuxes the splash is blank
       and hangs in front of phenote - so doSplash false allows for
@@ -119,10 +123,11 @@ public class Phenote {
     // have to init splash screen after config as config dictates whether to
     // show splash screen (loading screen can threadlock)
 //    LOG.debug("initBackend: doSplash = " + doSplash);  // DEL
-    if (doSplash)
-	    phenote.splashScreenInit();
-    else
-	    showBePatientDialog();
+//    if (doSplash)
+//	    phenote.splashScreenInit();
+//    else
+//	    showBePatientDialog();
+
     phenote.initOntologies();
     // phenote sometimes hangs right around here!???!
     LOG.debug("Ontologies initialized, checking command line for read & write");
@@ -193,22 +198,35 @@ public class Phenote {
     }
   }
 
-  private static void showBePatientDialog() {
+  public static void showBePatientDialog() {
 //          LOG.debug("showBePatientDialog"); // DEL
-          // Dialog box shows up empty, until loading of files is done, and THEN it shows the text!
-          // If modal=true, the dialog shows up with text filled in, but the dimensions are too small so you can't see most of the text.
-          // (modal=true isn't good, though, because the user has to make it go away before Phenote continues doing its thing.)
-          // Oh well, it's better than having NOTHING up while the ontologies are updated.
-          bePatientDialog = new JDialog((Frame)null, "Reading ontology files--please wait", false);
-          bePatientDialog.setPreferredSize(new Dimension(400, 100));
-          bePatientDialog.add(new JLabel("<html>Phenote may need to download the ontology files required by this configuration.<br>This process will take a while (possibly several minutes).</html>"));
-          bePatientDialog.pack();
-          bePatientDialog.setLocationRelativeTo(null); // centers panel on screen
-          bePatientDialog.setEnabled(true);
-          bePatientDialog.setVisible(true);
-          bePatientDialog.toFront();
-//          bePatientDialog.show(); // doesn't help
-//          bePatientDialog.repaint(); // doesn't help
+    bePatientDialog = new JDialog((Frame)null, "Reading ontology files--please wait", false);
+    bePatientDialog.setPreferredSize(new Dimension(540, 240));
+    bePatientDialog.setBackground(Color.WHITE);
+    bePatientDialog.setLayout(new BorderLayout(10,10));
+    bePatientDialog.setLocationRelativeTo(null); // centers panel on screen
+    bePatientDialog.setEnabled(true);
+
+    URL logoURL = null;
+    try {
+      logoURL = FileUtil.findUrl(logoFile);
+    }
+    catch (FileNotFoundException e) {
+      LOG.error("Unable to find Phenote logo (" + logoFile + ")");
+    }
+
+    String imageString = (logoURL == null) ? "" : "<center><img vspace=15 src=" + logoURL + "></center.";
+
+    bePatientDialog.add(new JLabel("<html><body>" + imageString +
+                                   "<br><br><font size=4>Phenote is updating and loading the ontology files required by this configuration.<br>This process will take a while (possibly several minutes).</font><br><br>" +
+                                   "<center><hr><br><font size=2>Phenote is a project of the Berkeley Bioinformatics Open-Source Projects" +
+                                   " (<a href='http://www.berkeleybop.org'>BBOP</a>).<br>It is distributed under the FreeBSD license.</font></center><br></body></html>"),
+                        BorderLayout.NORTH);
+
+    bePatientDialog.pack();
+    bePatientDialog.setVisible(true);
+    bePatientDialog.toFront();
+    LOG.debug("Displaying 'be patient' dialog..."); // DEL
   }
 
   public void initOntologies() {
@@ -233,44 +251,11 @@ public class Phenote {
             //OntologyDataAdapter oda = new OntologyDataAdapter(); // singleton?
             // loads up OntologyManager - non intuitive?
             OntologyDataAdapter.initialize(); // this sometimes hangs!!!
-//  		LOG.debug("Ontologies initialized");
+            LOG.debug("Ontologies initialized");
             setProgress("Ontologies Initialized", 70);
             //setMessageText("Ontologies Initialized");
     }
   }
-
-  /** Not currently used (and looks pretty much identical to initOntologies (above), anyway */
-//   public void simpleInitOntologies() {
-// 	  	//set up new interface here.
-		
-// 	    String m = "simpleInitOntologies: loading configuration: "+Config.inst().getConfigName();
-// 	    logInfo(m);
-	    
-// 	  	if (Config.inst().getTerminologyDefs()!=null) { //only do this if defined
-	  		
-// 	  		try {
-// 	  			OntologyDataAdapter2.getInstance().initOntologies(false);
-// 	  		} catch (Exception e) {
-// 	  			e.printStackTrace();
-// 	  		}
-// 	  	} else { //the old-school config style
-	  		
-// 	  		setProgress(m, 10);
-// 	  		setProgress(5); // 5?? from 10??? nicole?
-// 	  		LOG.debug("Initializing ontologies");
-// 	  		setProgress("Initializing Ontologies...", 20);
-// 	  		setProgressMsg("Initializing Ontologies");
-// 	  		setProgress(10);
-// 	  		//OntologyDataAdapter oda = new OntologyDataAdapter(); // singleton?
-// 	  		// loads up OntologyManager - non intuitive?
-// 	  		OntologyDataAdapter.initialize(); // this sometimes hangs!!!
-// //	  		LOG.debug("Ontologies initialized");
-// 	  		// if (config.useShrimpDagViewer())
-// 	  		// ShrimpDag.inst().initOntologies();
-// 	  		setProgress("Ontologies Initialized", 70);
-// 	  		//setMessageText("Ontologies Initialized");
-// 	  	}
-// 	  }
 
   private void loadFromCommandLine() {
     //LOG.debug("read spec "+commandLine.readIsSpecified());
@@ -330,13 +315,13 @@ public class Phenote {
   }
 
   /** Note that this is not the same splash screen generated by the "About" command. It's bigger, for one thing. */
-  private void splashScreenInit() {
+  public void splashScreenInit() {
     if (commandLine.writeIsSpecified()) return;
 
-  	ImageIcon myImage = new ImageIcon();
-  	try {
-		myImage = new ImageIcon(FileUtil.findUrl(logoFile));
-  	}	catch (FileNotFoundException ex) {  }
+    ImageIcon myImage = new ImageIcon();
+    try {
+      myImage = new ImageIcon(FileUtil.findUrl(logoFile));
+    }	catch (FileNotFoundException ex) {  }
  	
 //    ImageIcon myImage = new ImageIcon(logoFile);
     // wacky but oboedit preference 1st call causing setting font which triggers gui stuff
@@ -382,6 +367,7 @@ public class Phenote {
   }
   
   void splashScreenDestruct() {
+    LOG.debug("splashScreenDestruct"); // DEL
     if (splashScreen!=null) splashScreen.setScreenVisible(false);
     if (loadingScreen!=null) loadingScreen.setScreenVisible(false);
     if (bePatientDialog != null) {
