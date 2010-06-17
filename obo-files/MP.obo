@@ -1,6 +1,7 @@
 format-version: 1.2
-date: 12:05:2010 16:19
-auto-generated-by: OBO-Edit 2.1-beta4
+date: 11:06:2010 15:52
+saved-by: csmith
+auto-generated-by: OBO-Edit 2.0
 default-namespace: MPheno.ontology
 remark: The Mammalian Phenotype Ontology is being developed by Cynthia L. Smith, Susan M. Bello, Carroll W. Goldsmith and Janan T. Eppig, as part of the Mouse Genome Database (MGD) Project, Mouse Genome Informatics (MGI), The Jackson Laboratory, Bar Harbor, ME. Copyright 2007 The Jackson Laboratory. This file contains pre-coordinated phenotype terms, definitions and synonyms that can be used to describe mammalian phenotypes. The ontology is represented as a directed acyclic graph (DAG). It organizes phenotype terms into major biological system headers such as nervous system and respiratory system.  Behavior and lethality terms are also represented. This ontology is currently under development. Daily updates are available at the Mouse Genome Informatics (MGI) ftp site (ftp://ftp.informatics.jax.org/pub/reports/index.html#pheno) as well as the OBO Foundry site (http://obofoundry.org/). Questions, comments and suggestions are welcome, and should be directed to pheno@informatics.jax.org MGD is funded by NIH/NHGRI grant HG000330.
 
@@ -1813,6 +1814,8 @@ is_a: MP:0005621 ! abnormal cell physiology
 id: MP:0000314
 name: schistocytosis
 def: "the appearance of poikilocytes in the blood that owe their abnormal shape to fragmentation occurring as the cells flow through damaged small vessels" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator", PMID:12594949]
+synonym: "fragmented erythrocytes" EXACT []
+synonym: "fragmented red blood cells" RELATED []
 synonym: "schizocytosis" EXACT []
 is_a: MP:0002643 ! poikilocytosis
 
@@ -1956,7 +1959,7 @@ is_obsolete: true
 id: MP:0000341
 name: abnormal bile color
 def: "a change in the color of the bile from the normal yellowish brown or green" [J:80519]
-is_a: MP:0005085 ! abnormal gall bladder physiology
+is_a: MP:0005085 ! abnormal gallbladder physiology
 
 [Term]
 id: MP:0000343
@@ -2082,7 +2085,6 @@ is_obsolete: true
 id: MP:0000364
 name: abnormal vascular regression
 def: "premature regression or persistence of vessels programmed to regress and/or loss of vessels not programmed to regress" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
-synonym: "abnormal vascular remodeling" EXACT []
 is_a: MP:0009577 ! abnormal developmental vascular remodeling
 
 [Term]
@@ -2385,27 +2387,23 @@ is_a: MP:0005306 ! abnormal phalanx morphology
 [Term]
 id: MP:0000414
 name: alopecia
-def: "absence of hair or loss of hair; not usually in reference to primary genetic hairlessness but may be due to dietary, stress, secondary to immune condition" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:30772, J:33796]
-synonym: "absence of hair" EXACT []
-synonym: "absence of hair shaft" EXACT []
-synonym: "absent hair shaft" EXACT []
+def: "absence of hair due to loss of hair; not in reference to primary genetic hairlessness but may be due to dietary, stress or secondary to immune condition" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:30772, J:33796]
+synonym: "absence of hair" BROAD []
+synonym: "absence of hair shaft" BROAD []
+synonym: "absent hair shaft" BROAD []
 synonym: "baldness" EXACT []
 synonym: "hair loss" EXACT []
 synonym: "hairless" RELATED []
 synonym: "loss of hair" EXACT []
-synonym: "no hair shaft" EXACT []
-is_a: MP:0002073 ! abnormal hair growth
-
-[Term]
-id: MP:0000415
-name: partial hair loss
-def: "inability to retain some of the hairs of the coat" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "no hair shaft" BROAD []
 is_a: MP:0002073 ! abnormal hair growth
 
 [Term]
 id: MP:0000416
 name: sparse hair
-def: "body hair that is significantly less dense" [J:46854]
+alt_id: MP:0000415
+def: "body hair that is less dense; may be due to reduced follicle numbers or due to the inability to retain some of the hairs of the coat over time" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "partial hair loss" RELATED []
 synonym: "sparse fur" EXACT []
 synonym: "thin coat" EXACT []
 synonym: "thin hair" RELATED []
@@ -2420,16 +2418,20 @@ is_a: MP:0002073 ! abnormal hair growth
 
 [Term]
 id: MP:0000418
-name: patchy hair
-def: "uneven spots of hair growth on the body" [J:26975]
+name: focal hair loss
+alt_id: MP:0006368
+def: "focal absence of hair growth in areas where hair is normally expected; in rodents, often appearing behind the ears and on the tail, resulting visible patches of skin and uneven spots of hair growth on the body" [J:26975]
+synonym: "localized bare skin" RELATED []
+synonym: "localized hair loss" RELATED []
 synonym: "patchy fur" EXACT []
-is_a: MP:0001510 ! abnormal coat appearance
+synonym: "patchy hair" EXACT []
+is_a: MP:0002073 ! abnormal hair growth
 
 [Term]
 id: MP:0000419
 name: rough hair
 def: "greasy, matted appearance of the fur" [J:31155]
-is_a: MP:0002074 ! abnormal hair texture
+is_obsolete: true
 
 [Term]
 id: MP:0000420
@@ -2455,7 +2457,7 @@ is_a: MP:0002073 ! abnormal hair growth
 id: MP:0000423
 name: delayed hair regrowth
 def: "slow initiation and asynchrony of the hair growth cycle (anagen) after catagen phase" [PMID:10742104]
-is_a: MP:0002073 ! abnormal hair growth
+is_a: MP:0000427 ! abnormal hair cycle
 
 [Term]
 id: MP:0000424
@@ -2566,38 +2568,36 @@ id: MP:0000438
 name: abnormal cranium morphology
 def: "any structural anomaly of the bones of the head" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "abnormal cranium" EXACT []
-synonym: "abnormal skull" EXACT []
-synonym: "abnormal skull morphology" EXACT []
+synonym: "abnormal skull" RELATED []
+synonym: "abnormal skull morphology" RELATED []
 synonym: "cranial abnormalities" EXACT []
-synonym: "skull abnormalities" EXACT []
+synonym: "skull abnormalities" RELATED []
 xref: MA:0000316
 is_a: MP:0002116 ! abnormal craniofacial bone morphology
 
 [Term]
 id: MP:0000439
-name: enlarged skull
-def: "increased size of the skull" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-synonym: "increased skull size" EXACT []
+name: enlarged cranium
+def: "increased size of the cranium" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "enlarged skull" RELATED []
+synonym: "increased cranium size" EXACT []
+synonym: "increased skull size" RELATED []
 is_a: MP:0010031 ! abnormal cranium size
 
 [Term]
 id: MP:0000440
-name: domed skull
-def: "increased curvature to the hemispherical shape of the skull" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+name: domed cranium
+def: "increased curvature to the hemispherical shape of the upper cranial case" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "dome-shaped skull" EXACT []
+synonym: "domed skull" RELATED []
 is_a: MP:0000438 ! abnormal cranium morphology
 
 [Term]
 id: MP:0000441
-name: increased skull width
-def: "having an increased side-to-side distance of the skull" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-synonym: "wide skull" EXACT []
-is_a: MP:0010031 ! abnormal cranium size
-
-[Term]
-id: MP:0000442
-name: longitudinally short skull
-def: "decrease in the rostral-caudal distance of the skull" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+name: increased cranium width
+def: "having an increased side-to-side, or lateral distance of the cranium" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased skull width" RELATED []
+synonym: "wide skull" RELATED []
 is_a: MP:0010031 ! abnormal cranium size
 
 [Term]
@@ -4763,8 +4763,9 @@ is_a: MP:0000776 ! abnormal inferior colliculus
 
 [Term]
 id: MP:0000778
-name: abnormal tract
+name: abnormal nervous system tract
 def: "anomaly in the structure of any bundle of myelinated nerve fibers following a defined path through the brain and/or spinal cord" [MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
+synonym: "abnormal tract" BROAD []
 is_a: MP:0003632 ! abnormal nervous system morphology
 
 [Term]
@@ -5906,7 +5907,7 @@ id: MP:0000941
 name: failure of motor neuron target finding
 def: "failure of an innervating motor neuron to stop at target site and form terminal arbors" [J:47439]
 synonym: "failure of motoneuron target finding" EXACT []
-is_a: MP:0000937 ! abnormal motor neuron morphology
+is_obsolete: true
 
 [Term]
 id: MP:0000942
@@ -5914,8 +5915,7 @@ name: excessive motor neuron axon growth
 def: "innervating motor neuron projections grow past typical endplate target and extend to myotendenous ends of muscle" [J:33132]
 synonym: "excessive motoneuron axon growth" EXACT []
 synonym: "excessive motor neuron growth" EXACT []
-is_a: MP:0000937 ! abnormal motor neuron morphology
-is_a: MP:0003651 ! abnormal axon outgrowth
+is_obsolete: true
 
 [Term]
 id: MP:0000944
@@ -6081,12 +6081,12 @@ is_a: MP:0008948 ! decreased neuron number
 id: MP:0000967
 name: abnormal sensory neuron projections
 def: "misprojection or failure to bundle sensory axons to an effector tissue or to the spinal cord" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:60159]
-is_a: MP:0000968 ! abnormal sensory neuron innervation
+is_a: MP:0000968 ! abnormal sensory neuron innervation pattern
 
 [Term]
 id: MP:0000968
-name: abnormal sensory neuron innervation
-def: "defective or incomplete supply of nerve fibers to sensory termini or to spinal cord" [J:31622]
+name: abnormal sensory neuron innervation pattern
+def: "any changes in the placement, morphology or number of nerve fibers to sensory termini or to spinal cord" [J:31622]
 is_a: MP:0000965 ! abnormal sensory neuron morphology
 is_a: MP:0002184 ! abnormal innervation
 
@@ -6336,7 +6336,6 @@ name: abnormal taste bud morphology
 def: "any structural anomaly of the small sensory organs located in the tongue that contain gustatory receptor cells, basal cells, and supporting cells" [MESH:A03.556.500.885.779, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 synonym: "abnormal taste buds" EXACT []
 synonym: "taste bud dysplasia" EXACT []
-is_a: MP:0001001 ! abnormal chemoreceptor morphology
 is_a: MP:0005500 ! abnormal gustatory system morphology
 
 [Term]
@@ -6725,7 +6724,6 @@ synonym: "abnormal neuromuscular junction" EXACT []
 synonym: "abnormal NMJ" EXACT []
 synonym: "neuromuscular synapse abnormalities" EXACT []
 is_a: MP:0001051 ! abnormal somatic motor system morphology
-is_a: MP:0002184 ! abnormal innervation
 is_a: MP:0009538 ! abnormal synapse morphology
 
 [Term]
@@ -8085,7 +8083,7 @@ is_a: MP:0001264 ! increased body size
 [Term]
 id: MP:0001261
 name: obese
-def: "excessively fat; an increase in fat in the subcutaneous connective tissue" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:cml "Cathleen M. Lutz, Mouse Genome Informatics Curator"]
+def: "a status with body weight that is grossly above the average, acceptable or desirable weight, usually due to accumulation of excess fat tissue in the body" [HP:0001513, MESH:D009765]
 synonym: "obesity" EXACT []
 is_a: MP:0001260 ! increased body weight
 
@@ -9517,7 +9515,7 @@ is_obsolete: true
 [Term]
 id: MP:0001510
 name: abnormal coat appearance
-def: "coat that looks different from the usual state" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "anomaly in the visual apsect of the coat or hair" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "abnormal appearance of the fur" EXACT []
 is_a: MP:0000367 ! abnormal coat/ hair morphology
 
@@ -12640,7 +12638,7 @@ def: "absence or reduced amount of hair or abnormal onset of hair growth cycle o
 synonym: "coat: hair growth defects" EXACT []
 synonym: "hair growth abnormalities" EXACT []
 xref: MGI:2173539
-is_a: MP:0000367 ! abnormal coat/ hair morphology
+is_a: MP:0001510 ! abnormal coat appearance
 
 [Term]
 id: MP:0002074
@@ -12650,19 +12648,19 @@ def: "irregular or unusual appearance of the structure of the hair" [MGI:csmith 
 synonym: "coat: hair texture defects" EXACT []
 synonym: "hair texture abnormalities" EXACT []
 xref: MGI:2173540
-is_a: MP:0000367 ! abnormal coat/ hair morphology
+is_a: MP:0001510 ! abnormal coat appearance
 
 [Term]
 id: MP:0002075
 name: abnormal coat/hair pigmentation
 alt_id: MP:0000368
-def: "irregular or unusual pigmentation of the hair in relation to control animals" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+def: "irregular or unusual pigmentation of the hair" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "abnormal coat color" EXACT []
 synonym: "abnormal hair pigmentation" EXACT []
 synonym: "coat: color anomalies" EXACT []
 xref: MGI:2173541
-is_a: MP:0000367 ! abnormal coat/ hair morphology
 is_a: MP:0001186 ! pigmentation phenotype
+is_a: MP:0001510 ! abnormal coat appearance
 
 [Term]
 id: MP:0002076
@@ -13670,7 +13668,7 @@ name: abnormal brain commissure morphology
 def: "any structural anomaly of any of the nerve fiber tracts that span the longitudinal fissure between the cerebral and/or cerebellar hemispheres of the brain" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "abnormal brain commissure" EXACT []
 synonym: "abnormal commissure" BROAD []
-is_a: MP:0000778 ! abnormal tract
+is_a: MP:0000778 ! abnormal nervous system tract
 is_a: MP:0008026 ! abnormal brain white matter morphology
 
 [Term]
@@ -14695,6 +14693,7 @@ is_a: MP:0002339 ! abnormal lymph node morphology
 id: MP:0002349
 name: abnormal afferent lymphatic vessel morphology
 def: "structural anomaly in the lymphatic tube entering the lymph node" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+xref: MA:0000748
 is_a: MP:0001879 ! abnormal lymphatic vessel morphology
 is_a: MP:0002339 ! abnormal lymph node morphology
 
@@ -14702,6 +14701,7 @@ is_a: MP:0002339 ! abnormal lymph node morphology
 id: MP:0002350
 name: abnormal efferent lymphatic vessel morphology
 def: "structural anomaly in the lymphatic tube exiting the lymph node" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+xref: MA:0000749
 is_a: MP:0001879 ! abnormal lymphatic vessel morphology
 is_a: MP:0002339 ! abnormal lymph node morphology
 
@@ -15326,7 +15326,7 @@ synonym: "abnormal TH1 cell" EXACT []
 synonym: "T helper 1 abnormalities" EXACT []
 synonym: "TH1 abnormalities" EXACT []
 synonym: "Th1 abnormalities" EXACT []
-is_a: MP:0002432 ! abnormal CD4-positive T cell morphology
+is_a: MP:0010183 ! abnormal CD4-positive helper T cell morphology
 
 [Term]
 id: MP:0002434
@@ -15341,7 +15341,7 @@ synonym: "abnormal TH2 cell" EXACT []
 synonym: "T helper 2 abnormalities" EXACT []
 synonym: "TH2 abnormalities" EXACT []
 synonym: "Th2 abnormalities" EXACT []
-is_a: MP:0002432 ! abnormal CD4-positive T cell morphology
+is_a: MP:0010183 ! abnormal CD4-positive helper T cell morphology
 
 [Term]
 id: MP:0002435
@@ -18097,7 +18097,7 @@ def: "caliculi in the gallbladder or a bile duct; chemical composition of choles
 synonym: "biliary caliculi" EXACT []
 synonym: "cholelithiasis" EXACT []
 synonym: "gall stone" EXACT []
-is_a: MP:0005085 ! abnormal gall bladder physiology
+is_a: MP:0005085 ! abnormal gallbladder physiology
 
 [Term]
 id: MP:0002831
@@ -18428,7 +18428,7 @@ id: MP:0002878
 name: abnormal corticospinal tract morphology
 def: "any structural anomaly of the corticospinal fibers that arise from the pyramidal cells within the cerebral cortex layer V of the precentral motor area, the premotor area and the postcentral gyrus, then descend into and through the medulla to form the lateral corticospinal tract and the anterior corticospinal tract" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "abnormal pyramidal tract morphology" EXACT []
-is_a: MP:0000778 ! abnormal tract
+is_a: MP:0000778 ! abnormal nervous system tract
 
 [Term]
 id: MP:0002879
@@ -21003,18 +21003,19 @@ is_a: MP:0002106 ! abnormal muscle physiology
 
 [Term]
 id: MP:0003250
-name: absent gall bladder
+name: absent gallbladder
 def: "absence of the organ which serves as a storage reservoir for bile" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", NCBI:matt "Matthew Mailman"]
 synonym: "absent cholecyst" EXACT []
-synonym: "absent gallbladder" EXACT []
-is_a: MP:0005084 ! abnormal gall bladder morphology
+synonym: "absent gall bladder" EXACT []
+is_a: MP:0005084 ! abnormal gallbladder morphology
 
 [Term]
 id: MP:0003251
-name: gall bladder inflammation
+name: gallbladder inflammation
 def: "local accumulation of fluid, plasma proteins, and leukocytes in the gall bladder" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", NCBI:matt "Matthew Mailman"]
+synonym: "gall bladder inflammation" EXACT []
 is_a: MP:0001846 ! increased inflammatory response
-is_a: MP:0005085 ! abnormal gall bladder physiology
+is_a: MP:0005085 ! abnormal gallbladder physiology
 
 [Term]
 id: MP:0003252
@@ -22258,7 +22259,7 @@ is_a: MP:0005351 ! decreased susceptibility to autoimmune disorder
 id: MP:0003437
 name: abnormal carotid body morphology
 def: "any structural anomaly of a small epithelioid structure consisting of a small cluster of chemoreceptive and supporting cells located near the bifurcation of the common carotid artery that serves as a chemoreceptive organ that senses the pH, carbon dioxide, and oxygen concentrations in the blood and plays a crucial role in their homeostatic control" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:A08.800.550.700.120.600.150, MGI:monikat "Monika Tomczuk, Mouse Genome Informatics Curator"]
-is_a: MP:0001001 ! abnormal chemoreceptor morphology
+is_a: MP:0004181 ! abnormal carotid artery morphology
 
 [Term]
 id: MP:0003438
@@ -23799,11 +23800,12 @@ is_a: MP:0001545 ! abnormal hematopoietic system physiology
 
 [Term]
 id: MP:0003657
-name: abnormal erythrocyte lysis
+name: abnormal erythrocyte osmotic lysis
 def: "increase or decrease in the ability of RBCs to withstand changes in osmolarity" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
+synonym: "abnormal erythrocyte lysis" BROAD []
 synonym: "abnormal erythroid stress" EXACT []
 synonym: "erythrocyte fragility" EXACT []
-is_a: MP:0003656 ! abnormal erythrocyte physiology
+is_a: MP:0010163 ! hemolysis
 
 [Term]
 id: MP:0003658
@@ -24846,12 +24848,12 @@ is_a: MP:0005592 ! abnormal vascular smooth muscle morphology
 
 [Term]
 id: MP:0003815
-name: nude
-def: "having no hair at some time during or throughout lifespan, generally referring to primary genetic hairlessness" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
-synonym: "absent hair" EXACT []
-synonym: "bald" EXACT []
-synonym: "hairless" EXACT []
+name: hairless
+def: "having no hair at any time throughout lifespan, generally referring to primary genetic hairlessness" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+synonym: "absent hair" BROAD []
+synonym: "bald" RELATED []
 synonym: "naked" RELATED []
+synonym: "nude" EXACT []
 is_a: MP:0001510 ! abnormal coat appearance
 is_a: MP:0002073 ! abnormal hair growth
 
@@ -26345,12 +26347,13 @@ is_a: MP:0004036 ! abnormal muscle relaxation
 [Term]
 id: MP:0004038
 name: lymphangiectasis
+alt_id: MP:0010201
 def: "dilation of the lymphatic vessels, the basic process that may result in the formation of a lymphangioma" [J:71816, MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
 synonym: "dilated lymphatic vessels" EXACT []
 synonym: "lymphatic vessel dilation" EXACT []
 synonym: "lymphectasia" EXACT []
 synonym: "telangiectasia lymphatica" EXACT []
-is_a: MP:0001879 ! abnormal lymphatic vessel morphology
+is_a: MP:0010200 ! enlarged lymphatic vessel
 
 [Term]
 id: MP:0004039
@@ -26783,14 +26786,13 @@ is_a: MP:0000886 ! abnormal cerebellar granule layer
 id: MP:0004100
 name: abnormal spinal cord interneuron morphology
 def: "any structural anomaly of neurons that exclusively interact with other neurons in the spinal cord" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-is_a: MP:0006004 ! abnormal interneuron morphology
 is_a: MP:0008503 ! abnormal spinal cord grey matter morphology
 
 [Term]
 id: MP:0004101
 name: abnormal brain interneuron morphology
 def: "any structural anomaly of neurons that exclusively interact with other neurons in the brain; this includes most brain neuronal cell types" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-is_a: MP:0006004 ! abnormal interneuron morphology
+is_a: MP:0002152 ! abnormal brain morphology
 
 [Term]
 id: MP:0004102
@@ -26818,7 +26820,7 @@ is_a: MP:0001312 ! abnormal cornea morphology
 id: MP:0004106
 name: lymphatic vessel hyperplasia
 def: "overdevelopment or increased size, usually due an increased number of cells in lymphatic vessels" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
-is_a: MP:0001879 ! abnormal lymphatic vessel morphology
+is_a: MP:0010200 ! enlarged lymphatic vessel
 
 [Term]
 id: MP:0004107
@@ -27760,9 +27762,10 @@ is_a: MP:0005461 ! abnormal dendritic cell morphology
 
 [Term]
 id: MP:0004243
-name: abnormal motor nerve terminal sprouting
+name: abnormal motor nerve collateral sprouting
 def: "aberrant response of a motor neuron to form new neuritic processes (sprouts) that emerge from the nodes of Ranvier or terminal arborizations in response to nerve injury (such as denervation), application of nerve toxin, or muscle inactivity (usually due to disease)" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-is_a: MP:0000940 ! abnormal motor neuron innervation
+synonym: "abnormal motor nerve terminal sprouting" NARROW []
+is_a: MP:0004811 ! abnormal neuron physiology
 
 [Term]
 id: MP:0004244
@@ -27919,7 +27922,7 @@ is_a: MP:0001711 ! abnormal placenta morphology
 id: MP:0004267
 name: abnormal optic tract morphology
 def: "any structural anomaly of the band of optic nerve fibers running from the optic chiasma to the lateral geniculate body and midbrain" [MESH:National Library of Medicine_Medical Subject Headings]
-is_a: MP:0000778 ! abnormal tract
+is_a: MP:0000778 ! abnormal nervous system tract
 is_a: MP:0008026 ! abnormal brain white matter morphology
 
 [Term]
@@ -30521,16 +30524,16 @@ is_a: MP:0000801 ! abnormal temporal lobe morphology
 
 [Term]
 id: MP:0004632
-name: abnormal cochlear OHC efferent innervation
+name: abnormal cochlear OHC efferent innervation pattern
 def: "any changes in the morphology or number of efferent terminals, occurring as clusters, in the cochlear OHC region; normally, medial olivocochlear neurons, which are primarily found in rostral and ventral periolivary regions, project mainly to the contralateral cochlea, and terminate directly on OHCs" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
-is_a: MP:0000968 ! abnormal sensory neuron innervation
+is_a: MP:0000968 ! abnormal sensory neuron innervation pattern
 is_a: MP:0004399 ! abnormal cochlear outer hair cell morphology
 
 [Term]
 id: MP:0004633
-name: abnormal cochlear IHC efferent innervation
-def: "any changes in the morphology of the normally dense plexus of efferent terminals that contact radial fibers of the spiral ganglion below cochlear IHCs or of the sparser plexus of terminals positioned around IHC somata; normally, lateral olivocochlear neurons, which are found in and/or around the lateral superior olive, project mainly to the ipsilateral cochlea and terminate mostly on dendritic fibers below IHCs " [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
-is_a: MP:0000968 ! abnormal sensory neuron innervation
+name: abnormal cochlear IHC efferent innervation pattern
+def: "any changes in the morphology of the normally dense plexus of efferent terminals that contact radial fibers of the spiral ganglion below cochlear IHCs or of the sparser plexus of terminals positioned around IHC somata; normally, lateral olivocochlear neurons, which are found in and/or around the lateral superior olive, project mainly to the ipsilateral cochlea and terminate mostly on dendritic fibers below IHCs" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+is_a: MP:0000968 ! abnormal sensory neuron innervation pattern
 is_a: MP:0004393 ! abnormal cochlear inner hair cell morphology
 
 [Term]
@@ -31346,16 +31349,16 @@ is_a: MP:0004743 ! abnormal vestibular evoked myogenic potential
 
 [Term]
 id: MP:0004746
-name: abnormal cochlear IHC afferent innervation
-def: "any changes in the morphology or number of afferent terminals and/or their synapses in the cochlear IHC region" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
-is_a: MP:0000968 ! abnormal sensory neuron innervation
+name: abnormal cochlear IHC afferent innervation pattern
+def: "any changes in the placement, morphology or number of afferent terminals and/or their synapses in the cochlear IHC region" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+is_a: MP:0000968 ! abnormal sensory neuron innervation pattern
 is_a: MP:0004393 ! abnormal cochlear inner hair cell morphology
 
 [Term]
 id: MP:0004747
-name: abnormal cochlear OHC afferent innervation
-def: "any changes in the morphology or number of afferent terminals and/or their synapses in the cochlear OHC region" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
-is_a: MP:0000968 ! abnormal sensory neuron innervation
+name: abnormal cochlear OHC afferent innervation pattern
+def: "any changes in the morphology, placement or number of afferent terminals and/or their synapses in the cochlear OHC region" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+is_a: MP:0000968 ! abnormal sensory neuron innervation pattern
 is_a: MP:0004399 ! abnormal cochlear outer hair cell morphology
 
 [Term]
@@ -31551,13 +31554,13 @@ id: MP:0004772
 name: abnormal bile secretion
 def: "any anomaly in the quantity or rate of bile secreted through the bile ducts in a given length of time" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 is_a: MP:0003252 ! abnormal bile duct physiology
-is_a: MP:0005085 ! abnormal gall bladder physiology
+is_a: MP:0005085 ! abnormal gallbladder physiology
 
 [Term]
 id: MP:0004773
 name: abnormal bile composition
 def: "any alteration in the chemical make up of the greenish-yellow fluid secreted by the liver; normally contains bile acids and salts such as sodium glycocholate and sodium taurocholate as well as cholesterol, biliverdin and bilirubin, mucus, fat, lecithin, and cells and cellular debris" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-is_a: MP:0005085 ! abnormal gall bladder physiology
+is_a: MP:0005085 ! abnormal gallbladder physiology
 
 [Term]
 id: MP:0004774
@@ -32101,6 +32104,8 @@ is_a: MP:0000490 ! abnormal crypts of Lieberkuhn morphology
 id: MP:0004843
 name: abnormal Paneth cell morphology
 def: "any structural anomaly of the large secretory cells containing coarse granules found at the base of the crypts of Lieberkuhn in the small intestine" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
+synonym: "abnormal Davidoff cell morphology" EXACT []
+synonym: "abnormal Paneth granule cell morphology" EXACT []
 is_a: MP:0004841 ! abnormal small intestine crypts of Lieberkuhn morphology
 
 [Term]
@@ -33883,7 +33888,7 @@ is_a: MP:0002138 ! abnormal liver/biliary system morphology
 
 [Term]
 id: MP:0005084
-name: abnormal gall bladder morphology
+name: abnormal gallbladder morphology
 def: "any structural anomaly of the organ which serves as a storage reservoir for bile" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:A03.159.439]
 synonym: "abnormal cholecyst morphology" RELATED []
 synonym: "abnormal gall bladder" EXACT []
@@ -33894,9 +33899,10 @@ is_a: MP:0005083 ! abnormal biliary tract morphology
 
 [Term]
 id: MP:0005085
-name: abnormal gall bladder physiology
+name: abnormal gallbladder physiology
 def: "anomalous action or function of the organ that stores and concentrates bile" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "abnormal gall bladder function" EXACT []
+synonym: "abnormal gall bladder physiology" EXACT []
 synonym: "abnormal gallbladder function" EXACT []
 is_a: MP:0002139 ! abnormal liver/biliary system physiology
 
@@ -34687,7 +34693,6 @@ def: "fur or hair is devoid of coloration and appears white" [J:83500, MGI:cwg "
 synonym: "absent fur pigmentation" RELATED []
 synonym: "absent hair pigmentation" EXACT []
 synonym: "lack of coat pigmentation" EXACT []
-is_a: MP:0000367 ! abnormal coat/ hair morphology
 is_a: MP:0002075 ! abnormal coat/hair pigmentation
 
 [Term]
@@ -35239,7 +35244,6 @@ synonym: "abnormal amacrine cells" EXACT []
 synonym: "abnormal amacrine neuron" EXACT []
 is_a: MP:0000965 ! abnormal sensory neuron morphology
 is_a: MP:0001325 ! abnormal retina morphology
-is_a: MP:0006004 ! abnormal interneuron morphology
 
 [Term]
 id: MP:0005241
@@ -36051,10 +36055,12 @@ is_a: MP:0002425 ! altered susceptibility to autoimmune disorder
 
 [Term]
 id: MP:0005352
-name: small skull
-def: "less than the normal size of the cranium" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
-synonym: "decreased skull size" EXACT []
-synonym: "reduced skull size" EXACT []
+name: small cranium
+def: "reduced size of the cranium" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+synonym: "decreased cranium size" EXACT []
+synonym: "decreased skull size" RELATED []
+synonym: "reduced cranium size" EXACT []
+synonym: "reduced skull size" RELATED []
 is_a: MP:0010031 ! abnormal cranium size
 
 [Term]
@@ -36726,15 +36732,16 @@ is_a: MP:0005452 ! abnormal adipose tissue amount
 
 [Term]
 id: MP:0005455
-name: increased weight gain
-def: "greater increase in body weight over existing weight when compared to the average increase in weight on the same diet, with equal energy (calorie) intake" [J:42702, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
-is_a: MP:0005456 ! weight gain
+name: increased susceptibility to weight gain
+def: "greater increase in body weight over time when compared to the average increase in weight on the same diet, with equal energy (calorie) intake" [J:42702, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+synonym: "increased weight gain" RELATED []
+is_a: MP:0001260 ! increased body weight
 
 [Term]
 id: MP:0005456
 name: weight gain
 def: "increase in weight over existing weight" [MESH:C23.888.144.243.926]
-is_a: MP:0001260 ! increased body weight
+is_obsolete: true
 
 [Term]
 id: MP:0005457
@@ -38367,11 +38374,11 @@ is_a: MP:0006126 ! abnormal outflow tract development
 
 [Term]
 id: MP:0005675
-name: small gall bladder
+name: small gallbladder
 def: "reduced size of the gall bladder, the organ that serves as a storage reservoir for bile" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
 synonym: "small cholecyst" EXACT []
-synonym: "small gallbladder" EXACT []
-is_a: MP:0005084 ! abnormal gall bladder morphology
+synonym: "small gall bladder" EXACT []
+is_a: MP:0005084 ! abnormal gallbladder morphology
 
 [Term]
 id: MP:0006000
@@ -38401,7 +38408,7 @@ is_a: MP:0006001 ! abnormal intestinal transit time
 id: MP:0006004
 name: abnormal interneuron morphology
 def: "any structural anomaly of neurons that exclusively interact with other neurons" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
-is_a: MP:0002882 ! abnormal neuron morphology
+is_obsolete: true
 
 [Term]
 id: MP:0006005
@@ -38864,7 +38871,6 @@ name: abnormal horizontal cell morphology
 def: "any structural anomaly of the laterally interconnecting neurons in the outer plexiform layer of the retina that connect rods of one part of the retina with cones in another part of the retina" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 is_a: MP:0000965 ! abnormal sensory neuron morphology
 is_a: MP:0001325 ! abnormal retina morphology
-is_a: MP:0006004 ! abnormal interneuron morphology
 
 [Term]
 id: MP:0006069
@@ -38895,8 +38901,8 @@ is_a: MP:0005253 ! abnormal eye physiology
 id: MP:0006073
 name: abnormal retinal bipolar cell morphology
 def: "any structural anomaly of the cells that transmit signals from the photoreceptors to retinal amacrine and ganglion cells" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", PMID:15363390]
+is_a: MP:0000965 ! abnormal sensory neuron morphology
 is_a: MP:0001325 ! abnormal retina morphology
-is_a: MP:0006004 ! abnormal interneuron morphology
 
 [Term]
 id: MP:0006074
@@ -40085,8 +40091,9 @@ is_a: MP:0006256 ! abnormal gustatory papillae
 
 [Term]
 id: MP:0006260
-name: abnormal gustatory papillae taste buds
+name: abnormal gustatory papillae taste bud morphology
 def: "any structural anomaly of the taste buds located on the gustatory papillae, which includes the fungiform, foliate, and circumvallate papillae" [J:55127, MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
+synonym: "abnormal gustatory papillae taste buds" RELATED []
 is_a: MP:0001002 ! abnormal taste bud morphology
 
 [Term]
@@ -40829,14 +40836,6 @@ id: MP:0006367
 name: absent sweat gland
 def: "absence of any of the coil glands of the skin that secrete sweat" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
 is_a: MP:0000674 ! abnormal sweat gland morphology
-
-[Term]
-id: MP:0006368
-name: focal hair loss
-def: "focal absence of hair growth in areas where hair is normally expected; in rodents, often appearing behind the ears and on the tail" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
-synonym: "localized bare skin" RELATED []
-synonym: "localized hair loss" RELATED []
-is_a: MP:0002073 ! abnormal hair growth
 
 [Term]
 id: MP:0006369
@@ -43282,7 +43281,7 @@ is_a: MP:0008220 ! abnormal ventral commissure morphology
 id: MP:0008232
 name: abnormal cingulum morphology
 def: "any structural anomaly of the white matter fiber bundle that projects from the cingulate gyrus to the entorhinal cortex in the brain" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-is_a: MP:0000778 ! abnormal tract
+is_a: MP:0000778 ! abnormal nervous system tract
 is_a: MP:0008026 ! abnormal brain white matter morphology
 
 [Term]
@@ -43527,11 +43526,13 @@ is_a: MP:0000807 ! abnormal hippocampus morphology
 [Term]
 id: MP:0008263
 name: abnormal hippocampus CA1 region morphology
+def: "any structural anomaly of a cytoarchitectural subregion of the Ammon's horn region of the hippocampal formation consisting primarily of pyramidal neurons; the pyramidal neurons of CA1 receive projections from pyramidal neurons of CA3 via the Schaffer collaterals and send outputs to the entorhinal cortex and to the subiculum" [NLX:birnlex_1197 "NeuroLex.org"]
 synonym: "abnormal CA1 field morphology" EXACT []
 synonym: "abnormal CA1 field of Ammon's horn" EXACT []
 synonym: "abnormal Cornu Ammonis 1" EXACT []
 synonym: "abnormal field CA1 of hippocampus" EXACT []
 synonym: "abnormal regio superior of the hippocampus" EXACT []
+synonym: "abnormal region I of hippocampus proper" EXACT []
 is_a: MP:0000815 ! abnormal Ammon gyrus morphology
 is_a: MP:0008262 ! abnormal hippocampus region morphology
 
@@ -43548,10 +43549,12 @@ is_a: MP:0008263 ! abnormal hippocampus CA1 region morphology
 [Term]
 id: MP:0008265
 name: abnormal hippocampus CA2 region morphology
+def: "any structural anomaly of the smallest cytoarchitectural subregion of the Ammon's horn region of the hippocampal formation, located between CA3 and CA1, comprised of pyramidal neurons receiving both Schaffer collateral and mossy fiber input" [NLX:birnlex_1362 "NeurLex.org"]
 synonym: "abnormal CA2 field morphology" EXACT []
 synonym: "abnormal CA2 field of Ammon's horn" EXACT []
 synonym: "abnormal Cornu Ammonis 2" EXACT []
 synonym: "abnormal field CA2 of hippocampus" EXACT []
+synonym: "abnormal region II of hippocampus proper" EXACT []
 is_a: MP:0000815 ! abnormal Ammon gyrus morphology
 is_a: MP:0008262 ! abnormal hippocampus region morphology
 
@@ -43586,6 +43589,7 @@ is_a: MP:0008267 ! abnormal hippocampus CA3 region morphology
 [Term]
 id: MP:0008269
 name: abnormal hippocampus CA4 region morphology
+def: "any structural anomaly of the region of the hippocampal formation that is comprised of mossy cells that primarily receive inputs from granule cells in the dentate gyrus in the form of mossy fibers and from pyramidal cells in CA3, and send outputs into the dentate gyrus" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "abnormal dentate gyrus hilus morphology" EXACT []
 synonym: "abnormal field CA4 of hippocampal formation" EXACT []
 synonym: "abnormal hilus of dentate gyrus morphology" EXACT []
@@ -45800,15 +45804,21 @@ is_a: MP:0008123 ! abnormal plasmacytoid dendritic cell number
 
 [Term]
 id: MP:0008525
-name: decreased skull height
-def: "decrease in the distance between the cranial base and the upper domelike portion of the skull" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+name: decreased cranium height
+alt_id: MP:0000442
+def: "decrease in the rostral-caudal distance between the cranial base and the upper domelike portion of the skull" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "decreased skull height" RELATED []
+synonym: "longitudinally short skull" RELATED []
+synonym: "reduced cranium height" EXACT []
 is_a: MP:0010031 ! abnormal cranium size
 
 [Term]
 id: MP:0008526
-name: decreased skull width
-def: "having a decreased side-to-side distance of the skull" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-synonym: "reduced skull width" EXACT []
+name: decreased cranium width
+def: "having a decreased side-to-side, or lateral distance of the cranium" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "decreased skull width" RELATED []
+synonym: "reduced cranium width" EXACT []
+synonym: "reduced skull width" RELATED []
 is_a: MP:0010031 ! abnormal cranium size
 
 [Term]
@@ -48221,8 +48231,8 @@ is_a: MP:0005306 ! abnormal phalanx morphology
 
 [Term]
 id: MP:0008731
-name: abnormal hair shaft melanin granules
-def: "any amount or distribution anomaly of pigment polymers in the hair shaft" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+name: abnormal hair shaft melanin granule morphology
+def: "any structural anomaly of pigment polymers in the hair shaft" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
 is_a: MP:0002075 ! abnormal coat/hair pigmentation
 is_a: MP:0003809 ! abnormal hair shaft morphology
 is_a: MP:0005075 ! abnormal melanosome morphology
@@ -48231,13 +48241,13 @@ is_a: MP:0005075 ! abnormal melanosome morphology
 id: MP:0008732
 name: reduced hair shaft melanin granule number
 def: "the number of pigment polymers in the hair shaft is less than normal" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
-is_a: MP:0008731 ! abnormal hair shaft melanin granules
+is_a: MP:0008731 ! abnormal hair shaft melanin granule morphology
 
 [Term]
 id: MP:0008733
 name: abnormal hair shaft melanin granule distribution
 def: "disruption in the regular arrangement of pigment polymers in the hair shaft" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
-is_a: MP:0008731 ! abnormal hair shaft melanin granules
+is_a: MP:0008731 ! abnormal hair shaft melanin granule morphology
 
 [Term]
 id: MP:0008734
@@ -48629,7 +48639,7 @@ is_a: MP:0008775 ! abnormal heart ventricular pressure
 
 [Term]
 id: MP:0008778
-name: lymphangiogenesis
+name: abnormal lymphangiogenesis
 def: "any anomaly in the formation of lymphatic vessels from pre-existing lymphatic vessels" [MESH:G07.574.500.325.377.500]
 comment: Do not use for the initial specification of lymphatic vessels in early development; use for the remodeling of pre-existing lymphatic vessels. This term is similar to angiogenesis for blood vessel remodeling.
 is_a: MP:0001879 ! abnormal lymphatic vessel morphology
@@ -52715,7 +52725,7 @@ is_a: MP:0009270 ! abnormal guard hair length
 id: MP:0009273
 name: abnormal hair shaft melanin granule shape
 def: "the form of pigment polymers in the hair shaft differs compared to controls" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
-is_a: MP:0008731 ! abnormal hair shaft melanin granules
+is_a: MP:0008731 ! abnormal hair shaft melanin granule morphology
 
 [Term]
 id: MP:0009274
@@ -52790,8 +52800,8 @@ is_a: MP:0005335 ! abnormal gonadal fat pad morphology
 
 [Term]
 id: MP:0009284
-name: abnormal sympathetic neuron innervation
-def: "defective or incomplete supply of nerve fibers to sympathetic termini" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+name: abnormal sympathetic neuron innervation pattern
+def: "any changes in the placement, morphology or number of nerve fibers to sympathetic termini" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 is_a: MP:0001025 ! abnormal sympathetic neuron morphology
 is_a: MP:0002184 ! abnormal innervation
 
@@ -53242,21 +53252,21 @@ is_a: MP:0009340 ! abnormal splenocyte apoptosis
 
 [Term]
 id: MP:0009342
-name: enlarged gall bladder
+name: enlarged gallbladder
 def: "increased size of the gall bladder, the organ that serves as a storage reservoir for bile" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
 synonym: "enlarged cholecyst" EXACT []
-synonym: "enlarged gallbladder" EXACT []
-is_a: MP:0005084 ! abnormal gall bladder morphology
+synonym: "enlarged gall bladder" EXACT []
+is_a: MP:0005084 ! abnormal gallbladder morphology
 
 [Term]
 id: MP:0009343
-name: dilated gall bladder
+name: dilated gallbladder
 def: "abnormal distention of the gall bladder due to accumulation of fluid or bile" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
 synonym: "dilated cholecyst" RELATED []
-synonym: "dilated gallbladder" EXACT []
+synonym: "dilated gall bladder" EXACT []
 synonym: "distended gall bladder" EXACT []
 synonym: "gall bladder dilation" EXACT []
-is_a: MP:0005084 ! abnormal gall bladder morphology
+is_a: MP:0005084 ! abnormal gallbladder morphology
 
 [Term]
 id: MP:0009344
@@ -54148,11 +54158,12 @@ is_a: MP:0003920 ! abnormal heart right ventricle morphology
 
 [Term]
 id: MP:0009465
-name: abnormal gall bladder infundibulum morphology
+name: abnormal gallbladder infundibulum morphology
 def: "any structural anomaly of the tapering portion of the gall bladder that narrows to form the neck and cystic duct" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "abnormal gall bladder infundibulum morphology" EXACT []
 synonym: "abnormal infundibulum of gallbladder " EXACT []
 synonym: "abnormal infundibulum vesicae biliaris" EXACT []
-is_a: MP:0005084 ! abnormal gall bladder morphology
+is_a: MP:0005084 ! abnormal gallbladder morphology
 
 [Term]
 id: MP:0009466
@@ -54360,10 +54371,10 @@ is_a: MP:0003922 ! abnormal heart right atrium morphology
 
 [Term]
 id: MP:0009492
-name: abnormal gall bladder epithelium morphology
+name: abnormal gallbladder epithelium morphology
 def: "any structural anomaly of the simple columnar epithelial lining of the gall bladder" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-synonym: "abnormal gallbladder epithelium morphology" EXACT []
-is_a: MP:0005084 ! abnormal gall bladder morphology
+synonym: "abnormal gall bladder epithelium morphology" EXACT []
+is_a: MP:0005084 ! abnormal gallbladder morphology
 
 [Term]
 id: MP:0009493
@@ -54371,7 +54382,7 @@ name: abnormal cystic duct morphology
 def: "any structural anomaly of the tubular structure that conducts gall bladder contents from the gall bladder to the common bile duct" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "abnormal cystic gall duct morphology" EXACT []
 synonym: "abnormal ductus cysticus morphology" EXACT []
-is_a: MP:0005084 ! abnormal gall bladder morphology
+is_a: MP:0005084 ! abnormal gallbladder morphology
 is_a: MP:0009498 ! abnormal extrahepatic bile duct morphology
 
 [Term]
@@ -54828,6 +54839,10 @@ is_a: MP:0005449 ! abnormal food intake
 id: MP:0009547
 name: elliptocytosis
 def: "hematologic disorder in which an abnormally large number of erythrocytes are elliptical rather than the typical biconcave, disc shape" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+synonym: "cigar cells" EXACT []
+synonym: "cigar-shaped erythrocytes" EXACT []
+synonym: "oval-shaped erythrocytes" EXACT []
+synonym: "ovalocytes" EXACT []
 is_a: MP:0002447 ! abnormal erythrocyte morphology
 
 [Term]
@@ -55390,11 +55405,13 @@ is_a: MP:0002353 ! abnormal inguinal lymph node morphology
 [Term]
 id: MP:0009625
 name: abnormal abdominal lymph node morphology
+def: "any strucutral anomaly of the visceral glands that are located in the abdomen" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 is_a: MP:0002339 ! abnormal lymph node morphology
 
 [Term]
 id: MP:0009626
 name: abnormal celiac lymph node morphology
+def: "any structural anomaly of the visceral glands that are associated with the branches of the celiac artery, including the gastric, hepatic, and pancreaticolienal (splenic) lymph nodes" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 is_a: MP:0009625 ! abnormal abdominal lymph node morphology
 
 [Term]
@@ -55802,7 +55819,7 @@ synonym: "abnormal medial corticospinal tract morphology" EXACT []
 synonym: "abnormal Turck bundle morphology" EXACT []
 synonym: "abnormal Turck column morphology" EXACT []
 synonym: "abnormal ventral corticospinal tract morphology" EXACT []
-is_a: MP:0000778 ! abnormal tract
+is_a: MP:0000778 ! abnormal nervous system tract
 
 [Term]
 id: MP:0009683
@@ -55811,7 +55828,7 @@ def: "any structural anomaly of the large bundle of corticospinal motor fibers t
 synonym: "abnormal crossed pyramidal tract morphology" EXACT []
 synonym: "abnormal lateral cerebrospinal fasciculus morphology" EXACT []
 synonym: "abnormal lateral pyramidal tract morphology" EXACT []
-is_a: MP:0000778 ! abnormal tract
+is_a: MP:0000778 ! abnormal nervous system tract
 
 [Term]
 id: MP:0009684
@@ -55889,7 +55906,7 @@ is_a: MP:0009690 ! abnormal neural tube mantle layer morphology
 id: MP:0009694
 name: abnormal spinal cord commissure morphology
 def: "any structural anomaly of any of the nerve fiber tracts that span the midline of the spinal cord" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
-is_a: MP:0000778 ! abnormal tract
+is_a: MP:0000778 ! abnormal nervous system tract
 is_a: MP:0000955 ! abnormal spinal cord morphology
 
 [Term]
@@ -56086,6 +56103,7 @@ is_a: MP:0000857 ! abnormal cerebellar foliation
 id: MP:0009720
 name: abnormal mammary gland pattern
 def: "aberration in the number of mammary glands that differentiate during early embryogenesis as it relates to the norm for the species" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+synonym: "abnormal mammary gland number" RELATED []
 is_a: MP:0000628 ! abnormal mammary gland development
 
 [Term]
@@ -57849,7 +57867,7 @@ creation_date: 2010-01-27T03:00:03Z
 [Term]
 id: MP:0009931
 name: abnormal skin appearance
-def: "skin that looks different from the usual state" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+def: "anomaly in the visual apsect of the skin" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
 is_a: MP:0002060 ! abnormal skin morphology
 created_by: csmith
 creation_date: 2010-01-27T03:14:23Z
@@ -57945,7 +57963,7 @@ id: MP:0009941
 name: abnormal olfactory bulb interneuron morphology
 def: "any structural anomaly of the group of neurons residing in the olfactory bulb that serve to process and refine signals arising from olfactory sensory neurons" [PMID:18603310]
 is_a: MP:0000819 ! abnormal olfactory bulb morphology
-is_a: MP:0006004 ! abnormal interneuron morphology
+is_a: MP:0000965 ! abnormal sensory neuron morphology
 created_by: csmith
 creation_date: 2010-02-02T03:44:21Z
 
@@ -58841,7 +58859,7 @@ creation_date: 2010-03-01T01:21:37Z
 id: MP:0010031
 name: abnormal cranium size
 def: "deviation from the average range of cranium size compared to normal" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-synonym: "abnormal skull size" EXACT []
+synonym: "abnormal skull size" RELATED []
 is_a: MP:0000438 ! abnormal cranium morphology
 created_by: csmith
 creation_date: 2010-03-01T01:35:41Z
@@ -59271,6 +59289,9 @@ creation_date: 2010-03-12T03:32:39Z
 id: MP:0010074
 name: stomatocytosis
 def: "deformation of red blood cells to a cup-like shape, with swelling and with an elongated area of central pallor, instead of the normal biconcave shape" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "hydrocytosis" EXACT []
+synonym: "increased fish mouth cell number" EXACT []
+synonym: "increased mouth-shaped erythrocyte number" EXACT []
 synonym: "increased stomatocyte number" RELATED []
 is_a: MP:0002447 ! abnormal erythrocyte morphology
 created_by: csmith
@@ -60212,6 +60233,391 @@ def: "greater than normal amount in the brain of the principal sterol of vertebr
 is_a: MP:0003982 ! increased cholesterol level
 created_by: csmith
 creation_date: 2010-05-12T03:18:53Z
+
+[Term]
+id: MP:0010163
+name: hemolysis
+def: "destruction of erythrocytes such that hemoglobin is released from the cells; may occur by many different causal agents such as antibodies, bacteria, chemicals, temperature, and changes in tonicity" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "erythrocytolysis" EXACT []
+synonym: "erythrolysis" EXACT []
+synonym: "hematolysis" EXACT []
+is_a: MP:0003656 ! abnormal erythrocyte physiology
+created_by: csmith
+creation_date: 2010-05-21T02:13:18Z
+
+[Term]
+id: MP:0010164
+name: increased hemolysis
+def: "a greater incidence of erythrocyte destruction such that hemoglobin is released from the cells that may occur by many different causal agents such as antibodies, bacteria, chemicals, temperature, and changes in tonicity" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+is_a: MP:0010163 ! hemolysis
+created_by: csmith
+creation_date: 2010-05-21T03:14:57Z
+
+[Term]
+id: MP:0010165
+name: abnormal response to stress-induced hyperthermia
+def: "any anomaly in the expected increase in core body termperature in response to stress or anticipatory anxiety" [PMID:18722480]
+synonym: "abnormal SIH response" EXACT []
+is_a: MP:0001777 ! abnormal body temperature regulation
+created_by: mgi
+creation_date: 2010-05-28T02:42:40Z
+
+[Term]
+id: MP:0010166
+name: increased response to stress-induced hyperthermia
+def: "greater increase or faster than expected increase in core body termperature in response to stress or anticipatory anxiety" [PMID:18722480]
+synonym: "increased SIH response" EXACT []
+is_a: MP:0010165 ! abnormal response to stress-induced hyperthermia
+created_by: mgi
+creation_date: 2010-05-28T02:47:58Z
+
+[Term]
+id: MP:0010167
+name: decreased response to stress-induced hyperthermia
+def: "reduction or absence of the expected increase in core body termperature in response to stress or anticipatory anxiety" [PMID:18722480]
+synonym: "decreased SIH response" EXACT []
+is_a: MP:0010165 ! abnormal response to stress-induced hyperthermia
+created_by: mgi
+creation_date: 2010-05-28T02:48:26Z
+
+[Term]
+id: MP:0010168
+name: increased CD4-positive, CD25-positive, alpha-beta regulatory T cell number
+def: "a greater number of the CD4-positive, CD25-positive T cell subset which regulates overall immune responses as well as the responses of other T cell subsets through direct cell-cell contact and cytokine release" [ISBN:0781735149]
+synonym: "increased CD4-positive, CD25-positive, alpha-beta regulatory T lymphocyte number" EXACT []
+synonym: "increased CD4-positive, CD25-positive, alpha-beta regulatory T-cell number" EXACT []
+synonym: "increased CD4-positive, CD25-positive, alpha-beta regulatory T-lymphocyte number" EXACT []
+synonym: "increased CD4-positive, CD25-positive, alpha-beta Treg number" EXACT []
+synonym: "increased suppressor T cell number" BROAD []
+synonym: "increased suppressor T lymphocyte number" BROAD []
+synonym: "increased suppressor T-cell number" BROAD []
+synonym: "increased suppressor T-lymphocyte number" BROAD []
+xref: CL:0000792
+is_a: MP:0008074 ! increased CD4-positive T cell number
+is_a: MP:0008397 ! abnormal CD4-positive, CD25-positive, alpha-beta regulatory T cell morphology
+created_by: mgi
+creation_date: 2010-05-28T03:27:31Z
+
+[Term]
+id: MP:0010169
+name: decreased CD4-positive, CD25-positive, alpha-beta regulatory T cell number
+def: "a reduction in the number of the CD4-positive, CD25-positive T cell subset which regulates overall immune responses as well as the responses of other T cell subsets through direct cell-cell contact and cytokine release" [ISBN:0781735149]
+synonym: "decreased CD4-positive, CD25-positive, alpha-beta regulatory T lymphocyte number" EXACT []
+synonym: "decreased CD4-positive, CD25-positive, alpha-beta regulatory T-cell number" EXACT []
+synonym: "decreased CD4-positive, CD25-positive, alpha-beta regulatory T-lymphocyte number" EXACT []
+synonym: "decreased CD4-positive, CD25-positive, alpha-beta Treg number" EXACT []
+synonym: "decreased suppressor T cell number" BROAD []
+synonym: "decreased suppressor T lymphocyte number" BROAD []
+synonym: "decreased suppressor T-cell number" BROAD []
+synonym: "decreased suppressor T-lymphocyte number" BROAD []
+synonym: "reduced CD4-positive, CD25-positive, alpha-beta regulatory T cell number" EXACT []
+synonym: "reduced CD4-positive, CD25-positive, alpha-beta regulatory T lymphocyte number" EXACT []
+synonym: "reduced CD4-positive, CD25-positive, alpha-beta regulatory T-cell number" EXACT []
+synonym: "reduced CD4-positive, CD25-positive, alpha-beta regulatory T-lymphocyte number" EXACT []
+synonym: "reduced CD4-positive, CD25-positive, alpha-beta Treg number" EXACT []
+synonym: "reduced suppressor T cell number" BROAD []
+synonym: "reduced suppressor T lymphocyte number" BROAD []
+synonym: "reduced suppressor T-cell number" BROAD []
+synonym: "reduced suppressor T-lymphocyte number" BROAD []
+xref: CL:0000792
+is_a: MP:0008075 ! decreased CD4-positive T cell number
+is_a: MP:0008397 ! abnormal CD4-positive, CD25-positive, alpha-beta regulatory T cell morphology
+created_by: mgi
+creation_date: 2010-05-28T03:28:42Z
+
+[Term]
+id: MP:0010170
+name: abnormal glial cell apoptosis
+def: "change in the timing or the number of glial cells undergoing programmed cell death" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal glia apotosis" EXACT []
+is_a: MP:0003690 ! abnormal glial cell physiology
+created_by: csmith
+creation_date: 2010-06-01T02:20:10Z
+
+[Term]
+id: MP:0010171
+name: abnormal centroacinar cell of Langerhans morphology
+def: "any structural anomaly of cells that line the pancreatic ducts that secrete mucins and an aqueous bicarbonate solution under stimulation by the hormone secretin" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal pancreatic duct cell" EXACT []
+is_a: MP:0009143 ! abnormal pancreatic duct morphology
+created_by: csmith
+creation_date: 2010-06-01T02:40:50Z
+
+[Term]
+id: MP:0010172
+name: abnormal mammary gland epithelium physiology
+def: "any functional anomaly of the epithelial layer of the luminal surfaces of the mammary gland" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0001881 ! abnormal mammary gland physiology
+created_by: csmith
+creation_date: 2010-06-01T02:55:12Z
+
+[Term]
+id: MP:0010173
+name: increased mammary gland epithelium proliferation
+def: "increase in the expansion rate of the cells of the mammary gland epithelium by cell division" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010172 ! abnormal mammary gland epithelium physiology
+created_by: csmith
+creation_date: 2010-06-01T02:55:42Z
+
+[Term]
+id: MP:0010174
+name: decreased mammary gland epithelium proliferation
+def: "decrease in the expansion rate of the cells of the mammary gland epithelium by cell division" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "reduced mammary gland epithelium proliferation" EXACT []
+is_a: MP:0010172 ! abnormal mammary gland epithelium physiology
+created_by: csmith
+creation_date: 2010-06-01T03:03:57Z
+
+[Term]
+id: MP:0010175
+name: leptocytosis
+def: "the presence of unusually thin or flattened red blood cells that when stained show a dark center and a peripheral ring of hemoglobin, separated by a pale unstained ring containing less hemoglobin, resulting in a bull's-eye appearance and resembling a 3D sombrero when viewed under EM; seen in certain anemias, thalassemias, hemoglobinopathies, obstructive jaundice, and the post-splenectomy state" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+synonym: "increased codocyte number" EXACT []
+synonym: "increased Mexican hat cell number" EXACT []
+synonym: "increased target cell number" EXACT []
+synonym: "Mexican hat erythrocytes" EXACT []
+synonym: "target erythrocytes" EXACT []
+synonym: "wafer-thin erythrocytes" EXACT []
+is_a: MP:0002447 ! abnormal erythrocyte morphology
+created_by: csmith
+creation_date: 2010-06-01T03:33:04Z
+
+[Term]
+id: MP:0010176
+name: dacryocytosis
+def: "presence of teardrop-shaped red blood cells" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+synonym: "tear-shaped erythrocytes" EXACT []
+is_a: MP:0002447 ! abnormal erythrocyte morphology
+created_by: csmith
+creation_date: 2010-06-01T04:00:22Z
+
+[Term]
+id: MP:0010177
+name: acanthocytosis
+def: "presence of erythrocytes characterized by multiple spiny (thorn-like) cytoplasmic projections" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+synonym: "spiculated red blood cells " EXACT []
+synonym: "spike red blood cells" EXACT []
+synonym: "spikey erythrocytes" EXACT []
+synonym: "spur red blood cells" EXACT []
+is_a: MP:0002447 ! abnormal erythrocyte morphology
+created_by: csmith
+creation_date: 2010-06-01T04:03:45Z
+
+[Term]
+id: MP:0010178
+name: increased number of Howell-Jolly bodies
+def: "abnormal presence of basophilic nuclear remnants of condensed DNA (1 to 2 um in diameter) in circulating erythrocytes, typically seen in severe hemolytic anemias or after splenectomy; these inclusions are normally removed by the spleen but will persist in individuals with functional hyposplenia or asplenia" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+is_a: MP:0002447 ! abnormal erythrocyte morphology
+created_by: csmith
+creation_date: 2010-06-01T04:06:18Z
+
+[Term]
+id: MP:0010179
+name: rough coat
+def: "coat does not have the usual smooth appearance" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0002074 ! abnormal hair texture
+created_by: csmith
+creation_date: 2010-06-04T01:38:37Z
+
+[Term]
+id: MP:0010180
+name: increased susceptibility to weight loss
+def: "greater decrease in body weight over time when compared to the average decrease in weight in response to fasting or caloric restriction" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0001262 ! decreased body weight
+created_by: csmith
+creation_date: 2010-06-04T03:10:44Z
+
+[Term]
+id: MP:0010181
+name: decreased susceptibility to weight loss
+def: "smaller decrease in body weight over time when compared to the average decrease in weight in response to fasting or caloric restriction" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0001262 ! decreased body weight
+created_by: csmith
+creation_date: 2010-06-04T03:15:40Z
+
+[Term]
+id: MP:0010182
+name: decreased susceptibility to weight gain
+def: "smaller increase in body weight over time when compared to the average increase in weight on the same diet, with equal energy (calorie) intake" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0001260 ! increased body weight
+created_by: csmith
+creation_date: 2010-06-04T03:16:40Z
+
+[Term]
+id: MP:0010183
+name: abnormal CD4-positive helper T cell morphology
+def: "any structural anomaly of a CD4-positive, alpha-beta T cell that cooperates with other lymphocytes via direct contact or cytokine release to initiate a variety of immune functions" [CL:0000492, ISBN:0781735149]
+xref: FMA:70572
+is_a: MP:0002432 ! abnormal CD4-positive T cell morphology
+created_by: csmith
+creation_date: 2010-06-04T03:48:29Z
+
+[Term]
+id: MP:0010184
+name: abnormal T follicular helper cell morphology
+def: "any structural anomaly of a CD4-positive, CXCR5-positive, CCR7-negative alpha-beta T cell located in follicles of secondary lymph nodes that expresses high levels of BCL-6, ICOS and PD1 and stimulate follicular B cells to undergo class-switching and antibody production" [CL:0002038, PMID:19855402]
+xref: CL:0002038
+is_a: MP:0010183 ! abnormal CD4-positive helper T cell morphology
+created_by: csmith
+creation_date: 2010-06-04T03:51:32Z
+
+[Term]
+id: MP:0010185
+name: abnormal T follicular helper cell number
+def: "anomaly in the number of the CD4-positive, CXCR5-positive, CCR7-negative alpha-beta T cells located in follicles of secondary lymph nodes that expresses high levels of BCL-6, ICOS and PD1 and stimulate follicular B cells to undergo class-switching and antibody production" [CL:0002038, PMID:19855402]
+xref: CL:0002038
+is_a: MP:0010184 ! abnormal T follicular helper cell morphology
+created_by: csmith
+creation_date: 2010-06-04T03:55:18Z
+
+[Term]
+id: MP:0010186
+name: increased T follicular helper cell number
+def: "greater number of the CD4-positive, CXCR5-positive, CCR7-negative alpha-beta T cells located in follicles of secondary lymph nodes that expresses high levels of BCL-6, ICOS and PD1 and stimulate follicular B cells to undergo class-switching and antibody production" [CL:0002038, PMID:19855402]
+xref: CL:0002038
+is_a: MP:0010185 ! abnormal T follicular helper cell number
+created_by: csmith
+creation_date: 2010-06-04T03:55:39Z
+
+[Term]
+id: MP:0010187
+name: decreased T follicular helper cell number
+def: "reduced number of the CD4-positive, CXCR5-positive, CCR7-negative alpha-beta T cells located in follicles of secondary lymph nodes that expresses high levels of BCL-6, ICOS and PD1 and stimulate follicular B cells to undergo class-switching and antibody production" [CL:0002038, PMID:19855402]
+xref: CL:0002038
+is_a: MP:0010185 ! abnormal T follicular helper cell number
+created_by: csmith
+creation_date: 2010-06-04T03:56:04Z
+
+[Term]
+id: MP:0010188
+name: abnormal T follicular helper cell differentiation
+def: "atypical production of or inability to produce the CD4-positive, CXCR5-positive, CCR7-negative alpha-beta T cells located in follicles of secondary lymph nodes that expresses high levels of BCL-6, ICOS and PD1 and stimulate follicular B cells to undergo class-switching and antibody production" [CL:0002038, PMID:19855402]
+xref: CL:0002038
+is_a: MP:0010184 ! abnormal T follicular helper cell morphology
+created_by: csmith
+creation_date: 2010-06-04T03:56:29Z
+
+[Term]
+id: MP:0010189
+name: abnormal T follicular helper cell physiology
+def: "any functional anomaly of a CD4-positive, CXCR5-positive, CCR7-negative alpha-beta T cell located in follicles of secondary lymph nodes that expresses high levels of BCL-6, ICOS and PD1 and stimulate follicular B cells to undergo class-switching and antibody production" [CL:0002038, PMID:19855402]
+xref: CL:0002038
+is_a: MP:0005463 ! abnormal CD4-positive T cell physiology
+created_by: csmith
+creation_date: 2010-06-04T03:57:37Z
+
+[Term]
+id: MP:0010190
+name: abnormal retinal melanocyte morphology
+def: "any structural anomaly of the cells that produce pigment in the retina" [ISBN-13:978-1-4051-2034-0 "The Pigmentary System, Second Edition"]
+is_a: MP:0002877 ! abnormal melanocyte morphology
+is_a: MP:0005103 ! abnormal retinal pigmentation
+created_by: csmith
+creation_date: 2010-06-07T01:58:02Z
+
+[Term]
+id: MP:0010191
+name: abnormal choroid melanocyte morphology
+def: "any structural anomaly of the cells that produce pigment in the choroid" [ISBN-13:978-1-4051-2034-0 "The Pigmentary System, Second Edition"]
+is_a: MP:0002877 ! abnormal melanocyte morphology
+is_a: MP:0005100 ! abnormal choroid pigmentation
+created_by: csmith
+creation_date: 2010-06-07T01:58:36Z
+
+[Term]
+id: MP:0010192
+name: abnormal retinal melanin granule morphology
+def: "any structural anomaly of the pigment particles in the retina" [ISBN-13:978-1-4051-2034-0 "The Pigmentary System, Second Edition"]
+is_a: MP:0005075 ! abnormal melanosome morphology
+is_a: MP:0010190 ! abnormal retinal melanocyte morphology
+created_by: csmith
+creation_date: 2010-06-07T02:18:07Z
+
+[Term]
+id: MP:0010193
+name: abnormal choroid melanin granule morphology
+def: "any structural anomaly of the pigment particles in the choroid" [ISBN-13:978-1-4051-2034-0 "The Pigmentary System, Second Edition"]
+is_a: MP:0005075 ! abnormal melanosome morphology
+is_a: MP:0010191 ! abnormal choroid melanocyte morphology
+created_by: csmith
+creation_date: 2010-06-07T02:18:27Z
+
+[Term]
+id: MP:0010194
+name: absent lymphatic vessels
+def: "absence of the network of vessels which carries lymph around the body" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+is_a: MP:0001879 ! abnormal lymphatic vessel morphology
+created_by: csmith
+creation_date: 2010-06-11T10:37:22Z
+
+[Term]
+id: MP:0010195
+name: abnormal lymphatic vessel endothelium morphology
+def: "any structural anomaly of the thin layer of flat cells that line the lymphatic vessels and form a barrier between circulating lymph in the lumen and the rest of the vessel wall" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+xref: MA:0000750
+is_a: MP:0001879 ! abnormal lymphatic vessel morphology
+created_by: csmith
+creation_date: 2010-06-11T10:37:57Z
+
+[Term]
+id: MP:0010196
+name: abnormal lymphatic vessel smooth muscle morphology
+def: "any structural anomaly of the nonstriated, involuntary muscle tissue that encompasses the lymphatic vessels" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+xref: MA:0000751
+is_a: MP:0001879 ! abnormal lymphatic vessel morphology
+created_by: csmith
+creation_date: 2010-06-11T10:38:19Z
+
+[Term]
+id: MP:0010197
+name: abnormal lymphatic vessel endothelial cell morphology
+def: "any structural anomaly of the cells that line the lymphatic vessels" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010195 ! abnormal lymphatic vessel endothelium morphology
+created_by: csmith
+creation_date: 2010-06-11T10:39:31Z
+
+[Term]
+id: MP:0010198
+name: decreased lymphatic vessel endothelial cell number
+def: "reduced number of the cells that line the lymphatic vessels" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "reduced lymphatic vessel endothelial cell number" EXACT []
+is_a: MP:0010197 ! abnormal lymphatic vessel endothelial cell morphology
+created_by: csmith
+creation_date: 2010-06-11T10:40:07Z
+
+[Term]
+id: MP:0010199
+name: absent lymphatic vessel endothelial cells
+def: "absence of the cells that line the lymphatic vessels" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010198 ! decreased lymphatic vessel endothelial cell number
+created_by: csmith
+creation_date: 2010-06-11T10:40:32Z
+
+[Term]
+id: MP:0010200
+name: enlarged lymphatic vessel
+def: "increased size of the network of vessels which carries lymph around the body" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+is_a: MP:0001879 ! abnormal lymphatic vessel morphology
+created_by: csmith
+creation_date: 2010-06-11T10:41:07Z
+
+[Term]
+id: MP:0010202
+name: focal dorsal hair loss
+def: "focal hair loss on the dorsal area of a rodent resulting in dorsal skin visible in a patch where hair loss occurs" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", MGI:Sanger_Karp "Submission from Natasha Karp"]
+synonym: "dorsal skin visible" EXACT []
+is_a: MP:0000418 ! focal hair loss
+created_by: csmith
+creation_date: 2010-06-11T03:01:23Z
+
+[Term]
+id: MP:0010203
+name: focal ventral hair loss
+def: "focal hair loss on the ventral area of a rodent resulting in dorsal skin visible in a patch where hair loss occurs" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", MGI:Sanger_Karp "Submission from Natasha Karp"]
+synonym: "ventral skin visible" EXACT []
+is_a: MP:0000418 ! focal hair loss
+created_by: csmith
+creation_date: 2010-06-11T03:04:09Z
 
 [Typedef]
 id: part_of
