@@ -33,7 +33,7 @@ public class PhenoteHelpMenu extends DynamicMenu {
 
 	public static SplashScreen splashScreen;
 
-	private static String logoFile = "images/phenote_logo.jpg";
+	private static String logoFile = "images/phenote_logo.png";
 
 	//initialize logger
 	protected final static Logger logger = Logger.getLogger(PhenoteHelpMenu.class);
@@ -76,7 +76,7 @@ public class PhenoteHelpMenu extends DynamicMenu {
 		} catch (Exception e) {
 			logger.error("Error trying to find logo file " + logoFile + ": " + e.getMessage());
 		}
-		splashScreen = new SplashScreen(myImage,true,230,210); // true->enable
+		splashScreen = new SplashScreen(myImage,true,215,90); // true->enable
 		splashScreen.setLocationRelativeTo(null);
 //	splashScreen.setProgressMax(100);
 		splashScreen.setScreenVisible(true);
