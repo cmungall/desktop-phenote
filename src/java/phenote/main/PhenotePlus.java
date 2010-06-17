@@ -13,6 +13,9 @@ public class PhenotePlus {
     Runnable r = new PhenoteRunnable();
     // Set application name on Mac so it doesn't use the ugly Java class name
     System.setProperty("com.apple.mrj.application.apple.menu.about.name", getAppName());
+//      System.out.println("about to show splash screen"); // DEL
+    Phenote.showBePatientDialog();
+//      Phenote.getPhenote().splashScreenInit();  // can't call statically
     SwingUtilities.invokeLater(r);
   }
 
