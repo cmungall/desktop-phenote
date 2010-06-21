@@ -110,3 +110,9 @@ but it still sometimes seems not to do the right thing.
 - New splah screen (bePatientDialog) that stays up while Phenote is loading
 (well, actually, it still seems to show up blank when you run the installed
 version, though it looks fine when you launch Phenote from the shell).
+
+1.7-beta15
+- Fixed bug 3017776--Config files auto-update even if they have when="NEVER"
+- Added info about command-line options to user guide
+- Added name of current config to splash screen (should it also be added to
+the About screen?)
