@@ -12,6 +12,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -216,9 +217,18 @@ public class Phenote {
     }
 
     String imageString = (logoURL == null) ? "" : "<center><img vspace=15 src=" + logoURL + "></center.";
+    String myConfig = "";
+    try {
+      myConfig = " (" + Config.inst().getMyPhenoteConfigString() + ")";
+    }
+    catch (IOException e) {
+    }
 
     bePatientDialog.add(new JLabel("<html><body>" + imageString +
-                                   "<br><br><font size=4>Phenote is updating and loading the ontology files required by this configuration.<br>This process will take a while (possibly several minutes).</font><br><br>" +
+                                   "<br><br><font size=4>Phenote is updating and loading the ontology files required by your configuration" + 
+                                   myConfig +
+                                   ".<br>" +
+                                   "This process will take a while (possibly several minutes).</font><br><br>" +
                                    "<center><hr><br><font size=2>Phenote is a project of the Berkeley Bioinformatics Open-Source Projects" +
                                    " (<a href='http://www.berkeleybop.org'>BBOP</a>).<br>It is distributed under the FreeBSD license.</font></center><br></body></html>"),
                         BorderLayout.NORTH);
@@ -367,7 +377,7 @@ public class Phenote {
   }
   
   void splashScreenDestruct() {
-    LOG.debug("splashScreenDestruct"); // DEL
+//    LOG.debug("splashScreenDestruct"); // DEL
     if (splashScreen!=null) splashScreen.setScreenVisible(false);
     if (loadingScreen!=null) loadingScreen.setScreenVisible(false);
     if (bePatientDialog != null) {
