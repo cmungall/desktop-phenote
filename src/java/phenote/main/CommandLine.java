@@ -135,8 +135,8 @@ public class CommandLine {
 
   private class UpdateConfigCommandOption extends CommandOption {
     private final static String help =
-    "Specify config file to update from app conf, adds in new config fields."
-    +" if nothing to update just loads config file as is";
+    "Specify config file to update from conf directory.  Adds in new config fields;"
+    +" if nothing to update just loads config file as is.";
     private UpdateConfigCommandOption() {
       // true -> has argument
       super("updateConfig",'u',true,"config file",help);
@@ -152,7 +152,7 @@ public class CommandLine {
 
   private class SetConfigCommandOption extends CommandOption {
     private final static String help =
-      "Specify config file to set from app conf, careful this wipes out previous config";
+      "Specify config file to use (should be a .cfg file in conf directory).  (Note that this change applies only to the current Phenote session--the next time you launch Phenote, it will revert to your previously set configuration.)";
     private SetConfigCommandOption() {
       super("configSet",'c',true,"config file",help); // true -> has arg
     }
@@ -166,8 +166,7 @@ public class CommandLine {
   }
 
   private void loadDefaultConfig(String cmd, ConfigException e) {
-    String m = "Yikes! Failed to "+cmd+" config file "+e+" gonna try "+"loading "+
-      "default config";
+    String m = "Failed to "+cmd+" config file.  Error: "+e+".  Will try loading default config file instead.";
     logErr(m);
     //e.printStackTrace();
     try { Config.inst().loadDefaultConfigFile(); }
@@ -201,7 +200,7 @@ public class CommandLine {
   /** INPUT FILE COMMAND OPTION */
   private class InputFileCommandOption extends CommandOption {
     private final static String help =
-      "Specify filename to read in (phenoxml.xml,phenosyntax.psx)";
+      "Filename to read in (phenoxml.xml, phenosyntax.psx)";
     private InputFileCommandOption() {
       // true -> has argument
       super("inputFile",'f',true,"filename",help);
@@ -372,6 +371,7 @@ public class CommandLine {
 
     private void setFilename(String filename) {
       this.filename = filename;
+      System.out.println("Command-line option set filename to " + filename);
       adapterValue = filename;
     }
     private String getFilename() { return filename; }
