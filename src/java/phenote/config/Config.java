@@ -100,6 +100,7 @@ public class Config {
   private boolean configInitialized = false;
   private boolean configModified = false; 
   private boolean alwaysOverride = false;
+
    //flag for if any settings during session have changed, such as search params, col widths, etc.
   
   private static Map<String,OBDSQLDatabaseAdapterConfiguration> jdbcPathToOBDConfiguration = 
@@ -276,10 +277,46 @@ public class Config {
     // master conf may have attribute that overrides merge/overwrite settings - need to
     // check those before going through with below -- throws Ex
     ConfigMode mode = new ConfigMode(masterConfig,mergeConfigs,overwritePersonalCfg);
-    LOG.debug("getMyPhenoteConfig: master = " + masterConfig + ", mode.isWipeout = " + mode.isWipeout()); // DEL
+    LOG.debug("getMyPhenoteConfig: master = " + masterConfig + ", mode.isWipeout = " + mode.isWipeout() + ", when = " + mode.getWhen()); // DEL
+
+    if (mode.getWhen() != null && mode.getWhen().equals("NEVER")) {
+      LOG.info("Update is NEVER for config " + masterConfig + "--not updating.");
+        // Find a local copy
+        File localFile = new File(mode.localFileString());
+        if (localFile.exists()) {
+          LOG.info("Using (possibly stale) local copy " + mode.localFileString());
+          return mode.localFileString();
+        }
+        else {
+          try {
+            String jarConfig = getConfigUrl(configFile).getFile();
+            LOG.error("Also failed to open config file in user's .phenote: " + mode.localFileString() + "--trying to use one from jar: " + jarConfig);
+            // Try to copy jar one to .phenote
+//            LOG.debug("About to try copying " + jarConfig + " to " + localFile); // DEL
+            URL jarConfigUrl = null;
+            try {
+              jarConfigUrl = new URL("file://" + jarConfig);
+            } catch (MalformedURLException me) {
+              LOG.debug("Couldn't make URL for jar config " + jarConfigUrl);
+              writeMyPhenoteDefaultFile(masterConfig); // ? master?
+              return jarConfig;
+            }
+            try {
+              FileUtil.copyUrlToFile(jarConfigUrl, localFile);
+            } catch (IOException io) {
+              LOG.debug("Couldn't copy jar config " + jarConfig + " to " + localFile);
+            }
+            writeMyPhenoteDefaultFile(masterConfig); // ? master?
+            return jarConfig;
+          } catch (FileNotFoundException fnf) {
+            LOG.error("Couldn't find conf file from jar?!: " + fnf.getMessage());
+            throw new ConfigException(fnf);
+          }
+        }
+    }
 
     //if (mergeConfigs && masterExists) {
-    if (mode.isUpdate())
+    else if (mode.isUpdate())
       mergeMasterWithLocal(mode); // eventuall pass in mode as well
       
     // if file doesnt exist yet or overwrite, copy over masterConfig
@@ -361,7 +398,7 @@ public class Config {
       localFile = new File(getDotPhenoteConfDir(),nameOfFile);
 
       if (!masterExists && !localFile.exists())
-        throw new ConfigException("Cfg file doesnt exist in app nor .phenote/conf");
+        throw new ConfigException("Cfg file " + masterConfig + " not found in .phenote/conf or in Phenote app directory");
 
       parseModeXml(masterConfig);
     }
@@ -483,6 +520,14 @@ public class Config {
       return !versionSame(version);
     }
 
+    private String getWhen() {
+      if (masterToLocalBean != null)
+        return masterToLocalBean.getWhen();
+      else { // if we can't get the bean, then we don't want to try to update the config file
+//        log().debug("getWhen: masterToLocalBean is null");
+        return "NEVER";
+      }
+    }
 
     private boolean localFileExists() {
       return localFile!=null && localFile.exists();
@@ -533,8 +578,7 @@ public class Config {
       return;
     }
     else
-      // !! It keeps saying this when the "master" is NOT in fact newer.
-      log().info("Master config " + mode.masterUrl + " is newer than user config " + mode.localFileString() + "--updating user config");
+      log().info("Merging master config " + mode.masterUrl + " with user config " + mode.localFileString());
 
     // File Adapters - preserves enable state of old/local - should it?
     for (DataAdapterConfig dac : newCfg.getFileAdapConfigs()) {
