@@ -32,7 +32,7 @@
 <li>2972788--Field edits sometimes get lost unless you hit enter</li>
 <li>1874953--multi select wipes out data</li>
 </ul>
-The failure to commit changes made in annotation-constrained fields in the
+The failure to commit changes made in ontology-constrained fields in the
 Annotation Editor mostly happened if, rather than hitting return in the newly
 empty field, you hit tab (to go to the next field) or clicked on something
 else. (However, it didn't reliably happen even then--sometimes it worked
@@ -41,7 +41,7 @@ clicking on the field in the Annot Editor to empty it, and hitting tab.
 Usually, the terms were not deleted as desired (but sometimes they were!).
 <br>
 I have improved the behavior somewhat by checking TermCompLists (these
-annotation-constrained fields) for focusLost (i.e., user tabbed or clicked out
+ontology-constrained fields) for focusLost (i.e., user tabbed or clicked out
 of the field--these weren't registering as KeyEvents) and not just for return,
 but it still sometimes seems not to do the right thing.
 </li>

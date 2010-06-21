@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="../javahelp.css">
 </head>
 <body bgcolor="#ffffff">
-<h1>Phenote from the Command Line</h1>
+<h1>Running Phenote from the Command Line</h1>
 <h2>1) Install Java 1.5 or higher</h2>
 <p>On Macs, Java 1.5 can be installed automatically by doing a system software update. On any other platform, download 
 the appropriate binaries from the latest Java, currently JRE 6, <a 
@@ -54,7 +54,34 @@ Control for Source Code)</a>". </p>
   Unix platforms (including Mac OS), run the "phenote" shell script 
   to start the program (to do this on most Unix platforms, change to 
   the Phenote directory and type "./phenote").</li>
-  <li>On Windows or Mac, you can double-click the Phenote icon to launch the application.</li></ul>
+  <li>On Windows or Mac, you can double-click the Phenote icon to launch the
+  application.</li></ul>
+
+<h2>  4) Optional command-line arguments</h2>
+<p>When invoking Phenote from the command line, you can use one or more of these command-line options if you wish:
+<pre>
+Options:
+  -f, --inputFile=filename         Filename to read in 
+  -w, --writeFile=filename         Filename to write to
+  -c, --configSet=config file      Specify config file to use (should be a .cfg 
+                                   file in conf directory).  (Note that this 
+                                   change applies only to the current Phenote 
+                                   session--the next time you launch Phenote, it
+                                   will revert to your previously set 
+                                   configuration.)
+  -u, --updateConfig=config file   Specify config file to update from conf 
+                                   directory.  Adds in new config fields; if 
+                                   nothing to update just loads config file as 
+                                   is.
+  -l, --logFile=filename           Specify log file
+
+  -?, --help                       Show this help message
+  --usage                          Show brief usage message
+</pre>
+So, for example,
+<pre>phenote -c plant.cfg</pre>
+would launch Phenote using the plant configuration.
+</p>
 </ul>
 </body>
 </html>
