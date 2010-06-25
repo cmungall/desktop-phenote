@@ -97,7 +97,9 @@ public class OntologyUpdate {
 		createWindow();
 		if (numUpdates>0) {
 			dialog.setContentPane(contentPanel);
-			dialog.setTitle("Ontology Update");
+			dialog.setTitle("Updating ontologies...");
+                        dialog.setPreferredSize(new Dimension(500, 300)); // ?
+//                        dialog.setMinimumSize(200, 100); // ?
 			dialog.setBounds(100, 100, 500, 300);
 			dialog.setResizable(true);
 			dialog.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -148,8 +150,8 @@ public class OntologyUpdate {
                                                  new JTableButtonRenderer(defaultRenderer));
                 ontologyTable.addMouseListener(new JTableButtonMouseListener(ontologyTable));
 //		ontologyTable.setMaximumSize(new Dimension(300,200));
-		ontologyTable.setMinimumSize(new Dimension(300,100));
-		ontologyTable.setPreferredSize(new Dimension(300,200));
+		ontologyTable.setMinimumSize(new Dimension(300,90));
+		ontologyTable.setPreferredSize(new Dimension(300,140));
 		TableColumn column = null;
 		//				"Update","Status", "Name", "Version", "Info","Size"
 		//set the column widths
@@ -278,7 +280,7 @@ public class OntologyUpdate {
   }
 
   private void addOntologiesToTable() {
-		//first, add all the ontologies to the table
+    //first, add all the ontologies to the table
   	//loop through each ontology, place those in the table for which there's an update
   	int updateCount = 0;
 		for (int i=0; i<ontologies.length; i++) {
@@ -314,15 +316,15 @@ public class OntologyUpdate {
 //		if (status) {
 		URL localUrl = getLocalUrl(ontology.getFilename());
 		URL remoteUrl = getRemoteUrl(ontology);
-			String fileSize = FileUtil.getFileSize(localUrl);
+                String fileSize = FileUtil.getFileSize(localUrl);
 //			String fileSize = FileUtil.getRemoteFileSize(remoteUrl); //need to do this eventually
 //			Object[] rowData = new Object[]{status, " ", 
 //					ontology.getHandle(), ontology.getVersion(), infoButton, fileSize+" Kb" };
-			Object[] rowData = new Object[]{true, " ", 
-					ontology.getHandle(), ontology.getVersion(), fileSize};
-				for (int i=0; i<rowData.length; i++) {
-					ontologyTable.getModel().setValueAt(rowData[i], row, i);
-				}
+                Object[] rowData = new Object[]{true, " ", 
+                                                ontology.getHandle(), ontology.getVersion(), fileSize};
+                for (int i=0; i<rowData.length; i++) {
+                  ontologyTable.getModel().setValueAt(rowData[i], row, i);
+                }
   	return;
   }
   
@@ -428,7 +430,7 @@ public class OntologyUpdate {
 			return COLUMN_NAMES[columnIndex];
 		}
 		public Object getValueAt(int rowIndex, int columnIndex) {
-			if (rowIndex>data.size() || columnIndex>getColumnCount())
+			if (rowIndex < 0 || columnIndex < 0 || rowIndex>data.size() || columnIndex>getColumnCount())
 				return " ";
 			if (data.get(rowIndex)[columnIndex]==null)
 				return (" "); //put a blank in the table
@@ -466,7 +468,9 @@ public class OntologyUpdate {
 		
 	}
 	
+        // Note:  this doesn't work--the dialog box stays blank.
 	private void addUpdateMessage(String message) {
+                LOG.info(message);
 		sb.append(message);
 		messageTextArea.setText(sb.toString());
 		contentPanel.validate();
@@ -502,21 +506,25 @@ public class OntologyUpdate {
       for (int i=0; i<ontologyTable.getRowCount(); i++) {
       	OntologyFile ontology = Config.inst().getOntologyFileByHandle(ontologyTable.getValueAt(i,2).toString());
       	try {
-      		//download those that are checked, need updating, and also if they don't exist
-      		if ((ontologyTable.getValueAt(i,0).equals(true) && !OntologyDataAdapter2.getInstance().checkForUpdate(ontology)) ||
-      				!OntologyDataAdapter2.getInstance().checkForLocalFileExists(ontology.getFilename())) {
+          LOG.debug("Update: " + ontology + ", yes= " + ontologyTable.getValueAt(i,0) + ", checkForUpdate = " + OntologyDataAdapter2.getInstance().checkForUpdate(ontology)); // DEL
+      		 // download those that are checked, need updating, or haven't yet been downloaded at all
+                 if (ontologyTable.getValueAt(i,0).equals(true) 
+                     // !! Do we even need to check this again?  Isn't this how we got here in the first place?
+//                     && OntologyDataAdapter2.getInstance().checkForUpdate(ontology))
+                    || !OntologyDataAdapter2.getInstance().checkForLocalFileExists(ontology.getFilename())) {
       			m+= ontologyTable.getValueAt(i, 2)+ " ";
       			try {
       				ontologyTable.setValueAt("...", i, 1); //would like this to be a progress bar in here.
       				contentPanel.validate();
       				contentPanel.repaint();
-      				addUpdateMessage("Downloading: "+ontologyTable.getValueAt(i,2));
+                                String um = "Downloading "+ontologyTable.getValueAt(i,2) + "...";
+      				addUpdateMessage(um);
       				OntologyDataAdapter2.getInstance().downloadUpdate(ontologyTable.getValueAt(i, 2).toString());
       				ontologyTable.setValueAt(new ImageIcon(FileUtil.findUrl("images/OK.GIF")), i, 1);
       				contentPanel.validate();
       				contentPanel.repaint();
 
-      				addUpdateMessage(" DONE."+newline);
+      				addUpdateMessage(" Done downloading " + ontologyTable.getValueAt(i,2) + newline);
       				up++;
       			} catch(OntologyException oe) {
                                 ++error;
@@ -525,6 +533,7 @@ public class OntologyUpdate {
       			} catch (FileNotFoundException e2) {
                                 ++error;
                                 // TODO Auto-generated catch block
+      				LOG.error("Error updating ontology: " + e2.getMessage());
                                 e2.printStackTrace();
                         }
       		}
@@ -539,11 +548,11 @@ public class OntologyUpdate {
               LOG.info(m);
       }
       else if (up==0) {
-      	m="No ontologies needed updating";
+      	m="No ontologies were updated.";
       	LOG.info(m);
       } else {
-      	m = "Only some ontologies needed updating.  ";
-        m += up +" of " + numUpdates + " updated";
+//      	m = "Only some ontologies needed updating.  ";
+        m = up +" of " + numUpdates + " ontologies updated.";
       }
       	//here, i should just update the window, and switch the button to "done"?
       //or just go on.  perhaps close the window, then display the update
