@@ -94,6 +94,14 @@ public class CommandLine {
     return getWriteOptions().getSpecifiedState();
   }
 
+  String getCommandLineFilenameToRead() {
+    return getReadOptions().getFilename();
+  }
+
+  String getCommandLineFilenameToWrite() {
+    return getWriteOptions().getFilename();
+  }
+
   private IOOptions getReadOptions() {
     if (readOptions == null)
       readOptions = new IOOptions(true);
@@ -182,15 +190,6 @@ public class CommandLine {
     }
     public void execute() throws Exception {
       logSpecified = true;
-      // this has been superseded by just using default log4j initialization procedure
-//      try {
-//        DOMConfigurator.configure(getArg());
-//       }
-//       catch (FileNotFoundException e) { 
-//         //phenote.splashScreen.setProgress("bad file:"+e.getMessage(),10);
-//         //LOG.error(e.getMessage());
-//         System.out.println("Cmdline log failed "+e.getMessage());
-//       }
     }
   }
 
@@ -206,7 +205,7 @@ public class CommandLine {
       super("inputFile",'f',true,"filename",help);
     }
     public void execute() throws Exception {
-      //System.out.println("executing input file command option "+getArg());
+//      log().debug("getReadOptions().setFilename(" + getArg() + ")"); // DEL
       getReadOptions().setFilename(getArg());
       setAdapterForFile(getReadOptions(), false);
     }
@@ -371,7 +370,7 @@ public class CommandLine {
 
     private void setFilename(String filename) {
       this.filename = filename;
-      System.out.println("Command-line option set filename to " + filename);
+//      System.out.println("Command-line option set filename to " + filename);
       adapterValue = filename;
     }
     private String getFilename() { return filename; }
@@ -419,5 +418,5 @@ public class CommandLine {
   private static Logger log() {
     return Logger.getLogger(CommandLine.class);
   }
-
 }
+

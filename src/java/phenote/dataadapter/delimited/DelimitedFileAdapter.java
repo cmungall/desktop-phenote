@@ -41,6 +41,7 @@ public class DelimitedFileAdapter extends AbstractFileAdapter {
       or CLM makes the call itself? */
   public void load() {
 //this doesn't seem to do anything
+    LOG.error("load called with no args");
   }
   
   public CharacterListI load(File f) {

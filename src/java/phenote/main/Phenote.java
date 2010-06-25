@@ -131,7 +131,7 @@ public class Phenote {
 
     phenote.initOntologies();
     // phenote sometimes hangs right around here!???!
-    LOG.debug("Ontologies initialized, checking command line for read & write");
+//    LOG.debug("Ontologies initialized, checking command line for read & write");
     phenote.loadFromCommandLine(); // if load/file specified from cmd line
     phenote.setProgress("Phenote loaded", 100);
     phenote.writeFromCommandLine(); // if cmd line, writes & exits
@@ -261,18 +261,24 @@ public class Phenote {
             //OntologyDataAdapter oda = new OntologyDataAdapter(); // singleton?
             // loads up OntologyManager - non intuitive?
             OntologyDataAdapter.initialize(); // this sometimes hangs!!!
-            LOG.debug("Ontologies initialized");
             setProgress("Ontologies Initialized", 70);
             //setMessageText("Ontologies Initialized");
     }
   }
 
+  // If user specified a file to load on the command line, read it now
   private void loadFromCommandLine() {
-    //LOG.debug("read spec "+commandLine.readIsSpecified());
+//    LOG.debug("read spec "+commandLine.readIsSpecified());
     if (!commandLine.readIsSpecified()) return;
-    // LOG.info("Reading "+blah+" from command line");
-    try { commandLine.getReadAdapter().load(); }
-    catch (Exception e) { LOG.error("Failed to do load via command line "+e); }
+    File input = new File(commandLine.getCommandLineFilenameToRead());
+    if (input == null || !input.exists()) {
+      LOG.error("Can't find requested file " + commandLine.getCommandLineFilenameToRead());
+      return;
+    }
+    LOG.info("Trying to load command-line-specified file " + input);
+//    try { commandLine.getReadAdapter().load(input); }
+    try { LoadSaveManager.inst().loadData(input, commandLine.getReadAdapter()); }
+    catch (Exception e) { LOG.error("Problem trying to load file " + input + " specified on command line: "+e.getMessage() + "; stack trace: ");  e.printStackTrace(); }
   }
 
   private void writeFromCommandLine() {

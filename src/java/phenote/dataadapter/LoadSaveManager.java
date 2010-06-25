@@ -8,6 +8,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
 
 import org.apache.log4j.Logger;
@@ -39,7 +40,7 @@ public class LoadSaveManager {
     fileChooser = new JFileChooser("");
     List<DataAdapterI> adapters = Config.inst().getDataAdapters();
     if (adapters == null) {
-      log().error("No adapters configged, cant load or save");
+      log().error("No adapters configged, can't load or save");
       return;
     }
     boolean first = true;
@@ -69,7 +70,7 @@ public class LoadSaveManager {
   public void newData() { 
 //  CharacterListI charList = new CharacterList();
 //  CharacterListManager.inst().setCharacterList(this,charList);
-  System.out.println("NEW!");
+    log().debug("newData");
   }
 
   
@@ -97,6 +98,8 @@ public class LoadSaveManager {
   
   /**Loads a new document of characters from the given file using the given data adapter.*/
   public void loadData(File f, DataAdapterI adapter) {
+    if (adapter == null)
+      adapter = getDataAdapterForFilename(f.getName());
     CharacterListI charList = adapter.load(f);
     if (charList == null) {
       String m = "Failed to load in data for file "+f+" using data adapter "
@@ -359,7 +362,10 @@ public class LoadSaveManager {
     final String windowTitle;
 //    windowTitle = docName + " - " + PhenoteStartupTask.getAppName();  // This would be better, but that method can't be static.
     windowTitle = PhenotePlus.getAppName() + ": " + docName;
-    GUIManager.getManager().getFrame().setTitle(windowTitle);
+    SwingUtilities.invokeLater(new Runnable() {
+        public void run() {
+          GUIManager.getManager().getFrame().setTitle(windowTitle);
+        }
+      });
   }
-
 }

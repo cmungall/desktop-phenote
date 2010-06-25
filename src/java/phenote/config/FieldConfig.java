@@ -360,7 +360,7 @@ public class FieldConfig {
       // cant just add - need to add in proper place! insert!
       //oldConfig.addFieldConfig(this);
       int index = thisCfg.getAllFieldIndex(this); // enabled??? disabled?
-      LOG.debug("field config index merge "+index+" fc "+this);
+      LOG.debug("mergeWithOldconfig: merging field "+index+": new header is "+this);
       oldConfig.insertFieldConfig(index,this);
       return;
     }
