@@ -1,5 +1,5 @@
 format-version: 1.2
-date: 11:06:2010 15:52
+date: 22:06:2010 16:15
 saved-by: csmith
 auto-generated-by: OBO-Edit 2.0
 default-namespace: MPheno.ontology
@@ -7242,7 +7242,7 @@ is_a: MP:0001126 ! abnormal ovary morphology
 [Term]
 id: MP:0001132
 name: absent mature ovarian follicles
-def: "failure of ovarian follicle differentiation" [J:35782]
+def: "absence of ovarian follicles that are ready for ovulation and present a blanched spot (the follicular stigma) where the graafian follicle is about to rupture on the surface of the ovary; a first maturation (meiotic) division of the primary oocyte usually occurs just prior to rupture of the follicle" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
 synonym: "absence of mature ovarian follicles" EXACT []
 is_a: MP:0001130 ! abnormal ovarian folliculogenesis
 is_a: MP:0002682 ! decreased mature ovarian follicle number
@@ -16716,8 +16716,10 @@ is_a: MP:0005253 ! abnormal eye physiology
 id: MP:0002639
 name: micrognathia
 def: "abnormally reduced size of the jaws, especially of the mandible" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
-synonym: "brachygnathia" EXACT []
+synonym: "brachygnathia" NARROW []
+synonym: "brachygnathism" NARROW []
 synonym: "mandibular hypoplasia" NARROW []
+synonym: "micrognathism" EXACT []
 is_a: MP:0000454 ! abnormal jaw morphology
 
 [Term]
@@ -17030,11 +17032,12 @@ is_a: MP:0002679 ! abnormal corpus luteum
 [Term]
 id: MP:0002682
 name: decreased mature ovarian follicle number
-def: "fewer than normal numbers of spheroid cell aggregations in the ovary containing the ovum" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "fewer than normal numbers of ovarian follicles that are ready for ovulation and present a blanched spot (the follicular stigma) where the graafian follicle is about to rupture on the surface of the ovary; a first maturation (meiotic) division of the primary oocyte usually occurs just prior to rupture of the follicle" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
 synonym: "decreased number of mature ovarian follicles" EXACT []
 synonym: "reduced mature ovarian follicle number" EXACT []
 synonym: "reduced number of mature ovarian follicles" EXACT []
 is_a: MP:0008871 ! abnormal ovarian follicle number
+is_a: MP:0009364 ! abnormal mature ovarian follicle morphology
 
 [Term]
 id: MP:0002683
@@ -20357,8 +20360,8 @@ is_a: MP:0003755 ! abnormal palate morphology
 [Term]
 id: MP:0003155
 name: abnormal telomere length
-def: "abnormal length of the terminal section of a chromosome which has a specialized structure and which is involved in chromosomal replication and stability; normal length is a few hundred base pairs" [MESH:National Library of Medicine_Medical Subject Headings, MGI:hdene "Howard Dene, Mouse Genome Informatics Curator"]
-is_a: MP:0003702 ! abnormal chromosome morphology
+def: "abnormal length of the terminal repetitive DNA section of a chromosome which is involved in chromosomal replication and senescence, and which protects the end of the chromosome from deterioration; normal length is a few hundred base pairs" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", MGI:hdene "Howard Dene, Mouse Genome Informatics Curator"]
+is_a: MP:0010207 ! abnormal telomere morphology
 
 [Term]
 id: MP:0003156
@@ -24137,7 +24140,7 @@ is_a: MP:0002060 ! abnormal skin morphology
 id: MP:0003706
 name: abnormal nucleus count
 def: "absent or greater than one nuclei present per cell body when one is expected; often due to failed cytokinesis or events leading to apoptosis" [pg:Philip Groth submission]
-is_a: MP:0000358 ! abnormal cell content/ morphology
+is_a: MP:0003111 ! abnormal nucleus morphology
 
 [Term]
 id: MP:0003707
@@ -28036,7 +28039,7 @@ is_a: MP:0000846 ! abnormal medulla oblongata
 [Term]
 id: MP:0004282
 name: retrognathia
-def: "abnormal posterior positioning of one or both jaws, particularly the mandible, relative to the facial skeleton and soft tissues" [J:41682, MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+def: "abnormal posterior positioning of the jaws, particularly the mandible, relative to the facial skeleton and soft tissues" [J:41682, MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
 synonym: "retrognathism" EXACT []
 is_a: MP:0000454 ! abnormal jaw morphology
 
@@ -43471,6 +43474,8 @@ is_a: MP:0002417 ! abnormal megakaryocyte morphology
 id: MP:0008256
 name: abnormal myometrium morphology
 def: "any structural anomaly of the smooth muscle coat of the uterus, which forms the main mass of the organ and surrounds and supports the endometrium" [MESH:A02.633.570.500, MGI:brs "Beverly Richards-Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal uterine smooth muscle morphology" EXACT []
+synonym: "abnormal uterus smooth muscle morphology" RELATED []
 synonym: "myometrium dysplasia" EXACT []
 is_a: MP:0001120 ! abnormal uterus morphology
 
@@ -43478,6 +43483,8 @@ is_a: MP:0001120 ! abnormal uterus morphology
 id: MP:0008257
 name: thin myometrium
 def: "reduced thickness of the smooth muscle coat of the uterus, which forms the main mass of the organ and surrounds and supports the endometrium" [MESH:A02.633.570.500, MGI:brs "Beverly Richards-Smith, Mouse Genome Informatics Curator"]
+synonym: "thin uterine smooth muscle" EXACT []
+synonym: "thin uterus smooth muscle" EXACT []
 is_a: MP:0008256 ! abnormal myometrium morphology
 
 [Term]
@@ -49324,8 +49331,9 @@ is_a: MP:0001928 ! abnormal ovulation
 [Term]
 id: MP:0008870
 name: increased mature ovarian follicle number
-def: "than normal numbers of spheroid cell aggregations in the ovary containing the ovum" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "than normal numbers of ovarian follicles that are ready for ovulation and present a blanched spot (the follicular stigma) where the graafian follicle is about to rupture on the surface of the ovary; a first maturation (meiotic) division of the primary oocyte usually occurs just prior to rupture of the follicle" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
 is_a: MP:0008871 ! abnormal ovarian follicle number
+is_a: MP:0009364 ! abnormal mature ovarian follicle morphology
 
 [Term]
 id: MP:0008871
@@ -51191,6 +51199,8 @@ name: myometrium hypoplasia
 def: "underdevelopment or reduced size, usually due to a reduced number of cells, of the smooth muscle coat of the uterus, which forms the main mass of the organ and surrounds and supports the endometrium" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
 synonym: "hypoplastic myometrium" EXACT []
 synonym: "myometrial hypoplasia" EXACT []
+synonym: "uterine smooth muscle hypoplasia" EXACT []
+synonym: "uterus smooth muscle hypoplasia" RELATED []
 is_a: MP:0008256 ! abnormal myometrium morphology
 
 [Term]
@@ -60259,6 +60269,7 @@ name: abnormal response to stress-induced hyperthermia
 def: "any anomaly in the expected increase in core body termperature in response to stress or anticipatory anxiety" [PMID:18722480]
 synonym: "abnormal SIH response" EXACT []
 is_a: MP:0001777 ! abnormal body temperature regulation
+is_a: MP:0002572 ! abnormal emotion/affect behavior
 created_by: mgi
 creation_date: 2010-05-28T02:42:40Z
 
@@ -60422,7 +60433,7 @@ creation_date: 2010-06-04T01:38:37Z
 [Term]
 id: MP:0010180
 name: increased susceptibility to weight loss
-def: "greater decrease in body weight over time when compared to the average decrease in weight in response to fasting or caloric restriction" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+def: "greater decrease in body weight over time when compared to the average decrease in weight in response to dietary modification, fasting or caloric restriction" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 is_a: MP:0001262 ! decreased body weight
 created_by: csmith
 creation_date: 2010-06-04T03:10:44Z
@@ -60430,7 +60441,7 @@ creation_date: 2010-06-04T03:10:44Z
 [Term]
 id: MP:0010181
 name: decreased susceptibility to weight loss
-def: "smaller decrease in body weight over time when compared to the average decrease in weight in response to fasting or caloric restriction" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+def: "smaller decrease in body weight over time when compared to the average decrease in weight in response to dietary modification, fasting or caloric restriction" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 is_a: MP:0001262 ! decreased body weight
 created_by: csmith
 creation_date: 2010-06-04T03:15:40Z
@@ -60466,6 +60477,7 @@ id: MP:0010185
 name: abnormal T follicular helper cell number
 def: "anomaly in the number of the CD4-positive, CXCR5-positive, CCR7-negative alpha-beta T cells located in follicles of secondary lymph nodes that expresses high levels of BCL-6, ICOS and PD1 and stimulate follicular B cells to undergo class-switching and antibody production" [CL:0002038, PMID:19855402]
 xref: CL:0002038
+is_a: MP:0008073 ! abnormal CD4-positive T cell number
 is_a: MP:0010184 ! abnormal T follicular helper cell morphology
 created_by: csmith
 creation_date: 2010-06-04T03:55:18Z
@@ -60475,6 +60487,7 @@ id: MP:0010186
 name: increased T follicular helper cell number
 def: "greater number of the CD4-positive, CXCR5-positive, CCR7-negative alpha-beta T cells located in follicles of secondary lymph nodes that expresses high levels of BCL-6, ICOS and PD1 and stimulate follicular B cells to undergo class-switching and antibody production" [CL:0002038, PMID:19855402]
 xref: CL:0002038
+is_a: MP:0008074 ! increased CD4-positive T cell number
 is_a: MP:0010185 ! abnormal T follicular helper cell number
 created_by: csmith
 creation_date: 2010-06-04T03:55:39Z
@@ -60484,6 +60497,7 @@ id: MP:0010187
 name: decreased T follicular helper cell number
 def: "reduced number of the CD4-positive, CXCR5-positive, CCR7-negative alpha-beta T cells located in follicles of secondary lymph nodes that expresses high levels of BCL-6, ICOS and PD1 and stimulate follicular B cells to undergo class-switching and antibody production" [CL:0002038, PMID:19855402]
 xref: CL:0002038
+is_a: MP:0008075 ! decreased CD4-positive T cell number
 is_a: MP:0010185 ! abnormal T follicular helper cell number
 created_by: csmith
 creation_date: 2010-06-04T03:56:04Z
@@ -60493,6 +60507,7 @@ id: MP:0010188
 name: abnormal T follicular helper cell differentiation
 def: "atypical production of or inability to produce the CD4-positive, CXCR5-positive, CCR7-negative alpha-beta T cells located in follicles of secondary lymph nodes that expresses high levels of BCL-6, ICOS and PD1 and stimulate follicular B cells to undergo class-switching and antibody production" [CL:0002038, PMID:19855402]
 xref: CL:0002038
+is_a: MP:0008076 ! abnormal CD4-positive T cell differentiation
 is_a: MP:0010184 ! abnormal T follicular helper cell morphology
 created_by: csmith
 creation_date: 2010-06-04T03:56:29Z
@@ -60613,11 +60628,61 @@ creation_date: 2010-06-11T03:01:23Z
 [Term]
 id: MP:0010203
 name: focal ventral hair loss
-def: "focal hair loss on the ventral area of a rodent resulting in dorsal skin visible in a patch where hair loss occurs" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", MGI:Sanger_Karp "Submission from Natasha Karp"]
+def: "focal hair loss on the ventral area of a rodent resulting in ventral skin visible in a patch where hair loss occurs" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", MGI:Sanger_Karp "Submission from Natasha Karp"]
 synonym: "ventral skin visible" EXACT []
 is_a: MP:0000418 ! focal hair loss
 created_by: csmith
 creation_date: 2010-06-11T03:04:09Z
+
+[Term]
+id: MP:0010204
+name: abnormal astrocyte apoptosis
+def: "change in the timing or the number of astrocytes undergoing programmed cell death" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal astroglia apoptosis" EXACT []
+synonym: "abnormal astroglial cell apoptosis" EXACT []
+is_a: MP:0008916 ! abnormal astrocyte physiology
+is_a: MP:0010170 ! abnormal glial cell apoptosis
+created_by: csmith
+creation_date: 2010-06-18T11:05:34Z
+
+[Term]
+id: MP:0010205
+name: abnormal oligodendrocyte apoptosis
+def: "change in the timing or the number of oligodendrocytes undergoing programmed cell death" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal oligodendroglia apoptosis" RELATED []
+synonym: "abnormal oligodendroglial cell apoptosis" EXACT []
+synonym: "abnormal oligoglia apoptosis" EXACT []
+synonym: "abnormal oligoglial cell apoptosis" EXACT []
+is_a: MP:0008917 ! abnormal oligodendrocyte physiology
+is_a: MP:0010170 ! abnormal glial cell apoptosis
+created_by: csmith
+creation_date: 2010-06-18T11:08:21Z
+
+[Term]
+id: MP:0010206
+name: pigment incontinence
+def: "absence of melanin and melanosomes in the epidermis, and accumulation of melanin and melanosome in melanophages in the upper dermis" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "incontinence of pigment" EXACT []
+is_a: MP:0002095 ! abnormal skin pigmentation
+created_by: csmith
+creation_date: 2010-06-18T03:35:59Z
+
+[Term]
+id: MP:0010207
+name: abnormal telomere morphology
+def: "any strucutral anomaly of the terminal repetitive DNA section of a chromosome which is involved in chromosomal replication and senescence, and which protects the end of the chromosome from deterioration" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0003702 ! abnormal chromosome morphology
+created_by: csmith
+creation_date: 2010-06-22T01:20:58Z
+
+[Term]
+id: MP:0010208
+name: prognathia
+def: "abnormal protrusion of the mandible relative to the facial skeleton and soft tissues" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "prognathism" EXACT []
+is_a: MP:0000454 ! abnormal jaw morphology
+created_by: csmith
+creation_date: 2010-06-22T03:12:19Z
 
 [Typedef]
 id: part_of

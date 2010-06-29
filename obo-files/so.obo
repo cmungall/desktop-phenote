@@ -1,6 +1,6 @@
 format-version: 1.2
-date: 04:06:2010 13:08
-auto-generated-by: OBO-Edit 2.1-beta4
+date: 23:06:2010 15:26
+auto-generated-by: OBO-Edit 2.1-beta3
 subsetdef: biosapiens "biosapiens protein feature ontology"
 subsetdef: SOFA "SO feature annotation"
 synonymtypedef: aa1 "amino acid 1 letter code"
@@ -1132,8 +1132,7 @@ name: ribosome_entry_site
 def: "Region in mRNA where ribosome assembles." [SO:ke]
 subset: SOFA
 synonym: "ribosome entry site" EXACT []
-is_a: SO:0000837 ! UTR_region
-relationship: part_of SO:0000203 ! UTR
+is_a: SO:0000836 ! mRNA_region
 
 [Term]
 id: SO:0000140
@@ -4706,6 +4705,7 @@ is_a: SO:0005836 ! regulatory_region
 id: SO:0000552
 name: Shine_Dalgarno_sequence
 def: "A region in the 5' UTR that pairs with the 16S rRNA during formation of the preinitiation complex." [SO:jh]
+comment: Not found in Eukaryotic sequence.
 synonym: "five prime ribosome binding site" EXACT []
 synonym: "RBS" RELATED []
 synonym: "Shine Dalgarno sequence" EXACT []
@@ -5576,7 +5576,7 @@ name: repeat_region
 def: "A region of sequence containing one or more repeat units." [SO:ke]
 subset: SOFA
 synonym: "repeat region" EXACT []
-is_a: SO:0001412 ! topologically_defined_region
+is_a: SO:0001411 ! biological_region
 relationship: has_part SO:0000726 ! repeat_unit
 
 [Term]
@@ -6156,7 +6156,7 @@ def: "The simplest repeated component of a repeat region. A single repeat." [SO:
 comment: Added to comply with the feature table. A single repeat.
 synonym: "repeat unit" EXACT []
 xref: http://www.ebi.ac.uk/embl/Documentation/FT_definitions/feature_table.html
-is_a: SO:0001412 ! topologically_defined_region
+is_a: SO:0001411 ! biological_region
 
 [Term]
 id: SO:0000727
@@ -8697,10 +8697,8 @@ name: repeat_fragment
 def: "A portion of a repeat, interrupted by the insertion of another element." [SO:ke]
 comment: Requested by Chris Smith, and others at Flybase to help annotate nested repeats.
 synonym: "repeat fragment" EXACT []
-is_a: SO:0000657 ! implied link automatically realized ! repeat_region
 is_a: SO:0000840 ! repeat_component
-intersection_of: SO:0000657 ! repeat_region
-intersection_of: has_quality SO:0000731 ! fragmentary
+relationship: part_of SO:0001649 ! nested_repeat
 
 [Term]
 id: SO:0001051
@@ -8720,10 +8718,10 @@ is_obsolete: true
 [Term]
 id: SO:0001054
 name: transposon_fragment
+def: "A portion of a transposon, interrupted by the insertion of another element." [SO:ke]
 synonym: "transposon fragment" EXACT []
-is_a: SO:0000101 ! implied link automatically realized ! transposable_element
-intersection_of: SO:0000101 ! transposable_element
-intersection_of: has_quality SO:0000731 ! fragmentary
+is_a: SO:0000840 ! repeat_component
+relationship: part_of SO:0001648 ! nested_transposon
 
 [Term]
 id: SO:0001055
@@ -14236,6 +14234,37 @@ created_by: kareneilbeck
 creation_date: 2010-05-28T02:34:43Z
 
 [Term]
+id: SO:0001647
+name: kozak_sequence
+def: "A kind of ribosome entry site, specific to Eukaryotic organisms that overlaps part of both 5' UTR and CDS sequence." [SO:ke]
+subset: SOFA
+synonym: "kozak consensus" EXACT []
+synonym: "kozak consensus sequence" EXACT []
+synonym: "kozak sequence" EXACT []
+xref: http://en.wikipedia.org/wiki/Kozak_consensus_sequence "wikipedia"
+is_a: SO:0000139 ! ribosome_entry_site
+created_by: kareneilbeck
+creation_date: 2010-06-07T03:12:20Z
+
+[Term]
+id: SO:0001648
+name: nested_transposon
+def: "A transposon that is disrupted by the insertion of another element." [SO:ke]
+synonym: "nested transposon" EXACT []
+is_a: SO:0000101 ! transposable_element
+created_by: kareneilbeck
+creation_date: 2010-06-23T03:22:57Z
+
+[Term]
+id: SO:0001649
+name: nested_repeat
+def: "A repeat that is disrupted by the insertion of another element." [SO:ke]
+synonym: "nested repeat" RELATED []
+is_a: SO:0000657 ! repeat_region
+created_by: kareneilbeck
+creation_date: 2010-06-23T03:24:55Z
+
+[Term]
 id: SO:0001700
 name: histone_modification
 def: "Histone modification is a post translationally modified region whereby residues of the histone protein are modified by methylation, acetylation, phosphorylation, ubiquitination, sumoylation, citrullination, or ADP-ribosylation." [http:en.wikipedia.org/wiki/Histone]
@@ -16633,11 +16662,6 @@ created_by: kareneilbeck
 creation_date: 2009-08-19T02:27:24Z
 
 [Typedef]
-id: has_genome_location
-name: has_genome_location
-is_obsolete: true
-
-[Typedef]
 id: has_intergral_part
 name: has_integral_part
 def: "X has_integral_part Y if and only if: X has_part Y and Y part_of X." [http://precedings.nature.com/documents/3495/version/1]
@@ -16748,11 +16772,6 @@ id: recombined_to
 name: recombined_to
 created_by: kareneilbeck
 creation_date: 2009-08-19T02:20:07Z
-
-[Typedef]
-id: regulated_by
-name: regulated_by
-is_obsolete: true
 
 [Typedef]
 id: sequence_of
