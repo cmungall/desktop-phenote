@@ -521,7 +521,8 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
     public void charChanged(CharChangeEvent e) {
       // check charField is this char field
       updateListGui();
-      if (e.getSource() != CharFieldGui.this && e.isUpdateForCharField(charField)) {
+      // Everything in this if is now commented out
+//      if (e.getSource() != CharFieldGui.this && e.isUpdateForCharField(charField)) {
         // i think all we need to do is setText to synch with model
         // for complist dont we also need to set its model (not just text??)
         //setText(e.getValueString()); // might as well just synch with model
@@ -538,7 +539,7 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
         //updateGuiOnly = true; // disable model editing - a better way to do this???
 //        setValueFromChar(getFirstSelectedChar());
         //updateGuiOnly = false; // reenable model editing
-      }
+//      }
     }
   }
 
