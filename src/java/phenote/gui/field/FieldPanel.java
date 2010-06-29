@@ -52,7 +52,7 @@ public class FieldPanel extends AbstractGUIComponent {
   private EventSelectionModel<CharacterI> selectionModel;
 
   /** eventually configurable (with default 10) - for now hardwire at 10 */
-  private static int fieldsPerTab = 10;
+  private static int fieldsPerTab = 8; // 10;
 
 //   public FieldPanel() {
 //     this(true,false); // false - no search panel - in menu now
@@ -136,7 +136,7 @@ public class FieldPanel extends AbstractGUIComponent {
   private void initGui() {
     // should figure y from # of fields really!!! yes!!!
     // width of ontology labels effects x
-    this.setPreferredSize(new Dimension(650,350));//690,490));
+    this.setPreferredSize(new Dimension(700,375));//690,490));
     //this.setMinimumSize(new Dimension(700,490));//690,490));
     //this.setMaximumSize(new Dimension(2000,750));
     BoxLayout bl = new BoxLayout(this,BoxLayout.X_AXIS); // grid bag?
