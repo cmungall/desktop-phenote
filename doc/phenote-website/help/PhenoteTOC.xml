@@ -23,6 +23,7 @@
      <tocitem text="Term Info" target="Term_Info"/>
      <tocitem text="Annotation Spreadsheet" target="Annotation_Spreadsheet"/>
      <tocitem text="Changing your Configuration" target="Changing_your_Configuration"/>
+     <tocitem text="Using Filters" target="Using_Filters"/>
 </tocitem>
 <tocitem text="Loading/Saving Annotations">
      <tocitem text="Introduction to Data Adapters" target="Introduction_to_Adapters"/>

@@ -7,6 +7,40 @@
 </HEAD>
 <BODY bgColor=#ffffff>
 <H1>Using Filters</H1>
+<p>You can use filters to show only the lines that include a specific term or
+string.  The filter box is at the bottom of the Phenote window.</p>
+<p>The filter interface lets you choose a field to filter on, or you can use
+the "simple filter" to look for a term (or a string of letters, such as "ab")
+  in any field.  Choose the desired filtering field from the pulldown list, or
+  leave it at "Simple Filter".</p>
+<p>The fields that are constrained by ontologies offer you a choice of "Exact"
+  (find lines where the field exactly matches the term you've specified) or
+  "Inherit" (include lines where the field term inherits from the term you've
+  specified).  The unconstrained fields (including "Simple Filter", which
+  looks at all fields) offer a choice of Exact or Partial match.</p>
+<p>Here is an example showing the use of a simple filter and a field-specific
+  filter.  First, here's our sample dataset, unfiltered:<br>
+<img src="../images/no-filter.png"><br><br>
+Now the user has applied a Simple Filter to look for all lines that include the
+term "Abnormal".  Notice that in two lines, this term appears in the Quality
+field, and in one, it's in the Abnormal field.<br>
+<img src="../images/abnormal-any.png"><br><br>
+The user has decided she only wants to see terms with Quality=Abnormal, so she
+has chosen the Quality field from the filter pulldown.  Notice that the line
+that had Abnormal in a field other than Quality has disappeared from the
+table.<br>
+<img src="../images/abnormal-quality.png"><br><br>
+</p><p>
+Filters don't permanently remove data from your dataset--they just suppress it
+temporarily from the display.  To see all of your data again, all you have to
+do to remove the current filter is to delete the text you typed in the filter
+box.<p></p> Also keep in mind that filters are "live"--if you edit your data while a filter is turned
+on, the newly edited data will be subjected to the filter.  So, for example,
+if you edited the Quality field in the example above and changed "Abnormal" to
+"Normal", that whole line of data would disappear from the annotation table
+because it no longer matched the filter.  (This can be confusing the first
+time it happens--where'd my data go?!)
+</p>
 <P>&nbsp;</P>
 </BODY>
 </html>
