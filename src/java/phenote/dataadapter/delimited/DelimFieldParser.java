@@ -38,7 +38,10 @@ class DelimFieldParser {
         if (head.endsWith("ID")) {
           head = head.substring(0,head.length()-3);
           try { cf = CharFieldManager.inst().getCharFieldForName(head); }
-          catch (CharFieldException x) { cf = null; } // already is really
+          catch (CharFieldException x) {
+        	  //LOG.error("exception:"+x);
+        	  cf = null; 
+          } // already is really
         }
       }
       if (cf == null)

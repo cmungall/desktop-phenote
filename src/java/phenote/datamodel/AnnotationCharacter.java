@@ -181,7 +181,7 @@ public class AnnotationCharacter extends AbstractCharacter {
 //       OBOProperty rel = driver.getPropertyForField(objectDifferentia.getCharField());
 //       OBOClass pc =
 //         OboUtil.makePostCompTerm(objectGenus.toTerm(),rel,objectDifferentia.toTerm());
-      OboUtil ou = OboUtil.initPostCompTerm(objectGenus.toTerm());
+      PostCompTermWrapper ou = OboUtil.initPostCompTerm(objectGenus.toTerm());
 //      LOG.debug("ou = "+ou+" genus:"+objectGenus.toTerm());
       for (Map.Entry<CharField,CharFieldValue> e : charFieldToObjectDiff.entrySet()) {
         OBOProperty rel = driver.getPropertyForField(e.getKey());

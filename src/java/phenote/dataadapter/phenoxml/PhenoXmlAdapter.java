@@ -367,7 +367,7 @@ public class PhenoXmlAdapter extends AbstractFileAdapter {
     final OBOClass genus = this.getTerm(tr.getAbout());
     if (tr.sizeOfQualifierArray() > 0) {
       // need to create post-comp
-      final OboUtil postCompUtil = OboUtil.initPostCompTerm(genus);
+      final PostCompTermWrapper postCompUtil = OboUtil.initPostCompTerm(genus);
       for (Qualifier qualifier : tr.getQualifierList()) {
         final OBOProperty relation = this.getRelation(qualifier.getRelation());
         final OBOClass differentia = this.getTermForTyperef(qualifier.getHoldsInRelationTo().getTyperef());

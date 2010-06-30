@@ -27,6 +27,7 @@ import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldEnum;
 import phenote.datamodel.CharacterI;
 import phenote.datamodel.OboUtil;
+import phenote.datamodel.PostCompTermWrapper;
 import phenote.datamodel.Ontology;
 import phenote.edit.CharChangeEvent;
 import phenote.edit.CharChangeListener;
@@ -337,7 +338,7 @@ class PostCompGui {
       OBOClass genusTerm;
       try { genusTerm = genusField.getCurrentOboClass(); }
       catch (CharFieldGuiEx e) { throw new CompEx("Genus is unspecified"); }
-      OboUtil oboUtil = OboUtil.initPostCompTerm(genusTerm);
+      PostCompTermWrapper oboUtil = OboUtil.initPostCompTerm(genusTerm);
       for (RelDiffGui rd : relDiffGuis) {
         // check if filled in both rel & diff
         try {

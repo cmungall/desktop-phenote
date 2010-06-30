@@ -25,11 +25,7 @@ import org.obo.util.TermUtil;
 public class OboUtil {
 
   private static final Logger LOG = Logger.getLogger(OboUtil.class);
-  private OBOClass postCompTerm;
-  private String id;
-  private String name;
-  private boolean hasRelAndDiff=false;
-
+ 
 
 //   /** used by OntologyManager */
 //   public static OBOClass makePostCompTerm(OBOClass genus, OBOProperty rel,
@@ -49,62 +45,25 @@ public class OboUtil {
 
   public static OBOClass makePostCompTerm(OBOClass genus, OBOProperty rel,
                                           OBOClass diff) {
-    OboUtil u = initPostCompTerm(genus);
+    PostCompTermWrapper u = initPostCompTerm(genus);
     u.addRelDiff(rel,diff);
     return u.getPostCompTerm();
   }
 
 
   /** even if genus is null returns an oboutil - should it return null if genus null? ex? */
-  public static OboUtil initPostCompTerm(OBOClass genus) {
-    OboUtil ou = new OboUtil();
-    if (genus!=null) ou.addGenus(genus);
-    return ou;
+  public static PostCompTermWrapper initPostCompTerm(OBOClass genus) {
+	  PostCompTermWrapper ou = new PostCompTermWrapper();
+	  ou.addGenus(genus);
+	  return ou;
   }
-
-
-  private void addGenus(OBOClass genus) {
-  	if (genus==null) {
-  	  LOG.error("Genus is null, cant add to postcomp");
-  	  return;
-  	}
-    id = genus.getID();
-    name = genus.getName();
-    postCompTerm = new OBOClassImpl(name,id);
-    OBOProperty ISA = OBOProperty.IS_A;
-    OBORestrictionImpl gRel = new OBORestrictionImpl(postCompTerm,ISA,genus);
-    gRel.setCompletes(true); // post comp flag
-    postCompTerm.addParent(gRel);
-  }
-
-  public void addRelDiff(OBOProperty rel,OBOClass diff) {
-    if (postCompTerm==null){
-      LOG.error("cant add rel diff, post comp term is null");
-      return;
-    }
-    OBORestrictionImpl dRel = new OBORestrictionImpl(postCompTerm,rel,diff);
-    dRel.setCompletes(true); // post comp
-    postCompTerm.addParent(dRel);
-    name += relDiffString(rel.getName(),diff.getName());
-    postCompTerm.setName(name);
-    id += relDiffString(rel.getID(),diff.getID());
-    // just for now
-    // !! Note:  this is now causing a compile error: setID(java.lang.String) is not public in org.obo.datamodel.impl.AnnotatedObjectImpl; cannot be accessed from outside package
-    // I temporarily made that method public, but we need to figure out how to fix this.
-    ((OBOClassImpl)postCompTerm).setID(id);
-    hasRelAndDiff = true;
-  }
-
-  public boolean hasRelAndDiff() { return hasRelAndDiff; }
-
-  public OBOClass getPostCompTerm() { return postCompTerm; }
 
   private static String pcString(String g, String r, String d) {
     // for now hard wire to part_of
     return g + relDiffString(r,d);
   }
 
-  private static String relDiffString(String r, String d) {
+  public static String relDiffString(String r, String d) {
     return "^"+r+"("+d+")";
   }
 
