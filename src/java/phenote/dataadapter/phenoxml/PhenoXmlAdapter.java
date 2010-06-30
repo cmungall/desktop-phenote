@@ -49,6 +49,7 @@ import phenote.datamodel.OboUtil;
 import phenote.datamodel.PhenotypeCharacterI;
 import phenote.datamodel.PhenotypeCharacterWrapper;
 import phenote.datamodel.PhenotypeCharacterI.PhenotypeCharacterFactory;
+import phenote.datamodel.PostCompTermWrapper;
 
 public class PhenoXmlAdapter extends AbstractFileAdapter {
 
