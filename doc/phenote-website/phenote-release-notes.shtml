@@ -22,6 +22,22 @@
 
 <h1>1.7</h1>
 
+<h2>07.01.2010, Version 1.7-beta15</h2>
+<ul>
+  <li> Config files now don't auto-update if they have when="NEVER" (fix for
+  bug 3017776)</li>
+  <li> Fixed updating of user-selected ontology files.  Fixes these bugs:
+    <ul>
+    <li> "Ontology Update" dialog ignoring choices - ID: 2925894</li>
+    <li> update ontologies update button misleading message - ID: 2950774</li>
+    </ul>   
+ </li>
+  <li> Fixed command-line option for loading an annotation file
+    on launch (e.g., phenote -f data/mydatafile.tab).  Added documentation
+    about command-line options to user guide.</li>
+  <li> Fields in Annotation Editor now are not cut off</li>
+</ul>   
+
 <h2>06.17.2010, Version 1.7-beta14</h2>
 <ul>
 <li>Changes to zfin configs to fix problems reported by Ceri Van Slyke</li>
