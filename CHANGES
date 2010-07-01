@@ -116,3 +116,18 @@ version, though it looks fine when you launch Phenote from the shell).
 - Added info about command-line options to user guide
 - Added name of current config to splash screen (should it also be added to
 the About screen?)
+- Fixed updating of user-selected ontology files.  Fixes these bugs:
+  - "Ontology Update" dialog ignoring choices - ID: 2925894
+  - update ontologies update button misleading message - ID: 2950774
+- Fixed bug 3019278 (-f command-line option (for specifying a file to load)
+doesn't work).  You can now specify an annotation file on the command line,
+e.g.,
+        phenote -f data/mydatafile.tab
+- Added user guide page about using filters
+- Made Annotation Editor hold 8 fields per tab instead of 10 because 10 didn't
+fit.  (Also made panel a bit bigger, because even 8 fields weren't always
+fitting.)
+- (Chris refactored OboUtil because Phenote was trying to call setID in obo,
+which didn't have public access.  Now static helper classes are retained in
+OboUtil.  This shouldn't affect any Phenote behavior; I'm just noting it down
+for future reference.)
