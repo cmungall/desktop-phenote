@@ -39,19 +39,8 @@
         <p>The webstart edition is currently unavailable while we resolve some
         problems.  Please use the installer edition instead.</p>
 
-	<h3>Note about Phenote and Phenote+</h3>
-        <p>There's a small nomenclature change starting in v1.7.  In 2008, the
-        Phenote developers introduced a new "look and feel" to the Phenote
-        user interface.  They called this new version "Phenote+".  At that
-        time, Phenote+ was considered a still-experimental version, and
-        "regular" Phenote was still available.  We have decided that it's time
-        to retire the old Phenote interface and make the Phenote+ interface
-        the default.  (Phenote+ will henceforth be referred to as "Phenote";
-        there won't be anything called "Phenote+".)
-</p>
-
 	<h2>For developers</h2>
-	Check out our special documentation for running Phenote from the <a href="developer-docs/getting-source-code-in-eclipse.shtml">command line or in Eclipse</a> 
+	Check out our documentation on running Phenote from the <a href="developer-docs/getting-source-code-in-eclipse.shtml">command line or in Eclipse</a>.
 
 	<h2>Hardware requirements</h2>
 	<ul>
@@ -65,16 +54,19 @@
 	<li> Any of these operating systems:  Windows XP; Mac OSX; Linux;
 	Solaris </li>
         <li> Java 1.5 or later </li>
-	<li> To run from the command line:  Ant </li>
+	<li> If you want to compile and run Phenote from the command line,
+	you'll need Ant </li>
 	</ul>
-	
+	<h2>Reporting bugs</h2>
+        <p>Please use the <a target=_new href="https://sourceforge.net/tracker/?group_id=76834&atid=887913">bug tracker</a> to
+        report any Phenote issues.</p>
       </div>
     </div>
 
     <div id="sidebar_container">
 
       <div id="sidebar_content">
-
+<br><br>
 	<div class="content_box_head_blue">
 	  Recently added features and bug fixes, Phenote version 1.7-b15,
 	  1.7-b15
@@ -90,11 +82,26 @@
           on launch (e.g., phenote -f data/mydatafile.tab)</li>
           <li> (b15) Fields in Annotation Editor now are not cut off</li>
             </ul>   
-	<b>See the <a href="phenote-release-notes.shtml">release notes</a> for more details...<br />
+	<b>See the <a href="phenote-release-notes.shtml">release notes</a> for more details...</b><br />
 	</div>
-      </div>
-    </div>
+<br><br>
+	<div class="content_box_head_blue">
+	  Note about Phenote and Phenote+
+	</div>
 
+	<div class="content_box_blue">
+        <p>In 2008, the
+        Phenote developers introduced a new "look and feel" to the Phenote
+        user interface.  They called this new version "Phenote+".  At that
+        time, Phenote+ was considered a still-experimental version, and
+        "regular" Phenote was still available.  Starting with Phenote release
+        1.7, the developers decided that it's time
+        to retire the old Phenote interface and make the Phenote+ interface
+        the default.  (Phenote+ will henceforth be referred to as "Phenote";
+        there won't be anything called "Phenote+".)</p>
+      </div>
+        </div>
+        </div>
     <!--#include virtual="ssi/footer.html" -->
 
   </body>

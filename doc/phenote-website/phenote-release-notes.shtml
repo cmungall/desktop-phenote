@@ -24,24 +24,24 @@
 
 <h2>07.01.2010, Version 1.7-beta15</h2>
 <ul>
-  <li> Config files now don't auto-update if they have when="NEVER" (fix for
+  <li> bugfix: Config files now don't auto-update if they have when="NEVER" (fix for
   bug 3017776)</li>
-  <li> Fixed updating of user-selected ontology files.  Fixes these bugs:
+  <li> bugfix: Fixed updating of user-selected ontology files.  Fixes these bugs:
     <ul>
     <li> "Ontology Update" dialog ignoring choices - ID: 2925894</li>
     <li> update ontologies update button misleading message - ID: 2950774</li>
     </ul>   
  </li>
-  <li> Fixed command-line option for loading an annotation file
+  <li> bugfix: Fixed command-line option for loading an annotation file
     on launch (e.g., phenote -f data/mydatafile.tab).  Added documentation
     about command-line options to user guide.</li>
-  <li> Fields in Annotation Editor now are not cut off</li>
+  <li> bugfix: Fields in Annotation Editor no longer cut off</li>
 </ul>   
 
 <h2>06.17.2010, Version 1.7-beta14</h2>
 <ul>
-<li>Changes to zfin configs to fix problems reported by Ceri Van Slyke</li>
-<li>Partial fix (improvement, at least) for several related bug reports:
+<li>bugfix: Changes to zfin configs to fix problems reported by Ceri Van Slyke</li>
+<li>bugfix: Partial fix (improvement, at least) for several related bug reports:
 <ul>
 <li>3013449--Can't delete ontology-constrained terms in Annotation Editor</li>
 <li>1850306--cell contents disappear in row selection</li>
@@ -61,14 +61,14 @@ ontology-constrained fields) for focusLost (i.e., user tabbed or clicked out
 of the field--these weren't registering as KeyEvents) and not just for return,
 but it still sometimes seems not to do the right thing.
 </li>
-<li>New Phenote logo</li>
-<li>Updated dialog that comes up while Phenote is loading (but it still
+<li>change: New Phenote logo</li>
+<li>change: Updated dialog that comes up while Phenote is loading (but it still
   sometimes comes up blank)</li>
 </ul>
 
 <h2>05.06.2010, Version 1.7-beta12</h2>
 <ul>
-<li>Fixed bug 2993230: terms used in annotations that are not in any currently
+<li>bugfix: Fixed bug 2993230: terms used in annotations that are not in any currently
 loaded ontology were getting lost (not shown in annotation table; not saved in
 roundtrip).
 Now these unknown terms are not lost, and they are visually indicated in the
