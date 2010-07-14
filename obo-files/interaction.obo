@@ -1,0 +1,18 @@
+[Term]
+id: TEMP:interaction
+name: interaction
+
+[Term]
+id: TEMP:genetic_interaction
+name: genetic interaction
+is_a: TEMP:interaction
+
+[Term]
+id: TEMP:physical_interaction
+name: physical interaction
+is_a: TEMP:interaction
+
+[Typedef]
+id: OBO_REL:participates_in
+name: participates_in
+
