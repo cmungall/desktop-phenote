@@ -403,7 +403,7 @@ public class Phenote {
     if (!Config.inst().isInitialized()) { 
       try { Config.inst().loadDefaultConfigFile(); }
       catch (ConfigException ce) { 
-        logErr("Default config has failed: "+ce+".  Loading fallback flybase config file instead.");
+        logErr("Failed to load requested configuration: "+ce+".  Loading fallback flybase config file instead.");
         try { Config.inst().loadDefaultFlybaseConfigFile(); }
         catch (ConfigException c) { 
           logErr("Flybase default config has failed. We're hosed! "+c);

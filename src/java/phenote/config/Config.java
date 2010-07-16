@@ -290,7 +290,7 @@ public class Config {
         else {
           try {
             String jarConfig = getConfigUrl(configFile).getFile();
-            LOG.error("Also failed to open config file in user's .phenote: " + mode.localFileString() + "--trying to use one from jar: " + jarConfig);
+            LOG.error("Couldn't find config file in user's .phenote: " + mode.localFileString() + "--trying to use one from Phenote directory: " + jarConfig);
             // Try to copy jar one to .phenote
 //            LOG.debug("About to try copying " + jarConfig + " to " + localFile); // DEL
             URL jarConfigUrl = null;
