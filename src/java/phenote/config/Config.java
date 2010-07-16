@@ -297,19 +297,19 @@ public class Config {
             try {
               jarConfigUrl = new URL("file://" + jarConfig);
             } catch (MalformedURLException me) {
-              LOG.debug("Couldn't make URL for jar config " + jarConfigUrl);
+              LOG.debug("Couldn't make URL for config from jar or application directory: " + jarConfigUrl);
               writeMyPhenoteDefaultFile(masterConfig); // ? master?
               return jarConfig;
             }
             try {
               FileUtil.copyUrlToFile(jarConfigUrl, localFile);
             } catch (IOException io) {
-              LOG.debug("Couldn't copy jar config " + jarConfig + " to " + localFile);
+              LOG.debug("Couldn't copy config file from jar or application directory (" + jarConfig + ") to " + localFile);
             }
             writeMyPhenoteDefaultFile(masterConfig); // ? master?
             return jarConfig;
           } catch (FileNotFoundException fnf) {
-            LOG.error("Couldn't find conf file from jar?!: " + fnf.getMessage());
+            LOG.error("Couldn't find conf file from jar or application directory: " + fnf.getMessage());
             throw new ConfigException(fnf);
           }
         }
@@ -335,26 +335,26 @@ public class Config {
         else {
           try {
             String jarConfig = getConfigUrl(configFile).getFile();
-            LOG.error("Also failed to open config file in user's .phenote: " + mode.localFileString() + "--trying to use one from jar: " + jarConfig);
+            LOG.error("Also failed to open config file in user's .phenote: " + mode.localFileString() + "--trying to use one from jar or application directory: " + jarConfig);
             // Try to copy jar one to .phenote
 //            LOG.debug("About to try copying " + jarConfig + " to " + localFile); // DEL
             URL jarConfigUrl = null;
             try {
               jarConfigUrl = new URL("file://" + jarConfig);
             } catch (MalformedURLException me) {
-              LOG.debug("Couldn't make URL for jar config " + jarConfigUrl);
+              LOG.debug("Couldn't make URL for config from jar or application directory " + jarConfigUrl);
               writeMyPhenoteDefaultFile(masterConfig); // ? master?
               return jarConfig;
             }
             try {
               FileUtil.copyUrlToFile(jarConfigUrl, localFile);
             } catch (IOException io) {
-              LOG.debug("Couldn't copy jar config " + jarConfig + " to " + localFile);
+              LOG.debug("Couldn't copy config from jar or application directory (" + jarConfig + ") to " + localFile);
             }
             writeMyPhenoteDefaultFile(masterConfig); // ? master?
             return jarConfig;
           } catch (FileNotFoundException fnf) {
-            LOG.error("Couldn't find conf file from jar?!: " + fnf.getMessage());
+            LOG.error("Couldn't find conf file in jar or application directory: " + fnf.getMessage());
             throw new ConfigException(fnf);
           }
         }
