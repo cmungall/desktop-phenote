@@ -96,7 +96,7 @@ public class FileUtil {
     }
     List<URL> possibleUrls = getPossibleUrls(filename);
     for (URL u : possibleUrls) {  ///there's no particular order here, is there???
-      //System.out.println(u+" url exists "+urlExists(u));
+	//	LOG.debug("findUrl: checking " + u+", url exists: "+urlExists(u));
       if (urlExists(u)) return u;
     }
     //System.out.println("Failed to find file "+filename);
@@ -112,12 +112,14 @@ public class FileUtil {
   // better error message
   // split into getPossibleMaster?ConfigUrls & getPossibleOboUrls
   private static List<URL> getPossibleUrls(String filename) {
+      //      LOG.debug("getPossibleUrls: " + filename); // DEL
     List<URL> urls = new ArrayList<URL>(5);
     if (filename == null) {
       System.out.println("cant find null file");
       LOG.error("cant find null file");
       return urls; // ?? ex?
     }
+
     // hmmm - should full path go last? can be problem with running from
     // jar as config files are in root(fix), obo files finally given dir
     addFile(filename,urls); // full path or relative to pwd
@@ -128,10 +130,6 @@ public class FileUtil {
     addFile(getDotPhenoteOboDir().getPath()+"/"+filename,urls);
     // addFile(getDotPhenoteConfDir().getPath() ???
     addFile("obo-files/"+filename,urls);//this is obo-files specific - separate method?
-//     URL jarUrl = FileUtil.class.getResource(filename);
-//     if (jarUrl != null) urls.add(jarUrl);
-//     jarUrl = FileUtil.class.getResource("/"+filename);
-//     if (jarUrl != null) urls.add(jarUrl);
     return urls;
   }
 
@@ -143,16 +141,32 @@ public class FileUtil {
       return;
     }
     try {
-      URL u = new File(filename).toURL();
+	URL u;
+	if (filename.startsWith("file:") || filename.startsWith("http:"))
+	    u = new URL(filename);
+	else
+	    u = new File(filename).toURL();
+	//      LOG.debug("addFile(" + filename + "): u = " + u);// DEL
       if (u != null) urls.add(u);
 
-      URL jarUrl = FileUtil.class.getResource(filename);
+      URL jarUrl = FileUtil.class.getResource(filename); // Does this ever work?  It always seems like the next attempt (with the /) works better.
       if (jarUrl != null) urls.add(jarUrl);
+
       jarUrl = FileUtil.class.getResource("/"+filename);
-      if (jarUrl != null) urls.add(jarUrl);
+      if (filename.indexOf(".cfg") > 0 && jarUrl != null) {
+	  String appConfDir = jarUrl.getFile();
+	  appConfDir = appConfDir.substring(0, appConfDir.indexOf("/jars")) + "/conf/";
+	  if (appConfDir.startsWith("file:"))
+	      appConfDir = appConfDir.substring(5);
+	  //	  LOG.debug("addFile: now appConfDir = " + appConfDir + ", filename = " + filename); // DEL
+	  URL appConfUrl = new File(appConfDir + filename).toURL();
+	  if (appConfUrl != null)
+	      urls.add(appConfUrl);
+	  urls.add(jarUrl);
+      }
     } catch (MalformedURLException e) {
       //System.out.println("bad file url "+e);
-      LOG.error("bad file url "+e);
+      LOG.error("addFile(" + filename + "): error making url: "+e);
     }
   }
     
