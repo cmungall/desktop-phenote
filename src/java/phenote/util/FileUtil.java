@@ -155,7 +155,8 @@ public class FileUtil {
       jarUrl = FileUtil.class.getResource("/"+filename);
       if (filename.indexOf(".cfg") > 0 && jarUrl != null) {
 	  String appConfDir = jarUrl.getFile();
-	  appConfDir = appConfDir.substring(0, appConfDir.indexOf("/jars")) + "/conf/";
+          if (appConfDir.indexOf("/jars") > 0)
+            appConfDir = appConfDir.substring(0, appConfDir.indexOf("/jars")) + "/conf/";
 	  if (appConfDir.startsWith("file:"))
 	      appConfDir = appConfDir.substring(5);
 	  //	  LOG.debug("addFile: now appConfDir = " + appConfDir + ", filename = " + filename); // DEL
