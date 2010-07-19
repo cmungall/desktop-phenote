@@ -1,0 +1,9 @@
+default-namespace: Negation
+date: 19:07:2010 17:44
+remark: One-term ontology for use by hpo configuration for noting when the
+remark: relevant attribute is NOT present.  Could also be used by other configurations.
+
+[Term]
+id: NOT
+name: NOT
+
