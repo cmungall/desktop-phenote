@@ -149,8 +149,16 @@ public class OntologyDataAdapter {
 //            ontologies.add(oc.getName());
         }
         catch (OntologyException e) {
-          String m = "Got exception while trying to load obo file--please check config & obo files.  Exception: " + e.getMessage();
-          LOG.error(m); System.out.println(m);
+          String m = "Got exception while trying to load obo file--please check the configuration and ontology files in ~/.phenote and consider removing the defective file.  (You can even remove your entire .phenote directory, and Phenote will recreate it when you relaunch.)\n\nException: " + e;
+          if (e.getCause() != null) {
+            String cause = e.getCause().toString();
+            m += "\nCause: " + cause;
+            String badFile = getBadFileNameFromCause(cause);
+            if (badFile.length() > 0)
+              m += "\n\nYou may want to try removing the bad file (" + badFile + ") from ~/.phenote/obo-files and relaunching Phenote.";
+          }
+          LOG.error(m); 
+          JOptionPane.showMessageDialog(null,m,"Ontology load failure",JOptionPane.ERROR_MESSAGE);
         }
       }
     }
@@ -271,19 +279,21 @@ public class OntologyDataAdapter {
         url = synchWithRepositoryUrl(url,reposUrl,ontCfg.getName(),filename);
         //} catch (/*MalfURL & Ontol*/Exception e) { LOG.error(e); e.printStackTrace(); }
       } catch (MalformedURLException m) {
-        LOG.error("URL is malformed "+m);
+        LOG.error("URL is malformed: "+m);
       }
     }
 
-    if (url == null) 
-      throw new OntologyException("obo file "+filename+" not found in repos nor local");
+    if (url == null) {
+      String m = "Couldn't find obo file " + filename + " locally or in repository.";
+      LOG.error("findOboUrl: " + m);
+      throw new OntologyException(m);
+    }
 
     ontCfg.setLoadUrl(url);
 
     return url;
 
   }
-
 
 
   /** this copies obo file from reposUrl to local cache (~/.phenote/obo-files 
@@ -415,7 +425,10 @@ public class OntologyDataAdapter {
 //       return date;
       return 0;
 //      throw new OntologyException("No date found in "+oboUrl);
-    } catch (IOException e) { throw new OntologyException(e); }
+    } catch (IOException e) { 
+      String m = "Exception while trying to get date from " + oboUrl + ": " + e;
+      LOG.error(m);
+      throw new OntologyException(m); }
   }
 
   // String -> url to handle web start jar obo files
@@ -440,16 +453,18 @@ public class OntologyDataAdapter {
     this.updateLoadingScreen("loading ontologies into memory", false);
     
     try { // throws data adapter exception
-      
       OBOSession os = fa.doOperation(OBOAdapter.READ_ONTOLOGY,cfg,null);
       adapterMetaData = fa.getMetaData(); // check for null?
       return os;
     }
     catch (DataAdapterException e) {
       // cause is crucial!
-      String m = "got obo data adapter exception: "+e+" message "+e.getMessage()
-      +" cause "+e.getCause()+"\nTHIS IS FATAL!\nCannot load ontologies. Phenote must"
-      +" exit.\nConsider clearing out bad file from ~/.phenote/obo-files";
+      String cause = e.getCause().toString();
+      String badFile = getBadFileNameFromCause(cause);
+      String m = "Error while reading obo file " + badFile + ": "+e
+        +"\n"+cause+"\n\nTHIS IS FATAL!\nCannot load ontologies. Phenote must exit.";
+      if (badFile.length() > 0)
+        m += "\n\nYou may want to try removing the bad file (" + badFile + ") from ~/.phenote/obo-files and relaunching Phenote.";
       ErrorManager.inst().error(new ErrorEvent(this,m));
       //LOG.error(m); // error manager should do this for free 
       // actually theres really no point in going on i think as we have failed to get
@@ -457,12 +472,20 @@ public class OntologyDataAdapter {
       // failing file, or fetch from somewhere else, but for now throw up popup and exit
       // is the best we can do - or should this be done by catcher of OntEx?
       LOG.fatal(m);
-      JOptionPane.showMessageDialog(null,m,"Load failure",JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(null,m,"Fatal ontology load failure",JOptionPane.ERROR_MESSAGE);
       System.exit(1);
       throw new OntologyException(e);
     }
   }
 
+  private String getBadFileNameFromCause(String cause) {
+    String badFile = "";
+    if (cause.indexOf("file:") >= 0)
+      badFile = cause.substring(cause.indexOf("file:") + 5);
+    if (badFile.indexOf("\n") > 0)
+      badFile = badFile.substring(0, badFile.indexOf("\n"));
+    return badFile;
+  }
 
   /** The ontology has been determined to be out of date (by quartz) and thus directed
       to reload itself from its file - in other words there is a new obo file to load 
