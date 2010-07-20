@@ -37,11 +37,10 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-//import org.oboedit.gui.Preferences;
-import phenote.config.Preferences;
 
 import phenote.config.Config;
 import phenote.config.ConfigException;
+import phenote.config.Preferences;
 import phenote.config.xml.GroupDocument.Group;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.LoadSaveManager;
@@ -261,7 +260,7 @@ public class Phenote {
             //OntologyDataAdapter oda = new OntologyDataAdapter(); // singleton?
             // loads up OntologyManager - non intuitive?
             OntologyDataAdapter.initialize(); // this sometimes hangs!!!
-            setProgress("Ontologies Initialized", 70);
+            setProgress("Ontologies initialized", 70);
             //setMessageText("Ontologies Initialized");
     }
   }
@@ -399,29 +398,42 @@ public class Phenote {
     try { commandLine.setArgs(args); } // sets config if specified
     catch (Exception e) {
       logErr("Command line arg parse failed: "+e); }//e.printStackTrace();
+
     // no config set from command line use default
     if (!Config.inst().isInitialized()) { 
       try { Config.inst().loadDefaultConfigFile(); }
       catch (ConfigException ce) { 
-        logErr("Failed to load requested configuration: "+ce+".  Loading fallback flybase config file instead.");
-        try { Config.inst().loadDefaultFlybaseConfigFile(); }
+//        logErr("Failed to load requested configuration: "+ce+".  Loading fallback flybase config file instead.");
+        logErr("Failed to load requested configuration: "+ce);
+//        try { Config.inst().loadDefaultFlybaseConfigFile(); }
+        try {
+          String masterConfig = Config.inst().getDefaultFile();
+          String nameOfFile = FileUtil.getNameOfFile(masterConfig); 
+          File dotPhenoteFile = new File(Config.inst().getDotPhenoteConfDir(), nameOfFile);
+          logErr("Trying to find master copy of " + masterConfig + " in application directory and copy to " + dotPhenoteFile);
+          Config.inst().findAndCopyConfigFile(masterConfig, dotPhenoteFile);
+          logErr("Reloading " + dotPhenoteFile + " (which has now been updated from the master copy)");
+          try { Config.inst().loadDefaultConfigFile(true); }  // This will keep the config from re-updating itself from the master URL that's in the config file (which is probably bad if we got to this point)
+          catch (ConfigException c) {
+            logErr("Uh oh, reload of " + dotPhenoteFile + " failed! "+c);
+          }
+        }
         catch (ConfigException c) { 
-          logErr("Flybase default config has failed. We're hosed! "+c);
+//          logErr("Flybase default config has failed. We're hosed! "+c);
+          // !! Make this a dialog
+          logErr("Couldn't find a good version of requested config file anywhere!  Uh oh! "+c);
+          JOptionPane.showMessageDialog(null,"Couldn't find a usable version of requested configuration file " + Config.inst().getDefaultFile() + ".\nYou will be prompted to choose a different configuration.", "Can't find requested configuration", JOptionPane.ERROR_MESSAGE);
+          if (!Config.inst().resetMyConfig()) {
+            String m = "Couldn't reset configuration!  Fatal error!  Please exit Phenote and try again later.";
+            logErr(m);
+            JOptionPane.showMessageDialog(null,m,"Couldn't reset configuration", JOptionPane.ERROR_MESSAGE);
+          }
         }
       }
     }
     // now that config is done, add constraints from it
     Config.inst().loadConstraints();
   }
-
-//  private void ontologyProgressChangeListener extends PropertyChangeListener {
-//  	public void propertyChange(PropertyChangeEvent evt) {
-//  		if (!done) {
-//  			int progress = task.getProgress();
-//  			String m = "some ontology";
-//  			loadingScreen.setProgress(m, progress);
-//    }
-
 
   public Frame getFrame() { return frame; }
 
