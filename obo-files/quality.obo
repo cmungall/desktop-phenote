@@ -1,6 +1,6 @@
 format-version: 1.2
-date: 15:05:2010 19:17
-saved-by: George Gkoutos
+date: 16:07:2010 15:24
+saved-by: george
 auto-generated-by: OBO-Edit 2.0
 subsetdef: abnormal_slim "Abnormal/normal slim"
 subsetdef: absent_slim "Absent/present slim"
@@ -2298,6 +2298,8 @@ name: branched
 def: "A branchiness quality inhering in a bearer by virtue of the bearer's having branches." [WordNet:WordNet "http://wordnet.princeton.edu/"]
 subset: cell_quality
 subset: value_slim
+synonym: "ramified" EXACT []
+synonym: "ramiform" EXACT []
 is_a: PATO:0002009 ! branchiness
 
 [Term]
@@ -2361,7 +2363,7 @@ name: pinnate
 def: "A shape quality inhering in a bearer by virtue of the bearer's having leaflets or leaflets-like structures on each side of a common axis." [WordNet:WordNet "http://wordnet.princeton.edu/"]
 subset: cell_quality
 subset: value_slim
-synonym: "featherlike" RELATED []
+synonym: "feather-like" RELATED []
 synonym: "of a leaf shape" RELATED []
 is_a: PATO:0000052 ! shape
 
@@ -2372,6 +2374,7 @@ def: "A shape quality inhering in a bearer by virtue of the bearer's being such 
 subset: cell_quality
 subset: value_slim
 synonym: "circular" EXACT []
+synonym: "rounded" EXACT []
 is_a: PATO:0002006 ! 2-D shape
 
 [Term]
@@ -3263,7 +3266,7 @@ is_obsolete: true
 [Term]
 id: PATO:0000569
 name: decreased height
-def: "A height which is relatively high." [PATOC:GVG]
+def: "A height which is relatively low." [PATOC:GVG]
 subset: value_slim
 synonym: "short" RELATED []
 is_a: PATO:0000119 ! height
@@ -3272,7 +3275,7 @@ relationship: decreased_in_magnitude_relative_to PATO:0000461 ! normal
 [Term]
 id: PATO:0000570
 name: increased height
-def: "A height which is relatively low." [PATOC:GVG]
+def: "A height which is relatively high." [PATOC:GVG]
 subset: value_slim
 synonym: "tall" RELATED []
 is_a: PATO:0000119 ! height
@@ -5600,6 +5603,8 @@ subset: cell_quality
 subset: value_slim
 synonym: "rippled" RELATED []
 synonym: "sinuate" RELATED []
+synonym: "undulated" EXACT []
+synonym: "undulating" EXACT []
 synonym: "waved" EXACT []
 synonym: "wavy" EXACT []
 is_a: PATO:0000052 ! shape
@@ -7562,7 +7567,7 @@ is_a: PATO:0001291 ! electromagnetic (EM) radiation quality
 [Term]
 id: PATO:0001293
 name: absorption quality
-def: "A scalar EM radiation quality which obtains by the capacity of the bearer to absorb radiation." [PATOC:GVG]
+def: "A scalar EM radiation quality which obtains by the capacity of the bearer to retain radiation." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001292 ! full-spectrum EM radiation quality
 
@@ -8131,6 +8136,7 @@ name: erose
 def: "A surface feature shape quality inhering in a bearer by virtue of the bearer's having an irregularly toothed edge." [PATOC:GVG]
 subset: cell_quality
 subset: value_slim
+synonym: "jagged" RELATED []
 is_a: PATO:0001976 ! serration
 
 [Term]
@@ -8413,7 +8419,7 @@ id: PATO:0001404
 name: nucleate quality
 def: "A cellular quality inhering in a bearer by virtue of bearer's number of nuclei." [PATOC:GVG]
 subset: attribute_slim
-synonym: "GO:0005634]" EXACT []
+synonym: "GO:0005634" EXACT []
 is_a: PATO:0001396 ! cellular quality
 
 [Term]
@@ -9150,6 +9156,7 @@ def: "A spheroid quality inhering in a bearer by virtue of the bearer's resembli
 subset: cell_quality
 subset: value_slim
 synonym: "globular" EXACT []
+synonym: "rotund" RELATED []
 is_a: PATO:0001865 ! spheroid
 relationship: has_cross_section PATO:0000411 ! round
 
@@ -9159,6 +9166,7 @@ name: tapered
 def: "A shape quality inhering in a bearer by virtue of the bearer's being gradually narrower or thinner toward one end." [WordNet:WordNet "http://wordnet.princeton.edu/"]
 subset: cell_quality
 subset: value_slim
+synonym: "taper" EXACT []
 is_a: PATO:0001419 ! sharp
 
 [Term]
@@ -11472,15 +11480,6 @@ is_a: PATO:0000404 ! coiled
 relationship: decreased_in_magnitude_relative_to PATO:0000461 ! normal
 
 [Term]
-id: PATO:0001797
-name: clubbed
-def: "A shape quality inhering in a bearer by virtue of the bearer's being gradually enlarged towards one end. For example, plantarflexed." [MP:0000576]
-comment: This term was moved from "shape" to a kind of "inverted" to better reflect its definition and its current usage (cf Mammalian Phenotype Ontology, MP:0000576 clubbed foot). It is not clear if the term "clubbed" is useful as a general term applicable to any non-foot. The name should probably be changed to better reflect the definition. TODO
-subset: cell_quality
-subset: value_slim
-is_a: PATO:0000052 ! shape
-
-[Term]
 id: PATO:0001798
 name: kinked
 def: "A shape quality inhering in a bearer by virtue of the bearer's having multiple angles in its length." [thefreedictionary.com:thefreedictionary.com "http://www.thefreedictionary.com/"]
@@ -12034,6 +12033,7 @@ def: "A shape quality inhering in a circular disk by virtue of the bearer's havi
 subset: cell_quality
 subset: value_slim
 synonym: "bow-shaped" RELATED []
+synonym: "crescentic" EXACT []
 synonym: "lunate" RELATED []
 xref: Image:http\://upload.wikimedia.org/wikipedia/commons/7/74/Crescent.svg
 is_a: PATO:0002006 ! 2-D shape
@@ -12064,7 +12064,11 @@ alt_id: PATO:0001203
 def: "A convex 3-D shape quality inhering in a bearer by virtue of the bearer's exhibiting a consistently-sized round cross section." [PATOC:MAH]
 subset: cell_quality
 subset: value_slim
+synonym: "rod-like" EXACT []
 synonym: "rod-shaped" EXACT []
+synonym: "tube-like" EXACT []
+synonym: "tube-shaped" EXACT []
+synonym: "tubelike" EXACT []
 synonym: "tubular" EXACT []
 synonym: "tubulate" EXACT []
 is_a: PATO:0002007 ! convex 3-D shape
@@ -12077,6 +12081,7 @@ def: "A shape quality inhering in a bearer by virtue of the bearer's being cylin
 subset: cell_quality
 subset: value_slim
 synonym: "disc-shaped" EXACT []
+synonym: "disk-shaped" EXACT []
 is_a: PATO:0001873 ! cylindrical
 
 [Term]
@@ -12157,9 +12162,13 @@ is_a: PATO:0002008 ! concave 3-D shape
 [Term]
 id: PATO:0001883
 name: clavate
-def: "A concave 3-D shape quality inhering in a bearer by virtue of the bearer's gradually becoming thicker towards the end; club shaped." [PATOC:cjm]
+alt_id: PATO:0001797
+def: "A concave 3-D shape quality inhering in a bearer by virtue of the bearer's gradually becoming thicker towards the end." [:MP\:0000576]
+comment: This term was moved from "shape" to a kind of "inverted" to better reflect its definition and its current usage (cf Mammalian Phenotype Ontology, MP:0000576 clubbed foot). It is not clear if the term "clubbed" is useful as a general term applicable to any non-foot. The name should probably be changed to better reflect the definition. TODO
 subset: value_slim
+synonym: "club-like" EXACT []
 synonym: "club-shaped" EXACT []
+synonym: "clubbed" EXACT []
 is_a: PATO:0002008 ! concave 3-D shape
 
 [Term]
@@ -12213,6 +12222,7 @@ name: tripartite
 def: "A concave 3-D shape quality inhering in a bearer by virtue of the bearer's being divided into three branches." [InfoVisual:InfoVisual "http://www.infovisual.info/01/011_en.html"]
 subset: cell_quality
 subset: value_slim
+synonym: "trifurcate" EXACT []
 is_a: PATO:0002008 ! concave 3-D shape
 
 [Term]
@@ -12558,6 +12568,7 @@ is_a: PATO:0001891 ! ovate
 id: PATO:0001937
 name: spatulate
 def: "A shape quality inhering in a bearer by virtue of the bearer's being oblong, with the lower end very much attenuated." [ISBN:0881923214]
+synonym: "spathulate" EXACT []
 is_a: PATO:0000946 ! oblong
 
 [Term]
@@ -12627,6 +12638,7 @@ is_a: PATO:0001533 ! multi-colored
 id: PATO:0001948
 name: furrowed
 def: "A texture quality inhering in a bearer by virtue of the bearer's being marked by longitudinal lines or channels." [ISBN:0881923214]
+synonym: "fluted" RELATED []
 is_a: PATO:0001810 ! wrinkled
 
 [Term]
@@ -12838,8 +12850,9 @@ is_a: PATO:0001925 ! surface feature shape
 [Term]
 id: PATO:0001977
 name: angular
-def: "A shape quality inhering in a bearer by virtue of the bearer's having several salient angles on the margin." [ISBN:0881923214]
+def: "A shape quality inhering in a bearer by virtue of the bearer's having at least one salient angle on the margin." [PATOC:GVG]
 subset: value_slim
+synonym: "angulate" EXACT []
 is_a: PATO:0000052 ! shape
 
 [Term]
@@ -12847,6 +12860,7 @@ id: PATO:0001978
 name: cut
 def: "A shape quality inhering in a bearer by virtue of the bearer's being regularly divided by deep incisions." [ISBN:0881923214]
 subset: value_slim
+synonym: "incised" EXACT []
 is_a: PATO:0000052 ! shape
 
 [Term]
@@ -13351,6 +13365,7 @@ id: PATO:0002044
 name: trapezoid
 def: "A shape quality inhering in a bearer by virtue of the bearer's being a quadrilateral with two parallel sides." [PATOC:GVG]
 subset: value_slim
+synonym: "trapezoidal" EXACT []
 is_a: PATO:0001988 ! quadrangular
 
 [Term]
@@ -13445,6 +13460,7 @@ id: PATO:0002054
 name: laterally compressed
 def: "A curvature quality inhering in a bearer by virtue of the bearer's being flattened along transverse axis." [PATOC:msp]
 subset: value_slim
+synonym: "transversely flattened" RELATED []
 is_a: PATO:0000407 ! flat
 created_by: George Gkoutos
 creation_date: 2009-03-26T03:03:37Z
@@ -13500,6 +13516,7 @@ creation_date: 2009-05-27T02:25:33Z
 [Term]
 id: PATO:0002060
 name: absorption wavelength
+def: "The specific wavelength of radiation that can be retained by a bearer." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0001293 ! absorption quality
 created_by: George Gkoutos
@@ -13956,7 +13973,7 @@ id: PATO:0002109
 name: caseous
 def: "A structural quality inhering in a bearer by virtue of the bearer's resembling cheese." [answers.com:answers.com "http://www.answers.com/topic/caseous"]
 subset: value_slim
-synonym: "cheeselike" EXACT []
+synonym: "cheese-like" EXACT []
 is_a: PATO:0000141 ! structure
 created_by: george
 creation_date: 2009-10-05T03:09:27Z
@@ -14862,13 +14879,212 @@ creation_date: 2010-05-07T12:11:47Z
 
 [Term]
 id: PATO:0002207
-name: insertion depth 
+name: insertion depth
 def: "A relational quality that is the distance between the end of the inserted object and the surface of the object into which it penetrates." [PATOC:GVG]
 subset: attribute_slim
 subset: relational_slim
 is_a: PATO:0001452 ! relational structural quality
 created_by: George Gkoutos
 creation_date: 2010-05-14T11:40:24Z
+
+[Term]
+id: PATO:0002208
+name: spoon-shaped
+def: "A concave 3-D shape quality inhering in a bearer by virtue of the bearer's being shaped in the form of a spoon." [thefreedictionary:http\://www.thefreedictionary.com/spoon-shaped]
+subset: value_slim
+is_a: PATO:0002008 ! concave 3-D shape
+created_by: george
+creation_date: 2010-07-08T12:13:12Z
+
+[Term]
+id: PATO:0002209
+name: incisiform
+def: "A shape quality inhering in a bearer by virtue of the bearer's having the shape of an incisor tooth." [thefreedictionary:http\://www.thefreedictionary.com/incisiform]
+subset: value_slim
+is_a: PATO:0001419 ! sharp
+created_by: george
+creation_date: 2010-07-08T12:16:04Z
+
+[Term]
+id: PATO:0002210
+name: bulbous
+def: "A convex 3-D shape quality inhering in a bearer by virtue of the bearer's resembling a teardrop." [PATOC:GVG]
+synonym: " bulblike" EXACT []
+synonym: "bulb-shaped" EXACT []
+synonym: "swollen" RELATED []
+is_a: PATO:0001865 ! spheroid
+created_by: george
+creation_date: 2010-07-08T12:19:08Z
+
+[Term]
+id: PATO:0002211
+name: recurved
+def: "A curvature quality inhering in a bearer by virtue of the bearer's being curved backward or inward." [merriam-webster:http\://www.merriam-webster.com/dictionary/recurved]
+subset: value_slim
+is_a: PATO:0000406 ! curved
+created_by: george
+creation_date: 2010-07-08T12:26:45Z
+
+[Term]
+id: PATO:0002212
+name: slender
+def: "A shape quality inhering in a bearer by virtue of the bearer's being \"small or narrow in circumference or width in proportion to length or height." [merriam-webster:http\://www.merriam-webster.com/dictionary/slender]
+synonym: "slender" RELATED []
+is_a: PATO:0000052 ! shape
+created_by: george
+creation_date: 2010-07-08T01:32:26Z
+
+[Term]
+id: PATO:0002213
+name: obclavate
+def: "A concave 3-D shape quality inhering in a bearer by virtue of the bearer's shape being inversely clavate." [PATOC:GVG]
+subset: cell_quality
+is_a: PATO:0002008 ! concave 3-D shape
+created_by: george
+creation_date: 2010-07-08T01:47:09Z
+
+[Term]
+id: PATO:0002214
+name: bilobed
+def: "A lobed quality inhering in a bearer by virtue of the bearer's being divided into or having two lobes." [thefreedictionary:http\://www.thefreedictionary.com/bilobed]
+subset: value_slim
+is_a: PATO:0001979 ! lobed
+created_by: george
+creation_date: 2010-07-08T01:54:08Z
+
+[Term]
+id: PATO:0002215
+name: falciform
+def: "A shape quality inhering in a bearer by virtue of the bearer's having the shape of a scythe or sickle." [merriam-webster:http\://www.merriam-webster.com/dictionary/falciform]
+subset: value_slim
+synonym: "falcate" EXACT []
+synonym: "hooked" RELATED []
+synonym: "scythe-shaped" EXACT []
+synonym: "sickle-shaped" EXACT []
+is_a: PATO:0000052 ! shape
+created_by: george
+creation_date: 2010-07-08T01:57:46Z
+
+[Term]
+id: PATO:0002216
+name: ubiquinated
+def: "A molecular quality that pertains to the post-translational modification of a protein by the covalent attachment of one or more ubiquitin monomer." [neurolex:http\://neurolex.org/]
+subset: value_slim
+synonym: "Ubiquitylation" RELATED []
+is_a: PATO:0002182 ! molecular quality
+created_by: george
+creation_date: 2010-07-08T02:00:37Z
+
+[Term]
+id: PATO:0002217
+name: nitrated
+def: "A molecular quality inhering in a bearer by virtue of the bearer's being combined, or impregnated, with nitric acid, or some of its compounds." [neurolex:http\://neurolex.org/wiki/Category\:Nitrated_Molecular_Quality]
+subset: value_slim
+is_a: PATO:0002182 ! molecular quality
+created_by: george
+creation_date: 2010-07-08T02:04:03Z
+
+[Term]
+id: PATO:0002218
+name: demyelinated
+def: "A quality inhering in a bearer by virtue of the bearer's loss of myelin sheath." [thefreedictionary:http\://www.thefreedictionary.com/demyelinated]
+comment: For example loss of myelin sheath from a normally myelinated axon or dendrite.
+subset: value_slim
+is_a: PATO:0000141 ! structure
+created_by: george
+creation_date: 2010-07-08T02:08:06Z
+
+[Term]
+id: PATO:0002219
+name: fan-shaped
+def: "A quality inhering in a bearer that is shaped in the form of a fan." [thefreedictionary:http\://www.thefreedictionary.com/fan-shaped]
+subset: value_slim
+is_a: PATO:0002006 ! 2-D shape
+created_by: george
+creation_date: 2010-07-09T01:43:42Z
+
+[Term]
+id: PATO:0002220
+name: phosphorylated
+def: "A quality inhering in a proteing or a molecule by virtue of the addition of a phosphate (PO4) group to the bearer." [wikipedia:en.wikipedia.org/wiki/Phosphorylated]
+subset: value_slim
+is_a: PATO:0002182 ! molecular quality
+created_by: george
+creation_date: 2010-07-09T01:50:14Z
+
+[Term]
+id: PATO:0002221
+name: hyperphosphorylated
+def: "A quality inhering in a bearer by virtue of the bearer's being phosphorylated to a more than normal extent, or fully saturated with phosphate groups." [Wikipedia:http\://en.wiktionary.org/wiki/hyperphosphorylated]
+subset: absent_slim
+subset: value_slim
+is_a: PATO:0002220 ! phosphorylated
+created_by: george
+creation_date: 2010-07-09T01:51:52Z
+
+[Term]
+id: PATO:0002222
+name: hypophosporylated
+def: "A quality inhering in a bearer by virtue of the bearer's being phosphorylated to a lesser than normal extent, or less than fully." [Wikipedia:http\://en.wiktionary.org/wiki/hypophosphorylated]
+subset: value_slim
+is_a: PATO:0002220 ! phosphorylated
+created_by: george
+creation_date: 2010-07-09T01:54:22Z
+
+[Term]
+id: PATO:0002223
+name: oxidized
+def: "A quality inhering in a bearer by virtue of the bearer's having reacted with oxygen, or been modified by oxidation (the reaction in which the atoms of an element lose electrons and the valence of the element increases)." [Wikipedia:http\://en.wiktionary.org/wiki/oxidized]
+subset: value_slim
+is_a: PATO:0002182 ! molecular quality
+created_by: george
+creation_date: 2010-07-09T01:59:35Z
+
+[Term]
+id: PATO:0002224
+name: V--shaped
+def: "An angular shape quality inhering in a bearer by virtue of the bearer's having a single angle in its length giving the bearer the form of the letter V." [PATOC:JE]
+subset: value_slim
+is_a: PATO:0001977 ! angular
+created_by: george
+creation_date: 2010-07-13T04:12:13Z
+
+[Term]
+id: PATO:0002225
+name: L-shaped
+def: "An angular shape quality inhering in a bearer by virtue of the bearer's having a single angle in its length giving the bearer the form of the letter L." [PATOC:JE]
+subset: value_slim
+is_a: PATO:0001977 ! angular
+created_by: george
+creation_date: 2010-07-13T04:14:59Z
+
+[Term]
+id: PATO:0002226
+name: subcylindrical
+def: "A cylindrical shape quality inhering in a bearer by virtue of the bearer's being imperfectly cylindrical or approximately cylindrical." [url:http\://www.thefreedictionary.com/Subcylindrical]
+subset: value_slim
+is_a: PATO:0001873 ! cylindrical
+created_by: george
+creation_date: 2010-07-13T04:22:30Z
+
+[Term]
+id: PATO:0002227
+name: cup-shaped
+def: "A concave 3-D shape quality inhering in a bearer by virtue of the bearer's shape form resembling the shape of a cup." [url:http\://www.thefreedictionary.com/cup-shaped]
+subset: value_slim
+synonym: "cup-like" EXACT []
+is_a: PATO:0002008 ! concave 3-D shape
+created_by: george
+creation_date: 2010-07-13T04:29:32Z
+
+[Term]
+id: PATO:0002228
+name: acuminate
+def: "A tapered shape quality inhering in a bearer by virtue of the bearer's tapering gradually to a sharp point." [url:http\://www.thefreedictionary.com/acuminate]
+subset: value_slim
+is_a: PATO:0001500 ! tapered
+created_by: george
+creation_date: 2010-07-15T09:03:18Z
 
 [Typedef]
 id: decreased_in_magnitude_relative_to
@@ -14954,6 +15170,10 @@ domain: PATO:0000001 ! quality
 range: PATO:0000001 ! quality
 is_transitive: true
 is_a: different_in_magnitude_relative_to ! different_in_magnitude_relative_to
+
+[Typedef]
+id: inheres_in
+name: inheres_in
 
 [Typedef]
 id: inversely_associated_with
