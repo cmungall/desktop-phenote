@@ -21,12 +21,11 @@ file&nbsp;with a new filename to prevent any accidental overwriting by our
 server&nbsp;when you upgrade to a new Phenote version.</FONT>&nbsp; </STRONG><!--#include virtual="/ssi/footer.shtml" --></P>
 <DIV>
 <H2>The basics</H2>
-
+<name="dotphenote">
 <p>Before you try editing a configuration file, make sure you've launched
   Phenote at least once.  This should create a directory
 on your computer called ".phenote". 
-<DIV>        
-                          
+<DIV>
   <ul>
     <li>On a Mac, you will find your .phenote directory in <FONT 
   color=#ff0000>MacintoshHD:Users:YourUsername</FONT>,
@@ -36,15 +35,19 @@ on your computer called ".phenote".
       </li>
     <li>On other Unix systems, your .phenote directory will be in your home
     directory (~).</li>
-    <li>On a PC, look in <FONT 
-  color=#ff0000>C:/Documents and Settings/YourAccount/</FONT>          
+    <li>On Windows, look in <FONT 
+  color=#ff0000>C:/Documents and Settings/YourAccount/</FONT>
+      <br>Note: by default, Windows does not show you folders that start with
+      "."
+      To see your .phenote directory, first open the 'my computer' folder.  Select 'folder options' from the 'tools' menu and select "Display
+      all the file extensions and hidden files". and click OK. This should
+      make the .phenote folder visible and accessible.
     </li>
   </ul></DIV>
 
 <h2>Location of your configuration file</h2>
 <p> The configuration files used by Phenote are located in 
-the <FONT color=#ff0000>".phenote/conf</FONT>           " directory in your
-  home directory.
+the <FONT color=#ff0000>"conf"</FONT> directory in your .phenote directory.
 </p>
 <p>
 Within 
@@ -68,7 +71,9 @@ configuration settings will take effect the next time you launch Phenote
 <h2>Where to put personal ontology files</h2>
 <p>To use a custom ontology file in Phenote, 
 copy the file into <FONT color=#ff0000>.phenote/obo-files/</FONT>.  Any reference to this ontology within your configuration file must match the filename.
-</p></DIV>
+</p>
+<br>
+</DIV>
 
 </body>
 </html>
