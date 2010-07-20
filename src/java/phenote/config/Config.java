@@ -202,7 +202,17 @@ public class Config {
       updateFromDefault, revertToMain/Default or personal/ignoreMain/dontupdate */
   public void loadDefaultConfigFile() throws ConfigException {
     boolean updatePersonalFromMainCfg = true; //false;
+    // !! updatePersonalFromMainCfg is being used as the fourth argument, 
+    // when actually updatePersonalFromMainCfg is the THIRD argument to setConfigFile!
+    // But it seems to work, so I guess I'll leave it as-is for now...
     setConfigFile(getDefaultFile(),true,false,updatePersonalFromMainCfg);
+  }
+
+  public void loadDefaultConfigFile(boolean overwritePersonal) throws ConfigException {
+    // Second arg to setConfigFile is whether to use the personal config file (from .phenote)
+    // Third arg is whether to overwrite the personal config file
+    // Last arg is whether to merge personal and master config
+    setConfigFile(getDefaultFile(),false,overwritePersonal,false);
   }
 
   /** if all else fails revert to default flybase config file which should be there */
@@ -212,7 +222,7 @@ public class Config {
 
   /** default file should be in .phenote/conf/my-phenote.cfg. if not set yet then just
       do good ol flybase.cfg - actually if not there then query user */
-  private String getDefaultFile() {
+  public String getDefaultFile() {
     String file=null;
     try {
 //      LineNumberReader r = new LineNumberReader(new FileReader(getMyPhenoteFile()));
@@ -221,6 +231,7 @@ public class Config {
     } catch (IOException e) {}
     if (file == null || file.equals("")) {
       //file = FLYBASE_DEFAULT_CONFIG_FILE;
+      log().info("No config file specified--showing config options to user.");
       file = queryUserForConfigFile();
     }
     return file;
@@ -236,6 +247,24 @@ public class Config {
   
   private String queryUserForConfigFile() {
     return ConfigFileQueryGui.queryUserForConfigFile();
+  }
+
+  /** This method is called when Phenote can't find the requested config file
+      anywhere in a usable form.  Remove file that specifies desired config
+      (.phenote/conf/my-phenote) and prompt user to choose a different config. */
+  public boolean resetMyConfig() {
+    File myConfig = getMyPhenoteFile();
+    if (!myConfig.delete()) {
+      log().error("resetConfig: couldn't delete " + myConfig);
+      return false;
+    }
+    try {
+      loadDefaultConfigFile(); // Prompt user to choose a new configuration
+    } catch (ConfigException e) {
+      log().error("Got config exception while trying to load new config: " + e.getMessage());
+      return false;
+    }
+    return true;
   }
 
 
@@ -288,29 +317,12 @@ public class Config {
           return mode.localFileString();
         }
         else {
+          LOG.error("Couldn't find requested config file in user's .phenote: " + mode.localFileString());
           try {
-            String jarConfig = getConfigUrl(configFile).getFile();
-            LOG.error("Couldn't find config file in user's .phenote: " + mode.localFileString() + "--trying to use one from Phenote directory: " + jarConfig);
-            // Try to copy jar one to .phenote
-//            LOG.debug("About to try copying " + jarConfig + " to " + localFile); // DEL
-            URL jarConfigUrl = null;
-            try {
-              jarConfigUrl = new URL("file://" + jarConfig);
-            } catch (MalformedURLException me) {
-              LOG.debug("Couldn't make URL for config from jar or application directory: " + jarConfigUrl);
-              writeMyPhenoteDefaultFile(masterConfig); // ? master?
-              return jarConfig;
-            }
-            try {
-              FileUtil.copyUrlToFile(jarConfigUrl, localFile);
-            } catch (IOException io) {
-              LOG.debug("Couldn't copy config file from jar or application directory (" + jarConfig + ") to " + localFile);
-            }
-            writeMyPhenoteDefaultFile(masterConfig); // ? master?
-            return jarConfig;
-          } catch (FileNotFoundException fnf) {
-            LOG.error("Couldn't find conf file from jar or application directory: " + fnf.getMessage());
-            throw new ConfigException(fnf);
+            return findAndCopyConfigFile(masterConfig, localFile);
+          } catch (ConfigException fnf) {
+            // Something's really wrong.  Pop up a dialog?
+            LOG.error("Oh no, things are really bad!");
           }
         }
     }
@@ -325,37 +337,20 @@ public class Config {
         mode.doWipeout(); // ?? thorws ConfigEx
       }
       catch (ConfigException ce) {
-        LOG.error("Failed to get master config " + masterConfig + " to update local copy " + mode.localFileString());
         // If we can find a local copy, that should be good enough for now
         File localFile = new File(mode.localFileString());
+        LOG.error("Failed to get master config " + masterConfig + " to update local copy " + localFile);
         if (localFile.exists()) {
-          LOG.info("Using (possibly stale) local copy " + mode.localFileString());
+          LOG.info("Using (possibly stale) local copy " + localFile);
           return mode.localFileString();
         }
         else {
+          LOG.error("Couldn't find requested config file in user's .phenote: " + mode.localFileString());
           try {
-            String jarConfig = getConfigUrl(configFile).getFile();
-            LOG.error("Also failed to open config file in user's .phenote: " + mode.localFileString() + "--trying to use one from jar or application directory: " + jarConfig);
-            // Try to copy jar one to .phenote
-//            LOG.debug("About to try copying " + jarConfig + " to " + localFile); // DEL
-            URL jarConfigUrl = null;
-            try {
-              jarConfigUrl = new URL("file://" + jarConfig);
-            } catch (MalformedURLException me) {
-              LOG.debug("Couldn't make URL for config from jar or application directory " + jarConfigUrl);
-              writeMyPhenoteDefaultFile(masterConfig); // ? master?
-              return jarConfig;
-            }
-            try {
-              FileUtil.copyUrlToFile(jarConfigUrl, localFile);
-            } catch (IOException io) {
-              LOG.debug("Couldn't copy config from jar or application directory (" + jarConfig + ") to " + localFile);
-            }
-            writeMyPhenoteDefaultFile(masterConfig); // ? master?
-            return jarConfig;
-          } catch (FileNotFoundException fnf) {
-            LOG.error("Couldn't find conf file in jar or application directory: " + fnf.getMessage());
-            throw new ConfigException(fnf);
+            return findAndCopyConfigFile(masterConfig, localFile);
+          } catch (ConfigException fnf) {
+            // Something's really wrong.  Pop up a dialog?
+            LOG.error("Oh no, things are really bad!");
           }
         }
       // this should probably do a read & write of cfg to get version in there
@@ -368,6 +363,33 @@ public class Config {
     writeMyPhenoteDefaultFile(masterConfig); // ? master?
     
     return mode.localFileString(); // ?
+  }
+
+  public String findAndCopyConfigFile(String masterConfig, File localFile) throws ConfigException {
+    try {
+      String jarConfig = getConfigUrl(masterConfig).getFile();
+      LOG.info("Trying config file from application directory: " + jarConfig);
+      // Try to copy jar one to .phenote
+      URL jarConfigUrl = null;
+      try {
+        jarConfigUrl = new URL("file://" + jarConfig);
+        writeMyPhenoteDefaultFile(masterConfig); // ? master?
+        return jarConfig;
+      } catch (MalformedURLException me) {
+        LOG.debug("Couldn't make URL for config from jar or application directory " + jarConfigUrl);
+      }
+      try {
+        LOG.debug("About to try copying " + jarConfig + " to " + localFile); // DEL
+        FileUtil.copyUrlToFile(jarConfigUrl, localFile);
+      } catch (IOException io) {
+        LOG.debug("Couldn't copy config from jar or application directory (" + jarConfig + ") to " + localFile);
+      }
+      writeMyPhenoteDefaultFile(masterConfig); // ? master?
+      return jarConfig;
+    } catch (FileNotFoundException fnf) {
+      LOG.error("Couldn't find conf file in jar or application directory: " + fnf.getMessage());
+      throw new ConfigException(fnf);
+    }
   }
 
 
@@ -535,7 +557,7 @@ public class Config {
     private String localFileString() { return localFile.toString(); }
   }
 
-  private static File getDotPhenoteConfDir() {
+  public static File getDotPhenoteConfDir() {
     return FileUtil.getDotPhenoteConfDir();
     //File conf = new File(dotPhenote,"conf");conf.mkdir();return conf;
   }
@@ -551,7 +573,7 @@ public class Config {
     throws ConfigException {
     try {
       File myPhenote = getMyPhenoteFile();
-      LOG.debug("writeMyPhenoteDefaultFile: saving config choice " + newDefaultFileString + " to " + myPhenote); // DEL
+//      LOG.debug("writeMyPhenoteDefaultFile: saving config choice " + newDefaultFileString + " to " + myPhenote); // DEL
       PrintStream os = new PrintStream(new FileOutputStream(myPhenote));
       os.print(newDefaultFileString);
       os.close();
