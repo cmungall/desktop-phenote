@@ -22,6 +22,19 @@
 
 <h1>1.7</h1>
 
+<h2>07.20.2010, Version 1.7-beta16</h2>
+<ul>
+  <li> bugfix: Better recovery from problems with config files (for example, when
+auto-update doesn't work, like last week, when SourceForge wasn't working
+right).  If auto-updated config file doesn't work, Phenote now tries to find
+its own cached copy of the config file and uses that instead.  (It no longer
+changes your configuration to Flybase.)  If all attempts fail, it pops up an
+error window explaining that the user's selected configuration is no good, and
+prompts them to choose a new configuration.</li>
+  <li> bugfix: Better error messages when there's something wrong with one of the ontology
+files Phenote uses.</li>
+</ul>
+
 <h2>07.01.2010, Version 1.7-beta15</h2>
 <ul>
   <li> bugfix: Config files now don't auto-update if they have when="NEVER" (fix for
