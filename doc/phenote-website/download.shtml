@@ -17,11 +17,11 @@
 <h1>Downloading Phenote</h1>
 	<h2>For users</h2>
 	<h3>Phenote installer edition</h3>
-	Platform-specific installers are available for Phenote v1.7-b15 at <a href="https://sourceforge.net/project/showfiles.php?group_id=76834">SourceForge</a> or here:
-	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta15_macos_install4j.dmg">MacOS X</a> |
-	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta15_windows_install4j.exe">Windows</a> |
-	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta15_linux_install4j.rpm">Linux</a> |
-	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta15_unix_install4j.sh">Unix</a>
+	Platform-specific installers are available for Phenote v1.7-b16 at <a href="https://sourceforge.net/project/showfiles.php?group_id=76834">SourceForge</a> or here:
+	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta16_macos_install4j.dmg">MacOS X</a> |
+	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta16_windows_install4j.exe">Windows</a> |
+	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta16_linux_install4j.rpm">Linux</a> |
+	<a href="http://www.phenote.org/phenote/1.7/Phenote_1_7-beta16_unix_install4j.sh">Unix</a>
 	<ol>
 	  <li>Download your platform-specific package.  (For MacOS, this should self-extract into a disk image. If it doesn't, double-click on the file.  You should see an
 	  icon for the "drive" that the Phenote application is on.)</li>
@@ -68,8 +68,7 @@
       <div id="sidebar_content">
 <br><br>
 	<div class="content_box_head_blue">
-	  Recently added features and bug fixes, Phenote version 1.7-b15,
-	  1.7-b15
+	  Recently added features and bug fixes, Phenote version 1.7-b15-16
 	</div>
 
 	<div class="content_box_blue">
@@ -81,6 +80,9 @@
           <li> (b15) Fixed command-line option for loading an annotation file
           on launch (e.g., phenote -f data/mydatafile.tab)</li>
           <li> (b15) Fields in Annotation Editor now are not cut off</li>
+          <li> (b16) Better recovery from problems with config files</li>
+          <li> (b16) Better error notification if there are problems with
+          ontology files</li>
             </ul>   
 	<b>See the <a href="phenote-release-notes.shtml">release notes</a> for more details...</b><br />
 	</div>
