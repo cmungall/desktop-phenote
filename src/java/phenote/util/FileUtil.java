@@ -100,7 +100,7 @@ public class FileUtil {
       if (urlExists(u)) return u;
     }
     //System.out.println("Failed to find file "+filename);
-    //LOG.error("Failed to find file "+filename);
+    LOG.error("findUrl: failed to find file "+filename);
     throw new FileNotFoundException(filename+" not found");
   }
 
@@ -427,7 +427,10 @@ public class FileUtil {
       is.close(); // ??
       w.close();
       fos.close(); // ??
-    } catch (IOException e) { throw new OntologyException(e); }
+    } catch (IOException e) { 
+      String m = "couldn't open connection to " + reposUrl + " to copy to " + localUrl + ".  Exception: " + e;
+      LOG.error("copyReposToLocal: " + m);
+      throw new OntologyException(m); }
   }
 
   public static InputStream getInputStreamWithOrWithoutProxy(URL url) throws IOException {
