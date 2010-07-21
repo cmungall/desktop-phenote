@@ -1,0 +1,13 @@
+date: 21:05:2007 13:55
+
+[Typedef]
+id: relative_to
+name: relative_to
+
+[Typedef]
+id: inheres_in
+name: inheres_in
+
+[Typedef]
+id: towards
+name: towards
