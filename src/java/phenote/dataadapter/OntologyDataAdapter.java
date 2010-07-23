@@ -155,7 +155,7 @@ public class OntologyDataAdapter {
             m += "\nCause: " + cause;
             String badFile = getBadFileNameFromCause(cause);
             if (badFile.length() > 0)
-              m += "\n\nYou may want to try removing the bad file (" + badFile + ") from ~/.phenote/obo-files and relaunching Phenote.";
+              m += "\n\nYou may want to try removing the bad file (" + badFile + ") and relaunching Phenote.";
           }
           LOG.error(m); 
           JOptionPane.showMessageDialog(null,m,"Ontology load failure",JOptionPane.ERROR_MESSAGE);
@@ -464,7 +464,7 @@ public class OntologyDataAdapter {
       String m = "Error while reading obo file " + badFile + ": "+e
         +"\n"+cause+"\n\nTHIS IS FATAL!\nCannot load ontologies. Phenote must exit.";
       if (badFile.length() > 0)
-        m += "\n\nYou may want to try removing the bad file (" + badFile + ") from ~/.phenote/obo-files and relaunching Phenote.";
+        m += "\n\nYou may want to try removing the bad file (" + badFile + ") and relaunching Phenote.";
       ErrorManager.inst().error(new ErrorEvent(this,m));
       //LOG.error(m); // error manager should do this for free 
       // actually theres really no point in going on i think as we have failed to get
