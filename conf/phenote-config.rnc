@@ -25,7 +25,7 @@ start =
     character-mode,
     ontologyLoading,
     field-panel-tabs,
-##    comparison, -> field
+    fields-per-tab,
     constraint*
   }
 
@@ -58,7 +58,6 @@ externaldb =
    attribute name { xsd:string },
    attribute path { xsd:string }
  }
-
 
 ## Where the config file for log4j is
 log =
@@ -106,6 +105,8 @@ data-input-servlet = element data-input-servlet {
 term-history = element term-history { attribute enable { xsd:boolean } }
 
 field-panel-tabs = element field-panel-tabs { attribute enable { xsd:boolean } }
+
+fields-per-tab = element fields-per-tab { attribute numfields { xsd:int } }
 
 ## auto-update-ontologies, update-timer should go in here as well... 
 ## loading screen sometimes can cause threadlock hang, disable it here              
@@ -201,6 +202,7 @@ field =
     attribute warnIfNull { xsd:boolean },
     ## should this be another type? will there be anything readonly aside from strings?
     ##attribute read-only { xsd:boolean },
+    # For assigning this field to a named tab in Annotation Editor
     attribute tab { xsd:string },
     ## phase these 4 out - redundant with single ontology
     attribute file { xsd:string },
@@ -231,7 +233,6 @@ field =
     ## if true then give user big popup box activated by button to type
     ## multilines of text - comments, descriptions
     attribute enableBigTextBox { xsd:boolean },
-
     postcomp?,
     ontology*
   } 
