@@ -66,21 +66,23 @@ public class SettingsMenu extends DynamicMenu {
     getSearchParams().setParam(SearchFilterType.DEF, config.getAutocompleteSettings().getDefinition()); 
     getSearchParams().setParam(SearchFilterType.OBS, config.getAutocompleteSettings().getObsolete());
     
+    // These search options need a label
+    add (new JMenuItem("When looking for matching terms, Phenote will search in:"));
 
     // Create property items based on status
     menuSearchFilterTerm = CreateMenuItem(this, ITEM_CHECK,
-        SearchFilterType.TERM.getName(), null, 'T', "Look for partial matches within Term Names",
+        SearchFilterType.TERM.getName(), null, 'T', "Look for partial matches within term names",
         getSearchParams().getParam(SearchFilterType.TERM));
     menuSearchFilterSynonym = CreateMenuItem(this, ITEM_CHECK,
-            SearchFilterType.SYN.getName(), null, 'S', "Look for partial matches within Synonyms of Terms",
+            SearchFilterType.SYN.getName(), null, 'S', "Look for partial matches within synonyms of terms",
             getSearchParams().getParam(SearchFilterType.SYN));
     menuSearchFilterDefinition = CreateMenuItem(this, ITEM_CHECK,
-            SearchFilterType.DEF.getName(), null, 'D', "Look for partial matches within the Definition of Terms",
+            SearchFilterType.DEF.getName(), null, 'D', "Look for partial matches within definitions of terms",
             getSearchParams().getParam(SearchFilterType.DEF));
 
 //    addSeparator();  //obs are in a class by themselves.
     menuSearchFilterObsolete = CreateMenuItem(this, ITEM_CHECK,
-            SearchFilterType.OBS.getName(), null, 'O', "Look for partial matches within Obsolete Term Names",
+            SearchFilterType.OBS.getName(), null, 'O', "Look for partial matches within obsolete term names",
             getSearchParams().getParam(SearchFilterType.OBS));
 
     addSeparator();
@@ -148,7 +150,7 @@ public class SettingsMenu extends DynamicMenu {
   	break;
   	}
 
-//	Add the item test
+//	Add the item text
   	menuItem.setText(sText);
 
 //	Add the optional icon
