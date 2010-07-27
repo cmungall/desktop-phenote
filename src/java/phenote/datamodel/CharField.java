@@ -171,7 +171,12 @@ public class CharField {
       return null;
     }
   }
-  
+
+  public String getTabForField() {
+    if (fieldXmlBean == null) return null;
+    return (fieldXmlBean.getTab());
+  }
+
   /**
    * If a CharField is compound, there is another group of fields in the config which 
    * the value of this field can be parsed into - this is used by the CharacterListFieldGui.

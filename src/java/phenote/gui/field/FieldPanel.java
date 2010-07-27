@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.swing.Box;
@@ -51,7 +52,7 @@ public class FieldPanel extends AbstractGUIComponent {
   private EditManager groupEditMan;
   private EventSelectionModel<CharacterI> selectionModel;
 
-  /** eventually configurable (with default 10) - for now hardwire at 10 */
+  /** Configurable (with default 8) */
   private static int fieldsPerTab = 8; // 10;
 
 //   public FieldPanel() {
@@ -152,7 +153,12 @@ public class FieldPanel extends AbstractGUIComponent {
 
 
   private void initCharFieldGuis() {
+    if (Config.inst().getFieldsPerTab() > 0)
+      fieldsPerTab = Config.inst().getFieldsPerTab();
+    log().debug("fieldsPerTab = " + fieldsPerTab); // DEL
+
     fieldPanel = new VerticalScrollingOnlyPanel(new GridBagLayout());
+
     if (isTabbed()) {
       jTabbedPane  = new JTabbedPane();
       add(jTabbedPane);
@@ -162,16 +168,35 @@ public class FieldPanel extends AbstractGUIComponent {
       add(jsp);
     }
 
+    Hashtable tabbedPaneForTab = new Hashtable();
     int fieldNum = 0;
-    int tab = 1;
+    int tab = 0; // will get incremented before use
     for (CharField charField : this.getCharFieldList()) {
       // skip hidden fields
       if (!Config.inst().isVisible(charField)) continue;
-      if (isTabbed() && fieldNum % fieldsPerTab == 0) {
+
+      // See if there's a named tab assigned to this field
+      String tabForField = charField.getTabForField();
+//      log().debug("Looking for tab " + tabForField + " for " + charField.getName() + ", isTabbed = " + isTabbed()); // DEL
+      // If we're doing tabs by number
+      if (isTabbed() && (fieldNum % fieldsPerTab == 0) && (tabForField == null)) {
+        // Make a new tab (first increment tab number)
+        ++tab;
         fieldPanel = new JPanel(new GridBagLayout());
-        // add scroll pane? or is that wierd with tabs?
-        jTabbedPane.addTab("Tab "+tab++,fieldPanel);
+//        log().debug("Created tab " + tab); // DEL
+        jTabbedPane.addTab("Tab "+tab,fieldPanel);
       }
+      // Assign field to the appropriate named tab
+      else if (tabForField != null) {
+        fieldPanel = (JPanel) tabbedPaneForTab.get(tabForField);
+        if (fieldPanel == null) {
+//          log().debug("Couldn't find pre-existing tab " + tabForField + " for " + charField.getName() + "--constructing."); // DEL
+          fieldPanel = new JPanel(new GridBagLayout());
+          tabbedPaneForTab.put(tabForField, fieldPanel);
+          jTabbedPane.addTab(tabForField,fieldPanel);
+        }
+      }
+
       int minCompChars = Config.inst().getMinCompChars(fieldNum);//fieldnum??
       CharFieldGui gui = CharFieldGui.makeCharFieldGui(charField,minCompChars);
       ++fieldNum;
@@ -186,6 +211,8 @@ public class FieldPanel extends AbstractGUIComponent {
 
   private boolean isTabbed() {
     if (Config.inst().shouldUseFieldPanelTabs()) {
+      if (thereIsAtLeastOneNamedTab())
+        return true;
       if (this.group != null) {
         return this.charFieldManager.getCharFieldListForGroup(this.group).size() > FieldPanel.fieldsPerTab;
       } else {
@@ -194,6 +221,21 @@ public class FieldPanel extends AbstractGUIComponent {
     } else {
       return false;
     }
+  }
+
+  private boolean checkedWhetherThereIsANamedTab = false;
+
+  private boolean thereIsAtLeastOneNamedTab() {
+    for (CharField charField : this.getCharFieldList()) {
+      // skip hidden fields
+      if (!Config.inst().isVisible(charField)) { continue; }
+      if (charField.getTabForField() != null) {
+        checkedWhetherThereIsANamedTab = true;
+        return true;
+      }
+    }
+    checkedWhetherThereIsANamedTab = true;
+    return false;
   }
 
   private int currentGridBagRow = 0;

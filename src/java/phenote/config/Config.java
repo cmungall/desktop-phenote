@@ -34,6 +34,7 @@ import phenote.config.xml.DataadapterDocument.Dataadapter;
 import phenote.config.xml.ExternaldbDocument.Externaldb;
 import phenote.config.xml.FieldDocument.Field;
 import phenote.config.xml.FieldPanelTabsDocument.FieldPanelTabs;
+import phenote.config.xml.FieldsPerTabDocument.FieldsPerTab;
 import phenote.config.xml.GroupDocument.Group;
 import phenote.config.xml.LogDocument.Log;
 import phenote.config.xml.MasterToLocalConfigDocument.MasterToLocalConfig;
@@ -805,6 +806,15 @@ public class Config {
     }
   }
 
+  public int getFieldsPerTab() {
+    FieldsPerTab bean = phenoConfigBean.getFieldsPerTab();
+    if (bean != null) {
+      return bean.getNumfields();
+    } else {
+      return 0;
+    }
+  }
+
   /** returns enum from character mode xml bean itself - why not right? */
   public CharacterMode.Mode.Enum getCharacterMode() {
     return getCharModeBean().getMode();
@@ -1300,7 +1310,7 @@ public class Config {
   public List<Group> getFieldGroups() {
     return Arrays.asList(this.phenoConfigBean.getGroupArray());
   }
-  
+
   public List<String> getFieldsInGroup(String groupName) {
     List<String> fields = new ArrayList<String>();
     for (Field aField : this.phenoConfigBean.getFieldArray()) {
