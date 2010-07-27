@@ -41,7 +41,7 @@
 	<tstamp>
 		<format property="NOW" pattern="yyyy-MM-dd_HH:mm:ss"/>
 	</tstamp>
-	<property name="phenote.version" value="1.7-beta16"/>
+	<property name="phenote.version" value="1.7-beta17"/>
 	<property name="phenote.build" value="${NOW}"/>
 
     <!-- override this from command line with  -DCONF-FILE=initial-zfin.cfg -->
@@ -117,6 +117,7 @@ jars/phenote.jar if it exists. -->
             </patternset>
         </fileset>
     </path>
+    <property name="project.classpath3" value="${project.classpath3}"/>
 
 	<fileset dir="${src}" id="resource_files">
 		<include name="**/resources/**" />
@@ -539,13 +540,21 @@ them into  the classfiles directory. excludes="test/**"  -->
 
     <taskdef name="xmlbean" classname="org.apache.xmlbeans.impl.tool.XMLBean" classpath="${lib}/xbean.jar"/>
 
-    <!-- classgendir="${build.dir}" - if not doing jar but classes, schema is directory
-where xsd files are (conf) -->
+    <!-- classgendir="${build.dir}" - if not doing jar but classes, schema is directory where xsd files are (conf) -->
+    <!-- This target doesn't seem to be working. -->
     <target name="xml-beans">
         <xmlbean schema="${conf}" destfile="${lib}/phenotexmlbeans.jar" classpath="${project.classpath3}"
-                 failonerror="true" javasource="1.5">
+                 failonerror="true" javasource="1.5+">
         </xmlbean>
     </target>
+
+    <!-- If you change phenote-config.rnc, then you need to use trang and scomp to propagate the changes to
+          phenote-config.xsd and then to phenoteconfigbeans.jar.
+         First do:
+         java -jar trang.jar conf/phenote-config.rnc conf/phenote-config.xsd
+         then do:
+         sh ~/Downloads/xmlbeans-2.5.0/bin/scomp -out jars/phenoteconfigbeans.jar conf/phenote-config.xsd -->
+      
 
 <!-- todo do all jars not just phenote - take out -signed -->
 <!-- depends on sym link phenote-webstart -->
@@ -553,7 +562,6 @@ where xsd files are (conf) -->
     <target name="build-webstart" depends="build-all,jar,webstart"/>
 
     <!-- target name="build-sign-jars" depends="build-all,jar,sign-jars"/ -->
-
 
 
 
@@ -637,7 +645,7 @@ where xsd files are (conf) -->
 
     <path id="jars-and-oboedit-classes">
       <fileset dir="${lib}">
-        <patternset id="non-phenote-jars">
+        <patternset id="non-phenote-non-oe-jars">
           <include name="**/*.jar"/>
           <exclude name="**/phenote.jar"/>
           <exclude name="test/**"/>
