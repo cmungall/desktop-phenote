@@ -133,11 +133,29 @@ OboUtil.  This shouldn't affect any Phenote behavior; I'm just noting it down
 for future reference.)
 
 1.7-beta16
-- Better recovery from problems auto-updating config file (for example, last
-week, when SourceForge wasn't working right).  If auto-updated config file
-doesn't work, Phenote now tries to find its own cached copy of the config file
-and uses that instead.  (It no longer changes your configuration to Flybase!)
-If all attempts fail, it pops up an error window explaining that the user's
-selected configuration is no good, and prompts them to choose a new
-configuration.
+- Better recovery from problems with config files (for example, when
+auto-update doesn't work, like last week, when SourceForge wasn't working
+right).  If auto-updated config file doesn't work, Phenote now tries to find
+its own cached copy of the config file and uses that instead.  (It no longer
+changes your configuration to Flybase.)  If all attempts fail, it pops up an
+error window explaining that the user's selected configuration is no good, and
+prompts them to choose a new configuration.
+- Better error messages when there's something wrong with one of the ontology
+files Phenote uses.
 - User guide now explains how to find your .phenote directory on Windows.
+
+1.7-beta17
+- Made tabs in Annotation Editor configurable in two ways:
+1. Ability to designate number of fields per tab
+2. Ability to name tabs and assign fields to named tabs
+Both are specified in the config file.  For specifying the number of
+fields per tab, use the fields-per-tab attribute:
+<fields-per-tab numfields="12"/>
+For naming tabs, simply add tab="TabName" to each <field>.   You can have
+as many different tab names as you want.  If you specify tab names, the
+fields-per-tab attribute (which normally defaults to 8) is ignored.
+
+1.7-beta18
+- Added ability to search dbxrefs during term autocompletion.
+Whether or not to search dbxrefs is configurable from menu and config file,
+just like other options (name, synonym, etc.).
