@@ -1,5 +1,5 @@
 format-version: 1.2
-date: 16:07:2010 15:24
+date: 25:07:2010 11:19
 saved-by: george
 auto-generated-by: OBO-Edit 2.0
 subsetdef: abnormal_slim "Abnormal/normal slim"
@@ -2318,6 +2318,8 @@ def: "A shape quality inhering in a bearer by virtue of the bearer's being curle
 subset: cell_quality
 subset: value_slim
 synonym: "helical" RELATED []
+synonym: "helicoid" RELATED []
+synonym: "helicoidal" RELATED []
 synonym: "helix-shaped" RELATED []
 synonym: "spiral" EXACT []
 is_a: PATO:0001794 ! coiling
@@ -2346,6 +2348,7 @@ name: flat
 def: "A curvature quality inhering in a bearer by virtue of the bearer's having a horizontal surface without a slope, tilt, or curvature." [Merriam-Webster Online:Merriam-Webster Online "http://www.merriam-webster.com/"]
 subset: cell_quality
 subset: value_slim
+synonym: "plate-like" RELATED []
 is_a: PATO:0001591 ! curvature
 
 [Term]
@@ -8458,10 +8461,10 @@ is_a: PATO:0001396 ! cellular quality
 [Term]
 id: PATO:0001409
 name: spindle-shaped
-def: "A concave 3-D shape quality inhering in a bearer by virtue of the bearer's resembling a long tapered rod." [Biology-online:Biology-online "http://www.biology-online.org/"]
+def: "A shape quality inhering in a bearer by virtue of the bearer's resembling a long tapered rod." [Biology-online:Biology-online "http://www.biology-online.org/"]
 subset: cell_quality
 subset: value_slim
-is_a: PATO:0002008 ! concave 3-D shape
+is_a: PATO:0002007 ! convex 3-D shape
 
 [Term]
 id: PATO:0001410
@@ -9713,6 +9716,7 @@ id: PATO:0001572
 name: bifid
 def: "A shape quality inhering in a bearer by virtue of the bearer's being forked or partially split into two parts." [PATOC:GVG]
 subset: value_slim
+synonym: "forked" RELATED []
 is_a: PATO:0001786 ! split
 
 [Term]
@@ -9768,6 +9772,7 @@ relationship: decreased_in_magnitude_relative_to PATO:0000461 ! normal
 id: PATO:0001579
 name: contractility
 def: "A physical quality inhering in a bearer by virtue of the bearer's ability to shrink or contract." [WordNet:WordNet "http://wordnet.princeton.edu/"]
+comment: This refers to the disposition of the bearer.
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
@@ -9818,7 +9823,7 @@ relationship: increased_in_magnitude_relative_to PATO:0000461 ! normal
 id: PATO:0001585
 name: conductivity
 def: "A physical quality inhering in a bearer by virtue of the bearer's ability to transmit of an entity through a medium." [PATOC:GVG]
-comment: Examples could be heat or electricity or sound.
+comment: This refers to the disposition of the bearer.\nExamples could be heat or electricity or sound.
 subset: attribute_slim
 is_a: PATO:0001018 ! physical quality
 
@@ -10648,6 +10653,7 @@ relationship: decreased_in_magnitude_relative_to PATO:0000461 ! normal
 id: PATO:0001690
 name: contractile
 def: "A contractility quality inhering in a bearer by virtue of the bearer's ability of contracting or being contracted." [PATOC:GVG]
+comment: This refers to the disposition of the bearer.
 subset: value_slim
 is_a: PATO:0001579 ! contractility
 
@@ -10655,6 +10661,7 @@ is_a: PATO:0001579 ! contractility
 id: PATO:0001691
 name: non-contractile
 def: "A contractility quality inhering in a bearer by virtue of the bearer's inability of contracting or being contracted." [PATOC:GVG]
+comment: This refers to the disposition of the bearer.
 subset: value_slim
 is_a: PATO:0001579 ! contractility
 
@@ -11160,6 +11167,7 @@ is_a: PATO:0001752 ! peramorphic growth
 id: PATO:0001756
 name: heat conductivity
 def: "A conductivity quality inhering in a bearer by virtue of the bearer's spontaneous transfer of thermal energy from a region of higher temperature to a region of lower temperature." [Wikipedia:http\://en.wikipedia.org/wiki/Heat_conduction]
+comment: This refers to the disposition of the bearer.
 subset: attribute_slim
 synonym: "thermal conduction" EXACT []
 is_a: PATO:0001585 ! conductivity
@@ -11373,6 +11381,7 @@ name: bifurcated
 def: "A branched quality inhering in a bearer by virtue of the bearer's being divided into two branches." [thefreedictionary.com:thefreedictionary.com "http://www.thefreedictionary.com/"]
 subset: cell_quality
 subset: value_slim
+synonym: "forked" RELATED []
 is_a: PATO:0000402 ! branched
 
 [Term]
@@ -11392,6 +11401,7 @@ def: "A shape quality inhering in a bearer by virtue of the bearer's being divid
 subset: value_slim
 synonym: "clefted" EXACT []
 synonym: "divided" RELATED []
+synonym: "forked" RELATED []
 synonym: "septate" NARROW []
 is_a: PATO:0000052 ! shape
 
@@ -12053,6 +12063,7 @@ name: cuboid
 def: "A convex 3-D shape quality inhering in a bearer by virtue of the bearer's resemblance to a cube (a 3-D shape with a square cross section)." [PATOC:MAH]
 subset: cell_quality
 subset: value_slim
+synonym: "block-like" RELATED []
 synonym: "cuboidal" EXACT []
 is_a: PATO:0002007 ! convex 3-D shape
 relationship: has_cross_section PATO:0000413 ! square
@@ -12685,6 +12696,7 @@ name: subulate
 def: "A shape quality inhering in a bearer by virtue of the bearer's being linear, very narrow, tapering to a very fine point from a narrow base." [ISBN:0881923214]
 subset: value_slim
 synonym: "awl-shaped" EXACT []
+synonym: "needle-like" EXACT []
 is_a: PATO:0001199 ! linear
 
 [Term]
@@ -14929,7 +14941,7 @@ creation_date: 2010-07-08T12:26:45Z
 id: PATO:0002212
 name: slender
 def: "A shape quality inhering in a bearer by virtue of the bearer's being \"small or narrow in circumference or width in proportion to length or height." [merriam-webster:http\://www.merriam-webster.com/dictionary/slender]
-synonym: "slender" RELATED []
+synonym: "gracile" RELATED []
 is_a: PATO:0000052 ! shape
 created_by: george
 creation_date: 2010-07-08T01:32:26Z
@@ -14999,6 +15011,7 @@ id: PATO:0002219
 name: fan-shaped
 def: "A quality inhering in a bearer that is shaped in the form of a fan." [thefreedictionary:http\://www.thefreedictionary.com/fan-shaped]
 subset: value_slim
+synonym: "fan-like" EXACT []
 is_a: PATO:0002006 ! 2-D shape
 created_by: george
 creation_date: 2010-07-09T01:43:42Z
@@ -15085,6 +15098,122 @@ subset: value_slim
 is_a: PATO:0001500 ! tapered
 created_by: george
 creation_date: 2010-07-15T09:03:18Z
+
+[Term]
+id: PATO:0002229
+name: subrectangular
+def: "A quadrangular shape quality inhering in a bearer by virtue of the bearer's being approximately rectangular." [url:http\://dictionary.reference.com/browse/subrectangular?qsrc=2446&o=100074]
+subset: value_slim
+is_a: PATO:0001988 ! quadrangular
+created_by: george
+creation_date: 2010-07-19T12:18:57Z
+
+[Term]
+id: PATO:0002230
+name: subtriangular
+def: "A triangular shape quality inhering in a bearer by virtue of the bearer's being nearly, but not perfectly, triangular." [url:http\://www.thefreedictionary.com/Subtriangular]
+subset: value_slim
+is_a: PATO:0001875 ! triangular
+created_by: george
+creation_date: 2010-07-19T12:20:59Z
+
+[Term]
+id: PATO:0002231
+name: multifid
+def: "A split shape quality inhering in a bearer by virtue of the bearer's having or being divided into many lobes or similar segments." [url:http\://www.thefreedictionary.com/multifid]
+subset: value_slim
+is_a: PATO:0001786 ! split
+created_by: george
+creation_date: 2010-07-19T12:23:02Z
+
+[Term]
+id: PATO:0002232
+name: semicircular
+def: "A 2-D shape quality inhering in a bearer by virtue of the bearer's having shape or form of half a circle." [url:http\://www.thefreedictionary.com/semicircle]
+subset: value_slim
+synonym: "half circle" EXACT []
+synonym: "semicircle" EXACT []
+is_a: PATO:0002006 ! 2-D shape
+created_by: george
+creation_date: 2010-07-19T01:02:27Z
+
+[Term]
+id: PATO:0002233
+name: far from
+def: "A relational spatial quality inhering in a bearer by virtue of the bearer's being located far (not close to) in space in relation to another entity." [PATOC:PM]
+subset: relational_slim
+is_a: PATO:0001631 ! relational spatial quality
+created_by: george
+creation_date: 2010-07-19T02:43:53Z
+
+[Term]
+id: PATO:0002234
+name: emarginate
+def: "A notched shape quality inhering in a bearer by virtue of the bearer's having a notched tip or edge." [url:http\://www.thefreedictionary.com/emarginate]
+subset: value_slim
+is_a: PATO:0001495 ! notched
+created_by: george
+creation_date: 2010-07-19T04:25:58Z
+
+[Term]
+id: PATO:0002235
+name: ensiform
+def: "A tapered shape quality inhering in a bearer by virtue of the bearer's being flat, slender, and tapering to a point." [PATOC:JE]
+subset: value_slim
+synonym: " sword-like" EXACT []
+synonym: "blade-like" EXACT []
+synonym: "blade-shaped," EXACT []
+synonym: "sword-shaped" EXACT []
+is_a: PATO:0001500 ! tapered
+created_by: george
+creation_date: 2010-07-19T04:29:05Z
+
+[Term]
+id: PATO:0002236
+name: aliform
+def: "shape quality inhering in a bearer by virtue of the bearer's being shaped like a wing." [url:http\://www.thefreedictionary.com/aliform]
+subset: value_slim
+synonym: "wing-shaped" EXACT []
+is_a: PATO:0002006 ! 2-D shape
+created_by: george
+creation_date: 2010-07-23T02:19:14Z
+
+[Term]
+id: PATO:0002237
+name: retrorse
+def: "A curvature quality inhering in a bearer by virtue of the bearer's being curved backward or downward." [url:http\://www.thefreedictionary.com/retrorse]
+subset: value_slim
+is_a: PATO:0000406 ! curved
+created_by: george
+creation_date: 2010-07-23T02:22:09Z
+
+[Term]
+id: PATO:0002238
+name: antrorse
+def: "A curvature quality inhering in a bearer by virtue of the bearer's being curved forward or upward" [url:http\://www.thefreedictionary.com/antrorse]
+subset: value_slim
+is_a: PATO:0000406 ! curved
+created_by: george
+creation_date: 2010-07-23T02:22:56Z
+
+[Term]
+id: PATO:0002239
+name: hourglass-shaped
+def: "A concave 3-D shape shape that inheres in the bearer by virture of the bearer's nearly) symmetric shape wide at its ends and narrow in the middle, resemembling the figure of number 8." [url:http\://en.wikipedia.org/wiki/Hourglass-shaped]
+subset: value_slim
+synonym: "figure 8 shaped" EXACT []
+is_a: PATO:0002008 ! concave 3-D shape
+created_by: george
+creation_date: 2010-07-23T02:25:24Z
+
+[Term]
+id: PATO:0002240
+name: teardrop-shaped
+def: "A convex 3-D shape quality inhering in a bearer by virtue of the bearer's shape resembling falling drop." [url:wordnetweb.princeton.edu/perl/webwn]
+subset: value_slim
+is_a: PATO:0002007 ! convex 3-D shape
+created_by: george
+creation_date: 2010-07-23T02:31:11Z
 
 [Typedef]
 id: decreased_in_magnitude_relative_to
