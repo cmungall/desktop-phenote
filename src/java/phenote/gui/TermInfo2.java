@@ -428,7 +428,7 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
     termName.setContentType("text/html");
 		termName.setText("(No Selection)");
 		nameLabel.setLabelFor(termName);
-		nameLabel.setVerticalAlignment(JLabel.TOP);
+		nameLabel.setVerticalAlignment(JLabel.TOP); // Doesn't help--label still hangs below text.
 		basicInfoPanel.add(termName);
     // make nameLabel draggable to drag term to fields
     //nameLabel.setTransferHandler(new InfoTransferHandler());
@@ -449,7 +449,7 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 		basicInfoPanel.add(ontologyName);
 
 		JLabel definitionLabel = new JLabel("Definition: ", JLabel.TRAILING);
-		definitionLabel.setVerticalAlignment(JLabel.TOP);
+		definitionLabel.setVerticalAlignment(JLabel.TOP);  // Doesn't help--label still hangs below text.
 
 		basicInfoPanel.add(definitionLabel);
 		definitionTextArea = new JEditorPane();
@@ -479,13 +479,17 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 		// Lay out the panel.
 		int[] maxX = {PREFERREDX,-1};
 		int[] maxY = null;
+                int rows = 4;
+                if (this.isIncludeExternalDatabaseAnnotations())
+                  rows++;
+
 		SpringLayout layout = new SpringLayout();
 		basicInfoPanel.setLayout(layout);
-		SpringUtilities.makeCompactGrid(basicInfoPanel, 5, 2, // rows, cols
+		SpringUtilities.makeCompactGrid(basicInfoPanel, rows, 2, // rows, cols
 				INITX, INITY, // initX, initY
 				XPAD, YPAD); // xPad, yPad
 
-		SpringUtilities.fixCellWidth(basicInfoPanel, 5, 2, // rows,
+		SpringUtilities.fixCellWidth(basicInfoPanel, rows, 2, // rows,
 				// cols
 				INITX, INITY, // initX, initY
 				XPAD, YPAD,  // xPad, yPad
