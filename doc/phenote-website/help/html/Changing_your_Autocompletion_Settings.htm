@@ -13,16 +13,20 @@ options to choose from include:</p>
 <p><strong>Term name - </strong>The 
 name of the term itself.</p>
 <p><strong>Synonym</strong> - The name of the synonym for a term.</p>
-<p><strong>Definition</strong> -&nbsp;Partial-matches are&nbsp;based on 
+<p><strong>Definition</strong> -&nbsp;Partial matches are based on 
 inclusion within the definition of a term.&nbsp; </p>
+<p><strong>DBXref</strong> - Looks for matches within the DBxrefs for a term. </p>
 <p><strong>Obsoletes </strong>- This is an optional setting to be used in 
 combination with one of the settings above.&nbsp; It will look for matches to 
-term name, synonym, or definition within those terms that are obsolete, in 
+term name, synonym, DBxref, or definition in terms that are marked as obsolete, in 
 addition to non-obsoleted terms.&nbsp; In order to select obsolete search, you 
-must have at least one of the other three selected.</p>
-<p>&nbsp;</p>
-<p>To change these settings, simply check on/off the desired box in the Settings menu:</p>
-<p>&nbsp;</p>
+must have at least one of the other four search options selected.  (By
+  default, Phenote does not search obsolete terms.)</p>
+<p>To change these settings, simply check on/off the desired option in the Settings menu:</p>
 <p><IMG hspace=0 src="../images/Settings-menu.png" border=0></p>
+<p>You can also save your autocompletion settings in your configuration file
+using the <code>autocomplete-settings</code> parameter, e.g.<br>
+<code> &lt;autocomplete-settings term="true" synonym="true" definition="false" obsolete="false" dbxref="true"/&gt; </code>
+</p>
 </body>
 </html>

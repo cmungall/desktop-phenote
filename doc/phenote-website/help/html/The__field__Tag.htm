@@ -39,6 +39,13 @@ per configuration.</p>
     <td><em>any text value</em></td>
     <td></td></tr>
   <tr>
+    <td><font face="Courier">tab</font></td>
+    <td>The name of the tab to assign this field to in the Annotation Editor
+    (the Data Entry section).  If no tab name is assigned, the fields are
+    assigned to numbered tabs with a default of 8 fields per tab.</td>
+    <td><em>any text value</em></td>
+    <td></td></tr>
+  <tr>
     <td><font face="Courier">enable</font></td>
     <td>A flag that turns this field on or off.</td>
     <td>
@@ -46,19 +53,23 @@ per configuration.</p>
         <li>true 
         <li>false</li></ul></td>
     <td>true</td></tr></table></p>
-<h2>&nbsp;</h2>
 <h2>Contents</h2>
-<p>Each &lt;field&gt; element specifies one input are in 
+<p>Each &lt;field&gt; element specifies one input area in 
 the <em>Data Entry </em>section.&nbsp;</p>
 <p>There are two types of fields:&nbsp; free-text or 
 ontology.&nbsp; By default, a field is of the free-text type.&nbsp; To specify 
 ontology type, see The &lt;ontology&gt; Tag page.</p>
-<p>The order in which the fields are specified will dictate the order in which 
+<p>The order in which the fields are specified in the configuration file will dictate the order in which 
 they display in the <em>Data Entry</em> section, as well as the order of the 
 columns in the <em>Annotation Spreadsheet</em>.&nbsp; </p>
 <h2>Example</h2>
-<p>
 <h3>Free Text Field</h3><pre>&lt;ns:field name="Field Name" syntax-abbrev="FA" enable="true"/&gt;</pre>
-<h3>Ontology Field</h3><pre>&lt;ns:field name="Genetic Context" syntax-abbrev="GC" enable="true"&gt;<br>&nbsp;&nbsp;&nbsp; [see The&lt;ontology&gt; Tag page for specification.]<br>&lt;/ns:field&gt;</pre>
+<h3>Ontology-Controlled Field</h3>
+<pre>
+  &lt;ns:field name="Quality" datatag="Q" enable="true" warnIfNull="true" tab="Description"&gt;
+    &lt;ns:ontology name="Relationship" file="http://purl.org/obo/obo/PATO.obo" is-postcomp-rel="true"/&gt;
+    &lt;ns:ontology name="PATO" file="http://purl.org/obo/obo/PATO.obo"/&gt;
+  &lt;/ns:field&gt;
+</pre>
 </body>
 </html>

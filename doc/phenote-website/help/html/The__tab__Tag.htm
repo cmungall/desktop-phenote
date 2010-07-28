@@ -7,12 +7,31 @@
 </head>
 <body bgcolor="#ffffff">
 <h1>The &lt;tab&gt; Tag</h1>
-<p>The &lt;tab&gt; tag will allow the user to specify 
-groupings of fields into separate, paged tabs.&nbsp; This provides a way of 
-organizing fields into groups for ease of data entry.&nbsp;</p>
-<p>Phenote can accomodate approximately 12 fields per 
-tab.&nbsp;</p>
+<p>The optional &lt;tab&gt; tag (new in July 2010) allows the user to assign groups of fields
+to separate tabs in the Annotation Editor.&nbsp; This provides a way of 
+organizing fields into groups for ease of data entry.  In the example below,
+  the first three fields and also the Year field will go into the Publication
+  tab, while the Gene Name, Gene Symbol, and Alelle will go into the
+  Gene/Allele tab:</p>
+<pre>
+ &lt;field name="PubMed_ID" enable="true" desc="provide publication ID from PubMed" tab="Publication"/&gt;
+ &lt;field name="First Author" enable="true" tab="Publication"/&gt;
+ &lt;field name="Journal" enable="true" tab="Publication"&gt;
+   &lt;ontology name="Journal"
+file="http://dev.gramene.org/plant_ontology/ontology-files/collaborators_ontology/gramene/others/journal_list.obo"/&gt;
+ &lt;/field&gt;
+ &lt;field name="Gene Name" enable="true" tab="Gene/Allele"&gt;
+ &lt;field name="Gene Symbol" enable="true" tab="Gene/Allele"&gt;
+ &lt;field name="Allele" enable="true" tab="Gene/Allele"&gt;
+ &lt;field name="Year" enable="true" tab="Publication"/&gt;
+</pre>
+<p>If fields are not organized into named tabs, they will be split into
+  numbered tabs if there are too many fields to fit in one tab.  The number of
+  fields per tab defaults to 8 and can be set by the top-level tag
+  fields-per-tab, e.g.<br>
+<code>&lt;fields-per-tab numfields="12"/&gt;</code>
+</p><p>The fields-per-tab parameter is ignored if you assign fields to named tabs.
+</p>
 <p>&nbsp;</p>
-<p>in development...</p>
 </body>
 </html>
