@@ -416,6 +416,12 @@ public class Phenote {
           try { Config.inst().loadDefaultConfigFile(true); }  // This will keep the config from re-updating itself from the master URL that's in the config file (which is probably bad if we got to this point)
           catch (ConfigException c) {
             logErr("Uh oh, reload of " + dotPhenoteFile + " failed! "+c);
+            JOptionPane.showMessageDialog(null,"Couldn't find a usable version of requested configuration file " + Config.inst().getDefaultFile() + ".\nYou will be prompted to choose a different configuration.", "Can't find requested configuration", JOptionPane.ERROR_MESSAGE);
+            if (!Config.inst().resetMyConfig()) {
+              String m = "Couldn't reset configuration!  Fatal error!  Please exit Phenote and try again later.";
+              logErr(m);
+              JOptionPane.showMessageDialog(null,m,"Couldn't reset configuration", JOptionPane.ERROR_MESSAGE);
+            }
           }
         }
         catch (ConfigException c) { 
