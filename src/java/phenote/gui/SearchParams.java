@@ -10,6 +10,7 @@ public class SearchParams implements SearchParamsI {
   private boolean searchSyn = true; // false; default true?
   private boolean searchDef = false;
   private boolean searchObs = false;
+  private boolean searchDbxrefs = false;
 
   /**
    * Singleton
@@ -41,6 +42,8 @@ public class SearchParams implements SearchParamsI {
       searchDef = setting;
     } else if (SearchFilterType.OBS == filter) {
       searchObs = setting;
+    } else if (SearchFilterType.XRF == filter) {
+      searchDbxrefs = setting;
     }
   }
 
@@ -54,27 +57,12 @@ public class SearchParams implements SearchParamsI {
       return searchDef;
     } else if (SearchFilterType.OBS == filter) {
       return searchObs;
+    } else if (SearchFilterType.XRF == filter) {
+      return searchDbxrefs;
     }
     return true;
   }
   
-//  public boolean[] getAllParams() {
-//  	boolean[] temp;
-//  	for (SearchFilterType i : SearchFilterType.values()) {
-//  		if (i==SearchFilterType.TERM) {
-//  			temp[i.ordinal()]=searchTerm;
-//  		} else if (i==SearchFilterType.SYN) {
-//  			temp[i.ordinal()]=searchSyn;
-//  		} else if (i==SearchFilterType.DEF) {
-//  			temp[i.ordinal()]=searchDef;
-//  		} else if (i==SearchFilterType.OBS) {
-//  			temp[i.ordinal()]=searchObs;
-//  		}
-//  	}
-//  	return temp;
-//  }
-  
-
   public boolean searchTerms() {
     return searchTerm;
   }
@@ -95,10 +83,14 @@ public class SearchParams implements SearchParamsI {
     return searchObs;
   }
 
+  public boolean searchDbxrefs() {
+    return searchDbxrefs;
+  }
+
   public boolean verifySettings() {
     //this function will verify that the user has selected a minimum of
     //a single term/syn/def + optional obs
-    if (!(searchTerm || searchDef || searchSyn)) {
+    if (!(searchTerm || searchDef || searchSyn || searchDbxrefs)) {
       if (searchObs) {
         searchTerm = true;  //default to select Term if obs is chosen, at minimum for obs
         return false;

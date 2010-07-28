@@ -5,7 +5,7 @@ package phenote.gui;
  */
 public enum SearchFilterType {
 
-  TERM("Term Name"), SYN("Synonyms"), DEF("Definitions"), OBS("Obsoletes");
+  TERM("Term Name"), SYN("Synonyms"), DEF("Definitions"), OBS("Obsoletes"), XRF("DBxrefs");
 
   private String name;
 

@@ -869,6 +869,7 @@ public class Config {
    		s.setSynonym(true);
    		s.setDefinition(false);
    		s.setObsolete(false);
+   		s.setDbxref(false);
    	}
    	return s;
   }
@@ -879,6 +880,7 @@ public class Config {
   	getAutocompleteSettings().setSynonym(searchParams.getParam(SearchFilterType.SYN));
   	getAutocompleteSettings().setDefinition(searchParams.getParam(SearchFilterType.DEF));
   	getAutocompleteSettings().setObsolete(searchParams.getParam(SearchFilterType.OBS));
+  	getAutocompleteSettings().setDbxref(searchParams.getParam(SearchFilterType.XRF));
   }
  
   

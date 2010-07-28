@@ -294,6 +294,7 @@ public class CompListSearcher {
     private List<CompletionObject> containTerms = new ArrayList<CompletionObject>();
     private List<CompletionObject> startsWithSyns = new ArrayList<CompletionObject>();
     private List<CompletionObject> containSyns = new ArrayList<CompletionObject>();
+    private List<CompletionObject> containDbxrefs = new ArrayList<CompletionObject>();
     private List<CompletionObject> obsoletes = new ArrayList<CompletionObject>();
     private List<CompletionObject> definitions = new ArrayList<CompletionObject>();
 
@@ -306,6 +307,8 @@ public class CompListSearcher {
         addTerm(ct,startsWithSyns,containSyns);
       else if (ct.isDefinitionMatch())
         definitions.add(ct); // start with/contains?
+      else if (ct.isDbxrefMatch())
+        containDbxrefs.add(ct);
     }
 
     private void addTerm(CompletionObject ct, List<CompletionObject> startsWith,
@@ -338,6 +341,7 @@ public class CompListSearcher {
       sortedTerms.addAll(startsWithSyns);
       sortedTerms.addAll(containSyns);
       sortedTerms.addAll(definitions);
+      sortedTerms.addAll(containDbxrefs);
       sortedTerms.addAll(obsoletes);
       return sortedTerms;
     }

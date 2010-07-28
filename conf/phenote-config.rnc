@@ -122,7 +122,8 @@ autocomplete-settings = element autocomplete-settings {
   attribute term { xsd:boolean },
   attribute synonym { xsd:boolean },
   attribute definition { xsd:boolean },
-  attribute obsolete { xsd:boolean }
+  attribute obsolete { xsd:boolean },
+  attribute dbxref { xsd:boolean }
 }
 
 ## what implementation of CharacterI to use, CHARACTER or OBO_ANNOTATION

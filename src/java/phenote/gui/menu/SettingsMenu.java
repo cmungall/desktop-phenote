@@ -1,5 +1,6 @@
 package phenote.gui.menu;
 
+//import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -48,6 +49,7 @@ public class SettingsMenu extends DynamicMenu {
   private JMenuItem menuSearchFilterSynonym;
   private JMenuItem menuSearchFilterDefinition;
   private JMenuItem menuSearchFilterObsolete;
+  private JMenuItem menuSearchFilterDbxref;
   private JMenuItem showHistory;
   private JMenuItem lockDoc;
   public SearchParams searchParams;
@@ -65,9 +67,12 @@ public class SettingsMenu extends DynamicMenu {
     getSearchParams().setParam(SearchFilterType.SYN, config.getAutocompleteSettings().getSynonym());
     getSearchParams().setParam(SearchFilterType.DEF, config.getAutocompleteSettings().getDefinition()); 
     getSearchParams().setParam(SearchFilterType.OBS, config.getAutocompleteSettings().getObsolete());
+    getSearchParams().setParam(SearchFilterType.XRF, config.getAutocompleteSettings().getDbxref());
     
     // These search options need a label
-    add (new JMenuItem("When looking for matching terms, Phenote will search in:"));
+    JMenuItem searchLabel = new JMenuItem("Search for matching terms in:");
+//    searchLabel.setFont(searchLabel.getFont().deriveFont(Font.ITALIC));  // Didn't work
+    add(searchLabel);
 
     // Create property items based on status
     menuSearchFilterTerm = CreateMenuItem(this, ITEM_CHECK,
@@ -79,6 +84,9 @@ public class SettingsMenu extends DynamicMenu {
     menuSearchFilterDefinition = CreateMenuItem(this, ITEM_CHECK,
             SearchFilterType.DEF.getName(), null, 'D', "Look for partial matches within definitions of terms",
             getSearchParams().getParam(SearchFilterType.DEF));
+    menuSearchFilterDbxref = CreateMenuItem(this, ITEM_CHECK,
+            SearchFilterType.XRF.getName(), null, 'X', "Look for partial matches within DBxrefs",
+            getSearchParams().getParam(SearchFilterType.XRF));
 
 //    addSeparator();  //obs are in a class by themselves.
     menuSearchFilterObsolete = CreateMenuItem(this, ITEM_CHECK,
@@ -193,6 +201,8 @@ public class SettingsMenu extends DynamicMenu {
       } else if (e.getActionCommand().equals(SearchFilterType.OBS.getName())) {
         getSearchParams().setParam(SearchFilterType.OBS, menuSearchFilterObsolete.isSelected());
 //    		m = "OBS search is now *"+getSearchParams().searchObsoletes();
+      } else if (e.getActionCommand().equals(SearchFilterType.XRF.getName())) {
+        getSearchParams().setParam(SearchFilterType.XRF, menuSearchFilterDbxref.isSelected());
       }
       if (!(getSearchParams().verifySettings())) {
         m = "You must select at least one of Term/Synonym/Definition.\nFilter is reset to -Term-.";

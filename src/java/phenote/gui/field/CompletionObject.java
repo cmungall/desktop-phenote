@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
+import org.obo.datamodel.Dbxref;
 import org.obo.datamodel.OBOClass;
 import org.obo.datamodel.OBOObject;
 import org.obo.datamodel.OBOProperty;
@@ -21,6 +22,8 @@ public class CompletionObject {
   private boolean termMatch = false;
   private boolean isSynMatch = false;
   private String  synMatchString;
+  private boolean isDbxrefMatch = false;
+  private String  dbxrefMatchString;
   private boolean definitionMatch = false;
   private boolean exactMatch = false;
   private boolean startsWith = false;
@@ -62,9 +65,10 @@ public class CompletionObject {
   }
   private String getCompListDisplaySuffix() {
     final StringBuffer appends = new StringBuffer();
-    if (this.isSynMatch()) appends.append("[syn]");
-    if (this.isDefinitionMatch()) appends.append("[def]");
-    if (this.obj.isObsolete()) appends.append("[obs]");
+    if (this.isSynMatch()) appends.append(" [syn]");
+    if (this.isDefinitionMatch()) appends.append(" [def]");
+    if (this.obj.isObsolete()) appends.append(" [obs]");
+    if (this.isDbxrefMatch()) appends.append(" [xref]");
     return appends.toString();
   }
 
@@ -78,10 +82,13 @@ public class CompletionObject {
   boolean isTermMatch() { return termMatch; }
   boolean isSynMatch() { return isSynMatch; }
   boolean isDefinitionMatch() { return definitionMatch; }
+  boolean isDbxrefMatch() { return isDbxrefMatch; }
   boolean isExactMatch() { return exactMatch; }
   boolean isStartsWithMatch() { return startsWith; }
 
   private Set<Synonym> getSyns() { return obj.getSynonyms(); }
+
+  private Set<Dbxref> getDbxrefs() { return obj.getDbxrefs(); }
 
   private String getDefinition() { return obj.getDefinition(); }
   private boolean hasDefinition() {
@@ -127,6 +134,17 @@ public class CompletionObject {
         return true;
       }
     }
+    // DBXREFS
+    if (searchParams.searchDbxrefs()) {
+      for (Object o : getDbxrefs()) {
+        String dbxref = o.toString();
+        if (stringMatches(input,dbxref)) {
+          isDbxrefMatch = true;
+          dbxrefMatchString = dbxref;
+          return true;
+        }
+      }
+    }
     return false;
   }
 
@@ -157,6 +175,7 @@ public class CompletionObject {
   void resetMatchState() {
     termMatch = false;
     isSynMatch = false;
+    isDbxrefMatch = false;
     definitionMatch = false;
     exactMatch = false;
     startsWith = false;
