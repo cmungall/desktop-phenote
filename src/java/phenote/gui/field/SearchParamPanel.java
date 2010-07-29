@@ -74,6 +74,9 @@ public class SearchParamPanel {
     public boolean searchDefinitions() {
       return definitionButton.isSelected();
     }
+    public boolean searchDbxrefs() {
+      return false; // for now--haven't added a dbxrefs button.
+    }
     public boolean searchObsoletes() {
       return obsoleteButton.isSelected();
     }
