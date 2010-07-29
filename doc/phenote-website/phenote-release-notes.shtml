@@ -20,6 +20,31 @@
 	  Phenote Release Notes
 	</div>
 
+<h1>1.8</h1>
+
+<h2>1.8.1</h2>
+
+<ul>
+<li> feature: Made tabs in Annotation Editor configurable in two ways:
+<ul>
+<li>Ability to designate number of fields per tab</li>
+<li>Ability to name tabs and assign fields to named tabs</li>
+</ul>
+Both are specified in the config file.  For specifying the number of fields
+per tab, use the fields-per-tab attribute:
+<pre>&lt;fields-per-tab numfields="12"/&gt;</pre>
+For naming tabs, simply add tab="TabName" to each &lt;field&gt;.  You can have as
+many different tab names as you want.  If you specify tab names, the
+fields-per-tab attribute (which normally defaults to 8) is ignored.
+</li>
+<li>feature: Added ability to search dbxrefs during term autocompletion.
+Whether or not to search dbxrefs is configurable from menu and config file,
+just like other options (name, synonym, etc.).</li>
+<li> If a field has a description (desc) defined in the configuration, then it
+will pop up  as a tooltip if you hover your mouse over the field name in the
+Annotation Editor.</li>
+</ul>
+
 <h1>1.7</h1>
 
 <h2>07.20.2010, Version 1.7-beta16</h2>
