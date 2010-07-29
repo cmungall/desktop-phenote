@@ -310,13 +310,23 @@ public class FieldPanel extends AbstractGUIComponent {
     constraints.anchor = GridBagConstraints.EAST;
     if (!field.hasOntologyChooser())
       constraints.gridwidth = 2;
-    addLabel(field.getLabel(),constraints);
+    String tooltip = field.getCharField().getDesc();
+    addLabel(field.getLabel(),constraints, tooltip);
   }
 
   private void addLabel(String label,GridBagConstraints constraints) {
     constraints.gridx = 0;
     //constraints.anchor = GridBagConstraints.EAST;
     fieldPanel.add(new JLabel(label), constraints);
+  }
+
+  private void addLabel(String labelText,GridBagConstraints constraints, String tooltip) {
+    constraints.gridx = 0;
+    //constraints.anchor = GridBagConstraints.EAST;
+    JLabel label = new JLabel(labelText);
+    if (tooltip != null && !tooltip.equals(""))
+      label.setToolTipText(tooltip);
+    fieldPanel.add(label, constraints);
   }
   
   private void addOntologyChooser(CharFieldGui fieldGui, GridBagConstraints constraints) {
