@@ -35,7 +35,9 @@ per configuration.</p>
   <tr>
     <td><font face="Courier">desc</font></td>
     <td>A short description or definition of what a field is for; could be 
-      used to describe contents, proper usage, etc.</td>
+      used to describe contents, proper usage, etc.  Pops up as a tooltip if
+      you hover the mouse over the field name in the Annotaiton Editor.
+    </td>
     <td><em>any text value</em></td>
     <td></td></tr>
   <tr>
@@ -66,7 +68,9 @@ columns in the <em>Annotation Spreadsheet</em>.&nbsp; </p>
 <h3>Free Text Field</h3><pre>&lt;ns:field name="Field Name" syntax-abbrev="FA" enable="true"/&gt;</pre>
 <h3>Ontology-Controlled Field</h3>
 <pre>
-  &lt;ns:field name="Quality" datatag="Q" enable="true" warnIfNull="true" tab="Description"&gt;
+  &lt;ns:field name="Quality" datatag="Q" enable="true" warnIfNull="true"
+    desc="The quality or relationship of the phenotype"
+    tab="More details"&gt;
     &lt;ns:ontology name="Relationship" file="http://purl.org/obo/obo/PATO.obo" is-postcomp-rel="true"/&gt;
     &lt;ns:ontology name="PATO" file="http://purl.org/obo/obo/PATO.obo"/&gt;
   &lt;/ns:field&gt;

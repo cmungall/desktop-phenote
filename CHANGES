@@ -159,3 +159,8 @@ fields-per-tab attribute (which normally defaults to 8) is ignored.
 - Added ability to search dbxrefs during term autocompletion.
 Whether or not to search dbxrefs is configurable from menu and config file,
 just like other options (name, synonym, etc.).
+
+1.8.1 (we don't really need to keeeep calling them beta, do we?)
+- If a field has a description (desc) defined in the configuration, it will now
+pop up  as a tooltip if you hover your mouse over the field name in the
+Annotation Editor.
