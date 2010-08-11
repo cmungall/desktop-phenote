@@ -53,7 +53,7 @@
 	<li>Choose File -> New -> Project</li>
 	<li>Select "Checkout Projects from SVN" in the New Project Wizard, and click "Next"</li>
 	<li>Choose "Create a New Repository Location" and click "Next"</li>
-	<li>Enter https://geneontology.svn.sourceforge.net/svnroot/geneontology/java/oboedit/ into the location field and click "Next"</li>
+	<li>Enter http://obo.svn.sourceforge.net/viewvc/obo/phenote/ into the location field and click "Next"</li>
         <li>Choose the trunk directory to get the latest version (choose a branch from the "tags" or "branches" directories to get an earlier version) and click "Next"</li>
         <li>Enter a name for the Eclipse projet ("Phenote" is recommended) and click "Finish" </li>
       </ol>
