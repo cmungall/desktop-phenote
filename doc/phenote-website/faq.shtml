@@ -71,13 +71,24 @@
 	<h3>Is there some online documentation?</h3>
 	<p>
 	You bet!  Check out our <a href="/help/">User's Guide</a> (which is also included inside the Phenote application).</p>
-	<h3>When I'm annotating, I can't seem to find the right terms?</h3>
+	<h3>When I'm annotating, I can't seem to find the right terms.</h3>
 	<p>
 	Sometimes a term you are looking for is really just a synonym of another term.  Make sure you have "synonyms" selected under the "Settings" menu. </p>
 	<p>If you still can't find it, it might be that the ontology is really missing a term.  Ontologies, while extensive, are never complete, and are under active development.  There are usually online term request resources for each ontology.  You will need to contact each ontology resource separately.  </p>
 	<h3>Can I output my data in RDF-OWL?</h3>
 	<p>
 	Not yet, but that feature is coming soon.
+	</p>
+	<h3>When I launch Phenote, it hangs.</h3>
+	<p>
+          The most likely cause of this is that the configuration you chose
+          includes a lot of large ontologies, and your computer doesn't have
+          enough memory to load all of them.  Ontologies keep getting bigger,
+          and some configurations include a dozen or more ontologies, all of
+          which have to be loaded by Phenote.  The best workaround is to <a href="/help/html/How_To_Edit_a_Configuration_File.htm">edit
+          your configuration file</a> and remove any unneeded ontologies, or
+          use "slim" ontologies (smaller versions of the ontologies, with
+          unneeded terms or fields left out).
 	</p>
 <!-- 	<h3>Are there any tools that allow me to analyze my annotations?</h3> -->
 <!-- 	<p> Presently Phenote does not include any analysis tools.  However, -->
