@@ -1,5 +1,5 @@
 format-version: 1.2
-date: 22:06:2010 16:15
+date: 17:08:2010 16:54
 saved-by: csmith
 auto-generated-by: OBO-Edit 2.0
 default-namespace: MPheno.ontology
@@ -153,7 +153,6 @@ is_a: MP:0002856 ! abnormal vestibular ganglion morphology
 id: MP:0000029
 name: abnormal malleus morphology
 def: "any structural anomaly of the largest of the three auditory ossicles, which resembles a club or hammer" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
-synonym: "abnormal malleus" EXACT []
 is_a: MP:0005105 ! abnormal middle ear ossicle morphology
 
 [Term]
@@ -855,7 +854,7 @@ name: abnormal rib morphology
 def: "any structural anomaly of the bones forming the bony wall of the chest" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", PMID:9778510]
 synonym: "abnormal ribs" EXACT []
 synonym: "rib defect" EXACT []
-is_a: MP:0004624 ! abnormal thoracic cage
+is_a: MP:0004624 ! abnormal thoracic cage morphology
 
 [Term]
 id: MP:0000151
@@ -901,7 +900,7 @@ name: abnormal sternum morphology
 def: "any structural anomaly of the long flat bone of the chest that articulates with clavicle and first seven rib pairs" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", PMID:7925010]
 synonym: "abnormal sternum" EXACT []
 synonym: "sternum defect" EXACT []
-is_a: MP:0004624 ! abnormal thoracic cage
+is_a: MP:0004624 ! abnormal thoracic cage morphology
 
 [Term]
 id: MP:0000158
@@ -1031,6 +1030,7 @@ name: abnormal circulating LDL cholesterol level
 def: "any anomaly in the amount in the blood of the lipoprotein:cholesterol complex that transports cholesterol out of the arteries and around the body, for use by various tissues in normal bodily functions" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "abnormal LDL cholesterol level" EXACT []
 is_a: MP:0000180 ! abnormal circulating cholesterol level
+is_a: MP:0010330 ! abnormal circulating lipoprotein level
 
 [Term]
 id: MP:0000182
@@ -1062,6 +1062,7 @@ def: "any anomaly in the amount in the blood of the small lipoprotein:cholestero
 synonym: "abnormal HDL cholesterol level" EXACT []
 synonym: "abnormal HDL levels" EXACT []
 is_a: MP:0000180 ! abnormal circulating cholesterol level
+is_a: MP:0010330 ! abnormal circulating lipoprotein level
 
 [Term]
 id: MP:0000186
@@ -1663,6 +1664,7 @@ alt_id: MP:0000283
 def: "both the aorta and the pulmonary trunk originate from the right ventricle, usually in conjunction with a ventricular septal defect" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:67826]
 synonym: "double outlet right ventricle" EXACT []
 is_a: MP:0003920 ! abnormal heart right ventricle morphology
+is_a: MP:0010224 ! abnormal heart ventricle outflow tract morphology
 
 [Term]
 id: MP:0000285
@@ -2376,6 +2378,7 @@ is_a: MP:0001510 ! abnormal coat appearance
 id: MP:0000412
 name: excessive hair
 def: "greater amount of body hair compared to controls" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "hypertrichosis" EXACT []
 is_a: MP:0002073 ! abnormal hair growth
 
 [Term]
@@ -2403,6 +2406,7 @@ id: MP:0000416
 name: sparse hair
 alt_id: MP:0000415
 def: "body hair that is less dense; may be due to reduced follicle numbers or due to the inability to retain some of the hairs of the coat over time" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "hypotrichosis" BROAD []
 synonym: "partial hair loss" RELATED []
 synonym: "sparse fur" EXACT []
 synonym: "thin coat" EXACT []
@@ -3652,7 +3656,7 @@ name: abnormal liver development
 def: "any anomaly in the differentiation of the liver" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 synonym: "abnormal hepatic development" EXACT []
 is_a: MP:0000598 ! abnormal liver morphology
-is_a: MP:0003943 ! abnormal liver/biliary system development
+is_a: MP:0003943 ! abnormal hepatobiliary system development
 
 [Term]
 id: MP:0000597
@@ -3669,7 +3673,7 @@ def: "any structural anomaly of the bile-secreting exocrine gland, which is impo
 synonym: "abnormal hepatic morphology" EXACT []
 synonym: "abnormal liver" EXACT []
 synonym: "liver dysplasia" EXACT []
-is_a: MP:0002138 ! abnormal liver/biliary system morphology
+is_a: MP:0002138 ! abnormal hepatobiliary system morphology
 
 [Term]
 id: MP:0000599
@@ -3746,7 +3750,7 @@ def: "aberrant function of this bile-secreting exocrine gland, which is importan
 synonym: "abnormal hepatic function" EXACT []
 synonym: "abnormal hepatic physiology" EXACT []
 synonym: "abnormal liver function" EXACT []
-is_a: MP:0002139 ! abnormal liver/biliary system physiology
+is_a: MP:0002139 ! abnormal hepatobiliary system physiology
 
 [Term]
 id: MP:0000610
@@ -3833,6 +3837,7 @@ synonym: "acinic cell adenocarcinoma" EXACT []
 synonym: "acinic cell carcinoma" EXACT []
 synonym: "Salivary Adenocarcinomas" EXACT []
 is_a: MP:0009308 ! adenocarcinoma
+is_a: MP:0010318 ! increased salivary gland tumor incidence
 
 [Term]
 id: MP:0000622
@@ -4086,10 +4091,11 @@ is_a: MP:0004958 ! enlarged prostate gland
 
 [Term]
 id: MP:0000660
-name: lateral prostate hypoplasia
+name: lateral prostate gland hypoplasia
 alt_id: MP:0001161
 def: "underdevelopment or reduced size, usually due to a reduced number of cells, in the lateral lobe of the prostate" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", PMID:10906459]
 synonym: "hypoplastic lateral prostate" EXACT []
+synonym: "lateral prostate hypoplasia" EXACT []
 is_a: MP:0005147 ! prostate gland hypoplasia
 
 [Term]
@@ -4129,10 +4135,11 @@ is_a: MP:0009736 ! abnormal prostate gland branching morphogenesis
 
 [Term]
 id: MP:0000666
-name: decreased prostate duct number
+name: decreased prostate gland duct number
 alt_id: MP:0001166
 def: "fewer than normal minute canals that pass the prostatic secretions to the urethra" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", PMID:10906459]
 synonym: "decreased number of prostate ducts" EXACT []
+synonym: "decreased prostate duct number" EXACT []
 synonym: "reduced number of prostate ducts" EXACT []
 synonym: "reduced prostate duct number" EXACT []
 is_a: MP:0009734 ! abnormal prostate gland duct morphology
@@ -4393,10 +4400,13 @@ is_a: MP:0002364 ! abnormal thymus size
 [Term]
 id: MP:0000711
 name: thymus cortex hypoplasia
+alt_id: MP:0005045
 def: "underdevelopment or reduced size, usually due to a reduced cell number, of the outer part of a thymus lobule that surrounds the medulla and is composed of closely packed lymphocytes" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "decreased cellularity of thymic cortex" EXACT []
 synonym: "decreased thymic cortex cellularity" EXACT []
+synonym: "decreased thymus cortex area" EXACT []
 synonym: "hypoplasia of thymic cortex" EXACT []
+synonym: "reduced thymus cortex area" EXACT []
 synonym: "thymic cortex hypoplasia" EXACT []
 is_a: MP:0002371 ! abnormal thymus cortex morphology
 
@@ -7159,9 +7169,12 @@ is_a: MP:0009209 ! abnormal internal female genitalia morphology
 [Term]
 id: MP:0001121
 name: uterus hypoplasia
+alt_id: MP:0003573
 def: "underdevelopment or reduced size of the uterus, usually due to a reduced number of cells" [J:45065]
 synonym: "metra hypoplasia" EXACT []
 synonym: "metral hypoplasia" EXACT []
+synonym: "rudimentary metra" EXACT []
+synonym: "rudimentary uterus" EXACT []
 synonym: "uterine hypoplasia" EXACT []
 is_a: MP:0002637 ! small uterus
 
@@ -7465,9 +7478,10 @@ is_a: MP:0001158 ! abnormal prostate gland morphology
 
 [Term]
 id: MP:0001167
-name: prostate epithelial hyperplasia
+name: prostate gland epithelial hyperplasia
 alt_id: MP:0000667
 def: "epithelium is multi-layered instead of columnar with increased cell number" [PMID:10906459]
+synonym: "prostate epithelial hyperplasia" EXACT []
 is_a: MP:0001168 ! abnormal prostate gland epithelium morphology
 
 [Term]
@@ -8892,7 +8906,6 @@ id: MP:0001394
 name: circling
 def: "repeated, compulsive movement in a circle; often associated with inner ear defects" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", PMID:10709991]
 is_a: MP:0001408 ! stereotypic behavior
-is_a: MP:0002979 ! abnormal vestibular response
 
 [Term]
 id: MP:0001395
@@ -9004,7 +9017,6 @@ def: "compulsive up and down movement of the head" [J:17123]
 synonym: "head nodding" EXACT []
 is_a: MP:0000436 ! abnormal head movements
 is_a: MP:0001408 ! stereotypic behavior
-is_a: MP:0002979 ! abnormal vestibular response
 
 [Term]
 id: MP:0001411
@@ -9084,7 +9096,7 @@ is_obsolete: true
 id: MP:0001425
 name: abnormal alcohol consumption
 def: "aberrant behavioral-related or physiological-related intake of alcohol into the body" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-synonym: "ethanol consumption" EXACT []
+synonym: "abnormal ethanol consumption" EXACT []
 is_a: MP:0001422 ! abnormal drinking behavior
 is_a: MP:0009745 ! abnormal behavioral response to xenobiotic
 
@@ -9094,6 +9106,7 @@ name: polydipsia
 def: "abnormally large intake of fluids by mouth, usually due to excessive thirst that is relatively prolonged" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "excessive drinking" EXACT []
 synonym: "increased drinking" EXACT []
+synonym: "polydypsia" EXACT []
 is_a: MP:0003911 ! increased drinking behavior
 
 [Term]
@@ -9805,8 +9818,7 @@ is_a: MP:0001565 ! abnormal circulating phosphate level
 id: MP:0001569
 name: abnormal circulating bilirubin level
 alt_id: MP:0000200
-def: "aberrant concentration in the blood of this yellow heme breakdown product" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
-synonym: "abnormal bilirubin level" EXACT []
+def: "any anomaly in the concentration in the blood of the bile pigment bilirubin, normally found in the liver and in red blood cells" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 is_a: MP:0009642 ! abnormal blood homeostasis
 
 [Term]
@@ -10215,6 +10227,7 @@ id: MP:0001671
 name: abnormal vitamin absorption
 def: "any anomaly in the ability to take in any of a group of organic substances, present in food, that are essential to normal metabolism" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 is_a: MP:0001666 ! abnormal nutrient absorption
+is_a: MP:0004019 ! abnormal vitamin homeostasis
 
 [Term]
 id: MP:0001672
@@ -11484,8 +11497,8 @@ def: "higher than normal incidence of malignant tumors of the mammary gland" [J:
 synonym: "mammary carcinoma" EXACT []
 synonym: "mammary gland adenocarcinoma" EXACT []
 synonym: "mammary gland carcinoma" EXACT []
-is_a: MP:0006318 ! mammary gland tumor
 is_a: MP:0009308 ! adenocarcinoma
+is_a: MP:0010299 ! increased mammary gland tumor incidence
 
 [Term]
 id: MP:0001884
@@ -11705,6 +11718,7 @@ is_a: MP:0003698 ! abnormal male reproductive system physiology
 id: MP:0001923
 name: reduced female fertility
 def: "reduced ability of female to produce live offspring" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:60409]
+synonym: "low pregnancy rate" NARROW []
 is_a: MP:0001921 ! reduced fertility
 is_a: MP:0003699 ! abnormal female reproductive system physiology
 
@@ -11941,7 +11955,6 @@ id: MP:0001961
 name: abnormal reflex
 alt_id: MP:0001476
 def: "anomaly in an involuntary response to a peripheral stimulus" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
-synonym: "reflexes" EXACT []
 is_a: MP:0002067 ! abnormal sensory capabilities/reflexes/nociception
 is_a: MP:0003492 ! abnormal involuntary movement
 
@@ -12211,27 +12224,31 @@ is_obsolete: true
 id: MP:0002012
 name: trichofolliculoma
 def: "tumors which contain multiple abortive and/or misaligned hair follicles" [J:51296]
-is_a: MP:0005276 ! skin tumor
+is_a: MP:0010300 ! increased skin tumor incidence
 
 [Term]
 id: MP:0002013
-name: pilomatriculoma
-def: "hair follicle tumor" [J:51296]
-synonym: "pilomatricoma" EXACT []
-is_a: MP:0005276 ! skin tumor
+name: increased pilomatricoma incidence
+def: "greater than the expected number of neoplasms that arise from hair matrix cells occurring in a specific population in a given time period; pilomatricoma is an encapsulated tumor containing irregularly shaped, lobules of cells separated by fibrovascular connective tissue stroma; two distinct cell populations comprise this tumor, basaloid cells with scant cytoplasm located towards the periphery and the ghost (or shadow) cells occupying the central portion" [http://atlasgeneticsoncology.org/Tumors/PilomatricomaID5153.html "Atlas of Genetics and Cytogenetics in Oncology and Haematology", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "calcifying epithelioma" EXACT []
+synonym: "calcifying epithelioma of Malherbe" EXACT []
+synonym: "epithelioma of Malherbe" EXACT []
+synonym: "pilomatrixoma" EXACT []
+synonym: "trichomatricoma" EXACT []
+is_a: MP:0010300 ! increased skin tumor incidence
 
 [Term]
 id: MP:0002014
 name: papilloma
 def: "benign epithelial tumor" [J:47225]
-is_a: MP:0002020 ! increased tumor incidence
+is_a: MP:0010273 ! increased classified tumor incidence
 
 [Term]
 id: MP:0002015
 name: epithelioid cysts
 def: "abnormal membranous sacs appearing in an epithelium" [J:51296]
 is_a: MP:0001191 ! abnormal skin condition
-is_a: MP:0002020 ! increased tumor incidence
+is_a: MP:0002060 ! abnormal skin morphology
 
 [Term]
 id: MP:0002016
@@ -12246,7 +12263,7 @@ is_a: MP:0001126 ! abnormal ovary morphology
 id: MP:0002018
 name: malignant tumors
 def: "higher than normal incidence of locally invasive, destructive and metastatic tumors" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:44427]
-is_a: MP:0002020 ! increased tumor incidence
+is_a: MP:0010273 ! increased classified tumor incidence
 
 [Term]
 id: MP:0002019
@@ -12258,7 +12275,8 @@ is_a: MP:0002166 ! altered tumor susceptibility
 id: MP:0002020
 name: increased tumor incidence
 alt_id: MP:0002017
-def: "greater than the expected number of abnormal growths in a specific population in a given time period, usually of a specific type" [MESH:E05.318.308.985.525.375, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+def: "greater than the expected number of neoplasms in a specific population in a given time period, usually of a specific type" [MESH:E05.318.308.985.525.375, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased neoplasm incidence" EXACT []
 synonym: "spontaneous tumor" EXACT []
 is_a: MP:0002019 ! abnormal tumor incidence
 
@@ -12273,7 +12291,8 @@ id: MP:0002022
 name: lymphoma
 def: "neoplasm of any lymphoid tissue" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:18542]
 synonym: "lymphoid tumor" EXACT []
-is_a: MP:0002020 ! increased tumor incidence
+is_a: MP:0010273 ! increased classified tumor incidence
+is_a: MP:0010296 ! increased hemolymphoid system tumor incidence
 
 [Term]
 id: MP:0002023
@@ -12301,7 +12320,8 @@ is_a: MP:0002022 ! lymphoma
 id: MP:0002026
 name: leukemia
 def: "progressive proliferation of abnormal leukocytes in hematopoietic tissues, organs and blood" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:18542]
-is_a: MP:0002020 ! increased tumor incidence
+is_a: MP:0010273 ! increased classified tumor incidence
+is_a: MP:0010296 ! increased hemolymphoid system tumor incidence
 
 [Term]
 id: MP:0002027
@@ -12311,12 +12331,6 @@ is_a: MP:0008716 ! lung non-small cell carcinoma
 is_a: MP:0009308 ! adenocarcinoma
 
 [Term]
-id: MP:0002028
-name: hepatoma
-def: "presence of a usually malignant tumor composed of neoplastic liver cells" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:18542]
-is_a: MP:0008019 ! liver tumor
-
-[Term]
 id: MP:0002029
 name: fibrosarcoma
 def: "malignant neoplasm derived from deep fibrous tissue" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:18542]
@@ -12324,16 +12338,22 @@ is_a: MP:0002032 ! sarcoma
 
 [Term]
 id: MP:0002030
-name: neurofibrosarcoma
-def: "malignant neoplasm of fibrous tissue of the nervous system" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:18542]
+name: increased neurofibrosarcoma incidence
+alt_id: MP:0002034
+def: "greater than the expected number of a highly aggressive malignant neoplasm arising from the fibrous connective tissue surrounding peripheral nerves, in a specific population in a given time period" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "malignant neurolemmoma" RELATED []
+synonym: "malignant peripheral nerve sheath tumors" EXACT []
+synonym: "MPNSTs" EXACT []
 synonym: "peripheral nerve sheath tumor" EXACT []
-is_a: MP:0002032 ! sarcoma
+is_a: MP:0002029 ! fibrosarcoma
+is_a: MP:0003580 ! fibroma
+is_a: MP:0010281 ! increased nervous system tumor incidence
 
 [Term]
 id: MP:0002031
 name: adrenal tumor
 def: "tumors of the adrenal gland, including phaeochomocytomas" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:18542]
-is_a: MP:0002020 ! increased tumor incidence
+is_a: MP:0010288 ! increased gland tumor incidence
 
 [Term]
 id: MP:0002032
@@ -12349,31 +12369,26 @@ synonym: "MTTs" EXACT []
 is_a: MP:0002018 ! malignant tumors
 
 [Term]
-id: MP:0002034
-name: malignant peripheral nerve sheath tumors
-def: "a highly aggressive tumor arising from the connective tissue surrounding peripheral nerves" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-synonym: "malignant neurolemmoma" RELATED []
-synonym: "MPNSTs" EXACT []
-is_a: MP:0002018 ! malignant tumors
-
-[Term]
 id: MP:0002035
 name: leiomyosarcoma
 def: "malignant tumor derived from smooth (nonstriated) muscle" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:58877]
 is_a: MP:0002032 ! sarcoma
+is_a: MP:0010290 ! increased muscle tumor incidence
 
 [Term]
 id: MP:0002036
 name: rhabdomyosarcoma
 def: "malignant tumor derived from skeletal (striated) muscle" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:58877]
 is_a: MP:0002032 ! sarcoma
+is_a: MP:0010290 ! increased muscle tumor incidence
 
 [Term]
 id: MP:0002037
-name: fibrohistocytoma
-def: "slowly growing skin nodule derived from cellular fibrous tissue; often surrounds capillaries" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:58877]
+name: increased fibrohistocytoma incidence
+def: "greater than the expected number of slowly growing skin nodules derived from cellular fibrous tissue occurring in a specific population in a given time period; these often surround capillaries" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:58877]
 synonym: "dermatofibroma" EXACT []
-is_a: MP:0002020 ! increased tumor incidence
+is_a: MP:0003580 ! fibroma
+is_a: MP:0010300 ! increased skin tumor incidence
 
 [Term]
 id: MP:0002038
@@ -12386,12 +12401,14 @@ id: MP:0002039
 name: neuroblastoma
 def: "malignant neoplasm characterized by immature nerve cells of embryonic type" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:58877]
 is_a: MP:0008021 ! blastoma
+is_a: MP:0010281 ! increased nervous system tumor incidence
 
 [Term]
 id: MP:0002041
-name: pituitary adenoma
-def: "appearance of benign neoplasms of the pituitary" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:33042]
+name: increased pituitary adenoma incidence
+def: "greater than the expected number of benign neoplasms of the pituitary, occurring in a specific population in a given time period" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:33042]
 is_a: MP:0002815 ! adenoma
+is_a: MP:0010320 ! increased pituitary gland tumor incidence
 
 [Term]
 id: MP:0002042
@@ -12402,7 +12419,8 @@ is_obsolete: true
 id: MP:0002043
 name: colonic hamartoma
 def: "tumor-like focal abnormalities of the intestines; rarely neoplastic" [J:47050]
-is_a: MP:0006381 ! hamartoma
+is_a: MP:0010279 ! increased gastrointestinal tumor incidence
+is_a: MP:0010306 ! increased hamartoma incidence
 
 [Term]
 id: MP:0002044
@@ -12416,12 +12434,14 @@ id: MP:0002045
 name: renal cystadenoma
 def: "benign cystic neoplasm of the kidney derived from glandular epithelium origin" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:57631]
 is_a: MP:0002815 ! adenoma
+is_a: MP:0010294 ! increased kidney tumor incidence
 
 [Term]
 id: MP:0002046
 name: renal carcinoma
 def: "malignant neoplasm of the kidney" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:57631]
 is_a: MP:0002038 ! carcinoma
+is_a: MP:0010294 ! increased kidney tumor incidence
 
 [Term]
 id: MP:0002047
@@ -12429,14 +12449,14 @@ name: hepatic hemangioma
 def: "neoplastic- like masses in the liver; often undergoes spontaneous regression" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:57631]
 synonym: "liver angioma" EXACT []
 is_a: MP:0002947 ! hemangioma
-is_a: MP:0008019 ! liver tumor
+is_a: MP:0008019 ! increased liver tumor incidence
 
 [Term]
 id: MP:0002048
 name: lung adenoma
 def: "benign epithelial neoplasm of the lung" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:57631]
 is_a: MP:0002815 ! adenoma
-is_a: MP:0008014 ! lung tumor
+is_a: MP:0008014 ! increased lung tumor incidence
 
 [Term]
 id: MP:0002049
@@ -12455,12 +12475,18 @@ id: MP:0002051
 name: skin papilloma
 def: "a circumscribed, benign epithelial tumor projecting from the surrounding surface" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 is_a: MP:0002014 ! papilloma
-is_a: MP:0005276 ! skin tumor
+is_a: MP:0010300 ! increased skin tumor incidence
 
 [Term]
 id: MP:0002052
 name: decreased tumor incidence
-def: "less than the expected number of abnormal growths in a specific population in a given time period" [MESH:E05.318.308.985.525.375, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+alt_id: MP:0005514
+def: "less than the expected number of neoplasms in a specific population in a given time period" [MESH:E05.318.308.985.525.375, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+synonym: "decreased neoplasm incidence" EXACT []
+synonym: "decreased susceptibility to neoplasm development" RELATED []
+synonym: "decreased susceptibility to tumor development" RELATED []
+synonym: "increased resistance to neoplasm development" EXACT []
+synonym: "increased resistance to tumor development" EXACT []
 synonym: "reduced tumor incidence" EXACT []
 is_a: MP:0002019 ! abnormal tumor incidence
 
@@ -12634,7 +12660,7 @@ is_obsolete: true
 id: MP:0002073
 name: abnormal hair growth
 alt_id: MP:0000409
-def: "absence or reduced amount of hair or abnormal onset of hair growth cycle or development" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+def: "absence or reduced amount of hair or abnormal onset of hair growth cycle or development, or abnormal hair pattern" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
 synonym: "coat: hair growth defects" EXACT []
 synonym: "hair growth abnormalities" EXACT []
 xref: MGI:2173539
@@ -13249,9 +13275,10 @@ is_obsolete: true
 
 [Term]
 id: MP:0002138
-name: abnormal liver/biliary system morphology
+name: abnormal hepatobiliary system morphology
 alt_id: MP:0002172
 def: "structural abnormality or aberrant development of any of the tissues of the liver or biliary system" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal liver/biliary system morphology" EXACT []
 synonym: "hepatic dysplasia" EXACT []
 synonym: "hepatic system abnormalities" EXACT []
 synonym: "hepatic system defects" EXACT []
@@ -13262,10 +13289,11 @@ is_a: MP:0005370 ! liver/biliary system phenotype
 
 [Term]
 id: MP:0002139
-name: abnormal liver/biliary system physiology
+name: abnormal hepatobiliary system physiology
 alt_id: MP:0002173
 def: "altered function of the liver not due to anatomical defect" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "abnormal hepatic system physiology" EXACT []
+synonym: "abnormal liver/biliary system physiology" RELATED []
 synonym: "hepatic system physiology abnormalities" EXACT []
 synonym: "liver/hepatic system: functional anomalies" EXACT []
 xref: MGI:2173599
@@ -14807,7 +14835,7 @@ is_a: MP:0002357 ! abnormal spleen white pulp morphology
 id: MP:0002363
 name: abnormal spleen marginal sinus morphology
 def: "any structural anomaly of the border region surrounding the spleen B cell follicles and the periarteriolar lymphoid sheath (PALS) that separates it from the marginal zone that mediates lymphocyte entry into the white pulp from the blood" [PMID:11485909]
-comment: Note that there is no consensus in the literature about which compartments constitute the white pulp or the ramifications of the microvasculature. In addition, notable differences exist between humans and rodents. In this ontology, the marginal sinus (which may not exist in human) has been included as part of the white pulp.
+comment: Note that there is no consensus in the literature about which compartments constitute the white pulp or the ramifications of the microvasculature. In addition, notable differences exist between humans and rodents. In this ontology, the marginal sinus (which may not exist in human) has been included as part of the white pulp. The perifollicular zone, which is not present in human and not rodents, may be the functional equivalent of the marginal sinus in rodents.
 synonym: "abnormal splenic marginal sinus morphology" EXACT []
 is_a: MP:0002357 ! abnormal spleen white pulp morphology
 
@@ -14857,7 +14885,6 @@ id: MP:0002371
 name: abnormal thymus cortex morphology
 def: "any structural anomaly of the outer part of a thymus lobule that surrounds the medulla and is composed of closely packed lymphocytes" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 comment: The thymic cortex contains immature thymocytes, cortical epithelial cells, and scattered macrophages.
-synonym: "abnormal thymus cortex" EXACT []
 is_a: MP:0002367 ! abnormal thymus lobule morphology
 
 [Term]
@@ -15084,6 +15111,7 @@ name: intestinal adenoma
 def: "benign tumors of the small and large intestine" [MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
 synonym: "intestinal adenomata" EXACT []
 is_a: MP:0002815 ! adenoma
+is_a: MP:0010279 ! increased gastrointestinal tumor incidence
 
 [Term]
 id: MP:0002405
@@ -15632,9 +15660,13 @@ is_obsolete: true
 
 [Term]
 id: MP:0002471
-name: abnormal complement cascade
-def: "impaired ability of the complement proteins to act in concert and attack extracellular pathogens" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+name: abnormal complement pathway
+def: "impaired ability of the complement proteins to act sequentially to directly kill microbes, dispose of immune complexes, and regulate other immune processes" [GO:0006956]
+synonym: "abnormal complement activation" RELATED []
+synonym: "abnormal complement cascade" RELATED []
+synonym: "abnormal complement response" RELATED []
 synonym: "complement cascade dysfunction" EXACT []
+xref: GO:0006956
 is_a: MP:0001800 ! abnormal humoral immune response
 is_a: MP:0002419 ! abnormal innate immunity
 
@@ -15642,13 +15674,13 @@ is_a: MP:0002419 ! abnormal innate immunity
 id: MP:0002472
 name: impaired complement alternative pathway
 def: "abnormal function of the plasma protein cascade triggered by direct contact with pathogen surfaces" [ISBN:0-8153-1691-7 "Immunobiology, The Immune System in Health and Disease", MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
-is_a: MP:0002471 ! abnormal complement cascade
+is_a: MP:0002471 ! abnormal complement pathway
 
 [Term]
 id: MP:0002473
 name: impaired complement classical pathway
 def: "abnormal function of the plasma protein cascade triggered by antigen:antibody complexes" [ISBN:0-8153-1691-7 "Immunobiology, The Immune System in Health and Disease", MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
-is_a: MP:0002471 ! abnormal complement cascade
+is_a: MP:0002471 ! abnormal complement pathway
 
 [Term]
 id: MP:0002474
@@ -15719,15 +15751,14 @@ id: MP:0002483
 name: abnormal acute phase protein physiology
 def: "functional anomaly in the series of proteins found in the blood shortly after infection and which participate in the early phases of host defense against infection" [ISBN:0-8153-1691-7 "Immunobiology, The Immune System in Health and Disease"]
 synonym: "acute phase protein dysfunction" EXACT []
-is_a: MP:0002419 ! abnormal innate immunity
-is_a: MP:0002723 ! abnormal immune serum protein physiology
+is_obsolete: true
 
 [Term]
 id: MP:0002484
 name: abnormal C-reactive protein physiology
 def: "anomaly in the function of this plasma protein that normally circulates in increased amounts during inflammation or after tissue damage" [MESH:D12.776.034.145]
 synonym: "C-reactive protein dysfunction" EXACT []
-is_a: MP:0002483 ! abnormal acute phase protein physiology
+is_obsolete: true
 
 [Term]
 id: MP:0002485
@@ -15743,15 +15774,14 @@ def: "any functional anomaly in an acute-phase reaction protein that is a precur
 synonym: "abnormal SAA protein physiology" RELATED []
 synonym: "abnormal Serum Amyloid A Protein physiology" EXACT []
 synonym: "serum amyloid protein dysfunction" EXACT []
-is_a: MP:0002483 ! abnormal acute phase protein physiology
+is_obsolete: true
 
 [Term]
 id: MP:0002487
 name: abnormal fibrinogen physiology
 def: "an anomaly in the function of this coaguable protein in the blood plasma" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "fibrinogen dysfunction" EXACT []
-is_a: MP:0002483 ! abnormal acute phase protein physiology
-is_a: MP:0002551 ! abnormal blood coagulation
+is_obsolete: true
 
 [Term]
 id: MP:0002488
@@ -16627,7 +16657,7 @@ is_a: MP:0001629 ! abnormal heart rate
 id: MP:0002627
 name: teratoma
 def: "neoplasms composed of multiple tissue types; includes types not found in tissue in which lesion arises" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
-is_a: MP:0002020 ! increased tumor incidence
+is_a: MP:0010273 ! increased classified tumor incidence
 
 [Term]
 id: MP:0002628
@@ -16667,7 +16697,7 @@ is_a: MP:0009205 ! abnormal internal male genitalia morphology
 [Term]
 id: MP:0002632
 name: vestigial tail
-def: "a trace or rudimentary tail structure; the degenerated remains of any tail structure" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
+def: "a trace or rudimentary caudal structure, often a short boneless filament; the degenerated remains of any tail structure" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
 is_a: MP:0002111 ! abnormal tail morphology
 
 [Term]
@@ -16678,6 +16708,7 @@ synonym: "persistent truncus arteriosus" EXACT []
 synonym: "PTA" EXACT []
 synonym: "single outflow tract" EXACT []
 is_a: MP:0005674 ! abnormal outflow tract septation
+is_a: MP:0009383 ! abnormal truncus arteriosus morphology
 
 [Term]
 id: MP:0002634
@@ -16916,14 +16947,19 @@ is_a: MP:0005345 ! abnormal circulating corticosterone level
 id: MP:0002666
 name: increased circulating aldosterone level
 def: "increased in the blood concentration of the hormone that is secreted by the adrenal cortex and regulates sodium conservation and potassium secretion in the distal renal tubule" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
+synonym: "alsosteronism" EXACT []
 synonym: "elevated serum levels of aldosterone" EXACT []
+synonym: "hyperaldosteronism" EXACT []
+synonym: "increased plasma aldosterone" NARROW []
 is_a: MP:0005346 ! abnormal circulating aldosterone level
 
 [Term]
 id: MP:0002667
 name: decreased circulating aldosterone level
 def: "decreased in the blood concentration of the hormone that is secreted by the adrenal cortex and regulates sodium conservation and potassium secretion in the distal renal tubule" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
+synonym: "decreased serum aldosterone" NARROW []
 synonym: "decreased serum levels of aldosterone" EXACT []
+synonym: "hypoaldosteronism" EXACT []
 synonym: "reduced circulating aldosterone level" EXACT []
 is_a: MP:0005346 ! abnormal circulating aldosterone level
 
@@ -17396,7 +17432,6 @@ name: head shaking
 def: "compulsive movement of the head in the horizontal plane" [J:274, MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
 is_a: MP:0000436 ! abnormal head movements
 is_a: MP:0001408 ! stereotypic behavior
-is_a: MP:0002979 ! abnormal vestibular response
 
 [Term]
 id: MP:0002731
@@ -17409,7 +17444,7 @@ is_a: MP:0000495 ! abnormal colon morphology
 id: MP:0002732
 name: trichoepithelioma
 def: "benign hair follicle tumors that lack mature hair follicles, derived from basal cells of the hair follicles enclosing small keratin cysts" [MGI:il "Ira Lu, Mouse Genome Informatics Curator"]
-is_a: MP:0005276 ! skin tumor
+is_a: MP:0010300 ! increased skin tumor incidence
 
 [Term]
 id: MP:0002733
@@ -17994,8 +18029,8 @@ is_a: MP:0002447 ! abnormal erythrocyte morphology
 [Term]
 id: MP:0002815
 name: adenoma
-def: "a benign epithelial neoplasm with a glandular organization; usually does not invade or infiltrate surrounding tissue" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:C04.557.470.035]
-is_a: MP:0002020 ! increased tumor incidence
+def: "a benign epithelial neoplasm with a glandular organization; usually does not invade or infiltrate surrounding tissue but may remain a benign tumor or progress to malignancy" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:C04.557.470.035]
+is_a: MP:0010273 ! increased classified tumor incidence
 
 [Term]
 id: MP:0002816
@@ -18506,21 +18541,6 @@ def: "change in the measured amplitude, current density or duration of response 
 is_a: MP:0002886 ! abnormal glutamate-mediated receptor currents
 
 [Term]
-id: MP:0002889
-name: increased susceptibility to hepatoma
-def: "increased likelihood of developing a malignant tumor composed of neoplastic liver cells" [RGD:cur "Rat Genome Database submission"]
-synonym: "decreased resistance to hepatoma" EXACT []
-is_a: MP:0002028 ! hepatoma
-
-[Term]
-id: MP:0002890
-name: increased resistance to hepatoma
-def: "decreased likelihood of developing a malignant tumor composed of neoplastic liver cells" [RGD:cur "Rat Genome Database submission"]
-synonym: "decreased susceptibility to hepatoma" EXACT []
-synonym: "hepatoma resistance" EXACT []
-is_a: MP:0005513 ! increased resistance to liver neoplasm
-
-[Term]
 id: MP:0002891
 name: increased insulin sensitivity
 def: "greater ability to clear glucose from the bloodstream when given insulin than normal; can result in hypoglycemia" [RGD:cur "Rat Genome Database submission"]
@@ -18804,7 +18824,7 @@ id: MP:0002929
 name: abnormal bile duct development
 def: "incomplete or aberrant differentiation of the channels that secrete bile from the liver to the gall bladder and intestines" [MESH:A03.159.183, RGD:cur "Rat Genome Database submission"]
 is_a: MP:0002928 ! abnormal bile duct morphology
-is_a: MP:0003943 ! abnormal liver/biliary system development
+is_a: MP:0003943 ! abnormal hepatobiliary system development
 
 [Term]
 id: MP:0002930
@@ -18947,7 +18967,7 @@ id: MP:0002947
 name: hemangioma
 def: "proliferation of blood vessels leading to a mass that resembles a neoplasm" [J:87544, MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
 synonym: "angioma" EXACT []
-is_a: MP:0002020 ! increased tumor incidence
+is_a: MP:0010273 ! increased classified tumor incidence
 
 [Term]
 id: MP:0002948
@@ -19016,6 +19036,7 @@ id: MP:0002957
 name: intestinal adenocarcinoma
 def: "malignant neoplasm of epithelial cells in the intestine" [MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
 is_a: MP:0009308 ! adenocarcinoma
+is_a: MP:0010279 ! increased gastrointestinal tumor incidence
 
 [Term]
 id: MP:0002958
@@ -19072,7 +19093,7 @@ is_a: MP:0000199 ! abnormal circulating serum albumin level
 id: MP:0002966
 name: decreased circulating alkaline phosphatase level
 alt_id: MP:0002967
-def: "reduced activity of this enzyme, which hydrolyzes orthophosphoric monoesters, found in the blood" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", RGD:cur "Rat Genome Database submission"]
+def: "reduced concentration in the blood of the enzyme which hydrolyzes orthophosphoric monoesters" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", RGD:cur "Rat Genome Database submission"]
 synonym: "decreased circulating ALP levels" EXACT []
 synonym: "decreased plasma alkaline phosphatase level" EXACT []
 synonym: "decreased serum alkaline phosphatase level" EXACT []
@@ -19086,7 +19107,7 @@ is_a: MP:0000202 ! abnormal circulating alkaline phosphatase level
 id: MP:0002968
 name: increased circulating alkaline phosphatase level
 alt_id: MP:0002775
-def: "elevated activity of this enzyme, which hydrolyzes orthophosphoric monoesters, found in the blood" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", RGD:cur "Rat Genome Database submission"]
+def: "elevated concentration in the blood of the enzyme which hydrolyzes orthophosphoric monoesters" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", RGD:cur "Rat Genome Database submission"]
 synonym: "elevated serum alkaline phosphatase level" EXACT []
 synonym: "elevated serum AP level" EXACT []
 synonym: "elevated serum level of alkaline phosphatase" EXACT []
@@ -19160,8 +19181,7 @@ is_a: MP:0002894 ! abnormal otolith morphology
 id: MP:0002979
 name: abnormal vestibular response
 def: "abnormal response to changes in motion" [J:59485, MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
-is_a: MP:0001525 ! impaired balance
-is_a: MP:0004742 ! abnormal vestibular system physiology
+is_obsolete: true
 
 [Term]
 id: MP:0002980
@@ -19295,13 +19315,6 @@ name: abnormal bone healing
 def: "defects in the restoration of integrity to bone after trauma" [MESH:National Library of Medicine_Medical Subject Headings, MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
 is_a: MP:0001533 ! abnormal skeleton physiology
 is_a: MP:0005164 ! abnormal response to injury
-
-[Term]
-id: MP:0003000
-name: increased resistance to lymphoma
-def: "decreased likelihood of developing a neoplasm of any lymphoid tissue" [J:87536, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
-synonym: "decreased susceptibility to lymphoma" EXACT []
-is_a: MP:0005514 ! increased resistance to tumor development
 
 [Term]
 id: MP:0003005
@@ -19596,7 +19609,7 @@ id: MP:0003047
 name: abnormal thoracic vertebrae morphology
 def: "any structural anomaly of any or all of the thirteen bony segments of the spine located anterior to the lumbar vertebrae and posterior to the cervical vertebrae" [MESH:A02.835.232.834.892, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 is_a: MP:0000137 ! abnormal vertebrae morphology
-is_a: MP:0004624 ! abnormal thoracic cage
+is_a: MP:0004624 ! abnormal thoracic cage morphology
 
 [Term]
 id: MP:0003048
@@ -20034,9 +20047,10 @@ is_a: MP:0004686 ! decreased length of long bones
 
 [Term]
 id: MP:0003110
-name: absent malleal processus brevis
+name: absent malleus processus brevis
 def: "absence of the short projection extending from the base of the manubrium of the malleus which contacts the upper part of the tympanic membrane where the tympanic cavity makes a deep pocket (epitympanic pocket) surrounding the cartilaginous nodule" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator", PMID:12701100]
-is_a: MP:0008374 ! abnormal malleal manubrium morphology
+synonym: "absent malleal processus brevis" EXACT []
+is_a: MP:0010324 ! abnormal malleus processus brevis morphology
 
 [Term]
 id: MP:0003111
@@ -20473,15 +20487,6 @@ synonym: "abnormal cochlear chamber" EXACT []
 synonym: "abnormal cochlear duct" EXACT []
 synonym: "abnormal Lowenberg scala" EXACT []
 is_a: MP:0000031 ! abnormal cochlea morphology
-
-[Term]
-id: MP:0003170
-name: increased resistance to stomach tumor
-def: "reduced likelihood of developing an abnormal growth of gastric tissue" [RGD:cur "Rat Genome Database submission"]
-synonym: "decreased susceptibility to gastric tumor" EXACT []
-synonym: "decreased susceptibility to stomach tumor" EXACT []
-synonym: "increased resistance to gastric tumor" EXACT []
-is_a: MP:0005514 ! increased resistance to tumor development
 
 [Term]
 id: MP:0003171
@@ -21024,7 +21029,7 @@ is_a: MP:0005085 ! abnormal gallbladder physiology
 id: MP:0003252
 name: abnormal bile duct physiology
 def: "any functional anomaly of the channels that secrete bile from the liver to the gall bladder and intestines" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", NCBI:matt "Matthew Mailman"]
-is_a: MP:0002139 ! abnormal liver/biliary system physiology
+is_a: MP:0002139 ! abnormal hepatobiliary system physiology
 
 [Term]
 id: MP:0003253
@@ -21131,10 +21136,11 @@ is_a: MP:0003267 ! constipation
 
 [Term]
 id: MP:0003269
-name: colonic polyps
+name: colon polyps
 def: "abnormal tissue masses that protrude into the lumen of the colon and are tethered to the wall of the colon" [MESH:C23.300.825.411.235, NCBI:matt "Matthew Mailman"]
+synonym: "colonic polyps" EXACT []
 is_a: MP:0000495 ! abnormal colon morphology
-is_a: MP:0008011 ! intestinal polyps
+is_a: MP:0008011 ! intestine polyps
 
 [Term]
 id: MP:0003270
@@ -21188,6 +21194,7 @@ id: MP:0003277
 name: esophageal papilloma
 def: "benign epithelial tumor of the esophagus" [NCBI:matt "Matthew Mailman"]
 is_a: MP:0002014 ! papilloma
+is_a: MP:0010292 ! increased alimentary system tumor incidence
 
 [Term]
 id: MP:0003278
@@ -21255,6 +21262,7 @@ name: intestinal hemangioma
 def: "a benign tumor of the intestine, originating from the overgrowth of blood vessels" [MESH:National Library of Medicine_Medical Subject Headings, NCBI:matt "Matthew Mailman"]
 synonym: "intestinal angioma" EXACT []
 is_a: MP:0002947 ! hemangioma
+is_a: MP:0010279 ! increased gastrointestinal tumor incidence
 
 [Term]
 id: MP:0003288
@@ -21273,12 +21281,14 @@ is_a: MP:0001664 ! abnormal digestion
 id: MP:0003290
 name: hypoperistalsis
 def: "reduced intestinal movement characterized by waves of alternate circular contraction and relaxation of the muscular walls of the bowel that move bowel contents forward" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", NCBI:matt "Matthew Mailman"]
+synonym: "hypanakinesia" EXACT []
 is_a: MP:0003289 ! abnormal intestinal peristalsis
 
 [Term]
 id: MP:0003291
 name: hyperperistalsis
 def: "increased intestinal movement characterized by waves of alternate circular contraction and relaxation of the muscular walls of the bowel that move bowel contents forward" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", NCBI:matt "Matthew Mailman"]
+synonym: "hyperanakinesia" EXACT []
 is_a: MP:0003289 ! abnormal intestinal peristalsis
 
 [Term]
@@ -21327,6 +21337,7 @@ name: gastric polyps
 def: "abnormal tissue masses that protrude into the lumen of the stomach and are tethered to the wall of the stomach" [MESH:C23.300.825, NCBI:matt "Matthew Mailman"]
 synonym: "gastric polyposis" EXACT []
 is_a: MP:0000470 ! abnormal stomach morphology
+is_a: MP:0010352 ! gastrointestinal tract polyps
 
 [Term]
 id: MP:0003300
@@ -21502,7 +21513,7 @@ id: MP:0003324
 name: liver adenoma
 def: "benign epithelial neoplasm of the liver" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", NCBI:matt "Matthew Mailman"]
 is_a: MP:0002815 ! adenoma
-is_a: MP:0008019 ! liver tumor
+is_a: MP:0008019 ! increased liver tumor incidence
 
 [Term]
 id: MP:0003325
@@ -21554,12 +21565,12 @@ name: hepatocellular carcinoma
 alt_id: MP:0005510
 def: "malignant neoplasm arising from liver cells, usually in adults and caused by liver trauma due to disease or injury" [NCBI:matt "Matthew Mailman"]
 synonym: "HCC" EXACT []
-synonym: "liver neoplasia" EXACT []
-synonym: "liver neoplasm" EXACT []
+synonym: "liver neoplasia" BROAD []
+synonym: "liver neoplasm" BROAD []
 synonym: "malignant hepatoma" EXACT []
-synonym: "neoplastic liver" EXACT []
-is_a: MP:0002028 ! hepatoma
+synonym: "neoplastic liver" BROAD []
 is_a: MP:0002038 ! carcinoma
+is_a: MP:0008019 ! increased liver tumor incidence
 
 [Term]
 id: MP:0003332
@@ -21724,8 +21735,9 @@ is_a: MP:0002183 ! gliosis
 
 [Term]
 id: MP:0003355
-name: decreased ovulation frequency
-def: "reduction in the frequency in which an ovum is released from a rupturing ovarian follicle" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+name: decreased ovulation rate
+def: "reduction in the frequency in which an ovum (or ova) is/are released from a rupturing ovarian follicle(s)" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+synonym: "decreased ovulation frequency" EXACT []
 synonym: "reduced ovulation" RELATED []
 is_a: MP:0001928 ! abnormal ovulation
 
@@ -21970,13 +21982,14 @@ is_a: MP:0001785 ! edema
 id: MP:0003391
 name: myxoma
 def: "a benign tumor composed of connective tissue embedded in mucus" [ISBN:0-8036-0655-99 "Taber's Cyclopedic Medical Dictionary, 19th edition", MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
-is_a: MP:0002020 ! increased tumor incidence
+is_a: MP:0010273 ! increased classified tumor incidence
 
 [Term]
 id: MP:0003392
 name: atrial myxoma
 def: "a primary intracardiac tumor occurring in either the left or right atrium" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
 is_a: MP:0003391 ! myxoma
+is_a: MP:0010291 ! increased cardiovascular system tumor incidence
 
 [Term]
 id: MP:0003393
@@ -22015,6 +22028,7 @@ is_a: MP:0004233 ! abnormal muscle weight
 id: MP:0003398
 name: increased skeletal muscle size
 def: "greater than average dimensions of one or more of the muscles of the skeleton" [J:94134, MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
+is_a: MP:0004818 ! increased skeletal muscle mass
 is_a: MP:0009458 ! abnormal skeletal muscle size
 
 [Term]
@@ -22644,12 +22658,14 @@ id: MP:0003495
 name: parathyroid adenoma
 def: "appearance of benign neoplasms in the parathyroid gland" [NCBI:matt "Matthew Mailman"]
 is_a: MP:0002815 ! adenoma
+is_a: MP:0010321 ! increased parathyroid gland tumor incidence
 
 [Term]
 id: MP:0003496
 name: thyroid adenoma
 def: "appearance of benign neoplasms in the thyroid gland" [NCBI:matt "Matthew Mailman"]
 is_a: MP:0002815 ! adenoma
+is_a: MP:0010316 ! increased thyroid tumor incidence
 
 [Term]
 id: MP:0003497
@@ -22700,9 +22716,10 @@ is_a: MP:0002876 ! abnormal thyroid physiology
 
 [Term]
 id: MP:0003505
-name: prolactinoma
-def: "a pituitary adenoma characterized by secretion of prolactin" [MESH:C04.557.470.035.625, NCBI:matt "Matthew Mailman"]
-is_a: MP:0002041 ! pituitary adenoma
+name: increased prolactinoma incidence
+def: "greater than the expected number of a pituitary adenoma characterized by secretion of prolactin, occurring in a specific population in a given time period" [MESH:C04.557.470.035.625, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
+is_a: MP:0002041 ! increased pituitary adenoma incidence
+is_a: MP:0010350 ! increased pituitary adenohypophysis tumor incidence
 
 [Term]
 id: MP:0003506
@@ -22872,12 +22889,6 @@ def: "abnormal morphogenesis of the female reproductive canal located between th
 synonym: "abnormal vaginal development" EXACT []
 is_a: MP:0001139 ! abnormal vagina morphology
 is_a: MP:0003936 ! abnormal reproductive system development
-
-[Term]
-id: MP:0003532
-name: rudimentary vagina
-def: "not fully developed or remnant of the female reproductive canal located between the uterus and the vulva" [NCBI:matt "Matthew Mailman"]
-is_a: MP:0003531 ! abnormal vagina development
 
 [Term]
 id: MP:0003533
@@ -23128,7 +23139,7 @@ name: leiomyoma
 def: "a benign tumor derived from smooth (nonstriated) muscle" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", NCBI:matt "Matthew Mailman"]
 synonym: "fibroid tumor" EXACT []
 synonym: "fibromyoma" EXACT []
-is_a: MP:0002020 ! increased tumor incidence
+is_a: MP:0010273 ! increased classified tumor incidence
 
 [Term]
 id: MP:0003570
@@ -23159,13 +23170,6 @@ def: "abnormal morphogenesis of the female muscular organ of gestation" [NCBI:ma
 synonym: "abnormal metra development" EXACT []
 is_a: MP:0001120 ! abnormal uterus morphology
 is_a: MP:0003936 ! abnormal reproductive system development
-
-[Term]
-id: MP:0003573
-name: rudimentary uterus
-def: "not fully developed or remnant of the female muscular organ of gestation" [NCBI:matt "Matthew Mailman"]
-synonym: "rudimentary metra" EXACT []
-is_a: MP:0003572 ! abnormal uterus development
 
 [Term]
 id: MP:0003574
@@ -23204,8 +23208,18 @@ is_a: MP:0003574 ! abnormal oviduct morphology
 [Term]
 id: MP:0003576
 name: oviduct hypoplasia
+alt_id: MP:0003577
 def: "underdevelopment or reduced size, usually due to a reduced number of cells, of the tube through which the ova pass from the ovary to the uterus" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 synonym: "fallopian tube hypoplasia" EXACT []
+synonym: "rudimentary fallopian tubes" EXACT []
+synonym: "rudimentary oviduct" EXACT []
+synonym: "rudimentary salpinges" EXACT []
+synonym: "rudimentary salpinx" EXACT []
+synonym: "rudimentary salpinx uterina" EXACT []
+synonym: "rudimentary tuba fallopiana" EXACT []
+synonym: "rudimentary tuba fallopii" EXACT []
+synonym: "rudimentary tuba uterina" EXACT []
+synonym: "rudimentary uterine tube" EXACT []
 synonym: "salpinges hypoplasia" EXACT []
 synonym: "salpinx hypoplasia" EXACT []
 synonym: "salpinx uterina hypoplasia" EXACT []
@@ -23214,20 +23228,6 @@ synonym: "tuba fallopii hypoplasia" EXACT []
 synonym: "tuba uterina hypoplasia" EXACT []
 synonym: "uterine tube hypoplasia" EXACT []
 is_a: MP:0009070 ! small oviduct
-
-[Term]
-id: MP:0003577
-name: rudimentary oviduct
-def: "not fully developed or remnant of the tube through which the ova pass from the ovary to the uterus" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
-synonym: "rudimentary fallopian tubes" EXACT []
-synonym: "rudimentary salpinges" EXACT []
-synonym: "rudimentary salpinx" EXACT []
-synonym: "rudimentary salpinx uterina" EXACT []
-synonym: "rudimentary tuba fallopiana" EXACT []
-synonym: "rudimentary tuba fallopii" EXACT []
-synonym: "rudimentary tuba uterina" EXACT []
-synonym: "rudimentary uterine tube" EXACT []
-is_a: MP:0003574 ! abnormal oviduct morphology
 
 [Term]
 id: MP:0003578
@@ -23253,12 +23253,12 @@ alt_id: MP:0003297
 def: "a benign tumor of fibrous or fully developed connective tissue" [MESH:C04.557.450.565.590.340]
 synonym: "fibroma" EXACT []
 synonym: "fibromatosis" EXACT []
-is_a: MP:0002020 ! increased tumor incidence
+is_a: MP:0010273 ! increased classified tumor incidence
 
 [Term]
 id: MP:0003581
-name: ovarian fibroma
-def: "a benign tumor of the ovary" [MESH:C04.557.450.565.590.340, NCBI:matt "Matthew Mailman"]
+name: increased ovarian fibroma incidence
+def: "greater than the expected number of a benign tumor of fibrous or fully developed connective tissue in the ovary, in a specific population in a given time period" [MESH:C04.557.450.565.590.340, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
 is_a: MP:0003580 ! fibroma
 is_a: MP:0008000 ! ovary tumor
 
@@ -23268,12 +23268,6 @@ name: abnormal ovary development
 def: "abnormal morphogenesis of the ovarian follicle for the production of female germ cells or the endocrine cells for the production of estrogen and progesterone" [MESH:A05.360.319.114.630]
 is_a: MP:0001126 ! abnormal ovary morphology
 is_a: MP:0003936 ! abnormal reproductive system development
-
-[Term]
-id: MP:0003583
-name: rudimentary ovary
-def: "not fully developed or remnant of the female reproductive gland containing the germ cells" [MESH:National Library of Medicine_Medical Subject Headings]
-is_a: MP:0003582 ! abnormal ovary development
 
 [Term]
 id: MP:0003584
@@ -23362,6 +23356,7 @@ id: MP:0003597
 name: epididymal cystademona
 def: "a benign epithelial neoplasm with a glandular organization arising from epididymal tissue" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", NCBI:matt "Matthew Mailman"]
 is_a: MP:0002815 ! adenoma
+is_a: MP:0010287 ! increased reproductive system tumor incidence
 
 [Term]
 id: MP:0003598
@@ -23394,7 +23389,8 @@ is_a: MP:0002135 ! abnormal kidney morphology
 id: MP:0003602
 name: renal hamartoma
 def: "a benign formation of a mass of tissue of disproportionate size and distribution in the kidney, but composed of an overgrowth of mature cells and tissues that normally occur in this tissue" [MESH:National Library of Medicine_Medical Subject Headings, NCBI:matt "Matthew Mailman"]
-is_a: MP:0006381 ! hamartoma
+is_a: MP:0010294 ! increased kidney tumor incidence
+is_a: MP:0010306 ! increased hamartoma incidence
 
 [Term]
 id: MP:0003603
@@ -23402,6 +23398,7 @@ name: renal hemangioblastoma
 def: "a benign cyst-like tumor of the kidney that is composed of multiple capillary and sinusoidal channels lined with endothelial cells" [MESH:National Library of Medicine_Medical Subject Headings, NCBI:matt "Matthew Mailman"]
 is_a: MP:0002947 ! hemangioma
 is_a: MP:0008021 ! blastoma
+is_a: MP:0010294 ! increased kidney tumor incidence
 
 [Term]
 id: MP:0003604
@@ -23427,17 +23424,18 @@ is_a: MP:0002136 ! abnormal kidney physiology
 
 [Term]
 id: MP:0003607
-name: abnormal prostate physiology
+name: abnormal prostate gland physiology
 def: "malfunction of the gland in males that secretes part of the seminiferous fluid" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 is_a: MP:0003698 ! abnormal male reproductive system physiology
 is_a: MP:0005647 ! abnormal sex gland physiology
 
 [Term]
 id: MP:0003608
-name: prostate inflammation
+name: prostate gland inflammation
 def: "local accumulation of fluid, plasma proteins, and leukocytes in the prostate" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+synonym: "prostate inflammation" EXACT []
 is_a: MP:0001846 ! increased inflammatory response
-is_a: MP:0003607 ! abnormal prostate physiology
+is_a: MP:0003607 ! abnormal prostate gland physiology
 
 [Term]
 id: MP:0003609
@@ -23681,13 +23679,6 @@ def: "altered ability or inability to respond to or metabolize a group of organi
 synonym: "abnormal metabolism of vitamins" EXACT []
 is_a: MP:0003638 ! abnormal response/metabolism to endogenous compounds
 is_a: MP:0004019 ! abnormal vitamin homeostasis
-
-[Term]
-id: MP:0003640
-name: increased resistance to lung neoplasm
-def: "reduced likelihood of developing an abnormal growth of lung tissue" [J:95491, MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
-synonym: "decreased susceptibility to lung neoplasm" EXACT []
-is_a: MP:0005514 ! increased resistance to tumor development
 
 [Term]
 id: MP:0003641
@@ -24416,7 +24407,7 @@ id: MP:0003748
 name: oral mucosa hemangioma
 def: "proliferation of blood vessels in the oral mucosa that leads to a mass that resembles a benign neoplasm" [NCBI:matt "Matthew Mailman"]
 is_a: MP:0002947 ! hemangioma
-is_a: MP:0003750 ! mouth tumor
+is_a: MP:0003750 ! increased mouth tumor incidence
 
 [Term]
 id: MP:0003749
@@ -24429,9 +24420,9 @@ is_a: MP:0000452 ! abnormal mouth morphology
 
 [Term]
 id: MP:0003750
-name: mouth tumor
-def: "presence of abnormal rapidly proliferating cells in the mouth, usually in the form of a distinct mass" [NCBI:matt "Matthew Mailman"]
-is_a: MP:0002020 ! increased tumor incidence
+name: increased mouth tumor incidence
+def: "greater than the expected number of neoplasms in the mouth tissues, usually in the form of a distinct mass, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010292 ! increased alimentary system tumor incidence
 
 [Term]
 id: MP:0003751
@@ -24444,7 +24435,7 @@ id: MP:0003752
 name: oral papilloma
 def: "benign epithelial tumor of the oral cavity" [NCBI:matt "Matthew Mailman"]
 is_a: MP:0002014 ! papilloma
-is_a: MP:0003750 ! mouth tumor
+is_a: MP:0003750 ! increased mouth tumor incidence
 
 [Term]
 id: MP:0003753
@@ -24538,8 +24529,9 @@ is_a: MP:0003764 ! abnormal palatal depth
 
 [Term]
 id: MP:0003767
-name: palatal inflammation
+name: palate inflammation
 def: "local accumulation of fluid, plasma proteins and leukocytes in the palate" [NCBI:matt "Matthew Mailman"]
+synonym: "palatal inflammation" EXACT []
 is_a: MP:0001663 ! abnormal digestive system physiology
 is_a: MP:0001846 ! increased inflammatory response
 
@@ -24605,7 +24597,6 @@ id: MP:0003777
 name: lip inflammation
 def: "local accumulation of fluid, plasma proteins and leukocytes in the lips" [MESH:National Library of Medicine_Medical Subject Headings, NCBI:matt "Matthew Mailman"]
 is_a: MP:0001846 ! increased inflammatory response
-is_a: MP:0003769 ! abnormal lip morphology
 
 [Term]
 id: MP:0003778
@@ -24624,13 +24615,14 @@ is_a: MP:0003769 ! abnormal lip morphology
 id: MP:0003780
 name: lip tumor
 def: "presence of abnormal rapidly proliferating cells in the lip, usually in the form of a distinct mass" [NCBI:matt "Matthew Mailman"]
-is_a: MP:0002020 ! increased tumor incidence
+is_a: MP:0008018 ! increased facial tumor incidence
 
 [Term]
 id: MP:0003781
 name: lip neuroma
 def: "tumor derived from nerve cells or fibers residing in the lip" [NCBI:matt "Matthew Mailman"]
 is_a: MP:0003780 ! lip tumor
+is_a: MP:0010281 ! increased nervous system tumor incidence
 
 [Term]
 id: MP:0003782
@@ -24679,6 +24671,7 @@ id: MP:0003789
 name: osteosarcoma
 def: "malignant neoplasm derived from bone" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 is_a: MP:0002032 ! sarcoma
+is_a: MP:0010280 ! increased skeletal tumor incidence
 
 [Term]
 id: MP:0003790
@@ -24762,31 +24755,31 @@ id: MP:0003801
 name: deviant histocompatibility locus
 def: "deviation from the parental type of histocompatibility" [MGI:mberry "Melissa Berry, Genetics Resources Curator"]
 synonym: "altered histocompatibility locus" EXACT []
-is_a: MP:0001790 ! abnormal immune system physiology
+is_obsolete: true
 
 [Term]
 id: MP:0003802
 name: deviant class I histocompatibility locus
 def: "deviation from the parental type of class I histocompatibility" [MGI:mberry "Melissa Berry, Genetics Resources Curator"]
-is_a: MP:0003801 ! deviant histocompatibility locus
+is_obsolete: true
 
 [Term]
 id: MP:0003803
 name: deviant class II histocompatibility locus
 def: "deviation from the parental type of class II histocompatibility" [MGI:mberry "Melissa Berry, Genetics Resources Curator"]
-is_a: MP:0003801 ! deviant histocompatibility locus
+is_obsolete: true
 
 [Term]
 id: MP:0003804
 name: deviant minor histocompatibility locus
 def: "deviation from the parental type of minor histocompatibility" [MGI:mberry "Melissa Berry, Genetics Resources Curator"]
-is_a: MP:0003801 ! deviant histocompatibility locus
+is_obsolete: true
 
 [Term]
 id: MP:0003805
 name: deviant histocompatibility-related locus
 def: "deviation from the parental type of a histocompatibility-related locus" [MGI:mberry "Melissa Berry, Genetics Resources Curator"]
-is_a: MP:0003801 ! deviant histocompatibility locus
+is_obsolete: true
 
 [Term]
 id: MP:0003806
@@ -24855,6 +24848,7 @@ name: hairless
 def: "having no hair at any time throughout lifespan, generally referring to primary genetic hairlessness" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
 synonym: "absent hair" BROAD []
 synonym: "bald" RELATED []
+synonym: "hypotrichosis" RELATED []
 synonym: "naked" RELATED []
 synonym: "nude" EXACT []
 is_a: MP:0001510 ! abnormal coat appearance
@@ -24969,12 +24963,6 @@ name: abnormal testis development
 def: "abnormal morphogenesis of the male reproductive gland containing the germ cells" [J:100020, MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 is_a: MP:0001146 ! abnormal testis morphology
 is_a: MP:0003936 ! abnormal reproductive system development
-
-[Term]
-id: MP:0003831
-name: prostate tumor
-def: "presence of abnormal rapidly proliferating cells in the prostate, usually in the form of a distinct mass" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
-is_a: MP:0002020 ! increased tumor incidence
 
 [Term]
 id: MP:0003833
@@ -25176,6 +25164,7 @@ name: lymph node inflammation
 def: "local accumulation of fluid, plasma proteins, and leukocytes in the lymph nodes" [MGI:monikat "Monika Tomczuk, Mouse Genome Informatics Curator"]
 synonym: "lymphadenitis" EXACT []
 is_a: MP:0001846 ! increased inflammatory response
+is_a: MP:0003762 ! abnormal immune organ physiology
 
 [Term]
 id: MP:0003866
@@ -25688,9 +25677,10 @@ is_a: MP:0000516 ! abnormal urinary system morphology
 
 [Term]
 id: MP:0003943
-name: abnormal liver/biliary system development
+name: abnormal hepatobiliary system development
 def: "developmental anomaly of any of the tissues of the liver or biliary system" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-is_a: MP:0002138 ! abnormal liver/biliary system morphology
+synonym: "abnormal liver/biliary system development" EXACT []
+is_a: MP:0002138 ! abnormal hepatobiliary system morphology
 
 [Term]
 id: MP:0003944
@@ -26849,9 +26839,12 @@ is_a: MP:0003830 ! abnormal testis development
 [Term]
 id: MP:0004110
 name: transposition of great arteries
+alt_id: MP:0006127
 def: "cardiovascular structural anomaly in which the aorta arises from the right ventricle while the pulmonary artery arises from the left ventricle" [MGI:monikat "Monika Tomczuk, Mouse Genome Informatics Curator"]
 synonym: "TGA" EXACT []
-is_a: MP:0006127 ! transposition of great vessels
+synonym: "transposition of great vessels" EXACT []
+is_a: MP:0006126 ! abnormal outflow tract development
+is_a: MP:0010224 ! abnormal heart ventricle outflow tract morphology
 
 [Term]
 id: MP:0004111
@@ -27327,6 +27320,7 @@ is_a: MP:0004175 ! telangiectases
 id: MP:0004179
 name: transmission ratio distortion
 def: "the frequency that an allele or haplotype in the offspring of an organism deviates from expected Mendelian ratios" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+synonym: "nonrandom segregation ratio" EXACT []
 is_a: MP:0001929 ! abnormal gametogenesis
 
 [Term]
@@ -27527,7 +27521,7 @@ name: basal cell carcinoma
 def: "a slow-growing, invasive, but usually non-metastasizing neoplasm that originates from basal keratinocytes in the epidermis" [MGI:rbabiuk "Randall Babiuk, Mouse Genome Informatics Curator"]
 synonym: "skin basal cell carcinoma" RELATED []
 is_a: MP:0002038 ! carcinoma
-is_a: MP:0005276 ! skin tumor
+is_a: MP:0010300 ! increased skin tumor incidence
 
 [Term]
 id: MP:0004209
@@ -27855,6 +27849,7 @@ id: MP:0004256
 name: abnormal maternal decidual layer morphology
 def: "anomaly in the structure of the maternal uterine-derived portion of the placenta" [PMID:11433360]
 is_a: MP:0001711 ! abnormal placenta morphology
+is_a: MP:0004896 ! abnormal endometrium morphology
 
 [Term]
 id: MP:0004257
@@ -30474,10 +30469,11 @@ is_a: MP:0004609 ! vertebral fusion
 
 [Term]
 id: MP:0004624
-name: abnormal thoracic cage
+name: abnormal thoracic cage morphology
 def: "any structural anomaly of the bony and cartilaginous structure enclosing the thoracic cavity, consisting of the thoracic vertebrae, ribs, costal cartilages, and sternum" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "abnormal rib cage" EXACT []
 synonym: "abnormal ribcage" EXACT []
+synonym: "abnormal thoracic basket" EXACT []
 is_a: MP:0002114 ! abnormal axial skeleton morphology
 
 [Term]
@@ -30485,7 +30481,7 @@ id: MP:0004625
 name: abnormal rib attachment
 def: "any anomaly in the in the normal joining of the ribs to the vertebral column or to the sternum" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 is_a: MP:0000150 ! abnormal rib morphology
-is_a: MP:0004624 ! abnormal thoracic cage
+is_a: MP:0004624 ! abnormal thoracic cage morphology
 
 [Term]
 id: MP:0004626
@@ -31597,10 +31593,12 @@ is_a: MP:0001547 ! abnormal lipid level
 id: MP:0004778
 name: increased macrophage derived foam cell number
 def: "greater than normal number of a type of macrophage containing lipids in small vacuoles and typically seen in atherolosclerotic lesions, as well as other conditions" [CL:0000517]
-synonym: "increased number of foam cells" RELATED []
-is_a: MP:0001547 ! abnormal lipid level
+synonym: "increased foam cell number" BROAD []
+synonym: "increased number of foam cells" BROAD []
+xref: CL:0000517
 is_a: MP:0005425 ! increased macrophage cell number
 is_a: MP:0008243 ! abnormal macrophage derived foam cell morphology
+is_a: MP:0009841 ! foam cell reticulosis
 
 [Term]
 id: MP:0004779
@@ -32292,6 +32290,7 @@ id: MP:0004868
 name: endometrial carcinoma
 def: "malignant neoplasm arising from the endometrial tissue" [RGD:cur "Rat Genome Database submission"]
 is_a: MP:0002038 ! carcinoma
+is_a: MP:0009222 ! uterus tumor
 
 [Term]
 id: MP:0004869
@@ -33614,13 +33613,6 @@ def: "presence of various pathogenic organisms, or their toxins, in the blood or
 is_a: MP:0005025 ! abnormal response to infection
 
 [Term]
-id: MP:0005045
-name: decreased thymus cortex area
-def: "reduced size of the outer part of a thymus lobule that surrounds the medulla and is composed of closely packed lymphocytes" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
-synonym: "reduced thymus cortex area" EXACT []
-is_a: MP:0002371 ! abnormal thymus cortex morphology
-
-[Term]
 id: MP:0005046
 name: absent spleen white pulp
 def: "absence of the parenchymatous tissue of the spleen that surrounds splenic blood vessels, consists of compact masses of lymphatic cells and is where foreign material removed from the blood is used to initiate an immune reaction that results in the production of antibodies" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
@@ -33887,7 +33879,7 @@ name: abnormal biliary tract morphology
 def: "any structural anomaly of the gall bladder or its bile ducts" [MESH:A03.159]
 synonym: "abnormal biliary tract" EXACT []
 synonym: "biliary tract dysplasia" EXACT []
-is_a: MP:0002138 ! abnormal liver/biliary system morphology
+is_a: MP:0002138 ! abnormal hepatobiliary system morphology
 
 [Term]
 id: MP:0005084
@@ -33907,7 +33899,7 @@ def: "anomalous action or function of the organ that stores and concentrates bil
 synonym: "abnormal gall bladder function" EXACT []
 synonym: "abnormal gall bladder physiology" EXACT []
 synonym: "abnormal gallbladder function" EXACT []
-is_a: MP:0002139 ! abnormal liver/biliary system physiology
+is_a: MP:0002139 ! abnormal hepatobiliary system physiology
 
 [Term]
 id: MP:0005087
@@ -34234,6 +34226,7 @@ synonym: "decreased serum levels of mammotropic factor" EXACT []
 synonym: "decreased serum levels of mammotropic hormone" EXACT [MESH:D06.472.699.322.576.773]
 synonym: "decreased serum levels of PRL" EXACT [MESH:D06.472.699.322.576.773]
 synonym: "decreased serum levels of prolactin" EXACT []
+synonym: "hypoprolacinemia" EXACT []
 synonym: "reduced circulating prolactin level" EXACT []
 is_a: MP:0003363 ! decreased circulating gonadotropin level
 is_a: MP:0005118 ! decreased circulating pituitary hormone level
@@ -34267,6 +34260,7 @@ is_a: MP:0005137 ! increased growth hormone level
 id: MP:0005124
 name: increased circulating prolactin level
 def: "greater than expected blood concentration of the hormone that stimulates milk secretion" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "hyperprolacinemia" EXACT []
 synonym: "increased serum levels of galactopoietic hormone" EXACT []
 synonym: "increased serum levels of lactation hormone" EXACT []
 synonym: "increased serum levels of lactogenic hormone" EXACT []
@@ -34471,6 +34465,7 @@ name: abnormal circulating VLDL cholesterol level
 def: "any anomaly in the amount in the blood of the lipoprotein:cholesterol complex that transports triglycerides from the intestine and liver to muscle and adipose tissue" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "abnormal VLDL cholesterol level" EXACT []
 is_a: MP:0000180 ! abnormal circulating cholesterol level
+is_a: MP:0010330 ! abnormal circulating lipoprotein level
 
 [Term]
 id: MP:0005145
@@ -34584,10 +34579,12 @@ is_a: MP:0000913 ! abnormal brain development
 [Term]
 id: MP:0005158
 name: ovary hypoplasia
+alt_id: MP:0003583
 def: "underdevelopment or reduced size of the ovaries, usually due to a reduced number of cells" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:78931]
 synonym: "hypoplastic ovaries" EXACT []
 synonym: "hypoplastic ovary" EXACT []
 synonym: "ovarian hypoplasia" EXACT []
+synonym: "rudimentary ovary" EXACT []
 is_a: MP:0001127 ! small ovary
 
 [Term]
@@ -34853,7 +34850,6 @@ id: MP:0005191
 name: head tilt
 def: "condition in which the portion of the body containing the brain and organs of sight, hearing, taste, and smell lists to the side" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 is_a: MP:0000436 ! abnormal head movements
-is_a: MP:0002979 ! abnormal vestibular response
 
 [Term]
 id: MP:0005192
@@ -35176,12 +35172,6 @@ synonym: "mesenteric lymph node abnormalities" EXACT []
 is_a: MP:0009625 ! abnormal abdominal lymph node morphology
 
 [Term]
-id: MP:0005233
-name: plasmacytoma
-def: "discrete, presumably solitary mass of neoplastic plasma cells in bone or in one of the extramedullary sites" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:78204]
-is_a: MP:0002020 ! increased tumor incidence
-
-[Term]
 id: MP:0005234
 name: thymic lymphoma
 alt_id: MP:0003832
@@ -35190,6 +35180,7 @@ synonym: "thymic tumor" RELATED []
 synonym: "thymoma" EXACT []
 synonym: "thymus tumor" RELATED []
 is_a: MP:0002022 ! lymphoma
+is_a: MP:0010288 ! increased gland tumor incidence
 
 [Term]
 id: MP:0005235
@@ -35478,13 +35469,6 @@ def: "change from the normal maximum tension the skin can withstand without tear
 is_a: MP:0005501 ! abnormal skin physiology
 
 [Term]
-id: MP:0005276
-name: skin tumor
-def: "presence of abnormal rapidly proliferating cells in the dermis and/or epidermis, usually in the form of a distinct mass" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:73649]
-is_a: MP:0001191 ! abnormal skin condition
-is_a: MP:0002020 ! increased tumor incidence
-
-[Term]
 id: MP:0005277
 name: abnormal brainstem morphology
 def: "any structural anomaly of the midbrain, pons, or medulla" [J:82670, MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
@@ -35715,7 +35699,6 @@ name: head tossing
 def: "compulsive flailing of the head in multiple directions" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 is_a: MP:0000436 ! abnormal head movements
 is_a: MP:0001408 ! stereotypic behavior
-is_a: MP:0002979 ! abnormal vestibular response
 
 [Term]
 id: MP:0005308
@@ -35753,7 +35736,9 @@ is_a: MP:0009642 ! abnormal blood homeostasis
 id: MP:0005312
 name: pericardial effusion
 def: "escape of fluid from blood vessels or lymphatic vessels into the fibrous sac surrounding the heart" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "dropsy of pericardium" EXACT []
 is_a: MP:0000288 ! abnormal pericardium morphology
+is_a: MP:0001784 ! abnormal fluid regulation
 
 [Term]
 id: MP:0005313
@@ -36001,7 +35986,7 @@ is_a: MP:0000203 ! abnormal circulating aspartate transaminase level
 [Term]
 id: MP:0005344
 name: increased circulating bilirubin level
-def: "greater than the normal concentration in the blood of this yellow heme breakdown product" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:85204, MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
+def: "increased concentration in the blood of the bile pigment bilirubin, normally found in the liver and in red blood cells" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "elevated bilirubin level" EXACT []
 synonym: "elevated circulating bilirubin level" EXACT []
 synonym: "hyperbilirubinemia" NARROW []
@@ -36102,6 +36087,7 @@ id: MP:0005357
 name: novel environmental response-related retropulsion
 def: "when confronted with a novel stimulus, subjects exhibit involuntary backward walking" [J:79604, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 is_a: MP:0001413 ! abnormal response to new environment
+is_a: MP:0010323 ! retropulsion
 
 [Term]
 id: MP:0005358
@@ -36490,13 +36476,6 @@ def: "blood serum albumin concentration below the normal range" [MESH:National L
 is_a: MP:0000199 ! abnormal circulating serum albumin level
 
 [Term]
-id: MP:0005420
-name: walking backwards
-def: "locomotor activity in the posterior direction" [MGI:cml "Cathleen M. Lutz, Mouse Genome Informatics Curator"]
-synonym: "backward walking" EXACT []
-is_a: MP:0003313 ! abnormal locomotor activation
-
-[Term]
 id: MP:0005421
 name: loose skin
 def: "condition in which the skin hangs in folds" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
@@ -36717,21 +36696,6 @@ name: abnormal adipose tissue amount
 def: "more or less than the normal total amount of connective tissue composed of fat cells" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 synonym: "abnormal body fat amount" RELATED []
 is_a: MP:0000003 ! abnormal adipose tissue morphology
-
-[Term]
-id: MP:0005453
-name: increased adipose tissue amount
-def: "greater than the normal total amount of connective tissue composed of fat cells" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
-synonym: "increased body fat" RELATED []
-is_a: MP:0005452 ! abnormal adipose tissue amount
-
-[Term]
-id: MP:0005454
-name: decreased adipose tissue amount
-def: "less than the normal total amount of connective tissue composed of fat cells" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
-synonym: "decreased body fat" RELATED []
-synonym: "reduced adipose tissue amount" EXACT []
-is_a: MP:0005452 ! abnormal adipose tissue amount
 
 [Term]
 id: MP:0005455
@@ -37155,48 +37119,6 @@ synonym: "abnormal bone/ skeleton" EXACT []
 synonym: "bone/ skeletal abnormalities" EXACT []
 synonym: "skeletal dysplasia" EXACT []
 is_a: MP:0005390 ! skeleton phenotype
-
-[Term]
-id: MP:0005509
-name: tongue neoplasm
-def: "tumor or cancer of the tongue" [MESH:C04.588.443.591.925, RGD:cur "Rat Genome Database submission"]
-is_a: MP:0002020 ! increased tumor incidence
-
-[Term]
-id: MP:0005511
-name: increased resistance to tongue neoplasm
-def: "reduced likelihood of developing an abnormal growth of tongue tissue" [MESH:C04.588.443.591.925, RGD:cur "Rat Genome Database submission"]
-synonym: "decreased susceptibility to tongue neoplasm" EXACT []
-synonym: "decreased susceptibility to tongue tumor" EXACT []
-synonym: "increased resistance to tongue tumor" EXACT []
-is_a: MP:0005514 ! increased resistance to tumor development
-
-[Term]
-id: MP:0005512
-name: increased resistance to mammary neoplasm
-def: "reduced likelihood of developing an abnormal growth of mammary tissue" [MESH:C04.588.531, RGD:cur "Rat Genome Database submission"]
-synonym: "decreased susceptibility to mammary neoplasm" EXACT []
-synonym: "decreased susceptibility to mammary tumor" EXACT []
-synonym: "increased resistance to mammary tumor" EXACT []
-is_a: MP:0005514 ! increased resistance to tumor development
-
-[Term]
-id: MP:0005513
-name: increased resistance to liver neoplasm
-def: "reduced likelihood of developing an abnormal growth of liver tissue" [MESH:National Library of Medicine_Medical Subject Headings, RGD:cur "Rat Genome Database submission"]
-synonym: "decreased susceptibility to liver neoplasm" EXACT []
-synonym: "decreased susceptibility to liver tumor" EXACT []
-synonym: "increased resistance to liver tumor" EXACT []
-is_a: MP:0005514 ! increased resistance to tumor development
-
-[Term]
-id: MP:0005514
-name: increased resistance to tumor development
-def: "reduced likelihood of developing new abnormal growth of any tissue" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator", RGD:cur "Rat Genome Database submission"]
-synonym: "decreased susceptibility to neoplasm development" RELATED []
-synonym: "decreased susceptibility to tumor development" RELATED []
-synonym: "increased resistance to neoplasm development" EXACT []
-is_a: MP:0002052 ! decreased tumor incidence
 
 [Term]
 id: MP:0005515
@@ -38081,7 +38003,7 @@ is_a: MP:0001776 ! abnormal circulating sodium level
 [Term]
 id: MP:0005635
 name: decreased circulating bilirubin level
-def: "less than the normal concentration in the blood of this yellow heme breakdown product" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", RGD:cur "Rat Genome Database submission"]
+def: "reduced concentration in the blood of the bile pigment bilirubin, normally found in the liver and in red blood cells" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", RGD:cur "Rat Genome Database submission"]
 synonym: "hypobilirubinemia" NARROW []
 synonym: "reduced circulating bilirubin level" EXACT []
 is_a: MP:0001569 ! abnormal circulating bilirubin level
@@ -38188,7 +38110,7 @@ name: spleen neoplasm
 def: "abnormal new cellular growth of the spleen" [J:70407, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 synonym: "neoplastic spleen" EXACT []
 synonym: "spleen neoplasia" EXACT []
-is_a: MP:0002020 ! increased tumor incidence
+is_a: MP:0010296 ! increased hemolymphoid system tumor incidence
 
 [Term]
 id: MP:0005650
@@ -38944,13 +38866,6 @@ synonym: "abnormal thelium morphology" EXACT []
 is_a: MP:0000627 ! abnormal mammary gland morphology
 
 [Term]
-id: MP:0006079
-name: stomach tumor
-def: "presence of abnormal rapidly proliferating cells in the stomach, usually in the form of a distinct mass" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
-synonym: "gastric tumor" EXACT []
-is_a: MP:0002020 ! increased tumor incidence
-
-[Term]
 id: MP:0006080
 name: CNS ischemia
 def: "inadequate blood flow to a region of the brain that may lead to cerebral infarction" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
@@ -39267,12 +39182,6 @@ def: "anomaly in the development of the common arterial trunk that forms the aor
 is_a: MP:0000267 ! abnormal heart development
 
 [Term]
-id: MP:0006127
-name: transposition of great vessels
-def: "the pulmonary arteries are supplied by the left ventricle, and the aorta by the right ventricle the reverse of the normal arrangement" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
-is_a: MP:0006126 ! abnormal outflow tract development
-
-[Term]
 id: MP:0006128
 name: pulmonary valve stenosis
 def: "abnormal narrowing of the pulmonary valve" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
@@ -39344,14 +39253,16 @@ is_a: MP:0001544 ! abnormal cardiovascular system physiology
 [Term]
 id: MP:0006139
 name: rhabdomyoma
-def: "a benign neoplasm of striated muscle " [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
-is_a: MP:0002020 ! increased tumor incidence
+def: "a benign neoplasm of striated muscle" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
+is_a: MP:0010273 ! increased classified tumor incidence
+is_a: MP:0010290 ! increased muscle tumor incidence
 
 [Term]
 id: MP:0006140
 name: cardiac rhabdomyoma
 def: "the most common benign tumor of the myocardium it may be associated with tuberous sclerosis" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
 is_a: MP:0006139 ! rhabdomyoma
+is_a: MP:0010291 ! increased cardiovascular system tumor incidence
 
 [Term]
 id: MP:0006141
@@ -39524,7 +39435,7 @@ id: MP:0006169
 name: eyelid tumor
 def: "presence of abnormal rapidly proliferating cells in the eyelid, usually in the form of a distinct mass" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
 synonym: "tumor of the eyelid" EXACT []
-is_a: MP:0002020 ! increased tumor incidence
+is_a: MP:0008018 ! increased facial tumor incidence
 
 [Term]
 id: MP:0006170
@@ -39538,6 +39449,7 @@ id: MP:0006171
 name: eyelid neuroma
 def: "a tumor composed of nerve tissue found in the eyelid" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
 is_a: MP:0006169 ! eyelid tumor
+is_a: MP:0010281 ! increased nervous system tumor incidence
 
 [Term]
 id: MP:0006172
@@ -39579,29 +39491,11 @@ def: "thickening or hardening of the choroid usually secondary to atrophy" [MGI:
 is_a: MP:0005098 ! abnormal choroid morphology
 
 [Term]
-id: MP:0006178
-name: eye tumor
-def: "presence of abnormal rapidly proliferating cells in the eye, usually in the form of a distinct mass" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
-is_a: MP:0002020 ! increased tumor incidence
-
-[Term]
-id: MP:0006179
-name: choroid tumor
-def: "presence of abnormal rapidly proliferating cells in the choroid, usually in the form of a distinct mass" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
-is_a: MP:0006178 ! eye tumor
-
-[Term]
 id: MP:0006180
 name: choroid hemangioma
 def: "a benign tumor of the choroid, originating from the overgrowth of blood vessels" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
 is_a: MP:0002947 ! hemangioma
-is_a: MP:0006179 ! choroid tumor
-
-[Term]
-id: MP:0006181
-name: retina tumor
-def: "presence of abnormal rapidly proliferating cells in the retina, usually in the form of a distinct mass" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
-is_a: MP:0006178 ! eye tumor
+is_a: MP:0010304 ! increased choroid tumor incidence
 
 [Term]
 id: MP:0006182
@@ -39609,20 +39503,21 @@ name: retinal hemangioma
 def: "a benign tumor of the retina, originating from the overgrowth of blood vessels" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
 synonym: "retinal angioma" EXACT []
 is_a: MP:0002947 ! hemangioma
-is_a: MP:0006181 ! retina tumor
+is_a: MP:0010303 ! increased retina tumor incidence
 
 [Term]
 id: MP:0006183
 name: retinal hamartoma
 def: "tumor-like focal abnormalities of the retina; rarely neoplastic" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
-is_a: MP:0006181 ! retina tumor
-is_a: MP:0006381 ! hamartoma
+is_a: MP:0010303 ! increased retina tumor incidence
+is_a: MP:0010306 ! increased hamartoma incidence
 
 [Term]
 id: MP:0006184
 name: retinal astrocytoma
 def: "a malignant tumor of nervous tissue composed of well-differentiated astrocytes located in the retina" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
-is_a: MP:0006181 ! retina tumor
+is_a: MP:0010277 ! increased astrocytoma incidence
+is_a: MP:0010303 ! increased retina tumor incidence
 
 [Term]
 id: MP:0006185
@@ -39911,18 +39806,12 @@ is_a: MP:0005208 ! abnormal iris stroma morphology
 is_a: MP:0006226 ! iris hypoplasia
 
 [Term]
-id: MP:0006231
-name: iris tumor
-def: "presence of abnormal rapidly proliferating cells in the iris, usually in the form of a distinct mass" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
-is_a: MP:0006178 ! eye tumor
-
-[Term]
 id: MP:0006232
 name: Lisch nodule
 def: "a focal growth that resembles a neoplasm but results from faulty development in the iris and containing melanocytes" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
 synonym: "iris hamartoma" EXACT []
-is_a: MP:0006231 ! iris tumor
-is_a: MP:0006381 ! hamartoma
+is_a: MP:0010305 ! increased iris tumor incidence
+is_a: MP:0010306 ! increased hamartoma incidence
 
 [Term]
 id: MP:0006233
@@ -40009,18 +39898,6 @@ id: MP:0006245
 name: dislocated lens
 def: "the lens is moved out of position because some or all of the supporting ligaments have broken" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
 is_a: MP:0001303 ! abnormal lens morphology
-
-[Term]
-id: MP:0006246
-name: tumor of uvea
-def: "presence of abnormal rapidly proliferating cells in the uvea, usually in the form of a distinct mass" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
-is_a: MP:0006178 ! eye tumor
-
-[Term]
-id: MP:0006247
-name: intraocular melanoma
-def: "a dark-pigmented, usually malignant tumor arising from a melanocyte occurring in the eye" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
-is_a: MP:0006246 ! tumor of uvea
 
 [Term]
 id: MP:0006248
@@ -40110,6 +39987,7 @@ id: MP:0006262
 name: testis tumor
 def: "presence of abnormal rapidly proliferating cells in the testis, usually in the form of a distinct mass" [J:60034, MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 is_a: MP:0009590 ! gonad tumor
+is_a: MP:0010288 ! increased gland tumor incidence
 
 [Term]
 id: MP:0006263
@@ -40439,8 +40317,8 @@ is_a: MP:0008056 ! abnormal retinal ganglion cell morphology
 id: MP:0006310
 name: retinoblastoma
 def: "a malignant tumor of the retina composed of cells arising from the retinoblasts" [ISBN:0-8036-0655-99 "Taber's Cyclopedic Medical Dictionary, 19th edition", MGI:rbabiuk "Randall Babiuk, Mouse Genome Informatics Curator"]
-is_a: MP:0006181 ! retina tumor
 is_a: MP:0008021 ! blastoma
+is_a: MP:0010303 ! increased retina tumor incidence
 
 [Term]
 id: MP:0006311
@@ -40488,12 +40366,6 @@ name: decreased urine sodium level
 def: "lower than normal concentration of sodium in the urine" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 synonym: "reduced urine sodium level" EXACT []
 is_a: MP:0006274 ! abnormal urine sodium level
-
-[Term]
-id: MP:0006318
-name: mammary gland tumor
-def: "presence of abnormal, rapidly proliferating cells in the mammary gland, usually in the form of a distinct mass" [MGI:rbabiuk "Randall Babiuk, Mouse Genome Informatics Curator", MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
-is_a: MP:0002020 ! increased tumor incidence
 
 [Term]
 id: MP:0006319
@@ -40792,12 +40664,6 @@ def: "failure to respond to variable stimuli, often auditory; usually measured b
 is_a: MP:0001486 ! abnormal startle reflex
 
 [Term]
-id: MP:0006360
-name: tabby coat
-def: "presence of striping of variable degree in the coat " [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator", MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
-is_a: MP:0000372 ! irregular coat pigmentation
-
-[Term]
 id: MP:0006361
 name: abnormal female germ cell morphology
 def: "any structural anomaly female germ cells whether they are undifferentiated or fully differentiated" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
@@ -40924,12 +40790,6 @@ name: abnormal spermatid morphology
 def: "anomaly in the number or structure of the male germ cells that without further cell division give rise to mature spermatozoa" [ISBN:0-8036-0655-99 "Taber's Cyclopedic Medical Dictionary, 19th edition", MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 is_a: MP:0001156 ! abnormal spermatogenesis
 is_a: MP:0006362 ! abnormal male germ cell morphology
-
-[Term]
-id: MP:0006381
-name: hamartoma
-def: "a benign formation of a mass of tissue of disproportionate size and distribution, composed of an overgrowth of mature cells and tissues that normally occur in the tissue" [MGI:rbabiuk "Randall Babiuk, Mouse Genome Informatics Curator", MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
-is_a: MP:0002020 ! increased tumor incidence
 
 [Term]
 id: MP:0006382
@@ -41310,7 +41170,7 @@ id: MP:0006432
 name: abnormal costal cartilage morphology
 def: "any structural anomaly of the nonvascular, resilient, flexible hyaline connective tissue that connects the end of a true rib to the sternum or the end of a false rib with the with the lower border of the costal cartilage above it" [ISBN:0-8036-0655-9 "Taber's Cyclopedic Medical Dictionary", MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 is_a: MP:0000163 ! abnormal cartilage morphology
-is_a: MP:0004624 ! abnormal thoracic cage
+is_a: MP:0004624 ! abnormal thoracic cage morphology
 
 [Term]
 id: MP:0006433
@@ -41324,6 +41184,7 @@ name: ovary tumor
 def: "presence of abnormal rapidly proliferating cells in the ovary, usually in the form of a distinct mass" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "ovarian tumor" EXACT []
 is_a: MP:0009590 ! gonad tumor
+is_a: MP:0010288 ! increased gland tumor incidence
 
 [Term]
 id: MP:0008001
@@ -41389,38 +41250,42 @@ id: MP:0008010
 name: gastric adenocarcinoma
 def: "malignant neoplasm of epithelial cells in the stomach" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
 synonym: "stomach adenocarcinoma" EXACT []
-is_a: MP:0006079 ! stomach tumor
 is_a: MP:0009308 ! adenocarcinoma
+is_a: MP:0010301 ! increased stomach tumor incidence
 
 [Term]
 id: MP:0008011
-name: intestinal polyps
+name: intestine polyps
 def: "abnormal tissue masses that protrude into the lumen of the intestine and are tethered to the wall of the intestine" [MESH:C23.300.825.411, MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
 synonym: "intestinal polyposis" EXACT []
+synonym: "intestinal polyps" EXACT []
 is_a: MP:0000477 ! abnormal intestine morphology
+is_a: MP:0010352 ! gastrointestinal tract polyps
 
 [Term]
 id: MP:0008012
-name: duodenal polyps
+name: duodenum polyps
 def: "development of numerous growths that are connected to and protrude from the mucous membrane of the duodenum" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
 synonym: "duodenal polyposis" EXACT []
+synonym: "duodenal polyps" EXACT []
 is_a: MP:0003271 ! abnormal duodenum morphology
-is_a: MP:0008011 ! intestinal polyps
+is_a: MP:0008011 ! intestine polyps
 
 [Term]
 id: MP:0008013
 name: cecum polyps
 def: "development of numerous growths that are connected to and protrude from the mucous membrane of the cecum" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
 synonym: "caecum polyps" EXACT []
+synonym: "cecal polyps" EXACT []
 synonym: "cecum polyposis" EXACT []
 is_a: MP:0000494 ! abnormal cecum morphology
-is_a: MP:0008011 ! intestinal polyps
+is_a: MP:0008011 ! intestine polyps
 
 [Term]
 id: MP:0008014
-name: lung tumor
-def: "presence of abnormal, rapidly proliferating cells on the lung usually in the form of a distinct mass" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
-is_a: MP:0002020 ! increased tumor incidence
+name: increased lung tumor incidence
+def: "greater than the expected number of neoplasms in the lung, usually in the form of a distinct mass, in a specific population in a given time period" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+is_a: MP:0010298 ! increased respiratory system tumor incidence
 
 [Term]
 id: MP:0008015
@@ -41447,15 +41312,16 @@ is_a: MP:0003673 ! abnormal inguinal canal morphology
 
 [Term]
 id: MP:0008018
-name: facial tumor
-def: "presence of abnormal, rapidly proliferating cells on the face usually in the form of a distinct mass " [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
-is_a: MP:0002020 ! increased tumor incidence
+name: increased facial tumor incidence
+def: "greater than the expected number of neoplasms on the face, usually in the form of a distinct mass, in a specific population in a given time period" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+is_a: MP:0010293 ! increased integument system tumor incidence
 
 [Term]
 id: MP:0008019
-name: liver tumor
-def: "presence of abnormal, rapidly proliferating cells in the liver usually in the form of a distinct mass" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
-is_a: MP:0002020 ! increased tumor incidence
+name: increased liver tumor incidence
+def: "greater than the expected number of neoplasms in the liver, usually in the form of a distinct mass, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+synonym: "increased hepatic tumor incidence" EXACT []
+is_a: MP:0010297 ! increased hepatobiliary system tumor incidence
 
 [Term]
 id: MP:0008020
@@ -42885,9 +42751,6 @@ is_a: MP:0005022 ! abnormal immature B cell morphology
 id: MP:0008189
 name: increased transitional stage B cell number
 def: "greater number of immature B cells of an intermediate stage between the pre-B cell stage and the mature naive stage; transitional B cells express surface immunoglobulin, and are subject to the process of B cell selection" [CL:0000818, ISBN:0781735149, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-synonym: "increased T1 B cell number" NARROW []
-synonym: "increased T2 B cell number" NARROW []
-synonym: "increased T3 B cell number" NARROW []
 synonym: "increased transitional B cell number" EXACT []
 synonym: "increased transitional stage B lymphocyte number" EXACT []
 synonym: "increased transitional stage B-cell number" EXACT []
@@ -42898,9 +42761,6 @@ is_a: MP:0008214 ! increased immature B cell number
 id: MP:0008190
 name: decreased transitional stage B cell number
 def: "reduced number of immature B cells of an intermediate stage between the pre-B cell stage and the mature naive stage; transitional B cells express surface immunoglobulin, and are subject to the process of B cell selection" [CL:0000818, ISBN:0781735149, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-synonym: "decreased T1 B cell number" NARROW []
-synonym: "decreased T2 B cell number" NARROW []
-synonym: "decreased T3 B cell number" NARROW []
 synonym: "decreased transitional B cell number" EXACT []
 synonym: "decreased transitional stage B lymphocyte number" EXACT []
 synonym: "decreased transitional stage B-cell number" EXACT []
@@ -43370,7 +43230,9 @@ is_a: MP:0002446 ! abnormal macrophage morphology
 id: MP:0008243
 name: abnormal macrophage derived foam cell morphology
 def: "any structural anomaly of a type of macrophage containing lipids in small vacuoles and typically seen in atherolosclerotic lesions, as well as other conditions" [CL:0000517]
+xref: CL:0000517
 is_a: MP:0002446 ! abnormal macrophage morphology
+is_a: MP:0009840 ! abnormal foam cell morphology
 
 [Term]
 id: MP:0008244
@@ -44629,44 +44491,66 @@ is_a: MP:0000029 ! abnormal malleus morphology
 
 [Term]
 id: MP:0008374
-name: abnormal malleal manubrium morphology
+name: abnormal malleus manubrium morphology
 def: "any structural abnormality in the handle of the malleus, which extends downward, inward, and backward from the neck of the malleus and is embedded throughout its length in the tympanic membrane" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
-synonym: "abnormal manubrium morphology" RELATED []
+synonym: "abnormal handle of malleus morphology" EXACT []
+synonym: "abnormal malleal manubrium morphology" EXACT []
+synonym: "abnormal malleus handle morphology" EXACT []
+synonym: "abnormal manubrium mallei morphology" EXACT []
+synonym: "abnormal manubrium morphology" BROAD []
+synonym: "abnormal manubrium of malleus morphology" EXACT []
 is_a: MP:0000029 ! abnormal malleus morphology
 
 [Term]
 id: MP:0008375
-name: short malleal manubrium
+name: short malleus manubrium
 def: "reduced length of the handle of the malleus" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
-synonym: "short manubrium" EXACT []
-is_a: MP:0008374 ! abnormal malleal manubrium morphology
+synonym: "short handle of malleus" EXACT []
+synonym: "short malleal manubrium" EXACT []
+synonym: "short malleus handle" EXACT []
+synonym: "short manubrium" BROAD []
+synonym: "short manubrium mallei" EXACT []
+synonym: "short manubrium of malleus" EXACT []
+is_a: MP:0008374 ! abnormal malleus manubrium morphology
 
 [Term]
 id: MP:0008376
-name: small malleal manubrium
+name: small malleus manubrium
 def: "reduced size of the handle of the malleus" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
-synonym: "small manubrium" EXACT []
-is_a: MP:0008374 ! abnormal malleal manubrium morphology
+synonym: "small handle of malleus" EXACT []
+synonym: "small malleal manubrium" EXACT []
+synonym: "small malleus handle" EXACT []
+synonym: "small manubrium" BROAD []
+synonym: "small manubrium mallei" EXACT []
+synonym: "small manubrium of malleus" EXACT []
+is_a: MP:0008374 ! abnormal malleus manubrium morphology
 
 [Term]
 id: MP:0008377
-name: absent malleal manubrium
+name: absent malleus manubrium
 def: "absence of the handle of the malleus" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
-synonym: "absent manubrium" EXACT []
-is_a: MP:0008374 ! abnormal malleal manubrium morphology
+synonym: "absent handle of malleus" EXACT []
+synonym: "absent malleal manubrium" EXACT []
+synonym: "absent malleus handle" EXACT []
+synonym: "absent manubrium" BROAD []
+synonym: "absent manubrium mallei" EXACT []
+synonym: "absent manubrium of malleus" EXACT []
+is_a: MP:0008374 ! abnormal malleus manubrium morphology
 
 [Term]
 id: MP:0008378
-name: small malleal processus brevis
+name: small malleus processus brevis
 def: "reduced size of the projection extending from the base of the manubrium of the malleus which contacts the upper part of the tympanic membrane" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
-is_a: MP:0008374 ! abnormal malleal manubrium morphology
+synonym: "small malleal processus brevis" EXACT []
+is_a: MP:0010324 ! abnormal malleus processus brevis morphology
 
 [Term]
 id: MP:0008379
-name: absent head of malleus
+name: absent malleus head
 def: "absence of the rounded portion of the malleus articulating with the body of the incus" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
 synonym: "absent caput mallei" EXACT []
-is_a: MP:0000029 ! abnormal malleus morphology
+synonym: "absent head of malleus" EXACT []
+is_a: MP:0010325 ! abnormal malleus head morphology
 
 [Term]
 id: MP:0008380
@@ -45987,8 +45871,8 @@ id: MP:0008548
 name: abnormal circulating interferon level
 def: "anomaly in the amount in the blood of proteins secreted by vertebrate cells in response to a wide variety of inducers; they confer resistance against many different viruses, inhibit proliferation of normal and malignant cells, impede multiplication of intracellular parasites, enhance macrophage and granulocyte phagocytosis, augment natural killer cell activity, and show several other immunomodulatory functions" [MESH:D12.644.276.374.440]
 synonym: "abnormal circulating IFN level" EXACT []
-is_a: MP:0005416 ! abnormal circulating protein level
 is_a: MP:0008750 ! abnormal interferon level
+is_a: MP:0010210 ! abnormal circulating cytokine level
 
 [Term]
 id: MP:0008549
@@ -46026,8 +45910,8 @@ synonym: "abnormal circulating cachectin level" EXACT []
 synonym: "abnormal circulating TNF level" RELATED []
 synonym: "abnormal circulating TNFA level" EXACT []
 synonym: "abnormal circulating tumor necrosis factor alpha level" EXACT []
-is_a: MP:0005416 ! abnormal circulating protein level
 is_a: MP:0008752 ! abnormal tumor necrosis factor level
+is_a: MP:0010210 ! abnormal circulating cytokine level
 
 [Term]
 id: MP:0008553
@@ -46348,8 +46232,8 @@ id: MP:0008588
 name: abnormal circulating interleukin level
 def: "anomaly in the amount in the blood of soluble factors which stimulate growth-related activities of leukocytes as well as other cell types; they enhance cell proliferation and differentiation, DNA synthesis, secretion of other biologically active molecules and responses to immune and inflammatory stimuli" [MESH:D12.644.276.374.465]
 synonym: "abnormal circulating IL level" EXACT []
-is_a: MP:0005416 ! abnormal circulating protein level
 is_a: MP:0008751 ! abnormal interleukin level
+is_a: MP:0010210 ! abnormal circulating cytokine level
 
 [Term]
 id: MP:0008589
@@ -48123,7 +48007,7 @@ id: MP:0008714
 name: lung carcinoma
 def: "a malignant neoplasm of the ling, arising from epithelial cells, usually glandular or squamous" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 is_a: MP:0002038 ! carcinoma
-is_a: MP:0008014 ! lung tumor
+is_a: MP:0008014 ! increased lung tumor incidence
 
 [Term]
 id: MP:0008715
@@ -48659,8 +48543,8 @@ is_a: MP:0002068 ! abnormal parental behavior
 
 [Term]
 id: MP:0008780
-name: pancreatic acinar cell carcinoma
-def: "presence of an adenocarcinoma arising from cells of the pancreas that secrete digestive enzymes" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+name: increased pancreatic acinar cell carcinoma incidence
+def: "greater than the expected number of an adenocarcinoma arising from cells of the pancreas that secrete digestive enzymes, occurring in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "acinar carcinoma" RELATED []
 synonym: "pancreatic ACC" EXACT []
 synonym: "pancreatic acinar carcinoma" EXACT []
@@ -48833,7 +48717,7 @@ is_a: MP:0000477 ! abnormal intestine morphology
 [Term]
 id: MP:0008803
 name: abnormal placental labyrinth vasculature morphology
-def: "any structural anomaly of blood vessels of the layer of the placenta where embryonic and maternal blood vessels interdigitate" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
+def: "any structural anomaly of blood vessels of the layer of the placenta where embryonic and maternal blood exchange nutrients and waste products" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 synonym: "placental labyrinth vasculature dysplasia" EXACT []
 is_a: MP:0001716 ! abnormal placenta labyrinth morphology
 is_a: MP:0003231 ! abnormal placenta vasculature
@@ -50214,7 +50098,9 @@ is_a: MP:0008977 ! abnormal vagina size
 [Term]
 id: MP:0008984
 name: vagina hypoplasia
+alt_id: MP:0003532
 def: "underdevelopment or reduced size of the vagina, usually due to a reduced number of cells" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+synonym: "rudimentary vagina" EXACT []
 synonym: "vaginal hypoplasia" EXACT []
 is_a: MP:0008983 ! small vagina
 
@@ -50878,7 +50764,7 @@ name: impaired lectin complement pathway
 def: "abnormal function of the plasma protein cascade triggered by binding of lectin(s) to carbohydrate groups found on pathogen cell surfaces" [MGI:tmeehan "Terry Meehan, Mouse Genome Informatics Curator"]
 synonym: "impaired lectin mediated complement pathway" EXACT []
 synonym: "impaired lectin pathway of complement" EXACT []
-is_a: MP:0002471 ! abnormal complement cascade
+is_a: MP:0002471 ! abnormal complement pathway
 
 [Term]
 id: MP:0009063
@@ -51734,7 +51620,7 @@ synonym: "pancreas neoplasms" EXACT []
 synonym: "pancreatic cancer" EXACT []
 synonym: "pancreatic neoplasms" EXACT []
 synonym: "pancreatic tumor" EXACT []
-is_a: MP:0002020 ! increased tumor incidence
+is_a: MP:0010288 ! increased gland tumor incidence
 
 [Term]
 id: MP:0009154
@@ -52329,14 +52215,15 @@ name: prostate intraepithelial neoplasia
 def: "noninvasive prostate duct lesions that affect smaller caliber ducts" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "PIN" EXACT []
 synonym: "prostatic intraepithelial neoplasia" EXACT []
-is_a: MP:0003831 ! prostate tumor
+is_a: MP:0010357 ! increased prostate gland tumor incidence
 
 [Term]
 id: MP:0009220
-name: prostate adenocarcinoma
+name: prostate gland adenocarcinoma
 def: "malignant neoplasm arising from prostate tissue" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-is_a: MP:0003831 ! prostate tumor
+synonym: "prostate adenocarcinoma" EXACT []
 is_a: MP:0009308 ! adenocarcinoma
+is_a: MP:0010357 ! increased prostate gland tumor incidence
 
 [Term]
 id: MP:0009221
@@ -52359,11 +52246,12 @@ name: uterus tumor
 def: "presence of abnormal rapidly proliferating cells in the uterus, usually in the form of a distinct mass" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
 synonym: "uterine mass" EXACT []
 synonym: "uterine tumor" EXACT []
-is_a: MP:0002020 ! increased tumor incidence
+is_a: MP:0010287 ! increased reproductive system tumor incidence
 
 [Term]
 id: MP:0009223
 name: uterus carcinoma
+def: "malignant neoplasm derived from uterine epithelial cells" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "uterine carcinoma" EXACT []
 is_a: MP:0002038 ! carcinoma
 is_a: MP:0009222 ! uterus tumor
@@ -52750,7 +52638,7 @@ def: "an injury to biological tissue in which the capillaries are damaged, allow
 synonym: "bruise" EXACT []
 synonym: "bruises" EXACT []
 synonym: "contusion" EXACT []
-is_a: MP:0001914 ! hemorrhage
+is_a: MP:0008817 ! hematoma
 
 [Term]
 id: MP:0009276
@@ -52762,7 +52650,7 @@ is_a: MP:0001914 ! hemorrhage
 id: MP:0009277
 name: brain tumor
 def: "presence of abnormal rapidly proliferating cells in the brain, usually in the form of a distinct mass" [MGI:mnk "Michelle Knowlton, Mouse Genome Informatics Curator"]
-is_a: MP:0002020 ! increased tumor incidence
+is_a: MP:0010281 ! increased nervous system tumor incidence
 
 [Term]
 id: MP:0009278
@@ -53094,7 +52982,9 @@ is_a: MP:0002024 ! T cell derived lymphoma
 
 [Term]
 id: MP:0009321
-name: histiocytic sarcoma
+name: increased histiocytic sarcoma incidence
+def: "greater than the expected number of malignant tumors derived from histiocytes in a given population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0002022 ! lymphoma
 is_a: MP:0002032 ! sarcoma
 
 [Term]
@@ -53588,6 +53478,7 @@ id: MP:0009383
 name: abnormal truncus arteriosus morphology
 def: "any structural anomaly of the common arterial trunk opening out of both ventricles that divides into the aorta and pulmonary artery during development" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 is_a: MP:0006126 ! abnormal outflow tract development
+is_a: MP:0010224 ! abnormal heart ventricle outflow tract morphology
 
 [Term]
 id: MP:0009384
@@ -53983,13 +53874,15 @@ synonym: "EMMT" EXACT []
 synonym: "extramedullary myeloid tumors " EXACT []
 synonym: "granulocytic sarcoma" EXACT []
 is_a: MP:0002032 ! sarcoma
+is_a: MP:0010296 ! increased hemolymphoid system tumor incidence
 
 [Term]
 id: MP:0009440
 name: myeloma
 def: "tumor composed of cells derived from hemopoietic tissues of the bone marrow" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "plasma cell tumor" EXACT []
-is_a: MP:0002020 ! increased tumor incidence
+is_a: MP:0010273 ! increased classified tumor incidence
+is_a: MP:0010296 ! increased hemolymphoid system tumor incidence
 
 [Term]
 id: MP:0009441
@@ -54119,31 +54012,31 @@ is_a: MP:0001510 ! abnormal coat appearance
 id: MP:0009458
 name: abnormal skeletal muscle size
 def: "anomaly in the size of the striated muscle fibers connected at either or both extremities with the bony framework of the body" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
-is_a: MP:0000759 ! abnormal skeletal muscle morphology
+is_a: MP:0004817 ! abnormal skeletal muscle mass
 
 [Term]
 id: MP:0009459
 name: skeletal muscle hyperplasia
 def: "overdevelopment or increased size of the skeletal muscle, usually due an increased number of cells" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
-is_a: MP:0009458 ! abnormal skeletal muscle size
+is_a: MP:0003398 ! increased skeletal muscle size
 
 [Term]
 id: MP:0009460
 name: skeletal muscle hypoplasia
 def: "underdevelopment or decreased size of the skeletal muscle, usually due an decreased number of cells" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
-is_a: MP:0009458 ! abnormal skeletal muscle size
+is_a: MP:0010240 ! decreased skeletal muscle size
 
 [Term]
 id: MP:0009461
 name: skeletal muscle hypertrophy
 def: "increase in the bulk size of the skeletal muscle due to cell enlargement" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
-is_a: MP:0009458 ! abnormal skeletal muscle size
+is_a: MP:0003398 ! increased skeletal muscle size
 
 [Term]
 id: MP:0009462
 name: skeletal muscle hypotrophy
 def: "decrease in the bulk size of the skeletal muscle due to cell shrinkage" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
-is_a: MP:0009458 ! abnormal skeletal muscle size
+is_a: MP:0010240 ! decreased skeletal muscle size
 
 [Term]
 id: MP:0009463
@@ -54200,8 +54093,8 @@ is_a: MP:0009467 ! abnormal magnocellular neurosecretory cell morphology
 id: MP:0009469
 name: skin hamartoma
 def: "a benign formation of a mass of tissue of disproportionate size and distribution in the skin, but composed of an overgrowth of mature cells and tissues that normally occur in this tissue" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
-is_a: MP:0005276 ! skin tumor
-is_a: MP:0006381 ! hamartoma
+is_a: MP:0010300 ! increased skin tumor incidence
+is_a: MP:0010306 ! increased hamartoma incidence
 
 [Term]
 id: MP:0009470
@@ -54517,7 +54410,7 @@ name: mammary gland ductal carcinoma
 def: "higher than normal incidence of malignant tumors of the ducts of the mammary gland" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "ductal carcinoma in situ" EXACT []
 is_a: MP:0002038 ! carcinoma
-is_a: MP:0006318 ! mammary gland tumor
+is_a: MP:0010299 ! increased mammary gland tumor incidence
 
 [Term]
 id: MP:0009509
@@ -54567,7 +54460,7 @@ id: MP:0009515
 name: gastrointestinal stromal tumor
 def: "non-epithelial, mesenchymal tumors of the gastrointestinal tract, thought to originate from the interstitial cells of Cajal, the pacemaker cells that regulate peristalsis in the digestive tract; approximately 70% of GISTs develop in the stomach, 20% in the small intestine, and less than 10% in the esophagus, colon, and rectum; GISTs are tumors of connective tissue, i.e. sarcomas, account for 1-3% of all gastrointestinal malignancies in human, and are typically more cellular than other gastrointestinal sarcomas" [http://en.wikipedia.org/wiki/Gastrointestinal_stromal_tumor, MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator", OMIM:606764]
 synonym: "GISTs" EXACT []
-is_a: MP:0002020 ! increased tumor incidence
+is_a: MP:0010279 ! increased gastrointestinal tumor incidence
 
 [Term]
 id: MP:0009516
@@ -54878,6 +54771,7 @@ id: MP:0009550
 name: urinary bladder carcinoma
 def: "a malignant neoplasm of the urinary bladder, arising from epithelial cells" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
 is_a: MP:0002038 ! carcinoma
+is_a: MP:0010289 ! increased urinary system tumor incidence
 
 [Term]
 id: MP:0009551
@@ -55156,14 +55050,14 @@ is_a: MP:0009823 ! abnormal sphingomyelin level
 id: MP:0009590
 name: gonad tumor
 def: "presence of abnormal rapidly proliferating cells in the testis or ovary, usually in the form of a distinct mass" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
-is_a: MP:0002020 ! increased tumor incidence
+is_a: MP:0010287 ! increased reproductive system tumor incidence
 
 [Term]
 id: MP:0009591
 name: liver adenocarcinoma
 def: "malignant neoplasm of epithelial cells in the liver" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
 synonym: "hepatic adenocarcinoma" EXACT []
-is_a: MP:0008019 ! liver tumor
+is_a: MP:0008019 ! increased liver tumor incidence
 is_a: MP:0009308 ! adenocarcinoma
 
 [Term]
@@ -55574,7 +55468,7 @@ is_a: MP:0005303 ! abnormal urinary bladder physiology
 [Term]
 id: MP:0009647
 name: decreased fertilization frequency
-def: "he number of secondary oocytes each penetrated by a spermatozoon followed by fusion of the male and female pronuclei are fewer than expected" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+def: "the number of secondary oocytes each penetrated by a spermatozoon followed by fusion of the male and female pronuclei are fewer than expected" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
 is_a: MP:0005410 ! abnormal fertilization
 
 [Term]
@@ -55962,7 +55856,7 @@ def: "increased plasma concentrations of chylomicrons, the large lipid droplet (
 synonym: "increased circulating chylomicron numbers " EXACT []
 synonym: "increased plasma chylomicron levels" EXACT []
 synonym: "increased serum chylomicron numbers" EXACT []
-is_a: MP:0009642 ! abnormal blood homeostasis
+is_a: MP:0010330 ! abnormal circulating lipoprotein level
 
 [Term]
 id: MP:0009701
@@ -55990,7 +55884,7 @@ id: MP:0009704
 name: skin squamous cell carcinoma
 def: "a skin carcinoma derived from stratified squamous epithelium" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 is_a: MP:0004207 ! squamous cell carcinoma
-is_a: MP:0005276 ! skin tumor
+is_a: MP:0010300 ! increased skin tumor incidence
 
 [Term]
 id: MP:0009705
@@ -56460,7 +56354,6 @@ def: "decrease in the amount of a foreign compound required to cause death or di
 synonym: "decreased resistance to xenobiotic induced morbidity/mortality" EXACT []
 is_a: MP:0009763 ! increased sensitivity to induced morbidity/mortality
 is_a: MP:0009765 ! abnormal xenobiotic induced morbidity/mortality
-disjoint_from: MP:0009763 ! increased sensitivity to induced morbidity/mortality
 
 [Term]
 id: MP:0009767
@@ -56631,7 +56524,6 @@ synonym: "decreased viral infection induced morbidity/mortality " EXACT []
 synonym: "increased resistance to viral infection induced morbidity/mortality" EXACT []
 is_a: MP:0002410 ! decreased susceptibility to viral infection
 is_a: MP:0009786 ! decreased susceptibility to infection induced morbidity/mortality
-disjoint_from: MP:0002410 ! decreased susceptibility to viral infection
 
 [Term]
 id: MP:0009791
@@ -56908,9 +56800,10 @@ is_a: MP:0009931 ! abnormal skin appearance
 
 [Term]
 id: MP:0009828
-name: delayed tumor appearance
-def: "later onset of tumor occurence than expected, but with expected incidence" [MGI:mberry "Melissa Berry, Genetics Resources Curator"]
-is_a: MP:0002166 ! altered tumor susceptibility
+name: increased tumor latency
+def: "later onset of tumor occurrence than expected" [MGI:mberry "Melissa Berry, Genetics Resources Curator"]
+synonym: "delayed tumor appearance" EXACT []
+is_a: MP:0010307 ! abnormal tumor latency
 
 [Term]
 id: MP:0009829
@@ -57741,7 +57634,7 @@ creation_date: 2010-01-27T01:11:25Z
 [Term]
 id: MP:0009921
 name: abnormal transitional stage T3 B cell morphology
-def: "any strucutral anomaly of a type of a transitional stage B cell that expresses surface IgM and IgD, and CD62L. This cell type appears to be an anergic B cell that does not proliferate upon BCR signaling, is found in the spleen and lymph nodes, and has the phenotype surface IgM-positive, surface IgD-positive, CD21-positive, CD23-positive, and CD62L-positive" [PMID:12810111]
+def: "any strucutral anomaly of a type of a transitional stage B cell that expresses surface IgM and IgD, and CD62L; it is an anergic B cell that does not proliferate upon BCR signaling, is found in the spleen and lymph nodes, and has the phenotype surface IgM-positive, surface IgD-positive, CD21-positive, CD23-positive, and CD62L-positive" [PMID:12810111]
 synonym: "abnormal T3 stage B cell morphology" EXACT []
 synonym: "abnormal transitional three stage B lymphocyte morphology" EXACT []
 synonym: "abnormal transitional three stage B-cell morphology" EXACT []
@@ -58709,6 +58602,7 @@ id: MP:0010016
 name: variable depigmentation
 alt_id: MP:0002198
 def: "absence or loss of normal pigment in the skin in various and irregular patterns" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+synonym: "vitiligo" EXACT []
 synonym: "white skin spotting" EXACT []
 is_a: MP:0002095 ! abnormal skin pigmentation
 created_by: csmith
@@ -58790,7 +58684,11 @@ creation_date: 2010-02-17T03:53:44Z
 [Term]
 id: MP:0010024
 name: increased total body fat amount
+alt_id: MP:0005453
 def: "greater than the normal total amount of connective tissue composed of fat cells within the entire body" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased adipose tissue amount" EXACT []
+synonym: "increased adiposity" EXACT []
+synonym: "increased body fat" RELATED []
 synonym: "increased total body adipose tissue amount" EXACT []
 is_a: MP:0005452 ! abnormal adipose tissue amount
 created_by: csmith
@@ -58799,8 +58697,13 @@ creation_date: 2010-02-22T12:58:49Z
 [Term]
 id: MP:0010025
 name: decreased total body fat amount
+alt_id: MP:0005454
 def: "less than the normal total amount of connective tissue composed of fat cells within the entire body" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "decreased adipose tissue amount" EXACT []
+synonym: "decreased adiposity" EXACT []
+synonym: "decreased body fat" RELATED []
 synonym: "decreased total adipose tissue amount" EXACT []
+synonym: "reduced adipose tissue amount" EXACT []
 synonym: "reduced total adipose tissue amount" EXACT []
 synonym: "reduced total body fat amount" EXACT []
 is_a: MP:0005452 ! abnormal adipose tissue amount
@@ -58814,6 +58717,7 @@ def: "less than normal amount in the liver of the principal sterol of vertebrate
 synonym: "decreased hepatic cholesterol level" EXACT []
 synonym: "reduced hepatic cholesterol level" RELATED []
 synonym: "reduced liver cholesterol level" EXACT []
+is_a: MP:0000609 ! abnormal liver physiology
 is_a: MP:0003983 ! decreased cholesterol level
 created_by: csmith
 creation_date: 2010-02-24T03:00:30Z
@@ -58947,7 +58851,7 @@ synonym: "abnormal adult liver progenitor cell morphology" EXACT []
 synonym: "abnormal hepatic oval cell morphology" EXACT []
 synonym: "abnormal LPC morphology" EXACT []
 xref: CL:1000036
-is_a: MP:0002138 ! abnormal liver/biliary system morphology
+is_a: MP:0002138 ! abnormal hepatobiliary system morphology
 created_by: csmith
 creation_date: 2010-03-03T10:47:13Z
 
@@ -59079,7 +58983,7 @@ name: hepatoblastoma
 def: "a malignant neoplasm occurring primarily in the liver and composed of tissue resembling embryonic or fetal hepatic epithelium, or mixed epithelial and mesenchymal tissues" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
 synonym: "hepatic blastoma" EXACT []
 synonym: "liver blastoma" EXACT []
-is_a: MP:0008019 ! liver tumor
+is_a: MP:0008019 ! increased liver tumor incidence
 is_a: MP:0008021 ! blastoma
 created_by: csmith
 creation_date: 2010-03-03T03:22:41Z
@@ -59349,7 +59253,7 @@ creation_date: 2010-03-12T04:02:19Z
 id: MP:0010079
 name: osteochondroma
 def: "a benign cartilagenous neoplasm that consists of a pedicle of normal bone capped by a region of proliferating cartilage cells; most often associated with one or more of the long bones" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
-is_a: MP:0002020 ! increased tumor incidence
+is_a: MP:0010280 ! increased skeletal tumor incidence
 created_by: csmith
 creation_date: 2010-03-19T02:34:32Z
 
@@ -59502,6 +59406,7 @@ id: MP:0010092
 name: increased circulating magnesium level
 def: "an elevation in the blood concentration of magnesium" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "elevated circulating magnesium level" EXACT []
+synonym: "hypermagnesemia" EXACT []
 is_a: MP:0001771 ! abnormal circulating magnesium level
 created_by: csmith
 creation_date: 2010-03-29T01:33:11Z
@@ -59510,6 +59415,7 @@ creation_date: 2010-03-29T01:33:11Z
 id: MP:0010093
 name: decreased circulating magnesium level
 def: "a reduction in the blood concentration of magnesium" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "hypomagnesemia " EXACT []
 synonym: "reduced circulating magnesium level" EXACT []
 is_a: MP:0001771 ! abnormal circulating magnesium level
 created_by: csmith
@@ -59563,7 +59469,8 @@ name: abnormal thoracic cage shape
 def: "anomaly in the overall regular dome shape of the ribcage" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "abnormal rib cage shape" EXACT []
 synonym: "abnormal ribcage shape" EXACT []
-is_a: MP:0004624 ! abnormal thoracic cage
+synonym: "abnormal thoracic basket shape" EXACT []
+is_a: MP:0004624 ! abnormal thoracic cage morphology
 created_by: csmith
 creation_date: 2010-03-29T02:26:00Z
 
@@ -59601,7 +59508,8 @@ name: small thoracic cage
 def: "reduced size of the bony and cartilaginous structure enclosing the thoracic cavity, consisting of the thoracic vertebrae, ribs, costal cartilages, and sternum" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "small rib cage" EXACT []
 synonym: "small ribcage" EXACT []
-is_a: MP:0004624 ! abnormal thoracic cage
+synonym: "small thoracic basket" EXACT []
+is_a: MP:0004624 ! abnormal thoracic cage morphology
 created_by: csmith
 creation_date: 2010-04-01T09:37:12Z
 
@@ -59611,7 +59519,8 @@ name: enlarged thoracic cage
 def: "increased size of the bony and cartilaginous structure enclosing the thoracic cavity, consisting of the thoracic vertebrae, ribs, costal cartilages, and sternum" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "enlarged rib cage" EXACT []
 synonym: "enlarged ribcage" EXACT []
-is_a: MP:0004624 ! abnormal thoracic cage
+synonym: "enlarged thoracic basket" EXACT []
+is_a: MP:0004624 ! abnormal thoracic cage morphology
 created_by: csmith
 creation_date: 2010-04-01T09:37:36Z
 
@@ -60683,6 +60592,1481 @@ synonym: "prognathism" EXACT []
 is_a: MP:0000454 ! abnormal jaw morphology
 created_by: csmith
 creation_date: 2010-06-22T03:12:19Z
+
+[Term]
+id: MP:0010209
+name: abnormal circulating chemokine level
+def: "deviation from the normal levels of any of the class of pro-inflammatory cytokines that attract and activate leukocytes in the circulation" [MESH:D12.644.276.374.200, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+comment: The site en.wikipedia.org/wiki/Chemokine has a good list of chemokines.
+is_a: MP:0008721 ! abnormal chemokine level
+is_a: MP:0010210 ! abnormal circulating cytokine level
+created_by: csmith
+creation_date: 2010-07-05T10:00:46Z
+
+[Term]
+id: MP:0010210
+name: abnormal circulating cytokine level
+def: "deviation from the normal levels in the blood of any of the non-antibody proteins made by inflammatory leukocytes and some non-leukocytic cells that affect the behavior of other cells" [ISBN:0-8153-1691-7 "Immunobiology, The Immune System in Health and Disease", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0005416 ! abnormal circulating protein level
+is_a: MP:0008713 ! abnormal cytokine level
+created_by: csmith
+creation_date: 2010-07-05T10:02:09Z
+
+[Term]
+id: MP:0010211
+name: abnormal acute phase protein level
+def: "deviation from the normal levels of the series of proteins found in the blood shortly after infection and which participate in the early phases of host defense against infection" [ISBN:0-8153-1691-7 "Immunobiology, The Immune System in Health and Disease"]
+is_a: MP:0002419 ! abnormal innate immunity
+is_a: MP:0002723 ! abnormal immune serum protein physiology
+is_a: MP:0008469 ! abnormal protein level
+created_by: csmith
+creation_date: 2010-07-05T12:16:59Z
+
+[Term]
+id: MP:0010212
+name: abnormal circulating C-reactive protein level
+def: "deviation from the normal levels of the plasma protein that circulates in increased amounts during inflammation or after tissue damage and binds to phosphocholine expressed on the surface of dead or dying cells, including all types of pneumococci, in order to activate the complement system via the C1Q complex" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:D12.776.034.145, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal circulating CRP level" EXACT []
+is_a: MP:0005416 ! abnormal circulating protein level
+is_a: MP:0010211 ! abnormal acute phase protein level
+created_by: csmith
+creation_date: 2010-07-05T01:11:19Z
+
+[Term]
+id: MP:0010213
+name: abnormal circulating fibrinogen level
+def: "deviation from the normal levels in the blood of a globulin that is converted into fibrin by the action of thrombin in the presence of ionized calcium to produce coagulation of the blood" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0005416 ! abnormal circulating protein level
+is_a: MP:0010211 ! abnormal acute phase protein level
+created_by: csmith
+creation_date: 2010-07-05T01:21:44Z
+
+[Term]
+id: MP:0010214
+name: abnormal circulating serum amyloid protein level
+def: "deviation from the normal blood levels of an acute-phase reaction protein that is a precursor to amyloid A protein; it is present in very high levels during acute inflammatory episodes, and is present in low concentrations in normal sera, but is found at higher concentrations in sera of older persons and in patients with amyloidosis" [MESH:D12.776.049.790, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal SAA protein level" EXACT []
+synonym: "abnormal Serum Amyloid A Protein level" EXACT []
+is_a: MP:0005416 ! abnormal circulating protein level
+is_a: MP:0010211 ! abnormal acute phase protein level
+created_by: csmith
+creation_date: 2010-07-05T01:22:14Z
+
+[Term]
+id: MP:0010215
+name: abnormal circulating complement protein level
+def: "deviation from the normal levels of the serum proteins that act sequentially to allow for the direct killing of microbes, the disposal of immune complexes, and the regulation of other immune processes" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal circulating complement component level" RELATED []
+is_a: MP:0002419 ! abnormal innate immunity
+is_a: MP:0005416 ! abnormal circulating protein level
+created_by: csmith
+creation_date: 2010-07-06T12:19:11Z
+
+[Term]
+id: MP:0010216
+name: abnormal circulating retinol binding protein level
+def: "anomaly in the blood level of carrier proteins that bind retinol; serum levels are used to detect liver disease, protein-calorie malnutrition and vitamin A deficiencies" [PMID:10839978]
+synonym: "abnormal circulating CBP level" EXACT []
+synonym: "abnormal circulating retinoid-binding protein level" EXACT []
+is_a: MP:0005416 ! abnormal circulating protein level
+created_by: csmith
+creation_date: 2010-07-06T12:40:37Z
+
+[Term]
+id: MP:0010217
+name: abnormal T-helper 17 cell morphology
+def: "any structural anomaly of a CD4-positive, alpha-beta T cell with the phenotype RORgamma-t-positive that produces IL-17" [CL:0000899]
+synonym: "abnormal helper T cell type 17 morphology" EXACT []
+synonym: "abnormal Th17 cell morphology" EXACT []
+synonym: "abnormal Th17 T cell morphology" EXACT []
+synonym: "abnormal Th17 T lymphocyte morphology" EXACT []
+synonym: "abnormal Th17 T-cell morphology" EXACT []
+synonym: "abnormal Th17 T-lymphocyte morphology" EXACT []
+is_a: MP:0010183 ! abnormal CD4-positive helper T cell morphology
+created_by: csmith
+creation_date: 2010-07-06T04:45:33Z
+
+[Term]
+id: MP:0010218
+name: abnormal T-helper 17 cell number
+def: "deviation from the normal count of CD4-positive, alpha-beta T cells with the phenotype RORgamma-t-positive that produces IL-17" [CL:0000899]
+synonym: "abnormal helper T cell type 17 number" EXACT []
+synonym: "abnormal Th17 cell number" EXACT []
+synonym: "abnormal Th17 T cell number" EXACT []
+synonym: "abnormal Th17 T lymphocyte number" EXACT []
+synonym: "abnormal Th17 T-cell number" EXACT []
+synonym: "abnormal Th17 T-lymphocyte number" EXACT []
+is_a: MP:0008073 ! abnormal CD4-positive T cell number
+is_a: MP:0010217 ! abnormal T-helper 17 cell morphology
+created_by: csmith
+creation_date: 2010-07-06T04:47:34Z
+
+[Term]
+id: MP:0010219
+name: increased T-helper 17 cell number
+def: "increased number of CD4-positive, alpha-beta T cells with the phenotype RORgamma-t-positive that produces IL-17" [CL:0000899]
+synonym: "increased helper T cell type 17 number" EXACT []
+synonym: "increased Th17 cell number" EXACT []
+synonym: "increased Th17 T cell number" EXACT []
+synonym: "increased Th17 T lymphocyte number" EXACT []
+synonym: "increased Th17 T-cell number" EXACT []
+synonym: "increased Th17 T-lymphocyte number" EXACT []
+is_a: MP:0008074 ! increased CD4-positive T cell number
+is_a: MP:0010218 ! abnormal T-helper 17 cell number
+created_by: csmith
+creation_date: 2010-07-06T04:47:54Z
+
+[Term]
+id: MP:0010220
+name: decreased T-helper 17 cell number
+def: "reduced number of CD4-positive, alpha-beta T cells with the phenotype RORgamma-t-positive that produces IL-17" [CL:0000899]
+synonym: "decreased helper T cell type 17 number" EXACT []
+synonym: "decreased Th17 cell number" EXACT []
+synonym: "decreased Th17 T cell number" EXACT []
+synonym: "decreased Th17 T lymphocyte number" EXACT []
+synonym: "decreased Th17 T-cell number" EXACT []
+synonym: "decreased Th17 T-lymphocyte number" EXACT []
+synonym: "dreduced Th17 T-lymphocyte number" EXACT []
+synonym: "reduced helper T cell type 17 number" EXACT []
+synonym: "reduced Th17 cell number" EXACT []
+synonym: "reduced Th17 T cell number" EXACT []
+synonym: "reduced Th17 T lymphocyte number" EXACT []
+synonym: "reduced Th17 T-cell number" EXACT []
+is_a: MP:0008075 ! decreased CD4-positive T cell number
+is_a: MP:0010218 ! abnormal T-helper 17 cell number
+created_by: csmith
+creation_date: 2010-07-06T04:48:15Z
+
+[Term]
+id: MP:0010221
+name: abnormal T-helper 17 cell differentiation
+def: "atypical production of or inability to produce the CD4-positive, alpha-beta T cells with the phenotype RORgamma-t-positive that produces IL-17" [CL:0000899]
+synonym: "abnormal helper T cell type 17 differentiation" EXACT []
+synonym: "abnormal Th17 cell differentiation" EXACT []
+synonym: "abnormal Th17 T cell differentiation" EXACT []
+synonym: "abnormal Th17 T lymphocyte differentiation" EXACT []
+synonym: "abnormal Th17 T-cell differentiation" EXACT []
+synonym: "abnormal Th17 T-lymphocyte differentiation" EXACT []
+is_a: MP:0010217 ! abnormal T-helper 17 cell morphology
+created_by: csmith
+creation_date: 2010-07-06T04:48:37Z
+
+[Term]
+id: MP:0010222
+name: abnormal T-helper 17 cell physiology
+def: "any functional anomaly of a CD4-positive, alpha-beta T cell with the phenotype RORgamma-t-positive that produces IL-17" [CL:0000899]
+synonym: "abnormal helper T cell type 17 physiology" EXACT []
+synonym: "abnormal Th17 cell physiology" EXACT []
+synonym: "abnormal Th17 T cell physiology" EXACT []
+synonym: "abnormal Th17 T lymphocyte physiology" EXACT []
+synonym: "abnormal Th17 T-cell physiology" EXACT []
+synonym: "abnormal Th17 T-lymphocyte physiology" EXACT []
+is_a: MP:0005463 ! abnormal CD4-positive T cell physiology
+created_by: csmith
+creation_date: 2010-07-06T04:49:43Z
+
+[Term]
+id: MP:0010223
+name: abnormal immunoglobulin transcytosis
+def: "any anomaly in the process of transporting immunoglobulin, via transcytosis, from one side of a cell to the other; occurs in epithelial cells and other cell types" [GO:0002414, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0001790 ! abnormal immune system physiology
+created_by: csmith
+creation_date: 2010-07-07T03:42:50Z
+
+[Term]
+id: MP:0010224
+name: abnormal heart ventricle outflow tract morphology
+def: "any structural anomaly of the portion of the heart through which blood flows into the arteries" [GO:0003151]
+is_a: MP:0005294 ! abnormal heart ventricle morphology
+created_by: csmith
+creation_date: 2010-07-07T04:27:25Z
+
+[Term]
+id: MP:0010225
+name: abnormal quadriceps morphology
+def: "any structural anomaly of the group of four muscles (rectus femoris, vastus intermedius, vastus lateralis, and vastus medialis) which extend down the front of the thigh and are the major extensors of the knee joint" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal quadriceps extensor morphology" EXACT []
+synonym: "abnormal quadriceps femoris morphology" EXACT []
+synonym: "abnormal quadriceps muscle morphology" EXACT []
+synonym: "abnormal quads morphology" EXACT []
+is_a: MP:0003358 ! abnormal hypaxial muscle morphology
+created_by: csmith
+creation_date: 2010-07-12T02:23:53Z
+
+[Term]
+id: MP:0010226
+name: increased quadriceps weight
+def: "increase in the weight of the group of four muscles (rectus femoris, vastus intermedius, vastus lateralis, and vastus medialis) which extend down the front of the thigh and are the major extensors of the knee joint" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased quadriceps extensor weight" EXACT []
+synonym: "increased quadriceps femoris weight" EXACT []
+synonym: "increased quadriceps muscle weight" EXACT []
+synonym: "increased quads weight" EXACT []
+is_a: MP:0010225 ! abnormal quadriceps morphology
+created_by: csmith
+creation_date: 2010-07-12T02:36:45Z
+
+[Term]
+id: MP:0010227
+name: decreased quadriceps weight
+def: "reduction in the weight of the group of four muscles (rectus femoris, vastus intermedius, vastus lateralis, and vastus medialis) which extend down the front of the thigh and are the major extensors of the knee joint" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "decreased quadriceps extensor weight" EXACT []
+synonym: "decreased quadriceps femoris weight" EXACT []
+synonym: "decreased quadriceps muscle weight" EXACT []
+synonym: "decreased quads weight" EXACT []
+synonym: "reduced quadriceps extensor weight" EXACT []
+synonym: "reduced quadriceps femoris weight" EXACT []
+synonym: "reduced quadriceps muscle weight" EXACT []
+synonym: "reduced quadriceps weight" EXACT []
+synonym: "reduced quads weight" EXACT []
+is_a: MP:0010225 ! abnormal quadriceps morphology
+created_by: csmith
+creation_date: 2010-07-12T02:37:02Z
+
+[Term]
+id: MP:0010228
+name: decreased transitional stage T3 B cell number
+def: "reduced number of a type of a transitional stage B cell that expresses surface IgM and IgD, and CD62L; it is an anergic B cell that does not proliferate upon BCR signaling, is found in the spleen and lymph nodes, and has the phenotype surface IgM-positive, surface IgD-positive, CD21-positive, CD23-positive, and CD62L-positive" [PMID:12810111]
+synonym: "decreased T3 stage B cell number" EXACT []
+synonym: "decreased transitional three stage B lymphocyte number" EXACT []
+synonym: "decreased transitional three stage B-cell number" EXACT []
+synonym: "decreased transitional three stage B-lymphocyte number" EXACT []
+synonym: "reduced T3 stage B cell number" EXACT []
+synonym: "reduced transitional three stage B lymphocyte number" EXACT []
+synonym: "reduced transitional three stage B-cell number" EXACT []
+synonym: "reduced transitional three stage B-lymphocyte number" EXACT []
+xref: CL:0000960
+is_a: MP:0008190 ! decreased transitional stage B cell number
+is_a: MP:0009921 ! abnormal transitional stage T3 B cell morphology
+created_by: csmith
+creation_date: 2010-07-13T11:32:36Z
+
+[Term]
+id: MP:0010229
+name: increased transitional stage T3 B cell number
+def: "greater number of a type of a transitional stage B cell that expresses surface IgM and IgD, and CD62L; it is an anergic B cell that does not proliferate upon BCR signaling, is found in the spleen and lymph nodes, and has the phenotype surface IgM-positive, surface IgD-positive, CD21-positive, CD23-positive, and CD62L-positive" [PMID:12810111]
+synonym: "increased T3 stage B cell number" EXACT []
+synonym: "increased transitional three stage B lymphocyte number" EXACT []
+synonym: "increased transitional three stage B-cell number" EXACT []
+synonym: "increased transitional three stage B-lymphocyte number" EXACT []
+xref: CL:0000960
+is_a: MP:0008189 ! increased transitional stage B cell number
+is_a: MP:0009921 ! abnormal transitional stage T3 B cell morphology
+created_by: csmith
+creation_date: 2010-07-13T11:32:54Z
+
+[Term]
+id: MP:0010230
+name: absent transitional stage T3 B cells
+def: "absence of a type of a transitional stage B cell that expresses surface IgM and IgD, and CD62L; it is an anergic B cell that does not proliferate upon BCR signaling, is found in the spleen and lymph nodes, and has the phenotype surface IgM-positive, surface IgD-positive, CD21-positive, CD23-positive, and CD62L-positive" [PMID:12810111]
+synonym: "absent T3 stage B cells" EXACT []
+synonym: "absent transitional three stage B lymphocytes" EXACT []
+synonym: "absent transitional three stage B-lymphocytes" EXACT []
+synonym: "dabsent transitional three stage B-cells" EXACT []
+xref: CL:0000960
+is_a: MP:0010228 ! decreased transitional stage T3 B cell number
+created_by: csmith
+creation_date: 2010-07-13T11:33:30Z
+
+[Term]
+id: MP:0010231
+name: transverse fur striping
+alt_id: MP:0006360
+def: "presence of stripes of pigmented hair, usually black, of variable degree and location in the coat" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+synonym: "tabby coat" EXACT []
+synonym: "transverse coat striping" RELATED []
+synonym: "transverse fur markings" EXACT []
+is_a: MP:0000372 ! irregular coat pigmentation
+is_a: MP:0009659 ! striated fur
+created_by: csmith
+creation_date: 2010-07-15T03:17:55Z
+
+[Term]
+id: MP:0010232
+name: delayed skin pigmentation appearance
+def: "lag in the time that normal coloration of the skin color occurs in relation to control animals" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+is_a: MP:0002095 ! abnormal skin pigmentation
+created_by: csmith
+creation_date: 2010-07-15T04:01:57Z
+
+[Term]
+id: MP:0010233
+name: hairless tail
+def: "the tail is devoid of hair" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+synonym: "absent tail hair" EXACT []
+is_a: MP:0002111 ! abnormal tail morphology
+created_by: csmith
+creation_date: 2010-07-15T04:37:12Z
+
+[Term]
+id: MP:0010234
+name: abnormal vibrissa follicle morphology
+def: "any structural anomaly of one of the tubular invaginations of the epidermis enclosing the hair roots and from which grow the vibrissae located on the muzzle and face of many species" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+synonym: "abnormal contour hair follicle morphology" EXACT []
+synonym: "abnormal sinus hair follicle morphology" EXACT []
+synonym: "abnormal touch hair follicle morphology" EXACT []
+is_a: MP:0002098 ! abnormal vibrissa morphology
+created_by: csmith
+creation_date: 2010-07-15T04:39:00Z
+
+[Term]
+id: MP:0010235
+name: abnormal retina inner limiting membrane morphology
+def: "any structural anomaly of the row of fused Muller cell processes and astrocytes that separates the retinal nerve fiber layer from the vitreous" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal ILM morphology" EXACT []
+synonym: "abnormal internal limiting membrane morphology" EXACT []
+is_a: MP:0003727 ! abnormal retinal layer morphology
+created_by: csmith
+creation_date: 2010-07-16T10:38:04Z
+
+[Term]
+id: MP:0010236
+name: abnormal retina outer limiting membrane morphology
+def: "any structural anomaly of the row of jucntional complexes between the plasma membranes of rod segments and the Muller glia cells; this barrier separates the layer of inner and outer segments of the rods and cones from the outer nuclear layer and forms a blood-retina barrier" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal external limiting membrane morphology" RELATED []
+synonym: "abnormal OLM morphology" EXACT []
+is_a: MP:0003727 ! abnormal retinal layer morphology
+created_by: csmith
+creation_date: 2010-07-16T10:39:10Z
+
+[Term]
+id: MP:0010237
+name: abnormal skeletal muscle weight
+def: "any anomaly in the average skeletal muscle weight" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0004233 ! abnormal muscle weight
+is_a: MP:0009458 ! abnormal skeletal muscle size
+created_by: csmith
+creation_date: 2010-07-19T12:49:29Z
+
+[Term]
+id: MP:0010238
+name: increased skeletal muscle weight
+def: "greater than average skeletal muscle weight" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0003397 ! increased muscle weight
+is_a: MP:0003398 ! increased skeletal muscle size
+is_a: MP:0010237 ! abnormal skeletal muscle weight
+created_by: csmith
+creation_date: 2010-07-19T01:12:06Z
+
+[Term]
+id: MP:0010239
+name: decreased skeletal muscle weight
+def: "less than average skeletal muscle weight" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0004232 ! decreased muscle weight
+is_a: MP:0010237 ! abnormal skeletal muscle weight
+is_a: MP:0010240 ! decreased skeletal muscle size
+created_by: csmith
+creation_date: 2010-07-19T01:12:26Z
+
+[Term]
+id: MP:0010240
+name: decreased skeletal muscle size
+def: "less than average dimensions of one or more of the muscles of the skeleton" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
+is_a: MP:0004819 ! decreased skeletal muscle mass
+is_a: MP:0009458 ! abnormal skeletal muscle size
+created_by: csmith
+creation_date: 2010-07-19T01:20:35Z
+
+[Term]
+id: MP:0010241
+name: abnormal aortic arch development
+def: "anomaly in the process of forming the convex portion of the aorta between the ascending and descending parts of the aorta; including formation of the brachiocephalic trunk, the left common carotid artery, and the left subclavian artery; the brachiocephalic trunk further splits to form the right subclavian artery and the right common carotid artery" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "abnormal adult aortic arch development" RELATED []
+synonym: "abnormal arch of aorta development" EXACT []
+is_a: MP:0004113 ! abnormal aortic arch morphology
+created_by: csmith
+creation_date: 2010-07-19T03:04:01Z
+
+[Term]
+id: MP:0010242
+name: abnormal kidney copper level
+def: "an anomaly in the amount of copper present in kidney tissue" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+synonym: "abnormal renal copper level" EXACT []
+is_a: MP:0003952 ! abnormal copper level
+created_by: csmith
+creation_date: 2010-07-29T12:21:08Z
+
+[Term]
+id: MP:0010243
+name: increased kidney copper level
+def: "a greater accumulation of copper in the kidney tissue compared to controls" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+synonym: "increased renal copper level" EXACT []
+is_a: MP:0010242 ! abnormal kidney copper level
+created_by: csmith
+creation_date: 2010-07-29T12:27:15Z
+
+[Term]
+id: MP:0010244
+name: decreased kidney copper level
+def: "a reduced amount of copper in the kidney tissue compared to controls" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+synonym: "decreased renal copper level" EXACT []
+synonym: "reduced kidney copper level" EXACT []
+synonym: "reduced renal copper level" EXACT []
+is_a: MP:0010242 ! abnormal kidney copper level
+created_by: csmith
+creation_date: 2010-07-29T12:27:32Z
+
+[Term]
+id: MP:0010245
+name: abnormal spleen perifollicular zone morphology
+def: "any structural anomaly of the compartment located between the marginal zone and the red pulp harboring scattered B and T lymphocytes" [PMID:11485909, PMID:9415041]
+comment: Note that there is no consensus in the literature about whether the perifollicular zone (which does not exist in rodents) is part of the splenic red or white pulp. Notable differences in the structure of the spleen exist between humans and rodents. In this ontology, the marginal sinus (which doen not exist in human) has been included as part of the white pulp and may be the rodent functional equivalent of the human perifollicular zone.
+is_a: MP:0000689 ! abnormal spleen morphology
+created_by: csmith
+creation_date: 2010-07-29T01:22:05Z
+
+[Term]
+id: MP:0010246
+name: abnormal intestine copper level
+def: "an anomaly in the amount of copper present in the intestine" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+is_a: MP:0003952 ! abnormal copper level
+created_by: csmith
+creation_date: 2010-07-29T02:44:25Z
+
+[Term]
+id: MP:0010247
+name: increased intestine copper level
+def: "a greater accumulation of copper in intestinal tissue compared with controls" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+is_a: MP:0010246 ! abnormal intestine copper level
+created_by: csmith
+creation_date: 2010-07-29T02:45:01Z
+
+[Term]
+id: MP:0010248
+name: decreased intestine copper level
+def: "a reduced amount of copper in the intestinal tissue compared to controls" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+synonym: "reduced intestine copper level" EXACT []
+is_a: MP:0010246 ! abnormal intestine copper level
+created_by: csmith
+creation_date: 2010-07-29T02:45:26Z
+
+[Term]
+id: MP:0010249
+name: lactation failure
+def: "mammary glands do not secrete milk after parturition" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+synonym: "agalactia" EXACT []
+synonym: "agalactorrhea" EXACT []
+synonym: "agalactosis" EXACT []
+is_a: MP:0001882 ! abnormal lactation
+created_by: csmith
+creation_date: 2010-07-29T03:30:02Z
+
+[Term]
+id: MP:0010250
+name: absent thymus cortex
+def: "lacking the outer part of the thymus lobule which surrounds the medulla and is normally composed of closely packed lymphocytes" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+is_a: MP:0002371 ! abnormal thymus cortex morphology
+created_by: csmith
+creation_date: 2010-07-29T03:39:18Z
+
+[Term]
+id: MP:0010251
+name: subcapsular cataracts
+def: "a lens opacity localized beneath the anterior or posterior lens capsule" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", ISBN:978-0-8493-0864-2 "Smith R.S. et al (ed.) Systematic Evaluation of the Mouse Eye: Anatomy, Pathology, and Biomethods"]
+synonym: "subcapsular opacity" EXACT []
+is_a: MP:0001304 ! cataracts
+created_by: csmith
+creation_date: 2010-07-30T01:42:20Z
+
+[Term]
+id: MP:0010252
+name: anterior subcapsular cataracts
+def: "a lens opacity localized beneath the anterior lens capsule" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", ISBN:978-0-8493-0864-2 "Smith R.S. et al (ed.) Systematic Evaluation of the Mouse Eye: Anatomy, Pathology, and Biomethods"]
+synonym: "anterior subcapsular opacity" EXACT []
+is_a: MP:0010251 ! subcapsular cataracts
+created_by: csmith
+creation_date: 2010-07-30T01:42:40Z
+
+[Term]
+id: MP:0010253
+name: posterior subcapsular cataracts
+def: "a lens opacity localized beneath the posterior lens capsule" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", ISBN:978-0-8493-0864-2 "Smith R.S. et al (ed.) Systematic Evaluation of the Mouse Eye: Anatomy, Pathology, and Biomethods"]
+synonym: "posterior subcapsular opacity" EXACT []
+is_a: MP:0010251 ! subcapsular cataracts
+created_by: csmith
+creation_date: 2010-07-30T01:43:01Z
+
+[Term]
+id: MP:0010254
+name: nuclear cataracts
+def: "a lens opacity located in the dense, central part of the lens" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", ISBN:978-0-8493-0864-2 "Smith R.S. et al (ed.) Systematic Evaluation of the Mouse Eye: Anatomy, Pathology, and Biomethods"]
+synonym: "hard cataracts" EXACT []
+synonym: "nuclear opacity" EXACT []
+is_a: MP:0001304 ! cataracts
+created_by: csmith
+creation_date: 2010-07-30T01:43:19Z
+
+[Term]
+id: MP:0010255
+name: cortical cataracts
+def: "a lens opacity, frequently punctate, affecting the lens cortex in which spokes or wedges progressively extend from the outside of the lens towards the center" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", ISBN:978-0-8493-0864-2 "Smith R.S. et al (ed.) Systematic Evaluation of the Mouse Eye: Anatomy, Pathology, and Biomethods"]
+synonym: "cortical opacity" EXACT []
+synonym: "peripheral cataracts" EXACT []
+is_a: MP:0001304 ! cataracts
+created_by: csmith
+creation_date: 2010-07-30T01:43:33Z
+
+[Term]
+id: MP:0010256
+name: anterior cortical cataracts
+def: "a lens opacity, frequently punctate, affecting the anterior pole of the lens cortex in which spokes or wedges progressively extend from the outside of the lens towards the center" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", ISBN:978-0-8493-0864-2 "Smith R.S. et al (ed.) Systematic Evaluation of the Mouse Eye: Anatomy, Pathology, and Biomethods"]
+synonym: "anterior cortical opacity" EXACT []
+synonym: "anterior peripheral cataracts" EXACT []
+is_a: MP:0010255 ! cortical cataracts
+created_by: csmith
+creation_date: 2010-07-30T01:43:44Z
+
+[Term]
+id: MP:0010257
+name: posterior cortical cataracts
+def: "a lens opacity, frequently punctate, affecting the posterior pole of the lens cortex in which spokes or wedges progressively extend from the outside of the lens towards the center" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", ISBN:978-0-8493-0864-2 "Smith R.S. et al (ed.) Systematic Evaluation of the Mouse Eye: Anatomy, Pathology, and Biomethods"]
+synonym: "posterior cortical opacity" EXACT []
+synonym: "posterior peripheral cataracts" EXACT []
+is_a: MP:0010255 ! cortical cataracts
+created_by: csmith
+creation_date: 2010-07-30T01:44:09Z
+
+[Term]
+id: MP:0010258
+name: polar cataracts
+def: "a lens opacity, usually disk-shaped, that is limited to an area in the anterior or posterior pole of the lens capsular region" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", ISBN:978-0-8493-0864-2 "Smith R.S. et al (ed.) Systematic Evaluation of the Mouse Eye: Anatomy, Pathology, and Biomethods"]
+synonym: "polar opacity" EXACT []
+is_a: MP:0001304 ! cataracts
+created_by: csmith
+creation_date: 2010-07-30T01:44:36Z
+
+[Term]
+id: MP:0010259
+name: anterior polar cataracts
+def: "a lens opacity, usually disk-shaped, that is limited to an area in the anterior pole of the lens capsular region" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", ISBN:978-0-8493-0864-2 "Smith R.S. et al (ed.) Systematic Evaluation of the Mouse Eye: Anatomy, Pathology, and Biomethods"]
+synonym: "anterior polar opacity" EXACT []
+is_a: MP:0010258 ! polar cataracts
+created_by: csmith
+creation_date: 2010-07-30T01:44:47Z
+
+[Term]
+id: MP:0010260
+name: posterior polar cataracts
+def: "a lens opacity, usually disk-shaped, that is limited to an area in the posterior pole of the lens capsular region" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", ISBN:978-0-8493-0864-2 "Smith R.S. et al (ed.) Systematic Evaluation of the Mouse Eye: Anatomy, Pathology, and Biomethods"]
+synonym: "posterior polar opacity" EXACT []
+is_a: MP:0010258 ! polar cataracts
+created_by: csmith
+creation_date: 2010-07-30T01:45:00Z
+
+[Term]
+id: MP:0010261
+name: sutural cataracts
+def: "a lens opacity which follows the shape of anterior or posterior Y suture of the fetal lens and is not progressive; often more severe in males and is congenital, but usually does not affect vision" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", ISBN:978-0-8493-0864-2 "Smith R.S. et al (ed.) Systematic Evaluation of the Mouse Eye: Anatomy, Pathology, and Biomethods"]
+synonym: "sutural opacity" EXACT []
+synonym: "suture cataracts" EXACT []
+is_a: MP:0001304 ! cataracts
+created_by: csmith
+creation_date: 2010-07-30T01:45:29Z
+
+[Term]
+id: MP:0010262
+name: lamellar cataracts
+def: "a concentric lens opacity which is limited to layers of the cortex, affecting one lamella or zonule of an otherwise clear lens; usually congenital" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", ISBN:978-0-8493-0864-2 "Smith R.S. et al (ed.) Systematic Evaluation of the Mouse Eye: Anatomy, Pathology, and Biomethods"]
+synonym: "lamellar opacity" EXACT []
+synonym: "zonular cataracts" EXACT []
+is_a: MP:0001304 ! cataracts
+created_by: csmith
+creation_date: 2010-07-30T01:45:59Z
+
+[Term]
+id: MP:0010263
+name: total cataracts
+def: "a lens opacity which involves both nuclear and cortical regions, including all fibers of a lens; usually congenital" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", ISBN:978-0-8493-0864-2 "Smith R.S. et al (ed.) Systematic Evaluation of the Mouse Eye: Anatomy, Pathology, and Biomethods"]
+synonym: "complete cataracts" EXACT []
+synonym: "total lens opacity" EXACT []
+is_a: MP:0001304 ! cataracts
+created_by: csmith
+creation_date: 2010-07-30T01:46:30Z
+
+[Term]
+id: MP:0010264
+name: increased hepatoma incidence
+alt_id: MP:0002028
+alt_id: MP:0002889
+def: "greater than the expected number of malignant tumors composed of neoplastic liver cells in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "decreased resistance to hepatoma" EXACT []
+synonym: "increased malignant liver tumor incidence" EXACT []
+synonym: "increased susceptibility to hepatoma" EXACT []
+is_a: MP:0008019 ! increased liver tumor incidence
+created_by: csmith
+creation_date: 2010-08-03T10:36:22Z
+
+[Term]
+id: MP:0010265
+name: decreased hepatoma incidence
+alt_id: MP:0002890
+def: "less than the expected number of malignant tumors composed of neoplastic liver cells in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "decreased susceptibility to hepatoma" EXACT []
+synonym: "hepatoma resistance" EXACT []
+synonym: "increased resistance to hepatoma" EXACT []
+is_a: MP:0010266 ! decreased liver tumor incidence
+created_by: csmith
+creation_date: 2010-08-03T10:44:04Z
+
+[Term]
+id: MP:0010266
+name: decreased liver tumor incidence
+alt_id: MP:0005513
+def: "less than the expected number of neoplams in the liver, usually in the form of a distinct mass, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "decreased susceptibility to liver neoplasm" EXACT []
+synonym: "decreased susceptibility to liver tumor" EXACT []
+synonym: "increased resistance to liver neoplasm" EXACT []
+synonym: "increased resistance to liver tumor" EXACT []
+is_a: MP:0010282 ! decreased organ/body region tumor incidence
+created_by: csmith
+creation_date: 2010-08-03T10:47:13Z
+
+[Term]
+id: MP:0010267
+name: decreased lung tumor incidence
+alt_id: MP:0003640
+def: "less than the expected number of neoplams in the lung, usually in the form of a distinct mass, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "decreased susceptibility to lung neoplasm" EXACT []
+synonym: "increased resistance to lung neoplasm" EXACT []
+is_a: MP:0010282 ! decreased organ/body region tumor incidence
+created_by: csmith
+creation_date: 2010-08-03T12:16:39Z
+
+[Term]
+id: MP:0010268
+name: decreased lymphoma incidence
+alt_id: MP:0003000
+def: "less than the expected number of neoplasms derived from lymphoid tissue in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "decreased susceptibility to lymphoma" EXACT []
+synonym: "increased resistance to lymphoma" EXACT []
+is_a: MP:0010283 ! decreased classified tumor incidence
+created_by: csmith
+creation_date: 2010-08-03T12:24:28Z
+
+[Term]
+id: MP:0010269
+name: decreased mammary gland tumor incidence
+alt_id: MP:0005512
+def: "less than the expected number of neoplasms in the mammary gland, usually in the form of a distinct mass, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "decreased susceptibility to mammary neoplasm" EXACT []
+synonym: "decreased susceptibility to mammary tumor" EXACT []
+synonym: "increased resistance to mammary neoplasm" EXACT []
+synonym: "increased resistance to mammary tumor" EXACT []
+is_a: MP:0010282 ! decreased organ/body region tumor incidence
+created_by: csmith
+creation_date: 2010-08-03T12:33:31Z
+
+[Term]
+id: MP:0010270
+name: decreased stomach tumor incidence
+alt_id: MP:0003170
+def: "less than the expected number of neoplasms in the gastric tissue usually in the form of a distinct mass, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "decreased susceptibility to gastric tumor" EXACT []
+synonym: "decreased susceptibility to stomach tumor" EXACT []
+synonym: "increased resistance to gastric tumor" EXACT []
+synonym: "increased resistance to stomach tumor" EXACT []
+is_a: MP:0010282 ! decreased organ/body region tumor incidence
+created_by: csmith
+creation_date: 2010-08-03T12:37:15Z
+
+[Term]
+id: MP:0010271
+name: decreased tongue tumor incidence
+alt_id: MP:0005511
+def: "less than the expected number of neoplasms in the tongue tissue, usually in the form of a distinct mass, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "decreased susceptibility to tongue neoplasm" EXACT []
+synonym: "decreased susceptibility to tongue tumor" EXACT []
+synonym: "increased resistance to tongue neoplasm" EXACT []
+synonym: "increased resistance to tongue tumor" EXACT []
+is_a: MP:0010282 ! decreased organ/body region tumor incidence
+created_by: csmith
+creation_date: 2010-08-03T12:38:38Z
+
+[Term]
+id: MP:0010272
+name: increased tongue tumor incidence
+alt_id: MP:0005509
+def: "greater than the expected number of neoplasms in the tongue tissue, usually in the form of a distinct mass, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "tongue neoplasm" EXACT []
+is_a: MP:0003750 ! increased mouth tumor incidence
+created_by: csmith
+creation_date: 2010-08-03T12:39:51Z
+
+[Term]
+id: MP:0010273
+name: increased classified tumor incidence
+def: "greater than the expected number of tumors with a specific classification type in a given population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased tumor type incidence" EXACT []
+is_a: MP:0002020 ! increased tumor incidence
+created_by: csmith
+creation_date: 2010-08-03T02:32:43Z
+
+[Term]
+id: MP:0010274
+name: increased organ/body region tumor incidence
+def: "greater than the expected number of tumors originating in a specific body region or organ in a given population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0002020 ! increased tumor incidence
+created_by: csmith
+creation_date: 2010-08-03T02:33:47Z
+
+[Term]
+id: MP:0010275
+name: increased melanoma incidence
+def: "greater than the expected number of malignant neoplasms, derived from melanocytes and occuring in pigmented tissues, in a specific population in a given time period" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+is_a: MP:0002018 ! malignant tumors
+created_by: csmith
+creation_date: 2010-08-03T02:43:31Z
+
+[Term]
+id: MP:0010276
+name: increased intraocular melanoma incidence
+alt_id: MP:0006247
+def: "greater than the expected number of a dark-pigmented, usually malignant tumor arising from a melanocyte in the uvea of the eye, occurring in a specific population in a given time period" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "increased uvea melanoma incidence" RELATED []
+synonym: "increased uveal melanoma incidence" EXACT []
+is_a: MP:0010275 ! increased melanoma incidence
+is_a: MP:0010302 ! increased uvea tumor incidence
+created_by: csmith
+creation_date: 2010-08-03T02:46:07Z
+
+[Term]
+id: MP:0010277
+name: increased astrocytoma incidence
+def: "greater than the expected number of tumors that arise from astrocytes, large neuroglia cells of nervous tissue, occurring in a specific population in a given time period" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010278 ! increased glioma incidence
+created_by: csmith
+creation_date: 2010-08-03T03:06:34Z
+
+[Term]
+id: MP:0010278
+name: increased glioma incidence
+def: "greater than the expected number of tumors that arise from glial cells, non-neuronal cells of the nervous tissue, occurring in a specific population in a given time period" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010281 ! increased nervous system tumor incidence
+created_by: csmith
+creation_date: 2010-08-03T03:08:00Z
+
+[Term]
+id: MP:0010279
+name: increased gastrointestinal tumor incidence
+def: "greater than the expected number of tumors originating in the gastrointestinal system in a given population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased gastrointestinal tract neoplasia incidence" EXACT []
+is_a: MP:0010292 ! increased alimentary system tumor incidence
+created_by: csmith
+creation_date: 2010-08-03T03:18:01Z
+
+[Term]
+id: MP:0010280
+name: increased skeletal tumor incidence
+def: "greater than the expected number of neoplasms in the skeletal tissue, usually in the form of a distinct mass, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010274 ! increased organ/body region tumor incidence
+created_by: csmith
+creation_date: 2010-08-03T03:28:52Z
+
+[Term]
+id: MP:0010281
+name: increased nervous system tumor incidence
+def: "greater than the expected number of tumors originating in the nervous system in a given population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010274 ! increased organ/body region tumor incidence
+created_by: csmith
+creation_date: 2010-08-03T03:37:02Z
+
+[Term]
+id: MP:0010282
+name: decreased organ/body region tumor incidence
+def: "less than the expected number of tumors originating in a specific body region or organ in a given population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "reduced organ/body region tumor incidence" EXACT []
+is_a: MP:0002052 ! decreased tumor incidence
+created_by: csmith
+creation_date: 2010-08-03T03:40:31Z
+
+[Term]
+id: MP:0010283
+name: decreased classified tumor incidence
+def: "less than the expected number of tumors with a specific classification type in a given population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0002052 ! decreased tumor incidence
+created_by: csmith
+creation_date: 2010-08-03T03:42:26Z
+
+[Term]
+id: MP:0010284
+name: decreased plasmacytoma incidence
+def: "less han the expected number of neoplastic plasma cells in bone or in one of the extramedullary sites occurring in a specific population in a given time period" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "decreased plasma cell lymphoma incidence" EXACT []
+synonym: "increased resistance to plasmacytoma" EXACT []
+synonym: "plasmacytoma resistance" RELATED []
+synonym: "reduced plasmacytoma incidence" EXACT []
+is_a: MP:0010283 ! decreased classified tumor incidence
+created_by: csmith
+creation_date: 2010-08-03T03:47:13Z
+
+[Term]
+id: MP:0010285
+name: decreased skin tumor incidence
+def: "less than the expected number of neoplasms in the skin tissue usually in the form of a distinct mass, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010282 ! decreased organ/body region tumor incidence
+created_by: csmith
+creation_date: 2010-08-03T03:50:04Z
+
+[Term]
+id: MP:0010286
+name: increased plasmacytoma incidence
+alt_id: MP:0005233
+def: "greater than the expected number of neoplastic plasma cells in bone or in one of the extramedullary sites occurring in a specific population in a given time period" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased plasma cell lymphoma incidence" EXACT []
+synonym: "increased plasmacytoma susceptibility" EXACT []
+is_a: MP:0010273 ! increased classified tumor incidence
+created_by: csmith
+creation_date: 2010-08-03T04:09:30Z
+
+[Term]
+id: MP:0010287
+name: increased reproductive system tumor incidence
+def: "greater than the expected number of tumors originating in the reproductive system in a given population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010274 ! increased organ/body region tumor incidence
+created_by: csmith
+creation_date: 2010-08-03T04:37:41Z
+
+[Term]
+id: MP:0010288
+name: increased gland tumor incidence
+def: "greater than the expected number of tumors originating in a gland in a given population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010274 ! increased organ/body region tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T09:38:21Z
+
+[Term]
+id: MP:0010289
+name: increased urinary system tumor incidence
+def: "greater than the expected number of tumors originating in the urinary system in a given population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010274 ! increased organ/body region tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T09:41:22Z
+
+[Term]
+id: MP:0010290
+name: increased muscle tumor incidence
+def: "greater than the expected number of tumors originating in a gland in a given population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010274 ! increased organ/body region tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T09:50:15Z
+
+[Term]
+id: MP:0010291
+name: increased cardiovascular system tumor incidence
+def: "greater than the expected number of tumors originating in the cardiovascular system in a given population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010274 ! increased organ/body region tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T09:55:03Z
+
+[Term]
+id: MP:0010292
+name: increased alimentary system tumor incidence
+def: "greater than the expected number of tumors originating in the alimentary system in a given population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010274 ! increased organ/body region tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T09:56:49Z
+
+[Term]
+id: MP:0010293
+name: increased integument system tumor incidence
+def: "greater than the expected number of tumors originating in the integument system in a given population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased integument tumor incidence" EXACT []
+synonym: "increased integumentary system tumor incidence" EXACT []
+is_a: MP:0010274 ! increased organ/body region tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T11:22:45Z
+
+[Term]
+id: MP:0010294
+name: increased kidney tumor incidence
+def: "greater than the expected number of tumors originating in the kidney in a given population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased renal tumor incidence" EXACT []
+is_a: MP:0010289 ! increased urinary system tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T11:26:45Z
+
+[Term]
+id: MP:0010295
+name: increased eye tumor incidence
+alt_id: MP:0006178
+def: "greater than the expected number of tumors originating in the eye in a given population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010274 ! increased organ/body region tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T01:49:09Z
+
+[Term]
+id: MP:0010296
+name: increased hemolymphoid system tumor incidence
+def: "greater than the expected number of tumors originating in the hemolymphoid system in a given population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased hemolymphoid tumor incidence" EXACT []
+is_a: MP:0010274 ! increased organ/body region tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T01:52:10Z
+
+[Term]
+id: MP:0010297
+name: increased hepatobiliary system tumor incidence
+is_a: MP:0010274 ! increased organ/body region tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T01:54:12Z
+
+[Term]
+id: MP:0010298
+name: increased respiratory system tumor incidence
+def: "greater than the expected number of tumors originating in the urinary system in a given population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010274 ! increased organ/body region tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T02:00:11Z
+
+[Term]
+id: MP:0010299
+name: increased mammary gland tumor incidence
+alt_id: MP:0006318
+def: "greater than the expected number of neoplasms in the mammary gland, usually in the form of a distinct mass, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased susceptibility to mammary neoplasm" EXACT []
+is_a: MP:0010293 ! increased integument system tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T02:12:02Z
+
+[Term]
+id: MP:0010300
+name: increased skin tumor incidence
+alt_id: MP:0005276
+def: "greater than the expected number of neoplasms in the skin tissue usually in the form of a distinct mass, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0001191 ! abnormal skin condition
+is_a: MP:0010293 ! increased integument system tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T02:14:15Z
+
+[Term]
+id: MP:0010301
+name: increased stomach tumor incidence
+alt_id: MP:0006079
+def: "greater than the expected number of neoplasms in the gastric tissue usually in the form of a distinct mass, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased gastric tumor incidence" EXACT []
+synonym: "increased susceptibility to gastric tumor" EXACT []
+is_a: MP:0010279 ! increased gastrointestinal tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T02:16:45Z
+
+[Term]
+id: MP:0010302
+name: increased uvea tumor incidence
+alt_id: MP:0006246
+def: "greater than the expected number of neoplasms in the uvea, usually in the form of a distinct mass, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased uveal tumor incidence" EXACT []
+synonym: "tumor of uvea" EXACT []
+is_a: MP:0010295 ! increased eye tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T02:21:01Z
+
+[Term]
+id: MP:0010303
+name: increased retina tumor incidence
+alt_id: MP:0006181
+def: "greater than the expected number of neoplasms in the retina, usually in the form of a distinct mass, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased retinal tumor incidence" EXACT []
+is_a: MP:0010295 ! increased eye tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T02:22:59Z
+
+[Term]
+id: MP:0010304
+name: increased choroid tumor incidence
+alt_id: MP:0006179
+def: "greater than the expected number of neoplasms in the choroid of the eye, usually in the form of a distinct mass, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010302 ! increased uvea tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T02:48:07Z
+
+[Term]
+id: MP:0010305
+name: increased iris tumor incidence
+alt_id: MP:0006231
+def: "greater than the expected number of neoplasms in the iris of the eye, usually in the form of a distinct mass, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010302 ! increased uvea tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T02:48:26Z
+
+[Term]
+id: MP:0010306
+name: increased hamartoma incidence
+alt_id: MP:0006381
+def: "greater than the expected number of benign focal malformations in a specific population in a given time period; results from faulty development of an organ, and is composed of an abnormal mixture of tissue elements, or an abnormal proportion of a single element normally present at that site" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010273 ! increased classified tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T03:07:48Z
+
+[Term]
+id: MP:0010307
+name: abnormal tumor latency
+def: "anomaly in the expected time of onset of tumor occurrence" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0002166 ! altered tumor susceptibility
+created_by: csmith
+creation_date: 2010-08-04T03:22:09Z
+
+[Term]
+id: MP:0010308
+name: decreased tumor latency
+def: "earlier onset of tumor occurrence than expected" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "accelerated tumor appearance" EXACT []
+is_a: MP:0010307 ! abnormal tumor latency
+created_by: csmith
+creation_date: 2010-08-04T03:31:51Z
+
+[Term]
+id: MP:0010309
+name: increased mesothelioma incidence
+def: "greater than the expected number of neoplasms derived from the lining cells of the pleura and peritoneum, in a specific population in a given time period; is composed of spindle cells or fibrous tissue which may enclose glandlike spaces lined by cuboidal cells" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+is_a: MP:0010273 ! increased classified tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T03:43:38Z
+
+[Term]
+id: MP:0010310
+name: increased Schwannoma incidence
+def: "greater than the expected number of benign, encapsulated nerve sheath tumors composed of Schwann cells, in a specific population in a given time period; usually associated with a peripheral or cranial nerve" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "increased neurilemoma incidence" EXACT []
+synonym: "increased neuroschwannoma incidence" EXACT []
+synonym: "increased Schwann cell tumor incidence" EXACT []
+is_a: MP:0010281 ! increased nervous system tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T03:48:28Z
+
+[Term]
+id: MP:0010311
+name: increased meningioma incidence
+def: "greater than the expected number of encapsulated neoplasms derived from the meninges, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+comment: Meningiomas may be malignant or benign.
+is_a: MP:0010281 ! increased nervous system tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T03:55:34Z
+
+[Term]
+id: MP:0010312
+name: increased oligodendroglioma incidence
+def: "greater than the expected number of encapsulated neoplasms derived from oligodendrocytes, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010278 ! increased glioma incidence
+created_by: csmith
+creation_date: 2010-08-04T03:59:02Z
+
+[Term]
+id: MP:0010313
+name: increased osteoma incidence
+def: "greater than the expected number of benign neoplasms derived from lamellar bone, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010280 ! increased skeletal tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T04:06:58Z
+
+[Term]
+id: MP:0010314
+name: increased neurofibroma incidence
+def: "greater than the expected number of benign, encapsulated nerve sheath tumors composed of Schwann cells, in a specific population in a given time period; proliferation is disordered and includes portions of nerve fibers" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased fibroneuroma incidence" EXACT []
+is_a: MP:0003580 ! fibroma
+is_a: MP:0010281 ! increased nervous system tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T04:09:33Z
+
+[Term]
+id: MP:0010315
+name: increased cholangiocarcinoma incidence
+def: "greater than the expected number of malignant adenocarcimomas arising in the intrahepatic bile duct epithelium, in a specific population in a given time period" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0002038 ! carcinoma
+is_a: MP:0010297 ! increased hepatobiliary system tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T04:15:41Z
+
+[Term]
+id: MP:0010316
+name: increased thyroid tumor incidence
+def: "greater than the expected number of neoplams in the thyroid occurring in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010288 ! increased gland tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T04:45:38Z
+
+[Term]
+id: MP:0010317
+name: increased parotid gland tumor incidence
+def: "greater than the expected number of neoplams in the parotid gland occurring in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010318 ! increased salivary gland tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T04:48:31Z
+
+[Term]
+id: MP:0010318
+name: increased salivary gland tumor incidence
+def: "greater than the expected number of neoplams in the salivary gland occurring in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0003750 ! increased mouth tumor incidence
+is_a: MP:0010288 ! increased gland tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T04:49:44Z
+
+[Term]
+id: MP:0010319
+name: increased submandibular gland tumor incidence
+def: "greater than the expected number of neoplams in the submandibular gland occurring in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased submaxillary gland tumor incidence" EXACT []
+is_a: MP:0010318 ! increased salivary gland tumor incidence
+created_by: csmith
+creation_date: 2010-08-04T04:50:30Z
+
+[Term]
+id: MP:0010320
+name: increased pituitary gland tumor incidence
+def: "greater than the expected number of neoplams in the pituitary gland occurring in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010281 ! increased nervous system tumor incidence
+is_a: MP:0010288 ! increased gland tumor incidence
+created_by: csmith
+creation_date: 2010-08-09T11:09:33Z
+
+[Term]
+id: MP:0010321
+name: increased parathyroid gland tumor incidence
+def: "greater than the expected number of neoplams in the parathyroid gland occurring in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010288 ! increased gland tumor incidence
+created_by: csmith
+creation_date: 2010-08-09T11:53:58Z
+
+[Term]
+id: MP:0010322
+name: increased cutaneous melanoma incidence
+def: "greater than the expected number of a dark-pigmented, usually malignant tumor arising from a melanocyte in the skin, occurring in a specific population in a given time period" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased skin melanoma incidence" EXACT []
+is_a: MP:0010275 ! increased melanoma incidence
+is_a: MP:0010300 ! increased skin tumor incidence
+created_by: csmith
+creation_date: 2010-08-09T12:11:40Z
+
+[Term]
+id: MP:0010323
+name: retropulsion
+alt_id: MP:0005420
+def: "a tendency to step or walk backwards" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "backward walking" EXACT []
+synonym: "walking backwards" EXACT []
+is_a: MP:0003313 ! abnormal locomotor activation
+created_by: csmith
+creation_date: 2010-08-09T03:38:51Z
+
+[Term]
+id: MP:0010324
+name: abnormal malleus processus brevis morphology
+def: "any structural anomaly of the projection extending from the base of the manubrium of the malleus which contacts the upper part of the tympanic membrane where the tympanic cavity makes a deep pocket (epitympanic pocket) surrounding the cartilaginous nodule" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", PMID:12701100]
+synonym: "abnormal malleal processus brevis morphology" EXACT []
+is_a: MP:0000029 ! abnormal malleus morphology
+created_by: csmith
+creation_date: 2010-08-13T12:17:58Z
+
+[Term]
+id: MP:0010325
+name: abnormal malleus head morphology
+def: "any structural anomaly of the rounded portion of the malleus articulating with the body of the incus" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal caput mallei morphology" EXACT []
+synonym: "abnormal head of malleus morphology" EXACT []
+is_a: MP:0000029 ! abnormal malleus morphology
+created_by: csmith
+creation_date: 2010-08-13T12:21:18Z
+
+[Term]
+id: MP:0010326
+name: malleus hypoplasia
+def: "underdevelopment or reduced size, usually due to a reduced number of cells, of the largest of the three auditory ossicles, which resembles a club or hammer" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "malleal hypoplasia" EXACT []
+is_a: MP:0008372 ! small malleus
+created_by: csmith
+creation_date: 2010-08-13T01:10:43Z
+
+[Term]
+id: MP:0010327
+name: abnormal malleus neck morphology
+def: "any structural anomaly of the narrow contracted section of the malleus located between the head and the manubrium" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal collum mallei morphology" EXACT []
+synonym: "abnormal malleal neck morphology" EXACT []
+synonym: "abnormal neck of malleus morphology" EXACT []
+is_a: MP:0000029 ! abnormal malleus morphology
+created_by: csmith
+creation_date: 2010-08-13T01:12:28Z
+
+[Term]
+id: MP:0010328
+name: thin malleus neck
+def: "smaller diameter of the narrow contracted section of the malleus located between the head and the manubrium" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "thin collum mallei" EXACT []
+synonym: "thin malleal neck" EXACT []
+synonym: "thin neck of malleus" EXACT []
+is_a: MP:0010327 ! abnormal malleus neck morphology
+created_by: csmith
+creation_date: 2010-08-13T01:19:19Z
+
+[Term]
+id: MP:0010329
+name: abnormal lipoprotein level
+def: "any anomaly in the concentrations of any complex or compound containing both lipid and protein, are important components of biological membranes and myelin, and participate in lipid transport" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+is_a: MP:0001764 ! abnormal homeostasis
+created_by: csmith
+creation_date: 2010-08-13T01:40:14Z
+
+[Term]
+id: MP:0010330
+name: abnormal circulating lipoprotein level
+def: "any anomaly in the concentration in the blood of any complex or compound containing both lipid and protein, are important components of biological membranes and myelin, and participate in lipid transport" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+is_a: MP:0009642 ! abnormal blood homeostasis
+is_a: MP:0010329 ! abnormal lipoprotein level
+created_by: csmith
+creation_date: 2010-08-13T01:40:33Z
+
+[Term]
+id: MP:0010331
+name: abnormal apolipoprotein level
+def: "anomaly in the amount of the a protein that is frequently a component of a lipoprotein complex" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+is_a: MP:0008469 ! abnormal protein level
+created_by: csmith
+creation_date: 2010-08-13T01:41:00Z
+
+[Term]
+id: MP:0010332
+name: abnormal circulating apolipoprotein level
+def: "anomaly in the amount in the blood of a protein that is frequently a component of a lipoprotein complex" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+is_a: MP:0005416 ! abnormal circulating protein level
+is_a: MP:0010331 ! abnormal apolipoprotein level
+created_by: csmith
+creation_date: 2010-08-13T01:41:17Z
+
+[Term]
+id: MP:0010333
+name: abnormal circulating apolipoprotein E level
+def: "anomaly in the amount in the blood of a protein that is frequently a component of a VLDL, HDL, and chylomicron complexes, and functions in cholesterol transport" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "abnormal circulating ApoE level" EXACT []
+synonym: "abnormal serum ApoE level" NARROW []
+is_a: MP:0010332 ! abnormal circulating apolipoprotein level
+created_by: csmith
+creation_date: 2010-08-13T02:39:42Z
+
+[Term]
+id: MP:0010334
+name: pleural effusion
+def: "accumulation of excess fluid in the pleural cavity" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "hydrothorax" EXACT []
+is_a: MP:0001784 ! abnormal fluid regulation
+created_by: csmith
+creation_date: 2010-08-13T03:49:42Z
+
+[Term]
+id: MP:0010335
+name: fused first branchial arch
+def: "the first arch fails to fully divide along the midline" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
+synonym: "fused first pharyngeal arch" EXACT []
+is_a: MP:0006337 ! abnormal first branchial arch morphology
+created_by: csmith
+creation_date: 2010-08-13T03:56:00Z
+
+[Term]
+id: MP:0010336
+name: increased acute lymphoblastic leukemia incidence
+synonym: "increased ALL incidence" EXACT []
+is_a: MP:0002026 ! leukemia
+created_by: csmith
+creation_date: 2010-08-13T04:20:14Z
+
+[Term]
+id: MP:0010337
+name: increased chronic lymphocytic leukemia incidence
+synonym: "increased CLL incidence" EXACT []
+is_a: MP:0002026 ! leukemia
+created_by: csmith
+creation_date: 2010-08-13T04:22:38Z
+
+[Term]
+id: MP:0010338
+name: increased desmoid tumor incidence
+def: "greater than the expected number of a monoclonal, fibroblastic proliferation arising in musculoaponeurotic structures in a specific population in a given time period; this connective tissue hyperplasia infiltrates locally, recurs frequently after resection but does not metastasize; this tumor may occur at the site of any fascia, but in particular in muscle" [PMID:18023087]
+synonym: "aggressive fibromatosis" EXACT []
+synonym: "musculo-aponeurotic fibromatosis" EXACT []
+is_a: MP:0003580 ! fibroma
+created_by: csmith
+creation_date: 2010-08-16T01:30:51Z
+
+[Term]
+id: MP:0010339
+name: increased cardiac fibroma incidence
+def: "greater than the expected number of a benign tumor of fibrous or fully developed connective tissue in the cardiac tissue, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0003580 ! fibroma
+is_a: MP:0010291 ! increased cardiovascular system tumor incidence
+created_by: csmith
+creation_date: 2010-08-16T01:44:36Z
+
+[Term]
+id: MP:0010340
+name: increased lung fibroma incidence
+def: "greater than the expected number of a benign tumor of fibrous or fully developed connective tissue in the lung, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0003580 ! fibroma
+is_a: MP:0008014 ! increased lung tumor incidence
+created_by: csmith
+creation_date: 2010-08-16T01:44:58Z
+
+[Term]
+id: MP:0010341
+name: increased mammary gland fibroma incidence
+def: "greater than the expected number of a benign tumor of fibrous or fully developed connective tissue in the mammary gland, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0003580 ! fibroma
+is_a: MP:0010299 ! increased mammary gland tumor incidence
+created_by: csmith
+creation_date: 2010-08-16T01:45:21Z
+
+[Term]
+id: MP:0010342
+name: increased facial angiofibroma incidence
+def: "greater than the expected number of a benign tumor of fibrous or fully developed connective tissue on the face, in a specific population in a given time period; appear as red or yellow papules containing dilated vascular channels" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased adenoma sebaceum incidence" EXACT []
+is_a: MP:0003580 ! fibroma
+is_a: MP:0008018 ! increased facial tumor incidence
+created_by: csmith
+creation_date: 2010-08-16T01:45:42Z
+
+[Term]
+id: MP:0010343
+name: increased lipoma incidence
+def: "greater than the expected number of a benign neoplasia derived from lipoblasts or lipocytes of white or brown fat, occurring in a specific population in a given time period" [MPATH:417]
+is_a: MP:0010273 ! increased classified tumor incidence
+created_by: csmith
+creation_date: 2010-08-16T03:15:31Z
+
+[Term]
+id: MP:0010344
+name: increased hibernoma incidence
+def: "greater than the expected number of a benign neoplasm derived from brown fat occurring in a specific population in a given time period" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased brown adipose tissue tumor incidence" EXACT []
+is_a: MP:0010343 ! increased lipoma incidence
+created_by: csmith
+creation_date: 2010-08-16T03:21:08Z
+
+[Term]
+id: MP:0010345
+name: increased thyroid C-cell carcinoma incidence
+def: "greater than the expected number of a malignant neoplasm derived from the calcitonin producing C-cells of the thyroid gland, occurring in a specific population in a given time period" [MPATH:308]
+synonym: " increased C cell thyroid carcinoma incidence" EXACT []
+synonym: " increased C-cell thyroid carcinoma incidence" EXACT []
+synonym: "increased thyroid C cell carcinoma incidence" EXACT []
+synonym: "increased thyroid medullary carcinoma incidence" RELATED []
+synonym: "increased thyroid parafollicular carcinoma incidence" EXACT []
+synonym: "increased thyroid parafollicular cell carcinoma incidence" EXACT []
+is_a: MP:0010346 ! increased thyroid carcinioma incidence
+created_by: csmith
+creation_date: 2010-08-16T03:27:47Z
+
+[Term]
+id: MP:0010346
+name: increased thyroid carcinioma incidence
+def: "greater than the expected number of a malignant epithelial neoplasms of the thyroid gland, occurring in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0002038 ! carcinoma
+is_a: MP:0010316 ! increased thyroid tumor incidence
+created_by: csmith
+creation_date: 2010-08-16T03:39:28Z
+
+[Term]
+id: MP:0010347
+name: osseous metaplasia
+def: "the formation of mature bone elements in the stroma of a neoplasm" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0003448 ! altered tumor morphology
+created_by: csmith
+creation_date: 2010-08-16T03:44:14Z
+
+[Term]
+id: MP:0010348
+name: increased pancreatic islet cell carcinoma incidence
+def: "greater than the expected number of malignant neoplasms in the pancreatic islet cells, occurring in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0002038 ! carcinoma
+is_a: MP:0009153 ! pancreas tumor
+created_by: csmith
+creation_date: 2010-08-16T03:52:50Z
+
+[Term]
+id: MP:0010349
+name: increased teratocarcinoma incidence
+def: "greater than the expected number of a mixed germ cell neoplasm contaning elements of embryonal carcinoma and teratoma, occurring in a specific population in a given time period" [MPATH:321]
+is_a: MP:0002038 ! carcinoma
+is_a: MP:0002627 ! teratoma
+created_by: csmith
+creation_date: 2010-08-16T04:17:08Z
+
+[Term]
+id: MP:0010350
+name: increased pituitary adenohypophysis tumor incidence
+def: "greater than the expected number of neoplasms in the anterior part of the pituitary that secretes a variety of hormones, occurring in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased pituitary anterior lobe tumor incidence" EXACT []
+is_a: MP:0010320 ! increased pituitary gland tumor incidence
+created_by: csmith
+creation_date: 2010-08-16T04:30:36Z
+
+[Term]
+id: MP:0010351
+name: increased pituitary melanotroph tumor incidence
+def: "greater than the expected number of neoplasms derived from the cells of intermediate pituitary that produce melanocyte stimulating hormone and other peptides from the post-translational processing of pro-opiomelanocortin (POMC)" [CL:0000440, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased pituitary intermediate lobe tumor incidence" RELATED []
+is_a: MP:0010320 ! increased pituitary gland tumor incidence
+created_by: csmith
+creation_date: 2010-08-16T04:31:02Z
+
+[Term]
+id: MP:0010352
+name: gastrointestinal tract polyps
+def: "abnormal tissue masses that protrude into the lumen of the gastrointestinal tract and are tethered to the wall of the gastrointestinal tract" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0000462 ! abnormal digestive system morphology
+created_by: csmith
+creation_date: 2010-08-16T04:42:57Z
+
+[Term]
+id: MP:0010353
+name: increased odontoma incidence
+def: "greater than the expected number of a hamartomatous odontogenic tumor composed of enamel, dentin, cementum, and pulp tissue that may or may not be arranged in the form of a tooth,occurring in a specific population in a given time period" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+is_a: MP:0010273 ! increased classified tumor incidence
+created_by: csmith
+creation_date: 2010-08-16T04:46:28Z
+
+[Term]
+id: MP:0010354
+name: increased odontosarcoma incidence
+def: "greater than the expected number of an a gnathic malignant connective tissue tumor in which the epithelial component is benign and the proliferative mesenchymal component is malignant, occurring in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", PMID:10587276]
+synonym: "increased ameloblastic fibro-odontosarcoma incidence" EXACT []
+synonym: "increased ameloblastic odontosarcoma incidence" EXACT []
+synonym: "increased odontogenic sarcoma incidence" EXACT []
+is_a: MP:0002032 ! sarcoma
+is_a: MP:0010353 ! increased odontoma incidence
+created_by: csmith
+creation_date: 2010-08-16T04:50:24Z
+
+[Term]
+id: MP:0010355
+name: abnormal first branchial arch artery morphology
+def: "any structural anomaly of the vessels formed within the first pair of branchial arches in embryogenesis" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal first aortic arch morphology" EXACT []
+synonym: "abnormal first pharyngeal arch artery morphology" EXACT []
+is_a: MP:0002672 ! abnormal branchial arch artery morphology
+is_a: MP:0006337 ! abnormal first branchial arch morphology
+created_by: csmith
+creation_date: 2010-08-17T11:54:12Z
+
+[Term]
+id: MP:0010356
+name: abnormal second branchial arch artery morphology
+def: "any structural anomaly of the vessels formed within the second pair of branchial arches in embryogenesis" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal second aortic arch morphology" EXACT []
+synonym: "abnormal second pharyngeal arch artery morphology" EXACT []
+is_a: MP:0002672 ! abnormal branchial arch artery morphology
+is_a: MP:0006338 ! abnormal second branchial arch morphology
+created_by: csmith
+creation_date: 2010-08-17T11:54:12Z
+
+[Term]
+id: MP:0010357
+name: increased prostate gland tumor incidence
+alt_id: MP:0003831
+def: "greater than the expected number of neoplams in the prostate gland occurring in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "prostate tumor" EXACT []
+is_a: MP:0010287 ! increased reproductive system tumor incidence
+is_a: MP:0010288 ! increased gland tumor incidence
+created_by: csmith
+creation_date: 2010-08-17T12:47:29Z
 
 [Typedef]
 id: part_of
