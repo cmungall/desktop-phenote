@@ -164,3 +164,4 @@ just like other options (name, synonym, etc.).
 - If a field has a description (desc) defined in the configuration, it will now
 pop up  as a tooltip if you hover your mouse over the field name in the
 Annotation Editor.
+- Better notification about fatal errors (a popup error report appears).
