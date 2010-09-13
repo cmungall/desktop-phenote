@@ -1,0 +1,242 @@
+format-version: 1.0
+date: 09:13:2010 09:30
+saved-by: nlharris
+default-namespace: DECIPHER
+remark: Used in place of OMIM for annotating some diseases.
+remark: Extracted by Nomi from Prioritized DECIPHER_for_Annotation.csv, Revision 3629, 13 Sep 2010
+
+[Term]
+id: DECIPHER:01
+name: Wolf-Hirschhorn Syndrome
+
+[Term]
+id: DECIPHER:02
+name: Cri du Chat Syndrome (5p deletion)
+
+[Term]
+id: DECIPHER:03
+name: Williams-Beuren Syndrome (WBS)
+
+[Term]
+id: DECIPHER:04
+name: Angelman syndrome (Type 1)
+
+[Term]
+id: DECIPHER:05
+name: 
+
+[Term]
+id: DECIPHER:06
+name: 
+
+[Term]
+id: DECIPHER:07
+name: Rubinstein-Taybi Syndrome
+
+[Term]
+id: DECIPHER:08
+name: Smith-Magenis Syndrome
+
+[Term]
+id: DECIPHER:09
+name: 
+
+[Term]
+id: DECIPHER:10
+name: 
+
+[Term]
+id: DECIPHER:11
+name: 
+
+[Term]
+id: DECIPHER:12
+name: 
+
+[Term]
+id: DECIPHER:13
+name: 
+
+[Term]
+id: DECIPHER:14
+name: Prader-Willi syndrome (Type 1)
+
+[Term]
+id: DECIPHER:15
+name: NF1-microdeletion syndrome
+
+[Term]
+id: DECIPHER:16
+name: 22q11 deletion syndrome (Velocardiofacial / DiGeorge syndrome)
+
+[Term]
+id: DECIPHER:17
+name: Sotos syndrome
+
+[Term]
+id: DECIPHER:18
+name: 1p36 microdeletion syndrome
+
+[Term]
+id: DECIPHER:19
+name: Potocki-Lupski syndrome (17p11.2 duplication syndrome)
+
+[Term]
+id: DECIPHER:20
+name: 22q13 deletion syndrome (Phelan-Mcdermid syndrome)
+
+[Term]
+id: DECIPHER:21
+name: Miller-Dieker syndrome (MDS)
+
+[Term]
+id: DECIPHER:22
+name: 
+
+[Term]
+id: DECIPHER:23
+name: AZFa
+
+[Term]
+id: DECIPHER:24
+name: AZFc
+
+[Term]
+id: DECIPHER:25
+name: AZFb
+
+[Term]
+id: DECIPHER:26
+name: AZFb+AZFc
+
+[Term]
+id: DECIPHER:27
+name: Steroid sulphatase deficiency (STS)
+
+[Term]
+id: DECIPHER:28
+name: 
+
+[Term]
+id: DECIPHER:29
+name: Charcot-Marie-Tooth syndrome type 1A (CMT1A)
+
+[Term]
+id: DECIPHER:30
+name: 
+
+[Term]
+id: DECIPHER:31
+name: Hereditary Liability to Pressure Palsies (HNPP)
+
+[Term]
+id: DECIPHER:32
+name: 22q11 duplication syndrome
+
+[Term]
+id: DECIPHER:33
+name: 
+
+[Term]
+id: DECIPHER:34
+name: Potocki-Shaffer syndrome
+
+[Term]
+id: DECIPHER:35
+name: WAGR 11p13 deletion syndrome
+
+[Term]
+id: DECIPHER:36
+name: 
+
+[Term]
+id: DECIPHER:37
+name: 3q29 microdeletion syndrome
+
+[Term]
+id: DECIPHER:38
+name: Pelizaeus-Merzbacher disease
+
+[Term]
+id: DECIPHER:39
+name: 8p23.1 deletion syndrome
+
+[Term]
+id: DECIPHER:40
+name: 
+
+[Term]
+id: DECIPHER:41
+name: 
+
+[Term]
+id: DECIPHER:42
+name: Cat-Eye Syndrome (Type I)
+
+[Term]
+id: DECIPHER:43
+name: 7q11.23 duplication syndrome
+
+[Term]
+id: DECIPHER:44
+name: 2q37 monosomy
+
+[Term]
+id: DECIPHER:45
+name: Xq28 (MECP2) duplication
+
+[Term]
+id: DECIPHER:46
+name: Split hand/foot malformation 1 (SHFM1)
+
+[Term]
+id: DECIPHER:47
+name: RCAD (renal cysts and diabetes)
+
+[Term]
+id: DECIPHER:48
+name: Early-onset Alzheimer disease with cerebral amyloid angiopathy
+
+[Term]
+id: DECIPHER:49
+name: Familial Adenomatous Polyposis
+
+[Term]
+id: DECIPHER:50
+name: 
+
+[Term]
+id: DECIPHER:51
+name: 2q33.1 deletion syndrome
+
+[Term]
+id: DECIPHER:52
+name: 9q subtelomeric deletion syndrome
+
+[Term]
+id: DECIPHER:53
+name: Prader-Willi Syndrome (Type 2)
+
+[Term]
+id: DECIPHER:54
+name: Angelman syndrome (Type 2)
+
+[Term]
+id: DECIPHER:55
+name: 
+
+[Term]
+id: DECIPHER:56
+name: 
+
+[Term]
+id: DECIPHER:57
+name: 17q21.3 recurrent microdeletion syndrome
+
+[Term]
+id: DECIPHER:58
+name: Leri-Weill dyschondrostosis (LWD) - SHOX deletion
+
+[Term]
+id: DECIPHER:59
+name: Adult-onset autosomal dominant leukodystrophy (ADLD)
