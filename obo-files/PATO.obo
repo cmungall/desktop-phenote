@@ -1,15 +1,15 @@
 format-version: 1.2
-date: 16:08:2010 16:28
+date: 09:09:2010 19:58
 saved-by: george
 auto-generated-by: OBO-Edit 2.0
 subsetdef: abnormal_slim "Abnormal/normal slim"
 subsetdef: absent_slim "Absent/present slim"
 subsetdef: attribute_slim "Attribute slim"
 subsetdef: cell_quality "cell_quality"
+subsetdef: disposition_slim "Disposition slim"
 subsetdef: relational_slim "Relational slim: types of quality that require an additional entity in order to exist"
 subsetdef: value_slim "Value slim"
 default-namespace: quality
-namespace-id-rule: * PATO:$sequence(7,0,9999999)$
 
 [Term]
 id: PATO:0000000
@@ -495,9 +495,11 @@ id: PATO:0000077
 name: response to
 def: "A quality of related physical entities inhering in a bearer by virtue of the bearer's reaction to a stimulus or an agent." [PATOC:GVG]
 subset: attribute_slim
+subset: disposition_slim
 subset: relational_slim
 synonym: "responsivity" RELATED []
 is_a: PATO:0002079 ! relational physical quality
+! relationship: realised_by GO:0050896
 
 [Term]
 id: PATO:0000078
@@ -790,7 +792,7 @@ is_obsolete: true
 id: PATO:0000133
 name: angular placement
 alt_id: PATO:0000137
-def: "A relational spatial quality inhering in a bearer by virtue of the bearer's placement which is defined by the angle between two axes, or an axis and another object." [PATOC:MAH]
+def: "A relational spatial quality inhering in a bearer by virtue of the bearer's placement which is defined by the angle between the bearer and an axis, or the angle between the bearer and another object." [PATOC:JE]
 subset: attribute_slim
 subset: relational_slim
 synonym: "amount of rotation" RELATED []
@@ -798,7 +800,7 @@ synonym: "angle" RELATED []
 synonym: "angular magnitude" RELATED []
 synonym: "orientation" EXACT []
 synonym: "plane angle" RELATED []
-is_a: PATO:0002168 ! displaced to
+is_a: PATO:0001631 ! relational spatial quality
 
 [Term]
 id: PATO:0000134
@@ -988,7 +990,7 @@ id: PATO:0000169
 name: viability
 def: "An organismal quality inhering in a bearer or a population by virtue of the bearer's ability or inability to survive and develop normally or the number of surviving individuals in a given population." [PATOC:GVG]
 subset: attribute_slim
-is_a: PATO:0001995 ! organismal quality
+is_a: PATO:0002003 ! population quality
 
 [Term]
 id: PATO:0000170
@@ -3152,6 +3154,7 @@ subset: relational_slim
 subset: value_slim
 synonym: "photoresistant" RELATED []
 is_a: PATO:0000927 ! photosensitivity
+! relationship: realised_by GO:0009416
 
 [Term]
 id: PATO:0000547
@@ -3637,6 +3640,7 @@ id: PATO:0000622
 name: erect
 def: "A positional quality inhering in a bearer by virtue of the bearer's being upright in position or posture." [WordNet:WordNet "http://wordnet.princeton.edu/"]
 subset: value_slim
+synonym: "upright" EXACT []
 is_a: PATO:0000140 ! position
 
 [Term]
@@ -4207,14 +4211,16 @@ is_obsolete: true
 [Term]
 id: PATO:0000718
 name: lethal (sensu genetics)
-def: "A viability quality inhering in a bearer or a population by virtue of the bearer's inability to survive and develop normally or the long term survival inability of a given population." [PATOC:GVG]
+def: "A viability quality inhering in a population by virtue of the bearer's long term survival inability." [PATOC:GVG]
+subset: disposition_slim
 subset: value_slim
 is_a: PATO:0000169 ! viability
 
 [Term]
 id: PATO:0000719
 name: viable
-def: "A viability quality inhering in a bearer or a population by virtue of the bearer's ability to survive and develop normally or the long term survival ability of a given population." [PATOC:GVG]
+def: "A viability quality inhering in a bearer or a population by virtue of the bearer's ability to survive or the long term survival ability of a given population." [PATOC:GVG]
+subset: disposition_slim
 subset: value_slim
 is_a: PATO:0000169 ! viability
 
@@ -5330,6 +5336,7 @@ id: PATO:0000927
 name: photosensitivity
 def: "A quality of related physical entities inhering in a bearer by virtue of the bearer's sensitivity to the action of radiant energy." [WordNet:WordNet "http://wordnet.princeton.edu/"]
 subset: attribute_slim
+subset: disposition_slim
 subset: relational_slim
 is_a: PATO:0000085 ! sensitivity toward
 
@@ -5880,7 +5887,7 @@ is_a: PATO:0001237 ! quality of a single physical entity
 [Term]
 id: PATO:0001019
 name: mass density
-def: "A physical quality which inheres to the bearer by virtue of some influence is exerted by the bearer's mass per unit size." [WordNet:WordNet "http://wordnetweb.princeton.edu/perl/webwn"]
+def: "A physical quality which inheres in a bearer by virtue of some influence is exerted by the bearer's mass per unit size." [WordNet:WordNet "http://wordnetweb.princeton.edu/perl/webwn"]
 subset: attribute_slim
 synonym: "density" RELATED []
 is_a: PATO:0001018 ! physical quality
@@ -6081,16 +6088,16 @@ is_a: PATO:0000133 ! angular placement
 
 [Term]
 id: PATO:0001052
-name: obtuse angle
-def: "An angular placement quality inhering in a bearer by virtue of the bearer's placement at an angle which is between 90 degrees and 180 degrees." [thesaurus.maths:thesaurus.maths "http://thesaurus.maths.org/"]
+name: obtuse angle to
+def: "An angular placement quality inhering in a bearer by virtue of the bearer's placement at an angle which is between 90 degrees and 180 degrees to another entity." [thesaurus.maths:thesaurus.maths "http://thesaurus.maths.org/"]
 subset: relational_slim
 subset: value_slim
 is_a: PATO:0000133 ! angular placement
 
 [Term]
 id: PATO:0001053
-name: convex angle
-def: "An angular placement quality inhering in a bearer by virtue of the bearer's placement at an angle which is less than 180 degrees." [maths.org:maths.org "http://thesaurus.maths.org/"]
+name: convex angle to
+def: "An angular placement quality inhering in a bearer by virtue of the bearer's placement at an angle which is less than 180 degrees to another entity." [maths.org:maths.org "http://thesaurus.maths.org/"]
 subset: relational_slim
 subset: value_slim
 is_a: PATO:0000133 ! angular placement
@@ -6100,12 +6107,12 @@ id: PATO:0001054
 name: internal angle
 def: "A convex angle that is inside two adjacent sides of a polygon." [PATOC:GVG]
 subset: value_slim
-is_a: PATO:0001053 ! convex angle
+is_a: PATO:0001053 ! convex angle to
 
 [Term]
 id: PATO:0001055
-name: reflex angle
-def: "An angular placement quality inhering in a bearer by virtue of the bearer's placement at an angle that is greater than 180 degrees but less than 360 degrees." [thesaurus.maths:thesaurus.maths "http://thesaurus.maths.org/"]
+name: reflex angle to
+def: "An angular placement quality inhering in a bearer by virtue of the bearer's placement at an angle that is greater than 180 degrees but less than 360 degrees to another entity." [thesaurus.maths:thesaurus.maths "http://thesaurus.maths.org/"]
 subset: relational_slim
 subset: value_slim
 is_a: PATO:0000133 ! angular placement
@@ -6679,7 +6686,7 @@ relationship: decreased_in_magnitude_relative_to PATO:0000461 ! normal
 [Term]
 id: PATO:0001164
 name: dense
-def: "A physical quality which inheres to the bearer by virtue of the bearer's exhibiting density.\n." [PATOC:GVG]
+def: "A physical quality which inheres in a bearer by virtue of the bearer's exhibiting density.\n." [PATOC:GVG]
 subset: value_slim
 is_a: PATO:0001019 ! mass density
 
@@ -7769,8 +7776,8 @@ is_a: PATO:0000066 ! pilosity
 
 [Term]
 id: PATO:0001321
-name: right angle
-def: "An angular placement quality inhering in a bearer by virtue of the bearer's placement at an angle which is 90 degrees." [thesaurus.math:thesaurus.math "http://thesaurus.maths.org/"]
+name: right angle to
+def: "An angular placement quality inhering in a bearer by virtue of the bearer's placement at an angle which is 90 degrees to another entity." [thesaurus.math:thesaurus.math "http://thesaurus.maths.org/"]
 subset: relational_slim
 subset: value_slim
 is_a: PATO:0000133 ! angular placement
@@ -7778,7 +7785,7 @@ is_a: PATO:0000133 ! angular placement
 [Term]
 id: PATO:0001322
 name: straight angle
-def: "An angular placement quality inhering in a bearer by virtue of the bearer's placement at an angle which is 180 degrees." [thesaurus.maths:thesaurus.maths "http://thesaurus.maths.org/"]
+def: "An angular placement quality inhering in a bearer by virtue of the bearer's placement at an angle which is 180 degrees to another entity." [thesaurus.maths:thesaurus.maths "http://thesaurus.maths.org/"]
 comment: TODO: decide on correct parentage
 subset: relational_slim
 subset: value_slim
@@ -8003,7 +8010,7 @@ is_a: PATO:0001028 ! acceleration
 [Term]
 id: PATO:0001351
 name: area density
-def: "A density quality which inheres to the bearer by virtue of some influence exerted by the bearer's mass on a given area." [Wikipedia:http\://en.wikipedia.org/wiki/Area_density]
+def: "A density quality which inheres in a bearer by virtue of some influence exerted by the bearer's mass on a given area." [Wikipedia:http\://en.wikipedia.org/wiki/Area_density]
 subset: attribute_slim
 is_a: PATO:0001019 ! mass density
 
@@ -8017,7 +8024,7 @@ is_a: PATO:0001019 ! mass density
 [Term]
 id: PATO:0001353
 name: volumetric density
-def: "A density quality which inheres to the bearer by virtue of some influence exerted by the bearer's mass on a given volume." [Wikipedia:http\://en.wikipedia.org/wiki/Mass_density]
+def: "A density quality which inheres in a bearer by virtue of some influence exerted by the bearer's mass on a given volume." [Wikipedia:http\://en.wikipedia.org/wiki/Mass_density]
 subset: attribute_slim
 is_a: PATO:0001019 ! mass density
 
@@ -9394,8 +9401,10 @@ id: PATO:0001531
 name: cellular adhesivity
 def: "A cellular quality that exists by virtue of the capacity of the cell to adhere to other cells and molecules, through the emergent action of the molecular parts of the cell surface." [PATOC:cjm]
 subset: attribute_slim
+subset: disposition_slim
 subset: relational_slim
 is_a: PATO:0001431 ! adhesivity
+! relationship: realized-by GO:0007155
 
 [Term]
 id: PATO:0001532
@@ -11233,6 +11242,8 @@ is_a: PATO:0000274 ! fertility
 [Term]
 id: PATO:0001768
 name: semi-lethal (sensu genetics)
+def: "A viability quality inhering in a bearer or a population by virtue of some of it's members' inability to survive to reproduce." [PATOC:CVC]
+subset: disposition_slim
 subset: value_slim
 is_a: PATO:0000169 ! viability
 
@@ -11247,6 +11258,8 @@ is_a: PATO:0000140 ! position
 [Term]
 id: PATO:0001770
 name: semi-viable
+def: "A viability quality inhering in a population by virtue of some of it's members' ability to survive." [PATOC:CVC]
+subset: disposition_slim
 subset: value_slim
 is_a: PATO:0000169 ! viability
 
@@ -11570,9 +11583,9 @@ is_a: PATO:0000440 ! regular spatial pattern
 [Term]
 id: PATO:0001810
 name: wrinkled
-def: "A texture quality inhering in a bearer by virtue of the bearer's being marked with wrinkles or furrows." [WordNet:WordNet "http://wordnet.princeton.edu/"]
+def: "A grooved texture quality inhering in a bearer by virtue of the bearer's being marked by one or more creases in a normally smooth surface." [url:http\://www.thefreedictionary.com/wrinkled]
 subset: value_slim
-is_a: PATO:0000150 ! texture
+is_a: PATO:0002255 ! grooved
 
 [Term]
 id: PATO:0001811
@@ -12097,7 +12110,7 @@ is_a: PATO:0002008 ! concave 3-D shape
 [Term]
 id: PATO:0001877
 name: lanceolate
-def: "A shape quality inhering in a bearer by virtue of the bearer's being shaped like a lance-head, considerably longer than wide, tapering towards the tip from below the middle; attached at the broad end." [PATOC:cjm]
+def: "A shape quality inhering in a bearer by virtue of the bearer's being shaped like a lance-head, considerably longer than wide, tapering towards the tip from below the middle; attached at the broad end." [PATOC:GVG]
 subset: cell_quality
 subset: value_slim
 synonym: "spear-shaped" EXACT []
@@ -12628,9 +12641,10 @@ is_a: PATO:0001533 ! multi-colored
 [Term]
 id: PATO:0001948
 name: furrowed
-def: "A texture quality inhering in a bearer by virtue of the bearer's being marked by longitudinal lines or channels." [ISBN:0881923214]
+def: "A grooved texture quality inhering in a bearer by virtue of the bearer's being marked by two or more parallel channels." [PATOC:JE]
+subset: value_slim
 synonym: "fluted" RELATED []
-is_a: PATO:0001810 ! wrinkled
+is_a: PATO:0002255 ! grooved
 
 [Term]
 id: PATO:0001949
@@ -12872,16 +12886,16 @@ is_a: PATO:0000052 ! shape
 [Term]
 id: PATO:0001981
 name: auriculate
-def: "A shape quality inhering in a bearer by virtue of the bearer's having straight sides converging at the base on an angle of less than 90." [ISBN:0881923214]
+def: "A shape quality inhering in a bearer by virtue of the bearer's having a shape resembling an ear." [url:http\://www.thefreedictionary.com/auriculate]
 subset: value_slim
 is_a: PATO:0000052 ! shape
 
 [Term]
 id: PATO:0001982
 name: attenuate
-def: "A shape quality inhering in a bearer by virtue of the bearer's having straight sides converging at the base on an angle of more than 90." [ISBN:0881923214]
+def: "A shape quality inhering in a bearer by virtue of the bearer's gradually tapering to a slender point" [url:http\://www.thefreedictionary.com/attenuate]
 subset: value_slim
-is_a: PATO:0000052 ! shape
+is_a: PATO:0001500 ! tapered
 
 [Term]
 id: PATO:0001983
@@ -12942,6 +12956,7 @@ id: PATO:0001991
 name: immortal
 def: "A quality inhering in a bearer by virtue of the bearer's being capable of indefinite growth or division." [answers.com:answers.com "http://www.answers.com/"]
 comment: This refers to the disposition of the bearer.
+subset: disposition_slim
 is_a: PATO:0000169 ! viability
 
 [Term]
@@ -13185,7 +13200,7 @@ id: PATO:0002025
 name: external angle
 def: "A convex angle that is formed by one side of a polygon and a line extended from an adjacent side." [http://en.wikipedia.org/wiki/Internal_angle]
 subset: value_slim
-is_a: PATO:0001053 ! convex angle
+is_a: PATO:0001053 ! convex angle to
 
 [Term]
 id: PATO:0002026
@@ -13600,7 +13615,7 @@ creation_date: 2009-07-01T02:33:41Z
 [Term]
 id: PATO:0002070
 name: affinity
-def: "An molecular relational quality that arises from the molecular attraction exerted between two atoms or compounds." [PATOC:GVG]
+def: "A molecular relational quality that arises from the molecular attraction exerted between two atoms or compounds." [PATOC:GVG]
 subset: attribute_slim
 is_a: PATO:0002061 ! relational molecular quality
 created_by: George Gkoutos
@@ -13628,7 +13643,7 @@ creation_date: 2009-09-18T01:30:11Z
 [Term]
 id: PATO:0002073
 name: avidity
-def: "An molecular relational quality that arises from the synergistic strength of bond affinities between multiple bond interactions." [Wikipedia:Wikipedia "http://en.wikipedia.org/wiki/Avidity"]
+def: "A molecular relational quality that arises from the synergistic strength of bond affinities between multiple bond interactions." [Wikipedia:Wikipedia "http://en.wikipedia.org/wiki/Avidity"]
 subset: attribute_slim
 is_a: PATO:0002061 ! relational molecular quality
 created_by: George Gkoutos
@@ -13891,7 +13906,7 @@ creation_date: 2009-10-05T12:59:21Z
 [Term]
 id: PATO:0002101
 name: metaplastic
-def: "A cellular quality inhering in a bearer by virtue of having changed from one fully differentiated state into another." [PATOC:GVG, XX:<new dbxref>]
+def: "A cellular quality inhering in a bearer by virtue of having changed from one fully differentiated state into another." [PATOC:GVG]
 subset: value_slim
 synonym: "trans-differentiated" RELATED []
 is_a: PATO:0001397 ! cellular potency
@@ -13902,6 +13917,7 @@ creation_date: 2009-10-05T01:09:09Z
 id: PATO:0002102
 name: proliferative
 def: "A cellular quality inhering in a cell by virtue of the bearer's ability to grow and proliferate in number through cell division." [PATOC:GVG]
+subset: disposition_slim
 subset: value_slim
 is_a: PATO:0001396 ! cellular quality
 created_by: george
@@ -14170,9 +14186,9 @@ creation_date: 2009-10-06T05:03:13Z
 [Term]
 id: PATO:0002131
 name: abduction
-def: "An angular placement quality inhearing in a limb by virtue of the bearer's movement away from the medial plane of the body." [wikipedia:wikipedia "en.wikipedia.org/wiki/Abduction_(kinesiology)"]
+def: "A displaced angular placement quality inhering in a body part by virtue of the bearer's movement away from the medial plane of the body." [wikipedia:wikipedia "en.wikipedia.org/wiki/Abduction_(kinesiology)"]
 subset: attribute_slim
-is_a: PATO:0000133 ! angular placement
+is_a: PATO:0002168 ! displaced to
 created_by: george
 creation_date: 2009-10-13T06:38:53Z
 
@@ -14188,10 +14204,10 @@ creation_date: 2009-10-06T05:04:18Z
 [Term]
 id: PATO:0002133
 name: adduction
-def: "An angular placement quality inhearing in a limb by virtue of the bearer's movement closer the medial plane of the body." [wikipedia:wikipedia "en.wikipedia.org/wiki/adduction"]
+def: "A displaced angular placement quality inhering in a body part by virtue of the bearer's movement closer the medial plane of the body." [wikipedia:wikipedia "en.wikipedia.org/wiki/adduction"]
 comment: This term is also used in reference to the operation of the muscle in anatomy or musculature.
 subset: attribute_slim
-is_a: PATO:0000133 ! angular placement
+is_a: PATO:0002168 ! displaced to
 created_by: george
 creation_date: 2009-10-13T06:41:39Z
 
@@ -14428,7 +14444,7 @@ id: PATO:0002158
 name: relational dislocated quality
 def: "A relational shape quality inhering into a bearer by virtue of the bearer's dislocation towards another entity." [PATOC:GVG]
 subset: value_slim
-is_a: PATO:0001647 ! relational shape quality
+is_a: PATO:0001631 ! relational spatial quality
 created_by: george
 creation_date: 2009-11-06T04:03:34Z
 
@@ -14522,10 +14538,10 @@ creation_date: 2009-12-02T05:19:32Z
 [Term]
 id: PATO:0002168
 name: displaced to
-def: "A relational spatial quality inhering in a bearer by virtue being changed in position in relation to another entity." [PATOC:GVG]
+def: "An angular placement quality inhering in a bearer by virtue of the bearer being changed in position in relation to another entity." [PATOC:GVG]
 subset: relational_slim
 synonym: "mislocalised to" RELATED []
-is_a: PATO:0001631 ! relational spatial quality
+is_a: PATO:0000133 ! angular placement
 created_by: george
 creation_date: 2010-01-14T04:45:18Z
 
@@ -14788,6 +14804,7 @@ id: PATO:0002197
 name: electronegativity
 def: "A quality that describes the power of an atom to attract electrons to itself ." [PATOC:JH]
 subset: attribute_slim
+subset: disposition_slim
 is_a: PATO:0002182 ! molecular quality
 created_by: George Gkoutos
 creation_date: 2010-03-10T03:31:15Z
@@ -14858,6 +14875,7 @@ name: capacitance
 def: "A quality inhering in a bearer by virtue of the bearer's ability to hold an electrical charge." [Wikipedia:Wikipedia "http://en.wikipedia.org/wiki/Capacitance"]
 comment: Capacitance is also a measure of the amount of electrical energy stored (or separated) for a given electric potential.
 subset: attribute_slim
+subset: disposition_slim
 is_a: PATO:0002182 ! molecular quality
 created_by: George Gkoutos
 creation_date: 2010-03-25T09:42:51Z
@@ -14952,9 +14970,11 @@ name: falciform
 def: "A shape quality inhering in a bearer by virtue of the bearer's having the shape of a scythe or sickle." [merriam-webster:http\://www.merriam-webster.com/dictionary/falciform]
 subset: value_slim
 synonym: "falcate" EXACT []
-synonym: "hooked" RELATED []
+synonym: "hooked" EXACT []
 synonym: "scythe-shaped" EXACT []
 synonym: "sickle-shaped" EXACT []
+synonym: "unciform" EXACT []
+synonym: "uncinate" EXACT []
 is_a: PATO:0000052 ! shape
 created_by: george
 creation_date: 2010-07-08T01:57:46Z
@@ -15315,7 +15335,10 @@ creation_date: 2010-08-16T03:57:42Z
 
 [Term]
 id: PATO:0002253
-name: <new term>
+name: platelike
+def: "A quality inhering in a bearer by virtue of the bearer's being roundish, flattish shape, possibly with a slightly angled edge." [PATOC:CVC]
+synonym: "plate-like" EXACT []
+is_a: PATO:0000407 ! flat
 created_by: george
 creation_date: 2010-08-16T03:57:48Z
 
@@ -15329,6 +15352,73 @@ subset: value_slim
 is_a: PATO:0001591 ! curvature
 created_by: george
 creation_date: 2010-08-16T03:59:34Z
+
+[Term]
+id: PATO:0002255
+name: grooved
+def: "texture quality inhering in a bearer by virtue of the bearer's being marked with one or more channels." [PATOC:JE]
+subset: value_slim
+synonym: "channeled" RELATED []
+synonym: "creased" RELATED []
+is_a: PATO:0000150 ! texture
+created_by: george
+creation_date: 2010-09-01T10:27:48Z
+
+[Term]
+id: PATO:0002256
+name: tricuspidate
+def: "A cuscpidate quality inhering in a bearer by virtue of the bearer possessing three cusps." [PATOC:WD]
+subset: value_slim
+is_a: PATO:0001973 ! cuspidate
+created_by: george
+creation_date: 2010-09-08T02:21:50Z
+
+[Term]
+id: PATO:0002257
+name: multicuspidate
+def: "A cuscpidate quality inhering in a bearer by virtue of the bearer possessing more than one cusp." [PATOC:WD]
+subset: value_slim
+is_a: PATO:0001973 ! cuspidate
+created_by: george
+creation_date: 2010-09-08T02:23:22Z
+
+[Term]
+id: PATO:0002258
+name: pointed
+def: "A shape quality inhering in a bearer by virtue of the bearer's having a point." [PATOC:http\://www.merriam-webster.com/dictionary/pointed]
+subset: value_slim
+is_a: PATO:0001419 ! sharp
+created_by: george
+creation_date: 2010-09-08T03:15:16Z
+
+[Term]
+id: PATO:0002259
+name: adjacent to
+def: "A relational spatial quality inhering in a bearer by virtue of the bearer's being close to another entity." [PATOC:GVG]
+subset: relational_slim
+subset: value_slim
+is_a: PATO:0001631 ! relational spatial quality
+created_by: george
+creation_date: 2010-09-08T03:20:06Z
+
+[Term]
+id: PATO:0002260
+name: semi erect
+def: "A quality inhering in a bearer by virtue of the bearer's being being partially upright in position or posture." [PATOC:GVG]
+synonym: "semi upright" EXACT []
+is_a: PATO:0000622 ! erect
+created_by: george
+creation_date: 2010-09-08T03:27:21Z
+
+[Term]
+id: PATO:0002261
+name: located in
+def: "A relational spatial quality inhering in a bearer by virtue of the bearer's location within another entity." [PATOC:WD]
+subset: relational_slim
+subset: value_slim
+is_a: PATO:0001631 ! relational spatial quality
+created_by: george
+creation_date: 2010-09-09T09:36:56Z
 
 [Typedef]
 id: decreased_in_magnitude_relative_to
@@ -15448,6 +15538,10 @@ namespace: pato.ontology
 id: OBO_REL:part_of
 name: part_of
 is_transitive: true
+
+[Typedef]
+id: realized_by
+name: realized_by
 
 [Typedef]
 id: reciprocal_of

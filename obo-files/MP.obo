@@ -1,5 +1,5 @@
 format-version: 1.2
-date: 17:08:2010 16:54
+date: 27:08:2010 16:09
 saved-by: csmith
 auto-generated-by: OBO-Edit 2.0
 default-namespace: MPheno.ontology
@@ -1662,8 +1662,9 @@ id: MP:0000284
 name: double outlet heart right ventricle
 alt_id: MP:0000283
 def: "both the aorta and the pulmonary trunk originate from the right ventricle, usually in conjunction with a ventricular septal defect" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:67826]
+synonym: "DORV " EXACT []
 synonym: "double outlet right ventricle" EXACT []
-is_a: MP:0003920 ! abnormal heart right ventricle morphology
+synonym: "double-outflow right ventricle" EXACT []
 is_a: MP:0010224 ! abnormal heart ventricle outflow tract morphology
 
 [Term]
@@ -3765,6 +3766,7 @@ is_a: MP:0003252 ! abnormal bile duct physiology
 id: MP:0000611
 name: jaundice
 def: "clinical manifestation of hyperbilirubinemia, with deposition of bile pigments in the skin, resulting in yellowish staining of the skin and mucous membranes" [MESH:C23.550.429.500]
+synonym: "icterus" EXACT []
 is_a: MP:0000609 ! abnormal liver physiology
 
 [Term]
@@ -9732,13 +9734,13 @@ name: abnormal circulating free fatty acids level
 def: "any anomaly in the blood concentrations of the fatty acids which occur in plasma as a result of lipolysis in adipose tissue or when plasma triacyglycerols are taken into tissues" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "abnormal circulating fatty acid level" EXACT []
 synonym: "abnormal circulating non-esterified fatty acids level" EXACT []
-synonym: "abnormal FFA level" EXACT []
+synonym: "abnormal FFA level" BROAD []
 synonym: "abnormal free fatty acids level" EXACT []
 synonym: "abnormal NEFA level" RELATED []
 synonym: "abnormal UFA level" EXACT []
 synonym: "abnormal unesterified fatty acids level" EXACT []
 is_a: MP:0003949 ! abnormal circulating lipid level
-is_a: MP:0005280 ! abnormal fatty acid level
+is_a: MP:0010358 ! abnormal free fatty acids level
 
 [Term]
 id: MP:0001554
@@ -12331,28 +12333,22 @@ is_a: MP:0008716 ! lung non-small cell carcinoma
 is_a: MP:0009308 ! adenocarcinoma
 
 [Term]
-id: MP:0002029
-name: fibrosarcoma
-def: "malignant neoplasm derived from deep fibrous tissue" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:18542]
-is_a: MP:0002032 ! sarcoma
-
-[Term]
 id: MP:0002030
 name: increased neurofibrosarcoma incidence
 alt_id: MP:0002034
 def: "greater than the expected number of a highly aggressive malignant neoplasm arising from the fibrous connective tissue surrounding peripheral nerves, in a specific population in a given time period" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "increased fibroblastic neurosarcoma incidence" EXACT []
 synonym: "malignant neurolemmoma" RELATED []
 synonym: "malignant peripheral nerve sheath tumors" EXACT []
 synonym: "MPNSTs" EXACT []
 synonym: "peripheral nerve sheath tumor" EXACT []
-is_a: MP:0002029 ! fibrosarcoma
-is_a: MP:0003580 ! fibroma
 is_a: MP:0010281 ! increased nervous system tumor incidence
+is_a: MP:0010363 ! increased fibrosarcoma incidence
 
 [Term]
 id: MP:0002031
-name: adrenal tumor
-def: "tumors of the adrenal gland, including phaeochomocytomas" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:18542]
+name: increased adrenal gland tumor incidence
+def: "greater than the expected number of neoplams in the adrenal gland occurring in a specific population in a given time period" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:18542]
 is_a: MP:0010288 ! increased gland tumor incidence
 
 [Term]
@@ -12387,7 +12383,7 @@ id: MP:0002037
 name: increased fibrohistocytoma incidence
 def: "greater than the expected number of slowly growing skin nodules derived from cellular fibrous tissue occurring in a specific population in a given time period; these often surround capillaries" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:58877]
 synonym: "dermatofibroma" EXACT []
-is_a: MP:0003580 ! fibroma
+is_a: MP:0003580 ! increased fibroma incidence
 is_a: MP:0010300 ! increased skin tumor incidence
 
 [Term]
@@ -12468,7 +12464,7 @@ is_a: MP:0003667 ! hemangiosarcoma
 id: MP:0002050
 name: pheochromocytoma
 def: "a benign neoplasm derived from adrenal medullary cells; usually associated with hypertension" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:63229]
-is_a: MP:0002031 ! adrenal tumor
+is_a: MP:0002031 ! increased adrenal gland tumor incidence
 
 [Term]
 id: MP:0002051
@@ -12585,8 +12581,8 @@ name: seizures
 alt_id: MP:0000946
 alt_id: MP:0001493
 def: "sudden and often acute manifestation of epileptic attack, sometimes convulsive" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-synonym: "neurological/behavioral: seizures/epilepsy" EXACT []
-synonym: "seizures/epilepsy" EXACT []
+synonym: "neurological/behavioral: seizures/epilepsy" BROAD []
+synonym: "seizures/epilepsy" BROAD []
 xref: MGI:2173569
 is_a: MP:0003633 ! abnormal nervous system physiology
 is_a: MP:0004924 ! abnormal behavior
@@ -16667,7 +16663,7 @@ synonym: "fatty liver" EXACT []
 synonym: "hepatic lipidosis" RELATED []
 synonym: "liver adiposis" EXACT []
 synonym: "liver steatosis" EXACT []
-is_a: MP:0000598 ! abnormal liver morphology
+is_a: MP:0000609 ! abnormal liver physiology
 
 [Term]
 id: MP:0002629
@@ -18135,7 +18131,7 @@ def: "caliculi in the gallbladder or a bile duct; chemical composition of choles
 synonym: "biliary caliculi" EXACT []
 synonym: "cholelithiasis" EXACT []
 synonym: "gall stone" EXACT []
-is_a: MP:0005085 ! abnormal gallbladder physiology
+is_a: MP:0005083 ! abnormal biliary tract morphology
 
 [Term]
 id: MP:0002831
@@ -18968,6 +18964,7 @@ name: hemangioma
 def: "proliferation of blood vessels leading to a mass that resembles a neoplasm" [J:87544, MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
 synonym: "angioma" EXACT []
 is_a: MP:0010273 ! increased classified tumor incidence
+is_a: MP:0010291 ! increased cardiovascular system tumor incidence
 
 [Term]
 id: MP:0002948
@@ -21512,6 +21509,7 @@ is_a: MP:0000495 ! abnormal colon morphology
 id: MP:0003324
 name: liver adenoma
 def: "benign epithelial neoplasm of the liver" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", NCBI:matt "Matthew Mailman"]
+synonym: "hepatocellular adenoma" EXACT []
 is_a: MP:0002815 ! adenoma
 is_a: MP:0008019 ! increased liver tumor incidence
 
@@ -21648,12 +21646,6 @@ name: accessory spleen
 def: "the splenic tissue is divided into equal masses; often related to situs inversus" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", NCBI:matt "Matthew Mailman"]
 synonym: "polysplenia" EXACT []
 is_a: MP:0000689 ! abnormal spleen morphology
-
-[Term]
-id: MP:0003343
-name: fibroadenoma
-def: "a benign epithelial neoplasm containing fibrous tissue" [MESH:C04.557.450.565.590.595.350, NCBI:matt "Matthew Mailman"]
-is_a: MP:0002815 ! adenoma
 
 [Term]
 id: MP:0003344
@@ -23244,23 +23236,22 @@ id: MP:0003579
 name: ovarian carcinoma
 def: "malignant neoplasm arising from ovarian tissue" [NCBI:matt "Matthew Mailman"]
 is_a: MP:0002038 ! carcinoma
-is_a: MP:0008000 ! ovary tumor
+is_a: MP:0008000 ! increased ovary tumor incidence
 
 [Term]
 id: MP:0003580
-name: fibroma
+name: increased fibroma incidence
 alt_id: MP:0003297
-def: "a benign tumor of fibrous or fully developed connective tissue" [MESH:C04.557.450.565.590.340]
-synonym: "fibroma" EXACT []
-synonym: "fibromatosis" EXACT []
+def: "greater than the expected number of a benign tumor of fibrous or fully developed connective tissue, in a specific population in a given time period" [MESH:C04.557.450.565.590.340]
+synonym: "fibromatosis" RELATED []
 is_a: MP:0010273 ! increased classified tumor incidence
 
 [Term]
 id: MP:0003581
 name: increased ovarian fibroma incidence
 def: "greater than the expected number of a benign tumor of fibrous or fully developed connective tissue in the ovary, in a specific population in a given time period" [MESH:C04.557.450.565.590.340, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", NCBI:matt "Matthew Mailman"]
-is_a: MP:0003580 ! fibroma
-is_a: MP:0008000 ! ovary tumor
+is_a: MP:0003580 ! increased fibroma incidence
+is_a: MP:0008000 ! increased ovary tumor incidence
 
 [Term]
 id: MP:0003582
@@ -23869,6 +23860,7 @@ name: hemangiosarcoma
 def: "a malignant tumor characterized by rapidly proliferating, extensively infiltrating, anaplastic cells derived from blood vessels and appear as irregular blood-filled or lumpy sacs that are typically filled with blood; rupture of the tumor can cause rapid death from bleeding" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:C04.557.450.795.390, MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
 synonym: "angiosarcoma" EXACT []
 is_a: MP:0002032 ! sarcoma
+is_a: MP:0010291 ! increased cardiovascular system tumor incidence
 
 [Term]
 id: MP:0003668
@@ -35180,7 +35172,7 @@ synonym: "thymic tumor" RELATED []
 synonym: "thymoma" EXACT []
 synonym: "thymus tumor" RELATED []
 is_a: MP:0002022 ! lymphoma
-is_a: MP:0010288 ! increased gland tumor incidence
+is_a: MP:0010365 ! increased thymus tumor incidence
 
 [Term]
 id: MP:0005235
@@ -41180,8 +41172,8 @@ is_a: MP:0006429 ! abnormal hyaline cartilage morphology
 
 [Term]
 id: MP:0008000
-name: ovary tumor
-def: "presence of abnormal rapidly proliferating cells in the ovary, usually in the form of a distinct mass" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+name: increased ovary tumor incidence
+def: "greater than the expected number of neoplams in the ovary occurring in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "ovarian tumor" EXACT []
 is_a: MP:0009590 ! gonad tumor
 is_a: MP:0010288 ! increased gland tumor incidence
@@ -48550,7 +48542,7 @@ synonym: "pancreatic ACC" EXACT []
 synonym: "pancreatic acinar carcinoma" EXACT []
 synonym: "pancreatic tumor" BROAD []
 is_a: MP:0002038 ! carcinoma
-is_a: MP:0009153 ! pancreas tumor
+is_a: MP:0009153 ! increased pancreas tumor incidence
 
 [Term]
 id: MP:0008781
@@ -48751,6 +48743,7 @@ def: "increase in the amount of iron present in the liver tissue" [MGI:smb "Susa
 synonym: "increased hepatic iron level" EXACT []
 synonym: "increased hepatic iron load" EXACT []
 synonym: "increased liver iron load" EXACT []
+synonym: "liver iron deposits" EXACT []
 is_a: MP:0008738 ! abnormal liver iron level
 
 [Term]
@@ -48770,6 +48763,7 @@ def: "increase in the amount of iron present in the spleen tissue" [MGI:smb "Sus
 synonym: "increased spleen iron load" EXACT []
 synonym: "increased splenic iron level" EXACT []
 synonym: "increased splenic iron load" EXACT []
+synonym: "spleen iron deposits" EXACT []
 is_a: MP:0008739 ! abnormal spleen iron level
 
 [Term]
@@ -50602,14 +50596,14 @@ name: pancreas adenoma
 def: "a benign epithelial neoplasm located in the pancreas" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 synonym: "pancreatic adenoma" EXACT []
 is_a: MP:0002815 ! adenoma
-is_a: MP:0009153 ! pancreas tumor
+is_a: MP:0009153 ! increased pancreas tumor incidence
 
 [Term]
 id: MP:0009044
 name: adrenal gland adenoma
 def: "a benign epithelial neoplasm located in the adrenal gland" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 synonym: "adrenal adenoma" EXACT []
-is_a: MP:0002031 ! adrenal tumor
+is_a: MP:0002031 ! increased adrenal gland tumor incidence
 is_a: MP:0002815 ! adenoma
 
 [Term]
@@ -51601,7 +51595,7 @@ name: pancreatic ductal adenocarcinoma
 def: "adenocarcinoma that arises from the pancraetic ducts" [MESH:C04.557.470.200.025.232.750]
 synonym: "pancreatic duct cell carcinoma" EXACT []
 synonym: "PDAC" EXACT []
-is_a: MP:0009153 ! pancreas tumor
+is_a: MP:0009153 ! increased pancreas tumor incidence
 is_a: MP:0009308 ! adenocarcinoma
 
 [Term]
@@ -51609,12 +51603,12 @@ id: MP:0009152
 name: pancreatic intraepithelial neoplasia
 def: "noninvasive pancreatic duct lesions that affect smaller caliber ducts and do not involve the main pancreatic duct" [PMID:11342768]
 synonym: "PanIN" EXACT []
-is_a: MP:0009153 ! pancreas tumor
+is_a: MP:0009153 ! increased pancreas tumor incidence
 
 [Term]
 id: MP:0009153
-name: pancreas tumor
-def: "tumors or cancer of the pancreas" [MESH:C04.588.274.761]
+name: increased pancreas tumor incidence
+def: "greater than the expected number of neoplams in the pancreas occurring in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "pancreas cancer" EXACT []
 synonym: "pancreas neoplasms" EXACT []
 synonym: "pancreatic cancer" EXACT []
@@ -53896,7 +53890,7 @@ name: ovarian teratoma
 def: "a usually benign tumor found in the ovary that is the result of an anomaly of oogenesis and typically contains a diversity of tissues often representing all organ systems e.g. hair, teeth, bone, thyroid, nerve tissue" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
 synonym: "ovarian dermoid cyst" EXACT []
 is_a: MP:0002627 ! teratoma
-is_a: MP:0008000 ! ovary tumor
+is_a: MP:0008000 ! increased ovary tumor incidence
 
 [Term]
 id: MP:0009443
@@ -60777,7 +60771,7 @@ creation_date: 2010-07-07T03:42:50Z
 id: MP:0010224
 name: abnormal heart ventricle outflow tract morphology
 def: "any structural anomaly of the portion of the heart through which blood flows into the arteries" [GO:0003151]
-is_a: MP:0005294 ! abnormal heart ventricle morphology
+is_a: MP:0000266 ! abnormal heart morphology
 created_by: csmith
 creation_date: 2010-07-07T04:27:25Z
 
@@ -61662,7 +61656,7 @@ id: MP:0010314
 name: increased neurofibroma incidence
 def: "greater than the expected number of benign, encapsulated nerve sheath tumors composed of Schwann cells, in a specific population in a given time period; proliferation is disordered and includes portions of nerve fibers" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "increased fibroneuroma incidence" EXACT []
-is_a: MP:0003580 ! fibroma
+is_a: MP:0003580 ! increased fibroma incidence
 is_a: MP:0010281 ! increased nervous system tumor incidence
 created_by: csmith
 creation_date: 2010-08-04T04:09:33Z
@@ -61882,7 +61876,7 @@ name: increased desmoid tumor incidence
 def: "greater than the expected number of a monoclonal, fibroblastic proliferation arising in musculoaponeurotic structures in a specific population in a given time period; this connective tissue hyperplasia infiltrates locally, recurs frequently after resection but does not metastasize; this tumor may occur at the site of any fascia, but in particular in muscle" [PMID:18023087]
 synonym: "aggressive fibromatosis" EXACT []
 synonym: "musculo-aponeurotic fibromatosis" EXACT []
-is_a: MP:0003580 ! fibroma
+is_a: MP:0003580 ! increased fibroma incidence
 created_by: csmith
 creation_date: 2010-08-16T01:30:51Z
 
@@ -61890,7 +61884,7 @@ creation_date: 2010-08-16T01:30:51Z
 id: MP:0010339
 name: increased cardiac fibroma incidence
 def: "greater than the expected number of a benign tumor of fibrous or fully developed connective tissue in the cardiac tissue, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-is_a: MP:0003580 ! fibroma
+is_a: MP:0003580 ! increased fibroma incidence
 is_a: MP:0010291 ! increased cardiovascular system tumor incidence
 created_by: csmith
 creation_date: 2010-08-16T01:44:36Z
@@ -61899,7 +61893,7 @@ creation_date: 2010-08-16T01:44:36Z
 id: MP:0010340
 name: increased lung fibroma incidence
 def: "greater than the expected number of a benign tumor of fibrous or fully developed connective tissue in the lung, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-is_a: MP:0003580 ! fibroma
+is_a: MP:0003580 ! increased fibroma incidence
 is_a: MP:0008014 ! increased lung tumor incidence
 created_by: csmith
 creation_date: 2010-08-16T01:44:58Z
@@ -61908,7 +61902,7 @@ creation_date: 2010-08-16T01:44:58Z
 id: MP:0010341
 name: increased mammary gland fibroma incidence
 def: "greater than the expected number of a benign tumor of fibrous or fully developed connective tissue in the mammary gland, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-is_a: MP:0003580 ! fibroma
+is_a: MP:0003580 ! increased fibroma incidence
 is_a: MP:0010299 ! increased mammary gland tumor incidence
 created_by: csmith
 creation_date: 2010-08-16T01:45:21Z
@@ -61918,7 +61912,7 @@ id: MP:0010342
 name: increased facial angiofibroma incidence
 def: "greater than the expected number of a benign tumor of fibrous or fully developed connective tissue on the face, in a specific population in a given time period; appear as red or yellow papules containing dilated vascular channels" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "increased adenoma sebaceum incidence" EXACT []
-is_a: MP:0003580 ! fibroma
+is_a: MP:0003580 ! increased fibroma incidence
 is_a: MP:0008018 ! increased facial tumor incidence
 created_by: csmith
 creation_date: 2010-08-16T01:45:42Z
@@ -61976,7 +61970,7 @@ id: MP:0010348
 name: increased pancreatic islet cell carcinoma incidence
 def: "greater than the expected number of malignant neoplasms in the pancreatic islet cells, occurring in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 is_a: MP:0002038 ! carcinoma
-is_a: MP:0009153 ! pancreas tumor
+is_a: MP:0009153 ! increased pancreas tumor incidence
 created_by: csmith
 creation_date: 2010-08-16T03:52:50Z
 
@@ -62018,7 +62012,7 @@ creation_date: 2010-08-16T04:42:57Z
 [Term]
 id: MP:0010353
 name: increased odontoma incidence
-def: "greater than the expected number of a hamartomatous odontogenic tumor composed of enamel, dentin, cementum, and pulp tissue that may or may not be arranged in the form of a tooth,occurring in a specific population in a given time period" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "greater than the expected number of a hamartomatous odontogenic tumor composed of enamel, dentin, cementum, and pulp tissue that may or may not be arranged in the form of a tooth, occurring in a specific population in a given time period" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 is_a: MP:0010273 ! increased classified tumor incidence
 created_by: csmith
 creation_date: 2010-08-16T04:46:28Z
@@ -62067,6 +62061,199 @@ is_a: MP:0010287 ! increased reproductive system tumor incidence
 is_a: MP:0010288 ! increased gland tumor incidence
 created_by: csmith
 creation_date: 2010-08-17T12:47:29Z
+
+[Term]
+id: MP:0010358
+name: abnormal free fatty acids level
+def: "any anomaly in the concentration of the fatty acids which occur in plasma as a result of lipolysis in adipose tissue or when plasma triacyglycerols are taken into tissues" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "abnormal FFA level" EXACT []
+synonym: "abnormal non-esterified fatty acids level" EXACT []
+is_a: MP:0005280 ! abnormal fatty acid level
+created_by: csmith
+creation_date: 2010-08-18T11:05:18Z
+
+[Term]
+id: MP:0010359
+name: increased liver free fatty acids level
+def: "elevated liver concentrations of the fatty acids which occur in plasma as a result of lipolysis in adipose tissue or when plasma triacyglycerols are taken into tissues" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "increased hepatic free fatty acids level" EXACT []
+is_a: MP:0010358 ! abnormal free fatty acids level
+created_by: csmith
+creation_date: 2010-08-18T11:06:02Z
+
+[Term]
+id: MP:0010360
+name: decreased liver free fatty acids level
+def: "reduced liver concentration of the fatty acids which occur in plasma as a result of lipolysis in adipose tissue or when plasma triacyglycerols are taken into tissues" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "decreased hepatic free fatty acids level" EXACT []
+synonym: "reduced hepatic free fatty acids level" EXACT []
+synonym: "reduced liver free fatty acids level" EXACT []
+is_a: MP:0000609 ! abnormal liver physiology
+is_a: MP:0010358 ! abnormal free fatty acids level
+created_by: csmith
+creation_date: 2010-08-18T11:06:34Z
+
+[Term]
+id: MP:0010361
+name: increased gangliosarcoma incidence
+def: "greater than the expected number of a highly aggressive malignant neoplasm arising from mature ganglionic neurons, in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased ganglioneurosarcoma incidence" EXACT []
+is_a: MP:0010281 ! increased nervous system tumor incidence
+created_by: csmith
+creation_date: 2010-08-19T10:10:15Z
+
+[Term]
+id: MP:0010362
+name: increased ganglioneuroma incidence
+def: "greater than the expected number of a benign neoplasm composed of mature ganglionic neurons in a given population in a given time period; cells may be scattered singly or in clumps within a relatively abundant and dense stroma of neurofibrils and collagenous fibers" [MPATH:375]
+is_a: MP:0010281 ! increased nervous system tumor incidence
+created_by: csmith
+creation_date: 2010-08-19T10:11:35Z
+
+[Term]
+id: MP:0010363
+name: increased fibrosarcoma incidence
+alt_id: MP:0002029
+def: "greater than the expected number of a highly aggressive malignant neoplasm arising from fibrous connective tissue, in a specific population in a given time period" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "increased fibroblastic sarcoma incidence" EXACT []
+is_a: MP:0002032 ! sarcoma
+created_by: csmith
+creation_date: 2010-08-19T10:31:47Z
+
+[Term]
+id: MP:0010364
+name: increased fibroadenoma incidence
+alt_id: MP:0003343
+def: "greater than the expected number of a benign mammary gland tumor composed of both fibrous tissue and glandular tissue, in a specific population in a given time period" [CDR:523438 "http://www.cancer.gov/dictionary/?CdrID=523438"]
+synonym: "increased breast fibroadenoma incidence" EXACT []
+synonym: "increased mammary gland fibroadenoma incidence" EXACT []
+is_a: MP:0010273 ! increased classified tumor incidence
+is_a: MP:0010299 ! increased mammary gland tumor incidence
+created_by: csmith
+creation_date: 2010-08-19T10:45:18Z
+
+[Term]
+id: MP:0010365
+name: increased thymus tumor incidence
+def: "greater than the expected number of neoplams in the thymus occurring in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased thymic tumor incidence" EXACT []
+is_a: MP:0010288 ! increased gland tumor incidence
+created_by: csmith
+creation_date: 2010-08-26T03:38:42Z
+
+[Term]
+id: MP:0010366
+name: increased adrenal cortical tumor incidence
+def: "greater than the expected number of neoplams in the adrenal cortex occurring in a specific population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0002031 ! increased adrenal gland tumor incidence
+created_by: csmith
+creation_date: 2010-08-26T03:42:09Z
+
+[Term]
+id: MP:0010367
+name: increased spindle cell carcinoma incidence
+def: "greater than the expected number of a highly malignant variant of squamous cell carcinoma, occurring in a specific population in a given time period; spindle cell carcinoma shows biphasic proliferation of conventional SCC component and malignant spindle shape cells with sarcomatous appearance" [PMID:19040765]
+synonym: "increased pseudosarcoma incidence" EXACT []
+synonym: "increased sarcomatoid carcinoma incidence" EXACT []
+synonym: "increased SpCC incidence" EXACT []
+is_a: MP:0004207 ! squamous cell carcinoma
+created_by: csmith
+creation_date: 2010-08-26T03:54:01Z
+
+[Term]
+id: MP:0010368
+name: abnormal lymphatic system physiology
+def: "any functional anomaly of the interconnected system of spaces, organs and vessels between body tissues and organs through which fluid, fats, proteins, and lymphocytes are transported to the bloodstream as lymph, and microorganisms and other debris are removed from tissues" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal lymph system physiology" EXACT []
+synonym: "abnormal lymphoid system physiology" EXACT []
+is_a: MP:0001544 ! abnormal cardiovascular system physiology
+created_by: csmith
+creation_date: 2010-08-27T09:42:10Z
+
+[Term]
+id: MP:0010369
+name: abnormal thalamus neuron morphology
+def: "any structural anomaly of the impulse-conducting cells in the thalamus or its parts, a midline paired symmetrical structure between the cerebral cortex and midbrain within the brain that controls the flow of information to the cortex" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+synonym: "abnormal thalamic neuron morphology" EXACT []
+is_a: MP:0002882 ! abnormal neuron morphology
+created_by: csmith
+creation_date: 2010-08-27T12:34:11Z
+
+[Term]
+id: MP:0010370
+name: abnormal throat morphology
+def: "any strucutral anomaly in the anterior part of the neck, in front of the vertebral column comprising the pharynx and larynx" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+synonym: "abnormal fauces morphology" EXACT []
+is_a: MP:0000462 ! abnormal digestive system morphology
+created_by: csmith
+creation_date: 2010-08-27T12:38:50Z
+
+[Term]
+id: MP:0010371
+name: abnormal epiglottis morphology
+def: "any strucutral anomaly in the a flap located in the throat which separates the espohagus from the trachae and prevents inhalation of food or drink" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+is_a: MP:0010370 ! abnormal throat morphology
+created_by: csmith
+creation_date: 2010-08-27T12:39:55Z
+
+[Term]
+id: MP:0010372
+name: throat cyst
+def: "presence of fluid-filled usually benign growths in the passage from the mouth to the pharynx" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+is_a: MP:0010370 ! abnormal throat morphology
+created_by: csmith
+creation_date: 2010-08-27T12:40:34Z
+
+[Term]
+id: MP:0010373
+name: myeloid hyperplasia
+def: "greater than normal number of nucleated cells of the myeloid lineage (a monocyte, granulocyte, or mast cell), found in blood or other tissue" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "enhanced myelopoesis" RELATED []
+is_a: MP:0001601 ! abnormal myelopoiesis
+is_a: MP:0008250 ! abnormal myeloid leukocyte morphology
+created_by: csmith
+creation_date: 2010-08-27T12:59:47Z
+
+[Term]
+id: MP:0010374
+name: bilirubinate stones
+def: "caliculi in the gallbladder or a bile duct that is composed of calcium bilirubinate" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "black stones" EXACT []
+synonym: "calcium bilirubinate stones" EXACT []
+synonym: "pigment stones" EXACT []
+is_a: MP:0002830 ! gallstones
+created_by: csmith
+creation_date: 2010-08-27T01:03:46Z
+
+[Term]
+id: MP:0010375
+name: increased kidney iron level
+def: "increase in the amount of iron present in the renal tissue" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+synonym: "increased renal iron level" EXACT []
+synonym: "kidney iron deposits" EXACT []
+synonym: "renal iron deposits" EXACT []
+is_a: MP:0008742 ! abnormal kidney iron level
+created_by: csmith
+creation_date: 2010-08-27T01:28:09Z
+
+[Term]
+id: MP:0010376
+name: decreased kidney iron level
+def: "reduction in the amount of iron present in the renal tissue" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+synonym: "decreased renal iron level" EXACT []
+synonym: "reduced kidney iron level" EXACT []
+synonym: "reduced renal iron level" EXACT []
+is_a: MP:0008742 ! abnormal kidney iron level
+created_by: csmith
+creation_date: 2010-08-27T01:28:25Z
+
+[Term]
+id: MP:0010377
+name: abnormal gut flora balance
+def: "anomaly in the ratio of microorganisms that live in the digestive tracts of animals, many of which perform symbiotic functions to the host" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0001663 ! abnormal digestive system physiology
+created_by: csmith
+creation_date: 2010-08-27T04:00:05Z
 
 [Typedef]
 id: part_of
