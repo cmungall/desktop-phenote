@@ -250,7 +250,7 @@ class PostCompGui {
   }
 
   private boolean isLinkToDiff(OBORestriction r) {
-    return r.completes() && !r.getType().equals(OBOProperty.IS_A);
+    return r.getCompletes() && !r.getType().equals(OBOProperty.IS_A);
   }
 
 //   /** Throws exception if no diff term - for now only returning one diff term

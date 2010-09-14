@@ -403,7 +403,7 @@ public class HtmlUtil {
 		List<LinkCollection> allLinks = new ArrayList<LinkCollection>();
 		for (Iterator<Link> it = links.iterator(); it.hasNext(); ) {
 			Link link = (Link)it.next();
-			if (((OBORestriction)link).completes()==xp) {
+			if (((OBORestriction)link).getCompletes()==xp) {
 				//only add to links list those that match the desired xp state
 				OBOProperty type = link.getType();
 				if (!relSet.contains(type)) {
