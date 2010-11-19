@@ -119,7 +119,7 @@ synonym: "craniocaudal axis" NARROW vertebrate []
 synonym: "rostral/caudal" NARROW vertebrate []
 synonym: "rostrocaudal axis" NARROW vertebrate []
 is_a: BSPO:0000010 ! anatomical axis
-relationship: approximately_perpendicular_to BSPO:0000016 ! dorsal/ventral axis
+relationship: BSPO:0000104 BSPO:0000016 ! dorsal/ventral axis
 
 [Term]
 id: BSPO:0000014
@@ -484,7 +484,7 @@ xref: FBcv:0000053
 xref: FBql:00005848
 is_a: BSPO:0000054 ! anatomical side
 relationship: BSPO:0000096 BSPO:0000056 ! posterior side
-relationship: opposite_to BSPO:0000056 ! posterior side
+relationship: BSPO:0000113 BSPO:0000056 ! posterior side
 relationship: starts_axis BSPO:0000013 ! anterior/posterior axis
 
 [Term]
@@ -505,7 +505,7 @@ synonym: "apical" EXACT []
 xref: FBcv:0000054
 xref: FBql:00005854
 is_a: BSPO:0000054 ! anatomical side
-relationship: opposite_to BSPO:0000058 ! basal side
+relationship: BSPO:0000113 BSPO:0000058 ! basal side
 relationship: starts_axis BSPO:0000014 ! apical/basal axis
 
 [Term]
@@ -544,7 +544,7 @@ synonym: "proximal" EXACT []
 xref: FBcv:0000066
 xref: FBql:00005852
 is_a: BSPO:0000054 ! anatomical side
-relationship: opposite_to BSPO:0000062 ! distal side
+relationship: BSPO:0000113 BSPO:0000062 ! distal side
 relationship: starts_axis BSPO:0000015 ! proximal/distal axis
 
 [Term]
@@ -566,7 +566,7 @@ xref: FBcv:0000059
 xref: FBql:00005842
 is_a: BSPO:0000054 ! anatomical side
 relationship: BSPO:0000098 BSPO:0000066 ! lateral side
-relationship: opposite_to BSPO:0000068 ! ventral side
+relationship: BSPO:0000113 BSPO:0000068 ! ventral side
 relationship: starts_axis BSPO:0000016 ! dorsal/ventral axis
 
 [Term]
@@ -1263,7 +1263,8 @@ domain: BSPO:0000010 ! anatomical axis
 range: CARO:0000000 ! anatomical entity
 
 [Typedef]
-id: opposite_to
+id: BSPO:0000113
+alt_id: opposite_to
 name: opposite_to
 def: "Direcly opposite to. i.e. on the opposite side through the axis." [BSPO:cjm]
 is_a: BSPO:0000105 ! ipsilateral_to
@@ -1300,3 +1301,6 @@ name: surface_of
 comment: placeholder. used for relation between anatomical surface and an anatomical side.
 domain: BSPO:0000005 ! anatomical surface
 
+[Typedef]
+id: has_axis
+name: has_axis

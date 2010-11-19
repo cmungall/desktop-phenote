@@ -1,5 +1,5 @@
 format-version: 1.2
-date: 05:10:2010 13:11
+date: 16:11:2010 11:33
 auto-generated-by: OBO-Edit 2.1-beta6
 subsetdef: abnormal_slim "Abnormal/normal slim"
 subsetdef: absent_slim "Absent/present slim"
@@ -10,6 +10,7 @@ subsetdef: relational_slim "Relational slim: types of quality that require an ad
 subsetdef: scalar_slim "Scalar slim"
 subsetdef: value_slim "Value slim"
 default-namespace: quality
+namespace-id-rule: * PATO:$sequence(7,0,9999999)$
 
 [Term]
 id: PATO:0000000
@@ -3494,8 +3495,8 @@ name: decreased thickness
 def: "A thickness which is relatively low." [PATOC:GVG]
 subset: value_slim
 synonym: "low thickness" EXACT []
-synonym: "thin" RELATED []
 synonym: "slender" RELATED []
+synonym: "thin" RELATED []
 is_a: PATO:0000915 ! thickness
 relationship: decreased_in_magnitude_relative_to PATO:0000461 ! normal
 
@@ -5548,6 +5549,7 @@ id: PATO:0000950
 name: grey
 def: "A color between white and black colors." [http://en.wikipedia.org/wiki/Grey]
 subset: value_slim
+synonym: "plumbeous" RELATED []
 is_a: PATO:0000014 ! color
 
 [Term]
@@ -9549,6 +9551,10 @@ id: PATO:0001532
 name: mono-colored
 def: "A color pattern inhering in a bearer by virtue of the bearer's having one hue." [PATOC:GVG]
 subset: value_slim
+synonym: "evenly colored" EXACT []
+synonym: "homogeneously colored" EXACT []
+synonym: "homogenously pigmented" RELATED []
+synonym: "uniformly colored" EXACT []
 is_a: PATO:0000019 ! color pattern
 
 [Term]
@@ -10322,7 +10328,9 @@ is_a: PATO:0001626 ! sufficiency
 id: PATO:0001629
 name: aggregated
 def: "A spatial pattern inhering in a bearer by virtue of the bearer's being gathered or tending to gather into a mass or whole." [WordNet:WordNet "http://wordnet.princeton.edu/"]
+synonym: "clustered" EXACT []
 is_a: PATO:0000330 ! irregular spatial pattern
+disjoint_from: PATO:0001566 ! distributed
 
 [Term]
 id: PATO:0001630
@@ -11479,7 +11487,7 @@ is_a: PATO:0000169 ! viability
 
 [Term]
 id: PATO:0001769
-name: polarity
+name: positional polarity
 def: "A positional quality inhering in a bearer by virtue of the bearer's location of features or characteristics along an axis." [PATOC:MAH]
 subset: attribute_slim
 synonym: "cellular polarity" RELATED [PATOC:MAH]
@@ -11492,13 +11500,6 @@ def: "A viability quality inhering in a population by virtue of some of it's mem
 subset: disposition_slim
 subset: value_slim
 is_a: PATO:0000169 ! viability
-
-[Term]
-id: PATO:0001771
-name: vicinity of
-def: "A relational spatial quality inhering in a bearer by virtue of the bearer's being located near in space in relation to another entity." [answers.com:answers.com "http://www.answers.com/"]
-subset: value_slim
-is_a: PATO:0001631 ! relational spatial quality
 
 [Term]
 id: PATO:0001772
@@ -11527,7 +11528,7 @@ is_a: PATO:0000083 ! phase
 id: PATO:0001775
 name: dorsal-ventral polarity
 def: "A positional quality inhering in a bearer by virtue of the bearer's location of features or characteristics along the dorsal-ventral axis." [PATOC:MAH]
-is_a: PATO:0001769 ! polarity
+is_a: PATO:0001769 ! positional polarity
 
 [Term]
 id: PATO:0001776
@@ -12897,6 +12898,7 @@ id: PATO:0001946
 name: banded
 def: "A color pattern inhering in a bearer by virtue of bearer's exhibiting transverse stripes of one hue or degree of saturation crossing another." [ISBN:0881923214]
 subset: value_slim
+synonym: "striped" EXACT []
 is_a: PATO:0001533 ! multi-colored
 
 [Term]
@@ -12904,6 +12906,8 @@ id: PATO:0001947
 name: netted
 def: "A color pattern inhering in a bearer by virtue of bearer's being covered with reticulated lines of a different hue or degree of saturation." [ISBN:0881923214]
 subset: value_slim
+synonym: "net-like " EXACT []
+synonym: "reticulated" EXACT []
 is_a: PATO:0001533 ! multi-colored
 
 [Term]
@@ -13475,7 +13479,7 @@ is_a: PATO:0002008 ! concave 3-D shape
 id: PATO:0002023
 name: apical-basal polarity
 def: "A positional quality inhering in a bearer by virtue of the bearer's location of features or characteristics along an apical-basal axis." [PATOC:MAH]
-is_a: PATO:0001769 ! polarity
+is_a: PATO:0001769 ! positional polarity
 
 [Term]
 id: PATO:0002024
@@ -13483,7 +13487,7 @@ name: anterior-posterior polarity
 def: "A positional quality inhering in a bearer by virtue of the bearer's location of features or characteristics along the anterior-posterior axis." [PATOC:MAH]
 synonym: "rostral-caudal polarity " EXACT []
 synonym: "superior-caudal polarity (human torso)" EXACT []
-is_a: PATO:0001769 ! polarity
+is_a: PATO:0001769 ! positional polarity
 
 [Term]
 id: PATO:0002025
@@ -13764,6 +13768,7 @@ id: PATO:0002054
 name: laterally compressed
 def: "A quality inhering in a bearer by virtue of the bearer's being flattened along transverse axis." [PATOC:msp]
 subset: value_slim
+synonym: "laterally flattened" EXACT []
 synonym: "transversely flattened" RELATED []
 is_a: PATO:0002254 ! flattened
 created_by: George Gkoutos
@@ -14550,7 +14555,7 @@ creation_date: 2009-10-26T01:03:17Z
 [Term]
 id: PATO:0002136
 name: radiopacity
-def: "A quality inhering in a bearer by virtue of the bearer's relative inability of electromagnetism to pass through a particular material, particularly X-rays." [Wikipedia:WIkipedia "http://en.wikipedia.org/wiki/Radiopacity"]
+def: "A quality inhering in a bearer by virtue of the bearer's relative inability of electromagnetism to pass through a particular material, particularly X-rays." [Wikipedia:Wikipedia "http://en.wikipedia.org/wiki/Radiopacity"]
 subset: attribute_slim
 subset: disposition_slim
 is_a: PATO:0001291 ! electromagnetic (EM) radiation quality
@@ -15415,7 +15420,7 @@ creation_date: 2010-07-09T01:59:35Z
 
 [Term]
 id: PATO:0002224
-name: V--shaped
+name: V-shaped
 def: "An angular shape quality inhering in a bearer by virtue of the bearer's having a single angle in its length giving the bearer the form of the letter V." [PATOC:JE]
 subset: value_slim
 is_a: PATO:0001977 ! angular
@@ -15502,6 +15507,8 @@ id: PATO:0002233
 name: far from
 def: "A relational spatial quality inhering in a bearer by virtue of the bearer's being located far (not close to) in space in relation to another entity." [PATOC:PM]
 subset: relational_slim
+synonym: "distant from" EXACT []
+synonym: "remote from" EXACT []
 is_a: PATO:0001631 ! relational spatial quality
 created_by: george
 creation_date: 2010-07-19T02:43:53Z
@@ -15517,12 +15524,12 @@ creation_date: 2010-07-19T04:25:58Z
 
 [Term]
 id: PATO:0002235
-name: ensiform
+name: blade-like
 def: "A tapered shape quality inhering in a bearer by virtue of the bearer's being flat, slender, and tapering to a point." [PATOC:JE]
 subset: value_slim
 synonym: " sword-like" EXACT []
-synonym: "blade-like" EXACT []
-synonym: "blade-shaped," EXACT []
+synonym: "blade-shaped" EXACT []
+synonym: "ensiform " EXACT []
 synonym: "sword-shaped" EXACT []
 is_a: PATO:0001500 ! tapered
 created_by: george
@@ -15640,6 +15647,7 @@ def: "A quality inhering in a bearer by virtue of the bearer's having or lacking
 subset: attribute_slim
 subset: scalar_slim
 is_a: PATO:0000141 ! structure
+relationship: correlates_with PATO:0000014 ! color
 created_by: george
 creation_date: 2010-08-09T04:14:00Z
 
@@ -15658,7 +15666,10 @@ id: PATO:0002249
 name: unpigmented
 def: "A degree of pigmentation quality inhering in a bearer by virtue of the bearer's lacking substances produced by living organisms that have a color resulting from selective color absorption." [PATOC:GVG]
 subset: value_slim
+synonym: "depigmented" EXACT []
 is_a: PATO:0002247 ! degree of pigmentation
+disjoint_from: PATO:0002250 ! increased pigmentation
+disjoint_from: PATO:0002251 ! decreased pigmentation
 created_by: george
 creation_date: 2010-08-09T04:17:04Z
 
@@ -15756,9 +15767,13 @@ creation_date: 2010-09-08T03:15:16Z
 [Term]
 id: PATO:0002259
 name: adjacent to
-def: "A relational spatial quality inhering in a bearer by virtue of the bearer's being close to another entity." [PATOC:GVG]
+alt_id: PATO:0001771
+def: "A relational spatial quality inhering in a bearer by virtue of the bearer's being located near in space in relation to another entity." [PATOC:GVG]
 subset: relational_slim
 subset: value_slim
+synonym: "close to" EXACT []
+synonym: "near to" EXACT []
+synonym: "vicinity of" EXACT []
 is_a: PATO:0001631 ! relational spatial quality
 created_by: george
 creation_date: 2010-09-08T03:20:06Z
@@ -15844,6 +15859,89 @@ subset: value_slim
 is_a: PATO:0000140 ! position
 created_by: george
 creation_date: 2010-10-05T01:09:32Z
+
+[Term]
+id: PATO:0002269
+name: accumulation
+def: "A structural quality of the collection or massing of one physical object within another physical object." [PATOC:CVC]
+subset: attribute_slim
+subset: relational_slim
+subset: scalar_slim
+synonym: "pooled" RELATED []
+is_a: PATO:0000141 ! structure
+created_by: george
+creation_date: 2010-10-26T01:57:02Z
+
+[Term]
+id: PATO:0002270
+name: increased accumulation
+def: "An increased number of physical objects that are accumulated within another physical object usually as a result of a failure to break down or remove objects in a timely manner." [PATOC:MM]
+subset: relational_slim
+subset: value_slim
+synonym: "accumulated" EXACT []
+is_a: PATO:0002269 ! accumulation
+created_by: george
+creation_date: 2010-10-26T02:00:20Z
+
+[Term]
+id: PATO:0002271
+name: decreased accumulation
+def: "An accumulation which is relative low." [PATOC:GVG]
+subset: relational_slim
+subset: value_slim
+is_a: PATO:0002269 ! accumulation
+created_by: george
+creation_date: 2010-10-26T02:04:45Z
+
+[Term]
+id: PATO:0002272
+name: parallel to
+def: "A relational spatial quality inhering in a bearer by virtue of the bearer's being located at the same continuous distance relative to another object." [PATOC:WD]
+subset: relational_slim
+subset: value_slim
+is_a: PATO:0001631 ! relational spatial quality
+created_by: george
+creation_date: 2010-10-26T02:07:42Z
+
+[Term]
+id: PATO:0002273
+name: marbled
+def: "Multicolored quality inhering in a bearer by virtue of the bearer's being colored with a variegated pattern resembling marble," [url:http\://www.oed.com/]
+subset: value_slim
+is_a: PATO:0001533 ! multi-colored
+created_by: george
+creation_date: 2010-11-16T11:17:32Z
+
+[Term]
+id: PATO:0002274
+name: mottled
+def: "Multicolored quality inhering in a bearer by virtue of the bearer's being dappled with spots, patches, or blotches of different colors" [url:http\://www.oed.com/]
+subset: value_slim
+is_a: PATO:0001533 ! multi-colored
+created_by: george
+creation_date: 2010-11-16T11:22:57Z
+
+[Term]
+id: PATO:0002275
+name: high contrast color pattern
+def: "A color pattern quality inhering in a bearer by virtue of the bearer's color pattern in which light and dark colors (e.g., white and black) are codistributed to create a visual impression." [PATOC:WD]
+subset: disposition_slim
+is_a: PATO:0000019 ! color pattern
+created_by: george
+creation_date: 2010-11-16T11:24:15Z
+
+[Term]
+id: PATO:0002276
+name: barred
+def: "A color pattern inhering in a bearer by virtue of bearer's exhibiting vertical bars of one hue or degree of saturation crossing another." [PATOC:WD]
+subset: value_slim
+is_a: PATO:0001533 ! multi-colored
+created_by: george
+creation_date: 2010-11-16T11:30:40Z
+
+[Typedef]
+id: correlates_with
+name: correlates_with
 
 [Typedef]
 id: decreased_in_magnitude_relative_to
