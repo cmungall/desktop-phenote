@@ -435,20 +435,17 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
                 Font tnf = termName.getFont();
                 termName.setFont(tnf.deriveFont(tnf.getStyle() ^ Font.BOLD));
 
-//    termName.setVerticalAlignment(JLabel.BOTTOM);  // doesn't work
 		nameLabel.setLabelFor(termName);
-//		nameLabel.setVerticalAlignment(JLabel.TOP); // Doesn't help--label still hangs below text.
-//		basicInfoPanel.add(termName, SpringLayout.SOUTH);
 		basicInfoPanel.add(termName);
-    // make nameLabel draggable to drag term to fields
-    //nameLabel.setTransferHandler(new InfoTransferHandler());
+		// make nameLabel draggable to drag term to fields
+		//nameLabel.setTransferHandler(new InfoTransferHandler());
 
 		JLabel idLabel = new JLabel("ID: ", JLabel.TRAILING);
 		basicInfoPanel.add(idLabel);
 		termID = new JTextField(); //Label(); -> selectable text!
-    termID.setEditable(false);
-    termID.setBorder(null); // ?
-    termID.setBackground(Color.WHITE);
+		termID.setEditable(false);
+		termID.setBorder(null); // ?
+		termID.setBackground(Color.WHITE);
 		idLabel.setLabelFor(termID);
 		basicInfoPanel.add(termID);
 
