@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.TimeZone;
+import javax.swing.JOptionPane;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -40,13 +41,19 @@ public class FileUtil {
 
   private static final Logger LOG =  Logger.getLogger(FileUtil.class);
 
-  /** if ~/.phenote doesnt exist yet its created */
+  /** if ~/.phenote doesn't exist yet, create it. */
   public static File getDotPhenoteDir() {
     String home = System.getProperty("user.home");
     File dotPhenote = new File(sep(home,".phenote"));
     if (!dotPhenote.exists()) {
-      LOG.info("creating "+dotPhenote+" directory");
+      LOG.info("Creating "+dotPhenote+" directory.");
       dotPhenote.mkdir();
+      if (!dotPhenote.exists()) { // Failed to make it
+	  LOG.error("Couldn't create " + dotPhenote);
+	  // This is so bad, we better tell the user
+	  JOptionPane.showMessageDialog(null,"Couldn't create " + dotPhenote + "!\nCheck that you have permission to write in " + home + ".  Error is unrecoverable--exiting now.", "Can't create .phenote", JOptionPane.ERROR_MESSAGE);
+	  System.exit(1);
+      }
     }
     return dotPhenote;
   }
@@ -96,8 +103,11 @@ public class FileUtil {
     }
     List<URL> possibleUrls = getPossibleUrls(filename);
     for (URL u : possibleUrls) {  ///there's no particular order here, is there???
-	//	LOG.debug("findUrl: checking " + u+", url exists: "+urlExists(u));
-      if (urlExists(u)) return u;
+//      LOG.debug("findUrl: checking " + u+", url exists: "+urlExists(u));
+      if (urlExists(u)) {
+//        LOG.debug("Found " + filename + " at " + u);
+        return u;
+      }
     }
     //System.out.println("Failed to find file "+filename);
     LOG.error("findUrl: failed to find file "+filename);
@@ -112,7 +122,6 @@ public class FileUtil {
   // better error message
   // split into getPossibleMaster?ConfigUrls & getPossibleOboUrls
   private static List<URL> getPossibleUrls(String filename) {
-      //      LOG.debug("getPossibleUrls: " + filename); // DEL
     List<URL> urls = new ArrayList<URL>(5);
     if (filename == null) {
       System.out.println("cant find null file");
@@ -130,14 +139,15 @@ public class FileUtil {
     addFile(getDotPhenoteOboDir().getPath()+"/"+filename,urls);
     // addFile(getDotPhenoteConfDir().getPath() ???
     addFile("obo-files/"+filename,urls);//this is obo-files specific - separate method?
+//    LOG.debug("getPossibleUrls " + filename + ": url list = " + urls);
     return urls;
   }
 
   // make an inner class for this?
   private static void addFile(String filename,List<URL> urls) {
     if (filename == null) {
-      System.out.println("cant find null file");
-      LOG.error("cant find null file");
+      System.out.println("addFile: can't find null file");
+      LOG.error("addFile: can't find null file");
       return;
     }
     try {
@@ -146,27 +156,30 @@ public class FileUtil {
 	    u = new URL(filename);
 	else
 	    u = new File(filename).toURL();
-	//      LOG.debug("addFile(" + filename + "): u = " + u);// DEL
+//        LOG.debug("addFile(" + filename + "): u = " + u);// DEL
       if (u != null) urls.add(u);
 
       URL jarUrl = FileUtil.class.getResource(filename); // Does this ever work?  It always seems like the next attempt (with the /) works better.
+//      LOG.debug("jarUrl = " + jarUrl); // DEL
       if (jarUrl != null) urls.add(jarUrl);
 
       jarUrl = FileUtil.class.getResource("/"+filename);
+//      LOG.debug("second jarUrl = " + jarUrl); // DEL
+      if (jarUrl != null)
+        urls.add(jarUrl);
+
       if (filename.indexOf(".cfg") > 0 && jarUrl != null) {
 	  String appConfDir = jarUrl.getFile();
           if (appConfDir.indexOf("/jars") > 0)
             appConfDir = appConfDir.substring(0, appConfDir.indexOf("/jars")) + "/conf/";
 	  if (appConfDir.startsWith("file:"))
 	      appConfDir = appConfDir.substring(5);
-	  //	  LOG.debug("addFile: now appConfDir = " + appConfDir + ", filename = " + filename); // DEL
+//          LOG.debug("addFile: now appConfDir = " + appConfDir + ", filename = " + filename); // DEL
 	  URL appConfUrl = new File(appConfDir + filename).toURL();
 	  if (appConfUrl != null)
 	      urls.add(appConfUrl);
-	  urls.add(jarUrl);
       }
     } catch (MalformedURLException e) {
-      //System.out.println("bad file url "+e);
       LOG.error("addFile(" + filename + "): error making url: "+e);
     }
   }
