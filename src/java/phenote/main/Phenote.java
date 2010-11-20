@@ -201,7 +201,7 @@ public class Phenote {
   public static void showBePatientDialog() {
 //          LOG.debug("showBePatientDialog"); // DEL
     bePatientDialog = new JDialog((Frame)null, "Reading ontology files--please wait", false);
-    bePatientDialog.setPreferredSize(new Dimension(540, 240));
+    bePatientDialog.setPreferredSize(new Dimension(540, 270));
     bePatientDialog.setBackground(Color.WHITE);
     bePatientDialog.setLayout(new BorderLayout(10,10));
     bePatientDialog.setLocationRelativeTo(null); // centers panel on screen
@@ -215,7 +215,7 @@ public class Phenote {
       LOG.error("Unable to find Phenote logo (" + logoFile + ")");
     }
 
-    String imageString = (logoURL == null) ? "" : "<center><img vspace=15 src=" + logoURL + "></center.";
+    String imageString = (logoURL == null) ? "" : "<center><img vspace=15 src=\"" + logoURL + "\">";
     String myConfig = "";
     try {
       myConfig = " (" + Config.inst().getMyPhenoteConfigString() + ")";
@@ -223,12 +223,12 @@ public class Phenote {
     catch (IOException e) {
     }
 
-    bePatientDialog.add(new JLabel("<html><body>" + imageString +
+    bePatientDialog.add(new JLabel("<html><body bgcolor=\"#FFFFFF\">" + imageString +
                                    "<br><br><font size=4>Phenote is updating and loading the ontology files required by your configuration" + 
                                    myConfig +
                                    ".<br>" +
                                    "This process will take a while (possibly several minutes).</font><br><br>" +
-                                   "<center><hr><br><font size=2>Phenote is a project of the Berkeley Bioinformatics Open-Source Projects" +
+                                   "<hr><br><font size=2>Phenote is a project of the Berkeley Bioinformatics Open-Source Projects" +
                                    " (<a href='http://www.berkeleybop.org'>BBOP</a>).<br>It is distributed under the FreeBSD license.</font></center><br></body></html>"),
                         BorderLayout.NORTH);
 
@@ -404,7 +404,8 @@ public class Phenote {
       try { Config.inst().loadDefaultConfigFile(); }
       catch (ConfigException ce) { 
 //        logErr("Failed to load requested configuration: "+ce+".  Loading fallback flybase config file instead.");
-        logErr("Failed to load requested configuration: "+ce);
+        logErr("Failed to load requested configuration " +  Config.inst().getDefaultFile() + ": "+ce);
+	JOptionPane.showMessageDialog(null,"Couldn't load requested configuration file " + Config.inst().getDefaultFile() + ".\nYou will be prompted to choose a different configuration.", "Can't find requested configuration", JOptionPane.ERROR_MESSAGE);
 //        try { Config.inst().loadDefaultFlybaseConfigFile(); }
         try {
           String masterConfig = Config.inst().getDefaultFile();
