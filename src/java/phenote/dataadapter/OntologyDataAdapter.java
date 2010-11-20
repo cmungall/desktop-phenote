@@ -395,25 +395,34 @@ public class OntologyDataAdapter {
 //      InputStream is = oboUrl.openStream();
       InputStream is = FileUtil.getInputStreamWithOrWithoutProxy(oboUrl);
       BufferedReader br = new BufferedReader(new InputStreamReader(is));
+      LOG.debug("First 10 lines of " + oboUrl);
       // just try first 15 lines? try til hit [Term]?
-      for (int i=1; i<=15; i++) {
+      Date d = null;
+      for (int i=1; i<=10; i++) {
         String line = br.readLine();
         if (i == 1 && line == null)
           throw new OntologyException("readLine returns null, "+
               "url seems to have no content: "+oboUrl);
-        if (line == null)
+        if (line == null) {
+          br.close();
           throw new OntologyException("No date found in url "+oboUrl);
+        }
 
         // eg date: 22:08:2006 15:38
+        LOG.debug(i + ": " + line);  // For debugging
         if (!line.startsWith("date:")) continue;
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd:MM:yyyy HH:mm");
-        Date d = dateFormat.parse(line, new ParsePosition(6));
+        d = dateFormat.parse(line, new ParsePosition(6));
         //LOG.debug("date "+d+" for url "+oboUrl+" line "+line);
-        br.close();
+//        br.close();
         if (d == null)
           throw new OntologyException("getOboDate: couldn't parse date line from " + oboUrl + ": "+line);
-        return d.getTime();
+        // Just for now, don't return yet--read more lines (for debugging)
+//        return d.getTime();
       }
+      br.close();
+      if (d != null)
+        return d.getTime();
 
 //       URLConnection urlConnection = FileUtil.getURLConnectionWithOrWithoutProxy(oboUrl);
 //       // Doesn't seem to work--returns 0.
