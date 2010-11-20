@@ -80,6 +80,7 @@ import phenote.gui.selection.SelectionManager;
 import phenote.gui.selection.TermSelectionEvent;
 import phenote.gui.selection.TermSelectionListener;
 import phenote.gui.selection.UseTermListener;
+import phenote.gui.GuiUtil;
 import phenote.util.HtmlUtil;
 import phenote.util.LinkCollection;
 import edu.stanford.ejalbert.BrowserLauncher;
@@ -171,8 +172,9 @@ public class TermInfo2 extends AbstractGUIComponent {
 	private JPanel basicInfoPanel;
 
 	//private JLabel termName; // no selection
-  //private JTextField termName; // doesnt do html
-  private JEditorPane termName;
+  //private JTextField termName; // doesnt do html   // Why do we need html?
+//  private JEditorPane termName;  // Problematic--hard to adjust alignment, for example.
+  private JTextField termName;
 
 	//private JLabel termID;
   private JTextField termID;
@@ -384,7 +386,6 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 	}
 
 	private void initTermInfo() {
-
 		// create the panel the whole thing will live in (including toolbars,
 		// etc.)
 		//this.setLayout(new BorderLayout(0,0));
@@ -421,14 +422,23 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 		// Create and populate the panel.
 		JLabel nameLabel = new JLabel("Term: ", JLabel.TRAILING);
 		basicInfoPanel.add(nameLabel);
-		termName = new JEditorPane(); // handles html & text select/copy
-    termName.setEditable(false);
-    termName.setBorder(null);
-    termName.setBackground(Color.WHITE);
-    termName.setContentType("text/html");
+//		termName = new JEditorPane(); // handles html & text select/copy
+		termName = new JTextField();
+                termName.setEditable(false);
+                termName.setBorder(null);
+                termName.setBackground(Color.WHITE);
+//    termName.setContentType("text/html");
 		termName.setText("(No Selection)");
+//                termName.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);
+//                termName.setFont(new Font("Arial", Font.BOLD, 12));
+                // Whatever the termName font is, make it bold
+                Font tnf = termName.getFont();
+                termName.setFont(tnf.deriveFont(tnf.getStyle() ^ Font.BOLD));
+
+//    termName.setVerticalAlignment(JLabel.BOTTOM);  // doesn't work
 		nameLabel.setLabelFor(termName);
-		nameLabel.setVerticalAlignment(JLabel.TOP); // Doesn't help--label still hangs below text.
+//		nameLabel.setVerticalAlignment(JLabel.TOP); // Doesn't help--label still hangs below text.
+//		basicInfoPanel.add(termName, SpringLayout.SOUTH);
 		basicInfoPanel.add(termName);
     // make nameLabel draggable to drag term to fields
     //nameLabel.setTransferHandler(new InfoTransferHandler());
@@ -458,6 +468,10 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 		definitionTextArea.setBorder(null);
 		definitionTextArea.setBackground(Color.WHITE);
 		definitionTextArea.setContentType("text/html");
+                definitionTextArea.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);
+                definitionTextArea.setFont(new Font("Arial", Font.PLAIN, 12));
+//                definitionTextArea.setVerticalAlignment(JLabel.BOTTOM); // doesn't work
+
 		
 		termHyperlinkListener = new TermHyperlinkListener();
 		definitionLabel.setLabelFor(definitionTextArea);
@@ -808,7 +822,8 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 
 		// this refreshes the main panel
 		//this seems a little out of order, but its to get the scrollbar movement right
-		termName.setText("<html><b>"+oboClass.getName()+"</b></html>"); 
+//		termName.setText("<html><b>"+oboClass.getName()+"</b></html>"); 
+		termName.setText(oboClass.getName());
 		termName.validate();
 		termName.repaint();  //really trying to make sure the scroll works properly.
 		basicInfoPanel.validate();
@@ -1299,7 +1314,10 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 			SpringUtilities.makeCompactGrid(panel, rowCount, 2, // rows, cols
 					INITX, INITY, // initX, initY
 					XPAD, YPAD); // xPad, yPad
-			int[] maxX = {PREFERREDX,-1};
+                        // Need more space for some of the longer relationships (e.g., has_soma_location)
+                        // Could we somehow find the longest relationship among the parents & children of the current term
+                        // and set maxX accordingly?
+			int[] maxX = {PREFERREDX+32,-1};
 			int[] maxY = null;
 			SpringUtilities.fixCellWidth(panel, rowCount, 2, // rows,
 					// cols
@@ -1838,19 +1856,3 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
   }
 
 }
-
-
-//   /** use term listener comes from selection events, and it listens for useTerm
-//       events, this is how UseTerm button sets terms in char field guis.
-//       I think this should ignore setting to null, which right now is what
-//       happens from normal select events (as opposed to mouse over events)
-//   actually i think this isnt used anymore and should be taken out
-//   replaced by term info toolbar.setUseTermListener */
-//   private void setUseTermListener(UseTermListener utl) {
-//     // ignore null useTermListeners??, this means keep using one set previous
-//     LOG.debug("setting use term "+utl);
-//     if (utl == null) return;
-//     useTermListener = utl;
-//   }
-	
-
