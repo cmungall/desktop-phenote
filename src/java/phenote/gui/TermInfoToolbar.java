@@ -13,6 +13,7 @@ import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
 import javax.swing.border.EtchedBorder;
@@ -119,7 +120,7 @@ public class TermInfoToolbar extends JToolBar {
 //    buttons.add(GETANNOTATIONSBUTTONINDEX, getAnnotationsButton);
 
     termField =  new JTextArea();
-    termField.setFont(new Font("Arial", Font.BOLD, 12));
+    termField.setFont(new Font("Arial", Font.BOLD, 14));
     termField.setWrapStyleWord(true);
     termField.setLineWrap(true);
 //    termField.setContentType("text/html");
