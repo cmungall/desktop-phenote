@@ -578,7 +578,10 @@ public class Config {
       PrintStream os = new PrintStream(new FileOutputStream(myPhenote));
       os.print(newDefaultFileString);
       os.close();
-    } catch (FileNotFoundException e) { throw new ConfigException(e); }
+    } catch (FileNotFoundException e) {
+	LOG.error("writeMyPhenoteDefaultFile: couldn't write config choice " + newDefaultFileString + " to " + getMyPhenoteFile());
+	throw new ConfigException(e); 
+    }
   }
 
 
@@ -1175,6 +1178,7 @@ public class Config {
   }
   
   public boolean hasNCBIAdapter() {
+//    log().debug("hasNCBIAdapter = " + (getNCBIDataAdapters()!=null) + " for " + configFile);
   	return getNCBIDataAdapters()!=null;
   }
   
@@ -1225,6 +1229,7 @@ public class Config {
   }
   public void addFieldConfig(FieldConfig fc) {
     allFields.add(fc);
+//    log().debug("addFieldConfig + " + fc + "; isEnabled = " + fc.isEnabled());
     if (fc.isEnabled())
       enabledFields.add(fc);
   }
