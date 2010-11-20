@@ -160,7 +160,6 @@ public class FileUtil {
       if (u != null) urls.add(u);
 
       URL jarUrl = FileUtil.class.getResource(filename); // Does this ever work?  It always seems like the next attempt (with the /) works better.
-//      LOG.debug("jarUrl = " + jarUrl); // DEL
       if (jarUrl != null) urls.add(jarUrl);
 
       jarUrl = FileUtil.class.getResource("/"+filename);
