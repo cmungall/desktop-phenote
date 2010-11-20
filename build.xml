@@ -30,7 +30,7 @@
     <property name="lib" value="jars"/>
     <property name="jarfile" value="jars/phenote.jar"/>
 	<property name="nativelibs-jarname" value="phenote-nativelibs.jar"/>
-    <property name="obo" value="obo-files"/>
+    <property name="obo-files" value="obo-files"/>
     <property name="conf" value="conf"/>
     <property name="images" value="images"/>
 	<property name="dist" value="dist"/>
@@ -41,7 +41,7 @@
 	<tstamp>
 		<format property="NOW" pattern="yyyy-MM-dd_HH:mm:ss"/>
 	</tstamp>
-	<property name="phenote.version" value="1.8.3"/>
+	<property name="phenote.version" value="1.8.4"/>
 	<property name="phenote.build" value="${NOW}"/>
 
     <!-- override this from command line with  -DCONF-FILE=initial-zfin.cfg -->
@@ -329,7 +329,7 @@ them into  the classfiles directory. excludes="test/**"  -->
     <target name="jar-pase" depends="compile">
         <jar destfile="${jarfile}">
             <fileset dir="${classfiles}"/>
-            <fileset file="${obo}/*.obo"/>
+            <fileset file="${obo-files}/*.obo"/>
             <fileset file="${conf}/*.cfg"/>
 	    <fileset dir="${images}/*"/>
         </jar>
@@ -341,7 +341,7 @@ them into  the classfiles directory. excludes="test/**"  -->
         <!-- copy file="doc/phenote-website/help/Phenote.hs" todir="conf" ?? -->
         <jar destfile="${jarfile}">
             <fileset dir="${classfiles}"/>
-            <fileset dir="." includes="obo-files/" excludes="obo-files/old"/>
+            <fileset dir="." includes="obo-files/*.obo" excludes="obo-files/old,obo-files/sandra_human_phenotype.obo"/>
             <fileset file="${conf}/*.cfg"/>
         	<fileset file="${conf}/log4j.xml"/>
 	        <fileset dir="." includes="${conf}/*.xml"/>
@@ -489,7 +489,7 @@ them into  the classfiles directory. excludes="test/**"  -->
         <delete dir="${data_transfer}" />
         <mkdir dir="${data_transfer}" />
       <copy todir="${data_transfer}">
-          <fileset file="${obo}/**" />
+          <fileset file="${obo-files}/*obo" />
       </copy>
 
         <war destfile="war-deployment/phenote.war" webxml="src/web/WEB-INF/web.xml">
@@ -516,7 +516,7 @@ them into  the classfiles directory. excludes="test/**"  -->
                 <exclude name="BrowserLauncher2-10rc4.jar" />
                 <exclude name="tomcat-servlet.jar" />
             </lib>
-            <classes dir="${obo}" />
+            <classes dir="${obo-files}" />
             <classes dir="${conf}" />
 	    <classes dir="${images}" />
         </war>
@@ -532,7 +532,7 @@ them into  the classfiles directory. excludes="test/**"  -->
             <fileset dir="src/web"/>
             <lib dir="${lib}"/>
             <classes dir="${classfiles}"/>
-            <zipfileset dir="${obo}"/>
+            <zipfileset dir="${obo-files}"/>
             <!-- prefix="obo-files"/ ??? -->
             <zipfileset dir="${conf}"/>
         </war>
