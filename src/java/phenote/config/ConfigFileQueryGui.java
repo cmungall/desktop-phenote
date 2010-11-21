@@ -30,6 +30,7 @@ import java.util.jar.JarFile;
 import javax.jnlp.BasicService;
 import javax.jnlp.ServiceManager;
 import javax.swing.AbstractAction;
+import javax.swing.border.EtchedBorder;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -94,6 +95,8 @@ public class ConfigFileQueryGui {
 
     JPanel buttonPanel = new JPanel();
     buttonPanel.setLayout(new BoxLayout(buttonPanel,BoxLayout.Y_AXIS));
+    //    buttonPanel.setBackground(Color.white);
+    buttonPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
     buttonGroup = new ButtonGroup();
     boolean doFirst = false;
     String currentConfig = null;
@@ -101,6 +104,7 @@ public class ConfigFileQueryGui {
     catch (IOException e) { doFirst = true; }
     for (String cfg : getConfigNames()) {
       JRadioButton b = new JRadioButton(new BtnAction(cfg)); // makes display name
+      b.setBackground(Color.white);
       buttonPanel.add(b);
       // select current myphenote if exists, else select first
       if ( (currentConfig != null && cfg.equals(currentConfig)) 
@@ -162,7 +166,7 @@ public class ConfigFileQueryGui {
 //    dialog.add(info);
 //    dialog.add(cancel);
 
-    dialog.setPreferredSize(new Dimension(300,height+30));
+    dialog.setPreferredSize(new Dimension(315,height+60));
     dialog.pack();
     centerOnScreen(dialog);
     dialog.addWindowListener(new WindowCancel());
