@@ -185,3 +185,5 @@ now shows whole tree.
   dialog box and then exits.
 - Improved appearance of config chooser on Windows.
 - Phenote logo is now appearing properly on "please wait" splash screen on Windows.
+- To help debug Sandra's problem, it now prints the first 10 lines of each
+ontology file to the log.  (Can turn this off when that problem is resolved.)
