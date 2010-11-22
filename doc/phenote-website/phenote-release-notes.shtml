@@ -22,6 +22,18 @@
 
 <h1>1.8</h1>
 
+<h2>1.8.4</h2>
+<ul>
+	  <li> bugfix: Graph View was showing only immediate parent(s), now shows whole tree (bug fixed in OBO-Edit)</li>
+	  <li> bugfix: Fixed problem finding obo files in jar (broken between 1.7-beta16 and 1.7-beta17)</li>
+	  <li> bugfix: Term Info panel layout improvements (e.g., made fonts match; left more space for long relationship names in Parent/Child panel)</li>
+	  <li> bugfix: Improvements to appearance of splash screen and configuration chooser on Windows</li>
+	  <li> change:  If there's no .phenote directory and Phenote can't create it (this was
+  happening to me when I ran the Windows emulator), it now pops up an
+  error dialog and then exits.</li>
+</ul>
+
+
 <h2>1.8.2-3</h2>
 <ul>
   <li> 1.8.2 and 1.8.3 are essentially the same as 1.8.1.  The only changes are that some configuration and ontology files have been updated, and 1.8.3 now explicitly requires you to have Java 1.6 installed
