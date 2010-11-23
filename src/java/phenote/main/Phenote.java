@@ -201,7 +201,7 @@ public class Phenote {
   public static void showBePatientDialog() {
 //          LOG.debug("showBePatientDialog"); // DEL
     bePatientDialog = new JDialog((Frame)null, "Reading ontology files--please wait", false);
-    bePatientDialog.setPreferredSize(new Dimension(540, 270));
+    bePatientDialog.setPreferredSize(new Dimension(540, 250));
     bePatientDialog.setBackground(Color.WHITE);
     bePatientDialog.setLayout(new BorderLayout(10,10));
     bePatientDialog.setLocationRelativeTo(null); // centers panel on screen
@@ -404,9 +404,9 @@ public class Phenote {
       try { Config.inst().loadDefaultConfigFile(); }
       catch (ConfigException ce) { 
 //        logErr("Failed to load requested configuration: "+ce+".  Loading fallback flybase config file instead.");
-        logErr("Failed to load requested configuration " +  Config.inst().getDefaultFile() + ": "+ce);
-	JOptionPane.showMessageDialog(null,"Couldn't load requested configuration file " + Config.inst().getDefaultFile() + ".\nYou will be prompted to choose a different configuration.", "Can't find requested configuration", JOptionPane.ERROR_MESSAGE);
-//        try { Config.inst().loadDefaultFlybaseConfigFile(); }
+        logErr("Failed so far to load requested configuration " +  Config.inst().getDefaultFile() + ": "+ce);
+        // We don't need to complain yet--there are still more things to try.
+//	JOptionPane.showMessageDialog(null,"Couldn't find requested configuration file " + Config.inst().getDefaultFile(), "Can't find requested configuration file", JOptionPane.WARNING_MESSAGE);
         try {
           String masterConfig = Config.inst().getDefaultFile();
           String nameOfFile = FileUtil.getNameOfFile(masterConfig); 
