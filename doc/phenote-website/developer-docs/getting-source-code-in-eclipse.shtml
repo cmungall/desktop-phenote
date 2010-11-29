@@ -32,10 +32,11 @@
                 <p>However, it is not necessary to check out these projects, as the relevant jars are included in the Phenote distribution.</p>
       <p>You should update the source code periodically, as it changes frequently.  You can do that with the <code>svn update</code> command.</p>
 
-      <h1>Running Phenote from the command line</h1>
+      <h1>Compiling and running Phenote from the command line</h1>
       <p>You will need to have <a href="http://ant.apache.org/bindownload.cgi">Apache ant</a> installed on your system.</p>
       <p>After you've downloaded the source code, build the project with the command <code>ant build-all</code></p>
       <p>Then run the "phenote" shell script to launch Phenote.</p>
+      <p>Note: the jars for the supporting projects (BBOP, OBO, and OBO-Edit) that are in phenote/jars were compiled with Java 6.  If you are using a different version of Java, these included jars may be incompatible.  In that case, check out those projects (as above) and go into each directory and type "ant clean" and then "ant jar" to rebuild the jars.  Then copy the rebuilt jars (OBO/obo.jar, BBOP/bbop.jar, and OBO-Edit/runtime/oboedit.jar) into phenote/jars and remake phenote (ant clean; ant build-all).</p>
 
       <h1>Browsing the Phenote source on SourceForge</h1>
       <P>If you go

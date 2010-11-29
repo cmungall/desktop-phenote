@@ -22,7 +22,13 @@
 	  Please visit the <a href="/download.shtml">Downloads</a> page to
 	  download and install Phenote.  It's easy!
 	</p>
-	<h3>What's the best forum to ask my burning questions?</h3>
+<h3>What version of Java do I need to run Phenote?</h3>
+<p>The Phenote installer now requires Java 1.6 (aka Java SE 6), which you can download <a target="_new" href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">here</a>.
+Mac users who have earlier versions of Java installed may need to use the Java Preferences application to
+set Java SE 6 as their preferred Java to use for Java applications.</p>
+<p>If you have an old Mac that is not able to run Java 6, you can still use Phenote, but you will have
+to download the source and compile it yourself.  <a href="developer-docs/getting-source-code-in-eclipse.shtml">This page</a> explains how to do this (be sure to read the section about "Compiling and running Phenote from the command line" for instructions about what you'll need to do if you don't have Java 6).</p>
+	<h3>Where can I ask my burning questions?</h3>
 	<p>
 	  There are several discussion groups that are relevant to Phenote users.  You'll find a list on our <a href="http://www.phenote.org/contact.shtml">Contact</a> page.
 	</p>
