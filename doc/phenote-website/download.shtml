@@ -40,7 +40,7 @@
         problems.  Please use the installer edition instead.</p>
 
 	<h2>For developers</h2>
-	Check out our documentation on running Phenote from the <a href="developer-docs/getting-source-code-in-eclipse.shtml">command line or in Eclipse</a>.
+	You can download the Phenote source code and compile and run it from the <a href="developer-docs/getting-source-code-in-eclipse.shtml">command line or in Eclipse</a>.
 
 	<h2>Hardware requirements</h2>
 	<ul>

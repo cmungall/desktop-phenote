@@ -17,7 +17,7 @@
       </div>
 
       <h1>Introduction</h1>
-      <p>This page provides instructions for downloading the source code, compiling, and running the software from either the command line or through Eclipse, and is primarily intended for developers.</p>
+      <p>This page provides instructions for downloading the Phenote source code, compiling, and running the software from either the command line or through Eclipse, and is primarily intended for developers.</p>
 
       <h1>Getting the Source Code from Subversion on the command line</h1>
       <p>Phenote is stored in
@@ -25,11 +25,12 @@
       repository
       at <a href="http://obo.svn.sourceforge.net/viewvc/obo/phenote/trunk/">SourceForge</a>.  To check out the Phenote code, type this on your command line:
       <p><code>svn co https://obo.svn.sourceforge.net/svnroot/obo/phenote/trunk phenote</code></p>
-      <p>To check out the supporting projects, run these additional commands:<br>
+      <p>If you want to check out the supporting projects, you can do that as follows:<br>
           <code>svn co https://geneontology.svn.sourceforge.net/svnroot/geneontology/java/bbop/trunk BBOP</code><br>
             <code>svn co https://geneontology.svn.sourceforge.net/svnroot/geneontology/java/obo/trunk OBO</code><br>
               <code>svn co https://geneontology.svn.sourceforge.net/svnroot/geneontology/java/oboedit/trunk OBO-Edit</code><br>
-      <p>You should update the source code periodically, as it changes daily.  You can do that with the <code>svn update</code> command.</p>
+                <p>However, it is not necessary to check out these projects, as the relevant jars are included in the Phenote distribution.</p>
+      <p>You should update the source code periodically, as it changes frequently.  You can do that with the <code>svn update</code> command.</p>
 
       <h1>Running Phenote from the command line</h1>
       <p>You will need to have <a href="http://ant.apache.org/bindownload.cgi">Apache ant</a> installed on your system.</p>
