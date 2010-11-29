@@ -10,4 +10,4 @@ for file in jars/*.jar; do
 done
 
 echo "java -Xmx950M -classpath ${PHENOTE_CLASSPATH} phenote.main.PhenotePlus $@"
-java -Xmx9500M -classpath ${PHENOTE_CLASSPATH} phenote.main.PhenotePlus $@
+java -Xmx950M -classpath ${PHENOTE_CLASSPATH} phenote.main.PhenotePlus $@
