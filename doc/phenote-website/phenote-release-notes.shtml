@@ -233,7 +233,7 @@ Worm adapter changes:
 </li><li>change: Added ``suggested definition'' (text) and ``child of'' (phenotype obo) fields. Moved ``Paper Remark'' and ``Paper Remark History'' to the end. 
 </ul>
 
-<h2>04.15.2008, version <a href="phenote/1.6-beta4/phenote-plus.jnlp">1.6 - beta4</a></h2>
+<h2>04.15.2008, version 1.6 - beta4</h2>
 <ul>
 <li>feature: in-table editing added, complete with auto-completion </li>
 <li>feature: large text fields can now be viewed/edited in separate panel when configured [<a
@@ -268,7 +268,7 @@ highlighted in the genotype maker
 </ul>
 
 <h1>1.5</h1>
-<h2>03.03.2008, version <a href="phenote/1.5-release/phenote.jnlp">1.5 - release</a></h2>
+<h2>03.03.2008, version 1.5 - release</h2>
 <p>With the release of version 1.5, we are transitioning over to a new interface.  We will continue to support the webstart version of phenote for a couple of releases, but will ultimately switch to the standalone version that is debuting in this release.  The new 'Phenote+' will have at least the same capabilities as the original Phenote, but new components will be only added to the new interface.  Be sure to choose the proper phenote (or phenote plus) when entering bug reports</p>
 <ul>
 <li>feature: if user changes their annotations since previous save, user is prompted for resave [<a href="http://sourceforge.net/tracker/index.php?func=detail&amp;aid=1810448&amp;group_id=76834&amp;atid=887913">1810448</a>]</li>
@@ -291,7 +291,7 @@ highlighted in the genotype maker
 <li>bugfix: Undo with free-text type fields was broken</li>
 </ul>
 
-<h2>01.30.2008, version <a href="phenote/1.5-beta4/phenote.jnlp">1.5 - beta4</a></h2>
+<h2>01.30.2008, version 1.5 - beta4</h2>
 <ul>
 <li>feature: Added a scrollbar to the config chooser [<a href="http://sourceforge.net/tracker/index.php?func=detail&amp;aid=1799784&amp;group_id=76834&amp;atid=887913">1799784</a>]</li>
 <li>change: post-compositions are now displayed in multi-line style [<a href="http://sourceforge.net/tracker/index.php?func=detail&amp;aid=1579357&amp;group_id=76834&amp;atid=887913">1579357</a>]</li>
@@ -299,9 +299,9 @@ highlighted in the genotype maker
 <li>bugfix: Return/Enter key now selects first item in an auto-completion list before moving to next field [<a href="http://sourceforge.net/tracker/index.php?func=detail&amp;aid=1574780&amp;group_id=76834&amp;atid=887913">1574780</a>]</li>
 </ul>
 
-<h2>01.22.2008, version <a href="phenote/1.5-beta3/phenote.jnlp">1.5 - beta3</a></h2>
+<h2>01.22.2008, version 1.5 - beta3</h2>
 
-<h2>12.20.2007, version <a href="phenote/1.5-beta2/phenote.jnlp">1.5 - beta2</a></h2>
+<h2>12.20.2007, version 1.5 - beta2</h2>
 <ul>
 <li>feature: Solaris OS now supported</li>
 <li> feature: New look and feel with Phenote+
@@ -316,13 +316,13 @@ highlighted in the genotype maker
 <li>bugfix: Field name is now always shown, even if there is only one ontology configured for that field.  It used to default to the ontology name in this instance. [<a href="http://sourceforge.net/tracker/index.php?func=detail&amp;aid=1852112&amp;group_id=76834&amp;atid=887913">1852112</a>]</li>
 </ul>
 
-<h2>11.09.2007, version <a href="phenote/1.5-beta1/phenote.jnlp">1.5 - beta1</a></h2>
+<h2>11.09.2007, version 1.5 - beta1</h2>
 
 	
 <h1>1.4</h1>
 
 	
-<h2>10.10.2007, version <a href="phenote/1.4/phenote.jnlp">1.4 - release</a></h2>
+<h2>10.10.2007, version 1.4 - release</h2>
 <ul>
 	<li>feature: Loading splash more informative about what's going on behind-the-scenes such as which ontologies are loading, if they are being updated, etc.</li>
 	<li>feature: obo edit annotation model can now be optionally configured for backend, which will allow for more sophisticated data to be captured (like comparisons)</li>
@@ -348,7 +348,7 @@ highlighted in the genotype maker
 </ul>
 
 	
-<h2>08.28.2007, version <a href="phenote/1.4-beta3/phenote.jnlp">1.4-beta3</a></h2>
+<h2>08.28.2007, version 1.4-beta3</h2>
 
 	
 <ul>
@@ -401,7 +401,7 @@ taxonomic groups.</li>
 </ul>
 
 
-<h2>07.20.2007, version <a href="phenote/1.4-beta2/phenote.jnlp">1.4-beta2</a></h2>
+<h2>07.20.2007, version 1.4-beta2</h2>
 
 
 <ul>
@@ -465,202 +465,124 @@ can then be bulk edited.</li>
 
   <li>known bug: ontology files using import statements not properly read</li>
 
-
 </ul>
-
 
 
 <h1>1.3</h1>
 
-
-
-<h2>05.24.2007, version <a href="phenote/1.3/phenote.jnlp">1.3 release</a></h2>
-
+<h2>05.24.2007, version 1.3 release</h2>
 
 <ul>
 
-
   <li>feature:  <a href="http://www.phenote.org/help/">Web-based documentation and Help features.</a></li>
-
 
   <li>feature:  Metadata fields added to configuration.  User can name their configuration, add a description, and author [<a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1676756&amp;group_id=76834&amp;atid=887913">1676756</a>, <a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1672080&amp;group_id=76834&amp;atid=887913">1672080</a>]</li>
 
-
   <li>feature:  Descriptions can be added for fields </li>
-
 
   <li>feature:  Master-to-local overwrite stuff</li>
 
-
   <li>feature:  Dialog allows user to back out of exiting from File-&gt;Exit</li>
-
 
   <li>feature:  Autocompletion search default settings configurable <a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1677411&amp;group_id=76834&amp;atid=887913">1677411</a>, <a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1669579&amp;group_id=76834&amp;atid=887913">1669579</a>]
   </li>
 
-
   <li>feature:  User can save search setting defaults if changed during Phenote session</li>
 
-
   <li>change:  File-&gt;New is disabled until next version</li>
-
 
   <li>change: ncbo, zfin-standalone, flybase, demo configurations
 modified to include master-overwrite feature; keeping track of revision
 history in file comments </li>
 
-
   <li>change:  can read http, https, ftp, ftps for ontology update URLs, not just http [<a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1718945&amp;group_id=76834&amp;atid=887913">1718945</a>]</li>
-
 
   <li>bugfix: Bulk-editing functions are working again</li>
 
-
   <li>bugfix: Undo wasn't working for several functions due to a bug in the Copy function [<a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1721044&amp;group_id=76834&amp;atid=887913"> 1721044</a>]</li>
-
 
   <li>bugfix: multi-select deletes free-text content replaces with * [<a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1721032&amp;group_id=76834&amp;atid=887913">1721032</a>]</li>
 
-
   <li>bugfix: pre 1.2 post comp data wasnt able to load<big> </big>[<a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1721470&amp;group_id=76834&amp;atid=887913">1721470</a>]</li>
-
 
 </ul>
 
-
-
-
-
-<h2>05.09.2007, version <a href="phenote/1.3-beta1/phenote.jnlp">1.3-beta1</a></h2>
-
-
-
-
+<h2>05.09.2007, version 1.3-beta1</h2>
 <ul>
-
 
   <li>feature:  Added sample config for BIRN</li>
 
-
   <li>feature:  Added SAO.obo ontology for BIRN</li>
-
 
   <li>feature:  Namespace config writes back</li>
 
-
   <li>feature:  Can specify more than one website for ontology update</li>
-
 
   <li>feature:  Empty field shows all terms in ontology rather than none</li>
 
-
   <li>feature:  Can add more differentia to post comp</li>
-
 
   <li>bugfix:  Config update/merge bug where fields in wrong order fixed.</li>
 
-
   <li>known bug: can't read post-compositions from phenote versions 1.1 and prior</li>
 
-
 </ul>
-
-
-
-
 
 <h1>1.2</h1>
 
 
-<h2>05.02.2007, version <a href="phenote/1.2/phenote.jnlp">1.2</a></h2>
+<h2>05.02.2007, version 1.2</h2>
 
 <ul>
 
-
   <li>feature:  Can post-compose with &gt;2 terms </li>
 
-
   <li>feature:  Term history display can be toggled on/off (Settings-&gt;Term History menu)</li>
-
 
   <li>feature: Synonyms delineated by scope in Term Info: Exact,
 Narrow, Broad, General, Related. If the synonym category is given, it
 is displayed. For example, the term 'water' has the <i>related</i> synonym H2O, which has the category of a chemical <i>formula</i>.</li>
 
-
   <li>feature:  Obsolete replacements or consideration terms are displayed in term info with links</li>
-
 
   <li>feature:  Display term comments in Term Info beneath relationships</li>
 
-
   <li>feature:  Loading splash screen </li>
-
 
   <li>feature:  Can configure by namespace for ontologies</li>
 
-
   <li>feature:  Can automatically update ontologies during startup (configurable)</li>
-
 
   <li>feature:  Timer added to configuration during ontology update check (configurable)</li>
 
-
   <li>feature:  Can check which version of phenote is running by selecting Help-&gt;About.</li>
-
 
   <li>feature:  Added common configuration for OMIM curation for use by NCBO (ncbo.cfg).</li>
 
-
   <li>feature:  can forward and reverse sort columns by repeatedly clicking on column header [<a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1574916&amp;group_id=76834&amp;atid=887913">1574916</a>]</li>
-
 
   <li>feature:  display ontology namespace in term info box [<a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1598048&amp;group_id=76834&amp;atid=887913">1598048</a>]</li>
 
-
   <li>change:  Search filters moved into menu </li>
-
 
   <li>change:  Updates to the zfin-standalone.cfg for the zebrafish community annotation; only includes GO and ZFanatomy ontologies. </li>
 
-
   <li>bugfix:  Free-text field text not sticking in "new" or blank rows </li>
-
 
 </ul>
 
-
-
-
-
 <h1>1.1</h1>
-
-
-
-
-<h2>04.06.2007, version <a href="phenote/1.1/phenote.jnlp">1.1.3</a></h2>
-
-
-
+<h2>04.06.2007, version 1.1.3</h2>
 <ul>
-
-
   <li>feature: User can change the configuration they want to use at
 initialization from file menu; change takes effect after restart.
 (previously user had to edit the .phenote/conf/my-phenote file).</li>
-
-
 </ul>
-
-
 
 
 <h2>03.28.2007, version 1.1.1</h2>
 
-
 <ul>
-
-
     <li>feature: Phenote is now a single webstart app; user chooses
 their configuration at startup (used to be hard wired to a
 configuration)</li>
@@ -717,26 +639,14 @@ Queryable fields get a retrieve button.</li>
 
   <li>bugfix:  post-composed terms not loading [<a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1661728&amp;group_id=76834&amp;atid=887913">1661728</a>]</li>
 
-
 </ul>
 
-
-
-
 <h1>1.0</h1>
-
-
-
-
-<h2>02.06.2007, version  <a href="phenote/1.0/phenote-flybase.jnlp">1.0.5-fly</a>, <a href="1.0/phenote-zfin.jnlp">1.0.5-zfin</a></h2>
-
-
+<h2>02.06.2007, version  1.0.5-fly, 1.0.5-zfin</h2>
 
 
 <h2>01.12.2007, version1.0, 
-<a href="http://reaper.lbl.gov/phenote/html/ncbo.html">Webby
-Phenote(components used by Zfin)</a></h2>
-
+Webby Phenote(components used by Zfin)</h2>
 
 <ul>
 
@@ -745,180 +655,108 @@ field desired, not just E,Q,GC,GT,Pub. Stage, Evidence, Description,
 Abnormal, and Absent have been added through this new mechanism in the
 newest configurations. [<a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1574912&amp;group_id=76834&amp;atid=887913">1574912</a>]</li>
 
-
   <li>change:  Webby phenote is now using JSP and Spring.</li>
-
 
   <li>change:  There has been some recent work with UVictoria for ontology graph
 visualization. This is coming along well and hopefully will be seen in
 the next release.</li>
 
-
   <li>bugfix: absent fields not displaying in human 1.03 [<a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1661973&amp;group_id=76834&amp;atid=887913">1661973</a>]</li>
-
 
 </ul>
 
 
-
-
 <h1>0.9</h1>
 
-
-<h2>11.15.2006, version <a href="phenote/0.9/phenote-flybase.jnlp">0.9-fly</a>, 
-<a href="phenote/0.9/phenote-zfin.jnlp">0.9-zfin</a>, 
-<a href="http://165.124.152.194/web/html/interface.html">DictyBase
-webby phenote</a></h2>
-
+<h2>11.15.2006, version 0.9-fly, 
+0.9-zfin, DictyBase
+webby phenote</h2>
 
 <h2>11.09.2006, version 0.9</h2>
-
-
-
-
 <ul>
-
-
-
-
   <li>feature:  Undo - can step backward through previous actions</li>
-
 
   <li>feature:  Quartz scheduler used to schedule when to check for new obo files. Added by Christian Pich of Zfin. [<a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1588669&amp;group_id=76834&amp;atid=887913">1588669</a>]</li>
 
-
   <li>change:  upgraded PhenoteServlet to Spring framework.  Added by Christian Pich [<a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1588670&amp;group_id=76834&amp;atid=887913">1588670</a>]</li>
-
 
   <li>feature:  Synonyms are displayed from autocomplete with [syn]; when
 selected the term name (not the synonym) goes into the field and table (webby &amp; standalone)</li>
 
-
   <li>feature:  obsoletes are displayed from autocomplete with [obs]</li>
-
 
   <li>feature:  Bulk update &amp; copy in standalone. [<a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1579885&amp;group_id=76834&amp;atid=887913">1579885</a>, <a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1579882&amp;group_id=76834&amp;atid=887913">1579882</a>] </li>
 
-
   <li>change:  search types interface changed from radio buttons to checkboxes (j. balhoff)</li>
 
-
   <li>bugfix:  file-save button changed to say "save" not "load"</li>
-
 
   <li>feature: file-save recognizes and chooses appropriate data
 adapter based on file extension (.psx for phenosyntax and .xml for
 phenoxml)</li>
 
-
   <li>change:  Single quotes escaped for javascript fns.</li>
-
 
 </ul>
 
-
-
-
 <h1>0.8</h1>
 
-
-
-<h2>10.02.2006, version <a href="phenote/0.8/phenote-flybase.jnlp">0.8-fly</a>, 
-<a href="phenote/0.8/phenote-zfin.jnlp">0.8-zfin</a>, 
-<a href="http://165.124.152.194/web/html/interface.html">DictyBase
-webby phenote</a></h2>
+<h2>10.02.2006, version 0.8-fly, 0.8-zfin, DictyBase webby phenote</h2>
 
 <ul>
 
-
   <li>feature:  Added post composition to standalone phenote. </li>
 
-
   <li>feature:  Actions are logged for both webby/servlet &amp; standalone.</li>
-
 
   <li>feature:  Pheno-xml reader (thanks to Jim Balhoff) and improvements to pheno-xml
 writer (does pub &amp; genetic context)</li>
 
-
   <li> feature:  Command line reading &amp; writing of phenoxml &amp; phenosyntax.</li>
-
 
   <li>feature:  Application exits on window exit (unless servlet)</li>
 
-
   <li>feature:  Can filter out stage terms from zfin anatomy</li>
-
 
 </ul>
 
-
-
-
-
 <h1>0.7</h1>
-
-
-
-
-<h2>08.23.2007, version <a href="phenote/0.7/phenote-flybase.jnlp">0.7-fly.</a>,
-<a href="0.7/phenote-zfin.jnlp">0.7-zfin</a></h2>
-
+<h2>08.23.2007, version 0.7-fly, 0.7-zfin</h2>
 
 <ul>
 
   <li>feature:  entity chooser (web)</li>
 
-
   <li>feature:  can configure to check for new obo files and load
 them. (These are installed at zfin, if anyone would like to see them
 publicly let me know).</li>
 
-
   <li>feature:  entity field and term info installed into zfin (web)
 phenotype site. Term info &amp; completion are scrollable.</li>
 
-
   <li>feature: standalone version can read &amp; write pheno-syntax with ids &amp; term names in comments</li>
-
 
   <li>feature:  standalone entity chooser</li>
 
-
   <li>feature:  added pub field</li>
-
 
   <li>feature:  added 'use term' button in term info</li>
 
-
   <li>feature:  can sort table by any field in forward order by clicking on headers</li>
-
 
   <li>change:  personal config file gets copied out of jar</li>
 
-
   <li>change:  directory for file load/save remembered</li>
-
 
   <li>change:  layout fixed</li>
 
-
   <li>bugfix:  paste for mac fixed</li>
-
 
 </ul>
 
-
-
-
 <h1>0.6</h1>
-
-
-
-
-<h2>07.28.2006, version <a href="phenote/0.6/phenote-flybase.jnlp">0.6-fly</a>, <a href="phenote/0.6/phenote-zfin.jnlp">0.6-zfin</a>, 
-<a href="http://reaper.lbl.gov/phenote/html/ncbo.html">Webby Phenote
-(0.6)</a></h2>
+<h2>07.28.2006, version 0.6-fly, 0.6-zfin, Webby Phenote
+(0.6)</h2>
 
 <ul>
 
@@ -927,7 +765,6 @@ phenotype site. Term info &amp; completion are scrollable.</li>
 Entity and Quality fields and term info and thats it, and even thats
 buggy, but more coming soon! </li>
 
-
   <li> feature:  writing pheno-xml format, and uses the latest
 PATO ontology (as of July 28, 2006).</li>
 
@@ -935,7 +772,6 @@ PATO ontology (as of July 28, 2006).</li>
 
 
 <h1>0.5</h1>
-
 
 <h2>05.12.2006, version <a href="phenote/0.5/phenote-flybase.jnlp">0.5-FlyBase</a>, <a href="phenote/0.5/phenote-zfin.jnlp">0.5-ZFIN</a></h2>
 
@@ -953,23 +789,17 @@ FlyBase character wrappers that do the parsing and creating of Proforma
 character strings.</p>
 
 
-
 <h1>0.4</h1>
 
-<h2>04.26.2006, version <a href="phenote/0.4/phenote-flybase.jnlp">0.4-flybase</a>, <a href="phenote/0.4/phenote-zfin.jnlp">0.4-zfin</a></h2>
-
+<h2>04.26.2006, version 0.4-flybase, 0.4-zfin</h2>
 
 <ul>
 
-
   <li>feature:  Added Genetic Context field.</li>
-
 
   <li>feature:  Parent &amp; child terms in term info are now clickable/navigable.</li>
 
-
   <li>feature:  HTML Links in descriptions are clickable (should bring up default browser)</li>
-
 
   <li>feature:  configuration files to configure ontologies &amp; fields. This is
 currently at a devloper level (xml file) not a user level(gui - todo).
@@ -979,12 +809,9 @@ change the code to do it (like was done for the ctol release). The
 configuration for now is for developers (internal xml file), on the
 todo is to have a gui configuration for users.</li>
 
-
   <li>bugfix: can't delete to 0 rows</li>
 
-
   <li>bugfix: synonym search duplicates removed</li>
-
 
   <li>Development: Refactored for configuration &amp; adding field.
 Made the internal code much more generic for adding new fields from
@@ -994,24 +821,14 @@ improperly talking to other views. In theory this should also make it
 easier to plop a web gui on top of the current phenote model &amp;
 controller.</li>
 
-
   <li>Development:  Renamed Phenotype to Character. Added Character interface CharacterI.</li>
-
 
   <li>Development: Added tests to test suite.</li>
 
-
 </ul>
 
-
-
 <h1>0.3</h1>
-
-
-
-
-<h2>04.07.2006, version <a href="phenote/0.3/phenote-webstart.jnlp">0.3</a>, <a href="phenote/0.3.1/phenote-webstart.jnlp">0.3.1 (for CToL)</a></h2>
-
+<h2>04.07.2006, version 0.3, 0.3.1 (for CToL)</h2>
 
 <p>Note:  0.3.1 is identical to 0.3 except that it has ontologies for CToL
 (fish evolution group). In particular it uses a fish taxonomy
@@ -1024,98 +841,66 @@ bit more pressing.</p>
 here. Cleaned up and fixed a lot of the bugs in 0.2, which was rather
 buggy.</p>
 
-
 <ul>
-
 
   <li>feature:  Completion terms now sorted alphabeitcally.</li>
 
-
   <li>feature:  Obsoletes are now in addition to regular terms, not in lieu of.</li>
-
 
   <li>feature:  Filtering out attribute values (todo: change to actually filter in
 values)</li>
 
-
   <li>change:  Html formatting of term info (todo: make terms selectable)</li>
-
 
   <li>feature:  Children relations are in term info</li>
 
-
   <li>change:  Term info layout greatly improved</li>
-
 
   <li>change:  Term info in scroller</li>
 
-
   <li>change:  Border with label around term info</li>
-
 
   <li>change:  Put definition at end of term info</li>
 
-
   <li>bugfix:  Backspace in ontology combo box</li>
-
 
   <li>bugfix:  Selection of item in comp list causing exception, not going in term box</li>
 
-
   <li>bugfix:  No terms with just 1 char</li>
-
 
   <li>bugfix:  Popup was staying up after selection</li>
 
-
   <li>development:  Test suite added! (todo: add more tests)</li>
-
 
   <li>development:  Migrated to jdk 1.5 (which caused some of the bugs above)</li>
 
-
   <li>development:  Ant file made build.xml.</li>
-
 
   <li>development:  CompletionList refactored into Ontology (prompted by sorting)</li>
 
-
 </ul>
 
-
-
-
-
 <h1>0.2</h1>
-
-
-<h2>03.27.2006, version <a href="phenote/0.2/phenote-webstart.jnlp">0.2</a></h2>
-
+<h2>03.27.2006, version 0.2</h2>
 <ul>
-
 
   <li>feature:  term completion on Synonyms, Definitions and Obsoletes</li>
 
-
   <li>feature:  mouse-over on term in completion list displays info in 'term info' text area</li>
-
 
   <li>Todo: layout, scrollbar, border w title, ordering &amp; lumping
 parents
 &amp; children, formatting. Also perhaps have children &amp; parents be
 clickable in some fashion either html-like clickable text or as buttons.</li>
 
-
   <li>known bugs:  If you hit backspace in term completion fields it gets wacky </li>
-
 
 </ul>
 
 
 <h1>0.1</h1>
 
-
-<h2>03.01.2006, version <a href="phenote/0.1/phenote-webstart.jnlp">0.1</a></h2>
+<h2>03.01.2006, version 0.1</h2>
 
 <p> 0.1 was the initial phenote release (known briefly as the plumper at
 the time).  It just had a genotype, anatomy and pato fields, where
@@ -1127,7 +912,6 @@ limited functionality was demo'd at the cbio meeting 3/3/06 at Stanford.</p>
       </div>
 
     </div>
-
 
     <!--#include virtual="ssi/footer.html" -->
 

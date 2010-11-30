@@ -17,7 +17,7 @@
 <h1>Downloading Phenote</h1>
 	<h2>For users</h2>
 	<h3>Phenote installer edition</h3>
-	Platform-specific installers are available for Phenote v1.8.4 at <a href="https://sourceforge.net/project/showfiles.php?group_id=76834">SourceForge</a> or here:
+	Platform-specific installers are available for Phenote v1.8.4 at <a href="http://sourceforge.net/projects/obo/files/">SourceForge</a> or here:
 	<a href="http://www.phenote.org/phenote/1.8/Phenote_1_8_4_macos_install4j.dmg">MacOS X</a> |
 	<a href="http://www.phenote.org/phenote/1.8/Phenote_1_8_4_windows_install4j.exe">Windows</a> |
 	<a href="http://www.phenote.org/phenote/1.8/Phenote_1_8_4_linux_install4j.rpm">Linux</a> |
@@ -33,7 +33,7 @@
 	</ul>
 
 	<p> We will continue to post links to major releases on this website.
-	You can also install new releases from the <a href="https://sourceforge.net/project/showfiles.php?group_id=76834">Phenote SourceForge Project page</a>.</p>
+	You can also install new releases from the <a href="http://sourceforge.net/projects/obo/files/">Phenote SourceForge Project page</a>.</p>
 
 	<h3>Webstart edition</h3>
         <p>The webstart edition is currently unavailable while we resolve some
