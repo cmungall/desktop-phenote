@@ -1,6 +1,5 @@
 format-version: 1.2
-date: 11:11:2010 16:49
-saved-by: csmith
+date: 15:12:2010 14:16
 auto-generated-by: OBO-Edit 2.0
 subsetdef: CvDC_Terms "NHLBI Cardiovascular Development Consortium (CvDC) Terms"
 subsetdef: Europhenome_Terms "Terms in use by Europhenome"
@@ -23,7 +22,7 @@ is_obsolete: true
 id: MP:0000003
 name: abnormal adipose tissue morphology
 alt_id: MP:0000011
-def: "structural anomaly of the connective tissue composed of fat cells enmeshed in areolar tissue" [MESH:A10.165.114, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "any structural anomaly of the connective tissue composed of fat cells enmeshed in areolar tissue" [MESH:A10.165.114, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 synonym: "adipose tissue abnormalities" EXACT []
 synonym: "adipose tissue dysplasia" EXACT []
 is_a: MP:0005375 ! adipose tissue phenotype
@@ -154,7 +153,7 @@ is_obsolete: true
 [Term]
 id: MP:0000028
 name: abnormal pars superior vestibularis morphology
-def: "structural anomaly in the part of the vestibular ganglion that receives fibers from the maculae of the utricle and the sacculae and the ampullae of the anterior and lateral semicircular ducts" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "any structural anomaly in the part of the vestibular ganglion that receives fibers from the maculae of the utricle and the sacculae and the ampullae of the anterior and lateral semicircular ducts" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "abnormal pars superior vestibularis" EXACT []
 is_a: MP:0000026 ! abnormal inner ear morphology
 is_a: MP:0002856 ! abnormal vestibular ganglion morphology
@@ -359,19 +358,29 @@ is_a: MP:0001542 ! abnormal bone strength
 
 [Term]
 id: MP:0000062
-name: increased bone density
-def: "increased mineral content of bone; indicator of bone strength" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", PMID:10709991]
+name: increased bone mineral density
+alt_id: MP:0010120
+def: "elevation in the amount of mineral per square centimeter of bone (usually g/cm2), used as a measure of structural strength and screen for osteoporosis; bone mineral density is the ratio of bone mineral content to bone size" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 subset: Europhenome_Terms
-is_a: MP:0005007 ! abnormal bone density
+synonym: "elevated BMD" EXACT []
+synonym: "elevated bone mineral density" EXACT []
+synonym: "increased BMD" EXACT []
+synonym: "increased bone density" EXACT []
+is_a: MP:0010119 ! abnormal bone mineral density
 
 [Term]
 id: MP:0000063
-name: decreased bone density
-def: "decreased mineral content of bone; indicator of bone strength" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", PMID:10471508]
+name: decreased bone mineral density
+alt_id: MP:0010121
+def: "reduction in the amount of mineral per square centimeter of bone (usually g/cm2), used as a measure of structural strength and screen for osteoporosis; bone mineral density is the ratio of bone mineral content to bone size" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 subset: Europhenome_Terms
+synonym: "decreased BMD" EXACT []
+synonym: "decreased bone density" EXACT []
 synonym: "osteopenia" EXACT []
+synonym: "reduced BMD" EXACT []
 synonym: "reduced bone density" EXACT []
-is_a: MP:0005007 ! abnormal bone density
+synonym: "reduced bone mineral density" EXACT []
+is_a: MP:0010119 ! abnormal bone mineral density
 
 [Term]
 id: MP:0000064
@@ -747,7 +756,7 @@ is_a: MP:0002650 ! abnormal ameloblast morphology
 [Term]
 id: MP:0000130
 name: abnormal cancellous bone morphology
-def: "structural anomaly of bone that has a lattice-like or spongy structure" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "any structural anomaly of bone that has a lattice-like or spongy structure" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "abnormal cancellous bone" EXACT []
 synonym: "abnormal spongy bone" EXACT []
 synonym: "abnormal spongy spongiosa" EXACT []
@@ -2117,7 +2126,7 @@ id: MP:0000358
 name: abnormal cell content/ morphology
 alt_id: MP:0000311
 alt_id: MP:0000312
-def: "structural anomalies of the minute protoplasmic masses that make up organized tissues and which are the fundamental structural and functional units of living organisms" [MESH:A11, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "any structural anomalies of the minute protoplasmic masses that make up organized tissues and which are the fundamental structural and functional units of living organisms" [MESH:A11, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 synonym: "abnormal cell" EXACT []
 synonym: "cell abnormalities" EXACT []
 synonym: "cellular abnormalities" EXACT []
@@ -3484,7 +3493,7 @@ is_a: MP:0002109 ! abnormal limb morphology
 [Term]
 id: MP:0000550
 name: abnormal forelimb morphology
-def: "any structural anomaly of the entire anterior extremities" [MGI:tc "Teresa Chu, Mouse Genome Informatics Curator"]
+def: "any structural anomaly of the entire anterior extremity" [MGI:tc "Teresa Chu, Mouse Genome Informatics Curator"]
 subset: Europhenome_Terms
 synonym: "forelimb abnormalities" EXACT []
 synonym: "forelimb dysplasia" EXACT []
@@ -3504,8 +3513,8 @@ name: abnormal radius morphology
 def: "any structural anomaly of the short bone of the lateral forearm" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 subset: Europhenome_Terms
 synonym: "abnormal radius" EXACT []
-is_a: MP:0000550 ! abnormal forelimb morphology
 is_a: MP:0003723 ! abnormal long bone morphology
+is_a: MP:0003854 ! abnormal forelimb stylopod morphology
 
 [Term]
 id: MP:0000553
@@ -3534,7 +3543,7 @@ is_a: MP:0000554 ! abnormal carpal bone morphology
 [Term]
 id: MP:0000556
 name: abnormal hindlimb morphology
-def: "any structural anomaly of the entire posterior extremities" [MGI:tc "Teresa Chu, Mouse Genome Informatics Curator"]
+def: "any structural anomaly of the entire posterior extremity" [MGI:tc "Teresa Chu, Mouse Genome Informatics Curator"]
 subset: Europhenome_Terms
 synonym: "hindlimb abnormalities" EXACT []
 synonym: "hindlimb dysplasia" EXACT []
@@ -3551,20 +3560,20 @@ is_a: MP:0000556 ! abnormal hindlimb morphology
 [Term]
 id: MP:0000558
 name: abnormal tibia morphology
-def: "structural anomaly of the medial and larger of the two bones of the lower leg" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "any structural anomaly of the medial and larger of the two bones of the lower leg" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 subset: Europhenome_Terms
 synonym: "abnormal tibia" EXACT []
-is_a: MP:0000556 ! abnormal hindlimb morphology
 is_a: MP:0003723 ! abnormal long bone morphology
+is_a: MP:0003857 ! abnormal hindlimb zeugopod morphology
 
 [Term]
 id: MP:0000559
 name: abnormal femur morphology
-def: "structural anomaly of the long bone of the thigh" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "any structural anomaly of the long bone of the thigh" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 subset: Europhenome_Terms
 synonym: "abnormal femur" EXACT []
-is_a: MP:0000556 ! abnormal hindlimb morphology
 is_a: MP:0003723 ! abnormal long bone morphology
+is_a: MP:0003856 ! abnormal hindlimb stylopod morphology
 
 [Term]
 id: MP:0000561
@@ -3645,15 +3654,23 @@ is_a: MP:0000564 ! syndactyly
 [Term]
 id: MP:0000572
 name: abnormal autopod morphology
-def: "any structural anomaly of the distal elements of the developing limb of vertebrates that will give rise to the pedal or prehensile appendages (e.g. hand, foot, paw, phalanges and/or digits)" [PMID:12560810]
+alt_id: MP:0004271
+def: "any structural anomaly of the distal elements of the limb of vertebrates including the pedal or prehensile appendages (e.g. hand, foot, paw, phalanges and/or digits)" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", PMID:12560810]
 subset: Europhenome_Terms
-is_a: MP:0006279 ! abnormal limb development
+synonym: " paw/hand/foot dysplasia" EXACT []
+synonym: "abnormal foot morphology" NARROW []
+synonym: "abnormal hand morphology" NARROW []
+synonym: "abnormal paw morphology" NARROW []
+synonym: "abnormal paw/hand/foot morphology" EXACT []
+synonym: "abnormal paws" NARROW []
+synonym: "paw abnormalities" NARROW []
+is_a: MP:0002109 ! abnormal limb morphology
 
 [Term]
 id: MP:0000573
 name: enlarged hind paws
 def: "larger than average size of the rear feet" [J:51296]
-is_a: MP:0004271 ! abnormal paw/hand/foot morphology
+is_a: MP:0000572 ! abnormal autopod morphology
 
 [Term]
 id: MP:0000574
@@ -3661,7 +3678,7 @@ name: abnormal foot pad morphology
 def: "any structural anomaly of the body of fat on the foot" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 subset: Europhenome_Terms
 synonym: "abnormal foot pads" EXACT []
-is_a: MP:0004271 ! abnormal paw/hand/foot morphology
+is_a: MP:0000572 ! abnormal autopod morphology
 
 [Term]
 id: MP:0000575
@@ -3676,7 +3693,7 @@ name: clubfoot
 def: "congenital deformation of the feet; foot is plantarflexed, inverted and adducted" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", PMID:10709991]
 synonym: "club foot" EXACT []
 synonym: "clubbed feet" EXACT []
-is_a: MP:0004271 ! abnormal paw/hand/foot morphology
+is_a: MP:0000572 ! abnormal autopod morphology
 
 [Term]
 id: MP:0000577
@@ -3692,7 +3709,7 @@ is_a: MP:0000675 ! abnormal palmar eccrine gland morphology
 id: MP:0000578
 name: ulcerated paws
 def: "inflammatory, often suppurating lesions on the paws; often become necrotic" [J:17194]
-is_a: MP:0004271 ! abnormal paw/hand/foot morphology
+is_a: MP:0000572 ! abnormal autopod morphology
 
 [Term]
 id: MP:0000579
@@ -4305,8 +4322,8 @@ name: abnormal palmar eccrine gland morphology
 def: "any structural anomaly of the sweat glands of the palm; in mice these are the only sweat glands present" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "abnormal palmar eccrine glands" EXACT []
 synonym: "abnormal palmar sweat glands" EXACT []
+is_a: MP:0000572 ! abnormal autopod morphology
 is_a: MP:0000674 ! abnormal sweat gland morphology
-is_a: MP:0004271 ! abnormal paw/hand/foot morphology
 
 [Term]
 id: MP:0000676
@@ -5192,7 +5209,7 @@ is_a: MP:0004166 ! abnormal limbic system morphology
 id: MP:0000819
 name: abnormal olfactory bulb morphology
 alt_id: MP:0000943
-def: "any structural anomaly of the forebrain region that coordinates neuronal signaling involved in the perception of smell; it receives input from the sensory neurons and outputs to the olfactory cortex" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", ISBN:0838580343 "Kandel ER, et al. Principles of Neural Science, 3rd edition", J:16461]
+def: "any structural anomaly of the forebrain region that coordinates neuronal signaling involved in the perception of smell; it receives input from the sensory neurons and outputs to the olfactory cortex" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", ISBN:0838580343 "Kandel ER, et al. Principles of Neural Science, 3rd edition"]
 synonym: "abnormal olfactory bulb" EXACT []
 xref: MA:0000194
 is_a: MP:0009944 ! abnormal olfactory lobe morphology
@@ -6336,7 +6353,7 @@ is_a: MP:0000979 ! abnormal hair-down neuron morphology
 [Term]
 id: MP:0000982
 name: abnormal Meissner's corpuscle morphology
-def: "structural anomaly of any of the numerous oval bodies found in the dermal papillae of thick skin; believed to be mechanoreceptors for tactile sensation" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "any structural anomaly of any of the numerous oval bodies found in the dermal papillae of thick skin; believed to be mechanoreceptors for tactile sensation" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "abnormal oval corpuscle" EXACT []
 synonym: "abnormal touch corpuscle" EXACT []
 synonym: "normal Meissner's corpuscle" EXACT []
@@ -6359,7 +6376,7 @@ is_a: MP:0000982 ! abnormal Meissner's corpuscle morphology
 [Term]
 id: MP:0000985
 name: abnormal Merkel's receptor morphology
-def: "structural anomaly of the modified epidermal cells located in the stratum basale and found mostly in areas where sensory perception is acute" [MESH:A08.800.550.700.500.425]
+def: "any structural anomaly of the modified epidermal cells located in the stratum basale and found mostly in areas where sensory perception is acute" [MESH:A08.800.550.700.500.425]
 synonym: "abnormal Merkel cells" EXACT []
 synonym: "abnormal Merkel receptors" EXACT []
 synonym: "abnormal Merkel's receptor" EXACT []
@@ -6415,7 +6432,7 @@ is_a: MP:0004069 ! abnormal muscle spindle morphology
 [Term]
 id: MP:0000992
 name: absent primary muscle spindle morphology
-def: "missing sensory organ in muscle; involved in the stretch reflex and is sensitive to stretch velocity" [ISBN:0838580343 "Kandel ER, et al. Principles of Neural Science, 3rd edition", J:23882]
+def: "missing sensory organ in muscle; involved in the stretch reflex and is sensitive to stretch velocity" [ISBN:0838580343 "Kandel ER, et al. Principles of Neural Science, 3rd edition"]
 synonym: "absent muscle spindle -primary" EXACT []
 is_a: MP:0000991 ! abnormal primary muscle spindle morphology
 
@@ -6878,7 +6895,7 @@ is_a: MP:0002184 ! abnormal innervation
 [Term]
 id: MP:0001053
 name: abnormal neuromuscular synapse morphology
-def: "any structural anomaly of the membrane to membrane contact of a motor axon and a muscle myofiber that is responsible for the transmission of nerve impulses" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:47439, J:60159, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+def: "any structural anomaly of the membrane to membrane contact of a motor axon and a muscle myofiber that is responsible for the transmission of nerve impulses" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "abnormal neuromuscular junction" EXACT []
 synonym: "abnormal NMJ" EXACT []
 synonym: "neuromuscular synapse abnormalities" EXACT []
@@ -6949,7 +6966,7 @@ is_a: MP:0001063 ! abnormal trochlear nerve morphology
 [Term]
 id: MP:0001065
 name: abnormal trigeminal nerve morphology
-def: "any structural anomaly of the chief sensory nerve of the face and motor nerve of the muscles of mastication; has three major divisions: ophthalmic, maxillary and mandibular" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", ISBN:0838580343 "Kandel ER, et al. Principles of Neural Science, 3rd edition", J:33038]
+def: "any structural anomaly of the chief sensory nerve of the face and motor nerve of the muscles of mastication; has three major divisions: ophthalmic, maxillary and mandibular" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", ISBN:0838580343 "Kandel ER, et al. Principles of Neural Science, 3rd edition"]
 synonym: "abnormal trigeminal nerve" EXACT []
 synonym: "CN-V" EXACT []
 synonym: "trigeminal nerve abnormalities" EXACT []
@@ -7020,7 +7037,7 @@ is_a: MP:0001056 ! abnormal cranial nerve morphology
 [Term]
 id: MP:0001073
 name: abnormal glossopharyngeal nerve morphology
-def: "any structural anomaly of the sensory and autonomic axons to the parotid gland, carotid body, posterior third of the tongue; the branchial motor component contains motor fibers that innervate muscles that elevate the pharynx and larynx, and the tympanic branch supplies parasympathetic fibers to the otic ganglion" [ISBN:0838580343 "Kandel ER, et al. Principles of Neural Science, 3rd edition", J:33038]
+def: "any structural anomaly of the sensory and autonomic axons to the parotid gland, carotid body, posterior third of the tongue; the branchial motor component contains motor fibers that innervate muscles that elevate the pharynx and larynx, and the tympanic branch supplies parasympathetic fibers to the otic ganglion" [ISBN:0838580343 "Kandel ER, et al. Principles of Neural Science, 3rd edition"]
 synonym: "abnormal glossopharyngeal nerve" EXACT []
 synonym: "CN-IX" EXACT []
 synonym: "glossopharyngeal nerve abnormalities" EXACT []
@@ -7065,7 +7082,7 @@ is_a: MP:0002752 ! abnormal somatic nervous system morphology
 [Term]
 id: MP:0001078
 name: abnormal phrenic nerve morphology
-def: "any structural anomaly of motor and sensory neuron axons that project to the diaphragm and other tissues" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:60159, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+def: "any structural anomaly of motor and sensory neuron axons that project to the diaphragm and other tissues" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 is_a: MP:0001077 ! abnormal spinal nerve morphology
 
 [Term]
@@ -7520,7 +7537,7 @@ is_a: MP:0009205 ! abnormal internal male genitalia morphology
 [Term]
 id: MP:0001147
 name: small testis
-def: "reduced size of the male reproductive glands" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:58959]
+def: "reduced size of the male reproductive glands" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 subset: Europhenome_Terms
 synonym: "microorchidism" EXACT []
 synonym: "microrchidia" EXACT []
@@ -8001,7 +8018,7 @@ is_a: MP:0001216 ! abnormal epidermal layer morphology
 [Term]
 id: MP:0001231
 name: abnormal epidermis stratum basale morphology
-def: "structural anomaly of the deepest layer of the epidermis, which is composed of dividing stem cells and anchoring cells" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "any structural anomaly of the deepest layer of the epidermis, which is composed of dividing stem cells and anchoring cells" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "abnormal basal cell layer" EXACT []
 synonym: "abnormal basal cell layer morphology" EXACT []
 synonym: "abnormal basal layer" EXACT []
@@ -8347,7 +8364,7 @@ is_a: MP:0000858 ! altered metastatic potential
 id: MP:0001274
 name: curly vibrissae
 alt_id: MP:0001275
-def: "whiskers twisted into coils or spirals" [PMID:9573048]
+def: "coiled or spiral shape of the stiff hairs that project from the face around the nose of most mammals, and which act as touch receptors" [MESH:A13.950, PMID:9573048]
 subset: Europhenome_Terms
 synonym: "curly contour hair" EXACT []
 synonym: "curly sinus hair" EXACT []
@@ -8361,7 +8378,7 @@ is_a: MP:0002098 ! abnormal vibrissa morphology
 [Term]
 id: MP:0001277
 name: tangled vibrissae
-def: "snarled, intertwined whiskers" [J:65301]
+def: "snarled or intertwined stiff hairs that project from the face around the nose of most mammals, and which act as touch receptors" [MESH:A13.950, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 subset: Europhenome_Terms
 synonym: "tangled contour hair" EXACT []
 synonym: "tangled sinus hair" EXACT []
@@ -8372,7 +8389,7 @@ is_a: MP:0002098 ! abnormal vibrissa morphology
 [Term]
 id: MP:0001278
 name: kinked vibrissae
-def: "sharp bends in the vibrissae" [J:56641]
+def: "sharp bends in the stiff hairs that project from the face around the nose of most mammals, and which act as touch receptors" [J:56641]
 synonym: "kinked contour hair" EXACT []
 synonym: "kinked sinus hair" EXACT []
 synonym: "kinked touch hair" EXACT []
@@ -8382,7 +8399,7 @@ is_a: MP:0002098 ! abnormal vibrissa morphology
 [Term]
 id: MP:0001279
 name: wavy vibrissae
-def: "whiskers having undulations or a sinusoidal shape" [J:65044]
+def: "undulations or a sinusoidal shape of the stiff hairs that project from the face around the nose of most mammals, and which act as touch receptors" [MESH:A13.950, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "wavy contour hair" EXACT []
 synonym: "wavy sinus hair" EXACT []
 synonym: "wavy touch hair" EXACT []
@@ -8392,7 +8409,7 @@ is_a: MP:0002098 ! abnormal vibrissa morphology
 [Term]
 id: MP:0001280
 name: loss of vibrissae
-def: "inability to retain the whiskers" [PMID:9420327]
+def: "inability to retain the stiff hairs that project from the face around the nose of most mammals, and which act as touch receptors" [PMID:9420327]
 synonym: "loss of contour hair" EXACT []
 synonym: "loss of sinus hair" EXACT []
 synonym: "loss of touch hair" EXACT []
@@ -8402,7 +8419,7 @@ is_a: MP:0002098 ! abnormal vibrissa morphology
 [Term]
 id: MP:0001281
 name: increased vibrissae length
-def: "longer average length of the whiskers" [J:65037]
+def: "longer average length of the stiff hairs that project from the face around the nose of most mammals, and which act as touch receptors" [MESH:A13.950, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 subset: Europhenome_Terms
 synonym: "increased contour hair length" EXACT []
 synonym: "increased sinus hair length" EXACT []
@@ -8413,7 +8430,7 @@ is_a: MP:0002098 ! abnormal vibrissa morphology
 [Term]
 id: MP:0001282
 name: short vibrissae
-def: "decreased length of the vibrissae" [J:30249]
+def: "decreased length of the stiff hairs projecting from the face around the nose of most mammals which act as touch receptors" [MESH:A13.950, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 subset: Europhenome_Terms
 synonym: "decreased contour hair length" EXACT []
 synonym: "decreased sinus hair length" EXACT []
@@ -8428,7 +8445,7 @@ is_a: MP:0002098 ! abnormal vibrissa morphology
 [Term]
 id: MP:0001283
 name: sparse vibrissae
-def: "few and widely spaced whiskers" [J:65302]
+def: "few and widely spaced stiff hairs that project from the face around the nose of most mammals, and which act as touch receptors" [MESH:A13.950, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "sparse contour hair" EXACT []
 synonym: "sparse sinus hair" EXACT []
 synonym: "sparse touch hair" EXACT []
@@ -8438,14 +8455,14 @@ is_a: MP:0002098 ! abnormal vibrissa morphology
 [Term]
 id: MP:0001284
 name: absent vibrissae
-def: "missing whiskers" [PMID:7958926]
+def: "absence of the stiff hairs that project from the face around the nose of most mammals, and which act as touch receptors" [MESH:A13.950, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", PMID:7958926]
 subset: Europhenome_Terms
 synonym: "absence of vibrissae" EXACT []
-synonym: "absence of whiskers" EXACT []
+synonym: "absence of whiskers" RELATED []
 synonym: "absent contour hair" EXACT []
 synonym: "absent sinus hair" EXACT []
 synonym: "absent touch hair" EXACT []
-synonym: "absent whiskers" EXACT []
+synonym: "absent whiskers" RELATED []
 is_a: MP:0002098 ! abnormal vibrissa morphology
 
 [Term]
@@ -8558,7 +8575,7 @@ is_a: MP:0005193 ! abnormal anterior eye segment morphology
 [Term]
 id: MP:0001304
 name: cataracts
-def: "complete or partial opacity of the lens" [J:65031]
+def: "complete or partial opacity of the lens" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 subset: Europhenome_Terms
 synonym: "cataract" EXACT []
 synonym: "cataracts/ lens opacity" EXACT []
@@ -8640,7 +8657,7 @@ is_a: MP:0001312 ! abnormal cornea morphology
 [Term]
 id: MP:0001317
 name: abnormal pupil morphology
-def: "structural anomaly of the central circular aperture of the iris through which light rays enter the eye" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "any structural anomaly of the central circular aperture of the iris through which light rays enter the eye" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 subset: Europhenome_Terms
 synonym: "pupil abnormalities" EXACT []
 is_a: MP:0001322 ! abnormal iris morphology
@@ -8675,7 +8692,7 @@ is_a: MP:0001317 ! abnormal pupil morphology
 id: MP:0001322
 name: abnormal iris morphology
 alt_id: MP:0006227
-def: "structural anomaly of the adjustable membrane, composed of the stroma and pigmented epithelium, located just in front of the crystalline lens within the eye" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "any structural anomaly of the adjustable membrane, composed of the stroma and pigmented epithelium, located just in front of the crystalline lens within the eye" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 subset: Europhenome_Terms
 synonym: "iris abnormalities" EXACT []
 synonym: "iris dysplasia" EXACT []
@@ -9611,7 +9628,7 @@ is_obsolete: true
 id: MP:0001485
 name: abnormal pinna reflex
 alt_id: MP:0001962
-def: "anomaly in the response to an auditory stimulus by a characteristic ear twitch" [J:64900]
+def: "anomaly in the response to an auditory stimulus by a characteristic ear twitch" [PMID:11583390]
 subset: Europhenome_Terms
 synonym: "abnormal ear twitch response" EXACT []
 synonym: "abnormal Preyer's reflex" EXACT []
@@ -9658,7 +9675,7 @@ id: MP:0001491
 name: unresponsive to tactile stimuli
 alt_id: MP:0001971
 alt_id: MP:0001976
-def: "absence of reflex action normally induced by touch or pain" [J:43515, J:47439]
+def: "absence of reflex action normally induced by touch or pain" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 subset: Europhenome_Terms
 synonym: "absent pain responsiveness in pin prick test" EXACT []
 synonym: "absent pain responsiveness in tail pinch test" EXACT []
@@ -9723,7 +9740,7 @@ is_obsolete: true
 [Term]
 id: MP:0001504
 name: abnormal posture
-def: "atypical position of the limbs or carriage of the body" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:18984]
+def: "atypical position of the limbs or carriage of the body" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 subset: Europhenome_Terms
 is_a: MP:0002066 ! abnormal motor capabilities/coordination/movement
 
@@ -9861,7 +9878,7 @@ is_a: MP:0003312 ! abnormal locomotor coordination
 id: MP:0001529
 name: abnormal vocalization
 alt_id: MP:0001528
-def: "an inability, decreased ability or altered ability to produce sound from the vocal organs; or a general increase or decrease in the production of vocal sound" [J:85479, MGI:cml "Cathleen M. Lutz, Mouse Genome Informatics Curator"]
+def: "an inability, decreased ability or altered ability to produce sound from the vocal organs; or a general increase or decrease in the production of vocal sound" [MGI:cml "Cathleen M. Lutz, Mouse Genome Informatics Curator"]
 subset: Europhenome_Terms
 is_a: MP:0004924 ! abnormal behavior
 
@@ -9960,7 +9977,7 @@ is_a: MP:0003949 ! abnormal circulating lipid level
 id: MP:0001552
 name: increased circulating triglyceride level
 alt_id: MP:0005142
-def: "higher than normal concentration of triacylglycerols in the blood" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:65416]
+def: "higher than normal concentration of triacylglycerols in the blood" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 subset: Europhenome_Terms
 synonym: "elevated plasma triacylglycerol level" EXACT []
 synonym: "elevated plasma triglyceride level" EXACT []
@@ -10100,7 +10117,7 @@ is_a: MP:0003948 ! abnormal gas homeostasis
 [Term]
 id: MP:0001575
 name: cyanosis
-def: "a dark bluish or purple skin discoloration resulting from deficient oxygenation of the blood" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:60159]
+def: "a dark bluish or purple skin discoloration resulting from deficient oxygenation of the blood" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "cyanotic" EXACT []
 is_a: MP:0001574 ! abnormal oxygen level
 is_a: MP:0009642 ! abnormal blood homeostasis
@@ -12144,9 +12161,11 @@ is_a: MP:0002314 ! abnormal respiratory mechanics
 [Term]
 id: MP:0001947
 name: abnormal mucociliary clearance
-def: "anomaly in the mechanism that removes mucus and other material from the lungs by ciliary and secretory activity of the tracheobronchial submucosal glands" [MESH:E01.370.386.520, MGI:mnk "Michelle Knowlton, Mouse Genome Informatics Curator"]
+def: "anomaly in the mechanism that removes mucus and other foreign particles and microorganisms from the lungs by directed ciliary movement and secretory activity of the tracheobronchial submucosal glands" [MESH:E01.370.386.520, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", MGI:mnk "Michelle Knowlton, Mouse Genome Informatics Curator"]
+synonym: "abnormal lung bacterial clearance" NARROW []
+synonym: "abnormal lung clearance" EXACT []
 synonym: "abnormal mucociliary transport" EXACT []
-is_a: MP:0002314 ! abnormal respiratory mechanics
+is_a: MP:0002133 ! abnormal respiratory system physiology
 
 [Term]
 id: MP:0001948
@@ -12576,8 +12595,8 @@ is_a: MP:0002020 ! increased tumor incidence
 
 [Term]
 id: MP:0002022
-name: lymphoma
-def: "neoplasm of any lymphoid tissue" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:18542]
+name: increased lymphoma incidence
+def: "greater than the expected occurrence of a neoplasm of any lymphoid tissue, occurring in a specific population in a given time period" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "lymphoid tumor" EXACT []
 is_a: MP:0010273 ! increased classified tumor incidence
 is_a: MP:0010296 ! increased hemolymphoid system tumor incidence
@@ -12587,14 +12606,14 @@ id: MP:0002023
 name: B cell derived lymphoma
 def: "heterogeneous lymphoid tumors generally expressing one or more B-cell antigens or representing malignant transformations of B-lymphocytes" [MESH:C04.557.386.480.150]
 synonym: "B-cell derived lymphoma" EXACT []
-is_a: MP:0002022 ! lymphoma
+is_a: MP:0002022 ! increased lymphoma incidence
 
 [Term]
 id: MP:0002024
 name: T cell derived lymphoma
 def: "group of heterogeneous lymphoid tumors representing malignant transformations of T-lymphocytes" [MESH:C04.557.386.480.750]
 synonym: "T-cell derived lymphoma" EXACT []
-is_a: MP:0002022 ! lymphoma
+is_a: MP:0002022 ! increased lymphoma incidence
 
 [Term]
 id: MP:0002025
@@ -12602,7 +12621,7 @@ name: B cell/T cell derived lymphoma
 def: "group of heterogeneous lymphoid tumors representing malignant transformations of both B-lymphocytes and T-lymphocytes" [MESH:National Library of Medicine_Medical Subject Headings]
 synonym: "B cell/T cell derived lymphoma" EXACT []
 synonym: "B-cell/T-cell derived lymphoma" EXACT []
-is_a: MP:0002022 ! lymphoma
+is_a: MP:0002022 ! increased lymphoma incidence
 
 [Term]
 id: MP:0002026
@@ -12688,7 +12707,7 @@ is_a: MP:0010281 ! increased nervous system tumor incidence
 [Term]
 id: MP:0002041
 name: increased pituitary adenoma incidence
-def: "greater than the expected number of benign neoplasms of the pituitary, occurring in a specific population in a given time period" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:33042]
+def: "greater than the expected number of benign neoplasms of the pituitary, occurring in a specific population in a given time period" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 is_a: MP:0010320 ! increased pituitary gland tumor incidence
 is_a: MP:0010383 ! increased adenoma incidence
 
@@ -13210,7 +13229,7 @@ synonym: "abnormal contour hair morphology" EXACT []
 synonym: "abnormal sinus hair morphology" EXACT []
 synonym: "abnormal touch hair morphology" EXACT []
 synonym: "abnormal vibrissae" EXACT []
-synonym: "abnormal whiskers" EXACT []
+synonym: "abnormal whiskers" RELATED []
 synonym: "vibrissae abnormalities" EXACT []
 synonym: "vibrissae defects" EXACT []
 synonym: "vibrissae dysplasia" EXACT []
@@ -13329,7 +13348,7 @@ synonym: "abnormal toe morphology" NARROW []
 synonym: "digit abnormalities" EXACT []
 synonym: "extremities: digit dysmorphology" EXACT []
 xref: MGI:2173550
-is_a: MP:0004271 ! abnormal paw/hand/foot morphology
+is_a: MP:0000572 ! abnormal autopod morphology
 
 [Term]
 id: MP:0002111
@@ -13923,8 +13942,8 @@ name: abnormal fibula morphology
 def: "any structural anomaly of the lateral and smaller bone of the lower limb" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 subset: Europhenome_Terms
 synonym: "abnormal fibula" EXACT []
-is_a: MP:0000556 ! abnormal hindlimb morphology
 is_a: MP:0003723 ! abnormal long bone morphology
+is_a: MP:0003857 ! abnormal hindlimb zeugopod morphology
 
 [Term]
 id: MP:0002188
@@ -14233,7 +14252,7 @@ is_a: MP:0003743 ! abnormal facial morphology
 [Term]
 id: MP:0002234
 name: abnormal pharynx morphology
-def: "structural anomaly in the passage between the mouth and the posterior nares and the larynx and esophagus" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "any structural anomaly in the passage between the mouth and the posterior nares and the larynx and esophagus" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 synonym: "abnormal pharynx" EXACT []
 synonym: "pharynx dysplasia" EXACT []
 is_a: MP:0002132 ! abnormal respiratory system morphology
@@ -14365,21 +14384,21 @@ is_a: MP:0002132 ! abnormal respiratory system morphology
 [Term]
 id: MP:0002250
 name: abnormal hypopharynx morphology
-def: "structural anomaly in the portion of the pharynx that lies below the upper edge of the epiglottis and opens into the larynx and the esophagus" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "any structural anomaly in the portion of the pharynx that lies below the upper edge of the epiglottis and opens into the larynx and the esophagus" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 synonym: "hypopharynx abnormalities" EXACT []
 is_a: MP:0002234 ! abnormal pharynx morphology
 
 [Term]
 id: MP:0002251
 name: abnormal nasopharynx morphology
-def: "structural anomaly of the section of the pharynx that lies above the soft palate" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "any structural anomaly of the section of the pharynx that lies above the soft palate" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 synonym: "nasopharynx abnormalities" EXACT []
 is_a: MP:0002234 ! abnormal pharynx morphology
 
 [Term]
 id: MP:0002252
 name: abnormal oropharynx morphology
-def: "structural anomaly of the portion of the pharynx that lies between the soft palate and the upper edge of the epiglottis" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "any structural anomaly of the portion of the pharynx that lies between the soft palate and the upper edge of the epiglottis" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 is_a: MP:0002234 ! abnormal pharynx morphology
 
 [Term]
@@ -14564,7 +14583,7 @@ is_a: MP:0001175 ! abnormal lung morphology
 [Term]
 id: MP:0002277
 name: abnormal respiratory mucosa morphology
-def: "structural anomaly of the mucous membrane lining the respiratory tract" [MESH:A04.760, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "any structural anomaly of the mucous membrane lining the respiratory tract" [MESH:A04.760, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 synonym: "abnormal respiratory mucosa" EXACT []
 synonym: "respiratory mucosal dysplasia" EXACT []
 is_a: MP:0002132 ! abnormal respiratory system morphology
@@ -14593,13 +14612,13 @@ is_a: MP:0003358 ! abnormal hypaxial muscle morphology
 [Term]
 id: MP:0002281
 name: abnormal respiratory mucosa goblet cell morphology
-def: "structural anomaly of the cells of the respiratory epithelial lining that produce and secrete mucins" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "any structural anomaly of the cells of the respiratory epithelial lining that produce and secrete mucins" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 is_a: MP:0002277 ! abnormal respiratory mucosa morphology
 
 [Term]
 id: MP:0002282
 name: abnormal trachea morphology
-def: "structural anomaly of the tube descending from the larynx and branching into the right and left main bronchi" [MESH:A04.889, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "any structural anomaly of the tube descending from the larynx and branching into the right and left main bronchi" [MESH:A04.889, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 synonym: "trachea dysplasia" EXACT []
 is_a: MP:0002132 ! abnormal respiratory system morphology
 
@@ -14612,14 +14631,14 @@ is_obsolete: true
 [Term]
 id: MP:0002284
 name: abnormal tracheal smooth muscle morphology
-def: "structural anomaly of the smooth muscle lining the trachea" [ISBN:0-397-51047-0 "Rubin E, et al. Pathology, 2nd edition", MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "any structural anomaly of the smooth muscle lining the trachea" [ISBN:0-397-51047-0 "Rubin E, et al. Pathology, 2nd edition", MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 is_a: MP:0000767 ! abnormal smooth muscle morphology
 is_a: MP:0002282 ! abnormal trachea morphology
 
 [Term]
 id: MP:0002285
 name: abnormal tracheal ciliated epithelium morphology
-def: "structural anomaly of the epithelial lining of the trachea which contains numerous ciliated cells" [ISBN:0-397-51047-0 "Rubin E, et al. Pathology, 2nd edition", MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "any structural anomaly of the epithelial lining of the trachea which contains numerous ciliated cells" [ISBN:0-397-51047-0 "Rubin E, et al. Pathology, 2nd edition", MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 is_a: MP:0002282 ! abnormal trachea morphology
 
 [Term]
@@ -14901,7 +14920,7 @@ is_a: MP:0002327 ! abnormal respiratory function
 [Term]
 id: MP:0002332
 name: abnormal exercise endurance
-def: "improved or impaired performance during controlled physical activity" [MESH:National Library of Medicine_Medical Subject Headings, MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
+def: "improved or impaired performance during controlled physical activity" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 synonym: "abnormal exercise fitness" EXACT []
 synonym: "abnormal exercise tests" EXACT []
 is_a: MP:0005266 ! abnormal metabolism
@@ -14939,9 +14958,9 @@ is_a: MP:0002322 ! abnormal respiratory transport
 [Term]
 id: MP:0002337
 name: abnormal whole-body plethysmography
-def: "OBSOLETE. anomaly in the measurements gathered in a chamber that encloses the body and in which changes in volume are recorded" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:E01.370.386.700.615, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "anomaly in the measurements gathered in a chamber that encloses the body and in which changes in volume are recorded" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:E01.370.386.700.615, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 subset: Europhenome_Terms
-is_obsolete: true
+is_a: MP:0001942 ! abnormal lung volume
 
 [Term]
 id: MP:0002338
@@ -15027,7 +15046,7 @@ is_a: MP:0002339 ! abnormal lymph node morphology
 [Term]
 id: MP:0002349
 name: abnormal afferent lymphatic vessel morphology
-def: "structural anomaly in the lymphatic tube entering the lymph node" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "any structural anomaly in the lymphatic tube entering the lymph node" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 xref: MA:0000748
 is_a: MP:0001879 ! abnormal lymphatic vessel morphology
 is_a: MP:0002339 ! abnormal lymph node morphology
@@ -15035,7 +15054,7 @@ is_a: MP:0002339 ! abnormal lymph node morphology
 [Term]
 id: MP:0002350
 name: abnormal efferent lymphatic vessel morphology
-def: "structural anomaly in the lymphatic tube exiting the lymph node" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "any structural anomaly in the lymphatic tube exiting the lymph node" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 xref: MA:0000749
 is_a: MP:0001879 ! abnormal lymphatic vessel morphology
 is_a: MP:0002339 ! abnormal lymph node morphology
@@ -15779,6 +15798,7 @@ is_a: MP:0003945 ! abnormal lymphocyte physiology
 id: MP:0002445
 name: abnormal mononuclear leukocyte differentiation
 def: "atypical production of or inability to produce a leukocyte with a single non-segmented nucleus in the mature form" [CL:0000842]
+synonym: "abnormal mononuclear cell differentiation" EXACT []
 synonym: "mononuclear leukocyte development abnormalities" EXACT []
 is_a: MP:0002414 ! abnormal myeloblast morphology/development
 is_a: MP:0005460 ! abnormal leukopoiesis
@@ -15904,7 +15924,7 @@ is_a: MP:0002490 ! abnormal immunoglobulin level
 [Term]
 id: MP:0002462
 name: abnormal granulocyte physiology
-def: "functional anomaly of neutrophils, eosinophils, or basophils" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "any functional anomaly of neutrophils, eosinophils, or basophils" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 synonym: "granulocyte dysfunction" EXACT []
 is_a: MP:0002442 ! abnormal leukocyte physiology
 
@@ -16209,7 +16229,7 @@ is_obsolete: true
 [Term]
 id: MP:0002503
 name: abnormal histamine physiology
-def: "functional anomaly of this amine that is involved in local immune response, in regulating physiological function in the gut, and that acts as a neurotransmitter" [MGI:monikat "Monika Tomczuk, Mouse Genome Informatics Curator"]
+def: "any functional anomaly of this amine that is involved in local immune response, in regulating physiological function in the gut, and that acts as a neurotransmitter" [MGI:monikat "Monika Tomczuk, Mouse Genome Informatics Curator"]
 is_a: MP:0001764 ! abnormal homeostasis
 
 [Term]
@@ -16658,13 +16678,13 @@ is_a: MP:0004924 ! abnormal behavior
 [Term]
 id: MP:0002573
 name: behavioral despair
-def: "depression assayed by reduced escape attempts and/or immobility when placed in a stressful situation such as a forced swim test or a suspension test; or failure to seek pleasurable stimuli" [J:80395]
+def: "depression assayed by reduced escape attempts and/or immobility when placed in a stressful situation such as a forced swim test or a suspension test; or failure to seek pleasurable stimuli" [PMID:11875023]
 is_a: MP:0003360 ! abnormal depression-related behavior
 
 [Term]
 id: MP:0002574
 name: increased vertical activity
-def: "greater than average time spent jumping or rearing" [J:72576, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "greater than average time spent jumping or rearing" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 subset: Europhenome_Terms
 synonym: "increased rearing" EXACT []
 synonym: "increased reconnoitering behavior" EXACT []
@@ -17800,7 +17820,7 @@ is_a: MP:0001408 ! stereotypic behavior
 [Term]
 id: MP:0002731
 name: megacolon
-def: "extreme dilation of the colon" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:40722]
+def: "extreme dilation of the colon" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "giant colon" EXACT []
 is_a: MP:0000495 ! abnormal colon morphology
 
@@ -17995,7 +18015,7 @@ is_a: MP:0003313 ! abnormal locomotor activation
 [Term]
 id: MP:0002758
 name: long tail
-def: "increased length of tail relative to average of a given strain" [J:82849, MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
+def: "increased length of tail relative to average of a given strain" [MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
 subset: Europhenome_Terms
 is_a: MP:0002111 ! abnormal tail morphology
 
@@ -18045,7 +18065,7 @@ is_a: MP:0010387 ! abnormal Bergmann glial cell morphology
 [Term]
 id: MP:0002764
 name: short tibia
-def: "reduced length of the medial and larger bone of the lower leg" [J:12736, MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
+def: "reduced length of the medial and larger bone of the lower leg" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
 subset: Europhenome_Terms
 is_a: MP:0000558 ! abnormal tibia morphology
 is_a: MP:0004686 ! decreased length of long bones
@@ -18106,7 +18126,7 @@ is_a: MP:0001163 ! abnormal prostate gland anterior lobe morphology
 id: MP:0002772
 name: brachypodia
 def: "abnormally short feet" [J:31930, MGI:il "Ira Lu, Mouse Genome Informatics Curator"]
-is_a: MP:0004271 ! abnormal paw/hand/foot morphology
+is_a: MP:0000572 ! abnormal autopod morphology
 
 [Term]
 id: MP:0002773
@@ -18263,7 +18283,7 @@ is_a: MP:0001303 ! abnormal lens morphology
 [Term]
 id: MP:0002795
 name: dilated cardiomyopathy
-def: "decreased function of the heart associated with cardiac enlargement and congestive heart failure" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:National Library of Medicine_Medical Subject Headings]
+def: "decreased function of the heart associated with cardiac enlargement and congestive heart failure" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "congestive cardiomyopathy" EXACT []
 is_a: MP:0004937 ! dilated heart
 is_a: MP:0005330 ! cardiomyopathy
@@ -18575,7 +18595,7 @@ is_a: MP:0002837 ! dystrophic cardiac calcinosis
 [Term]
 id: MP:0002840
 name: abnormal lens fiber morphology
-def: "structural anomaly of the elongated cells of the crystalline lens of the eye" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "any structural anomaly of the elongated cells of the crystalline lens of the eye" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 is_a: MP:0001303 ! abnormal lens morphology
 
 [Term]
@@ -19324,7 +19344,7 @@ is_a: MP:0005319 ! abnormal enzyme/ coenzyme level
 [Term]
 id: MP:0002944
 name: increased lactate dehydrogenase level
-def: "greater than the normal concentration of this enzyme, which catalyzes the interconversion of lactate and pyruvate" [J:87714, MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
+def: "greater than the normal concentration of this enzyme, which catalyzes the interconversion of lactate and pyruvate" [MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
 subset: Europhenome_Terms
 synonym: "elevated lactate dehydrogenase level" EXACT []
 synonym: "elevated LDH level" EXACT []
@@ -19506,7 +19526,7 @@ is_a: MP:0000202 ! abnormal circulating alkaline phosphatase level
 [Term]
 id: MP:0002969
 name: impaired social transmission of food preference
-def: "defect in the ability to recall and prefer foods associated with odors recently smelled on the breath of other mice; an indicator of defects in learning and memory of olfactory cues" [J:62218]
+def: "defect in the ability to recall and prefer foods associated with odors recently smelled on the breath of other mice; an indicator of defects in learning and memory of olfactory cues" [PMID:10792055]
 is_a: MP:0002802 ! abnormal discrimination learning
 
 [Term]
@@ -19595,7 +19615,7 @@ is_a: MP:0001919 ! abnormal reproductive system physiology
 [Term]
 id: MP:0002983
 name: increased retinal ganglion cell number
-def: "greater number of ganglion neurons located in the innermost nuclear layer of the retina of that receive visual information from photoreceptors via various intermediate cells such as bipolar cells, amacrine cells, and horizontal cells; axons from these cells form the optic nerve and connect mainly to the lateral geniculate nucleus (LGN) and to the suprachiasmatic nucleus in the brain" [MESH:National Library of Medicine_Medical Subject Headings, MGI:il "Ira Lu, Mouse Genome Informatics Curator"]
+def: "greater number of ganglion neurons located in the innermost nuclear layer of the retina of that receive visual information from photoreceptors via various intermediate cells such as bipolar cells, amacrine cells, and horizontal cells; axons from these cells form the optic nerve and connect mainly to the lateral geniculate nucleus (LGN) and to the suprachiasmatic nucleus in the brain" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", MGI:il "Ira Lu, Mouse Genome Informatics Curator"]
 is_a: MP:0006006 ! increased sensory neuron number
 is_a: MP:0008056 ! abnormal retinal ganglion cell morphology
 
@@ -19788,20 +19808,20 @@ is_a: MP:0003015 ! abnormal circulating bicarbonate level
 [Term]
 id: MP:0003018
 name: abnormal circulating chloride level
-def: "aberrant concentration of chlorine salts in the circulation" [MESH:National Library of Medicine_Medical Subject Headings, RGD:cur "Rat Genome Database submission"]
+def: "aberrant concentration of chlorine salts in the circulation" [RGD:cur "Rat Genome Database submission"]
 is_a: MP:0006357 ! abnormal circulating mineral level
 
 [Term]
 id: MP:0003019
 name: increased circulating chloride level
-def: "elevated concentration of chlorine salts in the circulation" [MESH:National Library of Medicine_Medical Subject Headings, RGD:cur "Rat Genome Database submission"]
+def: "elevated concentration of chlorine salts in the circulation" [RGD:cur "Rat Genome Database submission"]
 subset: Europhenome_Terms
 is_a: MP:0003018 ! abnormal circulating chloride level
 
 [Term]
 id: MP:0003020
 name: decreased circulating chloride level
-def: "reduced concentration of chlorine salts in the circulation" [MESH:National Library of Medicine_Medical Subject Headings, RGD:cur "Rat Genome Database submission"]
+def: "reduced concentration of chlorine salts in the circulation" [RGD:cur "Rat Genome Database submission"]
 subset: Europhenome_Terms
 synonym: "reduced circulating chloride level" EXACT []
 is_a: MP:0003018 ! abnormal circulating chloride level
@@ -19809,20 +19829,20 @@ is_a: MP:0003018 ! abnormal circulating chloride level
 [Term]
 id: MP:0003021
 name: abnormal coronary flow rate
-def: "aberrant rate of blood flow in the blood vessels supplying the heart" [MESH:National Library of Medicine_Medical Subject Headings, RGD:cur "Rat Genome Database submission"]
+def: "aberrant rate of blood flow in the blood vessels supplying the heart" [RGD:cur "Rat Genome Database submission"]
 is_a: MP:0000233 ! abnormal blood flow velocity
 is_a: MP:0006111 ! abnormal coronary circulation
 
 [Term]
 id: MP:0003022
 name: increased coronary flow rate
-def: "elevated rate of blood flow in the blood vessels supplying the heart" [MESH:National Library of Medicine_Medical Subject Headings, RGD:cur "Rat Genome Database submission"]
+def: "elevated rate of blood flow in the blood vessels supplying the heart" [RGD:cur "Rat Genome Database submission"]
 is_a: MP:0003021 ! abnormal coronary flow rate
 
 [Term]
 id: MP:0003023
 name: decreased coronary flow rate
-def: "reduced rate of blood flow in the blood vessels supplying the heart" [MESH:National Library of Medicine_Medical Subject Headings, RGD:cur "Rat Genome Database submission"]
+def: "reduced rate of blood flow in the blood vessels supplying the heart" [RGD:cur "Rat Genome Database submission"]
 synonym: "reduced coronary flow rate" EXACT []
 is_a: MP:0003021 ! abnormal coronary flow rate
 
@@ -19929,39 +19949,39 @@ is_a: MP:0000137 ! abnormal vertebrae morphology
 [Term]
 id: MP:0003037
 name: increased infarction size
-def: "increased size of necrotic area from normal of the myocardium resulting from a sudden insufficiency of arterial or venous blood supply due to emboli, thrombi or mechanical factors" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:National Library of Medicine_Medical Subject Headings, RGD:cur "Rat Genome Database submission"]
+def: "increased size of necrotic area from normal of the myocardium resulting from a sudden insufficiency of arterial or venous blood supply due to emboli, thrombi or mechanical factors" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", RGD:cur "Rat Genome Database submission"]
 is_a: MP:0000343 ! altered response to myocardial infarction
 
 [Term]
 id: MP:0003038
 name: decreased infarction size
-def: "decreased size of necrotic area from normal of the myocardium resulting from a sudden insufficiency of arterial or venous blood supply due to emboli, thrombi or mechanical factors" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:National Library of Medicine_Medical Subject Headings, RGD:cur "Rat Genome Database submission"]
+def: "decreased size of necrotic area from normal of the myocardium resulting from a sudden insufficiency of arterial or venous blood supply due to emboli, thrombi or mechanical factors" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", RGD:cur "Rat Genome Database submission"]
 synonym: "reduced infarction size" EXACT []
 is_a: MP:0000343 ! altered response to myocardial infarction
 
 [Term]
 id: MP:0003039
 name: increased time of peak ischemic contracture
-def: "increased duration of time from normal necessary to achieve full irreversible contraction of the cardiac muscle in response to myocardial infarction" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:National Library of Medicine_Medical Subject Headings, RGD:cur "Rat Genome Database submission"]
+def: "increased duration of time from normal necessary to achieve full irreversible contraction of the cardiac muscle in response to myocardial infarction" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", RGD:cur "Rat Genome Database submission"]
 is_a: MP:0000343 ! altered response to myocardial infarction
 
 [Term]
 id: MP:0003040
 name: decreased time of peak ischemic contracture
-def: "decreased duration of time from normal necessary to achieve full irreversible contraction of the cardiac muscle in response to myocardial infarction" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:National Library of Medicine_Medical Subject Headings, RGD:cur "Rat Genome Database submission"]
+def: "decreased duration of time from normal necessary to achieve full irreversible contraction of the cardiac muscle in response to myocardial infarction" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", RGD:cur "Rat Genome Database submission"]
 synonym: "reduced time of peak ischemic contracture" EXACT []
 is_a: MP:0000343 ! altered response to myocardial infarction
 
 [Term]
 id: MP:0003041
 name: increased time of onset of induced ischemic contracture
-def: "increased duration of time from normal necessary to initiate the irreversible contraction of the cardiac muscle in response to induced myocardial infarction" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:National Library of Medicine_Medical Subject Headings, RGD:cur "Rat Genome Database submission"]
+def: "increased duration of time from normal necessary to initiate the irreversible contraction of the cardiac muscle in response to induced myocardial infarction" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", RGD:cur "Rat Genome Database submission"]
 is_a: MP:0000343 ! altered response to myocardial infarction
 
 [Term]
 id: MP:0003042
 name: decreased time of onset of induced ischemic contracture
-def: "decreased duration of time from normal necessary to initiate the irreversible contraction of the cardiac muscle in response to induced myocardial infarction" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:National Library of Medicine_Medical Subject Headings, RGD:cur "Rat Genome Database submission"]
+def: "decreased duration of time from normal necessary to initiate the irreversible contraction of the cardiac muscle in response to induced myocardial infarction" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", RGD:cur "Rat Genome Database submission"]
 synonym: "reduced time of onset of induced ischemic contracture" EXACT []
 is_a: MP:0000343 ! altered response to myocardial infarction
 
@@ -19975,7 +19995,7 @@ is_a: MP:0001970 ! abnormal pain threshold
 [Term]
 id: MP:0003044
 name: impaired basement membrane formation
-def: "defect in the development of the extracellular supportive tissue closely adjacent to the basal surface of the epithelium of muscle cells, fat cells and Schwann cells, which is comprised of type IV collagen, laminin, and sulfated proteoglycans and other components" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:National Library of Medicine_Medical Subject Headings]
+def: "defect in the development of the extracellular supportive tissue closely adjacent to the basal surface of the epithelium of muscle cells, fat cells and Schwann cells, which is comprised of type IV collagen, laminin, and sulfated proteoglycans and other components" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "impaired basement lamina formation" EXACT []
 is_a: MP:0004272 ! abnormal basement membrane morphology
 
@@ -19988,7 +20008,7 @@ is_a: MP:0002168 ! other aberrant phenotype
 [Term]
 id: MP:0003046
 name: liver cirrhosis
-def: "liver disease in which the occurrence of fibrotic nodules cause diffuse damage to parenchymal cells, disruptions in microcirculation, vascular anatomy and hepatic architecture, resulting in hepatic dysfunction and ultimately, hepatic failure" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:National Library of Medicine_Medical Subject Headings, MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+def: "liver disease in which the occurrence of fibrotic nodules cause diffuse damage to parenchymal cells, disruptions in microcirculation, vascular anatomy and hepatic architecture, resulting in hepatic dysfunction and ultimately, hepatic failure" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
 synonym: "hepatic cirrhosis" EXACT []
 is_a: MP:0000598 ! abnormal liver morphology
 
@@ -20236,7 +20256,7 @@ id: MP:0003080
 name: enhanced NK cell cytolysis
 def: "increased ability of natural killer cells to induce pathological breakdown of target cells by the destruction of their outer membrane" [RGD:cur "Rat Genome Database submission"]
 synonym: "competent NK cell cytolysis" EXACT []
-is_a: MP:0005069 ! abnormal NK cell physiology
+is_a: MP:0010766 ! abnormal NK cell physiology
 
 [Term]
 id: MP:0003081
@@ -20322,13 +20342,13 @@ is_a: MP:0005543 ! corneal thinning
 [Term]
 id: MP:0003093
 name: abnormal anterior stroma morphology
-def: "structural anomaly of the anterior segment of the lamellated connective tissue layer of the cornea" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator", PMID:12556382]
+def: "any structural anomaly of the anterior segment of the lamellated connective tissue layer of the cornea" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator", PMID:12556382]
 is_a: MP:0005300 ! abnormal corneal stroma morphology
 
 [Term]
 id: MP:0003094
 name: abnormal posterior stroma morphology
-def: "structural anomaly of the posterior segment of the lamellated connective tissue layer of the cornea" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator", PMID:12556382]
+def: "any structural anomaly of the posterior segment of the lamellated connective tissue layer of the cornea" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator", PMID:12556382]
 is_a: MP:0005300 ! abnormal corneal stroma morphology
 
 [Term]
@@ -20641,7 +20661,7 @@ is_a: MP:0002075 ! abnormal coat/hair pigmentation
 [Term]
 id: MP:0003137
 name: abnormal impulse conducting system conduction
-def: "anomaly in the impulse-conducting system composed of modified cardiac muscle and having the power of spontaneous rhythmicity and conduction more highly developed than the rest of the heart" [J:92050, MESH:A07.541.409, MGI:hdene "Howard Dene, Mouse Genome Informatics Curator"]
+def: "any functional anomaly in the impulse-conducting system composed of modified cardiac muscle and having the power of spontaneous rhythmicity and conduction more highly developed than the rest of the heart" [MESH:A07.541.409, MGI:hdene "Howard Dene, Mouse Genome Informatics Curator"]
 synonym: "abnormal bundle of Kent conduction" EXACT []
 synonym: "abnormal cardiac muscle conduction" EXACT []
 is_a: MP:0001544 ! abnormal cardiovascular system physiology
@@ -20808,7 +20828,7 @@ is_a: MP:0005449 ! abnormal food intake
 [Term]
 id: MP:0003159
 name: abnormal esophageal smooth muscle morphology
-def: "structural anomaly of the nonstriated, involuntary muscle tissue lining the esophagus" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
+def: "any structural anomaly of the nonstriated, involuntary muscle tissue lining the esophagus" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 is_a: MP:0000467 ! abnormal esophagus morphology
 is_a: MP:0000767 ! abnormal smooth muscle morphology
 
@@ -21025,7 +21045,7 @@ is_a: MP:0002932 ! abnormal joint morphology
 [Term]
 id: MP:0003190
 name: fused synovial joints
-def: "partial or complete absence of separations containing synovial fluid between bones" [J:93028, MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
+def: "partial or complete absence of separations containing synovial fluid between bones" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 is_a: MP:0003189 ! fused joints
 
 [Term]
@@ -21064,7 +21084,7 @@ is_a: MP:0002168 ! other aberrant phenotype
 [Term]
 id: MP:0003196
 name: skin calcification
-def: "pathologic deposition of calcium salts in the skin" [MESH:National Library of Medicine_Medical Subject Headings, RGD:cur "Rat Genome Database submission"]
+def: "pathologic deposition of calcium salts in the skin" [RGD:cur "Rat Genome Database submission"]
 is_a: MP:0005501 ! abnormal skin physiology
 
 [Term]
@@ -21084,13 +21104,13 @@ is_a: MP:0001533 ! abnormal skeleton physiology
 [Term]
 id: MP:0003199
 name: muscle calcification
-def: "pathologic deposition of calcium salts in muscle" [MESH:National Library of Medicine_Medical Subject Headings, RGD:cur "Rat Genome Database submission"]
+def: "pathologic deposition of calcium salts in muscle" [RGD:cur "Rat Genome Database submission"]
 is_a: MP:0002108 ! abnormal muscle morphology
 
 [Term]
 id: MP:0003200
 name: joint calcification
-def: "pathologic deposition of calcium salts in the joints" [MESH:National Library of Medicine_Medical Subject Headings, RGD:cur "Rat Genome Database submission"]
+def: "pathologic deposition of calcium salts in the joints" [RGD:cur "Rat Genome Database submission"]
 is_a: MP:0001533 ! abnormal skeleton physiology
 
 [Term]
@@ -22700,7 +22720,7 @@ is_a: MP:0004181 ! abnormal carotid artery morphology
 [Term]
 id: MP:0003438
 name: abnormal carotid body physiology
-def: "any functional change in a small epithelioid structure consisting of a small cluster of chemoreceptive and supporting cells located near the bifurcation of the common carotid artery that serves as a chemoreceptive organ that senses the pH, carbon dioxide, and oxygen concentrations in the blood and plays a crucial role in their homeostatic control" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:A08.800.550.700.120.600.150, MGI:monikat "Monika Tomczuk, Mouse Genome Informatics Curator"]
+def: "any functional anomaly in a small epithelioid structure consisting of a small cluster of chemoreceptive and supporting cells located near the bifurcation of the common carotid artery that serves as a chemoreceptive organ that senses the pH, carbon dioxide, and oxygen concentrations in the blood and plays a crucial role in their homeostatic control" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:A08.800.550.700.120.600.150, MGI:monikat "Monika Tomczuk, Mouse Genome Informatics Curator"]
 is_a: MP:0001544 ! abnormal cardiovascular system physiology
 
 [Term]
@@ -24214,7 +24234,7 @@ is_a: MP:0001944 ! abnormal pancreas morphology
 [Term]
 id: MP:0003656
 name: abnormal erythrocyte physiology
-def: "functional anomaly of the cells in the blood that carry oxygen, red blood cells" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "any functional anomaly of the cells in the blood that carry oxygen, red blood cells" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 is_a: MP:0001545 ! abnormal hematopoietic system physiology
 
 [Term]
@@ -24249,7 +24269,7 @@ is_a: MP:0003659 ! abnormal lymph circulation
 [Term]
 id: MP:0003661
 name: abnormal locus ceruleus
-def: "any structural anomaly of a dense cluster of neurons within the dorsorostral pons; it is the major location of neurons that release norepinephrine throughout the brain, and is responsible for physiological responses to stress and panic" [ISBN:0838580343 "Kandel ER, et al. Principles of Neural Science, 3rd edition", J:96328]
+def: "any structural anomaly of a dense cluster of neurons within the dorsorostral pons; it is the major location of neurons that release norepinephrine throughout the brain, and is responsible for physiological responses to stress and panic" [ISBN:0838580343 "Kandel ER, et al. Principles of Neural Science, 3rd edition"]
 synonym: "abnormal locus coeruleus morphology" EXACT []
 is_a: MP:0000848 ! abnormal pons morphology
 
@@ -25151,13 +25171,13 @@ is_a: MP:0005508 ! abnormal skeleton morphology
 [Term]
 id: MP:0003796
 name: abnormal cortical bone morphology
-def: "structural anomaly of the superficial thin layer of compact bone" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "any structural anomaly of the superficial thin layer of compact bone" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 is_a: MP:0003797 ! abnormal compact bone morphology
 
 [Term]
 id: MP:0003797
 name: abnormal compact bone morphology
-def: "structural anomaly of the outer layers of solid, hard bone that covers spongy bone; consists of parallel osteons containing mineral deposits and interstitial lamellae" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:hdene "Howard Dene, Mouse Genome Informatics Curator"]
+def: "any structural anomaly of the outer layers of solid, hard bone that covers spongy bone; consists of parallel osteons containing mineral deposits and interstitial lamellae" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:hdene "Howard Dene, Mouse Genome Informatics Curator"]
 synonym: "abnormal dense bone" EXACT []
 synonym: "abnormal lamellar bone" EXACT []
 is_a: MP:0003795 ! abnormal bone structure
@@ -25171,10 +25191,10 @@ is_a: MP:0009389 ! abnormal extracutaneous pigmentation
 
 [Term]
 id: MP:0003799
-name: impaired macrophage migration
-def: "defect in the ability of macrophages to move up a chemotactic gradient" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
-synonym: "impaired macrophage chemotaxis" EXACT []
-is_a: MP:0005495 ! abnormal macrophage recruitment
+name: impaired macrophage chemotaxis
+def: "reduced ability in the movement of a macrophage guided by a specific chemical concentration gradient" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
+synonym: "impaired macrophage migration" EXACT []
+is_a: MP:0010760 ! abnormal macrophage chemotaxis
 
 [Term]
 id: MP:0003800
@@ -25315,42 +25335,45 @@ is_a: MP:0001286 ! abnormal eye development
 id: MP:0003819
 name: increased left ventricle diastolic pressure
 def: "increase in the pressure in the left ventricle between heart beats when the heart is relaxed" [RGD:cur "Rat Genome Database submission"]
-is_a: MP:0008775 ! abnormal heart ventricular pressure
+is_a: MP:0010754 ! abnormal heart left ventricle pressure
 
 [Term]
 id: MP:0003820
 name: increased left ventricle systolic pressure
 def: "increase in the pressure in the left ventricle as the heart contracts and pumps blood into the arteries" [RGD:cur "Rat Genome Database submission"]
-is_a: MP:0008775 ! abnormal heart ventricular pressure
+is_a: MP:0010754 ! abnormal heart left ventricle pressure
 
 [Term]
 id: MP:0003821
 name: decreased left ventricle diastolic pressure
 def: "decrease in the pressure in the left ventricle between heart beats when the heart is relaxed" [RGD:cur "Rat Genome Database submission"]
 synonym: "reduced left ventricle diastolic pressure" EXACT []
-is_a: MP:0008775 ! abnormal heart ventricular pressure
+is_a: MP:0010754 ! abnormal heart left ventricle pressure
 
 [Term]
 id: MP:0003822
 name: decreased left ventricle systolic pressure
 def: "decrease in the pressure in the left ventricle as the heart contracts and pumps blood into the arteries" [RGD:cur "Rat Genome Database submission"]
 synonym: "reduced left ventricle systolic pressure" EXACT []
-is_a: MP:0008775 ! abnormal heart ventricular pressure
+is_a: MP:0010754 ! abnormal heart left ventricle pressure
 
 [Term]
 id: MP:0003823
-name: increased left ventricular developed pressure
+name: increased left ventricle developed pressure
 def: "increase in the difference between left ventricular systolic and diastolic pressures" [RGD:cur "Rat Genome Database submission"]
-is_a: MP:0008775 ! abnormal heart ventricular pressure
+synonym: "increased left ventricular developed pressure" EXACT []
+synonym: "increased LVDP" EXACT []
+is_a: MP:0010754 ! abnormal heart left ventricle pressure
 
 [Term]
 id: MP:0003824
-name: decreased left ventricular developed pressure
+name: decreased left ventricle developed pressure
 def: "decrease in the difference between left ventricular systolic and diastolic pressures" [RGD:cur "Rat Genome Database submission"]
+synonym: "decreased left ventricular developed pressure" EXACT []
 synonym: "decreased LVDP" EXACT []
 synonym: "reduced left ventricular developed pressure" EXACT []
 synonym: "reduced LVDP" EXACT []
-is_a: MP:0008775 ! abnormal heart ventricular pressure
+is_a: MP:0010754 ! abnormal heart left ventricle pressure
 
 [Term]
 id: MP:0003825
@@ -25396,7 +25419,7 @@ is_a: MP:0001777 ! abnormal body temperature regulation
 [Term]
 id: MP:0003830
 name: abnormal testis development
-def: "abnormal morphogenesis of the male reproductive gland containing the germ cells" [J:100020, MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
+def: "abnormal morphogenesis of the male reproductive gland containing the germ cells" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 subset: Europhenome_Terms
 is_a: MP:0001146 ! abnormal testis morphology
 is_a: MP:0003936 ! abnormal reproductive system development
@@ -25531,26 +25554,27 @@ is_a: MP:0009931 ! abnormal skin appearance
 [Term]
 id: MP:0003854
 name: abnormal forelimb stylopod morphology
-def: "any structural anomaly of the proximal element of the developing forelimb that will give rise to the humerus" [PMID:12560810]
-is_a: MP:0006279 ! abnormal limb development
+def: "any structural anomaly of the proximal element of the forelimb including the humerus" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", PMID:12560810]
+is_a: MP:0000550 ! abnormal forelimb morphology
 
 [Term]
 id: MP:0003855
 name: abnormal forelimb zeugopod morphology
-def: "any structural anomaly of the distal elements of the developing forelimb that will give rise to the radius and ulna" [PMID:12560810]
-is_a: MP:0006279 ! abnormal limb development
+def: "any structural anomaly of the distal elements of the forelimb including the radius and ulna" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", PMID:12560810]
+synonym: "abnormal lower arm morphology" RELATED []
+is_a: MP:0000550 ! abnormal forelimb morphology
 
 [Term]
 id: MP:0003856
 name: abnormal hindlimb stylopod morphology
-def: "any structural anomaly of the proximal element of the developing hindlimb that will give rise to the femur" [PMID:12560810]
-is_a: MP:0006279 ! abnormal limb development
+def: "any structural anomaly of the proximal element of the hindlimb including the femur" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", PMID:12560810]
+is_a: MP:0000556 ! abnormal hindlimb morphology
 
 [Term]
 id: MP:0003857
 name: abnormal hindlimb zeugopod morphology
-def: "any structural anomaly of the distal elements of the developing hindlimb that will give rise to the tibia and fibula" [PMID:12560810]
-is_a: MP:0006279 ! abnormal limb development
+def: "any structural anomaly of the distal elements of the hindlimb including the tibia and fibula" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", PMID:12560810]
+is_a: MP:0000556 ! abnormal hindlimb morphology
 
 [Term]
 id: MP:0003858
@@ -25995,7 +26019,7 @@ is_a: MP:0005294 ! abnormal heart ventricle morphology
 [Term]
 id: MP:0003921
 name: abnormal heart left ventricle morphology
-def: "structural anomaly of the left lower chamber of the heart" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
+def: "any structural anomaly of the left lower chamber of the heart" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 subset: CvDC_Terms
 synonym: "abnormal left ventricle morphology" EXACT []
 synonym: "abnormal LV" EXACT []
@@ -27423,7 +27447,7 @@ is_a: MP:0006111 ! abnormal coronary circulation
 [Term]
 id: MP:0004121
 name: abnormal sarcolemma morphology
-def: "structural anomaly in the plasma membrane of a muscle fiber that is capable of conducting electrical impulses" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "any structural anomaly in the plasma membrane of a muscle fiber that is capable of conducting electrical impulses" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "abnormal myolemma morphology" EXACT []
 is_a: MP:0004087 ! abnormal muscle fiber morphology
 
@@ -27440,7 +27464,7 @@ is_a: MP:0001629 ! abnormal heart rate
 [Term]
 id: MP:0004123
 name: abnormal impulse conducting system morphology
-def: "structural anomaly in the impulse-conducting system composed of modified cardiac muscle and having the power of spontaneous rhythmicity and conduction more highly developed than the rest of the heart" [MESH:A07.541.409]
+def: "any structural anomaly in the impulse-conducting system composed of modified cardiac muscle and having the power of spontaneous rhythmicity and conduction more highly developed than the rest of the heart" [MESH:A07.541.409]
 synonym: "abnormal bundle of Kent" EXACT []
 synonym: "abnormal heart conducting system" EXACT []
 is_a: MP:0000266 ! abnormal heart morphology
@@ -27448,7 +27472,7 @@ is_a: MP:0000266 ! abnormal heart morphology
 [Term]
 id: MP:0004124
 name: abnormal Purkinje fiber morphology
-def: "structural anomaly in the cardiac muscle fibers composing the terminal portion of the heart conduction system located in the ventricle" [MESH:A07.541.409.683]
+def: "any structural anomaly in the cardiac muscle fibers composing the terminal portion of the heart conduction system located in the ventricle" [MESH:A07.541.409.683]
 is_a: MP:0004123 ! abnormal impulse conducting system morphology
 
 [Term]
@@ -27474,6 +27498,7 @@ id: MP:0004129
 name: abnormal respiratory quotient
 def: "anomaly in the ratio of the volume of carbon dioxide released to oxygen consumed by a body tissue or an organism compared to controls" [J:94416]
 subset: Europhenome_Terms
+synonym: "abnormal respiratory coefficient" EXACT []
 synonym: "abnormal respiratory exchange ratio" EXACT []
 synonym: "abnormal RQ" EXACT []
 is_a: MP:0003948 ! abnormal gas homeostasis
@@ -28173,7 +28198,7 @@ is_a: MP:0003396 ! abnormal embryonic hematopoiesis
 [Term]
 id: MP:0004230
 name: abnormal embryonic erythrocyte morphology
-def: "structural anomaly of the embryonic blood cells that carry oxygen" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+def: "any structural anomaly of the embryonic blood cells that carry oxygen" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "abnormal primitive erythrocyte morphology" EXACT []
 is_a: MP:0004229 ! abnormal embryonic erythropoiesis
 
@@ -28408,7 +28433,7 @@ is_a: MP:0001504 ! abnormal posture
 [Term]
 id: MP:0004264
 name: abnormal extraembryonic tissue physiology
-def: "functional anomaly of the membranes involved with embryonic protection and nutrition" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+def: "any functional anomaly of the membranes involved with embryonic protection and nutrition" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 is_a: MP:0001672 ! abnormal embryogenesis/ development
 
 [Term]
@@ -28447,16 +28472,6 @@ id: MP:0004270
 name: analgesia
 def: "inability to sense pain" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 is_a: MP:0001968 ! abnormal touch/ nociception
-
-[Term]
-id: MP:0004271
-name: abnormal paw/hand/foot morphology
-def: "any structural anomaly of the pedal or prehensile extremity of vertebrates" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-synonym: " paw/hand/foot dysplasia" EXACT []
-synonym: "abnormal paw morphology" EXACT []
-synonym: "abnormal paws" EXACT []
-synonym: "paw abnormalities" RELATED []
-is_a: MP:0002109 ! abnormal limb morphology
 
 [Term]
 id: MP:0004272
@@ -30645,7 +30660,7 @@ def: "any structural anomaly of the distal elements of the developing limb of ve
 synonym: "abnormal footplate morphology" EXACT []
 synonym: "abnormal hand plate morphology" EXACT []
 synonym: "abnormal handplate morphology" EXACT []
-is_a: MP:0000572 ! abnormal autopod morphology
+is_a: MP:0006279 ! abnormal limb development
 
 [Term]
 id: MP:0004577
@@ -30796,8 +30811,10 @@ is_a: MP:0004272 ! abnormal basement membrane morphology
 [Term]
 id: MP:0004599
 name: abnormal vertebral arch morphology
-def: "any structural anomaly of the dorsal part of a vertebra, consisting of a pair of pedicles, a pair of laminae, and seven processes (four articular processes, two transverse processes, and one spinous process)" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+alt_id: MP:0009730
+def: "any structural anomaly of the dorsal bony and/or cartilagenous part of a vertebra, consisting of a pair of pedicles, a pair of laminae, and seven processes (four articular processes, two transverse processes, and one spinous process)" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "abnormal dorsal arch morphology" EXACT []
+synonym: "abnormal neural arch morphology" EXACT []
 is_a: MP:0000137 ! abnormal vertebrae morphology
 
 [Term]
@@ -30824,6 +30841,8 @@ is_a: MP:0004599 ! abnormal vertebral arch morphology
 id: MP:0004603
 name: absent vertebral arch
 def: "loss of the dorsal part of a vertebra, consisting of a pair of pedicles, a pair of laminae, and seven processes (four articular processes, two transverse processes, and one spinous process)" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "absent dorsal arch" EXACT []
+synonym: "absent neural arch" EXACT []
 is_a: MP:0004599 ! abnormal vertebral arch morphology
 
 [Term]
@@ -32339,7 +32358,7 @@ is_a: MP:0003635 ! abnormal synaptic transmission
 [Term]
 id: MP:0004808
 name: abnormal hematopoietic stem cell morphology
-def: "any structural anomaly or number of the multipotent, self-renewing stem cells found in the bone marrow and the fetal liver; these give rise to all the types of both the myeloid and lymphoid cell lineages" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+def: "any structural anomaly or number of the multipotent, self-renewing stem cells found in the bone marrow and the fetal liver; HSCs give rise to all the types of both the myeloid and lymphoid cell lineages" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "abnormal hematopoietic progenitor cell morphology" EXACT []
 synonym: "abnormal hemopoietic progenitor cell morphology" EXACT []
 synonym: "abnormal HSCs" RELATED []
@@ -32349,7 +32368,7 @@ is_a: MP:0002398 ! abnormal bone marrow cell morphology/development
 [Term]
 id: MP:0004809
 name: increased hematopoietic stem cell number
-def: "greater cell count of the multipotent, self-renewing stem cells found in the bone marrow and the fetal liver; these give rise to all the types of both the myeloid and lymphoid cell lineages" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+def: "greater cell count of the multipotent, self-renewing stem cells found in the bone marrow and the fetal liver; HSCs give rise to all the types of both the myeloid and lymphoid cell lineages" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "increased hematopoietic progenitor cell number" EXACT []
 synonym: "increased hemopoietic progenitor cell number" EXACT []
 synonym: "increased HSCs" EXACT []
@@ -32359,7 +32378,7 @@ is_a: MP:0004808 ! abnormal hematopoietic stem cell morphology
 [Term]
 id: MP:0004810
 name: decreased hematopoietic stem cell number
-def: "reduced cell count of the multipotent, self-renewing stem cells found in the bone marrow and the fetal liver; these give rise to all the types of both the myeloid and lymphoid cell lineages" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+def: "reduced cell count of the multipotent, self-renewing stem cells found in the bone marrow and the fetal liver; HSCs give rise to all the types of both the myeloid and lymphoid cell lineages" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "decreased hematopoietic progenitor cell number" EXACT []
 synonym: "decreased hemopoietic progenitor cell number" EXACT []
 synonym: "decreased HSCs" EXACT []
@@ -33849,13 +33868,6 @@ def: "any functional anomaly of bone-forming cells, which normally form an osseo
 is_a: MP:0002998 ! abnormal bone remodeling
 
 [Term]
-id: MP:0005007
-name: abnormal bone density
-def: "abnormal mineral content of bone" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
-synonym: "bone density anomalies" EXACT []
-is_a: MP:0003795 ! abnormal bone structure
-
-[Term]
 id: MP:0005009
 name: congenital skeletal deformities
 def: "OBSOLETE. malformations of the bones/skeleton existing at birth" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
@@ -34026,6 +34038,7 @@ is_a: MP:0001790 ! abnormal immune system physiology
 id: MP:0005026
 name: decreased susceptibility to parasitic infection
 def: "reduced likelihood that an organism will develop ill effects from a parasitic infection or from components of or toxins produced by parasites" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+synonym: "decreased susceptibility to parasite infection" EXACT []
 synonym: "increased resistance to parasitic infection" EXACT []
 synonym: "reduced susceptibility to parasitic infection" EXACT []
 is_a: MP:0002409 ! decreased susceptibility to infection
@@ -34035,6 +34048,7 @@ id: MP:0005027
 name: increased susceptibility to parasitic infection
 def: "greater likelihood that an organism will develop ill effects from a parasitic infection or from components of or toxins produced by parasites" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 synonym: "decreased resistance to parasitic infection" EXACT []
+synonym: "increased susceptibility to parasite infection" EXACT []
 is_a: MP:0002406 ! increased susceptibility to infection
 
 [Term]
@@ -34308,21 +34322,15 @@ is_obsolete: true
 [Term]
 id: MP:0005068
 name: abnormal NK cell morphology
-def: "any structural anomaly of non-T, non-B lymphocytes, having a granular morphology and which are important in innate immunity to viruses and other intracellular pathogens; in addition, these cells can kill certain tumor cells" [ISBN:0-8153-1691-7 "Immunobiology, The Immune System in Health and Disease"]
+def: "any structural anomaly of a lymphocyte that can spontaneously kill a variety of target cells without prior antigenic activation via germline encoded activation receptors, and also regulate immune responses via cytokine release and direct contact with other cells" [ISBN:0781735149, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", PMID:15771571]
 synonym: "abnormal natural killer cell" EXACT []
 synonym: "abnormal NK cells" EXACT []
 synonym: "natural killer cell abnormalities" EXACT []
 synonym: "NK cell abnormalities" EXACT []
+xref: CL:0000623
+xref: FMA:63147
+xref: FMA:83601
 is_a: MP:0002619 ! abnormal lymphocyte morphology
-
-[Term]
-id: MP:0005069
-name: abnormal NK cell physiology
-def: "impaired function of non-T, non-B lymphocytes, having a granular morphology and which are important in innate immunity to viruses and other intracellular pathogens; in addition, these cells can kill certain tumor cells" [ISBN:0-8153-1691-7 "Immunobiology, The Immune System in Health and Disease"]
-synonym: "dysfunctional NK cells" EXACT []
-synonym: "natural killer cell dysfunction" EXACT []
-synonym: "NK cell dysfunction" EXACT []
-is_a: MP:0003945 ! abnormal lymphocyte physiology
 
 [Term]
 id: MP:0005070
@@ -34330,7 +34338,7 @@ name: impaired NK cell cytolysis
 def: "impaired ability of natural killer cells to induce pathological breakdown of target cells by the destruction of their outer membrane" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "defective natural killer cell cytolysis" EXACT []
 synonym: "defective NK cell cytolysis" EXACT []
-is_a: MP:0005069 ! abnormal NK cell physiology
+is_a: MP:0010766 ! abnormal NK cell physiology
 
 [Term]
 id: MP:0005071
@@ -34346,13 +34354,6 @@ synonym: "hair follicle melanin granule abnormalities" EXACT []
 is_a: MP:0000377 ! abnormal hair follicle morphology
 is_a: MP:0004381 ! abnormal hair follicle melanocyte morphology
 is_a: MP:0005075 ! abnormal melanosome morphology
-
-[Term]
-id: MP:0005073
-name: impaired granulocyte migration
-def: "inability or reduced ability of neutrophils, eosinophils, or basophils to move in response to chemical stimuli" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:5405, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
-synonym: "defective granulocyte chemotaxis" EXACT []
-is_a: MP:0002462 ! abnormal granulocyte physiology
 
 [Term]
 id: MP:0005074
@@ -34578,7 +34579,7 @@ is_a: MP:0005196 ! abnormal posterior uvea morphology
 [Term]
 id: MP:0005099
 name: abnormal ciliary body morphology
-def: "structural anomaly of the thickened portion of the vascular tunic, which lies between the choroid and the iris" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "any structural anomaly of the thickened portion of the vascular tunic, which lies between the choroid and the iris" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "ciliary body abnormalities" EXACT []
 is_a: MP:0005194 ! abnormal anterior uvea morphology
 
@@ -34619,8 +34620,8 @@ comment: Note that humans only have seven tarsal bones, while rodents have eight
 synonym: "abnormal tarsal bone" EXACT []
 synonym: "abnormal tarsals" EXACT []
 synonym: "abnormal tarsus" EXACT []
+is_a: MP:0000572 ! abnormal autopod morphology
 is_a: MP:0002115 ! abnormal skeleton extremities morphology
-is_a: MP:0004271 ! abnormal paw/hand/foot morphology
 
 [Term]
 id: MP:0005105
@@ -34636,24 +34637,24 @@ is_a: MP:0002116 ! abnormal craniofacial bone morphology
 [Term]
 id: MP:0005106
 name: abnormal incus morphology
-def: "structural anomaly of the middle of the three auditory ossicles" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:83132]
+def: "any structural anomaly of the middle of the three auditory ossicles" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:83132]
 is_a: MP:0005105 ! abnormal middle ear ossicle morphology
 
 [Term]
 id: MP:0005107
 name: abnormal stapes morphology
-def: "structural anomaly of the smallest and innermost of the three auditory ossicles" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:83132]
+def: "any structural anomaly of the smallest and innermost of the three auditory ossicles" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:83132]
 synonym: "abnormal stapes" EXACT []
 is_a: MP:0005105 ! abnormal middle ear ossicle morphology
 
 [Term]
 id: MP:0005108
 name: abnormal ulna morphology
-def: "any structural anomaly of the medial and larger of the two bones of the forearm" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:83132]
+def: "any structural anomaly of the medial and larger of the two bones of the forearm" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 subset: Europhenome_Terms
 synonym: "abnormal ulna" EXACT []
-is_a: MP:0000550 ! abnormal forelimb morphology
 is_a: MP:0003723 ! abnormal long bone morphology
+is_a: MP:0003855 ! abnormal forelimb zeugopod morphology
 
 [Term]
 id: MP:0005109
@@ -35116,7 +35117,7 @@ is_a: MP:0003313 ! abnormal locomotor activation
 [Term]
 id: MP:0005157
 name: holoprosencephaly
-def: "presence of a single forebrain hemisphere or lobe; often accompanied by a deficit in median facial development" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:83058]
+def: "presence of a single forebrain hemisphere or lobe; often accompanied by a deficit in median facial development" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 is_a: MP:0000913 ! abnormal brain development
 
 [Term]
@@ -35168,7 +35169,7 @@ is_a: MP:0000753 ! paralysis
 [Term]
 id: MP:0005163
 name: cyclopia
-def: "a congenital defect in which the two orbits are united to form a single cavity containing one eye" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:60303]
+def: "a congenital defect in which the two orbits are united to form a single cavity containing one eye" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "cyclopea" EXACT []
 synonym: "one eye" EXACT []
 synonym: "synophthalmia" EXACT []
@@ -35441,7 +35442,7 @@ is_a: MP:0002092 ! abnormal eye morphology
 [Term]
 id: MP:0005196
 name: abnormal posterior uvea morphology
-def: "structural anomaly of the rear, or dorsal, portion of the vascular, pigmentary, or middle coat of the eye, includes the choroid" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "any structural anomaly of the rear, or dorsal, portion of the vascular, pigmentary, or middle coat of the eye, includes the choroid" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "posterior uvea abnormalities" EXACT []
 synonym: "tunica vasculosa bulbi" EXACT []
 synonym: "tunica vasculosa oculi abnormalities" EXACT []
@@ -35454,7 +35455,7 @@ is_a: MP:0005197 ! abnormal uvea morphology
 [Term]
 id: MP:0005197
 name: abnormal uvea morphology
-def: "structural anomaly of the pigmented vascular coat of the eyeball, consisting of the iris, ciliary body, and choroid" [MESH:A09.371.894]
+def: "any structural anomaly of the pigmented vascular coat of the eyeball, consisting of the iris, ciliary body, and choroid" [MESH:A09.371.894]
 synonym: "uvea abnormalities" EXACT []
 synonym: "uvea dysplasia" EXACT []
 synonym: "vascular layer of the eyeball" EXACT []
@@ -35496,13 +35497,13 @@ is_a: MP:0003313 ! abnormal locomotor activation
 [Term]
 id: MP:0005203
 name: abnormal trabecular meshwork morphology
-def: "structural anomaly in the pore-like structure surrounding the entire circumference of the anterior chamber through which aqueous humor circulates" [MESH:A09.371.060.932]
+def: "any structural anomaly in the pore-like structure surrounding the entire circumference of the anterior chamber through which aqueous humor circulates" [MESH:A09.371.060.932]
 is_a: MP:0004221 ! abnormal iridocorneal angle
 
 [Term]
 id: MP:0005204
 name: abnormal canal of Schlemm morphology
-def: "structural anomaly in the vascular structure encircling the anterior chamber of the eye, through which the aqueous humor is returned to the blood circulation" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "any structural anomaly in the vascular structure encircling the anterior chamber of the eye, through which the aqueous humor is returned to the blood circulation" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "circular sinus abnormalities" EXACT []
 synonym: "Fontana canal abnormalities" EXACT []
 synonym: "Lauth canal abnormalities" EXACT []
@@ -35532,7 +35533,7 @@ is_a: MP:0005205 ! abnormal eye anterior chamber
 [Term]
 id: MP:0005207
 name: abnormal aqueous vein morphology
-def: "structural anomaly of this vessel that receives aqueous humor from the sinus venosus sclerae (canal of Schlemm)" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "any structural anomaly of this vessel that receives aqueous humor from the sinus venosus sclerae (canal of Schlemm)" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 is_a: MP:0004221 ! abnormal iridocorneal angle
 
 [Term]
@@ -35671,6 +35672,8 @@ is_a: MP:0002113 ! abnormal skeleton development
 id: MP:0005226
 name: abnormal vertebral arch development
 def: "anomalous formation of the posterior projection from the body of a vertebra that encloses the vertebral foramen" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "abnormal dorsal arch development" EXACT []
+synonym: "abnormal neural arch development" EXACT []
 is_a: MP:0004599 ! abnormal vertebral arch morphology
 is_a: MP:0005225 ! abnormal vertebrae development
 
@@ -35727,7 +35730,7 @@ def: "a neoplasm originating from thymic tissue, usually benign, and frequently 
 synonym: "thymic tumor" RELATED []
 synonym: "thymoma" EXACT []
 synonym: "thymus tumor" RELATED []
-is_a: MP:0002022 ! lymphoma
+is_a: MP:0002022 ! increased lymphoma incidence
 is_a: MP:0010365 ! increased thymus tumor incidence
 
 [Term]
@@ -35750,7 +35753,7 @@ is_a: MP:0001056 ! abnormal cranial nerve morphology
 [Term]
 id: MP:0005237
 name: abnormal olfactory tract morphology
-def: "structural anomaly of the nerve-like, white band composed primarily of nerve fibers originating from the mitral cells and tufted cells of the olfactory bulb, but also containing the scattered cells of the anterior olfactory nucleus" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:34460]
+def: "any structural anomaly of the nerve-like, white band composed primarily of nerve fibers originating from the mitral cells and tufted cells of the olfactory bulb, but also containing the scattered cells of the anterior olfactory nucleus" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "abnormal olfactory tract" EXACT []
 xref: MA:0000975
 is_a: MP:0005267 ! abnormal olfactory cortex morphology
@@ -35868,7 +35871,7 @@ is_a: MP:0001851 ! eye inflammation
 [Term]
 id: MP:0005252
 name: abnormal meibomian gland morphology
-def: "structural anomaly of the sebaceous glands embedded in the tarsal plate of each eyelid" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "any structural anomaly of the sebaceous glands embedded in the tarsal plate of each eyelid" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "abnormal tarsal gland" RELATED []
 synonym: "meibomian gland dysplasia" EXACT []
 is_a: MP:0000647 ! abnormal sebaceous gland morphology
@@ -35967,7 +35970,7 @@ is_a: MP:0005376 ! homeostasis/metabolism phenotype
 [Term]
 id: MP:0005267
 name: abnormal olfactory cortex morphology
-def: "any structural anomaly of cortex area which receives its major afferents from the olfactory bulb, and is primarily responsible for the identification of odors" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:83884]
+def: "any structural anomaly of cortex area which receives its major afferents from the olfactory bulb, and is primarily responsible for the identification of odors" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "abnormal olfactory cortex" EXACT []
 xref: MA:0000193
 is_a: MP:0009944 ! abnormal olfactory lobe morphology
@@ -36154,7 +36157,7 @@ is_a: MP:0005291 ! abnormal glucose tolerance
 [Term]
 id: MP:0005294
 name: abnormal heart ventricle morphology
-def: "structural anomaly of one or both of the two lower chambers of the heart" [MESH:A07.541.560, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "any structural anomaly of one or both of the two lower chambers of the heart" [MESH:A07.541.560, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 synonym: "heart ventricle abnormalities" EXACT []
 synonym: "ventricular dysplasia" EXACT []
 is_a: MP:0000266 ! abnormal heart morphology
@@ -36165,8 +36168,8 @@ name: abnormal humerus morphology
 def: "any structural anomaly of the bone of the forelimb that articulates with the scapula above and the radius and ulna below" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 subset: Europhenome_Terms
 synonym: "abnormal humerus" EXACT []
-is_a: MP:0000550 ! abnormal forelimb morphology
 is_a: MP:0003723 ! abnormal long bone morphology
+is_a: MP:0003855 ! abnormal forelimb zeugopod morphology
 
 [Term]
 id: MP:0005297
@@ -36196,7 +36199,7 @@ is_a: MP:0005193 ! abnormal anterior eye segment morphology
 [Term]
 id: MP:0005300
 name: abnormal corneal stroma morphology
-def: "structural anomaly of the lamellated connective tissue of the cornea between the Bowman and Descemet membranes" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:A09.371.060.217.228]
+def: "any structural anomaly of the lamellated connective tissue of the cornea between the Bowman and Descemet membranes" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MESH:A09.371.060.217.228]
 is_a: MP:0001312 ! abnormal cornea morphology
 
 [Term]
@@ -36514,7 +36517,7 @@ is_a: MP:0002118 ! abnormal lipid homeostasis
 [Term]
 id: MP:0005343
 name: increased circulating aspartate transaminase level
-def: "greater than normal concentration in the blood of this enzyme, which catalyzes the reversible transfer of an amine group from l-glutamic acid to oxaloacetic acid, forming alpha-ketoglutaric acid and l-aspartic acid; aids in diagnosis of viral hepatitis and myocardial infarction" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:85204, MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
+def: "greater than normal concentration in the blood of this enzyme, which catalyzes the reversible transfer of an amine group from l-glutamic acid to oxaloacetic acid, forming alpha-ketoglutaric acid and l-aspartic acid; aids in diagnosis of viral hepatitis and myocardial infarction" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
 subset: Europhenome_Terms
 synonym: "elevated aspartate transaminase level" EXACT []
 synonym: "elevated AST level" EXACT []
@@ -36634,7 +36637,7 @@ is_a: MP:0003313 ! abnormal locomotor activation
 [Term]
 id: MP:0005357
 name: novel environmental response-related retropulsion
-def: "when confronted with a novel stimulus, subjects exhibit involuntary backward walking" [J:79604, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+def: "when confronted with a novel stimulus, subjects exhibit involuntary backward walking" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", PMID:12370287]
 subset: Europhenome_Terms
 is_a: MP:0001413 ! abnormal response to new environment
 is_a: MP:0010323 ! retropulsion
@@ -37164,7 +37167,7 @@ is_a: MP:0005437 ! abnormal glycogen level
 [Term]
 id: MP:0005441
 name: hypercalciuria
-def: "excretion of abnormally large amounts of calcium in the urine" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:86949, MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
+def: "excretion of abnormally large amounts of calcium in the urine" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:pvb "Pierre Vanden Borre, Mouse Genome Informatics Curator"]
 synonym: "hypercalcinuria" EXACT []
 synonym: "hypercalcuria" EXACT []
 is_a: MP:0002985 ! abnormal urine calcium level
@@ -37222,7 +37225,7 @@ is_a: MP:0001764 ! abnormal homeostasis
 [Term]
 id: MP:0005449
 name: abnormal food intake
-def: "any anomaly in the total number of calories taken in daily when compared to the normal state" [MESH:National Library of Medicine_Medical Subject Headings, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "any anomaly in the total number of calories taken in daily when compared to the normal state" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 subset: Europhenome_Terms
 synonym: "abnormal calorie consumption" EXACT []
 synonym: "abnormal energy intake" EXACT []
@@ -37611,7 +37614,7 @@ is_a: MP:0005394 ! taste/olfaction phenotype
 [Term]
 id: MP:0005500
 name: abnormal gustatory system morphology
-def: "structural anomaly of the organs involved in taste" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+def: "any structural anomaly of the organs involved in taste" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "gustatory system dysplasia" EXACT []
 is_a: MP:0005394 ! taste/olfaction phenotype
 
@@ -37624,14 +37627,14 @@ is_a: MP:0005393 ! skin/coat/nails phenotype
 [Term]
 id: MP:0005502
 name: abnormal urinary system physiology
-def: "functional anomaly of any of the organs involved in the production or excretion of urine" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+def: "any functional anomaly of any of the organs involved in the production or excretion of urine" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "abnormal urinary system function" EXACT []
 is_a: MP:0005367 ! renal/urinary system phenotype
 
 [Term]
 id: MP:0005503
 name: abnormal tendon morphology
-def: "structural anomaly of the fibrous bands or cords of connective tissue at the ends of muscle fibers that attach muscles to bones and other structures" [MESH:A02.880]
+def: "any structural anomaly of the fibrous bands or cords of connective tissue at the ends of muscle fibers that attach muscles to bones and other structures" [MESH:A02.880]
 synonym: "tendon dysplasia" RELATED []
 is_a: MP:0002108 ! abnormal muscle morphology
 is_a: MP:0005508 ! abnormal skeleton morphology
@@ -37639,7 +37642,7 @@ is_a: MP:0005508 ! abnormal skeleton morphology
 [Term]
 id: MP:0005504
 name: abnormal ligament morphology
-def: "structural anomaly of the flexible bands of fibrous tissue that connect the articular extremities of bones" [J:45509, MESH:A02.513]
+def: "any structural anomaly of the flexible bands of fibrous tissue that connect the articular extremities of bones" [J:45509, MESH:A02.513]
 synonym: "ligament dysplasia" EXACT []
 is_a: MP:0005508 ! abnormal skeleton morphology
 
@@ -38216,7 +38219,7 @@ is_a: MP:0002313 ! abnormal tidal volume
 [Term]
 id: MP:0005587
 name: abnormal Meckel's cartilage morphology
-def: "structural anomaly of this cartilage bar in the mandibular arch that forms a temporary supporting structure in the embryonic mandible; gives rise to middle ear bones and sphenomandibular and anterior malleolar ligaments" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:17694]
+def: "any structural anomaly of this cartilage bar in the mandibular arch that forms a temporary supporting structure in the embryonic mandible; gives rise to middle ear bones and sphenomandibular and anterior malleolar ligaments" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:17694]
 synonym: "abnormal mandibular cartilage morphology" EXACT []
 synonym: "abnormal Meckel cartilage morphology" EXACT []
 is_a: MP:0000163 ! abnormal cartilage morphology
@@ -38238,7 +38241,7 @@ is_a: MP:0001613 ! abnormal vasodilation
 [Term]
 id: MP:0005592
 name: abnormal vascular smooth muscle morphology
-def: "structural anomaly of the nonstriated, involuntary muscle tissue of the blood vessels" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "any structural anomaly of the nonstriated, involuntary muscle tissue of the blood vessels" [MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 is_a: MP:0000767 ! abnormal smooth muscle morphology
 is_a: MP:0001614 ! abnormal blood vessel morphology
 
@@ -38462,14 +38465,14 @@ is_a: MP:0002534 ! abnormal type IV hypersensitivity reaction
 [Term]
 id: MP:0005618
 name: decreased potassium excretion
-def: "less than the normal amount of this alkaline metallic element, the most abundant intracellular ion, voided by the kidneys" [MESH:National Library of Medicine_Medical Subject Headings, RGD:cur "Rat Genome Database submission"]
+def: "less than the normal amount of this alkaline metallic element, the most abundant intracellular ion, voided by the kidneys" [RGD:cur "Rat Genome Database submission"]
 synonym: "reduced potassium excretion" EXACT []
 is_a: MP:0006311 ! abnormal kidney potassium excretion
 
 [Term]
 id: MP:0005619
 name: increased potassium excretion
-def: "greater than the normal amount of this alkaline metallic element, the most abundant intracellular ion, voided by the kidneys" [MESH:National Library of Medicine_Medical Subject Headings, RGD:cur "Rat Genome Database submission"]
+def: "greater than the normal amount of this alkaline metallic element, the most abundant intracellular ion, voided by the kidneys" [RGD:cur "Rat Genome Database submission"]
 is_a: MP:0006311 ! abnormal kidney potassium excretion
 
 [Term]
@@ -38604,7 +38607,7 @@ is_a: MP:0001764 ! abnormal homeostasis
 [Term]
 id: MP:0005637
 name: abnormal iron homeostasis
-def: "anomaly in the processes involved in the maintenance of an internal equilibrium of iron that normally is a cofactor in the heme of hemoglobin, myoglobin, transferrin, ferritin, and iron-containing porphyrins; it is an essential component of enzymes such as catalase, peroxidase, and various cytochromes" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:64456]
+def: "anomaly in the processes involved in the maintenance of an internal equilibrium of iron that normally is a cofactor in the heme of hemoglobin, myoglobin, transferrin, ferritin, and iron-containing porphyrins; it is an essential component of enzymes such as catalase, peroxidase, and various cytochromes" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 subset: Europhenome_Terms
 is_a: MP:0005636 ! abnormal mineral homeostasis
 
@@ -38631,7 +38634,7 @@ is_a: MP:0001588 ! abnormal hemoglobin
 [Term]
 id: MP:0005641
 name: increased mean corpuscular hemoglobin concentration
-def: "greater than the normal Hgb/Hct; the average hemoglobin concentration in a given volume of packed red cells, calculated from the hemoglobin therein and the hematocrit, in erythrocyte indices" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:8936]
+def: "greater than the normal Hgb/Hct; the average hemoglobin concentration in a given volume of packed red cells, calculated from the hemoglobin therein and the hematocrit, in erythrocyte indices" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 comment: Mean corpuscular hemoglobin concentration (MCHC) is a standard measurment in clinical chemistry, usually reported in g/L or g/dL.
 subset: Europhenome_Terms
 synonym: "high MCHC" EXACT []
@@ -38642,7 +38645,7 @@ is_a: MP:0005640 ! abnormal mean corpuscular hemoglobin concentration
 [Term]
 id: MP:0005642
 name: decreased mean corpuscular hemoglobin concentration
-def: "less than the normal Hgb/Hct; the average hemoglobin concentration in a given volume of packed red cells, calculated from the hemoglobin therein and the hematocrit, in erythrocyte indices" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", J:8936]
+def: "less than the normal Hgb/Hct; the average hemoglobin concentration in a given volume of packed red cells, calculated from the hemoglobin therein and the hematocrit, in erythrocyte indices" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 comment: Mean corpuscular hemoglobin concentration (MCHC) is a standard measurment in clinical chemistry, usually reported in g/L or g/dL.
 subset: Europhenome_Terms
 synonym: "decreased MCHC" EXACT []
@@ -38819,7 +38822,7 @@ is_a: MP:0005663 ! abnormal circulating noradrenaline level
 [Term]
 id: MP:0005666
 name: abnormal adipose tissue physiology
-def: "functional anomaly of the connective tissue composed of fat cells enmeshed in areolar tissue" [MESH:A10.165.114, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
+def: "any functional anomaly of the connective tissue composed of fat cells enmeshed in areolar tissue" [MESH:A10.165.114, MGI:cwg "Carroll-Ann W. Goldsmith, Mouse Genome Informatics Curator"]
 is_a: MP:0005375 ! adipose tissue phenotype
 
 [Term]
@@ -39575,7 +39578,7 @@ is_a: MP:0009115 ! abnormal fat cell morphology
 [Term]
 id: MP:0006095
 name: absent amacrine cells
-def: "absence of the amacrine cells, which constitute one of the three types of interneurons found in the inner nuclear layer of the mature retina; they integrate, modulate, and interpose a temporal domain in the visual message presented to the retinal ganglion cells, with which they synapse in the inner plexiform layer" [J:74753, MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator", MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
+def: "absence of the amacrine cells, which constitute one of the three types of interneurons found in the inner nuclear layer of the mature retina; they integrate, modulate, and interpose a temporal domain in the visual message presented to the retinal ganglion cells, with which they synapse in the inner plexiform layer" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator", MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
 synonym: "absent amacrine neuron" EXACT []
 is_a: MP:0008106 ! decreased amacrine cell number
 
@@ -40616,7 +40619,7 @@ is_a: MP:0010288 ! increased gland tumor incidence
 [Term]
 id: MP:0006263
 name: decreased systemic arterial diastolic blood pressure
-def: "abnormal decrease in the pressure in the arteries between heart beats when the heart is relaxed" [J:21887, MGI:monikat "Monika Tomczuk, Mouse Genome Informatics Curator"]
+def: "abnormal decrease in the pressure in the arteries between heart beats when the heart is relaxed" [MGI:monikat "Monika Tomczuk, Mouse Genome Informatics Curator"]
 subset: Europhenome_Terms
 synonym: "reduced diastolic blood pressure" EXACT []
 is_a: MP:0002843 ! decreased systemic arterial blood pressure
@@ -40624,7 +40627,7 @@ is_a: MP:0002843 ! decreased systemic arterial blood pressure
 [Term]
 id: MP:0006264
 name: decreased systemic arterial systolic blood pressure
-def: "abnormal decrease in the pressure in the arteries as the heart contracts and pumps blood into the arteries" [J:21887, MGI:monikat "Monika Tomczuk, Mouse Genome Informatics Curator"]
+def: "abnormal decrease in the pressure in the arteries as the heart contracts and pumps blood into the arteries" [MGI:monikat "Monika Tomczuk, Mouse Genome Informatics Curator"]
 subset: Europhenome_Terms
 synonym: "reduced systolic blood pressure" EXACT []
 is_a: MP:0002843 ! decreased systemic arterial blood pressure
@@ -40735,7 +40738,7 @@ is_a: MP:0003937 ! abnormal limbs/digits/tail development
 id: MP:0006280
 name: abnormal digit development
 def: "anomaly in the formation of the digits" [J:70592, MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
-is_a: MP:0000572 ! abnormal autopod morphology
+is_a: MP:0006279 ! abnormal limb development
 
 [Term]
 id: MP:0006281
@@ -41341,7 +41344,7 @@ is_a: MP:0000674 ! abnormal sweat gland morphology
 [Term]
 id: MP:0006369
 name: supernumerary incisors
-def: "more than a pair, top and/or bottom, of the long pointed teeth that are the most anterior and prominent in the jaw" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
+def: "more than the usual number of incisors, normally consisting of two pairs, top and bottom, of the long pointed teeth that are the most anterior and prominent in the jaw" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
 is_a: MP:0004033 ! supernumerary teeth
 is_a: MP:0005358 ! abnormal incisor morphology
 
@@ -41432,7 +41435,7 @@ is_a: MP:0001175 ! abnormal lung morphology
 [Term]
 id: MP:0006383
 name: abnormal cochlear frequency tuning
-def: "any anomalies in the frequency resolution of the cochlea, normally determined by the passive mechanical properties of the basilar membrane and active feedback from the outer hair cells which detect and amplify sound-induced basilar membrane motions" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+def: "any anomaly in the frequency resolution of the cochlea, normally determined by the passive mechanical properties of the basilar membrane and active feedback from the outer hair cells which detect and amplify sound-induced basilar membrane motions" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
 synonym: "abnormal cochlear tuning" EXACT []
 synonym: "abnormal frequency resolution of the cochlea" EXACT []
 is_a: MP:0006335 ! abnormal hearing electrophysiology
@@ -42196,48 +42199,63 @@ is_a: MP:0002444 ! abnormal T cell physiology
 [Term]
 id: MP:0008043
 name: abnormal NK cell number
-def: "deviation in the normal number of non-T, non-B lymphocytes, having a granular morphology and which are important in innate immunity to viruses and other intracellular pathogens; in addition, these cells can kill certain tumor cells" [ISBN:0-8153-1691-7 "Immunobiology, The Immune System in Health and Disease", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+def: "deviation in the number of lymphocytes that can spontaneously kill a variety of target cells without prior antigenic activation via germline encoded activation receptors, and also regulate immune responses via cytokine release and direct contact with other cells" [ISBN:0781735149, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", PMID:15771571]
 synonym: "abnormal natural killer cell number" EXACT []
+xref: CL:0000623
+xref: FMA:63147
+xref: FMA:83601
 is_a: MP:0000717 ! abnormal lymphocyte cell number
 is_a: MP:0005068 ! abnormal NK cell morphology
 
 [Term]
 id: MP:0008044
 name: increased NK cell number
-def: "greater number of non-T, non-B lymphocytes, having a granular morphology and which are important in innate immunity to viruses and other intracellular pathogens; in addition, these cells can kill certain tumor cells" [ISBN:0-8153-1691-7 "Immunobiology, The Immune System in Health and Disease"]
+def: "greater number of lymphocytes that can spontaneously kill a variety of target cells without prior antigenic activation via germline encoded activation receptors, and also regulate immune responses via cytokine release and direct contact with other cells" [ISBN:0781735149, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", PMID:15771571]
 subset: Europhenome_Terms
 synonym: "increased natural killer cell number" EXACT []
+xref: CL:0000623
+xref: FMA:63147
+xref: FMA:83601
 is_a: MP:0005013 ! increased lymphocyte cell number
 is_a: MP:0008043 ! abnormal NK cell number
 
 [Term]
 id: MP:0008045
 name: decreased NK cell number
-def: "reduction in the number of non-T, non-B lymphocytes, having a granular morphology and which are important in innate immunity to viruses and other intracellular pathogens; in addition, these cells can kill certain tumor cells" [ISBN:0-8153-1691-7 "Immunobiology, The Immune System in Health and Disease"]
-subset: Europhenome_Terms
+def: "reduction in the number of lymphocytes that can spontaneously kill a variety of target cells without prior antigenic activation via germline encoded activation receptors, and also regulate immune responses via cytokine release and direct contact with other cells" [ISBN:0781735149, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", PMID:15771571]
 synonym: "decreased natural killer cell number" EXACT []
 synonym: "reduced natural killer cell number" EXACT []
 synonym: "reduced NK cell number" EXACT []
+xref: CL:0000623
+xref: FMA:63147
+xref: FMA:83601
 is_a: MP:0005016 ! decreased lymphocyte cell number
 is_a: MP:0008043 ! abnormal NK cell number
 
 [Term]
 id: MP:0008046
 name: absent NK cells
-def: "absence of the non-T, non-B lymphocytes, having a granular morphology and which are important in innate immunity to viruses and other intracellular pathogens; in addition, these cells can kill certain tumor cells" [ISBN:0-8153-1691-7 "Immunobiology, The Immune System in Health and Disease"]
+def: "absence of lymphocytes that can spontaneously kill a variety of target cells without prior antigenic activation via germline encoded activation receptors, and also regulate immune responses via cytokine release and direct contact with other cells" [ISBN:0781735149, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", PMID:15771571]
 synonym: "absence of natural killer cells" EXACT []
 synonym: "absent natural killer cells" EXACT []
+xref: CL:0000623
+xref: FMA:63147
+xref: FMA:83601
 is_a: MP:0000726 ! absent lymphocyte
 is_a: MP:0008045 ! decreased NK cell number
 
 [Term]
 id: MP:0008047
 name: absent uterine NK cells
-def: "absence of the uterine subset of the non-T, non-B lymphocytes, having a granular morphology and which are important in innate immunity to viruses and other intracellular pathogens; uNK cells contribute to uterine decidualization and are recruited to implantation sites" [ISBN:0-8153-1691-7 "Immunobiology, The Immune System in Health and Disease", PMID:12887272]
+def: "absence of a natural killer cell subset that is found in the decidual of the uterus, is CD56-high, Galectin-1-positive and CD16-negative, and is the most abundant immune cell type in the decidual during the first trimester of pregnancy" [PMID:14568979, PMID:19800965]
+synonym: "absent decidual natural killer cells" EXACT []
+synonym: "absent decidual NK cells" EXACT []
+synonym: "absent dNK cells" EXACT []
 synonym: "absent GMG cells" EXACT []
 synonym: "absent granulated metrial gland cells" EXACT []
 synonym: "absent uNK cells" EXACT []
 synonym: "absent uterine natural killer cells" EXACT []
+xref: CL:0002343
 is_a: MP:0008046 ! absent NK cells
 is_a: MP:0008876 ! decreased uterine NK cell number
 
@@ -42278,7 +42296,7 @@ is_a: MP:0002163 ! abnormal gland morphology
 [Term]
 id: MP:0008053
 name: abnormal NK cell differentiation
-def: "atypical production of or inability to produce the non-T, non-B lymphocytes, having a granular morphology and which are important in innate immunity to viruses and other intracellular pathogens; in addition, these cells can kill certain tumor cells" [ISBN:0-8153-1691-7 "Immunobiology, The Immune System in Health and Disease"]
+def: "atypical production of or inability to produce mature lymphocytes that can spontaneously kill a variety of target cells without prior antigenic activation via germline encoded activation receptors, and also regulate immune responses via cytokine release and direct contact with other cells" [ISBN:0781735149, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", PMID:15771571]
 synonym: "abnormal natural killer cell differentiation" EXACT []
 is_a: MP:0002401 ! abnormal lymphopoiesis
 is_a: MP:0005068 ! abnormal NK cell morphology
@@ -42286,11 +42304,15 @@ is_a: MP:0005068 ! abnormal NK cell morphology
 [Term]
 id: MP:0008054
 name: abnormal uterine NK cell morphology
-def: "any structural anomaly of the uterine subset of the non-T, non-B lymphocytes, having a granular morphology and which are important in innate immunity to viruses and other intracellular pathogens; uNK cells contribute to uterine decidualization and are recruited to implantation sites" [ISBN:0-8153-1691-7 "Immunobiology, The Immune System in Health and Disease", PMID:12887272]
+def: "any structural anomaly of a natural killer cell subset that is found in the decidual of the uterus, is CD56-high, Galectin-1-positive and CD16-negative, and is the most abundant immune cell type in the decidual during the first trimester of pregnancy" [PMID:14568979, PMID:19800965]
+synonym: "abnormal decidual natural killer cell morphology" EXACT []
+synonym: "abnormal decidual NK cell morphology" EXACT []
+synonym: "abnormal dNK cell morphology" EXACT []
 synonym: "abnormal GMG cell morphology" EXACT []
 synonym: "abnormal granulated metrial gland cell morphology" EXACT []
 synonym: "abnormal uNK cell morphology" EXACT []
 synonym: "abnormal uterine natural killer cell morphology" EXACT []
+xref: CL:0002343
 is_a: MP:0001120 ! abnormal uterus morphology
 is_a: MP:0005068 ! abnormal NK cell morphology
 
@@ -43641,7 +43663,8 @@ is_a: MP:0002459 ! abnormal B cell physiology
 [Term]
 id: MP:0008218
 name: delayed emergence of vibrissae
-def: "eruption of the vibrissae from the skin later than embryonic day E17-18" [MGI:brs "Beverly Richards-Smith, Mouse Genome Informatics Curator"]
+def: "eruption of the vibrissae from the skin later than expected" [MGI:brs "Beverly Richards-Smith, Mouse Genome Informatics Curator"]
+comment: In mouse, the vibrissae emerge at approximately embryonic day E17-18.
 synonym: "delayed emergence of sinus hairs" EXACT []
 is_a: MP:0002098 ! abnormal vibrissa morphology
 
@@ -44351,7 +44374,7 @@ is_a: MP:0004300 ! abnormal organ of Corti supporting cell morphology
 [Term]
 id: MP:0008305
 name: abnormal organ of Corti supporting cell physiology
-def: "anomalies in processes pertinent to the integrated function of the highly differentiated epithelial cells with distinctive morphological features that surround the hair cells in the organ of Corti" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+def: "any functional anomaly in processes pertinent to the integrated function of the highly differentiated epithelial cells with distinctive morphological features that surround the hair cells in the organ of Corti" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
 is_a: MP:0003878 ! abnormal ear physiology
 
 [Term]
@@ -48699,10 +48722,10 @@ is_a: MP:0002463 ! abnormal neutrophil physiology
 
 [Term]
 id: MP:0008720
-name: impaired neutrophil migration
-def: "defect in the ability of neutrophils to move along a chemotactic gradient" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+name: impaired neutrophil chemotaxis
+def: "defect in the movement of neutrophils guided by a specific chemical concentration gradient" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "decreased neutrophil migration" EXACT []
-synonym: "impaired neutrophil chemotaxis" EXACT []
+synonym: "impaired neutrophil migration" EXACT []
 synonym: "reduced neutrophil migration" EXACT []
 is_a: MP:0002463 ! abnormal neutrophil physiology
 
@@ -48727,10 +48750,10 @@ is_a: MP:0002465 ! abnormal eosinophil physiology
 
 [Term]
 id: MP:0008724
-name: impaired eosinophil migration
-def: "defect in the ability of eosinophils to move along a chemotactic gradient" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+name: impaired eosinophil chemotaxis
+def: "defect in the movement of eosinophils guided by a specific chemical concentration gradient" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "decreased eosinophil migration" EXACT []
-synonym: "impaired eosinophil chemotaxis" EXACT []
+synonym: "impaired eosinophil migration" EXACT []
 synonym: "reduced eosinophil migration" EXACT []
 is_a: MP:0002465 ! abnormal eosinophil physiology
 
@@ -49144,45 +49167,37 @@ is_a: MP:0004703 ! abnormal vertebral column
 
 [Term]
 id: MP:0008772
-name: enlarged heart ventricle
+name: increased heart ventricle size
 def: "increased average size of the heart ventricles compared to the average for a particular population" [MGI:rbabiuk "Randall Babiuk, Mouse Genome Informatics Curator"]
+synonym: "enlarged heart ventricle" RELATED []
 is_a: MP:0005294 ! abnormal heart ventricle morphology
 
 [Term]
-id: MP:0008773
-name: enlarged heart right ventricle
-def: "increased average size of the right ventricle compared to the average for a particular population" [MGI:rbabiuk "Randall Babiuk, Mouse Genome Informatics Curator"]
-is_a: MP:0008772 ! enlarged heart ventricle
-
-[Term]
-id: MP:0008774
-name: enlarged heart left ventricle
-def: "increased average size of the left ventricle compared to the average for a particular population" [MGI:rbabiuk "Randall Babiuk, Mouse Genome Informatics Curator"]
-is_a: MP:0008772 ! enlarged heart ventricle
-
-[Term]
 id: MP:0008775
-name: abnormal heart ventricular pressure
+name: abnormal heart ventricle pressure
 def: "any anomaly in the pressure within a cardiac ventricle" [MESH:G09.330.553.660.937]
 comment: Ventricular pressure waveforms can be measured in the beating heart by catheterization or estimated using imaging techniques (e.g., Doppler echocardiography). The information is useful in evaluating the function of the myocardium, cardiac valves and pericardium, particularly with simultaneous measurement of other (e.g., aortic or atrial) pressures.
 synonym: "abnormal cardiac ventricular pressure" EXACT []
 synonym: "abnormal heart intraventricular pressure" EXACT []
+synonym: "abnormal heart ventricular pressure" EXACT []
 is_a: MP:0001544 ! abnormal cardiovascular system physiology
 
 [Term]
 id: MP:0008776
-name: increased right ventricular peak pressure
+name: increased right ventricle peak pressure
 def: "increase in the difference between right ventricular systolic and diastolic pressures" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased right ventricular peak pressure" EXACT []
 synonym: "increased RVPP" EXACT []
 synonym: "right ventricular pulse pressure" EXACT []
-is_a: MP:0008775 ! abnormal heart ventricular pressure
+is_a: MP:0010755 ! abnormal heart right ventricle pressure
 
 [Term]
 id: MP:0008777
-name: increased right ventricular diastolic pressure
+name: increased right ventricle diastolic pressure
 def: "increase in the pressure of the right ventricle between heart beats when the heart is relaxed" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased right ventricular diastolic pressure" EXACT []
 synonym: "increased RVP" EXACT []
-is_a: MP:0008775 ! abnormal heart ventricular pressure
+is_a: MP:0010755 ! abnormal heart right ventricle pressure
 
 [Term]
 id: MP:0008778
@@ -49284,8 +49299,8 @@ is_a: MP:0005499 ! abnormal olfactory system morphology
 [Term]
 id: MP:0008790
 name: abnormal NK cell degranulation
-def: "anomalies in the exocytosis of secretory granules containing preformed mediators, such as perforin and granzyme, from NK cells" [MGI:brs "Beverly Richards-Smith, Mouse Genome Informatics Curator"]
-is_a: MP:0005069 ! abnormal NK cell physiology
+def: "anomaly in the exocytosis of secretory granules containing preformed mediators, such as perforin and granzyme, from NK cells" [MGI:brs "Beverly Richards-Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0010766 ! abnormal NK cell physiology
 
 [Term]
 id: MP:0008791
@@ -49929,15 +49944,22 @@ is_a: MP:0005266 ! abnormal metabolism
 [Term]
 id: MP:0008876
 name: decreased uterine NK cell number
-def: "reduced number of the uterine subset of the non-T, non-B lymphocytes, having a granular morphology and which are important in innate immunity to viruses and other intracellular pathogens; uNK cells contribute to uterine decidualization and are recruited to implantation sites" [ISBN:0-8153-1691-7 "Immunobiology, The Immune System in Health and Disease", PMID:12887272]
+def: "reduced cell number of a natural killer cell subset that is found in the decidual of the uterus, is CD56-high, Galectin-1-positive and CD16-negative, and is the most abundant immune cell type in the decidual during the first trimester of pregnancy" [PMID:14568979, PMID:19800965]
+synonym: "decreased decidual natural killer cell number" EXACT []
+synonym: "decreased decidual NK cell number" EXACT []
+synonym: "decreased dNK cell number" EXACT []
 synonym: "decreased GMG cell number" EXACT []
 synonym: "decreased granulated metrial gland cell number" EXACT []
 synonym: "decreased uNK cell number" EXACT []
 synonym: "decreased uterine natural killer cell number" EXACT []
+synonym: "redcuced decidual NK cell number" EXACT []
+synonym: "reduced decidual natural killer cell number" EXACT []
+synonym: "reduced dNK cell number" EXACT []
 synonym: "reduced GMG cell number" EXACT []
 synonym: "reduced granulated metrial gland cell number" EXACT []
 synonym: "reduced uNK cell number" EXACT []
 synonym: "reduced uterine natural killer cell number" EXACT []
+xref: CL:0002343
 is_a: MP:0008054 ! abnormal uterine NK cell morphology
 
 [Term]
@@ -50197,7 +50219,7 @@ is_a: MP:0005334 ! abnormal fat pad morphology
 id: MP:0008909
 name: supination
 def: "rotation of the pedal or prehensile extremity so the forefoot (hand) faces anteriorly to the anatomic position; rotation of the hindfoot (foot) such that the plantar surface turns upward" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
-is_a: MP:0004271 ! abnormal paw/hand/foot morphology
+is_a: MP:0000572 ! abnormal autopod morphology
 
 [Term]
 id: MP:0008910
@@ -51829,13 +51851,17 @@ is_a: MP:0001139 ! abnormal vagina morphology
 [Term]
 id: MP:0009099
 name: abnormal uterine NK cell physiology
-def: "any structural anomaly of the uterine subset of the non-T, non-B lymphocytes, having a granular morphology and which are important in innate immunity to viruses and other intracellular pathogens; uNK cells contribute to uterine decidualization and are recruited to implantation sites" [ISBN:0-8153-1691-7 "Immunobiology, The Immune System in Health and Disease", PMID:12887272]
+def: "any functional anomaly of a natural killer cell subset that is found in the decidual of the uterus, is CD56-high, Galectin-1-positive and CD16-negative, and is the most abundant immune cell type in the decidual during the first trimester of pregnancy" [PMID:14568979, PMID:19800965]
+synonym: "abnormal decidual natural killer cell physiology" EXACT []
+synonym: "abnormal decidual NK cell physiology" EXACT []
+synonym: "abnormal dNK cell physiology" EXACT []
 synonym: "abnormal GMG cell physiology" EXACT []
 synonym: "abnormal granulated metrial gland cell physiology" EXACT []
 synonym: "abnormal uNK cell physiology" EXACT []
 synonym: "abnormal uterine natural killer cell physiology" EXACT []
-is_a: MP:0005069 ! abnormal NK cell physiology
+xref: CL:0002343
 is_a: MP:0009671 ! abnormal uterus physiology
+is_a: MP:0010766 ! abnormal NK cell physiology
 
 [Term]
 id: MP:0009100
@@ -53663,7 +53689,7 @@ is_a: MP:0002024 ! T cell derived lymphoma
 id: MP:0009321
 name: increased histiocytic sarcoma incidence
 def: "greater than the expected number of malignant tumors derived from histiocytes in a given population in a given time period" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-is_a: MP:0002022 ! lymphoma
+is_a: MP:0002022 ! increased lymphoma incidence
 is_a: MP:0002032 ! sarcoma
 
 [Term]
@@ -54231,11 +54257,15 @@ is_a: MP:0001504 ! abnormal posture
 [Term]
 id: MP:0009394
 name: increased uterine NK cell number
-def: "increased number of the uterine subset of the non-T, non-B lymphocytes, having a granular morphology and which are important in innate immunity to viruses and other intracellular pathogens; uNK cells contribute to uterine decidualization and are recruited to implantation sites" [MGI:anna "Anna V. Anagnostopoulos, Mouse Genome Informatics Curator"]
+def: "increased cell number of a natural killer cell subset that is found in the decidual of the uterus, is CD56-high, Galectin-1-positive and CD16-negative, and is the most abundant immune cell type in the decidual during the first trimester of pregnancy" [PMID:14568979, PMID:19800965]
+synonym: "increased decidual natural killer cell number" EXACT []
+synonym: "increased decidual NK cell number" EXACT []
+synonym: "increased dNK cell number" EXACT []
 synonym: "increased GMG cell number" EXACT []
 synonym: "increased granulated metrial gland cell number" EXACT []
 synonym: "increased uNK cell number" EXACT []
 synonym: "increased uterine natural killer cell number" EXACT []
+xref: CL:0002343
 is_a: MP:0008054 ! abnormal uterine NK cell morphology
 
 [Term]
@@ -56769,12 +56799,6 @@ synonym: "absent tarsal bones" EXACT []
 is_a: MP:0005104 ! abnormal tarsal bone morphology
 
 [Term]
-id: MP:0009730
-name: abnormal neural arch morphology
-def: "any anomaly in the emergence of the primordium of the vertebral arch, one of the cartilaginous structures surrounding the embryonic spinal cord" [MGI:llw2 "Linda Washburn, Mouse Genome Informatics Curator"]
-is_a: MP:0005226 ! abnormal vertebral arch development
-
-[Term]
 id: MP:0009731
 name: abnormal offspring retrieval
 def: "any anomaly in the ability of a female to collect stray offspring and return them to a defined location, such as a nest or den" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
@@ -58479,7 +58503,7 @@ creation_date: 2010-01-27T03:45:24Z
 [Term]
 id: MP:0009935
 name: abnormal meibomian gland acinus morphology
-def: "anomalies of the sac-like structures comprising the sebaceous glands located at the rim of the eyelids and responsible for producing sebum" [MGI:mnk "Michelle Knowlton, Mouse Genome Informatics Curator"]
+def: "any structural anomaly of the sac-like structures comprising the sebaceous glands located at the rim of the eyelids and responsible for producing sebum" [MGI:mnk "Michelle Knowlton, Mouse Genome Informatics Curator"]
 synonym: "abnormal meibomian gland acini" EXACT []
 is_a: MP:0005252 ! abnormal meibomian gland morphology
 created_by: csmith
@@ -60342,34 +60366,14 @@ creation_date: 2010-04-12T01:16:29Z
 [Term]
 id: MP:0010119
 name: abnormal bone mineral density
+alt_id: MP:0005007
 def: "anomaly in the amount of mineral per square centimeter of bone (usually g/cm2), used as a measure of structural strength and screen for osteoporosis; bone mineral density is the ratio of bone mineral content to bone size" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
 synonym: "abnormal BMD" EXACT []
+synonym: "abnormal bone density" EXACT []
+synonym: "bone density anomalies" EXACT []
 is_a: MP:0003795 ! abnormal bone structure
 created_by: csmith
 creation_date: 2010-04-12T01:56:16Z
-
-[Term]
-id: MP:0010120
-name: increased bone mineral density
-def: "elevation in the amount of mineral per square centimeter of bone (usually g/cm2), used as a measure of structural strength and screen for osteoporosis; bone mineral density is the ratio of bone mineral content to bone size" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
-synonym: "elevated BMD" EXACT []
-synonym: "elevated bone mineral density" EXACT []
-synonym: "increased BMD" EXACT []
-is_a: MP:0010119 ! abnormal bone mineral density
-created_by: csmith
-creation_date: 2010-04-12T01:59:24Z
-
-[Term]
-id: MP:0010121
-name: decreased bone mineral density
-def: "reduction in the amount of mineral per square centimeter of bone (usually g/cm2), used as a measure of structural strength and screen for osteoporosis; bone mineral density is the ratio of bone mineral content to bone size" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
-synonym: "decreased BMD" EXACT []
-synonym: "osteopenia" EXACT []
-synonym: "reduced BMD" EXACT []
-synonym: "reduced bone mineral density" EXACT []
-is_a: MP:0010119 ! abnormal bone mineral density
-created_by: csmith
-creation_date: 2010-04-12T02:00:11Z
 
 [Term]
 id: MP:0010122
@@ -63574,6 +63578,7 @@ def: "the presence of only one working lower chamber in the heart, usually with 
 subset: CvDC_Terms
 synonym: "absent interventricular septum" RELATED []
 synonym: "single ventricle" EXACT []
+synonym: "univentricular heart" EXACT []
 is_a: MP:0000281 ! abnormal interventricular septum morphology
 is_a: MP:0005294 ! abnormal heart ventricle morphology
 created_by: csmith
@@ -64580,7 +64585,7 @@ creation_date: 2010-10-01T02:07:18Z
 [Term]
 id: MP:0010529
 name: hepatic arteriovenous malformation
-def: "congenital vascular anomalies in the liver characterized by direct communication between an artery and a vein without passing through the capillary bed" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+def: "congenital vascular anomaly in the liver characterized by direct communication between an artery and a vein without passing through the capillary bed" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "hepatic arteriovenous fistula" EXACT []
 synonym: "liver arteriovenous fisutla" RELATED []
 synonym: "liver arteriovenous malformation" EXACT []
@@ -64592,7 +64597,7 @@ creation_date: 2010-10-01T02:28:56Z
 [Term]
 id: MP:0010530
 name: cerebral arteriovenous malformation
-def: "congenital vascular anomalies in the cerebrum characterized by direct communication between an artery and a vein without passing through the capillary bed" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+def: "congenital vascular anomaly in the cerebrum characterized by direct communication between an artery and a vein without passing through the capillary bed" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 synonym: "cerebral arteriovenous fistula" EXACT []
 is_a: MP:0004950 ! abnormal brain vasculature morphology
 is_a: MP:0006093 ! arteriovenous malformation
@@ -64602,7 +64607,7 @@ creation_date: 2010-10-01T02:29:30Z
 [Term]
 id: MP:0010531
 name: gastrointestinal arteriovenous malformation
-def: "congenital vascular anomalies in the gastrointestinal system characterized by direct communication between an artery and a vein without passing through the capillary bed" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+def: "congenital vascular anomaly in the gastrointestinal system characterized by direct communication between an artery and a vein without passing through the capillary bed" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
 is_a: MP:0000462 ! abnormal digestive system morphology
 is_a: MP:0006093 ! arteriovenous malformation
 created_by: csmith
@@ -64889,8 +64894,10 @@ creation_date: 2010-10-04T02:32:55Z
 [Term]
 id: MP:0010563
 name: increased heart right ventricle size
-def: "greater than average size of the right ventricle compared to the average for a particular population" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
-synonym: "enlarged heart right ventricle" RELATED []
+alt_id: MP:0008773
+def: "greater than average size of the right ventricle" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "enlarged heart right ventricle" EXACT []
+is_a: MP:0008772 ! increased heart ventricle size
 is_a: MP:0010577 ! abnormal heart right ventricle size
 created_by: csmith
 creation_date: 2010-10-04T02:44:37Z
@@ -65041,8 +65048,11 @@ creation_date: 2010-10-05T11:52:23Z
 [Term]
 id: MP:0010579
 name: increased heart left ventricle size
-def: "greater than average size of the left ventricle compared to the average for a particular population" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+alt_id: MP:0008774
+def: "greater than average size of the left ventricle" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "enlarged heart left ventricle" EXACT []
 synonym: "enlarged left ventricle" EXACT []
+is_a: MP:0008772 ! increased heart ventricle size
 is_a: MP:0010578 ! abnormal heart left ventricle size
 created_by: csmith
 creation_date: 2010-10-05T11:52:42Z
@@ -66697,6 +66707,216 @@ is_a: MP:0003880 ! abnormal central pattern generator function
 is_a: MP:0006277 ! abnormal parasympathetic nervous system physiology
 created_by: csmith
 creation_date: 2010-11-11T04:36:35Z
+
+[Term]
+id: MP:0010747
+name: abnormal enamel organ morphology
+def: "any strucutral anomaly of the circumscribed knot of ectodermal cells which bud off from the dental lamina; it becomes cup-shaped and develops on its internal face the ameloblast layer of cells that produces the enamel cap of a developing tooth" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition"]
+synonym: "abnormal dental organ morphology" EXACT []
+is_a: MP:0000116 ! abnormal tooth development
+created_by: csmith
+creation_date: 2010-11-12T03:15:22Z
+
+[Term]
+id: MP:0010748
+name: abnormal visual evoked potential
+def: "anomaly in the electroencephalographic pattern recorded from the occipital area generated in response to retinal stimulation such as flashing lights or inverting a contrasting image; may be used to evaluate optic nerve damage or visual perception" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal vision evoked potentials" EXACT []
+synonym: "abnormal visual evoked response" EXACT []
+synonym: "abnormal visually evoked potential" EXACT []
+is_a: MP:0005551 ! abnormal eye electrophysiology
+created_by: csmith
+creation_date: 2010-11-12T03:55:48Z
+
+[Term]
+id: MP:0010749
+name: absent visual evoked potential
+def: "absence of a characteristic electroencephalographic pattern recorded from the occipital area generated in response to retinal stimulation such as flashing lights or inverting a contrasting image; absence may indicate blindness" [ISBN:0-683-40008-8 "Stedman's Medical Dictionary, 27th edition", MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "absent vision evoked potentials" EXACT []
+synonym: "absent visual evoked response" EXACT []
+synonym: "absent visually evoked potential" EXACT []
+is_a: MP:0010748 ! abnormal visual evoked potential
+created_by: csmith
+creation_date: 2010-11-12T03:57:03Z
+
+[Term]
+id: MP:0010750
+name: increased susceptibility to parasitic infection induced morbidity/mortality
+def: "increased likelihood that an organism will display the expected moribund state caused by a parasitic invasion or from components of or toxins produced by parasites" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
+synonym: "decreased resistance to parasitic infection induced morbidity/mortality" EXACT []
+synonym: "increased susceptibility to parasite infection induced morbidity/mortality" EXACT []
+is_a: MP:0005027 ! increased susceptibility to parasitic infection
+is_a: MP:0009787 ! increased susceptibility to infection induced morbidity/mortality
+created_by: csmith
+creation_date: 2010-11-12T04:06:04Z
+
+[Term]
+id: MP:0010751
+name: decreased susceptibility to parasitic infection induced morbidity/mortality
+def: "decreased likelihood that an organism will display the expected moribund state caused by a parasitic invasion or from components of or toxins produced by parasites" [MGI:smb "Susan M. Bello, Mouse Genome Informatics Curator"]
+synonym: "decreased susceptibility to parasite infection induced morbidity/mortality" EXACT []
+synonym: "increased resistance to parasitic infection induced morbidity/mortality" EXACT []
+is_a: MP:0005026 ! decreased susceptibility to parasitic infection
+is_a: MP:0009786 ! decreased susceptibility to infection induced morbidity/mortality
+created_by: csmith
+creation_date: 2010-11-12T04:07:02Z
+
+[Term]
+id: MP:0010752
+name: impaired mucociliary clearance
+def: "reduced ability to remove mucus and other foreign particles and microorganisms from the lungs by directed ciliary movement and secretory activity of the tracheobronchial submucosal glands" [MESH:E01.370.386.520, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0001947 ! abnormal mucociliary clearance
+created_by: csmith
+creation_date: 2010-12-09T11:40:59Z
+
+[Term]
+id: MP:0010753
+name: improved mucociliary clearance
+def: "enhanced ability to remove mucus and other foreign particles and microorganisms from the lungs by directed ciliary movement and secretory activity of the tracheobronchial submucosal glands" [MESH:E01.370.386.520, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0001947 ! abnormal mucociliary clearance
+created_by: csmith
+creation_date: 2010-12-09T11:41:22Z
+
+[Term]
+id: MP:0010754
+name: abnormal heart left ventricle pressure
+def: "any anomaly in the pressure within the left cardiac ventricle" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal heart left ventricular pressure" EXACT []
+is_a: MP:0008775 ! abnormal heart ventricle pressure
+created_by: csmith
+creation_date: 2010-12-09T01:21:58Z
+
+[Term]
+id: MP:0010755
+name: abnormal heart right ventricle pressure
+def: "any anomaly in the pressure within the right cardiac ventricle" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal heart right ventricular pressure" EXACT []
+is_a: MP:0008775 ! abnormal heart ventricle pressure
+created_by: csmith
+creation_date: 2010-12-09T01:23:06Z
+
+[Term]
+id: MP:0010756
+name: decreased right ventricle peak pressure
+def: "decrease in the difference between right ventricular systolic and diastolic pressures" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "decreased right ventricular peak pressure" EXACT []
+synonym: "reduced right ventricle peak pressure" EXACT []
+is_a: MP:0010755 ! abnormal heart right ventricle pressure
+created_by: csmith
+creation_date: 2010-12-09T01:45:04Z
+
+[Term]
+id: MP:0010757
+name: decreased right ventricle diastolic pressure
+def: "decrease in the pressure of the right ventricle between heart beats when the heart is relaxed" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "decreased right ventricular diastolic pressure" EXACT []
+synonym: "decreased RVP" EXACT []
+synonym: "reduced right ventricle diastolic pressure" EXACT []
+is_a: MP:0010755 ! abnormal heart right ventricle pressure
+created_by: csmith
+creation_date: 2010-12-09T01:45:04Z
+
+[Term]
+id: MP:0010758
+name: increased right ventricle systolic pressure
+def: "increase in the pressure in the right ventricle as the heart contracts and pumps blood into the arteries" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "increased right ventricular systolic pressure" EXACT []
+is_a: MP:0010755 ! abnormal heart right ventricle pressure
+created_by: csmith
+creation_date: 2010-12-09T01:45:04Z
+
+[Term]
+id: MP:0010759
+name: decreased right ventricle systolic pressure
+def: "decrease in the pressure in the right ventricle as the heart contracts and pumps blood into the arteries" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "decreased right ventricular systolic pressure" EXACT []
+synonym: "reduced right ventricle systolic pressure" EXACT []
+is_a: MP:0010755 ! abnormal heart right ventricle pressure
+created_by: csmith
+creation_date: 2010-12-09T01:45:04Z
+
+[Term]
+id: MP:0010760
+name: abnormal macrophage chemotaxis
+def: "anomaly in the movement of a macrophage guided by a specific chemical concentration gradient" [GO:0048246]
+synonym: "abnormal macrophage migration" RELATED []
+is_a: MP:0002451 ! abnormal macrophage physiology
+created_by: csmith
+creation_date: 2010-12-09T02:44:10Z
+
+[Term]
+id: MP:0010761
+name: abnormal microglial cell chemotaxis
+def: "anomaly in the movement of a microglial cell guided by a specific chemical concentration gradient" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal microglial cell migration" EXACT []
+synonym: "abnormal microglial cell recruitment" NARROW []
+is_a: MP:0003691 ! abnormal microglial cell physiology
+is_a: MP:0010760 ! abnormal macrophage chemotaxis
+created_by: csmith
+creation_date: 2010-12-09T02:46:55Z
+
+[Term]
+id: MP:0010762
+name: abnormal microglial cell activation
+def: "any anomaly in change in morphology and behavior of a microglial cell resulting from exposure to a cytokine, chemokine, cellular ligand, or soluble factor, during the maturation to the fully active phagocytic form" [GO:0001774, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0003691 ! abnormal microglial cell physiology
+created_by: csmith
+creation_date: 2010-12-09T03:38:16Z
+
+[Term]
+id: MP:0010763
+name: abnormal hematopoietic stem cell physiology
+def: "any functional anomaly or number of the multipotent, self-renewing stem cells found in the bone marrow and the fetal liver; HSCs give rise to all the types of both the myeloid and lymphoid cell lineages" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal hematopoietic progenitor cell physiology" EXACT []
+synonym: "abnormal hemopoietic progenitor cell physiology" EXACT []
+synonym: "abnormal HSC physiology" EXACT []
+is_a: MP:0001545 ! abnormal hematopoietic system physiology
+created_by: csmith
+creation_date: 2010-12-09T03:49:30Z
+
+[Term]
+id: MP:0010764
+name: abnormal granulocyte chemotaxis
+def: "anomaly in the movement of a granulocyte guided by a specific chemical concentration gradient" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+is_a: MP:0002462 ! abnormal granulocyte physiology
+created_by: csmith
+creation_date: 2010-12-10T09:48:29Z
+
+[Term]
+id: MP:0010765
+name: impaired granulocyte chemotaxis
+alt_id: MP:0005073
+def: "reduced ability in the movement of a granulocyte guided by a specific chemical concentration gradient" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "defective granulocyte chemotaxis" EXACT []
+synonym: "impaired granulocyte migration" BROAD []
+is_a: MP:0010764 ! abnormal granulocyte chemotaxis
+created_by: csmith
+creation_date: 2010-12-10T09:59:45Z
+
+[Term]
+id: MP:0010766
+name: abnormal NK cell physiology
+alt_id: MP:0005069
+def: "any functional anomaly of a lymphocyte that can spontaneously kill a variety of target cells without prior antigenic activation via germline encoded activation receptors, and also regulate immune responses via cytokine release and direct contact with other cells" [GOC:add, ISBN:0781735149, MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator", PMID:15771571]
+synonym: "abnormal natural killer cell physiology" EXACT []
+synonym: "dysfunctional NK cells" EXACT []
+synonym: "natural killer cell dysfunction" EXACT []
+synonym: "NK cell dysfunction" EXACT []
+xref: CL:0000623
+xref: FMA:63147
+xref: FMA:83601
+is_a: MP:0003945 ! abnormal lymphocyte physiology
+created_by: csmith
+creation_date: 2010-12-10T11:34:06Z
+
+[Term]
+id: MP:0010767
+name: abnormal female meiosis I arrest
+def: "any anomaly in the process in which oocytes stop at the diplotene stage of meiosis I and lie dormant, often for long periods of time" [MGI:csmith "Cynthia L. Smith, Mouse Genome Informatics Curator"]
+synonym: "abnormal dictyotene stage" EXACT []
+is_a: MP:0005168 ! abnormal female meiosis
+created_by: csmith
+creation_date: 2010-12-10T02:07:10Z
 
 [Typedef]
 id: part_of
