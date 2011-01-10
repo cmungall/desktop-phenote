@@ -1,11 +1,15 @@
 package phenote.dataadapter.delimited;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import javax.swing.JOptionPane;
+
 import org.apache.log4j.Logger;
 
+import phenote.config.Config;
 import phenote.datamodel.CharField;
 import phenote.datamodel.CharFieldManager;
 import phenote.datamodel.CharFieldValue;
@@ -133,9 +137,10 @@ public class DelimitedChar {
     if (colHeaders.length == 0) throw new DelimitedEx(headerLine);
     int i=0;
     boolean done = false;
+    DelimFieldParser p = null;
     while (i<colHeaders.length && !done) {
       try {
-        DelimFieldParser p = DelimFieldParser.makeNextParser(colHeaders,i);
+        p = DelimFieldParser.makeNextParser(colHeaders,i);
         fieldParsers.add(p);
         // may parse 1 field, may parse 2, may also skip unfound fields
         i = p.getLastParseField() + 1;
@@ -144,6 +149,24 @@ public class DelimitedChar {
     }
     if (fieldParsers.isEmpty())
       throw new DelimitedEx(headerLine);
+
+    // Warn user if there were columns in the input that are not defined in the current configuration.
+    String unknownFieldMessages = "";
+    if (p != null)
+      unknownFieldMessages = p.getUnknownFieldMessages();
+    if (unknownFieldMessages.length() > 1) {
+      String conf = "";
+      try {
+        conf = Config.inst().getMyPhenoteConfigString();
+      } catch (IOException e) {}
+      // Pop up warning message if there are unknown fields
+      JOptionPane.showMessageDialog(null,
+                                    "The following column(s) were found in the input datafile but are not defined in the current configuration (" + conf +
+                                    "):" + unknownFieldMessages +
+                                    "\n\nAny values that were in the unrecognized columns will be lost when you save your work.\n" +
+                                    "Before editing this data file, you should choose a configuration that includes column definitions for all columns.\n",
+                                    "Unrecognized column(s) in input",JOptionPane.ERROR_MESSAGE);
+    }
   }
 
   private String[] splitLine(String line) {
@@ -154,7 +177,6 @@ public class DelimitedChar {
       (line.endsWith(delimiter)) ? (line.substring(0, line.length() -1)) : line;
     return p.split(trimmedLine, -1);
   }
-
 
   void parseLine(String line) throws DelimitedEx {
     character = CharacterIFactory.makeChar();

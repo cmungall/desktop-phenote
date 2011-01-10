@@ -187,3 +187,14 @@ now shows whole tree.
 - Phenote logo is now appearing properly on "please wait" splash screen on Windows.
 - To help debug Sandra's problem, it now prints the first 10 lines of each
 ontology file to the log.  (Can turn this off when that problem is resolved.)
+
+1.8.5 (10 Jan 2011):
+- If you load a data file that has column(s) that are not defined in the
+current config, any values in those columns will be lost if you save the
+data.  Phenote was inconspiciously printing an error message.  Now it brings
+up a popup that warns the user about unknown columns.
+- The Date Created column was silently added by Phenote, even if it wasn't in
+the configuration, but it was not round-tripped if it wasn't in the
+configuration.  I have now added "Date Created" to most of the configurations
+that I believe to be in active use (and set isVisible="false" so the user
+won't be able to see/edit this field).

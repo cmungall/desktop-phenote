@@ -18,6 +18,7 @@ class DelimFieldParser {
 
   private CharField charField;
   private int columnIndex; // 0 based
+  private static String unknownFieldMessages = "";
 
   /** Given array of column headers and index col to start looking, find next valid
       field -- a field that is in datamodel/configged -- and return Parser for it
@@ -39,13 +40,15 @@ class DelimFieldParser {
           head = head.substring(0,head.length()-3);
           try { cf = CharFieldManager.inst().getCharFieldForName(head); }
           catch (CharFieldException x) {
-        	  //LOG.error("exception:"+x);
+            LOG.error("CharFieldException:"+x); // DEL
         	  cf = null; 
           } // already is really
         }
       }
-      if (cf == null)
-        LOG.error("Header column "+head+" not configged, skipping");
+      if (cf == null) {
+        addUnknownFieldMessage(head);
+        LOG.error("Header column "+head+" not in current configuration--ignoring column. (Any values that were in this column will be lost if you save the data to a file!)");
+      }
       else 
         return new DelimFieldParser(cf,i);
     }
@@ -91,5 +94,13 @@ class DelimFieldParser {
     catch (CharFieldException e) {
       LOG.error(e.getMessage());
     } 
+  }
+
+  private static void addUnknownFieldMessage(String m) {
+    unknownFieldMessages += "\n" + m;
+  }
+
+  public static String getUnknownFieldMessages() {
+    return unknownFieldMessages;
   }
 }
