@@ -49,12 +49,23 @@ per configuration.</p>
     <td></td></tr>
   <tr>
     <td><font face="Courier">enable</font></td>
-    <td>A flag that turns this field on or off.</td>
+    <td>A flag that enables this field to be used.  This defaults to true and
+    normally should not be set.</td>
     <td>
       <ul>
         <li>true 
         <li>false</li></ul></td>
-    <td>true</td></tr></table></p>
+    <td>true</td></tr>
+  <tr>
+    <td><font face="Courier">isVisible</font></td>
+    <td>Set to false if you don't want this field to be displayed to the user
+    (but still want it to be saved/roundtripped).</td>
+    <td>
+      <ul>
+        <li>true 
+        <li>false</li></ul></td>
+    <td>true</td></tr>
+</table></p>
 <h2>Contents</h2>
 <p>Each &lt;field&gt; element specifies one input area in 
 the <em>Data Entry </em>section.&nbsp;</p>
