@@ -203,3 +203,6 @@ Phenote.  (This only affected users who were launching Phenote from the
 command line.)
 - Added more documentation to web pages and userguide about how to
 compile and run Phenote from the command line
+
+1.8.6 (31 Jan 2011):
+- Made installable version work even if you have JDK 1.5 rather than 1.6.
