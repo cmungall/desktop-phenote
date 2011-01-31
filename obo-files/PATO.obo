@@ -1,5 +1,5 @@
 format-version: 1.2
-date: 12:12:2010 15:52
+date: 20:01:2011 18:10
 auto-generated-by: OBO-Edit 2.1-beta6
 subsetdef: abnormal_slim "Abnormal/normal slim"
 subsetdef: absent_slim "Absent/present slim"
@@ -11908,9 +11908,10 @@ is_a: PATO:0000057 ! occurrence quality
 
 [Term]
 id: PATO:0001819
-name: atresia
+name: atretic
 def: "A morphological quality inhering in a bearer by virtue of the bearer's absence or closure of a normal body orifice or tubular passage." [answers.com:answers.com "http://www.answers.com/"]
 subset: value_slim
+synonym: "atresia" EXACT []
 is_a: PATO:0000608 ! closed
 
 [Term]
@@ -14355,7 +14356,7 @@ alt_id: PATO:0000649
 def: "A structural quality inhering in a bearer by virtue of the bearer's having a hole or holes, especially a row or array of small holes." [answers.com:answers.com "http://www.answers.com/topic/perforated"]
 subset: value_slim
 synonym: "permeable" EXACT []
-synonym: "pieerced" RELATED []
+synonym: "pierced" RELATED []
 is_a: PATO:0002014 ! structure, cavities
 created_by: george
 creation_date: 2009-10-05T03:37:05Z
@@ -15980,6 +15981,33 @@ def: "A quality of certain surfaces which appear to change colour as the angle o
 is_a: PATO:0001615 ! variant color
 created_by: george
 creation_date: 2010-12-12T12:37:41Z
+
+[Term]
+id: PATO:0002278
+name: articulated with
+def: "An in contact with quality inhering in a bearer by virtue of the bearer's participating in a joint with another entity." [PATOC:WD]
+subset: relational_slim
+is_a: PATO:0001961 ! in contact with
+created_by: george
+creation_date: 2011-01-20T05:39:18Z
+
+[Term]
+id: PATO:0002279
+name: tightly articulated with
+def: "An articulated with quality inhering in a bearer by virtue of the bearer's being strongly articulated with another entity." [PATOC:WD]
+subset: relational_slim
+is_a: PATO:0002278 ! articulated with
+created_by: george
+creation_date: 2011-01-20T05:39:59Z
+
+[Term]
+id: PATO:0002280
+name: broadly articulated with
+def: "An articulated with quality inhering in a bearer by virtue of the bearer's possessing a broad surface in articulation with another entity." [PATOC:WD]
+subset: relational_slim
+is_a: PATO:0002278 ! articulated with
+created_by: george
+creation_date: 2011-01-20T05:40:29Z
 
 [Typedef]
 id: correlates_with
