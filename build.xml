@@ -673,7 +673,7 @@ them into  the classfiles directory. excludes="test/**"  -->
           <exclude name="**/org.geneontology.jar"/>
         </patternset>
       </fileset>
-      <fileset dir="/srv/home/mgibson/phenote/go-dev/java/oboedit/classes"/>
+      <fileset dir="../oboedit/classes"/>
     </path>
 
   <target name="compile-with-oboedit-classes" depends="init">
