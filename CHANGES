@@ -188,7 +188,7 @@ now shows whole tree.
 - To help debug Sandra's problem, it now prints the first 10 lines of each
 ontology file to the log.  (Can turn this off when that problem is resolved.)
 
-1.8.5 (1 Feb 2011):
+1.8.5 (internal release, 1 Feb 2011):
 - If you load a data file that has column(s) that are not defined in the
 current config, any values in those columns will be lost if you save the
 data.  Phenote was inconspiciously printing an error message.  Now it brings
@@ -200,6 +200,14 @@ that I believe to be in active use (and set isVisible="false" so the user
 won't be able to see/edit this field).
 - Fixed typo in phenote shell script that allocated too much memory to
 Phenote.  (This only affected users who were launching Phenote from the
-command line.)
+command line rather than from the application icon.)
 - Added more documentation to web pages and userguide about how to
 compile and run Phenote from the command line
+- Made release Java-1.5-compatible for users who have older Macs
+
+1.8.6 (10 Feb 2011):
+- Changed ontology URLs from old SourceForge cvs ones (which no longer work)
+to purl.org.  Note that the human phenotype ontology files are now called
+HPO.obo and HPO_XP.obo rather than human_phenotype.obo and
+human_phenotype_xp.obo; however, Sandra's local file is still called
+human_phenotype.obo.  Let me know if you want to change that.
