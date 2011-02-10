@@ -24,7 +24,9 @@
 	</p>
 <h3>What version of Java do I need to run Phenote?</h3>
 <p>The Phenote installer requires Java 1.5+. You can download the latest Java
-  (1.6, aka Java SE 6) <a target="_new" href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">here</a>.</p>
+  (1.6, aka Java SE 6) <a target="_new" href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">here</a>.
+(If you have an older Mac, you may not be able to install Java 1.6, but you can run Phenote with Java 1.5.)
+</p>
 	<h3>Where can I ask my burning questions?</h3>
 	<p>
 	  There are several discussion groups that are relevant to Phenote users.  You'll find a list on our <a href="http://www.phenote.org/contact.shtml">Contact</a> page.

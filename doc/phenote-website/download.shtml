@@ -17,11 +17,11 @@
 <h1>Downloading Phenote</h1>
 	<h2>For users</h2>
 	<h3>Phenote installer edition</h3>
-	Platform-specific installers are available for Phenote v1.8.4 at <a href="http://sourceforge.net/projects/obo/files/">SourceForge</a> or here:
-	<a href="http://www.phenote.org/phenote/1.8/Phenote_1_8_4_macos_install4j.dmg">MacOS X</a> |
-	<a href="http://www.phenote.org/phenote/1.8/Phenote_1_8_4_windows_install4j.exe">Windows</a> |
-	<a href="http://www.phenote.org/phenote/1.8/Phenote_1_8_4_linux_install4j.rpm">Linux</a> |
-	<a href="http://www.phenote.org/phenote/1.8/Phenote_1_8_4_unix_install4j.sh">Unix</a>
+	Platform-specific installers are available for Phenote v1.8.6 at <a href="http://sourceforge.net/projects/obo/files/">SourceForge</a> or here:
+	<a href="http://www.phenote.org/phenote/1.8/Phenote_1_8_6_macos_install4j.dmg">MacOS X</a> |
+	<a href="http://www.phenote.org/phenote/1.8/Phenote_1_8_6_windows_install4j.exe">Windows</a> |
+	<a href="http://www.phenote.org/phenote/1.8/Phenote_1_8_6_linux_install4j.rpm">Linux</a> |
+	<a href="http://www.phenote.org/phenote/1.8/Phenote_1_8_6_unix_install4j.sh">Unix</a>
 	<ol>
 	  <li>Download your platform-specific package.  (For MacOS, this should self-extract into a disk image. If it doesn't, double-click on the file.  You should see an
 	  icon for the "drive" that the Phenote application is on.)</li>
@@ -68,18 +68,14 @@
       <div id="sidebar_content">
 <br><br>
 	<div class="content_box_head_blue">
-	  Recently added features and bug fixes, Phenote version 1.8.4 (November 21, 2010)
+	  Recently added features and bug fixes, Phenote version 1.8.6
+	  (February 10, 2011)
 	</div>
 
 	<div class="content_box_blue">
           <ul>
-          <li> Fields can now be assigned to named tabs in Annotation
-          Editor </li>
-	  <li> Graph View was showing only immediate parent(s), now shows whole tree</li>
-	  <li> Fixed problem finding obo files in jar (broken between 1.7-beta16 and
-1.7-beta17)</li>
-	  <li> Term Info panel layout improvements </li>
-	  <li> Improvements to appearance of splash screen and configuration chooser on Windows</li>
+            <li>Now Java-1.5-compatible for users who have older Macs</li>
+            <li>Warns about unknown columns in input data</li>
           </ul>   
 	<b>See the <a href="phenote-release-notes.shtml">release notes</a> for more details...</b><br />
 	</div>

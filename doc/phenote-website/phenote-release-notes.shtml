@@ -1,26 +1,48 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head><!--#include virtual="ssi/head.html" -->
-
-
-    
     
   <title>Phenote Release Notes</title></head>
 
 <body>
 
-
     <!--#include virtual="ssi/header.html" -->
-
     
 <div id="main_container_aux">
-      
 <div id="main_content_aux">
-	
 <div class="catch_phrase">
 	  Phenote Release Notes
 	</div>
 
 <h1>1.8</h1>
+
+<h2>1.8.6</h2>
+<ul>
+<li>Made release Java-1.5-compatible for users who have older Macs</li>
+<li>Changed ontology URLs from old SourceForge cvs ones (which no longer work)
+to purl.org.  (Note that the human phenotype ontology files are now called
+HP.obo and HP_XP.obo rather than human_phenotype.obo and
+human_phenotype_xp.obo; however, Sandra's local file is still called
+human_phenotype.obo.)</li>
+</ul>
+
+<h2>1.8.5</h2>
+<ul>
+<li>If you load a data file that has column(s) that are not defined in the
+current config, any values in those columns will be lost if you save the
+data.  Phenote was inconspiciously printing an error message.  Now it brings
+up a popup that warns the user about unknown columns.
+</li>
+<li>The Date Created column was silently added by Phenote, even if it wasn't in
+the configuration, but it was not round-tripped if it wasn't in the
+configuration.  I have now added "Date Created" to most of the configurations
+that I believe to be in active use (and set isVisible="false" so the user
+won't be able to see/edit this field).</li>
+<li>Fixed typo in phenote shell script that allocated too much memory to
+Phenote.  (This only affected users who were launching Phenote from the
+command line rather than from the application icon.)</li>
+<li>Added more documentation to web pages and userguide about how to
+compile and run Phenote from the command line</li>
+</ul>
 
 <h2>1.8.4</h2>
 <ul>
