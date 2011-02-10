@@ -203,11 +203,11 @@ Phenote.  (This only affected users who were launching Phenote from the
 command line rather than from the application icon.)
 - Added more documentation to web pages and userguide about how to
 compile and run Phenote from the command line
-- Made release Java-1.5-compatible for users who have older Macs
 
 1.8.6 (10 Feb 2011):
+- Made release Java-1.5-compatible for users who have older Macs
 - Changed ontology URLs from old SourceForge cvs ones (which no longer work)
 to purl.org.  Note that the human phenotype ontology files are now called
-HPO.obo and HPO_XP.obo rather than human_phenotype.obo and
+HP.obo and HP_XP.obo rather than human_phenotype.obo and
 human_phenotype_xp.obo; however, Sandra's local file is still called
 human_phenotype.obo.  Let me know if you want to change that.
