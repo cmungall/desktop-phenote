@@ -240,3 +240,7 @@ name: Leri-Weill dyschondrostosis (LWD) - SHOX deletion
 [Term]
 id: DECIPHER:59
 name: Adult-onset autosomal dominant leukodystrophy (ADLD)
+
+[Term]
+id: DECIPHER:81
+name: 15q26 overgrowth syndrome
