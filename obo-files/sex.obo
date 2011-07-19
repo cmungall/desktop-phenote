@@ -1,0 +1,12 @@
+default-namespace: Sex
+date: 19:07:2011 17:44
+remark: Ontology for indicating the sex of the patient(s)
+
+[Term]
+id: male
+name: male
+
+[Term]
+id: female
+name: female
+

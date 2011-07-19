@@ -1,0 +1,23 @@
+default-namespace: Evidence
+date: 20:07:2011 17:44
+remark: Ontology for indicating the level of evidence supporting the annotation
+
+[Term]
+id: IEA
+name: IEA
+
+[Term]
+id: PCS
+name: PCS
+
+[Term]
+id: ICE
+name: ICE
+
+[Term]
+id: ITM
+name: ITM
+
+[Term]
+id: TAS
+name: TAS
