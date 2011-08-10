@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 
 public class PhenoteVersion {
 
-  private static String hardwiredDefaultVersion = "1.8.6";
+  private static String hardwiredDefaultVersion = "1.8.7";
   private static final Logger LOG = Logger.getLogger(PhenoteVersion.class);
 
   public static String versionString() {
@@ -35,7 +35,8 @@ public class PhenoteVersion {
   }
 
   public static Date getDateOfVersion(){
-    GregorianCalendar cal = new GregorianCalendar(2008, GregorianCalendar.APRIL, 15);
+      //    GregorianCalendar cal = new GregorianCalendar(2008, GregorianCalendar.APRIL, 15);
+      GregorianCalendar cal = new GregorianCalendar();
     return cal.getTime();
   }
 }
