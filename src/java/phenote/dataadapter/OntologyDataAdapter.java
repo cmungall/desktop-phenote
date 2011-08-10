@@ -271,7 +271,6 @@ public class OntologyDataAdapter {
       try {
         URL reposUrl = ontCfg.getReposUrl(); // throws MalfUrlEx
         //long mem = Runtime.getRuntime().totalMemory()/1000000; //startTimer();
-        LOG.info("Checking repository for newer version of " + ontCfg.getName() + ": " + reposUrl);
         this.updateLoadingScreen("Checking for updates: "+ontCfg.getName(), true);
         // if out of synch copies repos to local(.phenote/obo-files)
         // url may be jar/obo-files or svn/obo-files but this function will put file
@@ -305,27 +304,13 @@ public class OntologyDataAdapter {
 
     boolean useRepos = false;
     boolean downloadFailed = false;
-    if (localUrl == null) {
-      useRepos = true;
-    }
-    else {
-      long reposDate = 0;
-      try {
-        reposDate = getOboDate(reposUrl); // throws ex if no date
-        LOG.debug("For " + reposUrl + ", obodate = " + reposDate);
-      }
-      catch (OntologyException oe) { // no reposDate
-        LOG.error("got OntEx trying to parse date from " + reposUrl + ": "+oe); 
-        // already have local copy, no date to synch with, dont bother downloading from
-        // repos, there should probably be a config to override this (always download)
-        if (localUrl != null) {
-          useRepos = false;
-          downloadFailed = true;
-          LOG.error("Failed to read " + reposUrl + "--using (possibly out-of-date) local version " + localUrl + " instead.");
-        }
-        else
-          LOG.error("Uh oh--localUrl is null for " + ontol);
-      }
+    String localFile = localUrl!=null ? localUrl.getPath() : filename;
+    //String file = FileUtil.getNameOfFile(localUrl);
+    LOG.debug("synchWithRepositoryUrl: localUrl = " + localUrl + ", filename = " + filename + ", localFile = " + localFile); // DEL
+
+    // Start by assuming we WILL update from the repository
+    useRepos = true;
+    if (localUrl != null) {
       long loc = 0;
       int timer = cfg().getUpdateTimer();
       boolean autoUpdate = cfg().autoUpdateIsEnabled();
@@ -334,25 +319,77 @@ public class OntologyDataAdapter {
           loc = getOboDate(localUrl);
           LOG.debug("Date of localURL " + localUrl + " = " + loc);
         }
-        catch (OntologyException e2) { loc = 0; } // no local date - keep as 0
+        catch (OntologyException e2) {
+            LOG.debug("Couldn't find date line in " + localUrl + " for " + ontol);
+            loc = 0; // no local date - keep as 0
+        } 
       }
-      else
-        useRepos = true;
 
-      //if autoupdate without popup
-      //LOG.debug("repos date "+reposDate+" local date "+loc);
-      if ((autoUpdate && (timer==0)) && (reposDate > loc)) {
-        LOG.debug("Repository is newer than local copy " + localUrl);
-        useRepos = true;
-      } 
-      else if ((autoUpdate && (timer==0) && !downloadFailed) && (loc == 0 || reposDate == 0)) {
-        LOG.debug("Couldn't determine update time of both local copy and repository--will update local from repository.");
-        useRepos = true;
+      // If we couldn't find a date for the local version, try to figure out how old the file is.
+      if (loc == 0) {
+          try {
+              File f = new File(localFile);
+              long lastModified = f.lastModified();
+              long currentDate = new Date().getTime();
+              // We will update the local file if it's more than 6 days old
+              if ((currentDate - lastModified) < 1000*60*60*24*6) {
+                  LOG.debug(localFile + " last modified " + lastModified + "; current date is " + currentDate + "; diff = " + (currentDate - lastModified) + " (less than six days)--NOT updating " + localFile); // DEL
+                  useRepos = false;
+              }
+              else {
+                  LOG.debug(localFile + " last modified " + lastModified + "; current date is " + currentDate + "; diff = " + (currentDate - lastModified) + " (more than six days)--updating " + localFile); // DEL
+                  useRepos = true;
+              }
+          }
+          catch (Exception e) {
+          }
       }
-      else if (reposDate > loc || useRepos) {
-        useRepos = SynchOntologyDialog.queryUserForOntologyUpdate(ontol);
+
+      if (useRepos) {
+        LOG.info("Checking repository for newer version of " + ontol + ": " + reposUrl);
+
+        long reposDate = 0;
+        try {
+            reposDate = getOboDate(reposUrl); // throws ex if no date
+            LOG.debug("For " + reposUrl + ", obodate = " + reposDate);
+        }
+        catch (OntologyException oe) { // no reposDate
+            LOG.error("got OntEx trying to parse date from " + reposUrl + ": "+oe); 
+            // already have local copy, no date to synch with, dont bother downloading from
+            // repos, there should probably be a config to override this (always download)
+            // 8/9/11: I don't think this makes sense--the repository version might not have a date
+            // but might be otherwise ok.
+            //            if (localUrl != null) {
+                //                useRepos = false;
+                //                downloadFailed = true;
+                //                LOG.error("Failed to read " + reposUrl + "--using (possibly out-of-date) local version " + localUrl + " instead.");
+            //            }
+        //            else
+        //                LOG.error("Uh oh--localUrl is null for " + ontol);
+            LOG.info("Couldn't get date from respository version " + reposUrl + ", but local version is more than six days old, so will update from repository.");
+            reposDate = 0;
+        }
+
+        LOG.debug("autoUpdate = " + autoUpdate + ", timer = " + timer + ", reposDate = " + reposDate + ", loc = " + loc + ", useRepos = " + useRepos); // DEL
+
+        //if autoupdate, update without dialog
+        //LOG.debug("repos date "+reposDate+" local date "+loc);
+        if (reposDate <= loc) {
+            LOG.debug("Local copy is as new as repository--not updating " + ontol);
+            useRepos = false;
+        }
+        else if ((autoUpdate && (timer==0)) && (reposDate > loc)) {
+            LOG.debug("Repository is newer than local copy " + localUrl);
+            useRepos = true;
+        } 
+        else if ((autoUpdate && (timer==0) && !downloadFailed) && (loc == 0 || reposDate == 0)) {
+            LOG.debug("Couldn't determine update time of both local copy and repository--will update local file " + localFile + " from repository " + reposUrl);
+            useRepos = true;
+        }
+        else if (reposDate > loc && !autoUpdate) {
+            useRepos = SynchOntologyDialog.queryUserForOntologyUpdate(ontol);
+        }
       }
-//      LOG.debug("autoUpdate = " + autoUpdate + ", timer = " + timer + ", reposDate = " + reposDate + ", loc = " + loc + ", useRepos = " + useRepos); // DEL
     }
     if (useRepos) {
       // i think its always better to download as http/repos is slow
@@ -364,24 +401,23 @@ public class OntologyDataAdapter {
 //    }
 
       // download obo to local cache (takes time!)
-      String file = localUrl!=null ? FileUtil.getNameOfFile(localUrl) : filename;
-      //String file = FileUtil.getNameOfFile(localUrl);
       this.updateLoadingScreen("updating ontology file: "+ontol, true);
 
       try { 
-        localUrl = new File(FileUtil.getDotPhenoteOboDir(),file).toURL();
+          // Why are we recreating localUrl when it was passed in??
+          //        localUrl = new File(FileUtil.getDotPhenoteOboDir(),localFile).toURL();
         LOG.info("About to download new ontology from repository "+reposUrl+" to "+localUrl);
         this.updateLoadingScreen("Downloading " + ontol + " ontology from "+ reposUrl + "...", true);
 
         FileUtil.copyReposToLocal(reposUrl,localUrl);
       }
-      catch (MalformedURLException e) { 
+      catch (Exception e) { 
         LOG.error("Got error while trying to download ontology from repository "+reposUrl+" to "+localUrl);
         throw new OntologyException(e); 
       }
     }
-    else  // useRepos is false
-      LOG.debug("Ontology file " + localUrl + " not updated.");
+    //    else  // useRepos is false
+    //      LOG.debug("Ontology file " + localUrl + " not updated.");
 
     return localUrl;
   }
@@ -395,7 +431,7 @@ public class OntologyDataAdapter {
 //      InputStream is = oboUrl.openStream();
       InputStream is = FileUtil.getInputStreamWithOrWithoutProxy(oboUrl);
       BufferedReader br = new BufferedReader(new InputStreamReader(is));
-      LOG.debug("First 10 lines of " + oboUrl);
+      //      LOG.debug("First 10 lines of " + oboUrl);
       // just try first 15 lines? try til hit [Term]?
       Date d = null;
       for (int i=1; i<=10; i++) {
@@ -409,7 +445,7 @@ public class OntologyDataAdapter {
         }
 
         // eg date: 22:08:2006 15:38
-        LOG.debug(i + ": " + line);  // For debugging
+        //        LOG.debug(i + ": " + line);  // For debugging
         if (!line.startsWith("date:")) continue;
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd:MM:yyyy HH:mm");
         d = dateFormat.parse(line, new ParsePosition(6));
