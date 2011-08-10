@@ -1,13 +1,16 @@
 format-version: 1.2
-date: 23:06:2010 15:26
-auto-generated-by: OBO-Edit 2.1-beta3
+date: 17:06:2011 12:45
+saved-by: kareneilbeck
+auto-generated-by: OBO-Edit 2.1-beta10
 subsetdef: biosapiens "biosapiens protein feature ontology"
+subsetdef: DBVAR "database of genomic structural variation"
 subsetdef: SOFA "SO feature annotation"
 synonymtypedef: aa1 "amino acid 1 letter code"
 synonymtypedef: aa3 "amino acid 3 letter code"
 synonymtypedef: AAMOD "amino acid modification"
 synonymtypedef: BS "biosapiens"
 synonymtypedef: dbsnp "dbsnp variant terms"
+synonymtypedef: dbvar "DBVAR"
 synonymtypedef: ebi_variants "ensembl variant terms"
 synonymtypedef: RNAMOD "RNA modification" EXACT
 default-namespace: sequence
@@ -78,11 +81,13 @@ is_a: SO:0000695 ! reagent
 [Term]
 id: SO:0000007
 name: read_pair
-def: "A pair of sequencing reads in which the two members of the pair are related by originating at either end of a clone insert." [SO:ls]
+def: "One of a pair of sequencing reads in which the two members of the pair are related by originating at either end of a clone insert." [SO:ls]
 subset: SOFA
+synonym: "mate pair" EXACT []
 synonym: "read-pair" EXACT []
-is_a: SO:0000143 ! assembly_component
+is_a: SO:0000150 ! read
 relationship: part_of SO:0000149 ! contig
+relationship: part_of SO:0001790 ! paired_end_fragment
 
 [Term]
 id: SO:0000008
@@ -120,7 +125,7 @@ is_a: SO:0000483 ! nc_primary_transcript
 [Term]
 id: SO:0000013
 name: scRNA
-def: "Any one of several small cytoplasmic RNA molecules present in the cytoplasm and sometimes nucleus of a Eukaryote." [http://www.ebi.ac.uk/embl/WebFeat/align/scRNA_s.html]
+def: "A small non coding RNA sequence, present in the cytoplasm." [SO:ke]
 subset: SOFA
 synonym: "small cytoplasmic RNA" EXACT []
 is_a: SO:0000655 ! ncRNA
@@ -129,34 +134,39 @@ relationship: derives_from SO:0000012 ! scRNA_primary_transcript
 [Term]
 id: SO:0000014
 name: INR_motif
-def: "A sequence element characteristic of some RNA polymerase II promoters required for the correct positioning of the polymerase for the start of transcription. Overlaps the TSS. The mammalian consensus sequence is YYAN(T|A)YY; the Drosophila consensus sequence is TCA(G|T)t(T|C). In each the A is at position +1 with respect to the TSS. Functionally similar to the TATA box element." [PMID:12651739]
+def: "A sequence element characteristic of some RNA polymerase II promoters required for the correct positioning of the polymerase for the start of transcription. Overlaps the TSS. The mammalian consensus sequence is YYAN(T|A)YY; the Drosophila consensus sequence is TCA(G|T)t(T|C). In each the A is at position +1 with respect to the TSS. Functionally similar to the TATA box element." [PMID:12651739, PMID:16858867]
+comment: Binds TAF1, TAF2.
 synonym: "DMp2" RELATED []
 synonym: "initiator" EXACT []
 synonym: "initiator motif" EXACT []
 synonym: "INR motif" EXACT []
-is_a: SO:0000235 ! TF_binding_site
-relationship: part_of SO:0000170 ! RNApol_II_promoter
+is_a: SO:0001660 ! core_promoter_element
+relationship: part_of SO:0001669 ! RNApol_II_core_promoter
 
 [Term]
 id: SO:0000015
 name: DPE_motif
-def: "A sequence element characteristic of some RNA polymerase II promoters; Positioned from +28 to +32 with respect to the TSS (+1). Experimental results suggest that the DPE acts in conjunction with the INR_motif to provide a binding site for TFIID in the absence of a TATA box to mediate transcription of TATA-less promoters. Consensus sequence (A|G)G(A|T)(C|T)(G|A|C)." [PMID:12651739\:12537576]
+def: "A sequence element characteristic of some RNA polymerase II promoters; Positioned from +28 to +32 with respect to the TSS (+1). Experimental results suggest that the DPE acts in conjunction with the INR_motif to provide a binding site for TFIID in the absence of a TATA box to mediate transcription of TATA-less promoters. Consensus sequence (A|G)G(A|T)(C|T)(G|A|C)." [PMID:12651739\:12537576, PMID:16858867]
+comment: Binds TAF6, TAF9.
 synonym: "CRWMGCGWKCGCTTS" NARROW []
 synonym: "downstream core promoter element" EXACT []
 synonym: "DPE motif" EXACT []
-is_a: SO:0000235 ! TF_binding_site
-relationship: part_of SO:0000170 ! RNApol_II_promoter
+is_a: SO:0001660 ! core_promoter_element
+relationship: part_of SO:0001669 ! RNApol_II_core_promoter
 
 [Term]
 id: SO:0000016
-name: BRE_motif
-def: "A sequence element characteristic of some RNA polymerase II promoters, located immediately upstream of some TATA box elements at -37 to -32 with respect to the TSS (+1). Consensus sequence is (G|C)(G|C)(G|A)CGCC. Binds TFIIB." [PMID:12651739]
+name: BREu_motif
+def: "A sequence element characteristic of some RNA polymerase II promoters, located immediately upstream of some TATA box elements at -37 to -32 with respect to the TSS (+1). Consensus sequence is (G|C)(G|C)(G|A)CGCC. Binds TFIIB." [PMID:12651739, PMID:16858867]
+comment: Binds TFIIB.
 synonym: "B-recognition element" EXACT []
 synonym: "BRE motif" EXACT []
+synonym: "BREu" RELATED []
+synonym: "BREu motif" EXACT []
 synonym: "TFIIB recognition element" RELATED []
 synonym: "transcription factor B-recognition element" EXACT []
-is_a: SO:0000235 ! TF_binding_site
-relationship: part_of SO:0000170 ! RNApol_II_promoter
+is_a: SO:0001660 ! core_promoter_element
+relationship: part_of SO:0001669 ! RNApol_II_core_promoter
 
 [Term]
 id: SO:0000017
@@ -288,10 +298,12 @@ is_a: SO:0000031 ! aptamer
 id: SO:0000034
 name: morpholino_oligo
 def: "Morpholino oligos are synthesized from four different Morpholino subunits, each of which contains one of the four genetic bases (A, C, G, T) linked to a 6-membered morpholine ring. Eighteen to 25 subunits of these four subunit types are joined in a specific order by non-ionic phosphorodiamidate intersubunit linkages to give a Morpholino." [http://www.gene-tools.com/]
+synonym: "morphant" BROAD []
+synonym: "morpholino" EXACT []
 synonym: "morpholino oligo" EXACT []
 is_a: SO:0001247 ! implied link automatically realized ! synthetic_oligo
 intersection_of: SO:0001247 ! synthetic_oligo
-intersection_of: has_quality SO:0001183 ! morpholino
+intersection_of: has_quality SO:0001183 ! morpholino_backbone
 
 [Term]
 id: SO:0000035
@@ -385,7 +397,7 @@ id: SO:0000044
 name: pseudogene_by_unequal_crossing_over
 def: "A pseudogene caused by unequal crossing over at recombination." [SO:ke]
 synonym: "pseudogene by unequal crossing over" EXACT []
-is_a: SO:0000336 ! pseudogene
+is_a: SO:0001760 ! non_processed_pseudogene
 
 [Term]
 id: SO:0000045
@@ -441,9 +453,11 @@ is_obsolete: true
 id: SO:0000053
 name: sequence_variant_affecting_regulatory_region
 def: "A sequence_variant_effect which changes the regulatory region of a gene." [SO:ke]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting regulatory region" RELATED []
 synonym: "sequence variant affecting regulatory region" EXACT []
-is_a: SO:1000132 ! sequence_variant_effect
+is_obsolete: true
+replaced_by: SO:0001556
 
 [Term]
 id: SO:0000054
@@ -484,10 +498,10 @@ is_obsolete: true
 [Term]
 id: SO:0000059
 name: nuclease_binding_site
-def: "A region of a molecule that binds to a nuclease." [SO:cb]
+def: "A binding site that, of a nucleotide molecule, that interacts selectively and non-covalently with polypeptide residues of a nuclease." [SO:cb]
 subset: SOFA
 synonym: "nuclease binding site" EXACT []
-is_a: SO:0000410 ! protein_binding_site
+is_a: SO:0001654 ! nucleotide_to_protein_binding_site
 
 [Term]
 id: SO:0000060
@@ -499,11 +513,10 @@ is_a: SO:1000042 ! compound_chromosome
 [Term]
 id: SO:0000061
 name: restriction_enzyme_binding_site
-def: "A region of a molecule that binds to a restriction enzyme." [SO:cb]
+def: "A binding site that, in the nucleotide molecule, interacts selectively and non-covalently with polypeptide residues of a restriction enzyme." [SO:cb]
+comment: A region of a molecule that binds to a restriction enzyme.
 synonym: "restriction endonuclease binding site" EXACT []
-synonym: "restriction endonuclease recognition site" RELATED []
 synonym: "restriction enzyme binding site" EXACT []
-synonym: "restriction enzyme recognition site" RELATED []
 is_a: SO:0000059 ! nuclease_binding_site
 
 [Term]
@@ -900,7 +913,7 @@ relationship: part_of SO:0000101 ! transposable_element
 [Term]
 id: SO:0000112
 name: primer
-def: "A short preexisting polynucleotide chain to which new deoxyribonucleotides can be added by DNA polymerase." [http://www.ornl.gov/TechResources/Human_Genome/publicat/primer2001/glossary.html]
+def: "An oligo to which new deoxyribonucleotides can be added by DNA polymerase." [SO:ke]
 subset: SOFA
 synonym: "DNA primer" EXACT []
 synonym: "primer oligonucleotide" EXACT []
@@ -1141,7 +1154,7 @@ def: "A sequence segment located within the five prime end of an mRNA that cause
 subset: SOFA
 synonym: "attenuator sequence" EXACT []
 xref: http://en.wikipedia.org/wiki/Attenuator "wiki"
-is_a: SO:0005836 ! regulatory_region
+is_a: SO:0001680 ! translation_regulatory_region
 relationship: part_of SO:0000234 ! mRNA
 
 [Term]
@@ -1151,7 +1164,7 @@ def: "The sequence of DNA located either at the end of the transcript that cause
 subset: SOFA
 synonym: "terminator sequence" EXACT []
 xref: http://en.wikipedia.org/wiki/Terminator_(genetics) "wiki"
-is_a: SO:0005836 ! regulatory_region
+is_a: SO:0001679 ! transcription_regulatory_region
 relationship: part_of SO:0000673 ! transcript
 
 [Term]
@@ -1407,9 +1420,7 @@ synonym: "pol II promoter" RELATED []
 synonym: "polymerase II promoter" EXACT []
 synonym: "RNA polymerase B promoter" EXACT []
 synonym: "RNApol II promoter" EXACT []
-is_a: SO:0000727 ! implied link automatically realized ! CRM
 is_a: SO:0001203 ! RNA_polymerase_promoter
-relationship: has_part SO:0000174 ! TATA_box
 
 [Term]
 id: SO:0000171
@@ -1419,9 +1430,7 @@ synonym: "pol III promoter" EXACT []
 synonym: "polymerase III promoter" EXACT []
 synonym: "RNA polymerase C promoter" EXACT []
 synonym: "RNApol III promoter" EXACT []
-is_a: SO:0000727 ! implied link automatically realized ! CRM
 is_a: SO:0001203 ! RNA_polymerase_promoter
-relationship: has_part SO:0000174 ! TATA_box
 
 [Term]
 id: SO:0000172
@@ -1431,7 +1440,7 @@ synonym: "CAAT box" EXACT []
 synonym: "CAAT signal" EXACT []
 synonym: "CAAT-box" EXACT []
 xref: http://en.wikipedia.org/wiki/CAAT_box "wiki"
-is_a: SO:0000235 ! TF_binding_site
+is_a: SO:0000713 ! DNA_motif
 relationship: part_of SO:0000170 ! RNApol_II_promoter
 
 [Term]
@@ -1440,22 +1449,23 @@ name: GC_rich_promoter_region
 def: "A conserved GC-rich region located upstream of the start point of eukaryotic transcription units which may occur in multiple copies or in either orientation; consensus=GGGCGG." [http://www.ebi.ac.uk/embl/Documentation/FT_definitions/feature_table.html]
 synonym: "GC rich promoter region" EXACT []
 synonym: "GC-rich region" EXACT []
-is_a: SO:0000713 ! DNA_motif
+is_a: SO:0001659 ! promoter_element
 relationship: part_of SO:0000170 ! RNApol_II_promoter
 
 [Term]
 id: SO:0000174
 name: TATA_box
-def: "A conserved AT-rich septamer found about 25-bp before the start point of many eukaryotic RNA polymerase II transcript units; may be involved in positioning the enzyme for correct initiation; consensus=TATA(A|T)A(A|T)." [http://www.ebi.ac.uk/embl/Documentation/FT_definitions/feature_table.html]
+def: "A conserved AT-rich septamer found about 25-bp before the start point of many eukaryotic RNA polymerase II transcript units; may be involved in positioning the enzyme for correct initiation; consensus=TATA(A|T)A(A|T)." [http://www.ebi.ac.uk/embl/Documentation/FT_definitions/feature_table.html, PMID:16858867]
+comment: Binds TBP.
 synonym: "Goldstein-Hogness box" EXACT []
 synonym: "TATA box" EXACT []
 xref: http://en.wikipedia.org/wiki/TATA_box "wiki"
-is_a: SO:0000235 ! TF_binding_site
+is_a: SO:0001660 ! core_promoter_element
 
 [Term]
 id: SO:0000175
 name: minus_10_signal
-def: "A conserved region about 10-bp upstream of the start point of bacterial transcription units which may be involved in binding RNA polymerase; consensus=TAtAaT." [http://www.ebi.ac.uk/embl/Documentation/FT_definitions/feature_table.html]
+def: "A conserved region about 10-bp upstream of the start point of bacterial transcription units which may be involved in binding RNA polymerase; consensus=TAtAaT. This region is associated with sigma factor 70." [http://www.ebi.ac.uk/embl/Documentation/FT_definitions/feature_table.html]
 synonym: "-10 signal" EXACT []
 synonym: "minus 10 signal" EXACT []
 synonym: "Pribnow box" EXACT []
@@ -1463,16 +1473,16 @@ synonym: "Pribnow Schaller box" EXACT []
 synonym: "Pribnow-Schaller box" EXACT []
 xref: http://en.wikipedia.org/wiki/Pribnow_box "wiki"
 is_a: SO:0000713 ! DNA_motif
-relationship: part_of SO:0000613 ! bacterial_RNApol_promoter
+relationship: part_of SO:0001671 ! bacterial_RNApol_promoter_sigma_70
 
 [Term]
 id: SO:0000176
 name: minus_35_signal
-def: "A conserved hexamer about 35-bp upstream of the start point of bacterial transcription units; consensus=TTGACa or TGTTGACA." [http://www.ebi.ac.uk/embl/Documentation/FT_definitions/feature_table.html]
+def: "A conserved hexamer about 35-bp upstream of the start point of bacterial transcription units; consensus=TTGACa or TGTTGACA. This region is associated with sigma factor 70." [http://www.ebi.ac.uk/embl/Documentation/FT_definitions/feature_table.html]
 synonym: "-35 signal" EXACT []
 synonym: "minus 35 signal" EXACT []
 is_a: SO:0000713 ! DNA_motif
-relationship: part_of SO:0000613 ! bacterial_RNApol_promoter
+relationship: part_of SO:0001671 ! bacterial_RNApol_promoter_sigma_70
 
 [Term]
 id: SO:0000177
@@ -1668,6 +1678,8 @@ is_a: SO:0000147 ! exon
 id: SO:0000199
 name: translocation
 def: "A region of nucleotide sequence that has translocated to a new position." [SO:ke]
+subset: DBVAR
+synonym: "transchr" RELATED [http://www.ncbi.nlm.nih.gov/dbvar/]
 synonym: "translocated sequence" EXACT []
 is_a: SO:0001059 ! sequence_alteration
 
@@ -1944,12 +1956,12 @@ is_a: SO:0000233 ! mature_transcript
 [Term]
 id: SO:0000235
 name: TF_binding_site
-def: "A region of a molecule that binds a TF complex [GO:0005667]." [SO:ke]
+def: "A region of a nucleotide molecule that binds a Transcription Factor or Transcription Factor complex [GO:0005667]." [SO:ke]
 subset: SOFA
 synonym: "TF binding site" EXACT []
 synonym: "transcription factor binding site" EXACT []
-is_a: SO:0000410 ! protein_binding_site
-is_a: SO:0005836 ! regulatory_region
+is_a: SO:0001654 ! nucleotide_to_protein_binding_site
+is_a: SO:0001679 ! transcription_regulatory_region
 
 [Term]
 id: SO:0000236
@@ -1990,7 +2002,6 @@ synonym: "chromosome variation" EXACT []
 is_a: SO:0001507 ! variant_collection
 disjoint_from: SO:0000110 ! sequence_feature
 disjoint_from: SO:0000400 ! sequence_attribute
-disjoint_from: SO:1000132 ! sequence_variant_effect
 relationship: part_of SO:0001524 ! chromosomally_aberrant_genome
 
 [Term]
@@ -2825,7 +2836,7 @@ name: pseudogene
 def: "A sequence that closely resembles a known functional gene, at another locus within a genome, that is non-functional as a consequence of (usually several) mutations that prevent either its transcription or translation (or both). In general, pseudogenes result from either reverse transcription of a transcript of their \"normal\" paralog (SO:0000043) (in which case the pseudogene typically lacks introns and includes a poly(A) tail) or from recombination (SO:0000044) (in which case the pseudogene is typically a tandem duplication of its \"normal\" paralog)." [http://www.ucl.ac.uk/~ucbhjow/b241/glossary.html]
 subset: SOFA
 xref: http://en.wikipedia.org/wiki/Pseudogene "wiki"
-is_a: SO:0000462 ! pseudogenic_region
+is_a: SO:0001411 ! biological_region
 relationship: non_functional_homolog_of SO:0000704 ! gene
 
 [Term]
@@ -2966,6 +2977,7 @@ is_a: SO:0001248 ! assembly
 [Term]
 id: SO:0000354
 name: group_1_intron_homing_endonuclease_target_region
+def: "A region of intronic nucleotide sequence targeted by a nuclease enzyme." [SO:ke]
 synonym: "group 1 intron homing endonuclease target region" EXACT []
 is_a: SO:0000684 ! nuclease_sensitive_site
 
@@ -3163,7 +3175,7 @@ is_a: SO:0000378 ! DsrA_RNA
 [Term]
 id: SO:0000380
 name: hammerhead_ribozyme
-def: "A small catalytic RNA motif that catalyzes self-cleavage reaction. Its name comes from its secondary structure which resembles a carpenter's hammer. The hammerhead ribozyme is involved in the replication of some viroid and some satellite RNAs." [http://rnaworld.bio.ku.edu/class/RNA/RNA00/RNA_World_3.html]
+def: "A small catalytic RNA motif that catalyzes self-cleavage reaction. Its name comes from its secondary structure which resembles a carpenter's hammer. The hammerhead ribozyme is involved in the replication of some viroid and some satellite RNAs." [PMID:2436805]
 subset: SOFA
 synonym: "hammerhead ribozyme" EXACT []
 xref: http://en.wikipedia.org/wiki/Hammerhead_ribozyme "wiki"
@@ -3359,7 +3371,6 @@ def: "An attribute describes a quality of sequence." [SO:ke]
 synonym: "sequence attribute" EXACT []
 disjoint_from: SO:0000110 ! sequence_feature
 disjoint_from: SO:0000240 ! chromosome_variation
-disjoint_from: SO:1000132 ! sequence_variant_effect
 
 [Term]
 id: SO:0000401
@@ -3432,8 +3443,8 @@ is_obsolete: true
 id: SO:0000409
 name: binding_site
 alt_id: BS:00033
-def: "A region on the surface of a molecule that may interact with another molecule. When applied to polypeptides: Amino acids involved in binding or interactions. It can also apply to an amino acid bond which is represented by the positions of the two flanking amino acids." [EBIBS:GAR, SO:ke]
-comment: Discrete.
+def: "A biological_region of sequence that, in the molecule, interacts selectively and non-covalently with other molecules. A region on the surface of a molecule that may interact with another molecule. When applied to polypeptides: Amino acids involved in binding or interactions. It can also apply to an amino acid bond which is represented by the positions of the two flanking amino acids." [EBIBS:GAR, SO:ke]
+comment: See GO:0005488 : binding.
 subset: biosapiens
 subset: SOFA
 synonym: "binding_or_interaction_site" EXACT []
@@ -3444,7 +3455,8 @@ is_a: SO:0001411 ! biological_region
 [Term]
 id: SO:0000410
 name: protein_binding_site
-def: "A region of a molecule that binds to a protein." [SO:ke]
+def: "A binding site that, in the molecule, interacts selectively and non-covalently with polypeptide molecules." [SO:ke]
+comment: See GO:0042277 : peptide binding.
 subset: SOFA
 synonym: "protein binding site" EXACT []
 is_a: SO:0000409 ! binding_site
@@ -4699,7 +4711,7 @@ subset: SOFA
 synonym: "poly(A) signal" EXACT []
 synonym: "polyA signal sequence" EXACT []
 synonym: "polyadenylation termination signal" EXACT []
-is_a: SO:0005836 ! regulatory_region
+is_a: SO:0001679 ! transcription_regulatory_region
 
 [Term]
 id: SO:0000552
@@ -4716,12 +4728,15 @@ is_a: SO:0000139 ! ribosome_entry_site
 [Term]
 id: SO:0000553
 name: polyA_site
-def: "The site on an RNA transcript to which will be added adenine residues by post-transcriptional polyadenylation." [http://www.ebi.ac.uk/embl/Documentation/FT_definitions/feature_table.html]
+alt_id: SO:0001430
+def: "The site on an RNA transcript to which will be added adenine residues by post-transcriptional polyadenylation. The boundary between the UTR and the polyA sequence." [http://www.ebi.ac.uk/embl/Documentation/FT_definitions/feature_table.html]
 subset: SOFA
 synonym: "polyA cleavage site" EXACT []
+synonym: "polyA junction" EXACT []
 synonym: "polyA site" EXACT []
+synonym: "polyA_junction" EXACT []
 synonym: "polyadenylation site" RELATED []
-is_a: SO:0000837 ! UTR_region
+is_a: SO:0000699 ! junction
 relationship: part_of SO:0000205 ! three_prime_UTR
 relationship: part_of SO:0000233 ! mature_transcript
 
@@ -5246,17 +5261,18 @@ is_a: SO:0000171 ! RNApol_III_promoter
 id: SO:0000619
 name: A_box
 def: "A variably distant linear promoter region recognized by TFIIIC, with consensus sequence TGGCnnAGTGG." [SO:ke]
+comment: Binds TFIIIC.
 synonym: "A-box" EXACT []
 xref: http://en.wikipedia.org/wiki/A-box "wiki"
-is_a: SO:0000235 ! TF_binding_site
-relationship: part_of SO:0000618 ! RNApol_III_promoter_type_2
+is_a: SO:0001660 ! core_promoter_element
 
 [Term]
 id: SO:0000620
 name: B_box
 def: "A variably distant linear promoter region recognized by TFIIIC, with consensus sequence AGGTTCCAnnCC." [SO:ke]
+comment: Binds TFIIIC.
 synonym: "B-box" EXACT []
-is_a: SO:0000235 ! TF_binding_site
+is_a: SO:0001660 ! core_promoter_element
 relationship: part_of SO:0000618 ! RNApol_III_promoter_type_2
 
 [Term]
@@ -5270,7 +5286,7 @@ id: SO:0000622
 name: C_box
 def: "An RNA polymerase III type 1 promoter with consensus sequence CAnnCCn." [SO:ke]
 synonym: "C-box" EXACT []
-is_a: SO:0000235 ! TF_binding_site
+is_a: SO:0001660 ! core_promoter_element
 relationship: part_of SO:0000617 ! RNApol_III_promoter_type_1
 
 [Term]
@@ -5650,7 +5666,9 @@ id: SO:0000667
 name: insertion
 alt_id: SO:1000034
 def: "The sequence of one or more nucleotides added between two adjacent nucleotides in the sequence." [SO:ke]
+subset: DBVAR
 subset: SOFA
+synonym: "insertion" EXACT dbvar [http://www.ncbi.nlm.nih.gov/dbvar/]
 synonym: "nucleotide insertion" EXACT []
 synonym: "nucleotide_insertion" EXACT []
 is_a: SO:0001059 ! sequence_alteration
@@ -5992,12 +6010,14 @@ is_a: SO:0001420 ! trans_splice_site
 [Term]
 id: SO:0000708
 name: SL1_acceptor_site
+def: "A trans_splicing_acceptor_site which appends the 22nt SL1 RNA leader sequence to the 5' end of most mRNAs." [SO:nlw]
 synonym: "SL1 acceptor site" EXACT []
 is_a: SO:0000706 ! trans_splice_acceptor_site
 
 [Term]
 id: SO:0000709
 name: SL2_acceptor_site
+def: "A trans_splicing_acceptor_site which appends the 22nt SL2 RNA leader sequence to the 5' end of mRNAs. SL2 acceptor sites occur in genes in internal segments of polycistronic transcripts." [SO:nlw]
 synonym: "SL2 acceptor site" EXACT []
 is_a: SO:0000706 ! trans_splice_acceptor_site
 
@@ -6042,7 +6062,7 @@ name: nucleotide_motif
 def: "A region of nucleotide sequence corresponding to a known motif." [SO:ke]
 subset: SOFA
 synonym: "nucleotide motif" EXACT []
-is_a: SO:0001411 ! biological_region
+is_a: SO:0001683 ! sequence_motif
 
 [Term]
 id: SO:0000715
@@ -6086,6 +6106,7 @@ id: SO:0000719
 name: ultracontig
 def: "An ordered and oriented set of scaffolds based on somewhat weaker sets of inferential evidence such as one set of mate pair reads together with supporting evidence from ESTs or location of markers from SNP or microsatellite maps, or cytogenetic localization of contained markers." [FB:WG]
 subset: SOFA
+synonym: "superscaffold" RELATED []
 is_a: SO:0000353 ! sequence_assembly
 
 [Term]
@@ -6345,13 +6366,13 @@ id: SO:0000752
 name: gene_group_regulatory_region
 subset: SOFA
 synonym: "gene group regulatory region" EXACT []
-is_a: SO:0005836 ! regulatory_region
+is_a: SO:0001679 ! transcription_regulatory_region
 relationship: member_of SO:0005855 ! gene_group
 
 [Term]
 id: SO:0000753
 name: clone_insert
-def: "The region of sequence that has been inserted and is being propogated by the clone." [SO:ke]
+def: "The region of sequence that has been inserted and is being propagated by the clone." [SO:ke]
 subset: SOFA
 synonym: "clone insert" EXACT []
 is_a: SO:0000695 ! reagent
@@ -7310,9 +7331,9 @@ def: "A transcript that is edited." [SO:ke]
 synonym: "edited transcript" EXACT []
 is_a: SO:0000673 ! implied link automatically realized ! transcript
 intersection_of: SO:0000673 ! transcript
-intersection_of: guided_by SO:0000602 ! guide_RNA
-intersection_of: has_part SO:0000977 ! anchor_binding_site
 intersection_of: has_quality SO:0000116 ! edited
+relationship: guided_by SO:0000602 ! guide_RNA
+relationship: has_part SO:0000977 ! anchor_binding_site
 
 [Term]
 id: SO:0000874
@@ -7320,7 +7341,6 @@ name: edited_transcript_by_A_to_I_substitution
 def: "A transcript that has been edited by A to I substitution." [SO:ke]
 synonym: "edited transcript by A to I substitution" EXACT []
 is_a: SO:0000873 ! edited_transcript
-is_a: SO:0000929 ! implied link automatically realized ! edited_mRNA
 
 [Term]
 id: SO:0000875
@@ -7732,8 +7752,9 @@ id: SO:0000929
 name: edited_mRNA
 def: "An mRNA that is edited." [SO:xp]
 synonym: "edited mRNA" EXACT []
+is_a: SO:0000234 ! implied link automatically realized ! mRNA
 is_a: SO:0000873 ! implied link automatically realized ! edited_transcript
-intersection_of: SO:0000873 ! edited_transcript
+intersection_of: SO:0000234 ! mRNA
 intersection_of: has_quality SO:0000116 ! edited
 
 [Term]
@@ -7768,7 +7789,7 @@ id: SO:0000934
 name: miRNA_target_site
 def: "A miRNA target site is a binding site where the molecule is a micro RNA." [FB:cds]
 synonym: "miRNA target site" EXACT []
-is_a: SO:0000409 ! binding_site
+is_a: SO:0001655 ! nucleotide_binding_site
 
 [Term]
 id: SO:0000935
@@ -8265,6 +8286,8 @@ name: BAC_end
 def: "A region of sequence from the end of a BAC clone that may provide a highly specific marker." [SO:ke]
 comment: Requested by Keith Boroevich December, 2006.
 synonym: "BAC end" EXACT []
+synonym: "BAC end sequence" EXACT []
+synonym: "BES" EXACT []
 is_a: SO:0000150 ! read
 relationship: part_of SO:0000153 ! BAC
 
@@ -8423,7 +8446,7 @@ relationship: part_of SO:0000587 ! group_I_intron
 id: SO:0001017
 name: silent_mutation
 def: "A sequence variant that does not affect protein function. Silent mutations may occur in genic ( CDS, UTR, intron etc) and intergenic regions. Silent mutations may have affects on processes such as splicing and regulation." [SO:ke]
-comment: Added in March 2007 in after meeting with pharmgkb.  Although this term is in common usage, it is better to annotate with the most specific term possible, such as synonymous codon, intron variant etc.
+comment: Added in March 2007 in after meeting with pharmgkb. Although this term is in common usage, it is better to annotate with the most specific term possible, such as synonymous codon, intron variant etc.
 synonym: "silent mutation" EXACT []
 xref: http://en.wikipedia.org/wiki/Silent_mutation "wiki"
 is_a: SO:0001537 ! structural_variant
@@ -8431,7 +8454,7 @@ is_a: SO:0001537 ! structural_variant
 [Term]
 id: SO:0001018
 name: epitope
-def: "A region of a macromolecule that is recognized by the immune system." [http://en.wikipedia.org/wiki/Epitope]
+def: "A binding site that, in the molecule, interacts selectively and non-covalently with antibodies, B cells or T cells." [http://en.wikipedia.org/wiki/Epitope, SO:cb]
 comment: Requested by Trish Whetzel.
 xref: http://en.wikipedia.org/wiki/Epitope "wiki"
 is_a: SO:0000409 ! binding_site
@@ -8451,9 +8474,11 @@ is_a: SO:0001059 ! sequence_alteration
 [Term]
 id: SO:0001020
 name: sequence_variant_affecting_copy_number
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting copy number" EXACT []
 synonym: "sequence variant affecting copy number" EXACT []
-is_a: SO:1000132 ! sequence_variant_effect
+is_obsolete: true
+replaced_by: SO:0001563
 
 [Term]
 id: SO:0001021
@@ -8646,11 +8671,13 @@ relationship: part_of SO:0000371 ! conjugative_transposon
 [Term]
 id: SO:0001044
 name: nuclear_mt_pseudogene
-def: "A nuclear pseudogene of a mitochndrial gene." [SO:xp]
+def: "A nuclear pseudogene of either coding or non-coding mitochondria derived sequence." [SO:xp]
+comment: Definition change requested by Val, 3172757.
 synonym: "nuclear mitochondrial pseudogene" EXACT []
 synonym: "nuclear mt pseudogene" EXACT []
 synonym: "NUMT" EXACT []
-is_a: SO:0000336 ! pseudogene
+xref: http://en.wikipedia.org/wiki/Numt "wikipedia"
+is_a: SO:0001760 ! non_processed_pseudogene
 
 [Term]
 id: SO:0001045
@@ -8729,7 +8756,7 @@ name: transcriptional_cis_regulatory_region
 def: "A regulatory_region that modulates the transcription of a gene or genes." [SO:regcreative]
 subset: SOFA
 synonym: "transcriptional cis regulatory region" EXACT []
-is_a: SO:0005836 ! regulatory_region
+is_a: SO:0001679 ! transcription_regulatory_region
 
 [Term]
 id: SO:0001056
@@ -8737,7 +8764,7 @@ name: splicing_regulatory_region
 def: "A regulatory_region that modulates splicing." [SO:ke]
 subset: SOFA
 synonym: "splicing regulatory region" EXACT []
-is_a: SO:0005836 ! regulatory_region
+is_a: SO:0001679 ! transcription_regulatory_region
 
 [Term]
 id: SO:0001057
@@ -9105,31 +9132,32 @@ is_obsolete: true
 id: SO:0001092
 name: polypeptide_metal_contact
 alt_id: BS:00027
-def: "Residue is part of a binding site for a metal ion." [EBIBS:GAR, UniProt:curation_manual]
-comment: Discrete.
+def: "A binding site that, in the polypeptide molecule, interacts selectively and non-covalently with metal ions." [EBIBS:GAR, SO:cb, UniProt:curation_manual]
+comment: Residue is part of a binding site for a metal ion.
 subset: biosapiens
 synonym: "metal_binding" RELATED []
-is_a: SO:0000409 ! binding_site
+is_a: SO:0001656 ! metal_binding_site
 is_a: SO:0100002 ! molecular_contact_region
 
 [Term]
 id: SO:0001093
 name: protein_protein_contact
 alt_id: BS:00131
-def: "Residues involved in protein-protein interactions." [EBIBS:GAR, UniProt:Curation_manual]
+def: "A binding site that, in the protein molecule, interacts selectively and non-covalently with polypeptide residues." [EBIBS:GAR, UniProt:Curation_manual]
 subset: biosapiens
 synonym: "protein protein contact" EXACT []
 synonym: "protein protein contact site" EXACT []
 synonym: "protein_protein_interaction" RELATED []
 xref: http://en.wikipedia.org/wiki/Protein_protein_interaction "wiki"
-is_a: SO:0000409 ! binding_site
+is_a: SO:0000410 ! protein_binding_site
 is_a: SO:0100002 ! molecular_contact_region
 
 [Term]
 id: SO:0001094
 name: polypeptide_calcium_ion_contact_site
 alt_id: BS:00186
-def: "Residue involved in contact with calcium." [EBIBS:GAR]
+def: "A binding site that, in the polypeptide molecule, interacts selectively and non-covalently with calcium ions." [EBIBS:GAR]
+comment: Residue involved in contact with calcium.
 subset: biosapiens
 synonym: "ca bind" RELATED []
 synonym: "Ca_contact_site" EXACT []
@@ -9140,7 +9168,7 @@ is_a: SO:0001092 ! polypeptide_metal_contact
 id: SO:0001095
 name: polypeptide_cobalt_ion_contact_site
 alt_id: BS:00136
-def: "Residue involved in contact with cobalt." [EBIBS:GAR]
+def: "A binding site that, in the polypeptide molecule, interacts selectively and non-covalently with cobalt ions." [EBIBS:GAR, SO:cb]
 subset: biosapiens
 synonym: "Co_contact_site" EXACT []
 synonym: "polypeptide cobalt ion contact site" EXACT []
@@ -9150,7 +9178,7 @@ is_a: SO:0001092 ! polypeptide_metal_contact
 id: SO:0001096
 name: polypeptide_copper_ion_contact_site
 alt_id: BS:00146
-def: "Residue involved in contact with copper." [EBIBS:GAR]
+def: "A binding site that, in the polypeptide molecule, interacts selectively and non-covalently with copper ions." [EBIBS:GAR, SO:cb]
 subset: biosapiens
 synonym: "Cu_contact_site" EXACT []
 synonym: "polypeptide copper ion contact site" EXACT []
@@ -9160,7 +9188,7 @@ is_a: SO:0001092 ! polypeptide_metal_contact
 id: SO:0001097
 name: polypeptide_iron_ion_contact_site
 alt_id: BS:00137
-def: "Residue involved in contact with iron." [EBIBS:GAR]
+def: "A binding site that, in the polypeptide molecule, interacts selectively and non-covalently with iron ions." [EBIBS:GAR, SO:cb]
 subset: biosapiens
 synonym: "Fe_contact_site" EXACT []
 synonym: "polypeptide iron ion contact site" EXACT []
@@ -9170,7 +9198,7 @@ is_a: SO:0001092 ! polypeptide_metal_contact
 id: SO:0001098
 name: polypeptide_magnesium_ion_contact_site
 alt_id: BS:00187
-def: "Residue involved in contact with magnesium." [EBIBS:GAR]
+def: "A binding site that, in the polypeptide molecule, interacts selectively and non-covalently with magnesium ions." [EBIBS:GAR, SO:cb]
 subset: biosapiens
 synonym: "Mg_contact_site" EXACT []
 synonym: "polypeptide magnesium ion contact site" EXACT []
@@ -9180,7 +9208,7 @@ is_a: SO:0001092 ! polypeptide_metal_contact
 id: SO:0001099
 name: polypeptide_manganese_ion_contact_site
 alt_id: BS:00140
-def: "Residue involved in contact with manganese." [EBIBS:GAR]
+def: "A binding site that, in the polypeptide molecule, interacts selectively and non-covalently with manganese ions." [EBIBS:GAR, SO:cb]
 subset: biosapiens
 synonym: "Mn_contact_site" EXACT []
 synonym: "polypeptide manganese ion contact site" EXACT []
@@ -9190,7 +9218,7 @@ is_a: SO:0001092 ! polypeptide_metal_contact
 id: SO:0001100
 name: polypeptide_molybdenum_ion_contact_site
 alt_id: BS:00141
-def: "Residue involved in contact with molybdenum." [EBIBS:GAR]
+def: "A binding site that, in the polypeptide molecule, interacts selectively and non-covalently with molybdenum ions." [EBIBS:GAR, SO:cb]
 subset: biosapiens
 synonym: "Mo_contact_site" EXACT []
 synonym: "polypeptide molybdenum ion contact site" EXACT []
@@ -9200,7 +9228,7 @@ is_a: SO:0001092 ! polypeptide_metal_contact
 id: SO:0001101
 name: polypeptide_nickel_ion_contact_site
 alt_id: BS:00142
-def: "Residue involved in contact with nickel." [EBIBS:GAR]
+def: "A binding site that, in the polypeptide molecule, interacts selectively and non-covalently with nickel ions." [EBIBS:GAR]
 subset: biosapiens
 synonym: "Ni_contact_site" EXACT []
 synonym: "polypeptide nickel ion contact site" EXACT []
@@ -9210,7 +9238,7 @@ is_a: SO:0001092 ! polypeptide_metal_contact
 id: SO:0001102
 name: polypeptide_tungsten_ion_contact_site
 alt_id: BS:00143
-def: "Residue involved in contact with tungsten." [EBIBS:GAR]
+def: "A binding site that, in the polypeptide molecule, interacts selectively and non-covalently with tungsten ions." [EBIBS:GAR, SO:cb]
 subset: biosapiens
 synonym: "polypeptide tungsten ion contact site" EXACT []
 synonym: "W_contact_site" EXACT []
@@ -9220,7 +9248,7 @@ is_a: SO:0001092 ! polypeptide_metal_contact
 id: SO:0001103
 name: polypeptide_zinc_ion_contact_site
 alt_id: BS:00185
-def: "Residue involved in contact with zinc." [EBIBS:GAR]
+def: "A binding site that, in the polypeptide molecule, interacts selectively and non-covalently with zinc ions." [EBIBS:GAR, SO:cb]
 subset: biosapiens
 synonym: "polypeptide zinc ion contact site" EXACT []
 synonym: "Zn_contact_site" EXACT []
@@ -9247,7 +9275,7 @@ def: "Residues which interact with a ligand." [EBIBS:GAR]
 subset: biosapiens
 synonym: "polypeptide ligand contact" EXACT []
 synonym: "protein-ligand interaction" RELATED []
-is_a: SO:0000409 ! binding_site
+is_a: SO:0001657 ! ligand_binding_site
 is_a: SO:0100002 ! molecular_contact_region
 
 [Term]
@@ -9780,7 +9808,7 @@ comment: This consensus sequence was identified computationally using the MEME a
 synonym: "DRE motif" EXACT []
 synonym: "NDM4" EXACT []
 synonym: "WATCGATW_motif" EXACT []
-is_a: SO:0000235 ! TF_binding_site
+is_a: SO:0000713 ! DNA_motif
 relationship: part_of SO:0000170 ! RNApol_II_promoter
 
 [Term]
@@ -9793,7 +9821,7 @@ synonym: "DMv4 motif" EXACT []
 synonym: "motif 1 element" EXACT []
 synonym: "promoter motif 1" EXACT []
 synonym: "YGGTCACATR" NARROW []
-is_a: SO:0000713 ! DNA_motif
+is_a: SO:0001659 ! promoter_element
 
 [Term]
 id: SO:0001158
@@ -9803,7 +9831,7 @@ synonym: "AWCAGCTGWT" NARROW []
 synonym: "E box motif" EXACT []
 synonym: "generic E box motif" EXACT []
 synonym: "NDM5" RELATED []
-is_a: SO:0000235 ! TF_binding_site
+is_a: SO:0000713 ! DNA_motif
 relationship: part_of SO:0000170 ! RNApol_II_promoter
 
 [Term]
@@ -9815,7 +9843,7 @@ synonym: "DMv5" EXACT []
 synonym: "DMv5 motif" EXACT []
 synonym: "KTYRGTATWTTT" NARROW []
 synonym: "promoter motif 6" RELATED []
-is_a: SO:0000713 ! DNA_motif
+is_a: SO:0001659 ! promoter_element
 relationship: part_of SO:0000170 ! RNApol_II_promoter
 
 [Term]
@@ -9827,7 +9855,7 @@ synonym: "DMv3" EXACT []
 synonym: "DMv3 motif" EXACT []
 synonym: "KNNCAKCNCTRNY" NARROW []
 synonym: "promoter motif 7" EXACT []
-is_a: SO:0000713 ! DNA_motif
+is_a: SO:0001659 ! promoter_element
 relationship: part_of SO:0000170 ! RNApol_II_promoter
 
 [Term]
@@ -9839,18 +9867,18 @@ synonym: "DMv2" EXACT []
 synonym: "DMv2 motif" EXACT []
 synonym: "MKSYGGCARCGSYSS" NARROW []
 synonym: "promoter motif 8" EXACT []
-is_a: SO:0000713 ! DNA_motif
+is_a: SO:0001659 ! promoter_element
 relationship: part_of SO:0000170 ! RNApol_II_promoter
 
 [Term]
 id: SO:0001162
 name: MTE
-def: "A sequence element characteristic of some RNA polymerase II promoters, usually located between +20 and +30 relative to the TSS. Consensus sequence is CSARCSSAACGS. Tends to co-occur with INR motif (SO:0000014). Tends to not occur with DPE motif (SO:0000015) or DMv5 (SO:0001159)." [PMID:12537576\:15231738]
+def: "A sequence element characteristic of some RNA polymerase II promoters, usually located between +20 and +30 relative to the TSS. Consensus sequence is CSARCSSAACGS. Tends to co-occur with INR motif (SO:0000014). Tends to not occur with DPE motif (SO:0000015) or DMv5 (SO:0001159)." [PMID:12537576\:15231738, PMID:16858867]
 synonym: "CSARCSSAACGS" NARROW []
 synonym: "motif ten element" EXACT []
 synonym: "motif_ten_element" EXACT []
-is_a: SO:0000235 ! TF_binding_site
-relationship: part_of SO:0000170 ! RNApol_II_promoter
+is_a: SO:0001660 ! core_promoter_element
+relationship: part_of SO:0001669 ! RNApol_II_core_promoter
 
 [Term]
 id: SO:0001163
@@ -9860,7 +9888,7 @@ synonym: "directional motif p3" EXACT []
 synonym: "directional promoter motif 3" EXACT []
 synonym: "DMp3" EXACT []
 synonym: "INR1 motif" EXACT []
-is_a: SO:0000235 ! TF_binding_site
+is_a: SO:0000713 ! DNA_motif
 relationship: part_of SO:0000170 ! RNApol_II_promoter
 
 [Term]
@@ -9871,7 +9899,7 @@ synonym: "directional motif 5" EXACT []
 synonym: "directional promoter motif 5" RELATED []
 synonym: "DMp5" EXACT []
 synonym: "DPE1 motif" EXACT []
-is_a: SO:0000713 ! DNA_motif
+is_a: SO:0001659 ! promoter_element
 relationship: part_of SO:0000170 ! RNApol_II_promoter
 
 [Term]
@@ -9881,7 +9909,7 @@ def: "A promoter motif with consensus sequence CARCCCT." [PMID:16827941]
 synonym: "directional promoter motif v1" RELATED []
 synonym: "DMv1" RELATED []
 synonym: "DMv1 motif" EXACT []
-is_a: SO:0000713 ! DNA_motif
+is_a: SO:0001659 ! promoter_element
 relationship: part_of SO:0000170 ! RNApol_II_promoter
 
 [Term]
@@ -9891,7 +9919,7 @@ def: "A non directional promoter motif with consensus sequence GAGAGCG." [PMID:1
 synonym: "GAGA" EXACT []
 synonym: "GAGA motif" EXACT []
 synonym: "NDM1" EXACT []
-is_a: SO:0000235 ! TF_binding_site
+is_a: SO:0000713 ! DNA_motif
 relationship: part_of SO:0000170 ! RNApol_II_promoter
 
 [Term]
@@ -9901,7 +9929,7 @@ def: "A non directional promoter motif with consensus CGMYGYCR." [PMID:16827941]
 synonym: "NDM2" EXACT []
 synonym: "NDM2 motif" EXACT []
 synonym: "non directional promoter motif 2" EXACT []
-is_a: SO:0000713 ! DNA_motif
+is_a: SO:0001659 ! promoter_element
 relationship: part_of SO:0000170 ! RNApol_II_promoter
 
 [Term]
@@ -9911,7 +9939,7 @@ def: "A non directional promoter motif with consensus sequence GAAAGCT." [PMID:1
 synonym: "NDM3" EXACT []
 synonym: "NDM3 motif" EXACT []
 synonym: "non directional motif 3" EXACT []
-is_a: SO:0000713 ! DNA_motif
+is_a: SO:0001659 ! promoter_element
 relationship: part_of SO:0000170 ! RNApol_II_promoter
 
 [Term]
@@ -10040,7 +10068,7 @@ relationship: part_of SO:0000203 ! UTR
 
 [Term]
 id: SO:0001183
-name: morpholino
+name: morpholino_backbone
 def: "An attribute describing a sequence composed of nucleobases bound to a morpholino backbone. A morpholino backbone consists of morpholine (CHEBI:34856) rings connected by phosphorodiamidate linkages." [RSC:cb]
 comment: Do not use this for feature annotation. Use morpholino_oligo (SO:0000034) instead.
 xref: http://en.wikipedia.org/wiki/Morpholino "wiki"
@@ -10648,7 +10676,7 @@ name: octamer_motif
 def: "A sequence element characteristic of some RNA polymerase II promoters with sequence ATTGCAT that binds Pou-domain transcription factors." [GOC:dh, PMID:3095662]
 comment: Nature. 1986 Oct 16-22;323(6089):640-3.
 synonym: "octamer motif" EXACT []
-is_a: SO:0000235 ! TF_binding_site
+is_a: SO:0000713 ! DNA_motif
 relationship: part_of SO:0000170 ! RNApol_II_promoter
 
 [Term]
@@ -11820,9 +11848,9 @@ is_a: SO:0001277 ! modified_uridine
 [Term]
 id: SO:0001383
 name: histone_binding_site
-def: "A region of a DNA molecule that is bound by a histone." [SO:ke]
+def: "A binding site that, in the nucleotide molecule, interacts selectively and non-covalently with polypeptide residues of a histone." [SO:ke]
 synonym: "histone binding site" EXACT []
-is_a: SO:0000410 ! protein_binding_site
+is_a: SO:0001654 ! nucleotide_to_protein_binding_site
 
 [Term]
 id: SO:0001384
@@ -12208,7 +12236,7 @@ id: SO:0001427
 name: cis_regulatory_frameshift_element
 def: "A structural region in an RNA molecule which promotes ribosomal frameshifting of cis coding sequence." [RFAM:jd]
 synonym: "cis regulatory frameshift element" EXACT []
-is_a: SO:0005836 ! regulatory_region
+is_a: SO:0001679 ! transcription_regulatory_region
 
 [Term]
 id: SO:0001428
@@ -12221,16 +12249,9 @@ is_a: SO:0000353 ! sequence_assembly
 [Term]
 id: SO:0001429
 name: DNA_binding_site
-def: "A region of a molecule that binds to DNA." [SO:ke]
+def: "A binding site that, in the molecule, interacts selectively and non-covalently with DNA." [SO:ke]
 synonym: "DNA binding site" EXACT []
-is_a: SO:0000409 ! binding_site
-
-[Term]
-id: SO:0001430
-name: polyA_junction
-def: "The boundary between the UTR and the polyA sequence." [SO:ke]
-synonym: "polyA junction" EXACT []
-is_a: SO:0000699 ! junction
+is_a: SO:0001655 ! nucleotide_binding_site
 
 [Term]
 id: SO:0001431
@@ -12244,9 +12265,11 @@ intersection_of: has_quality SO:0000976 ! cryptic
 [Term]
 id: SO:0001432
 name: sequence_variant_affecting_polyadenylation
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting polyadenylation" RELATED []
 synonym: "sequence variant affecting polyadenylation" EXACT []
-is_a: SO:1000070 ! sequence_variant_affecting_transcript_processing
+is_obsolete: true
+replaced_by: SO:0001545
 
 [Term]
 id: SO:0001433
@@ -12262,7 +12285,7 @@ def: "A cassette pseudogene is a kind of gene in an inactive form which may reco
 comment: Requested by the Trypanosome community.
 synonym: "cassette pseudogene" EXACT []
 synonym: "cassette type psedogene" RELATED []
-is_a: SO:0000336 ! pseudogene
+is_a: SO:0001760 ! non_processed_pseudogene
 
 [Term]
 id: SO:0001435
@@ -12472,18 +12495,18 @@ is_a: SO:0000314 ! direct_repeat
 [Term]
 id: SO:0001460
 name: insulator_binding_site
-def: "A protein_binding_site located within an insulator." [SO:ke]
+def: "A binding site that, in an insulator region of a nucleotide molecule, interacts selectively and non-covalently with polypeptide residues." [SO:ke]
 comment: See tracker ID 2060908.
 synonym: "insulator binding site" RELATED []
-is_a: SO:0000410 ! protein_binding_site
+is_a: SO:0001654 ! nucleotide_to_protein_binding_site
 relationship: part_of SO:0000627 ! insulator
 
 [Term]
 id: SO:0001461
 name: enhancer_binding_site
-def: "A protein_binding_site located within an enhancer." [SO:ke]
+def: "A binding site that, in the enhancer region of a nucleotide molecule, interacts selectively and non-covalently with polypeptide residues." [SO:ke]
 synonym: "enhancer binding site" RELATED []
-is_a: SO:0000410 ! protein_binding_site
+is_a: SO:0001654 ! nucleotide_to_protein_binding_site
 relationship: part_of SO:0000165 ! enhancer
 
 [Term]
@@ -12664,7 +12687,7 @@ creation_date: 2009-09-09T05:29:29Z
 [Term]
 id: SO:0001483
 name: SNV
-def: "SNVs are single base pair positions in genomic DNA at which different sequence alternatives exist." [SO:bm]
+def: "SNVs are single nucleotide positions in genomic DNA at which different sequence alternatives exist." [SO:bm]
 subset: SOFA
 synonym: "single nucleotide variant" EXACT []
 is_a: SO:1000002 ! substitution
@@ -12684,7 +12707,7 @@ creation_date: 2009-11-10T11:03:37Z
 
 [Term]
 id: SO:0001485
-name: Y_prime_ element
+name: Y_prime_element
 def: "A Y' element is a repeat region (SO:0000657) located adjacent to telomeric repeats or X element combinatorial repeats, either as a single copy or tandem repeat of two to four copies." [http:http\://www.yeastgenome.org/help/glossary.html]
 comment: This term was requested 2009-10-16 by Michel Dumontier, tracker id 2880747.
 synonym: "Y' element" EXACT []
@@ -12753,7 +12776,7 @@ id: SO:0001492
 name: intronic_regulatory_region
 def: "A regulatory region that is part of an intron." [SO:ke]
 synonym: "intronic regulatory region" EXACT []
-is_a: SO:0005836 ! regulatory_region
+is_a: SO:0001679 ! transcription_regulatory_region
 relationship: part_of SO:0000188 ! intron
 created_by: kareneilbeck
 creation_date: 2009-11-08T02:48:02Z
@@ -12766,7 +12789,7 @@ comment: This term was requested 2009-10-16 by Michel Dumontier, tracker id 2880
 synonym: "CDEI" EXACT []
 synonym: "Centromere DNA Element I" EXACT []
 is_a: SO:0000330 ! conserved_region
-relationship: part_of SO:0000577 ! centromere
+relationship: part_of SO:0001794 ! point_centromere
 created_by: kareneilbeck
 creation_date: 2009-11-09T05:47:23Z
 
@@ -12778,7 +12801,7 @@ comment: This term was requested 2009-10-16 by Michel Dumontier, tracker id 2880
 synonym: "CDEII" EXACT []
 synonym: "centromere DNA Element II" EXACT []
 is_a: SO:0000330 ! conserved_region
-relationship: part_of SO:0000577 ! centromere
+relationship: part_of SO:0001794 ! point_centromere
 created_by: kareneilbeck
 creation_date: 2009-11-09T05:51:26Z
 
@@ -12790,7 +12813,7 @@ comment: This term was requested 2009-10-16 by Michel Dumontier, tracker id 2880
 synonym: "CDEIII" EXACT []
 synonym: "centromere DNA Element III" EXACT []
 is_a: SO:0000330 ! conserved_region
-relationship: part_of SO:0000577 ! centromere
+relationship: part_of SO:0001794 ! point_centromere
 created_by: kareneilbeck
 creation_date: 2009-11-09T05:54:47Z
 
@@ -13157,7 +13180,7 @@ creation_date: 2010-03-12T03:40:33Z
 [Term]
 id: SO:0001536
 name: functional_variant
-def: "A sequence variant which alters a biological process or function." [SO:ke]
+def: "A sequence variant in which the function of a gene product is altered with respect to a reference." [SO:ke]
 synonym: "functional variant" EXACT []
 is_a: SO:0001060 ! sequence_variant
 created_by: kareneilbeck
@@ -13175,7 +13198,7 @@ creation_date: 2010-03-22T11:31:01Z
 [Term]
 id: SO:0001538
 name: transcript_function_variant
-def: "A sequence variant which alters the functioning of a transcript." [SO:ke]
+def: "A sequence variant which alters the functioning of a transcript with respect to a reference sequence." [SO:ke]
 synonym: "transcript function variant" EXACT []
 is_a: SO:0001536 ! functional_variant
 created_by: kareneilbeck
@@ -13184,7 +13207,7 @@ creation_date: 2010-03-22T11:32:58Z
 [Term]
 id: SO:0001539
 name: translational_product_function_variant
-def: "A sequence variant that affects the functioning of a translational product." [SO:ke]
+def: "A sequence variant that affects the functioning of a translational product with respect to a reference sequence." [SO:ke]
 synonym: "translational product variant" EXACT []
 is_a: SO:0001536 ! functional_variant
 created_by: kareneilbeck
@@ -13201,8 +13224,8 @@ creation_date: 2010-03-22T11:47:07Z
 
 [Term]
 id: SO:0001541
-name: decreased_transcript_level
-def: "A sequence variant that increases the level of mature, spliced and processed RNA." [SO:ke]
+name: decreased_transcript_level_variant
+def: "A sequence variant that increases the level of mature, spliced and processed RNA with respect to a reference sequence." [SO:ke]
 synonym: "decreased transcript level" EXACT []
 is_a: SO:0001540 ! level_of_transcript_variant
 created_by: kareneilbeck
@@ -13210,9 +13233,9 @@ creation_date: 2010-03-22T11:47:47Z
 
 [Term]
 id: SO:0001542
-name: increased_transcript_level
-def: "A sequence variant that increases the level of mature, spliced and processed RNA." [SO:ke]
-synonym: "increased transcript level" EXACT []
+name: increased_transcript_level_variant
+def: "A sequence variant that increases the level of mature, spliced and processed RNA with respect to a reference sequence." [SO:ke]
+synonym: "increased transcript level variant" EXACT []
 is_a: SO:0001540 ! level_of_transcript_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T11:48:17Z
@@ -13220,7 +13243,7 @@ creation_date: 2010-03-22T11:48:17Z
 [Term]
 id: SO:0001543
 name: transcript_processing_variant
-def: "A sequence variant that affects the post transcriptional processing of a transcript." [SO:ke]
+def: "A sequence variant that affects the post transcriptional processing of a transcript with respect to a reference sequence." [SO:ke]
 synonym: "transcript processing variant" EXACT []
 is_a: SO:0001538 ! transcript_function_variant
 created_by: kareneilbeck
@@ -13229,7 +13252,7 @@ creation_date: 2010-03-22T11:48:48Z
 [Term]
 id: SO:0001544
 name: editing_variant
-def: "A variant that changes editing of a transcript." [SO:ke]
+def: "A transcript processing variant whereby the process of editing is disrupted with respect to the reference." [SO:ke]
 synonym: "editing variant" EXACT []
 is_a: SO:0001543 ! transcript_processing_variant
 created_by: kareneilbeck
@@ -13238,7 +13261,7 @@ creation_date: 2010-03-22T11:49:25Z
 [Term]
 id: SO:0001545
 name: polyadenylation_variant
-def: "A sequence variant that changes polyadenylation." [SO:ke]
+def: "A sequence variant that changes polyadenylation with respect to a reference sequence." [SO:ke]
 synonym: "polyadenylation variant" EXACT []
 is_a: SO:0001543 ! transcript_processing_variant
 created_by: kareneilbeck
@@ -13247,7 +13270,7 @@ creation_date: 2010-03-22T11:49:40Z
 [Term]
 id: SO:0001546
 name: transcript_stability_variant
-def: "A variant that changes the stability of a transcript." [SO:ke]
+def: "A variant that changes the stability of a transcript with respect to a reference sequence." [SO:ke]
 synonym: "transcript stability variant" EXACT []
 is_a: SO:0001538 ! transcript_function_variant
 created_by: kareneilbeck
@@ -13255,18 +13278,18 @@ creation_date: 2010-03-22T11:50:01Z
 
 [Term]
 id: SO:0001547
-name: decrease_transcript_stability
-def: "A sequence variant that decreases transcript stability." [SO:ke]
-synonym: "decrease transcript stability" EXACT []
+name: decreased_transcript_stability_variant
+def: "A sequence variant that decreases transcript stability with respect to a reference sequence." [SO:ke]
+synonym: "decrease transcript stability variant" EXACT []
 is_a: SO:0001546 ! transcript_stability_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T11:50:23Z
 
 [Term]
 id: SO:0001548
-name: increase_transcript_stability
-def: "A sequence variant that increases transcript stability." [SO:ke]
-synonym: "increase transcript stability" EXACT []
+name: increased_transcript_stability_variant
+def: "A sequence variant that increases transcript stability with respect to a reference sequence." [SO:ke]
+synonym: "increased transcript stability variant" EXACT []
 is_a: SO:0001546 ! transcript_stability_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T11:50:39Z
@@ -13274,7 +13297,7 @@ creation_date: 2010-03-22T11:50:39Z
 [Term]
 id: SO:0001549
 name: transcription_variant
-def: "A variant that changes alters the transcription of a transcript." [SO:ke]
+def: "A variant that changes alters the transcription of a transcript with respect to a reference sequence." [SO:ke]
 synonym: "transcription variant" EXACT []
 is_a: SO:0001538 ! transcript_function_variant
 created_by: kareneilbeck
@@ -13283,7 +13306,7 @@ creation_date: 2010-03-22T11:51:26Z
 [Term]
 id: SO:0001550
 name: rate_of_transcription_variant
-def: "A sequence variant that changes the rate of transcription." [SO:ke]
+def: "A sequence variant that changes the rate of transcription with respect to a reference sequence." [SO:ke]
 synonym: "rate of transcription variant" EXACT []
 is_a: SO:0001549 ! transcription_variant
 created_by: kareneilbeck
@@ -13291,18 +13314,18 @@ creation_date: 2010-03-22T11:51:50Z
 
 [Term]
 id: SO:0001551
-name: increase_transcription_rate
-def: "A sequence variant that increases the rate of transcription." [SO:ke]
-synonym: "increase transcription rate" RELATED []
+name: increased_transcription_rate_variant
+def: "A sequence variant that increases the rate of transcription with respect to a reference sequence." [SO:ke]
+synonym: "increased transcription rate variant" EXACT []
 is_a: SO:0001550 ! rate_of_transcription_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T11:52:17Z
 
 [Term]
 id: SO:0001552
-name: decrease_transcription_rate
-def: "A sequence variant that decreases the rate of transcription." [SO:ke]
-synonym: "decrease transcription rate" EXACT []
+name: decreased_transcription_rate_variant
+def: "A sequence variant that decreases the rate of transcription with respect to a reference sequence." [SO:ke]
+synonym: "decreased transcription rate variant" EXACT []
 is_a: SO:0001550 ! rate_of_transcription_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T11:52:43Z
@@ -13310,6 +13333,7 @@ creation_date: 2010-03-22T11:52:43Z
 [Term]
 id: SO:0001553
 name: translational_product_level_variant
+def: "A functional variant that changes the translational product level with respect to a reference sequence." [SO:ke]
 synonym: "translational product level variant" EXACT []
 is_a: SO:0001539 ! translational_product_function_variant
 created_by: kareneilbeck
@@ -13318,7 +13342,7 @@ creation_date: 2010-03-22T11:53:32Z
 [Term]
 id: SO:0001554
 name: polypeptide_function_variant
-def: "A sequence variant which changes polypeptide functioning." [SO:ke]
+def: "A sequence variant which changes polypeptide functioning with respect to a reference sequence." [SO:ke]
 synonym: "polypeptide function variant" EXACT []
 is_a: SO:0001539 ! translational_product_function_variant
 created_by: kareneilbeck
@@ -13327,7 +13351,7 @@ creation_date: 2010-03-22T11:53:54Z
 [Term]
 id: SO:0001555
 name: decreased_translational_product_level
-def: "A sequence variant which decreases the translational product level." [SO:ke]
+def: "A sequence variant which decreases the translational product level with respect to a reference sequence." [SO:ke]
 synonym: "decrease translational product level" EXACT []
 is_a: SO:0001553 ! translational_product_level_variant
 created_by: kareneilbeck
@@ -13336,7 +13360,7 @@ creation_date: 2010-03-22T11:54:25Z
 [Term]
 id: SO:0001556
 name: increased_translational_product_level
-def: "A sequence variant which increases the translational product level." [SO:ke]
+def: "A sequence variant which increases the translational product level with respect to a reference sequence." [SO:ke]
 synonym: "increase translational product level" EXACT []
 is_a: SO:0001553 ! translational_product_level_variant
 created_by: kareneilbeck
@@ -13344,9 +13368,9 @@ creation_date: 2010-03-22T11:55:25Z
 
 [Term]
 id: SO:0001557
-name: polypeptide_gain_of_function
-def: "A sequence variant which causes gain of polypeptide function." [SO:ke]
-synonym: "polypeptide gain of function" EXACT []
+name: polypeptide_gain_of_function_variant
+def: "A sequence variant which causes gain of polypeptide function with respect to a reference sequence." [SO:ke]
+synonym: "polypeptide gain of function variant" EXACT []
 is_a: SO:0001554 ! polypeptide_function_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T11:56:12Z
@@ -13354,7 +13378,7 @@ creation_date: 2010-03-22T11:56:12Z
 [Term]
 id: SO:0001558
 name: polypeptide_localization_variant
-def: "A sequence variant which changes the localization of a polypeptide." [SO:ke]
+def: "A sequence variant which changes the localization of a polypeptide with respect to a reference sequence." [SO:ke]
 synonym: "polypeptide localization variant" EXACT []
 is_a: SO:0001554 ! polypeptide_function_variant
 created_by: kareneilbeck
@@ -13362,9 +13386,9 @@ creation_date: 2010-03-22T11:56:37Z
 
 [Term]
 id: SO:0001559
-name: polypeptide_loss_of_function
-def: "A sequence variant that causes the loss of a polypeptide function." [SO:ke]
-synonym: "polypeptide loss of function" EXACT []
+name: polypeptide_loss_of_function_variant
+def: "A sequence variant that causes the loss of a polypeptide function with respect to a reference sequence." [SO:ke]
+synonym: "polypeptide loss of function variant" EXACT []
 is_a: SO:0001554 ! polypeptide_function_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T11:56:58Z
@@ -13372,25 +13396,25 @@ creation_date: 2010-03-22T11:56:58Z
 [Term]
 id: SO:0001560
 name: inactive_ligand_binding_site
-def: "A sequence variant that causes the inactivation of a ligand binding site." [SO:ke]
+def: "A sequence variant that causes the inactivation of a ligand binding site with respect to a reference sequence." [SO:ke]
 synonym: "inactive ligand binding site" EXACT []
-is_a: SO:0001559 ! polypeptide_loss_of_function
+is_a: SO:0001559 ! polypeptide_loss_of_function_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T11:58:00Z
 
 [Term]
 id: SO:0001561
 name: polypeptide_partial_loss_of_function
-def: "A sequence variant that causes some but not all loss of polypeptide function." [SO:ke]
+def: "A sequence variant that causes some but not all loss of polypeptide function with respect to a reference sequence." [SO:ke]
 synonym: "polypeptide partial loss of function" EXACT []
-is_a: SO:0001559 ! polypeptide_loss_of_function
+is_a: SO:0001559 ! polypeptide_loss_of_function_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T11:58:32Z
 
 [Term]
 id: SO:0001562
 name: polypeptide_post_translational_processing_variant
-def: "A sequence variant that causes a change in post translational processing of the peptide." [SO:ke]
+def: "A sequence variant that causes a change in post translational processing of the peptide with respect to a reference sequence." [SO:ke]
 synonym: "polypeptide post translational processing variant" EXACT []
 is_a: SO:0001554 ! polypeptide_function_variant
 created_by: kareneilbeck
@@ -13407,7 +13431,7 @@ creation_date: 2010-03-22T02:27:33Z
 
 [Term]
 id: SO:0001564
-name: gene_structure_variant
+name: gene_variant
 def: "A sequence variant where the structure of the gene is changed." [SO:ke]
 synonym: "gene structure variant" EXACT []
 is_a: SO:0001537 ! structural_variant
@@ -13419,14 +13443,14 @@ id: SO:0001565
 name: gene_fusion
 def: "A sequence variant whereby a two genes have become joined." [SO:ke]
 synonym: "gene fusion" EXACT []
-is_a: SO:0001564 ! gene_structure_variant
+is_a: SO:0001564 ! gene_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T02:28:28Z
 
 [Term]
 id: SO:0001566
 name: regulatory_region_variant
-def: "A sequence variant located with a regulatory region such as a promoter." [SO:ke]
+def: "A sequence variant located within a regulatory region." [SO:ke]
 comment: EBI term: Regulatory region variations - In regulatory region annotated by Ensembl.
 synonym: "regulatory region variant" EXACT []
 synonym: "regulatory_region_" EXACT ebi_variants [http://uswest.ensembl.org/info/docs/variation/index.html]
@@ -13448,17 +13472,17 @@ id: SO:0001568
 name: splicing_variant
 def: "A sequence variant that changes the process of splicing." [SO:ke]
 synonym: "splicing variant" EXACT []
-xref: http://www.ebi.ac.uk/mutations/recommendations/mutevent.html
-is_a: SO:0001537 ! structural_variant
+xref: EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html
+is_a: SO:0001564 ! gene_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T02:29:22Z
 
 [Term]
 id: SO:0001569
 name: cryptic_splice_site_variant
-def: "A sequence variant causing a new (functional) splice site." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "A sequence variant causing a new (functional) splice site." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
 synonym: "cryptic splice site activation" EXACT []
-xref: http://www.ebi.ac.uk/mutations/recommendations/mutevent.html
+xref: EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html
 is_a: SO:0001568 ! splicing_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T02:29:41Z
@@ -13493,9 +13517,9 @@ creation_date: 2010-03-22T02:31:09Z
 [Term]
 id: SO:0001573
 name: intron_gain
-def: "A sequence variant whereby an intron is gained by the processed transcript; usually a result of an alteration of the donor or acceptor." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "A sequence variant whereby an intron is gained by the processed transcript; usually a result of an alteration of the donor or acceptor." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
 synonym: "intron gain" EXACT []
-xref: http://www.ebi.ac.uk/mutations/recommendations/mutevent.html
+xref: EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html
 is_a: SO:0001568 ! splicing_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T02:31:25Z
@@ -13503,7 +13527,7 @@ creation_date: 2010-03-22T02:31:25Z
 [Term]
 id: SO:0001574
 name: splice_acceptor_variant
-def: "A splice variant that changes the2 base region at the 3' end of an intron." [SO:ke]
+def: "A splice variant that changes the 2 base region at the 3' end of an intron." [SO:ke]
 synonym: "splice acceptor variant" EXACT []
 is_a: SO:0001629 ! splice_site_variant
 created_by: kareneilbeck
@@ -13523,8 +13547,8 @@ id: SO:0001576
 name: transcript_variant
 def: "A sequence variant that changes the structure of the transcript." [SO:ke]
 synonym: "transcript variant" EXACT []
-xref: http://www.ebi.ac.uk/mutations/recommendations/mutevent.html
-is_a: SO:0001537 ! structural_variant
+xref: EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html
+is_a: SO:0001564 ! gene_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T02:32:41Z
 
@@ -13562,7 +13586,7 @@ id: SO:0001580
 name: coding_sequence_variant
 def: "A sequence variant that changes the coding sequence." [SO:ke]
 synonym: "coding sequence variant" EXACT []
-is_a: SO:0001576 ! transcript_variant
+is_a: SO:0001791 ! exon_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T02:34:36Z
 
@@ -13572,7 +13596,7 @@ name: codon_variant
 def: "A sequence variant that changes at least one base in a codon." [SO:ke]
 synonym: "coding variant" EXACT []
 synonym: "codon variant" EXACT []
-xref: http://www.ebi.ac.uk/mutations/recommendations/mutevent.html
+xref: EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html
 is_a: SO:0001580 ! coding_sequence_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T02:34:56Z
@@ -13582,7 +13606,7 @@ id: SO:0001582
 name: initiator_codon_change
 def: "A codon variant that changes at least one base of the first codon of a transcript." [SO:ke]
 synonym: "initiator codon change" EXACT []
-xref: http://www.ebi.ac.uk/mutations/recommendations/mutevent.html
+xref: EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html
 is_a: SO:0001581 ! codon_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T02:35:18Z
@@ -13591,14 +13615,11 @@ creation_date: 2010-03-22T02:35:18Z
 id: SO:0001583
 name: non_synonymous_codon
 alt_id: SO:0001584
-def: "A sequence variant whereby at least one base of a codon is changed resulting in a codon that encodes for a different amino acid." [SO:ke]
+def: "A sequence variant whereby at least one base of a codon is changed resulting in a codon that encodes for a different amino acid or stop codon." [SO:ke]
 comment: EBI term: Non-synonymous SNPs. SNPs that are located in the coding sequence and result in an amino acid change in the encoded peptide sequence.
-synonym: "missense" EXACT dbsnp [ftp://ftp.ncbi.nih.gov/snp/specs/docsum_3.1.xsd]
-synonym: "missense_codon" EXACT []
 synonym: "non synonymous codon" EXACT []
 synonym: "non_synonymous_coding" EXACT ebi_variants [http://uswest.ensembl.org/info/docs/variation/index.html]
-xref: http://www.ebi.ac.uk/mutations/recommendations/mutevent.html
-xref: http:http\://en.wikipedia.org/wiki/Missense_mutation "wiki"
+xref: EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html
 is_a: SO:0001581 ! codon_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T02:35:49Z
@@ -13610,8 +13631,8 @@ def: "A sequence variant whereby at least one base of a codon is changed resulti
 synonym: "conservative missense codon" EXACT []
 synonym: "neutral missense codon" RELATED []
 synonym: "quiet missense codon" RELATED []
-xref: http://www.ebi.ac.uk/mutations/recommendations/mutevent.html
-is_a: SO:0001583 ! non_synonymous_codon
+xref: EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html
+is_a: SO:0001783 ! missense_codon
 created_by: kareneilbeck
 creation_date: 2010-03-22T02:36:40Z
 
@@ -13620,8 +13641,8 @@ id: SO:0001586
 name: non_conservative_missense_codon
 def: "A sequence variant whereby at least one base of a codon is changed resulting in a codon that encodes for an amino acid with different biochemical properties." [SO:ke]
 synonym: "non conservative missense codon" EXACT []
-xref: http://www.ebi.ac.uk/mutations/recommendations/mutevent.html
-is_a: SO:0001583 ! non_synonymous_codon
+xref: EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html
+is_a: SO:0001783 ! missense_codon
 created_by: kareneilbeck
 creation_date: 2010-03-22T02:37:16Z
 
@@ -13650,9 +13671,9 @@ synonym: "silent substitution" RELATED []
 synonym: "silent_mutation" RELATED []
 synonym: "synonymous codon" EXACT []
 synonym: "synonymous_coding" EXACT ebi_variants []
+xref: EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html
 xref: http://en.wikipedia.org/wiki/Silent_mutation "wiki"
 xref: http://en.wikipedia.org/wiki/Synonymous_mutation
-xref: http://www.ebi.ac.uk/mutations/recommendations/mutevent.html
 is_a: SO:0001581 ! codon_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T02:39:38Z
@@ -13748,8 +13769,8 @@ id: SO:0001598
 name: translational_product_structure_variant
 def: "A sequence variant within the transcript that changes the structure of the translational product." [SO:ke]
 synonym: "translational product structure variant" EXACT []
-xref: http://www.ebi.ac.uk/mutations/recommendations/mutevent.html
-is_a: SO:0001537 ! structural_variant
+xref: EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html
+is_a: SO:0001564 ! gene_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T02:44:17Z
 
@@ -13802,7 +13823,7 @@ id: SO:0001604
 name: amino_acid_deletion
 def: "A sequence variant within a CDS resulting in the loss of an amino acid from the resulting polypeptide." [SO:ke]
 synonym: "amino acid deletion" EXACT []
-xref: http://www.ebi.ac.uk/mutations/recommendations/mutevent.html
+xref: EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html
 is_a: SO:0001603 ! polypeptide_sequence_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T02:47:36Z
@@ -13812,7 +13833,7 @@ id: SO:0001605
 name: amino_acid_insertion
 def: "A sequence variant within a CDS resulting in the gain of an amino acid to the resulting polypeptide." [SO:ke]
 synonym: "amino acid insertion" EXACT []
-xref: http://www.ebi.ac.uk/mutations/recommendations/mutevent.html
+xref: EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html
 is_a: SO:0001603 ! polypeptide_sequence_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T02:47:56Z
@@ -13822,7 +13843,7 @@ id: SO:0001606
 name: amino_acid_substitution
 def: "A sequence variant of a codon resulting in the substitution of one amino acid for another in the resulting polypeptide." [SO:ke]
 synonym: "amino acid substitution" EXACT []
-xref: http://www.ebi.ac.uk/mutations/recommendations/mutevent.html
+xref: EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html
 is_a: SO:0001603 ! polypeptide_sequence_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T02:48:17Z
@@ -13850,7 +13871,7 @@ id: SO:0001609
 name: elongated_polypeptide
 def: "A sequence variant with in the CDS that causes elongation of the resulting polypeptide sequence." [SO:ke]
 synonym: "elongated polypeptide" EXACT []
-xref: http://www.ebi.ac.uk/mutations/recommendations/mutevent.html
+xref: EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html
 is_a: SO:0001603 ! polypeptide_sequence_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T02:49:52Z
@@ -13923,7 +13944,7 @@ id: SO:0001617
 name: polypeptide_truncation
 def: "A sequence variant of the CD that causes a truncation of the resulting polypeptide." [SO:ke]
 synonym: "polypeptide truncation" EXACT []
-xref: http://www.ebi.ac.uk/mutations/recommendations/mutevent.html
+xref: EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html
 is_a: SO:0001603 ! polypeptide_sequence_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T02:53:07Z
@@ -13931,7 +13952,7 @@ creation_date: 2010-03-22T02:53:07Z
 [Term]
 id: SO:0001618
 name: inactive_catalytic_site
-def: "A sequence variant that causes the inactivation of a catalytic site." [SO:ke]
+def: "A sequence variant that causes the inactivation of a catalytic site with respect to a reference sequence." [SO:ke]
 synonym: "inactive catalytic site" EXACT []
 is_a: SO:0001560 ! inactive_ligand_binding_site
 created_by: kareneilbeck
@@ -14053,11 +14074,11 @@ creation_date: 2010-03-23T05:07:37Z
 [Term]
 id: SO:0001629
 name: splice_site_variant
-def: "A sequence variant that changes the first two or last two bases of an intron." [http://uswest.ensembl.org/info/docs/variation/index.html]
-comment: EBI term - essential splice site - In the first 2 or the last 2 basepairs of an intron.
+def: "A sequence variant that changes the first two or last two bases of an intron, or the 5th base from the start of the intron in the orientation of the transcript." [http://uswest.ensembl.org/info/docs/variation/index.html]
+comment: EBI term - essential splice site - In the first 2 or the last 2 base pairs of an intron. The 5th base is on the donor (5') side of the intron. Updated to b in line with Cancer Genome Project at the Sanger.
 synonym: "essential_splice_site" EXACT ebi_variants [http://uswest.ensembl.org/info/docs/variation/index.html]
 synonym: "splice site variant" EXACT []
-is_a: SO:0001568 ! splicing_variant
+is_a: SO:0001627 ! intron_variant
 created_by: kareneilbeck
 creation_date: 2010-03-24T09:42:00Z
 
@@ -14110,7 +14131,7 @@ name: 500B_downstream_variant
 def: "A sequence variant located within a half KB of the end of a gene." [SO:ke]
 synonym: "500B downstream variant" EXACT []
 synonym: "near-gene-3" EXACT dbsnp [ftp://ftp.ncbi.nih.gov/snp/specs/docsum_3.1.xsd]
-is_a: SO:0001632 ! downstream_gene_variant
+is_a: SO:0001633 ! 5KB_downstream_variant
 created_by: kareneilbeck
 creation_date: 2010-03-24T09:50:42Z
 
@@ -14131,7 +14152,7 @@ name: 2KB_upstream_variant
 def: "A sequence variant located within 2KB 5' of a gene." [SO:ke]
 synonym: "2KB upstream variant" EXACT []
 synonym: "near-gene-5" EXACT dbsnp [ftp://ftp.ncbi.nih.gov/snp/specs/docsum_3.1.xsd]
-is_a: SO:0001631 ! upstream_gene_variant
+is_a: SO:0001635 ! 5KB_upstream_variant
 created_by: kareneilbeck
 creation_date: 2010-03-24T09:51:22Z
 
@@ -14263,6 +14284,485 @@ synonym: "nested repeat" RELATED []
 is_a: SO:0000657 ! repeat_region
 created_by: kareneilbeck
 creation_date: 2010-06-23T03:24:55Z
+
+[Term]
+id: SO:0001650
+name: inframe_variant
+def: "A sequence variant which does not cause a disruption of the translational reading frame." [SO:ke]
+synonym: "cds-indel" EXACT dbsnp []
+synonym: "inframe variant" EXACT []
+is_a: SO:0001580 ! coding_sequence_variant
+created_by: kareneilbeck
+creation_date: 2010-07-19T01:24:44Z
+
+[Term]
+id: SO:0001651
+name: inframe_codon_gain
+def: "A sequence variant which gains a codon, and does not cause a disruption of the translational reading frame." [SO:ke]
+synonym: "inframe codon gain" RELATED []
+is_a: SO:0001650 ! inframe_variant
+created_by: kareneilbeck
+creation_date: 2010-07-19T01:29:08Z
+
+[Term]
+id: SO:0001652
+name: inframe_codon_loss
+def: "A sequence variant which loses a codon, and does not cause a disruption of the translational reading frame." [SO:ke]
+synonym: "inframe codon loss" RELATED []
+is_a: SO:0001650 ! inframe_variant
+created_by: kareneilbeck
+creation_date: 2010-07-19T01:29:35Z
+
+[Term]
+id: SO:0001653
+name: retinoic_acid_responsive_element
+def: "A transcription factor binding site of variable direct repeats of the sequence PuGGTCA spaced by five nucleotides (DR5) found in the promoters of retinoic acid-responsive genes, to which retinoic acid receptors bind." [PMID:11327309, PMID:19917671]
+synonym: "RARE" EXACT []
+synonym: "retinoic acid responsive element" EXACT []
+is_a: SO:0000713 ! DNA_motif
+relationship: part_of SO:0000167 ! promoter
+created_by: kareneilbeck
+creation_date: 2010-08-03T10:46:12Z
+
+[Term]
+id: SO:0001654
+name: nucleotide_to_protein_binding_site
+def: "A binding site that, in the nucleotide molecule, interacts selectively and non-covalently with polypeptide residues." [SO:ke]
+subset: SOFA
+synonym: "nucleotide to protein binding site" RELATED []
+is_a: SO:0000410 ! protein_binding_site
+created_by: kareneilbeck
+creation_date: 2010-08-03T12:26:05Z
+
+[Term]
+id: SO:0001655
+name: nucleotide_binding_site
+def: "A binding site that, in the molecule, interacts selectively and non-covalently with nucleotide residues." [SO:cb]
+comment: See GO:0000166 : nucleotide binding.
+synonym: "nucleotide binding site" EXACT []
+is_a: SO:0000409 ! binding_site
+created_by: kareneilbeck
+creation_date: 2010-08-03T12:30:04Z
+
+[Term]
+id: SO:0001656
+name: metal_binding_site
+def: "A binding site that, in the molecule, interacts selectively and non-covalently with metal ions." [SO:cb]
+comment: See GO:0046872 : metal ion binding.
+synonym: "metal binding site" RELATED []
+is_a: SO:0000409 ! binding_site
+created_by: kareneilbeck
+creation_date: 2010-08-03T12:31:42Z
+
+[Term]
+id: SO:0001657
+name: ligand_binding_site
+def: "A binding site that, in the molecule, interacts selectively and non-covalently with a small molecule such as a drug, or hormone." [SO:ke]
+synonym: "ligand binding site" EXACT []
+is_a: SO:0000409 ! binding_site
+created_by: kareneilbeck
+creation_date: 2010-08-03T12:32:58Z
+
+[Term]
+id: SO:0001658
+name: nested_tandem_repeat
+def: "An NTR is a nested repeat of two distinct tandem motifs interspersed with each other." [SO:AF]
+comment: Tracker ID: 3052459.
+synonym: "nested tandem repeat" EXACT []
+synonym: "NTR" EXACT []
+is_a: SO:0001649 ! nested_repeat
+created_by: kareneilbeck
+creation_date: 2010-08-26T09:36:16Z
+
+[Term]
+id: SO:0001659
+name: promoter_element
+synonym: "promoter element" EXACT []
+is_a: SO:0000713 ! DNA_motif
+relationship: overlaps SO:0000235 ! TF_binding_site
+created_by: kareneilbeck
+creation_date: 2010-10-01T11:48:32Z
+
+[Term]
+id: SO:0001660
+name: core_promoter_element
+synonym: "core promoter element" EXACT []
+synonym: "general transcription factor binding site" RELATED []
+is_a: SO:0001659 ! promoter_element
+created_by: kareneilbeck
+creation_date: 2010-10-01T11:49:03Z
+
+[Term]
+id: SO:0001661
+name: RNA_polymerase_II_TATA_box
+def: "A TATA box core promoter of a gene transcribed by RNA polymerase II." [PMID:16858867]
+synonym: "RNA polymerase II TATA box" EXACT []
+is_a: SO:0000174 ! TATA_box
+relationship: part_of SO:0001669 ! RNApol_II_core_promoter
+created_by: kareneilbeck
+creation_date: 2010-10-01T02:42:12Z
+
+[Term]
+id: SO:0001662
+name: RNA_polymerase_III_TATA_box
+def: "A TATA box core promoter of a gene transcribed by RNA polymerase III." [SO:ke]
+synonym: "RNA polymerase III TATA box" EXACT []
+is_a: SO:0000174 ! TATA_box
+relationship: part_of SO:0000171 ! RNApol_III_promoter
+created_by: kareneilbeck
+creation_date: 2010-10-01T02:43:16Z
+
+[Term]
+id: SO:0001663
+name: BREd_motif
+def: "A core TRNA polymerase II promoter element with consensus (G/A)T(T/G/A)(T/A)(G/T)(T/G)(T/G)." [PMID:16858867]
+synonym: "BREd" EXACT []
+synonym: "BREd motif" RELATED []
+is_a: SO:0001660 ! core_promoter_element
+relationship: part_of SO:0001669 ! RNApol_II_core_promoter
+created_by: kareneilbeck
+creation_date: 2010-10-01T02:49:55Z
+
+[Term]
+id: SO:0001664
+name: DCE
+def: "A discontinuous core element of RNA polymerase II transcribed genes, situated downstream of the TSS. It is composed of three sub elements: SI, SII and SIII." [PMID:16858867]
+synonym: "downstream core element" RELATED []
+is_a: SO:0001660 ! core_promoter_element
+relationship: part_of SO:0001669 ! RNApol_II_core_promoter
+created_by: kareneilbeck
+creation_date: 2010-10-01T02:56:41Z
+
+[Term]
+id: SO:0001665
+name: DCE_SI
+def: "A sub element of the DCE core promoter element, with consensus sequence CTTC." [PMID:16858867, SO:ke]
+synonym: "DCE SI" RELATED []
+is_a: SO:0000713 ! DNA_motif
+relationship: part_of SO:0001664 ! DCE
+created_by: kareneilbeck
+creation_date: 2010-10-01T03:00:10Z
+
+[Term]
+id: SO:0001666
+name: DCE_SII
+def: "A sub element of the DCE core promoter element with consensus sequence CTGT." [PMID:16858867, SO:ke]
+synonym: "DCE SII" EXACT []
+is_a: SO:0000713 ! DNA_motif
+relationship: part_of SO:0001664 ! DCE
+created_by: kareneilbeck
+creation_date: 2010-10-01T03:00:30Z
+
+[Term]
+id: SO:0001667
+name: DCE_SIII
+def: "A sub element of the DCE core promoter element with consensus sequence AGC." [PMID:16858867, SO:ke]
+synonym: "DCE SIII" EXACT []
+is_a: SO:0000713 ! DNA_motif
+relationship: part_of SO:0001664 ! DCE
+created_by: kareneilbeck
+creation_date: 2010-10-01T03:00:44Z
+
+[Term]
+id: SO:0001668
+name: proximal_promoter_element
+synonym: "proximal promoter element" RELATED []
+synonym: "specific transcription factor binding site" RELATED []
+is_a: SO:0001678 ! regulatory_promoter_element
+created_by: kareneilbeck
+creation_date: 2010-10-01T03:10:23Z
+
+[Term]
+id: SO:0001669
+name: RNApol_II_core_promoter
+def: "The minimal portion of the promoter required to properly initiate transcription in RNA polymerase II transcribed genes." [PMID:16858867]
+synonym: "RNApol II core promoter" EXACT []
+is_a: SO:0000170 ! RNApol_II_promoter
+created_by: kareneilbeck
+creation_date: 2010-10-01T03:13:41Z
+
+[Term]
+id: SO:0001670
+name: distal_promoter_element
+synonym: "distal promoter element" RELATED []
+is_a: SO:0001678 ! regulatory_promoter_element
+created_by: kareneilbeck
+creation_date: 2010-10-01T03:21:08Z
+
+[Term]
+id: SO:0001671
+name: bacterial_RNApol_promoter_sigma_70
+synonym: "bacterial RNA polymerase promoter sigma 70" EXACT []
+is_a: SO:0000613 ! bacterial_RNApol_promoter
+created_by: kareneilbeck
+creation_date: 2010-10-06T01:41:34Z
+
+[Term]
+id: SO:0001672
+name: bacterial_RNApol_promoter_sigma54
+synonym: "bacterial RNA polymerase promoter sigma54" EXACT []
+is_a: SO:0000613 ! bacterial_RNApol_promoter
+created_by: kareneilbeck
+creation_date: 2010-10-06T01:42:37Z
+
+[Term]
+id: SO:0001673
+name: minus_12_signal
+def: "A conserved region about 12-bp upstream of the start point of bacterial transcription units, involved with sigma factor 54." [PMID:18331472]
+synonym: "minus 12 signal" EXACT []
+is_a: SO:0000713 ! DNA_motif
+relationship: part_of SO:0001672 ! bacterial_RNApol_promoter_sigma54
+created_by: kareneilbeck
+creation_date: 2010-10-06T01:44:57Z
+
+[Term]
+id: SO:0001674
+name: minus_24_signal
+def: "A conserved region about 12-bp upstream of the start point of bacterial transcription units, involved with sigma factor 54." [PMID:18331472]
+synonym: "minus 24 signal" RELATED []
+is_a: SO:0000713 ! DNA_motif
+relationship: part_of SO:0001672 ! bacterial_RNApol_promoter_sigma54
+created_by: kareneilbeck
+creation_date: 2010-10-06T01:45:24Z
+
+[Term]
+id: SO:0001675
+name: A_box_type_1
+def: "An A box within an RNA polymerase III type 1 promoter." [SO:ke]
+comment: The A box can be found in the promoters of type 1 and type 2 (pol III) so sub-typing here allows the part of relationship of the subtypes to remain true.
+synonym: "A box type 1" RELATED []
+is_a: SO:0000619 ! A_box
+relationship: part_of SO:0000617 ! RNApol_III_promoter_type_1
+created_by: kareneilbeck
+creation_date: 2010-10-06T05:43:43Z
+
+[Term]
+id: SO:0001676
+name: A_box_type_2
+def: "An A box within an RNA polymerase III type 2 promoter." [SO:ke]
+comment: The A box can be found in the promoters of type 1 and type 2 (pol III) so sub-typing here allows the part of relationship of the subtypes to remain true.
+synonym: "A box type 2" RELATED []
+is_a: SO:0000619 ! A_box
+relationship: part_of SO:0000618 ! RNApol_III_promoter_type_2
+created_by: kareneilbeck
+creation_date: 2010-10-06T05:44:18Z
+
+[Term]
+id: SO:0001677
+name: intermediate_element
+def: "A core promoter region of RNA polymerase III type 1 promoters." [PMID:12381659]
+synonym: "IE" EXACT []
+synonym: "intermediate element" RELATED []
+is_a: SO:0001660 ! core_promoter_element
+relationship: part_of SO:0000617 ! RNApol_III_promoter_type_1
+created_by: kareneilbeck
+creation_date: 2010-10-06T05:52:03Z
+
+[Term]
+id: SO:0001678
+name: regulatory_promoter_element
+def: "A promoter element that is not part of the core promoter, but provides the promoter with a specific regulatory region." [PMID:12381659]
+synonym: "regulatory promoter element" RELATED []
+is_a: SO:0001659 ! promoter_element
+created_by: kareneilbeck
+creation_date: 2010-10-07T04:39:48Z
+
+[Term]
+id: SO:0001679
+name: transcription_regulatory_region
+def: "A regulatory region that is involved in the control of the process of transcription." [SO:ke]
+subset: SOFA
+synonym: "transcription regulatory region" EXACT []
+is_a: SO:0005836 ! regulatory_region
+created_by: kareneilbeck
+creation_date: 2010-10-12T03:49:35Z
+
+[Term]
+id: SO:0001680
+name: translation_regulatory_region
+def: "A regulatory region that is involved in the control of the process of translation." [SO:ke]
+synonym: "translation regulatory region" EXACT []
+is_a: SO:0005836 ! regulatory_region
+created_by: kareneilbeck
+creation_date: 2010-10-12T03:52:45Z
+
+[Term]
+id: SO:0001681
+name: recombination_regulatory_region
+def: "A regulatory region that is involved in the control of the process of recombination." [SO:ke]
+synonym: "recombination regulatory region" EXACT []
+is_a: SO:0005836 ! regulatory_region
+created_by: kareneilbeck
+creation_date: 2010-10-12T03:53:35Z
+
+[Term]
+id: SO:0001682
+name: replication_regulatory_region
+def: "A regulatory region that is involved in the control of the process of nucleotide replication." [SO:ke]
+synonym: "replication regulatory region" RELATED []
+is_a: SO:0005836 ! regulatory_region
+created_by: kareneilbeck
+creation_date: 2010-10-12T03:54:09Z
+
+[Term]
+id: SO:0001683
+name: sequence_motif
+def: "A sequence motif is a nucleotide or amino-acid sequence pattern that may have biological significance." [http://en.wikipedia.org/wiki/Sequence_motif]
+subset: SOFA
+synonym: "sequence motif" RELATED []
+xref: http://en.wikipedia.org/wiki/Sequence_motif "wikipedia"
+is_a: SO:0001411 ! biological_region
+created_by: kareneilbeck
+creation_date: 2010-10-14T04:13:22Z
+
+[Term]
+id: SO:0001684
+name: experimental_feature_attribute
+def: "An attribute of an experimentally derived feature." [SO:ke]
+synonym: "experimental feature attribute" RELATED []
+is_a: SO:0000733 ! feature_attribute
+created_by: kareneilbeck
+creation_date: 2010-10-28T02:22:23Z
+
+[Term]
+id: SO:0001685
+name: score
+def: "The score of an experimentally derived feature such as a p-value." [SO:ke]
+is_a: SO:0001684 ! experimental_feature_attribute
+created_by: kareneilbeck
+creation_date: 2010-10-28T02:23:16Z
+
+[Term]
+id: SO:0001686
+name: quality_value
+def: "An experimental feature attribute that defines the quality of the feature in a quantitative way, such as a phred quality score." [SO:ke]
+synonym: "quality value" RELATED []
+is_a: SO:0001684 ! experimental_feature_attribute
+created_by: kareneilbeck
+creation_date: 2010-10-28T02:24:11Z
+
+[Term]
+id: SO:0001687
+name: restriction_enzyme_recognition_site
+def: "The nucleotide region (usually a palindrome) that is recognized by a restriction enzyme. This may or may not be equal to the restriction enzyme binding site." [SO:ke]
+synonym: "restriction endonuclease recognition site" EXACT []
+synonym: "restriction enzyme recognition site" EXACT []
+is_a: SO:0001411 ! biological_region
+created_by: kareneilbeck
+creation_date: 2010-10-29T12:29:57Z
+
+[Term]
+id: SO:0001688
+name: restriction_enzyme_cleavage_junction
+def: "The boundary at which a restriction enzyme breaks the nucleotide sequence." [SO:ke]
+synonym: "restriction enzyme cleavage junction" EXACT []
+is_a: SO:0000699 ! junction
+created_by: kareneilbeck
+creation_date: 2010-10-29T12:35:02Z
+
+[Term]
+id: SO:0001689
+name: five_prime_restriction_enzyme_junction
+def: "The restriction enzyme cleavage junction on the 5' strand of the nucleotide sequence." [SO:ke]
+synonym: "5' restriction enzyme junction" EXACT []
+is_a: SO:0001694 ! single_strand_restriction_enzyme_cleavage_site
+relationship: part_of SO:0001692 ! sticky_end_restriction_enzyme_cleavage_site
+created_by: kareneilbeck
+creation_date: 2010-10-29T12:36:24Z
+
+[Term]
+id: SO:0001690
+name: three_prime_restriction_enzyme_junction
+synonym: "3' restriction enzyme junction" EXACT []
+is_a: SO:0001694 ! single_strand_restriction_enzyme_cleavage_site
+relationship: part_of SO:0001692 ! sticky_end_restriction_enzyme_cleavage_site
+created_by: kareneilbeck
+creation_date: 2010-10-29T12:37:52Z
+
+[Term]
+id: SO:0001691
+name: blunt_end_restriction_enzyme_cleavage_site
+synonym: "blunt end restriction enzyme cleavage site" EXACT []
+is_a: SO:0001687 ! restriction_enzyme_recognition_site
+created_by: kareneilbeck
+creation_date: 2010-10-29T12:39:53Z
+
+[Term]
+id: SO:0001692
+name: sticky_end_restriction_enzyme_cleavage_site
+synonym: "sticky end restriction enzyme cleavage site" RELATED []
+is_a: SO:0001687 ! restriction_enzyme_recognition_site
+created_by: kareneilbeck
+creation_date: 2010-10-29T12:40:50Z
+
+[Term]
+id: SO:0001693
+name: blunt_end_restriction_enzyme_cleavage_junction
+def: "A restriction enzyme cleavage site where both strands are cut at the same position." [SO:ke]
+synonym: "blunt end restriction enzyme cleavage site" RELATED []
+is_a: SO:0001688 ! restriction_enzyme_cleavage_junction
+relationship: part_of SO:0001691 ! blunt_end_restriction_enzyme_cleavage_site
+created_by: kareneilbeck
+creation_date: 2010-10-29T12:43:14Z
+
+[Term]
+id: SO:0001694
+name: single_strand_restriction_enzyme_cleavage_site
+def: "A restriction enzyme cleavage site whereby only one strand is cut." [SO:ke]
+synonym: "single strand restriction enzyme cleavage site" RELATED []
+is_a: SO:0001688 ! restriction_enzyme_cleavage_junction
+created_by: kareneilbeck
+creation_date: 2010-10-29T12:44:48Z
+
+[Term]
+id: SO:0001695
+name: restriction_enzyme_single_strand_overhang
+def: "A terminal region of DNA sequence where the end of the region is not blunt ended." [SO:ke]
+synonym: "single strand overhang" EXACT []
+synonym: "sticky end" RELATED []
+is_a: SO:0001411 ! biological_region
+relationship: part_of SO:0001692 ! sticky_end_restriction_enzyme_cleavage_site
+created_by: kareneilbeck
+creation_date: 2010-10-29T12:48:35Z
+
+[Term]
+id: SO:0001696
+name: experimentally_defined_binding_region
+def: "A region that has been implicated in binding although the exact coordinates of binding may be unknown." [SO:ke]
+synonym: "experimentally defined binding region" RELATED []
+is_a: SO:0001410 ! experimental_feature
+created_by: kareneilbeck
+creation_date: 2010-11-02T11:39:59Z
+
+[Term]
+id: SO:0001697
+name: CHiP_seq_region
+def: "A region of sequence identified by CHiP seq technology to contain a protein binding site." [SO:ke]
+synonym: "CHiP seq region" RELATED []
+is_a: SO:0001696 ! experimentally_defined_binding_region
+relationship: contains SO:0000410 ! protein_binding_site
+created_by: kareneilbeck
+creation_date: 2010-11-02T11:43:07Z
+
+[Term]
+id: SO:0001698
+name: ASPE_primer
+def: "\"A primer containing an SNV at the 3' end for accurate genotyping." [http://www.ncbi.nlm.nih.gov/pubmed/11252801]
+synonym: "allele specific primer extension primer" EXACT []
+synonym: "ASPE primer" EXACT []
+is_a: SO:0000112 ! primer
+created_by: kareneilbeck
+creation_date: 2010-11-11T03:25:21Z
+
+[Term]
+id: SO:0001699
+name: dCAPS_primer
+def: "A primer with one or more mis-matches to the DNA template corresponding to a position within a restriction enzyme recognition site." [http://www.ncbi.nlm.nih.gov/pubmed/9628033]
+synonym: "dCAPS primer" EXACT []
+synonym: "derived cleaved amplified polymorphic primer" EXACT []
+is_a: SO:0000112 ! primer
+created_by: kareneilbeck
+creation_date: 2010-11-11T03:27:09Z
 
 [Term]
 id: SO:0001700
@@ -14651,9 +15151,682 @@ created_by: kareneilbeck
 creation_date: 2010-04-13T02:00:06Z
 
 [Term]
+id: SO:0001739
+name: gene_with_non_canonical_start_codon
+def: "A gene with a start codon other than AUG." [SO:xp]
+comment: Requested by flybase, Dec 2010.
+is_a: SO:0000704 ! gene
+intersection_of: SO:0000704 ! gene
+intersection_of: contains SO:0000680 ! non_canonical_start_codon
+created_by: kareneilbeck
+creation_date: 2011-01-10T01:30:31Z
+
+[Term]
+id: SO:0001740
+name: gene_with_start_codon_CUG
+def: "A gene with a translational start codon of CUG." [SO:mc]
+comment: Requested by flybase, Dec 2010.
+is_a: SO:0001739 ! gene_with_non_canonical_start_codon
+created_by: kareneilbeck
+creation_date: 2011-01-10T01:32:35Z
+
+[Term]
+id: SO:0001741
+name: pseudogenic_gene_segment
+def: "A gene segment which when incorporated by somatic recombination in the final gene transcript results in a nonfunctional product." [SO:hd]
+is_a: SO:3000000 ! gene_segment
+created_by: batchelorc
+creation_date: 2011-02-15T05:07:52Z
+
+[Term]
+id: SO:0001742
+name: copy_number_gain
+def: "A sequence alteration whereby the copy number of a given regions is greater than the reference sequence." [SO:ke]
+subset: DBVAR
+synonym: "copy number gain" EXACT []
+synonym: "gain" RELATED dbvar [http://www.ncbi.nlm.nih.gov/dbvar/]
+is_a: SO:0001019 ! copy_number_variation
+created_by: kareneilbeck
+creation_date: 2011-02-28T01:54:09Z
+
+[Term]
+id: SO:0001743
+name: copy_number_loss
+def: "A sequence alteration whereby the copy number of a given region is less than the reference sequence." [SO:ke]
+subset: DBVAR
+synonym: "copy number loss" EXACT []
+synonym: "loss" RELATED dbvar [http://www.ncbi.nlm.nih.gov/dbvar/]
+is_a: SO:0001019 ! copy_number_variation
+created_by: kareneilbeck
+creation_date: 2011-02-28T01:55:02Z
+
+[Term]
+id: SO:0001744
+name: UPD
+def: "Uniparental disomy is a sequence_alteration where a diploid individual receives two copies for all or part of a chromosome from one parent and no copies of the same chromosome or region from the other parent." [SO:BM]
+subset: DBVAR
+synonym: "uniparental disomy" EXACT []
+synonym: "UPD" EXACT dbvar [http://www.ncbi.nlm.nih.gov/dbvar/]
+xref: http:http\://en.wikipedia.org/wiki/Uniparental_disomy "wikipedia"
+is_a: SO:0001059 ! sequence_alteration
+created_by: kareneilbeck
+creation_date: 2011-02-28T02:01:05Z
+
+[Term]
+id: SO:0001745
+name: maternal_uniparental_disomy
+def: "Uniparental disomy is a sequence_alteration where a diploid individual receives two copies for all or part of a chromosome from the mother and no copies of the same chromosome or region from the father." [SO:bm]
+synonym: "maternal uniparental disomy" EXACT []
+is_a: SO:0001744 ! UPD
+created_by: kareneilbeck
+creation_date: 2011-02-28T02:03:01Z
+
+[Term]
+id: SO:0001746
+name: paternal_uniparental_disomy
+def: "Uniparental disomy is a sequence_alteration where a diploid individual receives two copies for all or part of a chromosome from the father and no copies of the same chromosome or region from the mother." [SO:bm]
+synonym: "paternal uniparental disomy" EXACT []
+is_a: SO:0001744 ! UPD
+created_by: kareneilbeck
+creation_date: 2011-02-28T02:03:30Z
+
+[Term]
+id: SO:0001747
+name: open_chromatin_region
+def: "A DNA sequence that in the normal state of the chromosome corresponds to an unfolded, un-complexed stretch of double-stranded DNA." [SO:cb]
+comment: Requested by John Calley 3125900.
+is_a: SO:0001411 ! biological_region
+created_by: kareneilbeck
+creation_date: 2011-02-28T02:21:52Z
+
+[Term]
+id: SO:0001748
+name: SL3_acceptor_site
+def: "A SL2_acceptor_site which appends the SL3 RNA leader sequence to the 5' end of an mRNA. SL3 acceptor sites occur in genes in internal segments of polycistronic transcripts." [SO:nlw]
+is_a: SO:0000709 ! SL2_acceptor_site
+created_by: kareneilbeck
+creation_date: 2011-02-28T02:58:40Z
+
+[Term]
+id: SO:0001749
+name: SL4_acceptor_site
+def: "A SL2_acceptor_site which appends the SL4 RNA leader sequence to the 5' end of an mRNA. SL4 acceptor sites occur in genes in internal segments of polycistronic transcripts." [SO:nlw]
+is_a: SO:0000709 ! SL2_acceptor_site
+created_by: kareneilbeck
+creation_date: 2011-02-28T03:08:47Z
+
+[Term]
+id: SO:0001750
+name: SL5_acceptor_site
+def: "A SL2_acceptor_site which appends the SL5 RNA leader sequence to the 5' end of an mRNA. SL5 acceptor sites occur in genes in internal segments of polycistronic transcripts." [SO:nlw]
+is_a: SO:0000709 ! SL2_acceptor_site
+created_by: kareneilbeck
+creation_date: 2011-02-28T03:09:36Z
+
+[Term]
+id: SO:0001751
+name: SL6_acceptor_site
+def: "A SL2_acceptor_site which appends the SL6 RNA leader sequence to the 5' end of an mRNA. SL6 acceptor sites occur in genes in internal segments of polycistronic transcripts." [SO:nlw]
+is_a: SO:0000709 ! SL2_acceptor_site
+created_by: kareneilbeck
+creation_date: 2011-02-28T03:10:14Z
+
+[Term]
+id: SO:0001752
+name: SL7_acceptor_site
+def: "A SL2_acceptor_site which appends the SL7 RNA leader sequence to the 5' end of an mRNA. SL7 acceptor sites occur in genes in internal segments of polycistronic transcripts." [SO:nlw]
+is_a: SO:0000709 ! SL2_acceptor_site
+created_by: kareneilbeck
+creation_date: 2011-02-28T03:13:20Z
+
+[Term]
+id: SO:0001753
+name: SL8_acceptor_site
+def: "A SL2_acceptor_site which appends the SL8 RNA leader sequence to the 5' end of an mRNA. SL8 acceptor sites occur in genes in internal segments of polycistronic transcripts." [SO:nlw]
+is_a: SO:0000709 ! SL2_acceptor_site
+created_by: kareneilbeck
+creation_date: 2011-02-28T03:15:26Z
+
+[Term]
+id: SO:0001754
+name: SL9_acceptor_site
+def: "A SL2_acceptor_site which appends the SL9 RNA leader sequence to the 5' end of an mRNA. SL9 acceptor sites occur in genes in internal segments of polycistronic transcripts." [SO:nlw]
+is_a: SO:0000709 ! SL2_acceptor_site
+created_by: kareneilbeck
+creation_date: 2011-02-28T03:15:57Z
+
+[Term]
+id: SO:0001755
+name: SL10_accceptor_site
+def: "A SL2_acceptor_site which appends the SL10 RNA leader sequence to the 5' end of an mRNA. SL10 acceptor sites occur in genes in internal segments of polycistronic transcripts." [SO:nlw]
+is_a: SO:0000709 ! SL2_acceptor_site
+created_by: kareneilbeck
+creation_date: 2011-02-28T03:16:31Z
+
+[Term]
+id: SO:0001756
+name: SL11_acceptor_site
+def: "A SL2_acceptor_site which appends the SL11 RNA leader sequence to the 5' end of an mRNA. SL11 acceptor sites occur in genes in internal segments of polycistronic transcripts." [SO:nlw]
+is_a: SO:0000709 ! SL2_acceptor_site
+created_by: kareneilbeck
+creation_date: 2011-02-28T03:16:54Z
+
+[Term]
+id: SO:0001757
+name: SL12_acceptor_site
+def: "A SL2_acceptor_site which appends the SL12 RNA leader sequence to the 5' end of an mRNA. SL12 acceptor sites occur in genes in internal segments of polycistronic transcripts." [SO:nlw]
+is_a: SO:0000709 ! SL2_acceptor_site
+created_by: kareneilbeck
+creation_date: 2011-02-28T03:17:23Z
+
+[Term]
+id: SO:0001758
+name: duplicated_pseudogene
+def: "A pseudogene that arose via gene duplication. Generally duplicated pseudogenes have the same structure as the original gene, including intron-exon structure and some regulatory sequence." [http://en.wikipedia.org/wiki/Pseudogene]
+synonym: "duplicated pseudogene" RELATED []
+is_a: SO:0001760 ! non_processed_pseudogene
+created_by: kareneilbeck
+creation_date: 2011-03-09T09:58:04Z
+
+[Term]
+id: SO:0001759
+name: unitary_pseudogene
+def: "A pseudogene, deactivated from original state by mutation, fixed in a population." [http://en.wikipedia.org/wiki/Pseudogene, SO:ke]
+comment: This is different from a non processed pseudogene because the gene was not duplicated. An example is the L-gulono-lactone oxidase pseudogene in primates.
+synonym: "disabled gene" RELATED []
+synonym: "unitary pseudogene" RELATED []
+is_a: SO:0001760 ! non_processed_pseudogene
+created_by: kareneilbeck
+creation_date: 2011-03-09T10:04:04Z
+
+[Term]
+id: SO:0001760
+name: non_processed_pseudogene
+def: "A pseudogene that arose from a means other than retrotransposition." [SO:ke]
+synonym: "non processed pseudogene" RELATED []
+is_a: SO:0000336 ! pseudogene
+created_by: kareneilbeck
+creation_date: 2011-03-09T10:54:47Z
+
+[Term]
+id: SO:0001761
+name: variant_quality
+def: "A dependent entity that inheres in a bearer, a sequence variant." [PMID:17597783, SO:ke]
+synonym: "variant quality" EXACT []
+is_a: SO:0000400 ! sequence_attribute
+created_by: kareneilbeck
+creation_date: 2011-03-15T03:40:35Z
+
+[Term]
+id: SO:0001762
+name: variant_origin
+def: "A quality inhering in a variant by virtue of its origin." [PMID:17597783, SO:ke]
+synonym: "variant origin" EXACT []
+is_a: SO:0001761 ! variant_quality
+created_by: kareneilbeck
+creation_date: 2011-03-15T03:42:13Z
+
+[Term]
+id: SO:0001763
+name: variant_frequency
+def: "A physical quality which inheres to the variant by virtue of the number instances of the variant within a population." [PMID:17597783, SO:ke]
+synonym: "variant frequency" EXACT []
+is_a: SO:0001761 ! variant_quality
+created_by: kareneilbeck
+creation_date: 2011-03-15T03:44:39Z
+
+[Term]
+id: SO:0001764
+name: unique_variant
+def: "A physical quality which inheres to the variant by virtue of the number instances of the variant within a population." [SO:ke]
+synonym: "unique variant" EXACT []
+is_a: SO:0001763 ! variant_frequency
+created_by: kareneilbeck
+creation_date: 2011-03-15T03:47:20Z
+
+[Term]
+id: SO:0001765
+name: rare_variant
+synonym: "rare variant" EXACT []
+is_a: SO:0001763 ! variant_frequency
+created_by: kareneilbeck
+creation_date: 2011-03-15T03:48:29Z
+
+[Term]
+id: SO:0001766
+name: polymorphic_variant
+synonym: "polymorphic variant" EXACT []
+is_a: SO:0001763 ! variant_frequency
+created_by: kareneilbeck
+creation_date: 2011-03-15T03:48:51Z
+
+[Term]
+id: SO:0001767
+name: common_variant
+synonym: "common variant" EXACT []
+is_a: SO:0001763 ! variant_frequency
+created_by: kareneilbeck
+creation_date: 2011-03-15T03:50:36Z
+
+[Term]
+id: SO:0001768
+name: fixed_variant
+synonym: "fixed variant" EXACT []
+is_a: SO:0001763 ! variant_frequency
+created_by: kareneilbeck
+creation_date: 2011-03-15T03:50:53Z
+
+[Term]
+id: SO:0001769
+name: variant_phenotype
+def: "A quality inhering in a variant by virtue of its phenotype." [PMID:17597783, SO:ke]
+synonym: "variant phenotype" EXACT []
+is_a: SO:0001761 ! variant_quality
+created_by: kareneilbeck
+creation_date: 2011-03-15T03:53:15Z
+
+[Term]
+id: SO:0001770
+name: benign_variant
+synonym: "benign variant" EXACT []
+is_a: SO:0001769 ! variant_phenotype
+created_by: kareneilbeck
+creation_date: 2011-03-15T03:55:40Z
+
+[Term]
+id: SO:0001771
+name: disease_associated_variant
+synonym: "disease associated variant" EXACT []
+is_a: SO:0001769 ! variant_phenotype
+created_by: kareneilbeck
+creation_date: 2011-03-15T04:05:16Z
+
+[Term]
+id: SO:0001772
+name: disease_causing_variant
+synonym: "disease causing variant" EXACT []
+is_a: SO:0001769 ! variant_phenotype
+created_by: kareneilbeck
+creation_date: 2011-03-15T04:05:46Z
+
+[Term]
+id: SO:0001773
+name: lethal_variant
+synonym: "lethal variant" EXACT []
+is_a: SO:0001769 ! variant_phenotype
+created_by: kareneilbeck
+creation_date: 2011-03-15T04:06:22Z
+
+[Term]
+id: SO:0001774
+name: quantitative_variant
+synonym: "quantitative variant" EXACT []
+is_a: SO:0001769 ! variant_phenotype
+created_by: kareneilbeck
+creation_date: 2011-03-15T04:28:13Z
+
+[Term]
+id: SO:0001775
+name: maternal_variant
+synonym: "maternal variant" EXACT []
+is_a: SO:0001762 ! variant_origin
+created_by: kareneilbeck
+creation_date: 2011-03-15T04:30:23Z
+
+[Term]
+id: SO:0001776
+name: paternal_variant
+synonym: "paternal variant" EXACT []
+is_a: SO:0001762 ! variant_origin
+created_by: kareneilbeck
+creation_date: 2011-03-15T04:30:47Z
+
+[Term]
+id: SO:0001777
+name: somatic_variant
+synonym: "somatic variant" EXACT []
+is_a: SO:0001762 ! variant_origin
+created_by: kareneilbeck
+creation_date: 2011-03-15T04:31:12Z
+
+[Term]
+id: SO:0001778
+name: germline_variant
+synonym: "germline variant" EXACT []
+is_a: SO:0001762 ! variant_origin
+created_by: kareneilbeck
+creation_date: 2011-03-15T04:31:46Z
+
+[Term]
+id: SO:0001779
+name: pedigree_specific_variant
+synonym: "pedigree specific variant" EXACT []
+is_a: SO:0001762 ! variant_origin
+created_by: kareneilbeck
+creation_date: 2011-03-15T04:32:18Z
+
+[Term]
+id: SO:0001780
+name: population_specific_variant
+synonym: "population specific variant" EXACT []
+is_a: SO:0001762 ! variant_origin
+created_by: kareneilbeck
+creation_date: 2011-03-15T04:33:05Z
+
+[Term]
+id: SO:0001781
+name: de_novo_variant
+synonym: "de novo variant" EXACT []
+is_a: SO:0001762 ! variant_origin
+created_by: kareneilbeck
+creation_date: 2011-03-15T04:33:34Z
+
+[Term]
+id: SO:0001782
+name: TF_binding_site_variant
+def: "A sequence variant located within a transcription factor binding site." [EBI:fc]
+is_a: SO:0001566 ! regulatory_region_variant
+created_by: kareneilbeck
+creation_date: 2011-03-17T10:59:20Z
+
+[Term]
+id: SO:0001783
+name: missense_codon
+def: "A sequence variant whereby at least one base of a codon is changed resulting in a codon that encodes for a different amino acid." [SO:ke]
+synonym: "missense" EXACT [ftp://ftp.ncbi.nih.gov/snp/specs/docsum_3.1.xsd]
+synonym: "missense codon" EXACT []
+xref: http://en.wikipedia.org/wiki/Missense_mutation
+is_a: SO:0001583 ! non_synonymous_codon
+created_by: kareneilbeck
+creation_date: 2011-03-17T11:08:03Z
+
+[Term]
+id: SO:0001784
+name: complex_structural_alteration
+def: "A structural sequence alteration where there are multiple equally plausible explanations for the change." [SO:ke]
+subset: DBVAR
+synonym: "complex" RELATED dbvar [http://www.ncbi.nlm.nih.gov/dbvar/]
+is_a: SO:0001785 ! structural_alteration
+created_by: kareneilbeck
+creation_date: 2011-03-23T03:21:19Z
+
+[Term]
+id: SO:0001785
+name: structural_alteration
+subset: DBVAR
+is_a: SO:0001059 ! sequence_alteration
+created_by: kareneilbeck
+creation_date: 2011-03-25T02:27:41Z
+
+[Term]
+id: SO:0001786
+name: loss_of_heterozygosity
+subset: DBVAR
+synonym: "LOH" EXACT []
+synonym: "loss of heterozygosity" RELATED []
+is_a: SO:0001060 ! sequence_variant
+created_by: kareneilbeck
+creation_date: 2011-03-25T02:32:58Z
+
+[Term]
+id: SO:0001787
+name: splice_donor_5th_base_variant
+def: "A sequence variant that causes a change at the 5th base pair after the start of the intron in the orientation of the transcript." [EBI:gr]
+synonym: "splice donor 5th base variant" EXACT []
+is_a: SO:0001629 ! splice_site_variant
+created_by: kareneilbeck
+creation_date: 2011-04-05T04:16:28Z
+
+[Term]
+id: SO:0001788
+name: U_box
+def: "An U-box is a conserved T-rich region upstream of a retroviral polypurine tract that is involved in PPT primer creation during reverse transcription." [PMID:10556309, PMID:11577982, PMID:9649446]
+is_a: SO:0000330 ! conserved_region
+relationship: part_of SO:0000186 ! LTR_retrotransposon
+created_by: kareneilbeck
+creation_date: 2011-04-08T10:39:14Z
+
+[Term]
+id: SO:0001789
+name: mating_type_region
+def: "A specialized region in the genomes of some yeast and fungi, the genes of which regulate mating type." [SO:ke]
+xref: http://en.wikipedia.org/wiki/Mating-type_region
+is_a: SO:0005855 ! gene_group
+created_by: kareneilbeck
+creation_date: 2011-04-08T11:14:07Z
+
+[Term]
+id: SO:0001790
+name: paired_end_fragment
+def: "An assembly region that has been sequenced from both ends resulting in a read_pair (mate_pair)." [SO:ke]
+subset: SOFA
+is_a: SO:0000143 ! assembly_component
+created_by: kareneilbeck
+creation_date: 2011-04-14T01:48:20Z
+
+[Term]
+id: SO:0001791
+name: exon_variant
+def: "A sequence variant that changes exon sequence." [SO:ke]
+is_a: SO:0001576 ! transcript_variant
+created_by: kareneilbeck
+creation_date: 2011-05-06T01:51:17Z
+
+[Term]
+id: SO:0001792
+name: non_coding_exon_variant
+def: "A sequence variant that changes non-coding exon sequence." [SO:ke]
+is_a: SO:0001791 ! exon_variant
+created_by: kareneilbeck
+creation_date: 2011-05-06T01:51:59Z
+
+[Term]
+id: SO:0001793
+name: clone_end
+def: "A read from an end of the clone sequence." [SO:ke]
+synonym: "clone end" EXACT []
+is_a: SO:0000150 ! read
+relationship: part_of SO:0000151 ! clone
+created_by: kareneilbeck
+creation_date: 2011-05-13T11:32:27Z
+
+[Term]
+id: SO:0001794
+name: point_centromere
+def: "A point centromere is a relatively small centromere (about 125 bp DNA) in discrete sequence, found in some yeast including S. cerevisiae." [PMID:7502067, SO:vw]
+synonym: "point centromere" EXACT []
+is_a: SO:0000577 ! centromere
+created_by: kareneilbeck
+creation_date: 2011-05-31T12:42:35Z
+
+[Term]
+id: SO:0001795
+name: regional_centromere
+def: "A regional centromere is a large modular centromere found in fission yeast and higher eukaryotes. It consist of a central core region flanked by inverted inner and outer repeat regions." [PMID:7502067, SO:vw]
+synonym: "regional centromere" EXACT []
+is_a: SO:0000577 ! centromere
+created_by: kareneilbeck
+creation_date: 2011-05-31T12:43:07Z
+
+[Term]
+id: SO:0001796
+name: regional_centromere_central_core
+def: "A conserved region within the central region of a modular centromere, where the kinetochore is formed." [SO:vw]
+synonym: "regional centromere central core" EXACT []
+is_a: SO:0000330 ! conserved_region
+relationship: part_of SO:0001795 ! regional_centromere
+created_by: kareneilbeck
+creation_date: 2011-05-31T12:56:30Z
+
+[Term]
+id: SO:0001797
+name: centromeric_repeat
+def: "A repeat region found within the modular centromere." [SO:ke]
+synonym: "centromeric repeat" EXACT []
+is_a: SO:0000657 ! repeat_region
+created_by: kareneilbeck
+creation_date: 2011-05-31T12:59:27Z
+
+[Term]
+id: SO:0001798
+name: regional_centromere_inner_repeat_region
+def: "The inner repeat region of a modular centromere. This region is adjacent to the central core, on each chromosome arm." [SO:vw]
+synonym: "regional centromere inner repeat region" EXACT []
+is_a: SO:0001797 ! centromeric_repeat
+relationship: part_of SO:0001795 ! regional_centromere
+created_by: kareneilbeck
+creation_date: 2011-05-31T01:01:08Z
+
+[Term]
+id: SO:0001799
+name: regional_centromere_outer_repeat_region
+def: "The heterochromatic outer repeat region of a modular centromere. These repeats exist in tandem arrays on both chromosome arms." [SO:vw]
+synonym: "regional centromere outer repeat region" EXACT []
+is_a: SO:0001797 ! centromeric_repeat
+relationship: part_of SO:0001795 ! regional_centromere
+created_by: kareneilbeck
+creation_date: 2011-05-31T01:03:23Z
+
+[Term]
+id: SO:0001800
+name: tasiRNA
+def: "The sequence of a 21 nucleotide double stranded, polyadenylated non coding RNA, transcribed from the TAS gene." [PMID:16145017]
+synonym: "trans acting small interfering RNA" RELATED []
+is_a: SO:0000655 ! ncRNA
+relationship: derives_from SO:0001801 ! tasiRNA_primary_transcript
+created_by: kareneilbeck
+creation_date: 2011-05-31T03:24:06Z
+
+[Term]
+id: SO:0001801
+name: tasiRNA_primary_transcript
+def: "A primary transcript encoding a tasiRNA." [PMID:16145017]
+is_a: SO:0000483 ! nc_primary_transcript
+created_by: kareneilbeck
+creation_date: 2011-05-31T03:27:35Z
+
+[Term]
+id: SO:0001802
+name: increased_polyadenylation_variant
+def: "A transcript processing variant whereby polyadenylation of the encoded transcript is increased with respect to the reference." [SO:ke]
+comment: Term requested by M. Dumontier, June 1 2011.
+synonym: "increased polyadenylation variant" EXACT []
+is_a: SO:0001545 ! polyadenylation_variant
+created_by: kareneilbeck
+creation_date: 2011-06-01T10:53:12Z
+
+[Term]
+id: SO:0001803
+name: decreased_polyadenylation_variant
+def: "A transcript processing variant whereby polyadenylation of the encoded transcript is decreased with respect to the reference." [SO:ke]
+comment: Term requested by M. Dumontier, June 1 2011.
+synonym: "decreased polyadenylation variant" EXACT []
+is_a: SO:0001545 ! polyadenylation_variant
+created_by: kareneilbeck
+creation_date: 2011-06-01T10:53:40Z
+
+[Term]
+id: SO:0001804
+name: DDB_box
+def: "A conserved polypeptide motif that mediates protein-protein interaction and defines adaptor proteins for DDB1/cullin 4 ubiquitin ligases." [PMID:18794354, PMID:19818632]
+comment: Note: PMID:18794354 describes the DDB box, and has lots of alignments, but doesn't actually come out with a consensus sequence.
+synonym: "DDB box" EXACT []
+synonym: "DDB-box" EXACT []
+is_a: SO:0001093 ! protein_protein_contact
+created_by: kareneilbeck
+creation_date: 2011-06-17T12:10:44Z
+
+[Term]
+id: SO:0001805
+name: destruction_box
+def: "A conserved polypeptide motif that can be recognized by both Fizzy/Cdc20- and FZR/Cdh1-activated anaphase-promoting complex/cyclosome (APC/C) and targets a protein for ubiquitination and subsequent degradation by the APC/C. The consensus sequence is RXXLXXXXN." [PMID:12208841, PMID:1842691]
+synonym: "D-box" EXACT []
+synonym: "destruction box" EXACT []
+is_a: SO:0100017 ! polypeptide_conserved_motif
+created_by: kareneilbeck
+creation_date: 2011-06-17T12:16:02Z
+
+[Term]
+id: SO:0001806
+name: ER_retention_signal
+def: "A C-terminal tetrapeptide motif that mediates retention of a protein in (or retrieval to) the endoplasmic reticulum. In mammals the sequence is KDEL, and in fungi HDEL or DDEL." [doi:10.1093/jxb/50.331.157, PMID:2077689]
+synonym: "endoplasmic reticulum retention signal" EXACT []
+synonym: "ER retention signal" EXACT []
+is_a: SO:0001527 ! peptide_localization_signal
+created_by: kareneilbeck
+creation_date: 2011-06-17T12:19:49Z
+
+[Term]
+id: SO:0001807
+name: KEN_box
+def: "A conserved polypeptide motif that can be recognized by FZR/Cdh1-activated anaphase-promoting complex/cyclosome (APC/C) and targets a protein for ubiquitination and subsequent degradation by the APC/C. The consensus sequence is KENXXXN." [PMID:10733526, PMID:1220884, PMID:18426916]
+synonym: "KEN box" EXACT []
+is_a: SO:0100017 ! polypeptide_conserved_motif
+created_by: kareneilbeck
+creation_date: 2011-06-17T12:24:14Z
+
+[Term]
+id: SO:0001808
+name: mitochondrial_targeting_signal
+def: "A polypeptide region that targets a polypeptide to the mitochondrion." [PomBase:mah]
+synonym: "mitochondrial signal sequence" EXACT []
+synonym: "mitochondrial targeting signal" EXACT []
+synonym: "MTS" EXACT []
+is_a: SO:0001527 ! peptide_localization_signal
+created_by: kareneilbeck
+creation_date: 2011-06-17T12:26:35Z
+
+[Term]
+id: SO:0001809
+name: signal_anchor
+def: "A signal sequence that is not cleaved from the polypeptide. Anchors a Type II membrane protein to the membrane." [http://www.cbs.dtu.dk/services/SignalP/background/biobackground.php]
+synonym: "signal anchor" EXACT []
+synonym: "uncleaved signal peptide" EXACT []
+is_a: SO:0000418 ! signal_peptide
+created_by: kareneilbeck
+creation_date: 2011-06-17T12:28:53Z
+
+[Term]
+id: SO:0001810
+name: PIP_box
+def: "A polypeptide region that mediates binding to PCNA. The consensus sequence is QXX(hh)XX(aa), where (h) denotes residues with moderately hydrophobic side chains and (a) denotes residues with highly hydrophobic aromatic side chains." [PMID:9631646]
+synonym: "PIP box" EXACT []
+is_a: SO:0001093 ! protein_protein_contact
+created_by: kareneilbeck
+creation_date: 2011-06-17T12:33:25Z
+
+[Term]
+id: SO:0001811
+name: hosphorylation_site
+def: "A post-translationally modified region in which residues of the protein are modified by phosphorylation." [PomBase:mah]
+synonym: "phosphorylation site" EXACT []
+is_a: SO:0001089 ! post_translationally_modified_region
+created_by: kareneilbeck
+creation_date: 2011-06-17T12:36:20Z
+
+[Term]
+id: SO:0001812
+name: transmembrane_helix
+def: "A region that traverses the lipid bilayer and adopts a helical secondary structure." [PomBase:mah]
+synonym: "transmembrane helix" EXACT []
+is_a: SO:0001114 ! peptide_helix
+relationship: part_of SO:0001077 ! transmembrane_polypeptide_region
+created_by: kareneilbeck
+creation_date: 2011-06-17T12:39:46Z
+
+[Term]
+id: SO:0001813
+name: vacuolar_sorting_signal
+def: "A polypeptide region that targets a polypeptide to the vacuole." [PomBase:mah]
+synonym: "vacuolar sorting signal" EXACT []
+is_a: SO:0001527 ! peptide_localization_signal
+created_by: kareneilbeck
+creation_date: 2011-06-17T12:42:48Z
+
+[Term]
 id: SO:0005836
 name: regulatory_region
-def: "A DNA sequence that controls the expression of a gene." [SO:ke]
+def: "A region of sequence that is involved in the control of a biological process." [SO:ke]
 subset: SOFA
 synonym: "regulatory region" EXACT []
 xref: http://en.wikipedia.org/wiki/Regulatory_region "wiki"
@@ -14717,7 +15890,7 @@ name: primer_binding_site
 def: "Non-covalent primer binding site for initiation of replication, transcription, or reverse transcription." [http://www.ebi.ac.uk/embl/Documentation/FT_definitions/feature_table.html]
 synonym: "primer binding site" EXACT []
 xref: http://en.wikipedia.org/wiki/Primer_binding_site "wiki"
-is_a: SO:0000409 ! binding_site
+is_a: SO:0001655 ! nucleotide_binding_site
 relationship: part_of SO:0000186 ! LTR_retrotransposon
 
 [Term]
@@ -14965,10 +16138,10 @@ is_a: SO:0100001 ! biochemical_region_of_peptide
 [Term]
 id: SO:0100020
 name: polypeptide_DNA_contact
-def: "Residues involved in interactions with DNA." [EBIBS:GAR]
+def: "A binding site that, in the polypeptide molecule, interacts selectively and non-covalently with DNA." [EBIBS:GAR, SO:ke]
 subset: biosapiens
 synonym: "polypeptide DNA contact" EXACT []
-is_a: SO:0000409 ! binding_site
+is_a: SO:0001429 ! DNA_binding_site
 is_a: SO:0100002 ! molecular_contact_region
 
 [Term]
@@ -14982,7 +16155,7 @@ is_a: SO:0000839 ! polypeptide_region
 [Term]
 id: SO:1000002
 name: substitution
-def: "Any change in genomic DNA caused by a single event." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "A sequence alteration where the length of the change in the variant is the same as that of the reference." [SO:ke]
 subset: SOFA
 is_a: SO:0001059 ! sequence_alteration
 is_a: SO:0001411 ! biological_region
@@ -14990,7 +16163,7 @@ is_a: SO:0001411 ! biological_region
 [Term]
 id: SO:1000005
 name: complex_substitution
-def: "When no simple or well defined DNA mutation event describes the observed DNA change, the keyword \"complex\" should be used. Usually there are multiple equally plausible explanations for the change." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "When no simple or well defined DNA mutation event describes the observed DNA change, the keyword \"complex\" should be used. Usually there are multiple equally plausible explanations for the change." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
 subset: SOFA
 synonym: "complex substitution" EXACT []
 is_a: SO:1000002 ! substitution
@@ -15007,7 +16180,7 @@ is_a: SO:0001483 ! SNV
 [Term]
 id: SO:1000009
 name: transition
-def: "Change of a pyrimidine nucleotide, C or T, into an other pyrimidine nucleotide, or change of a purine nucleotide, A or G, into an other purine nucleotide." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "Change of a pyrimidine nucleotide, C or T, into an other pyrimidine nucleotide, or change of a purine nucleotide, A or G, into an other purine nucleotide." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
 is_a: SO:0001483 ! SNV
 
 [Term]
@@ -15027,7 +16200,7 @@ is_a: SO:1000010 ! pyrimidine_transition
 [Term]
 id: SO:1000012
 name: C_to_T_transition_at_pCpG_site
-def: "The transition of cytidine to thymine occurring at a pCpG site as a consequence of the spontaneous deamination of 5'-methylcytidine." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "The transition of cytidine to thymine occurring at a pCpG site as a consequence of the spontaneous deamination of 5'-methylcytidine." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
 synonym: "C to T transition at pCpG site" EXACT []
 is_a: SO:1000011 ! C_to_T_transition
 
@@ -15061,7 +16234,7 @@ is_a: SO:1000014 ! purine_transition
 [Term]
 id: SO:1000017
 name: transversion
-def: "Change of a pyrimidine nucleotide, C or T, into a purine nucleotide, A or G, or vice versa." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "Change of a pyrimidine nucleotide, C or T, into a purine nucleotide, A or G, or vice versa." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
 xref: http://en.wikipedia.org/wiki/Transversion "wiki"
 is_a: SO:0001483 ! SNV
 
@@ -15182,7 +16355,7 @@ intersection_of: has_quality SO:0001511 ! interchromosomal
 [Term]
 id: SO:1000032
 name: indel
-def: "A sequence alteration which included an insertion and a deletion, affecting 2 or more bases." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html, http:http\://www.hgvs.org/mutnomen/recs-DNA.html#indel]
+def: "A sequence alteration which included an insertion and a deletion, affecting 2 or more bases." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html, http:http\://www.hgvs.org/mutnomen/recs-DNA.html#indel]
 comment: Indels can have a different number of bases than the corresponding reference sequence.
 xref: http://en.wikipedia.org/wiki/Indel "wiki"
 is_a: SO:0001059 ! sequence_alteration
@@ -15190,7 +16363,7 @@ is_a: SO:0001059 ! sequence_alteration
 [Term]
 id: SO:1000035
 name: duplication
-def: "One or more nucleotides are added between two adjacent nucleotides in the sequence; the inserted sequence derives from, or is identical in sequence to, nucleotides adjacent to insertion point." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "One or more nucleotides are added between two adjacent nucleotides in the sequence; the inserted sequence derives from, or is identical in sequence to, nucleotides adjacent to insertion point." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
 synonym: "nucleotide duplication" EXACT []
 synonym: "nucleotide_duplication" RELATED []
 is_a: SO:0000667 ! insertion
@@ -15198,8 +16371,10 @@ is_a: SO:0000667 ! insertion
 [Term]
 id: SO:1000036
 name: inversion
-def: "A continuous nucleotide sequence is inverted in the same position." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "A continuous nucleotide sequence is inverted in the same position." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+subset: DBVAR
 subset: SOFA
+synonym: "inversion" EXACT dbvar [http://www.ncbi.nlm.nih.gov/dbvar/]
 is_a: SO:0001059 ! sequence_alteration
 is_a: SO:0001411 ! biological_region
 
@@ -15321,7 +16496,8 @@ id: SO:1000049
 name: sequence_variation_affecting_transcript
 alt_id: SO:1000177
 alt_id: SO:1000179
-def: "Any change in mature, spliced and processed, RNA that results from a change in the corresponding DNA sequence." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "Any change in mature, spliced and processed, RNA that results from a change in the corresponding DNA sequence." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting transcript" EXACT []
 synonym: "mutation causing partially characterised change in transcript" RELATED []
 synonym: "mutation causing uncharacterised change in transcript" RELATED []
@@ -15330,113 +16506,127 @@ synonym: "sequence variant causing uncharacterised change in transcript" EXACT [
 synonym: "sequence variation affecting transcript" EXACT []
 synonym: "sequence_variant_causing_partially_characterised_change_in_transcript" EXACT []
 synonym: "sequence_variant_causing_uncharacterised_change_in_transcript" EXACT []
-is_a: SO:1000132 ! sequence_variant_effect
+is_obsolete: true
+replaced_by: SO:0001576
 
 [Term]
 id: SO:1000050
 name: sequence_variant_causing_no_change_in_transcript
-def: "No effect on the state of the RNA." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "No effect on the state of the RNA." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect. Also as there is not change, it is not a good ontological term.
 synonym: "mutation causing no change in transcript" RELATED []
 synonym: "sequence variant causing no change in transcript" EXACT []
-is_a: SO:1000049 ! sequence_variation_affecting_transcript
-
-[Term]
-id: SO:1000052
-name: sequence_variation_affecting_complex_change_in_transcript
-synonym: "mutation affecting complex change in transcript" EXACT []
-synonym: "sequence variation affecting complex change in transcript" EXACT []
-is_a: SO:1000049 ! sequence_variation_affecting_transcript
+is_obsolete: true
 
 [Term]
 id: SO:1000054
 name: sequence_variation_affecting_coding_sequence
-def: "Any of the amino acid coding triplets of a gene are affected by the DNA mutation." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "Any of the amino acid coding triplets of a gene are affected by the DNA mutation." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting coding sequence" EXACT []
 synonym: "sequence variation affecting coding sequence" RELATED []
-is_a: SO:1000079 ! sequence_variation_affecting_transcript_sequence
+is_obsolete: true
+replaced_by: SO:0001580
 
 [Term]
 id: SO:1000055
 name: sequence_variant_causing_initiator_codon_change_in_transcript
-def: "The DNA mutation changes, usually destroys, the first coding triplet of a gene. Usually prevents translation although another initiator codon may be used." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "The DNA mutation changes, usually destroys, the first coding triplet of a gene. Usually prevents translation although another initiator codon may be used." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing initiator codon change in transcript" RELATED []
 synonym: "sequence variant causing initiator codon change in transcript" EXACT []
-is_a: SO:1000056 ! sequence_variant_causing_amino_acid_coding_codon_change_in_transcript
+is_obsolete: true
+replaced_by: SO:0001582
 
 [Term]
 id: SO:1000056
 name: sequence_variant_causing_amino_acid_coding_codon_change_in_transcript
-def: "The DNA mutation affects the amino acid coding sequence of a gene; this region includes both the initiator and terminator codons." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "The DNA mutation affects the amino acid coding sequence of a gene; this region includes both the initiator and terminator codons." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutaton causing amino acid coding codon change in transcript" RELATED []
 synonym: "sequence variant causing amino acid coding codon change in transcript" EXACT []
-is_a: SO:1000054 ! sequence_variation_affecting_coding_sequence
+is_obsolete: true
+consider: SO:0001606
 
 [Term]
 id: SO:1000057
 name: sequence_variant_causing_synonymous_codon_change_in_transcript
-def: "The changed codon has the same translation product as the original codon." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "The changed codon has the same translation product as the original codon." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing synonymous codon change in transcript" RELATED []
 synonym: "sequence variant causing synonymous codon change in transcript" EXACT []
-is_a: SO:1000056 ! sequence_variant_causing_amino_acid_coding_codon_change_in_transcript
+is_obsolete: true
+replaced_by: SO:0001588
 
 [Term]
 id: SO:1000058
 name: sequence_variant_causing_non_synonymous_codon_change_in_transcript
-def: "A DNA point mutation that causes a substitution of an amino acid by an other." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "A DNA point mutation that causes a substitution of an amino acid by an other." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing non synonymous codon change in transcript" RELATED []
 synonym: "non-synonymous codon change in transcript" EXACT []
 synonym: "sequence variant causing non synonymous codon change in transcript" EXACT []
-is_a: SO:1000056 ! sequence_variant_causing_amino_acid_coding_codon_change_in_transcript
+is_obsolete: true
+consider: SO:0001583
 
 [Term]
 id: SO:1000059
 name: sequence_variant_causing_missense_codon_change_in_transcript
-def: "The nucleotide change in the codon leads to a new codon coding for a new amino acid." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "The nucleotide change in the codon leads to a new codon coding for a new amino acid." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing missense codon change in transcript" RELATED []
 synonym: "sequence variant causing missense codon change in transcript" EXACT []
-is_a: SO:1000058 ! sequence_variant_causing_non_synonymous_codon_change_in_transcript
+is_obsolete: true
+consider: SO:0001583
 
 [Term]
 id: SO:1000060
 name: sequence_variant_causing_conservative_missense_codon_change_in_transcript
-def: "The amino acid change following from the codon change does not change the gross properties (size, charge, hydrophobicity) of the amino acid at that position." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "The amino acid change following from the codon change does not change the gross properties (size, charge, hydrophobicity) of the amino acid at that position." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
 comment: The exact rules need to be stated, a common set of rules can be derived from e.g. BLOSUM62 amino acid distance matrix.
 synonym: "mutation causing conservative missense codon change in transcript" RELATED []
 synonym: "sequence variant causing conservative missense codon change in transcript" EXACT []
-is_a: SO:1000059 ! sequence_variant_causing_missense_codon_change_in_transcript
+is_obsolete: true
+replaced_by: SO:0001585
 
 [Term]
 id: SO:1000061
 name: sequence_variant_causing_nonconservative_missense_codon_change_in_transcript
-def: "The amino acid change following from the codon change changes the gross properties (size, charge, hydrophobicity) of the amino acid in that position." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "The amino acid change following from the codon change changes the gross properties (size, charge, hydrophobicity) of the amino acid in that position." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
 comment: The exact rules need to be stated, a common set of rules can be derived from e.g. BLOSUM62 amino acid distance matrix.
 synonym: "mutation causing nonconservative missense codon change in transcript" RELATED []
 synonym: "sequence variant causing nonconservative missense codon change in transcript" EXACT []
-is_a: SO:1000059 ! sequence_variant_causing_missense_codon_change_in_transcript
+is_obsolete: true
+consider: SO:0001586
 
 [Term]
 id: SO:1000062
 name: sequence_variant_causing_nonsense_codon_change_in_transcript
-def: "The nucleotide change in the codon triplet creates a terminator codon." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "The nucleotide change in the codon triplet creates a terminator codon." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing nonsense codon change in transcript" RELATED []
 synonym: "sequence variant causing nonsense codon change in transcript" EXACT []
-is_a: SO:1000056 ! sequence_variant_causing_amino_acid_coding_codon_change_in_transcript
+is_obsolete: true
+consider: SO:0001587
 
 [Term]
 id: SO:1000063
 name: sequence_variant_causing_terminator_codon_change_in_transcript
 def: "The nucleotide change in the codon triplet changes the stop codon, causing an elongated transcript sequence." [SO:ke]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing terminator codon change in transcript" RELATED []
 synonym: "sequence variant causing terminator codon change in transcript" EXACT []
-is_a: SO:1000054 ! sequence_variation_affecting_coding_sequence
+is_obsolete: true
+consider: SO:0001590
 
 [Term]
 id: SO:1000064
 name: sequence_variation_affecting_reading_frame
-def: "An umbrella term for terms describing an effect of a sequence variation on the frame of translation." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "An umbrella term for terms describing an effect of a sequence variation on the frame of translation." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting reading frame" EXACT []
 synonym: "sequence variation affecting reading frame" RELATED []
-is_a: SO:1000054 ! sequence_variation_affecting_coding_sequence
+is_obsolete: true
 
 [Term]
 id: SO:1000065
@@ -15446,184 +16636,219 @@ synonym: "frameshift mutation" EXACT []
 synonym: "frameshift sequence variation" RELATED []
 synonym: "out of frame mutation" RELATED []
 xref: http://en.wikipedia.org/wiki/Frameshift_mutation "wiki"
-is_a: SO:1000064 ! sequence_variation_affecting_reading_frame
+is_obsolete: true
 
 [Term]
 id: SO:1000066
 name: sequence_variant_causing_plus_1_frameshift_mutation
 def: "A mutation causing a disruption of the translational reading frame, due to the insertion of a nucleotide." [SO:ke]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "plus 1 frameshift mutation" EXACT []
 synonym: "sequence variant causing plus 1 frameshift mutation" EXACT []
-is_a: SO:1000065 ! frameshift_sequence_variation
+is_obsolete: true
+replaced_by: SO:0001594
 
 [Term]
 id: SO:1000067
 name: sequence_variant_causing_minus_1_frameshift
 def: "A mutation causing a disruption of the translational reading frame, due to the deletion of a nucleotide." [SO:ke]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "minus 1 frameshift mutation" EXACT []
 synonym: "sequence variant causing minus 1 frameshift" EXACT []
-is_a: SO:1000065 ! frameshift_sequence_variation
+is_obsolete: true
+replaced_by: SO:0001592
 
 [Term]
 id: SO:1000068
 name: sequence_variant_causing_plus_2_frameshift
 def: "A mutation causing a disruption of the translational reading frame, due to the insertion of two nucleotides." [SO:ke]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "plus 2 frameshift mutation" EXACT []
 synonym: "sequence variant causing plus 2 frameshift" EXACT []
-is_a: SO:1000065 ! frameshift_sequence_variation
+is_obsolete: true
+replaced_by: SO:0001595
 
 [Term]
 id: SO:1000069
 name: sequence_variant_causing_minus_2_frameshift
 def: "A mutation causing a disruption of the translational reading frame, due to the deletion of two nucleotides." [SO:ke]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "minus 2 frameshift mutation" EXACT []
 synonym: "sequence variant causing minus 2 frameshift" EXACT []
-is_a: SO:1000065 ! frameshift_sequence_variation
+is_obsolete: true
+replaced_by: SO:0001593
 
 [Term]
 id: SO:1000070
 name: sequence_variant_affecting_transcript_processing
-def: "Sequence variant affects the way in which the primary transcriptional product is processed to form the mature transcript." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "Sequence variant affects the way in which the primary transcriptional product is processed to form the mature transcript." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting transcript processing" RELATED []
 synonym: "sequence variant affecting transcript processing" EXACT []
-is_a: SO:1000079 ! sequence_variation_affecting_transcript_sequence
+is_obsolete: true
+replaced_by: SO:0001543
 
 [Term]
 id: SO:1000071
 name: sequence_variant_affecting_splicing
-def: "A sequence_variant_effect where the way in which the primary transcriptional product is processed to form the mature transcript, specifically by the removal (splicing) of intron sequences is changed." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "A sequence_variant_effect where the way in which the primary transcriptional product is processed to form the mature transcript, specifically by the removal (splicing) of intron sequences is changed." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting splicing" RELATED []
 synonym: "sequence variant affecting splicing" EXACT []
-is_a: SO:1000132 ! sequence_variant_effect
+is_obsolete: true
+replaced_by: SO:0001568
 
 [Term]
 id: SO:1000072
 name: sequence_variant_affecting_splice_donor
 def: "A sequence_variant_effect that changes the splice donor sequence." [SO:ke]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting splice donor" RELATED []
 synonym: "sequence variant affecting splice donor" RELATED []
 synonym: "splice donor mutation" EXACT []
-is_a: SO:1000071 ! sequence_variant_affecting_splicing
+is_obsolete: true
+replaced_by: SO:0001575
 
 [Term]
 id: SO:1000073
 name: sequence_variant_affecting_splice_acceptor
 def: "A sequence_variant_effect that changes the splice acceptor sequence." [SO:ke]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting splicing" RELATED []
 synonym: "sequence variant affecting splice acceptor" RELATED []
 synonym: "splice acceptor mutation" EXACT []
-is_a: SO:1000071 ! sequence_variant_affecting_splicing
+is_obsolete: true
+replaced_by: SO:0001574
 
 [Term]
 id: SO:1000074
 name: sequence_variant_causing_cryptic_splice_activation
-def: "A sequence variant causing a new (functional) splice site." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "A sequence variant causing a new (functional) splice site." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
 comment: A cryptic splice site is only used when the natural splice site has been disrupted by a sequence alteration.
 synonym: "cryptic splice activator sequence variant" EXACT []
 synonym: "mutation causing cryptic splice activator" RELATED []
 synonym: "sequence variant causing cryptic splice activator" EXACT []
-is_a: SO:1000071 ! sequence_variant_affecting_splicing
+is_obsolete: true
+replaced_by: SO:0001569
 
 [Term]
 id: SO:1000075
 name: sequence_variant_affecting_editing
-def: "Sequence variant affects the editing of the transcript." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "Sequence variant affects the editing of the transcript." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting editing" RELATED []
 synonym: "sequence variant affecting editing" EXACT []
-is_a: SO:1000070 ! sequence_variant_affecting_transcript_processing
+is_obsolete: true
+replaced_by: SO:0001544
 
 [Term]
 id: SO:1000076
 name: sequence_variant_affecting_transcription
-def: "Mutation affects the process of transcription, its initiation, progression or termination." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "Mutation affects the process of transcription, its initiation, progression or termination." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting transcription" RELATED []
 synonym: "sequence variant affecting transcription" EXACT []
-is_a: SO:1000049 ! sequence_variation_affecting_transcript
+is_obsolete: true
+replaced_by: SO:0001549
 
 [Term]
 id: SO:1000078
 name: sequence_variant_decreasing_rate_of_transcription
 def: "A sequence variation that decreases the rate a which transcription of the sequence occurs." [SO:ke]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation decreasing rate of transcription" RELATED []
 synonym: "sequence variation decreasing rate of transcription" EXACT []
-is_a: SO:1000081 ! sequence_variant_affecting_rate_of_transcription
+is_obsolete: true
 
 [Term]
 id: SO:1000079
 name: sequence_variation_affecting_transcript_sequence
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting transcript sequence" EXACT []
 synonym: "sequence variation affecting transcript sequence" EXACT []
-is_a: SO:1000049 ! sequence_variation_affecting_transcript
+is_obsolete: true
 
 [Term]
 id: SO:1000080
 name: sequence_variant_increasing_rate_of_transcription
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation increasing rate of transcription" RELATED []
 synonym: "sequence variation increasing rate of transcription" EXACT []
-is_a: SO:1000081 ! sequence_variant_affecting_rate_of_transcription
+is_obsolete: true
 
 [Term]
 id: SO:1000081
 name: sequence_variant_affecting_rate_of_transcription
 def: "A mutation that alters the rate a which transcription of the sequence occurs." [SO:ke]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting rate of transcription" RELATED []
 synonym: "sequence variant affecting rate of transcription" EXACT []
-is_a: SO:1000076 ! sequence_variant_affecting_transcription
+is_obsolete: true
+replaced_by: SO:0001550
 
 [Term]
 id: SO:1000082
 name: sequence variant_affecting_transcript_stability
-def: "Sequence variant affects the stability of the transcript." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "Sequence variant affects the stability of the transcript." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting transcript stability" RELATED []
 synonym: "sequence variant affecting transcript stability" EXACT []
-is_a: SO:1000079 ! sequence_variation_affecting_transcript_sequence
+is_obsolete: true
+replaced_by: SO:0001546
 
 [Term]
 id: SO:1000083
 name: sequence_variant_increasing_transcript_stability
-def: "Sequence variant increases the stability (half-life) of the transcript." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "Sequence variant increases the stability (half-life) of the transcript." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation increasing transcript stability" RELATED []
 synonym: "sequence variant increasing transcript stability" EXACT []
-is_a: SO:1000082 ! sequence variant_affecting_transcript_stability
+is_obsolete: true
 
 [Term]
 id: SO:1000084
 name: sequence_variant_decreasing_transcript_stability
-def: "Sequence variant decreases the stability (half-life) of the transcript." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "Sequence variant decreases the stability (half-life) of the transcript." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation decreasing transcript stability" RELATED []
 synonym: "sequence variant decreasing transcript stability" EXACT []
-is_a: SO:1000082 ! sequence variant_affecting_transcript_stability
+is_obsolete: true
 
 [Term]
 id: SO:1000085
 name: sequence_variation_affecting_level_of_transcript
 def: "A sequence variation that causes a change in the level of mature, spliced and processed RNA, resulting from a change in the corresponding DNA sequence." [SO:ke]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting level of transcript" RELATED []
 synonym: "sequence variation affecting level of transcript" EXACT []
-is_a: SO:1000049 ! sequence_variation_affecting_transcript
+is_obsolete: true
+replaced_by: SO:0001540
 
 [Term]
 id: SO:1000086
 name: sequence_variation_decreasing_level_of_transcript
 def: "A sequence variation that causes a decrease in the level of mature, spliced and processed RNA, resulting from a change in the corresponding DNA sequence." [SO:ke]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation decreasing level of transcript" EXACT []
 synonym: "sequence variation decreasing level of transcript" RELATED []
-is_a: SO:1000085 ! sequence_variation_affecting_level_of_transcript
+is_obsolete: true
 
 [Term]
 id: SO:1000087
 name: sequence_variation_increasing_level_of_transcript
 def: "A sequence_variation that causes an increase in the level of mature, spliced and processed RNA, resulting from a change in the corresponding DNA sequence." [SO:ke]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation increasing level of transcript" EXACT []
 synonym: "sequence variation increasing level of transcript" EXACT []
-is_a: SO:1000085 ! sequence_variation_affecting_level_of_transcript
+is_obsolete: true
 
 [Term]
 id: SO:1000088
 name: sequence_variant_affecting_translational_product
 alt_id: SO:1000090
 alt_id: SO:1000091
-def: "A sequence variant causing a change in primary translation product of a transcript." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "A sequence variant causing a change in primary translation product of a transcript." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting translational product" RELATED []
 synonym: "mutation causing partially characterised change of translational product" RELATED []
 synonym: "mutation causing uncharacterised change of translational product" RELATED []
@@ -15632,149 +16857,184 @@ synonym: "sequence variant causing partially characterised change of translation
 synonym: "sequence variant causing uncharacterised change of translational product" EXACT []
 synonym: "sequence_variant_causing_partially_characterised_change_of_translational_product" EXACT []
 synonym: "sequence_variant_causing_uncharacterised_change_of_translational_product" EXACT []
-is_a: SO:1000132 ! sequence_variant_effect
+is_obsolete: true
+replaced_by: SO:0001553
 
 [Term]
 id: SO:1000089
 name: sequence_variant_causing_no_change_of_translational_product
-def: "The sequence variant at RNA level does not lead to any change in polypeptide." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "The sequence variant at RNA level does not lead to any change in polypeptide." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect. Also, as there is no change, this is not a good ontological term.
 synonym: "mutation causing no change of translational product" RELATED []
 synonym: "sequence variant causing no change of translational product" EXACT []
-is_a: SO:1000088 ! sequence_variant_affecting_translational_product
+is_obsolete: true
 
 [Term]
 id: SO:1000092
 name: sequence_variant_causing_complex_change_of_translational_product
-def: "Any sequence variant effect that is known at nucleotide level but cannot be explained by using other key terms." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "Any sequence variant effect that is known at nucleotide level but cannot be explained by using other key terms." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing complex change of translational product" RELATED []
 synonym: "sequence variant causing complex change of translational product" EXACT []
-is_a: SO:1000088 ! sequence_variant_affecting_translational_product
+is_obsolete: true
+consider: SO:0001539
 
 [Term]
 id: SO:1000093
 name: sequence_variant_causing_amino_acid_substitution
-def: "The replacement of a single amino acid by another." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "The replacement of a single amino acid by another." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing amino acid substitution" RELATED []
 synonym: "sequence variant causing amino acid substitution" EXACT []
-is_a: SO:1000105 ! sequence_variant_affecting_polypeptide_amino_acid_sequence
+is_obsolete: true
+replaced_by: SO:0001606
 
 [Term]
 id: SO:1000094
 name: sequence_variant_causing_conservative_amino_acid_substitution
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing conservative amino acid substitution" RELATED []
 synonym: "sequence variant causing conservative amino acid substitution" EXACT []
-is_a: SO:1000093 ! sequence_variant_causing_amino_acid_substitution
+is_obsolete: true
+replaced_by: SO:0001607
 
 [Term]
 id: SO:1000095
 name: sequence_variant_causing_nonconservative_amino_acid_substitution
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing nonconservative amino acid substitution" RELATED []
 synonym: "sequence variant causing nonconservative amino acid substitution" EXACT []
-is_a: SO:1000093 ! sequence_variant_causing_amino_acid_substitution
+is_obsolete: true
+replaced_by: SO:0001607
 
 [Term]
 id: SO:1000096
 name: sequence_variant_causing_amino_acid_insertion
-def: "The insertion of one or more amino acids from the polypeptide, without affecting the surrounding sequence." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "The insertion of one or more amino acids from the polypeptide, without affecting the surrounding sequence." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing amino acid insertion" RELATED []
 synonym: "sequence variant causing amino acid insertion" EXACT []
-is_a: SO:1000105 ! sequence_variant_affecting_polypeptide_amino_acid_sequence
+is_obsolete: true
+replaced_by: SO:0001603
 
 [Term]
 id: SO:1000097
 name: sequence_variant_causing_amino_acid_deletion
-def: "The deletion of one or more amino acids from the polypeptide, without affecting the surrounding sequence." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "The deletion of one or more amino acids from the polypeptide, without affecting the surrounding sequence." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing amino acid deletion" RELATED []
 synonym: "sequence variant causing amino acid deletion" EXACT []
-is_a: SO:1000105 ! sequence_variant_affecting_polypeptide_amino_acid_sequence
+is_obsolete: true
+consider: SO:0001583
 
 [Term]
 id: SO:1000098
 name: sequence_variant_causing_polypeptide_truncation
-def: "The translational product is truncated at its C-terminus, usually a result of a nonsense codon change in transcript (SO:1000062)." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "The translational product is truncated at its C-terminus, usually a result of a nonsense codon change in transcript (SO:1000062)." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing polypeptide truncation" RELATED []
 synonym: "sequence variant causing polypeptide truncation" EXACT []
-is_a: SO:1000105 ! sequence_variant_affecting_polypeptide_amino_acid_sequence
+is_obsolete: true
+replaced_by: SO:0001167
 
 [Term]
 id: SO:1000099
 name: sequence_variant_causing_polypeptide_elongation
-def: "The extension of the translational product at either (or both) the N-terminus and/or the C-terminus." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "The extension of the translational product at either (or both) the N-terminus and/or the C-terminus." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing polypeptide elongation" RELATED []
 synonym: "sequence variant causing polypeptide elongation" EXACT []
-is_a: SO:1000105 ! sequence_variant_affecting_polypeptide_amino_acid_sequence
+is_obsolete: true
+replaced_by: SO:0001609
 
 [Term]
 id: SO:1000100
 name: mutation_causing_polypeptide_N_terminal_elongation
-def: "." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing polypeptide N terminal elongation" EXACT []
 synonym: "polypeptide N-terminal elongation" EXACT []
-is_a: SO:1000099 ! sequence_variant_causing_polypeptide_elongation
+is_obsolete: true
+replaced_by: SO:0001611
 
 [Term]
 id: SO:1000101
 name: mutation_causing_polypeptide_C_terminal_elongation
-def: "." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing polypeptide C terminal elongation" EXACT []
 synonym: "polypeptide C-terminal elongation" EXACT []
-is_a: SO:1000099 ! sequence_variant_causing_polypeptide_elongation
+is_obsolete: true
+replaced_by: SO:0001610
 
 [Term]
 id: SO:1000102
 name: sequence_variant_affecting_level_of_translational_product
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting level of translational product" RELATED []
 synonym: "sequence variant affecting level of translational product" EXACT []
-is_a: SO:1000088 ! sequence_variant_affecting_translational_product
+is_obsolete: true
+replaced_by: SO:0001553
 
 [Term]
 id: SO:1000103
 name: sequence_variant_decreasing_level_of_translation_product
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutationdecreasing level of translation product" RELATED []
 synonym: "sequence variant decreasing level of translation product" EXACT []
-is_a: SO:1000102 ! sequence_variant_affecting_level_of_translational_product
+is_obsolete: true
 
 [Term]
 id: SO:1000104
 name: sequence_variant_increasing_level_of_translation_product
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutationt increasing level of translation product" RELATED []
 synonym: "sequence variant increasing level of translation product" EXACT []
-is_a: SO:1000102 ! sequence_variant_affecting_level_of_translational_product
+is_obsolete: true
 
 [Term]
 id: SO:1000105
 name: sequence_variant_affecting_polypeptide_amino_acid_sequence
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting polypeptide amino acid sequence" RELATED []
 synonym: "sequence variant affecting polypeptide amino acid sequence" EXACT []
-is_a: SO:1000088 ! sequence_variant_affecting_translational_product
+is_obsolete: true
+replaced_by: SO:0001603
 
 [Term]
 id: SO:1000106
 name: mutation_causing_inframe_polypeptide_N_terminal_elongation
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "inframe polypeptide N-terminal elongation" EXACT []
 synonym: "mutation causing inframe polypeptide N terminal elongation" EXACT []
-is_a: SO:1000100 ! mutation_causing_polypeptide_N_terminal_elongation
+is_obsolete: true
+replaced_by: SO:0001614
 
 [Term]
 id: SO:1000107
 name: mutation_causing_out_of_frame_polypeptide_N_terminal_elongation
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing out of frame polypeptide N terminal elongation" EXACT []
 synonym: "out of frame polypeptide N-terminal elongation" EXACT []
-is_a: SO:1000100 ! mutation_causing_polypeptide_N_terminal_elongation
+is_obsolete: true
+replaced_by: SO:0001615
 
 [Term]
 id: SO:1000108
 name: mutaton_causing_inframe_polypeptide_C_terminal_elongation
 synonym: "inframe_polypeptide C-terminal elongation" EXACT []
 synonym: "mutaton causing inframe polypeptide C terminal elongation" EXACT []
-is_a: SO:1000101 ! mutation_causing_polypeptide_C_terminal_elongation
+is_obsolete: true
+replaced_by: SO:0001612
 
 [Term]
 id: SO:1000109
 name: mutation_causing_out_of_frame_polypeptide_C_terminal_elongation
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing out of frame polypeptide C terminal elongation" EXACT []
 synonym: "out of frame polypeptide C-terminal elongation" EXACT []
-is_a: SO:1000101 ! mutation_causing_polypeptide_C_terminal_elongation
+is_obsolete: true
+replaced_by: SO:0001613
 
 [Term]
 id: SO:1000110
@@ -15782,7 +17042,7 @@ name: frame_restoring_sequence_variant
 def: "A mutation that reverts the sequence of a previous frameshift mutation back to the initial frame." [SO:ke]
 synonym: "frame restoring mutation" EXACT []
 synonym: "frame restoring sequence variant" EXACT []
-is_a: SO:1000065 ! frameshift_sequence_variation
+is_obsolete: true
 
 [Term]
 id: SO:1000111
@@ -15790,6 +17050,7 @@ name: sequence_variant_affecting_3D_structure_of_polypeptide
 alt_id: SO:1000113
 alt_id: SO:1000114
 def: "A mutation that changes the amino acid sequence of the peptide in such a way that it changes the 3D structure of the molecule." [SO:ke]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting 3D structure of polypeptide" RELATED []
 synonym: "mutation causing partially characterised 3D structural change" RELATED []
 synonym: "mutation causing uncharacterised 3D structural change" RELATED []
@@ -15799,73 +17060,90 @@ synonym: "sequence variant causing partially characterised 3D structural change"
 synonym: "sequence variant causing uncharacterised 3D structural change" EXACT []
 synonym: "sequence_variant_causing_partially_characterised_3D_structural_change" EXACT []
 synonym: "sequence_variant_causing_uncharacterised_3D_structural_change" EXACT []
-is_a: SO:1000088 ! sequence_variant_affecting_translational_product
+is_obsolete: true
+replaced_by: SO:0001599
 
 [Term]
 id: SO:1000112
 name: sequence_variant_causing_no_3D_structural_change
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect. Also as there is no effect, it is not a good term.
 synonym: "mutation causing no 3D structural change" RELATED []
 synonym: "sequence variant causing no 3D structural change" EXACT []
-is_a: SO:1000111 ! sequence_variant_affecting_3D_structure_of_polypeptide
+is_obsolete: true
 
 [Term]
 id: SO:1000115
 name: sequence_variant_causing_complex_3D_structural_change
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing complex 3D structural change" RELATED []
 synonym: "sequence variant causing complex 3D structural change" EXACT []
-is_a: SO:1000111 ! sequence_variant_affecting_3D_structure_of_polypeptide
+is_obsolete: true
+replaced_by: SO:0001600
 
 [Term]
 id: SO:1000116
 name: sequence_variant_causing_conformational_change
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing conformational change" RELATED []
 synonym: "sequence variant causing conformational change" EXACT []
-is_a: SO:1000111 ! sequence_variant_affecting_3D_structure_of_polypeptide
+is_obsolete: true
+replaced_by: SO:0001601
 
 [Term]
 id: SO:1000117
 name: sequence_variant_affecting_polypeptide_function
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting polypeptide function" RELATED []
 synonym: "sequence variant affecting polypeptide function" EXACT []
-is_a: SO:1000088 ! sequence_variant_affecting_translational_product
+is_obsolete: true
+replaced_by: SO:0001554
 
 [Term]
 id: SO:1000118
 name: sequence_variant_causing_loss_of_function_of_polypeptide
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "loss of function of polypeptide" RELATED []
 synonym: "mutation causing loss of function of polypeptide" RELATED []
 synonym: "sequence variant causing loss of function of polypeptide" EXACT []
-is_a: SO:1000117 ! sequence_variant_affecting_polypeptide_function
+is_obsolete: true
+replaced_by: SO:0001559
 
 [Term]
 id: SO:1000119
 name: sequence_variant_causing_inactive_ligand_binding_site
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing inactive ligand binding site" RELATED []
 synonym: "sequence variant causing inactive ligand binding site" EXACT []
-is_a: SO:1000118 ! sequence_variant_causing_loss_of_function_of_polypeptide
+is_obsolete: true
+replaced_by: SO:0001560
 
 [Term]
 id: SO:1000120
 name: sequence_variant_causing_inactive_catalytic_site
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing inactive catalytic site" RELATED []
 synonym: "sequence variant causing inactive catalytic site" EXACT []
-is_a: SO:1000119 ! sequence_variant_causing_inactive_ligand_binding_site
+is_obsolete: true
+replaced_by: SO:0001618
 
 [Term]
 id: SO:1000121
 name: sequence_variant_causing_polypeptide_localization_change
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing polypeptide localization change" RELATED []
 synonym: "sequence variant causing polypeptide localization change" EXACT []
-is_a: SO:1000117 ! sequence_variant_affecting_polypeptide_function
+is_obsolete: true
+replaced_by: SO:0001558
 
 [Term]
 id: SO:1000122
 name: sequence_variant_causing_polypeptide_post_translational_processing_change
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing polypeptide post translational processing change" RELATED []
 synonym: "polypeptide post-translational processing affected" EXACT []
 synonym: "sequence variant causing polypeptide post translational processing change" EXACT []
-is_a: SO:1000117 ! sequence_variant_affecting_polypeptide_function
-is_a: SO:1000118 ! sequence_variant_causing_loss_of_function_of_polypeptide
+is_obsolete: true
+replaced_by: SO:0001562
 
 [Term]
 id: SO:1000123
@@ -15876,49 +17154,58 @@ is_obsolete: true
 [Term]
 id: SO:1000124
 name: sequence_variant_causing_partial_loss_of_function_of_polypeptide
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing partial loss of function of polypeptide" RELATED []
 synonym: "partial loss of function of polypeptide" EXACT []
 synonym: "sequence variant causing partial loss of function of polypeptide" EXACT []
-is_a: SO:1000118 ! sequence_variant_causing_loss_of_function_of_polypeptide
+is_obsolete: true
+replaced_by: SO:0001561
 
 [Term]
 id: SO:1000125
 name: sequence_variant_causing_gain_of_function_of_polypeptide
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "gain of function of polypeptide" EXACT []
 synonym: "mutation causing gain of function of polypeptide" RELATED []
 synonym: "sequence variant causing gain of function of polypeptide" EXACT []
-is_a: SO:1000117 ! sequence_variant_affecting_polypeptide_function
+is_obsolete: true
+replaced_by: SO:0001557
 
 [Term]
 id: SO:1000126
 name: sequence_variant_affecting_transcript_secondary_structure
 def: "A sequence variant that affects the secondary structure (folding) of the RNA transcript molecule." [SO:ke]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting transcript secondary structure" RELATED []
 synonym: "sequence variant affecting transcript secondary structure" EXACT []
-is_a: SO:1000079 ! sequence_variation_affecting_transcript_sequence
+is_obsolete: true
+replaced_by: SO:0001596
 
 [Term]
 id: SO:1000127
 name: sequence_variant_causing_compensatory_transcript_secondary_structure_mutation
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing compensatory transcript secondary structure mutation" RELATED []
 synonym: "sequence variant causing compensatory transcript secondary structure mutation" EXACT []
-is_a: SO:1000126 ! sequence_variant_affecting_transcript_secondary_structure
+is_obsolete: true
+replaced_by: SO:0001597
 
 [Term]
 id: SO:1000132
 name: sequence_variant_effect
 def: "The effect of a change in nucleotide sequence." [SO:ke]
-comment: Updated after discussion with Peter Taschner - Feb 09.
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.\nUpdated after discussion with Peter Taschner - Feb 09.
 synonym: "sequence variant effect" RELATED []
-disjoint_from: SO:0000240 ! chromosome_variation
-disjoint_from: SO:0000400 ! sequence_attribute
+is_obsolete: true
 
 [Term]
 id: SO:1000134
 name: sequence_variant_causing_polypeptide_fusion
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing polypeptide fusion" RELATED []
 synonym: "sequence variant causing polypeptide fusion" EXACT []
-is_a: SO:1000105 ! sequence_variant_affecting_polypeptide_amino_acid_sequence
+is_obsolete: true
+replaced_by: SO:0001616
 
 [Term]
 id: SO:1000136
@@ -16160,7 +17447,9 @@ intersection_of: has_part SO:1000036 ! inversion
 [Term]
 id: SO:1000173
 name: tandem_duplication
-def: "A duplication consisting of 2 identical regions, which are adjacent." [SO:ke]
+def: "A duplication consisting of 2 identical adjacent regions." [SO:ke]
+subset: DBVAR
+synonym: "erverted" RELATED dbvar [http://www.ncbi.nlm.nih.gov/dbvar/]
 synonym: "tandem duplication" EXACT []
 is_a: SO:1000035 ! duplication
 
@@ -16174,17 +17463,21 @@ is_a: SO:1000170 ! uncharacterised_chromosomal_mutation
 id: SO:1000180
 name: sequence_variant_affecting_gene_structure
 def: "A sequence_variant_effect that changes the gene structure." [SO:ke]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation affecting gene structure" RELATED []
 synonym: "sequence variant affecting gene structure" EXACT []
-is_a: SO:1000132 ! sequence_variant_effect
+is_obsolete: true
+replaced_by: SO:0001564
 
 [Term]
 id: SO:1000181
 name: sequence_variant_causing_gene_fusion
 def: "A sequence_variant_effect that changes the gene structure by causing a fusion to another gene." [SO:ke]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causing gene fusion" RELATED []
 synonym: "sequence variant causing gene fusion" EXACT []
-is_a: SO:1000180 ! sequence_variant_affecting_gene_structure
+is_obsolete: true
+replaced_by: SO:0001565
 
 [Term]
 id: SO:1000182
@@ -16203,29 +17496,35 @@ is_a: SO:0000240 ! chromosome_variation
 id: SO:1000184
 name: sequence_variant_causes_exon_loss
 def: "A sequence variant affecting splicing and causes an exon loss." [SO:ke]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causes exon loss" RELATED []
 synonym: "sequence variant causes exon loss" EXACT []
-is_a: SO:1000071 ! sequence_variant_affecting_splicing
+is_obsolete: true
 
 [Term]
 id: SO:1000185
 name: sequence_variant_causes_intron_gain
-def: "A sequence variant effect, causing an intron to be gained by the processed transcript; usually a result of a donor acceptor mutation (SO:1000072)." [http://www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+def: "A sequence variant effect, causing an intron to be gained by the processed transcript; usually a result of a donor acceptor mutation (SO:1000072)." [EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html]
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "mutation causes intron gain" RELATED []
 synonym: "sequence variant causes intron gain" EXACT []
-is_a: SO:1000071 ! sequence_variant_affecting_splicing
+is_obsolete: true
 
 [Term]
 id: SO:1000186
 name: sequence_variant_causing_cryptic_splice_donor_activation
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "sequence variant causing cryptic splice donor activation" EXACT []
-is_a: SO:1000074 ! sequence_variant_causing_cryptic_splice_activation
+is_obsolete: true
+replaced_by: SO:0001571
 
 [Term]
 id: SO:1001186
 name: sequence_variant_causing_cryptic_splice_acceptor_activation
+comment: OBSOLETE: This term was deleted as it conflated more than one term. The alteration is separate from the effect.
 synonym: "sequence variant causing cryptic splice acceptor activation" EXACT []
-is_a: SO:1000074 ! sequence_variant_causing_cryptic_splice_activation
+is_obsolete: true
+replaced_by: SO:0001570
 
 [Term]
 id: SO:1001187
@@ -16598,7 +17897,7 @@ is_a: SO:0000842 ! gene_component_region
 [Typedef]
 id: adjacent_to
 name: adjacent_to
-def: "A geometric operator, specified in Egenhofer 1989. Two features meet if they share a junction on the sequence." [SO:ke]
+def: "A geometric operator, specified in Egenhofer 1989. Two features meet if they share a junction on the sequence. X adjacent_to Y iff X and Y share a boundary but do not overlap." [PMID:20226267, SO:ke]
 subset: SOFA
 
 [Typedef]
@@ -16615,10 +17914,44 @@ is_transitive: true
 is_a: evidence_for_feature ! evidence_for_feature
 
 [Typedef]
+id: connects_on
+name: connects_on
+def: "X connects_on Y, Z, R iff whenever Z is on a R, X is adjacent to a Y and adjacent to a Z." [PMID:20226267]
+comment: Example: A splice_junction connects_on exon, exon, mature_transcript.
+created_by: kareneilbeck
+creation_date: 2010-10-14T01:38:51Z
+
+[Typedef]
+id: contained_by
+name: contained_by
+def: "X contained_by Y iff X starts after start of Y and X ends before end of Y." [PMID:20226267]
+comment: The inverse is contains. Example: intein contained_by immature_peptide_region.
+is_transitive: true
+created_by: kareneilbeck
+creation_date: 2010-10-14T01:26:16Z
+
+[Typedef]
+id: contains
+name: contains
+def: "The inverse of contained_by." [PMID:20226267]
+comment: Example: pre_miRNA contains miRNA_loop.
+is_transitive: true
+created_by: kareneilbeck
+creation_date: 2010-10-14T01:32:15Z
+
+[Typedef]
 id: derives_from
 name: derives_from
 subset: SOFA
 is_transitive: true
+
+[Typedef]
+id: disconnected_from
+name: disconnected_from
+def: "X is disconnected_from Y iff it is not the case that X overlaps Y." [PMID:20226267]
+comment: Example: intron disconnected from exon \{on primary_transcript}.
+created_by: kareneilbeck
+creation_date: 2010-10-14T01:42:10Z
 
 [Typedef]
 id: edited_from
@@ -16646,6 +17979,22 @@ def: "X is exemplar of Y if X is the best evidence for Y." [SO:ke]
 comment: Tracker id: 2594157.
 
 [Typedef]
+id: finished_by
+name: finished_by
+def: "Xy is finished_by Y if Y part of X, and X and Y share a 3' boundary." [PMID:20226267]
+comment: Example CDS finished_by stop_codon.
+created_by: kareneilbeck
+creation_date: 2010-10-14T01:45:45Z
+
+[Typedef]
+id: finishes
+name: finishes
+def: "X finishes Y if X is part_of Y and X and Y share a 3' or C terminal boundary." [PMID:20226267]
+comment: Example: stop_codon finishes CDS.
+created_by: kareneilbeck
+creation_date: 2010-10-14T02:17:53Z
+
+[Typedef]
 id: genome_of
 name: genome_of
 
@@ -16662,10 +18011,11 @@ created_by: kareneilbeck
 creation_date: 2009-08-19T02:27:24Z
 
 [Typedef]
-id: has_intergral_part
+id: has_integral_part
 name: has_integral_part
 def: "X has_integral_part Y if and only if: X has_part Y and Y part_of X." [http://precedings.nature.com/documents/3495/version/1]
 comment: Example: mRNA has_integral_part CDS.
+is_a: has_part ! has_part
 created_by: kareneilbeck
 creation_date: 2009-08-19T12:01:46Z
 
@@ -16696,8 +18046,25 @@ id: integral_part_of
 name: integral_part_of
 def: "X integral_part_of Y if and only if: X part_of Y and Y has_part X." [http://precedings.nature.com/documents/3495/version/1]
 comment: Example: exon integral_part_of transcript.
+is_a: part_of ! part_of
 created_by: kareneilbeck
 creation_date: 2009-08-19T12:03:28Z
+
+[Typedef]
+id: is_consecutive_sequence_of
+name: is_consecutive_sequence_of
+def: "R is_consecutive_sequence_of R iff every instance of R is equivalent to a collection of instances of U:u1, u2, un, such that no pair of ux uy is overlapping and for all ux, it is adjacent to ux-1 and ux+1, with the exception of the initial and terminal u1,and un (which may be identical)." [PMID:20226267]
+comment: Example: region is consecutive_sequence of base.
+created_by: kareneilbeck
+creation_date: 2010-10-14T02:19:48Z
+
+[Typedef]
+id: maximally_overlaps
+name: maximally_overlaps
+def: "A maximally_overlaps X iff all parts of A (including A itself) overlap both A and Y." [PMID:20226267]
+comment: Example: non_coding_region_of_exon maximally_overlaps the intersections of exon and UTR.
+created_by: kareneilbeck
+creation_date: 2010-10-14T01:34:48Z
 
 [Typedef]
 id: member_of
@@ -16705,6 +18072,7 @@ name: member_of
 comment: A subtype of part_of. Inverse is collection_of. Winston, M, Chaffin, R, Herrmann: A taxonomy of part-whole relations. Cognitive Science 1987, 11:417-444.
 subset: SOFA
 is_transitive: true
+is_a: part_of ! part_of
 
 [Typedef]
 id: non_functional_homolog_of
@@ -16719,6 +18087,14 @@ name: orthologous_to
 subset: SOFA
 is_symmetric: true
 is_a: homologous_to ! homologous_to
+
+[Typedef]
+id: overlaps
+name: overlaps
+def: "X overlaps Y iff there exists some Z such that Z contained_by X and Z contained_by Y." [PMID:20226267]
+comment: Example: coding_exon overlaps CDS.
+created_by: kareneilbeck
+creation_date: 2010-10-14T01:33:15Z
 
 [Typedef]
 id: paralogous_to
@@ -16782,6 +18158,22 @@ id: similar_to
 name: similar_to
 subset: SOFA
 is_symmetric: true
+
+[Typedef]
+id: started_by
+name: started_by
+def: "X is strted_by Y if Y is part_of X and X and Y share a 5' boundary." [PMID:20226267]
+comment: Example: CDS started_by start_codon.
+created_by: kareneilbeck
+creation_date: 2010-10-14T01:43:55Z
+
+[Typedef]
+id: starts
+name: starts
+def: "X starts Y if X is part of Y, and A and Y share a 5' or N-terminal boundary." [PMID:20226267]
+comment: Example: start_codon starts CDS.
+created_by: kareneilbeck
+creation_date: 2010-10-14T01:47:53Z
 
 [Typedef]
 id: trans_spliced_from

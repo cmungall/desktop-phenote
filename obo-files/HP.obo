@@ -34637,7 +34637,6 @@ id: HP:0003722
 name: Neck flexor weakness
 namespace: medical_genetics
 alt_id: HP:0000469
-alt_id: HP:0003722
 def: "Weakness of the muscles involved in neck flexion (sternocleidomastoid, longus capitus, longus colli, and scalenus anterior)." [HPO:curators]
 synonym: "Neck flexion weakness" EXACT []
 synonym: "Neck flexor muscle weakness" EXACT []
