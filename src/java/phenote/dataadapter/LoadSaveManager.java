@@ -1,5 +1,6 @@
 package phenote.dataadapter;
 
+import java.awt.Dimension;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -219,18 +220,16 @@ public class LoadSaveManager {
   private void checkConstraints() throws ConstraintEx {
     ConstraintStatus cs = ConstraintManager.inst().checkCommitConstraints();
     
-//    log().debug("checkConstraints:"); // DEL
-//    new Throwable().printStackTrace(); // DEL
-
     // FAILURE - no commit
     if (cs.isFailure()) {
       String m = "There is a problem with your commit:\n"+cs.getFailureMessage()+
         "Commit cancelled. You must fix this.";
       JTextArea area = new JTextArea(m);
-      area.setRows(10);
-      area.setColumns(50);
+      //      area.setRows(20);
+      //      area.setColumns(80);
       area.setLineWrap(true);
       JScrollPane pane = new JScrollPane(area);
+      pane.setPreferredSize(new Dimension(500,200));
       JOptionPane.showMessageDialog(null,pane,"Commit failed",JOptionPane.ERROR_MESSAGE);
       throw new ConstraintEx(m);
     }
@@ -240,11 +239,12 @@ public class LoadSaveManager {
       String m = "There is a problem with your commit--save anyway?\n\n" +
         cs.getWarningMessage();
       JTextArea area = new JTextArea(m);
-      area.setRows(10);
-      area.setColumns(50);
+      //      area.setRows(20);
+      //      area.setColumns(80);
       area.setLineWrap(true);
       JScrollPane pane = new JScrollPane(area);
-       int ret = JOptionPane.showConfirmDialog(null,pane,"Commit Warning",
+      pane.setPreferredSize(new Dimension(500,200));
+      int ret = JOptionPane.showConfirmDialog(null,pane,"Commit Warning",
                                               JOptionPane.YES_NO_OPTION,
                                               JOptionPane.ERROR_MESSAGE);
       if (ret != JOptionPane.YES_OPTION)
