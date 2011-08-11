@@ -211,3 +211,21 @@ to purl.org.  Note that the human phenotype ontology files are now called
 HP.obo and HP_XP.obo rather than human_phenotype.obo and
 human_phenotype_xp.obo; however, Sandra's local file is still called
 human_phenotype.obo.  Let me know if you want to change that.
+
+1.8.7 (Aug 2011):
+- Improved protocol for updating ontology files from repository.
+In many cases, these ontology files don't have a date (though I think
+they all should have a date or a version), and in the past, these were
+updated (wastefully) every time Phenote started up.  Now it checks
+whether your local version is less than six days old, and if it is, then
+it doesn't update from the repository.  (If you know there was a recent
+update that you want, you can of course always update your local copy
+by hand.)
+This should save a lot of time on startup--in particular, we can avoid
+unnecessarily downloading omim.obo every time!
+- Date Created field is now visible (in human-annotation.cfg--visibility
+is controlled in the config file) but not editable (you can try to change it
+but it goes back to what it was).
+- Date Created is automatically filled in for newly-created annotations
+(it's round-tripped for existing ones).  Fixes bug
+https://sourceforge.net/tracker/?func=detail&aid=3389282&group_id=76834&atid=887913
