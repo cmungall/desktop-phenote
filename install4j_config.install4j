@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="4.0.8" transformSequenceNumber="1">
   <directoryPresets config="./doc/LICENSE" />
-  <application name="Phenote" distributionSourceDir="" applicationId="7283-8148-3557-1500" mediaDir="./releases" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.version}_${compiler:sys.platform}_install4j" compression="9" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" keepModificationTimes="false" shortName="Phenote" publisher="BBOP" publisherWeb="" version="1.8.6" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" javaMinVersion="1.5" javaMaxVersion="" allowBetaVM="true">
+  <application name="Phenote" distributionSourceDir="" applicationId="7283-8148-3557-1500" mediaDir="./releases" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.version}_${compiler:sys.platform}_install4j" compression="9" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" keepModificationTimes="false" shortName="Phenote" publisher="BBOP" publisherWeb="" version="1.8.7" allPathsRelative="true" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" javaMinVersion="1.5" javaMaxVersion="" allowBetaVM="true">
     <languages skipLanguageSelection="false">
       <principalLanguage id="en" customLocalizationFile="" />
       <additionalLanguages />
@@ -36,9 +36,12 @@
         </exclude>
       </dirEntry>
       <fileEntry mountPoint="9322" file="./doc/LICENSE" overwrite="1" shared="false" mode="644" uninstallMode="0" />
-      <dirEntry mountPoint="5" file="./conf" overwrite="4" shared="false" mode="644" uninstallMode="0" excludeSuffixes="CVS, .svn" dirMode="755">
+      <dirEntry mountPoint="5" file="./conf" overwrite="4" shared="false" mode="644" uninstallMode="0" excludeSuffixes=".svn, ~, xml, rnc, attic" dirMode="755">
         <exclude>
           <entry location=".svn" launcher="false" />
+        </exclude>
+        <exclude>
+          <entry location="./conf/attic" launcher="false" />
         </exclude>
       </dirEntry>
       <dirEntry mountPoint="6" file="./images" overwrite="4" shared="false" mode="644" uninstallMode="0" excludeSuffixes="CVS, .svn" dirMode="755">
@@ -367,6 +370,39 @@ configurationObject.setValue(val);</initScript>
               </java>
             </serializedBean>
             <condition>Util.isMacOS() &amp;&amp; context.getVariable("phenote.memoryAlloc") != null</condition>
+          </action>
+          <action name="" id="9326" beanClass="com.install4j.runtime.beans.actions.files.DeleteFileAction" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+            <serializedBean>
+              <java class="java.beans.XMLDecoder">
+                <object class="com.install4j.runtime.beans.actions.files.DeleteFileAction">
+                  <void property="file">
+                    <object class="java.io.File">
+                      <string>${installer:sys.installationDir}/Phenote.apps/Contents/MacOS/JavaApplicationStub</string>
+                    </object>
+                  </void>
+                </object>
+              </java>
+            </serializedBean>
+            <condition>Util.isMacOS()</condition>
+          </action>
+          <action name="" id="9327" beanClass="com.install4j.runtime.beans.actions.files.CreateSymlinkAction" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+            <serializedBean>
+              <java class="java.beans.XMLDecoder">
+                <object class="com.install4j.runtime.beans.actions.files.CreateSymlinkAction">
+                  <void property="file">
+                    <object class="java.io.File">
+                      <string>/System/Library/Frameworks/JavaVM.framework/Resources/MacOS/JavaApplicationStub</string>
+                    </object>
+                  </void>
+                  <void property="linkFile">
+                    <object class="java.io.File">
+                      <string>${installer:sys.installationDir}/Phenote.apps/Contents/MacOS/JavaApplicationStub</string>
+                    </object>
+                  </void>
+                </object>
+              </java>
+            </serializedBean>
+            <condition>Util.isMacOS()</condition>
           </action>
         </actions>
         <formComponents />
