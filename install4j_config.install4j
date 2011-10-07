@@ -115,7 +115,129 @@
         </serializedBean>
         <condition />
         <validation />
-        <actions />
+        <actions>
+          <action name="" id="9362" beanClass="com.install4j.runtime.beans.actions.control.SetVariableAction" rollbackBarrier="false" multiExec="false" failureStrategy="1" errorMessage="">
+            <serializedBean>
+              <java class="java.beans.XMLDecoder">
+                <object class="com.install4j.runtime.beans.actions.control.SetVariableAction">
+                  <void property="script">
+                    <object class="com.install4j.api.beans.ScriptProperty">
+                      <void property="value">
+                        <string>int maxMemory = new Long(SystemInfo.getPhysicalMemory() / 1024 / 1024).intValue();		
+		if (Util.isMacOS()) {
+			// special case MacOS: the installer gives you too low values for max
+			// memory. Use system tools instead.
+			try {
+				// Execute command
+				String cmd = "sysctl hw.memsize";
+				Process child = Runtime.getRuntime().exec(cmd);
+
+				// Get the input stream and read from it
+				java.io.InputStream in = child.getInputStream();
+				StringBuilder sb = new StringBuilder();
+				int c;
+				while ((c = in.read()) != -1) {
+					sb.append((char) c);
+				}
+				in.close();
+				java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("hw.memsize:\\s+(\\d+)\\s*");
+				java.util.regex.Matcher matcher = pattern.matcher(sb);
+				if (matcher.find()) {
+					maxMemory = new Long(Long.parseLong(matcher.group(1)) / 1024L / 1024L).intValue();
+				}
+			} catch (java.io.IOException e) {
+			} catch (NumberFormatException e) {
+			}
+
+			// The MacOS 64 bit check is three part: has 64-bit java version, 64-bit OS, and 64-bit ApplicationStub
+			boolean is64bitDefaultJava = false;
+			try {
+				// Check default java if it is 64-bit
+				String cmd = "java -version";
+				Process child = Runtime.getRuntime().exec(cmd);
+
+				// Get the input stream and read from it
+				java.io.InputStream in = child.getErrorStream();
+				StringBuilder sb = new StringBuilder();
+				int c;
+				while ((c = in.read()) != -1) {
+					sb.append((char) c);
+				}
+				in.close();
+				is64bitDefaultJava = sb.toString().toLowerCase().contains("64-bit");
+			} catch (java.io.IOException e) {
+			}
+			boolean is64bit = false;
+			if (is64bitDefaultJava) {
+				boolean is64bitOS = false;
+				try {
+					// Try to call uname to check for 64-bit OS
+					// Execute command
+					String cmd = "uname -pm";
+					Process child = Runtime.getRuntime().exec(cmd);
+	
+					// Get the input stream and read from it
+					java.io.InputStream in = child.getInputStream();
+					StringBuilder sb = new StringBuilder();
+					int c;
+					while ((c = in.read()) != -1) {
+						sb.append((char) c);
+					}
+					in.close();
+					String uname = sb.toString().toLowerCase();
+					is64bitOS = uname.contains("x86_64");
+				} catch (java.io.IOException e) {
+				}
+				if (is64bitOS) {
+					try {
+						// Try to call JavaApplicationstub to check, if it also is 64 bit capable
+						// Execute command file for default JavaApplicationStub
+						String cmd = "file /System/Library/Frameworks/JavaVM.framework/Resources/MacOS/JavaApplicationStub";
+						Process child = Runtime.getRuntime().exec(cmd);
+
+						// Get the input stream and read from it
+						java.io.InputStream in = child.getInputStream();
+						StringBuilder sb = new StringBuilder();
+						int c;
+						while ((c = in.read()) != -1) {
+							sb.append((char) c);
+						}
+						in.close();
+						is64bit = sb.toString().toLowerCase().contains("x86_64");
+					} catch (java.io.IOException e) {
+					}
+				}
+			}
+			if(!is64bit) {
+				maxMemory = Math.min(maxMemory, 1860);
+			}
+			return maxMemory;
+		} else {
+			// the 'os.arch' property gives you the bits for the running JavaVM not the OS.
+			String arch = System.getProperty("os.arch");
+			boolean is64bit = (arch != null) &amp;&amp; (arch.contains("x86_64") || arch.contains("amd64"));
+			if(!is64bit) {
+				int limit = 1860;
+				if(Util.isWindows()) {
+					// 32 bit windows JavaVM has lower limits.
+					limit = 1024;
+				}
+				maxMemory = Math.min(maxMemory, limit);
+			}
+			return maxMemory;
+		}</string>
+                      </void>
+                    </object>
+                  </void>
+                  <void property="variableName">
+                    <string>phenote.maxMemorySize</string>
+                  </void>
+                </object>
+              </java>
+            </serializedBean>
+            <condition />
+          </action>
+        </actions>
         <formComponents />
       </screen>
       <screen name="" id="27" beanClass="com.install4j.runtime.beans.screens.InstallationDirectoryScreen" rollbackBarrier="false" backButton="2" finishScreen="false">
@@ -201,7 +323,7 @@ It is recommended that you allocate as much memory as possible. The installer ha
                     <int>1024</int>
                   </void>
                   <void property="labelText">
-                    <string>Maximum Memory for Phenote (in Mb)</string>
+                    <string>Maximum Memory for Phenote (in MB)</string>
                   </void>
                   <void property="maxValue">
                     <int>2048</int>
@@ -218,10 +340,17 @@ It is recommended that you allocate as much memory as possible. The installer ha
                 </object>
               </java>
             </serializedBean>
-            <initScript>Integer val;
-val = new Integer((int) Math.max(1024,
-(Math.round(SystemInfo.getPhysicalMemory() * 0.8 / 1024 / 1024) / 128) * 128));
-configurationObject.setValue(val);</initScript>
+            <initScript>int val;
+int maxMemory = (Integer) context.getVariable("phenote.maxMemorySize");
+if (maxMemory &lt;= 1860) {
+    val = maxMemory;
+}
+else {
+    val = (int) Math.max(((Math.round(maxMemory * 0.6) / 128) *128), 1860);
+}
+// create a new model for the spinner
+javax.swing.SpinnerNumberModel model = new javax.swing.SpinnerNumberModel(val, 256, maxMemory, 128);
+configurationObject.setModel(model);</initScript>
           </formComponent>
         </formComponents>
       </screen>
