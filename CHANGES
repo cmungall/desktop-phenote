@@ -1,3 +1,39 @@
+================ 
+Changes in latest release
+================
+
+1.8.7:
+- Improved protocol for updating ontology files from repository.
+In many cases, these ontology files don't have a date (though I think
+they all should have a date or a version), and in the past, these were
+updated (wastefully) every time Phenote started up.  Now it checks
+whether your local version is less than six days old, and if it is, then
+it doesn't update from the repository.  (If you know there was a recent
+update that you want, you can of course always update your local copy
+by hand.)
+This should save a lot of time on startup--in particular, we can avoid
+unnecessarily downloading omim.obo every time!
+- Date Created field is now visible (in human-annotation.cfg--visibility
+is controlled in the config file) but not editable (you can try to change it
+but it goes back to what it was).
+- Date Created is automatically filled in for newly-created annotations
+(it's round-tripped for existing ones).  Fixes bug
+https://sourceforge.net/tracker/?func=detail&aid=3389282&group_id=76834&atid=887913
+- Heiko improved the installer so that if you have a 64-bit computer with
+64-bit Java, the installer will install Phenote so that it will launch in
+64-bit mode.  The installer tries to detect if you have a 64-bit machine, in
+which case it suggests a larger memory allocation, but it is (by necessity)
+conservative about this (because if it suggested a too-high memory setting you
+wouldn't be able to launch OE at all), so it may limit you to an 1860M
+setting. If this happens, you can hand-edit Phenote.vmoptions and put a
+higher memory setting (up to the amount of physical memory on your computer),
+and then relaunch OE (twice, if you're on a Mac).
+
+
+=================
+Changes in earlier releases
+=================
+
 Changes in versions 1.7-beta1-5:
 - Phenote+ is now just called Phenote.  The old Phenote will be de-supported.
 - Added support for proxies.  Users can now set proxy via a GUI.  All
@@ -211,21 +247,3 @@ to purl.org.  Note that the human phenotype ontology files are now called
 HP.obo and HP_XP.obo rather than human_phenotype.obo and
 human_phenotype_xp.obo; however, Sandra's local file is still called
 human_phenotype.obo.  Let me know if you want to change that.
-
-1.8.7 (Aug 2011):
-- Improved protocol for updating ontology files from repository.
-In many cases, these ontology files don't have a date (though I think
-they all should have a date or a version), and in the past, these were
-updated (wastefully) every time Phenote started up.  Now it checks
-whether your local version is less than six days old, and if it is, then
-it doesn't update from the repository.  (If you know there was a recent
-update that you want, you can of course always update your local copy
-by hand.)
-This should save a lot of time on startup--in particular, we can avoid
-unnecessarily downloading omim.obo every time!
-- Date Created field is now visible (in human-annotation.cfg--visibility
-is controlled in the config file) but not editable (you can try to change it
-but it goes back to what it was).
-- Date Created is automatically filled in for newly-created annotations
-(it's round-tripped for existing ones).  Fixes bug
-https://sourceforge.net/tracker/?func=detail&aid=3389282&group_id=76834&atid=887913
