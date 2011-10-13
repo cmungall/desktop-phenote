@@ -1,8 +1,9 @@
 format-version: 1.2
 data-version: 2011-06-03
-date: 26:07:2011 17:28
+date: 24:08:2011 09:07
 saved-by: tmeehan
 auto-generated-by: OBO-Edit 2.1-beta14
+ontology: cl
 subsetdef: upper_ontology_conflict "Terms in this subset group together terms from different anatomy ontologies that have conflicting upper ontology/CARO assignments. For example, in FMA the naris is immaterial and in ZFA it is an organism subdivision."
 subsetdef: inconsistent_with_fma "classes that have some inconsistency with FMA"
 subsetdef: metazoa_core "core classes typically found across metazoa. one purpose is to create a rough set of terms that could be used to start a new metazoan AO. Note this subset is not yet fully fleshed out"
@@ -29,6 +30,7 @@ subsetdef: goslim_plant "Plant GO slim"
 subsetdef: goslim_goa "GOA and proteome slim"
 subsetdef: uberon_slim "Uberon slim"
 subsetdef: goslim_generic "Generic GO slim"
+subsetdef: early_development "A class that represents an early developmental structure, like a blastocyst. This part of the ontology is undergoing review to remove inappropriate grouping classes."
 subsetdef: relational_slim "Relational slim: types of quality that require an additional entity in order to exist"
 subsetdef: cell_quality "cell_quality"
 subsetdef: attribute_slim "Attribute slim"
@@ -36,7 +38,6 @@ subsetdef: absent_slim "Absent/present slim"
 subsetdef: disposition_slim "Disposition slim"
 subsetdef: high_level_annotation_qc "High-level terms not to be used for direct annotation"
 subsetdef: developmental_classification "developmental_classification"
-ontology: cl
 synonymtypedef: systematic_synonym "Systematic synonym" EXACT
 synonymtypedef: InChI "InChI" 
 synonymtypedef: PLURAL "plural term" 
@@ -69,11 +70,12 @@ treat-xrefs-as-genus-differentia: ncithesaurus part_of NCBITaxon:40674
 treat-xrefs-as-genus-differentia: WBbt part_of NCBITaxon:6237
 treat-xrefs-as-genus-differentia: MFO part_of NCBITaxon:8089
 treat-xrefs-as-genus-differentia: FMA part_of NCBITaxon:9606
+treat-xrefs-as-genus-differentia: KUPO part_of NCBITaxon:9606
 treat-xrefs-as-genus-differentia: XAO part_of NCBITaxon:8353
 treat-xrefs-as-genus-differentia: MA part_of NCBITaxon:10088
 treat-xrefs-as-genus-differentia: TADS part_of NCBITaxon:6939
 treat-xrefs-as-genus-differentia: FBbt part_of NCBITaxon:7227
-remark: $Revision: 1.51 $  See PMID:15693950, PMID:12799354, PMID:20123131, Contact Alexander Diehl, addiehl@buffalo.edu, University of Buffalo.
+remark: $Revision: 1.52 $  See PMID:15693950, PMID:12799354, PMID:20123131, Contact Alexander Diehl, addiehl@buffalo.edu, University of Buffalo.
 treat-xrefs-as-has-subclass: EMAPA
 treat-xrefs-as-has-subclass: EHDAA2
 treat-xrefs-as-has-subclass: EHDAA
@@ -83,6 +85,7 @@ id: CL:0000000
 name: cell
 namespace: cell
 def: "Anatomical structure that has as its parts a maximally connected cell compartment surrounded by a plasma membrane." [CARO:mah]
+xref: KUPO:0000002
 xref: GO:0005623
 xref: FMA:68646
 
@@ -329,7 +332,7 @@ id: CL:0000029
 name: neuron neural crest derived
 namespace: cell
 is_a: CL:0000540 ! neuron
-relationship: develops_from CL:0000333 ! develops_from neural crest cell
+relationship: develops_from CL:0002676 ! develops_from neural crest derived neuroblast
 
 [Term]
 id: CL:0000030
@@ -1097,7 +1100,7 @@ name: autonomic neuron
 namespace: cell
 def: "A neruon whose cell body is within an autonomic ganglion." [GOC:tfm]
 xref: FMA:80121
-is_a: CL:0000029 ! neuron neural crest derived
+is_a: CL:0000540 ! neuron
 
 [Term]
 id: CL:0000108
@@ -1127,7 +1130,7 @@ name: peripheral neuron
 namespace: cell
 def: "A neuron that is part of nerve found outside the central nervous system." [ISBN:0721662544]
 xref: FMA:84664
-is_a: CL:0000029 ! neuron neural crest derived
+is_a: CL:0000540 ! neuron
 
 [Term]
 id: CL:0000112
@@ -4500,7 +4503,7 @@ namespace: cell
 def: "A neuron which conveys sensory information centrally from the periphery." [GOC:tfm, MESH:A.08.663.650]
 synonym: "input neuron" EXACT []
 xref: FMA:87653
-is_a: CL:0000029 ! neuron neural crest derived
+is_a: CL:0000540 ! neuron
 
 [Term]
 id: CL:0000527
@@ -4508,7 +4511,7 @@ name: efferent neuron
 namespace: cell
 def: "A neuron which sends impulses peripherally to activate muscles or secretory cells." [MESH:A.08.663.655]
 synonym: "output neuron" EXACT []
-is_a: CL:0000029 ! neuron neural crest derived
+is_a: CL:0000540 ! neuron
 
 [Term]
 id: CL:0000528
@@ -4957,6 +4960,7 @@ def: "One of the two photoreceptor cell types in the vertebrate retina. In cones
 xref: BTO:0001036
 xref: FMA:67748
 is_a: CL:0000287 ! eye photoreceptor cell
+relationship: develops_from CL:0002672 ! develops_from retinal progenitor cell
 
 [Term]
 id: CL:0000574
@@ -5255,6 +5259,7 @@ def: "One of the two photoreceptor cell types of the vertebrate retina. In rods 
 xref: FMA:67747
 xref: BTO:0001024
 is_a: CL:0000287 ! eye photoreceptor cell
+relationship: develops_from CL:0002672 ! develops_from retinal progenitor cell
 
 [Term]
 id: CL:0000605
@@ -11229,6 +11234,7 @@ def: "A cell that is a specialized type of pericyte providing structural support
 synonym: "lacis cell" RELATED []
 synonym: "Goormaghtigh cell" EXACT []
 synonym: "polar cushion cells" EXACT []
+xref: KUPO:0001033
 xref: FMA:84143
 is_a: CL:0000650 ! mesangial cell
 created_by: tmeehan
@@ -12711,22 +12717,23 @@ id: CL:0002305
 name: epithelial cell of distal tubule
 namespace: cell
 def: "An epithelial cell of the distal convoluted tubule of the kidney that helps regulate systemic levels of potassium, sodium, calcium, and pH." [GOC:tfm, ISBN:0517223651]
+synonym: "kidney distal tubule epithelial cell" EXACT []
 xref: FMA:62125
+xref: KUPO:0001055
 is_a: CL:0002078 ! meso-epithelial cell
-is_a: CL:0002518 ! kidney epithelial cell
-created_by: tmeehan
-creation_date: 2010-09-14T11:12:12Z
+is_a: CL:1000615 ! kidney cortex tubule cell
 
 [Term]
 id: CL:0002306
 name: epithelial cell of proximal tubule
 namespace: cell
 def: "An epithelial cell of the proximal tubule of the kidney." [GOC:tfm, ISBN:1-4160-2328-3]
+synonym: "kidney proximal tubule epithelial cell" EXACT []
+xref: KUPO:0001044
 xref: FMA:62125
 is_a: CL:0002078 ! meso-epithelial cell
-is_a: CL:0002518 ! kidney epithelial cell
-created_by: tmeehan
-creation_date: 2010-09-14T11:23:40Z
+is_a: CL:1000615 ! kidney cortex tubule cell
+is_a: CL:0000239 ! brush border epithelial cell
 
 [Term]
 id: CL:0002307
@@ -12734,7 +12741,6 @@ name: brush border cell of the proximal tubule
 namespace: cell
 def: "A brush border epithelial cell located in the proximal tubule of the kidney that detects fluid flow." [GOC:tfm, ISBN:1-4160-2328-3]
 is_a: CL:0002306 ! epithelial cell of proximal tubule
-is_a: CL:0000239 ! brush border epithelial cell
 created_by: tmeehan
 creation_date: 2010-09-14T11:29:20Z
 
@@ -14677,6 +14683,7 @@ synonym: "heart cell" EXACT []
 xref: FMA:83808
 xref: BTO:0001539
 is_a: CL:0002371 ! somatic cell
+is_a: CL:0000548 ! animal cell
 created_by: tmeehan
 creation_date: 2010-12-07T09:37:22Z
 
@@ -14917,8 +14924,8 @@ id: CL:0002518
 name: kidney epithelial cell
 namespace: cell
 def: "An epithelial cell of the kidney." [GOC:tfm, KUPO:SJ]
-xref: http://www.e-lico.eu/data/kupo/KUPO_0000002
-is_a: CL:0002371 ! somatic cell
+xref: KUPO:0001019
+is_a: CL:1000497 ! kidney cell
 is_a: CL:0000066 ! epithelial cell
 created_by: tmeehan
 creation_date: 2011-02-08T10:46:34Z
@@ -15151,9 +15158,12 @@ creation_date: 2011-02-28T03:04:35Z
 id: CL:0002543
 name: vein endothelial cell
 namespace: cell
-def: "A blood vessel endothelial cell of a vein." [GOC:tfm]
+alt_id: CL:1000393
+def: "An endothelial cell that is part of the vein." [GOC:tfm]
+synonym: "endothelial cell of vein" EXACT []
+xref: FMA:62104
+xref: KUPO:0001099
 is_a: CL:0000071 ! blood vessel endothelial cell
-is_a: CL:1000393 ! endothelial cell of vein
 created_by: tmeehan
 creation_date: 2011-02-28T03:48:11Z
 
@@ -15531,9 +15541,9 @@ id: CL:0002584
 name: renal cortical epithelial cell
 namespace: cell
 def: "An epithelial cell of the kidney cortex." [GOC:tfm]
+synonym: "kidney cortex cell" EXACT []
+xref: KUPO:0001016
 is_a: CL:0002518 ! kidney epithelial cell
-created_by: tmeehan
-creation_date: 2011-03-06T01:53:04Z
 
 [Term]
 id: CL:0002585
@@ -15643,7 +15653,9 @@ id: CL:0002597
 name: smooth muscle cell of bladder
 namespace: cell
 def: "A smooth muscle cell of the bladder." [GC:tfm]
+xref: KUPO:0001122
 is_a: CL:0000192 ! smooth muscle cell
+is_a: CL:1001319 ! bladder cell
 created_by: tmeehan
 creation_date: 2011-03-06T05:43:24Z
 
@@ -15838,7 +15850,7 @@ name: endothelial cell of umbilical vein
 namespace: cell
 def: "An endothelial cell of the umbilical vein." []
 xref: BTO:0004296
-is_a: CL:1000393 ! endothelial cell of vein
+is_a: CL:0002543 ! vein endothelial cell
 created_by: tmeehan
 creation_date: 2011-03-14T11:36:51Z
 
@@ -16366,6 +16378,63 @@ created_by: tmeehan
 creation_date: 2011-07-11T03:39:27Z
 
 [Term]
+id: CL:0002671
+name: endothelial stalk cell
+namespace: cell
+def: "An endothelial stalk cell is a specialized endothelial cell that follows behind the tip cell of an angiogenic sprout." [GOC:tfm, PMID:21521739]
+is_a: CL:0000071 ! blood vessel endothelial cell
+created_by: tmeehan
+creation_date: 2011-08-16T01:49:32Z
+
+[Term]
+id: CL:0002672
+name: retinal progenitor cell
+namespace: cell
+def: "A multi-fate stem cell that can give rise to different retinal cell types including rod and cone cells." [GOC:tfm, PMID:20959166, PMID:21148186]
+is_a: CL:0000048 ! multi fate stem cell
+relationship: develops_from CL:0000133 ! develops_from neurectodermal cell
+created_by: tmeehan
+creation_date: 2011-08-16T02:38:01Z
+
+[Term]
+id: CL:0002673
+name: tongue muscle cell
+namespace: cell
+def: "A skeletal muscle cell that is part of the tongue." [GOC:tfm, PMID:18816858]
+is_a: CL:0000188 ! skeletal muscle cell
+created_by: tmeehan
+creation_date: 2011-08-16T03:10:02Z
+
+[Term]
+id: CL:0002674
+name: H minus
+namespace: cell
+def: "A S. pombe mating type determined by the mat1-Mc and mat1-Mi on the mat1 locus." [GOC:tfm]
+synonym: "H-" EXACT []
+is_a: CL:0000521 ! fungal cell
+created_by: tmeehan
+creation_date: 2011-08-16T03:20:53Z
+
+[Term]
+id: CL:0002675
+name: H plus
+namespace: cell
+def: "A S. pombe cell type determined by mat1-Pc and mat1-Pi on the mat1 locus." [GOC:tfm]
+is_a: CL:0000521 ! fungal cell
+created_by: tmeehan
+creation_date: 2011-08-16T03:20:58Z
+
+[Term]
+id: CL:0002676
+name: neural crest derived neuroblast
+namespace: cell
+def: "A neuroblast derived from a neural crest cell." [GOC:tfm, PMID:17407019]
+is_a: CL:0000337 ! neuroblast (sensu Vertebrata)
+relationship: develops_from CL:0000333 ! develops_from neural crest cell
+created_by: tmeehan
+creation_date: 2011-08-22T09:24:15Z
+
+[Term]
 id: CL:0005000
 name: spinal cord interneuron
 namespace: cell
@@ -16722,6 +16791,7 @@ name: epithelial cell of urethra
 namespace: cell
 def: "An epithelial cell that is part of the urethra." [GOC:tfm]
 xref: FMA:256165
+is_a: CL:1001320 ! urethra cell
 is_a: CL:0000066 ! epithelial cell
 is_a: CL:0002371 ! somatic cell
 
@@ -17464,14 +17534,6 @@ xref: FMA:59175
 is_a: CL:0000148 ! melanocyte
 
 [Term]
-id: CL:1000393
-name: endothelial cell of vein
-namespace: cell
-def: "An endothelial cell that is part of the vein." [GOC:tfm]
-xref: FMA:62104
-is_a: CL:0002139 ! endothelial cell of vascular tree
-
-[Term]
 id: CL:1000394
 name: myoepithelial cell of intralobular lactiferous duct
 namespace: cell
@@ -17541,6 +17603,7 @@ id: CL:1000412
 name: endothelial cell of arteriole
 namespace: cell
 def: "An endothelial cell that is part of the arteriole." [GOC:tfm]
+xref: KUPO:0001097
 xref: FMA:67760
 is_a: CL:0000071 ! blood vessel endothelial cell
 
@@ -17551,6 +17614,7 @@ namespace: cell
 alt_id: CL:0002542
 def: "A blood vessel endothelial cell that is part of an arterial endothelium." [GOC:tfm]
 synonym: "arterial endothelial cell" EXACT []
+xref: KUPO:0001095
 xref: BTO:0004758
 xref: FMA:67761
 is_a: CL:0000071 ! blood vessel endothelial cell
@@ -17800,9 +17864,11 @@ name: epithelial cell of glomerular capsule
 namespace: cell
 def: "An epithelial cell that is part of the glomerular capsule." [GOC:tfm]
 synonym: "epithelial cell of bowman's capsule" EXACT [FMA:70966]
+synonym: "bowmans capsule epithelial cell" EXACT []
+xref: KUPO:0001034
 xref: FMA:70966
-is_a: CL:0002371 ! somatic cell
-is_a: CL:0000066 ! epithelial cell
+is_a: CL:1000612 ! kidney corpuscule cell
+is_a: CL:1000510 ! kidney glomerular epithelial cell
 
 [Term]
 id: CL:1000451
@@ -17829,16 +17895,20 @@ name: epithelial cell of intermediate tubule
 namespace: cell
 def: "An epithelial cell that is part of the intermediate tubule." [GOC:tfm]
 xref: FMA:70980
-is_a: CL:1000494 ! epithelial cell of renal tubule
+is_a: CL:0002371 ! somatic cell
+is_a: CL:0000066 ! epithelial cell
 
 [Term]
 id: CL:1000454
-name: epithelial cell of collecting duct of renal tubule
+name: kidney collecting duct epithelial cell
 namespace: cell
 def: "An epithelial cell that is part of the collecting duct of renal tubule." [GOC:tfm]
 synonym: "epithelial cell of renal collecting tubule" EXACT [FMA:70982]
 xref: FMA:70982
+xref: KUPO:0001059
 is_a: CL:0000072 ! non-branched duct epithelial cell
+is_a: CL:1001225 ! kidney collecting duct cell
+is_a: CL:0002518 ! kidney epithelial cell
 
 [Term]
 id: CL:1000456
@@ -18086,9 +18156,11 @@ id: CL:1000494
 name: epithelial cell of renal tubule
 namespace: cell
 def: "An epithelial cell that is part of the renal tubule." [GOC:tfm]
+synonym: "kidney tubule epithelial cell" EXACT []
 xref: FMA:86785
-is_a: CL:0000066 ! epithelial cell
-is_a: CL:0002371 ! somatic cell
+xref: KUPO:0001022
+is_a: CL:0002518 ! kidney epithelial cell
+is_a: CL:1000507 ! kidney tubule cell
 
 [Term]
 id: CL:1000495
@@ -18098,6 +18170,863 @@ def: "A goblet cell that is part of the small intestine." [GOC:tfm]
 synonym: "small intestinal goblet cell" EXACT [FMA:86929]
 xref: FMA:86929
 is_a: CL:0000160 ! goblet cell
+
+[Term]
+id: CL:1000497
+name: kidney cell
+namespace: cell
+xref: KUPO:0001010
+is_a: CL:0000548 ! animal cell
+is_a: CL:0002371 ! somatic cell
+
+[Term]
+id: CL:1000500
+name: kidney interstitial cell
+namespace: cell
+xref: KUPO:0001013
+is_a: CL:1000497 ! kidney cell
+is_a: CL:0002320 ! connective tissue cell
+
+[Term]
+id: CL:1000504
+name: kidney medulla cell
+namespace: cell
+xref: KUPO:0001017
+is_a: CL:1000497 ! kidney cell
+
+[Term]
+id: CL:1000505
+name: kidney pelvis cell
+namespace: cell
+xref: KUPO:0001018
+is_a: CL:1000497 ! kidney cell
+
+[Term]
+id: CL:1000507
+name: kidney tubule cell
+namespace: cell
+xref: KUPO:0001020
+is_a: CL:1000497 ! kidney cell
+
+[Term]
+id: CL:1000510
+name: kidney glomerular epithelial cell
+namespace: cell
+xref: KUPO:0001023
+is_a: CL:0002518 ! kidney epithelial cell
+
+[Term]
+id: CL:1000546
+name: kidney medulla collecting duct epithelial cell
+namespace: cell
+xref: KUPO:0001060
+is_a: CL:1001225 ! kidney collecting duct cell
+
+[Term]
+id: CL:1000547
+name: kidney inner medulla collecting duct epithelial cell
+namespace: cell
+xref: KUPO:0001061
+is_a: CL:1000546 ! kidney medulla collecting duct epithelial cell
+
+[Term]
+id: CL:1000548
+name: kidney outer medulla collecting duct epithelial cell
+namespace: cell
+xref: KUPO:0001062
+is_a: CL:1000546 ! kidney medulla collecting duct epithelial cell
+
+[Term]
+id: CL:1000549
+name: kidney cortex collecting duct epithelial cell
+namespace: cell
+xref: KUPO:0001063
+is_a: CL:1001225 ! kidney collecting duct cell
+
+[Term]
+id: CL:1000550
+name: kidney papillary duct principal epithelial cell
+namespace: cell
+xref: KUPO:0001064
+is_a: CL:1001225 ! kidney collecting duct cell
+
+[Term]
+id: CL:1000596
+name: inner renal cortex cell
+namespace: cell
+xref: KUPO:0001111
+is_a: CL:1000497 ! kidney cell
+
+[Term]
+id: CL:1000597
+name: papillary tips cell
+namespace: cell
+xref: KUPO:0001112
+is_a: CL:1000497 ! kidney cell
+
+[Term]
+id: CL:1000600
+name: lower urinary tract cell
+namespace: cell
+xref: KUPO:0001115
+is_a: CL:0000548 ! animal cell
+
+[Term]
+id: CL:1000601
+name: ureteral cell
+namespace: cell
+xref: KUPO:0001116
+is_a: CL:1000497 ! kidney cell
+
+[Term]
+id: CL:1000606
+name: kidney nerve cell
+namespace: cell
+xref: KUPO:0001015
+is_a: CL:1000500 ! kidney interstitial cell
+is_a: CL:0000540 ! neuron
+
+[Term]
+id: CL:1000612
+name: kidney corpuscule cell
+namespace: cell
+xref: KUPO:0001021
+is_a: CL:0002584 ! renal cortical epithelial cell
+
+[Term]
+id: CL:1000615
+name: kidney cortex tubule cell
+namespace: cell
+xref: KUPO:0001024
+is_a: CL:0002584 ! renal cortical epithelial cell
+is_a: CL:1000494 ! epithelial cell of renal tubule
+
+[Term]
+id: CL:1000616
+name: kidney outer medulla cell
+namespace: cell
+xref: KUPO:0001025
+is_a: CL:1000504 ! kidney medulla cell
+
+[Term]
+id: CL:1000617
+name: kidney inner medulla cell
+namespace: cell
+xref: KUPO:0001026
+is_a: CL:1000504 ! kidney medulla cell
+
+[Term]
+id: CL:1000618
+name: juxtaglomerular complex cell
+namespace: cell
+xref: KUPO:0001028
+is_a: CL:0002584 ! renal cortical epithelial cell
+
+[Term]
+id: CL:1000681
+name: kidney cortex interstitial cell
+namespace: cell
+xref: KUPO:0001091
+is_a: CL:1000500 ! kidney interstitial cell
+is_a: CL:0002584 ! renal cortical epithelial cell
+
+[Term]
+id: CL:1000682
+name: kidney medulla interstitial cell
+namespace: cell
+xref: KUPO:0001092
+is_a: CL:1000500 ! kidney interstitial cell
+is_a: CL:1000504 ! kidney medulla cell
+
+[Term]
+id: CL:1000691
+name: kidney interstitial myofibroblast
+namespace: cell
+xref: KUPO:0001101
+is_a: CL:1000500 ! kidney interstitial cell
+is_a: CL:0000186 ! myofibroblast cell
+
+[Term]
+id: CL:1000692
+name: kidney interstitial fibroblast
+namespace: cell
+xref: KUPO:0001102
+is_a: CL:0002241 ! pulmonary interstitial fibroblast
+is_a: CL:1000500 ! kidney interstitial cell
+
+[Term]
+id: CL:1000693
+name: kidney interstitial fibrocyte
+namespace: cell
+xref: KUPO:0001103
+is_a: CL:1000500 ! kidney interstitial cell
+is_a: CL:0000135 ! fibrocyte
+
+[Term]
+id: CL:1000695
+name: kidney interstitial alternatively activated macrophage
+namespace: cell
+xref: KUPO:0001106
+is_a: CL:1000500 ! kidney interstitial cell
+is_a: CL:0000890 ! alternatively activated macrophage
+is_a: CL:0000864 ! tissue-resident macrophage
+
+[Term]
+id: CL:1000696
+name: kidney interstitial inflammatory macrophage
+namespace: cell
+xref: KUPO:0001107
+is_a: CL:1000500 ! kidney interstitial cell
+is_a: CL:0000863 ! inflammatory macrophage
+is_a: CL:0000864 ! tissue-resident macrophage
+
+[Term]
+id: CL:1000697
+name: kidney interstitial suppressor macrophage
+namespace: cell
+xref: KUPO:0001108
+is_a: CL:1000500 ! kidney interstitial cell
+is_a: CL:0000862 ! suppressor macrophage
+is_a: CL:0000864 ! tissue-resident macrophage
+
+[Term]
+id: CL:1000698
+name: kidney resident macrophage
+namespace: cell
+xref: KUPO:0001109
+is_a: CL:1000500 ! kidney interstitial cell
+is_a: CL:0000864 ! tissue-resident macrophage
+
+[Term]
+id: CL:1000699
+name: kidney resident dendritic cell
+namespace: cell
+xref: KUPO:0001110
+is_a: CL:0001007 ! interstitial dendritic cell
+is_a: CL:1000500 ! kidney interstitial cell
+
+[Term]
+id: CL:1000702
+name: kidney pelvis smooth muscle cell
+namespace: cell
+xref: KUPO:0001113
+is_a: CL:0000192 ! smooth muscle cell
+is_a: CL:1000505 ! kidney pelvis cell
+
+[Term]
+id: CL:1000703
+name: kidney pelvis urothelial cell
+namespace: cell
+xref: KUPO:0001114
+is_a: CL:1000706 ! ureter urothelial cell
+is_a: CL:1000505 ! kidney pelvis cell
+
+[Term]
+id: CL:1000706
+name: ureter urothelial cell
+namespace: cell
+xref: KUPO:0001117
+is_a: CL:0002518 ! kidney epithelial cell
+is_a: CL:1000601 ! ureteral cell
+is_a: CL:0000731 ! urothelial cell
+
+[Term]
+id: CL:1000708
+name: ureter adventitial cell
+namespace: cell
+xref: KUPO:0001119
+is_a: CL:0002518 ! kidney epithelial cell
+is_a: CL:0002503 ! adventitial cell
+is_a: CL:0000134 ! mesenchymal cell
+is_a: CL:1000601 ! ureteral cell
+is_a: CL:0000115 ! endothelial cell
+
+[Term]
+id: CL:1000714
+name: kidney cortex collecting duct principal cell
+namespace: cell
+xref: KUPO:0001130
+is_a: CL:1001431 ! kidney collecting duct principal cell
+is_a: CL:1000549 ! kidney cortex collecting duct epithelial cell
+
+[Term]
+id: CL:1000715
+name: kidney cortex collecting duct intercalated cell
+namespace: cell
+xref: KUPO:0001131
+is_a: CL:1001432 ! kidney collecting duct intercalated cell
+is_a: CL:1000549 ! kidney cortex collecting duct epithelial cell
+
+[Term]
+id: CL:1000716
+name: kidney outer medulla collecting duct principal cell
+namespace: cell
+xref: KUPO:0001132
+is_a: CL:1001431 ! kidney collecting duct principal cell
+is_a: CL:1000548 ! kidney outer medulla collecting duct epithelial cell
+
+[Term]
+id: CL:1000717
+name: kidney outer medulla collecting duct intercalated cell
+namespace: cell
+xref: KUPO:0001133
+is_a: CL:1001432 ! kidney collecting duct intercalated cell
+is_a: CL:1000548 ! kidney outer medulla collecting duct epithelial cell
+
+[Term]
+id: CL:1000718
+name: kidney inner medulla collecting duct principal cell
+namespace: cell
+xref: KUPO:0001134
+is_a: CL:1001431 ! kidney collecting duct principal cell
+is_a: CL:1000547 ! kidney inner medulla collecting duct epithelial cell
+
+[Term]
+id: CL:1000719
+name: kidney inner medulla collecting duct intercalated cell
+namespace: cell
+xref: KUPO:0001135
+is_a: CL:1001432 ! kidney collecting duct intercalated cell
+is_a: CL:1000547 ! kidney inner medulla collecting duct epithelial cell
+
+[Term]
+id: CL:1000720
+name: kidney papillary duct intercalated cell
+namespace: cell
+xref: KUPO:0001136
+is_a: CL:1001432 ! kidney collecting duct intercalated cell
+is_a: CL:1000550 ! kidney papillary duct principal epithelial cell
+
+[Term]
+id: CL:1000721
+name: kidney papillary duct principal cell
+namespace: cell
+xref: KUPO:0001137
+is_a: CL:1001431 ! kidney collecting duct principal cell
+is_a: CL:1000550 ! kidney papillary duct principal epithelial cell
+
+[Term]
+id: CL:1000742
+name: glomerular mesangial cell
+namespace: cell
+xref: KUPO:0001032
+is_a: CL:0000650 ! mesangial cell
+is_a: CL:1001318 ! renal interstitial pericyte
+is_a: CL:1000612 ! kidney corpuscule cell
+
+[Term]
+id: CL:1000746
+name: glomerular cell
+namespace: cell
+xref: KUPO:0001036
+is_a: CL:1000612 ! kidney corpuscule cell
+
+[Term]
+id: CL:1000768
+name: kidney connecting tubule epithelial cell
+namespace: cell
+xref: KUPO:0001058
+is_a: CL:1000615 ! kidney cortex tubule cell
+
+[Term]
+id: CL:1000803
+name: kidney inner medulla interstitial cell
+namespace: cell
+xref: KUPO:0001093
+is_a: CL:1000682 ! kidney medulla interstitial cell
+is_a: CL:1000617 ! kidney inner medulla cell
+
+[Term]
+id: CL:1000804
+name: kidney outer medulla interstitial cell
+namespace: cell
+xref: KUPO:0001094
+is_a: CL:1000682 ! kidney medulla interstitial cell
+is_a: CL:1000616 ! kidney outer medulla cell
+
+[Term]
+id: CL:1000838
+name: kidney proximal convoluted tubule epithelial cell
+namespace: cell
+xref: KUPO:0001045
+is_a: CL:0002306 ! epithelial cell of proximal tubule
+
+[Term]
+id: CL:1000839
+name: kidney proximal straight tubule epithelial cell
+namespace: cell
+xref: KUPO:0001046
+is_a: CL:1000616 ! kidney outer medulla cell
+is_a: CL:0002306 ! epithelial cell of proximal tubule
+
+[Term]
+id: CL:1000849
+name: kidney distal convoluted tubule epithelial cell
+namespace: cell
+xref: KUPO:0001056
+is_a: CL:0002305 ! epithelial cell of distal tubule
+
+[Term]
+id: CL:1000850
+name: macula densa epithelial cell
+namespace: cell
+xref: KUPO:0001057
+is_a: CL:1000618 ! juxtaglomerular complex cell
+is_a: CL:0002305 ! epithelial cell of distal tubule
+
+[Term]
+id: CL:1000854
+name: kidney blood vessel cell
+namespace: cell
+xref: KUPO:0001014
+is_a: CL:0002584 ! renal cortical epithelial cell
+is_a: CL:1000504 ! kidney medulla cell
+
+[Term]
+id: CL:1000891
+name: kidney arterial blood vessel cell
+namespace: cell
+xref: KUPO:0001029
+is_a: CL:0000192 ! smooth muscle cell
+is_a: CL:0000071 ! blood vessel endothelial cell
+is_a: CL:1000854 ! kidney blood vessel cell
+
+[Term]
+id: CL:1000892
+name: kidney capillary endothelial cell
+namespace: cell
+xref: KUPO:0001030
+is_a: CL:0000071 ! blood vessel endothelial cell
+is_a: CL:1000854 ! kidney blood vessel cell
+
+[Term]
+id: CL:1000893
+name: kidney venous blood vessel cell
+namespace: cell
+xref: KUPO:0001031
+is_a: CL:0000359 ! vascular associated smooth muscle cell
+is_a: CL:1000854 ! kidney blood vessel cell
+is_a: CL:0002543 ! vein endothelial cell
+
+[Term]
+id: CL:1000897
+name: parietal epithelial cell
+namespace: cell
+xref: KUPO:0001035
+is_a: CL:1000450 ! epithelial cell of glomerular capsule
+is_a: CL:1000452 ! epithelial cell of parietal layer of glomerular capsule
+
+[Term]
+id: CL:1000909
+name: kidney loop of henle epithelial cell
+namespace: cell
+xref: KUPO:0001047
+is_a: CL:1000494 ! epithelial cell of renal tubule
+
+[Term]
+id: CL:1000979
+name: ureter smooth muscle cell
+namespace: cell
+xref: KUPO:0001118
+is_a: CL:0000192 ! smooth muscle cell
+is_a: CL:1000601 ! ureteral cell
+
+[Term]
+id: CL:1001005
+name: glomerular capillary endothelial cell
+namespace: cell
+xref: KUPO:0001037
+is_a: CL:0002188 ! glomerular endothelial cell
+is_a: CL:1000746 ! glomerular cell
+is_a: CL:1000494 ! epithelial cell of renal tubule
+is_a: CL:1000892 ! kidney capillary endothelial cell
+is_a: CL:0002144 ! capillary endothelial cell
+
+[Term]
+id: CL:1001006
+name: kidney afferent arteriole cell
+namespace: cell
+xref: KUPO:0001038
+is_a: CL:1000891 ! kidney arterial blood vessel cell
+is_a: CL:1000507 ! kidney tubule cell
+is_a: CL:1000412 ! endothelial cell of arteriole
+
+[Term]
+id: CL:1001009
+name: kidney efferent arteriole cell
+namespace: cell
+xref: KUPO:0001041
+is_a: CL:1000412 ! endothelial cell of arteriole
+is_a: CL:1000507 ! kidney tubule cell
+is_a: CL:1000891 ! kidney arterial blood vessel cell
+
+[Term]
+id: CL:1001016
+name: kidney loop of henle ascending limb epithelial cell
+namespace: cell
+xref: KUPO:0001048
+is_a: CL:0002305 ! epithelial cell of distal tubule
+is_a: CL:1000909 ! kidney loop of henle epithelial cell
+
+[Term]
+id: CL:1001021
+name: kidney loop of henle descending limb epithelial cell
+namespace: cell
+xref: KUPO:0001053
+is_a: CL:1000909 ! kidney loop of henle epithelial cell
+
+[Term]
+id: CL:1001033
+name: peritubular capillary endothelial cell
+namespace: cell
+xref: KUPO:0001065
+is_a: CL:1000892 ! kidney capillary endothelial cell
+
+[Term]
+id: CL:1001036
+name: vasa recta cell
+namespace: cell
+xref: KUPO:0001068
+is_a: CL:1000893 ! kidney venous blood vessel cell
+is_a: CL:1000892 ! kidney capillary endothelial cell
+
+[Term]
+id: CL:1001045
+name: kidney cortex artery cell
+namespace: cell
+xref: KUPO:0001077
+is_a: CL:1000891 ! kidney arterial blood vessel cell
+
+[Term]
+id: CL:1001052
+name: kidney cortex vein cell
+namespace: cell
+xref: KUPO:0001084
+is_a: CL:1000893 ! kidney venous blood vessel cell
+
+[Term]
+id: CL:1001064
+name: kidney artery smooth muscle cell
+namespace: cell
+comment: note that the source of this term is KUPO:0001096 (artery smooth muscle cell), which we believe actually denotes the kidney specific structure
+xref: KUPO:0001096
+is_a: CL:1000891 ! kidney arterial blood vessel cell
+
+[Term]
+id: CL:1001066
+name: kidney arteriole smooth muscle cell
+namespace: cell
+comment: note that the source of this term is KUPO:0001098 (arteriole smooth muscle cell), which we believe actually denotes the kidney specific structure
+xref: KUPO:0001098
+is_a: CL:1000891 ! kidney arterial blood vessel cell
+
+[Term]
+id: CL:1001068
+name: kidney venous system smooth muscle cell
+namespace: cell
+comment: note that the source of this term is KUPO:0001068 (venous system smooth muscle cell), which we believe actually denotes the kidney specific structure
+xref: KUPO:0001100
+is_a: CL:1000893 ! kidney venous blood vessel cell
+
+[Term]
+id: CL:1001096
+name: kidney afferent arteriole endothelial cell
+namespace: cell
+xref: KUPO:0001039
+is_a: CL:1001006 ! kidney afferent arteriole cell
+
+[Term]
+id: CL:1001097
+name: kidney afferent arteriole smooth muscle cell
+namespace: cell
+xref: KUPO:0001040
+is_a: CL:1001006 ! kidney afferent arteriole cell
+is_a: CL:1001066 ! kidney arteriole smooth muscle cell
+is_a: CL:0000359 ! vascular associated smooth muscle cell
+
+[Term]
+id: CL:1001099
+name: kidney efferent arteriole endothelial cell
+namespace: cell
+xref: KUPO:0001042
+is_a: CL:1001009 ! kidney efferent arteriole cell
+
+[Term]
+id: CL:1001100
+name: kidney efferent arteriole smooth muscle cell
+namespace: cell
+xref: KUPO:0001043
+is_a: CL:0000359 ! vascular associated smooth muscle cell
+is_a: CL:1001009 ! kidney efferent arteriole cell
+is_a: CL:1001066 ! kidney arteriole smooth muscle cell
+
+[Term]
+id: CL:1001106
+name: kidney loop of henle thick ascending limb epithelial cell
+namespace: cell
+xref: KUPO:0001049
+is_a: CL:1000504 ! kidney medulla cell
+is_a: CL:1001016 ! kidney loop of henle ascending limb epithelial cell
+
+[Term]
+id: CL:1001107
+name: kidney loop of henle thin ascending limb epithelial cell
+namespace: cell
+xref: KUPO:0001050
+is_a: CL:1001016 ! kidney loop of henle ascending limb epithelial cell
+
+[Term]
+id: CL:1001108
+name: kidney loop of henle medullary thick ascending limb epithelial cell
+namespace: cell
+xref: KUPO:0001051
+is_a: CL:1000616 ! kidney outer medulla cell
+is_a: CL:1001016 ! kidney loop of henle ascending limb epithelial cell
+
+[Term]
+id: CL:1001109
+name: kidney loop of henle cortical thick ascending limb epithelial cell
+namespace: cell
+xref: KUPO:0001052
+is_a: CL:1001016 ! kidney loop of henle ascending limb epithelial cell
+
+[Term]
+id: CL:1001111
+name: kidney loop of henle thin descending limb epithelial cell
+namespace: cell
+xref: KUPO:0001054
+is_a: CL:1000616 ! kidney outer medulla cell
+is_a: CL:1001021 ! kidney loop of henle descending limb epithelial cell
+
+[Term]
+id: CL:1001123
+name: kidney outer medulla peritubular capillary cell
+namespace: cell
+xref: KUPO:0001066
+is_a: CL:1000616 ! kidney outer medulla cell
+is_a: CL:1001033 ! peritubular capillary endothelial cell
+
+[Term]
+id: CL:1001124
+name: kidney cortex peritubular capillary cell
+namespace: cell
+xref: KUPO:0001067
+is_a: CL:1001033 ! peritubular capillary endothelial cell
+
+[Term]
+id: CL:1001126
+name: inner renal medulla vasa recta cell
+namespace: cell
+xref: KUPO:0001069
+is_a: CL:1000617 ! kidney inner medulla cell
+is_a: CL:1001036 ! vasa recta cell
+
+[Term]
+id: CL:1001127
+name: outer renal medulla vasa recta cell
+namespace: cell
+xref: KUPO:0001070
+is_a: CL:1000616 ! kidney outer medulla cell
+is_a: CL:1001036 ! vasa recta cell
+
+[Term]
+id: CL:1001131
+name: vasa recta ascending limb cell
+namespace: cell
+xref: KUPO:0001074
+is_a: CL:1001036 ! vasa recta cell
+
+[Term]
+id: CL:1001135
+name: arcuate artery cell
+namespace: cell
+xref: KUPO:0001078
+is_a: CL:1001045 ! kidney cortex artery cell
+
+[Term]
+id: CL:1001138
+name: interlobular artery cell
+namespace: cell
+xref: KUPO:0001081
+is_a: CL:1001045 ! kidney cortex artery cell
+
+[Term]
+id: CL:1001142
+name: arcuate vein cell
+namespace: cell
+xref: KUPO:0001085
+is_a: CL:1001052 ! kidney cortex vein cell
+
+[Term]
+id: CL:1001145
+name: interlobular vein cell
+namespace: cell
+xref: KUPO:0001088
+is_a: CL:1001052 ! kidney cortex vein cell
+
+[Term]
+id: CL:1001209
+name: inner medulla vasa recta ascending limb cell
+namespace: cell
+xref: KUPO:0001075
+is_a: CL:1001131 ! vasa recta ascending limb cell
+is_a: CL:1001126 ! inner renal medulla vasa recta cell
+
+[Term]
+id: CL:1001210
+name: outer medulla vasa recta ascending limb cell
+namespace: cell
+xref: KUPO:0001076
+is_a: CL:1001127 ! outer renal medulla vasa recta cell
+is_a: CL:1001131 ! vasa recta ascending limb cell
+
+[Term]
+id: CL:1001213
+name: arcuate artery endothelial cell
+namespace: cell
+xref: KUPO:0001079
+is_a: CL:1001135 ! arcuate artery cell
+is_a: CL:1000413 ! endothelial cell of artery
+
+[Term]
+id: CL:1001214
+name: arcuate artery smooth muscle cell
+namespace: cell
+xref: KUPO:0001080
+is_a: CL:1001064 ! kidney artery smooth muscle cell
+is_a: CL:1001135 ! arcuate artery cell
+is_a: CL:0000359 ! vascular associated smooth muscle cell
+
+[Term]
+id: CL:1001216
+name: interlobulary artery endothelial cell
+namespace: cell
+xref: KUPO:0001082
+is_a: CL:1000413 ! endothelial cell of artery
+is_a: CL:1001138 ! interlobular artery cell
+
+[Term]
+id: CL:1001217
+name: interlobulary artery smooth muscle cell
+namespace: cell
+xref: KUPO:0001083
+is_a: CL:0000359 ! vascular associated smooth muscle cell
+is_a: CL:1001138 ! interlobular artery cell
+is_a: CL:1001064 ! kidney artery smooth muscle cell
+
+[Term]
+id: CL:1001220
+name: arcuate vein endothelial cell
+namespace: cell
+xref: KUPO:0001086
+is_a: CL:1001142 ! arcuate vein cell
+
+[Term]
+id: CL:1001221
+name: arcuate vein smooth muscle cell
+namespace: cell
+xref: KUPO:0001087
+is_a: CL:1001142 ! arcuate vein cell
+is_a: CL:1001068 ! kidney venous system smooth muscle cell
+
+[Term]
+id: CL:1001223
+name: interlobulary vein endothelial cell
+namespace: cell
+xref: KUPO:0001089
+is_a: CL:1001145 ! interlobular vein cell
+
+[Term]
+id: CL:1001224
+name: interlobulary vein smooth muscle cell
+namespace: cell
+xref: KUPO:0001090
+is_a: CL:1001145 ! interlobular vein cell
+is_a: CL:1001068 ! kidney venous system smooth muscle cell
+
+[Term]
+id: CL:1001225
+name: kidney collecting duct cell
+namespace: cell
+xref: KUPO:0001012
+is_a: CL:1000497 ! kidney cell
+
+[Term]
+id: CL:1001285
+name: vasa recta descending limb cell
+namespace: cell
+xref: KUPO:0001071
+is_a: CL:1001036 ! vasa recta cell
+
+[Term]
+id: CL:1001286
+name: inner medulla vasa recta descending limb cell
+namespace: cell
+xref: KUPO:0001072
+is_a: CL:1001285 ! vasa recta descending limb cell
+is_a: CL:1001126 ! inner renal medulla vasa recta cell
+
+[Term]
+id: CL:1001287
+name: outer medulla vasa recta descending limb cell
+namespace: cell
+xref: KUPO:0001073
+is_a: CL:1001285 ! vasa recta descending limb cell
+is_a: CL:1001127 ! outer renal medulla vasa recta cell
+
+[Term]
+id: CL:1001318
+name: renal interstitial pericyte
+namespace: cell
+xref: KUPO:0001104
+is_a: CL:0000669 ! pericyte cell
+is_a: CL:1000497 ! kidney cell
+
+[Term]
+id: CL:1001319
+name: bladder cell
+namespace: cell
+xref: KUPO:0001120
+is_a: CL:0000548 ! animal cell
+
+[Term]
+id: CL:1001320
+name: urethra cell
+namespace: cell
+xref: KUPO:0001123
+is_a: CL:0000548 ! animal cell
+
+[Term]
+id: CL:1001428
+name: bladder urothelial cell
+namespace: cell
+xref: KUPO:0001121
+is_a: CL:1001319 ! bladder cell
+is_a: CL:0000731 ! urothelial cell
+
+[Term]
+id: CL:1001430
+name: urethra urothelial cell
+namespace: cell
+xref: KUPO:0001124
+is_a: CL:1000296 ! epithelial cell of urethra
+is_a: CL:0000731 ! urothelial cell
+
+[Term]
+id: CL:1001431
+name: kidney collecting duct principal cell
+namespace: cell
+xref: KUPO:0001128
+is_a: CL:0005009 ! renal principal cell
+is_a: CL:1000454 ! kidney collecting duct epithelial cell
+
+[Term]
+id: CL:1001432
+name: kidney collecting duct intercalated cell
+namespace: cell
+xref: KUPO:0001129
+is_a: CL:1000454 ! kidney collecting duct epithelial cell
+is_a: CL:0005010 ! renal intercalated cell
 
 [Typedef]
 id: RO:0002131
