@@ -16,11 +16,11 @@
 	  Frequently Asked Questions (FAQ)
 	</div>
 
-	<h1>General</h1>
+        <h1>General</h1>
 	<h3>How do I get started?</h3>
 	<p>
 	  Please visit the <a href="/download.shtml">Downloads</a> page to
-	  download and install Phenote.  It's easy!
+	  download and install Phenote.
 	</p>
 <h3>What version of Java do I need to run Phenote?</h3>
 <p>The Phenote installer requires Java 1.5+. You can download the latest Java
@@ -41,6 +41,7 @@
 	our <a href="http://www.sourceforge.net/tracker/?group_id=76834&amp;atid=887913">Feature
 	Request tracker</a>.  Please be sure to select "new feature" as the Group.
 	</p>
+<br>
 	<h1>Ontologies</h1>
 	<h3>What kinds of ontologies can I use to annotate in Phenote?</h3>
 	<p>
@@ -72,6 +73,7 @@
 	    <li><a href="http://www.obofoundry.org/">OBO Foundry</a></li>
 	    <li><a href="http://www.bioontology.org/">National Center for Biomedical Ontology</a></li>
 	  </ul>
+<br>
 	<h1>Using Phenote</h1>
 	<h3>Is there some online documentation?</h3>
 	<p>
