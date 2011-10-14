@@ -18,16 +18,14 @@ is controlled in the config file) but not editable (you can try to change it
 but it goes back to what it was).
 - Date Created is automatically filled in for newly-created annotations
 (it's round-tripped for existing ones).  Fixes bug
-https://sourceforge.net/tracker/?func=detail&aid=3389282&group_id=76834&atid=887913
+http://sourceforge.net/tracker/?func=detail&aid=3389282&group_id=76834&atid=887913
 - Heiko improved the installer so that if you have a 64-bit computer with
 64-bit Java, the installer will install Phenote so that it will launch in
 64-bit mode.  The installer tries to detect if you have a 64-bit machine, in
 which case it suggests a larger memory allocation, but it is (by necessity)
 conservative about this (because if it suggested a too-high memory setting you
-wouldn't be able to launch OE at all), so it may limit you to an 1860M
-setting. If this happens, you can hand-edit Phenote.vmoptions and put a
-higher memory setting (up to the amount of physical memory on your computer),
-and then relaunch OE (twice, if you're on a Mac).
+wouldn't be able to launch Phenote at all), so it may limit you to an 1860M
+setting if it's not sure that you have 64-bit Java enabled.
 
 
 =================

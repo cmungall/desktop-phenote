@@ -13,17 +13,26 @@
     <div id="main_container_aux">
       <div id="main_content_aux">
 
-	<h1>Current News and Events</h1>
-
-	  <h2>November, 2010</h2>
-	  <ul>
-	    <li>11.21.2010 - <a href="download.shtml">Version 1.8.4 released</a> </li>
-	  </ul>
+	<h1>Recent News and Events</h1>
+        <ul>
+          <li>14.10.2011 - <a href="download.shtml">Version 1.8.7
+        released</a></li>
+        </ul>
 <br>
 
 	<h1>Past News and Events</h1>
 
-	  <h2>September, 2010</h2>
+        <h2>2011</h2>
+        <ul>
+	 <li>11.02.2011 - <a href="download.shtml">Version 1.8.6 released</a> </li>
+	  </ul>
+
+        <h2>November, 2010</h2>
+	  <ul>
+	    <li>11.21.2010 - <a href="download.shtml">Version 1.8.4 released</a> </li>
+	  </ul>u
+
+          <h2>September, 2010</h2>
 	  <ul>
 	    <li>09.20.2010 - <a href="download.shtml">Version 1.8.3 released</a> </li>
 	  </ul>

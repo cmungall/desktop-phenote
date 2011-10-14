@@ -15,6 +15,32 @@
 
 <h1>1.8</h1>
 
+<h2>1.8.7</h2>
+<ul>
+  <li>Improved protocol for updating ontology files from repository.
+In many cases, these ontology files don't have a date (though I think
+they all should have a date or a version), and in the past, these were
+updated (wastefully) every time Phenote started up.  Now it checks
+whether your local version is less than six days old, and if it is, then
+it doesn't update from the repository.  (If you know there was a recent
+update that you want, you can of course always update your local copy
+by hand.)<br>This should save a lot of time on startup--in particular, we can avoid
+unnecessarily downloading omim.obo every time!
+  </li><li>"Date Created" field is now visible (in human-annotation.cfg--visibility
+is controlled in the config file) but not editable (you can try to change it
+but it goes back to what it was).
+  </li><li>Date Created is automatically filled in for newly-created annotations
+(it's round-tripped for existing ones).  Fixes <a href="http://sourceforge.net/tracker/?func=detail&aid=3389282&group_id=76834&atid=887913">bug 3389282</a>.
+  </li><li>Heiko improved the installer so that if you have a 64-bit computer with
+64-bit Java, the installer will install Phenote so that it will launch in
+64-bit mode.  The installer tries to detect if you have a 64-bit machine, in
+which case it suggests a larger memory allocation, but it is (by necessity)
+conservative about this (because if it suggested a too-high memory setting you
+wouldn't be able to launch Phenote at all), so it may limit you to an 1860M
+setting if it's not sure that you have 64-bit Java enabled.
+  </li>
+</ul>
+
 <h2>1.8.6</h2>
 <ul>
 <li>Made release Java-1.5-compatible for users who have older Macs</li>
