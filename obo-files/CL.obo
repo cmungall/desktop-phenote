@@ -17060,7 +17060,7 @@ creation_date: 2010-09-15T03:44:35Z
 id: CL:0002323
 name: amniocyte
 namespace: cell
-def: "A cell of a¬†fetus¬†which is suspended in the amniotic fluid. Amniocytes are considered to arise from several tissues including fetal skin, the fetal urinary tract, umbilical cord, and the inner amniotic surface." [BFO:0000066, GOC:tfm, PMID:3211847]
+def: "A cell of aÂ fetusÂ which is suspended in the amniotic fluid. Amniocytes are considered to arise from several tissues including fetal skin, the fetal urinary tract, umbilical cord, and the inner amniotic surface." [BFO:0000066, GOC:tfm, PMID:3211847]
 xref: BTO:0000066
 is_a: CL:0000349 ! extraembryonic cell
 intersection_of: CL:0000349 ! extraembryonic cell
@@ -17182,7 +17182,7 @@ creation_date: 2010-09-20T02:25:25Z
 id: CL:0002334
 name: preadipocyte
 namespace: cell
-def: "An undifferentiated¬†fibroblast¬†that can be stimulated to form a fat cell." [GOC:tfm, PMID:18793119]
+def: "An undifferentiatedÂ fibroblastÂ that can be stimulated to form a fat cell." [GOC:tfm, PMID:18793119]
 xref: BTO:0001107
 is_a: CL:0000057 ! fibroblast
 created_by: tmeehan
@@ -17423,7 +17423,7 @@ creation_date: 2010-09-21T04:33:05Z
 id: CL:0002351
 name: progenitor cell of endocrine pancreas
 namespace: cell
-def: "A multi-fate stem cell that is able to differentiate into the pancreas alpha, beta and delta endocrine cells. This cell type expresses neurogenin-3 and¬†Isl-1." [GOC:tfm, PMID:20025937, PMID:20217494]
+def: "A multi-fate stem cell that is able to differentiate into the pancreas alpha, beta and delta endocrine cells. This cell type expresses neurogenin-3 andÂ Isl-1." [GOC:tfm, PMID:20025937, PMID:20217494]
 synonym: "pancreatic endocrine progenitor" EXACT []
 synonym: "pancreatic islet progenitor cell" EXACT []
 is_a: CL:0000048 ! multi fate stem cell
@@ -17601,7 +17601,7 @@ creation_date: 2010-09-22T01:40:44Z
 id: CL:0002363
 name: keratocyte
 namespace: cell
-def: "A keratocyte is a specialized fibroblast¬†residing in the ¬†cornea stroma that has a flattened, dendritic cell located between the lamellae with a large flattened nucleus and lengthy processes which communicate with neighboring cells. This¬†corneal¬†layer, representing about 85-90% of corneal thickness, is built up from highly regular collagenous lamellae and extracellular matrix components. Keratocytes play the major role in keeping it transparent, healing its wounds, and synthesizing its components.  This cell type secretes collagen I, V, VI, and keratin sulfate." [GOC:tfm, ISBN:978-0-7020-2958-5]
+def: "A keratocyte is a specialized fibroblastÂ residing in the Â cornea stroma that has a flattened, dendritic cell located between the lamellae with a large flattened nucleus and lengthy processes which communicate with neighboring cells. ThisÂ cornealÂ layer, representing about 85-90% of corneal thickness, is built up from highly regular collagenous lamellae and extracellular matrix components. Keratocytes play the major role in keeping it transparent, healing its wounds, and synthesizing its components.  This cell type secretes collagen I, V, VI, and keratin sulfate." [GOC:tfm, ISBN:978-0-7020-2958-5]
 synonym: "corneal fibroblast" EXACT []
 synonym: "corneal keratocyte" EXACT []
 is_a: CL:0000057 ! fibroblast
@@ -17652,7 +17652,7 @@ creation_date: 2010-09-23T03:46:34Z
 id: CL:0002367
 name: trabecular meshwork cell
 namespace: cell
-def: "A cell that lines the trabecular meshwork, which is an area of tissue in the¬†eye¬†located around the base of the¬†cornea, near the¬†ciliary body, and is responsible for draining the¬†aqueous humor¬†from the eye via the¬†anterior chamber¬†(the chamber on the front of the eye covered by the cornea). This cell may play a role in regulating intraocular pressure." [GOC:tfm, PMID:14500801]
+def: "A cell that lines the trabecular meshwork, which is an area of tissue in theÂ eyeÂ located around the base of theÂ cornea, near theÂ ciliary body, and is responsible for draining theÂ aqueous humorÂ from the eye via theÂ anterior chamberÂ (the chamber on the front of the eye covered by the cornea). This cell may play a role in regulating intraocular pressure." [GOC:tfm, PMID:14500801]
 synonym: "trabeculocyte" EXACT []
 is_a: CL:0000115 ! endothelial cell
 intersection_of: CL:0000115 ! endothelial cell
@@ -35523,7 +35523,7 @@ creation_date: 2011-06-16T06:54:01Z
 id: PATO:0002318
 name: superelliptic
 def: "A shape constituting a transition between a rectangle and a circle; a closed curve, of which the circle and ellipse are special cases, whose parametric equation is x = a.cos2/rt, y = b.cos2/rt" [wiktionary:superellipse]
-synonym: "Lam√© curve" EXACT []
+synonym: "LamÃ© curve" EXACT []
 property_value: IAO:0000412 http://purl.obolibrary.org/obo/pato.owl
 is_a: PATO:0002006 ! 2-D shape
 created_by: George Gkoutos
@@ -39058,7 +39058,7 @@ id: UBERON:0000007
 name: pituitary gland
 namespace: uberon
 def: "The pituitary gland is an endocrine gland that secretes hormones that regulate many other glands [GO]. An endocrine gland located ventral to the diencephalon and derived from mixed neuroectodermal and non neuroectodermal origin [ZFIN]." [Wikipedia:Pituitary_gland, ZFIN:curator]
-comment: Taxon notes: The lamprey possesses a distinct pituitary organ and hormones, the ascidian does not show distinct evidence of them [Sower S, Freamat M, Kavanaugh S. The origins of the vertebrate hypothalamic‚Äìpituitary‚Äìgonadal (HPG) and hypothalamic‚Äìpituitary‚Äìthyroid (HPT) endocrine systems: new insights from lampreys. Gen Comp Endocrinol 2009;161:20-9]
+comment: Taxon notes: The lamprey possesses a distinct pituitary organ and hormones, the ascidian does not show distinct evidence of them [Sower S, Freamat M, Kavanaugh S. The origins of the vertebrate hypothalamicâ??pituitaryâ??gonadal (HPG) and hypothalamicâ??pituitaryâ??thyroid (HPT) endocrine systems: new insights from lampreys. Gen Comp Endocrinol 2009;161:20-9]
 subset: organ_slim
 subset: uberon_slim
 subset: vertebrate_core
@@ -39722,7 +39722,7 @@ id: UBERON:0000074
 name: renal glomerulus
 namespace: uberon
 def: "A capillary tuft which forms a close network with the visceral epithelium (podocytes) and the mesangium to form the filtration barrier and is surrounded by Bowman's capsule in nephrons of the vertebrate kidney[GO]." [MP:0005325, Wikipedia:Glomerulus]
-comment: ZFA - The multi-tissue structure where the glomerular basement membrane supported by mesonephric podocytes filters blood from the glomerular capillaries. TODO - split glomerulus and glomerular tuft? DONE. GUDMAP: 'Together, the Bowman‚Äôs capsule and the glomerulus comprise the definitive renal corpuscle.' - here the glomerulus is part of the capsule?
+comment: ZFA - The multi-tissue structure where the glomerular basement membrane supported by mesonephric podocytes filters blood from the glomerular capillaries. TODO - split glomerulus and glomerular tuft? DONE. GUDMAP: 'Together, the Bowmanâ??s capsule and the glomerulus comprise the definitive renal corpuscle.' - here the glomerulus is part of the capsule?
 subset: vertebrate_core
 synonym: "glomerular capillary tuft" RELATED [ZFA:0001288]
 synonym: "glomerular tuft" RELATED []
@@ -40465,7 +40465,7 @@ id: UBERON:0000305
 name: amnion
 namespace: uberon
 alt_id: UBERON:BTO_0000065-FMA_80223
-def: "A membrane building the amniotic sac that surrounds and protects an embryo. It is developed in reptiles, birds, and mammals, which are hence called ‚ÄúAmniota‚Äù; but not in amphibians and fish (Ichthyopsida), which are consequently termed ‚ÄúAnamniota‚Äù. The primary function of this is the protection of the embryo for its development. It stems from parts of the mesoderm on the outer side and the ectoderm on the inner side[WP]." [Wikipedia:Amnion]
+def: "A membrane building the amniotic sac that surrounds and protects an embryo. It is developed in reptiles, birds, and mammals, which are hence called â??Amniotaâ??; but not in amphibians and fish (Ichthyopsida), which are consequently termed â??Anamniotaâ??. The primary function of this is the protection of the embryo for its development. It stems from parts of the mesoderm on the outer side and the ectoderm on the inner side[WP]." [Wikipedia:Amnion]
 xref: BTO:0000065
 xref: EHDAA2:0000116
 xref: EHDAA:136
@@ -40489,7 +40489,7 @@ id: UBERON:0000310
 name: breast
 namespace: uberon
 alt_id: UBERON:BTO_0000149-FMA_9601
-def: "The breast is the upper ventral region of an animal's torso, particularly that of mammals, including human beings. The breasts of a female primate‚Äôs body contain the mammary glands, which secrete milk used to feed infants. Both men and women develop breasts from the same embryological tissues. However, at puberty female sex hormones, mainly estrogens, promote breast development, which does not happen with men. As a result women's breasts become more prominent than men's. [WP,unvetted]." [Wikipedia:Breast]
+def: "The breast is the upper ventral region of an animal's torso, particularly that of mammals, including human beings. The breasts of a female primateâ??s body contain the mammary glands, which secrete milk used to feed infants. Both men and women develop breasts from the same embryological tissues. However, at puberty female sex hormones, mainly estrogens, promote breast development, which does not happen with men. As a result women's breasts become more prominent than men's. [WP,unvetted]." [Wikipedia:Breast]
 synonym: "mammary part of chest" EXACT [FMA:9601]
 synonym: "mammary region" EXACT [FMA:9601]
 xref: BTO:0000149
@@ -42046,7 +42046,7 @@ id: UBERON:0000956
 name: cerebral cortex
 namespace: uberon
 alt_id: UBERON:FBbt_00003625-FMA_61830-MA_0000185-MIAA_0000108
-def: "The cerebral cortex is a structure within the brain that plays a key role in memory, attention, perceptual awareness, thought, language, and consciousness. It constitutes the outermost layer of the cerebrum. In preserved brains, it has a grey color, hence the name 'grey matter'. Grey matter is formed by neurons and their unmyelinated fibers, whereas the white matter below the grey matter of the cortex is formed predominantly by myelinated axons interconnecting different regions of the central nervous system. The human cerebral cortex is 2‚Äì4 mm (0.08‚Äì0.16 inches) thick. The surface of the cerebral cortex is folded in large mammals, such that more than two-thirds of the cortical surface is buried in the grooves, called 'sulci. ' The phylogenetically most recent part of the cerebral cortex, the neocortex, also called isocortex, is differentiated into six horizontal layers; the more ancient part of the cerebral cortex, the hippocampus (also called archicortex), has at most three cellular layers, and is divided into subfields. Relative variations in thickness or cell type (among other parameters) allow us to distinguish between different neocortical architectonic fields. The geometry of at least some of these fields seems to be related to the anatomy of the cortical folds, and, for example, layers in the upper part of the cortical ridges seem to be more clearly differentiated than in its deeper parts. [WP,unvetted]." [Wikipedia:Cerebral_cortex]
+def: "The cerebral cortex is a structure within the brain that plays a key role in memory, attention, perceptual awareness, thought, language, and consciousness. It constitutes the outermost layer of the cerebrum. In preserved brains, it has a grey color, hence the name 'grey matter'. Grey matter is formed by neurons and their unmyelinated fibers, whereas the white matter below the grey matter of the cortex is formed predominantly by myelinated axons interconnecting different regions of the central nervous system. The human cerebral cortex is 2â??4 mm (0.08â??0.16 inches) thick. The surface of the cerebral cortex is folded in large mammals, such that more than two-thirds of the cortical surface is buried in the grooves, called 'sulci. ' The phylogenetically most recent part of the cerebral cortex, the neocortex, also called isocortex, is differentiated into six horizontal layers; the more ancient part of the cerebral cortex, the hippocampus (also called archicortex), has at most three cellular layers, and is divided into subfields. Relative variations in thickness or cell type (among other parameters) allow us to distinguish between different neocortical architectonic fields. The geometry of at least some of these fields seems to be related to the anatomy of the cortical folds, and, for example, layers in the upper part of the cortical ridges seem to be more clearly differentiated than in its deeper parts. [WP,unvetted]." [Wikipedia:Cerebral_cortex]
 comment: This class was created automatically from a combination of ontologies
 subset: uberon_slim
 synonym: "brain cortex" RELATED [BTO:0000233]
@@ -44366,7 +44366,7 @@ name: glomerular capsule
 namespace: uberon
 alt_id: UBERON:FMA_15626-MA_0001660
 def: "The Bowman's capsule is a cup-like sac at the beginning of the tubular component of a nephron in the mammalian kidney. A glomerulus is enclosed in the sac. Fluids from blood in the glomerulus are collected in the Bowman's capsule and further processed along the nephron to form urine. This process is known as ultrafiltration. [WP,unvetted]." [Wikipedia:Glomerular_capsule]
-comment: One fold of the S-shaped body gives rise to Bowman‚Äôs capsule[GUDMAP]
+comment: One fold of the S-shaped body gives rise to Bowmanâ??s capsule[GUDMAP]
 subset: uberon_slim
 subset: vertebrate_core
 synonym: "Bowman's capsule" EXACT [http://www.gudmap.org/About/Tutorial/DevMUS.html#DMK_Nephron]
@@ -44890,7 +44890,7 @@ id: UBERON:0001264
 name: pancreas
 namespace: uberon
 alt_id: UBERON:FMA_16017-FMA_16018-FMA_7198-MA_0000120-MA_0001582-MA_0002415-MIAA_0000075-XAO_0000136-XAO_0000137-ZFA_0000140-ZFA_0001249-ZFA_0001260
-def: "An endoderm derived structure that produces precursors of digestive enzymes and blood glucose regulating enzymes[GO]. The mature pancreas of higher vertebrates and mammals comprises two major functional units: the exocrine pancreas, which is responsible for the production of digestive enzymes to be secreted into the gut lumen, and the endocrine pancreas, which has its role in the synthesis of several hormones with key regulatory functions in food uptake and metabolism. The exocrine portion constitutes the majority of the mass of the pancreas, and contains only two different cell types, the secretory acinar cells and the ductular cells. The endocrine portion, which comprises only 1‚Äì2% of the total mass, contains five different cell types, which are organized into mixed functional assemblies referred to as the islets of Langerhans[PMID]." [GO:0031016, PMID:16417468, Wikipedia:Pancreas]
+def: "An endoderm derived structure that produces precursors of digestive enzymes and blood glucose regulating enzymes[GO]. The mature pancreas of higher vertebrates and mammals comprises two major functional units: the exocrine pancreas, which is responsible for the production of digestive enzymes to be secreted into the gut lumen, and the endocrine pancreas, which has its role in the synthesis of several hormones with key regulatory functions in food uptake and metabolism. The exocrine portion constitutes the majority of the mass of the pancreas, and contains only two different cell types, the secretory acinar cells and the ductular cells. The endocrine portion, which comprises only 1â??2% of the total mass, contains five different cell types, which are organized into mixed functional assemblies referred to as the islets of Langerhans[PMID]." [GO:0031016, PMID:16417468, Wikipedia:Pancreas]
 comment: taxon notes: As a secretory organ serving exocrine and endocrine functions, the pancreas is specific to the vertebrates[PMID:16417468]
 subset: major_organ
 subset: organ_slim
@@ -45965,7 +45965,7 @@ id: UBERON:0001608
 name: dilatator pupillae
 namespace: uberon
 alt_id: UBERON:FMA_49158-MA_0001288
-def: "The iris dilator muscle (pupil dilator muscle, pupillary dilator, radial muscle of iris, radiating fibers), is a smooth muscle of the eye, running radially in the iris and therefore fit as a dilator. It is innervated by the sympathetic system, which acts by releasing noradrenaline, which acts on Œ±1-receptors.. Thus, when presented with a threatening stimuli that activates the fight-or-flight response, this innervation dilates the iris, thus temporarily letting more light reach the retina. [WP,unvetted]." [Wikipedia:Dilator_pupillae, Wikipedia:Iris_dilator_muscle]
+def: "The iris dilator muscle (pupil dilator muscle, pupillary dilator, radial muscle of iris, radiating fibers), is a smooth muscle of the eye, running radially in the iris and therefore fit as a dilator. It is innervated by the sympathetic system, which acts by releasing noradrenaline, which acts on Î±1-receptors.. Thus, when presented with a threatening stimuli that activates the fight-or-flight response, this innervation dilates the iris, thus temporarily letting more light reach the retina. [WP,unvetted]." [Wikipedia:Dilator_pupillae, Wikipedia:Iris_dilator_muscle]
 subset: uberon_slim
 synonym: "dilator muscle of pupil" EXACT []
 synonym: "dilator of pupil" EXACT []
@@ -46615,7 +46615,7 @@ id: UBERON:0001770
 name: lacrimal canaliculus
 namespace: uberon
 alt_id: UBERON:FMA_58245-MA_0001294
-def: "The lacrimal canaliculi, also known as the lacrimal canals or lacrimal ducts, are the small channels in each eyelid that commence at minute orifices, termed puncta lacrimalia, on the summits of the papillae lacrimales, seen on the margins of the lids at the lateral extremity of the lacus lacrimalis. The superior duct, the smaller and shorter of the two, at first ascends, and then bends at an acute angle, and passes medialward and downward to the lacrimal sac. The inferior duct at first descends, and then runs almost horizontally to the lacrimal sac. At the angles they are dilated into ampull√¶. Microscopically, they are lined by nonkeratinizing stratified squamous epithelium surrounded by fibrous tissue. Outside the latter is a layer of striped muscle, continuous with the lacrimal part of the Orbicularis oculi; at the base of each lacrimal papilla the muscular fibers are circularly arranged and form a kind of sphincter. [WP,unvetted]." [Wikipedia:Lacrimal_canaliculus]
+def: "The lacrimal canaliculi, also known as the lacrimal canals or lacrimal ducts, are the small channels in each eyelid that commence at minute orifices, termed puncta lacrimalia, on the summits of the papillae lacrimales, seen on the margins of the lids at the lateral extremity of the lacus lacrimalis. The superior duct, the smaller and shorter of the two, at first ascends, and then bends at an acute angle, and passes medialward and downward to the lacrimal sac. The inferior duct at first descends, and then runs almost horizontally to the lacrimal sac. At the angles they are dilated into ampullÃ?. Microscopically, they are lined by nonkeratinizing stratified squamous epithelium surrounded by fibrous tissue. Outside the latter is a layer of striped muscle, continuous with the lacrimal part of the Orbicularis oculi; at the base of each lacrimal papilla the muscular fibers are circularly arranged and form a kind of sphincter. [WP,unvetted]." [Wikipedia:Lacrimal_canaliculus]
 comment: todo - resolve canaliculus vs tear duct vs lacrimal vs nasolacrimal
 subset: uberon_slim
 xref: FMA:58245
@@ -46660,7 +46660,7 @@ id: UBERON:0001777
 name: substantia propria of cornea
 namespace: uberon
 alt_id: UBERON:FMA_58306-MA_0001245
-def: "The substantia propria (or stroma of cornea) is fibrous, tough, unyielding, and perfectly transparent. It is composed of about 200 flattened lamell√¶ (plates of collagen fibrils), superimposed one on another. They are each about 1.5-2.5 micrometres in thickness. These fibrils run at different angles between the limbi. Fibres of the layers frequently interweave, the anterior lamell√¶ interweaving more than posterior lamell√¶. The fibres of each lamella are parallel with one another, but at right angles to those of adjacent lamell√¶. The lamell√¶ are produced by keratocytes (corneal corpuscles), which occupy about 10% of the substantia propria. These lamell√¶ are made up of bundles of modified connective tissue, the fibres of which are directly continuous with those of the sclera. More collagen fibres run in a temporal-nasal direction than run in the superior-inferior direction. This is often ignored by corneal transplant surgeons, leading to poor corneal mechanical strength in corneal transplant patients. [WP,unvetted]." [Wikipedia:Corneal_stroma]
+def: "The substantia propria (or stroma of cornea) is fibrous, tough, unyielding, and perfectly transparent. It is composed of about 200 flattened lamellÃ? (plates of collagen fibrils), superimposed one on another. They are each about 1.5-2.5 micrometres in thickness. These fibrils run at different angles between the limbi. Fibres of the layers frequently interweave, the anterior lamellÃ? interweaving more than posterior lamellÃ?. The fibres of each lamella are parallel with one another, but at right angles to those of adjacent lamellÃ?. The lamellÃ? are produced by keratocytes (corneal corpuscles), which occupy about 10% of the substantia propria. These lamellÃ? are made up of bundles of modified connective tissue, the fibres of which are directly continuous with those of the sclera. More collagen fibres run in a temporal-nasal direction than run in the superior-inferior direction. This is often ignored by corneal transplant surgeons, leading to poor corneal mechanical strength in corneal transplant patients. [WP,unvetted]." [Wikipedia:Corneal_stroma]
 comment: This class was created automatically from a combination of ontologies
 subset: uberon_slim
 subset: vertebrate_core
@@ -47200,7 +47200,7 @@ id: UBERON:0001854
 name: saccule of membranous labyrinth
 namespace: uberon
 alt_id: UBERON:FMA_61116-MA_0000246-ZFA_0000428
-def: "A bed of sensory cells situated in the inner ear. The saccule translates head movements into neural impulses which the brain can interpret. The saccule is sensitive to linear translations of the head, specifically movements up and down (think about moving on an elevator). When the head moves vertically, the sensory cells of the saccule are disturbed and the neurons connected to them begin transmitting impulses to the brain. These impulses travel along the vestibular portion of the eighth cranial nerve to the vestibular nuclei in the brainstem. is the smaller of the two vestibular sacs. It is globular in form and lies in the recessus sph√¶ricus near the opening of the scala vestibuli of the cochlea. Its cavity does not directly communicate with that of the utricle. The anterior part of the saccule exhibits an oval thickening, the macula acustica sacculi, or macula, to which are distributed the saccular filaments of the vestibular branch of the vestibulocochlear nerve, also known as the acoustic nerve or cranial nerve VIII[WP]." [Wikipedia:Saccule]
+def: "A bed of sensory cells situated in the inner ear. The saccule translates head movements into neural impulses which the brain can interpret. The saccule is sensitive to linear translations of the head, specifically movements up and down (think about moving on an elevator). When the head moves vertically, the sensory cells of the saccule are disturbed and the neurons connected to them begin transmitting impulses to the brain. These impulses travel along the vestibular portion of the eighth cranial nerve to the vestibular nuclei in the brainstem. is the smaller of the two vestibular sacs. It is globular in form and lies in the recessus sphÃ?ricus near the opening of the scala vestibuli of the cochlea. Its cavity does not directly communicate with that of the utricle. The anterior part of the saccule exhibits an oval thickening, the macula acustica sacculi, or macula, to which are distributed the saccular filaments of the vestibular branch of the vestibulocochlear nerve, also known as the acoustic nerve or cranial nerve VIII[WP]." [Wikipedia:Saccule]
 comment: AAO to be checked
 subset: organ_slim
 subset: uberon_slim
@@ -48067,7 +48067,7 @@ name: endothelium
 namespace: uberon
 alt_id: UBERON:FMA_63916-ZFA_0001639
 def: "A layer of epithelium that lines the heart, blood vessels (endothelium, vascular), lymph vessels (endothelium, lymphatic), and the serous cavities of the body[MESH]. Simple squamous epithelium which lines blood and lymphatic vessels and the heart[FMA]" [FMA:63916, MESH:A.10.272.491]
-comment: The term ‚Äò‚Äòendothelium‚Äô‚Äô has been either restricted to the continuous cell layer of the vertebrates, as we are assuming here, or applied to all the cells able to adhere to the luminal surface of the vascular basement membrane (Casley-Smith 1980)
+comment: The term â??â??endotheliumâ??â?? has been either restricted to the continuous cell layer of the vertebrates, as we are assuming here, or applied to all the cells able to adhere to the luminal surface of the vascular basement membrane (Casley-Smith 1980)
 subset: uberon_slim
 xref: BTO:0000393
 xref: EFO:0002548
@@ -48140,7 +48140,7 @@ name: fibrocartilage
 namespace: uberon
 alt_id: UBERON:FMA_64784-MA_0000108
 def: "Cartilage tissue intermediate between hyaline cartilage and dense connective tissue; contains of abundant collagen fibers; chondrocytes often arranged in columns[VAO]. A mixture of white fibrous tissue and cartilaginous tissue in various proportions. It owes its flexibility and toughness to the former of these constituents, and its elasticity to the latter. It is the only type of cartilage that contains type I collagen in addition to the normal type II[WP]. Cartilage (tissue) which consists of chondrocytes and collagen, the intercellular matrix of which is an amorphous gel without a well-defined perichondrium[FMA]." [FMA:64784, VAO:0000103, Wikipedia:Fibrocartilage]
-comment: The white fibrocartilages admit of arrangement into four groups‚Äîinterarticular, connecting, circumferential, and stratiform -- WP. TODO: add mineralized
+comment: The white fibrocartilages admit of arrangement into four groupsâ??interarticular, connecting, circumferential, and stratiform -- WP. TODO: add mineralized
 subset: uberon_slim
 xref: FMA:64784
 xref: galen:Fibrocartilage
@@ -49838,7 +49838,7 @@ name: adenohypophysis
 namespace: uberon
 alt_id: UBERON:FMA_74627-MA_0000177-ZFA_0001282
 def: "The glandular, anterior lobe of the pituitary gland. The anterior pituitary regulates several physiological processes including stress, growth, and reproduction[WP]. The anterior lobe of the hypophysis (pituitary gland). This lobe contains cells that produce prolactin, growth hormone, thyroid-stimulating hormone, follicle-stimulating hormone and proopiomelanocortin. In contrast to mammalian vertebrates, the adenohypophysis remains in a subepithelial position and there exists no equivalent of Rathke's pouch in zebrafish[ZFA]." [Wikipedia:Adenohypophysis, ZFIN:curator]
-comment: note that BTO may contain an error here. Also note we may need to introduce taxon-specific developmental relationships: "While in most basal fish and tetrapods the adenohypophyseal anlagen invaginates to form Rathke‚Äôs pouch, in teleost fish the adenohypophyseal placode does not invaginate but rather maintains its initial organization forming a solid structure in the head"[NBK53175]
+comment: note that BTO may contain an error here. Also note we may need to introduce taxon-specific developmental relationships: "While in most basal fish and tetrapods the adenohypophyseal anlagen invaginates to form Rathkeâ??s pouch, in teleost fish the adenohypophyseal placode does not invaginate but rather maintains its initial organization forming a solid structure in the head"[NBK53175]
 subset: uberon_slim
 subset: vertebrate_core
 synonym: "anterior hypophysis" EXACT [ZFA:0001282]
@@ -50363,7 +50363,7 @@ id: UBERON:0002276
 name: lamina of spiral limbus
 namespace: uberon
 alt_id: UBERON:FMA_77721-MA_0001191
-def: "The osseous spiral lamina consists of two plates of bone, and between these are the canals for the transmission of the filaments of the acoustic nerve. On the upper plate of that part of the lamina which is outside the vestibular membrane, the periosteum is thickened to form the limbus spiralis (or limbus lamin√¶ spiralis), this ends externally in a concavity, the sulcus spiralis internus, which represents, on section, the form of the letter C. [WP,unvetted]." [Wikipedia:Limbus_laminae_spiralis]
+def: "The osseous spiral lamina consists of two plates of bone, and between these are the canals for the transmission of the filaments of the acoustic nerve. On the upper plate of that part of the lamina which is outside the vestibular membrane, the periosteum is thickened to form the limbus spiralis (or limbus laminÃ? spiralis), this ends externally in a concavity, the sulcus spiralis internus, which represents, on section, the form of the letter C. [WP,unvetted]." [Wikipedia:Limbus_laminae_spiralis]
 comment: This class was created automatically from a combination of ontologies
 subset: uberon_slim
 synonym: "limbus lamina spiralis" EXACT []
@@ -51145,7 +51145,7 @@ id: UBERON:0002358
 name: peritoneum
 namespace: uberon
 alt_id: UBERON:FMA_9584-XAO_0000139-ZFA_0005120
-def: "A serous membrane that forms the lining of the abdominal cavity or the coelom ‚Äî it covers most of the intra-abdominal (or coelomic) organs ‚Äî in higher vertebrates and some invertebrates (annelids, for instance). It is composed of a layer of mesothelium supported by a thin layer of connective tissue. The peritoneum both supports the abdominal organs and serves as a conduit for their blood and lymph vessels and nerves[WP]. The smooth transparent serous membrane that lines the cavity of the abdomen of a mammal and is folded inward over the abdominal and pelvic viscera[BTO]. The endothelial lining of the ABDOMINAL CAVITY. The parietal peritoneum covers the inside of the ABDOMINAL WALL and the visceral peritoneum covers the bowel, the MESENTERY, and certain of the organs. The portion that covers the bowel becomes the serosal layer of the bowel wall[GAID]." [Wikipedia:Peritoneum, ZFIN:curator]
+def: "A serous membrane that forms the lining of the abdominal cavity or the coelom â?? it covers most of the intra-abdominal (or coelomic) organs â?? in higher vertebrates and some invertebrates (annelids, for instance). It is composed of a layer of mesothelium supported by a thin layer of connective tissue. The peritoneum both supports the abdominal organs and serves as a conduit for their blood and lymph vessels and nerves[WP]. The smooth transparent serous membrane that lines the cavity of the abdomen of a mammal and is folded inward over the abdominal and pelvic viscera[BTO]. The endothelial lining of the ABDOMINAL CAVITY. The parietal peritoneum covers the inside of the ABDOMINAL WALL and the visceral peritoneum covers the bowel, the MESENTERY, and certain of the organs. The portion that covers the bowel becomes the serosal layer of the bowel wall[GAID]." [Wikipedia:Peritoneum, ZFIN:curator]
 comment: TODO - in ZFA is_a epithelium
 subset: uberon_slim
 subset: vertebrate_core
@@ -51628,7 +51628,7 @@ name: bile duct
 namespace: uberon
 alt_id: UBERON:FMA_9706-MA_0000354-XAO_0000134
 def: "Duct that carries bile from the liver to the small intestine." [Wikipedia:Bile_duct, ZFA:0001100]
-comment: The path is as follows: Bile canaliculi ‚Üí Canals of Hering ‚Üí interlobular bile ducts ‚Üí intrahepatic bile ducts ‚Üí left and right hepatic ducts merge to form ‚Üí common hepatic duct exits liver and joins ‚Üí cystic duct (from gall bladder) forming ‚Üí common bile duct ‚Üí joins with pancreatic duct ‚Üí forming ampulla of Vater ‚Üí enters duodenum [WP]
+comment: The path is as follows: Bile canaliculi â?? Canals of Hering â?? interlobular bile ducts â?? intrahepatic bile ducts â?? left and right hepatic ducts merge to form â?? common hepatic duct exits liver and joins â?? cystic duct (from gall bladder) forming â?? common bile duct â?? joins with pancreatic duct â?? forming ampulla of Vater â?? enters duodenum [WP]
 subset: uberon_slim
 synonym: "gall duct" RELATED [BTO:0000122]
 synonym: "hepatic duct" RELATED []
@@ -55327,7 +55327,7 @@ id: UBERON:0004208
 name: nephrogenic mesenchyme
 namespace: uberon
 def: "Nephrogenic mesenchyme is the tissue made up of loosely connected mesenchymal cells in the nephron" [GO:0072076]
-comment: The detailed events associated with the differentiation of the nephrogenic mesenchyme are somewhat complex. It has been suggested that each terminal branch of the ureteric bud stimulates the associated cap mesenchyme tissue to form a renal vesicle (the most primitive stage of nephron development: a stage I nephron). This then elongates, becomes a comma-shaped and then an S-shaped body (stage II nephron), and makes contact with and fuses with the distal component of the ureteric bud. The latter then forms the collecting duct. One fold of the S-shaped body gives rise to Bowman‚Äôs capsule (also termed the glomerular capsule). Soon afterwards, endothelial cells invade to make a capillary knot-like outgrowth, the glomerular tuft, which goes on to form the glomerulus. The inner epithelial layer of the Bowman‚Äôs capsule (also called the visceral epithelium, or podocyte layer because it consists of podocytes) is closely apposed to the endothelial glomerulus. Together, the Bowman‚Äôs capsule and the glomerulus comprise the definitive renal corpuscle. The rest of the nephron elongates to form components of the proximal tubule, the loop of Henle and the distal tubule. The distal pole of the developing nephron connects to the ureteric bud that induced it at an early stage of nephron/ collecting duct development, before differentiation of the proximal tubule, the loop of Henle and the distal tubule are complete. This connection allows the excretory products produced by the kidney to be removed and subsequently transferred, via the ureter, into the bladder where they are stored until it is appropriate to empty the bladder. [http://www.gudmap.org/About/Tutorial/DevMUS.html#DMK_Nephron]
+comment: The detailed events associated with the differentiation of the nephrogenic mesenchyme are somewhat complex. It has been suggested that each terminal branch of the ureteric bud stimulates the associated cap mesenchyme tissue to form a renal vesicle (the most primitive stage of nephron development: a stage I nephron). This then elongates, becomes a comma-shaped and then an S-shaped body (stage II nephron), and makes contact with and fuses with the distal component of the ureteric bud. The latter then forms the collecting duct. One fold of the S-shaped body gives rise to Bowmanâ??s capsule (also termed the glomerular capsule). Soon afterwards, endothelial cells invade to make a capillary knot-like outgrowth, the glomerular tuft, which goes on to form the glomerulus. The inner epithelial layer of the Bowmanâ??s capsule (also called the visceral epithelium, or podocyte layer because it consists of podocytes) is closely apposed to the endothelial glomerulus. Together, the Bowmanâ??s capsule and the glomerulus comprise the definitive renal corpuscle. The rest of the nephron elongates to form components of the proximal tubule, the loop of Henle and the distal tubule. The distal pole of the developing nephron connects to the ureteric bud that induced it at an early stage of nephron/ collecting duct development, before differentiation of the proximal tubule, the loop of Henle and the distal tubule are complete. This connection allows the excretory products produced by the kidney to be removed and subsequently transferred, via the ureter, into the bladder where they are stored until it is appropriate to empty the bladder. [http://www.gudmap.org/About/Tutorial/DevMUS.html#DMK_Nephron]
 synonym: "mesenchyme of nephron" EXACT [OBOL:automatic]
 synonym: "nephron mesenchyme" EXACT [OBOL:automatic]
 property_value: IAO:0000412 http://purl.obolibrary.org/obo/uberon.owl
@@ -59288,7 +59288,7 @@ relationship: part_of UBERON:0004135 {source="BTO"} ! distal tubule
 id: UBERON:0008425
 name: mammary ridge
 namespace: uberon
-def: "A bandlike thickening of ectoderm in the embryo extending from just below the axilla to the inguinal region and giving rise to the mammary glands[Stedmans]. One of two parallel lines, formed by thickenings of the epidermis (the mammary ridge) along the ventral surface of mammals of both sexes. They extend from the upper limbs (arms) to the lower limbs (legs) and are developed in the embryo. They give rise to the mammary glands and nipples but are otherwise usually not visible in the adult. The first manifestation of the mammary gland in many mammals is an elevated ridge or milk line, which then fragments into individual buds in specific regions lateral of the dorsal midline. These buds are either located in the thoracic region in primates, in the inguinal area in ungulates or along the entire length of the trunk in rodents and pigs. In humans, milk lines appear in the seventh week of embryonic development. After initial development of the milk lines they go into remission. Nipples develop on the milk lines of mammals. Most humans have two nipples, but in some cases more than two will develop. In most cases, these 'third nipples'‚Äîand sometimes fourth nipple‚Äîgrow along the milk line[WP]." [http://dictionary.reference.com/browse/mammary%20ridge, Wikipedia:Milk_line]
+def: "A bandlike thickening of ectoderm in the embryo extending from just below the axilla to the inguinal region and giving rise to the mammary glands[Stedmans]. One of two parallel lines, formed by thickenings of the epidermis (the mammary ridge) along the ventral surface of mammals of both sexes. They extend from the upper limbs (arms) to the lower limbs (legs) and are developed in the embryo. They give rise to the mammary glands and nipples but are otherwise usually not visible in the adult. The first manifestation of the mammary gland in many mammals is an elevated ridge or milk line, which then fragments into individual buds in specific regions lateral of the dorsal midline. These buds are either located in the thoracic region in primates, in the inguinal area in ungulates or along the entire length of the trunk in rodents and pigs. In humans, milk lines appear in the seventh week of embryonic development. After initial development of the milk lines they go into remission. Nipples develop on the milk lines of mammals. Most humans have two nipples, but in some cases more than two will develop. In most cases, these 'third nipples'â??and sometimes fourth nippleâ??grow along the milk line[WP]." [http://dictionary.reference.com/browse/mammary%20ridge, Wikipedia:Milk_line]
 comment: split ridge and milk line?
 synonym: "mammary fold" EXACT [http://dictionary.reference.com/browse/mammary+ridge]
 synonym: "milk line" RELATED [Wikipedia:Milk_line]
@@ -59549,7 +59549,7 @@ id: UBERON:0009122
 name: adenohypophyseal placode
 namespace: uberon
 def: "The adenohypophyseal placode forms the anterior lobe of the pituitary gland and gives rise to the endocrine secretory cells of the pituitary" [http://www.ncbi.nlm.nih.gov/books/NBK53175/]
-comment: Fate-mapping studies in amphibian, chick and mouse embryos (Eagleson et al., 1986; 1995; Couly and Le Douarin, 1985; Cobos et al., 2001; Osumi-Yamachita et al., 1994; Kawamura et al., 2002) have shown that the cells contributing to the adenohypophysis develop at the midline of the anterior neural ridge, which delineates the rostral boundary of the neural plate, a region devoid of neural crest. The anterior neural ridge also gives rise to the olfactory placodes and some forebrain tissues including the olfactory bulbs (reviewed in Papalopulu, 1995). Ablation of this region in chick embryos at the 2-4 somite stage confirmed these lineage analyses as it prevented formation of Rathke‚Äôs pouch and any further pituitary development (elAmraoui and Dubois, 1993). Upon head folding, the oral ectoderm cells of the adenohypophyseal placode invaginate towards the prospective ventral diencephalon to form Rathke‚Äôs pouch, the anlage of the adenohypophysis. Rathke‚Äôs pouch starts as an invagination of the oral ectoderm in response to inductive signals from the prospective diencephalon. The region of the diencephalon above the pouch is known as the infundibulum and forms the posterior lobe of the pituitary or neurohypohysis (Figure 3). While in most basal fish and tetrapods the adenohypophyseal anlagen invaginates to form Rathke‚Äôs pouch, in teleost fish the adenohypophyseal placode does not invaginate but rather maintains its initial organization forming a solid structure in the head (reviewed in Pogoda and Hammerschmidt; 2009)
+comment: Fate-mapping studies in amphibian, chick and mouse embryos (Eagleson et al., 1986; 1995; Couly and Le Douarin, 1985; Cobos et al., 2001; Osumi-Yamachita et al., 1994; Kawamura et al., 2002) have shown that the cells contributing to the adenohypophysis develop at the midline of the anterior neural ridge, which delineates the rostral boundary of the neural plate, a region devoid of neural crest. The anterior neural ridge also gives rise to the olfactory placodes and some forebrain tissues including the olfactory bulbs (reviewed in Papalopulu, 1995). Ablation of this region in chick embryos at the 2-4 somite stage confirmed these lineage analyses as it prevented formation of Rathkeâ??s pouch and any further pituitary development (elAmraoui and Dubois, 1993). Upon head folding, the oral ectoderm cells of the adenohypophyseal placode invaginate towards the prospective ventral diencephalon to form Rathkeâ??s pouch, the anlage of the adenohypophysis. Rathkeâ??s pouch starts as an invagination of the oral ectoderm in response to inductive signals from the prospective diencephalon. The region of the diencephalon above the pouch is known as the infundibulum and forms the posterior lobe of the pituitary or neurohypohysis (Figure 3). While in most basal fish and tetrapods the adenohypophyseal anlagen invaginates to form Rathkeâ??s pouch, in teleost fish the adenohypophyseal placode does not invaginate but rather maintains its initial organization forming a solid structure in the head (reviewed in Pogoda and Hammerschmidt; 2009)
 synonym: "pituitary placode" EXACT [ZFA:0001198]
 xref: TAO:0001198
 xref: XAO:0004208
@@ -59887,7 +59887,7 @@ id: UBERON:0009889
 name: secondary heart field
 namespace: uberon
 def: "extra-cardiac population of mesodermal progenitors that gives rise to the right ventricle and outflow tract." [PMID:17276708]
-comment: Taxon notes: "In general, the two studies in chick concluded that the contribution of the SHF was to the outflow tract, whereas the mouse work suggested that the second lineage contributed more broadly to the heart, including the outflow tract and much or all of the right ventricle [11‚Äì14]. These different conclusions may represent differences in the experimental approaches used or may represent bona fide differences in the contribution of the second lineage to the hearts of birds compared to mammals [11]. Alternatively, the secondary/anterior heart fields described in the chick may represent a subset of a broader field that makes a more substantial contribution to the heart, as the mouse studies suggested" [PMID:17276708]
+comment: Taxon notes: "In general, the two studies in chick concluded that the contribution of the SHF was to the outflow tract, whereas the mouse work suggested that the second lineage contributed more broadly to the heart, including the outflow tract and much or all of the right ventricle [11â??14]. These different conclusions may represent differences in the experimental approaches used or may represent bona fide differences in the contribution of the second lineage to the hearts of birds compared to mammals [11]. Alternatively, the secondary/anterior heart fields described in the chick may represent a subset of a broader field that makes a more substantial contribution to the heart, as the mouse studies suggested" [PMID:17276708]
 synonym: "anterior heart field" EXACT [PMID:17276708]
 synonym: "anterior/second heart field" EXACT [Geisha:syn]
 synonym: "second heart field" EXACT [XAO:0004186]

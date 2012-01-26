@@ -1,5 +1,5 @@
 format-version: 1.2
-date: 17:06:2011 12:45
+date: 17:01:2012 15:28
 saved-by: kareneilbeck
 auto-generated-by: OBO-Edit 2.1-beta10
 subsetdef: biosapiens "biosapiens protein feature ontology"
@@ -3859,7 +3859,7 @@ is_a: SO:1000037 ! chromosomal_duplication
 
 [Term]
 id: SO:0000458
-name: D_gene
+name: D_gene_segment
 def: "Germline genomic DNA including D-region with 5' UTR and 3' UTR, also designated as D-segment." [http://www.imgt.org/cgi-bin/IMGTlect.jv?query=7#]
 synonym: "D gene" EXACT []
 synonym: "D-GENE" EXACT []
@@ -3923,7 +3923,7 @@ is_a: SO:1000038 ! intrachromosomal_duplication
 
 [Term]
 id: SO:0000466
-name: V_gene
+name: V_gene_segment
 def: "Germline genomic DNA including L-part1, V-intron and V-exon, with the 5' UTR and 3' UTR." [http://www.imgt.org/cgi-bin/IMGTlect.jv?query=7#]
 synonym: "V gene" EXACT []
 synonym: "V-GENE" EXACT []
@@ -3957,7 +3957,7 @@ is_a: SO:0000130 ! post_translationally_regulated
 
 [Term]
 id: SO:0000470
-name: J_gene
+name: J_gene_segment
 def: "Germline genomic DNA of an immunoglobulin/T-cell receptor gene including J-region with 5' UTR (SO:0000204) and 3' UTR (SO:0000205), also designated as J-segment." [http://www.imgt.org/cgi-bin/IMGTlect.jv?query=7#]
 synonym: "J gene" EXACT []
 synonym: "J-GENE" EXACT []
@@ -4017,7 +4017,7 @@ is_obsolete: true
 
 [Term]
 id: SO:0000478
-name: C_gene
+name: C_gene_segment
 def: "Genomic DNA of immunoglobulin/T-cell receptor gene including C-region (and introns if present) with 5' UTR (SO:0000204) and 3' UTR (SO:0000205)." [http://www.imgt.org/cgi-bin/IMGTlect.jv?query=7#]
 synonym: "C gene" EXACT []
 synonym: "C_GENE" EXACT []
@@ -4084,8 +4084,8 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "(DJ)-J-CLUSTER" EXACT []
 synonym: "DJ J cluster" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000470 ! J_gene
-relationship: has_part SO:0000572 ! DJ_gene
+relationship: has_part SO:0000470 ! J_gene_segment
+relationship: has_part SO:0000572 ! DJ_gene_segment
 
 [Term]
 id: SO:0000486
@@ -4104,9 +4104,9 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "(VDJ)-J-C-CLUSTER" EXACT []
 synonym: "VDJ J C cluster" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000470 ! J_gene
-relationship: has_part SO:0000478 ! C_gene
-relationship: has_part SO:0000574 ! VDJ_gene
+relationship: has_part SO:0000470 ! J_gene_segment
+relationship: has_part SO:0000478 ! C_gene_segment
+relationship: has_part SO:0000574 ! VDJ_gene_segment
 
 [Term]
 id: SO:0000488
@@ -4115,8 +4115,8 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "(VDJ)-J-CLUSTER" EXACT []
 synonym: "VDJ J cluster" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000470 ! J_gene
-relationship: has_part SO:0000574 ! VDJ_gene
+relationship: has_part SO:0000470 ! J_gene_segment
+relationship: has_part SO:0000574 ! VDJ_gene_segment
 
 [Term]
 id: SO:0000489
@@ -4125,8 +4125,8 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "(VJ)-C-CLUSTER" RELATED []
 synonym: "VJ C cluster" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000478 ! C_gene
-relationship: has_part SO:0000576 ! VJ_gene
+relationship: has_part SO:0000478 ! C_gene_segment
+relationship: has_part SO:0000576 ! VJ_gene_segment
 
 [Term]
 id: SO:0000490
@@ -4135,9 +4135,9 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "(VJ)-J-C-CLUSTER" EXACT []
 synonym: "VJ J C cluster" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000470 ! J_gene
-relationship: has_part SO:0000478 ! C_gene
-relationship: has_part SO:0000576 ! VJ_gene
+relationship: has_part SO:0000470 ! J_gene_segment
+relationship: has_part SO:0000478 ! C_gene_segment
+relationship: has_part SO:0000576 ! VJ_gene_segment
 
 [Term]
 id: SO:0000491
@@ -4146,8 +4146,8 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "(VJ)-J-CLUSTER" EXACT []
 synonym: "VJ J cluster" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000470 ! J_gene
-relationship: has_part SO:0000576 ! VJ_gene
+relationship: has_part SO:0000470 ! J_gene_segment
+relationship: has_part SO:0000576 ! VJ_gene_segment
 
 [Term]
 id: SO:0000492
@@ -4253,9 +4253,9 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "D DJ C cluster" EXACT []
 synonym: "D-(DJ)-C-CLUSTER" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000458 ! D_gene
-relationship: has_part SO:0000478 ! C_gene
-relationship: has_part SO:0000572 ! DJ_gene
+relationship: has_part SO:0000458 ! D_gene_segment
+relationship: has_part SO:0000478 ! C_gene_segment
+relationship: has_part SO:0000572 ! DJ_gene_segment
 
 [Term]
 id: SO:0000505
@@ -4264,8 +4264,8 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "D DJ cluster" EXACT []
 synonym: "D-(DJ)-CLUSTER" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000458 ! D_gene
-relationship: has_part SO:0000572 ! DJ_gene
+relationship: has_part SO:0000458 ! D_gene_segment
+relationship: has_part SO:0000572 ! DJ_gene_segment
 
 [Term]
 id: SO:0000506
@@ -4274,10 +4274,10 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "D DJ J C cluster" EXACT []
 synonym: "D-(DJ)-J-C-CLUSTER" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000458 ! D_gene
-relationship: has_part SO:0000470 ! J_gene
-relationship: has_part SO:0000478 ! C_gene
-relationship: has_part SO:0000572 ! DJ_gene
+relationship: has_part SO:0000458 ! D_gene_segment
+relationship: has_part SO:0000470 ! J_gene_segment
+relationship: has_part SO:0000478 ! C_gene_segment
+relationship: has_part SO:0000572 ! DJ_gene_segment
 
 [Term]
 id: SO:0000507
@@ -4296,9 +4296,9 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "D DJ J cluster" EXACT []
 synonym: "D-(DJ)-J-CLUSTER" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000458 ! D_gene
-relationship: has_part SO:0000470 ! J_gene
-relationship: has_part SO:0000572 ! DJ_gene
+relationship: has_part SO:0000458 ! D_gene_segment
+relationship: has_part SO:0000470 ! J_gene_segment
+relationship: has_part SO:0000572 ! DJ_gene_segment
 
 [Term]
 id: SO:0000509
@@ -4307,13 +4307,13 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in germline configurati
 synonym: "D J C cluster" EXACT []
 synonym: "D-J-C-CLUSTER" EXACT []
 is_a: SO:0000482 ! vertebrate_immunoglobulin_T_cell_receptor_gene_cluster
-relationship: has_part SO:0000458 ! D_gene
-relationship: has_part SO:0000470 ! J_gene
-relationship: has_part SO:0000478 ! C_gene
+relationship: has_part SO:0000458 ! D_gene_segment
+relationship: has_part SO:0000470 ! J_gene_segment
+relationship: has_part SO:0000478 ! C_gene_segment
 
 [Term]
 id: SO:0000510
-name: VD_gene
+name: VD_gene_segment
 def: "Genomic DNA of immunoglobulin/T-cell receptor gene in partially rearranged genomic DNA including L-part1, V-intron and V-D-exon, with the 5' UTR (SO:0000204) and 3' UTR (SO:0000205)." [http://www.imgt.org/cgi-bin/IMGTlect.jv?query=7#]
 synonym: "V_D_GENE" EXACT []
 synonym: "VD gene" EXACT []
@@ -4326,8 +4326,8 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in germline configurati
 synonym: "J C cluster" EXACT []
 synonym: "J-C-CLUSTER" EXACT []
 is_a: SO:0000482 ! vertebrate_immunoglobulin_T_cell_receptor_gene_cluster
-relationship: has_part SO:0000470 ! J_gene
-relationship: has_part SO:0000478 ! C_gene
+relationship: has_part SO:0000470 ! J_gene_segment
+relationship: has_part SO:0000478 ! C_gene_segment
 
 [Term]
 id: SO:0000512
@@ -4343,7 +4343,7 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in germline configurati
 synonym: "J cluster" EXACT []
 synonym: "J-CLUSTER" EXACT []
 is_a: SO:0000482 ! vertebrate_immunoglobulin_T_cell_receptor_gene_cluster
-relationship: has_part SO:0000470 ! J_gene
+relationship: has_part SO:0000470 ! J_gene_segment
 
 [Term]
 id: SO:0000514
@@ -4389,8 +4389,8 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "V DJ cluster" EXACT []
 synonym: "V-(DJ)-CLUSTER" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000466 ! V_gene
-relationship: has_part SO:0000572 ! DJ_gene
+relationship: has_part SO:0000466 ! V_gene_segment
+relationship: has_part SO:0000572 ! DJ_gene_segment
 
 [Term]
 id: SO:0000519
@@ -4399,9 +4399,9 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "V DJ J cluster" EXACT []
 synonym: "V-(DJ)-J-CLUSTER" RELATED []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000466 ! V_gene
-relationship: has_part SO:0000470 ! J_gene
-relationship: has_part SO:0000572 ! DJ_gene
+relationship: has_part SO:0000466 ! V_gene_segment
+relationship: has_part SO:0000470 ! J_gene_segment
+relationship: has_part SO:0000572 ! DJ_gene_segment
 
 [Term]
 id: SO:0000520
@@ -4410,9 +4410,9 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "V VDJ C cluster" EXACT []
 synonym: "V-(VDJ)-C-CLUSTER" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000466 ! V_gene
-relationship: has_part SO:0000478 ! C_gene
-relationship: has_part SO:0000574 ! VDJ_gene
+relationship: has_part SO:0000466 ! V_gene_segment
+relationship: has_part SO:0000478 ! C_gene_segment
+relationship: has_part SO:0000574 ! VDJ_gene_segment
 
 [Term]
 id: SO:0000521
@@ -4421,8 +4421,8 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "V VDJ cluster" EXACT []
 synonym: "V-(VDJ)-CLUSTER" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000466 ! V_gene
-relationship: has_part SO:0000574 ! VDJ_gene
+relationship: has_part SO:0000466 ! V_gene_segment
+relationship: has_part SO:0000574 ! VDJ_gene_segment
 
 [Term]
 id: SO:0000522
@@ -4431,9 +4431,9 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "V VDJ J cluster" EXACT []
 synonym: "V-(VDJ)-J-CLUSTER" RELATED []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000466 ! V_gene
-relationship: has_part SO:0000470 ! J_gene
-relationship: has_part SO:0000574 ! VDJ_gene
+relationship: has_part SO:0000466 ! V_gene_segment
+relationship: has_part SO:0000470 ! J_gene_segment
+relationship: has_part SO:0000574 ! VDJ_gene_segment
 
 [Term]
 id: SO:0000523
@@ -4442,9 +4442,9 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "V VJ C cluster" EXACT []
 synonym: "V-(VJ)-C-CLUSTER" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000466 ! V_gene
-relationship: has_part SO:0000478 ! C_gene
-relationship: has_part SO:0000576 ! VJ_gene
+relationship: has_part SO:0000466 ! V_gene_segment
+relationship: has_part SO:0000478 ! C_gene_segment
+relationship: has_part SO:0000576 ! VJ_gene_segment
 
 [Term]
 id: SO:0000524
@@ -4453,8 +4453,8 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "V VJ cluster" EXACT []
 synonym: "V-(VJ)-CLUSTER" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000466 ! V_gene
-relationship: has_part SO:0000576 ! VJ_gene
+relationship: has_part SO:0000466 ! V_gene_segment
+relationship: has_part SO:0000576 ! VJ_gene_segment
 
 [Term]
 id: SO:0000525
@@ -4463,9 +4463,9 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "V VJ J cluster" EXACT []
 synonym: "V-(VJ)-J-CLUSTER" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000466 ! V_gene
-relationship: has_part SO:0000470 ! J_gene
-relationship: has_part SO:0000576 ! VJ_gene
+relationship: has_part SO:0000466 ! V_gene_segment
+relationship: has_part SO:0000470 ! J_gene_segment
+relationship: has_part SO:0000576 ! VJ_gene_segment
 
 [Term]
 id: SO:0000526
@@ -4474,7 +4474,7 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in germline configurati
 synonym: "V cluster" EXACT []
 synonym: "V-CLUSTER" EXACT []
 is_a: SO:0000482 ! vertebrate_immunoglobulin_T_cell_receptor_gene_cluster
-relationship: has_part SO:0000466 ! V_gene
+relationship: has_part SO:0000466 ! V_gene_segment
 
 [Term]
 id: SO:0000527
@@ -4483,10 +4483,10 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "V D DJ C cluster" EXACT []
 synonym: "V-D-(DJ)-C-CLUSTER" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000458 ! D_gene
-relationship: has_part SO:0000466 ! V_gene
-relationship: has_part SO:0000478 ! C_gene
-relationship: has_part SO:0000572 ! DJ_gene
+relationship: has_part SO:0000458 ! D_gene_segment
+relationship: has_part SO:0000466 ! V_gene_segment
+relationship: has_part SO:0000478 ! C_gene_segment
+relationship: has_part SO:0000572 ! DJ_gene_segment
 
 [Term]
 id: SO:0000528
@@ -4495,9 +4495,9 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "V D DJ cluster" EXACT []
 synonym: "V-D-(DJ)-CLUSTER" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000458 ! D_gene
-relationship: has_part SO:0000466 ! V_gene
-relationship: has_part SO:0000572 ! DJ_gene
+relationship: has_part SO:0000458 ! D_gene_segment
+relationship: has_part SO:0000466 ! V_gene_segment
+relationship: has_part SO:0000572 ! DJ_gene_segment
 
 [Term]
 id: SO:0000529
@@ -4506,11 +4506,11 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "V D DJ J C cluster" EXACT []
 synonym: "V-D-(DJ)-J-C-CLUSTER" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000458 ! D_gene
-relationship: has_part SO:0000466 ! V_gene
-relationship: has_part SO:0000470 ! J_gene
-relationship: has_part SO:0000478 ! C_gene
-relationship: has_part SO:0000572 ! DJ_gene
+relationship: has_part SO:0000458 ! D_gene_segment
+relationship: has_part SO:0000466 ! V_gene_segment
+relationship: has_part SO:0000470 ! J_gene_segment
+relationship: has_part SO:0000478 ! C_gene_segment
+relationship: has_part SO:0000572 ! DJ_gene_segment
 
 [Term]
 id: SO:0000530
@@ -4519,10 +4519,10 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "V D DJ J cluster" EXACT []
 synonym: "V-D-(DJ)-J-CLUSTER" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000458 ! D_gene
-relationship: has_part SO:0000466 ! V_gene
-relationship: has_part SO:0000470 ! J_gene
-relationship: has_part SO:0000572 ! DJ_gene
+relationship: has_part SO:0000458 ! D_gene_segment
+relationship: has_part SO:0000466 ! V_gene_segment
+relationship: has_part SO:0000470 ! J_gene_segment
+relationship: has_part SO:0000572 ! DJ_gene_segment
 
 [Term]
 id: SO:0000531
@@ -4531,10 +4531,10 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in germline configurati
 synonym: "V D J C cluster" EXACT []
 synonym: "V-D-J-C-CLUSTER" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000458 ! D_gene
-relationship: has_part SO:0000466 ! V_gene
-relationship: has_part SO:0000470 ! J_gene
-relationship: has_part SO:0000478 ! C_gene
+relationship: has_part SO:0000458 ! D_gene_segment
+relationship: has_part SO:0000466 ! V_gene_segment
+relationship: has_part SO:0000470 ! J_gene_segment
+relationship: has_part SO:0000478 ! C_gene_segment
 
 [Term]
 id: SO:0000532
@@ -4543,9 +4543,9 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in germline configurati
 synonym: "V D J cluster" EXACT []
 synonym: "V-D-J-CLUSTER" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000458 ! D_gene
-relationship: has_part SO:0000466 ! V_gene
-relationship: has_part SO:0000470 ! J_gene
+relationship: has_part SO:0000458 ! D_gene_segment
+relationship: has_part SO:0000466 ! V_gene_segment
+relationship: has_part SO:0000470 ! J_gene_segment
 
 [Term]
 id: SO:0000533
@@ -4563,8 +4563,8 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in germline configurati
 synonym: "V J cluster" EXACT []
 synonym: "V-J-CLUSTER" EXACT []
 is_a: SO:0000482 ! vertebrate_immunoglobulin_T_cell_receptor_gene_cluster
-relationship: has_part SO:0000466 ! V_gene
-relationship: has_part SO:0000470 ! J_gene
+relationship: has_part SO:0000466 ! V_gene_segment
+relationship: has_part SO:0000470 ! J_gene_segment
 
 [Term]
 id: SO:0000535
@@ -4573,9 +4573,9 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in germline configurati
 synonym: "V J C cluster" EXACT []
 synonym: "V-J-C-CLUSTER" EXACT []
 is_a: SO:0000482 ! vertebrate_immunoglobulin_T_cell_receptor_gene_cluster
-relationship: has_part SO:0000466 ! V_gene
-relationship: has_part SO:0000470 ! J_gene
-relationship: has_part SO:0000478 ! C_gene
+relationship: has_part SO:0000466 ! V_gene_segment
+relationship: has_part SO:0000470 ! J_gene_segment
+relationship: has_part SO:0000478 ! C_gene_segment
 
 [Term]
 id: SO:0000536
@@ -4610,8 +4610,8 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "(DJ)-C-CLUSTER" EXACT []
 synonym: "DJ C cluster" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000478 ! C_gene
-relationship: has_part SO:0000572 ! DJ_gene
+relationship: has_part SO:0000478 ! C_gene_segment
+relationship: has_part SO:0000572 ! DJ_gene_segment
 
 [Term]
 id: SO:0000540
@@ -4620,9 +4620,9 @@ def: "Genomic DNA in rearranged configuration including at least one D-J-GENE, o
 synonym: "(DJ)-J-C-CLUSTER" EXACT []
 synonym: "DJ J C cluster" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000470 ! J_gene
-relationship: has_part SO:0000478 ! C_gene
-relationship: has_part SO:0000572 ! DJ_gene
+relationship: has_part SO:0000470 ! J_gene_segment
+relationship: has_part SO:0000478 ! C_gene_segment
+relationship: has_part SO:0000572 ! DJ_gene_segment
 
 [Term]
 id: SO:0000541
@@ -4631,8 +4631,8 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "(VDJ)-C-CLUSTER" EXACT []
 synonym: "VDJ C cluster" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000478 ! C_gene
-relationship: has_part SO:0000574 ! VDJ_gene
+relationship: has_part SO:0000478 ! C_gene_segment
+relationship: has_part SO:0000574 ! VDJ_gene_segment
 
 [Term]
 id: SO:0000542
@@ -4641,9 +4641,9 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "V DJ C cluster" EXACT []
 synonym: "V-(DJ)-C-CLUSTER" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000466 ! V_gene
-relationship: has_part SO:0000478 ! C_gene
-relationship: has_part SO:0000572 ! DJ_gene
+relationship: has_part SO:0000466 ! V_gene_segment
+relationship: has_part SO:0000478 ! C_gene_segment
+relationship: has_part SO:0000572 ! DJ_gene_segment
 
 [Term]
 id: SO:0000543
@@ -4777,7 +4777,7 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene including more than one
 synonym: "C cluster" EXACT []
 synonym: "C-CLUSTER" EXACT []
 is_a: SO:0000482 ! vertebrate_immunoglobulin_T_cell_receptor_gene_cluster
-relationship: has_part SO:0000478 ! C_gene
+relationship: has_part SO:0000478 ! C_gene_segment
 
 [Term]
 id: SO:0000559
@@ -4786,7 +4786,7 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in germline configurati
 synonym: "D cluster" EXACT []
 synonym: "D-CLUSTER" EXACT []
 is_a: SO:0000482 ! vertebrate_immunoglobulin_T_cell_receptor_gene_cluster
-relationship: has_part SO:0000458 ! D_gene
+relationship: has_part SO:0000458 ! D_gene_segment
 
 [Term]
 id: SO:0000560
@@ -4795,8 +4795,8 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in germline configurati
 synonym: "D J cluster" EXACT []
 synonym: "D-J-CLUSTER" EXACT []
 is_a: SO:0000482 ! vertebrate_immunoglobulin_T_cell_receptor_gene_cluster
-relationship: has_part SO:0000458 ! D_gene
-relationship: has_part SO:0000470 ! J_gene
+relationship: has_part SO:0000458 ! D_gene_segment
+relationship: has_part SO:0000470 ! J_gene_segment
 
 [Term]
 id: SO:0000561
@@ -4825,10 +4825,10 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "V DJ J C cluster" EXACT []
 synonym: "V-(DJ)-J-C-CLUSTER" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000466 ! V_gene
-relationship: has_part SO:0000470 ! J_gene
-relationship: has_part SO:0000478 ! C_gene
-relationship: has_part SO:0000572 ! DJ_gene
+relationship: has_part SO:0000466 ! V_gene_segment
+relationship: has_part SO:0000470 ! J_gene_segment
+relationship: has_part SO:0000478 ! C_gene_segment
+relationship: has_part SO:0000572 ! DJ_gene_segment
 
 [Term]
 id: SO:0000565
@@ -4837,10 +4837,10 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "V VDJ J C cluster" EXACT []
 synonym: "V-(VDJ)-J-C-CLUSTER" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000466 ! V_gene
-relationship: has_part SO:0000470 ! J_gene
-relationship: has_part SO:0000478 ! C_gene
-relationship: has_part SO:0000574 ! VDJ_gene
+relationship: has_part SO:0000466 ! V_gene_segment
+relationship: has_part SO:0000470 ! J_gene_segment
+relationship: has_part SO:0000478 ! C_gene_segment
+relationship: has_part SO:0000574 ! VDJ_gene_segment
 
 [Term]
 id: SO:0000566
@@ -4849,10 +4849,10 @@ def: "Genomic DNA of immunoglobulin/T-cell receptor gene in rearranged configura
 synonym: "V VJ J C cluster" EXACT []
 synonym: "V-(VJ)-J-C-CLUSTER" EXACT []
 is_a: SO:0000938 ! vertebrate_immunoglobulin_T_cell_receptor_rearranged_gene_cluster
-relationship: has_part SO:0000466 ! V_gene
-relationship: has_part SO:0000470 ! J_gene
-relationship: has_part SO:0000478 ! C_gene
-relationship: has_part SO:0000576 ! VJ_gene
+relationship: has_part SO:0000466 ! V_gene_segment
+relationship: has_part SO:0000470 ! J_gene_segment
+relationship: has_part SO:0000478 ! C_gene_segment
+relationship: has_part SO:0000576 ! VJ_gene_segment
 
 [Term]
 id: SO:0000567
@@ -4893,7 +4893,7 @@ is_a: SO:0000011 ! non_protein_coding
 
 [Term]
 id: SO:0000572
-name: DJ_gene
+name: DJ_gene_segment
 def: "Genomic DNA of immunoglobulin/T-cell receptor gene in partially rearranged genomic DNA including D-J-region with 5' UTR and 3' UTR, also designated as D-J-segment." [http://www.imgt.org/cgi-bin/IMGTlect.jv?query=7#]
 synonym: "D-J-GENE" EXACT []
 synonym: "DJ gene" EXACT []
@@ -4907,7 +4907,7 @@ is_a: SO:0000011 ! non_protein_coding
 
 [Term]
 id: SO:0000574
-name: VDJ_gene
+name: VDJ_gene_segment
 def: "Rearranged genomic DNA of immunoglobulin/T-cell receptor gene including L-part1, V-intron and V-D-J-exon, with the 5'UTR (SO:0000204) and 3'UTR (SO:0000205)." [http://www.imgt.org/cgi-bin/IMGTlect.jv?query=7#]
 synonym: "V-D-J-GENE" EXACT []
 synonym: "VDJ gene" EXACT []
@@ -4921,7 +4921,7 @@ is_a: SO:0000011 ! non_protein_coding
 
 [Term]
 id: SO:0000576
-name: VJ_gene
+name: VJ_gene_segment
 def: "Rearranged genomic DNA of immunoglobulin/T-cell receptor gene including L-part1, V-intron and V-J-exon, with the 5'UTR (SO:0000204) and 3'UTR (SO:0000205)." [http://www.imgt.org/cgi-bin/IMGTlect.jv?query=7#]
 synonym: "V-J-GENE" EXACT []
 synonym: "VJ gene" EXACT []
@@ -8786,9 +8786,10 @@ alt_id: SO:1000007
 def: "A sequence_alteration is a sequence_feature whose extent is the deviation from another sequence." [SO:ke]
 comment: Merged with partially characterized change in nucleotide sequence.
 subset: SOFA
-synonym: "partially characterised change in DNA sequence" EXACT []
-synonym: "partially_characterised_change_in_DNA_sequence" EXACT []
+synonym: "partially characterised change in DNA sequence" NARROW []
+synonym: "partially_characterised_change_in_DNA_sequence" NARROW []
 synonym: "sequence alteration" EXACT []
+synonym: "uncharacterised_change_in_nucleotide_sequence" NARROW []
 is_a: SO:0000110 ! sequence_feature
 
 [Term]
@@ -8827,7 +8828,7 @@ def: "An immature_peptide_region is the extent of the peptide after it has been 
 comment: Range.
 subset: biosapiens
 subset: SOFA
-synonym: "immature_peptide_region" EXACT []
+synonym: "immature peptide region" EXACT []
 is_a: SO:0000839 ! polypeptide_region
 
 [Term]
@@ -8896,7 +8897,7 @@ alt_id: BS:00128
 def: "Arrangement of the polypeptide with respect to the lipid bilayer." [EBIBS:GAR]
 comment: Range.
 subset: biosapiens
-synonym: "membrane_structure" EXACT []
+synonym: "membrane structure" EXACT []
 is_a: SO:0001070 ! polypeptide_structural_region
 
 [Term]
@@ -9075,7 +9076,7 @@ name: cross_link
 alt_id: BS:00178
 def: "Posttranslationally formed amino acid bonds." [EBIBS:GAR, UniProt:curation_manual]
 subset: biosapiens
-synonym: "cross_link" EXACT []
+synonym: "cross link" EXACT []
 synonym: "crosslink" RELATED []
 is_obsolete: true
 
@@ -9089,7 +9090,6 @@ subset: biosapiens
 synonym: "disulfid" RELATED []
 synonym: "disulfide" RELATED []
 synonym: "disulfide bond" RELATED []
-synonym: "disulfide_bond" EXACT []
 synonym: "disulphide" EXACT []
 synonym: "disulphide bond" RELATED []
 is_obsolete: true
@@ -9113,7 +9113,7 @@ name: covalent_binding_site
 alt_id: BS:00246
 def: "Binding involving a covalent bond." [EBIBS:GAR]
 subset: biosapiens
-synonym: "covalent_binding_site" EXACT []
+synonym: "covalent binding site" EXACT []
 is_obsolete: true
 
 [Term]
@@ -9125,7 +9125,7 @@ comment: Discrete.
 subset: biosapiens
 synonym: "binding" RELATED [uniprot:curation]
 synonym: "binding site" RELATED []
-synonym: "non_covalent_binding_site" EXACT []
+synonym: "non covalent binding site" EXACT []
 is_obsolete: true
 
 [Term]
@@ -9418,7 +9418,7 @@ subset: biosapiens
 synonym: "3(10) helix" EXACT []
 synonym: "3-10 helix" EXACT []
 synonym: "310 helix" EXACT []
-synonym: "three_ten_helix" EXACT []
+synonym: "three ten helix" EXACT []
 xref: http://en.wikipedia.org/wiki/310_helix "wiki"
 is_a: SO:0001116 ! right_handed_peptide_helix
 
@@ -9463,7 +9463,7 @@ def: "A motif of six or seven consecutive residues that contains two H-bonds." [
 subset: biosapiens
 synonym: "paperclip" RELATED BS []
 synonym: "paperclip loop" RELATED []
-synonym: "schellmann_loop" EXACT []
+synonym: "schellmann loop" EXACT []
 is_a: SO:0001078 ! polypeptide_secondary_structure
 
 [Term]
@@ -13464,6 +13464,8 @@ name: stop_retained_variant
 def: "A sequence variant where at least one base in the terminator codon is changed, but the terminator remains." [SO:ke]
 synonym: "stop retained variant" EXACT []
 is_a: SO:0001590 ! terminator_codon_variant
+is_a: SO:0001650 ! inframe_variant
+is_a: SO:0001819 ! synonymous_variant
 created_by: kareneilbeck
 creation_date: 2010-04-19T05:02:30Z
 
@@ -13572,6 +13574,8 @@ synonym: "stop codon lost" EXACT []
 synonym: "stop lost" EXACT []
 synonym: "stop_lost" EXACT ebi_variants [http://uswest.ensembl.org/info/docs/variation/index.html]
 is_a: SO:0001590 ! terminator_codon_variant
+is_a: SO:0001650 ! inframe_variant
+is_a: SO:0001818 ! non_synonymous_variant
 created_by: kareneilbeck
 creation_date: 2010-03-23T03:46:42Z
 
@@ -13607,7 +13611,9 @@ name: initiator_codon_change
 def: "A codon variant that changes at least one base of the first codon of a transcript." [SO:ke]
 synonym: "initiator codon change" EXACT []
 xref: EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html
-is_a: SO:0001581 ! codon_variant
+is_a: SO:0001583 ! non_synonymous_codon
+is_a: SO:0001650 ! inframe_variant
+is_a: SO:0001818 ! non_synonymous_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T02:35:18Z
 
@@ -13615,12 +13621,13 @@ creation_date: 2010-03-22T02:35:18Z
 id: SO:0001583
 name: non_synonymous_codon
 alt_id: SO:0001584
-def: "A sequence variant whereby at least one base of a codon is changed resulting in a codon that encodes for a different amino acid or stop codon." [SO:ke]
-comment: EBI term: Non-synonymous SNPs. SNPs that are located in the coding sequence and result in an amino acid change in the encoded peptide sequence.
+def: "A sequence variant, where the change may be longer than 3 bases, and at least one base of a codon is changed resulting in a codon that encodes for a different amino acid or stop codon." [EBI:gr, SO:ke]
+comment: EBI term: Non-synonymous SNPs. SNPs that are located in the coding sequence and result in an amino acid change in the encoded peptide sequence. A change that causes a non_synonymous_codon can be more than 3 bases - for example 4 base substitution.
 synonym: "non synonymous codon" EXACT []
 synonym: "non_synonymous_coding" EXACT ebi_variants [http://uswest.ensembl.org/info/docs/variation/index.html]
 xref: EBI:www.ebi.ac.uk/mutations/recommendations/mutevent.html
 is_a: SO:0001581 ! codon_variant
+is_a: SO:0001818 ! non_synonymous_variant
 created_by: kareneilbeck
 creation_date: 2010-03-22T02:35:49Z
 
@@ -14300,7 +14307,7 @@ id: SO:0001651
 name: inframe_codon_gain
 def: "A sequence variant which gains a codon, and does not cause a disruption of the translational reading frame." [SO:ke]
 synonym: "inframe codon gain" RELATED []
-is_a: SO:0001650 ! inframe_variant
+is_a: SO:0001821 ! inframe_increase_in_CDS_length
 created_by: kareneilbeck
 creation_date: 2010-07-19T01:29:08Z
 
@@ -14309,7 +14316,7 @@ id: SO:0001652
 name: inframe_codon_loss
 def: "A sequence variant which loses a codon, and does not cause a disruption of the translational reading frame." [SO:ke]
 synonym: "inframe codon loss" RELATED []
-is_a: SO:0001650 ! inframe_variant
+is_a: SO:0001822 ! inframe_decrease_in_CDS_length
 created_by: kareneilbeck
 creation_date: 2010-07-19T01:29:35Z
 
@@ -14736,9 +14743,9 @@ creation_date: 2010-11-02T11:39:59Z
 
 [Term]
 id: SO:0001697
-name: CHiP_seq_region
+name: ChIP_seq_region
 def: "A region of sequence identified by CHiP seq technology to contain a protein binding site." [SO:ke]
-synonym: "CHiP seq region" RELATED []
+synonym: "ChIP seq region" RELATED []
 is_a: SO:0001696 ! experimentally_defined_binding_region
 relationship: contains SO:0000410 ! protein_binding_site
 created_by: kareneilbeck
@@ -15797,7 +15804,7 @@ creation_date: 2011-06-17T12:33:25Z
 
 [Term]
 id: SO:0001811
-name: hosphorylation_site
+name: phosphorylation_site
 def: "A post-translationally modified region in which residues of the protein are modified by phosphorylation." [PomBase:mah]
 synonym: "phosphorylation site" EXACT []
 is_a: SO:0001089 ! post_translationally_modified_region
@@ -15822,6 +15829,545 @@ synonym: "vacuolar sorting signal" EXACT []
 is_a: SO:0001527 ! peptide_localization_signal
 created_by: kareneilbeck
 creation_date: 2011-06-17T12:42:48Z
+
+[Term]
+id: SO:0001814
+name: coding_variant_quality
+is_a: SO:0001761 ! variant_quality
+created_by: kareneilbeck
+creation_date: 2011-06-24T03:32:25Z
+
+[Term]
+id: SO:0001815
+name: synonymous
+is_a: SO:0001814 ! coding_variant_quality
+created_by: kareneilbeck
+creation_date: 2011-06-24T03:33:16Z
+
+[Term]
+id: SO:0001816
+name: non_synonymous
+is_a: SO:0001814 ! coding_variant_quality
+created_by: kareneilbeck
+creation_date: 2011-06-24T03:33:36Z
+
+[Term]
+id: SO:0001817
+name: inframe
+def: "An attribute describing a sequence that contains a mutation involving the deletion or insertion of one or more bases, where this number is divisible by 3." [SO:ke]
+is_a: SO:0000863 ! mRNA_attribute
+created_by: kareneilbeck
+creation_date: 2011-06-24T03:34:03Z
+
+[Term]
+id: SO:0001818
+name: non_synonymous_variant
+def: "A sequence_variant which is predicted to change the protein encoded in the coding sequence." [EBI:gr]
+is_a: SO:0001580 ! coding_sequence_variant
+created_by: kareneilbeck
+creation_date: 2011-06-24T03:38:02Z
+
+[Term]
+id: SO:0001819
+name: synonymous_variant
+is_a: SO:0001580 ! coding_sequence_variant
+created_by: kareneilbeck
+creation_date: 2011-06-24T03:38:30Z
+
+[Term]
+id: SO:0001820
+name: inframe_change_in_CDS_length
+synonym: "inframe change in CDS length" EXACT []
+is_a: SO:0001581 ! codon_variant
+is_a: SO:0001650 ! inframe_variant
+is_a: SO:0001818 ! non_synonymous_variant
+created_by: kareneilbeck
+creation_date: 2011-06-27T11:25:33Z
+
+[Term]
+id: SO:0001821
+name: inframe_increase_in_CDS_length
+def: "An inframe_non_synonymous_variant that inserts bases into in the coding sequence." [EBI:gr]
+synonym: "inframe increase in CDS length" EXACT []
+is_a: SO:0001820 ! inframe_change_in_CDS_length
+created_by: kareneilbeck
+creation_date: 2011-06-27T11:26:22Z
+
+[Term]
+id: SO:0001822
+name: inframe_decrease_in_CDS_length
+def: "An inframe_non_synonymous_variant that deletes bases from the coding sequence." [EBI:gr]
+synonym: "inframe decrease in CDS length" RELATED []
+is_a: SO:0001820 ! inframe_change_in_CDS_length
+created_by: kareneilbeck
+creation_date: 2011-06-27T11:27:10Z
+
+[Term]
+id: SO:0001823
+name: conservative_increase_in_CDS_length
+def: "An inframe_increase_in_cds_length that inserts one or more codons into the coding sequence between existing codons." [EBI:gr]
+synonym: "conservative increase in CDS length" EXACT []
+is_a: SO:0001821 ! inframe_increase_in_CDS_length
+created_by: kareneilbeck
+creation_date: 2011-06-27T11:28:02Z
+
+[Term]
+id: SO:0001824
+name: disruptive_increase_in_CDS_length
+def: "An inframe_increase_in_cds_length that inserts one or more codons into the coding sequence within an existing codon." [EBI:gr]
+synonym: "disruptive increase in CDS length" EXACT []
+is_a: SO:0001821 ! inframe_increase_in_CDS_length
+created_by: kareneilbeck
+creation_date: 2011-06-27T11:28:37Z
+
+[Term]
+id: SO:0001825
+name: conservative_decrease_in_CDS_length
+def: "An inframe_decrease_in_cds_length that deletes one or more entire codons from the coding sequence but does not change any remaining codons." [EBI:gr]
+synonym: "conservative decrease in CDS length" RELATED []
+is_a: SO:0001822 ! inframe_decrease_in_CDS_length
+created_by: kareneilbeck
+creation_date: 2011-06-27T11:30:43Z
+
+[Term]
+id: SO:0001826
+name: disruptive_decrease_in_CDS_length
+def: "An inframe_decrease_in_cds_length that deletes bases from the coding sequence starting within an existing codon." [EBI:gr]
+synonym: "disruptive decrease in CDS length" EXACT []
+is_a: SO:0001822 ! inframe_decrease_in_CDS_length
+created_by: kareneilbeck
+creation_date: 2011-06-27T11:31:31Z
+
+[Term]
+id: SO:0001827
+name: mRNA_read
+def: "A sequencer read of an mRNA substrate." [SO:ke]
+comment: Requested by Bayer Cropscience June, 2011.
+synonym: "mRNA read" EXACT []
+is_a: SO:0000150 ! read
+created_by: kareneilbeck
+creation_date: 2011-06-28T04:04:32Z
+
+[Term]
+id: SO:0001828
+name: genomic_DNA_read
+def: "A sequencer read of a genomic DNA substrate." [SO:ke]
+synonym: "genomic DNA read" EXACT []
+is_a: SO:0000150 ! read
+created_by: kareneilbeck
+creation_date: 2011-06-28T04:06:10Z
+
+[Term]
+id: SO:0001829
+name: mRNA_contig
+def: "A contig composed of mRNA_reads." [SO:ke]
+comment: Requested by Bayer Cropscience June, 2011.
+synonym: "mRNA contig" RELATED []
+is_a: SO:0000149 ! contig
+created_by: kareneilbeck
+creation_date: 2011-06-28T04:07:09Z
+
+[Term]
+id: SO:0001830
+name: AFLP_fragment
+def: "A PCR product obtained by applying the AFLP technique, based on a restriction enzyme digestion of genomic DNA and an amplification of the resulting fragments." [GMOD:ea]
+comment: Requested by Bayer Cropscience June, 2011.
+synonym: "AFLP" EXACT []
+synonym: "AFLP fragment" EXACT []
+synonym: "AFLP-PCR" EXACT []
+synonym: "amplified fragment length polymorphism" EXACT []
+synonym: "amplified fragment length polymorphism PCR" EXACT []
+xref: http://en.wikipedia.org/wiki/Amplified_fragment_length_polymorphism "wiki"
+is_a: SO:0000006 ! PCR_product
+created_by: kareneilbeck
+creation_date: 2011-07-14T12:12:35Z
+
+[Term]
+id: SO:0001831
+name: protein_hmm_match
+def: "A match to a protein HMM such as pfam." [SO:ke]
+is_a: SO:0000349 ! protein_match
+created_by: kareneilbeck
+creation_date: 2011-08-11T03:20:27Z
+
+[Term]
+id: SO:0001832
+name: immunoglobulin_region
+def: "A region of immunoglobulin sequence, either constant or variable." [SO:ke]
+is_a: SO:0000839 ! polypeptide_region
+created_by: kareneilbeck
+creation_date: 2011-09-01T03:27:20Z
+
+[Term]
+id: SO:0001833
+name: V_region
+def: "The variable region of an immunoglobulin polypeptide sequence." [SO:ke]
+is_a: SO:0001832 ! immunoglobulin_region
+created_by: kareneilbeck
+creation_date: 2011-09-01T03:28:40Z
+
+[Term]
+id: SO:0001834
+name: C_region
+def: "The constant region of an immunoglobulin polypeptide sequence." [SO:ke]
+is_a: SO:0001832 ! immunoglobulin_region
+created_by: kareneilbeck
+creation_date: 2011-09-01T03:29:41Z
+
+[Term]
+id: SO:0001835
+name: N_region
+def: "Extra nucleotides inserted between rearranged immunoglobulin segments." [SO:ke]
+is_a: SO:0000301 ! vertebrate_immune_system_gene_recombination_feature
+created_by: kareneilbeck
+creation_date: 2011-09-01T03:50:16Z
+
+[Term]
+id: SO:0001836
+name: S_region
+def: "The switch region of immunoglobulin heavy chains; it is involved in the rearrangement of heavy chain DNA leading to the expression of a different immunoglobulin classes from the same B-cell." [SO:ke]
+is_a: SO:0000301 ! vertebrate_immune_system_gene_recombination_feature
+created_by: kareneilbeck
+creation_date: 2011-09-01T03:52:05Z
+
+[Term]
+id: SO:0001837
+name: mobile_element_insertion
+def: "A kind of insertion where the inserted sequence is a mobile element." [EBI:dvga]
+comment: Requested by the ebi.
+synonym: "mobile element insertion" EXACT []
+is_a: SO:0000667 ! insertion
+intersection_of: SO:0000667 ! insertion
+intersection_of: contains SO:0001037 ! mobile_genetic_element
+created_by: kareneilbeck
+creation_date: 2011-10-04T12:36:52Z
+
+[Term]
+id: SO:0001838
+name: novel_sequence_insertion
+def: "An insertion the sequence of which cannot be mapped to the reference genome." [NCBI:th]
+comment: Requested by the NCBI.
+synonym: "novel sequence insertion" EXACT []
+is_a: SO:0000667 ! insertion
+created_by: kareneilbeck
+creation_date: 2011-10-04T01:14:50Z
+
+[Term]
+id: SO:0001839
+name: CSL_response_element
+def: "A promoter element with consensus sequence GTGRGAA, bound by CSL (CBF1/RBP-JK/Suppressor of Hairless/LAG-1) transcription factors." [PMID:19101542]
+synonym: "CSL response element" EXACT []
+is_a: SO:0001659 ! promoter_element
+created_by: kareneilbeck
+creation_date: 2011-10-07T03:37:43Z
+
+[Term]
+id: SO:0001840
+name: GATA_box
+def: "A GATA transcription factor element containing the consensus sequence WGATAR (in which W indicates A/T and R indicates A/G)." [PMID:8321208]
+synonym: "GATA box" EXACT []
+synonym: "GATA element" RELATED []
+is_a: SO:0001660 ! core_promoter_element
+created_by: kareneilbeck
+creation_date: 2011-10-07T03:42:05Z
+
+[Term]
+id: SO:0001841
+name: polymorphic_pseudogene
+def: "Pseudogene owing to a SNP/DIP but in other individuals/haplotypes/strains the gene is translated." [JAX:hd]
+comment: This terms is used by ensembl and vega.
+synonym: "polymorphic psuedogene" EXACT []
+is_a: SO:0000336 ! pseudogene
+created_by: kareneilbeck
+creation_date: 2011-10-07T03:46:57Z
+
+[Term]
+id: SO:0001842
+name: AP_1_binding_site
+def: "A promoter element with consensus sequence TGACTCA, bound by AP-1 and related transcription factors." [PMID:1899230, PMID:3034432, PMID:3125983]
+synonym: "AP-1 binding site" EXACT []
+is_a: SO:0001659 ! promoter_element
+created_by: kareneilbeck
+creation_date: 2011-10-07T03:54:52Z
+
+[Term]
+id: SO:0001843
+name: CRE
+def: "A promoter element with consensus sequence TGACGTCA; bound by the ATF/CREB family of transcription factors." [PMID:11483355, PMID:11483993]
+synonym: "ATF/CRE site" EXACT [PMID:11483993]
+synonym: "cyclic AMP response element" EXACT []
+is_a: SO:0001659 ! promoter_element
+created_by: kareneilbeck
+creation_date: 2011-10-07T03:58:48Z
+
+[Term]
+id: SO:0001844
+name: CuRE
+def: "A promoter element bound by copper ion-sensing transcription factors such as S. cerevisiae Mac1p or S. pombe Cuf1; the consensus sequence is HTHNNGCTGD (more specifically TTTGCKCR in budding yeast)." [PMID:10593913, PMID:9188496, PMID:9211922]
+synonym: "copper-response element" EXACT []
+is_a: SO:0001659 ! promoter_element
+created_by: kareneilbeck
+creation_date: 2011-10-07T04:02:51Z
+
+[Term]
+id: SO:0001845
+name: DRE
+def: "A promoter element with consensus sequence CGWGGWNGMM, bound by transcription factors related to RecA and found in promoters of genes expressed following several types of DNA damage or inhibition of DNA synthesis." [PMID:11073995, PMID:8668127]
+synonym: "DNA damage response element" EXACT []
+is_a: SO:0001659 ! promoter_element
+created_by: kareneilbeck
+creation_date: 2011-10-07T04:17:25Z
+
+[Term]
+id: SO:0001846
+name: FLEX_element
+def: "A promoter element that has consensus sequence GTAAACAAACAAAM and contains a heptameric core GTAAACA, bound by transcription factors with a forkhead DNA-binding domain." [PMID:10747048, PMID:14871934]
+synonym: "FLEX element" RELATED []
+is_a: SO:0001659 ! promoter_element
+created_by: kareneilbeck
+creation_date: 2011-10-07T04:20:01Z
+
+[Term]
+id: SO:0001847
+name: forkhead_motif
+def: "A promoter element with consensus sequence TTTRTTTACA, bound by transcription factors with a forkhead DNA-binding domain." [PMID:15195092]
+synonym: "forkhead motif" EXACT []
+is_a: SO:0001659 ! promoter_element
+created_by: kareneilbeck
+creation_date: 2011-10-07T04:22:06Z
+
+[Term]
+id: SO:0001848
+name: homol_D_box
+def: "A core promoter element that has the consensus sequence CAGTCACA (or its inverted form TGTGACTG), and plays the role of a TATA box in promoters that do not contain a canonical TATA sequence." [PMID:7501449, PMID:8458332]
+synonym: "homol D box" EXACT []
+is_a: SO:0001660 ! core_promoter_element
+created_by: kareneilbeck
+creation_date: 2011-10-07T04:24:14Z
+
+[Term]
+id: SO:0001849
+name: homol_E_box
+def: "A core promoter element that has the consensus sequence ACCCTACCCT (or its inverted form AGGGTAGGGT), and is found near the homol D box in some promoters that use a homol D box instead of a canonical TATA sequence." [PMID:7501449]
+synonym: "homol E box" EXACT []
+is_a: SO:0001659 ! promoter_element
+created_by: kareneilbeck
+creation_date: 2011-10-07T04:26:09Z
+
+[Term]
+id: SO:0001850
+name: HSE
+def: "A promoter element that consists of at least three copies of the pentanucleotide NGAAN, bound by the heat shock transcription factor HSF." [PMID:17347150, PMID:8689565]
+synonym: "heat shock element" EXACT []
+is_a: SO:0001659 ! promoter_element
+created_by: kareneilbeck
+creation_date: 2011-10-07T04:29:10Z
+
+[Term]
+id: SO:0001851
+name: iron_repressed_GATA_element
+def: "A GATA promoter element with consensus sequence WGATAA, found in promoters of genes repressed in the presence of iron." [PMID:11956219, PMID:17211681]
+comment: The synonym IDP (GATA) is found in an annotation but un-traced as far as literature goes.
+synonym: "IDP (GATA)" EXACT []
+synonym: "iron repressed GATA element" EXACT []
+is_a: SO:0001840 ! GATA_box
+created_by: kareneilbeck
+creation_date: 2011-10-07T04:32:42Z
+
+[Term]
+id: SO:0001852
+name: mating_type_M_box
+def: "A promoter element with consensus sequence ACAAT, found in promoters of mating type M-specific genes in fission yeast and bound by the transcription factor Mat1-Mc." [PMID:9233811]
+comment: Note that this should not be confused with the M-box that has consensus sequence CATGTG and is bound by bHLH transcription factors such as MITF.
+synonym: "mating type M-box" EXACT []
+is_a: SO:0001659 ! promoter_element
+created_by: kareneilbeck
+creation_date: 2011-10-07T04:39:43Z
+
+[Term]
+id: SO:0001853
+name: androgen_response_element
+def: "A non-palindromic sequence found in the promoters of genes whose expression is regulated in response to androgen." [PMID:21796522]
+synonym: "androgen response element" EXACT []
+synonym: "ARE" EXACT []
+is_a: SO:0000713 ! DNA_motif
+created_by: kareneilbeck
+creation_date: 2011-10-10T04:52:44Z
+
+[Term]
+id: SO:0001854
+name: smFISH_probe
+def: "A smFISH is a probe that binds RNA in a single molecule in situ hybridization experiment." [PMID:18806792]
+synonym: "single molecule fish probe" EXACT []
+synonym: "smFISH probe" RELATED []
+is_a: SO:0000051 ! probe
+created_by: kareneilbeck
+creation_date: 2011-10-10T05:00:30Z
+
+[Term]
+id: SO:0001855
+name: MCB
+def: "A promoter element with consensus sequence ACGCGT, bound by the transcription factor complex MBF (MCB-binding factor) and found in promoters of genes expressed during the G1/S transition of the cell cycle." [PMID:16285853]
+synonym: "MluI cell cycle box" EXACT []
+is_a: SO:0001659 ! promoter_element
+created_by: kareneilbeck
+creation_date: 2011-10-10T05:09:45Z
+
+[Term]
+id: SO:0001856
+name: CCAAT_motif
+def: "A promoter element with consensus sequence CCAAT, bound by a protein complex that represses transcription in response to low iron levels." [PMID:16963626]
+synonym: "CCAAT motif" EXACT []
+is_a: SO:0001659 ! promoter_element
+created_by: kareneilbeck
+creation_date: 2011-10-10T05:13:54Z
+
+[Term]
+id: SO:0001857
+name: Ace2_UAS
+def: "A promoter element with consensus sequence CCAGCC, bound by the fungal transcription factor Ace2." [PMID:16678171]
+synonym: "Ace2 upstream activating sequence" EXACT []
+is_a: SO:0001659 ! promoter_element
+created_by: kareneilbeck
+creation_date: 2011-10-10T05:19:10Z
+
+[Term]
+id: SO:0001858
+name: TR_box
+def: "A promoter element with consensus sequence TTCTTTGTTY, bound an HMG-box transcription factor such as S. pombe Ste11, and found in promoters of genes up-regulated early in meiosis." [PMID:1657709]
+synonym: "TR box" EXACT []
+is_a: SO:0001659 ! promoter_element
+created_by: kareneilbeck
+creation_date: 2011-10-10T05:22:13Z
+
+[Term]
+id: SO:0001859
+name: STREP_motif
+def: "A promoter element with consensus sequence CCCCTC, bound by the PKA-responsive zinc finger transcription factor Rst2." [PMID:11739717]
+synonym: "STREP motif" RELATED []
+synonym: "stress-starvation response element of Schizosaccharomyces pombe" EXACT []
+is_a: SO:0001659 ! promoter_element
+created_by: kareneilbeck
+creation_date: 2011-10-14T10:25:02Z
+
+[Term]
+id: SO:0001860
+name: rDNA_intergenic_spacer_element
+def: "A DNA motif that contains a core consensus sequence AGGTAAGGGTAATGCAC, is found in the intergenic regions of rDNA repeats, and is bound by an RNA polymerase I transcription termination factor (e.g. S. pombe Reb1)." [PMID:9016645]
+synonym: "rDIS" EXACT []
+is_a: SO:0000713 ! DNA_motif
+created_by: kareneilbeck
+creation_date: 2011-10-19T11:23:09Z
+
+[Term]
+id: SO:0001861
+name: sterol_regulatory_element
+def: "A 10-bp promoter element bound by sterol regulatory element binding proteins (SREBPs), found in promoters of genes involved in sterol metabolism. Many variants of the sequence ATCACCCCAC function as SREs." [GO:mah, PMID:11111080, PMID:16537923]
+synonym: "SRE" BROAD [GO:mah]
+is_a: SO:0001659 ! promoter_element
+created_by: kareneilbeck
+creation_date: 2011-10-19T03:02:05Z
+
+[Term]
+id: SO:0001862
+name: GT_dinucleotide_repeat
+def: "A dinucleotide repeat region composed of GT repeating elements." [SO:ke]
+comment: paper:PMID:16043634.
+synonym: "d(GT)n" EXACT []
+is_a: SO:0000290 ! dinucleotide_repeat_microsatellite_feature
+created_by: kareneilbeck
+creation_date: 2011-10-19T03:54:37Z
+
+[Term]
+id: SO:0001863
+name: GTT_trinucleotide_repeat
+def: "A trinucleotide repeat region composed of GTT repeating elements." [SO:ke]
+synonym: "d(GTT)" EXACT []
+is_a: SO:0000291 ! trinucleotide_repeat_microsatellite_feature
+created_by: kareneilbeck
+creation_date: 2011-10-19T03:56:54Z
+
+[Term]
+id: SO:0001864
+name: Sap1_recognition_motif
+def: "A DNA motif to which the S. pombe Sap1 protein binds. The consensus sequence is 5'-TARGCAGNTNYAACGMG-3'; it is found at the mating type locus, where it is important for mating type switching, and at replication fork barriers in rDNA repeats." [PMID:16166653, PMID:7651412]
+synonym: "Sap1 recognitions site" EXACT []
+is_a: SO:0000713 ! DNA_motif
+created_by: kareneilbeck
+creation_date: 2011-10-19T04:24:16Z
+
+[Term]
+id: SO:0001865
+name: CDRE_motif
+def: "An RNA polymerase II promoter element found in the promoters of genes regulated by calcineurin. The consensus sequence is GNGGCKCA." [PMID:16928959]
+synonym: "calcineurin-dependent response element" EXACT [PMID:16928959]
+synonym: "CDRE motif" EXACT []
+is_a: SO:0001659 ! promoter_element
+created_by: kareneilbeck
+creation_date: 2011-10-20T10:12:19Z
+
+[Term]
+id: SO:0001866
+name: BAC_read_contig
+def: "A contig of BAC reads." [GMOD:ea]
+comment: Requested by Bayer Cropscience December, 2011.
+synonym: "BAC read contig" EXACT []
+is_a: SO:0000149 ! contig
+relationship: part_of SO:0000153 ! BAC
+created_by: kareneilbeck
+creation_date: 2012-01-17T02:45:04Z
+
+[Term]
+id: SO:0001867
+name: candidate_gene
+def: "A gene suspected of being involved in the expression of a trait." [GMOD:ea]
+comment: Requested by Bayer Cropscience December, 2011.
+synonym: "candidate gene" EXACT []
+synonym: "target gene" EXACT []
+is_a: SO:0000704 ! gene
+created_by: kareneilbeck
+creation_date: 2012-01-17T02:53:03Z
+
+[Term]
+id: SO:0001868
+name: positional_candidate_gene
+def: "A candidate gene whose association with a trait is based on the gene's location on a chromosome." [GMOD:ea]
+comment: equested by Bayer Cropscience December, 2011.
+synonym: "positional candidate gene" EXACT []
+synonym: "positional target gene" RELATED []
+is_a: SO:0001867 ! candidate_gene
+created_by: kareneilbeck
+creation_date: 2012-01-17T02:54:42Z
+
+[Term]
+id: SO:0001869
+name:  functional_candidate_gene
+def: "A candidate gene whose function has something in common biologically with the trait under investigation." [GMOD:ea]
+comment: A candidate gene whose function has something in common\nbiologically with the trait under investigation.
+synonym: "functional candidate gene" EXACT []
+synonym: "functional target gene" EXACT []
+is_a: SO:0001867 ! candidate_gene
+created_by: kareneilbeck
+creation_date: 2012-01-17T02:57:30Z
+
+[Term]
+id: SO:0001870
+name: enhancerRNA
+def: "A short ncRNA that is transcribed from an enhancer. May have a regulatory function." [doi:10.1038/465173a, SO:cjm]
+synonym: "eRNA" EXACT []
+is_a: SO:0000655 ! ncRNA
+intersection_of: SO:0000655 ! ncRNA
+intersection_of: transcribed_from SO:0000165 ! enhancer
+created_by: kareneilbeck
+creation_date: 2012-01-17T03:09:35Z
+
+[Term]
+id: SO:0001871
+name: PCB
+def: "A promoter element with consensus sequence GNAACR, bound by the transcription factor complex PBF (PCB-binding factor) and found in promoters of genes expressed during the M/G1 transition of the cell cycle." [GO:mah, PMID:12411492]
+is_a: SO:0001659 ! promoter_element
+created_by: kareneilbeck
+creation_date: 2012-01-17T03:14:02Z
 
 [Term]
 id: SO:0005836
@@ -17995,6 +18541,14 @@ created_by: kareneilbeck
 creation_date: 2010-10-14T02:17:53Z
 
 [Typedef]
+id: gained
+name: gained
+def: "X gained Y if X is a variant_of X' and Y part of X but not X'." [SO:ke]
+comment: A relation with which to annotate the changes in a variant sequence with respect to a reference.\nFor example a variant transcript may gain a stop codon not present in the reference sequence.
+created_by: kareneilbeck
+creation_date: 2011-06-28T12:51:10Z
+
+[Typedef]
 id: genome_of
 name: genome_of
 
@@ -18057,6 +18611,14 @@ def: "R is_consecutive_sequence_of R iff every instance of R is equivalent to a 
 comment: Example: region is consecutive_sequence of base.
 created_by: kareneilbeck
 creation_date: 2010-10-14T02:19:48Z
+
+[Typedef]
+id: lost
+name: lost
+def: "X lost Y if X is a variant_of X' and Y part of X' but not X." [SO:ke]
+comment: A relation with which to annotate the changes in a variant sequence with respect to a reference.\nFor example a variant transcript may have lost a stop codon present in the reference sequence.
+created_by: kareneilbeck
+creation_date: 2011-06-28T12:53:16Z
 
 [Typedef]
 id: maximally_overlaps
