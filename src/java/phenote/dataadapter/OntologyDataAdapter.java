@@ -335,7 +335,7 @@ public class OntologyDataAdapter {
                   useRepos = false;
               }
               else {
-                  LOG.debug(localFile + " last modified " + lastModified + "; current date is " + currentDate + "; diff = " + (currentDate - lastModified) + " (more than six days)--updating " + localFile); // DEL
+                  LOG.debug(localFile + " last modified " + lastModified + "; current date is " + currentDate + "; diff = " + (currentDate - lastModified) + " (more than six days)--planning to update " + localFile); // DEL
                   useRepos = true;
               }
           }
@@ -373,7 +373,7 @@ public class OntologyDataAdapter {
 
         //if autoupdate, update without dialog
         //LOG.debug("repos date "+reposDate+" local date "+loc);
-        if (reposDate <= loc) {
+        if (reposDate <= loc && reposDate != 0) {
             LOG.debug("Local copy is as new as repository--not updating " + ontol);
             useRepos = false;
         }
