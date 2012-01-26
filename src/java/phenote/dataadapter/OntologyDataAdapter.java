@@ -310,11 +310,10 @@ public class OntologyDataAdapter {
 
     // Start by assuming we WILL update from the repository
     useRepos = true;
+    long loc = 0;
     if (localUrl != null) {
-      long loc = 0;
       int timer = cfg().getUpdateTimer();
       boolean autoUpdate = cfg().autoUpdateIsEnabled();
-      if (localUrl != null) {
         try { 
           loc = getOboDate(localUrl);
           LOG.debug("Date of localURL " + localUrl + " = " + loc);
@@ -323,7 +322,6 @@ public class OntologyDataAdapter {
             LOG.debug("Couldn't find date line in " + localUrl + " for " + ontol);
             loc = 0; // no local date - keep as 0
         } 
-      }
 
       // If we couldn't find a date for the local version, try to figure out how old the file is.
       if (loc == 0) {
@@ -345,6 +343,7 @@ public class OntologyDataAdapter {
           }
       }
 
+      LOG.debug("synchWithRepositoryUrl: reposUrl = " + reposUrl + ", useRepos = " + useRepos); // DEL
       if (useRepos) {
         LOG.info("Checking repository for newer version of " + ontol + ": " + reposUrl);
 
@@ -405,8 +404,11 @@ public class OntologyDataAdapter {
 
       try { 
           // Why are we recreating localUrl when it was passed in??
-          //        localUrl = new File(FileUtil.getDotPhenoteOboDir(),localFile).toURL();
-        LOG.info("About to download new ontology from repository "+reposUrl+" to "+localUrl);
+	  // (Because it might be null!)
+	  if (localFile.indexOf("/") >= 0)
+	      localFile = localFile.substring(localFile.lastIndexOf("/") + 1);
+	localUrl = new File(FileUtil.getDotPhenoteOboDir(),localFile).toURL();
+        LOG.info("About to download new ontology from repository "+reposUrl+" to "+localUrl + " for localFile " + localFile);
         this.updateLoadingScreen("Downloading " + ontol + " ontology from "+ reposUrl + "...", true);
 
         FileUtil.copyReposToLocal(reposUrl,localUrl);
