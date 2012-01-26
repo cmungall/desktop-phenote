@@ -102,6 +102,7 @@ public class SelectionManager {
         }
 	
 	public void selectID(Object source, String id, String type) {
+//          System.out.println("selectID: id = " + id + ", type = " + type); // DEL
 		IDSelectionEvent e = makeIDEvent(source, id, type);
 			fireIDSelect(e);
 	}
