@@ -16661,7 +16661,7 @@ creation_date: 2011-10-12T12:33:07Z
 id: PATO:0002318
 name: superelliptic
 def: "A shape constituting a transition between a rectangle and a circle; a closed curve, of which the circle and ellipse are special cases, whose parametric equation is x = a.cos2/rt, y = b.cos2/rt" [wiktionary:superellipse]
-synonym: "Lamé curve" EXACT []
+synonym: "Lam̩ curve" EXACT []
 is_a: PATO:0002006 ! 2-D shape
 created_by: George Gkoutos
 creation_date: 2011-10-12T12:45:16Z
