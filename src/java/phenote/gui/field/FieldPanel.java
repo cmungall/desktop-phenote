@@ -155,7 +155,7 @@ public class FieldPanel extends AbstractGUIComponent {
   private void initCharFieldGuis() {
     if (Config.inst().getFieldsPerTab() > 0)
       fieldsPerTab = Config.inst().getFieldsPerTab();
-    log().debug("fieldsPerTab = " + fieldsPerTab); // DEL
+    //    log().debug("fieldsPerTab = " + fieldsPerTab); // DEL
 
     fieldPanel = new VerticalScrollingOnlyPanel(new GridBagLayout());
 

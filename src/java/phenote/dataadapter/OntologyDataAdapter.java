@@ -108,12 +108,12 @@ public class OntologyDataAdapter {
     try {
       LOG.debug("Loading ontology files");
       OBOSession os = loadAllOboFilesIntoOneOboSession();
-      LOG.debug("initializing char fields");
+      //      LOG.debug("initializing char fields");
       initCharFields();
 //      LOG.debug("setting char field managers obo session");
       charFieldManager.setOboSession(os);
       // map namespaces to ontologies? 2 methods?
-      LOG.debug("mapping namespaces to ontologies");
+      //      LOG.debug("mapping namespaces to ontologies");
       mapNamespacesToOntologies(os);
       LOG.debug("ontologies initialized!");
       // load ontologies from namespaces
@@ -306,7 +306,7 @@ public class OntologyDataAdapter {
     boolean downloadFailed = false;
     String localFile = localUrl!=null ? localUrl.getPath() : filename;
     //String file = FileUtil.getNameOfFile(localUrl);
-    LOG.debug("synchWithRepositoryUrl: localUrl = " + localUrl + ", filename = " + filename + ", localFile = " + localFile); // DEL
+    //    LOG.debug("synchWithRepositoryUrl: localUrl = " + localUrl + ", filename = " + filename + ", localFile = " + localFile); // DEL
 
     // Start by assuming we WILL update from the repository
     useRepos = true;
@@ -343,7 +343,7 @@ public class OntologyDataAdapter {
           }
       }
 
-      LOG.debug("synchWithRepositoryUrl: reposUrl = " + reposUrl + ", useRepos = " + useRepos); // DEL
+      //      LOG.debug("synchWithRepositoryUrl: reposUrl = " + reposUrl + ", useRepos = " + useRepos); // DEL
       if (useRepos) {
         LOG.info("Checking repository for newer version of " + ontol + ": " + reposUrl);
 
@@ -369,7 +369,7 @@ public class OntologyDataAdapter {
             reposDate = 0;
         }
 
-        LOG.debug("autoUpdate = " + autoUpdate + ", timer = " + timer + ", reposDate = " + reposDate + ", loc = " + loc + ", useRepos = " + useRepos); // DEL
+        //        LOG.debug("autoUpdate = " + autoUpdate + ", timer = " + timer + ", reposDate = " + reposDate + ", loc = " + loc + ", useRepos = " + useRepos); // DEL
 
         //if autoupdate, update without dialog
         //LOG.debug("repos date "+reposDate+" local date "+loc);

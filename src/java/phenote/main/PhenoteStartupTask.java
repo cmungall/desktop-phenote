@@ -246,7 +246,7 @@ public File getPrefsDir() {
   private Collection<CharacterTableFactory> getCharacterTableComponentFactories() {
     Collection<CharacterTableFactory> factories = new ArrayList<CharacterTableFactory>();
     for (Group group : Config.inst().getFieldGroups()) {
-      log().debug("Creating table factory for: " + group.getName());
+        //      log().debug("Creating table factory for: " + group.getName());
       if (!group.getInterface().equals(Group.Interface.CHARACTER_TEMPLATE)) {
         factories.add(new CharacterTableFactory(group.getName()));
       }
