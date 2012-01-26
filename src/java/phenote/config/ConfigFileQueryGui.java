@@ -153,7 +153,8 @@ public class ConfigFileQueryGui {
     JScrollPane scroll = new JScrollPane(mainPanel);
     // shouldnt take up whole screen - tool bars get in the way and dont know if
     // tool bar is on top or bottom - so subtract 100
-    int height = Math.min(getScreenHeight()-100,900);
+    //    int height = Math.min(getScreenHeight()-100,900);
+    int height = Math.min(getScreenHeight()-350,650);
 //    System.out.println("Phenote config window height: " + height);  // DEL
     scroll.setPreferredSize(new Dimension(300,height));
     scroll.setMinimumSize(new Dimension(300,(int)(height*0.7))); // just in case
