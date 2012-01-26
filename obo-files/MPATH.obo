@@ -1,7 +1,7 @@
 format-version: 1.2
-date: 01:04:2011 12:15
-saved-by: Paul
-auto-generated-by: OBO-Edit 2.000-beta53
+date: 26:10:2011 15:48
+saved-by: George Gkoutos
+auto-generated-by: OBO-Edit 2.1-beta13
 default-namespace: mouse_pathology.ontology
 namespace-id-rule: * MPATH:$sequence(3,0,999)$
 remark: The Pathbase mouse pathology ontology provides a description of mutant and transgenic mouse pathology phenotypes and incorporates 643 known mouse pathologies hierarchically organised as "instances of" pathological processes. Questions, comments and suggestions for amendment should be sent to the Co-ordinator, Dr. Paul Schofield, Dept. of Anatomy, University of Cambridge (PS@mole.bio.cam.ac.uk).The ontology was developed by the Pathbase consortium (http://www.pathbase.net) funded under the European Commission's Fifth Framework programme, Contract number QLRI-CT-1999-00320.
@@ -2459,6 +2459,7 @@ name: fibroma
 def: "Benign neoplasm of fibroblasts/fibrocytes with poor/moderate cellularity. (M-8810/0)." [Pathbase: Pathology Committee]
 comment: "Soft tissue" qualifier removed by Pathology Panel to increase scope of term.
 is_a: MPATH:404 ! soft tissue tumor
+is_a: MPATH:551 ! sarcoma
 
 [Term]
 id: MPATH:408
@@ -2917,12 +2918,12 @@ is_a: MPATH:1 ! cell and tissue damage
 id: MPATH:469
 name: symmetry defect
 def: "Any aberration of the normal symmetrical organisation of the body pattern." [Pathbase: Curation]
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
 
 [Term]
 id: MPATH:47
 name: intracellular and extracellular depletion
-def: "Loss of specific intra- and extracellular substances." [Pathbase: Pathology Committee]
+def: "Loss or dispersion of specific intra- and extracellular substances." [Pathbase: Pathology Committee]
 is_a: MPATH:1 ! cell and tissue damage
 
 [Term]
@@ -2974,7 +2975,7 @@ id: MPATH:477
 name: choristoma
 def: "Similar to hamartoma, including the mass lesion requirement, but unlike hamartoma, includes heterotopic tissue of an adult or embryonic nature ( topographical and developmental anomaly)." [ISBN:0781727286]
 synonym: "Choristoblastoma" RELATED [Pathbase: Curation]
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
 
 [Term]
 id: MPATH:478
@@ -3425,6 +3426,7 @@ is_a: MPATH:516 ! B-cell neoplasms
 id: MPATH:532
 name: plasmacytoma
 def: "Diffuse proliferation of mature plasma cells. Clonal by definition." [PMID:12070034]
+comment: Tissue, usually lymph nodes, that contain unusually large numbers of normal appearing plasma cells. While these may be plasmacytomas, additional work is needed to confirm this latter diagnosis.
 xref: URL: http\://emice.nci.nih.gov/emice/mouse_models/organ_models/hema_models/hema_mouse_class
 is_a: MPATH:530 ! Plasma cell neoplasms
 
@@ -3617,8 +3619,8 @@ is_a: MPATH:268 ! adenocarcinoma
 
 [Term]
 id: MPATH:56
-name: developmental and adult structural  defect
-def: "Structural, physical or other general defect of prenatal development of the embryo, the placenta or the adult." [Pathbase: Pathology Committee]
+name: developmental or adult structural  defect
+def: "Structural, physical or other general defect of prenatal development of the embryo and the placenta, or such as are acquired in the adult." [Pathbase: Pathology Committee]
 is_a: MPATH:55 ! developmental and structural abnormality
 
 [Term]
@@ -3638,7 +3640,7 @@ is_a: MPATH:442 ! squamous cell tumor
 id: MPATH:562
 name: torsion
 def: "The twisting of a bodily organ or part on its own axis." [Pathbase: Pathology Committee]
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
 
 [Term]
 id: MPATH:563
@@ -3766,7 +3768,7 @@ is_a: MPATH:599 ! developmental process abnormalities
 
 [Term]
 id: MPATH:580
-name: Erosion
+name: erosion
 def: "Partial epithelial denudation not penetrating to the basement membrane." [Pathbase: Pathology Committee]
 is_a: MPATH:15 ! general degenerative process
 
@@ -3881,6 +3883,7 @@ is_a: MPATH:135 ! epithelial and stromal hyperplasia
 id: MPATH:595
 name: extramedullary hemopoiesis
 def: "The formation of and development of blood cells outside the red pulp of the spleen. Composed of varying numbers of megakaryocytes as well as myeloid and erythroid precursors." [:Ward; J.M.; Mann; P.C.; Mrishima; H.; and Frith; C.H. Thymus; Spleen and Lymph nodes. Ch 13.  p342. In Maronpot; R. Pathology of the Mouse. (1999) Cache River Press. Vienna IL]
+comment: Production of blood cells in tissues other than the bone marrow. In the mouse, this is usually the liver.
 is_a: MPATH:515 ! Non-Lymphoid neoplasias
 
 [Term]
@@ -3917,13 +3920,13 @@ is_a: MPATH:4 ! necrosis
 id: MPATH:60
 name: communication defect
 def: "Failure of two cavities, voids or lumens to connect." [Pathbase: Curation]
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
 
 [Term]
 id: MPATH:600
 name: branching defect
 def: "Aberrant branch or branching pattern of a branched structure such as the bronchus." [Pathbase: Curation]
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
 
 [Term]
 id: MPATH:601
@@ -3988,7 +3991,7 @@ is_a: MPATH:607 ! healing and repair structure
 id: MPATH:61
 name: curvature defect
 def: "Inappropriate curvature of a structure." [Pathbase: Curation]
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
 
 [Term]
 id: MPATH:610
@@ -4065,7 +4068,7 @@ is_a: MPATH:93 ! cardiac septation defect
 id: MPATH:62
 name: cyst
 def: "Formation of an epithelium bounded cavity not associated with neoplasia." [Pathbase: Pathology Committee]
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
 
 [Term]
 id: MPATH:620
@@ -4094,26 +4097,26 @@ id: MPATH:623
 name: synechia
 def: "An adhesion, usually between the iris and the cornea or the lens capsule." [Millodot; Michel and Daniel Laby. Dictionary of Ophthalmology. London: Butterworth Heinemann; 2002]
 comment: May also be seen in the uterus ( in humans Asherman`s syndrome).
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
 
 [Term]
 id: MPATH:624
 name: involution
 def: "Turning in of the edges of a structure." [ISBN:0781727286]
 comment: Not return of an enlarged organ to its normal size.
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
 
 [Term]
 id: MPATH:625
 name: avulsion
 def: "Tearing away or separation of two structures or parts." [ISBN:0781727286]
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
 
 [Term]
 id: MPATH:626
 name: prolapse
 def: "To sink down, said of an organ or other part. A sinking of an organ or other part, especially its appearance at a natural or artificial orifice." [ISBN:0781727286]
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
 
 [Term]
 id: MPATH:627
@@ -4176,8 +4179,8 @@ is_a: MPATH:212 ! inflammation
 [Term]
 id: MPATH:635
 name: hydronephrosis
-def: "Swelling of the kidneys when urine flow is obstructed in any of part of the urinary tract." [ISBN:9780702027888]
-is_a: MPATH:33 ! intracellular and extracellular accumulation
+def: "Swelling of the kidneys when urine flow is obstructed in any of part of the urinary tract. Severe form of pyelectasia." [ISBN:9780702027888]
+is_a: MPATH:708 ! pyelectasia
 
 [Term]
 id: MPATH:636
@@ -4362,7 +4365,7 @@ creation_date: 2011-03-22T03:46:02Z
 id: MPATH:66
 name: dilatation
 def: "Increase in the diameter of an orifice or tubular structure beyond its normal dimensions." [Pathbase: Pathology Committee]
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
 
 [Term]
 id: MPATH:660
@@ -4518,7 +4521,7 @@ creation_date: 2011-02-19T04:12:43Z
 id: MPATH:68
 name: diverticulum
 def: "A blind ended outpouching through the wall of a tubular organ or bounded cavity." [Pathbase: Curation]
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
 
 [Term]
 id: MPATH:680
@@ -4681,7 +4684,7 @@ is_a: MPATH:4 ! necrosis
 id: MPATH:70
 name: fistula
 def: "An abnormal passage between two internal organs or leading from a cavity to the body surface." [Pathbase: Curation]
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
 
 [Term]
 id: MPATH:700
@@ -4740,10 +4743,41 @@ created_by: George Gkoutos
 creation_date: 2011-02-20T08:44:41Z
 
 [Term]
+id: MPATH:708
+name: pyelectasia
+def: "Distension of the renal pelvis by accumulated fluid or urine." [: "Pathbase Curation"]
+comment: May be fetal or adult.
+is_a: MPATH:33 ! intracellular and extracellular accumulation
+created_by: Paul
+creation_date: 2011-06-06T03:01:54Z
+
+[Term]
+id: MPATH:709
+name: alveolar rhabdomyosarcoma
+def: "Malignant tumor of striated muscle or pluripotential mesenchymal stem cells composed mainly of small round cells, with some partial skeletal muscle differentiation." [ICD-O:8920/3]
+is_a: MPATH:428 ! rhabdomyosarcoma
+created_by: Paul
+creation_date: 2011-06-06T03:24:13Z
+
+[Term]
 id: MPATH:71
 name: fusion defect
 def: "Failure of two or more structures ( not voids or lumens) to join together." [ISBN:0781727286]
 is_a: MPATH:599 ! developmental process abnormalities
+
+[Term]
+id: MPATH:710
+name: embryonal rhabdomyosarcoma
+def: "Malignant mesenchymal tumor that morphologically and phenotypically resembles embryonal skeletal muscle." [ICD-O:8910/3, ICDO-:8912/3]
+comment: Includes spindle cell, botryoid, anaplastic.
+synonym: " Rhabdopoietic Sarcoma" RELATED []
+synonym: " Sarcoma Botryoides [Soft Tissues]" RELATED []
+synonym: "Embryonal Sarcoma" RELATED []
+synonym: "Malignant Rhabdomyoma" RELATED []
+synonym: "Myosarcoma " EXACT []
+is_a: MPATH:428 ! rhabdomyosarcoma
+created_by: Paul
+creation_date: 2011-06-06T03:31:11Z
 
 [Term]
 id: MPATH:711
@@ -4799,6 +4833,14 @@ created_by: George Gkoutos
 creation_date: 2011-02-20T02:28:51Z
 
 [Term]
+id: MPATH:718
+name: pre-sacral teratoma
+def: "Generally benign germ cell derived tumors of male or female containing derivatives from all three germ layers with differentiation in the malignant form being poor. Pre-sacral tumors located in the retrorectal space between the rectum and the sacrococcygeal part of the spine." [: "Pathology Curation"]
+is_a: MPATH:322 ! teratoma
+created_by: Paul
+creation_date: 2011-06-06T03:39:01Z
+
+[Term]
 id: MPATH:719
 name: bronchiectasia
 is_a: MPATH:474 ! ectasia
@@ -4819,22 +4861,286 @@ created_by: George Gkoutos
 creation_date: 2011-02-20T12:05:38Z
 
 [Term]
+id: MPATH:721
+name: Sacrococcygeal teratoma
+def: "Generally benign germ cell derived tumors of male or female containing derivatives from all three germ layers with differentiation in the malignant form being poor. Sacrococcygeal tumors are located at the base of the coccyx." [: "MPATH Curation"]
+is_a: MPATH:322 ! teratoma
+created_by: Paul
+creation_date: 2011-06-06T03:51:12Z
+
+[Term]
+id: MPATH:722
+name: rhabdomyoma
+def: "Benign stromal tumors of the soft tissue with skeletal muscle differentiation." [ICD-O:M-8900/0, PMID:3525381]
+comment: Adult and fetal types.
+is_a: MPATH:551 ! sarcoma
+created_by: Paul
+creation_date: 2011-06-06T03:59:49Z
+
+[Term]
+id: MPATH:723
+name: fibromatosis
+def: "Systemic manifestation of MPATH: 407." [ICDO:M-8822/1]
+synonym: " Musculoaponeurotic Fibromatosis" RELATED []
+synonym: "Aggressive Fibromatosis" RELATED []
+synonym: "Desmoid Tumor" EXACT []
+synonym: "Plantar Fibromatosis (Ledderhose Disease)" RELATED []
+is_a: MPATH:407 ! fibroma
+created_by: Paul
+creation_date: 2011-06-06T04:11:04Z
+
+[Term]
+id: MPATH:724
+name: xanthoma
+def: "Dermal, subcutaneous,  or tendinous lesions characterized by accumulations of lipid-laden macrophages often rich in cholesterol." [MPATH:Pathology Committee]
+is_a: MPATH:42 ! lipid deposition
+created_by: Paul
+creation_date: 2011-06-08T03:43:07Z
+
+[Term]
+id: MPATH:725
+name: chronic interstitial nephritis
+is_a: MPATH:647 ! interstitial nephritis
+created_by: Paul
+creation_date: 2011-10-26T02:02:02Z
+
+[Term]
+id: MPATH:726
+name: hemosiderosis
+is_a: MPATH:41 ! iron deposition
+created_by: Paul
+creation_date: 2011-10-26T02:05:04Z
+
+[Term]
+id: MPATH:727
+name: hepatic hemosiderosis
+is_a: MPATH:726 ! hemosiderosis
+created_by: Paul
+creation_date: 2011-10-26T02:05:29Z
+
+[Term]
+id: MPATH:728
+name: pulmonary hemosiderosis
+is_a: MPATH:726 ! hemosiderosis
+created_by: Paul
+creation_date: 2011-10-26T02:06:12Z
+
+[Term]
+id: MPATH:729
+name: splenic melanosis
+is_a: MPATH:44 ! melanin deposition
+created_by: Paul
+creation_date: 2011-10-26T02:06:46Z
+
+[Term]
 id: MPATH:73
 name: growth arrest
 def: "The cessation of fetal or embryonic growth beyond a particular stage." [Pathbase: Pathology Committee]
 is_a: MPATH:599 ! developmental process abnormalities
 
 [Term]
+id: MPATH:730
+name: renal tubular concretion
+is_a: MPATH:614 ! concretion
+created_by: Paul
+creation_date: 2011-10-26T02:13:35Z
+
+[Term]
+id: MPATH:731
+name: Leydig cell hyperplasia
+is_a: MPATH:602 ! hyperplastic tissue
+created_by: Paul
+creation_date: 2011-10-26T02:17:02Z
+
+[Term]
+id: MPATH:732
+name: tracheal gland ectasia
+is_a: MPATH:474 ! ectasia
+created_by: Paul
+creation_date: 2011-10-26T02:19:12Z
+
+[Term]
+id: MPATH:733
+name: mucometra
+def: "A uterus distended with a fluid containing large quantities of mucin." [MPATH:Sundberg]
+is_a: MPATH:547 ! mucous secretions
+created_by: Paul
+creation_date: 2011-10-26T02:22:56Z
+
+[Term]
+id: MPATH:734
+name: acute blepharitis
+is_a: MPATH:546 ! blepharitis
+created_by: Paul
+creation_date: 2011-10-26T02:23:54Z
+
+[Term]
+id: MPATH:735
+name: molar hypercementosis
+def: "Thickening of the cementum layer of the molars." [MPATH:Sundberg]
+comment: This is usually a normal adaptive response, serving to improve the functional properties of teeth during aging.
+is_a: MPATH:33 ! intracellular and extracellular accumulation
+created_by: Paul
+creation_date: 2011-10-26T02:25:55Z
+
+[Term]
+id: MPATH:736
+name: ovarian follicular cyst
+comment: A variety of cysts develop in the ovary. They are subdivided based on where they develop anatomically. Ovarian follicles in this case become large and fluid filled.
+is_a: MPATH:62 ! cyst
+created_by: Paul
+creation_date: 2011-10-26T02:29:29Z
+
+[Term]
+id: MPATH:737
+name: retinal degeneration
+comment: Usually rd6-outer retinal photoreceptor degeneration
+is_a: MPATH:25 ! tissue specific degenerative process
+created_by: Paul
+creation_date: 2011-10-26T02:33:06Z
+
+[Term]
+id: MPATH:738
+name: uterine cystic endometrial hyperplasia
+comment: The uterus of older female mice often becomes distended with numerous fluid filled cysts that extend from the endometrium.
+is_a: MPATH:134 ! hyperplasia
+created_by: Paul
+creation_date: 2011-10-26T02:34:35Z
+
+[Term]
+id: MPATH:739
+name: sub-retinal hemorrhage
+def: "Extravascular blood between retina and choroid" [MPATH:Sundberg]
+is_a: MPATH:119 ! hemorrhage and non-specified extravasation
+created_by: Paul
+creation_date: 2011-10-26T02:36:03Z
+
+[Term]
 id: MPATH:74
 name: hamartoma
 def: "A focal malformation resembling a neoplasm which results from faulty development of an organ; composed of an abnormal mixture of tissue elements, or an abnormal proportion of a single element. Growth and location are usually normal for that tissue cf. Heterotopia/Choristoma MPATH:76/MPATH:477." [ISBN:0781727286]
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
+
+[Term]
+id: MPATH:740
+name: drusen
+def: "Tiny yellow or white deposits of  lamellar or amorphous extracellular material that build up between retina and retinal pigment epithelium." [MPATH:Sundberg]
+is_a: MPATH:45 ! protein deposition
+created_by: Paul
+creation_date: 2011-10-26T02:38:14Z
+
+[Term]
+id: MPATH:741
+name: splenomegaly
+def: "An increase in size of the spleen." [MPATH:Sundberg]
+is_a: MPATH:56 ! developmental or adult structural  defect
+created_by: Paul
+creation_date: 2011-10-26T02:56:13Z
+
+[Term]
+id: MPATH:742
+name: intervertebral disk prolapse
+def: "Rupture of the intervertebral disc, usually dorsally to compress the spinal cord, secondary to trauma." [MPATH:Sundberg]
+comment: These become more common with age.
+is_a: MPATH:626 ! prolapse
+created_by: Paul
+creation_date: 2011-10-26T02:59:08Z
+
+[Term]
+id: MPATH:743
+name: hepatic centrolobular fatty metamorphosis
+def: "Accumulation of clear large vacuoles in hepatocytes (most likely lipid pending frozen sections and oil red O or other lipid stains) around central veins." [MPATH:Sundberg]
+is_a: MPATH:622 ! steatosis
+created_by: Paul
+creation_date: 2011-10-26T03:04:08Z
+
+[Term]
+id: MPATH:744
+name: pigmentary incontinence
+def: "Release of melanin pigment in the dermis." [MPATH:Sundberg]
+comment: Observed as melanin pigment within macrophages in the dermis. Inflammation in the epidermis stimulates melanocytes to increase the synthesis of melanin and subsequently to transfer the pigment to surrounding keratinocytes. If the basal layer is injured (e.g. lichen planus), melanin pigment is released and subsequently trapped by macrophages in the papillary dermis.
+is_a: MPATH:47 ! intracellular and extracellular depletion
+created_by: Paul
+creation_date: 2011-10-26T03:06:29Z
+
+[Term]
+id: MPATH:745
+name: zenker's necrosis
+def: "Degenerative changes in skeletal muscle including hyalinization, swelling, fragmentation, vacuolation eventually resulting in death of muscle fibers." [MPATH:Sundberg]
+is_a: MPATH:4 ! necrosis
+created_by: Paul
+creation_date: 2011-10-26T03:15:56Z
+
+[Term]
+id: MPATH:746
+name: cartilagenous erosion
+def: "Fragmentation and erosion of articular cartilage." [MPATH\::Sundberg]
+is_a: MPATH:25 ! tissue specific degenerative process
+created_by: Paul
+creation_date: 2011-10-26T03:18:38Z
+
+[Term]
+id: MPATH:747
+name: renal tubular amyloidosis
+def: "Pink amorphous material (amyloid) deposited within the renal tubules." [MPATH:Sundberg]
+is_a: MPATH:34 ! amyloid deposition
+created_by: Paul
+creation_date: 2011-10-26T03:34:30Z
+
+[Term]
+id: MPATH:748
+name: recanalised thrombus
+def: "An old organized thrombus that has been recanalized to permit blood flow." [MPATH:Sundberg]
+is_a: MPATH:125 ! thrombosis
+created_by: Paul
+creation_date: 2011-10-26T03:36:06Z
+
+[Term]
+id: MPATH:749
+name: focal pulmonary fibrosis
+def: "Various degrees of pulmonary interstitial fibrosis." [MPATH:Sundberg]
+is_a: MPATH:181 ! fibrosis
+created_by: Paul
+creation_date: 2011-10-26T03:37:48Z
 
 [Term]
 id: MPATH:75
 name: hernia
 def: "Protrusion of a loop or wall of an organ through an abnormal opening." [Pathbase: Curation]
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
+
+[Term]
+id: MPATH:750
+name: pulmonary adenomatosis
+def: "Neoplastic proliferation of cuboidal cells lining alveoli most likely type II pneumocytes." [MPATH:Sundberg]
+is_a: MPATH:270 ! adenoma
+created_by: Paul
+creation_date: 2011-10-26T03:40:09Z
+
+[Term]
+id: MPATH:751
+name: pigment dispersion
+def: "Free pigment in anterior chamber/elsewhere in eye." [MPATH:Sundberg]
+is_a: MPATH:47 ! intracellular and extracellular depletion
+created_by: Paul
+creation_date: 2011-10-26T03:41:56Z
+
+[Term]
+id: MPATH:752
+name: barbered
+def: "loss of hair resulting from a behavioral abnormality in which the mouse, or more often other mice mice in the same box, remove hairs, initially vibrissae, from each other." [MPATH:Sundberg]
+comment: This is a form of trichotillomania.
+is_a: MPATH:56 ! developmental or adult structural  defect
+created_by: Paul
+creation_date: 2011-10-26T03:44:05Z
+
+[Term]
+id: MPATH:753
+name: gastric forestomach papillomatous hyperplasia
+def: "The forestomach of the mouse is lined by stratified squamous epithelia. At the limiting ridge there is hyperplasia to various degrees in which this epithelium proliferates to form raised areas on thin fibrovascular stalks." [MPATH:Sundberg]
+is_a: MPATH:138 ! epithelial hyperplasia
+created_by: Paul
+creation_date: 2011-10-26T03:47:01Z
 
 [Term]
 id: MPATH:76
@@ -4872,32 +5178,32 @@ is_a: MPATH:4 ! necrosis
 id: MPATH:80
 name: obstruction and stenosis
 def: "Occlusion ( partial or complete) of a lumen or space, internally by a space occupying mass or, in the case of stenosis, by local reduction in the diameter of a vessel, duct or the intestine." [Pathbase: Pathology Committee]
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
 
 [Term]
 id: MPATH:81
 name: perforation
 def: "Presence of a hole/channel through a normally imperforate structure often a membrane or septum." [Pathbase: Pathology Committee]
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
 
 [Term]
 id: MPATH:82
 name: persistent embryonic structure
 def: "Persistence of an embryonic structure or tissue into the post-natal period in its normal location; (Chronological/temporal anomaly)." [Pathbase: Pathology Committee]
 synonym: "Embryonic rest." RELATED [Pathbase: Curation]
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
 
 [Term]
 id: MPATH:83
 name: septation defect
 def: "Any defect in the formation of septae not describable as perforation." [Pathbase: Curation]
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
 
 [Term]
 id: MPATH:84
 name: supernumerary structure
 def: "Additional structure whether normally located or not." [Pathbase: Curation]
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
 
 [Term]
 id: MPATH:85
@@ -4942,7 +5248,7 @@ is_a: MPATH:4 ! necrosis
 id: MPATH:90
 name: aneurysm
 def: "Localised dilation of an artery or heart chamber usually due to an acquired or congenital weakness of the wall of the artery or chamber." [Pathbase: Pathology Committee]
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
 
 [Term]
 id: MPATH:91
@@ -5003,7 +5309,7 @@ is_a: MPATH:89 ! cardiovascular developmental defect
 id: MPATH:99
 name: varices
 def: "An enlarged and often tortuous vein." [Pathbase: Pathology Committee]
-is_a: MPATH:56 ! developmental and adult structural  defect
+is_a: MPATH:56 ! developmental or adult structural  defect
 
 [Typedef]
 id: is_a
