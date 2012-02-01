@@ -15,14 +15,18 @@
 
 	<h1>Recent News and Events</h1>
         <ul>
-          <li>14.10.2011 - <a href="download.shtml">Version 1.8.7
+          <li>01.02.2011 - <a href="download.shtml">Version 1.8.8
         released</a></li>
         </ul>
 <br>
 
 	<h1>Past News and Events</h1>
 
-        <h2>2011</h2>
+       <h2>2011</h2>
+        <ul>
+          <li>14.10.2011 - <a href="download.shtml">Version 1.8.7
+        released</a></li>
+        </ul>
         <ul>
 	 <li>11.02.2011 - <a href="download.shtml">Version 1.8.6 released</a> </li>
 	  </ul>

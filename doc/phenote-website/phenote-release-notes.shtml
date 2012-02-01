@@ -15,6 +15,16 @@
 
 <h1>1.8</h1>
 
+h2>1.8.8</h2>
+<ul>
+  <li>Updated bundled obo files (particularly the buggy version of fly_anatomy.obo
+that was bundled with version 1.8.7).</li>
+<li>Updated some config files and removed a bunch of obsolete ones. </li>
+<li>Fixed an issue with copying an obo file from an URL to .phenote when user
+didn't yet have that file. </li>
+<li>Fixed some logic about when to update local copies of obo files from repository. </li>
+</ul>
+  
 <h2>1.8.7</h2>
 <ul>
   <li>Improved protocol for updating ontology files from repository.

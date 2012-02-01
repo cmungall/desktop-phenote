@@ -17,10 +17,12 @@
 <h1>Downloading Phenote</h1>
 	<h2>For users</h2>
 	<h3>Phenote installer edition</h3>
-	Platform-specific installers are available for Phenote v1.8.7 at <a href="http://sourceforge.net/projects/obo/files/">SourceForge</a> or here:
-	<a href="http://www.phenote.org/phenote/1.8/Phenote_1_8_7_macos_install4j.dmg">MacOS X</a> |
-	<a href="http://www.phenote.org/phenote/1.8/Phenote_1_8_7_windows_install4j.exe">Windows</a> |
-	<a href="http://www.phenote.org/phenote/1.8/Phenote_1_8_7_unix_install4j.sh">Unix</a>
+	Platform-specific installers are available for Phenote v1.8.8 at <a
+      href="https://sourceforge.net/projects/obo/files/Phenote%20-%20releases/Phenote%201.8.8/">SourceForge</a> or
+      here:
+	<a href="http://www.phenote.org/phenote/1.8/Phenote_1_8_8_macos_install4j.dmg">MacOS X</a> |
+	<a href="http://www.phenote.org/phenote/1.8/Phenote_1_8_8_windows_install4j.exe">Windows</a> |
+	<a href="http://www.phenote.org/phenote/1.8/Phenote_1_8_8_unix_install4j.sh">Unix</a>
 	<ol>
 	  <li>Download your platform-specific package.  (For MacOS, this should self-extract into a disk image. If it doesn't, double-click on the file.  You should see an
 	  icon for the "drive" that the Phenote application is on.)</li>
