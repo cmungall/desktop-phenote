@@ -41,7 +41,7 @@
 	<tstamp>
 		<format property="NOW" pattern="yyyy-MM-dd_HH:mm:ss"/>
 	</tstamp>
-	<property name="phenote.version" value="1.8.7"/>
+	<property name="phenote.version" value="1.8.8"/>
 	<property name="phenote.build" value="${NOW}"/>
 
     <!-- override this from command line with  -DCONF-FILE=initial-zfin.cfg -->
@@ -351,9 +351,9 @@ them into  the classfiles directory. excludes="test/**"  -->
             <fileset dir="${classfiles}"/>
             <fileset dir="." includes="obo-files/*.obo" excludes="obo-files/old,obo-files/sandra_human_phenotype.obo"/>
             <fileset file="${conf}/*.cfg"/>
-        	<fileset file="${conf}/log4j.xml"/>
-	        <fileset dir="." includes="${conf}/*.xml"/>
-	        <fileset dir="." includes="images/"/>
+            <fileset file="${conf}/log4j.xml"/>
+            <fileset dir="." includes="${conf}/*.xml"/>
+            <fileset dir="." includes="images/"/>
             <fileset dir="doc/phenote-website" includes="help/**"/>
         </jar>
     </target>
@@ -363,9 +363,9 @@ them into  the classfiles directory. excludes="test/**"  -->
             <fileset dir="${classfiles}"/>
             <fileset dir="." includes="obo-files/*.obo" excludes="obo-files/old,obo-files/sandra_human_phenotype.obo"/>
             <fileset file="${conf}/*.cfg"/>
-        	<fileset file="${conf}/log4j.xml"/>
-	        <fileset dir="." includes="${conf}/*.xml"/>
-	        <fileset dir="." includes="images/"/>
+            <fileset file="${conf}/log4j.xml"/>
+            <fileset dir="." includes="${conf}/*.xml"/>
+            <fileset dir="." includes="images/"/>
             <fileset dir="doc/phenote-website" includes="help/**"/>
         </jar>
     </target>
@@ -757,7 +757,7 @@ them into  the classfiles directory. excludes="test/**"  -->
 		<install4j projectfile="install4j_config.install4j" release="${install4j_formatted_version_number}" />
 	</target>
 
-	<target name="installers" depends="backward_compatible_jar, dist-init, -install4j_installers" description="Build installers">
+	<target name="installers" depends="clean, backward_compatible_jar, dist-init, -install4j_installers" description="Build installers">
 	</target>
 
 	<target name="copy-installers" depends="installers" description="This will copy the installers over to the website, same location as webstart files">
