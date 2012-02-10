@@ -217,6 +217,7 @@ public class Config {
   }
 
   /** if all else fails revert to default flybase config file which should be there */
+  /** Note that this is not currently used. */
   public void loadDefaultFlybaseConfigFile() throws ConfigException {
     setConfigFile(FLYBASE_DEFAULT_CONFIG_FILE,true,false,false); // merge true?
   }
@@ -563,7 +564,7 @@ public class Config {
     //File conf = new File(dotPhenote,"conf");conf.mkdir();return conf;
   }
 
-  private static File getMyPhenoteFile() {
+  public static File getMyPhenoteFile() {
     return new File(getDotPhenoteConfDir(),myphenoteFile);
   }
 
@@ -892,6 +893,7 @@ public class Config {
   }
 
   String getLogConfigFile() { 
+      System.out.println("getLogConfigFile: phenoConfigBean.getLog() = " + phenoConfigBean.getLog() + ", defaultLogConfigFile = " + defaultLogConfigFile); // DEL
     if (phenoConfigBean.getLog() == null) {
       Log log = phenoConfigBean.addNewLog();
       log.setConfigFile(defaultLogConfigFile);
@@ -1570,6 +1572,25 @@ public class Config {
     }
     
   }
+
+    /** Returns the string naming the layout (e.g., phenote_classic.idw--that's the default one)
+        that should be used for this configuration. */
+    /** Note that this can't be used yet to set layout (perspective) by config, 
+        because IDWDriver.loadPerspectives simply sets the perspective to whichever
+        one is first in perspectives.xml. */
+    public String getLayoutForConfig() {
+        String configFile = null;
+        try {
+            configFile = getMyPhenoteConfigString();
+        } catch (IOException e) {
+            return "phenote_classic.idw";
+        }
+        // Hardcoding for now--should get from config file
+        if (configFile != null && configFile.indexOf("rcn") >= 0)
+            return "phenotype_rcn.idw";
+        else
+            return "phenote_classic.idw";
+    }
 
   public void addOntology(Ontology o) {
   	allOntologies.add(o);

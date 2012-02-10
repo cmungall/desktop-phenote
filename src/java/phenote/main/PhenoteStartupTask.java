@@ -50,6 +50,7 @@ import phenote.gui.menu.EditMenu;
 import phenote.gui.menu.FileMenu;
 import phenote.gui.menu.PhenoteHelpMenu;
 import phenote.gui.menu.SettingsMenu;
+//import phenote.gui.menu.ImageMenu; // Not currently used--beginning stages of image annotation
 import phenote.gui.selection.SelectionBridge;
 import phenote.matrix.model.MatrixController;
 import phenote.matrix.view.MatrixComponentFactory;
@@ -174,10 +175,16 @@ public class PhenoteStartupTask extends DefaultGUIStartupTask {
     // return System.getProperty("user.home") + "/.phenote";
   }
 
+    /** Note that this can't be used yet to set layout (perspective) by config, 
+        because IDWDriver.loadPerspectives simply sets the perspective to whichever
+        one is first in perspectives.xml. */
   @Override
   protected String getDefaultPerspectiveResourcePath() {
-    if (getPerspectiveResourceDir() != null)
-      return getPerspectiveResourceDir() + "/phenote_classic.idw";
+      if (getPerspectiveResourceDir() != null) {
+          log().debug("getDefaultPerspectiveResourcePath(): returning " + getPerspectiveResourceDir() + "/" + Config.inst().getLayoutForConfig());
+          return getPerspectiveResourceDir() + "/" + Config.inst().getLayoutForConfig();
+          //          return getPerspectiveResourceDir() + "/phenote_classic.idw";
+      }
     else
       return null;
   }
@@ -195,6 +202,7 @@ public File getPrefsDir() {
     menus.add(new FileMenu());
     menus.add(new EditMenu());
     menus.add(new ViewMenu());
+    //    menus.add(new ImageMenu());
     menus.add(new SettingsMenu());
     menus.add(new PhenoteHelpMenu());
     return menus;
