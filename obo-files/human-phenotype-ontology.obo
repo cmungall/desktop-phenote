@@ -1,6 +1,7 @@
 format-version: 1.2
-date: 10:02:2012 10:34
-auto-generated-by: OBO-Edit 2.1-beta6
+date: 12:02:2012 15:21
+saved-by: hecht
+auto-generated-by: OBO-Edit 2.1-rc2
 subsetdef: secondary_consequence "Consequence of a disorder in another organ system."
 default-namespace: medical_genetics
 ontology: hp
@@ -760,6 +761,7 @@ is_a: HP:0000096 ! Glomerulosclerosis
 id: HP:0000098
 name: Tall stature
 alt_id: HP:0001527
+def: "A height above that which is expected according to age and gender norms." [HPO:probinson]
 synonym: "Increased body height" EXACT []
 xref: UMLS:C0241240
 is_a: HP:0000002 ! Abnormality of body height
@@ -4986,7 +4988,7 @@ name: Hypoplasia of teeth
 alt_id: HP:0000688
 def: "Developmental hypoplasia of `teeth` (FMA:12516)." [HPO:ibailleulforestier]
 synonym: "Absent/hypoplastic teeth" EXACT []
-synonym: "Hypoplastic teeth" EXACT [:SKOEHLER]
+synonym: "Hypoplastic teeth" EXACT []
 xref: UMLS:C1855437 "Hypoplastic teeth"
 is_a: HP:0011061 ! Abnormality of dental structure
 
@@ -6750,8 +6752,16 @@ is_a: HP:0002867 ! Abnormality of the ilium
 
 [Term]
 id: HP:0000947
-name: Dumbbell-shaped long bones
-is_a: HP:0002813 ! Abnormality of the extremities
+name: Dumbbell-shaped long bone
+alt_id: HP:0005061
+alt_id: HP:0005071
+alt_id: HP:0005075
+def: "An abnormal appearance of the long bones with resemblance to a dumbbell, a short bar with a weight at each end. That is, the long bone is shortened and displays flaring (widening) of the metaphyses." [HPO:probinson]
+synonym: "Dumbbell widening of long bone metaphyses" EXACT []
+synonym: "Dumbbell-shaped short long bones" EXACT []
+synonym: "Short, dumbbell appearance of long bones" EXACT []
+is_a: HP:0003016 ! Metaphyseal widening
+is_a: HP:0011314 ! Abnormality of long bone morphology
 is_a: HP:0100714 ! Abnormality of the long tubular bones
 
 [Term]
@@ -6794,18 +6804,15 @@ is_a: HP:0001000 ! Abnormality of skin pigmentation
 
 [Term]
 id: HP:0000954
-name: Transverse palmar creases
+name: Single transverse palmar crease
 alt_id: HP:0006214
-def: "The presence of a single palmar crease (instead of the two palmar creases that are typically present)." [HPO:curators]
-synonym: "Bilateral simian creases" EXACT []
-synonym: "Bilateral single transverse palmar creases" EXACT []
-synonym: "Bilateral transverse palmar creases" EXACT []
+def: "The distal and proximal transverse palmar creases are merged into a single transverse palmar crease." [HPO:probinson, pmid:19125433]
+comment: The presence of a single palmar crease (instead of the two palmar creases that are typically present).
 synonym: "Simian crease" EXACT []
 synonym: "Simian creases" EXACT []
 synonym: "Single flexion crease" EXACT []
 synonym: "Single palmar crease" EXACT []
 synonym: "Single palmar creases" EXACT []
-synonym: "Single transverse palmar crease" EXACT []
 synonym: "Single transverse palmar creases" EXACT []
 synonym: "Transverse palmar crease" EXACT []
 xref: UMLS:C1865130 "Transverse palmar creases"
@@ -6952,8 +6959,8 @@ synonym: "Thickened palms and soles" EXACT []
 xref: UMLS:C1857046 "Palmoplantar hyperkeratosis"
 is_a: HP:0007556 ! Plantar hyperkeratosis
 is_a: HP:0010765 ! Palmar hyperkeratosis
-is_a: HP:0100871 ! Abnormality of the palms
-is_a: HP:0100872 ! Abnormality of the soles
+is_a: HP:0100871 ! Abnormality of the palm
+is_a: HP:0100872 ! Abnormality of the plantar part of foot
 
 [Term]
 id: HP:0000973
@@ -7275,8 +7282,8 @@ synonym: "Wrinkled palms and soles" EXACT []
 synonym: "Wrinkled skin of hands and feet" EXACT []
 is_a: HP:0000973 ! Cutis laxa
 is_a: HP:0007605 ! Excessive wrinkling of palmar skin
-is_a: HP:0100871 ! Abnormality of the palms
-is_a: HP:0100872 ! Abnormality of the soles
+is_a: HP:0100871 ! Abnormality of the palm
+is_a: HP:0100872 ! Abnormality of the plantar part of foot
 
 [Term]
 id: HP:0001017
@@ -7287,9 +7294,9 @@ is_a: HP:0000980 ! Pallor
 [Term]
 id: HP:0001018
 name: Abnormal palmar dermatoglyphics
-def: "An abnormality of the dermatoglyphs of the palms." [HPO:curators]
+def: "An abnormality of the dermatoglyphs, i.e., an abnormality of the patterns of ridges of the `skin of palm of hand` (FMA:38301)." [HPO:probinson]
 is_a: HP:0007477 ! Abnormal dermatoglyphics
-is_a: HP:0100871 ! Abnormality of the palms
+is_a: HP:0100871 ! Abnormality of the palm
 
 [Term]
 id: HP:0001019
@@ -7893,7 +7900,7 @@ name: Ocular albinism
 alt_id: HP:0007837
 def: "An abnormal reduction in the amount of pigmentation (reduced or absent) of the `iris` (FMA:58235) and retina." [HPO:probinson]
 comment: Ocular pigmentation is essential for normal vision, and persons with ocular albinism tend to have severely reduced visual acuity often associated with nystagmus, strabismus, and photophobia.
-synonym: "Albinism, Ocular" EXACT [:SKOEHLER]
+synonym: "Albinism, Ocular" EXACT []
 xref: UMLS:C0078917 "Albinism, Ocular"
 is_a: HP:0001098 ! Abnormality of the fundus
 is_a: HP:0007730 ! Reduced iris pigmentation
@@ -7907,7 +7914,7 @@ is_a: HP:0000496 ! Abnormality of eye movement
 id: HP:0001110
 name: Progressive myopia
 alt_id: HP:0007847
-synonym: "Myopia, Progressive" EXACT [:SKOEHLER]
+synonym: "Myopia, Progressive" EXACT []
 synonym: "Severe degenerative myopia" EXACT []
 xref: UMLS:C1449744 "Myopia, Progressive"
 is_a: HP:0000545 ! Myopia
@@ -8214,7 +8221,7 @@ id: HP:0001156
 name: Brachydactyly
 alt_id: HP:0001189
 def: "Digits that appear disproportionately short compared to the hand/foot." [HPO:probinson]
-is_a: HP:0002813 ! Abnormality of the extremities
+is_a: HP:0011297 ! Abnormality of the digits
 
 [Term]
 id: HP:0001159
@@ -8253,17 +8260,18 @@ is_a: HP:0100259 ! Postaxial polydactyly
 [Term]
 id: HP:0001163
 name: Abnormality of the metacarpal bones
+def: "An abnormality of the `metacarpal bones`(FMA:71336)." [HPO:probinson]
 is_a: HP:0001155 ! Abnormality of the hand
 
 [Term]
 id: HP:0001166
 name: Arachnodactyly
 alt_id: HP:0001505
-def: "Abnormally long and slender fingers (\"spider fingers\")." [HPO:curators]
+def: "Abnormally long and slender fingers (\"spider fingers\")." [HPO:probinson]
 synonym: "Long slender fingers" EXACT []
 synonym: "Long, slender fingers" EXACT []
-is_a: HP:0001238 ! Slender fingers
-is_a: HP:0010511 ! Increased length of toes
+is_a: HP:0001238 ! Slender finger
+is_a: HP:0010511 ! Long toe
 is_a: HP:0100807 ! Long fingers
 
 [Term]
@@ -8272,15 +8280,18 @@ name: Abnormality of the fingers
 alt_id: HP:0003035
 comment: Abnormality of hands, feet, or both.
 synonym: "Abnormalities of the fingers" EXACT []
-synonym: "Abnormality of the digits" EXACT []
-synonym: "Digital anomalies" EXACT []
 is_a: HP:0001155 ! Abnormality of the hand
+is_a: HP:0011297 ! Abnormality of the digits
 
 [Term]
 id: HP:0001169
-name: Broad hands
+name: Broad palm
+def: "For children from birth to 4 years of age the palm width is more than 2 SD above the mean; for children from 4 to 16 years of age the palm width is above the 95th centile; or, the width of the palm appears disproportionately wide for the length." [HPO:probinson, pmid:19125433]
+comment: Hand width is measured across the palm at the level of the MCPJ (radial aspect of the second MCPJ to the ulnar aspect of the fifth MCPJ) [Hall et al., 2007]. Caution is advised with the subjective assessment as short metacarpals can mimic a broad palm. In persons with polydactyly that includes a supernumerary metacarpal, that should be separately coded and the measurement technique from Hall et al, [2007] would need to be modified to account for the supernumerary digit (i.e., with postaxial polydactyly, measure to the sixth MCPJ).
+synonym: "Broad hand" EXACT []
+synonym: "Wide palm" EXACT []
 xref: UMLS:C0264142 "Broad hands"
-is_a: HP:0001155 ! Abnormality of the hand
+is_a: HP:0100871 ! Abnormality of the palm
 
 [Term]
 id: HP:0001171
@@ -8301,6 +8312,7 @@ is_a: HP:0100257 ! Ectrodactyly
 [Term]
 id: HP:0001172
 name: Abnormality of the thumb
+def: "An anomaly of the `thumb`(FMA:24938)." [HPO:probinson]
 synonym: "Abnormality of the thumbs" EXACT []
 synonym: "Thumb deformity" EXACT []
 xref: UMLS:C0575897 "THUMB DEFORMITY"
@@ -8311,8 +8323,8 @@ id: HP:0001174
 name: Short broad hands
 synonym: "Short, broad hands" EXACT []
 xref: UMLS:C1849956 "Short broad hands"
-is_a: HP:0001169 ! Broad hands
-is_a: HP:0004279 ! Hypoplastic hand
+is_a: HP:0001169 ! Broad palm
+is_a: HP:0004279 !  Short palm
 
 [Term]
 id: HP:0001176
@@ -8353,15 +8365,19 @@ is_a: HP:0009380 ! Aplasia of the fingers
 
 [Term]
 id: HP:0001181
-name: Adducted thumbs
+name: Adducted thumb
+def: "In the resting position, the tip of the thumb is on, or near, the palm, close to the base of the fourth or fifth finger." [pmid:19125433]
+comment: The thumb is both flexed and adducted. Lesser degrees of adduction than that specified here may warrant the use of this term, for example, when the tip of the thumb lies near the base of F2 or F3.
+synonym: "Adducted thumbs" EXACT []
 xref: UMLS:C1832151 "Adducted thumbs"
 is_a: HP:0001172 ! Abnormality of the thumb
 
 [Term]
 id: HP:0001182
-name: Tapered fingers
+name: Tapered finger
 alt_id: HP:0005800
 alt_id: HP:0007532
+def: "The gradual reduction in girth of the digit from proximal to distal." [pmid:19125433]
 synonym: "Distally tapering fingers" EXACT []
 synonym: "Tapered fingertips" EXACT []
 synonym: "Tapering fingers" EXACT []
@@ -8382,8 +8398,8 @@ is_a: HP:0001382 ! Joint hypermobility
 [Term]
 id: HP:0001188
 name: Hand clenching
-def: "An abnormal hand posture in which the hands are clenched to fists." [HPO:sdoelken, pmid:10085502]
-comment: Hand clenching is commonly characterized by malpositioning of the fingers characterized by radial deviation of the 4th and 5th digits and ulnar deviation of the 2nd digit over the 3rd finger.
+def: "An abnormal hand posture in which the hands are clenched to fists. All digits held completely flexed at the metacarpophalangeal and interphalangeal joints." [HPO:sdoelken, pmid:10085502]
+comment: Hand clenching is commonly characterized by malpositioning of the fingers characterized by radial deviation of the 4th and 5th digits and ulnar deviation of the 2nd digit over the 3rd finger. Hand clenching is distinguished from Camptodactyly, as that term may describe fewer than five digits of a eudactylous hand and does not involve the MCPJ. The digits may overlap when they lie flexed in the palm. It is not necessary to specify the overlapping fingers finding separately.
 synonym: "Clenched hands" EXACT []
 xref: UMLS:C0018563 "Hands"
 is_a: HP:0005922 ! Abnormal hand morphology
@@ -8436,12 +8452,17 @@ is_a: HP:0000118 ! Phenotypic abnormality
 [Term]
 id: HP:0001199
 name: Triphalangeal thumb
+alt_id: HP:0005846
+alt_id: HP:0006194
 alt_id: HP:0009610
-def: "In contrast to the metacarpals 2-5, the first metacarpal is embryologically of phalangeal origin. The thumb normally consists of the first metacarpal and a proximal and distal phalanx. All other digits have an additional middle phalanx. This term applies if the thumb has an accessory phalanx, leading to a digit like appearance of the thumb." [HPO:curators]
+def: "A thumb with three phalanges in a single, proximo-distal axis. Thus, this term applies if the thumb has an accessory phalanx, leading to a digit like appearance of the thumb." [HPO:probinson, pmid:19125433]
+comment: The requirement for a single PD axis relates to the issue that partial forms of Preaxial polydactyly may comprise a partially duplicated thumb with two distal phalanges and a single proximal phalanx. That finding is instead coded as a mild form of thumb polydactyly. Note that this finding can be readily assessed by examination and/or physical manipulation of the thumb.
+synonym: "Digitalized thumb" EXACT []
+synonym: "Finger-like thumb" EXACT []
 synonym: "Triphalangeal thumbs" EXACT []
 synonym: "Triphalangy of thumb" EXACT []
 xref: UMLS:C0241397 "Triphalangeal thumb"
-is_a: HP:0001177 ! Preaxial polydactyly (hands)
+is_a: HP:0001172 ! Abnormality of the thumb
 is_a: HP:0009619 ! Accessory phalanx of the thumb
 
 [Term]
@@ -8484,6 +8505,7 @@ synonym: "Persistent fetal fingertip pads" EXACT []
 synonym: "Prominent finger pads" EXACT []
 xref: UMLS:C1848512 "Prominent fingertip pads"
 is_a: HP:0001211 ! Abnormality of the fingertips
+is_a: HP:0011298 ! Prominent digit pad
 
 [Term]
 id: HP:0001215
@@ -8506,11 +8528,9 @@ name: Clubbing
 alt_id: HP:0003036
 def: "Broadening of the soft tissues (non-edematous swelling of soft tissues) of the digital tips in all dimensions associated with an increased longitudinal and lateral curvature of the nails." [HPO:sdoelken, pmid:19125433]
 comment: Non-edematous swelling/broadening of the soft tissue of the fingertips in all dimensions (distal phalanges of the fingers).
-synonym: "Clubbing of fingers" EXACT []
 synonym: "Digital clubbing" EXACT []
-synonym: "Finger clubbing" EXACT []
 xref: UMLS:C0149651 "Clubbing"
-is_a: HP:0002813 ! Abnormality of the extremities
+is_a: HP:0011297 ! Abnormality of the digits
 
 [Term]
 id: HP:0001218
@@ -8528,14 +8548,14 @@ is_a: HP:0100490 ! Camptodactyly (hands)
 [Term]
 id: HP:0001221
 name: Short, thick distal phalanges
-is_a: HP:0009882 ! Hypoplasia of the distal phalanges of the hand
+is_a: HP:0009882 ! Short distal phalanx of finger
 
 [Term]
 id: HP:0001222
 name: Spatulate thumbs
 def: "Spoon-shaped, broad thumbs." [HPO:curators]
 xref: UMLS:C0241395 "Spatulate thumbs"
-is_a: HP:0009651 ! Broad phalanges of the thumb
+is_a: HP:0011304 ! Broad thumb
 
 [Term]
 id: HP:0001223
@@ -8572,15 +8592,18 @@ is_a: HP:0005916 ! Abnormal metacarpal morphology
 id: HP:0001231
 name: Abnormality of the fingernails
 def: "An abnormality of the `fingernails` (FMA:54327)." [HPO:probinson]
+synonym: "Mildly dystrophic fingernails" RELATED []
 is_a: HP:0001167 ! Abnormality of the fingers
 is_a: HP:0001597 ! Abnormality of the nail
 
 [Term]
 id: HP:0001232
-name: Nail bed telangiectases
+name: Nail bed telangiectasia
+def: "Telangiectases in the area of the `nails` (FMA:54326)." [HPO:probinson]
+synonym: "Nail bed telangiectases" EXACT []
 xref: UMLS:C1838167 "Nail bed telangiectases"
 is_a: HP:0001009 ! Telangiectasia
-is_a: HP:0001231 ! Abnormality of the fingernails
+is_a: HP:0001597 ! Abnormality of the nail
 
 [Term]
 id: HP:0001233
@@ -8596,16 +8619,19 @@ is_a: HP:0006101 ! Finger syndactyly
 [Term]
 id: HP:0001234
 name: Hitchhiker thumb
-def: "The condition known as \"hitchhiker's thumb\" means, that the distal phalanx of the thumb, when the thumb is extended (as in a \"thumbs-up\"), can extend backwards toward the nail and outwards at an angle of up to, or more than, 90 degrees from the thumb, whereas normally it will extend straight out with little backward bending." [HPO:curators]
+def: "With the hand relaxed and the thumb in the plane of the palm, the axis of the thumb forms an angle of at least 90 degrees with the long axis of the hand." [HPO:probinson, pmid:19125433]
+comment: The condition known as "hitchhiker's thumb" means, that the distal phalanx of the thumb, when the thumb is extended (as in a "thumbs-up"), can extend backwards toward the nail and outwards at an angle of up to, or more than, 90 degrees from the thumb, whereas normally it will extend straight out with little backward bending.
+synonym: "Abducted thumb" EXACT []
 xref: UMLS:C1857269 "Hitchhiker thumb"
+is_a: HP:0001172 ! Abnormality of the thumb
 is_a: HP:0001187 ! Hyperextensibility of the finger joints
 is_a: HP:0009617 ! Abnormality of the distal phalanx of the thumb
 
 [Term]
 id: HP:0001238
-name: Slender fingers
-def: "Digits are disproportionaly narrow (reduced girth)." [HPO:curators]
-synonym: "narrow fingers" EXACT []
+name: Slender finger
+def: "Digits are disproportionately narrow (reduced girth) for the hand/foot size or build of the individual." [pmid:19125433]
+synonym: "Narrow fingers" EXACT []
 synonym: "thin fingers" EXACT []
 xref: UMLS:C1857482 "Slender fingers"
 is_a: HP:0001167 ! Abnormality of the fingers
@@ -8623,8 +8649,8 @@ is_a: HP:0100360 ! Contractures of the joints of the upper limbs
 [Term]
 id: HP:0001240
 name: Short, broad thumbs
-is_a: HP:0009651 ! Broad phalanges of the thumb
 is_a: HP:0009778 ! Hypoplastic/small thumb
+is_a: HP:0011304 ! Broad thumb
 
 [Term]
 id: HP:0001241
@@ -8640,10 +8666,12 @@ is_a: HP:0009702 ! Synostosis involving the carpal bones
 
 [Term]
 id: HP:0001245
-name: Thenar hypoplasia
+name: Small thenar eminence
 alt_id: HP:0006188
-def: "Underdevelopment of the thenar eminence." [HPO:curators]
+def: "Underdevelopment of the thenar eminence with reduced palmar soft tissue mass surrounding the base of the thumb." [HPO:probinson, pmid:19125433]
+comment: The reduced soft tissue is typically abductor pollicis brevis and flexor pollicis brevis muscle bulk. Detection of this abnormality entails clinical judgment, especially in mild cases. The bulk of the muscle mass around the base of the thumb is diminished, and there may be a mild concavity over the volar aspect of the first metacarpal. When the deficiency is unilateral, comparison between the two hands will point up the often-subtle change in contour of the thenar muscles. If the degree of involvement is severe, the palm may taper in width proximally.
 synonym: "Hypoplastic thenar eminences" EXACT []
+synonym: "Thenar hypoplasia" EXACT []
 synonym: "Thenar muscle hypoplasia" EXACT []
 xref: UMLS:C1846474 "Thenar hypoplasia"
 is_a: HP:0001227 ! Abnormality of the thenar eminence
@@ -8701,8 +8729,8 @@ alt_id: HP:0002479
 alt_id: HP:0002794
 alt_id: HP:0006997
 alt_id: HP:0010520
-def: "MERGED DEFINITION:\nTARGET DEFINITION: Seizures are an intermittent `abnormality of the central nervous system` (FMA:HP:0002011) due to a sudden, excessive, disorderly discharge of cerebral neurons and characterized clinically by some combination of disturbance of sensation, loss of consciousness, impairment of psychic function, or convulsive movements. The term epilepsy is used to describe chronic, recurrent seizures.\n--------------------\nSOURCE DEFINITION: Abnormal forceful, jerky, and periodic fetal movement can be associated with a fetal seizure. The seizures occur repeatedly, usually involving the whole fetal body, and at a frequency that varies from two movements/second in clonic convulsions to several times/minute in lightening convulsions. Suggested criteria for diagnosing fetal seizure are 1) a repetitive, episodic movement with a duration consistent with a seizure episode, and 2) a regularity of movement at a frequency consistent with that of seizure activity." [HPO:probinson]
-comment: MERGED COMMENT:\nTARGET COMMENT: The term epilepsy is not used to describe recurrent febrile seizures. Epilepsy presumably reflects an abnormally reduced seizure threshold.\n--------------------\nSOURCE COMMENT: TODO: Revise annotations using this term.
+def: "Seizures are an intermittent `abnormality of the central nervous system` (FMA:HP:0002011) due to a sudden, excessive, disorderly discharge of cerebral neurons and characterized clinically by some combination of disturbance of sensation, loss of consciousness, impairment of psychic function, or convulsive movements. The term epilepsy is used to describe chronic, recurrent seizures." [HPO:probinson]
+comment: The term epilepsy is not used to describe recurrent febrile seizures. Epilepsy presumably reflects an abnormally reduced seizure threshold.
 synonym: "Epilepsy" RELATED []
 synonym: "Seizure" EXACT []
 xref: UMLS:C0036572 "Seizure"
@@ -9259,7 +9287,7 @@ is_a: HP:0003011 ! Abnormality of musculature
 id: HP:0001325
 name: Hypoglycemic coma
 synonym: "Coma, hypoglycemic" EXACT []
-synonym: "Hypoglycaemic coma" EXACT [:SKOEHLER]
+synonym: "Hypoglycaemic coma" EXACT []
 synonym: "Loss of consciousness due to hypoglycemia" EXACT []
 xref: UMLS:C0020617 "Hypoglycaemic coma"
 is_a: HP:0001259 ! Coma
@@ -9379,7 +9407,8 @@ is_a: HP:0002536 ! Abnormal cortical gyration
 [Term]
 id: HP:0001340
 name: Enhancement of the C-reflex
-is_a: HP:0001311 ! Neurophysiological abnormality
+def: "Increase in amplitude of a long-loop response upon somatosensory evoked potential testing, representing an electrically evoked myoclonic response." [HPO:probinson, pmid:4819909]
+is_a: HP:0007377 ! Abnormality of somatosensory evoked potentials
 
 [Term]
 id: HP:0001341
@@ -9673,7 +9702,7 @@ name: Joint stiffness
 alt_id: HP:0002775
 def: "Joint stiffness is a perceived sensation of tightness in a joint or joints when attempting to move them after a period of inactivity. Joint stiffness typically subsides over time." [HPO:curators]
 synonym: "Joint stiffness (hands, shoulder, elbows, knees, and ankles)" EXACT []
-synonym: "Stiff joint" EXACT [:SKOEHLER]
+synonym: "Stiff joint" EXACT []
 synonym: "Stiff joints" EXACT []
 xref: UMLS:C0162298 "Stiff joint"
 is_a: HP:0001376 ! Decreased mobility of joints
@@ -10359,7 +10388,10 @@ is_a: HP:0006502 ! Aplasia/Hypoplasia involving the carpal bones
 
 [Term]
 id: HP:0001500
-name: Broad fingers
+name: Broad finger
+def: "Increased width of a non-thumb digit of the hand." [pmid:19125433]
+comment: Note that the girth may be increased in a broad finger, but this must be distinguished from Macrodactyly, because there the length is also increased. This distinction can be subtle. This term should not be used when the increased width is limited to the distal phalanges, instead use Broad fingertips. The affected digit should be specified by the numbering scheme in the introduction. This term is not used for the first digit, see Broad thumbs. When a thumb and one or more fingers are affected, it may be more economical to specify "Broad fingers, F1-5" instead of separately specifying "Broad thumb" and "Broad fingers F2-5".
+synonym: "Wide fingers" EXACT []
 xref: UMLS:C1844906 "Broad fingers"
 is_a: HP:0001167 ! Abnormality of the fingers
 
@@ -10373,7 +10405,7 @@ is_a: HP:0005917 ! Supernumerary metacarpal bones
 id: HP:0001502
 name: Long, thin hands
 is_a: HP:0001176 ! Large hands
-is_a: HP:0004283 ! Narrow hand
+is_a: HP:0011302 ! Long palm
 
 [Term]
 id: HP:0001504
@@ -10487,7 +10519,6 @@ synonym: "Marfanoid body habitus" EXACT []
 synonym: "Marfanoid habitus" EXACT []
 xref: UMLS:C0003706 "Dolichostenomelia"
 is_a: HP:0001533 ! Asthenic habitus
-is_a: HP:0003100 ! Thin long bones
 
 [Term]
 id: HP:0001520
@@ -10911,12 +10942,15 @@ name: Abnormality of the nail
 def: "Abnormality of the `nail` (FMA:54326)." [HPO:probinson]
 comment: Abnormality of the fingernails and/or toenails.
 is_a: HP:0011138 ! Abnormality of skin adnexa
+is_a: HP:0011297 ! Abnormality of the digits
 
 [Term]
 id: HP:0001598
-name: Koilonychia
+name: Concave nail
 alt_id: HP:0001815
-comment: Koilonychia literally means spoon nails.
+def: "The natural longitudinal (posterodistal) convex arch is not present or is inverted." [pmid:19125433]
+comment: Koilonychia literally means spoon nails. This often results in a saucer- or spoon-shaped nail and the free edge of the nail is typically everted. The affected digits should be specified. Note that the bundled term koilonychia is an abnormal shape of the fingernail where the nail has raised ridges and is thin and concave.
+synonym: "Koilonychia" EXACT []
 synonym: "Spoon-shaped nails" EXACT []
 xref: UMLS:C0221261 "Koilonychia"
 is_a: HP:0001597 ! Abnormality of the nail
@@ -11303,7 +11337,7 @@ is_a: HP:0001630 ! Abnormality of the atrial septum
 [Term]
 id: HP:0001657
 name: Prolonged QT interval on EKG
-synonym: "Long Q-T syndrome" EXACT [:SKOEHLER]
+synonym: "Long Q-T syndrome" RELATED []
 synonym: "Long QT syndrome" EXACT []
 synonym: "Prolong qt interval on ekg" EXACT []
 xref: UMLS:C0023976 "Long Q-T syndrome"
@@ -11922,7 +11956,9 @@ is_a: HP:0000359 ! Abnormality of the inner ear
 id: HP:0001760
 name: Abnormality of the feet
 alt_id: HP:0010216
+alt_id: HP:0010611
 def: "An abnormality of the feet (foot deformity) is a disorder of the foot that can either be congenital or acquired. Such deformities can include hammer toe, club foot deformity, flat feet, pes cavus, Congenital vertical talus (rocker bottom foot) & etc." [HPO:curators]
+synonym: "Abnormal feet morphology" EXACT []
 synonym: "Foot deformities" EXACT []
 synonym: "Foot deformity" EXACT []
 xref: UMLS:C0016506 "Foot Deformity"
@@ -11931,6 +11967,7 @@ is_a: HP:0002814 ! Abnormality of the lower limb
 [Term]
 id: HP:0001761
 name: Pes cavus
+def: "The presence of an unusually high `plantar arch` (FMA:43942). Also called high instep, pes cavus refers to a distinctly hollow form of the sole of the foot when it is bearing weight." [HPO:probinson, pmid:19125433]
 xref: UMLS:C0728829 "Pes cavus"
 is_a: HP:0001760 ! Abnormality of the feet
 
@@ -11952,7 +11989,9 @@ is_a: HP:0001883 ! Talipes
 [Term]
 id: HP:0001763
 name: Pes planus
-def: "A condition in which the arch of the foot is flat, with the entire sole of the foot being in near-complete contact with the ground." [HPO:curators]
+def: "A foot where the `plantar arch` (FMA:43942) is in contact with the ground or floor when the individual is standing; or, in a patient lying supine, a foot where the arch is in contact with the surface of a flat board pressed against the sole of the foot by the examiner with a pressure similar to that expected from weight bearing; or, the height of the arch is reduced." [HPO:probinson, pmid:19125433]
+synonym: "Dropped arches" RELATED []
+synonym: "Fallen arches" RELATED []
 synonym: "Flat feet" EXACT []
 xref: UMLS:C0264133 "Pes planus"
 is_a: HP:0001760 ! Abnormality of the feet
@@ -11967,7 +12006,8 @@ is_a: HP:0001760 ! Abnormality of the feet
 
 [Term]
 id: HP:0001765
-name: Hammer toes
+name: Hammertoe
+def: "Hyperextension of the metatarsal-phalangeal joint with hyperflexion of the proximal interphalangeal (PIP) joint." [pmid:19125433]
 synonym: "Hammer toe" EXACT []
 synonym: "Hammertoes" EXACT []
 xref: UMLS:C2239184 "hammer toe"
@@ -11975,8 +12015,9 @@ is_a: HP:0001780 ! Abnormality of the toes
 
 [Term]
 id: HP:0001769
-name: Broad feet
-def: "Increased width of the feet." [HPO:curators]
+name: Broad foot
+def: "A foot for which the measured width is above the 95th centile for age; or, a foot that appears disproportionately wide for its length." [pmid:19125433]
+synonym: "Broad feet" EXACT []
 xref: UMLS:C1866241 "Broad feet"
 is_a: HP:0001760 ! Abnormality of the feet
 
@@ -12019,7 +12060,7 @@ def: "Abnormally short and wide feet." [HPO:curators]
 synonym: "Short broad feet" EXACT []
 xref: UMLS:C1850337 "Short broad feet"
 is_a: HP:0001764 ! Small feet
-is_a: HP:0001769 ! Broad feet
+is_a: HP:0001769 ! Broad foot
 is_a: HP:0001772 ! Talipes equinovalgus
 
 [Term]
@@ -12039,9 +12080,10 @@ is_a: HP:0001762 ! Talipes equinovarus
 [Term]
 id: HP:0001780
 name: Abnormality of the toes
-def: "Abnormality of the toes of the feet." [HPO:curators]
+def: "An anomaly of a `toe` (FMA:25046)." [HPO:probinson]
 synonym: "Abnormalities of the toes" EXACT []
 is_a: HP:0001760 ! Abnormality of the feet
+is_a: HP:0011297 ! Abnormality of the digits
 
 [Term]
 id: HP:0001781
@@ -12059,7 +12101,7 @@ is_a: HP:0001780 ! Abnormality of the toes
 id: HP:0001783
 name: Broad metatarsals
 xref: UMLS:C1842231 "Broad metatarsals"
-is_a: HP:0001769 ! Broad feet
+is_a: HP:0001769 ! Broad foot
 is_a: HP:0001832 ! Abnormality of the metatarsal bones
 
 [Term]
@@ -12070,7 +12112,9 @@ is_a: HP:0003028 ! Abnormality of the ankles
 
 [Term]
 id: HP:0001786
-name: Slender feet
+name: Narrow foot
+def: "A foot for which the measured width is below the 5th centile for age; or, a foot that appears disproportionately narrow for its length." [pmid:19125433]
+synonym: "Slender feet" EXACT []
 xref: UMLS:C1833151 "Slender feet"
 is_a: HP:0001760 ! Abnormality of the feet
 
@@ -12118,20 +12162,21 @@ is_a: HP:0001541 ! Ascites
 
 [Term]
 id: HP:0001792
-name: Nail hypoplasia
+name: Small nail
 alt_id: HP:0001813
-def: "Underdeveloped `fingernails` (FMA:54327) or `toenails` (FMA:54328)." [HPO:probinson]
-synonym: "Fingernail hypoplasia" EXACT []
+def: "A nail that is diminished in length and width, i.e., underdeveloped `nail` (FMA:54326)." [HPO:probinson, pmid:19125433]
 synonym: "Hypoplastic nail" EXACT []
 synonym: "Hypoplastic nails" EXACT []
+synonym: "Nail hypoplasia" EXACT []
 synonym: "Small nails" EXACT []
 xref: UMLS:C0240439 "Nail hypoplasia"
 is_a: HP:0008386 ! Aplasia/Hypoplasia of the nails
 
 [Term]
 id: HP:0001795
-name: Hyperconvex nails
-def: "Fingernails or toenails that show an exaggeratedly convex form." [HPO:curators]
+name: Hyperconvex nail
+def: "When viewed on end (with the digit tip pointing toward the examiner's eye) the curve of the nail forms a tighter curve of convexity." [HPO:probinson, pmid:19125433]
+comment: No objective standards were identified for this finding. Another way to describe this finding is to say that the observed curve has a smaller radius than does the typical nail. The affected digits should be specified.
 xref: UMLS:C1846074 "Hyperconvex nails"
 is_a: HP:0001597 ! Abnormality of the nail
 
@@ -12147,78 +12192,95 @@ is_a: HP:0008386 ! Aplasia/Hypoplasia of the nails
 
 [Term]
 id: HP:0001799
-name: Short nails
+name: Short nail
+def: "Decreased length of nail." [pmid:19125433]
+comment: Use this designation when the length is reduced but the width is normal.
 xref: UMLS:C0423808 "Short nails"
-is_a: HP:0001597 ! Abnormality of the nail
+is_a: HP:0008386 ! Aplasia/Hypoplasia of the nails
 
 [Term]
 id: HP:0001800
 name: Hypoplastic toenails
-def: "Underdeveloped toenails." [HPO:curators]
+def: "Underdevelopment of the `toenail`(FMA:54328)." [HPO:probinson]
 xref: UMLS:C1837279 "Hypoplastic toenails"
-is_a: HP:0001792 ! Nail hypoplasia
+is_a: HP:0001792 ! Small nail
 is_a: HP:0010624 ! Aplastic/hypoplastic toenails
-
-[Term]
-id: HP:0001801
-name: Longitudinal ridging
-xref: UMLS:C1844641 "Longitudinal ridging"
-is_a: HP:0001807 ! Nail ridging
 
 [Term]
 id: HP:0001802
 name: Absent toenails
+def: "Congenital absence of the `toenail`(FMA:54328)." [HPO:probinson]
 xref: UMLS:C1844555 "Absent toenails"
 is_a: HP:0001798 ! Anonychia
 is_a: HP:0010624 ! Aplastic/hypoplastic toenails
 
 [Term]
 id: HP:0001803
-name: Nail pitting
-synonym: "Nail pits" EXACT []
+name: Nail pits
+def: "Small (typically about 1 mm or less in size) depressions on the dorsal nail surface." [pmid:19125433]
+synonym: "Nail pitting" EXACT []
 synonym: "Pitted nails" EXACT []
 xref: UMLS:C0150993 "Pitted nails"
 is_a: HP:0001597 ! Abnormality of the nail
 
 [Term]
 id: HP:0001804
-name: Hypoplastic fingernails
-def: "Underdeveloped fingernails." [HPO:curators]
+name: Hypoplastic fingernail
+def: "Underdevelopment of a `fingernail`(FMA:54327)." [HPO:curators]
 xref: UMLS:C1856786 "Hypoplastic fingernails"
-is_a: HP:0001792 ! Nail hypoplasia
-is_a: HP:0008384 ! Aplastic/hypoplastic fingernails
+is_a: HP:0001792 ! Small nail
+is_a: HP:0008384 ! Aplastic/hypoplastic fingernail
 
 [Term]
 id: HP:0001805
-name: Thickened nails
+name: Thick nail
+alt_id: HP:0001819
+def: "Nail that appears thick when viewed on end." [pmid:19125433]
+comment: There is a build up of keratin causing the nail plate to lift away from the nail bed. The thickened nail plate is usually very hard.
+synonym: "Onychogryposis" EXACT []
+synonym: "Thickened nails" EXACT []
 xref: UMLS:C0240444 "Thickened nails"
+xref: UMLS:C0263537 "Onychogryphosis"
 is_a: HP:0001597 ! Abnormality of the nail
 
 [Term]
 id: HP:0001806
 name: Onycholysis
-comment: Oncholysis appears to be a misspelling of onycholysis.
+def: "Detachment of the nail from the nail bed." [HPO:probinson]
 synonym: "Oncholysis" EXACT []
 xref: UMLS:C0085661 "Onycholysis"
 is_a: HP:0001597 ! Abnormality of the nail
 
 [Term]
 id: HP:0001807
-name: Nail ridging
+name: Ridged nail
+alt_id: HP:0001801
+alt_id: HP:0001811
+def: "Longitudinal, linear prominences in the nail plate." [pmid:19125433]
+comment: There may be only one, or several ridges. The affected digits should be specified.
+synonym: "Grooved nails" EXACT []
+synonym: "Longitudinal ridging" EXACT []
+synonym: "Nail ridging" EXACT []
+xref: UMLS:C0423818 "Grooved nails"
 xref: UMLS:C0423820 "Nail ridging"
+xref: UMLS:C1844641 "Longitudinal ridging"
 is_a: HP:0001597 ! Abnormality of the nail
 
 [Term]
 id: HP:0001808
 name: Fragile nails
 alt_id: HP:0001796
+def: "Nails that easily break." [HPO:probinson]
 synonym: "Brittle nails" EXACT []
 xref: UMLS:C1856963 "Fragile nails"
 is_a: HP:0001597 ! Abnormality of the nail
 
 [Term]
 id: HP:0001809
-name: Longitudinal splitting
+name: Split nail
+def: "A nail plate that has a longitudinal separation and the two sections of the nail share the same lateral radius of curvature." [pmid:19125433]
+comment: This is distinct from Fused nail, where the two parts of the nail have a separate radius of curvature. The affected digits should be specified as described in the introductory comments.
+synonym: "Longitudinal splitting of nail" EXACT []
 xref: UMLS:C1844642 "Longitudinal splitting"
 is_a: HP:0001597 ! Abnormality of the nail
 
@@ -12230,35 +12292,34 @@ xref: UMLS:C1858546 "Dystrophic toenails"
 is_a: HP:0002164 ! Nail dysplasia
 
 [Term]
-id: HP:0001811
-name: Grooved nails
-xref: UMLS:C0423818 "Grooved nails"
-is_a: HP:0001807 ! Nail ridging
-
-[Term]
 id: HP:0001812
 name: Hyperconvex fingernails
+def: "When viewed on end (with the finger tip pointing toward the examiner's eye) the curve of the fingernail forms a tighter curve of convexity." [HPO:probinson, pmid:19125433]
 xref: UMLS:C1844825 "Hyperconvex fingernails"
 is_a: HP:0001231 ! Abnormality of the fingernails
-is_a: HP:0001795 ! Hyperconvex nails
+is_a: HP:0001795 ! Hyperconvex nail
 
 [Term]
 id: HP:0001814
 name: Thin, deep-set nails
-is_a: HP:0001816 ! Thin nails
+is_a: HP:0001816 ! Thin nail
 
 [Term]
 id: HP:0001816
-name: Thin nails
+name: Thin nail
+def: "Nail that appears thin when viewed on end." [HPO:probinson, pmid:19125433]
+comment: No objective standard for nail thickness could be identified. An unsupported claim suggests that nails are 0.5 mm in females and 0.6 mm in males. Thin nails are usually brittle, may easily fray, or break at the free edge. Thin nails usually grow slowly but this definition does not require slow growth of the nail. Note that the term koilonychia is an abnormal shape of the fingernail where the nail has raised ridges and is thin and concave. Since it indicates also other characteristics than thin nails, it should not be used to indicate this. The affected digits should be specified.
+synonym: "Thin nails" EXACT []
 xref: UMLS:C0423823 "Thin nails"
 is_a: HP:0001597 ! Abnormality of the nail
 
 [Term]
 id: HP:0001817
-name: Absent fingernails
+name: Absent fingernail
+def: "Absence of a `fingernail`(FMA:54327)." [HPO:probinson]
 xref: UMLS:C1844554 "Absent fingernails"
 is_a: HP:0001798 ! Anonychia
-is_a: HP:0008384 ! Aplastic/hypoplastic fingernails
+is_a: HP:0008384 ! Aplastic/hypoplastic fingernail
 
 [Term]
 id: HP:0001818
@@ -12268,21 +12329,18 @@ xref: UMLS:C0030578 "Paronychia"
 is_a: HP:0100803 ! Abnormality of the ungual region
 
 [Term]
-id: HP:0001819
-name: Onychogryposis
-xref: UMLS:C0263537 "Onychogryphosis"
-is_a: HP:0001597 ! Abnormality of the nail
-
-[Term]
 id: HP:0001820
 name: Leukonychia
+def: "White discoloration  of the `nails` (FMA:54326)." [HPO:probinson]
 xref: UMLS:C0240182 "Leuconychia"
-is_a: HP:0100643 ! Abnormality of the nail colour
+is_a: HP:0100643 ! Abnormality of nail color
 
 [Term]
 id: HP:0001821
-name: Broad nails
+name: Broad nail
+def: "Increased width of nail." [HPO:probinson]
 synonym: "Broad fingernails" EXACT []
+synonym: "Wide fingernails" EXACT []
 xref: UMLS:C1843112 "Broad fingernails"
 is_a: HP:0001597 ! Abnormality of the nail
 
@@ -12321,21 +12379,26 @@ is_a: HP:0010442 ! Polydactyly
 
 [Term]
 id: HP:0001830
-name: Postaxial polydactyly (feet)
+name: Postaxial polydactyly of foot
 alt_id: HP:0010346
 def: "Polydactyly of the foot most commonly refers to the presence of six toes on one foot. Postaxial polydactyly affects the lateral ray and the duplication may range from a well-formed articulated digit to a rudimentary digit." [HPO:curators]
+comment: The modifier postaxial means that the supernumerary digit is not a hallux.
+synonym: "Fibular polydactyly" RELATED []
 synonym: "Polydactyly affecting the 5th toe" EXACT []
 synonym: "Postaxial polydactyly of feet" EXACT []
+synonym: "Posterior polydactyly of foot" EXACT []
 is_a: HP:0001829 ! Polydactyly (feet)
 is_a: HP:0010322 ! Abnormality of the 5th toe
 is_a: HP:0100259 ! Postaxial polydactyly
 
 [Term]
 id: HP:0001831
-name: Brachydactyly (feet)
-def: "Toes that appear disproportionately short compared to the foot." [HPO:probinson]
+name: Brachydactyly of the foot
+def: "Toes that appear disproportionately short compared to the foot." [HPO:probinson, pmid:19125433]
+comment: This finding must be distinguished from digits that are of increased girth but of normal length and that of a long mid- and hind foot with normal digit lengths. The affected digits should be specified as described in the introductory comments. Note that we designate brachydactyly as a synonym, but this use of the term is distinct from the use of the same word in Bell's classification of brachdactyly.
+synonym: "Short toe" EXACT []
 is_a: HP:0001156 ! Brachydactyly
-is_a: HP:0001780 ! Abnormality of the toes
+is_a: HP:0004701 ! Hypoplasia of the toes
 
 [Term]
 id: HP:0001832
@@ -12362,13 +12425,24 @@ is_a: HP:0100492 ! Joint contractures involving the joints of the feet
 
 [Term]
 id: HP:0001837
-name: Broad toes
+name: Broad toe
+def: "Visible increase in width of the non-hallux digit without an increase in the dorso-ventral dimension." [pmid:19125433]
+comment: Note that the girth may be increased in a broad toe, but this must be distinguished from Macrodactyly because in Macrodactyly the length is increased as well. The affected digit should be specified. Note that this assessment may be difficult when the toes are short. This term is not used for the first digit, see Broad hallux. If all five digits are broad, both terms should be used for that patient.
 xref: UMLS:C1865038 "Broad toes"
 is_a: HP:0001780 ! Abnormality of the toes
 
 [Term]
 id: HP:0001838
 name: Vertical talus
+alt_id: HP:0001835
+alt_id: HP:0004693
+alt_id: HP:0010218
+def: "This foot deformity is also known as rocker bottom feet and is characterized by the presence of both a prominent heel and a convex contour of the sole." [HPO:probinson]
+comment: Congenital vertical talus is characterized by pes valgus, a rigid flatfoot deformity (as opposed to a flexible calcaneovalgus foot) caused by a malpositioned navicular bone at the neck of the talus; the ankle is in severe equinus and the forefoot in dorsiflexion, rocker bottom-like, accompanied by contraction of the talonavicular, deltoid and calcaneal cuboidal ligaments. The foot examination usually reveals a rigid foot with a "reversed" arch, a convex plantar surface, and a deep crease on the lateral dorsal side of the foot. The ankle joint is plantarflexed, while the midfoot and forefoot are extended upward. Lateral foot radiographs are helpful in confirming the diagnosis.
+synonym: "Congenital vertical talus" EXACT []
+synonym: "Rocker bottom feet" EXACT []
+synonym: "Rocker-bottom feet" EXACT []
+synonym: "Rockerbottom feet" EXACT []
 xref: UMLS:C0431979 "Congenital vertical talus"
 is_a: HP:0008365 ! Abnormality of the talus
 
@@ -12387,25 +12461,29 @@ is_a: HP:0100257 ! Ectrodactyly
 
 [Term]
 id: HP:0001840
-name: Metatarsus varus
+name: Metatarsus adductus
 alt_id: HP:0001768
 alt_id: HP:0010217
-def: "Metatarsus varus (adductus) is one of the most common foot deformities, that is defined as a transverse plane deformity in Lisfranc's (tarsometatarsal) joints in which the metatarsals are deviated medially. The relationship between talus and calcaneus is normal. On inspection the toes angle abruptly towards the midline, creating a C-shaped lateral foot border with a prominent styloid process of the 5th metatarsal. The result is that the forefoot is twisted inwards relative to the heel, so that the sole faces the midline." [HPO:curators]
+def: "The metatarsals are deviated medially (tibially), that is, the bones in the front half of the foot bend or turn in toward the body." [HPO:probinson, pmid:19125433]
+comment: Metatarsus varus (adductus) is one of the most common foot deformities, that is defined as a transverse plane deformity in Lisfranc's (tarsometatarsal) joints in which the metatarsals are deviated medially. The relationship between talus and calcaneus is normal. On inspection the toes angle abruptly towards the midline, creating a C-shaped lateral foot border with a prominent styloid process of the 5th metatarsal. The result is that the forefoot is twisted inwards relative to the heel, so that the sole faces the midline.
 synonym: "Forefoot varus" EXACT []
+synonym: "Intoe" RELATED []
 synonym: "Metatarsus adductovarsus" EXACT []
-synonym: "Metatarsus adductus" EXACT []
+synonym: "Metatarsus varus" EXACT []
 xref: UMLS:C0265647 "Metatarsus varus"
 is_a: HP:0001832 ! Abnormality of the metatarsal bones
 
 [Term]
 id: HP:0001841
-name: Preaxial polydactyly (feet)
+name: Preaxial polydactyly of foot
 alt_id: HP:0009607
 alt_id: HP:0010050
-def: "This term applies for a wide variety of partial and/or complete duplications of the phalanges of the big toe (sometimes including the 1st metatarsal). A partial duplication can present itself on x-rays as a notched phalanx, bifid phalanx or a broadened phalanx. Polydactyly affecting the big toe is called preaxial or hallucal polydactyly of the feet." [HPO:curators]
+def: "Duplication of all or part of the first ray." [HPO:probinson, pmid:19125433]
+comment: This term applies for a wide variety of partial and/or complete duplications of the phalanges of the big toe (sometimes including the 1st metatarsal). A partial duplication can present itself on x-rays as a notched phalanx, bifid phalanx or a broadened phalanx. Polydactyly affecting the big toe is called preaxial or hallucal polydactyly of the feet.
 synonym: "Partial/complete duplication of the phalanges of the big toe" EXACT [HPO:curators]
 synonym: "Polydactyly affecting the hallux" EXACT []
 synonym: "Preaxial hallucal polydactyly" EXACT []
+synonym: "Preaxial polydactyly (feet)" EXACT []
 synonym: "Preaxial polydactyly of feet" EXACT []
 synonym: "Preaxial polydactyly of the feet" EXACT [HPO:curators]
 synonym: "Preaxial polydactyly, feet" EXACT []
@@ -12429,10 +12507,11 @@ is_a: HP:0001780 ! Abnormality of the toes
 
 [Term]
 id: HP:0001845
-name: Overriding toes
-def: "A congenital condition in which a toe is adducted, dorsifelxed, and medially deviated, generally lying over the metatarsal phalangeal joint of the adjacent toe. Usually, the fifth toe is affected." [HPO:curators]
+name: Overlapping toes
+def: "Describes a foot digit resting on the dorsal surface of an adjacent digit when the foot is at rest." [HPO:probinson, pmid:19125433]
+comment: This descriptor is ordered depending on which toes are involved. The overriding toe is labeled, as specified in the introduction (item 3): e.g., T3,4. The ordering of the numbers specifies which toe is dorsal, i.e., with dorsum of the foot facing upward the toe on top is/are recorded first separated by a comma from the digit that is/are overlapped. Toes that are laterally deviated, but do not rest on top of adjacent toes should be coded as Clinodactyly.
 synonym: "Crossover toe" RELATED []
-synonym: "Overlapping toe" EXACT []
+synonym: "Overriding toes" EXACT []
 xref: UMLS:C0920299 "Crossover toe"
 is_a: HP:0001780 ! Abnormality of the toes
 
@@ -12440,18 +12519,23 @@ is_a: HP:0001780 ! Abnormality of the toes
 id: HP:0001847
 name: Long hallux
 alt_id: HP:0001867
-def: "Increased length of the big toe." [HPO:curators]
+def: "Increased length of the `big toe` (FMA:25047)." [HPO:probinson]
 synonym: "Increased length of the hallux" EXACT []
 synonym: "Large halluces" EXACT []
 synonym: "Long halluces" EXACT []
 is_a: HP:0001844 ! Abnormality of the hallux
-is_a: HP:0010511 ! Increased length of toes
+is_a: HP:0010511 ! Long toe
 
 [Term]
 id: HP:0001848
-name: Calcaneovalgus deformities
+name: Calcaneovalgus deformity
 alt_id: HP:0001774
+alt_id: HP:0008120
+def: "This is a postural deformity in which the foot is positioned up against the tibia. The heel (calcaneus) is positioned downward (that is, the ankle is flexed upward), and the heel is turned outward (valgus)." [HPO:probinson]
+comment: Calcaneovalgus deformity may be related to abnormal positioning of the foot in utero and can resolve spontaneously after birth.
 synonym: "Calcaneovalgus" EXACT []
+synonym: "Calcaneovalgus Foot" EXACT []
+synonym: "Valgus position of the calcaneus" EXACT []
 xref: UMLS:C1866492 "Calcaneovalgus deformities"
 is_a: HP:0008364 ! Abnormality of the calcaneus
 
@@ -12463,7 +12547,7 @@ def: "A developmental defect resulting in the presence of fewer than the normal 
 synonym: "Missing toes" EXACT []
 synonym: "Oligodactyly of feet" EXACT []
 xref: UMLS:C2144104 "Missing toes"
-is_a: HP:0010760 ! Aplasia of the toes
+is_a: HP:0010760 ! Absent toe
 
 [Term]
 id: HP:0001850
@@ -12473,13 +12557,12 @@ is_a: HP:0001760 ! Abnormality of the feet
 
 [Term]
 id: HP:0001852
-name: Gap between first and second toes
-def: "The presence of a larger than normal gap between the first and second toes related to medial displacement of the first toe." [HPO:curators]
-synonym: "'sandal gap' between first and second toes" EXACT []
+name: Sandal gap
+def: "A widely spaced gap between the first toe (the great toe) and the second toe." [HPO:probinson, pmid:19125433]
 synonym: "Gap between 1st and 2nd toes" EXACT []
 synonym: "Gap between first and second toe" EXACT []
 synonym: "Increased space between first and second toes" EXACT []
-synonym: "Sandal gap" EXACT []
+synonym: "Sandal gap between first and second toes" EXACT []
 synonym: "Space between great toe and second toe" EXACT []
 synonym: "Wide space between 1st, 2nd ties" EXACT []
 synonym: "Wide space between first and second toes" EXACT []
@@ -12505,8 +12588,11 @@ is_a: HP:0001997 ! Gout
 
 [Term]
 id: HP:0001857
-name: Hypoplastic distal phalanges (feet)
-is_a: HP:0004701 ! Hypoplasia of the toes
+name: Short distal phalanx of toe
+def: "Short distance from the end of the toe to the most distal interphalangeal crease or distal interphalangeal joint flexion point." [pmid:19125433]
+comment: This term differs from Partial absence of the toe because in that term the phalanx must be missing, whereas here it may be small, but present. Relative shortening of the distal phalanges of the toes can be harder to assess than in the fingers, as they are normally quite short. Distal phalangeal lengths can be assessed subjectively by comparing that digit segment to the rest of the digit, to other normal digits in that patient, or to typical patients of that age or build.
+synonym: "Hypoplastic distal phalanges (feet)" EXACT []
+is_a: HP:0001831 ! Brachydactyly of the foot
 is_a: HP:0010185 ! Aplasia/Hypoplasia of the distal phalanges of the toes
 
 [Term]
@@ -12549,7 +12635,7 @@ is_a: HP:0001863 ! Clinodactyly of feet
 id: HP:0001865
 name: Short, broad metatarsals
 synonym: "Short, broad metatarsal" EXACT []
-is_a: HP:0010743 ! Hypoplasia of the metatarsal bones
+is_a: HP:0010743 ! Short metatarsal bone
 
 [Term]
 id: HP:0001868
@@ -12560,8 +12646,9 @@ is_a: HP:0001760 ! Abnormality of the feet
 [Term]
 id: HP:0001869
 name: Deep plantar creases
+def: "The presence of unusually deep creases (ridges/wrinkles) on the `skin of sole of foot` (FMA:37849)." [HPO:probinson]
 xref: UMLS:C1857953 "Deep plantar creases"
-is_a: HP:0010613 ! Minor feet anomalies
+is_a: HP:0100872 ! Abnormality of the plantar part of foot
 
 [Term]
 id: HP:0001870
@@ -12690,7 +12777,7 @@ is_a: HP:0001883 ! Talipes
 id: HP:0001885
 name: Brachydactyly (2nd-5th toes)
 synonym: "Brachydactyly, toes 2,4, and 5" EXACT []
-is_a: HP:0001831 ! Brachydactyly (feet)
+is_a: HP:0001831 ! Brachydactyly of the foot
 
 [Term]
 id: HP:0001886
@@ -12716,7 +12803,7 @@ is_a: HP:0001903 ! Anemia
 id: HP:0001890
 name: Autoimmune hemolytic anemia
 def: "An autoimmune form of `hemolytic anemia` (HP:0001878)." [HPO:probinson]
-synonym: "Autoimmune haemolytic anaemia" EXACT [:SKOEHLER]
+synonym: "Autoimmune haemolytic anaemia" EXACT []
 synonym: "Hemolytic anemia, autoimmune" EXACT []
 xref: UMLS:C0002880 "Autoimmune haemolytic anaemia"
 is_a: HP:0001878 ! Hemolytic anemia
@@ -13247,7 +13334,7 @@ id: HP:0001970
 name: Tubulointerstitial nephritis
 def: "A form of inflammation of the kidney affecting the interstitium of the kidneys surrounding the tubules." [HP:probinson]
 synonym: "Interstitial nephritis" EXACT []
-synonym: "Nephritis, Tubulointerstitial" EXACT [:SKOEHLER]
+synonym: "Nephritis, Tubulointerstitial" EXACT []
 xref: UMLS:C0041349 "Nephritis, Tubulointerstitial"
 is_a: HP:0001969 ! Tubulointerstitial abnormality
 
@@ -13908,7 +13995,7 @@ alt_id: HP:0002407
 alt_id: HP:0007252
 def: "Generalized tonic-clonic seizures are `generalized seizures` (HP:0002197) with bilateral symmetrical tonic contraction then bilateral clonic contractions of somatic muscles usually associated with autonomic phenomena." [HPO:curators]
 comment: In a generalized tonic-clonic seizure, the patient suddenly loses conciousness, the eyes roll back, and the entire body musculature undergoes tonic contractions. In the clonic phase of the seizure, there are rhythmic contractions of the musculature alternating with relaxation of all muscle groups. Loss of sphincter control during the seizure is common. This form of seizure was formerly commonly called grand mal seizure.
-synonym: "Generalised tonic-clonic seizures" EXACT [:SKOEHLER]
+synonym: "Generalised tonic-clonic seizures" EXACT []
 synonym: "Generalized clonic-tonic seizures" EXACT []
 synonym: "Generalized tonic clonic seizures" EXACT []
 synonym: "Grand mal seizures" EXACT []
@@ -14505,7 +14592,7 @@ id: HP:0002157
 name: Azotemia
 def: "An increased concentration of `nitrogen compounds` (CHEBI:51143) in the `blood` (FMA:9670)." [HPO:gcarletti]
 comment: Abnormal levels of nitrogen-containing compounds, such as urea and creatinine.
-synonym: "Azotaemia" EXACT [:SKOEHLER]
+synonym: "Azotaemia" EXACT []
 xref: UMLS:C0554309 "Azotaemia"
 is_a: HP:0004364 ! Abnormality of nitrogen compound homeostasis
 
@@ -15046,7 +15133,7 @@ id: HP:0002239
 name: Gastrointestinal hemorrhage
 def: "`Hemorrhage` (MPATH:119) affecting the `gastrointestinal tract` (FMA:71132)." [HPO:probinson]
 synonym: "Gastrointestinal bleeding" EXACT []
-synonym: "GI haemorrhage" EXACT [:SKOEHLER]
+synonym: "GI haemorrhage" EXACT []
 synonym: "GI hemorrhage" EXACT []
 xref: UMLS:C1880931 "Hemorrhage, GI"
 is_a: HP:0011024 ! Abnormality of the gastrointestinal tract
@@ -18282,6 +18369,7 @@ is_a: HP:0002795 ! Functional respiratory abnormality
 [Term]
 id: HP:0002792
 name: Reduced vital capacity
+def: "An abnormal reduction on the vital capacity, which is defined as the total lung capacity (volume of air in the lungs at maximal inflation) less the residual volume (i.e., volume of air in the lungs following maximal exhalation) of the lung." [HPO:probinson]
 synonym: "Decreased vital capacity" EXACT []
 xref: UMLS:C0476408 "Reduced vital capacity"
 is_a: HP:0002795 ! Functional respiratory abnormality
@@ -18624,9 +18712,11 @@ creation_date: 2008-02-25T10:42:00Z
 [Term]
 id: HP:0002857
 name: Genu valgum
+def: "A positional abnormality in which the knees angle inward and touch one another when the legs are straightened." [HPO:probinson]
 synonym: "Genu valga" EXACT []
 synonym: "Genu valgus" EXACT []
 synonym: "Genua valga" EXACT []
+synonym: "Knock knees" EXACT []
 xref: UMLS:C0576093 "Genu valgum"
 is_a: HP:0002815 ! Abnormality of the knees
 is_a: HP:0002979 ! Bowing of the legs
@@ -19382,6 +19472,9 @@ is_a: HP:0009826 ! Hypoplasia involving bones of the extremities
 id: HP:0002970
 name: Genu varum
 alt_id: HP:0003052
+def: "A positional abnormality marked by outward bowing of the legs in which the knees stay wide apart when a person stands with the feet and ankles together." [HPO:probinson]
+synonym: "Bow legs" EXACT []
+synonym: "Bow-leggedness" EXACT []
 synonym: "Genu vara" EXACT []
 synonym: "Genua vara" EXACT []
 xref: UMLS:C1836312 "Genua vara"
@@ -19451,6 +19544,7 @@ is_a: HP:0005750 ! Contractures of the joints of the lower limbs
 [Term]
 id: HP:0002979
 name: Bowing of the legs
+def: "A bending or abnormal curvature affecting a `long bone` (FMA:7474) of the leg." [HPO:probinson]
 synonym: "Bowed legs" EXACT []
 synonym: "Bowed lower limbs" EXACT []
 is_a: HP:0002814 ! Abnormality of the lower limb
@@ -19459,6 +19553,7 @@ is_a: HP:0006487 ! Bowing of the long bones
 [Term]
 id: HP:0002980
 name: Femoral bowing
+alt_id: HP:0004998
 def: "Bowing (abnormal curvature) of the `femur` (FMA:9611)." [HPO:probinson]
 xref: UMLS:C1837080 "Femoral bowing"
 is_a: HP:0002823 ! Abnormality of the femur
@@ -19474,7 +19569,8 @@ is_a: HP:0002814 ! Abnormality of the lower limb
 id: HP:0002982
 name: Tibial bowing
 alt_id: HP:0006363
-def: "A developmental defect with posteromedial tibial angulation." [HPO:curators]
+def: "A bending or abnormal curvature of the `tibia` (FMA:24476)." [HPO:probinson]
+comment: A developmental defect with posteromedial tibial angulation.
 synonym: "Bowed tibia" EXACT []
 synonym: "Bowing of the tibia" EXACT []
 xref: UMLS:C1837081 "Tibial bowing"
@@ -19507,6 +19603,8 @@ is_a: HP:0009821 ! Hypoplasia involving forearm bones
 [Term]
 id: HP:0002986
 name: Radial bowing
+alt_id: HP:0004996
+def: "A bending or abnormal curvature of the `radius` (:FMA:23463)." [HPO:probinson]
 synonym: "Bowed radii" EXACT []
 synonym: "Bowed radius" EXACT []
 xref: UMLS:C1865846 "Radial bowing"
@@ -19774,7 +19872,8 @@ is_a: HP:0003028 ! Abnormality of the ankles
 id: HP:0003031
 name: Ulnar bowing
 alt_id: HP:0003983
-def: "Bending of the diaphysis (shaft) of the ulna, usually in the convex posterior direction." [HPO:curators]
+def: "Bending of the diaphysis (shaft) of the `ulna`(FMA:23466)." [HPO:probinson]
+comment: Ulnar bowing is usually in the convex posterior direction.
 synonym: "Bowed ulna" EXACT []
 synonym: "Curved ulna" EXACT []
 xref: UMLS:C1865847 "Ulnar bowing"
@@ -19929,15 +20028,6 @@ is_a: HP:0009827 ! Amelia
 id: HP:0003059
 name: Abnormality of the radioulnar joints
 is_a: HP:0002973 ! Abnormality of the forearm
-
-[Term]
-id: HP:0003060
-name: Thin, gracile long bones
-synonym: "Long bones slender" EXACT []
-synonym: "Slender, gracile long tubular bones" EXACT []
-synonym: "Thin gracile long bones" EXACT []
-xref: UMLS:C1856235 "Thin gracile long bones"
-is_a: HP:0003100 ! Thin long bones
 
 [Term]
 id: HP:0003063
@@ -20156,19 +20246,28 @@ is_a: HP:0002991 ! Abnormality of the fibula
 
 [Term]
 id: HP:0003100
-name: Thin long bones
+name: Slender long bone
+alt_id: HP:0003060
 alt_id: HP:0003061
 alt_id: HP:0003096
+def: "Reduced diameter of a `long bone` (FMA:7474)." [HPO:probinson]
 synonym: "Gracile long bones" EXACT []
-synonym: "Slender long bones" EXACT []
+synonym: "Long bones slender" EXACT []
+synonym: "Slender, gracile long tubular bones" EXACT []
+synonym: "Thin gracile long bones" RELATED []
+synonym: "Thin long bones" EXACT []
+synonym: "Thin, gracile long bones" EXACT []
+xref: UMLS:C1856235 "Thin gracile long bones"
 xref: UMLS:C1865250 "Thin long bones"
-is_a: HP:0002813 ! Abnormality of the extremities
+is_a: HP:0011314 ! Abnormality of long bone morphology
 is_a: HP:0100714 ! Abnormality of the long tubular bones
 
 [Term]
 id: HP:0003102
 name: Increased carrying angle
-is_a: HP:0002813 ! Abnormality of the extremities
+def: "An abnormal increase in the carrying angle, which is the angle he long axis of the extended forearm as it lies lateral to the long axis of the arm." [HPO:probinson, pmid:18506557]
+comment: Anatomically, the carrying angle in human adults is approximately 10 degrees in men and 13 degrees in women. Increasing the carrying angle may lead to elbow instability and pain during exercise or in throwing activities of sports, may reduce function of elbow flexion, predispose to risk of elbow dislocation, and increase evidence of elbow fracture when falling on the outstretched hand and fracture of the distal humeral epiphysis.
+is_a: HP:0009811 ! Abnormality of the elbow
 
 [Term]
 id: HP:0003103
@@ -20179,7 +20278,8 @@ is_a: HP:0000924 ! Abnormality of the musculoskeletal system
 [Term]
 id: HP:0003105
 name: Protuberances at ends of long bones
-is_a: HP:0002813 ! Abnormality of the extremities
+def: "The presence of multiple protuberances (bulges, or knobs) at the ends of the `long bones` (FMA:7474)." [HPO:probinson]
+is_a: HP:0011314 ! Abnormality of long bone morphology
 
 [Term]
 id: HP:0003106
@@ -24278,7 +24378,7 @@ is_a: HP:0000270 ! Delayed closure of fontanelles
 [Term]
 id: HP:0003795
 name: Short middle phalanges (feet)
-is_a: HP:0004701 ! Hypoplasia of the toes
+is_a: HP:0001831 ! Brachydactyly of the foot
 
 [Term]
 id: HP:0003796
@@ -24610,8 +24710,9 @@ is_a: HP:0003063 ! Abnormality of the humerus
 [Term]
 id: HP:0003865
 name: Bowed humerus
+def: "A bending or abnormal curvature of the `humerus` (FMA:13303)." [HPO:probinson]
 is_a: HP:0003063 ! Abnormality of the humerus
-is_a: HP:0006488 ! Bowing of the arms
+is_a: HP:0006488 ! Bowing of the arm
 
 [Term]
 id: HP:0003866
@@ -24704,8 +24805,9 @@ is_a: HP:0006392 ! Increased density of long bones
 [Term]
 id: HP:0003882
 name: Slender humerus
+def: "Reduction in diameter of the `humerus` (FMA:13303)." [HPO:probinson]
 is_a: HP:0003063 ! Abnormality of the humerus
-is_a: HP:0003100 ! Thin long bones
+is_a: HP:0003100 ! Slender long bone
 
 [Term]
 id: HP:0003883
@@ -25106,8 +25208,9 @@ is_a: HP:0002973 ! Abnormality of the forearm
 [Term]
 id: HP:0003956
 name: Bowed forearm bones
+def: "A bending or abnormal curvature affecting either the `radius` (:FMA:23463), the `ulna`(FMA:23466), or both." [HPO:probinson]
 is_a: HP:0002973 ! Abnormality of the forearm
-is_a: HP:0006488 ! Bowing of the arms
+is_a: HP:0006488 ! Bowing of the arm
 
 [Term]
 id: HP:0003957
@@ -25294,9 +25397,10 @@ is_a: HP:0006392 ! Increased density of long bones
 [Term]
 id: HP:0003992
 name: Slender ulna
+def: "Reduction in diameter of the ùulna` (FMA:23466)." [HPO:probinson]
 xref: UMLS:C1968814 "Slender ulnae"
 is_a: HP:0002997 ! Abnormality of the ulna
-is_a: HP:0003100 ! Thin long bones
+is_a: HP:0003100 ! Slender long bone
 is_a: HP:0003969 ! Slender forearm bones
 
 [Term]
@@ -25613,7 +25717,9 @@ is_a: HP:0003019 ! Abnormality of the wrist
 
 [Term]
 id: HP:0004050
-name: Absent hands
+name: Absent hand
+def: "The total absence of the hand, with no bony elements distal to the radius or ulna." [pmid:19125433]
+synonym: "Acheiria" EXACT []
 is_a: HP:0005927 ! Aplasia/Hypoplasia involving bones of the hand
 
 [Term]
@@ -25699,9 +25805,12 @@ is_a: HP:0009484 ! Deviation of the hand or of fingers of the hand
 [Term]
 id: HP:0004099
 name: Macrodactyly
+def: "Significant increase in the length and girth of most or all of a digit compared to its contralateral digit (if unaffected) or compared to what would be expected for age/body build. The increased girth is accompanied by an increase in the dorso-ventral dimension AND the lateral dimension of the digit." [pmid:19125433]
+comment: There are no recognized standards for the girth of digits and this finding can vary substantially in the population. This assessment relies on the judgment of the examiner to recognize when the difference between the expected and the observed is significant. The affected digits should be specified. The definition does not mandate the component of the increased size (bone, connective tissue, etc.), but should exclude edema. The requirement that the girth is most, or all, of the digit is intended to distinguish this from broad fingertips. This should be distinguished from Broad fingers or Broad fingertips as the girth is circumferential in macrodactyly, which is not the case for broad fingers or broad fingertips, which are increased only (or predominantly) in their lateral (A/P) width.
 synonym: "Finger overgrowth" EXACT [HPO:sdoelken]
+synonym: "Megalodactyly" EXACT []
 xref: UMLS:C2117323 "macrodactyly"
-is_a: HP:0002813 ! Abnormality of the extremities
+is_a: HP:0011297 ! Abnormality of the digits
 
 [Term]
 id: HP:0004100
@@ -25824,7 +25933,7 @@ def: "Hypoplastic/small distal phalanx of the 3rd (middle) finger." [HPO:curator
 synonym: "Short terminal phalanx of middle finger" EXACT []
 is_a: HP:0009421 ! Aplasia/Hypoplasia of the distal phalanx of the 3rd finger
 is_a: HP:0009461 ! Hypoplastic/small 3rd finger
-is_a: HP:0009882 ! Hypoplasia of the distal phalanges of the hand
+is_a: HP:0009882 ! Short distal phalanx of finger
 
 [Term]
 id: HP:0004183
@@ -25938,7 +26047,7 @@ synonym: "Fifth finger clinodactyly" EXACT []
 synonym: "Radial deviation of the 5th finger" EXACT []
 xref: UMLS:C1850049 "Bilateral fifth finger clinodactyly"
 is_a: HP:0009179 ! Deviation of the 5th finger
-is_a: HP:0009466 ! Radial deviation of fingers
+is_a: HP:0009466 ! Radial deviation of finger
 
 [Term]
 id: HP:0004213
@@ -26050,7 +26159,7 @@ synonym: "Hypo/aplasia of terminal fifth digits" EXACT []
 synonym: "Hypoplastic/small terminal phalanx of the little finger" EXACT []
 is_a: HP:0009237 ! Hypoplastic/small 5th finger
 is_a: HP:0009239 ! Aplasia/Hypoplasia of the distal phalanx of the 5th finger
-is_a: HP:0009882 ! Hypoplasia of the distal phalanges of the hand
+is_a: HP:0009882 ! Short distal phalanx of finger
 
 [Term]
 id: HP:0004230
@@ -26333,13 +26442,15 @@ is_a: HP:0100238 ! Synostosis involving bones of the upper limbs
 
 [Term]
 id: HP:0004279
-name: Hypoplastic hand
+name:  Short palm
 alt_id: HP:0001165
-def: "Underdevelopment of the `hand` (FMA:9712)." [HPO:probinson]
+def: "Short `palm`(FMA:24920)." [HPO:probinson, pmid:19125433]
+comment: This term refers to a developmental finding resulting in short palms. This term is reserved for individuals with shortening of all four metacarpals 2-5. Individuals with fewer than four shortened metacarpals (in a eudactylous hand, the metacarpals of F2-5) should be coded as Metacarpal, short. See the entry for Hand, small for a discussion of this finding. "Short hand" should not be used as it is a bundle of two readily separable terms, Fingers, short (which, as noted above, can itself be a bundled term) and Palm, short.
+synonym: "Hypoplastic hands" EXACT []
 synonym: "Short hands" EXACT []
-synonym: "Small hands" EXACT []
 xref: UMLS:C1843108 "Short hands"
 is_a: HP:0005927 ! Aplasia/Hypoplasia involving bones of the hand
+is_a: HP:0100871 ! Abnormality of the palm
 
 [Term]
 id: HP:0004280
@@ -26355,9 +26466,12 @@ is_a: HP:0005921 ! Abnormal ossification of hand bones
 
 [Term]
 id: HP:0004283
-name: Narrow hand
+name: Narrow palm
+def: "For children from birth to 4 years of age, the palm width is more than 2 SD below the mean; for children from 4 to 16 years of age the palm width is below the 5th centile; or, the width of the palm appears disproportionately narrow for its length." [pmid:19125433]
+comment: Palm width is measured across the palm at the level of the MCPJ (radial aspect of the F2 MCPJ to the ulnar aspect of the F5 MCPJ). Norms are specified in [Hall et al., 2007]. Caution is advised for the subjective assessment as the breadth may be in the normal range with disproportionately increased length, which appears narrow. This finding may be associated with elongated/slender limbs in general, but that finding does not bear on the coding of this feature. Proximal narrowing may indicate small thenar or hypothenar eminences. This term replaces "narrow hands" as that term may leave the impression that it includes the thumb, which it does not.
+synonym: "Narrow hand" EXACT []
 xref: UMLS:C1857632 "Narrow hands"
-is_a: HP:0005922 ! Abnormal hand morphology
+is_a: HP:0100871 ! Abnormality of the palm
 
 [Term]
 id: HP:0004284
@@ -28838,21 +28952,23 @@ is_a: HP:0001850 ! Abnormality of the tarsal bones
 
 [Term]
 id: HP:0004681
-name: Longitudinal groove on soles
-is_a: HP:0010613 ! Minor feet anomalies
-is_a: HP:0100872 ! Abnormality of the soles
+name: Deep longitudinal plantar crease
+def: "Narrow, paramedian longitudinal depressions in the plantar skin of the forefoot." [pmid:19125433]
+synonym: "Longitudinal groove on soles" EXACT []
+is_a: HP:0001869 ! Deep plantar creases
 
 [Term]
 id: HP:0004684
-name: ankle valgus deformity
+name: Talipes valgus
+def: "Outward turning of the heel, resulting in clubfoot with the person walking on the inner part of the foot." [HPO:probinson]
+comment: The phrase talipes valgus is derived from the Latin words talus (ankle), pes (poot), and valgus (outward angulation of the distal segment of a bone).
 xref: UMLS:C1868564 "Ankle valgus deformity"
-is_a: HP:0001848 ! Calcaneovalgus deformities
 is_a: HP:0003028 ! Abnormality of the ankles
 
 [Term]
 id: HP:0004686
-name: short third, fourth, fifth metatarsals
-is_a: HP:0010743 ! Hypoplasia of the metatarsal bones
+name: Short third, fourth, fifth metatarsals
+is_a: HP:0010743 ! Short metatarsal bone
 
 [Term]
 id: HP:0004688
@@ -28862,11 +28978,12 @@ is_a: HP:0001850 ! Abnormality of the tarsal bones
 
 [Term]
 id: HP:0004689
-name: short fourth metatarsals
+name: Short fourth metatarsal
+def: "Short `fourth metatarsal bone` (FMA:24505)." [HPO:probinson]
 synonym: "Bilateral fourth metatarsal shortening" EXACT []
 synonym: "Short fourth metatarsus" EXACT []
 xref: UMLS:C1848514 "Short fourth metatarsals"
-is_a: HP:0010743 ! Hypoplasia of the metatarsal bones
+is_a: HP:0010743 ! Short metatarsal bone
 
 [Term]
 id: HP:0004690
@@ -28930,6 +29047,7 @@ is_a: HP:0001162 ! Postaxial polydactyly (hands)
 [Term]
 id: HP:0004699
 name: Osteoporotic metatarsal
+def: "Decrease in mass and density of the metatarsal bones." [HPO:probinson]
 xref: UMLS:C1836873 "Osteoporotic metatarsal"
 is_a: HP:0001832 ! Abnormality of the metatarsal bones
 
@@ -28964,7 +29082,7 @@ name: short 4th and 5th metatarsals
 alt_id: HP:0004702
 synonym: "variable shortening 4th-5th metatarsals" EXACT []
 xref: UMLS:C1862167 "Variable shortening 4th-5th metatarsals"
-is_a: HP:0010743 ! Hypoplasia of the metatarsal bones
+is_a: HP:0010743 ! Short metatarsal bone
 
 [Term]
 id: HP:0004710
@@ -30433,9 +30551,10 @@ is_a: HP:0001373 ! Joint dislocation
 
 [Term]
 id: HP:0004993
-name: slender long bones with narrow diaphyses
+name: Slender long bones with narrow diaphyses
+def: "Reduced diameter of a `long bone` (FMA:7474) with a more pronounced reduction of the diameter of the diaphysis of the long bones." [HPO:probinson]
 is_a: HP:0000940 ! Abnormality of the diaphyses
-is_a: HP:0003100 ! Thin long bones
+is_a: HP:0003100 ! Slender long bone
 
 [Term]
 id: HP:0004994
@@ -30443,20 +30562,9 @@ name: long, flared metaphyses
 is_a: HP:0003015 ! Flared metaphyses
 
 [Term]
-id: HP:0004996
-name: Radial bowing, severe
-is_a: HP:0002986 ! Radial bowing
-
-[Term]
 id: HP:0004997
 name: Multicentric ossification of proximal humeral epiphyses
 is_a: HP:0003897 ! Irregular ossification of the humeral epiphyses
-
-[Term]
-id: HP:0004998
-name: occasional femoral bowing
-xref: UMLS:C1833777 "Occasional femoral bowing"
-is_a: HP:0002980 ! Femoral bowing
 
 [Term]
 id: HP:0004999
@@ -30494,7 +30602,9 @@ is_a: HP:0010597 ! Abnormality of the distal radial epiphysis
 
 [Term]
 id: HP:0005005
-name: femoral bowing present at birth, straightening with time
+name: Femoral bowing present at birth, straightening with time
+def: "Congenital onset bending or abnormal curvature of the `femur` (FMA:9611) that normalizes with age." [HPO:probinson]
+comment: This feature can be diagnosed based on the medical history of congenital femoral bowing with spontaneous improvement.
 is_a: HP:0002980 ! Femoral bowing
 
 [Term]
@@ -30509,8 +30619,9 @@ is_a: HP:0001373 ! Joint dislocation
 
 [Term]
 id: HP:0005009
-name: short, dumbbell-shaped humeri
-is_a: HP:0000947 ! Dumbbell-shaped long bones
+name: Dumbbell-shaped humerus
+def: "The `humerus` (FMA:13303) is shortened and displays flaring (widening) of the metaphyses." [HPO:probinson]
+is_a: HP:0000947 ! Dumbbell-shaped long bone
 
 [Term]
 id: HP:0005010
@@ -30572,11 +30683,6 @@ id: HP:0005021
 name: Bilateral elbow dislocations
 xref: UMLS:C1855541 "Bilateral elbow dislocations"
 is_a: HP:0003042 ! Elbow dislocation
-
-[Term]
-id: HP:0005022
-name: mild, lateral femoral bowing
-is_a: HP:0002980 ! Femoral bowing
 
 [Term]
 id: HP:0005023
@@ -30763,11 +30869,6 @@ name: limited elbow flexion/extension
 is_a: HP:0001377 ! Limited elbow extension
 
 [Term]
-id: HP:0005061
-name: short, dumbbell appearance of long bones
-is_a: HP:0000947 ! Dumbbell-shaped long bones
-
-[Term]
 id: HP:0005062
 name: Sclerotic, irregular metaphyses
 alt_id: HP:0004995
@@ -30784,9 +30885,9 @@ is_a: HP:0100168 ! Fragmented epiphyses
 
 [Term]
 id: HP:0005064
-name: short, slender long bones
+name: Short, slender long bones
 xref: UMLS:C1854912 "Short long bones"
-is_a: HP:0003100 ! Thin long bones
+is_a: HP:0003100 ! Slender long bone
 
 [Term]
 id: HP:0005065
@@ -30823,23 +30924,11 @@ xref: UMLS:C1865570 "Proximal radial head dislocation"
 is_a: HP:0003083 ! Dislocated radial head
 
 [Term]
-id: HP:0005071
-name: Dumbbell widening of long bone metaphyses
-synonym: "Dumbbell widening of long bone metaphyses, especially femurs and humeri" EXACT []
-is_a: HP:0000947 ! Dumbbell-shaped long bones
-is_a: HP:0003016 ! Metaphyseal widening
-
-[Term]
 id: HP:0005072
 name: Hyperextensibility at wrists
 def: "The ability of the wrist joints to move beyond their normal range of motion." [HPO:curators]
 synonym: "Increased laxity of wrists" EXACT []
 is_a: HP:0001382 ! Joint hypermobility
-
-[Term]
-id: HP:0005075
-name: Dumbbell-shaped short long bones
-is_a: HP:0000947 ! Dumbbell-shaped long bones
 
 [Term]
 id: HP:0005077
@@ -30899,7 +30988,9 @@ is_a: HP:0000944 ! Abnormality of the metaphyses
 
 [Term]
 id: HP:0005090
-name: lateral femoral bowing
+name: Lateral femoral bowing
+alt_id: HP:0005022
+def: "A lateral bending or abnormal curvature of the `femur` (FMA:9611)." [HPO:probinson]
 xref: UMLS:C1866737 "Lateral femoral bowing"
 is_a: HP:0002980 ! Femoral bowing
 
@@ -30918,7 +31009,8 @@ is_a: HP:0010596 ! Abnormality of the proximal radial epiphysis
 
 [Term]
 id: HP:0005096
-name: distal femoral bowing
+name: Distal femoral bowing
+def: "A bending or abnormal curvature of the distal portion of the `femur` (FMA:9611)." [HPO:probinson]
 xref: UMLS:C1860107 "Distal femoral bowing"
 is_a: HP:0002980 ! Femoral bowing
 
@@ -33683,7 +33775,7 @@ is_a: HP:0004331 ! Decreased skull ossification
 [Term]
 id: HP:0005624
 name: Short second and third or third and fourth metacarpals
-is_a: HP:0010049 ! Hypoplastic/short metacarpal bones
+is_a: HP:0010049 ! Short metacarpal
 
 [Term]
 id: HP:0005625
@@ -33735,7 +33827,7 @@ is_a: HP:0003422 ! Vertebral segmentation defects
 [Term]
 id: HP:0005643
 name: Brachydactyly of index fingers and third toes
-is_a: HP:0001831 ! Brachydactyly (feet)
+is_a: HP:0001831 ! Brachydactyly of the foot
 is_a: HP:0100667 ! Brachydactyly (hand)
 
 [Term]
@@ -33749,7 +33841,7 @@ is_a: HP:0010766 ! Ectopic calcifications
 [Term]
 id: HP:0005646
 name: Severely adducted thumbs
-is_a: HP:0001181 ! Adducted thumbs
+is_a: HP:0001181 ! Adducted thumb
 
 [Term]
 id: HP:0005647
@@ -33769,6 +33861,7 @@ is_a: HP:0004220 ! Hypoplastic/small middle phalanx of the 5th finger
 [Term]
 id: HP:0005650
 name: Cutaneous syndactyly between fingers 2 and 5
+def: "A soft tissue continuity in the anteroposterior axis between the second to the fifth fingers that extends distally to at least the level of the proximal interphalangeal joints." [HPO:probinson]
 is_a: HP:0010554 ! Cutaneous syndactyly of the fingers
 
 [Term]
@@ -33843,7 +33936,7 @@ is_a: HP:0003467 ! Atlantoaxial instability
 [Term]
 id: HP:0005669
 name: Short, spear-shaped terminal phalanges
-is_a: HP:0009882 ! Hypoplasia of the distal phalanges of the hand
+is_a: HP:0009882 ! Short distal phalanx of finger
 
 [Term]
 id: HP:0005670
@@ -33994,8 +34087,9 @@ is_a: HP:0004220 ! Hypoplastic/small middle phalanx of the 5th finger
 
 [Term]
 id: HP:0005707
-name: Bilateral digitalized thumbs
-synonym: "Digitalized thumb" EXACT []
+name: Bilateral triphalangeal thumbs
+def: "A bilateral form of `triphalangeal thumb` (HP:0001199)." [HPO:probinson]
+synonym: "Bilateral digitalized thumb" EXACT []
 xref: UMLS:C1835605 "Digitalized thumb"
 is_a: HP:0001199 ! Triphalangeal thumb
 
@@ -34003,7 +34097,7 @@ is_a: HP:0001199 ! Triphalangeal thumb
 id: HP:0005709
 name: Cutaneous syndactyly of fingers 3 and 4 and toes 2 and 3
 is_a: HP:0010554 ! Cutaneous syndactyly of the fingers
-is_a: HP:0010621 ! Cutaneous syndactyly of the toes
+is_a: HP:0010621 ! Cutaneous syndactyly of toes
 
 [Term]
 id: HP:0005714
@@ -34025,7 +34119,7 @@ is_a: HP:0002652 ! Skeletal dysplasia
 [Term]
 id: HP:0005717
 name: Short stubby metacarpals and phalanges
-is_a: HP:0010049 ! Hypoplastic/short metacarpal bones
+is_a: HP:0010049 ! Short metacarpal
 
 [Term]
 id: HP:0005718
@@ -34040,14 +34134,14 @@ is_a: HP:0003468 ! Abnormality of the vertebrae
 [Term]
 id: HP:0005720
 name: Shortening of all phalanges and metacarpals
-is_a: HP:0010049 ! Hypoplastic/short metacarpal bones
+is_a: HP:0010049 ! Short metacarpal
 
 [Term]
 id: HP:0005721
 name: Thenar and hypothenar hypoplasia
 def: "Underdevelopment of the thenar and the hypothenar eminences." [HPO:curators]
-is_a: HP:0001245 ! Thenar hypoplasia
-is_a: HP:0010487 ! Hypoplasia of the hypothenar eminence
+is_a: HP:0001245 ! Small thenar eminence
+is_a: HP:0010487 ! Small hypothenar eminence
 
 [Term]
 id: HP:0005722
@@ -34067,7 +34161,8 @@ is_a: HP:0001320 ! Cerebellar vermis hypoplasia
 
 [Term]
 id: HP:0005725
-name: Nonopposable triphalangeal thumbs
+name: Nonopposable triphalangeal thumb
+def: "A form of triphalangeal thumb that cannot be placed opposite the fingers of the same hand." [HPO:probinson]
 xref: UMLS:C1860806 "TRIPHALANGEAL THUMB, NONOPPOSABLE"
 is_a: HP:0001199 ! Triphalangeal thumb
 
@@ -34079,7 +34174,7 @@ is_a: HP:0009778 ! Hypoplastic/small thumb
 [Term]
 id: HP:0005727
 name: Brachydactyly of hands and feet
-is_a: HP:0001831 ! Brachydactyly (feet)
+is_a: HP:0001831 ! Brachydactyly of the foot
 is_a: HP:0100667 ! Brachydactyly (hand)
 
 [Term]
@@ -34233,12 +34328,12 @@ is_a: HP:0005736 ! Hypoplastic tibia
 [Term]
 id: HP:0005767
 name: Complete cutaneous syndactyly of toes 1 and 2
-is_a: HP:0010621 ! Cutaneous syndactyly of the toes
+is_a: HP:0010621 ! Cutaneous syndactyly of toes
 
 [Term]
 id: HP:0005768
 name: Soft tissue syndactyly of toes 2, 3, and 4
-is_a: HP:0010621 ! Cutaneous syndactyly of the toes
+is_a: HP:0010621 ! Cutaneous syndactyly of toes
 
 [Term]
 id: HP:0005769
@@ -34278,7 +34373,7 @@ is_a: HP:0001191 ! Abnormality of the carpal bones
 [Term]
 id: HP:0005777
 name: Short middle and distal phalanges of digits ii through v
-is_a: HP:0009882 ! Hypoplasia of the distal phalanges of the hand
+is_a: HP:0009882 ! Short distal phalanx of finger
 
 [Term]
 id: HP:0005780
@@ -34346,7 +34441,7 @@ name: Short tapering fingers
 alt_id: HP:0006111
 synonym: "Short, distally tapering fingers" EXACT []
 synonym: "Short, tapering fingers" EXACT []
-is_a: HP:0001182 ! Tapered fingers
+is_a: HP:0001182 ! Tapered finger
 
 [Term]
 id: HP:0005796
@@ -34399,7 +34494,7 @@ is_a: HP:0009144 ! Supernumerary bones of the axial skeleton
 [Term]
 id: HP:0005817
 name: Hallucal and postaxial polysyndactyly of the feet
-is_a: HP:0001830 ! Postaxial polydactyly (feet)
+is_a: HP:0001830 ! Postaxial polydactyly of foot
 
 [Term]
 id: HP:0005818
@@ -34408,7 +34503,7 @@ alt_id: HP:0005735
 def: "Absence or underdevelopment of the distal phalanges of the toes." [HPO:curators]
 synonym: "Absent/hypoplastic terminal phalanges of toes" EXACT []
 synonym: "Hypoplasia/agenesis of distal phalanges of toes" RELATED []
-is_a: HP:0001991 ! Aplasia/Hypoplasia of the toes
+is_a: HP:0011306 ! Aplasia of the toes
 
 [Term]
 id: HP:0005819
@@ -34514,11 +34609,6 @@ is_a: HP:0009183 ! Joint contractures of the 5th finger
 is_a: HP:0009274 ! Joint contractures of the 4th finger
 
 [Term]
-id: HP:0005846
-name: Thumb replaced by one or two triphalangeal digits
-is_a: HP:0001199 ! Triphalangeal thumb
-
-[Term]
 id: HP:0005848
 name: Broad or bifid thumb distal phalanx
 is_a: HP:0009642 ! Broad distal phalanx of the thumb
@@ -34593,7 +34683,8 @@ is_a: HP:0000924 ! Abnormality of the musculoskeletal system
 
 [Term]
 id: HP:0005866
-name: Opposable triphalangeal thumbs
+name: Opposable triphalangeal thumb
+def: "A form of triphalangeal thumb that can be placed opposite the fingers of the same hand." [HPO:probinson]
 is_a: HP:0001199 ! Triphalangeal thumb
 
 [Term]
@@ -34628,7 +34719,8 @@ is_a: HP:0001156 ! Brachydactyly
 
 [Term]
 id: HP:0005873
-name: Polysyndactyly of great toes
+name: Polysyndactyly of great toe
+def: "Combined syndactyly and polydactyly of the great toe." [HPO:probinson]
 is_a: HP:0001770 ! Toe syndactyly
 
 [Term]
@@ -34705,7 +34797,7 @@ is_a: HP:0009381 ! Hypoplastic/small fingers
 [Term]
 id: HP:0005889
 name: Brachydactyly, toes and second metatarsal
-is_a: HP:0001831 ! Brachydactyly (feet)
+is_a: HP:0001831 ! Brachydactyly of the foot
 
 [Term]
 id: HP:0005890
@@ -34716,8 +34808,11 @@ is_a: HP:0004437 ! Cranial hyperostosis
 
 [Term]
 id: HP:0005891
-name: Progressive forearm curvature
+name: Progressive forearm bowing
+def: "Progressive bending or abnormal curvature of the `forearm skeleton` (FMA:71199)." [HPO:probinson]
+synonym: "Progressive forearm curvature" EXACT []
 is_a: HP:0003956 ! Bowed forearm bones
+is_a: HP:0006383 ! Progressive bowing of long bones
 
 [Term]
 id: HP:0005892
@@ -34759,7 +34854,7 @@ is_a: HP:0000939 ! Osteoporosis
 [Term]
 id: HP:0005898
 name: Short first metacarpals and first metatarsals
-is_a: HP:0010049 ! Hypoplastic/short metacarpal bones
+is_a: HP:0010049 ! Short metacarpal
 
 [Term]
 id: HP:0005899
@@ -34817,7 +34912,7 @@ is_a: HP:0100714 ! Abnormality of the long tubular bones
 [Term]
 id: HP:0005909
 name: Short metacarpals and phalanges
-is_a: HP:0010049 ! Hypoplastic/short metacarpal bones
+is_a: HP:0010049 ! Short metacarpal
 
 [Term]
 id: HP:0005910
@@ -35343,7 +35438,7 @@ is_a: HP:0000069 ! Abnormality of the ureter
 [Term]
 id: HP:0006004
 name: Short third, fourth, fifth metacarpals
-is_a: HP:0010049 ! Hypoplastic/short metacarpal bones
+is_a: HP:0010049 ! Short metacarpal
 
 [Term]
 id: HP:0006006
@@ -35365,15 +35460,15 @@ is_a: HP:0009768 ! Broad phalanges of the hand
 [Term]
 id: HP:0006010
 name: Long, hyperextensible fingers
-def: "Abnormally long fingers with hyperextensible finger joints." [HPO:curators]
+def: "Abnormally long fingers with hyperextensible finger joints." [HPO:probinson]
 xref: UMLS:C1858091 "Long fingers"
-is_a: HP:0001166 ! Arachnodactyly
 is_a: HP:0001187 ! Hyperextensibility of the finger joints
+is_a: HP:0100807 ! Long fingers
 
 [Term]
 id: HP:0006011
 name: Short, cuboidal metacarpals
-is_a: HP:0010049 ! Hypoplastic/short metacarpal bones
+is_a: HP:0010049 ! Short metacarpal
 
 [Term]
 id: HP:0006012
@@ -35473,21 +35568,6 @@ xref: UMLS:C1849740 "Short pointed phalanges"
 is_a: HP:0009803 ! Hypoplastic/small phalanges of the hand
 
 [Term]
-id: HP:0006046
-name: Pre- or postaxial polydactyly
-alt_id: HP:0006123
-synonym: "Polydactyly, preaxial or postaxial" EXACT []
-is_a: HP:0010442 ! Polydactyly
-
-[Term]
-id: HP:0006047
-name: Mild shortening of metacarpals
-alt_id: HP:0006186
-synonym: "Mild shortened metacarpals" EXACT []
-xref: UMLS:C1857633 "Mild shortened metacarpals"
-is_a: HP:0010049 ! Hypoplastic/short metacarpal bones
-
-[Term]
 id: HP:0006048
 name: Distal widening of metacarpals
 def: "Abnormal increase in width of the distal region of the metacarpal bones." [HPO:curators]
@@ -35545,7 +35625,7 @@ alt_id: HP:0006024
 def: "Abnormally short and broad metacarpal bones." [HPO:curators]
 synonym: "Short, wide metacarpals" EXACT []
 is_a: HP:0001230 ! Broad metacarpals
-is_a: HP:0010049 ! Hypoplastic/short metacarpal bones
+is_a: HP:0010049 ! Short metacarpal
 
 [Term]
 id: HP:0006067
@@ -35624,7 +35704,7 @@ is_a: HP:0001163 ! Abnormality of the metacarpal bones
 id: HP:0006088
 name: 1-5 finger complete cutaneous syndactyly
 is_a: HP:0010554 ! Cutaneous syndactyly of the fingers
-is_a: HP:0010621 ! Cutaneous syndactyly of the toes
+is_a: HP:0010621 ! Cutaneous syndactyly of toes
 
 [Term]
 id: HP:0006089
@@ -35668,7 +35748,7 @@ id: HP:0006098
 name: Slender, tapering fingers
 alt_id: HP:0006244
 synonym: "Thin, tapering fingers" EXACT []
-is_a: HP:0001182 ! Tapered fingers
+is_a: HP:0001182 ! Tapered finger
 
 [Term]
 id: HP:0006099
@@ -35708,7 +35788,7 @@ is_a: HP:0100585 ! Teleangiectasia of the skin
 [Term]
 id: HP:0006108
 name: Short, tapered metacarpals
-is_a: HP:0010049 ! Hypoplastic/short metacarpal bones
+is_a: HP:0010049 ! Short metacarpal
 
 [Term]
 id: HP:0006109
@@ -35732,6 +35812,7 @@ is_a: HP:0009768 ! Broad phalanges of the hand
 [Term]
 id: HP:0006114
 name: Multiple palmar creases
+def: "The presence of multiple creases on the palm of the hand (more than the normal three major creases (distal transverse crease, proximal transverse crease, and thenar crease)." [HPO:probinson]
 xref: UMLS:C1861872 "Multiple palmar creases"
 is_a: HP:0010490 ! Abnormality of the palmar creases
 
@@ -35750,7 +35831,7 @@ id: HP:0006118
 name: Hypoplastic distal and middle phalanges
 alt_id: HP:0005658
 synonym: "Distal and middle phalangeal hypoplasia" EXACT []
-is_a: HP:0009882 ! Hypoplasia of the distal phalanges of the hand
+is_a: HP:0009882 ! Short distal phalanx of finger
 
 [Term]
 id: HP:0006119
@@ -35763,7 +35844,7 @@ is_a: HP:0005916 ! Abnormal metacarpal morphology
 [Term]
 id: HP:0006120
 name: Small 3rd and 4th metacarpals
-is_a: HP:0010049 ! Hypoplastic/short metacarpal bones
+is_a: HP:0010049 ! Short metacarpal
 
 [Term]
 id: HP:0006121
@@ -35779,7 +35860,7 @@ alt_id: HP:0006080
 synonym: "Long, tapered fingers" EXACT []
 synonym: "Long, tapering fingers" EXACT []
 xref: UMLS:C1969247 "Long tapered fingers"
-is_a: HP:0001182 ! Tapered fingers
+is_a: HP:0001182 ! Tapered finger
 is_a: HP:0100807 ! Long fingers
 
 [Term]
@@ -35836,7 +35917,7 @@ is_a: HP:0010656 ! Abnormality of the mineralisation or ossification of the epip
 [Term]
 id: HP:0006141
 name: Short 1st, 4th, 5th metacarpals
-is_a: HP:0010049 ! Hypoplastic/short metacarpal bones
+is_a: HP:0010049 ! Short metacarpal
 
 [Term]
 id: HP:0006143
@@ -35911,7 +35992,7 @@ is_a: HP:0006009 ! Widened phalanges
 [Term]
 id: HP:0006156
 name: Ulnar deviation of 1st, 3rd fingers
-is_a: HP:0009465 ! Ulnar deviation of fingers
+is_a: HP:0009465 ! Ulnar deviation of finger
 
 [Term]
 id: HP:0006157
@@ -35931,21 +36012,20 @@ name: Central polydactyly (hands)
 alt_id: HP:0001496
 alt_id: HP:0004056
 synonym: "Interdigital polydactyly (hand)" EXACT []
-synonym: "Mesoaxial polydactyly" EXACT []
 xref: UMLS:C1856011 "Mesoaxial polydactyly"
 is_a: HP:0001161 ! Polydactyly (hands)
-is_a: HP:0100260 ! Central polydactyly
+is_a: HP:0100260 ! Mesoaxial polydactyly
 
 [Term]
 id: HP:0006160
 name: Hypoplastic, irregular metacarpals
 is_a: HP:0005916 ! Abnormal metacarpal morphology
-is_a: HP:0010049 ! Hypoplastic/short metacarpal bones
+is_a: HP:0010049 ! Short metacarpal
 
 [Term]
 id: HP:0006161
 name: Short metacarpals with rounded proximal ends
-is_a: HP:0010049 ! Hypoplastic/short metacarpal bones
+is_a: HP:0010049 ! Short metacarpal
 
 [Term]
 id: HP:0006162
@@ -36038,12 +36118,14 @@ is_a: HP:0001191 ! Abnormality of the carpal bones
 [Term]
 id: HP:0006181
 name: Clinodactyly, 3,5 finger
-is_a: HP:0009466 ! Radial deviation of fingers
+is_a: HP:0009466 ! Radial deviation of finger
 
 [Term]
 id: HP:0006184
-name: Hypoplastic palmar creases
+name: Decreased palmar creases
 alt_id: HP:0006178
+def: "Poorly defined or shallow palmar creases." [pmid:19125433]
+synonym: "Hypoplastic palmar creases" EXACT []
 synonym: "Poorly formed palmar creases" EXACT []
 xref: UMLS:C1857483 "Hypoplastic palmar creases"
 is_a: HP:0010488 ! Aplasia/Hypoplasia of the palmar creases
@@ -36073,7 +36155,7 @@ is_a: HP:0009486 ! Radial deviation of the hand
 [Term]
 id: HP:0006191
 name: Deep palmar creases
-def: "An increased depth of the palmar creases." [HPO:curators]
+def: "Excessively deep creases of the palm." [pmid:19125433]
 xref: UMLS:C1857539 "Deep palmar creases"
 is_a: HP:0010490 ! Abnormality of the palmar creases
 
@@ -36088,11 +36170,6 @@ name: Broad, thimble-like middle phalanges
 is_a: HP:0009768 ! Broad phalanges of the hand
 
 [Term]
-id: HP:0006194
-name: Separate triphalangeal thumb
-is_a: HP:0001199 ! Triphalangeal thumb
-
-[Term]
 id: HP:0006196
 name: Bifid terminal phalanges digits 2 and 3
 is_a: HP:0009883 ! Partial/complete duplication of the distal phalanges of the hand
@@ -36102,7 +36179,7 @@ id: HP:0006199
 name: Short, broad distal phalanges
 alt_id: HP:0006076
 synonym: "Short, broad distal phalanges, especially thumbs" EXACT []
-is_a: HP:0009882 ! Hypoplasia of the distal phalanges of the hand
+is_a: HP:0009882 ! Short distal phalanx of finger
 
 [Term]
 id: HP:0006200
@@ -36257,7 +36334,7 @@ is_a: HP:0006261 ! Abnormality of phalangeal joints of the hand
 [Term]
 id: HP:0006239
 name: Brachymesophalangy of hands and feet
-is_a: HP:0001831 ! Brachydactyly (feet)
+is_a: HP:0001831 ! Brachydactyly of the foot
 is_a: HP:0100667 ! Brachydactyly (hand)
 
 [Term]
@@ -36847,7 +36924,7 @@ is_a: HP:0005750 ! Contractures of the joints of the lower limbs
 id: HP:0006367
 name: Broad crumpled long bones
 xref: UMLS:C1833766 "Broad crumpled long bones"
-is_a: HP:0002813 ! Abnormality of the extremities
+is_a: HP:0011314 ! Abnormality of long bone morphology
 is_a: HP:0100714 ! Abnormality of the long tubular bones
 
 [Term]
@@ -36874,10 +36951,10 @@ is_a: HP:0006504 ! Abnormality involving the diaphyses of the limbs
 
 [Term]
 id: HP:0006375
-name: Short, dumbbell femur
-xref: UMLS:C1397248 "Short femora"
+name: Dumbbell-shaped femur
+def: "The `femur` (FMA:9611) is shortened and displays flaring (widening) of the metaphyses." [HPO:probinson]
+is_a: HP:0000947 ! Dumbbell-shaped long bone
 is_a: HP:0003097 ! Short femur
-is_a: HP:0005061 ! short, dumbbell appearance of long bones
 
 [Term]
 id: HP:0006376
@@ -36923,6 +37000,7 @@ is_a: HP:0009815 ! Aplasia/Hypoplasia of the extremities
 [Term]
 id: HP:0006383
 name: Progressive bowing of long bones
+def: "Progressive bending or abnormal curvature of a `long bone` (FMA:7474)." [HPO:probinson]
 is_a: HP:0006487 ! Bowing of the long bones
 
 [Term]
@@ -36964,14 +37042,17 @@ is_a: HP:0005085 ! limited knee flexion/extension
 
 [Term]
 id: HP:0006390
-name: Anterior bowing of tibia
+name: Anterior tibial bowing
+def: "An abnormal anterior bending or curvature of the `tibia` (FMA:24476)." [HPO:probinson]
+synonym: "Anterior bowing of tibia" EXACT []
 is_a: HP:0002982 ! Tibial bowing
 
 [Term]
 id: HP:0006391
 name: Overtubulated long bones
+def: "Overconstrction, or narrowness of the diaphysis and metaphysis of long bones." [HPO:probinson]
 xref: UMLS:C1848769 "Overtubulated long bones"
-is_a: HP:0002813 ! Abnormality of the extremities
+is_a: HP:0011314 ! Abnormality of long bone morphology
 
 [Term]
 id: HP:0006392
@@ -37028,7 +37109,8 @@ is_a: HP:0003097 ! Short femur
 [Term]
 id: HP:0006409
 name: Progressive leg bowing
-is_a: HP:0006487 ! Bowing of the long bones
+def: "Progressive bending or abnormal curvature of the leg." [HPO:probinson]
+is_a: HP:0006383 ! Progressive bowing of long bones
 
 [Term]
 id: HP:0006411
@@ -37043,16 +37125,20 @@ is_a: HP:0006491 ! Abnormality of the tibial metaphysis
 
 [Term]
 id: HP:0006414
-name: Bowing of the distal tibia
-synonym: "Tibial bowing, especially at ankle" EXACT []
+name: Distal tibial bowing
+def: "A bending or abnormal curvature of the distal portion of the `tibia` (FMA:24476)." [HPO:probinson]
+synonym: "Bowing of the distal tibia" EXACT []
+synonym: "Tibial bowing at ankle" EXACT []
 is_a: HP:0002982 ! Tibial bowing
 is_a: HP:0003028 ! Abnormality of the ankles
 
 [Term]
 id: HP:0006415
 name: Cortically dense long tubular bones
+def: "Increased density of the `compact bone of long bone` (FMA:32674)." [HPO:probinson]
+comment: Note that compact bone and cortical bone are synonymous.
 xref: UMLS:C1849276 "Cortically dense long tubular bones"
-is_a: HP:0002813 ! Abnormality of the extremities
+is_a: HP:0011314 ! Abnormality of long bone morphology
 
 [Term]
 id: HP:0006417
@@ -37215,6 +37301,7 @@ is_a: HP:0010574 ! Abnormality of the epiphysis of the femoral head
 [Term]
 id: HP:0006451
 name: Congenital bowing of the long bones
+def: "Congenital bending or abnormal curvature of a  `long bone` (FMA:7474)." [HPO:probinson]
 is_a: HP:0006487 ! Bowing of the long bones
 
 [Term]
@@ -37291,7 +37378,8 @@ is_a: HP:0003014 ! Short humeri
 [Term]
 id: HP:0006465
 name: Periosteal thickening of long tubular bones
-is_a: HP:0002813 ! Abnormality of the extremities
+def: "Thickening of the `periosteum of long bone` (FMA:32677)." [HPO:probinson]
+is_a: HP:0011314 ! Abnormality of long bone morphology
 
 [Term]
 id: HP:0006466
@@ -37335,6 +37423,7 @@ is_a: HP:0005647 ! Shortened bowed long bones
 [Term]
 id: HP:0006473
 name: Anterior bowing of long bones
+def: "An abnormal anterior curvature of a  `long bone` (FMA:7474)." [HPO:probinson]
 is_a: HP:0006487 ! Bowing of the long bones
 
 [Term]
@@ -37436,16 +37525,18 @@ id: HP:0006487
 name: Bowing of the long bones
 alt_id: HP:0005087
 alt_id: HP:0006404
+def: "A bending or abnormal curvature of a `long bone` (FMA:7474)." [HPO:probinson]
 synonym: "Bowed long bones" EXACT []
 synonym: "Bowing of long bones" EXACT []
-is_a: HP:0002813 ! Abnormality of the extremities
+is_a: HP:0011314 ! Abnormality of long bone morphology
 is_a: HP:0100714 ! Abnormality of the long tubular bones
 created_by: peter
 creation_date: 2008-03-28T05:56:00Z
 
 [Term]
 id: HP:0006488
-name: Bowing of the arms
+name: Bowing of the arm
+def: "A bending or abnormal curvature affecting a `long bone` (FMA:7474) of the arm." [HPO:probinson]
 is_a: HP:0002817 ! Abnormality of the upper limb
 is_a: HP:0006487 ! Bowing of the long bones
 created_by: peter
@@ -40603,7 +40694,6 @@ is_a: HP:0001251 ! Ataxia
 id: HP:0007153
 name: Progressive extrapyramidal movement disorder
 is_a: HP:0002071 ! Extrapyramidal signs
-is_a: HP:0100022 ! Abnormality of movement
 
 [Term]
 id: HP:0007154
@@ -41770,7 +41860,7 @@ is_a: HP:0009123 ! Mixed hypo- and hyperpigmentation of the skin
 id: HP:0007403
 name: Hypertrophy of skin of soles
 is_a: HP:0000951 ! Abnormality of the skin
-is_a: HP:0100872 ! Abnormality of the soles
+is_a: HP:0100872 ! Abnormality of the plantar part of foot
 
 [Term]
 id: HP:0007404
@@ -41806,7 +41896,7 @@ def: "An abnormally increased perspiration on palms and soles." [HPO:probinson]
 synonym: "Hyperhidrosis of palms and soles" EXACT []
 xref: UMLS:C1274743 "Palmoplantar hyperhidrosis"
 is_a: HP:0000975 ! Hyperhidrosis
-is_a: HP:0100872 ! Abnormality of the soles
+is_a: HP:0100872 ! Abnormality of the plantar part of foot
 
 [Term]
 id: HP:0007411
@@ -41976,8 +42066,8 @@ id: HP:0007446
 name: Palmoplantar blistering
 def: "A type of blistering that affects the skin of the palms of the hands and the soles of the feet." [HPO:probinson]
 is_a: HP:0008066 ! Abnormal blistering of the skin
-is_a: HP:0100871 ! Abnormality of the palms
-is_a: HP:0100872 ! Abnormality of the soles
+is_a: HP:0100871 ! Abnormality of the palm
+is_a: HP:0100872 ! Abnormality of the plantar part of foot
 
 [Term]
 id: HP:0007447
@@ -42101,8 +42191,8 @@ is_a: HP:0000962 ! Hyperkeratosis
 id: HP:0007469
 name: Cutis gyrata of palms and soles
 is_a: HP:0007477 ! Abnormal dermatoglyphics
-is_a: HP:0100871 ! Abnormality of the palms
-is_a: HP:0100872 ! Abnormality of the soles
+is_a: HP:0100871 ! Abnormality of the palm
+is_a: HP:0100872 ! Abnormality of the plantar part of foot
 
 [Term]
 id: HP:0007470
@@ -42685,9 +42775,10 @@ is_a: HP:0000982 ! Palmoplantar keratoderma
 
 [Term]
 id: HP:0007598
-name: Bilateral single palmar creases
+name: Bilateral single transverse palmar creases
+def: "The distal and proximal transverse palmar creases are merged into a single transverse palmar crease on both hands." [HPO:probinson]
 xref: UMLS:C1856138 "Bilateral single palmar creases"
-is_a: HP:0000954 ! Transverse palmar creases
+is_a: HP:0000954 ! Single transverse palmar crease
 
 [Term]
 id: HP:0007599
@@ -45109,6 +45200,7 @@ is_a: HP:0001832 ! Abnormality of the metatarsal bones
 [Term]
 id: HP:0008075
 name: Progressive pes cavus
+def: "The development of `Pes cavus` (HP:0001761) that is progressive with age." [HPO:probinson]
 xref: UMLS:C1846017 "Progressive pes cavus"
 is_a: HP:0001761 ! Pes cavus
 
@@ -45179,7 +45271,8 @@ is_a: HP:0004701 ! Hypoplasia of the toes
 
 [Term]
 id: HP:0008089
-name: Anomalous fifth metatarsal
+name: Abnormality of the fifth metatarsal bone
+def: "An anomaly of the fifth metatarsal bone` (FMA:24506)." [HPO:probinson]
 xref: UMLS:C1839518 "Anomalous fifth metatarsal"
 is_a: HP:0001832 ! Abnormality of the metatarsal bones
 
@@ -45192,12 +45285,13 @@ is_a: HP:0001760 ! Abnormality of the feet
 [Term]
 id: HP:0008093
 name: Short fourth and fifth toes
-is_a: HP:0004701 ! Hypoplasia of the toes
+is_a: HP:0001831 ! Brachydactyly of the foot
 
 [Term]
 id: HP:0008094
 name: Widely spaced toes
-def: "The presence of an abnormally wide spacing between the toes." [HPO:curators]
+def: "An overall widening of the spaces between the digits." [HPO:probinson, pmid:19125433]
+comment: This description is based on the width of the gap between the toes. It is usually used when the width of the toes remains normal rather than to describe a situation where the toes are thin or narrow. This term should not be used for the situation where the finding is limited to a gap between T1,2 (see Sandal gap).
 xref: UMLS:C1969238 "Widely spaced toes"
 is_a: HP:0001780 ! Abnormality of the toes
 
@@ -45212,7 +45306,8 @@ is_a: HP:0009134 ! Osteolysis involving bones of the feet
 [Term]
 id: HP:0008096
 name: Medially deviated second toe
-is_a: HP:0001780 ! Abnormality of the toes
+def: "Medial deviation of the `second toe` (FMA:25048)." [HPO:probinson]
+is_a: HP:0100498 ! Deviation of toes
 
 [Term]
 id: HP:0008097
@@ -45241,6 +45336,7 @@ is_a: HP:0001832 ! Abnormality of the metatarsal bones
 [Term]
 id: HP:0008107
 name: Plantar crease between first and second toes
+def: "The presence of unusually deep creases (ridges/wrinkles) on the `skin of sole of foot` (FMA:37849) located between the first and second toe." [HPO:probinson]
 is_a: HP:0001869 ! Deep plantar creases
 
 [Term]
@@ -45273,7 +45369,7 @@ is_a: HP:0008366 ! Contractures involving the joints of the feet
 id: HP:0008113
 name: Multiple plantar creases
 xref: UMLS:C1861873 "Multiple plantar creases"
-is_a: HP:0010613 ! Minor feet anomalies
+is_a: HP:0100872 ! Abnormality of the plantar part of foot
 
 [Term]
 id: HP:0008114
@@ -45306,11 +45402,6 @@ name: Deformed tarsal bones
 is_a: HP:0001850 ! Abnormality of the tarsal bones
 
 [Term]
-id: HP:0008120
-name: Valgus position of the calcaneus
-is_a: HP:0001848 ! Calcaneovalgus deformities
-
-[Term]
 id: HP:0008122
 name: Tarsonavicular and calcaneonavicular fusion
 is_a: HP:0008368 ! Synostosis involving tarsal bones
@@ -45332,7 +45423,7 @@ name: Bipartite calcaneus
 alt_id: HP:0008104
 alt_id: HP:0008130
 alt_id: HP:0008146
-def: "Bipartite calcaneus is a rarely observed radiographic finding that probably results from delayed coalescence of two primary calcaneal centers of ossification." [HPO:curators]
+def: "A two-part `calcaneus`(FMA:24496), a finding that probably results from delayed coalescence of two primary calcaneal centers of ossification." [HPO:probinson]
 synonym: "Delayed coalescence of bipartite calcanei" EXACT []
 synonym: "Delayed coalescence of calcaneal ossification centers" EXACT []
 synonym: "Delayed fusion of bipartite calcanei" EXACT []
@@ -45344,7 +45435,7 @@ is_a: HP:0008364 ! Abnormality of the calcaneus
 [Term]
 id: HP:0008128
 name: Flexion contractures of the toes
-is_a: HP:0200027 ! contractures of the toes
+is_a: HP:0200027 ! Contractures of the toes
 
 [Term]
 id: HP:0008131
@@ -45378,7 +45469,10 @@ is_a: HP:0001764 ! Small feet
 
 [Term]
 id: HP:0008138
-name: Equinus deformity of the calcaneus
+name: Equinus calcaneus
+def: "Abnormal plantar flexion of the calcaneus relative to the longitudinal axis of the tibia. This results in the angle between the long axis of the tibia and the long axis of the heel bone (calcaneus) being greater than 90 degrees." [HPO:probinson]
+synonym: "Equinus deformity of the calcaneus" EXACT []
+synonym: "Hindfoot equinus" EXACT []
 is_a: HP:0008364 ! Abnormality of the calcaneus
 
 [Term]
@@ -46370,7 +46464,7 @@ alt_id: HP:0008126
 def: "Absence or underdevelopment of the big toe." [HPO:curators]
 synonym: "Aplastic/hypoplastic halluces" EXACT []
 is_a: HP:0001844 ! Abnormality of the hallux
-is_a: HP:0001991 ! Aplasia/Hypoplasia of the toes
+is_a: HP:0011306 ! Aplasia of the toes
 created_by: peter
 creation_date: 2008-04-04T11:33:00Z
 
@@ -46388,6 +46482,7 @@ creation_date: 2008-04-04T11:35:00Z
 [Term]
 id: HP:0008364
 name: Abnormality of the calcaneus
+def: "An abnormality of the `calcaneus`(FMA:24496), also known as the heel bone, one of the or heel bone, one of the components of the tarsus of the foot which make up the heel." [HPO:probinson]
 is_a: HP:0001850 ! Abnormality of the tarsal bones
 created_by: peter
 creation_date: 2008-04-04T11:38:00Z
@@ -46493,7 +46588,7 @@ is_a: HP:0001597 ! Abnormality of the nail
 [Term]
 id: HP:0008382
 name: Dystrophic thickened nails
-is_a: HP:0001805 ! Thickened nails
+is_a: HP:0001805 ! Thick nail
 
 [Term]
 id: HP:0008383
@@ -46503,8 +46598,9 @@ is_a: HP:0001597 ! Abnormality of the nail
 
 [Term]
 id: HP:0008384
-name: Aplastic/hypoplastic fingernails
+name: Aplastic/hypoplastic fingernail
 alt_id: HP:0007593
+def: "Absence or underdevelopment of a `fingernail`(FMA:54327)." [HPO:probinson]
 synonym: "Absent or hypoplastic fingernails" EXACT []
 synonym: "Absent/hypoplastic finger nails" EXACT []
 synonym: "Hypoplastic/aplastic fingernails" EXACT []
@@ -46528,22 +46624,25 @@ is_a: HP:0002164 ! Nail dysplasia
 [Term]
 id: HP:0008388
 name: Abnormality of the toenails
+def: "An anomaly of the `toenail`(FMA:54328)." [HPO:probinson]
 is_a: HP:0001597 ! Abnormality of the nail
 
 [Term]
 id: HP:0008390
 name: Recurrent loss of toenails and fingernails
-is_a: HP:0001231 ! Abnormality of the fingernails
+is_a: HP:0001806 ! Onycholysis
 
 [Term]
 id: HP:0008391
-name: Mildly dystrophic fingernails
+name: Dystrophic fingernails
+def: "The presence of misshapen or partially destroyed nail plates, often with accumulation of soft, yellow keratin between the dystrophic nail plate and nail bed, resulting in elevation of the nail plate." [HPO:probinson]
 is_a: HP:0001231 ! Abnormality of the fingernails
 is_a: HP:0002164 ! Nail dysplasia
 
 [Term]
 id: HP:0008392
 name: Subungual hyperkeratosis
+def: "A thickening of the stratum corneum in the region beneath the nails." [HPO:probinson]
 xref: UMLS:C0038605 "Subungual hyperkeratosis"
 is_a: HP:0000962 ! Hyperkeratosis
 is_a: HP:0009723 ! Abnormality of the subungual region
@@ -46551,7 +46650,7 @@ is_a: HP:0009723 ! Abnormality of the subungual region
 [Term]
 id: HP:0008393
 name: Congenital curved nail, fourth toe
-is_a: HP:0001597 ! Abnormality of the nail
+is_a: HP:0008388 ! Abnormality of the toenails
 
 [Term]
 id: HP:0008394
@@ -46563,11 +46662,12 @@ id: HP:0008395
 name: Onychogryphosis of large toenails
 alt_id: HP:0008405
 synonym: "Severe onychogryposis, esp the great toes" EXACT []
-is_a: HP:0001819 ! Onychogryposis
+is_a: HP:0008401 ! Onychogryposis of toenails
 
 [Term]
 id: HP:0008396
 name: Chronic monilial nail infection
+def: "Chronic infection of the nails by Candida species." [HPO:probinson]
 is_a: HP:0001597 ! Abnormality of the nail
 
 [Term]
@@ -46583,6 +46683,7 @@ is_a: HP:0008386 ! Aplasia/Hypoplasia of the nails
 [Term]
 id: HP:0008399
 name: Circumungual hyperkeratosis
+def: "A thickening of the stratum corneum, the outer layer of the skin, in the region surrounding the nails." [HPO:probinson]
 xref: UMLS:C0870082 "Hyperkeratosis"
 is_a: HP:0000962 ! Hyperkeratosis
 is_a: HP:0001597 ! Abnormality of the nail
@@ -46590,17 +46691,20 @@ is_a: HP:0001597 ! Abnormality of the nail
 [Term]
 id: HP:0008400
 name: Onycholysis of distal fingernails
+def: "Detachment of the distal fingernails from the nail bed." [HPO:probinson]
 is_a: HP:0001231 ! Abnormality of the fingernails
 is_a: HP:0001806 ! Onycholysis
 
 [Term]
 id: HP:0008401
 name: Onychogryposis of toenails
-is_a: HP:0001819 ! Onychogryposis
+is_a: HP:0001805 ! Thick nail
 
 [Term]
 id: HP:0008402
-name: Longitudinally grooved fingernails
+name: Ridged fingernail
+def: "Longitudinal, linear prominences in the fingernail plate." [HPO:probinson, pmid:19125433]
+synonym: "Longitudinally grooved fingernails" EXACT []
 is_a: HP:0001231 ! Abnormality of the fingernails
 
 [Term]
@@ -46612,14 +46716,14 @@ is_a: HP:0002164 ! Nail dysplasia
 id: HP:0008406
 name: Short and broad fingernails
 is_a: HP:0001231 ! Abnormality of the fingernails
-is_a: HP:0001799 ! Short nails
-is_a: HP:0001821 ! Broad nails
+is_a: HP:0001799 ! Short nail
+is_a: HP:0001821 ! Broad nail
 
 [Term]
 id: HP:0008407
 name: Hyperconvex thumb nails
 xref: UMLS:C1855290 "Hyperconvex thumb nails"
-is_a: HP:0001795 ! Hyperconvex nails
+is_a: HP:0001795 ! Hyperconvex nail
 
 [Term]
 id: HP:0008408
@@ -50552,7 +50656,7 @@ id: HP:0009180
 name: Ulnar deviation of the 5th finger
 def: "Displacement of the 5th finger towards the ulnar side." [HPO:curators]
 is_a: HP:0009179 ! Deviation of the 5th finger
-is_a: HP:0009465 ! Ulnar deviation of fingers
+is_a: HP:0009465 ! Ulnar deviation of finger
 created_by: peter
 creation_date: 2008-12-29T03:30:05Z
 
@@ -51535,7 +51639,7 @@ id: HP:0009278
 name: Ulnar deviation of the 4th finger
 def: "Displacement of the 4th finger towards the ulnar side." [HPO:curators]
 is_a: HP:0009273 ! Deviation of the 4th finger
-is_a: HP:0009465 ! Ulnar deviation of fingers
+is_a: HP:0009465 ! Ulnar deviation of finger
 created_by: doelkens
 creation_date: 2009-01-07T04:24:53Z
 
@@ -51544,7 +51648,7 @@ id: HP:0009279
 name: Radial deviation of the 4th finger
 def: "Displacement of the 4th finger towards the radial side." [HPO:curators]
 is_a: HP:0009273 ! Deviation of the 4th finger
-is_a: HP:0009466 ! Radial deviation of fingers
+is_a: HP:0009466 ! Radial deviation of finger
 created_by: doelkens
 creation_date: 2009-01-07T04:24:53Z
 
@@ -51646,7 +51750,7 @@ name: Hypoplastic/small distal phalanx of the 4th finger
 def: "Hypoplastic/small distal phalanx of the 4th (ring) finger." [HPO:curators]
 is_a: HP:0009280 ! Hypoplastic/small 4th finger
 is_a: HP:0009289 ! Aplasia/Hypoplasia of the distal phalanx of the 4th finger
-is_a: HP:0009882 ! Hypoplasia of the distal phalanges of the hand
+is_a: HP:0009882 ! Short distal phalanx of finger
 created_by: doelkens
 creation_date: 2009-01-08T03:59:28Z
 
@@ -53228,7 +53332,7 @@ id: HP:0009462
 name: Radial deviation of the 3rd finger
 def: "Displacement of the 3rd finger towards the radial side." [HPO:curators]
 is_a: HP:0009317 ! Deviation of the 3rd finger
-is_a: HP:0009466 ! Radial deviation of fingers
+is_a: HP:0009466 ! Radial deviation of finger
 created_by: doelkens
 creation_date: 2009-01-15T09:35:10Z
 
@@ -53239,7 +53343,7 @@ alt_id: HP:0005865
 def: "Displacement of the 3rd finger towards the ulnar side." [HPO:curators]
 synonym: "Ulnar deviation of middle fingers" EXACT []
 is_a: HP:0009317 ! Deviation of the 3rd finger
-is_a: HP:0009465 ! Ulnar deviation of fingers
+is_a: HP:0009465 ! Ulnar deviation of finger
 created_by: doelkens
 creation_date: 2009-01-15T09:35:47Z
 
@@ -53254,16 +53358,17 @@ synonym: "Second finger ulnar deviation" EXACT []
 synonym: "Ulnar angulation of the index finger" EXACT []
 synonym: "Ulnar deviation of index fingers" EXACT []
 xref: UMLS:C1841682 "Second finger ulnar deviation"
-is_a: HP:0009465 ! Ulnar deviation of fingers
+is_a: HP:0009465 ! Ulnar deviation of finger
 is_a: HP:0009468 ! Deviation of the 2nd finger
 created_by: doelkens
 creation_date: 2009-01-15T09:37:48Z
 
 [Term]
 id: HP:0009465
-name: Ulnar deviation of fingers
+name: Ulnar deviation of finger
 alt_id: HP:0001200
 alt_id: HP:0004096
+def: "Bending or curvature of a finger toward the ulnar side (i.e., away from the thumb). The deviation is at the metacarpal-phalangeal joint, and this finding is distinct from clinodactyly." [HPO:probinson, pmid:19125433]
 synonym: "Medially deviated fingers" EXACT []
 is_a: HP:0001193 ! Ulnar deviation of the hand or of fingers of the hand
 is_a: HP:0004097 ! Deviated fingers
@@ -53272,13 +53377,11 @@ creation_date: 2009-01-15T09:39:43Z
 
 [Term]
 id: HP:0009466
-name: Radial deviation of fingers
+name: Radial deviation of finger
 alt_id: HP:0001157
 alt_id: HP:0001213
 alt_id: HP:0001503
-synonym: "Clinodactyly of fingers" EXACT []
-synonym: "Clinodactyly of hands" EXACT []
-synonym: "Clinodactyly of isolated digits" EXACT []
+def: "Bending or curvature of a finger toward the radial side (i.e., towards the thumb). The deviation is at the metacarpal-phalangeal joint, and this finding is distinct from clinodactyly." [HPO:probinson, pmid:19125433]
 synonym: "Radially deviated fingers" EXACT []
 synonym: "Radially deviated phalanges" EXACT []
 xref: UMLS:C1847407 "Radially deviated phalanges"
@@ -53296,7 +53399,7 @@ def: "Displacement of the 2nd finger towards the radial side." [HPO:curators]
 synonym: "Radially deviated index finger" EXACT []
 synonym: "Second finger clinodactyly" EXACT []
 xref: UMLS:C1844709 "Second finger clinodactyly"
-is_a: HP:0009466 ! Radial deviation of fingers
+is_a: HP:0009466 ! Radial deviation of finger
 is_a: HP:0009468 ! Deviation of the 2nd finger
 created_by: doelkens
 creation_date: 2009-01-15T09:40:58Z
@@ -53433,7 +53536,7 @@ creation_date: 2009-01-15T10:51:21Z
 [Term]
 id: HP:0009487
 name: Ulnar deviation of the hand
-def: "A deviation of the orientation of the hand in the direction of the ulna (i.e., towards the little finger)." [HPO:curators]
+def: "Divergence of the longitudinal axis of the hand at the wrist in a posterior (ulnar) direction (i.e., towards the little finger)." [HPO:probinson, pmid:19125433]
 is_a: HP:0001193 ! Ulnar deviation of the hand or of fingers of the hand
 created_by: doelkens
 creation_date: 2009-01-15T10:51:52Z
@@ -54220,7 +54323,7 @@ synonym: "Hypoplastic terminal index finger phalanx" EXACT []
 synonym: "Short terminal index finger phalanx" EXACT []
 is_a: HP:0009536 ! Hypoplastic/small 2nd finger
 is_a: HP:0009557 ! Aplasia/Hypoplasia of the distal phalanx of the 2nd finger
-is_a: HP:0009882 ! Hypoplasia of the distal phalanges of the hand
+is_a: HP:0009882 ! Short distal phalanx of finger
 created_by: doelkens
 creation_date: 2009-01-28T04:20:22Z
 
@@ -54569,7 +54672,7 @@ id: HP:0009601
 name: Aplasia/Hypoplasia of the thumb
 alt_id: HP:0002950
 alt_id: HP:0006225
-def: "Hypoplastic/small or absent thumb." [HPO:curators]
+def: "Hypoplastic/small or absent `thumb`(FMA:24938)." [HPO:probinson]
 synonym: "Absent or hypoplastic thumbs" EXACT []
 synonym: "Absent/hypoplastic thumb" EXACT []
 synonym: "Absent/hypoplastic thumbs" EXACT []
@@ -54606,13 +54709,6 @@ created_by: doelkens
 creation_date: 2009-01-29T01:49:57Z
 
 [Term]
-id: HP:0009605
-name: Pre- and postaxial polydactyly
-is_a: HP:0010442 ! Polydactyly
-created_by: doelkens
-creation_date: 2009-01-29T02:18:19Z
-
-[Term]
 id: HP:0009606
 name: duplicated distal phalanx of the thumb
 alt_id: HP:0004084
@@ -54643,8 +54739,8 @@ creation_date: 2009-01-29T03:32:28Z
 [Term]
 id: HP:0009609
 name: Partial/complete duplication of the 1st metacarpal
-def: "Partail or complete duplication of the 1st metacarpal (depending on severity). In contrast to the metacarpals 2-5, the first metacarpal is embryologically of phalangeal origin. This term applies if the first metacarpal is completely or partially duplicated. Depending on the severity, the appearance on x-ray can vary from a notched metacarpal (the duplicated bone is almost completely fused with the metacarpal), a partially fused appearance of the two bones (in most cases the fused bone resembles a Y-shape), or two separate metacarpal bones appearing side to side." [HPO:curators]
-is_a: HP:0009942 ! Partial/complete duplication of phalanges of the thumb
+def: "Partail or complete duplication of the `first metacarpal bone` (FMA:23899)." [HPO:probinson]
+comment: In contrast to the metacarpals 2-5, the first metacarpal is embryologically of phalangeal origin. This term applies if the first metacarpal is completely or partially duplicated. Depending on the severity, the appearance on x-ray can vary from a notched metacarpal (the duplicated bone is almost completely fused with the metacarpal), a partially fused appearance of the two bones (in most cases the fused bone resembles a Y-shape), or two separate metacarpal bones appearing side to side.
 is_a: HP:0010006 ! Partial/complete duplication of the proximal phalanges of the hand
 is_a: HP:0010009 ! Abnormality of the 1st metacarpal
 created_by: doelkens
@@ -54699,7 +54795,8 @@ creation_date: 2009-01-29T04:01:27Z
 [Term]
 id: HP:0009615
 name: duplicated 1st metacarpal
-def: "In contrast to the metacarpals 2-5, the first metacarpal is embryologically of phalangeal origin, equivalent to the proximal phalanges of the other digits. This term applies if the first metacarpal is completely duplicated. On x-ray two separate metacarpal bones appear side to side. This term applies if the first metacarpal is completely duplicated." [HPO:curators]
+def: "Complete duplication of the `first metacarpal bone` (FMA:23899)." [HPO:probinson]
+comment: In contrast to the metacarpals 2-5, the first metacarpal is embryologically of phalangeal origin, equivalent to the proximal phalanges of the other digits. This term applies if the first metacarpal is completely duplicated. On x-ray two separate metacarpal bones appear side to side. This term applies if the first metacarpal is completely duplicated.
 synonym: "complete duplication of the first metacarpal" EXACT []
 is_a: HP:0009609 ! Partial/complete duplication of the 1st metacarpal
 is_a: HP:0009943 ! Complete duplication of the phalanges of the thumb
@@ -54709,8 +54806,9 @@ creation_date: 2009-01-29T04:06:17Z
 
 [Term]
 id: HP:0009616
-name: bifid 1st metacarpal
-def: "In contrast to the metacarpals 2-5, the first metacarpal is embryologically of phalangeal origin (equivalent to the proximal phalanges of the other digits). This term applies if the first metacarpal is partially duplicated. Depending on the severity the appearance on x-ray can vary from a notched metacarpal (the duplicated bone is almost completely fused with the metacarpal) to a partially fused appearance of the two bones. In most cases the fused bone resembles a Y-shape." [HPO:curators]
+name: Bifid first metacarpal
+def: "Partial duplication of the `first metacarpal bone` (FMA:23899)." [HPO:probinson]
+comment: In contrast to the metacarpals 2-5, the first metacarpal is embryologically of phalangeal origin (equivalent to the proximal phalanges of the other digits). This term applies if the first metacarpal is partially duplicated. Depending on the severity the appearance on x-ray can vary from a notched metacarpal (the duplicated bone is almost completely fused with the metacarpal) to a partially fused appearance of the two bones. In most cases the fused bone resembles a Y-shape.
 synonym: "partial duplication of the first metacarpal" EXACT []
 is_a: HP:0009609 ! Partial/complete duplication of the 1st metacarpal
 is_a: HP:0009944 ! Partial duplication of the phalanges of the thumb
@@ -54771,10 +54869,11 @@ creation_date: 2009-01-29T04:40:23Z
 
 [Term]
 id: HP:0009623
-name: Proximally placed thumb
+name: Proximally placement of thumb
 alt_id: HP:0001170
 alt_id: HP:0005668
-def: "`Proximal mislocalization` (PATO:0002179) of the `thumb` (FMA:24938)." [HPO:probinson]
+def: "`Proximal mislocalization` (PATO:0002179) of the `thumb` (FMA:24938)." [HPO:probinson, pmid:19125433]
+comment: Thumb placement index greater than 0.55; or, the base of the thumb appears closer to the wrist than is typical. The technique for the thumb placement index is described in detail [Malina et al., 1973; Hall et al., 2007]. Briefly, the thumb placement index is the distance from the proximal crease of the index finger to the angle of the first interdigital space divided by the distance from the proximal crease of the index finger to the wrist flexion crease at the base of the thumb. This term should not be used with Preaxial polydactyly.
 synonym: "Low implantation of the thumb" EXACT []
 synonym: "Proximally placed halluces" EXACT []
 synonym: "Proximally placed thumbs" EXACT []
@@ -54823,8 +54922,8 @@ id: HP:0009630
 name: Broad proximal phalanx of the thumb
 def: "Increased width of the proximal phalanx of the thumb. In contrast to the proximal phalanges of the digits 2-5, the proximal phalanx of the thumb is embryologically equivalent to the middle phalanges of the other digits, whereas the first metacarpal is embryologically of phalangeal origin and as such equivalent to the proximal phalanges of the other digits." [HPO:curators]
 is_a: HP:0009618 ! Abnormality of the proximal phalanx of the thumb
-is_a: HP:0009651 ! Broad phalanges of the thumb
 is_a: HP:0009844 ! Broad middle phalanges of the hand
+is_a: HP:0011304 ! Broad thumb
 created_by: doelkens
 creation_date: 2009-01-29T05:09:41Z
 
@@ -54899,7 +54998,7 @@ alt_id: HP:0004077
 def: "Absence of the proximal phalanx of the thumb. In contrast to the proximal phalanges of the digits 2-5, the proximal phalanx of the thumb is embryologically equivalent to the middle phalanges of the other digits, whereas the first metacarpal is embryologically of phalangeal origin and as such equivalent to the proximal phalanges of the other digits." [HPO:curators]
 synonym: "Absent ossification/absent proximal thumb phalanx" EXACT []
 is_a: HP:0009629 ! Aplasia/Hypoplasia of the proximal phalanx of the thumb
-is_a: HP:0009659 ! Aplasia of the phalanges of the thumb
+is_a: HP:0009659 ! Partial absence of thumb
 is_a: HP:0010239 ! Aplasia of the middle phalanges of the hand
 created_by: doelkens
 creation_date: 2009-01-29T05:11:02Z
@@ -54945,8 +55044,8 @@ def: "Increased width of the distal phalanx of the thumb." [HPO:curators]
 synonym: "Broad terminal thumb phalanx" EXACT []
 synonym: "Wide distal phalanx of thumb" EXACT []
 is_a: HP:0009617 ! Abnormality of the distal phalanx of the thumb
-is_a: HP:0009651 ! Broad phalanges of the thumb
 is_a: HP:0009836 ! Broad distal phalanges of the hand
+is_a: HP:0011304 ! Broad thumb
 created_by: doelkens
 creation_date: 2009-01-29T05:19:33Z
 
@@ -55021,7 +55120,7 @@ alt_id: HP:0004082
 def: "Absence of the distal/terminal phalanx of the thumb." [HPO:curators]
 synonym: "Absent ossification/absent terminal thumb phalanx" EXACT []
 is_a: HP:0009641 ! Aplasia/Hypoplasia of the distal phalanx of the thumb
-is_a: HP:0009659 ! Aplasia of the phalanges of the thumb
+is_a: HP:0009659 ! Partial absence of thumb
 is_a: HP:0009881 ! Aplasia of the distal phalanges of the hand
 created_by: doelkens
 creation_date: 2009-01-29T05:22:06Z
@@ -55039,24 +55138,9 @@ synonym: "Small terminal thumb phalanx" EXACT []
 xref: UMLS:C1862313 "Short thumb terminal phalanx"
 is_a: HP:0009641 ! Aplasia/Hypoplasia of the distal phalanx of the thumb
 is_a: HP:0009660 ! Hypoplastic/small phalanges of the thumb
-is_a: HP:0009882 ! Hypoplasia of the distal phalanges of the hand
+is_a: HP:0009882 ! Short distal phalanx of finger
 created_by: doelkens
 creation_date: 2009-01-29T05:22:06Z
-
-[Term]
-id: HP:0009651
-name: Broad phalanges of the thumb
-alt_id: HP:0001173
-alt_id: HP:0004073
-synonym: "Broad thumb" EXACT []
-synonym: "Broad thumbs" EXACT []
-synonym: "Wide/broad thumb" EXACT []
-synonym: "Wide/broad thumb phalanges" EXACT []
-xref: UMLS:C0426891 "Broad thumb"
-is_a: HP:0009602 ! Abnormality of the phalanges of the thumb
-is_a: HP:0009768 ! Broad phalanges of the hand
-created_by: doelkens
-creation_date: 2009-01-29T05:29:26Z
 
 [Term]
 id: HP:0009652
@@ -55125,11 +55209,12 @@ creation_date: 2009-01-29T05:29:26Z
 
 [Term]
 id: HP:0009659
-name: Aplasia of the phalanges of the thumb
+name: Partial absence of thumb
 alt_id: HP:0004065
-synonym: "Absent ossification of thumb phalanges" EXACT []
+def: "The absence of a phalangeal segment of a thumb." [pmid:probinson]
+synonym: "Aplasia of the phalanges of the thumb" RELATED []
+is_a: HP:0009601 ! Aplasia/Hypoplasia of the thumb
 is_a: HP:0009658 ! Aplasia/Hypoplasia of the phalanges of the thumb
-is_a: HP:0009777 ! Aplasia of the thumb
 created_by: doelkens
 creation_date: 2009-01-29T05:35:50Z
 
@@ -56163,7 +56248,7 @@ def: "Increased width of the phalanges of the hand." [HPO:curators]
 synonym: "Broad phalanges" EXACT []
 synonym: "Widening of phalanges of the hand" EXACT []
 xref: UMLS:C1842230 "Broad phalanges"
-is_a: HP:0001500 ! Broad fingers
+is_a: HP:0001500 ! Broad finger
 is_a: HP:0005918 ! Abnormality of the phalanges of the hand
 created_by: doelkens
 creation_date: 2009-02-02T11:38:04Z
@@ -56237,10 +56322,11 @@ creation_date: 2009-02-02T11:38:04Z
 
 [Term]
 id: HP:0009775
-name: Amniotic bands
+name: Amniotic constriction ring
 alt_id: HP:0001078
 def: "Annular constrictions around the digits, limbs, or trunk, occurring congenitally (sometimes causing intrauterine autoamputation) and also associated with a wide variety of disorders. Constrictive amniotic bands are the result of primary amniotic rupture, which can lead to entanglement of fetal tissue (especially limbs) in fibrous amniotic strands." [HPO:probinson]
 comment: Pseudoainhum is a rare condition of unknown etiology that produces digital constricting rings, most commonly on the small fingers.
+synonym: "Amniotic bands" EXACT []
 synonym: "Amniotic constriction band" RELATED []
 synonym: "Pseudoainhum" EXACT []
 xref: UMLS:C1527388 "Amniotic Bands"
@@ -56251,24 +56337,24 @@ creation_date: 2009-02-02T05:36:41Z
 [Term]
 id: HP:0009776
 name: Adactyly
-def: "The absence of all phalanges of all digits of a limb and the associated soft tissues." [pmid:19125433]
+def: "The absence of all phalanges of all the digits of a limb and the associated soft tissues." [pmid:19125433]
 comment: This descriptor does not require absence of the metacarpal or metatarsal bones. A qualifying phrase is added to specify which limb has the attribute of adactyly.
 synonym: "Aphalangy" EXACT []
 xref: UMLS:C0238591 "Adactyly"
 is_a: HP:0009380 ! Aplasia of the fingers
-is_a: HP:0010760 ! Aplasia of the toes
+is_a: HP:0010760 ! Absent toe
 created_by: doelkens
 creation_date: 2009-02-02T05:44:39Z
 
 [Term]
 id: HP:0009777
-name: Aplasia of the thumb
+name: Absent thumb
 alt_id: HP:0001185
 alt_id: HP:0002802
 alt_id: HP:0009627
-def: "Absent thumb." [HPO:curators]
-synonym: "Absent thumb" EXACT []
+def: "Absent  `thumb`(FMA:24938), i.e., the absence of both phalanges of a thumb and the associated soft tissues." [HPO:probinson, pmid:19125433]
 synonym: "Absent thumbs" EXACT []
+synonym: "Aplasia of the thumb" EXACT []
 synonym: "Thumb aplasia" EXACT []
 xref: UMLS:C0241391 "Absent thumb"
 is_a: HP:0009380 ! Aplasia of the fingers
@@ -57106,7 +57192,7 @@ creation_date: 2009-04-24T04:29:30Z
 
 [Term]
 id: HP:0009882
-name: Hypoplasia of the distal phalanges of the hand
+name: Short distal phalanx of finger
 alt_id: HP:0001198
 alt_id: HP:0001202
 alt_id: HP:0001229
@@ -57114,17 +57200,18 @@ alt_id: HP:0006075
 alt_id: HP:0006132
 alt_id: HP:0006223
 alt_id: HP:0010279
+def: "Short distance from the end of the finger to the most distal interphalangeal crease or the distal interphalangeal joint flexion point." [pmid:19125433]
+comment: This term differs from Partial absence of the finger because in that term, the phalanx must be missing, whereas in this term it may be small, but present. Distal phalangeal lengths can be assessed subjectively by comparing that digit segment to the rest of the digit, to other normal digits in that patient, or to typical patients of that age or build. Regarding the subjective definition, for individuals who do not have flexion creases, one may determine this by flexing the DIP joint and estimating the length of the terminal segment of the digit. Alternatively, one may be able to palpate the joint.
 synonym: "Brachytelophalangy" EXACT []
 synonym: "Distal phalangeal hypoplasia" EXACT []
 synonym: "Hypoplasia of the distal phalanges" EXACT []
+synonym: "Hypoplasia of the distal phalanges of the hand" EXACT []
 synonym: "Hypoplasic terminal phalanges" EXACT []
 synonym: "Hypoplastic distal phalanges" EXACT []
 synonym: "Hypoplastic terminal phalanges" EXACT []
-synonym: "Narrowed distal phalanges" EXACT []
 synonym: "Short distal phalanges" EXACT []
 synonym: "Terminal phalangeal hypoplasia of hand" EXACT []
 synonym: "Variable shortening of terminal phalanges" EXACT []
-synonym: "Very short distal phalanges" EXACT []
 xref: UMLS:C1837681 "Hypoplastic terminal phalanges"
 is_a: HP:0009381 ! Hypoplastic/small fingers
 is_a: HP:0009803 ! Hypoplastic/small phalanges of the hand
@@ -58468,9 +58555,9 @@ id: HP:0010027
 name: Broad 1st metacarpal
 def: "Increased width of the 1st metacarapal. In contrast to the proximal phalanges of the digits 2-5, the proximal phalanx of the thumb is embryologically equivalent to the middle phalanges of the other digits, whereas the first metacarpal is embryologically of phalangeal origin and as such equivalent to the proximal phalanges of the other digits." [HPO:curators]
 is_a: HP:0001230 ! Broad metacarpals
-is_a: HP:0009651 ! Broad phalanges of the thumb
 is_a: HP:0009852 ! Broad proximal phalanges of the hand
 is_a: HP:0010009 ! Abnormality of the 1st metacarpal
+is_a: HP:0011304 ! Broad thumb
 created_by: doelkens
 creation_date: 2009-05-27T04:24:30Z
 
@@ -58535,7 +58622,7 @@ synonym: "Short first metacarpals" EXACT []
 xref: UMLS:C1849311 "Short first metacarpals"
 is_a: HP:0009660 ! Hypoplastic/small phalanges of the thumb
 is_a: HP:0010026 ! Aplasia/Hypoplasia of the 1st metacarpal
-is_a: HP:0010049 ! Hypoplastic/short metacarpal bones
+is_a: HP:0010049 ! Short metacarpal
 is_a: HP:0010241 ! Hypoplasia of the proximal phalanges of the hand
 created_by: doelkens
 creation_date: 2009-05-27T04:24:50Z
@@ -58547,7 +58634,7 @@ alt_id: HP:0006027
 def: "In contrast to the proximal phalanges of the digits 2-5, the proximal phalanx of the thumb is embryologically equivalent to the middle phalanges of the other digits, whereas the first metacarpal is embryologically of phalangeal origin and as such equivalent to the proximal phalanges of the other digits." [HPO:curators]
 synonym: "Absent first metacarpal" EXACT []
 xref: UMLS:C1838610 "Absent first metacarpal"
-is_a: HP:0009659 ! Aplasia of the phalanges of the thumb
+is_a: HP:0009659 ! Partial absence of thumb
 is_a: HP:0010026 ! Aplasia/Hypoplasia of the 1st metacarpal
 is_a: HP:0010048 ! Aplasia of metacarpal bones
 is_a: HP:0010242 ! Aplasia of the proximal phalanges of the hand
@@ -58575,10 +58662,11 @@ creation_date: 2009-05-27T04:35:04Z
 id: HP:0010038
 name: Hypoplastic/short 2nd metacarpal
 alt_id: HP:0006231
+def: "Short `second metacarpal bone`(FMA:23900)." [HPO:probinson]
 synonym: "Rudimentary 2nd metacarpal" EXACT []
 xref: UMLS:C1969397 "Rudimentary 2nd metacarpal"
 is_a: HP:0010036 ! Aplasia/Hypoplasia of the 2nd metacarpal
-is_a: HP:0010049 ! Hypoplastic/short metacarpal bones
+is_a: HP:0010049 ! Short metacarpal
 created_by: doelkens
 creation_date: 2009-05-27T04:35:04Z
 
@@ -58603,10 +58691,11 @@ creation_date: 2009-05-27T04:36:08Z
 id: HP:0010041
 name: Hypoplastic/short 3rd metacarpal
 alt_id: HP:0006074
+def: "Short `third metacarpal bone`(FMA:23901)." [HPO:probinson]
 synonym: "Short 3rd metacarpals" EXACT []
 xref: UMLS:C1850631 "Short 3rd metacarpals"
 is_a: HP:0010039 ! Aplasia/Hypoplasia of the 3rd metacarpal
-is_a: HP:0010049 ! Hypoplastic/short metacarpal bones
+is_a: HP:0010049 ! Short metacarpal
 created_by: doelkens
 creation_date: 2009-05-27T04:36:08Z
 
@@ -58631,6 +58720,7 @@ creation_date: 2009-05-27T04:37:00Z
 id: HP:0010044
 name: Hypoplastic/short 4th metacarpal
 alt_id: HP:0005094
+def: "Short `fourth metacarpal bone` (FMA:23902)." [HPO:probinson]
 synonym: "short 4th metacarpal" EXACT []
 synonym: "Short 4th metacarpals" EXACT []
 synonym: "Short fourth metacarpal" EXACT []
@@ -58638,7 +58728,7 @@ synonym: "Short fourth metacarpals" EXACT []
 synonym: "Short metacarpals, esp 4th" EXACT []
 xref: UMLS:C1862312 "Short 4th metacarpal"
 is_a: HP:0010042 ! Aplasia/Hypoplasia of the 4th metacarpal
-is_a: HP:0010049 ! Hypoplastic/short metacarpal bones
+is_a: HP:0010049 ! Short metacarpal
 created_by: doelkens
 creation_date: 2009-05-27T04:37:00Z
 
@@ -58667,12 +58757,13 @@ id: HP:0010047
 name: Hypoplastic/short 5th metacarpal
 alt_id: HP:0005737
 alt_id: HP:0006222
+def: "Short `fifth metacarpal bone`(FMA:23903)." [HPO:probinson]
 synonym: "Fifth metacarpal hypoplasia" EXACT []
 synonym: "Short 5th metacarpal" EXACT []
 synonym: "Short fifth metacarpal" EXACT []
 xref: UMLS:C1846953 "Short fifth metacarpal"
 is_a: HP:0010045 ! Aplasia/Hypoplasia of the 5th metacarpal
-is_a: HP:0010049 ! Hypoplastic/short metacarpal bones
+is_a: HP:0010049 ! Short metacarpal
 created_by: doelkens
 creation_date: 2009-05-27T04:37:44Z
 
@@ -58688,16 +58779,21 @@ creation_date: 2009-05-27T04:40:58Z
 
 [Term]
 id: HP:0010049
-name: Hypoplastic/short metacarpal bones
+name: Short metacarpal
 alt_id: HP:0001164
 alt_id: HP:0005695
+alt_id: HP:0006047
 alt_id: HP:0006183
+alt_id: HP:0006186
+def: "Diminished length of one or more metacarpal bones in relation to the others of the same hand or to the contralateral metacarpal." [pmid:19125433]
+comment: Short metacarpals can involve any of the metacarpal bones, and the affected ray should be specified. The assessment of isolated short metacarpal can be made by viewing the dorsum of the hand when clenched. Note that if metacarpals F2-5 are affected, the correct term is Short palm.
 synonym: "Hypoplastic metacarpal" EXACT []
 synonym: "Metacarpal hypoplasia" EXACT []
-synonym: "Short metacarpal" EXACT []
+synonym: "Mild shortening of metacarpals" EXACT []
 synonym: "Short metacarpals" EXACT []
 synonym: "Shortened metacarpals" EXACT []
 xref: UMLS:C1837084 "Short metacarpals"
+xref: UMLS:C1857633 "Mild shortened metacarpals"
 is_a: HP:0005914 ! Aplasia/Hypoplasia involving the metacarpal bones
 created_by: doelkens
 creation_date: 2009-05-27T04:40:58Z
@@ -58729,8 +58825,9 @@ creation_date: 2009-05-29T11:49:11Z
 
 [Term]
 id: HP:0010054
-name: Abnormality of the 1st metatarsal
-def: "In contrast to the metatarsals 2-5, the first metatarsal is embryologically of phalangeal origin and as such equivalent to the proximal phalanges of the digits 2-5, whereas the proximal phalanx of the big toe is equivalent to the middle phalanges of the other digits. This term applies to abnormalities of the first metatarsal." [HPO:curators]
+name: Abnormality of the first metatarsal
+def: "An anomaly of the `first metatarsal bone`(FMA:24502)." [HPO:probinson]
+comment: In contrast to the metatarsals 2-5, the first metatarsal is embryologically of phalangeal origin and as such equivalent to the proximal phalanges of the digits 2-5, whereas the proximal phalanx of the big toe is equivalent to the middle phalanges of the other digits. This term applies to abnormalities of the first metatarsal.
 is_a: HP:0001832 ! Abnormality of the metatarsal bones
 is_a: HP:0010057 ! Abnormality of the phalanges of the hallux
 is_a: HP:0010184 ! Abnormality of the proximal phalanges of the toes
@@ -58742,11 +58839,13 @@ id: HP:0010055
 name: Broad hallux
 alt_id: HP:0001834
 alt_id: HP:0003094
+def: "Visible increase in width of the hallux without an increase in the dorso-ventral dimension." [pmid:19125433]
+comment: Note that girth may be increased in a broad hallux, but this must be distinguished from Macrodactyly because there the length is also increased. This assessment may be difficult when the hallux is short.
 synonym: "Abnormally broad great toes" EXACT []
 synonym: "Broad great toe" EXACT []
 synonym: "Broad great toes" EXACT []
 xref: UMLS:C1855911 "Broad hallux"
-is_a: HP:0001837 ! Broad toes
+is_a: HP:0001837 ! Broad toe
 is_a: HP:0001844 ! Abnormality of the hallux
 created_by: doelkens
 creation_date: 2009-05-29T11:56:24Z
@@ -58846,7 +58945,7 @@ alt_id: HP:0005851
 synonym: "Duplicated hallux" EXACT []
 synonym: "Duplication of great toes" EXACT []
 synonym: "Hallucal duplication" EXACT []
-is_a: HP:0001841 ! Preaxial polydactyly (feet)
+is_a: HP:0001841 ! Preaxial polydactyly of foot
 is_a: HP:0010057 ! Abnormality of the phalanges of the hallux
 is_a: HP:0010181 ! Partial/complete duplication of the phalanges of the toes
 created_by: doelkens
@@ -58855,7 +58954,7 @@ creation_date: 2009-05-29T12:10:46Z
 [Term]
 id: HP:0010067
 name: Aplasia/Hypoplasia of the 1st metatarsal
-is_a: HP:0010054 ! Abnormality of the 1st metatarsal
+is_a: HP:0010054 ! Abnormality of the first metatarsal
 is_a: HP:0010058 ! Aplasia/Hypoplasia of the phalanges of the hallux
 is_a: HP:0010203 ! Aplasia/Hypoplasia of the proximal phalanges of the toes
 created_by: doelkens
@@ -58871,7 +58970,7 @@ synonym: "broad first metatarsal" EXACT []
 synonym: "Enlarged first metatarsal" EXACT []
 xref: UMLS:C1855899 "Broad first metatarsal"
 is_a: HP:0001783 ! Broad metatarsals
-is_a: HP:0010054 ! Abnormality of the 1st metatarsal
+is_a: HP:0010054 ! Abnormality of the first metatarsal
 is_a: HP:0010059 ! Broad phalanges of the hallux
 is_a: HP:0010204 ! Broad proximal phalanges of the toes
 created_by: doelkens
@@ -58880,7 +58979,7 @@ creation_date: 2009-05-29T12:13:57Z
 [Term]
 id: HP:0010069
 name: Bullet-shaped 1st metatarsal
-is_a: HP:0010054 ! Abnormality of the 1st metatarsal
+is_a: HP:0010054 ! Abnormality of the first metatarsal
 is_a: HP:0010060 ! Bullet-shaped phalanges of the hallux
 created_by: doelkens
 creation_date: 2009-05-29T12:13:57Z
@@ -58888,7 +58987,7 @@ creation_date: 2009-05-29T12:13:57Z
 [Term]
 id: HP:0010070
 name: Curved 1st metatarsal
-is_a: HP:0010054 ! Abnormality of the 1st metatarsal
+is_a: HP:0010054 ! Abnormality of the first metatarsal
 is_a: HP:0010061 ! Curved phalanges of the hallux
 is_a: HP:0010206 ! Curved proximal phalanges of the toes
 created_by: doelkens
@@ -58898,7 +58997,7 @@ creation_date: 2009-05-29T12:13:57Z
 id: HP:0010071
 name: Osteolytic defects of the 1st metatarsal
 is_a: HP:0001473 ! Osteolysis involving metatarsal bones
-is_a: HP:0010054 ! Abnormality of the 1st metatarsal
+is_a: HP:0010054 ! Abnormality of the first metatarsal
 is_a: HP:0010062 ! Osteolytic defects of the phalanges of the hallux
 is_a: HP:0010207 ! Osteolytic defects of the proximal phalanges of the toes
 created_by: doelkens
@@ -58907,7 +59006,7 @@ creation_date: 2009-05-29T12:13:57Z
 [Term]
 id: HP:0010072
 name: Patchy sclerosis of the 1st metatarsal
-is_a: HP:0010054 ! Abnormality of the 1st metatarsal
+is_a: HP:0010054 ! Abnormality of the first metatarsal
 is_a: HP:0010063 ! Patchy sclerosis of the phalanges of the hallux
 is_a: HP:0010208 ! Patchy sclerosis of the proximal phalanges of the toes
 is_a: HP:0100945 ! Sclerosis of the 1st metatarsal
@@ -58917,7 +59016,7 @@ creation_date: 2009-05-29T12:13:57Z
 [Term]
 id: HP:0010073
 name: Synostosis involving the 1st metatarsal
-is_a: HP:0010054 ! Abnormality of the 1st metatarsal
+is_a: HP:0010054 ! Abnormality of the first metatarsal
 is_a: HP:0010064 ! Symphalangism affecting the phalanges of the hallux
 is_a: HP:0010209 ! Symphalangism affecting the proximal phalanges of the toes
 created_by: doelkens
@@ -58926,7 +59025,7 @@ creation_date: 2009-05-29T12:13:57Z
 [Term]
 id: HP:0010074
 name: Triangular shaped 1st metatarsal
-is_a: HP:0010054 ! Abnormality of the 1st metatarsal
+is_a: HP:0010054 ! Abnormality of the first metatarsal
 is_a: HP:0010065 ! Triangular shaped phalanges of the hallux
 is_a: HP:0010210 ! Triangular shaped proximal phalanges of the toes
 created_by: doelkens
@@ -58935,7 +59034,7 @@ creation_date: 2009-05-29T12:13:57Z
 [Term]
 id: HP:0010075
 name: Partial/complete duplication of the1st metatarsal
-is_a: HP:0010054 ! Abnormality of the 1st metatarsal
+is_a: HP:0010054 ! Abnormality of the first metatarsal
 is_a: HP:0010066 ! Partial/complete duplication of the phalanges of the hallux
 is_a: HP:0010211 ! Partial/complete duplication of the proximal phalanges of the toes
 created_by: doelkens
@@ -59198,25 +59297,26 @@ creation_date: 2009-05-29T12:41:37Z
 id: HP:0010104
 name: Aplasia of the 1st metatarsal
 alt_id: HP:0006124
+def: "A developmental defect characterized by the absence of the `first metatarsal bone` (FMAID:24502)." [HPO:probinson]
 synonym: "Absent first metatarsal" EXACT []
 xref: UMLS:C1863382 "Absent first metatarsal"
 is_a: HP:0010067 ! Aplasia/Hypoplasia of the 1st metatarsal
-is_a: HP:0010110 ! Aplasia of the phalanges of the hallux
 is_a: HP:0010744 ! Aplasia of the metatarsal bones
 created_by: doelkens
 creation_date: 2009-05-29T12:42:09Z
 
 [Term]
 id: HP:0010105
-name: Hypoplastic/short 1st metatarsal
+name: Short first metatarsal
 alt_id: HP:0004680
+def: "Short `first metatarsal bone`(FMA:24502)." [HPO:probinson]
 synonym: "First metatarsal hypoplasia" EXACT []
 synonym: "First metatarsals hypoplastic" EXACT []
 synonym: "short first metatarsal" EXACT []
 xref: UMLS:C1866003 "First metatarsal hypoplasia"
 is_a: HP:0010067 ! Aplasia/Hypoplasia of the 1st metatarsal
 is_a: HP:0010111 ! Hypoplastic/small phalanges of the hallux
-is_a: HP:0010743 ! Hypoplasia of the metatarsal bones
+is_a: HP:0010743 ! Short metatarsal bone
 created_by: doelkens
 creation_date: 2009-05-29T12:42:09Z
 
@@ -59242,16 +59342,6 @@ created_by: doelkens
 creation_date: 2009-05-29T12:43:40Z
 
 [Term]
-id: HP:0010108
-name: Aplasia of the hallux
-alt_id: HP:0008084
-synonym: "Agenesis of the halluces" EXACT []
-is_a: HP:0008362 ! Aplasia/Hypoplasia of the hallux
-is_a: HP:0010760 ! Aplasia of the toes
-created_by: doelkens
-creation_date: 2009-05-29T12:46:00Z
-
-[Term]
 id: HP:0010109
 name: Hypoplastic/small hallux
 alt_id: HP:0001843
@@ -59267,8 +59357,8 @@ creation_date: 2009-05-29T12:46:14Z
 [Term]
 id: HP:0010110
 name: Aplasia of the phalanges of the hallux
+is_a: HP:0008362 ! Aplasia/Hypoplasia of the hallux
 is_a: HP:0010058 ! Aplasia/Hypoplasia of the phalanges of the hallux
-is_a: HP:0010108 ! Aplasia of the hallux
 is_a: HP:0010745 ! Aplasia fo the phalanges of the toes
 created_by: doelkens
 creation_date: 2009-05-29T12:49:19Z
@@ -59286,7 +59376,7 @@ creation_date: 2009-05-29T12:49:19Z
 id: HP:0010112
 name: Central polydactyly (feet)
 is_a: HP:0001829 ! Polydactyly (feet)
-is_a: HP:0100260 ! Central polydactyly
+is_a: HP:0100260 ! Mesoaxial polydactyly
 created_by: doelkens
 creation_date: 2009-05-29T01:11:06Z
 
@@ -59597,7 +59687,7 @@ creation_date: 2009-05-29T01:24:17Z
 id: HP:0010151
 name: Cone-shaped epiphysis of the 1st metatarsal
 def: "A conical (cone-shaped) appearance of the epiphysis of the first metatarsal of the foot." [HPO:curators]
-is_a: HP:0010054 ! Abnormality of the 1st metatarsal
+is_a: HP:0010054 ! Abnormality of the first metatarsal
 is_a: HP:0010125 ! Abnormality of the epiphysis of the 1st metatarsal
 is_a: HP:0010630 ! Abnormality of the epiphyses of the metatarsals
 created_by: doelkens
@@ -60076,7 +60166,7 @@ id: HP:0010212
 name: Joint contractures of the hallux
 is_a: HP:0001836 ! Camptodactyly (feet)
 is_a: HP:0001844 ! Abnormality of the hallux
-is_a: HP:0200027 ! contractures of the toes
+is_a: HP:0200027 ! Contractures of the toes
 created_by: doelkens
 creation_date: 2009-06-02T01:39:18Z
 
@@ -60101,23 +60191,6 @@ name: Contractures of the metatarsophalangeal joint of the hallux
 is_a: HP:0010212 ! Joint contractures of the hallux
 created_by: doelkens
 creation_date: 2009-06-02T01:45:34Z
-
-[Term]
-id: HP:0010218
-name: Congenital vertical talus
-alt_id: HP:0001835
-alt_id: HP:0004693
-def: "This foot deformity is also known as rocker bottom feet (pes valgus), a rigid flatfoot deformity (as opposed to a flexible calcaneovalgus foot) caused by a malpositioned navicular bone at the neck of the talus; the ankle is in severe equinus and the forefoot in dorsiflexion, rocker bottom-like, accompanied by contraction of the talonavicular, deltoid and calcaneal cuboidal ligaments. The foot examination usually reveals a rigid foot with a \"reversed\" arch, a convex plantar surface, and a deep crease on the lateral dorsal side of the foot. The ankle joint is plantarflexed, while the midfoot and forefoot are extended upward. Lateral foot radiographs are helpful in confirming the diagnosis." [HPO:curators]
-synonym: "'rocker bottom' feet" EXACT []
-synonym: "'rocker-bottom' feet" EXACT []
-synonym: "congenital vertical talus, bilateral" NARROW []
-synonym: "Rocker bottom feet" EXACT []
-synonym: "Rocker-bottom feet" EXACT []
-synonym: "Rockerbottom feet" EXACT []
-xref: UMLS:C0431979 "Congenital vertical talus"
-is_a: HP:0001838 ! Vertical talus
-created_by: doelkens
-creation_date: 2009-06-04T04:48:32Z
 
 [Term]
 id: HP:0010219
@@ -61051,6 +61124,7 @@ creation_date: 2009-07-14T11:51:46Z
 [Term]
 id: HP:0010319
 name: Abnormality of the 2nd toe
+def: "An anomaly of the `second toe`(FMA:25048)." [HPO:probinson]
 is_a: HP:0001780 ! Abnormality of the toes
 created_by: doelkens
 creation_date: 2009-07-16T11:37:12Z
@@ -61058,6 +61132,7 @@ creation_date: 2009-07-16T11:37:12Z
 [Term]
 id: HP:0010320
 name: Abnormality of the 3rd toe
+def: "An anomaly of the `third toe`(FMA:25051)." [HPO:probinson]
 is_a: HP:0001780 ! Abnormality of the toes
 created_by: doelkens
 creation_date: 2009-07-16T11:37:12Z
@@ -61065,6 +61140,7 @@ creation_date: 2009-07-16T11:37:12Z
 [Term]
 id: HP:0010321
 name: Abnormality of the 4th toe
+def: "An anomaly of the `fourth toe` (FMA:25052)." [HPO:probinson]
 is_a: HP:0001780 ! Abnormality of the toes
 created_by: doelkens
 creation_date: 2009-07-16T11:37:12Z
@@ -61072,6 +61148,7 @@ creation_date: 2009-07-16T11:37:12Z
 [Term]
 id: HP:0010322
 name: Abnormality of the 5th toe
+def: "An anomaly of the `little toe`(FMA:25053)." [HPO:probinson]
 is_a: HP:0001780 ! Abnormality of the toes
 created_by: doelkens
 creation_date: 2009-07-16T11:37:12Z
@@ -61095,8 +61172,8 @@ creation_date: 2009-07-16T11:40:18Z
 [Term]
 id: HP:0010325
 name: Aplasia/Hypoplasia of the 2nd toe
-is_a: HP:0001991 ! Aplasia/Hypoplasia of the toes
 is_a: HP:0010319 ! Abnormality of the 2nd toe
+is_a: HP:0011306 ! Aplasia of the toes
 created_by: doelkens
 creation_date: 2009-07-16T11:40:18Z
 
@@ -61112,7 +61189,7 @@ id: HP:0010327
 name: Joint contractures of the 2nd toe
 is_a: HP:0001836 ! Camptodactyly (feet)
 is_a: HP:0010319 ! Abnormality of the 2nd toe
-is_a: HP:0200027 ! contractures of the toes
+is_a: HP:0200027 ! Contractures of the toes
 created_by: doelkens
 creation_date: 2009-07-16T11:40:18Z
 
@@ -61145,8 +61222,8 @@ id: HP:0010331
 name: Aplasia/Hypoplasia of the 3rd toe
 alt_id: HP:0008100
 synonym: "Absent/hypoplastic third toe" EXACT []
-is_a: HP:0001991 ! Aplasia/Hypoplasia of the toes
 is_a: HP:0010320 ! Abnormality of the 3rd toe
+is_a: HP:0011306 ! Aplasia of the toes
 created_by: doelkens
 creation_date: 2009-07-16T11:40:52Z
 
@@ -61162,7 +61239,7 @@ id: HP:0010333
 name: Joint contractures of the 3rd toe
 is_a: HP:0001836 ! Camptodactyly (feet)
 is_a: HP:0010320 ! Abnormality of the 3rd toe
-is_a: HP:0200027 ! contractures of the toes
+is_a: HP:0200027 ! Contractures of the toes
 created_by: doelkens
 creation_date: 2009-07-16T11:40:52Z
 
@@ -61193,8 +61270,8 @@ creation_date: 2009-07-16T11:41:21Z
 [Term]
 id: HP:0010337
 name: Aplasia/Hypoplasia of the 4th toe
-is_a: HP:0001991 ! Aplasia/Hypoplasia of the toes
 is_a: HP:0010321 ! Abnormality of the 4th toe
+is_a: HP:0011306 ! Aplasia of the toes
 created_by: doelkens
 creation_date: 2009-07-16T11:41:21Z
 
@@ -61210,7 +61287,7 @@ id: HP:0010339
 name: Joint contractures of the 4th toe
 is_a: HP:0001836 ! Camptodactyly (feet)
 is_a: HP:0010321 ! Abnormality of the 4th toe
-is_a: HP:0200027 ! contractures of the toes
+is_a: HP:0200027 ! Contractures of the toes
 created_by: doelkens
 creation_date: 2009-07-16T11:41:21Z
 
@@ -61241,8 +61318,8 @@ creation_date: 2009-07-16T11:41:49Z
 [Term]
 id: HP:0010343
 name: Aplasia/Hypoplasia of the 5th toe
-is_a: HP:0001991 ! Aplasia/Hypoplasia of the toes
 is_a: HP:0010322 ! Abnormality of the 5th toe
+is_a: HP:0011306 ! Aplasia of the toes
 created_by: doelkens
 creation_date: 2009-07-16T11:41:49Z
 
@@ -61258,7 +61335,7 @@ id: HP:0010345
 name: Joint contractures of the 5th toe
 is_a: HP:0001836 ! Camptodactyly (feet)
 is_a: HP:0010322 ! Abnormality of the 5th toe
-is_a: HP:0200027 ! contractures of the toes
+is_a: HP:0200027 ! Contractures of the toes
 created_by: doelkens
 creation_date: 2009-07-16T11:41:49Z
 
@@ -62060,10 +62137,12 @@ creation_date: 2009-07-29T01:34:47Z
 id: HP:0010442
 name: Polydactyly
 alt_id: HP:0006034
+alt_id: HP:0006046
+alt_id: HP:0006123
+alt_id: HP:0009605
 def: "A congenital anomaly characterized by the presence of supernumerary fingers or toes." [HPO:probinson]
-synonym: "Preaxial and/or postaxial polydactyly" EXACT []
 xref: UMLS:C2117329 "polydactyly"
-is_a: HP:0002813 ! Abnormality of the extremities
+is_a: HP:0011297 ! Abnormality of the digits
 created_by: doelkens
 creation_date: 2009-07-29T01:39:27Z
 
@@ -62416,7 +62495,7 @@ id: HP:0010483
 name: Amniotic constriction rings of arms
 def: "Amniotic constriction rings affecting the arms." [HPO:curators]
 is_a: HP:0002817 ! Abnormality of the upper limb
-is_a: HP:0009775 ! Amniotic bands
+is_a: HP:0009775 ! Amniotic constriction ring
 created_by: peter
 creation_date: 2009-09-16T09:15:05Z
 
@@ -62439,15 +62518,16 @@ creation_date: 2009-09-16T10:05:52Z
 [Term]
 id: HP:0010486
 name: Abnormality of the hypothenar eminence
-def: "An abnormality of the hypothenar eminence, i.e., of the muscles on the palm of the human hand that are below the little finger." [HPO:curators]
+def: "An abnormality of the `hypothenar eminence`(FMA:61523), i.e., of the muscles on the ulnar side of the palm of the hand (i.e., on the side of the little finger)." [HPO:probinson]
 is_a: HP:0001421 ! Abnormality of the musculature of the hand
 created_by: peter
 creation_date: 2009-09-16T10:38:43Z
 
 [Term]
 id: HP:0010487
-name: Hypoplasia of the hypothenar eminence
-def: "Underdevelopment of the hypothenar eminence." [HPO:curators]
+name: Small hypothenar eminence
+def: "Reduced muscle mass on the ulnar side of the palm, that is, reduction in size of the `hypothenar eminence`(FMA:61523)." [HPO:probinson, pmid:19125433]
+synonym: "Hypoplasia of the hypothenar eminence" EXACT []
 is_a: HP:0010486 ! Abnormality of the hypothenar eminence
 created_by: peter
 creation_date: 2009-09-16T10:40:18Z
@@ -62462,8 +62542,9 @@ creation_date: 2009-09-16T10:53:24Z
 
 [Term]
 id: HP:0010489
-name: Aplasia of the palmar creases
-def: "Absence of the palmar creases." [HPO:curators]
+name: Absence of the palmar creases
+def: "The absence of the major creases of the palm (distal transverse crease, proximal transverse crease, or thenar crease)." [HPO:probinson, pmid:19125433]
+synonym: "Aplasia of the palmar creases" EXACT []
 is_a: HP:0010488 ! Aplasia/Hypoplasia of the palmar creases
 created_by: peter
 creation_date: 2009-09-16T10:54:09Z
@@ -62471,17 +62552,18 @@ creation_date: 2009-09-16T10:54:09Z
 [Term]
 id: HP:0010490
 name: Abnormality of the palmar creases
-def: "An abnormality of the creases of the palm of the hand." [HPO:curators]
+def: "An abnormality of the creases of the `skin of palm of hand` (FMA:38301)." [HPO:probinson]
 is_a: HP:0001018 ! Abnormal palmar dermatoglyphics
 created_by: peter
 creation_date: 2009-09-16T10:54:52Z
 
 [Term]
 id: HP:0010491
-name: Amniotic constriction rings of digits
-def: "Annular constrictions around the digits resulting from amniotic strands." [HPO:curators]
-synonym: "Digital constriction ring" EXACT []
-is_a: HP:0009775 ! Amniotic bands
+name: Digital constriction ring
+def: "A narrow segment of significantly reduced circumference of a digit." [pmid:19125433]
+comment: The description should specify the hand and digit that is affected and the approximate location of the band relative to the phalanges. It may be described as partial, if it does not involve the entire circumference of the digit.
+synonym: "Amniotic constriction rings of digits" EXACT []
+is_a: HP:0009775 ! Amniotic constriction ring
 created_by: peter
 creation_date: 2009-09-16T11:08:16Z
 
@@ -62514,7 +62596,7 @@ id: HP:0010495
 name: Amniotic constriction rings of legs
 def: "Amniotic constriction rings affecting the legs." [HPO:probinson]
 is_a: HP:0002814 ! Abnormality of the lower limb
-is_a: HP:0009775 ! Amniotic bands
+is_a: HP:0009775 ! Amniotic constriction ring
 created_by: peter
 creation_date: 2009-09-17T11:07:10Z
 
@@ -62577,7 +62659,8 @@ creation_date: 2009-09-19T09:44:33Z
 [Term]
 id: HP:0010502
 name: Fibular bowing
-def: "A developmental defect with posteromedial fibular angulation." [HPO:curators]
+def: "A bending or abnormal curvature of the `fibula` (FMA:24479)." [HPO:probinson]
+comment: A developmental defect with posteromedial fibular angulation.
 is_a: HP:0002979 ! Bowing of the legs
 is_a: HP:0002991 ! Abnormality of the fibula
 created_by: peter
@@ -62611,10 +62694,10 @@ creation_date: 2009-09-19T09:47:11Z
 [Term]
 id: HP:0010506
 name: Abnormal plantar dermatoglyphics
-def: "An abnormality of dermatoglyphs on the toes and soles." [HPO:curators]
+def: "An abnormality of dermatoglyphs on the toes and soles, i.e., an abnormality of the patterns of ridges of the `skin of sole of foot` (FMA:37849)." [HPO:probinson]
 synonym: "Abnormal dermatoglyphics on feet" EXACT []
 is_a: HP:0007477 ! Abnormal dermatoglyphics
-is_a: HP:0100872 ! Abnormality of the soles
+is_a: HP:0100872 ! Abnormality of the plantar part of foot
 created_by: peter
 creation_date: 2009-09-19T09:47:44Z
 
@@ -62654,8 +62737,10 @@ creation_date: 2009-09-19T10:15:12Z
 
 [Term]
 id: HP:0010511
-name: Increased length of toes
-def: "The presence of abnormally long toes." [HPO:curators]
+name: Long toe
+def: "Digits that appear disproportionately long compared to the foot." [HPO:probinson, pmid:19125433]
+comment: This finding must be distinguished from digits that are thin but of normal length and that of a short mid and hind foot with normal digit lengths. The affected digits should be specified. If only a subset of the digits of a limb is lengthened, the affected digits should be specified.
+synonym: "Increased length of toes" EXACT []
 synonym: "Long toes" EXACT []
 is_a: HP:0001780 ! Abnormality of the toes
 created_by: peter
@@ -63050,7 +63135,8 @@ alt_id: HP:0001214
 alt_id: HP:0005637
 alt_id: HP:0006054
 alt_id: HP:0006220
-def: "Webbing or fusion of the fingers involving soft parts only." [HPO:curators]
+def: "A soft tissue continuity in the A/P axis between two fingers that extends distally to at least the level of the proximal interphalangeal joints, or a soft tissue continuity in the A/P axis between two fingers that lies significantly distal to the flexion crease that overlies the metacarpophalangeal joint of the adjacent fingers." [pmid:19125433]
+comment: We have set an arguably arbitrary threshold to distinguish the object form the subjective finding. While severe degrees of cutaneous syndactyly are clearly objective, more subtle degrees are subjective. We set this threshold to distinguish these two situations. The digits (or parts of) are joined together by tissue that is not normally present between the digits at that point in the P/D axis. A modifier of "complete" may be used if the cutaneous syndactyly extends to the distal end of the nail bed of the digits. The affected digits should be specified. Note that the unqualified term "syndactyly" is no longer allowed as it is unclear whether this refers to bony or cutaneous syndactyly.
 synonym: "Cutaneous syndactyly" EXACT []
 synonym: "Cutaneous syndactyly (hands)" EXACT []
 synonym: "Partial cutaneous syndactyly" EXACT []
@@ -63064,7 +63150,8 @@ creation_date: 2009-10-07T10:59:57Z
 [Term]
 id: HP:0010557
 name: Overlapping fingers
-def: "Overlapping of the fingers occuring as the result of a deviation of the fingers from their normal position." [HPO:curators]
+def: "A finger resting on the dorsal surface of an adjacent digit when the hand is at rest." [HPO:probinson, pmid:19125433]
+comment: Overlapping of the fingers occurring as the result of a deviation of the fingers from their normal position. Fingers that are laterally deviated, but do not rest on top of adjacent fingers should be coded as Clinodactyly.
 xref: UMLS:C1446712 "Overlapping fingers"
 is_a: HP:0004097 ! Deviated fingers
 created_by: sandra1
@@ -63483,27 +63570,14 @@ created_by: sandra1
 creation_date: 2009-10-28T01:23:05Z
 
 [Term]
-id: HP:0010611
-name: Abnormal feet morphology
-is_a: HP:0001760 ! Abnormality of the feet
-created_by: sandra1
-creation_date: 2009-10-28T01:24:27Z
-
-[Term]
 id: HP:0010612
 name: Plantar pits
+def: "The presence of multiple pits (small, pinpoint-large indentations on the surface of the skin) located on the `skin of sole of foot` (FMA:37849)." [HPO:probinson]
 xref: UMLS:C1852301 "Plantar pits"
-is_a: HP:0010613 ! Minor feet anomalies
 is_a: HP:0100276 ! Skin pits
+is_a: HP:0100872 ! Abnormality of the plantar part of foot
 created_by: sandra1
 creation_date: 2009-10-28T01:25:57Z
-
-[Term]
-id: HP:0010613
-name: Minor feet anomalies
-is_a: HP:0010611 ! Abnormal feet morphology
-created_by: sandra1
-creation_date: 2009-10-28T01:28:39Z
 
 [Term]
 id: HP:0010614
@@ -63574,11 +63648,11 @@ creation_date: 2009-11-02T07:53:02Z
 
 [Term]
 id: HP:0010621
-name: Cutaneous syndactyly of the toes
+name: Cutaneous syndactyly of toes
 alt_id: HP:0001990
 alt_id: HP:0004707
 alt_id: HP:0010555
-def: "Webbing or fusion of the toes involving soft parts only." [HPO:curators]
+def: "A soft tissue continuity in the anteroposterior axis between adjacent foot digits that involves at least half of the proximodistal length of one of the two involved digits; or, a soft tissue continuity in the A/P axis between two digits of the foot that does not meet the prior objective criteria." [HPO:probinson, pmid:19125433]
 synonym: "Cutaneous syndactyly (feet)" EXACT []
 synonym: "soft tissue syndactyly of toes" EXACT []
 synonym: "Syndactyly, cutaneous (feet)" EXACT []
@@ -63599,6 +63673,7 @@ id: HP:0010624
 name: Aplastic/hypoplastic toenails
 alt_id: HP:0008381
 alt_id: HP:0008389
+def: "Absence or underdevelopment of the `toenail`(FMA:54328)." [HPO:probinson]
 synonym: "Hypoplastic-absent toenails" EXACT []
 xref: UMLS:C1856749 "Hypoplastic-absent toenails"
 is_a: HP:0008386 ! Aplasia/Hypoplasia of the nails
@@ -64043,8 +64118,8 @@ creation_date: 2010-02-26T08:21:39Z
 
 [Term]
 id: HP:0010672
-name: Abnormality of the 3rd metatarsal bone
-def: "An abnormality of the `Third metatarsal bone` (FMA:24504)." [HPO:probinson]
+name: Abnormality of the third metatarsal bone
+def: "An abnormality of the `third metatarsal bone` (FMA:24504)." [HPO:probinson]
 is_a: HP:0001832 ! Abnormality of the metatarsal bones
 created_by: peter
 creation_date: 2010-02-26T08:22:51Z
@@ -64053,7 +64128,7 @@ creation_date: 2010-02-26T08:22:51Z
 id: HP:0010673
 name: Hypoplasia of the 3rd metatarsal bone
 def: "Underdevelopment of the `Third metatarsal bone` (FMA:24504)." [HPO:probinson]
-is_a: HP:0010672 ! Abnormality of the 3rd metatarsal bone
+is_a: HP:0010672 ! Abnormality of the third metatarsal bone
 created_by: peter
 creation_date: 2010-02-26T08:23:37Z
 
@@ -64190,9 +64265,10 @@ creation_date: 2010-03-05T11:13:28Z
 
 [Term]
 id: HP:0010689
-name: Mirror image dupliction of digits
-def: "A mirror-like duplication of the digits of the hands or feet leading to an appearance were radio/ulnar and/or fibular/tibial aspects of the hands and/or feet can not be destinguished anymore. Depending on severity this might also affect the bones of the forarm or lower leg in such a way that there might be two ulnae rather than one radius and ulna each. The same may be seen for the fibula and tibia." [HPO:sdoelken]
+name: Mirror image polydactyly
+def: "A hand or foot with more than five digits that has a recognizable A/P axis of symmetry. The axis can lie within a normally formed or partially duplicated digit resembling a middle finger, index finger, thumb, toe, or hallux. Alternatively, the axis can be in an interdigital space with a flanking pair of digits that resemble a middle finger, index finger, thumb, toe or hallux. The most lateral digits on each side of the hand typically resemble fifth fingers/toes." [HPO:sdoelken, pmid:19125433]
 comment: Transplantation of the ZPA (zone of polarised activity) to the anterior margin of a limb bud in the chick results in mirror image duplication of limb elements (Tabin, 1991). Similarly, mirror image duplication in the forelimb of the mouse has been observed with ectopic expression of Hox b-8 (Charit6 et al, 1994). Mirror hand anomaly in humans has been shown to be due to either aberrant positioning of the ZPA or altered inductive interactions of the Shh gene resulting in impairment of the mechanism responsible for the organization and differentiation of the limb bud, rather than a primary duplication event. In other words, the primary event results in failure of the radial ray to develop. The ulnar area will then induce the differentiation of two groups of ulnar rays. Timing of this insult could play a critical role in severity of this phenotypic feature. Syndromal mirror hand is probably due to agene mutation of the Shh gene (Hersh et al, 1995). Finally, the multiple hand deformity may be explained by true duplication of the ZPA.
+synonym: "Mirror image duplication of digits" EXACT []
 is_a: HP:0010442 ! Polydactyly
 created_by: doelkens
 creation_date: 2010-03-05T05:03:16Z
@@ -64202,7 +64278,7 @@ id: HP:0010690
 name: Mirror image dupliction of fingers
 def: "`Mirror image dupliction of digits` (HP:0010689) affecting the hands only." [HPO:sdoelken]
 is_a: HP:0001161 ! Polydactyly (hands)
-is_a: HP:0010689 ! Mirror image dupliction of digits
+is_a: HP:0010689 ! Mirror image polydactyly
 created_by: doelkens
 creation_date: 2010-03-05T05:05:05Z
 
@@ -64211,7 +64287,7 @@ id: HP:0010691
 name: Mirror image dupliction of toes
 def: "`Mirror image dupliction of digits` (HP:0010689) affecting the feet only." [HPO:sdoelken]
 is_a: HP:0001829 ! Polydactyly (feet)
-is_a: HP:0010689 ! Mirror image dupliction of digits
+is_a: HP:0010689 ! Mirror image polydactyly
 created_by: doelkens
 creation_date: 2010-03-05T05:05:05Z
 
@@ -64462,7 +64538,7 @@ creation_date: 2010-03-26T05:22:26Z
 [Term]
 id: HP:0010717
 name: Osseous syndactyly of the toes
-def: "Webbing or fusion of the toes, involving soft parts and including fusion of individual bones of the toes. Bony fusions are revered to as \"bony\" Syndactyly if the fusion occurs in a tibial-fibular axis. Fusions of bones of the toes in a proximo-distal axis are refered to as \"Symphalangism\"." [HPO:sdoelken]
+def: "Webbing or fusion of the toes, involving soft parts and including fusion of individual bones of the toes. Bony fusions are revered to as \"bony\" Syndactyly if the fusion occurs in a tibial-fibular axis. Fusions of bones of the toes in a proximo-distal axis are referred to as \"Symphalangism\"." [HPO:sdoelken]
 is_a: HP:0001770 ! Toe syndactyly
 created_by: sdoelken
 creation_date: 2010-03-26T05:31:50Z
@@ -64661,13 +64737,15 @@ creation_date: 2010-04-22T02:17:15Z
 
 [Term]
 id: HP:0010743
-name: Hypoplasia of the metatarsal bones
+name: Short metatarsal bone
 alt_id: HP:0001779
 alt_id: HP:0003092
 alt_id: HP:0004706
 alt_id: HP:0005754
+def: "Diminished length of a `metatarsal bone`(FMA:24492), with resultant proximal displacement of the associated toe." [HPO:probinson, pmid:19125433]
+comment: This is a subjective assessment and one generally compares the position of the MTP joint to that of the contralateral digit or the putatively shortened ray in proportion to the other rays. The affected digits should be specified.
+synonym: "Hypoplasia of the metatarsal bones" EXACT []
 synonym: "Hypoplastic metatarsals" EXACT []
-synonym: "mild shortening of metatarsals" EXACT []
 synonym: "Short metatarsal" EXACT []
 synonym: "Short metatarsals" EXACT []
 synonym: "Shortened metatarsals" EXACT []
@@ -64810,8 +64888,18 @@ creation_date: 2010-04-23T11:01:23Z
 
 [Term]
 id: HP:0010760
-name: Aplasia of the toes
-is_a: HP:0001991 ! Aplasia/Hypoplasia of the toes
+name: Absent toe
+alt_id: HP:0008084
+alt_id: HP:0010108
+def: "Aplasia of a `toe` (FMA:25046). That is, absence of all phalanges of a non-hallux digit of the foot and the associated soft tissues." [HPO:probinson]
+comment: This descriptor does NOT require absence of the metatarsal. The definition excludes partial absent hallux.
+synonym: "Absent hallux" EXACT []
+synonym: "Agenesis of the halluces" EXACT []
+synonym: "Aplasia of the hallux" EXACT []
+synonym: "Aplasia of the toes" RELATED []
+synonym: "Aplasia of toe" EXACT []
+is_a: HP:0008362 ! Aplasia/Hypoplasia of the hallux
+is_a: HP:0011306 ! Aplasia of the toes
 created_by: doelkens
 creation_date: 2010-04-23T03:58:25Z
 
@@ -65091,7 +65179,9 @@ creation_date: 2010-05-04T09:51:26Z
 
 [Term]
 id: HP:0010793
-name: Bifid/duplicated nails
+name: Bifid nail
+def: "A digit with two nails, with at least some soft tissue between them." [pmid:19125433]
+synonym: "duplicated nail" EXACT []
 is_a: HP:0001597 ! Abnormality of the nail
 created_by: sdoelken
 creation_date: 2010-05-04T10:34:02Z
@@ -69419,6 +69509,254 @@ created_by: peter
 creation_date: 2012-01-01T03:03:46Z
 
 [Term]
+id: HP:0011287
+name: EEG with occipital sharp slow waves
+def: "EEG with sharp slow waves in the occipital region. Sharp slow waves are focal sharp transient waves of a duration between 80 and 200 msec followed by a slow wave." [HPO:jalbers]
+is_a: HP:0011195 ! EEG with focal sharp slow waves
+created_by: peter
+creation_date: 2012-02-11T12:28:45Z
+
+[Term]
+id: HP:0011288
+name: EEG with parietal sharp slow waves
+def: "EEG with sharp slow waves in the parietal region. Sharp slow waves are focal sharp transient waves of a duration between 80 and 200 msec followed by a slow wave." [HPO:jalbers]
+is_a: HP:0011195 ! EEG with focal sharp slow waves
+created_by: peter
+creation_date: 2012-02-11T12:29:59Z
+
+[Term]
+id: HP:0011289
+name: EEG with temporal sharp slow waves
+def: "EEG with sharp slow waves in the temporal region. Sharp slow waves are focal sharp transient waves of a duration between 80 and 200 msec followed by a slow wave." [HPO:jalbers]
+is_a: HP:0011195 ! EEG with focal sharp slow waves
+created_by: peter
+creation_date: 2012-02-11T12:30:25Z
+
+[Term]
+id: HP:0011290
+name: EEG with frontal sharp slow waves
+def: "EEG with sharp slow waves in the frontal region. Sharp slow waves are focal sharp transient waves of a duration between 80 and 200 msec followed by a slow wave." [HPO:jalbers]
+is_a: HP:0011195 ! EEG with focal sharp slow waves
+created_by: peter
+creation_date: 2012-02-11T12:30:41Z
+
+[Term]
+id: HP:0011291
+name: EEG with central sharp slow waves
+def: "EEG with sharp slow waves in the central region. Sharp slow waves are focal sharp transient waves of a duration between 80 and 200 msec followed by a slow wave." [HPO:jalbers]
+is_a: HP:0011195 ! EEG with focal sharp slow waves
+created_by: peter
+creation_date: 2012-02-11T12:31:02Z
+
+[Term]
+id: HP:0011292
+name: EEG with occipital sharp waves
+def: "EEG with sharp waves in the parietal region, i.e., sharp transient waves of a duration between 80 and 200 msec." [HPO:jalbers]
+is_a: HP:0011196 ! EEG with focal sharp waves
+created_by: peter
+creation_date: 2012-02-11T12:31:29Z
+
+[Term]
+id: HP:0011293
+name: EEG with central sharp waves
+def: "EEG with sharp waves in the central region, i.e., sharp transient waves of a duration between 80 and 200 msec." [HPO:jalbers]
+is_a: HP:0011196 ! EEG with focal sharp waves
+created_by: peter
+creation_date: 2012-02-11T12:32:48Z
+
+[Term]
+id: HP:0011294
+name: EEG with frontal sharp waves
+def: "EEG with sharp waves in the frontal region, i.e., sharp transient waves of a duration between 80 and 200 msec." [HPO:jalbers]
+is_a: HP:0011196 ! EEG with focal sharp waves
+created_by: peter
+creation_date: 2012-02-11T12:33:10Z
+
+[Term]
+id: HP:0011295
+name: EEG with parietal sharp waves
+def: "EEG with sharp waves in the parietal region, i.e., sharp transient waves of a duration between 80 and 200 msec." [HPO:jalbers]
+is_a: HP:0011196 ! EEG with focal sharp waves
+created_by: peter
+creation_date: 2012-02-11T12:33:29Z
+
+[Term]
+id: HP:0011296
+name: EEG with temporal sharp waves
+def: "EEG with sharp waves in the temporal region, i.e., sharp transient waves of a duration between 80 and 200 msec." [HPO:jalbers]
+is_a: HP:0011196 ! EEG with focal sharp waves
+created_by: peter
+creation_date: 2012-02-11T12:33:47Z
+
+[Term]
+id: HP:0011297
+name: Abnormality of the digits
+def: "A morphological abnormality of a `digit` (FMA:85518), i.e., of a finger or toe." [HPO:probinson]
+synonym: "Digital anomalies" EXACT []
+is_a: HP:0002813 ! Abnormality of the extremities
+created_by: peter
+creation_date: 2012-02-11T07:16:22Z
+
+[Term]
+id: HP:0011298
+name: Prominent digit pad
+def: "A soft tissue prominence of the ventral aspects of the fingertips or toe tips." [pmid:19125433]
+comment: The prominence of the finger or toe pads varies throughout life, being greater in neonates and dependent on the state of hydration. This term should not be used if the digit has clubbing. Note that the synonym "fetal fingertip pads" should not be interpreted to mean that the prominent pad necessarily was present in this individual since fetal life. We do not endorse the use of the term "Persistent fetal pads" as this term implies knowledge of the natural history of this finding, which may or may not be known.
+is_a: HP:0011297 ! Abnormality of the digits
+created_by: peter
+creation_date: 2012-02-11T07:18:29Z
+
+[Term]
+id: HP:0011299
+name: Partial absence of finger
+def: "The absence of a phalangeal segment of a finger." [pmid:19125433]
+comment: The part that is absent may be specified. The "distal" modifier specifies the loss of the distal phalanx; clinically this is defined by the absence of the nail. The "proximal" modifier specifies the loss of the proximal or middle phalanx with the nail still present and/or the radiographic finding of a remaining phalanx that is similar to a distal phalanx. It may be difficult to determine which phalanx is absent without x-rays and even then, there are circumstances where the missing bone may not be exactly identified (note that no attempt is made to distinguish missing middle from proximal phalanges). In this situation the location adjective will have to be removed. This finding is distinct from Short fingers.
+is_a: HP:0005918 ! Abnormality of the phalanges of the hand
+created_by: hecht
+creation_date: 2012-02-11T10:57:07Z
+
+[Term]
+id: HP:0011300
+name: Broad fingertip
+def: "Increased width of the distal segment of a finger." [pmid:19125433]
+comment: This term should be reserved for use when the distal digit is significantly broader than the middle part. It should not be used if the digit has Clubbing or Macrodactyly or if the entire finger is broad.
+is_a: HP:0001211 ! Abnormality of the fingertips
+created_by: hecht
+creation_date: 2012-02-11T11:18:08Z
+
+[Term]
+id: HP:0011301
+name: Absent foot
+def: "The total absence of the foot, with no bony elements distal to the tibia or fibula." [pmid:19125433]
+synonym: "Apodia" EXACT []
+is_a: HP:0006494 ! Aplasia/Hypoplasia involving bones of the feet
+created_by: hecht
+creation_date: 2012-02-11T11:20:59Z
+
+[Term]
+id: HP:0011302
+name: Long palm
+def: "For children from birth to 16 years of age the length of the palm is more than the 97th centile; or, the length of the palm appears relatively long compared to the finger length or the limb length." [pmid:19125433]
+is_a: HP:0100871 ! Abnormality of the palm
+created_by: hecht
+creation_date: 2012-02-12T10:20:56Z
+
+[Term]
+id: HP:0011303
+name: Convex contour of sole
+def: "The contour of the foot in lateral profile has a convex shape." [pmid:19125433]
+comment: This term was established as the convex contour may occur without the prominent heel, which together comprise the bundled term Rocker-bottom foot.
+is_a: HP:0100872 ! Abnormality of the plantar part of foot
+created_by: hecht
+creation_date: 2012-02-12T11:06:12Z
+
+[Term]
+id: HP:0011304
+name: Broad thumb
+alt_id: HP:0001173
+alt_id: HP:0004073
+alt_id: HP:0009651
+def: "Increased thumb width without increased dorso-ventral dimension." [pmid:19125433]
+comment: Note that this term should not be used for thumbs that meet the definition for Macrodactyly.
+synonym: "Broad phalanges of the thumb" EXACT []
+synonym: "Broad thumbs" EXACT []
+synonym: "Wide/broad thumb" EXACT []
+synonym: "Wide/broad thumb phalanges" EXACT []
+xref: UMLS:C0426891 "Broad thumb"
+is_a: HP:0001172 ! Abnormality of the thumb
+is_a: HP:0009602 ! Abnormality of the phalanges of the thumb
+is_a: HP:0009768 ! Broad phalanges of the hand
+created_by: hecht
+creation_date: 2012-02-12T11:15:31Z
+
+[Term]
+id: HP:0011305
+name: Partial absence of toe
+def: "The absence of a phalangeal segment of a toe or hallux." [pmid:19125433]
+comment: The part that is absent may be specified. The "distal" modifier specifies the loss of the distal phalanx; clinically this is defined by the absence of the nail. The "proximal" modifier specifies the loss of the proximal or middle phalanx with the nail still present. It may be difficult to know which phalanx is absent without X-rays and even then, the missing bone may not be identified (note no attempt is made to distinguish missing middle from proximal phalanges). In this situation the location adjective should be removed. Note that this finding is distinct from Short toes, (which are reduced in length but have the normal number of phalangeal segments). Partial absence of the hallux is an alternative term that may be used for the first toe.
+synonym: "Hypophalangy of toes" EXACT []
+is_a: HP:0011306 ! Aplasia of the toes
+created_by: hecht
+creation_date: 2012-02-12T12:20:32Z
+
+[Term]
+id: HP:0011306
+name: Aplasia of the toes
+def: "Aplasia affecting the toes or any parts thereof." [HPO:probinson]
+is_a: HP:0001991 ! Aplasia/Hypoplasia of the toes
+created_by: hecht
+creation_date: 2012-02-12T12:36:21Z
+
+[Term]
+id: HP:0011307
+name: Splayed toes
+def: "Divergence of digits along the anteroposterior axis (in the plane of the sole)." [pmid:19125433]
+is_a: HP:0001780 ! Abnormality of the toes
+created_by: hecht
+creation_date: 2012-02-12T12:38:36Z
+
+[Term]
+id: HP:0011308
+name: Slender toe
+def: "Digits are disproportionately narrow (reduced girth) for the hand/foot size or build of the individual." [pmid:19125433]
+synonym: "Narrow toe" EXACT []
+is_a: HP:0001780 ! Abnormality of the toes
+created_by: hecht
+creation_date: 2012-02-12T12:39:51Z
+
+[Term]
+id: HP:0011309
+name: Tapered toe
+def: "The gradual reduction in girth of the digit from proximal to distal." [pmid:19125433]
+is_a: HP:0001780 ! Abnormality of the toes
+created_by: hecht
+creation_date: 2012-02-12T12:41:30Z
+
+[Term]
+id: HP:0011310
+name: Bridged palmar crease
+def: "A crease that connects the proximal and distal transverse palmar creases." [pmid:19125433]
+comment: The crease that connects the two transverse creases should itself be more in the transverse (antero-posterior) than longitudinal (proximo-distal) orientation.
+synonym: "Transitional palmar crease" EXACT []
+is_a: HP:0010490 ! Abnormality of the palmar creases
+created_by: hecht
+creation_date: 2012-02-12T12:56:40Z
+
+[Term]
+id: HP:0011311
+name: Sydney crease
+def: "Extension of the proximal transverse crease (five finger crease) to the ulnar edge of the palm." [pmid:19125433]
+comment: The proximal transverse (five finger) crease starts on the radial side of the hand near the base of the index finger and extends toward the ulnar side of the palm, but does not reach the ulnar side. In this finding, the crease extends completely to the ulnar margin of the palm.
+is_a: HP:0010490 ! Abnormality of the palmar creases
+created_by: hecht
+creation_date: 2012-02-12T12:58:13Z
+
+[Term]
+id: HP:0011312
+name: Fused nails
+def: "A nail plate that has a longitudinal separation with partially separated nails, each with a separate lateral radius of curvature." [pmid:19125433]
+comment: The use of the word "fused" is not meant to imply that pathogenetically these nails were separate and merged. This is distinct from a split or cleaved nail, where the two parts of the nails share the same radius of curvature. The involved digits should be specified. It may be associated with underlying syndactylous digits, but these are coded separately.
+is_a: HP:0001597 ! Abnormality of the nail
+created_by: hecht
+creation_date: 2012-02-12T01:12:22Z
+
+[Term]
+id: HP:0011313
+name: Narrow nail
+def: "Decreased width of nail." [pmid:19125433]
+is_a: HP:0001597 ! Abnormality of the nail
+created_by: hecht
+creation_date: 2012-02-12T01:33:34Z
+
+[Term]
+id: HP:0011314
+name: Abnormality of long bone morphology
+def: "An abnormality of size or shape of the `long bones` (FMA:7474)." [HPO:probinson]
+is_a: HP:0002813 ! Abnormality of the extremities
+created_by: hecht
+creation_date: 2012-02-12T02:31:03Z
+
+[Term]
 id: HP:0100000
 name: Early onset of puberty
 def: "An early onset of puberty, in this case early does not refer to precocious." [HPO:curators]
@@ -69797,7 +70135,7 @@ id: HP:0100040
 name: Broad 2nd toe
 def: "A broad appearance of the second toe." [HPO:sdoelken]
 comment: Note that an apparent broad appearance might be due to a hidden duplication.
-is_a: HP:0001837 ! Broad toes
+is_a: HP:0001837 ! Broad toe
 is_a: HP:0010319 ! Abnormality of the 2nd toe
 created_by: doelkens
 creation_date: 2010-06-24T09:52:57Z
@@ -69806,7 +70144,7 @@ creation_date: 2010-06-24T09:52:57Z
 id: HP:0100041
 name: Broad 3rd toe
 def: "A broad appearance of the third toe." [HPO:sdoelken]
-is_a: HP:0001837 ! Broad toes
+is_a: HP:0001837 ! Broad toe
 is_a: HP:0010320 ! Abnormality of the 3rd toe
 created_by: doelkens
 creation_date: 2010-06-24T09:54:55Z
@@ -69815,7 +70153,7 @@ creation_date: 2010-06-24T09:54:55Z
 id: HP:0100042
 name: Broad 4th toe
 def: "A broad appearance of the fourth toe." [HPO:sdoelken]
-is_a: HP:0001837 ! Broad toes
+is_a: HP:0001837 ! Broad toe
 is_a: HP:0010321 ! Abnormality of the 4th toe
 created_by: doelkens
 creation_date: 2010-06-24T09:55:43Z
@@ -69824,7 +70162,7 @@ creation_date: 2010-06-24T09:55:43Z
 id: HP:0100043
 name: Broad 5th toe
 def: "A broad appearance of the fifth toe." [HPO:sdoelken]
-is_a: HP:0001837 ! Broad toes
+is_a: HP:0001837 ! Broad toe
 is_a: HP:0010322 ! Abnormality of the 5th toe
 created_by: doelkens
 creation_date: 2010-06-24T09:56:25Z
@@ -71561,7 +71899,11 @@ creation_date: 2010-07-20T11:00:32Z
 
 [Term]
 id: HP:0100260
-name: Central polydactyly
+name: Mesoaxial polydactyly
+def: "The presence of a supernumerary finger or toe (not a thumb or hallux) involving the third or fourth metacarpal/tarsal with associated osseous syndactyly." [pmid:19125433]
+synonym: "Central polydactyly" EXACT []
+synonym: "Insertional polydactyly" RELATED []
+synonym: "Intercalary polydactyly" EXACT []
 is_a: HP:0010442 ! Polydactyly
 created_by: doelkens
 creation_date: 2010-07-20T11:00:32Z
@@ -72593,7 +72935,7 @@ is_a: HP:0010380 ! Abnormality of the distal phalanx of the 4th toe
 [Term]
 id: HP:0100400
 name: Partial/complete duplication of the distal phalanx of the 5th toe
-is_a: HP:0001830 ! Postaxial polydactyly (feet)
+is_a: HP:0001830 ! Postaxial polydactyly of foot
 is_a: HP:0010391 ! Partial/complete duplication of the phalanges of the 5th toe
 is_a: HP:0010392 ! Abnormality of the distal phalanx of the 5th toe
 
@@ -72614,7 +72956,7 @@ is_a: HP:0010381 ! Abnormality of the middle phalanx of the 4th toe
 [Term]
 id: HP:0100403
 name: Partial/complete duplication of the middle phalanx of the 5th toe
-is_a: HP:0001830 ! Postaxial polydactyly (feet)
+is_a: HP:0001830 ! Postaxial polydactyly of foot
 is_a: HP:0010391 ! Partial/complete duplication of the phalanges of the 5th toe
 is_a: HP:0010393 ! Abnormality of the middle phalanx of the 5th toe
 
@@ -72635,7 +72977,7 @@ is_a: HP:0010382 ! Abnormality of the proximal phalanx of the 4th toe
 [Term]
 id: HP:0100406
 name: Partial/complete duplication of the proximal phalanx of the 5th toe
-is_a: HP:0001830 ! Postaxial polydactyly (feet)
+is_a: HP:0001830 ! Postaxial polydactyly of foot
 is_a: HP:0010391 ! Partial/complete duplication of the phalanges of the 5th toe
 is_a: HP:0010394 ! Abnormality of the proximal phalanx of the 5th toe
 
@@ -74374,7 +74716,9 @@ creation_date: 2010-12-29T05:54:15Z
 
 [Term]
 id: HP:0100643
-name: Abnormality of the nail colour
+name: Abnormality of nail color
+def: "An anomaly of the color of the `nail` (FMA:54326)." [HPO:probinson]
+synonym: "Abnormality of nail colour" EXACT []
 is_a: HP:0001597 ! Abnormality of the nail
 created_by: doelkens
 creation_date: 2010-12-29T05:59:15Z
@@ -74382,7 +74726,8 @@ creation_date: 2010-12-29T05:59:15Z
 [Term]
 id: HP:0100644
 name: Melanonychia
-is_a: HP:0100643 ! Abnormality of the nail colour
+def: "Brown or black discoloration  of the `nails` (FMA:54326)." [HPO:probinson]
+is_a: HP:0100643 ! Abnormality of nail color
 created_by: doelkens
 creation_date: 2010-12-29T06:00:12Z
 
@@ -75173,6 +75518,7 @@ creation_date: 2011-06-06T06:25:05Z
 [Term]
 id: HP:0100746
 name: Macrodactyly (hands)
+def: "A type of `Macrodactyly` (HP:0004099) affecting one or several fingers." [HPO:probinson]
 is_a: HP:0001167 ! Abnormality of the fingers
 is_a: HP:0004099 ! Macrodactyly
 created_by: doelkens
@@ -75181,6 +75527,7 @@ creation_date: 2011-06-06T06:29:55Z
 [Term]
 id: HP:0100747
 name: Macrodactyly (feet)
+def: "A type of `Macrodactyly` (HP:0004099) affecting one or several toes." [HPO:probinson]
 is_a: HP:0001780 ! Abnormality of the toes
 is_a: HP:0004099 ! Macrodactyly
 created_by: doelkens
@@ -75266,8 +75613,11 @@ creation_date: 2011-06-07T10:19:11Z
 
 [Term]
 id: HP:0100759
-name: Clubbing (hands)
+name: Clubbing of fingers
 def: "Terminal broadening of the fingers (distal phalanges of the fingers)." [HPO:sdoelken]
+synonym: "Clubbed fingers" EXACT []
+synonym: "Clubbing (hands)" EXACT []
+synonym: "Finger clubbing" EXACT []
 is_a: HP:0001211 ! Abnormality of the fingertips
 is_a: HP:0001217 ! Clubbing
 created_by: doelkens
@@ -75275,8 +75625,10 @@ creation_date: 2011-06-07T10:25:26Z
 
 [Term]
 id: HP:0100760
-name: Clubbing (feet)
+name: Clubbing of toes
 def: "Terminal broadening of the toes (distal phalanges of the toes)." [HPO:sdoelken]
+synonym: "Clubbed toes" RELATED []
+synonym: "Clubbing (feet)" EXACT []
 is_a: HP:0001217 ! Clubbing
 is_a: HP:0010161 ! Abnormality of the phalanges of the toes
 created_by: doelkens
@@ -75562,7 +75914,9 @@ creation_date: 2011-06-08T04:18:06Z
 
 [Term]
 id: HP:0100797
-name: Dysplastic toenails
+name: Toenail dysplasia
+def: "An abnormality of the development of the toenails." [HPO:probinson]
+synonym: "Dysplastic toenails" EXACT []
 is_a: HP:0002164 ! Nail dysplasia
 is_a: HP:0008388 ! Abnormality of the toenails
 created_by: doelkens
@@ -75570,7 +75924,10 @@ creation_date: 2011-06-08T04:23:37Z
 
 [Term]
 id: HP:0100798
-name: Dysplastic fingernails
+name: Fingernail dysplasia
+def: "An abnormality of the development of the fingernails." [HPO:probinson]
+comment: If possible, a more precise term should be chosen for annotation.
+synonym: "Dysplastic fingernails" EXACT []
 is_a: HP:0001231 ! Abnormality of the fingernails
 is_a: HP:0002164 ! Nail dysplasia
 created_by: doelkens
@@ -75649,6 +76006,7 @@ creation_date: 2011-06-09T01:05:51Z
 [Term]
 id: HP:0100807
 name: Long fingers
+def: "The middle finger is more than 2 SD above the mean for newborns 27 to 41 weeks EGA or above the 97th centile for children from birth to 16 years of age AND the five digits retain their normal length proportions relative to each other (i.e., it is not the case that the middle finger is the only lengthened digit), or, Fingers that appear disproportionately long compared to the palm of the hand." [pmid:19125433]
 is_a: HP:0001167 ! Abnormality of the fingers
 created_by: doelkens
 creation_date: 2011-06-09T01:13:15Z
@@ -76136,30 +76494,39 @@ creation_date: 2011-11-30T11:16:11Z
 
 [Term]
 id: HP:0100869
-name: Teleangiectases of palms
+name: Palmar telangiectasia
+def: "The presence of telangiectases on the `skin of palm of hand` (FMA:38301)." [HPO:probinson]
+synonym: "Teleangiectases of palms" EXACT []
 is_a: HP:0007399 ! Telangiectases of palms and soles
-is_a: HP:0100871 ! Abnormality of the palms
+is_a: HP:0100871 ! Abnormality of the palm
 created_by: doelkens
 creation_date: 2011-11-30T11:19:45Z
 
 [Term]
 id: HP:0100870
-name: Teleangiectases of soles
+name: Plantar telangiectasia
+def: "Telangiectases (small dilated blood vessels) located on the `skin of sole of foot` (FMA:37849)." [HPO:probinson]
+synonym: "Plantar teleangiectasia" EXACT []
+synonym: "Teleangiectases of soles" EXACT []
 is_a: HP:0007399 ! Telangiectases of palms and soles
-is_a: HP:0100872 ! Abnormality of the soles
+is_a: HP:0100872 ! Abnormality of the plantar part of foot
 created_by: doelkens
 creation_date: 2011-11-30T11:19:59Z
 
 [Term]
 id: HP:0100871
-name: Abnormality of the palms
+name: Abnormality of the palm
+def: "An abnormality of the `palm`(FMA:24920), that is, of the front of the hand." [HPO:probinson]
 is_a: HP:0001155 ! Abnormality of the hand
 created_by: doelkens
 creation_date: 2011-11-30T11:21:16Z
 
 [Term]
 id: HP:0100872
-name: Abnormality of the soles
+name: Abnormality of the plantar part of foot
+alt_id: HP:0010613
+def: "An abnormality of the `plantar part of foot` (FMA:25000), that is of the soles of the feet." [HPO:probinson]
+synonym: "Minor feet anomalies" EXACT []
 is_a: HP:0001760 ! Abnormality of the feet
 created_by: doelkens
 creation_date: 2011-11-30T11:23:05Z
@@ -77035,7 +77402,7 @@ creation_date: 2010-06-16T07:39:04Z
 
 [Term]
 id: HP:0200027
-name: contractures of the toes
+name: Contractures of the toes
 alt_id: HP:0001860
 alt_id: HP:0008367
 synonym: "Contractures involving the toes" EXACT []
@@ -77268,9 +77635,7 @@ created_by: sebastiankohler
 creation_date: 2011-12-02T03:41:26Z
 
 [Term]
-id: ID:0000000
+id: HP:0200053
 name: Monodactyly (feet)
 is_a: HP:0001849 ! Oligodactyly (feet)
-created_by: doelkens
-creation_date: 2011-11-22T09:56:55Z
 
