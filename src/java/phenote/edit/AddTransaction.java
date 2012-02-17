@@ -42,6 +42,7 @@ public class AddTransaction implements TransactionI {
     // if has auto id field then, create annot id
     setAutoAnnotId();
     // index = getCharList().indexOf(addChar); ??
+    setUserName();
   }
 
   private void setDateCreated() {
@@ -49,6 +50,15 @@ public class AddTransaction implements TransactionI {
     CharFieldValue v = new CharFieldValue(getDate(),addChar,dateField);
     addChar.setValue(dateField,v);
     //} catch (CharFieldException e) { System.out.println("no date_created field"); } //?
+  }
+
+  private void setUserName() {
+    CharField userField = CharFieldManager.inst().getUserNameField();
+    if (userField != null) {
+        CharFieldValue v = new CharFieldValue(getUserName(),addChar,userField);
+        addChar.setValue(userField,v);
+        System.out.println("setUserName: " + userField); // DEL
+    }
   }
 
   /** if char has an auto annot id then set it */
@@ -63,6 +73,10 @@ public class AddTransaction implements TransactionI {
 
   // get current date
   private Date getDate() { return new Date(); }
+
+    private String getUserName() {
+        return System.getProperty("user.name");
+    }
 
 // public int getIndex() { return index; } ???
 

@@ -175,6 +175,18 @@ public class CharFieldManager {
     }
   }
 
+  public CharField getUserNameField() {
+      CharFieldEnum userEnum = CharFieldEnum.CURATOR;
+      try { 
+          CharField userField = getCharFieldForEnum(userEnum);
+          return userField;
+      }
+       catch (CharFieldException e) {
+           log().debug("getUserNameField: didn't find userNameField--returning null"); // DEL
+           return null;
+       }
+  }
+
   public boolean hasAutoAnnotField() {
     return getAutoAnnotField() != null;
   }

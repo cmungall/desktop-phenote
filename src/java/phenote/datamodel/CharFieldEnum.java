@@ -23,6 +23,7 @@ public enum CharFieldEnum {
   GENETIC_CONTEXT("Genetic Context", "GC"),
   ENTITY("Entity","E"), ENTITY2("Add'l Entity","E2"), QUALITY("Quality", "Q"),
   DATE_CREATED("Date Created","date_created",Type.DATE),
+  CURATOR("Curator"),
   ASSIGNED_BY("Assigned by"),
   EVIDENCE("Evidence"),
   /** Its questionable if relationship belongs here ??? */
