@@ -2,13 +2,23 @@
 Changes in latest release
 ================
 
+1.8.10 (15 February 2012--private release for RCN)
+- Added Date Created field to rcn config
+- Auto-fill Curator field with System(user.name) if not filled in by user
+- Enabled Image menu, so you can load an image
+- Installer supports 64-bit Java (so you can allocate more memory to Phenote, if you want). If you are on Windows 7 and have 64-bit Java, download the installer called "windows-x64".
+
+1.8.9 (10 February 2012--private release for RCN)
+- Added config for rcn (phenotype_rcn.cfg)
+- Special perspectives.xml uses phenotype_rcn layout as the default
+
 1.8.8 (1 February 2012):
 - Updated bundled obo files (particularly the buggy version of fly_anatomy.obo
 that was bundled with version 1.8.7).
 - Updated some config files and removed a bunch of obsolete ones.
 - Fixed an issue with copying an obo file from an URL to .phenote when user
 didn't yet have that file.
-- Fixed some logic about when to update local copy from repository.
+- Fixed some logic about when to update local copies of obo files from repository.
 
 
 =================
