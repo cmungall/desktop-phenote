@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -34,6 +35,7 @@ import phenote.config.Config;
 import phenote.config.xml.FieldDocument.Field;
 import phenote.dataadapter.CharacterListManager;
 import phenote.dataadapter.DataAdapterEx;
+import phenote.dataadapter.ImageManager;
 import phenote.dataadapter.QueryableDataAdapterI;
 import phenote.dataadapter.ncbi.NCBIDataAdapterI;
 import phenote.datamodel.CharField;
@@ -62,6 +64,7 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
   /** if true then set gui but not model, for clearing on multi, default false */
   private boolean updateGuiOnly = false;
   private JButton retrieveButton;
+  private JButton loadImageButton;
   private JButton editButton;
   static int fieldHeight = 17;
   static Dimension inputSize = new Dimension(390,fieldHeight); // size of user input box
@@ -95,6 +98,7 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
       fieldGui = t;
     }
     else if (charField.isID()) {
+//      log().debug("isID: " + charField); // DEL
       fieldGui = new IdFieldGui(charField);
     }
     // this assumes all read only are free text - this will prob need refactoring
@@ -425,6 +429,7 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
   	//i'm hard-coding this for now...needs to be much slicker, perhaps not
   	//even the same kind of queryable adapter
   	if (qa!=null) {
+//          log().debug("isFieldQueryable(" + getCharField().getName() + ") = " + qa.isFieldQueryable(getCharField().getName())); // DEL
   		if (qa.isFieldQueryable(getCharField().getName())) {
   			retrieveButton = new JButton("Retrieve");
   			retrieveButton.addActionListener(new RetrieveActionListener(qa));
@@ -433,6 +438,7 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
   	} else if (naList.size()>0) {
   		//add the button if there is a match for the particular adapter
   		for (NCBIDataAdapterI nda : naList) {
+//                  log().debug("nda.isFieldQueryable(" + getCharField().getName() + ") = " + nda.isFieldQueryable(getCharField().getName())); // DEL
   			if (nda.isFieldQueryable(getCharField().getName())) {
 			    try {
 				ImageIcon icon = new ImageIcon(FileUtil.findUrl("images/ncbi_icon.png"));
@@ -455,6 +461,7 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
     NCBIDataAdapterI nda;
     private NCBIActionListener(NCBIDataAdapterI q) { nda = q; }
     public void actionPerformed(ActionEvent e) {
+//      log().debug("Calling selectID " + getText() + ", " +  nda.getName()); // DEL
         selectionManager.selectID(this, getText(), nda.getName());
     }
   }
@@ -484,6 +491,34 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
       }
     }
   }
+
+  boolean hasLoadImageButton() { return getLoadImageButton() != null; }
+  JButton getLoadImageButton() { 
+    if (!loadImageButtonConfigged()) return null;
+    if (loadImageButton == null) {
+      loadImageButton = new JButton("Load");
+      loadImageButton.addActionListener(new LoadImageButtonActionListener());
+    }
+    return loadImageButton;
+  }
+  
+  private boolean loadImageButtonConfigged() {
+    return fieldXmlBean!=null && fieldXmlBean.xgetEnableLoadImage()!=null
+      && fieldXmlBean.getEnableLoadImage();
+  }
+  
+  private class LoadImageButtonActionListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+        log().debug("Loading image " + getText());
+        try {
+            ImageManager.inst().loadAndShowImage(getText());
+        } catch (IOException io) {
+            JOptionPane.showMessageDialog(null,io.getMessage(),"Couldn't load image",
+                                          JOptionPane.ERROR_MESSAGE);
+        }
+    }
+  }
+
   
   private static class FieldFocusListener implements FocusListener {
     

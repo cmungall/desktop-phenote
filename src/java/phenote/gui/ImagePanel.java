@@ -28,105 +28,114 @@ import phenote.dataadapter.Image;
 
 public class ImagePanel extends JPanel implements MouseListener {
 
-  private static float borderWidth = 1.0f;
-  private static float selectedBorderWidth = 3.0f;
-	private static final Logger LOG = Logger.getLogger(ImagePanel.class);
-	final static BasicStroke selectedStroke = new BasicStroke(selectedBorderWidth);
-	final static BasicStroke stroke = new BasicStroke(borderWidth);
+    private static float borderWidth = 1.0f;
+    private static float selectedBorderWidth = 3.0f;
+    private static final Logger LOG = Logger.getLogger(ImagePanel.class);
+    final static BasicStroke selectedStroke = new BasicStroke(selectedBorderWidth);
+    final static BasicStroke stroke = new BasicStroke(borderWidth);
 
-	private Image image;
+    private Image image;
 	
-  private int currentMap;
-  private Color fill;
-  private float alpha;
+    private int currentMap;
+    private Color fill;
+    private float alpha;
   
+    public ImagePanel(Image i) {
+        image = i;
+        createPanel();
+        //add this to the ImageViewer frame
+    }
 	
-	public ImagePanel(Image i) {
-		image = i;
-		createPanel();
-		//add this to the ImageViewer frame
-	}
-	
-  public void createPanel() {
-//    super.init();
-    currentMap = -1;
-    addMouseListener(this);
-    alpha = 0.1f;
-    fill = Color.BLUE;
-    this.setBackground(Color.black);
-    this.setLayout(new BorderLayout());
-    this.setVisible(true);
-    this.repaint();
-  }
+    public void createPanel() {
+        //    super.init();
+        currentMap = -1;
+        addMouseListener(this);
+        alpha = 0.1f;
+        fill = Color.BLUE;
+        this.setBackground(Color.black);
+        this.setLayout(new BorderLayout());
+        this.setVisible(true);
+        this.repaint();
+    }
   
-  
-  public ImagePanel getImagePanel() {
+    public ImagePanel getImagePanel() {
   	return this;
-  }
+    }
   
-  public Image getImage() {
+    public Image getImage() {
   	return image;
-  }
+    }
+
+    public void setImage(Image i) {
+        //        System.out.println("ImagePanel.setImage(" + i + ")");
+        this.image = i;
+        this.repaint();
+    }
   
-	@Override
-  public void paintComponent(Graphics g) {
-      //g.drawImage(image, 0, 0, null); // see javadoc for more info on the parameters
-//		Vector<Polygon> polys = image.getPolys();
-		Vector<Shape> regions = image.getROIs();
-		Graphics2D g2 = (Graphics2D) g;
-		g2.setBackground(Color.white);
-		g2.drawImage(this.image.getImage(), 0, 0, this);
-//		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC, this.alpha));
-		g2.setStroke(stroke);
-		//First, draw all the ROIs
-		for (int i=0; i<regions.size(); i++) {
-			g2.setColor(Color.yellow);
-			g2.draw(regions.get(i));      	
-		}
+    @Override
+        public void paintComponent(Graphics g) {
+        //g.drawImage(image, 0, 0, null); // see javadoc for more info on the parameters
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setBackground(Color.white);
+        g2.drawImage(this.image.getImage(), 0, 0, this);
+        //		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC, this.alpha));
+        // Commented out for now
+        //                drawRegions(g2);
+    }
+
+    private void drawRegions(Graphics2D g2) {
+        //		Vector<Polygon> polys = image.getPolys();
+        Vector<Shape> regions = image.getROIs();
+        g2.setStroke(stroke);
+        //First, draw all the ROIs
+        for (int i=0; i<regions.size(); i++) {
+            g2.setColor(Color.yellow);
+            g2.draw(regions.get(i));      	
+        }
 			
-		//Highlight the ROI that is selected
-		if (this.currentMap > -1) {
-//			g2.setColor(Color.RED);
-			g2.setStroke(selectedStroke);
-			g2.draw(regions.get(this.currentMap));
-		}
-	}
+        //Highlight the ROI that is selected
+        if (this.currentMap > -1) {
+            //			g2.setColor(Color.RED);
+            g2.setStroke(selectedStroke);
+            g2.draw(regions.get(this.currentMap));
+        }
+    }
 	
-  private Logger log() {
-    return Logger.getLogger(this.getClass());
-  }
+    private Logger log() {
+        return Logger.getLogger(this.getClass());
+    }
 	
-	public void setFill(Color color){
-		this.fill = color;
-	}
+    public void setFill(Color color){
+        this.fill = color;
+    }
 	
-	public void setFill(Color color, float alpha){
-		this.fill = color;
-		this.alpha = alpha;
-	}
+    public void setFill(Color color, float alpha){
+        this.fill = color;
+        this.alpha = alpha;
+    }
 	
-	public void mouseReleased(MouseEvent e) {
-	}
+    public void mouseReleased(MouseEvent e) {
+    }
 	
-	// unused mouse
-	public void mouseClicked(MouseEvent e) {
-		Vector<Shape> regions = image.getROIs();
-		for(int i=0; i<regions.size();i++){
-			if(regions.get(i).contains(e.getX(), e.getY())){
-				this.firePropertyChange("CurrentMap", currentMap, i);
-				currentMap = i;
-				repaint();
-				break; // no need to keep checking
-			}
-		}	
-	}
+    // unused mouse
+    public void mouseClicked(MouseEvent e) {
+        Vector<Shape> regions = image.getROIs();
+        for(int i=0; i<regions.size();i++){
+            if(regions.get(i).contains(e.getX(), e.getY())){
+                this.firePropertyChange("CurrentMap", currentMap, i);
+                currentMap = i;
+                repaint();
+                break; // no need to keep checking
+            }
+        }	
+    }
 
-	public void mouseEntered(MouseEvent e) {
-	}
+    public void mouseEntered(MouseEvent e) {
+    }
 
-	public void mouseExited(MouseEvent e) {	
-	}
+    public void mouseExited(MouseEvent e) {	
+    }
 
-	public void mousePressed(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {}
   
 }

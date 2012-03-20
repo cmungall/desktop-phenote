@@ -202,6 +202,7 @@ public File getPrefsDir() {
     menus.add(new FileMenu());
     menus.add(new EditMenu());
     menus.add(new ViewMenu());
+    // No Image menu--load images from a field with enableLoadImage="true" in the conf
     //    menus.add(new ImageMenu());
     menus.add(new SettingsMenu());
     menus.add(new PhenoteHelpMenu());
