@@ -393,6 +393,11 @@ necasarily displayed</xs:documentation>
 multilines of text - comments, descriptions</xs:documentation>
         </xs:annotation>
       </xs:attribute>
+      <xs:attribute name="enableLoadImage" use="required" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>if true, then add Load button to load an image</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
     </xs:complexType>
   </xs:element>
   <xs:element name="ontology">

@@ -234,6 +234,8 @@ field =
     ## if true then give user big popup box activated by button to type
     ## multilines of text - comments, descriptions
     attribute enableBigTextBox { xsd:boolean },
+    ## if true, then add Load button to load an image
+    attribute enableLoadImage { xsd:boolean },
     postcomp?,
     ontology*
   } 
