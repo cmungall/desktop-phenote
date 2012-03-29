@@ -65,6 +65,7 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
   private boolean updateGuiOnly = false;
   private JButton retrieveButton;
   private JButton loadImageButton;
+  private JButton browseImageButton;
   private JButton editButton;
   static int fieldHeight = 17;
   static Dimension inputSize = new Dimension(390,fieldHeight); // size of user input box
@@ -85,7 +86,6 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
   /** bean from xml conguration for field */
   private Field fieldXmlBean;
   private JLabel listMessage;
-  
 
   /** CharFieldGui for main window not post comp box - factory method, make appropriate
       CFG subclass from type of charField - minCompChars is not used at moment - may
@@ -119,11 +119,12 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
     final JComponent component = fieldGui.getUserInputGui();
     // set a property so the the field gui can handle responder chain commands sent to component
     component.putClientProperty(ResponderChainAction.CLIENT_PROPERTY, fieldGui);
+    FieldFocusListener fieldFocusListener = new FieldFocusListener(fieldGui);
     if (component instanceof JComboBox) {
       // JComboBox does not correctly notify its focus listeners - need to use editor instead
-      ((JComboBox)component).getEditor().getEditorComponent().addFocusListener(new FieldFocusListener(fieldGui));
+      ((JComboBox)component).getEditor().getEditorComponent().addFocusListener(fieldFocusListener);
     } else {
-      component.addFocusListener(new FieldFocusListener(fieldGui));
+      component.addFocusListener(fieldFocusListener);
     }
     return fieldGui;
   }
@@ -519,7 +520,32 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
     }
   }
 
+  JButton getBrowseImageButton() { 
+    if (!loadImageButtonConfigged()) return null;
+    if (browseImageButton == null) {
+      browseImageButton = new JButton("Browse");
+      browseImageButton.addActionListener(new BrowseImageButtonActionListener());
+    }
+    return browseImageButton;
+  }
   
+  private class BrowseImageButtonActionListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+        String selectedImage = ImageManager.inst().chooseImage();
+        if (selectedImage == null)
+            return;
+        setText(selectedImage);
+        log().debug("Loading chosen image " + getText());
+        try {
+            ImageManager.inst().loadAndShowImage(getText());
+            getEditManager().updateModel(getSelectedChars(), getCharField(), selectedImage, this);
+        } catch (IOException io) {
+            JOptionPane.showMessageDialog(null,io.getMessage(),"Couldn't load image " + getText(),
+                                          JOptionPane.ERROR_MESSAGE);
+        }
+    }
+  }
+
   private static class FieldFocusListener implements FocusListener {
     
     private CharFieldGui field;
@@ -556,7 +582,7 @@ public abstract class CharFieldGui implements ListEventListener<CharacterI> {
     public void charChanged(CharChangeEvent e) {
       // check charField is this char field
       updateListGui();
-      // Everything in this if is now commented out
+      // Everything in this "if" is now commented out
 //      if (e.getSource() != CharFieldGui.this && e.isUpdateForCharField(charField)) {
         // i think all we need to do is setText to synch with model
         // for complist dont we also need to set its model (not just text??)

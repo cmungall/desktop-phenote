@@ -273,7 +273,7 @@ public class FieldPanel extends AbstractGUIComponent {
     this.addPostCompButton(fieldGui, constraints);
     if (!fieldGui.hasListGui()) this.addRetrieveButton(fieldGui, constraints);
     addEditButton(fieldGui, constraints);
-    addLoadImageButton(fieldGui, constraints);
+    addLoadImageButtons(fieldGui, constraints);
   }
   
   /** set up basic grid bag constraints with insets and increments currentGridBagRow/gridy
@@ -413,9 +413,12 @@ public class FieldPanel extends AbstractGUIComponent {
     }
   }
 
-  private void addLoadImageButton(CharFieldGui fieldGui, GridBagConstraints constraints) {
+  private void addLoadImageButtons(CharFieldGui fieldGui, GridBagConstraints constraints) {
     if (fieldGui.hasLoadImageButton()) {
+      constraints.gridwidth = 2;
       fieldPanel.add(fieldGui.getLoadImageButton(), constraints);
+      constraints.gridx++;
+      fieldPanel.add(fieldGui.getBrowseImageButton(), constraints);
     }
   }
 

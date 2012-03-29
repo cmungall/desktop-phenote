@@ -38,12 +38,17 @@ public class ImageManager {
     	return singleton;  
     }
   
-  public void loadImage() {
-      fileChooser = new JFileChooser();
+  public String chooseImage() {
+      if (fileChooser == null)
+          fileChooser = new JFileChooser();
+      else
+          fileChooser.show();
       int returnValue = fileChooser.showOpenDialog(null);
       if (returnValue == JFileChooser.APPROVE_OPTION) {
-          image = new Image(fileChooser.getSelectedFile().getPath());
+          String selected = fileChooser.getSelectedFile().getPath();
+          return selected;
       }
+      return null;
   }
 
   public Image getImage() {
