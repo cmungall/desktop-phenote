@@ -75,7 +75,13 @@ public class ImageMenu extends DynamicMenu {
   private void addOpenImageItem() {
     final Action openImageAction = new AbstractAction("Open...") {
       public void actionPerformed(ActionEvent e) {
-      	ImageManager.inst().loadImage();
+	  try {
+	      String image = ImageManager.inst().chooseImage();
+	      ImageManager.inst().loadAndShowImage(image);
+	  } catch (IOException ioe) {
+	      log().debug("Couldn't load image: " + ioe.getMessage());
+	      return;
+	  }
 //    	  ImagePanelFactory factory = new ImagePanelFactory(ImageManager.inst().getImage(),ImageManager.inst().getImageName());
     	  ImageViewFactory factory = new ImageViewFactory(ImageManager.inst().getImage(),ImageManager.inst().getImageName());
     	  ComponentManager.getManager().showComponent(factory, null, null, false);
