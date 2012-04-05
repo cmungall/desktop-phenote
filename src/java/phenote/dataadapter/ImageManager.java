@@ -65,6 +65,9 @@ public class ImageManager {
 
     public void loadAndShowImage(String imageFileOrUrl) 
         throws IOException {
+        if (imageFileOrUrl == null || imageFileOrUrl.equals(""))
+            throw new IOException("No filename or URL specified. Please enter one in the text box to the left of the Load button, or use the Browse button to choose a file from your computer.");
+
         // Determine whether we're dealing with a path or an URL
         URL url = null;
         try {
