@@ -417,7 +417,8 @@ public class FieldPanel extends AbstractGUIComponent {
     if (fieldGui.hasLoadImageButton()) {
       constraints.gridwidth = 2;
       fieldPanel.add(fieldGui.getLoadImageButton(), constraints);
-      constraints.gridx++;
+      // I don't really like magic numbers like this, but 4 seems to do the trick.
+      constraints.gridx += 4;
       fieldPanel.add(fieldGui.getBrowseImageButton(), constraints);
     }
   }
