@@ -44,7 +44,9 @@ per configuration.</p>
     <td><font face="Courier">tab</font></td>
     <td>The name of the tab to assign this field to in the Annotation Editor
     (the Data Entry section).  If no tab name is assigned, the fields are
-    assigned to numbered tabs with a default of 8 fields per tab.</td>
+    assigned to numbered tabs with a default of 8 fields per tab.
+      <a href="The__tab__Tag.htm">More information on the tab parameter</a>
+    </td>
     <td><em>any text value</em></td>
     <td></td></tr>
   <tr>
@@ -65,7 +67,57 @@ per configuration.</p>
         <li>true 
         <li>false</li></ul></td>
     <td>true</td></tr>
+  <tr>
+    <td><font face="Courier">datatag</font></td>
+    <td>Used for referencing fields that come from outside applications</td>
+    <td><em>any text value</em></td>
+    <td></td></tr>
+  <tr>
+    <td><font face="Courier">isRequired</font></td>
+    <td>This field must be filled in--if it's empty, then commit will fail.</td>
+    <td>
+      <ul>
+        <li>true</li>
+        <li>false</li></ul></td>
+    <td>false</td></tr>
+  <tr>
+    <td><font face="Courier">warnIfNull</font></td>
+    <td>Like isRequired, this means this field should be filled in, but if
+      it's empty, then commit will warn rather than failing.</td>
+    <td>
+      <ul>
+        <li>true</li>
+        <li>false</li></ul></td>
+    <td>false</td></tr>
+  <tr>
+    <td><font face="Courier">isList</font></td>
+    <td>True means this field can have multiple values--the list GUI will be used.</td>
+    <td>
+      <ul>
+        <li>true</li>
+        <li>false</li></ul></td>
+    <td>false</td></tr>
+  <tr>
+    <td><font face="Courier">enableBigTextBox</font></td>
+    <td>If set to true, this field gets an Edit button that opens a text
+      box. This is typically used for a Description or Comments field, where
+      the text might be too long to easily fit into one of the columns of the spreadsheet.</td>
+    <td>
+      <ul>
+        <li>true</li>
+        <li>false</li></ul></td>
+    <td>false</td></tr>
+  <tr>
+    <td><font face="Courier">enableLoadImage</font></td>
+    <td>If set to true, this field gets Load and Browse buttons that allow the
+    user to select and load an image associated with this annotation.</td>
+    <td>
+      <ul>
+        <li>true</li>
+        <li>false</li></ul></td>
+    <td>false</td></tr>
 </table></p>
+<p>The parameters to the field tag are listed in conf/phenote-config.rnc.</p>
 <h2>Contents</h2>
 <p>Each &lt;field&gt; element specifies one input area in 
 the <em>Data Entry </em>section.&nbsp;</p>
@@ -75,8 +127,9 @@ ontology type, see The &lt;ontology&gt; Tag page.</p>
 <p>The order in which the fields are specified in the configuration file will dictate the order in which 
 they display in the <em>Data Entry</em> section, as well as the order of the 
 columns in the <em>Annotation Spreadsheet</em>.&nbsp; </p>
-<h2>Example</h2>
+<h2>Examples</h2>
 <h3>Free Text Field</h3><pre>&lt;ns:field name="Field Name" syntax-abbrev="FA" enable="true"/&gt;</pre>
+<pre><field name="Image Filename/URL" datatag="Image" enableLoadImage="true" tab="First Tab"/></pre>
 <h3>Ontology-Controlled Field</h3>
 <pre>
   &lt;ns:field name="Quality" datatag="Q" enable="true" warnIfNull="true"
