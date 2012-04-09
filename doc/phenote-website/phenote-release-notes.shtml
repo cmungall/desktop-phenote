@@ -15,7 +15,22 @@
 
 <h1>1.8</h1>
 
-h2>1.8.8</h2>
+<h2>1.8.11</h2>
+        <ul>
+          <li>Curator field is autofilled with System(user.name) if not filled in by user</li>
+          <li>Installer supports 64-bit Java (so you can allocate more memory to Phenote,
+          if you want). If you are on Windows 7 and have 64-bit Java, download the
+          installer called "windows-x64".</li>
+          <li>Added support for loading images associated with
+        annotations. Add the parameter enableLoadImage="true" to the
+        appropriate field in the config file, and that field will get Load and
+        Browse buttons for selecting and loading an image.</li>
+      </ul>
+
+<h2>1.8.9, 1.8.10</h2>
+<p>(Private releases for RCN project)</p>
+        
+<h2>1.8.8</h2>
 <ul>
   <li>Updated bundled obo files (particularly the buggy version of fly_anatomy.obo
 that was bundled with version 1.8.7).</li>
