@@ -2,6 +2,16 @@
 Changes in latest release
 ================
 
+1.8.11 (9 April 2012)
+- Added support for loading images associated with annotations. Add the
+parameter enableLoadImage="true" to the appropriate field in the config file,
+and that field will get Load and Browse buttons for selecting and loading an
+image.
+
+=================
+Changes in earlier releases
+=================
+
 1.8.10 (15 February 2012--private release for RCN)
 - Added Date Created field to rcn config
 - Auto-fill Curator field with System(user.name) if not filled in by user
@@ -19,12 +29,7 @@ that was bundled with version 1.8.7).
 - Fixed an issue with copying an obo file from an URL to .phenote when user
 didn't yet have that file.
 - Fixed some logic about when to update local copies of obo files from repository.
-
-
-=================
-Changes in earlier releases
-=================
-
+ 
 1.8.7 (14 October 2011):
 - Improved protocol for updating ontology files from repository.
 In many cases, these ontology files don't have a date (though I think
