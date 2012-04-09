@@ -207,6 +207,8 @@ public class OntologyDataAdapter {
           String urlString = oc.getLoadUrl().toString();
           Collection<Namespace> spaces = adapterMetaData.getNamespaces(urlString);
           // load ontology from spaces (if we didn't already load it)
+          LOG.info("Loading ontology " + oc.getName() + " from " + urlString); // DEL
+          this.updateLoadingScreen("Loading: "+oc.getName(), true);
           Ontology o = ontologies.get(oc.getName());
           if (o == null) {
             o = new Ontology(spaces,oc,oboSession);

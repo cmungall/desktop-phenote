@@ -168,6 +168,7 @@ public class CommandLine {
 
       // this should use ConfigMode (make outer class)!!
 
+        logErr("User set config to " + getArg());
       try { Config.inst().setOverwriteConfigFile(getArg()); }
       catch (ConfigException e) { loadDefaultConfig("overwrite",e); }
     }
