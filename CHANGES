@@ -1,17 +1,21 @@
 ================ 
 Changes in latest release
 ================
+1.8.12
+- Loaded images now resize automatically (preserving the aspect ratio) when
+user changes size of image panel.
+
+
+=================
+Changes in earlier releases
+=================
 
 1.8.11 (9 April 2012)
 - Added support for loading images associated with annotations. Add the
 parameter enableLoadImage="true" to the appropriate field in the config file,
 and that field will get Load and Browse buttons for selecting and loading an
 image.
-
-=================
-Changes in earlier releases
-=================
-
+ 
 1.8.10 (15 February 2012--private release for RCN)
 - Added Date Created field to rcn config
 - Auto-fill Curator field with System(user.name) if not filled in by user

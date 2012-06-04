@@ -3,18 +3,21 @@ package phenote.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.AlphaComposite;
+//import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.Stroke;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 
 import java.util.Vector;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
@@ -73,12 +76,30 @@ public class ImagePanel extends JPanel implements MouseListener {
     }
   
     @Override
-        public void paintComponent(Graphics g) {
-        //g.drawImage(image, 0, 0, null); // see javadoc for more info on the parameters
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setBackground(Color.white);
-        g2.drawImage(this.image.getImage(), 0, 0, this);
-        //		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC, this.alpha));
+        //        g2.drawImage(this.image.getImage(), 0, 0, this);
+
+        // Make image resize automatically (preserving aspect ratio)
+        // if user changes size of panel
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+                            RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+        int w = getWidth();
+        int h = getHeight();
+        int iw = image.getImage().getWidth();
+        int ih = image.getImage().getHeight();
+        double xScale = (double)w/iw;
+        double yScale = (double)h/ih;
+        double scale = Math.min(xScale, yScale);    // scale to fit
+                       //Math.max(xScale, yScale);  // scale to fill
+        int width = (int)(scale*iw);
+        int height = (int)(scale*ih);
+        int x = (w - width)/2;
+        int y = (h - height)/2;
+        g2.drawImage(this.image.getImage(), x, y, width, height, this);
+
         // Commented out for now
         //                drawRegions(g2);
     }
