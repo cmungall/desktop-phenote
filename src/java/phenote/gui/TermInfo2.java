@@ -80,11 +80,9 @@ import phenote.gui.selection.SelectionManager;
 import phenote.gui.selection.TermSelectionEvent;
 import phenote.gui.selection.TermSelectionListener;
 import phenote.gui.selection.UseTermListener;
-import phenote.gui.GuiUtil;
 import phenote.util.HtmlUtil;
 import phenote.util.LinkCollection;
 import edu.stanford.ejalbert.BrowserLauncher;
-import edu.stanford.ejalbert.BrowserLauncherRunner;
 import edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException;
 import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
 
@@ -947,9 +945,7 @@ public void setIncludeImplicitAnnotations(boolean includeImplicitAnnotations) {
 			if (url == null) return;
 			try {
 				BrowserLauncher bl = new BrowserLauncher(null); // no logger
-				BrowserLauncherRunner br = new BrowserLauncherRunner(bl,
-						url.toString(), null);
-				new Thread(br).start();
+				bl.openURLinBrowser(url.toString());
 			} catch (BrowserLaunchingInitializingException be) {
 				LOG.error("cant launch browser ", be);
 			} catch (UnsupportedOperatingSystemException ue) {

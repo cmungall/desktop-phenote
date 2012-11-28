@@ -176,26 +176,26 @@ public class Phenote {
   }
 
   private static void initLookAndFeel() {
-    try {
-      final String lookAndFeelClassName = UIManager.getSystemLookAndFeelClassName();
-      final String osName = System.getProperty("os.name");
-      if (osName.startsWith("Mac")) {
-        // We are running on Mac OS X - use the Quaqua look and feel
-        System.setProperty("apple.laf.useScreenMenuBar", "true");
-        UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
-      } else {
-        // We are on some other platform, use the system look and feel
-        UIManager.setLookAndFeel(lookAndFeelClassName);
-      }
-    } catch (ClassNotFoundException e) {
-      LOG.error("Look and feel class not found", e);
-    } catch (InstantiationException e) {
-      LOG.error("Could not instantiate look and feel", e);
-    } catch (IllegalAccessException e) {
-      LOG.error("Error setting look and feel", e);
-    } catch (UnsupportedLookAndFeelException e) {
-      LOG.error("Look and feel not supported", e);
-    }
+//    try {
+//      final String lookAndFeelClassName = UIManager.getSystemLookAndFeelClassName();
+//      final String osName = System.getProperty("os.name");
+//      if (osName.startsWith("Mac")) {
+//        // We are running on Mac OS X - use the Quaqua look and feel
+//        System.setProperty("apple.laf.useScreenMenuBar", "true");
+//        UIManager.setLookAndFeel("ch.randelshofer.quaqua.QuaquaLookAndFeel");
+//      } else {
+//        // We are on some other platform, use the system look and feel
+//        UIManager.setLookAndFeel(lookAndFeelClassName);
+//      }
+//    } catch (ClassNotFoundException e) {
+//      LOG.error("Look and feel class not found", e);
+//    } catch (InstantiationException e) {
+//      LOG.error("Could not instantiate look and feel", e);
+//    } catch (IllegalAccessException e) {
+//      LOG.error("Error setting look and feel", e);
+//    } catch (UnsupportedLookAndFeelException e) {
+//      LOG.error("Look and feel not supported", e);
+//    }
   }
 
   public static void showBePatientDialog() {
